@@ -3,7 +3,7 @@
 @import '@fontsource-variable/fraunces';
 
 @theme {
-  /* Warm "theatre dark" with a coral accent, picked to stay well clear of other media servers' gold, purple and green. */
+  /* Warm "theatre dark" with a coral accent, that gives Matinee its own look. */
   --color-ink: #100d12;
   --color-surface: #18141b;
   --color-raised: #221d26;

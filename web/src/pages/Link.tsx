@@ -13,7 +13,7 @@ export function DeviceIcon({ platform, className = 'size-5' }: { platform: strin
   return /tv/.test(platform) ? <Tv className={className} /> : <Smartphone className={className} />
 }
 
-// /link: sign in a phone or TV that is showing a code, the way plex.tv/link works.
+// /link: sign in a phone or TV that is showing a code, by typing the code here.
 export default function Link({ user }: { user: User }) {
   const [params] = useSearchParams()
   const [typed, setTyped] = useState(() => pretty(clean(params.get('code') ?? '')))

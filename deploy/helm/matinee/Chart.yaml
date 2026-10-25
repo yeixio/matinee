@@ -7,4 +7,4 @@ appVersion: "0.1.0"
 home: https://github.com/yeixio/matinee
 sources:
   - https://github.com/yeixio/matinee
-keywords: [media, streaming, plex, movies, music]
+keywords: [media, media-server, streaming, self-hosted, movies, tv, music]
