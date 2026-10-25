@@ -46,6 +46,23 @@ func TestStatus(t *testing.T) {
 	}
 }
 
+// An app with a URL base redirects requests that leave it out; the client
+// moves to the base, not the redirected request's whole address.
+func TestURLBase(t *testing.T) {
+	radarr := arrtest.New(t, arr.Radarr)
+	radarr.Base = "/radarr"
+	c, _ := arr.New(arr.Radarr, arr.Config{URL: radarr.URL + "/", APIKey: radarr.Key})
+	if _, err := c.Status(context.Background()); err != nil {
+		t.Fatal(err)
+	}
+	if c.URL() != radarr.URL+"/radarr" {
+		t.Fatalf("URL = %s", c.URL())
+	}
+	if _, err := c.QualityProfiles(context.Background()); err != nil {
+		t.Fatalf("after moving to the base: %v", err)
+	}
+}
+
 // The API key travels in a header that a redirect would carry to wherever it points.
 func TestNoRedirects(t *testing.T) {
 	var leaked bool
@@ -56,7 +73,7 @@ func TestNoRedirects(t *testing.T) {
 	redirect := httptest.NewServer(http.RedirectHandler(elsewhere.URL+"/api/v3/system/status", http.StatusFound))
 	defer redirect.Close()
 	c, _ := arr.New(arr.Radarr, arr.Config{URL: redirect.URL, APIKey: "key"})
-	if _, err := c.Status(context.Background()); err == nil || !strings.Contains(err.Error(), "redirects") {
+	if _, err := c.Status(context.Background()); err == nil || !strings.Contains(err.Error(), "redirects to "+elsewhere.URL+";") {
 		t.Fatalf("redirect: %v", err)
 	}
 	if leaked {

@@ -18,6 +18,9 @@ type Fake struct {
 	App arr.App
 	Key string
 	URL string
+	// Base is the app's URL base (Settings → General), such as "/radarr".
+	// Requests without it are redirected to it, as the real apps do.
+	Base string
 
 	mu sync.Mutex
 	// Catalog is what lookups find online: movies by tmdbId, shows by tvdbId.
@@ -92,6 +95,14 @@ func write(w http.ResponseWriter, v any) {
 }
 
 func (f *Fake) serve(w http.ResponseWriter, r *http.Request) {
+	if f.Base != "" {
+		rest, ok := strings.CutPrefix(r.URL.Path, f.Base)
+		if !ok {
+			http.Redirect(w, r, f.Base+r.URL.Path, http.StatusFound)
+			return
+		}
+		r.URL.Path = rest
+	}
 	if r.Header.Get("X-Api-Key") != f.Key {
 		w.WriteHeader(http.StatusUnauthorized)
 		return

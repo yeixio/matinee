@@ -62,6 +62,7 @@ function Connection({ app, name, port, icon: Icon, what, saved }: (typeof apps)[
     mutationFn: () => api.testIntegration(app, { url, apiKey: apiKey || undefined }),
     onSuccess: (c) => {
       setChecked(c)
+      setUrl(c.url)
       if (!c.qualityProfiles.some((p) => p.id === profile)) setProfile(c.qualityProfiles[0]?.id ?? 0)
       if (!c.rootFolders.some((f) => f.path === root)) setRoot(c.rootFolders[0]?.path ?? '')
     },
@@ -154,8 +155,11 @@ function Connection({ app, name, port, icon: Icon, what, saved }: (typeof apps)[
           </div>
           {checked && (
             <>
-              <p className="flex items-center gap-2 text-sm text-accent">
-                <Check className="size-4" /> {checked.appName} {checked.version} answers
+              <p className="flex items-start gap-2 text-sm text-accent">
+                <Check className="mt-0.5 size-4 shrink-0" />
+                <span className="min-w-0 break-all">
+                  {checked.appName} {checked.version} answers at {checked.url}
+                </span>
               </p>
               <div className="grid gap-3 sm:grid-cols-2">
                 <Field label={`Quality for new ${what}`}>
