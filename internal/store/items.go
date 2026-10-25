@@ -33,6 +33,9 @@ type Item struct {
 	Rating      *float64 `json:"rating,omitempty"`
 	HasPoster   bool     `json:"hasPoster"`
 	HasBackdrop bool     `json:"hasBackdrop"`
+	// For episodes: the show's title and season number, for cards outside the show's pages.
+	ShowTitle   string `json:"showTitle,omitempty"`
+	SeasonIndex *int   `json:"seasonIndex,omitempty"`
 
 	Poster   string `json:"-"`
 	Backdrop string `json:"-"`
@@ -50,7 +53,9 @@ const itemCols = `
 	i.width, i.height, i.added_at, COALESCE(i.path, ''), COALESCE(i.size, 0), COALESCE(i.mtime, 0),
 	(SELECT COUNT(*) FROM items c WHERE c.parent_id = i.id),
 	COALESCE(p.position_ms, 0), COALESCE(p.played, 0),
-	COALESCE(i.overview, ''), i.rating, COALESCE(i.poster, ''), COALESCE(i.backdrop, ''), i.tmdb_id, COALESCE(i.meta_at, 0)`
+	COALESCE(i.overview, ''), i.rating, COALESCE(i.poster, ''), COALESCE(i.backdrop, ''), i.tmdb_id, COALESCE(i.meta_at, 0),
+	CASE WHEN i.kind = 'episode' THEN (SELECT COALESCE(sh.title, '') FROM items se JOIN items sh ON sh.id = se.parent_id WHERE se.id = i.parent_id) ELSE '' END,
+	CASE WHEN i.kind = 'episode' THEN (SELECT se.index_number FROM items se WHERE se.id = i.parent_id) END`
 
 const itemFrom = ` FROM items i LEFT JOIN progress p ON p.item_id = i.id AND p.user_id = ?`
 
@@ -62,10 +67,13 @@ func scanItem(r scanner) (Item, error) {
 	var year, idx, disc, w, h sql.NullInt64
 	var dur, tmdb sql.NullInt64
 	var rating sql.NullFloat64
+	var seasonIdx sql.NullInt64
+	var showTitle sql.NullString
 	err := r.Scan(&it.ID, &it.LibraryID, &parent, &it.Kind, &it.Title, &year, &idx, &disc,
 		&dur, &it.Container, &it.VideoCodec, &it.AudioCodec, &w, &h, &it.AddedAt, &it.Path, &it.Size, &it.Mtime,
 		&it.ChildCount, &it.PositionMs, &it.Played,
-		&it.Overview, &rating, &it.Poster, &it.Backdrop, &tmdb, &it.MetaAt)
+		&it.Overview, &rating, &it.Poster, &it.Backdrop, &tmdb, &it.MetaAt,
+		&showTitle, &seasonIdx)
 	if err != nil {
 		return it, err
 	}
@@ -83,6 +91,7 @@ func scanItem(r scanner) (Item, error) {
 	if tmdb.Valid {
 		it.TMDBID = &tmdb.Int64
 	}
+	it.ShowTitle, it.SeasonIndex = showTitle.String, intPtr(seasonIdx)
 	it.Playable = it.Path != ""
 	it.HasPoster, it.HasBackdrop = it.Poster != "", it.Backdrop != ""
 	return it, nil
@@ -154,9 +163,13 @@ func (s *Store) Search(ctx context.Context, userID int64, q string, limit int) (
 		"i.sort_title LIMIT ?", userID, `"`+strings.Join(words, `"* "`)+`"*`, limit)
 }
 
-// RecentlyAdded lists the newest movies, episodes and albums.
+// RecentlyAdded lists the newest movies, albums and shows. A show counts as
+// new when an episode is, so a fresh season doesn't fill the row with episodes.
 func (s *Store) RecentlyAdded(ctx context.Context, userID int64, limit int) ([]Item, error) {
-	return s.queryItems(ctx, "i.kind IN ('movie', 'episode', 'album')", "i.added_at DESC, i.id DESC LIMIT ?", userID, limit)
+	return s.queryItems(ctx, "i.kind IN ('movie', 'show', 'album')", `
+		CASE WHEN i.kind = 'show' THEN (
+			SELECT MAX(e.added_at) FROM items se JOIN items e ON e.parent_id = se.id WHERE se.parent_id = i.id
+		) ELSE i.added_at END DESC, i.id DESC LIMIT ?`, userID, limit)
 }
 
 // ContinueWatching lists videos the user started but didn't finish.

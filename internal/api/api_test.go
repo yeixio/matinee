@@ -173,7 +173,7 @@ func TestEndToEnd(t *testing.T) {
 		t.Fatalf("seasons: %+v", seasons)
 	}
 	c.do("GET", "/api/items/"+itoa(seasons[0].ID)+"/children", nil, &episodes)
-	if len(episodes) != 1 || episodes[0].Title != "Pilot" {
+	if len(episodes) != 1 || episodes[0].Title != "Pilot" || episodes[0].ShowTitle != "Test Show" || *episodes[0].SeasonIndex != 1 {
 		t.Fatalf("episodes: %+v", episodes)
 	}
 
@@ -238,7 +238,7 @@ func TestEndToEnd(t *testing.T) {
 		t.Fatalf("continue watching: %+v", home.ContinueWatching)
 	}
 	if len(home.RecentlyAdded) != 3 {
-		t.Fatalf("recently added should list the movie, episode and album: %+v", home.RecentlyAdded)
+		t.Fatalf("recently added should list the movie, show and album: %+v", home.RecentlyAdded)
 	}
 	c.do("PUT", "/api/items/"+itoa(movie.ID)+"/progress", map[string]any{"positionMs": 9800}, nil)
 	var watched store.Item

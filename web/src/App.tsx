@@ -1,0 +1,50 @@
+import { useQuery } from '@tanstack/react-query'
+import { lazy, Suspense } from 'react'
+import { Route, Routes } from 'react-router-dom'
+import { api, ApiError } from './api'
+import Shell from './components/Shell'
+import { AudioProvider } from './player/AudioPlayer'
+import Home from './pages/Home'
+import Library from './pages/Library'
+import ItemPage from './pages/Item'
+import Search from './pages/Search'
+import { Login, Setup } from './pages/Auth'
+import { Spinner } from './components/ui'
+
+const Watch = lazy(() => import('./pages/Watch'))
+const Settings = lazy(() => import('./pages/Settings'))
+
+export default function App() {
+  const me = useQuery({ queryKey: ['me'], queryFn: api.me, staleTime: Infinity })
+  const unauthenticated = me.error instanceof ApiError && me.error.status === 401
+  const setup = useQuery({ queryKey: ['setup'], queryFn: api.setup, enabled: unauthenticated })
+
+  if (me.isPending || (unauthenticated && setup.isPending)) {
+    return (
+      <div className="grid h-dvh place-items-center">
+        <Spinner />
+      </div>
+    )
+  }
+  if (unauthenticated) return setup.data?.needsSetup ? <Setup /> : <Login />
+  if (me.isError) {
+    return <div className="grid h-dvh place-items-center text-muted">Can't reach the server. Retrying…</div>
+  }
+
+  return (
+    <AudioProvider>
+      <Suspense fallback={null}>
+      <Routes>
+        <Route path="/watch/:id" element={<Watch />} />
+        <Route element={<Shell user={me.data} />}>
+          <Route index element={<Home />} />
+          <Route path="/library/:id" element={<Library />} />
+          <Route path="/item/:id" element={<ItemPage />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/settings" element={<Settings />} />
+        </Route>
+      </Routes>
+      </Suspense>
+    </AudioProvider>
+  )
+}

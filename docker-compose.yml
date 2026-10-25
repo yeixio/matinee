@@ -9,6 +9,7 @@ services:
     ports:
       - "7171:7171"
     environment:
+      MATINEE_SCAN_INTERVAL: 15m
       # MATINEE_TMDB_KEY: your-themoviedb-key
       # MATINEE_DATABASE_URL: postgres://matinee:matinee@postgres:5432/matinee?sslmode=disable
     volumes:
