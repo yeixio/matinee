@@ -101,6 +101,32 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
+  # Moves the edge branch to each main commit that passed every check and
+  # has its image published, so clusters that follow edge only roll out
+  # builds they can pull (see "Following the latest build" in the README).
+  edge:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [go, web, helm, docker, packages]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: edge
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      # Fast-forward only, so a slow run for an older commit never moves edge back.
+      - name: Move edge to this commit
+        run: |
+          if git rev-parse -q --verify origin/edge > /dev/null &&
+            ! git merge-base --is-ancestor origin/edge "$GITHUB_SHA"; then
+            echo "edge is already past ${GITHUB_SHA}."
+            exit 0
+          fi
+          git push origin "${GITHUB_SHA}:refs/heads/edge"
+
   packages:
     name: Linux packages
     runs-on: ubuntu-latest

@@ -51,6 +51,23 @@ The chart runs Matinee with a bundled PostgreSQL, so nothing depends on file loc
 
 Run one replica for now: an active transcode lives in the pod that started it. More replicas work with `service.sessionAffinity: ClientIP`.
 
+### Following the latest build
+
+To try each change as it lands, point Argo CD at the `edge` branch. CI moves `edge` to a commit on `main` only once its checks pass and its image is published, so the cluster never waits on an image that isn't there yet. The chart from that commit runs the image built from it (`sha-<commit>`), and **Settings** shows the same commit as `main-<commit>`.
+
+```yaml
+source:
+  repoURL: https://github.com/yeixio/matinee.git
+  targetRevision: edge
+  path: deploy/helm/matinee
+  helm:
+    parameters:
+      - name: image.tag
+        value: sha-$ARGOCD_APP_REVISION_SHORT
+```
+
+Argo CD checks the branch every few minutes, so a new build rolls out shortly after CI finishes. For releases instead, install the chart from `oci://ghcr.io/yeixio/charts/matinee` with a version.
+
 ### Finding it from the apps
 
 The Matinee apps list servers on your home network by themselves, so nobody has to know an IP address. The server announces itself over multicast DNS (Bonjour), and the apps show it on their first screen.
