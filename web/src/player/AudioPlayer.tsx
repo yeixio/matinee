@@ -146,7 +146,7 @@ function NowPlaying({ audio, state }: { audio: React.RefObject<HTMLAudioElement 
         onChange={seek}
         aria-label="Seek"
         className="absolute inset-x-0 -top-1.5 h-3 w-full cursor-pointer appearance-none bg-transparent accent-accent"
-        style={{ background: `linear-gradient(to right, #f5b544 ${dur ? (time / dur) * 100 : 0}%, transparent 0) center / 100% 3px no-repeat` }}
+        style={{ background: `linear-gradient(to right, var(--color-accent) ${dur ? (time / dur) * 100 : 0}%, transparent 0) center / 100% 3px no-repeat` }}
       />
       <div className="flex h-16 items-center gap-3 px-4 md:h-20 md:px-6">
         <Link to={item.parentId ? `/item/${item.parentId}` : '#'} className="shrink-0">

@@ -15,10 +15,10 @@ export function Hero({ item }: { item: Item }) {
       <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-transparent" />
       <div className="absolute inset-0 bg-gradient-to-r from-ink/80 via-ink/20 to-transparent" />
       <div className="absolute inset-x-0 bottom-0 max-w-2xl space-y-3 p-5 md:p-10">
-        <div className="text-xs font-semibold tracking-widest text-accent uppercase">
-          {resume ? 'Continue watching' : 'Recently added'}
-        </div>
-        <h1 className="text-3xl font-bold tracking-tight md:text-5xl">{item.showTitle || item.title}</h1>
+        <span className="inline-block rounded-full bg-accent/15 px-3 py-1 text-xs font-medium text-accent">
+          {resume ? 'Up next' : 'Just added'}
+        </span>
+        <h1 className="text-3xl font-semibold md:text-6xl">{item.showTitle || item.title}</h1>
         <div className="flex gap-3 text-sm text-muted">
           {item.showTitle && (
             <span className="text-text/90">
