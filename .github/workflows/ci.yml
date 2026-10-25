@@ -99,3 +99,27 @@ jobs:
             tmdb_key=${{ secrets.TMDB_API_KEY }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+  packages:
+    name: Linux packages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - name: Install packaging tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends dpkg-dev apt-utils createrepo-c rpm
+          go install github.com/goreleaser/nfpm/v2/cmd/nfpm@v2.41.3
+          echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
+      # The packaging is under test here, not the web player, so a stand-in
+      # page saves building it.
+      - name: Build amd64 packages
+        run: |
+          echo '<!doctype html><title>Matinee</title>' > web/dist/index.html
+          VERSION=0.0.0-ci TARGETS=linux/amd64 scripts/release-binaries.sh
+          VERSION=0.0.0-ci scripts/package-linux.sh
+      - name: Install from signed apt and dnf repositories
+        run: scripts/test-packages.sh

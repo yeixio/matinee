@@ -1,0 +1,24 @@
+[Unit]
+Description=Matinee media server
+Documentation=https://github.com/yeixio/matinee
+After=network-online.target remote-fs.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=matinee
+Group=matinee
+Environment=MATINEE_DATA_DIR=/var/lib/matinee
+# Settings such as MATINEE_TMDB_KEY. Edit it, then: systemctl restart matinee
+EnvironmentFile=-/etc/matinee/matinee.env
+ExecStart=/usr/bin/matinee
+Restart=on-failure
+RestartSec=5
+# Media can live anywhere, so the service may read the whole system; it
+# writes only to its data directory.
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+
+[Install]
+WantedBy=multi-user.target
