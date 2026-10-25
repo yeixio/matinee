@@ -39,7 +39,20 @@ export type Item = {
   seasonIndex?: number
 }
 
-export type ItemDetail = Item & { mimeType?: string; parents: Item[] }
+export type SubtitleTrack = {
+  id: string
+  label: string
+  language?: string
+  codec: string
+  forced?: boolean
+  default?: boolean
+  sdh?: boolean
+  external?: boolean
+  // Picture-based subtitles the server draws into a transcode.
+  burnIn?: boolean
+}
+
+export type ItemDetail = Item & { mimeType?: string; subtitles?: SubtitleTrack[]; parents: Item[] }
 
 export class ApiError extends Error {
   status: number
@@ -97,8 +110,16 @@ export const api = {
   children: (id: number) => request<Item[]>('GET', `/api/items/${id}/children`),
   setProgress: (id: number, positionMs: number, played = false) =>
     request<void>('PUT', `/api/items/${id}/progress`, { positionMs, played }),
-  startHls: (id: number, startSec = 0) =>
-    request<{ url: string; startSec: number }>('POST', `/api/items/${id}/hls?start=${startSec}`),
+  startHls: (id: number, startSec = 0, burnSubtitle?: string) =>
+    request<{ url: string; startSec: number }>(
+      'POST',
+      `/api/items/${id}/hls?start=${startSec}${burnSubtitle ? `&subtitle=${encodeURIComponent(burnSubtitle)}` : ''}`,
+    ),
+  subtitles: async (id: number, track: string) => {
+    const res = await fetch(`/api/items/${id}/subtitles/${encodeURIComponent(track)}.vtt`, { credentials: 'same-origin' })
+    if (!res.ok) throw new ApiError(res.status, "Couldn't load these subtitles")
+    return res.text()
+  },
 }
 
 export const imageUrl = (id: number, type: 'poster' | 'backdrop') => `/api/items/${id}/image/${type}`

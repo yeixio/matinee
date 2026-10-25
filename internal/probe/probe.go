@@ -20,6 +20,18 @@ type Result struct {
 	Height     int
 	HasCover   bool              // an embedded picture, like album art in a FLAC or MP3
 	Tags       map[string]string // lower-cased keys: title, artist, album_artist, album, track, disc, date
+	Subtitles  []Subtitle        // embedded subtitle streams, in file order
+}
+
+// Subtitle is an embedded subtitle stream.
+type Subtitle struct {
+	Index    int    `json:"index"` // among the file's subtitle streams, as in FFmpeg's 0:s:N
+	Codec    string `json:"codec"`
+	Language string `json:"language,omitempty"` // as tagged, usually ISO 639-2 like "eng"
+	Title    string `json:"title,omitempty"`
+	Default  bool   `json:"default,omitempty"`
+	Forced   bool   `json:"forced,omitempty"`
+	SDH      bool   `json:"sdh,omitempty"` // for the deaf and hard of hearing
 }
 
 type Prober struct {
@@ -80,6 +92,16 @@ func parse(data []byte) (Result, error) {
 			} else if r.VideoCodec == "" {
 				r.VideoCodec, r.Width, r.Height = s.CodecName, s.Width, s.Height
 			}
+		case "subtitle":
+			r.Subtitles = append(r.Subtitles, Subtitle{
+				Index:    len(r.Subtitles),
+				Codec:    s.CodecName,
+				Language: tag(s.Tags, "language"),
+				Title:    tag(s.Tags, "title"),
+				Default:  s.Disposition["default"] == 1,
+				Forced:   s.Disposition["forced"] == 1,
+				SDH:      s.Disposition["hearing_impaired"] == 1,
+			})
 		case "audio":
 			if r.AudioCodec == "" {
 				r.AudioCodec = s.CodecName
@@ -93,6 +115,24 @@ func parse(data []byte) (Result, error) {
 		}
 	}
 	return r, nil
+}
+
+// SubtitleList is Subtitles, never nil, so it encodes as [] rather than null.
+func (r Result) SubtitleList() []Subtitle {
+	if r.Subtitles == nil {
+		return []Subtitle{}
+	}
+	return r.Subtitles
+}
+
+// tag reads a stream tag whatever its case; MKV and MP4 muxers differ.
+func tag(tags map[string]string, key string) string {
+	for k, v := range tags {
+		if strings.EqualFold(k, key) {
+			return strings.TrimSpace(v)
+		}
+	}
+	return ""
 }
 
 // LeadingInt reads "3/12" or "03" as 3, the way track and disc tags are written.
