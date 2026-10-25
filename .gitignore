@@ -1,0 +1,22 @@
+# Go
+/bin/
+/dist/
+*.test
+coverage.out
+
+# Runtime data
+/data/
+*.db
+*.db-wal
+*.db-shm
+
+# Web
+web/node_modules/
+web/.svelte-kit/
+web/build/
+!web/build/.gitkeep
+
+# Editors
+.DS_Store
+.idea/
+.vscode/
