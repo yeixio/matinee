@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { api, type User } from '../api'
 import { LibraryIcon, useLibraries } from '../components/Shell'
 import { Button, Field, inputClass } from '../components/ui'
+import { Integrations } from './Integrations'
 import { DeviceIcon } from './Link'
 
 export default function Settings() {
@@ -15,6 +16,7 @@ export default function Settings() {
       {me?.isAdmin && <Libraries />}
       {me?.isAdmin && <Users />}
       {me?.isAdmin && <HomeNetwork />}
+      {me?.isAdmin && <Integrations />}
       <Devices />
       {/* TMDB's API terms ask apps that use it for this notice. */}
       <p className="text-xs text-faint">

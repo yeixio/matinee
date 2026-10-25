@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { X } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { api, pendingRefetch, type Item } from '../api'
+import { ComingSoonRow } from '../components/Arr'
 import { PosterCard } from '../components/Card'
 import { Hero } from '../components/Hero'
 import { Row, RowItem } from '../components/Row'
@@ -72,6 +73,7 @@ export default function Home() {
           ))}
         </Row>
       )}
+      <ComingSoonRow />
       {data.recentlyAdded.length === 0 && (
         <EmptyState title="Scanning your library">New titles show up here as soon as they're found.</EmptyState>
       )}

@@ -5,6 +5,7 @@ import (
 	"net"
 	"net/http"
 	"net/netip"
+	"strconv"
 	"sync"
 )
 
@@ -109,33 +110,65 @@ func (s *Server) homeSignInRequired(ctx context.Context) (bool, error) {
 type serverSettings struct {
 	// RequireSignInAtHome makes devices on the home network sign in too.
 	RequireSignInAtHome bool `json:"requireSignInAtHome"`
+	// Requests says who may add titles through Radarr and Sonarr besides
+	// admins: off (nobody), approve (anyone may ask; an admin approves) or
+	// auto (what people ask for is added right away). See arr.go.
+	Requests string `json:"requests"`
+}
+
+func (s *Server) settings(ctx context.Context) (serverSettings, error) {
+	required, err := s.homeSignInRequired(ctx)
+	if err != nil {
+		return serverSettings{}, err
+	}
+	mode, err := s.requestMode(ctx)
+	return serverSettings{RequireSignInAtHome: required, Requests: mode}, err
 }
 
 func (s *Server) getSettings(w http.ResponseWriter, r *http.Request) {
-	required, err := s.homeSignInRequired(r.Context())
+	set, err := s.settings(r.Context())
 	if err != nil {
 		s.serverError(w, err)
 		return
 	}
-	writeJSON(w, http.StatusOK, serverSettings{RequireSignInAtHome: required})
+	writeJSON(w, http.StatusOK, set)
 }
 
+// putSettings changes the settings it's sent; ones left out stay as they are.
 func (s *Server) putSettings(w http.ResponseWriter, r *http.Request) {
-	var in serverSettings
+	var in struct {
+		RequireSignInAtHome *bool   `json:"requireSignInAtHome"`
+		Requests            *string `json:"requests"`
+	}
 	if err := readJSON(r, &in); err != nil {
 		writeError(w, http.StatusBadRequest, "bad request")
 		return
 	}
-	v := "false"
-	if in.RequireSignInAtHome {
-		v = "true"
+	ctx := r.Context()
+	if m := in.Requests; m != nil && *m != "" {
+		if *m != requestsOff && *m != requestsApprove && *m != requestsAuto {
+			writeError(w, http.StatusBadRequest, "requests must be off, approve or auto")
+			return
+		}
+		if err := s.Store.SetSetting(ctx, settingRequests, *m); err != nil {
+			s.serverError(w, err)
+			return
+		}
 	}
-	if err := s.Store.SetSetting(r.Context(), settingHomeSignIn, v); err != nil {
+	if in.RequireSignInAtHome != nil {
+		required := *in.RequireSignInAtHome
+		if err := s.Store.SetSetting(ctx, settingHomeSignIn, strconv.FormatBool(required)); err != nil {
+			s.serverError(w, err)
+			return
+		}
+		s.homeSignIn.mu.Lock()
+		s.homeSignIn.loaded, s.homeSignIn.required = true, required
+		s.homeSignIn.mu.Unlock()
+	}
+	set, err := s.settings(ctx)
+	if err != nil {
 		s.serverError(w, err)
 		return
 	}
-	s.homeSignIn.mu.Lock()
-	s.homeSignIn.loaded, s.homeSignIn.required = true, in.RequireSignInAtHome
-	s.homeSignIn.mu.Unlock()
-	writeJSON(w, http.StatusOK, in)
+	writeJSON(w, http.StatusOK, set)
 }

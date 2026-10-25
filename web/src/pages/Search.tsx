@@ -1,12 +1,14 @@
 import { useQuery } from '@tanstack/react-query'
 import { Search as SearchIcon } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { api } from '../api'
+import { useRequestOptions } from '../components/Arr'
 import { PosterGrid } from '../components/Card'
 import { EmptyState } from '../components/ui'
 
 export default function Search() {
+  const { data: opts } = useRequestOptions()
   const [params, setParams] = useSearchParams()
   const [text, setText] = useState(params.get('q') ?? '')
   const [q, setQ] = useState(text)
@@ -41,6 +43,15 @@ export default function Search() {
         {isFetching && <div className="absolute right-4 top-1/2 size-2 -translate-y-1/2 animate-pulse rounded-full bg-accent" />}
       </div>
       {q && data && (data.length > 0 ? <PosterGrid items={data} /> : <EmptyState title={`Nothing matches "${q}"`} />)}
+      {/* Not in the library? Ask for it. */}
+      {q && data && opts?.canRequest && (
+        <p className="text-center text-sm text-muted">
+          Looking for something new?{' '}
+          <Link to={`/requests?q=${encodeURIComponent(q)}`} className="text-accent hover:text-accent-strong">
+            {opts.autoApprove ? 'Add it' : 'Ask for it'}
+          </Link>
+        </p>
+      )}
     </div>
   )
 }

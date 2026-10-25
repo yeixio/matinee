@@ -650,6 +650,318 @@ paths:
                   applied: { type: integer }
                   skipped: { type: integer }
 
+  /integrations:
+    get:
+      summary: Radarr and Sonarr connections (admins only)
+      description: The API key is never sent back; `hasApiKey` says one is saved.
+      responses:
+        "200":
+          description: Each app's connection.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  radarr: { $ref: "#/components/schemas/Integration" }
+                  sonarr: { $ref: "#/components/schemas/Integration" }
+  /integrations/{app}:
+    parameters: [{ $ref: "#/components/parameters/App" }]
+    put:
+      summary: Connect Radarr or Sonarr (admins only)
+      description: |
+        Checks the app answers before saving. Leave `apiKey` out to keep the
+        saved key; that only works for the saved address. Without
+        `qualityProfileId` or `rootFolder`, titles added from Matinee get the
+        app's first profile and root folder.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/IntegrationConfig" }
+      responses:
+        "200":
+          description: Connected.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Integration" }
+        "400": { $ref: "#/components/responses/Error" }
+        "502": { description: The app didn't answer or refused the key. }
+    delete:
+      summary: Disconnect Radarr or Sonarr (admins only)
+      responses:
+        "204": { description: Disconnected. }
+  /integrations/{app}/test:
+    parameters: [{ $ref: "#/components/parameters/App" }]
+    post:
+      summary: Check a connection without saving it (admins only)
+      description: Leave the body out to check the saved connection.
+      requestBody:
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/IntegrationConfig" }
+      responses:
+        "200":
+          description: It answers. Lists what to pick defaults from.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  appName: { type: string }
+                  version: { type: string }
+                  qualityProfiles: { type: array, items: { $ref: "#/components/schemas/QualityProfile" } }
+                  rootFolders:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        path: { type: string }
+                        freeSpace: { type: integer }
+        "400": { $ref: "#/components/responses/Error" }
+        "502": { $ref: "#/components/responses/Error" }
+
+  /requests/options:
+    get:
+      summary: What this account can ask for
+      description: |
+        Whether Radarr (`movies`) and Sonarr (`shows`) are connected, and
+        whether this account may ask for titles (`canRequest`) and report
+        problems (`canReport`). The home network's guest can do neither.
+      responses:
+        "200":
+          description: Options.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  movies: { type: boolean }
+                  shows: { type: boolean }
+                  canRequest: { type: boolean }
+                  autoApprove: { type: boolean, description: What this account asks for is added without waiting for an admin. }
+                  canReport: { type: boolean }
+                  qualityProfiles:
+                    type: object
+                    description: By kind (`movie`, `show`).
+                    additionalProperties: { type: array, items: { $ref: "#/components/schemas/QualityProfile" } }
+                  defaultQualityProfile:
+                    type: object
+                    additionalProperties: { type: integer }
+                  pendingRequests: { type: integer, description: Admins only. }
+                  openIssues: { type: integer, description: Admins only. }
+  /requests/search:
+    get:
+      summary: Find a movie or show to ask for
+      description: Looks titles up through Radarr or Sonarr. Each says whether it's in a library already, on its way, or asked for.
+      parameters:
+        - { name: kind, in: query, required: true, schema: { type: string, enum: [movie, show] } }
+        - { name: q, in: query, required: true, schema: { type: string } }
+      responses:
+        "200":
+          description: Up to 20 titles.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Title" }
+        "403": { $ref: "#/components/responses/Error" }
+  /requests:
+    get:
+      summary: Requests
+      description: Your own, or with `all` (admins), everyone's. Pending ones first.
+      parameters:
+        - { name: all, in: query, schema: { type: boolean } }
+      responses:
+        "200":
+          description: Requests.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Request" }
+    post:
+      summary: Ask for a movie or show
+      description: |
+        Movies are named by `tmdbId`, shows by `tvdbId`, as `/requests/search`
+        returns them. Admins' requests, and everyone's when the server's
+        `requests` setting is `auto`, are added right away.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [kind]
+              properties:
+                kind: { type: string, enum: [movie, show] }
+                tmdbId: { type: integer }
+                tvdbId: { type: integer }
+                qualityProfileId: { type: integer, description: Leave out for the server's default. }
+      responses:
+        "201":
+          description: Asked.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Request" }
+        "403": { $ref: "#/components/responses/Error" }
+        "409": { description: Already in a library, on its way, or asked for. }
+  /requests/{id}/approve:
+    parameters: [{ $ref: "#/components/parameters/RequestID" }]
+    post:
+      summary: Approve a request (admins only)
+      description: Adds the title to Radarr or Sonarr. If that fails the request's state is `failed`, with the reason in `error`; approving again retries.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                qualityProfileId: { type: integer }
+      responses:
+        "200":
+          description: The request now.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Request" }
+  /requests/{id}/decline:
+    parameters: [{ $ref: "#/components/parameters/RequestID" }]
+    post:
+      summary: Decline a request (admins only)
+      responses:
+        "200":
+          description: The request now.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Request" }
+  /requests/{id}:
+    parameters: [{ $ref: "#/components/parameters/RequestID" }]
+    delete:
+      summary: Take a request off the list
+      description: Your own, or anyone's for admins. A title already added stays in Radarr or Sonarr.
+      responses:
+        "204": { description: Removed. }
+
+  /upcoming:
+    get:
+      summary: Coming soon
+      description: |
+        Movie releases and episode airings from Radarr's and Sonarr's
+        calendars that are still to come in, soonest first. Answers are kept
+        for up to ten minutes.
+      parameters:
+        - { name: days, in: query, schema: { type: integer, minimum: 1, maximum: 90, default: 30 } }
+      responses:
+        "200":
+          description: What's coming.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        kind: { type: string, enum: [movie, episode] }
+                        title: { type: string }
+                        year: { type: integer }
+                        showTitle: { type: string }
+                        season: { type: integer }
+                        episode: { type: integer }
+                        date: { type: string, format: date-time }
+                        release: { type: string, enum: [cinemas, digital, physical, airs] }
+                        overview: { type: string }
+                        poster: { type: string, description: An image URL on the internet. }
+                        tmdbId: { type: integer }
+                  unavailable:
+                    type: array
+                    description: Apps that didn't answer, so the list may be missing some.
+                    items: { type: string }
+
+  /items/{id}/quality:
+    parameters: [{ $ref: "#/components/parameters/ID" }]
+    get:
+      summary: The quality profile of a movie or show (admins only)
+      description: For a season or episode, the show's. 404 when Radarr or Sonarr doesn't have the title.
+      responses:
+        "200":
+          description: The profile, and the ones to choose from.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Quality" }
+        "404": { $ref: "#/components/responses/Error" }
+    put:
+      summary: Change the quality profile of a movie or show (admins only)
+      description: Then searches for copies that match it, unless `search` is false.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [qualityProfileId]
+              properties:
+                qualityProfileId: { type: integer }
+                search: { type: boolean, default: true }
+      responses:
+        "200":
+          description: Changed.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Quality" }
+  /items/{id}/issues:
+    parameters: [{ $ref: "#/components/parameters/ID" }]
+    post:
+      summary: Report a problem with an item
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [kind]
+              properties:
+                kind: { type: string, enum: [video, audio, subtitles, wrong, other], description: "`wrong` is the wrong movie or episode." }
+                note: { type: string, maxLength: 1000 }
+      responses:
+        "201":
+          description: Reported.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Issue" }
+  /issues:
+    get:
+      summary: Reported problems
+      description: Your own, or with `all` (admins), everyone's. Open ones first.
+      parameters:
+        - { name: all, in: query, schema: { type: boolean } }
+      responses:
+        "200":
+          description: Issues.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Issue" }
+  /issues/{id}/resolve:
+    parameters: [{ $ref: "#/components/parameters/IssueID" }]
+    post:
+      summary: Close an issue (admins only)
+      responses:
+        "204": { description: Closed. }
+  /issues/{id}/replace:
+    parameters: [{ $ref: "#/components/parameters/IssueID" }]
+    post:
+      summary: Replace the file (admins only)
+      description: |
+        Deletes the movie's or episode's file in Radarr or Sonarr and has it
+        search for another copy, then closes the issue. The next scan picks
+        the new file up.
+      responses:
+        "204": { description: Deleted, and searching. }
+        "502": { $ref: "#/components/responses/Error" }
+
 components:
   securitySchemes:
     bearer:
@@ -659,6 +971,12 @@ components:
     ID:
       { name: id, in: path, required: true, schema: { type: integer } }
     DownloadID:
+      { name: id, in: path, required: true, schema: { type: string } }
+    App:
+      { name: app, in: path, required: true, schema: { type: string, enum: [radarr, sonarr] } }
+    RequestID:
+      { name: id, in: path, required: true, schema: { type: string } }
+    IssueID:
       { name: id, in: path, required: true, schema: { type: string } }
     UserCode:
       { name: code, in: path, required: true, schema: { type: string }, description: "The code as typed; case, dashes and spaces don't matter." }
@@ -706,6 +1024,89 @@ components:
         requireSignInAtHome:
           type: boolean
           description: Devices on the home network have to sign in too. Off by default.
+        requests:
+          type: string
+          enum: [off, approve, auto]
+          description: |
+            Who may add titles through Radarr and Sonarr besides admins: nobody
+            (`off`), anyone, with an admin approving (`approve`, the default),
+            or anyone, right away (`auto`). Settings left out of a `PUT` stay
+            as they are.
+    Integration:
+      type: object
+      properties:
+        connected: { type: boolean }
+        url: { type: string }
+        hasApiKey: { type: boolean }
+        qualityProfileId: { type: integer, description: What titles added from Matinee get by default. }
+        rootFolder: { type: string }
+    IntegrationConfig:
+      type: object
+      properties:
+        url: { type: string, description: "Such as http://radarr:7878. Without a scheme, http is assumed." }
+        apiKey: { type: string }
+        qualityProfileId: { type: integer }
+        rootFolder: { type: string }
+    QualityProfile:
+      type: object
+      properties:
+        id: { type: integer }
+        name: { type: string }
+    Quality:
+      type: object
+      properties:
+        app: { type: string, enum: [radarr, sonarr] }
+        qualityProfileId: { type: integer }
+        qualityProfiles: { type: array, items: { $ref: "#/components/schemas/QualityProfile" } }
+    Title:
+      type: object
+      properties:
+        kind: { type: string, enum: [movie, show] }
+        tmdbId: { type: integer }
+        tvdbId: { type: integer }
+        title: { type: string }
+        year: { type: integer }
+        overview: { type: string }
+        poster: { type: string, description: An image URL on the internet. }
+        status:
+          type: string
+          enum: [available, added, requested]
+          description: Missing when nobody has asked for it yet.
+        itemId: { type: integer, description: When available. }
+        requestId: { type: string, description: When requested. }
+    Request:
+      type: object
+      properties:
+        id: { type: string }
+        kind: { type: string, enum: [movie, show] }
+        tmdbId: { type: integer }
+        tvdbId: { type: integer }
+        title: { type: string }
+        year: { type: integer }
+        poster: { type: string }
+        qualityProfileId: { type: integer }
+        state: { type: string, enum: [pending, approved, declined, failed] }
+        error: { type: string }
+        userId: { type: integer }
+        username: { type: string }
+        createdAt: { type: integer }
+        updatedAt: { type: integer }
+        itemId: { type: integer, description: Set once an approved title is in a library. }
+    Issue:
+      type: object
+      properties:
+        id: { type: string }
+        itemId: { type: integer }
+        item: { $ref: "#/components/schemas/Item" }
+        kind: { type: string, enum: [video, audio, subtitles, wrong, other] }
+        note: { type: string }
+        resolved: { type: boolean }
+        resolution: { type: string, description: "`replaced`, or empty when an admin closed it." }
+        replaceable: { type: boolean, description: An admin can have the file replaced. }
+        userId: { type: integer }
+        username: { type: string }
+        createdAt: { type: integer }
+        resolvedAt: { type: integer }
     Credentials:
       type: object
       required: [username, password]

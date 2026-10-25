@@ -4,7 +4,97 @@
 
 // guest is the shared account of a device at home that hasn't signed in.
 export type User = { id: number; username: string; isAdmin: boolean; guest?: boolean }
-export type Settings = { requireSignInAtHome: boolean }
+// requests: who besides admins may add titles through Radarr and Sonarr.
+export type RequestMode = 'off' | 'approve' | 'auto'
+export type Settings = { requireSignInAtHome: boolean; requests: RequestMode }
+
+export type ArrApp = 'radarr' | 'sonarr'
+// A Radarr or Sonarr connection. The API key stays on the server.
+export type Integration = { connected: boolean; url: string; hasApiKey: boolean; qualityProfileId: number; rootFolder: string }
+export type IntegrationConfig = { url: string; apiKey?: string; qualityProfileId?: number; rootFolder?: string }
+export type QualityProfile = { id: number; name: string }
+export type ConnectionCheck = {
+  appName: string
+  version: string
+  qualityProfiles: QualityProfile[]
+  rootFolders: { path: string; freeSpace: number }[]
+}
+
+export type TitleKind = 'movie' | 'show'
+export type RequestOptions = {
+  movies: boolean
+  shows: boolean
+  canRequest: boolean
+  autoApprove: boolean
+  canReport: boolean
+  qualityProfiles?: Partial<Record<TitleKind, QualityProfile[]>>
+  defaultQualityProfile?: Partial<Record<TitleKind, number>>
+  pendingRequests?: number
+  openIssues?: number
+}
+
+// A movie or show found to ask for. status: in a library (available), in
+// Radarr or Sonarr still to download (added), or waiting for an admin (requested).
+export type Title = {
+  kind: TitleKind
+  tmdbId?: number
+  tvdbId?: number
+  title: string
+  year?: number
+  overview?: string
+  poster?: string
+  status?: 'available' | 'added' | 'requested'
+  itemId?: number
+  requestId?: string
+}
+
+export type TitleRequest = {
+  id: string
+  kind: TitleKind
+  tmdbId?: number
+  tvdbId?: number
+  title: string
+  year?: number
+  poster?: string
+  qualityProfileId?: number
+  state: 'pending' | 'approved' | 'declined' | 'failed'
+  error?: string
+  userId: number
+  username: string
+  createdAt: number
+  updatedAt: number
+  itemId?: number
+}
+
+export type Upcoming = {
+  kind: 'movie' | 'episode'
+  title: string
+  year?: number
+  showTitle?: string
+  season?: number
+  episode?: number
+  date: string
+  release: 'cinemas' | 'digital' | 'physical' | 'airs'
+  overview?: string
+  poster?: string
+  tmdbId?: number
+}
+
+export type IssueKind = 'video' | 'audio' | 'subtitles' | 'wrong' | 'other'
+export type Issue = {
+  id: string
+  itemId: number
+  item?: Item
+  kind: IssueKind
+  note?: string
+  resolved: boolean
+  resolution?: string
+  replaceable: boolean
+  userId: number
+  username: string
+  createdAt: number
+  resolvedAt?: number
+}
 
 export type Device = {
   id: string
@@ -130,10 +220,34 @@ export const api = {
     request<{ path: string; parent: string; dirs: string[] }>('GET', `/api/v1/fs?path=${encodeURIComponent(path)}`),
 
   settings: () => request<Settings>('GET', '/api/v1/settings'),
-  saveSettings: (s: Settings) => request<Settings>('PUT', '/api/v1/settings', s),
+  saveSettings: (s: Partial<Settings>) => request<Settings>('PUT', '/api/v1/settings', s),
   users: () => request<User[]>('GET', '/api/v1/users'),
   createUser: (username: string, password: string, isAdmin: boolean) =>
     request<User>('POST', '/api/v1/users', { username, password, isAdmin }),
+
+  integrations: () => request<Record<ArrApp, Integration>>('GET', '/api/v1/integrations'),
+  testIntegration: (app: ArrApp, c: IntegrationConfig) => request<ConnectionCheck>('POST', `/api/v1/integrations/${app}/test`, c),
+  saveIntegration: (app: ArrApp, c: IntegrationConfig) => request<Integration>('PUT', `/api/v1/integrations/${app}`, c),
+  deleteIntegration: (app: ArrApp) => request<void>('DELETE', `/api/v1/integrations/${app}`),
+  requestOptions: () => request<RequestOptions>('GET', '/api/v1/requests/options'),
+  searchTitles: (kind: TitleKind, q: string) =>
+    request<Title[]>('GET', `/api/v1/requests/search?kind=${kind}&q=${encodeURIComponent(q)}`),
+  requests: (all = false) => request<TitleRequest[]>('GET', `/api/v1/requests${all ? '?all=1' : ''}`),
+  createRequest: (t: Title, qualityProfileId?: number) =>
+    request<TitleRequest>('POST', '/api/v1/requests', { kind: t.kind, tmdbId: t.tmdbId, tvdbId: t.tvdbId, qualityProfileId }),
+  approveRequest: (id: string, qualityProfileId?: number) =>
+    request<TitleRequest>('POST', `/api/v1/requests/${id}/approve`, { qualityProfileId }),
+  declineRequest: (id: string) => request<TitleRequest>('POST', `/api/v1/requests/${id}/decline`),
+  deleteRequest: (id: string) => request<void>('DELETE', `/api/v1/requests/${id}`),
+  upcoming: (days = 30) => request<{ items: Upcoming[]; unavailable?: string[] }>('GET', `/api/v1/upcoming?days=${days}`),
+  itemQuality: (id: number) =>
+    request<{ app: ArrApp; qualityProfileId: number; qualityProfiles: QualityProfile[] }>('GET', `/api/v1/items/${id}/quality`),
+  setItemQuality: (id: number, qualityProfileId: number) =>
+    request<{ app: ArrApp; qualityProfileId: number; qualityProfiles: QualityProfile[] }>('PUT', `/api/v1/items/${id}/quality`, { qualityProfileId }),
+  reportIssue: (id: number, kind: IssueKind, note: string) => request<Issue>('POST', `/api/v1/items/${id}/issues`, { kind, note }),
+  issues: (all = false) => request<Issue[]>('GET', `/api/v1/issues${all ? '?all=1' : ''}`),
+  resolveIssue: (id: string) => request<void>('POST', `/api/v1/issues/${id}/resolve`),
+  replaceIssueFile: (id: string) => request<void>('POST', `/api/v1/issues/${id}/replace`),
 
   home: () => request<{ continueWatching: Item[]; watchList: Item[]; recentlyAdded: Item[] }>('GET', '/api/v1/home'),
   search: (q: string) => request<Item[]>('GET', `/api/v1/search?q=${encodeURIComponent(q)}`),
