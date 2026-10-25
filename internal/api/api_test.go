@@ -16,9 +16,11 @@ import (
 	"testing"
 	"time"
 
+	"github.com/yeixio/matinee/internal/artwork"
 	"github.com/yeixio/matinee/internal/probe"
 	"github.com/yeixio/matinee/internal/scan"
 	"github.com/yeixio/matinee/internal/store"
+	"github.com/yeixio/matinee/internal/store/storetest"
 	"github.com/yeixio/matinee/internal/stream"
 )
 
@@ -65,11 +67,7 @@ func makeMedia(t *testing.T, path string, args ...string) {
 
 func newTestServer(t *testing.T) (*client, string) {
 	t.Helper()
-	db, err := store.Open(":memory:")
-	if err != nil {
-		t.Fatal(err)
-	}
-	t.Cleanup(func() { db.Close() })
+	db := storetest.Open(t)
 	log := slog.New(slog.NewTextHandler(io.Discard, nil))
 	tmp := t.TempDir()
 	tc := stream.NewTranscoder("ffmpeg", filepath.Join(tmp, "transcode"), log)
@@ -78,7 +76,7 @@ func newTestServer(t *testing.T) (*client, string) {
 	t.Cleanup(cancel)
 	srv := &Server{
 		Store: db, Scanner: &scan.Scanner{Store: db, Prober: probe.Prober{Path: "ffprobe"}, Log: log},
-		Transcoder: tc, Log: log, BackgroundCtx: ctx,
+		Transcoder: tc, Art: artwork.NewCache(filepath.Join(tmp, "images"), "ffmpeg"), Log: log, BackgroundCtx: ctx,
 	}
 	ts := httptest.NewServer(srv.Handler())
 	t.Cleanup(ts.Close)

@@ -15,7 +15,7 @@ CREATE TABLE sessions (
 CREATE TABLE libraries (
     id         INTEGER PRIMARY KEY,
     name       TEXT NOT NULL,
-    kind       TEXT NOT NULL CHECK (kind IN ('movies', 'tv', 'music')),
+    kind       TEXT NOT NULL, -- a registered library kind: movies, tv, music, or one a plugin adds
     created_at INTEGER NOT NULL
 );
 
@@ -26,12 +26,13 @@ CREATE TABLE library_paths (
 );
 
 -- Every browsable thing is an item. Files are leaves (movie, episode, track);
--- containers (show, season, artist, album) have no path.
+-- containers (show, season, artist, album) have no path. Kinds aren't
+-- constrained here so library-type plugins can add their own.
 CREATE TABLE items (
     id             INTEGER PRIMARY KEY,
     library_id     INTEGER NOT NULL REFERENCES libraries(id) ON DELETE CASCADE,
     parent_id      INTEGER REFERENCES items(id) ON DELETE CASCADE,
-    kind           TEXT NOT NULL CHECK (kind IN ('movie', 'show', 'season', 'episode', 'artist', 'album', 'track')),
+    kind           TEXT NOT NULL,
     title          TEXT NOT NULL,
     sort_title     TEXT NOT NULL,
     year           INTEGER,
@@ -46,13 +47,19 @@ CREATE TABLE items (
     audio_codec    TEXT,
     width          INTEGER,
     height         INTEGER,
+    overview       TEXT,
+    rating         REAL,
+    poster         TEXT, -- local path, http(s) URL, or "embedded:<audio file>"
+    backdrop       TEXT,
+    tmdb_id        INTEGER,
+    meta_at        INTEGER, -- when online metadata was last looked up
     added_at       INTEGER NOT NULL
 );
 CREATE INDEX items_parent ON items(parent_id, index_number, sort_title);
 CREATE INDEX items_library ON items(library_id, kind, sort_title);
 CREATE INDEX items_added ON items(added_at);
 -- Containers are unique by name under their parent, so rescans reuse them.
-CREATE UNIQUE INDEX items_container_key ON items(library_id, kind, IFNULL(parent_id, 0), title, IFNULL(index_number, -1)) WHERE path IS NULL;
+CREATE UNIQUE INDEX items_container_key ON items(library_id, kind, COALESCE(parent_id, 0), title, COALESCE(index_number, -1)) WHERE path IS NULL;
 
 CREATE VIRTUAL TABLE items_fts USING fts5(title, content='items', content_rowid='id', tokenize='unicode61 remove_diacritics 2');
 CREATE TRIGGER items_ai AFTER INSERT ON items BEGIN

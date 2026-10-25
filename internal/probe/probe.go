@@ -18,6 +18,7 @@ type Result struct {
 	AudioCodec string
 	Width      int
 	Height     int
+	HasCover   bool              // an embedded picture, like album art in a FLAC or MP3
 	Tags       map[string]string // lower-cased keys: title, artist, album_artist, album, track, disc, date
 }
 
@@ -74,7 +75,9 @@ func parse(data []byte) (Result, error) {
 		switch s.CodecType {
 		case "video":
 			// Cover art in music files shows up as a video stream; skip it.
-			if r.VideoCodec == "" && s.Disposition["attached_pic"] == 0 {
+			if s.Disposition["attached_pic"] == 1 {
+				r.HasCover = true
+			} else if r.VideoCodec == "" {
 				r.VideoCodec, r.Width, r.Height = s.CodecName, s.Width, s.Height
 			}
 		case "audio":

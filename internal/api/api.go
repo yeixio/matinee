@@ -15,6 +15,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/yeixio/matinee/internal/artwork"
 	"github.com/yeixio/matinee/internal/auth"
 	"github.com/yeixio/matinee/internal/scan"
 	"github.com/yeixio/matinee/internal/store"
@@ -26,6 +27,7 @@ type Server struct {
 	Store      *store.Store
 	Scanner    *scan.Scanner
 	Transcoder *stream.Transcoder
+	Art        *artwork.Cache
 	Web        fs.FS // built web player; nil serves a placeholder
 	Log        *slog.Logger
 
@@ -38,6 +40,17 @@ func (s *Server) Handler() http.Handler {
 
 	mux.HandleFunc("GET /api/health", func(w http.ResponseWriter, r *http.Request) {
 		writeJSON(w, http.StatusOK, map[string]string{"status": "ok", "version": version.Version})
+	})
+	// Kubernetes probes: alive means the process answers, ready means the database does too.
+	mux.HandleFunc("GET /healthz", func(w http.ResponseWriter, r *http.Request) { w.Write([]byte("ok")) })
+	mux.HandleFunc("GET /readyz", func(w http.ResponseWriter, r *http.Request) {
+		ctx, cancel := context.WithTimeout(r.Context(), 2*time.Second)
+		defer cancel()
+		if err := s.Store.Ping(ctx); err != nil {
+			http.Error(w, "database unavailable", http.StatusServiceUnavailable)
+			return
+		}
+		w.Write([]byte("ok"))
 	})
 	mux.HandleFunc("GET /api/setup", s.getSetup)
 	mux.HandleFunc("POST /api/setup", s.postSetup)
@@ -63,6 +76,7 @@ func (s *Server) Handler() http.Handler {
 	user("GET /api/items/{id}", s.getItem)
 	user("GET /api/items/{id}/children", s.itemChildren)
 	user("PUT /api/items/{id}/progress", s.setProgress)
+	user("GET /api/items/{id}/image/{type}", s.itemImage)
 	user("GET /api/items/{id}/file", s.directFile)
 	user("POST /api/items/{id}/hls", s.startHLS)
 	user("GET /api/hls/{session}/{file}", s.hlsFile)
@@ -319,8 +333,8 @@ func (s *Server) createLibrary(w http.ResponseWriter, r *http.Request) {
 		writeError(w, http.StatusBadRequest, "name is required")
 		return
 	}
-	if req.Kind != "movies" && req.Kind != "tv" && req.Kind != "music" {
-		writeError(w, http.StatusBadRequest, "kind must be movies, tv or music")
+	if _, ok := scan.KindByName(req.Kind); !ok {
+		writeError(w, http.StatusBadRequest, "kind must be one of: "+strings.Join(scan.KindNames(), ", "))
 		return
 	}
 	if len(req.Paths) == 0 {
@@ -521,6 +535,41 @@ func (s *Server) setProgress(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.WriteHeader(http.StatusNoContent)
+}
+
+// itemImage serves a poster or backdrop. Seasons and tracks without their
+// own poster borrow their show's or album's.
+func (s *Server) itemImage(w http.ResponseWriter, r *http.Request) {
+	it, ok := s.loadItem(w, r)
+	if !ok {
+		return
+	}
+	kind := r.PathValue("type")
+	if kind != "poster" && kind != "backdrop" {
+		http.NotFound(w, r)
+		return
+	}
+	for range 3 {
+		src := it.Poster
+		if kind == "backdrop" {
+			src = it.Backdrop
+		}
+		if src != "" {
+			s.Art.Serve(w, r, src)
+			return
+		}
+		borrow := kind == "poster" && (it.Kind == "season" || it.Kind == "track") ||
+			kind == "backdrop" && (it.Kind == "season" || it.Kind == "episode")
+		if !borrow || it.ParentID == nil {
+			break
+		}
+		parent, err := s.Store.Item(r.Context(), 0, *it.ParentID)
+		if err != nil {
+			break
+		}
+		it = parent
+	}
+	http.NotFound(w, r)
 }
 
 // ---- playback ----

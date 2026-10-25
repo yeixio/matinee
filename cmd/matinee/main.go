@@ -14,7 +14,9 @@ import (
 	"time"
 
 	"github.com/yeixio/matinee/internal/api"
+	"github.com/yeixio/matinee/internal/artwork"
 	"github.com/yeixio/matinee/internal/config"
+	"github.com/yeixio/matinee/internal/metadata"
 	"github.com/yeixio/matinee/internal/probe"
 	"github.com/yeixio/matinee/internal/scan"
 	"github.com/yeixio/matinee/internal/store"
@@ -47,7 +49,7 @@ func run() error {
 		}
 	}
 
-	db, err := store.Open(cfg.DBPath())
+	db, err := store.Open(cfg.Database())
 	if err != nil {
 		return fmt.Errorf("open database: %w", err)
 	}
@@ -57,6 +59,12 @@ func run() error {
 	defer stop()
 
 	scanner := &scan.Scanner{Store: db, Prober: probe.Prober{Path: cfg.FFprobePath}, Log: log}
+	if cfg.TMDBKey != "" {
+		fetcher := &metadata.Fetcher{Store: db, Provider: metadata.NewTMDB(cfg.TMDBKey), Log: log}
+		scanner.AfterScan = fetcher.FetchLibrary
+	} else {
+		log.Info("no TMDB key set; using local artwork only (set MATINEE_TMDB_KEY for posters and descriptions)")
+	}
 	transcoder := stream.NewTranscoder(cfg.FFmpegPath, cfg.TranscodeDir(), log)
 	defer transcoder.Close()
 
@@ -64,6 +72,7 @@ func run() error {
 		Addr: cfg.Addr,
 		Handler: (&api.Server{
 			Store: db, Scanner: scanner, Transcoder: transcoder,
+			Art: artwork.NewCache(cfg.ImageDir(), cfg.FFmpegPath),
 			Web: web.FS(), Log: log, BackgroundCtx: ctx,
 		}).Handler(),
 		ReadHeaderTimeout: 10 * time.Second,
@@ -87,7 +96,11 @@ func run() error {
 
 	errc := make(chan error, 1)
 	go func() { errc <- srv.ListenAndServe() }()
-	log.Info("matinee started", "version", version.Version, "addr", cfg.Addr, "data", cfg.DataDir)
+	dbKind := "sqlite"
+	if cfg.DatabaseURL != "" {
+		dbKind = "postgres"
+	}
+	log.Info("matinee started", "version", version.Version, "addr", cfg.Addr, "data", cfg.DataDir, "database", dbKind)
 
 	select {
 	case err := <-errc:

@@ -12,32 +12,48 @@ import (
 	"strings"
 	"time"
 
+	_ "github.com/jackc/pgx/v5/stdlib"
 	_ "modernc.org/sqlite"
 )
 
-//go:embed schema.sql
-var schema string
+//go:embed schema_sqlite.sql
+var schemaSQLite string
+
+//go:embed schema_postgres.sql
+var schemaPostgres string
 
 var ErrNotFound = errors.New("not found")
 
 type Store struct {
-	db *sql.DB
+	db *db
 }
 
-// Open opens (and if needed creates) the database at path. Use ":memory:" in tests.
-func Open(path string) (*Store, error) {
-	dsn := "file:" + path + "?_pragma=foreign_keys(1)&_pragma=busy_timeout(5000)&_pragma=journal_mode(WAL)&_pragma=synchronous(NORMAL)"
-	db, err := sql.Open("sqlite", dsn)
-	if err != nil {
-		return nil, err
+// Open connects to the database. A postgres:// URL uses PostgreSQL, which
+// suits Kubernetes and network storage; anything else is a SQLite file path
+// (":memory:" in tests).
+func Open(dsn string) (*Store, error) {
+	var d *db
+	if strings.HasPrefix(dsn, "postgres://") || strings.HasPrefix(dsn, "postgresql://") {
+		conn, err := sql.Open("pgx", dsn)
+		if err != nil {
+			return nil, err
+		}
+		conn.SetMaxOpenConns(20)
+		d = &db{DB: conn, dialect: postgres}
+	} else {
+		conn, err := sql.Open("sqlite", "file:"+dsn+"?_pragma=foreign_keys(1)&_pragma=busy_timeout(5000)&_pragma=journal_mode(WAL)&_pragma=synchronous(NORMAL)")
+		if err != nil {
+			return nil, err
+		}
+		if dsn == ":memory:" {
+			// Each connection to :memory: is its own database, so keep exactly one.
+			conn.SetMaxOpenConns(1)
+		}
+		d = &db{DB: conn, dialect: sqlite}
 	}
-	if path == ":memory:" {
-		// Each connection to :memory: is its own database, so keep exactly one.
-		db.SetMaxOpenConns(1)
-	}
-	s := &Store{db: db}
+	s := &Store{db: d}
 	if err := s.migrate(); err != nil {
-		db.Close()
+		d.Close()
 		return nil, fmt.Errorf("migrate: %w", err)
 	}
 	return s, nil
@@ -45,26 +61,41 @@ func Open(path string) (*Store, error) {
 
 func (s *Store) Close() error { return s.db.Close() }
 
+// Ping checks the database is reachable, for readiness probes.
+func (s *Store) Ping(ctx context.Context) error { return s.db.PingContext(ctx) }
+
 func (s *Store) migrate() error {
+	ctx := context.Background()
+	t, err := s.db.BeginTx(ctx)
+	if err != nil {
+		return err
+	}
+	defer t.Rollback()
+	schema := schemaSQLite
+	if s.db.dialect == postgres {
+		schema = schemaPostgres
+		// Several pods may start at once; only one migrates.
+		if _, err := t.ExecContext(ctx, "SELECT pg_advisory_xact_lock(7171)"); err != nil {
+			return err
+		}
+	}
+	if _, err := t.ExecContext(ctx, "CREATE TABLE IF NOT EXISTS schema_version (version INTEGER NOT NULL)"); err != nil {
+		return err
+	}
 	var version int
-	if err := s.db.QueryRow("PRAGMA user_version").Scan(&version); err != nil {
+	if err := t.QueryRowContext(ctx, "SELECT COALESCE(MAX(version), 0) FROM schema_version").Scan(&version); err != nil {
 		return err
 	}
 	if version >= 1 {
 		return nil
 	}
-	tx, err := s.db.Begin()
-	if err != nil {
+	if _, err := t.ExecContext(ctx, schema); err != nil {
 		return err
 	}
-	defer tx.Rollback()
-	if _, err := tx.Exec(schema); err != nil {
+	if _, err := t.ExecContext(ctx, "INSERT INTO schema_version (version) VALUES (1)"); err != nil {
 		return err
 	}
-	if _, err := tx.Exec("PRAGMA user_version = 1"); err != nil {
-		return err
-	}
-	return tx.Commit()
+	return t.Commit()
 }
 
 func now() int64 { return time.Now().Unix() }
@@ -98,13 +129,13 @@ func (s *Store) CountUsers(ctx context.Context) (int, error) {
 }
 
 func (s *Store) CreateUser(ctx context.Context, username, passwordHash string, admin bool) (User, error) {
-	res, err := s.db.ExecContext(ctx,
-		"INSERT INTO users (username, password_hash, is_admin, created_at) VALUES (?, ?, ?, ?)",
-		username, passwordHash, admin, now())
+	var id int64
+	err := s.db.QueryRowContext(ctx,
+		"INSERT INTO users (username, password_hash, is_admin, created_at) VALUES (?, ?, ?, ?) RETURNING id",
+		username, passwordHash, b2i(admin), now()).Scan(&id)
 	if err != nil {
 		return User{}, err
 	}
-	id, _ := res.LastInsertId()
 	return User{ID: id, Username: username, IsAdmin: admin, hash: passwordHash}, nil
 }
 
@@ -127,7 +158,7 @@ func (s *Store) Users(ctx context.Context) ([]User, error) {
 
 func (s *Store) UserByName(ctx context.Context, username string) (User, error) {
 	return s.scanUser(s.db.QueryRowContext(ctx,
-		"SELECT id, username, is_admin, password_hash FROM users WHERE username = ?", username))
+		"SELECT id, username, is_admin, password_hash FROM users WHERE lower(username) = lower(?)", username))
 }
 
 func (s *Store) scanUser(row *sql.Row) (User, error) {
@@ -172,18 +203,18 @@ type Library struct {
 }
 
 func (s *Store) CreateLibrary(ctx context.Context, name, kind string, paths []string) (Library, error) {
-	tx, err := s.db.BeginTx(ctx, nil)
+	tx, err := s.db.BeginTx(ctx)
 	if err != nil {
 		return Library{}, err
 	}
 	defer tx.Rollback()
-	res, err := tx.ExecContext(ctx, "INSERT INTO libraries (name, kind, created_at) VALUES (?, ?, ?)", name, kind, now())
+	var id int64
+	err = tx.QueryRowContext(ctx, "INSERT INTO libraries (name, kind, created_at) VALUES (?, ?, ?) RETURNING id", name, kind, now()).Scan(&id)
 	if err != nil {
 		return Library{}, err
 	}
-	id, _ := res.LastInsertId()
 	for _, p := range paths {
-		if _, err := tx.ExecContext(ctx, "INSERT OR IGNORE INTO library_paths (library_id, path) VALUES (?, ?)", id, p); err != nil {
+		if _, err := tx.ExecContext(ctx, "INSERT INTO library_paths (library_id, path) VALUES (?, ?) ON CONFLICT DO NOTHING", id, p); err != nil {
 			return Library{}, err
 		}
 	}
