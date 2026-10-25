@@ -1,0 +1,50 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-ink: #0b0c10;
+  --color-surface: #13151b;
+  --color-raised: #1b1e26;
+  --color-line: #262a34;
+  --color-text: #eceef2;
+  --color-muted: #9aa1b0;
+  --color-faint: #6b7280;
+  --color-accent: #f5b544;
+  --color-accent-strong: #ffc85c;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --animate-fade: fade 240ms ease-out;
+  --animate-shimmer: shimmer 1.4s linear infinite;
+
+  @keyframes fade {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes shimmer {
+    from { background-position: -200% 0; }
+    to { background-position: 200% 0; }
+  }
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-ink text-text font-sans;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-accent;
+  }
+}
+
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+@utility skeleton {
+  background: linear-gradient(90deg, #1b1e26 0%, #242833 50%, #1b1e26 100%);
+  background-size: 200% 100%;
+  @apply animate-shimmer;
+}

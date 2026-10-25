@@ -12,11 +12,13 @@ coverage.out
 
 # Web
 web/node_modules/
-web/.svelte-kit/
-web/build/
-!web/build/.gitkeep
+web/coverage/
+web/dist/*
+!web/dist/.gitkeep
 
 # Editors
 .DS_Store
 .idea/
 .vscode/
+demo-media/
+web/*.tsbuildinfo

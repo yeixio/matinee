@@ -1,0 +1,99 @@
+image:
+  repository: ghcr.io/yeixio/matinee
+  # Defaults to the chart's appVersion.
+  tag: ""
+  pullPolicy: IfNotPresent
+
+# Keep 1 for now: active transcodes live in the pod that started them.
+# Several replicas need sticky sessions (see service.sessionAffinity).
+replicaCount: 1
+
+service:
+  type: ClusterIP
+  port: 7171
+  # ClientIP keeps a viewer on one pod when replicaCount > 1.
+  sessionAffinity: None
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  hosts:
+    - host: matinee.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
+
+# Optional themoviedb.org key for posters and descriptions.
+tmdb:
+  apiKey: ""
+  # Or read it from an existing secret's "tmdb-api-key" key.
+  existingSecret: ""
+
+# Your media, mounted read-only. Any volume source works: nfs, persistentVolumeClaim, hostPath...
+media: []
+#  - name: movies
+#    mountPath: /media/movies
+#    volume:
+#      nfs:
+#        server: nas.local
+#        path: /export/movies
+#  - name: tv
+#    mountPath: /media/tv
+#    volume:
+#      persistentVolumeClaim:
+#        claimName: tv-library
+
+# Transcode segments and the image cache. Rebuilt on demand, so emptyDir is fine.
+# Use a fast local disk; network storage slows transcoding down.
+cache:
+  sizeLimit: 50Gi
+  medium: ""  # "Memory" puts it in RAM (counts against the memory limit)
+
+database:
+  # Use an existing PostgreSQL instead of the bundled one (set postgresql.enabled=false):
+  # either a full URL here...
+  url: ""
+  # ...or an existing secret holding it under the "database-url" key.
+  existingSecret: ""
+
+# Bundled PostgreSQL, so `helm install` works out of the box.
+postgresql:
+  enabled: true
+  image:
+    repository: postgres
+    tag: "17-alpine"
+  auth:
+    username: matinee
+    database: matinee
+    # Generated on first install and kept across upgrades when empty.
+    password: ""
+  persistence:
+    size: 8Gi
+    storageClass: ""
+  resources: {}
+
+env: []
+#  - name: MATINEE_SCAN_INTERVAL
+#    value: 30m
+
+resources: {}
+#  requests: {cpu: 500m, memory: 512Mi}
+#  limits: {memory: 4Gi}
+
+podSecurityContext:
+  runAsUser: 1000
+  runAsGroup: 1000
+  fsGroup: 1000
+  runAsNonRoot: true
+
+securityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  capabilities:
+    drop: [ALL]
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
