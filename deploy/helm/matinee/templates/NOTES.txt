@@ -1,0 +1,15 @@
+Matinee is starting.
+
+{{- if .Values.ingress.enabled }}
+Open: {{ range .Values.ingress.hosts }}http{{ if $.Values.ingress.tls }}s{{ end }}://{{ .host }}{{ end }}
+{{- else }}
+Reach it from your machine:
+  kubectl port-forward -n {{ .Release.Namespace }} svc/{{ include "matinee.fullname" . }} 7171:{{ .Values.service.port }}
+  then open http://localhost:7171
+{{- end }}
+
+The first visit asks you to create the admin account.
+{{- if not .Values.media }}
+
+No media volumes are mounted yet. Set `media` in your values to mount your library folders.
+{{- end }}

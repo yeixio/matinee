@@ -1,0 +1,105 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "matinee.fullname" . }}
+  labels:
+    {{- include "matinee.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  # Stop the old pod before starting the new one so transcodes don't double up.
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      {{- include "matinee.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "matinee.selectorLabels" . | nindent 8 }}
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
+    spec:
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: matinee
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          ports:
+            - name: http
+              containerPort: 7171
+          env:
+            - name: MATINEE_ADDR
+              value: ":7171"
+            - name: MATINEE_DATA_DIR
+              value: /cache
+            - name: MATINEE_DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "matinee.databaseSecret" . }}
+                  key: database-url
+            {{- if or .Values.tmdb.apiKey .Values.tmdb.existingSecret }}
+            - name: MATINEE_TMDB_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.tmdb.existingSecret | default (printf "%s-tmdb" (include "matinee.fullname" .)) }}
+                  key: tmdb-api-key
+            {{- end }}
+            {{- with .Values.env }}
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            periodSeconds: 20
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: http
+            periodSeconds: 10
+          startupProbe:
+            httpGet:
+              path: /readyz
+              port: http
+            periodSeconds: 3
+            failureThreshold: 60
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: cache
+              mountPath: /cache
+            - name: tmp
+              mountPath: /tmp
+            {{- range .Values.media }}
+            - name: media-{{ .name }}
+              mountPath: {{ .mountPath }}
+              readOnly: true
+            {{- end }}
+      volumes:
+        - name: cache
+          emptyDir:
+            sizeLimit: {{ .Values.cache.sizeLimit }}
+            {{- with .Values.cache.medium }}
+            medium: {{ . }}
+            {{- end }}
+        - name: tmp
+          emptyDir: {}
+        {{- range .Values.media }}
+        - name: media-{{ .name }}
+          {{- toYaml .volume | nindent 10 }}
+        {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

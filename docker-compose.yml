@@ -1,0 +1,30 @@
+# Single machine: SQLite in ./data, nothing else to run.
+#   docker compose up -d
+# With PostgreSQL instead: docker compose --profile postgres up -d
+# and uncomment MATINEE_DATABASE_URL below.
+services:
+  matinee:
+    image: ghcr.io/yeixio/matinee:latest
+    build: .
+    ports:
+      - "7171:7171"
+    environment:
+      # MATINEE_TMDB_KEY: your-themoviedb-key
+      # MATINEE_DATABASE_URL: postgres://matinee:matinee@postgres:5432/matinee?sslmode=disable
+    volumes:
+      - ./data:/data
+      - /path/to/movies:/media/movies:ro
+      - /path/to/tv:/media/tv:ro
+      - /path/to/music:/media/music:ro
+    restart: unless-stopped
+
+  postgres:
+    profiles: [postgres]
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: matinee
+      POSTGRES_PASSWORD: matinee
+      POSTGRES_DB: matinee
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+    restart: unless-stopped
