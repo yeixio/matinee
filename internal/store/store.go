@@ -180,6 +180,36 @@ var migrations = []string{
 	)`,
 	// 15: items someone took out of Continue Watching, until they play them again.
 	"ALTER TABLE progress ADD COLUMN hidden INTEGER NOT NULL DEFAULT 0",
+	// 16–19: titles people ask for, and problems they report (see requests.go).
+	`CREATE TABLE requests (
+		id                 TEXT PRIMARY KEY,
+		user_id            BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+		kind               TEXT NOT NULL,
+		tmdb_id            BIGINT NOT NULL DEFAULT 0,
+		tvdb_id            BIGINT NOT NULL DEFAULT 0,
+		title              TEXT NOT NULL,
+		year               INTEGER NOT NULL DEFAULT 0,
+		poster             TEXT NOT NULL DEFAULT '',
+		quality_profile_id INTEGER NOT NULL DEFAULT 0,
+		state              TEXT NOT NULL,
+		error              TEXT NOT NULL DEFAULT '',
+		created_at         BIGINT NOT NULL,
+		updated_at         BIGINT NOT NULL
+	)`,
+	`CREATE TABLE issues (
+		id          TEXT PRIMARY KEY,
+		user_id     BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+		item_id     BIGINT NOT NULL REFERENCES items(id) ON DELETE CASCADE,
+		kind        TEXT NOT NULL,
+		note        TEXT NOT NULL DEFAULT '',
+		resolved    INTEGER NOT NULL DEFAULT 0,
+		resolution  TEXT NOT NULL DEFAULT '',
+		created_at  BIGINT NOT NULL,
+		resolved_at BIGINT NOT NULL DEFAULT 0
+	)`,
+	"CREATE INDEX issues_item ON issues(item_id)",
+	// Requests are matched to the libraries by TMDB id.
+	"CREATE INDEX items_tmdb ON items(kind, tmdb_id)",
 }
 
 func now() int64 { return time.Now().Unix() }

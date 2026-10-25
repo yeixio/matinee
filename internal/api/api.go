@@ -45,6 +45,7 @@ type Server struct {
 	HomeListener bool
 	homeSignIn   homeSetting
 	setUp        atomic.Bool // the first account exists
+	arrCache     ttlCache    // answers from Radarr and Sonarr (see arr.go)
 
 	// BackgroundCtx scopes scans started by API calls; it outlives any one request.
 	BackgroundCtx context.Context
@@ -128,6 +129,25 @@ func (s *Server) routes() []route {
 		{"POST /downloads/{id}/finished", signedIn, s.finishDownload},
 		{"GET /downloads/{id}/file", signedIn, s.downloadFile},
 		{"POST /sync/progress", signedIn, s.syncProgress},
+
+		{"GET /integrations", adminOnly, s.getIntegrations},
+		{"PUT /integrations/{app}", adminOnly, s.putIntegration},
+		{"DELETE /integrations/{app}", adminOnly, s.deleteIntegration},
+		{"POST /integrations/{app}/test", adminOnly, s.testIntegration},
+		{"GET /requests/options", reader, s.getRequestOptions},
+		{"GET /requests/search", signedIn, s.searchTitles},
+		{"GET /requests", signedIn, s.listRequests},
+		{"POST /requests", signedIn, s.createRequest},
+		{"POST /requests/{id}/approve", adminOnly, s.approveRequest},
+		{"POST /requests/{id}/decline", adminOnly, s.declineRequest},
+		{"DELETE /requests/{id}", signedIn, s.deleteRequest},
+		{"GET /upcoming", reader, s.upcoming},
+		{"GET /items/{id}/quality", adminOnly, s.getItemQuality},
+		{"PUT /items/{id}/quality", adminOnly, s.putItemQuality},
+		{"POST /items/{id}/issues", signedIn, s.reportIssue},
+		{"GET /issues", signedIn, s.listIssues},
+		{"POST /issues/{id}/resolve", adminOnly, s.resolveIssue},
+		{"POST /issues/{id}/replace", adminOnly, s.replaceIssue},
 	}
 }
 
