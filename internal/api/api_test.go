@@ -22,6 +22,7 @@ import (
 	"github.com/yeixio/matinee/internal/store"
 	"github.com/yeixio/matinee/internal/store/storetest"
 	"github.com/yeixio/matinee/internal/stream"
+	"github.com/yeixio/matinee/internal/subtitle"
 )
 
 type client struct {
@@ -76,7 +77,8 @@ func newTestServer(t *testing.T) (*client, string) {
 	t.Cleanup(cancel)
 	srv := &Server{
 		Store: db, Scanner: &scan.Scanner{Store: db, Prober: probe.Prober{Path: "ffprobe"}, Log: log},
-		Transcoder: tc, Art: artwork.NewCache(filepath.Join(tmp, "images"), "ffmpeg"), Log: log, BackgroundCtx: ctx,
+		Transcoder: tc, Art: artwork.NewCache(filepath.Join(tmp, "images"), "ffmpeg"),
+		Subtitles: subtitle.NewConverter("ffmpeg", filepath.Join(tmp, "subtitles")), Log: log, BackgroundCtx: ctx,
 	}
 	ts := httptest.NewServer(srv.Handler())
 	t.Cleanup(ts.Close)

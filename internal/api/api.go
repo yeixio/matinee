@@ -17,9 +17,11 @@ import (
 
 	"github.com/yeixio/matinee/internal/artwork"
 	"github.com/yeixio/matinee/internal/auth"
+	"github.com/yeixio/matinee/internal/probe"
 	"github.com/yeixio/matinee/internal/scan"
 	"github.com/yeixio/matinee/internal/store"
 	"github.com/yeixio/matinee/internal/stream"
+	"github.com/yeixio/matinee/internal/subtitle"
 	"github.com/yeixio/matinee/internal/version"
 )
 
@@ -28,6 +30,7 @@ type Server struct {
 	Scanner    *scan.Scanner
 	Transcoder *stream.Transcoder
 	Art        *artwork.Cache
+	Subtitles  *subtitle.Converter
 	Web        fs.FS // built web player; nil serves a placeholder
 	Log        *slog.Logger
 
@@ -78,6 +81,7 @@ func (s *Server) Handler() http.Handler {
 	user("PUT /api/items/{id}/progress", s.setProgress)
 	user("GET /api/items/{id}/image/{type}", s.itemImage)
 	user("GET /api/items/{id}/file", s.directFile)
+	user("GET /api/items/{id}/subtitles/{track}", s.subtitleFile)
 	user("POST /api/items/{id}/hls", s.startHLS)
 	user("GET /api/hls/{session}/{file}", s.hlsFile)
 
@@ -475,8 +479,9 @@ func (s *Server) loadItem(w http.ResponseWriter, r *http.Request) (store.Item, b
 
 type itemView struct {
 	store.Item
-	MimeType string       `json:"mimeType,omitempty"`
-	Parents  []store.Item `json:"parents"` // root first: show, season
+	MimeType  string           `json:"mimeType,omitempty"`
+	Subtitles []subtitle.Track `json:"subtitles,omitempty"`
+	Parents   []store.Item     `json:"parents"` // root first: show, season
 }
 
 func (s *Server) getItem(w http.ResponseWriter, r *http.Request) {
@@ -487,6 +492,9 @@ func (s *Server) getItem(w http.ResponseWriter, r *http.Request) {
 	v := itemView{Item: it, Parents: []store.Item{}}
 	if it.Playable {
 		v.MimeType = stream.MimeType(it.Path)
+	}
+	if it.Playable && it.VideoCodec != "" {
+		v.Subtitles = s.subtitleTracks(r.Context(), it)
 	}
 	for p := it.ParentID; p != nil; {
 		parent, err := s.Store.Item(r.Context(), currentUser(r).ID, *p)
@@ -596,13 +604,62 @@ func (s *Server) startHLS(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	start, _ := strconv.ParseFloat(r.URL.Query().Get("start"), 64)
-	id, err := s.Transcoder.Start(r.Context(), currentUser(r).ID, it, start)
+	burn := -1
+	if sub := r.URL.Query().Get("subtitle"); sub != "" {
+		t, ok := subtitle.Find(s.subtitleTracks(r.Context(), it), sub)
+		if !ok {
+			writeError(w, http.StatusBadRequest, "no such subtitle track")
+			return
+		}
+		// Text subtitles are drawn by the player; only pictures need burning in.
+		if t.BurnIn {
+			burn = t.Stream
+		}
+	}
+	id, err := s.Transcoder.Start(r.Context(), currentUser(r).ID, it, start, burn)
 	if err != nil {
 		s.Log.Error("transcode", "item", it.ID, "err", err)
 		writeError(w, http.StatusInternalServerError, "couldn't start playback for this file")
 		return
 	}
 	writeJSON(w, http.StatusOK, map[string]any{"url": "/api/hls/" + id + "/index.m3u8", "startSec": start})
+}
+
+// subtitleTracks lists a video's subtitle tracks. Files scanned before
+// Matinee looked for embedded subtitles are probed now, once.
+func (s *Server) subtitleTracks(ctx context.Context, it store.Item) []subtitle.Track {
+	var embedded []probe.Subtitle
+	raw, ok, err := s.Store.SubtitleStreams(ctx, it.ID)
+	if err != nil {
+		s.Log.Warn("subtitle streams", "item", it.ID, "err", err)
+	} else if ok {
+		json.Unmarshal([]byte(raw), &embedded)
+	} else if pr, err := s.Scanner.Prober.Probe(ctx, it.Path); err == nil {
+		embedded = pr.Subtitles
+		b, _ := json.Marshal(pr.SubtitleList())
+		if err := s.Store.SetSubtitleStreams(ctx, it.ID, string(b)); err != nil {
+			s.Log.Warn("save subtitle streams", "item", it.ID, "err", err)
+		}
+	}
+	return subtitle.List(it.Path, embedded)
+}
+
+func (s *Server) subtitleFile(w http.ResponseWriter, r *http.Request) {
+	it, ok := s.loadItem(w, r)
+	if !ok {
+		return
+	}
+	if !it.Playable || it.VideoCodec == "" {
+		writeError(w, http.StatusBadRequest, "not a video")
+		return
+	}
+	tracks := s.subtitleTracks(r.Context(), it)
+	t, ok := subtitle.Find(tracks, strings.TrimSuffix(r.PathValue("track"), ".vtt"))
+	if !ok {
+		writeError(w, http.StatusNotFound, "no such subtitle track")
+		return
+	}
+	s.Subtitles.Serve(w, r, it.Path, t, tracks)
 }
 
 func (s *Server) hlsFile(w http.ResponseWriter, r *http.Request) {

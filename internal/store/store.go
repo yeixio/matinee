@@ -86,16 +86,36 @@ func (s *Store) migrate() error {
 	if err := t.QueryRowContext(ctx, "SELECT COALESCE(MAX(version), 0) FROM schema_version").Scan(&version); err != nil {
 		return err
 	}
-	if version >= 1 {
-		return nil
+	if version < 1 {
+		if _, err := t.ExecContext(ctx, schema); err != nil {
+			return err
+		}
+		version = 1
 	}
-	if _, err := t.ExecContext(ctx, schema); err != nil {
+	if version > len(migrations) {
+		return t.Commit() // up to date, or made by a newer Matinee
+	}
+	// Later changes, in order. Each runs once on databases made before it.
+	for _, m := range migrations[version-1:] {
+		if _, err := t.ExecContext(ctx, m); err != nil {
+			return err
+		}
+		version++
+	}
+	if _, err := t.ExecContext(ctx, "DELETE FROM schema_version"); err != nil {
 		return err
 	}
-	if _, err := t.ExecContext(ctx, "INSERT INTO schema_version (version) VALUES (1)"); err != nil {
+	if _, err := t.ExecContext(ctx, "INSERT INTO schema_version (version) VALUES (?)", version); err != nil {
 		return err
 	}
 	return t.Commit()
+}
+
+// migrations take the schema from version 1 (the schema files) upward. They
+// must work on both SQLite and PostgreSQL.
+var migrations = []string{
+	// 2: embedded subtitle streams as JSON; NULL until the file is probed for them.
+	"ALTER TABLE items ADD COLUMN subtitle_streams TEXT",
 }
 
 func now() int64 { return time.Now().Unix() }

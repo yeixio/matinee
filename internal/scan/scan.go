@@ -3,6 +3,7 @@ package scan
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"io/fs"
@@ -160,6 +161,10 @@ func (s *Scanner) indexFile(ctx context.Context, kind Kind, lib store.Library, r
 	}
 	if pr.Width > 0 {
 		it.Width, it.Height = &pr.Width, &pr.Height
+	}
+	if err == nil && pr.VideoCodec != "" {
+		subs, _ := json.Marshal(pr.SubtitleList())
+		it.SubtitleStreams = string(subs)
 	}
 	_, err = s.Store.UpsertFile(ctx, it)
 	return err

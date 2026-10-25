@@ -17,12 +17,24 @@ video() { # video <file> <seconds> <codec>
   ff -f lavfi -i "testsrc2=s=1280x720:r=24:d=$2" -f lavfi -i "sine=f=330:d=$2" -c:v "$3" -c:a aac -shortest "$1"
 }
 
+subs() { # subs <file> <seconds> <lines...>: one cue every few seconds
+  local f=$1 secs=$2 n=0 t=1; shift 2
+  : > "$f"
+  while [ $t -lt $((secs - 2)) ]; do
+    n=$((n + 1))
+    printf '%d\n00:00:%02d,000 --> 00:00:%02d,500\n%s\n\n' $n $t $((t + 2)) "${@:$(( (n - 1) % $# + 1 )):1}" >> "$f"
+    t=$((t + 4))
+  done
+}
+
 i=0
 for m in "Big Buck Bunny (2008)" "Sintel (2010)" "Tears of Steel (2012)" "Elephants Dream (2006)" \
          "Cosmos Laundromat (2015)" "Spring (2019)" "Agent 327 (2017)" "Caminandes (2013)" \
          "Glass Half (2015)" "Charge (2022)" "Sprite Fright (2021)" "Hero (2018)"; do
   d="$root/movies/$m"; mkdir -p "$d"
   [ -f "$d/$m.mp4" ] || video "$d/$m.mp4" 30 libx264
+  subs "$d/$m.en.srt" 30 "The lights go down." "<i>Somewhere, a projector hums.</i>" "Popcorn, anyone?"
+  subs "$d/$m.es.srt" 30 "Se apagan las luces." "<i>En algún lugar, zumba un proyector.</i>" "¿Palomitas?"
   art "$d/poster.jpg" 500x750 $i; art "$d/fanart.jpg" 1280x720 $((i + 1)); i=$((i + 1))
 done
 
