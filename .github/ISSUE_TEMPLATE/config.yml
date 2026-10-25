@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Join the core team
+    url: https://github.com/yeixio/matinee/issues/51
+    about: Say hello and tell us what you'd like to work on.
+  - name: Report a security problem
+    url: https://github.com/yeixio/matinee/security/advisories/new
+    about: Privately, not as a public issue.

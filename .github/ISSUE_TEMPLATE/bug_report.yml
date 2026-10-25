@@ -1,0 +1,91 @@
+name: Bug report
+description: Something in Matinee doesn't work.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        One problem per report, please. Remove passwords, API keys and private URLs from anything you paste.
+  - type: checkboxes
+    id: preflight
+    attributes:
+      label: Checks
+      options:
+        - label: I searched existing issues
+          required: true
+        - label: I removed secrets and private URLs from logs and screenshots
+          required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Matinee version
+      description: From Settings, the image tag, or `git rev-parse --short HEAD`.
+    validations:
+      required: true
+  - type: dropdown
+    id: install
+    attributes:
+      label: How do you run it?
+      options:
+        - Docker / Compose
+        - Kubernetes (Helm)
+        - NAS app (Unraid, Synology, TrueNAS, ...)
+        - From source
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: database
+    attributes:
+      label: Database
+      options:
+        - SQLite (default)
+        - PostgreSQL
+        - Not sure
+    validations:
+      required: true
+  - type: input
+    id: client
+    attributes:
+      label: Browser or device you watched on
+      placeholder: Chrome 140 on Windows, Safari on iPhone 16, LG TV browser
+    validations:
+      required: false
+  - type: textarea
+    id: file
+    attributes:
+      label: The file, if it's about a specific one
+      description: The file name and its folder, and if you can, the output of `ffprobe -hide_banner "<file>"`.
+      render: text
+    validations:
+      required: false
+  - type: textarea
+    id: logs
+    attributes:
+      label: Server logs
+      description: Matinee logs to stdout (`docker logs matinee`, `kubectl logs`).
+      render: text
+    validations:
+      required: false
