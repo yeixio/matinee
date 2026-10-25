@@ -22,8 +22,8 @@ body:
   - type: textarea
     id: prior-art
     attributes:
-      label: How do other servers handle it?
-      description: Plex, Jellyfin, Emby, Navidrome... Links or screenshots help.
+      label: Seen it done well somewhere?
+      description: Another app or service that does this well? Links or screenshots help.
     validations:
       required: false
   - type: dropdown
