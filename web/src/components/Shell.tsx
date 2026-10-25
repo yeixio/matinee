@@ -10,21 +10,27 @@ export function LibraryIcon({ kind, className = 'size-5' }: { kind: string; clas
   return <Clapperboard className={className} />
 }
 
+const ticket = 'M12 14H52a6 6 0 0 1 6 6v6a6 6 0 0 0 0 12v6a6 6 0 0 1-6 6H12a6 6 0 0 1-6-6v-6a6 6 0 0 0 0-12v-6a6 6 0 0 1 6-6Z'
+
+// The mark is a ticket stub: a matinee is the afternoon showing.
 export function Logo({ className = '' }: { className?: string }) {
   return (
-    <span className={`flex items-center gap-2 text-lg font-bold tracking-tight ${className}`}>
-      <svg viewBox="0 0 64 64" className="size-7" aria-hidden>
-        <rect width="64" height="64" rx="14" fill="#1b1e26" />
-        <path d="M18 46V18l14 16 14-16v28" fill="none" stroke="#f5b544" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" />
+    <span className={`flex items-center gap-2 font-display text-xl font-semibold tracking-tight ${className}`}>
+      <svg viewBox="0 0 64 64" className="size-8" aria-hidden>
+        <g transform="rotate(-10 32 32)">
+          <path d={ticket} className="fill-accent" />
+          <path d="M44 19v26" className="stroke-ink" strokeWidth="2.5" strokeDasharray="3 3.5" />
+          <path d="M21 24.5v15l12-7.5Z" className="fill-ink" />
+        </g>
       </svg>
-      Matinee
+      matinee
     </span>
   )
 }
 
-const sideLink = ({ isActive }: { isActive: boolean }) =>
-  `flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors ${
-    isActive ? 'bg-white/10 text-text font-medium' : 'text-muted hover:bg-white/5 hover:text-text'
+const topLink = ({ isActive }: { isActive: boolean }) =>
+  `flex items-center gap-2 rounded-full px-4 py-1.5 text-sm transition-colors ${
+    isActive ? 'bg-text text-ink font-medium' : 'text-muted hover:bg-white/5 hover:text-text'
   }`
 
 const tabLink = ({ isActive }: { isActive: boolean }) =>
@@ -50,55 +56,43 @@ export default function Shell({ user }: { user: User }) {
   }
 
   return (
-    <div className="min-h-dvh md:pl-60">
-      {/* Desktop sidebar */}
-      <aside className="fixed inset-y-0 left-0 hidden w-60 flex-col border-r border-line/60 bg-surface/60 px-3 py-5 backdrop-blur md:flex">
-        <NavLink to="/" className="mb-6 px-3">
-          <Logo />
-        </NavLink>
-        <nav className="space-y-1">
-          <NavLink to="/" end className={sideLink}>
-            <Home className="size-5" /> Home
+    <div className="min-h-dvh">
+      <header className="sticky top-0 z-20 border-b border-line/60 bg-ink/80 backdrop-blur">
+        <div className="flex h-14 items-center gap-6 px-4 md:h-16 md:px-8">
+          <NavLink to="/">
+            <Logo />
           </NavLink>
-          <NavLink to="/search" className={sideLink}>
-            <Search className="size-5" /> Search
-          </NavLink>
-        </nav>
-        {libraries.length > 0 && (
-          <>
-            <div className="mt-6 mb-2 px-3 text-xs font-medium tracking-wide text-faint uppercase">Libraries</div>
-            <nav className="space-y-1">
-              {libraries.map((l) => (
-                <NavLink key={l.id} to={`/library/${l.id}`} className={sideLink}>
-                  <LibraryIcon kind={l.kind} /> <span className="truncate">{l.name}</span>
-                  {l.scanning && <span className="ml-auto size-1.5 animate-pulse rounded-full bg-accent" title="Scanning" />}
-                </NavLink>
-              ))}
-            </nav>
-          </>
-        )}
-        <div className="mt-auto space-y-1">
-          {user.isAdmin && (
-            <NavLink to="/settings" className={sideLink}>
-              <Settings className="size-5" /> Settings
+          {/* Desktop: everything in one bar, libraries as pills */}
+          <nav className="scrollbar-none hidden min-w-0 flex-1 items-center gap-1 overflow-x-auto md:flex">
+            <NavLink to="/" end className={topLink}>
+              Home
             </NavLink>
-          )}
-          <button onClick={logout} className={sideLink({ isActive: false }) + ' w-full'}>
-            <LogOut className="size-5" /> Sign out <span className="ml-auto truncate text-xs text-faint">{user.username}</span>
-          </button>
+            {libraries.map((l) => (
+              <NavLink key={l.id} to={`/library/${l.id}`} className={topLink}>
+                <span className="truncate">{l.name}</span>
+                {l.scanning && <span className="size-1.5 animate-pulse rounded-full bg-accent" title="Scanning" />}
+              </NavLink>
+            ))}
+          </nav>
+          <div className="ml-auto flex items-center gap-1">
+            <NavLink to="/search" className="hidden rounded-full p-2 text-muted hover:bg-white/5 hover:text-text md:block" aria-label="Search">
+              <Search className="size-5" />
+            </NavLink>
+            {user.isAdmin && (
+              <NavLink to="/settings" className="rounded-full p-2 text-muted hover:bg-white/5 hover:text-text" aria-label="Settings">
+                <Settings className="size-5" />
+              </NavLink>
+            )}
+            <button
+              onClick={logout}
+              className="hidden items-center gap-2 rounded-full py-1 pr-3 pl-1 text-sm text-muted hover:bg-white/5 hover:text-text md:flex"
+              title="Sign out"
+            >
+              <span className="grid size-7 place-items-center rounded-full bg-raised text-xs font-semibold text-text uppercase">{user.username[0]}</span>
+              <LogOut className="size-4" />
+            </button>
+          </div>
         </div>
-      </aside>
-
-      {/* Mobile top bar */}
-      <header className="sticky top-0 z-20 flex h-14 items-center justify-between border-b border-line/60 bg-ink/80 px-4 backdrop-blur md:hidden">
-        <NavLink to="/">
-          <Logo />
-        </NavLink>
-        {user.isAdmin && (
-          <NavLink to="/settings" className="rounded-lg p-2 text-muted" aria-label="Settings">
-            <Settings className="size-5" />
-          </NavLink>
-        )}
       </header>
 
       <main className={`px-4 pt-4 md:px-8 md:pt-8 ${audio.current ? 'pb-44 md:pb-28' : 'pb-24 md:pb-12'}`}>

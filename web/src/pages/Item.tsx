@@ -91,7 +91,7 @@ function Header({ item, kids }: { item: ItemDetail; kids?: Item[] }) {
         />
         <div className="min-w-0 flex-1 space-y-4 pb-1">
           <Breadcrumbs parents={item.parents} />
-          <h1 className="text-3xl font-bold tracking-tight md:text-5xl">{item.title}</h1>
+          <h1 className="text-3xl font-semibold md:text-5xl">{item.title}</h1>
           {facts.length > 0 && (
             <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-muted">
               {facts.map((f, i) => (
