@@ -1,0 +1,38 @@
+name: Feature request
+description: Suggest something Matinee should do.
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Matinee aims for the core things a media server needs, done well. Ads, rentals, a discover feed and other streaming-service extras are out of scope.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to do?
+      description: The problem or the situation, not the solution yet.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What should Matinee do?
+    validations:
+      required: true
+  - type: textarea
+    id: prior-art
+    attributes:
+      label: How do other servers handle it?
+      description: Plex, Jellyfin, Emby, Navidrome... Links or screenshots help.
+    validations:
+      required: false
+  - type: dropdown
+    id: help
+    attributes:
+      label: Would you like to work on it?
+      options:
+        - Yes, I'd like to build it
+        - Maybe, with some guidance
+        - No
+    validations:
+      required: true

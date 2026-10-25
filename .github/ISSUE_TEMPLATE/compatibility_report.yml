@@ -1,0 +1,57 @@
+name: Compatibility report
+description: Tell us how Matinee runs on your hardware, NAS, browser or TV.
+labels: ["hardware"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Reports like this are real contributions. CI can't test on your GPU, your NAS or your TV, so every report widens what we know works.
+  - type: dropdown
+    id: result
+    attributes:
+      label: Result
+      options:
+        - Works
+        - Works with problems
+        - Doesn't work
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What are you reporting on?
+      options:
+        - Server hardware or NAS
+        - GPU / hardware transcoding
+        - Browser or TV / streaming device playback
+        - Kubernetes or another platform
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Device and OS
+      placeholder: Synology DS923+ DSM 7.2, Raspberry Pi 5, LG C3 webOS 23, Chrome on Pixel 9
+    validations:
+      required: true
+  - type: input
+    id: cpu-gpu
+    attributes:
+      label: CPU and GPU
+      placeholder: Ryzen 7 5700U / Radeon iGPU, Intel N100, Apple M2
+    validations:
+      required: false
+  - type: input
+    id: version
+    attributes:
+      label: Matinee version
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: What worked, and what didn't?
+      description: For playback, include the file's codecs (`ffprobe -hide_banner "<file>"`) and whether it direct played or transcoded.
+    validations:
+      required: true

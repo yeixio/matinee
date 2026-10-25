@@ -1,0 +1,112 @@
+# Canonical GitHub label definitions for Matinee.
+# Colors are six-digit hex values without '#'.
+# Sync with scripts/sync-github-labels.sh.
+
+# Kind
+- name: bug
+  color: d73a4a
+  description: Something isn't working
+
+- name: enhancement
+  color: a2eeef
+  description: New feature or improvement
+
+- name: documentation
+  color: 0075ca
+  description: Docs, guides and examples
+
+- name: performance
+  color: fbca04
+  description: Speed, memory or CPU use
+
+- name: security
+  color: b60205
+  description: Security-related work
+
+- name: question
+  color: d876e3
+  description: Further information is requested
+
+# Contributor entry points
+- name: good first issue
+  color: 7057ff
+  description: Small, well-scoped, a good way to start
+
+- name: help wanted
+  color: 008672
+  description: Open for anyone to pick up
+
+- name: needs design
+  color: f9d0c4
+  description: Needs a short design discussion before code
+
+- name: hardware
+  color: 5319e7
+  description: Needs someone with specific hardware to build or test
+
+# Difficulty
+- name: difficulty/easy
+  color: c2e0c6
+  description: An evening or two; little context needed
+
+- name: difficulty/medium
+  color: fef2c0
+  description: Touches a few packages; a week or so of evenings
+
+- name: difficulty/hard
+  color: f4c7b8
+  description: Large or cross-cutting; talk to a maintainer first
+
+# Area
+- name: area/scanning
+  color: c5def5
+  description: Library scanning and file name parsing
+
+- name: area/metadata
+  color: c5def5
+  description: TMDB, MusicBrainz and artwork
+
+- name: area/streaming
+  color: c5def5
+  description: Direct play, FFmpeg, HLS, transcoding and subtitles
+
+- name: area/server
+  color: c5def5
+  description: HTTP API, auth, users and storage
+
+- name: area/web
+  color: c5def5
+  description: The React web player
+
+- name: area/music
+  color: c5def5
+  description: Music libraries and playback
+
+- name: area/plugins
+  color: c5def5
+  description: Plugin framework and plugins
+
+- name: area/deploy
+  color: c5def5
+  description: Docker, Helm and Kubernetes
+
+- name: area/ci
+  color: c5def5
+  description: Build, CI and releases
+
+- name: area/apps
+  color: c5def5
+  description: Server work the phone and TV apps need
+
+# Triage
+- name: duplicate
+  color: cfd3d7
+  description: This issue or pull request already exists
+
+- name: invalid
+  color: e4e669
+  description: This doesn't seem right
+
+- name: wontfix
+  color: ffffff
+  description: This will not be worked on
