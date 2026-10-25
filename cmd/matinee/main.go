@@ -66,12 +66,17 @@ func run() error {
 	defer stop()
 
 	scanner := &scan.Scanner{Store: db, Prober: probe.Prober{Path: cfg.FFprobePath}, Log: log}
+	fetcher := &metadata.Fetcher{Store: db, Log: log}
 	if cfg.TMDBKey != "" {
-		fetcher := &metadata.Fetcher{Store: db, Provider: metadata.NewTMDB(cfg.TMDBKey), Log: log}
-		scanner.AfterScan = fetcher.FetchLibrary
+		fetcher.Providers = append(fetcher.Providers, metadata.NewTMDB(cfg.TMDBKey))
 	} else {
-		log.Info("no TMDB key set; using local artwork only (set MATINEE_TMDB_KEY for posters and descriptions)")
+		log.Info("no TMDB key set; movies and TV use local artwork only (set MATINEE_TMDB_KEY for posters and descriptions)")
 	}
+	if cfg.MusicBrainz {
+		fetcher.Providers = append(fetcher.Providers, metadata.NewMusicBrainz(version.Version))
+	}
+	db.SetMetadataKinds(fetcher.Kinds()...)
+	scanner.AfterScan = fetcher.FetchLibrary
 	transcoder := stream.NewTranscoder(cfg.FFmpegPath, cfg.TranscodeDir(), log)
 	defer transcoder.Close()
 

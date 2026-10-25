@@ -48,6 +48,9 @@ export function useLibraries() {
 export default function Shell({ user }: { user: User }) {
   const { data: libraries = [] } = useLibraries()
   const qc = useQueryClient()
+  // Start loading a library on hover so the switch feels instant.
+  const prefetchLibrary = (id: number) =>
+    qc.prefetchQuery({ queryKey: ['library', id], queryFn: () => api.libraryItems(id), staleTime: 30_000 })
   const audio = useAudio()
   const logout = async () => {
     await api.logout()
@@ -68,7 +71,7 @@ export default function Shell({ user }: { user: User }) {
               Home
             </NavLink>
             {libraries.map((l) => (
-              <NavLink key={l.id} to={`/library/${l.id}`} className={topLink}>
+              <NavLink key={l.id} to={`/library/${l.id}`} className={topLink} onMouseEnter={() => prefetchLibrary(l.id)} onFocus={() => prefetchLibrary(l.id)}>
                 <span className="truncate">{l.name}</span>
                 {l.scanning && <span className="size-1.5 animate-pulse rounded-full bg-accent" title="Scanning" />}
               </NavLink>
@@ -106,7 +109,7 @@ export default function Shell({ user }: { user: User }) {
           <Home className="size-5" /> Home
         </NavLink>
         {libraries.slice(0, 3).map((l) => (
-          <NavLink key={l.id} to={`/library/${l.id}`} className={tabLink}>
+          <NavLink key={l.id} to={`/library/${l.id}`} className={tabLink} onTouchStart={() => prefetchLibrary(l.id)}>
             <LibraryIcon kind={l.kind} /> <span className="max-w-16 truncate">{l.name}</span>
           </NavLink>
         ))}

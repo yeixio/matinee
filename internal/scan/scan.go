@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"io/fs"
 	"log/slog"
+	"os"
 	"path/filepath"
 	"strings"
 	"sync"
@@ -30,10 +31,16 @@ type Scanner struct {
 
 type Stats struct {
 	Added, Updated, Unchanged, Removed, Failed int
+	Unplayable                                 int // files with no playable stream, left out
 	Took                                       time.Duration
 }
 
 var ErrAlreadyRunning = errors.New("scan already running")
+
+var (
+	errUnplayable   = errors.New("not playable")
+	errProbeTimeout = errors.New("probe timed out")
+)
 
 // Running reports whether a library is being scanned right now.
 func (s *Scanner) Running(libraryID int64) bool {
@@ -82,10 +89,20 @@ func (s *Scanner) Scan(ctx context.Context, lib store.Library) (Stats, error) {
 	start := time.Now()
 	var st Stats
 	seen := map[string]bool{}
+	// A folder that can't be read, such as an unmounted network share, must
+	// not look like every file in it was deleted, so its items are kept.
+	var unreadable []string
 	for _, root := range lib.Paths {
+		// An empty folder is usually a share that isn't mounted yet, too.
+		if entries, err := os.ReadDir(root); err != nil || len(entries) == 0 {
+			s.Log.Warn("library folder missing or empty; keeping its items", "library", lib.Name, "path", root, "err", err)
+			unreadable = append(unreadable, root)
+			continue
+		}
 		err := filepath.WalkDir(root, func(path string, d fs.DirEntry, err error) error {
 			if err != nil {
 				s.Log.Warn("walk", "path", path, "err", err)
+				unreadable = append(unreadable, path)
 				return nil
 			}
 			if ctx.Err() != nil {
@@ -114,8 +131,23 @@ func (s *Scanner) Scan(ctx context.Context, lib store.Library) (Stats, error) {
 				return err
 			}
 			if err := s.indexFile(ctx, kind, lib, root, path, info); err != nil {
-				s.Log.Warn("index file", "path", path, "err", err)
-				st.Failed++
+				switch {
+				case errors.Is(err, errUnplayable):
+					// Leave it out; if it was listed before, the cleanup below removes it.
+					s.Log.Debug("not playable", "path", path, "err", err)
+					delete(seen, path)
+					st.Unplayable++
+				case errors.Is(err, errProbeTimeout):
+					// A slow share isn't a broken file: keep what's listed and retry next scan.
+					s.Log.Warn("index file", "path", path, "err", err)
+					if id == 0 {
+						delete(seen, path)
+					}
+					st.Failed++
+				default:
+					s.Log.Warn("index file", "path", path, "err", err)
+					st.Failed++
+				}
 				return nil
 			}
 			if id == 0 {
@@ -129,7 +161,17 @@ func (s *Scanner) Scan(ctx context.Context, lib store.Library) (Stats, error) {
 			return st, err
 		}
 	}
-	removed, err := s.Store.RemoveMissing(ctx, lib.ID, seen)
+	removed, err := s.Store.RemoveMissing(ctx, lib.ID, func(p string) bool {
+		if seen[p] {
+			return true
+		}
+		for _, u := range unreadable {
+			if p == u || strings.HasPrefix(p, u+string(filepath.Separator)) {
+				return true
+			}
+		}
+		return false
+	})
 	if err != nil {
 		return st, err
 	}
@@ -139,16 +181,24 @@ func (s *Scanner) Scan(ctx context.Context, lib store.Library) (Stats, error) {
 		s.AfterScan(ctx, lib)
 	}
 	s.Log.Info("scan done", "library", lib.Name, "added", st.Added, "updated", st.Updated,
-		"unchanged", st.Unchanged, "removed", st.Removed, "failed", st.Failed, "took", st.Took.Round(time.Millisecond))
+		"unchanged", st.Unchanged, "removed", st.Removed, "unplayable", st.Unplayable, "failed", st.Failed, "took", st.Took.Round(time.Millisecond))
 	return st, nil
 }
 
 func (s *Scanner) indexFile(ctx context.Context, kind Kind, lib store.Library, root, path string, info fs.FileInfo) error {
-	// A file ffprobe can't read is still listed; playback will tell the user.
+	if info.Size() == 0 {
+		return fmt.Errorf("%w: empty file", errUnplayable)
+	}
 	pr, err := s.Prober.Probe(ctx, path)
-	if err != nil {
-		s.Log.Debug("probe failed", "path", path, "err", err)
-		pr = probe.Result{Tags: map[string]string{}}
+	switch {
+	case errors.Is(err, context.DeadlineExceeded):
+		return fmt.Errorf("%w: %v", errProbeTimeout, err)
+	case errors.Is(err, context.Canceled):
+		return err
+	case err != nil:
+		return fmt.Errorf("%w: %v", errUnplayable, err)
+	case !kind.Playable(pr):
+		return fmt.Errorf("%w: no playable stream", errUnplayable)
 	}
 	it, err := kind.Index(ctx, s.Store, File{Library: lib, Root: root, Path: path, Info: info, Probe: pr})
 	if err != nil {

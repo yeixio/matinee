@@ -16,6 +16,7 @@ func TestMigrateFromVersion1(t *testing.T) {
 	ctx := context.Background()
 	for _, q := range []string{
 		"ALTER TABLE items DROP COLUMN subtitle_streams",
+		"ALTER TABLE items DROP COLUMN mbid",
 		"ALTER TABLE sessions DROP COLUMN device_name",
 		"ALTER TABLE sessions DROP COLUMN platform",
 		"ALTER TABLE sessions DROP COLUMN created_at",

@@ -1,5 +1,7 @@
 import { Check, Play } from 'lucide-react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useWindowVirtualizer } from '@tanstack/react-virtual'
 import { useQueryClient } from '@tanstack/react-query'
 import { api, type Item } from '../api'
 import { episodeCode, progressFraction } from '../format'
@@ -65,7 +67,10 @@ export function PosterCard({ item, wide = false }: { item: Item; wide?: boolean 
   )
 }
 
+// Big libraries only draw the rows near the screen; a few thousand cards at
+// once make switching libraries slow.
 export function PosterGrid({ items, wide = false }: { items: Item[]; wide?: boolean }) {
+  if (items.length > 120) return <VirtualPosterGrid items={items} wide={wide} />
   return (
     <div
       className="grid gap-x-4 gap-y-6"
@@ -74,6 +79,64 @@ export function PosterGrid({ items, wide = false }: { items: Item[]; wide?: bool
       {items.map((it) => (
         <PosterCard key={it.id} item={it} wide={wide} />
       ))}
+    </div>
+  )
+}
+
+const gapX = 16 // gap-x-4
+const gapY = 24 // gap-y-6
+const captionHeight = 44 // mt-2 plus the title and subtitle lines
+
+function VirtualPosterGrid({ items, wide }: { items: Item[]; wide: boolean }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const [width, setWidth] = useState(0)
+  const [top, setTop] = useState(0)
+  useLayoutEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const update = () => {
+      setWidth(el.clientWidth)
+      setTop(el.getBoundingClientRect().top + window.scrollY)
+    }
+    update()
+    const ro = new ResizeObserver(update)
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [])
+
+  // The same columns the CSS grid above would make.
+  const min = wide ? 240 : 140
+  const cols = Math.max(1, Math.floor((width + gapX) / (min + gapX)))
+  const colWidth = width ? (width - gapX * (cols - 1)) / cols : min
+  const square = items[0]?.kind === 'album' || items[0]?.kind === 'artist'
+  const ratio = wide ? 9 / 16 : square ? 1 : 3 / 2
+  const rowHeight = Math.round(colWidth * ratio + captionHeight + gapY)
+
+  const rows = useWindowVirtualizer({
+    count: Math.ceil(items.length / cols),
+    estimateSize: () => rowHeight,
+    overscan: 4,
+    scrollMargin: top,
+  })
+  useEffect(() => rows.measure(), [rows, rowHeight])
+
+  return (
+    <div ref={ref} className="relative" style={{ height: rows.getTotalSize() }}>
+      {width > 0 &&
+        rows.getVirtualItems().map((row) => (
+          <div
+            key={row.key}
+            className="absolute inset-x-0 top-0 grid gap-x-4"
+            style={{
+              gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
+              transform: `translateY(${row.start - top}px)`,
+            }}
+          >
+            {items.slice(row.index * cols, (row.index + 1) * cols).map((it) => (
+              <PosterCard key={it.id} item={it} wide={wide} />
+            ))}
+          </div>
+        ))}
     </div>
   )
 }

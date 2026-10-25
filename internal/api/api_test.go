@@ -272,12 +272,23 @@ func TestEndToEnd(t *testing.T) {
 		t.Fatalf("kid delete library: %d", code)
 	}
 
-	// Deleting a file removes it on the next scan, along with its empty show.
+	// A library folder that turns up empty looks like an unmounted share, so
+	// its items are kept.
+	rescanTV := func() {
+		c.do("POST", "/api/libraries/"+itoa(byKind["tv"])+"/scan", nil, nil)
+		time.Sleep(50 * time.Millisecond)
+		waitForScan(t, c)
+		c.do("GET", "/api/libraries/"+itoa(byKind["tv"])+"/items", nil, &shows)
+	}
 	os.RemoveAll(filepath.Join(tmp, "tv", "Test Show"))
-	c.do("POST", "/api/libraries/"+itoa(byKind["tv"])+"/scan", nil, nil)
-	time.Sleep(50 * time.Millisecond)
-	waitForScan(t, c)
-	c.do("GET", "/api/libraries/"+itoa(byKind["tv"])+"/items", nil, &shows)
+	rescanTV()
+	if len(shows) != 1 {
+		t.Fatalf("an empty library folder should keep its items: %+v", shows)
+	}
+	// Once the folder holds anything, a deleted file goes on the next scan,
+	// along with its empty show.
+	os.WriteFile(filepath.Join(tmp, "tv", "notes.txt"), []byte("x"), 0o644)
+	rescanTV()
 	if len(shows) != 0 {
 		t.Fatalf("show should be gone: %+v", shows)
 	}

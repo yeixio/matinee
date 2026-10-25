@@ -31,6 +31,9 @@ func fakeTMDB(t *testing.T) *TMDB {
 		json.NewEncoder(w).Encode(map[string]any{"results": []map[string]any{
 			{"id": 1396, "overview": "A teacher.", "first_air_date": "2008-01-20", "poster_path": "/bb.jpg"}}})
 	})
+	mux.HandleFunc("GET /tv/1396/season/1", func(w http.ResponseWriter, r *http.Request) {
+		json.NewEncoder(w).Encode(map[string]any{"id": 3572, "overview": "Walt starts.", "air_date": "2008-01-20", "poster_path": "/s1.jpg"})
+	})
 	mux.HandleFunc("GET /tv/1396/season/1/episode/1", func(w http.ResponseWriter, r *http.Request) {
 		json.NewEncoder(w).Encode(map[string]any{"id": 62085, "name": "Pilot", "overview": "It begins.", "still_path": "/s.jpg"})
 	})
@@ -66,7 +69,7 @@ func TestTMDBLookup(t *testing.T) {
 	}
 }
 
-func TestFetcherFillsShowsThenEpisodes(t *testing.T) {
+func TestFetcherFillsShowsSeasonsThenEpisodes(t *testing.T) {
 	st := storetest.Open(t)
 	ctx := context.Background()
 	lib, _ := st.CreateLibrary(ctx, "TV", "tv", []string{"/tv"})
@@ -78,18 +81,29 @@ func TestFetcherFillsShowsThenEpisodes(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	f := &Fetcher{Store: st, Provider: fakeTMDB(t), Log: slog.New(slog.NewTextHandler(io.Discard, nil))}
+	f := &Fetcher{Store: st, Providers: []Provider{fakeTMDB(t)}, Log: slog.New(slog.NewTextHandler(io.Discard, nil))}
+	st.SetMetadataKinds(f.Kinds()...)
+	if got, _ := st.Item(ctx, 0, show); !got.Pending {
+		t.Fatalf("show should be pending before its lookup: %+v", got)
+	}
 	f.FetchLibrary(ctx, lib)
 
 	got, _ := st.Item(ctx, 0, show)
 	if got.TMDBID == nil || *got.TMDBID != 1396 || !got.HasPoster || got.Overview != "A teacher." {
 		t.Fatalf("show: %+v", got)
 	}
+	if got.Pending {
+		t.Fatal("show still pending after its lookup")
+	}
+	se, _ := st.Item(ctx, 0, season)
+	if se.Overview != "Walt starts." || !se.HasPoster || se.Year == nil || *se.Year != 2008 {
+		t.Fatalf("season: %+v", se)
+	}
 	ep, _ := st.Item(ctx, 0, epID)
 	if ep.Title != "Pilot" || ep.Overview != "It begins." || !ep.HasPoster {
 		t.Fatalf("episode: %+v", ep)
 	}
-	if left, _ := st.NeedsMetadata(ctx, lib.ID); len(left) != 0 {
+	if left, _ := st.NeedsMetadata(ctx, lib.ID, f.Kinds()); len(left) != 0 {
 		t.Fatalf("everything should be looked up: %+v", left)
 	}
 }

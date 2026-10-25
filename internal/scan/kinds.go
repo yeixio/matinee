@@ -18,6 +18,9 @@ import (
 type Kind interface {
 	Name() string
 	Wants(path string) bool
+	// Playable reports whether a probed file has what this library plays.
+	// Files that don't are left out, along with folders holding nothing else.
+	Playable(pr probe.Result) bool
 	// Index files one file, creating any containers it lives in, and returns
 	// the playable item. The scanner fills in the file and probe fields.
 	Index(ctx context.Context, st *store.Store, f File) (store.Item, error)
@@ -80,6 +83,8 @@ func (movies) Wants(path string) bool {
 	return isVideo(path) && !strings.Contains(strings.ToLower(filepath.Base(path)), "sample")
 }
 
+func (movies) Playable(pr probe.Result) bool { return pr.VideoCodec != "" }
+
 func (movies) Index(ctx context.Context, st *store.Store, f File) (store.Item, error) {
 	mi := ParseMovie(f.Path)
 	it := store.Item{Kind: "movie", Title: mi.Title, Year: nonZero(mi.Year)}
@@ -99,8 +104,9 @@ func (movies) Index(ctx context.Context, st *store.Store, f File) (store.Item, e
 
 type tv struct{}
 
-func (tv) Name() string           { return "tv" }
-func (tv) Wants(path string) bool { return movies{}.Wants(path) }
+func (tv) Name() string                  { return "tv" }
+func (tv) Wants(path string) bool        { return movies{}.Wants(path) }
+func (tv) Playable(pr probe.Result) bool { return pr.VideoCodec != "" }
 
 func (tv) Index(ctx context.Context, st *store.Store, f File) (store.Item, error) {
 	ep := ParseEpisode(f.Root, f.Path)
@@ -140,8 +146,9 @@ func (tv) Index(ctx context.Context, st *store.Store, f File) (store.Item, error
 
 type music struct{}
 
-func (music) Name() string           { return "music" }
-func (music) Wants(path string) bool { return isAudio(path) }
+func (music) Name() string                  { return "music" }
+func (music) Wants(path string) bool        { return isAudio(path) }
+func (music) Playable(pr probe.Result) bool { return pr.AudioCodec != "" }
 
 func (music) Index(ctx context.Context, st *store.Store, f File) (store.Item, error) {
 	tr := trackFromTags(f.Probe.Tags, ParseTrackPath(f.Root, f.Path))
@@ -152,6 +159,14 @@ func (music) Index(ctx context.Context, st *store.Store, f File) (store.Item, er
 	albumID, err := st.EnsureContainer(ctx, f.Library.ID, &artistID, "album", tr.Album, nil, nonZero(tr.Year))
 	if err != nil {
 		return store.Item{}, err
+	}
+	// An artist photo sits in the artist's folder, one up from the album.
+	if artistDir := filepath.Dir(filepath.Dir(f.Path)); artistDir != f.Root && strings.HasPrefix(artistDir, f.Root) {
+		if photo := findArt(artistDir, "artist.jpg", "artist.png"); photo != "" {
+			if err := st.SetArt(ctx, artistID, photo, ""); err != nil {
+				return store.Item{}, err
+			}
+		}
 	}
 	cover := findArt(filepath.Dir(f.Path), "cover.jpg", "folder.jpg", "front.jpg", "cover.png", "folder.png")
 	if cover == "" && f.Probe.HasCover {

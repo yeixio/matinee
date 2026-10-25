@@ -10,6 +10,7 @@ import (
 	"errors"
 	"fmt"
 	"strings"
+	"sync/atomic"
 	"time"
 
 	_ "github.com/jackc/pgx/v5/stdlib"
@@ -25,7 +26,8 @@ var schemaPostgres string
 var ErrNotFound = errors.New("not found")
 
 type Store struct {
-	db *db
+	db        *db
+	metaKinds atomic.Pointer[map[string]bool]
 }
 
 // Open connects to the database. A postgres:// URL uses PostgreSQL, which
@@ -116,12 +118,19 @@ func (s *Store) migrate() error {
 var migrations = []string{
 	// 2: embedded subtitle streams as JSON; NULL until the file is probed for them.
 	"ALTER TABLE items ADD COLUMN subtitle_streams TEXT",
-	// 3–6: sessions say which device they belong to, so people can see and sign out their devices.
+	// 3: scans now leave out files with nothing to play. Files listed before
+	// that ffprobe couldn't read get probed again on the next scan.
+	`UPDATE items SET mtime = 0 WHERE path IS NOT NULL AND (
+		(kind = 'track' AND COALESCE(audio_codec, '') = '') OR
+		(kind IN ('movie', 'episode') AND COALESCE(video_codec, '') = ''))`,
+	// 4: MusicBrainz ids for artists and albums.
+	"ALTER TABLE items ADD COLUMN mbid TEXT",
+	// 5–8: sessions say which device they belong to, so people can see and sign out their devices.
 	"ALTER TABLE sessions ADD COLUMN device_name TEXT NOT NULL DEFAULT ''",
 	"ALTER TABLE sessions ADD COLUMN platform TEXT NOT NULL DEFAULT ''",
 	"ALTER TABLE sessions ADD COLUMN created_at BIGINT NOT NULL DEFAULT 0",
 	"ALTER TABLE sessions ADD COLUMN last_seen_at BIGINT NOT NULL DEFAULT 0",
-	// 7: pending sign-ins from devices that show a code (see devices.go).
+	// 9: pending sign-ins from devices that show a code (see devices.go).
 	`CREATE TABLE device_codes (
 		device_code TEXT PRIMARY KEY,
 		user_code   TEXT NOT NULL UNIQUE,
