@@ -21,7 +21,7 @@ dev: ## Run the web player with hot reload (start the server with `make run` fir
 
 test: ## Go and web tests
 	go test ./...
-	cd web && pnpm typecheck
+	cd web && pnpm typecheck && pnpm test
 
 test-postgres: ## Go tests against PostgreSQL (set MATINEE_TEST_DATABASE_URL)
 	go test -count=1 ./...

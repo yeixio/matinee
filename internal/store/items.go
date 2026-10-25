@@ -44,6 +44,9 @@ type Item struct {
 	Path     string `json:"-"`
 	Size     int64  `json:"-"`
 	Mtime    int64  `json:"-"`
+	// SubtitleStreams is the probed embedded subtitle streams as JSON, only
+	// set when upserting a file. See Store.SubtitleStreams.
+	SubtitleStreams string `json:"-"`
 }
 
 // itemCols selects an item plus the given user's progress. The user id is the first bind argument.
@@ -225,21 +228,38 @@ func (s *Store) UpsertFile(ctx context.Context, it Item) (int64, error) {
 	var id int64
 	err := s.db.QueryRowContext(ctx, `
 		INSERT INTO items (library_id, parent_id, kind, title, sort_title, year, index_number, disc_number,
-			path, size, mtime, duration_ms, container, video_codec, audio_codec, width, height, poster, backdrop, added_at)
-		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			path, size, mtime, duration_ms, container, video_codec, audio_codec, width, height, poster, backdrop, subtitle_streams, added_at)
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 		ON CONFLICT (path) DO UPDATE SET
 			library_id = excluded.library_id, parent_id = excluded.parent_id, kind = excluded.kind,
 			title = excluded.title, sort_title = excluded.sort_title, year = excluded.year,
 			index_number = excluded.index_number, disc_number = excluded.disc_number,
 			size = excluded.size, mtime = excluded.mtime, duration_ms = excluded.duration_ms,
 			container = excluded.container, video_codec = excluded.video_codec, audio_codec = excluded.audio_codec,
-			width = excluded.width, height = excluded.height,
+			width = excluded.width, height = excluded.height, subtitle_streams = excluded.subtitle_streams,
 			poster = COALESCE(excluded.poster, items.poster), backdrop = COALESCE(excluded.backdrop, items.backdrop)
 		RETURNING id`,
 		it.LibraryID, it.ParentID, it.Kind, it.Title, SortTitle(it.Title), it.Year, it.IndexNumber, it.DiscNumber,
 		it.Path, it.Size, it.Mtime, it.DurationMs, nullStr(it.Container), nullStr(it.VideoCodec), nullStr(it.AudioCodec),
-		it.Width, it.Height, nullStr(it.Poster), nullStr(it.Backdrop), now()).Scan(&id)
+		it.Width, it.Height, nullStr(it.Poster), nullStr(it.Backdrop), nullStr(it.SubtitleStreams), now()).Scan(&id)
 	return id, err
+}
+
+// SubtitleStreams returns a file's embedded subtitle streams as stored by the
+// scanner, as JSON. ok is false for files scanned before Matinee looked for them.
+func (s *Store) SubtitleStreams(ctx context.Context, id int64) (streams string, ok bool, err error) {
+	var v sql.NullString
+	err = s.db.QueryRowContext(ctx, "SELECT subtitle_streams FROM items WHERE id = ?", id).Scan(&v)
+	if errors.Is(err, sql.ErrNoRows) {
+		err = ErrNotFound
+	}
+	return v.String, v.Valid, err
+}
+
+// SetSubtitleStreams records a file's embedded subtitle streams as JSON.
+func (s *Store) SetSubtitleStreams(ctx context.Context, id int64, streams string) error {
+	_, err := s.db.ExecContext(ctx, "UPDATE items SET subtitle_streams = ? WHERE id = ?", streams, id)
+	return err
 }
 
 // SetArt records artwork found on disk. Local art wins over anything fetched

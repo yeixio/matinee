@@ -21,6 +21,7 @@ import (
 	"github.com/yeixio/matinee/internal/scan"
 	"github.com/yeixio/matinee/internal/store"
 	"github.com/yeixio/matinee/internal/stream"
+	"github.com/yeixio/matinee/internal/subtitle"
 	"github.com/yeixio/matinee/internal/version"
 	"github.com/yeixio/matinee/web"
 )
@@ -72,8 +73,9 @@ func run() error {
 		Addr: cfg.Addr,
 		Handler: (&api.Server{
 			Store: db, Scanner: scanner, Transcoder: transcoder,
-			Art: artwork.NewCache(cfg.ImageDir(), cfg.FFmpegPath),
-			Web: web.FS(), Log: log, BackgroundCtx: ctx,
+			Art:       artwork.NewCache(cfg.ImageDir(), cfg.FFmpegPath),
+			Subtitles: subtitle.NewConverter(cfg.FFmpegPath, cfg.SubtitleDir()),
+			Web:       web.FS(), Log: log, BackgroundCtx: ctx,
 		}).Handler(),
 		ReadHeaderTimeout: 10 * time.Second,
 	}

@@ -3,9 +3,11 @@ import type Hls from 'hls.js'
 import { ArrowLeft, Maximize, Minimize, Pause, Play, RotateCcw, RotateCw, Volume2, VolumeX } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { api, fileUrl, type ItemDetail } from '../api'
+import { api, fileUrl, type ItemDetail, type SubtitleTrack } from '../api'
 import { Spinner } from '../components/ui'
 import { clock } from '../format'
+import { defaultTrack, savePreference, SubtitleMenu, SubtitleOverlay } from '../player/Subtitles'
+import { parseVTT, type Cue } from '../player/vtt'
 
 const videoCodecs: Record<string, string> = {
   h264: 'avc1.640028',
@@ -56,19 +58,26 @@ export default function Watch() {
   const [chrome, setChrome] = useState(true)
   const [error, setError] = useState('')
   const hideTimer = useRef<number>(undefined)
+  const [sub, setSub] = useState<SubtitleTrack>()
+  const [cues, setCues] = useState<Cue[]>([])
+  // The picture subtitle track drawn into the current transcode, if any.
+  const burned = useRef<string>(undefined)
+  const lastSub = useRef<SubtitleTrack>(undefined)
+  const menuOpen = useRef(false)
 
   const duration = item?.durationMs ? item.durationMs / 1000 : 0
-  const position = () => offset.current + (video.current?.currentTime ?? 0)
+  const position = useCallback(() => offset.current + (video.current?.currentTime ?? 0), [])
 
   const startHls = useCallback(
-    async (at: number) => {
+    async (at: number, burn = burned.current) => {
       const el = video.current
       if (!el || !item) return
       setWaiting(true)
       hls.current?.destroy()
       hls.current = null
+      burned.current = burn
       try {
-        const { url } = await api.startHls(item.id, Math.floor(at))
+        const { url } = await api.startHls(item.id, Math.floor(at), burn)
         offset.current = Math.floor(at)
         // hls.js is only downloaded when a file needs converting.
         const { default: Hls } = await import('hls.js')
@@ -90,21 +99,61 @@ export default function Watch() {
     [item],
   )
 
+  const playDirect = useCallback(
+    (at: number) => {
+      const el = video.current
+      if (!el || !item) return
+      hls.current?.destroy()
+      hls.current = null
+      burned.current = undefined
+      setMode('direct')
+      offset.current = 0
+      el.src = fileUrl(item.id)
+      el.currentTime = at
+      el.play().catch(() => setPaused(true))
+    },
+    [item],
+  )
+
   // Pick direct play or a transcode, and resume where the viewer left off.
   useEffect(() => {
     const el = video.current
     if (!item || !el || mode) return
     const resume = !item.played && item.positionMs ? item.positionMs / 1000 : 0
-    if (canDirectPlay(item, el)) {
-      setMode('direct')
-      offset.current = 0
-      el.src = fileUrl(item.id)
-      el.currentTime = resume
-      el.play().catch(() => setPaused(true))
-    } else {
-      startHls(resume)
+    const pick = defaultTrack(item.subtitles ?? [])
+    setSub(pick)
+    if (pick?.burnIn) startHls(resume, pick.id)
+    else if (canDirectPlay(item, el)) playDirect(resume)
+    else startHls(resume)
+  }, [item, mode, startHls, playDirect])
+
+  // Text subtitles are drawn by the player; fetch the cues when the choice changes.
+  useEffect(() => {
+    setCues([])
+    if (!item || !sub || sub.burnIn) return
+    let current = true
+    api
+      .subtitles(item.id, sub.id)
+      .then((text) => current && setCues(parseVTT(text)))
+      .catch(() => {})
+    return () => {
+      current = false
     }
-  }, [item, mode, startHls])
+  }, [item, sub])
+
+  // Picture subtitles are part of the video, so switching to or from one
+  // restarts playback at the same spot.
+  const selectSub = (t: SubtitleTrack | undefined) => {
+    const el = video.current
+    if (!item || !el) return
+    savePreference(t)
+    setSub(t)
+    if (t) lastSub.current = t
+    const burn = t?.burnIn ? t.id : undefined
+    if (burn === burned.current) return
+    if (!burn && canDirectPlay(item, el)) playDirect(position())
+    else startHls(position(), burn)
+  }
 
   useEffect(() => () => hls.current?.destroy(), [])
 
@@ -157,7 +206,7 @@ export default function Watch() {
   const poke = useCallback(() => {
     setChrome(true)
     window.clearTimeout(hideTimer.current)
-    hideTimer.current = window.setTimeout(() => !video.current?.paused && setChrome(false), 2500)
+    hideTimer.current = window.setTimeout(() => !video.current?.paused && !menuOpen.current && setChrome(false), 2500)
   }, [])
 
   useEffect(() => {
@@ -181,6 +230,9 @@ export default function Watch() {
           break
         case 'm':
           if (video.current) video.current.muted = !video.current.muted
+          break
+        case 'c':
+          if (item?.subtitles?.length) selectSub(sub ? undefined : (lastSub.current ?? item.subtitles.find((t) => !t.burnIn) ?? item.subtitles[0]))
           break
         case 'Escape':
           if (!document.fullscreenElement) navigate(-1)
@@ -227,6 +279,8 @@ export default function Watch() {
         onEnded={() => item && api.setProgress(item.id, 0, true).then(() => navigate(-1))}
         onError={() => mode === 'direct' && startHls(position())}
       />
+
+      {sub && !sub.burnIn && !error && <SubtitleOverlay cues={cues} position={position} lifted={chrome} />}
 
       {(waiting || !item) && !error && (
         <div className="pointer-events-none absolute inset-0 grid place-items-center">
@@ -293,6 +347,17 @@ export default function Watch() {
             </div>
             <div className="ml-auto flex items-center gap-2">
               {mode === 'hls' && <span className="hidden rounded bg-white/10 px-2 py-0.5 text-xs text-white/60 sm:inline">Converting</span>}
+              {!!item?.subtitles?.length && (
+                <SubtitleMenu
+                  tracks={item.subtitles}
+                  selected={sub?.id}
+                  onSelect={selectSub}
+                  onOpenChange={(open) => {
+                    menuOpen.current = open
+                    poke()
+                  }}
+                />
+              )}
               <button onClick={toggleFull} className="rounded-full p-2 hover:bg-white/10" aria-label="Fullscreen">
                 {full ? <Minimize className="size-6" /> : <Maximize className="size-6" />}
               </button>

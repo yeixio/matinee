@@ -16,6 +16,7 @@ A fast, self-hosted media server for your movies, TV and music. The basics Plex 
 
 - **Libraries** for movies, TV and music. Point it at folders; it names things from the file and folder names (`Movie (2021)`, `Show/Season 1/Show - S01E02.mkv`, `Artist/Album/01 Track.flac`), reads music tags, and picks up `poster.jpg`, `fanart.jpg` and `cover.jpg` next to your files.
 - **Plays anywhere.** Files the browser can play stream as-is, with instant seeking. Anything else is converted on the fly with FFmpeg to HLS. H.264 video is repackaged, not re-encoded, so it costs almost no CPU.
+- **Subtitles** from the file itself or from files next to it (`Movie.en.srt`, `Movie.en.forced.srt`, `.vtt`, `.ass`). Text subtitles are drawn by the player; Blu-ray and DVD picture subtitles are burned into the video while converting. The player remembers your language from one episode to the next.
 - **Picks up where you left off.** Resume points, watched marks, Continue Watching and Recently Added, per person.
 - **Music** with a player that keeps going while you browse.
 - **Posters and descriptions** from [TMDB](https://www.themoviedb.org/) when you add a free API key. Your own artwork files always win.

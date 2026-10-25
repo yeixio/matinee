@@ -60,8 +60,9 @@ func NewTranscoder(ffmpeg, dir string, log *slog.Logger) *Transcoder {
 
 // Start begins a transcode of item from startSec and returns the session id
 // once the first segment is ready. A user watching an item has at most one
-// session for it, so seeking far ahead replaces the old one.
-func (t *Transcoder) Start(ctx context.Context, userID int64, it store.Item, startSec float64) (string, error) {
+// session for it, so seeking far ahead replaces the old one. burnSub is an
+// embedded subtitle stream to draw into the video, or -1 for none.
+func (t *Transcoder) Start(ctx context.Context, userID int64, it store.Item, startSec float64, burnSub int) (string, error) {
 	t.mu.Lock()
 	for id, s := range t.sessions {
 		if s.userID == userID && s.itemID == it.ID {
@@ -84,15 +85,24 @@ func (t *Transcoder) Start(ctx context.Context, userID int64, it store.Item, sta
 	}
 	args = append(args, "-i", it.Path)
 	if it.VideoCodec != "" {
-		args = append(args, "-map", "0:v:0", "-map", "0:a:0?", "-sn")
-		if it.VideoCodec == "h264" {
+		encode := []string{"-c:v", "libx264", "-preset", "veryfast", "-crf", "22",
+			"-maxrate", "10M", "-bufsize", "20M", "-pix_fmt", "yuv420p",
+			"-force_key_frames", fmt.Sprintf("expr:gte(t,n_forced*%d)", segmentSeconds)}
+		const scale = "scale='min(1920,iw)':-2"
+		switch {
+		case burnSub >= 0:
+			// Picture subtitles are drawn at the video's size (their canvas can
+			// differ, e.g. 1080p subtitles on a cropped 800-line video), which
+			// means re-encoding even H.264.
+			graph := fmt.Sprintf("[0:s:%d][0:v:0]scale2ref[sub][vid];[vid][sub]overlay=eof_action=pass,%s[v]", burnSub, scale)
+			args = append(args, "-filter_complex", graph, "-map", "[v]", "-map", "0:a:0?", "-sn")
+			args = append(args, encode...)
+		case it.VideoCodec == "h264":
 			// Already browser-friendly video: repackage instead of re-encoding. Far cheaper.
-			args = append(args, "-c:v", "copy")
-		} else {
-			args = append(args, "-c:v", "libx264", "-preset", "veryfast", "-crf", "22",
-				"-maxrate", "10M", "-bufsize", "20M", "-pix_fmt", "yuv420p",
-				"-vf", "scale='min(1920,iw)':-2",
-				"-force_key_frames", fmt.Sprintf("expr:gte(t,n_forced*%d)", segmentSeconds))
+			args = append(args, "-map", "0:v:0", "-map", "0:a:0?", "-sn", "-c:v", "copy")
+		default:
+			args = append(args, "-map", "0:v:0", "-map", "0:a:0?", "-sn", "-vf", scale)
+			args = append(args, encode...)
 		}
 		args = append(args, "-c:a", "aac", "-ac", "2", "-b:a", "192k")
 	} else {
@@ -117,7 +127,7 @@ func (t *Transcoder) Start(ctx context.Context, userID int64, it store.Item, sta
 	t.mu.Lock()
 	t.sessions[id] = s
 	t.mu.Unlock()
-	t.Log.Info("transcode started", "session", id, "item", it.ID, "start", startSec, "videoCopy", it.VideoCodec == "h264")
+	t.Log.Info("transcode started", "session", id, "item", it.ID, "start", startSec, "videoCopy", it.VideoCodec == "h264" && burnSub < 0, "burnSub", burnSub)
 
 	// Wait for the first segment so the player can start right away.
 	if err := waitFor(ctx, s, filepath.Join(dir, "seg00000.ts"), startupWait); err != nil {
