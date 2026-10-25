@@ -1,12 +1,13 @@
 #!/bin/sh
 # Builds release archives of the server, web player included, into dist/.
 # Usage: VERSION=1.2.3 scripts/release-binaries.sh  (run `make web` first)
+# TARGETS="linux/amd64" builds only those, as CI's package test does.
 set -eu
 : "${VERSION:?set VERSION, e.g. 1.2.3}"
 test -f web/dist/index.html || { echo "build the web player first: make web" >&2; exit 1; }
 
 rm -rf dist && mkdir -p dist
-for target in linux/amd64 linux/arm64 linux/arm/7 darwin/amd64 darwin/arm64 windows/amd64 windows/arm64; do
+for target in ${TARGETS:-linux/amd64 linux/arm64 linux/arm/7 darwin/amd64 darwin/arm64 windows/amd64 windows/arm64}; do
 	os=${target%%/*}
 	rest=${target#*/}
 	arch=${rest%%/*}
@@ -27,5 +28,5 @@ for target in linux/amd64 linux/arm64 linux/arm/7 darwin/amd64 darwin/arm64 wind
 	fi
 	rm -rf "dist/$name"
 done
-(cd dist && sha256sum ./*.tar.gz ./*.zip | sed 's| \./| |' > SHA256SUMS.txt)
+(cd dist && sha256sum $(ls ./*.tar.gz ./*.zip 2>/dev/null) | sed 's| \./| |' > SHA256SUMS.txt)
 ls -l dist

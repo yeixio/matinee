@@ -9,6 +9,7 @@ on:
 permissions:
   contents: write
   packages: write
+  pull-requests: write
 
 jobs:
   test:
@@ -104,14 +105,68 @@ jobs:
           name: binaries
           path: dist/*
 
+  packages:
+    needs: binaries
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - uses: actions/download-artifact@v4
+        with:
+          name: binaries
+          path: dist
+      - name: Install packaging tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends dpkg-dev apt-utils createrepo-c rpm
+          go install github.com/goreleaser/nfpm/v2/cmd/nfpm@v2.41.3
+          echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
+      - name: Build .deb and .rpm packages
+        run: VERSION="${GITHUB_REF_NAME#v}" scripts/package-linux.sh
+      # A stable release publishes the repositories, so it fails without the
+      # signing key rather than publishing them unsigned.
+      - name: Build the apt and dnf repositories
+        env:
+          PACKAGE_SIGNING_KEY: ${{ secrets.PACKAGE_SIGNING_KEY }}
+          PACKAGE_SIGNING_PASSPHRASE: ${{ secrets.PACKAGE_SIGNING_PASSPHRASE }}
+          PACKAGE_REQUIRE_SIGNING: ${{ !contains(github.ref_name, '-') && '1' || '' }}
+        run: scripts/package-repos.sh dist/packages
+      # Fresh Debian, Ubuntu and Fedora add the repositories as the README
+      # says, install Matinee and start it, before anything is published.
+      - name: Test the repositories
+        if: ${{ !contains(github.ref_name, '-') }}
+        run: scripts/test-packages.sh dist/packages
+      - uses: actions/upload-artifact@v4
+        with:
+          name: packages
+          path: |
+            dist/*.deb
+            dist/*.rpm
+      - uses: actions/upload-artifact@v4
+        with:
+          name: package-repos
+          path: dist/packages
+
   release:
-    needs: [image, chart, binaries]
+    needs: [image, chart, binaries, packages]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v4
         with:
+          name: binaries
           path: dist
-          merge-multiple: true
+      - uses: actions/download-artifact@v4
+        with:
+          name: chart
+          path: dist
+      - uses: actions/download-artifact@v4
+        with:
+          name: packages
+          path: dist
+      - name: Checksum everything attached
+        run: cd dist && rm -f SHA256SUMS.txt && sha256sum -- * > SHA256SUMS.txt
       - name: Write the release notes
         run: |
           VERSION="${GITHUB_REF_NAME#v}"
@@ -120,8 +175,13 @@ jobs:
 
           - **Docker:** \`docker pull ghcr.io/${GITHUB_REPOSITORY}:${VERSION}\`
           - **Kubernetes:** \`helm install matinee oci://ghcr.io/${GITHUB_REPOSITORY_OWNER}/charts/matinee --version ${VERSION}\`
+          - **Homebrew (macOS, Linux):** \`brew tap yeixio/matinee https://github.com/yeixio/matinee && brew install yeixio/matinee/matinee\`
+          - **Debian, Ubuntu, Fedora, RHEL:** add the apt or dnf repository as the [README](https://github.com/${GITHUB_REPOSITORY}#debian-and-ubuntu) shows, or install the \`.deb\` or \`.rpm\` below. Either runs Matinee as a service on port 7171.
           - **Single binary:** download the archive for your system below. FFmpeg must be on the PATH.
           EOF
+          if [[ "$GITHUB_REF_NAME" == *-* ]]; then
+            printf '\n**Pre-release.** Homebrew, apt and dnf keep the latest stable release; use the packages or archives below to try this one.\n' >> notes.md
+          fi
       - uses: softprops/action-gh-release@v2
         with:
           name: Matinee ${{ github.ref_name }}
@@ -129,3 +189,73 @@ jobs:
           generate_release_notes: true
           body_path: notes.md
           files: dist/*
+
+  # Homebrew, apt and dnf serve stable releases; a pre-release must not
+  # replace what their users install.
+  publish-packages:
+    needs: release
+    if: ${{ !contains(github.ref_name, '-') }}
+    runs-on: ubuntu-latest
+    concurrency:
+      group: publish-packages
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/download-artifact@v4
+        with:
+          name: binaries
+          path: dist
+      - uses: actions/download-artifact@v4
+        with:
+          name: package-repos
+          path: packages
+      - name: Configure git
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
+      # The packages branch holds only the current repositories, in one
+      # commit, so old packages don't pile up in the git history. apt and
+      # dnf read it from raw.githubusercontent.com.
+      - name: Publish the apt and dnf repositories
+        run: |
+          set -euo pipefail
+          work="$(mktemp -d)"
+          cp -a packages/. "$work/"
+          cd "$work"
+          git init -q -b packages
+          git add -A
+          git commit -qm "Packages for ${GITHUB_REF_NAME}"
+          git push --force "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:packages
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Open the Homebrew formula pull request
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          VERSION="${GITHUB_REF_NAME#v}" scripts/write-brew-formula.sh
+          cp Formula/matinee.rb /tmp/matinee.rb
+          git fetch origin main
+          git checkout -f -B formula origin/main
+          mkdir -p Formula
+          cp /tmp/matinee.rb Formula/matinee.rb
+          git add Formula/matinee.rb
+          if git diff --cached --quiet; then
+            echo "The Homebrew formula on main is current."
+            exit 0
+          fi
+          git commit -m "Publish the Homebrew formula for ${GITHUB_REF_NAME#v}"
+          # formula is a release branch, replaced each release.
+          git push --force origin HEAD:formula
+          if [ -z "$(gh pr list --head formula --base main --state open --json number --jq '.[0].number')" ]; then
+            gh pr create --base main --head formula \
+              --title "Publish the Homebrew formula for ${GITHUB_REF_NAME#v}" \
+              --body "Updates Formula/matinee.rb from the ${GITHUB_REF_NAME} release."
+          fi
+          # The workflow token can open the pull request but not approve it,
+          # so a required review leaves it open rather than failing the release.
+          if ! gh pr merge formula --squash --admin; then
+            echo "::warning::The Homebrew formula pull request is open and still needs an approving review."
+          fi

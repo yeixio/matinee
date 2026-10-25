@@ -49,6 +49,36 @@ The chart runs Matinee with a bundled PostgreSQL, so nothing depends on file loc
 
 Run one replica for now: an active transcode lives in the pod that started it. More replicas work with `service.sessionAffinity: ClientIP`.
 
+### Debian and Ubuntu
+
+```sh
+sudo install -d -m 0755 /etc/apt/keyrings
+curl -fsSL https://raw.githubusercontent.com/yeixio/matinee/packages/matinee.asc | sudo tee /etc/apt/keyrings/matinee.asc > /dev/null
+echo "deb [signed-by=/etc/apt/keyrings/matinee.asc] https://raw.githubusercontent.com/yeixio/matinee/packages/apt stable main" | sudo tee /etc/apt/sources.list.d/matinee.list
+sudo apt-get update && sudo apt-get install matinee
+```
+
+### Fedora, RHEL and friends
+
+```sh
+sudo curl -fsSL https://raw.githubusercontent.com/yeixio/matinee/packages/matinee.repo -o /etc/yum.repos.d/matinee.repo
+sudo dnf install matinee
+```
+
+Fedora's own `ffmpeg-free` satisfies the FFmpeg dependency. On RHEL, Rocky and Alma, enable [EPEL and RPM Fusion](https://rpmfusion.org/Configuration) first for FFmpeg.
+
+Both packages (amd64 and arm64, plus armhf for apt) install `matinee.service`, which starts right away and on boot as the `matinee` user, with its data in `/var/lib/matinee`. Settings go in `/etc/matinee/matinee.env`; run `sudo systemctl restart matinee` after a change. Open http://your-server:7171 to finish setup. The user is also added to the `render` and `video` groups for hardware transcoding. To read a share the `matinee` user can't, mount it with that user's permissions or add the user to the share's group.
+
+### Homebrew (macOS and Linux)
+
+```sh
+brew tap yeixio/matinee https://github.com/yeixio/matinee
+brew install yeixio/matinee/matinee
+brew services start matinee
+```
+
+Then open http://localhost:7171. Settings go in `$(brew --prefix)/etc/matinee/matinee.env` (then `brew services restart matinee`), and data lives in `$(brew --prefix)/var/matinee`.
+
 ### Posters and descriptions (TMDB key)
 
 Matinee looks up posters, backdrops and descriptions on [TMDB](https://www.themoviedb.org/). For now, each server uses its own free TMDB key. It takes about two minutes:
@@ -60,6 +90,8 @@ Matinee looks up posters, backdrops and descriptions on [TMDB](https://www.themo
 5. Give it to Matinee:
    - Docker: add `-e MATINEE_TMDB_KEY=your-key` to `docker run`.
    - Kubernetes: run `kubectl create secret generic matinee-tmdb --from-literal=tmdb-api-key=your-key`, then set `tmdb.existingSecret: matinee-tmdb` in your values.
+   - apt or dnf: add `MATINEE_TMDB_KEY=your-key` to `/etc/matinee/matinee.env`.
+   - Homebrew: add `MATINEE_TMDB_KEY=your-key` to `$(brew --prefix)/etc/matinee/matinee.env`.
 
 Restart Matinee. The next library scan fills in the artwork.
 
@@ -123,7 +155,7 @@ The Go tests build real media files with FFmpeg and run a full scan, browse, pla
 
 ## Releasing
 
-Push a version tag, such as `git tag v0.2.0 && git push origin v0.2.0`. The release workflow tests, then publishes `ghcr.io/yeixio/matinee:0.2.0` (and `0.2`, `latest`) for amd64, arm64 and armv7, pushes the Helm chart to `oci://ghcr.io/yeixio/charts/matinee` with that version, and attaches single-binary archives for Linux, macOS and Windows to a GitHub release. A tag with a suffix (`v0.2.0-beta.1`) is a pre-release and leaves `latest` alone.
+Push a version tag, such as `git tag v0.2.0 && git push origin v0.2.0`. The release workflow tests, then publishes `ghcr.io/yeixio/matinee:0.2.0` (and `0.2`, `latest`) for amd64, arm64 and armv7, pushes the Helm chart to `oci://ghcr.io/yeixio/charts/matinee` with that version, and attaches single-binary archives for Linux, macOS and Windows plus `.deb` and `.rpm` packages to a GitHub release. It then installs the packages from freshly built apt and dnf repositories in Debian, Ubuntu and Fedora containers, publishes those repositories on the `packages` branch, and opens a pull request updating `Formula/matinee.rb` for Homebrew. A tag with a suffix (`v0.2.0-beta.1`) is a pre-release: it leaves `latest`, Homebrew, apt and dnf alone. Packaging details and the signing key setup are in [docs/packaging.md](docs/packaging.md).
 
 ## Contributing
 
