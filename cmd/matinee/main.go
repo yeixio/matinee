@@ -17,6 +17,7 @@ import (
 	"github.com/yeixio/matinee/internal/api"
 	"github.com/yeixio/matinee/internal/artwork"
 	"github.com/yeixio/matinee/internal/config"
+	"github.com/yeixio/matinee/internal/download"
 	"github.com/yeixio/matinee/internal/kube"
 	"github.com/yeixio/matinee/internal/metadata"
 	"github.com/yeixio/matinee/internal/probe"
@@ -80,15 +81,21 @@ func run() error {
 	transcoder := stream.NewTranscoder(cfg.FFmpegPath, cfg.TranscodeDir(), log)
 	defer transcoder.Close()
 
+	downloads := download.NewManager(db, cfg.FFmpegPath, cfg.DownloadDir(), log)
+
+	apiServer := &api.Server{
+		Store: db, Scanner: scanner, Transcoder: transcoder, Downloads: downloads,
+		Art:       artwork.NewCache(cfg.ImageDir(), cfg.FFmpegPath),
+		Subtitles: subtitle.NewConverter(cfg.FFmpegPath, cfg.SubtitleDir()),
+		Web:       web.FS(), Log: log, BackgroundCtx: ctx,
+		MediaRoot: cfg.MediaRoot,
+	}
+	downloads.SubtitleStream = apiServer.BurnStream
+	go downloads.Run(ctx)
+
 	srv := &http.Server{
-		Addr: cfg.Addr,
-		Handler: (&api.Server{
-			Store: db, Scanner: scanner, Transcoder: transcoder,
-			Art:       artwork.NewCache(cfg.ImageDir(), cfg.FFmpegPath),
-			Subtitles: subtitle.NewConverter(cfg.FFmpegPath, cfg.SubtitleDir()),
-			Web:       web.FS(), Log: log, BackgroundCtx: ctx,
-			MediaRoot: cfg.MediaRoot,
-		}).Handler(),
+		Addr:              cfg.Addr,
+		Handler:           apiServer.Handler(),
 		ReadHeaderTimeout: 10 * time.Second,
 	}
 

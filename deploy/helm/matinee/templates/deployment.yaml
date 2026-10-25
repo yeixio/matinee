@@ -73,6 +73,10 @@ spec:
           volumeMounts:
             - name: cache
               mountPath: /cache
+            {{- if .Values.downloads.persistence.enabled }}
+            - name: downloads
+              mountPath: /cache/downloads
+            {{- end }}
             - name: tmp
               mountPath: /tmp
             {{- range .Values.media }}
@@ -92,6 +96,11 @@ spec:
             {{- end }}
         - name: tmp
           emptyDir: {}
+        {{- if .Values.downloads.persistence.enabled }}
+        - name: downloads
+          persistentVolumeClaim:
+            claimName: {{ .Values.downloads.persistence.existingClaim | default (printf "%s-downloads" (include "matinee.fullname" .)) }}
+        {{- end }}
         {{- range .Values.media }}
         - name: media-{{ .name }}
           {{- toYaml .volume | nindent 10 }}

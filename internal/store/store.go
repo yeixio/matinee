@@ -140,6 +140,32 @@ var migrations = []string{
 		denied      INTEGER NOT NULL DEFAULT 0,
 		expires_at  BIGINT NOT NULL
 	)`,
+	// 10–11: downloads for offline playback (see downloads.go).
+	`CREATE TABLE downloads (
+		id           TEXT PRIMARY KEY,
+		user_id      BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+		device_id    TEXT NOT NULL,
+		item_id      BIGINT NOT NULL REFERENCES items(id) ON DELETE CASCADE,
+		quality      TEXT NOT NULL,
+		subtitle     TEXT NOT NULL DEFAULT '',
+		state        TEXT NOT NULL,
+		progress     INTEGER NOT NULL DEFAULT 0,
+		error        TEXT NOT NULL DEFAULT '',
+		attempts     INTEGER NOT NULL DEFAULT 0,
+		not_before   BIGINT NOT NULL DEFAULT 0,
+		file         TEXT NOT NULL,
+		source_size  BIGINT NOT NULL DEFAULT 0,
+		source_mtime BIGINT NOT NULL DEFAULT 0,
+		size         BIGINT NOT NULL DEFAULT 0,
+		sha256       TEXT NOT NULL DEFAULT '',
+		md5          TEXT NOT NULL DEFAULT '',
+		mime_type    TEXT NOT NULL DEFAULT '',
+		created_at   BIGINT NOT NULL,
+		updated_at   BIGINT NOT NULL,
+		finished_at  BIGINT NOT NULL DEFAULT 0,
+		UNIQUE (device_id, item_id)
+	)`,
+	"CREATE INDEX downloads_file ON downloads(file)",
 }
 
 func now() int64 { return time.Now().Unix() }
@@ -254,7 +280,11 @@ func (s *Store) SessionUser(ctx context.Context, token string) (User, error) {
 	return u, nil
 }
 
+// DeleteSession signs a device out. Its downloads go with it.
 func (s *Store) DeleteSession(ctx context.Context, token string) error {
+	if _, err := s.db.ExecContext(ctx, "DELETE FROM downloads WHERE device_id = ?", SessionID(token)); err != nil {
+		return err
+	}
 	_, err := s.db.ExecContext(ctx, "DELETE FROM sessions WHERE token = ?", token)
 	return err
 }

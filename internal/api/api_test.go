@@ -17,6 +17,7 @@ import (
 	"time"
 
 	"github.com/yeixio/matinee/internal/artwork"
+	"github.com/yeixio/matinee/internal/download"
 	"github.com/yeixio/matinee/internal/probe"
 	"github.com/yeixio/matinee/internal/scan"
 	"github.com/yeixio/matinee/internal/store"
@@ -75,12 +76,17 @@ func newTestServer(t *testing.T) (*client, string) {
 	t.Cleanup(tc.Close)
 	ctx, cancel := context.WithCancel(context.Background())
 	t.Cleanup(cancel)
+	dl := download.NewManager(db, "ffmpeg", filepath.Join(tmp, "downloads"), log)
 	srv := &Server{
 		MediaRoot: tmp,
 		Store:     db, Scanner: &scan.Scanner{Store: db, Prober: probe.Prober{Path: "ffprobe"}, Log: log},
-		Transcoder: tc, Art: artwork.NewCache(filepath.Join(tmp, "images"), "ffmpeg"),
+		Transcoder: tc, Downloads: dl, Art: artwork.NewCache(filepath.Join(tmp, "images"), "ffmpeg"),
 		Subtitles: subtitle.NewConverter("ffmpeg", filepath.Join(tmp, "subtitles")), Log: log, BackgroundCtx: ctx,
 	}
+	dl.SubtitleStream = srv.BurnStream
+	done := make(chan struct{})
+	go func() { dl.Run(ctx); close(done) }()
+	t.Cleanup(func() { cancel(); <-done })
 	ts := httptest.NewServer(srv.Handler())
 	t.Cleanup(ts.Close)
 	return &client{t: t, base: ts.URL}, tmp

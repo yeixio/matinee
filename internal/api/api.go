@@ -18,6 +18,7 @@ import (
 
 	"github.com/yeixio/matinee/internal/artwork"
 	"github.com/yeixio/matinee/internal/auth"
+	"github.com/yeixio/matinee/internal/download"
 	"github.com/yeixio/matinee/internal/probe"
 	"github.com/yeixio/matinee/internal/scan"
 	"github.com/yeixio/matinee/internal/store"
@@ -30,6 +31,7 @@ type Server struct {
 	Store      *store.Store
 	Scanner    *scan.Scanner
 	Transcoder *stream.Transcoder
+	Downloads  *download.Manager
 	Art        *artwork.Cache
 	Subtitles  *subtitle.Converter
 	Web        fs.FS // built web player; nil serves a placeholder
@@ -99,6 +101,15 @@ func (s *Server) routes() []route {
 		{"GET /items/{id}/subtitles/{track}", signedIn, s.subtitleFile},
 		{"POST /items/{id}/hls", signedIn, s.startHLS},
 		{"GET /hls/{session}/{file}", signedIn, s.hlsFile},
+
+		{"GET /downloads/qualities", signedIn, s.downloadQualities},
+		{"POST /downloads", signedIn, s.createDownload},
+		{"GET /downloads", signedIn, s.listDownloads},
+		{"GET /downloads/{id}", signedIn, s.getDownload},
+		{"DELETE /downloads/{id}", signedIn, s.deleteDownload},
+		{"POST /downloads/{id}/finished", signedIn, s.finishDownload},
+		{"GET /downloads/{id}/file", signedIn, s.downloadFile},
+		{"POST /sync/progress", signedIn, s.syncProgress},
 	}
 }
 

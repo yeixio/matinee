@@ -447,6 +447,145 @@ paths:
       responses:
         "200": { description: Playlist or segment. }
 
+  /downloads/qualities:
+    get:
+      summary: Qualities a download can be converted to
+      responses:
+        "200":
+          description: Best first. `original` is the file as it is.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name: { type: string, examples: [original, 1080p, 720p, 480p] }
+                    label: { type: string }
+                    height: { type: integer }
+                    videoBps: { type: integer }
+                    audioBps: { type: integer }
+  /downloads:
+    post:
+      summary: Download an item to this device
+      description: |
+        Creates a job that prepares the file: the original as is, or a single
+        MP4 (M4A for music) at the chosen quality, converted in the background.
+        Poll `GET /downloads/{id}` until `state` is `ready`, then fetch `url`.
+        A device has one download per item: asking again returns the same
+        download (retrying it if it failed), and a different quality replaces it.
+        Text subtitles aren't part of the file; fetch them from
+        `/items/{id}/subtitles/{track}`. A picture subtitle track given as
+        `subtitle` is drawn into a converted video.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [itemId]
+              properties:
+                itemId: { type: integer }
+                quality: { type: string, default: original }
+                subtitle: { type: string, description: A picture subtitle track id to draw in. }
+      responses:
+        "200":
+          description: The download.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Download" }
+        "400": { $ref: "#/components/responses/Error" }
+        "404": { $ref: "#/components/responses/Error" }
+    get:
+      summary: Downloads for this device
+      parameters:
+        - { name: device, in: query, schema: { type: string, enum: [all] }, description: "`all` lists every device of the current user." }
+        - { name: user, in: query, schema: { type: string, enum: [all] }, description: "`all` lists everyone's (admins only)." }
+      responses:
+        "200":
+          description: Oldest first.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Download" }
+  /downloads/{id}:
+    get:
+      summary: One download
+      parameters: [{ $ref: "#/components/parameters/DownloadID" }]
+      responses:
+        "200":
+          description: The download.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Download" }
+        "404": { $ref: "#/components/responses/Error" }
+    delete:
+      summary: Remove a download
+      description: The server deletes its converted copy once no device needs it. Admins can remove anyone's download.
+      parameters: [{ $ref: "#/components/parameters/DownloadID" }]
+      responses:
+        "204": { description: Removed. }
+        "404": { $ref: "#/components/responses/Error" }
+  /downloads/{id}/finished:
+    post:
+      summary: Say the device has the whole file and its checksum matched
+      description: The server keeps a converted copy for a week after every device that asked for it has finished, then cleans it up (the download's state becomes `expired`).
+      parameters: [{ $ref: "#/components/parameters/DownloadID" }]
+      responses:
+        "204": { description: Recorded. }
+        "409": { $ref: "#/components/responses/Error" }
+  /downloads/{id}/file:
+    get:
+      summary: The prepared file
+      description: |
+        Only the device that created the download can fetch it. Supports
+        Range requests for resuming. The ETag is the file's SHA-256 in quotes;
+        send it as `If-Range` when resuming so a changed file is sent whole
+        instead of mixed with the old one. `Repr-Digest` carries the same
+        checksum; check it before treating the file as done.
+      parameters: [{ $ref: "#/components/parameters/DownloadID" }]
+      responses:
+        "200": { description: The file. }
+        "206": { description: Part of the file. }
+        "403": { $ref: "#/components/responses/Error" }
+        "409": { description: Not ready, or the file changed on the server and is being prepared again. The body has `state`. }
+  /sync/progress:
+    post:
+      summary: Send watch progress recorded while offline
+      description: |
+        Each event is applied unless the item's progress changed more recently
+        (on another device, say), so the latest change wins. Send events in
+        batches of up to 1000. Times in the future count as now.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                events:
+                  type: array
+                  maxItems: 1000
+                  items:
+                    type: object
+                    required: [itemId, at]
+                    properties:
+                      itemId: { type: integer }
+                      positionMs: { type: integer }
+                      played: { type: boolean }
+                      at: { type: integer, description: When it happened, in Unix seconds. }
+      responses:
+        "200":
+          description: How many were applied, and how many were older than what the server had (or for items that are gone).
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  applied: { type: integer }
+                  skipped: { type: integer }
+
 components:
   securitySchemes:
     bearer:
@@ -455,6 +594,8 @@ components:
   parameters:
     ID:
       { name: id, in: path, required: true, schema: { type: integer } }
+    DownloadID:
+      { name: id, in: path, required: true, schema: { type: string } }
     UserCode:
       { name: code, in: path, required: true, schema: { type: string }, description: "The code as typed; case, dashes and spaces don't matter." }
   responses:
@@ -574,3 +715,27 @@ components:
         sdh: { type: boolean }
         external: { type: boolean }
         burnIn: { type: boolean, description: Picture-based; only playable burned into a transcode. }
+    Download:
+      type: object
+      properties:
+        id: { type: string }
+        itemId: { type: integer }
+        deviceId: { type: string, description: "The device's id, as in GET /devices." }
+        quality: { type: string }
+        subtitle: { type: string }
+        state:
+          type: string
+          enum: [queued, preparing, ready, failed, expired]
+          description: |
+            `failed` downloads were tried three times; ask again to retry.
+            `expired` means the device finished it and the server cleaned up its copy.
+        progress: { type: integer, minimum: 0, maximum: 1000, description: Thousandths prepared. }
+        error: { type: string, description: Why it failed, fit to show a person. }
+        size: { type: integer, description: Bytes, once ready. }
+        sha256: { type: string, description: Hex SHA-256 of the file, once ready. }
+        md5: { type: string, description: "Hex MD5 of the file, once ready, for devices that can only hash files natively with MD5. It catches broken transfers, not tampering." }
+        mimeType: { type: string }
+        url: { type: string, example: /api/v1/downloads/abc123/file }
+        createdAt: { type: integer }
+        updatedAt: { type: integer }
+        finishedAt: { type: integer, description: When the device said it has the whole file. }
