@@ -91,7 +91,6 @@ function AddLibrary({ onDone }: { onDone: () => void }) {
   const [kind, setKind] = useState('movies')
   const [name, setName] = useState('')
   const [paths, setPaths] = useState<string[]>([])
-  const [picking, setPicking] = useState(true)
   const create = useMutation({
     mutationFn: () => api.createLibrary(name || kinds.find((k) => k.value === kind)!.label, kind, paths),
     onSuccess: () => {
@@ -127,7 +126,10 @@ function AddLibrary({ onDone }: { onDone: () => void }) {
         <input className={inputClass} value={name} onChange={(e) => setName(e.target.value)} placeholder={kinds.find((k) => k.value === kind)!.label} />
       </Field>
       <Field label="Folders">
+        {/* The picker stays put and chosen folders appear below it, so nothing new lands
+            under the finger after a tap (a quick second tap used to hit a chip's remove button). */}
         <div className="space-y-2">
+          <FolderPicker picked={paths} onPick={(p) => setPaths((prev) => (prev.includes(p) ? prev : [...prev, p]))} />
           {paths.map((p) => (
             <div key={p} className="flex items-center gap-2 rounded-lg bg-white/5 px-3 py-2 text-sm">
               <Folder className="size-4 text-accent" />
@@ -137,18 +139,6 @@ function AddLibrary({ onDone }: { onDone: () => void }) {
               </button>
             </div>
           ))}
-          {picking ? (
-            <FolderPicker
-              onPick={(p) => {
-                if (!paths.includes(p)) setPaths([...paths, p])
-                setPicking(false)
-              }}
-            />
-          ) : (
-            <Button type="button" variant="ghost" icon={<Plus className="size-4" />} onClick={() => setPicking(true)}>
-              Add another folder
-            </Button>
-          )}
         </div>
       </Field>
       {create.error && <p className="text-sm text-red-400">{create.error.message}</p>}
@@ -165,7 +155,7 @@ function AddLibrary({ onDone }: { onDone: () => void }) {
 }
 
 // Browse the server's folders, since the media lives on the server, not this device.
-function FolderPicker({ onPick }: { onPick: (path: string) => void }) {
+function FolderPicker({ picked, onPick }: { picked: string[]; onPick: (path: string) => void }) {
   // Empty asks the server for its media root (MATINEE_MEDIA_ROOT), so the picker opens on the media.
   const [path, setPath] = useState('')
   const { data, error } = useQuery({ queryKey: ['fs', path], queryFn: () => api.browse(path) })
@@ -186,8 +176,14 @@ function FolderPicker({ onPick }: { onPick: (path: string) => void }) {
           <ChevronLeft className="size-4" />
         </button>
         <span className="flex-1 truncate font-mono text-xs text-muted">{data?.path ?? path}</span>
-        <Button type="button" variant="primary" className="h-8 px-3 text-xs" onClick={() => onPick(data?.path ?? path)}>
-          Use this folder
+        <Button
+          type="button"
+          variant="primary"
+          className="h-8 px-3 text-xs"
+          disabled={!data || picked.includes(data.path)}
+          onClick={() => data && onPick(data.path)}
+        >
+          {data && picked.includes(data.path) ? 'Added' : 'Use this folder'}
         </Button>
       </div>
       <div className="max-h-60 overflow-y-auto">
