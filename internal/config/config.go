@@ -37,6 +37,7 @@ func (c Config) Database() string {
 func (c Config) TranscodeDir() string { return filepath.Join(c.DataDir, "transcode") }
 func (c Config) ImageDir() string     { return filepath.Join(c.DataDir, "images") }
 func (c Config) SubtitleDir() string  { return filepath.Join(c.DataDir, "subtitles") }
+func (c Config) DownloadDir() string  { return filepath.Join(c.DataDir, "downloads") }
 
 // Load reads flags, falling back to MATINEE_* environment variables, then defaults.
 func Load(args []string) (Config, error) {
