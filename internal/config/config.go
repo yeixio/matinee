@@ -23,6 +23,7 @@ type Config struct {
 	TMDBKey      string        // themoviedb.org API key or read token; empty disables online metadata
 	DatabaseURL  string        // postgres:// URL; empty uses SQLite in DataDir
 	MediaRoot    string        // where the folder picker starts when adding a library
+	MusicBrainz  bool          // look up artists and albums on MusicBrainz (no key needed)
 }
 
 // Database is what store.Open takes: the PostgreSQL URL, or the SQLite file.
@@ -48,6 +49,7 @@ func Load(args []string) (Config, error) {
 	fs.StringVar(&c.DatabaseURL, "database-url", env("MATINEE_DATABASE_URL", ""), "PostgreSQL URL (postgres://...); default is SQLite in the data directory")
 	fs.StringVar(&c.TMDBKey, "tmdb-key", env("MATINEE_TMDB_KEY", DefaultTMDBKey), "themoviedb.org API key for posters and descriptions")
 	fs.StringVar(&c.MediaRoot, "media-root", env("MATINEE_MEDIA_ROOT", "/"), "folder the library picker starts in")
+	fs.BoolVar(&c.MusicBrainz, "musicbrainz", env("MATINEE_MUSICBRAINZ", "true") != "false", "look up artists and albums on musicbrainz.org")
 	interval := fs.String("scan-interval", env("MATINEE_SCAN_INTERVAL", "15m"), "periodic rescan interval, 0 to disable")
 	if err := fs.Parse(args); err != nil {
 		return c, err

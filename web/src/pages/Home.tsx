@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
-import { api } from '../api'
+import { api, pendingRefetch } from '../api'
 import { PosterCard } from '../components/Card'
 import { Hero } from '../components/Hero'
 import { Row, RowItem } from '../components/Row'
@@ -9,7 +9,11 @@ import { Button, EmptyState } from '../components/ui'
 
 export default function Home() {
   const { data: libraries } = useLibraries()
-  const { data, isPending } = useQuery({ queryKey: ['home'], queryFn: api.home })
+  const { data, isPending } = useQuery({
+    queryKey: ['home'],
+    queryFn: api.home,
+    refetchInterval: (q) => pendingRefetch(q.state.data?.recentlyAdded),
+  })
 
   if (libraries && libraries.length === 0) {
     return (

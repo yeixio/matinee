@@ -31,7 +31,8 @@ func NewTMDB(key string) *TMDB {
 	}
 }
 
-func (t *TMDB) Name() string { return "tmdb" }
+func (t *TMDB) Name() string    { return "tmdb" }
+func (t *TMDB) Kinds() []string { return []string{"movie", "show", "season", "episode"} }
 
 func (t *TMDB) Lookup(ctx context.Context, q Query) (*store.Metadata, error) {
 	switch q.Kind {
@@ -39,6 +40,8 @@ func (t *TMDB) Lookup(ctx context.Context, q Query) (*store.Metadata, error) {
 		return t.search(ctx, "movie", q.Title, q.Year)
 	case "show":
 		return t.search(ctx, "tv", q.Title, q.Year)
+	case "season":
+		return t.season(ctx, q)
 	case "episode":
 		return t.episode(ctx, q)
 	}
@@ -108,6 +111,23 @@ func (t *TMDB) episode(ctx context.Context, q Query) (*store.Metadata, error) {
 		TMDBID: res.ID, Title: res.Name, Overview: res.Overview, Rating: res.VoteAverage,
 		Poster: t.image("w780", res.StillPath),
 	}, nil
+}
+
+func (t *TMDB) season(ctx context.Context, q Query) (*store.Metadata, error) {
+	var res struct {
+		ID         int64  `json:"id"`
+		Overview   string `json:"overview"`
+		PosterPath string `json:"poster_path"`
+		AirDate    string `json:"air_date"`
+	}
+	if err := t.get(ctx, fmt.Sprintf("/tv/%d/season/%d", q.ShowID, q.Season), nil, &res); err != nil {
+		if err == errNotFound {
+			return nil, nil
+		}
+		return nil, err
+	}
+	y, _ := strconv.Atoi(strings.SplitN(res.AirDate, "-", 2)[0])
+	return &store.Metadata{TMDBID: res.ID, Overview: res.Overview, Year: y, Poster: t.image("w500", res.PosterPath)}, nil
 }
 
 func (t *TMDB) image(size, path string) string {

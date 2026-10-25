@@ -1,45 +1,64 @@
 // Package metadata looks up descriptions and artwork from online providers.
-// Providers are an extension point: TMDB is built in, and metadata plugins
-// will implement the same interface.
+// Providers are an extension point: TMDB (movies and TV) and MusicBrainz
+// (music) are built in, and metadata plugins will implement the same interface.
 package metadata
 
 import (
 	"context"
 	"log/slog"
+	"slices"
 
 	"github.com/yeixio/matinee/internal/store"
 )
 
 // Query describes the item to identify.
 type Query struct {
-	Kind    string // movie, show or episode
+	Kind    string // movie, show, season, episode, artist or album
 	Title   string
 	Year    int
-	ShowID  int64 // provider id of the episode's show
+	ShowID  int64 // provider id of the season's or episode's show
 	Season  int
 	Episode int
+	Artist  string // the album's artist
 }
 
 // Provider identifies items with an online database. Lookup returns nil, nil
 // when nothing matches.
 type Provider interface {
 	Name() string
+	// Kinds lists the item kinds the provider looks up.
+	Kinds() []string
 	Lookup(ctx context.Context, q Query) (*store.Metadata, error)
 }
 
 // Fetcher fills in metadata for newly scanned items.
 type Fetcher struct {
-	Store    *store.Store
-	Provider Provider
-	Log      *slog.Logger
+	Store     *store.Store
+	Providers []Provider
+	Log       *slog.Logger
+}
+
+// Kinds lists every item kind some provider looks up.
+func (f *Fetcher) Kinds() []string {
+	var kinds []string
+	for _, p := range f.Providers {
+		kinds = append(kinds, p.Kinds()...)
+	}
+	return kinds
+}
+
+func (f *Fetcher) provider(kind string) Provider {
+	for _, p := range f.Providers {
+		if slices.Contains(p.Kinds(), kind) {
+			return p
+		}
+	}
+	return nil
 }
 
 // FetchLibrary looks up every item in the library that hasn't been looked up yet.
 func (f *Fetcher) FetchLibrary(ctx context.Context, lib store.Library) {
-	if f.Provider == nil {
-		return
-	}
-	items, err := f.Store.NeedsMetadata(ctx, lib.ID)
+	items, err := f.Store.NeedsMetadata(ctx, lib.ID, f.Kinds())
 	if err != nil {
 		f.Log.Error("list items needing metadata", "err", err)
 		return
@@ -57,10 +76,11 @@ func (f *Fetcher) FetchLibrary(ctx context.Context, lib store.Library) {
 			f.Store.ApplyMetadata(ctx, it.ID, nil)
 			continue
 		}
-		m, err := f.Provider.Lookup(ctx, q)
+		p := f.provider(it.Kind)
+		m, err := p.Lookup(ctx, q)
 		if err != nil {
 			// Leave it for the next scan; the provider may be down.
-			f.Log.Warn("metadata lookup", "provider", f.Provider.Name(), "title", it.Title, "err", err)
+			f.Log.Warn("metadata lookup", "provider", p.Name(), "title", it.Title, "err", err)
 			continue
 		}
 		if m != nil {
@@ -88,17 +108,45 @@ func (f *Fetcher) query(ctx context.Context, it store.Item) (Query, queryState) 
 	if it.Year != nil {
 		q.Year = *it.Year
 	}
-	if it.Kind != "episode" {
+	switch it.Kind {
+	case "artist":
+		if it.Title == "Unknown Artist" {
+			return q, noMatch
+		}
 		return q, ready
+	case "album":
+		if it.Title == "Unknown Album" || it.ParentID == nil {
+			return q, noMatch
+		}
+		artist, err := f.Store.Item(ctx, 0, *it.ParentID)
+		if err != nil {
+			return q, noMatch
+		}
+		if artist.Title != "Unknown Artist" {
+			q.Artist = artist.Title
+		}
+		return q, ready
+	case "season":
+		if it.ParentID == nil || it.IndexNumber == nil {
+			return q, noMatch
+		}
+		return f.showQuery(ctx, q, *it.ParentID, *it.IndexNumber, 0)
+	case "episode":
+		if it.ParentID == nil || it.IndexNumber == nil {
+			return q, noMatch
+		}
+		season, err := f.Store.Item(ctx, 0, *it.ParentID)
+		if err != nil || season.ParentID == nil || season.IndexNumber == nil {
+			return q, noMatch
+		}
+		return f.showQuery(ctx, q, *season.ParentID, *season.IndexNumber, *it.IndexNumber)
 	}
-	if it.ParentID == nil || it.IndexNumber == nil {
-		return q, noMatch
-	}
-	season, err := f.Store.Item(ctx, 0, *it.ParentID)
-	if err != nil || season.ParentID == nil || season.IndexNumber == nil {
-		return q, noMatch
-	}
-	show, err := f.Store.Item(ctx, 0, *season.ParentID)
+	return q, ready
+}
+
+// showQuery fills in the show's provider id for a season or episode lookup.
+func (f *Fetcher) showQuery(ctx context.Context, q Query, showID int64, season, episode int) (Query, queryState) {
+	show, err := f.Store.Item(ctx, 0, showID)
 	switch {
 	case err != nil:
 		return q, noMatch
@@ -107,6 +155,6 @@ func (f *Fetcher) query(ctx context.Context, it store.Item) (Query, queryState) 
 	case show.TMDBID == nil:
 		return q, noMatch
 	}
-	q.ShowID, q.Season, q.Episode = *show.TMDBID, *season.IndexNumber, *it.IndexNumber
+	q.ShowID, q.Season, q.Episode = *show.TMDBID, season, episode
 	return q, ready
 }

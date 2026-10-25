@@ -41,9 +41,11 @@ type Item struct {
 	Backdrop string `json:"-"`
 	TMDBID   *int64 `json:"-"`
 	MetaAt   int64  `json:"-"` // 0 until online metadata was looked up
-	Path     string `json:"-"`
-	Size     int64  `json:"-"`
-	Mtime    int64  `json:"-"`
+	// Pending is true while an online lookup for the item is still to come.
+	Pending bool   `json:"pending,omitempty"`
+	Path    string `json:"-"`
+	Size    int64  `json:"-"`
+	Mtime   int64  `json:"-"`
 	// SubtitleStreams is the probed embedded subtitle streams as JSON, only
 	// set when upserting a file. See Store.SubtitleStreams.
 	SubtitleStreams string `json:"-"`
@@ -120,6 +122,7 @@ func (s *Store) queryItems(ctx context.Context, where, order string, args ...any
 		if err != nil {
 			return nil, err
 		}
+		s.markPending(&it)
 		out = append(out, it)
 	}
 	return out, rows.Err()
@@ -131,7 +134,24 @@ func (s *Store) Item(ctx context.Context, userID, id int64) (Item, error) {
 	if errors.Is(err, sql.ErrNoRows) {
 		return it, ErrNotFound
 	}
+	s.markPending(&it)
 	return it, err
+}
+
+// SetMetadataKinds says which item kinds an online provider looks up, so
+// those items can show as pending until their lookup is done.
+func (s *Store) SetMetadataKinds(kinds ...string) {
+	m := map[string]bool{}
+	for _, k := range kinds {
+		m[k] = true
+	}
+	s.metaKinds.Store(&m)
+}
+
+func (s *Store) markPending(it *Item) {
+	if m := s.metaKinds.Load(); m != nil && it.MetaAt == 0 {
+		it.Pending = (*m)[it.Kind]
+	}
 }
 
 // TopLevel lists a library's root items: movies, shows or artists.
@@ -271,16 +291,25 @@ func (s *Store) SetArt(ctx context.Context, id int64, poster, backdrop string) e
 	return err
 }
 
-// NeedsMetadata lists a library's movies, shows and episodes not yet looked
-// up online, shows before episodes so episodes can use their show's match.
-func (s *Store) NeedsMetadata(ctx context.Context, libraryID int64) ([]Item, error) {
-	return s.queryItems(ctx, "i.library_id = ? AND i.meta_at IS NULL AND i.kind IN ('movie', 'show', 'episode')",
-		"CASE i.kind WHEN 'show' THEN 0 ELSE 1 END, i.id", 0, libraryID)
+// NeedsMetadata lists a library's items of the given kinds not yet looked
+// up online, shows before seasons and episodes so those can use the show's match.
+func (s *Store) NeedsMetadata(ctx context.Context, libraryID int64, kinds []string) ([]Item, error) {
+	if len(kinds) == 0 {
+		return nil, nil
+	}
+	in := strings.TrimSuffix(strings.Repeat("?, ", len(kinds)), ", ")
+	args := []any{0, libraryID}
+	for _, k := range kinds {
+		args = append(args, k)
+	}
+	return s.queryItems(ctx, "i.library_id = ? AND i.meta_at IS NULL AND i.kind IN ("+in+")",
+		"CASE i.kind WHEN 'show' THEN 0 WHEN 'season' THEN 1 ELSE 2 END, i.id", args...)
 }
 
 // Metadata is what an online provider knows about an item.
 type Metadata struct {
 	TMDBID   int64
+	MBID     string // MusicBrainz id, for artists and albums
 	Title    string // only applied to episodes, whose file names rarely carry one
 	Overview string
 	Year     int
@@ -298,17 +327,24 @@ func (s *Store) ApplyMetadata(ctx context.Context, id int64, m *Metadata) error 
 	}
 	_, err := s.db.ExecContext(ctx, `
 		UPDATE items SET
-			tmdb_id = ?, overview = ?, rating = ?,
+			tmdb_id = ?, mbid = ?, overview = ?, rating = ?,
 			year = COALESCE(year, ?), poster = COALESCE(poster, ?), backdrop = COALESCE(backdrop, ?),
 			title = CASE WHEN kind = 'episode' AND ? != '' AND title LIKE 'Episode %' THEN ? ELSE title END,
 			meta_at = ?
 		WHERE id = ?`,
-		m.TMDBID, nullStr(m.Overview), nullFloat(m.Rating), nullInt(m.Year), nullStr(m.Poster), nullStr(m.Backdrop),
+		nullInt64(m.TMDBID), nullStr(m.MBID), nullStr(m.Overview), nullFloat(m.Rating), nullInt(m.Year), nullStr(m.Poster), nullStr(m.Backdrop),
 		m.Title, m.Title, now(), id)
 	return err
 }
 
 func nullInt(n int) any {
+	if n == 0 {
+		return nil
+	}
+	return n
+}
+
+func nullInt64(n int64) any {
 	if n == 0 {
 		return nil
 	}

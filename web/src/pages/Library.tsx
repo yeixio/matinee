@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import { ArrowDownAZ, Clock } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { api } from '../api'
+import { api, pendingRefetch } from '../api'
 import { GridSkeleton, PosterGrid } from '../components/Card'
 import { LibraryIcon, useLibraries } from '../components/Shell'
 import { EmptyState } from '../components/ui'
@@ -14,7 +14,7 @@ export default function Library() {
   const { data: items, isPending } = useQuery({
     queryKey: ['library', id],
     queryFn: () => api.libraryItems(id),
-    refetchInterval: lib?.scanning ? 3000 : false,
+    refetchInterval: (q) => (lib?.scanning ? 3000 : pendingRefetch(q.state.data)),
   })
   const [sort, setSort] = useState<'title' | 'added'>('title')
   const sorted = useMemo(
