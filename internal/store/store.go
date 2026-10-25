@@ -158,6 +158,7 @@ var migrations = []string{
 		source_mtime BIGINT NOT NULL DEFAULT 0,
 		size         BIGINT NOT NULL DEFAULT 0,
 		sha256       TEXT NOT NULL DEFAULT '',
+		md5          TEXT NOT NULL DEFAULT '',
 		mime_type    TEXT NOT NULL DEFAULT '',
 		created_at   BIGINT NOT NULL,
 		updated_at   BIGINT NOT NULL,

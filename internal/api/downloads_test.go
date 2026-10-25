@@ -1,8 +1,10 @@
 package api
 
 import (
+	"crypto/md5"
 	"crypto/sha256"
 	"encoding/hex"
+	"fmt"
 	"io"
 	"net/http"
 	"os"
@@ -105,7 +107,7 @@ func TestDownloads(t *testing.T) {
 	}
 	orig = waitForDownload(t, phone, orig.ID)
 	want, _ := os.ReadFile(moviePath)
-	if orig.SHA256 != sha(want) || orig.Size != int64(len(want)) || orig.MimeType != "video/x-matroska" {
+	if orig.SHA256 != sha(want) || orig.MD5 != fmt.Sprintf("%x", md5.Sum(want)) || orig.Size != int64(len(want)) || orig.MimeType != "video/x-matroska" {
 		t.Fatalf("original: %+v", orig)
 	}
 

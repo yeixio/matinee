@@ -30,16 +30,19 @@ const (
 )
 
 type Download struct {
-	ID         string `json:"id"`
-	ItemID     int64  `json:"itemId"`
-	DeviceID   string `json:"deviceId"`
-	Quality    string `json:"quality"`
-	Subtitle   string `json:"subtitle,omitempty"` // a picture subtitle track drawn into the video
-	State      string `json:"state"`
-	Progress   int    `json:"progress"` // thousandths, while preparing
-	Error      string `json:"error,omitempty"`
-	Size       int64  `json:"size,omitempty"`
-	SHA256     string `json:"sha256,omitempty"`
+	ID       string `json:"id"`
+	ItemID   int64  `json:"itemId"`
+	DeviceID string `json:"deviceId"`
+	Quality  string `json:"quality"`
+	Subtitle string `json:"subtitle,omitempty"` // a picture subtitle track drawn into the video
+	State    string `json:"state"`
+	Progress int    `json:"progress"` // thousandths, while preparing
+	Error    string `json:"error,omitempty"`
+	Size     int64  `json:"size,omitempty"`
+	SHA256   string `json:"sha256,omitempty"`
+	// MD5 is there for devices that can hash a file natively only with MD5;
+	// it guards against a broken transfer, not tampering.
+	MD5        string `json:"md5,omitempty"`
 	MimeType   string `json:"mimeType,omitempty"`
 	CreatedAt  int64  `json:"createdAt"`
 	UpdatedAt  int64  `json:"updatedAt"`
@@ -53,13 +56,13 @@ type Download struct {
 	SourceMtime int64 `json:"-"`
 }
 
-const downloadCols = `id, item_id, device_id, quality, subtitle, state, progress, error, size, sha256, mime_type,
+const downloadCols = `id, item_id, device_id, quality, subtitle, state, progress, error, size, sha256, md5, mime_type,
 	created_at, updated_at, finished_at, user_id, attempts, file, source_size, source_mtime`
 
 func scanDownload(row interface{ Scan(...any) error }) (Download, error) {
 	var d Download
 	err := row.Scan(&d.ID, &d.ItemID, &d.DeviceID, &d.Quality, &d.Subtitle, &d.State, &d.Progress, &d.Error,
-		&d.Size, &d.SHA256, &d.MimeType, &d.CreatedAt, &d.UpdatedAt, &d.FinishedAt,
+		&d.Size, &d.SHA256, &d.MD5, &d.MimeType, &d.CreatedAt, &d.UpdatedAt, &d.FinishedAt,
 		&d.UserID, &d.Attempts, &d.File, &d.SourceSize, &d.SourceMtime)
 	return d, err
 }
@@ -84,27 +87,26 @@ func (s *Store) PutDownload(ctx context.Context, d Download) (Download, error) {
 	default:
 		d.ID, d.CreatedAt = old.ID, old.CreatedAt
 	}
-	d.State, d.Progress, d.Error, d.Size, d.SHA256, d.Attempts, d.UpdatedAt, d.FinishedAt =
-		DownloadQueued, 0, "", 0, "", 0, now(), 0
+	d.State, d.Progress, d.Error, d.Size, d.SHA256, d.MD5, d.Attempts, d.UpdatedAt, d.FinishedAt =
+		DownloadQueued, 0, "", 0, "", "", 0, now(), 0
 	// Another device may already have this file ready.
-	var size int64
-	var sum string
-	var mtime int64
-	err = s.db.QueryRowContext(ctx, `SELECT size, sha256, source_mtime FROM downloads
+	var size, mtime int64
+	var sum, md5 string
+	err = s.db.QueryRowContext(ctx, `SELECT size, sha256, md5, source_mtime FROM downloads
 		WHERE file = ? AND quality = ? AND subtitle = ? AND sha256 <> '' AND state = ? ORDER BY updated_at DESC LIMIT 1`,
-		d.File, d.Quality, d.Subtitle, DownloadReady).Scan(&size, &sum, &mtime)
+		d.File, d.Quality, d.Subtitle, DownloadReady).Scan(&size, &sum, &md5, &mtime)
 	if err == nil {
-		d.State, d.Size, d.SHA256, d.SourceMtime = DownloadReady, size, sum, mtime
+		d.State, d.Size, d.SHA256, d.MD5, d.SourceMtime = DownloadReady, size, sum, md5, mtime
 	} else if !errors.Is(err, sql.ErrNoRows) {
 		return d, err
 	}
 	_, err = s.db.ExecContext(ctx, `
-		INSERT INTO downloads (`+downloadCols+`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+		INSERT INTO downloads (`+downloadCols+`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 		ON CONFLICT (id) DO UPDATE SET quality = excluded.quality, subtitle = excluded.subtitle,
-			state = excluded.state, progress = 0, error = '', size = excluded.size, sha256 = excluded.sha256,
+			state = excluded.state, progress = 0, error = '', size = excluded.size, sha256 = excluded.sha256, md5 = excluded.md5,
 			mime_type = excluded.mime_type, updated_at = excluded.updated_at, finished_at = 0, attempts = 0,
 			not_before = 0, file = excluded.file, source_size = excluded.source_size, source_mtime = excluded.source_mtime`,
-		d.ID, d.ItemID, d.DeviceID, d.Quality, d.Subtitle, d.State, 0, "", d.Size, d.SHA256, d.MimeType,
+		d.ID, d.ItemID, d.DeviceID, d.Quality, d.Subtitle, d.State, 0, "", d.Size, d.SHA256, d.MD5, d.MimeType,
 		d.CreatedAt, d.UpdatedAt, 0, d.UserID, 0, d.File, d.SourceSize, d.SourceMtime)
 	return d, err
 }
@@ -252,10 +254,10 @@ func (s *Store) SetDownloadProgress(ctx context.Context, file string, permille i
 
 // DownloadPrepared marks every download being prepared from file as ready.
 // For an original, sourceMtime is the mtime the checksum is for (0 otherwise).
-func (s *Store) DownloadPrepared(ctx context.Context, file string, size int64, sha256 string, sourceMtime int64) error {
-	_, err := s.db.ExecContext(ctx, `UPDATE downloads SET state = ?, progress = 1000, size = ?, sha256 = ?, error = '', updated_at = ?,
+func (s *Store) DownloadPrepared(ctx context.Context, file string, size int64, sha256, md5 string, sourceMtime int64) error {
+	_, err := s.db.ExecContext(ctx, `UPDATE downloads SET state = ?, progress = 1000, size = ?, sha256 = ?, md5 = ?, error = '', updated_at = ?,
 		source_mtime = CASE WHEN ? > 0 THEN ? ELSE source_mtime END WHERE file = ? AND state = ?`,
-		DownloadReady, size, sha256, now(), sourceMtime, sourceMtime, file, DownloadPreparing)
+		DownloadReady, size, sha256, md5, now(), sourceMtime, sourceMtime, file, DownloadPreparing)
 	return err
 }
 
@@ -272,7 +274,7 @@ func (s *Store) DownloadFailed(ctx context.Context, file, msg string, maxAttempt
 
 // RequeueDownload prepares a ready download again, as when its file went missing or changed.
 func (s *Store) RequeueDownload(ctx context.Context, d Download) error {
-	_, err := s.db.ExecContext(ctx, "UPDATE downloads SET state = ?, progress = 0, size = 0, sha256 = '', updated_at = ?, file = ?, source_size = ?, source_mtime = ? WHERE id = ?",
+	_, err := s.db.ExecContext(ctx, "UPDATE downloads SET state = ?, progress = 0, size = 0, sha256 = '', md5 = '', updated_at = ?, file = ?, source_size = ?, source_mtime = ? WHERE id = ?",
 		DownloadQueued, now(), d.File, d.SourceSize, d.SourceMtime, d.ID)
 	return err
 }

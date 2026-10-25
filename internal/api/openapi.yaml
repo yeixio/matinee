@@ -733,6 +733,7 @@ components:
         error: { type: string, description: Why it failed, fit to show a person. }
         size: { type: integer, description: Bytes, once ready. }
         sha256: { type: string, description: Hex SHA-256 of the file, once ready. }
+        md5: { type: string, description: "Hex MD5 of the file, once ready, for devices that can only hash files natively with MD5. It catches broken transfers, not tampering." }
         mimeType: { type: string }
         url: { type: string, example: /api/v1/downloads/abc123/file }
         createdAt: { type: integer }

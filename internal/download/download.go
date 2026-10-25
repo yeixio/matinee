@@ -8,6 +8,7 @@ package download
 import (
 	"bufio"
 	"context"
+	"crypto/md5"
 	"crypto/sha256"
 	"encoding/hex"
 	"errors"
@@ -177,7 +178,7 @@ func (m *Manager) prepare(ctx context.Context, d store.Download) {
 	log := m.Log.With("download", d.ID, "item", d.ItemID, "quality", d.Quality)
 	log.Info("download preparing")
 	start := time.Now()
-	size, sum, mtime, err := m.build(jobCtx, d)
+	sum, mtime, err := m.build(jobCtx, d)
 	if ctx.Err() != nil {
 		return // shutting down; RequeueInterrupted picks it up next time
 	}
@@ -192,62 +193,62 @@ func (m *Manager) prepare(ctx context.Context, d store.Download) {
 		}
 		return
 	}
-	if err := m.Store.DownloadPrepared(ctx, d.File, size, sum, mtime); err != nil {
+	if err := m.Store.DownloadPrepared(ctx, d.File, sum.size, sum.sha256, sum.md5, mtime); err != nil {
 		log.Error("downloads: record ready", "err", err)
 		return
 	}
-	log.Info("download ready", "size", size, "took", time.Since(start).Round(time.Second))
+	log.Info("download ready", "size", sum.size, "took", time.Since(start).Round(time.Second))
 }
 
 // build makes the file if needed and checksums it. For an original it also
 // returns the mtime the checksum is for, which the file is served against.
-func (m *Manager) build(ctx context.Context, d store.Download) (size int64, sum string, mtime int64, err error) {
+func (m *Manager) build(ctx context.Context, d store.Download) (sums, int64, error) {
 	if !m.Converted(d) {
 		before, err := os.Stat(d.File)
 		if err != nil {
-			return 0, "", 0, errors.New("the file isn't available on the server right now")
+			return sums{}, 0, errors.New("the file isn't available on the server right now")
 		}
-		size, sum, err = m.checksum(ctx, d.File, 0, 1000)
+		sum, err := m.checksum(ctx, d.File, 0, 1000)
 		if err != nil {
-			return 0, "", 0, err
+			return sums{}, 0, err
 		}
 		if after, err := os.Stat(d.File); err != nil || !after.ModTime().Equal(before.ModTime()) {
-			return 0, "", 0, errors.New("the file changed while it was being read")
+			return sums{}, 0, errors.New("the file changed while it was being read")
 		}
-		return size, sum, before.ModTime().Unix(), nil
+		return sum, before.ModTime().Unix(), nil
 	}
 	if _, err := os.Stat(d.File); err == nil {
 		// Made earlier and still on disk (a download of it was removed and asked for again).
-		size, sum, err = m.checksum(ctx, d.File, 0, 1000)
-		return size, sum, 0, err
+		sum, err := m.checksum(ctx, d.File, 0, 1000)
+		return sum, 0, err
 	}
 	it, err := m.Store.Item(ctx, 0, d.ItemID)
 	if err != nil {
-		return 0, "", 0, fmt.Errorf("item: %w", err)
+		return sums{}, 0, fmt.Errorf("item: %w", err)
 	}
 	q, ok := QualityByName(d.Quality)
 	if !ok {
-		return 0, "", 0, fmt.Errorf("unknown quality %q", d.Quality)
+		return sums{}, 0, fmt.Errorf("unknown quality %q", d.Quality)
 	}
 	burn := -1
 	if d.Subtitle != "" && m.SubtitleStream != nil {
 		if burn, ok = m.SubtitleStream(ctx, it, d.Subtitle); !ok {
-			return 0, "", 0, errors.New("that subtitle track is gone")
+			return sums{}, 0, errors.New("that subtitle track is gone")
 		}
 	}
 	part := d.File + ".part"
 	defer os.Remove(part)
 	if err := m.convert(ctx, it, q, burn, part); err != nil {
-		return 0, "", 0, err
+		return sums{}, 0, err
 	}
 	// Only a finished conversion gets the real name, so a file under that
 	// name is always whole.
 	if err := os.Rename(part, d.File); err != nil {
-		return 0, "", 0, err
+		return sums{}, 0, err
 	}
 	// Converting is 95% of the work; checksumming the result is the rest.
-	size, sum, err = m.checksum(ctx, d.File, 950, 1000)
-	return size, sum, 0, err
+	sum, err := m.checksum(ctx, d.File, 950, 1000)
+	return sum, 0, err
 }
 
 // ConvertArgs is the FFmpeg command line converting it to a single MP4 (or
@@ -335,24 +336,31 @@ func (m *Manager) convert(ctx context.Context, it store.Item, q Quality, burnSub
 	return nil
 }
 
+// sums are a prepared file's checksums.
+type sums struct {
+	size        int64
+	sha256, md5 string
+}
+
 // checksum hashes a file, reporting progress between from and to thousandths.
-func (m *Manager) checksum(ctx context.Context, path string, from, to int) (int64, string, error) {
+func (m *Manager) checksum(ctx context.Context, path string, from, to int) (sums, error) {
 	f, err := os.Open(path)
 	if err != nil {
-		return 0, "", err
+		return sums{}, err
 	}
 	defer f.Close()
 	info, err := f.Stat()
 	if err != nil {
-		return 0, "", err
+		return sums{}, err
 	}
-	h := sha256.New()
+	sh, mh := sha256.New(), md5.New()
+	h := io.MultiWriter(sh, mh)
 	buf := make([]byte, 1<<20)
 	var done int64
 	last := time.Now()
 	for {
 		if err := ctx.Err(); err != nil {
-			return 0, "", err
+			return sums{}, err
 		}
 		n, err := f.Read(buf)
 		h.Write(buf[:n])
@@ -361,7 +369,7 @@ func (m *Manager) checksum(ctx context.Context, path string, from, to int) (int6
 			break
 		}
 		if err != nil {
-			return 0, "", fmt.Errorf("reading the file: %w", err)
+			return sums{}, fmt.Errorf("reading the file: %w", err)
 		}
 		if time.Since(last) > 2*time.Second && info.Size() > 0 {
 			last = time.Now()
@@ -369,9 +377,9 @@ func (m *Manager) checksum(ctx context.Context, path string, from, to int) (int6
 		}
 	}
 	if done != info.Size() {
-		return 0, "", errors.New("the file changed while it was being read")
+		return sums{}, errors.New("the file changed while it was being read")
 	}
-	return done, hex.EncodeToString(h.Sum(nil)), nil
+	return sums{done, hex.EncodeToString(sh.Sum(nil)), hex.EncodeToString(mh.Sum(nil))}, nil
 }
 
 // recheck queues ready downloads whose converted file is gone again, as
