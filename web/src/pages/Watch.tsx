@@ -64,6 +64,13 @@ export default function Watch() {
   const burned = useRef<string>(undefined)
   const lastSub = useRef<SubtitleTrack>(undefined)
   const menuOpen = useRef(false)
+  // Counts transcode starts so a slow, replaced one can't take over the player.
+  const hlsSeq = useRef(0)
+  // While the seek bar is held, where it points. The seek happens on release.
+  const [scrub, setScrub] = useState<number>()
+  const scrubAt = useRef<number>(undefined)
+  const dragging = useRef(false)
+  const scrubTimer = useRef<number>(undefined)
 
   const duration = item?.durationMs ? item.durationMs / 1000 : 0
   const position = useCallback(() => offset.current + (video.current?.currentTime ?? 0), [])
@@ -72,15 +79,19 @@ export default function Watch() {
     async (at: number, burn = burned.current) => {
       const el = video.current
       if (!el || !item) return
+      const seq = ++hlsSeq.current
       setWaiting(true)
+      setError('')
       hls.current?.destroy()
       hls.current = null
       burned.current = burn
       try {
         const { url } = await api.startHls(item.id, Math.floor(at), burn)
+        if (seq !== hlsSeq.current) return
         offset.current = Math.floor(at)
         // hls.js is only downloaded when a file needs converting.
         const { default: Hls } = await import('hls.js')
+        if (seq !== hlsSeq.current) return
         if (Hls.isSupported()) {
           const h = new Hls({ maxBufferLength: 60 })
           h.loadSource(url)
@@ -93,6 +104,8 @@ export default function Watch() {
         setMode('hls')
         el.play().catch(() => setPaused(true))
       } catch (e) {
+        // A newer seek replaced this transcode, which isn't a failure.
+        if (seq !== hlsSeq.current) return
         setError(e instanceof Error ? e.message : 'Playback failed')
       }
     },
@@ -103,6 +116,7 @@ export default function Watch() {
     (at: number) => {
       const el = video.current
       if (!el || !item) return
+      hlsSeq.current++
       hls.current?.destroy()
       hls.current = null
       burned.current = undefined
@@ -191,6 +205,29 @@ export default function Watch() {
     else startHls(to)
   }
 
+  // Direct play seeks live while dragging. A transcode restarts on each far
+  // seek, so it waits for the bar to be let go (or a pause in key presses).
+  const scrubTo = (to: number) => {
+    window.clearTimeout(scrubTimer.current)
+    if (mode === 'direct') {
+      seek(to)
+      return
+    }
+    scrubAt.current = to
+    setScrub(to)
+    if (!dragging.current) scrubTimer.current = window.setTimeout(commitScrub, 400)
+  }
+  const commitScrub = () => {
+    window.clearTimeout(scrubTimer.current)
+    dragging.current = false
+    const to = scrubAt.current
+    if (to === undefined) return
+    scrubAt.current = undefined
+    setScrub(undefined)
+    setTime(to)
+    seek(to)
+  }
+
   const toggle = () => {
     const el = video.current
     if (!el) return
@@ -248,7 +285,8 @@ export default function Watch() {
   })
 
   const t = item ? displayTitle(item) : { title: '', sub: '' }
-  const frac = duration ? Math.min(1, time / duration) : 0
+  const shown = scrub ?? time
+  const frac = duration ? Math.min(1, shown / duration) : 0
 
   return (
     <div
@@ -319,8 +357,11 @@ export default function Watch() {
               min={0}
               max={duration || 1}
               step={1}
-              value={time}
-              onChange={(e) => seek(Number(e.target.value))}
+              value={shown}
+              onPointerDown={() => (dragging.current = true)}
+              onPointerUp={commitScrub}
+              onPointerCancel={() => commitScrub()}
+              onChange={(e) => scrubTo(Number(e.target.value))}
               aria-label="Seek"
               className="absolute inset-0 w-full cursor-pointer opacity-0"
             />
@@ -343,7 +384,7 @@ export default function Watch() {
               {muted ? <VolumeX className="size-6" /> : <Volume2 className="size-6" />}
             </button>
             <div className="text-sm text-white/80 tabular-nums">
-              {clock(time)} <span className="text-white/40">/ {clock(duration)}</span>
+              {clock(shown)} <span className="text-white/40">/ {clock(duration)}</span>
             </div>
             <div className="ml-auto flex items-center gap-2">
               {mode === 'hls' && <span className="hidden rounded bg-white/10 px-2 py-0.5 text-xs text-white/60 sm:inline">Converting</span>}

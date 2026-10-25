@@ -26,6 +26,10 @@ const (
 	startupWait    = 20 * time.Second
 )
 
+// ErrSuperseded means a newer Start for the same viewer and item replaced this
+// one before it was ready, as happens while dragging the seek bar.
+var ErrSuperseded = errors.New("replaced by a newer transcode")
+
 var hlsFileRe = regexp.MustCompile(`^(index\.m3u8|seg\d{5}\.ts)$`)
 
 // Transcoder runs one FFmpeg process per playback session and serves its HLS output.
@@ -47,6 +51,8 @@ type session struct {
 	cmd      *exec.Cmd
 	done     chan struct{}
 	lastSeen time.Time
+	// superseded is set (under Transcoder.mu) when a newer session replaces this one.
+	superseded bool
 }
 
 func NewTranscoder(ffmpeg, dir string, log *slog.Logger) *Transcoder {
@@ -66,6 +72,7 @@ func (t *Transcoder) Start(ctx context.Context, userID int64, it store.Item, sta
 	t.mu.Lock()
 	for id, s := range t.sessions {
 		if s.userID == userID && s.itemID == it.ID {
+			s.superseded = true
 			t.killLocked(id)
 		}
 	}
@@ -131,7 +138,13 @@ func (t *Transcoder) Start(ctx context.Context, userID int64, it store.Item, sta
 
 	// Wait for the first segment so the player can start right away.
 	if err := waitFor(ctx, s, filepath.Join(dir, "seg00000.ts"), startupWait); err != nil {
-		t.Kill(id)
+		t.mu.Lock()
+		superseded := s.superseded
+		t.killLocked(id)
+		t.mu.Unlock()
+		if superseded {
+			return "", ErrSuperseded
+		}
 		return "", err
 	}
 	return id, nil
