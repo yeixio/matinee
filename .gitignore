@@ -21,3 +21,4 @@ web/dist/*
 .idea/
 .vscode/
 demo-media/
+web/*.tsbuildinfo
