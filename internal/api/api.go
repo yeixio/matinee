@@ -40,12 +40,71 @@ type Server struct {
 	BackgroundCtx context.Context
 }
 
+// APIVersion is the version of the documented API served under /api/v1
+// (openapi.yaml). Changes within a version only add things; anything that
+// would break an app goes in /api/v2.
+const APIVersion = 1
+
+type access int
+
+const (
+	public access = iota
+	signedIn
+	adminOnly
+)
+
+type route struct {
+	pattern string // "METHOD /path", relative to /api/v1
+	access  access
+	handler http.HandlerFunc
+}
+
+func (s *Server) routes() []route {
+	return []route{
+		{"GET /health", public, func(w http.ResponseWriter, r *http.Request) {
+			writeJSON(w, http.StatusOK, map[string]any{"status": "ok", "version": version.Version, "apiVersion": APIVersion})
+		}},
+		{"GET /server", public, s.serverInfo},
+		{"GET /openapi.yaml", public, serveOpenAPI},
+		{"GET /setup", public, s.getSetup},
+		{"POST /setup", public, s.postSetup},
+		{"POST /auth/login", public, s.login},
+		{"POST /auth/logout", public, s.logout},
+		{"POST /auth/device", public, s.startDeviceCode},
+		{"POST /auth/device/token", public, s.pollDeviceCode},
+		{"GET /auth/device/{code}", signedIn, s.getDeviceCode},
+		{"POST /auth/device/{code}/approve", signedIn, s.approveDeviceCode},
+		{"POST /auth/device/{code}/deny", signedIn, s.denyDeviceCode},
+
+		{"GET /me", signedIn, s.me},
+		{"GET /devices", signedIn, s.listDevices},
+		{"DELETE /devices/{id}", signedIn, s.deleteDevice},
+		{"GET /users", adminOnly, s.listUsers},
+		{"POST /users", adminOnly, s.createUser},
+
+		{"GET /libraries", signedIn, s.listLibraries},
+		{"POST /libraries", adminOnly, s.createLibrary},
+		{"DELETE /libraries/{id}", adminOnly, s.deleteLibrary},
+		{"POST /libraries/{id}/scan", adminOnly, s.scanLibrary},
+		{"GET /libraries/{id}/items", signedIn, s.libraryItems},
+		{"GET /fs", adminOnly, s.browseFS},
+
+		{"GET /home", signedIn, s.home},
+		{"GET /search", signedIn, s.search},
+		{"GET /items/{id}", signedIn, s.getItem},
+		{"GET /items/{id}/children", signedIn, s.itemChildren},
+		{"PUT /items/{id}/progress", signedIn, s.setProgress},
+		{"GET /items/{id}/image/{type}", signedIn, s.itemImage},
+		{"GET /items/{id}/file", signedIn, s.directFile},
+		{"GET /items/{id}/subtitles/{track}", signedIn, s.subtitleFile},
+		{"POST /items/{id}/hls", signedIn, s.startHLS},
+		{"GET /hls/{session}/{file}", signedIn, s.hlsFile},
+	}
+}
+
 func (s *Server) Handler() http.Handler {
 	mux := http.NewServeMux()
 
-	mux.HandleFunc("GET /api/health", func(w http.ResponseWriter, r *http.Request) {
-		writeJSON(w, http.StatusOK, map[string]string{"status": "ok", "version": version.Version})
-	})
 	// Kubernetes probes: alive means the process answers, ready means the database does too.
 	mux.HandleFunc("GET /healthz", func(w http.ResponseWriter, r *http.Request) { w.Write([]byte("ok")) })
 	mux.HandleFunc("GET /readyz", func(w http.ResponseWriter, r *http.Request) {
@@ -57,35 +116,18 @@ func (s *Server) Handler() http.Handler {
 		}
 		w.Write([]byte("ok"))
 	})
-	mux.HandleFunc("GET /api/setup", s.getSetup)
-	mux.HandleFunc("POST /api/setup", s.postSetup)
-	mux.HandleFunc("POST /api/auth/login", s.login)
-	mux.HandleFunc("POST /api/auth/logout", s.logout)
 
-	user := func(pattern string, h http.HandlerFunc) { mux.Handle(pattern, s.requireUser(h, false)) }
-	admin := func(pattern string, h http.HandlerFunc) { mux.Handle(pattern, s.requireUser(h, true)) }
-
-	user("GET /api/me", s.me)
-	admin("GET /api/users", s.listUsers)
-	admin("POST /api/users", s.createUser)
-
-	user("GET /api/libraries", s.listLibraries)
-	admin("POST /api/libraries", s.createLibrary)
-	admin("DELETE /api/libraries/{id}", s.deleteLibrary)
-	admin("POST /api/libraries/{id}/scan", s.scanLibrary)
-	user("GET /api/libraries/{id}/items", s.libraryItems)
-	admin("GET /api/fs", s.browseFS)
-
-	user("GET /api/home", s.home)
-	user("GET /api/search", s.search)
-	user("GET /api/items/{id}", s.getItem)
-	user("GET /api/items/{id}/children", s.itemChildren)
-	user("PUT /api/items/{id}/progress", s.setProgress)
-	user("GET /api/items/{id}/image/{type}", s.itemImage)
-	user("GET /api/items/{id}/file", s.directFile)
-	user("GET /api/items/{id}/subtitles/{track}", s.subtitleFile)
-	user("POST /api/items/{id}/hls", s.startHLS)
-	user("GET /api/hls/{session}/{file}", s.hlsFile)
+	for _, rt := range s.routes() {
+		var h http.Handler = rt.handler
+		if rt.access != public {
+			h = s.requireUser(rt.handler, rt.access == adminOnly)
+		}
+		method, path, _ := strings.Cut(rt.pattern, " ")
+		mux.Handle(method+" /api/v1"+path, h)
+		// The same routes without a version, as served before /api/v1, for web
+		// players that were open during an upgrade. New clients use /api/v1.
+		mux.Handle(method+" /api"+path, h)
+	}
 
 	mux.HandleFunc("/api/", func(w http.ResponseWriter, r *http.Request) {
 		writeError(w, http.StatusNotFound, "no such endpoint")
@@ -178,7 +220,7 @@ func (s *Server) logRequests(next http.Handler) http.Handler {
 		start := time.Now()
 		rec := &statusRecorder{ResponseWriter: w, status: 200}
 		next.ServeHTTP(rec, r)
-		if strings.HasPrefix(r.URL.Path, "/api/") && !strings.HasPrefix(r.URL.Path, "/api/hls/") {
+		if strings.HasPrefix(r.URL.Path, "/api/") && !strings.HasPrefix(r.URL.Path, "/api/hls/") && !strings.HasPrefix(r.URL.Path, "/api/v1/hls/") {
 			// Rejected requests are logged by default, so "it failed" shows up in the pod logs.
 			level := slog.LevelDebug
 			if rec.status >= 400 && rec.status != http.StatusUnauthorized {
@@ -244,20 +286,28 @@ func (s *Server) postSetup(w http.ResponseWriter, r *http.Request) {
 		s.serverError(w, err)
 		return
 	}
-	s.login(w, r.WithContext(context.WithValue(r.Context(), credsKey{}, c)))
+	s.login(w, r.WithContext(context.WithValue(r.Context(), credsKey{}, loginRequest{credentials: c})))
 }
 
 type credsKey struct{}
 
+type loginRequest struct {
+	credentials
+	// Apps name themselves so people can tell their devices apart; browsers
+	// are named from their User-Agent.
+	DeviceName string `json:"deviceName"`
+	Platform   string `json:"platform"`
+}
+
 func (s *Server) login(w http.ResponseWriter, r *http.Request) {
-	c, ok := r.Context().Value(credsKey{}).(credentials)
+	req, ok := r.Context().Value(credsKey{}).(loginRequest)
 	if !ok {
-		if err := readJSON(r, &c); err != nil {
+		if err := readJSON(r, &req); err != nil {
 			writeError(w, http.StatusBadRequest, "invalid request")
 			return
 		}
 	}
-	u, token, err := auth.Login(r.Context(), s.Store, strings.TrimSpace(c.Username), c.Password)
+	u, token, err := auth.Login(r.Context(), s.Store, strings.TrimSpace(req.Username), req.Password, requestDevice(r, req.DeviceName, req.Platform))
 	if errors.Is(err, auth.ErrBadCredentials) {
 		writeError(w, http.StatusUnauthorized, err.Error())
 		return
@@ -266,11 +316,34 @@ func (s *Server) login(w http.ResponseWriter, r *http.Request) {
 		s.serverError(w, err)
 		return
 	}
+	setSessionCookie(w, r, token)
+	writeJSON(w, http.StatusOK, map[string]any{"user": u, "token": token})
+}
+
+func setSessionCookie(w http.ResponseWriter, r *http.Request, token string) {
 	http.SetCookie(w, &http.Cookie{
 		Name: auth.CookieName, Value: token, Path: "/", HttpOnly: true,
 		SameSite: http.SameSiteLaxMode, Secure: r.TLS != nil, MaxAge: int(auth.SessionTTL.Seconds()),
 	})
-	writeJSON(w, http.StatusOK, map[string]any{"user": u, "token": token})
+}
+
+// requestDevice names the device a request comes from.
+func requestDevice(r *http.Request, name, platform string) store.Device {
+	name, platform = clip(strings.TrimSpace(name), 80), clip(strings.ToLower(strings.TrimSpace(platform)), 20)
+	if name == "" {
+		name = auth.BrowserName(r.UserAgent())
+		if platform == "" {
+			platform = "web"
+		}
+	}
+	return store.Device{Name: name, Platform: platform}
+}
+
+func clip(s string, n int) string {
+	if r := []rune(s); len(r) > n {
+		return string(r[:n])
+	}
+	return s
 }
 
 func (s *Server) logout(w http.ResponseWriter, r *http.Request) {
@@ -652,7 +725,7 @@ func (s *Server) startHLS(w http.ResponseWriter, r *http.Request) {
 		writeError(w, http.StatusInternalServerError, "couldn't start playback for this file")
 		return
 	}
-	writeJSON(w, http.StatusOK, map[string]any{"url": "/api/hls/" + id + "/index.m3u8", "startSec": start})
+	writeJSON(w, http.StatusOK, map[string]any{"url": "/api/v1/hls/" + id + "/index.m3u8", "startSec": start})
 }
 
 // subtitleTracks lists a video's subtitle tracks. Files scanned before

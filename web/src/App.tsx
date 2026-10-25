@@ -13,6 +13,7 @@ import { Spinner } from './components/ui'
 
 const Watch = lazy(() => import('./pages/Watch'))
 const Settings = lazy(() => import('./pages/Settings'))
+const Link = lazy(() => import('./pages/Link'))
 
 export default function App() {
   const me = useQuery({ queryKey: ['me'], queryFn: api.me, staleTime: Infinity })
@@ -42,6 +43,7 @@ export default function App() {
           <Route path="/item/:id" element={<ItemPage />} />
           <Route path="/search" element={<Search />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/link" element={<Link user={me.data} />} />
         </Route>
       </Routes>
       </Suspense>

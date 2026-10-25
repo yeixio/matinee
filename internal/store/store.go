@@ -125,6 +125,21 @@ var migrations = []string{
 		(kind IN ('movie', 'episode') AND COALESCE(video_codec, '') = ''))`,
 	// 4: MusicBrainz ids for artists and albums.
 	"ALTER TABLE items ADD COLUMN mbid TEXT",
+	// 5–8: sessions say which device they belong to, so people can see and sign out their devices.
+	"ALTER TABLE sessions ADD COLUMN device_name TEXT NOT NULL DEFAULT ''",
+	"ALTER TABLE sessions ADD COLUMN platform TEXT NOT NULL DEFAULT ''",
+	"ALTER TABLE sessions ADD COLUMN created_at BIGINT NOT NULL DEFAULT 0",
+	"ALTER TABLE sessions ADD COLUMN last_seen_at BIGINT NOT NULL DEFAULT 0",
+	// 9: pending sign-ins from devices that show a code (see devices.go).
+	`CREATE TABLE device_codes (
+		device_code TEXT PRIMARY KEY,
+		user_code   TEXT NOT NULL UNIQUE,
+		device_name TEXT NOT NULL,
+		platform    TEXT NOT NULL,
+		user_id     BIGINT REFERENCES users(id) ON DELETE CASCADE,
+		denied      INTEGER NOT NULL DEFAULT 0,
+		expires_at  BIGINT NOT NULL
+	)`,
 }
 
 func now() int64 { return time.Now().Unix() }
@@ -199,22 +214,44 @@ func (s *Store) scanUser(row *sql.Row) (User, error) {
 	return u, err
 }
 
-func (s *Store) CreateSession(ctx context.Context, userID int64, ttl time.Duration) (string, error) {
+// Device names the app or browser a session belongs to.
+type Device struct {
+	Name     string
+	Platform string // ios, android, web, tv…
+}
+
+func (s *Store) CreateSession(ctx context.Context, userID int64, ttl time.Duration, dev Device) (string, error) {
 	b := make([]byte, 32)
 	if _, err := rand.Read(b); err != nil {
 		return "", err
 	}
 	token := hex.EncodeToString(b)
-	_, err := s.db.ExecContext(ctx, "INSERT INTO sessions (token, user_id, expires_at) VALUES (?, ?, ?)",
-		token, userID, time.Now().Add(ttl).Unix())
+	_, err := s.db.ExecContext(ctx, `INSERT INTO sessions (token, user_id, expires_at, device_name, platform, created_at, last_seen_at)
+		VALUES (?, ?, ?, ?, ?, ?, ?)`,
+		token, userID, time.Now().Add(ttl).Unix(), dev.Name, dev.Platform, now(), now())
 	return token, err
 }
 
+// seenEvery is how stale last_seen_at may get, so requests don't each write to the database.
+const seenEvery = 5 * 60
+
 func (s *Store) SessionUser(ctx context.Context, token string) (User, error) {
-	return s.scanUser(s.db.QueryRowContext(ctx, `
-		SELECT u.id, u.username, u.is_admin, u.password_hash
+	var u User
+	var seen int64
+	err := s.db.QueryRowContext(ctx, `
+		SELECT u.id, u.username, u.is_admin, u.password_hash, s.last_seen_at
 		FROM sessions s JOIN users u ON u.id = s.user_id
-		WHERE s.token = ? AND s.expires_at > ?`, token, now()))
+		WHERE s.token = ? AND s.expires_at > ?`, token, now()).Scan(&u.ID, &u.Username, &u.IsAdmin, &u.hash, &seen)
+	if errors.Is(err, sql.ErrNoRows) {
+		return u, ErrNotFound
+	}
+	if err != nil {
+		return u, err
+	}
+	if now()-seen > seenEvery {
+		s.db.ExecContext(ctx, "UPDATE sessions SET last_seen_at = ? WHERE token = ?", now(), token)
+	}
+	return u, nil
 }
 
 func (s *Store) DeleteSession(ctx context.Context, token string) error {

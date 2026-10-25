@@ -58,3 +58,11 @@ func TestStartSupersededByNewerSeek(t *testing.T) {
 		t.Fatalf("replaced start returned %v, want ErrSuperseded", err)
 	}
 }
+
+func TestSignPlaylist(t *testing.T) {
+	in := "#EXTM3U\n#EXT-X-TARGETDURATION:4\n#EXTINF:4.0,\nseg00000.ts\n#EXTINF:4.0,\nseg00001.ts\n"
+	want := "#EXTM3U\n#EXT-X-TARGETDURATION:4\n#EXTINF:4.0,\nseg00000.ts?token=a%2Bb\n#EXTINF:4.0,\nseg00001.ts?token=a%2Bb\n"
+	if got := string(signPlaylist([]byte(in), "a+b")); got != want {
+		t.Fatalf("got\n%s\nwant\n%s", got, want)
+	}
+}

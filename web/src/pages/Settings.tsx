@@ -1,16 +1,20 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { ChevronLeft, Folder, FolderOpen, Plus, RefreshCw, Trash2, UserPlus, X } from 'lucide-react'
+import { ChevronLeft, Folder, FolderOpen, Monitor, Plus, RefreshCw, Trash2, UserPlus, X } from 'lucide-react'
 import { useState, type FormEvent } from 'react'
-import { api } from '../api'
+import { useNavigate } from 'react-router-dom'
+import { api, type User } from '../api'
 import { LibraryIcon, useLibraries } from '../components/Shell'
 import { Button, Field, inputClass } from '../components/ui'
+import { DeviceIcon } from './Link'
 
 export default function Settings() {
+  const { data: me } = useQuery<User>({ queryKey: ['me'], queryFn: api.me, staleTime: Infinity })
   return (
     <div className="max-w-3xl space-y-12">
       <h1 className="text-2xl font-bold tracking-tight">Settings</h1>
-      <Libraries />
-      <Users />
+      {me?.isAdmin && <Libraries />}
+      {me?.isAdmin && <Users />}
+      <Devices />
       {/* TMDB's API terms ask apps that use it for this notice. */}
       <p className="text-xs text-faint">
         Posters and descriptions come from{' '}
@@ -252,6 +256,52 @@ function Users() {
         </Button>
       </form>
       {create.error && <p className="text-sm text-red-400">{create.error.message}</p>}
+    </section>
+  )
+}
+
+function lastSeen(unix: number) {
+  if (!unix) return 'a while ago'
+  const mins = Math.round((Date.now() / 1000 - unix) / 60)
+  if (mins < 10) return 'just now'
+  if (mins < 60) return `${mins} min ago`
+  if (mins < 60 * 24) return `${Math.round(mins / 60)} h ago`
+  return new Date(unix * 1000).toLocaleDateString()
+}
+
+function Devices() {
+  const qc = useQueryClient()
+  const { data: devices = [] } = useQuery({ queryKey: ['devices'], queryFn: api.devices })
+  const navigate = useNavigate()
+  const signOut = useMutation({ mutationFn: api.signOutDevice, onSuccess: () => qc.invalidateQueries({ queryKey: ['devices'] }) })
+  return (
+    <section className="space-y-4">
+      <div className="flex items-center justify-between">
+        <h2 className="text-lg font-semibold">Your devices</h2>
+        <Button onClick={() => navigate('/link')}>Sign in a device</Button>
+      </div>
+      <div className="divide-y divide-line/60 rounded-xl border border-line/60 bg-surface/50">
+        {devices.map((d) => (
+          <div key={d.id} className="flex items-center gap-4 p-4">
+            <span className="grid size-10 place-items-center rounded-lg bg-white/5 text-accent">
+              {d.platform === 'web' ? <Monitor className="size-5" /> : <DeviceIcon platform={d.platform} />}
+            </span>
+            <div className="min-w-0 flex-1">
+              <div className="truncate font-medium">{d.deviceName || 'Unknown device'}</div>
+              <div className="text-xs text-muted">{d.current ? 'This device' : `Last used ${lastSeen(d.lastSeenAt)}`}</div>
+            </div>
+            {!d.current && (
+              <Button
+                variant="ghost"
+                disabled={signOut.isPending}
+                onClick={() => confirm(`Sign out "${d.deviceName}"?`) && signOut.mutate(d.id)}
+              >
+                Sign out
+              </Button>
+            )}
+          </div>
+        ))}
+      </div>
     </section>
   )
 }
