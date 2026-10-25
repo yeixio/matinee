@@ -2,7 +2,9 @@
 // internal/api/openapi.yaml). The session lives in an HttpOnly cookie, so
 // requests just need to be same-origin.
 
-export type User = { id: number; username: string; isAdmin: boolean }
+// guest is the shared account of a device at home that hasn't signed in.
+export type User = { id: number; username: string; isAdmin: boolean; guest?: boolean }
+export type Settings = { requireSignInAtHome: boolean }
 
 export type Device = {
   id: string
@@ -100,6 +102,7 @@ async function request<T>(method: string, path: string, body?: unknown): Promise
 }
 
 export const api = {
+  server: () => request<{ version: string; apiVersion: number; name?: string }>('GET', '/api/v1/server'),
   setup: () => request<{ needsSetup: boolean }>('GET', '/api/v1/setup'),
   createAdmin: (username: string, password: string) =>
     request<{ user: User }>('POST', '/api/v1/setup', { username, password }),
@@ -122,6 +125,8 @@ export const api = {
   browse: (path: string) =>
     request<{ path: string; parent: string; dirs: string[] }>('GET', `/api/v1/fs?path=${encodeURIComponent(path)}`),
 
+  settings: () => request<Settings>('GET', '/api/v1/settings'),
+  saveSettings: (s: Settings) => request<Settings>('PUT', '/api/v1/settings', s),
   users: () => request<User[]>('GET', '/api/v1/users'),
   createUser: (username: string, password: string, isAdmin: boolean) =>
     request<User>('POST', '/api/v1/users', { username, password, isAdmin }),

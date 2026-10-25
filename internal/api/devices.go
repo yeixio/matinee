@@ -1,6 +1,7 @@
 package api
 
 import (
+	"cmp"
 	_ "embed"
 	"errors"
 	"net/http"
@@ -33,11 +34,19 @@ func (s *Server) serverInfo(w http.ResponseWriter, r *http.Request) {
 		s.serverError(w, err)
 		return
 	}
+	home, err := s.homeAccess(r)
+	if err != nil {
+		s.serverError(w, err)
+		return
+	}
 	writeJSON(w, http.StatusOK, map[string]any{
 		"product":    "matinee",
 		"version":    version.Version,
 		"apiVersion": APIVersion,
 		"needsSetup": n == 0,
+		"name":       cmp.Or(s.Name, "Matinee"),
+		// This device may browse and play without signing in.
+		"homeAccess": home,
 	})
 }
 

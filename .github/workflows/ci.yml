@@ -61,6 +61,7 @@ jobs:
       - uses: azure/setup-helm@v4
       - run: helm lint deploy/helm/matinee
       - run: helm template t deploy/helm/matinee > /dev/null
+      - run: helm template t deploy/helm/matinee --set discovery.url=https://matinee.example.com > /dev/null
 
   docker:
     runs-on: ubuntu-latest

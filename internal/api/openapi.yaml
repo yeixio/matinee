@@ -19,6 +19,13 @@ info:
     person approves it at `/link` on the server. Media URLs used as `<video>`
     or player sources may carry the token as `?token=` instead.
 
+    **At home.** Devices on the server's home network may browse and play
+    without a token, as a shared guest account, unless an admin requires
+    signing in there too (`PUT /settings`). `GET /server` says whether this
+    device may (`homeAccess`). Only the endpoints that look and play allow
+    it; the rest still need a token. Requests that reach the server through
+    a proxy or ingress never count as coming from home.
+
     **Errors** are JSON `{"error": "message"}`, with a message fit to show a person.
   license:
     name: AGPL-3.0-or-later
@@ -243,6 +250,29 @@ paths:
       responses:
         "204": { description: Signed out. }
         "404": { $ref: "#/components/responses/Error" }
+  /settings:
+    get:
+      summary: Server-wide settings (admins only)
+      responses:
+        "200":
+          description: Settings.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Settings" }
+    put:
+      summary: Change server-wide settings (admins only)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/Settings" }
+      responses:
+        "200":
+          description: The settings now.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Settings" }
+
   /users:
     get:
       summary: Everyone with an account (admins only)
@@ -632,6 +662,16 @@ components:
         version: { type: string }
         apiVersion: { type: integer }
         needsSetup: { type: boolean }
+        name: { type: string, description: What the apps call this server. }
+        homeAccess:
+          type: boolean
+          description: This device is on the server's home network and may browse and play without signing in.
+    Settings:
+      type: object
+      properties:
+        requireSignInAtHome:
+          type: boolean
+          description: Devices on the home network have to sign in too. Off by default.
     Credentials:
       type: object
       required: [username, password]
@@ -649,6 +689,9 @@ components:
         id: { type: integer }
         username: { type: string }
         isAdmin: { type: boolean }
+        guest:
+          type: boolean
+          description: The shared account of a device at home that hasn't signed in.
     Device:
       type: object
       properties:

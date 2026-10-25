@@ -103,6 +103,12 @@ discovery:
   url: ""
   # The name the apps show for this server.
   name: Matinee
+  # A port on the server's node that serves the home network directly. Behind
+  # an ingress the server can't tell home from the internet, so devices at
+  # home use this port instead and can watch without signing in (an admin
+  # can still require it in Settings). Don't forward it from your router.
+  # 0 turns it off; then everyone signs in.
+  homePort: 7172
   resources: {}
 
 env: []

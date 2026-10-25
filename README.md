@@ -60,6 +60,18 @@ The Matinee apps list servers on your home network by themselves, so nobody has 
 
 To keep a server unlisted, set `MATINEE_DISCOVERY=false` (`discovery.enabled=false` in the chart). The apps can always connect by address.
 
+### Watching at home without signing in
+
+Phones, TVs and browsers on your home network can browse and play without an account. They share one Home account, so they share its watch progress, and they can't change anything: no settings, no downloads, no approving other devices. Away from home, everyone signs in. To make everyone sign in at home too, turn on **Settings → Home network → Ask for sign-in at home**.
+
+Matinee decides a device is at home by the address its connection comes from, and only when nothing sits in between:
+
+- **apt, dnf, Homebrew, source and Docker with `--network host`:** a device with a private address (such as `192.168.x.x`) connecting straight to the server counts as home.
+- **Behind a reverse proxy or ingress,** every request arrives from the proxy, the internet's included, so requests through it never count. Give the home network its own way in with `MATINEE_HOME_ADDR` (for example `:7172`). Then only that address counts, and the apps on your network use it. Don't forward that port from your router.
+- **Kubernetes:** the chart does this for you. It opens port 7172 on the server's node (`discovery.homePort`) and runs the announcer on the same node, so the apps at home connect there and use your ingress address away from home. Set `discovery.homePort=0` to turn it off.
+
+If something in front of Matinee rewrites addresses without saying so, for example a port forward that makes internet traffic look like it comes from your router, turn on **Ask for sign-in at home**.
+
 ### Debian and Ubuntu
 
 ```sh
@@ -133,6 +145,7 @@ Every setting is a flag or an environment variable.
 | `MATINEE_DISCOVERY` | `true` | Announce the server on the local network so the apps find it ([more](#finding-it-from-the-apps)) |
 | `MATINEE_SERVER_NAME` | `Matinee` | The name the apps show for this server |
 | `MATINEE_PUBLIC_URL` | empty | The address the apps should connect to, such as `https://matinee.example.com`; empty uses this machine's IP and port |
+| `MATINEE_HOME_ADDR` | empty | A second listen address just for the home network, such as `:7172`, when the main one is behind a proxy. Only devices that connect here can watch without signing in (see above) |
 | `MATINEE_FFMPEG`, `MATINEE_FFPROBE` | `ffmpeg`, `ffprobe` | Paths to FFmpeg |
 
 **SQLite or PostgreSQL?** SQLite is the default and needs nothing else: right for a single machine or a NAS, as long as `MATINEE_DATA_DIR` is on a local disk. Use PostgreSQL on Kubernetes, with several servers, or whenever the data would otherwise live on network storage, where SQLite's locking isn't reliable.
