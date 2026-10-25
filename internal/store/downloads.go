@@ -329,7 +329,7 @@ func (s *Store) MergeProgress(ctx context.Context, userID int64, e ProgressEvent
 	res, err := s.db.ExecContext(ctx, `
 		INSERT INTO progress (user_id, item_id, position_ms, played, updated_at) VALUES (?, ?, ?, ?, ?)
 		ON CONFLICT (user_id, item_id) DO UPDATE SET
-			position_ms = excluded.position_ms, played = excluded.played, updated_at = excluded.updated_at
+			position_ms = excluded.position_ms, played = excluded.played, updated_at = excluded.updated_at, hidden = 0
 		WHERE progress.updated_at <= excluded.updated_at`,
 		userID, e.ItemID, e.PositionMs, b2i(e.Played), e.At)
 	if err != nil {

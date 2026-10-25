@@ -25,6 +25,8 @@ func TestMigrateFromVersion1(t *testing.T) {
 		"DROP TABLE downloads",
 		"DROP TABLE settings",
 		"ALTER TABLE users DROP COLUMN guest",
+		"DROP TABLE watchlist",
+		"ALTER TABLE progress DROP COLUMN hidden",
 		"UPDATE schema_version SET version = 1",
 	} {
 		if _, err := s.db.ExecContext(ctx, q); err != nil {

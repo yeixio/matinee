@@ -304,6 +304,9 @@ func (s *Server) syncProgress(w http.ResponseWriter, r *http.Request) {
 			e.Played, e.PositionMs = true, 0
 		}
 		ok, err := s.Store.MergeProgress(r.Context(), u.ID, e)
+		if err == nil && ok {
+			err = s.watched(r.Context(), u.ID, it, e.Played)
+		}
 		if err != nil {
 			s.serverError(w, err)
 			return

@@ -171,6 +171,15 @@ var migrations = []string{
 	// 13: the shared account that devices on the home network use without
 	// signing in. It has no password and isn't listed with the others.
 	"ALTER TABLE users ADD COLUMN guest INTEGER NOT NULL DEFAULT 0",
+	// 14: each person's watch list (see watchlist.go).
+	`CREATE TABLE watchlist (
+		user_id  BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+		item_id  BIGINT NOT NULL REFERENCES items(id) ON DELETE CASCADE,
+		added_at BIGINT NOT NULL, -- milliseconds
+		PRIMARY KEY (user_id, item_id)
+	)`,
+	// 15: items someone took out of Continue Watching, until they play them again.
+	"ALTER TABLE progress ADD COLUMN hidden INTEGER NOT NULL DEFAULT 0",
 }
 
 func now() int64 { return time.Now().Unix() }

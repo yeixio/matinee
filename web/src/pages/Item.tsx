@@ -5,6 +5,7 @@ import { api, pendingRefetch, type Item, type ItemDetail } from '../api'
 import { Artwork } from '../components/Artwork'
 import { PosterGrid } from '../components/Card'
 import { Button, Spinner } from '../components/ui'
+import { WatchListButton } from '../components/WatchListButton'
 import { clock, duration, progressFraction, resolution } from '../format'
 import { useAudio } from '../player/AudioPlayer'
 
@@ -151,6 +152,7 @@ function Header({ item, kids }: { item: ItemDetail; kids?: Item[] }) {
                 </Button>
               </>
             )}
+            <WatchListButton item={item} />
           </div>
         </div>
       </div>
