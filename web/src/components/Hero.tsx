@@ -1,4 +1,4 @@
-import { Info, Play } from 'lucide-react'
+import { Info, Play, X } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import type { Item } from '../api'
 import { duration, episodeCode, progressFraction } from '../format'
@@ -6,7 +6,8 @@ import { Artwork } from './Artwork'
 import { Button } from './ui'
 
 // The big backdrop at the top of Home: the thing you're most likely to want next.
-export function Hero({ item }: { item: Item }) {
+// onRemove takes it off Continue Watching.
+export function Hero({ item, onRemove }: { item: Item; onRemove?: () => void }) {
   const resume = !!item.positionMs && !item.played
   const left = item.durationMs && item.positionMs ? item.durationMs - item.positionMs : 0
   return (
@@ -46,6 +47,15 @@ export function Hero({ item }: { item: Item }) {
           <Link to={`/item/${item.id}`}>
             <Button icon={<Info className="size-4" />}>Details</Button>
           </Link>
+          {onRemove && (
+            <Button
+              onClick={onRemove}
+              icon={<X className="size-4" />}
+              aria-label="Remove from Continue watching"
+              title="Remove from Continue watching"
+              className="px-3"
+            />
+          )}
         </div>
       </div>
     </section>

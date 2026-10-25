@@ -109,11 +109,16 @@ func (s *Server) routes() []route {
 		{"GET /items/{id}", reader, s.getItem},
 		{"GET /items/{id}/children", reader, s.itemChildren},
 		{"PUT /items/{id}/progress", reader, s.setProgress},
+		{"DELETE /continue-watching/{id}", reader, s.hideFromContinueWatching},
 		{"GET /items/{id}/image/{type}", reader, s.itemImage},
 		{"GET /items/{id}/file", reader, s.directFile},
 		{"GET /items/{id}/subtitles/{track}", reader, s.subtitleFile},
 		{"POST /items/{id}/hls", reader, s.startHLS},
 		{"GET /hls/{session}/{file}", reader, s.hlsFile},
+
+		{"GET /watchlist", reader, s.getWatchList},
+		{"PUT /watchlist/{id}", reader, s.addToWatchList},
+		{"DELETE /watchlist/{id}", reader, s.removeFromWatchList},
 
 		{"GET /downloads/qualities", signedIn, s.downloadQualities},
 		{"POST /downloads", signedIn, s.createDownload},
@@ -585,7 +590,12 @@ func (s *Server) home(w http.ResponseWriter, r *http.Request) {
 		s.serverError(w, err)
 		return
 	}
-	writeJSON(w, http.StatusOK, map[string]any{"continueWatching": cont, "recentlyAdded": recent})
+	watchList, err := s.Store.WatchList(r.Context(), uid, 30)
+	if err != nil {
+		s.serverError(w, err)
+		return
+	}
+	writeJSON(w, http.StatusOK, map[string]any{"continueWatching": cont, "watchList": watchList, "recentlyAdded": recent})
 }
 
 func (s *Server) search(w http.ResponseWriter, r *http.Request) {
@@ -677,6 +687,25 @@ func (s *Server) setProgress(w http.ResponseWriter, r *http.Request) {
 		req.Played, req.PositionMs = true, 0
 	}
 	if err := s.Store.SetProgress(r.Context(), currentUser(r).ID, it.ID, req.PositionMs, req.Played); err != nil {
+		s.serverError(w, err)
+		return
+	}
+	if err := s.watched(r.Context(), currentUser(r).ID, it, req.Played); err != nil {
+		s.serverError(w, err)
+		return
+	}
+	w.WriteHeader(http.StatusNoContent)
+}
+
+// hideFromContinueWatching takes an item off the Continue Watching row,
+// keeping its place for when it's played again.
+func (s *Server) hideFromContinueWatching(w http.ResponseWriter, r *http.Request) {
+	id, ok := pathID(r)
+	if !ok {
+		writeError(w, http.StatusBadRequest, "bad id")
+		return
+	}
+	if err := s.Store.HideFromContinueWatching(r.Context(), currentUser(r).ID, id); err != nil {
 		s.serverError(w, err)
 		return
 	}

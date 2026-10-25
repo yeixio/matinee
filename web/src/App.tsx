@@ -8,6 +8,7 @@ import Home from './pages/Home'
 import Library from './pages/Library'
 import ItemPage from './pages/Item'
 import Search from './pages/Search'
+import WatchList from './pages/WatchList'
 import { Login, Setup } from './pages/Auth'
 import { Spinner } from './components/ui'
 
@@ -42,6 +43,7 @@ export default function App() {
           <Route path="/library/:id" element={<Library />} />
           <Route path="/item/:id" element={<ItemPage />} />
           <Route path="/search" element={<Search />} />
+          <Route path="/watchlist" element={<WatchList />} />
           <Route path="/settings" element={<Settings />} />
           {/* At home people can watch without signing in; these need a real account. */}
           <Route path="/link" element={me.data.guest ? <Login /> : <Link user={me.data} />} />

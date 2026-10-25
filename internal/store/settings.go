@@ -26,7 +26,7 @@ func (s *Store) SetSetting(ctx context.Context, key, value string) error {
 
 // HomeGuest is the account devices on the home network use when they
 // haven't signed in, created the first time one does. Everyone at home
-// shares it, so they share its watch progress too. It can't sign in, isn't
+// shares it, so they share its watch progress and watch list too. It can't sign in, isn't
 // listed with the other accounts, and isn't an admin.
 func (s *Store) HomeGuest(ctx context.Context) (User, error) {
 	u, err := s.scanUser(s.db.QueryRowContext(ctx, "SELECT id, username, is_admin, password_hash FROM users WHERE guest = 1 ORDER BY id LIMIT 1"))

@@ -70,6 +70,9 @@ export default function Shell({ user }: { user: User }) {
             <NavLink to="/" end className={topLink}>
               Home
             </NavLink>
+            <NavLink to="/watchlist" className={topLink}>
+              Watch list
+            </NavLink>
             {libraries.map((l) => (
               <NavLink key={l.id} to={`/library/${l.id}`} className={topLink} onMouseEnter={() => prefetchLibrary(l.id)} onFocus={() => prefetchLibrary(l.id)}>
                 <span className="truncate">{l.name}</span>

@@ -36,6 +36,7 @@ type Item struct {
 	// For episodes: the show's title and season number, for cards outside the show's pages.
 	ShowTitle   string `json:"showTitle,omitempty"`
 	SeasonIndex *int   `json:"seasonIndex,omitempty"`
+	OnWatchList bool   `json:"onWatchList,omitempty"`
 
 	Poster   string `json:"-"`
 	Backdrop string `json:"-"`
@@ -51,7 +52,8 @@ type Item struct {
 	SubtitleStreams string `json:"-"`
 }
 
-// itemCols selects an item plus the given user's progress. The user id is the first bind argument.
+// itemCols selects an item plus the given user's progress and whether it's
+// on their watch list. The user id is the first bind argument.
 const itemCols = `
 	i.id, i.library_id, i.parent_id, i.kind, i.title, i.year, i.index_number, i.disc_number,
 	i.duration_ms, COALESCE(i.container, ''), COALESCE(i.video_codec, ''), COALESCE(i.audio_codec, ''),
@@ -60,9 +62,10 @@ const itemCols = `
 	COALESCE(p.position_ms, 0), COALESCE(p.played, 0),
 	COALESCE(i.overview, ''), i.rating, COALESCE(i.poster, ''), COALESCE(i.backdrop, ''), i.tmdb_id, COALESCE(i.meta_at, 0),
 	CASE WHEN i.kind = 'episode' THEN (SELECT COALESCE(sh.title, '') FROM items se JOIN items sh ON sh.id = se.parent_id WHERE se.id = i.parent_id) ELSE '' END,
-	CASE WHEN i.kind = 'episode' THEN (SELECT se.index_number FROM items se WHERE se.id = i.parent_id) END`
+	CASE WHEN i.kind = 'episode' THEN (SELECT se.index_number FROM items se WHERE se.id = i.parent_id) END,
+	EXISTS (SELECT 1 FROM watchlist wl WHERE wl.user_id = me.id AND wl.item_id = i.id)`
 
-const itemFrom = ` FROM items i LEFT JOIN progress p ON p.item_id = i.id AND p.user_id = ?`
+const itemFrom = ` FROM (SELECT CAST(? AS BIGINT) AS id) me CROSS JOIN items i LEFT JOIN progress p ON p.item_id = i.id AND p.user_id = me.id`
 
 type scanner interface{ Scan(...any) error }
 
@@ -78,7 +81,7 @@ func scanItem(r scanner) (Item, error) {
 		&dur, &it.Container, &it.VideoCodec, &it.AudioCodec, &w, &h, &it.AddedAt, &it.Path, &it.Size, &it.Mtime,
 		&it.ChildCount, &it.PositionMs, &it.Played,
 		&it.Overview, &rating, &it.Poster, &it.Backdrop, &tmdb, &it.MetaAt,
-		&showTitle, &seasonIdx)
+		&showTitle, &seasonIdx, &it.OnWatchList)
 	if err != nil {
 		return it, err
 	}
@@ -195,17 +198,29 @@ func (s *Store) RecentlyAdded(ctx context.Context, userID int64, limit int) ([]I
 		) ELSE i.added_at END DESC, i.id DESC LIMIT ?`, userID, limit)
 }
 
-// ContinueWatching lists videos the user started but didn't finish.
+// ContinueWatching lists videos the user started but didn't finish, leaving
+// out the ones they took off the row.
 func (s *Store) ContinueWatching(ctx context.Context, userID int64, limit int) ([]Item, error) {
-	return s.queryItems(ctx, "p.played = 0 AND p.position_ms > 0 AND i.kind IN ('movie', 'episode')",
+	return s.queryItems(ctx, "p.played = 0 AND p.position_ms > 0 AND p.hidden = 0 AND i.kind IN ('movie', 'episode')",
 		"p.updated_at DESC LIMIT ?", userID, limit)
 }
 
+// HideFromContinueWatching takes an item off the user's Continue Watching
+// row. Its place is kept, so its page still offers to resume, and playing it
+// again brings it back.
+func (s *Store) HideFromContinueWatching(ctx context.Context, userID, itemID int64) error {
+	_, err := s.db.ExecContext(ctx, "UPDATE progress SET hidden = 1, updated_at = ? WHERE user_id = ? AND item_id = ?",
+		now(), userID, itemID)
+	return err
+}
+
+// SetProgress saves where the user is in an item. Any progress brings an
+// item back to Continue Watching.
 func (s *Store) SetProgress(ctx context.Context, userID, itemID, positionMs int64, played bool) error {
 	_, err := s.db.ExecContext(ctx, `
 		INSERT INTO progress (user_id, item_id, position_ms, played, updated_at) VALUES (?, ?, ?, ?, ?)
 		ON CONFLICT (user_id, item_id) DO UPDATE SET
-			position_ms = excluded.position_ms, played = excluded.played, updated_at = excluded.updated_at`,
+			position_ms = excluded.position_ms, played = excluded.played, updated_at = excluded.updated_at, hidden = 0`,
 		userID, itemID, positionMs, b2i(played), now())
 	return err
 }
