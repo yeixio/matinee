@@ -15,6 +15,8 @@ import { Spinner } from './components/ui'
 const Watch = lazy(() => import('./pages/Watch'))
 const Settings = lazy(() => import('./pages/Settings'))
 const Link = lazy(() => import('./pages/Link'))
+const Requests = lazy(() => import('./pages/Requests'))
+const Upcoming = lazy(() => import('./pages/Upcoming'))
 
 export default function App() {
   const me = useQuery({ queryKey: ['me'], queryFn: api.me, staleTime: Infinity })
@@ -45,6 +47,8 @@ export default function App() {
           <Route path="/search" element={<Search />} />
           <Route path="/watchlist" element={<WatchList />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/upcoming" element={<Upcoming />} />
+          <Route path="/requests" element={me.data.guest ? <Login /> : <Requests />} />
           {/* At home people can watch without signing in; these need a real account. */}
           <Route path="/link" element={me.data.guest ? <Login /> : <Link user={me.data} />} />
           <Route path="/sign-in" element={me.data.guest ? <Login /> : <Navigate to="/" replace />} />

@@ -1,8 +1,9 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { Clapperboard, Home, LogIn, LogOut, Music, Search, Settings, Tv } from 'lucide-react'
+import { CalendarClock, Clapperboard, Home, Inbox, LogIn, LogOut, Music, Search, Settings, Tv } from 'lucide-react'
 import { NavLink, Outlet } from 'react-router-dom'
 import { api, type Library, type User } from '../api'
 import { useAudio } from '../player/AudioPlayer'
+import { useRequestOptions } from './Arr'
 
 export function LibraryIcon({ kind, className = 'size-5' }: { kind: string; className?: string }) {
   if (kind === 'tv') return <Tv className={className} />
@@ -33,6 +34,9 @@ const topLink = ({ isActive }: { isActive: boolean }) =>
     isActive ? 'bg-text text-ink font-medium' : 'text-muted hover:bg-white/5 hover:text-text'
   }`
 
+const iconLink = ({ isActive }: { isActive: boolean }) =>
+  `rounded-full p-2 transition-colors hover:bg-white/5 hover:text-text ${isActive ? 'text-text' : 'text-muted'}`
+
 const tabLink = ({ isActive }: { isActive: boolean }) =>
   `flex flex-1 flex-col items-center gap-1 py-2 text-[11px] ${isActive ? 'text-accent' : 'text-muted'}`
 
@@ -52,6 +56,9 @@ export default function Shell({ user }: { user: User }) {
   const prefetchLibrary = (id: number) =>
     qc.prefetchQuery({ queryKey: ['library', id], queryFn: () => api.libraryItems(id), staleTime: 30_000 })
   const audio = useAudio()
+  const { data: opts } = useRequestOptions()
+  const arr = !!opts && (opts.movies || opts.shows)
+  const waiting = (opts?.pendingRequests ?? 0) + (opts?.openIssues ?? 0)
   const logout = async () => {
     await api.logout()
     qc.clear()
@@ -84,6 +91,21 @@ export default function Shell({ user }: { user: User }) {
             <NavLink to="/search" className="hidden rounded-full p-2 text-muted hover:bg-white/5 hover:text-text md:block" aria-label="Search">
               <Search className="size-5" />
             </NavLink>
+            {arr && (
+              <NavLink to="/upcoming" className={iconLink} aria-label="Coming soon" title="Coming soon">
+                <CalendarClock className="size-5" />
+              </NavLink>
+            )}
+            {(arr || waiting > 0) && !user.guest && (
+              <NavLink to="/requests" className={(a) => `relative ${iconLink(a)}`} aria-label="Requests" title="Requests">
+                <Inbox className="size-5" />
+                {waiting > 0 && (
+                  <span className="absolute -top-0.5 -right-0.5 grid h-4 min-w-4 place-items-center rounded-full bg-accent px-1 text-[10px] font-semibold text-ink">
+                    {waiting}
+                  </span>
+                )}
+              </NavLink>
+            )}
             {user.guest ? (
               // Watching at home without an account; signing in brings your own progress and settings.
               <NavLink to="/sign-in" className="flex items-center gap-2 rounded-full px-3 py-1.5 text-sm text-muted hover:bg-white/5 hover:text-text">

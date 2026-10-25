@@ -1,7 +1,8 @@
 import { useQuery } from '@tanstack/react-query'
 import { Check, ChevronRight, LoaderCircle, Play, Shuffle } from 'lucide-react'
 import { Link, useParams } from 'react-router-dom'
-import { api, pendingRefetch, type Item, type ItemDetail } from '../api'
+import { api, pendingRefetch, type Item, type ItemDetail, type User } from '../api'
+import { ItemQuality, ReportProblem } from '../components/Arr'
 import { Artwork } from '../components/Artwork'
 import { PosterGrid } from '../components/Card'
 import { Button, Spinner } from '../components/ui'
@@ -62,6 +63,7 @@ function Breadcrumbs({ parents }: { parents: Item[] }) {
 
 function Header({ item, kids }: { item: ItemDetail; kids?: Item[] }) {
   const audio = useAudio()
+  const { data: me } = useQuery<User>({ queryKey: ['me'], queryFn: api.me, staleTime: Infinity })
   const square = item.kind === 'album' || item.kind === 'artist'
   const resume = !!item.positionMs && !item.played
   // Next up in a season: the episode in progress, else the first unwatched one.
@@ -153,6 +155,12 @@ function Header({ item, kids }: { item: ItemDetail; kids?: Item[] }) {
               </>
             )}
             <WatchListButton item={item} />
+            {item.kind !== 'artist' && item.kind !== 'album' && item.kind !== 'track' && (
+              <>
+                <ItemQuality item={item} user={me} />
+                <ReportProblem item={item} />
+              </>
+            )}
           </div>
         </div>
       </div>

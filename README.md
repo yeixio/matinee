@@ -23,6 +23,7 @@ A fast, self-hosted media server for your movies, TV and music. Point it at your
 - **Search** as you type.
 - **People:** an admin plus as many accounts as you like, each with their own history.
 - **Downloads** for watching offline in the Matinee apps. A download is a job on the server, not a stream: it's prepared in the background (the original file, or a single MP4 at 1080p, 720p or 480p), checksummed, then fetched by the phone at its own pace, resuming where it broke off. Jobs survive restarts and retry on their own, and watch progress made offline is merged back when the phone reconnects, with the latest change winning.
+- **Radarr and Sonarr** (optional): people ask for movies and shows and an admin approves them, everyone sees what's coming soon, and anyone can report a problem with what they're watching. Admins can change a title's quality or have a bad file replaced. [Setting it up](#radarr-and-sonarr).
 - **Devices:** sign in a phone or TV by typing the code it shows at `/link`, and see or sign out every device you're signed in on under Settings.
 
 ## Run it
@@ -119,6 +120,22 @@ Matinee looks up posters, backdrops and descriptions on [TMDB](https://www.themo
 Restart Matinee. The next library scan fills in the artwork.
 
 **Why isn't a key built in?** TMDB's free keys are for personal use, and a key shipped inside Matinee would be shared by every server. Once donations or client app sales bring in enough, we'll license a TMDB key for the project and build it into the official images, so new servers get artwork with no setup. Until then, you use your own key.
+
+### Radarr and Sonarr
+
+If you use [Radarr](https://radarr.video/) for movies or [Sonarr](https://sonarr.tv/) for TV, connect them under **Settings → Radarr and Sonarr**:
+
+1. Click **Connect**, enter the app's address (such as `http://radarr:7878`) and its API key (in the app under **Settings → General**), then **Test**.
+2. Pick the quality and folder that new titles get, and **Save**.
+3. Choose who can add titles: anyone can ask and an admin approves (the default), anyone's requests are added right away, or only admins add.
+
+The address and key stay on the server. Then:
+
+- **Requests** (the inbox icon) is where people find a movie or show and ask for it, and where admins approve requests and see reported problems. A problem with a movie or episode can be fixed with **Replace file**, which deletes the file in Radarr or Sonarr and has it download another copy.
+- **Coming soon** (the calendar icon, and a row on Home) lists the next two months of new episodes and movie releases that aren't in yet.
+- On a movie or show, admins can change its quality, and anyone signed in can **Report a problem**.
+
+Devices at home that haven't signed in can see what's coming soon, but can't ask for titles or report problems.
 
 ### From source
 
