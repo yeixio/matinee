@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { lazy, Suspense } from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import { api, ApiError } from './api'
 import Shell from './components/Shell'
 import { AudioProvider } from './player/AudioPlayer'
@@ -43,7 +43,9 @@ export default function App() {
           <Route path="/item/:id" element={<ItemPage />} />
           <Route path="/search" element={<Search />} />
           <Route path="/settings" element={<Settings />} />
-          <Route path="/link" element={<Link user={me.data} />} />
+          {/* At home people can watch without signing in; these need a real account. */}
+          <Route path="/link" element={me.data.guest ? <Login /> : <Link user={me.data} />} />
+          <Route path="/sign-in" element={me.data.guest ? <Login /> : <Navigate to="/" replace />} />
         </Route>
       </Routes>
       </Suspense>

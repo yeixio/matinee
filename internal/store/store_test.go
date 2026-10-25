@@ -23,6 +23,8 @@ func TestMigrateFromVersion1(t *testing.T) {
 		"ALTER TABLE sessions DROP COLUMN last_seen_at",
 		"DROP TABLE device_codes",
 		"DROP TABLE downloads",
+		"DROP TABLE settings",
+		"ALTER TABLE users DROP COLUMN guest",
 		"UPDATE schema_version SET version = 1",
 	} {
 		if _, err := s.db.ExecContext(ctx, q); err != nil {
@@ -48,4 +50,40 @@ func TestMigrateFromVersion1(t *testing.T) {
 		t.Fatalf("reopening an up-to-date database: %v", err)
 	}
 	s.Close()
+}
+
+// The home network's guest account is made once, can't sign in, and isn't
+// counted or listed as a person.
+func TestHomeGuest(t *testing.T) {
+	s, err := Open(filepath.Join(t.TempDir(), "matinee.db"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer s.Close()
+	ctx := context.Background()
+	if _, err := s.CreateUser(ctx, "mike", "hash", true); err != nil {
+		t.Fatal(err)
+	}
+	g, err := s.HomeGuest(ctx)
+	if err != nil || !g.Guest || g.Username != "Home" || g.IsAdmin {
+		t.Fatalf("guest = %+v, %v", g, err)
+	}
+	again, _ := s.HomeGuest(ctx)
+	if again.ID != g.ID {
+		t.Fatalf("second guest %d, want %d", again.ID, g.ID)
+	}
+	if n, _ := s.CountUsers(ctx); n != 1 {
+		t.Fatalf("CountUsers = %d, want 1", n)
+	}
+	if users, _ := s.Users(ctx); len(users) != 1 {
+		t.Fatalf("Users = %+v", users)
+	}
+	if v, _ := s.Setting(ctx, "x"); v != "" {
+		t.Fatalf("unset setting = %q", v)
+	}
+	s.SetSetting(ctx, "x", "1")
+	s.SetSetting(ctx, "x", "2")
+	if v, _ := s.Setting(ctx, "x"); v != "2" {
+		t.Fatalf("setting = %q, want 2", v)
+	}
 }

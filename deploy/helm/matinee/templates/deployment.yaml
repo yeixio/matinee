@@ -30,6 +30,13 @@ spec:
           ports:
             - name: http
               containerPort: 7171
+            {{- if .Values.discovery.homePort }}
+            # The home network's own way in, on the node's address, so the
+            # server sees each device's real address (an ingress hides it).
+            - name: home
+              containerPort: 7172
+              hostPort: {{ .Values.discovery.homePort }}
+            {{- end }}
           env:
             - name: MATINEE_ADDR
               value: ":7171"
@@ -40,6 +47,10 @@ spec:
             # The pod network doesn't reach the home network; discovery.yaml announces it instead.
             - name: MATINEE_DISCOVERY
               value: "false"
+            {{- if .Values.discovery.homePort }}
+            - name: MATINEE_HOME_ADDR
+              value: ":7172"
+            {{- end }}
             - name: MATINEE_DATABASE_URL
               valueFrom:
                 secretKeyRef:

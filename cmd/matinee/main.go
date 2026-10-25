@@ -98,7 +98,8 @@ func run() error {
 		Art:       artwork.NewCache(cfg.ImageDir(), cfg.FFmpegPath),
 		Subtitles: subtitle.NewConverter(cfg.FFmpegPath, cfg.SubtitleDir()),
 		Web:       web.FS(), Log: log, BackgroundCtx: ctx,
-		MediaRoot: cfg.MediaRoot,
+		MediaRoot: cfg.MediaRoot, Name: cfg.ServerName,
+		HomeListener: cfg.HomeAddr != "",
 	}
 	downloads.SubtitleStream = apiServer.BurnStream
 	go downloads.Run(ctx)
@@ -127,20 +128,30 @@ func run() error {
 
 	if cfg.Discovery {
 		go func() {
-			a := discovery.Announcement{Name: cfg.ServerName, Port: listenPort(cfg.Addr), URL: cfg.PublicURL, Version: version.Version}
+			port := listenPort(cfg.Addr)
+			if cfg.HomeAddr != "" {
+				port = listenPort(cfg.HomeAddr)
+			}
+			a := discovery.Announcement{Name: cfg.ServerName, Port: port, URL: cfg.PublicURL, Version: version.Version, Home: true}
 			if err := discovery.Run(ctx, a, log); err != nil {
 				log.Warn("apps on this network won't find the server by themselves; they can still connect by address", "err", err)
 			}
 		}()
 	}
 
-	errc := make(chan error, 1)
+	errc := make(chan error, 2)
 	go func() { errc <- srv.ListenAndServe() }()
+	// The home network's own entrance, when the main address is behind a proxy.
+	var homeSrv *http.Server
+	if cfg.HomeAddr != "" {
+		homeSrv = &http.Server{Addr: cfg.HomeAddr, Handler: apiServer.HomeHandler(), ReadHeaderTimeout: 10 * time.Second}
+		go func() { errc <- homeSrv.ListenAndServe() }()
+	}
 	dbKind := "sqlite"
 	if cfg.DatabaseURL != "" {
 		dbKind = "postgres"
 	}
-	log.Info("matinee started", "version", version.Version, "addr", cfg.Addr, "data", cfg.DataDir, "database", dbKind)
+	log.Info("matinee started", "version", version.Version, "addr", cfg.Addr, "home_addr", cfg.HomeAddr, "data", cfg.DataDir, "database", dbKind)
 
 	select {
 	case err := <-errc:
@@ -152,6 +163,9 @@ func run() error {
 		shutdownCtx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 		defer cancel()
 		srv.Shutdown(shutdownCtx)
+		if homeSrv != nil {
+			homeSrv.Shutdown(shutdownCtx)
+		}
 	}
 	return nil
 }
@@ -195,6 +209,7 @@ func announce() error {
 	var a discovery.Announcement
 	fs.StringVar(&a.URL, "url", os.Getenv("MATINEE_PUBLIC_URL"), "the server's address, such as https://matinee.example.com")
 	fs.StringVar(&a.Name, "name", cmp.Or(os.Getenv("MATINEE_SERVER_NAME"), "Matinee"), "the name the apps show")
+	homePort := fs.Int("home-port", 0, "a port on this host that serves Matinee to the home network (the server's MATINEE_HOME_ADDR)")
 	if err := fs.Parse(os.Args[2:]); err != nil {
 		return err
 	}
@@ -211,6 +226,9 @@ func announce() error {
 	}
 	if p, err := strconv.Atoi(u.Port()); err == nil {
 		a.Port = p
+	}
+	if *homePort > 0 {
+		a.Port, a.Home = *homePort, true
 	}
 	a.Version = version.Version
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)

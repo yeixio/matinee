@@ -14,6 +14,7 @@ export default function Settings() {
       <h1 className="text-2xl font-bold tracking-tight">Settings</h1>
       {me?.isAdmin && <Libraries />}
       {me?.isAdmin && <Users />}
+      {me?.isAdmin && <HomeNetwork />}
       <Devices />
       {/* TMDB's API terms ask apps that use it for this notice. */}
       <p className="text-xs text-faint">
@@ -267,6 +268,35 @@ function lastSeen(unix: number) {
   if (mins < 60) return `${mins} min ago`
   if (mins < 60 * 24) return `${Math.round(mins / 60)} h ago`
   return new Date(unix * 1000).toLocaleDateString()
+}
+
+function HomeNetwork() {
+  const qc = useQueryClient()
+  const { data } = useQuery({ queryKey: ['settings'], queryFn: api.settings })
+  const save = useMutation({ mutationFn: api.saveSettings, onSuccess: (s) => qc.setQueryData(['settings'], s) })
+  const required = data?.requireSignInAtHome ?? false
+  return (
+    <section className="space-y-4">
+      <h2 className="text-lg font-semibold">Home network</h2>
+      <label className="flex cursor-pointer items-start gap-4 rounded-xl border border-line/60 bg-surface/50 p-4">
+        <span className="min-w-0 flex-1">
+          <span className="block font-medium">Ask for sign-in at home</span>
+          <span className="mt-1 block text-sm text-muted">
+            {required
+              ? 'Everyone signs in, at home and away.'
+              : "Phones, TVs and browsers on your home network can watch without signing in. They share one Home account and can't change anything. Away from home, everyone signs in."}
+          </span>
+        </span>
+        <input
+          type="checkbox"
+          className="mt-1 size-5 accent-[var(--color-accent)]"
+          checked={required}
+          disabled={!data || save.isPending}
+          onChange={(e) => save.mutate({ requireSignInAtHome: e.target.checked })}
+        />
+      </label>
+    </section>
+  )
 }
 
 function Devices() {

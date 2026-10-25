@@ -2,7 +2,8 @@
 {{- if and .Values.discovery.enabled $url }}
 # Announces the server on the home network so the apps list it. Runs on the
 # host network, since multicast DNS doesn't cross the pod network; it only
-# answers lookups and doesn't serve anything.
+# answers lookups and doesn't serve anything. With a home port it runs on
+# the server's node and points the apps there.
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -32,11 +33,29 @@ spec:
         - name: announce
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          args: ["announce", "-url", {{ $url | quote }}, "-name", {{ .Values.discovery.name | quote }}]
+          args:
+            - announce
+            - -url
+            - {{ $url | quote }}
+            - -name
+            - {{ .Values.discovery.name | quote }}
+            {{- if .Values.discovery.homePort }}
+            - -home-port
+            - {{ .Values.discovery.homePort | quote }}
+            {{- end }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           resources:
             {{- toYaml (.Values.discovery.resources | default (dict "requests" (dict "cpu" "5m" "memory" "16Mi") "limits" (dict "memory" "64Mi"))) | nindent 12 }}
+      {{- if .Values.discovery.homePort }}
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - topologyKey: kubernetes.io/hostname
+              labelSelector:
+                matchLabels:
+                  {{- include "matinee.selectorLabels" . | nindent 18 }}
+      {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

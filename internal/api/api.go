@@ -14,6 +14,7 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+	"sync/atomic"
 	"time"
 
 	"github.com/yeixio/matinee/internal/artwork"
@@ -37,6 +38,13 @@ type Server struct {
 	Web        fs.FS // built web player; nil serves a placeholder
 	Log        *slog.Logger
 	MediaRoot  string // where the folder picker starts; empty means /
+	Name       string // what the apps call this server
+
+	// HomeListener means the home network has its own listener (HomeHandler),
+	// so requests to the main one never count as coming from home.
+	HomeListener bool
+	homeSignIn   homeSetting
+	setUp        atomic.Bool // the first account exists
 
 	// BackgroundCtx scopes scans started by API calls; it outlives any one request.
 	BackgroundCtx context.Context
@@ -51,6 +59,9 @@ type access int
 
 const (
 	public access = iota
+	// reader routes only look and play, so devices on the home network can
+	// use them without signing in (see home.go).
+	reader
 	signedIn
 	adminOnly
 )
@@ -78,29 +89,31 @@ func (s *Server) routes() []route {
 		{"POST /auth/device/{code}/approve", signedIn, s.approveDeviceCode},
 		{"POST /auth/device/{code}/deny", signedIn, s.denyDeviceCode},
 
-		{"GET /me", signedIn, s.me},
+		{"GET /me", reader, s.me},
 		{"GET /devices", signedIn, s.listDevices},
 		{"DELETE /devices/{id}", signedIn, s.deleteDevice},
+		{"GET /settings", adminOnly, s.getSettings},
+		{"PUT /settings", adminOnly, s.putSettings},
 		{"GET /users", adminOnly, s.listUsers},
 		{"POST /users", adminOnly, s.createUser},
 
-		{"GET /libraries", signedIn, s.listLibraries},
+		{"GET /libraries", reader, s.listLibraries},
 		{"POST /libraries", adminOnly, s.createLibrary},
 		{"DELETE /libraries/{id}", adminOnly, s.deleteLibrary},
 		{"POST /libraries/{id}/scan", adminOnly, s.scanLibrary},
-		{"GET /libraries/{id}/items", signedIn, s.libraryItems},
+		{"GET /libraries/{id}/items", reader, s.libraryItems},
 		{"GET /fs", adminOnly, s.browseFS},
 
-		{"GET /home", signedIn, s.home},
-		{"GET /search", signedIn, s.search},
-		{"GET /items/{id}", signedIn, s.getItem},
-		{"GET /items/{id}/children", signedIn, s.itemChildren},
-		{"PUT /items/{id}/progress", signedIn, s.setProgress},
-		{"GET /items/{id}/image/{type}", signedIn, s.itemImage},
-		{"GET /items/{id}/file", signedIn, s.directFile},
-		{"GET /items/{id}/subtitles/{track}", signedIn, s.subtitleFile},
-		{"POST /items/{id}/hls", signedIn, s.startHLS},
-		{"GET /hls/{session}/{file}", signedIn, s.hlsFile},
+		{"GET /home", reader, s.home},
+		{"GET /search", reader, s.search},
+		{"GET /items/{id}", reader, s.getItem},
+		{"GET /items/{id}/children", reader, s.itemChildren},
+		{"PUT /items/{id}/progress", reader, s.setProgress},
+		{"GET /items/{id}/image/{type}", reader, s.itemImage},
+		{"GET /items/{id}/file", reader, s.directFile},
+		{"GET /items/{id}/subtitles/{track}", reader, s.subtitleFile},
+		{"POST /items/{id}/hls", reader, s.startHLS},
+		{"GET /hls/{session}/{file}", reader, s.hlsFile},
 
 		{"GET /downloads/qualities", signedIn, s.downloadQualities},
 		{"POST /downloads", signedIn, s.createDownload},
@@ -131,7 +144,7 @@ func (s *Server) Handler() http.Handler {
 	for _, rt := range s.routes() {
 		var h http.Handler = rt.handler
 		if rt.access != public {
-			h = s.requireUser(rt.handler, rt.access == adminOnly)
+			h = s.requireUser(rt.handler, rt.access)
 		}
 		method, path, _ := strings.Cut(rt.pattern, " ")
 		mux.Handle(method+" /api/v1"+path, h)
@@ -195,9 +208,25 @@ func currentUser(r *http.Request) store.User {
 	return u
 }
 
-func (s *Server) requireUser(h http.HandlerFunc, adminOnly bool) http.Handler {
+func (s *Server) requireUser(h http.HandlerFunc, level access) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		token := auth.Token(r)
+		if token == "" && level == reader {
+			ok, err := s.homeAccess(r)
+			if err != nil {
+				s.serverError(w, err)
+				return
+			}
+			if ok {
+				guest, err := s.Store.HomeGuest(r.Context())
+				if err != nil {
+					s.serverError(w, err)
+					return
+				}
+				h(w, r.WithContext(auth.WithUser(r.Context(), guest)))
+				return
+			}
+		}
 		if token == "" {
 			writeError(w, http.StatusUnauthorized, "sign in required")
 			return
@@ -211,7 +240,7 @@ func (s *Server) requireUser(h http.HandlerFunc, adminOnly bool) http.Handler {
 			s.serverError(w, err)
 			return
 		}
-		if adminOnly && !u.IsAdmin {
+		if level == adminOnly && !u.IsAdmin {
 			writeError(w, http.StatusForbidden, "admins only")
 			return
 		}

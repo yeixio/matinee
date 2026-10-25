@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { Clapperboard, Home, LogOut, Music, Search, Settings, Tv } from 'lucide-react'
+import { Clapperboard, Home, LogIn, LogOut, Music, Search, Settings, Tv } from 'lucide-react'
 import { NavLink, Outlet } from 'react-router-dom'
 import { api, type Library, type User } from '../api'
 import { useAudio } from '../player/AudioPlayer'
@@ -81,17 +81,26 @@ export default function Shell({ user }: { user: User }) {
             <NavLink to="/search" className="hidden rounded-full p-2 text-muted hover:bg-white/5 hover:text-text md:block" aria-label="Search">
               <Search className="size-5" />
             </NavLink>
-            <NavLink to="/settings" className="rounded-full p-2 text-muted hover:bg-white/5 hover:text-text" aria-label="Settings">
-              <Settings className="size-5" />
-            </NavLink>
-            <button
-              onClick={logout}
-              className="hidden items-center gap-2 rounded-full py-1 pr-3 pl-1 text-sm text-muted hover:bg-white/5 hover:text-text md:flex"
-              title="Sign out"
-            >
-              <span className="grid size-7 place-items-center rounded-full bg-raised text-xs font-semibold text-text uppercase">{user.username[0]}</span>
-              <LogOut className="size-4" />
-            </button>
+            {user.guest ? (
+              // Watching at home without an account; signing in brings your own progress and settings.
+              <NavLink to="/sign-in" className="flex items-center gap-2 rounded-full px-3 py-1.5 text-sm text-muted hover:bg-white/5 hover:text-text">
+                <LogIn className="size-4" /> Sign in
+              </NavLink>
+            ) : (
+              <NavLink to="/settings" className="rounded-full p-2 text-muted hover:bg-white/5 hover:text-text" aria-label="Settings">
+                <Settings className="size-5" />
+              </NavLink>
+            )}
+            {!user.guest && (
+              <button
+                onClick={logout}
+                className="hidden items-center gap-2 rounded-full py-1 pr-3 pl-1 text-sm text-muted hover:bg-white/5 hover:text-text md:flex"
+                title="Sign out"
+              >
+                <span className="grid size-7 place-items-center rounded-full bg-raised text-xs font-semibold text-text uppercase">{user.username[0]}</span>
+                <LogOut className="size-4" />
+              </button>
+            )}
           </div>
         </div>
       </header>

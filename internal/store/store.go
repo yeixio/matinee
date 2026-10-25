@@ -166,6 +166,11 @@ var migrations = []string{
 		UNIQUE (device_id, item_id)
 	)`,
 	"CREATE INDEX downloads_file ON downloads(file)",
+	// 12: server-wide settings an admin changes in the app (see settings.go).
+	"CREATE TABLE settings (key TEXT PRIMARY KEY, value TEXT NOT NULL)",
+	// 13: the shared account that devices on the home network use without
+	// signing in. It has no password and isn't listed with the others.
+	"ALTER TABLE users ADD COLUMN guest INTEGER NOT NULL DEFAULT 0",
 }
 
 func now() int64 { return time.Now().Unix() }
@@ -187,14 +192,16 @@ type User struct {
 	ID       int64  `json:"id"`
 	Username string `json:"username"`
 	IsAdmin  bool   `json:"isAdmin"`
-	hash     string
+	// Guest is the home network's shared account (see HomeGuest).
+	Guest bool `json:"guest,omitempty"`
+	hash  string
 }
 
 func (u User) PasswordHash() string { return u.hash }
 
 func (s *Store) CountUsers(ctx context.Context) (int, error) {
 	var n int
-	err := s.db.QueryRowContext(ctx, "SELECT COUNT(*) FROM users").Scan(&n)
+	err := s.db.QueryRowContext(ctx, "SELECT COUNT(*) FROM users WHERE guest = 0").Scan(&n)
 	return n, err
 }
 
@@ -210,7 +217,7 @@ func (s *Store) CreateUser(ctx context.Context, username, passwordHash string, a
 }
 
 func (s *Store) Users(ctx context.Context) ([]User, error) {
-	rows, err := s.db.QueryContext(ctx, "SELECT id, username, is_admin, password_hash FROM users ORDER BY username")
+	rows, err := s.db.QueryContext(ctx, "SELECT id, username, is_admin, password_hash FROM users WHERE guest = 0 ORDER BY username")
 	if err != nil {
 		return nil, err
 	}
@@ -228,7 +235,7 @@ func (s *Store) Users(ctx context.Context) ([]User, error) {
 
 func (s *Store) UserByName(ctx context.Context, username string) (User, error) {
 	return s.scanUser(s.db.QueryRowContext(ctx,
-		"SELECT id, username, is_admin, password_hash FROM users WHERE lower(username) = lower(?)", username))
+		"SELECT id, username, is_admin, password_hash FROM users WHERE lower(username) = lower(?) AND guest = 0", username))
 }
 
 func (s *Store) scanUser(row *sql.Row) (User, error) {

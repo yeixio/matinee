@@ -19,8 +19,12 @@ const Service = "_matinee._tcp"
 type Announcement struct {
 	Name    string // shown in the list, such as "Matinee"
 	Port    int    // where this host serves Matinee
-	URL     string // optional: the address to use instead of this host's IP and Port
+	URL     string // optional: the server's address away from home
 	Version string
+	// Home means this host's IP and Port reach Matinee directly from the home
+	// network, so devices there can use it without signing in. Otherwise
+	// apps connect to URL.
+	Home bool
 }
 
 // TXT is the record the apps read: who's answering, and where to connect.
@@ -28,6 +32,9 @@ func (a Announcement) TXT() []string {
 	txt := []string{"product=matinee", "version=" + a.Version}
 	if a.URL != "" {
 		txt = append(txt, "url="+strings.TrimRight(a.URL, "/"))
+	}
+	if a.Home {
+		txt = append(txt, "home=1")
 	}
 	return txt
 }
