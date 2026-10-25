@@ -367,7 +367,7 @@ func nullStr(s string) any {
 
 // RemoveMissing deletes a library's files that the last scan didn't see, then
 // any containers left empty.
-func (s *Store) RemoveMissing(ctx context.Context, libraryID int64, seen map[string]bool) (int, error) {
+func (s *Store) RemoveMissing(ctx context.Context, libraryID int64, seen func(path string) bool) (int, error) {
 	rows, err := s.db.QueryContext(ctx, "SELECT id, path FROM items WHERE library_id = ? AND path IS NOT NULL", libraryID)
 	if err != nil {
 		return 0, err
@@ -380,7 +380,7 @@ func (s *Store) RemoveMissing(ctx context.Context, libraryID int64, seen map[str
 			rows.Close()
 			return 0, err
 		}
-		if !seen[p] {
+		if !seen(p) {
 			gone = append(gone, id)
 		}
 	}

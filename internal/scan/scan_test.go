@@ -10,6 +10,7 @@ import (
 	"testing"
 
 	"github.com/yeixio/matinee/internal/probe"
+	"github.com/yeixio/matinee/internal/store"
 	"github.com/yeixio/matinee/internal/store/storetest"
 )
 
@@ -52,5 +53,24 @@ func TestScanLeavesOutUnplayableFiles(t *testing.T) {
 	top, _ := st.TopLevel(ctx, 0, lib.ID)
 	if len(top) != 1 || top[0].Title != "Real Artist" {
 		t.Fatalf("artists: %+v", top)
+	}
+}
+
+// An unmounted share looks like an empty or missing folder; its items stay.
+func TestScanKeepsItemsWhenFolderIsGone(t *testing.T) {
+	root := filepath.Join(t.TempDir(), "share")
+	st := storetest.Open(t)
+	ctx := context.Background()
+	lib, _ := st.CreateLibrary(ctx, "Movies", "movies", []string{root})
+	if _, err := st.UpsertFile(ctx, store.Item{LibraryID: lib.ID, Kind: "movie", Title: "Heat", Path: filepath.Join(root, "Heat.mkv"), VideoCodec: "h264"}); err != nil {
+		t.Fatal(err)
+	}
+	s := &Scanner{Store: st, Prober: probe.Prober{Path: "ffprobe"}, Log: slog.New(slog.NewTextHandler(io.Discard, nil))}
+	stats, err := s.Scan(ctx, lib)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if top, _ := st.TopLevel(ctx, 0, lib.ID); stats.Removed != 0 || len(top) != 1 {
+		t.Fatalf("removed %d, left %+v", stats.Removed, top)
 	}
 }

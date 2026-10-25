@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"io/fs"
 	"log/slog"
+	"os"
 	"path/filepath"
 	"strings"
 	"sync"
@@ -88,10 +89,20 @@ func (s *Scanner) Scan(ctx context.Context, lib store.Library) (Stats, error) {
 	start := time.Now()
 	var st Stats
 	seen := map[string]bool{}
+	// A folder that can't be read, such as an unmounted network share, must
+	// not look like every file in it was deleted, so its items are kept.
+	var unreadable []string
 	for _, root := range lib.Paths {
+		// An empty folder is usually a share that isn't mounted yet, too.
+		if entries, err := os.ReadDir(root); err != nil || len(entries) == 0 {
+			s.Log.Warn("library folder missing or empty; keeping its items", "library", lib.Name, "path", root, "err", err)
+			unreadable = append(unreadable, root)
+			continue
+		}
 		err := filepath.WalkDir(root, func(path string, d fs.DirEntry, err error) error {
 			if err != nil {
 				s.Log.Warn("walk", "path", path, "err", err)
+				unreadable = append(unreadable, path)
 				return nil
 			}
 			if ctx.Err() != nil {
@@ -150,7 +161,17 @@ func (s *Scanner) Scan(ctx context.Context, lib store.Library) (Stats, error) {
 			return st, err
 		}
 	}
-	removed, err := s.Store.RemoveMissing(ctx, lib.ID, seen)
+	removed, err := s.Store.RemoveMissing(ctx, lib.ID, func(p string) bool {
+		if seen[p] {
+			return true
+		}
+		for _, u := range unreadable {
+			if p == u || strings.HasPrefix(p, u+string(filepath.Separator)) {
+				return true
+			}
+		}
+		return false
+	})
 	if err != nil {
 		return st, err
 	}
