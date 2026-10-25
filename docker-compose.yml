@@ -8,6 +8,9 @@ services:
     build: .
     ports:
       - "7171:7171"
+    # For the apps to find this server on your network by themselves, use the
+    # host's network instead of the ports above (Linux only):
+    # network_mode: host
     environment:
       MATINEE_SCAN_INTERVAL: 15m
       # MATINEE_TMDB_KEY: your-themoviedb-key

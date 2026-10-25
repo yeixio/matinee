@@ -2,21 +2,26 @@
 package main
 
 import (
+	"cmp"
 	"context"
 	"errors"
 	"flag"
 	"fmt"
 	"log/slog"
+	"net"
 	"net/http"
+	"net/url"
 	"os"
 	"os/exec"
 	"os/signal"
+	"strconv"
 	"syscall"
 	"time"
 
 	"github.com/yeixio/matinee/internal/api"
 	"github.com/yeixio/matinee/internal/artwork"
 	"github.com/yeixio/matinee/internal/config"
+	"github.com/yeixio/matinee/internal/discovery"
 	"github.com/yeixio/matinee/internal/download"
 	"github.com/yeixio/matinee/internal/kube"
 	"github.com/yeixio/matinee/internal/metadata"
@@ -31,8 +36,13 @@ import (
 
 func main() {
 	cmd := run
-	if len(os.Args) > 1 && os.Args[1] == "init-db-secret" {
-		cmd = initDBSecret
+	if len(os.Args) > 1 {
+		switch os.Args[1] {
+		case "init-db-secret":
+			cmd = initDBSecret
+		case "announce":
+			cmd = announce
+		}
 	}
 	if err := cmd(); err != nil {
 		fmt.Fprintln(os.Stderr, "matinee:", err)
@@ -115,6 +125,15 @@ func run() error {
 		}()
 	}
 
+	if cfg.Discovery {
+		go func() {
+			a := discovery.Announcement{Name: cfg.ServerName, Port: listenPort(cfg.Addr), URL: cfg.PublicURL, Version: version.Version}
+			if err := discovery.Run(ctx, a, log); err != nil {
+				log.Warn("apps on this network won't find the server by themselves; they can still connect by address", "err", err)
+			}
+		}()
+	}
+
 	errc := make(chan error, 1)
 	go func() { errc <- srv.ListenAndServe() }()
 	dbKind := "sqlite"
@@ -166,4 +185,44 @@ func initDBSecret() error {
 		fmt.Println("secret", s.Name, "already exists; keeping it")
 	}
 	return nil
+}
+
+// announce runs on its own to make a server the apps can't otherwise see on
+// the local network findable, such as one inside Kubernetes: the Helm chart
+// runs it on the host network, pointing at the server's public address.
+func announce() error {
+	fs := flag.NewFlagSet("announce", flag.ContinueOnError)
+	var a discovery.Announcement
+	fs.StringVar(&a.URL, "url", os.Getenv("MATINEE_PUBLIC_URL"), "the server's address, such as https://matinee.example.com")
+	fs.StringVar(&a.Name, "name", cmp.Or(os.Getenv("MATINEE_SERVER_NAME"), "Matinee"), "the name the apps show")
+	if err := fs.Parse(os.Args[2:]); err != nil {
+		return err
+	}
+	if a.URL == "" {
+		return errors.New("announce needs -url")
+	}
+	u, err := url.Parse(a.URL)
+	if err != nil || (u.Scheme != "http" && u.Scheme != "https") || u.Host == "" {
+		return fmt.Errorf("-url %q isn't an http(s) address", a.URL)
+	}
+	a.Port = 443
+	if u.Scheme == "http" {
+		a.Port = 80
+	}
+	if p, err := strconv.Atoi(u.Port()); err == nil {
+		a.Port = p
+	}
+	a.Version = version.Version
+	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
+	defer stop()
+	return discovery.Run(ctx, a, slog.New(slog.NewTextHandler(os.Stderr, nil)))
+}
+
+// listenPort is the port in an address like ":7171" or "0.0.0.0:8080".
+func listenPort(addr string) int {
+	_, p, err := net.SplitHostPort(addr)
+	if n, perr := strconv.Atoi(p); err == nil && perr == nil {
+		return n
+	}
+	return 7171
 }

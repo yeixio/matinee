@@ -50,6 +50,16 @@ The chart runs Matinee with a bundled PostgreSQL, so nothing depends on file loc
 
 Run one replica for now: an active transcode lives in the pod that started it. More replicas work with `service.sessionAffinity: ClientIP`.
 
+### Finding it from the apps
+
+The Matinee apps list servers on your home network by themselves, so nobody has to know an IP address. The server announces itself over multicast DNS (Bonjour), and the apps show it on their first screen.
+
+- **apt, dnf, Homebrew and source installs** are found as they are.
+- **Docker:** a container on the default bridge network can't announce itself. Run it with `--network host` instead of `-p 7171:7171`, or keep typing the address.
+- **Kubernetes:** the chart runs a small announcer on a node's host network that points the apps at your ingress address. If your ingress is managed outside the chart, set `discovery.url` to the address you open Matinee at.
+
+To keep a server unlisted, set `MATINEE_DISCOVERY=false` (`discovery.enabled=false` in the chart). The apps can always connect by address.
+
 ### Debian and Ubuntu
 
 ```sh
@@ -120,6 +130,9 @@ Every setting is a flag or an environment variable.
 | `MATINEE_MEDIA_ROOT` | `/` | Folder the library picker opens in |
 | `MATINEE_MUSICBRAINZ` | `true` | Look up artists and albums on MusicBrainz, with covers from the Cover Art Archive and artist photos from Wikidata. No key needed. Set `false` to use only local artwork |
 | `MATINEE_SCAN_INTERVAL` | `15m` | How often libraries are rescanned; `0` turns it off |
+| `MATINEE_DISCOVERY` | `true` | Announce the server on the local network so the apps find it ([more](#finding-it-from-the-apps)) |
+| `MATINEE_SERVER_NAME` | `Matinee` | The name the apps show for this server |
+| `MATINEE_PUBLIC_URL` | empty | The address the apps should connect to, such as `https://matinee.example.com`; empty uses this machine's IP and port |
 | `MATINEE_FFMPEG`, `MATINEE_FFPROBE` | `ffmpeg`, `ffprobe` | Paths to FFmpeg |
 
 **SQLite or PostgreSQL?** SQLite is the default and needs nothing else: right for a single machine or a NAS, as long as `MATINEE_DATA_DIR` is on a local disk. Use PostgreSQL on Kubernetes, with several servers, or whenever the data would otherwise live on network storage, where SQLite's locking isn't reliable.

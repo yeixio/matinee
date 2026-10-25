@@ -24,6 +24,9 @@ type Config struct {
 	DatabaseURL  string        // postgres:// URL; empty uses SQLite in DataDir
 	MediaRoot    string        // where the folder picker starts when adding a library
 	MusicBrainz  bool          // look up artists and albums on MusicBrainz (no key needed)
+	Discovery    bool          // announce the server on the local network so the apps find it
+	ServerName   string        // the name the apps show for this server
+	PublicURL    string        // the address the apps should connect to; empty uses this host's IP and port
 }
 
 // Database is what store.Open takes: the PostgreSQL URL, or the SQLite file.
@@ -51,6 +54,9 @@ func Load(args []string) (Config, error) {
 	fs.StringVar(&c.TMDBKey, "tmdb-key", env("MATINEE_TMDB_KEY", DefaultTMDBKey), "themoviedb.org API key for posters and descriptions")
 	fs.StringVar(&c.MediaRoot, "media-root", env("MATINEE_MEDIA_ROOT", "/"), "folder the library picker starts in")
 	fs.BoolVar(&c.MusicBrainz, "musicbrainz", env("MATINEE_MUSICBRAINZ", "true") != "false", "look up artists and albums on musicbrainz.org")
+	fs.BoolVar(&c.Discovery, "discovery", env("MATINEE_DISCOVERY", "true") != "false", "announce this server on the local network so the apps find it")
+	fs.StringVar(&c.ServerName, "server-name", env("MATINEE_SERVER_NAME", "Matinee"), "the name the apps show for this server")
+	fs.StringVar(&c.PublicURL, "public-url", env("MATINEE_PUBLIC_URL", ""), "the address the apps should connect to, such as https://matinee.example.com")
 	interval := fs.String("scan-interval", env("MATINEE_SCAN_INTERVAL", "15m"), "periodic rescan interval, 0 to disable")
 	if err := fs.Parse(args); err != nil {
 		return c, err

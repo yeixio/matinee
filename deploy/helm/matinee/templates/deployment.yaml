@@ -37,6 +37,9 @@ spec:
               value: /cache
             - name: MATINEE_MEDIA_ROOT
               value: {{ .Values.mediaRoot | quote }}
+            # The pod network doesn't reach the home network; discovery.yaml announces it instead.
+            - name: MATINEE_DISCOVERY
+              value: "false"
             - name: MATINEE_DATABASE_URL
               valueFrom:
                 secretKeyRef:

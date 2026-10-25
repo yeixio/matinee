@@ -92,6 +92,19 @@ postgresql:
     storageClass: ""
   resources: {}
 
+# Lets the apps find this server on your home network by themselves, so nobody
+# has to type an address (they still can). A pod can't reach the home network,
+# so a small announcer runs on a node's host network and points the apps at
+# your server's address. Set enabled: false to keep the server unlisted.
+discovery:
+  enabled: true
+  # The address the apps should connect to. Defaults to the first ingress host
+  # above; set it when your ingress is managed outside this chart.
+  url: ""
+  # The name the apps show for this server.
+  name: Matinee
+  resources: {}
+
 env: []
 #  - name: MATINEE_SCAN_INTERVAL
 #    value: 30m
