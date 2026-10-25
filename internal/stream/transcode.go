@@ -9,11 +9,13 @@ import (
 	"fmt"
 	"log/slog"
 	"net/http"
+	"net/url"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"regexp"
 	"strconv"
+	"strings"
 	"sync"
 	"time"
 
@@ -178,8 +180,31 @@ func (t *Transcoder) ServeFile(w http.ResponseWriter, r *http.Request, userID in
 	} else {
 		w.Header().Set("Content-Type", "application/vnd.apple.mpegurl")
 		w.Header().Set("Cache-Control", "no-cache")
+		// A player given the playlist with ?token= (an app's native player, or
+		// a cast device) fetches segments without its headers or cookies, so
+		// the segment links carry the token too.
+		if token := r.URL.Query().Get("token"); token != "" {
+			b, err := os.ReadFile(path)
+			if err != nil {
+				http.NotFound(w, r)
+				return
+			}
+			w.Write(signPlaylist(b, token))
+			return
+		}
 	}
 	http.ServeFile(w, r, path)
+}
+
+// signPlaylist adds ?token= to each segment in an HLS playlist.
+func signPlaylist(playlist []byte, token string) []byte {
+	lines := strings.Split(string(playlist), "\n")
+	for i, l := range lines {
+		if l != "" && !strings.HasPrefix(l, "#") {
+			lines[i] = l + "?token=" + url.QueryEscape(token)
+		}
+	}
+	return []byte(strings.Join(lines, "\n"))
 }
 
 // waitFor returns once file exists and FFmpeg has moved past it (or exited).

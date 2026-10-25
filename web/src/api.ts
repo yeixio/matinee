@@ -1,7 +1,19 @@
-// Typed client for the Matinee server API. The session lives in an HttpOnly
-// cookie, so requests just need to be same-origin.
+// Typed client for the Matinee server API (/api/v1, documented in
+// internal/api/openapi.yaml). The session lives in an HttpOnly cookie, so
+// requests just need to be same-origin.
 
 export type User = { id: number; username: string; isAdmin: boolean }
+
+export type Device = {
+  id: string
+  deviceName: string
+  platform: string
+  createdAt: number
+  lastSeenAt: number
+  current: boolean
+}
+
+export type PendingDevice = { userCode: string; deviceName: string; platform: string; expiresAt: number }
 
 export type Library = {
   id: number
@@ -88,44 +100,49 @@ async function request<T>(method: string, path: string, body?: unknown): Promise
 }
 
 export const api = {
-  setup: () => request<{ needsSetup: boolean }>('GET', '/api/setup'),
+  setup: () => request<{ needsSetup: boolean }>('GET', '/api/v1/setup'),
   createAdmin: (username: string, password: string) =>
-    request<{ user: User }>('POST', '/api/setup', { username, password }),
+    request<{ user: User }>('POST', '/api/v1/setup', { username, password }),
   login: (username: string, password: string) =>
-    request<{ user: User }>('POST', '/api/auth/login', { username, password }),
-  logout: () => request<void>('POST', '/api/auth/logout'),
-  me: () => request<User>('GET', '/api/me'),
+    request<{ user: User }>('POST', '/api/v1/auth/login', { username, password }),
+  logout: () => request<void>('POST', '/api/v1/auth/logout'),
+  me: () => request<User>('GET', '/api/v1/me'),
+  devices: () => request<Device[]>('GET', '/api/v1/devices'),
+  signOutDevice: (id: string) => request<void>('DELETE', `/api/v1/devices/${encodeURIComponent(id)}`),
+  pendingDevice: (code: string) => request<PendingDevice>('GET', `/api/v1/auth/device/${encodeURIComponent(code)}`),
+  decideDevice: (code: string, approve: boolean) =>
+    request<void>('POST', `/api/v1/auth/device/${encodeURIComponent(code)}/${approve ? 'approve' : 'deny'}`),
 
-  libraries: () => request<Library[]>('GET', '/api/libraries'),
+  libraries: () => request<Library[]>('GET', '/api/v1/libraries'),
   createLibrary: (name: string, kind: string, paths: string[]) =>
-    request<Library>('POST', '/api/libraries', { name, kind, paths }),
-  deleteLibrary: (id: number) => request<void>('DELETE', `/api/libraries/${id}`),
-  scanLibrary: (id: number) => request<void>('POST', `/api/libraries/${id}/scan`),
-  libraryItems: (id: number) => request<Item[]>('GET', `/api/libraries/${id}/items`),
+    request<Library>('POST', '/api/v1/libraries', { name, kind, paths }),
+  deleteLibrary: (id: number) => request<void>('DELETE', `/api/v1/libraries/${id}`),
+  scanLibrary: (id: number) => request<void>('POST', `/api/v1/libraries/${id}/scan`),
+  libraryItems: (id: number) => request<Item[]>('GET', `/api/v1/libraries/${id}/items`),
   browse: (path: string) =>
-    request<{ path: string; parent: string; dirs: string[] }>('GET', `/api/fs?path=${encodeURIComponent(path)}`),
+    request<{ path: string; parent: string; dirs: string[] }>('GET', `/api/v1/fs?path=${encodeURIComponent(path)}`),
 
-  users: () => request<User[]>('GET', '/api/users'),
+  users: () => request<User[]>('GET', '/api/v1/users'),
   createUser: (username: string, password: string, isAdmin: boolean) =>
-    request<User>('POST', '/api/users', { username, password, isAdmin }),
+    request<User>('POST', '/api/v1/users', { username, password, isAdmin }),
 
-  home: () => request<{ continueWatching: Item[]; recentlyAdded: Item[] }>('GET', '/api/home'),
-  search: (q: string) => request<Item[]>('GET', `/api/search?q=${encodeURIComponent(q)}`),
-  item: (id: number) => request<ItemDetail>('GET', `/api/items/${id}`),
-  children: (id: number) => request<Item[]>('GET', `/api/items/${id}/children`),
+  home: () => request<{ continueWatching: Item[]; recentlyAdded: Item[] }>('GET', '/api/v1/home'),
+  search: (q: string) => request<Item[]>('GET', `/api/v1/search?q=${encodeURIComponent(q)}`),
+  item: (id: number) => request<ItemDetail>('GET', `/api/v1/items/${id}`),
+  children: (id: number) => request<Item[]>('GET', `/api/v1/items/${id}/children`),
   setProgress: (id: number, positionMs: number, played = false) =>
-    request<void>('PUT', `/api/items/${id}/progress`, { positionMs, played }),
+    request<void>('PUT', `/api/v1/items/${id}/progress`, { positionMs, played }),
   startHls: (id: number, startSec = 0, burnSubtitle?: string) =>
     request<{ url: string; startSec: number }>(
       'POST',
-      `/api/items/${id}/hls?start=${startSec}${burnSubtitle ? `&subtitle=${encodeURIComponent(burnSubtitle)}` : ''}`,
+      `/api/v1/items/${id}/hls?start=${startSec}${burnSubtitle ? `&subtitle=${encodeURIComponent(burnSubtitle)}` : ''}`,
     ),
   subtitles: async (id: number, track: string) => {
-    const res = await fetch(`/api/items/${id}/subtitles/${encodeURIComponent(track)}.vtt`, { credentials: 'same-origin' })
+    const res = await fetch(`/api/v1/items/${id}/subtitles/${encodeURIComponent(track)}.vtt`, { credentials: 'same-origin' })
     if (!res.ok) throw new ApiError(res.status, "Couldn't load these subtitles")
     return res.text()
   },
 }
 
-export const imageUrl = (id: number, type: 'poster' | 'backdrop') => `/api/items/${id}/image/${type}`
-export const fileUrl = (id: number) => `/api/items/${id}/file`
+export const imageUrl = (id: number, type: 'poster' | 'backdrop') => `/api/v1/items/${id}/image/${type}`
+export const fileUrl = (id: number) => `/api/v1/items/${id}/file`

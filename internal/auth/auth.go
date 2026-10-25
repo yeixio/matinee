@@ -27,8 +27,8 @@ func HashPassword(pw string) (string, error) {
 	return string(b), err
 }
 
-// Login checks a password and starts a session.
-func Login(ctx context.Context, s *store.Store, username, password string) (store.User, string, error) {
+// Login checks a password and starts a session for a device.
+func Login(ctx context.Context, s *store.Store, username, password string, dev store.Device) (store.User, string, error) {
 	u, err := s.UserByName(ctx, username)
 	if errors.Is(err, store.ErrNotFound) {
 		// Spend the same time as a real check so usernames can't be probed by timing.
@@ -41,7 +41,7 @@ func Login(ctx context.Context, s *store.Store, username, password string) (stor
 	if bcrypt.CompareHashAndPassword([]byte(u.PasswordHash()), []byte(password)) != nil {
 		return u, "", ErrBadCredentials
 	}
-	token, err := s.CreateSession(ctx, u.ID, SessionTTL)
+	token, err := s.CreateSession(ctx, u.ID, SessionTTL, dev)
 	return u, token, err
 }
 
@@ -66,4 +66,37 @@ func WithUser(ctx context.Context, u store.User) context.Context {
 func UserFrom(ctx context.Context) (store.User, bool) {
 	u, ok := ctx.Value(ctxKey{}).(store.User)
 	return u, ok
+}
+
+// BrowserName describes a browser from its User-Agent, such as "Firefox on macOS",
+// for the list of signed-in devices.
+func BrowserName(userAgent string) string {
+	browser := ""
+	for _, b := range []struct{ token, name string }{
+		{"Edg/", "Edge"}, {"OPR/", "Opera"}, {"Firefox/", "Firefox"}, {"Chrome/", "Chrome"}, {"Safari/", "Safari"},
+	} {
+		if strings.Contains(userAgent, b.token) {
+			browser = b.name
+			break
+		}
+	}
+	os := ""
+	for _, o := range []struct{ token, name string }{
+		{"iPhone", "iPhone"}, {"iPad", "iPad"}, {"Android", "Android"}, {"Mac OS X", "macOS"},
+		{"Windows", "Windows"}, {"CrOS", "ChromeOS"}, {"Linux", "Linux"},
+	} {
+		if strings.Contains(userAgent, o.token) {
+			os = o.name
+			break
+		}
+	}
+	switch {
+	case browser != "" && os != "":
+		return browser + " on " + os
+	case browser != "":
+		return browser
+	case os != "":
+		return os
+	}
+	return "Web browser"
 }
