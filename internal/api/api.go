@@ -626,6 +626,11 @@ func (s *Server) startHLS(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	id, err := s.Transcoder.Start(r.Context(), currentUser(r).ID, it, start, burn)
+	if errors.Is(err, stream.ErrSuperseded) {
+		// The player already asked for a newer position; it ignores this answer.
+		writeError(w, http.StatusConflict, "replaced by a newer seek")
+		return
+	}
 	if err != nil {
 		s.Log.Error("transcode", "item", it.ID, "err", err)
 		writeError(w, http.StatusInternalServerError, "couldn't start playback for this file")
