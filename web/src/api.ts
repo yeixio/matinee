@@ -102,6 +102,7 @@ async function request<T>(method: string, path: string, body?: unknown): Promise
 }
 
 export const api = {
+  server: () => request<{ version: string; apiVersion: number; name?: string }>('GET', '/api/v1/server'),
   setup: () => request<{ needsSetup: boolean }>('GET', '/api/v1/setup'),
   createAdmin: (username: string, password: string) =>
     request<{ user: User }>('POST', '/api/v1/setup', { username, password }),

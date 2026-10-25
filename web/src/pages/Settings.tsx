@@ -24,6 +24,7 @@ export default function Settings() {
         </a>
         . This product uses the TMDB API but is not endorsed or certified by TMDB.
       </p>
+      <ServerVersion />
     </div>
   )
 }
@@ -268,6 +269,17 @@ function lastSeen(unix: number) {
   if (mins < 60) return `${mins} min ago`
   if (mins < 60 * 24) return `${Math.round(mins / 60)} h ago`
   return new Date(unix * 1000).toLocaleDateString()
+}
+
+function ServerVersion() {
+  const { data } = useQuery({ queryKey: ['server'], queryFn: api.server, staleTime: Infinity })
+  if (!data) return null
+  return (
+    <p className="text-xs text-faint">
+      {/* Builds from main are "main-<commit>"; the short commit is enough. */}
+      Matinee server {data.version.replace(/^main-([0-9a-f]{7})[0-9a-f]+$/, 'main-$1')} · API v{data.apiVersion}
+    </p>
+  )
 }
 
 function HomeNetwork() {
