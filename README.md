@@ -120,6 +120,10 @@ make dev                       # web player with hot reload, against a server fr
 
 The Go tests build real media files with FFmpeg and run a full scan, browse, play and transcode cycle, so FFmpeg needs to be installed.
 
+## Releasing
+
+Push a version tag, such as `git tag v0.2.0 && git push origin v0.2.0`. The release workflow tests, then publishes `ghcr.io/yeixio/matinee:0.2.0` (and `0.2`, `latest`) for amd64, arm64 and armv7, pushes the Helm chart to `oci://ghcr.io/yeixio/charts/matinee` with that version, and attaches single-binary archives for Linux, macOS and Windows to a GitHub release. A tag with a suffix (`v0.2.0-beta.1`) is a pre-release and leaves `latest` alone.
+
 ## License
 
 The Matinee server and web player are licensed under the [GNU AGPL-3.0-or-later](LICENSE).
