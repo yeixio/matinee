@@ -9,6 +9,11 @@ import (
 	"time"
 )
 
+// DefaultTMDBKey is the project's own TMDB key, linked into official builds with
+// -ldflags "-X github.com/yeixio/matinee/internal/config.DefaultTMDBKey=...", so
+// posters work without users registering a key. MATINEE_TMDB_KEY overrides it.
+var DefaultTMDBKey = ""
+
 type Config struct {
 	Addr         string        // HTTP listen address
 	DataDir      string        // SQLite database (when used), image cache and transcode scratch space
@@ -17,6 +22,7 @@ type Config struct {
 	ScanInterval time.Duration // periodic library rescan; 0 disables it
 	TMDBKey      string        // themoviedb.org API key or read token; empty disables online metadata
 	DatabaseURL  string        // postgres:// URL; empty uses SQLite in DataDir
+	MediaRoot    string        // where the folder picker starts when adding a library
 }
 
 // Database is what store.Open takes: the PostgreSQL URL, or the SQLite file.
@@ -40,7 +46,8 @@ func Load(args []string) (Config, error) {
 	fs.StringVar(&c.FFmpegPath, "ffmpeg", env("MATINEE_FFMPEG", "ffmpeg"), "path to ffmpeg")
 	fs.StringVar(&c.FFprobePath, "ffprobe", env("MATINEE_FFPROBE", "ffprobe"), "path to ffprobe")
 	fs.StringVar(&c.DatabaseURL, "database-url", env("MATINEE_DATABASE_URL", ""), "PostgreSQL URL (postgres://...); default is SQLite in the data directory")
-	fs.StringVar(&c.TMDBKey, "tmdb-key", env("MATINEE_TMDB_KEY", ""), "themoviedb.org API key for posters and descriptions")
+	fs.StringVar(&c.TMDBKey, "tmdb-key", env("MATINEE_TMDB_KEY", DefaultTMDBKey), "themoviedb.org API key for posters and descriptions")
+	fs.StringVar(&c.MediaRoot, "media-root", env("MATINEE_MEDIA_ROOT", "/"), "folder the library picker starts in")
 	interval := fs.String("scan-interval", env("MATINEE_SCAN_INTERVAL", "15m"), "periodic rescan interval, 0 to disable")
 	if err := fs.Parse(args); err != nil {
 		return c, err

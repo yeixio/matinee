@@ -31,7 +31,9 @@ tmdb:
   # Or read it from an existing secret's "tmdb-api-key" key.
   existingSecret: ""
 
-# Your media, mounted read-only. Any volume source works: nfs, persistentVolumeClaim, hostPath...
+# Your media, mounted read-only. Any volume source works: nfs, persistentVolumeClaim, csi (SMB), hostPath...
+# After install, add libraries in Settings: the folder picker opens at mediaRoot.
+mediaRoot: /media
 media: []
 #  - name: movies
 #    mountPath: /media/movies
@@ -44,6 +46,7 @@ media: []
 #    volume:
 #      persistentVolumeClaim:
 #        claimName: tv-library
+#    subPath: "TV Shows"  # optional: mount one folder of the volume
 
 # Transcode segments and the image cache. Rebuilt on demand, so emptyDir is fine.
 # Use a fast local disk; network storage slows transcoding down.
@@ -56,6 +59,10 @@ database:
   # either a full URL here...
   url: ""
   # ...or an existing secret holding it under the "database-url" key.
+  # With the bundled PostgreSQL, the secret also needs "postgres-password", and database-url must use it:
+  #   postgres://matinee:<password>@<release>-postgresql:5432/matinee?sslmode=disable
+  # Use this with Argo CD or Flux: they render with `helm template`, where the generated
+  # password below can't be looked up and would change on every sync.
   existingSecret: ""
 
 # Bundled PostgreSQL, so `helm install` works out of the box.
@@ -67,7 +74,8 @@ postgresql:
   auth:
     username: matinee
     database: matinee
-    # Generated on first install and kept across upgrades when empty.
+    # Generated on first install and kept across `helm upgrade` when empty.
+    # GitOps tools can't keep it; use database.existingSecret there.
     password: ""
   persistence:
     size: 8Gi

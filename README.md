@@ -19,7 +19,7 @@ A fast, self-hosted media server for your movies, TV and music. The basics Plex 
 - **Subtitles** from the file itself or from files next to it (`Movie.en.srt`, `Movie.en.forced.srt`, `.vtt`, `.ass`). Text subtitles are drawn by the player; Blu-ray and DVD picture subtitles are burned into the video while converting. The player remembers your language from one episode to the next.
 - **Picks up where you left off.** Resume points, watched marks, Continue Watching and Recently Added, per person.
 - **Music** with a player that keeps going while you browse.
-- **Posters and descriptions** from [TMDB](https://www.themoviedb.org/) when you add a free API key. Your own artwork files always win.
+- **Posters and descriptions** from [TMDB](https://www.themoviedb.org/) built in to the official images, no account needed. Your own artwork files always win.
 - **Search** as you type.
 - **People:** an admin plus as many accounts as you like, each with their own history.
 
@@ -66,7 +66,8 @@ Every setting is a flag or an environment variable.
 | `MATINEE_ADDR` | `:7171` | Listen address |
 | `MATINEE_DATA_DIR` | `./data` | SQLite database (when used), image cache, transcode scratch space |
 | `MATINEE_DATABASE_URL` | empty | `postgres://…` to use PostgreSQL instead of SQLite |
-| `MATINEE_TMDB_KEY` | empty | TMDB API key or read access token, for posters and descriptions |
+| `MATINEE_TMDB_KEY` | built-in key in official images | Your own TMDB API key or read access token, to use instead of the built-in one |
+| `MATINEE_MEDIA_ROOT` | `/` | Folder the library picker opens in |
 | `MATINEE_SCAN_INTERVAL` | `15m` | How often libraries are rescanned; `0` turns it off |
 | `MATINEE_FFMPEG`, `MATINEE_FFPROBE` | `ffmpeg`, `ffprobe` | Paths to FFmpeg |
 

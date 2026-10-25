@@ -16,8 +16,11 @@ COPY . .
 COPY --from=web /src/web/dist ./web/dist
 ARG VERSION=dev
 ARG TARGETOS TARGETARCH
-RUN CGO_ENABLED=0 GOOS=$TARGETOS GOARCH=$TARGETARCH go build -trimpath \
-    -ldflags "-s -w -X github.com/yeixio/matinee/internal/version.Version=${VERSION}" \
+# Official images get the project's TMDB key from a build secret (kept out of image history).
+RUN --mount=type=secret,id=tmdb_key \
+    TMDB_KEY="$(cat /run/secrets/tmdb_key 2>/dev/null || true)" && \
+    CGO_ENABLED=0 GOOS=$TARGETOS GOARCH=$TARGETARCH go build -trimpath \
+    -ldflags "-s -w -X github.com/yeixio/matinee/internal/version.Version=${VERSION} -X github.com/yeixio/matinee/internal/config.DefaultTMDBKey=${TMDB_KEY}" \
     -o /out/matinee ./cmd/matinee
 
 FROM alpine:3.22

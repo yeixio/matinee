@@ -11,6 +11,14 @@ export default function Settings() {
       <h1 className="text-2xl font-bold tracking-tight">Settings</h1>
       <Libraries />
       <Users />
+      {/* TMDB's API terms ask apps that use it for this notice. */}
+      <p className="text-xs text-faint">
+        Posters and descriptions come from{' '}
+        <a href="https://www.themoviedb.org/" target="_blank" rel="noreferrer" className="underline hover:text-muted">
+          TMDB
+        </a>
+        . This product uses the TMDB API but is not endorsed or certified by TMDB.
+      </p>
     </div>
   )
 }
@@ -158,9 +166,13 @@ function AddLibrary({ onDone }: { onDone: () => void }) {
 
 // Browse the server's folders, since the media lives on the server, not this device.
 function FolderPicker({ onPick }: { onPick: (path: string) => void }) {
-  const [path, setPath] = useState('/')
+  // Empty asks the server for its media root (MATINEE_MEDIA_ROOT), so the picker opens on the media.
+  const [path, setPath] = useState('')
   const { data, error } = useQuery({ queryKey: ['fs', path], queryFn: () => api.browse(path) })
-  const join = (dir: string) => (path.endsWith('/') ? path + dir : `${path}/${dir}`)
+  const join = (dir: string) => {
+    const base = data?.path ?? path
+    return base.endsWith('/') ? base + dir : `${base}/${dir}`
+  }
   return (
     <div className="overflow-hidden rounded-lg border border-line">
       <div className="flex items-center gap-2 border-b border-line bg-white/5 px-2 py-2">

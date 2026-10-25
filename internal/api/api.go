@@ -33,6 +33,7 @@ type Server struct {
 	Subtitles  *subtitle.Converter
 	Web        fs.FS // built web player; nil serves a placeholder
 	Log        *slog.Logger
+	MediaRoot  string // where the folder picker starts; empty means /
 
 	// BackgroundCtx scopes scans started by API calls; it outlives any one request.
 	BackgroundCtx context.Context
@@ -413,6 +414,9 @@ func (s *Server) libraryItems(w http.ResponseWriter, r *http.Request) {
 // browseFS lists subfolders so admins can pick library folders from the browser.
 func (s *Server) browseFS(w http.ResponseWriter, r *http.Request) {
 	dir := r.URL.Query().Get("path")
+	if dir == "" {
+		dir = s.MediaRoot
+	}
 	if dir == "" {
 		dir = "/"
 	}

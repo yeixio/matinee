@@ -76,6 +76,7 @@ func run() error {
 			Art:       artwork.NewCache(cfg.ImageDir(), cfg.FFmpegPath),
 			Subtitles: subtitle.NewConverter(cfg.FFmpegPath, cfg.SubtitleDir()),
 			Web:       web.FS(), Log: log, BackgroundCtx: ctx,
+			MediaRoot: cfg.MediaRoot,
 		}).Handler(),
 		ReadHeaderTimeout: 10 * time.Second,
 	}

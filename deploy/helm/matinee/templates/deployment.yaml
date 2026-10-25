@@ -35,6 +35,8 @@ spec:
               value: ":7171"
             - name: MATINEE_DATA_DIR
               value: /cache
+            - name: MATINEE_MEDIA_ROOT
+              value: {{ .Values.mediaRoot | quote }}
             - name: MATINEE_DATABASE_URL
               valueFrom:
                 secretKeyRef:
@@ -76,6 +78,9 @@ spec:
             {{- range .Values.media }}
             - name: media-{{ .name }}
               mountPath: {{ .mountPath }}
+              {{- with .subPath }}
+              subPath: {{ . | quote }}
+              {{- end }}
               readOnly: true
             {{- end }}
       volumes:
