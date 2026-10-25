@@ -4,6 +4,7 @@ package main
 import (
 	"context"
 	"errors"
+	"flag"
 	"fmt"
 	"log/slog"
 	"net/http"
@@ -16,6 +17,7 @@ import (
 	"github.com/yeixio/matinee/internal/api"
 	"github.com/yeixio/matinee/internal/artwork"
 	"github.com/yeixio/matinee/internal/config"
+	"github.com/yeixio/matinee/internal/kube"
 	"github.com/yeixio/matinee/internal/metadata"
 	"github.com/yeixio/matinee/internal/probe"
 	"github.com/yeixio/matinee/internal/scan"
@@ -27,7 +29,11 @@ import (
 )
 
 func main() {
-	if err := run(); err != nil {
+	cmd := run
+	if len(os.Args) > 1 && os.Args[1] == "init-db-secret" {
+		cmd = initDBSecret
+	}
+	if err := cmd(); err != nil {
 		fmt.Fprintln(os.Stderr, "matinee:", err)
 		os.Exit(1)
 	}
@@ -76,6 +82,7 @@ func run() error {
 			Art:       artwork.NewCache(cfg.ImageDir(), cfg.FFmpegPath),
 			Subtitles: subtitle.NewConverter(cfg.FFmpegPath, cfg.SubtitleDir()),
 			Web:       web.FS(), Log: log, BackgroundCtx: ctx,
+			MediaRoot: cfg.MediaRoot,
 		}).Handler(),
 		ReadHeaderTimeout: 10 * time.Second,
 	}
@@ -114,6 +121,37 @@ func run() error {
 		shutdownCtx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 		defer cancel()
 		srv.Shutdown(shutdownCtx)
+	}
+	return nil
+}
+
+// initDBSecret runs as the Helm chart's install hook: it creates the bundled
+// PostgreSQL's credentials once, so a fresh install needs no hand-made Secret.
+func initDBSecret() error {
+	fs := flag.NewFlagSet("init-db-secret", flag.ContinueOnError)
+	var s kube.DatabaseSecret
+	fs.StringVar(&s.Name, "name", "matinee-db", "secret to create")
+	fs.StringVar(&s.User, "user", "matinee", "database user")
+	fs.StringVar(&s.Database, "database", "matinee", "database name")
+	fs.StringVar(&s.Host, "host", "matinee-postgresql", "PostgreSQL service")
+	if err := fs.Parse(os.Args[2:]); err != nil {
+		return err
+	}
+	client, ns, err := kube.InCluster()
+	if err != nil {
+		return err
+	}
+	s.Namespace = ns
+	ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
+	defer cancel()
+	created, err := client.EnsureDatabaseSecret(ctx, s)
+	if err != nil {
+		return err
+	}
+	if created {
+		fmt.Println("created database credentials in secret", s.Name)
+	} else {
+		fmt.Println("secret", s.Name, "already exists; keeping it")
 	}
 	return nil
 }

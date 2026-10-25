@@ -33,16 +33,9 @@ app.kubernetes.io/component: server
 {{- end -}}
 {{- end -}}
 
-{{/* Reuse the bundled database's password across upgrades. */}}
-{{- define "matinee.postgresql.password" -}}
-{{- if .Values.postgresql.auth.password -}}
-{{- .Values.postgresql.auth.password -}}
-{{- else -}}
-{{- $existing := lookup "v1" "Secret" .Release.Namespace (include "matinee.databaseSecret" .) -}}
-{{- if and $existing (index $existing.data "postgres-password") -}}
-{{- index $existing.data "postgres-password" | b64dec -}}
-{{- else -}}
-{{- randAlphaNum 32 -}}
-{{- end -}}
+{{/* True when an install hook generates the bundled database's credentials. */}}
+{{- define "matinee.generateDBSecret" -}}
+{{- if and .Values.postgresql.enabled (not .Values.database.existingSecret) (not .Values.postgresql.auth.password) -}}
+true
 {{- end -}}
 {{- end -}}

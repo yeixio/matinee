@@ -76,7 +76,8 @@ func newTestServer(t *testing.T) (*client, string) {
 	ctx, cancel := context.WithCancel(context.Background())
 	t.Cleanup(cancel)
 	srv := &Server{
-		Store: db, Scanner: &scan.Scanner{Store: db, Prober: probe.Prober{Path: "ffprobe"}, Log: log},
+		MediaRoot: tmp,
+		Store:     db, Scanner: &scan.Scanner{Store: db, Prober: probe.Prober{Path: "ffprobe"}, Log: log},
 		Transcoder: tc, Art: artwork.NewCache(filepath.Join(tmp, "images"), "ffmpeg"),
 		Subtitles: subtitle.NewConverter("ffmpeg", filepath.Join(tmp, "subtitles")), Log: log, BackgroundCtx: ctx,
 	}
@@ -247,6 +248,13 @@ func TestEndToEnd(t *testing.T) {
 	c.do("GET", "/api/items/"+itoa(movie.ID), nil, &watched)
 	if !watched.Played {
 		t.Fatal("watching past the credits should mark the movie played")
+	}
+
+	// The folder picker opens at the media root when no path is given.
+	var root struct{ Path string }
+	c.do("GET", "/api/fs", nil, &root)
+	if root.Path != tmp {
+		t.Fatalf("folder picker starts at %q, want the media root %q", root.Path, tmp)
 	}
 
 	// Non-admins can browse but not manage libraries.
