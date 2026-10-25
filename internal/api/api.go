@@ -2,6 +2,7 @@
 package api
 
 import (
+	"compress/gzip"
 	"context"
 	"encoding/json"
 	"errors"
@@ -99,6 +100,21 @@ func writeJSON(w http.ResponseWriter, status int, v any) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(status)
 	json.NewEncoder(w).Encode(v)
+}
+
+// writeLargeJSON is writeJSON compressed for clients that accept gzip, for
+// lists that can run to megabytes, like a library of thousands of movies.
+func writeLargeJSON(w http.ResponseWriter, r *http.Request, v any) {
+	w.Header().Add("Vary", "Accept-Encoding")
+	if !strings.Contains(r.Header.Get("Accept-Encoding"), "gzip") {
+		writeJSON(w, http.StatusOK, v)
+		return
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Content-Encoding", "gzip")
+	gz, _ := gzip.NewWriterLevel(w, gzip.BestSpeed)
+	json.NewEncoder(gz).Encode(v)
+	gz.Close()
 }
 
 func writeError(w http.ResponseWriter, status int, msg string) {
@@ -413,7 +429,7 @@ func (s *Server) libraryItems(w http.ResponseWriter, r *http.Request) {
 		s.serverError(w, err)
 		return
 	}
-	writeJSON(w, http.StatusOK, items)
+	writeLargeJSON(w, r, items)
 }
 
 // browseFS lists subfolders so admins can pick library folders from the browser.

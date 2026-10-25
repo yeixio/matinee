@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
-import { Check, ChevronRight, Play, Shuffle } from 'lucide-react'
+import { Check, ChevronRight, LoaderCircle, Play, Shuffle } from 'lucide-react'
 import { Link, useParams } from 'react-router-dom'
-import { api, type Item, type ItemDetail } from '../api'
+import { api, pendingRefetch, type Item, type ItemDetail } from '../api'
 import { Artwork } from '../components/Artwork'
 import { PosterGrid } from '../components/Card'
 import { Button, Spinner } from '../components/ui'
@@ -10,11 +10,16 @@ import { useAudio } from '../player/AudioPlayer'
 
 export default function ItemPage() {
   const id = Number(useParams().id)
-  const { data: item, isPending } = useQuery({ queryKey: ['item', id], queryFn: () => api.item(id) })
+  const { data: item, isPending } = useQuery({
+    queryKey: ['item', id],
+    queryFn: () => api.item(id),
+    refetchInterval: (q) => pendingRefetch(q.state.data && [q.state.data]),
+  })
   const { data: children } = useQuery({
     queryKey: ['children', id],
     queryFn: () => api.children(id),
     enabled: !!item && !item.playable,
+    refetchInterval: (q) => pendingRefetch(q.state.data),
   })
 
   if (isPending || !item) {
@@ -104,7 +109,15 @@ function Header({ item, kids }: { item: ItemDetail; kids?: Item[] }) {
               )}
             </div>
           )}
-          {item.overview && <p className="max-w-3xl leading-relaxed text-text/85">{item.overview}</p>}
+          {item.overview ? (
+            <p className="max-w-3xl leading-relaxed text-text/85">{item.overview}</p>
+          ) : (
+            item.pending && (
+              <p className="flex items-center gap-2 text-sm text-muted">
+                <LoaderCircle className="size-4 animate-spin" /> Fetching details…
+              </p>
+            )
+          )}
 
           <div className="flex flex-wrap gap-3">
             {item.playable && item.kind !== 'track' && (

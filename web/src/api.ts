@@ -37,7 +37,12 @@ export type Item = {
   hasBackdrop: boolean
   showTitle?: string
   seasonIndex?: number
+  // True until the server has looked the item up online.
+  pending?: boolean
 }
+
+// How often lists refresh while some of their items are still being looked up.
+export const pendingRefetch = (items?: Item[]) => (items?.some((i) => i.pending) ? 10_000 : false)
 
 export type SubtitleTrack = {
   id: string

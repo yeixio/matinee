@@ -100,6 +100,8 @@ func (c *Cache) download(ctx context.Context, url, dst string) error {
 	if err != nil {
 		return err
 	}
+	// Wikimedia turns away requests without a descriptive User-Agent.
+	req.Header.Set("User-Agent", "Matinee (https://github.com/yeixio/matinee)")
 	res, err := c.Client.Do(req)
 	if err != nil {
 		return err

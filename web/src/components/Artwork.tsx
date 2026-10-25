@@ -28,6 +28,9 @@ export function Artwork({
       className={`relative overflow-hidden bg-raised ${className}`}
       style={{ backgroundImage: `linear-gradient(140deg, hsl(${h} 35% 22%), hsl(${(h + 40) % 360} 30% 10%))` }}
     >
+      {item.pending && (!has || failed || !loaded) && (
+        <div className="pending-sweep absolute inset-0" title="Fetching details…" aria-label="Fetching details" />
+      )}
       {(!has || failed || !loaded) && label && (
         <div className="absolute inset-0 flex items-end p-3">
           <span className="line-clamp-3 text-sm leading-snug font-semibold text-white/85">{item.title}</span>

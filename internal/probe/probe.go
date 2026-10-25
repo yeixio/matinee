@@ -49,6 +49,10 @@ func (p Prober) Probe(ctx context.Context, file string) (Result, error) {
 	out, err := exec.CommandContext(ctx, p.Path, "-v", "error", "-print_format", "json",
 		"-show_format", "-show_streams", file).Output()
 	if err != nil {
+		if ctx.Err() != nil {
+			// Timed out or cancelled: says nothing about the file itself.
+			return Result{}, fmt.Errorf("ffprobe %s: %w", file, ctx.Err())
+		}
 		return Result{}, fmt.Errorf("ffprobe %s: %w", file, err)
 	}
 	return parse(out)
