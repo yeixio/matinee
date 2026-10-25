@@ -1,6 +1,6 @@
 # Matinee
 
-A fast, self-hosted media server for your movies, TV and music. The basics Plex got right, without the fluff: no ads, no rentals, no discover feed, no account on someone else's server.
+A fast, self-hosted media server for your movies, TV and music. Point it at your folders and it does the rest: tidy libraries, artwork and details, and smooth playback on any screen. No ads, and no account on someone else's server.
 
 ![Home](docs/screenshots/desktop-home.png)
 
