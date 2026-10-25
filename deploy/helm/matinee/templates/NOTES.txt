@@ -9,6 +9,11 @@ Reach it from your machine:
 {{- end }}
 
 The first visit asks you to create the admin account.
+{{- if and .Values.discovery.enabled (not (include "matinee.publicURL" .)) }}
+
+The apps can't find this server on your network by themselves yet: set
+discovery.url to the address you open Matinee at.
+{{- end }}
 {{- if not .Values.media }}
 
 No media volumes are mounted yet. Set `media` in your values to mount your library folders.

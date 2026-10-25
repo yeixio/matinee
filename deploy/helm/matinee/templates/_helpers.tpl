@@ -39,3 +39,12 @@ app.kubernetes.io/component: server
 true
 {{- end -}}
 {{- end -}}
+
+{{/* The address the apps connect to: discovery.url, or the chart's own ingress. */}}
+{{- define "matinee.publicURL" -}}
+{{- if .Values.discovery.url -}}
+{{- .Values.discovery.url -}}
+{{- else if and .Values.ingress.enabled .Values.ingress.hosts -}}
+{{- printf "%s://%s" (ternary "https" "http" (not (empty .Values.ingress.tls))) (first .Values.ingress.hosts).host -}}
+{{- end -}}
+{{- end -}}
