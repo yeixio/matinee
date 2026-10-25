@@ -61,8 +61,6 @@ database:
   # ...or an existing secret holding it under the "database-url" key.
   # With the bundled PostgreSQL, the secret also needs "postgres-password", and database-url must use it:
   #   postgres://matinee:<password>@<release>-postgresql:5432/matinee?sslmode=disable
-  # Use this with Argo CD or Flux: they render with `helm template`, where the generated
-  # password below can't be looked up and would change on every sync.
   existingSecret: ""
 
 # Bundled PostgreSQL, so `helm install` works out of the box.
@@ -74,8 +72,9 @@ postgresql:
   auth:
     username: matinee
     database: matinee
-    # Generated on first install and kept across `helm upgrade` when empty.
-    # GitOps tools can't keep it; use database.existingSecret there.
+    # When empty, an install hook generates one into the <release>-db secret on first
+    # install and keeps it from then on (works with Argo CD and Flux too). The secret
+    # outlives `helm uninstall`, like the database volume, so a reinstall still matches.
     password: ""
   persistence:
     size: 8Gi
