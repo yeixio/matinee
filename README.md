@@ -19,7 +19,7 @@ A fast, self-hosted media server for your movies, TV and music. The basics Plex 
 - **Subtitles** from the file itself or from files next to it (`Movie.en.srt`, `Movie.en.forced.srt`, `.vtt`, `.ass`). Text subtitles are drawn by the player; Blu-ray and DVD picture subtitles are burned into the video while converting. The player remembers your language from one episode to the next.
 - **Picks up where you left off.** Resume points, watched marks, Continue Watching and Recently Added, per person.
 - **Music** with a player that keeps going while you browse.
-- **Posters and descriptions** from [TMDB](https://www.themoviedb.org/) built in to the official images, no account needed. Your own artwork files always win.
+- **Posters and descriptions** from [TMDB](https://www.themoviedb.org/) with a free API key ([how to get one](#posters-and-descriptions-tmdb-key)). Your own artwork files always win, and everything else works without a key.
 - **Search** as you type.
 - **People:** an admin plus as many accounts as you like, each with their own history.
 
@@ -48,6 +48,22 @@ The chart runs Matinee with a bundled PostgreSQL, so nothing depends on file loc
 
 Run one replica for now: an active transcode lives in the pod that started it. More replicas work with `service.sessionAffinity: ClientIP`.
 
+### Posters and descriptions (TMDB key)
+
+Matinee looks up posters, backdrops and descriptions on [TMDB](https://www.themoviedb.org/). For now, each server uses its own free TMDB key. It takes about two minutes:
+
+1. Sign up at [themoviedb.org](https://www.themoviedb.org/signup) and confirm your email.
+2. Open [Settings → API](https://www.themoviedb.org/settings/api), click **Create**, and answer **Yes** to "personal use". Your own server is personal use.
+3. Fill in the short form. For example, use "Matinee" as the name and "Self-hosted media server for my household" as the summary.
+4. Copy the **API Key** (or the API Read Access Token; either works).
+5. Give it to Matinee:
+   - Docker: add `-e MATINEE_TMDB_KEY=your-key` to `docker run`.
+   - Kubernetes: run `kubectl create secret generic matinee-tmdb --from-literal=tmdb-api-key=your-key`, then set `tmdb.existingSecret: matinee-tmdb` in your values.
+
+Restart Matinee. The next library scan fills in the artwork.
+
+**Why isn't a key built in?** TMDB's free keys are for personal use, and a key shipped inside Matinee would be shared by every server. Once donations or client app sales bring in enough, we'll license a TMDB key for the project and build it into the official images, so new servers get artwork with no setup. Until then, you use your own key.
+
 ### From source
 
 Needs Go 1.26+, Node 22 with pnpm, and FFmpeg.
@@ -66,7 +82,7 @@ Every setting is a flag or an environment variable.
 | `MATINEE_ADDR` | `:7171` | Listen address |
 | `MATINEE_DATA_DIR` | `./data` | SQLite database (when used), image cache, transcode scratch space |
 | `MATINEE_DATABASE_URL` | empty | `postgres://…` to use PostgreSQL instead of SQLite |
-| `MATINEE_TMDB_KEY` | built-in key in official images | Your own TMDB API key or read access token, to use instead of the built-in one |
+| `MATINEE_TMDB_KEY` | empty | TMDB API key or read access token, for posters and descriptions ([get one](#posters-and-descriptions-tmdb-key)) |
 | `MATINEE_MEDIA_ROOT` | `/` | Folder the library picker opens in |
 | `MATINEE_SCAN_INTERVAL` | `15m` | How often libraries are rescanned; `0` turns it off |
 | `MATINEE_FFMPEG`, `MATINEE_FFPROBE` | `ffmpeg`, `ffprobe` | Paths to FFmpeg |
