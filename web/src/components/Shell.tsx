@@ -78,11 +78,9 @@ export default function Shell({ user }: { user: User }) {
             <NavLink to="/search" className="hidden rounded-full p-2 text-muted hover:bg-white/5 hover:text-text md:block" aria-label="Search">
               <Search className="size-5" />
             </NavLink>
-            {user.isAdmin && (
-              <NavLink to="/settings" className="rounded-full p-2 text-muted hover:bg-white/5 hover:text-text" aria-label="Settings">
-                <Settings className="size-5" />
-              </NavLink>
-            )}
+            <NavLink to="/settings" className="rounded-full p-2 text-muted hover:bg-white/5 hover:text-text" aria-label="Settings">
+              <Settings className="size-5" />
+            </NavLink>
             <button
               onClick={logout}
               className="hidden items-center gap-2 rounded-full py-1 pr-3 pl-1 text-sm text-muted hover:bg-white/5 hover:text-text md:flex"

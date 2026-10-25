@@ -1,0 +1,576 @@
+openapi: 3.1.0
+info:
+  title: Matinee API
+  version: "1"
+  summary: The HTTP API that the web player and Matinee's apps use.
+  description: |
+    Every path here is under `/api/v1` on a Matinee server, for example
+    `https://matinee.example.com/api/v1/home`.
+
+    **Compatibility.** Within v1, changes only add things: new endpoints, new
+    optional request fields and new response fields. Clients ignore response
+    fields they don't know. Anything that would break a client goes in v2,
+    and the server keeps serving v1 alongside it.
+
+    **Signing in.** Send `Authorization: Bearer <token>` with every request.
+    Get a token from `POST /auth/login` (username and password) or, on a
+    phone or TV, from the code flow: `POST /auth/device`, show the code,
+    then poll `POST /auth/device/token` every `interval` seconds until the
+    person approves it at `/link` on the server. Media URLs used as `<video>`
+    or player sources may carry the token as `?token=` instead.
+
+    **Errors** are JSON `{"error": "message"}`, with a message fit to show a person.
+  license:
+    name: AGPL-3.0-or-later
+    identifier: AGPL-3.0-or-later
+servers:
+  - url: /api/v1
+security:
+  - bearer: []
+
+paths:
+  /health:
+    get:
+      summary: Health check
+      security: []
+      responses:
+        "200":
+          description: The server is up.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string, const: ok }
+                  version: { type: string }
+                  apiVersion: { type: integer }
+  /server:
+    get:
+      summary: What this server is
+      description: Apps call this first to check that an address is a Matinee server and which API it speaks.
+      security: []
+      responses:
+        "200":
+          description: Server details.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ServerInfo" }
+  /openapi.yaml:
+    get:
+      summary: This document
+      security: []
+      responses:
+        "200":
+          description: The OpenAPI document.
+          content:
+            application/yaml: {}
+
+  /setup:
+    get:
+      summary: Whether the server still needs its first account
+      security: []
+      responses:
+        "200":
+          description: Setup state.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  needsSetup: { type: boolean }
+    post:
+      summary: Create the first (admin) account and sign in
+      description: Works once, on a server with no accounts.
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/Credentials" }
+      responses:
+        "200": { $ref: "#/components/responses/SignedIn" }
+        "400": { $ref: "#/components/responses/Error" }
+        "409": { $ref: "#/components/responses/Error" }
+
+  /auth/login:
+    post:
+      summary: Sign in with a username and password
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/Credentials"
+                - $ref: "#/components/schemas/DeviceInfo"
+      responses:
+        "200": { $ref: "#/components/responses/SignedIn" }
+        "401": { $ref: "#/components/responses/Error" }
+  /auth/logout:
+    post:
+      summary: Sign this device out
+      responses:
+        "204": { description: Signed out. }
+
+  /auth/device:
+    post:
+      summary: Start signing in with a code
+      description: |
+        For devices where typing a password is a chore. Show `userCode` (and
+        `verificationUrl`, or a QR code of `verificationUrlComplete`), then poll
+        `POST /auth/device/token` every `interval` seconds.
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/DeviceInfo"
+                - required: [deviceName]
+      responses:
+        "200":
+          description: A code to show.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [deviceCode, userCode, verificationUrl, verificationUrlComplete, expiresIn, interval]
+                properties:
+                  deviceCode: { type: string, description: Secret. Keep it on the device and send it when polling. }
+                  userCode: { type: string, example: WXYZ-2345, description: What the person types. }
+                  verificationUrl: { type: string, example: https://matinee.example.com/link }
+                  verificationUrlComplete: { type: string, example: "https://matinee.example.com/link?code=WXYZ2345" }
+                  expiresIn: { type: integer, description: Seconds until the code expires. }
+                  interval: { type: integer, description: Seconds to wait between polls. }
+  /auth/device/token:
+    post:
+      summary: Ask whether a code was approved
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [deviceCode]
+              properties:
+                deviceCode: { type: string }
+      responses:
+        "200":
+          description: Approved. The token is returned once; later polls get 410.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string, const: approved }
+                  user: { $ref: "#/components/schemas/User" }
+                  token: { type: string }
+        "202":
+          description: Not approved yet. Poll again after `interval` seconds.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string, const: pending }
+        "403": { $ref: "#/components/responses/Error" }
+        "410": { $ref: "#/components/responses/Error" }
+  /auth/device/{code}:
+    parameters:
+      - $ref: "#/components/parameters/UserCode"
+    get:
+      summary: Look up a code someone typed
+      description: The signed-in person sees which device they are about to sign in.
+      responses:
+        "200":
+          description: A code waiting for approval.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  userCode: { type: string }
+                  deviceName: { type: string }
+                  platform: { type: string }
+                  expiresAt: { type: integer, description: Unix seconds. }
+        "404": { $ref: "#/components/responses/Error" }
+  /auth/device/{code}/approve:
+    parameters:
+      - $ref: "#/components/parameters/UserCode"
+    post:
+      summary: Sign the device in as the current user
+      responses:
+        "204": { description: Approved. The device's next poll gets a token. }
+        "404": { $ref: "#/components/responses/Error" }
+  /auth/device/{code}/deny:
+    parameters:
+      - $ref: "#/components/parameters/UserCode"
+    post:
+      summary: Decline the sign-in
+      responses:
+        "204": { description: Declined. The device's next poll gets 403. }
+        "404": { $ref: "#/components/responses/Error" }
+
+  /me:
+    get:
+      summary: The signed-in user
+      responses:
+        "200":
+          description: The user.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/User" }
+        "401": { $ref: "#/components/responses/Error" }
+  /devices:
+    get:
+      summary: Devices signed in as the current user
+      responses:
+        "200":
+          description: Most recently used first.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Device" }
+  /devices/{id}:
+    delete:
+      summary: Sign a device out
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        "204": { description: Signed out. }
+        "404": { $ref: "#/components/responses/Error" }
+  /users:
+    get:
+      summary: Everyone with an account (admins only)
+      responses:
+        "200":
+          description: Users.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/User" }
+    post:
+      summary: Add an account (admins only)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/Credentials"
+                - properties:
+                    isAdmin: { type: boolean }
+      responses:
+        "201":
+          description: Created.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/User" }
+        "409": { $ref: "#/components/responses/Error" }
+
+  /libraries:
+    get:
+      summary: All libraries
+      responses:
+        "200":
+          description: Libraries, by name.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Library" }
+    post:
+      summary: Add a library and start scanning it (admins only)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, kind, paths]
+              properties:
+                name: { type: string }
+                kind: { type: string, examples: [movies, tv, music] }
+                paths: { type: array, items: { type: string }, description: Folders on the server. }
+      responses:
+        "201":
+          description: Created.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Library" }
+        "400": { $ref: "#/components/responses/Error" }
+  /libraries/{id}:
+    delete:
+      summary: Remove a library (admins only). Files stay where they are.
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      responses:
+        "204": { description: Removed. }
+        "404": { $ref: "#/components/responses/Error" }
+  /libraries/{id}/scan:
+    post:
+      summary: Scan a library for new and changed files (admins only)
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      responses:
+        "202": { description: Scanning. Watch `scanning` on GET /libraries. }
+  /libraries/{id}/items:
+    get:
+      summary: A library's top level (movies, shows or artists)
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      responses:
+        "200": { $ref: "#/components/responses/Items" }
+  /fs:
+    get:
+      summary: Browse the server's folders, to pick library folders (admins only)
+      parameters:
+        - { name: path, in: query, schema: { type: string }, description: Empty starts at the server's media folder. }
+      responses:
+        "200":
+          description: Subfolders.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  path: { type: string }
+                  parent: { type: string }
+                  dirs: { type: array, items: { type: string } }
+
+  /home:
+    get:
+      summary: The home screen's rows
+      responses:
+        "200":
+          description: Rows of items.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  continueWatching: { type: array, items: { $ref: "#/components/schemas/Item" } }
+                  recentlyAdded: { type: array, items: { $ref: "#/components/schemas/Item" } }
+  /search:
+    get:
+      summary: Search titles
+      parameters:
+        - { name: q, in: query, required: true, schema: { type: string } }
+      responses:
+        "200": { $ref: "#/components/responses/Items" }
+  /items/{id}:
+    get:
+      summary: One item, with its parents and subtitle tracks
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      responses:
+        "200":
+          description: The item.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ItemDetail" }
+        "404": { $ref: "#/components/responses/Error" }
+  /items/{id}/children:
+    get:
+      summary: Seasons of a show, episodes of a season, albums of an artist, tracks of an album
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      responses:
+        "200": { $ref: "#/components/responses/Items" }
+  /items/{id}/progress:
+    put:
+      summary: Save where playback is
+      description: A position past 92% of the duration marks the item played.
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                positionMs: { type: integer }
+                played: { type: boolean }
+      responses:
+        "204": { description: Saved. }
+  /items/{id}/image/{type}:
+    get:
+      summary: An item's poster or backdrop
+      description: Seasons and tracks without their own poster get their show's or album's.
+      parameters:
+        - $ref: "#/components/parameters/ID"
+        - { name: type, in: path, required: true, schema: { type: string, enum: [poster, backdrop] } }
+      responses:
+        "200": { description: The image., content: { image/*: {} } }
+        "404": { description: No image. }
+  /items/{id}/file:
+    get:
+      summary: The original file, for direct play and downloads
+      description: Supports Range requests, so players can seek and downloads can resume.
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      responses:
+        "200": { description: The file. }
+        "206": { description: Part of the file. }
+  /items/{id}/subtitles/{track}:
+    get:
+      summary: A text subtitle track as WebVTT
+      parameters:
+        - $ref: "#/components/parameters/ID"
+        - { name: track, in: path, required: true, schema: { type: string }, description: "A track id, optionally ending in .vtt." }
+      responses:
+        "200": { description: WebVTT., content: { text/vtt: {} } }
+        "404": { $ref: "#/components/responses/Error" }
+  /items/{id}/hls:
+    post:
+      summary: Start a transcode for players that can't play the file directly
+      parameters:
+        - $ref: "#/components/parameters/ID"
+        - { name: start, in: query, schema: { type: number }, description: Seconds into the file. }
+        - { name: subtitle, in: query, schema: { type: string }, description: A subtitle track to burn in (picture-based tracks). }
+      responses:
+        "200":
+          description: An HLS playlist to play.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  url: { type: string, example: /api/v1/hls/abc123/index.m3u8 }
+                  startSec: { type: number }
+        "409": { description: A newer start for the same item replaced this one. }
+  /hls/{session}/{file}:
+    get:
+      summary: A transcode's playlist and segments
+      parameters:
+        - { name: session, in: path, required: true, schema: { type: string } }
+        - { name: file, in: path, required: true, schema: { type: string } }
+      responses:
+        "200": { description: Playlist or segment. }
+
+components:
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+  parameters:
+    ID:
+      { name: id, in: path, required: true, schema: { type: integer } }
+    UserCode:
+      { name: code, in: path, required: true, schema: { type: string }, description: "The code as typed; case, dashes and spaces don't matter." }
+  responses:
+    Error:
+      description: Something was wrong with the request.
+      content:
+        application/json:
+          schema: { $ref: "#/components/schemas/Error" }
+    SignedIn:
+      description: Signed in. Browsers also get a session cookie.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              user: { $ref: "#/components/schemas/User" }
+              token: { type: string }
+    Items:
+      description: Items.
+      content:
+        application/json:
+          schema:
+            type: array
+            items: { $ref: "#/components/schemas/Item" }
+  schemas:
+    Error:
+      type: object
+      properties:
+        error: { type: string }
+    ServerInfo:
+      type: object
+      properties:
+        product: { type: string, const: matinee }
+        version: { type: string }
+        apiVersion: { type: integer }
+        needsSetup: { type: boolean }
+    Credentials:
+      type: object
+      required: [username, password]
+      properties:
+        username: { type: string }
+        password: { type: string, minLength: 8 }
+    DeviceInfo:
+      type: object
+      properties:
+        deviceName: { type: string, maxLength: 80, example: "Mike's iPhone" }
+        platform: { type: string, maxLength: 20, examples: [ios, android, tvos, androidtv, web] }
+    User:
+      type: object
+      properties:
+        id: { type: integer }
+        username: { type: string }
+        isAdmin: { type: boolean }
+    Device:
+      type: object
+      properties:
+        id: { type: string }
+        deviceName: { type: string }
+        platform: { type: string }
+        createdAt: { type: integer, description: Unix seconds. }
+        lastSeenAt: { type: integer, description: Unix seconds, updated every few minutes. }
+        current: { type: boolean, description: The device making this request. }
+    Library:
+      type: object
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        kind: { type: string, examples: [movies, tv, music] }
+        paths: { type: array, items: { type: string } }
+        scanning: { type: boolean }
+    Item:
+      type: object
+      description: Anything browsable. Fields without a value are left out.
+      properties:
+        id: { type: integer }
+        libraryId: { type: integer }
+        parentId: { type: integer }
+        kind: { type: string, examples: [movie, show, season, episode, artist, album, track] }
+        title: { type: string }
+        year: { type: integer }
+        index: { type: integer, description: Season, episode or track number. }
+        disc: { type: integer }
+        durationMs: { type: integer }
+        container: { type: string }
+        videoCodec: { type: string }
+        audioCodec: { type: string }
+        width: { type: integer }
+        height: { type: integer }
+        addedAt: { type: integer, description: Unix seconds. }
+        playable: { type: boolean }
+        childCount: { type: integer }
+        positionMs: { type: integer }
+        played: { type: boolean }
+        overview: { type: string }
+        rating: { type: number }
+        hasPoster: { type: boolean }
+        hasBackdrop: { type: boolean }
+        showTitle: { type: string, description: "Episodes: the show's title." }
+        seasonIndex: { type: integer, description: "Episodes: the season number." }
+    ItemDetail:
+      allOf:
+        - $ref: "#/components/schemas/Item"
+        - type: object
+          properties:
+            mimeType: { type: string }
+            subtitles: { type: array, items: { $ref: "#/components/schemas/SubtitleTrack" } }
+            parents: { type: array, items: { $ref: "#/components/schemas/Item" }, description: Root first, such as show then season. }
+    SubtitleTrack:
+      type: object
+      properties:
+        id: { type: string }
+        label: { type: string }
+        language: { type: string }
+        codec: { type: string }
+        forced: { type: boolean }
+        default: { type: boolean }
+        sdh: { type: boolean }
+        external: { type: boolean }
+        burnIn: { type: boolean, description: Picture-based; only playable burned into a transcode. }

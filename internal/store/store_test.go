@@ -14,7 +14,15 @@ func TestMigrateFromVersion1(t *testing.T) {
 		t.Fatal(err)
 	}
 	ctx := context.Background()
-	for _, q := range []string{"ALTER TABLE items DROP COLUMN subtitle_streams", "UPDATE schema_version SET version = 1"} {
+	for _, q := range []string{
+		"ALTER TABLE items DROP COLUMN subtitle_streams",
+		"ALTER TABLE sessions DROP COLUMN device_name",
+		"ALTER TABLE sessions DROP COLUMN platform",
+		"ALTER TABLE sessions DROP COLUMN created_at",
+		"ALTER TABLE sessions DROP COLUMN last_seen_at",
+		"DROP TABLE device_codes",
+		"UPDATE schema_version SET version = 1",
+	} {
 		if _, err := s.db.ExecContext(ctx, q); err != nil {
 			t.Fatal(err)
 		}

@@ -22,6 +22,7 @@ A fast, self-hosted media server for your movies, TV and music. The basics Plex 
 - **Posters and descriptions** from [TMDB](https://www.themoviedb.org/) with a free API key ([how to get one](#posters-and-descriptions-tmdb-key)). Your own artwork files always win, and everything else works without a key.
 - **Search** as you type.
 - **People:** an admin plus as many accounts as you like, each with their own history.
+- **Devices:** sign in a phone or TV by typing the code it shows at `/link`, and see or sign out every device you're signed in on under Settings.
 
 ## Run it
 
@@ -107,7 +108,7 @@ deploy/helm/matinee  Helm chart
 
 Library kinds and metadata providers are interfaces so plugins can add more later, such as an arcade (MAME) library.
 
-The API is plain JSON over HTTP and open to any client. Kubernetes probes are at `/healthz` (process up) and `/readyz` (database reachable).
+The API is plain JSON over HTTP under `/api/v1`, open to any client, and documented in [`openapi.yaml`](internal/api/openapi.yaml) (also served at `/api/v1/openapi.yaml`). Within v1 it only grows; breaking changes would go in a v2 served alongside it. Kubernetes probes are at `/healthz` (process up) and `/readyz` (database reachable).
 
 ## Development
 
