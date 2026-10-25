@@ -163,7 +163,12 @@ func (s *Server) logRequests(next http.Handler) http.Handler {
 		rec := &statusRecorder{ResponseWriter: w, status: 200}
 		next.ServeHTTP(rec, r)
 		if strings.HasPrefix(r.URL.Path, "/api/") && !strings.HasPrefix(r.URL.Path, "/api/hls/") {
-			s.Log.Debug("http", "method", r.Method, "path", r.URL.Path, "status", rec.status, "took", time.Since(start))
+			// Rejected requests are logged by default, so "it failed" shows up in the pod logs.
+			level := slog.LevelDebug
+			if rec.status >= 400 && rec.status != http.StatusUnauthorized {
+				level = slog.LevelInfo
+			}
+			s.Log.Log(r.Context(), level, "http", "method", r.Method, "path", r.URL.Path, "status", rec.status, "took", time.Since(start))
 		}
 	})
 }
