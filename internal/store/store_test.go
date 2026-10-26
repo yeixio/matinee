@@ -30,6 +30,9 @@ func TestMigrateFromVersion1(t *testing.T) {
 		"DROP TABLE requests",
 		"DROP TABLE issues",
 		"DROP INDEX items_tmdb",
+		"ALTER TABLE items DROP COLUMN media_info",
+		"ALTER TABLE items DROP COLUMN media_tags",
+		"ALTER TABLE items DROP COLUMN media_key",
 		"ALTER TABLE items DROP COLUMN genres",
 		"UPDATE schema_version SET version = 1",
 	} {

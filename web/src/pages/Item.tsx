@@ -4,10 +4,11 @@ import { Link, useParams } from 'react-router-dom'
 import { api, pendingRefetch, type Item, type ItemDetail, type User } from '../api'
 import { ItemQuality, ReportProblem } from '../components/Arr'
 import { Artwork } from '../components/Artwork'
+import { FileDetailsButton, Languages, QualityBadges } from '../components/MediaInfo'
 import { PosterGrid } from '../components/Card'
 import { Button, Spinner } from '../components/ui'
 import { WatchListButton } from '../components/WatchListButton'
-import { clock, duration, progressFraction, resolution } from '../format'
+import { clock, duration, progressFraction } from '../format'
 import { useAudio } from '../player/AudioPlayer'
 
 export default function ItemPage() {
@@ -73,7 +74,6 @@ function Header({ item, kids }: { item: ItemDetail; kids?: Item[] }) {
   const facts = [
     item.year,
     item.durationMs && duration(item.durationMs),
-    resolution(item.width, item.height),
     item.rating ? `★ ${item.rating.toFixed(1)}` : '',
     item.kind === 'album' && kids ? `${kids.length} tracks` : '',
   ].filter(Boolean)
@@ -112,6 +112,8 @@ function Header({ item, kids }: { item: ItemDetail; kids?: Item[] }) {
               )}
             </div>
           )}
+          <QualityBadges item={item} />
+          <Languages item={item} />
           {item.overview ? (
             <p className="max-w-3xl leading-relaxed text-text/85">{item.overview}</p>
           ) : (
@@ -161,6 +163,7 @@ function Header({ item, kids }: { item: ItemDetail; kids?: Item[] }) {
                 <ReportProblem item={item} />
               </>
             )}
+            <FileDetailsButton item={item} user={me} />
           </div>
         </div>
       </div>
