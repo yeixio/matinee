@@ -396,17 +396,54 @@ paths:
         "202": { description: Scanning. Watch `scanning` on GET /libraries. }
   /libraries/{id}/items:
     get:
-      summary: A library's top level (movies, shows or artists)
+      summary: A library's top level (movies, shows or artists), filtered and sorted
+      description: >
+        With no filter, everything at the library's top level in title order.
+        Any ItemFilter field narrows the list, e.g.
+        `?genre=Comedy&yearMin=1980&yearMax=1989&watched=unwatched&sort=rating`.
+        `library` is taken from the path.
       parameters:
         - { $ref: "#/components/parameters/ID" }
-        - name: tag
-          in: query
-          schema: { type: array, items: { type: string } }
-          style: form
-          explode: true
-          description: Keep only items with every tag given (see Item.mediaTags), such as `?tag=4k&tag=hdr`.
+        - { $ref: "#/components/parameters/Filter" }
       responses:
         "200": { $ref: "#/components/responses/Items" }
+        "400": { $ref: "#/components/responses/Error" }
+  /libraries/{id}/filters:
+    get:
+      summary: What a library can be filtered by
+      description: The values its titles have, most common first, and which ranges are worth offering.
+      parameters:
+        - { $ref: "#/components/parameters/ID" }
+      responses:
+        "200":
+          description: Filter choices.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/FilterOptions" }
+        "404": { $ref: "#/components/responses/Error" }
+  /libraries/{id}/people:
+    get:
+      summary: Find people credited in a library, for the person and director filters
+      parameters:
+        - { $ref: "#/components/parameters/ID" }
+        - { name: q, in: query, schema: { type: string }, description: Matches the start of any word of a name; empty lists the most credited. }
+        - { name: role, in: query, schema: { type: string, enum: [cast, director] }, description: Empty matches any credit. }
+        - { name: limit, in: query, schema: { type: integer, default: 20, maximum: 100 } }
+      responses:
+        "200":
+          description: People, in the most titles first.
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: "#/components/schemas/FilterPerson" } }
+  /items:
+    get:
+      summary: Titles across libraries, filtered and sorted
+      description: Like /libraries/{id}/items, with `library` choosing libraries (none means all).
+      parameters:
+        - { $ref: "#/components/parameters/Filter" }
+      responses:
+        "200": { $ref: "#/components/responses/Items" }
+        "400": { $ref: "#/components/responses/Error" }
   /fs:
     get:
       summary: Browse the server's folders, to pick library folders (admins only)
@@ -1184,6 +1221,13 @@ components:
       { name: id, in: path, required: true, schema: { type: string } }
     UserCode:
       { name: code, in: path, required: true, schema: { type: string }, description: "The code as typed; case, dashes and spaces don't matter." }
+    Filter:
+      name: filter
+      in: query
+      style: form
+      explode: true
+      description: Each ItemFilter field is its own query parameter; repeat a parameter for several values.
+      schema: { $ref: "#/components/schemas/ItemFilter" }
   responses:
     Error:
       description: Something was wrong with the request.
@@ -1207,6 +1251,79 @@ components:
             type: array
             items: { $ref: "#/components/schemas/Item" }
   schemas:
+    ItemFilter:
+      description: >
+        Picks titles by their metadata. The same field names are used as query
+        parameters and as JSON, so a filter can be saved as is. Within a field
+        any value matches, except tag and person, where every value must.
+        Relative fields (addedWithin, releasedWithin) count from the day the
+        filter runs.
+      type: object
+      properties:
+        library: { type: array, items: { type: integer }, description: Library ids; none means every library. }
+        kind: { type: array, items: { type: string, enum: [movie, show, season, episode, artist, album, track] }, description: Without it, libraries' top level is listed. }
+        q: { type: string, description: Words in the title. }
+        genre: { type: array, items: { type: string } }
+        notGenre: { type: array, items: { type: string } }
+        yearMin: { type: integer }
+        yearMax: { type: integer }
+        releasedAfter: { type: string, format: date, description: Shows use their first air date; titles without a date count as released on January 1st of their year. }
+        releasedBefore: { type: string, format: date }
+        releasedWithin: { type: integer, description: Released in the last this many days. }
+        addedAfter: { type: string, format: date, description: A show counts as added when its newest episode was. }
+        addedBefore: { type: string, format: date }
+        addedWithin: { type: integer, description: Added in the last this many days. }
+        ratingMin: { type: number, description: 0 to 10. }
+        ratingMax: { type: number }
+        runtimeMin: { type: integer, description: Minutes; a show's runtime is its average episode's, an album's its total. }
+        runtimeMax: { type: integer }
+        watched:
+          type: string
+          enum: [unwatched, inProgress, watched, notStarted]
+          description: For the signed-in person. unwatched has something left to play; watched has everything played.
+        tag: { type: array, items: { type: string }, description: Media tags such as 4k, hdr or atmos (see Item.mediaTags); all must match. }
+        notTag: { type: array, items: { type: string } }
+        person: { type: array, items: { type: integer }, description: TMDB person ids credited in any role, including episodes; all must match. }
+        director: { type: array, items: { type: integer }, description: Directed or created the title or one of its episodes. }
+        studio: { type: array, items: { type: string }, description: Studios, and networks for shows. }
+        country: { type: array, items: { type: string } }
+        language: { type: array, items: { type: string }, description: Original language, e.g. Japanese. }
+        certification: { type: array, items: { type: string }, description: e.g. PG-13 or TV-MA. }
+        collection: { type: array, items: { type: integer }, description: TMDB collection ids. }
+        watchList: { type: boolean, description: Only titles on the signed-in person's watch list. }
+        sort: { type: string, enum: [title, added, released, year, rating, runtime, lastPlayed], default: title }
+        order: { type: string, enum: [asc, desc], description: Title and runtime run low to high by default, the others high to low. Titles missing the field go last. }
+        limit: { type: integer }
+    FilterValue:
+      type: object
+      properties:
+        value: { type: string }
+        label: { type: string, description: A name for values that are ids, such as collections. }
+        count: { type: integer }
+    FilterPerson:
+      type: object
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        hasPhoto: { type: boolean, description: "GET /people/{id}/image has a photo." }
+        count: { type: integer, description: Titles they're credited in. }
+    FilterOptions:
+      type: object
+      properties:
+        genres: { type: array, items: { $ref: "#/components/schemas/FilterValue" } }
+        tags: { type: array, items: { $ref: "#/components/schemas/FilterValue" } }
+        studios: { type: array, items: { $ref: "#/components/schemas/FilterValue" } }
+        countries: { type: array, items: { $ref: "#/components/schemas/FilterValue" } }
+        languages: { type: array, items: { $ref: "#/components/schemas/FilterValue" } }
+        certifications: { type: array, items: { $ref: "#/components/schemas/FilterValue" } }
+        collections: { type: array, items: { $ref: "#/components/schemas/FilterValue" } }
+        directors: { type: array, items: { $ref: "#/components/schemas/FilterPerson" }, description: The most credited 30. }
+        cast: { type: array, items: { $ref: "#/components/schemas/FilterPerson" }, description: The most credited 30. }
+        yearMin: { type: integer }
+        yearMax: { type: integer }
+        hasRatings: { type: boolean }
+        hasRuntimes: { type: boolean }
+        hasReleased: { type: boolean }
     Error:
       type: object
       properties:
