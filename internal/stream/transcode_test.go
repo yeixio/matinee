@@ -66,3 +66,14 @@ func TestSignPlaylist(t *testing.T) {
 		t.Fatalf("got\n%s\nwant\n%s", got, want)
 	}
 }
+
+func TestStartAtBeginning(t *testing.T) {
+	in := "#EXTM3U\n#EXT-X-VERSION:3\n#EXT-X-PLAYLIST-TYPE:EVENT\n"
+	want := "#EXTM3U\n#EXT-X-START:TIME-OFFSET=0,PRECISE=YES\n#EXT-X-VERSION:3\n#EXT-X-PLAYLIST-TYPE:EVENT\n"
+	if got := string(startAtBeginning([]byte(in))); got != want {
+		t.Fatalf("got\n%s\nwant\n%s", got, want)
+	}
+	if got := string(startAtBeginning([]byte(want))); got != want {
+		t.Fatalf("added a second start:\n%s", got)
+	}
+}
