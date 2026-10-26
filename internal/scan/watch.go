@@ -493,15 +493,17 @@ func (w *Watcher) pollDir(ctx context.Context, dir string, dirs map[string]*poll
 		if wasDir, had := before[name]; had && wasDir == isDir {
 			continue
 		}
-		// Everything in a folder seen for the first time is new, unless this
-		// is the first look at the library.
-		report(p)
+		// A new folder is listed before it's reported, so whatever lands in
+		// it after the scan of it starts is seen on the next pass.
 		if isDir {
 			if _, known := dirs[p]; !known {
 				dirs[p] = nil
 				w.pollDir(ctx, p, dirs, nil)
 			}
 		}
+		// Everything in a folder seen for the first time is new, unless this
+		// is the first look at the library.
+		report(p)
 	}
 	if old == nil {
 		return
