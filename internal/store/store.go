@@ -64,6 +64,10 @@ func Open(dsn string) (*Store, error) {
 		d.Close()
 		return nil, fmt.Errorf("backfill filters: %w", err)
 	}
+	if err := s.AddStarterCollections(context.Background()); err != nil {
+		d.Close()
+		return nil, fmt.Errorf("starter collections: %w", err)
+	}
 	return s, nil
 }
 
@@ -298,6 +302,28 @@ var migrations = []string{
 		mode       TEXT NOT NULL,
 		PRIMARY KEY (user_id, library_id)
 	)`,
+	// 42–44: collections, smart (a saved filter) and manual (see collections.go).
+	`CREATE TABLE collections (
+		id          TEXT PRIMARY KEY,
+		name        TEXT NOT NULL,
+		kind        TEXT NOT NULL, -- smart or manual
+		user_id     BIGINT REFERENCES users(id) ON DELETE CASCADE, -- NULL: shared
+		filter      TEXT, -- a smart collection's ItemFilter as JSON
+		sort        TEXT NOT NULL DEFAULT '',
+		sort_order  TEXT NOT NULL DEFAULT '',
+		pin_home    INTEGER NOT NULL DEFAULT 0,
+		pin_library BIGINT REFERENCES libraries(id) ON DELETE SET NULL,
+		starter     TEXT NOT NULL DEFAULT '',
+		created_at  BIGINT NOT NULL, -- milliseconds
+		updated_at  BIGINT NOT NULL
+	)`,
+	`CREATE TABLE collection_items (
+		collection_id TEXT NOT NULL REFERENCES collections(id) ON DELETE CASCADE,
+		item_id       BIGINT NOT NULL REFERENCES items(id) ON DELETE CASCADE,
+		position      INTEGER NOT NULL,
+		PRIMARY KEY (collection_id, item_id)
+	)`,
+	"CREATE INDEX collection_items_item ON collection_items(item_id)",
 }
 
 func now() int64 { return time.Now().Unix() }

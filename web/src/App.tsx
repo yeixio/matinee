@@ -10,6 +10,9 @@ import ItemPage from './pages/Item'
 import PersonPage from './pages/Person'
 import Search from './pages/Search'
 import WatchList from './pages/WatchList'
+import Collections from './pages/Collections'
+import CollectionPage from './pages/Collection'
+import BoxSetPage from './pages/BoxSet'
 import { Login, Setup } from './pages/Auth'
 import { SwitchProfile, WhoIsWatching } from './pages/Profiles'
 import { askedFor, isKids, rememberAsked, shouldAsk } from './profiles'
@@ -80,6 +83,9 @@ function Screens() {
           <Route path="/person/:id" element={<PersonPage />} />
           <Route path="/search" element={<Search />} />
           <Route path="/watchlist" element={<WatchList />} />
+          <Route path="/collections" element={<Collections />} />
+          <Route path="/collection/:id" element={<CollectionPage />} />
+          <Route path="/box-set/:id" element={<BoxSetPage />} />
           <Route path="/settings" element={grownUps(<Settings />)} />
           <Route path="/upcoming" element={grownUps(<Upcoming />)} />
           <Route path="/requests" element={grownUps(me.data.guest ? <Login /> : <Requests />)} />

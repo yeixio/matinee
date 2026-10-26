@@ -43,12 +43,14 @@ var rowTitles = map[string]string{
 	"Western":         "Westerns",
 }
 
-// HomeRow is one of the home screen's genre rows.
+// HomeRow is one of the home screen's rows: a pinned collection or a genre.
 type HomeRow struct {
-	ID    string       `json:"id"` // e.g. "genre:Science Fiction"
-	Title string       `json:"title"`
-	Genre string       `json:"genre"`
-	Items []store.Item `json:"items"`
+	ID    string `json:"id"` // e.g. "genre:Science Fiction"
+	Title string `json:"title"`
+	Genre string `json:"genre"`
+	// CollectionID is set on the rows of collections pinned to Home.
+	CollectionID string       `json:"collectionId,omitempty"`
+	Items        []store.Item `json:"items"`
 }
 
 // dayNumber counts days, so each date picks the same rows all day.

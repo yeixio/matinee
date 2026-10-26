@@ -269,8 +269,53 @@ export type SubtitleTrack = {
   burnIn?: boolean
 }
 
-/** One of the home screen's genre rows, a different few each day. */
-export type HomeRow = { id: string; title: string; genre: string; items: Item[] }
+/** One of the home screen's rows: a pinned collection, or a genre (a different few each day). */
+export type HomeRow = { id: string; title: string; genre: string; collectionId?: string; items: Item[] }
+
+/** The orders a collection can have; "" is its own (the filter's, or the order titles were added in). */
+export type CollectionSort = '' | 'title' | 'added' | 'released' | 'year' | 'rating' | 'runtime' | 'lastPlayed' | 'shuffle'
+
+/**
+ * A collection: smart ones are a saved library filter (the same fields as the
+ * library page's query), manual ones are kept by hand. Shared ones have no owner.
+ */
+export type Collection = {
+  id: string
+  name: string
+  kind: 'smart' | 'manual'
+  ownerId?: number
+  shared: boolean
+  filter?: ItemFilterJSON
+  sort?: CollectionSort
+  order?: 'asc' | 'desc'
+  pinHome: boolean
+  pinLibrary?: number
+  starter?: string
+  createdAt: number
+  updatedAt: number
+  /** How many titles it has in all; items may be only the first few. */
+  count: number
+  items: Item[]
+  canEdit: boolean
+  contains?: boolean
+}
+
+/** A smart collection's filter as the server keeps it: the library filter's query fields. */
+export type ItemFilterJSON = Record<string, unknown>
+
+export type CollectionInput = {
+  name: string
+  kind?: 'smart' | 'manual'
+  filter?: ItemFilterJSON
+  sort?: CollectionSort
+  order?: 'asc' | 'desc' | ''
+  pinHome?: boolean
+  pinLibrary?: number | null
+  shared?: boolean
+}
+
+/** One of TMDB's collections, such as a trilogy, with two or more titles in the library. */
+export type BoxSet = { id: number; name: string; count: number; itemIds: number[] }
 
 export type HDR = 'dolby-vision' | 'hdr10+' | 'hdr10' | 'hlg'
 
@@ -527,6 +572,20 @@ export const api = {
   children: (id: number) => request<Item[]>('GET', `/api/v1/items/${id}/children`),
   related: (id: number) => request<Related>('GET', `/api/v1/items/${id}/related`),
   person: (id: number) => request<Person>('GET', `/api/v1/people/${id}`),
+  collections: (q: { library?: number; item?: number } = {}) => {
+    const p = new URLSearchParams()
+    if (q.library) p.set('library', String(q.library))
+    if (q.item) p.set('item', String(q.item))
+    return request<{ collections: Collection[]; boxSets: BoxSet[] }>('GET', `/api/v1/collections${p.toString() ? `?${p}` : ''}`)
+  },
+  collection: (id: string) => request<Collection>('GET', `/api/v1/collections/${encodeURIComponent(id)}`),
+  createCollection: (c: CollectionInput) => request<Collection>('POST', '/api/v1/collections', c),
+  updateCollection: (id: string, c: CollectionInput) => request<Collection>('PUT', `/api/v1/collections/${encodeURIComponent(id)}`, c),
+  deleteCollection: (id: string) => request<void>('DELETE', `/api/v1/collections/${encodeURIComponent(id)}`),
+  addToCollection: (id: string, item: number) => request<void>('PUT', `/api/v1/collections/${encodeURIComponent(id)}/items/${item}`),
+  removeFromCollection: (id: string, item: number) =>
+    request<void>('DELETE', `/api/v1/collections/${encodeURIComponent(id)}/items/${item}`),
+  boxSet: (id: number) => request<{ id: number; name: string; items: Item[] }>('GET', `/api/v1/box-sets/${id}`),
   watchList: () => request<Item[]>('GET', '/api/v1/watchlist'),
   addToWatchList: (id: number) => request<void>('PUT', `/api/v1/watchlist/${id}`),
   removeFromWatchList: (id: number) => request<void>('DELETE', `/api/v1/watchlist/${id}`),

@@ -6,6 +6,7 @@ import { ItemQuality, ReportProblem } from '../components/Arr'
 import { Artwork } from '../components/Artwork'
 import { FileDetailsButton, Languages, QualityBadges } from '../components/MediaInfo'
 import { PosterGrid } from '../components/Card'
+import { AddToCollectionButton } from '../components/Collections'
 import { CastRows, KeyPeople, MoreDetailsButton } from '../components/Credits'
 import { RelatedRows } from '../components/Related'
 import { TrailerButton } from '../components/Trailer'
@@ -171,6 +172,7 @@ function Header({ item, kids }: { item: ItemDetail; kids?: Item[] }) {
             )}
             <TrailerButton item={item} />
             <WatchListButton item={item} />
+            <AddToCollectionButton item={item} />
             {item.kind !== 'artist' && item.kind !== 'album' && item.kind !== 'track' && (
               <>
                 <ItemQuality item={item} user={me} />

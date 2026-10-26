@@ -39,6 +39,8 @@ func TestMigrateFromVersion1(t *testing.T) {
 		"DROP TABLE credits",
 		"DROP TABLE people",
 		"DROP TABLE item_terms",
+		"DROP TABLE collection_items",
+		"DROP TABLE collections",
 		"DROP TABLE profile_libraries",
 		"ALTER TABLE items DROP COLUMN rating_level",
 		"ALTER TABLE sessions DROP COLUMN home_only",
