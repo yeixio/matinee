@@ -2,6 +2,7 @@
 package stream
 
 import (
+	"bytes"
 	"context"
 	"crypto/rand"
 	"encoding/hex"
@@ -178,22 +179,34 @@ func (t *Transcoder) ServeFile(w http.ResponseWriter, r *http.Request, userID in
 		w.Header().Set("Content-Type", "video/mp2t")
 		w.Header().Set("Cache-Control", "private, max-age=3600")
 	} else {
-		w.Header().Set("Content-Type", "application/vnd.apple.mpegurl")
-		w.Header().Set("Cache-Control", "no-cache")
+		b, err := os.ReadFile(path)
+		if err != nil {
+			http.NotFound(w, r)
+			return
+		}
+		b = startAtBeginning(b)
 		// A player given the playlist with ?token= (an app's native player, or
 		// a cast device) fetches segments without its headers or cookies, so
 		// the segment links carry the token too.
 		if token := r.URL.Query().Get("token"); token != "" {
-			b, err := os.ReadFile(path)
-			if err != nil {
-				http.NotFound(w, r)
-				return
-			}
-			w.Write(signPlaylist(b, token))
-			return
+			b = signPlaylist(b, token)
 		}
+		w.Header().Set("Content-Type", "application/vnd.apple.mpegurl")
+		w.Header().Set("Cache-Control", "no-cache")
+		w.Write(b)
+		return
 	}
 	http.ServeFile(w, r, path)
+}
+
+// startAtBeginning tells players to start a playlist that is still growing
+// from its first segment, rather than from its newest as for live TV.
+func startAtBeginning(playlist []byte) []byte {
+	const head = "#EXTM3U\n"
+	if !bytes.HasPrefix(playlist, []byte(head)) || bytes.Contains(playlist, []byte("#EXT-X-START:")) {
+		return playlist
+	}
+	return append([]byte(head+"#EXT-X-START:TIME-OFFSET=0,PRECISE=YES\n"), playlist[len(head):]...)
 }
 
 // signPlaylist adds ?token= to each segment in an HLS playlist.

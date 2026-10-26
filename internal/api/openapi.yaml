@@ -440,6 +440,7 @@ paths:
       parameters:
         - $ref: "#/components/parameters/ID"
         - { name: type, in: path, required: true, schema: { type: string, enum: [poster, backdrop] } }
+        - { name: size, in: query, schema: { type: string, enum: [large] }, description: "large asks for art sharp enough for a 4K TV: the original backdrop and the largest poster, where the source has them." }
       responses:
         "200": { description: The image., content: { image/*: {} } }
         "404": { description: No image. }

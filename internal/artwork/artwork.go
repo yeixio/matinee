@@ -12,6 +12,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"regexp"
 	"strings"
 	"sync"
 	"time"
@@ -33,14 +34,30 @@ func NewCache(dir, ffmpeg string) *Cache {
 
 // Serve writes the image src points at: a local path, an http(s) URL
 // (downloaded once, then served from the cache), or "embedded:<audio file>".
-func (c *Cache) Serve(w http.ResponseWriter, r *http.Request, src string) {
-	path, err := c.resolve(r.Context(), src)
-	if err != nil {
-		http.Error(w, "image unavailable", http.StatusNotFound)
+// Further sources are tried in turn when one can't be had.
+func (c *Cache) Serve(w http.ResponseWriter, r *http.Request, src string, fallbacks ...string) {
+	for _, s := range append([]string{src}, fallbacks...) {
+		path, err := c.resolve(r.Context(), s)
+		if err != nil {
+			continue
+		}
+		w.Header().Set("Cache-Control", "private, max-age=86400")
+		http.ServeFile(w, r, path)
 		return
 	}
-	w.Header().Set("Cache-Control", "private, max-age=86400")
-	http.ServeFile(w, r, path)
+	http.Error(w, "image unavailable", http.StatusNotFound)
+}
+
+var tmdbSize = regexp.MustCompile(`^(https://image\.tmdb\.org/t/p/)w\d+/`)
+
+// Large is src at the size a 4K TV shows it: TMDB's original for backdrops
+// and its largest sized poster. Other sources are already as big as they get.
+func Large(src, kind string) string {
+	size := "w780"
+	if kind == "backdrop" {
+		size = "original"
+	}
+	return tmdbSize.ReplaceAllString(src, "${1}"+size+"/")
 }
 
 func (c *Cache) resolve(ctx context.Context, src string) (string, error) {

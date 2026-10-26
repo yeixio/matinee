@@ -750,6 +750,13 @@ func (s *Server) itemImage(w http.ResponseWriter, r *http.Request) {
 			src = it.Backdrop
 		}
 		if src != "" {
+			// TVs ask for size=large, falling back to the usual size.
+			if r.URL.Query().Get("size") == "large" {
+				if large := artwork.Large(src, kind); large != src {
+					s.Art.Serve(w, r, large, src)
+					return
+				}
+			}
 			s.Art.Serve(w, r, src)
 			return
 		}
