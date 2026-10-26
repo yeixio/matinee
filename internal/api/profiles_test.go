@@ -159,6 +159,15 @@ func TestProfilesAndKidsMode(t *testing.T) {
 	if len(libList) != 3 {
 		t.Errorf("Sam's libraries = %+v", libList)
 	}
+	// Nor can a kids profile see what a hidden library could be filtered by.
+	for _, path := range []string{"/filters", "/people"} {
+		if code := tvc.do("GET", "/api/v1/libraries/"+itoa(music.ID)+path, nil, nil); code != 404 {
+			t.Errorf("Sam's music%s = %d, want 404", path, code)
+		}
+		if code := tvc.do("GET", "/api/v1/libraries/"+itoa(movies.ID)+path, nil, nil); code != 200 {
+			t.Errorf("Sam's movies%s = %d, want 200", path, code)
+		}
+	}
 	for _, title := range []string{"Grim Night", "Space Saga", "Mystery Reel", "Late Pilot", "Lullaby"} {
 		if code := tvc.do("GET", "/api/v1/items/"+itoa(ids[title]), nil, nil); code != http.StatusNotFound {
 			t.Errorf("Sam opening %s: %d, want 404", title, code)

@@ -9,6 +9,7 @@ import (
 	"encoding/hex"
 	"errors"
 	"fmt"
+	"net/url"
 	"strconv"
 	"strings"
 	"sync/atomic"
@@ -37,7 +38,7 @@ type Store struct {
 func Open(dsn string) (*Store, error) {
 	var d *db
 	if strings.HasPrefix(dsn, "postgres://") || strings.HasPrefix(dsn, "postgresql://") {
-		conn, err := sql.Open("pgx", dsn)
+		conn, err := sql.Open("pgx", withoutJIT(dsn))
 		if err != nil {
 			return nil, err
 		}
@@ -59,7 +60,29 @@ func Open(dsn string) (*Store, error) {
 		d.Close()
 		return nil, fmt.Errorf("migrate: %w", err)
 	}
+	if err := s.backfillFilters(context.Background()); err != nil {
+		d.Close()
+		return nil, fmt.Errorf("backfill filters: %w", err)
+	}
 	return s, nil
+}
+
+// withoutJIT turns off PostgreSQL's JIT compiler for Matinee's connections,
+// unless the URL says otherwise. Library filters are quick queries the
+// planner thinks are costly, and compiling them took far longer than
+// running them.
+func withoutJIT(dsn string) string {
+	u, err := url.Parse(dsn)
+	if err != nil {
+		return dsn
+	}
+	q := u.Query()
+	if q.Has("jit") {
+		return dsn
+	}
+	q.Set("jit", "off")
+	u.RawQuery = q.Encode()
+	return u.String()
 }
 
 func (s *Store) Close() error { return s.db.Close() }
@@ -250,21 +273,24 @@ var migrations = []string{
 		PRIMARY KEY (item_id, kind, term)
 	)`,
 	"CREATE INDEX item_terms_term ON item_terms(kind, term)",
-	// 32–36: profiles, which are users without a password that belong to an
+	// 32: release date (first air date for shows, air date for episodes),
+	// for filtering and sorting by it (see filter.go).
+	"ALTER TABLE items ADD COLUMN released TEXT",
+	// 33–37: profiles, which are users without a password that belong to an
 	// account, and kids mode (see profiles.go).
 	"ALTER TABLE users ADD COLUMN parent_id BIGINT REFERENCES users(id) ON DELETE CASCADE",
 	"ALTER TABLE users ADD COLUMN display_name TEXT NOT NULL DEFAULT ''",
 	"ALTER TABLE users ADD COLUMN pin_hash TEXT NOT NULL DEFAULT ''",
 	"ALTER TABLE users ADD COLUMN kids_level INTEGER NOT NULL DEFAULT 0",
 	"ALTER TABLE users ADD COLUMN avatar TEXT NOT NULL DEFAULT ''",
-	// 37–38: which profile a device is watching as. Home sessions belong to
+	// 38–39: which profile a device is watching as. Home sessions belong to
 	// the home network's guest account and stop working away from home.
 	"ALTER TABLE sessions ADD COLUMN profile_id BIGINT REFERENCES users(id) ON DELETE SET NULL",
 	"ALTER TABLE sessions ADD COLUMN home_only INTEGER NOT NULL DEFAULT 0",
-	// 39: the age rating's level (see the rating package); NULL when unknown.
+	// 40: the age rating's level (see the rating package); NULL when unknown.
 	// Seasons and episodes go by their show's.
 	"ALTER TABLE items ADD COLUMN rating_level INTEGER",
-	// 40: the libraries a kids profile can see: everything in them ('all') or
+	// 41: the libraries a kids profile can see: everything in them ('all') or
 	// only titles rated for it ('rated').
 	`CREATE TABLE profile_libraries (
 		user_id    BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
