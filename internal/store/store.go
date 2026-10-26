@@ -210,6 +210,8 @@ var migrations = []string{
 	"CREATE INDEX issues_item ON issues(item_id)",
 	// Requests are matched to the libraries by TMDB id.
 	"CREATE INDEX items_tmdb ON items(kind, tmdb_id)",
+	// 20: genres of movies and shows, for the home screen's genre rows (see genres.go).
+	"ALTER TABLE items ADD COLUMN genres TEXT",
 }
 
 func now() int64 { return time.Now().Unix() }

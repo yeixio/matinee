@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
+	"slices"
 	"strconv"
 	"strings"
 	"time"
@@ -56,6 +57,7 @@ type searchResult struct {
 	BackdropPath string  `json:"backdrop_path"`
 	ReleaseDate  string  `json:"release_date"`
 	FirstAirDate string  `json:"first_air_date"`
+	GenreIDs     []int   `json:"genre_ids"`
 }
 
 func (t *TMDB) search(ctx context.Context, kind, title string, year int) (*store.Metadata, error) {
@@ -89,7 +91,56 @@ func (t *TMDB) search(ctx context.Context, kind, title string, year int) (*store
 	return &store.Metadata{
 		TMDBID: r.ID, Overview: r.Overview, Year: y, Rating: r.VoteAverage,
 		Poster: t.image("w500", r.PosterPath), Backdrop: t.image("w1280", r.BackdropPath),
+		Genres: genreNames(r.GenreIDs),
 	}, nil
+}
+
+// Genres looks up the genres of a movie or show matched before Matinee kept them.
+func (t *TMDB) Genres(ctx context.Context, kind string, id int64) ([]string, error) {
+	path := fmt.Sprintf("/movie/%d", id)
+	if kind == "show" {
+		path = fmt.Sprintf("/tv/%d", id)
+	}
+	var res struct {
+		Genres []struct {
+			ID int `json:"id"`
+		} `json:"genres"`
+	}
+	if err := t.get(ctx, path, nil, &res); err != nil {
+		if err == errNotFound {
+			return []string{}, nil
+		}
+		return nil, err
+	}
+	ids := make([]int, len(res.Genres))
+	for i, g := range res.Genres {
+		ids[i] = g.ID
+	}
+	return genreNames(ids), nil
+}
+
+// TMDB's genres, by id, as Matinee names them. TV's combined genres count as
+// both (a "Sci-Fi & Fantasy" show is in Science Fiction and in Fantasy), so a
+// genre row has the movies and the shows. TV Movie, News and Talk are left out.
+var tmdbGenres = map[int][]string{
+	28: {"Action"}, 12: {"Adventure"}, 16: {"Animation"}, 35: {"Comedy"}, 80: {"Crime"},
+	99: {"Documentary"}, 18: {"Drama"}, 10751: {"Family"}, 14: {"Fantasy"}, 36: {"History"},
+	27: {"Horror"}, 10402: {"Music"}, 9648: {"Mystery"}, 10749: {"Romance"}, 878: {"Science Fiction"},
+	53: {"Thriller"}, 10752: {"War"}, 37: {"Western"},
+	10759: {"Action", "Adventure"}, 10762: {"Family"}, 10764: {"Reality"}, 10765: {"Science Fiction", "Fantasy"},
+	10766: {"Drama"}, 10768: {"War"},
+}
+
+func genreNames(ids []int) []string {
+	out := []string{}
+	for _, id := range ids {
+		for _, name := range tmdbGenres[id] {
+			if !slices.Contains(out, name) {
+				out = append(out, name)
+			}
+		}
+	}
+	return out
 }
 
 func (t *TMDB) episode(ctx context.Context, q Query) (*store.Metadata, error) {

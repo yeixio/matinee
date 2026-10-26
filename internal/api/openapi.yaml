@@ -384,6 +384,23 @@ paths:
                   continueWatching: { type: array, items: { $ref: "#/components/schemas/Item" } }
                   watchList: { type: array, description: "The newest 30 on the watch list.", items: { $ref: "#/components/schemas/Item" } }
                   recentlyAdded: { type: array, items: { $ref: "#/components/schemas/Item" } }
+                  newReleases:
+                    type: array
+                    description: Movies and shows from this year and last, newest first.
+                    items: { $ref: "#/components/schemas/Item" }
+                  rows:
+                    type: array
+                    description: >-
+                      The day's genre rows, shown below the others: a few genres with at
+                      least four titles, different each day, each with up to 20 of its
+                      best-rated titles in a daily order. Empty until titles have genres.
+                    items:
+                      type: object
+                      properties:
+                        id: { type: string, examples: ["genre:Science Fiction"] }
+                        title: { type: string, examples: [Sci-fi favorites] }
+                        genre: { type: string, examples: [Science Fiction] }
+                        items: { type: array, items: { $ref: "#/components/schemas/Item" } }
   /search:
     get:
       summary: Search titles
@@ -1204,6 +1221,7 @@ components:
         showTitle: { type: string, description: "Episodes: the show's title." }
         seasonIndex: { type: integer, description: "Episodes: the season number." }
         onWatchList: { type: boolean, description: "On the signed-in person's watch list." }
+        genres: { type: array, items: { type: string }, description: "Movies and shows: genres from the online match.", examples: [[Science Fiction, Drama]] }
     ItemDetail:
       allOf:
         - $ref: "#/components/schemas/Item"

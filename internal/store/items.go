@@ -37,6 +37,8 @@ type Item struct {
 	ShowTitle   string `json:"showTitle,omitempty"`
 	SeasonIndex *int   `json:"seasonIndex,omitempty"`
 	OnWatchList bool   `json:"onWatchList,omitempty"`
+	// Genres of a movie or show, from its online match.
+	Genres []string `json:"genres,omitempty"`
 
 	Poster   string `json:"-"`
 	Backdrop string `json:"-"`
@@ -63,7 +65,8 @@ const itemCols = `
 	COALESCE(i.overview, ''), i.rating, COALESCE(i.poster, ''), COALESCE(i.backdrop, ''), i.tmdb_id, COALESCE(i.meta_at, 0),
 	CASE WHEN i.kind = 'episode' THEN (SELECT COALESCE(sh.title, '') FROM items se JOIN items sh ON sh.id = se.parent_id WHERE se.id = i.parent_id) ELSE '' END,
 	CASE WHEN i.kind = 'episode' THEN (SELECT se.index_number FROM items se WHERE se.id = i.parent_id) END,
-	EXISTS (SELECT 1 FROM watchlist wl WHERE wl.user_id = me.id AND wl.item_id = i.id)`
+	EXISTS (SELECT 1 FROM watchlist wl WHERE wl.user_id = me.id AND wl.item_id = i.id),
+	COALESCE(i.genres, '')`
 
 const itemFrom = ` FROM (SELECT CAST(? AS BIGINT) AS id) me CROSS JOIN items i LEFT JOIN progress p ON p.item_id = i.id AND p.user_id = me.id`
 
@@ -77,11 +80,12 @@ func scanItem(r scanner) (Item, error) {
 	var rating sql.NullFloat64
 	var seasonIdx sql.NullInt64
 	var showTitle sql.NullString
+	var genres string
 	err := r.Scan(&it.ID, &it.LibraryID, &parent, &it.Kind, &it.Title, &year, &idx, &disc,
 		&dur, &it.Container, &it.VideoCodec, &it.AudioCodec, &w, &h, &it.AddedAt, &it.Path, &it.Size, &it.Mtime,
 		&it.ChildCount, &it.PositionMs, &it.Played,
 		&it.Overview, &rating, &it.Poster, &it.Backdrop, &tmdb, &it.MetaAt,
-		&showTitle, &seasonIdx, &it.OnWatchList)
+		&showTitle, &seasonIdx, &it.OnWatchList, &genres)
 	if err != nil {
 		return it, err
 	}
@@ -100,6 +104,7 @@ func scanItem(r scanner) (Item, error) {
 		it.TMDBID = &tmdb.Int64
 	}
 	it.ShowTitle, it.SeasonIndex = showTitle.String, intPtr(seasonIdx)
+	it.Genres = decodeGenres(genres)
 	it.Playable = it.Path != ""
 	it.HasPoster, it.HasBackdrop = it.Poster != "", it.Backdrop != ""
 	return it, nil
@@ -331,6 +336,8 @@ type Metadata struct {
 	Rating   float64
 	Poster   string // URL
 	Backdrop string // URL
+	// Genres of a movie or show; nil when the provider doesn't say.
+	Genres []string
 }
 
 // ApplyMetadata stores a provider match (nil for no match) without
@@ -344,10 +351,12 @@ func (s *Store) ApplyMetadata(ctx context.Context, id int64, m *Metadata) error 
 		UPDATE items SET
 			tmdb_id = ?, mbid = ?, overview = ?, rating = ?,
 			year = COALESCE(year, ?), poster = COALESCE(poster, ?), backdrop = COALESCE(backdrop, ?),
+			genres = COALESCE(?, genres),
 			title = CASE WHEN kind = 'episode' AND ? != '' AND title LIKE 'Episode %' THEN ? ELSE title END,
 			meta_at = ?
 		WHERE id = ?`,
 		nullInt64(m.TMDBID), nullStr(m.MBID), nullStr(m.Overview), nullFloat(m.Rating), nullInt(m.Year), nullStr(m.Poster), nullStr(m.Backdrop),
+		encodeGenres(m.Genres),
 		m.Title, m.Title, now(), id)
 	return err
 }

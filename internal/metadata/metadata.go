@@ -31,6 +31,12 @@ type Provider interface {
 	Lookup(ctx context.Context, q Query) (*store.Metadata, error)
 }
 
+// GenreProvider is a Provider that can look up the genres of a movie or show
+// it matched earlier, by its id.
+type GenreProvider interface {
+	Genres(ctx context.Context, kind string, id int64) ([]string, error)
+}
+
 // Fetcher fills in metadata for newly scanned items.
 type Fetcher struct {
 	Store     *store.Store
@@ -92,6 +98,34 @@ func (f *Fetcher) FetchLibrary(ctx context.Context, lib store.Library) {
 	}
 	if len(items) > 0 {
 		f.Log.Info("metadata done", "library", lib.Name, "looked_up", len(items), "matched", matched)
+	}
+	f.fetchGenres(ctx, lib)
+}
+
+// fetchGenres fills in genres for movies and shows matched before Matinee
+// kept them, so the home screen's genre rows include the whole library.
+func (f *Fetcher) fetchGenres(ctx context.Context, lib store.Library) {
+	items, err := f.Store.NeedsGenres(ctx, lib.ID)
+	if err != nil {
+		f.Log.Error("list items needing genres", "err", err)
+		return
+	}
+	for _, it := range items {
+		if ctx.Err() != nil {
+			return
+		}
+		p, ok := f.provider(it.Kind).(GenreProvider)
+		if !ok {
+			continue
+		}
+		genres, err := p.Genres(ctx, it.Kind, *it.TMDBID)
+		if err != nil {
+			f.Log.Warn("genre lookup", "title", it.Title, "err", err)
+			return // likely down; the next scan tries again
+		}
+		if err := f.Store.SetGenres(ctx, it.ID, genres); err != nil {
+			f.Log.Error("save genres", "err", err)
+		}
 	}
 }
 

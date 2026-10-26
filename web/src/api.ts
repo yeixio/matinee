@@ -154,6 +154,8 @@ export type Item = {
   // True until the server has looked the item up online.
   pending?: boolean
   onWatchList?: boolean
+  /** Movies and shows: genres from the online match. */
+  genres?: string[]
 }
 
 // Only movies and shows go on a watch list.
@@ -174,6 +176,9 @@ export type SubtitleTrack = {
   // Picture-based subtitles the server draws into a transcode.
   burnIn?: boolean
 }
+
+/** One of the home screen's genre rows, a different few each day. */
+export type HomeRow = { id: string; title: string; genre: string; items: Item[] }
 
 export type ItemDetail = Item & { mimeType?: string; subtitles?: SubtitleTrack[]; parents: Item[] }
 
@@ -259,7 +264,9 @@ export const api = {
   resolveIssue: (id: string) => request<void>('POST', `/api/v1/issues/${id}/resolve`),
   replaceIssueFile: (id: string) => request<void>('POST', `/api/v1/issues/${id}/replace`),
 
-  home: () => request<{ continueWatching: Item[]; watchList: Item[]; recentlyAdded: Item[] }>('GET', '/api/v1/home'),
+  // newReleases and rows come from servers new enough to have them.
+  home: () =>
+    request<{ continueWatching: Item[]; watchList: Item[]; recentlyAdded: Item[]; newReleases?: Item[]; rows?: HomeRow[] }>('GET', '/api/v1/home'),
   search: (q: string) => request<Item[]>('GET', `/api/v1/search?q=${encodeURIComponent(q)}`),
   item: (id: number) => request<ItemDetail>('GET', `/api/v1/items/${id}`),
   children: (id: number) => request<Item[]>('GET', `/api/v1/items/${id}/children`),

@@ -30,6 +30,7 @@ func TestMigrateFromVersion1(t *testing.T) {
 		"DROP TABLE requests",
 		"DROP TABLE issues",
 		"DROP INDEX items_tmdb",
+		"ALTER TABLE items DROP COLUMN genres",
 		"UPDATE schema_version SET version = 1",
 	} {
 		if _, err := s.db.ExecContext(ctx, q); err != nil {

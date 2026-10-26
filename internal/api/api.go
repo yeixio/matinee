@@ -617,7 +617,21 @@ func (s *Server) home(w http.ResponseWriter, r *http.Request) {
 		s.serverError(w, err)
 		return
 	}
-	writeJSON(w, http.StatusOK, map[string]any{"continueWatching": cont, "watchList": watchList, "recentlyAdded": recent})
+	now := today()
+	releases, err := s.Store.NewReleases(r.Context(), uid, now.Year()-newReleaseYrs+1, 30)
+	if err != nil {
+		s.serverError(w, err)
+		return
+	}
+	rows, err := s.genreRows(r.Context(), uid, now)
+	if err != nil {
+		s.serverError(w, err)
+		return
+	}
+	writeJSON(w, http.StatusOK, map[string]any{
+		"continueWatching": cont, "watchList": watchList, "recentlyAdded": recent,
+		"newReleases": releases, "rows": rows,
+	})
 }
 
 func (s *Server) search(w http.ResponseWriter, r *http.Request) {
