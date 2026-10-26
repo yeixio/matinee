@@ -40,7 +40,7 @@ func TestDetailsRelatedAndPeople(t *testing.T) {
 	alien := add("Alien", 348, store.DetailsUpdate{
 		Details: store.Details{Tagline: "In space no one can hear you scream.", Collection: coll, AwardSummary: "Won 1 Academy Award"},
 		Cast:    []store.Credit{weaver}, Crew: []store.Credit{scott},
-		Terms:   []store.Term{{Kind: "collection", Term: "8091"}, {Kind: "genre", Term: "movie:27"}},
+		Terms: []store.Term{{Kind: "collection", Term: "8091"}, {Kind: "genre", Term: "movie:27"}},
 	})
 	add("Aliens", 679, store.DetailsUpdate{
 		Details: store.Details{Collection: coll},
