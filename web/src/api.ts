@@ -268,6 +268,52 @@ export type MediaInfo = {
   error?: string
   analyzedAt: number
 }
+// The longer details of a movie, show, season or episode, once looked up.
+// Seasons and episodes carry their show's genres, certification and networks.
+export type Details = {
+  tagline?: string
+  originalTitle?: string
+  originalLanguage?: string
+  releaseDate?: string // YYYY-MM-DD; first air date for shows
+  endDate?: string
+  status?: string
+  certification?: string
+  genres?: string[]
+  studios?: string[]
+  networks?: string[]
+  countries?: string[]
+  languages?: string[]
+  budget?: number // US dollars
+  revenue?: number
+  collection?: { id: number; name: string }
+  seasons?: number
+  episodes?: number
+  imdbId?: string
+  awards?: Award[]
+  awardSummary?: string // e.g. "Won 4 Academy Awards · 31 wins and 62 nominations"
+}
+export type Award = { name: string; year?: number; won: boolean; names?: string[] }
+
+// role is the character, or a job such as Director.
+export type Credit = { personId: number; name: string; role?: string; department?: string; episodes?: number; hasPhoto: boolean }
+// An episode's cast is its season's regulars; guests are its own guest stars.
+export type Credits = { cast: Credit[]; guests?: Credit[]; crew: Credit[] }
+
+export type Person = {
+  id: number
+  name: string
+  hasPhoto: boolean
+  biography?: string
+  birthday?: string
+  deathday?: string
+  birthplace?: string
+  knownFor?: string
+  // Titles in the library they're in, newest first.
+  titles: { item: Item; roles: string[] }[]
+}
+
+// collection: the franchise a movie belongs to, with its titles in the library.
+export type Related = { collection?: { id: number; name: string; items: Item[] }; items: Item[] }
 
 export type ItemDetail = Item & {
   mimeType?: string
@@ -278,6 +324,8 @@ export type ItemDetail = Item & {
   mediaInfoStale?: boolean
   filePath?: string // admins only
   fileSize?: number
+  details?: Details
+  credits?: Credits
 }
 
 export type AnalysisMode = 'gentle' | 'normal' | 'off'
@@ -381,6 +429,8 @@ export const api = {
   search: (q: string) => request<Item[]>('GET', `/api/v1/search?q=${encodeURIComponent(q)}`),
   item: (id: number) => request<ItemDetail>('GET', `/api/v1/items/${id}`),
   children: (id: number) => request<Item[]>('GET', `/api/v1/items/${id}/children`),
+  related: (id: number) => request<Related>('GET', `/api/v1/items/${id}/related`),
+  person: (id: number) => request<Person>('GET', `/api/v1/people/${id}`),
   watchList: () => request<Item[]>('GET', '/api/v1/watchlist'),
   addToWatchList: (id: number) => request<void>('PUT', `/api/v1/watchlist/${id}`),
   removeFromWatchList: (id: number) => request<void>('DELETE', `/api/v1/watchlist/${id}`),
@@ -403,5 +453,6 @@ export const api = {
 }
 
 export const imageUrl = (id: number, type: 'poster' | 'backdrop') => `/api/v1/items/${id}/image/${type}`
+export const personImageUrl = (id: number) => `/api/v1/people/${id}/image`
 export const fileUrl = (id: number) => `/api/v1/items/${id}/file`
 export const trailerFileUrl = (id: number, trailer: string) => `/api/v1/items/${id}/trailers/${encodeURIComponent(trailer)}/file`
