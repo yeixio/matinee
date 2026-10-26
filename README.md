@@ -19,6 +19,7 @@ A fast, self-hosted media server for your movies, TV and music. Point it at your
 - **Subtitles** from the file itself or from files next to it (`Movie.en.srt`, `Movie.en.forced.srt`, `.vtt`, `.ass`). Text subtitles are drawn by the player; Blu-ray and DVD picture subtitles are burned into the video while converting. The player remembers your language from one episode to the next.
 - **Picks up where you left off.** Resume points, watched marks, Continue Watching and Recently Added, per person.
 - **Music** with a player that keeps going while you browse.
+- **Knows what's in every file.** In the background, Matinee slowly reads each file for its resolution, HDR (HDR10, HDR10+, HLG, Dolby Vision), codecs and bitrates, audio channels, Atmos and languages, and subtitles. The essentials show as badges on each title and as library filters (4K, HDR, Dolby Atmos…); everything else is under File details. It reads one file at a time at the lowest priority, waits while someone's watching something being converted, and looks at a file again only when it changes, so network shares stay responsive. Admins can see its progress, or slow it down or pause it, under Settings.
 - **Posters and descriptions** from [TMDB](https://www.themoviedb.org/) with a free API key ([how to get one](#posters-and-descriptions-tmdb-key)). Your own artwork files always win, and everything else works without a key.
 - **Search** as you type.
 - **People:** an admin plus as many accounts as you like, each with their own history.
@@ -181,6 +182,30 @@ Every setting is a flag or an environment variable.
 | `MATINEE_PUBLIC_URL` | empty | The address the apps should connect to, such as `https://matinee.example.com`; empty uses this machine's IP and port |
 | `MATINEE_HOME_ADDR` | empty | A second listen address just for the home network, such as `:7172`, when the main one is behind a proxy. Only devices that connect here can watch without signing in (see above) |
 | `MATINEE_FFMPEG`, `MATINEE_FFPROBE` | `ffmpeg`, `ffprobe` | Paths to FFmpeg |
+| `MATINEE_VAAPI_DEVICE` | empty | The GPU to use for VAAPI, such as `/dev/dri/renderD129`, on a machine with several; empty tries each |
+
+### Hardware transcoding
+
+When a device can't play a file as it is, Matinee converts it while you watch. A GPU makes that much faster and lighter on the server: a 4K HEVC film becomes 1080p H.264 without keeping the CPU busy. At startup Matinee tests what the machine's FFmpeg can use, with a one-second test encode, and picks the best that works:
+
+| Hardware | Backend |
+| --- | --- |
+| NVIDIA | NVENC to encode, NVDEC to decode |
+| AMD or Intel on Linux | VAAPI |
+| Intel | Quick Sync |
+| Mac | VideoToolbox |
+| AMD on Windows | AMF |
+| Raspberry Pi and other ARM boards | V4L2 |
+
+**Settings → Transcoding** shows which one is in use, and lets an admin pick another or turn it off. If the GPU can't handle a file (an old codec, a profile it doesn't decode), that playback starts again on the CPU, and the file keeps using the CPU from then on, so nobody sees an error.
+
+To give Matinee a GPU:
+
+- **Docker:** pass `/dev/dri` in for AMD and Intel, and add the group that owns it on the host (see [`docker-compose.yml`](docker-compose.yml)). For NVIDIA, install the NVIDIA Container Toolkit and request a GPU. The image includes FFmpeg with every Linux backend and the AMD and Intel drivers.
+- **Kubernetes:** set `gpu.type` to `vaapi` or `nvidia`, and `nodeSelector` to keep Matinee on the node with the GPU. See `gpu:` in [`values.yaml`](deploy/helm/matinee/values.yaml).
+- **Packages:** Matinee uses the system's FFmpeg and drivers, and its user is already in the `render` and `video` groups.
+
+Only VAAPI on an AMD card has been tried on real hardware so far. If you have one of the others, a [compatibility report](https://github.com/yeixio/matinee/issues/new?template=compatibility_report.yml) helps a lot.
 
 **SQLite or PostgreSQL?** SQLite is the default and needs nothing else: right for a single machine or a NAS, as long as `MATINEE_DATA_DIR` is on a local disk. Use PostgreSQL on Kubernetes, with several servers, or whenever the data would otherwise live on network storage, where SQLite's locking isn't reliable.
 
@@ -192,9 +217,11 @@ One Go binary with the web player embedded. It talks to SQLite or PostgreSQL and
 cmd/matinee          entry point
 internal/api         HTTP API, auth, serves the web player
 internal/scan        library scanning; library kinds (movies, tv, music) register here
+internal/analyze     background media analysis (HDR, codecs, audio, languages)
 internal/metadata    online metadata providers (TMDB)
 internal/artwork     poster and backdrop serving and caching
 internal/stream      direct play and HLS transcoding
+internal/hwaccel     finds the GPU and builds FFmpeg's arguments for it
 internal/store       SQLite / PostgreSQL storage
 web/                 React + Vite web player
 deploy/helm/matinee  Helm chart

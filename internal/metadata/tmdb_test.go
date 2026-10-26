@@ -7,6 +7,7 @@ import (
 	"log/slog"
 	"net/http"
 	"net/http/httptest"
+	"slices"
 	"strings"
 	"testing"
 
@@ -24,13 +25,20 @@ func fakeTMDB(t *testing.T) *TMDB {
 		res := []map[string]any{}
 		if r.URL.Query().Get("query") == "Heat" && r.URL.Query().Get("year") != "1996" {
 			res = append(res, map[string]any{"id": 949, "overview": "A heist.", "vote_average": 7.9,
-				"poster_path": "/p.jpg", "backdrop_path": "/b.jpg", "release_date": "1995-12-15"})
+				"poster_path": "/p.jpg", "backdrop_path": "/b.jpg", "release_date": "1995-12-15", "genre_ids": []int{28, 80, 18}})
 		}
 		json.NewEncoder(w).Encode(map[string]any{"results": res})
 	})
 	mux.HandleFunc("GET /search/tv", func(w http.ResponseWriter, r *http.Request) {
 		json.NewEncoder(w).Encode(map[string]any{"results": []map[string]any{
-			{"id": 1396, "overview": "A teacher.", "first_air_date": "2008-01-20", "poster_path": "/bb.jpg"}}})
+			{"id": 1396, "overview": "A teacher.", "first_air_date": "2008-01-20", "poster_path": "/bb.jpg", "genre_ids": []int{18, 10765}}}})
+	})
+	// Details, for genres of titles matched before Matinee kept them.
+	mux.HandleFunc("GET /movie/949", func(w http.ResponseWriter, r *http.Request) {
+		json.NewEncoder(w).Encode(map[string]any{"id": 949, "genres": []map[string]any{{"id": 28, "name": "Action"}, {"id": 53, "name": "Thriller"}}})
+	})
+	mux.HandleFunc("GET /tv/1396", func(w http.ResponseWriter, r *http.Request) {
+		json.NewEncoder(w).Encode(map[string]any{"id": 1396, "genres": []map[string]any{{"id": 10759, "name": "Action & Adventure"}}})
 	})
 	mux.HandleFunc("GET /tv/1396/season/1", func(w http.ResponseWriter, r *http.Request) {
 		json.NewEncoder(w).Encode(map[string]any{"id": 3572, "overview": "Walt starts.", "air_date": "2008-01-20", "poster_path": "/s1.jpg"})
@@ -53,6 +61,13 @@ func TestTMDBLookup(t *testing.T) {
 	}
 	if m.TMDBID != 949 || m.Year != 1995 || m.Poster != "https://img/w500/p.jpg" || m.Backdrop != "https://img/w1280/b.jpg" {
 		t.Fatalf("movie: %+v", m)
+	}
+	if !slices.Equal(m.Genres, []string{"Action", "Crime", "Drama"}) {
+		t.Fatalf("movie genres: %v", m.Genres)
+	}
+	// A show's combined TV genres count as each of their parts.
+	if m, _ := tm.Lookup(context.Background(), Query{Kind: "show", Title: "Breaking Bad"}); m == nil || !slices.Equal(m.Genres, []string{"Drama", "Science Fiction", "Fantasy"}) {
+		t.Fatalf("show genres: %+v", m)
 	}
 	// A wrong year in the file name falls back to a search without one.
 	if m, _ := tm.Lookup(context.Background(), Query{Kind: "movie", Title: "Heat", Year: 1996}); m == nil || m.TMDBID != 949 {
@@ -146,5 +161,42 @@ func TestTMDBTrailers(t *testing.T) {
 	}
 	if vids, err := tm.Trailers(ctx, "show", 1, 0); err != nil || len(vids) != 0 {
 		t.Errorf("unknown show: %+v %v", vids, err)
+	}
+}
+
+// Movies and shows matched before Matinee kept genres get them on the next scan.
+func TestFetcherBackfillsGenres(t *testing.T) {
+	st := storetest.Open(t)
+	ctx := context.Background()
+	movies, _ := st.CreateLibrary(ctx, "Movies", "movies", []string{"/m"})
+	tv, _ := st.CreateLibrary(ctx, "TV", "tv", []string{"/tv"})
+	movie, _ := st.UpsertFile(ctx, store.Item{LibraryID: movies.ID, Kind: "movie", Title: "Heat", Path: "/m/heat.mkv"})
+	show, _ := st.EnsureContainer(ctx, tv.ID, nil, "show", "Breaking Bad", nil, nil)
+	// As an earlier Matinee left them: matched, with no genres.
+	st.ApplyMetadata(ctx, movie, &store.Metadata{TMDBID: 949})
+	st.ApplyMetadata(ctx, show, &store.Metadata{TMDBID: 1396})
+
+	f := &Fetcher{Store: st, Providers: []Provider{fakeTMDB(t)}, Log: slog.New(slog.NewTextHandler(io.Discard, nil))}
+	f.FetchLibrary(ctx, movies)
+	f.FetchLibrary(ctx, tv)
+	if it, _ := st.Item(ctx, 0, movie); !slices.Equal(it.Genres, []string{"Action", "Thriller"}) {
+		t.Fatalf("movie genres: %v", it.Genres)
+	}
+	if it, _ := st.Item(ctx, 0, show); !slices.Equal(it.Genres, []string{"Action", "Adventure"}) {
+		t.Fatalf("show genres: %v", it.Genres)
+	}
+	if left, _ := st.NeedsGenres(ctx, movies.ID); len(left) != 0 {
+		t.Fatalf("still needing genres: %+v", left)
+	}
+	counts, _ := st.GenreCounts(ctx)
+	if counts["Action"] != 2 || counts["Thriller"] != 1 {
+		t.Fatalf("counts: %v", counts)
+	}
+	if in, _ := st.InGenre(ctx, 0, "Action", 10); len(in) != 2 {
+		t.Fatalf("in Action: %+v", in)
+	}
+	// "Action" mustn't match a genre that merely contains it.
+	if in, _ := st.InGenre(ctx, 0, "Act", 10); len(in) != 0 {
+		t.Fatalf("in Act: %+v", in)
 	}
 }

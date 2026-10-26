@@ -62,6 +62,9 @@ jobs:
       - run: helm lint deploy/helm/matinee
       - run: helm template t deploy/helm/matinee > /dev/null
       - run: helm template t deploy/helm/matinee --set discovery.url=https://matinee.example.com > /dev/null
+      - run: helm template t deploy/helm/matinee --set gpu.type=vaapi --set 'gpu.vaapi.groups={993}' > /dev/null
+      - run: helm template t deploy/helm/matinee --set gpu.type=vaapi --set gpu.vaapi.resource=amd.com/gpu > /dev/null
+      - run: helm template t deploy/helm/matinee --set gpu.type=nvidia > /dev/null
 
   docker:
     runs-on: ubuntu-latest

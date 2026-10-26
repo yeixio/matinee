@@ -16,8 +16,10 @@ import (
 	"testing"
 	"time"
 
+	"github.com/yeixio/matinee/internal/analyze"
 	"github.com/yeixio/matinee/internal/artwork"
 	"github.com/yeixio/matinee/internal/download"
+	"github.com/yeixio/matinee/internal/hwaccel"
 	"github.com/yeixio/matinee/internal/probe"
 	"github.com/yeixio/matinee/internal/scan"
 	"github.com/yeixio/matinee/internal/store"
@@ -30,6 +32,7 @@ type client struct {
 	t     *testing.T
 	base  string
 	token string
+	srv   *Server
 }
 
 func (c *client) do(method, path string, body any, out any) int {
@@ -73,7 +76,8 @@ func newTestServer(t *testing.T, opts ...func(*Server)) (*client, string) {
 	db := storetest.Open(t)
 	log := slog.New(slog.NewTextHandler(io.Discard, nil))
 	tmp := t.TempDir()
-	tc := stream.NewTranscoder("ffmpeg", filepath.Join(tmp, "transcode"), log)
+	hw := hwaccel.NewManager("ffmpeg", log)
+	tc := stream.NewTranscoder("ffmpeg", filepath.Join(tmp, "transcode"), hw, log)
 	t.Cleanup(tc.Close)
 	ctx, cancel := context.WithCancel(context.Background())
 	t.Cleanup(cancel)
@@ -81,10 +85,12 @@ func newTestServer(t *testing.T, opts ...func(*Server)) (*client, string) {
 	srv := &Server{
 		MediaRoot: tmp,
 		Store:     db, Scanner: &scan.Scanner{Store: db, Prober: probe.Prober{Path: "ffprobe"}, Log: log},
-		Transcoder: tc, Downloads: dl, Art: artwork.NewCache(filepath.Join(tmp, "images"), "ffmpeg"),
+		Transcoder: tc, HW: hw, Downloads: dl, Art: artwork.NewCache(filepath.Join(tmp, "images"), "ffmpeg"),
 		Subtitles: subtitle.NewConverter("ffmpeg", filepath.Join(tmp, "subtitles")), Log: log, BackgroundCtx: ctx,
 	}
 	dl.SubtitleStream = srv.BurnStream
+	// Not running: tests that want it start srv.Analyzer.Run themselves.
+	srv.Analyzer = &analyze.Analyzer{Store: db, Prober: probe.Prober{Path: "ffprobe"}, Log: log}
 	for _, o := range opts {
 		o(srv)
 	}
@@ -93,7 +99,7 @@ func newTestServer(t *testing.T, opts ...func(*Server)) (*client, string) {
 	t.Cleanup(func() { cancel(); <-done })
 	ts := httptest.NewServer(srv.Handler())
 	t.Cleanup(ts.Close)
-	return &client{t: t, base: ts.URL}, tmp
+	return &client{t: t, base: ts.URL, srv: srv}, tmp
 }
 
 func waitForScan(t *testing.T, c *client) {

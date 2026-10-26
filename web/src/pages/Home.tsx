@@ -55,15 +55,6 @@ export default function Home() {
           ))}
         </Row>
       )}
-      {data.watchList.length > 0 && (
-        <Row title="Watch list" more="/watchlist">
-          {data.watchList.map((it) => (
-            <RowItem key={it.id}>
-              <PosterCard item={it} />
-            </RowItem>
-          ))}
-        </Row>
-      )}
       {data.recentlyAdded.length > 0 && (
         <Row title="Recently added">
           {data.recentlyAdded.map((it) => (
@@ -73,6 +64,35 @@ export default function Home() {
           ))}
         </Row>
       )}
+      {/* Continue watching, recently added and new releases stay at the top. */}
+      {!!data.newReleases?.length && (
+        <Row title="New releases">
+          {data.newReleases.map((it) => (
+            <RowItem key={it.id}>
+              <PosterCard item={it} />
+            </RowItem>
+          ))}
+        </Row>
+      )}
+      {data.watchList.length > 0 && (
+        <Row title="Watch list" more="/watchlist">
+          {data.watchList.map((it) => (
+            <RowItem key={it.id}>
+              <PosterCard item={it} />
+            </RowItem>
+          ))}
+        </Row>
+      )}
+      {/* A few genres, different each day. */}
+      {data.rows?.map((row) => (
+        <Row key={row.id} title={row.title}>
+          {row.items.map((it) => (
+            <RowItem key={it.id}>
+              <PosterCard item={it} />
+            </RowItem>
+          ))}
+        </Row>
+      ))}
       <ComingSoonRow />
       {data.recentlyAdded.length === 0 && (
         <EmptyState title="Scanning your library">New titles show up here as soon as they're found.</EmptyState>

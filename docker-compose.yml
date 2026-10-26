@@ -21,6 +21,22 @@ services:
       - /path/to/tv:/media/tv:ro
       - /path/to/music:/media/music:ro
     restart: unless-stopped
+    # Hardware transcoding. AMD or Intel GPU (VAAPI): pass the GPU in, and
+    # add the group that owns it on the host (`getent group render` prints
+    # its number, often 104 to 110 or 992 to 993).
+    # devices:
+    #   - /dev/dri:/dev/dri
+    # group_add:
+    #   - "993"
+    # NVIDIA GPU (needs the NVIDIA Container Toolkit on the host):
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu, video]
+    # Settings → Transcoding shows which one Matinee found.
 
   postgres:
     profiles: [postgres]

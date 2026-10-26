@@ -2,11 +2,14 @@ package api
 
 import (
 	"context"
+	"encoding/json"
 	"net"
 	"net/http"
 	"net/netip"
 	"strconv"
 	"sync"
+
+	"github.com/yeixio/matinee/internal/hwaccel"
 )
 
 // Devices on the home network can browse and play without signing in,
@@ -28,6 +31,10 @@ import (
 //     listener count, never ones to the main address.
 
 const settingHomeSignIn = "home_sign_in_required"
+
+// SettingHardwareAcceleration holds serverSettings.HardwareAcceleration. The
+// server reads it at startup to set up the transcoder.
+const SettingHardwareAcceleration = "hardware_acceleration"
 
 type homeKey struct{}
 
@@ -114,6 +121,13 @@ type serverSettings struct {
 	// admins: off (nobody), approve (anyone may ask; an admin approves) or
 	// auto (what people ask for is added right away). See arr.go.
 	Requests string `json:"requests"`
+	// HardwareAcceleration is what transcodes run on: auto (the best
+	// accelerator that passed its test at startup), off (the CPU), or one
+	// accelerator by id. See internal/hwaccel.
+	HardwareAcceleration string `json:"hardwareAcceleration"`
+	// Hardware says which accelerator is in use and which ones work here.
+	// It can't be changed.
+	Hardware *hwaccel.Status `json:"hardware,omitempty"`
 	// RemoteTrailers offers trailers from TMDB (played from YouTube) along
 	// with trailer files next to the media. On unless an admin turns it off.
 	RemoteTrailers bool `json:"remoteTrailers"`
@@ -129,7 +143,13 @@ func (s *Server) settings(ctx context.Context) (serverSettings, error) {
 		return serverSettings{}, err
 	}
 	trailers, err := s.remoteTrailersOn(ctx)
-	return serverSettings{RequireSignInAtHome: required, Requests: mode, RemoteTrailers: trailers}, err
+	set := serverSettings{RequireSignInAtHome: required, Requests: mode, RemoteTrailers: trailers,
+		HardwareAcceleration: hwaccel.Auto, Hardware: &hwaccel.Status{Available: []hwaccel.Accel{}}}
+	if hw := s.HW; hw != nil {
+		st := hw.Status()
+		set.Hardware, set.HardwareAcceleration = &st, st.Preference
+	}
+	return set, err
 }
 
 func (s *Server) getSettings(w http.ResponseWriter, r *http.Request) {
@@ -144,9 +164,12 @@ func (s *Server) getSettings(w http.ResponseWriter, r *http.Request) {
 // putSettings changes the settings it's sent; ones left out stay as they are.
 func (s *Server) putSettings(w http.ResponseWriter, r *http.Request) {
 	var in struct {
-		RequireSignInAtHome *bool   `json:"requireSignInAtHome"`
-		Requests            *string `json:"requests"`
-		RemoteTrailers      *bool   `json:"remoteTrailers"`
+		RequireSignInAtHome  *bool   `json:"requireSignInAtHome"`
+		Requests             *string `json:"requests"`
+		HardwareAcceleration *string `json:"hardwareAcceleration"`
+		RemoteTrailers       *bool   `json:"remoteTrailers"`
+		// Read-only; accepted so a client can send back what it got.
+		Hardware json.RawMessage `json:"hardware"`
 	}
 	if err := readJSON(r, &in); err != nil {
 		writeError(w, http.StatusBadRequest, "bad request")
@@ -161,6 +184,19 @@ func (s *Server) putSettings(w http.ResponseWriter, r *http.Request) {
 		if err := s.Store.SetSetting(ctx, settingRequests, *m); err != nil {
 			s.serverError(w, err)
 			return
+		}
+	}
+	if p := in.HardwareAcceleration; p != nil && *p != "" {
+		if !hwaccel.ValidPreference(*p) {
+			writeError(w, http.StatusBadRequest, "hardwareAcceleration must be auto, off or an accelerator's id")
+			return
+		}
+		if err := s.Store.SetSetting(ctx, SettingHardwareAcceleration, *p); err != nil {
+			s.serverError(w, err)
+			return
+		}
+		if hw := s.HW; hw != nil {
+			hw.SetPreference(*p)
 		}
 	}
 	if in.RemoteTrailers != nil {

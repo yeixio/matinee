@@ -47,6 +47,10 @@ export default function Watch() {
   const menuOpen = useRef(false)
   // Counts transcode starts so a slow, replaced one can't take over the player.
   const hlsSeq = useRef(0)
+  // A transcode that dies partway (say, the server's GPU gave up) is started
+  // again once from where it stopped; the server then uses its CPU.
+  const recovered = useRef(false)
+  const restartHls = useRef<(at: number) => void>(undefined)
   // While the seek bar is held, where it points. The seek happens on release.
   const [scrub, setScrub] = useState<number>()
   const scrubAt = useRef<number>(undefined)
@@ -77,7 +81,15 @@ export default function Watch() {
           const h = new Hls({ maxBufferLength: 60 })
           h.loadSource(url)
           h.attachMedia(el)
-          h.on(Hls.Events.ERROR, (_, d) => d.fatal && setError("Playback failed. The file may be damaged or in a format the server can't convert."))
+          h.on(Hls.Events.ERROR, (_, d) => {
+            if (!d.fatal) return
+            if (!recovered.current && seq === hlsSeq.current) {
+              recovered.current = true
+              restartHls.current?.(position())
+              return
+            }
+            setError("Playback failed. The file may be damaged or in a format the server can't convert.")
+          })
           hls.current = h
         } else {
           el.src = url // Safari plays HLS natively
@@ -90,8 +102,11 @@ export default function Watch() {
         setError(e instanceof Error ? e.message : 'Playback failed')
       }
     },
-    [item],
+    [item, position],
   )
+  useEffect(() => {
+    restartHls.current = startHls
+  }, [startHls])
 
   const playDirect = useCallback(
     (at: number) => {
