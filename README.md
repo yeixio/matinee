@@ -19,6 +19,7 @@ A fast, self-hosted media server for your movies, TV and music. Point it at your
 - **Subtitles** from the file itself or from files next to it (`Movie.en.srt`, `Movie.en.forced.srt`, `.vtt`, `.ass`). Text subtitles are drawn by the player; Blu-ray and DVD picture subtitles are burned into the video while converting. The player remembers your language from one episode to the next.
 - **Picks up where you left off.** Resume points, watched marks, Continue Watching and Recently Added, per person.
 - **Music** with a player that keeps going while you browse.
+- **Knows what's in every file.** In the background, Matinee slowly reads each file for its resolution, HDR (HDR10, HDR10+, HLG, Dolby Vision), codecs and bitrates, audio channels, Atmos and languages, and subtitles. The essentials show as badges on each title and as library filters (4K, HDR, Dolby Atmos…); everything else is under File details. It reads one file at a time at the lowest priority, waits while someone's watching something being converted, and looks at a file again only when it changes, so network shares stay responsive. Admins can see its progress, or slow it down or pause it, under Settings.
 - **Posters and descriptions** from [TMDB](https://www.themoviedb.org/) with a free API key ([how to get one](#posters-and-descriptions-tmdb-key)). Your own artwork files always win, and everything else works without a key.
 - **Search** as you type.
 - **People:** an admin plus as many accounts as you like, each with their own history.
@@ -216,6 +217,7 @@ One Go binary with the web player embedded. It talks to SQLite or PostgreSQL and
 cmd/matinee          entry point
 internal/api         HTTP API, auth, serves the web player
 internal/scan        library scanning; library kinds (movies, tv, music) register here
+internal/analyze     background media analysis (HDR, codecs, audio, languages)
 internal/metadata    online metadata providers (TMDB)
 internal/artwork     poster and backdrop serving and caching
 internal/stream      direct play and HLS transcoding

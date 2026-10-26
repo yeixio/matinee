@@ -37,6 +37,9 @@ type Subtitle struct {
 type Prober struct {
 	Path    string
 	Timeout time.Duration
+	// LowPriority runs ffprobe at the lowest CPU and disk priority, for work
+	// in the background that nobody is waiting on.
+	LowPriority bool
 }
 
 func (p Prober) Probe(ctx context.Context, file string) (Result, error) {

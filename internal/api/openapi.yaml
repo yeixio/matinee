@@ -350,7 +350,14 @@ paths:
   /libraries/{id}/items:
     get:
       summary: A library's top level (movies, shows or artists)
-      parameters: [{ $ref: "#/components/parameters/ID" }]
+      parameters:
+        - { $ref: "#/components/parameters/ID" }
+        - name: tag
+          in: query
+          schema: { type: array, items: { type: string } }
+          style: form
+          explode: true
+          description: Keep only items with every tag given (see Item.mediaTags), such as `?tag=4k&tag=hdr`.
       responses:
         "200": { $ref: "#/components/responses/Items" }
   /fs:
@@ -369,6 +376,46 @@ paths:
                   path: { type: string }
                   parent: { type: string }
                   dirs: { type: array, items: { type: string } }
+  /analysis:
+    get:
+      summary: How far the background media analysis is (admins only)
+      description: >
+        The server slowly reads every file once more in the background, at the
+        lowest priority, to record resolution, HDR, codecs, bitrates, audio
+        channels and languages, and subtitles. A file is read again only when
+        it changes.
+      responses:
+        "200":
+          description: Progress.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/AnalysisStatus" }
+    put:
+      summary: Set how hard the media analysis works (admins only)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [mode]
+              properties:
+                mode: { $ref: "#/components/schemas/AnalysisMode" }
+      responses:
+        "200":
+          description: Progress, with the new mode.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/AnalysisStatus" }
+        "400": { $ref: "#/components/responses/Error" }
+  /items/{id}/analyze:
+    post:
+      summary: Analyze one file again soon (admins only)
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      responses:
+        "202": { description: Queued. It's analyzed next unless the analysis is off. }
+        "400": { $ref: "#/components/responses/Error" }
+        "404": { $ref: "#/components/responses/Error" }
 
   /home:
     get:
@@ -1204,6 +1251,15 @@ components:
         showTitle: { type: string, description: "Episodes: the show's title." }
         seasonIndex: { type: integer, description: "Episodes: the season number." }
         onWatchList: { type: boolean, description: "On the signed-in person's watch list." }
+        mediaTags:
+          type: array
+          items: { type: string }
+          description: >
+            What the background analysis found, as short keys: resolution (8k, 4k, 1080p, 720p, 576p, 480p, sd);
+            hdr plus one of dolby-vision, hdr10+, hdr10, hlg; the video codec (hevc, h264, av1…); atmos and dts-x;
+            the most audio channels (7.1, 5.1, stereo, mono); for music lossless and hi-res; unreadable when the
+            file couldn't be read. Shows and seasons get every tag of their episodes. Left out until analyzed.
+          examples: [[4k, hdr, dolby-vision, hevc, atmos, "7.1"]]
     ItemDetail:
       allOf:
         - $ref: "#/components/schemas/Item"
@@ -1212,6 +1268,96 @@ components:
             mimeType: { type: string }
             subtitles: { type: array, items: { $ref: "#/components/schemas/SubtitleTrack" } }
             parents: { type: array, items: { $ref: "#/components/schemas/Item" }, description: Root first, such as show then season. }
+            mediaInfo: { $ref: "#/components/schemas/MediaInfo" }
+            mediaInfoStale: { type: boolean, description: The file changed since it was analyzed; a new analysis is on its way. }
+            filePath: { type: string, description: Where the file is on the server. Admins only. }
+            fileSize: { type: integer, description: Bytes. }
+    MediaInfo:
+      type: object
+      description: A file's streams in detail, from the background analysis. Left out until the file is analyzed.
+      properties:
+        container: { type: string, examples: [matroska, mov] }
+        size: { type: integer }
+        durationMs: { type: integer }
+        bitrate: { type: integer, description: Bits per second, all streams. }
+        chapters: { type: integer }
+        error: { type: string, description: Set when the file couldn't be read. }
+        analyzedAt: { type: integer, description: Unix seconds. }
+        video:
+          type: array
+          items:
+            type: object
+            properties:
+              index: { type: integer, description: Among the video streams. }
+              codec: { type: string }
+              profile: { type: string }
+              width: { type: integer }
+              height: { type: integer }
+              resolution: { type: string, examples: [4K, 1080p, 720p] }
+              frameRate: { type: number }
+              bitrate: { type: integer }
+              bitDepth: { type: integer }
+              pixFmt: { type: string }
+              colorPrimaries: { type: string }
+              colorTransfer: { type: string }
+              colorSpace: { type: string }
+              hdr: { type: string, enum: [dolby-vision, hdr10+, hdr10, hlg], description: Left out for SDR. }
+              hdrBase: { type: string, description: "Dolby Vision only: the HDR10, HDR10+ or HLG layer players without Dolby Vision show. Left out when there is none (profile 5)." }
+              dvProfile: { type: integer }
+              dvLevel: { type: integer }
+              language: { type: string }
+              title: { type: string }
+              default: { type: boolean }
+        audio:
+          type: array
+          items:
+            type: object
+            properties:
+              index: { type: integer, description: Among the audio streams. }
+              codec: { type: string, examples: [truehd, eac3, dts, aac, flac] }
+              profile: { type: string }
+              channels: { type: integer }
+              channelLayout: { type: string }
+              sampleRate: { type: integer }
+              bitDepth: { type: integer }
+              bitrate: { type: integer }
+              atmos: { type: boolean }
+              dtsx: { type: boolean }
+              language: { type: string }
+              title: { type: string }
+              default: { type: boolean }
+              forced: { type: boolean }
+              commentary: { type: boolean }
+              descriptive: { type: boolean, description: Audio description. }
+        subtitles:
+          type: array
+          description: Embedded subtitle streams. Files next to the video are listed in ItemDetail.subtitles.
+          items:
+            type: object
+            properties:
+              index: { type: integer }
+              codec: { type: string }
+              language: { type: string }
+              title: { type: string }
+              default: { type: boolean }
+              forced: { type: boolean }
+              sdh: { type: boolean }
+    AnalysisMode:
+      type: string
+      enum: [gentle, normal, off]
+      description: >
+        gentle (the default) reads a file every few seconds and waits while anyone is watching
+        something transcoded; normal reads files back to back; off pauses. Both read one file at a
+        time at the lowest CPU and disk priority.
+    AnalysisStatus:
+      type: object
+      properties:
+        mode: { $ref: "#/components/schemas/AnalysisMode" }
+        state: { type: string, enum: [analyzing, waiting, slowDisk, idle, off], description: "waiting: for playback to end. slowDisk: files kept timing out, so it's resting." }
+        total: { type: integer, description: Files in all libraries. }
+        done: { type: integer, description: Files analyzed as they are now. }
+        unreadable: { type: integer, description: Files among those done that couldn't be read. }
+        current: { type: string, description: Title of the file being analyzed. }
     SubtitleTrack:
       type: object
       properties:
