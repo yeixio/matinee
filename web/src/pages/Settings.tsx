@@ -4,6 +4,7 @@ import { useState, type FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { api, type User } from '../api'
 import { MediaAnalysis } from '../components/MediaAnalysis'
+import { Profiles } from '../components/ProfileSettings'
 import { Appearance } from '../components/ThemePicker'
 import { LibraryIcon, useLibraries } from '../components/Shell'
 import { Button, Field, inputClass } from '../components/ui'
@@ -19,6 +20,7 @@ export default function Settings() {
       {me?.isAdmin && <Libraries />}
       {me?.isAdmin && <MediaAnalysis />}
       {me?.isAdmin && <Users />}
+      {me?.isAdmin && <Profiles />}
       {me?.isAdmin && <HomeNetwork />}
       {me?.isAdmin && <Trailers />}
       {me?.isAdmin && <Transcoding />}

@@ -88,6 +88,8 @@ type DetailsUpdate struct {
 	Guests  []Credit
 	Crew    []Credit
 	Terms   []Term
+	// RatingLevel is the level of Details.Certification (see the rating package).
+	RatingLevel int
 }
 
 // NeedsDetails lists a library's matched movies, shows and seasons whose
@@ -116,7 +118,8 @@ func (s *Store) ApplyDetails(ctx context.Context, id int64, u DetailsUpdate) err
 		return err
 	}
 	defer t.Rollback()
-	if _, err := t.ExecContext(ctx, "UPDATE items SET details = ?, details_at = ? WHERE id = ?", string(js), now(), id); err != nil {
+	if _, err := t.ExecContext(ctx, "UPDATE items SET details = ?, details_at = ?, rating_level = ? WHERE id = ?",
+		string(js), now(), nullInt(u.RatingLevel), id); err != nil {
 		return err
 	}
 	if err := applyCredits(ctx, t, id, u); err != nil {

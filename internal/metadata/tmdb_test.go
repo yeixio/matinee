@@ -188,7 +188,7 @@ func TestFetcherBackfillsGenres(t *testing.T) {
 	if left, _ := st.NeedsGenres(ctx, movies.ID); len(left) != 0 {
 		t.Fatalf("still needing genres: %+v", left)
 	}
-	counts, _ := st.GenreCounts(ctx)
+	counts, _ := st.GenreCounts(ctx, 0)
 	if counts["Action"] != 2 || counts["Thriller"] != 1 {
 		t.Fatalf("counts: %v", counts)
 	}

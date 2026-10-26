@@ -71,7 +71,7 @@ func pickGenres(counts map[string]int, day uint64, n int) []string {
 }
 
 func (s *Server) genreRows(ctx context.Context, userID int64, now time.Time) ([]HomeRow, error) {
-	counts, err := s.Store.GenreCounts(ctx)
+	counts, err := s.Store.GenreCounts(ctx, userID)
 	if err != nil {
 		return nil, err
 	}

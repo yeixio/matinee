@@ -249,6 +249,28 @@ var migrations = []string{
 		PRIMARY KEY (item_id, kind, term)
 	)`,
 	"CREATE INDEX item_terms_term ON item_terms(kind, term)",
+	// 32–36: profiles, which are users without a password that belong to an
+	// account, and kids mode (see profiles.go).
+	"ALTER TABLE users ADD COLUMN parent_id BIGINT REFERENCES users(id) ON DELETE CASCADE",
+	"ALTER TABLE users ADD COLUMN display_name TEXT NOT NULL DEFAULT ''",
+	"ALTER TABLE users ADD COLUMN pin_hash TEXT NOT NULL DEFAULT ''",
+	"ALTER TABLE users ADD COLUMN kids_level INTEGER NOT NULL DEFAULT 0",
+	"ALTER TABLE users ADD COLUMN avatar TEXT NOT NULL DEFAULT ''",
+	// 37–38: which profile a device is watching as. Home sessions belong to
+	// the home network's guest account and stop working away from home.
+	"ALTER TABLE sessions ADD COLUMN profile_id BIGINT REFERENCES users(id) ON DELETE SET NULL",
+	"ALTER TABLE sessions ADD COLUMN home_only INTEGER NOT NULL DEFAULT 0",
+	// 39: the age rating's level (see the rating package); NULL when unknown.
+	// Seasons and episodes go by their show's.
+	"ALTER TABLE items ADD COLUMN rating_level INTEGER",
+	// 40: the libraries a kids profile can see: everything in them ('all') or
+	// only titles rated for it ('rated').
+	`CREATE TABLE profile_libraries (
+		user_id    BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+		library_id BIGINT NOT NULL REFERENCES libraries(id) ON DELETE CASCADE,
+		mode       TEXT NOT NULL,
+		PRIMARY KEY (user_id, library_id)
+	)`,
 }
 
 func now() int64 { return time.Now().Unix() }
@@ -268,18 +290,59 @@ func SortTitle(title string) string {
 
 type User struct {
 	ID       int64  `json:"id"`
-	Username string `json:"username"`
+	Username string `json:"username"` // a profile's name, for profiles
 	IsAdmin  bool   `json:"isAdmin"`
-	// Guest is the home network's shared account (see HomeGuest).
+	// Guest is the home network's shared account (see HomeGuest), or one of its profiles.
 	Guest bool `json:"guest,omitempty"`
-	hash  string
+	// AccountID is the account a profile belongs to; 0 for accounts.
+	AccountID int64 `json:"accountId,omitempty"`
+	// KidsLevel limits a kids profile to titles rated up to it (see the
+	// rating package); 0 for everyone else.
+	KidsLevel int    `json:"kidsLevel,omitempty"`
+	Avatar    string `json:"avatar,omitempty"` // a colour name the apps know, such as coral
+	HasPIN    bool   `json:"hasPin,omitempty"`
+	hash      string
+	pinHash   string
 }
 
 func (u User) PasswordHash() string { return u.hash }
+func (u User) PINHash() string      { return u.pinHash }
+
+// Account is the id of the account a user is, or belongs to as a profile.
+func (u User) Account() int64 {
+	if u.AccountID != 0 {
+		return u.AccountID
+	}
+	return u.ID
+}
+
+// userCols selects a user for scanUser; u is the users table.
+const userCols = `u.id, u.username, u.is_admin, u.password_hash, u.guest, COALESCE(u.parent_id, 0),
+	u.display_name, u.pin_hash, u.kids_level, u.avatar,
+	COALESCE((SELECT a.guest FROM users a WHERE a.id = u.parent_id), 0)`
+
+func scanUserRow(r scanner, extra ...any) (User, error) {
+	var u User
+	var parentGuest bool
+	var display string
+	err := r.Scan(append([]any{&u.ID, &u.Username, &u.IsAdmin, &u.hash, &u.Guest, &u.AccountID,
+		&display, &u.pinHash, &u.KidsLevel, &u.Avatar, &parentGuest}, extra...)...)
+	if err != nil {
+		return u, err
+	}
+	u.HasPIN = u.pinHash != ""
+	switch {
+	case u.AccountID != 0:
+		u.Username, u.IsAdmin, u.Guest = display, false, parentGuest
+	case u.Guest:
+		u.Username = "Home"
+	}
+	return u, nil
+}
 
 func (s *Store) CountUsers(ctx context.Context) (int, error) {
 	var n int
-	err := s.db.QueryRowContext(ctx, "SELECT COUNT(*) FROM users WHERE guest = 0").Scan(&n)
+	err := s.db.QueryRowContext(ctx, "SELECT COUNT(*) FROM users WHERE guest = 0 AND parent_id IS NULL").Scan(&n)
 	return n, err
 }
 
@@ -294,16 +357,18 @@ func (s *Store) CreateUser(ctx context.Context, username, passwordHash string, a
 	return User{ID: id, Username: username, IsAdmin: admin, hash: passwordHash}, nil
 }
 
+// Users lists the accounts people sign in with, leaving out the home
+// network's guest account and profiles.
 func (s *Store) Users(ctx context.Context) ([]User, error) {
-	rows, err := s.db.QueryContext(ctx, "SELECT id, username, is_admin, password_hash FROM users WHERE guest = 0 ORDER BY username")
+	rows, err := s.db.QueryContext(ctx, "SELECT "+userCols+" FROM users u WHERE u.guest = 0 AND u.parent_id IS NULL ORDER BY u.username")
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
 	var out []User
 	for rows.Next() {
-		var u User
-		if err := rows.Scan(&u.ID, &u.Username, &u.IsAdmin, &u.hash); err != nil {
+		u, err := scanUserRow(rows)
+		if err != nil {
 			return nil, err
 		}
 		out = append(out, u)
@@ -313,12 +378,16 @@ func (s *Store) Users(ctx context.Context) ([]User, error) {
 
 func (s *Store) UserByName(ctx context.Context, username string) (User, error) {
 	return s.scanUser(s.db.QueryRowContext(ctx,
-		"SELECT id, username, is_admin, password_hash FROM users WHERE lower(username) = lower(?) AND guest = 0", username))
+		"SELECT "+userCols+" FROM users u WHERE lower(u.username) = lower(?) AND u.guest = 0 AND u.parent_id IS NULL", username))
+}
+
+// UserByID returns an account, the guest account or a profile.
+func (s *Store) UserByID(ctx context.Context, id int64) (User, error) {
+	return s.scanUser(s.db.QueryRowContext(ctx, "SELECT "+userCols+" FROM users u WHERE u.id = ?", id))
 }
 
 func (s *Store) scanUser(row *sql.Row) (User, error) {
-	var u User
-	err := row.Scan(&u.ID, &u.Username, &u.IsAdmin, &u.hash)
+	u, err := scanUserRow(row)
 	if errors.Is(err, sql.ErrNoRows) {
 		return u, ErrNotFound
 	}
@@ -332,37 +401,55 @@ type Device struct {
 }
 
 func (s *Store) CreateSession(ctx context.Context, userID int64, ttl time.Duration, dev Device) (string, error) {
+	return s.createSession(ctx, userID, 0, false, ttl, dev)
+}
+
+// CreateHomeSession starts a session for a device at home that picked one of
+// the guest account's profiles. It only works from the home network.
+func (s *Store) CreateHomeSession(ctx context.Context, guestID, profileID int64, ttl time.Duration, dev Device) (string, error) {
+	return s.createSession(ctx, guestID, profileID, true, ttl, dev)
+}
+
+func (s *Store) createSession(ctx context.Context, userID, profileID int64, homeOnly bool, ttl time.Duration, dev Device) (string, error) {
 	b := make([]byte, 32)
 	if _, err := rand.Read(b); err != nil {
 		return "", err
 	}
 	token := hex.EncodeToString(b)
-	_, err := s.db.ExecContext(ctx, `INSERT INTO sessions (token, user_id, expires_at, device_name, platform, created_at, last_seen_at)
-		VALUES (?, ?, ?, ?, ?, ?, ?)`,
-		token, userID, time.Now().Add(ttl).Unix(), dev.Name, dev.Platform, now(), now())
+	_, err := s.db.ExecContext(ctx, `INSERT INTO sessions (token, user_id, expires_at, device_name, platform, created_at, last_seen_at, profile_id, home_only)
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+		token, userID, time.Now().Add(ttl).Unix(), dev.Name, dev.Platform, now(), now(), nullInt64(profileID), b2i(homeOnly))
 	return token, err
 }
 
 // seenEvery is how stale last_seen_at may get, so requests don't each write to the database.
 const seenEvery = 5 * 60
 
-func (s *Store) SessionUser(ctx context.Context, token string) (User, error) {
-	var u User
+// SessionUser returns who a session watches as: the profile it picked, or
+// else its account. homeOnly is true for sessions that only work at home.
+func (s *Store) SessionUser(ctx context.Context, token string) (u User, homeOnly bool, err error) {
 	var seen int64
-	err := s.db.QueryRowContext(ctx, `
-		SELECT u.id, u.username, u.is_admin, u.password_hash, s.last_seen_at
-		FROM sessions s JOIN users u ON u.id = s.user_id
-		WHERE s.token = ? AND s.expires_at > ?`, token, now()).Scan(&u.ID, &u.Username, &u.IsAdmin, &u.hash, &seen)
+	u, err = scanUserRow(s.db.QueryRowContext(ctx, `
+		SELECT `+userCols+`, s.last_seen_at, s.home_only
+		FROM sessions s JOIN users u ON u.id = COALESCE(s.profile_id, s.user_id)
+		WHERE s.token = ? AND s.expires_at > ?`, token, now()), &seen, &homeOnly)
 	if errors.Is(err, sql.ErrNoRows) {
-		return u, ErrNotFound
+		return u, false, ErrNotFound
 	}
 	if err != nil {
-		return u, err
+		return u, false, err
 	}
 	if now()-seen > seenEvery {
 		s.db.ExecContext(ctx, "UPDATE sessions SET last_seen_at = ? WHERE token = ?", now(), token)
 	}
-	return u, nil
+	return u, homeOnly, nil
+}
+
+// SetSessionProfile switches the profile a session watches as; 0 goes back
+// to the account itself.
+func (s *Store) SetSessionProfile(ctx context.Context, token string, profileID int64) error {
+	_, err := s.db.ExecContext(ctx, "UPDATE sessions SET profile_id = ? WHERE token = ?", nullInt64(profileID), token)
+	return err
 }
 
 // DeleteSession signs a device out. Its downloads go with it.

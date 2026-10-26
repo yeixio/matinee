@@ -15,20 +15,21 @@ import (
 var DefaultTMDBKey = ""
 
 type Config struct {
-	Addr         string        // HTTP listen address
-	DataDir      string        // SQLite database (when used), image cache and transcode scratch space
-	FFmpegPath   string        // ffmpeg binary
-	FFprobePath  string        // ffprobe binary
-	ScanInterval time.Duration // periodic library rescan; 0 disables it
-	TMDBKey      string        // themoviedb.org API key or read token; empty disables online metadata
-	DatabaseURL  string        // postgres:// URL; empty uses SQLite in DataDir
-	MediaRoot    string        // where the folder picker starts when adding a library
-	MusicBrainz  bool          // look up artists and albums on MusicBrainz (no key needed)
-	Wikidata     bool          // look up movies' and shows' awards on Wikidata (no key needed)
-	Discovery    bool          // announce the server on the local network so the apps find it
-	ServerName   string        // the name the apps show for this server
-	PublicURL    string        // the address the apps should connect to; empty uses this host's IP and port
-	HomeAddr     string        // a second listen address only for the home network; empty means Addr serves both
+	Addr          string        // HTTP listen address
+	DataDir       string        // SQLite database (when used), image cache and transcode scratch space
+	FFmpegPath    string        // ffmpeg binary
+	FFprobePath   string        // ffprobe binary
+	ScanInterval  time.Duration // periodic library rescan; 0 disables it
+	TMDBKey       string        // themoviedb.org API key or read token; empty disables online metadata
+	RatingCountry string        // whose age ratings to use, such as US or GB
+	DatabaseURL   string        // postgres:// URL; empty uses SQLite in DataDir
+	MediaRoot     string        // where the folder picker starts when adding a library
+	MusicBrainz   bool          // look up artists and albums on MusicBrainz (no key needed)
+	Wikidata      bool          // look up movies' and shows' awards on Wikidata (no key needed)
+	Discovery     bool          // announce the server on the local network so the apps find it
+	ServerName    string        // the name the apps show for this server
+	PublicURL     string        // the address the apps should connect to; empty uses this host's IP and port
+	HomeAddr      string        // a second listen address only for the home network; empty means Addr serves both
 }
 
 // Database is what store.Open takes: the PostgreSQL URL, or the SQLite file.
@@ -57,6 +58,7 @@ func Load(args []string) (Config, error) {
 	fs.StringVar(&c.FFprobePath, "ffprobe", env("MATINEE_FFPROBE", "ffprobe"), "path to ffprobe")
 	fs.StringVar(&c.DatabaseURL, "database-url", env("MATINEE_DATABASE_URL", ""), "PostgreSQL URL (postgres://...); default is SQLite in the data directory")
 	fs.StringVar(&c.TMDBKey, "tmdb-key", env("MATINEE_TMDB_KEY", DefaultTMDBKey), "themoviedb.org API key for posters and descriptions")
+	fs.StringVar(&c.RatingCountry, "rating-country", env("MATINEE_RATING_COUNTRY", "US"), "country whose age ratings kids profiles go by, such as US, GB or DE")
 	fs.StringVar(&c.MediaRoot, "media-root", env("MATINEE_MEDIA_ROOT", "/"), "folder the library picker starts in")
 	fs.BoolVar(&c.Wikidata, "wikidata", env("MATINEE_WIKIDATA", "true") != "false", "look up awards on wikidata.org")
 	fs.BoolVar(&c.MusicBrainz, "musicbrainz", env("MATINEE_MUSICBRAINZ", "true") != "false", "look up artists and albums on musicbrainz.org")

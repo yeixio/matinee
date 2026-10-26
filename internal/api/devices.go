@@ -120,7 +120,7 @@ func (s *Server) pollDeviceCode(w http.ResponseWriter, r *http.Request) {
 		s.serverError(w, err)
 		return
 	}
-	u, err := s.Store.SessionUser(r.Context(), token)
+	u, _, err := s.Store.SessionUser(r.Context(), token)
 	if err != nil {
 		s.serverError(w, err)
 		return
@@ -154,7 +154,7 @@ func (s *Server) denyDeviceCode(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s *Server) decideDeviceCode(w http.ResponseWriter, r *http.Request, approve bool) {
-	err := s.Store.DecideDeviceCode(r.Context(), r.PathValue("code"), currentUser(r).ID, approve)
+	err := s.Store.DecideDeviceCode(r.Context(), r.PathValue("code"), currentUser(r).Account(), approve)
 	if errors.Is(err, store.ErrNotFound) {
 		writeError(w, http.StatusNotFound, "that code isn't valid or has expired")
 		return
@@ -167,7 +167,7 @@ func (s *Server) decideDeviceCode(w http.ResponseWriter, r *http.Request, approv
 }
 
 func (s *Server) listDevices(w http.ResponseWriter, r *http.Request) {
-	sessions, err := s.Store.Sessions(r.Context(), currentUser(r).ID, auth.Token(r))
+	sessions, err := s.Store.Sessions(r.Context(), currentUser(r).Account(), auth.Token(r))
 	if err != nil {
 		s.serverError(w, err)
 		return
@@ -176,7 +176,7 @@ func (s *Server) listDevices(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s *Server) deleteDevice(w http.ResponseWriter, r *http.Request) {
-	err := s.Store.DeleteSessionByID(r.Context(), currentUser(r).ID, r.PathValue("id"))
+	err := s.Store.DeleteSessionByID(r.Context(), currentUser(r).Account(), r.PathValue("id"))
 	if errors.Is(err, store.ErrNotFound) {
 		writeError(w, http.StatusNotFound, "no such device")
 		return
