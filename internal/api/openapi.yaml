@@ -298,6 +298,134 @@ paths:
                   themes:
                     type: array
                     items: { $ref: "#/components/schemas/Theme" }
+  /profiles:
+    get:
+      summary: Who's watching? The account and its profiles
+      description: |
+        The account the device is signed in to (or the home network's
+        guest account) comes first, then its profiles. With no profiles
+        the list has just the account, and apps skip the question.
+        `current` is the one the device is watching as now.
+      responses:
+        "200":
+          description: The choices.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  current: { type: integer }
+                  profiles:
+                    type: array
+                    items: { $ref: "#/components/schemas/ProfileChoice" }
+    post:
+      summary: Add a profile to an account (admins)
+      description: |
+        A kids profile (kidsLevel 1–3) without `libraries` gets every movie
+        and TV library, filtered by rating.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ProfileChanges" }
+      responses:
+        "201":
+          description: The new profile.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Profile" }
+        "400": { $ref: "#/components/responses/Error" }
+        "403": { $ref: "#/components/responses/Error" }
+  /profiles/select:
+    post:
+      summary: Watch as another profile of the same account
+      description: |
+        Profiles with a PIN need it, unless the device is already watching
+        as that profile. Five wrong PINs lock a profile for a minute (429).
+        On the home network without signing in, picking a profile returns a
+        `token` (and sets the session cookie) that only works from home and
+        only for browsing and playing.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [id]
+              properties:
+                id: { type: integer }
+                pin: { type: string, description: Four digits. }
+                deviceName: { type: string, description: For a new home session. }
+                platform: { type: string }
+      responses:
+        "200":
+          description: Switched.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user: { $ref: "#/components/schemas/User" }
+                  token: { type: string, description: Only for a new home session. }
+        "403": { $ref: "#/components/responses/Error" }
+        "404": { $ref: "#/components/responses/Error" }
+        "429": { $ref: "#/components/responses/Error" }
+  /profiles/manage:
+    get:
+      summary: Every account with its profiles (admins)
+      description: The home network's guest account comes first.
+      responses:
+        "200":
+          description: Accounts, avatar colours and kids levels to choose from.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accounts:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        account: { $ref: "#/components/schemas/User" }
+                        profiles:
+                          type: array
+                          items: { $ref: "#/components/schemas/Profile" }
+                  avatars: { type: array, items: { type: string } }
+                  levels:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        level: { type: integer }
+                        name: { type: string }
+        "403": { $ref: "#/components/responses/Error" }
+  /profiles/{id}:
+    parameters:
+      - { name: id, in: path, required: true, schema: { type: integer } }
+    put:
+      summary: Change a profile (admins)
+      description: |
+        Fields left out stay as they are. For an account, only `pin` and
+        `avatar` can be set; an account's PIN guards it in "Who's watching?".
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ProfileChanges" }
+      responses:
+        "200":
+          description: The profile.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Profile" }
+        "400": { $ref: "#/components/responses/Error" }
+        "404": { $ref: "#/components/responses/Error" }
+    delete:
+      summary: Remove a profile with its progress and watch list (admins)
+      responses:
+        "204": { description: Removed. }
+        "404": { $ref: "#/components/responses/Error" }
   /devices:
     get:
       summary: Devices signed in as the current user
@@ -511,6 +639,7 @@ paths:
           content:
             application/json:
               schema: { type: array, items: { $ref: "#/components/schemas/FilterPerson" } }
+        "404": { $ref: "#/components/responses/Error" }
   /items:
     get:
       summary: Titles across libraries, filtered and sorted
@@ -1601,11 +1730,52 @@ components:
       type: object
       properties:
         id: { type: integer }
-        username: { type: string }
+        username: { type: string, description: "A profile's name, for profiles." }
         isAdmin: { type: boolean }
         guest:
           type: boolean
-          description: The shared account of a device at home that hasn't signed in.
+          description: The shared account of a device at home that hasn't signed in, or one of its profiles.
+        accountId: { type: integer, description: "The account a profile belongs to; absent for accounts." }
+        kidsLevel:
+          type: integer
+          description: |
+            For kids profiles, the oldest age rating they see: 1 little kids
+            (G, TV-Y, TV-G), 2 kids (PG, TV-Y7, TV-PG), 3 teens (PG-13,
+            TV-14). Kids profiles can't make requests, report problems, see
+            coming soon or manage devices.
+        avatar: { type: string, description: "A colour name: coral, amber, lime, teal, sky, violet, pink or slate." }
+        hasPin: { type: boolean }
+    ProfileChoice:
+      type: object
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        avatar: { type: string }
+        kidsLevel: { type: integer }
+        hasPin: { type: boolean }
+        account: { type: boolean, description: The account itself rather than one of its profiles. }
+    Profile:
+      allOf:
+        - $ref: "#/components/schemas/User"
+        - type: object
+          properties:
+            libraries:
+              type: object
+              additionalProperties: { type: string, enum: [all, rated] }
+              description: |
+                Library ids a kids profile sees: everything in them, or only
+                titles rated up to its level. Others are hidden.
+    ProfileChanges:
+      type: object
+      properties:
+        accountId: { type: integer, description: Only when adding a profile. }
+        name: { type: string }
+        avatar: { type: string }
+        kidsLevel: { type: integer, minimum: 0, maximum: 3 }
+        pin: { type: string, description: 'Four digits; "" removes the PIN.' }
+        libraries:
+          type: object
+          additionalProperties: { type: string, enum: [all, rated] }
     Device:
       type: object
       properties:

@@ -105,3 +105,21 @@ func BrowserName(userAgent string) string {
 	}
 	return "Web browser"
 }
+
+// ValidPIN reports whether a profile PIN is four digits.
+func ValidPIN(pin string) bool {
+	if len(pin) != 4 {
+		return false
+	}
+	for _, r := range pin {
+		if r < '0' || r > '9' {
+			return false
+		}
+	}
+	return true
+}
+
+// CheckPIN compares a PIN with a profile's stored hash.
+func CheckPIN(hash, pin string) bool {
+	return hash != "" && ValidPIN(pin) && bcrypt.CompareHashAndPassword([]byte(hash), []byte(pin)) == nil
+}

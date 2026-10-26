@@ -11,6 +11,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/yeixio/matinee/internal/rating"
 	"github.com/yeixio/matinee/internal/store"
 )
 
@@ -312,6 +313,7 @@ func (t *TMDB) Details(ctx context.Context, kind string, id int64) (*store.Detai
 		u.Crew = t.crew(r.Credits.Crew)
 	}
 	u.Details = d
+	u.RatingLevel = rating.Level(t.region(), d.Certification)
 	return u, nil
 }
 

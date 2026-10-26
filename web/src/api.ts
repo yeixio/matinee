@@ -4,8 +4,37 @@
 
 import { type ItemFilter, toSearchParams } from './filter'
 
-// guest is the shared account of a device at home that hasn't signed in.
-export type User = { id: number; username: string; isAdmin: boolean; guest?: boolean }
+// guest is the shared account of a device at home that hasn't signed in, or
+// one of its profiles. Profiles have accountId; kids profiles have kidsLevel
+// (see profiles.ts).
+export type User = {
+  id: number
+  username: string
+  isAdmin: boolean
+  guest?: boolean
+  accountId?: number
+  kidsLevel?: number
+  avatar?: string
+  hasPin?: boolean
+}
+// One entry in "Who's watching?". The account itself comes first.
+export type ProfileChoice = { id: number; name: string; avatar?: string; kidsLevel?: number; hasPin: boolean; account?: boolean }
+// A profile as admins manage it. libraries: library id → all or rated (kids only).
+export type LibraryMode = 'all' | 'rated'
+export type Profile = User & { libraries: Record<string, LibraryMode> }
+export type ProfileChanges = {
+  accountId?: number
+  name?: string
+  avatar?: string
+  kidsLevel?: number
+  pin?: string
+  libraries?: Record<string, LibraryMode>
+}
+export type ManagedProfiles = {
+  accounts: { account: User; profiles: Profile[] }[]
+  avatars: string[]
+  levels: { level: number; name: string }[]
+}
 // requests: who besides admins may add titles through Radarr and Sonarr.
 export type RequestMode = 'off' | 'approve' | 'auto'
 export type Settings = {
@@ -450,6 +479,12 @@ export const api = {
   myTheme: () => request<{ theme: string }>('GET', '/api/v1/me/theme'),
   setMyTheme: (theme: string) => request<{ theme: string }>('PUT', '/api/v1/me/theme', { theme }),
   users: () => request<User[]>('GET', '/api/v1/users'),
+  profiles: () => request<{ current: number; profiles: ProfileChoice[] }>('GET', '/api/v1/profiles'),
+  selectProfile: (id: number, pin?: string) => request<{ user: User }>('POST', '/api/v1/profiles/select', { id, pin }),
+  manageProfiles: () => request<ManagedProfiles>('GET', '/api/v1/profiles/manage'),
+  createProfile: (p: ProfileChanges) => request<Profile>('POST', '/api/v1/profiles', p),
+  updateProfile: (id: number, p: ProfileChanges) => request<Profile>('PUT', `/api/v1/profiles/${id}`, p),
+  deleteProfile: (id: number) => request<void>('DELETE', `/api/v1/profiles/${id}`),
   createUser: (username: string, password: string, isAdmin: boolean) =>
     request<User>('POST', '/api/v1/users', { username, password, isAdmin }),
   setAdmin: (id: number, isAdmin: boolean) => request<User>('PATCH', `/api/v1/users/${id}`, { isAdmin }),
