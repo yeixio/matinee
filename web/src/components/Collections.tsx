@@ -12,7 +12,8 @@ import {
   type ItemFilterJSON,
   type User,
 } from '../api'
-import { FilterBar, type ItemFilter } from '../filter'
+import { FilterBar } from './FilterBar'
+import type { ItemFilter } from '../filter'
 import { PosterCard } from './Card'
 import { Row, RowItem } from './Row'
 import { useLibraries } from './Shell'
