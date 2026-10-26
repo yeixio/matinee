@@ -155,6 +155,14 @@ func (s *Server) routes() []route {
 		{"POST /items/{id}/hls", reader, s.startHLS},
 		{"GET /hls/{session}/{file}", reader, s.hlsFile},
 
+		{"GET /collections", reader, s.listCollections},
+		{"POST /collections", signedIn, s.createCollection},
+		{"GET /collections/{id}", reader, s.getCollection},
+		{"PUT /collections/{id}", signedIn, s.updateCollection},
+		{"DELETE /collections/{id}", signedIn, s.deleteCollection},
+		{"PUT /collections/{id}/items/{item}", signedIn, s.addToCollection},
+		{"DELETE /collections/{id}/items/{item}", signedIn, s.removeFromCollection},
+		{"GET /box-sets/{id}", reader, s.getBoxSet},
 		{"GET /watchlist", reader, s.getWatchList},
 		{"PUT /watchlist/{id}", reader, s.addToWatchList},
 		{"DELETE /watchlist/{id}", reader, s.removeFromWatchList},
@@ -674,11 +682,18 @@ func (s *Server) home(w http.ResponseWriter, r *http.Request) {
 		s.serverError(w, err)
 		return
 	}
+	pinned, err := s.pinnedRows(r.Context(), currentUser(r))
+	if err != nil {
+		s.serverError(w, err)
+		return
+	}
 	rows, err := s.genreRows(r.Context(), uid, now)
 	if err != nil {
 		s.serverError(w, err)
 		return
 	}
+	// Pinned collections come before the day's genres.
+	rows = append(pinned, rows...)
 	writeJSON(w, http.StatusOK, map[string]any{
 		"continueWatching": cont, "watchList": watchList, "recentlyAdded": recent,
 		"newReleases": releases, "rows": rows,

@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { CalendarClock, Clapperboard, Home, Inbox, LogIn, LogOut, Music, Search, Settings, Tv } from 'lucide-react'
+import { CalendarClock, Clapperboard, Home, Inbox, Layers, LogIn, LogOut, Music, Search, Settings, Tv } from 'lucide-react'
 import { NavLink, Outlet } from 'react-router-dom'
 import { api, type Library, type User } from '../api'
 import { Avatar } from '../pages/Profiles'
@@ -86,6 +86,9 @@ export default function Shell({ user }: { user: User }) {
             <NavLink to="/watchlist" className={topLink}>
               Watch list
             </NavLink>
+            <NavLink to="/collections" className={topLink}>
+              Collections
+            </NavLink>
             {libraries.map((l) => (
               <NavLink key={l.id} to={`/library/${l.id}`} className={topLink} onMouseEnter={() => prefetchLibrary(l.id)} onFocus={() => prefetchLibrary(l.id)}>
                 <span className="truncate">{l.name}</span>
@@ -94,6 +97,10 @@ export default function Shell({ user }: { user: User }) {
             ))}
           </nav>
           <div className="ml-auto flex items-center gap-1">
+            {/* On phones the tab bar has no room, so collections get an icon up here. */}
+            <NavLink to="/collections" className={(a) => `md:hidden ${iconLink(a)}`} aria-label="Collections" title="Collections">
+              <Layers className="size-5" />
+            </NavLink>
             <NavLink to="/search" className="hidden rounded-full p-2 text-muted hover:bg-text/5 hover:text-text md:block" aria-label="Search">
               <Search className="size-5" />
             </NavLink>
