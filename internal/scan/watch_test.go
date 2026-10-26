@@ -269,3 +269,27 @@ func TestWatcherPicksUpNewFiles(t *testing.T) {
 		})
 	}
 }
+
+// A file added in the same tick of the folder's clock as the listing leaves
+// the folder's time unchanged; it must still be noticed.
+func TestPollNoticesFileAddedWithinTheSameTick(t *testing.T) {
+	root := t.TempDir()
+	w := NewWatcher(nil, quietLog())
+	dirs := map[string]*polledDir{root: nil}
+	w.pollDir(context.Background(), root, dirs, nil)
+	listed := dirs[root].mtime
+
+	file := filepath.Join(root, "Heat.mkv")
+	os.WriteFile(file, []byte("x"), 0o644)
+	os.Chtimes(root, listed, listed) // as if the clock hadn't ticked
+	changes := make(chan string, 4)
+	w.pollDir(context.Background(), root, dirs, changes)
+	select {
+	case p := <-changes:
+		if p != file {
+			t.Fatalf("reported %s", p)
+		}
+	default:
+		t.Fatal("not reported")
+	}
+}

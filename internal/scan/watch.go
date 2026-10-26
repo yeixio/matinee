@@ -406,7 +406,16 @@ func (w *Watcher) events(ctx context.Context, fw *fsnotify.Watcher, root string,
 type polledDir struct {
 	mtime   time.Time
 	entries map[string]bool // name → is a folder
+	// recent means the folder changed just before it was listed. Folder
+	// times are coarse (a few milliseconds on Linux, up to seconds on some
+	// shares), so a file added right after the listing can leave the time
+	// unchanged; such a folder is listed again on the next pass.
+	recent bool
 }
+
+// recentChange is how close to its listing a folder's change must be to
+// count as recent. It also covers some clock difference with a share.
+const recentChange = 2 * time.Second
 
 func (w *Watcher) poll(ctx context.Context, roots []string, changes chan<- string) {
 	dirs := map[string]*polledDir{}
@@ -452,14 +461,14 @@ func (w *Watcher) pollDir(ctx context.Context, dir string, dirs map[string]*poll
 		return
 	}
 	old := dirs[dir]
-	if old != nil && info.ModTime().Equal(old.mtime) {
+	if old != nil && !old.recent && info.ModTime().Equal(old.mtime) {
 		return
 	}
 	list, err := os.ReadDir(dir)
 	if err != nil {
 		return
 	}
-	now := &polledDir{mtime: info.ModTime(), entries: map[string]bool{}}
+	now := &polledDir{mtime: info.ModTime(), entries: map[string]bool{}, recent: time.Since(info.ModTime()) < recentChange}
 	for _, e := range list {
 		if !strings.HasPrefix(e.Name(), ".") {
 			now.entries[e.Name()] = e.IsDir()
