@@ -92,6 +92,18 @@ Matinee decides a device is at home by the address its connection comes from, an
 
 If something in front of Matinee rewrites addresses without saying so, for example a port forward that makes internet traffic look like it comes from your router, turn on **Ask for sign-in at home**.
 
+### Reaching it away from home
+
+Turn on **Settings → Remote access** and Matinee sets itself up to be reached from outside your home, with nothing to configure on the router:
+
+1. It asks your router to forward a port to it (port 7443, or another the router picks), over UPnP or NAT-PMP. Most home routers allow this; if yours doesn't, turn on UPnP in its settings.
+2. It gets an HTTPS certificate for your public IP address from [Let's Encrypt](https://letsencrypt.org/), so phones and browsers trust the connection. For the check, Let's Encrypt connects once through port 443 or 80, which Matinee forwards for a minute and closes again. Getting the certificate also proves the internet can reach the server. It lasts six days and renews by itself, and a new one is fetched when your address changes.
+3. The apps pick up the address while they're at home and use it when they're away. Everyone signs in from outside; nothing that arrives through this port counts as home.
+
+Settings shows the address and what stands in the way when it doesn't work. Two setups can't be reached directly: an internet provider that shares one public address among its customers (carrier-grade NAT), and a second router in front of yours. Settings says when that's the case. If your public address changes while you're away, the apps learn the new one next time they're home.
+
+Remote access needs Matinee on the host's network, so it isn't offered in the Helm chart (the ingress is the way in) and needs `network_mode: host` in Docker. If you already reach Matinee at your own domain, set `MATINEE_PUBLIC_URL` instead and the apps use that. To not offer remote access at all, set `MATINEE_REMOTE_ADDR=off`.
+
 ### Debian and Ubuntu
 
 ```sh
@@ -181,8 +193,9 @@ Every setting is a flag or an environment variable.
 | `MATINEE_SCAN_INTERVAL` | `15m` | How often libraries are rescanned; `0` turns it off |
 | `MATINEE_DISCOVERY` | `true` | Announce the server on the local network so the apps find it ([more](#finding-it-from-the-apps)) |
 | `MATINEE_SERVER_NAME` | `Matinee` | The name the apps show for this server |
-| `MATINEE_PUBLIC_URL` | empty | The address the apps should connect to, such as `https://matinee.example.com`; empty uses this machine's IP and port |
+| `MATINEE_PUBLIC_URL` | empty | The address the apps should connect to, such as `https://matinee.example.com`, at home and away; empty uses this machine's IP and port at home, and remote access's address away |
 | `MATINEE_HOME_ADDR` | empty | A second listen address just for the home network, such as `:7172`, when the main one is behind a proxy. Only devices that connect here can watch without signing in (see above) |
+| `MATINEE_REMOTE_ADDR` | `:7443` | HTTPS listen address for remote access, which an admin turns on in Settings ([more](#reaching-it-away-from-home)); `off` to not offer it |
 | `MATINEE_FFMPEG`, `MATINEE_FFPROBE` | `ffmpeg`, `ffprobe` | Paths to FFmpeg |
 | `MATINEE_VAAPI_DEVICE` | empty | The GPU to use for VAAPI, such as `/dev/dri/renderD129`, on a machine with several; empty tries each |
 

@@ -10,6 +10,7 @@ import (
 	"sync"
 
 	"github.com/yeixio/matinee/internal/hwaccel"
+	"github.com/yeixio/matinee/internal/remote"
 )
 
 // Devices on the home network can browse and play without signing in,
@@ -26,6 +27,9 @@ import (
 //     included, so the address says nothing.
 //   - Otherwise it counts when it comes from a private, link-local or
 //     loopback address.
+//   - Requests to the remote access port (see remote.go) never count. Some
+//     routers make forwarded connections look like they come from the
+//     router itself.
 //   - With a separate home listener (MATINEE_HOME_ADDR, which the Helm
 //     chart opens as a host port on the node), only requests to that
 //     listener count, never ones to the main address.
@@ -50,6 +54,9 @@ func (s *Server) HomeHandler() http.Handler {
 // fromHome reports whether a request comes straight from the home network.
 func (s *Server) fromHome(r *http.Request) bool {
 	if s.HomeListener && r.Context().Value(homeKey{}) == nil {
+		return false
+	}
+	if r.Context().Value(remoteKey{}) != nil {
 		return false
 	}
 	return directFromPrivateNetwork(r)
@@ -136,6 +143,15 @@ type serverSettings struct {
 	// ThemeProblems lists theme files in the themes folder that couldn't be
 	// loaded, and why. It can't be changed.
 	ThemeProblems []string `json:"themeProblems"`
+	// RemoteAccess opens a port on the router so the apps reach this server
+	// away from home (see remote.go). Off unless an admin turns it on.
+	RemoteAccess bool `json:"remoteAccess"`
+	// Remote says how remote access is doing; nil when this server can't
+	// offer it (MATINEE_REMOTE_ADDR=off). It can't be changed.
+	Remote *remote.Status `json:"remote,omitempty"`
+	// PublicURL is the address set with MATINEE_PUBLIC_URL, which the apps
+	// use away from home instead. It can't be changed here.
+	PublicURL string `json:"publicURL,omitempty"`
 }
 
 func (s *Server) settings(ctx context.Context) (serverSettings, error) {
@@ -151,9 +167,14 @@ func (s *Server) settings(ctx context.Context) (serverSettings, error) {
 	if err != nil {
 		return serverSettings{}, err
 	}
+	remoteOn, err := RemoteAccessOn(ctx, s.Store)
+	if err != nil {
+		return serverSettings{}, err
+	}
 	themes, problems := s.themes()
 	def, err := s.defaultTheme(ctx, themes)
 	set := serverSettings{RequireSignInAtHome: required, Requests: mode, RemoteTrailers: trailers, Theme: def,
+		RemoteAccess: remoteOn, Remote: s.remoteStatus(), PublicURL: s.PublicURL,
 		ThemeProblems: []string{}, HardwareAcceleration: hwaccel.Auto, Hardware: &hwaccel.Status{Available: []hwaccel.Accel{}}}
 	for _, p := range problems {
 		set.ThemeProblems = append(set.ThemeProblems, p.Error())
@@ -182,9 +203,12 @@ func (s *Server) putSettings(w http.ResponseWriter, r *http.Request) {
 		HardwareAcceleration *string `json:"hardwareAcceleration"`
 		RemoteTrailers       *bool   `json:"remoteTrailers"`
 		Theme                *string `json:"theme"`
+		RemoteAccess         *bool   `json:"remoteAccess"`
 		// Read-only; accepted so a client can send back what it got.
 		Hardware      json.RawMessage `json:"hardware"`
 		ThemeProblems json.RawMessage `json:"themeProblems"`
+		Remote        json.RawMessage `json:"remote"`
+		PublicURL     json.RawMessage `json:"publicURL"`
 	}
 	if err := readJSON(r, &in); err != nil {
 		writeError(w, http.StatusBadRequest, "bad request")
@@ -226,6 +250,12 @@ func (s *Server) putSettings(w http.ResponseWriter, r *http.Request) {
 	}
 	if in.RemoteTrailers != nil {
 		if err := s.Store.SetSetting(ctx, settingRemoteTrailers, strconv.FormatBool(*in.RemoteTrailers)); err != nil {
+			s.serverError(w, err)
+			return
+		}
+	}
+	if in.RemoteAccess != nil {
+		if err := s.setRemoteAccess(ctx, *in.RemoteAccess); err != nil {
 			s.serverError(w, err)
 			return
 		}

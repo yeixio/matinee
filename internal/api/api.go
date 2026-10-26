@@ -24,6 +24,7 @@ import (
 	"github.com/yeixio/matinee/internal/download"
 	"github.com/yeixio/matinee/internal/hwaccel"
 	"github.com/yeixio/matinee/internal/probe"
+	"github.com/yeixio/matinee/internal/remote"
 	"github.com/yeixio/matinee/internal/scan"
 	"github.com/yeixio/matinee/internal/store"
 	"github.com/yeixio/matinee/internal/stream"
@@ -51,6 +52,12 @@ type Server struct {
 	// ThemeDir holds the admin's own theme files (see themes.go); empty means
 	// only the built-in themes.
 	ThemeDir string
+
+	// Remote keeps remote access going (see remote.go); nil when this
+	// server doesn't offer it.
+	Remote *remote.Manager
+	// PublicURL is the address set with MATINEE_PUBLIC_URL, if any.
+	PublicURL string
 
 	// HomeListener means the home network has its own listener (HomeHandler),
 	// so requests to the main one never count as coming from home.

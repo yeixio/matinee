@@ -1222,6 +1222,16 @@ components:
         homeAccess:
           type: boolean
           description: This device is on the server's home network and may browse and play without signing in.
+        remoteURL:
+          type: string
+          description: |
+            Where the apps reach this server away from home: the address set
+            with `MATINEE_PUBLIC_URL`, or the one remote access set up
+            (`https://<public IP>:<port>`, with a certificate browsers and
+            phones trust). Empty when there is none. Apps should remember it
+            while at home and try it when the home address doesn't answer.
+            The public IP can change; the apps learn the new one the next
+            time they're home.
     Settings:
       type: object
       properties:
@@ -1247,6 +1257,32 @@ components:
           readOnly: true
           items: { type: string }
           description: Theme files in `<data>/themes` that couldn't be loaded, and why. Ignored in a `PUT`.
+        remoteAccess:
+          type: boolean
+          description: |
+            Open a port on the home router (UPnP or NAT-PMP) and get a Let's
+            Encrypt certificate for its public IP address, so the apps reach
+            this server away from home. Off by default.
+        remote:
+          type: object
+          readOnly: true
+          description: How remote access is doing. Missing when the server can't offer it (`MATINEE_REMOTE_ADDR=off`). Ignored in a `PUT`.
+          properties:
+            enabled: { type: boolean }
+            state: { type: string, enum: [off, working, ready, failed] }
+            url: { type: string, description: The address the apps use away from home, once ready. }
+            router: { type: string, description: How the port was opened, `UPnP` or `NAT-PMP`. }
+            publicIP: { type: string }
+            problem: { type: string, description: What stands in the way, for people to read. }
+            sharedAddress:
+              type: boolean
+              description: The router has no public address of its own (the internet provider shares one, or another router sits in front), so a direct connection can't work.
+            certificateExpires: { type: string, format: date-time }
+            checkedAt: { type: string, format: date-time }
+        publicURL:
+          type: string
+          readOnly: true
+          description: The address set with `MATINEE_PUBLIC_URL`, which apps use away from home. Ignored in a `PUT`.
         hardwareAcceleration:
           type: string
           enum: [auto, off, nvenc, vaapi, qsv, videotoolbox, amf, v4l2m2m]

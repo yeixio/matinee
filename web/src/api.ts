@@ -19,6 +19,25 @@ export type Settings = {
   theme: string
   // Theme files on the server that couldn't be loaded, and why.
   themeProblems: string[]
+  // Open a port on the router so the apps reach the server away from home.
+  remoteAccess: boolean
+  // How remote access is doing; missing when the server doesn't offer it.
+  remote?: RemoteStatus
+  // The address set with MATINEE_PUBLIC_URL, which the apps use away from home.
+  publicURL?: string
+}
+
+// sharedAddress: the router has no public address of its own, so only a relay could help.
+export type RemoteStatus = {
+  enabled: boolean
+  state: 'off' | 'working' | 'ready' | 'failed'
+  url?: string
+  router?: string
+  publicIP?: string
+  problem?: string
+  sharedAddress?: boolean
+  certificateExpires?: string
+  checkedAt?: string
 }
 
 // A theme as the server sends it, every colour filled in. See docs/themes.md.

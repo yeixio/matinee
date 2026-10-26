@@ -29,6 +29,7 @@ type Config struct {
 	ServerName   string        // the name the apps show for this server
 	PublicURL    string        // the address the apps should connect to; empty uses this host's IP and port
 	HomeAddr     string        // a second listen address only for the home network; empty means Addr serves both
+	RemoteAddr   string        // HTTPS listen address for remote access (internal/remote); empty means the server doesn't offer it
 }
 
 // Database is what store.Open takes: the PostgreSQL URL, or the SQLite file.
@@ -43,6 +44,7 @@ func (c Config) TranscodeDir() string { return filepath.Join(c.DataDir, "transco
 func (c Config) ImageDir() string     { return filepath.Join(c.DataDir, "images") }
 func (c Config) SubtitleDir() string  { return filepath.Join(c.DataDir, "subtitles") }
 func (c Config) DownloadDir() string  { return filepath.Join(c.DataDir, "downloads") }
+func (c Config) RemoteDir() string    { return filepath.Join(c.DataDir, "remote") }
 
 // ThemeDir holds an admin's own theme files (docs/themes.md).
 func (c Config) ThemeDir() string { return filepath.Join(c.DataDir, "themes") }
@@ -64,6 +66,7 @@ func Load(args []string) (Config, error) {
 	fs.StringVar(&c.ServerName, "server-name", env("MATINEE_SERVER_NAME", "Matinee"), "the name the apps show for this server")
 	fs.StringVar(&c.PublicURL, "public-url", env("MATINEE_PUBLIC_URL", ""), "the address the apps should connect to, such as https://matinee.example.com")
 	fs.StringVar(&c.HomeAddr, "home-addr", env("MATINEE_HOME_ADDR", ""), "listen address for the home network alone, when the main one sits behind a proxy (see the README)")
+	fs.StringVar(&c.RemoteAddr, "remote-addr", env("MATINEE_REMOTE_ADDR", ":7443"), "HTTPS listen address for remote access, which an admin turns on in Settings; off to not offer it")
 	interval := fs.String("scan-interval", env("MATINEE_SCAN_INTERVAL", "15m"), "periodic rescan interval, 0 to disable")
 	if err := fs.Parse(args); err != nil {
 		return c, err
@@ -73,6 +76,9 @@ func Load(args []string) (Config, error) {
 		return c, fmt.Errorf("scan-interval: %w", err)
 	}
 	c.ScanInterval = d
+	if c.RemoteAddr == "off" {
+		c.RemoteAddr = ""
+	}
 	if err := os.MkdirAll(c.TranscodeDir(), 0o755); err != nil {
 		return c, fmt.Errorf("create data dir: %w", err)
 	}

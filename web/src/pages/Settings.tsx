@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { ChevronLeft, Folder, FolderOpen, Monitor, Plus, RefreshCw, Trash2, UserPlus, X } from 'lucide-react'
 import { useState, type FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { api, type User } from '../api'
+import { api, type RemoteStatus, type User } from '../api'
 import { MediaAnalysis } from '../components/MediaAnalysis'
 import { Appearance } from '../components/ThemePicker'
 import { LibraryIcon, useLibraries } from '../components/Shell'
@@ -20,6 +20,7 @@ export default function Settings() {
       {me?.isAdmin && <MediaAnalysis />}
       {me?.isAdmin && <Users />}
       {me?.isAdmin && <HomeNetwork />}
+      {me?.isAdmin && <RemoteAccess />}
       {me?.isAdmin && <Trailers />}
       {me?.isAdmin && <Transcoding />}
       {me?.isAdmin && <Integrations />}
@@ -316,6 +317,69 @@ function HomeNetwork() {
         />
       </label>
     </section>
+  )
+}
+
+function RemoteAccess() {
+  const qc = useQueryClient()
+  const { data } = useQuery({
+    queryKey: ['settings'],
+    queryFn: api.settings,
+    // Opening the port and getting a certificate takes a little while.
+    refetchInterval: (q) => (q.state.data?.remote?.state === 'working' ? 2000 : false),
+  })
+  const save = useMutation({ mutationFn: api.saveSettings, onSuccess: (s) => qc.setQueryData(['settings'], s) })
+  if (!data) return null
+  const remote = data.remote
+  if (!remote && !data.publicURL) return null
+  return (
+    <section className="space-y-4">
+      <h2 className="text-lg font-semibold">Remote access</h2>
+      {data.publicURL ? (
+        <p className="rounded-xl border border-line/60 bg-surface/50 p-4 text-sm text-muted">
+          Away from home, the apps connect to <span className="font-medium text-text">{data.publicURL}</span>, the address this
+          server was set up with.
+        </p>
+      ) : (
+        <label className="flex cursor-pointer items-start gap-4 rounded-xl border border-line/60 bg-surface/50 p-4">
+          <span className="min-w-0 flex-1">
+            <span className="block font-medium">Watch away from home</span>
+            <span className="mt-1 block text-sm text-muted">
+              {data.remoteAccess
+                ? <RemoteState status={remote} />
+                : 'Matinee asks your router to open a port and gets a certificate so the apps connect securely from anywhere. Everyone signs in from outside.'}
+            </span>
+          </span>
+          <input
+            type="checkbox"
+            className="mt-1 size-5 accent-[var(--color-accent)]"
+            checked={data.remoteAccess}
+            disabled={save.isPending}
+            onChange={(e) => save.mutate({ remoteAccess: e.target.checked })}
+          />
+        </label>
+      )}
+    </section>
+  )
+}
+
+function RemoteState({ status }: { status?: RemoteStatus }) {
+  if (!status || status.state === 'working' || status.state === 'off') return <>Opening a port on your router and getting a certificate…</>
+  if (status.state === 'ready')
+    return (
+      <>
+        The apps reach this server at <span className="font-medium text-text">{status.url}</span> when they’re away from home.
+        {status.router && ` Your router opened the port over ${status.router}.`} They pick this address up next time they’re
+        on your home network.
+      </>
+    )
+  return (
+    <>
+      <span className="block text-danger">{status.problem}</span>
+      {status.sharedAddress
+        ? ' Matinee can’t get around this by itself yet.'
+        : ' Matinee tries again every half hour.'}
+    </>
   )
 }
 

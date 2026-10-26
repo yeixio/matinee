@@ -74,6 +74,10 @@ spec:
             # The pod network doesn't reach the home network; discovery.yaml announces it instead.
             - name: MATINEE_DISCOVERY
               value: "false"
+            # Remote access asks the home router for a port, which a pod
+            # can't do; the ingress is the way in from outside.
+            - name: MATINEE_REMOTE_ADDR
+              value: "off"
             {{- if .Values.discovery.homePort }}
             - name: MATINEE_HOME_ADDR
               value: ":7172"
