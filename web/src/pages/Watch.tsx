@@ -9,7 +9,7 @@ import { clock } from '../format'
 import { canDirectPlay } from '../player/direct'
 import { defaultTrack, savePreference, SubtitleMenu, SubtitleOverlay } from '../player/Subtitles'
 import { UpNextCard, type UpNextMode } from '../player/UpNext'
-import { COUNTDOWN_SECONDS, stillWatching, upNextAt } from '../player/upnext'
+import { COUNTDOWN_SECONDS, stillWatching, upNextAt } from '../player/autoplay'
 import { parseVTT, type Cue } from '../player/vtt'
 
 const displayTitle = (item: ItemDetail) => {

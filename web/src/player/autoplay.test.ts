@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { STILL_WATCHING_AFTER, stillWatching, upNextAt } from './upnext'
+import { STILL_WATCHING_AFTER, stillWatching, upNextAt } from './autoplay'
 
 describe('upNextAt', () => {
   it('shows the card where the credits start', () => {

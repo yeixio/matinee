@@ -2,7 +2,7 @@ import { Play, X } from 'lucide-react'
 import type { Item } from '../api'
 import { Artwork } from '../components/Artwork'
 import { episodeCode } from '../format'
-import { COUNTDOWN_SECONDS } from './upnext'
+import { COUNTDOWN_SECONDS } from './autoplay'
 
 export type UpNextMode = 'countdown' | 'still' | 'similar'
 
