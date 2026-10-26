@@ -1,0 +1,23 @@
+{
+  "id": "high-contrast",
+  "name": "High contrast",
+  "description": "Black, white and bright yellow, for the clearest text from across the room.",
+  "author": "Matinee",
+  "scheme": "dark",
+  "fonts": { "display": "inter", "body": "inter" },
+  "colors": {
+    "ink": "#000000",
+    "surface": "#0a0a0a",
+    "raised": "#161616",
+    "line": "#5c5c5c",
+    "text": "#ffffff",
+    "muted": "#e0e0e0",
+    "faint": "#b8b8b8",
+    "accent": "#ffdd00",
+    "accentStrong": "#fff07a",
+    "onAccent": "#000000",
+    "danger": "#ff6b6b",
+    "glow": "rgba(255,221,0,0.7)",
+    "glassFocused": "rgba(255,255,255,0.4)"
+  }
+}

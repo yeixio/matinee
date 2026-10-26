@@ -42,7 +42,7 @@ function TrailerDialog({ item, trailers, onClose }: { item: Item; trailers: Trai
       role="dialog"
       aria-modal="true"
       aria-label={`${item.title} trailer`}
-      className="animate-fade fixed inset-0 z-50 flex flex-col items-center justify-center gap-4 bg-black/90 p-4 backdrop-blur md:p-10"
+      className="animate-fade fixed inset-0 z-50 flex flex-col items-center justify-center gap-4 bg-ink/95 p-4 backdrop-blur md:p-10"
       onClick={onClose}
     >
       <div className="flex w-full max-w-6xl items-center justify-between gap-4" onClick={(e) => e.stopPropagation()}>
@@ -50,12 +50,12 @@ function TrailerDialog({ item, trailers, onClose }: { item: Item; trailers: Trai
           <div className="truncate font-display text-lg font-semibold">{item.title}</div>
           <div className="truncate text-sm text-muted">{current.name}</div>
         </div>
-        <button onClick={onClose} aria-label="Close" className="grid size-10 shrink-0 place-items-center rounded-full bg-white/10 hover:bg-white/20">
+        <button onClick={onClose} aria-label="Close" className="grid size-10 shrink-0 place-items-center rounded-full bg-text/10 hover:bg-text/20">
           <X className="size-5" />
         </button>
       </div>
       <div
-        className="aspect-video w-full max-w-6xl overflow-hidden rounded-xl bg-black shadow-2xl ring-1 ring-white/10"
+        className="aspect-video w-full max-w-6xl overflow-hidden rounded-xl bg-black shadow-2xl ring-1 ring-text/10"
         style={{ maxHeight: 'calc(100vh - 12rem)' }}
         onClick={(e) => e.stopPropagation()}
       >

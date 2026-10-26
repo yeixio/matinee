@@ -58,7 +58,7 @@ export default function Requests() {
             }`}
           >
             {t.label}
-            {!!t.count && <span className="rounded-full bg-accent px-1.5 text-xs font-semibold text-ink">{t.count}</span>}
+            {!!t.count && <span className="rounded-full bg-accent px-1.5 text-xs font-semibold text-on-accent">{t.count}</span>}
           </button>
         ))}
       </nav>
@@ -155,13 +155,13 @@ function Ask() {
           </label>
         )}
       </div>
-      {error && <p className="text-sm text-red-400">{error.message}</p>}
-      {ask.error && <p className="text-sm text-red-400">{ask.error.message}</p>}
+      {error && <p className="text-sm text-danger">{error.message}</p>}
+      {ask.error && <p className="text-sm text-danger">{ask.error.message}</p>}
       {q.length > 1 && data && data.length === 0 && <EmptyState title={`Nothing found for "${q}"`} />}
       <div className="grid gap-x-4 gap-y-6" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))' }}>
         {data?.map((t) => (
           <div key={`${t.tmdbId}-${t.tvdbId}`} className="animate-fade">
-            <RemotePoster src={t.poster} title={t.title} className="rounded-xl ring-1 ring-white/5" />
+            <RemotePoster src={t.poster} title={t.title} className="rounded-xl ring-1 ring-text/5" />
             <div className="mt-2 px-0.5">
               <div className="truncate text-sm font-medium" title={t.title}>
                 {t.title}
@@ -239,7 +239,7 @@ function RequestList({ admin }: { admin: boolean }) {
   return (
     <div className="divide-y divide-line/60 rounded-xl border border-line/60 bg-surface/50">
       {(approve.error || decline.error || remove.error) && (
-        <p className="p-4 text-sm text-red-400">{(approve.error ?? decline.error ?? remove.error)!.message}</p>
+        <p className="p-4 text-sm text-danger">{(approve.error ?? decline.error ?? remove.error)!.message}</p>
       )}
       {data.map((r) => (
         <div key={r.id} className="flex flex-wrap items-center gap-x-4 gap-y-2 p-3">
@@ -256,13 +256,13 @@ function RequestList({ admin }: { admin: boolean }) {
               {r.year ? <span className="text-sm font-normal text-muted">{r.year}</span> : null}
             </div>
             <div className="truncate text-xs text-muted">
-              <span className={r.state === 'failed' ? 'text-red-400' : r.itemId ? 'text-accent' : ''}>
+              <span className={r.state === 'failed' ? 'text-danger' : r.itemId ? 'text-accent' : ''}>
                 {r.itemId ? 'Ready to watch' : stateLabel[r.state]}
               </span>
               {admin && ` · ${r.username}`} · {ago(r.createdAt)}
             </div>
             {r.error && (
-              <div className="mt-0.5 truncate text-xs text-red-400" title={r.error}>
+              <div className="mt-0.5 truncate text-xs text-danger" title={r.error}>
                 {r.error}
               </div>
             )}
@@ -338,7 +338,7 @@ function Problems({ admin }: { admin: boolean }) {
   }
   return (
     <div className="divide-y divide-line/60 rounded-xl border border-line/60 bg-surface/50">
-      {(resolve.error || replace.error) && <p className="p-4 text-sm text-red-400">{(resolve.error ?? replace.error)!.message}</p>}
+      {(resolve.error || replace.error) && <p className="p-4 text-sm text-danger">{(resolve.error ?? replace.error)!.message}</p>}
       {data.map((x) => (
         <div key={x.id} className={`flex flex-wrap items-center gap-x-4 gap-y-2 p-4 ${x.resolved ? 'opacity-60' : ''}`}>
           <div className="min-w-0 flex-1 basis-60">

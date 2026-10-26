@@ -103,7 +103,7 @@ function Header({ item, kids }: { item: ItemDetail; kids?: Item[] }) {
         <Artwork
           item={item}
           type="poster"
-          className={`w-40 shrink-0 rounded-xl shadow-2xl shadow-black/60 ring-1 ring-white/10 md:w-56 ${
+          className={`w-40 shrink-0 rounded-xl shadow-2xl shadow-black/60 ring-1 ring-text/10 md:w-56 ${
             square ? 'aspect-square' : item.kind === 'episode' ? 'aspect-video w-64 md:w-96' : 'aspect-[2/3]'
           }`}
         />
@@ -147,7 +147,7 @@ function Header({ item, kids }: { item: ItemDetail; kids?: Item[] }) {
             )}
             {resume && (
               <div className="flex items-center">
-                <div className="h-1 w-32 overflow-hidden rounded-full bg-white/15">
+                <div className="h-1 w-32 overflow-hidden rounded-full bg-text/15">
                   <div className="h-full bg-accent" style={{ width: `${progressFraction(item.positionMs, item.durationMs) * 100}%` }} />
                 </div>
               </div>
@@ -206,10 +206,10 @@ function EpisodeList({ items }: { items: Item[] }) {
         <Link
           key={ep.id}
           to={`/watch/${ep.id}`}
-          className="group flex gap-4 rounded-xl p-2 transition-colors hover:bg-white/5 md:p-3"
+          className="group flex gap-4 rounded-xl p-2 transition-colors hover:bg-text/5 md:p-3"
         >
           <div className="relative w-36 shrink-0 md:w-56">
-            <Artwork item={ep} type="poster" label={false} className="aspect-video rounded-lg ring-1 ring-white/5" />
+            <Artwork item={ep} type="poster" label={false} className="aspect-video rounded-lg ring-1 ring-text/5" />
             <div className="absolute inset-0 grid place-items-center opacity-0 transition-opacity group-hover:opacity-100">
               <span className="grid size-10 place-items-center rounded-full bg-black/60 backdrop-blur">
                 <Play className="size-4 translate-x-0.5 fill-white text-white" />
@@ -247,7 +247,7 @@ function TrackList({ items }: { items: Item[] }) {
           <button
             key={t.id}
             onClick={() => audio.play(items, i)}
-            className={`flex w-full items-center gap-4 px-4 py-3 text-left transition-colors hover:bg-white/5 ${current ? 'text-accent' : ''}`}
+            className={`flex w-full items-center gap-4 px-4 py-3 text-left transition-colors hover:bg-text/5 ${current ? 'text-accent' : ''}`}
           >
             <span className="w-8 text-right text-sm text-faint tabular-nums">
               {current && audio.playing ? '▶' : discs ? `${t.disc ?? 1}.${t.index ?? ''}` : (t.index ?? i + 1)}

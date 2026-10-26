@@ -1,0 +1,21 @@
+{
+  "id": "clean",
+  "name": "Clean",
+  "description": "Plain white, one blue, no serifs. Nothing but the posters.",
+  "author": "Matinee",
+  "scheme": "light",
+  "fonts": { "display": "inter", "body": "inter" },
+  "colors": {
+    "ink": "#ffffff",
+    "surface": "#f5f6f8",
+    "raised": "#eceef2",
+    "line": "#dfe2e8",
+    "text": "#0f172a",
+    "muted": "#475569",
+    "faint": "#76819a",
+    "accent": "#2563eb",
+    "accentStrong": "#1d4ed8",
+    "onAccent": "#ffffff",
+    "danger": "#dc2626"
+  }
+}

@@ -32,6 +32,7 @@ import (
 	"github.com/yeixio/matinee/internal/store"
 	"github.com/yeixio/matinee/internal/stream"
 	"github.com/yeixio/matinee/internal/subtitle"
+	"github.com/yeixio/matinee/internal/theme"
 	"github.com/yeixio/matinee/internal/version"
 	"github.com/yeixio/matinee/web"
 )
@@ -126,7 +127,12 @@ func run() error {
 		Subtitles: subtitle.NewConverter(cfg.FFmpegPath, cfg.SubtitleDir()),
 		Web:       web.FS(), Log: log, BackgroundCtx: ctx,
 		MediaRoot: cfg.MediaRoot, Name: cfg.ServerName,
-		HomeListener: cfg.HomeAddr != "",
+		HomeListener: cfg.HomeAddr != "", ThemeDir: cfg.ThemeDir(),
+	}
+	if _, problems := theme.Load(cfg.ThemeDir()); len(problems) > 0 {
+		for _, p := range problems {
+			log.Warn("skipping a theme file", "dir", cfg.ThemeDir(), "err", p)
+		}
 	}
 	if tmdb != nil {
 		apiServer.TrailerSource = tmdb

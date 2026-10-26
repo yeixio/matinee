@@ -39,7 +39,7 @@ export function PosterCard({ item, wide = false }: { item: Item; wide?: boolean 
         <Artwork
           item={item}
           type={wide ? 'backdrop' : 'poster'}
-          className={`${wide ? 'aspect-video' : square ? 'aspect-square' : 'aspect-[2/3]'} rounded-xl ring-1 ring-white/5 transition duration-200 group-hover:ring-accent/70 group-hover:brightness-110`}
+          className={`${wide ? 'aspect-video' : square ? 'aspect-square' : 'aspect-[2/3]'} rounded-xl ring-1 ring-text/5 transition duration-200 group-hover:ring-accent/70 group-hover:brightness-110`}
         />
         {item.playable && (
           <div className="absolute inset-0 grid place-items-center opacity-0 transition-opacity group-hover:opacity-100">
@@ -49,7 +49,7 @@ export function PosterCard({ item, wide = false }: { item: Item; wide?: boolean 
           </div>
         )}
         {item.played && (
-          <span className="absolute top-2 right-2 grid size-6 place-items-center rounded-full bg-accent text-ink shadow">
+          <span className="absolute top-2 right-2 grid size-6 place-items-center rounded-full bg-accent text-on-accent shadow">
             <Check className="size-4" strokeWidth={3} />
           </span>
         )}

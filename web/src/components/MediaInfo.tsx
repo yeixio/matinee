@@ -25,7 +25,7 @@ export function QualityBadges({ item }: { item: ItemDetail }) {
         <span
           key={b.label}
           title={b.title}
-          className="rounded-md border border-white/20 px-2 py-0.5 text-xs font-semibold tracking-wide text-text/90"
+          className="rounded-md border border-text/20 px-2 py-0.5 text-xs font-semibold tracking-wide text-text/90"
         >
           {b.label}
         </span>
@@ -117,7 +117,7 @@ function FileDetails({ item, user, onClose }: { item: ItemDetail; user?: User; o
           </p>
         ) : (
           <div className="space-y-6">
-            {mi.error && <p className="text-sm text-red-300">Matinee couldn't read this file: {mi.error}</p>}
+            {mi.error && <p className="text-sm text-danger">Matinee couldn't read this file: {mi.error}</p>}
             {item.mediaInfoStale && (
               <p className="text-sm text-muted">The file changed since this was recorded; it will be looked at again soon.</p>
             )}
@@ -199,7 +199,7 @@ function FileDetails({ item, user, onClose }: { item: ItemDetail; user?: User; o
         {user?.isAdmin && (
           <div className="mt-5 flex items-center justify-end gap-3">
             {again.isSuccess && <span className="text-sm text-muted">Queued; it's looked at next.</span>}
-            {again.error && <span className="text-sm text-red-400">{again.error.message}</span>}
+            {again.error && <span className="text-sm text-danger">{again.error.message}</span>}
             <Button variant="ghost" icon={<RefreshCw className="size-4" />} disabled={again.isPending || again.isSuccess} onClick={() => again.mutate()}>
               Analyze again
             </Button>
@@ -242,7 +242,7 @@ function Tracks({ rows }: { rows: { key: number; name: string; detail: string; f
           <span className="font-medium">{r.name}</span>
           <span className="text-muted">{r.detail}</span>
           {r.flags.filter(Boolean).map((f) => (
-            <span key={f as string} className="rounded bg-white/10 px-1.5 text-xs text-muted">
+            <span key={f as string} className="rounded bg-text/10 px-1.5 text-xs text-muted">
               {f}
             </span>
           ))}

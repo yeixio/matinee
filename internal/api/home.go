@@ -131,6 +131,11 @@ type serverSettings struct {
 	// RemoteTrailers offers trailers from TMDB (played from YouTube) along
 	// with trailer files next to the media. On unless an admin turns it off.
 	RemoteTrailers bool `json:"remoteTrailers"`
+	// Theme is what everyone sees until they pick their own (see themes.go).
+	Theme string `json:"theme"`
+	// ThemeProblems lists theme files in the themes folder that couldn't be
+	// loaded, and why. It can't be changed.
+	ThemeProblems []string `json:"themeProblems"`
 }
 
 func (s *Server) settings(ctx context.Context) (serverSettings, error) {
@@ -143,8 +148,16 @@ func (s *Server) settings(ctx context.Context) (serverSettings, error) {
 		return serverSettings{}, err
 	}
 	trailers, err := s.remoteTrailersOn(ctx)
-	set := serverSettings{RequireSignInAtHome: required, Requests: mode, RemoteTrailers: trailers,
-		HardwareAcceleration: hwaccel.Auto, Hardware: &hwaccel.Status{Available: []hwaccel.Accel{}}}
+	if err != nil {
+		return serverSettings{}, err
+	}
+	themes, problems := s.themes()
+	def, err := s.defaultTheme(ctx, themes)
+	set := serverSettings{RequireSignInAtHome: required, Requests: mode, RemoteTrailers: trailers, Theme: def,
+		ThemeProblems: []string{}, HardwareAcceleration: hwaccel.Auto, Hardware: &hwaccel.Status{Available: []hwaccel.Accel{}}}
+	for _, p := range problems {
+		set.ThemeProblems = append(set.ThemeProblems, p.Error())
+	}
 	if hw := s.HW; hw != nil {
 		st := hw.Status()
 		set.Hardware, set.HardwareAcceleration = &st, st.Preference
@@ -168,8 +181,10 @@ func (s *Server) putSettings(w http.ResponseWriter, r *http.Request) {
 		Requests             *string `json:"requests"`
 		HardwareAcceleration *string `json:"hardwareAcceleration"`
 		RemoteTrailers       *bool   `json:"remoteTrailers"`
+		Theme                *string `json:"theme"`
 		// Read-only; accepted so a client can send back what it got.
-		Hardware json.RawMessage `json:"hardware"`
+		Hardware      json.RawMessage `json:"hardware"`
+		ThemeProblems json.RawMessage `json:"themeProblems"`
 	}
 	if err := readJSON(r, &in); err != nil {
 		writeError(w, http.StatusBadRequest, "bad request")
@@ -197,6 +212,16 @@ func (s *Server) putSettings(w http.ResponseWriter, r *http.Request) {
 		}
 		if hw := s.HW; hw != nil {
 			hw.SetPreference(*p)
+		}
+	}
+	if t := in.Theme; t != nil && *t != "" {
+		if themes, _ := s.themes(); !hasTheme(themes, *t) {
+			writeError(w, http.StatusBadRequest, "no such theme")
+			return
+		}
+		if err := s.Store.SetSetting(ctx, settingTheme, *t); err != nil {
+			s.serverError(w, err)
+			return
 		}
 	}
 	if in.RemoteTrailers != nil {

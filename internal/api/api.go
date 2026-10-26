@@ -48,6 +48,9 @@ type Server struct {
 	TrailerSource TrailerSource
 	// People has biographies; nil shows only names and photos.
 	People PersonSource
+	// ThemeDir holds the admin's own theme files (see themes.go); empty means
+	// only the built-in themes.
+	ThemeDir string
 
 	// HomeListener means the home network has its own listener (HomeHandler),
 	// so requests to the main one never count as coming from home.
@@ -101,6 +104,9 @@ func (s *Server) routes() []route {
 		{"POST /auth/device/{code}/deny", signedIn, s.denyDeviceCode},
 
 		{"GET /me", reader, s.me},
+		{"GET /me/theme", reader, s.getMyTheme},
+		{"PUT /me/theme", reader, s.putMyTheme},
+		{"GET /themes", public, s.listThemes},
 		{"GET /devices", signedIn, s.listDevices},
 		{"DELETE /devices/{id}", signedIn, s.deleteDevice},
 		{"GET /settings", adminOnly, s.getSettings},

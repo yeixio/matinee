@@ -32,7 +32,7 @@ export function Hero({ item, onRemove }: { item: Item; onRemove?: () => void }) 
         </div>
         {item.overview && <p className="line-clamp-2 hidden text-sm text-text/80 sm:block md:text-base">{item.overview}</p>}
         {resume && (
-          <div className="h-1 w-48 overflow-hidden rounded-full bg-white/20">
+          <div className="h-1 w-48 overflow-hidden rounded-full bg-text/20">
             <div className="h-full bg-accent" style={{ width: `${progressFraction(item.positionMs, item.durationMs) * 100}%` }} />
           </div>
         )}

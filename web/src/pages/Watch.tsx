@@ -289,7 +289,7 @@ export default function Watch() {
       ref={wrap}
       onMouseMove={poke}
       onTouchStart={poke}
-      className={`fixed inset-0 z-50 bg-black select-none ${chrome ? '' : 'cursor-none'}`}
+      className={`fixed inset-0 z-50 bg-black text-white select-none ${chrome ? '' : 'cursor-none'}`}
     >
       <video
         ref={video}
@@ -322,7 +322,7 @@ export default function Watch() {
         </div>
       )}
       {error && (
-        <div className="absolute inset-0 grid place-items-center p-6 text-center text-muted">
+        <div className="absolute inset-0 grid place-items-center p-6 text-center text-white/70">
           <div>
             <p>{error}</p>
             <button onClick={() => navigate(-1)} className="mt-4 text-accent">

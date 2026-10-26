@@ -106,7 +106,7 @@ function Connection({ app, name, port, icon: Icon, what, saved }: (typeof apps)[
   return (
     <div className="rounded-xl border border-line/60 bg-surface/50">
       <div className="flex items-center gap-4 p-4">
-        <span className="grid size-10 place-items-center rounded-lg bg-white/5 text-accent">
+        <span className="grid size-10 place-items-center rounded-lg bg-text/5 text-accent">
           <Icon className="size-5" />
         </span>
         <div className="min-w-0 flex-1">
@@ -183,7 +183,7 @@ function Connection({ app, name, port, icon: Icon, what, saved }: (typeof apps)[
               </div>
             </>
           )}
-          {error && <p className="text-sm text-red-400">{error.message}</p>}
+          {error && <p className="text-sm text-danger">{error.message}</p>}
           <div className="flex flex-wrap justify-end gap-2">
             {saved.connected && (
               <Button

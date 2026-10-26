@@ -4,6 +4,7 @@ import { useState, type FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { api, type User } from '../api'
 import { MediaAnalysis } from '../components/MediaAnalysis'
+import { Appearance } from '../components/ThemePicker'
 import { LibraryIcon, useLibraries } from '../components/Shell'
 import { Button, Field, inputClass } from '../components/ui'
 import { Integrations } from './Integrations'
@@ -14,6 +15,7 @@ export default function Settings() {
   return (
     <div className="max-w-3xl space-y-12">
       <h1 className="text-2xl font-bold tracking-tight">Settings</h1>
+      {me && <Appearance me={me} />}
       {me?.isAdmin && <Libraries />}
       {me?.isAdmin && <MediaAnalysis />}
       {me?.isAdmin && <Users />}
@@ -64,7 +66,7 @@ function Libraries() {
         {libraries.length === 0 && !adding && <p className="p-5 text-sm text-muted">No libraries yet.</p>}
         {libraries.map((l) => (
           <div key={l.id} className="flex items-center gap-4 p-4">
-            <span className="grid size-10 place-items-center rounded-lg bg-white/5 text-accent">
+            <span className="grid size-10 place-items-center rounded-lg bg-text/5 text-accent">
               <LibraryIcon kind={l.kind} />
             </span>
             <div className="min-w-0 flex-1">
@@ -143,7 +145,7 @@ function AddLibrary({ onDone }: { onDone: () => void }) {
         <div className="space-y-2">
           <FolderPicker picked={paths} onPick={(p) => setPaths((prev) => (prev.includes(p) ? prev : [...prev, p]))} />
           {paths.map((p) => (
-            <div key={p} className="flex items-center gap-2 rounded-lg bg-white/5 px-3 py-2 text-sm">
+            <div key={p} className="flex items-center gap-2 rounded-lg bg-text/5 px-3 py-2 text-sm">
               <Folder className="size-4 text-accent" />
               <span className="flex-1 truncate">{p}</span>
               <button type="button" onClick={() => setPaths(paths.filter((x) => x !== p))} aria-label={`Remove ${p}`}>
@@ -153,7 +155,7 @@ function AddLibrary({ onDone }: { onDone: () => void }) {
           ))}
         </div>
       </Field>
-      {create.error && <p className="text-sm text-red-400">{create.error.message}</p>}
+      {create.error && <p className="text-sm text-danger">{create.error.message}</p>}
       <div className="flex justify-end gap-2">
         <Button type="button" variant="ghost" onClick={onDone}>
           Cancel
@@ -177,7 +179,7 @@ function FolderPicker({ picked, onPick }: { picked: string[]; onPick: (path: str
   }
   return (
     <div className="overflow-hidden rounded-lg border border-line">
-      <div className="flex items-center gap-2 border-b border-line bg-white/5 px-2 py-2">
+      <div className="flex items-center gap-2 border-b border-line bg-text/5 px-2 py-2">
         <button
           type="button"
           disabled={!data || data.path === data.parent}
@@ -199,14 +201,14 @@ function FolderPicker({ picked, onPick }: { picked: string[]; onPick: (path: str
         </Button>
       </div>
       <div className="max-h-60 overflow-y-auto">
-        {error && <p className="p-3 text-sm text-red-400">{error.message}</p>}
+        {error && <p className="p-3 text-sm text-danger">{error.message}</p>}
         {data?.dirs.length === 0 && <p className="p-3 text-sm text-faint">No subfolders</p>}
         {data?.dirs.map((d) => (
           <button
             type="button"
             key={d}
             onClick={() => setPath(join(d))}
-            className="flex w-full items-center gap-2 px-3 py-2 text-left text-sm hover:bg-white/5"
+            className="flex w-full items-center gap-2 px-3 py-2 text-left text-sm hover:bg-text/5"
           >
             <FolderOpen className="size-4 text-faint" /> {d}
           </button>
@@ -237,7 +239,7 @@ function Users() {
       <div className="divide-y divide-line/60 rounded-xl border border-line/60 bg-surface/50">
         {users.map((u) => (
           <div key={u.id} className="flex items-center gap-3 p-4">
-            <span className="grid size-9 place-items-center rounded-full bg-white/10 text-sm font-semibold uppercase">{u.username[0]}</span>
+            <span className="grid size-9 place-items-center rounded-full bg-text/10 text-sm font-semibold uppercase">{u.username[0]}</span>
             <span className="flex-1">{u.username}</span>
             {u.isAdmin && <span className="rounded bg-accent/15 px-2 py-0.5 text-xs text-accent">Admin</span>}
           </div>
@@ -263,7 +265,7 @@ function Users() {
           Add
         </Button>
       </form>
-      {create.error && <p className="text-sm text-red-400">{create.error.message}</p>}
+      {create.error && <p className="text-sm text-danger">{create.error.message}</p>}
     </section>
   )
 }
@@ -391,7 +393,7 @@ function Transcoding() {
         <div>
           <span className="block text-sm font-medium">Converting with</span>
           <span className="mt-1 block text-sm text-muted">{status}</span>
-          {!active && hw?.problem && <span className="mt-2 block text-sm text-red-400">{hw.problem}</span>}
+          {!active && hw?.problem && <span className="mt-2 block text-sm text-danger">{hw.problem}</span>}
         </div>
         <Field label="Hardware acceleration">
           <select
@@ -429,7 +431,7 @@ function Devices() {
       <div className="divide-y divide-line/60 rounded-xl border border-line/60 bg-surface/50">
         {devices.map((d) => (
           <div key={d.id} className="flex items-center gap-4 p-4">
-            <span className="grid size-10 place-items-center rounded-lg bg-white/5 text-accent">
+            <span className="grid size-10 place-items-center rounded-lg bg-text/5 text-accent">
               {d.platform === 'web' ? <Monitor className="size-5" /> : <DeviceIcon platform={d.platform} />}
             </span>
             <div className="min-w-0 flex-1">

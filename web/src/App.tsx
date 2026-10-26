@@ -12,6 +12,7 @@ import Search from './pages/Search'
 import WatchList from './pages/WatchList'
 import { Login, Setup } from './pages/Auth'
 import { Spinner } from './components/ui'
+import { ThemeSync } from './theme'
 
 const Watch = lazy(() => import('./pages/Watch'))
 const Settings = lazy(() => import('./pages/Settings'))
@@ -20,6 +21,16 @@ const Requests = lazy(() => import('./pages/Requests'))
 const Upcoming = lazy(() => import('./pages/Upcoming'))
 
 export default function App() {
+  const me = useQuery({ queryKey: ['me'], queryFn: api.me, staleTime: Infinity })
+  return (
+    <>
+      <ThemeSync userId={me.data?.id} />
+      <Screens />
+    </>
+  )
+}
+
+function Screens() {
   const me = useQuery({ queryKey: ['me'], queryFn: api.me, staleTime: Infinity })
   const unauthenticated = me.error instanceof ApiError && me.error.status === 401
   const setup = useQuery({ queryKey: ['setup'], queryFn: api.setup, enabled: unauthenticated })

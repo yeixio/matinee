@@ -1,0 +1,21 @@
+{
+  "id": "drive-in",
+  "name": "Drive-in",
+  "description": "Seventies browns and marquee amber, like a night at the drive-in.",
+  "author": "Matinee",
+  "scheme": "dark",
+  "fonts": { "display": "fraunces", "body": "inter" },
+  "colors": {
+    "ink": "#1a110b",
+    "surface": "#231811",
+    "raised": "#2f2017",
+    "line": "#4a3324",
+    "text": "#fbecd3",
+    "muted": "#cfb28a",
+    "faint": "#987a58",
+    "accent": "#f4a62a",
+    "accentStrong": "#ffc05a",
+    "onAccent": "#1a110b",
+    "danger": "#ff7a59"
+  }
+}

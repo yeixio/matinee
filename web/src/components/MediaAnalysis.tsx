@@ -45,7 +45,7 @@ export function MediaAnalysis() {
               {st.done.toLocaleString()} of {st.total.toLocaleString()}
             </span>
           </div>
-          <div className="h-1.5 overflow-hidden rounded-full bg-white/10" role="progressbar" aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100}>
+          <div className="h-1.5 overflow-hidden rounded-full bg-text/10" role="progressbar" aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100}>
             <div className="h-full bg-accent transition-[width]" style={{ width: `${pct}%` }} />
           </div>
           {st.unreadable > 0 && (
@@ -72,7 +72,7 @@ export function MediaAnalysis() {
           ))}
         </div>
         <p className="text-xs text-muted">{modes.find((m) => m.mode === st.mode)?.hint}</p>
-        {setMode.error && <p className="text-sm text-red-400">{setMode.error.message}</p>}
+        {setMode.error && <p className="text-sm text-danger">{setMode.error.message}</p>}
       </div>
     </section>
   )

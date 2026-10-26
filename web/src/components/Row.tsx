@@ -19,10 +19,10 @@ export function Row({ title, more, children }: { title: string; more?: string; c
           <h2 className="text-lg font-semibold tracking-tight">{title}</h2>
         )}
         <div className="hidden gap-1 opacity-0 transition-opacity group-hover/row:opacity-100 md:flex">
-          <button onClick={() => scroll(-1)} className="rounded-md p-1.5 text-muted hover:bg-white/10 hover:text-text" aria-label="Scroll left">
+          <button onClick={() => scroll(-1)} className="rounded-md p-1.5 text-muted hover:bg-text/10 hover:text-text" aria-label="Scroll left">
             <ChevronLeft className="size-5" />
           </button>
-          <button onClick={() => scroll(1)} className="rounded-md p-1.5 text-muted hover:bg-white/10 hover:text-text" aria-label="Scroll right">
+          <button onClick={() => scroll(1)} className="rounded-md p-1.5 text-muted hover:bg-text/10 hover:text-text" aria-label="Scroll right">
             <ChevronRight className="size-5" />
           </button>
         </div>

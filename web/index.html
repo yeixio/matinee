@@ -6,6 +6,17 @@
     <meta name="theme-color" content="#100d12" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <title>Matinee</title>
+    <script>
+      // Wear the last theme before the first paint (src/theme.ts keeps it).
+      try {
+        const t = JSON.parse(localStorage.getItem('matinee-theme'))
+        if (t && t.css) {
+          document.documentElement.style.cssText = t.css
+          document.documentElement.dataset.theme = t.id
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', t.ink)
+        }
+      } catch {}
+    </script>
   </head>
   <body>
     <div id="root"></div>
