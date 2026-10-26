@@ -1,76 +1,63 @@
-import { useQuery } from '@tanstack/react-query'
-import { ArrowDownAZ, Clock } from 'lucide-react'
-import { useMemo, useState } from 'react'
+import { keepPreviousData, useQuery } from '@tanstack/react-query'
 import { useParams } from 'react-router-dom'
 import { api, pendingRefetch } from '../api'
 import { GridSkeleton, PosterGrid } from '../components/Card'
+import { PinnedCollections, SaveAsCollectionButton } from '../components/Collections'
+import { FilterBar } from '../components/FilterBar'
 import { LibraryIcon, useLibraries } from '../components/Shell'
-import { EmptyState } from '../components/ui'
-import { filterTags } from '../media'
+import { Button, EmptyState } from '../components/ui'
+import { activeCount, clearPicks, toSearchParams, useLibraryFilter } from '../filter'
 
 export default function Library() {
   const id = Number(useParams().id)
   const { data: libraries } = useLibraries()
   const lib = libraries?.find((l) => l.id === id)
-  const { data: items, isPending } = useQuery({
-    queryKey: ['library', id],
-    queryFn: () => api.libraryItems(id),
+  const [filter, setFilter] = useLibraryFilter(id)
+  const { data: items, isPending, isPlaceholderData } = useQuery({
+    queryKey: ['library', id, toSearchParams(filter).toString()],
+    queryFn: () => api.libraryItems(id, filter),
+    placeholderData: keepPreviousData,
     refetchInterval: (q) => (lib?.scanning ? 3000 : pendingRefetch(q.state.data)),
   })
-  const [sort, setSort] = useState<'title' | 'added'>('title')
-  // Quality filters, offered only for tags some item in the library has.
-  const [filters, setFilters] = useState<string[]>([])
-  const available = useMemo(() => filterTags.filter((f) => items?.some((i) => i.mediaTags?.includes(f.tag))), [items])
-  const sorted = useMemo(() => {
-    const kept = items?.filter((i) => filters.every((f) => i.mediaTags?.includes(f)))
-    return sort === 'title' ? kept : kept && [...kept].sort((a, b) => b.addedAt - a.addedAt)
-  }, [items, sort, filters])
-  const toggle = (tag: string) => setFilters((f) => (f.includes(tag) ? f.filter((t) => t !== tag) : [...f, tag]))
+  const filtered = activeCount(filter) > 0
+  const onlyUnwatched = filtered && activeCount(filter) === 1 && filter.watched === 'unwatched'
 
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-3">
         {lib && <LibraryIcon kind={lib.kind} className="size-6 text-accent" />}
         <h1 className="text-2xl font-bold tracking-tight">{lib?.name ?? 'Library'}</h1>
-        {sorted && <span className="text-sm text-muted">{filters.length > 0 && items ? `${sorted.length} of ${items.length}` : sorted.length}</span>}
+        {items && (
+          <span className={`text-sm text-muted transition-opacity ${isPlaceholderData ? 'opacity-50' : ''}`}>
+            {items.length} {filtered ? (items.length === 1 ? 'match' : 'matches') : ''}
+          </span>
+        )}
         {lib?.scanning && <span className="animate-pulse text-sm text-accent">Scanning…</span>}
-        <div className="ml-auto flex rounded-lg bg-surface p-1 text-sm">
-          <button
-            onClick={() => setSort('title')}
-            className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 ${sort === 'title' ? 'bg-text/10 text-text' : 'text-muted'}`}
-          >
-            <ArrowDownAZ className="size-4" /> <span className="hidden sm:inline">Title</span>
-          </button>
-          <button
-            onClick={() => setSort('added')}
-            className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 ${sort === 'added' ? 'bg-text/10 text-text' : 'text-muted'}`}
-          >
-            <Clock className="size-4" /> <span className="hidden sm:inline">Added</span>
-          </button>
-        </div>
+        {filtered && (
+          <div className="ml-auto">
+            <SaveAsCollectionButton filter={filter} library={id} />
+          </div>
+        )}
       </div>
-      {available.length > 0 && (
-        <div className="-mt-2 flex flex-wrap gap-2" role="group" aria-label="Filter by quality">
-          {available.map((f) => (
-            <button
-              key={f.tag}
-              onClick={() => toggle(f.tag)}
-              aria-pressed={filters.includes(f.tag)}
-              className={`rounded-full border px-3 py-1 text-sm transition-colors ${
-                filters.includes(f.tag) ? 'border-accent bg-accent/10 text-text' : 'border-line text-muted hover:border-faint hover:text-text'
-              }`}
-            >
-              {f.label}
-            </button>
-          ))}
-        </div>
-      )}
+      {/* Collections pinned to this library, while no filter is on. */}
+      {!filtered && <PinnedCollections library={id} />}
+      <FilterBar value={filter} onChange={setFilter} libraryId={id} libraryKind={lib?.kind} />
       {isPending ? (
         <GridSkeleton />
-      ) : sorted && sorted.length > 0 ? (
-        <PosterGrid items={sorted} />
-      ) : filters.length > 0 ? (
-        <EmptyState title="Nothing matches">Try fewer filters.</EmptyState>
+      ) : items && items.length > 0 ? (
+        <div className={`transition-opacity ${isPlaceholderData ? 'opacity-60' : ''}`}>
+          <PosterGrid items={items} />
+        </div>
+      ) : filtered ? (
+        <EmptyState title={onlyUnwatched ? 'Nothing unwatched here' : 'Nothing matches'}>
+          {onlyUnwatched ? (
+            'You’ve seen everything in this library.'
+          ) : (
+            <Button className="mt-2" onClick={() => setFilter(clearPicks(filter))}>
+              Clear filters
+            </Button>
+          )}
+        </EmptyState>
       ) : (
         <EmptyState title={lib?.scanning ? 'Scanning…' : 'Nothing here yet'}>
           {lib?.scanning ? 'Titles appear as they are found.' : `Matinee looked in ${lib?.paths.join(', ')} and found no media.`}

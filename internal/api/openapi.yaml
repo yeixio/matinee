@@ -231,6 +231,26 @@ paths:
             application/json:
               schema: { $ref: "#/components/schemas/User" }
         "401": { $ref: "#/components/responses/Error" }
+  /me/password:
+    put:
+      summary: Change your own password
+      description: |
+        Needs the current password. Every other device you signed in on is
+        signed out; this one stays signed in.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [current, new]
+              properties:
+                current: { type: string }
+                new: { type: string, minLength: 8 }
+      responses:
+        "204": { description: Changed. }
+        "400": { $ref: "#/components/responses/Error" }
+        "403": { $ref: "#/components/responses/Error" }
   /me/theme:
     get:
       summary: The theme the current user picked
@@ -278,6 +298,134 @@ paths:
                   themes:
                     type: array
                     items: { $ref: "#/components/schemas/Theme" }
+  /profiles:
+    get:
+      summary: Who's watching? The account and its profiles
+      description: |
+        The account the device is signed in to (or the home network's
+        guest account) comes first, then its profiles. With no profiles
+        the list has just the account, and apps skip the question.
+        `current` is the one the device is watching as now.
+      responses:
+        "200":
+          description: The choices.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  current: { type: integer }
+                  profiles:
+                    type: array
+                    items: { $ref: "#/components/schemas/ProfileChoice" }
+    post:
+      summary: Add a profile to an account (admins)
+      description: |
+        A kids profile (kidsLevel 1–3) without `libraries` gets every movie
+        and TV library, filtered by rating.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ProfileChanges" }
+      responses:
+        "201":
+          description: The new profile.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Profile" }
+        "400": { $ref: "#/components/responses/Error" }
+        "403": { $ref: "#/components/responses/Error" }
+  /profiles/select:
+    post:
+      summary: Watch as another profile of the same account
+      description: |
+        Profiles with a PIN need it, unless the device is already watching
+        as that profile. Five wrong PINs lock a profile for a minute (429).
+        On the home network without signing in, picking a profile returns a
+        `token` (and sets the session cookie) that only works from home and
+        only for browsing and playing.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [id]
+              properties:
+                id: { type: integer }
+                pin: { type: string, description: Four digits. }
+                deviceName: { type: string, description: For a new home session. }
+                platform: { type: string }
+      responses:
+        "200":
+          description: Switched.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user: { $ref: "#/components/schemas/User" }
+                  token: { type: string, description: Only for a new home session. }
+        "403": { $ref: "#/components/responses/Error" }
+        "404": { $ref: "#/components/responses/Error" }
+        "429": { $ref: "#/components/responses/Error" }
+  /profiles/manage:
+    get:
+      summary: Every account with its profiles (admins)
+      description: The home network's guest account comes first.
+      responses:
+        "200":
+          description: Accounts, avatar colours and kids levels to choose from.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accounts:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        account: { $ref: "#/components/schemas/User" }
+                        profiles:
+                          type: array
+                          items: { $ref: "#/components/schemas/Profile" }
+                  avatars: { type: array, items: { type: string } }
+                  levels:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        level: { type: integer }
+                        name: { type: string }
+        "403": { $ref: "#/components/responses/Error" }
+  /profiles/{id}:
+    parameters:
+      - { name: id, in: path, required: true, schema: { type: integer } }
+    put:
+      summary: Change a profile (admins)
+      description: |
+        Fields left out stay as they are. For an account, only `pin` and
+        `avatar` can be set; an account's PIN guards it in "Who's watching?".
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ProfileChanges" }
+      responses:
+        "200":
+          description: The profile.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Profile" }
+        "400": { $ref: "#/components/responses/Error" }
+        "404": { $ref: "#/components/responses/Error" }
+    delete:
+      summary: Remove a profile with its progress and watch list (admins)
+      responses:
+        "204": { description: Removed. }
+        "404": { $ref: "#/components/responses/Error" }
   /devices:
     get:
       summary: Devices signed in as the current user
@@ -349,6 +497,62 @@ paths:
             application/json:
               schema: { $ref: "#/components/schemas/User" }
         "409": { $ref: "#/components/responses/Error" }
+  /users/{id}:
+    patch:
+      summary: Make an account an admin or not (admins only)
+      description: The last admin can't stop being one (409).
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                isAdmin: { type: boolean }
+      responses:
+        "200":
+          description: The account as it is now.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/User" }
+        "404": { $ref: "#/components/responses/Error" }
+        "409": { $ref: "#/components/responses/Error" }
+    delete:
+      summary: Remove an account (admins only)
+      description: |
+        Removes the account with its sessions, downloads, watch history, watch
+        list, requests and problem reports. Admins can't remove themselves
+        (400), and the last admin can't be removed (409).
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      responses:
+        "204": { description: Removed. }
+        "400": { $ref: "#/components/responses/Error" }
+        "404": { $ref: "#/components/responses/Error" }
+        "409": { $ref: "#/components/responses/Error" }
+  /users/{id}/password:
+    put:
+      summary: Set someone's password (admins only)
+      description: |
+        No current password needed. The account is signed out on every
+        device, except this one when admins reset their own.
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [password]
+              properties:
+                password: { type: string, minLength: 8 }
+      responses:
+        "204": { description: Changed. }
+        "400": { $ref: "#/components/responses/Error" }
+        "404": { $ref: "#/components/responses/Error" }
 
   /libraries:
     get:
@@ -396,17 +600,55 @@ paths:
         "202": { description: Scanning. Watch `scanning` on GET /libraries. }
   /libraries/{id}/items:
     get:
-      summary: A library's top level (movies, shows or artists)
+      summary: A library's top level (movies, shows or artists), filtered and sorted
+      description: >
+        With no filter, everything at the library's top level in title order.
+        Any ItemFilter field narrows the list, e.g.
+        `?genre=Comedy&yearMin=1980&yearMax=1989&watched=unwatched&sort=rating`.
+        `library` is taken from the path.
       parameters:
         - { $ref: "#/components/parameters/ID" }
-        - name: tag
-          in: query
-          schema: { type: array, items: { type: string } }
-          style: form
-          explode: true
-          description: Keep only items with every tag given (see Item.mediaTags), such as `?tag=4k&tag=hdr`.
+        - { $ref: "#/components/parameters/Filter" }
       responses:
         "200": { $ref: "#/components/responses/Items" }
+        "400": { $ref: "#/components/responses/Error" }
+  /libraries/{id}/filters:
+    get:
+      summary: What a library can be filtered by
+      description: The values its titles have, most common first, and which ranges are worth offering.
+      parameters:
+        - { $ref: "#/components/parameters/ID" }
+      responses:
+        "200":
+          description: Filter choices.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/FilterOptions" }
+        "404": { $ref: "#/components/responses/Error" }
+  /libraries/{id}/people:
+    get:
+      summary: Find people credited in a library, for the person and director filters
+      parameters:
+        - { $ref: "#/components/parameters/ID" }
+        - { name: q, in: query, schema: { type: string }, description: Matches the start of any word of a name; empty lists the most credited. }
+        - { name: role, in: query, schema: { type: string, enum: [cast, director] }, description: Empty matches any credit. }
+        - { name: limit, in: query, schema: { type: integer, default: 20, maximum: 100 } }
+      responses:
+        "200":
+          description: People, in the most titles first.
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: "#/components/schemas/FilterPerson" } }
+        "404": { $ref: "#/components/responses/Error" }
+  /items:
+    get:
+      summary: Titles across libraries, filtered and sorted
+      description: Like /libraries/{id}/items, with `library` choosing libraries (none means all).
+      parameters:
+        - { $ref: "#/components/parameters/Filter" }
+      responses:
+        "200": { $ref: "#/components/responses/Items" }
+        "400": { $ref: "#/components/responses/Error" }
   /fs:
     get:
       summary: Browse the server's folders, to pick library folders (admins only)
@@ -485,15 +727,18 @@ paths:
                   rows:
                     type: array
                     description: >-
-                      The day's genre rows, shown below the others: a few genres with at
+                      Rows shown below the others. First the collections pinned to Home
+                      (shared ones and the person's own, empty ones left out), each with
+                      up to 20 titles. Then the day's genre rows: a few genres with at
                       least four titles, different each day, each with up to 20 of its
                       best-rated titles in a daily order. Empty until titles have genres.
                     items:
                       type: object
                       properties:
-                        id: { type: string, examples: ["genre:Science Fiction"] }
+                        id: { type: string, examples: ["genre:Science Fiction", "collection:4f1c9e0a2b7d3e5f6a8b9c0d"] }
                         title: { type: string, examples: [Sci-fi favorites] }
-                        genre: { type: string, examples: [Science Fiction] }
+                        genre: { type: string, description: Empty on a collection's row., examples: [Science Fiction] }
+                        collectionId: { type: string, description: Set on a pinned collection's row. }
                         items: { type: array, items: { $ref: "#/components/schemas/Item" } }
   /search:
     get:
@@ -714,6 +959,124 @@ paths:
       parameters: [{ $ref: "#/components/parameters/ID" }]
       responses:
         "204": { description: Off the list (or it wasn't on it). }
+
+  /collections:
+    get:
+      summary: Collections and box sets
+      description: |
+        The shared collections and the person's own, shared first, each in
+        the order it was made, with how many titles it has and the first 12.
+        A smart collection is evaluated for whoever asks, so its watched
+        rules follow their progress. Box sets are TMDB's collections (such
+        as a trilogy) with two or more titles in the libraries.
+      parameters:
+        - name: library
+          in: query
+          description: Only the collections pinned to this library's page, with up to 20 titles each, and no box sets.
+          schema: { type: integer }
+        - name: item
+          in: query
+          description: Say in `contains` whether each manual collection holds this item.
+          schema: { type: integer }
+      responses:
+        "200":
+          description: Collections and box sets.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  collections: { type: array, items: { $ref: "#/components/schemas/Collection" } }
+                  boxSets: { type: array, items: { $ref: "#/components/schemas/BoxSet" } }
+    post:
+      summary: Make a collection
+      description: |
+        Signed-in accounts only. It's the maker's own unless an admin shares it
+        with everyone (`shared`).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/CollectionInput" }
+      responses:
+        "201":
+          description: Made, with its first 12 titles.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Collection" }
+        "400": { $ref: "#/components/responses/Error" }
+        "403": { description: Only an admin can share a collection. }
+  /collections/{id}:
+    parameters: [{ name: id, in: path, required: true, schema: { type: string } }]
+    get:
+      summary: A collection with all its titles
+      responses:
+        "200":
+          description: The collection.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Collection" }
+        "404": { $ref: "#/components/responses/Error" }
+    put:
+      summary: Change a collection
+      description: |
+        Its name, rules, order and pins. Its kind and owner don't change.
+        Shared collections are changed by admins; others by their owner.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/CollectionInput" }
+      responses:
+        "200":
+          description: Changed, with its first 12 titles.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Collection" }
+        "400": { $ref: "#/components/responses/Error" }
+        "403": { $ref: "#/components/responses/Error" }
+        "404": { $ref: "#/components/responses/Error" }
+    delete:
+      summary: Delete a collection
+      description: The titles stay in the library.
+      responses:
+        "204": { description: Deleted. }
+        "403": { $ref: "#/components/responses/Error" }
+        "404": { $ref: "#/components/responses/Error" }
+  /collections/{id}/items/{item}:
+    parameters:
+      - { name: id, in: path, required: true, schema: { type: string } }
+      - { name: item, in: path, required: true, schema: { type: integer } }
+    put:
+      summary: Add a title to a manual collection
+      description: Adding one that's already there keeps its place.
+      responses:
+        "204": { description: In the collection. }
+        "400": { description: A smart collection fills itself. }
+        "403": { $ref: "#/components/responses/Error" }
+        "404": { $ref: "#/components/responses/Error" }
+    delete:
+      summary: Take a title out of a manual collection
+      responses:
+        "204": { description: Out of the collection (or it wasn't in it). }
+        "400": { description: A smart collection fills itself. }
+        "403": { $ref: "#/components/responses/Error" }
+  /box-sets/{id}:
+    get:
+      summary: A box set's titles in the library, oldest first
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      responses:
+        "200":
+          description: The box set.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id: { type: integer, description: TMDB collection id }
+                  name: { type: string }
+                  items: { type: array, items: { $ref: "#/components/schemas/Item" } }
+        "404": { $ref: "#/components/responses/Error" }
 
   /downloads/qualities:
     get:
@@ -1184,6 +1547,13 @@ components:
       { name: id, in: path, required: true, schema: { type: string } }
     UserCode:
       { name: code, in: path, required: true, schema: { type: string }, description: "The code as typed; case, dashes and spaces don't matter." }
+    Filter:
+      name: filter
+      in: query
+      style: form
+      explode: true
+      description: Each ItemFilter field is its own query parameter; repeat a parameter for several values.
+      schema: { $ref: "#/components/schemas/ItemFilter" }
   responses:
     Error:
       description: Something was wrong with the request.
@@ -1207,6 +1577,128 @@ components:
             type: array
             items: { $ref: "#/components/schemas/Item" }
   schemas:
+    ItemFilter:
+      description: >
+        Picks titles by their metadata. The same field names are used as query
+        parameters and as JSON, so a filter can be saved as is. Within a field
+        any value matches, except tag and person, where every value must.
+        Relative fields (addedWithin, releasedWithin) count from the day the
+        filter runs.
+      type: object
+      properties:
+        library: { type: array, items: { type: integer }, description: Library ids; none means every library. }
+        kind: { type: array, items: { type: string, enum: [movie, show, season, episode, artist, album, track] }, description: Without it, libraries' top level is listed. }
+        q: { type: string, description: Words in the title. }
+        genre: { type: array, items: { type: string } }
+        notGenre: { type: array, items: { type: string } }
+        yearMin: { type: integer }
+        yearMax: { type: integer }
+        releasedAfter: { type: string, format: date, description: Shows use their first air date; titles without a date count as released on January 1st of their year. }
+        releasedBefore: { type: string, format: date }
+        releasedWithin: { type: integer, description: Released in the last this many days. }
+        addedAfter: { type: string, format: date, description: A show counts as added when its newest episode was. }
+        addedBefore: { type: string, format: date }
+        addedWithin: { type: integer, description: Added in the last this many days. }
+        ratingMin: { type: number, description: 0 to 10. }
+        ratingMax: { type: number }
+        runtimeMin: { type: integer, description: Minutes; a show's runtime is its average episode's, an album's its total. }
+        runtimeMax: { type: integer }
+        watched:
+          type: string
+          enum: [unwatched, inProgress, watched, notStarted]
+          description: For the signed-in person. unwatched has something left to play; watched has everything played.
+        tag: { type: array, items: { type: string }, description: Media tags such as 4k, hdr or atmos (see Item.mediaTags); all must match. }
+        notTag: { type: array, items: { type: string } }
+        person: { type: array, items: { type: integer }, description: TMDB person ids credited in any role, including episodes; all must match. }
+        director: { type: array, items: { type: integer }, description: Directed or created the title or one of its episodes. }
+        studio: { type: array, items: { type: string }, description: Studios, and networks for shows. }
+        country: { type: array, items: { type: string } }
+        language: { type: array, items: { type: string }, description: Original language, e.g. Japanese. }
+        certification: { type: array, items: { type: string }, description: e.g. PG-13 or TV-MA. }
+        collection: { type: array, items: { type: integer }, description: TMDB collection ids. }
+        watchList: { type: boolean, description: Only titles on the signed-in person's watch list. }
+        sort: { type: string, enum: [title, added, released, year, rating, runtime, lastPlayed], default: title }
+        order: { type: string, enum: [asc, desc], description: Title and runtime run low to high by default, the others high to low. Titles missing the field go last. }
+        limit: { type: integer }
+    FilterValue:
+      type: object
+      properties:
+        value: { type: string }
+        label: { type: string, description: A name for values that are ids, such as collections. }
+        count: { type: integer }
+    FilterPerson:
+      type: object
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        hasPhoto: { type: boolean, description: "GET /people/{id}/image has a photo." }
+        count: { type: integer, description: Titles they're credited in. }
+    FilterOptions:
+      type: object
+      properties:
+        genres: { type: array, items: { $ref: "#/components/schemas/FilterValue" } }
+        tags: { type: array, items: { $ref: "#/components/schemas/FilterValue" } }
+        studios: { type: array, items: { $ref: "#/components/schemas/FilterValue" } }
+        countries: { type: array, items: { $ref: "#/components/schemas/FilterValue" } }
+        languages: { type: array, items: { $ref: "#/components/schemas/FilterValue" } }
+        certifications: { type: array, items: { $ref: "#/components/schemas/FilterValue" } }
+        collections: { type: array, items: { $ref: "#/components/schemas/FilterValue" } }
+        directors: { type: array, items: { $ref: "#/components/schemas/FilterPerson" }, description: The most credited 30. }
+        cast: { type: array, items: { $ref: "#/components/schemas/FilterPerson" }, description: The most credited 30. }
+        yearMin: { type: integer }
+        yearMax: { type: integer }
+        hasRatings: { type: boolean }
+        hasRuntimes: { type: boolean }
+        hasReleased: { type: boolean }
+    Collection:
+      type: object
+      description: |
+        A smart collection is a saved library filter and fills itself; a
+        manual one is kept by hand. A new server starts with three shared
+        smart ones (`starter`): recent, unwatched and tonight.
+      properties:
+        id: { type: string }
+        name: { type: string }
+        kind: { type: string, enum: [smart, manual] }
+        ownerId: { type: integer, description: Who made it; absent on a shared collection. }
+        shared: { type: boolean }
+        filter: { $ref: "#/components/schemas/ItemFilter" }
+        sort:
+          type: string
+          enum: [title, added, released, year, rating, runtime, lastPlayed, shuffle]
+          description: |
+            Absent for the collection's own order: its filter's, or the order
+            titles were added in. `shuffle` is a different order each day.
+            Manual collections can't sort by released or lastPlayed.
+        order: { type: string, enum: [asc, desc] }
+        pinHome: { type: boolean, description: Shown as a row on Home. }
+        pinLibrary: { type: integer, description: Shown as a row on this library's page. }
+        starter: { type: string, examples: [tonight] }
+        createdAt: { type: integer, description: Unix milliseconds }
+        updatedAt: { type: integer, description: Unix milliseconds }
+        count: { type: integer, description: How many titles it has in all. }
+        items: { type: array, items: { $ref: "#/components/schemas/Item" } }
+        canEdit: { type: boolean }
+        contains: { type: boolean, description: Only with `?item=`, on manual collections. }
+    CollectionInput:
+      type: object
+      required: [name]
+      properties:
+        name: { type: string, maxLength: 100 }
+        kind: { type: string, enum: [smart, manual], description: Required when making one. }
+        filter: { $ref: "#/components/schemas/ItemFilter" }
+        sort: { type: string }
+        order: { type: string, enum: [asc, desc] }
+        pinHome: { type: boolean }
+        pinLibrary: { type: [integer, "null"] }
+        shared: { type: boolean, description: Only when making one, and only for admins. }
+    BoxSet:
+      type: object
+      properties:
+        id: { type: integer, description: TMDB collection id }
+        name: { type: string }
+        count: { type: integer }
+        itemIds: { type: array, items: { type: integer }, description: Its titles in the library, oldest first. }
     Error:
       type: object
       properties:
@@ -1283,6 +1775,22 @@ components:
           type: string
           readOnly: true
           description: The address set with `MATINEE_PUBLIC_URL`, which apps use away from home. Ignored in a `PUT`.
+        libraryWatch:
+          type: string
+          enum: [auto, poll, off]
+          description: >
+            How library folders are watched for new files: change notifications
+            on local disks and a quick check every `watchPollSeconds` on network
+            shares (`auto`, the default), the quick check everywhere (`poll`), or
+            only the full rescan (`off`).
+        watchPollSeconds:
+          type: integer
+          readOnly: true
+          description: How often polled folders are checked (MATINEE_WATCH_POLL_INTERVAL). Ignored in a `PUT`.
+        scanIntervalSeconds:
+          type: integer
+          readOnly: true
+          description: How often every library is rescanned in full, 0 for never (MATINEE_SCAN_INTERVAL). Ignored in a `PUT`.
         hardwareAcceleration:
           type: string
           enum: [auto, off, nvenc, vaapi, qsv, videotoolbox, amf, v4l2m2m]
@@ -1444,11 +1952,52 @@ components:
       type: object
       properties:
         id: { type: integer }
-        username: { type: string }
+        username: { type: string, description: "A profile's name, for profiles." }
         isAdmin: { type: boolean }
         guest:
           type: boolean
-          description: The shared account of a device at home that hasn't signed in.
+          description: The shared account of a device at home that hasn't signed in, or one of its profiles.
+        accountId: { type: integer, description: "The account a profile belongs to; absent for accounts." }
+        kidsLevel:
+          type: integer
+          description: |
+            For kids profiles, the oldest age rating they see: 1 little kids
+            (G, TV-Y, TV-G), 2 kids (PG, TV-Y7, TV-PG), 3 teens (PG-13,
+            TV-14). Kids profiles can't make requests, report problems, see
+            coming soon or manage devices.
+        avatar: { type: string, description: "A colour name: coral, amber, lime, teal, sky, violet, pink or slate." }
+        hasPin: { type: boolean }
+    ProfileChoice:
+      type: object
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        avatar: { type: string }
+        kidsLevel: { type: integer }
+        hasPin: { type: boolean }
+        account: { type: boolean, description: The account itself rather than one of its profiles. }
+    Profile:
+      allOf:
+        - $ref: "#/components/schemas/User"
+        - type: object
+          properties:
+            libraries:
+              type: object
+              additionalProperties: { type: string, enum: [all, rated] }
+              description: |
+                Library ids a kids profile sees: everything in them, or only
+                titles rated up to its level. Others are hidden.
+    ProfileChanges:
+      type: object
+      properties:
+        accountId: { type: integer, description: Only when adding a profile. }
+        name: { type: string }
+        avatar: { type: string }
+        kidsLevel: { type: integer, minimum: 0, maximum: 3 }
+        pin: { type: string, description: 'Four digits; "" removes the PIN.' }
+        libraries:
+          type: object
+          additionalProperties: { type: string, enum: [all, rated] }
     Device:
       type: object
       properties:
@@ -1466,6 +2015,15 @@ components:
         kind: { type: string, examples: [movies, tv, music] }
         paths: { type: array, items: { type: string } }
         scanning: { type: boolean }
+        watch:
+          type: array
+          description: How each folder is watched for new files. Empty just after the server starts.
+          items:
+            type: object
+            properties:
+              path: { type: string }
+              method: { type: string, enum: [events, polling, off] }
+              reason: { type: string, description: 'Why a folder is polled, such as "network share (cifs)".' }
     Item:
       type: object
       description: Anything browsable. Fields without a value are left out.

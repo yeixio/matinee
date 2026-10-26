@@ -1,9 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { ChevronLeft, Folder, FolderOpen, Monitor, Plus, RefreshCw, Trash2, UserPlus, X } from 'lucide-react'
+import { ChevronLeft, Folder, FolderOpen, KeyRound, Monitor, Plus, RefreshCw, Trash2, UserPlus, X } from 'lucide-react'
 import { useState, type FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { api, type RemoteStatus, type User } from '../api'
+import { NewFiles, watchSummary } from '../components/LibraryWatch'
 import { MediaAnalysis } from '../components/MediaAnalysis'
+import { Profiles } from '../components/ProfileSettings'
 import { Appearance } from '../components/ThemePicker'
 import { LibraryIcon, useLibraries } from '../components/Shell'
 import { Button, Field, inputClass } from '../components/ui'
@@ -17,13 +19,16 @@ export default function Settings() {
       <h1 className="text-2xl font-bold tracking-tight">Settings</h1>
       {me && <Appearance me={me} />}
       {me?.isAdmin && <Libraries />}
+      {me?.isAdmin && <NewFiles />}
       {me?.isAdmin && <MediaAnalysis />}
-      {me?.isAdmin && <Users />}
+      {me?.isAdmin && <Users me={me} />}
+      {me?.isAdmin && <Profiles />}
       {me?.isAdmin && <HomeNetwork />}
       {me?.isAdmin && <RemoteAccess />}
       {me?.isAdmin && <Trailers />}
       {me?.isAdmin && <Transcoding />}
       {me?.isAdmin && <Integrations />}
+      {me && !me.guest && <Account />}
       <Devices />
       {/* TMDB's API terms ask apps that use it for this notice. */}
       <p className="text-xs text-faint">
@@ -41,6 +46,7 @@ export default function Settings() {
 function Libraries() {
   const qc = useQueryClient()
   const { data: libraries = [] } = useLibraries()
+  const { data: settings } = useQuery({ queryKey: ['settings'], queryFn: api.settings })
   const [adding, setAdding] = useState(false)
   const refresh = () => qc.invalidateQueries({ queryKey: ['libraries'] })
   const scan = useMutation({ mutationFn: api.scanLibrary, onSuccess: () => setTimeout(refresh, 300) })
@@ -73,6 +79,7 @@ function Libraries() {
             <div className="min-w-0 flex-1">
               <div className="font-medium">{l.name}</div>
               <div className="truncate text-xs text-muted">{l.paths.join(' · ')}</div>
+              {l.watch.length > 0 && <div className="truncate text-xs text-faint">{watchSummary(l, settings?.watchPollSeconds || 30)}</div>}
             </div>
             <Button
               variant="ghost"
@@ -219,7 +226,7 @@ function FolderPicker({ picked, onPick }: { picked: string[]; onPick: (path: str
   )
 }
 
-function Users() {
+function Users({ me }: { me: User }) {
   const qc = useQueryClient()
   const { data: users = [] } = useQuery({ queryKey: ['users'], queryFn: api.users })
   const [username, setUsername] = useState('')
@@ -239,11 +246,7 @@ function Users() {
       <h2 className="text-lg font-semibold">People</h2>
       <div className="divide-y divide-line/60 rounded-xl border border-line/60 bg-surface/50">
         {users.map((u) => (
-          <div key={u.id} className="flex items-center gap-3 p-4">
-            <span className="grid size-9 place-items-center rounded-full bg-text/10 text-sm font-semibold uppercase">{u.username[0]}</span>
-            <span className="flex-1">{u.username}</span>
-            {u.isAdmin && <span className="rounded bg-accent/15 px-2 py-0.5 text-xs text-accent">Admin</span>}
-          </div>
+          <Person key={u.id} user={u} isMe={u.id === me.id} />
         ))}
       </div>
       <form
@@ -267,6 +270,198 @@ function Users() {
         </Button>
       </form>
       {create.error && <p className="text-sm text-danger">{create.error.message}</p>}
+    </section>
+  )
+}
+
+// Person's actions sit in a row of three on phones.
+const actionClass = 'h-9 whitespace-nowrap px-2 text-xs sm:px-3 sm:text-sm'
+
+// Person is one account in the admin's list, with what an admin can do to it.
+// Admins change their own password under Your account, and can't remove
+// themselves or take away their own admin, so another admin is always left.
+function Person({ user, isMe }: { user: User; isMe: boolean }) {
+  const qc = useQueryClient()
+  const [mode, setMode] = useState<'idle' | 'reset' | 'remove'>('idle')
+  const [password, setPassword] = useState('')
+  const [done, setDone] = useState('')
+  const refresh = () => qc.invalidateQueries({ queryKey: ['users'] })
+  const close = () => {
+    setMode('idle')
+    setPassword('')
+    reset.reset()
+    remove.reset()
+  }
+  const reset = useMutation({
+    mutationFn: () => api.resetPassword(user.id, password),
+    onSuccess: () => {
+      close()
+      setDone(`Password changed. ${user.username} was signed out everywhere.`)
+    },
+  })
+  const remove = useMutation({ mutationFn: () => api.deleteUser(user.id), onSuccess: refresh })
+  const admin = useMutation({
+    mutationFn: () => api.setAdmin(user.id, !user.isAdmin),
+    onSuccess: () => {
+      setDone('')
+      refresh()
+    },
+  })
+  const error = reset.error ?? remove.error ?? admin.error
+  return (
+    <div className="space-y-3 p-4">
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+        <span className="grid size-9 shrink-0 place-items-center rounded-full bg-text/10 text-sm font-semibold uppercase">{user.username[0]}</span>
+        <span className="min-w-0 flex-1 truncate">
+          {user.username}
+          {isMe && <span className="text-muted"> (you)</span>}
+        </span>
+        {user.isAdmin && <span className="rounded bg-accent/15 px-2 py-0.5 text-xs text-accent">Admin</span>}
+        {!isMe && mode === 'idle' && (
+          <div className="grid w-full grid-cols-3 gap-1 sm:flex sm:w-auto">
+            <Button variant="ghost" className={actionClass} disabled={admin.isPending} onClick={() => admin.mutate()}>
+              {user.isAdmin ? 'Remove admin' : 'Make admin'}
+            </Button>
+            <Button
+              variant="ghost"
+              className={actionClass}
+              icon={<KeyRound className="hidden size-4 sm:block" />}
+              onClick={() => (setDone(''), setMode('reset'))}
+            >
+              Reset password
+            </Button>
+            <Button
+              variant="ghost"
+              className={`${actionClass} hover:text-danger`}
+              icon={<Trash2 className="hidden size-4 sm:block" />}
+              onClick={() => (setDone(''), setMode('remove'))}
+            >
+              Remove
+            </Button>
+          </div>
+        )}
+      </div>
+      {mode === 'reset' && (
+        <form
+          onSubmit={(e) => {
+            e.preventDefault()
+            reset.mutate()
+          }}
+          className="grid gap-3 sm:grid-cols-[1fr_auto_auto] sm:items-end"
+        >
+          <Field label={`New password for ${user.username}`}>
+            <input
+              className={inputClass}
+              type="password"
+              minLength={8}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              autoComplete="new-password"
+              autoFocus
+              required
+            />
+          </Field>
+          <Button type="button" variant="ghost" onClick={close}>
+            Cancel
+          </Button>
+          <Button variant="primary" disabled={reset.isPending}>
+            Set password
+          </Button>
+        </form>
+      )}
+      {mode === 'remove' && (
+        <div className="space-y-3 rounded-lg border border-danger/40 bg-danger/5 p-3">
+          <p className="text-sm">
+            Remove <strong>{user.username}</strong>? Their watch history, watch list, downloads and requests go too, and
+            they're signed out everywhere. This can't be undone.
+          </p>
+          <div className="flex flex-wrap justify-end gap-2">
+            <Button variant="ghost" onClick={close}>
+              Cancel
+            </Button>
+            <Button variant="danger" icon={<Trash2 className="size-4" />} disabled={remove.isPending} onClick={() => remove.mutate()}>
+              Remove {user.username}
+            </Button>
+          </div>
+        </div>
+      )}
+      {done && <p className="text-sm text-muted">{done}</p>}
+      {error && <p className="text-sm text-danger">{error.message}</p>}
+    </div>
+  )
+}
+
+// Account lets the signed-in person change their own password.
+function Account() {
+  const [current, setCurrent] = useState('')
+  const [next, setNext] = useState('')
+  const [again, setAgain] = useState('')
+  const [done, setDone] = useState(false)
+  const change = useMutation({
+    mutationFn: () => api.changePassword(current, next),
+    onSuccess: () => {
+      setCurrent('')
+      setNext('')
+      setAgain('')
+      setDone(true)
+    },
+  })
+  const mismatch = again !== '' && again !== next
+  return (
+    <section className="space-y-4">
+      <h2 className="text-lg font-semibold">Your account</h2>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault()
+          if (!mismatch) change.mutate()
+        }}
+        className="space-y-3 rounded-xl border border-line/60 bg-surface/50 p-4"
+      >
+        <h3 className="font-medium">Change password</h3>
+        <div className="grid gap-3 sm:grid-cols-3">
+          <Field label="Current password">
+            <input
+              className={inputClass}
+              type="password"
+              value={current}
+              onChange={(e) => (setDone(false), setCurrent(e.target.value))}
+              autoComplete="current-password"
+              required
+            />
+          </Field>
+          <Field label="New password">
+            <input
+              className={inputClass}
+              type="password"
+              minLength={8}
+              value={next}
+              onChange={(e) => (setDone(false), setNext(e.target.value))}
+              autoComplete="new-password"
+              required
+            />
+          </Field>
+          <Field label="New password again">
+            <input
+              className={inputClass}
+              type="password"
+              minLength={8}
+              value={again}
+              onChange={(e) => (setDone(false), setAgain(e.target.value))}
+              autoComplete="new-password"
+              required
+            />
+          </Field>
+        </div>
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <p className="text-xs text-muted">At least 8 characters. Your other devices will be signed out.</p>
+          <Button variant="primary" icon={<KeyRound className="size-4" />} disabled={change.isPending || mismatch}>
+            Change password
+          </Button>
+        </div>
+        {mismatch && <p className="text-sm text-danger">The new passwords don't match.</p>}
+        {change.error && <p className="text-sm text-danger">{change.error.message}</p>}
+        {done && <p className="text-sm text-muted">Password changed. Your other devices were signed out.</p>}
+      </form>
     </section>
   )
 }

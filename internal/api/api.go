@@ -11,7 +11,6 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
-	"slices"
 	"sort"
 	"strconv"
 	"strings"
@@ -33,18 +32,21 @@ import (
 )
 
 type Server struct {
-	Store      *store.Store
-	Scanner    *scan.Scanner
-	Transcoder *stream.Transcoder
-	HW         *hwaccel.Manager // hardware transcoding; nil means the CPU only
-	Downloads  *download.Manager
-	Analyzer   *analyze.Analyzer // nil when media analysis is off for this server
-	Art        *artwork.Cache
-	Subtitles  *subtitle.Converter
-	Web        fs.FS // built web player; nil serves a placeholder
-	Log        *slog.Logger
-	MediaRoot  string // where the folder picker starts; empty means /
-	Name       string // what the apps call this server
+	Store   *store.Store
+	Scanner *scan.Scanner
+	Watcher *scan.Watcher // nil means libraries aren't watched for changes
+	// ScanInterval is how often every library is rescanned; 0 means never.
+	ScanInterval time.Duration
+	Transcoder   *stream.Transcoder
+	HW           *hwaccel.Manager // hardware transcoding; nil means the CPU only
+	Downloads    *download.Manager
+	Analyzer     *analyze.Analyzer // nil when media analysis is off for this server
+	Art          *artwork.Cache
+	Subtitles    *subtitle.Converter
+	Web          fs.FS // built web player; nil serves a placeholder
+	Log          *slog.Logger
+	MediaRoot    string // where the folder picker starts; empty means /
+	Name         string // what the apps call this server
 	// TrailerSource lists trailers online; nil without a TMDB key.
 	TrailerSource TrailerSource
 	// People has biographies; nil shows only names and photos.
@@ -66,6 +68,7 @@ type Server struct {
 	setUp        atomic.Bool // the first account exists
 	arrCache     ttlCache    // answers from Radarr and Sonarr (see arr.go)
 	trailerCache ttlCache    // trailer files' probes and TMDB's trailer lists (see trailers.go)
+	pins         pinGuard    // wrong profile PINs (see profiles.go)
 
 	// BackgroundCtx scopes scans started by API calls; it outlives any one request.
 	BackgroundCtx context.Context
@@ -106,26 +109,39 @@ func (s *Server) routes() []route {
 		{"POST /auth/logout", public, s.logout},
 		{"POST /auth/device", public, s.startDeviceCode},
 		{"POST /auth/device/token", public, s.pollDeviceCode},
-		{"GET /auth/device/{code}", signedIn, s.getDeviceCode},
-		{"POST /auth/device/{code}/approve", signedIn, s.approveDeviceCode},
-		{"POST /auth/device/{code}/deny", signedIn, s.denyDeviceCode},
+		{"GET /auth/device/{code}", signedIn, grownUps(s.getDeviceCode)},
+		{"POST /auth/device/{code}/approve", signedIn, grownUps(s.approveDeviceCode)},
+		{"POST /auth/device/{code}/deny", signedIn, grownUps(s.denyDeviceCode)},
 
 		{"GET /me", reader, s.me},
 		{"GET /me/theme", reader, s.getMyTheme},
 		{"PUT /me/theme", reader, s.putMyTheme},
+		{"PUT /me/password", signedIn, s.changeMyPassword},
 		{"GET /themes", public, s.listThemes},
-		{"GET /devices", signedIn, s.listDevices},
-		{"DELETE /devices/{id}", signedIn, s.deleteDevice},
+		{"GET /profiles", reader, s.listProfiles},
+		{"POST /profiles/select", reader, s.selectProfile},
+		{"GET /profiles/manage", adminOnly, s.manageProfiles},
+		{"POST /profiles", adminOnly, s.createProfile},
+		{"PUT /profiles/{id}", adminOnly, s.updateProfile},
+		{"DELETE /profiles/{id}", adminOnly, s.deleteProfile},
+		{"GET /devices", signedIn, grownUps(s.listDevices)},
+		{"DELETE /devices/{id}", signedIn, grownUps(s.deleteDevice)},
 		{"GET /settings", adminOnly, s.getSettings},
 		{"PUT /settings", adminOnly, s.putSettings},
 		{"GET /users", adminOnly, s.listUsers},
 		{"POST /users", adminOnly, s.createUser},
+		{"PATCH /users/{id}", adminOnly, s.updateUser},
+		{"PUT /users/{id}/password", adminOnly, s.resetPassword},
+		{"DELETE /users/{id}", adminOnly, s.deleteUser},
 
 		{"GET /libraries", reader, s.listLibraries},
 		{"POST /libraries", adminOnly, s.createLibrary},
 		{"DELETE /libraries/{id}", adminOnly, s.deleteLibrary},
 		{"POST /libraries/{id}/scan", adminOnly, s.scanLibrary},
 		{"GET /libraries/{id}/items", reader, s.libraryItems},
+		{"GET /libraries/{id}/filters", reader, s.libraryFilters},
+		{"GET /libraries/{id}/people", reader, s.libraryPeople},
+		{"GET /items", reader, s.filterItems},
 		{"GET /fs", adminOnly, s.browseFS},
 		{"GET /analysis", adminOnly, s.getAnalysis},
 		{"PUT /analysis", adminOnly, s.putAnalysis},
@@ -149,6 +165,14 @@ func (s *Server) routes() []route {
 		{"POST /items/{id}/hls", reader, s.startHLS},
 		{"GET /hls/{session}/{file}", reader, s.hlsFile},
 
+		{"GET /collections", reader, s.listCollections},
+		{"POST /collections", signedIn, s.createCollection},
+		{"GET /collections/{id}", reader, s.getCollection},
+		{"PUT /collections/{id}", signedIn, s.updateCollection},
+		{"DELETE /collections/{id}", signedIn, s.deleteCollection},
+		{"PUT /collections/{id}/items/{item}", signedIn, s.addToCollection},
+		{"DELETE /collections/{id}/items/{item}", signedIn, s.removeFromCollection},
+		{"GET /box-sets/{id}", reader, s.getBoxSet},
 		{"GET /watchlist", reader, s.getWatchList},
 		{"PUT /watchlist/{id}", reader, s.addToWatchList},
 		{"DELETE /watchlist/{id}", reader, s.removeFromWatchList},
@@ -166,18 +190,18 @@ func (s *Server) routes() []route {
 		{"PUT /integrations/{app}", adminOnly, s.putIntegration},
 		{"DELETE /integrations/{app}", adminOnly, s.deleteIntegration},
 		{"POST /integrations/{app}/test", adminOnly, s.testIntegration},
-		{"GET /requests/options", reader, s.getRequestOptions},
-		{"GET /requests/search", signedIn, s.searchTitles},
-		{"GET /requests", signedIn, s.listRequests},
-		{"POST /requests", signedIn, s.createRequest},
+		{"GET /requests/options", reader, grownUps(s.getRequestOptions)},
+		{"GET /requests/search", signedIn, grownUps(s.searchTitles)},
+		{"GET /requests", signedIn, grownUps(s.listRequests)},
+		{"POST /requests", signedIn, grownUps(s.createRequest)},
 		{"POST /requests/{id}/approve", adminOnly, s.approveRequest},
 		{"POST /requests/{id}/decline", adminOnly, s.declineRequest},
-		{"DELETE /requests/{id}", signedIn, s.deleteRequest},
-		{"GET /upcoming", reader, s.upcoming},
+		{"DELETE /requests/{id}", signedIn, grownUps(s.deleteRequest)},
+		{"GET /upcoming", reader, grownUps(s.upcoming)},
 		{"GET /items/{id}/quality", adminOnly, s.getItemQuality},
 		{"PUT /items/{id}/quality", adminOnly, s.putItemQuality},
-		{"POST /items/{id}/issues", signedIn, s.reportIssue},
-		{"GET /issues", signedIn, s.listIssues},
+		{"POST /items/{id}/issues", signedIn, grownUps(s.reportIssue)},
+		{"GET /issues", signedIn, grownUps(s.listIssues)},
 		{"POST /issues/{id}/resolve", adminOnly, s.resolveIssue},
 		{"POST /issues/{id}/replace", adminOnly, s.replaceIssue},
 	}
@@ -288,7 +312,7 @@ func (s *Server) requireUser(h http.HandlerFunc, level access) http.Handler {
 			writeError(w, http.StatusUnauthorized, "sign in required")
 			return
 		}
-		u, err := s.Store.SessionUser(r.Context(), token)
+		u, homeOnly, err := s.Store.SessionUser(r.Context(), token)
 		if errors.Is(err, store.ErrNotFound) {
 			writeError(w, http.StatusUnauthorized, "sign in required")
 			return
@@ -296,6 +320,19 @@ func (s *Server) requireUser(h http.HandlerFunc, level access) http.Handler {
 		if err != nil {
 			s.serverError(w, err)
 			return
+		}
+		if homeOnly {
+			// A profile picked at home without signing in: it can only look
+			// and play, and only from home.
+			ok, err := s.homeAccess(r)
+			if err != nil {
+				s.serverError(w, err)
+				return
+			}
+			if !ok || level > reader {
+				writeError(w, http.StatusUnauthorized, "sign in required")
+				return
+			}
 		}
 		if level == adminOnly && !u.IsAdmin {
 			writeError(w, http.StatusForbidden, "admins only")
@@ -348,8 +385,17 @@ func (c credentials) validate() string {
 	switch {
 	case strings.TrimSpace(c.Username) == "":
 		return "username is required"
-	case len(c.Password) < 8:
+	}
+	return validatePassword(c.Password)
+}
+
+// validatePassword says what's wrong with a new password, or "" if nothing.
+func validatePassword(pw string) string {
+	switch {
+	case len([]rune(pw)) < 8:
 		return "password must be at least 8 characters"
+	case len(pw) > 72: // bcrypt's limit
+		return "password must be at most 72 bytes"
 	}
 	return ""
 }
@@ -499,6 +545,19 @@ func (s *Server) createUser(w http.ResponseWriter, r *http.Request) {
 type libraryView struct {
 	store.Library
 	Scanning bool `json:"scanning"`
+	// Watch says how each folder is watched for new files (scan.FolderWatch).
+	Watch []scan.FolderWatch `json:"watch"`
+}
+
+func (s *Server) libraryView(l store.Library, scanning bool) libraryView {
+	v := libraryView{l, scanning, nil}
+	if s.Watcher != nil {
+		v.Watch = s.Watcher.Status(l.ID)
+	}
+	if v.Watch == nil {
+		v.Watch = []scan.FolderWatch{}
+	}
+	return v
 }
 
 func (s *Server) listLibraries(w http.ResponseWriter, r *http.Request) {
@@ -507,9 +566,16 @@ func (s *Server) listLibraries(w http.ResponseWriter, r *http.Request) {
 		s.serverError(w, err)
 		return
 	}
-	out := make([]libraryView, len(libs))
-	for i, l := range libs {
-		out[i] = libraryView{l, s.Scanner.Running(l.ID)}
+	out := []libraryView{}
+	for _, l := range libs {
+		ok, err := s.Store.LibraryVisible(r.Context(), currentUser(r), l.ID)
+		if err != nil {
+			s.serverError(w, err)
+			return
+		}
+		if ok {
+			out = append(out, s.libraryView(l, s.Scanner.Running(l.ID)))
+		}
 	}
 	writeJSON(w, http.StatusOK, out)
 }
@@ -551,7 +617,10 @@ func (s *Server) createLibrary(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	go s.Scanner.Scan(s.BackgroundCtx, lib)
-	writeJSON(w, http.StatusCreated, libraryView{lib, true})
+	if s.Watcher != nil {
+		s.Watcher.Reload()
+	}
+	writeJSON(w, http.StatusCreated, s.libraryView(lib, true))
 }
 
 func (s *Server) deleteLibrary(w http.ResponseWriter, r *http.Request) {
@@ -566,6 +635,9 @@ func (s *Server) deleteLibrary(w http.ResponseWriter, r *http.Request) {
 	} else if err != nil {
 		s.serverError(w, err)
 		return
+	}
+	if s.Watcher != nil {
+		s.Watcher.Reload()
 	}
 	w.WriteHeader(http.StatusNoContent)
 }
@@ -586,39 +658,6 @@ func (s *Server) scanLibrary(w http.ResponseWriter, r *http.Request) {
 	}
 	go s.Scanner.Scan(s.BackgroundCtx, lib)
 	w.WriteHeader(http.StatusAccepted)
-}
-
-func (s *Server) libraryItems(w http.ResponseWriter, r *http.Request) {
-	id, ok := pathID(r)
-	if !ok {
-		writeError(w, http.StatusBadRequest, "bad id")
-		return
-	}
-	items, err := s.Store.TopLevel(r.Context(), currentUser(r).ID, id)
-	if err != nil {
-		s.serverError(w, err)
-		return
-	}
-	// ?tag=4k&tag=hdr keeps items with every tag given (see Item.MediaTags).
-	if tags := r.URL.Query()["tag"]; len(tags) > 0 {
-		kept := items[:0]
-		for _, it := range items {
-			if hasAll(it.MediaTags, tags) {
-				kept = append(kept, it)
-			}
-		}
-		items = kept
-	}
-	writeLargeJSON(w, r, items)
-}
-
-func hasAll(have, want []string) bool {
-	for _, w := range want {
-		if !slices.Contains(have, w) {
-			return false
-		}
-	}
-	return true
 }
 
 // browseFS lists subfolders so admins can pick library folders from the browser.
@@ -672,11 +711,18 @@ func (s *Server) home(w http.ResponseWriter, r *http.Request) {
 		s.serverError(w, err)
 		return
 	}
+	pinned, err := s.pinnedRows(r.Context(), currentUser(r))
+	if err != nil {
+		s.serverError(w, err)
+		return
+	}
 	rows, err := s.genreRows(r.Context(), uid, now)
 	if err != nil {
 		s.serverError(w, err)
 		return
 	}
+	// Pinned collections come before the day's genres.
+	rows = append(pinned, rows...)
 	writeJSON(w, http.StatusOK, map[string]any{
 		"continueWatching": cont, "watchList": watchList, "recentlyAdded": recent,
 		"newReleases": releases, "rows": rows,

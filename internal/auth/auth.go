@@ -27,6 +27,11 @@ func HashPassword(pw string) (string, error) {
 	return string(b), err
 }
 
+// CheckPassword says whether password is the user's.
+func CheckPassword(u store.User, password string) bool {
+	return bcrypt.CompareHashAndPassword([]byte(u.PasswordHash()), []byte(password)) == nil
+}
+
 // Login checks a password and starts a session for a device.
 func Login(ctx context.Context, s *store.Store, username, password string, dev store.Device) (store.User, string, error) {
 	u, err := s.UserByName(ctx, username)
@@ -38,7 +43,7 @@ func Login(ctx context.Context, s *store.Store, username, password string, dev s
 	if err != nil {
 		return u, "", err
 	}
-	if bcrypt.CompareHashAndPassword([]byte(u.PasswordHash()), []byte(password)) != nil {
+	if !CheckPassword(u, password) {
 		return u, "", ErrBadCredentials
 	}
 	token, err := s.CreateSession(ctx, u.ID, SessionTTL, dev)
@@ -99,4 +104,22 @@ func BrowserName(userAgent string) string {
 		return os
 	}
 	return "Web browser"
+}
+
+// ValidPIN reports whether a profile PIN is four digits.
+func ValidPIN(pin string) bool {
+	if len(pin) != 4 {
+		return false
+	}
+	for _, r := range pin {
+		if r < '0' || r > '9' {
+			return false
+		}
+	}
+	return true
+}
+
+// CheckPIN compares a PIN with a profile's stored hash.
+func CheckPIN(hash, pin string) bool {
+	return hash != "" && ValidPIN(pin) && bcrypt.CompareHashAndPassword([]byte(hash), []byte(pin)) == nil
 }

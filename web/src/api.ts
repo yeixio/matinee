@@ -2,8 +2,39 @@
 // internal/api/openapi.yaml). The session lives in an HttpOnly cookie, so
 // requests just need to be same-origin.
 
-// guest is the shared account of a device at home that hasn't signed in.
-export type User = { id: number; username: string; isAdmin: boolean; guest?: boolean }
+import { type ItemFilter, toSearchParams } from './filter'
+
+// guest is the shared account of a device at home that hasn't signed in, or
+// one of its profiles. Profiles have accountId; kids profiles have kidsLevel
+// (see profiles.ts).
+export type User = {
+  id: number
+  username: string
+  isAdmin: boolean
+  guest?: boolean
+  accountId?: number
+  kidsLevel?: number
+  avatar?: string
+  hasPin?: boolean
+}
+// One entry in "Who's watching?". The account itself comes first.
+export type ProfileChoice = { id: number; name: string; avatar?: string; kidsLevel?: number; hasPin: boolean; account?: boolean }
+// A profile as admins manage it. libraries: library id → all or rated (kids only).
+export type LibraryMode = 'all' | 'rated'
+export type Profile = User & { libraries: Record<string, LibraryMode> }
+export type ProfileChanges = {
+  accountId?: number
+  name?: string
+  avatar?: string
+  kidsLevel?: number
+  pin?: string
+  libraries?: Record<string, LibraryMode>
+}
+export type ManagedProfiles = {
+  accounts: { account: User; profiles: Profile[] }[]
+  avatars: string[]
+  levels: { level: number; name: string }[]
+}
 // requests: who besides admins may add titles through Radarr and Sonarr.
 export type RequestMode = 'off' | 'approve' | 'auto'
 export type Settings = {
@@ -25,6 +56,12 @@ export type Settings = {
   remote?: RemoteStatus
   // The address set with MATINEE_PUBLIC_URL, which the apps use away from home.
   publicURL?: string
+  // How library folders are watched for new files.
+  libraryWatch: WatchMode
+  // Set on the server's command line: how often polled folders are checked,
+  // and how often every library is rescanned in full (0 for never).
+  watchPollSeconds: number
+  scanIntervalSeconds: number
 }
 
 // sharedAddress: the router has no public address of its own, so only a relay could help.
@@ -39,6 +76,13 @@ export type RemoteStatus = {
   certificateExpires?: string
   checkedAt?: string
 }
+
+// auto: change notifications on local disks, a quick check on network shares;
+// poll: the quick check everywhere; off: only the full rescan.
+export type WatchMode = 'auto' | 'poll' | 'off'
+
+// How one library folder is watched. reason says why a folder is polled.
+export type FolderWatch = { path: string; method: 'events' | 'polling' | 'off'; reason?: string }
 
 // A theme as the server sends it, every colour filled in. See docs/themes.md.
 export type Theme = {
@@ -173,12 +217,35 @@ export type Device = {
 
 export type PendingDevice = { userCode: string; deviceName: string; platform: string; expiresAt: number }
 
+export type FilterValue = { value: string; label?: string; count: number }
+export type FilterPerson = { id: number; name: string; hasPhoto: boolean; count: number }
+
+// What a library can be filtered by: the values its titles have, most common first.
+export type FilterOptions = {
+  genres: FilterValue[]
+  tags: FilterValue[]
+  studios: FilterValue[]
+  countries: FilterValue[]
+  languages: FilterValue[]
+  certifications: FilterValue[]
+  collections: FilterValue[]
+  directors: FilterPerson[]
+  cast: FilterPerson[]
+  yearMin?: number
+  yearMax?: number
+  hasRatings: boolean
+  hasRuntimes: boolean
+  hasReleased: boolean
+}
+
 export type Library = {
   id: number
   name: string
   kind: 'movies' | 'tv' | 'music' | string
   paths: string[]
   scanning: boolean
+  // Empty until the server has set up watching, just after it starts.
+  watch: FolderWatch[]
 }
 
 export type Item = {
@@ -236,8 +303,50 @@ export type SubtitleTrack = {
   burnIn?: boolean
 }
 
-/** One of the home screen's genre rows, a different few each day. */
-export type HomeRow = { id: string; title: string; genre: string; items: Item[] }
+/** One of the home screen's rows: a pinned collection, or a genre (a different few each day). */
+export type HomeRow = { id: string; title: string; genre: string; collectionId?: string; items: Item[] }
+
+/** The orders a collection can have; "" is its own (the filter's, or the order titles were added in). */
+export type CollectionSort = '' | 'title' | 'added' | 'released' | 'year' | 'rating' | 'runtime' | 'lastPlayed' | 'shuffle'
+
+/**
+ * A collection: smart ones are a saved library filter (the same fields as the
+ * library page's query), manual ones are kept by hand. Shared ones have no owner.
+ */
+export type Collection = {
+  id: string
+  name: string
+  kind: 'smart' | 'manual'
+  ownerId?: number
+  shared: boolean
+  filter?: ItemFilter
+  sort?: CollectionSort
+  order?: 'asc' | 'desc'
+  pinHome: boolean
+  pinLibrary?: number
+  starter?: string
+  createdAt: number
+  updatedAt: number
+  /** How many titles it has in all; items may be only the first few. */
+  count: number
+  items: Item[]
+  canEdit: boolean
+  contains?: boolean
+}
+
+export type CollectionInput = {
+  name: string
+  kind?: 'smart' | 'manual'
+  filter?: ItemFilter
+  sort?: CollectionSort
+  order?: 'asc' | 'desc' | ''
+  pinHome?: boolean
+  pinLibrary?: number | null
+  shared?: boolean
+}
+
+/** One of TMDB's collections, such as a trilogy, with two or more titles in the library. */
+export type BoxSet = { id: number; name: string; count: number; itemIds: number[] }
 
 export type HDR = 'dolby-vision' | 'hdr10+' | 'hdr10' | 'hlg'
 
@@ -425,7 +534,14 @@ export const api = {
     request<Library>('POST', '/api/v1/libraries', { name, kind, paths }),
   deleteLibrary: (id: number) => request<void>('DELETE', `/api/v1/libraries/${id}`),
   scanLibrary: (id: number) => request<void>('POST', `/api/v1/libraries/${id}/scan`),
-  libraryItems: (id: number) => request<Item[]>('GET', `/api/v1/libraries/${id}/items`),
+  libraryItems: (id: number, filter: ItemFilter = {}) => {
+    const q = toSearchParams({ ...filter, library: undefined }).toString()
+    return request<Item[]>('GET', `/api/v1/libraries/${id}/items${q ? `?${q}` : ''}`)
+  },
+  filterItems: (filter: ItemFilter) => request<Item[]>('GET', `/api/v1/items?${toSearchParams(filter)}`),
+  libraryFilters: (id: number) => request<FilterOptions>('GET', `/api/v1/libraries/${id}/filters`),
+  libraryPeople: (id: number, q: string, role?: 'cast' | 'director') =>
+    request<FilterPerson[]>('GET', `/api/v1/libraries/${id}/people?${new URLSearchParams({ q, ...(role ? { role } : {}) })}`),
   browse: (path: string) =>
     request<{ path: string; parent: string; dirs: string[] }>('GET', `/api/v1/fs?path=${encodeURIComponent(path)}`),
 
@@ -433,14 +549,27 @@ export const api = {
   setAnalysisMode: (mode: AnalysisMode) => request<AnalysisStatus>('PUT', '/api/v1/analysis', { mode }),
   reanalyze: (id: number) => request<void>('POST', `/api/v1/items/${id}/analyze`),
   settings: () => request<Settings>('GET', '/api/v1/settings'),
-  saveSettings: (s: Partial<Omit<Settings, 'hardware' | 'themeProblems'>>) => request<Settings>('PUT', '/api/v1/settings', s),
+  saveSettings: (s: Partial<Omit<Settings, 'hardware' | 'themeProblems' | 'watchPollSeconds' | 'scanIntervalSeconds'>>) => request<Settings>('PUT', '/api/v1/settings', s),
   themes: () => request<ThemeList>('GET', '/api/v1/themes'),
   // theme: "" follows the server's default.
   myTheme: () => request<{ theme: string }>('GET', '/api/v1/me/theme'),
   setMyTheme: (theme: string) => request<{ theme: string }>('PUT', '/api/v1/me/theme', { theme }),
   users: () => request<User[]>('GET', '/api/v1/users'),
+  profiles: () => request<{ current: number; profiles: ProfileChoice[] }>('GET', '/api/v1/profiles'),
+  selectProfile: (id: number, pin?: string) => request<{ user: User }>('POST', '/api/v1/profiles/select', { id, pin }),
+  manageProfiles: () => request<ManagedProfiles>('GET', '/api/v1/profiles/manage'),
+  createProfile: (p: ProfileChanges) => request<Profile>('POST', '/api/v1/profiles', p),
+  updateProfile: (id: number, p: ProfileChanges) => request<Profile>('PUT', `/api/v1/profiles/${id}`, p),
+  deleteProfile: (id: number) => request<void>('DELETE', `/api/v1/profiles/${id}`),
   createUser: (username: string, password: string, isAdmin: boolean) =>
     request<User>('POST', '/api/v1/users', { username, password, isAdmin }),
+  setAdmin: (id: number, isAdmin: boolean) => request<User>('PATCH', `/api/v1/users/${id}`, { isAdmin }),
+  // Signs the person out on every device.
+  resetPassword: (id: number, password: string) => request<void>('PUT', `/api/v1/users/${id}/password`, { password }),
+  deleteUser: (id: number) => request<void>('DELETE', `/api/v1/users/${id}`),
+  // Signs out every other device of the signed-in user.
+  changePassword: (current: string, next: string) =>
+    request<void>('PUT', '/api/v1/me/password', { current, new: next }),
 
   integrations: () => request<Record<ArrApp, Integration>>('GET', '/api/v1/integrations'),
   testIntegration: (app: ArrApp, c: IntegrationConfig) => request<ConnectionCheck>('POST', `/api/v1/integrations/${app}/test`, c),
@@ -474,6 +603,20 @@ export const api = {
   children: (id: number) => request<Item[]>('GET', `/api/v1/items/${id}/children`),
   related: (id: number) => request<Related>('GET', `/api/v1/items/${id}/related`),
   person: (id: number) => request<Person>('GET', `/api/v1/people/${id}`),
+  collections: (q: { library?: number; item?: number } = {}) => {
+    const p = new URLSearchParams()
+    if (q.library) p.set('library', String(q.library))
+    if (q.item) p.set('item', String(q.item))
+    return request<{ collections: Collection[]; boxSets: BoxSet[] }>('GET', `/api/v1/collections${p.toString() ? `?${p}` : ''}`)
+  },
+  collection: (id: string) => request<Collection>('GET', `/api/v1/collections/${encodeURIComponent(id)}`),
+  createCollection: (c: CollectionInput) => request<Collection>('POST', '/api/v1/collections', c),
+  updateCollection: (id: string, c: CollectionInput) => request<Collection>('PUT', `/api/v1/collections/${encodeURIComponent(id)}`, c),
+  deleteCollection: (id: string) => request<void>('DELETE', `/api/v1/collections/${encodeURIComponent(id)}`),
+  addToCollection: (id: string, item: number) => request<void>('PUT', `/api/v1/collections/${encodeURIComponent(id)}/items/${item}`),
+  removeFromCollection: (id: string, item: number) =>
+    request<void>('DELETE', `/api/v1/collections/${encodeURIComponent(id)}/items/${item}`),
+  boxSet: (id: number) => request<{ id: number; name: string; items: Item[] }>('GET', `/api/v1/box-sets/${id}`),
   watchList: () => request<Item[]>('GET', '/api/v1/watchlist'),
   addToWatchList: (id: number) => request<void>('PUT', `/api/v1/watchlist/${id}`),
   removeFromWatchList: (id: number) => request<void>('DELETE', `/api/v1/watchlist/${id}`),

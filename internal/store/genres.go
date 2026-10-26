@@ -40,9 +40,9 @@ func (s *Store) NeedsGenres(ctx context.Context, libraryID int64) ([]Item, error
 		"i.id", 0, libraryID)
 }
 
-// GenreCounts says how many movies and shows there are in each genre.
-func (s *Store) GenreCounts(ctx context.Context) (map[string]int, error) {
-	rows, err := s.db.QueryContext(ctx, "SELECT genres FROM items WHERE kind IN ('movie', 'show') AND genres IS NOT NULL")
+// GenreCounts says how many movies and shows the user can see in each genre.
+func (s *Store) GenreCounts(ctx context.Context, userID int64) (map[string]int, error) {
+	rows, err := s.db.QueryContext(ctx, "SELECT i.genres"+itemFrom+" WHERE i.kind IN ('movie', 'show') AND i.genres IS NOT NULL"+visibleToMe, userID)
 	if err != nil {
 		return nil, err
 	}

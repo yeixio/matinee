@@ -1,8 +1,10 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { CalendarClock, Clapperboard, Home, Inbox, LogIn, LogOut, Music, Search, Settings, Tv } from 'lucide-react'
+import { CalendarClock, Clapperboard, Home, Inbox, Layers, LogIn, LogOut, Music, Search, Settings, Tv } from 'lucide-react'
 import { NavLink, Outlet } from 'react-router-dom'
 import { api, type Library, type User } from '../api'
+import { Avatar } from '../pages/Profiles'
 import { useAudio } from '../player/AudioPlayer'
+import { forgetAsked, isKids } from '../profiles'
 import { useRequestOptions } from './Arr'
 
 export function LibraryIcon({ kind, className = 'size-5' }: { kind: string; className?: string }) {
@@ -54,13 +56,17 @@ export default function Shell({ user }: { user: User }) {
   const qc = useQueryClient()
   // Start loading a library on hover so the switch feels instant.
   const prefetchLibrary = (id: number) =>
-    qc.prefetchQuery({ queryKey: ['library', id], queryFn: () => api.libraryItems(id), staleTime: 30_000 })
+    qc.prefetchQuery({ queryKey: ['library', id, ''], queryFn: () => api.libraryItems(id), staleTime: 30_000 })
   const audio = useAudio()
-  const { data: opts } = useRequestOptions()
-  const arr = !!opts && (opts.movies || opts.shows)
-  const waiting = (opts?.pendingRequests ?? 0) + (opts?.openIssues ?? 0)
+  const kids = isKids(user)
+  const { data: opts } = useRequestOptions(!kids)
+  const arr = !kids && !!opts && (opts.movies || opts.shows)
+  const waiting = kids ? 0 : (opts?.pendingRequests ?? 0) + (opts?.openIssues ?? 0)
+  const { data: who } = useQuery({ queryKey: ['profiles'], queryFn: api.profiles, retry: false })
+  const hasProfiles = (who?.profiles.length ?? 0) > 1
   const logout = async () => {
     await api.logout()
+    forgetAsked()
     qc.clear()
     window.location.href = '/'
   }
@@ -80,6 +86,9 @@ export default function Shell({ user }: { user: User }) {
             <NavLink to="/watchlist" className={topLink}>
               Watch list
             </NavLink>
+            <NavLink to="/collections" className={topLink}>
+              Collections
+            </NavLink>
             {libraries.map((l) => (
               <NavLink key={l.id} to={`/library/${l.id}`} className={topLink} onMouseEnter={() => prefetchLibrary(l.id)} onFocus={() => prefetchLibrary(l.id)}>
                 <span className="truncate">{l.name}</span>
@@ -88,6 +97,10 @@ export default function Shell({ user }: { user: User }) {
             ))}
           </nav>
           <div className="ml-auto flex items-center gap-1">
+            {/* On phones the tab bar has no room, so collections get an icon up here. */}
+            <NavLink to="/collections" className={(a) => `md:hidden ${iconLink(a)}`} aria-label="Collections" title="Collections">
+              <Layers className="size-5" />
+            </NavLink>
             <NavLink to="/search" className="hidden rounded-full p-2 text-muted hover:bg-text/5 hover:text-text md:block" aria-label="Search">
               <Search className="size-5" />
             </NavLink>
@@ -106,23 +119,33 @@ export default function Shell({ user }: { user: User }) {
                 )}
               </NavLink>
             )}
-            {user.guest ? (
+            {user.guest && !kids ? (
               // Watching at home without an account; signing in brings your own progress and settings.
               <NavLink to="/sign-in" className="flex items-center gap-2 rounded-full px-3 py-1.5 text-sm text-muted hover:bg-text/5 hover:text-text">
                 <LogIn className="size-4" /> Sign in
               </NavLink>
             ) : (
-              <NavLink to="/settings" className="rounded-full p-2 text-muted hover:bg-text/5 hover:text-text" aria-label="Settings">
-                <Settings className="size-5" />
+              !kids && (
+                <NavLink to="/settings" className="rounded-full p-2 text-muted hover:bg-text/5 hover:text-text" aria-label="Settings">
+                  <Settings className="size-5" />
+                </NavLink>
+              )
+            )}
+            {hasProfiles && (
+              <NavLink to="/profiles" className="flex items-center gap-2 rounded-full p-1 text-sm text-muted hover:bg-text/5 hover:text-text md:pr-3" title="Switch profile">
+                <Avatar name={user.username} avatar={user.avatar} className="size-7 text-xs" />
+                <span className="hidden max-w-28 truncate md:inline">{user.username}</span>
               </NavLink>
             )}
-            {!user.guest && (
+            {!user.guest && !kids && (
               <button
                 onClick={logout}
                 className="hidden items-center gap-2 rounded-full py-1 pr-3 pl-1 text-sm text-muted hover:bg-text/5 hover:text-text md:flex"
                 title="Sign out"
               >
-                <span className="grid size-7 place-items-center rounded-full bg-raised text-xs font-semibold text-text uppercase">{user.username[0]}</span>
+                {!hasProfiles && (
+                  <span className="grid size-7 place-items-center rounded-full bg-raised text-xs font-semibold text-text uppercase">{user.username[0]}</span>
+                )}
                 <LogOut className="size-4" />
               </button>
             )}

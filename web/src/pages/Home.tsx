@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { api, pendingRefetch, type Item } from '../api'
 import { ComingSoonRow } from '../components/Arr'
 import { PosterCard } from '../components/Card'
+import { collectionLink } from '../components/Collections'
 import { Hero } from '../components/Hero'
 import { Row, RowItem } from '../components/Row'
 import { useLibraries } from '../components/Shell'
@@ -83,9 +84,9 @@ export default function Home() {
           ))}
         </Row>
       )}
-      {/* A few genres, different each day. */}
+      {/* Pinned collections, then a few genres, different each day. */}
       {data.rows?.map((row) => (
-        <Row key={row.id} title={row.title}>
+        <Row key={row.id} title={row.title} more={row.collectionId ? collectionLink({ id: row.collectionId }) : undefined}>
           {row.items.map((it) => (
             <RowItem key={it.id}>
               <PosterCard item={it} />

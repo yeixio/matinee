@@ -10,6 +10,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/yeixio/matinee/internal/rating"
 	"github.com/yeixio/matinee/internal/store"
 	"github.com/yeixio/matinee/internal/store/storetest"
 )
@@ -231,6 +232,21 @@ func TestFetchShowDetails(t *testing.T) {
 	d, _ := st.ItemDetails(ctx, show)
 	if d == nil || d.Certification != "TV-MA" || d.EndDate != "2013-09-29" || d.Seasons != 5 || d.Networks[0] != "AMC" {
 		t.Fatalf("show details: %+v", d)
+	}
+	// TV-MA is for adults, so a teens profile sees neither the show nor its episodes.
+	acct, _ := st.CreateUser(ctx, "parent", "hash", false)
+	teens := rating.Teens
+	kid, err := st.CreateProfile(ctx, acct.ID, store.ProfileChanges{KidsLevel: &teens, Libraries: map[int64]string{lib.ID: store.LibraryRated}})
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, id := range []int64{show, season, ep} {
+		if _, err := st.Item(ctx, kid.ID, id); err != store.ErrNotFound {
+			t.Errorf("teens profile opening %d: %v", id, err)
+		}
+		if _, err := st.Item(ctx, acct.ID, id); err != nil {
+			t.Errorf("account opening %d: %v", id, err)
+		}
 	}
 	c, _ := st.ItemCredits(ctx, show)
 	if len(c.Cast) != 1 || c.Cast[0].Role != "Walter White" || c.Cast[0].Episodes != 62 || c.Crew[0].Role != "Creator" {

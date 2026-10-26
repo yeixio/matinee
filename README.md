@@ -15,14 +15,17 @@ A fast, self-hosted media server for your movies, TV and music. Point it at your
 ## What it does
 
 - **Libraries** for movies, TV and music. Point it at folders; it names things from the file and folder names (`Movie (2021)`, `Show/Season 1/Show - S01E02.mkv`, `Artist/Album/01 Track.flac`), reads music tags, and picks up `poster.jpg`, `fanart.jpg` and `cover.jpg` next to your files.
+- **New files show up in seconds.** Matinee watches library folders and adds what you copy in, rename or delete a few seconds after the copy finishes, scanning just that file or folder. Folders on this machine's own disks announce changes as they happen; network shares (SMB, NFS) don't, so Matinee checks those every 30 seconds by looking at each folder's modification time, which is cheap even on a big library. A full rescan every 15 minutes catches the rest. Settings → New files shows how each library is watched.
 - **Plays anywhere.** Files the browser can play stream as-is, with instant seeking. Anything else is converted on the fly with FFmpeg to HLS. H.264 video is repackaged, not re-encoded, so it costs almost no CPU.
 - **Subtitles** from the file itself or from files next to it (`Movie.en.srt`, `Movie.en.forced.srt`, `.vtt`, `.ass`). Text subtitles are drawn by the player; Blu-ray and DVD picture subtitles are burned into the video while converting. The player remembers your language from one episode to the next.
 - **Picks up where you left off.** Resume points, watched marks, Continue Watching and Recently Added, per person.
+- **Collections.** Smart collections fill themselves from rules, using the same filters as the library pages ("unwatched 80s action", "kids movies under 90 minutes"), and follow each person's own watched state. Keep collections by hand too, find box sets like a trilogy filled in from TMDB, and pin any collection to Home or a library page as a row, sorted by any field or shuffled daily. New servers start with Recently added, Unwatched and Short enough for tonight.
 - **Music** with a player that keeps going while you browse.
 - **Knows what's in every file.** In the background, Matinee slowly reads each file for its resolution, HDR (HDR10, HDR10+, HLG, Dolby Vision), codecs and bitrates, audio channels, Atmos and languages, and subtitles. The essentials show as badges on each title and as library filters (4K, HDR, Dolby Atmos…); everything else is under File details. It reads one file at a time at the lowest priority, waits while someone's watching something being converted, and looks at a file again only when it changes, so network shares stay responsive. Admins can see its progress, or slow it down or pause it, under Settings.
 - **Posters and descriptions** from [TMDB](https://www.themoviedb.org/) with a free API key ([how to get one](#posters-and-descriptions-tmdb-key)). Your own artwork files always win, and everything else works without a key.
 - **Search** as you type.
 - **People:** an admin plus as many accounts as you like, each with their own history.
+- **Profiles and kids mode:** one sign-in, or the Home account on your network, can have profiles that each keep their own progress, watch list and theme, with "Who's watching?" when the app opens and an optional 4-digit PIN. Kids profiles see only titles rated for them (Little kids, Kids or Teens, from TMDB's age ratings for your country) in the libraries you pick, and can't open settings or make requests. Admins set them up under Settings → Profiles.
 - **Downloads** for watching offline in the Matinee apps. A download is a job on the server, not a stream: it's prepared in the background (the original file, or a single MP4 at 1080p, 720p or 480p), checksummed, then fetched by the phone at its own pace, resuming where it broke off. Jobs survive restarts and retry on their own, and watch progress made offline is merged back when the phone reconnects, with the latest change winning.
 - **Radarr and Sonarr** (optional): people ask for movies and shows and an admin approves them, everyone sees what's coming soon, and anyone can report a problem with what they're watching. Admins can change a title's quality or have a bad file replaced. [Setting it up](#radarr-and-sonarr).
 - **Themes:** seven built in (Matinee, Dark, Light, Clean, Sci-fi, Drive-in, High contrast), picked by each person under Settings → Appearance and followed by the web player and the phone and TV apps. Add your own with a small JSON file; see [docs/themes.md](docs/themes.md).
@@ -187,10 +190,12 @@ Every setting is a flag or an environment variable.
 | `MATINEE_DATA_DIR` | `./data` | SQLite database (when used), image cache, transcode scratch space |
 | `MATINEE_DATABASE_URL` | empty | `postgres://…` to use PostgreSQL instead of SQLite |
 | `MATINEE_TMDB_KEY` | empty | TMDB API key or read access token, for posters and descriptions ([get one](#posters-and-descriptions-tmdb-key)) |
+| `MATINEE_RATING_COUNTRY` | `US` | Whose age ratings to use for kids profiles, such as `GB`, `CA`, `AU` or `DE`. Titles pick up a new country's ratings when their details are next refreshed |
 | `MATINEE_MEDIA_ROOT` | `/` | Folder the library picker opens in |
 | `MATINEE_MUSICBRAINZ` | `true` | Look up artists and albums on MusicBrainz, with covers from the Cover Art Archive and artist photos from Wikidata. No key needed. Set `false` to use only local artwork |
 | `MATINEE_WIKIDATA` | `true` | Look up the awards movies and shows won or were nominated for on Wikidata. No key needed. Set `false` to skip awards |
-| `MATINEE_SCAN_INTERVAL` | `15m` | How often libraries are rescanned; `0` turns it off |
+| `MATINEE_SCAN_INTERVAL` | `15m` | How often libraries are rescanned in full; `0` turns it off |
+| `MATINEE_WATCH_POLL_INTERVAL` | `30s` | How often folders on network shares are checked for new files. A big library on a slow share is checked less often by itself, so the share stays responsive |
 | `MATINEE_DISCOVERY` | `true` | Announce the server on the local network so the apps find it ([more](#finding-it-from-the-apps)) |
 | `MATINEE_SERVER_NAME` | `Matinee` | The name the apps show for this server |
 | `MATINEE_PUBLIC_URL` | empty | The address the apps should connect to, such as `https://matinee.example.com`, at home and away; empty uses this machine's IP and port at home, and remote access's address away |

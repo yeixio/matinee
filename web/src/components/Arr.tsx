@@ -9,11 +9,13 @@ import { Button, Field, inputClass } from './ui'
 
 // What this account can do with Radarr and Sonarr: ask for titles, report
 // problems, and for admins, what's waiting for them.
-export function useRequestOptions() {
+// enabled is false for kids profiles, which can't make requests.
+export function useRequestOptions(enabled = true) {
   return useQuery({
     queryKey: ['requestOptions'],
     queryFn: api.requestOptions,
     staleTime: 60_000,
+    enabled,
   })
 }
 

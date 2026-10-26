@@ -29,9 +29,8 @@ func (s *Store) SetSetting(ctx context.Context, key, value string) error {
 // shares it, so they share its watch progress and watch list too. It can't sign in, isn't
 // listed with the other accounts, and isn't an admin.
 func (s *Store) HomeGuest(ctx context.Context) (User, error) {
-	u, err := s.scanUser(s.db.QueryRowContext(ctx, "SELECT id, username, is_admin, password_hash FROM users WHERE guest = 1 ORDER BY id LIMIT 1"))
+	u, err := s.scanUser(s.db.QueryRowContext(ctx, "SELECT "+userCols+" FROM users u WHERE u.guest = 1 ORDER BY u.id LIMIT 1"))
 	if !errors.Is(err, ErrNotFound) {
-		u.Guest, u.Username = true, "Home"
 		return u, err
 	}
 	// The stored name only has to be unique; people see "Home".

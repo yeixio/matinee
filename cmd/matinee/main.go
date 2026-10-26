@@ -15,6 +15,7 @@ import (
 	"os/exec"
 	"os/signal"
 	"strconv"
+	"strings"
 	"syscall"
 	"time"
 
@@ -28,6 +29,7 @@ import (
 	"github.com/yeixio/matinee/internal/kube"
 	"github.com/yeixio/matinee/internal/metadata"
 	"github.com/yeixio/matinee/internal/probe"
+	"github.com/yeixio/matinee/internal/rating"
 	"github.com/yeixio/matinee/internal/remote"
 	"github.com/yeixio/matinee/internal/scan"
 	"github.com/yeixio/matinee/internal/store"
@@ -80,11 +82,20 @@ func run() error {
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
 	defer stop()
 
+	// Titles looked up before kids profiles get their rating levels now.
+	country := strings.ToUpper(cfg.RatingCountry)
+	if n, err := db.BackfillRatingLevels(ctx, func(cert string) int { return rating.Level(country, cert) }); err != nil {
+		log.Warn("fill in rating levels", "err", err)
+	} else if n > 0 {
+		log.Info("filled in rating levels", "titles", n)
+	}
+
 	scanner := &scan.Scanner{Store: db, Prober: probe.Prober{Path: cfg.FFprobePath}, Log: log}
 	fetcher := &metadata.Fetcher{Store: db, Log: log}
 	var tmdb *metadata.TMDB
 	if cfg.TMDBKey != "" {
 		tmdb = metadata.NewTMDB(cfg.TMDBKey)
+		tmdb.Region = country
 		fetcher.Providers = append(fetcher.Providers, tmdb)
 	} else {
 		log.Info("no TMDB key set; movies and TV use local artwork only (set MATINEE_TMDB_KEY for posters and descriptions)")
@@ -120,10 +131,15 @@ func run() error {
 	}
 	go analyzer.Run(ctx)
 
+	// New files show up seconds after they land (see internal/scan/watch.go).
+	watcher := scan.NewWatcher(scanner, log)
+	watcher.PollInterval = cfg.WatchPoll
+	go watcher.Run(ctx)
+
 	downloads := download.NewManager(db, cfg.FFmpegPath, cfg.DownloadDir(), log)
 
 	apiServer := &api.Server{
-		Store: db, Scanner: scanner, Transcoder: transcoder, HW: hw, Downloads: downloads, Analyzer: analyzer,
+		Store: db, Scanner: scanner, Watcher: watcher, ScanInterval: cfg.ScanInterval, Transcoder: transcoder, HW: hw, Downloads: downloads, Analyzer: analyzer,
 		Art:       artwork.NewCache(cfg.ImageDir(), cfg.FFmpegPath),
 		Subtitles: subtitle.NewConverter(cfg.FFmpegPath, cfg.SubtitleDir()),
 		Web:       web.FS(), Log: log, BackgroundCtx: ctx,
