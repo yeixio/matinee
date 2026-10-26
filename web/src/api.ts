@@ -2,6 +2,8 @@
 // internal/api/openapi.yaml). The session lives in an HttpOnly cookie, so
 // requests just need to be same-origin.
 
+import { type ItemFilter, toSearchParams } from './filter'
+
 // guest is the shared account of a device at home that hasn't signed in.
 export type User = { id: number; username: string; isAdmin: boolean; guest?: boolean }
 // requests: who besides admins may add titles through Radarr and Sonarr.
@@ -153,6 +155,27 @@ export type Device = {
 }
 
 export type PendingDevice = { userCode: string; deviceName: string; platform: string; expiresAt: number }
+
+export type FilterValue = { value: string; label?: string; count: number }
+export type FilterPerson = { id: number; name: string; hasPhoto: boolean; count: number }
+
+// What a library can be filtered by: the values its titles have, most common first.
+export type FilterOptions = {
+  genres: FilterValue[]
+  tags: FilterValue[]
+  studios: FilterValue[]
+  countries: FilterValue[]
+  languages: FilterValue[]
+  certifications: FilterValue[]
+  collections: FilterValue[]
+  directors: FilterPerson[]
+  cast: FilterPerson[]
+  yearMin?: number
+  yearMax?: number
+  hasRatings: boolean
+  hasRuntimes: boolean
+  hasReleased: boolean
+}
 
 export type Library = {
   id: number
@@ -406,7 +429,14 @@ export const api = {
     request<Library>('POST', '/api/v1/libraries', { name, kind, paths }),
   deleteLibrary: (id: number) => request<void>('DELETE', `/api/v1/libraries/${id}`),
   scanLibrary: (id: number) => request<void>('POST', `/api/v1/libraries/${id}/scan`),
-  libraryItems: (id: number) => request<Item[]>('GET', `/api/v1/libraries/${id}/items`),
+  libraryItems: (id: number, filter: ItemFilter = {}) => {
+    const q = toSearchParams({ ...filter, library: undefined }).toString()
+    return request<Item[]>('GET', `/api/v1/libraries/${id}/items${q ? `?${q}` : ''}`)
+  },
+  filterItems: (filter: ItemFilter) => request<Item[]>('GET', `/api/v1/items?${toSearchParams(filter)}`),
+  libraryFilters: (id: number) => request<FilterOptions>('GET', `/api/v1/libraries/${id}/filters`),
+  libraryPeople: (id: number, q: string, role?: 'cast' | 'director') =>
+    request<FilterPerson[]>('GET', `/api/v1/libraries/${id}/people?${new URLSearchParams({ q, ...(role ? { role } : {}) })}`),
   browse: (path: string) =>
     request<{ path: string; parent: string; dirs: string[] }>('GET', `/api/v1/fs?path=${encodeURIComponent(path)}`),
 

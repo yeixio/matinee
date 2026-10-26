@@ -54,7 +54,7 @@ export default function Shell({ user }: { user: User }) {
   const qc = useQueryClient()
   // Start loading a library on hover so the switch feels instant.
   const prefetchLibrary = (id: number) =>
-    qc.prefetchQuery({ queryKey: ['library', id], queryFn: () => api.libraryItems(id), staleTime: 30_000 })
+    qc.prefetchQuery({ queryKey: ['library', id, ''], queryFn: () => api.libraryItems(id), staleTime: 30_000 })
   const audio = useAudio()
   const { data: opts } = useRequestOptions()
   const arr = !!opts && (opts.movies || opts.shows)
