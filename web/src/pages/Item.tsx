@@ -6,6 +6,8 @@ import { ItemQuality, ReportProblem } from '../components/Arr'
 import { Artwork } from '../components/Artwork'
 import { FileDetailsButton, Languages, QualityBadges } from '../components/MediaInfo'
 import { PosterGrid } from '../components/Card'
+import { CastRows, KeyPeople, MoreDetailsButton } from '../components/Credits'
+import { RelatedRows } from '../components/Related'
 import { TrailerButton } from '../components/Trailer'
 import { Button, Spinner } from '../components/ui'
 import { WatchListButton } from '../components/WatchListButton'
@@ -43,6 +45,10 @@ export default function ItemPage() {
           <Children item={item} items={children} />
         </div>
       )}
+      <div className="relative space-y-10">
+        <CastRows item={item} />
+        <RelatedRows item={item} />
+      </div>
     </div>
   )
 }
@@ -72,11 +78,14 @@ function Header({ item, kids }: { item: ItemDetail; kids?: Item[] }) {
   const firstUnwatched =
     kids?.find((c) => c.playable && !c.played && !!c.positionMs) ?? kids?.find((c) => c.playable && !c.played)
 
+  const d = item.details
   const facts = [
     item.year,
+    d?.certification,
     item.durationMs && duration(item.durationMs),
     item.rating ? `★ ${item.rating.toFixed(1)}` : '',
     item.kind === 'album' && kids ? `${kids.length} tracks` : '',
+    d?.genres?.slice(0, 3).join(', '),
   ].filter(Boolean)
 
   return (
@@ -115,6 +124,7 @@ function Header({ item, kids }: { item: ItemDetail; kids?: Item[] }) {
           )}
           <QualityBadges item={item} />
           <Languages item={item} />
+          {d?.tagline && item.overview && <p className="max-w-3xl text-text/70 italic">{d.tagline}</p>}
           {item.overview ? (
             <p className="max-w-3xl leading-relaxed text-text/85">{item.overview}</p>
           ) : (
@@ -124,6 +134,8 @@ function Header({ item, kids }: { item: ItemDetail; kids?: Item[] }) {
               </p>
             )
           )}
+
+          <KeyPeople item={item} />
 
           <div className="flex flex-wrap gap-3">
             {item.playable && item.kind !== 'track' && (
@@ -165,6 +177,7 @@ function Header({ item, kids }: { item: ItemDetail; kids?: Item[] }) {
                 <ReportProblem item={item} />
               </>
             )}
+            <MoreDetailsButton item={item} />
             <FileDetailsButton item={item} user={me} />
           </div>
         </div>

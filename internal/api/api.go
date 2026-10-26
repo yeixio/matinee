@@ -46,6 +46,8 @@ type Server struct {
 	Name       string // what the apps call this server
 	// TrailerSource lists trailers online; nil without a TMDB key.
 	TrailerSource TrailerSource
+	// People has biographies; nil shows only names and photos.
+	People PersonSource
 
 	// HomeListener means the home network has its own listener (HomeHandler),
 	// so requests to the main one never count as coming from home.
@@ -120,6 +122,9 @@ func (s *Server) routes() []route {
 		{"GET /search", reader, s.search},
 		{"GET /items/{id}", reader, s.getItem},
 		{"GET /items/{id}/children", reader, s.itemChildren},
+		{"GET /items/{id}/related", reader, s.itemRelated},
+		{"GET /people/{id}", reader, s.getPerson},
+		{"GET /people/{id}/image", reader, s.personImage},
 		{"PUT /items/{id}/progress", reader, s.setProgress},
 		{"DELETE /continue-watching/{id}", reader, s.hideFromContinueWatching},
 		{"GET /items/{id}/image/{type}", reader, s.itemImage},
@@ -705,6 +710,10 @@ type itemView struct {
 	// FilePath is where the file is on the server, for admins only.
 	FilePath string `json:"filePath,omitempty"`
 	FileSize int64  `json:"fileSize,omitempty"`
+	// Details and Credits are set for movies, shows, seasons and episodes
+	// once looked up; Details stays absent until then.
+	Details *store.Details `json:"details,omitempty"`
+	Credits *store.Credits `json:"credits,omitempty"`
 }
 
 func (s *Server) getItem(w http.ResponseWriter, r *http.Request) {
@@ -731,6 +740,10 @@ func (s *Server) getItem(w http.ResponseWriter, r *http.Request) {
 		}
 		v.Parents = append([]store.Item{parent}, v.Parents...)
 		p = parent.ParentID
+	}
+	if err := s.addDetails(r.Context(), &v); err != nil {
+		s.serverError(w, err)
+		return
 	}
 	writeJSON(w, http.StatusOK, v)
 }

@@ -41,7 +41,9 @@ type GenreProvider interface {
 type Fetcher struct {
 	Store     *store.Store
 	Providers []Provider
-	Log       *slog.Logger
+	// Awards looks up titles' awards, if set.
+	Awards AwardSource
+	Log    *slog.Logger
 }
 
 // Kinds lists every item kind some provider looks up.
@@ -100,6 +102,7 @@ func (f *Fetcher) FetchLibrary(ctx context.Context, lib store.Library) {
 		f.Log.Info("metadata done", "library", lib.Name, "looked_up", len(items), "matched", matched)
 	}
 	f.fetchGenres(ctx, lib)
+	f.FetchDetails(ctx, lib)
 }
 
 // fetchGenres fills in genres for movies and shows matched before Matinee

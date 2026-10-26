@@ -472,6 +472,51 @@ paths:
       parameters: [{ $ref: "#/components/parameters/ID" }]
       responses:
         "200": { $ref: "#/components/responses/Items" }
+  /items/{id}/related:
+    get:
+      summary: Titles in the library like a movie or show
+      description: |
+        The movie's collection (such as a franchise's films) with the ones in
+        the library, and other titles like it: ones TMDB recommends, by the
+        same director or creator, with the same leads, keywords and genres.
+        Only titles in the library are listed. Empty for other kinds.
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      responses:
+        "200":
+          description: Related titles.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  collection:
+                    type: object
+                    description: Absent when the title is in no collection, or is the only one of it in the library.
+                    properties:
+                      id: { type: integer }
+                      name: { type: string }
+                      items: { type: array, items: { $ref: "#/components/schemas/Item" }, description: Oldest first, including this title. }
+                  items: { type: array, items: { $ref: "#/components/schemas/Item" }, description: Best match first; at most 20. }
+  /people/{id}:
+    get:
+      summary: Someone in the cast or crew, and their titles in the library
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      responses:
+        "200":
+          description: The person.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Person" }
+        "404": { $ref: "#/components/responses/Error" }
+  /people/{id}/image:
+    get:
+      summary: A person's photo
+      parameters:
+        - $ref: "#/components/parameters/ID"
+        - { name: size, in: query, schema: { type: string, enum: [large] }, description: "large asks for a photo sharp enough for a 4K TV." }
+      responses:
+        "200": { description: The image., content: { image/*: {} } }
+        "404": { description: No photo. }
   /items/{id}/progress:
     put:
       summary: Save where playback is
@@ -1443,6 +1488,83 @@ components:
         done: { type: integer, description: Files analyzed as they are now. }
         unreadable: { type: integer, description: Files among those done that couldn't be read. }
         current: { type: string, description: Title of the file being analyzed. }
+            details: { $ref: "#/components/schemas/Details" }
+            credits: { $ref: "#/components/schemas/Credits" }
+    Details:
+      type: object
+      description: |
+        The longer details of a movie, show, season or episode, once looked up
+        online. Seasons and episodes carry their own air date plus their
+        show's genres, certification and networks.
+      properties:
+        tagline: { type: string }
+        originalTitle: { type: string, description: Only when it differs from the title. }
+        originalLanguage: { type: string, description: "A language name, such as Japanese." }
+        releaseDate: { type: string, description: "YYYY-MM-DD; first air date for shows." }
+        endDate: { type: string, description: Last air date of a show that ended. }
+        status: { type: string }
+        certification: { type: string, description: "Age rating, such as PG-13 or TV-MA." }
+        genres: { type: array, items: { type: string } }
+        studios: { type: array, items: { type: string } }
+        networks: { type: array, items: { type: string } }
+        countries: { type: array, items: { type: string } }
+        languages: { type: array, items: { type: string }, description: Spoken languages. }
+        budget: { type: integer, description: US dollars. }
+        revenue: { type: integer, description: "Worldwide box office, US dollars." }
+        collection: { type: object, properties: { id: { type: integer }, name: { type: string } } }
+        seasons: { type: integer }
+        episodes: { type: integer }
+        imdbId: { type: string }
+        wikidataId: { type: string }
+        awards:
+          type: array
+          description: Wins first, then nominations, newest first. From Wikidata.
+          items:
+            type: object
+            properties:
+              name: { type: string }
+              year: { type: integer }
+              won: { type: boolean }
+              names: { type: array, items: { type: string }, description: The people it went to, when not the title itself. }
+        awardSummary: { type: string, description: "One line for the main pane, such as Won 4 Academy Awards · 31 wins and 62 nominations." }
+    Credits:
+      type: object
+      description: |
+        People in billing order. A season without its own cast has its show's;
+        an episode's cast is its season's regulars, and its own guest stars
+        and crew (director, writers) are listed separately.
+      properties:
+        cast: { type: array, items: { $ref: "#/components/schemas/Credit" } }
+        guests: { type: array, items: { $ref: "#/components/schemas/Credit" } }
+        crew: { type: array, items: { $ref: "#/components/schemas/Credit" }, description: Key jobs only, most important first. }
+    Credit:
+      type: object
+      properties:
+        personId: { type: integer }
+        name: { type: string }
+        role: { type: string, description: "The character, or a job such as Director." }
+        department: { type: string }
+        episodes: { type: integer, description: "For a show's cast: how many episodes they're in." }
+        hasPhoto: { type: boolean, description: "See GET /people/{id}/image." }
+    Person:
+      type: object
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        hasPhoto: { type: boolean }
+        biography: { type: string }
+        birthday: { type: string }
+        deathday: { type: string }
+        birthplace: { type: string }
+        knownFor: { type: string, description: "A department, such as Acting or Directing." }
+        titles:
+          type: array
+          description: The movies and shows in the library they're in, newest first.
+          items:
+            type: object
+            properties:
+              item: { $ref: "#/components/schemas/Item" }
+              roles: { type: array, items: { type: string }, description: "Characters and jobs, such as Director or Krazy-8 · 2 episodes." }
     SubtitleTrack:
       type: object
       properties:

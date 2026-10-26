@@ -22,6 +22,8 @@ type TMDB struct {
 	BaseURL  string // defaults to the public API; tests point it elsewhere
 	ImageURL string
 	Client   *http.Client
+	// Region picks which country's age ratings to show; defaults to US.
+	Region string
 }
 
 func NewTMDB(key string) *TMDB {

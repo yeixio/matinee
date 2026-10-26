@@ -7,6 +7,7 @@ import { AudioProvider } from './player/AudioPlayer'
 import Home from './pages/Home'
 import Library from './pages/Library'
 import ItemPage from './pages/Item'
+import PersonPage from './pages/Person'
 import Search from './pages/Search'
 import WatchList from './pages/WatchList'
 import { Login, Setup } from './pages/Auth'
@@ -44,6 +45,7 @@ export default function App() {
           <Route index element={<Home />} />
           <Route path="/library/:id" element={<Library />} />
           <Route path="/item/:id" element={<ItemPage />} />
+          <Route path="/person/:id" element={<PersonPage />} />
           <Route path="/search" element={<Search />} />
           <Route path="/watchlist" element={<WatchList />} />
           <Route path="/settings" element={<Settings />} />
