@@ -132,3 +132,27 @@ func TestAnalyzeHDR10File(t *testing.T) {
 		t.Fatalf("tags: %v", got)
 	}
 }
+
+func TestCreditsStart(t *testing.T) {
+	ch := func(start, title string) chapter {
+		return chapter{StartTime: start, Tags: map[string]string{"title": title}}
+	}
+	cases := []struct {
+		name     string
+		chapters []chapter
+		want     int64
+	}{
+		{"none", nil, 0},
+		{"untitled", []chapter{ch("0", "Chapter 1"), ch("1500", "Chapter 2")}, 0},
+		{"end credits", []chapter{ch("0", "Opening Credits"), ch("90", "Episode"), ch("1620.5", "End Credits"), ch("1700", "Preview")}, 1620500},
+		{"opening credits only", []chapter{ch("0", "Intro"), ch("60", "Opening credits")}, 0},
+		{"anime ED", []chapter{ch("0", "OP"), ch("120", "Part A"), ch("1290", "ED"), ch("1380", "Preview")}, 1290000},
+		{"too early", []chapter{ch("300", "Credits")}, 0},
+		{"alternate ending", []chapter{ch("1500", "Alternate Ending")}, 0},
+	}
+	for _, c := range cases {
+		if got := creditsStart(c.chapters, 1800000); got != c.want {
+			t.Errorf("%s: %d, want %d", c.name, got, c.want)
+		}
+	}
+}

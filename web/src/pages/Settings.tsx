@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { ChevronLeft, Folder, FolderOpen, KeyRound, Monitor, Plus, RefreshCw, Trash2, UserPlus, X } from 'lucide-react'
 import { useState, type FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { api, type RemoteStatus, type User } from '../api'
+import { api, type PlaybackPrefs, type RemoteStatus, type User } from '../api'
 import { NewFiles, watchSummary } from '../components/LibraryWatch'
 import { MediaAnalysis } from '../components/MediaAnalysis'
 import { Profiles } from '../components/ProfileSettings'
@@ -18,6 +18,7 @@ export default function Settings() {
     <div className="max-w-3xl space-y-12">
       <h1 className="text-2xl font-bold tracking-tight">Settings</h1>
       {me && <Appearance me={me} />}
+      {me && <Playback />}
       {me?.isAdmin && <Libraries />}
       {me?.isAdmin && <NewFiles />}
       {me?.isAdmin && <MediaAnalysis />}
@@ -575,6 +576,47 @@ function RemoteState({ status }: { status?: RemoteStatus }) {
         ? ' Matinee can’t get around this by itself yet.'
         : ' Matinee tries again every half hour.'}
     </>
+  )
+}
+
+// Each person's own auto-play choices, which follow them to every device.
+function Playback() {
+  const qc = useQueryClient()
+  const { data } = useQuery({ queryKey: ['playback'], queryFn: api.playback })
+  const save = useMutation({ mutationFn: api.setPlayback, onSuccess: (p) => qc.setQueryData(['playback'], p) })
+  const prefs = data ?? { autoPlay: true, binge: false }
+  const toggle = (title: string, body: string, checked: boolean, change: Partial<PlaybackPrefs>, disabled = false) => (
+    <label className={`flex items-start gap-4 rounded-xl border border-line/60 bg-surface/50 p-4 ${disabled ? 'opacity-50' : 'cursor-pointer'}`}>
+      <span className="min-w-0 flex-1">
+        <span className="block font-medium">{title}</span>
+        <span className="mt-1 block text-sm text-muted">{body}</span>
+      </span>
+      <input
+        type="checkbox"
+        className="mt-1 size-5 accent-[var(--color-accent)]"
+        checked={checked}
+        disabled={!data || save.isPending || disabled}
+        onChange={() => save.mutate({ ...prefs, ...change })}
+      />
+    </label>
+  )
+  return (
+    <section className="space-y-4">
+      <h2 className="text-lg font-semibold">Playback</h2>
+      {toggle(
+        'Play the next episode',
+        'When the credits start, the next episode plays after a 10-second countdown you can cancel.',
+        prefs.autoPlay,
+        { autoPlay: !prefs.autoPlay },
+      )}
+      {toggle(
+        'Skip the countdown',
+        'Go straight into the next episode when the credits start. After three in a row without touching anything, you’re asked if you’re still watching.',
+        prefs.autoPlay && prefs.binge,
+        { binge: !prefs.binge },
+        !prefs.autoPlay,
+      )}
+    </section>
   )
 }
 

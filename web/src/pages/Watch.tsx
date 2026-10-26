@@ -8,6 +8,8 @@ import { Spinner } from '../components/ui'
 import { clock } from '../format'
 import { canDirectPlay } from '../player/direct'
 import { defaultTrack, savePreference, SubtitleMenu, SubtitleOverlay } from '../player/Subtitles'
+import { UpNextCard, type UpNextMode } from '../player/UpNext'
+import { COUNTDOWN_SECONDS, stillWatching, upNextAt } from '../player/autoplay'
 import { parseVTT, type Cue } from '../player/vtt'
 
 const displayTitle = (item: ItemDetail) => {
@@ -19,8 +21,13 @@ const displayTitle = (item: ItemDetail) => {
   return { title: item.title, sub: item.year ? String(item.year) : '' }
 }
 
+// Each episode gets a fresh player, so auto-play can move on to the next.
 export default function Watch() {
   const id = Number(useParams().id)
+  return <Player key={id} id={id} />
+}
+
+function Player({ id }: { id: number }) {
   const navigate = useNavigate()
   const qc = useQueryClient()
   const { data: item } = useQuery({ queryKey: ['item', id], queryFn: () => api.item(id) })
@@ -56,6 +63,19 @@ export default function Watch() {
   const scrubAt = useRef<number>(undefined)
   const dragging = useRef(false)
   const scrubTimer = useRef<number>(undefined)
+  // Auto-play: the card that offers what's next, and its countdown.
+  const { data: prefs } = useQuery({ queryKey: ['playback'], queryFn: api.playback, staleTime: 60_000, retry: false })
+  const { data: upNext } = useQuery({
+    queryKey: ['next', id],
+    queryFn: () => api.next(id),
+    enabled: item?.kind === 'episode',
+    retry: false,
+  })
+  const [card, setCard] = useState<UpNextMode>()
+  const [left, setLeft] = useState(COUNTDOWN_SECONDS)
+  const cardClosed = useRef(false)
+  // Set once this episode is done with, so leaving doesn't save a position.
+  const finished = useRef(false)
 
   const duration = item?.durationMs ? item.durationMs / 1000 : 0
   const position = useCallback(() => offset.current + (video.current?.currentTime ?? 0), [])
@@ -171,6 +191,7 @@ export default function Watch() {
   useEffect(() => {
     if (!item) return
     const save = () => {
+      if (finished.current) return
       const pos = position()
       if (pos > 1) api.setProgress(item.id, Math.round(pos * 1000)).catch(() => {})
     }
@@ -233,7 +254,70 @@ export default function Watch() {
 
   const toggleFull = () => {
     if (document.fullscreenElement) document.exitFullscreen()
-    else wrap.current?.requestFullscreen()
+    // The whole page, so full screen carries on into the next episode.
+    else document.documentElement.requestFullscreen()
+  }
+
+  const autoPlay = prefs?.autoPlay ?? true
+  const at = upNextAt(duration, item?.mediaInfo?.creditsMs)
+
+  // Done with this episode: mark it watched and play the next.
+  const playNext = useCallback(
+    (auto: boolean) => {
+      const next = upNext?.next
+      if (!item || !next || finished.current) return
+      finished.current = true
+      if (auto) stillWatching.autoPlayed()
+      api.setProgress(item.id, 0, true).catch(() => {})
+      navigate(`/watch/${next.id}`, { replace: true })
+    },
+    [item, upNext, navigate],
+  )
+
+  // Leave for the episode's page, as the card's Cancel does.
+  const toDetails = () => {
+    if (item) navigate(`/item/${item.id}`, { replace: true })
+  }
+
+  // Show the card once the credits start; take it away when someone seeks back before them.
+  useEffect(() => {
+    if (!item || at === undefined || !upNext) return
+    if (time < at - 0.25) {
+      if (card) setCard(undefined)
+      setLeft(COUNTDOWN_SECONDS)
+      cardClosed.current = false
+      return
+    }
+    if (card) return
+    if (upNext.next && autoPlay) {
+      if (stillWatching.shouldAsk()) setCard('still')
+      else if (prefs?.binge) playNext(true)
+      else setCard('countdown')
+    } else if (upNext.similar && !cardClosed.current) {
+      setCard('similar')
+    }
+  }, [item, at, upNext, time, card, autoPlay, prefs, playNext])
+
+  // Count down while the video plays.
+  useEffect(() => {
+    if (card !== 'countdown' || paused) return
+    if (left <= 0) {
+      playNext(true)
+      return
+    }
+    const t = window.setTimeout(() => setLeft((l) => l - 1), 1000)
+    return () => window.clearTimeout(t)
+  }, [card, paused, left, playNext])
+
+  const ended = () => {
+    if (!item) return
+    if (upNext?.next && autoPlay) {
+      if (stillWatching.shouldAsk()) setCard('still')
+      else playNext(true)
+      return
+    }
+    finished.current = true
+    api.setProgress(item.id, 0, true).then(() => navigate(-1))
   }
 
   const poke = useCallback(() => {
@@ -244,6 +328,7 @@ export default function Watch() {
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
+      stillWatching.input()
       if (e.target instanceof HTMLInputElement) return
       poke()
       switch (e.key) {
@@ -289,6 +374,7 @@ export default function Watch() {
       ref={wrap}
       onMouseMove={poke}
       onTouchStart={poke}
+      onPointerDown={() => stillWatching.input()}
       className={`fixed inset-0 z-50 bg-black text-white select-none ${chrome ? '' : 'cursor-none'}`}
     >
       <video
@@ -310,11 +396,30 @@ export default function Watch() {
         onPlaying={() => setWaiting(false)}
         onCanPlay={() => setWaiting(false)}
         onVolumeChange={() => setMuted(!!video.current?.muted)}
-        onEnded={() => item && api.setProgress(item.id, 0, true).then(() => navigate(-1))}
+        onEnded={ended}
         onError={() => mode === 'direct' && startHls(position())}
       />
 
       {sub && !sub.burnIn && !error && <SubtitleOverlay cues={cues} position={position} lifted={chrome} />}
+
+      {card && !error && (upNext?.next ?? upNext?.similar) && (
+        <UpNextCard
+          mode={card}
+          item={(card === 'similar' ? upNext?.similar : upNext?.next)!}
+          left={left}
+          lifted={chrome}
+          onPlay={() => {
+            if (card === 'similar') navigate(`/item/${upNext!.similar!.id}`, { replace: true })
+            else playNext(false)
+          }}
+          onCancel={() => {
+            if (card === 'similar') {
+              cardClosed.current = true
+              setCard(undefined)
+            } else toDetails()
+          }}
+        />
+      )}
 
       {(waiting || !item) && !error && (
         <div className="pointer-events-none absolute inset-0 grid place-items-center">
