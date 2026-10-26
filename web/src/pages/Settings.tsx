@@ -3,6 +3,7 @@ import { ChevronLeft, Folder, FolderOpen, Monitor, Plus, RefreshCw, Trash2, User
 import { useState, type FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { api, type User } from '../api'
+import { MediaAnalysis } from '../components/MediaAnalysis'
 import { LibraryIcon, useLibraries } from '../components/Shell'
 import { Button, Field, inputClass } from '../components/ui'
 import { Integrations } from './Integrations'
@@ -14,6 +15,7 @@ export default function Settings() {
     <div className="max-w-3xl space-y-12">
       <h1 className="text-2xl font-bold tracking-tight">Settings</h1>
       {me?.isAdmin && <Libraries />}
+      {me?.isAdmin && <MediaAnalysis />}
       {me?.isAdmin && <Users />}
       {me?.isAdmin && <HomeNetwork />}
       {me?.isAdmin && <Integrations />}

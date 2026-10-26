@@ -16,6 +16,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/yeixio/matinee/internal/analyze"
 	"github.com/yeixio/matinee/internal/artwork"
 	"github.com/yeixio/matinee/internal/download"
 	"github.com/yeixio/matinee/internal/probe"
@@ -30,6 +31,7 @@ type client struct {
 	t     *testing.T
 	base  string
 	token string
+	srv   *Server
 }
 
 func (c *client) do(method, path string, body any, out any) int {
@@ -84,12 +86,14 @@ func newTestServer(t *testing.T) (*client, string) {
 		Subtitles: subtitle.NewConverter("ffmpeg", filepath.Join(tmp, "subtitles")), Log: log, BackgroundCtx: ctx,
 	}
 	dl.SubtitleStream = srv.BurnStream
+	// Not running: tests that want it start srv.Analyzer.Run themselves.
+	srv.Analyzer = &analyze.Analyzer{Store: db, Prober: probe.Prober{Path: "ffprobe"}, Log: log}
 	done := make(chan struct{})
 	go func() { dl.Run(ctx); close(done) }()
 	t.Cleanup(func() { cancel(); <-done })
 	ts := httptest.NewServer(srv.Handler())
 	t.Cleanup(ts.Close)
-	return &client{t: t, base: ts.URL}, tmp
+	return &client{t: t, base: ts.URL, srv: srv}, tmp
 }
 
 func waitForScan(t *testing.T, c *client) {

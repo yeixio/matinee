@@ -210,6 +210,10 @@ var migrations = []string{
 	"CREATE INDEX issues_item ON issues(item_id)",
 	// Requests are matched to the libraries by TMDB id.
 	"CREATE INDEX items_tmdb ON items(kind, tmdb_id)",
+	// 21–23: what the background analysis found in each file (see mediainfo.go).
+	"ALTER TABLE items ADD COLUMN media_info TEXT",
+	"ALTER TABLE items ADD COLUMN media_tags TEXT",
+	"ALTER TABLE items ADD COLUMN media_key TEXT",
 }
 
 func now() int64 { return time.Now().Unix() }

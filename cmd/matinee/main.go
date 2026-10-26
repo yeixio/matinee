@@ -18,6 +18,7 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/yeixio/matinee/internal/analyze"
 	"github.com/yeixio/matinee/internal/api"
 	"github.com/yeixio/matinee/internal/artwork"
 	"github.com/yeixio/matinee/internal/config"
@@ -87,14 +88,26 @@ func run() error {
 		fetcher.Providers = append(fetcher.Providers, metadata.NewMusicBrainz(version.Version))
 	}
 	db.SetMetadataKinds(fetcher.Kinds()...)
-	scanner.AfterScan = fetcher.FetchLibrary
 	transcoder := stream.NewTranscoder(cfg.FFmpegPath, cfg.TranscodeDir(), log)
 	defer transcoder.Close()
+
+	// Media analysis reads every file once more, slowly and at the lowest
+	// priority, for the details the scan doesn't need (see internal/analyze).
+	analyzer := &analyze.Analyzer{
+		Store: db, Log: log,
+		Prober: probe.Prober{Path: cfg.FFprobePath, Timeout: 2 * time.Minute, LowPriority: true},
+		Busy:   func() bool { return transcoder.Active() > 0 },
+	}
+	scanner.AfterScan = func(ctx context.Context, lib store.Library) {
+		analyzer.Wake()
+		fetcher.FetchLibrary(ctx, lib)
+	}
+	go analyzer.Run(ctx)
 
 	downloads := download.NewManager(db, cfg.FFmpegPath, cfg.DownloadDir(), log)
 
 	apiServer := &api.Server{
-		Store: db, Scanner: scanner, Transcoder: transcoder, Downloads: downloads,
+		Store: db, Scanner: scanner, Transcoder: transcoder, Downloads: downloads, Analyzer: analyzer,
 		Art:       artwork.NewCache(cfg.ImageDir(), cfg.FFmpegPath),
 		Subtitles: subtitle.NewConverter(cfg.FFmpegPath, cfg.SubtitleDir()),
 		Web:       web.FS(), Log: log, BackgroundCtx: ctx,

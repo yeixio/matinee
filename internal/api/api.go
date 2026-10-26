@@ -11,12 +11,14 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"slices"
 	"sort"
 	"strconv"
 	"strings"
 	"sync/atomic"
 	"time"
 
+	"github.com/yeixio/matinee/internal/analyze"
 	"github.com/yeixio/matinee/internal/artwork"
 	"github.com/yeixio/matinee/internal/auth"
 	"github.com/yeixio/matinee/internal/download"
@@ -33,6 +35,7 @@ type Server struct {
 	Scanner    *scan.Scanner
 	Transcoder *stream.Transcoder
 	Downloads  *download.Manager
+	Analyzer   *analyze.Analyzer // nil when media analysis is off for this server
 	Art        *artwork.Cache
 	Subtitles  *subtitle.Converter
 	Web        fs.FS // built web player; nil serves a placeholder
@@ -104,6 +107,9 @@ func (s *Server) routes() []route {
 		{"POST /libraries/{id}/scan", adminOnly, s.scanLibrary},
 		{"GET /libraries/{id}/items", reader, s.libraryItems},
 		{"GET /fs", adminOnly, s.browseFS},
+		{"GET /analysis", adminOnly, s.getAnalysis},
+		{"PUT /analysis", adminOnly, s.putAnalysis},
+		{"POST /items/{id}/analyze", adminOnly, s.analyzeItem},
 
 		{"GET /home", reader, s.home},
 		{"GET /search", reader, s.search},
@@ -567,7 +573,26 @@ func (s *Server) libraryItems(w http.ResponseWriter, r *http.Request) {
 		s.serverError(w, err)
 		return
 	}
+	// ?tag=4k&tag=hdr keeps items with every tag given (see Item.MediaTags).
+	if tags := r.URL.Query()["tag"]; len(tags) > 0 {
+		kept := items[:0]
+		for _, it := range items {
+			if hasAll(it.MediaTags, tags) {
+				kept = append(kept, it)
+			}
+		}
+		items = kept
+	}
 	writeLargeJSON(w, r, items)
+}
+
+func hasAll(have, want []string) bool {
+	for _, w := range want {
+		if !slices.Contains(have, w) {
+			return false
+		}
+	}
+	return true
 }
 
 // browseFS lists subfolders so admins can pick library folders from the browser.
@@ -650,6 +675,14 @@ type itemView struct {
 	MimeType  string           `json:"mimeType,omitempty"`
 	Subtitles []subtitle.Track `json:"subtitles,omitempty"`
 	Parents   []store.Item     `json:"parents"` // root first: show, season
+	// MediaInfo is the background analysis of a file, every stream in
+	// detail; absent until the file is analyzed. MediaInfoStale is true
+	// while the file changed and is waiting to be analyzed again.
+	MediaInfo      *probe.MediaInfo `json:"mediaInfo,omitempty"`
+	MediaInfoStale bool             `json:"mediaInfoStale,omitempty"`
+	// FilePath is where the file is on the server, for admins only.
+	FilePath string `json:"filePath,omitempty"`
+	FileSize int64  `json:"fileSize,omitempty"`
 }
 
 func (s *Server) getItem(w http.ResponseWriter, r *http.Request) {
@@ -660,6 +693,11 @@ func (s *Server) getItem(w http.ResponseWriter, r *http.Request) {
 	v := itemView{Item: it, Parents: []store.Item{}}
 	if it.Playable {
 		v.MimeType = stream.MimeType(it.Path)
+		v.MediaInfo, v.MediaInfoStale = s.mediaInfo(r, it)
+		v.FileSize = it.Size
+		if currentUser(r).IsAdmin {
+			v.FilePath = it.Path
+		}
 	}
 	if it.Playable && it.VideoCodec != "" {
 		v.Subtitles = s.subtitleTracks(r.Context(), it)

@@ -145,6 +145,9 @@ export type Item = {
   // True until the server has looked the item up online.
   pending?: boolean
   onWatchList?: boolean
+  // What the background analysis found, like 4k, hdr, dolby-vision, atmos,
+  // 5.1 (see openapi.yaml). Shows and seasons get their episodes' tags.
+  mediaTags?: string[]
 }
 
 // Only movies and shows go on a watch list.
@@ -166,7 +169,95 @@ export type SubtitleTrack = {
   burnIn?: boolean
 }
 
-export type ItemDetail = Item & { mimeType?: string; subtitles?: SubtitleTrack[]; parents: Item[] }
+export type HDR = 'dolby-vision' | 'hdr10+' | 'hdr10' | 'hlg'
+
+export type VideoStream = {
+  index: number
+  codec: string
+  profile?: string
+  width: number
+  height: number
+  resolution: string
+  frameRate?: number
+  bitrate?: number
+  bitDepth?: number
+  pixFmt?: string
+  colorPrimaries?: string
+  colorTransfer?: string
+  colorSpace?: string
+  hdr?: HDR
+  // Dolby Vision only: what players without it show instead.
+  hdrBase?: Exclude<HDR, 'dolby-vision'>
+  dvProfile?: number
+  dvLevel?: number
+  language?: string
+  title?: string
+  default?: boolean
+}
+
+export type AudioStream = {
+  index: number
+  codec: string
+  profile?: string
+  channels: number
+  channelLayout?: string
+  sampleRate?: number
+  bitDepth?: number
+  bitrate?: number
+  atmos?: boolean
+  dtsx?: boolean
+  language?: string
+  title?: string
+  default?: boolean
+  forced?: boolean
+  commentary?: boolean
+  descriptive?: boolean
+}
+
+export type EmbeddedSubtitle = {
+  index: number
+  codec: string
+  language?: string
+  title?: string
+  default?: boolean
+  forced?: boolean
+  sdh?: boolean
+}
+
+// A file's streams in detail, from the server's background analysis.
+export type MediaInfo = {
+  container: string
+  size: number
+  durationMs: number
+  bitrate?: number
+  video: VideoStream[]
+  audio: AudioStream[]
+  subtitles: EmbeddedSubtitle[]
+  chapters?: number
+  error?: string
+  analyzedAt: number
+}
+
+export type ItemDetail = Item & {
+  mimeType?: string
+  subtitles?: SubtitleTrack[]
+  parents: Item[]
+  // Left out until the file is analyzed; stale while it changed and waits to be analyzed again.
+  mediaInfo?: MediaInfo
+  mediaInfoStale?: boolean
+  filePath?: string // admins only
+  fileSize?: number
+}
+
+export type AnalysisMode = 'gentle' | 'normal' | 'off'
+export type AnalysisStatus = {
+  mode: AnalysisMode
+  state: 'analyzing' | 'waiting' | 'slowDisk' | 'idle' | 'off'
+  total: number
+  done: number
+  unreadable: number
+  current?: string
+}
 
 export class ApiError extends Error {
   status: number
@@ -220,6 +311,9 @@ export const api = {
   browse: (path: string) =>
     request<{ path: string; parent: string; dirs: string[] }>('GET', `/api/v1/fs?path=${encodeURIComponent(path)}`),
 
+  analysis: () => request<AnalysisStatus>('GET', '/api/v1/analysis'),
+  setAnalysisMode: (mode: AnalysisMode) => request<AnalysisStatus>('PUT', '/api/v1/analysis', { mode }),
+  reanalyze: (id: number) => request<void>('POST', `/api/v1/items/${id}/analyze`),
   settings: () => request<Settings>('GET', '/api/v1/settings'),
   saveSettings: (s: Partial<Settings>) => request<Settings>('PUT', '/api/v1/settings', s),
   users: () => request<User[]>('GET', '/api/v1/users'),
