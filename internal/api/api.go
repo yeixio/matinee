@@ -31,18 +31,21 @@ import (
 )
 
 type Server struct {
-	Store      *store.Store
-	Scanner    *scan.Scanner
-	Transcoder *stream.Transcoder
-	HW         *hwaccel.Manager // hardware transcoding; nil means the CPU only
-	Downloads  *download.Manager
-	Analyzer   *analyze.Analyzer // nil when media analysis is off for this server
-	Art        *artwork.Cache
-	Subtitles  *subtitle.Converter
-	Web        fs.FS // built web player; nil serves a placeholder
-	Log        *slog.Logger
-	MediaRoot  string // where the folder picker starts; empty means /
-	Name       string // what the apps call this server
+	Store   *store.Store
+	Scanner *scan.Scanner
+	Watcher *scan.Watcher // nil means libraries aren't watched for changes
+	// ScanInterval is how often every library is rescanned; 0 means never.
+	ScanInterval time.Duration
+	Transcoder   *stream.Transcoder
+	HW           *hwaccel.Manager // hardware transcoding; nil means the CPU only
+	Downloads    *download.Manager
+	Analyzer     *analyze.Analyzer // nil when media analysis is off for this server
+	Art          *artwork.Cache
+	Subtitles    *subtitle.Converter
+	Web          fs.FS // built web player; nil serves a placeholder
+	Log          *slog.Logger
+	MediaRoot    string // where the folder picker starts; empty means /
+	Name         string // what the apps call this server
 	// TrailerSource lists trailers online; nil without a TMDB key.
 	TrailerSource TrailerSource
 	// People has biographies; nil shows only names and photos.
@@ -535,6 +538,19 @@ func (s *Server) createUser(w http.ResponseWriter, r *http.Request) {
 type libraryView struct {
 	store.Library
 	Scanning bool `json:"scanning"`
+	// Watch says how each folder is watched for new files (scan.FolderWatch).
+	Watch []scan.FolderWatch `json:"watch"`
+}
+
+func (s *Server) libraryView(l store.Library, scanning bool) libraryView {
+	v := libraryView{l, scanning, nil}
+	if s.Watcher != nil {
+		v.Watch = s.Watcher.Status(l.ID)
+	}
+	if v.Watch == nil {
+		v.Watch = []scan.FolderWatch{}
+	}
+	return v
 }
 
 func (s *Server) listLibraries(w http.ResponseWriter, r *http.Request) {
@@ -551,7 +567,7 @@ func (s *Server) listLibraries(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		if ok {
-			out = append(out, libraryView{l, s.Scanner.Running(l.ID)})
+			out = append(out, s.libraryView(l, s.Scanner.Running(l.ID)))
 		}
 	}
 	writeJSON(w, http.StatusOK, out)
@@ -594,7 +610,10 @@ func (s *Server) createLibrary(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	go s.Scanner.Scan(s.BackgroundCtx, lib)
-	writeJSON(w, http.StatusCreated, libraryView{lib, true})
+	if s.Watcher != nil {
+		s.Watcher.Reload()
+	}
+	writeJSON(w, http.StatusCreated, s.libraryView(lib, true))
 }
 
 func (s *Server) deleteLibrary(w http.ResponseWriter, r *http.Request) {
@@ -609,6 +628,9 @@ func (s *Server) deleteLibrary(w http.ResponseWriter, r *http.Request) {
 	} else if err != nil {
 		s.serverError(w, err)
 		return
+	}
+	if s.Watcher != nil {
+		s.Watcher.Reload()
 	}
 	w.WriteHeader(http.StatusNoContent)
 }
