@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os/exec"
 	"path/filepath"
+	"strings"
 	"testing"
 
 	"github.com/yeixio/matinee/internal/metadata"
@@ -61,7 +62,7 @@ func TestTrailers(t *testing.T) {
 		t.Fatalf("trailers: %+v", trailers)
 	}
 	local, teaser, online := trailers[0], trailers[1], trailers[2]
-	if local.Name != "Trailer" || local.Source != "local" || local.VideoCodec != "h264" || local.MimeType != "video/mp4" {
+	if local.Name != "Trailer" || local.Source != "local" || local.VideoCodec != "h264" || local.MimeType != "video/mp4" || !strings.Contains(local.Container, "mp4") {
 		t.Errorf("local trailer: %+v", local)
 	}
 	if teaser.Name != "Teaser" || teaser.VideoCodec != "mpeg4" {

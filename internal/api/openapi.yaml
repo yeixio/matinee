@@ -1094,6 +1094,7 @@ components:
           enum: [local, youtube]
           description: Local trailers play through `/items/{id}/trailers/{trailer}/file` or `/hls`; YouTube ones on YouTube.
         mimeType: { type: string, description: Local trailers only. }
+        container: { type: string, description: "Local trailers only, as ffprobe names it, e.g. mov,mp4,m4a,3gp,3g2,mj2." }
         videoCodec: { type: string, description: Local trailers only. }
         audioCodec: { type: string, description: Local trailers only. }
         durationMs: { type: integer, description: Local trailers only. }

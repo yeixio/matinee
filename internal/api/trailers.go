@@ -37,6 +37,7 @@ type trailerView struct {
 	// Local trailers play from /items/{id}/trailers/{trailer}/file or /hls,
 	// and carry what players need to choose between the two.
 	MimeType   string `json:"mimeType,omitempty"`
+	Container  string `json:"container,omitempty"`
 	VideoCodec string `json:"videoCodec,omitempty"`
 	AudioCodec string `json:"audioCodec,omitempty"`
 	DurationMs int64  `json:"durationMs,omitempty"`
@@ -64,7 +65,7 @@ func (s *Server) listTrailers(w http.ResponseWriter, r *http.Request) {
 	for i, t := range s.localTrailers(r.Context(), it) {
 		v := trailerView{
 			ID: "local-" + strconv.Itoa(i), Name: scan.TrailerName(t.path), Source: "local",
-			MimeType: stream.MimeType(t.path), VideoCodec: t.probe.VideoCodec, AudioCodec: t.probe.AudioCodec, DurationMs: t.probe.DurationMs,
+			MimeType: stream.MimeType(t.path), Container: t.probe.Container, VideoCodec: t.probe.VideoCodec, AudioCodec: t.probe.AudioCodec, DurationMs: t.probe.DurationMs,
 		}
 		out = append(out, v)
 	}
