@@ -163,7 +163,8 @@ func (s *Store) UpdateProfile(ctx context.Context, id int64, c ProfileChanges) e
 
 // DeleteProfile removes a profile with its progress and watch list.
 func (s *Store) DeleteProfile(ctx context.Context, id int64) error {
-	if _, err := s.db.ExecContext(ctx, "DELETE FROM settings WHERE key = ?", "theme:user:"+strconv.FormatInt(id, 10)); err != nil {
+	// Per-user settings are keys like "theme:user:<id>".
+	if _, err := s.db.ExecContext(ctx, "DELETE FROM settings WHERE key LIKE ?", "%:user:"+strconv.FormatInt(id, 10)); err != nil {
 		return err
 	}
 	res, err := s.db.ExecContext(ctx, "DELETE FROM users WHERE id = ? AND parent_id IS NOT NULL", id)

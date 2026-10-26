@@ -14,7 +14,7 @@ import (
 
 // MediaInfoVersion goes up when Analyze learns something new, so files
 // analyzed before are looked at again.
-const MediaInfoVersion = 1
+const MediaInfoVersion = 2
 
 // MediaInfo is everything worth knowing about a file's streams, from a
 // slower and more thorough look than the scanner's.
@@ -27,8 +27,11 @@ type MediaInfo struct {
 	Audio      []AudioStream `json:"audio"`
 	Subtitles  []Subtitle    `json:"subtitles"`
 	Chapters   int           `json:"chapters,omitempty"`
-	Error      string        `json:"error,omitempty"` // set when ffprobe couldn't read the file
-	AnalyzedAt int64         `json:"analyzedAt"`      // Unix seconds
+	// CreditsMs is where the closing credits start, when a chapter says so.
+	// Players offer the next episode from there.
+	CreditsMs  int64  `json:"creditsMs,omitempty"`
+	Error      string `json:"error,omitempty"` // set when ffprobe couldn't read the file
+	AnalyzedAt int64  `json:"analyzedAt"`      // Unix seconds
 }
 
 type VideoStream struct {
@@ -175,7 +178,12 @@ type analyzeOutput struct {
 		Tags             map[string]string `json:"tags"`
 		SideData         []sideData        `json:"side_data_list"`
 	} `json:"streams"`
-	Chapters []json.RawMessage `json:"chapters"`
+	Chapters []chapter `json:"chapters"`
+}
+
+type chapter struct {
+	StartTime string            `json:"start_time"`
+	Tags      map[string]string `json:"tags"`
 }
 
 func parseMediaInfo(data []byte) (MediaInfo, error) {
@@ -189,6 +197,7 @@ func parseMediaInfo(data []byte) (MediaInfo, error) {
 		mi.DurationMs = int64(d * 1000)
 	}
 	mi.Size, _ = strconv.ParseInt(o.Format.Size, 10, 64)
+	mi.CreditsMs = creditsStart(o.Chapters, mi.DurationMs)
 	mi.Bitrate, _ = strconv.ParseInt(o.Format.BitRate, 10, 64)
 	for _, s := range o.Streams {
 		switch s.CodecType {
@@ -423,4 +432,41 @@ func ChannelLabel(n int) string {
 		return fmt.Sprintf("%d.0", n)
 	}
 	return fmt.Sprintf("%d.1", n-1)
+}
+
+// creditsStart finds the chapter where the closing credits begin, or 0. It
+// goes by the chapter's title and only looks in the second half of the
+// file, so opening credits and intros don't count.
+func creditsStart(chapters []chapter, durationMs int64) int64 {
+	if durationMs <= 0 {
+		return 0
+	}
+	for _, c := range chapters {
+		start, err := strconv.ParseFloat(c.StartTime, 64)
+		if err != nil {
+			continue
+		}
+		ms := int64(start * 1000)
+		if ms < durationMs/2 || ms >= durationMs {
+			continue
+		}
+		if isCreditsTitle(c.Tags["title"]) {
+			return ms
+		}
+	}
+	return 0
+}
+
+func isCreditsTitle(title string) bool {
+	t := strings.ToLower(strings.TrimSpace(title))
+	if strings.Contains(t, "opening") || strings.Contains(t, "intro") {
+		return false
+	}
+	for _, w := range []string{"credit", "outro", "end titles"} {
+		if strings.Contains(t, w) {
+			return true
+		}
+	}
+	// Anime names the ending theme's chapter ED or Ending.
+	return slices.Contains([]string{"ed", "end", "ending", "ending theme", "ending song"}, t)
 }

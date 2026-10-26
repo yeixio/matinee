@@ -116,6 +116,8 @@ func (s *Server) routes() []route {
 		{"GET /me", reader, s.me},
 		{"GET /me/theme", reader, s.getMyTheme},
 		{"PUT /me/theme", reader, s.putMyTheme},
+		{"GET /me/playback", reader, s.getMyPlayback},
+		{"PUT /me/playback", reader, s.putMyPlayback},
 		{"PUT /me/password", signedIn, s.changeMyPassword},
 		{"GET /themes", public, s.listThemes},
 		{"GET /profiles", reader, s.listProfiles},
@@ -152,6 +154,7 @@ func (s *Server) routes() []route {
 		{"GET /items/{id}", reader, s.getItem},
 		{"GET /items/{id}/children", reader, s.itemChildren},
 		{"GET /items/{id}/related", reader, s.itemRelated},
+		{"GET /items/{id}/next", reader, s.itemNext},
 		{"GET /people/{id}", reader, s.getPerson},
 		{"GET /people/{id}/image", reader, s.personImage},
 		{"PUT /items/{id}/progress", reader, s.setProgress},
@@ -835,7 +838,10 @@ func (s *Server) setProgress(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// Past 92% counts as watched, the way credits usually start.
+	// So does reaching the closing credits, when a chapter says where they are.
 	if it.DurationMs != nil && *it.DurationMs > 0 && req.PositionMs > *it.DurationMs*92/100 {
+		req.Played, req.PositionMs = true, 0
+	} else if mi, _ := s.mediaInfo(r, it); mi != nil && mi.CreditsMs > 0 && req.PositionMs >= mi.CreditsMs {
 		req.Played, req.PositionMs = true, 0
 	}
 	if err := s.Store.SetProgress(r.Context(), currentUser(r).ID, it.ID, req.PositionMs, req.Played); err != nil {

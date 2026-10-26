@@ -413,6 +413,7 @@ export type MediaInfo = {
   audio: AudioStream[]
   subtitles: EmbeddedSubtitle[]
   chapters?: number
+  creditsMs?: number // where the closing credits start, when a chapter says so
   error?: string
   analyzedAt: number
 }
@@ -462,6 +463,16 @@ export type Person = {
 
 // collection: the franchise a movie belongs to, with its titles in the library.
 export type Related = { collection?: { id: number; name: string; items: Item[] }; items: Item[] }
+
+// What to offer when an episode ends: the next episode, or after a show's
+// last one a similar title to open.
+export type NextUp = { next?: Item; similar?: Item }
+
+// Each person's auto-play choices, on every device.
+export type PlaybackPrefs = {
+  autoPlay: boolean // offer the next episode with a countdown
+  binge: boolean // skip the countdown
+}
 
 export type ItemDetail = Item & {
   mimeType?: string
@@ -554,6 +565,8 @@ export const api = {
   // theme: "" follows the server's default.
   myTheme: () => request<{ theme: string }>('GET', '/api/v1/me/theme'),
   setMyTheme: (theme: string) => request<{ theme: string }>('PUT', '/api/v1/me/theme', { theme }),
+  playback: () => request<PlaybackPrefs>('GET', '/api/v1/me/playback'),
+  setPlayback: (p: PlaybackPrefs) => request<PlaybackPrefs>('PUT', '/api/v1/me/playback', p),
   users: () => request<User[]>('GET', '/api/v1/users'),
   profiles: () => request<{ current: number; profiles: ProfileChoice[] }>('GET', '/api/v1/profiles'),
   selectProfile: (id: number, pin?: string) => request<{ user: User }>('POST', '/api/v1/profiles/select', { id, pin }),
@@ -602,6 +615,7 @@ export const api = {
   item: (id: number) => request<ItemDetail>('GET', `/api/v1/items/${id}`),
   children: (id: number) => request<Item[]>('GET', `/api/v1/items/${id}/children`),
   related: (id: number) => request<Related>('GET', `/api/v1/items/${id}/related`),
+  next: (id: number) => request<NextUp>('GET', `/api/v1/items/${id}/next`),
   person: (id: number) => request<Person>('GET', `/api/v1/people/${id}`),
   collections: (q: { library?: number; item?: number } = {}) => {
     const p = new URLSearchParams()

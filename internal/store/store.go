@@ -496,8 +496,8 @@ func (s *Store) DeleteUser(ctx context.Context, userID int64) error {
 		return err
 	}
 	// Its profiles' too.
-	if _, err := t.ExecContext(ctx, `DELETE FROM settings WHERE key IN (
-		SELECT 'theme:user:' || CAST(id AS TEXT) FROM users WHERE parent_id = ?)`, userID); err != nil {
+	if _, err := t.ExecContext(ctx, `DELETE FROM settings WHERE EXISTS (
+		SELECT 1 FROM users u WHERE u.parent_id = ? AND settings.key LIKE '%:user:' || CAST(u.id AS TEXT))`, userID); err != nil {
 		return err
 	}
 	res, err := t.ExecContext(ctx, "DELETE FROM users WHERE id = ? AND guest = 0 AND (is_admin = 0 OR "+otherAdmins+")", userID, userID)

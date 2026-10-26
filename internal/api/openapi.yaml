@@ -277,6 +277,32 @@ paths:
             application/json:
               schema: { $ref: "#/components/schemas/MyTheme" }
         "400": { $ref: "#/components/responses/Error" }
+  /me/playback:
+    get:
+      summary: The current user's auto-play choices
+      responses:
+        "200":
+          description: Their choices; auto-play is on and binge off until they change them.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/PlaybackPrefs" }
+    put:
+      summary: Change the current user's auto-play choices, on every device
+      description: |
+        On the home network without signing in, these are the shared Home
+        account's (or the picked profile's) choices.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/PlaybackPrefs" }
+      responses:
+        "200":
+          description: Saved.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/PlaybackPrefs" }
+        "400": { $ref: "#/components/responses/Error" }
   /themes:
     get:
       summary: The themes people can pick, and the server's default
@@ -789,6 +815,28 @@ paths:
                       name: { type: string }
                       items: { type: array, items: { $ref: "#/components/schemas/Item" }, description: Oldest first, including this title. }
                   items: { type: array, items: { $ref: "#/components/schemas/Item" }, description: Best match first; at most 20. }
+  /items/{id}/next:
+    get:
+      summary: What to offer when an episode ends
+      description: |
+        The next episode: the next in its season, else the first of the
+        following season (specials only lead to other specials). After a
+        show's last episode, a similar title the user hasn't watched instead,
+        to open rather than play. Both are absent for anything else, or when
+        there's nothing to offer. Players show the offer from the episode's
+        `mediaInfo.creditsMs`, else 30 seconds before the end; see
+        docs/autoplay.md.
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      responses:
+        "200":
+          description: The offer.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  next: { $ref: "#/components/schemas/Item" }
+                  similar: { $ref: "#/components/schemas/Item" }
   /people/{id}:
     get:
       summary: Someone in the cast or crew, and their titles in the library
@@ -1812,6 +1860,11 @@ components:
               items: { $ref: '#/components/schemas/Accelerator' }
             detecting: { type: boolean, description: The startup tests are still running. }
             problem: { type: string, description: "When no accelerator works: why a GPU the server can see couldn't be used, such as a missing permission." }
+    PlaybackPrefs:
+      type: object
+      properties:
+        autoPlay: { type: boolean, description: Offer the next episode with a countdown. }
+        binge: { type: boolean, description: Skip the countdown and start the next episode right away. }
     MyTheme:
       type: object
       required: [theme]
@@ -2087,6 +2140,7 @@ components:
         durationMs: { type: integer }
         bitrate: { type: integer, description: Bits per second, all streams. }
         chapters: { type: integer }
+        creditsMs: { type: integer, description: Where the closing credits start, when a chapter is titled so. }
         error: { type: string, description: Set when the file couldn't be read. }
         analyzedAt: { type: integer, description: Unix seconds. }
         video:
