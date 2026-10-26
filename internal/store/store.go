@@ -214,6 +214,8 @@ var migrations = []string{
 	"ALTER TABLE items ADD COLUMN media_info TEXT",
 	"ALTER TABLE items ADD COLUMN media_tags TEXT",
 	"ALTER TABLE items ADD COLUMN media_key TEXT",
+	// 24: genres of movies and shows, for the home screen's genre rows (see genres.go).
+	"ALTER TABLE items ADD COLUMN genres TEXT",
 }
 
 func now() int64 { return time.Now().Unix() }
