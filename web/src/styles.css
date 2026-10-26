@@ -1,9 +1,13 @@
 @import 'tailwindcss';
 @import '@fontsource-variable/inter';
 @import '@fontsource-variable/fraunces';
+@import '@fontsource-variable/orbitron';
 
 @theme {
-  /* Warm "theatre dark" with a coral accent, that gives Matinee its own look. */
+  /* Warm "theatre dark" with a coral accent, that gives Matinee its own look.
+     These are the Matinee theme's colours; src/theme.ts swaps them for the
+     theme someone picks (docs/themes.md). Use these tokens, not white/black,
+     for anything on the page, so light themes work too. */
   --color-ink: #100d12;
   --color-surface: #18141b;
   --color-raised: #221d26;
@@ -13,6 +17,8 @@
   --color-faint: #756b77;
   --color-accent: #ff6a55;
   --color-accent-strong: #ff8873;
+  --color-on-accent: #100d12;
+  --color-danger: #f08a80;
   --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --font-display: 'Fraunces Variable', ui-serif, Georgia, serif;
   --animate-fade: fade 240ms ease-out;
@@ -60,7 +66,12 @@
 }
 
 @utility skeleton {
-  background: linear-gradient(90deg, #221d26 0%, #2c2631 50%, #221d26 100%);
+  background: linear-gradient(
+    90deg,
+    var(--color-raised) 0%,
+    color-mix(in srgb, var(--color-raised), var(--color-text) 7%) 50%,
+    var(--color-raised) 100%
+  );
   background-size: 200% 100%;
   @apply animate-shimmer;
 }

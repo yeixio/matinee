@@ -110,7 +110,7 @@ export function ComingSoonRow() {
             <RemotePoster
               src={u.poster}
               title={upcomingTitle(u)}
-              className="rounded-xl ring-1 ring-white/5 transition group-hover:ring-accent/70"
+              className="rounded-xl ring-1 ring-text/5 transition group-hover:ring-accent/70"
             />
             <div className="mt-2 px-0.5">
               <div className="truncate text-sm font-medium">{upcomingTitle(u)}</div>
@@ -194,7 +194,7 @@ export function ReportProblem({ item }: { item: Item }) {
           placeholder="Like: no sound after 20 minutes"
         />
       </Field>
-      {report.error && <p className="text-sm text-red-400">{report.error.message}</p>}
+      {report.error && <p className="text-sm text-danger">{report.error.message}</p>}
       <div className="flex justify-end">
         <Button variant="primary" disabled={report.isPending}>
           Send
@@ -241,7 +241,7 @@ export function ItemQuality({ item, user }: { item: Item; user?: User }) {
         ))}
       </select>
       {set.isSuccess && <span className="text-accent">Searching…</span>}
-      {set.error && <span className="text-red-400">{set.error.message}</span>}
+      {set.error && <span className="text-danger">{set.error.message}</span>}
     </label>
   )
 }

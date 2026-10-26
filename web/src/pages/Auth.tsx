@@ -59,7 +59,7 @@ function CredentialsForm({ form, cta, newPassword }: { form: ReturnType<typeof u
           required
         />
       </Field>
-      {form.error && <p className="text-sm text-red-400">{form.error}</p>}
+      {form.error && <p className="text-sm text-danger">{form.error}</p>}
       <Button variant="primary" className="w-full" disabled={form.busy}>
         {form.busy ? 'One moment…' : cta}
       </Button>

@@ -1,0 +1,24 @@
+{
+  "id": "sci-fi",
+  "name": "Sci-fi",
+  "description": "Deep space navy with a neon cyan glow and a futuristic typeface.",
+  "author": "Matinee",
+  "scheme": "dark",
+  "fonts": { "display": "orbitron", "body": "inter" },
+  "colors": {
+    "ink": "#04070e",
+    "surface": "#0a1020",
+    "raised": "#111a2e",
+    "line": "#1f2d48",
+    "text": "#e4f6ff",
+    "muted": "#8cb0c6",
+    "faint": "#5b7489",
+    "accent": "#22e5ff",
+    "accentStrong": "#7cf1ff",
+    "onAccent": "#03121a",
+    "danger": "#ff5c7a",
+    "glow": "rgba(34,229,255,0.6)",
+    "glass": "rgba(34,229,255,0.12)",
+    "glassFocused": "rgba(34,229,255,0.28)"
+  }
+}

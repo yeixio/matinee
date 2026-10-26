@@ -15,7 +15,27 @@ export type Settings = {
   hardware: { active: Accelerator | null; available: Accelerator[]; detecting: boolean; problem?: string }
   // Offer TMDB's YouTube trailers next to trailer files.
   remoteTrailers: boolean
+  // The theme people see until they pick their own.
+  theme: string
+  // Theme files on the server that couldn't be loaded, and why.
+  themeProblems: string[]
 }
+
+// A theme as the server sends it, every colour filled in. See docs/themes.md.
+export type Theme = {
+  id: string
+  name: string
+  description?: string
+  author?: string
+  scheme: 'dark' | 'light'
+  builtIn: boolean
+  fonts: { display: string; body: string }
+  colors: Record<ThemeColor, string>
+}
+export type ThemeColor =
+  | 'ink' | 'surface' | 'raised' | 'line' | 'text' | 'muted' | 'faint' | 'accent' | 'accentStrong' | 'onAccent'
+  | 'danger' | 'glow' | 'glass' | 'glassFocused' | 'scrim' | 'track' | 'shade' | 'veil'
+export type ThemeList = { default: string; themes: Theme[] }
 // A GPU backend that passed its test encode on the server.
 export type Accelerator = { id: string; name: string; device?: string; detail?: string; decode: boolean }
 
@@ -394,7 +414,11 @@ export const api = {
   setAnalysisMode: (mode: AnalysisMode) => request<AnalysisStatus>('PUT', '/api/v1/analysis', { mode }),
   reanalyze: (id: number) => request<void>('POST', `/api/v1/items/${id}/analyze`),
   settings: () => request<Settings>('GET', '/api/v1/settings'),
-  saveSettings: (s: Partial<Omit<Settings, 'hardware'>>) => request<Settings>('PUT', '/api/v1/settings', s),
+  saveSettings: (s: Partial<Omit<Settings, 'hardware' | 'themeProblems'>>) => request<Settings>('PUT', '/api/v1/settings', s),
+  themes: () => request<ThemeList>('GET', '/api/v1/themes'),
+  // theme: "" follows the server's default.
+  myTheme: () => request<{ theme: string }>('GET', '/api/v1/me/theme'),
+  setMyTheme: (theme: string) => request<{ theme: string }>('PUT', '/api/v1/me/theme', { theme }),
   users: () => request<User[]>('GET', '/api/v1/users'),
   createUser: (username: string, password: string, isAdmin: boolean) =>
     request<User>('POST', '/api/v1/users', { username, password, isAdmin }),

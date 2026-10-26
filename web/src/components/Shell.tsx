@@ -31,11 +31,11 @@ export function Logo({ className = '' }: { className?: string }) {
 
 const topLink = ({ isActive }: { isActive: boolean }) =>
   `flex items-center gap-2 rounded-full px-4 py-1.5 text-sm transition-colors ${
-    isActive ? 'bg-text text-ink font-medium' : 'text-muted hover:bg-white/5 hover:text-text'
+    isActive ? 'bg-text text-ink font-medium' : 'text-muted hover:bg-text/5 hover:text-text'
   }`
 
 const iconLink = ({ isActive }: { isActive: boolean }) =>
-  `rounded-full p-2 transition-colors hover:bg-white/5 hover:text-text ${isActive ? 'text-text' : 'text-muted'}`
+  `rounded-full p-2 transition-colors hover:bg-text/5 hover:text-text ${isActive ? 'text-text' : 'text-muted'}`
 
 const tabLink = ({ isActive }: { isActive: boolean }) =>
   `flex flex-1 flex-col items-center gap-1 py-2 text-[11px] ${isActive ? 'text-accent' : 'text-muted'}`
@@ -88,7 +88,7 @@ export default function Shell({ user }: { user: User }) {
             ))}
           </nav>
           <div className="ml-auto flex items-center gap-1">
-            <NavLink to="/search" className="hidden rounded-full p-2 text-muted hover:bg-white/5 hover:text-text md:block" aria-label="Search">
+            <NavLink to="/search" className="hidden rounded-full p-2 text-muted hover:bg-text/5 hover:text-text md:block" aria-label="Search">
               <Search className="size-5" />
             </NavLink>
             {arr && (
@@ -100,7 +100,7 @@ export default function Shell({ user }: { user: User }) {
               <NavLink to="/requests" className={(a) => `relative ${iconLink(a)}`} aria-label="Requests" title="Requests">
                 <Inbox className="size-5" />
                 {waiting > 0 && (
-                  <span className="absolute -top-0.5 -right-0.5 grid h-4 min-w-4 place-items-center rounded-full bg-accent px-1 text-[10px] font-semibold text-ink">
+                  <span className="absolute -top-0.5 -right-0.5 grid h-4 min-w-4 place-items-center rounded-full bg-accent px-1 text-[10px] font-semibold text-on-accent">
                     {waiting}
                   </span>
                 )}
@@ -108,18 +108,18 @@ export default function Shell({ user }: { user: User }) {
             )}
             {user.guest ? (
               // Watching at home without an account; signing in brings your own progress and settings.
-              <NavLink to="/sign-in" className="flex items-center gap-2 rounded-full px-3 py-1.5 text-sm text-muted hover:bg-white/5 hover:text-text">
+              <NavLink to="/sign-in" className="flex items-center gap-2 rounded-full px-3 py-1.5 text-sm text-muted hover:bg-text/5 hover:text-text">
                 <LogIn className="size-4" /> Sign in
               </NavLink>
             ) : (
-              <NavLink to="/settings" className="rounded-full p-2 text-muted hover:bg-white/5 hover:text-text" aria-label="Settings">
+              <NavLink to="/settings" className="rounded-full p-2 text-muted hover:bg-text/5 hover:text-text" aria-label="Settings">
                 <Settings className="size-5" />
               </NavLink>
             )}
             {!user.guest && (
               <button
                 onClick={logout}
-                className="hidden items-center gap-2 rounded-full py-1 pr-3 pl-1 text-sm text-muted hover:bg-white/5 hover:text-text md:flex"
+                className="hidden items-center gap-2 rounded-full py-1 pr-3 pl-1 text-sm text-muted hover:bg-text/5 hover:text-text md:flex"
                 title="Sign out"
               >
                 <span className="grid size-7 place-items-center rounded-full bg-raised text-xs font-semibold text-text uppercase">{user.username[0]}</span>

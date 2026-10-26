@@ -1,0 +1,21 @@
+{
+  "id": "light",
+  "name": "Light",
+  "description": "Warm paper white with coral, for a bright room.",
+  "author": "Matinee",
+  "scheme": "light",
+  "fonts": { "display": "fraunces", "body": "inter" },
+  "colors": {
+    "ink": "#f7f3ee",
+    "surface": "#efe8e0",
+    "raised": "#ffffff",
+    "line": "#ddd3c8",
+    "text": "#1d171f",
+    "muted": "#5c525d",
+    "faint": "#857a86",
+    "accent": "#d33f2b",
+    "accentStrong": "#b83423",
+    "onAccent": "#ffffff",
+    "danger": "#b42318"
+  }
+}

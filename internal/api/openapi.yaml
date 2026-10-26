@@ -231,6 +231,53 @@ paths:
             application/json:
               schema: { $ref: "#/components/schemas/User" }
         "401": { $ref: "#/components/responses/Error" }
+  /me/theme:
+    get:
+      summary: The theme the current user picked
+      responses:
+        "200":
+          description: Their theme.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/MyTheme" }
+    put:
+      summary: Pick a theme for the current user, on every device
+      description: |
+        On the home network without signing in, this is the shared Home
+        account's theme. Send `""` to follow the server's default again.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/MyTheme" }
+      responses:
+        "200":
+          description: Saved.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/MyTheme" }
+        "400": { $ref: "#/components/responses/Error" }
+  /themes:
+    get:
+      summary: The themes people can pick, and the server's default
+      description: |
+        The built-in themes, then the theme files in the server's
+        `<data>/themes` folder. No sign-in needed. Colours are complete:
+        the ones a theme file left out are filled in. See docs/themes.md.
+      security: []
+      responses:
+        "200":
+          description: Themes, the built-in default first.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [default, themes]
+                properties:
+                  default: { type: string, example: matinee, description: What people see until they pick their own. }
+                  themes:
+                    type: array
+                    items: { $ref: "#/components/schemas/Theme" }
   /devices:
     get:
       summary: Devices signed in as the current user
@@ -1192,6 +1239,14 @@ components:
         remoteTrailers:
           type: boolean
           description: Offer TMDB's YouTube trailers along with trailer files. On by default.
+        theme:
+          type: string
+          description: The theme everyone sees until they pick their own. `matinee` by default.
+        themeProblems:
+          type: array
+          readOnly: true
+          items: { type: string }
+          description: Theme files in `<data>/themes` that couldn't be loaded, and why. Ignored in a `PUT`.
         hardwareAcceleration:
           type: string
           enum: [auto, off, nvenc, vaapi, qsv, videotoolbox, amf, v4l2m2m]
@@ -1213,6 +1268,31 @@ components:
               items: { $ref: '#/components/schemas/Accelerator' }
             detecting: { type: boolean, description: The startup tests are still running. }
             problem: { type: string, description: "When no accelerator works: why a GPU the server can see couldn't be used, such as a missing permission." }
+    MyTheme:
+      type: object
+      required: [theme]
+      properties:
+        theme: { type: string, example: sci-fi, description: 'A theme id, or "" for the server''s default.' }
+    Theme:
+      type: object
+      required: [id, name, scheme, fonts, colors, builtIn]
+      properties:
+        id: { type: string, example: sci-fi }
+        name: { type: string, example: Sci-fi }
+        description: { type: string }
+        author: { type: string }
+        scheme: { type: string, enum: [dark, light], description: What the system's own controls should match. }
+        builtIn: { type: boolean, description: Ships with Matinee, rather than a file an admin added. }
+        fonts:
+          type: object
+          properties:
+            display: { type: string, enum: [fraunces, inter, orbitron], description: Titles and headings. }
+            body: { type: string, enum: [inter] }
+        colors:
+          type: object
+          description: Every colour as `#rrggbb` or `rgba(r,g,b,a)`. See docs/themes.md for what each is for.
+          additionalProperties: { type: string }
+          example: { ink: "#04070e", surface: "#0a1020", raised: "#111a2e", line: "#1f2d48", text: "#e4f6ff", muted: "#8cb0c6", faint: "#5b7489", accent: "#22e5ff", accentStrong: "#7cf1ff", onAccent: "#03121a", danger: "#ff5c7a", glow: "rgba(34,229,255,0.6)", glass: "rgba(34,229,255,0.12)", glassFocused: "rgba(34,229,255,0.28)", scrim: "#000000", track: "rgba(228,246,255,0.25)", shade: "rgba(0,0,0,0.55)", veil: "rgba(4,7,14,0.35)" }
     Trailer:
       type: object
       required: [id, name, source]
@@ -1402,6 +1482,8 @@ components:
             mediaInfoStale: { type: boolean, description: The file changed since it was analyzed; a new analysis is on its way. }
             filePath: { type: string, description: Where the file is on the server. Admins only. }
             fileSize: { type: integer, description: Bytes. }
+            details: { $ref: "#/components/schemas/Details" }
+            credits: { $ref: "#/components/schemas/Credits" }
     MediaInfo:
       type: object
       description: A file's streams in detail, from the background analysis. Left out until the file is analyzed.
@@ -1488,8 +1570,6 @@ components:
         done: { type: integer, description: Files analyzed as they are now. }
         unreadable: { type: integer, description: Files among those done that couldn't be read. }
         current: { type: string, description: Title of the file being analyzed. }
-            details: { $ref: "#/components/schemas/Details" }
-            credits: { $ref: "#/components/schemas/Credits" }
     Details:
       type: object
       description: |

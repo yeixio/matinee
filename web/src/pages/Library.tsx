@@ -37,13 +37,13 @@ export default function Library() {
         <div className="ml-auto flex rounded-lg bg-surface p-1 text-sm">
           <button
             onClick={() => setSort('title')}
-            className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 ${sort === 'title' ? 'bg-white/10 text-text' : 'text-muted'}`}
+            className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 ${sort === 'title' ? 'bg-text/10 text-text' : 'text-muted'}`}
           >
             <ArrowDownAZ className="size-4" /> <span className="hidden sm:inline">Title</span>
           </button>
           <button
             onClick={() => setSort('added')}
-            className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 ${sort === 'added' ? 'bg-white/10 text-text' : 'text-muted'}`}
+            className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 ${sort === 'added' ? 'bg-text/10 text-text' : 'text-muted'}`}
           >
             <Clock className="size-4" /> <span className="hidden sm:inline">Added</span>
           </button>

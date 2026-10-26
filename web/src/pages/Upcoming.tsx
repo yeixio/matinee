@@ -59,7 +59,7 @@ export default function Upcoming() {
         <h1 className="text-2xl font-bold tracking-tight">Coming soon</h1>
         <p className="mt-1 text-sm text-muted">New episodes and movie releases over the next two months that aren't in yet.</p>
         {data.unavailable && (
-          <p className="mt-2 text-sm text-red-400">{data.unavailable.join(' and ')} didn't answer, so some may be missing.</p>
+          <p className="mt-2 text-sm text-danger">{data.unavailable.join(' and ')} didn't answer, so some may be missing.</p>
         )}
       </div>
       {days.length === 0 && <p className="text-muted">Nothing on the way. Ask for something new from Requests.</p>}

@@ -25,6 +25,7 @@ A fast, self-hosted media server for your movies, TV and music. Point it at your
 - **People:** an admin plus as many accounts as you like, each with their own history.
 - **Downloads** for watching offline in the Matinee apps. A download is a job on the server, not a stream: it's prepared in the background (the original file, or a single MP4 at 1080p, 720p or 480p), checksummed, then fetched by the phone at its own pace, resuming where it broke off. Jobs survive restarts and retry on their own, and watch progress made offline is merged back when the phone reconnects, with the latest change winning.
 - **Radarr and Sonarr** (optional): people ask for movies and shows and an admin approves them, everyone sees what's coming soon, and anyone can report a problem with what they're watching. Admins can change a title's quality or have a bad file replaced. [Setting it up](#radarr-and-sonarr).
+- **Themes:** seven built in (Matinee, Dark, Light, Clean, Sci-fi, Drive-in, High contrast), picked by each person under Settings → Appearance and followed by the web player and the phone and TV apps. Add your own with a small JSON file; see [docs/themes.md](docs/themes.md).
 - **Devices:** sign in a phone or TV by typing the code it shows at `/link`, and see or sign out every device you're signed in on under Settings.
 
 ## Run it

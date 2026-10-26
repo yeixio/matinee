@@ -21,7 +21,7 @@ export function PersonPhoto({ id, name, hasPhoto, className = '' }: { id: number
   const h = hue(name)
   return (
     <div
-      className={`relative grid place-items-center overflow-hidden rounded-full ring-1 ring-white/10 ${className}`}
+      className={`relative grid place-items-center overflow-hidden rounded-full ring-1 ring-text/10 ${className}`}
       style={{ background: `linear-gradient(140deg, hsl(${h} 30% 28%), hsl(${(h + 40) % 360} 25% 14%))` }}
     >
       <span className="text-lg font-semibold text-white/80">{initials}</span>

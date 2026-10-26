@@ -1,0 +1,21 @@
+{
+  "id": "matinee",
+  "name": "Matinee",
+  "description": "Warm theatre dark with a coral accent. The house look.",
+  "author": "Matinee",
+  "scheme": "dark",
+  "fonts": { "display": "fraunces", "body": "inter" },
+  "colors": {
+    "ink": "#100d12",
+    "surface": "#18141b",
+    "raised": "#221d26",
+    "line": "#322b36",
+    "text": "#f4efea",
+    "muted": "#aca2ac",
+    "faint": "#756b77",
+    "accent": "#ff6a55",
+    "accentStrong": "#ff8873",
+    "onAccent": "#100d12",
+    "danger": "#f08a80"
+  }
+}

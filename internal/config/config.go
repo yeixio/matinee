@@ -44,6 +44,9 @@ func (c Config) ImageDir() string     { return filepath.Join(c.DataDir, "images"
 func (c Config) SubtitleDir() string  { return filepath.Join(c.DataDir, "subtitles") }
 func (c Config) DownloadDir() string  { return filepath.Join(c.DataDir, "downloads") }
 
+// ThemeDir holds an admin's own theme files (docs/themes.md).
+func (c Config) ThemeDir() string { return filepath.Join(c.DataDir, "themes") }
+
 // Load reads flags, falling back to MATINEE_* environment variables, then defaults.
 func Load(args []string) (Config, error) {
 	fs := flag.NewFlagSet("matinee", flag.ContinueOnError)

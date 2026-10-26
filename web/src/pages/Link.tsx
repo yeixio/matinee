@@ -87,7 +87,7 @@ export default function Link({ user }: { user: User }) {
             </Button>
           </form>
 
-          {pending.isError && <p className="mt-4 text-sm text-red-400">{pending.error.message}</p>}
+          {pending.isError && <p className="mt-4 text-sm text-danger">{pending.error.message}</p>}
 
           {pending.data && (
             <div className="mt-6 animate-fade rounded-2xl border border-accent/30 bg-surface p-5">
@@ -103,7 +103,7 @@ export default function Link({ user }: { user: User }) {
                 </div>
               </div>
               <p className="mt-4 text-xs text-faint">Only approve a device you're holding or can see. It gets the same access you have.</p>
-              {decide.isError && <p className="mt-3 text-sm text-red-400">{decide.error.message}</p>}
+              {decide.isError && <p className="mt-3 text-sm text-danger">{decide.error.message}</p>}
               <div className="mt-5 flex justify-end gap-2">
                 <Button variant="ghost" disabled={decide.isPending} onClick={() => decide.mutate(false)}>
                   Decline

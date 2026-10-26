@@ -17,10 +17,10 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 
 export function Button({ variant = 'secondary', icon, children, className = '', ...rest }: ButtonProps) {
   const styles = {
-    primary: 'bg-accent text-ink hover:bg-accent-strong font-semibold',
-    secondary: 'bg-white/10 text-text hover:bg-white/15',
-    ghost: 'text-muted hover:text-text hover:bg-white/5',
-    danger: 'bg-red-500/15 text-red-300 hover:bg-red-500/25',
+    primary: 'bg-accent text-on-accent hover:bg-accent-strong font-semibold',
+    secondary: 'bg-text/10 text-text hover:bg-text/15',
+    ghost: 'text-muted hover:text-text hover:bg-text/5',
+    danger: 'bg-danger/15 text-danger hover:bg-danger/25',
   }[variant]
   return (
     <button
