@@ -20,6 +20,7 @@ import (
 	"github.com/yeixio/matinee/internal/artwork"
 	"github.com/yeixio/matinee/internal/auth"
 	"github.com/yeixio/matinee/internal/download"
+	"github.com/yeixio/matinee/internal/hwaccel"
 	"github.com/yeixio/matinee/internal/probe"
 	"github.com/yeixio/matinee/internal/scan"
 	"github.com/yeixio/matinee/internal/store"
@@ -32,6 +33,7 @@ type Server struct {
 	Store      *store.Store
 	Scanner    *scan.Scanner
 	Transcoder *stream.Transcoder
+	HW         *hwaccel.Manager // hardware transcoding; nil means the CPU only
 	Downloads  *download.Manager
 	Art        *artwork.Cache
 	Subtitles  *subtitle.Converter

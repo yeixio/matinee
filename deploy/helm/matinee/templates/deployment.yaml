@@ -19,14 +19,41 @@ spec:
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
     spec:
+      {{- $gpu := .Values.gpu }}
+      {{- $podSecurity := deepCopy .Values.podSecurityContext }}
+      {{- $security := deepCopy .Values.securityContext }}
+      {{- $resources := deepCopy .Values.resources }}
+      {{- $limits := $resources.limits | default dict }}
+      {{- if eq $gpu.type "vaapi" }}
+      {{- with $gpu.vaapi.groups }}
+      {{- $_ := set $podSecurity "supplementalGroups" (concat ($podSecurity.supplementalGroups | default list) .) }}
+      {{- end }}
+      {{- if $gpu.vaapi.resource }}
+      {{- $_ := set $limits $gpu.vaapi.resource 1 }}
+      {{- else }}
+      {{- /* Without a device plugin, only a privileged container may open the node's GPU. */}}
+      {{- $_ := set $security "privileged" true }}
+      {{- $_ := unset $security "allowPrivilegeEscalation" }}
+      {{- end }}
+      {{- else if eq $gpu.type "nvidia" }}
+      {{- $_ := set $limits "nvidia.com/gpu" $gpu.nvidia.count }}
+      {{- with $gpu.nvidia.runtimeClassName }}
+      runtimeClassName: {{ . }}
+      {{- end }}
+      {{- else if ne $gpu.type "none" }}
+      {{- fail "gpu.type must be none, vaapi or nvidia" }}
+      {{- end }}
+      {{- if $limits }}
+      {{- $_ := set $resources "limits" $limits }}
+      {{- end }}
       securityContext:
-        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+        {{- toYaml $podSecurity | nindent 8 }}
       containers:
         - name: matinee
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
+            {{- toYaml $security | nindent 12 }}
           ports:
             - name: http
               containerPort: 7171
@@ -63,6 +90,10 @@ spec:
                   name: {{ .Values.tmdb.existingSecret | default (printf "%s-tmdb" (include "matinee.fullname" .)) }}
                   key: tmdb-api-key
             {{- end }}
+            {{- if and (eq .Values.gpu.type "vaapi") .Values.gpu.vaapi.device }}
+            - name: MATINEE_VAAPI_DEVICE
+              value: {{ .Values.gpu.vaapi.device | quote }}
+            {{- end }}
             {{- with .Values.env }}
             {{- toYaml . | nindent 12 }}
             {{- end }}
@@ -83,7 +114,7 @@ spec:
             periodSeconds: 3
             failureThreshold: 60
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+            {{- toYaml $resources | nindent 12 }}
           volumeMounts:
             - name: cache
               mountPath: /cache
