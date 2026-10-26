@@ -1,6 +1,6 @@
 // Labels for cast, crew and details, shared by the details and person pages.
 // The phone and TV apps keep a copy in src/people.ts.
-import type { Credit } from './api'
+import type { Credit, Details } from './api'
 
 // "Walter White · 62 episodes", or the job for crew.
 export function roleLabel(c: Credit): string {
@@ -80,4 +80,28 @@ export function lifeLabel(p: { birthday?: string; deathday?: string; birthplace?
   }
   if (!born) return p.birthplace ? `Born in ${p.birthplace}` : ''
   return p.birthplace ? `Born ${born} in ${p.birthplace}` : `Born ${born}`
+}
+
+// The rows of a title's About section, in reading order, skipping unknowns.
+export function detailFacts(d: Details, kind: string): [string, string][] {
+  const show = kind === 'show'
+  const rows: [string, string][] = []
+  const add = (label: string, value?: string) => value && rows.push([label, value])
+  const list = (one: string, many: string, values?: string[]) => add(values && values.length > 1 ? many : one, values?.join(', '))
+  add(show ? 'First aired' : kind === 'movie' ? 'Released' : 'Aired', dateLabel(d.releaseDate))
+  add('Ended', dateLabel(d.endDate))
+  if (show && d.status !== 'Ended') add('Status', d.status)
+  if (show && d.seasons) add('Seasons', `${d.seasons} (${d.episodes ?? '?'} episodes)`)
+  add('Rated', d.certification)
+  add('Genres', d.genres?.join(', '))
+  add('Original title', d.originalTitle)
+  add('Original language', d.originalLanguage)
+  if (d.languages && d.languages.length > 1) add('Spoken languages', d.languages.join(', '))
+  list('Studio', 'Studios', d.studios)
+  list('Network', 'Networks', d.networks)
+  list('Country', 'Countries', d.countries)
+  add('Collection', d.collection?.name)
+  add('Budget', money(d.budget))
+  add('Box office', money(d.revenue))
+  return rows
 }

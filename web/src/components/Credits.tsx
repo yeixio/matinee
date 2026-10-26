@@ -3,7 +3,7 @@ import { useEffect, useState, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { personImageUrl, type Award, type Credit, type Details, type ItemDetail } from '../api'
 import { hue } from '../format'
-import { castLine, crewLine, dateLabel, money, roleLabel } from '../people'
+import { castLine, crewLine, detailFacts, roleLabel } from '../people'
 import { Row } from './Row'
 import { Button } from './ui'
 
@@ -207,24 +207,7 @@ function Section({ title, children }: { title: string; children: ReactNode }) {
 }
 
 function Facts({ d, kind }: { d: Details; kind: string }) {
-  const show = kind === 'show'
-  const rows: [string, ReactNode][] = []
-  const add = (label: string, value?: ReactNode) => value && rows.push([label, value])
-  add(show ? 'First aired' : kind === 'movie' ? 'Released' : 'Aired', dateLabel(d.releaseDate))
-  add('Ended', dateLabel(d.endDate))
-  if (show && d.status && d.status !== 'Ended') add('Status', d.status)
-  add('Seasons', show && d.seasons ? `${d.seasons} (${d.episodes ?? '?'} episodes)` : '')
-  add('Rated', d.certification)
-  add('Genres', d.genres?.join(', '))
-  add('Original title', d.originalTitle)
-  add('Original language', d.originalLanguage)
-  add('Spoken languages', d.languages && d.languages.length > 1 ? d.languages.join(', ') : '')
-  add(d.studios && d.studios.length > 1 ? 'Studios' : 'Studio', d.studios?.join(', '))
-  add(d.networks && d.networks.length > 1 ? 'Networks' : 'Network', d.networks?.join(', '))
-  add(d.countries && d.countries.length > 1 ? 'Countries' : 'Country', d.countries?.join(', '))
-  add('Collection', d.collection?.name)
-  add('Budget', money(d.budget))
-  add('Box office', money(d.revenue))
+  const rows = detailFacts(d, kind)
   if (rows.length === 0) return null
   return (
     <Section title="About">
