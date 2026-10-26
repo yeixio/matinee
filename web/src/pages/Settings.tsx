@@ -16,6 +16,7 @@ export default function Settings() {
       {me?.isAdmin && <Libraries />}
       {me?.isAdmin && <Users />}
       {me?.isAdmin && <HomeNetwork />}
+      {me?.isAdmin && <Transcoding />}
       {me?.isAdmin && <Integrations />}
       <Devices />
       {/* TMDB's API terms ask apps that use it for this notice. */}
@@ -309,6 +310,73 @@ function HomeNetwork() {
           onChange={(e) => save.mutate({ requireSignInAtHome: e.target.checked })}
         />
       </label>
+    </section>
+  )
+}
+
+// Every accelerator the server knows, so an admin can pick one before it's set up.
+const accelerators: { id: string; name: string }[] = [
+  { id: 'nvenc', name: 'NVIDIA NVENC' },
+  { id: 'vaapi', name: 'VAAPI (AMD and Intel on Linux)' },
+  { id: 'qsv', name: 'Intel Quick Sync' },
+  { id: 'videotoolbox', name: 'VideoToolbox (Mac)' },
+  { id: 'amf', name: 'AMD AMF (Windows)' },
+  { id: 'v4l2m2m', name: 'V4L2 (Raspberry Pi)' },
+]
+
+function Transcoding() {
+  const qc = useQueryClient()
+  const { data } = useQuery({
+    queryKey: ['settings'],
+    queryFn: api.settings,
+    // The server tests its GPU for a few seconds after it starts.
+    refetchInterval: (q) => (q.state.data?.hardware?.detecting ? 2000 : false),
+  })
+  const save = useMutation({ mutationFn: api.saveSettings, onSuccess: (s) => qc.setQueryData(['settings'], s) })
+  const hw = data?.hardware
+  const active = hw?.active
+  const found = new Set(hw?.available.map((a) => a.id))
+  let status: string
+  if (!hw) status = ''
+  else if (active)
+    status = `${active.name}${active.detail ? ` on ${active.detail}` : ''}. ${
+      active.decode ? 'Video is decoded, resized and encoded on the GPU.' : 'Video is encoded on the GPU and decoded on the CPU.'
+    } If the GPU can't handle a file, it plays through the CPU instead.`
+  else if (hw.detecting) status = 'Testing this server’s GPU…'
+  else if (data?.hardwareAcceleration === 'off') status = 'The CPU. Hardware transcoding is off.'
+  else if (data?.hardwareAcceleration !== 'auto') status = 'The CPU, because the accelerator you chose didn’t work on this server.'
+  else status = 'The CPU. No GPU on this server passed its test.'
+  return (
+    <section className="space-y-4">
+      <h2 className="text-lg font-semibold">Transcoding</h2>
+      <p className="text-sm text-muted">
+        Files a device can’t play as they are get converted while you watch. A GPU does that faster and with less load on the
+        server.
+      </p>
+      <div className="space-y-4 rounded-xl border border-line/60 bg-surface/50 p-4">
+        <div>
+          <span className="block text-sm font-medium">Converting with</span>
+          <span className="mt-1 block text-sm text-muted">{status}</span>
+          {!active && hw?.problem && <span className="mt-2 block text-sm text-red-400">{hw.problem}</span>}
+        </div>
+        <Field label="Hardware acceleration">
+          <select
+            className={inputClass}
+            value={data?.hardwareAcceleration ?? 'auto'}
+            disabled={!data || save.isPending}
+            onChange={(e) => save.mutate({ hardwareAcceleration: e.target.value })}
+          >
+            <option value="auto">Automatic: the best one that works</option>
+            <option value="off">Off: always use the CPU</option>
+            {accelerators.map((a) => (
+              <option key={a.id} value={a.id}>
+                {a.name}
+                {hw && !hw.detecting && !found.has(a.id) ? ' (not found on this server)' : ''}
+              </option>
+            ))}
+          </select>
+        </Field>
+      </div>
     </section>
   )
 }

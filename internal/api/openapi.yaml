@@ -1033,6 +1033,35 @@ components:
             (`off`), anyone, with an admin approving (`approve`, the default),
             or anyone, right away (`auto`). Settings left out of a `PUT` stay
             as they are.
+        hardwareAcceleration:
+          type: string
+          enum: [auto, off, nvenc, vaapi, qsv, videotoolbox, amf, v4l2m2m]
+          description: |
+            What video transcodes run on: the best accelerator that passed
+            its test at startup (`auto`, the default), the CPU (`off`), or one
+            accelerator. A chosen accelerator that isn't available here means
+            the CPU. A transcode that fails on the GPU starts again on the CPU.
+        hardware:
+          type: object
+          readOnly: true
+          description: Which accelerator is in use and which ones work on this server. Ignored in a `PUT`.
+          properties:
+            active:
+              description: What new transcodes use; null means the CPU.
+              oneOf: [{ $ref: '#/components/schemas/Accelerator' }, { type: 'null' }]
+            available:
+              type: array
+              items: { $ref: '#/components/schemas/Accelerator' }
+            detecting: { type: boolean, description: The startup tests are still running. }
+            problem: { type: string, description: "When no accelerator works: why a GPU the server can see couldn't be used, such as a missing permission." }
+    Accelerator:
+      type: object
+      properties:
+        id: { type: string, description: "nvenc, vaapi, qsv, videotoolbox, amf or v4l2m2m" }
+        name: { type: string, description: "Such as VAAPI." }
+        device: { type: string, description: "The GPU's render node, such as /dev/dri/renderD128 (VAAPI, and Quick Sync on Linux)." }
+        detail: { type: string, description: "The GPU, when its driver says, such as AMD Radeon RX 7900 XTX." }
+        decode: { type: boolean, description: "The GPU decodes too, not only encodes." }
     Integration:
       type: object
       properties:

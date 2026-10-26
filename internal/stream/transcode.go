@@ -15,18 +15,22 @@ import (
 	"os/exec"
 	"path/filepath"
 	"regexp"
+	"slices"
 	"strconv"
 	"strings"
 	"sync"
 	"time"
 
+	"github.com/yeixio/matinee/internal/hwaccel"
 	"github.com/yeixio/matinee/internal/store"
 )
 
 const (
 	segmentSeconds = 4
+	maxWidth       = 1920
 	idleTimeout    = 2 * time.Minute
 	startupWait    = 20 * time.Second
+	hwStartupWait  = 10 * time.Second
 )
 
 // ErrSuperseded means a newer Start for the same viewer and item replaced this
@@ -40,10 +44,26 @@ type Transcoder struct {
 	FFmpeg string
 	Dir    string
 	Log    *slog.Logger
+	// HW picks the hardware accelerator, if any; nil transcodes on the CPU.
+	HW Accelerator
 
 	mu       sync.Mutex
 	sessions map[string]*session
-	stop     chan struct{}
+	// failed remembers items whose transcodes failed on the GPU, so their
+	// next ones go straight to a mode that works.
+	failed map[int64]failure
+	stop   chan struct{}
+}
+
+// Accelerator says which hardware accelerator new transcodes use (see
+// hwaccel.Manager); nil means the CPU.
+type Accelerator interface {
+	Active() *hwaccel.Accel
+}
+
+type failure struct {
+	kind hwaccel.Kind
+	mode hwaccel.Mode
 }
 
 type session struct {
@@ -56,13 +76,15 @@ type session struct {
 	lastSeen time.Time
 	// superseded is set (under Transcoder.mu) when a newer session replaces this one.
 	superseded bool
+	// killed is set (under Transcoder.mu) when Matinee stops FFmpeg itself.
+	killed bool
 }
 
-func NewTranscoder(ffmpeg, dir string, log *slog.Logger) *Transcoder {
+func NewTranscoder(ffmpeg, dir string, hw Accelerator, log *slog.Logger) *Transcoder {
 	// Leftovers from a previous run are never valid.
 	os.RemoveAll(dir)
 	os.MkdirAll(dir, 0o755)
-	t := &Transcoder{FFmpeg: ffmpeg, Dir: dir, Log: log, sessions: map[string]*session{}, stop: make(chan struct{})}
+	t := &Transcoder{FFmpeg: ffmpeg, Dir: dir, Log: log, HW: hw, sessions: map[string]*session{}, failed: map[int64]failure{}, stop: make(chan struct{})}
 	go t.reap()
 	return t
 }
@@ -71,6 +93,9 @@ func NewTranscoder(ffmpeg, dir string, log *slog.Logger) *Transcoder {
 // once the first segment is ready. A user watching an item has at most one
 // session for it, so seeking far ahead replaces the old one. burnSub is an
 // embedded subtitle stream to draw into the video, or -1 for none.
+//
+// With a hardware accelerator, a transcode that fails to start on the GPU
+// starts again with less of it on the GPU, and finally on the CPU alone.
 func (t *Transcoder) Start(ctx context.Context, userID int64, it store.Item, startSec float64, burnSub int) (string, error) {
 	t.mu.Lock()
 	for id, s := range t.sessions {
@@ -81,6 +106,51 @@ func (t *Transcoder) Start(ctx context.Context, userID int64, it store.Item, sta
 	}
 	t.mu.Unlock()
 
+	var accel *hwaccel.Accel
+	if t.HW != nil {
+		accel = t.HW.Active()
+	}
+	video := hwaccel.Video{Codec: it.VideoCodec, BurnSub: burnSub, MaxWidth: maxWidth, KeyframeSeconds: segmentSeconds}
+	modes := t.plan(accel, it.ID, video)
+	for i, mode := range modes {
+		id, err := t.start(ctx, userID, it, startSec, accel, mode, video)
+		if err == nil || i == len(modes)-1 || errors.Is(err, ErrSuperseded) || ctx.Err() != nil {
+			return id, err
+		}
+		t.Log.Warn("transcode failed on the GPU; trying again with less on it",
+			"item", it.ID, "accel", accel.Kind, "mode", mode, "next", modes[i+1], "err", err)
+		t.hwFailed(it.ID, accel.Kind, mode)
+	}
+	panic("unreachable")
+}
+
+// plan lists the modes to try, leaving out the ones that already failed for
+// this item on this accelerator (so seeking doesn't retry them each time).
+func (t *Transcoder) plan(accel *hwaccel.Accel, itemID int64, video hwaccel.Video) []hwaccel.Mode {
+	if accel == nil || video.Codec == "" || (video.Codec == "h264" && video.BurnSub < 0) {
+		// No GPU, or audio or video that's copied: nothing to put on one.
+		return []hwaccel.Mode{hwaccel.CPU}
+	}
+	modes := hwaccel.Plan(accel, video)
+	t.mu.Lock()
+	f, ok := t.failed[itemID]
+	t.mu.Unlock()
+	if ok && f.kind == accel.Kind {
+		modes = slices.DeleteFunc(modes, func(m hwaccel.Mode) bool { return m >= f.mode })
+	}
+	return modes
+}
+
+// hwFailed remembers that item failed in mode on the accelerator kind.
+func (t *Transcoder) hwFailed(itemID int64, kind hwaccel.Kind, mode hwaccel.Mode) {
+	t.mu.Lock()
+	defer t.mu.Unlock()
+	if f, ok := t.failed[itemID]; !ok || f.kind != kind || mode < f.mode {
+		t.failed[itemID] = failure{kind, mode}
+	}
+}
+
+func (t *Transcoder) start(ctx context.Context, userID int64, it store.Item, startSec float64, accel *hwaccel.Accel, mode hwaccel.Mode, video hwaccel.Video) (string, error) {
 	b := make([]byte, 12)
 	rand.Read(b)
 	id := hex.EncodeToString(b)
@@ -90,34 +160,26 @@ func (t *Transcoder) Start(ctx context.Context, userID int64, it store.Item, sta
 	}
 
 	args := []string{"-hide_banner", "-loglevel", "error", "-nostdin"}
+	var output []string
+	switch {
+	case it.VideoCodec == "":
+		output = []string{"-vn", "-map", "0:a:0", "-c:a", "aac", "-b:a", "256k"}
+	case it.VideoCodec == "h264" && video.BurnSub < 0:
+		// Already browser-friendly video: repackage instead of re-encoding. Far cheaper.
+		output = []string{"-map", "0:v:0", "-c:v", "copy"}
+	default:
+		var input []string
+		input, output = hwaccel.Args(accel, mode, video)
+		args = append(args, input...)
+	}
+	if it.VideoCodec != "" {
+		output = append(output, "-map", "0:a:0?", "-sn", "-c:a", "aac", "-ac", "2", "-b:a", "192k")
+	}
 	if startSec > 0 {
 		args = append(args, "-ss", strconv.FormatFloat(startSec, 'f', 3, 64))
 	}
 	args = append(args, "-i", it.Path)
-	if it.VideoCodec != "" {
-		encode := []string{"-c:v", "libx264", "-preset", "veryfast", "-crf", "22",
-			"-maxrate", "10M", "-bufsize", "20M", "-pix_fmt", "yuv420p",
-			"-force_key_frames", fmt.Sprintf("expr:gte(t,n_forced*%d)", segmentSeconds)}
-		const scale = "scale='min(1920,iw)':-2"
-		switch {
-		case burnSub >= 0:
-			// Picture subtitles are drawn at the video's size (their canvas can
-			// differ, e.g. 1080p subtitles on a cropped 800-line video), which
-			// means re-encoding even H.264.
-			graph := fmt.Sprintf("[0:s:%d][0:v:0]scale2ref[sub][vid];[vid][sub]overlay=eof_action=pass,%s[v]", burnSub, scale)
-			args = append(args, "-filter_complex", graph, "-map", "[v]", "-map", "0:a:0?", "-sn")
-			args = append(args, encode...)
-		case it.VideoCodec == "h264":
-			// Already browser-friendly video: repackage instead of re-encoding. Far cheaper.
-			args = append(args, "-map", "0:v:0", "-map", "0:a:0?", "-sn", "-c:v", "copy")
-		default:
-			args = append(args, "-map", "0:v:0", "-map", "0:a:0?", "-sn", "-vf", scale)
-			args = append(args, encode...)
-		}
-		args = append(args, "-c:a", "aac", "-ac", "2", "-b:a", "192k")
-	} else {
-		args = append(args, "-vn", "-map", "0:a:0", "-c:a", "aac", "-b:a", "256k")
-	}
+	args = append(args, output...)
 	args = append(args,
 		"-f", "hls", "-hls_time", strconv.Itoa(segmentSeconds), "-hls_list_size", "0",
 		"-hls_playlist_type", "event", "-hls_segment_filename", filepath.Join(dir, "seg%05d.ts"),
@@ -130,17 +192,36 @@ func (t *Transcoder) Start(ctx context.Context, userID int64, it store.Item, sta
 		return "", fmt.Errorf("start ffmpeg: %w", err)
 	}
 	s := &session{id: id, userID: userID, itemID: it.ID, dir: dir, cmd: cmd, done: make(chan struct{}), lastSeen: time.Now()}
+	var kind hwaccel.Kind
+	if mode != hwaccel.CPU {
+		kind = accel.Kind
+	}
 	go func() {
-		cmd.Wait()
+		err := cmd.Wait()
+		t.mu.Lock()
+		killed := s.killed
+		t.mu.Unlock()
+		// A GPU that fails partway through (rather than at the start) leaves
+		// the player stuck; when it starts again, this item skips that mode.
+		if err != nil && !killed && kind != "" {
+			t.Log.Warn("transcode failed on the GPU partway through", "session", id, "item", it.ID, "accel", kind, "mode", mode, "err", err)
+			t.hwFailed(it.ID, kind, mode)
+		}
 		close(s.done)
 	}()
 	t.mu.Lock()
 	t.sessions[id] = s
 	t.mu.Unlock()
-	t.Log.Info("transcode started", "session", id, "item", it.ID, "start", startSec, "videoCopy", it.VideoCodec == "h264" && burnSub < 0, "burnSub", burnSub)
+	t.Log.Info("transcode started", "session", id, "item", it.ID, "start", startSec,
+		"videoCopy", it.VideoCodec == "h264" && video.BurnSub < 0, "burnSub", video.BurnSub, "accel", kind, "mode", mode)
 
-	// Wait for the first segment so the player can start right away.
-	if err := waitFor(ctx, s, filepath.Join(dir, "seg00000.ts"), startupWait); err != nil {
+	// Wait for the first segment so the player can start right away. A GPU
+	// that hasn't made one in a while is stuck, and the CPU gets a turn.
+	wait := startupWait
+	if kind != "" {
+		wait = hwStartupWait
+	}
+	if err := waitFor(ctx, s, filepath.Join(dir, "seg00000.ts"), wait); err != nil {
 		t.mu.Lock()
 		superseded := s.superseded
 		t.killLocked(id)
@@ -280,6 +361,7 @@ func (t *Transcoder) killLocked(id string) {
 		return
 	}
 	delete(t.sessions, id)
+	s.killed = true
 	if s.cmd.Process != nil {
 		s.cmd.Process.Kill()
 	}

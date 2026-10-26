@@ -126,3 +126,26 @@ func TestHomeAccess(t *testing.T) {
 		t.Fatalf("bad token at home: %d", code)
 	}
 }
+
+func TestHardwareAccelerationSetting(t *testing.T) {
+	c, _ := newTestServer(t)
+	var login struct{ Token string }
+	c.do("POST", "/api/v1/setup", credentials{"admin", "correct horse"}, &login)
+	c.token = login.Token
+	var set serverSettings
+	c.do("GET", "/api/v1/settings", nil, &set)
+	if set.HardwareAcceleration != "auto" || set.Hardware == nil || set.Hardware.Active != nil {
+		t.Fatalf("defaults: %+v", set)
+	}
+	if code := c.do("PUT", "/api/v1/settings", map[string]any{"hardwareAcceleration": "vaapi"}, &set); code != 200 || set.HardwareAcceleration != "vaapi" {
+		t.Fatalf("choose vaapi: %d %+v", code, set)
+	}
+	if code := c.do("PUT", "/api/v1/settings", map[string]any{"hardwareAcceleration": "gpu please"}, nil); code != http.StatusBadRequest {
+		t.Fatalf("bad choice: %d", code)
+	}
+	// What a client got back can be sent as is.
+	set.HardwareAcceleration = "off"
+	if code := c.do("PUT", "/api/v1/settings", set, &set); code != 200 || set.HardwareAcceleration != "off" {
+		t.Fatalf("round trip: %d %+v", code, set)
+	}
+}
