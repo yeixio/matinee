@@ -104,6 +104,15 @@ func TestCollections(t *testing.T) {
 	if got := titlesOf(bs.Items); !slices.Equal(got, []string{"Alien", "Aliens"}) {
 		t.Fatalf("box set: %v", got)
 	}
+	// A kids profile only sees box sets of titles it may see.
+	level := 1
+	kid, err := db.CreateProfile(ctx, 1, store.ProfileChanges{KidsLevel: &level})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if sets, err := db.BoxSets(ctx, kid.ID); err != nil || len(sets) != 0 {
+		t.Fatalf("kids profile box sets: %v %+v", err, sets)
+	}
 	if code := guest.do("GET", "/api/v1/box-sets/1", nil, nil); code != http.StatusNotFound {
 		t.Errorf("missing box set: %d", code)
 	}
