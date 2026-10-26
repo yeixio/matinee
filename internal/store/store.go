@@ -9,6 +9,7 @@ import (
 	"encoding/hex"
 	"errors"
 	"fmt"
+	"net/url"
 	"strings"
 	"sync/atomic"
 	"time"
@@ -36,7 +37,7 @@ type Store struct {
 func Open(dsn string) (*Store, error) {
 	var d *db
 	if strings.HasPrefix(dsn, "postgres://") || strings.HasPrefix(dsn, "postgresql://") {
-		conn, err := sql.Open("pgx", dsn)
+		conn, err := sql.Open("pgx", withoutJIT(dsn))
 		if err != nil {
 			return nil, err
 		}
@@ -63,6 +64,24 @@ func Open(dsn string) (*Store, error) {
 		return nil, fmt.Errorf("backfill filters: %w", err)
 	}
 	return s, nil
+}
+
+// withoutJIT turns off PostgreSQL's JIT compiler for Matinee's connections,
+// unless the URL says otherwise. Library filters are quick queries the
+// planner thinks are costly, and compiling them took far longer than
+// running them.
+func withoutJIT(dsn string) string {
+	u, err := url.Parse(dsn)
+	if err != nil {
+		return dsn
+	}
+	q := u.Query()
+	if q.Has("jit") {
+		return dsn
+	}
+	q.Set("jit", "off")
+	u.RawQuery = q.Encode()
+	return u.String()
 }
 
 func (s *Store) Close() error { return s.db.Close() }

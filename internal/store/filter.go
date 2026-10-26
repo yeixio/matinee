@@ -243,25 +243,68 @@ func (f ItemFilter) Values() url.Values {
 
 // The SQL below runs inside itemFrom, where i is the title and me.id the
 // person asking.
+
+// level is FROM … WHERE for one level under a title, as f: 0 is the title
+// itself (a movie), 1 its children (an album's tracks, a show's seasons)
+// and 2 its grandchildren (a show's episodes, an artist's tracks). Each
+// level is its own subquery so both databases walk it by index from the
+// title. join is joined to f.
+func level(n int, join string) string {
+	switch n {
+	case 0:
+		return "FROM items f " + join + " WHERE f.id = i.id"
+	case 1:
+		return "FROM items f " + join + " WHERE f.parent_id = i.id"
+	}
+	return "FROM items fc JOIN items f ON f.parent_id = fc.id " + join + " WHERE fc.parent_id = i.id"
+}
+
+// inFamily is true when the title or anything under it, as f, joined with
+// join, meets cond. cond's arguments are needed three times; see repeat.
+func inFamily(join, cond string) string {
+	var or []string
+	for n := range 3 {
+		or = append(or, "EXISTS (SELECT 1 "+level(n, join)+" AND "+cond+")")
+	}
+	return "(" + strings.Join(or, " OR ") + ")"
+}
+
+func repeat(n int, args ...any) []any {
+	var out []any
+	for range n {
+		out = append(out, args...)
+	}
+	return out
+}
+
+// played joins the person's progress as fp; the conditions go in playedOn.
+// A CROSS JOIN keeps SQLite from starting at every progress row they have.
 const (
-	// family is the ids of the title and everything under it: a show's
-	// seasons and episodes, an artist's albums and tracks. Spelled out case
-	// by case so each part uses an index.
-	family = `(SELECT i.id UNION ALL SELECT fc.id FROM items fc WHERE fc.parent_id = i.id
-		UNION ALL SELECT fg.id FROM items fc JOIN items fg ON fg.parent_id = fc.id WHERE fc.parent_id = i.id)`
-	// files is family limited to what can be played, as f.
-	files = `f.path IS NOT NULL AND f.id IN ` + family
+	played   = `CROSS JOIN progress fp`
+	playedOn = `fp.item_id = f.id AND fp.user_id = me.id`
+)
 
-	addedExpr = `CASE WHEN i.path IS NOT NULL THEN i.added_at ELSE COALESCE((SELECT MAX(f.added_at) FROM items f WHERE ` + files + `), i.added_at) END`
+var (
+	// A container counts as added when its newest file was.
+	addedExpr = `CASE WHEN i.path IS NOT NULL THEN i.added_at ELSE COALESCE(
+		(SELECT MAX(f.added_at) ` + level(2, "") + ` AND f.path IS NOT NULL),
+		(SELECT MAX(f.added_at) ` + level(1, "") + ` AND f.path IS NOT NULL), i.added_at) END`
 	// A show's runtime is its average episode's, an album's its whole length.
-	runtimeExpr = `CASE WHEN i.path IS NOT NULL THEN i.duration_ms WHEN i.kind IN ('album', 'artist') THEN (SELECT SUM(f.duration_ms) FROM items f WHERE ` + files + `)
-		ELSE (SELECT AVG(f.duration_ms) FROM items f WHERE ` + files + `) END`
-	releasedExpr   = `COALESCE(i.released, CAST(i.year AS TEXT) || '-01-01')`
-	lastPlayedExpr = `(SELECT MAX(fp.updated_at) FROM progress fp WHERE fp.user_id = me.id AND fp.item_id IN ` + family + `)`
+	runtimeExpr = `CASE WHEN i.path IS NOT NULL THEN i.duration_ms
+		WHEN i.kind = 'album' THEN (SELECT SUM(f.duration_ms) ` + level(1, "") + `)
+		WHEN i.kind = 'artist' THEN (SELECT SUM(f.duration_ms) ` + level(2, "") + `)
+		ELSE COALESCE((SELECT AVG(f.duration_ms) ` + level(2, "") + ` AND f.path IS NOT NULL),
+			(SELECT AVG(f.duration_ms) ` + level(1, "") + ` AND f.path IS NOT NULL)) END`
+	releasedExpr = `COALESCE(i.released, CAST(i.year AS TEXT) || '-01-01')`
+	// When the person last played the title or anything in it.
+	lastPlayedExpr = `COALESCE((SELECT MAX(fp.updated_at) ` + level(0, played) + ` AND ` + playedOn + `),
+		(SELECT MAX(fp.updated_at) ` + level(2, played) + ` AND ` + playedOn + `),
+		(SELECT MAX(fp.updated_at) ` + level(1, played) + ` AND ` + playedOn + `))`
 
-	anyUnplayed = `EXISTS (SELECT 1 FROM items f LEFT JOIN progress fp ON fp.item_id = f.id AND fp.user_id = me.id WHERE ` + files + ` AND COALESCE(fp.played, 0) = 0)`
-	anyStarted  = `EXISTS (SELECT 1 FROM progress fp WHERE fp.user_id = me.id AND fp.item_id IN ` + family + ` AND (fp.played = 1 OR fp.position_ms > 0))`
-	anyFile     = `EXISTS (SELECT 1 FROM items f WHERE ` + files + `)`
+	anyUnplayed = inFamily(`LEFT JOIN progress fp ON fp.item_id = f.id AND fp.user_id = me.id`, `f.path IS NOT NULL AND COALESCE(fp.played, 0) = 0`)
+	anyStarted  = inFamily(played, playedOn+` AND (fp.played = 1 OR fp.position_ms > 0)`)
+	anyFile     = inFamily("", `f.path IS NOT NULL`)
+	hasTag      = inFamily("", `',' || COALESCE(f.media_tags, '') || ',' LIKE ? ESCAPE '\'`)
 )
 
 // sortExprs map each sort to its SQL and whether it runs high to low by default.
@@ -375,19 +418,18 @@ func (f ItemFilter) sql(today time.Time) (where, order string, args []any) {
 	case "notStarted":
 		add("NOT " + anyStarted)
 	}
-	hasTag := `EXISTS (SELECT 1 FROM items f WHERE ` + files + ` AND ',' || COALESCE(f.media_tags, '') || ',' LIKE ? ESCAPE '\')`
 	for _, t := range f.Tag {
-		add(hasTag, "%,"+likeEscape(t)+",%")
+		add(hasTag, repeat(3, "%,"+likeEscape(t)+",%")...)
 	}
 	for _, t := range f.NotTag {
-		add("NOT "+hasTag, "%,"+likeEscape(t)+",%")
+		add("NOT "+hasTag, repeat(3, "%,"+likeEscape(t)+",%")...)
 	}
 	for _, p := range f.Person {
-		add(`EXISTS (SELECT 1 FROM credits c WHERE c.person_id = ? AND c.item_id IN `+family+`)`, p)
+		add(inFamily("JOIN credits c ON c.item_id = f.id", "c.person_id = ?"), repeat(3, p)...)
 	}
 	if len(f.Director) > 0 {
-		add(`EXISTS (SELECT 1 FROM credits c WHERE c.person_id IN (`+placeholders(len(f.Director))+`)
-			AND c.kind = 'crew' AND c.role IN ('Director', 'Creator') AND c.item_id IN `+family+`)`, anyArgs(f.Director)...)
+		add(inFamily("JOIN credits c ON c.item_id = f.id", "c.person_id IN ("+placeholders(len(f.Director))+
+			") AND c.kind = 'crew' AND c.role IN ('Director', 'Creator')"), repeat(3, anyArgs(f.Director)...)...)
 	}
 	terms := func(kind string, values []any) {
 		if len(values) > 0 {
@@ -421,7 +463,7 @@ func (f ItemFilter) sql(today time.Time) (where, order string, args []any) {
 		dir = "DESC"
 	}
 	// Titles missing the sort field go last either way.
-	order = "CASE WHEN (" + by.expr + ") IS NULL THEN 1 ELSE 0 END, " + by.expr + " " + dir + ", i.sort_title, i.id"
+	order = by.expr + " " + dir + " NULLS LAST, i.sort_title, i.id"
 	if f.Limit > 0 {
 		order += " LIMIT ?"
 		args = append(args, f.Limit)
