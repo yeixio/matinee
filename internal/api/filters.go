@@ -58,6 +58,9 @@ func (s *Server) libraryFilters(w http.ResponseWriter, r *http.Request) {
 		s.serverError(w, err)
 		return
 	}
+	if s.libraryHidden(w, r, id) {
+		return
+	}
 	o, err := s.Store.FilterOptions(r.Context(), id)
 	if err != nil {
 		s.serverError(w, err)
@@ -79,6 +82,9 @@ func (s *Server) libraryPeople(w http.ResponseWriter, r *http.Request) {
 		writeError(w, http.StatusBadRequest, "role: use cast or director")
 		return
 	}
+	if s.libraryHidden(w, r, id) {
+		return
+	}
 	limit, _ := strconv.Atoi(r.URL.Query().Get("limit"))
 	if limit <= 0 || limit > 100 {
 		limit = 20
@@ -89,4 +95,18 @@ func (s *Server) libraryPeople(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	writeJSON(w, http.StatusOK, people)
+}
+
+// libraryHidden answers 404 for a library a kids profile can't see, so its
+// filter options don't list what's in it.
+func (s *Server) libraryHidden(w http.ResponseWriter, r *http.Request, id int64) bool {
+	ok, err := s.Store.LibraryVisible(r.Context(), currentUser(r), id)
+	if err != nil {
+		s.serverError(w, err)
+		return true
+	}
+	if !ok {
+		writeError(w, http.StatusNotFound, "library not found")
+	}
+	return !ok
 }

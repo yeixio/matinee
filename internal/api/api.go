@@ -61,6 +61,7 @@ type Server struct {
 	setUp        atomic.Bool // the first account exists
 	arrCache     ttlCache    // answers from Radarr and Sonarr (see arr.go)
 	trailerCache ttlCache    // trailer files' probes and TMDB's trailer lists (see trailers.go)
+	pins         pinGuard    // wrong profile PINs (see profiles.go)
 
 	// BackgroundCtx scopes scans started by API calls; it outlives any one request.
 	BackgroundCtx context.Context
@@ -101,17 +102,23 @@ func (s *Server) routes() []route {
 		{"POST /auth/logout", public, s.logout},
 		{"POST /auth/device", public, s.startDeviceCode},
 		{"POST /auth/device/token", public, s.pollDeviceCode},
-		{"GET /auth/device/{code}", signedIn, s.getDeviceCode},
-		{"POST /auth/device/{code}/approve", signedIn, s.approveDeviceCode},
-		{"POST /auth/device/{code}/deny", signedIn, s.denyDeviceCode},
+		{"GET /auth/device/{code}", signedIn, grownUps(s.getDeviceCode)},
+		{"POST /auth/device/{code}/approve", signedIn, grownUps(s.approveDeviceCode)},
+		{"POST /auth/device/{code}/deny", signedIn, grownUps(s.denyDeviceCode)},
 
 		{"GET /me", reader, s.me},
 		{"GET /me/theme", reader, s.getMyTheme},
 		{"PUT /me/theme", reader, s.putMyTheme},
 		{"PUT /me/password", signedIn, s.changeMyPassword},
 		{"GET /themes", public, s.listThemes},
-		{"GET /devices", signedIn, s.listDevices},
-		{"DELETE /devices/{id}", signedIn, s.deleteDevice},
+		{"GET /profiles", reader, s.listProfiles},
+		{"POST /profiles/select", reader, s.selectProfile},
+		{"GET /profiles/manage", adminOnly, s.manageProfiles},
+		{"POST /profiles", adminOnly, s.createProfile},
+		{"PUT /profiles/{id}", adminOnly, s.updateProfile},
+		{"DELETE /profiles/{id}", adminOnly, s.deleteProfile},
+		{"GET /devices", signedIn, grownUps(s.listDevices)},
+		{"DELETE /devices/{id}", signedIn, grownUps(s.deleteDevice)},
 		{"GET /settings", adminOnly, s.getSettings},
 		{"PUT /settings", adminOnly, s.putSettings},
 		{"GET /users", adminOnly, s.listUsers},
@@ -151,6 +158,14 @@ func (s *Server) routes() []route {
 		{"POST /items/{id}/hls", reader, s.startHLS},
 		{"GET /hls/{session}/{file}", reader, s.hlsFile},
 
+		{"GET /collections", reader, s.listCollections},
+		{"POST /collections", signedIn, s.createCollection},
+		{"GET /collections/{id}", reader, s.getCollection},
+		{"PUT /collections/{id}", signedIn, s.updateCollection},
+		{"DELETE /collections/{id}", signedIn, s.deleteCollection},
+		{"PUT /collections/{id}/items/{item}", signedIn, s.addToCollection},
+		{"DELETE /collections/{id}/items/{item}", signedIn, s.removeFromCollection},
+		{"GET /box-sets/{id}", reader, s.getBoxSet},
 		{"GET /watchlist", reader, s.getWatchList},
 		{"PUT /watchlist/{id}", reader, s.addToWatchList},
 		{"DELETE /watchlist/{id}", reader, s.removeFromWatchList},
@@ -168,18 +183,18 @@ func (s *Server) routes() []route {
 		{"PUT /integrations/{app}", adminOnly, s.putIntegration},
 		{"DELETE /integrations/{app}", adminOnly, s.deleteIntegration},
 		{"POST /integrations/{app}/test", adminOnly, s.testIntegration},
-		{"GET /requests/options", reader, s.getRequestOptions},
-		{"GET /requests/search", signedIn, s.searchTitles},
-		{"GET /requests", signedIn, s.listRequests},
-		{"POST /requests", signedIn, s.createRequest},
+		{"GET /requests/options", reader, grownUps(s.getRequestOptions)},
+		{"GET /requests/search", signedIn, grownUps(s.searchTitles)},
+		{"GET /requests", signedIn, grownUps(s.listRequests)},
+		{"POST /requests", signedIn, grownUps(s.createRequest)},
 		{"POST /requests/{id}/approve", adminOnly, s.approveRequest},
 		{"POST /requests/{id}/decline", adminOnly, s.declineRequest},
-		{"DELETE /requests/{id}", signedIn, s.deleteRequest},
-		{"GET /upcoming", reader, s.upcoming},
+		{"DELETE /requests/{id}", signedIn, grownUps(s.deleteRequest)},
+		{"GET /upcoming", reader, grownUps(s.upcoming)},
 		{"GET /items/{id}/quality", adminOnly, s.getItemQuality},
 		{"PUT /items/{id}/quality", adminOnly, s.putItemQuality},
-		{"POST /items/{id}/issues", signedIn, s.reportIssue},
-		{"GET /issues", signedIn, s.listIssues},
+		{"POST /items/{id}/issues", signedIn, grownUps(s.reportIssue)},
+		{"GET /issues", signedIn, grownUps(s.listIssues)},
 		{"POST /issues/{id}/resolve", adminOnly, s.resolveIssue},
 		{"POST /issues/{id}/replace", adminOnly, s.replaceIssue},
 	}
@@ -290,7 +305,7 @@ func (s *Server) requireUser(h http.HandlerFunc, level access) http.Handler {
 			writeError(w, http.StatusUnauthorized, "sign in required")
 			return
 		}
-		u, err := s.Store.SessionUser(r.Context(), token)
+		u, homeOnly, err := s.Store.SessionUser(r.Context(), token)
 		if errors.Is(err, store.ErrNotFound) {
 			writeError(w, http.StatusUnauthorized, "sign in required")
 			return
@@ -298,6 +313,19 @@ func (s *Server) requireUser(h http.HandlerFunc, level access) http.Handler {
 		if err != nil {
 			s.serverError(w, err)
 			return
+		}
+		if homeOnly {
+			// A profile picked at home without signing in: it can only look
+			// and play, and only from home.
+			ok, err := s.homeAccess(r)
+			if err != nil {
+				s.serverError(w, err)
+				return
+			}
+			if !ok || level > reader {
+				writeError(w, http.StatusUnauthorized, "sign in required")
+				return
+			}
 		}
 		if level == adminOnly && !u.IsAdmin {
 			writeError(w, http.StatusForbidden, "admins only")
@@ -531,9 +559,16 @@ func (s *Server) listLibraries(w http.ResponseWriter, r *http.Request) {
 		s.serverError(w, err)
 		return
 	}
-	out := make([]libraryView, len(libs))
-	for i, l := range libs {
-		out[i] = s.libraryView(l, s.Scanner.Running(l.ID))
+	out := []libraryView{}
+	for _, l := range libs {
+		ok, err := s.Store.LibraryVisible(r.Context(), currentUser(r), l.ID)
+		if err != nil {
+			s.serverError(w, err)
+			return
+		}
+		if ok {
+			out = append(out, s.libraryView(l, s.Scanner.Running(l.ID)))
+		}
 	}
 	writeJSON(w, http.StatusOK, out)
 }
@@ -669,11 +704,18 @@ func (s *Server) home(w http.ResponseWriter, r *http.Request) {
 		s.serverError(w, err)
 		return
 	}
+	pinned, err := s.pinnedRows(r.Context(), currentUser(r))
+	if err != nil {
+		s.serverError(w, err)
+		return
+	}
 	rows, err := s.genreRows(r.Context(), uid, now)
 	if err != nil {
 		s.serverError(w, err)
 		return
 	}
+	// Pinned collections come before the day's genres.
+	rows = append(pinned, rows...)
 	writeJSON(w, http.StatusOK, map[string]any{
 		"continueWatching": cont, "watchList": watchList, "recentlyAdded": recent,
 		"newReleases": releases, "rows": rows,

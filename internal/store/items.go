@@ -125,7 +125,7 @@ func intPtr(n sql.NullInt64) *int {
 }
 
 func (s *Store) queryItems(ctx context.Context, where, order string, args ...any) ([]Item, error) {
-	rows, err := s.db.QueryContext(ctx, "SELECT "+itemCols+itemFrom+" WHERE "+where+" ORDER BY "+order, args...)
+	rows, err := s.db.QueryContext(ctx, "SELECT "+itemCols+itemFrom+" WHERE ("+where+")"+visibleToMe+" ORDER BY "+order, args...)
 	if err != nil {
 		return nil, err
 	}
@@ -142,9 +142,10 @@ func (s *Store) queryItems(ctx context.Context, where, order string, args ...any
 	return out, rows.Err()
 }
 
-// Item returns one item with the user's progress.
+// Item returns one item with the user's progress, or ErrNotFound when it's
+// not for them (see visibleToMe). User 0 sees everything.
 func (s *Store) Item(ctx context.Context, userID, id int64) (Item, error) {
-	it, err := scanItem(s.db.QueryRowContext(ctx, "SELECT "+itemCols+itemFrom+" WHERE i.id = ?", userID, id))
+	it, err := scanItem(s.db.QueryRowContext(ctx, "SELECT "+itemCols+itemFrom+" WHERE i.id = ?"+visibleToMe, userID, id))
 	if errors.Is(err, sql.ErrNoRows) {
 		return it, ErrNotFound
 	}

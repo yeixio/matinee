@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { api, type User } from '../api'
 import { NewFiles, watchSummary } from '../components/LibraryWatch'
 import { MediaAnalysis } from '../components/MediaAnalysis'
+import { Profiles } from '../components/ProfileSettings'
 import { Appearance } from '../components/ThemePicker'
 import { LibraryIcon, useLibraries } from '../components/Shell'
 import { Button, Field, inputClass } from '../components/ui'
@@ -21,6 +22,7 @@ export default function Settings() {
       {me?.isAdmin && <NewFiles />}
       {me?.isAdmin && <MediaAnalysis />}
       {me?.isAdmin && <Users me={me} />}
+      {me?.isAdmin && <Profiles />}
       {me?.isAdmin && <HomeNetwork />}
       {me?.isAdmin && <Trailers />}
       {me?.isAdmin && <Transcoding />}
