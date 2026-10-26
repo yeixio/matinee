@@ -10,6 +10,7 @@ import (
 	"sync"
 
 	"github.com/yeixio/matinee/internal/hwaccel"
+	"github.com/yeixio/matinee/internal/scan"
 )
 
 // Devices on the home network can browse and play without signing in,
@@ -136,6 +137,17 @@ type serverSettings struct {
 	// ThemeProblems lists theme files in the themes folder that couldn't be
 	// loaded, and why. It can't be changed.
 	ThemeProblems []string `json:"themeProblems"`
+	// LibraryWatch is how library folders are watched for new files: auto
+	// (change notifications on local disks, a quick check every so often on
+	// network shares), poll (the quick check everywhere) or off. See
+	// internal/scan/watch.go.
+	LibraryWatch scan.WatchMode `json:"libraryWatch"`
+	// WatchPollSeconds is how often polled folders are checked, and
+	// ScanIntervalSeconds how often every library is rescanned in full (0
+	// for never). Both are set on the server's command line and can't be
+	// changed here.
+	WatchPollSeconds    int `json:"watchPollSeconds"`
+	ScanIntervalSeconds int `json:"scanIntervalSeconds"`
 }
 
 func (s *Server) settings(ctx context.Context) (serverSettings, error) {
@@ -162,6 +174,11 @@ func (s *Server) settings(ctx context.Context) (serverSettings, error) {
 		st := hw.Status()
 		set.Hardware, set.HardwareAcceleration = &st, st.Preference
 	}
+	set.LibraryWatch, set.ScanIntervalSeconds = scan.WatchOff, int(s.ScanInterval.Seconds())
+	if w := s.Watcher; w != nil && err == nil {
+		set.LibraryWatch, err = w.Mode(ctx)
+		set.WatchPollSeconds = int(w.PollInterval.Seconds())
+	}
 	return set, err
 }
 
@@ -182,9 +199,12 @@ func (s *Server) putSettings(w http.ResponseWriter, r *http.Request) {
 		HardwareAcceleration *string `json:"hardwareAcceleration"`
 		RemoteTrailers       *bool   `json:"remoteTrailers"`
 		Theme                *string `json:"theme"`
+		LibraryWatch         *string `json:"libraryWatch"`
 		// Read-only; accepted so a client can send back what it got.
-		Hardware      json.RawMessage `json:"hardware"`
-		ThemeProblems json.RawMessage `json:"themeProblems"`
+		Hardware            json.RawMessage `json:"hardware"`
+		ThemeProblems       json.RawMessage `json:"themeProblems"`
+		WatchPollSeconds    json.RawMessage `json:"watchPollSeconds"`
+		ScanIntervalSeconds json.RawMessage `json:"scanIntervalSeconds"`
 	}
 	if err := readJSON(r, &in); err != nil {
 		writeError(w, http.StatusBadRequest, "bad request")
@@ -221,6 +241,23 @@ func (s *Server) putSettings(w http.ResponseWriter, r *http.Request) {
 		}
 		if err := s.Store.SetSetting(ctx, settingTheme, *t); err != nil {
 			s.serverError(w, err)
+			return
+		}
+	}
+	if m := in.LibraryWatch; m != nil && *m != "" {
+		mode := scan.WatchMode(*m)
+		if mode != scan.WatchAuto && mode != scan.WatchPoll && mode != scan.WatchOff {
+			writeError(w, http.StatusBadRequest, "libraryWatch must be auto, poll or off")
+			return
+		}
+		switch {
+		case s.Watcher != nil:
+			if err := s.Watcher.SetMode(ctx, mode); err != nil {
+				s.serverError(w, err)
+				return
+			}
+		case mode != scan.WatchOff:
+			writeError(w, http.StatusBadRequest, "this server doesn't watch library folders")
 			return
 		}
 	}

@@ -4,7 +4,12 @@ import (
 	"context"
 	"net/http"
 	"net/http/httptest"
+	"os"
+	"path/filepath"
 	"testing"
+	"time"
+
+	"github.com/yeixio/matinee/internal/scan"
 )
 
 func TestFromHome(t *testing.T) {
@@ -148,4 +153,48 @@ func TestHardwareAccelerationSetting(t *testing.T) {
 	if code := c.do("PUT", "/api/v1/settings", set, &set); code != 200 || set.HardwareAcceleration != "off" {
 		t.Fatalf("round trip: %d %+v", code, set)
 	}
+}
+
+func TestLibraryWatchSetting(t *testing.T) {
+	c, tmp := newTestServer(t, func(s *Server) {
+		s.Watcher = scan.NewWatcher(s.Scanner, s.Log)
+		s.ScanInterval = 15 * time.Minute
+		go s.Watcher.Run(s.BackgroundCtx)
+	})
+	var login struct{ Token string }
+	c.do("POST", "/api/v1/setup", credentials{"admin", "correct horse"}, &login)
+	c.token = login.Token
+	var set serverSettings
+	c.do("GET", "/api/v1/settings", nil, &set)
+	if set.LibraryWatch != scan.WatchAuto || set.WatchPollSeconds != 30 || set.ScanIntervalSeconds != 900 {
+		t.Fatalf("defaults: %+v", set)
+	}
+	if code := c.do("PUT", "/api/v1/settings", map[string]any{"libraryWatch": "sometimes"}, nil); code != http.StatusBadRequest {
+		t.Fatalf("bad mode: %d", code)
+	}
+
+	dir := filepath.Join(tmp, "movies")
+	os.MkdirAll(dir, 0o755)
+	c.do("POST", "/api/libraries", map[string]any{"name": "Movies", "kind": "movies", "paths": []string{dir}}, nil)
+	watch := func(want string) {
+		t.Helper()
+		for deadline := time.Now().Add(5 * time.Second); ; time.Sleep(20 * time.Millisecond) {
+			var libs []libraryView
+			c.do("GET", "/api/libraries", nil, &libs)
+			if len(libs) == 1 && len(libs[0].Watch) == 1 && libs[0].Watch[0].Method == want {
+				return
+			}
+			if time.Now().After(deadline) {
+				t.Fatalf("want %s, libraries: %+v", want, libs)
+			}
+		}
+	}
+	watch(scan.MethodEvents)
+	if code := c.do("PUT", "/api/v1/settings", map[string]any{"libraryWatch": "poll"}, &set); code != 200 || set.LibraryWatch != scan.WatchPoll {
+		t.Fatalf("poll: %d %+v", code, set)
+	}
+	watch(scan.MethodPolling)
+	c.do("PUT", "/api/v1/settings", set, nil)
+	c.do("PUT", "/api/v1/settings", map[string]any{"libraryWatch": "off"}, nil)
+	watch(scan.MethodOff)
 }

@@ -3,6 +3,7 @@ import { ChevronLeft, Folder, FolderOpen, Monitor, Plus, RefreshCw, Trash2, User
 import { useState, type FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { api, type User } from '../api'
+import { NewFiles, watchSummary } from '../components/LibraryWatch'
 import { MediaAnalysis } from '../components/MediaAnalysis'
 import { Appearance } from '../components/ThemePicker'
 import { LibraryIcon, useLibraries } from '../components/Shell'
@@ -17,6 +18,7 @@ export default function Settings() {
       <h1 className="text-2xl font-bold tracking-tight">Settings</h1>
       {me && <Appearance me={me} />}
       {me?.isAdmin && <Libraries />}
+      {me?.isAdmin && <NewFiles />}
       {me?.isAdmin && <MediaAnalysis />}
       {me?.isAdmin && <Users />}
       {me?.isAdmin && <HomeNetwork />}
@@ -40,6 +42,7 @@ export default function Settings() {
 function Libraries() {
   const qc = useQueryClient()
   const { data: libraries = [] } = useLibraries()
+  const { data: settings } = useQuery({ queryKey: ['settings'], queryFn: api.settings })
   const [adding, setAdding] = useState(false)
   const refresh = () => qc.invalidateQueries({ queryKey: ['libraries'] })
   const scan = useMutation({ mutationFn: api.scanLibrary, onSuccess: () => setTimeout(refresh, 300) })
@@ -72,6 +75,7 @@ function Libraries() {
             <div className="min-w-0 flex-1">
               <div className="font-medium">{l.name}</div>
               <div className="truncate text-xs text-muted">{l.paths.join(' · ')}</div>
+              {l.watch.length > 0 && <div className="truncate text-xs text-faint">{watchSummary(l, settings?.watchPollSeconds || 30)}</div>}
             </div>
             <Button
               variant="ghost"

@@ -19,7 +19,20 @@ export type Settings = {
   theme: string
   // Theme files on the server that couldn't be loaded, and why.
   themeProblems: string[]
+  // How library folders are watched for new files.
+  libraryWatch: WatchMode
+  // Set on the server's command line: how often polled folders are checked,
+  // and how often every library is rescanned in full (0 for never).
+  watchPollSeconds: number
+  scanIntervalSeconds: number
 }
+
+// auto: change notifications on local disks, a quick check on network shares;
+// poll: the quick check everywhere; off: only the full rescan.
+export type WatchMode = 'auto' | 'poll' | 'off'
+
+// How one library folder is watched. reason says why a folder is polled.
+export type FolderWatch = { path: string; method: 'events' | 'polling' | 'off'; reason?: string }
 
 // A theme as the server sends it, every colour filled in. See docs/themes.md.
 export type Theme = {
@@ -160,6 +173,8 @@ export type Library = {
   kind: 'movies' | 'tv' | 'music' | string
   paths: string[]
   scanning: boolean
+  // Empty until the server has set up watching, just after it starts.
+  watch: FolderWatch[]
 }
 
 export type Item = {
@@ -414,7 +429,7 @@ export const api = {
   setAnalysisMode: (mode: AnalysisMode) => request<AnalysisStatus>('PUT', '/api/v1/analysis', { mode }),
   reanalyze: (id: number) => request<void>('POST', `/api/v1/items/${id}/analyze`),
   settings: () => request<Settings>('GET', '/api/v1/settings'),
-  saveSettings: (s: Partial<Omit<Settings, 'hardware' | 'themeProblems'>>) => request<Settings>('PUT', '/api/v1/settings', s),
+  saveSettings: (s: Partial<Omit<Settings, 'hardware' | 'themeProblems' | 'watchPollSeconds' | 'scanIntervalSeconds'>>) => request<Settings>('PUT', '/api/v1/settings', s),
   themes: () => request<ThemeList>('GET', '/api/v1/themes'),
   // theme: "" follows the server's default.
   myTheme: () => request<{ theme: string }>('GET', '/api/v1/me/theme'),

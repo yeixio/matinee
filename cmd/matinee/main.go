@@ -119,10 +119,15 @@ func run() error {
 	}
 	go analyzer.Run(ctx)
 
+	// New files show up seconds after they land (see internal/scan/watch.go).
+	watcher := scan.NewWatcher(scanner, log)
+	watcher.PollInterval = cfg.WatchPoll
+	go watcher.Run(ctx)
+
 	downloads := download.NewManager(db, cfg.FFmpegPath, cfg.DownloadDir(), log)
 
 	apiServer := &api.Server{
-		Store: db, Scanner: scanner, Transcoder: transcoder, HW: hw, Downloads: downloads, Analyzer: analyzer,
+		Store: db, Scanner: scanner, Watcher: watcher, ScanInterval: cfg.ScanInterval, Transcoder: transcoder, HW: hw, Downloads: downloads, Analyzer: analyzer,
 		Art:       artwork.NewCache(cfg.ImageDir(), cfg.FFmpegPath),
 		Subtitles: subtitle.NewConverter(cfg.FFmpegPath, cfg.SubtitleDir()),
 		Web:       web.FS(), Log: log, BackgroundCtx: ctx,

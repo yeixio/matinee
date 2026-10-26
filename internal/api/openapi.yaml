@@ -1247,6 +1247,22 @@ components:
           readOnly: true
           items: { type: string }
           description: Theme files in `<data>/themes` that couldn't be loaded, and why. Ignored in a `PUT`.
+        libraryWatch:
+          type: string
+          enum: [auto, poll, off]
+          description: >
+            How library folders are watched for new files: change notifications
+            on local disks and a quick check every `watchPollSeconds` on network
+            shares (`auto`, the default), the quick check everywhere (`poll`), or
+            only the full rescan (`off`).
+        watchPollSeconds:
+          type: integer
+          readOnly: true
+          description: How often polled folders are checked (MATINEE_WATCH_POLL_INTERVAL). Ignored in a `PUT`.
+        scanIntervalSeconds:
+          type: integer
+          readOnly: true
+          description: How often every library is rescanned in full, 0 for never (MATINEE_SCAN_INTERVAL). Ignored in a `PUT`.
         hardwareAcceleration:
           type: string
           enum: [auto, off, nvenc, vaapi, qsv, videotoolbox, amf, v4l2m2m]
@@ -1430,6 +1446,15 @@ components:
         kind: { type: string, examples: [movies, tv, music] }
         paths: { type: array, items: { type: string } }
         scanning: { type: boolean }
+        watch:
+          type: array
+          description: How each folder is watched for new files. Empty just after the server starts.
+          items:
+            type: object
+            properties:
+              path: { type: string }
+              method: { type: string, enum: [events, polling, off] }
+              reason: { type: string, description: 'Why a folder is polled, such as "network share (cifs)".' }
     Item:
       type: object
       description: Anything browsable. Fields without a value are left out.

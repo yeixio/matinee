@@ -20,6 +20,7 @@ type Config struct {
 	FFmpegPath   string        // ffmpeg binary
 	FFprobePath  string        // ffprobe binary
 	ScanInterval time.Duration // periodic library rescan; 0 disables it
+	WatchPoll    time.Duration // how often folders on network shares are checked for new files
 	TMDBKey      string        // themoviedb.org API key or read token; empty disables online metadata
 	DatabaseURL  string        // postgres:// URL; empty uses SQLite in DataDir
 	MediaRoot    string        // where the folder picker starts when adding a library
@@ -65,6 +66,7 @@ func Load(args []string) (Config, error) {
 	fs.StringVar(&c.PublicURL, "public-url", env("MATINEE_PUBLIC_URL", ""), "the address the apps should connect to, such as https://matinee.example.com")
 	fs.StringVar(&c.HomeAddr, "home-addr", env("MATINEE_HOME_ADDR", ""), "listen address for the home network alone, when the main one sits behind a proxy (see the README)")
 	interval := fs.String("scan-interval", env("MATINEE_SCAN_INTERVAL", "15m"), "periodic rescan interval, 0 to disable")
+	watchPoll := fs.String("watch-poll-interval", env("MATINEE_WATCH_POLL_INTERVAL", "30s"), "how often folders on network shares are checked for new files")
 	if err := fs.Parse(args); err != nil {
 		return c, err
 	}
@@ -73,6 +75,9 @@ func Load(args []string) (Config, error) {
 		return c, fmt.Errorf("scan-interval: %w", err)
 	}
 	c.ScanInterval = d
+	if c.WatchPoll, err = time.ParseDuration(*watchPoll); err != nil || c.WatchPoll < time.Second {
+		return c, fmt.Errorf("watch-poll-interval: want a duration of at least 1s, like 30s")
+	}
 	if err := os.MkdirAll(c.TranscodeDir(), 0o755); err != nil {
 		return c, fmt.Errorf("create data dir: %w", err)
 	}

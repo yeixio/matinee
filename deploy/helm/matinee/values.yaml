@@ -142,6 +142,8 @@ gpu:
 env: []
 #  - name: MATINEE_SCAN_INTERVAL
 #    value: 30m
+#  - name: MATINEE_WATCH_POLL_INTERVAL   # how often SMB/NFS folders are checked for new files
+#    value: 30s
 
 resources: {}
 #  requests: {cpu: 500m, memory: 512Mi}
