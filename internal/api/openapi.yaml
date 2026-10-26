@@ -231,6 +231,26 @@ paths:
             application/json:
               schema: { $ref: "#/components/schemas/User" }
         "401": { $ref: "#/components/responses/Error" }
+  /me/password:
+    put:
+      summary: Change your own password
+      description: |
+        Needs the current password. Every other device you signed in on is
+        signed out; this one stays signed in.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [current, new]
+              properties:
+                current: { type: string }
+                new: { type: string, minLength: 8 }
+      responses:
+        "204": { description: Changed. }
+        "400": { $ref: "#/components/responses/Error" }
+        "403": { $ref: "#/components/responses/Error" }
   /me/theme:
     get:
       summary: The theme the current user picked
@@ -349,6 +369,62 @@ paths:
             application/json:
               schema: { $ref: "#/components/schemas/User" }
         "409": { $ref: "#/components/responses/Error" }
+  /users/{id}:
+    patch:
+      summary: Make an account an admin or not (admins only)
+      description: The last admin can't stop being one (409).
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                isAdmin: { type: boolean }
+      responses:
+        "200":
+          description: The account as it is now.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/User" }
+        "404": { $ref: "#/components/responses/Error" }
+        "409": { $ref: "#/components/responses/Error" }
+    delete:
+      summary: Remove an account (admins only)
+      description: |
+        Removes the account with its sessions, downloads, watch history, watch
+        list, requests and problem reports. Admins can't remove themselves
+        (400), and the last admin can't be removed (409).
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      responses:
+        "204": { description: Removed. }
+        "400": { $ref: "#/components/responses/Error" }
+        "404": { $ref: "#/components/responses/Error" }
+        "409": { $ref: "#/components/responses/Error" }
+  /users/{id}/password:
+    put:
+      summary: Set someone's password (admins only)
+      description: |
+        No current password needed. The account is signed out on every
+        device, except this one when admins reset their own.
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [password]
+              properties:
+                password: { type: string, minLength: 8 }
+      responses:
+        "204": { description: Changed. }
+        "400": { $ref: "#/components/responses/Error" }
+        "404": { $ref: "#/components/responses/Error" }
 
   /libraries:
     get:
