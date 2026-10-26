@@ -11,7 +11,6 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
-	"slices"
 	"sort"
 	"strconv"
 	"strings"
@@ -109,6 +108,7 @@ func (s *Server) routes() []route {
 		{"GET /me", reader, s.me},
 		{"GET /me/theme", reader, s.getMyTheme},
 		{"PUT /me/theme", reader, s.putMyTheme},
+		{"PUT /me/password", signedIn, s.changeMyPassword},
 		{"GET /themes", public, s.listThemes},
 		{"GET /devices", signedIn, s.listDevices},
 		{"DELETE /devices/{id}", signedIn, s.deleteDevice},
@@ -116,12 +116,18 @@ func (s *Server) routes() []route {
 		{"PUT /settings", adminOnly, s.putSettings},
 		{"GET /users", adminOnly, s.listUsers},
 		{"POST /users", adminOnly, s.createUser},
+		{"PATCH /users/{id}", adminOnly, s.updateUser},
+		{"PUT /users/{id}/password", adminOnly, s.resetPassword},
+		{"DELETE /users/{id}", adminOnly, s.deleteUser},
 
 		{"GET /libraries", reader, s.listLibraries},
 		{"POST /libraries", adminOnly, s.createLibrary},
 		{"DELETE /libraries/{id}", adminOnly, s.deleteLibrary},
 		{"POST /libraries/{id}/scan", adminOnly, s.scanLibrary},
 		{"GET /libraries/{id}/items", reader, s.libraryItems},
+		{"GET /libraries/{id}/filters", reader, s.libraryFilters},
+		{"GET /libraries/{id}/people", reader, s.libraryPeople},
+		{"GET /items", reader, s.filterItems},
 		{"GET /fs", adminOnly, s.browseFS},
 		{"GET /analysis", adminOnly, s.getAnalysis},
 		{"PUT /analysis", adminOnly, s.putAnalysis},
@@ -344,8 +350,17 @@ func (c credentials) validate() string {
 	switch {
 	case strings.TrimSpace(c.Username) == "":
 		return "username is required"
-	case len(c.Password) < 8:
+	}
+	return validatePassword(c.Password)
+}
+
+// validatePassword says what's wrong with a new password, or "" if nothing.
+func validatePassword(pw string) string {
+	switch {
+	case len([]rune(pw)) < 8:
 		return "password must be at least 8 characters"
+	case len(pw) > 72: // bcrypt's limit
+		return "password must be at most 72 bytes"
 	}
 	return ""
 }
@@ -601,39 +616,6 @@ func (s *Server) scanLibrary(w http.ResponseWriter, r *http.Request) {
 	}
 	go s.Scanner.Scan(s.BackgroundCtx, lib)
 	w.WriteHeader(http.StatusAccepted)
-}
-
-func (s *Server) libraryItems(w http.ResponseWriter, r *http.Request) {
-	id, ok := pathID(r)
-	if !ok {
-		writeError(w, http.StatusBadRequest, "bad id")
-		return
-	}
-	items, err := s.Store.TopLevel(r.Context(), currentUser(r).ID, id)
-	if err != nil {
-		s.serverError(w, err)
-		return
-	}
-	// ?tag=4k&tag=hdr keeps items with every tag given (see Item.MediaTags).
-	if tags := r.URL.Query()["tag"]; len(tags) > 0 {
-		kept := items[:0]
-		for _, it := range items {
-			if hasAll(it.MediaTags, tags) {
-				kept = append(kept, it)
-			}
-		}
-		items = kept
-	}
-	writeLargeJSON(w, r, items)
-}
-
-func hasAll(have, want []string) bool {
-	for _, w := range want {
-		if !slices.Contains(have, w) {
-			return false
-		}
-	}
-	return true
 }
 
 // browseFS lists subfolders so admins can pick library folders from the browser.

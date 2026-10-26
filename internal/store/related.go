@@ -40,7 +40,7 @@ func (s *Store) Related(ctx context.Context, userID int64, it Item) ([]Item, err
 	err := add(`
 		SELECT o.item_id, SUM(CASE m.kind WHEN 'rec' THEN 6 WHEN 'keyword' THEN 2 WHEN 'collection' THEN -1000 ELSE 1 END)
 		FROM item_terms m JOIN item_terms o ON o.kind = m.kind AND o.term = m.term AND o.item_id <> m.item_id
-		WHERE m.item_id = ?
+		WHERE m.item_id = ? AND m.kind IN ('genre', 'keyword', 'collection', 'rec')
 		GROUP BY o.item_id`)
 	if err != nil {
 		return nil, err

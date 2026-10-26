@@ -27,6 +27,11 @@ func HashPassword(pw string) (string, error) {
 	return string(b), err
 }
 
+// CheckPassword says whether password is the user's.
+func CheckPassword(u store.User, password string) bool {
+	return bcrypt.CompareHashAndPassword([]byte(u.PasswordHash()), []byte(password)) == nil
+}
+
 // Login checks a password and starts a session for a device.
 func Login(ctx context.Context, s *store.Store, username, password string, dev store.Device) (store.User, string, error) {
 	u, err := s.UserByName(ctx, username)
@@ -38,7 +43,7 @@ func Login(ctx context.Context, s *store.Store, username, password string, dev s
 	if err != nil {
 		return u, "", err
 	}
-	if bcrypt.CompareHashAndPassword([]byte(u.PasswordHash()), []byte(password)) != nil {
+	if !CheckPassword(u, password) {
 		return u, "", ErrBadCredentials
 	}
 	token, err := s.CreateSession(ctx, u.ID, SessionTTL, dev)

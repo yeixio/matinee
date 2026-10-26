@@ -116,7 +116,8 @@ func (s *Store) ApplyDetails(ctx context.Context, id int64, u DetailsUpdate) err
 		return err
 	}
 	defer t.Rollback()
-	if _, err := t.ExecContext(ctx, "UPDATE items SET details = ?, details_at = ? WHERE id = ?", string(js), now(), id); err != nil {
+	if _, err := t.ExecContext(ctx, "UPDATE items SET details = ?, details_at = ?, released = ? WHERE id = ?",
+		string(js), now(), releaseDate(u.Details), id); err != nil {
 		return err
 	}
 	if err := applyCredits(ctx, t, id, u); err != nil {
@@ -126,7 +127,7 @@ func (s *Store) ApplyDetails(ctx context.Context, id int64, u DetailsUpdate) err
 		return err
 	}
 	seen := map[Term]bool{}
-	for _, term := range u.Terms {
+	for _, term := range append(u.Terms, filterTerms(u.Details)...) {
 		if seen[term] || term.Term == "" {
 			continue
 		}
@@ -150,7 +151,8 @@ func (s *Store) ApplyEpisodeDetails(ctx context.Context, id int64, u DetailsUpda
 		return err
 	}
 	defer t.Rollback()
-	if _, err := t.ExecContext(ctx, "UPDATE items SET details = ?, details_at = ? WHERE id = ?", string(js), now(), id); err != nil {
+	if _, err := t.ExecContext(ctx, "UPDATE items SET details = ?, details_at = ?, released = ? WHERE id = ?",
+		string(js), now(), releaseDate(u.Details), id); err != nil {
 		return err
 	}
 	if err := applyCredits(ctx, t, id, u); err != nil {

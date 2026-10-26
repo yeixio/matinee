@@ -9,6 +9,8 @@ import (
 	"encoding/hex"
 	"errors"
 	"fmt"
+	"net/url"
+	"strconv"
 	"strings"
 	"sync/atomic"
 	"time"
@@ -36,7 +38,7 @@ type Store struct {
 func Open(dsn string) (*Store, error) {
 	var d *db
 	if strings.HasPrefix(dsn, "postgres://") || strings.HasPrefix(dsn, "postgresql://") {
-		conn, err := sql.Open("pgx", dsn)
+		conn, err := sql.Open("pgx", withoutJIT(dsn))
 		if err != nil {
 			return nil, err
 		}
@@ -58,7 +60,29 @@ func Open(dsn string) (*Store, error) {
 		d.Close()
 		return nil, fmt.Errorf("migrate: %w", err)
 	}
+	if err := s.backfillFilters(context.Background()); err != nil {
+		d.Close()
+		return nil, fmt.Errorf("backfill filters: %w", err)
+	}
 	return s, nil
+}
+
+// withoutJIT turns off PostgreSQL's JIT compiler for Matinee's connections,
+// unless the URL says otherwise. Library filters are quick queries the
+// planner thinks are costly, and compiling them took far longer than
+// running them.
+func withoutJIT(dsn string) string {
+	u, err := url.Parse(dsn)
+	if err != nil {
+		return dsn
+	}
+	q := u.Query()
+	if q.Has("jit") {
+		return dsn
+	}
+	q.Set("jit", "off")
+	u.RawQuery = q.Encode()
+	return u.String()
 }
 
 func (s *Store) Close() error { return s.db.Close() }
@@ -249,6 +273,9 @@ var migrations = []string{
 		PRIMARY KEY (item_id, kind, term)
 	)`,
 	"CREATE INDEX item_terms_term ON item_terms(kind, term)",
+	// 32: release date (first air date for shows, air date for episodes),
+	// for filtering and sorting by it (see filter.go).
+	"ALTER TABLE items ADD COLUMN released TEXT",
 }
 
 func now() int64 { return time.Now().Unix() }
@@ -314,6 +341,110 @@ func (s *Store) Users(ctx context.Context) ([]User, error) {
 func (s *Store) UserByName(ctx context.Context, username string) (User, error) {
 	return s.scanUser(s.db.QueryRowContext(ctx,
 		"SELECT id, username, is_admin, password_hash FROM users WHERE lower(username) = lower(?) AND guest = 0", username))
+}
+
+func (s *Store) UserByID(ctx context.Context, id int64) (User, error) {
+	return s.scanUser(s.db.QueryRowContext(ctx,
+		"SELECT id, username, is_admin, password_hash FROM users WHERE id = ? AND guest = 0", id))
+}
+
+// ErrLastAdmin means a change would leave the server with no admin.
+var ErrLastAdmin = errors.New("the server needs at least one admin")
+
+// otherAdmins is true when an account other than the one given is an admin.
+// Changes to admins check it in the same statement as the change.
+const otherAdmins = "EXISTS (SELECT 1 FROM users o WHERE o.is_admin = 1 AND o.guest = 0 AND o.id <> ?)"
+
+func (s *Store) SetPassword(ctx context.Context, userID int64, passwordHash string) error {
+	res, err := s.db.ExecContext(ctx, "UPDATE users SET password_hash = ? WHERE id = ? AND guest = 0", passwordHash, userID)
+	return oneRow(res, err)
+}
+
+// SetAdmin makes an account an admin or not. The last admin stays one.
+func (s *Store) SetAdmin(ctx context.Context, userID int64, admin bool) error {
+	if _, err := s.UserByID(ctx, userID); err != nil {
+		return err
+	}
+	q := "UPDATE users SET is_admin = ? WHERE id = ? AND guest = 0"
+	args := []any{b2i(admin), userID}
+	if !admin {
+		q += " AND (is_admin = 0 OR " + otherAdmins + ")"
+		args = append(args, userID)
+	}
+	res, err := s.db.ExecContext(ctx, q, args...)
+	if err := oneRow(res, err); errors.Is(err, ErrNotFound) {
+		return ErrLastAdmin
+	} else if err != nil {
+		return err
+	}
+	return nil
+}
+
+// DeleteUser removes an account and everything that belongs to it: sessions,
+// watch history, watch list, downloads, requests and settings. The last admin
+// can't be removed.
+func (s *Store) DeleteUser(ctx context.Context, userID int64) error {
+	if _, err := s.UserByID(ctx, userID); err != nil {
+		return err
+	}
+	t, err := s.db.BeginTx(ctx)
+	if err != nil {
+		return err
+	}
+	defer t.Rollback()
+	// The other tables follow with ON DELETE CASCADE; per-user settings are
+	// keys like "theme:user:<id>".
+	if _, err := t.ExecContext(ctx, "DELETE FROM settings WHERE key LIKE ?", "%:user:"+strconv.FormatInt(userID, 10)); err != nil {
+		return err
+	}
+	res, err := t.ExecContext(ctx, "DELETE FROM users WHERE id = ? AND guest = 0 AND (is_admin = 0 OR "+otherAdmins+")", userID, userID)
+	if err := oneRow(res, err); errors.Is(err, ErrNotFound) {
+		return ErrLastAdmin
+	} else if err != nil {
+		return err
+	}
+	return t.Commit()
+}
+
+// DeleteOtherSessions signs a user out everywhere but the session keep
+// ("" signs them out everywhere). Those devices' downloads go with them.
+func (s *Store) DeleteOtherSessions(ctx context.Context, userID int64, keep string) error {
+	rows, err := s.db.QueryContext(ctx, "SELECT token FROM sessions WHERE user_id = ? AND token <> ?", userID, keep)
+	if err != nil {
+		return err
+	}
+	var tokens []string
+	for rows.Next() {
+		var token string
+		if err := rows.Scan(&token); err != nil {
+			rows.Close()
+			return err
+		}
+		tokens = append(tokens, token)
+	}
+	rows.Close()
+	if err := rows.Err(); err != nil {
+		return err
+	}
+	for _, token := range tokens {
+		if err := s.DeleteSession(ctx, token); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// oneRow turns an update that matched nothing into ErrNotFound.
+func oneRow(res sql.Result, err error) error {
+	if err != nil {
+		return err
+	}
+	if n, err := res.RowsAffected(); err != nil {
+		return err
+	} else if n == 0 {
+		return ErrNotFound
+	}
+	return nil
 }
 
 func (s *Store) scanUser(row *sql.Row) (User, error) {
