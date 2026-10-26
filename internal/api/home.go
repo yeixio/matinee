@@ -128,6 +128,9 @@ type serverSettings struct {
 	// Hardware says which accelerator is in use and which ones work here.
 	// It can't be changed.
 	Hardware *hwaccel.Status `json:"hardware,omitempty"`
+	// RemoteTrailers offers trailers from TMDB (played from YouTube) along
+	// with trailer files next to the media. On unless an admin turns it off.
+	RemoteTrailers bool `json:"remoteTrailers"`
 }
 
 func (s *Server) settings(ctx context.Context) (serverSettings, error) {
@@ -136,7 +139,11 @@ func (s *Server) settings(ctx context.Context) (serverSettings, error) {
 		return serverSettings{}, err
 	}
 	mode, err := s.requestMode(ctx)
-	set := serverSettings{RequireSignInAtHome: required, Requests: mode,
+	if err != nil {
+		return serverSettings{}, err
+	}
+	trailers, err := s.remoteTrailersOn(ctx)
+	set := serverSettings{RequireSignInAtHome: required, Requests: mode, RemoteTrailers: trailers,
 		HardwareAcceleration: hwaccel.Auto, Hardware: &hwaccel.Status{Available: []hwaccel.Accel{}}}
 	if hw := s.HW; hw != nil {
 		st := hw.Status()
@@ -160,6 +167,7 @@ func (s *Server) putSettings(w http.ResponseWriter, r *http.Request) {
 		RequireSignInAtHome  *bool   `json:"requireSignInAtHome"`
 		Requests             *string `json:"requests"`
 		HardwareAcceleration *string `json:"hardwareAcceleration"`
+		RemoteTrailers       *bool   `json:"remoteTrailers"`
 		// Read-only; accepted so a client can send back what it got.
 		Hardware json.RawMessage `json:"hardware"`
 	}
@@ -189,6 +197,12 @@ func (s *Server) putSettings(w http.ResponseWriter, r *http.Request) {
 		}
 		if hw := s.HW; hw != nil {
 			hw.SetPreference(*p)
+		}
+	}
+	if in.RemoteTrailers != nil {
+		if err := s.Store.SetSetting(ctx, settingRemoteTrailers, strconv.FormatBool(*in.RemoteTrailers)); err != nil {
+			s.serverError(w, err)
+			return
 		}
 	}
 	if in.RequireSignInAtHome != nil {

@@ -543,6 +543,53 @@ paths:
                   url: { type: string, example: /api/v1/hls/abc123/index.m3u8 }
                   startSec: { type: number }
         "409": { description: A newer start for the same item replaced this one. }
+  /items/{id}/trailers:
+    get:
+      summary: A movie's, show's or season's trailers
+      description: |
+        Trailer files next to the media come first (`Movie-trailer.mkv`,
+        `trailer.mp4`, or anything in a `Trailers` folder), then up to three
+        YouTube trailers from TMDB unless an admin turned those off. A season
+        without its own trailers lists its show's. Empty when there are none.
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      responses:
+        "200":
+          description: Trailers, best first.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Trailer" }
+  /items/{id}/trailers/{trailer}/file:
+    get:
+      summary: A local trailer's file, for direct play
+      description: Supports Range requests.
+      parameters:
+        - $ref: "#/components/parameters/ID"
+        - { name: trailer, in: path, required: true, schema: { type: string }, description: "A local trailer's id, e.g. local-0." }
+      responses:
+        "200": { description: The file. }
+        "206": { description: Part of the file. }
+        "404": { $ref: "#/components/responses/Error" }
+  /items/{id}/trailers/{trailer}/hls:
+    post:
+      summary: Start a transcode of a local trailer
+      description: Like `/items/{id}/hls`. It replaces the viewer's transcode of the title itself.
+      parameters:
+        - $ref: "#/components/parameters/ID"
+        - { name: trailer, in: path, required: true, schema: { type: string } }
+        - { name: start, in: query, schema: { type: number }, description: Seconds into the trailer. }
+      responses:
+        "200":
+          description: An HLS playlist to play.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  url: { type: string, example: /api/v1/hls/abc123/index.m3u8 }
+                  startSec: { type: number }
+        "404": { $ref: "#/components/responses/Error" }
   /hls/{session}/{file}:
     get:
       summary: A transcode's playlist and segments
@@ -1097,6 +1144,9 @@ components:
             (`off`), anyone, with an admin approving (`approve`, the default),
             or anyone, right away (`auto`). Settings left out of a `PUT` stay
             as they are.
+        remoteTrailers:
+          type: boolean
+          description: Offer TMDB's YouTube trailers along with trailer files. On by default.
         hardwareAcceleration:
           type: string
           enum: [auto, off, nvenc, vaapi, qsv, videotoolbox, amf, v4l2m2m]
@@ -1118,6 +1168,23 @@ components:
               items: { $ref: '#/components/schemas/Accelerator' }
             detecting: { type: boolean, description: The startup tests are still running. }
             problem: { type: string, description: "When no accelerator works: why a GPU the server can see couldn't be used, such as a missing permission." }
+    Trailer:
+      type: object
+      required: [id, name, source]
+      properties:
+        id: { type: string, example: local-0 }
+        name: { type: string, example: Official Trailer }
+        source:
+          type: string
+          enum: [local, youtube]
+          description: Local trailers play through `/items/{id}/trailers/{trailer}/file` or `/hls`; YouTube ones on YouTube.
+        mimeType: { type: string, description: Local trailers only. }
+        container: { type: string, description: Local trailers only, as the first name ffprobe gives (e.g. mov or matroska). }
+        videoCodec: { type: string, description: Local trailers only. }
+        audioCodec: { type: string, description: Local trailers only. }
+        durationMs: { type: integer, description: Local trailers only. }
+        key: { type: string, description: The YouTube video id. }
+        url: { type: string, description: The YouTube page. }
     Accelerator:
       type: object
       properties:

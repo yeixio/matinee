@@ -70,7 +70,8 @@ func makeMedia(t *testing.T, path string, args ...string) {
 	}
 }
 
-func newTestServer(t *testing.T) (*client, string) {
+// newTestServer starts a server; opts can change it before it starts.
+func newTestServer(t *testing.T, opts ...func(*Server)) (*client, string) {
 	t.Helper()
 	db := storetest.Open(t)
 	log := slog.New(slog.NewTextHandler(io.Discard, nil))
@@ -90,6 +91,9 @@ func newTestServer(t *testing.T) (*client, string) {
 	dl.SubtitleStream = srv.BurnStream
 	// Not running: tests that want it start srv.Analyzer.Run themselves.
 	srv.Analyzer = &analyze.Analyzer{Store: db, Prober: probe.Prober{Path: "ffprobe"}, Log: log}
+	for _, o := range opts {
+		o(srv)
+	}
 	done := make(chan struct{})
 	go func() { dl.Run(ctx); close(done) }()
 	t.Cleanup(func() { cancel(); <-done })

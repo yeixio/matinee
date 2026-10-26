@@ -6,6 +6,7 @@ import { ItemQuality, ReportProblem } from '../components/Arr'
 import { Artwork } from '../components/Artwork'
 import { FileDetailsButton, Languages, QualityBadges } from '../components/MediaInfo'
 import { PosterGrid } from '../components/Card'
+import { TrailerButton } from '../components/Trailer'
 import { Button, Spinner } from '../components/ui'
 import { WatchListButton } from '../components/WatchListButton'
 import { clock, duration, progressFraction } from '../format'
@@ -156,6 +157,7 @@ function Header({ item, kids }: { item: ItemDetail; kids?: Item[] }) {
                 </Button>
               </>
             )}
+            <TrailerButton item={item} />
             <WatchListButton item={item} />
             {item.kind !== 'artist' && item.kind !== 'album' && item.kind !== 'track' && (
               <>
