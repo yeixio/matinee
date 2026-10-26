@@ -452,6 +452,13 @@ export const api = {
   users: () => request<User[]>('GET', '/api/v1/users'),
   createUser: (username: string, password: string, isAdmin: boolean) =>
     request<User>('POST', '/api/v1/users', { username, password, isAdmin }),
+  setAdmin: (id: number, isAdmin: boolean) => request<User>('PATCH', `/api/v1/users/${id}`, { isAdmin }),
+  // Signs the person out on every device.
+  resetPassword: (id: number, password: string) => request<void>('PUT', `/api/v1/users/${id}/password`, { password }),
+  deleteUser: (id: number) => request<void>('DELETE', `/api/v1/users/${id}`),
+  // Signs out every other device of the signed-in user.
+  changePassword: (current: string, next: string) =>
+    request<void>('PUT', '/api/v1/me/password', { current, new: next }),
 
   integrations: () => request<Record<ArrApp, Integration>>('GET', '/api/v1/integrations'),
   testIntegration: (app: ArrApp, c: IntegrationConfig) => request<ConnectionCheck>('POST', `/api/v1/integrations/${app}/test`, c),
