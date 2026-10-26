@@ -74,3 +74,34 @@ func TestScanKeepsItemsWhenFolderIsGone(t *testing.T) {
 		t.Fatalf("removed %d, left %+v", stats.Removed, top)
 	}
 }
+
+// Trailers belong to the title next to them, not in the library as titles of their own.
+func TestScanLeavesOutTrailers(t *testing.T) {
+	ffmpeg, err := exec.LookPath("ffmpeg")
+	if err != nil {
+		t.Skip("ffmpeg not installed")
+	}
+	ffprobe, err := exec.LookPath("ffprobe")
+	if err != nil {
+		t.Skip("ffprobe not installed")
+	}
+	root := t.TempDir()
+	for _, rel := range []string{"Heat (1995)/Heat (1995).mkv", "Heat (1995)/Heat (1995)-trailer.mkv", "Heat (1995)/Trailers/Teaser.mkv"} {
+		p := filepath.Join(root, rel)
+		os.MkdirAll(filepath.Dir(p), 0o755)
+		if out, err := exec.Command(ffmpeg, "-loglevel", "error", "-f", "lavfi", "-i", "testsrc=d=1:s=64x36", p).CombinedOutput(); err != nil {
+			t.Fatalf("make video: %v\n%s", err, out)
+		}
+	}
+	st := storetest.Open(t)
+	ctx := context.Background()
+	lib, _ := st.CreateLibrary(ctx, "Movies", "movies", []string{root})
+	s := &Scanner{Store: st, Prober: probe.Prober{Path: ffprobe}, Log: slog.New(slog.NewTextHandler(io.Discard, nil))}
+	if _, err := s.Scan(ctx, lib); err != nil {
+		t.Fatal(err)
+	}
+	top, _ := st.TopLevel(ctx, 0, lib.ID)
+	if len(top) != 1 || top[0].Title != "Heat" {
+		t.Fatalf("movies: %+v", top)
+	}
+}

@@ -39,6 +39,8 @@ type Server struct {
 	Log        *slog.Logger
 	MediaRoot  string // where the folder picker starts; empty means /
 	Name       string // what the apps call this server
+	// TrailerSource lists trailers online; nil without a TMDB key.
+	TrailerSource TrailerSource
 
 	// HomeListener means the home network has its own listener (HomeHandler),
 	// so requests to the main one never count as coming from home.
@@ -46,6 +48,7 @@ type Server struct {
 	homeSignIn   homeSetting
 	setUp        atomic.Bool // the first account exists
 	arrCache     ttlCache    // answers from Radarr and Sonarr (see arr.go)
+	trailerCache ttlCache    // trailer files' probes and TMDB's trailer lists (see trailers.go)
 
 	// BackgroundCtx scopes scans started by API calls; it outlives any one request.
 	BackgroundCtx context.Context
@@ -114,6 +117,9 @@ func (s *Server) routes() []route {
 		{"GET /items/{id}/image/{type}", reader, s.itemImage},
 		{"GET /items/{id}/file", reader, s.directFile},
 		{"GET /items/{id}/subtitles/{track}", reader, s.subtitleFile},
+		{"GET /items/{id}/trailers", reader, s.listTrailers},
+		{"GET /items/{id}/trailers/{trailer}/file", reader, s.trailerFile},
+		{"POST /items/{id}/trailers/{trailer}/hls", reader, s.trailerHLS},
 		{"POST /items/{id}/hls", reader, s.startHLS},
 		{"GET /hls/{session}/{file}", reader, s.hlsFile},
 

@@ -7,6 +7,7 @@ import (
 	"log/slog"
 	"net/http"
 	"net/http/httptest"
+	"strings"
 	"testing"
 
 	"github.com/yeixio/matinee/internal/store"
@@ -105,5 +106,45 @@ func TestFetcherFillsShowsSeasonsThenEpisodes(t *testing.T) {
 	}
 	if left, _ := st.NeedsMetadata(ctx, lib.ID, f.Kinds()); len(left) != 0 {
 		t.Fatalf("everything should be looked up: %+v", left)
+	}
+}
+
+func TestTMDBTrailers(t *testing.T) {
+	mux := http.NewServeMux()
+	mux.HandleFunc("GET /movie/949/videos", func(w http.ResponseWriter, r *http.Request) {
+		json.NewEncoder(w).Encode(map[string]any{"results": []map[string]any{
+			{"name": "Behind the scenes", "site": "YouTube", "key": "bts", "type": "Featurette", "official": true},
+			{"name": "Teaser", "site": "YouTube", "key": "teaser", "type": "Teaser", "official": true},
+			{"name": "Fan trailer", "site": "YouTube", "key": "fan", "type": "Trailer", "official": false},
+			{"name": "Old trailer", "site": "YouTube", "key": "old", "type": "Trailer", "official": true, "published_at": "1995-01-01"},
+			{"name": "Official Trailer", "site": "YouTube", "key": "new", "type": "Trailer", "official": true, "published_at": "2020-01-01"},
+			{"name": "Vimeo trailer", "site": "Vimeo", "key": "v", "type": "Trailer", "official": true},
+		}})
+	})
+	mux.HandleFunc("GET /tv/1396/season/2/videos", func(w http.ResponseWriter, r *http.Request) {
+		json.NewEncoder(w).Encode(map[string]any{"results": []map[string]any{{"name": "Season 2", "site": "YouTube", "key": "s2", "type": "Trailer"}}})
+	})
+	ts := httptest.NewServer(mux)
+	t.Cleanup(ts.Close)
+	tm := NewTMDB("k")
+	tm.BaseURL = ts.URL
+	ctx := context.Background()
+
+	vids, err := tm.Trailers(ctx, "movie", 949, 0)
+	if err != nil {
+		t.Fatal(err)
+	}
+	var keys []string
+	for _, v := range vids {
+		keys = append(keys, v.Key)
+	}
+	if got := strings.Join(keys, ","); got != "new,old,fan,teaser" {
+		t.Errorf("order: %s", got)
+	}
+	if vids, _ := tm.Trailers(ctx, "show", 1396, 2); len(vids) != 1 || vids[0].Key != "s2" {
+		t.Errorf("season: %+v", vids)
+	}
+	if vids, err := tm.Trailers(ctx, "show", 1, 0); err != nil || len(vids) != 0 {
+		t.Errorf("unknown show: %+v %v", vids, err)
 	}
 }

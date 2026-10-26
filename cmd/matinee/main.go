@@ -78,8 +78,10 @@ func run() error {
 
 	scanner := &scan.Scanner{Store: db, Prober: probe.Prober{Path: cfg.FFprobePath}, Log: log}
 	fetcher := &metadata.Fetcher{Store: db, Log: log}
+	var tmdb *metadata.TMDB
 	if cfg.TMDBKey != "" {
-		fetcher.Providers = append(fetcher.Providers, metadata.NewTMDB(cfg.TMDBKey))
+		tmdb = metadata.NewTMDB(cfg.TMDBKey)
+		fetcher.Providers = append(fetcher.Providers, tmdb)
 	} else {
 		log.Info("no TMDB key set; movies and TV use local artwork only (set MATINEE_TMDB_KEY for posters and descriptions)")
 	}
@@ -100,6 +102,9 @@ func run() error {
 		Web:       web.FS(), Log: log, BackgroundCtx: ctx,
 		MediaRoot: cfg.MediaRoot, Name: cfg.ServerName,
 		HomeListener: cfg.HomeAddr != "",
+	}
+	if tmdb != nil {
+		apiServer.TrailerSource = tmdb
 	}
 	downloads.SubtitleStream = apiServer.BurnStream
 	go downloads.Run(ctx)

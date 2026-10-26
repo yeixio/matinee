@@ -280,6 +280,20 @@ func (s *Store) UpsertFile(ctx context.Context, it Item) (int64, error) {
 	return id, err
 }
 
+// FileUnder returns the path of one file under a show or season, so callers
+// can find the folder it lives in. It returns "" when there's none.
+func (s *Store) FileUnder(ctx context.Context, id int64) (string, error) {
+	var p string
+	err := s.db.QueryRowContext(ctx, `
+		SELECT path FROM items
+		WHERE path IS NOT NULL AND (parent_id = ? OR parent_id IN (SELECT id FROM items WHERE parent_id = ?))
+		ORDER BY path LIMIT 1`, id, id).Scan(&p)
+	if errors.Is(err, sql.ErrNoRows) {
+		return "", nil
+	}
+	return p, err
+}
+
 // SubtitleStreams returns a file's embedded subtitle streams as stored by the
 // scanner, as JSON. ok is false for files scanned before Matinee looked for them.
 func (s *Store) SubtitleStreams(ctx context.Context, id int64) (streams string, ok bool, err error) {

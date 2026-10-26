@@ -86,6 +86,8 @@ func (s *Scanner) Scan(ctx context.Context, lib store.Library) (Stats, error) {
 	if !ok {
 		return Stats{}, fmt.Errorf("unknown library kind %q", lib.Kind)
 	}
+	// Trailers are found when someone opens a title (see trailers.go), not listed as titles.
+	video := kind.Name() == "movies" || kind.Name() == "tv"
 	start := time.Now()
 	var st Stats
 	seen := map[string]bool{}
@@ -109,12 +111,12 @@ func (s *Scanner) Scan(ctx context.Context, lib store.Library) (Stats, error) {
 				return ctx.Err()
 			}
 			if d.IsDir() {
-				if path != root && strings.HasPrefix(d.Name(), ".") {
+				if path != root && (strings.HasPrefix(d.Name(), ".") || video && IsTrailerDir(d.Name())) {
 					return filepath.SkipDir
 				}
 				return nil
 			}
-			if strings.HasPrefix(d.Name(), ".") || !kind.Wants(path) {
+			if strings.HasPrefix(d.Name(), ".") || !kind.Wants(path) || video && IsTrailerFile(d.Name()) {
 				return nil
 			}
 			seen[path] = true

@@ -6,7 +6,22 @@
 export type User = { id: number; username: string; isAdmin: boolean; guest?: boolean }
 // requests: who besides admins may add titles through Radarr and Sonarr.
 export type RequestMode = 'off' | 'approve' | 'auto'
-export type Settings = { requireSignInAtHome: boolean; requests: RequestMode }
+// remoteTrailers: offer TMDB's YouTube trailers next to trailer files.
+export type Settings = { requireSignInAtHome: boolean; requests: RequestMode; remoteTrailers: boolean }
+
+// A trailer file next to the media (local), which plays like the title
+// itself, or a YouTube trailer from TMDB.
+export type Trailer = {
+  id: string
+  name: string
+  source: 'local' | 'youtube'
+  mimeType?: string
+  videoCodec?: string
+  audioCodec?: string
+  durationMs?: number
+  key?: string
+  url?: string
+}
 
 export type ArrApp = 'radarr' | 'sonarr'
 // A Radarr or Sonarr connection. The API key stays on the server.
@@ -265,6 +280,9 @@ export const api = {
       'POST',
       `/api/v1/items/${id}/hls?start=${startSec}${burnSubtitle ? `&subtitle=${encodeURIComponent(burnSubtitle)}` : ''}`,
     ),
+  trailers: (id: number) => request<Trailer[]>('GET', `/api/v1/items/${id}/trailers`),
+  startTrailerHls: (id: number, trailer: string) =>
+    request<{ url: string; startSec: number }>('POST', `/api/v1/items/${id}/trailers/${encodeURIComponent(trailer)}/hls`),
   subtitles: async (id: number, track: string) => {
     const res = await fetch(`/api/v1/items/${id}/subtitles/${encodeURIComponent(track)}.vtt`, { credentials: 'same-origin' })
     if (!res.ok) throw new ApiError(res.status, "Couldn't load these subtitles")
@@ -274,3 +292,4 @@ export const api = {
 
 export const imageUrl = (id: number, type: 'poster' | 'backdrop') => `/api/v1/items/${id}/image/${type}`
 export const fileUrl = (id: number) => `/api/v1/items/${id}/file`
+export const trailerFileUrl = (id: number, trailer: string) => `/api/v1/items/${id}/trailers/${encodeURIComponent(trailer)}/file`

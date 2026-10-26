@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
+	"sort"
 	"strconv"
 	"strings"
 	"time"
@@ -167,4 +168,70 @@ func (t *TMDB) get(ctx context.Context, path string, params url.Values, out any)
 		return fmt.Errorf("tmdb %s: HTTP %d", path, res.StatusCode)
 	}
 	return json.NewDecoder(res.Body).Decode(out)
+}
+
+// Video is a trailer or teaser TMDB lists for a title.
+type Video struct {
+	Name string
+	Site string // only YouTube for now
+	Key  string // the site's video id
+	Type string // Trailer or Teaser
+}
+
+// Trailers lists a movie's, show's or season's trailers, best first: official
+// trailers, then other trailers, then teasers. kind is movie or show; season
+// is 0 for a whole show.
+func (t *TMDB) Trailers(ctx context.Context, kind string, id int64, season int) ([]Video, error) {
+	path := fmt.Sprintf("/movie/%d/videos", id)
+	switch {
+	case kind == "show" && season > 0:
+		path = fmt.Sprintf("/tv/%d/season/%d/videos", id, season)
+	case kind == "show":
+		path = fmt.Sprintf("/tv/%d/videos", id)
+	}
+	var res struct {
+		Results []struct {
+			Name        string `json:"name"`
+			Site        string `json:"site"`
+			Key         string `json:"key"`
+			Type        string `json:"type"`
+			Official    bool   `json:"official"`
+			PublishedAt string `json:"published_at"`
+		} `json:"results"`
+	}
+	params := url.Values{"include_video_language": {"en,null"}}
+	if err := t.get(ctx, path, params, &res); err != nil {
+		if err == errNotFound {
+			return nil, nil
+		}
+		return nil, err
+	}
+	rank := func(typ string, official bool) int {
+		r := 0
+		if typ != "Trailer" {
+			r += 2
+		}
+		if !official {
+			r++
+		}
+		return r
+	}
+	vids := res.Results[:0]
+	for _, v := range res.Results {
+		if v.Site == "YouTube" && v.Key != "" && (v.Type == "Trailer" || v.Type == "Teaser") {
+			vids = append(vids, v)
+		}
+	}
+	sort.SliceStable(vids, func(i, j int) bool {
+		ri, rj := rank(vids[i].Type, vids[i].Official), rank(vids[j].Type, vids[j].Official)
+		if ri != rj {
+			return ri < rj
+		}
+		return vids[i].PublishedAt > vids[j].PublishedAt
+	})
+	out := []Video{}
+	for _, v := range vids {
+		out = append(out, Video{Name: v.Name, Site: v.Site, Key: v.Key, Type: v.Type})
+	}
+	return out, nil
 }

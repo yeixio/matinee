@@ -114,6 +114,9 @@ type serverSettings struct {
 	// admins: off (nobody), approve (anyone may ask; an admin approves) or
 	// auto (what people ask for is added right away). See arr.go.
 	Requests string `json:"requests"`
+	// RemoteTrailers offers trailers from TMDB (played from YouTube) along
+	// with trailer files next to the media. On unless an admin turns it off.
+	RemoteTrailers bool `json:"remoteTrailers"`
 }
 
 func (s *Server) settings(ctx context.Context) (serverSettings, error) {
@@ -122,7 +125,11 @@ func (s *Server) settings(ctx context.Context) (serverSettings, error) {
 		return serverSettings{}, err
 	}
 	mode, err := s.requestMode(ctx)
-	return serverSettings{RequireSignInAtHome: required, Requests: mode}, err
+	if err != nil {
+		return serverSettings{}, err
+	}
+	trailers, err := s.remoteTrailersOn(ctx)
+	return serverSettings{RequireSignInAtHome: required, Requests: mode, RemoteTrailers: trailers}, err
 }
 
 func (s *Server) getSettings(w http.ResponseWriter, r *http.Request) {
@@ -139,6 +146,7 @@ func (s *Server) putSettings(w http.ResponseWriter, r *http.Request) {
 	var in struct {
 		RequireSignInAtHome *bool   `json:"requireSignInAtHome"`
 		Requests            *string `json:"requests"`
+		RemoteTrailers      *bool   `json:"remoteTrailers"`
 	}
 	if err := readJSON(r, &in); err != nil {
 		writeError(w, http.StatusBadRequest, "bad request")
@@ -151,6 +159,12 @@ func (s *Server) putSettings(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		if err := s.Store.SetSetting(ctx, settingRequests, *m); err != nil {
+			s.serverError(w, err)
+			return
+		}
+	}
+	if in.RemoteTrailers != nil {
+		if err := s.Store.SetSetting(ctx, settingRemoteTrailers, strconv.FormatBool(*in.RemoteTrailers)); err != nil {
 			s.serverError(w, err)
 			return
 		}

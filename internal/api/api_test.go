@@ -67,7 +67,8 @@ func makeMedia(t *testing.T, path string, args ...string) {
 	}
 }
 
-func newTestServer(t *testing.T) (*client, string) {
+// newTestServer starts a server; opts can change it before it starts.
+func newTestServer(t *testing.T, opts ...func(*Server)) (*client, string) {
 	t.Helper()
 	db := storetest.Open(t)
 	log := slog.New(slog.NewTextHandler(io.Discard, nil))
@@ -84,6 +85,9 @@ func newTestServer(t *testing.T) (*client, string) {
 		Subtitles: subtitle.NewConverter("ffmpeg", filepath.Join(tmp, "subtitles")), Log: log, BackgroundCtx: ctx,
 	}
 	dl.SubtitleStream = srv.BurnStream
+	for _, o := range opts {
+		o(srv)
+	}
 	done := make(chan struct{})
 	go func() { dl.Run(ctx); close(done) }()
 	t.Cleanup(func() { cancel(); <-done })
