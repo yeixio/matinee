@@ -47,6 +47,9 @@ func (s *Server) serverInfo(w http.ResponseWriter, r *http.Request) {
 		"name":       cmp.Or(s.Name, "Matinee"),
 		// This device may browse and play without signing in.
 		"homeAccess": home,
+		// Where to reach this server away from home; apps keep it from
+		// their last visit. Empty when the server has no such address.
+		"remoteURL": s.remoteURL(),
 	})
 }
 

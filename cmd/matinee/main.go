@@ -30,6 +30,7 @@ import (
 	"github.com/yeixio/matinee/internal/metadata"
 	"github.com/yeixio/matinee/internal/probe"
 	"github.com/yeixio/matinee/internal/rating"
+	"github.com/yeixio/matinee/internal/remote"
 	"github.com/yeixio/matinee/internal/scan"
 	"github.com/yeixio/matinee/internal/store"
 	"github.com/yeixio/matinee/internal/stream"
@@ -144,6 +145,7 @@ func run() error {
 		Web:       web.FS(), Log: log, BackgroundCtx: ctx,
 		MediaRoot: cfg.MediaRoot, Name: cfg.ServerName,
 		HomeListener: cfg.HomeAddr != "", ThemeDir: cfg.ThemeDir(),
+		PublicURL: cfg.PublicURL,
 	}
 	if _, problems := theme.Load(cfg.ThemeDir()); len(problems) > 0 {
 		for _, p := range problems {
@@ -153,6 +155,15 @@ func run() error {
 	if tmdb != nil {
 		apiServer.TrailerSource = tmdb
 		apiServer.People = tmdb
+	}
+	if cfg.RemoteAddr != "" {
+		apiServer.Remote = &remote.Manager{Addr: cfg.RemoteAddr, Dir: cfg.RemoteDir(), Handler: apiServer.RemoteHandler(), Log: log}
+		on, err := api.RemoteAccessOn(ctx, db)
+		if err != nil {
+			return err
+		}
+		apiServer.Remote.SetEnabled(on)
+		go apiServer.Remote.Run(ctx)
 	}
 	downloads.SubtitleStream = apiServer.BurnStream
 	go downloads.Run(ctx)
@@ -204,7 +215,7 @@ func run() error {
 	if cfg.DatabaseURL != "" {
 		dbKind = "postgres"
 	}
-	log.Info("matinee started", "version", version.Version, "addr", cfg.Addr, "home_addr", cfg.HomeAddr, "data", cfg.DataDir, "database", dbKind)
+	log.Info("matinee started", "version", version.Version, "addr", cfg.Addr, "home_addr", cfg.HomeAddr, "remote_addr", cfg.RemoteAddr, "data", cfg.DataDir, "database", dbKind)
 
 	select {
 	case err := <-errc:

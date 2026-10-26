@@ -50,12 +50,31 @@ export type Settings = {
   theme: string
   // Theme files on the server that couldn't be loaded, and why.
   themeProblems: string[]
+  // Open a port on the router so the apps reach the server away from home.
+  remoteAccess: boolean
+  // How remote access is doing; missing when the server doesn't offer it.
+  remote?: RemoteStatus
+  // The address set with MATINEE_PUBLIC_URL, which the apps use away from home.
+  publicURL?: string
   // How library folders are watched for new files.
   libraryWatch: WatchMode
   // Set on the server's command line: how often polled folders are checked,
   // and how often every library is rescanned in full (0 for never).
   watchPollSeconds: number
   scanIntervalSeconds: number
+}
+
+// sharedAddress: the router has no public address of its own, so only a relay could help.
+export type RemoteStatus = {
+  enabled: boolean
+  state: 'off' | 'working' | 'ready' | 'failed'
+  url?: string
+  router?: string
+  publicIP?: string
+  problem?: string
+  sharedAddress?: boolean
+  certificateExpires?: string
+  checkedAt?: string
 }
 
 // auto: change notifications on local disks, a quick check on network shares;
