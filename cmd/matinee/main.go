@@ -87,6 +87,9 @@ func run() error {
 	} else {
 		log.Info("no TMDB key set; movies and TV use local artwork only (set MATINEE_TMDB_KEY for posters and descriptions)")
 	}
+	if cfg.Wikidata {
+		fetcher.Awards = metadata.NewWikidata(version.Version)
+	}
 	if cfg.MusicBrainz {
 		fetcher.Providers = append(fetcher.Providers, metadata.NewMusicBrainz(version.Version))
 	}
@@ -127,6 +130,7 @@ func run() error {
 	}
 	if tmdb != nil {
 		apiServer.TrailerSource = tmdb
+		apiServer.People = tmdb
 	}
 	downloads.SubtitleStream = apiServer.BurnStream
 	go downloads.Run(ctx)

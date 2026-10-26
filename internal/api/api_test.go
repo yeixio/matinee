@@ -73,6 +73,14 @@ func makeMedia(t *testing.T, path string, args ...string) {
 // newTestServer starts a server; opts can change it before it starts.
 func newTestServer(t *testing.T, opts ...func(*Server)) (*client, string) {
 	t.Helper()
+	c, tmp, _ := newTestServerStore(t)
+	return c, tmp
+}
+
+// newTestServerStore also returns the server's store, for tests that set up
+// what a scan or lookup would.
+func newTestServerStore(t *testing.T) (*client, string, *store.Store) {
+	t.Helper()
 	db := storetest.Open(t)
 	log := slog.New(slog.NewTextHandler(io.Discard, nil))
 	tmp := t.TempDir()
@@ -99,7 +107,7 @@ func newTestServer(t *testing.T, opts ...func(*Server)) (*client, string) {
 	t.Cleanup(func() { cancel(); <-done })
 	ts := httptest.NewServer(srv.Handler())
 	t.Cleanup(ts.Close)
-	return &client{t: t, base: ts.URL, srv: srv}, tmp
+	return &client{t: t, base: ts.URL, srv: srv}, tmp, db
 }
 
 func waitForScan(t *testing.T, c *client) {

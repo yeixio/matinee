@@ -384,7 +384,7 @@ func (s *Store) ApplyMetadata(ctx context.Context, id int64, m *Metadata) error 
 			year = COALESCE(year, ?), poster = COALESCE(poster, ?), backdrop = COALESCE(backdrop, ?),
 			genres = COALESCE(?, genres),
 			title = CASE WHEN kind = 'episode' AND ? != '' AND title LIKE 'Episode %' THEN ? ELSE title END,
-			meta_at = ?
+			meta_at = ?, details_at = NULL
 		WHERE id = ?`,
 		nullInt64(m.TMDBID), nullStr(m.MBID), nullStr(m.Overview), nullFloat(m.Rating), nullInt(m.Year), nullStr(m.Poster), nullStr(m.Backdrop),
 		encodeGenres(m.Genres),

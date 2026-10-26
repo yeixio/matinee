@@ -216,6 +216,39 @@ var migrations = []string{
 	"ALTER TABLE items ADD COLUMN media_key TEXT",
 	// 24: genres of movies and shows, for the home screen's genre rows (see genres.go).
 	"ALTER TABLE items ADD COLUMN genres TEXT",
+	// 25–31: cast, crew and the longer details of movies and shows, and what
+	// titles have in common for finding related ones (see details.go).
+	"ALTER TABLE items ADD COLUMN details TEXT",
+	"ALTER TABLE items ADD COLUMN details_at BIGINT",
+	`CREATE TABLE people (
+		id         BIGINT PRIMARY KEY, -- TMDB person id
+		name       TEXT NOT NULL,
+		photo      TEXT,
+		bio        TEXT,
+		birthday   TEXT,
+		deathday   TEXT,
+		birthplace TEXT,
+		known_for  TEXT,
+		info_at    BIGINT
+	)`,
+	`CREATE TABLE credits (
+		item_id    BIGINT NOT NULL REFERENCES items(id) ON DELETE CASCADE,
+		person_id  BIGINT NOT NULL REFERENCES people(id),
+		kind       TEXT NOT NULL, -- cast, guest or crew
+		role       TEXT NOT NULL, -- character or job
+		department TEXT NOT NULL DEFAULT '',
+		episodes   INTEGER NOT NULL DEFAULT 0,
+		ord        INTEGER NOT NULL,
+		PRIMARY KEY (item_id, ord)
+	)`,
+	"CREATE INDEX credits_person ON credits(person_id)",
+	`CREATE TABLE item_terms (
+		item_id BIGINT NOT NULL REFERENCES items(id) ON DELETE CASCADE,
+		kind    TEXT NOT NULL, -- genre, keyword, collection or rec
+		term    TEXT NOT NULL,
+		PRIMARY KEY (item_id, kind, term)
+	)`,
+	"CREATE INDEX item_terms_term ON item_terms(kind, term)",
 }
 
 func now() int64 { return time.Now().Unix() }
