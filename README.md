@@ -127,6 +127,8 @@ Fedora's own `ffmpeg-free` satisfies the FFmpeg dependency. On RHEL, Rocky and A
 
 Both packages (amd64 and arm64, plus armhf for apt) install `matinee.service`, which starts right away and on boot as the `matinee` user, with its data in `/var/lib/matinee`. Settings go in `/etc/matinee/matinee.env`; run `sudo systemctl restart matinee` after a change. Open http://your-server:7171 to finish setup. The user is also added to the `render` and `video` groups for hardware transcoding. To read a share the `matinee` user can't, mount it with that user's permissions or add the user to the share's group.
 
+The apt and dnf repositories and the rpm packages are signed with the key "Matinee packages <hello@yeix.io>", RSA 4096, fingerprint `4EE3 3F8C EE07 6BB0 C9A7  C559 21F5 BE9F 726A 2895`, valid until 2031-10-25.
+
 ### Homebrew (macOS and Linux)
 
 ```sh

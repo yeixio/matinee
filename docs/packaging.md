@@ -23,6 +23,8 @@ Pre-releases attach the `.deb` and `.rpm` files to their GitHub release but don'
 
 `PACKAGE_SIGNING_KEY` (an armored secret key) and `PACKAGE_SIGNING_PASSPHRASE` sign the apt index (`InRelease`, `Release.gpg`), every rpm, and the rpm index (`repomd.xml.asc`). The public half is published as `matinee.asc` on the `packages` branch. A stable release fails without the key, so the repositories are never published unsigned.
 
+The current key is "Matinee packages <hello@yeix.io>", RSA 4096, fingerprint `4EE3 3F8C EE07 6BB0 C9A7  C559 21F5 BE9F 726A 2895`, made 2026-10-26 and valid until 2031-10-25. Its passphrase and an armored backup are in the maintainer's macOS login keychain ("Matinee package signing passphrase", "Matinee package signing key").
+
 The key is RSA rather than Ed25519, because the rpm on RHEL 8 and its rebuilds can't check Ed25519 signatures. To make one:
 
 ```sh
