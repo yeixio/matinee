@@ -153,6 +153,7 @@ jobs:
     needs: [image, chart, binaries, packages]
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
         with:
           name: binaries
@@ -170,7 +171,12 @@ jobs:
       - name: Write the release notes
         run: |
           VERSION="${GITHUB_REF_NAME#v}"
-          cat > notes.md <<EOF
+          # docs/release-notes/<tag>.md, when there is one, opens the notes.
+          : > notes.md
+          if [ -f "docs/release-notes/${GITHUB_REF_NAME}.md" ]; then
+            cat "docs/release-notes/${GITHUB_REF_NAME}.md" >> notes.md
+          fi
+          cat >> notes.md <<EOF
           ### Install
 
           - **Docker:** \`docker pull ghcr.io/${GITHUB_REPOSITORY}:${VERSION}\`
