@@ -84,7 +84,7 @@ func (s *Server) account(ctx context.Context, u store.User) (store.User, error) 
 	if u.AccountID == 0 {
 		return u, nil
 	}
-	return s.Store.UserByID(ctx, u.AccountID)
+	return s.Store.Viewer(ctx, u.AccountID)
 }
 
 // listProfiles answers "Who's watching?": the account and its profiles. An
@@ -122,7 +122,7 @@ func (s *Server) selectProfile(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	u := currentUser(r)
-	target, err := s.Store.UserByID(r.Context(), req.ID)
+	target, err := s.Store.Viewer(r.Context(), req.ID)
 	if errors.Is(err, store.ErrNotFound) || err == nil && target.Account() != u.Account() {
 		writeError(w, http.StatusNotFound, "no such profile")
 		return
@@ -290,7 +290,7 @@ func (s *Server) createProfile(w http.ResponseWriter, r *http.Request) {
 		writeError(w, http.StatusBadRequest, msg)
 		return
 	}
-	acct, err := s.Store.UserByID(r.Context(), req.AccountID)
+	acct, err := s.Store.Viewer(r.Context(), req.AccountID)
 	if errors.Is(err, store.ErrNotFound) || err == nil && acct.AccountID != 0 {
 		writeError(w, http.StatusBadRequest, "no such account")
 		return
@@ -348,7 +348,7 @@ func (s *Server) updateProfile(w http.ResponseWriter, r *http.Request) {
 		writeError(w, http.StatusBadRequest, msg)
 		return
 	}
-	u, err := s.Store.UserByID(r.Context(), id)
+	u, err := s.Store.Viewer(r.Context(), id)
 	if errors.Is(err, store.ErrNotFound) {
 		writeError(w, http.StatusNotFound, "no such profile")
 		return
@@ -366,7 +366,7 @@ func (s *Server) updateProfile(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if u.AccountID == 0 {
-		u, err = s.Store.UserByID(r.Context(), id)
+		u, err = s.Store.Viewer(r.Context(), id)
 		if err != nil {
 			s.serverError(w, err)
 			return

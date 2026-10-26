@@ -5,6 +5,7 @@ import (
 	"crypto/rand"
 	"encoding/hex"
 	"encoding/json"
+	"strconv"
 )
 
 // A profile is a user without a password that belongs to an account, so
@@ -84,7 +85,7 @@ func (s *Store) profileLibraries(ctx context.Context, userID int64) (map[int64]s
 
 // Profile returns one profile.
 func (s *Store) Profile(ctx context.Context, id int64) (Profile, error) {
-	u, err := s.UserByID(ctx, id)
+	u, err := s.Viewer(ctx, id)
 	if err != nil {
 		return Profile{}, err
 	}
@@ -162,6 +163,9 @@ func (s *Store) UpdateProfile(ctx context.Context, id int64, c ProfileChanges) e
 
 // DeleteProfile removes a profile with its progress and watch list.
 func (s *Store) DeleteProfile(ctx context.Context, id int64) error {
+	if _, err := s.db.ExecContext(ctx, "DELETE FROM settings WHERE key = ?", "theme:user:"+strconv.FormatInt(id, 10)); err != nil {
+		return err
+	}
 	res, err := s.db.ExecContext(ctx, "DELETE FROM users WHERE id = ? AND parent_id IS NOT NULL", id)
 	if err != nil {
 		return err

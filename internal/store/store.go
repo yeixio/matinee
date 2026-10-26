@@ -9,6 +9,7 @@ import (
 	"encoding/hex"
 	"errors"
 	"fmt"
+	"strconv"
 	"strings"
 	"sync/atomic"
 	"time"
@@ -381,9 +382,120 @@ func (s *Store) UserByName(ctx context.Context, username string) (User, error) {
 		"SELECT "+userCols+" FROM users u WHERE lower(u.username) = lower(?) AND u.guest = 0 AND u.parent_id IS NULL", username))
 }
 
-// UserByID returns an account, the guest account or a profile.
+// UserByID returns an account people sign in to: not the guest account, and
+// not a profile.
 func (s *Store) UserByID(ctx context.Context, id int64) (User, error) {
+	return s.scanUser(s.db.QueryRowContext(ctx,
+		"SELECT "+userCols+" FROM users u WHERE u.id = ? AND u.guest = 0 AND u.parent_id IS NULL", id))
+}
+
+// Viewer returns anyone who can watch: an account, the guest account or a profile.
+func (s *Store) Viewer(ctx context.Context, id int64) (User, error) {
 	return s.scanUser(s.db.QueryRowContext(ctx, "SELECT "+userCols+" FROM users u WHERE u.id = ?", id))
+}
+
+// ErrLastAdmin means a change would leave the server with no admin.
+var ErrLastAdmin = errors.New("the server needs at least one admin")
+
+// otherAdmins is true when an account other than the one given is an admin.
+// Changes to admins check it in the same statement as the change.
+const otherAdmins = "EXISTS (SELECT 1 FROM users o WHERE o.is_admin = 1 AND o.guest = 0 AND o.id <> ?)"
+
+func (s *Store) SetPassword(ctx context.Context, userID int64, passwordHash string) error {
+	res, err := s.db.ExecContext(ctx, "UPDATE users SET password_hash = ? WHERE id = ? AND guest = 0 AND parent_id IS NULL", passwordHash, userID)
+	return oneRow(res, err)
+}
+
+// SetAdmin makes an account an admin or not. The last admin stays one.
+func (s *Store) SetAdmin(ctx context.Context, userID int64, admin bool) error {
+	if _, err := s.UserByID(ctx, userID); err != nil {
+		return err
+	}
+	q := "UPDATE users SET is_admin = ? WHERE id = ? AND guest = 0"
+	args := []any{b2i(admin), userID}
+	if !admin {
+		q += " AND (is_admin = 0 OR " + otherAdmins + ")"
+		args = append(args, userID)
+	}
+	res, err := s.db.ExecContext(ctx, q, args...)
+	if err := oneRow(res, err); errors.Is(err, ErrNotFound) {
+		return ErrLastAdmin
+	} else if err != nil {
+		return err
+	}
+	return nil
+}
+
+// DeleteUser removes an account and everything that belongs to it: sessions,
+// watch history, watch list, downloads, requests and settings. The last admin
+// can't be removed.
+func (s *Store) DeleteUser(ctx context.Context, userID int64) error {
+	if _, err := s.UserByID(ctx, userID); err != nil {
+		return err
+	}
+	t, err := s.db.BeginTx(ctx)
+	if err != nil {
+		return err
+	}
+	defer t.Rollback()
+	// The other tables follow with ON DELETE CASCADE; per-user settings are
+	// keys like "theme:user:<id>".
+	if _, err := t.ExecContext(ctx, "DELETE FROM settings WHERE key LIKE ?", "%:user:"+strconv.FormatInt(userID, 10)); err != nil {
+		return err
+	}
+	// Its profiles' too.
+	if _, err := t.ExecContext(ctx, `DELETE FROM settings WHERE key IN (
+		SELECT 'theme:user:' || CAST(id AS TEXT) FROM users WHERE parent_id = ?)`, userID); err != nil {
+		return err
+	}
+	res, err := t.ExecContext(ctx, "DELETE FROM users WHERE id = ? AND guest = 0 AND (is_admin = 0 OR "+otherAdmins+")", userID, userID)
+	if err := oneRow(res, err); errors.Is(err, ErrNotFound) {
+		return ErrLastAdmin
+	} else if err != nil {
+		return err
+	}
+	return t.Commit()
+}
+
+// DeleteOtherSessions signs a user out everywhere but the session keep
+// ("" signs them out everywhere). Those devices' downloads go with them.
+func (s *Store) DeleteOtherSessions(ctx context.Context, userID int64, keep string) error {
+	rows, err := s.db.QueryContext(ctx, "SELECT token FROM sessions WHERE user_id = ? AND token <> ?", userID, keep)
+	if err != nil {
+		return err
+	}
+	var tokens []string
+	for rows.Next() {
+		var token string
+		if err := rows.Scan(&token); err != nil {
+			rows.Close()
+			return err
+		}
+		tokens = append(tokens, token)
+	}
+	rows.Close()
+	if err := rows.Err(); err != nil {
+		return err
+	}
+	for _, token := range tokens {
+		if err := s.DeleteSession(ctx, token); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// oneRow turns an update that matched nothing into ErrNotFound.
+func oneRow(res sql.Result, err error) error {
+	if err != nil {
+		return err
+	}
+	if n, err := res.RowsAffected(); err != nil {
+		return err
+	} else if n == 0 {
+		return ErrNotFound
+	}
+	return nil
 }
 
 func (s *Store) scanUser(row *sql.Row) (User, error) {

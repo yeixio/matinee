@@ -107,6 +107,7 @@ func (s *Server) routes() []route {
 		{"GET /me", reader, s.me},
 		{"GET /me/theme", reader, s.getMyTheme},
 		{"PUT /me/theme", reader, s.putMyTheme},
+		{"PUT /me/password", signedIn, s.changeMyPassword},
 		{"GET /themes", public, s.listThemes},
 		{"GET /profiles", reader, s.listProfiles},
 		{"POST /profiles/select", reader, s.selectProfile},
@@ -120,6 +121,9 @@ func (s *Server) routes() []route {
 		{"PUT /settings", adminOnly, s.putSettings},
 		{"GET /users", adminOnly, s.listUsers},
 		{"POST /users", adminOnly, s.createUser},
+		{"PATCH /users/{id}", adminOnly, s.updateUser},
+		{"PUT /users/{id}/password", adminOnly, s.resetPassword},
+		{"DELETE /users/{id}", adminOnly, s.deleteUser},
 
 		{"GET /libraries", reader, s.listLibraries},
 		{"POST /libraries", adminOnly, s.createLibrary},
@@ -361,8 +365,17 @@ func (c credentials) validate() string {
 	switch {
 	case strings.TrimSpace(c.Username) == "":
 		return "username is required"
-	case len(c.Password) < 8:
+	}
+	return validatePassword(c.Password)
+}
+
+// validatePassword says what's wrong with a new password, or "" if nothing.
+func validatePassword(pw string) string {
+	switch {
+	case len([]rune(pw)) < 8:
 		return "password must be at least 8 characters"
+	case len(pw) > 72: // bcrypt's limit
+		return "password must be at most 72 bytes"
 	}
 	return ""
 }
