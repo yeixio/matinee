@@ -6,7 +6,16 @@
 export type User = { id: number; username: string; isAdmin: boolean; guest?: boolean }
 // requests: who besides admins may add titles through Radarr and Sonarr.
 export type RequestMode = 'off' | 'approve' | 'auto'
-export type Settings = { requireSignInAtHome: boolean; requests: RequestMode }
+export type Settings = {
+  requireSignInAtHome: boolean
+  requests: RequestMode
+  // auto, off (the CPU), or an Accelerator's id.
+  hardwareAcceleration: string
+  // problem: why a GPU the server can see couldn't be used, when none works.
+  hardware: { active: Accelerator | null; available: Accelerator[]; detecting: boolean; problem?: string }
+}
+// A GPU backend that passed its test encode on the server.
+export type Accelerator = { id: string; name: string; device?: string; detail?: string; decode: boolean }
 
 export type ArrApp = 'radarr' | 'sonarr'
 // A Radarr or Sonarr connection. The API key stays on the server.
@@ -315,7 +324,7 @@ export const api = {
   setAnalysisMode: (mode: AnalysisMode) => request<AnalysisStatus>('PUT', '/api/v1/analysis', { mode }),
   reanalyze: (id: number) => request<void>('POST', `/api/v1/items/${id}/analyze`),
   settings: () => request<Settings>('GET', '/api/v1/settings'),
-  saveSettings: (s: Partial<Settings>) => request<Settings>('PUT', '/api/v1/settings', s),
+  saveSettings: (s: Partial<Omit<Settings, 'hardware'>>) => request<Settings>('PUT', '/api/v1/settings', s),
   users: () => request<User[]>('GET', '/api/v1/users'),
   createUser: (username: string, password: string, isAdmin: boolean) =>
     request<User>('POST', '/api/v1/users', { username, password, isAdmin }),

@@ -7,9 +7,12 @@ import (
 	"log/slog"
 	"os/exec"
 	"path/filepath"
+	"slices"
+	"strings"
 	"testing"
 	"time"
 
+	"github.com/yeixio/matinee/internal/hwaccel"
 	"github.com/yeixio/matinee/internal/store"
 )
 
@@ -28,7 +31,7 @@ func TestStartSupersededByNewerSeek(t *testing.T) {
 		t.Fatalf("make clip: %v\n%s", err, out)
 	}
 
-	tr := NewTranscoder(ffmpeg, filepath.Join(dir, "cache"), slog.New(slog.NewTextHandler(io.Discard, nil)))
+	tr := NewTranscoder(ffmpeg, filepath.Join(dir, "cache"), nil, slog.New(slog.NewTextHandler(io.Discard, nil)))
 	defer tr.Close()
 	it := store.Item{ID: 1, Path: src, VideoCodec: "mpeg4"}
 
@@ -75,5 +78,54 @@ func TestStartAtBeginning(t *testing.T) {
 	}
 	if got := string(startAtBeginning([]byte(want))); got != want {
 		t.Fatalf("added a second start:\n%s", got)
+	}
+}
+
+type fakeAccel struct{ a *hwaccel.Accel }
+
+func (f fakeAccel) Active() *hwaccel.Accel { return f.a }
+
+// A GPU that can't do the job (here, one that isn't there) costs a moment,
+// not the playback: the transcode starts again on the CPU, and the item's
+// next transcode goes straight there.
+func TestStartFallsBackToCPU(t *testing.T) {
+	ffmpeg, err := exec.LookPath("ffmpeg")
+	if err != nil {
+		t.Skip("ffmpeg not installed")
+	}
+	dir := t.TempDir()
+	src := filepath.Join(dir, "clip.mkv")
+	gen := exec.Command(ffmpeg, "-hide_banner", "-loglevel", "error", "-f", "lavfi", "-i", "testsrc=size=640x360:rate=24:duration=10",
+		"-c:v", "mpeg4", src)
+	if out, err := gen.CombinedOutput(); err != nil {
+		t.Fatalf("make clip: %v\n%s", err, out)
+	}
+
+	var logs strings.Builder
+	gpu := &hwaccel.Accel{Kind: hwaccel.VAAPI, Device: filepath.Join(dir, "no-such-gpu"), Decode: true}
+	tr := NewTranscoder(ffmpeg, filepath.Join(dir, "cache"), fakeAccel{gpu}, slog.New(slog.NewTextHandler(&logs, nil)))
+	defer tr.Close()
+	it := store.Item{ID: 1, Path: src, VideoCodec: "mpeg4"}
+
+	if got := tr.plan(gpu, it.ID, hwaccel.Video{Codec: "mpeg4", BurnSub: -1}); !slices.Equal(got, []hwaccel.Mode{hwaccel.Encode, hwaccel.CPU}) {
+		t.Fatalf("plan before failing: %v", got)
+	}
+	id, err := tr.Start(context.Background(), 7, it, 0, -1)
+	if err != nil {
+		t.Fatalf("start: %v\n%s", err, logs.String())
+	}
+	if id == "" || !strings.Contains(logs.String(), "transcode failed on the GPU") {
+		t.Fatalf("didn't fall back:\n%s", logs.String())
+	}
+	if got := tr.plan(gpu, it.ID, hwaccel.Video{Codec: "mpeg4", BurnSub: -1}); !slices.Equal(got, []hwaccel.Mode{hwaccel.CPU}) {
+		t.Fatalf("plan after failing: %v", got)
+	}
+	// Another item still gets the GPU first.
+	if got := tr.plan(gpu, 2, hwaccel.Video{Codec: "hevc", BurnSub: -1}); !slices.Equal(got, []hwaccel.Mode{hwaccel.Full, hwaccel.Encode, hwaccel.CPU}) {
+		t.Fatalf("plan for another item: %v", got)
+	}
+	// Copied video never touches the GPU.
+	if got := tr.plan(gpu, 3, hwaccel.Video{Codec: "h264", BurnSub: -1}); !slices.Equal(got, []hwaccel.Mode{hwaccel.CPU}) {
+		t.Fatalf("plan for h264: %v", got)
 	}
 }

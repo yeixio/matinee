@@ -24,6 +24,7 @@ import (
 	"github.com/yeixio/matinee/internal/config"
 	"github.com/yeixio/matinee/internal/discovery"
 	"github.com/yeixio/matinee/internal/download"
+	"github.com/yeixio/matinee/internal/hwaccel"
 	"github.com/yeixio/matinee/internal/kube"
 	"github.com/yeixio/matinee/internal/metadata"
 	"github.com/yeixio/matinee/internal/probe"
@@ -88,7 +89,15 @@ func run() error {
 		fetcher.Providers = append(fetcher.Providers, metadata.NewMusicBrainz(version.Version))
 	}
 	db.SetMetadataKinds(fetcher.Kinds()...)
-	transcoder := stream.NewTranscoder(cfg.FFmpegPath, cfg.TranscodeDir(), log)
+	// Testing the GPU takes a few seconds; transcodes use the CPU until it's done.
+	hw := hwaccel.NewManager(cfg.FFmpegPath, log)
+	pref, err := db.Setting(ctx, api.SettingHardwareAcceleration)
+	if err != nil {
+		return err
+	}
+	hw.SetPreference(pref)
+	go hw.Detect(ctx)
+	transcoder := stream.NewTranscoder(cfg.FFmpegPath, cfg.TranscodeDir(), hw, log)
 	defer transcoder.Close()
 
 	// Media analysis reads every file once more, slowly and at the lowest
@@ -107,7 +116,7 @@ func run() error {
 	downloads := download.NewManager(db, cfg.FFmpegPath, cfg.DownloadDir(), log)
 
 	apiServer := &api.Server{
-		Store: db, Scanner: scanner, Transcoder: transcoder, Downloads: downloads, Analyzer: analyzer,
+		Store: db, Scanner: scanner, Transcoder: transcoder, HW: hw, Downloads: downloads, Analyzer: analyzer,
 		Art:       artwork.NewCache(cfg.ImageDir(), cfg.FFmpegPath),
 		Subtitles: subtitle.NewConverter(cfg.FFmpegPath, cfg.SubtitleDir()),
 		Web:       web.FS(), Log: log, BackgroundCtx: ctx,

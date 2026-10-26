@@ -23,10 +23,21 @@ RUN --mount=type=secret,id=tmdb_key \
     -ldflags "-s -w -X github.com/yeixio/matinee/internal/version.Version=${VERSION} -X github.com/yeixio/matinee/internal/config.DefaultTMDBKey=${TMDB_KEY}" \
     -o /out/matinee ./cmd/matinee
 
-FROM alpine:3.22
-RUN apk add --no-cache ffmpeg ca-certificates tzdata \
-    && adduser -D -u 1000 matinee \
+# Debian rather than Alpine: its FFmpeg is built with every hardware backend
+# Matinee uses on Linux, and glibc lets NVIDIA's container runtime add its
+# driver libraries. mesa-va-drivers runs VAAPI on AMD GPUs (and older Intel);
+# intel-media-va-driver runs VAAPI on newer Intel ones (Matinee prefers VAAPI
+# to Quick Sync on Linux).
+FROM debian:trixie-slim
+ARG TARGETARCH
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends ffmpeg mesa-va-drivers ca-certificates tzdata wget \
+    && if [ "$TARGETARCH" = amd64 ]; then apt-get install -y --no-install-recommends intel-media-va-driver; fi \
+    && rm -rf /var/lib/apt/lists/* \
+    && useradd -u 1000 -U -m -d /home/matinee matinee \
     && mkdir -p /data && chown matinee:matinee /data
+# Tells NVIDIA's container runtime to add the video encode/decode libraries.
+ENV NVIDIA_DRIVER_CAPABILITIES=compute,video,utility
 COPY --from=server /out/matinee /usr/local/bin/matinee
 USER matinee
 ENV MATINEE_DATA_DIR=/data MATINEE_ADDR=:7171

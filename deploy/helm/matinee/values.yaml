@@ -111,6 +111,34 @@ discovery:
   homePort: 7172
   resources: {}
 
+# Hardware transcoding. Matinee tests the GPUs it can see at startup and uses
+# the best one that works (Settings → Transcoding shows which, and lets an
+# admin pick another or turn it off). These values give the pod a GPU. To run
+# Matinee on the node that has the GPU, set nodeSelector or affinity below,
+# for example nodeSelector: {kubernetes.io/hostname: gpu-node}.
+gpu:
+  # none, vaapi (AMD or Intel GPUs, through /dev/dri) or nvidia.
+  type: none
+  vaapi:
+    # A device plugin resource that hands the pod the GPU, such as
+    # amd.com/gpu (AMD's plugin) or gpu.intel.com/i915 (Intel's).
+    # Leave it empty when no plugin is installed: the container then runs
+    # privileged, the only way Kubernetes lets it open the node's /dev/dri
+    # without one.
+    resource: ""
+    # The groups allowed to open /dev/dri/renderD* on the node, so Matinee's
+    # non-root user can (run `getent group render` on the node; the number is
+    # often 104 to 110, or 989 to 993). If it's wrong, Settings → Transcoding
+    # says which number it needs.
+    groups: []
+    # The render node to use when a node has several GPUs. Empty tries each.
+    device: ""
+  nvidia:
+    # The RuntimeClass of NVIDIA's container runtime (the GPU Operator and
+    # k3s both name it nvidia). Empty uses the node's default runtime.
+    runtimeClassName: nvidia
+    count: 1
+
 env: []
 #  - name: MATINEE_SCAN_INTERVAL
 #    value: 30m

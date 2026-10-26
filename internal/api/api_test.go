@@ -19,6 +19,7 @@ import (
 	"github.com/yeixio/matinee/internal/analyze"
 	"github.com/yeixio/matinee/internal/artwork"
 	"github.com/yeixio/matinee/internal/download"
+	"github.com/yeixio/matinee/internal/hwaccel"
 	"github.com/yeixio/matinee/internal/probe"
 	"github.com/yeixio/matinee/internal/scan"
 	"github.com/yeixio/matinee/internal/store"
@@ -74,7 +75,8 @@ func newTestServer(t *testing.T) (*client, string) {
 	db := storetest.Open(t)
 	log := slog.New(slog.NewTextHandler(io.Discard, nil))
 	tmp := t.TempDir()
-	tc := stream.NewTranscoder("ffmpeg", filepath.Join(tmp, "transcode"), log)
+	hw := hwaccel.NewManager("ffmpeg", log)
+	tc := stream.NewTranscoder("ffmpeg", filepath.Join(tmp, "transcode"), hw, log)
 	t.Cleanup(tc.Close)
 	ctx, cancel := context.WithCancel(context.Background())
 	t.Cleanup(cancel)
@@ -82,7 +84,7 @@ func newTestServer(t *testing.T) (*client, string) {
 	srv := &Server{
 		MediaRoot: tmp,
 		Store:     db, Scanner: &scan.Scanner{Store: db, Prober: probe.Prober{Path: "ffprobe"}, Log: log},
-		Transcoder: tc, Downloads: dl, Art: artwork.NewCache(filepath.Join(tmp, "images"), "ffmpeg"),
+		Transcoder: tc, HW: hw, Downloads: dl, Art: artwork.NewCache(filepath.Join(tmp, "images"), "ffmpeg"),
 		Subtitles: subtitle.NewConverter("ffmpeg", filepath.Join(tmp, "subtitles")), Log: log, BackgroundCtx: ctx,
 	}
 	dl.SubtitleStream = srv.BurnStream
