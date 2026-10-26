@@ -67,7 +67,11 @@ func TestRadarrAndSonarr(t *testing.T) {
 	if !iv.Connected || !iv.HasAPIKey || iv.QualityProfileID != 1 || iv.RootFolder != "/media/movie" {
 		t.Fatalf("radarr connection: %+v", iv)
 	}
-	admin.do("PUT", "/api/v1/integrations/sonarr", arr.Config{URL: sonarr.URL, APIKey: sonarr.Key}, nil)
+	// Sonarr has a URL base; the address without it finds it and keeps it.
+	sonarr.Base = "/sonarr"
+	if code := admin.do("PUT", "/api/v1/integrations/sonarr", arr.Config{URL: sonarr.URL + "/", APIKey: sonarr.Key}, &iv); code != 200 || iv.URL != sonarr.URL+"/sonarr" {
+		t.Fatalf("connect sonarr with a URL base: %d %+v", code, iv)
+	}
 	// The key never leaves the server.
 	if body := get(t, admin, "/api/v1/integrations"); strings.Contains(body, radarr.Key) || strings.Contains(body, sonarr.Key) {
 		t.Fatalf("integrations show the API key: %s", body)

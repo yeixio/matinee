@@ -14,6 +14,7 @@ export type Integration = { connected: boolean; url: string; hasApiKey: boolean;
 export type IntegrationConfig = { url: string; apiKey?: string; qualityProfileId?: number; rootFolder?: string }
 export type QualityProfile = { id: number; name: string }
 export type ConnectionCheck = {
+  url: string // the address that works, with the app's URL base if it redirected to one
   appName: string
   version: string
   qualityProfiles: QualityProfile[]

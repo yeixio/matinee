@@ -76,6 +76,8 @@ var ErrNotFound = errors.New("not found")
 type Error struct {
 	Status  int
 	Message string
+	// redirect is where the app sent the request instead, unfollowed.
+	redirect *url.URL
 }
 
 func (e *Error) Error() string { return e.Message }
@@ -115,7 +117,7 @@ func New(app App, c Config) (*Client, error) {
 			// The API key goes in a header that redirects would carry along,
 			// possibly to another host, so redirects aren't followed.
 			CheckRedirect: func(req *http.Request, via []*http.Request) error {
-				return fmt.Errorf("it redirects to %s; use that address instead", req.URL.Redacted())
+				return &redirectError{req.URL}
 			},
 		},
 	}, nil
@@ -143,6 +145,11 @@ func (c *Client) do(ctx context.Context, method, path string, query url.Values, 
 		req.Header.Set("Content-Type", "application/json")
 	}
 	res, err := c.http.Do(req)
+	var rd *redirectError
+	if errors.As(err, &rd) {
+		base := baseOf(rd.to, u.Path[len(c.base.Path):])
+		return &Error{redirect: base, Message: fmt.Sprintf("%s at %s redirects to %s; try that address", c.App.Name(), c.base.Redacted(), base.Redacted())}
+	}
 	if err != nil {
 		var ue *url.Error
 		if errors.As(err, &ue) {
@@ -191,6 +198,27 @@ func errorMessage(res *http.Response) string {
 	return "HTTP " + strconv.Itoa(res.StatusCode)
 }
 
+type redirectError struct{ to *url.URL }
+
+func (r *redirectError) Error() string { return "redirected to " + r.to.Redacted() }
+
+// baseOf is the address an app redirected a request for path to, without
+// the path: Radarr and Sonarr redirect requests that leave out their URL
+// base (Settings → General), so /api/v3/x goes to /radarr/api/v3/x.
+func baseOf(to *url.URL, path string) *url.URL {
+	b := *to
+	b.RawQuery, b.Fragment, b.User = "", "", nil
+	if p, ok := strings.CutSuffix(b.Path, path); ok {
+		b.Path = strings.TrimRight(p, "/")
+	} else {
+		b.Path = ""
+	}
+	return &b
+}
+
+// URL is the app's address, as Status found it.
+func (c *Client) URL() string { return c.base.String() }
+
 // Status is what an app says about itself.
 type Status struct {
 	AppName string `json:"appName"`
@@ -198,9 +226,20 @@ type Status struct {
 }
 
 // Status checks the address and key reach the app this client is for.
+//
+// When the app redirects to its own URL base on the same host (or from http
+// to https there), the client moves to that address; URL then reports it.
+// Redirects elsewhere aren't followed, since they'd carry the API key along.
 func (c *Client) Status(ctx context.Context) (Status, error) {
 	var s Status
-	if err := c.do(ctx, "GET", "/system/status", nil, nil, &s); err != nil {
+	err := c.do(ctx, "GET", "/system/status", nil, nil, &s)
+	var ae *Error
+	if errors.As(err, &ae) && ae.redirect != nil && ae.redirect.Host == c.base.Host &&
+		(ae.redirect.Scheme == c.base.Scheme || ae.redirect.Scheme == "https") && ae.redirect.String() != c.base.String() {
+		c.base = ae.redirect
+		err = c.do(ctx, "GET", "/system/status", nil, nil, &s)
+	}
+	if err != nil {
 		if errors.Is(err, ErrNotFound) {
 			return s, &Error{Message: fmt.Sprintf("%s doesn't look like %s's address", c.base.Redacted(), c.App.Name())}
 		}

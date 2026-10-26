@@ -228,6 +228,9 @@ func (s *Server) candidate(ctx context.Context, app arr.App, in arr.Config) (arr
 }
 
 type connectionCheck struct {
+	// URL is the address that works, which differs from the one entered
+	// when the app has a URL base it redirected to.
+	URL             string               `json:"url"`
 	AppName         string               `json:"appName"`
 	Version         string               `json:"version"`
 	QualityProfiles []arr.QualityProfile `json:"qualityProfiles"`
@@ -244,7 +247,7 @@ func check(ctx context.Context, app arr.App, c arr.Config) (connectionCheck, err
 	if err != nil {
 		return out, err
 	}
-	out.AppName, out.Version = st.AppName, st.Version
+	out.URL, out.AppName, out.Version = cl.URL(), st.AppName, st.Version
 	if out.QualityProfiles, err = cl.QualityProfiles(ctx); err != nil {
 		return out, err
 	}
@@ -306,6 +309,7 @@ func (s *Server) putIntegration(w http.ResponseWriter, r *http.Request) {
 		s.arrError(w, r, app, err)
 		return
 	}
+	c.URL = res.URL
 	// Defaults for what's added from Matinee: the admin's pick, else the app's first.
 	if c.QualityProfileID == 0 && len(res.QualityProfiles) > 0 {
 		c.QualityProfileID = res.QualityProfiles[0].ID
