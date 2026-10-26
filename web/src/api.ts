@@ -16,6 +16,7 @@ export type Trailer = {
   name: string
   source: 'local' | 'youtube'
   mimeType?: string
+  container?: string
   videoCodec?: string
   audioCodec?: string
   durationMs?: number
