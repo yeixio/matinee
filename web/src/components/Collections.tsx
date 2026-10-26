@@ -9,7 +9,6 @@ import {
   type CollectionInput,
   type CollectionSort,
   type ItemDetail,
-  type ItemFilterJSON,
   type User,
 } from '../api'
 import { FilterBar } from './FilterBar'
@@ -41,7 +40,6 @@ const sortLabels: Record<CollectionSort, string> = {
   shuffle: 'Shuffle daily',
 }
 const manualSorts: CollectionSort[] = ['', 'title', 'added', 'year', 'rating', 'runtime', 'shuffle']
-const smartSorts: CollectionSort[] = ['', 'title', 'added', 'released', 'year', 'rating', 'runtime', 'lastPlayed', 'shuffle']
 
 /** A cover made from up to four posters, or the collection's initial when it's empty. */
 export function Mosaic({ ids, title }: { ids: number[]; title: string }) {
@@ -130,7 +128,7 @@ export function CollectionEditor({
 }: {
   collection?: Collection
   kind?: 'smart' | 'manual'
-  start?: ItemFilterJSON
+  start?: ItemFilter
   library?: number
   onClose: () => void
   onSaved?: (c: Collection) => void
@@ -140,7 +138,7 @@ export function CollectionEditor({
   const { data: libraries } = useLibraries()
   const smart = (collection?.kind ?? kind) === 'smart'
   const [name, setName] = useState(collection?.name ?? '')
-  const [filter, setFilter] = useState<ItemFilter>((collection?.filter ?? start ?? (library ? { library: [library] } : {})) as ItemFilter)
+  const [filter, setFilter] = useState<ItemFilter>(collection?.filter ?? start ?? (library ? { library: [library] } : {}))
   const [sort, setSort] = useState<CollectionSort>(collection?.sort ?? '')
   const [order, setOrder] = useState<'' | 'asc' | 'desc'>(collection?.order ?? '')
   const [pinHome, setPinHome] = useState(collection?.pinHome ?? false)
@@ -150,11 +148,11 @@ export function CollectionEditor({
     mutationFn: () => {
       const body: CollectionInput = {
         name,
-        sort,
-        order,
+        sort: smart && sort !== 'shuffle' ? '' : sort,
+        order: smart ? '' : order,
         pinHome,
         pinLibrary: pinLibrary ?? null,
-        ...(smart && { filter: filter as ItemFilterJSON }),
+        ...(smart && { filter }),
       }
       return collection
         ? api.updateCollection(collection.id, body)
@@ -166,7 +164,7 @@ export function CollectionEditor({
       onClose()
     },
   })
-  const filterLibrary = (filter as { library?: number[] }).library
+  const filterLibrary = filter.library
   return (
     <Dialog title={collection ? `Edit ${collection.name}` : smart ? 'New smart collection' : 'New collection'} onClose={onClose}>
       <form
@@ -193,26 +191,39 @@ export function CollectionEditor({
             <FilterBar value={filter} onChange={setFilter} libraryId={filterLibrary?.length === 1 ? filterLibrary[0] : undefined} />
           </div>
         )}
-        <div className="grid gap-4 sm:grid-cols-2">
-          <Field label="Order">
-            <select className={inputClass} value={sort} onChange={(e) => setSort(e.target.value as CollectionSort)}>
-              {(smart ? smartSorts : manualSorts).map((s) => (
-                <option key={s} value={s}>
-                  {s === '' ? (smart ? 'As the rules sort' : 'The order titles were added') : sortLabels[s]}
-                </option>
-              ))}
-            </select>
-          </Field>
-          {sort !== '' && sort !== 'shuffle' && (
-            <Field label="Direction">
-              <select className={inputClass} value={order} onChange={(e) => setOrder(e.target.value as '' | 'asc' | 'desc')}>
-                <option value="">Usual</option>
-                <option value="asc">Ascending</option>
-                <option value="desc">Descending</option>
+        {smart ? (
+          // The rules carry their own order (the filter bar's sort); shuffling is on top of it.
+          <label className="flex items-center gap-2 text-sm">
+            <input
+              type="checkbox"
+              checked={sort === 'shuffle'}
+              onChange={(e) => setSort(e.target.checked ? 'shuffle' : '')}
+              className="accent-accent"
+            />
+            Shuffle every day
+          </label>
+        ) : (
+          <div className="grid gap-4 sm:grid-cols-2">
+            <Field label="Order">
+              <select className={inputClass} value={sort} onChange={(e) => setSort(e.target.value as CollectionSort)}>
+                {manualSorts.map((s) => (
+                  <option key={s} value={s}>
+                    {s === '' ? 'The order titles were added' : sortLabels[s]}
+                  </option>
+                ))}
               </select>
             </Field>
-          )}
-        </div>
+            {sort !== '' && sort !== 'shuffle' && (
+              <Field label="Direction">
+                <select className={inputClass} value={order} onChange={(e) => setOrder(e.target.value as '' | 'asc' | 'desc')}>
+                  <option value="">Usual</option>
+                  <option value="asc">Ascending</option>
+                  <option value="desc">Descending</option>
+                </select>
+              </Field>
+            )}
+          </div>
+        )}
         <fieldset className="space-y-2">
           <legend className="mb-1 text-xs font-medium tracking-wide text-muted uppercase">Show as a row</legend>
           <label className="flex items-center gap-2 text-sm">
@@ -374,7 +385,7 @@ export function PinnedCollections({ library }: { library: number }) {
 }
 
 /** Saves the filters someone has on a library page as a smart collection. */
-export function SaveAsCollectionButton({ filter, library }: { filter: ItemFilterJSON; library: number }) {
+export function SaveAsCollectionButton({ filter, library }: { filter: ItemFilter; library: number }) {
   const navigate = useNavigate()
   const { data: me } = useQuery<User>({ queryKey: ['me'], queryFn: api.me, staleTime: Infinity })
   const [open, setOpen] = useState(false)

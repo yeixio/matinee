@@ -2,6 +2,7 @@ import { keepPreviousData, useQuery } from '@tanstack/react-query'
 import { useParams } from 'react-router-dom'
 import { api, pendingRefetch } from '../api'
 import { GridSkeleton, PosterGrid } from '../components/Card'
+import { PinnedCollections, SaveAsCollectionButton } from '../components/Collections'
 import { FilterBar } from '../components/FilterBar'
 import { LibraryIcon, useLibraries } from '../components/Shell'
 import { Button, EmptyState } from '../components/ui'
@@ -32,7 +33,14 @@ export default function Library() {
           </span>
         )}
         {lib?.scanning && <span className="animate-pulse text-sm text-accent">Scanning…</span>}
+        {filtered && (
+          <div className="ml-auto">
+            <SaveAsCollectionButton filter={filter} library={id} />
+          </div>
+        )}
       </div>
+      {/* Collections pinned to this library, while no filter is on. */}
+      {!filtered && <PinnedCollections library={id} />}
       <FilterBar value={filter} onChange={setFilter} libraryId={id} libraryKind={lib?.kind} />
       {isPending ? (
         <GridSkeleton />

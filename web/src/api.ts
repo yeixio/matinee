@@ -285,7 +285,7 @@ export type Collection = {
   kind: 'smart' | 'manual'
   ownerId?: number
   shared: boolean
-  filter?: ItemFilterJSON
+  filter?: ItemFilter
   sort?: CollectionSort
   order?: 'asc' | 'desc'
   pinHome: boolean
@@ -300,13 +300,10 @@ export type Collection = {
   contains?: boolean
 }
 
-/** A smart collection's filter as the server keeps it: the library filter's query fields. */
-export type ItemFilterJSON = Record<string, unknown>
-
 export type CollectionInput = {
   name: string
   kind?: 'smart' | 'manual'
-  filter?: ItemFilterJSON
+  filter?: ItemFilter
   sort?: CollectionSort
   order?: 'asc' | 'desc' | ''
   pinHome?: boolean

@@ -30,10 +30,10 @@ export default function Collections() {
         {!me?.guest && (
           <div className="ml-auto flex gap-2">
             <Button onClick={() => setMaking('manual')} icon={<Plus className="size-4" />}>
-              New collection
+              New<span className="hidden sm:inline"> collection</span>
             </Button>
             <Button variant="primary" onClick={() => setMaking('smart')} icon={<Sparkles className="size-4" />}>
-              New smart collection
+              New smart<span className="hidden sm:inline"> collection</span>
             </Button>
           </div>
         )}
