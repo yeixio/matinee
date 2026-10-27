@@ -7,7 +7,7 @@ sidebar:
 
 Home is where Matinee opens. It's built for the person (or [profile](/docs/household/profiles/)) watching, so everyone in the house sees their own.
 
-![Home with The Long Matinee featured at the top and Continue watching below](../images/home.webp)
+![Home with a title featured at the top and Continue watching below](../images/home.webp)
 
 ## The big picture at the top
 

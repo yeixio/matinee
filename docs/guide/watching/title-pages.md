@@ -7,7 +7,7 @@ sidebar:
 
 Click any poster to open its page. Everything Matinee knows about the title is here.
 
-![The Long Matinee's page: poster, details, badges and buttons](../images/movie.webp)
+![A movie's page: poster, details, badges and buttons](../images/movie.webp)
 
 ## At the top
 
@@ -34,27 +34,27 @@ Click any poster to open its page. Everything Matinee knows about the title is h
 
 Further down are the cast, with their photos and the parts they played, then the title's **box set** (a trilogy or a series of films, from TMDB) if it has one, and **More like this**: titles in your library that TMDB links to it, or that share its genres and keywords.
 
-![The cast, The Long Matinee Collection, and More like this](../images/movie-more.webp)
+![Further down a movie's page: the cast, its box set, and More like this](../images/movie-more.webp)
 
 Click a box set's name to see all its films, including where you are in the series.
 
-![The Paper Moons Collection box set](../images/box-set.webp)
+![A box set with every film in the series](../images/box-set.webp)
 
 ## People
 
 Every name links to a page with the person's photo, a short biography, and everything in your library they're in, with the part they played.
 
-![Ada Lindqvist's page: photo, biography and her titles in the library](../images/person.webp)
+![A person's page: photo, biography and their titles in the library](../images/person.webp)
 
 ## Shows, seasons and episodes
 
 A show's page has the same details plus its **seasons**. **Play** (or **Resume episode 3**) always starts the next episode you haven't finished.
 
-![Crumb Street's page with its two seasons](../images/show.webp)
+![A show's page with its seasons](../images/show.webp)
 
 A season lists its episodes with a still, the length, a short description, and a tick for each one you've watched.
 
-![Season 1 of Crumb Street: episodes with stills and descriptions](../images/season.webp)
+![A season: episodes with stills and descriptions](../images/season.webp)
 
 ## File details
 

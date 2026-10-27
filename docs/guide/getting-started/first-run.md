@@ -16,10 +16,10 @@ Pick a username and a password of at least 8 characters, then **Create account**
 A library is a set of folders holding one kind of media: movies, TV shows or music. Most people have three, one of each.
 
 1. Open **Settings** (the gear at the top right) and find **Libraries**.
-2. Click **Add library** and pick the type.
+2. Click **Add a library** and pick the type.
 3. Give it a name, or keep the suggested one. This is the name in the top bar.
 4. Browse to a folder and click **Use this folder**. A library can have several folders, for example movies on two disks; add each one.
-5. Click **Add library**.
+5. Click **Add a library**.
 
 ![Adding a Movies library: the type, the name and the folder picker](../images/add-library.webp)
 

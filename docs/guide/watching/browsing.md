@@ -44,7 +44,7 @@ Like a set of filters? **Save as collection** turns it into a [smart collection]
 
 Click the magnifying glass at the top (or **Search** in the apps) and start typing. Results come up as you type, matching titles across every library: movies, shows, episodes, artists, albums and songs.
 
-![Searching for "harbor" finds a movie, an artist and another movie](../images/search.webp)
+![Search results for a word, across movies, shows and music](../images/search.webp)
 
 ## On a phone
 

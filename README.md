@@ -4,15 +4,22 @@ A fast, self-hosted media server for your movies, TV and music. Point it at your
 
 **[matinee.yeix.io](https://matinee.yeix.io)** has the user guide, with screenshots of every feature.
 
-![Home](docs/screenshots/desktop-home.png)
+![Home in the web player](docs/guide/images/home.webp)
 
 <p>
-  <img src="docs/screenshots/phone-home.png" width="195" alt="Home on a phone">
-  <img src="docs/screenshots/phone-season.png" width="195" alt="A season on a phone">
-  <img src="docs/screenshots/desktop-album-playing.png" width="560" alt="An album playing">
+  <img src="docs/guide/images/movie.webp" width="49%" alt="A movie's page, with its details, badges and cast">
+  <img src="docs/guide/images/up-next.webp" width="49%" alt="The next episode coming up as the credits start">
+  <img src="docs/guide/images/filters.webp" width="49%" alt="Filtering a library by genre, decade, rating, quality and more">
+  <img src="docs/guide/images/who-is-watching.webp" width="49%" alt="Profiles for everyone in the house">
 </p>
 
-**Status:** early. The server and web player work end to end; native apps come later.
+<p>
+  <img src="docs/guide/images/app-phone-home.webp" width="18%" alt="Home in the phone app">
+  <img src="docs/guide/images/app-phone-details.webp" width="18%" alt="A movie in the phone app">
+  <img src="docs/guide/images/app-tv-home.webp" width="57%" alt="Home in the TV app">
+</p>
+
+**Status:** early. The server and web player work end to end, and the [phone and TV apps](https://matinee.yeix.io/docs/apps/phone-and-tv/) are on the way to the App Store and Google Play.
 
 ## What it does
 
