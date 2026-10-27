@@ -67,6 +67,7 @@
   "password_must_be_at_most_72_bytes": "a jelszó legfeljebb 72 bájt lehet",
   "person_not_found": "a személy nem található",
   "picture_subtitles_need_a_converted_quality_not_the_original_file": "a képes feliratokhoz átalakított minőség kell, nem az eredeti fájl",
+  "remoteforwardedport_must_be_443_80_or_0": "a remoteForwardedPort értéke 443, 80 vagy 0 lehet",
   "replaced_by_a_newer_seek": "egy újabb ugrás felváltotta",
   "request_not_found": "a kérés nem található",
   "requests_must_be_off_approve_or_auto": "a requests értéke off, approve vagy auto lehet",

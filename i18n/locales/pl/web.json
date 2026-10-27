@@ -647,8 +647,13 @@
       "ready": "Poza domem aplikacje łączą się z tym serwerem pod <url>{{url}}</url>.",
       "router": "Router otworzył port przez {{router}}.",
       "pickUp": "Pobiorą ten adres, gdy następnym razem będą w sieci domowej.",
-      "sharedAddress": "Matinee nie potrafi jeszcze samo tego obejść.",
-      "retry": "Matinee próbuje ponownie co pół godziny."
+      "retry": "Matinee próbuje ponownie co pół godziny.",
+      "forward": "Port routera",
+      "forwardAuto": "Poproś router o otwarcie portu (UPnP lub NAT-PMP)",
+      "forwardPort": "Sam przekierowałem port {{port}}",
+      "forwardHint": "Jeśli router nie otwiera portu na żądanie, przekieruj w jego ustawieniach port 443 (lub 80) na port {{port}} tego komputera i wybierz ten port tutaj.",
+      "findable": "Gdy adres internetowy Twojego domu się zmieni, aplikacje nadal znajdą ten serwer.",
+      "direct": "Aplikacje zawsze łączą się bezpośrednio z tym serwerem, nigdy przez cudzy, dlatego potrzebny jest publiczny adres od dostawcy internetu."
     },
     "playback": {
       "title": "Odtwarzanie",

@@ -55,6 +55,8 @@ export type Settings = {
   themeProblems: string[]
   // Open a port on the router so the apps reach the server away from home.
   remoteAccess: boolean
+  // The router port (443 or 80) an admin forwarded by hand; 0 asks the router.
+  remoteForwardedPort: number
   // How remote access is doing; missing when the server doesn't offer it.
   remote?: RemoteStatus
   // The address set with MATINEE_PUBLIC_URL, which the apps use away from home.
@@ -70,7 +72,10 @@ export type Settings = {
   tmdb: { source: 'settings' | 'environment' | 'built-in' | 'none'; hint?: string }
 }
 
-// sharedAddress: the router has no public address of its own, so only a relay could help.
+// sharedAddress: the router has no public address of its own, so the internet
+// can't reach the server until the provider gives it one.
+// findable: the apps can look the server up if its address changes.
+// listenPort: the server's remote access port, where a hand-made forward goes.
 export type RemoteStatus = {
   enabled: boolean
   state: 'off' | 'working' | 'ready' | 'failed'
@@ -79,6 +84,9 @@ export type RemoteStatus = {
   publicIP?: string
   problem?: string
   sharedAddress?: boolean
+  forwardedPort?: number
+  listenPort?: number
+  findable?: boolean
   certificateExpires?: string
   checkedAt?: string
 }

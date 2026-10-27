@@ -14,6 +14,7 @@ import (
 	"os"
 	"os/exec"
 	"os/signal"
+	"path/filepath"
 	"strconv"
 	"strings"
 	"syscall"
@@ -23,6 +24,7 @@ import (
 	"github.com/yeixio/matinee/internal/api"
 	"github.com/yeixio/matinee/internal/artwork"
 	"github.com/yeixio/matinee/internal/config"
+	"github.com/yeixio/matinee/internal/connect"
 	"github.com/yeixio/matinee/internal/discovery"
 	"github.com/yeixio/matinee/internal/download"
 	"github.com/yeixio/matinee/internal/hwaccel"
@@ -172,10 +174,22 @@ func run() error {
 	}
 	if cfg.RemoteAddr != "" {
 		apiServer.Remote = &remote.Manager{Addr: cfg.RemoteAddr, Dir: cfg.RemoteDir(), Handler: apiServer.RemoteHandler(), Log: log}
+		if cfg.ConnectURL != "" {
+			key, err := connect.LoadKey(filepath.Join(cfg.RemoteDir(), "server.key"))
+			if err != nil {
+				return err
+			}
+			apiServer.Remote.Connect = &connect.Client{URL: cfg.ConnectURL, Key: key}
+		}
 		on, err := api.RemoteAccessOn(ctx, db)
 		if err != nil {
 			return err
 		}
+		port, err := api.RemoteForwardedPort(ctx, db)
+		if err != nil {
+			return err
+		}
+		apiServer.Remote.SetForwardedPort(port)
 		apiServer.Remote.SetEnabled(on)
 		go apiServer.Remote.Run(ctx)
 	}

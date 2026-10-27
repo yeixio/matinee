@@ -643,8 +643,13 @@
       "ready": "Aplicațiile ajung la acest server la <url>{{url}}</url> când sunt în afara casei.",
       "router": "Routerul tău a deschis portul prin {{router}}.",
       "pickUp": "Vor prelua această adresă data viitoare când sunt în rețeaua ta de acasă.",
-      "sharedAddress": "Matinee nu poate ocoli asta singur încă.",
-      "retry": "Matinee încearcă din nou la fiecare jumătate de oră."
+      "retry": "Matinee încearcă din nou la fiecare jumătate de oră.",
+      "forward": "Portul routerului",
+      "forwardAuto": "Cere routerului să deschidă unul (UPnP sau NAT-PMP)",
+      "forwardPort": "Am redirecționat eu portul {{port}}",
+      "forwardHint": "Dacă routerul nu deschide un port la cerere, redirecționează din setările lui portul 443 (sau 80) către portul {{port}} al acestui computer, apoi alege acel port aici.",
+      "findable": "Dacă adresa de internet a casei se schimbă, aplicațiile găsesc în continuare acest server.",
+      "direct": "Aplicațiile se conectează mereu direct la acest server, niciodată prin serverul altcuiva, deci e nevoie de o adresă publică de la furnizorul de internet."
     },
     "playback": {
       "title": "Redare",

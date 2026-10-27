@@ -635,8 +635,13 @@
       "ready": "Apl mencapai pelayan ini di <url>{{url}}</url> apabila berada di luar rumah.",
       "router": "Penghala anda membuka port melalui {{router}}.",
       "pickUp": "Apl akan mengambil alamat ini apabila berada di rangkaian rumah anda nanti.",
-      "sharedAddress": "Matinee belum dapat mengatasi ini sendiri.",
-      "retry": "Matinee mencuba lagi setiap setengah jam."
+      "retry": "Matinee mencuba lagi setiap setengah jam.",
+      "forward": "Port penghala",
+      "forwardAuto": "Minta penghala membukanya (UPnP atau NAT-PMP)",
+      "forwardPort": "Saya memajukan port {{port}} sendiri",
+      "forwardHint": "Jika penghala tidak membuka port apabila diminta, majukan port 443 (atau 80) dalam tetapannya ke port {{port}} pada komputer ini, kemudian pilih port itu di sini.",
+      "findable": "Jika alamat internet rumah anda berubah, apl masih menemui pelayan ini.",
+      "direct": "Apl sentiasa bersambung terus ke pelayan ini, tidak pernah melalui pelayan orang lain, jadi ini memerlukan alamat awam daripada penyedia internet anda."
     },
     "playback": {
       "title": "Main balik",

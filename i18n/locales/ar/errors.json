@@ -67,6 +67,7 @@
   "password_must_be_at_most_72_bytes": "يجب ألا تتجاوز كلمة المرور 72 بايت",
   "person_not_found": "لم يُعثر على الشخص",
   "picture_subtitles_need_a_converted_quality_not_the_original_file": "الترجمات المصوّرة تحتاج إلى جودة محوّلة، لا الملف الأصلي",
+  "remoteforwardedport_must_be_443_80_or_0": "يجب أن تكون قيمة remoteForwardedPort ‏443 أو 80 أو 0",
   "replaced_by_a_newer_seek": "استُبدل بانتقال أحدث",
   "request_not_found": "لم يُعثر على الطلب",
   "requests_must_be_off_approve_or_auto": "يجب أن تكون requests ‏off أو approve أو auto",

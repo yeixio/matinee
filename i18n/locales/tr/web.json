@@ -639,8 +639,13 @@
       "ready": "Uygulamalar evden uzaktayken bu sunucuya <url>{{url}}</url> adresinden ulaşır.",
       "router": "Yönlendiricin portu {{router}} üzerinden açtı.",
       "pickUp": "Bu adresi bir sonraki ev ağına bağlanışlarında alırlar.",
-      "sharedAddress": "Matinee bunu henüz kendi başına aşamıyor.",
-      "retry": "Matinee yarım saatte bir yeniden dener."
+      "retry": "Matinee yarım saatte bir yeniden dener.",
+      "forward": "Yönlendirici portu",
+      "forwardAuto": "Yönlendiriciden bir port açmasını iste (UPnP veya NAT-PMP)",
+      "forwardPort": "{{port}} portunu kendim yönlendirdim",
+      "forwardHint": "Yönlendiricin istendiğinde port açmıyorsa ayarlarından 443 (veya 80) portunu bu bilgisayarın {{port}} portuna yönlendir, sonra o portu burada seç.",
+      "findable": "Evinin internet adresi değişse de uygulamalar bu sunucuyu bulmaya devam eder.",
+      "direct": "Uygulamalar her zaman doğrudan bu sunucuya bağlanır, asla başkasının sunucusu üzerinden değil; bu yüzden internet sağlayıcından genel bir adres gerekir."
     },
     "playback": {
       "title": "Oynatma",

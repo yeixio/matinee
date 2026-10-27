@@ -647,8 +647,13 @@
       "ready": "Mimo domov aplikace dosáhnou na tento server na <url>{{url}}</url>.",
       "router": "Tvůj router otevřel port přes {{router}}.",
       "pickUp": "Tuto adresu si převezmou, až budou příště v domácí síti.",
-      "sharedAddress": "Matinee to zatím neumí obejít sám.",
-      "retry": "Matinee to zkusí znovu každou půlhodinu."
+      "retry": "Matinee to zkusí znovu každou půlhodinu.",
+      "forward": "Port routeru",
+      "forwardAuto": "Požádat router o otevření portu (UPnP nebo NAT-PMP)",
+      "forwardPort": "Port {{port}} jsem přesměroval sám",
+      "forwardHint": "Pokud router na požádání port neotevře, přesměruj v jeho nastavení port 443 (nebo 80) na port {{port}} tohoto počítače a pak ten port vyber tady.",
+      "findable": "Když se internetová adresa tvé domácnosti změní, aplikace tento server stále najdou.",
+      "direct": "Aplikace se vždy připojují přímo k tomuto serveru, nikdy přes cizí, proto je potřeba veřejná adresa od tvého poskytovatele internetu."
     },
     "playback": {
       "title": "Přehrávání",

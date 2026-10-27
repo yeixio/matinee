@@ -67,6 +67,7 @@
   "password_must_be_at_most_72_bytes": "kata laluan mesti paling banyak 72 bait",
   "person_not_found": "orang tidak ditemui",
   "picture_subtitles_need_a_converted_quality_not_the_original_file": "sari kata gambar memerlukan kualiti yang ditukar, bukan fail asal",
+  "remoteforwardedport_must_be_443_80_or_0": "remoteForwardedPort mestilah 443, 80 atau 0",
   "replaced_by_a_newer_seek": "digantikan oleh lompatan yang lebih baharu",
   "request_not_found": "permintaan tidak ditemui",
   "requests_must_be_off_approve_or_auto": "requests mesti off, approve atau auto",

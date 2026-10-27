@@ -635,8 +635,13 @@
       "ready": "外出时，应用通过 <url>{{url}}</url> 访问此服务器。",
       "router": "路由器已通过 {{router}} 打开端口。",
       "pickUp": "它们下次连上家庭网络时会获取这个地址。",
-      "sharedAddress": "Matinee 暂时无法自行解决这个问题。",
-      "retry": "Matinee 每半小时重试一次。"
+      "retry": "Matinee 每半小时重试一次。",
+      "forward": "路由器端口",
+      "forwardAuto": "让路由器自动开放（UPnP 或 NAT-PMP）",
+      "forwardPort": "我已自行转发端口 {{port}}",
+      "forwardHint": "如果路由器不会按请求开放端口，请在其设置中将端口 443（或 80）转发到这台电脑的端口 {{port}}，然后在这里选择该端口。",
+      "findable": "即使家里的互联网地址变了，应用也能找到这台服务器。",
+      "direct": "应用始终直接连接到这台服务器，从不经过别人的服务器，因此需要互联网服务商提供的公网地址。"
     },
     "playback": {
       "title": "播放",

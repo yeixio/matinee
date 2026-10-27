@@ -643,8 +643,13 @@
       "ready": "Fuera de casa, las apps llegan a este servidor en <url>{{url}}</url>.",
       "router": "Tu router abrió el puerto mediante {{router}}.",
       "pickUp": "Tomarán esta dirección la próxima vez que estén en tu red doméstica.",
-      "sharedAddress": "Matinee aún no puede solucionar esto por sí solo.",
-      "retry": "Matinee lo vuelve a intentar cada media hora."
+      "retry": "Matinee lo vuelve a intentar cada media hora.",
+      "forward": "Puerto del router",
+      "forwardAuto": "Pedir al router que abra uno (UPnP o NAT-PMP)",
+      "forwardPort": "Redirigí el puerto {{port}} yo mismo",
+      "forwardHint": "Si tu router no abre un puerto cuando se le pide, redirige en su configuración el puerto 443 (o 80) al puerto {{port}} de este equipo y elige ese puerto aquí.",
+      "findable": "Si cambia la dirección de internet de tu casa, las apps siguen encontrando este servidor.",
+      "direct": "Las apps siempre se conectan directamente a este servidor, nunca a través del de otra persona, así que hace falta una dirección pública de tu proveedor de internet."
     },
     "playback": {
       "title": "Reproducción",

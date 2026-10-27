@@ -67,6 +67,7 @@
   "password_must_be_at_most_72_bytes": "گذرواژه حداکثر ۷۲ بایت می‌تواند باشد",
   "person_not_found": "شخص پیدا نشد",
   "picture_subtitles_need_a_converted_quality_not_the_original_file": "زیرنویس‌های تصویری به کیفیت تبدیل‌شده نیاز دارند، نه فایل اصلی",
+  "remoteforwardedport_must_be_443_80_or_0": "remoteForwardedPort باید 443، 80 یا 0 باشد",
   "replaced_by_a_newer_seek": "با جابه‌جایی جدیدتری جایگزین شد",
   "request_not_found": "درخواست پیدا نشد",
   "requests_must_be_off_approve_or_auto": "requests باید off، approve یا auto باشد",

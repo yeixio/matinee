@@ -639,8 +639,13 @@
       "ready": "Buitenshuis bereiken de apps deze server op <url>{{url}}</url>.",
       "router": "Je router heeft de poort geopend via {{router}}.",
       "pickUp": "Ze nemen dit adres over zodra ze weer op je thuisnetwerk zijn.",
-      "sharedAddress": "Matinee kan dit nog niet zelf omzeilen.",
-      "retry": "Matinee probeert het elk half uur opnieuw."
+      "retry": "Matinee probeert het elk half uur opnieuw.",
+      "forward": "Routerpoort",
+      "forwardAuto": "De router er een laten openen (UPnP of NAT-PMP)",
+      "forwardPort": "Ik heb poort {{port}} zelf doorgestuurd",
+      "forwardHint": "Als je router niet op verzoek een poort opent, stuur dan in de instellingen poort 443 (of 80) door naar poort {{port}} op deze computer en kies die poort hier.",
+      "findable": "Als het internetadres van je huis verandert, vinden de apps deze server nog steeds.",
+      "direct": "De apps maken altijd rechtstreeks verbinding met deze server, nooit via die van een ander, dus hiervoor is een openbaar adres van je internetprovider nodig."
     },
     "playback": {
       "title": "Afspelen",

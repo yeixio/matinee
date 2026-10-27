@@ -67,6 +67,7 @@
   "password_must_be_at_most_72_bytes": "lösenordet får vara högst 72 byte",
   "person_not_found": "personen hittades inte",
   "picture_subtitles_need_a_converted_quality_not_the_original_file": "bildundertexter kräver en konverterad kvalitet, inte originalfilen",
+  "remoteforwardedport_must_be_443_80_or_0": "remoteForwardedPort måste vara 443, 80 eller 0",
   "replaced_by_a_newer_seek": "ersatt av en nyare spolning",
   "request_not_found": "önskemålet hittades inte",
   "requests_must_be_off_approve_or_auto": "requests måste vara off, approve eller auto",

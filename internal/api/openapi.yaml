@@ -2024,8 +2024,19 @@ components:
             (`https://<public IP>:<port>`, with a certificate browsers and
             phones trust). Empty when there is none. Apps should remember it
             while at home and try it when the home address doesn't answer.
-            The public IP can change; the apps learn the new one the next
-            time they're home.
+            If the public IP changes while they're away, they look the
+            server up at `lookupURL`.
+        serverId:
+          type: string
+          description: This server's id with the connect service (docs/connect.md). Empty when remote access isn't working or the service is off.
+        lookupURL:
+          type: string
+          description: |
+            Where the apps find this server's current outside addresses when
+            `remoteURL` stops answering: `GET` it for `{"id", "urls",
+            "updated"}`, then try each URL. The service only knows addresses;
+            everything else goes straight to the server. Empty when there's
+            none.
     Settings:
       type: object
       properties:
@@ -2060,6 +2071,13 @@ components:
             Open a port on the home router (UPnP or NAT-PMP) and get a Let's
             Encrypt certificate for its public IP address, so the apps reach
             this server away from home. Off by default.
+        remoteForwardedPort:
+          type: integer
+          enum: [0, 443, 80]
+          description: |
+            The router port an admin forwarded to the remote access port by
+            hand, for routers that won't open one when asked. 0 (the
+            default) asks the router.
         remote:
           type: object
           readOnly: true
@@ -2074,6 +2092,9 @@ components:
             sharedAddress:
               type: boolean
               description: The router has no public address of its own (the internet provider shares one, or another router sits in front), so a direct connection can't work.
+            forwardedPort: { type: integer, description: The router port forwarded by hand, when one is. }
+            listenPort: { type: integer, description: The server's remote access port, where a forward made by hand goes. }
+            findable: { type: boolean, description: The connect service knows the current address, so apps away from home find the server after it changes. }
             certificateExpires: { type: string, format: date-time }
             checkedAt: { type: string, format: date-time }
         publicURL:

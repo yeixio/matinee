@@ -635,8 +635,13 @@
       "ready": "Aplikasi menjangkau server ini di <url>{{url}}</url> saat berada di luar rumah.",
       "router": "Router-mu membuka port lewat {{router}}.",
       "pickUp": "Mereka akan mengambil alamat ini saat berikutnya berada di jaringan rumahmu.",
-      "sharedAddress": "Matinee belum bisa mengatasi ini sendiri.",
-      "retry": "Matinee mencoba lagi setiap setengah jam."
+      "retry": "Matinee mencoba lagi setiap setengah jam.",
+      "forward": "Port router",
+      "forwardAuto": "Minta router membukanya (UPnP atau NAT-PMP)",
+      "forwardPort": "Saya meneruskan port {{port}} sendiri",
+      "forwardHint": "Jika router-mu tidak membuka port saat diminta, teruskan port 443 (atau 80) di pengaturannya ke port {{port}} di komputer ini, lalu pilih port itu di sini.",
+      "findable": "Jika alamat internet rumahmu berubah, aplikasi tetap menemukan server ini.",
+      "direct": "Aplikasi selalu terhubung langsung ke server ini, tidak pernah melalui server orang lain, jadi diperlukan alamat publik dari penyedia internetmu."
     },
     "playback": {
       "title": "Pemutaran",

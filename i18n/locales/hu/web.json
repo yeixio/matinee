@@ -639,8 +639,13 @@
       "ready": "Az alkalmazások otthonon kívül itt érik el a szervert: <url>{{url}}</url>.",
       "router": "A routered megnyitotta a portot ezen keresztül: {{router}}.",
       "pickUp": "Ezt a címet akkor veszik át, amikor legközelebb az otthoni hálózaton vannak.",
-      "sharedAddress": "A Matinee ezt egyelőre nem tudja magától megkerülni.",
-      "retry": "A Matinee félóránként újrapróbálja."
+      "retry": "A Matinee félóránként újrapróbálja.",
+      "forward": "Router portja",
+      "forwardAuto": "A router nyisson egyet (UPnP vagy NAT-PMP)",
+      "forwardPort": "A(z) {{port}} portot én irányítottam át",
+      "forwardHint": "Ha a routered kérésre nem nyit portot, a beállításaiban irányítsd át a 443-as (vagy 80-as) portot ennek a számítógépnek a(z) {{port}} portjára, majd itt válaszd ki azt a portot.",
+      "findable": "Ha az otthoni internetcím megváltozik, az alkalmazások akkor is megtalálják ezt a szervert.",
+      "direct": "Az alkalmazások mindig közvetlenül ehhez a szerverhez csatlakoznak, soha nem más szerverén át, ezért nyilvános címre van szükség az internetszolgáltatódtól."
     },
     "playback": {
       "title": "Lejátszás",

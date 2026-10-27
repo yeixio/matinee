@@ -21,6 +21,8 @@ import (
 	"sync"
 	"testing"
 	"time"
+
+	"github.com/yeixio/matinee/internal/connect"
 )
 
 func TestPublic(t *testing.T) {
@@ -203,6 +205,38 @@ func TestNoRouter(t *testing.T) {
 	}
 }
 
+func TestForwardedPortNotReachable(t *testing.T) {
+	m := &Manager{Addr: "127.0.0.1:0", Dir: t.TempDir(), Log: slog.New(slog.DiscardHandler), Handler: http.NotFoundHandler()}
+	m.SetForwardedPort(443)
+	m.SetEnabled(true)
+	m.check(context.Background())
+	if st := m.Status(); st.State != StateFailed || !strings.Contains(st.Problem, "needs the connect service") {
+		t.Fatalf("without the service: %+v", st)
+	}
+	m.stop(context.Background())
+
+	// The service can't reach the forwarded port.
+	var dialed string
+	svc := &connect.Service{AllowPrivate: true, Dial: func(_ context.Context, _, addr string) (net.Conn, error) {
+		dialed = addr
+		return nil, errors.New("refused")
+	}}
+	ts := httptest.NewServer(svc.Handler())
+	defer ts.Close()
+	key, _ := connect.LoadKey(filepath.Join(t.TempDir(), "server.key"))
+	m = &Manager{Addr: "127.0.0.1:0", Dir: t.TempDir(), Log: slog.New(slog.DiscardHandler), Handler: http.NotFoundHandler(),
+		Connect: &connect.Client{URL: ts.URL, Key: key}}
+	m.SetForwardedPort(443)
+	m.SetEnabled(true)
+	m.check(context.Background())
+	defer m.stop(context.Background())
+	st := m.Status()
+	want := fmt.Sprintf("forward TCP port 443 to port %d on this computer", m.port)
+	if st.State != StateFailed || st.PublicIP != "127.0.0.1" || st.ForwardedPort != 443 || !strings.Contains(st.Problem, want) || dialed != "127.0.0.1:443" {
+		t.Fatalf("status %+v, dialed %s", st, dialed)
+	}
+}
+
 // TestPebble gets a real certificate from Pebble, Let's Encrypt's test CA,
 // through a pretend router. It runs when the pebble binary is on PATH:
 // go install github.com/letsencrypt/pebble/v2/cmd/pebble@latest
@@ -222,12 +256,16 @@ func TestPebble(t *testing.T) {
 	for _, c := range []struct {
 		name   string
 		refuse map[int]bool
-	}{{"tls-alpn-01", nil}, {"http-01 when 443 is taken", map[int]bool{15001: true}}} {
-		t.Run(c.name, func(t *testing.T) { runPebble(t, bin, src, c.refuse) })
+		byHand bool
+	}{{"tls-alpn-01", nil, false}, {"http-01 when 443 is taken", map[int]bool{15001: true}, false}, {"port forwarded by hand", nil, true}} {
+		t.Run(c.name, func(t *testing.T) { runPebble(t, bin, src, c.refuse, c.byHand) })
 	}
 }
 
-func runPebble(t *testing.T, bin, src string, refuse map[int]bool) {
+// runPebble gets a certificate through a router that opens ports, or with
+// byHand through a port the admin forwarded (here, the CA's TLS port
+// straight to the server) and the connect service.
+func runPebble(t *testing.T, bin, src string, refuse map[int]bool, byHand bool) {
 	dir := t.TempDir()
 	cfg := map[string]any{"pebble": map[string]any{
 		"listenAddress": "127.0.0.1:14000", "managementListenAddress": "127.0.0.1:15000",
@@ -269,6 +307,18 @@ func runPebble(t *testing.T, bin, src string, refuse map[int]bool) {
 		FindRouter: func(context.Context) (router, error) { return r, nil },
 		Challenges: []challenge{{"tls-alpn-01", 15001}, {"http-01", 15002}},
 	}
+	svc := &connect.Service{AllowPrivate: true}
+	ts := httptest.NewServer(svc.Handler())
+	defer ts.Close()
+	key, err := connect.LoadKey(filepath.Join(t.TempDir(), "server.key"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	m.Connect = &connect.Client{URL: ts.URL, Key: key}
+	if byHand {
+		m.Addr, m.FindRouter = "127.0.0.1:15001", nil
+		m.SetForwardedPort(15001)
+	}
 	m.SetEnabled(true)
 	ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
 	defer cancel()
@@ -278,8 +328,23 @@ func runPebble(t *testing.T, bin, src string, refuse map[int]bool) {
 	if st.State != StateReady {
 		t.Fatalf("status %+v", st)
 	}
-	if st.URL != fmt.Sprintf("https://127.0.0.1:%d", m.port) || st.CertificateExpires == nil || st.Router != "UPnP" {
+	router := "UPnP"
+	if byHand {
+		router = ""
+	}
+	if st.URL != fmt.Sprintf("https://127.0.0.1:%d", m.mapped) || st.CertificateExpires == nil || st.Router != router || !st.Findable {
 		t.Fatalf("status %+v", st)
+	}
+	// The apps can look the server up.
+	resp, err := http.Get(m.Connect.LookupURL())
+	if err != nil {
+		t.Fatal(err)
+	}
+	var found connect.Found
+	json.NewDecoder(resp.Body).Decode(&found)
+	resp.Body.Close()
+	if len(found.URLs) != 1 || found.URLs[0] != st.URL {
+		t.Fatalf("lookup %+v", found)
 	}
 	if d := time.Until(*st.CertificateExpires); d > 7*24*time.Hour {
 		t.Errorf("expected a short-lived certificate, got one for %v", d)
@@ -293,7 +358,7 @@ func runPebble(t *testing.T, bin, src string, refuse map[int]bool) {
 
 	// The server answers over HTTPS with the new certificate, which pebble's
 	// issuing root (fetched from its management port) vouches for.
-	resp, err := client.Get("https://127.0.0.1:15000/roots/0")
+	resp, err = client.Get("https://127.0.0.1:15000/roots/0")
 	if err != nil {
 		t.Fatal(err)
 	}

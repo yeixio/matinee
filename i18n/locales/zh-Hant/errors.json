@@ -67,6 +67,7 @@
   "password_must_be_at_most_72_bytes": "密碼最多 72 個位元組",
   "person_not_found": "找不到此人",
   "picture_subtitles_need_a_converted_quality_not_the_original_file": "圖形字幕需要轉換後的畫質，不能用原始檔案",
+  "remoteforwardedport_must_be_443_80_or_0": "remoteForwardedPort 必須是 443、80 或 0",
   "replaced_by_a_newer_seek": "已被更新的跳轉取代",
   "request_not_found": "找不到該請求",
   "requests_must_be_off_approve_or_auto": "requests 必須是 off、approve 或 auto",

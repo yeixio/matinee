@@ -67,6 +67,7 @@
   "password_must_be_at_most_72_bytes": "salasana saa olla enintään 72 tavua",
   "person_not_found": "henkilöä ei löytynyt",
   "picture_subtitles_need_a_converted_quality_not_the_original_file": "kuvatekstitykset vaativat muunnetun laadun, ei alkuperäistä tiedostoa",
+  "remoteforwardedport_must_be_443_80_or_0": "remoteForwardedPort on oltava 443, 80 tai 0",
   "replaced_by_a_newer_seek": "korvattu uudemmalla siirtymällä",
   "request_not_found": "toivetta ei löytynyt",
   "requests_must_be_off_approve_or_auto": "requests on oltava off, approve tai auto",

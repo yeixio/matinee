@@ -67,6 +67,7 @@
   "password_must_be_at_most_72_bytes": "parola trebuie să aibă cel mult 72 de octeți",
   "person_not_found": "persoana nu a fost găsită",
   "picture_subtitles_need_a_converted_quality_not_the_original_file": "subtitrările imagine au nevoie de o calitate convertită, nu de fișierul original",
+  "remoteforwardedport_must_be_443_80_or_0": "remoteForwardedPort trebuie să fie 443, 80 sau 0",
   "replaced_by_a_newer_seek": "înlocuit de o derulare mai nouă",
   "request_not_found": "cererea nu a fost găsită",
   "requests_must_be_off_approve_or_auto": "requests trebuie să fie off, approve sau auto",

@@ -67,6 +67,7 @@
   "password_must_be_at_most_72_bytes": "het wachtwoord mag hoogstens 72 bytes zijn",
   "person_not_found": "persoon niet gevonden",
   "picture_subtitles_need_a_converted_quality_not_the_original_file": "beeldondertitels hebben een omgezette kwaliteit nodig, niet het originele bestand",
+  "remoteforwardedport_must_be_443_80_or_0": "remoteForwardedPort moet 443, 80 of 0 zijn",
   "replaced_by_a_newer_seek": "vervangen door een nieuwere spoelactie",
   "request_not_found": "verzoek niet gevonden",
   "requests_must_be_off_approve_or_auto": "requests moet off, approve of auto zijn",

@@ -639,8 +639,13 @@
       "ready": "Appene når denne serveren på <url>{{url}}</url> når de er borte fra hjemmet.",
       "router": "Ruteren din åpnet porten via {{router}}.",
       "pickUp": "De henter denne adressen neste gang de er på hjemmenettverket.",
-      "sharedAddress": "Matinee kommer ikke rundt dette på egen hånd ennå.",
-      "retry": "Matinee prøver igjen hver halvtime."
+      "retry": "Matinee prøver igjen hver halvtime.",
+      "forward": "Ruterport",
+      "forwardAuto": "Be ruteren åpne en (UPnP eller NAT-PMP)",
+      "forwardPort": "Jeg videresendte port {{port}} selv",
+      "forwardHint": "Hvis ruteren ikke åpner en port når den blir bedt om det, videresend port 443 (eller 80) i innstillingene til port {{port}} på denne datamaskinen, og velg den porten her.",
+      "findable": "Hvis internettadressen hjemme endres, finner appene fortsatt denne serveren.",
+      "direct": "Appene kobler seg alltid direkte til denne serveren, aldri via noen andres, så dette krever en offentlig adresse fra internettleverandøren."
     },
     "playback": {
       "title": "Avspilling",

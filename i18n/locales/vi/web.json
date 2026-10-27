@@ -635,8 +635,13 @@
       "ready": "Ứng dụng kết nối tới máy chủ này tại <url>{{url}}</url> khi ở ngoài nhà.",
       "router": "Bộ định tuyến của bạn đã mở cổng qua {{router}}.",
       "pickUp": "Chúng sẽ nhận địa chỉ này vào lần tới ở trong mạng gia đình.",
-      "sharedAddress": "Matinee chưa thể tự vượt qua chuyện này.",
-      "retry": "Matinee thử lại mỗi nửa giờ."
+      "retry": "Matinee thử lại mỗi nửa giờ.",
+      "forward": "Cổng bộ định tuyến",
+      "forwardAuto": "Để bộ định tuyến tự mở (UPnP hoặc NAT-PMP)",
+      "forwardPort": "Tôi đã tự chuyển tiếp cổng {{port}}",
+      "forwardHint": "Nếu bộ định tuyến không mở cổng khi được yêu cầu, hãy chuyển tiếp cổng 443 (hoặc 80) trong phần cài đặt của nó tới cổng {{port}} trên máy tính này, rồi chọn cổng đó ở đây.",
+      "findable": "Nếu địa chỉ internet của nhà bạn thay đổi, các ứng dụng vẫn tìm thấy máy chủ này.",
+      "direct": "Các ứng dụng luôn kết nối thẳng tới máy chủ này, không bao giờ qua máy chủ của người khác, nên cần một địa chỉ công khai từ nhà cung cấp internet."
     },
     "playback": {
       "title": "Phát lại",

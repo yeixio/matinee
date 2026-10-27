@@ -67,6 +67,7 @@
   "password_must_be_at_most_72_bytes": "ο κωδικός πρέπει να έχει το πολύ 72 byte",
   "person_not_found": "το πρόσωπο δεν βρέθηκε",
   "picture_subtitles_need_a_converted_quality_not_the_original_file": "οι υπότιτλοι εικόνας χρειάζονται μετατρεπόμενη ποιότητα, όχι το αρχικό αρχείο",
+  "remoteforwardedport_must_be_443_80_or_0": "το remoteForwardedPort πρέπει να είναι 443, 80 ή 0",
   "replaced_by_a_newer_seek": "αντικαταστάθηκε από νεότερη μετάβαση",
   "request_not_found": "το αίτημα δεν βρέθηκε",
   "requests_must_be_off_approve_or_auto": "το requests πρέπει να είναι off, approve ή auto",

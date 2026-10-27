@@ -35,7 +35,7 @@ See [Home network](/docs/server/home-network/).
 
 ## Remote access doesn't work
 
-**Settings → Remote access** says what's in the way. The usual causes are UPnP turned off on the router, a second router in front of yours, or an internet provider that shares one public address between customers. See [Remote access](/docs/server/remote-access/).
+**Settings → Remote access** says what's in the way. The usual causes are UPnP turned off on the router (turn it on, or [forward a port yourself](/docs/server/remote-access/#forwarding-a-port-yourself)), a second router in front of yours, or an internet provider that shares one public address between customers. See [Remote access](/docs/server/remote-access/).
 
 ## I forgot my password
 
