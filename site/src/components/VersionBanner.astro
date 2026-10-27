@@ -1,0 +1,25 @@
+---
+// A note at the top of the guide for an older release or for main, which
+// points to the latest release's guide. The latest release gets none.
+import Default from '@astrojs/starlight/components/Banner.astro'
+
+const version = import.meta.env.DOCS_VERSION ?? 'dev'
+const latest = import.meta.env.DOCS_LATEST ?? ''
+const page = Astro.url.pathname.slice(import.meta.env.BASE_URL.length)
+const note =
+  version === 'next'
+    ? 'This is the guide for the next release, with features that are on main but not released yet.'
+    : version !== 'dev' && latest && version !== latest
+      ? `This is the guide for Matinee ${version}.`
+      : ''
+---
+
+{
+  note ? (
+    <div class="sl-banner" data-pagefind-ignore>
+      {note} <a href={`/${page}`}>Read the guide for the latest release{latest ? ` (${latest})` : ''}</a>.
+    </div>
+  ) : (
+    <Default />
+  )
+}

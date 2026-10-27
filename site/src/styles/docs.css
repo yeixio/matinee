@@ -1,0 +1,101 @@
+/* The guide in Matinee's own look: warm theatre dark, a coral accent,
+   Fraunces for headings and Inter for everything else. */
+
+:root {
+  --sl-font: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --sl-font-heading: 'Fraunces Variable', ui-serif, Georgia, serif;
+  --sl-content-width: 48rem;
+}
+
+/* Dark (the default) */
+:root,
+::backdrop {
+  --sl-color-accent-low: #3a1a17;
+  --sl-color-accent: #ff6a55;
+  --sl-color-accent-high: #ffc2b8;
+  --sl-color-white: #f4efea;
+  --sl-color-gray-1: #e4dcd9;
+  --sl-color-gray-2: #c3b9bf;
+  --sl-color-gray-3: #aca2ac;
+  --sl-color-gray-4: #756b77;
+  --sl-color-gray-5: #3b3340;
+  --sl-color-gray-6: #221d26;
+  --sl-color-black: #100d12;
+  --sl-color-text-accent: #ff8873;
+  --sl-color-bg-nav: #100d12;
+  --sl-color-bg-sidebar: #100d12;
+  --sl-color-hairline: #2a242e;
+  --sl-color-hairline-light: #322b36;
+  --sl-color-banner-bg: #221d26;
+  --sl-color-banner-text: #f4efea;
+}
+
+/* Light */
+:root[data-theme='light'],
+[data-theme='light'] ::backdrop {
+  --sl-color-accent-low: #ffe1db;
+  --sl-color-accent: #d9412c;
+  --sl-color-accent-high: #6b1d12;
+  --sl-color-white: #1d171f;
+  --sl-color-gray-1: #2c2530;
+  --sl-color-gray-2: #463d4a;
+  --sl-color-gray-3: #6b6170;
+  --sl-color-gray-4: #9a909c;
+  --sl-color-gray-5: #d9d1d3;
+  --sl-color-gray-6: #f1ebe6;
+  --sl-color-gray-7: #f8f4f0;
+  --sl-color-black: #fffcf8;
+  --sl-color-text-accent: #c2392a;
+  --sl-color-bg-nav: #fffcf8;
+  --sl-color-bg-sidebar: #fffcf8;
+  --sl-color-banner-bg: #f1ebe6;
+  --sl-color-banner-text: #1d171f;
+}
+
+.sl-markdown-content h1,
+.sl-markdown-content h2,
+.sl-markdown-content h3,
+h1#_top {
+  font-family: var(--sl-font-heading);
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+
+.site-title {
+  font-family: var(--sl-font-heading);
+  font-weight: 700;
+  font-size: 1.35rem;
+  color: var(--sl-color-white);
+}
+
+/* Screenshots: rounded, with a hairline so dark UI doesn't melt into a dark page. */
+.sl-markdown-content img {
+  border-radius: 0.75rem;
+  border: 1px solid var(--sl-color-hairline-light);
+  box-shadow: 0 10px 30px -12px rgb(0 0 0 / 0.45);
+}
+
+/* A phone screenshot next to its text, or two side by side. */
+.sl-markdown-content .phone img,
+.sl-markdown-content img[alt$='(phone)'] {
+  max-width: 300px;
+  border-radius: 1.5rem;
+}
+.sl-markdown-content .pair {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  align-items: start;
+}
+.sl-markdown-content .pair img {
+  margin: 0;
+}
+
+.sl-markdown-content kbd {
+  font-family: var(--sl-font);
+  font-size: 0.85em;
+  padding: 0.1em 0.4em;
+  border-radius: 0.3em;
+  border: 1px solid var(--sl-color-gray-5);
+  background: var(--sl-color-gray-6);
+}

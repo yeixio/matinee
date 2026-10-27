@@ -1,0 +1,610 @@
+---
+// The landing page: what Matinee is, what it looks like, and how to get it.
+import '@fontsource-variable/inter'
+import '@fontsource-variable/fraunces'
+import { Image } from 'astro:assets'
+import home from '../assets/home.webp'
+import movie from '../assets/movie.webp'
+import upNext from '../assets/up-next.webp'
+import filters from '../assets/filters.webp'
+import whoIsWatching from '../assets/who-is-watching.webp'
+import collections from '../assets/collections.webp'
+import fileDetails from '../assets/file-details.webp'
+import album from '../assets/album.webp'
+import themeLight from '../assets/theme-light.webp'
+import themeSciFi from '../assets/theme-sci-fi.webp'
+import themeDriveIn from '../assets/theme-drive-in.webp'
+import tvHome from '../assets/app-tv-home.webp'
+import phoneHome from '../assets/app-phone-home.webp'
+import phoneDetails from '../assets/app-phone-details.webp'
+
+const base = import.meta.env.BASE_URL
+const guide = (path = '') => `${base}docs/${path}`
+const github = 'https://github.com/yeixio/matinee'
+
+const features = [
+  {
+    title: 'Plays anything, anywhere',
+    body: 'Files a device can play stream exactly as they are, with instant seeking. Everything else is converted on the fly, on your GPU if you have one. Subtitles, resume points and the next episode are all handled for you.',
+    image: upNext,
+    alt: 'The Up next card counting down to the next episode',
+    link: guide('watching/playing/'),
+  },
+  {
+    title: 'Find the right thing in seconds',
+    body: 'Filter any library by genre, decade, rating, runtime, cast, studio, 4K or Dolby Atmos. Search as you type across movies, shows and music. Save a set of filters as a smart collection that keeps itself up to date.',
+    image: filters,
+    alt: 'The Filters panel open on the Movies library',
+    link: guide('watching/browsing/'),
+  },
+  {
+    title: 'Everyone gets their own',
+    body: 'Accounts for the whole household, profiles with "Who\'s watching?", and kids profiles that only see what\'s rated for them. Each person keeps their own progress, watch list and theme.',
+    image: whoIsWatching,
+    alt: 'Who\'s watching? with a profile for each person',
+    link: guide('household/profiles/'),
+  },
+  {
+    title: 'Every title, beautifully presented',
+    body: 'Posters, backdrops, descriptions, cast and crew, awards, trailers and box sets are filled in for you. Your own artwork always wins.',
+    image: movie,
+    alt: 'A movie\'s page with its poster, details and badges',
+    link: guide('watching/title-pages/'),
+  },
+  {
+    title: 'Collections that build themselves',
+    body: 'Smart collections like "Unwatched 80s action" or "Short enough for tonight", hand-picked lists, and box sets, each one pinnable to Home.',
+    image: collections,
+    alt: 'The Collections page',
+    link: guide('watching/collections/'),
+  },
+  {
+    title: 'Knows what\'s in every file',
+    body: 'Matinee quietly reads every file for resolution, HDR and Dolby Vision, codecs, audio channels and languages, then shows the essentials as badges and filters.',
+    image: fileDetails,
+    alt: 'File details for a 4K HDR10 movie',
+    link: guide('server/media-analysis/'),
+  },
+  {
+    title: 'Your music, too',
+    body: 'Artists and albums with covers and photos, read from your tags, and a player that keeps going while you browse.',
+    image: album,
+    alt: 'An album page with its tracks',
+    link: guide('watching/music/'),
+  },
+]
+
+const steps = [
+  { n: '1', title: 'Install it', body: 'One Docker command, a package for Debian, Ubuntu, Fedora or Homebrew, or a Helm chart.' },
+  { n: '2', title: 'Point it at your folders', body: 'Movies, TV and music. Matinee names everything from your file and folder names.' },
+  { n: '3', title: 'Press play', body: 'Artwork and details fill themselves in, new files appear in seconds, and every screen in the house can watch.' },
+]
+
+const installs = [
+  {
+    name: 'Docker',
+    code: `docker run -d --name matinee -p 7171:7171 \\
+  -v ./data:/data \\
+  -v /path/to/movies:/media/movies:ro \\
+  ghcr.io/yeixio/matinee:latest`,
+  },
+  { name: 'Homebrew', code: `brew tap yeixio/matinee https://github.com/yeixio/matinee\nbrew install yeixio/matinee/matinee\nbrew services start matinee` },
+  { name: 'Kubernetes', code: `helm install matinee oci://ghcr.io/yeixio/charts/matinee \\\n  -f my-values.yaml` },
+]
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Matinee: your own home cinema</title>
+    <meta name="description" content="Matinee is a fast, free and open source media server for your movies, TV and music. Point it at your folders and watch on any screen." />
+    <meta property="og:title" content="Matinee: your own home cinema" />
+    <meta property="og:description" content="A fast, free and open source media server for your movies, TV and music." />
+    <meta property="og:image" content={new URL(home.src, Astro.site).href} />
+    <meta name="theme-color" content="#100d12" />
+    <link rel="icon" href={`${base}favicon.svg`} type="image/svg+xml" />
+  </head>
+  <body>
+    <header class="nav">
+      <a class="brand" href={base}>
+        <img src={`${base}favicon.svg`} alt="" width="30" height="30" />
+        Matinee
+      </a>
+      <nav>
+        <a href={guide()}>Guide</a>
+        <a href="#apps">Apps</a>
+        <a href="#install">Install</a>
+        <a href={github}>GitHub</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Free and open source media server</p>
+        <h1>Your movies, shows and music.<br /><em>Your own home cinema.</em></h1>
+        <p class="lede">
+          Matinee turns the folders on your server into a beautiful library for the whole household. Point it at your
+          files and it does the rest: artwork and details, smooth playback on every screen, and a place for everyone to
+          pick up where they left off. No ads, and no account on someone else's server.
+        </p>
+        <div class="ctas">
+          <a class="button primary" href="#install">Install Matinee</a>
+          <a class="button" href={guide()}>Read the guide</a>
+        </div>
+        <div class="shot hero-shot">
+          <Image src={home} alt="Matinee's Home, with a movie featured at the top and Continue watching below" widths={[800, 1400, 2000]} sizes="(max-width: 1200px) 100vw, 1200px" loading="eager" />
+        </div>
+      </section>
+
+      <section class="steps">
+        {steps.map((s) => (
+          <div class="step">
+            <span class="n">{s.n}</span>
+            <h3>{s.title}</h3>
+            <p>{s.body}</p>
+          </div>
+        ))}
+      </section>
+
+      <section class="features">
+        {features.map((f, i) => (
+          <article class:list={['feature', { flip: i % 2 === 1 }]}>
+            <div class="copy">
+              <h2>{f.title}</h2>
+              <p>{f.body}</p>
+              <a class="more" href={f.link}>How it works →</a>
+            </div>
+            <div class="shot">
+              <Image src={f.image} alt={f.alt} widths={[700, 1200]} sizes="(max-width: 900px) 100vw, 700px" />
+            </div>
+          </article>
+        ))}
+      </section>
+
+      <section class="themes">
+        <h2>Make it yours</h2>
+        <p>Seven themes built in, from cinema dark to drive-in, and each person picks their own. The phone and TV apps follow along.</p>
+        <div class="theme-grid">
+          {[themeLight, themeSciFi, themeDriveIn].map((t, i) => (
+            <div class="shot">
+              <Image src={t} alt={['The Light theme', 'The Sci-fi theme', 'The Drive-in theme'][i]} widths={[500, 900]} sizes="(max-width: 900px) 100vw, 400px" />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class="apps" id="apps">
+        <div class="copy">
+          <h2>On the couch and on the go</h2>
+          <p>
+            The Matinee apps for iPhone, iPad, Android, Apple TV and Google TV find your server on their own, play files
+            with the device's own player, and download for offline viewing with progress that syncs back.
+          </p>
+          <p>
+            The apps are a one-time purchase. The server stays free and open source, and buying an app is how the project
+            is funded.
+          </p>
+          <a class="more" href={guide('apps/phone-and-tv/')}>About the apps →</a>
+        </div>
+        <div class="devices">
+          <div class="shot tv"><Image src={tvHome} alt="Home in the TV app" widths={[900, 1400]} sizes="(max-width: 900px) 100vw, 640px" /></div>
+          <div class="phones">
+            <div class="shot phone"><Image src={phoneHome} alt="Home in the phone app" widths={[360, 720]} sizes="180px" /></div>
+            <div class="shot phone"><Image src={phoneDetails} alt="A movie in the phone app" widths={[360, 720]} sizes="180px" /></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="install" id="install">
+        <h2>Up and running in minutes</h2>
+        <p>
+          Runs on Linux and macOS, on amd64 and arm64, from a Raspberry Pi to a rack server. Then open{' '}
+          <code>http://your-server:7171</code> and follow the setup.
+        </p>
+        <div class="install-grid">
+          {installs.map((i) => (
+            <div class="code">
+              <h3>{i.name}</h3>
+              <pre><code>{i.code}</code></pre>
+            </div>
+          ))}
+        </div>
+        <p class="also">
+          Also packaged for <a href={guide('getting-started/install/#debian-and-ubuntu')}>Debian and Ubuntu</a>{' '}
+          and <a href={guide('getting-started/install/#fedora-rhel-and-friends')}>Fedora</a>.{' '}
+          <a href={guide('getting-started/install/')}>All the ways to install →</a>
+        </p>
+      </section>
+
+      <section class="open">
+        <h2>Yours, completely</h2>
+        <div class="open-grid">
+          <div>
+            <h3>Runs on your hardware</h3>
+            <p>Your library, your watch history and your accounts live on your server and nowhere else.</p>
+          </div>
+          <div>
+            <h3>Free and open source</h3>
+            <p>The server is AGPL licensed and developed in the open. Read the code, file an issue, or send a fix.</p>
+          </div>
+          <div>
+            <h3>No ads, ever</h3>
+            <p>Just your collection, without recommendations for things you don't own.</p>
+          </div>
+        </div>
+        <div class="ctas">
+          <a class="button primary" href={guide('getting-started/install/')}>Get started</a>
+          <a class="button" href={github}>Star on GitHub</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>Matinee is free software under the AGPL 3.0 or later.</span>
+      <span>
+        <a href={guide()}>Guide</a> · <a href={`${github}/releases`}>Releases</a> · <a href={`${github}/issues`}>Issues</a>{' '}
+        · <a href={guide('help/troubleshooting/')}>Help</a>
+      </span>
+      <span class="tmdb">Movie and TV details come from TMDB. This product uses the TMDB API but is not endorsed or certified by TMDB.</span>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --bg: #100d12;
+    --bg-2: #18141b;
+    --line: #2a242e;
+    --text: #f4efea;
+    --muted: #aca2ac;
+    --accent: #ff6a55;
+    --accent-2: #ff8873;
+    --serif: 'Fraunces Variable', ui-serif, Georgia, serif;
+    --sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    color-scheme: dark;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 17px/1.6 var(--sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  a {
+    color: var(--accent-2);
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--serif);
+    font-weight: 650;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin: 0 0 0.5em;
+  }
+  h2 {
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  }
+  h3 {
+    font-size: 1.25rem;
+  }
+  p {
+    margin: 0 0 1em;
+    color: var(--muted);
+  }
+  code {
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 0.88em;
+  }
+  main > section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 24px;
+    background: rgb(16 13 18 / 0.82);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text);
+    text-decoration: none;
+    font: 650 1.35rem var(--serif);
+  }
+  .brand img {
+    width: 30px;
+  }
+  .nav nav {
+    display: flex;
+    gap: 22px;
+  }
+  .nav nav a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+  .nav nav a:hover {
+    color: var(--text);
+  }
+
+  .hero {
+    text-align: center;
+    padding-top: 80px !important;
+  }
+  .eyebrow {
+    color: var(--accent);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+  }
+  .hero h1 {
+    font-size: clamp(2.4rem, 6vw, 4.4rem);
+  }
+  .hero h1 em {
+    color: var(--accent);
+    font-style: italic;
+  }
+  .lede {
+    max-width: 680px;
+    margin: 0 auto 2em;
+    font-size: 1.15rem;
+  }
+  .ctas {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .button {
+    display: inline-block;
+    padding: 12px 22px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+    transition:
+      transform 0.15s,
+      background 0.15s;
+  }
+  .button:hover {
+    transform: translateY(-1px);
+    background: var(--bg-2);
+  }
+  .button.primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #1a0e0c;
+  }
+  .button.primary:hover {
+    background: var(--accent-2);
+  }
+
+  .shot {
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    box-shadow: 0 30px 80px -20px rgb(0 0 0 / 0.7);
+    background: var(--bg-2);
+  }
+  .hero-shot {
+    margin-top: 56px;
+    box-shadow:
+      0 0 0 1px var(--line),
+      0 40px 120px -30px rgb(255 106 85 / 0.35),
+      0 30px 80px -20px rgb(0 0 0 / 0.8);
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    padding-top: 96px !important;
+  }
+  .step .n {
+    display: inline-grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgb(255 106 85 / 0.14);
+    color: var(--accent);
+    font: 650 1.1rem var(--serif);
+    margin-bottom: 12px;
+  }
+
+  .features {
+    padding-top: 64px !important;
+  }
+  .feature {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: 56px;
+    align-items: center;
+    padding: 56px 0;
+  }
+  .feature.flip .copy {
+    order: 2;
+  }
+  .feature p {
+    font-size: 1.08rem;
+  }
+  .more {
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .more:hover {
+    text-decoration: underline;
+  }
+
+  .themes {
+    text-align: center;
+    padding-top: 64px !important;
+  }
+  .themes > p {
+    max-width: 620px;
+    margin: 0 auto 32px;
+  }
+  .theme-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .apps {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: 56px;
+    align-items: center;
+    padding-top: 120px !important;
+  }
+  .devices {
+    position: relative;
+    padding-bottom: 60px;
+  }
+  .phones {
+    position: absolute;
+    right: -12px;
+    bottom: 0;
+    display: flex;
+    gap: 12px;
+  }
+  .phone {
+    width: 150px;
+    border-radius: 22px;
+    border: 3px solid #2c2530;
+  }
+
+  .install {
+    padding-top: 120px !important;
+    text-align: center;
+  }
+  .install > p {
+    max-width: 620px;
+    margin: 0 auto 32px;
+  }
+  .install-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    text-align: left;
+  }
+  .install-grid .code:first-child {
+    grid-column: 1 / -1;
+  }
+  .code {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px 20px;
+    min-width: 0;
+  }
+  .code h3 {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+  }
+  .code pre {
+    margin: 0;
+    overflow-x: auto;
+    color: var(--text);
+    line-height: 1.55;
+  }
+  .install .also {
+    margin-top: 24px;
+  }
+
+  .open {
+    padding: 120px 24px 80px !important;
+    text-align: center;
+  }
+  .open-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    text-align: left;
+    margin: 32px 0 48px;
+  }
+
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 32px 24px 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: var(--muted);
+    font-size: 0.88rem;
+    text-align: center;
+  }
+  footer a {
+    color: var(--muted);
+  }
+  footer .tmdb {
+    font-size: 0.78rem;
+    opacity: 0.8;
+  }
+
+  @media (max-width: 900px) {
+    main > section {
+      padding: 0 16px;
+    }
+    .steps,
+    .theme-grid,
+    .install-grid,
+    .open-grid,
+    .feature,
+    .apps {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    .feature.flip .copy {
+      order: 0;
+    }
+    .feature {
+      padding: 40px 0;
+    }
+    .nav nav {
+      gap: 14px;
+    }
+    .nav nav a[href='#apps'] {
+      display: none;
+    }
+    .phones {
+      right: 8px;
+    }
+    .phone {
+      width: 110px;
+    }
+    .code pre {
+      font-size: 0.8em;
+    }
+  }
+</style>
