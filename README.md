@@ -2,6 +2,8 @@
 
 A fast, self-hosted media server for your movies, TV and music. Point it at your folders and it does the rest: tidy libraries, artwork and details, and smooth playback on any screen. No ads, and no account on someone else's server.
 
+**[matinee.yeix.io](https://matinee.yeix.io)** has the user guide, with screenshots of every feature.
+
 ![Home](docs/screenshots/desktop-home.png)
 
 <p>
