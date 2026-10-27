@@ -10,9 +10,10 @@ const sources = import.meta.glob<string>(['../**/*.tsx', '!../**/*.test.tsx'], {
 const readAttributes = new Set(['title', 'aria-label', 'placeholder', 'alt', 'label'])
 
 // Names that read the same in every language.
-const allowed = new Set(['Matinee', 'TMDB', 'Radarr', 'Sonarr', 'YouTube', 'ABCD-EFGH', 'IMDb', 'matinee'])
+const allowed = new Set(['Matinee', 'TMDB', 'Radarr', 'Sonarr', 'YouTube', 'ABCD-EFGH', 'IMDb', 'matinee', 'Overseerr'])
 
-const readable = (s: string) => /\p{L}{2,}/u.test(s) && !allowed.has(s.trim())
+// An address such as http://overseerr:5055 reads the same in every language too.
+const readable = (s: string) => /\p{L}{2,}/u.test(s) && !allowed.has(s.trim()) && !/^https?:\/\/\S+$/.test(s.trim())
 
 function hardcoded([path, text]: [string, string]): string[] {
   const src = ts.createSourceFile(path, text, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX)

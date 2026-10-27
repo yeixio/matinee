@@ -91,5 +91,12 @@
   "wrong_pin": "PIN greșit",
   "wrong_username_or_password": "nume de utilizator sau parolă greșită",
   "you_cant_remove_your_own_account": "nu îți poți elimina propriul cont",
-  "your_current_password_is_wrong": "parola ta actuală este greșită"
+  "your_current_password_is_wrong": "parola ta actuală este greșită",
+  "enter_the_api_key_in_overseerr_under_settings_general": "introdu cheia API (în Overseerr, la Settings → General)",
+  "overseerr_doesnt_know_this_title": "Overseerr nu cunoaște acest titlu",
+  "overseerr_has_no_such_user": "Overseerr nu are un astfel de utilizator",
+  "overseerr_isnt_answering_right_now_try_again_later": "Overseerr nu răspunde acum. Încearcă mai târziu.",
+  "overseerr_isnt_connected": "Overseerr nu e conectat",
+  "someone_already_asked_for_title": "cineva a cerut deja {{title}}",
+  "tmdbid_is_required": "tmdbId este obligatoriu"
 }

@@ -11,7 +11,8 @@
     "signIn": "登入",
     "settings": "設定",
     "switchProfile": "切換個人資料",
-    "signOut": "登出"
+    "signOut": "登出",
+    "discover": "探索"
   },
   "cantReachServer": "無法連線伺服器。正在重試…",
   "player": {
@@ -518,6 +519,15 @@
         "label": "只有管理員能新增作品",
         "detail": "其他人仍然可以查看即將推出的內容並報告問題。"
       }
+    },
+    "overseerr": {
+      "intro": "連線後會多出「探索」分頁:熱門趨勢、根據大家觀看內容的推薦,以及請求任何影片的方式。Jellyseerr 也可以。",
+      "notConnected": "未連線 · 用於「探索」",
+      "requestAs": "沒有 Overseerr 帳號的人的請求",
+      "madeAsOwner": "以 {{name}} 的身分送出(API 金鑰擁有者)",
+      "madeAs": "以 {{name}} 的身分送出",
+      "sameName": "在 Overseerr 中有同名帳號的人會以自己的身分請求。哪些請求需要核准,由 Overseerr 根據每位使用者在那裡的權限決定。",
+      "confirmDisconnect": "中斷 Overseerr 的連線?「探索」分頁將會消失。"
     }
   },
   "requests": {
@@ -666,6 +676,11 @@
         "amf": "AMD AMF（Windows）",
         "v4l2m2m": "V4L2（Raspberry Pi）"
       }
+    },
+    "homeRows": {
+      "title": "首頁",
+      "holidays": "節日列",
+      "holidaysDetail": "在情人節、復活節、萬聖節、感恩節和聖誕節前一個月,以及跨年夜前一週,首頁會以一列應景的影片開頭,依關鍵字、標題和簡介挑選。"
     }
   },
   "language": {
@@ -676,5 +691,21 @@
     "automatic": "自動（{{language}}）",
     "machine": "此語言為機器翻譯，部分用詞可能不太自然。",
     "help": "幫助改進"
+  },
+  "discover": {
+    "title": "探索",
+    "emptyTitle": "暫時沒有可探索的內容",
+    "connectIt": "連線 Overseerr,查看熱門趨勢、取得推薦,並請求新的電影和影集。",
+    "openSettings": "開啟設定",
+    "notConnected": "管理員尚未將 Overseerr 連線到此伺服器。",
+    "placeholder": "尋找任何電影或影集…",
+    "unavailable": "「探索」暫時無法使用",
+    "open": "開啟",
+    "request": "請求",
+    "requestShow": "請求這部影集",
+    "asking": "正在請求…",
+    "waiting": "正在等待管理員核准。",
+    "onItsWay": "下載完成後會出現在你的媒體庫中。",
+    "findIt": "在「探索」中尋找"
   }
 }

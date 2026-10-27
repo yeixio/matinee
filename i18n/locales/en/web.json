@@ -11,7 +11,8 @@
     "signIn": "Sign in",
     "settings": "Settings",
     "switchProfile": "Switch profile",
-    "signOut": "Sign out"
+    "signOut": "Sign out",
+    "discover": "Discover"
   },
   "cantReachServer": "Can't reach the server. Retrying…",
   "player": {
@@ -522,6 +523,15 @@
         "label": "Only admins add titles",
         "detail": "Everyone else can still see what’s coming soon and report problems."
       }
+    },
+    "overseerr": {
+      "intro": "Connect it to add a Discover tab: what's trending, recommendations based on what people watch, and a way to ask for anything. Jellyseerr works too.",
+      "notConnected": "Not connected · for Discover",
+      "requestAs": "Requests from people without an Overseerr account",
+      "madeAsOwner": "Made as {{name}} (the API key's owner)",
+      "madeAs": "Made as {{name}}",
+      "sameName": "People with an Overseerr account of the same name ask as themselves. Overseerr decides which requests need approval, from each user's permissions there.",
+      "confirmDisconnect": "Disconnect Overseerr? The Discover tab goes away."
     }
   },
   "requests": {
@@ -620,6 +630,11 @@
       "required": "Everyone signs in, at home and away.",
       "open": "Phones, TVs and browsers on your home network can watch without signing in. They share one Home account and can't change anything. Away from home, everyone signs in."
     },
+    "homeRows": {
+      "title": "Home",
+      "holidays": "Holiday rows",
+      "holidaysDetail": "In the month before Valentine’s Day, Easter, Halloween, Thanksgiving and Christmas, and the week before New Year’s Eve, Home leads with a row of titles for the day, picked by their keywords, titles and descriptions."
+    },
     "remote": {
       "title": "Remote access",
       "publicURL": "Away from home, the apps connect to <url>{{url}}</url>, the address this server was set up with.",
@@ -680,5 +695,21 @@
     "automatic": "Automatic ({{language}})",
     "machine": "This language was translated by machine, so some words may read oddly.",
     "help": "Help improve it"
+  },
+  "discover": {
+    "title": "Discover",
+    "emptyTitle": "Nothing to discover yet",
+    "connectIt": "Connect Overseerr to see what's trending, get recommendations, and ask for new movies and shows.",
+    "openSettings": "Open settings",
+    "notConnected": "An admin hasn't connected Overseerr to this server.",
+    "placeholder": "Find any movie or show…",
+    "unavailable": "Discover isn't available right now",
+    "open": "Open",
+    "request": "Request",
+    "requestShow": "Request the show",
+    "asking": "Asking…",
+    "waiting": "Waiting for an admin to approve it.",
+    "onItsWay": "It'll show up in your library once it's downloaded.",
+    "findIt": "Find it in Discover"
   }
 }

@@ -46,13 +46,24 @@ export default function Search() {
       </div>
       {q && data && (data.length > 0 ? <PosterGrid items={data} /> : <EmptyState title={tr('search.nothing', { q })} />)}
       {/* Not in the library? Ask for it. */}
-      {q && data && opts?.canRequest && (
+      {q && data && opts?.discover ? (
+        <p className="text-center text-sm text-muted">
+          {tr('search.lookingForNew')}{' '}
+          <Link to={`/discover?q=${encodeURIComponent(q)}`} className="text-accent hover:text-accent-strong">
+            {tr('discover.findIt')}
+          </Link>
+        </p>
+      ) : (
+        q &&
+        data &&
+        opts?.canRequest && (
         <p className="text-center text-sm text-muted">
           {tr('search.lookingForNew')}{' '}
           <Link to={`/requests?q=${encodeURIComponent(q)}`} className="text-accent hover:text-accent-strong">
             {opts.autoApprove ? tr('search.addIt') : tr('search.askForIt')}
           </Link>
         </p>
+        )
       )}
     </div>
   )

@@ -91,5 +91,12 @@
   "wrong_pin": "forkert pinkode",
   "wrong_username_or_password": "forkert brugernavn eller adgangskode",
   "you_cant_remove_your_own_account": "du kan ikke fjerne din egen konto",
-  "your_current_password_is_wrong": "din nuværende adgangskode er forkert"
+  "your_current_password_is_wrong": "din nuværende adgangskode er forkert",
+  "enter_the_api_key_in_overseerr_under_settings_general": "indtast API-nøglen (i Overseerr under Settings → General)",
+  "overseerr_doesnt_know_this_title": "Overseerr kender ikke denne titel",
+  "overseerr_has_no_such_user": "Overseerr har ingen sådan bruger",
+  "overseerr_isnt_answering_right_now_try_again_later": "Overseerr svarer ikke lige nu. Prøv igen senere.",
+  "overseerr_isnt_connected": "Overseerr er ikke forbundet",
+  "someone_already_asked_for_title": "nogen har allerede bedt om {{title}}",
+  "tmdbid_is_required": "tmdbId er påkrævet"
 }

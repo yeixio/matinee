@@ -91,5 +91,12 @@
   "wrong_pin": "feil PIN-kode",
   "wrong_username_or_password": "feil brukernavn eller passord",
   "you_cant_remove_your_own_account": "du kan ikke fjerne din egen konto",
-  "your_current_password_is_wrong": "det nåværende passordet ditt er feil"
+  "your_current_password_is_wrong": "det nåværende passordet ditt er feil",
+  "enter_the_api_key_in_overseerr_under_settings_general": "skriv inn API-nøkkelen (i Overseerr under Settings → General)",
+  "overseerr_doesnt_know_this_title": "Overseerr kjenner ikke denne tittelen",
+  "overseerr_has_no_such_user": "Overseerr har ingen slik bruker",
+  "overseerr_isnt_answering_right_now_try_again_later": "Overseerr svarer ikke akkurat nå. Prøv igjen senere.",
+  "overseerr_isnt_connected": "Overseerr er ikke tilkoblet",
+  "someone_already_asked_for_title": "noen har allerede bedt om {{title}}",
+  "tmdbid_is_required": "tmdbId er påkrevd"
 }

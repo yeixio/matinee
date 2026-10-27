@@ -91,5 +91,12 @@
   "wrong_pin": "PIN salah",
   "wrong_username_or_password": "nama pengguna atau kata sandi salah",
   "you_cant_remove_your_own_account": "kamu tidak bisa menghapus akunmu sendiri",
-  "your_current_password_is_wrong": "kata sandimu saat ini salah"
+  "your_current_password_is_wrong": "kata sandimu saat ini salah",
+  "enter_the_api_key_in_overseerr_under_settings_general": "masukkan kunci API (di Overseerr pada Settings → General)",
+  "overseerr_doesnt_know_this_title": "Overseerr tidak mengenal judul ini",
+  "overseerr_has_no_such_user": "Overseerr tidak punya pengguna itu",
+  "overseerr_isnt_answering_right_now_try_again_later": "Overseerr sedang tidak menjawab. Coba lagi nanti.",
+  "overseerr_isnt_connected": "Overseerr tidak terhubung",
+  "someone_already_asked_for_title": "seseorang sudah meminta {{title}}",
+  "tmdbid_is_required": "tmdbId wajib diisi"
 }

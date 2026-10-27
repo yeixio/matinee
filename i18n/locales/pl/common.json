@@ -360,5 +360,32 @@
     "subtitles": "Napisy",
     "wrong": "Zły tytuł",
     "other": "Coś innego"
+  },
+  "holidays": {
+    "valentines": "Na walentynki",
+    "easter": "Na Wielkanoc",
+    "halloween": "Sezon strachu",
+    "thanksgiving": "Na Święto Dziękczynienia",
+    "christmas": "Świąteczne ulubione",
+    "newyear": "Na powitanie nowego roku"
+  },
+  "discover": {
+    "rows": {
+      "trending": "Na czasie",
+      "popular-movies": "Popularne filmy",
+      "popular-shows": "Popularne seriale",
+      "upcoming-movies": "Wkrótce w kinach",
+      "upcoming-shows": "Nadchodzące nowe seriale"
+    },
+    "because": "Bo oglądałeś {{title}}",
+    "status": {
+      "available": "W twojej bibliotece",
+      "added": "W drodze",
+      "requested": "Zamówione"
+    },
+    "kind": {
+      "movie": "Film",
+      "show": "Serial"
+    }
   }
 }

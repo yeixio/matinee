@@ -91,5 +91,12 @@
   "wrong_pin": "verkeerde pincode",
   "wrong_username_or_password": "verkeerde gebruikersnaam of verkeerd wachtwoord",
   "you_cant_remove_your_own_account": "je kunt je eigen account niet verwijderen",
-  "your_current_password_is_wrong": "je huidige wachtwoord is onjuist"
+  "your_current_password_is_wrong": "je huidige wachtwoord is onjuist",
+  "enter_the_api_key_in_overseerr_under_settings_general": "voer de API-sleutel in (in Overseerr onder Settings → General)",
+  "overseerr_doesnt_know_this_title": "Overseerr kent deze titel niet",
+  "overseerr_has_no_such_user": "Overseerr heeft zo'n gebruiker niet",
+  "overseerr_isnt_answering_right_now_try_again_later": "Overseerr reageert nu niet. Probeer het later opnieuw.",
+  "overseerr_isnt_connected": "Overseerr is niet gekoppeld",
+  "someone_already_asked_for_title": "iemand heeft {{title}} al aangevraagd",
+  "tmdbid_is_required": "tmdbId is verplicht"
 }

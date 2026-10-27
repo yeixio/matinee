@@ -11,7 +11,8 @@
     "signIn": "サインイン",
     "settings": "設定",
     "switchProfile": "プロフィールを切り替え",
-    "signOut": "サインアウト"
+    "signOut": "サインアウト",
+    "discover": "見つける"
   },
   "cantReachServer": "サーバーに接続できません。再試行しています…",
   "player": {
@@ -518,6 +519,15 @@
         "label": "管理者のみ追加",
         "detail": "他の人も近日公開の確認や問題の報告はできます。"
       }
+    },
+    "overseerr": {
+      "intro": "接続すると「見つける」タブが加わります。トレンド、みんなが観ているものに基づくおすすめ、そして何でもリクエストできる場所です。Jellyseerrも使えます。",
+      "notConnected": "未接続 · 「見つける」用",
+      "requestAs": "Overseerrアカウントがない人のリクエスト",
+      "madeAsOwner": "{{name}}として送信(APIキーの所有者)",
+      "madeAs": "{{name}}として送信",
+      "sameName": "同じ名前のOverseerrアカウントを持つ人は本人としてリクエストします。どのリクエストに承認が必要かは、Overseerr側の各ユーザーの権限で決まります。",
+      "confirmDisconnect": "Overseerrの接続を解除しますか?「見つける」タブはなくなります。"
     }
   },
   "requests": {
@@ -666,6 +676,11 @@
         "amf": "AMD AMF（Windows）",
         "v4l2m2m": "V4L2（Raspberry Pi）"
       }
+    },
+    "homeRows": {
+      "title": "ホーム",
+      "holidays": "季節の行事の列",
+      "holidaysDetail": "バレンタイン、イースター、ハロウィン、感謝祭、クリスマスの1か月前と、大晦日の1週間前には、ホームの先頭にその日にちなんだ作品の列が表示されます。キーワード、タイトル、説明から選ばれます。"
     }
   },
   "language": {
@@ -676,5 +691,21 @@
     "automatic": "自動（{{language}}）",
     "machine": "この言語は機械翻訳のため、不自然な表現があるかもしれません。",
     "help": "改善に協力する"
+  },
+  "discover": {
+    "title": "見つける",
+    "emptyTitle": "まだ見つけるものがありません",
+    "connectIt": "Overseerrを接続すると、トレンドやおすすめを見たり、新しい映画や番組をリクエストしたりできます。",
+    "openSettings": "設定を開く",
+    "notConnected": "このサーバーには管理者がOverseerrを接続していません。",
+    "placeholder": "映画や番組を検索…",
+    "unavailable": "「見つける」は現在利用できません",
+    "open": "開く",
+    "request": "リクエスト",
+    "requestShow": "番組をリクエスト",
+    "asking": "リクエスト中…",
+    "waiting": "管理者の承認待ちです。",
+    "onItsWay": "ダウンロードされるとライブラリに表示されます。",
+    "findIt": "「見つける」で探す"
   }
 }

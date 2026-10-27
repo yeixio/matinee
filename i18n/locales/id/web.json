@@ -11,7 +11,8 @@
     "signIn": "Masuk",
     "settings": "Pengaturan",
     "switchProfile": "Ganti profil",
-    "signOut": "Keluar"
+    "signOut": "Keluar",
+    "discover": "Jelajahi"
   },
   "cantReachServer": "Server tidak dapat dijangkau. Mencoba lagi…",
   "player": {
@@ -518,6 +519,15 @@
         "label": "Hanya admin yang menambahkan judul",
         "detail": "Semua orang lain tetap bisa melihat yang akan datang dan melaporkan masalah."
       }
+    },
+    "overseerr": {
+      "intro": "Hubungkan agar ada tab Jelajahi: yang sedang tren, rekomendasi berdasarkan tontonan orang, dan cara meminta apa saja. Jellyseerr juga bisa.",
+      "notConnected": "Tidak terhubung · untuk Jelajahi",
+      "requestAs": "Permintaan dari orang tanpa akun Overseerr",
+      "madeAsOwner": "Dibuat sebagai {{name}} (pemilik kunci API)",
+      "madeAs": "Dibuat sebagai {{name}}",
+      "sameName": "Orang yang punya akun Overseerr dengan nama yang sama meminta atas nama sendiri. Overseerr menentukan permintaan mana yang perlu disetujui, dari izin tiap pengguna di sana.",
+      "confirmDisconnect": "Putuskan Overseerr? Tab Jelajahi akan hilang."
     }
   },
   "requests": {
@@ -666,6 +676,11 @@
         "amf": "AMD AMF (Windows)",
         "v4l2m2m": "V4L2 (Raspberry Pi)"
       }
+    },
+    "homeRows": {
+      "title": "Beranda",
+      "holidays": "Baris hari raya",
+      "holidaysDetail": "Sebulan sebelum Hari Valentine, Paskah, Halloween, Thanksgiving, dan Natal, serta seminggu sebelum malam Tahun Baru, Beranda dimulai dengan baris judul untuk hari itu, dipilih dari kata kunci, judul, dan deskripsinya."
     }
   },
   "language": {
@@ -676,5 +691,21 @@
     "automatic": "Otomatis ({{language}})",
     "machine": "Bahasa ini diterjemahkan oleh mesin, jadi beberapa kata mungkin terdengar janggal.",
     "help": "Bantu memperbaikinya"
+  },
+  "discover": {
+    "title": "Jelajahi",
+    "emptyTitle": "Belum ada yang bisa dijelajahi",
+    "connectIt": "Hubungkan Overseerr untuk melihat yang sedang tren, mendapat rekomendasi, dan meminta film dan serial baru.",
+    "openSettings": "Buka pengaturan",
+    "notConnected": "Admin belum menghubungkan Overseerr ke server ini.",
+    "placeholder": "Cari film atau serial apa saja…",
+    "unavailable": "Jelajahi sedang tidak tersedia",
+    "open": "Buka",
+    "request": "Minta",
+    "requestShow": "Minta serialnya",
+    "asking": "Meminta…",
+    "waiting": "Menunggu persetujuan admin.",
+    "onItsWay": "Akan muncul di pustakamu setelah diunduh.",
+    "findIt": "Cari di Jelajahi"
   }
 }

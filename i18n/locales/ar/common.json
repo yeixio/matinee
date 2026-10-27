@@ -414,5 +414,32 @@
     "subtitles": "الترجمة",
     "wrong": "عنوان خاطئ",
     "other": "شيء آخر"
+  },
+  "holidays": {
+    "valentines": "لعيد الحب",
+    "easter": "لعيد الفصح",
+    "halloween": "موسم الرعب",
+    "thanksgiving": "لعيد الشكر",
+    "christmas": "مفضلات عيد الميلاد",
+    "newyear": "لاستقبال العام الجديد"
+  },
+  "discover": {
+    "rows": {
+      "trending": "رائج",
+      "popular-movies": "أفلام شائعة",
+      "popular-shows": "مسلسلات شائعة",
+      "upcoming-movies": "قريبًا في السينما",
+      "upcoming-shows": "مسلسلات جديدة قادمة"
+    },
+    "because": "لأنك شاهدت {{title}}",
+    "status": {
+      "available": "في مكتبتك",
+      "added": "في الطريق",
+      "requested": "مطلوب"
+    },
+    "kind": {
+      "movie": "فيلم",
+      "show": "مسلسل"
+    }
   }
 }

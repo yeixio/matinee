@@ -11,7 +11,8 @@
     "signIn": "Kirjaudu sisään",
     "settings": "Asetukset",
     "switchProfile": "Vaihda profiilia",
-    "signOut": "Kirjaudu ulos"
+    "signOut": "Kirjaudu ulos",
+    "discover": "Löydä"
   },
   "cantReachServer": "Palvelimeen ei saada yhteyttä. Yritetään uudelleen…",
   "player": {
@@ -522,6 +523,15 @@
         "label": "Vain ylläpitäjät lisäävät nimikkeitä",
         "detail": "Muut näkevät silti, mitä on tulossa, ja voivat ilmoittaa ongelmista."
       }
+    },
+    "overseerr": {
+      "intro": "Yhdistä se, niin saat Löydä-välilehden: mikä on nousussa, suosituksia sen mukaan mitä ihmiset katsovat ja tavan pyytää mitä tahansa. Myös Jellyseerr toimii.",
+      "notConnected": "Ei yhdistetty · Löydä-välilehteä varten",
+      "requestAs": "Pyynnöt ihmisiltä, joilla ei ole Overseerr-tiliä",
+      "madeAsOwner": "Tehdään käyttäjänä {{name}} (API-avaimen omistaja)",
+      "madeAs": "Tehdään käyttäjänä {{name}}",
+      "sameName": "Ne, joilla on samanniminen Overseerr-tili, pyytävät omissa nimissään. Overseerr päättää käyttäjien oikeuksien perusteella, mitkä pyynnöt tarvitsevat hyväksynnän.",
+      "confirmDisconnect": "Katkaistaanko Overseerr-yhteys? Löydä-välilehti poistuu."
     }
   },
   "requests": {
@@ -670,6 +680,11 @@
         "amf": "AMD AMF (Windows)",
         "v4l2m2m": "V4L2 (Raspberry Pi)"
       }
+    },
+    "homeRows": {
+      "title": "Koti",
+      "holidays": "Juhlapyhärivit",
+      "holidaysDetail": "Kuukautta ennen ystävänpäivää, pääsiäistä, halloweenia, kiitospäivää ja joulua sekä viikkoa ennen uudenvuodenaattoa Koti alkaa rivillä päivään sopivia nimikkeitä, jotka valitaan avainsanojen, nimien ja kuvausten perusteella."
     }
   },
   "language": {
@@ -680,5 +695,21 @@
     "automatic": "Automaattinen ({{language}})",
     "machine": "Tämä kieli on konekäännetty, joten jotkin sanat voivat kuulostaa oudoilta.",
     "help": "Auta parantamaan sitä"
+  },
+  "discover": {
+    "title": "Löydä",
+    "emptyTitle": "Ei vielä mitään löydettävää",
+    "connectIt": "Yhdistä Overseerr nähdäksesi mikä on nousussa, saadaksesi suosituksia ja pyytääksesi uusia elokuvia ja sarjoja.",
+    "openSettings": "Avaa asetukset",
+    "notConnected": "Ylläpitäjä ei ole yhdistänyt Overseerria tähän palvelimeen.",
+    "placeholder": "Etsi mikä tahansa elokuva tai sarja…",
+    "unavailable": "Löydä ei ole juuri nyt käytettävissä",
+    "open": "Avaa",
+    "request": "Pyydä",
+    "requestShow": "Pyydä sarja",
+    "asking": "Pyydetään…",
+    "waiting": "Odottaa ylläpitäjän hyväksyntää.",
+    "onItsWay": "Se näkyy kirjastossasi, kun se on ladattu.",
+    "findIt": "Etsi Löydä-välilehdeltä"
   }
 }

@@ -279,5 +279,32 @@
     "subtitles": "字幕",
     "wrong": "タイトルが違う",
     "other": "その他"
+  },
+  "holidays": {
+    "valentines": "バレンタインに",
+    "easter": "イースターに",
+    "halloween": "ぞくぞくシーズン",
+    "thanksgiving": "感謝祭に",
+    "christmas": "クリスマスの定番",
+    "newyear": "新年を迎えよう"
+  },
+  "discover": {
+    "rows": {
+      "trending": "トレンド",
+      "popular-movies": "人気の映画",
+      "popular-shows": "人気の番組",
+      "upcoming-movies": "近日劇場公開",
+      "upcoming-shows": "もうすぐ始まる新番組"
+    },
+    "because": "{{title}}を観たあなたに",
+    "status": {
+      "available": "ライブラリにあります",
+      "added": "準備中",
+      "requested": "リクエスト済み"
+    },
+    "kind": {
+      "movie": "映画",
+      "show": "番組"
+    }
   }
 }

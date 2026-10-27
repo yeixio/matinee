@@ -91,5 +91,12 @@
   "wrong_pin": "špatný PIN",
   "wrong_username_or_password": "špatné uživatelské jméno nebo heslo",
   "you_cant_remove_your_own_account": "nemůžeš odebrat vlastní účet",
-  "your_current_password_is_wrong": "tvoje současné heslo je špatně"
+  "your_current_password_is_wrong": "tvoje současné heslo je špatně",
+  "enter_the_api_key_in_overseerr_under_settings_general": "zadejte klíč API (v Overseerr v Settings → General)",
+  "overseerr_doesnt_know_this_title": "Overseerr tento titul nezná",
+  "overseerr_has_no_such_user": "Overseerr takového uživatele nemá",
+  "overseerr_isnt_answering_right_now_try_again_later": "Overseerr teď neodpovídá. Zkuste to později.",
+  "overseerr_isnt_connected": "Overseerr není připojený",
+  "someone_already_asked_for_title": "o {{title}} už někdo požádal",
+  "tmdbid_is_required": "tmdbId je povinné"
 }

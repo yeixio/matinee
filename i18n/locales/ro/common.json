@@ -333,5 +333,32 @@
     "subtitles": "Subtitrări",
     "wrong": "Titlu greșit",
     "other": "Altceva"
+  },
+  "holidays": {
+    "valentines": "De Ziua Îndrăgostiților",
+    "easter": "De Paște",
+    "halloween": "Sezonul înfiorător",
+    "thanksgiving": "De Ziua Recunoștinței",
+    "christmas": "Preferatele de Crăciun",
+    "newyear": "Întâmpină noul an"
+  },
+  "discover": {
+    "rows": {
+      "trending": "În tendințe",
+      "popular-movies": "Filme populare",
+      "popular-shows": "Seriale populare",
+      "upcoming-movies": "În curând la cinema",
+      "upcoming-shows": "Seriale noi pe drum"
+    },
+    "because": "Pentru că ai văzut {{title}}",
+    "status": {
+      "available": "În biblioteca ta",
+      "added": "Pe drum",
+      "requested": "Cerut"
+    },
+    "kind": {
+      "movie": "Film",
+      "show": "Serial"
+    }
   }
 }

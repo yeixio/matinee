@@ -333,5 +333,32 @@
     "subtitles": "Sottotitoli",
     "wrong": "Titolo sbagliato",
     "other": "Altro"
+  },
+  "holidays": {
+    "valentines": "Per San Valentino",
+    "easter": "Per Pasqua",
+    "halloween": "Stagione da brividi",
+    "thanksgiving": "Per il Ringraziamento",
+    "christmas": "I preferiti di Natale",
+    "newyear": "Per festeggiare l'anno nuovo"
+  },
+  "discover": {
+    "rows": {
+      "trending": "Di tendenza",
+      "popular-movies": "Film popolari",
+      "popular-shows": "Serie popolari",
+      "upcoming-movies": "Presto al cinema",
+      "upcoming-shows": "Nuove serie in arrivo"
+    },
+    "because": "Perché hai guardato {{title}}",
+    "status": {
+      "available": "Nella tua libreria",
+      "added": "In arrivo",
+      "requested": "Richiesto"
+    },
+    "kind": {
+      "movie": "Film",
+      "show": "Serie"
+    }
   }
 }

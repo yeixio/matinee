@@ -91,5 +91,12 @@
   "wrong_pin": "PIN incorrecto",
   "wrong_username_or_password": "usuario o contraseña incorrectos",
   "you_cant_remove_your_own_account": "no puedes quitar tu propia cuenta",
-  "your_current_password_is_wrong": "tu contraseña actual es incorrecta"
+  "your_current_password_is_wrong": "tu contraseña actual es incorrecta",
+  "enter_the_api_key_in_overseerr_under_settings_general": "introduce la clave API (en Overseerr, en Settings → General)",
+  "overseerr_doesnt_know_this_title": "Overseerr no conoce este título",
+  "overseerr_has_no_such_user": "Overseerr no tiene ese usuario",
+  "overseerr_isnt_answering_right_now_try_again_later": "Overseerr no responde ahora. Inténtalo más tarde.",
+  "overseerr_isnt_connected": "Overseerr no está conectado",
+  "someone_already_asked_for_title": "alguien ya pidió {{title}}",
+  "tmdbid_is_required": "tmdbId es obligatorio"
 }

@@ -360,5 +360,32 @@
     "subtitles": "Субтитры",
     "wrong": "Неверное название",
     "other": "Другое"
+  },
+  "holidays": {
+    "valentines": "Ко Дню святого Валентина",
+    "easter": "К Пасхе",
+    "halloween": "Сезон страшилок",
+    "thanksgiving": "Ко Дню благодарения",
+    "christmas": "Любимое к Рождеству",
+    "newyear": "Встречаем Новый год"
+  },
+  "discover": {
+    "rows": {
+      "trending": "В тренде",
+      "popular-movies": "Популярные фильмы",
+      "popular-shows": "Популярные сериалы",
+      "upcoming-movies": "Скоро в кино",
+      "upcoming-shows": "Новые сериалы на подходе"
+    },
+    "because": "Потому что вы смотрели {{title}}",
+    "status": {
+      "available": "В вашей медиатеке",
+      "added": "В пути",
+      "requested": "Запрошено"
+    },
+    "kind": {
+      "movie": "Фильм",
+      "show": "Сериал"
+    }
   }
 }

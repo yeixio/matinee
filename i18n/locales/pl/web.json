@@ -11,7 +11,8 @@
     "signIn": "Zaloguj się",
     "settings": "Ustawienia",
     "switchProfile": "Zmień profil",
-    "signOut": "Wyloguj się"
+    "signOut": "Wyloguj się",
+    "discover": "Odkrywaj"
   },
   "cantReachServer": "Nie można połączyć się z serwerem. Ponawianie…",
   "player": {
@@ -530,6 +531,15 @@
         "label": "Tylko administratorzy dodają tytuły",
         "detail": "Pozostali nadal widzą, co nadchodzi, i mogą zgłaszać problemy."
       }
+    },
+    "overseerr": {
+      "intro": "Połącz, aby dodać kartę Odkrywaj: co jest na czasie, polecenia na podstawie tego, co ludzie oglądają, i sposób, by poprosić o cokolwiek. Jellyseerr też działa.",
+      "notConnected": "Niepołączony · dla Odkrywaj",
+      "requestAs": "Prośby od osób bez konta w Overseerr",
+      "madeAsOwner": "Składane jako {{name}} (właściciel klucza API)",
+      "madeAs": "Składane jako {{name}}",
+      "sameName": "Osoby z kontem w Overseerr o tej samej nazwie proszą we własnym imieniu. Overseerr decyduje, które prośby wymagają zatwierdzenia, na podstawie uprawnień każdego użytkownika.",
+      "confirmDisconnect": "Odłączyć Overseerr? Karta Odkrywaj zniknie."
     }
   },
   "requests": {
@@ -678,6 +688,11 @@
         "amf": "AMD AMF (Windows)",
         "v4l2m2m": "V4L2 (Raspberry Pi)"
       }
+    },
+    "homeRows": {
+      "title": "Start",
+      "holidays": "Rzędy świąteczne",
+      "holidaysDetail": "W miesiącu przed walentynkami, Wielkanocą, Halloween, Świętem Dziękczynienia i Bożym Narodzeniem oraz w tygodniu przed sylwestrem Start zaczyna się od rzędu tytułów na tę okazję, wybranych po słowach kluczowych, tytułach i opisach."
     }
   },
   "language": {
@@ -688,5 +703,21 @@
     "automatic": "Automatycznie ({{language}})",
     "machine": "Ten język przetłumaczono maszynowo, więc niektóre słowa mogą brzmieć dziwnie.",
     "help": "Pomóż go poprawić"
+  },
+  "discover": {
+    "title": "Odkrywaj",
+    "emptyTitle": "Na razie nie ma nic do odkrycia",
+    "connectIt": "Połącz Overseerr, aby widzieć, co jest na czasie, dostawać polecenia i prosić o nowe filmy i seriale.",
+    "openSettings": "Otwórz ustawienia",
+    "notConnected": "Administrator nie połączył Overseerr z tym serwerem.",
+    "placeholder": "Znajdź dowolny film lub serial…",
+    "unavailable": "Odkrywaj jest teraz niedostępne",
+    "open": "Otwórz",
+    "request": "Poproś",
+    "requestShow": "Poproś o serial",
+    "asking": "Wysyłanie prośby…",
+    "waiting": "Czeka na zatwierdzenie przez administratora.",
+    "onItsWay": "Pojawi się w twojej bibliotece, gdy się pobierze.",
+    "findIt": "Znajdź w Odkrywaj"
   }
 }

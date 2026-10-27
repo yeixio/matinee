@@ -306,5 +306,32 @@
     "subtitles": "Feliratok",
     "wrong": "Rossz cím",
     "other": "Valami más"
+  },
+  "holidays": {
+    "valentines": "Valentin-napra",
+    "easter": "Húsvétra",
+    "halloween": "Borzongás ideje",
+    "thanksgiving": "Hálaadásra",
+    "christmas": "Karácsonyi kedvencek",
+    "newyear": "Új évet köszöntve"
+  },
+  "discover": {
+    "rows": {
+      "trending": "Felkapott",
+      "popular-movies": "Népszerű filmek",
+      "popular-shows": "Népszerű sorozatok",
+      "upcoming-movies": "Hamarosan a mozikban",
+      "upcoming-shows": "Érkező új sorozatok"
+    },
+    "because": "Mert megnézted ezt: {{title}}",
+    "status": {
+      "available": "A könyvtáradban",
+      "added": "Úton",
+      "requested": "Kérve"
+    },
+    "kind": {
+      "movie": "Film",
+      "show": "Sorozat"
+    }
   }
 }

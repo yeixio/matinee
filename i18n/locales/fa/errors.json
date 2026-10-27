@@ -91,5 +91,12 @@
   "wrong_pin": "PIN اشتباه",
   "wrong_username_or_password": "نام کاربری یا گذرواژه اشتباه است",
   "you_cant_remove_your_own_account": "نمی‌توانید حساب خودتان را حذف کنید",
-  "your_current_password_is_wrong": "گذرواژه‌ی فعلی شما اشتباه است"
+  "your_current_password_is_wrong": "گذرواژه‌ی فعلی شما اشتباه است",
+  "enter_the_api_key_in_overseerr_under_settings_general": "کلید API را وارد کنید (در Overseerr زیر Settings → General)",
+  "overseerr_doesnt_know_this_title": "Overseerr این عنوان را نمی‌شناسد",
+  "overseerr_has_no_such_user": "چنین کاربری در Overseerr نیست",
+  "overseerr_isnt_answering_right_now_try_again_later": "Overseerr الان پاسخ نمی‌دهد. بعداً دوباره امتحان کنید.",
+  "overseerr_isnt_connected": "Overseerr متصل نیست",
+  "someone_already_asked_for_title": "کسی قبلاً {{title}} را درخواست کرده است",
+  "tmdbid_is_required": "tmdbId لازم است"
 }

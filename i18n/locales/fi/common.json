@@ -306,5 +306,32 @@
     "subtitles": "Tekstitykset",
     "wrong": "Väärä nimike",
     "other": "Jotain muuta"
+  },
+  "holidays": {
+    "valentines": "Ystävänpäiväksi",
+    "easter": "Pääsiäiseksi",
+    "halloween": "Kauhukausi",
+    "thanksgiving": "Kiitospäiväksi",
+    "christmas": "Joulun suosikit",
+    "newyear": "Uutta vuotta vastaan"
+  },
+  "discover": {
+    "rows": {
+      "trending": "Nousussa",
+      "popular-movies": "Suositut elokuvat",
+      "popular-shows": "Suositut sarjat",
+      "upcoming-movies": "Pian elokuvateattereissa",
+      "upcoming-shows": "Tulossa olevat uudet sarjat"
+    },
+    "because": "Koska katsoit {{title}}",
+    "status": {
+      "available": "Kirjastossasi",
+      "added": "Tulossa",
+      "requested": "Pyydetty"
+    },
+    "kind": {
+      "movie": "Elokuva",
+      "show": "Sarja"
+    }
   }
 }

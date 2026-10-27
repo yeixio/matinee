@@ -43,7 +43,8 @@ var rowTitles = map[string]string{
 	"Western":         "Westerns",
 }
 
-// HomeRow is one of the home screen's rows: a pinned collection or a genre.
+// HomeRow is one of the home screen's rows: a holiday's, a pinned collection
+// or a genre.
 type HomeRow struct {
 	ID    string `json:"id"` // e.g. "genre:Science Fiction"
 	Title string `json:"title"`
@@ -51,7 +52,10 @@ type HomeRow struct {
 	// CollectionID is set on the rows of collections pinned to Home.
 	CollectionID string `json:"collectionId,omitempty"`
 	// Starter is set on a built-in collection's row (see store.starters).
-	Starter string       `json:"starter,omitempty"`
+	Starter string `json:"starter,omitempty"`
+	// Holiday is set on the row for a holiday coming up, e.g. "halloween"
+	// (see holidays.go).
+	Holiday string       `json:"holiday,omitempty"`
 	Items   []store.Item `json:"items"`
 }
 

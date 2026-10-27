@@ -91,5 +91,12 @@
   "wrong_pin": "błędny PIN",
   "wrong_username_or_password": "błędna nazwa użytkownika lub hasło",
   "you_cant_remove_your_own_account": "nie możesz usunąć własnego konta",
-  "your_current_password_is_wrong": "twoje obecne hasło jest błędne"
+  "your_current_password_is_wrong": "twoje obecne hasło jest błędne",
+  "enter_the_api_key_in_overseerr_under_settings_general": "wpisz klucz API (w Overseerr w Settings → General)",
+  "overseerr_doesnt_know_this_title": "Overseerr nie zna tego tytułu",
+  "overseerr_has_no_such_user": "Overseerr nie ma takiego użytkownika",
+  "overseerr_isnt_answering_right_now_try_again_later": "Overseerr teraz nie odpowiada. Spróbuj ponownie później.",
+  "overseerr_isnt_connected": "Overseerr nie jest połączony",
+  "someone_already_asked_for_title": "ktoś już poprosił o {{title}}",
+  "tmdbid_is_required": "tmdbId jest wymagane"
 }

@@ -91,5 +91,12 @@
   "wrong_pin": "رمز PIN خاطئ",
   "wrong_username_or_password": "اسم المستخدم أو كلمة المرور غير صحيحة",
   "you_cant_remove_your_own_account": "لا يمكنك إزالة حسابك",
-  "your_current_password_is_wrong": "كلمة مرورك الحالية غير صحيحة"
+  "your_current_password_is_wrong": "كلمة مرورك الحالية غير صحيحة",
+  "enter_the_api_key_in_overseerr_under_settings_general": "أدخل مفتاح API (في Overseerr ضمن Settings → General)",
+  "overseerr_doesnt_know_this_title": "لا يعرف Overseerr هذا العنوان",
+  "overseerr_has_no_such_user": "لا يوجد مستخدم كهذا في Overseerr",
+  "overseerr_isnt_answering_right_now_try_again_later": "لا يستجيب Overseerr الآن. حاول مرة أخرى لاحقًا.",
+  "overseerr_isnt_connected": "Overseerr غير متصل",
+  "someone_already_asked_for_title": "طلب أحدهم {{title}} بالفعل",
+  "tmdbid_is_required": "tmdbId مطلوب"
 }

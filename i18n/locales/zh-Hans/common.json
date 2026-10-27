@@ -279,5 +279,32 @@
     "subtitles": "字幕",
     "wrong": "标题错误",
     "other": "其他问题"
+  },
+  "holidays": {
+    "valentines": "情人节专属",
+    "easter": "复活节专属",
+    "halloween": "惊悚季",
+    "thanksgiving": "感恩节专属",
+    "christmas": "圣诞最爱",
+    "newyear": "迎接新年"
+  },
+  "discover": {
+    "rows": {
+      "trending": "热门趋势",
+      "popular-movies": "热门电影",
+      "popular-shows": "热门剧集",
+      "upcoming-movies": "即将上映",
+      "upcoming-shows": "即将开播的新剧"
+    },
+    "because": "因为你看过《{{title}}》",
+    "status": {
+      "available": "在你的媒体库中",
+      "added": "即将到来",
+      "requested": "已请求"
+    },
+    "kind": {
+      "movie": "电影",
+      "show": "剧集"
+    }
   }
 }

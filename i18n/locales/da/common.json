@@ -306,5 +306,32 @@
     "subtitles": "Undertekster",
     "wrong": "Forkert titel",
     "other": "Noget andet"
+  },
+  "holidays": {
+    "valentines": "Til valentinsdag",
+    "easter": "Til påske",
+    "halloween": "Gyseruge",
+    "thanksgiving": "Til Thanksgiving",
+    "christmas": "Julefavoritter",
+    "newyear": "Ring det nye år ind"
+  },
+  "discover": {
+    "rows": {
+      "trending": "Populært lige nu",
+      "popular-movies": "Populære film",
+      "popular-shows": "Populære serier",
+      "upcoming-movies": "Snart i biografen",
+      "upcoming-shows": "Nye serier på vej"
+    },
+    "because": "Fordi du så {{title}}",
+    "status": {
+      "available": "I dit bibliotek",
+      "added": "På vej",
+      "requested": "Anmodet"
+    },
+    "kind": {
+      "movie": "Film",
+      "show": "Serie"
+    }
   }
 }

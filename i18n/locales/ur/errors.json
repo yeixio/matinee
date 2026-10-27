@@ -91,5 +91,12 @@
   "wrong_pin": "غلط PIN",
   "wrong_username_or_password": "غلط صارف نام یا پاس ورڈ",
   "you_cant_remove_your_own_account": "آپ اپنا اکاؤنٹ نہیں ہٹا سکتے",
-  "your_current_password_is_wrong": "آپ کا موجودہ پاس ورڈ غلط ہے"
+  "your_current_password_is_wrong": "آپ کا موجودہ پاس ورڈ غلط ہے",
+  "enter_the_api_key_in_overseerr_under_settings_general": "API کلید درج کریں (Overseerr میں Settings → General کے تحت)",
+  "overseerr_doesnt_know_this_title": "Overseerr اس عنوان کو نہیں جانتا",
+  "overseerr_has_no_such_user": "Overseerr میں ایسا کوئی صارف نہیں",
+  "overseerr_isnt_answering_right_now_try_again_later": "Overseerr ابھی جواب نہیں دے رہا۔ بعد میں دوبارہ کوشش کریں۔",
+  "overseerr_isnt_connected": "Overseerr جڑا ہوا نہیں",
+  "someone_already_asked_for_title": "کوئی پہلے ہی {{title}} مانگ چکا ہے",
+  "tmdbid_is_required": "tmdbId ضروری ہے"
 }

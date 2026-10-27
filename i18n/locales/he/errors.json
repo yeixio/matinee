@@ -91,5 +91,12 @@
   "wrong_pin": "PIN שגוי",
   "wrong_username_or_password": "שם משתמש או סיסמה שגויים",
   "you_cant_remove_your_own_account": "אי אפשר להסיר את החשבון שלך",
-  "your_current_password_is_wrong": "הסיסמה הנוכחית שלך שגויה"
+  "your_current_password_is_wrong": "הסיסמה הנוכחית שלך שגויה",
+  "enter_the_api_key_in_overseerr_under_settings_general": "הזן את מפתח ה־API (ב־Overseerr תחת Settings → General)",
+  "overseerr_doesnt_know_this_title": "Overseerr לא מכיר את הכותר הזה",
+  "overseerr_has_no_such_user": "אין ב־Overseerr משתמש כזה",
+  "overseerr_isnt_answering_right_now_try_again_later": "Overseerr לא עונה כרגע. נסה שוב מאוחר יותר.",
+  "overseerr_isnt_connected": "Overseerr לא מחובר",
+  "someone_already_asked_for_title": "מישהו כבר ביקש את {{title}}",
+  "tmdbid_is_required": "נדרש tmdbId"
 }

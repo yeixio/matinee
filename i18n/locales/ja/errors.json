@@ -91,5 +91,12 @@
   "wrong_pin": "PINが違います",
   "wrong_username_or_password": "ユーザー名かパスワードが違います",
   "you_cant_remove_your_own_account": "自分のアカウントは削除できません",
-  "your_current_password_is_wrong": "現在のパスワードが違います"
+  "your_current_password_is_wrong": "現在のパスワードが違います",
+  "enter_the_api_key_in_overseerr_under_settings_general": "APIキーを入力してください(OverseerrのSettings → General)",
+  "overseerr_doesnt_know_this_title": "Overseerrはこの作品を知りません",
+  "overseerr_has_no_such_user": "Overseerrにそのユーザーはいません",
+  "overseerr_isnt_answering_right_now_try_again_later": "Overseerrが応答していません。後でもう一度お試しください。",
+  "overseerr_isnt_connected": "Overseerrが接続されていません",
+  "someone_already_asked_for_title": "{{title}}はすでにリクエストされています",
+  "tmdbid_is_required": "tmdbIdは必須です"
 }

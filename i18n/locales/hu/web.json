@@ -11,7 +11,8 @@
     "signIn": "Bejelentkezés",
     "settings": "Beállítások",
     "switchProfile": "Profilváltás",
-    "signOut": "Kijelentkezés"
+    "signOut": "Kijelentkezés",
+    "discover": "Felfedezés"
   },
   "cantReachServer": "A szerver nem érhető el. Újrapróbálás…",
   "player": {
@@ -522,6 +523,15 @@
         "label": "Csak rendszergazdák adhatnak hozzá címeket",
         "detail": "Mindenki más továbbra is láthatja, mi jön hamarosan, és jelenthet problémákat."
       }
+    },
+    "overseerr": {
+      "intro": "Kapcsold össze, és lesz egy Felfedezés lap: mi a felkapott, ajánlások aszerint, amit az emberek néznek, és egy mód bármi kérésére. A Jellyseerr is működik.",
+      "notConnected": "Nincs összekapcsolva · a Felfedezéshez",
+      "requestAs": "Overseerr-fiók nélküliek kérései",
+      "madeAsOwner": "{{name}} nevében (az API-kulcs tulajdonosa)",
+      "madeAs": "{{name}} nevében",
+      "sameName": "Akinek ugyanilyen nevű Overseerr-fiókja van, a saját nevében kér. Az Overseerr dönti el az ottani jogosultságok alapján, mely kérésekhez kell jóváhagyás.",
+      "confirmDisconnect": "Leválasztod az Overseerrt? A Felfedezés lap eltűnik."
     }
   },
   "requests": {
@@ -670,6 +680,11 @@
         "amf": "AMD AMF (Windows)",
         "v4l2m2m": "V4L2 (Raspberry Pi)"
       }
+    },
+    "homeRows": {
+      "title": "Kezdőlap",
+      "holidays": "Ünnepi sorok",
+      "holidaysDetail": "Valentin-nap, húsvét, Halloween, hálaadás és karácsony előtt egy hónappal, valamint szilveszter előtt egy héttel a Kezdőlap egy alkalomhoz illő sorral kezd, amelyet kulcsszavak, címek és leírások alapján válogat."
     }
   },
   "language": {
@@ -680,5 +695,21 @@
     "automatic": "Automatikus ({{language}})",
     "machine": "Ezt a nyelvet gép fordította, így egyes szavak furcsán hangozhatnak.",
     "help": "Segíts javítani"
+  },
+  "discover": {
+    "title": "Felfedezés",
+    "emptyTitle": "Még nincs mit felfedezni",
+    "connectIt": "Kapcsold össze az Overseerrt, hogy lásd, mi a felkapott, ajánlásokat kapj, és új filmeket és sorozatokat kérj.",
+    "openSettings": "Beállítások megnyitása",
+    "notConnected": "Egy adminisztrátor még nem kapcsolta össze az Overseerrt ezzel a szerverrel.",
+    "placeholder": "Keress bármilyen filmet vagy sorozatot…",
+    "unavailable": "A Felfedezés most nem érhető el",
+    "open": "Megnyitás",
+    "request": "Kérés",
+    "requestShow": "Sorozat kérése",
+    "asking": "Kérés folyamatban…",
+    "waiting": "Adminisztrátori jóváhagyásra vár.",
+    "onItsWay": "Megjelenik a könyvtáradban, amint letöltődik.",
+    "findIt": "Keresd a Felfedezésben"
   }
 }

@@ -11,7 +11,8 @@
     "signIn": "Logga in",
     "settings": "Inställningar",
     "switchProfile": "Byt profil",
-    "signOut": "Logga ut"
+    "signOut": "Logga ut",
+    "discover": "Upptäck"
   },
   "cantReachServer": "Når inte servern. Försöker igen…",
   "player": {
@@ -522,6 +523,15 @@
         "label": "Bara administratörer lägger till titlar",
         "detail": "Alla andra kan fortfarande se vad som kommer snart och rapportera problem."
       }
+    },
+    "overseerr": {
+      "intro": "Anslut den för att lägga till fliken Upptäck: det som trendar, rekommendationer utifrån vad folk tittar på och ett sätt att be om vad som helst. Jellyseerr fungerar också.",
+      "notConnected": "Inte ansluten · för Upptäck",
+      "requestAs": "Förfrågningar från personer utan Overseerr-konto",
+      "madeAsOwner": "Görs som {{name}} (API-nyckelns ägare)",
+      "madeAs": "Görs som {{name}}",
+      "sameName": "Den som har ett Overseerr-konto med samma namn frågar som sig själv. Overseerr avgör vilka förfrågningar som behöver godkännas, utifrån varje användares behörigheter där.",
+      "confirmDisconnect": "Koppla från Overseerr? Fliken Upptäck försvinner."
     }
   },
   "requests": {
@@ -670,6 +680,11 @@
         "amf": "AMD AMF (Windows)",
         "v4l2m2m": "V4L2 (Raspberry Pi)"
       }
+    },
+    "homeRows": {
+      "title": "Hem",
+      "holidays": "Högtidsrader",
+      "holidaysDetail": "Månaden före alla hjärtans dag, påsk, halloween, Thanksgiving och jul, och veckan före nyårsafton, börjar Hem med en rad titlar för dagen, valda efter nyckelord, titlar och beskrivningar."
     }
   },
   "language": {
@@ -680,5 +695,21 @@
     "automatic": "Automatiskt ({{language}})",
     "machine": "Det här språket är maskinöversatt, så vissa ord kan låta konstiga.",
     "help": "Hjälp till att förbättra det"
+  },
+  "discover": {
+    "title": "Upptäck",
+    "emptyTitle": "Inget att upptäcka än",
+    "connectIt": "Anslut Overseerr för att se vad som trendar, få rekommendationer och be om nya filmer och serier.",
+    "openSettings": "Öppna inställningar",
+    "notConnected": "En administratör har inte anslutit Overseerr till den här servern.",
+    "placeholder": "Hitta en film eller serie…",
+    "unavailable": "Upptäck är inte tillgängligt just nu",
+    "open": "Öppna",
+    "request": "Begär",
+    "requestShow": "Begär serien",
+    "asking": "Skickar…",
+    "waiting": "Väntar på att en administratör godkänner den.",
+    "onItsWay": "Den dyker upp i ditt bibliotek när den har laddats ner.",
+    "findIt": "Hitta den i Upptäck"
   }
 }

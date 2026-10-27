@@ -306,5 +306,32 @@
     "subtitles": "سب ٹائٹلز",
     "wrong": "غلط عنوان",
     "other": "کچھ اور"
+  },
+  "holidays": {
+    "valentines": "ویلنٹائن ڈے کے لیے",
+    "easter": "ایسٹر کے لیے",
+    "halloween": "ڈراؤنا موسم",
+    "thanksgiving": "تھینکس گیونگ کے لیے",
+    "christmas": "کرسمس کی پسندیدہ",
+    "newyear": "نئے سال کا استقبال"
+  },
+  "discover": {
+    "rows": {
+      "trending": "ٹرینڈنگ",
+      "popular-movies": "مقبول فلمیں",
+      "popular-shows": "مقبول شوز",
+      "upcoming-movies": "جلد سینما گھروں میں",
+      "upcoming-shows": "آنے والے نئے شوز"
+    },
+    "because": "کیونکہ آپ نے {{title}} دیکھی",
+    "status": {
+      "available": "آپ کی لائبریری میں",
+      "added": "راستے میں",
+      "requested": "مانگا گیا"
+    },
+    "kind": {
+      "movie": "فلم",
+      "show": "شو"
+    }
   }
 }

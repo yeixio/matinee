@@ -11,7 +11,8 @@
     "signIn": "Giriş yap",
     "settings": "Ayarlar",
     "switchProfile": "Profil değiştir",
-    "signOut": "Çıkış yap"
+    "signOut": "Çıkış yap",
+    "discover": "Keşfet"
   },
   "cantReachServer": "Sunucuya ulaşılamıyor. Yeniden deneniyor…",
   "player": {
@@ -522,6 +523,15 @@
         "label": "Yalnızca yöneticiler yapım ekler",
         "detail": "Diğer herkes yine yakında geleceklere bakabilir ve sorun bildirebilir."
       }
+    },
+    "overseerr": {
+      "intro": "Keşfet sekmesi eklemek için bağla: trend olanlar, insanların izlediklerine göre öneriler ve her şeyi isteyebileceğin bir yol. Jellyseerr de çalışır.",
+      "notConnected": "Bağlı değil · Keşfet için",
+      "requestAs": "Overseerr hesabı olmayanların istekleri",
+      "madeAsOwner": "{{name}} olarak yapılır (API anahtarının sahibi)",
+      "madeAs": "{{name}} olarak yapılır",
+      "sameName": "Aynı adla Overseerr hesabı olanlar kendi adlarına ister. Hangi isteklerin onay gerektirdiğine Overseerr, oradaki kullanıcı izinlerine göre karar verir.",
+      "confirmDisconnect": "Overseerr bağlantısı kesilsin mi? Keşfet sekmesi kaybolur."
     }
   },
   "requests": {
@@ -670,6 +680,11 @@
         "amf": "AMD AMF (Windows)",
         "v4l2m2m": "V4L2 (Raspberry Pi)"
       }
+    },
+    "homeRows": {
+      "title": "Ana sayfa",
+      "holidays": "Bayram satırları",
+      "holidaysDetail": "Sevgililer Günü, Paskalya, Cadılar Bayramı, Şükran Günü ve Noel'den önceki ay ve yılbaşı gecesinden önceki hafta, Ana sayfa o güne uygun, anahtar kelimelerine, adlarına ve açıklamalarına göre seçilmiş bir satırla başlar."
     }
   },
   "language": {
@@ -680,5 +695,21 @@
     "automatic": "Otomatik ({{language}})",
     "machine": "Bu dil makine tarafından çevrildi, bu yüzden bazı sözcükler tuhaf gelebilir.",
     "help": "İyileştirmeye yardım et"
+  },
+  "discover": {
+    "title": "Keşfet",
+    "emptyTitle": "Henüz keşfedilecek bir şey yok",
+    "connectIt": "Trend olanları görmek, öneri almak ve yeni film ve dizi istemek için Overseerr'ı bağla.",
+    "openSettings": "Ayarları aç",
+    "notConnected": "Bir yönetici Overseerr'ı bu sunucuya bağlamadı.",
+    "placeholder": "Herhangi bir film ya da dizi bul…",
+    "unavailable": "Keşfet şu anda kullanılamıyor",
+    "open": "Aç",
+    "request": "İste",
+    "requestShow": "Diziyi iste",
+    "asking": "İsteniyor…",
+    "waiting": "Bir yöneticinin onaylaması bekleniyor.",
+    "onItsWay": "İndirildiğinde kitaplığında görünecek.",
+    "findIt": "Keşfet'te bul"
   }
 }

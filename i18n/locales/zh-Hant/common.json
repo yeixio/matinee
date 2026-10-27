@@ -279,5 +279,32 @@
     "subtitles": "字幕",
     "wrong": "標題錯誤",
     "other": "其他問題"
+  },
+  "holidays": {
+    "valentines": "情人節專屬",
+    "easter": "復活節專屬",
+    "halloween": "驚悚季",
+    "thanksgiving": "感恩節專屬",
+    "christmas": "聖誕最愛",
+    "newyear": "迎接新年"
+  },
+  "discover": {
+    "rows": {
+      "trending": "熱門趨勢",
+      "popular-movies": "熱門電影",
+      "popular-shows": "熱門影集",
+      "upcoming-movies": "即將上映",
+      "upcoming-shows": "即將開播的新影集"
+    },
+    "because": "因為你看過《{{title}}》",
+    "status": {
+      "available": "在你的媒體庫中",
+      "added": "即將到來",
+      "requested": "已請求"
+    },
+    "kind": {
+      "movie": "電影",
+      "show": "影集"
+    }
   }
 }

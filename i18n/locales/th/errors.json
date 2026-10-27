@@ -91,5 +91,12 @@
   "wrong_pin": "PIN ไม่ถูกต้อง",
   "wrong_username_or_password": "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง",
   "you_cant_remove_your_own_account": "คุณลบบัญชีของตัวเองไม่ได้",
-  "your_current_password_is_wrong": "รหัสผ่านปัจจุบันไม่ถูกต้อง"
+  "your_current_password_is_wrong": "รหัสผ่านปัจจุบันไม่ถูกต้อง",
+  "enter_the_api_key_in_overseerr_under_settings_general": "ใส่คีย์ API (ใน Overseerr ที่ Settings → General)",
+  "overseerr_doesnt_know_this_title": "Overseerr ไม่รู้จักเรื่องนี้",
+  "overseerr_has_no_such_user": "Overseerr ไม่มีผู้ใช้นี้",
+  "overseerr_isnt_answering_right_now_try_again_later": "Overseerr ไม่ตอบในขณะนี้ ลองอีกครั้งภายหลัง",
+  "overseerr_isnt_connected": "Overseerr ไม่ได้เชื่อมต่อ",
+  "someone_already_asked_for_title": "มีคนขอ {{title}} แล้ว",
+  "tmdbid_is_required": "ต้องระบุ tmdbId"
 }

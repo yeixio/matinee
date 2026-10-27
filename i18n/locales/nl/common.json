@@ -306,5 +306,32 @@
     "subtitles": "Ondertiteling",
     "wrong": "Verkeerde titel",
     "other": "Iets anders"
+  },
+  "holidays": {
+    "valentines": "Voor Valentijnsdag",
+    "easter": "Voor Pasen",
+    "halloween": "Griezelseizoen",
+    "thanksgiving": "Voor Thanksgiving",
+    "christmas": "Kerstfavorieten",
+    "newyear": "Het nieuwe jaar in"
+  },
+  "discover": {
+    "rows": {
+      "trending": "Populair nu",
+      "popular-movies": "Populaire films",
+      "popular-shows": "Populaire series",
+      "upcoming-movies": "Binnenkort in de bioscoop",
+      "upcoming-shows": "Nieuwe series op komst"
+    },
+    "because": "Omdat je {{title}} hebt gekeken",
+    "status": {
+      "available": "In je bibliotheek",
+      "added": "Onderweg",
+      "requested": "Aangevraagd"
+    },
+    "kind": {
+      "movie": "Film",
+      "show": "Serie"
+    }
   }
 }

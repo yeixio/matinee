@@ -306,5 +306,32 @@
     "subtitles": "Untertitel",
     "wrong": "Falscher Titel",
     "other": "Etwas anderes"
+  },
+  "holidays": {
+    "valentines": "Zum Valentinstag",
+    "easter": "Zu Ostern",
+    "halloween": "Gruselzeit",
+    "thanksgiving": "Zu Thanksgiving",
+    "christmas": "Weihnachtslieblinge",
+    "newyear": "Ins neue Jahr feiern"
+  },
+  "discover": {
+    "rows": {
+      "trending": "Angesagt",
+      "popular-movies": "Beliebte Filme",
+      "popular-shows": "Beliebte Serien",
+      "upcoming-movies": "Bald im Kino",
+      "upcoming-shows": "Neue Serien demnächst"
+    },
+    "because": "Weil du {{title}} gesehen hast",
+    "status": {
+      "available": "In deiner Mediathek",
+      "added": "Unterwegs",
+      "requested": "Angefragt"
+    },
+    "kind": {
+      "movie": "Film",
+      "show": "Serie"
+    }
   }
 }

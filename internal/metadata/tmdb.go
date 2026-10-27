@@ -125,6 +125,24 @@ func (t *TMDB) Genres(ctx context.Context, kind string, id int64) ([]string, err
 	return genreNames(ids), nil
 }
 
+// Keywords finds the ids of TMDB's keywords named exactly name, ignoring
+// case. There is usually one, sometimes a few duplicates.
+func (t *TMDB) Keywords(ctx context.Context, name string) ([]int64, error) {
+	var res struct {
+		Results []named `json:"results"`
+	}
+	if err := t.get(ctx, "/search/keyword", url.Values{"query": {name}}, &res); err != nil {
+		return nil, err
+	}
+	ids := []int64{}
+	for _, k := range res.Results {
+		if strings.EqualFold(k.Name, name) {
+			ids = append(ids, k.ID)
+		}
+	}
+	return ids, nil
+}
+
 // TMDB's genres, by id, as Matinee names them. TV's combined genres count as
 // both (a "Sci-Fi & Fantasy" show is in Science Fiction and in Fantasy), so a
 // genre row has the movies and the shows. TV Movie, News and Talk are left out.

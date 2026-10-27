@@ -11,7 +11,8 @@
     "signIn": "Conectează-te",
     "settings": "Setări",
     "switchProfile": "Schimbă profilul",
-    "signOut": "Deconectează-te"
+    "signOut": "Deconectează-te",
+    "discover": "Descoperă"
   },
   "cantReachServer": "Serverul nu poate fi accesat. Se reîncearcă…",
   "player": {
@@ -526,6 +527,15 @@
         "label": "Doar administratorii adaugă titluri",
         "detail": "Toți ceilalți pot vedea în continuare ce urmează și pot raporta probleme."
       }
+    },
+    "overseerr": {
+      "intro": "Conectează-l ca să adaugi fila Descoperă: ce e în tendințe, recomandări după ce văd oamenii și un mod de a cere orice. Merge și Jellyseerr.",
+      "notConnected": "Neconectat · pentru Descoperă",
+      "requestAs": "Cereri de la oameni fără cont Overseerr",
+      "madeAsOwner": "Făcute ca {{name}} (proprietarul cheii API)",
+      "madeAs": "Făcute ca {{name}}",
+      "sameName": "Cei cu un cont Overseerr cu același nume cer în numele lor. Overseerr decide ce cereri au nevoie de aprobare, după permisiunile fiecăruia de acolo.",
+      "confirmDisconnect": "Deconectezi Overseerr? Fila Descoperă dispare."
     }
   },
   "requests": {
@@ -674,6 +684,11 @@
         "amf": "AMD AMF (Windows)",
         "v4l2m2m": "V4L2 (Raspberry Pi)"
       }
+    },
+    "homeRows": {
+      "title": "Acasă",
+      "holidays": "Rânduri de sărbători",
+      "holidaysDetail": "Cu o lună înainte de Ziua Îndrăgostiților, Paște, Halloween, Ziua Recunoștinței și Crăciun și cu o săptămână înainte de Revelion, Acasă începe cu un rând de titluri pentru ocazie, alese după cuvinte-cheie, titluri și descrieri."
     }
   },
   "language": {
@@ -684,5 +699,21 @@
     "automatic": "Automat ({{language}})",
     "machine": "Această limbă a fost tradusă automat, așa că unele cuvinte pot suna ciudat.",
     "help": "Ajută la îmbunătățirea ei"
+  },
+  "discover": {
+    "title": "Descoperă",
+    "emptyTitle": "Nimic de descoperit încă",
+    "connectIt": "Conectează Overseerr ca să vezi ce e în tendințe, să primești recomandări și să ceri filme și seriale noi.",
+    "openSettings": "Deschide setările",
+    "notConnected": "Un administrator nu a conectat Overseerr la acest server.",
+    "placeholder": "Găsește orice film sau serial…",
+    "unavailable": "Descoperă nu e disponibil acum",
+    "open": "Deschide",
+    "request": "Cere",
+    "requestShow": "Cere serialul",
+    "asking": "Se cere…",
+    "waiting": "Așteaptă aprobarea unui administrator.",
+    "onItsWay": "Va apărea în biblioteca ta după ce se descarcă.",
+    "findIt": "Găsește-l în Descoperă"
   }
 }

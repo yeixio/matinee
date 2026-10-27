@@ -360,5 +360,32 @@
     "subtitles": "Субтитри",
     "wrong": "Неправильна назва",
     "other": "Інше"
+  },
+  "holidays": {
+    "valentines": "До Дня святого Валентина",
+    "easter": "До Великодня",
+    "halloween": "Сезон страшилок",
+    "thanksgiving": "До Дня подяки",
+    "christmas": "Улюблене на Різдво",
+    "newyear": "Зустрічаємо Новий рік"
+  },
+  "discover": {
+    "rows": {
+      "trending": "У тренді",
+      "popular-movies": "Популярні фільми",
+      "popular-shows": "Популярні серіали",
+      "upcoming-movies": "Незабаром у кіно",
+      "upcoming-shows": "Нові серіали на підході"
+    },
+    "because": "Бо ви дивилися {{title}}",
+    "status": {
+      "available": "У вашій медіатеці",
+      "added": "У дорозі",
+      "requested": "Запитано"
+    },
+    "kind": {
+      "movie": "Фільм",
+      "show": "Серіал"
+    }
   }
 }

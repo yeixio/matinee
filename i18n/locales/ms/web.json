@@ -11,7 +11,8 @@
     "signIn": "Log masuk",
     "settings": "Tetapan",
     "switchProfile": "Tukar profil",
-    "signOut": "Log keluar"
+    "signOut": "Log keluar",
+    "discover": "Teroka"
   },
   "cantReachServer": "Tidak dapat menghubungi pelayan. Mencuba lagi…",
   "player": {
@@ -518,6 +519,15 @@
         "label": "Hanya pentadbir menambah tajuk",
         "detail": "Orang lain masih boleh melihat apa yang akan datang dan melaporkan masalah."
       }
+    },
+    "overseerr": {
+      "intro": "Sambungkannya untuk menambah tab Teroka: apa yang sohor kini, cadangan berdasarkan tontonan orang, dan cara untuk meminta apa sahaja. Jellyseerr juga boleh.",
+      "notConnected": "Tidak disambungkan · untuk Teroka",
+      "requestAs": "Permintaan daripada orang tanpa akaun Overseerr",
+      "madeAsOwner": "Dibuat sebagai {{name}} (pemilik kunci API)",
+      "madeAs": "Dibuat sebagai {{name}}",
+      "sameName": "Orang yang mempunyai akaun Overseerr dengan nama yang sama meminta atas nama sendiri. Overseerr menentukan permintaan mana yang perlu diluluskan, berdasarkan kebenaran setiap pengguna di sana.",
+      "confirmDisconnect": "Putuskan Overseerr? Tab Teroka akan hilang."
     }
   },
   "requests": {
@@ -666,6 +676,11 @@
         "amf": "AMD AMF (Windows)",
         "v4l2m2m": "V4L2 (Raspberry Pi)"
       }
+    },
+    "homeRows": {
+      "title": "Laman utama",
+      "holidays": "Baris perayaan",
+      "holidaysDetail": "Sebulan sebelum Hari Valentine, Easter, Halloween, Thanksgiving dan Krismas, dan seminggu sebelum malam Tahun Baharu, Laman utama bermula dengan baris tajuk untuk hari itu, dipilih berdasarkan kata kunci, tajuk dan penerangannya."
     }
   },
   "language": {
@@ -676,5 +691,21 @@
     "automatic": "Automatik ({{language}})",
     "machine": "Bahasa ini diterjemahkan oleh mesin, jadi sesetengah perkataan mungkin kedengaran janggal.",
     "help": "Bantu memperbaikinya"
+  },
+  "discover": {
+    "title": "Teroka",
+    "emptyTitle": "Belum ada apa-apa untuk diteroka",
+    "connectIt": "Sambungkan Overseerr untuk melihat apa yang sohor kini, mendapat cadangan, dan meminta filem dan siri baharu.",
+    "openSettings": "Buka tetapan",
+    "notConnected": "Pentadbir belum menyambungkan Overseerr ke pelayan ini.",
+    "placeholder": "Cari mana-mana filem atau siri…",
+    "unavailable": "Teroka tidak tersedia sekarang",
+    "open": "Buka",
+    "request": "Minta",
+    "requestShow": "Minta siri ini",
+    "asking": "Meminta…",
+    "waiting": "Menunggu kelulusan pentadbir.",
+    "onItsWay": "Ia akan muncul dalam pustaka anda selepas dimuat turun.",
+    "findIt": "Cari dalam Teroka"
   }
 }

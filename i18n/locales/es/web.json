@@ -11,7 +11,8 @@
     "signIn": "Iniciar sesión",
     "settings": "Ajustes",
     "switchProfile": "Cambiar de perfil",
-    "signOut": "Cerrar sesión"
+    "signOut": "Cerrar sesión",
+    "discover": "Descubrir"
   },
   "cantReachServer": "No se puede conectar con el servidor. Reintentando…",
   "player": {
@@ -526,6 +527,15 @@
         "label": "Solo los administradores añaden títulos",
         "detail": "Los demás pueden seguir viendo lo que llega pronto e informar de problemas."
       }
+    },
+    "overseerr": {
+      "intro": "Conéctalo para añadir una pestaña Descubrir: lo que es tendencia, recomendaciones según lo que ve la gente y una forma de pedir cualquier cosa. Jellyseerr también funciona.",
+      "notConnected": "No conectado · para Descubrir",
+      "requestAs": "Solicitudes de personas sin cuenta de Overseerr",
+      "madeAsOwner": "Hechas como {{name}} (dueño de la clave API)",
+      "madeAs": "Hechas como {{name}}",
+      "sameName": "Quien tenga una cuenta de Overseerr con el mismo nombre pide como sí mismo. Overseerr decide qué solicitudes necesitan aprobación según los permisos de cada usuario allí.",
+      "confirmDisconnect": "¿Desconectar Overseerr? La pestaña Descubrir desaparecerá."
     }
   },
   "requests": {
@@ -674,6 +684,11 @@
         "amf": "AMD AMF (Windows)",
         "v4l2m2m": "V4L2 (Raspberry Pi)"
       }
+    },
+    "homeRows": {
+      "title": "Inicio",
+      "holidays": "Filas de fiestas",
+      "holidaysDetail": "En el mes antes de San Valentín, Pascua, Halloween, Acción de Gracias y Navidad, y la semana antes de Nochevieja, Inicio empieza con una fila de títulos para la ocasión, elegidos por sus palabras clave, títulos y descripciones."
     }
   },
   "language": {
@@ -684,5 +699,21 @@
     "automatic": "Automático ({{language}})",
     "machine": "Este idioma se ha traducido automáticamente, así que algunas palabras pueden sonar raras.",
     "help": "Ayuda a mejorarlo"
+  },
+  "discover": {
+    "title": "Descubrir",
+    "emptyTitle": "Aún no hay nada que descubrir",
+    "connectIt": "Conecta Overseerr para ver lo que es tendencia, recibir recomendaciones y pedir películas y series nuevas.",
+    "openSettings": "Abrir ajustes",
+    "notConnected": "Un administrador no ha conectado Overseerr a este servidor.",
+    "placeholder": "Busca cualquier película o serie…",
+    "unavailable": "Descubrir no está disponible ahora",
+    "open": "Abrir",
+    "request": "Solicitar",
+    "requestShow": "Solicitar la serie",
+    "asking": "Solicitando…",
+    "waiting": "Esperando a que un administrador lo apruebe.",
+    "onItsWay": "Aparecerá en tu biblioteca cuando se descargue.",
+    "findIt": "Buscarlo en Descubrir"
   }
 }

@@ -91,5 +91,12 @@
   "wrong_pin": "sai mã PIN",
   "wrong_username_or_password": "sai tên người dùng hoặc mật khẩu",
   "you_cant_remove_your_own_account": "bạn không thể xóa tài khoản của chính mình",
-  "your_current_password_is_wrong": "mật khẩu hiện tại của bạn không đúng"
+  "your_current_password_is_wrong": "mật khẩu hiện tại của bạn không đúng",
+  "enter_the_api_key_in_overseerr_under_settings_general": "nhập khóa API (trong Overseerr tại Settings → General)",
+  "overseerr_doesnt_know_this_title": "Overseerr không biết phim này",
+  "overseerr_has_no_such_user": "Overseerr không có người dùng đó",
+  "overseerr_isnt_answering_right_now_try_again_later": "Overseerr hiện không phản hồi. Hãy thử lại sau.",
+  "overseerr_isnt_connected": "Overseerr chưa được kết nối",
+  "someone_already_asked_for_title": "đã có người yêu cầu {{title}}",
+  "tmdbid_is_required": "cần có tmdbId"
 }

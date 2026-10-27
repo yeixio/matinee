@@ -306,5 +306,32 @@
     "subtitles": "Subtitles",
     "wrong": "Wrong title",
     "other": "Something else"
+  },
+  "holidays": {
+    "valentines": "For Valentine's Day",
+    "easter": "For Easter",
+    "halloween": "Spooky season",
+    "thanksgiving": "For Thanksgiving",
+    "christmas": "Christmas favorites",
+    "newyear": "Ring in the new year"
+  },
+  "discover": {
+    "rows": {
+      "trending": "Trending",
+      "popular-movies": "Popular movies",
+      "popular-shows": "Popular shows",
+      "upcoming-movies": "Coming to cinemas",
+      "upcoming-shows": "New shows coming up"
+    },
+    "because": "Because you watched {{title}}",
+    "status": {
+      "available": "In your library",
+      "added": "On its way",
+      "requested": "Requested"
+    },
+    "kind": {
+      "movie": "Movie",
+      "show": "Show"
+    }
   }
 }

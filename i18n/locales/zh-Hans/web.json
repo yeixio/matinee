@@ -11,7 +11,8 @@
     "signIn": "登录",
     "settings": "设置",
     "switchProfile": "切换个人资料",
-    "signOut": "退出登录"
+    "signOut": "退出登录",
+    "discover": "发现"
   },
   "cantReachServer": "无法连接服务器。正在重试…",
   "player": {
@@ -518,6 +519,15 @@
         "label": "只有管理员能添加作品",
         "detail": "其他人仍然可以查看即将推出的内容并报告问题。"
       }
+    },
+    "overseerr": {
+      "intro": "连接后会多出“发现”标签:热门趋势、根据大家观看内容的推荐,以及请求任何影片的方式。Jellyseerr 也可以。",
+      "notConnected": "未连接 · 用于“发现”",
+      "requestAs": "没有 Overseerr 帐户的人的请求",
+      "madeAsOwner": "以 {{name}} 的身份发出(API 密钥所有者)",
+      "madeAs": "以 {{name}} 的身份发出",
+      "sameName": "在 Overseerr 中有同名帐户的人会以自己的身份请求。哪些请求需要批准,由 Overseerr 根据每个用户在那里的权限决定。",
+      "confirmDisconnect": "断开 Overseerr?“发现”标签将会消失。"
     }
   },
   "requests": {
@@ -666,6 +676,11 @@
         "amf": "AMD AMF（Windows）",
         "v4l2m2m": "V4L2（Raspberry Pi）"
       }
+    },
+    "homeRows": {
+      "title": "首页",
+      "holidays": "节日行",
+      "holidaysDetail": "在情人节、复活节、万圣节、感恩节和圣诞节前一个月,以及除夕前一周,首页会以一行应景的影片开头,按关键词、标题和简介挑选。"
     }
   },
   "language": {
@@ -676,5 +691,21 @@
     "automatic": "自动（{{language}}）",
     "machine": "此语言为机器翻译，部分用词可能不太自然。",
     "help": "帮助改进"
+  },
+  "discover": {
+    "title": "发现",
+    "emptyTitle": "暂时没有可发现的内容",
+    "connectIt": "连接 Overseerr,查看热门趋势、获得推荐,并请求新的电影和剧集。",
+    "openSettings": "打开设置",
+    "notConnected": "管理员尚未将 Overseerr 连接到此服务器。",
+    "placeholder": "查找任意电影或剧集…",
+    "unavailable": "“发现”暂时不可用",
+    "open": "打开",
+    "request": "请求",
+    "requestShow": "请求这部剧集",
+    "asking": "正在请求…",
+    "waiting": "正在等待管理员批准。",
+    "onItsWay": "下载完成后会出现在你的媒体库中。",
+    "findIt": "在“发现”中查找"
   }
 }

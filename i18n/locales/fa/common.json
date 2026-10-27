@@ -306,5 +306,32 @@
     "subtitles": "زیرنویس",
     "wrong": "عنوان اشتباه",
     "other": "چیز دیگر"
+  },
+  "holidays": {
+    "valentines": "برای روز ولنتاین",
+    "easter": "برای عید پاک",
+    "halloween": "فصل وحشت",
+    "thanksgiving": "برای روز شکرگزاری",
+    "christmas": "محبوب‌های کریسمس",
+    "newyear": "به پیشواز سال نو"
+  },
+  "discover": {
+    "rows": {
+      "trending": "پرطرفدار",
+      "popular-movies": "فیلم‌های محبوب",
+      "popular-shows": "سریال‌های محبوب",
+      "upcoming-movies": "به‌زودی در سینماها",
+      "upcoming-shows": "سریال‌های تازه در راه"
+    },
+    "because": "چون {{title}} را دیدید",
+    "status": {
+      "available": "در کتابخانه‌ی شما",
+      "added": "در راه",
+      "requested": "درخواست‌شده"
+    },
+    "kind": {
+      "movie": "فیلم",
+      "show": "سریال"
+    }
   }
 }

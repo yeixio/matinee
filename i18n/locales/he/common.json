@@ -333,5 +333,32 @@
     "subtitles": "כתוביות",
     "wrong": "שם שגוי",
     "other": "משהו אחר"
+  },
+  "holidays": {
+    "valentines": "לוולנטיין",
+    "easter": "לפסחא",
+    "halloween": "עונת האימה",
+    "thanksgiving": "לחג ההודיה",
+    "christmas": "אהובי חג המולד",
+    "newyear": "לקבל את השנה החדשה"
+  },
+  "discover": {
+    "rows": {
+      "trending": "טרנדי",
+      "popular-movies": "סרטים פופולריים",
+      "popular-shows": "סדרות פופולריות",
+      "upcoming-movies": "בקרוב בקולנוע",
+      "upcoming-shows": "סדרות חדשות בדרך"
+    },
+    "because": "כי צפית ב{{title}}",
+    "status": {
+      "available": "בספרייה שלך",
+      "added": "בדרך",
+      "requested": "התבקש"
+    },
+    "kind": {
+      "movie": "סרט",
+      "show": "סדרה"
+    }
   }
 }

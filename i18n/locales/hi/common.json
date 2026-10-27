@@ -306,5 +306,32 @@
     "subtitles": "सबटाइटल",
     "wrong": "गलत शीर्षक",
     "other": "कुछ और"
+  },
+  "holidays": {
+    "valentines": "वैलेंटाइन डे के लिए",
+    "easter": "ईस्टर के लिए",
+    "halloween": "डरावना मौसम",
+    "thanksgiving": "थैंक्सगिविंग के लिए",
+    "christmas": "क्रिसमस की पसंदीदा",
+    "newyear": "नए साल का स्वागत"
+  },
+  "discover": {
+    "rows": {
+      "trending": "ट्रेंडिंग",
+      "popular-movies": "लोकप्रिय फ़िल्में",
+      "popular-shows": "लोकप्रिय शो",
+      "upcoming-movies": "जल्द ही सिनेमाघरों में",
+      "upcoming-shows": "आने वाले नए शो"
+    },
+    "because": "क्योंकि आपने {{title}} देखी",
+    "status": {
+      "available": "आपकी लाइब्रेरी में",
+      "added": "रास्ते में",
+      "requested": "अनुरोध किया गया"
+    },
+    "kind": {
+      "movie": "फ़िल्म",
+      "show": "शो"
+    }
   }
 }

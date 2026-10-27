@@ -279,5 +279,32 @@
     "subtitles": "คำบรรยาย",
     "wrong": "ชื่อเรื่องผิด",
     "other": "อย่างอื่น"
+  },
+  "holidays": {
+    "valentines": "สำหรับวันวาเลนไทน์",
+    "easter": "สำหรับอีสเตอร์",
+    "halloween": "ฤดูขนหัวลุก",
+    "thanksgiving": "สำหรับวันขอบคุณพระเจ้า",
+    "christmas": "เรื่องโปรดช่วงคริสต์มาส",
+    "newyear": "ต้อนรับปีใหม่"
+  },
+  "discover": {
+    "rows": {
+      "trending": "กำลังมาแรง",
+      "popular-movies": "หนังยอดนิยม",
+      "popular-shows": "ซีรีส์ยอดนิยม",
+      "upcoming-movies": "เร็วๆ นี้ในโรงภาพยนตร์",
+      "upcoming-shows": "ซีรีส์ใหม่ที่กำลังจะมา"
+    },
+    "because": "เพราะคุณดู {{title}}",
+    "status": {
+      "available": "อยู่ในคลังของคุณ",
+      "added": "กำลังมา",
+      "requested": "ขอแล้ว"
+    },
+    "kind": {
+      "movie": "หนัง",
+      "show": "ซีรีส์"
+    }
   }
 }

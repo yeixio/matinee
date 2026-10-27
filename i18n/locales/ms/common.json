@@ -279,5 +279,32 @@
     "subtitles": "Sari kata",
     "wrong": "Tajuk salah",
     "other": "Lain-lain"
+  },
+  "holidays": {
+    "valentines": "Untuk Hari Valentine",
+    "easter": "Untuk Easter",
+    "halloween": "Musim seram",
+    "thanksgiving": "Untuk Thanksgiving",
+    "christmas": "Kegemaran Krismas",
+    "newyear": "Sambut tahun baharu"
+  },
+  "discover": {
+    "rows": {
+      "trending": "Sohor kini",
+      "popular-movies": "Filem popular",
+      "popular-shows": "Siri popular",
+      "upcoming-movies": "Akan datang di pawagam",
+      "upcoming-shows": "Siri baharu akan datang"
+    },
+    "because": "Kerana anda menonton {{title}}",
+    "status": {
+      "available": "Dalam pustaka anda",
+      "added": "Dalam perjalanan",
+      "requested": "Diminta"
+    },
+    "kind": {
+      "movie": "Filem",
+      "show": "Siri"
+    }
   }
 }

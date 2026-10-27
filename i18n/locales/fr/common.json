@@ -333,5 +333,32 @@
     "subtitles": "Sous-titres",
     "wrong": "Mauvais titre",
     "other": "Autre chose"
+  },
+  "holidays": {
+    "valentines": "Pour la Saint-Valentin",
+    "easter": "Pour Pâques",
+    "halloween": "La saison des frissons",
+    "thanksgiving": "Pour Thanksgiving",
+    "christmas": "Les classiques de Noël",
+    "newyear": "Pour fêter la nouvelle année"
+  },
+  "discover": {
+    "rows": {
+      "trending": "Tendances",
+      "popular-movies": "Films populaires",
+      "popular-shows": "Séries populaires",
+      "upcoming-movies": "Bientôt au cinéma",
+      "upcoming-shows": "Nouvelles séries à venir"
+    },
+    "because": "Parce que vous avez regardé {{title}}",
+    "status": {
+      "available": "Dans votre bibliothèque",
+      "added": "En route",
+      "requested": "Demandé"
+    },
+    "kind": {
+      "movie": "Film",
+      "show": "Série"
+    }
   }
 }

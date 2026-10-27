@@ -28,6 +28,7 @@ A fast, self-hosted media server for your movies, TV and music. Point it at your
 - **Profiles and kids mode:** one sign-in, or the Home account on your network, can have profiles that each keep their own progress, watch list and theme, with "Who's watching?" when the app opens and an optional 4-digit PIN. Kids profiles see only titles rated for them (Little kids, Kids or Teens, from TMDB's age ratings for your country) in the libraries you pick, and can't open settings or make requests. Admins set them up under Settings → Profiles.
 - **Downloads** for watching offline in the Matinee apps. A download is a job on the server, not a stream: it's prepared in the background (the original file, or a single MP4 at 1080p, 720p or 480p), checksummed, then fetched by the phone at its own pace, resuming where it broke off. Jobs survive restarts and retry on their own, and watch progress made offline is merged back when the phone reconnects, with the latest change winning.
 - **Radarr and Sonarr** (optional): people ask for movies and shows and an admin approves them, everyone sees what's coming soon, and anyone can report a problem with what they're watching. Admins can change a title's quality or have a bad file replaced. [Setting it up](#radarr-and-sonarr).
+- **Discover with Overseerr** (optional): a Discover tab with what's trending, recommendations based on what each person watched, and a way to ask for any movie or show. [Setting it up](#overseerr).
 - **Themes:** seven built in (Matinee, Dark, Light, Clean, Sci-fi, Drive-in, High contrast), picked by each person under Settings → Appearance and followed by the web player and the phone and TV apps. Add your own with a small JSON file; see [docs/themes.md](docs/themes.md).
 - **In your language:** the web player and the apps come in 32 languages, right to left included, and titles, descriptions and trailers come from TMDB in each person's language where TMDB has them. Each profile picks its language under Settings → Language, or follows the device. The translations are by machine for now; [help improve them](i18n/README.md).
 - **Devices:** sign in a phone or TV by typing the code it shows at `/link`, and see or sign out every device you're signed in on under Settings.
@@ -173,6 +174,16 @@ The address and key stay on the server. Then:
 - On a movie or show, admins can change its quality, and anyone signed in can **Report a problem**.
 
 Devices at home that haven't signed in can see what's coming soon, but can't ask for titles or report problems.
+
+### Overseerr
+
+If you run [Overseerr](https://overseerr.dev/) (or Jellyseerr, which works the same way), connect it under **Settings → Overseerr** with its address (such as `http://overseerr:5055`) and API key (in Overseerr under **Settings → General**). A **Discover** tab then shows up on the web and in the apps:
+
+- Rows of titles like the ones each person watched lately ("Because you watched …"), then what's trending, popular and coming up.
+- A search for any movie or show, not only what's in your libraries.
+- **Request** on any title asks for it in Overseerr, which approves it and hands it to Radarr or Sonarr by its own rules.
+
+Requests are made as the Overseerr user with the same name as the person asking. For people without one, pick which Overseerr user their requests are made as. Who may ask at all follows the same setting as Radarr and Sonarr. Kids profiles don't see Discover. Disconnecting Overseerr takes the tab away.
 
 ### From source
 

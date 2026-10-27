@@ -91,5 +91,12 @@
   "wrong_pin": "väärä PIN-koodi",
   "wrong_username_or_password": "väärä käyttäjänimi tai salasana",
   "you_cant_remove_your_own_account": "et voi poistaa omaa tiliäsi",
-  "your_current_password_is_wrong": "nykyinen salasanasi on väärä"
+  "your_current_password_is_wrong": "nykyinen salasanasi on väärä",
+  "enter_the_api_key_in_overseerr_under_settings_general": "anna API-avain (Overseerrissa kohdassa Settings → General)",
+  "overseerr_doesnt_know_this_title": "Overseerr ei tunne tätä nimikettä",
+  "overseerr_has_no_such_user": "Overseerrissa ei ole tällaista käyttäjää",
+  "overseerr_isnt_answering_right_now_try_again_later": "Overseerr ei vastaa juuri nyt. Yritä myöhemmin uudelleen.",
+  "overseerr_isnt_connected": "Overseerria ei ole yhdistetty",
+  "someone_already_asked_for_title": "joku on jo pyytänyt nimikettä {{title}}",
+  "tmdbid_is_required": "tmdbId vaaditaan"
 }

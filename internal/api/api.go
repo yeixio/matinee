@@ -49,6 +49,8 @@ type Server struct {
 	Name         string // what the apps call this server
 	// TrailerSource lists trailers online; nil without a TMDB key.
 	TrailerSource TrailerSource
+	// Keywords finds TMDB keywords for holiday rows; nil matches on words alone.
+	Keywords KeywordSource
 	// People has biographies; nil shows only names and photos.
 	People PersonSource
 	// ThemeDir holds the admin's own theme files (see themes.go); empty means
@@ -63,13 +65,15 @@ type Server struct {
 
 	// HomeListener means the home network has its own listener (HomeHandler),
 	// so requests to the main one never count as coming from home.
-	HomeListener bool
-	homeSignIn   homeSetting
-	setUp        atomic.Bool // the first account exists
-	arrCache     ttlCache    // answers from Radarr and Sonarr (see arr.go)
-	trailerCache ttlCache    // trailer files' probes and TMDB's trailer lists (see trailers.go)
-	pins         pinGuard    // wrong profile PINs (see profiles.go)
-	langs        languages   // profiles' languages (see languages.go)
+	HomeListener    bool
+	homeSignIn      homeSetting
+	setUp           atomic.Bool     // the first account exists
+	arrCache        ttlCache        // answers from Radarr and Sonarr (see arr.go)
+	discoverCache   ttlCache        // answers from Overseerr (see discover.go)
+	trailerCache    ttlCache        // trailer files' probes and TMDB's trailer lists (see trailers.go)
+	pins            pinGuard        // wrong profile PINs (see profiles.go)
+	holidayKeywords holidayKeywords // TMDB's ids for holiday keywords (see holidays.go)
+	langs           languages       // profiles' languages (see languages.go)
 
 	// Translate looks up translations for every library, when people start
 	// using a language; nil without an online provider that has them.
@@ -201,6 +205,13 @@ func (s *Server) routes() []route {
 		{"PUT /integrations/{app}", adminOnly, s.putIntegration},
 		{"DELETE /integrations/{app}", adminOnly, s.deleteIntegration},
 		{"POST /integrations/{app}/test", adminOnly, s.testIntegration},
+		{"GET /integrations/overseerr", adminOnly, s.getOverseerr},
+		{"PUT /integrations/overseerr", adminOnly, s.putOverseerr},
+		{"DELETE /integrations/overseerr", adminOnly, s.deleteOverseerr},
+		{"POST /integrations/overseerr/test", adminOnly, s.testOverseerr},
+		{"GET /discover", reader, grownUps(s.discover)},
+		{"GET /discover/search", reader, grownUps(s.discoverSearch)},
+		{"POST /discover/requests", signedIn, grownUps(s.discoverRequest)},
 		{"GET /requests/options", reader, grownUps(s.getRequestOptions)},
 		{"GET /requests/search", signedIn, grownUps(s.searchTitles)},
 		{"GET /requests", signedIn, grownUps(s.listRequests)},
@@ -766,8 +777,14 @@ func (s *Server) home(w http.ResponseWriter, r *http.Request) {
 		s.serverError(w, err)
 		return
 	}
-	// Pinned collections come before the day's genres.
-	rows = append(pinned, rows...)
+	holidayRows, err := s.holidayRows(r.Context(), uid, now)
+	if err != nil {
+		s.serverError(w, err)
+		return
+	}
+	// A holiday coming up comes first, then pinned collections, then the
+	// day's genres.
+	rows = append(append(holidayRows, pinned...), rows...)
 	writeJSON(w, http.StatusOK, map[string]any{
 		"continueWatching": cont, "watchList": watchList, "recentlyAdded": recent,
 		"newReleases": releases, "rows": rows,

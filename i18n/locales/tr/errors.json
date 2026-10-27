@@ -91,5 +91,12 @@
   "wrong_pin": "yanlış PIN",
   "wrong_username_or_password": "yanlış kullanıcı adı veya parola",
   "you_cant_remove_your_own_account": "kendi hesabını kaldıramazsın",
-  "your_current_password_is_wrong": "mevcut parolan yanlış"
+  "your_current_password_is_wrong": "mevcut parolan yanlış",
+  "enter_the_api_key_in_overseerr_under_settings_general": "API anahtarını gir (Overseerr'da Settings → General altında)",
+  "overseerr_doesnt_know_this_title": "Overseerr bu yapımı bilmiyor",
+  "overseerr_has_no_such_user": "Overseerr'da böyle bir kullanıcı yok",
+  "overseerr_isnt_answering_right_now_try_again_later": "Overseerr şu anda yanıt vermiyor. Daha sonra yeniden dene.",
+  "overseerr_isnt_connected": "Overseerr bağlı değil",
+  "someone_already_asked_for_title": "{{title}} zaten istendi",
+  "tmdbid_is_required": "tmdbId gerekli"
 }

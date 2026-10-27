@@ -11,7 +11,8 @@
     "signIn": "Přihlásit se",
     "settings": "Nastavení",
     "switchProfile": "Přepnout profil",
-    "signOut": "Odhlásit se"
+    "signOut": "Odhlásit se",
+    "discover": "Objevovat"
   },
   "cantReachServer": "Server není dostupný. Zkouším znovu…",
   "player": {
@@ -530,6 +531,15 @@
         "label": "Tituly přidávají jen správci",
         "detail": "Ostatní stále vidí, co brzy přijde, a mohou hlásit problémy."
       }
+    },
+    "overseerr": {
+      "intro": "Připojte ho a přidejte kartu Objevovat: co je v trendu, doporučení podle toho, co lidé sledují, a možnost požádat o cokoli. Funguje i Jellyseerr.",
+      "notConnected": "Nepřipojeno · pro Objevovat",
+      "requestAs": "Žádosti lidí bez účtu Overseerr",
+      "madeAsOwner": "Podávané jako {{name}} (vlastník klíče API)",
+      "madeAs": "Podávané jako {{name}}",
+      "sameName": "Kdo má v Overseerr účet se stejným jménem, žádá sám za sebe. Overseerr podle oprávnění každého uživatele rozhoduje, které žádosti potřebují schválení.",
+      "confirmDisconnect": "Odpojit Overseerr? Karta Objevovat zmizí."
     }
   },
   "requests": {
@@ -678,6 +688,11 @@
         "amf": "AMD AMF (Windows)",
         "v4l2m2m": "V4L2 (Raspberry Pi)"
       }
+    },
+    "homeRows": {
+      "title": "Domů",
+      "holidays": "Sváteční řady",
+      "holidaysDetail": "Měsíc před Valentýnem, Velikonocemi, Halloweenem, Dnem díkůvzdání a Vánoci a týden před Silvestrem začíná Domů řadou titulů pro tu příležitost, vybraných podle klíčových slov, názvů a popisů."
     }
   },
   "language": {
@@ -688,5 +703,21 @@
     "automatic": "Automaticky ({{language}})",
     "machine": "Tento jazyk byl přeložen strojově, takže některá slova mohou znít zvláštně.",
     "help": "Pomoz ho vylepšit"
+  },
+  "discover": {
+    "title": "Objevovat",
+    "emptyTitle": "Zatím není co objevovat",
+    "connectIt": "Připojte Overseerr, abyste viděli, co je v trendu, dostávali doporučení a mohli žádat o nové filmy a seriály.",
+    "openSettings": "Otevřít nastavení",
+    "notConnected": "Správce k tomuto serveru Overseerr nepřipojil.",
+    "placeholder": "Najděte jakýkoli film nebo seriál…",
+    "unavailable": "Objevovat teď není k dispozici",
+    "open": "Otevřít",
+    "request": "Požádat",
+    "requestShow": "Požádat o seriál",
+    "asking": "Žádám…",
+    "waiting": "Čeká na schválení správcem.",
+    "onItsWay": "Objeví se ve vaší knihovně, jakmile se stáhne.",
+    "findIt": "Najít v Objevovat"
   }
 }

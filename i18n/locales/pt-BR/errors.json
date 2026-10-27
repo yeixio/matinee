@@ -91,5 +91,12 @@
   "wrong_pin": "PIN errado",
   "wrong_username_or_password": "nome de usuário ou senha errados",
   "you_cant_remove_your_own_account": "você não pode remover sua própria conta",
-  "your_current_password_is_wrong": "sua senha atual está errada"
+  "your_current_password_is_wrong": "sua senha atual está errada",
+  "enter_the_api_key_in_overseerr_under_settings_general": "digite a chave de API (no Overseerr, em Settings → General)",
+  "overseerr_doesnt_know_this_title": "o Overseerr não conhece este título",
+  "overseerr_has_no_such_user": "o Overseerr não tem esse usuário",
+  "overseerr_isnt_answering_right_now_try_again_later": "O Overseerr não está respondendo agora. Tente de novo mais tarde.",
+  "overseerr_isnt_connected": "o Overseerr não está conectado",
+  "someone_already_asked_for_title": "alguém já pediu {{title}}",
+  "tmdbid_is_required": "tmdbId é obrigatório"
 }

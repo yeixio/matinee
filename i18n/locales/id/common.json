@@ -279,5 +279,32 @@
     "subtitles": "Subtitel",
     "wrong": "Judul salah",
     "other": "Hal lain"
+  },
+  "holidays": {
+    "valentines": "Untuk Hari Valentine",
+    "easter": "Untuk Paskah",
+    "halloween": "Musim seram",
+    "thanksgiving": "Untuk Thanksgiving",
+    "christmas": "Favorit Natal",
+    "newyear": "Sambut tahun baru"
+  },
+  "discover": {
+    "rows": {
+      "trending": "Sedang tren",
+      "popular-movies": "Film populer",
+      "popular-shows": "Serial populer",
+      "upcoming-movies": "Segera di bioskop",
+      "upcoming-shows": "Serial baru yang akan datang"
+    },
+    "because": "Karena kamu menonton {{title}}",
+    "status": {
+      "available": "Di pustakamu",
+      "added": "Dalam perjalanan",
+      "requested": "Diminta"
+    },
+    "kind": {
+      "movie": "Film",
+      "show": "Serial"
+    }
   }
 }

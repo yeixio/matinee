@@ -11,7 +11,8 @@
     "signIn": "Anmelden",
     "settings": "Einstellungen",
     "switchProfile": "Profil wechseln",
-    "signOut": "Abmelden"
+    "signOut": "Abmelden",
+    "discover": "Entdecken"
   },
   "cantReachServer": "Server nicht erreichbar. Neuer Versuch …",
   "player": {
@@ -522,6 +523,15 @@
         "label": "Nur Admins fügen Titel hinzu",
         "detail": "Alle anderen sehen trotzdem, was demnächst kommt, und können Probleme melden."
       }
+    },
+    "overseerr": {
+      "intro": "Verbinde es, um einen Tab „Entdecken“ hinzuzufügen: was gerade angesagt ist, Empfehlungen nach dem, was alle schauen, und eine Möglichkeit, alles anzufragen. Jellyseerr funktioniert auch.",
+      "notConnected": "Nicht verbunden · für Entdecken",
+      "requestAs": "Anfragen von Personen ohne Overseerr-Konto",
+      "madeAsOwner": "Gestellt als {{name}} (Besitzer des API-Schlüssels)",
+      "madeAs": "Gestellt als {{name}}",
+      "sameName": "Wer ein Overseerr-Konto mit demselben Namen hat, fragt als er selbst an. Overseerr entscheidet anhand der dortigen Berechtigungen, welche Anfragen eine Freigabe brauchen.",
+      "confirmDisconnect": "Overseerr trennen? Der Tab „Entdecken“ verschwindet."
     }
   },
   "requests": {
@@ -670,6 +680,11 @@
         "amf": "AMD AMF (Windows)",
         "v4l2m2m": "V4L2 (Raspberry Pi)"
       }
+    },
+    "homeRows": {
+      "title": "Startseite",
+      "holidays": "Feiertagsreihen",
+      "holidaysDetail": "Im Monat vor Valentinstag, Ostern, Halloween, Thanksgiving und Weihnachten sowie in der Woche vor Silvester beginnt die Startseite mit einer Reihe passender Titel, ausgewählt nach Schlagwörtern, Titeln und Beschreibungen."
     }
   },
   "language": {
@@ -680,5 +695,21 @@
     "automatic": "Automatisch ({{language}})",
     "machine": "Diese Sprache wurde maschinell übersetzt, manches klingt vielleicht ungewohnt.",
     "help": "Hilf mit, sie zu verbessern"
+  },
+  "discover": {
+    "title": "Entdecken",
+    "emptyTitle": "Noch nichts zu entdecken",
+    "connectIt": "Verbinde Overseerr, um zu sehen, was angesagt ist, Empfehlungen zu bekommen und neue Filme und Serien anzufragen.",
+    "openSettings": "Einstellungen öffnen",
+    "notConnected": "Ein Admin hat Overseerr noch nicht mit diesem Server verbunden.",
+    "placeholder": "Beliebigen Film oder beliebige Serie finden…",
+    "unavailable": "Entdecken ist gerade nicht verfügbar",
+    "open": "Öffnen",
+    "request": "Anfragen",
+    "requestShow": "Serie anfragen",
+    "asking": "Wird angefragt…",
+    "waiting": "Wartet auf die Freigabe durch einen Admin.",
+    "onItsWay": "Erscheint in deiner Mediathek, sobald es heruntergeladen ist.",
+    "findIt": "In „Entdecken“ finden"
   }
 }

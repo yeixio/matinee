@@ -306,5 +306,32 @@
     "subtitles": "Undertexter",
     "wrong": "Fel titel",
     "other": "Något annat"
+  },
+  "holidays": {
+    "valentines": "Till alla hjärtans dag",
+    "easter": "Till påsk",
+    "halloween": "Rysarsäsong",
+    "thanksgiving": "Till Thanksgiving",
+    "christmas": "Julfavoriter",
+    "newyear": "Ring in det nya året"
+  },
+  "discover": {
+    "rows": {
+      "trending": "Trendar",
+      "popular-movies": "Populära filmer",
+      "popular-shows": "Populära serier",
+      "upcoming-movies": "Snart på bio",
+      "upcoming-shows": "Nya serier på väg"
+    },
+    "because": "Eftersom du såg {{title}}",
+    "status": {
+      "available": "I ditt bibliotek",
+      "added": "På väg",
+      "requested": "Begärd"
+    },
+    "kind": {
+      "movie": "Film",
+      "show": "Serie"
+    }
   }
 }

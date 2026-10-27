@@ -91,5 +91,12 @@
   "wrong_pin": "неправильний PIN-код",
   "wrong_username_or_password": "неправильне ім'я користувача або пароль",
   "you_cant_remove_your_own_account": "не можна видалити власний обліковий запис",
-  "your_current_password_is_wrong": "поточний пароль неправильний"
+  "your_current_password_is_wrong": "поточний пароль неправильний",
+  "enter_the_api_key_in_overseerr_under_settings_general": "введіть API-ключ (в Overseerr: Settings → General)",
+  "overseerr_doesnt_know_this_title": "Overseerr не знає цього фільму",
+  "overseerr_has_no_such_user": "в Overseerr немає такого користувача",
+  "overseerr_isnt_answering_right_now_try_again_later": "Overseerr зараз не відповідає. Спробуйте пізніше.",
+  "overseerr_isnt_connected": "Overseerr не підключено",
+  "someone_already_asked_for_title": "хтось уже попросив {{title}}",
+  "tmdbid_is_required": "потрібен tmdbId"
 }

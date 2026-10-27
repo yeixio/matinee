@@ -306,5 +306,32 @@
     "subtitles": "Altyazılar",
     "wrong": "Yanlış ad",
     "other": "Başka bir şey"
+  },
+  "holidays": {
+    "valentines": "Sevgililer Günü için",
+    "easter": "Paskalya için",
+    "halloween": "Ürperti mevsimi",
+    "thanksgiving": "Şükran Günü için",
+    "christmas": "Noel favorileri",
+    "newyear": "Yeni yıla merhaba"
+  },
+  "discover": {
+    "rows": {
+      "trending": "Trendler",
+      "popular-movies": "Popüler filmler",
+      "popular-shows": "Popüler diziler",
+      "upcoming-movies": "Yakında sinemalarda",
+      "upcoming-shows": "Yolda olan yeni diziler"
+    },
+    "because": "{{title}} izlediğin için",
+    "status": {
+      "available": "Kitaplığında",
+      "added": "Yolda",
+      "requested": "İstendi"
+    },
+    "kind": {
+      "movie": "Film",
+      "show": "Dizi"
+    }
   }
 }

@@ -11,7 +11,8 @@
     "signIn": "Logg inn",
     "settings": "Innstillinger",
     "switchProfile": "Bytt profil",
-    "signOut": "Logg ut"
+    "signOut": "Logg ut",
+    "discover": "Utforsk"
   },
   "cantReachServer": "Får ikke kontakt med serveren. Prøver igjen…",
   "player": {
@@ -522,6 +523,15 @@
         "label": "Bare administratorer legger til titler",
         "detail": "Alle andre kan fortsatt se hva som kommer snart og rapportere problemer."
       }
+    },
+    "overseerr": {
+      "intro": "Koble den til for å legge til fanen Utforsk: det som er populært, anbefalinger basert på hva folk ser, og en måte å be om hva som helst. Jellyseerr fungerer også.",
+      "notConnected": "Ikke tilkoblet · for Utforsk",
+      "requestAs": "Forespørsler fra folk uten Overseerr-konto",
+      "madeAsOwner": "Gjøres som {{name}} (eieren av API-nøkkelen)",
+      "madeAs": "Gjøres som {{name}}",
+      "sameName": "De som har en Overseerr-konto med samme navn, spør som seg selv. Overseerr avgjør hvilke forespørsler som må godkjennes, ut fra hver brukers tillatelser der.",
+      "confirmDisconnect": "Koble fra Overseerr? Fanen Utforsk forsvinner."
     }
   },
   "requests": {
@@ -670,6 +680,11 @@
         "amf": "AMD AMF (Windows)",
         "v4l2m2m": "V4L2 (Raspberry Pi)"
       }
+    },
+    "homeRows": {
+      "title": "Hjem",
+      "holidays": "Høytidsrader",
+      "holidaysDetail": "Måneden før valentinsdagen, påske, halloween, Thanksgiving og jul, og uken før nyttårsaften, starter Hjem med en rad titler for dagen, valgt ut fra nøkkelord, titler og beskrivelser."
     }
   },
   "language": {
@@ -680,5 +695,21 @@
     "automatic": "Automatisk ({{language}})",
     "machine": "Dette språket er maskinoversatt, så noen ord kan høres rare ut.",
     "help": "Hjelp til å forbedre det"
+  },
+  "discover": {
+    "title": "Utforsk",
+    "emptyTitle": "Ingenting å utforske ennå",
+    "connectIt": "Koble til Overseerr for å se hva som er populært, få anbefalinger og be om nye filmer og serier.",
+    "openSettings": "Åpne innstillinger",
+    "notConnected": "En administrator har ikke koblet Overseerr til denne serveren.",
+    "placeholder": "Finn en film eller serie…",
+    "unavailable": "Utforsk er ikke tilgjengelig akkurat nå",
+    "open": "Åpne",
+    "request": "Be om",
+    "requestShow": "Be om serien",
+    "asking": "Sender…",
+    "waiting": "Venter på at en administrator godkjenner den.",
+    "onItsWay": "Den dukker opp i biblioteket ditt når den er lastet ned.",
+    "findIt": "Finn den i Utforsk"
   }
 }

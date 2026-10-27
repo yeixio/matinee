@@ -11,7 +11,8 @@
     "signIn": "Entrar",
     "settings": "Configurações",
     "switchProfile": "Trocar de perfil",
-    "signOut": "Sair"
+    "signOut": "Sair",
+    "discover": "Descobrir"
   },
   "cantReachServer": "Não foi possível acessar o servidor. Tentando de novo…",
   "player": {
@@ -526,6 +527,15 @@
         "label": "Só administradores adicionam títulos",
         "detail": "Os outros ainda podem ver o que chega em breve e informar problemas."
       }
+    },
+    "overseerr": {
+      "intro": "Conecte para adicionar a aba Descobrir: o que está em alta, recomendações com base no que as pessoas assistem e um jeito de pedir qualquer coisa. O Jellyseerr também funciona.",
+      "notConnected": "Não conectado · para Descobrir",
+      "requestAs": "Pedidos de quem não tem conta no Overseerr",
+      "madeAsOwner": "Feitos como {{name}} (dono da chave de API)",
+      "madeAs": "Feitos como {{name}}",
+      "sameName": "Quem tem conta no Overseerr com o mesmo nome pede como si mesmo. O Overseerr decide quais pedidos precisam de aprovação, pelas permissões de cada um lá.",
+      "confirmDisconnect": "Desconectar o Overseerr? A aba Descobrir some."
     }
   },
   "requests": {
@@ -674,6 +684,11 @@
         "amf": "AMD AMF (Windows)",
         "v4l2m2m": "V4L2 (Raspberry Pi)"
       }
+    },
+    "homeRows": {
+      "title": "Início",
+      "holidays": "Fileiras de datas comemorativas",
+      "holidaysDetail": "No mês antes do Dia dos Namorados, Páscoa, Halloween, Ação de Graças e Natal, e na semana antes do Réveillon, o Início começa com uma fileira de títulos para a data, escolhidos por palavras-chave, títulos e descrições."
     }
   },
   "language": {
@@ -684,5 +699,21 @@
     "automatic": "Automático ({{language}})",
     "machine": "Este idioma foi traduzido automaticamente, então algumas palavras podem soar estranhas.",
     "help": "Ajude a melhorar"
+  },
+  "discover": {
+    "title": "Descobrir",
+    "emptyTitle": "Nada para descobrir ainda",
+    "connectIt": "Conecte o Overseerr para ver o que está em alta, receber recomendações e pedir filmes e séries novos.",
+    "openSettings": "Abrir configurações",
+    "notConnected": "Nenhum administrador conectou o Overseerr a este servidor.",
+    "placeholder": "Encontre qualquer filme ou série…",
+    "unavailable": "Descobrir não está disponível agora",
+    "open": "Abrir",
+    "request": "Pedir",
+    "requestShow": "Pedir a série",
+    "asking": "Pedindo…",
+    "waiting": "Aguardando a aprovação de um administrador.",
+    "onItsWay": "Vai aparecer na sua biblioteca quando for baixado.",
+    "findIt": "Encontrar em Descobrir"
   }
 }

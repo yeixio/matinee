@@ -360,5 +360,32 @@
     "subtitles": "Titulky",
     "wrong": "Špatný název",
     "other": "Něco jiného"
+  },
+  "holidays": {
+    "valentines": "Na Valentýna",
+    "easter": "Na Velikonoce",
+    "halloween": "Strašidelná sezóna",
+    "thanksgiving": "Na Den díkůvzdání",
+    "christmas": "Vánoční oblíbené",
+    "newyear": "Na přivítání nového roku"
+  },
+  "discover": {
+    "rows": {
+      "trending": "Trendy",
+      "popular-movies": "Oblíbené filmy",
+      "popular-shows": "Oblíbené seriály",
+      "upcoming-movies": "Brzy v kinech",
+      "upcoming-shows": "Nové seriály na cestě"
+    },
+    "because": "Protože jste sledovali {{title}}",
+    "status": {
+      "available": "Ve vaší knihovně",
+      "added": "Na cestě",
+      "requested": "Vyžádáno"
+    },
+    "kind": {
+      "movie": "Film",
+      "show": "Seriál"
+    }
   }
 }

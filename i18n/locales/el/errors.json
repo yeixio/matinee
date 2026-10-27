@@ -91,5 +91,12 @@
   "wrong_pin": "λάθος PIN",
   "wrong_username_or_password": "λάθος όνομα χρήστη ή κωδικός",
   "you_cant_remove_your_own_account": "δεν μπορείς να αφαιρέσεις τον δικό σου λογαριασμό",
-  "your_current_password_is_wrong": "ο τρέχων κωδικός σου είναι λάθος"
+  "your_current_password_is_wrong": "ο τρέχων κωδικός σου είναι λάθος",
+  "enter_the_api_key_in_overseerr_under_settings_general": "γράψε το κλειδί API (στο Overseerr, στο Settings → General)",
+  "overseerr_doesnt_know_this_title": "το Overseerr δεν γνωρίζει αυτόν τον τίτλο",
+  "overseerr_has_no_such_user": "το Overseerr δεν έχει τέτοιον χρήστη",
+  "overseerr_isnt_answering_right_now_try_again_later": "Το Overseerr δεν απαντά τώρα. Δοκίμασε ξανά αργότερα.",
+  "overseerr_isnt_connected": "το Overseerr δεν είναι συνδεδεμένο",
+  "someone_already_asked_for_title": "κάποιος έχει ήδη ζητήσει το {{title}}",
+  "tmdbid_is_required": "το tmdbId είναι υποχρεωτικό"
 }

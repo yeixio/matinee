@@ -91,5 +91,12 @@
   "wrong_pin": "PIN이 틀렸습니다",
   "wrong_username_or_password": "사용자 이름 또는 비밀번호가 틀렸습니다",
   "you_cant_remove_your_own_account": "내 계정은 삭제할 수 없습니다",
-  "your_current_password_is_wrong": "현재 비밀번호가 틀렸습니다"
+  "your_current_password_is_wrong": "현재 비밀번호가 틀렸습니다",
+  "enter_the_api_key_in_overseerr_under_settings_general": "API 키를 입력하세요 (Overseerr의 Settings → General)",
+  "overseerr_doesnt_know_this_title": "Overseerr가 이 작품을 모릅니다",
+  "overseerr_has_no_such_user": "Overseerr에 그런 사용자가 없습니다",
+  "overseerr_isnt_answering_right_now_try_again_later": "지금 Overseerr가 응답하지 않아요. 나중에 다시 시도하세요.",
+  "overseerr_isnt_connected": "Overseerr가 연결되지 않았습니다",
+  "someone_already_asked_for_title": "누군가 이미 {{title}}을(를) 요청했습니다",
+  "tmdbid_is_required": "tmdbId가 필요합니다"
 }

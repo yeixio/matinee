@@ -11,7 +11,8 @@
     "signIn": "Accedi",
     "settings": "Impostazioni",
     "switchProfile": "Cambia profilo",
-    "signOut": "Esci"
+    "signOut": "Esci",
+    "discover": "Scopri"
   },
   "cantReachServer": "Impossibile raggiungere il server. Nuovo tentativo…",
   "player": {
@@ -526,6 +527,15 @@
         "label": "Solo gli amministratori aggiungono titoli",
         "detail": "Gli altri possono comunque vedere cosa arriva presto e segnalare problemi."
       }
+    },
+    "overseerr": {
+      "intro": "Collegalo per aggiungere la scheda Scopri: cosa va di moda, consigli in base a ciò che le persone guardano e un modo per chiedere qualsiasi cosa. Funziona anche Jellyseerr.",
+      "notConnected": "Non collegato · per Scopri",
+      "requestAs": "Richieste di chi non ha un account Overseerr",
+      "madeAsOwner": "Fatte come {{name}} (proprietario della chiave API)",
+      "madeAs": "Fatte come {{name}}",
+      "sameName": "Chi ha un account Overseerr con lo stesso nome chiede a nome proprio. Overseerr decide quali richieste vanno approvate, in base ai permessi di ciascuno.",
+      "confirmDisconnect": "Scollegare Overseerr? La scheda Scopri sparirà."
     }
   },
   "requests": {
@@ -674,6 +684,11 @@
         "amf": "AMD AMF (Windows)",
         "v4l2m2m": "V4L2 (Raspberry Pi)"
       }
+    },
+    "homeRows": {
+      "title": "Home",
+      "holidays": "Righe delle feste",
+      "holidaysDetail": "Nel mese prima di San Valentino, Pasqua, Halloween, Ringraziamento e Natale, e nella settimana prima di Capodanno, la Home inizia con una riga di titoli per l'occasione, scelti in base a parole chiave, titoli e descrizioni."
     }
   },
   "language": {
@@ -684,5 +699,21 @@
     "automatic": "Automatica ({{language}})",
     "machine": "Questa lingua è stata tradotta automaticamente, quindi alcune parole potrebbero suonare strane.",
     "help": "Aiuta a migliorarla"
+  },
+  "discover": {
+    "title": "Scopri",
+    "emptyTitle": "Ancora niente da scoprire",
+    "connectIt": "Collega Overseerr per vedere cosa va di moda, ricevere consigli e chiedere nuovi film e serie.",
+    "openSettings": "Apri le impostazioni",
+    "notConnected": "Nessun amministratore ha collegato Overseerr a questo server.",
+    "placeholder": "Trova qualsiasi film o serie…",
+    "unavailable": "Scopri non è disponibile in questo momento",
+    "open": "Apri",
+    "request": "Richiedi",
+    "requestShow": "Richiedi la serie",
+    "asking": "Richiesta in corso…",
+    "waiting": "In attesa dell'approvazione di un amministratore.",
+    "onItsWay": "Comparirà nella tua libreria una volta scaricato.",
+    "findIt": "Trovalo in Scopri"
   }
 }

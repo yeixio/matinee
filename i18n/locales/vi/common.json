@@ -279,5 +279,32 @@
     "subtitles": "Phụ đề",
     "wrong": "Sai tên",
     "other": "Vấn đề khác"
+  },
+  "holidays": {
+    "valentines": "Cho ngày Valentine",
+    "easter": "Cho lễ Phục sinh",
+    "halloween": "Mùa rùng rợn",
+    "thanksgiving": "Cho Lễ Tạ ơn",
+    "christmas": "Phim Giáng sinh yêu thích",
+    "newyear": "Đón chào năm mới"
+  },
+  "discover": {
+    "rows": {
+      "trending": "Thịnh hành",
+      "popular-movies": "Phim lẻ nổi bật",
+      "popular-shows": "Phim bộ nổi bật",
+      "upcoming-movies": "Sắp ra rạp",
+      "upcoming-shows": "Phim bộ mới sắp ra"
+    },
+    "because": "Vì bạn đã xem {{title}}",
+    "status": {
+      "available": "Trong thư viện của bạn",
+      "added": "Đang về",
+      "requested": "Đã yêu cầu"
+    },
+    "kind": {
+      "movie": "Phim lẻ",
+      "show": "Phim bộ"
+    }
   }
 }

@@ -11,7 +11,8 @@
     "signIn": "Se connecter",
     "settings": "Réglages",
     "switchProfile": "Changer de profil",
-    "signOut": "Se déconnecter"
+    "signOut": "Se déconnecter",
+    "discover": "Découvrir"
   },
   "cantReachServer": "Impossible de joindre le serveur. Nouvelle tentative…",
   "player": {
@@ -526,6 +527,15 @@
         "label": "Seuls les administrateurs ajoutent des titres",
         "detail": "Les autres peuvent toujours voir ce qui arrive bientôt et signaler des problèmes."
       }
+    },
+    "overseerr": {
+      "intro": "Connectez-le pour ajouter un onglet Découvrir : les tendances, des recommandations selon ce que les gens regardent, et un moyen de demander n’importe quoi. Jellyseerr fonctionne aussi.",
+      "notConnected": "Non connecté · pour Découvrir",
+      "requestAs": "Demandes des personnes sans compte Overseerr",
+      "madeAsOwner": "Faites au nom de {{name}} (propriétaire de la clé API)",
+      "madeAs": "Faites au nom de {{name}}",
+      "sameName": "Les personnes ayant un compte Overseerr du même nom demandent en leur propre nom. Overseerr décide quelles demandes doivent être approuvées, selon les permissions de chacun là-bas.",
+      "confirmDisconnect": "Déconnecter Overseerr ? L’onglet Découvrir disparaîtra."
     }
   },
   "requests": {
@@ -674,6 +684,11 @@
         "amf": "AMD AMF (Windows)",
         "v4l2m2m": "V4L2 (Raspberry Pi)"
       }
+    },
+    "homeRows": {
+      "title": "Accueil",
+      "holidays": "Rangées des fêtes",
+      "holidaysDetail": "Le mois avant la Saint-Valentin, Pâques, Halloween, Thanksgiving et Noël, et la semaine avant le Nouvel An, l’accueil commence par une rangée de titres pour l’occasion, choisis selon leurs mots-clés, titres et descriptions."
     }
   },
   "language": {
@@ -684,5 +699,21 @@
     "automatic": "Automatique ({{language}})",
     "machine": "Cette langue a été traduite automatiquement, certains mots peuvent sembler étranges.",
     "help": "Aidez à l’améliorer"
+  },
+  "discover": {
+    "title": "Découvrir",
+    "emptyTitle": "Rien à découvrir pour l’instant",
+    "connectIt": "Connectez Overseerr pour voir les tendances, recevoir des recommandations et demander de nouveaux films et séries.",
+    "openSettings": "Ouvrir les réglages",
+    "notConnected": "Aucun administrateur n’a connecté Overseerr à ce serveur.",
+    "placeholder": "Trouvez un film ou une série…",
+    "unavailable": "Découvrir n’est pas disponible pour le moment",
+    "open": "Ouvrir",
+    "request": "Demander",
+    "requestShow": "Demander la série",
+    "asking": "Demande en cours…",
+    "waiting": "En attente de l’approbation d’un administrateur.",
+    "onItsWay": "Il apparaîtra dans votre bibliothèque une fois téléchargé.",
+    "findIt": "Le trouver dans Découvrir"
   }
 }

@@ -11,7 +11,8 @@
     "signIn": "Đăng nhập",
     "settings": "Cài đặt",
     "switchProfile": "Đổi hồ sơ",
-    "signOut": "Đăng xuất"
+    "signOut": "Đăng xuất",
+    "discover": "Khám phá"
   },
   "cantReachServer": "Không kết nối được máy chủ. Đang thử lại…",
   "player": {
@@ -518,6 +519,15 @@
         "label": "Chỉ quản trị viên thêm nội dung",
         "detail": "Những người khác vẫn xem được những gì sắp ra mắt và báo lỗi."
       }
+    },
+    "overseerr": {
+      "intro": "Kết nối để thêm thẻ Khám phá: những gì đang thịnh hành, gợi ý dựa trên những gì mọi người xem và cách yêu cầu bất cứ thứ gì. Jellyseerr cũng dùng được.",
+      "notConnected": "Chưa kết nối · cho Khám phá",
+      "requestAs": "Yêu cầu từ người không có tài khoản Overseerr",
+      "madeAsOwner": "Gửi dưới tên {{name}} (chủ khóa API)",
+      "madeAs": "Gửi dưới tên {{name}}",
+      "sameName": "Người có tài khoản Overseerr cùng tên sẽ yêu cầu dưới tên chính họ. Overseerr quyết định yêu cầu nào cần duyệt, theo quyền của từng người dùng ở đó.",
+      "confirmDisconnect": "Ngắt kết nối Overseerr? Thẻ Khám phá sẽ biến mất."
     }
   },
   "requests": {
@@ -666,6 +676,11 @@
         "amf": "AMD AMF (Windows)",
         "v4l2m2m": "V4L2 (Raspberry Pi)"
       }
+    },
+    "homeRows": {
+      "title": "Trang chủ",
+      "holidays": "Hàng ngày lễ",
+      "holidaysDetail": "Trong tháng trước ngày Valentine, Phục sinh, Halloween, Lễ Tạ ơn và Giáng sinh, và tuần trước đêm Giao thừa, Trang chủ mở đầu bằng một hàng phim cho dịp đó, chọn theo từ khóa, tên và mô tả."
     }
   },
   "language": {
@@ -676,5 +691,21 @@
     "automatic": "Tự động ({{language}})",
     "machine": "Ngôn ngữ này được dịch bằng máy, nên một số từ có thể đọc hơi lạ.",
     "help": "Giúp cải thiện"
+  },
+  "discover": {
+    "title": "Khám phá",
+    "emptyTitle": "Chưa có gì để khám phá",
+    "connectIt": "Kết nối Overseerr để xem những gì đang thịnh hành, nhận gợi ý và yêu cầu phim lẻ, phim bộ mới.",
+    "openSettings": "Mở cài đặt",
+    "notConnected": "Quản trị viên chưa kết nối Overseerr với máy chủ này.",
+    "placeholder": "Tìm phim lẻ hoặc phim bộ bất kỳ…",
+    "unavailable": "Khám phá hiện không dùng được",
+    "open": "Mở",
+    "request": "Yêu cầu",
+    "requestShow": "Yêu cầu phim bộ",
+    "asking": "Đang yêu cầu…",
+    "waiting": "Đang chờ quản trị viên duyệt.",
+    "onItsWay": "Phim sẽ xuất hiện trong thư viện của bạn khi tải xong.",
+    "findIt": "Tìm trong Khám phá"
   }
 }

@@ -91,5 +91,12 @@
   "wrong_pin": "PIN salah",
   "wrong_username_or_password": "nama pengguna atau kata laluan salah",
   "you_cant_remove_your_own_account": "anda tidak boleh mengalih keluar akaun anda sendiri",
-  "your_current_password_is_wrong": "kata laluan semasa anda salah"
+  "your_current_password_is_wrong": "kata laluan semasa anda salah",
+  "enter_the_api_key_in_overseerr_under_settings_general": "masukkan kunci API (dalam Overseerr di bawah Settings → General)",
+  "overseerr_doesnt_know_this_title": "Overseerr tidak mengenali tajuk ini",
+  "overseerr_has_no_such_user": "Overseerr tiada pengguna sebegitu",
+  "overseerr_isnt_answering_right_now_try_again_later": "Overseerr tidak menjawab sekarang. Cuba lagi nanti.",
+  "overseerr_isnt_connected": "Overseerr tidak disambungkan",
+  "someone_already_asked_for_title": "seseorang sudah meminta {{title}}",
+  "tmdbid_is_required": "tmdbId diperlukan"
 }

@@ -91,5 +91,12 @@
   "wrong_pin": "fel PIN-kod",
   "wrong_username_or_password": "fel användarnamn eller lösenord",
   "you_cant_remove_your_own_account": "du kan inte ta bort ditt eget konto",
-  "your_current_password_is_wrong": "ditt nuvarande lösenord är fel"
+  "your_current_password_is_wrong": "ditt nuvarande lösenord är fel",
+  "enter_the_api_key_in_overseerr_under_settings_general": "ange API-nyckeln (i Overseerr under Settings → General)",
+  "overseerr_doesnt_know_this_title": "Overseerr känner inte till den här titeln",
+  "overseerr_has_no_such_user": "Overseerr har ingen sådan användare",
+  "overseerr_isnt_answering_right_now_try_again_later": "Overseerr svarar inte just nu. Försök igen senare.",
+  "overseerr_isnt_connected": "Overseerr är inte anslutet",
+  "someone_already_asked_for_title": "någon har redan bett om {{title}}",
+  "tmdbid_is_required": "tmdbId krävs"
 }

@@ -91,5 +91,12 @@
   "wrong_pin": "hibás PIN-kód",
   "wrong_username_or_password": "hibás felhasználónév vagy jelszó",
   "you_cant_remove_your_own_account": "nem távolíthatod el a saját fiókodat",
-  "your_current_password_is_wrong": "a jelenlegi jelszavad hibás"
+  "your_current_password_is_wrong": "a jelenlegi jelszavad hibás",
+  "enter_the_api_key_in_overseerr_under_settings_general": "add meg az API-kulcsot (az Overseerrben: Settings → General)",
+  "overseerr_doesnt_know_this_title": "az Overseerr nem ismeri ezt a címet",
+  "overseerr_has_no_such_user": "az Overseerrben nincs ilyen felhasználó",
+  "overseerr_isnt_answering_right_now_try_again_later": "Az Overseerr most nem válaszol. Próbáld újra később.",
+  "overseerr_isnt_connected": "az Overseerr nincs összekapcsolva",
+  "someone_already_asked_for_title": "valaki már kérte ezt: {{title}}",
+  "tmdbid_is_required": "a tmdbId megadása kötelező"
 }

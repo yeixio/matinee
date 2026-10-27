@@ -87,9 +87,9 @@ export default function Home() {
           ))}
         </Row>
       )}
-      {/* Pinned collections, then a few genres, different each day. */}
+      {/* A holiday coming up, pinned collections, then a few genres, different each day. */}
       {data.rows?.map((row) => (
-        <Row key={row.id} title={row.genre ? genreRowTitle(row.genre) : collectionName({ name: row.title, starter: row.starter })} more={row.collectionId ? collectionLink({ id: row.collectionId }) : undefined}>
+        <Row key={row.id} title={row.holiday ? t(`common:holidays.${row.holiday}`, { defaultValue: row.title }) : row.genre ? genreRowTitle(row.genre) : collectionName({ name: row.title, starter: row.starter })} more={row.collectionId ? collectionLink({ id: row.collectionId }) : undefined}>
           {row.items.map((it) => (
             <RowItem key={it.id}>
               <PosterCard item={it} />

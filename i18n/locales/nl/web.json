@@ -11,7 +11,8 @@
     "signIn": "Inloggen",
     "settings": "Instellingen",
     "switchProfile": "Profiel wisselen",
-    "signOut": "Uitloggen"
+    "signOut": "Uitloggen",
+    "discover": "Ontdekken"
   },
   "cantReachServer": "Kan de server niet bereiken. Opnieuw proberen…",
   "player": {
@@ -522,6 +523,15 @@
         "label": "Alleen beheerders voegen titels toe",
         "detail": "Alle anderen kunnen nog steeds zien wat er binnenkort komt en problemen melden."
       }
+    },
+    "overseerr": {
+      "intro": "Koppel het om een tabblad Ontdekken toe te voegen: wat populair is, aanbevelingen op basis van wat mensen kijken, en een manier om alles aan te vragen. Jellyseerr werkt ook.",
+      "notConnected": "Niet gekoppeld · voor Ontdekken",
+      "requestAs": "Aanvragen van mensen zonder Overseerr-account",
+      "madeAsOwner": "Gedaan als {{name}} (eigenaar van de API-sleutel)",
+      "madeAs": "Gedaan als {{name}}",
+      "sameName": "Wie een Overseerr-account met dezelfde naam heeft, vraagt aan als zichzelf. Overseerr bepaalt welke aanvragen goedkeuring nodig hebben, op basis van ieders rechten daar.",
+      "confirmDisconnect": "Overseerr ontkoppelen? Het tabblad Ontdekken verdwijnt."
     }
   },
   "requests": {
@@ -670,6 +680,11 @@
         "amf": "AMD AMF (Windows)",
         "v4l2m2m": "V4L2 (Raspberry Pi)"
       }
+    },
+    "homeRows": {
+      "title": "Start",
+      "holidays": "Feestdagrijen",
+      "holidaysDetail": "In de maand voor Valentijnsdag, Pasen, Halloween, Thanksgiving en Kerstmis, en de week voor oudejaarsavond, begint Start met een rij titels voor die dag, gekozen op trefwoorden, titels en beschrijvingen."
     }
   },
   "language": {
@@ -680,5 +695,21 @@
     "automatic": "Automatisch ({{language}})",
     "machine": "Deze taal is machinaal vertaald, dus sommige woorden klinken misschien vreemd.",
     "help": "Help mee om het te verbeteren"
+  },
+  "discover": {
+    "title": "Ontdekken",
+    "emptyTitle": "Nog niets te ontdekken",
+    "connectIt": "Koppel Overseerr om te zien wat populair is, aanbevelingen te krijgen en nieuwe films en series aan te vragen.",
+    "openSettings": "Instellingen openen",
+    "notConnected": "Een beheerder heeft Overseerr nog niet aan deze server gekoppeld.",
+    "placeholder": "Zoek een film of serie…",
+    "unavailable": "Ontdekken is nu niet beschikbaar",
+    "open": "Openen",
+    "request": "Aanvragen",
+    "requestShow": "Serie aanvragen",
+    "asking": "Bezig met aanvragen…",
+    "waiting": "Wacht op goedkeuring van een beheerder.",
+    "onItsWay": "Verschijnt in je bibliotheek zodra het is gedownload.",
+    "findIt": "Zoeken in Ontdekken"
   }
 }

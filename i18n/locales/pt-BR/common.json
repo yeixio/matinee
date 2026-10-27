@@ -333,5 +333,32 @@
     "subtitles": "Legendas",
     "wrong": "Título errado",
     "other": "Outra coisa"
+  },
+  "holidays": {
+    "valentines": "Para o Dia dos Namorados",
+    "easter": "Para a Páscoa",
+    "halloween": "Temporada de sustos",
+    "thanksgiving": "Para o Dia de Ação de Graças",
+    "christmas": "Favoritos de Natal",
+    "newyear": "Para receber o ano novo"
+  },
+  "discover": {
+    "rows": {
+      "trending": "Em alta",
+      "popular-movies": "Filmes populares",
+      "popular-shows": "Séries populares",
+      "upcoming-movies": "Em breve nos cinemas",
+      "upcoming-shows": "Novas séries chegando"
+    },
+    "because": "Porque você assistiu {{title}}",
+    "status": {
+      "available": "Na sua biblioteca",
+      "added": "A caminho",
+      "requested": "Pedido"
+    },
+    "kind": {
+      "movie": "Filme",
+      "show": "Série"
+    }
   }
 }
