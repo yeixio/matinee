@@ -18,6 +18,7 @@
   "bad_item": "hatalı öğe",
   "bad_library": "hatalı kütüphane",
   "bad_request": "hatalı istek",
+  "billing_couldnt_be_reached_try_again_in_a_minute": "faturalandırmaya ulaşılamadı; bir dakika sonra tekrar dene",
   "box_set_not_found": "film serisi bulunamadı",
   "cant_read_that_folder": "bu klasör okunamıyor",
   "collection_not_found": "koleksiyon bulunamadı",
@@ -67,6 +68,7 @@
   "password_must_be_at_most_72_bytes": "parola en fazla 72 bayt olmalı",
   "person_not_found": "kişi bulunamadı",
   "picture_subtitles_need_a_converted_quality_not_the_original_file": "resim altyazıları orijinal dosya değil, dönüştürülmüş bir kalite gerektirir",
+  "plan_must_be_monthly_or_yearly": "plan monthly veya yearly olmalı",
   "remoteforwardedport_must_be_443_80_or_0": "remoteForwardedPort 443, 80 veya 0 olmalı",
   "replaced_by_a_newer_seek": "daha yeni bir ilerletmeyle değiştirildi",
   "request_not_found": "istek bulunamadı",
@@ -83,6 +85,7 @@
   "this_code_expired_ask_for_another": "bu kodun süresi doldu; yenisini iste",
   "this_download_belongs_to_another_device": "bu indirme başka bir cihaza ait",
   "this_server_doesnt_watch_library_folders": "bu sunucu kütüphane klasörlerini izlemiyor",
+  "this_server_has_no_matinee_connect_subscription_bought_in_its_settings": "bu sunucu için ayarlarından satın alınmış bir Matinee Connect aboneliği yok",
   "title_is_already_in_your_library": "{{title}} zaten kütüphanende",
   "title_is_already_on_its_way": "{{title}} zaten yolda",
   "too_many_wrong_pins_try_again_in_a_minute": "çok fazla yanlış PIN; bir dakika sonra yeniden dene",
@@ -103,5 +106,7 @@
   "no_such_row": "böyle bir sıra yok",
   "tmdb_didnt_accept_that_key": "TMDB bu anahtarı kabul etmedi",
   "tmdb_couldnt_be_reached_to_check_the_key": "Anahtarı doğrulamak için TMDB'ye ulaşılamadı",
-  "this_server_cant_change_its_tmdb_key": "bu sunucu TMDB anahtarını değiştiremez"
+  "this_server_cant_change_its_tmdb_key": "bu sunucu TMDB anahtarını değiştiremez",
+  "this_server_doesnt_offer_remote_access": "bu sunucu uzaktan erişim sunmuyor",
+  "this_server_doesnt_use_matinee_connect": "bu sunucu Matinee Connect kullanmıyor"
 }

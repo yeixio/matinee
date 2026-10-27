@@ -706,6 +706,18 @@
       "save": "Enregistrer la clé",
       "remove": "Supprimer la clé enregistrée",
       "saved": "Enregistrée. Matinee complète maintenant les affiches et les détails."
+    },
+    "connect": {
+      "title": "Matinee Connect",
+      "about": "Permet aux apps de retrouver ce serveur quand l’adresse internet de votre domicile change. Le service ne connaît que l’adresse : la vidéo va toujours directement de ce serveur aux apps.",
+      "active": "Actif jusqu’au {{date}}. Se renouvelle automatiquement.",
+      "manage": "Gérer l’abonnement",
+      "waiting": "En attente du paiement…",
+      "openCheckout": "Rouvrir la page de paiement",
+      "ended": "L’abonnement a pris fin. Tant que vous ne vous réabonnez pas, les apps n’apprennent une nouvelle adresse qu’à la maison.",
+      "perYear": "{{price}} par an",
+      "perMonth": "{{price}} par mois",
+      "paid": "Facturé à l’avance par Yeix. Résiliable à tout moment ; il court jusqu’à la fin de la période payée."
     }
   },
   "language": {

@@ -702,6 +702,18 @@
       "save": "Kulcs mentése",
       "remove": "Mentett kulcs eltávolítása",
       "saved": "Mentve. A Matinee most kiegészíti a plakátokat és részleteket."
+    },
+    "connect": {
+      "title": "Matinee Connect",
+      "about": "Így az alkalmazások akkor is megtalálják ezt a szervert, ha megváltozik az otthoni internetcímed. A szolgáltatás csak a címet ismeri: a videó mindig közvetlenül ettől a szervertől megy az alkalmazásokhoz.",
+      "active": "Aktív eddig: {{date}}. Magától megújul.",
+      "manage": "Előfizetés kezelése",
+      "waiting": "Várakozás a fizetés teljesülésére…",
+      "openCheckout": "Fizetés újbóli megnyitása",
+      "ended": "Az előfizetés lejárt. Amíg újra elő nem fizetsz, az alkalmazások csak otthon tudják meg az új címet.",
+      "perYear": "{{price}} évente",
+      "perMonth": "{{price}} havonta",
+      "paid": "A Yeix előre számláz. Bármikor lemondhatod; a kifizetett időszak végéig érvényes."
     }
   },
   "language": {

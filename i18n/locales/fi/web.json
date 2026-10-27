@@ -702,6 +702,18 @@
       "save": "Tallenna avain",
       "remove": "Poista tallennettu avain",
       "saved": "Tallennettu. Matinee täydentää nyt julisteita ja tietoja."
+    },
+    "connect": {
+      "title": "Matinee Connect",
+      "about": "Pitää sovellukset löytämässä tämän palvelimen, kun kotisi internetosoite vaihtuu. Palvelu tietää vain osoitteen: video kulkee aina suoraan tältä palvelimelta sovelluksiin.",
+      "active": "Voimassa {{date}} asti. Uusiutuu itsestään.",
+      "manage": "Hallitse tilausta",
+      "waiting": "Odotetaan maksun valmistumista…",
+      "openCheckout": "Avaa maksu uudelleen",
+      "ended": "Tilaus on päättynyt. Kunnes tilaat uudelleen, sovellukset saavat uuden osoitteen vain kotona.",
+      "perYear": "{{price}} vuodessa",
+      "perMonth": "{{price}} kuukaudessa",
+      "paid": "Yeix laskuttaa etukäteen. Peru milloin vain; tilaus on voimassa maksetun jakson loppuun."
     }
   },
   "language": {

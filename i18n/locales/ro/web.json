@@ -706,6 +706,18 @@
       "save": "Salvează cheia",
       "remove": "Elimină cheia salvată",
       "saved": "Salvată. Matinee completează acum afișele și detaliile."
+    },
+    "connect": {
+      "title": "Matinee Connect",
+      "about": "Ajută aplicațiile să găsească acest server când se schimbă adresa de internet a casei. Serviciul află doar adresa: video-ul merge mereu direct de la acest server la aplicații.",
+      "active": "Activ până la {{date}}. Se reînnoiește singur.",
+      "manage": "Gestionează abonamentul",
+      "waiting": "Se așteaptă finalizarea plății…",
+      "openCheckout": "Redeschide plata",
+      "ended": "Abonamentul s-a încheiat. Până te abonezi din nou, aplicațiile află o adresă nouă doar acasă.",
+      "perYear": "{{price}} pe an",
+      "perMonth": "{{price}} pe lună",
+      "paid": "Facturat în avans de Yeix. Anulezi oricând; rămâne activ până la finalul perioadei plătite."
     }
   },
   "language": {

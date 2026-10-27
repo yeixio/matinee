@@ -180,6 +180,9 @@ func run() error {
 				return err
 			}
 			apiServer.Remote.Connect = &connect.Client{URL: cfg.ConnectURL, Key: key}
+			if cfg.BillingURL != "" {
+				apiServer.Remote.Billing = &connect.Billing{URL: cfg.BillingURL}
+			}
 		}
 		on, err := api.RemoteAccessOn(ctx, db)
 		if err != nil {

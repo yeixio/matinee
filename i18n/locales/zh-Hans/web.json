@@ -698,6 +698,18 @@
       "save": "保存密钥",
       "remove": "移除已保存的密钥",
       "saved": "已保存。Matinee 正在补全海报和详情。"
+    },
+    "connect": {
+      "title": "Matinee Connect",
+      "about": "即使家里的互联网地址变了，应用也能找到这台服务器。该服务只知道地址：视频始终从这台服务器直接发送到应用。",
+      "active": "有效期至 {{date}}，自动续订。",
+      "manage": "管理订阅",
+      "waiting": "正在等待付款完成…",
+      "openCheckout": "重新打开付款页面",
+      "ended": "订阅已结束。在重新订阅之前，应用只能在家时获知新地址。",
+      "perYear": "每年 {{price}}",
+      "perMonth": "每月 {{price}}",
+      "paid": "由 Yeix 预先收费。可随时取消，有效期持续到已付费周期结束。"
     }
   },
   "language": {

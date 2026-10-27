@@ -710,6 +710,18 @@
       "save": "Zapisz klucz",
       "remove": "Usuń zapisany klucz",
       "saved": "Zapisano. Matinee uzupełnia teraz plakaty i szczegóły."
+    },
+    "connect": {
+      "title": "Matinee Connect",
+      "about": "Pozwala aplikacjom znaleźć ten serwer, gdy zmieni się adres internetowy Twojego domu. Usługa zna tylko adres: wideo zawsze płynie prosto z tego serwera do aplikacji.",
+      "active": "Aktywna do {{date}}. Odnawia się automatycznie.",
+      "manage": "Zarządzaj subskrypcją",
+      "waiting": "Czekamy na zaksięgowanie płatności…",
+      "openCheckout": "Otwórz płatność ponownie",
+      "ended": "Subskrypcja wygasła. Dopóki jej nie odnowisz, aplikacje poznają nowy adres tylko w domu.",
+      "perYear": "{{price}} rocznie",
+      "perMonth": "{{price}} miesięcznie",
+      "paid": "Płatne z góry na rzecz Yeix. Możesz anulować w każdej chwili; działa do końca opłaconego okresu."
     }
   },
   "language": {

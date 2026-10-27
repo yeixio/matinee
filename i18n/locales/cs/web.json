@@ -710,6 +710,18 @@
       "save": "Uložit klíč",
       "remove": "Odebrat uložený klíč",
       "saved": "Uloženo. Matinee teď doplňuje plakáty a podrobnosti."
+    },
+    "connect": {
+      "title": "Matinee Connect",
+      "about": "Aplikace díky tomu najdou tento server, i když se změní internetová adresa tvé domácnosti. Služba zná jen adresu: video jde vždy přímo z tohoto serveru do aplikací.",
+      "active": "Aktivní do {{date}}. Obnovuje se samo.",
+      "manage": "Spravovat předplatné",
+      "waiting": "Čeká se na dokončení platby…",
+      "openCheckout": "Znovu otevřít platbu",
+      "ended": "Předplatné skončilo. Dokud si ho znovu nepředplatíš, aplikace zjistí novou adresu jen doma.",
+      "perYear": "{{price}} ročně",
+      "perMonth": "{{price}} měsíčně",
+      "paid": "Účtuje Yeix předem. Zrušit můžeš kdykoli; platí do konce zaplaceného období."
     }
   },
   "language": {

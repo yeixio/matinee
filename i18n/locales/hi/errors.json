@@ -18,6 +18,7 @@
   "bad_item": "गलत आइटम",
   "bad_library": "गलत लाइब्रेरी",
   "bad_request": "गलत अनुरोध",
+  "billing_couldnt_be_reached_try_again_in_a_minute": "बिलिंग से संपर्क नहीं हो सका; एक मिनट बाद फिर कोशिश करें",
   "box_set_not_found": "बॉक्स सेट नहीं मिला",
   "cant_read_that_folder": "वह फ़ोल्डर पढ़ा नहीं जा सकता",
   "collection_not_found": "संग्रह नहीं मिला",
@@ -67,6 +68,7 @@
   "password_must_be_at_most_72_bytes": "पासवर्ड ज़्यादा से ज़्यादा 72 बाइट का होना चाहिए",
   "person_not_found": "व्यक्ति नहीं मिला",
   "picture_subtitles_need_a_converted_quality_not_the_original_file": "चित्र वाले सबटाइटल को कन्वर्ट की गई क्वालिटी चाहिए, मूल फ़ाइल नहीं",
+  "plan_must_be_monthly_or_yearly": "plan monthly या yearly होना चाहिए",
   "remoteforwardedport_must_be_443_80_or_0": "remoteForwardedPort 443, 80 या 0 होना चाहिए",
   "replaced_by_a_newer_seek": "नए सीक से बदल दिया गया",
   "request_not_found": "अनुरोध नहीं मिला",
@@ -83,6 +85,7 @@
   "this_code_expired_ask_for_another": "इस कोड की अवधि खत्म हो गई; दूसरा माँगें",
   "this_download_belongs_to_another_device": "यह डाउनलोड किसी दूसरे डिवाइस का है",
   "this_server_doesnt_watch_library_folders": "यह सर्वर लाइब्रेरी फ़ोल्डरों पर नज़र नहीं रखता",
+  "this_server_has_no_matinee_connect_subscription_bought_in_its_settings": "इस सर्वर की सेटिंग में कोई Matinee Connect सदस्यता नहीं खरीदी गई है",
   "title_is_already_in_your_library": "{{title}} पहले से आपकी लाइब्रेरी में है",
   "title_is_already_on_its_way": "{{title}} पहले से रास्ते में है",
   "too_many_wrong_pins_try_again_in_a_minute": "बहुत ज़्यादा गलत PIN; एक मिनट बाद फिर कोशिश करें",
@@ -103,5 +106,7 @@
   "no_such_row": "ऐसी कोई पंक्ति नहीं",
   "tmdb_didnt_accept_that_key": "TMDB ने वह कुंजी स्वीकार नहीं की",
   "tmdb_couldnt_be_reached_to_check_the_key": "कुंजी जाँचने के लिए TMDB तक नहीं पहुँचा जा सका",
-  "this_server_cant_change_its_tmdb_key": "यह सर्वर अपनी TMDB कुंजी नहीं बदल सकता"
+  "this_server_cant_change_its_tmdb_key": "यह सर्वर अपनी TMDB कुंजी नहीं बदल सकता",
+  "this_server_doesnt_offer_remote_access": "यह सर्वर रिमोट एक्सेस नहीं देता",
+  "this_server_doesnt_use_matinee_connect": "यह सर्वर Matinee Connect का उपयोग नहीं करता"
 }

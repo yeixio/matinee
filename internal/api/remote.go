@@ -2,6 +2,7 @@ package api
 
 import (
 	"context"
+	"errors"
 	"net/http"
 	"strconv"
 
@@ -68,9 +69,9 @@ func (s *Server) setRemoteForwardedPort(ctx context.Context, port int) error {
 }
 
 // lookup is this server's id with the connect service and where the apps
-// look it up, while remote access can use it; both "" otherwise.
+// look it up, while the service knows its address; both "" otherwise.
 func (s *Server) lookup() (id, url string) {
-	if s.PublicURL != "" || s.Remote == nil || s.Remote.URL() == "" {
+	if s.PublicURL != "" || s.Remote == nil || !s.Remote.Findable() {
 		return "", ""
 	}
 	return s.Remote.Lookup()
@@ -103,4 +104,65 @@ func (s *Server) remoteStatus() *remote.Status {
 	}
 	st := s.Remote.Status()
 	return &st
+}
+
+// Matinee Connect, the paid service that lets the apps find this server
+// after its address changes, is bought here (internal/remote/subscription.go).
+
+func (s *Server) connectPlans(w http.ResponseWriter, r *http.Request) {
+	if s.Remote == nil {
+		writeError(w, http.StatusNotFound, "this server doesn't offer remote access")
+		return
+	}
+	plans, err := s.Remote.Plans(r.Context())
+	if err != nil {
+		s.connectError(w, err)
+		return
+	}
+	writeJSON(w, http.StatusOK, map[string]any{"plans": plans})
+}
+
+func (s *Server) connectSubscribe(w http.ResponseWriter, r *http.Request) {
+	var in struct {
+		Plan string `json:"plan"`
+	}
+	if err := readJSON(r, &in); err != nil || (in.Plan != "monthly" && in.Plan != "yearly") {
+		writeError(w, http.StatusBadRequest, "plan must be monthly or yearly")
+		return
+	}
+	if s.Remote == nil {
+		writeError(w, http.StatusNotFound, "this server doesn't offer remote access")
+		return
+	}
+	url, err := s.Remote.Subscribe(r.Context(), in.Plan)
+	if err != nil {
+		s.connectError(w, err)
+		return
+	}
+	writeJSON(w, http.StatusOK, map[string]string{"url": url})
+}
+
+func (s *Server) connectManage(w http.ResponseWriter, r *http.Request) {
+	if s.Remote == nil {
+		writeError(w, http.StatusNotFound, "this server doesn't offer remote access")
+		return
+	}
+	url, err := s.Remote.ManageURL(r.Context())
+	if err != nil {
+		s.connectError(w, err)
+		return
+	}
+	writeJSON(w, http.StatusOK, map[string]string{"url": url})
+}
+
+func (s *Server) connectError(w http.ResponseWriter, err error) {
+	switch {
+	case errors.Is(err, remote.ErrNoBilling):
+		writeError(w, http.StatusNotFound, "this server doesn't use Matinee Connect")
+	case errors.Is(err, remote.ErrNoSubscriber):
+		writeError(w, http.StatusNotFound, "this server has no Matinee Connect subscription bought in its settings")
+	default:
+		s.Log.Warn("Matinee Connect billing", "err", err)
+		writeError(w, http.StatusBadGateway, "billing couldn't be reached; try again in a minute")
+	}
 }

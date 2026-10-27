@@ -702,6 +702,18 @@
       "save": "Spara nyckel",
       "remove": "Ta bort sparad nyckel",
       "saved": "Sparad. Matinee fyller nu i affischer och detaljer."
+    },
+    "connect": {
+      "title": "Matinee Connect",
+      "about": "Gör att apparna hittar den här servern även när hemmets internetadress ändras. Tjänsten känner bara till adressen: video går alltid direkt från servern till apparna.",
+      "active": "Aktiv till {{date}}. Förnyas automatiskt.",
+      "manage": "Hantera prenumeration",
+      "waiting": "Väntar på att betalningen går igenom…",
+      "openCheckout": "Öppna betalningen igen",
+      "ended": "Prenumerationen har upphört. Tills du prenumererar igen får apparna en ny adress bara när de är hemma.",
+      "perYear": "{{price}} per år",
+      "perMonth": "{{price}} per månad",
+      "paid": "Debiteras i förskott av Yeix. Säg upp när du vill; den gäller till slutet av den betalda perioden."
     }
   },
   "language": {

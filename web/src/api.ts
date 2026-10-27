@@ -87,9 +87,16 @@ export type RemoteStatus = {
   forwardedPort?: number
   listenPort?: number
   findable?: boolean
+  // The Matinee Connect subscription that pays for being findable; missing
+  // when the server uses a lookup service that needs none.
+  connect?: ConnectStatus
   certificateExpires?: string
   checkedAt?: string
 }
+
+// checkout: a checkout is open, waiting for payment.
+export type ConnectStatus = { state: 'none' | 'checkout' | 'active' | 'ended'; until?: string; checkout?: string; problem?: string }
+export type ConnectPlan = { id: 'monthly' | 'yearly'; price: string; interval: 'month' | 'year' }
 
 // auto: change notifications on local disks, a quick check on network shares;
 // poll: the quick check everywhere; off: only the full rescan.
@@ -626,6 +633,9 @@ export const api = {
   // tmdbKey replaces the server's TMDB key; "" goes back to the one it started with.
   saveSettings: (s: Partial<Omit<Settings, 'hardware' | 'themeProblems' | 'watchPollSeconds' | 'scanIntervalSeconds' | 'tmdb'>> & { tmdbKey?: string }) =>
     request<Settings>('PUT', '/api/v1/settings', s),
+  connectPlans: () => request<{ plans: ConnectPlan[] }>('GET', '/api/v1/settings/connect/plans').then((r) => r.plans),
+  connectSubscribe: (plan: ConnectPlan['id']) => request<{ url: string }>('POST', '/api/v1/settings/connect/subscribe', { plan }),
+  connectManage: () => request<{ url: string }>('POST', '/api/v1/settings/connect/manage'),
   themes: () => request<ThemeList>('GET', '/api/v1/themes'),
   // theme: "" follows the server's default.
   myTheme: () => request<{ theme: string }>('GET', '/api/v1/me/theme'),

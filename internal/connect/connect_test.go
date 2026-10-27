@@ -5,6 +5,8 @@ import (
 	"crypto/ed25519"
 	"encoding/json"
 	"errors"
+	"fmt"
+	"io"
 	"net"
 	"net/http"
 	"net/http/httptest"
@@ -58,7 +60,7 @@ func TestRegisterAndLookUp(t *testing.T) {
 	if _, code := lookup(t, ts.URL, c.ID()); code != http.StatusNotFound {
 		t.Fatalf("unregistered lookup %d", code)
 	}
-	reg, err := c.Register(ctx, 7443)
+	reg, err := c.Register(ctx, 7443, "")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -72,13 +74,13 @@ func TestRegisterAndLookUp(t *testing.T) {
 	// A new address replaces the old one of its family; IPv6 sits beside it.
 	time.Sleep(1100 * time.Millisecond) // registrations are ordered by the second
 	ip = "198.51.100.9"
-	if _, err := c.Register(ctx, 443); err != nil {
+	if _, err := c.Register(ctx, 443, ""); err != nil {
 		t.Fatal(err)
 	}
 	ip = "2001:db8::1"
 	svc.AllowPrivate = true // 2001:db8::/32 is for documentation
 	time.Sleep(1100 * time.Millisecond)
-	if _, err := c.Register(ctx, 7443); err != nil {
+	if _, err := c.Register(ctx, 7443, ""); err != nil {
 		t.Fatal(err)
 	}
 	f, _ := lookup(t, ts.URL, c.ID())
@@ -88,7 +90,7 @@ func TestRegisterAndLookUp(t *testing.T) {
 
 	// Port 0 takes the address of its family down.
 	time.Sleep(1100 * time.Millisecond)
-	if _, err := c.Register(ctx, 0); err != nil {
+	if _, err := c.Register(ctx, 0, ""); err != nil {
 		t.Fatal(err)
 	}
 	if f, _ := lookup(t, ts.URL, c.ID()); len(f.URLs) != 1 || f.URLs[0] != "https://198.51.100.9" {
@@ -102,7 +104,7 @@ func TestRegistrationsExpire(t *testing.T) {
 	svc := &Service{Now: func() time.Time { return now }}
 	ts := serve(t, svc, &ip)
 	c := newClient(t, ts.URL)
-	if _, err := c.Register(context.Background(), 7443); err != nil {
+	if _, err := c.Register(context.Background(), 7443, ""); err != nil {
 		t.Fatal(err)
 	}
 	now = now.Add(ttl + time.Minute)
@@ -155,7 +157,7 @@ func TestRegisterRefuses(t *testing.T) {
 
 	// Private and shared addresses can't be reached, so aren't registered.
 	for _, ip = range []string{"192.168.1.20", "100.64.3.4"} {
-		if _, err := c.Register(context.Background(), 7443); err == nil {
+		if _, err := c.Register(context.Background(), 7443, ""); err == nil {
 			t.Errorf("registered from %s", ip)
 		}
 	}
@@ -175,11 +177,11 @@ func TestCheckOnlyDialsTheCaller(t *testing.T) {
 	}}
 	ts := serve(t, svc, &ip)
 	c := newClient(t, ts.URL)
-	got, ok, err := c.Check(context.Background(), 443)
+	got, ok, err := c.Check(context.Background(), 443, "")
 	if err != nil || got.String() != ip || !ok {
 		t.Fatalf("check 443: %v %v %v", got, ok, err)
 	}
-	if _, ok, _ := c.Check(context.Background(), 7443); ok {
+	if _, ok, _ := c.Check(context.Background(), 7443, ""); ok {
 		t.Fatal("closed port reachable")
 	}
 	if strings.Join(dialed, " ") != "203.0.113.7:443 203.0.113.7:7443" {
@@ -212,5 +214,107 @@ func TestLoadKeyKeepsTheID(t *testing.T) {
 	}
 	if ID(a.Public().(ed25519.PublicKey)) != ID(b.Public().(ed25519.PublicKey)) || !validID(ID(a.Public().(ed25519.PublicKey))) {
 		t.Fatal("id changed or invalid")
+	}
+}
+
+// fakeStripe answers for Checkout Sessions as Stripe does, with sessions
+// keyed by id.
+func fakeStripe(t *testing.T, sessions map[string]string) *Stripe {
+	t.Helper()
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.Header.Get("Authorization") != "Bearer rk_test" || r.URL.Query().Get("expand[]") != "subscription" {
+			http.Error(w, "unauthorized", http.StatusUnauthorized)
+			return
+		}
+		body, ok := sessions[strings.TrimPrefix(r.URL.Path, "/v1/checkout/sessions/")]
+		if !ok {
+			http.NotFound(w, r)
+			return
+		}
+		io.WriteString(w, body)
+	}))
+	t.Cleanup(ts.Close)
+	return &Stripe{Key: "rk_test", BaseURL: ts.URL}
+}
+
+func TestSubscriptionGatesTheService(t *testing.T) {
+	ip := "203.0.113.7"
+	c := newClient(t, "")
+	other := newClient(t, "")
+	end := time.Now().Add(20 * 24 * time.Hour).Unix()
+	session := func(server, status, payment, subStatus string) string {
+		return fmt.Sprintf(`{"status":%q,"payment_status":%q,"metadata":{"product":"matinee-connect","server":%q},
+			"subscription":{"status":%q,"items":{"data":[{"current_period_start":%d,"current_period_end":%d}]}}}`,
+			status, payment, server, subStatus, time.Now().Add(-10*24*time.Hour).Unix(), end)
+	}
+	stripe := fakeStripe(t, map[string]string{
+		"cs_paid":    session(c.ID(), "complete", "paid", "active"),
+		"cs_open":    session(c.ID(), "open", "unpaid", ""),
+		"cs_theirs":  session(other.ID(), "complete", "paid", "active"),
+		"cs_ended":   session(c.ID(), "complete", "paid", "canceled"),
+		"cs_pastdue": session(c.ID(), "complete", "paid", "past_due"),
+	})
+	svc := &Service{Stripe: stripe, PassKey: []byte("secret"), Dial: func(context.Context, string, string) (net.Conn, error) {
+		a, b := net.Pipe()
+		b.Close()
+		return a, nil
+	}}
+	ts := serve(t, svc, &ip)
+	c.URL = ts.URL
+	ctx := context.Background()
+
+	// Without a pass, nothing but taking a registration down.
+	if _, err := c.Register(ctx, 7443, ""); !NeedsSubscription(err) {
+		t.Fatalf("register without a pass: %v", err)
+	}
+	if _, _, err := c.Check(ctx, 443, ""); !NeedsSubscription(err) {
+		t.Fatalf("check without a pass: %v", err)
+	}
+	if _, err := c.Register(ctx, 0, ""); err != nil {
+		t.Fatalf("taking down: %v", err)
+	}
+
+	for s, want := range map[string]error{"cs_open": ErrNotPaid, "cs_theirs": ErrEnded, "cs_ended": ErrEnded, "cs_missing": ErrEnded} {
+		if _, err := c.Subscribe(ctx, s); !errors.Is(err, want) {
+			t.Errorf("%s: %v, want %v", s, err, want)
+		}
+	}
+	p, err := c.Subscribe(ctx, "cs_paid")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if p.Until != time.Unix(end, 0).Add(grace).Unix() {
+		t.Errorf("until %v", time.Unix(p.Until, 0))
+	}
+	time.Sleep(1100 * time.Millisecond) // after the takedown's second
+	if _, err := c.Register(ctx, 7443, p.Pass); err != nil {
+		t.Fatalf("register with a pass: %v", err)
+	}
+	if _, ok, err := c.Check(ctx, 443, p.Pass); err != nil || !ok {
+		t.Fatalf("check with a pass: %v %v", ok, err)
+	}
+	// A pass is for its own server only.
+	other.URL = ts.URL
+	if _, err := other.Register(ctx, 7443, p.Pass); !NeedsSubscription(err) {
+		t.Fatalf("someone else's pass: %v", err)
+	}
+	// A renewal that isn't paid leaves only the grace from the period's start.
+	if p, err := c.Subscribe(ctx, "cs_pastdue"); err != nil || p.Until > time.Now().Unix() {
+		t.Fatalf("past due: %v %v", time.Unix(p.Until, 0), err)
+	}
+}
+
+func TestPass(t *testing.T) {
+	key := []byte("k")
+	now := time.Now()
+	p := makePass(key, pass{ID: "abc", Until: now.Add(time.Hour).Unix()})
+	if !checkPass(key, p, "abc", now) {
+		t.Fatal("good pass refused")
+	}
+	if checkPass(key, p, "abd", now) || checkPass([]byte("other"), p, "abc", now) || checkPass(key, p, "abc", now.Add(2*time.Hour)) {
+		t.Fatal("bad pass accepted")
+	}
+	if checkPass(key, p[:len(p)-2]+"AA", "abc", now) || checkPass(key, "v1.x", "abc", now) {
+		t.Fatal("forged pass accepted")
 	}
 }

@@ -54,9 +54,12 @@ type Status struct {
 	ListenPort int `json:"listenPort,omitempty"`
 	// Findable means the connect service knows the current address, so
 	// the apps find this server even after the address changes.
-	Findable           bool       `json:"findable,omitempty"`
-	CertificateExpires *time.Time `json:"certificateExpires,omitempty"`
-	CheckedAt          *time.Time `json:"checkedAt,omitempty"`
+	Findable bool `json:"findable,omitempty"`
+	// Connect is the Matinee Connect subscription that pays for that;
+	// nil when the server uses a service that needs none.
+	Connect            *ConnectStatus `json:"connect,omitempty"`
+	CertificateExpires *time.Time     `json:"certificateExpires,omitempty"`
+	CheckedAt          *time.Time     `json:"checkedAt,omitempty"`
 }
 
 const (
@@ -75,6 +78,9 @@ type Manager struct {
 	// Connect is the service the apps look this server up with; nil for
 	// none, which also rules out a port forwarded by hand.
 	Connect *connect.Client
+	// Billing is where Matinee Connect is bought, for Yeix's service;
+	// nil for one that needs no subscription.
+	Billing *connect.Billing
 
 	// For tests: the ACME directory (default Let's Encrypt), an HTTP client
 	// for it, a router, challenges to try, and accepting private addresses.
@@ -94,6 +100,10 @@ type Manager struct {
 	router    router // nil until found
 	mapped    int    // external port forwarded to the listener; 0 if none
 	lastFail  time.Time
+
+	subMu      sync.Mutex // guards subscription.json and subProblem
+	subProblem string
+	subWake    chan struct{}
 
 	cert            atomic.Pointer[tls.Certificate]
 	alpnCert        atomic.Pointer[tls.Certificate]
@@ -170,21 +180,30 @@ func (m *Manager) Lookup() (id, url string) {
 // Status reports how remote access is doing.
 func (m *Manager) Status() Status {
 	m.mu.Lock()
-	defer m.mu.Unlock()
 	s := m.status
 	if !m.enabled {
 		s = Status{State: StateOff}
 	}
+	m.mu.Unlock()
+	s.Connect = m.ConnectStatus()
 	return s
 }
 
 // URL is the address the apps use away from home, or "" while there's none.
 func (m *Manager) URL() string {
-	s := m.Status()
-	if s.State != StateReady {
+	m.mu.Lock()
+	defer m.mu.Unlock()
+	if !m.enabled || m.status.State != StateReady {
 		return ""
 	}
-	return s.URL
+	return m.status.URL
+}
+
+// Findable reports whether the apps can look this server up right now.
+func (m *Manager) Findable() bool {
+	m.mu.Lock()
+	defer m.mu.Unlock()
+	return m.enabled && m.status.State == StateReady && m.status.Findable
 }
 
 // Run keeps remote access up while it's on, until ctx ends; then it takes
@@ -196,6 +215,10 @@ func (m *Manager) Run(ctx context.Context) {
 	m.mu.Unlock()
 	if c := m.loadCert(); c != nil {
 		m.cert.Store(c)
+	}
+	if m.Connect != nil && m.Billing != nil {
+		m.subWake = make(chan struct{}, 1)
+		go m.runSubscription(ctx)
 	}
 	t := time.NewTimer(checkEvery)
 	defer t.Stop()
@@ -267,7 +290,13 @@ func (m *Manager) setUp(ctx context.Context) (Status, error) {
 		if m.Connect == nil {
 			return st, errors.New("a port forwarded by hand needs the connect service, which this server has turned off (MATINEE_CONNECT_URL)")
 		}
-		r = &forwardedPort{ext: forwarded, internal: m.port, check: m.Connect.Check}
+		pass := m.pass()
+		if m.needsPass() && pass == "" {
+			return st, errors.New("checking a port forwarded by hand needs Matinee Connect. Subscribe below, or turn on UPnP or NAT-PMP in the router's settings and set Router port back to asking the router")
+		}
+		r = &forwardedPort{ext: forwarded, internal: m.port, check: func(ctx context.Context, port int) (netip.Addr, bool, error) {
+			return m.Connect.Check(ctx, port, m.pass())
+		}}
 		m.router = r
 	}
 	if r == nil {
@@ -393,7 +422,11 @@ func (m *Manager) register(ctx context.Context, ext int, want string) bool {
 	if m.Connect == nil {
 		return false
 	}
-	reg, err := m.Connect.Register(ctx, ext)
+	pass := m.pass()
+	if m.needsPass() && pass == "" {
+		return false
+	}
+	reg, err := m.Connect.Register(ctx, ext, pass)
 	if err != nil {
 		m.Log.Warn("couldn't tell the connect service this server's address; the apps find it when they're home", "err", err)
 		return false
@@ -418,7 +451,7 @@ func (m *Manager) dropRouter(ctx context.Context) {
 func (m *Manager) stop(ctx context.Context) {
 	if m.Connect != nil && m.mapped != 0 {
 		ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
-		if _, err := m.Connect.Register(ctx, 0); err != nil {
+		if _, err := m.Connect.Register(ctx, 0, ""); err != nil {
 			m.Log.Debug("couldn't take the connect registration down; it expires by itself", "err", err)
 		}
 		cancel()

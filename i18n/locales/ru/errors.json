@@ -18,6 +18,7 @@
   "bad_item": "неверный элемент",
   "bad_library": "неверная медиатека",
   "bad_request": "неверный запрос",
+  "billing_couldnt_be_reached_try_again_in_a_minute": "не удалось связаться с оплатой; попробуйте через минуту",
   "box_set_not_found": "подборка не найдена",
   "cant_read_that_folder": "не удаётся прочитать эту папку",
   "collection_not_found": "коллекция не найдена",
@@ -67,6 +68,7 @@
   "password_must_be_at_most_72_bytes": "пароль должен быть не длиннее 72 байт",
   "person_not_found": "человек не найден",
   "picture_subtitles_need_a_converted_quality_not_the_original_file": "графическим субтитрам нужно перекодированное качество, а не исходный файл",
+  "plan_must_be_monthly_or_yearly": "plan должен быть monthly или yearly",
   "remoteforwardedport_must_be_443_80_or_0": "remoteForwardedPort должен быть 443, 80 или 0",
   "replaced_by_a_newer_seek": "заменено более новой перемоткой",
   "request_not_found": "запрос не найден",
@@ -83,6 +85,7 @@
   "this_code_expired_ask_for_another": "срок действия кода истёк; запроси новый",
   "this_download_belongs_to_another_device": "эта загрузка принадлежит другому устройству",
   "this_server_doesnt_watch_library_folders": "этот сервер не следит за папками медиатек",
+  "this_server_has_no_matinee_connect_subscription_bought_in_its_settings": "для этого сервера в его настройках не куплена подписка Matinee Connect",
   "title_is_already_in_your_library": "«{{title}}» уже в твоей медиатеке",
   "title_is_already_on_its_way": "«{{title}}» уже в пути",
   "too_many_wrong_pins_try_again_in_a_minute": "слишком много неверных PIN-кодов; попробуй через минуту",
@@ -103,5 +106,7 @@
   "no_such_row": "такого ряда нет",
   "tmdb_didnt_accept_that_key": "TMDB не принял этот ключ",
   "tmdb_couldnt_be_reached_to_check_the_key": "Не удалось связаться с TMDB, чтобы проверить ключ",
-  "this_server_cant_change_its_tmdb_key": "этот сервер не может сменить свой ключ TMDB"
+  "this_server_cant_change_its_tmdb_key": "этот сервер не может сменить свой ключ TMDB",
+  "this_server_doesnt_offer_remote_access": "этот сервер не предлагает удалённый доступ",
+  "this_server_doesnt_use_matinee_connect": "этот сервер не использует Matinee Connect"
 }

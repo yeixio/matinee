@@ -4,6 +4,7 @@ import (
 	"context"
 	"crypto/ed25519"
 	"encoding/json"
+	"errors"
 	"net"
 	"net/http"
 	"net/netip"
@@ -24,6 +25,10 @@ type Service struct {
 	AllowPrivate bool
 	// Now is the clock, for tests.
 	Now func() time.Time
+	// Stripe reads the checkouts that buy passes, and PassKey signs the
+	// passes. Without Stripe, servers need no pass (pass.go).
+	Stripe  *Stripe
+	PassKey []byte
 
 	mu      sync.Mutex
 	servers map[string]*entry
@@ -53,7 +58,7 @@ const maxServers = 1_000_000
 const skew = 5 * time.Minute
 
 // How many of each request one address may make a minute.
-var perMinute = map[string]int{"register": 30, "check": 10, "lookup": 60}
+var perMinute = map[string]int{"register": 30, "check": 10, "lookup": 60, "subscription": 20}
 
 type limitKey struct {
 	kind string
@@ -65,6 +70,7 @@ func (s *Service) Handler() http.Handler {
 	mux := http.NewServeMux()
 	mux.HandleFunc("POST /v1/register", s.register)
 	mux.HandleFunc("POST /v1/check", s.check)
+	mux.HandleFunc("POST /v1/subscription", s.subscription)
 	mux.HandleFunc("GET /v1/servers/{id}", s.lookup)
 	mux.HandleFunc("GET /healthz", func(w http.ResponseWriter, r *http.Request) { w.Write([]byte("ok\n")) })
 	return mux
@@ -117,26 +123,19 @@ func (s *Service) register(w http.ResponseWriter, r *http.Request) {
 	if !ok {
 		return
 	}
-	var in signed
-	if err := json.NewDecoder(http.MaxBytesReader(w, r.Body, 4096)).Decode(&in); err != nil {
-		fail(w, http.StatusBadRequest, "bad request")
-		return
-	}
-	if len(in.Key) != ed25519.PublicKeySize || !ed25519.Verify(in.Key, append([]byte(signContext), in.Payload...), in.Sig) {
-		fail(w, http.StatusForbidden, "bad signature")
-		return
-	}
 	var reg registration
-	if err := json.Unmarshal(in.Payload, &reg); err != nil || reg.Port < 0 || reg.Port > 65535 {
+	id, ok := s.signedBy(w, r, &reg)
+	if !ok {
+		return
+	}
+	if reg.Port < 0 || reg.Port > 65535 {
 		fail(w, http.StatusBadRequest, "bad registration")
 		return
 	}
 	now := s.now()
-	if d := now.Sub(time.Unix(reg.Time, 0)); d > skew || d < -skew {
-		fail(w, http.StatusBadRequest, "clock is off")
+	if reg.Port != 0 && !s.paid(w, reg.Pass, id, now) {
 		return
 	}
-	id := ID(in.Key)
 	out := Registered{ID: id, TTL: int(ttl.Seconds())}
 	s.mu.Lock()
 	defer s.mu.Unlock()
@@ -181,11 +180,16 @@ func (s *Service) check(w http.ResponseWriter, r *http.Request) {
 	if !ok {
 		return
 	}
-	var in struct {
-		Port int `json:"port"`
+	var in checkRequest
+	id, ok := s.signedBy(w, r, &in)
+	if !ok {
+		return
 	}
-	if err := json.NewDecoder(http.MaxBytesReader(w, r.Body, 1024)).Decode(&in); err != nil || in.Port < 1 || in.Port > 65535 {
+	if in.Port < 1 || in.Port > 65535 {
 		fail(w, http.StatusBadRequest, "bad request")
+		return
+	}
+	if !s.paid(w, in.Pass, id, s.now()) {
 		return
 	}
 	dial := s.Dial
@@ -200,6 +204,76 @@ func (s *Service) check(w http.ResponseWriter, r *http.Request) {
 		out.Reachable = true
 	}
 	writeJSON(w, out)
+}
+
+// subscription trades a paid Checkout Session for a pass (pass.go).
+func (s *Service) subscription(w http.ResponseWriter, r *http.Request) {
+	if _, ok := s.client(w, r, "subscription"); !ok {
+		return
+	}
+	var in subscriptionRequest
+	id, ok := s.signedBy(w, r, &in)
+	if !ok {
+		return
+	}
+	if s.Stripe == nil {
+		fail(w, http.StatusNotFound, "this service needs no subscription")
+		return
+	}
+	if !validSession(in.Session) {
+		fail(w, http.StatusBadRequest, "bad checkout session")
+		return
+	}
+	until, err := s.Stripe.paidUntil(r.Context(), in.Session, id)
+	switch {
+	case errors.Is(err, errNotPaid):
+		fail(w, http.StatusPaymentRequired, err.Error())
+		return
+	case errors.Is(err, errNotFound):
+		fail(w, http.StatusNotFound, err.Error())
+		return
+	case errors.Is(err, errEnded):
+		fail(w, http.StatusGone, err.Error())
+		return
+	case err != nil:
+		fail(w, http.StatusBadGateway, "billing couldn't be reached")
+		return
+	}
+	writeJSON(w, Pass{Pass: makePass(s.PassKey, pass{ID: id, Until: until.Unix()}), Until: until.Unix()})
+}
+
+// paid reports whether pass lets server id use the service, and answers
+// the request itself when it doesn't.
+func (s *Service) paid(w http.ResponseWriter, pass, id string, now time.Time) bool {
+	if s.Stripe == nil || checkPass(s.PassKey, pass, id, now) {
+		return true
+	}
+	fail(w, http.StatusPaymentRequired, "this server has no Matinee Connect subscription")
+	return false
+}
+
+// signedBy reads a signed request into payload, which must have a Time,
+// and returns the id of the server that signed it; it answers the request
+// itself when it returns false.
+func (s *Service) signedBy(w http.ResponseWriter, r *http.Request, payload interface{ time() int64 }) (string, bool) {
+	var in signed
+	if err := json.NewDecoder(http.MaxBytesReader(w, r.Body, 4096)).Decode(&in); err != nil {
+		fail(w, http.StatusBadRequest, "bad request")
+		return "", false
+	}
+	if len(in.Key) != ed25519.PublicKeySize || !ed25519.Verify(in.Key, append([]byte(signContext), in.Payload...), in.Sig) {
+		fail(w, http.StatusForbidden, "bad signature")
+		return "", false
+	}
+	if err := json.Unmarshal(in.Payload, payload); err != nil {
+		fail(w, http.StatusBadRequest, "bad request")
+		return "", false
+	}
+	if d := s.now().Sub(time.Unix(payload.time(), 0)); d > skew || d < -skew {
+		fail(w, http.StatusBadRequest, "clock is off")
+		return "", false
+	}
+	return ID(in.Key), true
 }
 
 func (s *Service) lookup(w http.ResponseWriter, r *http.Request) {

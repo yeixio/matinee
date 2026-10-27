@@ -18,6 +18,7 @@
   "bad_item": "μη έγκυρο στοιχείο",
   "bad_library": "μη έγκυρη βιβλιοθήκη",
   "bad_request": "μη έγκυρο αίτημα",
+  "billing_couldnt_be_reached_try_again_in_a_minute": "η χρέωση δεν είναι διαθέσιμη· δοκίμασε ξανά σε ένα λεπτό",
   "box_set_not_found": "η συλλογή ταινιών δεν βρέθηκε",
   "cant_read_that_folder": "δεν είναι δυνατή η ανάγνωση αυτού του φακέλου",
   "collection_not_found": "η συλλογή δεν βρέθηκε",
@@ -67,6 +68,7 @@
   "password_must_be_at_most_72_bytes": "ο κωδικός πρέπει να έχει το πολύ 72 byte",
   "person_not_found": "το πρόσωπο δεν βρέθηκε",
   "picture_subtitles_need_a_converted_quality_not_the_original_file": "οι υπότιτλοι εικόνας χρειάζονται μετατρεπόμενη ποιότητα, όχι το αρχικό αρχείο",
+  "plan_must_be_monthly_or_yearly": "το plan πρέπει να είναι monthly ή yearly",
   "remoteforwardedport_must_be_443_80_or_0": "το remoteForwardedPort πρέπει να είναι 443, 80 ή 0",
   "replaced_by_a_newer_seek": "αντικαταστάθηκε από νεότερη μετάβαση",
   "request_not_found": "το αίτημα δεν βρέθηκε",
@@ -83,6 +85,7 @@
   "this_code_expired_ask_for_another": "ο κωδικός έληξε· ζήτησε άλλον",
   "this_download_belongs_to_another_device": "αυτή η λήψη ανήκει σε άλλη συσκευή",
   "this_server_doesnt_watch_library_folders": "αυτός ο διακομιστής δεν παρακολουθεί φακέλους βιβλιοθήκης",
+  "this_server_has_no_matinee_connect_subscription_bought_in_its_settings": "αυτός ο διακομιστής δεν έχει συνδρομή Matinee Connect αγορασμένη από τις ρυθμίσεις του",
   "title_is_already_in_your_library": "το {{title}} είναι ήδη στη βιβλιοθήκη σου",
   "title_is_already_on_its_way": "το {{title}} είναι ήδη στον δρόμο",
   "too_many_wrong_pins_try_again_in_a_minute": "πάρα πολλά λάθος PIN· δοκίμασε ξανά σε ένα λεπτό",
@@ -103,5 +106,7 @@
   "no_such_row": "δεν υπάρχει τέτοια σειρά",
   "tmdb_didnt_accept_that_key": "Το TMDB δεν δέχτηκε αυτό το κλειδί",
   "tmdb_couldnt_be_reached_to_check_the_key": "Δεν ήταν δυνατή η σύνδεση με το TMDB για έλεγχο του κλειδιού",
-  "this_server_cant_change_its_tmdb_key": "αυτός ο διακομιστής δεν μπορεί να αλλάξει το κλειδί TMDB του"
+  "this_server_cant_change_its_tmdb_key": "αυτός ο διακομιστής δεν μπορεί να αλλάξει το κλειδί TMDB του",
+  "this_server_doesnt_offer_remote_access": "αυτός ο διακομιστής δεν προσφέρει απομακρυσμένη πρόσβαση",
+  "this_server_doesnt_use_matinee_connect": "αυτός ο διακομιστής δεν χρησιμοποιεί το Matinee Connect"
 }

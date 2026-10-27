@@ -18,6 +18,7 @@
   "bad_item": "مورد نامعتبر",
   "bad_library": "کتابخانه‌ی نامعتبر",
   "bad_request": "درخواست نامعتبر",
+  "billing_couldnt_be_reached_try_again_in_a_minute": "دسترسی به صورت‌حساب ممکن نشد؛ یک دقیقه دیگر دوباره امتحان کنید",
   "box_set_not_found": "مجموعه‌ی جعبه‌ای پیدا نشد",
   "cant_read_that_folder": "آن پوشه خوانده نمی‌شود",
   "collection_not_found": "مجموعه پیدا نشد",
@@ -67,6 +68,7 @@
   "password_must_be_at_most_72_bytes": "گذرواژه حداکثر ۷۲ بایت می‌تواند باشد",
   "person_not_found": "شخص پیدا نشد",
   "picture_subtitles_need_a_converted_quality_not_the_original_file": "زیرنویس‌های تصویری به کیفیت تبدیل‌شده نیاز دارند، نه فایل اصلی",
+  "plan_must_be_monthly_or_yearly": "plan باید monthly یا yearly باشد",
   "remoteforwardedport_must_be_443_80_or_0": "remoteForwardedPort باید 443، 80 یا 0 باشد",
   "replaced_by_a_newer_seek": "با جابه‌جایی جدیدتری جایگزین شد",
   "request_not_found": "درخواست پیدا نشد",
@@ -83,6 +85,7 @@
   "this_code_expired_ask_for_another": "این کد منقضی شد؛ کد دیگری بخواهید",
   "this_download_belongs_to_another_device": "این دانلود متعلق به دستگاه دیگری است",
   "this_server_doesnt_watch_library_folders": "این سرور پوشه‌های کتابخانه را پیگیری نمی‌کند",
+  "this_server_has_no_matinee_connect_subscription_bought_in_its_settings": "این سرور اشتراک Matinee Connect خریداری‌شده در تنظیماتش ندارد",
   "title_is_already_in_your_library": "{{title}} از قبل در کتابخانه‌ی شماست",
   "title_is_already_on_its_way": "{{title}} از قبل در راه است",
   "too_many_wrong_pins_try_again_in_a_minute": "PIN اشتباه بیش از حد؛ یک دقیقه دیگر دوباره امتحان کنید",
@@ -103,5 +106,7 @@
   "no_such_row": "چنین ردیفی وجود ندارد",
   "tmdb_didnt_accept_that_key": "TMDB این کلید را نپذیرفت",
   "tmdb_couldnt_be_reached_to_check_the_key": "برای بررسی کلید نمی‌توان به TMDB دسترسی پیدا کرد",
-  "this_server_cant_change_its_tmdb_key": "این سرور نمی‌تواند کلید TMDB خود را تغییر دهد"
+  "this_server_cant_change_its_tmdb_key": "این سرور نمی‌تواند کلید TMDB خود را تغییر دهد",
+  "this_server_doesnt_offer_remote_access": "این سرور دسترسی از راه دور ارائه نمی‌دهد",
+  "this_server_doesnt_use_matinee_connect": "این سرور از Matinee Connect استفاده نمی‌کند"
 }

@@ -698,6 +698,18 @@
       "save": "Lưu khóa",
       "remove": "Xóa khóa đã lưu",
       "saved": "Đã lưu. Matinee đang bổ sung áp phích và chi tiết."
+    },
+    "connect": {
+      "title": "Matinee Connect",
+      "about": "Giúp các ứng dụng vẫn tìm thấy máy chủ này khi địa chỉ internet của nhà bạn thay đổi. Dịch vụ chỉ biết địa chỉ: video luôn đi thẳng từ máy chủ này tới các ứng dụng.",
+      "active": "Hoạt động đến {{date}}. Tự gia hạn.",
+      "manage": "Quản lý gói đăng ký",
+      "waiting": "Đang chờ thanh toán hoàn tất…",
+      "openCheckout": "Mở lại trang thanh toán",
+      "ended": "Gói đăng ký đã kết thúc. Cho đến khi bạn đăng ký lại, các ứng dụng chỉ biết địa chỉ mới khi ở nhà.",
+      "perYear": "{{price}} mỗi năm",
+      "perMonth": "{{price}} mỗi tháng",
+      "paid": "Yeix thu tiền trước. Hủy bất cứ lúc nào; gói vẫn dùng được đến hết kỳ đã trả."
     }
   },
   "language": {

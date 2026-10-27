@@ -702,6 +702,18 @@
       "save": "Sleutel opslaan",
       "remove": "Opgeslagen sleutel verwijderen",
       "saved": "Opgeslagen. Matinee vult nu posters en details aan."
+    },
+    "connect": {
+      "title": "Matinee Connect",
+      "about": "Zorgt dat de apps deze server blijven vinden als het internetadres van je huis verandert. De dienst kent alleen het adres: video gaat altijd rechtstreeks van deze server naar de apps.",
+      "active": "Actief tot {{date}}. Verlengt vanzelf.",
+      "manage": "Abonnement beheren",
+      "waiting": "Wachten tot de betaling rond is…",
+      "openCheckout": "Betaalpagina opnieuw openen",
+      "ended": "Het abonnement is afgelopen. Tot je opnieuw abonneert, leren de apps een nieuw adres alleen thuis.",
+      "perYear": "{{price}} per jaar",
+      "perMonth": "{{price}} per maand",
+      "paid": "Vooraf gefactureerd door Yeix. Altijd opzegbaar; het loopt tot het eind van de betaalde periode."
     }
   },
   "language": {
