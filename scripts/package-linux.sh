@@ -40,9 +40,10 @@ version: "${PKG_VERSION}"
 maintainer: YEIXIO LLC <hello@yeix.io>
 description: |-
   Self-hosted media server for movies, TV and music
-  A fast, self-hosted media server for your movies, TV and music. Runs as
-  matinee.service on port 7171, with its data in /var/lib/matinee.
-homepage: https://github.com/yeixio/matinee
+  A fast, free and open source, self-hosted media server for your movies, TV
+  and music. Runs as matinee.service on port 7171, with its data in
+  /var/lib/matinee.
+homepage: https://matinee.yeix.io
 license: AGPL-3.0-or-later
 section: video
 contents:

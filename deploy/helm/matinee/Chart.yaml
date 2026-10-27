@@ -1,10 +1,10 @@
 apiVersion: v2
 name: matinee
-description: Matinee, a fast self-hosted media server for movies, TV and music
+description: Matinee, a free and open source, self-hosted media server for movies, TV and music
 type: application
 version: 0.1.0
 appVersion: "0.1.0"
-home: https://github.com/yeixio/matinee
+home: https://matinee.yeix.io
 sources:
   - https://github.com/yeixio/matinee
-keywords: [media, media-server, streaming, self-hosted, movies, tv, music]
+keywords: [media-server, self-hosted, home-media, streaming, movies, tv, music, transcoding]

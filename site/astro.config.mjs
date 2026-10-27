@@ -25,7 +25,7 @@ export default defineConfig({
   integrations: [
     starlight({
       title: 'Matinee',
-      description: 'A fast, self-hosted media server for your movies, TV and music.',
+      description: 'The guide to Matinee, a free, open source, self-hosted media server for your movies, TV and music.',
       logo: { src: './public/favicon.svg', alt: '' },
       favicon: '/favicon.svg',
       customCss: ['@fontsource-variable/inter', '@fontsource-variable/fraunces', './src/styles/docs.css'],
@@ -36,7 +36,13 @@ export default defineConfig({
         SiteTitle: './src/components/SiteTitle.astro',
         Banner: './src/components/VersionBanner.astro',
       },
-      head: [{ tag: 'meta', attrs: { name: 'docs-version', content: version } }],
+      routeMiddleware: './src/routeData.ts',
+      head: [
+        { tag: 'meta', attrs: { name: 'docs-version', content: version } },
+        // Only the latest release's guide at / belongs in search results. Main's
+        // guide at /next/ and each release's copy at /<tag>/ would compete with it.
+        ...(base === '/' ? [] : [{ tag: 'meta', attrs: { name: 'robots', content: 'noindex, follow' } }]),
+      ],
     }),
   ],
 })
