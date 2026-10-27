@@ -1,0 +1,310 @@
+{
+  "duration": {
+    "minutes": "{{minutes}} นาที",
+    "hoursMinutes": "{{hours}} ชม. {{minutes}} นาที"
+  },
+  "episodeCode": "ซ.{{season}} · ต.{{episode}}",
+  "seasonN": "ซีซัน {{season}}",
+  "specials": "ตอนพิเศษ",
+  "media": {
+    "mono": "โมโน",
+    "stereo": "สเตอริโอ",
+    "lossless": "Lossless",
+    "hiRes": "Hi-Res",
+    "dolbyVisionProfile": "Dolby Vision โปรไฟล์ {{profile}}",
+    "withBase": "{{format}} พร้อม {{base}} สำหรับจออื่น",
+    "bitDepth": "{{bits}} บิต",
+    "forced": "บังคับ",
+    "sdh": "SDH"
+  },
+  "people": {
+    "episodes_other": "{{count}} ตอน",
+    "lines": {
+      "createdBy": "สร้างโดย",
+      "director_other": "ผู้กำกับ",
+      "writer_other": "ผู้เขียนบท",
+      "basedOn": "สร้างจาก",
+      "music": "ดนตรี"
+    },
+    "died": "เสียชีวิต {{date}}",
+    "bornIn": "เกิดที่ {{place}}",
+    "bornOnIn": "เกิด {{date}} ที่ {{place}}",
+    "bornOn": "เกิด {{date}}",
+    "dollars": "${{amount}}"
+  },
+  "facts": {
+    "firstAired": "ออกอากาศครั้งแรก",
+    "released": "ออกฉาย",
+    "aired": "ออกอากาศ",
+    "ended": "จบแล้ว",
+    "status": "สถานะ",
+    "seasons": "ซีซัน",
+    "seasonsValue_other": "{{seasons}} ({{count}} ตอน)",
+    "rated": "เรต",
+    "genres": "ประเภท",
+    "originalTitle": "ชื่อดั้งเดิม",
+    "originalLanguage": "ภาษาต้นฉบับ",
+    "spokenLanguages": "ภาษาที่พูด",
+    "studio_other": "สตูดิโอ",
+    "network_other": "ช่อง",
+    "country_other": "ประเทศ",
+    "collection": "คอลเลกชัน",
+    "budget": "ทุนสร้าง",
+    "boxOffice": "รายได้"
+  },
+  "showStatus": {
+    "Returning Series": "ยังมีต่อ",
+    "Ended": "จบแล้ว",
+    "Canceled": "ยกเลิก",
+    "In Production": "กำลังสร้าง",
+    "Planned": "วางแผนไว้",
+    "Pilot": "ตอนนำร่อง"
+  },
+  "genres": {
+    "Action": "แอ็กชัน",
+    "Adventure": "ผจญภัย",
+    "Animation": "แอนิเมชัน",
+    "Comedy": "ตลก",
+    "Crime": "อาชญากรรม",
+    "Documentary": "สารคดี",
+    "Drama": "ดราม่า",
+    "Family": "ครอบครัว",
+    "Fantasy": "แฟนตาซี",
+    "History": "ประวัติศาสตร์",
+    "Horror": "สยองขวัญ",
+    "Music": "ดนตรี",
+    "Mystery": "ลึกลับ",
+    "Romance": "โรแมนติก",
+    "Science Fiction": "ไซไฟ",
+    "Thriller": "ระทึกขวัญ",
+    "War": "สงคราม",
+    "Western": "คาวบอย",
+    "Reality": "เรียลลิตี้",
+    "TV Movie": "ภาพยนตร์โทรทัศน์",
+    "Action & Adventure": "แอ็กชันและผจญภัย",
+    "Kids": "เด็ก",
+    "News": "ข่าว",
+    "Sci-Fi & Fantasy": "ไซไฟและแฟนตาซี",
+    "Soap": "ละคร",
+    "Talk": "ทอล์กโชว์",
+    "War & Politics": "สงครามและการเมือง"
+  },
+  "jobs": {
+    "Director": "ผู้กำกับ",
+    "Creator": "ผู้สร้างสรรค์",
+    "Screenplay": "บทภาพยนตร์",
+    "Writer": "ผู้เขียนบท",
+    "Teleplay": "บทโทรทัศน์",
+    "Story": "เรื่อง",
+    "Novel": "นวนิยาย",
+    "Characters": "ตัวละคร",
+    "Author": "ผู้แต่ง",
+    "Original Music Composer": "ผู้ประพันธ์ดนตรีประกอบ",
+    "Music": "ดนตรี",
+    "Director of Photography": "ผู้กำกับภาพ",
+    "Editor": "ผู้ลำดับภาพ",
+    "Producer": "ผู้อำนวยการสร้าง",
+    "Executive Producer": "ผู้อำนวยการสร้างบริหาร",
+    "Casting": "คัดเลือกนักแสดง",
+    "Production Design": "ออกแบบงานสร้าง",
+    "Costume Design": "ออกแบบเครื่องแต่งกาย"
+  },
+  "kids": {
+    "littleKids": "เด็กเล็ก",
+    "kids": "เด็ก",
+    "teens": "วัยรุ่น",
+    "andYounger": "{{ratings}} และต่ำกว่า"
+  },
+  "sort": {
+    "title": "ชื่อเรื่อง",
+    "added": "วันที่เพิ่ม",
+    "released": "วันออกฉาย",
+    "year": "ปี",
+    "rating": "คะแนน",
+    "runtime": "ความยาว",
+    "lastPlayed": "ดูล่าสุด"
+  },
+  "watched": {
+    "unwatched": "ยังไม่ได้ดู",
+    "inProgress": "กำลังดู",
+    "watched": "ดูแล้ว",
+    "notStarted": "ยังไม่เริ่ม"
+  },
+  "genreRows": {
+    "Action": "แอ็กชันจัดเต็ม",
+    "Adventure": "ผจญภัย",
+    "Animation": "แอนิเมชันยอดนิยม",
+    "Comedy": "หนังตลก",
+    "Crime": "เรื่องอาชญากรรม",
+    "Documentary": "สารคดี",
+    "Drama": "ดราม่า",
+    "Family": "สำหรับทั้งครอบครัว",
+    "Fantasy": "โลกแฟนตาซี",
+    "Horror": "สยองขวัญ",
+    "Mystery": "ลึกลับ",
+    "Romance": "โรแมนติก",
+    "Science Fiction": "ไซไฟยอดนิยม",
+    "Thriller": "ระทึกขวัญ",
+    "War": "เรื่องสงคราม",
+    "Western": "คาวบอย"
+  },
+  "count": {
+    "episodes_other": "{{count}} ตอน",
+    "seasons_other": "{{count}} ซีซัน",
+    "albums_other": "{{count}} อัลบั้ม",
+    "tracks_other": "{{count}} เพลง",
+    "titles_other": "{{count}} เรื่อง"
+  },
+  "awards": {
+    "academy": {
+      "won_other": "ได้รับรางวัลออสการ์ {{count}} รางวัล",
+      "nominated_other": "เข้าชิงรางวัลออสการ์ {{count}} สาขา"
+    },
+    "emmy": {
+      "won_other": "ได้รับรางวัล Primetime Emmy {{count}} รางวัล",
+      "nominated_other": "เข้าชิงรางวัล Primetime Emmy {{count}} สาขา"
+    },
+    "globe": {
+      "won_other": "ได้รับรางวัลลูกโลกทองคำ {{count}} รางวัล",
+      "nominated_other": "เข้าชิงรางวัลลูกโลกทองคำ {{count}} สาขา"
+    },
+    "bafta": {
+      "won_other": "ได้รับรางวัล BAFTA {{count}} รางวัล",
+      "nominated_other": "เข้าชิงรางวัล BAFTA {{count}} สาขา"
+    },
+    "wins_other": "ชนะ {{count}} รางวัล",
+    "nominations_other": "เข้าชิง {{count}} สาขา",
+    "winsAndNominations": "{{wins}} และ{{nominations}}"
+  },
+  "departments": {
+    "Acting": "นักแสดง",
+    "Directing": "กำกับ",
+    "Writing": "เขียนบท",
+    "Production": "อำนวยการสร้าง",
+    "Sound": "เสียง",
+    "Camera": "กล้อง",
+    "Editing": "ลำดับภาพ",
+    "Art": "ศิลป์",
+    "Crew": "ทีมงาน",
+    "Visual Effects": "เทคนิคพิเศษด้านภาพ",
+    "Costume & Make-Up": "เครื่องแต่งกายและแต่งหน้า",
+    "Lighting": "แสง",
+    "Creator": "ผู้สร้างสรรค์"
+  },
+  "starters": {
+    "recent": "เพิ่มล่าสุด",
+    "unwatched": "ยังไม่ได้ดู",
+    "tonight": "สั้นพอสำหรับคืนนี้"
+  },
+  "filter": {
+    "decade": "ยุค {{decade}}",
+    "yearRange": "{{from}}–{{to}}",
+    "yearOrLater": "{{year}} หรือหลังจากนั้น",
+    "yearOrEarlier": "{{year}} หรือก่อนหน้านั้น",
+    "lastYear": "ปีที่ผ่านมา",
+    "lastWeeks_other": "{{count}} สัปดาห์ที่ผ่านมา",
+    "lastDays_other": "{{count}} วันที่ผ่านมา",
+    "runtime": {
+      "titles": {
+        "between": "{{min}}–{{max}} นาที",
+        "over": "มากกว่า {{min}} นาที",
+        "under": "น้อยกว่า {{max}} นาที"
+      },
+      "episodes": {
+        "between": "ตอนละ {{min}}–{{max}} นาที",
+        "over": "ตอนละมากกว่า {{min}} นาที",
+        "under": "ตอนละน้อยกว่า {{max}} นาที"
+      }
+    }
+  },
+  "themes": {
+    "clean": {
+      "name": "เรียบง่าย",
+      "description": "ขาวล้วน ฟ้าหนึ่งสี ไม่มีเชิง มีแค่โปสเตอร์"
+    },
+    "dark": {
+      "name": "มืด",
+      "description": "ดำสนิทและขาวคมชัด สบายตา และถนอมจอ OLED"
+    },
+    "drive-in": {
+      "name": "ไดรฟ์อิน",
+      "description": "น้ำตาลยุคเจ็ดศูนย์และสีอำพันของป้ายไฟ เหมือนค่ำคืนที่โรงหนังไดรฟ์อิน"
+    },
+    "high-contrast": {
+      "name": "คอนทราสต์สูง",
+      "description": "ดำ ขาว และเหลืองสด เพื่อตัวอักษรที่ชัดที่สุดจากอีกฝั่งของห้อง"
+    },
+    "light": {
+      "name": "สว่าง",
+      "description": "ขาวกระดาษอบอุ่นกับสีปะการัง สำหรับห้องที่สว่าง"
+    },
+    "matinee": {
+      "name": "Matinee",
+      "description": "ความมืดอบอุ่นของโรงละครกับสีปะการัง ลุคประจำบ้าน"
+    },
+    "sci-fi": {
+      "name": "ไซไฟ",
+      "description": "น้ำเงินห้วงอวกาศกับแสงนีออนฟ้าและฟอนต์ล้ำยุค"
+    }
+  },
+  "every": {
+    "seconds_other": "{{count}} วินาที",
+    "minutes_other": "{{count}} นาที",
+    "hours_other": "{{count}} ชั่วโมง"
+  },
+  "avatars": {
+    "coral": "ปะการัง",
+    "amber": "อำพัน",
+    "lime": "เขียวมะนาว",
+    "teal": "เขียวอมฟ้า",
+    "sky": "ฟ้า",
+    "violet": "ม่วง",
+    "pink": "ชมพู",
+    "slate": "เทาหิน"
+  },
+  "day": {
+    "today": "วันนี้",
+    "tomorrow": "พรุ่งนี้",
+    "yesterday": "เมื่อวาน"
+  },
+  "release": {
+    "cinemas": "ในโรงภาพยนตร์",
+    "digital": "ฉายแบบดิจิทัล",
+    "physical": "บนแผ่น",
+    "airs": "ออกอากาศ"
+  },
+  "issue": {
+    "video": "ภาพ",
+    "audio": "เสียง",
+    "subtitles": "คำบรรยาย",
+    "wrong": "ชื่อเรื่องผิด",
+    "other": "อย่างอื่น"
+  },
+  "holidays": {
+    "valentines": "สำหรับวันวาเลนไทน์",
+    "easter": "สำหรับอีสเตอร์",
+    "halloween": "ฤดูขนหัวลุก",
+    "thanksgiving": "สำหรับวันขอบคุณพระเจ้า",
+    "christmas": "เรื่องโปรดช่วงคริสต์มาส",
+    "newyear": "ต้อนรับปีใหม่"
+  },
+  "discover": {
+    "rows": {
+      "trending": "กำลังมาแรง",
+      "popular-movies": "หนังยอดนิยม",
+      "popular-shows": "ซีรีส์ยอดนิยม",
+      "upcoming-movies": "เร็วๆ นี้ในโรงภาพยนตร์",
+      "upcoming-shows": "ซีรีส์ใหม่ที่กำลังจะมา"
+    },
+    "because": "เพราะคุณดู {{title}}",
+    "status": {
+      "available": "อยู่ในคลังของคุณ",
+      "added": "กำลังมา",
+      "requested": "ขอแล้ว"
+    },
+    "kind": {
+      "movie": "หนัง",
+      "show": "ซีรีส์"
+    }
+  }
+}

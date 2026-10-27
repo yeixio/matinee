@@ -1,0 +1,310 @@
+{
+  "duration": {
+    "minutes": "{{minutes}}分",
+    "hoursMinutes": "{{hours}}時間{{minutes}}分"
+  },
+  "episodeCode": "S{{season}} · E{{episode}}",
+  "seasonN": "シーズン{{season}}",
+  "specials": "スペシャル",
+  "media": {
+    "mono": "モノラル",
+    "stereo": "ステレオ",
+    "lossless": "ロスレス",
+    "hiRes": "ハイレゾ",
+    "dolbyVisionProfile": "Dolby Vision プロファイル{{profile}}",
+    "withBase": "{{format}}（他の画面用に{{base}}）",
+    "bitDepth": "{{bits}}ビット",
+    "forced": "強制",
+    "sdh": "SDH"
+  },
+  "people": {
+    "episodes_other": "{{count}}話",
+    "lines": {
+      "createdBy": "クリエイター",
+      "director_other": "監督",
+      "writer_other": "脚本",
+      "basedOn": "原作",
+      "music": "音楽"
+    },
+    "died": "{{date}}没",
+    "bornIn": "{{place}}生まれ",
+    "bornOnIn": "{{date}}、{{place}}生まれ",
+    "bornOn": "{{date}}生まれ",
+    "dollars": "${{amount}}"
+  },
+  "facts": {
+    "firstAired": "初回放送",
+    "released": "公開",
+    "aired": "放送",
+    "ended": "終了",
+    "status": "状態",
+    "seasons": "シーズン",
+    "seasonsValue_other": "{{seasons}}（{{count}}話）",
+    "rated": "レーティング",
+    "genres": "ジャンル",
+    "originalTitle": "原題",
+    "originalLanguage": "原語",
+    "spokenLanguages": "使用言語",
+    "studio_other": "制作会社",
+    "network_other": "放送局",
+    "country_other": "国",
+    "collection": "コレクション",
+    "budget": "製作費",
+    "boxOffice": "興行収入"
+  },
+  "showStatus": {
+    "Returning Series": "継続中",
+    "Ended": "終了",
+    "Canceled": "打ち切り",
+    "In Production": "制作中",
+    "Planned": "企画中",
+    "Pilot": "パイロット"
+  },
+  "genres": {
+    "Action": "アクション",
+    "Adventure": "アドベンチャー",
+    "Animation": "アニメーション",
+    "Comedy": "コメディ",
+    "Crime": "犯罪",
+    "Documentary": "ドキュメンタリー",
+    "Drama": "ドラマ",
+    "Family": "ファミリー",
+    "Fantasy": "ファンタジー",
+    "History": "歴史",
+    "Horror": "ホラー",
+    "Music": "音楽",
+    "Mystery": "ミステリー",
+    "Romance": "ロマンス",
+    "Science Fiction": "SF",
+    "Thriller": "スリラー",
+    "War": "戦争",
+    "Western": "西部劇",
+    "Reality": "リアリティ",
+    "TV Movie": "テレビ映画",
+    "Action & Adventure": "アクション＆アドベンチャー",
+    "Kids": "キッズ",
+    "News": "ニュース",
+    "Sci-Fi & Fantasy": "SF＆ファンタジー",
+    "Soap": "ソープ",
+    "Talk": "トーク",
+    "War & Politics": "戦争＆政治"
+  },
+  "jobs": {
+    "Director": "監督",
+    "Creator": "クリエイター",
+    "Screenplay": "脚本",
+    "Writer": "脚本",
+    "Teleplay": "テレビ脚本",
+    "Story": "原案",
+    "Novel": "原作小説",
+    "Characters": "キャラクター",
+    "Author": "著者",
+    "Original Music Composer": "音楽",
+    "Music": "音楽",
+    "Director of Photography": "撮影監督",
+    "Editor": "編集",
+    "Producer": "プロデューサー",
+    "Executive Producer": "製作総指揮",
+    "Casting": "キャスティング",
+    "Production Design": "美術",
+    "Costume Design": "衣装デザイン"
+  },
+  "kids": {
+    "littleKids": "小さな子ども",
+    "kids": "子ども",
+    "teens": "ティーン",
+    "andYounger": "{{ratings}}以下"
+  },
+  "sort": {
+    "title": "タイトル",
+    "added": "追加日",
+    "released": "公開日",
+    "year": "年",
+    "rating": "評価",
+    "runtime": "上映時間",
+    "lastPlayed": "最後に観た日"
+  },
+  "watched": {
+    "unwatched": "未視聴",
+    "inProgress": "視聴中",
+    "watched": "視聴済み",
+    "notStarted": "未開始"
+  },
+  "genreRows": {
+    "Action": "アクション満載",
+    "Adventure": "アドベンチャー",
+    "Animation": "人気のアニメーション",
+    "Comedy": "コメディ",
+    "Crime": "犯罪もの",
+    "Documentary": "ドキュメンタリー",
+    "Drama": "ドラマ",
+    "Family": "家族みんなで",
+    "Fantasy": "ファンタジーの世界",
+    "Horror": "ホラー",
+    "Mystery": "ミステリー",
+    "Romance": "ロマンス",
+    "Science Fiction": "人気のSF",
+    "Thriller": "スリラー",
+    "War": "戦争もの",
+    "Western": "西部劇"
+  },
+  "count": {
+    "episodes_other": "{{count}}話",
+    "seasons_other": "{{count}}シーズン",
+    "albums_other": "{{count}}枚のアルバム",
+    "tracks_other": "{{count}}曲",
+    "titles_other": "{{count}}作品"
+  },
+  "awards": {
+    "academy": {
+      "won_other": "アカデミー賞{{count}}部門受賞",
+      "nominated_other": "アカデミー賞{{count}}部門ノミネート"
+    },
+    "emmy": {
+      "won_other": "プライムタイム・エミー賞{{count}}部門受賞",
+      "nominated_other": "プライムタイム・エミー賞{{count}}部門ノミネート"
+    },
+    "globe": {
+      "won_other": "ゴールデングローブ賞{{count}}部門受賞",
+      "nominated_other": "ゴールデングローブ賞{{count}}部門ノミネート"
+    },
+    "bafta": {
+      "won_other": "英国アカデミー賞{{count}}部門受賞",
+      "nominated_other": "英国アカデミー賞{{count}}部門ノミネート"
+    },
+    "wins_other": "{{count}}受賞",
+    "nominations_other": "{{count}}ノミネート",
+    "winsAndNominations": "{{wins}}・{{nominations}}"
+  },
+  "departments": {
+    "Acting": "俳優",
+    "Directing": "監督",
+    "Writing": "脚本",
+    "Production": "製作",
+    "Sound": "音響",
+    "Camera": "撮影",
+    "Editing": "編集",
+    "Art": "美術",
+    "Crew": "スタッフ",
+    "Visual Effects": "視覚効果",
+    "Costume & Make-Up": "衣装・メイク",
+    "Lighting": "照明",
+    "Creator": "クリエイター"
+  },
+  "starters": {
+    "recent": "最近追加",
+    "unwatched": "未視聴",
+    "tonight": "今夜にちょうどいい長さ"
+  },
+  "filter": {
+    "decade": "{{decade}}年代",
+    "yearRange": "{{from}}〜{{to}}",
+    "yearOrLater": "{{year}}年以降",
+    "yearOrEarlier": "{{year}}年以前",
+    "lastYear": "過去1年",
+    "lastWeeks_other": "過去{{count}}週間",
+    "lastDays_other": "過去{{count}}日間",
+    "runtime": {
+      "titles": {
+        "between": "{{min}}〜{{max}}分",
+        "over": "{{min}}分超",
+        "under": "{{max}}分未満"
+      },
+      "episodes": {
+        "between": "1話{{min}}〜{{max}}分",
+        "over": "1話{{min}}分超",
+        "under": "1話{{max}}分未満"
+      }
+    }
+  },
+  "themes": {
+    "clean": {
+      "name": "クリーン",
+      "description": "白地に青をひとつ、セリフなし。ポスターだけが主役。"
+    },
+    "dark": {
+      "name": "ダーク",
+      "description": "真っ黒とくっきりした白。目にもOLED画面にもやさしい。"
+    },
+    "drive-in": {
+      "name": "ドライブイン",
+      "description": "70年代のブラウンとネオン看板のアンバー。ドライブインシアターの夜のように。"
+    },
+    "high-contrast": {
+      "name": "ハイコントラスト",
+      "description": "黒、白、明るい黄色。部屋の向こうからでも文字がいちばんはっきり読めます。"
+    },
+    "light": {
+      "name": "ライト",
+      "description": "温かみのある紙の白にコーラル。明るい部屋に。"
+    },
+    "matinee": {
+      "name": "Matinee",
+      "description": "劇場の温かな暗さにコーラルのアクセント。定番の見た目です。"
+    },
+    "sci-fi": {
+      "name": "SF",
+      "description": "深宇宙のネイビーにネオンシアンの輝き、未来的な書体。"
+    }
+  },
+  "every": {
+    "seconds_other": "{{count}}秒",
+    "minutes_other": "{{count}}分",
+    "hours_other": "{{count}}時間"
+  },
+  "avatars": {
+    "coral": "コーラル",
+    "amber": "アンバー",
+    "lime": "ライム",
+    "teal": "ティール",
+    "sky": "スカイブルー",
+    "violet": "バイオレット",
+    "pink": "ピンク",
+    "slate": "スレート"
+  },
+  "day": {
+    "today": "今日",
+    "tomorrow": "明日",
+    "yesterday": "昨日"
+  },
+  "release": {
+    "cinemas": "劇場公開",
+    "digital": "デジタル配信",
+    "physical": "ディスク",
+    "airs": "放送"
+  },
+  "issue": {
+    "video": "映像",
+    "audio": "音声",
+    "subtitles": "字幕",
+    "wrong": "タイトルが違う",
+    "other": "その他"
+  },
+  "holidays": {
+    "valentines": "バレンタインに",
+    "easter": "イースターに",
+    "halloween": "ぞくぞくシーズン",
+    "thanksgiving": "感謝祭に",
+    "christmas": "クリスマスの定番",
+    "newyear": "新年を迎えよう"
+  },
+  "discover": {
+    "rows": {
+      "trending": "トレンド",
+      "popular-movies": "人気の映画",
+      "popular-shows": "人気の番組",
+      "upcoming-movies": "近日劇場公開",
+      "upcoming-shows": "もうすぐ始まる新番組"
+    },
+    "because": "{{title}}を観たあなたに",
+    "status": {
+      "available": "ライブラリにあります",
+      "added": "準備中",
+      "requested": "リクエスト済み"
+    },
+    "kind": {
+      "movie": "映画",
+      "show": "番組"
+    }
+  }
+}

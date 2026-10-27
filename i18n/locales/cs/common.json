@@ -1,0 +1,391 @@
+{
+  "duration": {
+    "minutes": "{{minutes}} min",
+    "hoursMinutes": "{{hours}} h {{minutes}} min"
+  },
+  "episodeCode": "S{{season}} · E{{episode}}",
+  "seasonN": "Řada {{season}}",
+  "specials": "Speciály",
+  "media": {
+    "mono": "Mono",
+    "stereo": "Stereo",
+    "lossless": "Bezztrátové",
+    "hiRes": "Hi-Res",
+    "dolbyVisionProfile": "Dolby Vision profil {{profile}}",
+    "withBase": "{{format}}, s {{base}} pro ostatní obrazovky",
+    "bitDepth": "{{bits}} bitů",
+    "forced": "Vynucené",
+    "sdh": "SDH"
+  },
+  "people": {
+    "episodes_few": "{{count}} díly",
+    "episodes_many": "{{count}} dílů",
+    "episodes_one": "{{count}} díl",
+    "episodes_other": "{{count}} dílů",
+    "lines": {
+      "createdBy": "Vytvořil(a)",
+      "director_few": "Režie",
+      "director_many": "Režie",
+      "director_one": "Režie",
+      "director_other": "Režie",
+      "writer_few": "Scénář",
+      "writer_many": "Scénář",
+      "writer_one": "Scénář",
+      "writer_other": "Scénář",
+      "basedOn": "Podle předlohy",
+      "music": "Hudba"
+    },
+    "died": "Zemřel(a) {{date}}",
+    "bornIn": "Narozen(a) v {{place}}",
+    "bornOnIn": "Narozen(a) {{date}} v {{place}}",
+    "bornOn": "Narozen(a) {{date}}",
+    "dollars": "{{amount}} $"
+  },
+  "facts": {
+    "firstAired": "První vysílání",
+    "released": "Vydáno",
+    "aired": "Vysíláno",
+    "ended": "Ukončeno",
+    "status": "Stav",
+    "seasons": "Řady",
+    "seasonsValue_few": "{{seasons}} ({{count}} díly)",
+    "seasonsValue_many": "{{seasons}} ({{count}} dílů)",
+    "seasonsValue_one": "{{seasons}} ({{count}} díl)",
+    "seasonsValue_other": "{{seasons}} ({{count}} dílů)",
+    "rated": "Přístupnost",
+    "genres": "Žánry",
+    "originalTitle": "Původní název",
+    "originalLanguage": "Původní jazyk",
+    "spokenLanguages": "Mluvené jazyky",
+    "studio_few": "Studia",
+    "studio_many": "Studia",
+    "studio_one": "Studio",
+    "studio_other": "Studia",
+    "network_few": "Stanice",
+    "network_many": "Stanice",
+    "network_one": "Stanice",
+    "network_other": "Stanice",
+    "country_few": "Země",
+    "country_many": "Země",
+    "country_one": "Země",
+    "country_other": "Země",
+    "collection": "Kolekce",
+    "budget": "Rozpočet",
+    "boxOffice": "Tržby"
+  },
+  "showStatus": {
+    "Returning Series": "Pokračuje",
+    "Ended": "Ukončeno",
+    "Canceled": "Zrušeno",
+    "In Production": "Ve výrobě",
+    "Planned": "Plánováno",
+    "Pilot": "Pilot"
+  },
+  "genres": {
+    "Action": "Akční",
+    "Adventure": "Dobrodružný",
+    "Animation": "Animovaný",
+    "Comedy": "Komedie",
+    "Crime": "Krimi",
+    "Documentary": "Dokument",
+    "Drama": "Drama",
+    "Family": "Rodinný",
+    "Fantasy": "Fantasy",
+    "History": "Historický",
+    "Horror": "Horor",
+    "Music": "Hudební",
+    "Mystery": "Mysteriózní",
+    "Romance": "Romantický",
+    "Science Fiction": "Sci-fi",
+    "Thriller": "Thriller",
+    "War": "Válečný",
+    "Western": "Western",
+    "Reality": "Reality",
+    "TV Movie": "TV film",
+    "Action & Adventure": "Akční a dobrodružný",
+    "Kids": "Pro děti",
+    "News": "Zprávy",
+    "Sci-Fi & Fantasy": "Sci-fi a fantasy",
+    "Soap": "Telenovela",
+    "Talk": "Talk show",
+    "War & Politics": "Válka a politika"
+  },
+  "jobs": {
+    "Director": "Režie",
+    "Creator": "Tvůrce",
+    "Screenplay": "Scénář",
+    "Writer": "Scenárista",
+    "Teleplay": "TV scénář",
+    "Story": "Námět",
+    "Novel": "Román",
+    "Characters": "Postavy",
+    "Author": "Autor",
+    "Original Music Composer": "Původní hudba",
+    "Music": "Hudba",
+    "Director of Photography": "Kamera",
+    "Editor": "Střih",
+    "Producer": "Producent",
+    "Executive Producer": "Výkonný producent",
+    "Casting": "Casting",
+    "Production Design": "Výprava",
+    "Costume Design": "Kostýmy"
+  },
+  "kids": {
+    "littleKids": "Malé děti",
+    "kids": "Děti",
+    "teens": "Dospívající",
+    "andYounger": "{{ratings}} a mladší"
+  },
+  "sort": {
+    "title": "Název",
+    "added": "Datum přidání",
+    "released": "Datum vydání",
+    "year": "Rok",
+    "rating": "Hodnocení",
+    "runtime": "Délka",
+    "lastPlayed": "Naposledy zhlédnuto"
+  },
+  "watched": {
+    "unwatched": "Nezhlédnuté",
+    "inProgress": "Rozkoukané",
+    "watched": "Zhlédnuté",
+    "notStarted": "Nezačaté"
+  },
+  "genreRows": {
+    "Action": "Plné akce",
+    "Adventure": "Dobrodružství",
+    "Animation": "Oblíbené animáky",
+    "Comedy": "Komedie",
+    "Crime": "Kriminální příběhy",
+    "Documentary": "Dokumenty",
+    "Drama": "Dramata",
+    "Family": "Pro celou rodinu",
+    "Fantasy": "Fantasy světy",
+    "Horror": "Horory",
+    "Mystery": "Záhady",
+    "Romance": "Romantika",
+    "Science Fiction": "Oblíbené sci-fi",
+    "Thriller": "Thrillery",
+    "War": "Válečné příběhy",
+    "Western": "Westerny"
+  },
+  "count": {
+    "episodes_few": "{{count}} díly",
+    "episodes_many": "{{count}} dílů",
+    "episodes_one": "{{count}} díl",
+    "episodes_other": "{{count}} dílů",
+    "seasons_few": "{{count}} řady",
+    "seasons_many": "{{count}} řad",
+    "seasons_one": "{{count}} řada",
+    "seasons_other": "{{count}} řad",
+    "albums_few": "{{count}} alba",
+    "albums_many": "{{count}} alb",
+    "albums_one": "{{count}} album",
+    "albums_other": "{{count}} alb",
+    "tracks_few": "{{count}} skladby",
+    "tracks_many": "{{count}} skladeb",
+    "tracks_one": "{{count}} skladba",
+    "tracks_other": "{{count}} skladeb",
+    "titles_few": "{{count}} tituly",
+    "titles_many": "{{count}} titulů",
+    "titles_one": "{{count}} titul",
+    "titles_other": "{{count}} titulů"
+  },
+  "awards": {
+    "academy": {
+      "won_few": "Získal(a) {{count}} Oscary",
+      "won_many": "Získal(a) {{count}} Oscarů",
+      "won_one": "Získal(a) {{count}} Oscara",
+      "won_other": "Získal(a) {{count}} Oscarů",
+      "nominated_few": "{{count}} nominace na Oscara",
+      "nominated_many": "{{count}} nominací na Oscara",
+      "nominated_one": "{{count}} nominace na Oscara",
+      "nominated_other": "{{count}} nominací na Oscara"
+    },
+    "emmy": {
+      "won_few": "Získal(a) {{count}} ceny Primetime Emmy",
+      "won_many": "Získal(a) {{count}} cen Primetime Emmy",
+      "won_one": "Získal(a) {{count}} cenu Primetime Emmy",
+      "won_other": "Získal(a) {{count}} cen Primetime Emmy",
+      "nominated_few": "{{count}} nominace na Primetime Emmy",
+      "nominated_many": "{{count}} nominací na Primetime Emmy",
+      "nominated_one": "{{count}} nominace na Primetime Emmy",
+      "nominated_other": "{{count}} nominací na Primetime Emmy"
+    },
+    "globe": {
+      "won_few": "Získal(a) {{count}} Zlaté glóby",
+      "won_many": "Získal(a) {{count}} Zlatých glóbů",
+      "won_one": "Získal(a) {{count}} Zlatý glóbus",
+      "won_other": "Získal(a) {{count}} Zlatých glóbů",
+      "nominated_few": "{{count}} nominace na Zlatý glóbus",
+      "nominated_many": "{{count}} nominací na Zlatý glóbus",
+      "nominated_one": "{{count}} nominace na Zlatý glóbus",
+      "nominated_other": "{{count}} nominací na Zlatý glóbus"
+    },
+    "bafta": {
+      "won_few": "Získal(a) {{count}} ceny BAFTA",
+      "won_many": "Získal(a) {{count}} cen BAFTA",
+      "won_one": "Získal(a) {{count}} cenu BAFTA",
+      "won_other": "Získal(a) {{count}} cen BAFTA",
+      "nominated_few": "{{count}} nominace na BAFTA",
+      "nominated_many": "{{count}} nominací na BAFTA",
+      "nominated_one": "{{count}} nominace na BAFTA",
+      "nominated_other": "{{count}} nominací na BAFTA"
+    },
+    "wins_few": "{{count}} výhry",
+    "wins_many": "{{count}} výher",
+    "wins_one": "{{count}} výhra",
+    "wins_other": "{{count}} výher",
+    "nominations_few": "{{count}} nominace",
+    "nominations_many": "{{count}} nominací",
+    "nominations_one": "{{count}} nominace",
+    "nominations_other": "{{count}} nominací",
+    "winsAndNominations": "{{wins}} a {{nominations}}"
+  },
+  "departments": {
+    "Acting": "Herec",
+    "Directing": "Režie",
+    "Writing": "Scénář",
+    "Production": "Produkce",
+    "Sound": "Zvuk",
+    "Camera": "Kamera",
+    "Editing": "Střih",
+    "Art": "Výprava",
+    "Crew": "Štáb",
+    "Visual Effects": "Vizuální efekty",
+    "Costume & Make-Up": "Kostýmy a masky",
+    "Lighting": "Osvětlení",
+    "Creator": "Tvůrce"
+  },
+  "starters": {
+    "recent": "Nedávno přidané",
+    "unwatched": "Nezhlédnuté",
+    "tonight": "Dost krátké na dnešní večer"
+  },
+  "filter": {
+    "decade": "{{decade}}. léta",
+    "yearRange": "{{from}}–{{to}}",
+    "yearOrLater": "{{year}} nebo později",
+    "yearOrEarlier": "{{year}} nebo dříve",
+    "lastYear": "za poslední rok",
+    "lastWeeks_few": "za poslední {{count}} týdny",
+    "lastWeeks_many": "za posledních {{count}} týdnů",
+    "lastWeeks_one": "za poslední týden",
+    "lastWeeks_other": "za posledních {{count}} týdnů",
+    "lastDays_few": "za poslední {{count}} dny",
+    "lastDays_many": "za posledních {{count}} dní",
+    "lastDays_one": "za poslední {{count}} den",
+    "lastDays_other": "za posledních {{count}} dní",
+    "runtime": {
+      "titles": {
+        "between": "{{min}}–{{max}} min",
+        "over": "Přes {{min}} min",
+        "under": "Pod {{max}} min"
+      },
+      "episodes": {
+        "between": "Díly {{min}}–{{max}} min",
+        "over": "Díly přes {{min}} min",
+        "under": "Díly pod {{max}} min"
+      }
+    }
+  },
+  "themes": {
+    "clean": {
+      "name": "Čistý",
+      "description": "Bílá, jedna modrá, žádné patky. Jen plakáty."
+    },
+    "dark": {
+      "name": "Tmavý",
+      "description": "Čistě černá a ostře bílá. Šetrné k očím i k OLED obrazovce."
+    },
+    "drive-in": {
+      "name": "Autokino",
+      "description": "Hnědé tóny sedmdesátek a jantarová světla, jako večer v autokině."
+    },
+    "high-contrast": {
+      "name": "Vysoký kontrast",
+      "description": "Černá, bílá a jasně žlutá pro nejčitelnější text přes celou místnost."
+    },
+    "light": {
+      "name": "Světlý",
+      "description": "Teplá papírová bílá s korálovou, do světlé místnosti."
+    },
+    "matinee": {
+      "name": "Matinee",
+      "description": "Teplé divadelní šero s korálovým akcentem. Vzhled domu."
+    },
+    "sci-fi": {
+      "name": "Sci-fi",
+      "description": "Hluboká vesmírná modř s neonově azurovou září a futuristickým písmem."
+    }
+  },
+  "every": {
+    "seconds_few": "{{count}} sekundy",
+    "seconds_many": "{{count}} sekund",
+    "seconds_one": "{{count}} sekunda",
+    "seconds_other": "{{count}} sekund",
+    "minutes_few": "{{count}} minuty",
+    "minutes_many": "{{count}} minut",
+    "minutes_one": "{{count}} minuta",
+    "minutes_other": "{{count}} minut",
+    "hours_few": "{{count}} hodiny",
+    "hours_many": "{{count}} hodin",
+    "hours_one": "{{count}} hodina",
+    "hours_other": "{{count}} hodin"
+  },
+  "avatars": {
+    "coral": "Korálová",
+    "amber": "Jantarová",
+    "lime": "Limetková",
+    "teal": "Modrozelená",
+    "sky": "Nebeská modř",
+    "violet": "Fialová",
+    "pink": "Růžová",
+    "slate": "Břidlicová"
+  },
+  "day": {
+    "today": "Dnes",
+    "tomorrow": "Zítra",
+    "yesterday": "Včera"
+  },
+  "release": {
+    "cinemas": "V kinech",
+    "digital": "Digitální vydání",
+    "physical": "Na disku",
+    "airs": "Vysílá se"
+  },
+  "issue": {
+    "video": "Obraz",
+    "audio": "Zvuk",
+    "subtitles": "Titulky",
+    "wrong": "Špatný název",
+    "other": "Něco jiného"
+  },
+  "holidays": {
+    "valentines": "Na Valentýna",
+    "easter": "Na Velikonoce",
+    "halloween": "Strašidelná sezóna",
+    "thanksgiving": "Na Den díkůvzdání",
+    "christmas": "Vánoční oblíbené",
+    "newyear": "Na přivítání nového roku"
+  },
+  "discover": {
+    "rows": {
+      "trending": "Trendy",
+      "popular-movies": "Oblíbené filmy",
+      "popular-shows": "Oblíbené seriály",
+      "upcoming-movies": "Brzy v kinech",
+      "upcoming-shows": "Nové seriály na cestě"
+    },
+    "because": "Protože jste sledovali {{title}}",
+    "status": {
+      "available": "Ve vaší knihovně",
+      "added": "Na cestě",
+      "requested": "Vyžádáno"
+    },
+    "kind": {
+      "movie": "Film",
+      "show": "Seriál"
+    }
+  }
+}

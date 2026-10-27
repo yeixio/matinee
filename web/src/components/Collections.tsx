@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Check, Layers, LibraryBig, Pin, Plus, Sparkles, X } from 'lucide-react'
 import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link, useNavigate } from 'react-router-dom'
 import {
   api,
@@ -17,6 +18,7 @@ import { PosterCard } from './Card'
 import { Row, RowItem } from './Row'
 import { useLibraries } from './Shell'
 import { Button, Field, inputClass } from './ui'
+import i18n from '../i18n'
 
 export const collectionLink = (c: { id: string }) => `/collection/${encodeURIComponent(c.id)}`
 export const boxSetLink = (id: number) => `/box-set/${id}`
@@ -28,17 +30,7 @@ export function invalidateCollections(qc: ReturnType<typeof useQueryClient>) {
   qc.invalidateQueries({ queryKey: ['home'] })
 }
 
-const sortLabels: Record<CollectionSort, string> = {
-  '': 'Own order',
-  title: 'Title',
-  added: 'Date added',
-  released: 'Release date',
-  year: 'Year',
-  rating: 'Rating',
-  runtime: 'Runtime',
-  lastPlayed: 'Last played',
-  shuffle: 'Shuffle daily',
-}
+const sortLabel = (s: CollectionSort) => i18n.t(`collections.sort.${s || 'own'}`)
 const manualSorts: CollectionSort[] = ['', 'title', 'added', 'year', 'rating', 'runtime', 'shuffle']
 
 /** A cover made from up to four posters, or the collection's initial when it's empty. */
@@ -63,16 +55,26 @@ export function Mosaic({ ids, title }: { ids: number[]; title: string }) {
   )
 }
 
+// A collection's name. The built-in ones are named in the page's language
+// until someone renames them.
+export function collectionName(c: { name: string; starter?: string }): string {
+  if (!c.starter) return c.name
+  const key = `common:starters.${c.starter}`
+  return i18n.exists(key) && c.name === i18n.t(key, { lng: 'en' }) ? i18n.t(key) : c.name
+}
+
 export function CollectionCard({ c }: { c: Collection }) {
+  const { t } = useTranslation()
+  const name = collectionName(c)
   return (
     <Link to={collectionLink(c)} className="group block animate-fade">
-      <Mosaic ids={c.items.map((i) => i.id)} title={c.name} />
+      <Mosaic ids={c.items.map((i) => i.id)} title={name} />
       <div className="mt-2 px-0.5">
         <div className="flex items-center gap-1.5 truncate text-sm font-medium text-text group-hover:text-accent-strong">
-          {c.kind === 'smart' && <Sparkles className="size-3.5 shrink-0 text-accent" aria-label="Smart" />}
-          <span className="truncate">{c.name}</span>
+          {c.kind === 'smart' && <Sparkles className="size-3.5 shrink-0 text-accent" aria-label={t('collections.smartShort')} />}
+          <span className="truncate">{name}</span>
         </div>
-        <div className="truncate text-xs text-muted">{c.count === 1 ? '1 title' : `${c.count} titles`}</div>
+        <div className="truncate text-xs text-muted">{t('common:count.titles', { count: c.count })}</div>
       </div>
     </Link>
   )
@@ -87,6 +89,7 @@ export function CardGrid({ children }: { children: ReactNode }) {
 }
 
 function Dialog({ title, onClose, children }: { title: string; onClose: () => void; children: ReactNode }) {
+  const { t } = useTranslation()
   useEffect(() => {
     const esc = (e: KeyboardEvent) => e.key === 'Escape' && onClose()
     window.addEventListener('keydown', esc)
@@ -103,7 +106,7 @@ function Dialog({ title, onClose, children }: { title: string; onClose: () => vo
       >
         <div className="mb-5 flex items-start justify-between gap-4">
           <h2 className="text-lg font-semibold">{title}</h2>
-          <button onClick={onClose} aria-label="Close" className="text-muted hover:text-text">
+          <button onClick={onClose} aria-label={t('close')} className="text-muted hover:text-text">
             <X className="size-5" />
           </button>
         </div>
@@ -133,11 +136,12 @@ export function CollectionEditor({
   onClose: () => void
   onSaved?: (c: Collection) => void
 }) {
+  const { t } = useTranslation()
   const qc = useQueryClient()
   const { data: me } = useQuery<User>({ queryKey: ['me'], queryFn: api.me, staleTime: Infinity })
   const { data: libraries } = useLibraries()
   const smart = (collection?.kind ?? kind) === 'smart'
-  const [name, setName] = useState(collection?.name ?? '')
+  const [name, setName] = useState(collection ? collectionName(collection) : '')
   const [filter, setFilter] = useState<ItemFilter>(collection?.filter ?? start ?? (library ? { library: [library] } : {}))
   const [sort, setSort] = useState<CollectionSort>(collection?.sort ?? '')
   const [order, setOrder] = useState<'' | 'asc' | 'desc'>(collection?.order ?? '')
@@ -166,7 +170,7 @@ export function CollectionEditor({
   })
   const filterLibrary = filter.library
   return (
-    <Dialog title={collection ? `Edit ${collection.name}` : smart ? 'New smart collection' : 'New collection'} onClose={onClose}>
+    <Dialog title={collection ? t('collections.editNamed', { name: collectionName(collection) }) : smart ? t('collections.newSmart') : t('collections.new')} onClose={onClose}>
       <form
         onSubmit={(e) => {
           e.preventDefault()
@@ -174,20 +178,20 @@ export function CollectionEditor({
         }}
         className="space-y-5"
       >
-        <Field label="Name">
+        <Field label={t('collections.name')}>
           <input
             className={inputClass}
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder={smart ? 'Unwatched 80s action' : 'Movie night'}
+            placeholder={smart ? t('collections.smartExample') : t('collections.manualExample')}
             autoFocus
             maxLength={100}
           />
         </Field>
         {smart && (
           <div className="space-y-2">
-            <span className="text-xs font-medium tracking-wide text-muted uppercase">Rules</span>
-            <p className="text-sm text-muted">Titles that match these filters join by themselves as the library changes.</p>
+            <span className="text-xs font-medium tracking-wide text-muted uppercase">{t('collections.rules')}</span>
+            <p className="text-sm text-muted">{t('collections.rulesHint')}</p>
             <FilterBar value={filter} onChange={setFilter} libraryId={filterLibrary?.length === 1 ? filterLibrary[0] : undefined} />
           </div>
         )}
@@ -200,34 +204,34 @@ export function CollectionEditor({
               onChange={(e) => setSort(e.target.checked ? 'shuffle' : '')}
               className="accent-accent"
             />
-            Shuffle every day
+            {t('collections.shuffleDaily')}
           </label>
         ) : (
           <div className="grid gap-4 sm:grid-cols-2">
-            <Field label="Order">
+            <Field label={t('collections.order')}>
               <select className={inputClass} value={sort} onChange={(e) => setSort(e.target.value as CollectionSort)}>
                 {manualSorts.map((s) => (
                   <option key={s} value={s}>
-                    {s === '' ? 'The order titles were added' : sortLabels[s]}
+                    {s === '' ? t('collections.orderAdded') : sortLabel(s)}
                   </option>
                 ))}
               </select>
             </Field>
             {sort !== '' && sort !== 'shuffle' && (
-              <Field label="Direction">
+              <Field label={t('collections.direction')}>
                 <select className={inputClass} value={order} onChange={(e) => setOrder(e.target.value as '' | 'asc' | 'desc')}>
-                  <option value="">Usual</option>
-                  <option value="asc">Ascending</option>
-                  <option value="desc">Descending</option>
+                  <option value="">{t('collections.usual')}</option>
+                  <option value="asc">{t('collections.ascending')}</option>
+                  <option value="desc">{t('collections.descending')}</option>
                 </select>
               </Field>
             )}
           </div>
         )}
         <fieldset className="space-y-2">
-          <legend className="mb-1 text-xs font-medium tracking-wide text-muted uppercase">Show as a row</legend>
+          <legend className="mb-1 text-xs font-medium tracking-wide text-muted uppercase">{t('collections.showAsRow')}</legend>
           <label className="flex items-center gap-2 text-sm">
-            <input type="checkbox" checked={pinHome} onChange={(e) => setPinHome(e.target.checked)} className="accent-accent" /> On Home
+            <input type="checkbox" checked={pinHome} onChange={(e) => setPinHome(e.target.checked)} className="accent-accent" /> {t('collections.onHome')}
           </label>
           <label className="flex items-center gap-2 text-sm">
             <input
@@ -237,13 +241,13 @@ export function CollectionEditor({
               className="accent-accent"
               disabled={!libraries?.length}
             />
-            On a library page
+            {t('collections.onLibraryPage')}
             {pinLibrary !== undefined && (
               <select
-                className="ml-1 rounded-md border border-line bg-surface px-2 py-1 text-sm"
+                className="ms-1 rounded-md border border-line bg-surface px-2 py-1 text-sm"
                 value={pinLibrary}
                 onChange={(e) => setPinLibrary(Number(e.target.value))}
-                aria-label="Library"
+                aria-label={t('library.library')}
               >
                 {libraries?.map((l) => (
                   <option key={l.id} value={l.id}>
@@ -256,17 +260,16 @@ export function CollectionEditor({
         </fieldset>
         {!collection && me?.isAdmin && (
           <label className="flex items-center gap-2 text-sm">
-            <input type="checkbox" checked={shared} onChange={(e) => setShared(e.target.checked)} className="accent-accent" /> Share with
-            everyone on this server
+            <input type="checkbox" checked={shared} onChange={(e) => setShared(e.target.checked)} className="accent-accent" /> {t('collections.shareWithEveryone')}
           </label>
         )}
         {save.error && <p className="text-sm text-danger">{save.error.message}</p>}
         <div className="flex justify-end gap-2">
           <Button type="button" variant="ghost" onClick={onClose}>
-            Cancel
+            {t('cancel')}
           </Button>
           <Button type="submit" variant="primary" disabled={!name.trim() || save.isPending}>
-            {collection ? 'Save' : 'Create'}
+            {collection ? t('save') : t('create')}
           </Button>
         </div>
       </form>
@@ -276,6 +279,7 @@ export function CollectionEditor({
 
 /** Puts a title in the collections kept by hand, or takes it out. */
 export function AddToCollectionButton({ item }: { item: ItemDetail }) {
+  const { t } = useTranslation()
   const qc = useQueryClient()
   const { data: me } = useQuery<User>({ queryKey: ['me'], queryFn: api.me, staleTime: Infinity })
   const [open, setOpen] = useState(false)
@@ -303,22 +307,22 @@ export function AddToCollectionButton({ item }: { item: ItemDetail }) {
   return (
     <div ref={ref} className="relative">
       <Button onClick={() => setOpen(!open)} aria-expanded={open} icon={<Layers className="size-4" />}>
-        Collections
+        {t('nav.collections')}
       </Button>
       {open && (
-        <div className="absolute top-full left-0 z-30 mt-2 w-64 rounded-xl border border-line/60 bg-surface p-1.5 shadow-2xl">
+        <div className="absolute top-full start-0 z-30 mt-2 w-64 rounded-xl border border-line/60 bg-surface p-1.5 shadow-2xl">
           {!data ? (
-            <div className="px-3 py-2 text-sm text-muted">Loading…</div>
+            <div className="px-3 py-2 text-sm text-muted">{t('loadingDots')}</div>
           ) : (
             mine.map((c) => (
               <button
                 key={c.id}
                 onClick={() => toggle.mutate({ c, add: !c.contains })}
-                className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm hover:bg-text/5"
+                className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-start text-sm hover:bg-text/5"
                 aria-pressed={!!c.contains}
               >
                 <span className="grid size-4 place-items-center">{c.contains && <Check className="size-4 text-accent" />}</span>
-                <span className="truncate">{c.name}</span>
+                <span className="truncate">{collectionName(c)}</span>
               </button>
             ))
           )}
@@ -327,9 +331,9 @@ export function AddToCollectionButton({ item }: { item: ItemDetail }) {
               setCreating(true)
               setOpen(false)
             }}
-            className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm text-muted hover:bg-text/5 hover:text-text"
+            className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-start text-sm text-muted hover:bg-text/5 hover:text-text"
           >
-            <Plus className="size-4" /> New collection
+            <Plus className="size-4" /> {t('collections.new')}
           </button>
         </div>
       )}
@@ -346,13 +350,14 @@ export function AddToCollectionButton({ item }: { item: ItemDetail }) {
 
 /** Small labels for where a collection shows up. */
 export function PinBadges({ c }: { c: Collection }) {
+  const { t } = useTranslation()
   const { data: libraries } = useLibraries()
   const lib = libraries?.find((l) => l.id === c.pinLibrary)
   return (
     <>
       {c.pinHome && (
         <span className="flex items-center gap-1 rounded-full bg-text/10 px-2 py-0.5 text-xs text-muted">
-          <Pin className="size-3" /> Home
+          <Pin className="size-3" /> {t('nav.home')}
         </span>
       )}
       {lib && (
@@ -372,7 +377,7 @@ export function PinnedCollections({ library }: { library: number }) {
   return (
     <div className="space-y-10">
       {rows.map((c) => (
-        <Row key={c.id} title={c.name} more={collectionLink(c)}>
+        <Row key={c.id} title={collectionName(c)} more={collectionLink(c)}>
           {c.items.map((it) => (
             <RowItem key={it.id}>
               <PosterCard item={it} />
@@ -386,6 +391,7 @@ export function PinnedCollections({ library }: { library: number }) {
 
 /** Saves the filters someone has on a library page as a smart collection. */
 export function SaveAsCollectionButton({ filter, library }: { filter: ItemFilter; library: number }) {
+  const { t } = useTranslation()
   const navigate = useNavigate()
   const { data: me } = useQuery<User>({ queryKey: ['me'], queryFn: api.me, staleTime: Infinity })
   const [open, setOpen] = useState(false)
@@ -393,7 +399,7 @@ export function SaveAsCollectionButton({ filter, library }: { filter: ItemFilter
   return (
     <>
       <Button variant="ghost" onClick={() => setOpen(true)} icon={<Sparkles className="size-4" />}>
-        Save as collection
+        {t('collections.saveAs')}
       </Button>
       {open && (
         <CollectionEditor

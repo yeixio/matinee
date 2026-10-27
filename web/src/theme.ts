@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import { api, type Theme, type ThemeColor, type ThemeList } from './api'
+import i18n from './i18n'
 
 // Themes swap the colour and font variables that styles.css defines (the
 // Tailwind tokens: bg-ink, text-muted, bg-accent...), so a new theme needs no
@@ -74,5 +75,11 @@ export function useSetMyTheme(userId?: number) {
     onError: () => qc.invalidateQueries({ queryKey: ['my-theme', userId] }),
   })
 }
+
+// A built-in theme's name and description in the page's language; a theme
+// file's own text as it is.
+export const themeName = (t: Theme) => (t.builtIn ? i18n.t(`common:themes.${t.id}.name`, { defaultValue: t.name }) : t.name)
+export const themeDescription = (t: Theme) =>
+  t.builtIn ? i18n.t(`common:themes.${t.id}.description`, { defaultValue: t.description }) : t.description
 
 export type { Theme, ThemeColor }

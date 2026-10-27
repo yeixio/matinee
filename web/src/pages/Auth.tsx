@@ -1,5 +1,6 @@
 import { useQueryClient } from '@tanstack/react-query'
 import { useState, type FormEvent } from 'react'
+import { useTranslation } from 'react-i18next'
 import { api } from '../api'
 import { Logo } from '../components/Shell'
 import { Button, Field, inputClass } from '../components/ui'
@@ -21,6 +22,7 @@ function AuthCard({ title, subtitle, children }: { title: string; subtitle: stri
 }
 
 function useCredentialsForm(submit: (u: string, p: string) => Promise<unknown>) {
+  const { t } = useTranslation()
   const qc = useQueryClient()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -34,7 +36,7 @@ function useCredentialsForm(submit: (u: string, p: string) => Promise<unknown>) 
       await submit(username, password)
       await qc.invalidateQueries()
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Something went wrong')
+      setError(err instanceof Error ? err.message : t('somethingWentWrong'))
     } finally {
       setBusy(false)
     }
@@ -43,12 +45,13 @@ function useCredentialsForm(submit: (u: string, p: string) => Promise<unknown>) 
 }
 
 function CredentialsForm({ form, cta, newPassword }: { form: ReturnType<typeof useCredentialsForm>; cta: string; newPassword?: boolean }) {
+  const { t } = useTranslation()
   return (
     <form onSubmit={form.onSubmit} className="space-y-4">
-      <Field label="Username">
+      <Field label={t('auth.username')}>
         <input className={inputClass} value={form.username} onChange={(e) => form.setUsername(e.target.value)} autoComplete="username" autoFocus required />
       </Field>
-      <Field label="Password">
+      <Field label={t('auth.password')}>
         <input
           className={inputClass}
           type="password"
@@ -61,26 +64,28 @@ function CredentialsForm({ form, cta, newPassword }: { form: ReturnType<typeof u
       </Field>
       {form.error && <p className="text-sm text-danger">{form.error}</p>}
       <Button variant="primary" className="w-full" disabled={form.busy}>
-        {form.busy ? 'One moment…' : cta}
+        {form.busy ? t('oneMoment') : cta}
       </Button>
     </form>
   )
 }
 
 export function Login() {
+  const { t } = useTranslation()
   const form = useCredentialsForm(api.login)
   return (
-    <AuthCard title="Sign in" subtitle="Welcome back.">
-      <CredentialsForm form={form} cta="Sign in" />
+    <AuthCard title={t('auth.signIn')} subtitle={t('auth.welcomeBack')}>
+      <CredentialsForm form={form} cta={t('auth.signIn')} />
     </AuthCard>
   )
 }
 
 export function Setup() {
+  const { t } = useTranslation()
   const form = useCredentialsForm(api.createAdmin)
   return (
-    <AuthCard title="Set up Matinee" subtitle="Create the admin account. You can add family and friends later.">
-      <CredentialsForm form={form} cta="Create account" newPassword />
+    <AuthCard title={t('auth.setUp')} subtitle={t('auth.setUpHint')}>
+      <CredentialsForm form={form} cta={t('auth.createAccount')} newPassword />
     </AuthCard>
   )
 }

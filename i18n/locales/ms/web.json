@@ -1,0 +1,711 @@
+{
+  "loading": "Memuatkan",
+  "nav": {
+    "home": "Utama",
+    "watchList": "Senarai tontonan",
+    "collections": "Koleksi",
+    "scanning": "Mengimbas",
+    "search": "Cari",
+    "comingSoon": "Akan datang",
+    "requests": "Permintaan",
+    "signIn": "Log masuk",
+    "settings": "Tetapan",
+    "switchProfile": "Tukar profil",
+    "signOut": "Log keluar",
+    "discover": "Teroka"
+  },
+  "cantReachServer": "Tidak dapat menghubungi pelayan. Mencuba lagi…",
+  "player": {
+    "subtitlesFailed": "Tidak dapat memuatkan sari kata ini",
+    "off": "Mati",
+    "convertsVideo": "Menukar video",
+    "file": "Fail",
+    "seek": "Lompat",
+    "previous": "Sebelumnya",
+    "pause": "Jeda",
+    "next": "Seterusnya",
+    "closePlayer": "Tutup pemain",
+    "failedDetail": "Main balik gagal. Fail mungkin rosak atau dalam format yang tidak dapat ditukar oleh pelayan.",
+    "failed": "Main balik gagal",
+    "back10": "Undur 10 saat",
+    "forward10": "Maju 10 saat",
+    "unmute": "Nyahsenyap",
+    "mute": "Senyap",
+    "converting": "Menukar",
+    "fullscreen": "Skrin penuh"
+  },
+  "somethingWentWrong": "Sesuatu tidak kena",
+  "oneMoment": "Sekejap…",
+  "auth": {
+    "username": "Nama pengguna",
+    "password": "Kata laluan",
+    "signIn": "Log masuk",
+    "welcomeBack": "Selamat kembali.",
+    "setUp": "Sediakan Matinee",
+    "setUpHint": "Cipta akaun pentadbir. Anda boleh menambah keluarga dan rakan kemudian.",
+    "createAccount": "Cipta akaun"
+  },
+  "home": {
+    "welcome": "Selamat datang ke Matinee",
+    "welcomeHint": "Tambah folder filem, rancangan atau muzik untuk bermula.",
+    "addLibrary": "Tambah pustaka",
+    "continueWatching": "Teruskan menonton",
+    "recentlyAdded": "Baru ditambah",
+    "newReleases": "Keluaran baharu",
+    "scanning": "Mengimbas pustaka anda",
+    "scanningHint": "Tajuk baharu muncul di sini sebaik sahaja ditemui.",
+    "removeNamed": "Alih keluar {{title}} daripada Teruskan menonton",
+    "remove": "Alih keluar daripada Teruskan menonton"
+  },
+  "hero": {
+    "upNext": "Seterusnya",
+    "justAdded": "Baru ditambah",
+    "details": "Butiran"
+  },
+  "item": {
+    "resume": "Sambung semula",
+    "resumeLeft": "Sambung semula · tinggal {{left}}",
+    "play": "Main",
+    "resumeFrom": "Sambung semula dari {{time}}",
+    "resumeEpisode": "Sambung semula episod {{episode}}",
+    "playEpisode": "Main episod {{episode}}",
+    "shuffle": "Rawak",
+    "seasons": "Musim",
+    "albums": "Album",
+    "episodes": "Episod"
+  },
+  "row": {
+    "back": "Tatal ke belakang",
+    "forward": "Tatal ke hadapan"
+  },
+  "artwork": {
+    "fetching": "Mengambil butiran…"
+  },
+  "close": "Tutup",
+  "file": {
+    "audio": "Audio",
+    "subtitles": "Sari kata",
+    "title": "Butiran fail",
+    "notYet": "Matinee belum meneliti fail ini secara terperinci. Ia membaca setiap fail perlahan-lahan di latar belakang, jadi ruangan ini akan terisi dengan sendirinya.",
+    "unreadable": "Matinee tidak dapat membaca fail ini: {{error}}",
+    "stale": "Fail telah berubah sejak ini direkodkan; ia akan diteliti semula tidak lama lagi.",
+    "file": "Fail",
+    "location": "Lokasi",
+    "size": "Saiz",
+    "format": "Format",
+    "length": "Tempoh",
+    "bitrate": "Kadar bit",
+    "chapters": "Bab",
+    "video": "Video",
+    "videoN": "Video {{n}}",
+    "codec": "Codec",
+    "resolution": "Resolusi",
+    "frameRate": "Kadar bingkai",
+    "fps": "{{rate}} fps",
+    "bitDepth": "Kedalaman bit",
+    "dynamicRange": "Julat dinamik",
+    "dvProfile": "profil {{profile}}",
+    "dvProfileLevel": "profil {{profile}}, tahap {{level}}",
+    "fallback": "sandaran {{format}}",
+    "color": "Warna",
+    "trackN": "Trek {{n}}",
+    "default": "Lalai",
+    "forced": "Paksa",
+    "commentary": "Ulasan",
+    "audioDescription": "Penerangan audio",
+    "separateFile": "Fail berasingan",
+    "inFile": "Dalam fail",
+    "sdh": "SDH",
+    "recorded": "Direkodkan {{when}}",
+    "queued": "Dalam baris gilir; ia seterusnya.",
+    "analyzeAgain": "Analisis semula"
+  },
+  "listSeparator": ", ",
+  "credits": {
+    "seriesCast": "Pelakon siri",
+    "cast": "Pelakon",
+    "guestStars": "Bintang undangan",
+    "starring": "Lakonan",
+    "moreDetails": "Butiran lanjut",
+    "crew": "Kru",
+    "about": "Perihal",
+    "awards": "Anugerah",
+    "won": "Menang",
+    "nominated": "Dicalonkan",
+    "wonIn": "Menang {{year}}",
+    "nominatedIn": "Dicalonkan {{year}}",
+    "showAll": "Tunjukkan kesemua {{count}}",
+    "awardsSource": "Anugerah daripada Wikidata."
+  },
+  "cancel": "Batal",
+  "upNext": {
+    "upNext": "Seterusnya",
+    "stillWatching": "Masih menonton?",
+    "youMightLike": "Anda mungkin suka",
+    "playingIn": "Bermain dalam {{seconds}}",
+    "playNow": "Main sekarang",
+    "keepWatching": "Terus menonton",
+    "haveALook": "Lihat-lihat",
+    "stop": "Henti"
+  },
+  "goBack": "Kembali",
+  "back": "Kembali",
+  "trailer": {
+    "trailer": "Treler",
+    "named": "Treler {{title}}",
+    "wontPlay": "Treler ini tidak dapat dimainkan."
+  },
+  "watchList": {
+    "on": "Dalam senarai tontonan anda",
+    "add": "Tambah ke senarai tontonan",
+    "empty": "Belum ada yang disimpan",
+    "emptyHint": "Buka filem atau rancangan dan pilih Senarai tontonan untuk menyimpannya di sini. Filem keluar dari senarai selepas anda menontonnya.",
+    "browse": "Semak imbas"
+  },
+  "related": {
+    "moreLikeThis": "Yang serupa"
+  },
+  "boxSet": {
+    "notFound": "Set kotak tidak ditemui",
+    "notFoundHint": "Tiada tajuknya berada dalam pustaka sekarang.",
+    "boxSet": "Set kotak"
+  },
+  "search": {
+    "placeholder": "Filem, rancangan, artis, album…",
+    "nothing": "Tiada yang sepadan dengan \"{{q}}\"",
+    "lookingForNew": "Mencari sesuatu yang baharu?",
+    "addIt": "Tambahkannya",
+    "askForIt": "Mintanya"
+  },
+  "person": {
+    "notFound": "Orang tidak ditemui",
+    "showLess": "Kurangkan",
+    "readMore": "Baca lagi",
+    "inLibrary": "Dalam pustaka anda"
+  },
+  "library": {
+    "library": "Pustaka",
+    "matches_other": "{{count}} padanan",
+    "scanning": "Mengimbas…",
+    "nothingUnwatched": "Tiada yang belum ditonton di sini",
+    "nothingMatches": "Tiada yang sepadan",
+    "seenEverything": "Anda telah menonton semua dalam pustaka ini.",
+    "clearFilters": "Kosongkan penapis",
+    "appearAsFound": "Tajuk muncul apabila ditemui.",
+    "noMedia": "Matinee mencari dalam {{paths}} dan tidak menemui media."
+  },
+  "nothingHereYet": "Belum ada apa-apa di sini",
+  "collection": {
+    "notFound": "Koleksi tidak ditemui",
+    "notFoundHint": "Ia mungkin telah dipadam.",
+    "smart": "Koleksi pintar",
+    "collection": "Koleksi",
+    "shuffledDaily": "Dirawakkan setiap hari",
+    "editRules": "Edit peraturan",
+    "edit": "Edit",
+    "delete": "Padam koleksi",
+    "deleteConfirm": "Padam {{name}}? Tajuknya kekal dalam pustaka anda.",
+    "nothingMatchesYet": "Belum ada yang sepadan",
+    "joinByRules": "Tajuk masuk dengan sendirinya apabila sepadan dengan peraturan.",
+    "howToAdd": "Buka filem atau rancangan dan pilih Koleksi untuk menambahnya."
+  },
+  "collections": {
+    "newShort": "Baharu",
+    "new": "Koleksi baharu",
+    "newSmartShort": "Pintar baharu",
+    "newSmart": "Koleksi pintar baharu",
+    "none": "Belum ada koleksi",
+    "noneHint": "Koleksi pintar terisi sendiri berdasarkan peraturan, seperti filem aksi 80-an yang belum ditonton. Set kotak muncul di sini apabila dua tajuknya berada dalam pustaka.",
+    "yours": "Milik anda",
+    "shared": "Dikongsi",
+    "forEveryone": "Koleksi untuk semua",
+    "boxSets": "Set kotak",
+    "sort": {
+      "own": "Susunan sendiri",
+      "title": "Tajuk",
+      "added": "Tarikh ditambah",
+      "released": "Tarikh keluaran",
+      "year": "Tahun",
+      "rating": "Penarafan",
+      "runtime": "Tempoh",
+      "lastPlayed": "Terakhir dimainkan",
+      "shuffle": "Rawak harian"
+    },
+    "smartShort": "Pintar",
+    "editNamed": "Edit {{name}}",
+    "name": "Nama",
+    "smartExample": "Aksi 80-an belum ditonton",
+    "manualExample": "Malam filem",
+    "rules": "Peraturan",
+    "rulesHint": "Tajuk yang sepadan dengan penapis ini masuk dengan sendirinya apabila pustaka berubah.",
+    "shuffleDaily": "Rawakkan setiap hari",
+    "order": "Susunan",
+    "orderAdded": "Susunan tajuk ditambah",
+    "direction": "Arah",
+    "usual": "Biasa",
+    "ascending": "Menaik",
+    "descending": "Menurun",
+    "showAsRow": "Tunjukkan sebagai baris",
+    "onHome": "Di Utama",
+    "onLibraryPage": "Di halaman pustaka",
+    "shareWithEveryone": "Kongsi dengan semua orang di pelayan ini",
+    "saveAs": "Simpan sebagai koleksi"
+  },
+  "save": "Simpan",
+  "create": "Cipta",
+  "loadingDots": "Memuatkan…",
+  "filters": {
+    "title": "Penapis",
+    "inUse_other": "Penapis, {{count}} digunakan",
+    "sortBy": "Isih mengikut",
+    "highestFirst": "Tertinggi dahulu",
+    "lowestFirst": "Terendah dahulu",
+    "highestFirstSwitch": "Tertinggi dahulu; tukar kepada terendah dahulu",
+    "lowestFirstSwitch": "Terendah dahulu; tukar kepada tertinggi dahulu",
+    "not": "Bukan {{label}}",
+    "remove": "Alih keluar {{label}}",
+    "chip": {
+      "words": "\"{{q}}\"",
+      "directedBy": "Diarahkan oleh {{name}}",
+      "with": "Lakonan {{name}}",
+      "releasedWithin": "Keluaran dalam {{within}}",
+      "releasedAfter": "Keluaran selepas {{date}}",
+      "releasedBefore": "Keluaran sebelum {{date}}",
+      "addedWithin": "Ditambah dalam {{within}}",
+      "addedAfter": "Ditambah selepas {{date}}",
+      "addedBefore": "Ditambah sebelum {{date}}",
+      "ratingMin": "Penarafan {{rating}}+",
+      "ratingMax": "Penarafan {{rating}} atau kurang",
+      "certification": "Penarafan {{rating}}",
+      "watchList": "Dalam senarai tontonan saya"
+    },
+    "collection": "Koleksi",
+    "active": "Penapis yang digunakan",
+    "clearAll": "Kosongkan semua",
+    "more_other": "{{count}} lagi",
+    "any": "Mana-mana",
+    "all": "Semua",
+    "anyTime": "Bila-bila masa",
+    "runtime": {
+      "under30": "Kurang 30 min",
+      "30to60": "30–60 min",
+      "overHour": "Lebih sejam",
+      "under90": "Kurang 90 min",
+      "90to120": "90 min – 2 jam",
+      "over2Hours": "Lebih 2 jam"
+    },
+    "wordsInTitle": "Perkataan dalam tajuk",
+    "onlyWatchList": "Hanya tajuk dalam senarai tontonan saya",
+    "fromYear": "Dari tahun",
+    "toYear": "Hingga tahun",
+    "from": "Dari",
+    "to": "hingga",
+    "toPlaceholder": "Hingga",
+    "lastWeek": "Minggu lalu",
+    "last30Days": "30 hari lalu",
+    "last3Months": "3 bulan lalu",
+    "lastYear": "Tahun lalu",
+    "ratingAtLeast": "{{rating}}+",
+    "findPerson": "Cari orang",
+    "nobody": "Tiada sesiapa dengan nama itu dalam pustaka ini.",
+    "showResults": "Tunjukkan hasil",
+    "section": {
+      "title": "Tajuk",
+      "watched": "Ditonton",
+      "genre": "Genre",
+      "year": "Tahun",
+      "firstAired": "Mula ditayangkan",
+      "released": "Keluaran",
+      "added": "Ditambah",
+      "rating": "Penarafan",
+      "episodeLength": "Tempoh episod",
+      "runtime": "Tempoh",
+      "quality": "Kualiti",
+      "network": "Rangkaian atau studio",
+      "studio": "Studio",
+      "ageRating": "Penarafan umur",
+      "language": "Bahasa asal",
+      "country": "Negara",
+      "creator": "Dicipta atau diarahkan oleh",
+      "director": "Pengarah",
+      "people": "Pelakon dan kru"
+    }
+  },
+  "appearance": {
+    "title": "Penampilan",
+    "useServerTheme": "Gunakan tema pelayan ({{name}})",
+    "guestHint": "Semua orang di rumah tanpa akaun berkongsi tema ini.",
+    "hint": "Tema anda mengikut anda ke apl Matinee pada telefon dan TV anda.",
+    "theme": "Tema",
+    "preview": {
+      "tonight": "Malam ini",
+      "trailer": "Treler"
+    },
+    "serverTheme": "Tema pelayan",
+    "serverThemeHint": "Apa yang dilihat semua orang sehingga mereka memilih sendiri, dan pada halaman log masuk.",
+    "custom": "{{name}} (tersuai)",
+    "addYourOwn": "Untuk menambah tema anda sendiri, letakkan fail tema dalam folder <code>themes</code> pelayan, di dalam folder datanya.",
+    "howTo": "Cara membuat tema",
+    "skipped": "Dilangkau {{problem}}"
+  },
+  "newFiles": {
+    "title": "Fail baharu",
+    "intro": "Matinee perasan fail yang anda tambah, namakan semula atau padam, dan mengemas kini pustaka beberapa saat selepas fail selesai disalin.",
+    "watch": "Pantau fail baharu",
+    "summary": {
+      "some": "Sesetengah folder disemak setiap {{every}}",
+      "watching": "Memantau fail baharu",
+      "polling": "Fail baharu disemak setiap {{every}}",
+      "pollingShare": "Fail baharu disemak setiap {{every}} (perkongsian rangkaian)",
+      "off": "Fail baharu tidak dipantau"
+    },
+    "mode": {
+      "auto": {
+        "label": "Automatik",
+        "hint": "Serta-merta pada cakera pelayan sendiri. Perkongsian rangkaian (SMB, NFS) tidak memaklumkan perubahan, jadi Matinee menyemaknya setiap {{every}}."
+      },
+      "poll": {
+        "label": "Semak mengikut pemasa",
+        "hint": "Setiap folder disemak setiap {{every}}. Pilih ini jika fail baharu pada cakera tidak muncul dengan sendirinya."
+      },
+      "off": {
+        "label": "Mati",
+        "hint": "Fail baharu muncul pada imbasan penuh seterusnya, atau apabila anda menekan Imbas."
+      }
+    },
+    "rescan": "Setiap pustaka juga diimbas semula sepenuhnya setiap {{every}}, yang menangkap apa sahaja yang lain, seperti fail yang diganti di tempatnya pada perkongsian.",
+    "rescanOff": "Imbasan semula penuh dimatikan pada pelayan ini (MATINEE_SCAN_INTERVAL=0)."
+  },
+  "analysis": {
+    "title": "Analisis media",
+    "intro": "Matinee membaca setiap fail perlahan-lahan untuk kualiti, bunyi dan bahasanya, dan sekali lagi apabila fail berubah.",
+    "state": {
+      "lookingAt": "Meneliti {{file}}",
+      "working": "Sedang bekerja",
+      "waiting": "Menunggu main balik selesai",
+      "slowDisk": "Fail lambat dibaca; berehat beberapa minit",
+      "allDone": "Semua fail telah dianalisis",
+      "upToDate": "Terkini",
+      "paused": "Dijeda"
+    },
+    "progress": "{{done}} daripada {{total}}",
+    "unreadable_other": "{{count}} fail tidak dapat dibaca.",
+    "speed": "Kelajuan",
+    "mode": {
+      "gentle": {
+        "label": "Lembut",
+        "hint": "Satu fail setiap beberapa saat, dan tiada langsung semasa pelayan menukar sesuatu untuk main balik."
+      },
+      "normal": {
+        "label": "Biasa",
+        "hint": "Fail berturut-turut, masih pada keutamaan terendah."
+      },
+      "off": {
+        "label": "Mati",
+        "hint": "Dijeda sehingga anda menghidupkannya semula."
+      }
+    }
+  },
+  "profileSettings": {
+    "title": "Profil",
+    "intro": "Profil berkongsi satu log masuk tetapi menyimpan kemajuan, senarai tontonan dan tema masing-masing. Profil kanak-kanak hanya melihat apa yang anda benarkan. PIN mengekalkan profil, atau akaun itu sendiri, untuk pemiliknya.",
+    "pinFor": "PIN 4 digit untuk {{name}}",
+    "homeDevices": "Peranti di rangkaian rumah anda yang belum log masuk",
+    "account": "Akaun",
+    "removePin": "Alih keluar PIN",
+    "addPin": "Tambah PIN",
+    "hasPin": "Ada PIN",
+    "edit": "Edit {{name}}",
+    "remove": "Alih keluar {{name}}",
+    "confirmRemove": "Alih keluar {{name}}? Kemajuan dan senarai tontonannya turut hilang.",
+    "add": "Tambah profil",
+    "name": "Nama",
+    "newPin": "PIN baharu",
+    "pinOptional": "PIN (pilihan)",
+    "unchanged": "Tidak berubah",
+    "fourDigits": "4 digit",
+    "removeThePin": "Alih keluar PIN",
+    "colour": "Warna",
+    "kidsMode": "Mod kanak-kanak",
+    "kidsOff": "Mati: melihat semuanya",
+    "kidsLevel": "{{name}}: {{ratings}}",
+    "kidsLibraries": "Apa yang dilihat profil ini dalam setiap pustaka. Mengikut penarafan menyembunyikan tajuk yang ditarafkan melebihi tahap {{level}} dan tajuk tanpa penarafan. Profil kanak-kanak tidak boleh membuka Tetapan atau membuat permintaan.",
+    "libraryMode": {
+      "hidden": "Disembunyikan",
+      "rated": "Mengikut penarafan",
+      "all": "Semuanya"
+    }
+  },
+  "report": {
+    "thanks": "Terima kasih, pentadbir akan menelitinya.",
+    "button": "Laporkan masalah",
+    "whatsWrong": "Apa masalah dengan {{title}}?",
+    "details": "Butiran (pilihan)",
+    "detailsExample": "Contohnya: tiada bunyi selepas 20 minit",
+    "send": "Hantar"
+  },
+  "quality": {
+    "label": "Kualiti",
+    "forShow": "Kualiti untuk rancangan",
+    "confirm": "Tukar kepada {{name}}? {{app}} akan mencari salinan yang sepadan.",
+    "searching": "Mencari…"
+  },
+  "upcoming": {
+    "nothingYet": "Belum ada apa-apa untuk ditunjukkan",
+    "connect": "Sambungkan Radarr atau Sonarr untuk melihat filem dan episod yang sedang dalam perjalanan.",
+    "openSettings": "Buka tetapan",
+    "notConnected": "Pentadbir belum menyambungkan Radarr atau Sonarr ke pelayan ini.",
+    "intro": "Episod baharu dan keluaran filem dalam dua bulan akan datang yang belum tiba.",
+    "unavailable": "{{apps}} tidak menjawab, jadi mungkin ada yang tertinggal.",
+    "nothing": "Tiada apa-apa dalam perjalanan. Minta sesuatu yang baharu daripada Permintaan."
+  },
+  "link": {
+    "title": "Log masuk peranti",
+    "intro": "Masukkan kod yang ditunjukkan oleh telefon atau TV anda.",
+    "signedIn": "{{device}} telah log masuk",
+    "ready": "Ia akan sedia dalam beberapa saat.",
+    "declined": "Ditolak",
+    "notSignedIn": "{{device}} tidak dilog masuk.",
+    "another": "Log masuk peranti lain",
+    "code": "Kod",
+    "next": "Seterusnya",
+    "wantsToSignIn": "mahu log masuk sebagai <name>{{name}}</name>",
+    "warning": "Luluskan hanya peranti yang anda pegang atau boleh lihat. Ia mendapat akses yang sama seperti anda.",
+    "decline": "Tolak",
+    "approve": "Log masuk"
+  },
+  "profiles": {
+    "whoIsWatching": "Siapa yang menonton?",
+    "signInWithAccount": "Log masuk dengan akaun",
+    "enterPin": "Masukkan PIN {{name}}",
+    "pin": "PIN",
+    "deleteDigit": "Padam"
+  },
+  "integrations": {
+    "title": "Radarr dan Sonarr",
+    "intro": "Sambungkannya supaya orang boleh meminta filem dan rancangan, melihat apa yang akan datang dan melaporkan masalah dengan apa yang mereka tonton.",
+    "connected": "Disambungkan · {{url}}",
+    "notConnected": {
+      "radarr": "Tidak disambungkan · untuk filem",
+      "sonarr": "Tidak disambungkan · untuk rancangan"
+    },
+    "change": "Tukar",
+    "connect": "Sambung",
+    "address": "Alamat",
+    "apiKey": "Kunci API",
+    "keyWhere": "{{app}} → Settings → General",
+    "saved": "Disimpan",
+    "answers": "{{app}} {{version}} menjawab di {{url}}",
+    "quality": {
+      "radarr": "Kualiti untuk filem baharu",
+      "sonarr": "Kualiti untuk rancangan baharu"
+    },
+    "folder": "Folder",
+    "confirmDisconnect": "Putuskan sambungan {{app}}? Tajuk yang sudah ada di sana kekal.",
+    "disconnect": "Putuskan sambungan",
+    "testing": "Menguji…",
+    "test": "Uji",
+    "whoCanAdd": "Siapa boleh menambah filem dan rancangan",
+    "mode": {
+      "approve": {
+        "label": "Minta, kemudian pentadbir meluluskan",
+        "detail": "Sesiapa yang mempunyai akaun boleh meminta tajuk. Ia menunggu pentadbir."
+      },
+      "auto": {
+        "label": "Tambah serta-merta",
+        "detail": "Apa yang diminta terus pergi ke Radarr atau Sonarr."
+      },
+      "off": {
+        "label": "Hanya pentadbir menambah tajuk",
+        "detail": "Orang lain masih boleh melihat apa yang akan datang dan melaporkan masalah."
+      }
+    },
+    "overseerr": {
+      "intro": "Sambungkannya untuk menambah tab Teroka: apa yang sohor kini, cadangan berdasarkan tontonan orang, dan cara untuk meminta apa sahaja. Jellyseerr juga boleh.",
+      "notConnected": "Tidak disambungkan · untuk Teroka",
+      "requestAs": "Permintaan daripada orang tanpa akaun Overseerr",
+      "madeAsOwner": "Dibuat sebagai {{name}} (pemilik kunci API)",
+      "madeAs": "Dibuat sebagai {{name}}",
+      "sameName": "Orang yang mempunyai akaun Overseerr dengan nama yang sama meminta atas nama sendiri. Overseerr menentukan permintaan mana yang perlu diluluskan, berdasarkan kebenaran setiap pengguna di sana.",
+      "confirmDisconnect": "Putuskan Overseerr? Tab Teroka akan hilang."
+    }
+  },
+  "requests": {
+    "tab": {
+      "ask": "Minta sesuatu",
+      "requests": "Permintaan",
+      "yourRequests": "Permintaan anda",
+      "problems": "Masalah",
+      "yourReports": "Laporan anda"
+    },
+    "movies": "Filem",
+    "shows": "Rancangan",
+    "findMovie": "Cari filem…",
+    "findShow": "Cari rancangan…",
+    "nothingFound": "Tiada apa-apa ditemui untuk \"{{q}}\"",
+    "ready": "Sedia untuk ditonton",
+    "askedFor": "Diminta",
+    "onItsWay": "Dalam perjalanan",
+    "add": "Tambah",
+    "askForIt": "Mintanya",
+    "state": {
+      "pending": "Menunggu kelulusan",
+      "approved": "Dalam perjalanan",
+      "declined": "Ditolak",
+      "failed": "Tidak dapat ditambah"
+    },
+    "none": "Belum ada permintaan.",
+    "retry": "Cuba lagi",
+    "approve": "Luluskan",
+    "remove": "Alih keluar permintaan untuk {{title}}",
+    "removedFromLibrary": "Dialih keluar daripada pustaka",
+    "noProblems": "Tiada sesiapa melaporkan masalah.",
+    "noReports": "Anda belum melaporkan sebarang masalah. Gunakan \"Laporkan masalah\" pada sesuatu tajuk.",
+    "fileReplaced": "Fail diganti",
+    "closed": "Ditutup",
+    "confirmReplace": "Padam fail {{title}} ini dan muat turun salinan lain? Yang baharu muncul selepas dimuat turun dan pustaka diimbas.",
+    "replaceFile": "Ganti fail",
+    "close": "Tutup"
+  },
+  "settings": {
+    "tmdbNotice": "Poster dan penerangan datang daripada <link>TMDB</link>. Produk ini menggunakan API TMDB tetapi tidak disokong atau diperakui oleh TMDB.",
+    "libraries": {
+      "title": "Pustaka",
+      "none": "Belum ada pustaka.",
+      "scan": "Imbas",
+      "remove": "Alih keluar {{name}}",
+      "confirmRemove": "Alih keluar \"{{name}}\"? Fail anda kekal di tempatnya.",
+      "kind": {
+        "movies": "Filem",
+        "tv": "Rancangan TV",
+        "music": "Muzik"
+      },
+      "type": "Jenis",
+      "folders": "Folder",
+      "up": "Naik satu folder",
+      "added": "Ditambah",
+      "useFolder": "Gunakan folder ini",
+      "noSubfolders": "Tiada subfolder"
+    },
+    "people": {
+      "title": "Orang",
+      "admin": "Pentadbir",
+      "passwordChanged": "Kata laluan ditukar. {{name}} telah dilog keluar di semua tempat.",
+      "you": "(anda)",
+      "removeAdmin": "Buang pentadbir",
+      "makeAdmin": "Jadikan pentadbir",
+      "resetPassword": "Tetapkan semula kata laluan",
+      "remove": "Alih keluar",
+      "newPasswordFor": "Kata laluan baharu untuk {{name}}",
+      "setPassword": "Tetapkan kata laluan",
+      "confirmRemove": "Alih keluar <name>{{name}}</name>? Sejarah tontonan, senarai tontonan, muat turun dan permintaannya turut hilang, dan dia dilog keluar di semua tempat. Ini tidak boleh dibuat asal."
+    },
+    "account": {
+      "title": "Akaun anda",
+      "changePassword": "Tukar kata laluan",
+      "current": "Kata laluan semasa",
+      "new": "Kata laluan baharu",
+      "again": "Kata laluan baharu sekali lagi",
+      "hint": "Sekurang-kurangnya 8 aksara. Peranti anda yang lain akan dilog keluar.",
+      "mismatch": "Kata laluan baharu tidak sepadan.",
+      "changed": "Kata laluan ditukar. Peranti anda yang lain telah dilog keluar."
+    },
+    "devices": {
+      "aWhileAgo": "sebentar tadi",
+      "justNow": "baru sahaja",
+      "title": "Peranti anda",
+      "unknown": "Peranti tidak dikenali",
+      "this": "Peranti ini",
+      "lastUsed": "Terakhir digunakan {{when}}",
+      "confirmSignOut": "Log keluar \"{{name}}\"?"
+    },
+    "version": "Pelayan Matinee {{version}} · API v{{api}}",
+    "home": {
+      "title": "Rangkaian rumah",
+      "requireSignIn": "Minta log masuk di rumah",
+      "required": "Semua orang log masuk, di rumah dan di luar.",
+      "open": "Telefon, TV dan pelayar di rangkaian rumah anda boleh menonton tanpa log masuk. Mereka berkongsi satu akaun Rumah dan tidak boleh menukar apa-apa. Di luar rumah, semua orang log masuk."
+    },
+    "remote": {
+      "title": "Akses jauh",
+      "publicURL": "Di luar rumah, apl bersambung ke <url>{{url}}</url>, alamat yang digunakan semasa pelayan ini disediakan.",
+      "toggle": "Tonton di luar rumah",
+      "hint": "Matinee meminta penghala anda membuka port dan mendapatkan sijil supaya apl bersambung dengan selamat dari mana-mana. Semua orang log masuk dari luar.",
+      "working": "Membuka port pada penghala dan mendapatkan sijil…",
+      "ready": "Apl mencapai pelayan ini di <url>{{url}}</url> apabila berada di luar rumah.",
+      "router": "Penghala anda membuka port melalui {{router}}.",
+      "pickUp": "Apl akan mengambil alamat ini apabila berada di rangkaian rumah anda nanti.",
+      "sharedAddress": "Matinee belum dapat mengatasi ini sendiri.",
+      "retry": "Matinee mencuba lagi setiap setengah jam."
+    },
+    "playback": {
+      "title": "Main balik",
+      "autoPlay": "Main episod seterusnya",
+      "autoPlayHint": "Apabila kredit bermula, episod seterusnya dimainkan selepas kira detik 10 saat yang boleh anda batalkan.",
+      "binge": "Langkau kira detik",
+      "bingeHint": "Terus ke episod seterusnya apabila kredit bermula. Selepas tiga berturut-turut tanpa menyentuh apa-apa, anda akan ditanya sama ada masih menonton."
+    },
+    "trailers": {
+      "title": "Treler",
+      "remote": "Treler daripada YouTube",
+      "remoteOn": "Filem dan rancangan menawarkan treler daripada TMDB, yang dimainkan dari YouTube. Fail treler di sebelah media anda juga sentiasa ditunjukkan.",
+      "remoteOff": "Hanya fail treler di sebelah media anda ditunjukkan, seperti \"Movie (2020)-trailer.mkv\" atau apa sahaja dalam folder Trailers."
+    },
+    "transcoding": {
+      "title": "Transkod",
+      "intro": "Fail yang tidak dapat dimainkan oleh peranti seadanya ditukar semasa anda menonton. GPU melakukannya dengan lebih pantas dan kurang membebankan pelayan.",
+      "convertingWith": "Menukar dengan",
+      "active": "{{name}}.",
+      "activeOn": "{{name}} pada {{detail}}.",
+      "fullGPU": "Video dinyahkod, disaiz semula dan dikod pada GPU.",
+      "encodeOnly": "Video dikod pada GPU dan dinyahkod pada CPU.",
+      "fallback": "Jika GPU tidak dapat mengendalikan fail, ia dimainkan melalui CPU.",
+      "testing": "Menguji GPU pelayan ini…",
+      "cpuOff": "CPU. Transkod perkakasan dimatikan.",
+      "cpuFailed": "CPU, kerana pemecut yang anda pilih tidak berfungsi pada pelayan ini.",
+      "cpuNoGPU": "CPU. Tiada GPU pada pelayan ini yang lulus ujian.",
+      "hardware": "Pecutan perkakasan",
+      "auto": "Automatik: yang terbaik yang berfungsi",
+      "off": "Mati: sentiasa gunakan CPU",
+      "notFound": "{{name}} (tidak ditemui pada pelayan ini)",
+      "accelerator": {
+        "nvenc": "NVIDIA NVENC",
+        "vaapi": "VAAPI (AMD dan Intel pada Linux)",
+        "qsv": "Intel Quick Sync",
+        "videotoolbox": "VideoToolbox (Mac)",
+        "amf": "AMD AMF (Windows)",
+        "v4l2m2m": "V4L2 (Raspberry Pi)"
+      }
+    },
+    "homeRows": {
+      "title": "Laman utama",
+      "holidays": "Baris perayaan",
+      "holidaysDetail": "Sebulan sebelum Hari Valentine, Easter, Halloween, Thanksgiving dan Krismas, dan seminggu sebelum malam Tahun Baharu, Laman utama bermula dengan baris tajuk untuk hari itu, dipilih berdasarkan kata kunci, tajuk dan penerangannya."
+    }
+  },
+  "language": {
+    "title": "Bahasa",
+    "label": "Tunjukkan Matinee dalam",
+    "hint": "Bahasa anda mengikut anda ke apl Matinee pada telefon dan TV anda. Tajuk dan penerangan juga dalam bahasa itu, jika TMDB memilikinya.",
+    "guestHint": "Semua orang di rumah tanpa akaun berkongsi bahasa ini.",
+    "automatic": "Automatik ({{language}})",
+    "machine": "Bahasa ini diterjemahkan oleh mesin, jadi sesetengah perkataan mungkin kedengaran janggal.",
+    "help": "Bantu memperbaikinya"
+  },
+  "discover": {
+    "title": "Teroka",
+    "emptyTitle": "Belum ada apa-apa untuk diteroka",
+    "connectIt": "Sambungkan Overseerr untuk melihat apa yang sohor kini, mendapat cadangan, dan meminta filem dan siri baharu.",
+    "openSettings": "Buka tetapan",
+    "notConnected": "Pentadbir belum menyambungkan Overseerr ke pelayan ini.",
+    "placeholder": "Cari mana-mana filem atau siri…",
+    "unavailable": "Teroka tidak tersedia sekarang",
+    "open": "Buka",
+    "request": "Minta",
+    "requestShow": "Minta siri ini",
+    "asking": "Meminta…",
+    "waiting": "Menunggu kelulusan pentadbir.",
+    "onItsWay": "Ia akan muncul dalam pustaka anda selepas dimuat turun.",
+    "findIt": "Cari dalam Teroka"
+  }
+}

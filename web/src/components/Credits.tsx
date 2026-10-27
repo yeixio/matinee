@@ -1,9 +1,11 @@
 import { Info, Trophy, X } from 'lucide-react'
 import { useEffect, useState, type ReactNode } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { personImageUrl, type Award, type Credit, type Details, type ItemDetail } from '../api'
 import { hue } from '../format'
-import { castLine, crewLine, detailFacts, roleLabel } from '../people'
+import { awardSummary } from '../media'
+import { castLine, crewLine, detailFacts, jobName, roleLabel } from '../people'
 import { Row } from './Row'
 import { Button } from './ui'
 
@@ -56,19 +58,20 @@ function PersonCard({ c }: { c: Credit }) {
 
 // The cast row under the header, and an episode's guest stars.
 export function CastRows({ item }: { item: ItemDetail }) {
+  const { t } = useTranslation()
   const credits = item.credits
   if (!credits) return null
   return (
     <>
       {credits.cast.length > 0 && (
-        <Row title={item.kind === 'episode' ? 'Series cast' : 'Cast'}>
+        <Row title={item.kind === 'episode' ? t('credits.seriesCast') : t('credits.cast')}>
           {credits.cast.map((c) => (
             <PersonCard key={c.personId} c={c} />
           ))}
         </Row>
       )}
       {!!credits.guests?.length && (
-        <Row title="Guest stars">
+        <Row title={t('credits.guestStars')}>
           {credits.guests.map((c) => (
             <PersonCard key={c.personId} c={c} />
           ))}
@@ -80,9 +83,10 @@ export function CastRows({ item }: { item: ItemDetail }) {
 
 // "Directed by …", "Starring …" and the award line, for the main pane.
 export function KeyPeople({ item }: { item: ItemDetail }) {
+  const { t } = useTranslation()
   const crew = item.credits ? crewLine(item.credits.crew) : []
   const stars = item.credits && item.kind !== 'episode' ? castLine(item.credits.cast) : []
-  const awards = item.details?.awardSummary
+  const awards = item.details?.awards?.length ? awardSummary(item.details.awards) : item.details?.awardSummary
   if (crew.length === 0 && stars.length === 0 && !awards) return null
   return (
     <div className="space-y-1.5 text-sm">
@@ -96,7 +100,7 @@ export function KeyPeople({ item }: { item: ItemDetail }) {
       ))}
       {stars.length > 0 && (
         <div className="flex gap-2">
-          <span className="shrink-0 text-muted">Starring</span>
+          <span className="shrink-0 text-muted">{t('credits.starring')}</span>
           <span className="min-w-0">
             <People list={stars} />
           </span>
@@ -113,11 +117,12 @@ export function KeyPeople({ item }: { item: ItemDetail }) {
 }
 
 function People({ list }: { list: { id: number; name: string }[] }) {
+  const { t } = useTranslation()
   return (
     <>
       {list.map((p, i) => (
         <span key={p.id}>
-          {i > 0 && ', '}
+          {i > 0 && t('listSeparator')}
           <Link to={personLink(p.id)} className="hover:text-accent-strong hover:underline">
             {p.name}
           </Link>
@@ -128,12 +133,13 @@ function People({ list }: { list: { id: number; name: string }[] }) {
 }
 
 export function MoreDetailsButton({ item }: { item: ItemDetail }) {
+  const { t } = useTranslation()
   const [open, setOpen] = useState(false)
   if (!item.details && !item.credits?.crew.length) return null
   return (
     <>
       <Button variant="ghost" icon={<Info className="size-4" />} onClick={() => setOpen(true)}>
-        More details
+        {t('credits.moreDetails')}
       </Button>
       {open && <MoreDetails item={item} onClose={() => setOpen(false)} />}
     </>
@@ -141,6 +147,7 @@ export function MoreDetailsButton({ item }: { item: ItemDetail }) {
 }
 
 function MoreDetails({ item, onClose }: { item: ItemDetail; onClose: () => void }) {
+  const { t } = useTranslation()
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose()
     window.addEventListener('keydown', onKey)
@@ -154,7 +161,7 @@ function MoreDetails({ item, onClose }: { item: ItemDetail; onClose: () => void 
       <div
         role="dialog"
         aria-modal="true"
-        aria-label="More details"
+        aria-label={t('credits.moreDetails')}
         onClick={(e) => e.stopPropagation()}
         className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-t-2xl border border-line/60 bg-surface p-5 shadow-2xl sm:rounded-2xl md:p-6"
       >
@@ -163,18 +170,18 @@ function MoreDetails({ item, onClose }: { item: ItemDetail; onClose: () => void 
             <h2 className="text-lg font-semibold">{item.title}</h2>
             {d.tagline && <p className="text-sm text-muted italic">{d.tagline}</p>}
           </div>
-          <button onClick={onClose} aria-label="Close" className="text-muted hover:text-text">
+          <button onClick={onClose} aria-label={t('close')} className="text-muted hover:text-text">
             <X className="size-5" />
           </button>
         </div>
         <div className="space-y-6">
           <Facts d={d} kind={item.kind} />
           {crew.length > 0 && (
-            <Section title="Crew">
+            <Section title={t('credits.crew')}>
               <dl className="grid grid-cols-1 gap-x-6 gap-y-2 text-sm sm:grid-cols-2">
                 {crew.map((c, i) => (
                   <div key={`${c.personId}-${c.role}-${i}`} className="flex min-w-0 gap-2">
-                    <dt className="w-36 shrink-0 text-muted">{c.role}</dt>
+                    <dt className="w-36 shrink-0 text-muted">{jobName(c.role ?? '')}</dt>
                     <dd className="min-w-0 truncate">
                       <Link to={personLink(c.personId)} onClick={onClose} className="hover:text-accent-strong hover:underline">
                         {c.name}
@@ -207,10 +214,11 @@ function Section({ title, children }: { title: string; children: ReactNode }) {
 }
 
 function Facts({ d, kind }: { d: Details; kind: string }) {
+  const { t } = useTranslation()
   const rows = detailFacts(d, kind)
   if (rows.length === 0) return null
   return (
-    <Section title="About">
+    <Section title={t('credits.about')}>
       <dl className="grid grid-cols-1 gap-x-6 gap-y-2 text-sm sm:grid-cols-2">
         {rows.map(([label, value]) => (
           <div key={label} className="flex min-w-0 gap-2">
@@ -224,10 +232,11 @@ function Facts({ d, kind }: { d: Details; kind: string }) {
 }
 
 function Awards({ awards }: { awards: Award[] }) {
+  const { t } = useTranslation()
   const [all, setAll] = useState(false)
   const shown = all ? awards : awards.slice(0, 12)
   return (
-    <Section title="Awards">
+    <Section title={t('credits.awards')}>
       <ul className="space-y-1.5 text-sm">
         {shown.map((a, i) => (
           <li key={i} className="flex gap-2">
@@ -236,9 +245,8 @@ function Awards({ awards }: { awards: Award[] }) {
               <span className={a.won ? '' : 'text-text/80'}>{a.name}</span>
               <span className="text-muted">
                 {' · '}
-                {a.won ? 'Won' : 'Nominated'}
-                {a.year ? ` ${a.year}` : ''}
-                {a.names?.length ? ` · ${a.names.join(', ')}` : ''}
+                {a.year ? t(a.won ? 'credits.wonIn' : 'credits.nominatedIn', { year: a.year }) : t(a.won ? 'credits.won' : 'credits.nominated')}
+                {a.names?.length ? ` · ${a.names.join(t('listSeparator'))}` : ''}
               </span>
             </span>
           </li>
@@ -246,10 +254,10 @@ function Awards({ awards }: { awards: Award[] }) {
       </ul>
       {awards.length > shown.length && (
         <button onClick={() => setAll(true)} className="mt-2 text-sm text-accent hover:text-accent-strong">
-          Show all {awards.length}
+          {t('credits.showAll', { count: awards.length })}
         </button>
       )}
-      <p className="mt-3 text-xs text-faint">Awards from Wikidata.</p>
+      <p className="mt-3 text-xs text-faint">{t('credits.awardsSource')}</p>
     </Section>
   )
 }

@@ -2,14 +2,17 @@ import { useQuery } from '@tanstack/react-query'
 import type Hls from 'hls.js'
 import { Clapperboard, X } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { api, trailerFileUrl, type Item, type Trailer } from '../api'
 import { clock } from '../format'
+import i18n from '../i18n'
 import { canDirectPlay } from '../player/direct'
 import { Button, Spinner } from './ui'
 
 // TrailerButton shows on movies, shows and seasons that have a trailer, from
 // a file next to the media or (unless an admin turned it off) from YouTube.
 export function TrailerButton({ item }: { item: Item }) {
+  const { t } = useTranslation()
   const [open, setOpen] = useState(false)
   const has = item.kind === 'movie' || item.kind === 'show' || item.kind === 'season'
   const { data: trailers } = useQuery({
@@ -22,7 +25,7 @@ export function TrailerButton({ item }: { item: Item }) {
   return (
     <>
       <Button icon={<Clapperboard className="size-4" />} onClick={() => setOpen(true)}>
-        Trailer
+        {t('trailer.trailer')}
       </Button>
       {open && <TrailerDialog item={item} trailers={trailers} onClose={() => setOpen(false)} />}
     </>
@@ -30,6 +33,7 @@ export function TrailerButton({ item }: { item: Item }) {
 }
 
 function TrailerDialog({ item, trailers, onClose }: { item: Item; trailers: Trailer[]; onClose: () => void }) {
+  const { t: tr } = useTranslation()
   const [current, setCurrent] = useState(trailers[0])
   useEffect(() => {
     const key = (e: KeyboardEvent) => e.key === 'Escape' && onClose()
@@ -41,7 +45,7 @@ function TrailerDialog({ item, trailers, onClose }: { item: Item; trailers: Trai
     <div
       role="dialog"
       aria-modal="true"
-      aria-label={`${item.title} trailer`}
+      aria-label={tr('trailer.named', { title: item.title })}
       className="animate-fade fixed inset-0 z-50 flex flex-col items-center justify-center gap-4 bg-ink/95 p-4 backdrop-blur md:p-10"
       onClick={onClose}
     >
@@ -50,7 +54,7 @@ function TrailerDialog({ item, trailers, onClose }: { item: Item; trailers: Trai
           <div className="truncate font-display text-lg font-semibold">{item.title}</div>
           <div className="truncate text-sm text-muted">{current.name}</div>
         </div>
-        <button onClick={onClose} aria-label="Close" className="grid size-10 shrink-0 place-items-center rounded-full bg-text/10 hover:bg-text/20">
+        <button onClick={onClose} aria-label={tr('close')} className="grid size-10 shrink-0 place-items-center rounded-full bg-text/10 hover:bg-text/20">
           <X className="size-5" />
         </button>
       </div>
@@ -84,7 +88,7 @@ function TrailerDialog({ item, trailers, onClose }: { item: Item; trailers: Trai
               }`}
             >
               {t.name}
-              {t.durationMs ? <span className="ml-1.5 text-faint tabular-nums">{clock(t.durationMs / 1000)}</span> : null}
+              {t.durationMs ? <span className="ms-1.5 text-faint tabular-nums">{clock(t.durationMs / 1000)}</span> : null}
             </button>
           ))}
         </div>
@@ -116,14 +120,14 @@ function LocalTrailer({ item, trailer, onEnded }: { item: Item; trailer: Trailer
           hls = new Hls()
           hls.loadSource(url)
           hls.attachMedia(el)
-          hls.on(Hls.Events.ERROR, (_, d) => d.fatal && setError("This trailer won't play."))
+          hls.on(Hls.Events.ERROR, (_, d) => d.fatal && setError(i18n.t('trailer.wontPlay')))
         } else {
           el.src = url // Safari plays HLS natively
         }
       }
       el.play().catch(() => {})
     }
-    start().catch(() => !cancelled && setError("This trailer won't play."))
+    start().catch(() => !cancelled && setError(i18n.t('trailer.wontPlay')))
     return () => {
       cancelled = true
       hls?.destroy()
@@ -141,7 +145,7 @@ function LocalTrailer({ item, trailer, onEnded }: { item: Item; trailer: Trailer
         playsInline
         onPlaying={() => setLoading(false)}
         onEnded={onEnded}
-        onError={() => setError("This trailer won't play.")}
+        onError={() => setError(i18n.t('trailer.wontPlay'))}
       />
       {loading && !error && (
         <div className="pointer-events-none absolute inset-0 grid place-items-center">

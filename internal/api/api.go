@@ -73,6 +73,11 @@ type Server struct {
 	trailerCache    ttlCache        // trailer files' probes and TMDB's trailer lists (see trailers.go)
 	pins            pinGuard        // wrong profile PINs (see profiles.go)
 	holidayKeywords holidayKeywords // TMDB's ids for holiday keywords (see holidays.go)
+	langs           languages       // profiles' languages (see languages.go)
+
+	// Translate looks up translations for every library, when people start
+	// using a language; nil without an online provider that has them.
+	Translate func(context.Context)
 
 	// BackgroundCtx scopes scans started by API calls; it outlives any one request.
 	BackgroundCtx context.Context
@@ -120,6 +125,9 @@ func (s *Server) routes() []route {
 		{"GET /me", reader, s.me},
 		{"GET /me/theme", reader, s.getMyTheme},
 		{"PUT /me/theme", reader, s.putMyTheme},
+		{"GET /me/language", reader, s.getMyLanguage},
+		{"PUT /me/language", reader, s.putMyLanguage},
+		{"GET /languages", public, s.listLanguages},
 		{"GET /me/playback", reader, s.getMyPlayback},
 		{"PUT /me/playback", reader, s.putMyPlayback},
 		{"PUT /me/password", signedIn, s.changeMyPassword},
@@ -278,8 +286,42 @@ func writeLargeJSON(w http.ResponseWriter, r *http.Request, v any) {
 	gz.Close()
 }
 
+// writeError answers with an error in English, and its code, which the web
+// player and the apps show in their own language (i18n/locales/*/errors.json).
 func writeError(w http.ResponseWriter, status int, msg string) {
-	writeJSON(w, status, map[string]string{"error": msg})
+	writeJSON(w, status, map[string]string{"error": msg, "code": errorCode(msg)})
+}
+
+// writeErrorWith is writeError for a message that names something, such as a
+// title: template marks each name {{like_this}}, and params has them, so a
+// client can put them into the message in its own language.
+func writeErrorWith(w http.ResponseWriter, status int, template string, params map[string]string) {
+	msg := template
+	for k, v := range params {
+		msg = strings.ReplaceAll(msg, "{{"+k+"}}", v)
+	}
+	writeJSON(w, status, map[string]any{"error": msg, "code": errorCode(template), "params": params})
+}
+
+// errorCode names an error message for the catalog: "no such theme" is
+// no_such_theme, and "{{title}} is already on its way" is
+// title_is_already_on_its_way. Messages with details pasted in get codes the
+// catalog doesn't have, and show in English.
+func errorCode(msg string) string {
+	var b strings.Builder
+	under := false
+	for _, r := range strings.ToLower(msg) {
+		if r >= 'a' && r <= 'z' || r >= '0' && r <= '9' {
+			if under && b.Len() > 0 {
+				b.WriteByte('_')
+			}
+			b.WriteRune(r)
+			under = false
+		} else if r != '\'' {
+			under = true
+		}
+	}
+	return b.String()
 }
 
 func (s *Server) serverError(w http.ResponseWriter, err error) {
@@ -318,7 +360,7 @@ func (s *Server) requireUser(h http.HandlerFunc, level access) http.Handler {
 					s.serverError(w, err)
 					return
 				}
-				h(w, r.WithContext(auth.WithUser(r.Context(), guest)))
+				h(w, r.WithContext(store.WithLanguage(auth.WithUser(r.Context(), guest), s.requestLanguage(r, guest))))
 				return
 			}
 		}
@@ -352,7 +394,7 @@ func (s *Server) requireUser(h http.HandlerFunc, level access) http.Handler {
 			writeError(w, http.StatusForbidden, "admins only")
 			return
 		}
-		h(w, r.WithContext(auth.WithUser(r.Context(), u)))
+		h(w, r.WithContext(store.WithLanguage(auth.WithUser(r.Context(), u), s.requestLanguage(r, u))))
 	})
 }
 

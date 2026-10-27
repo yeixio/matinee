@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { Check, ChevronRight, LoaderCircle, Play, Shuffle } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import { Link, useParams } from 'react-router-dom'
 import { api, pendingRefetch, type Item, type ItemDetail, type User } from '../api'
 import { ItemQuality, ReportProblem } from '../components/Arr'
@@ -12,7 +13,8 @@ import { RelatedRows } from '../components/Related'
 import { TrailerButton } from '../components/Trailer'
 import { Button, Spinner } from '../components/ui'
 import { WatchListButton } from '../components/WatchListButton'
-import { clock, duration, progressFraction } from '../format'
+import { clock, duration, progressFraction, ratingLabel, seasonTitle } from '../format'
+import { genreName } from '../people'
 import { useAudio } from '../player/AudioPlayer'
 
 export default function ItemPage() {
@@ -61,9 +63,9 @@ function Breadcrumbs({ parents }: { parents: Item[] }) {
       {parents.map((p) => (
         <span key={p.id} className="flex items-center gap-1">
           <Link to={`/item/${p.id}`} className="hover:text-text">
-            {p.title}
+            {seasonTitle(p)}
           </Link>
-          <ChevronRight className="size-4 text-faint" />
+          <ChevronRight className="size-4 text-faint rtl:-scale-x-100" />
         </span>
       ))}
     </nav>
@@ -71,6 +73,7 @@ function Breadcrumbs({ parents }: { parents: Item[] }) {
 }
 
 function Header({ item, kids }: { item: ItemDetail; kids?: Item[] }) {
+  const { t } = useTranslation()
   const audio = useAudio()
   const { data: me } = useQuery<User>({ queryKey: ['me'], queryFn: api.me, staleTime: Infinity })
   const square = item.kind === 'album' || item.kind === 'artist'
@@ -84,9 +87,9 @@ function Header({ item, kids }: { item: ItemDetail; kids?: Item[] }) {
     item.year,
     d?.certification,
     item.durationMs && duration(item.durationMs),
-    item.rating ? `★ ${item.rating.toFixed(1)}` : '',
-    item.kind === 'album' && kids ? `${kids.length} tracks` : '',
-    d?.genres?.slice(0, 3).join(', '),
+    item.rating ? `★ ${ratingLabel(item.rating)}` : '',
+    item.kind === 'album' && kids ? t('common:count.tracks', { count: kids.length }) : '',
+    d?.genres?.slice(0, 3).map(genreName).join(', '),
   ].filter(Boolean)
 
   return (
@@ -110,7 +113,7 @@ function Header({ item, kids }: { item: ItemDetail; kids?: Item[] }) {
         />
         <div className="min-w-0 flex-1 space-y-4 pb-1">
           <Breadcrumbs parents={item.parents} />
-          <h1 className="text-3xl font-semibold md:text-5xl">{item.title}</h1>
+          <h1 className="text-3xl font-semibold md:text-5xl">{seasonTitle(item)}</h1>
           {facts.length > 0 && (
             <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-muted">
               {facts.map((f, i) => (
@@ -118,7 +121,7 @@ function Header({ item, kids }: { item: ItemDetail; kids?: Item[] }) {
               ))}
               {item.played && (
                 <span className="flex items-center gap-1 text-accent">
-                  <Check className="size-4" /> Watched
+                  <Check className="size-4" /> {t('common:watched.watched')}
                 </span>
               )}
             </div>
@@ -131,7 +134,7 @@ function Header({ item, kids }: { item: ItemDetail; kids?: Item[] }) {
           ) : (
             item.pending && (
               <p className="flex items-center gap-2 text-sm text-muted">
-                <LoaderCircle className="size-4 animate-spin" /> Fetching details…
+                <LoaderCircle className="size-4 animate-spin" /> {t('artwork.fetching')}
               </p>
             )
           )}
@@ -142,7 +145,7 @@ function Header({ item, kids }: { item: ItemDetail; kids?: Item[] }) {
             {item.playable && item.kind !== 'track' && (
               <Link to={`/watch/${item.id}`}>
                 <Button variant="primary" icon={<Play className="size-4 fill-current" />}>
-                  {resume ? `Resume from ${clock(item.positionMs! / 1000)}` : 'Play'}
+                  {resume ? t('item.resumeFrom', { time: clock(item.positionMs! / 1000) }) : t('item.play')}
                 </Button>
               </Link>
             )}
@@ -156,17 +159,17 @@ function Header({ item, kids }: { item: ItemDetail; kids?: Item[] }) {
             {item.kind === 'season' && firstUnwatched && (
               <Link to={`/watch/${firstUnwatched.id}`}>
                 <Button variant="primary" icon={<Play className="size-4 fill-current" />}>
-                  {firstUnwatched.positionMs ? 'Resume' : 'Play'} episode {firstUnwatched.index ?? ''}
+                  {t(firstUnwatched.positionMs ? 'item.resumeEpisode' : 'item.playEpisode', { episode: firstUnwatched.index ?? '' })}
                 </Button>
               </Link>
             )}
             {item.kind === 'album' && kids && kids.length > 0 && (
               <>
                 <Button variant="primary" icon={<Play className="size-4 fill-current" />} onClick={() => audio.play(kids)}>
-                  Play
+                  {t('item.play')}
                 </Button>
                 <Button icon={<Shuffle className="size-4" />} onClick={() => audio.play([...kids].sort(() => Math.random() - 0.5))}>
-                  Shuffle
+                  {t('item.shuffle')}
                 </Button>
               </>
             )}
@@ -189,9 +192,10 @@ function Header({ item, kids }: { item: ItemDetail; kids?: Item[] }) {
 }
 
 function Children({ item, items }: { item: ItemDetail; items: Item[] }) {
+  const { t } = useTranslation()
   if (item.kind === 'season') return <EpisodeList items={items} />
   if (item.kind === 'album') return <TrackList items={items} />
-  const title = item.kind === 'show' ? 'Seasons' : item.kind === 'artist' ? 'Albums' : ''
+  const title = item.kind === 'show' ? t('item.seasons') : item.kind === 'artist' ? t('item.albums') : ''
   return (
     <section className="space-y-4">
       {title && <h2 className="text-lg font-semibold">{title}</h2>}
@@ -201,9 +205,10 @@ function Children({ item, items }: { item: ItemDetail; items: Item[] }) {
 }
 
 function EpisodeList({ items }: { items: Item[] }) {
+  const { t } = useTranslation()
   return (
     <section className="space-y-2">
-      <h2 className="mb-4 text-lg font-semibold">Episodes</h2>
+      <h2 className="mb-4 text-lg font-semibold">{t('item.episodes')}</h2>
       {items.map((ep) => (
         <Link
           key={ep.id}
@@ -249,9 +254,9 @@ function TrackList({ items }: { items: Item[] }) {
           <button
             key={t.id}
             onClick={() => audio.play(items, i)}
-            className={`flex w-full items-center gap-4 px-4 py-3 text-left transition-colors hover:bg-text/5 ${current ? 'text-accent' : ''}`}
+            className={`flex w-full items-center gap-4 px-4 py-3 text-start transition-colors hover:bg-text/5 ${current ? 'text-accent' : ''}`}
           >
-            <span className="w-8 text-right text-sm text-faint tabular-nums">
+            <span className="w-8 text-end text-sm text-faint tabular-nums">
               {current && audio.playing ? '▶' : discs ? `${t.disc ?? 1}.${t.index ?? ''}` : (t.index ?? i + 1)}
             </span>
             <span className="min-w-0 flex-1 truncate">{t.title}</span>

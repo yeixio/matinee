@@ -1,16 +1,19 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { X } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { api, pendingRefetch, type Item } from '../api'
 import { ComingSoonRow } from '../components/Arr'
 import { PosterCard } from '../components/Card'
-import { collectionLink } from '../components/Collections'
+import { collectionLink, collectionName } from '../components/Collections'
 import { Hero } from '../components/Hero'
 import { Row, RowItem } from '../components/Row'
 import { useLibraries } from '../components/Shell'
 import { Button, EmptyState } from '../components/ui'
+import { genreRowTitle } from '../people'
 
 export default function Home() {
+  const { t } = useTranslation()
   const { data: libraries } = useLibraries()
   const hide = useHideFromContinueWatching()
   const { data, isPending } = useQuery({
@@ -21,11 +24,11 @@ export default function Home() {
 
   if (libraries && libraries.length === 0) {
     return (
-      <EmptyState title="Welcome to Matinee">
-        <p>Add a folder of movies, shows or music to get started.</p>
+      <EmptyState title={t('home.welcome')}>
+        <p>{t('home.welcomeHint')}</p>
         <Link to="/settings">
           <Button variant="primary" className="mt-6">
-            Add a library
+            {t('home.addLibrary')}
           </Button>
         </Link>
       </EmptyState>
@@ -48,7 +51,7 @@ export default function Home() {
         <Hero item={featured} onRemove={featured === data.continueWatching[0] ? () => hide.mutate(featured.id) : undefined} />
       )}
       {data.continueWatching.length > 0 && (
-        <Row title="Continue watching">
+        <Row title={t('home.continueWatching')}>
           {data.continueWatching.map((it) => (
             <RowItem key={it.id} wide>
               <ContinueWatchingCard item={it} />
@@ -57,7 +60,7 @@ export default function Home() {
         </Row>
       )}
       {data.recentlyAdded.length > 0 && (
-        <Row title="Recently added">
+        <Row title={t('home.recentlyAdded')}>
           {data.recentlyAdded.map((it) => (
             <RowItem key={it.id}>
               <PosterCard item={it} />
@@ -67,7 +70,7 @@ export default function Home() {
       )}
       {/* Continue watching, recently added and new releases stay at the top. */}
       {!!data.newReleases?.length && (
-        <Row title="New releases">
+        <Row title={t('home.newReleases')}>
           {data.newReleases.map((it) => (
             <RowItem key={it.id}>
               <PosterCard item={it} />
@@ -76,7 +79,7 @@ export default function Home() {
         </Row>
       )}
       {data.watchList.length > 0 && (
-        <Row title="Watch list" more="/watchlist">
+        <Row title={t('nav.watchList')} more="/watchlist">
           {data.watchList.map((it) => (
             <RowItem key={it.id}>
               <PosterCard item={it} />
@@ -86,7 +89,7 @@ export default function Home() {
       )}
       {/* A holiday coming up, pinned collections, then a few genres, different each day. */}
       {data.rows?.map((row) => (
-        <Row key={row.id} title={row.title} more={row.collectionId ? collectionLink({ id: row.collectionId }) : undefined}>
+        <Row key={row.id} title={row.holiday ? t(`common:holidays.${row.holiday}`, { defaultValue: row.title }) : row.genre ? genreRowTitle(row.genre) : collectionName({ name: row.title, starter: row.starter })} more={row.collectionId ? collectionLink({ id: row.collectionId }) : undefined}>
           {row.items.map((it) => (
             <RowItem key={it.id}>
               <PosterCard item={it} />
@@ -96,7 +99,7 @@ export default function Home() {
       ))}
       <ComingSoonRow />
       {data.recentlyAdded.length === 0 && (
-        <EmptyState title="Scanning your library">New titles show up here as soon as they're found.</EmptyState>
+        <EmptyState title={t('home.scanning')}>{t('home.scanningHint')}</EmptyState>
       )}
     </div>
   )
@@ -126,15 +129,16 @@ function useHideFromContinueWatching() {
 // A Continue Watching card with a button to take it off the row. The button
 // shows all the time on touch screens, and on hover with a mouse.
 function ContinueWatchingCard({ item }: { item: Item }) {
+  const { t } = useTranslation()
   const hide = useHideFromContinueWatching()
   return (
     <div className="group/cw relative">
       <PosterCard item={item} wide />
       <button
         onClick={() => hide.mutate(item.id)}
-        className="absolute top-1 right-1 grid size-11 place-items-center rounded-full transition-opacity focus:opacity-100 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover/cw:opacity-100"
-        aria-label={`Remove ${item.showTitle || item.title} from Continue watching`}
-        title="Remove from Continue watching"
+        className="absolute top-1 end-1 grid size-11 place-items-center rounded-full transition-opacity focus:opacity-100 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover/cw:opacity-100"
+        aria-label={t('home.removeNamed', { title: item.showTitle || item.title })}
+        title={t('home.remove')}
       >
         <span className="grid size-8 place-items-center rounded-full bg-black/60 text-white/90 backdrop-blur hover:bg-black/80 hover:text-white">
           <X className="size-4" />

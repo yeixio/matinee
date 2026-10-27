@@ -36,7 +36,8 @@ type Item struct {
 	// For episodes: the show's title and season number, for cards outside the show's pages.
 	ShowTitle   string `json:"showTitle,omitempty"`
 	SeasonIndex *int   `json:"seasonIndex,omitempty"`
-	OnWatchList bool   `json:"onWatchList,omitempty"`
+	showID      int64
+	OnWatchList bool `json:"onWatchList,omitempty"`
 	// Genres of a movie or show, from its online match.
 	Genres []string `json:"genres,omitempty"`
 	// MediaTags sums up what the background analysis found, such as 4k,
@@ -71,7 +72,8 @@ const itemCols = `
 	CASE WHEN i.kind = 'episode' THEN (SELECT se.index_number FROM items se WHERE se.id = i.parent_id) END,
 	EXISTS (SELECT 1 FROM watchlist wl WHERE wl.user_id = me.id AND wl.item_id = i.id),
 	COALESCE(i.media_tags, ''),
-	COALESCE(i.genres, '')`
+	COALESCE(i.genres, ''),
+	CASE WHEN i.kind = 'episode' THEN (SELECT se.parent_id FROM items se WHERE se.id = i.parent_id) END`
 
 const itemFrom = ` FROM (SELECT CAST(? AS BIGINT) AS id) me CROSS JOIN items i LEFT JOIN progress p ON p.item_id = i.id AND p.user_id = me.id`
 
@@ -85,12 +87,13 @@ func scanItem(r scanner) (Item, error) {
 	var rating sql.NullFloat64
 	var seasonIdx sql.NullInt64
 	var showTitle sql.NullString
+	var showID sql.NullInt64
 	var tags, genres string
 	err := r.Scan(&it.ID, &it.LibraryID, &parent, &it.Kind, &it.Title, &year, &idx, &disc,
 		&dur, &it.Container, &it.VideoCodec, &it.AudioCodec, &w, &h, &it.AddedAt, &it.Path, &it.Size, &it.Mtime,
 		&it.ChildCount, &it.PositionMs, &it.Played,
 		&it.Overview, &rating, &it.Poster, &it.Backdrop, &tmdb, &it.MetaAt,
-		&showTitle, &seasonIdx, &it.OnWatchList, &tags, &genres)
+		&showTitle, &seasonIdx, &it.OnWatchList, &tags, &genres, &showID)
 	if err != nil {
 		return it, err
 	}
@@ -108,7 +111,7 @@ func scanItem(r scanner) (Item, error) {
 	if tmdb.Valid {
 		it.TMDBID = &tmdb.Int64
 	}
-	it.ShowTitle, it.SeasonIndex = showTitle.String, intPtr(seasonIdx)
+	it.ShowTitle, it.SeasonIndex, it.showID = showTitle.String, intPtr(seasonIdx), showID.Int64
 	it.Genres = decodeGenres(genres)
 	it.Playable = it.Path != ""
 	it.MediaTags = splitTags(tags)
@@ -139,7 +142,12 @@ func (s *Store) queryItems(ctx context.Context, where, order string, args ...any
 		s.markPending(&it)
 		out = append(out, it)
 	}
-	return out, rows.Err()
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	// Done with the rows before asking for translations: SQLite in tests has one connection.
+	rows.Close()
+	return out, s.localize(ctx, out)
 }
 
 // Item returns one item with the user's progress, or ErrNotFound when it's
@@ -149,8 +157,13 @@ func (s *Store) Item(ctx context.Context, userID, id int64) (Item, error) {
 	if errors.Is(err, sql.ErrNoRows) {
 		return it, ErrNotFound
 	}
+	if err != nil {
+		return it, err
+	}
 	s.markPending(&it)
-	return it, err
+	one := []Item{it}
+	err = s.localize(ctx, one)
+	return one[0], err
 }
 
 // SetMetadataKinds says which item kinds an online provider looks up, so
@@ -199,14 +212,25 @@ func (s *Store) Search(ctx context.Context, userID int64, q string, limit int) (
 	if len(words) == 0 {
 		return []Item{}, nil
 	}
+	// Titles also match in the language people see them in, word by word.
+	translated, args := "FALSE", []any{}
+	if lang := translating(ctx); lang != "" {
+		var like []string
+		for _, w := range words {
+			like = append(like, `t.search LIKE ? ESCAPE '\'`)
+			args = append(args, "%"+likeEscape(w)+"%")
+		}
+		translated = "i.id IN (SELECT t.item_id FROM item_translations t WHERE t.language = ? AND " + strings.Join(like, " AND ") + ")"
+		args = append([]any{lang}, args...)
+	}
 	if s.db.dialect == postgres {
 		return s.queryItems(ctx,
-			"to_tsvector('simple', i.title) @@ to_tsquery('simple', ?) AND i.kind <> 'season'",
-			"i.sort_title LIMIT ?", userID, strings.Join(words, ":* & ")+":*", limit)
+			"(to_tsvector('simple', i.title) @@ to_tsquery('simple', ?) OR "+translated+") AND i.kind <> 'season'",
+			"i.sort_title LIMIT ?", append(append([]any{userID, strings.Join(words, ":* & ") + ":*"}, args...), limit)...)
 	}
 	return s.queryItems(ctx,
-		"i.id IN (SELECT rowid FROM items_fts WHERE items_fts MATCH ?) AND i.kind <> 'season'",
-		"i.sort_title LIMIT ?", userID, `"`+strings.Join(words, `"* "`)+`"*`, limit)
+		"(i.id IN (SELECT rowid FROM items_fts WHERE items_fts MATCH ?) OR "+translated+") AND i.kind <> 'season'",
+		"i.sort_title LIMIT ?", append(append([]any{userID, `"` + strings.Join(words, `"* "`) + `"*`}, args...), limit)...)
 }
 
 // RecentlyAdded lists the newest movies, albums and shows. A show counts as

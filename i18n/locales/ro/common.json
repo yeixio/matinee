@@ -1,0 +1,364 @@
+{
+  "duration": {
+    "minutes": "{{minutes}} min",
+    "hoursMinutes": "{{hours}} h {{minutes}} min"
+  },
+  "episodeCode": "S{{season}} · E{{episode}}",
+  "seasonN": "Sezonul {{season}}",
+  "specials": "Episoade speciale",
+  "media": {
+    "mono": "Mono",
+    "stereo": "Stereo",
+    "lossless": "Fără pierderi",
+    "hiRes": "Hi-Res",
+    "dolbyVisionProfile": "Dolby Vision profil {{profile}}",
+    "withBase": "{{format}}, cu {{base}} pentru alte ecrane",
+    "bitDepth": "{{bits}} biți",
+    "forced": "Forțate",
+    "sdh": "SDH"
+  },
+  "people": {
+    "episodes_few": "{{count}} episoade",
+    "episodes_one": "{{count}} episod",
+    "episodes_other": "{{count}} de episoade",
+    "lines": {
+      "createdBy": "Creat de",
+      "director_few": "Regizori",
+      "director_one": "Regizor",
+      "director_other": "Regizori",
+      "writer_few": "Scenariști",
+      "writer_one": "Scenarist",
+      "writer_other": "Scenariști",
+      "basedOn": "Bazat pe",
+      "music": "Muzică"
+    },
+    "died": "Decedat(ă) {{date}}",
+    "bornIn": "Născut(ă) în {{place}}",
+    "bornOnIn": "Născut(ă) {{date}} în {{place}}",
+    "bornOn": "Născut(ă) {{date}}",
+    "dollars": "{{amount}} $"
+  },
+  "facts": {
+    "firstAired": "Prima difuzare",
+    "released": "Lansat",
+    "aired": "Difuzat",
+    "ended": "Încheiat",
+    "status": "Stare",
+    "seasons": "Sezoane",
+    "seasonsValue_few": "{{seasons}} ({{count}} episoade)",
+    "seasonsValue_one": "{{seasons}} ({{count}} episod)",
+    "seasonsValue_other": "{{seasons}} ({{count}} de episoade)",
+    "rated": "Clasificare",
+    "genres": "Genuri",
+    "originalTitle": "Titlu original",
+    "originalLanguage": "Limbă originală",
+    "spokenLanguages": "Limbi vorbite",
+    "studio_few": "Studiouri",
+    "studio_one": "Studio",
+    "studio_other": "Studiouri",
+    "network_few": "Rețele",
+    "network_one": "Rețea",
+    "network_other": "Rețele",
+    "country_few": "Țări",
+    "country_one": "Țară",
+    "country_other": "Țări",
+    "collection": "Colecție",
+    "budget": "Buget",
+    "boxOffice": "Încasări"
+  },
+  "showStatus": {
+    "Returning Series": "Continuă",
+    "Ended": "Încheiat",
+    "Canceled": "Anulat",
+    "In Production": "În producție",
+    "Planned": "Planificat",
+    "Pilot": "Pilot"
+  },
+  "genres": {
+    "Action": "Acțiune",
+    "Adventure": "Aventură",
+    "Animation": "Animație",
+    "Comedy": "Comedie",
+    "Crime": "Polițist",
+    "Documentary": "Documentar",
+    "Drama": "Dramă",
+    "Family": "Familie",
+    "Fantasy": "Fantasy",
+    "History": "Istoric",
+    "Horror": "Horror",
+    "Music": "Muzică",
+    "Mystery": "Mister",
+    "Romance": "Romantic",
+    "Science Fiction": "Science fiction",
+    "Thriller": "Thriller",
+    "War": "Război",
+    "Western": "Western",
+    "Reality": "Reality",
+    "TV Movie": "Film TV",
+    "Action & Adventure": "Acțiune și aventură",
+    "Kids": "Copii",
+    "News": "Știri",
+    "Sci-Fi & Fantasy": "SF și fantasy",
+    "Soap": "Telenovelă",
+    "Talk": "Talk-show",
+    "War & Politics": "Război și politică"
+  },
+  "jobs": {
+    "Director": "Regie",
+    "Creator": "Creator",
+    "Screenplay": "Scenariu",
+    "Writer": "Scenarist",
+    "Teleplay": "Scenariu TV",
+    "Story": "Poveste",
+    "Novel": "Roman",
+    "Characters": "Personaje",
+    "Author": "Autor",
+    "Original Music Composer": "Muzică originală",
+    "Music": "Muzică",
+    "Director of Photography": "Imagine",
+    "Editor": "Montaj",
+    "Producer": "Producător",
+    "Executive Producer": "Producător executiv",
+    "Casting": "Casting",
+    "Production Design": "Scenografie",
+    "Costume Design": "Costume"
+  },
+  "kids": {
+    "littleKids": "Copii mici",
+    "kids": "Copii",
+    "teens": "Adolescenți",
+    "andYounger": "{{ratings}} și mai mici"
+  },
+  "sort": {
+    "title": "Titlu",
+    "added": "Data adăugării",
+    "released": "Data lansării",
+    "year": "An",
+    "rating": "Notă",
+    "runtime": "Durată",
+    "lastPlayed": "Văzut ultima dată"
+  },
+  "watched": {
+    "unwatched": "Nevăzute",
+    "inProgress": "În curs",
+    "watched": "Văzute",
+    "notStarted": "Neîncepute"
+  },
+  "genreRows": {
+    "Action": "Pline de acțiune",
+    "Adventure": "Aventuri",
+    "Animation": "Animații preferate",
+    "Comedy": "Comedii",
+    "Crime": "Povești polițiste",
+    "Documentary": "Documentare",
+    "Drama": "Drame",
+    "Family": "Pentru toată familia",
+    "Fantasy": "Lumi fantastice",
+    "Horror": "Horror",
+    "Mystery": "Mistere",
+    "Romance": "Romantice",
+    "Science Fiction": "SF-uri preferate",
+    "Thriller": "Thrillere",
+    "War": "Povești de război",
+    "Western": "Westernuri"
+  },
+  "count": {
+    "episodes_few": "{{count}} episoade",
+    "episodes_one": "{{count}} episod",
+    "episodes_other": "{{count}} de episoade",
+    "seasons_few": "{{count}} sezoane",
+    "seasons_one": "{{count}} sezon",
+    "seasons_other": "{{count}} de sezoane",
+    "albums_few": "{{count}} albume",
+    "albums_one": "{{count}} album",
+    "albums_other": "{{count}} de albume",
+    "tracks_few": "{{count}} piese",
+    "tracks_one": "{{count}} piesă",
+    "tracks_other": "{{count}} de piese",
+    "titles_few": "{{count}} titluri",
+    "titles_one": "{{count}} titlu",
+    "titles_other": "{{count}} de titluri"
+  },
+  "awards": {
+    "academy": {
+      "won_few": "A câștigat {{count}} Oscaruri",
+      "won_one": "A câștigat {{count}} Oscar",
+      "won_other": "A câștigat {{count}} de Oscaruri",
+      "nominated_few": "Nominalizat la {{count}} Oscaruri",
+      "nominated_one": "Nominalizat la {{count}} Oscar",
+      "nominated_other": "Nominalizat la {{count}} de Oscaruri"
+    },
+    "emmy": {
+      "won_few": "A câștigat {{count}} Primetime Emmy",
+      "won_one": "A câștigat {{count}} Primetime Emmy",
+      "won_other": "A câștigat {{count}} de Primetime Emmy",
+      "nominated_few": "Nominalizat la {{count}} Primetime Emmy",
+      "nominated_one": "Nominalizat la {{count}} Primetime Emmy",
+      "nominated_other": "Nominalizat la {{count}} de Primetime Emmy"
+    },
+    "globe": {
+      "won_few": "A câștigat {{count}} Globuri de Aur",
+      "won_one": "A câștigat {{count}} Glob de Aur",
+      "won_other": "A câștigat {{count}} de Globuri de Aur",
+      "nominated_few": "Nominalizat la {{count}} Globuri de Aur",
+      "nominated_one": "Nominalizat la {{count}} Glob de Aur",
+      "nominated_other": "Nominalizat la {{count}} de Globuri de Aur"
+    },
+    "bafta": {
+      "won_few": "A câștigat {{count}} BAFTA",
+      "won_one": "A câștigat {{count}} BAFTA",
+      "won_other": "A câștigat {{count}} de BAFTA",
+      "nominated_few": "Nominalizat la {{count}} BAFTA",
+      "nominated_one": "Nominalizat la {{count}} BAFTA",
+      "nominated_other": "Nominalizat la {{count}} de BAFTA"
+    },
+    "wins_few": "{{count}} premii",
+    "wins_one": "{{count}} premiu",
+    "wins_other": "{{count}} de premii",
+    "nominations_few": "{{count}} nominalizări",
+    "nominations_one": "{{count}} nominalizare",
+    "nominations_other": "{{count}} de nominalizări",
+    "winsAndNominations": "{{wins}} și {{nominations}}"
+  },
+  "departments": {
+    "Acting": "Actor",
+    "Directing": "Regie",
+    "Writing": "Scenariu",
+    "Production": "Producție",
+    "Sound": "Sunet",
+    "Camera": "Cameră",
+    "Editing": "Montaj",
+    "Art": "Artă",
+    "Crew": "Echipă",
+    "Visual Effects": "Efecte vizuale",
+    "Costume & Make-Up": "Costume și machiaj",
+    "Lighting": "Lumini",
+    "Creator": "Creator"
+  },
+  "starters": {
+    "recent": "Adăugate recent",
+    "unwatched": "Nevăzute",
+    "tonight": "Destul de scurt pentru diseară"
+  },
+  "filter": {
+    "decade": "Anii {{decade}}",
+    "yearRange": "{{from}}–{{to}}",
+    "yearOrLater": "{{year}} sau mai târziu",
+    "yearOrEarlier": "{{year}} sau mai devreme",
+    "lastYear": "ultimul an",
+    "lastWeeks_few": "ultimele {{count}} săptămâni",
+    "lastWeeks_one": "ultima săptămână",
+    "lastWeeks_other": "ultimele {{count}} de săptămâni",
+    "lastDays_few": "ultimele {{count}} zile",
+    "lastDays_one": "ultima {{count}} zi",
+    "lastDays_other": "ultimele {{count}} de zile",
+    "runtime": {
+      "titles": {
+        "between": "{{min}}–{{max}} min",
+        "over": "Peste {{min}} min",
+        "under": "Sub {{max}} min"
+      },
+      "episodes": {
+        "between": "Episoade de {{min}}–{{max}} min",
+        "over": "Episoade de peste {{min}} min",
+        "under": "Episoade de sub {{max}} min"
+      }
+    }
+  },
+  "themes": {
+    "clean": {
+      "name": "Curat",
+      "description": "Alb simplu, un albastru, fără serife. Doar afișele."
+    },
+    "dark": {
+      "name": "Întunecat",
+      "description": "Negru pur și alb clar. Odihnitor pentru ochi și pentru un ecran OLED."
+    },
+    "drive-in": {
+      "name": "Drive-in",
+      "description": "Maro de anii '70 și chihlimbar de firmă luminoasă, ca o seară la drive-in."
+    },
+    "high-contrast": {
+      "name": "Contrast ridicat",
+      "description": "Negru, alb și galben aprins, pentru cel mai clar text de peste cameră."
+    },
+    "light": {
+      "name": "Luminos",
+      "description": "Alb cald de hârtie cu coral, pentru o cameră luminoasă."
+    },
+    "matinee": {
+      "name": "Matinee",
+      "description": "Întuneric cald de sală de cinema cu accent coral. Stilul casei."
+    },
+    "sci-fi": {
+      "name": "SF",
+      "description": "Bleumarin de spațiu adânc cu o strălucire neon cyan și un font futurist."
+    }
+  },
+  "every": {
+    "seconds_few": "{{count}} secunde",
+    "seconds_one": "{{count}} secundă",
+    "seconds_other": "{{count}} de secunde",
+    "minutes_few": "{{count}} minute",
+    "minutes_one": "{{count}} minut",
+    "minutes_other": "{{count}} de minute",
+    "hours_few": "{{count}} ore",
+    "hours_one": "{{count}} oră",
+    "hours_other": "{{count}} de ore"
+  },
+  "avatars": {
+    "coral": "Coral",
+    "amber": "Chihlimbar",
+    "lime": "Lime",
+    "teal": "Turcoaz",
+    "sky": "Bleu",
+    "violet": "Violet",
+    "pink": "Roz",
+    "slate": "Ardezie"
+  },
+  "day": {
+    "today": "Azi",
+    "tomorrow": "Mâine",
+    "yesterday": "Ieri"
+  },
+  "release": {
+    "cinemas": "În cinematografe",
+    "digital": "Lansare digitală",
+    "physical": "Pe disc",
+    "airs": "Se difuzează"
+  },
+  "issue": {
+    "video": "Imagine",
+    "audio": "Sunet",
+    "subtitles": "Subtitrări",
+    "wrong": "Titlu greșit",
+    "other": "Altceva"
+  },
+  "holidays": {
+    "valentines": "De Ziua Îndrăgostiților",
+    "easter": "De Paște",
+    "halloween": "Sezonul înfiorător",
+    "thanksgiving": "De Ziua Recunoștinței",
+    "christmas": "Preferatele de Crăciun",
+    "newyear": "Întâmpină noul an"
+  },
+  "discover": {
+    "rows": {
+      "trending": "În tendințe",
+      "popular-movies": "Filme populare",
+      "popular-shows": "Seriale populare",
+      "upcoming-movies": "În curând la cinema",
+      "upcoming-shows": "Seriale noi pe drum"
+    },
+    "because": "Pentru că ai văzut {{title}}",
+    "status": {
+      "available": "În biblioteca ta",
+      "added": "Pe drum",
+      "requested": "Cerut"
+    },
+    "kind": {
+      "movie": "Film",
+      "show": "Serial"
+    }
+  }
+}

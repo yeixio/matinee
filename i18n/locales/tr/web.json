@@ -1,0 +1,715 @@
+{
+  "loading": "Yükleniyor",
+  "nav": {
+    "home": "Ana sayfa",
+    "watchList": "İzleme listesi",
+    "collections": "Koleksiyonlar",
+    "scanning": "Taranıyor",
+    "search": "Ara",
+    "comingSoon": "Yakında",
+    "requests": "İstekler",
+    "signIn": "Giriş yap",
+    "settings": "Ayarlar",
+    "switchProfile": "Profil değiştir",
+    "signOut": "Çıkış yap",
+    "discover": "Keşfet"
+  },
+  "cantReachServer": "Sunucuya ulaşılamıyor. Yeniden deneniyor…",
+  "player": {
+    "subtitlesFailed": "Bu altyazılar yüklenemedi",
+    "off": "Kapalı",
+    "convertsVideo": "Video dönüştürüyor",
+    "file": "Dosya",
+    "seek": "İlerlet",
+    "previous": "Önceki",
+    "pause": "Duraklat",
+    "next": "Sonraki",
+    "closePlayer": "Oynatıcıyı kapat",
+    "failedDetail": "Oynatma başarısız oldu. Dosya bozuk olabilir veya sunucunun dönüştüremediği bir biçimde olabilir.",
+    "failed": "Oynatma başarısız oldu",
+    "back10": "10 saniye geri",
+    "forward10": "10 saniye ileri",
+    "unmute": "Sesi aç",
+    "mute": "Sesi kapat",
+    "converting": "Dönüştürülüyor",
+    "fullscreen": "Tam ekran"
+  },
+  "somethingWentWrong": "Bir şeyler ters gitti",
+  "oneMoment": "Bir saniye…",
+  "auth": {
+    "username": "Kullanıcı adı",
+    "password": "Parola",
+    "signIn": "Giriş yap",
+    "welcomeBack": "Tekrar hoş geldin.",
+    "setUp": "Matinee'yi kur",
+    "setUpHint": "Yönetici hesabını oluştur. Aileni ve arkadaşlarını sonra ekleyebilirsin.",
+    "createAccount": "Hesap oluştur"
+  },
+  "home": {
+    "welcome": "Matinee'ye hoş geldin",
+    "welcomeHint": "Başlamak için film, dizi veya müzik içeren bir klasör ekle.",
+    "addLibrary": "Kütüphane ekle",
+    "continueWatching": "İzlemeye devam et",
+    "recentlyAdded": "Yeni eklenenler",
+    "newReleases": "Yeni çıkanlar",
+    "scanning": "Kütüphanen taranıyor",
+    "scanningHint": "Yeni yapımlar bulunur bulunmaz burada görünür.",
+    "removeNamed": "{{title}} yapımını İzlemeye devam et'ten kaldır",
+    "remove": "İzlemeye devam et'ten kaldır"
+  },
+  "hero": {
+    "upNext": "Sıradaki",
+    "justAdded": "Yeni eklendi",
+    "details": "Ayrıntılar"
+  },
+  "item": {
+    "resume": "Devam et",
+    "resumeLeft": "Devam et · {{left}} kaldı",
+    "play": "Oynat",
+    "resumeFrom": "{{time}} noktasından devam et",
+    "resumeEpisode": "{{episode}}. bölüme devam et",
+    "playEpisode": "{{episode}}. bölümü oynat",
+    "shuffle": "Karıştır",
+    "seasons": "Sezonlar",
+    "albums": "Albümler",
+    "episodes": "Bölümler"
+  },
+  "row": {
+    "back": "Geri kaydır",
+    "forward": "İleri kaydır"
+  },
+  "artwork": {
+    "fetching": "Ayrıntılar getiriliyor…"
+  },
+  "close": "Kapat",
+  "file": {
+    "audio": "Ses",
+    "subtitles": "Altyazılar",
+    "title": "Dosya ayrıntıları",
+    "notYet": "Matinee bu dosyayı henüz ayrıntılı incelemedi. Her dosyayı arka planda yavaşça okur, bu yüzden burası kendiliğinden dolacak.",
+    "unreadable": "Matinee bu dosyayı okuyamadı: {{error}}",
+    "stale": "Dosya bu kayıttan beri değişti; yakında yeniden incelenecek.",
+    "file": "Dosya",
+    "location": "Konum",
+    "size": "Boyut",
+    "format": "Biçim",
+    "length": "Uzunluk",
+    "bitrate": "Bit hızı",
+    "chapters": "Bölümler",
+    "video": "Video",
+    "videoN": "Video {{n}}",
+    "codec": "Kodek",
+    "resolution": "Çözünürlük",
+    "frameRate": "Kare hızı",
+    "fps": "{{rate}} fps",
+    "bitDepth": "Bit derinliği",
+    "dynamicRange": "Dinamik aralık",
+    "dvProfile": "profil {{profile}}",
+    "dvProfileLevel": "profil {{profile}}, seviye {{level}}",
+    "fallback": "{{format}} yedek",
+    "color": "Renk",
+    "trackN": "Parça {{n}}",
+    "default": "Varsayılan",
+    "forced": "Zorunlu",
+    "commentary": "Yorum",
+    "audioDescription": "Sesli betimleme",
+    "separateFile": "Ayrı dosya",
+    "inFile": "Dosyanın içinde",
+    "sdh": "SDH",
+    "recorded": "Kaydedildi: {{when}}",
+    "queued": "Sırada; sıradaki o.",
+    "analyzeAgain": "Yeniden analiz et"
+  },
+  "listSeparator": ", ",
+  "credits": {
+    "seriesCast": "Dizi oyuncuları",
+    "cast": "Oyuncular",
+    "guestStars": "Konuk oyuncular",
+    "starring": "Başrollerde",
+    "moreDetails": "Daha fazla ayrıntı",
+    "crew": "Ekip",
+    "about": "Hakkında",
+    "awards": "Ödüller",
+    "won": "Kazandı",
+    "nominated": "Aday",
+    "wonIn": "Kazandı: {{year}}",
+    "nominatedIn": "Aday: {{year}}",
+    "showAll": "{{count}} öğenin tümünü göster",
+    "awardsSource": "Ödüller Wikidata'dan."
+  },
+  "cancel": "İptal",
+  "upNext": {
+    "upNext": "Sıradaki",
+    "stillWatching": "Hâlâ izliyor musun?",
+    "youMightLike": "Bunları da sevebilirsin",
+    "playingIn": "{{seconds}} içinde başlıyor",
+    "playNow": "Şimdi oynat",
+    "keepWatching": "İzlemeye devam",
+    "haveALook": "Bir göz at",
+    "stop": "Durdur"
+  },
+  "goBack": "Geri dön",
+  "back": "Geri",
+  "trailer": {
+    "trailer": "Fragman",
+    "named": "{{title}} fragmanı",
+    "wontPlay": "Bu fragman oynatılamıyor."
+  },
+  "watchList": {
+    "on": "İzleme listende",
+    "add": "İzleme listesine ekle",
+    "empty": "Henüz kaydedilen bir şey yok",
+    "emptyHint": "Bir film veya dizi aç ve sonrası için burada tutmak üzere İzleme listesi'ni seç. Filmler izlediğinde listeden çıkar.",
+    "browse": "Göz at"
+  },
+  "related": {
+    "moreLikeThis": "Benzerleri"
+  },
+  "boxSet": {
+    "notFound": "Seri bulunamadı",
+    "notFoundHint": "Yapımlarının hiçbiri şu an bir kütüphanede değil.",
+    "boxSet": "Film serisi"
+  },
+  "search": {
+    "placeholder": "Filmler, diziler, sanatçılar, albümler…",
+    "nothing": "\"{{q}}\" ile eşleşen bir şey yok",
+    "lookingForNew": "Yeni bir şey mi arıyorsun?",
+    "addIt": "Ekle",
+    "askForIt": "İste"
+  },
+  "person": {
+    "notFound": "Kişi bulunamadı",
+    "showLess": "Daha az göster",
+    "readMore": "Devamını oku",
+    "inLibrary": "Kütüphanende"
+  },
+  "library": {
+    "library": "Kütüphane",
+    "matches_one": "{{count}} eşleşme",
+    "matches_other": "{{count}} eşleşme",
+    "scanning": "Taranıyor…",
+    "nothingUnwatched": "Burada izlenmemiş bir şey yok",
+    "nothingMatches": "Eşleşen bir şey yok",
+    "seenEverything": "Bu kütüphanedeki her şeyi izledin.",
+    "clearFilters": "Filtreleri temizle",
+    "appearAsFound": "Yapımlar bulundukça görünür.",
+    "noMedia": "Matinee {{paths}} içinde aradı ve medya bulamadı."
+  },
+  "nothingHereYet": "Burada henüz bir şey yok",
+  "collection": {
+    "notFound": "Koleksiyon bulunamadı",
+    "notFoundHint": "Silinmiş olabilir.",
+    "smart": "Akıllı koleksiyon",
+    "collection": "Koleksiyon",
+    "shuffledDaily": "Her gün karıştırılır",
+    "editRules": "Kuralları düzenle",
+    "edit": "Düzenle",
+    "delete": "Koleksiyonu sil",
+    "deleteConfirm": "{{name}} silinsin mi? Yapımlar kütüphanende kalır.",
+    "nothingMatchesYet": "Henüz eşleşen bir şey yok",
+    "joinByRules": "Kurallara uyan yapımlar kendiliğinden eklenir.",
+    "howToAdd": "Bir film veya dizi aç ve eklemek için Koleksiyonlar'ı seç."
+  },
+  "collections": {
+    "newShort": "Yeni",
+    "new": "Yeni koleksiyon",
+    "newSmartShort": "Yeni akıllı",
+    "newSmart": "Yeni akıllı koleksiyon",
+    "none": "Henüz koleksiyon yok",
+    "noneHint": "Akıllı bir koleksiyon, izlenmemiş 80'ler aksiyonu gibi kurallarla kendini doldurur. Film serileri, iki yapımı bir kütüphanede olduğunda burada görünür.",
+    "yours": "Seninkiler",
+    "shared": "Paylaşılan",
+    "forEveryone": "Herkes için koleksiyonlar",
+    "boxSets": "Film serileri",
+    "sort": {
+      "own": "Kendi sıram",
+      "title": "Ad",
+      "added": "Eklenme tarihi",
+      "released": "Çıkış tarihi",
+      "year": "Yıl",
+      "rating": "Puan",
+      "runtime": "Süre",
+      "lastPlayed": "Son oynatılma",
+      "shuffle": "Her gün karıştır"
+    },
+    "smartShort": "Akıllı",
+    "editNamed": "{{name}} düzenle",
+    "name": "Ad",
+    "smartExample": "İzlenmemiş 80'ler aksiyonu",
+    "manualExample": "Film gecesi",
+    "rules": "Kurallar",
+    "rulesHint": "Bu filtrelere uyan yapımlar kütüphane değiştikçe kendiliğinden eklenir.",
+    "shuffleDaily": "Her gün karıştır",
+    "order": "Sıra",
+    "orderAdded": "Yapımların eklendiği sıra",
+    "direction": "Yön",
+    "usual": "Olağan",
+    "ascending": "Artan",
+    "descending": "Azalan",
+    "showAsRow": "Satır olarak göster",
+    "onHome": "Ana sayfada",
+    "onLibraryPage": "Bir kütüphane sayfasında",
+    "shareWithEveryone": "Bu sunucudaki herkesle paylaş",
+    "saveAs": "Koleksiyon olarak kaydet"
+  },
+  "save": "Kaydet",
+  "create": "Oluştur",
+  "loadingDots": "Yükleniyor…",
+  "filters": {
+    "title": "Filtreler",
+    "inUse_one": "Filtreler, {{count}} kullanımda",
+    "inUse_other": "Filtreler, {{count}} kullanımda",
+    "sortBy": "Sırala",
+    "highestFirst": "Önce en yüksek",
+    "lowestFirst": "Önce en düşük",
+    "highestFirstSwitch": "Önce en yüksek; önce en düşüğe geç",
+    "lowestFirstSwitch": "Önce en düşük; önce en yükseğe geç",
+    "not": "{{label}} değil",
+    "remove": "{{label}} kaldır",
+    "chip": {
+      "words": "\"{{q}}\"",
+      "directedBy": "Yönetmen: {{name}}",
+      "with": "Oyuncu: {{name}}",
+      "releasedWithin": "Çıkış: {{within}}",
+      "releasedAfter": "{{date}} sonrası çıkan",
+      "releasedBefore": "{{date}} öncesi çıkan",
+      "addedWithin": "Eklenme: {{within}}",
+      "addedAfter": "{{date}} sonrası eklenen",
+      "addedBefore": "{{date}} öncesi eklenen",
+      "ratingMin": "Puan {{rating}}+",
+      "ratingMax": "Puan {{rating}} veya altı",
+      "certification": "Puan {{rating}}",
+      "watchList": "İzleme listemde"
+    },
+    "collection": "Koleksiyon",
+    "active": "Kullanımdaki filtreler",
+    "clearAll": "Tümünü temizle",
+    "more_one": "{{count}} tane daha",
+    "more_other": "{{count}} tane daha",
+    "any": "Herhangi",
+    "all": "Tümü",
+    "anyTime": "Herhangi bir zaman",
+    "runtime": {
+      "under30": "30 dk altı",
+      "30to60": "30–60 dk",
+      "overHour": "Bir saatten uzun",
+      "under90": "90 dk altı",
+      "90to120": "90 dk – 2 saat",
+      "over2Hours": "2 saatten uzun"
+    },
+    "wordsInTitle": "Addaki kelimeler",
+    "onlyWatchList": "Yalnızca izleme listemdekiler",
+    "fromYear": "Başlangıç yılı",
+    "toYear": "Bitiş yılı",
+    "from": "Başlangıç",
+    "to": "ile",
+    "toPlaceholder": "Bitiş",
+    "lastWeek": "Geçen hafta",
+    "last30Days": "Son 30 gün",
+    "last3Months": "Son 3 ay",
+    "lastYear": "Geçen yıl",
+    "ratingAtLeast": "{{rating}}+",
+    "findPerson": "Kişi bul",
+    "nobody": "Bu kütüphanede bu adla kimse yok.",
+    "showResults": "Sonuçları göster",
+    "section": {
+      "title": "Ad",
+      "watched": "İzlendi",
+      "genre": "Tür",
+      "year": "Yıl",
+      "firstAired": "İlk yayın",
+      "released": "Çıkış",
+      "added": "Eklenme",
+      "rating": "Puan",
+      "episodeLength": "Bölüm süresi",
+      "runtime": "Süre",
+      "quality": "Kalite",
+      "network": "Kanal veya stüdyo",
+      "studio": "Stüdyo",
+      "ageRating": "Yaş sınırı",
+      "language": "Orijinal dil",
+      "country": "Ülke",
+      "creator": "Yaratan veya yöneten",
+      "director": "Yönetmen",
+      "people": "Oyuncular ve ekip"
+    }
+  },
+  "appearance": {
+    "title": "Görünüm",
+    "useServerTheme": "Sunucunun temasını kullan ({{name}})",
+    "guestHint": "Evde hesabı olmayan herkes bu temayı paylaşır.",
+    "hint": "Teman, telefonundaki ve TV'ndeki Matinee uygulamalarına seninle gelir.",
+    "theme": "Tema",
+    "preview": {
+      "tonight": "Bu akşam",
+      "trailer": "Fragman"
+    },
+    "serverTheme": "Sunucu teması",
+    "serverThemeHint": "Herkesin kendi temasını seçene kadar gördüğü tema; giriş sayfasında da kullanılır.",
+    "custom": "{{name}} (özel)",
+    "addYourOwn": "Kendi temanı eklemek için sunucunun veri klasöründeki <code>themes</code> klasörüne bir tema dosyası koy.",
+    "howTo": "Tema nasıl yapılır",
+    "skipped": "Atlandı: {{problem}}"
+  },
+  "newFiles": {
+    "title": "Yeni dosyalar",
+    "intro": "Matinee eklediğin, yeniden adlandırdığın veya sildiğin dosyaları fark eder ve kopyalama bittikten birkaç saniye sonra kütüphaneyi günceller.",
+    "watch": "Yeni dosyaları izle",
+    "summary": {
+      "some": "Bazı klasörler her {{every}} kontrol edilir",
+      "watching": "Yeni dosyalar izleniyor",
+      "polling": "Yeni dosyalar her {{every}} kontrol edilir",
+      "pollingShare": "Yeni dosyalar her {{every}} kontrol edilir (ağ paylaşımı)",
+      "off": "Yeni dosyalar izlenmiyor"
+    },
+    "mode": {
+      "auto": {
+        "label": "Otomatik",
+        "hint": "Sunucunun kendi disklerinde hemen. Ağ paylaşımları (SMB, NFS) değişiklikleri bildirmez, bu yüzden Matinee onları her {{every}} kontrol eder."
+      },
+      "poll": {
+        "label": "Zamanlayıcıyla kontrol et",
+        "hint": "Her klasör her {{every}} kontrol edilir. Bir diskteki yeni dosyalar kendiliğinden görünmüyorsa bunu seç."
+      },
+      "off": {
+        "label": "Kapalı",
+        "hint": "Yeni dosyalar bir sonraki tam taramada veya Tara'ya bastığında görünür."
+      }
+    },
+    "rescan": "Her kütüphane ayrıca her {{every}} baştan taranır; bu, paylaşımda yerinde değiştirilen bir dosya gibi diğer her şeyi yakalar.",
+    "rescanOff": "Tam yeniden taramalar bu sunucuda kapalı (MATINEE_SCAN_INTERVAL=0)."
+  },
+  "analysis": {
+    "title": "Medya analizi",
+    "intro": "Matinee her dosyayı kalitesi, sesi ve dilleri için yavaşça okur; bir dosya değiştiğinde yeniden okur.",
+    "state": {
+      "lookingAt": "İnceleniyor: {{file}}",
+      "working": "Çalışıyor",
+      "waiting": "Oynatmanın bitmesi bekleniyor",
+      "slowDisk": "Dosyalar yavaş okunuyor; birkaç dakika dinleniyor",
+      "allDone": "Tüm dosyalar analiz edildi",
+      "upToDate": "Güncel",
+      "paused": "Duraklatıldı"
+    },
+    "progress": "{{done}} / {{total}}",
+    "unreadable_one": "{{count}} dosya okunamadı.",
+    "unreadable_other": "{{count}} dosya okunamadı.",
+    "speed": "Hız",
+    "mode": {
+      "gentle": {
+        "label": "Nazik",
+        "hint": "Birkaç saniyede bir dosya; sunucu oynatma için bir şey dönüştürürken hiç yok."
+      },
+      "normal": {
+        "label": "Normal",
+        "hint": "Dosyalar art arda, yine en düşük öncelikte."
+      },
+      "off": {
+        "label": "Kapalı",
+        "hint": "Tekrar açana kadar duraklatıldı."
+      }
+    }
+  },
+  "profileSettings": {
+    "title": "Profiller",
+    "intro": "Profiller bir girişi paylaşır ama kendi ilerlemesini, izleme listesini ve temasını tutar. Çocuk profilleri yalnızca izin verdiğini görür. PIN, bir profili ya da hesabın kendisini sahibine ayırır.",
+    "pinFor": "{{name}} için 4 haneli PIN",
+    "homeDevices": "Ev ağındaki giriş yapmamış cihazlar",
+    "account": "Hesap",
+    "removePin": "PIN'i kaldır",
+    "addPin": "PIN ekle",
+    "hasPin": "PIN'i var",
+    "edit": "{{name}} düzenle",
+    "remove": "{{name}} kaldır",
+    "confirmRemove": "{{name}} kaldırılsın mı? İlerlemesi ve izleme listesi de gider.",
+    "add": "Profil ekle",
+    "name": "Ad",
+    "newPin": "Yeni PIN",
+    "pinOptional": "PIN (isteğe bağlı)",
+    "unchanged": "Değişmedi",
+    "fourDigits": "4 hane",
+    "removeThePin": "PIN'i kaldır",
+    "colour": "Renk",
+    "kidsMode": "Çocuk modu",
+    "kidsOff": "Kapalı: her şeyi görür",
+    "kidsLevel": "{{name}}: {{ratings}}",
+    "kidsLibraries": "Bu profilin her kütüphanede gördükleri. Yaş sınırına göre, {{level}} seviyesinin üstündeki ve yaş sınırı olmayan yapımları gizler. Çocuk profilleri Ayarlar'ı açamaz ve istekte bulunamaz.",
+    "libraryMode": {
+      "hidden": "Gizli",
+      "rated": "Yaş sınırına göre",
+      "all": "Her şey"
+    }
+  },
+  "report": {
+    "thanks": "Teşekkürler, bir yönetici bakacak.",
+    "button": "Sorun bildir",
+    "whatsWrong": "{{title}} ile ilgili sorun ne?",
+    "details": "Ayrıntılar (isteğe bağlı)",
+    "detailsExample": "Örn.: 20 dakika sonra ses yok",
+    "send": "Gönder"
+  },
+  "quality": {
+    "label": "Kalite",
+    "forShow": "Dizinin kalitesi",
+    "confirm": "{{name}} kalitesine geçilsin mi? {{app}} uyan kopyaları arayacak.",
+    "searching": "Aranıyor…"
+  },
+  "upcoming": {
+    "nothingYet": "Henüz gösterilecek bir şey yok",
+    "connect": "Yoldaki filmleri ve bölümleri görmek için Radarr veya Sonarr bağla.",
+    "openSettings": "Ayarları aç",
+    "notConnected": "Bir yönetici bu sunucuya Radarr veya Sonarr bağlamamış.",
+    "intro": "Önümüzdeki iki ay içinde henüz gelmemiş yeni bölümler ve film çıkışları.",
+    "unavailable": "{{apps}} yanıt vermedi, bu yüzden bazıları eksik olabilir.",
+    "nothing": "Yolda bir şey yok. İstekler'den yeni bir şey iste."
+  },
+  "link": {
+    "title": "Cihazda giriş yap",
+    "intro": "Telefonunda veya TV'nde görünen kodu gir.",
+    "signedIn": "{{device}} giriş yaptı",
+    "ready": "Birkaç saniye içinde hazır olacak.",
+    "declined": "Reddedildi",
+    "notSignedIn": "{{device}} giriş yapmadı.",
+    "another": "Başka bir cihazda giriş yap",
+    "code": "Kod",
+    "next": "İleri",
+    "wantsToSignIn": "<name>{{name}}</name> olarak giriş yapmak istiyor",
+    "warning": "Yalnızca elinde tuttuğun veya görebildiğin bir cihazı onayla. Seninle aynı erişimi alır.",
+    "decline": "Reddet",
+    "approve": "Giriş yap"
+  },
+  "profiles": {
+    "whoIsWatching": "Kim izliyor?",
+    "signInWithAccount": "Bir hesapla giriş yap",
+    "enterPin": "{{name}} için PIN'i gir",
+    "pin": "PIN",
+    "deleteDigit": "Sil"
+  },
+  "integrations": {
+    "title": "Radarr ve Sonarr",
+    "intro": "İnsanlar film ve dizi isteyebilsin, yakında geleceklere bakabilsin ve izlediklerindeki sorunları bildirebilsin diye bunları bağla.",
+    "connected": "Bağlı · {{url}}",
+    "notConnected": {
+      "radarr": "Bağlı değil · filmler için",
+      "sonarr": "Bağlı değil · diziler için"
+    },
+    "change": "Değiştir",
+    "connect": "Bağla",
+    "address": "Adres",
+    "apiKey": "API anahtarı",
+    "keyWhere": "{{app}} → Settings → General",
+    "saved": "Kaydedildi",
+    "answers": "{{app}} {{version}}, {{url}} adresinde yanıt veriyor",
+    "quality": {
+      "radarr": "Yeni filmler için kalite",
+      "sonarr": "Yeni diziler için kalite"
+    },
+    "folder": "Klasör",
+    "confirmDisconnect": "{{app}} bağlantısı kesilsin mi? İçindeki yapımlar orada kalır.",
+    "disconnect": "Bağlantıyı kes",
+    "testing": "Test ediliyor…",
+    "test": "Test et",
+    "whoCanAdd": "Kimler film ve dizi ekleyebilir",
+    "mode": {
+      "approve": {
+        "label": "İste, sonra bir yönetici onaylasın",
+        "detail": "Hesabı olan herkes bir yapım isteyebilir. Bir yöneticiyi bekler."
+      },
+      "auto": {
+        "label": "Hemen ekle",
+        "detail": "İstenenler doğrudan Radarr'a veya Sonarr'a gider."
+      },
+      "off": {
+        "label": "Yalnızca yöneticiler yapım ekler",
+        "detail": "Diğer herkes yine yakında geleceklere bakabilir ve sorun bildirebilir."
+      }
+    },
+    "overseerr": {
+      "intro": "Keşfet sekmesi eklemek için bağla: trend olanlar, insanların izlediklerine göre öneriler ve her şeyi isteyebileceğin bir yol. Jellyseerr de çalışır.",
+      "notConnected": "Bağlı değil · Keşfet için",
+      "requestAs": "Overseerr hesabı olmayanların istekleri",
+      "madeAsOwner": "{{name}} olarak yapılır (API anahtarının sahibi)",
+      "madeAs": "{{name}} olarak yapılır",
+      "sameName": "Aynı adla Overseerr hesabı olanlar kendi adlarına ister. Hangi isteklerin onay gerektirdiğine Overseerr, oradaki kullanıcı izinlerine göre karar verir.",
+      "confirmDisconnect": "Overseerr bağlantısı kesilsin mi? Keşfet sekmesi kaybolur."
+    }
+  },
+  "requests": {
+    "tab": {
+      "ask": "Bir şey iste",
+      "requests": "İstekler",
+      "yourRequests": "İsteklerin",
+      "problems": "Sorunlar",
+      "yourReports": "Bildirimlerin"
+    },
+    "movies": "Filmler",
+    "shows": "Diziler",
+    "findMovie": "Film bul…",
+    "findShow": "Dizi bul…",
+    "nothingFound": "\"{{q}}\" için bir şey bulunamadı",
+    "ready": "İzlemeye hazır",
+    "askedFor": "İstendi",
+    "onItsWay": "Yolda",
+    "add": "Ekle",
+    "askForIt": "İste",
+    "state": {
+      "pending": "Onay bekliyor",
+      "approved": "Yolda",
+      "declined": "Reddedildi",
+      "failed": "Eklenemedi"
+    },
+    "none": "Henüz istek yok.",
+    "retry": "Yeniden dene",
+    "approve": "Onayla",
+    "remove": "{{title}} isteğini kaldır",
+    "removedFromLibrary": "Kütüphaneden kaldırıldı",
+    "noProblems": "Kimse sorun bildirmedi.",
+    "noReports": "Hiç sorun bildirmedin. Bir yapımda \"Sorun bildir\"i kullan.",
+    "fileReplaced": "Dosya değiştirildi",
+    "closed": "Kapatıldı",
+    "confirmReplace": "{{title}} yapımının bu dosyası silinip başka bir kopya indirilsin mi? Yenisi indirilip kütüphane tarandıktan sonra görünür.",
+    "replaceFile": "Dosyayı değiştir",
+    "close": "Kapat"
+  },
+  "settings": {
+    "tmdbNotice": "Afişler ve açıklamalar <link>TMDB</link>'den gelir. Bu ürün TMDB API'sini kullanır ancak TMDB tarafından onaylanmış veya sertifikalandırılmış değildir.",
+    "libraries": {
+      "title": "Kütüphaneler",
+      "none": "Henüz kütüphane yok.",
+      "scan": "Tara",
+      "remove": "{{name}} kaldır",
+      "confirmRemove": "\"{{name}}\" kaldırılsın mı? Dosyaların olduğu yerde kalır.",
+      "kind": {
+        "movies": "Filmler",
+        "tv": "TV dizileri",
+        "music": "Müzik"
+      },
+      "type": "Tür",
+      "folders": "Klasörler",
+      "up": "Bir klasör yukarı",
+      "added": "Eklendi",
+      "useFolder": "Bu klasörü kullan",
+      "noSubfolders": "Alt klasör yok"
+    },
+    "people": {
+      "title": "Kişiler",
+      "admin": "Yönetici",
+      "passwordChanged": "Parola değişti. {{name}} her yerden çıkış yaptırıldı.",
+      "you": "(sen)",
+      "removeAdmin": "Yöneticiliği kaldır",
+      "makeAdmin": "Yönetici yap",
+      "resetPassword": "Parolayı sıfırla",
+      "remove": "Kaldır",
+      "newPasswordFor": "{{name}} için yeni parola",
+      "setPassword": "Parolayı ayarla",
+      "confirmRemove": "<name>{{name}}</name> kaldırılsın mı? İzleme geçmişi, izleme listesi, indirmeleri ve istekleri de gider ve her yerden çıkış yaptırılır. Bu geri alınamaz."
+    },
+    "account": {
+      "title": "Hesabın",
+      "changePassword": "Parolayı değiştir",
+      "current": "Mevcut parola",
+      "new": "Yeni parola",
+      "again": "Yeni parola tekrar",
+      "hint": "En az 8 karakter. Diğer cihazlarından çıkış yapılacak.",
+      "mismatch": "Yeni parolalar eşleşmiyor.",
+      "changed": "Parola değişti. Diğer cihazlarından çıkış yapıldı."
+    },
+    "devices": {
+      "aWhileAgo": "bir süre önce",
+      "justNow": "az önce",
+      "title": "Cihazların",
+      "unknown": "Bilinmeyen cihaz",
+      "this": "Bu cihaz",
+      "lastUsed": "Son kullanım: {{when}}",
+      "confirmSignOut": "\"{{name}}\" çıkış yaptırılsın mı?"
+    },
+    "version": "Matinee sunucusu {{version}} · API v{{api}}",
+    "home": {
+      "title": "Ev ağı",
+      "requireSignIn": "Evde de giriş iste",
+      "required": "Herkes, evde de dışarıda da giriş yapar.",
+      "open": "Ev ağındaki telefonlar, TV'ler ve tarayıcılar giriş yapmadan izleyebilir. Tek bir Ev hesabını paylaşırlar ve hiçbir şeyi değiştiremezler. Evden uzaktayken herkes giriş yapar."
+    },
+    "remote": {
+      "title": "Uzaktan erişim",
+      "publicURL": "Evden uzaktayken uygulamalar, bu sunucunun kurulduğu adres olan <url>{{url}}</url> adresine bağlanır.",
+      "toggle": "Evden uzakta izle",
+      "hint": "Matinee yönlendiricinden bir port açmasını ister ve bir sertifika alır, böylece uygulamalar her yerden güvenle bağlanır. Dışarıdan herkes giriş yapar.",
+      "working": "Yönlendiricide port açılıyor ve sertifika alınıyor…",
+      "ready": "Uygulamalar evden uzaktayken bu sunucuya <url>{{url}}</url> adresinden ulaşır.",
+      "router": "Yönlendiricin portu {{router}} üzerinden açtı.",
+      "pickUp": "Bu adresi bir sonraki ev ağına bağlanışlarında alırlar.",
+      "sharedAddress": "Matinee bunu henüz kendi başına aşamıyor.",
+      "retry": "Matinee yarım saatte bir yeniden dener."
+    },
+    "playback": {
+      "title": "Oynatma",
+      "autoPlay": "Sonraki bölümü oynat",
+      "autoPlayHint": "Jenerik başladığında, iptal edebileceğin 10 saniyelik bir geri sayımın ardından sonraki bölüm oynar.",
+      "binge": "Geri sayımı atla",
+      "bingeHint": "Jenerik başladığında doğrudan sonraki bölüme geç. Hiçbir şeye dokunmadan art arda üç bölümden sonra hâlâ izleyip izlemediğin sorulur."
+    },
+    "trailers": {
+      "title": "Fragmanlar",
+      "remote": "YouTube'dan fragmanlar",
+      "remoteOn": "Filmler ve diziler, YouTube'dan oynayan TMDB fragmanlarını sunar. Medyanın yanındaki fragman dosyaları da her zaman görünür.",
+      "remoteOff": "Yalnızca medyanın yanındaki fragman dosyaları görünür, örneğin \"Movie (2020)-trailer.mkv\" ya da bir Trailers klasöründeki her şey."
+    },
+    "transcoding": {
+      "title": "Kod dönüştürme",
+      "intro": "Bir cihazın olduğu gibi oynatamadığı dosyalar sen izlerken dönüştürülür. Bir GPU bunu daha hızlı ve sunucuya daha az yük bindirerek yapar.",
+      "convertingWith": "Dönüştürme aracı",
+      "active": "{{name}}.",
+      "activeOn": "{{detail}} üzerinde {{name}}.",
+      "fullGPU": "Video GPU'da çözülür, yeniden boyutlandırılır ve kodlanır.",
+      "encodeOnly": "Video GPU'da kodlanır, CPU'da çözülür.",
+      "fallback": "GPU bir dosyayı işleyemezse onun yerine CPU üzerinden oynar.",
+      "testing": "Bu sunucunun GPU'su test ediliyor…",
+      "cpuOff": "CPU. Donanımsal kod dönüştürme kapalı.",
+      "cpuFailed": "CPU, çünkü seçtiğin hızlandırıcı bu sunucuda çalışmadı.",
+      "cpuNoGPU": "CPU. Bu sunucudaki hiçbir GPU testi geçemedi.",
+      "hardware": "Donanım hızlandırma",
+      "auto": "Otomatik: çalışan en iyisi",
+      "off": "Kapalı: her zaman CPU kullan",
+      "notFound": "{{name}} (bu sunucuda bulunamadı)",
+      "accelerator": {
+        "nvenc": "NVIDIA NVENC",
+        "vaapi": "VAAPI (Linux'ta AMD ve Intel)",
+        "qsv": "Intel Quick Sync",
+        "videotoolbox": "VideoToolbox (Mac)",
+        "amf": "AMD AMF (Windows)",
+        "v4l2m2m": "V4L2 (Raspberry Pi)"
+      }
+    },
+    "homeRows": {
+      "title": "Ana sayfa",
+      "holidays": "Bayram satırları",
+      "holidaysDetail": "Sevgililer Günü, Paskalya, Cadılar Bayramı, Şükran Günü ve Noel'den önceki ay ve yılbaşı gecesinden önceki hafta, Ana sayfa o güne uygun, anahtar kelimelerine, adlarına ve açıklamalarına göre seçilmiş bir satırla başlar."
+    }
+  },
+  "language": {
+    "title": "Dil",
+    "label": "Matinee'nin dili",
+    "hint": "Dilin, telefonundaki ve TV'ndeki Matinee uygulamalarına seninle gelir. Adlar ve açıklamalar da, TMDB'de varsa, bu dilde gelir.",
+    "guestHint": "Evde hesabı olmayan herkes bu dili paylaşır.",
+    "automatic": "Otomatik ({{language}})",
+    "machine": "Bu dil makine tarafından çevrildi, bu yüzden bazı sözcükler tuhaf gelebilir.",
+    "help": "İyileştirmeye yardım et"
+  },
+  "discover": {
+    "title": "Keşfet",
+    "emptyTitle": "Henüz keşfedilecek bir şey yok",
+    "connectIt": "Trend olanları görmek, öneri almak ve yeni film ve dizi istemek için Overseerr'ı bağla.",
+    "openSettings": "Ayarları aç",
+    "notConnected": "Bir yönetici Overseerr'ı bu sunucuya bağlamadı.",
+    "placeholder": "Herhangi bir film ya da dizi bul…",
+    "unavailable": "Keşfet şu anda kullanılamıyor",
+    "open": "Aç",
+    "request": "İste",
+    "requestShow": "Diziyi iste",
+    "asking": "İsteniyor…",
+    "waiting": "Bir yöneticinin onaylaması bekleniyor.",
+    "onItsWay": "İndirildiğinde kitaplığında görünecek.",
+    "findIt": "Keşfet'te bul"
+  }
+}

@@ -1,0 +1,337 @@
+{
+  "duration": {
+    "minutes": "{{minutes}} min",
+    "hoursMinutes": "{{hours}} u {{minutes}} min"
+  },
+  "episodeCode": "S{{season}} · A{{episode}}",
+  "seasonN": "Seizoen {{season}}",
+  "specials": "Specials",
+  "media": {
+    "mono": "Mono",
+    "stereo": "Stereo",
+    "lossless": "Lossless",
+    "hiRes": "Hi-res",
+    "dolbyVisionProfile": "Dolby Vision profiel {{profile}}",
+    "withBase": "{{format}}, met {{base}} voor andere schermen",
+    "bitDepth": "{{bits}}-bit",
+    "forced": "Geforceerd",
+    "sdh": "SDH"
+  },
+  "people": {
+    "episodes_one": "{{count}} aflevering",
+    "episodes_other": "{{count}} afleveringen",
+    "lines": {
+      "createdBy": "Bedacht door",
+      "director_one": "Regie",
+      "director_other": "Regie",
+      "writer_one": "Scenario",
+      "writer_other": "Scenario",
+      "basedOn": "Gebaseerd op",
+      "music": "Muziek"
+    },
+    "died": "Overleden {{date}}",
+    "bornIn": "Geboren in {{place}}",
+    "bornOnIn": "Geboren {{date}} in {{place}}",
+    "bornOn": "Geboren {{date}}",
+    "dollars": "$ {{amount}}"
+  },
+  "facts": {
+    "firstAired": "Eerste uitzending",
+    "released": "Uitgebracht",
+    "aired": "Uitgezonden",
+    "ended": "Afgelopen",
+    "status": "Status",
+    "seasons": "Seizoenen",
+    "seasonsValue_one": "{{seasons}} ({{count}} aflevering)",
+    "seasonsValue_other": "{{seasons}} ({{count}} afleveringen)",
+    "rated": "Leeftijdsclassificatie",
+    "genres": "Genres",
+    "originalTitle": "Oorspronkelijke titel",
+    "originalLanguage": "Oorspronkelijke taal",
+    "spokenLanguages": "Gesproken talen",
+    "studio_one": "Studio",
+    "studio_other": "Studio’s",
+    "network_one": "Zender",
+    "network_other": "Zenders",
+    "country_one": "Land",
+    "country_other": "Landen",
+    "collection": "Collectie",
+    "budget": "Budget",
+    "boxOffice": "Opbrengst"
+  },
+  "showStatus": {
+    "Returning Series": "Loopt nog",
+    "Ended": "Afgelopen",
+    "Canceled": "Geannuleerd",
+    "In Production": "In productie",
+    "Planned": "Gepland",
+    "Pilot": "Pilot"
+  },
+  "genres": {
+    "Action": "Actie",
+    "Adventure": "Avontuur",
+    "Animation": "Animatie",
+    "Comedy": "Komedie",
+    "Crime": "Misdaad",
+    "Documentary": "Documentaire",
+    "Drama": "Drama",
+    "Family": "Familie",
+    "Fantasy": "Fantasy",
+    "History": "Geschiedenis",
+    "Horror": "Horror",
+    "Music": "Muziek",
+    "Mystery": "Mysterie",
+    "Romance": "Romantiek",
+    "Science Fiction": "Sciencefiction",
+    "Thriller": "Thriller",
+    "War": "Oorlog",
+    "Western": "Western",
+    "Reality": "Reality",
+    "TV Movie": "Tv-film",
+    "Action & Adventure": "Actie & avontuur",
+    "Kids": "Kinderen",
+    "News": "Nieuws",
+    "Sci-Fi & Fantasy": "Sci-fi & fantasy",
+    "Soap": "Soap",
+    "Talk": "Talkshow",
+    "War & Politics": "Oorlog & politiek"
+  },
+  "jobs": {
+    "Director": "Regie",
+    "Creator": "Bedenker",
+    "Screenplay": "Scenario",
+    "Writer": "Schrijver",
+    "Teleplay": "Tv-scenario",
+    "Story": "Verhaal",
+    "Novel": "Roman",
+    "Characters": "Personages",
+    "Author": "Auteur",
+    "Original Music Composer": "Originele muziek",
+    "Music": "Muziek",
+    "Director of Photography": "Cameraman",
+    "Editor": "Montage",
+    "Producer": "Producent",
+    "Executive Producer": "Uitvoerend producent",
+    "Casting": "Casting",
+    "Production Design": "Productieontwerp",
+    "Costume Design": "Kostuumontwerp"
+  },
+  "kids": {
+    "littleKids": "Kleine kinderen",
+    "kids": "Kinderen",
+    "teens": "Tieners",
+    "andYounger": "{{ratings}} en jonger"
+  },
+  "sort": {
+    "title": "Titel",
+    "added": "Datum toegevoegd",
+    "released": "Releasedatum",
+    "year": "Jaar",
+    "rating": "Beoordeling",
+    "runtime": "Speelduur",
+    "lastPlayed": "Laatst bekeken"
+  },
+  "watched": {
+    "unwatched": "Niet bekeken",
+    "inProgress": "Bezig",
+    "watched": "Bekeken",
+    "notStarted": "Niet begonnen"
+  },
+  "genreRows": {
+    "Action": "Vol actie",
+    "Adventure": "Avonturen",
+    "Animation": "Animatiefavorieten",
+    "Comedy": "Komedies",
+    "Crime": "Misdaadverhalen",
+    "Documentary": "Documentaires",
+    "Drama": "Drama’s",
+    "Family": "Voor het hele gezin",
+    "Fantasy": "Fantasywerelden",
+    "Horror": "Horror",
+    "Mystery": "Mysteries",
+    "Romance": "Romantiek",
+    "Science Fiction": "Sci-fi-favorieten",
+    "Thriller": "Thrillers",
+    "War": "Oorlogsverhalen",
+    "Western": "Westerns"
+  },
+  "count": {
+    "episodes_one": "{{count}} aflevering",
+    "episodes_other": "{{count}} afleveringen",
+    "seasons_one": "{{count}} seizoen",
+    "seasons_other": "{{count}} seizoenen",
+    "albums_one": "{{count}} album",
+    "albums_other": "{{count}} albums",
+    "tracks_one": "{{count}} nummer",
+    "tracks_other": "{{count}} nummers",
+    "titles_one": "{{count}} titel",
+    "titles_other": "{{count}} titels"
+  },
+  "awards": {
+    "academy": {
+      "won_one": "{{count}} Oscar gewonnen",
+      "won_other": "{{count}} Oscars gewonnen",
+      "nominated_one": "Genomineerd voor {{count}} Oscar",
+      "nominated_other": "Genomineerd voor {{count}} Oscars"
+    },
+    "emmy": {
+      "won_one": "{{count}} Primetime Emmy gewonnen",
+      "won_other": "{{count}} Primetime Emmy’s gewonnen",
+      "nominated_one": "Genomineerd voor {{count}} Primetime Emmy",
+      "nominated_other": "Genomineerd voor {{count}} Primetime Emmy’s"
+    },
+    "globe": {
+      "won_one": "{{count}} Golden Globe gewonnen",
+      "won_other": "{{count}} Golden Globes gewonnen",
+      "nominated_one": "Genomineerd voor {{count}} Golden Globe",
+      "nominated_other": "Genomineerd voor {{count}} Golden Globes"
+    },
+    "bafta": {
+      "won_one": "{{count}} BAFTA gewonnen",
+      "won_other": "{{count}} BAFTA’s gewonnen",
+      "nominated_one": "Genomineerd voor {{count}} BAFTA",
+      "nominated_other": "Genomineerd voor {{count}} BAFTA’s"
+    },
+    "wins_one": "{{count}} prijs",
+    "wins_other": "{{count}} prijzen",
+    "nominations_one": "{{count}} nominatie",
+    "nominations_other": "{{count}} nominaties",
+    "winsAndNominations": "{{wins}} en {{nominations}}"
+  },
+  "departments": {
+    "Acting": "Acteur",
+    "Directing": "Regie",
+    "Writing": "Schrijven",
+    "Production": "Productie",
+    "Sound": "Geluid",
+    "Camera": "Camera",
+    "Editing": "Montage",
+    "Art": "Art direction",
+    "Crew": "Crew",
+    "Visual Effects": "Visuele effecten",
+    "Costume & Make-Up": "Kostuums & make-up",
+    "Lighting": "Belichting",
+    "Creator": "Bedenker"
+  },
+  "starters": {
+    "recent": "Onlangs toegevoegd",
+    "unwatched": "Niet bekeken",
+    "tonight": "Kort genoeg voor vanavond"
+  },
+  "filter": {
+    "decade": "Jaren {{decade}}",
+    "yearRange": "{{from}}–{{to}}",
+    "yearOrLater": "{{year}} of later",
+    "yearOrEarlier": "{{year}} of eerder",
+    "lastYear": "het afgelopen jaar",
+    "lastWeeks_one": "de afgelopen week",
+    "lastWeeks_other": "de afgelopen {{count}} weken",
+    "lastDays_one": "de afgelopen {{count}} dag",
+    "lastDays_other": "de afgelopen {{count}} dagen",
+    "runtime": {
+      "titles": {
+        "between": "{{min}}–{{max}} min",
+        "over": "Meer dan {{min}} min",
+        "under": "Minder dan {{max}} min"
+      },
+      "episodes": {
+        "between": "Afleveringen van {{min}}–{{max}} min",
+        "over": "Afleveringen langer dan {{min}} min",
+        "under": "Afleveringen korter dan {{max}} min"
+      }
+    }
+  },
+  "themes": {
+    "clean": {
+      "name": "Strak",
+      "description": "Puur wit, één blauw, geen schreven. Alleen de posters."
+    },
+    "dark": {
+      "name": "Donker",
+      "description": "Echt zwart en helder wit. Rustig voor je ogen en voor een OLED-scherm."
+    },
+    "drive-in": {
+      "name": "Drive-in",
+      "description": "Seventiesbruin en barnsteen van een lichtreclame, als een avond in de drive-in."
+    },
+    "high-contrast": {
+      "name": "Hoog contrast",
+      "description": "Zwart, wit en felgeel, voor de duidelijkste tekst van de andere kant van de kamer."
+    },
+    "light": {
+      "name": "Licht",
+      "description": "Warm papierwit met koraal, voor een lichte kamer."
+    },
+    "matinee": {
+      "name": "Matinee",
+      "description": "Warm bioscoopdonker met een koraalaccent. De huisstijl."
+    },
+    "sci-fi": {
+      "name": "Sci-fi",
+      "description": "Diep ruimteblauw met een neoncyaan gloed en een futuristisch lettertype."
+    }
+  },
+  "every": {
+    "seconds_one": "{{count}} seconde",
+    "seconds_other": "{{count}} seconden",
+    "minutes_one": "{{count}} minuut",
+    "minutes_other": "{{count}} minuten",
+    "hours_one": "{{count}} uur",
+    "hours_other": "{{count}} uur"
+  },
+  "avatars": {
+    "coral": "Koraal",
+    "amber": "Amber",
+    "lime": "Limoen",
+    "teal": "Petrol",
+    "sky": "Hemelsblauw",
+    "violet": "Violet",
+    "pink": "Roze",
+    "slate": "Leisteen"
+  },
+  "day": {
+    "today": "Vandaag",
+    "tomorrow": "Morgen",
+    "yesterday": "Gisteren"
+  },
+  "release": {
+    "cinemas": "In de bioscoop",
+    "digital": "Digitale release",
+    "physical": "Op disc",
+    "airs": "Uitzending"
+  },
+  "issue": {
+    "video": "Beeld",
+    "audio": "Geluid",
+    "subtitles": "Ondertiteling",
+    "wrong": "Verkeerde titel",
+    "other": "Iets anders"
+  },
+  "holidays": {
+    "valentines": "Voor Valentijnsdag",
+    "easter": "Voor Pasen",
+    "halloween": "Griezelseizoen",
+    "thanksgiving": "Voor Thanksgiving",
+    "christmas": "Kerstfavorieten",
+    "newyear": "Het nieuwe jaar in"
+  },
+  "discover": {
+    "rows": {
+      "trending": "Populair nu",
+      "popular-movies": "Populaire films",
+      "popular-shows": "Populaire series",
+      "upcoming-movies": "Binnenkort in de bioscoop",
+      "upcoming-shows": "Nieuwe series op komst"
+    },
+    "because": "Omdat je {{title}} hebt gekeken",
+    "status": {
+      "available": "In je bibliotheek",
+      "added": "Onderweg",
+      "requested": "Aangevraagd"
+    },
+    "kind": {
+      "movie": "Film",
+      "show": "Serie"
+    }
+  }
+}

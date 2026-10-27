@@ -1,0 +1,310 @@
+{
+  "duration": {
+    "minutes": "{{minutes}}분",
+    "hoursMinutes": "{{hours}}시간 {{minutes}}분"
+  },
+  "episodeCode": "S{{season}} · E{{episode}}",
+  "seasonN": "시즌 {{season}}",
+  "specials": "스페셜",
+  "media": {
+    "mono": "모노",
+    "stereo": "스테레오",
+    "lossless": "무손실",
+    "hiRes": "Hi-Res",
+    "dolbyVisionProfile": "Dolby Vision 프로필 {{profile}}",
+    "withBase": "{{format}}, 다른 화면용 {{base}} 포함",
+    "bitDepth": "{{bits}}비트",
+    "forced": "강제",
+    "sdh": "SDH"
+  },
+  "people": {
+    "episodes_other": "{{count}}개 에피소드",
+    "lines": {
+      "createdBy": "제작",
+      "director_other": "감독",
+      "writer_other": "각본",
+      "basedOn": "원작",
+      "music": "음악"
+    },
+    "died": "{{date}} 사망",
+    "bornIn": "{{place}} 출생",
+    "bornOnIn": "{{date}} {{place}} 출생",
+    "bornOn": "{{date}} 출생",
+    "dollars": "${{amount}}"
+  },
+  "facts": {
+    "firstAired": "첫 방송",
+    "released": "개봉",
+    "aired": "방송",
+    "ended": "종영",
+    "status": "상태",
+    "seasons": "시즌",
+    "seasonsValue_other": "{{seasons}}({{count}}개 에피소드)",
+    "rated": "등급",
+    "genres": "장르",
+    "originalTitle": "원제",
+    "originalLanguage": "원어",
+    "spokenLanguages": "사용 언어",
+    "studio_other": "제작사",
+    "network_other": "방송사",
+    "country_other": "국가",
+    "collection": "컬렉션",
+    "budget": "제작비",
+    "boxOffice": "박스오피스"
+  },
+  "showStatus": {
+    "Returning Series": "방영 중",
+    "Ended": "종영",
+    "Canceled": "취소됨",
+    "In Production": "제작 중",
+    "Planned": "기획 중",
+    "Pilot": "파일럿"
+  },
+  "genres": {
+    "Action": "액션",
+    "Adventure": "모험",
+    "Animation": "애니메이션",
+    "Comedy": "코미디",
+    "Crime": "범죄",
+    "Documentary": "다큐멘터리",
+    "Drama": "드라마",
+    "Family": "가족",
+    "Fantasy": "판타지",
+    "History": "역사",
+    "Horror": "공포",
+    "Music": "음악",
+    "Mystery": "미스터리",
+    "Romance": "로맨스",
+    "Science Fiction": "SF",
+    "Thriller": "스릴러",
+    "War": "전쟁",
+    "Western": "서부",
+    "Reality": "리얼리티",
+    "TV Movie": "TV 영화",
+    "Action & Adventure": "액션 & 어드벤처",
+    "Kids": "키즈",
+    "News": "뉴스",
+    "Sci-Fi & Fantasy": "SF & 판타지",
+    "Soap": "연속극",
+    "Talk": "토크",
+    "War & Politics": "전쟁 & 정치"
+  },
+  "jobs": {
+    "Director": "감독",
+    "Creator": "크리에이터",
+    "Screenplay": "각본",
+    "Writer": "작가",
+    "Teleplay": "TV 각본",
+    "Story": "원안",
+    "Novel": "소설",
+    "Characters": "캐릭터",
+    "Author": "원작자",
+    "Original Music Composer": "음악",
+    "Music": "음악",
+    "Director of Photography": "촬영 감독",
+    "Editor": "편집",
+    "Producer": "프로듀서",
+    "Executive Producer": "총괄 프로듀서",
+    "Casting": "캐스팅",
+    "Production Design": "프로덕션 디자인",
+    "Costume Design": "의상 디자인"
+  },
+  "kids": {
+    "littleKids": "어린이",
+    "kids": "키즈",
+    "teens": "청소년",
+    "andYounger": "{{ratings}} 이하"
+  },
+  "sort": {
+    "title": "제목",
+    "added": "추가한 날짜",
+    "released": "개봉일",
+    "year": "연도",
+    "rating": "평점",
+    "runtime": "러닝타임",
+    "lastPlayed": "마지막 시청"
+  },
+  "watched": {
+    "unwatched": "안 본 작품",
+    "inProgress": "보는 중",
+    "watched": "본 작품",
+    "notStarted": "시작 전"
+  },
+  "genreRows": {
+    "Action": "액션 가득",
+    "Adventure": "모험",
+    "Animation": "인기 애니메이션",
+    "Comedy": "코미디",
+    "Crime": "범죄 이야기",
+    "Documentary": "다큐멘터리",
+    "Drama": "드라마",
+    "Family": "온 가족을 위한",
+    "Fantasy": "판타지 세계",
+    "Horror": "공포",
+    "Mystery": "미스터리",
+    "Romance": "로맨스",
+    "Science Fiction": "인기 SF",
+    "Thriller": "스릴러",
+    "War": "전쟁 이야기",
+    "Western": "서부극"
+  },
+  "count": {
+    "episodes_other": "에피소드 {{count}}개",
+    "seasons_other": "시즌 {{count}}개",
+    "albums_other": "앨범 {{count}}개",
+    "tracks_other": "{{count}}곡",
+    "titles_other": "작품 {{count}}편"
+  },
+  "awards": {
+    "academy": {
+      "won_other": "아카데미상 {{count}}개 부문 수상",
+      "nominated_other": "아카데미상 {{count}}개 부문 후보"
+    },
+    "emmy": {
+      "won_other": "프라임타임 에미상 {{count}}개 부문 수상",
+      "nominated_other": "프라임타임 에미상 {{count}}개 부문 후보"
+    },
+    "globe": {
+      "won_other": "골든 글로브 {{count}}개 부문 수상",
+      "nominated_other": "골든 글로브 {{count}}개 부문 후보"
+    },
+    "bafta": {
+      "won_other": "BAFTA {{count}}개 부문 수상",
+      "nominated_other": "BAFTA {{count}}개 부문 후보"
+    },
+    "wins_other": "{{count}}개 수상",
+    "nominations_other": "{{count}}개 후보",
+    "winsAndNominations": "{{wins}}, {{nominations}}"
+  },
+  "departments": {
+    "Acting": "배우",
+    "Directing": "연출",
+    "Writing": "각본",
+    "Production": "제작",
+    "Sound": "사운드",
+    "Camera": "촬영",
+    "Editing": "편집",
+    "Art": "미술",
+    "Crew": "스태프",
+    "Visual Effects": "시각효과",
+    "Costume & Make-Up": "의상 & 분장",
+    "Lighting": "조명",
+    "Creator": "크리에이터"
+  },
+  "starters": {
+    "recent": "최근 추가",
+    "unwatched": "안 본 작품",
+    "tonight": "오늘 밤 보기 딱 좋은 길이"
+  },
+  "filter": {
+    "decade": "{{decade}}년대",
+    "yearRange": "{{from}}–{{to}}",
+    "yearOrLater": "{{year}}년 이후",
+    "yearOrEarlier": "{{year}}년 이전",
+    "lastYear": "지난 1년",
+    "lastWeeks_other": "지난 {{count}}주",
+    "lastDays_other": "지난 {{count}}일",
+    "runtime": {
+      "titles": {
+        "between": "{{min}}–{{max}}분",
+        "over": "{{min}}분 초과",
+        "under": "{{max}}분 미만"
+      },
+      "episodes": {
+        "between": "에피소드 {{min}}–{{max}}분",
+        "over": "에피소드 {{min}}분 초과",
+        "under": "에피소드 {{max}}분 미만"
+      }
+    }
+  },
+  "themes": {
+    "clean": {
+      "name": "클린",
+      "description": "흰 바탕에 파란색 하나, 세리프 없음. 포스터만 돋보이게."
+    },
+    "dark": {
+      "name": "다크",
+      "description": "완전한 검정과 선명한 흰색. 눈에도, OLED 화면에도 편안해요."
+    },
+    "drive-in": {
+      "name": "자동차 극장",
+      "description": "70년대 브라운과 네온 간판의 앰버, 자동차 극장의 밤처럼."
+    },
+    "high-contrast": {
+      "name": "고대비",
+      "description": "검정, 흰색, 밝은 노랑으로 방 건너편에서도 가장 또렷하게."
+    },
+    "light": {
+      "name": "라이트",
+      "description": "따뜻한 종이 흰색에 코랄, 밝은 방을 위해."
+    },
+    "matinee": {
+      "name": "Matinee",
+      "description": "코랄 포인트가 있는 따뜻한 극장의 어둠. 기본 테마."
+    },
+    "sci-fi": {
+      "name": "SF",
+      "description": "네온 시안 빛과 미래적인 서체를 더한 깊은 우주 남색."
+    }
+  },
+  "every": {
+    "seconds_other": "{{count}}초",
+    "minutes_other": "{{count}}분",
+    "hours_other": "{{count}}시간"
+  },
+  "avatars": {
+    "coral": "코랄",
+    "amber": "앰버",
+    "lime": "라임",
+    "teal": "틸",
+    "sky": "하늘색",
+    "violet": "바이올렛",
+    "pink": "핑크",
+    "slate": "슬레이트"
+  },
+  "day": {
+    "today": "오늘",
+    "tomorrow": "내일",
+    "yesterday": "어제"
+  },
+  "release": {
+    "cinemas": "극장 개봉",
+    "digital": "디지털 출시",
+    "physical": "디스크 출시",
+    "airs": "방송"
+  },
+  "issue": {
+    "video": "화면",
+    "audio": "소리",
+    "subtitles": "자막",
+    "wrong": "제목이 틀림",
+    "other": "기타"
+  },
+  "holidays": {
+    "valentines": "밸런타인데이를 위해",
+    "easter": "부활절을 위해",
+    "halloween": "으스스한 시즌",
+    "thanksgiving": "추수감사절을 위해",
+    "christmas": "크리스마스 인기작",
+    "newyear": "새해를 맞이하며"
+  },
+  "discover": {
+    "rows": {
+      "trending": "트렌드",
+      "popular-movies": "인기 영화",
+      "popular-shows": "인기 시리즈",
+      "upcoming-movies": "곧 극장 개봉",
+      "upcoming-shows": "곧 나올 새 시리즈"
+    },
+    "because": "{{title}}을(를) 보셨기에",
+    "status": {
+      "available": "보관함에 있음",
+      "added": "준비 중",
+      "requested": "요청됨"
+    },
+    "kind": {
+      "movie": "영화",
+      "show": "시리즈"
+    }
+  }
+}

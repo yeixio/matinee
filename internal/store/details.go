@@ -207,7 +207,11 @@ func (s *Store) ItemDetails(ctx context.Context, id int64) (*Details, error) {
 	if err := json.Unmarshal([]byte(js.String), &d); err != nil {
 		return nil, err
 	}
-	return &d, nil
+	tagline, err := s.TranslatedTagline(ctx, id)
+	if tagline != "" {
+		d.Tagline = tagline
+	}
+	return &d, err
 }
 
 // ItemCredits returns an item's cast, guest stars and crew in billing order.

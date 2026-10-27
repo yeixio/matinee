@@ -1,0 +1,715 @@
+{
+  "loading": "Indlæser",
+  "nav": {
+    "home": "Hjem",
+    "watchList": "Se-liste",
+    "collections": "Samlinger",
+    "scanning": "Scanner",
+    "search": "Søg",
+    "comingSoon": "Kommer snart",
+    "requests": "Ønsker",
+    "signIn": "Log ind",
+    "settings": "Indstillinger",
+    "switchProfile": "Skift profil",
+    "signOut": "Log ud",
+    "discover": "Udforsk"
+  },
+  "cantReachServer": "Kan ikke nå serveren. Prøver igen…",
+  "player": {
+    "subtitlesFailed": "Kunne ikke indlæse disse undertekster",
+    "off": "Fra",
+    "convertsVideo": "Konverterer video",
+    "file": "Fil",
+    "seek": "Spol",
+    "previous": "Forrige",
+    "pause": "Pause",
+    "next": "Næste",
+    "closePlayer": "Luk afspilleren",
+    "failedDetail": "Afspilningen mislykkedes. Filen kan være beskadiget eller i et format, serveren ikke kan konvertere.",
+    "failed": "Afspilningen mislykkedes",
+    "back10": "10 sekunder tilbage",
+    "forward10": "10 sekunder frem",
+    "unmute": "Slå lyd til",
+    "mute": "Slå lyd fra",
+    "converting": "Konverterer",
+    "fullscreen": "Fuld skærm"
+  },
+  "somethingWentWrong": "Noget gik galt",
+  "oneMoment": "Et øjeblik…",
+  "auth": {
+    "username": "Brugernavn",
+    "password": "Adgangskode",
+    "signIn": "Log ind",
+    "welcomeBack": "Velkommen tilbage.",
+    "setUp": "Konfigurer Matinee",
+    "setUpHint": "Opret administratorkontoen. Du kan tilføje familie og venner senere.",
+    "createAccount": "Opret konto"
+  },
+  "home": {
+    "welcome": "Velkommen til Matinee",
+    "welcomeHint": "Tilføj en mappe med film, serier eller musik for at komme i gang.",
+    "addLibrary": "Tilføj et bibliotek",
+    "continueWatching": "Fortsæt med at se",
+    "recentlyAdded": "Senest tilføjet",
+    "newReleases": "Nye udgivelser",
+    "scanning": "Scanner dit bibliotek",
+    "scanningHint": "Nye titler dukker op her, så snart de bliver fundet.",
+    "removeNamed": "Fjern {{title}} fra Fortsæt med at se",
+    "remove": "Fjern fra Fortsæt med at se"
+  },
+  "hero": {
+    "upNext": "Næste",
+    "justAdded": "Lige tilføjet",
+    "details": "Detaljer"
+  },
+  "item": {
+    "resume": "Genoptag",
+    "resumeLeft": "Genoptag · {{left}} tilbage",
+    "play": "Afspil",
+    "resumeFrom": "Genoptag fra {{time}}",
+    "resumeEpisode": "Genoptag afsnit {{episode}}",
+    "playEpisode": "Afspil afsnit {{episode}}",
+    "shuffle": "Bland",
+    "seasons": "Sæsoner",
+    "albums": "Album",
+    "episodes": "Afsnit"
+  },
+  "row": {
+    "back": "Rul tilbage",
+    "forward": "Rul frem"
+  },
+  "artwork": {
+    "fetching": "Henter detaljer…"
+  },
+  "close": "Luk",
+  "file": {
+    "audio": "Lyd",
+    "subtitles": "Undertekster",
+    "title": "Fildetaljer",
+    "notYet": "Matinee har ikke kigget nærmere på denne fil endnu. Den læser hver fil langsomt i baggrunden, så det her udfyldes af sig selv.",
+    "unreadable": "Matinee kunne ikke læse denne fil: {{error}}",
+    "stale": "Filen er ændret, siden dette blev registreret; den bliver kigget på igen snart.",
+    "file": "Fil",
+    "location": "Placering",
+    "size": "Størrelse",
+    "format": "Format",
+    "length": "Længde",
+    "bitrate": "Bithastighed",
+    "chapters": "Kapitler",
+    "video": "Video",
+    "videoN": "Video {{n}}",
+    "codec": "Codec",
+    "resolution": "Opløsning",
+    "frameRate": "Billedfrekvens",
+    "fps": "{{rate}} fps",
+    "bitDepth": "Bitdybde",
+    "dynamicRange": "Dynamisk område",
+    "dvProfile": "profil {{profile}}",
+    "dvProfileLevel": "profil {{profile}}, niveau {{level}}",
+    "fallback": "{{format}} som reserve",
+    "color": "Farve",
+    "trackN": "Spor {{n}}",
+    "default": "Standard",
+    "forced": "Tvungne",
+    "commentary": "Kommentar",
+    "audioDescription": "Synstolkning",
+    "separateFile": "Separat fil",
+    "inFile": "I filen",
+    "sdh": "SDH",
+    "recorded": "Registreret {{when}}",
+    "queued": "I kø; den er den næste.",
+    "analyzeAgain": "Analysér igen"
+  },
+  "listSeparator": ", ",
+  "credits": {
+    "seriesCast": "Seriens medvirkende",
+    "cast": "Medvirkende",
+    "guestStars": "Gæsteroller",
+    "starring": "Medvirkende",
+    "moreDetails": "Flere detaljer",
+    "crew": "Hold",
+    "about": "Om",
+    "awards": "Priser",
+    "won": "Vandt",
+    "nominated": "Nomineret",
+    "wonIn": "Vandt {{year}}",
+    "nominatedIn": "Nomineret {{year}}",
+    "showAll": "Vis alle {{count}}",
+    "awardsSource": "Priser fra Wikidata."
+  },
+  "cancel": "Annuller",
+  "upNext": {
+    "upNext": "Næste",
+    "stillWatching": "Ser du stadig med?",
+    "youMightLike": "Du vil måske kunne lide",
+    "playingIn": "Afspilles om {{seconds}}",
+    "playNow": "Afspil nu",
+    "keepWatching": "Bliv ved med at se",
+    "haveALook": "Tag et kig",
+    "stop": "Stop"
+  },
+  "goBack": "Gå tilbage",
+  "back": "Tilbage",
+  "trailer": {
+    "trailer": "Trailer",
+    "named": "Trailer til {{title}}",
+    "wontPlay": "Denne trailer kan ikke afspilles."
+  },
+  "watchList": {
+    "on": "På din se-liste",
+    "add": "Føj til se-listen",
+    "empty": "Intet gemt endnu",
+    "emptyHint": "Åbn en film eller serie, og vælg Se-liste for at gemme den her til senere. Film forsvinder fra listen, når du har set dem.",
+    "browse": "Gennemse"
+  },
+  "related": {
+    "moreLikeThis": "Mere som dette"
+  },
+  "boxSet": {
+    "notFound": "Boksen blev ikke fundet",
+    "notFoundHint": "Ingen af dens titler er i et bibliotek nu.",
+    "boxSet": "Boks"
+  },
+  "search": {
+    "placeholder": "Film, serier, kunstnere, album…",
+    "nothing": "Intet matcher \"{{q}}\"",
+    "lookingForNew": "Leder du efter noget nyt?",
+    "addIt": "Tilføj den",
+    "askForIt": "Ønsk den"
+  },
+  "person": {
+    "notFound": "Personen blev ikke fundet",
+    "showLess": "Vis mindre",
+    "readMore": "Læs mere",
+    "inLibrary": "I dit bibliotek"
+  },
+  "library": {
+    "library": "Bibliotek",
+    "matches_one": "{{count}} resultat",
+    "matches_other": "{{count}} resultater",
+    "scanning": "Scanner…",
+    "nothingUnwatched": "Intet uset her",
+    "nothingMatches": "Intet matcher",
+    "seenEverything": "Du har set alt i dette bibliotek.",
+    "clearFilters": "Ryd filtre",
+    "appearAsFound": "Titler vises, efterhånden som de bliver fundet.",
+    "noMedia": "Matinee kiggede i {{paths}} og fandt ingen medier."
+  },
+  "nothingHereYet": "Intet her endnu",
+  "collection": {
+    "notFound": "Samlingen blev ikke fundet",
+    "notFoundHint": "Den er måske blevet slettet.",
+    "smart": "Smart samling",
+    "collection": "Samling",
+    "shuffledDaily": "Blandes dagligt",
+    "editRules": "Rediger regler",
+    "edit": "Rediger",
+    "delete": "Slet samling",
+    "deleteConfirm": "Slet {{name}}? Titlerne bliver i dit bibliotek.",
+    "nothingMatchesYet": "Intet matcher endnu",
+    "joinByRules": "Titler kommer med af sig selv, når de matcher reglerne.",
+    "howToAdd": "Åbn en film eller serie, og vælg Samlinger for at tilføje den."
+  },
+  "collections": {
+    "newShort": "Ny",
+    "new": "Ny samling",
+    "newSmartShort": "Ny smart",
+    "newSmart": "Ny smart samling",
+    "none": "Ingen samlinger endnu",
+    "noneHint": "En smart samling fylder sig selv ud fra regler, f.eks. uset 80'er-action. Bokse vises her, når to af deres titler er i et bibliotek.",
+    "yours": "Dine",
+    "shared": "Delte",
+    "forEveryone": "Samlinger til alle",
+    "boxSets": "Bokse",
+    "sort": {
+      "own": "Egen rækkefølge",
+      "title": "Titel",
+      "added": "Tilføjet",
+      "released": "Udgivelsesdato",
+      "year": "År",
+      "rating": "Bedømmelse",
+      "runtime": "Spilletid",
+      "lastPlayed": "Sidst afspillet",
+      "shuffle": "Bland dagligt"
+    },
+    "smartShort": "Smart",
+    "editNamed": "Rediger {{name}}",
+    "name": "Navn",
+    "smartExample": "Uset 80'er-action",
+    "manualExample": "Filmaften",
+    "rules": "Regler",
+    "rulesHint": "Titler, der matcher disse filtre, kommer med af sig selv, når biblioteket ændres.",
+    "shuffleDaily": "Bland hver dag",
+    "order": "Rækkefølge",
+    "orderAdded": "Rækkefølgen, titlerne blev tilføjet i",
+    "direction": "Retning",
+    "usual": "Normal",
+    "ascending": "Stigende",
+    "descending": "Faldende",
+    "showAsRow": "Vis som række",
+    "onHome": "På Hjem",
+    "onLibraryPage": "På en biblioteksside",
+    "shareWithEveryone": "Del med alle på denne server",
+    "saveAs": "Gem som samling"
+  },
+  "save": "Gem",
+  "create": "Opret",
+  "loadingDots": "Indlæser…",
+  "filters": {
+    "title": "Filtre",
+    "inUse_one": "Filtre, {{count}} i brug",
+    "inUse_other": "Filtre, {{count}} i brug",
+    "sortBy": "Sortér efter",
+    "highestFirst": "Højeste først",
+    "lowestFirst": "Laveste først",
+    "highestFirstSwitch": "Højeste først; skift til laveste først",
+    "lowestFirstSwitch": "Laveste først; skift til højeste først",
+    "not": "Ikke {{label}}",
+    "remove": "Fjern {{label}}",
+    "chip": {
+      "words": "\"{{q}}\"",
+      "directedBy": "Instrueret af {{name}}",
+      "with": "Med {{name}}",
+      "releasedWithin": "Udgivet {{within}}",
+      "releasedAfter": "Udgivet efter {{date}}",
+      "releasedBefore": "Udgivet før {{date}}",
+      "addedWithin": "Tilføjet {{within}}",
+      "addedAfter": "Tilføjet efter {{date}}",
+      "addedBefore": "Tilføjet før {{date}}",
+      "ratingMin": "Bedømt {{rating}}+",
+      "ratingMax": "Bedømt {{rating}} eller lavere",
+      "certification": "Bedømt {{rating}}",
+      "watchList": "På min se-liste"
+    },
+    "collection": "Samling",
+    "active": "Filtre i brug",
+    "clearAll": "Ryd alle",
+    "more_one": "{{count}} mere",
+    "more_other": "{{count}} mere",
+    "any": "Vilkårlig",
+    "all": "Alle",
+    "anyTime": "Når som helst",
+    "runtime": {
+      "under30": "Under 30 min.",
+      "30to60": "30–60 min.",
+      "overHour": "Over en time",
+      "under90": "Under 90 min.",
+      "90to120": "90 min. – 2 timer",
+      "over2Hours": "Over 2 timer"
+    },
+    "wordsInTitle": "Ord i titlen",
+    "onlyWatchList": "Kun titler på min se-liste",
+    "fromYear": "Fra år",
+    "toYear": "Til år",
+    "from": "Fra",
+    "to": "til",
+    "toPlaceholder": "Til",
+    "lastWeek": "Seneste uge",
+    "last30Days": "Seneste 30 dage",
+    "last3Months": "Seneste 3 måneder",
+    "lastYear": "Seneste år",
+    "ratingAtLeast": "{{rating}}+",
+    "findPerson": "Find en person",
+    "nobody": "Ingen med det navn i dette bibliotek.",
+    "showResults": "Vis resultater",
+    "section": {
+      "title": "Titel",
+      "watched": "Set",
+      "genre": "Genre",
+      "year": "År",
+      "firstAired": "Først vist",
+      "released": "Udgivet",
+      "added": "Tilføjet",
+      "rating": "Bedømmelse",
+      "episodeLength": "Afsnitslængde",
+      "runtime": "Spilletid",
+      "quality": "Kvalitet",
+      "network": "Kanal eller studie",
+      "studio": "Studie",
+      "ageRating": "Aldersgrænse",
+      "language": "Originalsprog",
+      "country": "Land",
+      "creator": "Skabt eller instrueret af",
+      "director": "Instruktør",
+      "people": "Medvirkende og hold"
+    }
+  },
+  "appearance": {
+    "title": "Udseende",
+    "useServerTheme": "Brug serverens tema ({{name}})",
+    "guestHint": "Alle derhjemme uden konto deler dette tema.",
+    "hint": "Dit tema følger dig til Matinee-apps på din telefon og dit tv.",
+    "theme": "Tema",
+    "preview": {
+      "tonight": "I aften",
+      "trailer": "Trailer"
+    },
+    "serverTheme": "Servertema",
+    "serverThemeHint": "Det, alle ser, indtil de vælger deres eget, og på login-siden.",
+    "custom": "{{name}} (brugerdefineret)",
+    "addYourOwn": "For at tilføje dit eget skal du lægge en temafil i serverens <code>themes</code>-mappe i dens datamappe.",
+    "howTo": "Sådan laver du et tema",
+    "skipped": "Sprang over {{problem}}"
+  },
+  "newFiles": {
+    "title": "Nye filer",
+    "intro": "Matinee opdager filer, du tilføjer, omdøber eller sletter, og opdaterer biblioteket et par sekunder efter, at de er færdige med at blive kopieret.",
+    "watch": "Hold øje med nye filer",
+    "summary": {
+      "some": "Nogle mapper tjekkes hvert {{every}}",
+      "watching": "Holder øje med nye filer",
+      "polling": "Tjekkes for nye filer hvert {{every}}",
+      "pollingShare": "Tjekkes for nye filer hvert {{every}} (netværksdrev)",
+      "off": "Holder ikke øje med nye filer"
+    },
+    "mode": {
+      "auto": {
+        "label": "Automatisk",
+        "hint": "Med det samme på serverens egne diske. Netværksdrev (SMB, NFS) melder ikke om ændringer, så Matinee tjekker dem hvert {{every}}."
+      },
+      "poll": {
+        "label": "Tjek med timer",
+        "hint": "Hver mappe tjekkes hvert {{every}}. Vælg dette, hvis nye filer på en disk ikke dukker op af sig selv."
+      },
+      "off": {
+        "label": "Fra",
+        "hint": "Nye filer dukker op ved næste fulde scanning, eller når du trykker på Scan."
+      }
+    },
+    "rescan": "Hvert bibliotek scannes også helt igen hvert {{every}}, hvilket fanger alt andet, f.eks. en fil der er erstattet på et netværksdrev.",
+    "rescanOff": "Fulde scanninger er slået fra på denne server (MATINEE_SCAN_INTERVAL=0)."
+  },
+  "analysis": {
+    "title": "Medieanalyse",
+    "intro": "Matinee læser langsomt hver fil for kvalitet, lyd og sprog, og igen hver gang en fil ændres.",
+    "state": {
+      "lookingAt": "Kigger på {{file}}",
+      "working": "Arbejder",
+      "waiting": "Venter på, at afspilningen slutter",
+      "slowDisk": "Filerne er langsomme at læse; holder pause et par minutter",
+      "allDone": "Alle filer er analyseret",
+      "upToDate": "Opdateret",
+      "paused": "Sat på pause"
+    },
+    "progress": "{{done}} af {{total}}",
+    "unreadable_one": "{{count}} fil kunne ikke læses.",
+    "unreadable_other": "{{count}} filer kunne ikke læses.",
+    "speed": "Hastighed",
+    "mode": {
+      "gentle": {
+        "label": "Skånsom",
+        "hint": "Én fil med få sekunders mellemrum, og ingen mens serveren konverterer noget til afspilning."
+      },
+      "normal": {
+        "label": "Normal",
+        "hint": "Filer i træk, stadig med laveste prioritet."
+      },
+      "off": {
+        "label": "Fra",
+        "hint": "Sat på pause, indtil du slår den til igen."
+      }
+    }
+  },
+  "profileSettings": {
+    "title": "Profiler",
+    "intro": "Profiler deler et login, men har hver deres fremskridt, se-liste og tema. Børneprofiler ser kun det, du tillader. En pinkode holder en profil, eller selve kontoen, for dens ejer.",
+    "pinFor": "En 4-cifret pinkode til {{name}}",
+    "homeDevices": "Enheder på dit hjemmenetværk, der ikke er logget ind",
+    "account": "Konto",
+    "removePin": "Fjern pinkode",
+    "addPin": "Tilføj pinkode",
+    "hasPin": "Har pinkode",
+    "edit": "Rediger {{name}}",
+    "remove": "Fjern {{name}}",
+    "confirmRemove": "Fjern {{name}}? Fremskridt og se-liste forsvinder også.",
+    "add": "Tilføj profil",
+    "name": "Navn",
+    "newPin": "Ny pinkode",
+    "pinOptional": "Pinkode (valgfri)",
+    "unchanged": "Uændret",
+    "fourDigits": "4 cifre",
+    "removeThePin": "Fjern pinkoden",
+    "colour": "Farve",
+    "kidsMode": "Børnetilstand",
+    "kidsOff": "Fra: ser alt",
+    "kidsLevel": "{{name}}: {{ratings}}",
+    "kidsLibraries": "Hvad denne profil ser i hvert bibliotek. Efter aldersgrænse skjuler titler over niveauet {{level}} og titler uden aldersgrænse. Børneprofiler kan ikke åbne Indstillinger eller sende ønsker.",
+    "libraryMode": {
+      "hidden": "Skjult",
+      "rated": "Efter aldersgrænse",
+      "all": "Alt"
+    }
+  },
+  "report": {
+    "thanks": "Tak, en administrator kigger på det.",
+    "button": "Rapportér et problem",
+    "whatsWrong": "Hvad er der galt med {{title}}?",
+    "details": "Detaljer (valgfri)",
+    "detailsExample": "F.eks.: ingen lyd efter 20 minutter",
+    "send": "Send"
+  },
+  "quality": {
+    "label": "Kvalitet",
+    "forShow": "Kvalitet for serien",
+    "confirm": "Skift til {{name}}? {{app}} leder efter kopier, der passer.",
+    "searching": "Søger…"
+  },
+  "upcoming": {
+    "nothingYet": "Intet at vise endnu",
+    "connect": "Forbind Radarr eller Sonarr for at se de film og afsnit, der er på vej.",
+    "openSettings": "Åbn indstillinger",
+    "notConnected": "En administrator har ikke forbundet Radarr eller Sonarr til denne server.",
+    "intro": "Nye afsnit og filmudgivelser i de næste to måneder, som ikke er kommet endnu.",
+    "unavailable": "{{apps}} svarede ikke, så nogle mangler måske.",
+    "nothing": "Intet på vej. Ønsk noget nyt under Ønsker."
+  },
+  "link": {
+    "title": "Log en enhed ind",
+    "intro": "Indtast koden, som din telefon eller dit tv viser.",
+    "signedIn": "{{device}} er logget ind",
+    "ready": "Den er klar om et par sekunder.",
+    "declined": "Afvist",
+    "notSignedIn": "{{device}} blev ikke logget ind.",
+    "another": "Log en anden enhed ind",
+    "code": "Kode",
+    "next": "Næste",
+    "wantsToSignIn": "vil logge ind som <name>{{name}}</name>",
+    "warning": "Godkend kun en enhed, du holder i hånden eller kan se. Den får samme adgang som dig.",
+    "decline": "Afvis",
+    "approve": "Log ind"
+  },
+  "profiles": {
+    "whoIsWatching": "Hvem ser med?",
+    "signInWithAccount": "Log ind med en konto",
+    "enterPin": "Indtast pinkoden til {{name}}",
+    "pin": "Pinkode",
+    "deleteDigit": "Slet"
+  },
+  "integrations": {
+    "title": "Radarr og Sonarr",
+    "intro": "Forbind dem, så folk kan ønske film og serier, se hvad der kommer snart, og rapportere problemer med det, de ser.",
+    "connected": "Forbundet · {{url}}",
+    "notConnected": {
+      "radarr": "Ikke forbundet · til film",
+      "sonarr": "Ikke forbundet · til serier"
+    },
+    "change": "Skift",
+    "connect": "Forbind",
+    "address": "Adresse",
+    "apiKey": "API-nøgle",
+    "keyWhere": "{{app}} → Settings → General",
+    "saved": "Gemt",
+    "answers": "{{app}} {{version}} svarer på {{url}}",
+    "quality": {
+      "radarr": "Kvalitet for nye film",
+      "sonarr": "Kvalitet for nye serier"
+    },
+    "folder": "Mappe",
+    "confirmDisconnect": "Afbryd {{app}}? Titler, der allerede er der, bliver der.",
+    "disconnect": "Afbryd",
+    "testing": "Tester…",
+    "test": "Test",
+    "whoCanAdd": "Hvem kan tilføje film og serier",
+    "mode": {
+      "approve": {
+        "label": "Ønsk, så godkender en administrator",
+        "detail": "Alle med en konto kan ønske en titel. Den venter på en administrator."
+      },
+      "auto": {
+        "label": "Tilføj med det samme",
+        "detail": "Det, folk ønsker, går direkte til Radarr eller Sonarr."
+      },
+      "off": {
+        "label": "Kun administratorer tilføjer titler",
+        "detail": "Alle andre kan stadig se, hvad der kommer snart, og rapportere problemer."
+      }
+    },
+    "overseerr": {
+      "intro": "Forbind den for at tilføje fanen Udforsk: hvad der er populært, anbefalinger ud fra hvad folk ser, og en måde at bede om hvad som helst. Jellyseerr virker også.",
+      "notConnected": "Ikke forbundet · til Udforsk",
+      "requestAs": "Anmodninger fra folk uden Overseerr-konto",
+      "madeAsOwner": "Lavet som {{name}} (ejeren af API-nøglen)",
+      "madeAs": "Lavet som {{name}}",
+      "sameName": "Folk med en Overseerr-konto med samme navn beder som sig selv. Overseerr afgør, hvilke anmodninger der skal godkendes, ud fra hver brugers tilladelser der.",
+      "confirmDisconnect": "Afbryd Overseerr? Fanen Udforsk forsvinder."
+    }
+  },
+  "requests": {
+    "tab": {
+      "ask": "Ønsk noget",
+      "requests": "Ønsker",
+      "yourRequests": "Dine ønsker",
+      "problems": "Problemer",
+      "yourReports": "Dine rapporter"
+    },
+    "movies": "Film",
+    "shows": "Serier",
+    "findMovie": "Find en film…",
+    "findShow": "Find en serie…",
+    "nothingFound": "Intet fundet for \"{{q}}\"",
+    "ready": "Klar til at se",
+    "askedFor": "Ønsket",
+    "onItsWay": "På vej",
+    "add": "Tilføj",
+    "askForIt": "Ønsk den",
+    "state": {
+      "pending": "Venter på godkendelse",
+      "approved": "På vej",
+      "declined": "Afvist",
+      "failed": "Kunne ikke tilføjes"
+    },
+    "none": "Ingen ønsker endnu.",
+    "retry": "Prøv igen",
+    "approve": "Godkend",
+    "remove": "Fjern ønsket om {{title}}",
+    "removedFromLibrary": "Fjernet fra biblioteket",
+    "noProblems": "Ingen har rapporteret et problem.",
+    "noReports": "Du har ikke rapporteret nogen problemer. Brug \"Rapportér et problem\" på en titel.",
+    "fileReplaced": "Fil erstattet",
+    "closed": "Lukket",
+    "confirmReplace": "Slet denne fil af {{title}} og download en anden kopi? Den nye vises, når den er downloadet, og biblioteket er scannet.",
+    "replaceFile": "Erstat fil",
+    "close": "Luk"
+  },
+  "settings": {
+    "tmdbNotice": "Plakater og beskrivelser kommer fra <link>TMDB</link>. Dette produkt bruger TMDB's API, men er ikke godkendt eller certificeret af TMDB.",
+    "libraries": {
+      "title": "Biblioteker",
+      "none": "Ingen biblioteker endnu.",
+      "scan": "Scan",
+      "remove": "Fjern {{name}}",
+      "confirmRemove": "Fjern \"{{name}}\"? Dine filer bliver, hvor de er.",
+      "kind": {
+        "movies": "Film",
+        "tv": "Tv-serier",
+        "music": "Musik"
+      },
+      "type": "Type",
+      "folders": "Mapper",
+      "up": "Én mappe op",
+      "added": "Tilføjet",
+      "useFolder": "Brug denne mappe",
+      "noSubfolders": "Ingen undermapper"
+    },
+    "people": {
+      "title": "Personer",
+      "admin": "Administrator",
+      "passwordChanged": "Adgangskoden er ændret. {{name}} blev logget ud overalt.",
+      "you": "(dig)",
+      "removeAdmin": "Fjern administrator",
+      "makeAdmin": "Gør til administrator",
+      "resetPassword": "Nulstil adgangskode",
+      "remove": "Fjern",
+      "newPasswordFor": "Ny adgangskode til {{name}}",
+      "setPassword": "Angiv adgangskode",
+      "confirmRemove": "Fjern <name>{{name}}</name>? Visningshistorik, se-liste, downloads og ønsker forsvinder også, og vedkommende logges ud overalt. Det kan ikke fortrydes."
+    },
+    "account": {
+      "title": "Din konto",
+      "changePassword": "Skift adgangskode",
+      "current": "Nuværende adgangskode",
+      "new": "Ny adgangskode",
+      "again": "Ny adgangskode igen",
+      "hint": "Mindst 8 tegn. Dine andre enheder bliver logget ud.",
+      "mismatch": "De nye adgangskoder er ikke ens.",
+      "changed": "Adgangskoden er ændret. Dine andre enheder blev logget ud."
+    },
+    "devices": {
+      "aWhileAgo": "for et stykke tid siden",
+      "justNow": "lige nu",
+      "title": "Dine enheder",
+      "unknown": "Ukendt enhed",
+      "this": "Denne enhed",
+      "lastUsed": "Sidst brugt {{when}}",
+      "confirmSignOut": "Log \"{{name}}\" ud?"
+    },
+    "version": "Matinee-server {{version}} · API v{{api}}",
+    "home": {
+      "title": "Hjemmenetværk",
+      "requireSignIn": "Kræv login derhjemme",
+      "required": "Alle logger ind, hjemme og ude.",
+      "open": "Telefoner, tv'er og browsere på dit hjemmenetværk kan se uden at logge ind. De deler én Hjem-konto og kan ikke ændre noget. Uden for hjemmet logger alle ind."
+    },
+    "remote": {
+      "title": "Fjernadgang",
+      "publicURL": "Uden for hjemmet forbinder apps til <url>{{url}}</url>, adressen denne server blev sat op med.",
+      "toggle": "Se uden for hjemmet",
+      "hint": "Matinee beder din router om at åbne en port og henter et certifikat, så apps forbinder sikkert hvor som helst fra. Alle logger ind udefra.",
+      "working": "Åbner en port på din router og henter et certifikat…",
+      "ready": "Apps når denne server på <url>{{url}}</url>, når de er uden for hjemmet.",
+      "router": "Din router åbnede porten via {{router}}.",
+      "pickUp": "De henter denne adresse, næste gang de er på dit hjemmenetværk.",
+      "sharedAddress": "Matinee kan ikke komme uden om dette på egen hånd endnu.",
+      "retry": "Matinee prøver igen hver halve time."
+    },
+    "playback": {
+      "title": "Afspilning",
+      "autoPlay": "Afspil næste afsnit",
+      "autoPlayHint": "Når rulleteksterne starter, afspilles næste afsnit efter en nedtælling på 10 sekunder, som du kan annullere.",
+      "binge": "Spring nedtællingen over",
+      "bingeHint": "Gå direkte til næste afsnit, når rulleteksterne starter. Efter tre i træk uden at røre noget bliver du spurgt, om du stadig ser med."
+    },
+    "trailers": {
+      "title": "Trailere",
+      "remote": "Trailere fra YouTube",
+      "remoteOn": "Film og serier tilbyder deres trailere fra TMDB, som afspilles fra YouTube. Trailerfiler ved siden af dine medier vises altid også.",
+      "remoteOff": "Kun trailerfiler ved siden af dine medier vises, f.eks. \"Movie (2020)-trailer.mkv\" eller alt i en Trailers-mappe."
+    },
+    "transcoding": {
+      "title": "Omkodning",
+      "intro": "Filer, en enhed ikke kan afspille, som de er, bliver konverteret, mens du ser. En GPU gør det hurtigere og belaster serveren mindre.",
+      "convertingWith": "Konverterer med",
+      "active": "{{name}}.",
+      "activeOn": "{{name}} på {{detail}}.",
+      "fullGPU": "Video afkodes, skaleres og kodes på GPU'en.",
+      "encodeOnly": "Video kodes på GPU'en og afkodes på CPU'en.",
+      "fallback": "Hvis GPU'en ikke kan klare en fil, afspilles den via CPU'en i stedet.",
+      "testing": "Tester serverens GPU…",
+      "cpuOff": "CPU'en. Hardwareomkodning er slået fra.",
+      "cpuFailed": "CPU'en, fordi den accelerator, du valgte, ikke virkede på denne server.",
+      "cpuNoGPU": "CPU'en. Ingen GPU på denne server bestod testen.",
+      "hardware": "Hardwareacceleration",
+      "auto": "Automatisk: den bedste, der virker",
+      "off": "Fra: brug altid CPU'en",
+      "notFound": "{{name}} (findes ikke på denne server)",
+      "accelerator": {
+        "nvenc": "NVIDIA NVENC",
+        "vaapi": "VAAPI (AMD og Intel på Linux)",
+        "qsv": "Intel Quick Sync",
+        "videotoolbox": "VideoToolbox (Mac)",
+        "amf": "AMD AMF (Windows)",
+        "v4l2m2m": "V4L2 (Raspberry Pi)"
+      }
+    },
+    "homeRows": {
+      "title": "Hjem",
+      "holidays": "Højtidsrækker",
+      "holidaysDetail": "I måneden før valentinsdag, påske, halloween, Thanksgiving og jul, og ugen før nytårsaften, begynder Hjem med en række titler til dagen, valgt ud fra nøgleord, titler og beskrivelser."
+    }
+  },
+  "language": {
+    "title": "Sprog",
+    "label": "Vis Matinee på",
+    "hint": "Dit sprog følger dig til Matinee-apps på din telefon og dit tv. Titler og beskrivelser kommer også på det, hvor TMDB har dem.",
+    "guestHint": "Alle derhjemme uden konto deler dette sprog.",
+    "automatic": "Automatisk ({{language}})",
+    "machine": "Dette sprog er maskinoversat, så nogle ord kan lyde mærkelige.",
+    "help": "Hjælp med at forbedre det"
+  },
+  "discover": {
+    "title": "Udforsk",
+    "emptyTitle": "Intet at udforske endnu",
+    "connectIt": "Forbind Overseerr for at se hvad der er populært, få anbefalinger og bede om nye film og serier.",
+    "openSettings": "Åbn indstillinger",
+    "notConnected": "En administrator har ikke forbundet Overseerr til denne server.",
+    "placeholder": "Find en film eller serie…",
+    "unavailable": "Udforsk er ikke tilgængelig lige nu",
+    "open": "Åbn",
+    "request": "Anmod",
+    "requestShow": "Anmod om serien",
+    "asking": "Sender…",
+    "waiting": "Venter på, at en administrator godkender den.",
+    "onItsWay": "Den dukker op i dit bibliotek, når den er hentet.",
+    "findIt": "Find den i Udforsk"
+  }
+}

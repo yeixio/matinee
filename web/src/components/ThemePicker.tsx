@@ -1,32 +1,34 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Check } from 'lucide-react'
+import { Trans, useTranslation } from 'react-i18next'
 import { api, type Theme, type User } from '../api'
-import { useSetMyTheme, useThemes } from '../theme'
+import { themeDescription, themeName, useSetMyTheme, useThemes } from '../theme'
 
 // Appearance: everyone picks their own theme, which follows them to every
 // device; an admin also picks the server's default.
 export function Appearance({ me }: { me: User }) {
+  const { t } = useTranslation()
   const { list, mine, active } = useThemes(me.id)
   const pick = useSetMyTheme(me.id)
   const fallback = list?.themes.find((t) => t.id === list.default)
   return (
     <section className="space-y-4">
       <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-        <h2 className="text-lg font-semibold">Appearance</h2>
+        <h2 className="text-lg font-semibold">{t('appearance.title')}</h2>
         {mine && fallback && (
           <button onClick={() => pick.mutate('')} className="text-sm text-muted underline-offset-4 hover:text-text hover:underline">
-            Use the server's theme ({fallback.name})
+            {t('appearance.useServerTheme', { name: themeName(fallback) })}
           </button>
         )}
       </div>
       <p className="text-sm text-muted">
         {me.guest
-          ? 'Everyone at home without an account shares this theme.'
-          : 'Your theme follows you to the Matinee apps on your phone and TV.'}
+          ? t('appearance.guestHint')
+          : t('appearance.hint')}
       </p>
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3" role="radiogroup" aria-label="Theme">
-        {list?.themes.map((t) => (
-          <ThemeCard key={t.id} theme={t} selected={t.id === active?.id} onPick={() => pick.mutate(t.id)} />
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3" role="radiogroup" aria-label={t('appearance.theme')}>
+        {list?.themes.map((th) => (
+          <ThemeCard key={th.id} theme={th} selected={th.id === active?.id} onPick={() => pick.mutate(th.id)} />
         ))}
       </div>
       {me.isAdmin && list && <ServerTheme themes={list.themes} />}
@@ -40,20 +42,21 @@ function ThemeCard({ theme, selected, onPick }: { theme: Theme; selected: boolea
       role="radio"
       aria-checked={selected}
       onClick={onPick}
-      className={`group rounded-xl p-1.5 text-left transition ${selected ? 'bg-accent/10 ring-2 ring-accent' : 'ring-1 ring-line hover:ring-faint'}`}
+      className={`group rounded-xl p-1.5 text-start transition ${selected ? 'bg-accent/10 ring-2 ring-accent' : 'ring-1 ring-line hover:ring-faint'}`}
     >
       <ThemePreview theme={theme} />
       <span className="flex items-center gap-1.5 px-1.5 pt-2 text-sm font-medium">
-        {theme.name}
+        {themeName(theme)}
         {selected && <Check className="size-4 text-accent" />}
       </span>
-      {theme.description && <span className="line-clamp-2 px-1.5 pb-1 text-xs text-muted">{theme.description}</span>}
+      {theme.description && <span className="line-clamp-2 px-1.5 pb-1 text-xs text-muted">{themeDescription(theme)}</span>}
     </button>
   )
 }
 
 // ThemePreview draws a little home screen in a theme's own colours and font.
 export function ThemePreview({ theme }: { theme: Theme }) {
+  const { t } = useTranslation()
   const c = theme.colors
   const display = { fraunces: "'Fraunces Variable', serif", orbitron: "'Orbitron Variable', sans-serif" }[theme.fonts.display] ?? "'Inter Variable', sans-serif"
   return (
@@ -65,14 +68,14 @@ export function ThemePreview({ theme }: { theme: Theme }) {
       </span>
       <span className="block space-y-1.5 p-2">
         <span className="block truncate text-sm leading-tight font-semibold" style={{ color: c.text, fontFamily: display }}>
-          Tonight
+          {t('appearance.preview.tonight')}
         </span>
         <span className="flex gap-1">
           <span className="rounded px-1.5 py-0.5 text-[9px] font-semibold" style={{ background: c.accent, color: c.onAccent }}>
-            Play
+            {t('item.play')}
           </span>
           <span className="rounded px-1.5 py-0.5 text-[9px]" style={{ background: c.raised, color: c.text }}>
-            Trailer
+            {t('appearance.preview.trailer')}
           </span>
         </span>
         <span className="grid grid-cols-4 gap-1">
@@ -90,6 +93,7 @@ export function ThemePreview({ theme }: { theme: Theme }) {
 }
 
 function ServerTheme({ themes }: { themes: Theme[] }) {
+  const { t } = useTranslation()
   const qc = useQueryClient()
   const { data } = useQuery({ queryKey: ['settings'], queryFn: api.settings })
   const save = useMutation({
@@ -103,8 +107,8 @@ function ServerTheme({ themes }: { themes: Theme[] }) {
     <div className="space-y-3 rounded-xl border border-line/60 bg-surface/50 p-4">
       <label className="flex flex-wrap items-center gap-x-4 gap-y-2">
         <span className="min-w-0 flex-1">
-          <span className="block font-medium">Server theme</span>
-          <span className="mt-1 block text-sm text-muted">What everyone sees until they pick their own, and on the sign-in page.</span>
+          <span className="block font-medium">{t('appearance.serverTheme')}</span>
+          <span className="mt-1 block text-sm text-muted">{t('appearance.serverThemeHint')}</span>
         </span>
         <select
           className="rounded-lg border border-line bg-raised px-3 py-2 text-sm"
@@ -112,30 +116,28 @@ function ServerTheme({ themes }: { themes: Theme[] }) {
           disabled={!data || save.isPending}
           onChange={(e) => save.mutate({ theme: e.target.value })}
         >
-          {themes.map((t) => (
-            <option key={t.id} value={t.id}>
-              {t.name}
-              {t.builtIn ? '' : ' (custom)'}
+          {themes.map((th) => (
+            <option key={th.id} value={th.id}>
+              {th.builtIn ? themeName(th) : t('appearance.custom', { name: th.name })}
             </option>
           ))}
         </select>
       </label>
       <p className="text-xs text-faint">
-        To add your own, put a theme file in the server's <code className="text-muted">themes</code> folder, in its data
-        folder.{' '}
+        <Trans i18nKey="appearance.addYourOwn" components={{ code: <code className="text-muted" /> }} />{' '}
         <a
           href="https://github.com/yeixio/matinee/blob/main/docs/themes.md"
           target="_blank"
           rel="noreferrer"
           className="underline hover:text-muted"
         >
-          How to make a theme
+          {t('appearance.howTo')}
         </a>
       </p>
       {!!data?.themeProblems.length && (
         <ul className="space-y-1 text-sm text-danger">
           {data.themeProblems.map((p) => (
-            <li key={p}>Skipped {p}</li>
+            <li key={p}>{t('appearance.skipped', { problem: p })}</li>
           ))}
         </ul>
       )}

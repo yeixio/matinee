@@ -1,0 +1,719 @@
+{
+  "loading": "Carregando",
+  "nav": {
+    "home": "Início",
+    "watchList": "Minha lista",
+    "collections": "Coleções",
+    "scanning": "Verificando",
+    "search": "Buscar",
+    "comingSoon": "Em breve",
+    "requests": "Pedidos",
+    "signIn": "Entrar",
+    "settings": "Configurações",
+    "switchProfile": "Trocar de perfil",
+    "signOut": "Sair",
+    "discover": "Descobrir"
+  },
+  "cantReachServer": "Não foi possível acessar o servidor. Tentando de novo…",
+  "player": {
+    "subtitlesFailed": "Não foi possível carregar estas legendas",
+    "off": "Desativadas",
+    "convertsVideo": "Converte o vídeo",
+    "file": "Arquivo",
+    "seek": "Avançar ou voltar",
+    "previous": "Anterior",
+    "pause": "Pausar",
+    "next": "Próximo",
+    "closePlayer": "Fechar player",
+    "failedDetail": "A reprodução falhou. O arquivo pode estar danificado ou em um formato que o servidor não consegue converter.",
+    "failed": "A reprodução falhou",
+    "back10": "Voltar 10 segundos",
+    "forward10": "Avançar 10 segundos",
+    "unmute": "Ativar som",
+    "mute": "Silenciar",
+    "converting": "Convertendo",
+    "fullscreen": "Tela cheia"
+  },
+  "somethingWentWrong": "Algo deu errado",
+  "oneMoment": "Só um momento…",
+  "auth": {
+    "username": "Nome de usuário",
+    "password": "Senha",
+    "signIn": "Entrar",
+    "welcomeBack": "Que bom ver você de novo.",
+    "setUp": "Configure o Matinee",
+    "setUpHint": "Crie a conta de administrador. Você pode adicionar família e amigos depois.",
+    "createAccount": "Criar conta"
+  },
+  "home": {
+    "welcome": "Boas-vindas ao Matinee",
+    "welcomeHint": "Adicione uma pasta de filmes, séries ou músicas para começar.",
+    "addLibrary": "Adicionar biblioteca",
+    "continueWatching": "Continuar assistindo",
+    "recentlyAdded": "Adicionados recentemente",
+    "newReleases": "Lançamentos",
+    "scanning": "Verificando sua biblioteca",
+    "scanningHint": "Novos títulos aparecem aqui assim que são encontrados.",
+    "removeNamed": "Remover {{title}} de Continuar assistindo",
+    "remove": "Remover de Continuar assistindo"
+  },
+  "hero": {
+    "upNext": "A seguir",
+    "justAdded": "Acabou de chegar",
+    "details": "Detalhes"
+  },
+  "item": {
+    "resume": "Retomar",
+    "resumeLeft": "Retomar · faltam {{left}}",
+    "play": "Assistir",
+    "resumeFrom": "Retomar de {{time}}",
+    "resumeEpisode": "Retomar episódio {{episode}}",
+    "playEpisode": "Assistir episódio {{episode}}",
+    "shuffle": "Aleatório",
+    "seasons": "Temporadas",
+    "albums": "Álbuns",
+    "episodes": "Episódios"
+  },
+  "row": {
+    "back": "Rolar para trás",
+    "forward": "Rolar para frente"
+  },
+  "artwork": {
+    "fetching": "Buscando detalhes…"
+  },
+  "close": "Fechar",
+  "file": {
+    "audio": "Áudio",
+    "subtitles": "Legendas",
+    "title": "Detalhes do arquivo",
+    "notYet": "O Matinee ainda não analisou este arquivo em detalhes. Ele lê cada arquivo devagar em segundo plano, então isso se completa sozinho.",
+    "unreadable": "O Matinee não conseguiu ler este arquivo: {{error}}",
+    "stale": "O arquivo mudou desde este registro; ele será analisado de novo em breve.",
+    "file": "Arquivo",
+    "location": "Local",
+    "size": "Tamanho",
+    "format": "Formato",
+    "length": "Duração",
+    "bitrate": "Taxa de bits",
+    "chapters": "Capítulos",
+    "video": "Vídeo",
+    "videoN": "Vídeo {{n}}",
+    "codec": "Codec",
+    "resolution": "Resolução",
+    "frameRate": "Taxa de quadros",
+    "fps": "{{rate}} fps",
+    "bitDepth": "Profundidade de cor",
+    "dynamicRange": "Faixa dinâmica",
+    "dvProfile": "perfil {{profile}}",
+    "dvProfileLevel": "perfil {{profile}}, nível {{level}}",
+    "fallback": "{{format}} de reserva",
+    "color": "Cor",
+    "trackN": "Faixa {{n}}",
+    "default": "Padrão",
+    "forced": "Forçadas",
+    "commentary": "Comentários",
+    "audioDescription": "Audiodescrição",
+    "separateFile": "Arquivo separado",
+    "inFile": "No arquivo",
+    "sdh": "SDH",
+    "recorded": "Registrado {{when}}",
+    "queued": "Na fila; é o próximo.",
+    "analyzeAgain": "Analisar de novo"
+  },
+  "listSeparator": ", ",
+  "credits": {
+    "seriesCast": "Elenco da série",
+    "cast": "Elenco",
+    "guestStars": "Participações especiais",
+    "starring": "Com",
+    "moreDetails": "Mais detalhes",
+    "crew": "Equipe",
+    "about": "Sobre",
+    "awards": "Prêmios",
+    "won": "Venceu",
+    "nominated": "Indicado",
+    "wonIn": "Venceu em {{year}}",
+    "nominatedIn": "Indicado em {{year}}",
+    "showAll": "Mostrar todos os {{count}}",
+    "awardsSource": "Prêmios do Wikidata."
+  },
+  "cancel": "Cancelar",
+  "upNext": {
+    "upNext": "A seguir",
+    "stillWatching": "Ainda está assistindo?",
+    "youMightLike": "Talvez você goste",
+    "playingIn": "Começa em {{seconds}}",
+    "playNow": "Assistir agora",
+    "keepWatching": "Continuar assistindo",
+    "haveALook": "Dar uma olhada",
+    "stop": "Parar"
+  },
+  "goBack": "Voltar",
+  "back": "Voltar",
+  "trailer": {
+    "trailer": "Trailer",
+    "named": "Trailer de {{title}}",
+    "wontPlay": "Este trailer não pode ser reproduzido."
+  },
+  "watchList": {
+    "on": "Na sua lista",
+    "add": "Adicionar à lista",
+    "empty": "Nada salvo ainda",
+    "emptyHint": "Abra um filme ou série e escolha Minha lista para guardar aqui para depois. Os filmes saem da lista depois que você os assiste.",
+    "browse": "Explorar"
+  },
+  "related": {
+    "moreLikeThis": "Mais como este"
+  },
+  "boxSet": {
+    "notFound": "Box não encontrado",
+    "notFoundHint": "Nenhum dos títulos está em uma biblioteca agora.",
+    "boxSet": "Box"
+  },
+  "search": {
+    "placeholder": "Filmes, séries, artistas, álbuns…",
+    "nothing": "Nada corresponde a “{{q}}”",
+    "lookingForNew": "Procurando algo novo?",
+    "addIt": "Adicionar",
+    "askForIt": "Pedir"
+  },
+  "person": {
+    "notFound": "Pessoa não encontrada",
+    "showLess": "Mostrar menos",
+    "readMore": "Ler mais",
+    "inLibrary": "Na sua biblioteca"
+  },
+  "library": {
+    "library": "Biblioteca",
+    "matches_one": "{{count}} resultado",
+    "matches_many": "{{count}} resultados",
+    "matches_other": "{{count}} resultados",
+    "scanning": "Verificando…",
+    "nothingUnwatched": "Nada para assistir aqui",
+    "nothingMatches": "Nada corresponde",
+    "seenEverything": "Você já assistiu a tudo nesta biblioteca.",
+    "clearFilters": "Limpar filtros",
+    "appearAsFound": "Os títulos aparecem conforme são encontrados.",
+    "noMedia": "O Matinee procurou em {{paths}} e não encontrou mídia."
+  },
+  "nothingHereYet": "Nada aqui ainda",
+  "collection": {
+    "notFound": "Coleção não encontrada",
+    "notFoundHint": "Ela pode ter sido excluída.",
+    "smart": "Coleção inteligente",
+    "collection": "Coleção",
+    "shuffledDaily": "Embaralhada todo dia",
+    "editRules": "Editar regras",
+    "edit": "Editar",
+    "delete": "Excluir coleção",
+    "deleteConfirm": "Excluir {{name}}? Os títulos continuam na sua biblioteca.",
+    "nothingMatchesYet": "Nada corresponde ainda",
+    "joinByRules": "Os títulos entram sozinhos quando atendem às regras.",
+    "howToAdd": "Abra um filme ou série e escolha Coleções para adicioná-lo."
+  },
+  "collections": {
+    "newShort": "Nova",
+    "new": "Nova coleção",
+    "newSmartShort": "Nova inteligente",
+    "newSmart": "Nova coleção inteligente",
+    "none": "Nenhuma coleção ainda",
+    "noneHint": "Uma coleção inteligente se preenche sozinha a partir de regras, como ação dos anos 80 não assistida. Boxes aparecem aqui quando dois dos seus títulos estão em uma biblioteca.",
+    "yours": "Suas",
+    "shared": "Compartilhadas",
+    "forEveryone": "Coleções para todos",
+    "boxSets": "Boxes",
+    "sort": {
+      "own": "Ordem própria",
+      "title": "Título",
+      "added": "Data de inclusão",
+      "released": "Data de lançamento",
+      "year": "Ano",
+      "rating": "Avaliação",
+      "runtime": "Duração",
+      "lastPlayed": "Reproduzido por último",
+      "shuffle": "Embaralhar todo dia"
+    },
+    "smartShort": "Inteligente",
+    "editNamed": "Editar {{name}}",
+    "name": "Nome",
+    "smartExample": "Ação dos anos 80 não assistida",
+    "manualExample": "Noite de cinema",
+    "rules": "Regras",
+    "rulesHint": "Títulos que atendem a estes filtros entram sozinhos quando a biblioteca muda.",
+    "shuffleDaily": "Embaralhar todo dia",
+    "order": "Ordem",
+    "orderAdded": "A ordem em que os títulos foram adicionados",
+    "direction": "Direção",
+    "usual": "Padrão",
+    "ascending": "Crescente",
+    "descending": "Decrescente",
+    "showAsRow": "Mostrar como fileira",
+    "onHome": "No Início",
+    "onLibraryPage": "Na página de uma biblioteca",
+    "shareWithEveryone": "Compartilhar com todos neste servidor",
+    "saveAs": "Salvar como coleção"
+  },
+  "save": "Salvar",
+  "create": "Criar",
+  "loadingDots": "Carregando…",
+  "filters": {
+    "title": "Filtros",
+    "inUse_one": "Filtros, {{count}} em uso",
+    "inUse_many": "Filtros, {{count}} em uso",
+    "inUse_other": "Filtros, {{count}} em uso",
+    "sortBy": "Ordenar por",
+    "highestFirst": "Maiores primeiro",
+    "lowestFirst": "Menores primeiro",
+    "highestFirstSwitch": "Maiores primeiro; mudar para menores primeiro",
+    "lowestFirstSwitch": "Menores primeiro; mudar para maiores primeiro",
+    "not": "Não {{label}}",
+    "remove": "Remover {{label}}",
+    "chip": {
+      "words": "“{{q}}”",
+      "directedBy": "Dirigido por {{name}}",
+      "with": "Com {{name}}",
+      "releasedWithin": "Lançado {{within}}",
+      "releasedAfter": "Lançado depois de {{date}}",
+      "releasedBefore": "Lançado antes de {{date}}",
+      "addedWithin": "Adicionado {{within}}",
+      "addedAfter": "Adicionado depois de {{date}}",
+      "addedBefore": "Adicionado antes de {{date}}",
+      "ratingMin": "Avaliação {{rating}}+",
+      "ratingMax": "Avaliação {{rating}} ou menos",
+      "certification": "Classificação {{rating}}",
+      "watchList": "Na minha lista"
+    },
+    "collection": "Coleção",
+    "active": "Filtros em uso",
+    "clearAll": "Limpar tudo",
+    "more_one": "Mais {{count}}",
+    "more_many": "Mais {{count}}",
+    "more_other": "Mais {{count}}",
+    "any": "Qualquer",
+    "all": "Todos",
+    "anyTime": "Qualquer data",
+    "runtime": {
+      "under30": "Menos de 30 min",
+      "30to60": "30–60 min",
+      "overHour": "Mais de uma hora",
+      "under90": "Menos de 90 min",
+      "90to120": "90 min – 2 horas",
+      "over2Hours": "Mais de 2 horas"
+    },
+    "wordsInTitle": "Palavras do título",
+    "onlyWatchList": "Só títulos da minha lista",
+    "fromYear": "Do ano",
+    "toYear": "Até o ano",
+    "from": "De",
+    "to": "a",
+    "toPlaceholder": "Até",
+    "lastWeek": "Última semana",
+    "last30Days": "Últimos 30 dias",
+    "last3Months": "Últimos 3 meses",
+    "lastYear": "Último ano",
+    "ratingAtLeast": "{{rating}}+",
+    "findPerson": "Encontrar uma pessoa",
+    "nobody": "Ninguém com esse nome nesta biblioteca.",
+    "showResults": "Ver resultados",
+    "section": {
+      "title": "Título",
+      "watched": "Assistidos",
+      "genre": "Gênero",
+      "year": "Ano",
+      "firstAired": "Primeira exibição",
+      "released": "Lançamento",
+      "added": "Adicionado",
+      "rating": "Avaliação",
+      "episodeLength": "Duração do episódio",
+      "runtime": "Duração",
+      "quality": "Qualidade",
+      "network": "Emissora ou estúdio",
+      "studio": "Estúdio",
+      "ageRating": "Classificação indicativa",
+      "language": "Idioma original",
+      "country": "País",
+      "creator": "Criado ou dirigido por",
+      "director": "Direção",
+      "people": "Elenco e equipe"
+    }
+  },
+  "appearance": {
+    "title": "Aparência",
+    "useServerTheme": "Usar o tema do servidor ({{name}})",
+    "guestHint": "Todos em casa sem conta compartilham este tema.",
+    "hint": "Seu tema acompanha você nos apps do Matinee no celular e na TV.",
+    "theme": "Tema",
+    "preview": {
+      "tonight": "Hoje à noite",
+      "trailer": "Trailer"
+    },
+    "serverTheme": "Tema do servidor",
+    "serverThemeHint": "O que todos veem até escolherem o seu, e na página de entrada.",
+    "custom": "{{name}} (personalizado)",
+    "addYourOwn": "Para adicionar o seu, coloque um arquivo de tema na pasta <code>themes</code> da pasta de dados do servidor.",
+    "howTo": "Como criar um tema",
+    "skipped": "Ignorado: {{problem}}"
+  },
+  "newFiles": {
+    "title": "Arquivos novos",
+    "intro": "O Matinee percebe os arquivos que você adiciona, renomeia ou exclui e atualiza a biblioteca alguns segundos depois que terminam de ser copiados.",
+    "watch": "Observar arquivos novos",
+    "summary": {
+      "some": "Algumas pastas verificadas a cada {{every}}",
+      "watching": "Observando arquivos novos",
+      "polling": "Arquivos novos verificados a cada {{every}}",
+      "pollingShare": "Arquivos novos verificados a cada {{every}} (compartilhamento de rede)",
+      "off": "Arquivos novos não são observados"
+    },
+    "mode": {
+      "auto": {
+        "label": "Automático",
+        "hint": "Na hora nos discos do próprio servidor. Compartilhamentos de rede (SMB, NFS) não avisam mudanças, então o Matinee os verifica a cada {{every}}."
+      },
+      "poll": {
+        "label": "Verificar periodicamente",
+        "hint": "Cada pasta é verificada a cada {{every}}. Escolha isso se arquivos novos em um disco não aparecem sozinhos."
+      },
+      "off": {
+        "label": "Desativado",
+        "hint": "Arquivos novos aparecem na próxima verificação completa ou quando você toca em Verificar."
+      }
+    },
+    "rescan": "Cada biblioteca também é verificada por inteiro a cada {{every}}, o que pega todo o resto, como um arquivo substituído no lugar em um compartilhamento.",
+    "rescanOff": "As verificações completas estão desativadas neste servidor (MATINEE_SCAN_INTERVAL=0)."
+  },
+  "analysis": {
+    "title": "Análise de mídia",
+    "intro": "O Matinee lê cada arquivo devagar para saber sua qualidade, som e idiomas, e de novo sempre que um arquivo muda.",
+    "state": {
+      "lookingAt": "Analisando {{file}}",
+      "working": "Trabalhando",
+      "waiting": "Esperando a reprodução terminar",
+      "slowDisk": "Os arquivos estão lentos para ler; pausa de alguns minutos",
+      "allDone": "Todos os arquivos foram analisados",
+      "upToDate": "Em dia",
+      "paused": "Pausada"
+    },
+    "progress": "{{done}} de {{total}}",
+    "unreadable_one": "Não foi possível ler {{count}} arquivo.",
+    "unreadable_many": "Não foi possível ler {{count}} arquivos.",
+    "unreadable_other": "Não foi possível ler {{count}} arquivos.",
+    "speed": "Velocidade",
+    "mode": {
+      "gentle": {
+        "label": "Suave",
+        "hint": "Um arquivo a cada poucos segundos, e nenhum enquanto o servidor converte algo para reprodução."
+      },
+      "normal": {
+        "label": "Normal",
+        "hint": "Arquivos um atrás do outro, ainda com a prioridade mais baixa."
+      },
+      "off": {
+        "label": "Desativada",
+        "hint": "Pausada até você ativar de novo."
+      }
+    }
+  },
+  "profileSettings": {
+    "title": "Perfis",
+    "intro": "Os perfis compartilham uma entrada, mas guardam seu próprio progresso, lista e tema. Perfis infantis só veem o que você permitir. Um PIN reserva um perfil, ou a própria conta, para quem é dono.",
+    "pinFor": "Um PIN de 4 dígitos para {{name}}",
+    "homeDevices": "Dispositivos da sua rede doméstica que não entraram",
+    "account": "Conta",
+    "removePin": "Remover PIN",
+    "addPin": "Adicionar PIN",
+    "hasPin": "Tem PIN",
+    "edit": "Editar {{name}}",
+    "remove": "Remover {{name}}",
+    "confirmRemove": "Remover {{name}}? O progresso e a lista também serão apagados.",
+    "add": "Adicionar perfil",
+    "name": "Nome",
+    "newPin": "Novo PIN",
+    "pinOptional": "PIN (opcional)",
+    "unchanged": "Sem alteração",
+    "fourDigits": "4 dígitos",
+    "removeThePin": "Remover o PIN",
+    "colour": "Cor",
+    "kidsMode": "Modo infantil",
+    "kidsOff": "Desativado: vê tudo",
+    "kidsLevel": "{{name}}: {{ratings}}",
+    "kidsLibraries": "O que este perfil vê em cada biblioteca. “Pela classificação” esconde títulos acima do nível {{level}} e títulos sem classificação. Perfis infantis não podem abrir as Configurações nem fazer pedidos.",
+    "libraryMode": {
+      "hidden": "Oculta",
+      "rated": "Pela classificação",
+      "all": "Tudo"
+    }
+  },
+  "report": {
+    "thanks": "Obrigado, um administrador vai dar uma olhada.",
+    "button": "Informar um problema",
+    "whatsWrong": "O que há de errado com {{title}}?",
+    "details": "Detalhes (opcional)",
+    "detailsExample": "Por exemplo: sem som depois de 20 minutos",
+    "send": "Enviar"
+  },
+  "quality": {
+    "label": "Qualidade",
+    "forShow": "Qualidade da série",
+    "confirm": "Mudar para {{name}}? O {{app}} vai procurar cópias que correspondam.",
+    "searching": "Buscando…"
+  },
+  "upcoming": {
+    "nothingYet": "Nada para mostrar ainda",
+    "connect": "Conecte o Radarr ou o Sonarr para ver os filmes e episódios a caminho.",
+    "openSettings": "Abrir configurações",
+    "notConnected": "Nenhum administrador conectou o Radarr ou o Sonarr a este servidor.",
+    "intro": "Novos episódios e lançamentos de filmes dos próximos dois meses que ainda não chegaram.",
+    "unavailable": "{{apps}} não respondeu, então algo pode estar faltando.",
+    "nothing": "Nada a caminho. Peça algo novo em Pedidos."
+  },
+  "link": {
+    "title": "Conectar um dispositivo",
+    "intro": "Digite o código que aparece no celular ou na TV.",
+    "signedIn": "{{device}} está conectado",
+    "ready": "Ficará pronto em alguns segundos.",
+    "declined": "Recusado",
+    "notSignedIn": "{{device}} não foi conectado.",
+    "another": "Conectar outro dispositivo",
+    "code": "Código",
+    "next": "Próximo",
+    "wantsToSignIn": "quer entrar como <name>{{name}}</name>",
+    "warning": "Só aprove um dispositivo que você esteja segurando ou vendo. Ele recebe o mesmo acesso que você.",
+    "decline": "Recusar",
+    "approve": "Entrar"
+  },
+  "profiles": {
+    "whoIsWatching": "Quem está assistindo?",
+    "signInWithAccount": "Entrar com uma conta",
+    "enterPin": "Digite o PIN de {{name}}",
+    "pin": "PIN",
+    "deleteDigit": "Apagar"
+  },
+  "integrations": {
+    "title": "Radarr e Sonarr",
+    "intro": "Conecte-os para que as pessoas possam pedir filmes e séries, ver o que chega em breve e informar problemas.",
+    "connected": "Conectado · {{url}}",
+    "notConnected": {
+      "radarr": "Não conectado · para filmes",
+      "sonarr": "Não conectado · para séries"
+    },
+    "change": "Alterar",
+    "connect": "Conectar",
+    "address": "Endereço",
+    "apiKey": "Chave de API",
+    "keyWhere": "{{app}} → Settings → General",
+    "saved": "Salva",
+    "answers": "{{app}} {{version}} responde em {{url}}",
+    "quality": {
+      "radarr": "Qualidade para filmes novos",
+      "sonarr": "Qualidade para séries novas"
+    },
+    "folder": "Pasta",
+    "confirmDisconnect": "Desconectar o {{app}}? Os títulos que já estão nele continuam lá.",
+    "disconnect": "Desconectar",
+    "testing": "Testando…",
+    "test": "Testar",
+    "whoCanAdd": "Quem pode adicionar filmes e séries",
+    "mode": {
+      "approve": {
+        "label": "Pedir e um administrador aprova",
+        "detail": "Qualquer pessoa com conta pode pedir um título. Ele espera por um administrador."
+      },
+      "auto": {
+        "label": "Adicionar na hora",
+        "detail": "O que é pedido vai direto para o Radarr ou o Sonarr."
+      },
+      "off": {
+        "label": "Só administradores adicionam títulos",
+        "detail": "Os outros ainda podem ver o que chega em breve e informar problemas."
+      }
+    },
+    "overseerr": {
+      "intro": "Conecte para adicionar a aba Descobrir: o que está em alta, recomendações com base no que as pessoas assistem e um jeito de pedir qualquer coisa. O Jellyseerr também funciona.",
+      "notConnected": "Não conectado · para Descobrir",
+      "requestAs": "Pedidos de quem não tem conta no Overseerr",
+      "madeAsOwner": "Feitos como {{name}} (dono da chave de API)",
+      "madeAs": "Feitos como {{name}}",
+      "sameName": "Quem tem conta no Overseerr com o mesmo nome pede como si mesmo. O Overseerr decide quais pedidos precisam de aprovação, pelas permissões de cada um lá.",
+      "confirmDisconnect": "Desconectar o Overseerr? A aba Descobrir some."
+    }
+  },
+  "requests": {
+    "tab": {
+      "ask": "Pedir algo",
+      "requests": "Pedidos",
+      "yourRequests": "Seus pedidos",
+      "problems": "Problemas",
+      "yourReports": "Seus relatos"
+    },
+    "movies": "Filmes",
+    "shows": "Séries",
+    "findMovie": "Encontrar um filme…",
+    "findShow": "Encontrar uma série…",
+    "nothingFound": "Nada encontrado para “{{q}}”",
+    "ready": "Pronto para assistir",
+    "askedFor": "Pedido",
+    "onItsWay": "A caminho",
+    "add": "Adicionar",
+    "askForIt": "Pedir",
+    "state": {
+      "pending": "Aguardando aprovação",
+      "approved": "A caminho",
+      "declined": "Recusado",
+      "failed": "Não foi possível adicionar"
+    },
+    "none": "Nenhum pedido ainda.",
+    "retry": "Tentar de novo",
+    "approve": "Aprovar",
+    "remove": "Remover o pedido de {{title}}",
+    "removedFromLibrary": "Removido da biblioteca",
+    "noProblems": "Ninguém informou nenhum problema.",
+    "noReports": "Você não informou nenhum problema. Use “Informar um problema” em um título.",
+    "fileReplaced": "Arquivo substituído",
+    "closed": "Fechado",
+    "confirmReplace": "Excluir este arquivo de {{title}} e baixar outra cópia? A nova aparece depois do download e da verificação da biblioteca.",
+    "replaceFile": "Substituir arquivo",
+    "close": "Fechar"
+  },
+  "settings": {
+    "tmdbNotice": "Pôsteres e descrições vêm do <link>TMDB</link>. Este produto usa a API do TMDB, mas não é endossado nem certificado pelo TMDB.",
+    "libraries": {
+      "title": "Bibliotecas",
+      "none": "Nenhuma biblioteca ainda.",
+      "scan": "Verificar",
+      "remove": "Remover {{name}}",
+      "confirmRemove": "Remover “{{name}}”? Seus arquivos continuam onde estão.",
+      "kind": {
+        "movies": "Filmes",
+        "tv": "Séries de TV",
+        "music": "Música"
+      },
+      "type": "Tipo",
+      "folders": "Pastas",
+      "up": "Subir uma pasta",
+      "added": "Adicionada",
+      "useFolder": "Usar esta pasta",
+      "noSubfolders": "Nenhuma subpasta"
+    },
+    "people": {
+      "title": "Pessoas",
+      "admin": "Administrador",
+      "passwordChanged": "Senha alterada. {{name}} saiu de todos os dispositivos.",
+      "you": "(você)",
+      "removeAdmin": "Remover administrador",
+      "makeAdmin": "Tornar administrador",
+      "resetPassword": "Redefinir senha",
+      "remove": "Remover",
+      "newPasswordFor": "Nova senha para {{name}}",
+      "setPassword": "Definir senha",
+      "confirmRemove": "Remover <name>{{name}}</name>? O histórico, a lista, os downloads e os pedidos também serão apagados, e a pessoa sairá de todos os dispositivos. Isso não pode ser desfeito."
+    },
+    "account": {
+      "title": "Sua conta",
+      "changePassword": "Alterar senha",
+      "current": "Senha atual",
+      "new": "Nova senha",
+      "again": "Repita a nova senha",
+      "hint": "Pelo menos 8 caracteres. Seus outros dispositivos serão desconectados.",
+      "mismatch": "As novas senhas não coincidem.",
+      "changed": "Senha alterada. Seus outros dispositivos foram desconectados."
+    },
+    "devices": {
+      "aWhileAgo": "há algum tempo",
+      "justNow": "agora mesmo",
+      "title": "Seus dispositivos",
+      "unknown": "Dispositivo desconhecido",
+      "this": "Este dispositivo",
+      "lastUsed": "Usado por último {{when}}",
+      "confirmSignOut": "Desconectar “{{name}}”?"
+    },
+    "version": "Servidor Matinee {{version}} · API v{{api}}",
+    "home": {
+      "title": "Rede doméstica",
+      "requireSignIn": "Pedir entrada em casa",
+      "required": "Todos entram com conta, em casa e fora.",
+      "open": "Celulares, TVs e navegadores da sua rede doméstica podem assistir sem entrar. Eles compartilham uma conta Casa e não podem mudar nada. Fora de casa, todos entram com conta."
+    },
+    "remote": {
+      "title": "Acesso remoto",
+      "publicURL": "Fora de casa, os apps se conectam a <url>{{url}}</url>, o endereço com que este servidor foi configurado.",
+      "toggle": "Assistir fora de casa",
+      "hint": "O Matinee pede ao seu roteador para abrir uma porta e obtém um certificado para que os apps se conectem com segurança de qualquer lugar. De fora, todos entram com conta.",
+      "working": "Abrindo uma porta no roteador e obtendo um certificado…",
+      "ready": "Fora de casa, os apps acessam este servidor em <url>{{url}}</url>.",
+      "router": "Seu roteador abriu a porta via {{router}}.",
+      "pickUp": "Eles pegam este endereço da próxima vez que estiverem na sua rede doméstica.",
+      "sharedAddress": "O Matinee ainda não consegue contornar isso sozinho.",
+      "retry": "O Matinee tenta de novo a cada meia hora."
+    },
+    "playback": {
+      "title": "Reprodução",
+      "autoPlay": "Reproduzir o próximo episódio",
+      "autoPlayHint": "Quando os créditos começam, o próximo episódio começa depois de uma contagem de 10 segundos que você pode cancelar.",
+      "binge": "Pular a contagem",
+      "bingeHint": "Ir direto para o próximo episódio quando os créditos começam. Depois de três seguidos sem tocar em nada, você vai ser perguntado se ainda está assistindo."
+    },
+    "trailers": {
+      "title": "Trailers",
+      "remote": "Trailers do YouTube",
+      "remoteOn": "Filmes e séries oferecem os trailers do TMDB, que tocam pelo YouTube. Arquivos de trailer junto da sua mídia sempre aparecem também.",
+      "remoteOff": "Só aparecem arquivos de trailer junto da sua mídia, como “Filme (2020)-trailer.mkv” ou qualquer coisa em uma pasta Trailers."
+    },
+    "transcoding": {
+      "title": "Transcodificação",
+      "intro": "Arquivos que um dispositivo não consegue reproduzir como estão são convertidos enquanto você assiste. Uma GPU faz isso mais rápido e com menos carga no servidor.",
+      "convertingWith": "Convertendo com",
+      "active": "{{name}}.",
+      "activeOn": "{{name}} em {{detail}}.",
+      "fullGPU": "O vídeo é decodificado, redimensionado e codificado na GPU.",
+      "encodeOnly": "O vídeo é codificado na GPU e decodificado na CPU.",
+      "fallback": "Se a GPU não der conta de um arquivo, ele toca pela CPU.",
+      "testing": "Testando a GPU deste servidor…",
+      "cpuOff": "A CPU. A transcodificação por hardware está desativada.",
+      "cpuFailed": "A CPU, porque o acelerador escolhido não funcionou neste servidor.",
+      "cpuNoGPU": "A CPU. Nenhuma GPU deste servidor passou no teste.",
+      "hardware": "Aceleração por hardware",
+      "auto": "Automática: a melhor que funcionar",
+      "off": "Desativada: sempre usar a CPU",
+      "notFound": "{{name}} (não encontrado neste servidor)",
+      "accelerator": {
+        "nvenc": "NVIDIA NVENC",
+        "vaapi": "VAAPI (AMD e Intel no Linux)",
+        "qsv": "Intel Quick Sync",
+        "videotoolbox": "VideoToolbox (Mac)",
+        "amf": "AMD AMF (Windows)",
+        "v4l2m2m": "V4L2 (Raspberry Pi)"
+      }
+    },
+    "homeRows": {
+      "title": "Início",
+      "holidays": "Fileiras de datas comemorativas",
+      "holidaysDetail": "No mês antes do Dia dos Namorados, Páscoa, Halloween, Ação de Graças e Natal, e na semana antes do Réveillon, o Início começa com uma fileira de títulos para a data, escolhidos por palavras-chave, títulos e descrições."
+    }
+  },
+  "language": {
+    "title": "Idioma",
+    "label": "Mostrar o Matinee em",
+    "hint": "Seu idioma acompanha você nos apps do Matinee no celular e na TV. Títulos e descrições também aparecem nele, quando o TMDB os tem.",
+    "guestHint": "Todos em casa sem conta compartilham este idioma.",
+    "automatic": "Automático ({{language}})",
+    "machine": "Este idioma foi traduzido automaticamente, então algumas palavras podem soar estranhas.",
+    "help": "Ajude a melhorar"
+  },
+  "discover": {
+    "title": "Descobrir",
+    "emptyTitle": "Nada para descobrir ainda",
+    "connectIt": "Conecte o Overseerr para ver o que está em alta, receber recomendações e pedir filmes e séries novos.",
+    "openSettings": "Abrir configurações",
+    "notConnected": "Nenhum administrador conectou o Overseerr a este servidor.",
+    "placeholder": "Encontre qualquer filme ou série…",
+    "unavailable": "Descobrir não está disponível agora",
+    "open": "Abrir",
+    "request": "Pedir",
+    "requestShow": "Pedir a série",
+    "asking": "Pedindo…",
+    "waiting": "Aguardando a aprovação de um administrador.",
+    "onItsWay": "Vai aparecer na sua biblioteca quando for baixado.",
+    "findIt": "Encontrar em Descobrir"
+  }
+}

@@ -1,5 +1,6 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { CalendarClock, Clapperboard, Compass, Home, Inbox, Layers, LogIn, LogOut, Music, Search, Settings, Tv } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import { NavLink, Outlet } from 'react-router-dom'
 import { api, type Library, type User } from '../api'
 import { Avatar } from '../pages/Profiles'
@@ -52,6 +53,7 @@ export function useLibraries() {
 }
 
 export default function Shell({ user }: { user: User }) {
+  const { t } = useTranslation()
   const { data: libraries = [] } = useLibraries()
   const qc = useQueryClient()
   // Start loading a library on hover so the switch feels instant.
@@ -82,44 +84,44 @@ export default function Shell({ user }: { user: User }) {
           {/* Desktop: everything in one bar, libraries as pills */}
           <nav className="scrollbar-none hidden min-w-0 flex-1 items-center gap-1 overflow-x-auto md:flex">
             <NavLink to="/" end className={topLink}>
-              Home
+              {t('nav.home')}
             </NavLink>
             <NavLink to="/watchlist" className={topLink}>
-              Watch list
+              {t('nav.watchList')}
             </NavLink>
             <NavLink to="/collections" className={topLink}>
-              Collections
+              {t('nav.collections')}
             </NavLink>
             {discover && (
               <NavLink to="/discover" className={topLink}>
-                Discover
+                {t('nav.discover')}
               </NavLink>
             )}
             {libraries.map((l) => (
               <NavLink key={l.id} to={`/library/${l.id}`} className={topLink} onMouseEnter={() => prefetchLibrary(l.id)} onFocus={() => prefetchLibrary(l.id)}>
                 <span className="truncate">{l.name}</span>
-                {l.scanning && <span className="size-1.5 animate-pulse rounded-full bg-accent" title="Scanning" />}
+                {l.scanning && <span className="size-1.5 animate-pulse rounded-full bg-accent" title={t('nav.scanning')} />}
               </NavLink>
             ))}
           </nav>
-          <div className="ml-auto flex items-center gap-1">
+          <div className="ms-auto flex items-center gap-1">
             {/* On phones the tab bar has no room, so collections get an icon up here. */}
-            <NavLink to="/collections" className={(a) => `md:hidden ${iconLink(a)}`} aria-label="Collections" title="Collections">
+            <NavLink to="/collections" className={(a) => `md:hidden ${iconLink(a)}`} aria-label={t('nav.collections')} title={t('nav.collections')}>
               <Layers className="size-5" />
             </NavLink>
-            <NavLink to="/search" className="hidden rounded-full p-2 text-muted hover:bg-text/5 hover:text-text md:block" aria-label="Search">
+            <NavLink to="/search" className="hidden rounded-full p-2 text-muted hover:bg-text/5 hover:text-text md:block" aria-label={t('nav.search')}>
               <Search className="size-5" />
             </NavLink>
             {arr && (
-              <NavLink to="/upcoming" className={iconLink} aria-label="Coming soon" title="Coming soon">
+              <NavLink to="/upcoming" className={iconLink} aria-label={t('nav.comingSoon')} title={t('nav.comingSoon')}>
                 <CalendarClock className="size-5" />
               </NavLink>
             )}
             {(arr || waiting > 0) && !user.guest && (
-              <NavLink to="/requests" className={(a) => `relative ${iconLink(a)}`} aria-label="Requests" title="Requests">
+              <NavLink to="/requests" className={(a) => `relative ${iconLink(a)}`} aria-label={t('nav.requests')} title={t('nav.requests')}>
                 <Inbox className="size-5" />
                 {waiting > 0 && (
-                  <span className="absolute -top-0.5 -right-0.5 grid h-4 min-w-4 place-items-center rounded-full bg-accent px-1 text-[10px] font-semibold text-on-accent">
+                  <span className="absolute -top-0.5 -end-0.5 grid h-4 min-w-4 place-items-center rounded-full bg-accent px-1 text-[10px] font-semibold text-on-accent">
                     {waiting}
                   </span>
                 )}
@@ -128,17 +130,17 @@ export default function Shell({ user }: { user: User }) {
             {user.guest && !kids ? (
               // Watching at home without an account; signing in brings your own progress and settings.
               <NavLink to="/sign-in" className="flex items-center gap-2 rounded-full px-3 py-1.5 text-sm text-muted hover:bg-text/5 hover:text-text">
-                <LogIn className="size-4" /> Sign in
+                <LogIn className="size-4 rtl:-scale-x-100" /> {t('nav.signIn')}
               </NavLink>
             ) : (
               !kids && (
-                <NavLink to="/settings" className="rounded-full p-2 text-muted hover:bg-text/5 hover:text-text" aria-label="Settings">
+                <NavLink to="/settings" className="rounded-full p-2 text-muted hover:bg-text/5 hover:text-text" aria-label={t('nav.settings')}>
                   <Settings className="size-5" />
                 </NavLink>
               )
             )}
             {hasProfiles && (
-              <NavLink to="/profiles" className="flex items-center gap-2 rounded-full p-1 text-sm text-muted hover:bg-text/5 hover:text-text md:pr-3" title="Switch profile">
+              <NavLink to="/profiles" className="flex items-center gap-2 rounded-full p-1 text-sm text-muted hover:bg-text/5 hover:text-text md:pe-3" title={t('nav.switchProfile')}>
                 <Avatar name={user.username} avatar={user.avatar} className="size-7 text-xs" />
                 <span className="hidden max-w-28 truncate md:inline">{user.username}</span>
               </NavLink>
@@ -146,13 +148,13 @@ export default function Shell({ user }: { user: User }) {
             {!user.guest && !kids && (
               <button
                 onClick={logout}
-                className="hidden items-center gap-2 rounded-full py-1 pr-3 pl-1 text-sm text-muted hover:bg-text/5 hover:text-text md:flex"
-                title="Sign out"
+                className="hidden items-center gap-2 rounded-full py-1 ps-1 pe-3 text-sm text-muted hover:bg-text/5 hover:text-text md:flex"
+                title={t('nav.signOut')}
               >
                 {!hasProfiles && (
                   <span className="grid size-7 place-items-center rounded-full bg-raised text-xs font-semibold text-text uppercase">{user.username[0]}</span>
                 )}
-                <LogOut className="size-4" />
+                <LogOut className="size-4 rtl:-scale-x-100" />
               </button>
             )}
           </div>
@@ -169,7 +171,7 @@ export default function Shell({ user }: { user: User }) {
         style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
       >
         <NavLink to="/" end className={tabLink}>
-          <Home className="size-5" /> Home
+          <Home className="size-5" /> {t('nav.home')}
         </NavLink>
         {/* Discover takes a library's place when it's there. */}
         {libraries.slice(0, discover ? 2 : 3).map((l) => (
@@ -179,11 +181,11 @@ export default function Shell({ user }: { user: User }) {
         ))}
         {discover && (
           <NavLink to="/discover" className={tabLink}>
-            <Compass className="size-5" /> Discover
+            <Compass className="size-5" /> {t('nav.discover')}
           </NavLink>
         )}
         <NavLink to="/search" className={tabLink}>
-          <Search className="size-5" /> Search
+          <Search className="size-5" /> {t('nav.search')}
         </NavLink>
       </nav>
     </div>

@@ -1,0 +1,715 @@
+{
+  "loading": "Loading",
+  "nav": {
+    "home": "Home",
+    "watchList": "Watch list",
+    "collections": "Collections",
+    "scanning": "Scanning",
+    "search": "Search",
+    "comingSoon": "Coming soon",
+    "requests": "Requests",
+    "signIn": "Sign in",
+    "settings": "Settings",
+    "switchProfile": "Switch profile",
+    "signOut": "Sign out",
+    "discover": "Discover"
+  },
+  "cantReachServer": "Can't reach the server. Retrying…",
+  "player": {
+    "subtitlesFailed": "Couldn't load these subtitles",
+    "off": "Off",
+    "convertsVideo": "Converts video",
+    "file": "File",
+    "seek": "Seek",
+    "previous": "Previous",
+    "pause": "Pause",
+    "next": "Next",
+    "closePlayer": "Close player",
+    "failedDetail": "Playback failed. The file may be damaged or in a format the server can't convert.",
+    "failed": "Playback failed",
+    "back10": "Back 10 seconds",
+    "forward10": "Forward 10 seconds",
+    "unmute": "Unmute",
+    "mute": "Mute",
+    "converting": "Converting",
+    "fullscreen": "Fullscreen"
+  },
+  "somethingWentWrong": "Something went wrong",
+  "oneMoment": "One moment…",
+  "auth": {
+    "username": "Username",
+    "password": "Password",
+    "signIn": "Sign in",
+    "welcomeBack": "Welcome back.",
+    "setUp": "Set up Matinee",
+    "setUpHint": "Create the admin account. You can add family and friends later.",
+    "createAccount": "Create account"
+  },
+  "home": {
+    "welcome": "Welcome to Matinee",
+    "welcomeHint": "Add a folder of movies, shows or music to get started.",
+    "addLibrary": "Add a library",
+    "continueWatching": "Continue watching",
+    "recentlyAdded": "Recently added",
+    "newReleases": "New releases",
+    "scanning": "Scanning your library",
+    "scanningHint": "New titles show up here as soon as they're found.",
+    "removeNamed": "Remove {{title}} from Continue watching",
+    "remove": "Remove from Continue watching"
+  },
+  "hero": {
+    "upNext": "Up next",
+    "justAdded": "Just added",
+    "details": "Details"
+  },
+  "item": {
+    "resume": "Resume",
+    "resumeLeft": "Resume · {{left}} left",
+    "play": "Play",
+    "resumeFrom": "Resume from {{time}}",
+    "resumeEpisode": "Resume episode {{episode}}",
+    "playEpisode": "Play episode {{episode}}",
+    "shuffle": "Shuffle",
+    "seasons": "Seasons",
+    "albums": "Albums",
+    "episodes": "Episodes"
+  },
+  "row": {
+    "back": "Scroll back",
+    "forward": "Scroll forward"
+  },
+  "artwork": {
+    "fetching": "Fetching details…"
+  },
+  "close": "Close",
+  "file": {
+    "audio": "Audio",
+    "subtitles": "Subtitles",
+    "title": "File details",
+    "notYet": "Matinee hasn't looked at this file in detail yet. It reads every file slowly in the background, so this fills in on its own.",
+    "unreadable": "Matinee couldn't read this file: {{error}}",
+    "stale": "The file changed since this was recorded; it will be looked at again soon.",
+    "file": "File",
+    "location": "Location",
+    "size": "Size",
+    "format": "Format",
+    "length": "Length",
+    "bitrate": "Bitrate",
+    "chapters": "Chapters",
+    "video": "Video",
+    "videoN": "Video {{n}}",
+    "codec": "Codec",
+    "resolution": "Resolution",
+    "frameRate": "Frame rate",
+    "fps": "{{rate}} fps",
+    "bitDepth": "Bit depth",
+    "dynamicRange": "Dynamic range",
+    "dvProfile": "profile {{profile}}",
+    "dvProfileLevel": "profile {{profile}}, level {{level}}",
+    "fallback": "{{format}} fallback",
+    "color": "Color",
+    "trackN": "Track {{n}}",
+    "default": "Default",
+    "forced": "Forced",
+    "commentary": "Commentary",
+    "audioDescription": "Audio description",
+    "separateFile": "Separate file",
+    "inFile": "In the file",
+    "sdh": "SDH",
+    "recorded": "Recorded {{when}}",
+    "queued": "Queued; it's looked at next.",
+    "analyzeAgain": "Analyze again"
+  },
+  "listSeparator": ", ",
+  "credits": {
+    "seriesCast": "Series cast",
+    "cast": "Cast",
+    "guestStars": "Guest stars",
+    "starring": "Starring",
+    "moreDetails": "More details",
+    "crew": "Crew",
+    "about": "About",
+    "awards": "Awards",
+    "won": "Won",
+    "nominated": "Nominated",
+    "wonIn": "Won {{year}}",
+    "nominatedIn": "Nominated {{year}}",
+    "showAll": "Show all {{count}}",
+    "awardsSource": "Awards from Wikidata."
+  },
+  "cancel": "Cancel",
+  "upNext": {
+    "upNext": "Up next",
+    "stillWatching": "Still watching?",
+    "youMightLike": "You might like",
+    "playingIn": "Playing in {{seconds}}",
+    "playNow": "Play now",
+    "keepWatching": "Keep watching",
+    "haveALook": "Have a look",
+    "stop": "Stop"
+  },
+  "goBack": "Go back",
+  "back": "Back",
+  "trailer": {
+    "trailer": "Trailer",
+    "named": "{{title}} trailer",
+    "wontPlay": "This trailer won't play."
+  },
+  "watchList": {
+    "on": "On your watch list",
+    "add": "Add to watch list",
+    "empty": "Nothing saved yet",
+    "emptyHint": "Open a movie or show and choose Watch list to keep it here for later. Movies leave the list once you've watched them.",
+    "browse": "Browse"
+  },
+  "related": {
+    "moreLikeThis": "More like this"
+  },
+  "boxSet": {
+    "notFound": "Box set not found",
+    "notFoundHint": "None of its titles are in a library now.",
+    "boxSet": "Box set"
+  },
+  "search": {
+    "placeholder": "Movies, shows, artists, albums…",
+    "nothing": "Nothing matches \"{{q}}\"",
+    "lookingForNew": "Looking for something new?",
+    "addIt": "Add it",
+    "askForIt": "Ask for it"
+  },
+  "person": {
+    "notFound": "Person not found",
+    "showLess": "Show less",
+    "readMore": "Read more",
+    "inLibrary": "In your library"
+  },
+  "library": {
+    "library": "Library",
+    "matches_one": "{{count}} match",
+    "matches_other": "{{count}} matches",
+    "scanning": "Scanning…",
+    "nothingUnwatched": "Nothing unwatched here",
+    "nothingMatches": "Nothing matches",
+    "seenEverything": "You’ve seen everything in this library.",
+    "clearFilters": "Clear filters",
+    "appearAsFound": "Titles appear as they are found.",
+    "noMedia": "Matinee looked in {{paths}} and found no media."
+  },
+  "nothingHereYet": "Nothing here yet",
+  "collection": {
+    "notFound": "Collection not found",
+    "notFoundHint": "It may have been deleted.",
+    "smart": "Smart collection",
+    "collection": "Collection",
+    "shuffledDaily": "Shuffled daily",
+    "editRules": "Edit rules",
+    "edit": "Edit",
+    "delete": "Delete collection",
+    "deleteConfirm": "Delete {{name}}? The titles stay in your library.",
+    "nothingMatchesYet": "Nothing matches yet",
+    "joinByRules": "Titles join by themselves when they match the rules.",
+    "howToAdd": "Open a movie or show and choose Collections to add it."
+  },
+  "collections": {
+    "newShort": "New",
+    "new": "New collection",
+    "newSmartShort": "New smart",
+    "newSmart": "New smart collection",
+    "none": "No collections yet",
+    "noneHint": "A smart collection fills itself from rules, like unwatched 80s action. Box sets show up here once two of their titles are in a library.",
+    "yours": "Yours",
+    "shared": "Shared",
+    "forEveryone": "Collections for everyone",
+    "boxSets": "Box sets",
+    "sort": {
+      "own": "Own order",
+      "title": "Title",
+      "added": "Date added",
+      "released": "Release date",
+      "year": "Year",
+      "rating": "Rating",
+      "runtime": "Runtime",
+      "lastPlayed": "Last played",
+      "shuffle": "Shuffle daily"
+    },
+    "smartShort": "Smart",
+    "editNamed": "Edit {{name}}",
+    "name": "Name",
+    "smartExample": "Unwatched 80s action",
+    "manualExample": "Movie night",
+    "rules": "Rules",
+    "rulesHint": "Titles that match these filters join by themselves as the library changes.",
+    "shuffleDaily": "Shuffle every day",
+    "order": "Order",
+    "orderAdded": "The order titles were added",
+    "direction": "Direction",
+    "usual": "Usual",
+    "ascending": "Ascending",
+    "descending": "Descending",
+    "showAsRow": "Show as a row",
+    "onHome": "On Home",
+    "onLibraryPage": "On a library page",
+    "shareWithEveryone": "Share with everyone on this server",
+    "saveAs": "Save as collection"
+  },
+  "save": "Save",
+  "create": "Create",
+  "loadingDots": "Loading…",
+  "filters": {
+    "title": "Filters",
+    "inUse_one": "Filters, {{count}} in use",
+    "inUse_other": "Filters, {{count}} in use",
+    "sortBy": "Sort by",
+    "highestFirst": "Highest first",
+    "lowestFirst": "Lowest first",
+    "highestFirstSwitch": "Highest first; switch to lowest first",
+    "lowestFirstSwitch": "Lowest first; switch to highest first",
+    "not": "Not {{label}}",
+    "remove": "Remove {{label}}",
+    "chip": {
+      "words": "“{{q}}”",
+      "directedBy": "Directed by {{name}}",
+      "with": "With {{name}}",
+      "releasedWithin": "Released in {{within}}",
+      "releasedAfter": "Released after {{date}}",
+      "releasedBefore": "Released before {{date}}",
+      "addedWithin": "Added in {{within}}",
+      "addedAfter": "Added after {{date}}",
+      "addedBefore": "Added before {{date}}",
+      "ratingMin": "Rated {{rating}}+",
+      "ratingMax": "Rated {{rating}} or less",
+      "certification": "Rated {{rating}}",
+      "watchList": "On my watch list"
+    },
+    "collection": "Collection",
+    "active": "Filters in use",
+    "clearAll": "Clear all",
+    "more_one": "{{count}} more",
+    "more_other": "{{count}} more",
+    "any": "Any",
+    "all": "All",
+    "anyTime": "Any time",
+    "runtime": {
+      "under30": "Under 30 min",
+      "30to60": "30–60 min",
+      "overHour": "Over an hour",
+      "under90": "Under 90 min",
+      "90to120": "90 min – 2 hours",
+      "over2Hours": "Over 2 hours"
+    },
+    "wordsInTitle": "Words in the title",
+    "onlyWatchList": "Only titles on my watch list",
+    "fromYear": "From year",
+    "toYear": "To year",
+    "from": "From",
+    "to": "to",
+    "toPlaceholder": "To",
+    "lastWeek": "Last week",
+    "last30Days": "Last 30 days",
+    "last3Months": "Last 3 months",
+    "lastYear": "Last year",
+    "ratingAtLeast": "{{rating}}+",
+    "findPerson": "Find a person",
+    "nobody": "Nobody by that name in this library.",
+    "showResults": "Show results",
+    "section": {
+      "title": "Title",
+      "watched": "Watched",
+      "genre": "Genre",
+      "year": "Year",
+      "firstAired": "First aired",
+      "released": "Released",
+      "added": "Added",
+      "rating": "Rating",
+      "episodeLength": "Episode length",
+      "runtime": "Runtime",
+      "quality": "Quality",
+      "network": "Network or studio",
+      "studio": "Studio",
+      "ageRating": "Age rating",
+      "language": "Original language",
+      "country": "Country",
+      "creator": "Created or directed by",
+      "director": "Director",
+      "people": "Cast and crew"
+    }
+  },
+  "appearance": {
+    "title": "Appearance",
+    "useServerTheme": "Use the server's theme ({{name}})",
+    "guestHint": "Everyone at home without an account shares this theme.",
+    "hint": "Your theme follows you to the Matinee apps on your phone and TV.",
+    "theme": "Theme",
+    "preview": {
+      "tonight": "Tonight",
+      "trailer": "Trailer"
+    },
+    "serverTheme": "Server theme",
+    "serverThemeHint": "What everyone sees until they pick their own, and on the sign-in page.",
+    "custom": "{{name}} (custom)",
+    "addYourOwn": "To add your own, put a theme file in the server's <code>themes</code> folder, in its data folder.",
+    "howTo": "How to make a theme",
+    "skipped": "Skipped {{problem}}"
+  },
+  "newFiles": {
+    "title": "New files",
+    "intro": "Matinee notices files you add, rename or delete and updates the library a few seconds after they finish copying.",
+    "watch": "Watch for new files",
+    "summary": {
+      "some": "Some folders checked every {{every}}",
+      "watching": "Watching for new files",
+      "polling": "Checked for new files every {{every}}",
+      "pollingShare": "Checked for new files every {{every}} (network share)",
+      "off": "Not watched for new files"
+    },
+    "mode": {
+      "auto": {
+        "label": "Automatic",
+        "hint": "Right away on this server's own disks. Network shares (SMB, NFS) don't announce changes, so Matinee checks those every {{every}}."
+      },
+      "poll": {
+        "label": "Check on a timer",
+        "hint": "Every folder is checked every {{every}}. Pick this if new files on a disk don't show up by themselves."
+      },
+      "off": {
+        "label": "Off",
+        "hint": "New files show up at the next full rescan, or when you press Scan."
+      }
+    },
+    "rescan": "Every library is also rescanned in full every {{every}}, which catches anything else, like a file replaced in place on a share.",
+    "rescanOff": "Full rescans are turned off on this server (MATINEE_SCAN_INTERVAL=0)."
+  },
+  "analysis": {
+    "title": "Media analysis",
+    "intro": "Matinee slowly reads each file for its quality, sound and languages, and again whenever a file changes.",
+    "state": {
+      "lookingAt": "Looking at {{file}}",
+      "working": "Working",
+      "waiting": "Waiting for playback to finish",
+      "slowDisk": "Files are slow to read; resting for a few minutes",
+      "allDone": "Every file is analyzed",
+      "upToDate": "Up to date",
+      "paused": "Paused"
+    },
+    "progress": "{{done}} of {{total}}",
+    "unreadable_one": "{{count}} file couldn't be read.",
+    "unreadable_other": "{{count}} files couldn't be read.",
+    "speed": "Speed",
+    "mode": {
+      "gentle": {
+        "label": "Gentle",
+        "hint": "One file every few seconds, and none while the server is converting something for playback."
+      },
+      "normal": {
+        "label": "Normal",
+        "hint": "Files back to back, still at the lowest priority."
+      },
+      "off": {
+        "label": "Off",
+        "hint": "Paused until you turn it back on."
+      }
+    }
+  },
+  "profileSettings": {
+    "title": "Profiles",
+    "intro": "Profiles share a sign-in but keep their own progress, watch list and theme. Kids profiles only see what you allow. A PIN keeps a profile, or the account itself, to its owner.",
+    "pinFor": "A 4-digit PIN for {{name}}",
+    "homeDevices": "Devices on your home network that haven’t signed in",
+    "account": "Account",
+    "removePin": "Remove PIN",
+    "addPin": "Add PIN",
+    "hasPin": "Has a PIN",
+    "edit": "Edit {{name}}",
+    "remove": "Remove {{name}}",
+    "confirmRemove": "Remove {{name}}? Their progress and watch list go too.",
+    "add": "Add profile",
+    "name": "Name",
+    "newPin": "New PIN",
+    "pinOptional": "PIN (optional)",
+    "unchanged": "Unchanged",
+    "fourDigits": "4 digits",
+    "removeThePin": "Remove the PIN",
+    "colour": "Colour",
+    "kidsMode": "Kids mode",
+    "kidsOff": "Off: sees everything",
+    "kidsLevel": "{{name}}: {{ratings}}",
+    "kidsLibraries": "What this profile sees in each library. By rating hides titles rated above the {{level}} level and titles with no rating. Kids profiles can’t open Settings or make requests.",
+    "libraryMode": {
+      "hidden": "Hidden",
+      "rated": "By rating",
+      "all": "Everything"
+    }
+  },
+  "report": {
+    "thanks": "Thanks, an admin will take a look.",
+    "button": "Report a problem",
+    "whatsWrong": "What's wrong with {{title}}?",
+    "details": "Details (optional)",
+    "detailsExample": "Like: no sound after 20 minutes",
+    "send": "Send"
+  },
+  "quality": {
+    "label": "Quality",
+    "forShow": "Quality for the show",
+    "confirm": "Switch to {{name}}? {{app}} will look for copies that match.",
+    "searching": "Searching…"
+  },
+  "upcoming": {
+    "nothingYet": "Nothing to show yet",
+    "connect": "Connect Radarr or Sonarr to see the movies and episodes on their way.",
+    "openSettings": "Open settings",
+    "notConnected": "An admin hasn't connected Radarr or Sonarr to this server.",
+    "intro": "New episodes and movie releases over the next two months that aren't in yet.",
+    "unavailable": "{{apps}} didn't answer, so some may be missing.",
+    "nothing": "Nothing on the way. Ask for something new from Requests."
+  },
+  "link": {
+    "title": "Sign in a device",
+    "intro": "Enter the code your phone or TV is showing.",
+    "signedIn": "{{device}} is signed in",
+    "ready": "It will be ready in a few seconds.",
+    "declined": "Declined",
+    "notSignedIn": "{{device}} was not signed in.",
+    "another": "Sign in another device",
+    "code": "Code",
+    "next": "Next",
+    "wantsToSignIn": "wants to sign in as <name>{{name}}</name>",
+    "warning": "Only approve a device you're holding or can see. It gets the same access you have.",
+    "decline": "Decline",
+    "approve": "Sign in"
+  },
+  "profiles": {
+    "whoIsWatching": "Who's watching?",
+    "signInWithAccount": "Sign in with an account",
+    "enterPin": "Enter {{name}}'s PIN",
+    "pin": "PIN",
+    "deleteDigit": "Delete"
+  },
+  "integrations": {
+    "title": "Radarr and Sonarr",
+    "intro": "Connect them so people can ask for movies and shows, see what's coming soon, and report problems with what they watch.",
+    "connected": "Connected · {{url}}",
+    "notConnected": {
+      "radarr": "Not connected · for movies",
+      "sonarr": "Not connected · for shows"
+    },
+    "change": "Change",
+    "connect": "Connect",
+    "address": "Address",
+    "apiKey": "API key",
+    "keyWhere": "{{app}} → Settings → General",
+    "saved": "Saved",
+    "answers": "{{app}} {{version}} answers at {{url}}",
+    "quality": {
+      "radarr": "Quality for new movies",
+      "sonarr": "Quality for new shows"
+    },
+    "folder": "Folder",
+    "confirmDisconnect": "Disconnect {{app}}? Titles already in it stay there.",
+    "disconnect": "Disconnect",
+    "testing": "Testing…",
+    "test": "Test",
+    "whoCanAdd": "Who can add movies and shows",
+    "mode": {
+      "approve": {
+        "label": "Ask, then an admin approves",
+        "detail": "Anyone with an account can ask for a title. It waits for an admin."
+      },
+      "auto": {
+        "label": "Add right away",
+        "detail": "What people ask for goes straight to Radarr or Sonarr."
+      },
+      "off": {
+        "label": "Only admins add titles",
+        "detail": "Everyone else can still see what’s coming soon and report problems."
+      }
+    },
+    "overseerr": {
+      "intro": "Connect it to add a Discover tab: what's trending, recommendations based on what people watch, and a way to ask for anything. Jellyseerr works too.",
+      "notConnected": "Not connected · for Discover",
+      "requestAs": "Requests from people without an Overseerr account",
+      "madeAsOwner": "Made as {{name}} (the API key's owner)",
+      "madeAs": "Made as {{name}}",
+      "sameName": "People with an Overseerr account of the same name ask as themselves. Overseerr decides which requests need approval, from each user's permissions there.",
+      "confirmDisconnect": "Disconnect Overseerr? The Discover tab goes away."
+    }
+  },
+  "requests": {
+    "tab": {
+      "ask": "Ask for something",
+      "requests": "Requests",
+      "yourRequests": "Your requests",
+      "problems": "Problems",
+      "yourReports": "Your reports"
+    },
+    "movies": "Movies",
+    "shows": "Shows",
+    "findMovie": "Find a movie…",
+    "findShow": "Find a show…",
+    "nothingFound": "Nothing found for “{{q}}”",
+    "ready": "Ready to watch",
+    "askedFor": "Asked for",
+    "onItsWay": "On its way",
+    "add": "Add",
+    "askForIt": "Ask for it",
+    "state": {
+      "pending": "Waiting for approval",
+      "approved": "On its way",
+      "declined": "Declined",
+      "failed": "Couldn't add"
+    },
+    "none": "No requests yet.",
+    "retry": "Retry",
+    "approve": "Approve",
+    "remove": "Remove the request for {{title}}",
+    "removedFromLibrary": "Removed from the library",
+    "noProblems": "Nobody has reported a problem.",
+    "noReports": "You haven’t reported any problems. Use “Report a problem” on a title.",
+    "fileReplaced": "File replaced",
+    "closed": "Closed",
+    "confirmReplace": "Delete this file of {{title}} and download another copy? The new one shows up after it downloads and the library is scanned.",
+    "replaceFile": "Replace file",
+    "close": "Close"
+  },
+  "settings": {
+    "tmdbNotice": "Posters and descriptions come from <link>TMDB</link>. This product uses the TMDB API but is not endorsed or certified by TMDB.",
+    "libraries": {
+      "title": "Libraries",
+      "none": "No libraries yet.",
+      "scan": "Scan",
+      "remove": "Remove {{name}}",
+      "confirmRemove": "Remove “{{name}}”? Your files stay where they are.",
+      "kind": {
+        "movies": "Movies",
+        "tv": "TV shows",
+        "music": "Music"
+      },
+      "type": "Type",
+      "folders": "Folders",
+      "up": "Up one folder",
+      "added": "Added",
+      "useFolder": "Use this folder",
+      "noSubfolders": "No subfolders"
+    },
+    "people": {
+      "title": "People",
+      "admin": "Admin",
+      "passwordChanged": "Password changed. {{name}} was signed out everywhere.",
+      "you": "(you)",
+      "removeAdmin": "Remove admin",
+      "makeAdmin": "Make admin",
+      "resetPassword": "Reset password",
+      "remove": "Remove",
+      "newPasswordFor": "New password for {{name}}",
+      "setPassword": "Set password",
+      "confirmRemove": "Remove <name>{{name}}</name>? Their watch history, watch list, downloads and requests go too, and they're signed out everywhere. This can't be undone."
+    },
+    "account": {
+      "title": "Your account",
+      "changePassword": "Change password",
+      "current": "Current password",
+      "new": "New password",
+      "again": "New password again",
+      "hint": "At least 8 characters. Your other devices will be signed out.",
+      "mismatch": "The new passwords don't match.",
+      "changed": "Password changed. Your other devices were signed out."
+    },
+    "devices": {
+      "aWhileAgo": "a while ago",
+      "justNow": "just now",
+      "title": "Your devices",
+      "unknown": "Unknown device",
+      "this": "This device",
+      "lastUsed": "Last used {{when}}",
+      "confirmSignOut": "Sign out “{{name}}”?"
+    },
+    "version": "Matinee server {{version}} · API v{{api}}",
+    "home": {
+      "title": "Home network",
+      "requireSignIn": "Ask for sign-in at home",
+      "required": "Everyone signs in, at home and away.",
+      "open": "Phones, TVs and browsers on your home network can watch without signing in. They share one Home account and can't change anything. Away from home, everyone signs in."
+    },
+    "homeRows": {
+      "title": "Home",
+      "holidays": "Holiday rows",
+      "holidaysDetail": "In the month before Valentine’s Day, Easter, Halloween, Thanksgiving and Christmas, and the week before New Year’s Eve, Home leads with a row of titles for the day, picked by their keywords, titles and descriptions."
+    },
+    "remote": {
+      "title": "Remote access",
+      "publicURL": "Away from home, the apps connect to <url>{{url}}</url>, the address this server was set up with.",
+      "toggle": "Watch away from home",
+      "hint": "Matinee asks your router to open a port and gets a certificate so the apps connect securely from anywhere. Everyone signs in from outside.",
+      "working": "Opening a port on your router and getting a certificate…",
+      "ready": "The apps reach this server at <url>{{url}}</url> when they’re away from home.",
+      "router": "Your router opened the port over {{router}}.",
+      "pickUp": "They pick this address up next time they’re on your home network.",
+      "sharedAddress": "Matinee can’t get around this by itself yet.",
+      "retry": "Matinee tries again every half hour."
+    },
+    "playback": {
+      "title": "Playback",
+      "autoPlay": "Play the next episode",
+      "autoPlayHint": "When the credits start, the next episode plays after a 10-second countdown you can cancel.",
+      "binge": "Skip the countdown",
+      "bingeHint": "Go straight into the next episode when the credits start. After three in a row without touching anything, you’re asked if you’re still watching."
+    },
+    "trailers": {
+      "title": "Trailers",
+      "remote": "Trailers from YouTube",
+      "remoteOn": "Movies and shows offer their trailers from TMDB, which play from YouTube. Trailer files next to your media always show too.",
+      "remoteOff": "Only trailer files next to your media show, like “Movie (2020)-trailer.mkv” or anything in a Trailers folder."
+    },
+    "transcoding": {
+      "title": "Transcoding",
+      "intro": "Files a device can’t play as they are get converted while you watch. A GPU does that faster and with less load on the server.",
+      "convertingWith": "Converting with",
+      "active": "{{name}}.",
+      "activeOn": "{{name}} on {{detail}}.",
+      "fullGPU": "Video is decoded, resized and encoded on the GPU.",
+      "encodeOnly": "Video is encoded on the GPU and decoded on the CPU.",
+      "fallback": "If the GPU can't handle a file, it plays through the CPU instead.",
+      "testing": "Testing this server’s GPU…",
+      "cpuOff": "The CPU. Hardware transcoding is off.",
+      "cpuFailed": "The CPU, because the accelerator you chose didn’t work on this server.",
+      "cpuNoGPU": "The CPU. No GPU on this server passed its test.",
+      "hardware": "Hardware acceleration",
+      "auto": "Automatic: the best one that works",
+      "off": "Off: always use the CPU",
+      "notFound": "{{name}} (not found on this server)",
+      "accelerator": {
+        "nvenc": "NVIDIA NVENC",
+        "vaapi": "VAAPI (AMD and Intel on Linux)",
+        "qsv": "Intel Quick Sync",
+        "videotoolbox": "VideoToolbox (Mac)",
+        "amf": "AMD AMF (Windows)",
+        "v4l2m2m": "V4L2 (Raspberry Pi)"
+      }
+    }
+  },
+  "language": {
+    "title": "Language",
+    "label": "Show Matinee in",
+    "hint": "Your language follows you to the Matinee apps on your phone and TV. Titles and descriptions come in it too, where TMDB has them.",
+    "guestHint": "Everyone at home without an account shares this language.",
+    "automatic": "Automatic ({{language}})",
+    "machine": "This language was translated by machine, so some words may read oddly.",
+    "help": "Help improve it"
+  },
+  "discover": {
+    "title": "Discover",
+    "emptyTitle": "Nothing to discover yet",
+    "connectIt": "Connect Overseerr to see what's trending, get recommendations, and ask for new movies and shows.",
+    "openSettings": "Open settings",
+    "notConnected": "An admin hasn't connected Overseerr to this server.",
+    "placeholder": "Find any movie or show…",
+    "unavailable": "Discover isn't available right now",
+    "open": "Open",
+    "request": "Request",
+    "requestShow": "Request the show",
+    "asking": "Asking…",
+    "waiting": "Waiting for an admin to approve it.",
+    "onItsWay": "It'll show up in your library once it's downloaded.",
+    "findIt": "Find it in Discover"
+  }
+}

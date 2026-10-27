@@ -126,8 +126,11 @@ func TestFetcherFillsShowsSeasonsThenEpisodes(t *testing.T) {
 
 func TestTMDBTrailers(t *testing.T) {
 	mux := http.NewServeMux()
+	var asked string
 	mux.HandleFunc("GET /movie/949/videos", func(w http.ResponseWriter, r *http.Request) {
+		asked = r.URL.Query().Get("include_video_language")
 		json.NewEncoder(w).Encode(map[string]any{"results": []map[string]any{
+			{"name": "Deutscher Teaser", "site": "YouTube", "key": "de-teaser", "type": "Teaser", "official": true, "iso_639_1": "de"},
 			{"name": "Behind the scenes", "site": "YouTube", "key": "bts", "type": "Featurette", "official": true},
 			{"name": "Teaser", "site": "YouTube", "key": "teaser", "type": "Teaser", "official": true},
 			{"name": "Fan trailer", "site": "YouTube", "key": "fan", "type": "Trailer", "official": false},
@@ -153,8 +156,13 @@ func TestTMDBTrailers(t *testing.T) {
 	for _, v := range vids {
 		keys = append(keys, v.Key)
 	}
-	if got := strings.Join(keys, ","); got != "new,old,fan,teaser" {
-		t.Errorf("order: %s", got)
+	if got := strings.Join(keys, ","); got != "new,old,fan,de-teaser,teaser" || asked != "en,null" {
+		t.Errorf("order: %s, asked for %s", got, asked)
+	}
+	// Someone reading German gets German trailers first.
+	vids, _ = tm.Trailers(store.WithLanguage(ctx, "de"), "movie", 949, 0)
+	if len(vids) == 0 || vids[0].Key != "de-teaser" || asked != "de,en,null" {
+		t.Errorf("in German: %+v, asked for %s", vids, asked)
 	}
 	if vids, _ := tm.Trailers(ctx, "show", 1396, 2); len(vids) != 1 || vids[0].Key != "s2" {
 		t.Errorf("season: %+v", vids)

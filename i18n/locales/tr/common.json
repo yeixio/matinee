@@ -1,0 +1,337 @@
+{
+  "duration": {
+    "minutes": "{{minutes}} dk",
+    "hoursMinutes": "{{hours}} sa {{minutes}} dk"
+  },
+  "episodeCode": "S{{season}} · B{{episode}}",
+  "seasonN": "{{season}}. Sezon",
+  "specials": "Özel bölümler",
+  "media": {
+    "mono": "Mono",
+    "stereo": "Stereo",
+    "lossless": "Kayıpsız",
+    "hiRes": "Hi-Res",
+    "dolbyVisionProfile": "Dolby Vision profil {{profile}}",
+    "withBase": "{{format}}, diğer ekranlar için {{base}}",
+    "bitDepth": "{{bits}} bit",
+    "forced": "Zorunlu",
+    "sdh": "SDH"
+  },
+  "people": {
+    "episodes_one": "{{count}} bölüm",
+    "episodes_other": "{{count}} bölüm",
+    "lines": {
+      "createdBy": "Yaratıcı",
+      "director_one": "Yönetmen",
+      "director_other": "Yönetmenler",
+      "writer_one": "Senarist",
+      "writer_other": "Senaristler",
+      "basedOn": "Uyarlandığı eser",
+      "music": "Müzik"
+    },
+    "died": "Ölüm: {{date}}",
+    "bornIn": "Doğum yeri: {{place}}",
+    "bornOnIn": "Doğum: {{date}}, {{place}}",
+    "bornOn": "Doğum: {{date}}",
+    "dollars": "{{amount}} $"
+  },
+  "facts": {
+    "firstAired": "İlk yayın",
+    "released": "Çıkış",
+    "aired": "Yayınlandı",
+    "ended": "Sona erdi",
+    "status": "Durum",
+    "seasons": "Sezonlar",
+    "seasonsValue_one": "{{seasons}} ({{count}} bölüm)",
+    "seasonsValue_other": "{{seasons}} ({{count}} bölüm)",
+    "rated": "Yaş sınırı",
+    "genres": "Türler",
+    "originalTitle": "Orijinal ad",
+    "originalLanguage": "Orijinal dil",
+    "spokenLanguages": "Konuşulan diller",
+    "studio_one": "Stüdyo",
+    "studio_other": "Stüdyolar",
+    "network_one": "Kanal",
+    "network_other": "Kanallar",
+    "country_one": "Ülke",
+    "country_other": "Ülkeler",
+    "collection": "Koleksiyon",
+    "budget": "Bütçe",
+    "boxOffice": "Gişe"
+  },
+  "showStatus": {
+    "Returning Series": "Devam ediyor",
+    "Ended": "Sona erdi",
+    "Canceled": "İptal edildi",
+    "In Production": "Yapım aşamasında",
+    "Planned": "Planlandı",
+    "Pilot": "Pilot"
+  },
+  "genres": {
+    "Action": "Aksiyon",
+    "Adventure": "Macera",
+    "Animation": "Animasyon",
+    "Comedy": "Komedi",
+    "Crime": "Suç",
+    "Documentary": "Belgesel",
+    "Drama": "Dram",
+    "Family": "Aile",
+    "Fantasy": "Fantastik",
+    "History": "Tarih",
+    "Horror": "Korku",
+    "Music": "Müzik",
+    "Mystery": "Gizem",
+    "Romance": "Romantik",
+    "Science Fiction": "Bilim kurgu",
+    "Thriller": "Gerilim",
+    "War": "Savaş",
+    "Western": "Western",
+    "Reality": "Gerçeklik",
+    "TV Movie": "TV filmi",
+    "Action & Adventure": "Aksiyon ve macera",
+    "Kids": "Çocuk",
+    "News": "Haber",
+    "Sci-Fi & Fantasy": "Bilim kurgu ve fantastik",
+    "Soap": "Pembe dizi",
+    "Talk": "Talk show",
+    "War & Politics": "Savaş ve politika"
+  },
+  "jobs": {
+    "Director": "Yönetmen",
+    "Creator": "Yaratıcı",
+    "Screenplay": "Senaryo",
+    "Writer": "Senarist",
+    "Teleplay": "TV senaryosu",
+    "Story": "Hikâye",
+    "Novel": "Roman",
+    "Characters": "Karakterler",
+    "Author": "Yazar",
+    "Original Music Composer": "Orijinal müzik",
+    "Music": "Müzik",
+    "Director of Photography": "Görüntü yönetmeni",
+    "Editor": "Kurgu",
+    "Producer": "Yapımcı",
+    "Executive Producer": "Yönetici yapımcı",
+    "Casting": "Oyuncu seçimi",
+    "Production Design": "Yapım tasarımı",
+    "Costume Design": "Kostüm tasarımı"
+  },
+  "kids": {
+    "littleKids": "Küçük çocuklar",
+    "kids": "Çocuklar",
+    "teens": "Gençler",
+    "andYounger": "{{ratings}} ve altı"
+  },
+  "sort": {
+    "title": "Ad",
+    "added": "Eklenme tarihi",
+    "released": "Çıkış tarihi",
+    "year": "Yıl",
+    "rating": "Puan",
+    "runtime": "Süre",
+    "lastPlayed": "Son izlenme"
+  },
+  "watched": {
+    "unwatched": "İzlenmemiş",
+    "inProgress": "Devam eden",
+    "watched": "İzlenmiş",
+    "notStarted": "Başlanmamış"
+  },
+  "genreRows": {
+    "Action": "Aksiyon dolu",
+    "Adventure": "Maceralar",
+    "Animation": "Sevilen animasyonlar",
+    "Comedy": "Komediler",
+    "Crime": "Suç hikâyeleri",
+    "Documentary": "Belgeseller",
+    "Drama": "Dramlar",
+    "Family": "Tüm aile için",
+    "Fantasy": "Fantastik dünyalar",
+    "Horror": "Korku",
+    "Mystery": "Gizemler",
+    "Romance": "Romantik",
+    "Science Fiction": "Sevilen bilim kurgular",
+    "Thriller": "Gerilimler",
+    "War": "Savaş hikâyeleri",
+    "Western": "Westernler"
+  },
+  "count": {
+    "episodes_one": "{{count}} bölüm",
+    "episodes_other": "{{count}} bölüm",
+    "seasons_one": "{{count}} sezon",
+    "seasons_other": "{{count}} sezon",
+    "albums_one": "{{count}} albüm",
+    "albums_other": "{{count}} albüm",
+    "tracks_one": "{{count}} parça",
+    "tracks_other": "{{count}} parça",
+    "titles_one": "{{count}} yapım",
+    "titles_other": "{{count}} yapım"
+  },
+  "awards": {
+    "academy": {
+      "won_one": "{{count}} Oscar kazandı",
+      "won_other": "{{count}} Oscar kazandı",
+      "nominated_one": "{{count}} Oscar adaylığı",
+      "nominated_other": "{{count}} Oscar adaylığı"
+    },
+    "emmy": {
+      "won_one": "{{count}} Primetime Emmy kazandı",
+      "won_other": "{{count}} Primetime Emmy kazandı",
+      "nominated_one": "{{count}} Primetime Emmy adaylığı",
+      "nominated_other": "{{count}} Primetime Emmy adaylığı"
+    },
+    "globe": {
+      "won_one": "{{count}} Altın Küre kazandı",
+      "won_other": "{{count}} Altın Küre kazandı",
+      "nominated_one": "{{count}} Altın Küre adaylığı",
+      "nominated_other": "{{count}} Altın Küre adaylığı"
+    },
+    "bafta": {
+      "won_one": "{{count}} BAFTA kazandı",
+      "won_other": "{{count}} BAFTA kazandı",
+      "nominated_one": "{{count}} BAFTA adaylığı",
+      "nominated_other": "{{count}} BAFTA adaylığı"
+    },
+    "wins_one": "{{count}} ödül",
+    "wins_other": "{{count}} ödül",
+    "nominations_one": "{{count}} adaylık",
+    "nominations_other": "{{count}} adaylık",
+    "winsAndNominations": "{{wins}} ve {{nominations}}"
+  },
+  "departments": {
+    "Acting": "Oyuncu",
+    "Directing": "Yönetmenlik",
+    "Writing": "Senaryo",
+    "Production": "Yapım",
+    "Sound": "Ses",
+    "Camera": "Kamera",
+    "Editing": "Kurgu",
+    "Art": "Sanat",
+    "Crew": "Ekip",
+    "Visual Effects": "Görsel efektler",
+    "Costume & Make-Up": "Kostüm ve makyaj",
+    "Lighting": "Işık",
+    "Creator": "Yaratıcı"
+  },
+  "starters": {
+    "recent": "Yeni eklenenler",
+    "unwatched": "İzlenmemiş",
+    "tonight": "Bu akşama yetecek kadar kısa"
+  },
+  "filter": {
+    "decade": "{{decade}}'ler",
+    "yearRange": "{{from}}–{{to}}",
+    "yearOrLater": "{{year}} veya sonrası",
+    "yearOrEarlier": "{{year}} veya öncesi",
+    "lastYear": "son bir yıl",
+    "lastWeeks_one": "son bir hafta",
+    "lastWeeks_other": "son {{count}} hafta",
+    "lastDays_one": "son {{count}} gün",
+    "lastDays_other": "son {{count}} gün",
+    "runtime": {
+      "titles": {
+        "between": "{{min}}–{{max}} dk",
+        "over": "{{min}} dk üzeri",
+        "under": "{{max}} dk altı"
+      },
+      "episodes": {
+        "between": "Bölümler {{min}}–{{max}} dk",
+        "over": "Bölümler {{min}} dk üzeri",
+        "under": "Bölümler {{max}} dk altı"
+      }
+    }
+  },
+  "themes": {
+    "clean": {
+      "name": "Sade",
+      "description": "Düz beyaz, tek mavi, tırnaksız yazı. Sadece afişler."
+    },
+    "dark": {
+      "name": "Koyu",
+      "description": "Gerçek siyah ve net beyaz. Göze ve OLED ekrana dost."
+    },
+    "drive-in": {
+      "name": "Açık hava sineması",
+      "description": "Yetmişlerin kahverengileri ve kehribar ışıklı tabelalar, açık hava sinemasında bir gece gibi."
+    },
+    "high-contrast": {
+      "name": "Yüksek kontrast",
+      "description": "Siyah, beyaz ve parlak sarı; odanın öbür ucundan en net okunan yazı için."
+    },
+    "light": {
+      "name": "Açık",
+      "description": "Mercanla sıcak kâğıt beyazı, aydınlık bir oda için."
+    },
+    "matinee": {
+      "name": "Matinee",
+      "description": "Mercan vurgulu sıcak salon karanlığı. Evin görünümü."
+    },
+    "sci-fi": {
+      "name": "Bilim kurgu",
+      "description": "Neon camgöbeği parıltılı derin uzay laciverti ve fütüristik bir yazı tipi."
+    }
+  },
+  "every": {
+    "seconds_one": "{{count}} saniye",
+    "seconds_other": "{{count}} saniye",
+    "minutes_one": "{{count}} dakika",
+    "minutes_other": "{{count}} dakika",
+    "hours_one": "{{count}} saat",
+    "hours_other": "{{count}} saat"
+  },
+  "avatars": {
+    "coral": "Mercan",
+    "amber": "Kehribar",
+    "lime": "Limon yeşili",
+    "teal": "Deniz mavisi",
+    "sky": "Gök mavisi",
+    "violet": "Mor",
+    "pink": "Pembe",
+    "slate": "Arduvaz"
+  },
+  "day": {
+    "today": "Bugün",
+    "tomorrow": "Yarın",
+    "yesterday": "Dün"
+  },
+  "release": {
+    "cinemas": "Sinemalarda",
+    "digital": "Dijital çıkış",
+    "physical": "Diskte",
+    "airs": "Yayında"
+  },
+  "issue": {
+    "video": "Görüntü",
+    "audio": "Ses",
+    "subtitles": "Altyazılar",
+    "wrong": "Yanlış ad",
+    "other": "Başka bir şey"
+  },
+  "holidays": {
+    "valentines": "Sevgililer Günü için",
+    "easter": "Paskalya için",
+    "halloween": "Ürperti mevsimi",
+    "thanksgiving": "Şükran Günü için",
+    "christmas": "Noel favorileri",
+    "newyear": "Yeni yıla merhaba"
+  },
+  "discover": {
+    "rows": {
+      "trending": "Trendler",
+      "popular-movies": "Popüler filmler",
+      "popular-shows": "Popüler diziler",
+      "upcoming-movies": "Yakında sinemalarda",
+      "upcoming-shows": "Yolda olan yeni diziler"
+    },
+    "because": "{{title}} izlediğin için",
+    "status": {
+      "available": "Kitaplığında",
+      "added": "Yolda",
+      "requested": "İstendi"
+    },
+    "kind": {
+      "movie": "Film",
+      "show": "Dizi"
+    }
+  }
+}

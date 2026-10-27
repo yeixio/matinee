@@ -112,7 +112,7 @@ func (s *Server) pollDeviceCode(w http.ResponseWriter, r *http.Request) {
 		writeError(w, http.StatusForbidden, "sign-in was declined")
 		return
 	case errors.Is(err, store.ErrCodeExpired):
-		writeError(w, http.StatusGone, "this code expired; ask for a new one")
+		writeError(w, http.StatusGone, "this code expired; ask for another")
 		return
 	case err != nil:
 		s.serverError(w, err)

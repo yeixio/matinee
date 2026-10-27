@@ -172,7 +172,7 @@ func (s *Server) remoteTrailers(ctx context.Context, it store.Item) []metadata.V
 		return nil
 	}
 	load := func(season int) []metadata.Video {
-		key := fmt.Sprintf("trailers:%s:%d:%d", kind, *id, season)
+		key := fmt.Sprintf("trailers:%s:%d:%d:%s", kind, *id, season, store.LanguageFrom(ctx))
 		vids, err := cached(&s.trailerCache, key, 12*time.Hour, func() ([]metadata.Video, error) {
 			return s.TrailerSource.Trailers(ctx, kind, *id, season)
 		})

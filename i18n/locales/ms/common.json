@@ -1,0 +1,310 @@
+{
+  "duration": {
+    "minutes": "{{minutes}} min",
+    "hoursMinutes": "{{hours}} j {{minutes}} min"
+  },
+  "episodeCode": "M{{season}} · E{{episode}}",
+  "seasonN": "Musim {{season}}",
+  "specials": "Istimewa",
+  "media": {
+    "mono": "Mono",
+    "stereo": "Stereo",
+    "lossless": "Tanpa kehilangan",
+    "hiRes": "Hi-Res",
+    "dolbyVisionProfile": "Dolby Vision profil {{profile}}",
+    "withBase": "{{format}}, dengan {{base}} untuk skrin lain",
+    "bitDepth": "{{bits}}-bit",
+    "forced": "Paksa",
+    "sdh": "SDH"
+  },
+  "people": {
+    "episodes_other": "{{count}} episod",
+    "lines": {
+      "createdBy": "Dicipta oleh",
+      "director_other": "Pengarah",
+      "writer_other": "Penulis",
+      "basedOn": "Berdasarkan",
+      "music": "Muzik"
+    },
+    "died": "Meninggal dunia {{date}}",
+    "bornIn": "Lahir di {{place}}",
+    "bornOnIn": "Lahir {{date}} di {{place}}",
+    "bornOn": "Lahir {{date}}",
+    "dollars": "${{amount}}"
+  },
+  "facts": {
+    "firstAired": "Mula ditayangkan",
+    "released": "Keluaran",
+    "aired": "Ditayangkan",
+    "ended": "Tamat",
+    "status": "Status",
+    "seasons": "Musim",
+    "seasonsValue_other": "{{seasons}} ({{count}} episod)",
+    "rated": "Penarafan",
+    "genres": "Genre",
+    "originalTitle": "Tajuk asal",
+    "originalLanguage": "Bahasa asal",
+    "spokenLanguages": "Bahasa yang dituturkan",
+    "studio_other": "Studio",
+    "network_other": "Rangkaian",
+    "country_other": "Negara",
+    "collection": "Koleksi",
+    "budget": "Belanjawan",
+    "boxOffice": "Kutipan box office"
+  },
+  "showStatus": {
+    "Returning Series": "Bersambung",
+    "Ended": "Tamat",
+    "Canceled": "Dibatalkan",
+    "In Production": "Dalam penerbitan",
+    "Planned": "Dirancang",
+    "Pilot": "Perintis"
+  },
+  "genres": {
+    "Action": "Aksi",
+    "Adventure": "Pengembaraan",
+    "Animation": "Animasi",
+    "Comedy": "Komedi",
+    "Crime": "Jenayah",
+    "Documentary": "Dokumentari",
+    "Drama": "Drama",
+    "Family": "Keluarga",
+    "Fantasy": "Fantasi",
+    "History": "Sejarah",
+    "Horror": "Seram",
+    "Music": "Muzik",
+    "Mystery": "Misteri",
+    "Romance": "Romantik",
+    "Science Fiction": "Fiksyen sains",
+    "Thriller": "Thriller",
+    "War": "Perang",
+    "Western": "Western",
+    "Reality": "Realiti",
+    "TV Movie": "Filem TV",
+    "Action & Adventure": "Aksi & Pengembaraan",
+    "Kids": "Kanak-kanak",
+    "News": "Berita",
+    "Sci-Fi & Fantasy": "Fiksyen Sains & Fantasi",
+    "Soap": "Drama bersiri",
+    "Talk": "Bual bicara",
+    "War & Politics": "Perang & Politik"
+  },
+  "jobs": {
+    "Director": "Pengarah",
+    "Creator": "Pencipta",
+    "Screenplay": "Lakon layar",
+    "Writer": "Penulis",
+    "Teleplay": "Skrip TV",
+    "Story": "Cerita",
+    "Novel": "Novel",
+    "Characters": "Watak",
+    "Author": "Pengarang",
+    "Original Music Composer": "Komposer Muzik Asal",
+    "Music": "Muzik",
+    "Director of Photography": "Pengarah Fotografi",
+    "Editor": "Penyunting",
+    "Producer": "Penerbit",
+    "Executive Producer": "Penerbit Eksekutif",
+    "Casting": "Pemilihan pelakon",
+    "Production Design": "Reka Bentuk Produksi",
+    "Costume Design": "Reka Bentuk Kostum"
+  },
+  "kids": {
+    "littleKids": "Kanak-kanak kecil",
+    "kids": "Kanak-kanak",
+    "teens": "Remaja",
+    "andYounger": "{{ratings}} dan lebih muda"
+  },
+  "sort": {
+    "title": "Tajuk",
+    "added": "Tarikh ditambah",
+    "released": "Tarikh keluaran",
+    "year": "Tahun",
+    "rating": "Penarafan",
+    "runtime": "Tempoh",
+    "lastPlayed": "Terakhir ditonton"
+  },
+  "watched": {
+    "unwatched": "Belum ditonton",
+    "inProgress": "Sedang ditonton",
+    "watched": "Sudah ditonton",
+    "notStarted": "Belum bermula"
+  },
+  "genreRows": {
+    "Action": "Penuh aksi",
+    "Adventure": "Pengembaraan",
+    "Animation": "Animasi kegemaran",
+    "Comedy": "Komedi",
+    "Crime": "Kisah jenayah",
+    "Documentary": "Dokumentari",
+    "Drama": "Drama",
+    "Family": "Untuk seisi keluarga",
+    "Fantasy": "Dunia fantasi",
+    "Horror": "Seram",
+    "Mystery": "Misteri",
+    "Romance": "Romantik",
+    "Science Fiction": "Fiksyen sains kegemaran",
+    "Thriller": "Thriller",
+    "War": "Kisah perang",
+    "Western": "Western"
+  },
+  "count": {
+    "episodes_other": "{{count}} episod",
+    "seasons_other": "{{count}} musim",
+    "albums_other": "{{count}} album",
+    "tracks_other": "{{count}} lagu",
+    "titles_other": "{{count}} tajuk"
+  },
+  "awards": {
+    "academy": {
+      "won_other": "Memenangi {{count}} Anugerah Akademi",
+      "nominated_other": "Dicalonkan untuk {{count}} Anugerah Akademi"
+    },
+    "emmy": {
+      "won_other": "Memenangi {{count}} Primetime Emmy",
+      "nominated_other": "Dicalonkan untuk {{count}} Primetime Emmy"
+    },
+    "globe": {
+      "won_other": "Memenangi {{count}} Golden Globe",
+      "nominated_other": "Dicalonkan untuk {{count}} Golden Globe"
+    },
+    "bafta": {
+      "won_other": "Memenangi {{count}} BAFTA",
+      "nominated_other": "Dicalonkan untuk {{count}} BAFTA"
+    },
+    "wins_other": "{{count}} kemenangan",
+    "nominations_other": "{{count}} pencalonan",
+    "winsAndNominations": "{{wins}} dan {{nominations}}"
+  },
+  "departments": {
+    "Acting": "Pelakon",
+    "Directing": "Arahan",
+    "Writing": "Penulisan",
+    "Production": "Penerbitan",
+    "Sound": "Bunyi",
+    "Camera": "Kamera",
+    "Editing": "Suntingan",
+    "Art": "Seni",
+    "Crew": "Kru",
+    "Visual Effects": "Kesan Visual",
+    "Costume & Make-Up": "Kostum & Solekan",
+    "Lighting": "Pencahayaan",
+    "Creator": "Pencipta"
+  },
+  "starters": {
+    "recent": "Baru ditambah",
+    "unwatched": "Belum ditonton",
+    "tonight": "Cukup pendek untuk malam ini"
+  },
+  "filter": {
+    "decade": "Tahun {{decade}}-an",
+    "yearRange": "{{from}}–{{to}}",
+    "yearOrLater": "{{year}} atau selepasnya",
+    "yearOrEarlier": "{{year}} atau sebelumnya",
+    "lastYear": "setahun yang lalu",
+    "lastWeeks_other": "{{count}} minggu yang lalu",
+    "lastDays_other": "{{count}} hari yang lalu",
+    "runtime": {
+      "titles": {
+        "between": "{{min}}–{{max}} min",
+        "over": "Lebih {{min}} min",
+        "under": "Kurang {{max}} min"
+      },
+      "episodes": {
+        "between": "Episod {{min}}–{{max}} min",
+        "over": "Episod lebih {{min}} min",
+        "under": "Episod kurang {{max}} min"
+      }
+    }
+  },
+  "themes": {
+    "clean": {
+      "name": "Bersih",
+      "description": "Putih biasa, satu biru, tanpa serif. Hanya poster."
+    },
+    "dark": {
+      "name": "Gelap",
+      "description": "Hitam pekat dan putih jelas. Selesa untuk mata, dan untuk skrin OLED."
+    },
+    "drive-in": {
+      "name": "Pawagam pandu masuk",
+      "description": "Coklat tahun tujuh puluhan dan papan tanda ambar, seperti malam di pawagam pandu masuk."
+    },
+    "high-contrast": {
+      "name": "Kontras tinggi",
+      "description": "Hitam, putih dan kuning terang, untuk teks paling jelas dari hujung bilik."
+    },
+    "light": {
+      "name": "Cerah",
+      "description": "Putih kertas yang hangat dengan koral, untuk bilik yang cerah."
+    },
+    "matinee": {
+      "name": "Matinee",
+      "description": "Gelap panggung yang hangat dengan aksen koral. Gaya rumah."
+    },
+    "sci-fi": {
+      "name": "Fiksyen sains",
+      "description": "Biru angkasa lepas dengan sinaran sian neon dan fon futuristik."
+    }
+  },
+  "every": {
+    "seconds_other": "{{count}} saat",
+    "minutes_other": "{{count}} minit",
+    "hours_other": "{{count}} jam"
+  },
+  "avatars": {
+    "coral": "Koral",
+    "amber": "Ambar",
+    "lime": "Limau nipis",
+    "teal": "Hijau kebiruan",
+    "sky": "Biru langit",
+    "violet": "Ungu",
+    "pink": "Merah jambu",
+    "slate": "Kelabu batu"
+  },
+  "day": {
+    "today": "Hari ini",
+    "tomorrow": "Esok",
+    "yesterday": "Semalam"
+  },
+  "release": {
+    "cinemas": "Di pawagam",
+    "digital": "Keluaran digital",
+    "physical": "Pada cakera",
+    "airs": "Ditayangkan"
+  },
+  "issue": {
+    "video": "Gambar",
+    "audio": "Bunyi",
+    "subtitles": "Sari kata",
+    "wrong": "Tajuk salah",
+    "other": "Lain-lain"
+  },
+  "holidays": {
+    "valentines": "Untuk Hari Valentine",
+    "easter": "Untuk Easter",
+    "halloween": "Musim seram",
+    "thanksgiving": "Untuk Thanksgiving",
+    "christmas": "Kegemaran Krismas",
+    "newyear": "Sambut tahun baharu"
+  },
+  "discover": {
+    "rows": {
+      "trending": "Sohor kini",
+      "popular-movies": "Filem popular",
+      "popular-shows": "Siri popular",
+      "upcoming-movies": "Akan datang di pawagam",
+      "upcoming-shows": "Siri baharu akan datang"
+    },
+    "because": "Kerana anda menonton {{title}}",
+    "status": {
+      "available": "Dalam pustaka anda",
+      "added": "Dalam perjalanan",
+      "requested": "Diminta"
+    },
+    "kind": {
+      "movie": "Filem",
+      "show": "Siri"
+    }
+  }
+}

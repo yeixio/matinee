@@ -1,17 +1,20 @@
 package metadata
 
 import (
+	"cmp"
 	"context"
 	"encoding/json"
 	"fmt"
 	"net/http"
 	"net/url"
+	"regexp"
 	"slices"
 	"sort"
 	"strconv"
 	"strings"
 	"time"
 
+	"github.com/yeixio/matinee/i18n"
 	"github.com/yeixio/matinee/internal/store"
 )
 
@@ -249,9 +252,10 @@ type Video struct {
 	Type string // Trailer or Teaser
 }
 
-// Trailers lists a movie's, show's or season's trailers, best first: official
-// trailers, then other trailers, then teasers. kind is movie or show; season
-// is 0 for a whole show.
+// Trailers lists a movie's, show's or season's trailers, best first: those
+// in the context's language (store.WithLanguage), then English ones; within
+// each, official trailers, then other trailers, then teasers. kind is movie
+// or show; season is 0 for a whole show.
 func (t *TMDB) Trailers(ctx context.Context, kind string, id int64, season int) ([]Video, error) {
 	path := fmt.Sprintf("/movie/%d/videos", id)
 	switch {
@@ -268,17 +272,26 @@ func (t *TMDB) Trailers(ctx context.Context, kind string, id int64, season int) 
 			Type        string `json:"type"`
 			Official    bool   `json:"official"`
 			PublishedAt string `json:"published_at"`
+			Language    string `json:"iso_639_1"`
 		} `json:"results"`
 	}
-	params := url.Values{"include_video_language": {"en,null"}}
+	languages := "en,null"
+	own := strings.Split(i18n.TMDBLanguage(store.LanguageFrom(ctx)), "-")[0]
+	if own != "" && own != i18n.Source {
+		languages = own + "," + languages
+	}
+	params := url.Values{"include_video_language": {languages}}
 	if err := t.get(ctx, path, params, &res); err != nil {
 		if err == errNotFound {
 			return nil, nil
 		}
 		return nil, err
 	}
-	rank := func(typ string, official bool) int {
+	rank := func(lang, typ string, official bool) int {
 		r := 0
+		if own != "" && lang != own {
+			r += 4
+		}
 		if typ != "Trailer" {
 			r += 2
 		}
@@ -294,7 +307,7 @@ func (t *TMDB) Trailers(ctx context.Context, kind string, id int64, season int) 
 		}
 	}
 	sort.SliceStable(vids, func(i, j int) bool {
-		ri, rj := rank(vids[i].Type, vids[i].Official), rank(vids[j].Type, vids[j].Official)
+		ri, rj := rank(vids[i].Language, vids[i].Type, vids[i].Official), rank(vids[j].Language, vids[j].Type, vids[j].Official)
 		if ri != rj {
 			return ri < rj
 		}
@@ -306,3 +319,110 @@ func (t *TMDB) Trailers(ctx context.Context, kind string, id int64, season int) 
 	}
 	return out, nil
 }
+
+// Translations looks up a movie's or show's title, description and tagline
+// in every language TMDB has them in, keyed by i18n language.
+func (t *TMDB) Translations(ctx context.Context, kind string, id int64) (map[string]store.Translation, error) {
+	path := fmt.Sprintf("/movie/%d/translations", id)
+	if kind == "show" {
+		path = fmt.Sprintf("/tv/%d/translations", id)
+	}
+	var res struct {
+		Translations []struct {
+			Language string `json:"iso_639_1"`
+			Country  string `json:"iso_3166_1"`
+			Data     struct {
+				Title    string `json:"title"`
+				Name     string `json:"name"`
+				Overview string `json:"overview"`
+				Tagline  string `json:"tagline"`
+			} `json:"data"`
+		} `json:"translations"`
+	}
+	if err := t.get(ctx, path, nil, &res); err != nil {
+		if err == errNotFound {
+			return map[string]store.Translation{}, nil
+		}
+		return nil, err
+	}
+	// A language can have several countries' translations (es-ES, es-MX):
+	// each field comes from the best fit that has it.
+	type fit struct {
+		tr                       store.Translation
+		title, overview, tagline int
+	}
+	best := map[string]*fit{}
+	for _, tr := range res.Translations {
+		code, score := i18n.FromTMDB(tr.Language, tr.Country)
+		if score == 0 {
+			continue
+		}
+		f := best[code]
+		if f == nil {
+			f = &fit{}
+			best[code] = f
+		}
+		take := func(value string, have *int, field *string) {
+			if v := strings.TrimSpace(value); v != "" && score > *have {
+				*field, *have = v, score
+			}
+		}
+		take(cmp.Or(tr.Data.Title, tr.Data.Name), &f.title, &f.tr.Title)
+		take(tr.Data.Overview, &f.overview, &f.tr.Overview)
+		take(tr.Data.Tagline, &f.tagline, &f.tr.Tagline)
+	}
+	out := map[string]store.Translation{}
+	for code, f := range best {
+		if f.tr != (store.Translation{}) {
+			out[code] = f.tr
+		}
+	}
+	return out, nil
+}
+
+// SeasonTranslation looks up a season's name and description in one i18n
+// language, with each episode's, keyed by episode number. Text TMDB has no
+// translation for is left empty.
+func (t *TMDB) SeasonTranslation(ctx context.Context, showID int64, season int, lang string) (store.Translation, map[int]store.Translation, error) {
+	var res struct {
+		Name     string `json:"name"`
+		Overview string `json:"overview"`
+		Episodes []struct {
+			Number   int    `json:"episode_number"`
+			Name     string `json:"name"`
+			Overview string `json:"overview"`
+		} `json:"episodes"`
+	}
+	params := url.Values{"language": {i18n.TMDBLanguage(lang)}}
+	if err := t.get(ctx, fmt.Sprintf("/tv/%d/season/%d", showID, season), params, &res); err != nil {
+		if err == errNotFound {
+			return store.Translation{}, nil, nil
+		}
+		return store.Translation{}, nil, err
+	}
+	episodes := map[int]store.Translation{}
+	for _, e := range res.Episodes {
+		tr := store.Translation{Overview: strings.TrimSpace(e.Overview)}
+		// Without a translated name TMDB makes one up, such as "Folge 3";
+		// it's only worth showing with a translated description.
+		if name := strings.TrimSpace(e.Name); name != "" && (tr.Overview != "" || !numbered(name, e.Number)) {
+			tr.Title = name
+		}
+		if tr != (store.Translation{}) {
+			episodes[e.Number] = tr
+		}
+	}
+	return store.Translation{Title: strings.TrimSpace(res.Name), Overview: strings.TrimSpace(res.Overview)}, episodes, nil
+}
+
+// numbered reports whether an episode's name is only a word or two and its
+// number, such as "Episode 3", "Folge 3" or "第 3 集".
+func numbered(name string, n int) bool {
+	runs := digitRuns.FindAllStringIndex(name, -1)
+	if len(runs) != 1 || name[runs[0][0]:runs[0][1]] != strconv.Itoa(n) {
+		return false
+	}
+	return len(strings.Fields(name[:runs[0][0]]+" "+name[runs[0][1]:])) <= 2
+}
+
+var digitRuns = regexp.MustCompile(`[0-9]+`)

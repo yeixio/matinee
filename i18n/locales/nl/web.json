@@ -1,0 +1,715 @@
+{
+  "loading": "Laden",
+  "nav": {
+    "home": "Start",
+    "watchList": "Kijklijst",
+    "collections": "Collecties",
+    "scanning": "Scannen",
+    "search": "Zoeken",
+    "comingSoon": "Binnenkort",
+    "requests": "Verzoeken",
+    "signIn": "Inloggen",
+    "settings": "Instellingen",
+    "switchProfile": "Profiel wisselen",
+    "signOut": "Uitloggen",
+    "discover": "Ontdekken"
+  },
+  "cantReachServer": "Kan de server niet bereiken. Opnieuw proberen…",
+  "player": {
+    "subtitlesFailed": "Deze ondertiteling kon niet worden geladen",
+    "off": "Uit",
+    "convertsVideo": "Zet video om",
+    "file": "Bestand",
+    "seek": "Spoelen",
+    "previous": "Vorige",
+    "pause": "Pauze",
+    "next": "Volgende",
+    "closePlayer": "Speler sluiten",
+    "failedDetail": "Afspelen mislukt. Het bestand is misschien beschadigd of in een formaat dat de server niet kan omzetten.",
+    "failed": "Afspelen mislukt",
+    "back10": "10 seconden terug",
+    "forward10": "10 seconden vooruit",
+    "unmute": "Geluid aan",
+    "mute": "Dempen",
+    "converting": "Omzetten",
+    "fullscreen": "Volledig scherm"
+  },
+  "somethingWentWrong": "Er ging iets mis",
+  "oneMoment": "Een moment…",
+  "auth": {
+    "username": "Gebruikersnaam",
+    "password": "Wachtwoord",
+    "signIn": "Inloggen",
+    "welcomeBack": "Welkom terug.",
+    "setUp": "Matinee instellen",
+    "setUpHint": "Maak het beheerdersaccount aan. Familie en vrienden kun je later toevoegen.",
+    "createAccount": "Account maken"
+  },
+  "home": {
+    "welcome": "Welkom bij Matinee",
+    "welcomeHint": "Voeg een map met films, series of muziek toe om te beginnen.",
+    "addLibrary": "Bibliotheek toevoegen",
+    "continueWatching": "Verder kijken",
+    "recentlyAdded": "Onlangs toegevoegd",
+    "newReleases": "Nieuwe releases",
+    "scanning": "Je bibliotheek wordt gescand",
+    "scanningHint": "Nieuwe titels verschijnen hier zodra ze gevonden zijn.",
+    "removeNamed": "{{title}} uit Verder kijken halen",
+    "remove": "Uit Verder kijken halen"
+  },
+  "hero": {
+    "upNext": "Hierna",
+    "justAdded": "Net toegevoegd",
+    "details": "Details"
+  },
+  "item": {
+    "resume": "Hervatten",
+    "resumeLeft": "Hervatten · nog {{left}}",
+    "play": "Afspelen",
+    "resumeFrom": "Hervatten vanaf {{time}}",
+    "resumeEpisode": "Aflevering {{episode}} hervatten",
+    "playEpisode": "Aflevering {{episode}} afspelen",
+    "shuffle": "Willekeurig",
+    "seasons": "Seizoenen",
+    "albums": "Albums",
+    "episodes": "Afleveringen"
+  },
+  "row": {
+    "back": "Terug scrollen",
+    "forward": "Verder scrollen"
+  },
+  "artwork": {
+    "fetching": "Details ophalen…"
+  },
+  "close": "Sluiten",
+  "file": {
+    "audio": "Audio",
+    "subtitles": "Ondertiteling",
+    "title": "Bestandsdetails",
+    "notYet": "Matinee heeft dit bestand nog niet in detail bekeken. Het leest elk bestand langzaam op de achtergrond, dus dit vult zich vanzelf.",
+    "unreadable": "Matinee kon dit bestand niet lezen: {{error}}",
+    "stale": "Het bestand is sindsdien gewijzigd; het wordt binnenkort opnieuw bekeken.",
+    "file": "Bestand",
+    "location": "Locatie",
+    "size": "Grootte",
+    "format": "Formaat",
+    "length": "Lengte",
+    "bitrate": "Bitrate",
+    "chapters": "Hoofdstukken",
+    "video": "Video",
+    "videoN": "Video {{n}}",
+    "codec": "Codec",
+    "resolution": "Resolutie",
+    "frameRate": "Framerate",
+    "fps": "{{rate}} fps",
+    "bitDepth": "Bitdiepte",
+    "dynamicRange": "Dynamisch bereik",
+    "dvProfile": "profiel {{profile}}",
+    "dvProfileLevel": "profiel {{profile}}, niveau {{level}}",
+    "fallback": "{{format}} als terugval",
+    "color": "Kleur",
+    "trackN": "Spoor {{n}}",
+    "default": "Standaard",
+    "forced": "Geforceerd",
+    "commentary": "Commentaar",
+    "audioDescription": "Audiodescriptie",
+    "separateFile": "Apart bestand",
+    "inFile": "In het bestand",
+    "sdh": "SDH",
+    "recorded": "Vastgelegd {{when}}",
+    "queued": "In de wachtrij; is als volgende aan de beurt.",
+    "analyzeAgain": "Opnieuw analyseren"
+  },
+  "listSeparator": ", ",
+  "credits": {
+    "seriesCast": "Cast van de serie",
+    "cast": "Cast",
+    "guestStars": "Gastrollen",
+    "starring": "Met",
+    "moreDetails": "Meer details",
+    "crew": "Crew",
+    "about": "Over",
+    "awards": "Prijzen",
+    "won": "Gewonnen",
+    "nominated": "Genomineerd",
+    "wonIn": "Gewonnen in {{year}}",
+    "nominatedIn": "Genomineerd in {{year}}",
+    "showAll": "Alle {{count}} tonen",
+    "awardsSource": "Prijzen van Wikidata."
+  },
+  "cancel": "Annuleren",
+  "upNext": {
+    "upNext": "Hierna",
+    "stillWatching": "Kijk je nog?",
+    "youMightLike": "Misschien vind je dit leuk",
+    "playingIn": "Speelt over {{seconds}}",
+    "playNow": "Nu afspelen",
+    "keepWatching": "Blijven kijken",
+    "haveALook": "Even kijken",
+    "stop": "Stoppen"
+  },
+  "goBack": "Ga terug",
+  "back": "Terug",
+  "trailer": {
+    "trailer": "Trailer",
+    "named": "Trailer van {{title}}",
+    "wontPlay": "Deze trailer kan niet worden afgespeeld."
+  },
+  "watchList": {
+    "on": "Op je kijklijst",
+    "add": "Op kijklijst zetten",
+    "empty": "Nog niets bewaard",
+    "emptyHint": "Open een film of serie en kies Kijklijst om hem hier te bewaren voor later. Films gaan van de lijst zodra je ze gezien hebt.",
+    "browse": "Bladeren"
+  },
+  "related": {
+    "moreLikeThis": "Meer zoals dit"
+  },
+  "boxSet": {
+    "notFound": "Box niet gevonden",
+    "notFoundHint": "Geen van de titels staat nu in een bibliotheek.",
+    "boxSet": "Box"
+  },
+  "search": {
+    "placeholder": "Films, series, artiesten, albums…",
+    "nothing": "Niets komt overeen met ‘{{q}}’",
+    "lookingForNew": "Op zoek naar iets nieuws?",
+    "addIt": "Toevoegen",
+    "askForIt": "Aanvragen"
+  },
+  "person": {
+    "notFound": "Persoon niet gevonden",
+    "showLess": "Minder tonen",
+    "readMore": "Meer lezen",
+    "inLibrary": "In je bibliotheek"
+  },
+  "library": {
+    "library": "Bibliotheek",
+    "matches_one": "{{count}} resultaat",
+    "matches_other": "{{count}} resultaten",
+    "scanning": "Scannen…",
+    "nothingUnwatched": "Niets ongezien hier",
+    "nothingMatches": "Niets komt overeen",
+    "seenEverything": "Je hebt alles in deze bibliotheek gezien.",
+    "clearFilters": "Filters wissen",
+    "appearAsFound": "Titels verschijnen zodra ze gevonden worden.",
+    "noMedia": "Matinee heeft in {{paths}} gezocht en geen media gevonden."
+  },
+  "nothingHereYet": "Hier is nog niets",
+  "collection": {
+    "notFound": "Collectie niet gevonden",
+    "notFoundHint": "Hij is misschien verwijderd.",
+    "smart": "Slimme collectie",
+    "collection": "Collectie",
+    "shuffledDaily": "Dagelijks geschud",
+    "editRules": "Regels bewerken",
+    "edit": "Bewerken",
+    "delete": "Collectie verwijderen",
+    "deleteConfirm": "{{name}} verwijderen? De titels blijven in je bibliotheek.",
+    "nothingMatchesYet": "Nog niets komt overeen",
+    "joinByRules": "Titels komen er vanzelf bij als ze aan de regels voldoen.",
+    "howToAdd": "Open een film of serie en kies Collecties om hem toe te voegen."
+  },
+  "collections": {
+    "newShort": "Nieuw",
+    "new": "Nieuwe collectie",
+    "newSmartShort": "Nieuw slim",
+    "newSmart": "Nieuwe slimme collectie",
+    "none": "Nog geen collecties",
+    "noneHint": "Een slimme collectie vult zichzelf volgens regels, zoals ongeziene actie uit de jaren 80. Boxen verschijnen hier zodra twee van hun titels in een bibliotheek staan.",
+    "yours": "Van jou",
+    "shared": "Gedeeld",
+    "forEveryone": "Collecties voor iedereen",
+    "boxSets": "Boxen",
+    "sort": {
+      "own": "Eigen volgorde",
+      "title": "Titel",
+      "added": "Datum toegevoegd",
+      "released": "Releasedatum",
+      "year": "Jaar",
+      "rating": "Beoordeling",
+      "runtime": "Speelduur",
+      "lastPlayed": "Laatst afgespeeld",
+      "shuffle": "Dagelijks schudden"
+    },
+    "smartShort": "Slim",
+    "editNamed": "{{name}} bewerken",
+    "name": "Naam",
+    "smartExample": "Ongeziene actie uit de jaren 80",
+    "manualExample": "Filmavond",
+    "rules": "Regels",
+    "rulesHint": "Titels die aan deze filters voldoen, komen er vanzelf bij als de bibliotheek verandert.",
+    "shuffleDaily": "Elke dag schudden",
+    "order": "Volgorde",
+    "orderAdded": "De volgorde waarin titels zijn toegevoegd",
+    "direction": "Richting",
+    "usual": "Gebruikelijk",
+    "ascending": "Oplopend",
+    "descending": "Aflopend",
+    "showAsRow": "Als rij tonen",
+    "onHome": "Op Start",
+    "onLibraryPage": "Op een bibliotheekpagina",
+    "shareWithEveryone": "Delen met iedereen op deze server",
+    "saveAs": "Opslaan als collectie"
+  },
+  "save": "Opslaan",
+  "create": "Maken",
+  "loadingDots": "Laden…",
+  "filters": {
+    "title": "Filters",
+    "inUse_one": "Filters, {{count}} actief",
+    "inUse_other": "Filters, {{count}} actief",
+    "sortBy": "Sorteren op",
+    "highestFirst": "Hoogste eerst",
+    "lowestFirst": "Laagste eerst",
+    "highestFirstSwitch": "Hoogste eerst; wissel naar laagste eerst",
+    "lowestFirstSwitch": "Laagste eerst; wissel naar hoogste eerst",
+    "not": "Niet {{label}}",
+    "remove": "{{label}} verwijderen",
+    "chip": {
+      "words": "‘{{q}}’",
+      "directedBy": "Regie: {{name}}",
+      "with": "Met {{name}}",
+      "releasedWithin": "Uitgebracht in {{within}}",
+      "releasedAfter": "Uitgebracht na {{date}}",
+      "releasedBefore": "Uitgebracht voor {{date}}",
+      "addedWithin": "Toegevoegd in {{within}}",
+      "addedAfter": "Toegevoegd na {{date}}",
+      "addedBefore": "Toegevoegd voor {{date}}",
+      "ratingMin": "Beoordeeld {{rating}}+",
+      "ratingMax": "Beoordeeld {{rating}} of lager",
+      "certification": "Classificatie {{rating}}",
+      "watchList": "Op mijn kijklijst"
+    },
+    "collection": "Collectie",
+    "active": "Actieve filters",
+    "clearAll": "Alles wissen",
+    "more_one": "Nog {{count}}",
+    "more_other": "Nog {{count}}",
+    "any": "Alle",
+    "all": "Alle",
+    "anyTime": "Altijd",
+    "runtime": {
+      "under30": "Minder dan 30 min",
+      "30to60": "30–60 min",
+      "overHour": "Meer dan een uur",
+      "under90": "Minder dan 90 min",
+      "90to120": "90 min – 2 uur",
+      "over2Hours": "Meer dan 2 uur"
+    },
+    "wordsInTitle": "Woorden in de titel",
+    "onlyWatchList": "Alleen titels op mijn kijklijst",
+    "fromYear": "Vanaf jaar",
+    "toYear": "Tot jaar",
+    "from": "Van",
+    "to": "tot",
+    "toPlaceholder": "Tot",
+    "lastWeek": "Afgelopen week",
+    "last30Days": "Afgelopen 30 dagen",
+    "last3Months": "Afgelopen 3 maanden",
+    "lastYear": "Afgelopen jaar",
+    "ratingAtLeast": "{{rating}}+",
+    "findPerson": "Persoon zoeken",
+    "nobody": "Niemand met die naam in deze bibliotheek.",
+    "showResults": "Resultaten tonen",
+    "section": {
+      "title": "Titel",
+      "watched": "Bekeken",
+      "genre": "Genre",
+      "year": "Jaar",
+      "firstAired": "Eerste uitzending",
+      "released": "Uitgebracht",
+      "added": "Toegevoegd",
+      "rating": "Beoordeling",
+      "episodeLength": "Afleveringsduur",
+      "runtime": "Speelduur",
+      "quality": "Kwaliteit",
+      "network": "Zender of studio",
+      "studio": "Studio",
+      "ageRating": "Leeftijdsclassificatie",
+      "language": "Oorspronkelijke taal",
+      "country": "Land",
+      "creator": "Bedacht of geregisseerd door",
+      "director": "Regie",
+      "people": "Cast en crew"
+    }
+  },
+  "appearance": {
+    "title": "Weergave",
+    "useServerTheme": "Thema van de server gebruiken ({{name}})",
+    "guestHint": "Iedereen thuis zonder account deelt dit thema.",
+    "hint": "Je thema volgt je naar de Matinee-apps op je telefoon en tv.",
+    "theme": "Thema",
+    "preview": {
+      "tonight": "Vanavond",
+      "trailer": "Trailer"
+    },
+    "serverTheme": "Serverthema",
+    "serverThemeHint": "Wat iedereen ziet tot ze er zelf een kiezen, en op de inlogpagina.",
+    "custom": "{{name}} (eigen)",
+    "addYourOwn": "Wil je je eigen thema toevoegen? Zet een themabestand in de map <code>themes</code> in de gegevensmap van de server.",
+    "howTo": "Een thema maken",
+    "skipped": "Overgeslagen: {{problem}}"
+  },
+  "newFiles": {
+    "title": "Nieuwe bestanden",
+    "intro": "Matinee merkt bestanden op die je toevoegt, hernoemt of verwijdert en werkt de bibliotheek een paar seconden na het kopiëren bij.",
+    "watch": "Op nieuwe bestanden letten",
+    "summary": {
+      "some": "Sommige mappen elke {{every}} gecontroleerd",
+      "watching": "Let op nieuwe bestanden",
+      "polling": "Elke {{every}} op nieuwe bestanden gecontroleerd",
+      "pollingShare": "Elke {{every}} op nieuwe bestanden gecontroleerd (netwerkshare)",
+      "off": "Niet op nieuwe bestanden gecontroleerd"
+    },
+    "mode": {
+      "auto": {
+        "label": "Automatisch",
+        "hint": "Meteen op de eigen schijven van deze server. Netwerkshares (SMB, NFS) melden geen wijzigingen, dus Matinee controleert die elke {{every}}."
+      },
+      "poll": {
+        "label": "Op een timer controleren",
+        "hint": "Elke map wordt elke {{every}} gecontroleerd. Kies dit als nieuwe bestanden op een schijf niet vanzelf verschijnen."
+      },
+      "off": {
+        "label": "Uit",
+        "hint": "Nieuwe bestanden verschijnen bij de volgende volledige scan, of als je op Scannen drukt."
+      }
+    },
+    "rescan": "Elke bibliotheek wordt ook elke {{every}} volledig opnieuw gescand, zodat al het andere ook wordt opgemerkt, zoals een bestand dat op een share is vervangen.",
+    "rescanOff": "Volledige scans staan uit op deze server (MATINEE_SCAN_INTERVAL=0)."
+  },
+  "analysis": {
+    "title": "Media-analyse",
+    "intro": "Matinee leest elk bestand langzaam voor de kwaliteit, het geluid en de talen, en opnieuw zodra een bestand verandert.",
+    "state": {
+      "lookingAt": "Bekijkt {{file}}",
+      "working": "Bezig",
+      "waiting": "Wacht tot het afspelen klaar is",
+      "slowDisk": "Bestanden lezen traag; een paar minuten pauze",
+      "allDone": "Elk bestand is geanalyseerd",
+      "upToDate": "Bijgewerkt",
+      "paused": "Gepauzeerd"
+    },
+    "progress": "{{done}} van {{total}}",
+    "unreadable_one": "{{count}} bestand kon niet worden gelezen.",
+    "unreadable_other": "{{count}} bestanden konden niet worden gelezen.",
+    "speed": "Snelheid",
+    "mode": {
+      "gentle": {
+        "label": "Rustig",
+        "hint": "Elke paar seconden één bestand, en geen terwijl de server iets omzet om af te spelen."
+      },
+      "normal": {
+        "label": "Normaal",
+        "hint": "Bestanden achter elkaar, nog steeds met de laagste prioriteit."
+      },
+      "off": {
+        "label": "Uit",
+        "hint": "Gepauzeerd tot je het weer aanzet."
+      }
+    }
+  },
+  "profileSettings": {
+    "title": "Profielen",
+    "intro": "Profielen delen een login maar houden hun eigen voortgang, kijklijst en thema. Kinderprofielen zien alleen wat jij toestaat. Een pincode houdt een profiel, of het account zelf, voor de eigenaar.",
+    "pinFor": "Een pincode van 4 cijfers voor {{name}}",
+    "homeDevices": "Apparaten op je thuisnetwerk die niet zijn ingelogd",
+    "account": "Account",
+    "removePin": "Pincode verwijderen",
+    "addPin": "Pincode toevoegen",
+    "hasPin": "Heeft een pincode",
+    "edit": "{{name}} bewerken",
+    "remove": "{{name}} verwijderen",
+    "confirmRemove": "{{name}} verwijderen? De voortgang en kijklijst gaan ook weg.",
+    "add": "Profiel toevoegen",
+    "name": "Naam",
+    "newPin": "Nieuwe pincode",
+    "pinOptional": "Pincode (optioneel)",
+    "unchanged": "Ongewijzigd",
+    "fourDigits": "4 cijfers",
+    "removeThePin": "De pincode verwijderen",
+    "colour": "Kleur",
+    "kidsMode": "Kindermodus",
+    "kidsOff": "Uit: ziet alles",
+    "kidsLevel": "{{name}}: {{ratings}}",
+    "kidsLibraries": "Wat dit profiel in elke bibliotheek ziet. ‘Op classificatie’ verbergt titels boven het niveau {{level}} en titels zonder classificatie. Kinderprofielen kunnen Instellingen niet openen en geen verzoeken doen.",
+    "libraryMode": {
+      "hidden": "Verborgen",
+      "rated": "Op classificatie",
+      "all": "Alles"
+    }
+  },
+  "report": {
+    "thanks": "Bedankt, een beheerder kijkt ernaar.",
+    "button": "Een probleem melden",
+    "whatsWrong": "Wat is er mis met {{title}}?",
+    "details": "Details (optioneel)",
+    "detailsExample": "Bijvoorbeeld: geen geluid na 20 minuten",
+    "send": "Versturen"
+  },
+  "quality": {
+    "label": "Kwaliteit",
+    "forShow": "Kwaliteit voor de serie",
+    "confirm": "Overschakelen naar {{name}}? {{app}} zoekt naar kopieën die passen.",
+    "searching": "Zoeken…"
+  },
+  "upcoming": {
+    "nothingYet": "Nog niets te zien",
+    "connect": "Koppel Radarr of Sonarr om de films en afleveringen te zien die eraan komen.",
+    "openSettings": "Instellingen openen",
+    "notConnected": "Een beheerder heeft Radarr of Sonarr nog niet aan deze server gekoppeld.",
+    "intro": "Nieuwe afleveringen en filmreleases van de komende twee maanden die er nog niet zijn.",
+    "unavailable": "{{apps}} reageerde niet, dus er kan iets ontbreken.",
+    "nothing": "Niets onderweg. Vraag iets nieuws aan via Verzoeken."
+  },
+  "link": {
+    "title": "Een apparaat inloggen",
+    "intro": "Voer de code in die je telefoon of tv toont.",
+    "signedIn": "{{device}} is ingelogd",
+    "ready": "Het is over een paar seconden klaar.",
+    "declined": "Geweigerd",
+    "notSignedIn": "{{device}} is niet ingelogd.",
+    "another": "Nog een apparaat inloggen",
+    "code": "Code",
+    "next": "Volgende",
+    "wantsToSignIn": "wil inloggen als <name>{{name}}</name>",
+    "warning": "Keur alleen een apparaat goed dat je vasthoudt of kunt zien. Het krijgt dezelfde toegang als jij.",
+    "decline": "Weigeren",
+    "approve": "Inloggen"
+  },
+  "profiles": {
+    "whoIsWatching": "Wie kijkt er?",
+    "signInWithAccount": "Inloggen met een account",
+    "enterPin": "Voer de pincode van {{name}} in",
+    "pin": "Pincode",
+    "deleteDigit": "Wissen"
+  },
+  "integrations": {
+    "title": "Radarr en Sonarr",
+    "intro": "Koppel ze zodat iedereen films en series kan aanvragen, kan zien wat er binnenkort komt en problemen kan melden.",
+    "connected": "Gekoppeld · {{url}}",
+    "notConnected": {
+      "radarr": "Niet gekoppeld · voor films",
+      "sonarr": "Niet gekoppeld · voor series"
+    },
+    "change": "Wijzigen",
+    "connect": "Koppelen",
+    "address": "Adres",
+    "apiKey": "API-sleutel",
+    "keyWhere": "{{app}} → Settings → General",
+    "saved": "Opgeslagen",
+    "answers": "{{app}} {{version}} antwoordt op {{url}}",
+    "quality": {
+      "radarr": "Kwaliteit voor nieuwe films",
+      "sonarr": "Kwaliteit voor nieuwe series"
+    },
+    "folder": "Map",
+    "confirmDisconnect": "{{app}} ontkoppelen? Titels die er al in staan, blijven daar.",
+    "disconnect": "Ontkoppelen",
+    "testing": "Testen…",
+    "test": "Testen",
+    "whoCanAdd": "Wie films en series kan toevoegen",
+    "mode": {
+      "approve": {
+        "label": "Aanvragen, daarna keurt een beheerder goed",
+        "detail": "Iedereen met een account kan een titel aanvragen. Die wacht op een beheerder."
+      },
+      "auto": {
+        "label": "Meteen toevoegen",
+        "detail": "Aanvragen gaan direct naar Radarr of Sonarr."
+      },
+      "off": {
+        "label": "Alleen beheerders voegen titels toe",
+        "detail": "Alle anderen kunnen nog steeds zien wat er binnenkort komt en problemen melden."
+      }
+    },
+    "overseerr": {
+      "intro": "Koppel het om een tabblad Ontdekken toe te voegen: wat populair is, aanbevelingen op basis van wat mensen kijken, en een manier om alles aan te vragen. Jellyseerr werkt ook.",
+      "notConnected": "Niet gekoppeld · voor Ontdekken",
+      "requestAs": "Aanvragen van mensen zonder Overseerr-account",
+      "madeAsOwner": "Gedaan als {{name}} (eigenaar van de API-sleutel)",
+      "madeAs": "Gedaan als {{name}}",
+      "sameName": "Wie een Overseerr-account met dezelfde naam heeft, vraagt aan als zichzelf. Overseerr bepaalt welke aanvragen goedkeuring nodig hebben, op basis van ieders rechten daar.",
+      "confirmDisconnect": "Overseerr ontkoppelen? Het tabblad Ontdekken verdwijnt."
+    }
+  },
+  "requests": {
+    "tab": {
+      "ask": "Iets aanvragen",
+      "requests": "Verzoeken",
+      "yourRequests": "Jouw verzoeken",
+      "problems": "Problemen",
+      "yourReports": "Jouw meldingen"
+    },
+    "movies": "Films",
+    "shows": "Series",
+    "findMovie": "Een film zoeken…",
+    "findShow": "Een serie zoeken…",
+    "nothingFound": "Niets gevonden voor ‘{{q}}’",
+    "ready": "Klaar om te kijken",
+    "askedFor": "Aangevraagd",
+    "onItsWay": "Onderweg",
+    "add": "Toevoegen",
+    "askForIt": "Aanvragen",
+    "state": {
+      "pending": "Wacht op goedkeuring",
+      "approved": "Onderweg",
+      "declined": "Geweigerd",
+      "failed": "Kon niet worden toegevoegd"
+    },
+    "none": "Nog geen verzoeken.",
+    "retry": "Opnieuw proberen",
+    "approve": "Goedkeuren",
+    "remove": "Het verzoek voor {{title}} verwijderen",
+    "removedFromLibrary": "Uit de bibliotheek verwijderd",
+    "noProblems": "Niemand heeft een probleem gemeld.",
+    "noReports": "Je hebt nog geen problemen gemeld. Gebruik ‘Een probleem melden’ bij een titel.",
+    "fileReplaced": "Bestand vervangen",
+    "closed": "Gesloten",
+    "confirmReplace": "Dit bestand van {{title}} verwijderen en een andere kopie downloaden? De nieuwe verschijnt zodra hij gedownload is en de bibliotheek gescand is.",
+    "replaceFile": "Bestand vervangen",
+    "close": "Sluiten"
+  },
+  "settings": {
+    "tmdbNotice": "Posters en beschrijvingen komen van <link>TMDB</link>. Dit product gebruikt de TMDB-API maar wordt niet door TMDB onderschreven of gecertificeerd.",
+    "libraries": {
+      "title": "Bibliotheken",
+      "none": "Nog geen bibliotheken.",
+      "scan": "Scannen",
+      "remove": "{{name}} verwijderen",
+      "confirmRemove": "‘{{name}}’ verwijderen? Je bestanden blijven waar ze zijn.",
+      "kind": {
+        "movies": "Films",
+        "tv": "Tv-series",
+        "music": "Muziek"
+      },
+      "type": "Type",
+      "folders": "Mappen",
+      "up": "Eén map omhoog",
+      "added": "Toegevoegd",
+      "useFolder": "Deze map gebruiken",
+      "noSubfolders": "Geen submappen"
+    },
+    "people": {
+      "title": "Mensen",
+      "admin": "Beheerder",
+      "passwordChanged": "Wachtwoord gewijzigd. {{name}} is overal uitgelogd.",
+      "you": "(jij)",
+      "removeAdmin": "Beheerder af maken",
+      "makeAdmin": "Beheerder maken",
+      "resetPassword": "Wachtwoord opnieuw instellen",
+      "remove": "Verwijderen",
+      "newPasswordFor": "Nieuw wachtwoord voor {{name}}",
+      "setPassword": "Wachtwoord instellen",
+      "confirmRemove": "<name>{{name}}</name> verwijderen? Kijkgeschiedenis, kijklijst, downloads en verzoeken gaan ook weg, en diegene wordt overal uitgelogd. Dit kan niet ongedaan worden gemaakt."
+    },
+    "account": {
+      "title": "Je account",
+      "changePassword": "Wachtwoord wijzigen",
+      "current": "Huidig wachtwoord",
+      "new": "Nieuw wachtwoord",
+      "again": "Nieuw wachtwoord herhalen",
+      "hint": "Minstens 8 tekens. Je andere apparaten worden uitgelogd.",
+      "mismatch": "De nieuwe wachtwoorden komen niet overeen.",
+      "changed": "Wachtwoord gewijzigd. Je andere apparaten zijn uitgelogd."
+    },
+    "devices": {
+      "aWhileAgo": "een tijdje geleden",
+      "justNow": "zojuist",
+      "title": "Je apparaten",
+      "unknown": "Onbekend apparaat",
+      "this": "Dit apparaat",
+      "lastUsed": "Laatst gebruikt {{when}}",
+      "confirmSignOut": "‘{{name}}’ uitloggen?"
+    },
+    "version": "Matinee-server {{version}} · API v{{api}}",
+    "home": {
+      "title": "Thuisnetwerk",
+      "requireSignIn": "Ook thuis om inloggen vragen",
+      "required": "Iedereen logt in, thuis en onderweg.",
+      "open": "Telefoons, tv’s en browsers op je thuisnetwerk kunnen kijken zonder in te loggen. Ze delen één Thuis-account en kunnen niets wijzigen. Buitenshuis logt iedereen in."
+    },
+    "remote": {
+      "title": "Toegang op afstand",
+      "publicURL": "Buitenshuis maken de apps verbinding met <url>{{url}}</url>, het adres waarmee deze server is ingesteld.",
+      "toggle": "Buitenshuis kijken",
+      "hint": "Matinee vraagt je router een poort te openen en haalt een certificaat op, zodat de apps overal veilig verbinding maken. Van buitenaf logt iedereen in.",
+      "working": "Poort op je router openen en een certificaat ophalen…",
+      "ready": "Buitenshuis bereiken de apps deze server op <url>{{url}}</url>.",
+      "router": "Je router heeft de poort geopend via {{router}}.",
+      "pickUp": "Ze nemen dit adres over zodra ze weer op je thuisnetwerk zijn.",
+      "sharedAddress": "Matinee kan dit nog niet zelf omzeilen.",
+      "retry": "Matinee probeert het elk half uur opnieuw."
+    },
+    "playback": {
+      "title": "Afspelen",
+      "autoPlay": "De volgende aflevering afspelen",
+      "autoPlayHint": "Als de aftiteling begint, start de volgende aflevering na een aftelling van 10 seconden die je kunt annuleren.",
+      "binge": "De aftelling overslaan",
+      "bingeHint": "Meteen door naar de volgende aflevering als de aftiteling begint. Na drie op rij zonder iets aan te raken, wordt gevraagd of je nog kijkt."
+    },
+    "trailers": {
+      "title": "Trailers",
+      "remote": "Trailers van YouTube",
+      "remoteOn": "Films en series bieden hun trailers van TMDB aan, die via YouTube spelen. Trailerbestanden naast je media verschijnen ook altijd.",
+      "remoteOff": "Alleen trailerbestanden naast je media verschijnen, zoals ‘Film (2020)-trailer.mkv’ of alles in een map Trailers."
+    },
+    "transcoding": {
+      "title": "Transcoderen",
+      "intro": "Bestanden die een apparaat niet zomaar kan afspelen, worden omgezet terwijl je kijkt. Een GPU doet dat sneller en met minder belasting voor de server.",
+      "convertingWith": "Omzetten met",
+      "active": "{{name}}.",
+      "activeOn": "{{name}} op {{detail}}.",
+      "fullGPU": "Video wordt op de GPU gedecodeerd, geschaald en gecodeerd.",
+      "encodeOnly": "Video wordt op de GPU gecodeerd en op de CPU gedecodeerd.",
+      "fallback": "Kan de GPU een bestand niet aan, dan speelt het via de CPU.",
+      "testing": "De GPU van deze server testen…",
+      "cpuOff": "De CPU. Hardwaretranscoderen staat uit.",
+      "cpuFailed": "De CPU, omdat de gekozen versneller niet werkte op deze server.",
+      "cpuNoGPU": "De CPU. Geen GPU op deze server is door de test gekomen.",
+      "hardware": "Hardwareversnelling",
+      "auto": "Automatisch: de beste die werkt",
+      "off": "Uit: altijd de CPU gebruiken",
+      "notFound": "{{name}} (niet gevonden op deze server)",
+      "accelerator": {
+        "nvenc": "NVIDIA NVENC",
+        "vaapi": "VAAPI (AMD en Intel op Linux)",
+        "qsv": "Intel Quick Sync",
+        "videotoolbox": "VideoToolbox (Mac)",
+        "amf": "AMD AMF (Windows)",
+        "v4l2m2m": "V4L2 (Raspberry Pi)"
+      }
+    },
+    "homeRows": {
+      "title": "Start",
+      "holidays": "Feestdagrijen",
+      "holidaysDetail": "In de maand voor Valentijnsdag, Pasen, Halloween, Thanksgiving en Kerstmis, en de week voor oudejaarsavond, begint Start met een rij titels voor die dag, gekozen op trefwoorden, titels en beschrijvingen."
+    }
+  },
+  "language": {
+    "title": "Taal",
+    "label": "Matinee tonen in",
+    "hint": "Je taal volgt je naar de Matinee-apps op je telefoon en tv. Titels en beschrijvingen verschijnen er ook in, als TMDB ze heeft.",
+    "guestHint": "Iedereen thuis zonder account deelt deze taal.",
+    "automatic": "Automatisch ({{language}})",
+    "machine": "Deze taal is machinaal vertaald, dus sommige woorden klinken misschien vreemd.",
+    "help": "Help mee om het te verbeteren"
+  },
+  "discover": {
+    "title": "Ontdekken",
+    "emptyTitle": "Nog niets te ontdekken",
+    "connectIt": "Koppel Overseerr om te zien wat populair is, aanbevelingen te krijgen en nieuwe films en series aan te vragen.",
+    "openSettings": "Instellingen openen",
+    "notConnected": "Een beheerder heeft Overseerr nog niet aan deze server gekoppeld.",
+    "placeholder": "Zoek een film of serie…",
+    "unavailable": "Ontdekken is nu niet beschikbaar",
+    "open": "Openen",
+    "request": "Aanvragen",
+    "requestShow": "Serie aanvragen",
+    "asking": "Bezig met aanvragen…",
+    "waiting": "Wacht op goedkeuring van een beheerder.",
+    "onItsWay": "Verschijnt in je bibliotheek zodra het is gedownload.",
+    "findIt": "Zoeken in Ontdekken"
+  }
+}

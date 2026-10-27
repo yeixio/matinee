@@ -1,11 +1,13 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { BookmarkCheck, BookmarkPlus } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import { api, canWatchList, type ItemDetail } from '../api'
 import { Button } from './ui'
 
 // Adds a movie or show to the watch list, or takes it off. The button flips
 // right away and flips back if the server says no.
 export function WatchListButton({ item }: { item: ItemDetail }) {
+  const { t } = useTranslation()
   const qc = useQueryClient()
   const key = ['item', item.id]
   const toggle = useMutation({
@@ -34,7 +36,7 @@ export function WatchListButton({ item }: { item: ItemDetail }) {
       aria-pressed={on}
       icon={on ? <BookmarkCheck className="size-4 text-accent" /> : <BookmarkPlus className="size-4" />}
     >
-      {on ? 'On your watch list' : 'Add to watch list'}
+      {on ? t('watchList.on') : t('watchList.add')}
     </Button>
   )
 }

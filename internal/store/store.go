@@ -324,6 +324,18 @@ var migrations = []string{
 		PRIMARY KEY (collection_id, item_id)
 	)`,
 	"CREATE INDEX collection_items_item ON collection_items(item_id)",
+	// 45–46: titles, descriptions and taglines in other languages (see
+	// translations.go), and when a title's were last looked up.
+	`CREATE TABLE item_translations (
+		item_id  BIGINT NOT NULL REFERENCES items(id) ON DELETE CASCADE,
+		language TEXT NOT NULL, -- an i18n language, such as de or pt-BR
+		title    TEXT NOT NULL DEFAULT '',
+		overview TEXT NOT NULL DEFAULT '',
+		tagline  TEXT NOT NULL DEFAULT '',
+		search   TEXT NOT NULL DEFAULT '', -- the title in lower case, which SQLite's LOWER can't do beyond ASCII
+		PRIMARY KEY (item_id, language)
+	)`,
+	"ALTER TABLE items ADD COLUMN translations_at BIGINT",
 }
 
 func now() int64 { return time.Now().Unix() }

@@ -66,11 +66,11 @@ func (s *Server) overseerrError(w http.ResponseWriter, r *http.Request, err erro
 		writeError(w, http.StatusNotFound, "Overseerr doesn't know this title")
 	case errors.As(err, &oe):
 		s.Log.Warn("overseerr", "err", err)
-		msg := oe.Message
 		if !currentUser(r).IsAdmin && oe.Status != http.StatusConflict {
-			msg = "Overseerr isn't answering right now. Try again later."
+			writeError(w, http.StatusBadGateway, "Overseerr isn't answering right now. Try again later.")
+			return
 		}
-		writeError(w, http.StatusBadGateway, msg)
+		writeError(w, http.StatusBadGateway, oe.Message)
 	default:
 		s.serverError(w, err)
 	}
@@ -226,9 +226,12 @@ type discoverTitle struct {
 }
 
 type discoverRow struct {
-	ID    string          `json:"id"`
-	Title string          `json:"title"`
-	Items []discoverTitle `json:"items"`
+	ID    string `json:"id"`
+	Title string `json:"title"`
+	// Because is the title watched, on a because-{item id} row, so apps can
+	// word the row in their own language.
+	Because string          `json:"because,omitempty"`
+	Items   []discoverTitle `json:"items"`
 }
 
 type discoverView struct {
@@ -308,7 +311,7 @@ func (s *Server) discover(w http.ResponseWriter, r *http.Request) {
 	var jobs []job
 	for _, t := range watched {
 		jobs = append(jobs, job{
-			row:       discoverRow{ID: "because-" + strconv.FormatInt(t.ItemID, 10), Title: "Because you watched " + t.Title},
+			row:       discoverRow{ID: "because-" + strconv.FormatInt(t.ItemID, 10), Title: "Because you watched " + t.Title, Because: t.Title},
 			dropOwned: true,
 			load: func() ([]overseerr.Title, error) {
 				return cached(&s.discoverCache, "rec:"+t.Kind+":"+strconv.Itoa(t.TMDBID), time.Hour, func() ([]overseerr.Title, error) {
@@ -457,13 +460,13 @@ func (s *Server) discoverRequest(w http.ResponseWriter, r *http.Request) {
 	}
 	switch v.Status {
 	case titleAvailable:
-		writeError(w, http.StatusConflict, t.Title+" is already in your library")
+		writeErrorWith(w, http.StatusConflict, "{{title}} is already in your library", map[string]string{"title": t.Title})
 		return
 	case titleAdded:
-		writeError(w, http.StatusConflict, t.Title+" is already on its way")
+		writeErrorWith(w, http.StatusConflict, "{{title}} is already on its way", map[string]string{"title": t.Title})
 		return
 	case titleRequested:
-		writeError(w, http.StatusConflict, "someone already asked for "+t.Title)
+		writeErrorWith(w, http.StatusConflict, "someone already asked for {{title}}", map[string]string{"title": t.Title})
 		return
 	}
 	as, err := s.requestUser(ctx, cl, c, currentUser(r))

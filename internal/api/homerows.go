@@ -51,6 +51,8 @@ type HomeRow struct {
 	Genre string `json:"genre"`
 	// CollectionID is set on the rows of collections pinned to Home.
 	CollectionID string `json:"collectionId,omitempty"`
+	// Starter is set on a built-in collection's row (see store.starters).
+	Starter string `json:"starter,omitempty"`
 	// Holiday is set on the row for a holiday coming up, e.g. "halloween"
 	// (see holidays.go).
 	Holiday string       `json:"holiday,omitempty"`

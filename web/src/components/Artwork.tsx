@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { imageUrl, type Item } from '../api'
 import { hue } from '../format'
 
@@ -15,6 +16,7 @@ export function Artwork({
   className?: string
   label?: boolean
 }) {
+  const { t } = useTranslation()
   // Seasons, tracks and episodes borrow artwork from their show or album on the server.
   const borrows = item.kind === 'season' || item.kind === 'track' || item.kind === 'episode'
   // An episode without its own still shows the show's backdrop instead.
@@ -29,7 +31,7 @@ export function Artwork({
       style={{ backgroundImage: `linear-gradient(140deg, hsl(${h} 35% 22%), hsl(${(h + 40) % 360} 30% 10%))` }}
     >
       {item.pending && (!has || failed || !loaded) && (
-        <div className="pending-sweep absolute inset-0" title="Fetching details…" aria-label="Fetching details" />
+        <div className="pending-sweep absolute inset-0" title={t('artwork.fetching')} aria-label={t('artwork.fetching')} />
       )}
       {(!has || failed || !loaded) && label && (
         <div className="absolute inset-0 flex items-end p-3">

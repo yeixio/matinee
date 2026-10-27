@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
+import { useTranslation } from 'react-i18next'
 import { api, type ItemDetail } from '../api'
 import { PosterCard } from './Card'
 import { boxSetLink } from './Collections'
@@ -6,6 +7,7 @@ import { Row, RowItem } from './Row'
 
 // The movie's collection, then other titles in the library like it.
 export function RelatedRows({ item }: { item: ItemDetail }) {
+  const { t } = useTranslation()
   const enabled = item.kind === 'movie' || item.kind === 'show'
   const { data } = useQuery({ queryKey: ['related', item.id], queryFn: () => api.related(item.id), enabled })
   if (!enabled || !data) return null
@@ -23,7 +25,7 @@ export function RelatedRows({ item }: { item: ItemDetail }) {
         </Row>
       )}
       {data.items.length > 0 && (
-        <Row title="More like this">
+        <Row title={t('related.moreLikeThis')}>
           {data.items.map((it) => (
             <RowItem key={it.id}>
               <PosterCard item={it} />

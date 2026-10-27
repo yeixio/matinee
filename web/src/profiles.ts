@@ -2,6 +2,7 @@
 // filters what kids profiles see; these helpers decide what the web player
 // shows around that. The phone and TV apps mirror them in src/profiles.ts.
 import type { ProfileChoice, User } from './api'
+import i18n from './i18n'
 
 // Avatar colours, by the names the server stores. They mark people, so they
 // stay the same in every theme.
@@ -18,12 +19,19 @@ export const avatarColors: Record<string, string> = {
 
 export const avatarColor = (avatar?: string) => avatarColors[avatar ?? ''] ?? avatarColors.slate
 
-// Kids levels, from the youngest up, with the US ratings each adds.
-export const kidsLevels = [
-  { level: 1, name: 'Little kids', ratings: 'G, TV-Y, TV-G' },
-  { level: 2, name: 'Kids', ratings: 'PG, TV-Y7, TV-PG and younger' },
-  { level: 3, name: 'Teens', ratings: 'PG-13, TV-14 and younger' },
-]
+// Kids levels, from the youngest up, with the US ratings each adds. Names
+// are read when shown, in the page's language.
+const kidsLevel = (level: number, key: string, ratings: string) => ({
+  level,
+  get name() {
+    return i18n.t(`common:kids.${key}`)
+  },
+  get ratings() {
+    return level === 1 ? ratings : i18n.t('common:kids.andYounger', { ratings })
+  },
+})
+
+export const kidsLevels = [kidsLevel(1, 'littleKids', 'G, TV-Y, TV-G'), kidsLevel(2, 'kids', 'PG, TV-Y7, TV-PG'), kidsLevel(3, 'teens', 'PG-13, TV-14')]
 
 export const kidsLevelName = (level?: number) => kidsLevels.find((l) => l.level === level)?.name ?? ''
 

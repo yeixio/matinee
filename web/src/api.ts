@@ -3,6 +3,7 @@
 // requests just need to be same-origin.
 
 import { type ItemFilter, toSearchParams } from './filter'
+import i18n from './i18n'
 
 // guest is the shared account of a device at home that hasn't signed in, or
 // one of its profiles. Profiles have accountId; kids profiles have kidsLevel
@@ -178,7 +179,7 @@ export type DiscoverTitle = {
   itemId?: number
 }
 
-export type DiscoverRow = { id: string; title: string; items: DiscoverTitle[] }
+export type DiscoverRow = { id: string; title: string; because?: string; items: DiscoverTitle[] }
 
 export type OverseerrConnection = { connected: boolean; url: string; hasApiKey: boolean; requestAs: number }
 export type OverseerrConfig = { url: string; apiKey?: string; requestAs?: number }
@@ -319,7 +320,9 @@ export const pendingRefetch = (items?: Item[]) => (items?.some((i) => i.pending)
 
 export type SubtitleTrack = {
   id: string
+  // label is in English; subtitleLabel (media.ts) makes one in the page's language.
   label: string
+  note?: string
   language?: string
   codec: string
   forced?: boolean
@@ -331,7 +334,7 @@ export type SubtitleTrack = {
 }
 
 /** One of the home screen's rows: a holiday coming up, a pinned collection, or a genre (a different few each day). */
-export type HomeRow = { id: string; title: string; genre: string; collectionId?: string; holiday?: string; items: Item[] }
+export type HomeRow = { id: string; title: string; genre: string; collectionId?: string; starter?: string; holiday?: string; items: Item[] }
 
 /** The orders a collection can have; "" is its own (the filter's, or the order titles were added in). */
 export type CollectionSort = '' | 'title' | 'added' | 'released' | 'year' | 'rating' | 'runtime' | 'lastPlayed' | 'shuffle'
@@ -524,11 +527,15 @@ export type AnalysisStatus = {
   current?: string
 }
 
+// message is in the page's language where the catalog has the server's
+// error code (errors.json), else the server's English.
 export class ApiError extends Error {
   status: number
-  constructor(status: number, message: string) {
-    super(message)
+  code?: string
+  constructor(status: number, message: string, code?: string, params?: Record<string, string>) {
+    super(code && i18n.exists(`errors:${code}`) ? i18n.t(`errors:${code}`, params) : message)
     this.status = status
+    this.code = code
   }
 }
 
@@ -541,12 +548,17 @@ async function request<T>(method: string, path: string, body?: unknown): Promise
   })
   if (!res.ok) {
     let message = res.statusText
+    let code: string | undefined
+    let params: Record<string, string> | undefined
     try {
-      message = (await res.json()).error ?? message
+      const body = await res.json()
+      message = body.error ?? message
+      code = body.code
+      params = body.params
     } catch {
       // not JSON
     }
-    throw new ApiError(res.status, message)
+    throw new ApiError(res.status, message, code, params)
   }
   if (res.status === 204 || res.status === 202) return undefined as T
   return res.json() as Promise<T>
@@ -592,6 +604,9 @@ export const api = {
   // theme: "" follows the server's default.
   myTheme: () => request<{ theme: string }>('GET', '/api/v1/me/theme'),
   setMyTheme: (theme: string) => request<{ theme: string }>('PUT', '/api/v1/me/theme', { theme }),
+  // language: "" follows the browser.
+  myLanguage: () => request<{ language: string }>('GET', '/api/v1/me/language'),
+  setMyLanguage: (language: string) => request<{ language: string }>('PUT', '/api/v1/me/language', { language }),
   playback: () => request<PlaybackPrefs>('GET', '/api/v1/me/playback'),
   setPlayback: (p: PlaybackPrefs) => request<PlaybackPrefs>('PUT', '/api/v1/me/playback', p),
   users: () => request<User[]>('GET', '/api/v1/users'),
@@ -681,7 +696,7 @@ export const api = {
     request<{ url: string; startSec: number }>('POST', `/api/v1/items/${id}/trailers/${encodeURIComponent(trailer)}/hls`),
   subtitles: async (id: number, track: string) => {
     const res = await fetch(`/api/v1/items/${id}/subtitles/${encodeURIComponent(track)}.vtt`, { credentials: 'same-origin' })
-    if (!res.ok) throw new ApiError(res.status, "Couldn't load these subtitles")
+    if (!res.ok) throw new ApiError(res.status, i18n.t('web:player.subtitlesFailed'))
     return res.text()
   },
 }

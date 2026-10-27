@@ -1,0 +1,711 @@
+{
+  "loading": "正在載入",
+  "nav": {
+    "home": "首頁",
+    "watchList": "待看清單",
+    "collections": "合集",
+    "scanning": "正在掃描",
+    "search": "搜尋",
+    "comingSoon": "即將推出",
+    "requests": "請求",
+    "signIn": "登入",
+    "settings": "設定",
+    "switchProfile": "切換個人資料",
+    "signOut": "登出",
+    "discover": "探索"
+  },
+  "cantReachServer": "無法連線伺服器。正在重試…",
+  "player": {
+    "subtitlesFailed": "無法載入這些字幕",
+    "off": "關",
+    "convertsVideo": "轉換影片",
+    "file": "檔案",
+    "seek": "跳轉",
+    "previous": "上一個",
+    "pause": "暫停",
+    "next": "下一個",
+    "closePlayer": "關閉播放器",
+    "failedDetail": "播放失敗。檔案可能已損壞，或者格式是伺服器無法轉換的。",
+    "failed": "播放失敗",
+    "back10": "後退 10 秒",
+    "forward10": "前進 10 秒",
+    "unmute": "取消靜音",
+    "mute": "靜音",
+    "converting": "正在轉換",
+    "fullscreen": "全螢幕"
+  },
+  "somethingWentWrong": "出了點問題",
+  "oneMoment": "請稍候…",
+  "auth": {
+    "username": "使用者名稱",
+    "password": "密碼",
+    "signIn": "登入",
+    "welcomeBack": "歡迎回來。",
+    "setUp": "設定 Matinee",
+    "setUpHint": "建立管理員帳號。家人和朋友可以稍後再新增。",
+    "createAccount": "建立帳號"
+  },
+  "home": {
+    "welcome": "歡迎使用 Matinee",
+    "welcomeHint": "新增一個電影、劇集或音樂資料夾來開始使用。",
+    "addLibrary": "新增媒體庫",
+    "continueWatching": "繼續觀看",
+    "recentlyAdded": "最近新增",
+    "newReleases": "新上映",
+    "scanning": "正在掃描你的媒體庫",
+    "scanningHint": "新作品一找到就會顯示在這裡。",
+    "removeNamed": "從繼續觀看中移除《{{title}}》",
+    "remove": "從繼續觀看中移除"
+  },
+  "hero": {
+    "upNext": "接下來",
+    "justAdded": "剛剛新增",
+    "details": "詳情"
+  },
+  "item": {
+    "resume": "繼續",
+    "resumeLeft": "繼續 · 剩餘 {{left}}",
+    "play": "播放",
+    "resumeFrom": "從 {{time}} 繼續",
+    "resumeEpisode": "繼續第 {{episode}} 集",
+    "playEpisode": "播放第 {{episode}} 集",
+    "shuffle": "隨機播放",
+    "seasons": "季",
+    "albums": "專輯",
+    "episodes": "劇集"
+  },
+  "row": {
+    "back": "向前滾動",
+    "forward": "向後滾動"
+  },
+  "artwork": {
+    "fetching": "正在取得詳情…"
+  },
+  "close": "關閉",
+  "file": {
+    "audio": "音訊",
+    "subtitles": "字幕",
+    "title": "檔案詳情",
+    "notYet": "Matinee 還沒有仔細查看這個檔案。它會在背景慢慢讀取每個檔案，這裡會自動補全。",
+    "unreadable": "Matinee 無法讀取這個檔案：{{error}}",
+    "stale": "記錄之後檔案已更改，很快會重新查看。",
+    "file": "檔案",
+    "location": "位置",
+    "size": "大小",
+    "format": "格式",
+    "length": "時長",
+    "bitrate": "位元率",
+    "chapters": "章節",
+    "video": "影片",
+    "videoN": "影片 {{n}}",
+    "codec": "編解碼器",
+    "resolution": "解析度",
+    "frameRate": "影格速率",
+    "fps": "{{rate}} fps",
+    "bitDepth": "位元深度",
+    "dynamicRange": "動態範圍",
+    "dvProfile": "配置 {{profile}}",
+    "dvProfileLevel": "配置 {{profile}}，級別 {{level}}",
+    "fallback": "{{format}} 備援",
+    "color": "色彩",
+    "trackN": "音軌 {{n}}",
+    "default": "預設",
+    "forced": "強制",
+    "commentary": "評論音軌",
+    "audioDescription": "口述影像",
+    "separateFile": "單獨檔案",
+    "inFile": "內嵌",
+    "sdh": "SDH",
+    "recorded": "記錄於 {{when}}",
+    "queued": "已排隊，下一個就查看它。",
+    "analyzeAgain": "重新分析"
+  },
+  "listSeparator": "、",
+  "credits": {
+    "seriesCast": "劇集演員",
+    "cast": "演員",
+    "guestStars": "客串",
+    "starring": "主演",
+    "moreDetails": "更多詳情",
+    "crew": "劇組",
+    "about": "簡介",
+    "awards": "獎項",
+    "won": "獲獎",
+    "nominated": "提名",
+    "wonIn": "{{year}} 年獲獎",
+    "nominatedIn": "{{year}} 年提名",
+    "showAll": "顯示全部 {{count}} 項",
+    "awardsSource": "獎項資訊來自 Wikidata。"
+  },
+  "cancel": "取消",
+  "upNext": {
+    "upNext": "接下來",
+    "stillWatching": "還在看嗎？",
+    "youMightLike": "你可能會喜歡",
+    "playingIn": "{{seconds}}後播放",
+    "playNow": "立即播放",
+    "keepWatching": "繼續看",
+    "haveALook": "看一看",
+    "stop": "停止"
+  },
+  "goBack": "返回",
+  "back": "返回",
+  "trailer": {
+    "trailer": "預告片",
+    "named": "《{{title}}》預告片",
+    "wontPlay": "這個預告片無法播放。"
+  },
+  "watchList": {
+    "on": "已在待看清單中",
+    "add": "加入待看清單",
+    "empty": "還沒有儲存任何內容",
+    "emptyHint": "開啟一部電影或劇集並選擇「待看清單」，就能留到以後再看。電影看完後會自動移出清單。",
+    "browse": "瀏覽"
+  },
+  "related": {
+    "moreLikeThis": "更多類似內容"
+  },
+  "boxSet": {
+    "notFound": "找不到電影系列",
+    "notFoundHint": "它的作品目前都不在任何媒體庫中。",
+    "boxSet": "電影系列"
+  },
+  "search": {
+    "placeholder": "電影、劇集、藝人、專輯…",
+    "nothing": "沒有與「{{q}}」匹配的內容",
+    "lookingForNew": "想找點新東西？",
+    "addIt": "新增",
+    "askForIt": "請求新增"
+  },
+  "person": {
+    "notFound": "找不到此人",
+    "showLess": "收起",
+    "readMore": "展開",
+    "inLibrary": "在你的媒體庫中"
+  },
+  "library": {
+    "library": "媒體庫",
+    "matches_other": "{{count}} 個匹配項",
+    "scanning": "正在掃描…",
+    "nothingUnwatched": "這裡沒有未看的內容",
+    "nothingMatches": "沒有匹配項",
+    "seenEverything": "這個媒體庫裡的內容你都看過了。",
+    "clearFilters": "清除篩選",
+    "appearAsFound": "作品會在找到後陸續顯示。",
+    "noMedia": "Matinee 在 {{paths}} 中尋找過，但沒有找到媒體。"
+  },
+  "nothingHereYet": "這裡還沒有內容",
+  "collection": {
+    "notFound": "找不到合集",
+    "notFoundHint": "它可能已被刪除。",
+    "smart": "智慧合集",
+    "collection": "合集",
+    "shuffledDaily": "每天隨機排序",
+    "editRules": "編輯規則",
+    "edit": "編輯",
+    "delete": "刪除合集",
+    "deleteConfirm": "要刪除「{{name}}」嗎？作品仍會保留在你的媒體庫中。",
+    "nothingMatchesYet": "還沒有匹配的內容",
+    "joinByRules": "符合規則的作品會自動加入。",
+    "howToAdd": "開啟一部電影或劇集並選擇「合集」即可新增。"
+  },
+  "collections": {
+    "newShort": "新建",
+    "new": "新建合集",
+    "newSmartShort": "新建智慧",
+    "newSmart": "新建智慧合集",
+    "none": "還沒有合集",
+    "noneHint": "智慧合集會按規則自動填充，比如「未看的 80 年代動作片」。電影系列中有兩部作品進入媒體庫後，就會顯示在這裡。",
+    "yours": "我的",
+    "shared": "共享",
+    "forEveryone": "所有人的合集",
+    "boxSets": "電影系列",
+    "sort": {
+      "own": "自定順序",
+      "title": "標題",
+      "added": "新增日期",
+      "released": "上映日期",
+      "year": "年份",
+      "rating": "評分",
+      "runtime": "片長",
+      "lastPlayed": "上次播放",
+      "shuffle": "每天隨機排序"
+    },
+    "smartShort": "智慧",
+    "editNamed": "編輯「{{name}}」",
+    "name": "名稱",
+    "smartExample": "未看的 80 年代動作片",
+    "manualExample": "電影之夜",
+    "rules": "規則",
+    "rulesHint": "符合這些篩選條件的作品會隨媒體庫變化自動加入。",
+    "shuffleDaily": "每天隨機排序",
+    "order": "順序",
+    "orderAdded": "作品的新增順序",
+    "direction": "方向",
+    "usual": "常規",
+    "ascending": "升序",
+    "descending": "降序",
+    "showAsRow": "顯示為一行",
+    "onHome": "在首頁",
+    "onLibraryPage": "在媒體庫頁面",
+    "shareWithEveryone": "與此伺服器上的所有人共享",
+    "saveAs": "儲存為合集"
+  },
+  "save": "儲存",
+  "create": "建立",
+  "loadingDots": "正在載入…",
+  "filters": {
+    "title": "篩選",
+    "inUse_other": "篩選，已使用 {{count}} 項",
+    "sortBy": "排序方式",
+    "highestFirst": "從高到低",
+    "lowestFirst": "從低到高",
+    "highestFirstSwitch": "從高到低；切換為從低到高",
+    "lowestFirstSwitch": "從低到高；切換為從高到低",
+    "not": "不是{{label}}",
+    "remove": "移除{{label}}",
+    "chip": {
+      "words": "「{{q}}」",
+      "directedBy": "導演：{{name}}",
+      "with": "主演：{{name}}",
+      "releasedWithin": "{{within}}上映",
+      "releasedAfter": "{{date}}之後上映",
+      "releasedBefore": "{{date}}之前上映",
+      "addedWithin": "{{within}}新增",
+      "addedAfter": "{{date}}之後新增",
+      "addedBefore": "{{date}}之前新增",
+      "ratingMin": "評分 {{rating}}+",
+      "ratingMax": "評分 {{rating}} 及以下",
+      "certification": "{{rating}} 級",
+      "watchList": "在我的待看清單中"
+    },
+    "collection": "合集",
+    "active": "使用中的篩選",
+    "clearAll": "全部清除",
+    "more_other": "另外 {{count}} 項",
+    "any": "任意",
+    "all": "全部",
+    "anyTime": "任何時間",
+    "runtime": {
+      "under30": "不到 30 分鐘",
+      "30to60": "30–60 分鐘",
+      "overHour": "超過一小時",
+      "under90": "不到 90 分鐘",
+      "90to120": "90 分鐘 – 2 小時",
+      "over2Hours": "超過 2 小時"
+    },
+    "wordsInTitle": "標題中的字詞",
+    "onlyWatchList": "僅限我的待看清單",
+    "fromYear": "起始年份",
+    "toYear": "結束年份",
+    "from": "從",
+    "to": "到",
+    "toPlaceholder": "到",
+    "lastWeek": "上週",
+    "last30Days": "過去 30 天",
+    "last3Months": "過去 3 個月",
+    "lastYear": "去年",
+    "ratingAtLeast": "{{rating}}+",
+    "findPerson": "尋找人物",
+    "nobody": "此媒體庫中沒有叫這個名字的人。",
+    "showResults": "顯示結果",
+    "section": {
+      "title": "標題",
+      "watched": "已看",
+      "genre": "類型",
+      "year": "年份",
+      "firstAired": "首播",
+      "released": "上映",
+      "added": "新增",
+      "rating": "評分",
+      "episodeLength": "單集時長",
+      "runtime": "片長",
+      "quality": "畫質",
+      "network": "電視網或製片公司",
+      "studio": "製片公司",
+      "ageRating": "年齡分級",
+      "language": "原始語言",
+      "country": "國家/地區",
+      "creator": "創作者或導演",
+      "director": "導演",
+      "people": "演職人員"
+    }
+  },
+  "appearance": {
+    "title": "外觀",
+    "useServerTheme": "使用伺服器主題（{{name}}）",
+    "guestHint": "家裡沒有帳號的人都使用這個主題。",
+    "hint": "你的主題會同步到手機和電視上的 Matinee App。",
+    "theme": "主題",
+    "preview": {
+      "tonight": "今晚",
+      "trailer": "預告片"
+    },
+    "serverTheme": "伺服器主題",
+    "serverThemeHint": "在大家選擇自己的主題之前看到的主題，也用於登入頁面。",
+    "custom": "{{name}}（自定義）",
+    "addYourOwn": "要新增自己的主題，請將主題檔案放入伺服器資料資料夾中的 <code>themes</code> 資料夾。",
+    "howTo": "如何製作主題",
+    "skipped": "已跳過 {{problem}}"
+  },
+  "newFiles": {
+    "title": "新檔案",
+    "intro": "Matinee 會注意到你新增、重新命名或刪除的檔案，並在複製完成幾秒後更新媒體庫。",
+    "watch": "監視新檔案",
+    "summary": {
+      "some": "部分資料夾每 {{every}}檢查一次",
+      "watching": "正在監視新檔案",
+      "polling": "每 {{every}}檢查一次新檔案",
+      "pollingShare": "每 {{every}}檢查一次新檔案（網路共享）",
+      "off": "未監視新檔案"
+    },
+    "mode": {
+      "auto": {
+        "label": "自動",
+        "hint": "伺服器自己的磁碟會立即更新。網路共享（SMB、NFS）不會通知變化，所以 Matinee 每 {{every}}檢查一次。"
+      },
+      "poll": {
+        "label": "定時檢查",
+        "hint": "每個資料夾每 {{every}}檢查一次。如果磁碟上的新檔案不會自動出現，請選擇此項。"
+      },
+      "off": {
+        "label": "關",
+        "hint": "新檔案會在下次完整掃描時出現，或在你點按「掃描」時出現。"
+      }
+    },
+    "rescan": "每個媒體庫還會每 {{every}}完整重新掃描一次，以發現其他變化，比如共享上被原地替換的檔案。",
+    "rescanOff": "此伺服器已關閉完整重新掃描（MATINEE_SCAN_INTERVAL=0）。"
+  },
+  "analysis": {
+    "title": "媒體分析",
+    "intro": "Matinee 會慢慢讀取每個檔案，瞭解畫質、聲音和語言，檔案有變化時會重新讀取。",
+    "state": {
+      "lookingAt": "正在查看 {{file}}",
+      "working": "工作中",
+      "waiting": "正在等待播放結束",
+      "slowDisk": "檔案讀取較慢，休息幾分鐘",
+      "allDone": "所有檔案都已分析",
+      "upToDate": "已是最新",
+      "paused": "已暫停"
+    },
+    "progress": "{{done}} / {{total}}",
+    "unreadable_other": "{{count}} 個檔案無法讀取。",
+    "speed": "速度",
+    "mode": {
+      "gentle": {
+        "label": "溫和",
+        "hint": "每隔幾秒處理一個檔案，伺服器為播放轉換內容時暫停。"
+      },
+      "normal": {
+        "label": "正常",
+        "hint": "連續處理檔案，仍保持最低優先順序。"
+      },
+      "off": {
+        "label": "關",
+        "hint": "已暫停，直到你重新開啟。"
+      }
+    }
+  },
+  "profileSettings": {
+    "title": "個人資料",
+    "intro": "個人資料共用一個登入，但各自保留觀看進度、待看清單和主題。兒童個人資料只能看到你允許的內容。PIN 可以讓個人資料或帳號本身只供主人使用。",
+    "pinFor": "{{name}}的 4 位 PIN",
+    "homeDevices": "家庭網路中未登入的裝置",
+    "account": "帳號",
+    "removePin": "移除 PIN",
+    "addPin": "新增 PIN",
+    "hasPin": "已設 PIN",
+    "edit": "編輯{{name}}",
+    "remove": "移除{{name}}",
+    "confirmRemove": "要移除{{name}}嗎？觀看進度和待看清單也會一併刪除。",
+    "add": "新增個人資料",
+    "name": "名稱",
+    "newPin": "新 PIN",
+    "pinOptional": "PIN（可選）",
+    "unchanged": "未更改",
+    "fourDigits": "4 位數字",
+    "removeThePin": "移除 PIN",
+    "colour": "顏色",
+    "kidsMode": "兒童模式",
+    "kidsOff": "關：可以看到全部",
+    "kidsLevel": "{{name}}：{{ratings}}",
+    "kidsLibraries": "此個人資料在各媒體庫中能看到的內容。「按分級」會隱藏分級高於 {{level}} 級的作品和沒有分級的作品。兒童個人資料無法開啟設定或提交請求。",
+    "libraryMode": {
+      "hidden": "隱藏",
+      "rated": "按分級",
+      "all": "全部"
+    }
+  },
+  "report": {
+    "thanks": "謝謝，管理員會查看。",
+    "button": "報告問題",
+    "whatsWrong": "《{{title}}》有什麼問題？",
+    "details": "詳情（可選）",
+    "detailsExample": "例如：20 分鐘後沒有聲音",
+    "send": "傳送"
+  },
+  "quality": {
+    "label": "畫質",
+    "forShow": "劇集畫質",
+    "confirm": "要切換到 {{name}} 嗎？{{app}} 會尋找匹配的版本。",
+    "searching": "正在搜尋…"
+  },
+  "upcoming": {
+    "nothingYet": "還沒有可顯示的內容",
+    "connect": "連線 Radarr 或 Sonarr，查看即將到來的電影和劇集。",
+    "openSettings": "開啟設定",
+    "notConnected": "管理員尚未將 Radarr 或 Sonarr 連線到此伺服器。",
+    "intro": "未來兩個月內尚未入庫的新劇集和電影。",
+    "unavailable": "{{apps}} 沒有回應，可能會缺少部分內容。",
+    "nothing": "暫無即將到來的內容。去「請求」裡請求點新東西吧。"
+  },
+  "link": {
+    "title": "登入裝置",
+    "intro": "輸入手機或電視上顯示的代碼。",
+    "signedIn": "{{device}} 已登入",
+    "ready": "幾秒後即可使用。",
+    "declined": "已拒絕",
+    "notSignedIn": "{{device}} 未登入。",
+    "another": "登入其他裝置",
+    "code": "代碼",
+    "next": "下一步",
+    "wantsToSignIn": "想以 <name>{{name}}</name> 的身份登入",
+    "warning": "只批准你手裡拿著或能看到的裝置。它將獲得與你相同的權限。",
+    "decline": "拒絕",
+    "approve": "登入"
+  },
+  "profiles": {
+    "whoIsWatching": "誰在看？",
+    "signInWithAccount": "使用帳號登入",
+    "enterPin": "輸入{{name}}的 PIN",
+    "pin": "PIN",
+    "deleteDigit": "刪除"
+  },
+  "integrations": {
+    "title": "Radarr 和 Sonarr",
+    "intro": "連線它們後，大家可以請求電影和劇集、查看即將推出的內容，並報告觀看時遇到的問題。",
+    "connected": "已連線 · {{url}}",
+    "notConnected": {
+      "radarr": "未連線 · 用於電影",
+      "sonarr": "未連線 · 用於劇集"
+    },
+    "change": "更改",
+    "connect": "連線",
+    "address": "地址",
+    "apiKey": "API 金鑰",
+    "keyWhere": "{{app}} → Settings → General",
+    "saved": "已儲存",
+    "answers": "{{app}} {{version}} 在 {{url}} 回應",
+    "quality": {
+      "radarr": "新電影的畫質",
+      "sonarr": "新劇集的畫質"
+    },
+    "folder": "資料夾",
+    "confirmDisconnect": "要斷開 {{app}} 嗎？其中已有的作品會保留。",
+    "disconnect": "斷開連線",
+    "testing": "正在測試…",
+    "test": "測試",
+    "whoCanAdd": "誰可以新增電影和劇集",
+    "mode": {
+      "approve": {
+        "label": "先請求，再由管理員批准",
+        "detail": "有帳號的人都可以請求作品，請求會等待管理員處理。"
+      },
+      "auto": {
+        "label": "直接新增",
+        "detail": "大家請求的內容會直接傳送到 Radarr 或 Sonarr。"
+      },
+      "off": {
+        "label": "只有管理員能新增作品",
+        "detail": "其他人仍然可以查看即將推出的內容並報告問題。"
+      }
+    },
+    "overseerr": {
+      "intro": "連線後會多出「探索」分頁:熱門趨勢、根據大家觀看內容的推薦,以及請求任何影片的方式。Jellyseerr 也可以。",
+      "notConnected": "未連線 · 用於「探索」",
+      "requestAs": "沒有 Overseerr 帳號的人的請求",
+      "madeAsOwner": "以 {{name}} 的身分送出(API 金鑰擁有者)",
+      "madeAs": "以 {{name}} 的身分送出",
+      "sameName": "在 Overseerr 中有同名帳號的人會以自己的身分請求。哪些請求需要核准,由 Overseerr 根據每位使用者在那裡的權限決定。",
+      "confirmDisconnect": "中斷 Overseerr 的連線?「探索」分頁將會消失。"
+    }
+  },
+  "requests": {
+    "tab": {
+      "ask": "請求內容",
+      "requests": "請求",
+      "yourRequests": "我的請求",
+      "problems": "問題",
+      "yourReports": "我的報告"
+    },
+    "movies": "電影",
+    "shows": "劇集",
+    "findMovie": "尋找電影…",
+    "findShow": "尋找劇集…",
+    "nothingFound": "沒有找到「{{q}}」",
+    "ready": "可以觀看",
+    "askedFor": "已請求",
+    "onItsWay": "即將到來",
+    "add": "新增",
+    "askForIt": "請求新增",
+    "state": {
+      "pending": "等待批准",
+      "approved": "即將到來",
+      "declined": "已拒絕",
+      "failed": "無法新增"
+    },
+    "none": "還沒有請求。",
+    "retry": "重試",
+    "approve": "批准",
+    "remove": "移除《{{title}}》的請求",
+    "removedFromLibrary": "已從媒體庫移除",
+    "noProblems": "還沒有人報告問題。",
+    "noReports": "你還沒有報告過問題。在作品頁面使用「報告問題」即可。",
+    "fileReplaced": "已替換檔案",
+    "closed": "已關閉",
+    "confirmReplace": "要刪除《{{title}}》的這個檔案並下載另一個版本嗎？新版本會在下載完成、媒體庫掃描後出現。",
+    "replaceFile": "替換檔案",
+    "close": "關閉"
+  },
+  "settings": {
+    "tmdbNotice": "海報和簡介來自 <link>TMDB</link>。本產品使用 TMDB API，但未獲得 TMDB 的認可或認證。",
+    "libraries": {
+      "title": "媒體庫",
+      "none": "還沒有媒體庫。",
+      "scan": "掃描",
+      "remove": "移除{{name}}",
+      "confirmRemove": "要移除「{{name}}」嗎？你的檔案會留在原處。",
+      "kind": {
+        "movies": "電影",
+        "tv": "電視劇",
+        "music": "音樂"
+      },
+      "type": "類型",
+      "folders": "資料夾",
+      "up": "上一級資料夾",
+      "added": "已新增",
+      "useFolder": "使用此資料夾",
+      "noSubfolders": "沒有子資料夾"
+    },
+    "people": {
+      "title": "成員",
+      "admin": "管理員",
+      "passwordChanged": "密碼已更改。{{name}}已在所有裝置上登出。",
+      "you": "（你）",
+      "removeAdmin": "取消管理員",
+      "makeAdmin": "設為管理員",
+      "resetPassword": "重置密碼",
+      "remove": "移除",
+      "newPasswordFor": "{{name}}的新密碼",
+      "setPassword": "設定密碼",
+      "confirmRemove": "要移除 <name>{{name}}</name> 嗎？其觀看記錄、待看清單、下載和請求也會一併刪除，並在所有裝置上登出。此操作無法撤銷。"
+    },
+    "account": {
+      "title": "我的帳號",
+      "changePassword": "更改密碼",
+      "current": "當前密碼",
+      "new": "新密碼",
+      "again": "再次輸入新密碼",
+      "hint": "至少 8 個字元。你的其他裝置將登出。",
+      "mismatch": "兩次輸入的新密碼不一致。",
+      "changed": "密碼已更改。你的其他裝置已登出。"
+    },
+    "devices": {
+      "aWhileAgo": "不久前",
+      "justNow": "剛剛",
+      "title": "我的裝置",
+      "unknown": "未知裝置",
+      "this": "此裝置",
+      "lastUsed": "上次使用：{{when}}",
+      "confirmSignOut": "要讓「{{name}}」登出嗎？"
+    },
+    "version": "Matinee 伺服器 {{version}} · API v{{api}}",
+    "home": {
+      "title": "家庭網路",
+      "requireSignIn": "在家也需要登入",
+      "required": "無論在家還是外出，所有人都需要登入。",
+      "open": "家庭網路中的手機、電視和瀏覽器無需登入即可觀看。它們共用一個「家庭」帳號，無法更改任何設定。外出時所有人都需要登入。"
+    },
+    "remote": {
+      "title": "遠端存取",
+      "publicURL": "外出時，App 會連線到 <url>{{url}}</url>，也就是設定此伺服器時使用的地址。",
+      "toggle": "在外觀看",
+      "hint": "Matinee 會請求路由器開啟一個埠並取得憑證，讓 App可以在任何地方安全連線。從外部存取時所有人都需要登入。",
+      "working": "正在路由器上開啟埠並取得憑證…",
+      "ready": "外出時，App 透過 <url>{{url}}</url> 存取此伺服器。",
+      "router": "路由器已透過 {{router}} 開啟埠。",
+      "pickUp": "它們下次連上家庭網路時會取得這個地址。",
+      "sharedAddress": "Matinee 暫時無法自行解決這個問題。",
+      "retry": "Matinee 每半小時重試一次。"
+    },
+    "playback": {
+      "title": "播放",
+      "autoPlay": "自動播放下一集",
+      "autoPlayHint": "片尾字幕開始時，會在可取消的 10 秒倒計時後播放下一集。",
+      "binge": "跳過倒計時",
+      "bingeHint": "片尾字幕一開始就直接進入下一集。連續三集沒有任何操作後，會詢問你是否還在看。"
+    },
+    "trailers": {
+      "title": "預告片",
+      "remote": "來自 YouTube 的預告片",
+      "remoteOn": "電影和劇集會提供來自 TMDB 的預告片，從 YouTube 播放。媒體旁邊的預告片檔案始終會顯示。",
+      "remoteOff": "僅顯示媒體旁邊的預告片檔案，例如「Movie (2020)-trailer.mkv」或 Trailers 資料夾中的任何檔案。"
+    },
+    "transcoding": {
+      "title": "轉碼",
+      "intro": "裝置無法直接播放的檔案會在觀看時轉換。用 GPU 轉換更快，伺服器負載也更低。",
+      "convertingWith": "轉換方式",
+      "active": "{{name}}。",
+      "activeOn": "{{detail}} 上的 {{name}}。",
+      "fullGPU": "影片的解碼、縮放和編碼都在 GPU 上進行。",
+      "encodeOnly": "影片在 GPU 上編碼，在 CPU 上解碼。",
+      "fallback": "如果 GPU 處理不了某個檔案，就改用 CPU 播放。",
+      "testing": "正在測試此伺服器的 GPU…",
+      "cpuOff": "CPU。硬體轉碼已關閉。",
+      "cpuFailed": "CPU，因為你選擇的加速器在此伺服器上無法工作。",
+      "cpuNoGPU": "CPU。此伺服器上沒有 GPU 透過測試。",
+      "hardware": "硬體加速",
+      "auto": "自動：可用的最佳選項",
+      "off": "關：始終使用 CPU",
+      "notFound": "{{name}}（此伺服器上未找到）",
+      "accelerator": {
+        "nvenc": "NVIDIA NVENC",
+        "vaapi": "VAAPI（Linux 上的 AMD 和 Intel）",
+        "qsv": "Intel Quick Sync",
+        "videotoolbox": "VideoToolbox（Mac）",
+        "amf": "AMD AMF（Windows）",
+        "v4l2m2m": "V4L2（Raspberry Pi）"
+      }
+    },
+    "homeRows": {
+      "title": "首頁",
+      "holidays": "節日列",
+      "holidaysDetail": "在情人節、復活節、萬聖節、感恩節和聖誕節前一個月,以及跨年夜前一週,首頁會以一列應景的影片開頭,依關鍵字、標題和簡介挑選。"
+    }
+  },
+  "language": {
+    "title": "語言",
+    "label": "Matinee 顯示語言",
+    "hint": "你的語言會同步到手機和電視上的 Matinee App。如果 TMDB 有相應內容，標題和簡介也會以該語言顯示。",
+    "guestHint": "家裡沒有帳號的人都使用這個語言。",
+    "automatic": "自動（{{language}}）",
+    "machine": "此語言為機器翻譯，部分用詞可能不太自然。",
+    "help": "幫助改進"
+  },
+  "discover": {
+    "title": "探索",
+    "emptyTitle": "暫時沒有可探索的內容",
+    "connectIt": "連線 Overseerr,查看熱門趨勢、取得推薦,並請求新的電影和影集。",
+    "openSettings": "開啟設定",
+    "notConnected": "管理員尚未將 Overseerr 連線到此伺服器。",
+    "placeholder": "尋找任何電影或影集…",
+    "unavailable": "「探索」暫時無法使用",
+    "open": "開啟",
+    "request": "請求",
+    "requestShow": "請求這部影集",
+    "asking": "正在請求…",
+    "waiting": "正在等待管理員核准。",
+    "onItsWay": "下載完成後會出現在你的媒體庫中。",
+    "findIt": "在「探索」中尋找"
+  }
+}

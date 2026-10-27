@@ -1,0 +1,711 @@
+{
+  "loading": "불러오는 중",
+  "nav": {
+    "home": "홈",
+    "watchList": "볼 목록",
+    "collections": "컬렉션",
+    "scanning": "스캔 중",
+    "search": "검색",
+    "comingSoon": "공개 예정",
+    "requests": "요청",
+    "signIn": "로그인",
+    "settings": "설정",
+    "switchProfile": "프로필 전환",
+    "signOut": "로그아웃",
+    "discover": "둘러보기"
+  },
+  "cantReachServer": "서버에 연결할 수 없습니다. 다시 시도하는 중…",
+  "player": {
+    "subtitlesFailed": "이 자막을 불러올 수 없습니다",
+    "off": "끄기",
+    "convertsVideo": "동영상 변환",
+    "file": "파일",
+    "seek": "탐색",
+    "previous": "이전",
+    "pause": "일시정지",
+    "next": "다음",
+    "closePlayer": "플레이어 닫기",
+    "failedDetail": "재생하지 못했습니다. 파일이 손상되었거나 서버가 변환할 수 없는 형식일 수 있습니다.",
+    "failed": "재생하지 못했습니다",
+    "back10": "10초 뒤로",
+    "forward10": "10초 앞으로",
+    "unmute": "음소거 해제",
+    "mute": "음소거",
+    "converting": "변환 중",
+    "fullscreen": "전체 화면"
+  },
+  "somethingWentWrong": "문제가 발생했습니다",
+  "oneMoment": "잠시만요…",
+  "auth": {
+    "username": "사용자 이름",
+    "password": "비밀번호",
+    "signIn": "로그인",
+    "welcomeBack": "다시 오신 것을 환영합니다.",
+    "setUp": "Matinee 설정",
+    "setUpHint": "관리자 계정을 만드세요. 가족과 친구는 나중에 추가할 수 있습니다.",
+    "createAccount": "계정 만들기"
+  },
+  "home": {
+    "welcome": "Matinee에 오신 것을 환영합니다",
+    "welcomeHint": "시작하려면 영화, 프로그램 또는 음악 폴더를 추가하세요.",
+    "addLibrary": "라이브러리 추가",
+    "continueWatching": "이어 보기",
+    "recentlyAdded": "최근 추가",
+    "newReleases": "새로 나온 작품",
+    "scanning": "라이브러리를 스캔하는 중",
+    "scanningHint": "새 작품은 발견되는 대로 여기에 표시됩니다.",
+    "removeNamed": "이어 보기에서 {{title}} 삭제",
+    "remove": "이어 보기에서 삭제"
+  },
+  "hero": {
+    "upNext": "다음 작품",
+    "justAdded": "방금 추가됨",
+    "details": "상세 정보"
+  },
+  "item": {
+    "resume": "이어 보기",
+    "resumeLeft": "이어 보기 · {{left}} 남음",
+    "play": "재생",
+    "resumeFrom": "{{time}}부터 이어 보기",
+    "resumeEpisode": "{{episode}}화 이어 보기",
+    "playEpisode": "{{episode}}화 재생",
+    "shuffle": "셔플",
+    "seasons": "시즌",
+    "albums": "앨범",
+    "episodes": "에피소드"
+  },
+  "row": {
+    "back": "뒤로 스크롤",
+    "forward": "앞으로 스크롤"
+  },
+  "artwork": {
+    "fetching": "상세 정보를 가져오는 중…"
+  },
+  "close": "닫기",
+  "file": {
+    "audio": "오디오",
+    "subtitles": "자막",
+    "title": "파일 정보",
+    "notYet": "Matinee가 아직 이 파일을 자세히 살펴보지 않았습니다. 백그라운드에서 모든 파일을 천천히 읽으므로 이 부분은 자동으로 채워집니다.",
+    "unreadable": "Matinee가 이 파일을 읽지 못했습니다: {{error}}",
+    "stale": "기록된 이후 파일이 변경되었습니다. 곧 다시 살펴봅니다.",
+    "file": "파일",
+    "location": "위치",
+    "size": "크기",
+    "format": "형식",
+    "length": "길이",
+    "bitrate": "비트레이트",
+    "chapters": "챕터",
+    "video": "비디오",
+    "videoN": "비디오 {{n}}",
+    "codec": "코덱",
+    "resolution": "해상도",
+    "frameRate": "프레임 속도",
+    "fps": "{{rate}}fps",
+    "bitDepth": "비트 심도",
+    "dynamicRange": "다이내믹 레인지",
+    "dvProfile": "프로필 {{profile}}",
+    "dvProfileLevel": "프로필 {{profile}}, 레벨 {{level}}",
+    "fallback": "{{format}} 대체",
+    "color": "색상",
+    "trackN": "트랙 {{n}}",
+    "default": "기본",
+    "forced": "강제",
+    "commentary": "코멘터리",
+    "audioDescription": "화면 해설",
+    "separateFile": "별도 파일",
+    "inFile": "파일 내장",
+    "sdh": "SDH",
+    "recorded": "{{when}} 기록",
+    "queued": "대기 중. 다음 차례입니다.",
+    "analyzeAgain": "다시 분석"
+  },
+  "listSeparator": ", ",
+  "credits": {
+    "seriesCast": "시리즈 출연진",
+    "cast": "출연진",
+    "guestStars": "게스트 출연",
+    "starring": "주연",
+    "moreDetails": "추가 정보",
+    "crew": "스태프",
+    "about": "정보",
+    "awards": "수상",
+    "won": "수상",
+    "nominated": "후보",
+    "wonIn": "{{year}} 수상",
+    "nominatedIn": "{{year}} 후보",
+    "showAll": "{{count}}개 모두 보기",
+    "awardsSource": "수상 정보 출처: Wikidata"
+  },
+  "cancel": "취소",
+  "upNext": {
+    "upNext": "다음 작품",
+    "stillWatching": "아직 보고 계신가요?",
+    "youMightLike": "이런 작품은 어때요",
+    "playingIn": "{{seconds}} 후 재생",
+    "playNow": "지금 재생",
+    "keepWatching": "계속 보기",
+    "haveALook": "둘러보기",
+    "stop": "정지"
+  },
+  "goBack": "돌아가기",
+  "back": "뒤로",
+  "trailer": {
+    "trailer": "예고편",
+    "named": "{{title}} 예고편",
+    "wontPlay": "이 예고편은 재생할 수 없습니다."
+  },
+  "watchList": {
+    "on": "볼 목록에 있음",
+    "add": "볼 목록에 추가",
+    "empty": "아직 저장한 작품이 없습니다",
+    "emptyHint": "영화나 프로그램을 열고 볼 목록을 선택하면 나중에 보도록 여기에 보관됩니다. 영화는 다 보면 목록에서 빠집니다.",
+    "browse": "둘러보기"
+  },
+  "related": {
+    "moreLikeThis": "비슷한 작품"
+  },
+  "boxSet": {
+    "notFound": "박스 세트를 찾을 수 없음",
+    "notFoundHint": "지금 라이브러리에 이 세트의 작품이 없습니다.",
+    "boxSet": "박스 세트"
+  },
+  "search": {
+    "placeholder": "영화, 프로그램, 아티스트, 앨범…",
+    "nothing": "\"{{q}}\"와(과) 일치하는 항목이 없습니다",
+    "lookingForNew": "새로운 걸 찾고 있나요?",
+    "addIt": "추가하기",
+    "askForIt": "요청하기"
+  },
+  "person": {
+    "notFound": "인물을 찾을 수 없음",
+    "showLess": "접기",
+    "readMore": "더 보기",
+    "inLibrary": "내 라이브러리에 있음"
+  },
+  "library": {
+    "library": "라이브러리",
+    "matches_other": "{{count}}개 일치",
+    "scanning": "스캔 중…",
+    "nothingUnwatched": "여기에는 안 본 작품이 없습니다",
+    "nothingMatches": "일치하는 항목 없음",
+    "seenEverything": "이 라이브러리의 모든 작품을 봤습니다.",
+    "clearFilters": "필터 지우기",
+    "appearAsFound": "작품은 발견되는 대로 표시됩니다.",
+    "noMedia": "Matinee가 {{paths}}에서 찾아봤지만 미디어가 없습니다."
+  },
+  "nothingHereYet": "아직 아무것도 없습니다",
+  "collection": {
+    "notFound": "컬렉션을 찾을 수 없음",
+    "notFoundHint": "삭제되었을 수 있습니다.",
+    "smart": "스마트 컬렉션",
+    "collection": "컬렉션",
+    "shuffledDaily": "매일 섞기",
+    "editRules": "규칙 편집",
+    "edit": "편집",
+    "delete": "컬렉션 삭제",
+    "deleteConfirm": "{{name}}을(를) 삭제할까요? 작품은 라이브러리에 남습니다.",
+    "nothingMatchesYet": "아직 일치하는 작품 없음",
+    "joinByRules": "규칙에 맞는 작품은 자동으로 추가됩니다.",
+    "howToAdd": "영화나 프로그램을 열고 컬렉션을 선택해 추가하세요."
+  },
+  "collections": {
+    "newShort": "새로 만들기",
+    "new": "새 컬렉션",
+    "newSmartShort": "새 스마트",
+    "newSmart": "새 스마트 컬렉션",
+    "none": "아직 컬렉션이 없습니다",
+    "noneHint": "스마트 컬렉션은 '안 본 80년대 액션' 같은 규칙에 따라 자동으로 채워집니다. 박스 세트는 그 작품 중 두 편이 라이브러리에 있으면 여기에 나타납니다.",
+    "yours": "내 컬렉션",
+    "shared": "공유됨",
+    "forEveryone": "모두를 위한 컬렉션",
+    "boxSets": "박스 세트",
+    "sort": {
+      "own": "직접 정한 순서",
+      "title": "제목",
+      "added": "추가한 날짜",
+      "released": "개봉일",
+      "year": "연도",
+      "rating": "평점",
+      "runtime": "러닝타임",
+      "lastPlayed": "마지막 재생",
+      "shuffle": "매일 섞기"
+    },
+    "smartShort": "스마트",
+    "editNamed": "{{name}} 편집",
+    "name": "이름",
+    "smartExample": "안 본 80년대 액션",
+    "manualExample": "영화의 밤",
+    "rules": "규칙",
+    "rulesHint": "이 필터에 맞는 작품은 라이브러리가 바뀌면 자동으로 추가됩니다.",
+    "shuffleDaily": "매일 섞기",
+    "order": "순서",
+    "orderAdded": "작품을 추가한 순서",
+    "direction": "방향",
+    "usual": "기본",
+    "ascending": "오름차순",
+    "descending": "내림차순",
+    "showAsRow": "한 줄로 표시",
+    "onHome": "홈에 표시",
+    "onLibraryPage": "라이브러리 페이지에 표시",
+    "shareWithEveryone": "이 서버의 모든 사람과 공유",
+    "saveAs": "컬렉션으로 저장"
+  },
+  "save": "저장",
+  "create": "만들기",
+  "loadingDots": "불러오는 중…",
+  "filters": {
+    "title": "필터",
+    "inUse_other": "필터, {{count}}개 사용 중",
+    "sortBy": "정렬 기준",
+    "highestFirst": "높은 순",
+    "lowestFirst": "낮은 순",
+    "highestFirstSwitch": "높은 순, 낮은 순으로 전환",
+    "lowestFirstSwitch": "낮은 순, 높은 순으로 전환",
+    "not": "{{label}} 제외",
+    "remove": "{{label}} 삭제",
+    "chip": {
+      "words": "\"{{q}}\"",
+      "directedBy": "감독: {{name}}",
+      "with": "출연: {{name}}",
+      "releasedWithin": "{{within}} 개봉",
+      "releasedAfter": "{{date}} 이후 개봉",
+      "releasedBefore": "{{date}} 이전 개봉",
+      "addedWithin": "{{within}} 추가",
+      "addedAfter": "{{date}} 이후 추가",
+      "addedBefore": "{{date}} 이전 추가",
+      "ratingMin": "평점 {{rating}}+",
+      "ratingMax": "평점 {{rating}} 이하",
+      "certification": "{{rating}} 등급",
+      "watchList": "내 볼 목록에 있음"
+    },
+    "collection": "컬렉션",
+    "active": "사용 중인 필터",
+    "clearAll": "모두 지우기",
+    "more_other": "{{count}}개 더",
+    "any": "전체",
+    "all": "모두",
+    "anyTime": "언제든",
+    "runtime": {
+      "under30": "30분 미만",
+      "30to60": "30–60분",
+      "overHour": "1시간 초과",
+      "under90": "90분 미만",
+      "90to120": "90분 – 2시간",
+      "over2Hours": "2시간 초과"
+    },
+    "wordsInTitle": "제목에 포함된 단어",
+    "onlyWatchList": "내 볼 목록의 작품만",
+    "fromYear": "시작 연도",
+    "toYear": "끝 연도",
+    "from": "시작",
+    "to": "~",
+    "toPlaceholder": "끝",
+    "lastWeek": "지난주",
+    "last30Days": "지난 30일",
+    "last3Months": "지난 3개월",
+    "lastYear": "지난해",
+    "ratingAtLeast": "{{rating}}+",
+    "findPerson": "인물 찾기",
+    "nobody": "이 라이브러리에 그런 이름의 인물이 없습니다.",
+    "showResults": "결과 보기",
+    "section": {
+      "title": "제목",
+      "watched": "시청함",
+      "genre": "장르",
+      "year": "연도",
+      "firstAired": "첫 방송",
+      "released": "개봉",
+      "added": "추가됨",
+      "rating": "평점",
+      "episodeLength": "에피소드 길이",
+      "runtime": "러닝타임",
+      "quality": "화질",
+      "network": "방송사 또는 제작사",
+      "studio": "제작사",
+      "ageRating": "관람 등급",
+      "language": "원어",
+      "country": "국가",
+      "creator": "제작 또는 감독",
+      "director": "감독",
+      "people": "출연진 및 스태프"
+    }
+  },
+  "appearance": {
+    "title": "화면 스타일",
+    "useServerTheme": "서버 테마 사용 ({{name}})",
+    "guestHint": "계정 없이 집에서 보는 모든 사람이 이 테마를 함께 씁니다.",
+    "hint": "테마는 휴대폰과 TV의 Matinee 앱에도 따라갑니다.",
+    "theme": "테마",
+    "preview": {
+      "tonight": "오늘 밤",
+      "trailer": "예고편"
+    },
+    "serverTheme": "서버 테마",
+    "serverThemeHint": "각자 테마를 고르기 전까지 모두에게 보이는 테마이며, 로그인 페이지에도 쓰입니다.",
+    "custom": "{{name}} (사용자 지정)",
+    "addYourOwn": "직접 만든 테마를 추가하려면 서버 데이터 폴더의 <code>themes</code> 폴더에 테마 파일을 넣으세요.",
+    "howTo": "테마 만드는 방법",
+    "skipped": "{{problem}} 건너뜀"
+  },
+  "newFiles": {
+    "title": "새 파일",
+    "intro": "Matinee는 추가하거나 이름을 바꾸거나 삭제한 파일을 알아채고, 복사가 끝나고 몇 초 뒤 라이브러리를 업데이트합니다.",
+    "watch": "새 파일 감시",
+    "summary": {
+      "some": "일부 폴더는 {{every}}마다 확인",
+      "watching": "새 파일 감시 중",
+      "polling": "{{every}}마다 새 파일 확인",
+      "pollingShare": "{{every}}마다 새 파일 확인 (네트워크 공유)",
+      "off": "새 파일 감시 안 함"
+    },
+    "mode": {
+      "auto": {
+        "label": "자동",
+        "hint": "서버 자체 디스크는 즉시. 네트워크 공유(SMB, NFS)는 변경을 알리지 않으므로 Matinee가 {{every}}마다 확인합니다."
+      },
+      "poll": {
+        "label": "타이머로 확인",
+        "hint": "모든 폴더를 {{every}}마다 확인합니다. 디스크의 새 파일이 저절로 나타나지 않으면 이 옵션을 선택하세요."
+      },
+      "off": {
+        "label": "끄기",
+        "hint": "새 파일은 다음 전체 스캔 때 또는 스캔을 누르면 나타납니다."
+      }
+    },
+    "rescan": "모든 라이브러리는 {{every}}마다 전체 재스캔도 하므로, 공유에서 제자리에서 교체된 파일 같은 다른 변경도 잡아냅니다.",
+    "rescanOff": "이 서버에서는 전체 재스캔이 꺼져 있습니다(MATINEE_SCAN_INTERVAL=0)."
+  },
+  "analysis": {
+    "title": "미디어 분석",
+    "intro": "Matinee는 각 파일의 화질, 소리, 언어를 천천히 읽고, 파일이 바뀔 때마다 다시 읽습니다.",
+    "state": {
+      "lookingAt": "{{file}} 확인 중",
+      "working": "작업 중",
+      "waiting": "재생이 끝나기를 기다리는 중",
+      "slowDisk": "파일 읽기가 느려 몇 분 쉬는 중",
+      "allDone": "모든 파일 분석 완료",
+      "upToDate": "최신 상태",
+      "paused": "일시정지됨"
+    },
+    "progress": "{{done}}/{{total}}",
+    "unreadable_other": "파일 {{count}}개를 읽지 못했습니다.",
+    "speed": "속도",
+    "mode": {
+      "gentle": {
+        "label": "천천히",
+        "hint": "몇 초마다 파일 하나씩, 서버가 재생용으로 변환하는 동안에는 쉽니다."
+      },
+      "normal": {
+        "label": "보통",
+        "hint": "파일을 연달아 처리하되 우선순위는 가장 낮게."
+      },
+      "off": {
+        "label": "끄기",
+        "hint": "다시 켤 때까지 일시정지됩니다."
+      }
+    }
+  },
+  "profileSettings": {
+    "title": "프로필",
+    "intro": "프로필은 로그인을 함께 쓰지만 시청 기록, 볼 목록, 테마는 따로 가집니다. 키즈 프로필은 허용한 것만 볼 수 있습니다. PIN으로 프로필이나 계정 자체를 본인만 쓰게 할 수 있습니다.",
+    "pinFor": "{{name}}의 4자리 PIN",
+    "homeDevices": "로그인하지 않은 홈 네트워크 기기",
+    "account": "계정",
+    "removePin": "PIN 삭제",
+    "addPin": "PIN 추가",
+    "hasPin": "PIN 있음",
+    "edit": "{{name}} 편집",
+    "remove": "{{name}} 삭제",
+    "confirmRemove": "{{name}}을(를) 삭제할까요? 시청 기록과 볼 목록도 삭제됩니다.",
+    "add": "프로필 추가",
+    "name": "이름",
+    "newPin": "새 PIN",
+    "pinOptional": "PIN (선택)",
+    "unchanged": "변경 없음",
+    "fourDigits": "4자리",
+    "removeThePin": "PIN 삭제",
+    "colour": "색상",
+    "kidsMode": "키즈 모드",
+    "kidsOff": "끄기: 모두 보기",
+    "kidsLevel": "{{name}}: {{ratings}}",
+    "kidsLibraries": "이 프로필이 각 라이브러리에서 볼 수 있는 것. 등급별을 선택하면 {{level}} 등급보다 높은 작품과 등급이 없는 작품을 숨깁니다. 키즈 프로필은 설정을 열거나 요청할 수 없습니다.",
+    "libraryMode": {
+      "hidden": "숨김",
+      "rated": "등급별",
+      "all": "모두"
+    }
+  },
+  "report": {
+    "thanks": "감사합니다. 관리자가 확인할 거예요.",
+    "button": "문제 신고",
+    "whatsWrong": "{{title}}에 어떤 문제가 있나요?",
+    "details": "상세 내용 (선택)",
+    "detailsExample": "예: 20분 후 소리가 안 나요",
+    "send": "보내기"
+  },
+  "quality": {
+    "label": "화질",
+    "forShow": "프로그램 화질",
+    "confirm": "{{name}}(으)로 바꿀까요? {{app}}이(가) 맞는 사본을 찾습니다.",
+    "searching": "검색 중…"
+  },
+  "upcoming": {
+    "nothingYet": "아직 표시할 항목이 없습니다",
+    "connect": "Radarr나 Sonarr를 연결하면 곧 들어올 영화와 에피소드를 볼 수 있습니다.",
+    "openSettings": "설정 열기",
+    "notConnected": "관리자가 이 서버에 Radarr나 Sonarr를 연결하지 않았습니다.",
+    "intro": "아직 들어오지 않은 앞으로 두 달간의 새 에피소드와 영화 출시.",
+    "unavailable": "{{apps}}이(가) 응답하지 않아 일부가 빠졌을 수 있습니다.",
+    "nothing": "들어올 예정인 작품이 없습니다. 요청에서 새 작품을 요청해 보세요."
+  },
+  "link": {
+    "title": "기기 로그인",
+    "intro": "휴대폰이나 TV에 표시된 코드를 입력하세요.",
+    "signedIn": "{{device}}이(가) 로그인했습니다",
+    "ready": "몇 초 후 준비됩니다.",
+    "declined": "거절됨",
+    "notSignedIn": "{{device}}이(가) 로그인하지 않았습니다.",
+    "another": "다른 기기 로그인",
+    "code": "코드",
+    "next": "다음",
+    "wantsToSignIn": "<name>{{name}}</name>(으)로 로그인하려고 합니다",
+    "warning": "손에 들고 있거나 눈앞에 있는 기기만 승인하세요. 내 계정과 같은 권한을 갖게 됩니다.",
+    "decline": "거절",
+    "approve": "로그인"
+  },
+  "profiles": {
+    "whoIsWatching": "누가 보나요?",
+    "signInWithAccount": "계정으로 로그인",
+    "enterPin": "{{name}}의 PIN 입력",
+    "pin": "PIN",
+    "deleteDigit": "삭제"
+  },
+  "integrations": {
+    "title": "Radarr 및 Sonarr",
+    "intro": "연결하면 영화와 프로그램을 요청하고, 공개 예정작을 보고, 시청 중 문제를 신고할 수 있습니다.",
+    "connected": "연결됨 · {{url}}",
+    "notConnected": {
+      "radarr": "연결 안 됨 · 영화용",
+      "sonarr": "연결 안 됨 · 프로그램용"
+    },
+    "change": "변경",
+    "connect": "연결",
+    "address": "주소",
+    "apiKey": "API 키",
+    "keyWhere": "{{app}} → Settings → General",
+    "saved": "저장됨",
+    "answers": "{{app}} {{version}}이(가) {{url}}에서 응답합니다",
+    "quality": {
+      "radarr": "새 영화 화질",
+      "sonarr": "새 프로그램 화질"
+    },
+    "folder": "폴더",
+    "confirmDisconnect": "{{app}} 연결을 해제할까요? 이미 있는 작품은 그대로 남습니다.",
+    "disconnect": "연결 해제",
+    "testing": "테스트 중…",
+    "test": "테스트",
+    "whoCanAdd": "영화와 프로그램을 추가할 수 있는 사람",
+    "mode": {
+      "approve": {
+        "label": "요청 후 관리자 승인",
+        "detail": "계정이 있으면 누구나 작품을 요청할 수 있습니다. 관리자 승인을 기다립니다."
+      },
+      "auto": {
+        "label": "바로 추가",
+        "detail": "요청은 바로 Radarr나 Sonarr로 갑니다."
+      },
+      "off": {
+        "label": "관리자만 추가",
+        "detail": "다른 사람도 공개 예정작을 보고 문제를 신고할 수 있습니다."
+      }
+    },
+    "overseerr": {
+      "intro": "연결하면 둘러보기 탭이 생겨요: 지금 뜨는 작품, 사람들이 보는 작품을 바탕으로 한 추천, 무엇이든 요청하는 방법까지. Jellyseerr도 됩니다.",
+      "notConnected": "연결 안 됨 · 둘러보기용",
+      "requestAs": "Overseerr 계정이 없는 사람의 요청",
+      "madeAsOwner": "{{name}}(으)로 요청 (API 키 소유자)",
+      "madeAs": "{{name}}(으)로 요청",
+      "sameName": "같은 이름의 Overseerr 계정이 있으면 본인 이름으로 요청해요. 어떤 요청에 승인이 필요한지는 Overseerr가 각 사용자의 권한으로 정해요.",
+      "confirmDisconnect": "Overseerr 연결을 해제할까요? 둘러보기 탭이 사라져요."
+    }
+  },
+  "requests": {
+    "tab": {
+      "ask": "무언가 요청하기",
+      "requests": "요청",
+      "yourRequests": "내 요청",
+      "problems": "문제",
+      "yourReports": "내 신고"
+    },
+    "movies": "영화",
+    "shows": "프로그램",
+    "findMovie": "영화 찾기…",
+    "findShow": "프로그램 찾기…",
+    "nothingFound": "\"{{q}}\"에 대한 결과가 없습니다",
+    "ready": "시청 가능",
+    "askedFor": "요청됨",
+    "onItsWay": "준비 중",
+    "add": "추가",
+    "askForIt": "요청하기",
+    "state": {
+      "pending": "승인 대기 중",
+      "approved": "준비 중",
+      "declined": "거절됨",
+      "failed": "추가하지 못함"
+    },
+    "none": "아직 요청이 없습니다.",
+    "retry": "다시 시도",
+    "approve": "승인",
+    "remove": "{{title}} 요청 삭제",
+    "removedFromLibrary": "라이브러리에서 삭제됨",
+    "noProblems": "신고된 문제가 없습니다.",
+    "noReports": "신고한 문제가 없습니다. 작품에서 \"문제 신고\"를 사용하세요.",
+    "fileReplaced": "파일 교체됨",
+    "closed": "종료됨",
+    "confirmReplace": "{{title}}의 이 파일을 삭제하고 다른 사본을 받을까요? 새 파일은 다운로드와 라이브러리 스캔이 끝나면 나타납니다.",
+    "replaceFile": "파일 교체",
+    "close": "종료"
+  },
+  "settings": {
+    "tmdbNotice": "포스터와 설명은 <link>TMDB</link>에서 가져옵니다. 이 제품은 TMDB API를 사용하지만 TMDB의 보증이나 인증을 받지 않았습니다.",
+    "libraries": {
+      "title": "라이브러리",
+      "none": "아직 라이브러리가 없습니다.",
+      "scan": "스캔",
+      "remove": "{{name}} 삭제",
+      "confirmRemove": "\"{{name}}\"을(를) 삭제할까요? 파일은 그대로 남습니다.",
+      "kind": {
+        "movies": "영화",
+        "tv": "TV 프로그램",
+        "music": "음악"
+      },
+      "type": "유형",
+      "folders": "폴더",
+      "up": "상위 폴더로",
+      "added": "추가됨",
+      "useFolder": "이 폴더 사용",
+      "noSubfolders": "하위 폴더 없음"
+    },
+    "people": {
+      "title": "사용자",
+      "admin": "관리자",
+      "passwordChanged": "비밀번호를 변경했습니다. {{name}}은(는) 모든 기기에서 로그아웃되었습니다.",
+      "you": "(나)",
+      "removeAdmin": "관리자 해제",
+      "makeAdmin": "관리자로 지정",
+      "resetPassword": "비밀번호 재설정",
+      "remove": "삭제",
+      "newPasswordFor": "{{name}}의 새 비밀번호",
+      "setPassword": "비밀번호 설정",
+      "confirmRemove": "<name>{{name}}</name>을(를) 삭제할까요? 시청 기록, 볼 목록, 다운로드, 요청도 삭제되고 모든 기기에서 로그아웃됩니다. 되돌릴 수 없습니다."
+    },
+    "account": {
+      "title": "내 계정",
+      "changePassword": "비밀번호 변경",
+      "current": "현재 비밀번호",
+      "new": "새 비밀번호",
+      "again": "새 비밀번호 확인",
+      "hint": "8자 이상. 다른 기기에서는 로그아웃됩니다.",
+      "mismatch": "새 비밀번호가 일치하지 않습니다.",
+      "changed": "비밀번호를 변경했습니다. 다른 기기에서 로그아웃되었습니다."
+    },
+    "devices": {
+      "aWhileAgo": "얼마 전",
+      "justNow": "방금",
+      "title": "내 기기",
+      "unknown": "알 수 없는 기기",
+      "this": "이 기기",
+      "lastUsed": "마지막 사용 {{when}}",
+      "confirmSignOut": "\"{{name}}\"을(를) 로그아웃할까요?"
+    },
+    "version": "Matinee 서버 {{version}} · API v{{api}}",
+    "home": {
+      "title": "홈 네트워크",
+      "requireSignIn": "집에서도 로그인 요구",
+      "required": "집에서든 밖에서든 모두 로그인합니다.",
+      "open": "홈 네트워크의 휴대폰, TV, 브라우저는 로그인 없이 볼 수 있습니다. 하나의 홈 계정을 함께 쓰며 아무것도 바꿀 수 없습니다. 집 밖에서는 모두 로그인합니다."
+    },
+    "remote": {
+      "title": "원격 접속",
+      "publicURL": "집 밖에서는 앱이 이 서버를 설정할 때 쓴 주소인 <url>{{url}}</url>에 연결합니다.",
+      "toggle": "집 밖에서 보기",
+      "hint": "Matinee가 공유기에 포트를 열어 달라고 요청하고 인증서를 받아, 앱이 어디서든 안전하게 연결되게 합니다. 외부에서는 모두 로그인합니다.",
+      "working": "공유기 포트를 열고 인증서를 받는 중…",
+      "ready": "집 밖에서는 앱이 <url>{{url}}</url>로 이 서버에 연결합니다.",
+      "router": "공유기가 {{router}}(으)로 포트를 열었습니다.",
+      "pickUp": "다음에 홈 네트워크에 연결될 때 이 주소를 받아 갑니다.",
+      "sharedAddress": "Matinee가 아직 스스로 해결할 수 없습니다.",
+      "retry": "Matinee가 30분마다 다시 시도합니다."
+    },
+    "playback": {
+      "title": "재생",
+      "autoPlay": "다음 에피소드 재생",
+      "autoPlayHint": "엔딩 크레딧이 시작되면 취소할 수 있는 10초 카운트다운 후 다음 에피소드가 재생됩니다.",
+      "binge": "카운트다운 건너뛰기",
+      "bingeHint": "엔딩 크레딧이 시작되면 바로 다음 에피소드로 넘어갑니다. 아무것도 누르지 않고 세 편을 연달아 보면 아직 보고 있는지 물어봅니다."
+    },
+    "trailers": {
+      "title": "예고편",
+      "remote": "YouTube 예고편",
+      "remoteOn": "영화와 프로그램에서 TMDB의 예고편을 YouTube로 재생할 수 있습니다. 미디어 옆에 있는 예고편 파일은 항상 표시됩니다.",
+      "remoteOff": "\"Movie (2020)-trailer.mkv\"나 Trailers 폴더 안의 파일처럼 미디어 옆에 있는 예고편 파일만 표시됩니다."
+    },
+    "transcoding": {
+      "title": "트랜스코딩",
+      "intro": "기기가 그대로 재생할 수 없는 파일은 보는 동안 변환됩니다. GPU를 쓰면 더 빠르고 서버 부하도 적습니다.",
+      "convertingWith": "변환에 사용",
+      "active": "{{name}}.",
+      "activeOn": "{{detail}}의 {{name}}.",
+      "fullGPU": "비디오 디코딩, 크기 조정, 인코딩을 GPU에서 합니다.",
+      "encodeOnly": "비디오 인코딩은 GPU, 디코딩은 CPU에서 합니다.",
+      "fallback": "GPU가 처리하지 못하는 파일은 CPU로 재생합니다.",
+      "testing": "이 서버의 GPU를 테스트하는 중…",
+      "cpuOff": "CPU. 하드웨어 트랜스코딩이 꺼져 있습니다.",
+      "cpuFailed": "CPU. 선택한 가속기가 이 서버에서 작동하지 않았습니다.",
+      "cpuNoGPU": "CPU. 이 서버에는 테스트를 통과한 GPU가 없습니다.",
+      "hardware": "하드웨어 가속",
+      "auto": "자동: 작동하는 것 중 최선",
+      "off": "끄기: 항상 CPU 사용",
+      "notFound": "{{name}} (이 서버에 없음)",
+      "accelerator": {
+        "nvenc": "NVIDIA NVENC",
+        "vaapi": "VAAPI (Linux의 AMD 및 Intel)",
+        "qsv": "Intel Quick Sync",
+        "videotoolbox": "VideoToolbox (Mac)",
+        "amf": "AMD AMF (Windows)",
+        "v4l2m2m": "V4L2 (Raspberry Pi)"
+      }
+    },
+    "homeRows": {
+      "title": "홈",
+      "holidays": "명절 줄",
+      "holidaysDetail": "밸런타인데이, 부활절, 핼러윈, 추수감사절, 크리스마스 한 달 전과 새해 전날 한 주 전에는 홈 맨 위에 그날에 맞는 작품 줄이 나와요. 키워드, 제목, 설명으로 골라요."
+    }
+  },
+  "language": {
+    "title": "언어",
+    "label": "Matinee 표시 언어",
+    "hint": "언어는 휴대폰과 TV의 Matinee 앱에도 따라갑니다. TMDB에 있으면 제목과 설명도 이 언어로 표시됩니다.",
+    "guestHint": "계정 없이 집에서 보는 모든 사람이 이 언어를 함께 씁니다.",
+    "automatic": "자동 ({{language}})",
+    "machine": "이 언어는 기계 번역이라 일부 표현이 어색할 수 있습니다.",
+    "help": "개선에 참여하기"
+  },
+  "discover": {
+    "title": "둘러보기",
+    "emptyTitle": "아직 둘러볼 것이 없어요",
+    "connectIt": "Overseerr를 연결하면 지금 뜨는 작품을 보고, 추천을 받고, 새 영화와 시리즈를 요청할 수 있어요.",
+    "openSettings": "설정 열기",
+    "notConnected": "관리자가 이 서버에 Overseerr를 연결하지 않았어요.",
+    "placeholder": "영화나 시리즈 찾기…",
+    "unavailable": "지금은 둘러보기를 쓸 수 없어요",
+    "open": "열기",
+    "request": "요청",
+    "requestShow": "시리즈 요청",
+    "asking": "요청 중…",
+    "waiting": "관리자 승인을 기다리는 중이에요.",
+    "onItsWay": "다운로드되면 보관함에 나타나요.",
+    "findIt": "둘러보기에서 찾기"
+  }
+}

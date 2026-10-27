@@ -1,0 +1,337 @@
+{
+  "duration": {
+    "minutes": "{{minutes}} min",
+    "hoursMinutes": "{{hours}} t {{minutes}} min"
+  },
+  "episodeCode": "S{{season}} · E{{episode}}",
+  "seasonN": "Sesong {{season}}",
+  "specials": "Spesialepisoder",
+  "media": {
+    "mono": "Mono",
+    "stereo": "Stereo",
+    "lossless": "Tapsfri",
+    "hiRes": "Hi-Res",
+    "dolbyVisionProfile": "Dolby Vision profil {{profile}}",
+    "withBase": "{{format}}, med {{base}} for andre skjermer",
+    "bitDepth": "{{bits}}-bit",
+    "forced": "Tvungne",
+    "sdh": "SDH"
+  },
+  "people": {
+    "episodes_one": "{{count}} episode",
+    "episodes_other": "{{count}} episoder",
+    "lines": {
+      "createdBy": "Skapt av",
+      "director_one": "Regissør",
+      "director_other": "Regissører",
+      "writer_one": "Manusforfatter",
+      "writer_other": "Manusforfattere",
+      "basedOn": "Basert på",
+      "music": "Musikk"
+    },
+    "died": "Død {{date}}",
+    "bornIn": "Født i {{place}}",
+    "bornOnIn": "Født {{date}} i {{place}}",
+    "bornOn": "Født {{date}}",
+    "dollars": "{{amount}} $"
+  },
+  "facts": {
+    "firstAired": "Først sendt",
+    "released": "Utgitt",
+    "aired": "Sendt",
+    "ended": "Avsluttet",
+    "status": "Status",
+    "seasons": "Sesonger",
+    "seasonsValue_one": "{{seasons}} ({{count}} episode)",
+    "seasonsValue_other": "{{seasons}} ({{count}} episoder)",
+    "rated": "Aldersgrense",
+    "genres": "Sjangre",
+    "originalTitle": "Originaltittel",
+    "originalLanguage": "Originalspråk",
+    "spokenLanguages": "Talte språk",
+    "studio_one": "Studio",
+    "studio_other": "Studioer",
+    "network_one": "Kanal",
+    "network_other": "Kanaler",
+    "country_one": "Land",
+    "country_other": "Land",
+    "collection": "Samling",
+    "budget": "Budsjett",
+    "boxOffice": "Billettinntekter"
+  },
+  "showStatus": {
+    "Returning Series": "Fortsetter",
+    "Ended": "Avsluttet",
+    "Canceled": "Avlyst",
+    "In Production": "I produksjon",
+    "Planned": "Planlagt",
+    "Pilot": "Pilot"
+  },
+  "genres": {
+    "Action": "Action",
+    "Adventure": "Eventyr",
+    "Animation": "Animasjon",
+    "Comedy": "Komedie",
+    "Crime": "Krim",
+    "Documentary": "Dokumentar",
+    "Drama": "Drama",
+    "Family": "Familie",
+    "Fantasy": "Fantasy",
+    "History": "Historie",
+    "Horror": "Skrekk",
+    "Music": "Musikk",
+    "Mystery": "Mysterium",
+    "Romance": "Romantikk",
+    "Science Fiction": "Science fiction",
+    "Thriller": "Thriller",
+    "War": "Krig",
+    "Western": "Western",
+    "Reality": "Reality",
+    "TV Movie": "TV-film",
+    "Action & Adventure": "Action og eventyr",
+    "Kids": "Barn",
+    "News": "Nyheter",
+    "Sci-Fi & Fantasy": "Sci-fi og fantasy",
+    "Soap": "Såpe",
+    "Talk": "Talkshow",
+    "War & Politics": "Krig og politikk"
+  },
+  "jobs": {
+    "Director": "Regi",
+    "Creator": "Skaper",
+    "Screenplay": "Manus",
+    "Writer": "Manusforfatter",
+    "Teleplay": "TV-manus",
+    "Story": "Historie",
+    "Novel": "Roman",
+    "Characters": "Karakterer",
+    "Author": "Forfatter",
+    "Original Music Composer": "Originalmusikk",
+    "Music": "Musikk",
+    "Director of Photography": "Fotografi",
+    "Editor": "Klipp",
+    "Producer": "Produsent",
+    "Executive Producer": "Utøvende produsent",
+    "Casting": "Rollebesetning",
+    "Production Design": "Scenografi",
+    "Costume Design": "Kostymer"
+  },
+  "kids": {
+    "littleKids": "Små barn",
+    "kids": "Barn",
+    "teens": "Tenåringer",
+    "andYounger": "{{ratings}} og yngre"
+  },
+  "sort": {
+    "title": "Tittel",
+    "added": "Lagt til",
+    "released": "Utgivelsesdato",
+    "year": "År",
+    "rating": "Vurdering",
+    "runtime": "Spilletid",
+    "lastPlayed": "Sist sett"
+  },
+  "watched": {
+    "unwatched": "Usett",
+    "inProgress": "Påbegynt",
+    "watched": "Sett",
+    "notStarted": "Ikke påbegynt"
+  },
+  "genreRows": {
+    "Action": "Full av action",
+    "Adventure": "Eventyr",
+    "Animation": "Animerte favoritter",
+    "Comedy": "Komedier",
+    "Crime": "Krimhistorier",
+    "Documentary": "Dokumentarer",
+    "Drama": "Dramaer",
+    "Family": "For hele familien",
+    "Fantasy": "Fantasyverdener",
+    "Horror": "Skrekk",
+    "Mystery": "Mysterier",
+    "Romance": "Romantikk",
+    "Science Fiction": "Sci-fi-favoritter",
+    "Thriller": "Thrillere",
+    "War": "Krigshistorier",
+    "Western": "Westerner"
+  },
+  "count": {
+    "episodes_one": "{{count}} episode",
+    "episodes_other": "{{count}} episoder",
+    "seasons_one": "{{count}} sesong",
+    "seasons_other": "{{count}} sesonger",
+    "albums_one": "{{count}} album",
+    "albums_other": "{{count}} album",
+    "tracks_one": "{{count}} spor",
+    "tracks_other": "{{count}} spor",
+    "titles_one": "{{count}} tittel",
+    "titles_other": "{{count}} titler"
+  },
+  "awards": {
+    "academy": {
+      "won_one": "Vant {{count}} Oscar",
+      "won_other": "Vant {{count}} Oscarer",
+      "nominated_one": "Nominert til {{count}} Oscar",
+      "nominated_other": "Nominert til {{count}} Oscarer"
+    },
+    "emmy": {
+      "won_one": "Vant {{count}} Primetime Emmy",
+      "won_other": "Vant {{count}} Primetime Emmyer",
+      "nominated_one": "Nominert til {{count}} Primetime Emmy",
+      "nominated_other": "Nominert til {{count}} Primetime Emmyer"
+    },
+    "globe": {
+      "won_one": "Vant {{count}} Golden Globe",
+      "won_other": "Vant {{count}} Golden Globes",
+      "nominated_one": "Nominert til {{count}} Golden Globe",
+      "nominated_other": "Nominert til {{count}} Golden Globes"
+    },
+    "bafta": {
+      "won_one": "Vant {{count}} BAFTA",
+      "won_other": "Vant {{count}} BAFTA",
+      "nominated_one": "Nominert til {{count}} BAFTA",
+      "nominated_other": "Nominert til {{count}} BAFTA"
+    },
+    "wins_one": "{{count}} seier",
+    "wins_other": "{{count}} seire",
+    "nominations_one": "{{count}} nominasjon",
+    "nominations_other": "{{count}} nominasjoner",
+    "winsAndNominations": "{{wins}} og {{nominations}}"
+  },
+  "departments": {
+    "Acting": "Skuespiller",
+    "Directing": "Regi",
+    "Writing": "Manus",
+    "Production": "Produksjon",
+    "Sound": "Lyd",
+    "Camera": "Kamera",
+    "Editing": "Klipp",
+    "Art": "Scenografi",
+    "Crew": "Stab",
+    "Visual Effects": "Visuelle effekter",
+    "Costume & Make-Up": "Kostyme og sminke",
+    "Lighting": "Lys",
+    "Creator": "Skaper"
+  },
+  "starters": {
+    "recent": "Nylig lagt til",
+    "unwatched": "Usett",
+    "tonight": "Kort nok for i kveld"
+  },
+  "filter": {
+    "decade": "{{decade}}-tallet",
+    "yearRange": "{{from}}–{{to}}",
+    "yearOrLater": "{{year}} eller senere",
+    "yearOrEarlier": "{{year}} eller tidligere",
+    "lastYear": "det siste året",
+    "lastWeeks_one": "den siste uken",
+    "lastWeeks_other": "de siste {{count}} ukene",
+    "lastDays_one": "den siste {{count}} dagen",
+    "lastDays_other": "de siste {{count}} dagene",
+    "runtime": {
+      "titles": {
+        "between": "{{min}}–{{max}} min",
+        "over": "Over {{min}} min",
+        "under": "Under {{max}} min"
+      },
+      "episodes": {
+        "between": "Episoder {{min}}–{{max}} min",
+        "over": "Episoder over {{min}} min",
+        "under": "Episoder under {{max}} min"
+      }
+    }
+  },
+  "themes": {
+    "clean": {
+      "name": "Ren",
+      "description": "Hvitt, én blåtone, ingen seriffer. Bare plakatene."
+    },
+    "dark": {
+      "name": "Mørk",
+      "description": "Helt svart og skarpt hvitt. Skånsomt for øynene og for en OLED-skjerm."
+    },
+    "drive-in": {
+      "name": "Drive-in",
+      "description": "Syttitallsbrunt og ravgult skiltlys, som en kveld på drive-in."
+    },
+    "high-contrast": {
+      "name": "Høy kontrast",
+      "description": "Svart, hvitt og klart gult, for den tydeligste teksten fra andre siden av rommet."
+    },
+    "light": {
+      "name": "Lys",
+      "description": "Varmt papirhvitt med korall, for et lyst rom."
+    },
+    "matinee": {
+      "name": "Matinee",
+      "description": "Varmt kinomørke med en korallaksent. Husets eget utseende."
+    },
+    "sci-fi": {
+      "name": "Sci-fi",
+      "description": "Dyp romblå med en neoncyan glød og en futuristisk skrift."
+    }
+  },
+  "every": {
+    "seconds_one": "{{count}} sekund",
+    "seconds_other": "{{count}} sekunder",
+    "minutes_one": "{{count}} minutt",
+    "minutes_other": "{{count}} minutter",
+    "hours_one": "{{count}} time",
+    "hours_other": "{{count}} timer"
+  },
+  "avatars": {
+    "coral": "Korall",
+    "amber": "Rav",
+    "lime": "Lime",
+    "teal": "Blågrønn",
+    "sky": "Himmelblå",
+    "violet": "Fiolett",
+    "pink": "Rosa",
+    "slate": "Skifer"
+  },
+  "day": {
+    "today": "I dag",
+    "tomorrow": "I morgen",
+    "yesterday": "I går"
+  },
+  "release": {
+    "cinemas": "På kino",
+    "digital": "Digital utgivelse",
+    "physical": "På plate",
+    "airs": "Sendes"
+  },
+  "issue": {
+    "video": "Bilde",
+    "audio": "Lyd",
+    "subtitles": "Undertekster",
+    "wrong": "Feil tittel",
+    "other": "Noe annet"
+  },
+  "holidays": {
+    "valentines": "Til valentinsdagen",
+    "easter": "Til påske",
+    "halloween": "Grøssersesong",
+    "thanksgiving": "Til Thanksgiving",
+    "christmas": "Julefavoritter",
+    "newyear": "Ring inn det nye året"
+  },
+  "discover": {
+    "rows": {
+      "trending": "Populært nå",
+      "popular-movies": "Populære filmer",
+      "popular-shows": "Populære serier",
+      "upcoming-movies": "Snart på kino",
+      "upcoming-shows": "Nye serier på vei"
+    },
+    "because": "Fordi du så {{title}}",
+    "status": {
+      "available": "I biblioteket ditt",
+      "added": "På vei",
+      "requested": "Forespurt"
+    },
+    "kind": {
+      "movie": "Film",
+      "show": "Serie"
+    }
+  }
+}

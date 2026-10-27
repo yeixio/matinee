@@ -26,7 +26,15 @@ info:
     it; the rest still need a token. Requests that reach the server through
     a proxy or ingress never count as coming from home.
 
-    **Errors** are JSON `{"error": "message"}`, with a message fit to show a person.
+    **Languages.** Titles, descriptions and taglines come in the language the
+    current profile picked (`PUT /me/language`) or, until it picks one, the
+    first of the device's languages in `Accept-Language` that Matinee has
+    (`GET /languages`), where TMDB has a translation; otherwise as they are.
+
+    **Errors** are JSON `{"error": "message", "code": "message_code"}`, with
+    an English message fit to show a person. Apps show the code's text from
+    their own catalog (`i18n/locales/<language>/errors.json`) and the message
+    when the catalog doesn't have the code.
   license:
     name: AGPL-3.0-or-later
     identifier: AGPL-3.0-or-later
@@ -277,6 +285,34 @@ paths:
             application/json:
               schema: { $ref: "#/components/schemas/MyTheme" }
         "400": { $ref: "#/components/responses/Error" }
+  /me/language:
+    get:
+      summary: The language the current profile picked
+      responses:
+        "200":
+          description: Its language.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/MyLanguage" }
+    put:
+      summary: Pick a language for the current profile, on every device
+      description: |
+        The web player and the apps show themselves in it, and titles and
+        descriptions come in it where TMDB has them. On the home network
+        without signing in, this is the shared Home account's language. Send
+        `""` to follow each device's language again.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/MyLanguage" }
+      responses:
+        "200":
+          description: Saved.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/MyLanguage" }
+        "400": { $ref: "#/components/responses/Error" }
   /me/playback:
     get:
       summary: The current user's auto-play choices
@@ -324,6 +360,19 @@ paths:
                   themes:
                     type: array
                     items: { $ref: "#/components/schemas/Theme" }
+  /languages:
+    get:
+      summary: The languages people can pick
+      description: No sign-in needed. English, the source, comes first.
+      security: []
+      responses:
+        "200":
+          description: Languages.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Language" }
   /profiles:
     get:
       summary: Who's watching? The account and its profiles
@@ -771,6 +820,7 @@ paths:
                           enum: [valentines, easter, halloween, thanksgiving, christmas, newyear]
                           description: Set on a holiday's row.
                         collectionId: { type: string, description: Set on a pinned collection's row. }
+                        starter: { type: string, examples: [tonight], description: Set on a built-in collection's row, which apps may name in their own language while it keeps its English name. }
                         items: { type: array, items: { $ref: "#/components/schemas/Item" } }
   /search:
     get:
@@ -1420,7 +1470,8 @@ paths:
                       type: object
                       properties:
                         id: { type: string, description: "trending, popular-movies, popular-shows, upcoming-movies, upcoming-shows, or because-{item id}" }
-                        title: { type: string }
+                        title: { type: string, description: In English. Apps may name the lists by id in their own language. }
+                        because: { type: string, description: 'On a because-{item id} row, the title watched, so apps can say "Because you watched …" in their own language.' }
                         items: { type: array, items: { $ref: "#/components/schemas/DiscoverTitle" } }
                   canRequest: { type: boolean, description: This account may ask for titles. }
         "409": { $ref: "#/components/responses/Error" }
@@ -1883,7 +1934,12 @@ components:
     Error:
       type: object
       properties:
-        error: { type: string }
+        error: { type: string, description: In English. }
+        code: { type: string, example: no_such_theme, description: The message's key in the errors catalog. }
+        params:
+          type: object
+          additionalProperties: { type: string }
+          description: "For a message that names something, such as {{title}} is already on its way: the names, to put into the catalog's message."
     ServerInfo:
       type: object
       properties:
@@ -2001,6 +2057,19 @@ components:
       properties:
         autoPlay: { type: boolean, description: Offer the next episode with a countdown. }
         binge: { type: boolean, description: Skip the countdown and start the next episode right away. }
+    MyLanguage:
+      type: object
+      required: [language]
+      properties:
+        language: { type: string, example: pt-BR, description: 'A language code from GET /languages, or "" to follow each device.' }
+    Language:
+      type: object
+      required: [code, name, dir, status]
+      properties:
+        code: { type: string, example: zh-Hant, description: A BCP 47 tag. }
+        name: { type: string, example: 繁體中文, description: The language's name in itself. }
+        dir: { type: string, enum: [ltr, rtl] }
+        status: { type: string, enum: [source, machine, partial, reviewed, community], description: How the text was translated. }
     MyTheme:
       type: object
       required: [theme]
@@ -2467,7 +2536,8 @@ components:
       type: object
       properties:
         id: { type: string }
-        label: { type: string }
+        label: { type: string, description: 'In English, such as "English (SDH)".' }
+        note: { type: string, example: Commentary, description: The track's own title where it says more than its language and flags. }
         language: { type: string }
         codec: { type: string }
         forced: { type: boolean }

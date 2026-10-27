@@ -1,0 +1,337 @@
+{
+  "duration": {
+    "minutes": "{{minutes}}′",
+    "hoursMinutes": "{{hours}} ώ. {{minutes}}′"
+  },
+  "episodeCode": "Σ{{season}} · Ε{{episode}}",
+  "seasonN": "Σεζόν {{season}}",
+  "specials": "Ειδικά επεισόδια",
+  "media": {
+    "mono": "Μονοφωνικό",
+    "stereo": "Στερεοφωνικό",
+    "lossless": "Χωρίς απώλειες",
+    "hiRes": "Hi-Res",
+    "dolbyVisionProfile": "Dolby Vision προφίλ {{profile}}",
+    "withBase": "{{format}}, με {{base}} για άλλες οθόνες",
+    "bitDepth": "{{bits}}-bit",
+    "forced": "Αναγκαστικοί",
+    "sdh": "SDH"
+  },
+  "people": {
+    "episodes_one": "{{count}} επεισόδιο",
+    "episodes_other": "{{count}} επεισόδια",
+    "lines": {
+      "createdBy": "Δημιουργία",
+      "director_one": "Σκηνοθέτης",
+      "director_other": "Σκηνοθέτες",
+      "writer_one": "Σεναριογράφος",
+      "writer_other": "Σεναριογράφοι",
+      "basedOn": "Βασισμένο σε",
+      "music": "Μουσική"
+    },
+    "died": "Πέθανε {{date}}",
+    "bornIn": "Γεννήθηκε σε: {{place}}",
+    "bornOnIn": "Γεννήθηκε {{date}} σε: {{place}}",
+    "bornOn": "Γεννήθηκε {{date}}",
+    "dollars": "{{amount}} $"
+  },
+  "facts": {
+    "firstAired": "Πρώτη προβολή",
+    "released": "Κυκλοφορία",
+    "aired": "Προβλήθηκε",
+    "ended": "Ολοκληρώθηκε",
+    "status": "Κατάσταση",
+    "seasons": "Σεζόν",
+    "seasonsValue_one": "{{seasons}} ({{count}} επεισόδιο)",
+    "seasonsValue_other": "{{seasons}} ({{count}} επεισόδια)",
+    "rated": "Καταλληλότητα",
+    "genres": "Είδη",
+    "originalTitle": "Πρωτότυπος τίτλος",
+    "originalLanguage": "Πρωτότυπη γλώσσα",
+    "spokenLanguages": "Ομιλούμενες γλώσσες",
+    "studio_one": "Στούντιο",
+    "studio_other": "Στούντιο",
+    "network_one": "Κανάλι",
+    "network_other": "Κανάλια",
+    "country_one": "Χώρα",
+    "country_other": "Χώρες",
+    "collection": "Συλλογή",
+    "budget": "Προϋπολογισμός",
+    "boxOffice": "Εισπράξεις"
+  },
+  "showStatus": {
+    "Returning Series": "Συνεχίζεται",
+    "Ended": "Ολοκληρώθηκε",
+    "Canceled": "Ακυρώθηκε",
+    "In Production": "Σε παραγωγή",
+    "Planned": "Προγραμματισμένη",
+    "Pilot": "Πιλότος"
+  },
+  "genres": {
+    "Action": "Δράση",
+    "Adventure": "Περιπέτεια",
+    "Animation": "Κινούμενα σχέδια",
+    "Comedy": "Κωμωδία",
+    "Crime": "Αστυνομική",
+    "Documentary": "Ντοκιμαντέρ",
+    "Drama": "Δράμα",
+    "Family": "Οικογενειακή",
+    "Fantasy": "Φαντασίας",
+    "History": "Ιστορική",
+    "Horror": "Τρόμου",
+    "Music": "Μουσική",
+    "Mystery": "Μυστηρίου",
+    "Romance": "Ρομαντική",
+    "Science Fiction": "Επιστημονική φαντασία",
+    "Thriller": "Θρίλερ",
+    "War": "Πολεμική",
+    "Western": "Γουέστερν",
+    "Reality": "Ριάλιτι",
+    "TV Movie": "Τηλεταινία",
+    "Action & Adventure": "Δράση και περιπέτεια",
+    "Kids": "Παιδικά",
+    "News": "Ειδήσεις",
+    "Sci-Fi & Fantasy": "Sci-Fi και φαντασία",
+    "Soap": "Σαπουνόπερα",
+    "Talk": "Talk show",
+    "War & Politics": "Πόλεμος και πολιτική"
+  },
+  "jobs": {
+    "Director": "Σκηνοθεσία",
+    "Creator": "Δημιουργός",
+    "Screenplay": "Σενάριο",
+    "Writer": "Σεναριογράφος",
+    "Teleplay": "Τηλεοπτικό σενάριο",
+    "Story": "Ιστορία",
+    "Novel": "Μυθιστόρημα",
+    "Characters": "Χαρακτήρες",
+    "Author": "Συγγραφέας",
+    "Original Music Composer": "Πρωτότυπη μουσική",
+    "Music": "Μουσική",
+    "Director of Photography": "Διεύθυνση φωτογραφίας",
+    "Editor": "Μοντάζ",
+    "Producer": "Παραγωγός",
+    "Executive Producer": "Εκτελεστικός παραγωγός",
+    "Casting": "Κάστινγκ",
+    "Production Design": "Σκηνογραφία",
+    "Costume Design": "Ενδυματολογία"
+  },
+  "kids": {
+    "littleKids": "Μικρά παιδιά",
+    "kids": "Παιδιά",
+    "teens": "Έφηβοι",
+    "andYounger": "{{ratings}} και κάτω"
+  },
+  "sort": {
+    "title": "Τίτλος",
+    "added": "Ημερομηνία προσθήκης",
+    "released": "Ημερομηνία κυκλοφορίας",
+    "year": "Έτος",
+    "rating": "Βαθμολογία",
+    "runtime": "Διάρκεια",
+    "lastPlayed": "Τελευταία προβολή"
+  },
+  "watched": {
+    "unwatched": "Δεν έχουν προβληθεί",
+    "inProgress": "Σε εξέλιξη",
+    "watched": "Προβλήθηκαν",
+    "notStarted": "Δεν ξεκίνησαν"
+  },
+  "genreRows": {
+    "Action": "Γεμάτες δράση",
+    "Adventure": "Περιπέτειες",
+    "Animation": "Αγαπημένα κινούμενα σχέδια",
+    "Comedy": "Κωμωδίες",
+    "Crime": "Αστυνομικές ιστορίες",
+    "Documentary": "Ντοκιμαντέρ",
+    "Drama": "Δράματα",
+    "Family": "Για όλη την οικογένεια",
+    "Fantasy": "Κόσμοι φαντασίας",
+    "Horror": "Τρόμου",
+    "Mystery": "Μυστήρια",
+    "Romance": "Ρομαντικές",
+    "Science Fiction": "Αγαπημένα sci-fi",
+    "Thriller": "Θρίλερ",
+    "War": "Πολεμικές ιστορίες",
+    "Western": "Γουέστερν"
+  },
+  "count": {
+    "episodes_one": "{{count}} επεισόδιο",
+    "episodes_other": "{{count}} επεισόδια",
+    "seasons_one": "{{count}} σεζόν",
+    "seasons_other": "{{count}} σεζόν",
+    "albums_one": "{{count}} άλμπουμ",
+    "albums_other": "{{count}} άλμπουμ",
+    "tracks_one": "{{count}} κομμάτι",
+    "tracks_other": "{{count}} κομμάτια",
+    "titles_one": "{{count}} τίτλος",
+    "titles_other": "{{count}} τίτλοι"
+  },
+  "awards": {
+    "academy": {
+      "won_one": "Κέρδισε {{count}} Όσκαρ",
+      "won_other": "Κέρδισε {{count}} Όσκαρ",
+      "nominated_one": "Υποψήφιο για {{count}} Όσκαρ",
+      "nominated_other": "Υποψήφιο για {{count}} Όσκαρ"
+    },
+    "emmy": {
+      "won_one": "Κέρδισε {{count}} Primetime Emmy",
+      "won_other": "Κέρδισε {{count}} Primetime Emmy",
+      "nominated_one": "Υποψήφιο για {{count}} Primetime Emmy",
+      "nominated_other": "Υποψήφιο για {{count}} Primetime Emmy"
+    },
+    "globe": {
+      "won_one": "Κέρδισε {{count}} Χρυσή Σφαίρα",
+      "won_other": "Κέρδισε {{count}} Χρυσές Σφαίρες",
+      "nominated_one": "Υποψήφιο για {{count}} Χρυσή Σφαίρα",
+      "nominated_other": "Υποψήφιο για {{count}} Χρυσές Σφαίρες"
+    },
+    "bafta": {
+      "won_one": "Κέρδισε {{count}} BAFTA",
+      "won_other": "Κέρδισε {{count}} BAFTA",
+      "nominated_one": "Υποψήφιο για {{count}} BAFTA",
+      "nominated_other": "Υποψήφιο για {{count}} BAFTA"
+    },
+    "wins_one": "{{count}} βραβείο",
+    "wins_other": "{{count}} βραβεία",
+    "nominations_one": "{{count}} υποψηφιότητα",
+    "nominations_other": "{{count}} υποψηφιότητες",
+    "winsAndNominations": "{{wins}} και {{nominations}}"
+  },
+  "departments": {
+    "Acting": "Ηθοποιός",
+    "Directing": "Σκηνοθεσία",
+    "Writing": "Σενάριο",
+    "Production": "Παραγωγή",
+    "Sound": "Ήχος",
+    "Camera": "Κάμερα",
+    "Editing": "Μοντάζ",
+    "Art": "Σκηνογραφία",
+    "Crew": "Συντελεστές",
+    "Visual Effects": "Οπτικά εφέ",
+    "Costume & Make-Up": "Κοστούμια και μακιγιάζ",
+    "Lighting": "Φωτισμός",
+    "Creator": "Δημιουργός"
+  },
+  "starters": {
+    "recent": "Προστέθηκαν πρόσφατα",
+    "unwatched": "Δεν έχουν προβληθεί",
+    "tonight": "Αρκετά σύντομο για απόψε"
+  },
+  "filter": {
+    "decade": "Δεκαετία του {{decade}}",
+    "yearRange": "{{from}}–{{to}}",
+    "yearOrLater": "{{year}} ή αργότερα",
+    "yearOrEarlier": "{{year}} ή νωρίτερα",
+    "lastYear": "τον τελευταίο χρόνο",
+    "lastWeeks_one": "την τελευταία εβδομάδα",
+    "lastWeeks_other": "τις τελευταίες {{count}} εβδομάδες",
+    "lastDays_one": "την τελευταία {{count}} ημέρα",
+    "lastDays_other": "τις τελευταίες {{count}} ημέρες",
+    "runtime": {
+      "titles": {
+        "between": "{{min}}–{{max}}′",
+        "over": "Πάνω από {{min}}′",
+        "under": "Κάτω από {{max}}′"
+      },
+      "episodes": {
+        "between": "Επεισόδια {{min}}–{{max}}′",
+        "over": "Επεισόδια πάνω από {{min}}′",
+        "under": "Επεισόδια κάτω από {{max}}′"
+      }
+    }
+  },
+  "themes": {
+    "clean": {
+      "name": "Καθαρό",
+      "description": "Λευκό, ένα μπλε, χωρίς πατούρες. Μόνο οι αφίσες."
+    },
+    "dark": {
+      "name": "Σκοτεινό",
+      "description": "Απόλυτο μαύρο και καθαρό λευκό. Ξεκούραστο για τα μάτια και για οθόνη OLED."
+    },
+    "drive-in": {
+      "name": "Drive-in",
+      "description": "Καφέ της δεκαετίας του '70 και κεχριμπαρένιες φωτεινές πινακίδες, σαν βραδιά σε drive-in."
+    },
+    "high-contrast": {
+      "name": "Υψηλή αντίθεση",
+      "description": "Μαύρο, λευκό και έντονο κίτρινο, για το πιο ευανάγνωστο κείμενο από την άλλη άκρη του δωματίου."
+    },
+    "light": {
+      "name": "Φωτεινό",
+      "description": "Ζεστό λευκό χαρτιού με κοραλί, για φωτεινό δωμάτιο."
+    },
+    "matinee": {
+      "name": "Matinee",
+      "description": "Ζεστό σκοτάδι αίθουσας με κοραλί τόνο. Η εμφάνιση του σπιτιού."
+    },
+    "sci-fi": {
+      "name": "Sci-fi",
+      "description": "Βαθύ διαστημικό μπλε με λάμψη νέον κυανού και φουτουριστική γραμματοσειρά."
+    }
+  },
+  "every": {
+    "seconds_one": "{{count}} δευτερόλεπτο",
+    "seconds_other": "{{count}} δευτερόλεπτα",
+    "minutes_one": "{{count}} λεπτό",
+    "minutes_other": "{{count}} λεπτά",
+    "hours_one": "{{count}} ώρα",
+    "hours_other": "{{count}} ώρες"
+  },
+  "avatars": {
+    "coral": "Κοραλί",
+    "amber": "Κεχριμπαρί",
+    "lime": "Λάιμ",
+    "teal": "Πετρόλ",
+    "sky": "Γαλάζιο",
+    "violet": "Βιολετί",
+    "pink": "Ροζ",
+    "slate": "Σχιστόλιθος"
+  },
+  "day": {
+    "today": "Σήμερα",
+    "tomorrow": "Αύριο",
+    "yesterday": "Χθες"
+  },
+  "release": {
+    "cinemas": "Στους κινηματογράφους",
+    "digital": "Ψηφιακή κυκλοφορία",
+    "physical": "Σε δίσκο",
+    "airs": "Προβάλλεται"
+  },
+  "issue": {
+    "video": "Εικόνα",
+    "audio": "Ήχος",
+    "subtitles": "Υπότιτλοι",
+    "wrong": "Λάθος τίτλος",
+    "other": "Κάτι άλλο"
+  },
+  "holidays": {
+    "valentines": "Για του Αγίου Βαλεντίνου",
+    "easter": "Για το Πάσχα",
+    "halloween": "Εποχή τρόμου",
+    "thanksgiving": "Για την Ημέρα των Ευχαριστιών",
+    "christmas": "Χριστουγεννιάτικα αγαπημένα",
+    "newyear": "Για να υποδεχτούμε τη νέα χρονιά"
+  },
+  "discover": {
+    "rows": {
+      "trending": "Τάσεις",
+      "popular-movies": "Δημοφιλείς ταινίες",
+      "popular-shows": "Δημοφιλείς σειρές",
+      "upcoming-movies": "Σύντομα στους κινηματογράφους",
+      "upcoming-shows": "Νέες σειρές που έρχονται"
+    },
+    "because": "Επειδή είδες {{title}}",
+    "status": {
+      "available": "Στη βιβλιοθήκη σου",
+      "added": "Έρχεται",
+      "requested": "Ζητήθηκε"
+    },
+    "kind": {
+      "movie": "Ταινία",
+      "show": "Σειρά"
+    }
+  }
+}

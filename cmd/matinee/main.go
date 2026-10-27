@@ -155,6 +155,7 @@ func run() error {
 	if tmdb != nil {
 		apiServer.TrailerSource = tmdb
 		apiServer.People = tmdb
+		apiServer.Translate = fetcher.TranslateAll
 		apiServer.Keywords = tmdb
 	}
 	if cfg.RemoteAddr != "" {

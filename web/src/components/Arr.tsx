@@ -1,9 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Flag, X } from 'lucide-react'
 import { useState, type FormEvent } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { api, type IssueKind, type Item, type Upcoming, type User } from '../api'
-import { hue } from '../format'
+import { episodeCode, hue } from '../format'
+import i18n, { formatLocale } from '../i18n'
 import { Row, RowItem } from './Row'
 import { Button, Field, inputClass } from './ui'
 
@@ -68,34 +70,30 @@ export function RemotePoster({
 export function dayLabel(date: Date) {
   const start = (d: Date) => new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime()
   const days = Math.round((start(date) - start(new Date())) / 86_400_000)
-  if (days === 0) return 'Today'
-  if (days === 1) return 'Tomorrow'
-  if (days === -1) return 'Yesterday'
-  return date.toLocaleDateString(undefined, {
+  if (days === 0) return i18n.t('common:day.today')
+  if (days === 1) return i18n.t('common:day.tomorrow')
+  if (days === -1) return i18n.t('common:day.yesterday')
+  return date.toLocaleDateString(formatLocale(), {
     weekday: 'short',
     day: 'numeric',
     month: 'short',
   })
 }
 
-export const releaseLabel: Record<Upcoming['release'], string> = {
-  cinemas: 'In cinemas',
-  digital: 'Digital release',
-  physical: 'On disc',
-  airs: 'Airs',
-}
+export const releaseLabel = (release: Upcoming['release']) => i18n.t(`common:release.${release}`)
 
 export function upcomingTitle(u: Upcoming) {
   return u.kind === 'episode' ? (u.showTitle ?? u.title) : u.title
 }
 
 export function upcomingDetail(u: Upcoming) {
-  if (u.kind === 'episode') return `S${u.season} · E${u.episode}${u.title ? ` · ${u.title}` : ''}`
-  return releaseLabel[u.release]
+  if (u.kind === 'episode') return [episodeCode(u.season, u.episode), u.title].filter(Boolean).join(' · ')
+  return releaseLabel(u.release)
 }
 
 // A row of what's coming soon, for Home.
 export function ComingSoonRow() {
+  const { t } = useTranslation()
   const { data: opts } = useRequestOptions()
   const { data } = useQuery({
     queryKey: ['upcoming', 30],
@@ -105,7 +103,7 @@ export function ComingSoonRow() {
   })
   if (!data?.items.length) return null
   return (
-    <Row title="Coming soon" more="/upcoming">
+    <Row title={t('nav.comingSoon')} more="/upcoming">
       {data.items.slice(0, 20).map((u, i) => (
         <RowItem key={i}>
           <Link to="/upcoming" className="group block animate-fade">
@@ -127,16 +125,12 @@ export function ComingSoonRow() {
   )
 }
 
-export const issueKinds: { value: IssueKind; label: string }[] = [
-  { value: 'video', label: 'Picture' },
-  { value: 'audio', label: 'Sound' },
-  { value: 'subtitles', label: 'Subtitles' },
-  { value: 'wrong', label: 'Wrong title' },
-  { value: 'other', label: 'Something else' },
-]
+export const issueKinds: IssueKind[] = ['video', 'audio', 'subtitles', 'wrong', 'other']
+export const issueKindLabel = (kind: string) => i18n.t(`common:issue.${kind}`, { defaultValue: kind })
 
 // Report a problem with an item, for an admin to fix.
 export function ReportProblem({ item }: { item: Item }) {
+  const { t } = useTranslation()
   const qc = useQueryClient()
   const { data: opts } = useRequestOptions()
   const [open, setOpen] = useState(false)
@@ -152,12 +146,12 @@ export function ReportProblem({ item }: { item: Item }) {
   })
   if (!opts?.canReport) return null
   if (report.isSuccess && !open) {
-    return <span className="flex h-10 items-center text-sm text-muted">Thanks, an admin will take a look.</span>
+    return <span className="flex h-10 items-center text-sm text-muted">{t('report.thanks')}</span>
   }
   if (!open) {
     return (
       <Button variant="ghost" icon={<Flag className="size-4" />} onClick={() => setOpen(true)}>
-        Report a problem
+        {t('report.button')}
       </Button>
     )
   }
@@ -168,8 +162,8 @@ export function ReportProblem({ item }: { item: Item }) {
   return (
     <form onSubmit={submit} className="w-full max-w-lg space-y-4 rounded-xl border border-line/60 bg-surface/90 p-4 backdrop-blur">
       <div className="flex items-center justify-between">
-        <span className="font-medium">What's wrong with {item.title}?</span>
-        <button type="button" onClick={() => setOpen(false)} aria-label="Close" className="text-muted hover:text-text">
+        <span className="font-medium">{t('report.whatsWrong', { title: item.title })}</span>
+        <button type="button" onClick={() => setOpen(false)} aria-label={t('close')} className="text-muted hover:text-text">
           <X className="size-4" />
         </button>
       </div>
@@ -177,29 +171,29 @@ export function ReportProblem({ item }: { item: Item }) {
         {issueKinds.map((k) => (
           <button
             type="button"
-            key={k.value}
-            onClick={() => setKind(k.value)}
+            key={k}
+            onClick={() => setKind(k)}
             className={`rounded-full border px-3 py-1.5 text-sm transition-colors ${
-              kind === k.value ? 'border-accent bg-accent/10 text-text' : 'border-line text-muted hover:border-faint'
+              kind === k ? 'border-accent bg-accent/10 text-text' : 'border-line text-muted hover:border-faint'
             }`}
           >
-            {k.label}
+            {issueKindLabel(k)}
           </button>
         ))}
       </div>
-      <Field label="Details (optional)">
+      <Field label={t('report.details')}>
         <textarea
           className={`${inputClass} h-20 py-2`}
           maxLength={1000}
           value={note}
           onChange={(e) => setNote(e.target.value)}
-          placeholder="Like: no sound after 20 minutes"
+          placeholder={t('report.detailsExample')}
         />
       </Field>
       {report.error && <p className="text-sm text-danger">{report.error.message}</p>}
       <div className="flex justify-end">
         <Button variant="primary" disabled={report.isPending}>
-          Send
+          {t('report.send')}
         </Button>
       </div>
     </form>
@@ -208,6 +202,7 @@ export function ReportProblem({ item }: { item: Item }) {
 
 // An admin's choice of quality for a movie, or the show an item belongs to.
 export function ItemQuality({ item, user }: { item: Item; user?: User }) {
+  const { t } = useTranslation()
   const qc = useQueryClient()
   const { data: opts } = useRequestOptions()
   const app = item.kind === 'movie' ? opts?.movies : ['show', 'season', 'episode'].includes(item.kind) ? opts?.shows : false
@@ -225,14 +220,14 @@ export function ItemQuality({ item, user }: { item: Item; user?: User }) {
   if (!enabled || !data) return null
   return (
     <label className="flex h-10 items-center gap-2 text-sm text-muted">
-      Quality{item.kind !== 'movie' && ' for the show'}
+      {item.kind === 'movie' ? t('quality.label') : t('quality.forShow')}
       <select
         className="h-10 rounded-lg border border-line bg-surface px-2 text-sm text-text focus:border-accent focus:outline-none"
         value={data.qualityProfileId}
         disabled={set.isPending}
         onChange={(e) => {
           const p = data.qualityProfiles.find((x) => x.id === Number(e.target.value))
-          if (p && confirm(`Switch to ${p.name}? ${data.app === 'radarr' ? 'Radarr' : 'Sonarr'} will look for copies that match.`))
+          if (p && confirm(t('quality.confirm', { name: p.name, app: data.app === 'radarr' ? 'Radarr' : 'Sonarr' })))
             set.mutate(p.id)
         }}
       >
@@ -242,7 +237,7 @@ export function ItemQuality({ item, user }: { item: Item; user?: User }) {
           </option>
         ))}
       </select>
-      {set.isSuccess && <span className="text-accent">Searching…</span>}
+      {set.isSuccess && <span className="text-accent">{t('quality.searching')}</span>}
       {set.error && <span className="text-danger">{set.error.message}</span>}
     </label>
   )

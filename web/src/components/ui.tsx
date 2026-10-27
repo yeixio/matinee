@@ -1,10 +1,12 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react'
+import { useTranslation } from 'react-i18next'
 
 export function Spinner({ className = '' }: { className?: string }) {
+  const { t } = useTranslation()
   return (
     <div
       role="status"
-      aria-label="Loading"
+      aria-label={t('loading')}
       className={`size-8 animate-spin rounded-full border-2 border-line border-t-accent ${className}`}
     />
   )
