@@ -99,5 +99,8 @@
   "overseerr_isnt_connected": "Overseerria ei ole yhdistetty",
   "someone_already_asked_for_title": "joku on jo pyytänyt nimikettä {{title}}",
   "tmdbid_is_required": "tmdbId vaaditaan",
-  "no_such_row": "riviä ei ole"
+  "no_such_row": "riviä ei ole",
+  "tmdb_didnt_accept_that_key": "TMDB ei hyväksynyt avainta",
+  "tmdb_couldnt_be_reached_to_check_the_key": "TMDB:hen ei saatu yhteyttä avaimen tarkistamiseksi",
+  "this_server_cant_change_its_tmdb_key": "tämä palvelin ei voi vaihtaa TMDB-avaintaan"
 }

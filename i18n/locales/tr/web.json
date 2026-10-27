@@ -572,7 +572,7 @@
     "close": "Kapat"
   },
   "settings": {
-    "tmdbNotice": "Afişler ve açıklamalar <link>TMDB</link>'den gelir. Bu ürün TMDB API'sini kullanır ancak TMDB tarafından onaylanmış veya sertifikalandırılmış değildir.",
+    "tmdbNotice": "Afişler ve açıklamalar <site>TMDB</site>'den gelir. Bu ürün TMDB API'sini kullanır ancak TMDB tarafından onaylanmış veya sertifikalandırılmış değildir.",
     "libraries": {
       "title": "Kütüphaneler",
       "none": "Henüz kütüphane yok.",
@@ -685,6 +685,18 @@
       "title": "Ana sayfa",
       "holidays": "Bayram satırları",
       "holidaysDetail": "Sevgililer Günü, Paskalya, Cadılar Bayramı, Şükran Günü ve Noel'den önceki ay ve yılbaşı gecesinden önceki hafta, Ana sayfa o güne uygun, anahtar kelimelerine, adlarına ve açıklamalarına göre seçilmiş bir satırla başlar."
+    },
+    "tmdb": {
+      "title": "Afişler ve ayrıntılar",
+      "intro": "Filmler ve diziler için afişler, açıklamalar, oyuncular ve fragmanlar ücretsiz bir API anahtarıyla TMDB'den gelir. <guide>Nasıl alınır</guide>",
+      "usingSaved": "Burada kaydedilen, {{hint}} ile biten anahtar kullanılıyor.",
+      "usingEnvironment": "MATINEE_TMDB_KEY'deki, {{hint}} ile biten anahtar kullanılıyor. Burada kaydedilen bir anahtar onun yerini alır.",
+      "usingBuiltIn": "Matinee'ye yerleşik anahtar kullanılıyor. Burada kaydedilen bir anahtar onun yerini alır.",
+      "none": "Henüz anahtar yok; filmler ve diziler yalnızca medyanın yanındaki görsel dosyalarını kullanıyor.",
+      "label": "TMDB API anahtarı",
+      "save": "Anahtarı kaydet",
+      "remove": "Kayıtlı anahtarı kaldır",
+      "saved": "Kaydedildi. Matinee şimdi afişleri ve ayrıntıları dolduruyor."
     }
   },
   "language": {

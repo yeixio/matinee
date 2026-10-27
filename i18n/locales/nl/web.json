@@ -572,7 +572,7 @@
     "close": "Sluiten"
   },
   "settings": {
-    "tmdbNotice": "Posters en beschrijvingen komen van <link>TMDB</link>. Dit product gebruikt de TMDB-API maar wordt niet door TMDB onderschreven of gecertificeerd.",
+    "tmdbNotice": "Posters en beschrijvingen komen van <site>TMDB</site>. Dit product gebruikt de TMDB-API maar wordt niet door TMDB onderschreven of gecertificeerd.",
     "libraries": {
       "title": "Bibliotheken",
       "none": "Nog geen bibliotheken.",
@@ -685,6 +685,18 @@
       "title": "Start",
       "holidays": "Feestdagrijen",
       "holidaysDetail": "In de maand voor Valentijnsdag, Pasen, Halloween, Thanksgiving en Kerstmis, en de week voor oudejaarsavond, begint Start met een rij titels voor die dag, gekozen op trefwoorden, titels en beschrijvingen."
+    },
+    "tmdb": {
+      "title": "Posters en details",
+      "intro": "Posters, beschrijvingen, cast en trailers voor films en series komen van TMDB, met een gratis API-sleutel. <guide>Zo krijg je er een</guide>",
+      "usingSaved": "De hier opgeslagen sleutel wordt gebruikt, eindigend op {{hint}}.",
+      "usingEnvironment": "De sleutel uit MATINEE_TMDB_KEY wordt gebruikt, eindigend op {{hint}}. Een hier opgeslagen sleutel vervangt hem.",
+      "usingBuiltIn": "De in Matinee ingebouwde sleutel wordt gebruikt. Een hier opgeslagen sleutel vervangt hem.",
+      "none": "Nog geen sleutel, dus films en series gebruiken alleen afbeeldingsbestanden naast je media.",
+      "label": "TMDB-API-sleutel",
+      "save": "Sleutel opslaan",
+      "remove": "Opgeslagen sleutel verwijderen",
+      "saved": "Opgeslagen. Matinee vult nu posters en details aan."
     }
   },
   "language": {

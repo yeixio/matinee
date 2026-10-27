@@ -572,7 +572,7 @@
     "close": "Sulje"
   },
   "settings": {
-    "tmdbNotice": "Julisteet ja kuvaukset tulevat <link>TMDB</link>:stä. Tämä tuote käyttää TMDB:n rajapintaa, mutta TMDB ei ole hyväksynyt tai sertifioinut sitä.",
+    "tmdbNotice": "Julisteet ja kuvaukset tulevat <site>TMDB</site>:stä. Tämä tuote käyttää TMDB:n rajapintaa, mutta TMDB ei ole hyväksynyt tai sertifioinut sitä.",
     "libraries": {
       "title": "Kirjastot",
       "none": "Ei vielä kirjastoja.",
@@ -685,6 +685,18 @@
       "title": "Koti",
       "holidays": "Juhlapyhärivit",
       "holidaysDetail": "Kuukautta ennen ystävänpäivää, pääsiäistä, halloweenia, kiitospäivää ja joulua sekä viikkoa ennen uudenvuodenaattoa Koti alkaa rivillä päivään sopivia nimikkeitä, jotka valitaan avainsanojen, nimien ja kuvausten perusteella."
+    },
+    "tmdb": {
+      "title": "Julisteet ja tiedot",
+      "intro": "Elokuvien ja sarjojen julisteet, kuvaukset, näyttelijät ja trailerit tulevat TMDB:stä ilmaisella API-avaimella. <guide>Näin saat sellaisen</guide>",
+      "usingSaved": "Käytössä on tähän tallennettu avain, joka päättyy {{hint}}.",
+      "usingEnvironment": "Käytössä on MATINEE_TMDB_KEY-avain, joka päättyy {{hint}}. Tähän tallennettu avain korvaa sen.",
+      "usingBuiltIn": "Käytössä on Matineen sisäänrakennettu avain. Tähän tallennettu avain korvaa sen.",
+      "none": "Avainta ei vielä ole, joten elokuvat ja sarjat käyttävät vain mediasi vieressä olevia kuvatiedostoja.",
+      "label": "TMDB-API-avain",
+      "save": "Tallenna avain",
+      "remove": "Poista tallennettu avain",
+      "saved": "Tallennettu. Matinee täydentää nyt julisteita ja tietoja."
     }
   },
   "language": {

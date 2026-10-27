@@ -99,5 +99,8 @@
   "overseerr_isnt_connected": "Overseerr не подключён",
   "someone_already_asked_for_title": "кто-то уже запросил {{title}}",
   "tmdbid_is_required": "нужен tmdbId",
-  "no_such_row": "такого ряда нет"
+  "no_such_row": "такого ряда нет",
+  "tmdb_didnt_accept_that_key": "TMDB не принял этот ключ",
+  "tmdb_couldnt_be_reached_to_check_the_key": "Не удалось связаться с TMDB, чтобы проверить ключ",
+  "this_server_cant_change_its_tmdb_key": "этот сервер не может сменить свой ключ TMDB"
 }

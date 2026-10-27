@@ -154,7 +154,7 @@ func (s *Server) probeTrailer(ctx context.Context, path string) (probe.Result, e
 // remoteTrailers asks TMDB for a title's trailers. A season without its own
 // borrows its show's. Failures only mean no online trailers this time.
 func (s *Server) remoteTrailers(ctx context.Context, it store.Item) []metadata.Video {
-	if s.TrailerSource == nil {
+	if !ready(s.TrailerSource) {
 		return nil
 	}
 	kind, id, season := it.Kind, it.TMDBID, 0

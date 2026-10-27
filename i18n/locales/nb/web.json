@@ -572,7 +572,7 @@
     "close": "Lukk"
   },
   "settings": {
-    "tmdbNotice": "Plakater og beskrivelser kommer fra <link>TMDB</link>. Dette produktet bruker TMDB-API-et, men er ikke godkjent eller sertifisert av TMDB.",
+    "tmdbNotice": "Plakater og beskrivelser kommer fra <site>TMDB</site>. Dette produktet bruker TMDB-API-et, men er ikke godkjent eller sertifisert av TMDB.",
     "libraries": {
       "title": "Biblioteker",
       "none": "Ingen biblioteker ennå.",
@@ -685,6 +685,18 @@
       "title": "Hjem",
       "holidays": "Høytidsrader",
       "holidaysDetail": "Måneden før valentinsdagen, påske, halloween, Thanksgiving og jul, og uken før nyttårsaften, starter Hjem med en rad titler for dagen, valgt ut fra nøkkelord, titler og beskrivelser."
+    },
+    "tmdb": {
+      "title": "Plakater og detaljer",
+      "intro": "Plakater, beskrivelser, rolleliste og trailere for filmer og serier kommer fra TMDB, med en gratis API-nøkkel. <guide>Slik får du en</guide>",
+      "usingSaved": "Bruker nøkkelen som er lagret her, som slutter på {{hint}}.",
+      "usingEnvironment": "Bruker nøkkelen fra MATINEE_TMDB_KEY, som slutter på {{hint}}. En nøkkel lagret her erstatter den.",
+      "usingBuiltIn": "Bruker nøkkelen som er innebygd i Matinee. En nøkkel lagret her erstatter den.",
+      "none": "Ingen nøkkel ennå, så filmer og serier bruker bare bildefiler ved siden av mediene dine.",
+      "label": "TMDB API-nøkkel",
+      "save": "Lagre nøkkel",
+      "remove": "Fjern lagret nøkkel",
+      "saved": "Lagret. Matinee fyller nå inn plakater og detaljer."
     }
   },
   "language": {

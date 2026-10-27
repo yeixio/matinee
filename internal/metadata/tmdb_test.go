@@ -3,6 +3,7 @@ package metadata
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"io"
 	"log/slog"
 	"net/http"
@@ -224,5 +225,35 @@ func TestTMDBKeywords(t *testing.T) {
 	ids, err := tm.Keywords(context.Background(), "halloween")
 	if err != nil || !slices.Equal(ids, []int64{3335, 9002}) {
 		t.Fatalf("keywords: %v %v", ids, err)
+	}
+}
+
+func TestTMDBWithoutKey(t *testing.T) {
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.URL.Query().Get("api_key") != "good" {
+			w.WriteHeader(http.StatusUnauthorized)
+			return
+		}
+		w.Write([]byte(`{}`))
+	}))
+	defer srv.Close()
+	tm := NewTMDB("")
+	tm.BaseURL = srv.URL
+	ctx := context.Background()
+	if tm.Ready() || len(tm.Kinds()) != 0 {
+		t.Fatalf("without a key it looks up nothing: %v", tm.Kinds())
+	}
+	if _, err := tm.Lookup(ctx, Query{Kind: "movie", Title: "Heat"}); !errors.Is(err, ErrNoKey) {
+		t.Fatalf("lookup without a key: %v", err)
+	}
+	if err := tm.Check(ctx, "bad"); !errors.Is(err, ErrBadKey) {
+		t.Fatalf("a bad key: %v", err)
+	}
+	if err := tm.Check(ctx, "good"); err != nil {
+		t.Fatalf("a good key: %v", err)
+	}
+	tm.SetKey("good")
+	if !tm.Ready() || len(tm.Kinds()) == 0 {
+		t.Fatal("with a key it looks up movies and TV")
 	}
 }

@@ -18,7 +18,7 @@ type Translator interface {
 }
 
 func (f *Fetcher) translator() Translator {
-	for _, p := range f.Providers {
+	for _, p := range f.active() {
 		if t, ok := p.(Translator); ok {
 			return t
 		}

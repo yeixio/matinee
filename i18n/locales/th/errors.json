@@ -99,5 +99,8 @@
   "overseerr_isnt_connected": "Overseerr ไม่ได้เชื่อมต่อ",
   "someone_already_asked_for_title": "มีคนขอ {{title}} แล้ว",
   "tmdbid_is_required": "ต้องระบุ tmdbId",
-  "no_such_row": "ไม่มีแถวนี้"
+  "no_such_row": "ไม่มีแถวนี้",
+  "tmdb_didnt_accept_that_key": "TMDB ไม่ยอมรับคีย์นี้",
+  "tmdb_couldnt_be_reached_to_check_the_key": "ไม่สามารถติดต่อ TMDB เพื่อตรวจสอบคีย์ได้",
+  "this_server_cant_change_its_tmdb_key": "เซิร์ฟเวอร์นี้เปลี่ยนคีย์ TMDB ของตัวเองไม่ได้"
 }

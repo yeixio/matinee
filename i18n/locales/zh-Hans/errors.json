@@ -99,5 +99,8 @@
   "overseerr_isnt_connected": "Overseerr 未连接",
   "someone_already_asked_for_title": "已经有人请求了《{{title}}》",
   "tmdbid_is_required": "需要 tmdbId",
-  "no_such_row": "没有这一行"
+  "no_such_row": "没有这一行",
+  "tmdb_didnt_accept_that_key": "TMDB 未接受该密钥",
+  "tmdb_couldnt_be_reached_to_check_the_key": "无法连接 TMDB 来验证密钥",
+  "this_server_cant_change_its_tmdb_key": "此服务器无法更改其 TMDB 密钥"
 }

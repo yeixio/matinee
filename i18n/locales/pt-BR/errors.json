@@ -99,5 +99,8 @@
   "overseerr_isnt_connected": "o Overseerr não está conectado",
   "someone_already_asked_for_title": "alguém já pediu {{title}}",
   "tmdbid_is_required": "tmdbId é obrigatório",
-  "no_such_row": "fileira não encontrada"
+  "no_such_row": "fileira não encontrada",
+  "tmdb_didnt_accept_that_key": "O TMDB não aceitou essa chave",
+  "tmdb_couldnt_be_reached_to_check_the_key": "Não foi possível acessar o TMDB para verificar a chave",
+  "this_server_cant_change_its_tmdb_key": "este servidor não pode mudar sua chave do TMDB"
 }

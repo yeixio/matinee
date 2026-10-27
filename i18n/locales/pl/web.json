@@ -580,7 +580,7 @@
     "close": "Zamknij"
   },
   "settings": {
-    "tmdbNotice": "Plakaty i opisy pochodzą z <link>TMDB</link>. Ten produkt korzysta z API TMDB, ale nie jest przez TMDB popierany ani certyfikowany.",
+    "tmdbNotice": "Plakaty i opisy pochodzą z <site>TMDB</site>. Ten produkt korzysta z API TMDB, ale nie jest przez TMDB popierany ani certyfikowany.",
     "libraries": {
       "title": "Biblioteki",
       "none": "Brak bibliotek.",
@@ -693,6 +693,18 @@
       "title": "Start",
       "holidays": "Rzędy świąteczne",
       "holidaysDetail": "W miesiącu przed walentynkami, Wielkanocą, Halloween, Świętem Dziękczynienia i Bożym Narodzeniem oraz w tygodniu przed sylwestrem Start zaczyna się od rzędu tytułów na tę okazję, wybranych po słowach kluczowych, tytułach i opisach."
+    },
+    "tmdb": {
+      "title": "Plakaty i szczegóły",
+      "intro": "Plakaty, opisy, obsada i zwiastuny filmów i seriali pochodzą z TMDB, z darmowym kluczem API. <guide>Jak go zdobyć</guide>",
+      "usingSaved": "Używany jest klucz zapisany tutaj, kończący się na {{hint}}.",
+      "usingEnvironment": "Używany jest klucz z MATINEE_TMDB_KEY, kończący się na {{hint}}. Klucz zapisany tutaj go zastąpi.",
+      "usingBuiltIn": "Używany jest klucz wbudowany w Matinee. Klucz zapisany tutaj go zastąpi.",
+      "none": "Brak klucza, więc filmy i seriale używają tylko plików graficznych obok Twoich multimediów.",
+      "label": "Klucz API TMDB",
+      "save": "Zapisz klucz",
+      "remove": "Usuń zapisany klucz",
+      "saved": "Zapisano. Matinee uzupełnia teraz plakaty i szczegóły."
     }
   },
   "language": {

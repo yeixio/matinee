@@ -576,7 +576,7 @@
     "close": "Chiudi"
   },
   "settings": {
-    "tmdbNotice": "Locandine e descrizioni provengono da <link>TMDB</link>. Questo prodotto usa l’API di TMDB ma non è approvato né certificato da TMDB.",
+    "tmdbNotice": "Locandine e descrizioni provengono da <site>TMDB</site>. Questo prodotto usa l’API di TMDB ma non è approvato né certificato da TMDB.",
     "libraries": {
       "title": "Librerie",
       "none": "Ancora nessuna libreria.",
@@ -689,6 +689,18 @@
       "title": "Home",
       "holidays": "Righe delle feste",
       "holidaysDetail": "Nel mese prima di San Valentino, Pasqua, Halloween, Ringraziamento e Natale, e nella settimana prima di Capodanno, la Home inizia con una riga di titoli per l'occasione, scelti in base a parole chiave, titoli e descrizioni."
+    },
+    "tmdb": {
+      "title": "Locandine e dettagli",
+      "intro": "Locandine, descrizioni, cast e trailer di film e serie arrivano da TMDB, con una chiave API gratuita. <guide>Come ottenerla</guide>",
+      "usingSaved": "Viene usata la chiave salvata qui, che termina con {{hint}}.",
+      "usingEnvironment": "Viene usata la chiave di MATINEE_TMDB_KEY, che termina con {{hint}}. Una chiave salvata qui la sostituisce.",
+      "usingBuiltIn": "Viene usata la chiave integrata in Matinee. Una chiave salvata qui la sostituisce.",
+      "none": "Nessuna chiave per ora, quindi film e serie usano solo i file di immagine accanto ai tuoi media.",
+      "label": "Chiave API di TMDB",
+      "save": "Salva chiave",
+      "remove": "Rimuovi la chiave salvata",
+      "saved": "Salvata. Matinee sta completando locandine e dettagli."
     }
   },
   "language": {

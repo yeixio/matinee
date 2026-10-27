@@ -2096,6 +2096,26 @@ components:
           type: integer
           readOnly: true
           description: How often every library is rescanned in full, 0 for never (MATINEE_SCAN_INTERVAL). Ignored in a `PUT`.
+        tmdb:
+          type: object
+          readOnly: true
+          description: Where the TMDB key in use comes from. The key itself is never sent. Ignored in a `PUT`.
+          properties:
+            source:
+              type: string
+              enum: [settings, environment, built-in, none]
+              description: Saved with `tmdbKey`, from `MATINEE_TMDB_KEY`, built into the server, or no key at all.
+            hint: { type: string, description: The key's last four characters. }
+        tmdbKey:
+          type: string
+          writeOnly: true
+          description: |
+            A TMDB API key or API Read Access Token to use from now on. It's
+            checked with TMDB first (400 when TMDB turns it down, 502 when
+            TMDB can't be reached), then replaces `MATINEE_TMDB_KEY` and any
+            built-in key, and every library is scanned to fill in what's
+            missing. An empty string removes the saved key and goes back to
+            those.
         hardwareAcceleration:
           type: string
           enum: [auto, off, nvenc, vaapi, qsv, videotoolbox, amf, v4l2m2m]

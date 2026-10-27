@@ -27,6 +27,7 @@ export default function Settings() {
       {me?.isAdmin && <Libraries />}
       {me?.isAdmin && <NewFiles />}
       {me?.isAdmin && <MediaAnalysis />}
+      {me?.isAdmin && <TMDBKey />}
       {me?.isAdmin && <Users me={me} />}
       {me?.isAdmin && <Profiles />}
       {me?.isAdmin && <HomeNetwork />}
@@ -41,7 +42,7 @@ export default function Settings() {
       <p className="text-xs text-faint">
         <Trans
           i18nKey="settings.tmdbNotice"
-          components={{ link: <a href="https://www.themoviedb.org/" target="_blank" rel="noreferrer" className="underline hover:text-muted" /> }}
+          components={{ site: <a href="https://www.themoviedb.org/" target="_blank" rel="noreferrer" className="underline hover:text-muted" /> }}
         />
       </p>
       <ServerVersion />
@@ -625,6 +626,74 @@ function Playback() {
         { binge: !prefs.binge },
         !prefs.autoPlay,
       )}
+    </section>
+  )
+}
+
+// Where people learn to get a TMDB key.
+const tmdbGuide = 'https://matinee.yeix.io/docs/getting-started/posters-and-details/'
+
+function TMDBKey() {
+  const { t } = useTranslation()
+  const qc = useQueryClient()
+  const { data } = useQuery({ queryKey: ['settings'], queryFn: api.settings })
+  const [key, setKey] = useState('')
+  const [saved, setSaved] = useState(false)
+  const save = useMutation({
+    mutationFn: (tmdbKey: string) => api.saveSettings({ tmdbKey }),
+    onSuccess: (s) => {
+      qc.setQueryData(['settings'], s)
+      setKey('')
+      setSaved(true)
+    },
+  })
+  const tmdb = data?.tmdb
+  const hint = tmdb?.hint ?? '…'
+  const using = {
+    settings: t('settings.tmdb.usingSaved', { hint }),
+    environment: t('settings.tmdb.usingEnvironment', { hint }),
+    'built-in': t('settings.tmdb.usingBuiltIn'),
+    none: t('settings.tmdb.none'),
+  }[tmdb?.source ?? 'none']
+  const submit = (e: FormEvent) => {
+    e.preventDefault()
+    setSaved(false)
+    save.mutate(key)
+  }
+  return (
+    <section className="space-y-4">
+      <h2 className="text-lg font-semibold">{t('settings.tmdb.title')}</h2>
+      <p className="text-sm text-muted">
+        <Trans
+          i18nKey="settings.tmdb.intro"
+          components={{ guide: <a href={tmdbGuide} target="_blank" rel="noreferrer" className="text-accent underline" /> }}
+        />
+      </p>
+      <form onSubmit={submit} className="space-y-3 rounded-xl border border-line/60 bg-surface/50 p-4">
+        <p className="text-sm">{using}</p>
+        <Field label={t('settings.tmdb.label')}>
+          <input
+            type="password"
+            autoComplete="off"
+            spellCheck={false}
+            className={inputClass}
+            value={key}
+            onChange={(e) => setKey(e.target.value)}
+          />
+        </Field>
+        {save.error && <p className="text-sm text-danger">{save.error.message}</p>}
+        {saved && !save.error && <p className="text-sm text-muted">{t('settings.tmdb.saved')}</p>}
+        <div className="flex flex-wrap gap-2">
+          <Button type="submit" variant="primary" icon={<KeyRound className="size-4" />} disabled={!key.trim() || save.isPending}>
+            {t('settings.tmdb.save')}
+          </Button>
+          {tmdb?.source === 'settings' && (
+            <Button type="button" variant="ghost" disabled={save.isPending} onClick={() => save.mutate('')}>
+              {t('settings.tmdb.remove')}
+            </Button>
+          )}
+        </div>
+      </form>
     </section>
   )
 }

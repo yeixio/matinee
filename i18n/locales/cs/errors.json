@@ -99,5 +99,8 @@
   "overseerr_isnt_connected": "Overseerr není připojený",
   "someone_already_asked_for_title": "o {{title}} už někdo požádal",
   "tmdbid_is_required": "tmdbId je povinné",
-  "no_such_row": "taková řada neexistuje"
+  "no_such_row": "taková řada neexistuje",
+  "tmdb_didnt_accept_that_key": "TMDB tento klíč nepřijalo",
+  "tmdb_couldnt_be_reached_to_check_the_key": "TMDB se nepodařilo kontaktovat kvůli ověření klíče",
+  "this_server_cant_change_its_tmdb_key": "tento server nemůže změnit svůj klíč TMDB"
 }

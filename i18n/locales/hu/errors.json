@@ -99,5 +99,8 @@
   "overseerr_isnt_connected": "az Overseerr nincs összekapcsolva",
   "someone_already_asked_for_title": "valaki már kérte ezt: {{title}}",
   "tmdbid_is_required": "a tmdbId megadása kötelező",
-  "no_such_row": "nincs ilyen sor"
+  "no_such_row": "nincs ilyen sor",
+  "tmdb_didnt_accept_that_key": "A TMDB nem fogadta el ezt a kulcsot",
+  "tmdb_couldnt_be_reached_to_check_the_key": "A TMDB nem érhető el a kulcs ellenőrzéséhez",
+  "this_server_cant_change_its_tmdb_key": "ez a szerver nem tudja módosítani a TMDB-kulcsát"
 }

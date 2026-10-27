@@ -576,7 +576,7 @@
     "close": "Fechar"
   },
   "settings": {
-    "tmdbNotice": "Pôsteres e descrições vêm do <link>TMDB</link>. Este produto usa a API do TMDB, mas não é endossado nem certificado pelo TMDB.",
+    "tmdbNotice": "Pôsteres e descrições vêm do <site>TMDB</site>. Este produto usa a API do TMDB, mas não é endossado nem certificado pelo TMDB.",
     "libraries": {
       "title": "Bibliotecas",
       "none": "Nenhuma biblioteca ainda.",
@@ -689,6 +689,18 @@
       "title": "Início",
       "holidays": "Fileiras de datas comemorativas",
       "holidaysDetail": "No mês antes do Dia dos Namorados, Páscoa, Halloween, Ação de Graças e Natal, e na semana antes do Réveillon, o Início começa com uma fileira de títulos para a data, escolhidos por palavras-chave, títulos e descrições."
+    },
+    "tmdb": {
+      "title": "Pôsteres e detalhes",
+      "intro": "Pôsteres, descrições, elenco e trailers de filmes e séries vêm do TMDB, com uma chave de API gratuita. <guide>Como conseguir uma</guide>",
+      "usingSaved": "Usando a chave salva aqui, terminada em {{hint}}.",
+      "usingEnvironment": "Usando a chave de MATINEE_TMDB_KEY, terminada em {{hint}}. Uma chave salva aqui a substitui.",
+      "usingBuiltIn": "Usando a chave incluída no Matinee. Uma chave salva aqui a substitui.",
+      "none": "Ainda não há chave, então filmes e séries usam só os arquivos de imagem ao lado da sua mídia.",
+      "label": "Chave de API do TMDB",
+      "save": "Salvar chave",
+      "remove": "Remover chave salva",
+      "saved": "Salva. O Matinee está preenchendo pôsteres e detalhes agora."
     }
   },
   "language": {

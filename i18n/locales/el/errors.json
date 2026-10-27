@@ -99,5 +99,8 @@
   "overseerr_isnt_connected": "το Overseerr δεν είναι συνδεδεμένο",
   "someone_already_asked_for_title": "κάποιος έχει ήδη ζητήσει το {{title}}",
   "tmdbid_is_required": "το tmdbId είναι υποχρεωτικό",
-  "no_such_row": "δεν υπάρχει τέτοια σειρά"
+  "no_such_row": "δεν υπάρχει τέτοια σειρά",
+  "tmdb_didnt_accept_that_key": "Το TMDB δεν δέχτηκε αυτό το κλειδί",
+  "tmdb_couldnt_be_reached_to_check_the_key": "Δεν ήταν δυνατή η σύνδεση με το TMDB για έλεγχο του κλειδιού",
+  "this_server_cant_change_its_tmdb_key": "αυτός ο διακομιστής δεν μπορεί να αλλάξει το κλειδί TMDB του"
 }

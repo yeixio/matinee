@@ -47,12 +47,23 @@ type Server struct {
 	Log          *slog.Logger
 	MediaRoot    string // where the folder picker starts; empty means /
 	Name         string // what the apps call this server
-	// TrailerSource lists trailers online; nil without a TMDB key.
+	// TrailerSource lists trailers online; nil, or TMDB without a key,
+	// offers none.
 	TrailerSource TrailerSource
-	// Keywords finds TMDB keywords for holiday rows; nil matches on words alone.
+	// Keywords finds TMDB keywords for holiday rows; nil (or no TMDB key)
+	// matches on words alone.
 	Keywords KeywordSource
-	// People has biographies; nil shows only names and photos.
+	// People has biographies; nil (or no TMDB key) shows only names and photos.
 	People PersonSource
+	// TMDB is the client whose key admins can change in Settings (see
+	// tmdbkey.go); nil means it can't be changed here. TMDBFallback is the
+	// key it goes back to when the one in Settings is cleared, and
+	// TMDBFallbackSource where that one comes from (environment or built-in).
+	TMDB               TMDBKeyHolder
+	TMDBFallback       string
+	TMDBFallbackSource string
+	// OnTMDBKey runs after an admin changes the TMDB key.
+	OnTMDBKey func()
 	// ThemeDir holds the admin's own theme files (see themes.go); empty means
 	// only the built-in themes.
 	ThemeDir string

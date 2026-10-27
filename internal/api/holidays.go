@@ -191,7 +191,7 @@ func (s *Server) keywordIDs(names []string) []string {
 			missing = append(missing, n)
 		}
 	}
-	if len(missing) == 0 || s.Keywords == nil {
+	if len(missing) == 0 || !ready(s.Keywords) {
 		return ids
 	}
 	if k.looking == nil {

@@ -99,5 +99,8 @@
   "overseerr_isnt_connected": "Overseerr לא מחובר",
   "someone_already_asked_for_title": "מישהו כבר ביקש את {{title}}",
   "tmdbid_is_required": "נדרש tmdbId",
-  "no_such_row": "אין שורה כזו"
+  "no_such_row": "אין שורה כזו",
+  "tmdb_didnt_accept_that_key": "TMDB לא קיבל את המפתח הזה",
+  "tmdb_couldnt_be_reached_to_check_the_key": "לא ניתן היה להתחבר ל-TMDB כדי לבדוק את המפתח",
+  "this_server_cant_change_its_tmdb_key": "השרת הזה לא יכול לשנות את מפתח ה-TMDB שלו"
 }

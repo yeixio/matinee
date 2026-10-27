@@ -60,6 +60,18 @@ func (f *Fetcher) Kinds() []string {
 	return kinds
 }
 
+// active lists the providers that look something up now: TMDB without a
+// key doesn't.
+func (f *Fetcher) active() []Provider {
+	var ps []Provider
+	for _, p := range f.Providers {
+		if len(p.Kinds()) > 0 {
+			ps = append(ps, p)
+		}
+	}
+	return ps
+}
+
 func (f *Fetcher) provider(kind string) Provider {
 	for _, p := range f.Providers {
 		if slices.Contains(p.Kinds(), kind) {

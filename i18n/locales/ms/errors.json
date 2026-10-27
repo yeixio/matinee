@@ -99,5 +99,8 @@
   "overseerr_isnt_connected": "Overseerr tidak disambungkan",
   "someone_already_asked_for_title": "seseorang sudah meminta {{title}}",
   "tmdbid_is_required": "tmdbId diperlukan",
-  "no_such_row": "baris tidak wujud"
+  "no_such_row": "baris tidak wujud",
+  "tmdb_didnt_accept_that_key": "TMDB tidak menerima kunci itu",
+  "tmdb_couldnt_be_reached_to_check_the_key": "TMDB tidak dapat dihubungi untuk menyemak kunci",
+  "this_server_cant_change_its_tmdb_key": "pelayan ini tidak boleh menukar kunci TMDB-nya"
 }

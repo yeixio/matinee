@@ -580,7 +580,7 @@
     "close": "Uzavřít"
   },
   "settings": {
-    "tmdbNotice": "Plakáty a popisy pocházejí z <link>TMDB</link>. Tento produkt používá API TMDB, ale TMDB jej neschválila ani necertifikovala.",
+    "tmdbNotice": "Plakáty a popisy pocházejí z <site>TMDB</site>. Tento produkt používá API TMDB, ale TMDB jej neschválila ani necertifikovala.",
     "libraries": {
       "title": "Knihovny",
       "none": "Zatím žádné knihovny.",
@@ -693,6 +693,18 @@
       "title": "Domů",
       "holidays": "Sváteční řady",
       "holidaysDetail": "Měsíc před Valentýnem, Velikonocemi, Halloweenem, Dnem díkůvzdání a Vánoci a týden před Silvestrem začíná Domů řadou titulů pro tu příležitost, vybraných podle klíčových slov, názvů a popisů."
+    },
+    "tmdb": {
+      "title": "Plakáty a podrobnosti",
+      "intro": "Plakáty, popisy, obsazení a trailery k filmům a seriálům pocházejí z TMDB s bezplatným klíčem API. <guide>Jak ho získat</guide>",
+      "usingSaved": "Používá se klíč uložený zde, končící na {{hint}}.",
+      "usingEnvironment": "Používá se klíč z MATINEE_TMDB_KEY, končící na {{hint}}. Klíč uložený zde ho nahradí.",
+      "usingBuiltIn": "Používá se klíč zabudovaný v Matinee. Klíč uložený zde ho nahradí.",
+      "none": "Zatím žádný klíč, takže filmy a seriály používají jen obrázky uložené vedle vašich médií.",
+      "label": "Klíč API TMDB",
+      "save": "Uložit klíč",
+      "remove": "Odebrat uložený klíč",
+      "saved": "Uloženo. Matinee teď doplňuje plakáty a podrobnosti."
     }
   },
   "language": {

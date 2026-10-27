@@ -99,5 +99,8 @@
   "overseerr_isnt_connected": "Overseerr कनेक्ट नहीं है",
   "someone_already_asked_for_title": "किसी ने पहले ही {{title}} माँग ली है",
   "tmdbid_is_required": "tmdbId ज़रूरी है",
-  "no_such_row": "ऐसी कोई पंक्ति नहीं"
+  "no_such_row": "ऐसी कोई पंक्ति नहीं",
+  "tmdb_didnt_accept_that_key": "TMDB ने वह कुंजी स्वीकार नहीं की",
+  "tmdb_couldnt_be_reached_to_check_the_key": "कुंजी जाँचने के लिए TMDB तक नहीं पहुँचा जा सका",
+  "this_server_cant_change_its_tmdb_key": "यह सर्वर अपनी TMDB कुंजी नहीं बदल सकता"
 }

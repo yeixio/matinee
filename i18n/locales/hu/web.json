@@ -572,7 +572,7 @@
     "close": "Lezárás"
   },
   "settings": {
-    "tmdbNotice": "A plakátok és leírások a <link>TMDB</link>-től származnak. Ez a termék a TMDB API-t használja, de a TMDB nem hagyta jóvá és nem tanúsította.",
+    "tmdbNotice": "A plakátok és leírások a <site>TMDB</site>-től származnak. Ez a termék a TMDB API-t használja, de a TMDB nem hagyta jóvá és nem tanúsította.",
     "libraries": {
       "title": "Könyvtárak",
       "none": "Még nincsenek könyvtárak.",
@@ -685,6 +685,18 @@
       "title": "Kezdőlap",
       "holidays": "Ünnepi sorok",
       "holidaysDetail": "Valentin-nap, húsvét, Halloween, hálaadás és karácsony előtt egy hónappal, valamint szilveszter előtt egy héttel a Kezdőlap egy alkalomhoz illő sorral kezd, amelyet kulcsszavak, címek és leírások alapján válogat."
+    },
+    "tmdb": {
+      "title": "Plakátok és részletek",
+      "intro": "A filmek és sorozatok plakátjai, leírásai, szereplői és előzetesei a TMDB-ről érkeznek, ingyenes API-kulccsal. <guide>Így szerezhetsz egyet</guide>",
+      "usingSaved": "Az itt mentett kulcs van használatban, végződése: {{hint}}.",
+      "usingEnvironment": "A MATINEE_TMDB_KEY kulcs van használatban, végződése: {{hint}}. Az itt mentett kulcs felváltja.",
+      "usingBuiltIn": "A Matinee beépített kulcsa van használatban. Az itt mentett kulcs felváltja.",
+      "none": "Még nincs kulcs, így a filmek és sorozatok csak a médiáid melletti képfájlokat használják.",
+      "label": "TMDB API-kulcs",
+      "save": "Kulcs mentése",
+      "remove": "Mentett kulcs eltávolítása",
+      "saved": "Mentve. A Matinee most kiegészíti a plakátokat és részleteket."
     }
   },
   "language": {

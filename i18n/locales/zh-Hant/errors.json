@@ -99,5 +99,8 @@
   "overseerr_isnt_connected": "Overseerr 未連線",
   "someone_already_asked_for_title": "已經有人請求了《{{title}}》",
   "tmdbid_is_required": "需要 tmdbId",
-  "no_such_row": "沒有這一列"
+  "no_such_row": "沒有這一列",
+  "tmdb_didnt_accept_that_key": "TMDB 不接受此金鑰",
+  "tmdb_couldnt_be_reached_to_check_the_key": "無法連線到 TMDB 以檢查金鑰",
+  "this_server_cant_change_its_tmdb_key": "此伺服器無法變更其 TMDB 金鑰"
 }

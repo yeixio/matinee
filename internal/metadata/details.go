@@ -34,7 +34,7 @@ const detailsRefresh = 90 * 24 * time.Hour
 // movies, shows and seasons, and for the episodes of those seasons.
 func (f *Fetcher) FetchDetails(ctx context.Context, lib store.Library) {
 	var d Detailer
-	for _, p := range f.Providers {
+	for _, p := range f.active() {
 		if pd, ok := p.(Detailer); ok {
 			d = pd
 			break
