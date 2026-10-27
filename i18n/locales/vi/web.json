@@ -629,6 +629,7 @@
     "remote": {
       "title": "Truy cập từ xa",
       "publicURL": "Khi ra ngoài, ứng dụng kết nối tới <url>{{url}}</url>, địa chỉ máy chủ này được thiết lập.",
+      "publicURLHomeOnly": "<url>{{url}}</url>, địa chỉ dùng khi thiết lập máy chủ này, chỉ dẫn tới một địa chỉ trong mạng nhà bạn, nên các ứng dụng không dùng được khi ở ngoài.",
       "toggle": "Xem khi ra ngoài",
       "hint": "Matinee nhờ bộ định tuyến mở một cổng và lấy chứng chỉ để ứng dụng kết nối an toàn từ bất cứ đâu. Từ bên ngoài, mọi người đều đăng nhập.",
       "working": "Đang mở cổng trên bộ định tuyến và lấy chứng chỉ…",

@@ -3,9 +3,15 @@ package api
 import (
 	"context"
 	"errors"
+	"net"
 	"net/http"
+	"net/netip"
+	"net/url"
 	"strconv"
+	"sync"
+	"time"
 
+	"github.com/yeixio/matinee/internal/connect"
 	"github.com/yeixio/matinee/internal/remote"
 )
 
@@ -13,8 +19,8 @@ import (
 // gets a certificate for the router's public address, so the apps reach it
 // away from home without anyone setting up the router (internal/remote).
 // It's off until an admin turns it on, since it opens a port to the
-// internet. A server with its own address (MATINEE_PUBLIC_URL), such as one
-// behind an ingress, doesn't need it.
+// internet. A server with its own public address (MATINEE_PUBLIC_URL), such
+// as one behind an ingress the internet reaches, doesn't need it.
 
 type remoteKey struct{}
 
@@ -68,24 +74,87 @@ func (s *Server) setRemoteForwardedPort(ctx context.Context, port int) error {
 	return nil
 }
 
+// A public URL isn't taken to work away from home just because it's set:
+// many are names that only resolve, or only lead anywhere, at home. Its
+// host has to resolve to addresses the internet can route to before it
+// stands in for remote access; until then remote access stays offered
+// alongside it.
+
+// publicCheck caches whether PublicURL's host resolved to public addresses.
+type publicCheck struct {
+	mu     sync.Mutex
+	at     time.Time
+	public bool
+}
+
+const publicCheckEvery = 10 * time.Minute
+
+// publicURLIsPublic reports whether PublicURL is set and its host resolves
+// only to public addresses.
+func (s *Server) publicURLIsPublic(ctx context.Context) bool {
+	if s.PublicURL == "" {
+		return false
+	}
+	c := &s.publicCheck
+	c.mu.Lock()
+	defer c.mu.Unlock()
+	if !c.at.IsZero() && time.Since(c.at) < publicCheckEvery {
+		return c.public
+	}
+	c.public = s.resolvesPublic(ctx)
+	c.at = time.Now()
+	return c.public
+}
+
+func (s *Server) resolvesPublic(ctx context.Context) bool {
+	u, err := url.Parse(s.PublicURL)
+	if err != nil || u.Hostname() == "" {
+		return false
+	}
+	host := u.Hostname()
+	if ip, err := netip.ParseAddr(host); err == nil {
+		return connect.Public(ip)
+	}
+	lookup := s.LookupHost
+	if lookup == nil {
+		lookup = net.DefaultResolver.LookupHost
+	}
+	ctx, cancel := context.WithTimeout(ctx, 3*time.Second)
+	defer cancel()
+	addrs, err := lookup(ctx, host)
+	if err != nil || len(addrs) == 0 {
+		return false
+	}
+	for _, a := range addrs {
+		ip, err := netip.ParseAddr(a)
+		if err != nil || !connect.Public(ip) {
+			return false
+		}
+	}
+	return true
+}
+
 // lookup is this server's id with the connect service and where the apps
 // look it up, while the service knows its address; both "" otherwise.
-func (s *Server) lookup() (id, url string) {
-	if s.PublicURL != "" || s.Remote == nil || !s.Remote.Findable() {
+func (s *Server) lookup(ctx context.Context) (id, url string) {
+	if s.publicURLIsPublic(ctx) || s.Remote == nil || !s.Remote.Findable() {
 		return "", ""
 	}
 	return s.Remote.Lookup()
 }
 
 // remoteURL is where the apps reach this server away from home, or "".
-func (s *Server) remoteURL() string {
-	if s.PublicURL != "" {
+func (s *Server) remoteURL(ctx context.Context) string {
+	if s.publicURLIsPublic(ctx) {
 		return s.PublicURL
 	}
 	if s.Remote != nil {
-		return s.Remote.URL()
+		if u := s.Remote.URL(); u != "" {
+			return u
+		}
 	}
-	return ""
+	// Maybe it works through a VPN or tunnel the apps also use.
+	return s.PublicURL
 }
 
 func (s *Server) setRemoteAccess(ctx context.Context, on bool) error {

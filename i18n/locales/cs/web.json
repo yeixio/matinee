@@ -641,6 +641,7 @@
     "remote": {
       "title": "Vzdálený přístup",
       "publicURL": "Mimo domov se aplikace připojují k <url>{{url}}</url>, adrese, se kterou byl server nastaven.",
+      "publicURLHomeOnly": "<url>{{url}}</url>, adresa, se kterou byl tento server nastaven, vede jen na adresu v tvé domácí síti, takže ji aplikace mimo domov nemůžou použít.",
       "toggle": "Sledovat mimo domov",
       "hint": "Matinee požádá tvůj router o otevření portu a získá certifikát, aby se aplikace odkudkoli připojovaly bezpečně. Zvenku se přihlašují všichni.",
       "working": "Otevírám port na routeru a získávám certifikát…",

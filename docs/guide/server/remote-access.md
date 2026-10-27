@@ -65,3 +65,6 @@ Remote access needs Matinee on the host's network: apt, dnf, Homebrew, source, o
 ## Using your own domain instead
 
 If you already reach Matinee at your own address, through a reverse proxy, a tunnel or a VPN, set `MATINEE_PUBLIC_URL` (such as `https://matinee.example.com`) and the apps use that away from home.
+
+<!-- since: v0.1.1 -->
+Matinee checks where that name leads. If it only resolves to an address on your home network (or a VPN's), Settings says so and still offers remote access, since the internet can't reach the server that way.

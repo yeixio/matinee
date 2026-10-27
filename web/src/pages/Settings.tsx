@@ -541,14 +541,22 @@ function RemoteAccess() {
   if (!data) return null
   const remote = data.remote
   if (!remote && !data.publicURL) return null
+  // A public URL whose name doesn't resolve to a public address only works
+  // at home, so remote access is still offered.
+  const publicURL = data.publicURLHomeOnly ? '' : data.publicURL
   return (
     <section className="space-y-4">
       <h2 className="text-lg font-semibold">{t('settings.remote.title')}</h2>
-      {data.publicURL ? (
+      {data.publicURL && data.publicURLHomeOnly && (
         <p className="rounded-xl border border-line/60 bg-surface/50 p-4 text-sm text-muted">
-          <Trans i18nKey="settings.remote.publicURL" values={{ url: data.publicURL }} components={{ url: <span className="font-medium text-text" dir="ltr" /> }} />
+          <Trans i18nKey="settings.remote.publicURLHomeOnly" values={{ url: data.publicURL }} components={{ url: <span className="font-medium text-text" dir="ltr" /> }} />
         </p>
-      ) : (
+      )}
+      {publicURL ? (
+        <p className="rounded-xl border border-line/60 bg-surface/50 p-4 text-sm text-muted">
+          <Trans i18nKey="settings.remote.publicURL" values={{ url: publicURL }} components={{ url: <span className="font-medium text-text" dir="ltr" /> }} />
+        </p>
+      ) : remote && (
         <label className="flex cursor-pointer items-start gap-4 rounded-xl border border-line/60 bg-surface/50 p-4">
           <span className="min-w-0 flex-1">
             <span className="block font-medium">{t('settings.remote.toggle')}</span>
@@ -567,8 +575,8 @@ function RemoteAccess() {
           />
         </label>
       )}
-      {!data.publicURL && data.remoteAccess && remote?.connect && <MatineeConnect status={remote.connect} />}
-      {!data.publicURL && data.remoteAccess && (
+      {!publicURL && data.remoteAccess && remote?.connect && <MatineeConnect status={remote.connect} />}
+      {!publicURL && remote && data.remoteAccess && (
         <div className="rounded-xl border border-line/60 bg-surface/50 p-4">
           <Field label={t('settings.remote.forward')}>
             <select

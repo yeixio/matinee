@@ -633,6 +633,7 @@
     "remote": {
       "title": "Fernzugriff",
       "publicURL": "Unterwegs verbinden sich die Apps mit <url>{{url}}</url>, der Adresse, mit der dieser Server eingerichtet wurde.",
+      "publicURLHomeOnly": "<url>{{url}}</url>, die Adresse, mit der dieser Server eingerichtet wurde, führt nur zu einer Adresse in deinem Heimnetz, deshalb können die Apps sie unterwegs nicht nutzen.",
       "toggle": "Unterwegs schauen",
       "hint": "Matinee bittet deinen Router, einen Port zu öffnen, und holt ein Zertifikat, damit sich die Apps von überall sicher verbinden. Von außen melden sich alle an.",
       "working": "Port am Router wird geöffnet und Zertifikat geholt …",

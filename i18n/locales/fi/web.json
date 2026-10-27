@@ -633,6 +633,7 @@
     "remote": {
       "title": "Etäkäyttö",
       "publicURL": "Kodin ulkopuolella sovellukset yhdistävät osoitteeseen <url>{{url}}</url>, jolla tämä palvelin otettiin käyttöön.",
+      "publicURLHomeOnly": "<url>{{url}}</url>, osoite, jolla tämä palvelin otettiin käyttöön, johtaa vain kotiverkkosi osoitteeseen, joten sovellukset eivät voi käyttää sitä kodin ulkopuolella.",
       "toggle": "Katso kodin ulkopuolella",
       "hint": "Matinee pyytää reititintäsi avaamaan portin ja hankkii varmenteen, jotta sovellukset yhdistävät turvallisesti mistä tahansa. Kaikki kirjautuvat ulkoa.",
       "working": "Avataan porttia reitittimeen ja hankitaan varmennetta…",

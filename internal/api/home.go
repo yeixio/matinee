@@ -162,6 +162,10 @@ type serverSettings struct {
 	// PublicURL is the address set with MATINEE_PUBLIC_URL, which the apps
 	// use away from home instead. It can't be changed here.
 	PublicURL string `json:"publicURL,omitempty"`
+	// PublicURLHomeOnly means PublicURL's name doesn't resolve to a public
+	// address, so it can't be reached from the internet and remote access
+	// is offered as if it weren't set.
+	PublicURLHomeOnly bool `json:"publicURLHomeOnly,omitempty"`
 	// LibraryWatch is how library folders are watched for new files: auto
 	// (change notifications on local disks, a quick check every so often on
 	// network shares), poll (the quick check everywhere) or off. See
@@ -210,7 +214,7 @@ func (s *Server) settings(ctx context.Context) (serverSettings, error) {
 	themes, problems := s.themes()
 	def, err := s.defaultTheme(ctx, themes)
 	set := serverSettings{RequireSignInAtHome: required, Requests: mode, RemoteTrailers: trailers, HolidayRows: holidaysOn, Theme: def,
-		RemoteAccess: remoteOn, RemoteForwardedPort: forwarded, Remote: s.remoteStatus(), PublicURL: s.PublicURL, TMDB: tmdb,
+		RemoteAccess: remoteOn, RemoteForwardedPort: forwarded, Remote: s.remoteStatus(), PublicURL: s.PublicURL, PublicURLHomeOnly: s.PublicURL != "" && !s.publicURLIsPublic(ctx), TMDB: tmdb,
 		ThemeProblems: []string{}, HardwareAcceleration: hwaccel.Auto, Hardware: &hwaccel.Status{Available: []hwaccel.Accel{}}}
 	for _, p := range problems {
 		set.ThemeProblems = append(set.ThemeProblems, p.Error())

@@ -633,6 +633,7 @@
     "remote": {
       "title": "Fjärråtkomst",
       "publicURL": "Borta från hemmet ansluter apparna till <url>{{url}}</url>, adressen servern konfigurerades med.",
+      "publicURLHomeOnly": "<url>{{url}}</url>, adressen servern konfigurerades med, leder bara till en adress i ditt hemnätverk, så apparna kan inte använda den hemifrån.",
       "toggle": "Titta borta från hemmet",
       "hint": "Matinee ber din router att öppna en port och skaffar ett certifikat så att apparna ansluter säkert var som helst. Alla loggar in utifrån.",
       "working": "Öppnar en port i routern och skaffar ett certifikat…",

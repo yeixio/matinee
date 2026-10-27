@@ -1,6 +1,7 @@
 package api
 
 import (
+	"context"
 	"io"
 	"log/slog"
 	"net/http"
@@ -71,7 +72,10 @@ func TestRemoteForwardedPortSetting(t *testing.T) {
 }
 
 func TestPublicURLIsRemoteURL(t *testing.T) {
-	c, _ := newTestServer(t, func(s *Server) { s.PublicURL = "https://matinee.example.com" })
+	c, _ := newTestServer(t, func(s *Server) {
+		s.PublicURL = "https://matinee.example.com"
+		s.LookupHost = resolveTo("203.0.113.7")
+	})
 	var info struct{ RemoteURL string }
 	c.do("GET", "/api/v1/server", nil, &info)
 	if info.RemoteURL != "https://matinee.example.com" {
@@ -82,8 +86,40 @@ func TestPublicURLIsRemoteURL(t *testing.T) {
 	c.token = login.Token
 	var set serverSettings
 	c.do("GET", "/api/v1/settings", nil, &set)
-	if set.PublicURL != "https://matinee.example.com" || set.Remote != nil {
+	if set.PublicURL != "https://matinee.example.com" || set.PublicURLHomeOnly || set.Remote != nil {
 		t.Fatalf("settings %+v", set)
+	}
+}
+
+func resolveTo(addrs ...string) func(context.Context, string) ([]string, error) {
+	return func(context.Context, string) ([]string, error) { return addrs, nil }
+}
+
+// A public URL whose name only leads to the home network doesn't stand in
+// for remote access.
+func TestHomeOnlyPublicURL(t *testing.T) {
+	for _, tc := range []struct {
+		url   string
+		addrs []string
+		home  bool
+	}{
+		{"https://matinee.example.com", []string{"203.0.113.7"}, false},
+		{"https://matinee.example.com", []string{"192.168.1.20"}, true},
+		{"https://matinee.example.com", []string{"203.0.113.7", "10.0.0.5"}, true},
+		{"https://matinee.example.com", nil, true},
+		{"https://100.101.102.103:7171", nil, true},
+		{"https://[fd00::1]", nil, true},
+		{"https://198.51.100.2", nil, false},
+	} {
+		s := &Server{PublicURL: tc.url, LookupHost: resolveTo(tc.addrs...)}
+		if got := !s.publicURLIsPublic(context.Background()); got != tc.home {
+			t.Errorf("%s at %v: home only %v, want %v", tc.url, tc.addrs, got, tc.home)
+		}
+		// Away from home the apps still get it when nothing better exists:
+		// it may work through a VPN.
+		if got := s.remoteURL(context.Background()); got != tc.url {
+			t.Errorf("%s: remoteURL %q", tc.url, got)
+		}
 	}
 }
 
