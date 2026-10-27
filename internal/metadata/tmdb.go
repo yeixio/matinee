@@ -29,11 +29,18 @@ type TMDB struct {
 	Region string
 }
 
+// Where TMDB's API and images are. Variables so the docs' screenshot server
+// can point a build at a stand-in (go build -ldflags "-X ...").
+var (
+	TMDBBaseURL  = "https://api.themoviedb.org/3"
+	TMDBImageURL = "https://image.tmdb.org/t/p/"
+)
+
 func NewTMDB(key string) *TMDB {
 	return &TMDB{
 		Key:      key,
-		BaseURL:  "https://api.themoviedb.org/3",
-		ImageURL: "https://image.tmdb.org/t/p/",
+		BaseURL:  TMDBBaseURL,
+		ImageURL: TMDBImageURL,
 		Client:   &http.Client{Timeout: 15 * time.Second},
 	}
 }

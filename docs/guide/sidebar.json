@@ -1,0 +1,66 @@
+[
+  {
+    "label": "Welcome",
+    "slug": "docs"
+  },
+  {
+    "label": "Getting started",
+    "items": [
+      {
+        "autogenerate": {
+          "directory": "docs/getting-started"
+        }
+      }
+    ]
+  },
+  {
+    "label": "Watching",
+    "items": [
+      {
+        "autogenerate": {
+          "directory": "docs/watching"
+        }
+      }
+    ]
+  },
+  {
+    "label": "Phone and TV apps",
+    "items": [
+      {
+        "autogenerate": {
+          "directory": "docs/apps"
+        }
+      }
+    ]
+  },
+  {
+    "label": "Your household",
+    "items": [
+      {
+        "autogenerate": {
+          "directory": "docs/household"
+        }
+      }
+    ]
+  },
+  {
+    "label": "Running the server",
+    "items": [
+      {
+        "autogenerate": {
+          "directory": "docs/server"
+        }
+      }
+    ]
+  },
+  {
+    "label": "Help",
+    "items": [
+      {
+        "autogenerate": {
+          "directory": "docs/help"
+        }
+      }
+    ]
+  }
+]
