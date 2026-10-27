@@ -21,6 +21,7 @@ import phoneDetails from '../assets/app-phone-details.webp'
 const base = import.meta.env.BASE_URL
 const guide = (path = '') => `${base}docs/${path}`
 const github = 'https://github.com/yeixio/matinee'
+const donate = 'https://yeix.io/matinee/donate'
 
 const features = [
   {
@@ -116,7 +117,8 @@ const installs = [
         <a href={guide()}>Guide</a>
         <a href="#apps">Apps</a>
         <a href="#install">Install</a>
-        <a href={github}>GitHub</a>
+        <a class="github" href={github}>GitHub</a>
+        <a class="donate" href={donate}>Donate</a>
       </nav>
     </header>
 
@@ -239,13 +241,26 @@ const installs = [
           <a class="button" href={github}>Star on GitHub</a>
         </div>
       </section>
+
+      <section class="support" id="support">
+        <h2>Help Matinee grow</h2>
+        <p>
+          The server is free, and donations and app sales are what fund it. The first goal is posters with no setup: once
+          they reach <strong>$150 a month</strong>, Matinee will license a commercial TMDB key and build it in. Until then,
+          each server uses its own free key, which takes about two minutes to get.
+        </p>
+        <div class="ctas">
+          <a class="button primary" href={donate}>Donate to Matinee</a>
+          <a class="button" href={guide('getting-started/posters-and-details/')}>Get your own TMDB key</a>
+        </div>
+      </section>
     </main>
 
     <footer>
       <span>Matinee is free software under the AGPL 3.0 or later.</span>
       <span>
         <a href={guide()}>Guide</a> · <a href={`${github}/releases`}>Releases</a> · <a href={`${github}/issues`}>Issues</a>{' '}
-        · <a href={guide('help/troubleshooting/')}>Help</a>
+        · <a href={guide('help/troubleshooting/')}>Help</a> · <a href={donate}>Donate</a>
       </span>
       <span class="tmdb">Movie and TV details come from TMDB. This product uses the TMDB API but is not endorsed or certified by TMDB.</span>
     </footer>
@@ -349,6 +364,10 @@ const installs = [
   }
   .nav nav a:hover {
     color: var(--text);
+  }
+  .nav nav a.donate {
+    color: var(--accent-2);
+    font-weight: 600;
   }
 
   .hero {
@@ -551,6 +570,19 @@ const installs = [
     gap: 32px;
     text-align: left;
     margin: 32px 0 48px;
+  }
+  .support {
+    max-width: 760px !important;
+    padding: 0 24px 100px !important;
+    text-align: center;
+  }
+  .support strong {
+    color: var(--text);
+  }
+  @media (max-width: 480px) {
+    .nav nav a.github {
+      display: none;
+    }
   }
 
   footer {
