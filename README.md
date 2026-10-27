@@ -160,13 +160,13 @@ Matinee looks up posters, backdrops and descriptions on [TMDB](https://www.themo
 2. Open [Settings → API](https://www.themoviedb.org/settings/api), click **Create**, and answer **Yes** to "personal use". Your own server is personal use.
 3. Fill in the short form. For example, use "Matinee" as the name and "Self-hosted media server for my household" as the summary.
 4. Copy the **API Key** (or the API Read Access Token; either works).
-5. Give it to Matinee:
+5. Give it to Matinee. The easiest way: sign in as an admin, open **Settings → Posters and details**, paste the key and click **Save key**. Matinee checks it with TMDB and fills in artwork right away, with no restart. Or set it on the server:
    - Docker: add `-e MATINEE_TMDB_KEY=your-key` to `docker run`.
    - Kubernetes: run `kubectl create secret generic matinee-tmdb --from-literal=tmdb-api-key=your-key`, then set `tmdb.existingSecret: matinee-tmdb` in your values.
    - apt or dnf: add `MATINEE_TMDB_KEY=your-key` to `/etc/matinee/matinee.env`.
    - Homebrew: add `MATINEE_TMDB_KEY=your-key` to `$(brew --prefix)/etc/matinee/matinee.env`.
 
-Restart Matinee. The next library scan fills in the artwork.
+If you set it on the server, restart Matinee; the next library scan fills in the artwork. A key saved in Settings wins over one set on the server.
 
 The [guide](https://matinee.yeix.io/docs/getting-started/posters-and-details/) has the same steps with a table for every kind of install.
 

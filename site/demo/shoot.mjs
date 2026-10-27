@@ -192,6 +192,7 @@ try {
     await shot(page, 'playback', { target: section(page, 'Playback') })
     await shot(page, 'new-files', { target: section(page, 'New files') })
     await shot(page, 'media-analysis', { target: section(page, 'Media analysis') })
+    await shot(page, 'tmdb-key', { target: section(page, 'Posters and details') })
     await shot(page, 'home-network', { target: section(page, 'Home network') })
     await shot(page, 'trailers', { target: section(page, 'Trailers') })
     await shot(page, 'holiday-rows', { target: section(page, 'Home') })
