@@ -112,6 +112,30 @@ func (s *Server) holidayRowsOn(ctx context.Context) (bool, error) {
 	return v != "false", err
 }
 
+// holidayItems are the titles for a holiday: the ones about it, then, if
+// there are few, others in its genre. shuffle, if set, mixes each part.
+func (s *Server) holidayItems(ctx context.Context, userID int64, h holiday, limit int, shuffle func([]store.Item, uint64)) ([]store.Item, error) {
+	m := store.HolidayMatch{Words: h.Words, Keywords: s.keywordIDs(h.Keywords)}
+	items, err := s.Store.HolidayItems(ctx, userID, m, limit)
+	if err != nil {
+		return nil, err
+	}
+	if shuffle != nil {
+		shuffle(items, 101)
+	}
+	if h.Genre != "" && len(items) < genreRowItems {
+		more, err := s.Store.InGenreExcept(ctx, userID, h.Genre, m, limit)
+		if err != nil {
+			return nil, err
+		}
+		if shuffle != nil {
+			shuffle(more, 102)
+		}
+		items = append(items, more...)
+	}
+	return items, nil
+}
+
 // holidayRows are the rows for the holidays coming up, if any.
 func (s *Server) holidayRows(ctx context.Context, userID int64, now time.Time) ([]HomeRow, error) {
 	rows := []HomeRow{}
@@ -124,28 +148,19 @@ func (s *Server) holidayRows(ctx context.Context, userID int64, now time.Time) (
 	}
 	day := dayNumber(now)
 	for _, h := range active {
-		m := store.HolidayMatch{Words: h.Words, Keywords: s.keywordIDs(h.Keywords)}
-		items, err := s.Store.HolidayItems(ctx, userID, m, genreRowItems*3)
+		// A different order each day, but the ones about the day first.
+		items, err := s.holidayItems(ctx, userID, h, genreRowItems*3, func(list []store.Item, seed uint64) {
+			rand.New(rand.NewPCG(day, seed)).Shuffle(len(list), func(a, b int) { list[a], list[b] = list[b], list[a] })
+		})
 		if err != nil {
 			return nil, err
-		}
-		// A different order each day, but the ones about the day first.
-		shuffle := func(list []store.Item, seed uint64) {
-			rand.New(rand.NewPCG(day, seed)).Shuffle(len(list), func(a, b int) { list[a], list[b] = list[b], list[a] })
-		}
-		shuffle(items, 101)
-		if h.Genre != "" && len(items) < genreRowItems {
-			more, err := s.Store.InGenreExcept(ctx, userID, h.Genre, m, genreRowItems*3)
-			if err != nil {
-				return nil, err
-			}
-			shuffle(more, 102)
-			items = append(items, more...)
 		}
 		if len(items) < genreRowMin {
 			continue
 		}
-		rows = append(rows, HomeRow{ID: "holiday:" + h.ID, Title: h.Title, Holiday: h.ID, Items: items[:min(genreRowItems, len(items))]})
+		row := HomeRow{ID: "holiday:" + h.ID, Title: h.Title, Holiday: h.ID}
+		row.Items, row.More = cut(items, genreRowItems)
+		rows = append(rows, row)
 	}
 	return rows, nil
 }

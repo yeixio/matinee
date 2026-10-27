@@ -98,5 +98,6 @@
   "overseerr_isnt_answering_right_now_try_again_later": "Overseerr 目前沒有回應。請稍後再試。",
   "overseerr_isnt_connected": "Overseerr 未連線",
   "someone_already_asked_for_title": "已經有人請求了《{{title}}》",
-  "tmdbid_is_required": "需要 tmdbId"
+  "tmdbid_is_required": "需要 tmdbId",
+  "no_such_row": "沒有這一列"
 }

@@ -306,5 +306,13 @@
       "movie": "電影",
       "show": "影集"
     }
+  },
+  "rows": {
+    "seeMore": "查看更多",
+    "seeMoreOf": "{{title}}，查看更多",
+    "moreLike": "與{{title}}類似",
+    "empty": "這裡暫時沒有內容",
+    "unavailable": "此列無法使用",
+    "loadMore": "載入更多"
   }
 }

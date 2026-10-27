@@ -333,5 +333,13 @@
       "movie": "Film",
       "show": "Dizi"
     }
+  },
+  "rows": {
+    "seeMore": "Daha fazla gör",
+    "seeMoreOf": "{{title}}, daha fazla gör",
+    "moreLike": "{{title}} gibi diğerleri",
+    "empty": "Şu anda burada bir şey yok",
+    "unavailable": "Bu sıra kullanılamıyor",
+    "loadMore": "Daha fazla yükle"
   }
 }

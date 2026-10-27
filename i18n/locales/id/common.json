@@ -306,5 +306,13 @@
       "movie": "Film",
       "show": "Serial"
     }
+  },
+  "rows": {
+    "seeMore": "Lihat lainnya",
+    "seeMoreOf": "{{title}}, lihat lainnya",
+    "moreLike": "Lainnya seperti {{title}}",
+    "empty": "Belum ada apa-apa di sini",
+    "unavailable": "Baris ini tidak tersedia",
+    "loadMore": "Muat lainnya"
   }
 }

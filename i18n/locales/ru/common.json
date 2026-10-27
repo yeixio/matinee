@@ -387,5 +387,13 @@
       "movie": "Фильм",
       "show": "Сериал"
     }
+  },
+  "rows": {
+    "seeMore": "Ещё",
+    "seeMoreOf": "{{title}}, ещё",
+    "moreLike": "Похожие на {{title}}",
+    "empty": "Здесь пока ничего нет",
+    "unavailable": "Этот ряд недоступен",
+    "loadMore": "Загрузить ещё"
   }
 }

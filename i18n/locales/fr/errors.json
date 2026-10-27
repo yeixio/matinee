@@ -98,5 +98,6 @@
   "overseerr_isnt_answering_right_now_try_again_later": "Overseerr ne répond pas pour le moment. Réessayez plus tard.",
   "overseerr_isnt_connected": "Overseerr n’est pas connecté",
   "someone_already_asked_for_title": "quelqu’un a déjà demandé {{title}}",
-  "tmdbid_is_required": "tmdbId est obligatoire"
+  "tmdbid_is_required": "tmdbId est obligatoire",
+  "no_such_row": "rangée introuvable"
 }

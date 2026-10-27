@@ -360,5 +360,13 @@
       "movie": "Film",
       "show": "Serial"
     }
+  },
+  "rows": {
+    "seeMore": "Vezi mai multe",
+    "seeMoreOf": "{{title}}, vezi mai multe",
+    "moreLike": "Mai multe ca {{title}}",
+    "empty": "Nu e nimic aici acum",
+    "unavailable": "Acest rând nu este disponibil",
+    "loadMore": "Încarcă mai multe"
   }
 }

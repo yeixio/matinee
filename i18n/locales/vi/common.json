@@ -306,5 +306,13 @@
       "movie": "Phim lẻ",
       "show": "Phim bộ"
     }
+  },
+  "rows": {
+    "seeMore": "Xem thêm",
+    "seeMoreOf": "{{title}}, xem thêm",
+    "moreLike": "Tương tự {{title}}",
+    "empty": "Hiện chưa có gì ở đây",
+    "unavailable": "Hàng này không khả dụng",
+    "loadMore": "Tải thêm"
   }
 }

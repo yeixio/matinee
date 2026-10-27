@@ -333,5 +333,13 @@
       "movie": "फ़िल्म",
       "show": "शो"
     }
+  },
+  "rows": {
+    "seeMore": "और देखें",
+    "seeMoreOf": "{{title}}, और देखें",
+    "moreLike": "{{title}} जैसे और",
+    "empty": "अभी यहाँ कुछ नहीं है",
+    "unavailable": "यह पंक्ति उपलब्ध नहीं है",
+    "loadMore": "और लोड करें"
   }
 }

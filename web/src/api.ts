@@ -179,7 +179,8 @@ export type DiscoverTitle = {
   itemId?: number
 }
 
-export type DiscoverRow = { id: string; title: string; because?: string; items: DiscoverTitle[] }
+// more: the row has more titles than it shows (see api.discoverRow).
+export type DiscoverRow = { id: string; title: string; because?: string; items: DiscoverTitle[]; more?: boolean }
 
 export type OverseerrConnection = { connected: boolean; url: string; hasApiKey: boolean; requestAs: number }
 export type OverseerrConfig = { url: string; apiKey?: string; requestAs?: number }
@@ -334,7 +335,19 @@ export type SubtitleTrack = {
 }
 
 /** One of the home screen's rows: a holiday coming up, a pinned collection, or a genre (a different few each day). */
-export type HomeRow = { id: string; title: string; genre: string; collectionId?: string; starter?: string; holiday?: string; items: Item[] }
+// A row of titles. more: it has more than it shows, and api.row(id) has
+// them all. relatedTo is the title a related:{id} row is like.
+export type HomeRow = {
+  id: string
+  title: string
+  genre: string
+  collectionId?: string
+  starter?: string
+  holiday?: string
+  relatedTo?: string
+  items: Item[]
+  more?: boolean
+}
 
 /** The orders a collection can have; "" is its own (the filter's, or the order titles were added in). */
 export type CollectionSort = '' | 'title' | 'added' | 'released' | 'year' | 'rating' | 'runtime' | 'lastPlayed' | 'shuffle'
@@ -492,7 +505,7 @@ export type Person = {
 }
 
 // collection: the franchise a movie belongs to, with its titles in the library.
-export type Related = { collection?: { id: number; name: string; items: Item[] }; items: Item[] }
+export type Related = { collection?: { id: number; name: string; items: Item[] }; items: Item[]; more?: boolean }
 
 // What to offer when an episode ends: the next episode, or after a show's
 // last one a similar title to open.
@@ -636,6 +649,9 @@ export const api = {
   saveOverseerr: (c: OverseerrConfig) => request<OverseerrConnection>('PUT', '/api/v1/integrations/overseerr', c),
   deleteOverseerr: () => request<void>('DELETE', '/api/v1/integrations/overseerr'),
   discover: () => request<{ rows: DiscoverRow[]; canRequest: boolean }>('GET', '/api/v1/discover'),
+  // A page (from 1) of one of Discover's rows, for the row's own page.
+  discoverRow: (id: string, page: number) =>
+    request<{ row: DiscoverRow; page: number; pages: number; canRequest: boolean }>('GET', `/api/v1/discover/rows/${encodeURIComponent(id)}?page=${page}`),
   discoverSearch: (q: string) => request<DiscoverTitle[]>('GET', `/api/v1/discover/search?q=${encodeURIComponent(q)}`),
   discoverRequest: (t: DiscoverTitle) => request<DiscoverTitle>('POST', '/api/v1/discover/requests', { kind: t.kind, tmdbId: t.tmdbId }),
   searchTitles: (kind: TitleKind, q: string) =>
@@ -657,9 +673,19 @@ export const api = {
   resolveIssue: (id: string) => request<void>('POST', `/api/v1/issues/${id}/resolve`),
   replaceIssueFile: (id: string) => request<void>('POST', `/api/v1/issues/${id}/replace`),
 
-  // newReleases and rows come from servers new enough to have them.
+  // newReleases and rows come from servers new enough to have them. more
+  // says which of the lists have more titles than they show.
   home: () =>
-    request<{ continueWatching: Item[]; watchList: Item[]; recentlyAdded: Item[]; newReleases?: Item[]; rows?: HomeRow[] }>('GET', '/api/v1/home'),
+    request<{
+      continueWatching: Item[]
+      watchList: Item[]
+      recentlyAdded: Item[]
+      newReleases?: Item[]
+      rows?: HomeRow[]
+      more?: Partial<Record<'continueWatching' | 'recentlyAdded' | 'newReleases' | 'watchList', boolean>>
+    }>('GET', '/api/v1/home'),
+  // A row with all its titles, by its id (see HomeRow).
+  row: (id: string) => request<HomeRow>('GET', `/api/v1/rows/${encodeURIComponent(id)}`),
   search: (q: string) => request<Item[]>('GET', `/api/v1/search?q=${encodeURIComponent(q)}`),
   item: (id: number) => request<ItemDetail>('GET', `/api/v1/items/${id}`),
   children: (id: number) => request<Item[]>('GET', `/api/v1/items/${id}/children`),

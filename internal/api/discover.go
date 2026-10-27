@@ -232,6 +232,16 @@ type discoverRow struct {
 	// word the row in their own language.
 	Because string          `json:"because,omitempty"`
 	Items   []discoverTitle `json:"items"`
+	// More says there are more titles than the row has: GET
+	// /discover/rows/{id} pages through them all.
+	More bool `json:"more,omitempty"`
+}
+
+// discoverPage is a page of one of Overseerr's lists, and how many pages
+// the list has.
+type discoverPage struct {
+	Titles []overseerr.Title
+	Pages  int
 }
 
 type discoverView struct {
@@ -306,32 +316,24 @@ func (s *Server) discover(w http.ResponseWriter, r *http.Request) {
 	type job struct {
 		row       discoverRow
 		dropOwned bool
-		load      func() ([]overseerr.Title, error)
+		load      func() (discoverPage, error)
 	}
 	var jobs []job
 	for _, t := range watched {
 		jobs = append(jobs, job{
 			row:       discoverRow{ID: "because-" + strconv.FormatInt(t.ItemID, 10), Title: "Because you watched " + t.Title, Because: t.Title},
 			dropOwned: true,
-			load: func() ([]overseerr.Title, error) {
-				return cached(&s.discoverCache, "rec:"+t.Kind+":"+strconv.Itoa(t.TMDBID), time.Hour, func() ([]overseerr.Title, error) {
-					return cl.Recommendations(ctx, t.Kind, t.TMDBID)
-				})
-			},
+			load:      func() (discoverPage, error) { return s.recommendationsPage(ctx, cl, t.Kind, t.TMDBID, 1) },
 		})
 	}
 	for _, l := range discoverLists {
 		jobs = append(jobs, job{
-			row: discoverRow{ID: l.id, Title: l.title},
-			load: func() ([]overseerr.Title, error) {
-				return cached(&s.discoverCache, "list:"+l.id, 30*time.Minute, func() ([]overseerr.Title, error) {
-					return cl.Discover(ctx, l.id)
-				})
-			},
+			row:  discoverRow{ID: l.id, Title: l.title},
+			load: func() (discoverPage, error) { return s.discoverListPage(ctx, cl, l.id, 1) },
 		})
 	}
 
-	results := make([][]overseerr.Title, len(jobs))
+	results := make([]discoverPage, len(jobs))
 	errs := make([]error, len(jobs))
 	var wg sync.WaitGroup
 	for i, j := range jobs {
@@ -347,10 +349,11 @@ func (s *Server) discover(w http.ResponseWriter, r *http.Request) {
 			firstErr = cmp.Or(firstErr, errs[i])
 			continue
 		}
-		if j.row.Items, err = s.discoverTitles(ctx, results[i], j.dropOwned); err != nil {
+		if j.row.Items, err = s.discoverTitles(ctx, results[i].Titles, j.dropOwned); err != nil {
 			s.serverError(w, err)
 			return
 		}
+		j.row.More = results[i].Pages > 1
 		if len(j.row.Items) > 0 {
 			out.Rows = append(out.Rows, j.row)
 		}
@@ -361,6 +364,88 @@ func (s *Server) discover(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	writeJSON(w, http.StatusOK, out)
+}
+
+// The pages of Overseerr's lists, cached a while: they change slowly, and
+// each is a trip out to TMDB.
+func (s *Server) recommendationsPage(ctx context.Context, cl *overseerr.Client, kind string, tmdbID, page int) (discoverPage, error) {
+	return cached(&s.discoverCache, "rec:"+kind+":"+strconv.Itoa(tmdbID)+":"+strconv.Itoa(page), time.Hour, func() (discoverPage, error) {
+		t, n, err := cl.RecommendationsPage(ctx, kind, tmdbID, page)
+		return discoverPage{t, n}, err
+	})
+}
+
+func (s *Server) discoverListPage(ctx context.Context, cl *overseerr.Client, list string, page int) (discoverPage, error) {
+	return cached(&s.discoverCache, "list:"+list+":"+strconv.Itoa(page), 30*time.Minute, func() (discoverPage, error) {
+		t, n, err := cl.DiscoverPage(ctx, list, page)
+		return discoverPage{t, n}, err
+	})
+}
+
+// discoverRowPages caps how far a row's own page goes; TMDB's lists run
+// to hundreds of pages, and nobody wants that far.
+const discoverRowPages = 25
+
+// discoverRowPage is a page (?page=, from 1) of one of the Discover tab's
+// rows, for the row's page with all its titles.
+func (s *Server) discoverRowPage(w http.ResponseWriter, r *http.Request) {
+	ctx, u, id := r.Context(), currentUser(r), r.PathValue("id")
+	page, _ := strconv.Atoi(r.URL.Query().Get("page"))
+	page = max(page, 1)
+	cl, _, err := s.overseerrClient(ctx)
+	if err != nil {
+		s.overseerrError(w, r, err)
+		return
+	}
+	var row discoverRow
+	var p discoverPage
+	dropOwned := false
+	if v, ok := strings.CutPrefix(id, "because-"); ok {
+		itemID, err := strconv.ParseInt(v, 10, 64)
+		if err != nil {
+			writeError(w, http.StatusNotFound, "no such row")
+			return
+		}
+		it, err := s.Store.Item(ctx, u.ID, itemID)
+		if errors.Is(err, store.ErrNotFound) || err == nil && (it.TMDBID == nil || it.Kind != "movie" && it.Kind != "show") {
+			writeError(w, http.StatusNotFound, "no such row")
+			return
+		}
+		if err != nil {
+			s.serverError(w, err)
+			return
+		}
+		row = discoverRow{ID: id, Title: "Because you watched " + it.Title, Because: it.Title}
+		dropOwned = true
+		p, err = s.recommendationsPage(ctx, cl, it.Kind, int(*it.TMDBID), page)
+		if err != nil {
+			s.overseerrError(w, r, err)
+			return
+		}
+	} else {
+		i := slices.IndexFunc(discoverLists, func(l struct{ id, title string }) bool { return l.id == id })
+		if i < 0 {
+			writeError(w, http.StatusNotFound, "no such row")
+			return
+		}
+		row = discoverRow{ID: id, Title: discoverLists[i].title}
+		if p, err = s.discoverListPage(ctx, cl, id, page); err != nil {
+			s.overseerrError(w, r, err)
+			return
+		}
+	}
+	if row.Items, err = s.discoverTitles(ctx, p.Titles, dropOwned); err != nil {
+		s.serverError(w, err)
+		return
+	}
+	can, _, err := s.canRequest(ctx, u)
+	if err != nil {
+		s.serverError(w, err)
+		return
+	}
+	pages := min(p.Pages, discoverRowPages)
+	row.More = page < pages
+	writeJSON(w, http.StatusOK, map[string]any{"row": row, "page": page, "pages": pages, "canRequest": can})
 }
 
 func (s *Server) discoverSearch(w http.ResponseWriter, r *http.Request) {

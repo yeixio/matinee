@@ -6,6 +6,8 @@ import (
 	"log/slog"
 	"net/http"
 	"net/http/httptest"
+	"slices"
+	"strconv"
 	"strings"
 	"testing"
 
@@ -147,6 +149,37 @@ func TestDiscover(t *testing.T) {
 	if len(d.Rows) != 2 || d.Rows[0].ID != "trending" {
 		t.Fatalf("sam's discover: %+v", d.Rows)
 	}
+
+	// A row's own page goes through Overseerr's pages, one at a time.
+	o.SetPageSize(1)
+	srv.discoverCache.clear()
+	ellen.do("GET", "/api/v1/discover", nil, &d)
+	if i := slices.IndexFunc(d.Rows, func(r discoverRow) bool { return r.ID == "popular-movies" }); i < 0 || !d.Rows[i].More || len(d.Rows[i].Items) != 1 {
+		t.Fatalf("popular movies on more than one page: %+v", d.Rows)
+	}
+	var page struct {
+		Row   discoverRow
+		Page  int
+		Pages int
+	}
+	if code := ellen.do("GET", "/api/v1/discover/rows/popular-movies?page=2", nil, &page); code != 200 ||
+		page.Page != 2 || page.Pages != 2 || page.Row.More || len(page.Row.Items) != 1 || page.Row.Items[0].TMDBID != 157336 || page.Row.Title != "Popular movies" {
+		t.Fatalf("popular movies page 2: %d %+v", code, page)
+	}
+	// Because-you-watched rows page too, still leaving out what's in a library.
+	if code := ellen.do("GET", "/api/v1/discover/rows/because-"+strconv.FormatInt(inception, 10)+"?page=1", nil, &page); code != 200 ||
+		page.Row.Because != "Inception" || !page.Row.More || len(page.Row.Items) != 0 {
+		t.Fatalf("because page 1: %d %+v", code, page)
+	}
+	ellen.do("GET", "/api/v1/discover/rows/because-"+strconv.FormatInt(inception, 10)+"?page=2", nil, &page)
+	if len(page.Row.Items) != 1 || page.Row.Items[0].Title.Title != "Arrival" {
+		t.Fatalf("because page 2: %+v", page)
+	}
+	if code := ellen.do("GET", "/api/v1/discover/rows/nope", nil, nil); code != http.StatusNotFound {
+		t.Fatalf("a row that isn't: %d", code)
+	}
+	o.SetPageSize(0)
+	srv.discoverCache.clear()
 
 	// Search finds any title, with spaces sent as %20.
 	var found []discoverTitle

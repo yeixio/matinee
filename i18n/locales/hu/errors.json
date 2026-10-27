@@ -98,5 +98,6 @@
   "overseerr_isnt_answering_right_now_try_again_later": "Az Overseerr most nem válaszol. Próbáld újra később.",
   "overseerr_isnt_connected": "az Overseerr nincs összekapcsolva",
   "someone_already_asked_for_title": "valaki már kérte ezt: {{title}}",
-  "tmdbid_is_required": "a tmdbId megadása kötelező"
+  "tmdbid_is_required": "a tmdbId megadása kötelező",
+  "no_such_row": "nincs ilyen sor"
 }

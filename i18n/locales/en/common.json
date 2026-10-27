@@ -333,5 +333,13 @@
       "movie": "Movie",
       "show": "Show"
     }
+  },
+  "rows": {
+    "seeMore": "See more",
+    "seeMoreOf": "{{title}}, see more",
+    "moreLike": "More like {{title}}",
+    "empty": "Nothing here right now",
+    "unavailable": "This row isn't available",
+    "loadMore": "Load more"
   }
 }

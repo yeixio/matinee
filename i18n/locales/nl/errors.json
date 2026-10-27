@@ -98,5 +98,6 @@
   "overseerr_isnt_answering_right_now_try_again_later": "Overseerr reageert nu niet. Probeer het later opnieuw.",
   "overseerr_isnt_connected": "Overseerr is niet gekoppeld",
   "someone_already_asked_for_title": "iemand heeft {{title}} al aangevraagd",
-  "tmdbid_is_required": "tmdbId is verplicht"
+  "tmdbid_is_required": "tmdbId is verplicht",
+  "no_such_row": "deze rij bestaat niet"
 }

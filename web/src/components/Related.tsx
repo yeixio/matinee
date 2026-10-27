@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
 import { api, type ItemDetail } from '../api'
 import { PosterCard } from './Card'
+import { rowLink } from '../rows'
 import { boxSetLink } from './Collections'
 import { Row, RowItem } from './Row'
 
@@ -25,7 +26,7 @@ export function RelatedRows({ item }: { item: ItemDetail }) {
         </Row>
       )}
       {data.items.length > 0 && (
-        <Row title={t('related.moreLikeThis')}>
+        <Row title={t('related.moreLikeThis')} more={data.more ? rowLink(`related:${item.id}`) : undefined} hasMore={data.more}>
           {data.items.map((it) => (
             <RowItem key={it.id}>
               <PosterCard item={it} />

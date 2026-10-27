@@ -98,5 +98,6 @@
   "overseerr_isnt_answering_right_now_try_again_later": "Το Overseerr δεν απαντά τώρα. Δοκίμασε ξανά αργότερα.",
   "overseerr_isnt_connected": "το Overseerr δεν είναι συνδεδεμένο",
   "someone_already_asked_for_title": "κάποιος έχει ήδη ζητήσει το {{title}}",
-  "tmdbid_is_required": "το tmdbId είναι υποχρεωτικό"
+  "tmdbid_is_required": "το tmdbId είναι υποχρεωτικό",
+  "no_such_row": "δεν υπάρχει τέτοια σειρά"
 }

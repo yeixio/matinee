@@ -20,6 +20,11 @@ const (
 // the same leads, keywords and genres. Members of its collection are left
 // out; see CollectionItems.
 func (s *Store) Related(ctx context.Context, userID int64, it Item) ([]Item, error) {
+	return s.RelatedN(ctx, userID, it, relatedLimit)
+}
+
+// RelatedN is Related with up to limit titles.
+func (s *Store) RelatedN(ctx context.Context, userID int64, it Item, limit int) ([]Item, error) {
 	scores := map[int64]int{}
 	add := func(q string) error {
 		rows, err := s.db.QueryContext(ctx, q, it.ID)
@@ -73,7 +78,7 @@ func (s *Store) Related(ctx context.Context, userID int64, it Item) ([]Item, err
 	})
 	out := []Item{}
 	for _, c := range cands {
-		if len(out) == relatedLimit {
+		if len(out) == limit {
 			break
 		}
 		r, err := s.Item(ctx, userID, c.id)

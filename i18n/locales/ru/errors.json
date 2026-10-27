@@ -98,5 +98,6 @@
   "overseerr_isnt_answering_right_now_try_again_later": "Overseerr сейчас не отвечает. Попробуйте позже.",
   "overseerr_isnt_connected": "Overseerr не подключён",
   "someone_already_asked_for_title": "кто-то уже запросил {{title}}",
-  "tmdbid_is_required": "нужен tmdbId"
+  "tmdbid_is_required": "нужен tmdbId",
+  "no_such_row": "такого ряда нет"
 }

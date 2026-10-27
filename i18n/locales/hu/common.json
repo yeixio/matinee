@@ -333,5 +333,13 @@
       "movie": "Film",
       "show": "Sorozat"
     }
+  },
+  "rows": {
+    "seeMore": "Továbbiak",
+    "seeMoreOf": "{{title}}, továbbiak",
+    "moreLike": "Hasonlók ehhez: {{title}}",
+    "empty": "Most nincs itt semmi",
+    "unavailable": "Ez a sor nem érhető el",
+    "loadMore": "Továbbiak betöltése"
   }
 }

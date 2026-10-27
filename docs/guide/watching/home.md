@@ -29,6 +29,12 @@ Scroll down for rows of posters. Each row scrolls sideways, and a row with a **â
 | **Genres** | A few genres from your library, different each day. |
 | **Coming soon** | With [Radarr or Sonarr](/docs/server/radarr-and-sonarr/) connected: new episodes and movies due in the next two months. |
 
+<!-- since: v0.1.1 -->
+## See more
+
+A row only has room for so many titles. When there are more, the row ends with a **See more** card: scroll to the end of the row and pick it for a page with every title in the row. It's on Home's rows, on **More like this** under a title, on collections pinned to a library, and on [Discover](/docs/watching/discover/)'s rows, where the page keeps loading more as you scroll. The phone and TV apps have it too.
+<!-- /since -->
+
 ## Removing something from Continue watching
 
 Hover over a card in **Continue watching** and click **Ã—**. It disappears from the row but keeps its place, so playing it again picks up where you stopped.

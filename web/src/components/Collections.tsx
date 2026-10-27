@@ -377,7 +377,7 @@ export function PinnedCollections({ library }: { library: number }) {
   return (
     <div className="space-y-10">
       {rows.map((c) => (
-        <Row key={c.id} title={collectionName(c)} more={collectionLink(c)}>
+        <Row key={c.id} title={collectionName(c)} more={collectionLink(c)} hasMore={c.count > c.items.length}>
           {c.items.map((it) => (
             <RowItem key={it.id}>
               <PosterCard item={it} />

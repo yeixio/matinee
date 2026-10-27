@@ -1,8 +1,8 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Check, Clock, Play, Plus, Search as SearchIcon, Star, X } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link, useParams, useSearchParams } from 'react-router-dom'
 import { api, type DiscoverRow, type DiscoverTitle, type User } from '../api'
 import { RemotePoster, useRequestOptions } from '../components/Arr'
 import { Row, RowItem } from '../components/Row'
@@ -103,7 +103,7 @@ export default function Discover() {
         </div>
       ) : (
         rows.data.rows.map((r) => (
-          <Row key={r.id} title={discoverRowTitle(r)}>
+          <Row key={r.id} title={discoverRowTitle(r)} more={r.more ? discoverRowLink(r.id) : undefined} hasMore={r.more}>
             {r.items.map((d) => (
               <RowItem key={d.kind + d.tmdbId}>
                 <TitleCard title={d} onOpen={setOpen} />
@@ -113,6 +113,75 @@ export default function Discover() {
         ))
       )}
 
+      {open && <TitleSheet title={open} canRequest={canRequest} onClose={() => setOpen(undefined)} onChange={setOpen} />}
+    </div>
+  )
+}
+
+const discoverRowLink = (id: string) => `/discover/row/${encodeURIComponent(id)}`
+
+// All of one of Discover's rows, a page from Overseerr at a time as you
+// scroll, for the See more at the end of the row.
+export function DiscoverRowPage() {
+  const { t } = useTranslation()
+  const id = useParams().id ?? ''
+  const [open, setOpen] = useState<DiscoverTitle>()
+  const pages = useInfiniteQuery({
+    queryKey: ['discoverRow', id],
+    queryFn: ({ pageParam }) => api.discoverRow(id, pageParam),
+    initialPageParam: 1,
+    getNextPageParam: (last) => (last.page < last.pages ? last.page + 1 : undefined),
+    staleTime: 10 * 60_000,
+  })
+  const end = useRef<HTMLDivElement>(null)
+  const { hasNextPage, isFetchingNextPage, fetchNextPage } = pages
+  // The next page loads as the end of the grid comes into view.
+  useEffect(() => {
+    const el = end.current
+    if (!el || !hasNextPage) return
+    const seen = new IntersectionObserver((e) => e[0].isIntersecting && !isFetchingNextPage && fetchNextPage(), { rootMargin: '800px' })
+    seen.observe(el)
+    return () => seen.disconnect()
+  }, [hasNextPage, isFetchingNextPage, fetchNextPage])
+
+  if (pages.error) {
+    return (
+      <EmptyState title={t('discover.unavailable')}>
+        <p>{pages.error.message}</p>
+      </EmptyState>
+    )
+  }
+  if (!pages.data) {
+    return (
+      <div className="grid h-[50vh] place-items-center">
+        <Spinner />
+      </div>
+    )
+  }
+  const canRequest = pages.data.pages[0].canRequest
+  // A title can move up a list between pages; it shows once.
+  const seen = new Set<string>()
+  const titles = pages.data.pages
+    .flatMap((p) => p.row.items)
+    .filter((d) => {
+      const key = d.kind + d.tmdbId
+      return !seen.has(key) && !!seen.add(key)
+    })
+  return (
+    <div className="space-y-6">
+      <h1 className="text-2xl font-bold tracking-tight">{discoverRowTitle(pages.data.pages[0].row)}</h1>
+      {titles.length > 0 ? (
+        <div className="grid grid-cols-[repeat(auto-fill,minmax(8rem,1fr))] gap-4 md:grid-cols-[repeat(auto-fill,minmax(10rem,1fr))]">
+          {titles.map((d) => (
+            <TitleCard key={d.kind + d.tmdbId} title={d} onOpen={setOpen} />
+          ))}
+        </div>
+      ) : (
+        !hasNextPage && <EmptyState title={t('common:rows.empty')} />
+      )}
+      <div ref={end} className="grid h-16 place-items-center">
+        {hasNextPage && (isFetchingNextPage ? <Spinner /> : <Button onClick={() => fetchNextPage()}>{t('common:rows.loadMore')}</Button>)}
+      </div>
       {open && <TitleSheet title={open} canRequest={canRequest} onClose={() => setOpen(undefined)} onChange={setOpen} />}
     </div>
   )
@@ -172,6 +241,7 @@ function TitleSheet({
       onChange(v)
       qc.invalidateQueries({ queryKey: ['discover'] })
       qc.invalidateQueries({ queryKey: ['discoverSearch'] })
+      qc.invalidateQueries({ queryKey: ['discoverRow'] })
     },
   })
 

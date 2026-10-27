@@ -98,5 +98,6 @@
   "overseerr_isnt_answering_right_now_try_again_later": "Overseerr ei vastaa juuri nyt. Yritä myöhemmin uudelleen.",
   "overseerr_isnt_connected": "Overseerria ei ole yhdistetty",
   "someone_already_asked_for_title": "joku on jo pyytänyt nimikettä {{title}}",
-  "tmdbid_is_required": "tmdbId vaaditaan"
+  "tmdbid_is_required": "tmdbId vaaditaan",
+  "no_such_row": "riviä ei ole"
 }

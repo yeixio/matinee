@@ -445,12 +445,12 @@ func (s *Server) pinnedRows(ctx context.Context, u store.User) ([]HomeRow, error
 		if !c.PinHome {
 			continue
 		}
-		items, _, err := s.resolveCollection(ctx, u.ID, c, collectionRowItems)
+		items, n, err := s.resolveCollection(ctx, u.ID, c, collectionRowItems)
 		if err != nil {
 			return nil, err
 		}
 		if len(items) > 0 {
-			rows = append(rows, HomeRow{ID: "collection:" + c.ID, Title: c.Name, CollectionID: c.ID, Starter: c.Starter, Items: items})
+			rows = append(rows, HomeRow{ID: "collection:" + c.ID, Title: c.Name, CollectionID: c.ID, Starter: c.Starter, Items: items, More: n > len(items)})
 		}
 	}
 	return rows, nil

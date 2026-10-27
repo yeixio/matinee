@@ -162,6 +162,7 @@ func (s *Server) routes() []route {
 		{"POST /items/{id}/analyze", adminOnly, s.analyzeItem},
 
 		{"GET /home", reader, s.home},
+		{"GET /rows/{id}", reader, s.rowPage},
 		{"GET /search", reader, s.search},
 		{"GET /items/{id}", reader, s.getItem},
 		{"GET /items/{id}/children", reader, s.itemChildren},
@@ -211,6 +212,7 @@ func (s *Server) routes() []route {
 		{"POST /integrations/overseerr/test", adminOnly, s.testOverseerr},
 		{"GET /discover", reader, grownUps(s.discover)},
 		{"GET /discover/search", reader, grownUps(s.discoverSearch)},
+		{"GET /discover/rows/{id}", reader, grownUps(s.discoverRowPage)},
 		{"POST /discover/requests", signedIn, grownUps(s.discoverRequest)},
 		{"GET /requests/options", reader, grownUps(s.getRequestOptions)},
 		{"GET /requests/search", signedIn, grownUps(s.searchTitles)},
@@ -745,39 +747,45 @@ func (s *Server) browseFS(w http.ResponseWriter, r *http.Request) {
 // ---- browsing ----
 
 func (s *Server) home(w http.ResponseWriter, r *http.Request) {
-	uid := currentUser(r).ID
-	cont, err := s.Store.ContinueWatching(r.Context(), uid, 20)
-	if err != nil {
-		s.serverError(w, err)
-		return
-	}
-	recent, err := s.Store.RecentlyAdded(r.Context(), uid, 30)
-	if err != nil {
-		s.serverError(w, err)
-		return
-	}
-	watchList, err := s.Store.WatchList(r.Context(), uid, 30)
-	if err != nil {
-		s.serverError(w, err)
-		return
-	}
+	ctx, uid := r.Context(), currentUser(r).ID
 	now := today()
-	releases, err := s.Store.NewReleases(r.Context(), uid, now.Year()-newReleaseYrs+1, 30)
+	// One more than a row shows says whether it has more.
+	cont, err := s.Store.ContinueWatching(ctx, uid, continueItems+1)
 	if err != nil {
 		s.serverError(w, err)
 		return
 	}
-	pinned, err := s.pinnedRows(r.Context(), currentUser(r))
+	recent, err := s.Store.RecentlyAdded(ctx, uid, homeRowItems+1)
 	if err != nil {
 		s.serverError(w, err)
 		return
 	}
-	rows, err := s.genreRows(r.Context(), uid, now)
+	watchList, err := s.Store.WatchList(ctx, uid, homeRowItems+1)
 	if err != nil {
 		s.serverError(w, err)
 		return
 	}
-	holidayRows, err := s.holidayRows(r.Context(), uid, now)
+	releases, err := s.Store.NewReleases(ctx, uid, now.Year()-newReleaseYrs+1, homeRowItems+1)
+	if err != nil {
+		s.serverError(w, err)
+		return
+	}
+	more := map[string]bool{}
+	cont, more[rowContinue] = cut(cont, continueItems)
+	recent, more[rowRecent] = cut(recent, homeRowItems)
+	watchList, more[rowWatchList] = cut(watchList, homeRowItems)
+	releases, more[rowReleases] = cut(releases, homeRowItems)
+	pinned, err := s.pinnedRows(ctx, currentUser(r))
+	if err != nil {
+		s.serverError(w, err)
+		return
+	}
+	rows, err := s.genreRows(ctx, uid, now)
+	if err != nil {
+		s.serverError(w, err)
+		return
+	}
+	holidayRows, err := s.holidayRows(ctx, uid, now)
 	if err != nil {
 		s.serverError(w, err)
 		return
@@ -788,6 +796,8 @@ func (s *Server) home(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, http.StatusOK, map[string]any{
 		"continueWatching": cont, "watchList": watchList, "recentlyAdded": recent,
 		"newReleases": releases, "rows": rows,
+		// Which of the lists above have more titles than they show (see rows.go).
+		"more": more,
 	})
 }
 

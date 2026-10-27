@@ -306,5 +306,13 @@
       "movie": "영화",
       "show": "시리즈"
     }
+  },
+  "rows": {
+    "seeMore": "더 보기",
+    "seeMoreOf": "{{title}} 더 보기",
+    "moreLike": "{{title}}와(과) 비슷한 작품",
+    "empty": "지금은 아무것도 없습니다",
+    "unavailable": "이 줄을 사용할 수 없습니다",
+    "loadMore": "더 불러오기"
   }
 }

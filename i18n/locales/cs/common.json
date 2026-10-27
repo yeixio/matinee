@@ -387,5 +387,13 @@
       "movie": "Film",
       "show": "Seriál"
     }
+  },
+  "rows": {
+    "seeMore": "Zobrazit více",
+    "seeMoreOf": "{{title}}, zobrazit více",
+    "moreLike": "Podobné jako {{title}}",
+    "empty": "Teď tu nic není",
+    "unavailable": "Tato řada není dostupná",
+    "loadMore": "Načíst další"
   }
 }

@@ -98,5 +98,6 @@
   "overseerr_isnt_answering_right_now_try_again_later": "Overseerr sedang tidak menjawab. Coba lagi nanti.",
   "overseerr_isnt_connected": "Overseerr tidak terhubung",
   "someone_already_asked_for_title": "seseorang sudah meminta {{title}}",
-  "tmdbid_is_required": "tmdbId wajib diisi"
+  "tmdbid_is_required": "tmdbId wajib diisi",
+  "no_such_row": "baris tidak ada"
 }

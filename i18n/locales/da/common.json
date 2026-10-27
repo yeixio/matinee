@@ -333,5 +333,13 @@
       "movie": "Film",
       "show": "Serie"
     }
+  },
+  "rows": {
+    "seeMore": "Se mere",
+    "seeMoreOf": "{{title}}, se mere",
+    "moreLike": "Mere som {{title}}",
+    "empty": "Her er intet lige nu",
+    "unavailable": "Rækken er ikke tilgængelig",
+    "loadMore": "Indlæs flere"
   }
 }

@@ -5,12 +5,11 @@ import { Link } from 'react-router-dom'
 import { api, pendingRefetch, type Item } from '../api'
 import { ComingSoonRow } from '../components/Arr'
 import { PosterCard } from '../components/Card'
-import { collectionLink, collectionName } from '../components/Collections'
 import { Hero } from '../components/Hero'
 import { Row, RowItem } from '../components/Row'
 import { useLibraries } from '../components/Shell'
 import { Button, EmptyState } from '../components/ui'
-import { genreRowTitle } from '../people'
+import { rowLink, rowTitle } from '../rows'
 
 export default function Home() {
   const { t } = useTranslation()
@@ -51,7 +50,7 @@ export default function Home() {
         <Hero item={featured} onRemove={featured === data.continueWatching[0] ? () => hide.mutate(featured.id) : undefined} />
       )}
       {data.continueWatching.length > 0 && (
-        <Row title={t('home.continueWatching')}>
+        <Row title={t('home.continueWatching')} more={rowLink('continueWatching')} hasMore={data.more?.continueWatching} wide>
           {data.continueWatching.map((it) => (
             <RowItem key={it.id} wide>
               <ContinueWatchingCard item={it} />
@@ -60,7 +59,7 @@ export default function Home() {
         </Row>
       )}
       {data.recentlyAdded.length > 0 && (
-        <Row title={t('home.recentlyAdded')}>
+        <Row title={t('home.recentlyAdded')} more={rowLink('recentlyAdded')} hasMore={data.more?.recentlyAdded}>
           {data.recentlyAdded.map((it) => (
             <RowItem key={it.id}>
               <PosterCard item={it} />
@@ -70,7 +69,7 @@ export default function Home() {
       )}
       {/* Continue watching, recently added and new releases stay at the top. */}
       {!!data.newReleases?.length && (
-        <Row title={t('home.newReleases')}>
+        <Row title={t('home.newReleases')} more={rowLink('newReleases')} hasMore={data.more?.newReleases}>
           {data.newReleases.map((it) => (
             <RowItem key={it.id}>
               <PosterCard item={it} />
@@ -79,7 +78,7 @@ export default function Home() {
         </Row>
       )}
       {data.watchList.length > 0 && (
-        <Row title={t('nav.watchList')} more="/watchlist">
+        <Row title={t('nav.watchList')} more={rowLink('watchList')} hasMore={data.more?.watchList}>
           {data.watchList.map((it) => (
             <RowItem key={it.id}>
               <PosterCard item={it} />
@@ -89,7 +88,7 @@ export default function Home() {
       )}
       {/* A holiday coming up, pinned collections, then a few genres, different each day. */}
       {data.rows?.map((row) => (
-        <Row key={row.id} title={row.holiday ? t(`common:holidays.${row.holiday}`, { defaultValue: row.title }) : row.genre ? genreRowTitle(row.genre) : collectionName({ name: row.title, starter: row.starter })} more={row.collectionId ? collectionLink({ id: row.collectionId }) : undefined}>
+        <Row key={row.id} title={rowTitle(row)} more={row.collectionId || row.more ? rowLink(row.id) : undefined} hasMore={row.more}>
           {row.items.map((it) => (
             <RowItem key={it.id}>
               <PosterCard item={it} />

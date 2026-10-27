@@ -360,5 +360,13 @@
       "movie": "Film",
       "show": "Série"
     }
+  },
+  "rows": {
+    "seeMore": "Voir plus",
+    "seeMoreOf": "{{title}}, voir plus",
+    "moreLike": "Dans le même esprit que {{title}}",
+    "empty": "Rien ici pour le moment",
+    "unavailable": "Cette rangée n'est pas disponible",
+    "loadMore": "Charger plus"
   }
 }

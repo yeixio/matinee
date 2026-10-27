@@ -98,5 +98,6 @@
   "overseerr_isnt_answering_right_now_try_again_later": "Overseerr nu răspunde acum. Încearcă mai târziu.",
   "overseerr_isnt_connected": "Overseerr nu e conectat",
   "someone_already_asked_for_title": "cineva a cerut deja {{title}}",
-  "tmdbid_is_required": "tmdbId este obligatoriu"
+  "tmdbid_is_required": "tmdbId este obligatoriu",
+  "no_such_row": "rândul nu există"
 }

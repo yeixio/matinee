@@ -98,5 +98,6 @@
   "overseerr_isnt_answering_right_now_try_again_later": "Overseerr şu anda yanıt vermiyor. Daha sonra yeniden dene.",
   "overseerr_isnt_connected": "Overseerr bağlı değil",
   "someone_already_asked_for_title": "{{title}} zaten istendi",
-  "tmdbid_is_required": "tmdbId gerekli"
+  "tmdbid_is_required": "tmdbId gerekli",
+  "no_such_row": "böyle bir sıra yok"
 }
