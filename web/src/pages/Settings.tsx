@@ -27,6 +27,7 @@ export default function Settings() {
       {me?.isAdmin && <HomeNetwork />}
       {me?.isAdmin && <RemoteAccess />}
       {me?.isAdmin && <Trailers />}
+      {me?.isAdmin && <HolidayRows />}
       {me?.isAdmin && <Transcoding />}
       {me?.isAdmin && <Integrations />}
       {me && !me.guest && <Account />}
@@ -644,6 +645,36 @@ function Trailers() {
           disabled={!data || save.isPending}
           onChange={(e) => {
             save.mutate({ remoteTrailers: e.target.checked }, { onSuccess: () => qc.invalidateQueries({ queryKey: ['trailers'] }) })
+          }}
+        />
+      </label>
+    </section>
+  )
+}
+
+function HolidayRows() {
+  const qc = useQueryClient()
+  const { data } = useQuery({ queryKey: ['settings'], queryFn: api.settings })
+  const save = useMutation({ mutationFn: api.saveSettings, onSuccess: (s) => qc.setQueryData(['settings'], s) })
+  const on = data?.holidayRows ?? true
+  return (
+    <section className="space-y-4">
+      <h2 className="text-lg font-semibold">Home</h2>
+      <label className="flex cursor-pointer items-start gap-4 rounded-xl border border-line/60 bg-surface/50 p-4">
+        <span className="min-w-0 flex-1">
+          <span className="block font-medium">Holiday rows</span>
+          <span className="mt-1 block text-sm text-muted">
+            In the month before Valentine’s Day, Easter, Halloween, Thanksgiving and Christmas, and the week before New
+            Year’s Eve, Home leads with a row of titles for the day, picked by their keywords, titles and descriptions.
+          </span>
+        </span>
+        <input
+          type="checkbox"
+          className="mt-1 size-5 accent-[var(--color-accent)]"
+          checked={on}
+          disabled={!data || save.isPending}
+          onChange={(e) => {
+            save.mutate({ holidayRows: e.target.checked }, { onSuccess: () => qc.invalidateQueries({ queryKey: ['home'] }) })
           }}
         />
       </label>

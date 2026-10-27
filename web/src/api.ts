@@ -46,6 +46,8 @@ export type Settings = {
   hardware: { active: Accelerator | null; available: Accelerator[]; detecting: boolean; problem?: string }
   // Offer TMDB's YouTube trailers next to trailer files.
   remoteTrailers: boolean
+  // A row of titles for a holiday on Home in the weeks before it.
+  holidayRows: boolean
   // The theme people see until they pick their own.
   theme: string
   // Theme files on the server that couldn't be loaded, and why.
@@ -303,8 +305,8 @@ export type SubtitleTrack = {
   burnIn?: boolean
 }
 
-/** One of the home screen's rows: a pinned collection, or a genre (a different few each day). */
-export type HomeRow = { id: string; title: string; genre: string; collectionId?: string; items: Item[] }
+/** One of the home screen's rows: a holiday coming up, a pinned collection, or a genre (a different few each day). */
+export type HomeRow = { id: string; title: string; genre: string; collectionId?: string; holiday?: string; items: Item[] }
 
 /** The orders a collection can have; "" is its own (the filter's, or the order titles were added in). */
 export type CollectionSort = '' | 'title' | 'added' | 'released' | 'year' | 'rating' | 'runtime' | 'lastPlayed' | 'shuffle'

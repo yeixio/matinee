@@ -200,3 +200,21 @@ func TestFetcherBackfillsGenres(t *testing.T) {
 		t.Fatalf("in Act: %+v", in)
 	}
 }
+
+func TestTMDBKeywords(t *testing.T) {
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.URL.Path != "/search/keyword" || r.URL.Query().Get("query") != "halloween" {
+			http.NotFound(w, r)
+			return
+		}
+		json.NewEncoder(w).Encode(map[string]any{"results": []map[string]any{
+			{"id": 3335, "name": "halloween"}, {"id": 9001, "name": "halloween party"}, {"id": 9002, "name": "Halloween"}}})
+	}))
+	t.Cleanup(ts.Close)
+	tm := NewTMDB("k")
+	tm.BaseURL = ts.URL
+	ids, err := tm.Keywords(context.Background(), "halloween")
+	if err != nil || !slices.Equal(ids, []int64{3335, 9002}) {
+		t.Fatalf("keywords: %v %v", ids, err)
+	}
+}
