@@ -23,6 +23,21 @@ const guide = (path = '') => `${base}docs/${path}`
 const github = 'https://github.com/yeixio/matinee'
 const donate = 'https://yeix.io/matinee/donate'
 
+// Tells search engines what Matinee is, for richer results.
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Matinee',
+  alternateName: 'Matinee media server',
+  description: 'A free, open source, self-hosted media server for movies, TV and music.',
+  applicationCategory: 'MultimediaApplication',
+  operatingSystem: 'Linux, macOS',
+  url: new URL(base, Astro.site).href,
+  downloadUrl: `${github}/releases`,
+  license: 'https://www.gnu.org/licenses/agpl-3.0.html',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+}
+
 const features = [
   {
     title: 'Plays anything, anywhere',
@@ -99,11 +114,17 @@ const installs = [
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Matinee: your own home cinema</title>
-    <meta name="description" content="Matinee is a fast, free and open source media server for your movies, TV and music. Point it at your folders and watch on any screen." />
-    <meta property="og:title" content="Matinee: your own home cinema" />
-    <meta property="og:description" content="A fast, free and open source media server for your movies, TV and music." />
+    <title>Matinee: free, self-hosted media server for movies, TV and music</title>
+    <meta name="description" content="Matinee is a free, open source, self-hosted media server for your movies, TV and music. Point it at your folders and watch on any screen: web, phone, tablet and TV." />
+    <link rel="canonical" href={new URL(base, Astro.site).href} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Matinee" />
+    <meta property="og:url" content={new URL(base, Astro.site).href} />
+    <meta property="og:title" content="Matinee: free, self-hosted media server" />
+    <meta property="og:description" content="A fast, free and open source media server for your movies, TV and music. Run it at home and watch on any screen." />
     <meta property="og:image" content={new URL(home.src, Astro.site).href} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
     <meta name="theme-color" content="#100d12" />
     <link rel="icon" href={`${base}favicon.svg`} type="image/svg+xml" />
   </head>
@@ -124,7 +145,7 @@ const installs = [
 
     <main>
       <section class="hero">
-        <p class="eyebrow">Free and open source media server</p>
+        <p class="eyebrow">Free, open source, self-hosted media server</p>
         <h1>Your movies, shows and music.<br /><em>Your own home cinema.</em></h1>
         <p class="lede">
           Matinee turns the folders on your server into a beautiful library for the whole household. Point it at your
