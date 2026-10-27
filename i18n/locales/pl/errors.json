@@ -99,5 +99,8 @@
   "overseerr_isnt_connected": "Overseerr nie jest połączony",
   "someone_already_asked_for_title": "ktoś już poprosił o {{title}}",
   "tmdbid_is_required": "tmdbId jest wymagane",
-  "no_such_row": "nie ma takiego rzędu"
+  "no_such_row": "nie ma takiego rzędu",
+  "tmdb_didnt_accept_that_key": "TMDB nie przyjął tego klucza",
+  "tmdb_couldnt_be_reached_to_check_the_key": "Nie udało się połączyć z TMDB, aby sprawdzić klucz",
+  "this_server_cant_change_its_tmdb_key": "ten serwer nie może zmienić swojego klucza TMDB"
 }

@@ -576,7 +576,7 @@
     "close": "Cerrar"
   },
   "settings": {
-    "tmdbNotice": "Los pósteres y las descripciones proceden de <link>TMDB</link>. Este producto usa la API de TMDB, pero TMDB no lo respalda ni lo certifica.",
+    "tmdbNotice": "Los pósteres y las descripciones proceden de <site>TMDB</site>. Este producto usa la API de TMDB, pero TMDB no lo respalda ni lo certifica.",
     "libraries": {
       "title": "Bibliotecas",
       "none": "Aún no hay bibliotecas.",
@@ -689,6 +689,18 @@
       "title": "Inicio",
       "holidays": "Filas de fiestas",
       "holidaysDetail": "En el mes antes de San Valentín, Pascua, Halloween, Acción de Gracias y Navidad, y la semana antes de Nochevieja, Inicio empieza con una fila de títulos para la ocasión, elegidos por sus palabras clave, títulos y descripciones."
+    },
+    "tmdb": {
+      "title": "Pósteres y detalles",
+      "intro": "Los pósteres, descripciones, reparto y tráileres de películas y series vienen de TMDB, con una clave de API gratuita. <guide>Cómo conseguir una</guide>",
+      "usingSaved": "Se usa la clave guardada aquí, que termina en {{hint}}.",
+      "usingEnvironment": "Se usa la clave de MATINEE_TMDB_KEY, que termina en {{hint}}. Una clave guardada aquí la reemplaza.",
+      "usingBuiltIn": "Se usa la clave integrada en Matinee. Una clave guardada aquí la reemplaza.",
+      "none": "Aún no hay clave, así que las películas y series solo usan los archivos de imagen junto a tus medios.",
+      "label": "Clave de API de TMDB",
+      "save": "Guardar clave",
+      "remove": "Quitar la clave guardada",
+      "saved": "Guardada. Matinee está completando pósteres y detalles."
     }
   },
   "language": {

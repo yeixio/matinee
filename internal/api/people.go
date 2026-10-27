@@ -157,7 +157,7 @@ func (s *Server) getPerson(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	ctx := r.Context()
-	if s.People != nil && time.Since(time.Unix(p.InfoAt, 0)) > personRefresh {
+	if ready(s.People) && time.Since(time.Unix(p.InfoAt, 0)) > personRefresh {
 		lookup, cancel := context.WithTimeout(ctx, 5*time.Second)
 		info, err := s.People.Person(lookup, p.ID)
 		cancel()

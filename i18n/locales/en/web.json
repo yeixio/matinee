@@ -572,7 +572,7 @@
     "close": "Close"
   },
   "settings": {
-    "tmdbNotice": "Posters and descriptions come from <link>TMDB</link>. This product uses the TMDB API but is not endorsed or certified by TMDB.",
+    "tmdbNotice": "Posters and descriptions come from <site>TMDB</site>. This product uses the TMDB API but is not endorsed or certified by TMDB.",
     "libraries": {
       "title": "Libraries",
       "none": "No libraries yet.",
@@ -685,6 +685,18 @@
         "amf": "AMD AMF (Windows)",
         "v4l2m2m": "V4L2 (Raspberry Pi)"
       }
+    },
+    "tmdb": {
+      "title": "Posters and details",
+      "intro": "Posters, descriptions, cast and trailers for movies and TV come from TMDB, with a free API key. <guide>How to get one</guide>",
+      "usingSaved": "Using the key saved here, ending in {{hint}}.",
+      "usingEnvironment": "Using the key from MATINEE_TMDB_KEY, ending in {{hint}}. A key saved here replaces it.",
+      "usingBuiltIn": "Using the key built into Matinee. A key saved here replaces it.",
+      "none": "No key yet, so movies and TV only use artwork files next to your media.",
+      "label": "TMDB API key",
+      "save": "Save key",
+      "remove": "Remove saved key",
+      "saved": "Saved. Matinee is filling in posters and details now."
     }
   },
   "language": {

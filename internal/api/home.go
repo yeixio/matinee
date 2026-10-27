@@ -3,6 +3,7 @@ package api
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"net"
 	"net/http"
 	"net/netip"
@@ -10,6 +11,7 @@ import (
 	"sync"
 
 	"github.com/yeixio/matinee/internal/hwaccel"
+	"github.com/yeixio/matinee/internal/metadata"
 	"github.com/yeixio/matinee/internal/remote"
 	"github.com/yeixio/matinee/internal/scan"
 )
@@ -167,6 +169,9 @@ type serverSettings struct {
 	// changed here.
 	WatchPollSeconds    int `json:"watchPollSeconds"`
 	ScanIntervalSeconds int `json:"scanIntervalSeconds"`
+	// TMDB says where the TMDB key in use comes from. An admin changes it
+	// with tmdbKey (see tmdbkey.go); the key itself is never sent back.
+	TMDB tmdbStatus `json:"tmdb"`
 }
 
 func (s *Server) settings(ctx context.Context) (serverSettings, error) {
@@ -190,10 +195,14 @@ func (s *Server) settings(ctx context.Context) (serverSettings, error) {
 	if err != nil {
 		return serverSettings{}, err
 	}
+	tmdb, err := s.tmdbStatus(ctx)
+	if err != nil {
+		return serverSettings{}, err
+	}
 	themes, problems := s.themes()
 	def, err := s.defaultTheme(ctx, themes)
 	set := serverSettings{RequireSignInAtHome: required, Requests: mode, RemoteTrailers: trailers, HolidayRows: holidaysOn, Theme: def,
-		RemoteAccess: remoteOn, Remote: s.remoteStatus(), PublicURL: s.PublicURL,
+		RemoteAccess: remoteOn, Remote: s.remoteStatus(), PublicURL: s.PublicURL, TMDB: tmdb,
 		ThemeProblems: []string{}, HardwareAcceleration: hwaccel.Auto, Hardware: &hwaccel.Status{Available: []hwaccel.Accel{}}}
 	for _, p := range problems {
 		set.ThemeProblems = append(set.ThemeProblems, p.Error())
@@ -230,6 +239,8 @@ func (s *Server) putSettings(w http.ResponseWriter, r *http.Request) {
 		Theme                *string `json:"theme"`
 		RemoteAccess         *bool   `json:"remoteAccess"`
 		LibraryWatch         *string `json:"libraryWatch"`
+		// TMDBKey replaces the TMDB key; "" goes back to the environment's.
+		TMDBKey *string `json:"tmdbKey"`
 		// Read-only; accepted so a client can send back what it got.
 		Hardware            json.RawMessage `json:"hardware"`
 		ThemeProblems       json.RawMessage `json:"themeProblems"`
@@ -237,12 +248,30 @@ func (s *Server) putSettings(w http.ResponseWriter, r *http.Request) {
 		PublicURL           json.RawMessage `json:"publicURL"`
 		WatchPollSeconds    json.RawMessage `json:"watchPollSeconds"`
 		ScanIntervalSeconds json.RawMessage `json:"scanIntervalSeconds"`
+		TMDB                json.RawMessage `json:"tmdb"`
 	}
 	if err := readJSON(r, &in); err != nil {
 		writeError(w, http.StatusBadRequest, "bad request")
 		return
 	}
 	ctx := r.Context()
+	// First, so a key TMDB turns down changes nothing else.
+	if in.TMDBKey != nil {
+		switch err := s.setTMDBKey(ctx, *in.TMDBKey); {
+		case errors.Is(err, metadata.ErrBadKey):
+			writeError(w, http.StatusBadRequest, "TMDB didn't accept that key")
+			return
+		case errors.Is(err, errTMDBUnreachable):
+			writeError(w, http.StatusBadGateway, "TMDB couldn't be reached to check the key")
+			return
+		case errors.Is(err, errNoTMDB):
+			writeError(w, http.StatusBadRequest, "this server can't change its TMDB key")
+			return
+		case err != nil:
+			s.serverError(w, err)
+			return
+		}
+	}
 	if m := in.Requests; m != nil && *m != "" {
 		if *m != requestsOff && *m != requestsApprove && *m != requestsAuto {
 			writeError(w, http.StatusBadRequest, "requests must be off, approve or auto")

@@ -572,7 +572,7 @@
     "close": "Stäng"
   },
   "settings": {
-    "tmdbNotice": "Affischer och beskrivningar kommer från <link>TMDB</link>. Den här produkten använder TMDB:s API men är inte godkänd eller certifierad av TMDB.",
+    "tmdbNotice": "Affischer och beskrivningar kommer från <site>TMDB</site>. Den här produkten använder TMDB:s API men är inte godkänd eller certifierad av TMDB.",
     "libraries": {
       "title": "Bibliotek",
       "none": "Inga bibliotek än.",
@@ -685,6 +685,18 @@
       "title": "Hem",
       "holidays": "Högtidsrader",
       "holidaysDetail": "Månaden före alla hjärtans dag, påsk, halloween, Thanksgiving och jul, och veckan före nyårsafton, börjar Hem med en rad titlar för dagen, valda efter nyckelord, titlar och beskrivningar."
+    },
+    "tmdb": {
+      "title": "Affischer och detaljer",
+      "intro": "Affischer, beskrivningar, rollista och trailers för filmer och serier kommer från TMDB, med en gratis API-nyckel. <guide>Så skaffar du en</guide>",
+      "usingSaved": "Nyckeln som sparats här används, slutar på {{hint}}.",
+      "usingEnvironment": "Nyckeln från MATINEE_TMDB_KEY används, slutar på {{hint}}. En nyckel som sparas här ersätter den.",
+      "usingBuiltIn": "Nyckeln som är inbyggd i Matinee används. En nyckel som sparas här ersätter den.",
+      "none": "Ingen nyckel än, så filmer och serier använder bara bildfiler bredvid dina medier.",
+      "label": "TMDB API-nyckel",
+      "save": "Spara nyckel",
+      "remove": "Ta bort sparad nyckel",
+      "saved": "Sparad. Matinee fyller nu i affischer och detaljer."
     }
   },
   "language": {

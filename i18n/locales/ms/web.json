@@ -568,7 +568,7 @@
     "close": "Tutup"
   },
   "settings": {
-    "tmdbNotice": "Poster dan penerangan datang daripada <link>TMDB</link>. Produk ini menggunakan API TMDB tetapi tidak disokong atau diperakui oleh TMDB.",
+    "tmdbNotice": "Poster dan penerangan datang daripada <site>TMDB</site>. Produk ini menggunakan API TMDB tetapi tidak disokong atau diperakui oleh TMDB.",
     "libraries": {
       "title": "Pustaka",
       "none": "Belum ada pustaka.",
@@ -681,6 +681,18 @@
       "title": "Laman utama",
       "holidays": "Baris perayaan",
       "holidaysDetail": "Sebulan sebelum Hari Valentine, Easter, Halloween, Thanksgiving dan Krismas, dan seminggu sebelum malam Tahun Baharu, Laman utama bermula dengan baris tajuk untuk hari itu, dipilih berdasarkan kata kunci, tajuk dan penerangannya."
+    },
+    "tmdb": {
+      "title": "Poster dan butiran",
+      "intro": "Poster, penerangan, pelakon dan treler untuk filem dan siri datang daripada TMDB, dengan kunci API percuma. <guide>Cara mendapatkannya</guide>",
+      "usingSaved": "Menggunakan kunci yang disimpan di sini, berakhir dengan {{hint}}.",
+      "usingEnvironment": "Menggunakan kunci daripada MATINEE_TMDB_KEY, berakhir dengan {{hint}}. Kunci yang disimpan di sini akan menggantikannya.",
+      "usingBuiltIn": "Menggunakan kunci terbina dalam Matinee. Kunci yang disimpan di sini akan menggantikannya.",
+      "none": "Belum ada kunci, jadi filem dan siri hanya menggunakan fail imej di sebelah media anda.",
+      "label": "Kunci API TMDB",
+      "save": "Simpan kunci",
+      "remove": "Buang kunci yang disimpan",
+      "saved": "Disimpan. Matinee sedang melengkapkan poster dan butiran."
     }
   },
   "language": {

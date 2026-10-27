@@ -576,7 +576,7 @@
     "close": "Închide"
   },
   "settings": {
-    "tmdbNotice": "Afișele și descrierile provin de la <link>TMDB</link>. Acest produs folosește API-ul TMDB, dar nu este aprobat sau certificat de TMDB.",
+    "tmdbNotice": "Afișele și descrierile provin de la <site>TMDB</site>. Acest produs folosește API-ul TMDB, dar nu este aprobat sau certificat de TMDB.",
     "libraries": {
       "title": "Biblioteci",
       "none": "Nicio bibliotecă încă.",
@@ -689,6 +689,18 @@
       "title": "Acasă",
       "holidays": "Rânduri de sărbători",
       "holidaysDetail": "Cu o lună înainte de Ziua Îndrăgostiților, Paște, Halloween, Ziua Recunoștinței și Crăciun și cu o săptămână înainte de Revelion, Acasă începe cu un rând de titluri pentru ocazie, alese după cuvinte-cheie, titluri și descrieri."
+    },
+    "tmdb": {
+      "title": "Afișe și detalii",
+      "intro": "Afișele, descrierile, distribuția și trailerele pentru filme și seriale vin de la TMDB, cu o cheie API gratuită. <guide>Cum obții una</guide>",
+      "usingSaved": "Se folosește cheia salvată aici, care se termină în {{hint}}.",
+      "usingEnvironment": "Se folosește cheia din MATINEE_TMDB_KEY, care se termină în {{hint}}. O cheie salvată aici o înlocuiește.",
+      "usingBuiltIn": "Se folosește cheia inclusă în Matinee. O cheie salvată aici o înlocuiește.",
+      "none": "Încă nu există o cheie, așa că filmele și serialele folosesc doar fișierele de imagine de lângă media ta.",
+      "label": "Cheie API TMDB",
+      "save": "Salvează cheia",
+      "remove": "Elimină cheia salvată",
+      "saved": "Salvată. Matinee completează acum afișele și detaliile."
     }
   },
   "language": {

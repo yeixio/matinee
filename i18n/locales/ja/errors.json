@@ -99,5 +99,8 @@
   "overseerr_isnt_connected": "Overseerrが接続されていません",
   "someone_already_asked_for_title": "{{title}}はすでにリクエストされています",
   "tmdbid_is_required": "tmdbIdは必須です",
-  "no_such_row": "その列はありません"
+  "no_such_row": "その列はありません",
+  "tmdb_didnt_accept_that_key": "TMDB がそのキーを受け付けませんでした",
+  "tmdb_couldnt_be_reached_to_check_the_key": "キーを確認するために TMDB に接続できませんでした",
+  "this_server_cant_change_its_tmdb_key": "このサーバーは TMDB キーを変更できません"
 }

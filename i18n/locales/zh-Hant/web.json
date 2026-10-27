@@ -568,7 +568,7 @@
     "close": "關閉"
   },
   "settings": {
-    "tmdbNotice": "海報和簡介來自 <link>TMDB</link>。本產品使用 TMDB API，但未獲得 TMDB 的認可或認證。",
+    "tmdbNotice": "海報和簡介來自 <site>TMDB</site>。本產品使用 TMDB API，但未獲得 TMDB 的認可或認證。",
     "libraries": {
       "title": "媒體庫",
       "none": "還沒有媒體庫。",
@@ -681,6 +681,18 @@
       "title": "首頁",
       "holidays": "節日列",
       "holidaysDetail": "在情人節、復活節、萬聖節、感恩節和聖誕節前一個月,以及跨年夜前一週,首頁會以一列應景的影片開頭,依關鍵字、標題和簡介挑選。"
+    },
+    "tmdb": {
+      "title": "海報與詳細資料",
+      "intro": "電影與影集的海報、簡介、演職員與預告片來自 TMDB，只需一組免費的 API 金鑰。<guide>如何取得</guide>",
+      "usingSaved": "正在使用此處儲存的金鑰，結尾為 {{hint}}。",
+      "usingEnvironment": "正在使用 MATINEE_TMDB_KEY 中的金鑰，結尾為 {{hint}}。此處儲存的金鑰會取代它。",
+      "usingBuiltIn": "正在使用 Matinee 內建的金鑰。此處儲存的金鑰會取代它。",
+      "none": "尚無金鑰，因此電影與影集只使用媒體旁的圖片檔。",
+      "label": "TMDB API 金鑰",
+      "save": "儲存金鑰",
+      "remove": "移除已儲存的金鑰",
+      "saved": "已儲存。Matinee 正在補齊海報與詳細資料。"
     }
   },
   "language": {

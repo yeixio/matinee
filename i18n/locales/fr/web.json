@@ -576,7 +576,7 @@
     "close": "Fermer"
   },
   "settings": {
-    "tmdbNotice": "Les affiches et descriptions proviennent de <link>TMDB</link>. Ce produit utilise l’API TMDB mais n’est ni approuvé ni certifié par TMDB.",
+    "tmdbNotice": "Les affiches et descriptions proviennent de <site>TMDB</site>. Ce produit utilise l’API TMDB mais n’est ni approuvé ni certifié par TMDB.",
     "libraries": {
       "title": "Bibliothèques",
       "none": "Aucune bibliothèque pour l’instant.",
@@ -689,6 +689,18 @@
       "title": "Accueil",
       "holidays": "Rangées des fêtes",
       "holidaysDetail": "Le mois avant la Saint-Valentin, Pâques, Halloween, Thanksgiving et Noël, et la semaine avant le Nouvel An, l’accueil commence par une rangée de titres pour l’occasion, choisis selon leurs mots-clés, titres et descriptions."
+    },
+    "tmdb": {
+      "title": "Affiches et détails",
+      "intro": "Les affiches, descriptions, distributions et bandes-annonces des films et séries viennent de TMDB, avec une clé d’API gratuite. <guide>Comment en obtenir une</guide>",
+      "usingSaved": "Clé enregistrée ici utilisée, se terminant par {{hint}}.",
+      "usingEnvironment": "Clé de MATINEE_TMDB_KEY utilisée, se terminant par {{hint}}. Une clé enregistrée ici la remplace.",
+      "usingBuiltIn": "Clé intégrée à Matinee utilisée. Une clé enregistrée ici la remplace.",
+      "none": "Pas encore de clé : les films et séries n’utilisent que les images placées à côté de vos médias.",
+      "label": "Clé d’API TMDB",
+      "save": "Enregistrer la clé",
+      "remove": "Supprimer la clé enregistrée",
+      "saved": "Enregistrée. Matinee complète maintenant les affiches et les détails."
     }
   },
   "language": {

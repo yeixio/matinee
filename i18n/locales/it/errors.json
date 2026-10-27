@@ -99,5 +99,8 @@
   "overseerr_isnt_connected": "Overseerr non è collegato",
   "someone_already_asked_for_title": "qualcuno ha già chiesto {{title}}",
   "tmdbid_is_required": "tmdbId è obbligatorio",
-  "no_such_row": "riga inesistente"
+  "no_such_row": "riga inesistente",
+  "tmdb_didnt_accept_that_key": "TMDB non ha accettato questa chiave",
+  "tmdb_couldnt_be_reached_to_check_the_key": "Impossibile raggiungere TMDB per verificare la chiave",
+  "this_server_cant_change_its_tmdb_key": "questo server non può cambiare la sua chiave TMDB"
 }

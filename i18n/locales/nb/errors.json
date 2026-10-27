@@ -99,5 +99,8 @@
   "overseerr_isnt_connected": "Overseerr er ikke tilkoblet",
   "someone_already_asked_for_title": "noen har allerede bedt om {{title}}",
   "tmdbid_is_required": "tmdbId er påkrevd",
-  "no_such_row": "raden finnes ikke"
+  "no_such_row": "raden finnes ikke",
+  "tmdb_didnt_accept_that_key": "TMDB godtok ikke den nøkkelen",
+  "tmdb_couldnt_be_reached_to_check_the_key": "Fikk ikke kontakt med TMDB for å sjekke nøkkelen",
+  "this_server_cant_change_its_tmdb_key": "denne serveren kan ikke endre TMDB-nøkkelen sin"
 }

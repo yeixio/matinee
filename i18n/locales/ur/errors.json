@@ -99,5 +99,8 @@
   "overseerr_isnt_connected": "Overseerr جڑا ہوا نہیں",
   "someone_already_asked_for_title": "کوئی پہلے ہی {{title}} مانگ چکا ہے",
   "tmdbid_is_required": "tmdbId ضروری ہے",
-  "no_such_row": "ایسی کوئی قطار نہیں"
+  "no_such_row": "ایسی کوئی قطار نہیں",
+  "tmdb_didnt_accept_that_key": "TMDB نے یہ کلید قبول نہیں کی",
+  "tmdb_couldnt_be_reached_to_check_the_key": "کلید جانچنے کے لیے TMDB تک رسائی نہیں ہو سکی",
+  "this_server_cant_change_its_tmdb_key": "یہ سرور اپنی TMDB کلید تبدیل نہیں کر سکتا"
 }

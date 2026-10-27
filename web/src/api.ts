@@ -65,6 +65,9 @@ export type Settings = {
   // and how often every library is rescanned in full (0 for never).
   watchPollSeconds: number
   scanIntervalSeconds: number
+  // Where the TMDB key in use comes from, and its last four characters.
+  // The key itself is never sent; an admin changes it with tmdbKey.
+  tmdb: { source: 'settings' | 'environment' | 'built-in' | 'none'; hint?: string }
 }
 
 // sharedAddress: the router has no public address of its own, so only a relay could help.
@@ -612,7 +615,9 @@ export const api = {
   setAnalysisMode: (mode: AnalysisMode) => request<AnalysisStatus>('PUT', '/api/v1/analysis', { mode }),
   reanalyze: (id: number) => request<void>('POST', `/api/v1/items/${id}/analyze`),
   settings: () => request<Settings>('GET', '/api/v1/settings'),
-  saveSettings: (s: Partial<Omit<Settings, 'hardware' | 'themeProblems' | 'watchPollSeconds' | 'scanIntervalSeconds'>>) => request<Settings>('PUT', '/api/v1/settings', s),
+  // tmdbKey replaces the server's TMDB key; "" goes back to the one it started with.
+  saveSettings: (s: Partial<Omit<Settings, 'hardware' | 'themeProblems' | 'watchPollSeconds' | 'scanIntervalSeconds' | 'tmdb'>> & { tmdbKey?: string }) =>
+    request<Settings>('PUT', '/api/v1/settings', s),
   themes: () => request<ThemeList>('GET', '/api/v1/themes'),
   // theme: "" follows the server's default.
   myTheme: () => request<{ theme: string }>('GET', '/api/v1/me/theme'),

@@ -99,5 +99,8 @@
   "overseerr_isnt_connected": "Overseerr is niet gekoppeld",
   "someone_already_asked_for_title": "iemand heeft {{title}} al aangevraagd",
   "tmdbid_is_required": "tmdbId is verplicht",
-  "no_such_row": "deze rij bestaat niet"
+  "no_such_row": "deze rij bestaat niet",
+  "tmdb_didnt_accept_that_key": "TMDB heeft die sleutel niet geaccepteerd",
+  "tmdb_couldnt_be_reached_to_check_the_key": "TMDB was niet bereikbaar om de sleutel te controleren",
+  "this_server_cant_change_its_tmdb_key": "deze server kan zijn TMDB-sleutel niet wijzigen"
 }

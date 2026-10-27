@@ -4,6 +4,7 @@ import (
 	"cmp"
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"net/http"
 	"net/url"
@@ -12,6 +13,7 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+	"sync"
 	"time"
 
 	"github.com/yeixio/matinee/i18n"
@@ -19,15 +21,24 @@ import (
 )
 
 // TMDB looks up movies and TV on themoviedb.org. It takes either a v3 API key
-// or a v4 read access token.
+// or a v4 read access token. Without a key it looks up nothing: Kinds is
+// empty, and every lookup fails with ErrNoKey.
 type TMDB struct {
-	Key      string
 	BaseURL  string // defaults to the public API; tests point it elsewhere
 	ImageURL string
 	Client   *http.Client
 	// Region picks which country's age ratings to show; defaults to US.
 	Region string
+
+	mu  sync.RWMutex
+	key string
 }
+
+// ErrNoKey is what lookups fail with while TMDB has no key.
+var ErrNoKey = errors.New("tmdb: no API key")
+
+// ErrBadKey means TMDB turned the key down.
+var ErrBadKey = errors.New("tmdb: the API key was turned down")
 
 // Where TMDB's API and images are. Variables so the docs' screenshot server
 // can point a build at a stand-in (go build -ldflags "-X ...").
@@ -38,15 +49,45 @@ var (
 
 func NewTMDB(key string) *TMDB {
 	return &TMDB{
-		Key:      key,
+		key:      key,
 		BaseURL:  TMDBBaseURL,
 		ImageURL: TMDBImageURL,
 		Client:   &http.Client{Timeout: 15 * time.Second},
 	}
 }
 
-func (t *TMDB) Name() string    { return "tmdb" }
-func (t *TMDB) Kinds() []string { return []string{"movie", "show", "season", "episode"} }
+// Key is the API key or read access token in use; "" when there's none.
+func (t *TMDB) Key() string {
+	t.mu.RLock()
+	defer t.mu.RUnlock()
+	return t.key
+}
+
+// SetKey changes the key while the server runs; "" turns lookups off.
+func (t *TMDB) SetKey(key string) {
+	t.mu.Lock()
+	t.key = key
+	t.mu.Unlock()
+}
+
+// Ready reports whether TMDB has a key to look things up with.
+func (t *TMDB) Ready() bool { return t.Key() != "" }
+
+// Check asks TMDB whether it accepts key, without changing the one in use.
+func (t *TMDB) Check(ctx context.Context, key string) error {
+	var out struct{}
+	return t.getWith(ctx, key, "/configuration", nil, &out)
+}
+
+func (t *TMDB) Name() string { return "tmdb" }
+
+// Kinds is empty while TMDB has no key, so nothing waits on it.
+func (t *TMDB) Kinds() []string {
+	if !t.Ready() {
+		return nil
+	}
+	return []string{"movie", "show", "season", "episode"}
+}
 
 func (t *TMDB) Lookup(ctx context.Context, q Query) (*store.Metadata, error) {
 	switch q.Kind {
@@ -222,6 +263,13 @@ func (t *TMDB) image(size, path string) string {
 var errNotFound = fmt.Errorf("tmdb: not found")
 
 func (t *TMDB) get(ctx context.Context, path string, params url.Values, out any) error {
+	return t.getWith(ctx, t.Key(), path, params, out)
+}
+
+func (t *TMDB) getWith(ctx context.Context, key, path string, params url.Values, out any) error {
+	if key == "" {
+		return ErrNoKey
+	}
 	if params == nil {
 		params = url.Values{}
 	}
@@ -230,10 +278,10 @@ func (t *TMDB) get(ctx context.Context, path string, params url.Values, out any)
 		return err
 	}
 	// v4 read access tokens are JWTs; v3 keys are short hex strings.
-	if strings.HasPrefix(t.Key, "eyJ") {
-		req.Header.Set("Authorization", "Bearer "+t.Key)
+	if strings.HasPrefix(key, "eyJ") {
+		req.Header.Set("Authorization", "Bearer "+key)
 	} else {
-		params.Set("api_key", t.Key)
+		params.Set("api_key", key)
 	}
 	req.URL.RawQuery = params.Encode()
 	req.Header.Set("Accept", "application/json")
@@ -245,6 +293,8 @@ func (t *TMDB) get(ctx context.Context, path string, params url.Values, out any)
 	switch {
 	case res.StatusCode == http.StatusNotFound:
 		return errNotFound
+	case res.StatusCode == http.StatusUnauthorized:
+		return ErrBadKey
 	case res.StatusCode != http.StatusOK:
 		return fmt.Errorf("tmdb %s: HTTP %d", path, res.StatusCode)
 	}

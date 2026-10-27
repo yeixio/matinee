@@ -572,7 +572,7 @@
     "close": "Schließen"
   },
   "settings": {
-    "tmdbNotice": "Poster und Beschreibungen stammen von <link>TMDB</link>. Dieses Produkt nutzt die TMDB-API, ist aber nicht von TMDB unterstützt oder zertifiziert.",
+    "tmdbNotice": "Poster und Beschreibungen stammen von <site>TMDB</site>. Dieses Produkt nutzt die TMDB-API, ist aber nicht von TMDB unterstützt oder zertifiziert.",
     "libraries": {
       "title": "Mediatheken",
       "none": "Noch keine Mediatheken.",
@@ -685,6 +685,18 @@
       "title": "Startseite",
       "holidays": "Feiertagsreihen",
       "holidaysDetail": "Im Monat vor Valentinstag, Ostern, Halloween, Thanksgiving und Weihnachten sowie in der Woche vor Silvester beginnt die Startseite mit einer Reihe passender Titel, ausgewählt nach Schlagwörtern, Titeln und Beschreibungen."
+    },
+    "tmdb": {
+      "title": "Poster und Details",
+      "intro": "Poster, Beschreibungen, Besetzung und Trailer für Filme und Serien kommen von TMDB, mit einem kostenlosen API-Schlüssel. <guide>So bekommst du einen</guide>",
+      "usingSaved": "Der hier gespeicherte Schlüssel wird verwendet, endet auf {{hint}}.",
+      "usingEnvironment": "Der Schlüssel aus MATINEE_TMDB_KEY wird verwendet, endet auf {{hint}}. Ein hier gespeicherter Schlüssel ersetzt ihn.",
+      "usingBuiltIn": "Der in Matinee eingebaute Schlüssel wird verwendet. Ein hier gespeicherter Schlüssel ersetzt ihn.",
+      "none": "Noch kein Schlüssel, daher nutzen Filme und Serien nur Bilddateien neben deinen Medien.",
+      "label": "TMDB-API-Schlüssel",
+      "save": "Schlüssel speichern",
+      "remove": "Gespeicherten Schlüssel entfernen",
+      "saved": "Gespeichert. Matinee ergänzt jetzt Poster und Details."
     }
   },
   "language": {

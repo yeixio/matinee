@@ -99,5 +99,8 @@
   "overseerr_isnt_connected": "Overseerr chưa được kết nối",
   "someone_already_asked_for_title": "đã có người yêu cầu {{title}}",
   "tmdbid_is_required": "cần có tmdbId",
-  "no_such_row": "không có hàng này"
+  "no_such_row": "không có hàng này",
+  "tmdb_didnt_accept_that_key": "TMDB không chấp nhận khóa đó",
+  "tmdb_couldnt_be_reached_to_check_the_key": "Không thể kết nối TMDB để kiểm tra khóa",
+  "this_server_cant_change_its_tmdb_key": "máy chủ này không thể đổi khóa TMDB của nó"
 }

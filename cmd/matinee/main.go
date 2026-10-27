@@ -92,13 +92,17 @@ func run() error {
 
 	scanner := &scan.Scanner{Store: db, Prober: probe.Prober{Path: cfg.FFprobePath}, Log: log}
 	fetcher := &metadata.Fetcher{Store: db, Log: log}
-	var tmdb *metadata.TMDB
-	if cfg.TMDBKey != "" {
-		tmdb = metadata.NewTMDB(cfg.TMDBKey)
-		tmdb.Region = country
-		fetcher.Providers = append(fetcher.Providers, tmdb)
-	} else {
-		log.Info("no TMDB key set; movies and TV use local artwork only (set MATINEE_TMDB_KEY for posters and descriptions)")
+	// An admin can change the TMDB key in Settings (see internal/api/tmdbkey.go);
+	// without one, TMDB looks nothing up until they do.
+	tmdbKey, err := api.TMDBKey(ctx, db, cfg.TMDBKey)
+	if err != nil {
+		return err
+	}
+	tmdb := metadata.NewTMDB(tmdbKey)
+	tmdb.Region = country
+	fetcher.Providers = append(fetcher.Providers, tmdb)
+	if tmdbKey == "" {
+		log.Info("no TMDB key set; movies and TV use local artwork only (add one in Settings or set MATINEE_TMDB_KEY for posters and descriptions)")
 	}
 	if cfg.Wikidata {
 		fetcher.Awards = metadata.NewWikidata(version.Version)
@@ -152,11 +156,19 @@ func run() error {
 			log.Warn("skipping a theme file", "dir", cfg.ThemeDir(), "err", p)
 		}
 	}
-	if tmdb != nil {
-		apiServer.TrailerSource = tmdb
-		apiServer.People = tmdb
-		apiServer.Translate = fetcher.TranslateAll
-		apiServer.Keywords = tmdb
+	apiServer.TrailerSource = tmdb
+	apiServer.People = tmdb
+	apiServer.Translate = fetcher.TranslateAll
+	apiServer.Keywords = tmdb
+	apiServer.TMDB, apiServer.TMDBFallback, apiServer.TMDBFallbackSource = tmdb, cfg.TMDBKey, api.TMDBKeyFromEnvironment
+	if cfg.TMDBKey != "" && cfg.TMDBKey == config.DefaultTMDBKey {
+		apiServer.TMDBFallbackSource = api.TMDBKeyBuiltIn
+	}
+	// A new key fills in what the old one couldn't: titles never looked up
+	// count as waiting again, and a scan of every library looks them up.
+	apiServer.OnTMDBKey = func() {
+		db.SetMetadataKinds(fetcher.Kinds()...)
+		scanner.ScanAll(ctx)
 	}
 	if cfg.RemoteAddr != "" {
 		apiServer.Remote = &remote.Manager{Addr: cfg.RemoteAddr, Dir: cfg.RemoteDir(), Handler: apiServer.RemoteHandler(), Log: log}

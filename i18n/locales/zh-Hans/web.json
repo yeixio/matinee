@@ -568,7 +568,7 @@
     "close": "关闭"
   },
   "settings": {
-    "tmdbNotice": "海报和简介来自 <link>TMDB</link>。本产品使用 TMDB API，但未获得 TMDB 的认可或认证。",
+    "tmdbNotice": "海报和简介来自 <site>TMDB</site>。本产品使用 TMDB API，但未获得 TMDB 的认可或认证。",
     "libraries": {
       "title": "媒体库",
       "none": "还没有媒体库。",
@@ -681,6 +681,18 @@
       "title": "首页",
       "holidays": "节日行",
       "holidaysDetail": "在情人节、复活节、万圣节、感恩节和圣诞节前一个月,以及除夕前一周,首页会以一行应景的影片开头,按关键词、标题和简介挑选。"
+    },
+    "tmdb": {
+      "title": "海报和详情",
+      "intro": "电影和剧集的海报、简介、演职员和预告片来自 TMDB，只需一个免费的 API 密钥。<guide>如何获取</guide>",
+      "usingSaved": "正在使用此处保存的密钥，结尾为 {{hint}}。",
+      "usingEnvironment": "正在使用 MATINEE_TMDB_KEY 中的密钥，结尾为 {{hint}}。此处保存的密钥会取代它。",
+      "usingBuiltIn": "正在使用 Matinee 内置的密钥。此处保存的密钥会取代它。",
+      "none": "还没有密钥，所以电影和剧集只使用媒体旁边的图片文件。",
+      "label": "TMDB API 密钥",
+      "save": "保存密钥",
+      "remove": "移除已保存的密钥",
+      "saved": "已保存。Matinee 正在补全海报和详情。"
     }
   },
   "language": {
