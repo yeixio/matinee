@@ -7,6 +7,7 @@ import (
 	"context"
 	"fmt"
 	"log/slog"
+	"net"
 	"strings"
 
 	"github.com/libp2p/zeroconf/v2"
@@ -45,7 +46,7 @@ func Run(ctx context.Context, a Announcement, log *slog.Logger) error {
 	if name == "" {
 		name = "Matinee"
 	}
-	server, err := zeroconf.Register(name, Service, "local.", a.Port, a.TXT(), nil)
+	server, err := zeroconf.Register(name, Service, "local.", a.Port, a.TXT(), homeInterfaces())
 	if err != nil {
 		return fmt.Errorf("announce on the local network: %w", err)
 	}
@@ -53,4 +54,46 @@ func Run(ctx context.Context, a Announcement, log *slog.Logger) error {
 	<-ctx.Done()
 	server.Shutdown()
 	return nil
+}
+
+// virtualPrefixes name the interfaces of containers, Kubernetes networks and
+// VPNs. A server on a cluster node or a Docker host has several; announcing
+// their addresses sends some phones to one they can't reach, and Android
+// apps then hang trying it.
+var virtualPrefixes = []string{
+	"cni", "flannel", "docker", "veth", "br-", "cali", "cilium", "vxlan", "kube",
+	"tunl", "tun", "tap", "wg", "tailscale", "zt", "lxc", "lxd", "virbr", "vmnet", "podman", "weave", "genev",
+}
+
+// virtual reports whether an interface belongs to containers or a VPN
+// rather than the home network.
+func virtual(name string) bool {
+	name = strings.ToLower(name)
+	for _, p := range virtualPrefixes {
+		if strings.HasPrefix(name, p) {
+			return true
+		}
+	}
+	return false
+}
+
+// homeInterfaces lists the interfaces facing the home network. When there's
+// none it can tell, it returns nil, which announces on all of them.
+func homeInterfaces() []net.Interface {
+	all, err := net.Interfaces()
+	if err != nil {
+		return nil
+	}
+	return pickHome(all)
+}
+
+func pickHome(all []net.Interface) []net.Interface {
+	var out []net.Interface
+	for _, i := range all {
+		if i.Flags&net.FlagUp == 0 || i.Flags&net.FlagLoopback != 0 || i.Flags&net.FlagMulticast == 0 || virtual(i.Name) {
+			continue
+		}
+		out = append(out, i)
+	}
+	return out
 }
