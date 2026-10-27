@@ -155,6 +155,7 @@ func run() error {
 	if tmdb != nil {
 		apiServer.TrailerSource = tmdb
 		apiServer.People = tmdb
+		apiServer.Keywords = tmdb
 	}
 	if cfg.RemoteAddr != "" {
 		apiServer.Remote = &remote.Manager{Addr: cfg.RemoteAddr, Dir: cfg.RemoteDir(), Handler: apiServer.RemoteHandler(), Log: log}

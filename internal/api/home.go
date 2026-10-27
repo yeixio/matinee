@@ -139,6 +139,9 @@ type serverSettings struct {
 	// RemoteTrailers offers trailers from TMDB (played from YouTube) along
 	// with trailer files next to the media. On unless an admin turns it off.
 	RemoteTrailers bool `json:"remoteTrailers"`
+	// HolidayRows shows a row of titles for a holiday on Home in the weeks
+	// before it (see holidays.go). On unless an admin turns it off.
+	HolidayRows bool `json:"holidayRows"`
 	// Theme is what everyone sees until they pick their own (see themes.go).
 	Theme string `json:"theme"`
 	// ThemeProblems lists theme files in the themes folder that couldn't be
@@ -179,13 +182,17 @@ func (s *Server) settings(ctx context.Context) (serverSettings, error) {
 	if err != nil {
 		return serverSettings{}, err
 	}
+	holidaysOn, err := s.holidayRowsOn(ctx)
+	if err != nil {
+		return serverSettings{}, err
+	}
 	remoteOn, err := RemoteAccessOn(ctx, s.Store)
 	if err != nil {
 		return serverSettings{}, err
 	}
 	themes, problems := s.themes()
 	def, err := s.defaultTheme(ctx, themes)
-	set := serverSettings{RequireSignInAtHome: required, Requests: mode, RemoteTrailers: trailers, Theme: def,
+	set := serverSettings{RequireSignInAtHome: required, Requests: mode, RemoteTrailers: trailers, HolidayRows: holidaysOn, Theme: def,
 		RemoteAccess: remoteOn, Remote: s.remoteStatus(), PublicURL: s.PublicURL,
 		ThemeProblems: []string{}, HardwareAcceleration: hwaccel.Auto, Hardware: &hwaccel.Status{Available: []hwaccel.Accel{}}}
 	for _, p := range problems {
@@ -219,6 +226,7 @@ func (s *Server) putSettings(w http.ResponseWriter, r *http.Request) {
 		Requests             *string `json:"requests"`
 		HardwareAcceleration *string `json:"hardwareAcceleration"`
 		RemoteTrailers       *bool   `json:"remoteTrailers"`
+		HolidayRows          *bool   `json:"holidayRows"`
 		Theme                *string `json:"theme"`
 		RemoteAccess         *bool   `json:"remoteAccess"`
 		LibraryWatch         *string `json:"libraryWatch"`
@@ -287,6 +295,12 @@ func (s *Server) putSettings(w http.ResponseWriter, r *http.Request) {
 	}
 	if in.RemoteTrailers != nil {
 		if err := s.Store.SetSetting(ctx, settingRemoteTrailers, strconv.FormatBool(*in.RemoteTrailers)); err != nil {
+			s.serverError(w, err)
+			return
+		}
+	}
+	if in.HolidayRows != nil {
+		if err := s.Store.SetSetting(ctx, settingHolidayRows, strconv.FormatBool(*in.HolidayRows)); err != nil {
 			s.serverError(w, err)
 			return
 		}

@@ -753,7 +753,9 @@ paths:
                   rows:
                     type: array
                     description: >-
-                      Rows shown below the others. First the collections pinned to Home
+                      Rows shown below the others. First, in the 30 days before a holiday
+                      (a week for New Year's Eve), a row of up to 20 titles for it, if at
+                      least four fit; unless an admin turned holiday rows off. Then the collections pinned to Home
                       (shared ones and the person's own, empty ones left out), each with
                       up to 20 titles. Then the day's genre rows: a few genres with at
                       least four titles, different each day, each with up to 20 of its
@@ -761,9 +763,13 @@ paths:
                     items:
                       type: object
                       properties:
-                        id: { type: string, examples: ["genre:Science Fiction", "collection:4f1c9e0a2b7d3e5f6a8b9c0d"] }
+                        id: { type: string, examples: ["genre:Science Fiction", "collection:4f1c9e0a2b7d3e5f6a8b9c0d", "holiday:halloween"] }
                         title: { type: string, examples: [Sci-fi favorites] }
-                        genre: { type: string, description: Empty on a collection's row., examples: [Science Fiction] }
+                        genre: { type: string, description: Empty on a collection's or a holiday's row., examples: [Science Fiction] }
+                        holiday:
+                          type: string
+                          enum: [valentines, easter, halloween, thanksgiving, christmas, newyear]
+                          description: Set on a holiday's row.
                         collectionId: { type: string, description: Set on a pinned collection's row. }
                         items: { type: array, items: { $ref: "#/components/schemas/Item" } }
   /search:
@@ -1789,6 +1795,9 @@ components:
         remoteTrailers:
           type: boolean
           description: Offer TMDB's YouTube trailers along with trailer files. On by default.
+        holidayRows:
+          type: boolean
+          description: Show a row of titles for a holiday on Home in the weeks before it. On by default.
         theme:
           type: string
           description: The theme everyone sees until they pick their own. `matinee` by default.
