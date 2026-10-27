@@ -40,6 +40,7 @@ On a TV, sign-in starts with a code instead of a password: see [Signing in a dev
 - **Your profile and theme.** The [profile picker](/docs/household/profiles/) and [your theme](/docs/household/themes/) follow you from the server.
 - **Playback that picks up where you left off**, with the [Up next](/docs/watching/playing/#up-next) countdown, picture in picture on phones, and music that keeps playing in the background.
 - **Downloads** on phones and tablets, to [watch offline](/docs/apps/downloads/).
+- **Coming soon**, with [Radarr or Sonarr](/docs/server/radarr-and-sonarr/#coming-soon) connected: a row at the end of Home, and the next two months day by day. On a phone, the calendar along the top jumps to a day; on a TV, each day is a row.
 
 ## On a TV
 

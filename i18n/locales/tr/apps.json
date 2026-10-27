@@ -394,5 +394,13 @@
   "duration": {
     "minutes": "{{minutes}} dk",
     "hoursMinutes": "{{hours}} sa {{minutes}} dk"
+  },
+  "upcoming": {
+    "intro": "Önümüzdeki iki ay içinde henüz gelmemiş yeni bölümler ve film çıkışları.",
+    "unavailable": "{{apps}} yanıt vermedi, bu yüzden bazıları eksik olabilir.",
+    "nothingYet": "Henüz gösterilecek bir şey yok",
+    "notConnected": "Bir yönetici bu sunucuya Radarr veya Sonarr bağlamamış.",
+    "connect": "Bir yönetici Radarr veya Sonarr'ı web'deki Matinee Ayarlar bölümünden bağlayabilir.",
+    "nothing": "Şu anda yolda bir şey yok."
   }
 }

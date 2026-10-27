@@ -394,5 +394,13 @@
   "duration": {
     "minutes": "{{minutes}} دقیقه",
     "hoursMinutes": "{{hours}} ساعت {{minutes}} دقیقه"
+  },
+  "upcoming": {
+    "intro": "قسمت‌های جدید و فیلم‌هایی که در دو ماه آینده منتشر می‌شوند و هنوز نرسیده‌اند.",
+    "unavailable": "{{apps}} پاسخ نداد، پس شاید برخی از قلم افتاده باشند.",
+    "nothingYet": "هنوز چیزی برای نمایش نیست",
+    "notConnected": "مدیری هنوز Radarr یا Sonarr را به این سرور وصل نکرده است.",
+    "connect": "مدیر می‌تواند Radarr یا Sonarr را از تنظیمات Matinee در وب وصل کند.",
+    "nothing": "فعلاً چیزی در راه نیست."
   }
 }

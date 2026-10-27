@@ -394,5 +394,13 @@
   "duration": {
     "minutes": "{{minutes}} min",
     "hoursMinutes": "{{hours}} h {{minutes}} min"
+  },
+  "upcoming": {
+    "intro": "New episodes and movie releases over the next two months that aren't in yet.",
+    "unavailable": "{{apps}} didn't answer, so some may be missing.",
+    "nothingYet": "Nothing to show yet",
+    "notConnected": "An admin hasn't connected Radarr or Sonarr to this server.",
+    "connect": "An admin can connect Radarr or Sonarr in Settings in Matinee on the web.",
+    "nothing": "Nothing on the way right now."
   }
 }

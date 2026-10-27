@@ -422,5 +422,13 @@
   "duration": {
     "minutes": "{{minutes}} د",
     "hoursMinutes": "{{hours}} س {{minutes}} د"
+  },
+  "upcoming": {
+    "intro": "الحلقات الجديدة وإصدارات الأفلام خلال الشهرين القادمين التي لم تصل بعد.",
+    "unavailable": "لم يستجب {{apps}}، لذا قد ينقص بعضها.",
+    "nothingYet": "لا شيء للعرض بعد",
+    "notConnected": "لم يربط أي مسؤول Radarr أو Sonarr بهذا الخادم.",
+    "connect": "يمكن للمسؤول ربط Radarr أو Sonarr من الإعدادات في Matinee على الويب.",
+    "nothing": "لا شيء في الطريق حاليًا."
   }
 }

@@ -408,5 +408,13 @@
   "duration": {
     "minutes": "{{minutes}} min",
     "hoursMinutes": "{{hours}} h {{minutes}} min"
+  },
+  "upcoming": {
+    "intro": "Nové díly a filmové premiéry v příštích dvou měsících, které tu ještě nejsou.",
+    "unavailable": "{{apps}} neodpověděl, takže něco může chybět.",
+    "nothingYet": "Zatím není co ukázat",
+    "notConnected": "Správce k tomuto serveru nepřipojil Radarr ani Sonarr.",
+    "connect": "Správce může připojit Radarr nebo Sonarr v Nastavení Matinee na webu.",
+    "nothing": "Momentálně nic nového nepřichází."
   }
 }
