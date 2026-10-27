@@ -331,3 +331,77 @@ func TestHomeProfiles(t *testing.T) {
 		t.Fatalf("Home's movies = %+v", items)
 	}
 }
+
+// Several devices use one server at once: a phone, a tablet and a TV at
+// home, some signed in. One signing in or picking a profile leaves the
+// others as they were.
+func TestDevicesDontDisturbEachOther(t *testing.T) {
+	c, _, db := newTestServerStore(t)
+	ctx := context.Background()
+	var login struct{ Token string }
+	c.do("POST", "/api/v1/setup", credentials{"admin", "correct horse"}, &login)
+	c.token = login.Token
+	movies, _ := db.CreateLibrary(ctx, "Movies", "movies", []string{"/m"})
+	for title, level := range map[string]int{"Toy Tale": rating.LittleKids, "Grim Night": rating.Adults} {
+		id, _ := db.UpsertFile(ctx, store.Item{LibraryID: movies.ID, Kind: "movie", Title: title, Path: "/" + title})
+		db.ApplyDetails(ctx, id, store.DetailsUpdate{RatingLevel: level})
+	}
+	var manage struct{ Accounts []accountProfiles }
+	c.do("GET", "/api/v1/profiles/manage", nil, &manage)
+	home := manage.Accounts[0].Account
+	var kid, sam store.Profile
+	c.do("POST", "/api/v1/profiles", map[string]any{"accountId": home.ID, "name": "Little one", "kidsLevel": rating.LittleKids}, &kid)
+	var admin store.User
+	c.do("GET", "/api/v1/me", nil, &admin)
+	c.do("POST", "/api/v1/profiles", map[string]any{"accountId": admin.ID, "name": "Sam", "kidsLevel": rating.LittleKids}, &sam)
+
+	movieCount := func(d *client) int {
+		var items []store.Item
+		if code := d.do("GET", "/api/v1/libraries/"+itoa(movies.ID)+"/items", nil, &items); code != 200 {
+			t.Fatalf("listing movies: %d", code)
+		}
+		return len(items)
+	}
+	var picked struct{ Token string }
+
+	// The phone at home picks the kids profile.
+	phone := &client{t: t, base: c.base}
+	phone.do("POST", "/api/v1/profiles/select", map[string]any{"id": kid.ID, "deviceName": "Phone", "platform": "android"}, &picked)
+	phone.token = picked.Token
+	// The tablet at home watches as the Home account, then picks the same profile.
+	tablet := &client{t: t, base: c.base}
+	if n := movieCount(tablet); n != 2 {
+		t.Fatalf("tablet as Home sees %d movies", n)
+	}
+	tablet.do("POST", "/api/v1/profiles/select", map[string]any{"id": kid.ID, "deviceName": "Tablet", "platform": "ios"}, &picked)
+	tablet.token = picked.Token
+	if tablet.token == phone.token {
+		t.Fatal("two devices share one home session")
+	}
+	// The TV signs in to the admin account and switches to Sam.
+	tv := &client{t: t, base: c.base}
+	tv.do("POST", "/api/v1/auth/login", map[string]any{"username": "admin", "password": "correct horse", "deviceName": "TV", "platform": "tvos"}, &login)
+	tv.token = login.Token
+	if code := tv.do("POST", "/api/v1/profiles/select", map[string]any{"id": sam.ID}, nil); code != 200 {
+		t.Fatalf("TV picking Sam: %d", code)
+	}
+
+	// Everyone is still who they were.
+	for name, d := range map[string]*client{"phone": phone, "tablet": tablet, "tv": tv} {
+		var me store.User
+		if code := d.do("GET", "/api/v1/me", nil, &me); code != 200 {
+			t.Fatalf("%s signed out by another device: %d", name, code)
+		}
+		if n := movieCount(d); n != 1 {
+			t.Errorf("%s sees %d movies, want the kids' 1", name, n)
+		}
+	}
+	if n := movieCount(c); n != 2 {
+		t.Errorf("admin's first device sees %d movies after the TV switched to Sam", n)
+	}
+	var info struct{ HomeAccess bool }
+	(&client{t: t, base: c.base}).do("GET", "/api/v1/server", nil, &info)
+	if !info.HomeAccess {
+		t.Error("a new device at home lost home access")
+	}
+}
