@@ -6,7 +6,8 @@
     "dev": "node scripts/prepare.mjs && astro dev",
     "build": "node scripts/prepare.mjs && astro build",
     "build:all": "node scripts/build-all.mjs",
-    "shots": "node demo/shoot.mjs"
+    "shots": "node demo/shoot.mjs",
+    "shots:library": "node demo/shoot-library.mjs"
   },
   "dependencies": {
     "@astrojs/starlight": "0.42.6",
