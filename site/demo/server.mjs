@@ -61,7 +61,7 @@ export async function startServer() {
       ...process.env,
       MATINEE_ADDR: `127.0.0.1:${port}`,
       MATINEE_DATA_DIR: data,
-      MATINEE_TMDB_KEY: 'demo',
+      MATINEE_TMDB_KEY: 'demo0000000000000000000000007c3e', // a made-up key, as long as a real one
       MATINEE_WIKIDATA: 'false',
       MATINEE_MUSICBRAINZ: 'false',
       MATINEE_DISCOVERY: 'false',

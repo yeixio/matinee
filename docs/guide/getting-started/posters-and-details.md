@@ -18,6 +18,16 @@ Matinee looks up posters, backdrops, descriptions, genres, cast and crew, age ra
 
 ## Give it to Matinee
 
+<!-- since: v0.1.1 -->
+The easiest way is in the web player. As an admin, open **Settings → Posters and details**, paste the key and click **Save key**. Matinee checks the key with TMDB, starts using it right away and fills in posters and details for your libraries, with no restart.
+
+![The Posters and details setting, with a field for the TMDB key](../images/tmdb-key.webp)
+
+A key saved in Settings replaces one set on the server (below). **Remove saved key** goes back to the server's key.
+
+Or set it on the server, where it goes depends on how you installed Matinee:
+<!-- /since -->
+
 | How you installed | Where the key goes |
 | --- | --- |
 | Docker | add `-e MATINEE_TMDB_KEY=your-key` to `docker run` (or `environment:` in Compose) |
@@ -25,7 +35,7 @@ Matinee looks up posters, backdrops, descriptions, genres, cast and crew, age ra
 | Homebrew | add `MATINEE_TMDB_KEY=your-key` to `$(brew --prefix)/etc/matinee/matinee.env` |
 | Kubernetes | `kubectl create secret generic matinee-tmdb --from-literal=tmdb-api-key=your-key`, then `tmdb.existingSecret: matinee-tmdb` in your values |
 
-Restart Matinee. The next scan fills in what's missing; you can start one from **Settings → Libraries → Scan**.
+After changing it on the server, restart Matinee. The next scan fills in what's missing; you can start one from **Settings → Libraries → Scan**.
 
 ## Why isn't a key built in?
 
