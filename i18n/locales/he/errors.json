@@ -98,5 +98,6 @@
   "overseerr_isnt_answering_right_now_try_again_later": "Overseerr לא עונה כרגע. נסה שוב מאוחר יותר.",
   "overseerr_isnt_connected": "Overseerr לא מחובר",
   "someone_already_asked_for_title": "מישהו כבר ביקש את {{title}}",
-  "tmdbid_is_required": "נדרש tmdbId"
+  "tmdbid_is_required": "נדרש tmdbId",
+  "no_such_row": "אין שורה כזו"
 }

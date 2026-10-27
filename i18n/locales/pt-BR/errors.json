@@ -98,5 +98,6 @@
   "overseerr_isnt_answering_right_now_try_again_later": "O Overseerr não está respondendo agora. Tente de novo mais tarde.",
   "overseerr_isnt_connected": "o Overseerr não está conectado",
   "someone_already_asked_for_title": "alguém já pediu {{title}}",
-  "tmdbid_is_required": "tmdbId é obrigatório"
+  "tmdbid_is_required": "tmdbId é obrigatório",
+  "no_such_row": "fileira não encontrada"
 }

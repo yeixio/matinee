@@ -98,5 +98,6 @@
   "overseerr_isnt_answering_right_now_try_again_later": "Overseerr ابھی جواب نہیں دے رہا۔ بعد میں دوبارہ کوشش کریں۔",
   "overseerr_isnt_connected": "Overseerr جڑا ہوا نہیں",
   "someone_already_asked_for_title": "کوئی پہلے ہی {{title}} مانگ چکا ہے",
-  "tmdbid_is_required": "tmdbId ضروری ہے"
+  "tmdbid_is_required": "tmdbId ضروری ہے",
+  "no_such_row": "ایسی کوئی قطار نہیں"
 }

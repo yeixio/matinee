@@ -387,5 +387,13 @@
       "movie": "Film",
       "show": "Serial"
     }
+  },
+  "rows": {
+    "seeMore": "Zobacz więcej",
+    "seeMoreOf": "{{title}}, zobacz więcej",
+    "moreLike": "Podobne do {{title}}",
+    "empty": "Na razie nic tu nie ma",
+    "unavailable": "Ten rząd jest niedostępny",
+    "loadMore": "Wczytaj więcej"
   }
 }

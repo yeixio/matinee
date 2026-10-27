@@ -333,5 +333,13 @@
       "movie": "Film",
       "show": "Serie"
     }
+  },
+  "rows": {
+    "seeMore": "Meer bekijken",
+    "seeMoreOf": "{{title}}, meer bekijken",
+    "moreLike": "Meer zoals {{title}}",
+    "empty": "Hier is nu niets",
+    "unavailable": "Deze rij is niet beschikbaar",
+    "loadMore": "Meer laden"
   }
 }

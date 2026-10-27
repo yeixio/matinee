@@ -98,5 +98,6 @@
   "overseerr_isnt_answering_right_now_try_again_later": "지금 Overseerr가 응답하지 않아요. 나중에 다시 시도하세요.",
   "overseerr_isnt_connected": "Overseerr가 연결되지 않았습니다",
   "someone_already_asked_for_title": "누군가 이미 {{title}}을(를) 요청했습니다",
-  "tmdbid_is_required": "tmdbId가 필요합니다"
+  "tmdbid_is_required": "tmdbId가 필요합니다",
+  "no_such_row": "해당 줄이 없습니다"
 }

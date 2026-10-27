@@ -441,5 +441,13 @@
       "movie": "فيلم",
       "show": "مسلسل"
     }
+  },
+  "rows": {
+    "seeMore": "عرض المزيد",
+    "seeMoreOf": "{{title}}، عرض المزيد",
+    "moreLike": "المزيد مثل {{title}}",
+    "empty": "لا شيء هنا الآن",
+    "unavailable": "هذا الصف غير متاح",
+    "loadMore": "تحميل المزيد"
   }
 }

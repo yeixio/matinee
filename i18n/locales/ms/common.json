@@ -306,5 +306,13 @@
       "movie": "Filem",
       "show": "Siri"
     }
+  },
+  "rows": {
+    "seeMore": "Lihat lagi",
+    "seeMoreOf": "{{title}}, lihat lagi",
+    "moreLike": "Lagi seperti {{title}}",
+    "empty": "Tiada apa-apa di sini buat masa ini",
+    "unavailable": "Baris ini tidak tersedia",
+    "loadMore": "Muatkan lagi"
   }
 }

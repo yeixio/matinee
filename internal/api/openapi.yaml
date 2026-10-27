@@ -822,6 +822,44 @@ paths:
                         collectionId: { type: string, description: Set on a pinned collection's row. }
                         starter: { type: string, examples: [tonight], description: Set on a built-in collection's row, which apps may name in their own language while it keeps its English name. }
                         items: { type: array, items: { $ref: "#/components/schemas/Item" } }
+                        more: { type: boolean, description: "The row has more titles than it shows; GET /rows/{id} has them all." }
+                  more:
+                    type: object
+                    description: "Which of the lists above have more titles than they show (up to 20 in Continue watching, 30 in the others); GET /rows/{id} has them all, by the list's name."
+                    properties:
+                      continueWatching: { type: boolean }
+                      recentlyAdded: { type: boolean }
+                      newReleases: { type: boolean }
+                      watchList: { type: boolean }
+  /rows/{id}:
+    get:
+      summary: All of a row's titles
+      description: |
+        For the See more at the end of a row. Rows are Home's lists
+        (continueWatching, recentlyAdded, newReleases, watchList), Home's
+        other rows by their id (genre:{genre}, holiday:{id},
+        collection:{id}), and related:{item id} for the titles like one
+        (More like this). Up to 1,000 titles, in the row's order; a genre's
+        or a holiday's best rated first.
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string }, examples: { genre: { value: "genre:Science Fiction" } } }
+      responses:
+        "200":
+          description: The row, as in /home's rows, with relatedTo (the title it's like) on a related row.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id: { type: string }
+                  title: { type: string, description: In English. }
+                  genre: { type: string }
+                  holiday: { type: string }
+                  collectionId: { type: string }
+                  starter: { type: string }
+                  relatedTo: { type: string }
+                  items: { type: array, items: { $ref: "#/components/schemas/Item" } }
+        "404": { $ref: "#/components/responses/Error" }
   /search:
     get:
       summary: Search titles
@@ -871,6 +909,7 @@ paths:
                       name: { type: string }
                       items: { type: array, items: { $ref: "#/components/schemas/Item" }, description: Oldest first, including this title. }
                   items: { type: array, items: { $ref: "#/components/schemas/Item" }, description: Best match first; at most 20. }
+                  more: { type: boolean, description: "There are more than 20; GET /rows/related:{id} has them all." }
   /items/{id}/next:
     get:
       summary: What to offer when an episode ends
@@ -1473,7 +1512,33 @@ paths:
                         title: { type: string, description: In English. Apps may name the lists by id in their own language. }
                         because: { type: string, description: 'On a because-{item id} row, the title watched, so apps can say "Because you watched …" in their own language.' }
                         items: { type: array, items: { $ref: "#/components/schemas/DiscoverTitle" } }
+                        more: { type: boolean, description: "The list has more titles; GET /discover/rows/{id} pages through them." }
                   canRequest: { type: boolean, description: This account may ask for titles. }
+        "409": { $ref: "#/components/responses/Error" }
+        "502": { $ref: "#/components/responses/Error" }
+  /discover/rows/{id}:
+    get:
+      summary: A page of one of the Discover tab's rows
+      description: |
+        For the See more at the end of a Discover row: the row's titles a
+        page at a time, as Overseerr pages them (about 20 a page), up to 25
+        pages.
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string }, description: "A row's id from /discover." }
+        - { name: page, in: query, schema: { type: integer, minimum: 1, default: 1 } }
+      responses:
+        "200":
+          description: The page.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  row: { type: object, description: "As in /discover's rows; more says there's another page." }
+                  page: { type: integer }
+                  pages: { type: integer }
+                  canRequest: { type: boolean }
+        "404": { $ref: "#/components/responses/Error" }
         "409": { $ref: "#/components/responses/Error" }
         "502": { $ref: "#/components/responses/Error" }
   /discover/search:

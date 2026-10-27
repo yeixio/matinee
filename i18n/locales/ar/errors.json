@@ -98,5 +98,6 @@
   "overseerr_isnt_answering_right_now_try_again_later": "لا يستجيب Overseerr الآن. حاول مرة أخرى لاحقًا.",
   "overseerr_isnt_connected": "Overseerr غير متصل",
   "someone_already_asked_for_title": "طلب أحدهم {{title}} بالفعل",
-  "tmdbid_is_required": "tmdbId مطلوب"
+  "tmdbid_is_required": "tmdbId مطلوب",
+  "no_such_row": "لا يوجد صف كهذا"
 }

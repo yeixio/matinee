@@ -360,5 +360,13 @@
       "movie": "סרט",
       "show": "סדרה"
     }
+  },
+  "rows": {
+    "seeMore": "עוד",
+    "seeMoreOf": "{{title}}, עוד",
+    "moreLike": "עוד כמו {{title}}",
+    "empty": "אין כאן כלום כרגע",
+    "unavailable": "השורה הזו לא זמינה",
+    "loadMore": "טעינת עוד"
   }
 }

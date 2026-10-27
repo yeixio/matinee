@@ -98,5 +98,6 @@
   "overseerr_isnt_answering_right_now_try_again_later": "Overseerr hiện không phản hồi. Hãy thử lại sau.",
   "overseerr_isnt_connected": "Overseerr chưa được kết nối",
   "someone_already_asked_for_title": "đã có người yêu cầu {{title}}",
-  "tmdbid_is_required": "cần có tmdbId"
+  "tmdbid_is_required": "cần có tmdbId",
+  "no_such_row": "không có hàng này"
 }

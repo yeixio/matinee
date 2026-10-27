@@ -78,12 +78,18 @@ type relatedView struct {
 	Collection *collectionView `json:"collection,omitempty"`
 	// Items are other titles in the library like this one, best first.
 	Items []store.Item `json:"items"`
+	// More says there are more like it than Items has; GET
+	// /rows/related:{id} has them all.
+	More bool `json:"more,omitempty"`
 }
 
 type collectionView struct {
 	store.Collection
 	Items []store.Item `json:"items"`
 }
+
+// relatedItems is how many titles More like this shows.
+const relatedItems = 20
 
 func (s *Server) itemRelated(w http.ResponseWriter, r *http.Request) {
 	it, ok := s.loadItem(w, r)
@@ -112,10 +118,11 @@ func (s *Server) itemRelated(w http.ResponseWriter, r *http.Request) {
 			v.Collection = &collectionView{Collection: *d.Collection, Items: items}
 		}
 	}
-	if v.Items, err = s.Store.Related(ctx, user.ID, it); err != nil {
+	if v.Items, err = s.Store.RelatedN(ctx, user.ID, it, relatedItems+1); err != nil {
 		s.serverError(w, err)
 		return
 	}
+	v.Items, v.More = cut(v.Items, relatedItems)
 	writeJSON(w, http.StatusOK, v)
 }
 

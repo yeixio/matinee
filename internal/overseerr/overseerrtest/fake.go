@@ -29,6 +29,8 @@ type Fake struct {
 	Requests []map[string]any
 	// Searches are the raw query strings searches came with.
 	Searches []string
+	// PageSize splits lists into pages of this many titles; 0 is one page.
+	PageSize int
 	// AutoApprove lists the users whose requests Overseerr approves.
 	AutoApprove map[int]bool
 	// status of each title, by id, once asked for.
@@ -78,14 +80,20 @@ func (f *Fake) title(id int) map[string]any {
 	return nil
 }
 
-func (f *Fake) page(ids []int) map[string]any {
+func (f *Fake) page(ids []int, n int) map[string]any {
+	pages := 1
+	if f.PageSize > 0 && len(ids) > 0 {
+		pages = (len(ids) + f.PageSize - 1) / f.PageSize
+		n = min(max(n, 1), pages+1)
+		ids = ids[min((n-1)*f.PageSize, len(ids)):min(n*f.PageSize, len(ids))]
+	}
 	results := []map[string]any{}
 	for _, id := range ids {
 		if m := f.title(id); m != nil {
 			results = append(results, m)
 		}
 	}
-	return map[string]any{"page": 1, "totalPages": 1, "results": results}
+	return map[string]any{"page": max(n, 1), "totalPages": pages, "results": results}
 }
 
 func (f *Fake) serve(w http.ResponseWriter, r *http.Request) {
@@ -107,6 +115,7 @@ func (f *Fake) serve(w http.ResponseWriter, r *http.Request) {
 	f.mu.Lock()
 	defer f.mu.Unlock()
 	parts := strings.Split(strings.Trim(path, "/"), "/")
+	pageNum, _ := strconv.Atoi(r.URL.Query().Get("page"))
 	switch {
 	case path == "/auth/me":
 		write(w, f.Users[0])
@@ -124,7 +133,7 @@ func (f *Fake) serve(w http.ResponseWriter, r *http.Request) {
 				ids = append(ids, num(m["id"]))
 			}
 		}
-		write(w, f.page(ids))
+		write(w, f.page(ids, pageNum))
 	case path == "/request" && r.Method == "POST":
 		var body map[string]any
 		json.NewDecoder(r.Body).Decode(&body)
@@ -160,7 +169,7 @@ func (f *Fake) serve(w http.ResponseWriter, r *http.Request) {
 			http.NotFound(w, r)
 			return
 		}
-		write(w, f.page(ids))
+		write(w, f.page(ids, pageNum))
 	}
 }
 
@@ -168,5 +177,12 @@ func (f *Fake) serve(w http.ResponseWriter, r *http.Request) {
 func (f *Fake) SetStatus(id, status int) {
 	f.mu.Lock()
 	f.status[id] = status
+	f.mu.Unlock()
+}
+
+// SetPageSize sets PageSize while the fake is serving.
+func (f *Fake) SetPageSize(n int) {
+	f.mu.Lock()
+	f.PageSize = n
 	f.mu.Unlock()
 }

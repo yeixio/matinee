@@ -294,18 +294,26 @@ func (r result) title(kind string) (Title, bool) {
 	return t, true
 }
 
-// list reads a page of results. kind is "movie" or "tv" for lists that
-// leave each result's type out.
+// list reads the first page of results. kind is "movie" or "tv" for lists
+// that leave each result's type out.
 func (c *Client) list(ctx context.Context, path, kind string, query url.Values) ([]Title, error) {
+	out, _, err := c.listPage(ctx, path, kind, query, 1)
+	return out, err
+}
+
+// listPage reads one page of results (from 1), and says how many pages
+// there are.
+func (c *Client) listPage(ctx context.Context, path, kind string, query url.Values, n int) ([]Title, int, error) {
 	var page struct {
-		Results []result `json:"results"`
+		TotalPages int      `json:"totalPages"`
+		Results    []result `json:"results"`
 	}
 	if query == nil {
 		query = url.Values{}
 	}
-	query.Set("page", "1")
+	query.Set("page", strconv.Itoa(max(n, 1)))
 	if err := c.do(ctx, "GET", path, query, nil, &page); err != nil {
-		return nil, err
+		return nil, 0, err
 	}
 	out := []Title{}
 	for _, r := range page.Results {
@@ -313,7 +321,7 @@ func (c *Client) list(ctx context.Context, path, kind string, query url.Values) 
 			out = append(out, t)
 		}
 	}
-	return out, nil
+	return out, page.TotalPages, nil
 }
 
 // Lists Overseerr's discover pages offer, by the name Matinee uses.
@@ -327,11 +335,17 @@ var Lists = map[string]struct{ Path, Kind string }{
 
 // Discover lists one of Lists.
 func (c *Client) Discover(ctx context.Context, list string) ([]Title, error) {
+	out, _, err := c.DiscoverPage(ctx, list, 1)
+	return out, err
+}
+
+// DiscoverPage is a page (from 1) of one of Lists, and how many pages it has.
+func (c *Client) DiscoverPage(ctx context.Context, list string, page int) ([]Title, int, error) {
 	l, ok := Lists[list]
 	if !ok {
-		return nil, ErrNotFound
+		return nil, 0, ErrNotFound
 	}
-	return c.list(ctx, l.Path, l.Kind, nil)
+	return c.listPage(ctx, l.Path, l.Kind, nil, page)
 }
 
 func apiKind(kind string) string {
@@ -343,7 +357,14 @@ func apiKind(kind string) string {
 
 // Recommendations lists titles like a movie or show (kind), by its TMDB id.
 func (c *Client) Recommendations(ctx context.Context, kind string, tmdbID int) ([]Title, error) {
-	return c.list(ctx, "/"+apiKind(kind)+"/"+strconv.Itoa(tmdbID)+"/recommendations", apiKind(kind), nil)
+	out, _, err := c.RecommendationsPage(ctx, kind, tmdbID, 1)
+	return out, err
+}
+
+// RecommendationsPage is a page (from 1) of Recommendations, and how many
+// pages there are.
+func (c *Client) RecommendationsPage(ctx context.Context, kind string, tmdbID, page int) ([]Title, int, error) {
+	return c.listPage(ctx, "/"+apiKind(kind)+"/"+strconv.Itoa(tmdbID)+"/recommendations", apiKind(kind), nil, page)
 }
 
 // Search finds movies and shows by name.

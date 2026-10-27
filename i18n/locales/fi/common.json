@@ -333,5 +333,13 @@
       "movie": "Elokuva",
       "show": "Sarja"
     }
+  },
+  "rows": {
+    "seeMore": "Näytä lisää",
+    "seeMoreOf": "{{title}}, näytä lisää",
+    "moreLike": "Lisää kuin {{title}}",
+    "empty": "Täällä ei ole juuri nyt mitään",
+    "unavailable": "Tämä rivi ei ole saatavilla",
+    "loadMore": "Lataa lisää"
   }
 }

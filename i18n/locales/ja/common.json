@@ -306,5 +306,13 @@
       "movie": "映画",
       "show": "番組"
     }
+  },
+  "rows": {
+    "seeMore": "もっと見る",
+    "seeMoreOf": "{{title}}をもっと見る",
+    "moreLike": "{{title}}に似た作品",
+    "empty": "今は何もありません",
+    "unavailable": "この列は利用できません",
+    "loadMore": "さらに読み込む"
   }
 }

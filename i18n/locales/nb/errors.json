@@ -98,5 +98,6 @@
   "overseerr_isnt_answering_right_now_try_again_later": "Overseerr svarer ikke akkurat nå. Prøv igjen senere.",
   "overseerr_isnt_connected": "Overseerr er ikke tilkoblet",
   "someone_already_asked_for_title": "noen har allerede bedt om {{title}}",
-  "tmdbid_is_required": "tmdbId er påkrevd"
+  "tmdbid_is_required": "tmdbId er påkrevd",
+  "no_such_row": "raden finnes ikke"
 }

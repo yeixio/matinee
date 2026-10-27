@@ -103,7 +103,7 @@ export function ComingSoonRow() {
   })
   if (!data?.items.length) return null
   return (
-    <Row title={t('nav.comingSoon')} more="/upcoming">
+    <Row title={t('nav.comingSoon')} more="/upcoming" hasMore={data.items.length > 20}>
       {data.items.slice(0, 20).map((u, i) => (
         <RowItem key={i}>
           <Link to="/upcoming" className="group block animate-fade">

@@ -98,5 +98,6 @@
   "overseerr_isnt_answering_right_now_try_again_later": "Overseerrが応答していません。後でもう一度お試しください。",
   "overseerr_isnt_connected": "Overseerrが接続されていません",
   "someone_already_asked_for_title": "{{title}}はすでにリクエストされています",
-  "tmdbid_is_required": "tmdbIdは必須です"
+  "tmdbid_is_required": "tmdbIdは必須です",
+  "no_such_row": "その列はありません"
 }

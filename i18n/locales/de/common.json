@@ -333,5 +333,13 @@
       "movie": "Film",
       "show": "Serie"
     }
+  },
+  "rows": {
+    "seeMore": "Mehr anzeigen",
+    "seeMoreOf": "{{title}}, mehr anzeigen",
+    "moreLike": "Mehr wie {{title}}",
+    "empty": "Hier ist gerade nichts",
+    "unavailable": "Diese Reihe ist nicht verfügbar",
+    "loadMore": "Mehr laden"
   }
 }

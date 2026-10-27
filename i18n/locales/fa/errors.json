@@ -98,5 +98,6 @@
   "overseerr_isnt_answering_right_now_try_again_later": "Overseerr الان پاسخ نمی‌دهد. بعداً دوباره امتحان کنید.",
   "overseerr_isnt_connected": "Overseerr متصل نیست",
   "someone_already_asked_for_title": "کسی قبلاً {{title}} را درخواست کرده است",
-  "tmdbid_is_required": "tmdbId لازم است"
+  "tmdbid_is_required": "tmdbId لازم است",
+  "no_such_row": "چنین ردیفی وجود ندارد"
 }

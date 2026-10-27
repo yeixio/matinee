@@ -98,5 +98,6 @@
   "overseerr_isnt_answering_right_now_try_again_later": "Overseerr अभी जवाब नहीं दे रहा। बाद में फिर कोशिश करें।",
   "overseerr_isnt_connected": "Overseerr कनेक्ट नहीं है",
   "someone_already_asked_for_title": "किसी ने पहले ही {{title}} माँग ली है",
-  "tmdbid_is_required": "tmdbId ज़रूरी है"
+  "tmdbid_is_required": "tmdbId ज़रूरी है",
+  "no_such_row": "ऐसी कोई पंक्ति नहीं"
 }

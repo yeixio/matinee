@@ -55,8 +55,22 @@ type HomeRow struct {
 	Starter string `json:"starter,omitempty"`
 	// Holiday is set on the row for a holiday coming up, e.g. "halloween"
 	// (see holidays.go).
-	Holiday string       `json:"holiday,omitempty"`
-	Items   []store.Item `json:"items"`
+	Holiday string `json:"holiday,omitempty"`
+	// RelatedTo is the title a related:{id} row is like, so apps can word
+	// "More like …" in their own language.
+	RelatedTo string       `json:"relatedTo,omitempty"`
+	Items     []store.Item `json:"items"`
+	// More says the row has more titles than it shows: GET /rows/{id} has
+	// them all (see rows.go).
+	More bool `json:"more,omitempty"`
+}
+
+// genreRowTitle is the English name of a genre's row.
+func genreRowTitle(g string) string {
+	if t := rowTitles[g]; t != "" {
+		return t
+	}
+	return g
 }
 
 // dayNumber counts days, so each date picks the same rows all day.
@@ -92,11 +106,9 @@ func (s *Server) genreRows(ctx context.Context, userID int64, now time.Time) ([]
 			return nil, err
 		}
 		rand.New(rand.NewPCG(day, uint64(i)+2)).Shuffle(len(items), func(a, b int) { items[a], items[b] = items[b], items[a] })
-		title := rowTitles[g]
-		if title == "" {
-			title = g
-		}
-		rows = append(rows, HomeRow{ID: "genre:" + g, Title: title, Genre: g, Items: items[:min(genreRowItems, len(items))]})
+		row := HomeRow{ID: "genre:" + g, Title: genreRowTitle(g), Genre: g}
+		row.Items, row.More = cut(items, genreRowItems)
+		rows = append(rows, row)
 	}
 	return rows, nil
 }

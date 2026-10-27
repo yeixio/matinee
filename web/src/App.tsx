@@ -14,6 +14,7 @@ import WatchList from './pages/WatchList'
 import Collections from './pages/Collections'
 import CollectionPage from './pages/Collection'
 import BoxSetPage from './pages/BoxSet'
+import RowPage from './pages/RowPage'
 import { Login, Setup } from './pages/Auth'
 import { SwitchProfile, WhoIsWatching } from './pages/Profiles'
 import { askedFor, isKids, rememberAsked, shouldAsk } from './profiles'
@@ -27,6 +28,7 @@ const Link = lazy(() => import('./pages/Link'))
 const Requests = lazy(() => import('./pages/Requests'))
 const Upcoming = lazy(() => import('./pages/Upcoming'))
 const Discover = lazy(() => import('./pages/Discover'))
+const DiscoverRowPage = lazy(() => import('./pages/Discover').then((m) => ({ default: m.DiscoverRowPage })))
 
 export default function App() {
   const me = useQuery({ queryKey: ['me'], queryFn: api.me, staleTime: Infinity })
@@ -91,9 +93,11 @@ function Screens() {
           <Route path="/collections" element={<Collections />} />
           <Route path="/collection/:id" element={<CollectionPage />} />
           <Route path="/box-set/:id" element={<BoxSetPage />} />
+          <Route path="/row/:id" element={<RowPage />} />
           <Route path="/settings" element={grownUps(<Settings />)} />
           <Route path="/upcoming" element={grownUps(<Upcoming />)} />
           <Route path="/discover" element={grownUps(<Discover />)} />
+          <Route path="/discover/row/:id" element={grownUps(<DiscoverRowPage />)} />
           <Route path="/requests" element={grownUps(me.data.guest ? <Login /> : <Requests />)} />
           {/* At home people can watch without signing in; these need a real account. */}
           <Route path="/link" element={grownUps(me.data.guest ? <Login /> : <Link user={me.data} />)} />

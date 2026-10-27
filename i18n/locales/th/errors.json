@@ -98,5 +98,6 @@
   "overseerr_isnt_answering_right_now_try_again_later": "Overseerr ไม่ตอบในขณะนี้ ลองอีกครั้งภายหลัง",
   "overseerr_isnt_connected": "Overseerr ไม่ได้เชื่อมต่อ",
   "someone_already_asked_for_title": "มีคนขอ {{title}} แล้ว",
-  "tmdbid_is_required": "ต้องระบุ tmdbId"
+  "tmdbid_is_required": "ต้องระบุ tmdbId",
+  "no_such_row": "ไม่มีแถวนี้"
 }
