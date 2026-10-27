@@ -401,5 +401,13 @@
   "duration": {
     "minutes": "{{minutes}} min",
     "hoursMinutes": "{{hours}} h {{minutes}} min"
+  },
+  "upcoming": {
+    "intro": "Novos episódios e lançamentos de filmes dos próximos dois meses que ainda não chegaram.",
+    "unavailable": "{{apps}} não respondeu, então algo pode estar faltando.",
+    "nothingYet": "Nada para mostrar ainda",
+    "notConnected": "Nenhum administrador conectou o Radarr ou o Sonarr a este servidor.",
+    "connect": "Um administrador pode conectar o Radarr ou o Sonarr nas Configurações do Matinee na web.",
+    "nothing": "Nada a caminho no momento."
   }
 }

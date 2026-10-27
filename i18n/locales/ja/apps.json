@@ -387,5 +387,13 @@
   "duration": {
     "minutes": "{{minutes}} 分",
     "hoursMinutes": "{{hours}} 時間 {{minutes}} 分"
+  },
+  "upcoming": {
+    "intro": "今後2か月以内の、まだ届いていない新エピソードと映画の公開。",
+    "unavailable": "{{apps}}が応答しなかったため、一部が欠けている可能性があります。",
+    "nothingYet": "まだ表示するものがありません",
+    "notConnected": "管理者がこのサーバーに Radarr も Sonarr も接続していません。",
+    "connect": "管理者がウェブ版 Matinee の設定で Radarr または Sonarr を接続できます。",
+    "nothing": "今のところ予定はありません。"
   }
 }

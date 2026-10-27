@@ -387,5 +387,13 @@
   "duration": {
     "minutes": "{{minutes}} phút",
     "hoursMinutes": "{{hours}} giờ {{minutes}} phút"
+  },
+  "upcoming": {
+    "intro": "Các tập mới và phim phát hành trong hai tháng tới mà chưa có.",
+    "unavailable": "{{apps}} không phản hồi, nên có thể thiếu một số mục.",
+    "nothingYet": "Chưa có gì để hiển thị",
+    "notConnected": "Quản trị viên chưa kết nối Radarr hoặc Sonarr với máy chủ này.",
+    "connect": "Quản trị viên có thể kết nối Radarr hoặc Sonarr trong Cài đặt của Matinee trên web.",
+    "nothing": "Hiện chưa có gì sắp ra mắt."
   }
 }

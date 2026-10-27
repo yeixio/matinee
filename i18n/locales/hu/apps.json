@@ -394,5 +394,13 @@
   "duration": {
     "minutes": "{{minutes}} perc",
     "hoursMinutes": "{{hours}} óra {{minutes}} perc"
+  },
+  "upcoming": {
+    "intro": "A következő két hónap új részei és filmmegjelenései, amelyek még nincsenek itt.",
+    "unavailable": "A(z) {{apps}} nem válaszolt, így egyesek hiányozhatnak.",
+    "nothingYet": "Még nincs mit mutatni",
+    "notConnected": "Egy rendszergazda nem csatlakoztatta a Radarrt vagy a Sonarrt ehhez a szerverhez.",
+    "connect": "Egy rendszergazda a Matinee webes Beállításaiban kapcsolhatja be a Radarrt vagy a Sonarrt.",
+    "nothing": "Most semmi sem érkezik."
   }
 }

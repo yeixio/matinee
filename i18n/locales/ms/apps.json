@@ -387,5 +387,13 @@
   "duration": {
     "minutes": "{{minutes}} min",
     "hoursMinutes": "{{hours}} j {{minutes}} min"
+  },
+  "upcoming": {
+    "intro": "Episod baharu dan keluaran filem dalam dua bulan akan datang yang belum tiba.",
+    "unavailable": "{{apps}} tidak menjawab, jadi mungkin ada yang tertinggal.",
+    "nothingYet": "Belum ada apa-apa untuk ditunjukkan",
+    "notConnected": "Pentadbir belum menyambungkan Radarr atau Sonarr ke pelayan ini.",
+    "connect": "Pentadbir boleh menyambungkan Radarr atau Sonarr dalam Tetapan Matinee di web.",
+    "nothing": "Tiada apa-apa yang akan datang buat masa ini."
   }
 }

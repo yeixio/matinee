@@ -387,5 +387,13 @@
   "duration": {
     "minutes": "{{minutes}} mnt",
     "hoursMinutes": "{{hours}} j {{minutes}} mnt"
+  },
+  "upcoming": {
+    "intro": "Episode baru dan rilis film selama dua bulan ke depan yang belum masuk.",
+    "unavailable": "{{apps}} tidak menjawab, jadi mungkin ada yang terlewat.",
+    "nothingYet": "Belum ada yang bisa ditampilkan",
+    "notConnected": "Admin belum menghubungkan Radarr atau Sonarr ke server ini.",
+    "connect": "Admin dapat menghubungkan Radarr atau Sonarr di Pengaturan Matinee di web.",
+    "nothing": "Belum ada yang akan datang saat ini."
   }
 }

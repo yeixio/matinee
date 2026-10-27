@@ -394,5 +394,13 @@
   "duration": {
     "minutes": "{{minutes}} मिनट",
     "hoursMinutes": "{{hours}} घं {{minutes}} मिनट"
+  },
+  "upcoming": {
+    "intro": "अगले दो महीनों के नए एपिसोड और फ़िल्म रिलीज़ जो अभी आए नहीं हैं।",
+    "unavailable": "{{apps}} ने जवाब नहीं दिया, इसलिए कुछ छूट सकते हैं।",
+    "nothingYet": "अभी दिखाने को कुछ नहीं",
+    "notConnected": "किसी एडमिन ने इस सर्वर से Radarr या Sonarr कनेक्ट नहीं किया है।",
+    "connect": "कोई एडमिन वेब पर Matinee की सेटिंग में Radarr या Sonarr जोड़ सकता है।",
+    "nothing": "अभी कुछ भी आने वाला नहीं है।"
   }
 }

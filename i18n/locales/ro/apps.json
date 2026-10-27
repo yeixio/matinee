@@ -401,5 +401,13 @@
   "duration": {
     "minutes": "{{minutes}} min",
     "hoursMinutes": "{{hours}} h {{minutes}} min"
+  },
+  "upcoming": {
+    "intro": "Episoade noi și lansări de filme din următoarele două luni care nu au sosit încă.",
+    "unavailable": "{{apps}} nu a răspuns, așa că unele pot lipsi.",
+    "nothingYet": "Nimic de arătat încă",
+    "notConnected": "Un administrator nu a conectat Radarr sau Sonarr la acest server.",
+    "connect": "Un administrator poate conecta Radarr sau Sonarr din Setările Matinee pe web.",
+    "nothing": "Momentan nu vine nimic."
   }
 }

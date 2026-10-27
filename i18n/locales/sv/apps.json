@@ -394,5 +394,13 @@
   "duration": {
     "minutes": "{{minutes}} min",
     "hoursMinutes": "{{hours}} tim {{minutes}} min"
+  },
+  "upcoming": {
+    "intro": "Nya avsnitt och filmpremiärer de kommande två månaderna som inte har kommit än.",
+    "unavailable": "{{apps}} svarade inte, så vissa kan saknas.",
+    "nothingYet": "Inget att visa än",
+    "notConnected": "En administratör har inte anslutit Radarr eller Sonarr till den här servern.",
+    "connect": "En administratör kan ansluta Radarr eller Sonarr under Inställningar i Matinee på webben.",
+    "nothing": "Inget är på väg just nu."
   }
 }

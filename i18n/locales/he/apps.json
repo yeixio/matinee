@@ -401,5 +401,13 @@
   "duration": {
     "minutes": "{{minutes}} דק׳",
     "hoursMinutes": "{{hours}} שע׳ {{minutes}} דק׳"
+  },
+  "upcoming": {
+    "intro": "פרקים חדשים וסרטים שיוצאים בחודשיים הקרובים ועוד לא הגיעו.",
+    "unavailable": "{{apps}} לא ענה, אז ייתכן שחלק חסרים.",
+    "nothingYet": "עדיין אין מה להציג",
+    "notConnected": "מנהל עדיין לא חיבר את Radarr או Sonarr לשרת הזה.",
+    "connect": "מנהל יכול לחבר את Radarr או Sonarr בהגדרות של Matinee באתר.",
+    "nothing": "אין כרגע שום דבר בדרך."
   }
 }

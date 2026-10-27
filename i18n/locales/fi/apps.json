@@ -394,5 +394,13 @@
   "duration": {
     "minutes": "{{minutes}} min",
     "hoursMinutes": "{{hours}} t {{minutes}} min"
+  },
+  "upcoming": {
+    "intro": "Uudet jaksot ja elokuvajulkaisut seuraavan kahden kuukauden ajalta, joita ei vielä ole.",
+    "unavailable": "{{apps}} ei vastannut, joten osa voi puuttua.",
+    "nothingYet": "Ei vielä mitään näytettävää",
+    "notConnected": "Ylläpitäjä ei ole yhdistänyt Radarria tai Sonarria tähän palvelimeen.",
+    "connect": "Ylläpitäjä voi yhdistää Radarrin tai Sonarrin Matineen asetuksista verkossa.",
+    "nothing": "Mitään ei ole tulossa juuri nyt."
   }
 }

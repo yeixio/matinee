@@ -394,5 +394,13 @@
   "duration": {
     "minutes": "{{minutes}} min",
     "hoursMinutes": "{{hours}} u {{minutes}} min"
+  },
+  "upcoming": {
+    "intro": "Nieuwe afleveringen en filmreleases van de komende twee maanden die er nog niet zijn.",
+    "unavailable": "{{apps}} reageerde niet, dus er kan iets ontbreken.",
+    "nothingYet": "Nog niets te zien",
+    "notConnected": "Een beheerder heeft Radarr of Sonarr nog niet aan deze server gekoppeld.",
+    "connect": "Een beheerder kan Radarr of Sonarr koppelen via Instellingen in Matinee op het web.",
+    "nothing": "Er komt op dit moment niets aan."
   }
 }

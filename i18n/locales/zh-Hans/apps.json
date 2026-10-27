@@ -387,5 +387,13 @@
   "duration": {
     "minutes": "{{minutes}} 分钟",
     "hoursMinutes": "{{hours}} 小时 {{minutes}} 分钟"
+  },
+  "upcoming": {
+    "intro": "未来两个月内尚未入库的新剧集和电影。",
+    "unavailable": "{{apps}} 没有响应，可能会缺少部分内容。",
+    "nothingYet": "还没有可显示的内容",
+    "notConnected": "管理员尚未将 Radarr 或 Sonarr 连接到此服务器。",
+    "connect": "管理员可以在网页版 Matinee 的设置中连接 Radarr 或 Sonarr。",
+    "nothing": "目前没有即将推出的内容。"
   }
 }
