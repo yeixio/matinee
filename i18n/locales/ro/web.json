@@ -1,0 +1,688 @@
+{
+  "loading": "Se încarcă",
+  "nav": {
+    "home": "Acasă",
+    "watchList": "Lista de vizionat",
+    "collections": "Colecții",
+    "scanning": "Se scanează",
+    "search": "Căutare",
+    "comingSoon": "În curând",
+    "requests": "Cereri",
+    "signIn": "Conectează-te",
+    "settings": "Setări",
+    "switchProfile": "Schimbă profilul",
+    "signOut": "Deconectează-te"
+  },
+  "cantReachServer": "Serverul nu poate fi accesat. Se reîncearcă…",
+  "player": {
+    "subtitlesFailed": "Nu s-au putut încărca aceste subtitrări",
+    "off": "Dezactivat",
+    "convertsVideo": "Convertește video",
+    "file": "Fișier",
+    "seek": "Derulare",
+    "previous": "Anterior",
+    "pause": "Pauză",
+    "next": "Următor",
+    "closePlayer": "Închide playerul",
+    "failedDetail": "Redarea a eșuat. Fișierul poate fi deteriorat sau într-un format pe care serverul nu îl poate converti.",
+    "failed": "Redarea a eșuat",
+    "back10": "Înapoi 10 secunde",
+    "forward10": "Înainte 10 secunde",
+    "unmute": "Activează sunetul",
+    "mute": "Dezactivează sunetul",
+    "converting": "Se convertește",
+    "fullscreen": "Ecran complet"
+  },
+  "somethingWentWrong": "Ceva n-a mers bine",
+  "oneMoment": "O clipă…",
+  "auth": {
+    "username": "Nume de utilizator",
+    "password": "Parolă",
+    "signIn": "Conectează-te",
+    "welcomeBack": "Bine ai revenit.",
+    "setUp": "Configurează Matinee",
+    "setUpHint": "Creează contul de administrator. Poți adăuga familia și prietenii mai târziu.",
+    "createAccount": "Creează contul"
+  },
+  "home": {
+    "welcome": "Bun venit în Matinee",
+    "welcomeHint": "Adaugă un dosar cu filme, seriale sau muzică pentru a începe.",
+    "addLibrary": "Adaugă o bibliotecă",
+    "continueWatching": "Continuă vizionarea",
+    "recentlyAdded": "Adăugate recent",
+    "newReleases": "Lansări noi",
+    "scanning": "Se scanează biblioteca",
+    "scanningHint": "Titlurile noi apar aici imediat ce sunt găsite.",
+    "removeNamed": "Elimină {{title}} din Continuă vizionarea",
+    "remove": "Elimină din Continuă vizionarea"
+  },
+  "hero": {
+    "upNext": "Urmează",
+    "justAdded": "Abia adăugat",
+    "details": "Detalii"
+  },
+  "item": {
+    "resume": "Reia",
+    "resumeLeft": "Reia · mai sunt {{left}}",
+    "play": "Redă",
+    "resumeFrom": "Reia de la {{time}}",
+    "resumeEpisode": "Reia episodul {{episode}}",
+    "playEpisode": "Redă episodul {{episode}}",
+    "shuffle": "Amestecă",
+    "seasons": "Sezoane",
+    "albums": "Albume",
+    "episodes": "Episoade"
+  },
+  "row": {
+    "back": "Derulează înapoi",
+    "forward": "Derulează înainte"
+  },
+  "artwork": {
+    "fetching": "Se preiau detaliile…"
+  },
+  "close": "Închide",
+  "file": {
+    "audio": "Audio",
+    "subtitles": "Subtitrări",
+    "title": "Detalii fișier",
+    "notYet": "Matinee nu a analizat încă acest fișier în detaliu. Citește fiecare fișier încet, în fundal, așa că aceasta se completează singură.",
+    "unreadable": "Matinee nu a putut citi acest fișier: {{error}}",
+    "stale": "Fișierul s-a schimbat de când a fost înregistrat; va fi analizat din nou în curând.",
+    "file": "Fișier",
+    "location": "Locație",
+    "size": "Dimensiune",
+    "format": "Format",
+    "length": "Durată",
+    "bitrate": "Rată de biți",
+    "chapters": "Capitole",
+    "video": "Video",
+    "videoN": "Video {{n}}",
+    "codec": "Codec",
+    "resolution": "Rezoluție",
+    "frameRate": "Cadre pe secundă",
+    "fps": "{{rate}} fps",
+    "bitDepth": "Adâncime de culoare",
+    "dynamicRange": "Gamă dinamică",
+    "dvProfile": "profil {{profile}}",
+    "dvProfileLevel": "profil {{profile}}, nivel {{level}}",
+    "fallback": "{{format}} de rezervă",
+    "color": "Culoare",
+    "trackN": "Pista {{n}}",
+    "default": "Implicită",
+    "forced": "Forțate",
+    "commentary": "Comentariu",
+    "audioDescription": "Descriere audio",
+    "separateFile": "Fișier separat",
+    "inFile": "În fișier",
+    "sdh": "SDH",
+    "recorded": "Înregistrat {{when}}",
+    "queued": "În coadă; urmează.",
+    "analyzeAgain": "Analizează din nou"
+  },
+  "listSeparator": ", ",
+  "credits": {
+    "seriesCast": "Distribuția serialului",
+    "cast": "Distribuție",
+    "guestStars": "Invitați",
+    "starring": "În rolurile principale",
+    "moreDetails": "Mai multe detalii",
+    "crew": "Echipă",
+    "about": "Despre",
+    "awards": "Premii",
+    "won": "Câștigat",
+    "nominated": "Nominalizat",
+    "wonIn": "Câștigat în {{year}}",
+    "nominatedIn": "Nominalizat în {{year}}",
+    "showAll": "Arată toate cele {{count}}",
+    "awardsSource": "Premii din Wikidata."
+  },
+  "cancel": "Anulează",
+  "upNext": {
+    "upNext": "Urmează",
+    "stillWatching": "Încă te uiți?",
+    "youMightLike": "Ți-ar putea plăcea",
+    "playingIn": "Pornește în {{seconds}}",
+    "playNow": "Redă acum",
+    "keepWatching": "Continuă",
+    "haveALook": "Aruncă o privire",
+    "stop": "Oprește"
+  },
+  "goBack": "Înapoi",
+  "back": "Înapoi",
+  "trailer": {
+    "trailer": "Trailer",
+    "named": "Trailer {{title}}",
+    "wontPlay": "Acest trailer nu poate fi redat."
+  },
+  "watchList": {
+    "on": "Pe lista ta de vizionat",
+    "add": "Adaugă în lista de vizionat",
+    "empty": "Nimic salvat încă",
+    "emptyHint": "Deschide un film sau un serial și alege Lista de vizionat ca să-l păstrezi aici pentru mai târziu. Filmele dispar din listă după ce le-ai văzut.",
+    "browse": "Răsfoiește"
+  },
+  "related": {
+    "moreLikeThis": "Mai multe ca acesta"
+  },
+  "boxSet": {
+    "notFound": "Colecția nu a fost găsită",
+    "notFoundHint": "Niciunul dintre titlurile ei nu este acum într-o bibliotecă.",
+    "boxSet": "Colecție de filme"
+  },
+  "search": {
+    "placeholder": "Filme, seriale, artiști, albume…",
+    "nothing": "Nimic nu se potrivește cu „{{q}}”",
+    "lookingForNew": "Cauți ceva nou?",
+    "addIt": "Adaugă-l",
+    "askForIt": "Cere-l"
+  },
+  "person": {
+    "notFound": "Persoana nu a fost găsită",
+    "showLess": "Mai puțin",
+    "readMore": "Citește mai mult",
+    "inLibrary": "În biblioteca ta"
+  },
+  "library": {
+    "library": "Bibliotecă",
+    "matches_few": "{{count}} rezultate",
+    "matches_one": "{{count}} rezultat",
+    "matches_other": "{{count}} de rezultate",
+    "scanning": "Se scanează…",
+    "nothingUnwatched": "Nimic nevăzut aici",
+    "nothingMatches": "Nimic nu se potrivește",
+    "seenEverything": "Ai văzut tot din această bibliotecă.",
+    "clearFilters": "Șterge filtrele",
+    "appearAsFound": "Titlurile apar pe măsură ce sunt găsite.",
+    "noMedia": "Matinee a căutat în {{paths}} și nu a găsit niciun fișier media."
+  },
+  "nothingHereYet": "Nimic aici încă",
+  "collection": {
+    "notFound": "Colecția nu a fost găsită",
+    "notFoundHint": "Poate a fost ștearsă.",
+    "smart": "Colecție inteligentă",
+    "collection": "Colecție",
+    "shuffledDaily": "Amestecată zilnic",
+    "editRules": "Editează regulile",
+    "edit": "Editează",
+    "delete": "Șterge colecția",
+    "deleteConfirm": "Ștergi {{name}}? Titlurile rămân în biblioteca ta.",
+    "nothingMatchesYet": "Nimic nu se potrivește încă",
+    "joinByRules": "Titlurile se adaugă singure când se potrivesc regulilor.",
+    "howToAdd": "Deschide un film sau un serial și alege Colecții pentru a-l adăuga."
+  },
+  "collections": {
+    "newShort": "Nouă",
+    "new": "Colecție nouă",
+    "newSmartShort": "Inteligentă nouă",
+    "newSmart": "Colecție inteligentă nouă",
+    "none": "Nicio colecție încă",
+    "noneHint": "O colecție inteligentă se umple singură după reguli, de exemplu acțiune din anii '80 nevăzută. Colecțiile de filme apar aici când două dintre titlurile lor sunt într-o bibliotecă.",
+    "yours": "Ale tale",
+    "shared": "Partajate",
+    "forEveryone": "Colecții pentru toți",
+    "boxSets": "Colecții de filme",
+    "sort": {
+      "own": "Ordine proprie",
+      "title": "Titlu",
+      "added": "Data adăugării",
+      "released": "Data lansării",
+      "year": "An",
+      "rating": "Notă",
+      "runtime": "Durată",
+      "lastPlayed": "Redat ultima dată",
+      "shuffle": "Amestecă zilnic"
+    },
+    "smartShort": "Inteligentă",
+    "editNamed": "Editează {{name}}",
+    "name": "Nume",
+    "smartExample": "Acțiune din anii '80 nevăzută",
+    "manualExample": "Seară de film",
+    "rules": "Reguli",
+    "rulesHint": "Titlurile care se potrivesc acestor filtre se adaugă singure pe măsură ce biblioteca se schimbă.",
+    "shuffleDaily": "Amestecă în fiecare zi",
+    "order": "Ordine",
+    "orderAdded": "Ordinea în care au fost adăugate titlurile",
+    "direction": "Direcție",
+    "usual": "Obișnuită",
+    "ascending": "Crescător",
+    "descending": "Descrescător",
+    "showAsRow": "Arată ca rând",
+    "onHome": "Pe Acasă",
+    "onLibraryPage": "Pe o pagină de bibliotecă",
+    "shareWithEveryone": "Partajează cu toți de pe acest server",
+    "saveAs": "Salvează ca colecție"
+  },
+  "save": "Salvează",
+  "create": "Creează",
+  "loadingDots": "Se încarcă…",
+  "filters": {
+    "title": "Filtre",
+    "inUse_few": "Filtre, {{count}} active",
+    "inUse_one": "Filtre, {{count}} activ",
+    "inUse_other": "Filtre, {{count}} de active",
+    "sortBy": "Sortează după",
+    "highestFirst": "Cele mai mari primele",
+    "lowestFirst": "Cele mai mici primele",
+    "highestFirstSwitch": "Cele mai mari primele; comută la cele mai mici primele",
+    "lowestFirstSwitch": "Cele mai mici primele; comută la cele mai mari primele",
+    "not": "Nu {{label}}",
+    "remove": "Elimină {{label}}",
+    "chip": {
+      "words": "„{{q}}”",
+      "directedBy": "Regizat de {{name}}",
+      "with": "Cu {{name}}",
+      "releasedWithin": "Lansat în {{within}}",
+      "releasedAfter": "Lansat după {{date}}",
+      "releasedBefore": "Lansat înainte de {{date}}",
+      "addedWithin": "Adăugat în {{within}}",
+      "addedAfter": "Adăugat după {{date}}",
+      "addedBefore": "Adăugat înainte de {{date}}",
+      "ratingMin": "Notă {{rating}}+",
+      "ratingMax": "Notă {{rating}} sau mai mică",
+      "certification": "Notă {{rating}}",
+      "watchList": "Pe lista mea de vizionat"
+    },
+    "collection": "Colecție",
+    "active": "Filtre active",
+    "clearAll": "Șterge tot",
+    "more_few": "încă {{count}}",
+    "more_one": "încă {{count}}",
+    "more_other": "încă {{count}}",
+    "any": "Oricare",
+    "all": "Toate",
+    "anyTime": "Oricând",
+    "runtime": {
+      "under30": "Sub 30 min",
+      "30to60": "30–60 min",
+      "overHour": "Peste o oră",
+      "under90": "Sub 90 min",
+      "90to120": "90 min – 2 ore",
+      "over2Hours": "Peste 2 ore"
+    },
+    "wordsInTitle": "Cuvinte din titlu",
+    "onlyWatchList": "Doar titlurile de pe lista mea de vizionat",
+    "fromYear": "Din anul",
+    "toYear": "Până în anul",
+    "from": "De la",
+    "to": "până la",
+    "toPlaceholder": "Până la",
+    "lastWeek": "Ultima săptămână",
+    "last30Days": "Ultimele 30 de zile",
+    "last3Months": "Ultimele 3 luni",
+    "lastYear": "Ultimul an",
+    "ratingAtLeast": "{{rating}}+",
+    "findPerson": "Găsește o persoană",
+    "nobody": "Nimeni cu acest nume în această bibliotecă.",
+    "showResults": "Arată rezultatele",
+    "section": {
+      "title": "Titlu",
+      "watched": "Văzut",
+      "genre": "Gen",
+      "year": "An",
+      "firstAired": "Prima difuzare",
+      "released": "Lansat",
+      "added": "Adăugat",
+      "rating": "Notă",
+      "episodeLength": "Durata episodului",
+      "runtime": "Durată",
+      "quality": "Calitate",
+      "network": "Rețea sau studio",
+      "studio": "Studio",
+      "ageRating": "Clasificare de vârstă",
+      "language": "Limbă originală",
+      "country": "Țară",
+      "creator": "Creat sau regizat de",
+      "director": "Regizor",
+      "people": "Distribuție și echipă"
+    }
+  },
+  "appearance": {
+    "title": "Aspect",
+    "useServerTheme": "Folosește tema serverului ({{name}})",
+    "guestHint": "Toți cei de acasă fără cont folosesc această temă.",
+    "hint": "Tema ta te urmează în aplicațiile Matinee de pe telefon și TV.",
+    "theme": "Temă",
+    "preview": {
+      "tonight": "În seara asta",
+      "trailer": "Trailer"
+    },
+    "serverTheme": "Tema serverului",
+    "serverThemeHint": "Ce văd toți până își aleg una proprie, și pe pagina de conectare.",
+    "custom": "{{name}} (personalizată)",
+    "addYourOwn": "Pentru a adăuga una proprie, pune un fișier de temă în dosarul <code>themes</code> al serverului, din dosarul lui de date.",
+    "howTo": "Cum faci o temă",
+    "skipped": "Omis: {{problem}}"
+  },
+  "newFiles": {
+    "title": "Fișiere noi",
+    "intro": "Matinee observă fișierele pe care le adaugi, redenumești sau ștergi și actualizează biblioteca la câteva secunde după ce s-au terminat de copiat.",
+    "watch": "Urmărește fișierele noi",
+    "summary": {
+      "some": "Unele dosare sunt verificate la fiecare {{every}}",
+      "watching": "Se urmăresc fișierele noi",
+      "polling": "Fișierele noi sunt verificate la fiecare {{every}}",
+      "pollingShare": "Fișierele noi sunt verificate la fiecare {{every}} (partajare de rețea)",
+      "off": "Fișierele noi nu sunt urmărite"
+    },
+    "mode": {
+      "auto": {
+        "label": "Automat",
+        "hint": "Imediat pe discurile proprii ale serverului. Partajările de rețea (SMB, NFS) nu anunță schimbările, așa că Matinee le verifică la fiecare {{every}}."
+      },
+      "poll": {
+        "label": "Verifică periodic",
+        "hint": "Fiecare dosar este verificat la fiecare {{every}}. Alege asta dacă fișierele noi de pe un disc nu apar singure."
+      },
+      "off": {
+        "label": "Dezactivat",
+        "hint": "Fișierele noi apar la următoarea scanare completă sau când apeși Scanează."
+      }
+    },
+    "rescan": "Fiecare bibliotecă este de asemenea rescanată complet la fiecare {{every}}, ceea ce prinde orice altceva, cum ar fi un fișier înlocuit pe o partajare.",
+    "rescanOff": "Rescanările complete sunt dezactivate pe acest server (MATINEE_SCAN_INTERVAL=0)."
+  },
+  "analysis": {
+    "title": "Analiză media",
+    "intro": "Matinee citește încet fiecare fișier pentru calitate, sunet și limbi, și din nou ori de câte ori un fișier se schimbă.",
+    "state": {
+      "lookingAt": "Se analizează {{file}}",
+      "working": "Lucrează",
+      "waiting": "Așteaptă terminarea redării",
+      "slowDisk": "Fișierele se citesc greu; pauză câteva minute",
+      "allDone": "Toate fișierele sunt analizate",
+      "upToDate": "La zi",
+      "paused": "În pauză"
+    },
+    "progress": "{{done}} din {{total}}",
+    "unreadable_few": "{{count}} fișiere nu au putut fi citite.",
+    "unreadable_one": "{{count}} fișier nu a putut fi citit.",
+    "unreadable_other": "{{count}} de fișiere nu au putut fi citite.",
+    "speed": "Viteză",
+    "mode": {
+      "gentle": {
+        "label": "Blândă",
+        "hint": "Un fișier la câteva secunde și niciunul cât timp serverul convertește ceva pentru redare."
+      },
+      "normal": {
+        "label": "Normală",
+        "hint": "Fișiere unul după altul, tot cu cea mai mică prioritate."
+      },
+      "off": {
+        "label": "Dezactivată",
+        "hint": "În pauză până o reactivezi."
+      }
+    }
+  },
+  "profileSettings": {
+    "title": "Profiluri",
+    "intro": "Profilurile au o conectare comună, dar își păstrează propriul progres, lista de vizionat și tema. Profilurile pentru copii văd doar ce permiți tu. Un PIN păstrează un profil, sau contul însuși, pentru proprietarul lui.",
+    "pinFor": "Un PIN din 4 cifre pentru {{name}}",
+    "homeDevices": "Dispozitive din rețeaua de acasă care nu s-au conectat",
+    "account": "Cont",
+    "removePin": "Elimină PIN-ul",
+    "addPin": "Adaugă PIN",
+    "hasPin": "Are PIN",
+    "edit": "Editează {{name}}",
+    "remove": "Elimină {{name}}",
+    "confirmRemove": "Elimini {{name}}? Progresul și lista de vizionat dispar și ele.",
+    "add": "Adaugă profil",
+    "name": "Nume",
+    "newPin": "PIN nou",
+    "pinOptional": "PIN (opțional)",
+    "unchanged": "Neschimbat",
+    "fourDigits": "4 cifre",
+    "removeThePin": "Elimină PIN-ul",
+    "colour": "Culoare",
+    "kidsMode": "Mod copii",
+    "kidsOff": "Dezactivat: vede tot",
+    "kidsLevel": "{{name}}: {{ratings}}",
+    "kidsLibraries": "Ce vede acest profil în fiecare bibliotecă. După clasificare ascunde titlurile peste nivelul {{level}} și titlurile fără clasificare. Profilurile pentru copii nu pot deschide Setările și nu pot face cereri.",
+    "libraryMode": {
+      "hidden": "Ascuns",
+      "rated": "După clasificare",
+      "all": "Tot"
+    }
+  },
+  "report": {
+    "thanks": "Mulțumim, un administrator se va uita.",
+    "button": "Raportează o problemă",
+    "whatsWrong": "Ce nu e în regulă cu {{title}}?",
+    "details": "Detalii (opțional)",
+    "detailsExample": "De ex.: fără sunet după 20 de minute",
+    "send": "Trimite"
+  },
+  "quality": {
+    "label": "Calitate",
+    "forShow": "Calitate pentru serial",
+    "confirm": "Treci la {{name}}? {{app}} va căuta copii care se potrivesc.",
+    "searching": "Se caută…"
+  },
+  "upcoming": {
+    "nothingYet": "Nimic de arătat încă",
+    "connect": "Conectează Radarr sau Sonarr pentru a vedea filmele și episoadele care sunt pe drum.",
+    "openSettings": "Deschide setările",
+    "notConnected": "Un administrator nu a conectat Radarr sau Sonarr la acest server.",
+    "intro": "Episoade noi și lansări de filme din următoarele două luni care nu au sosit încă.",
+    "unavailable": "{{apps}} nu a răspuns, așa că unele pot lipsi.",
+    "nothing": "Nimic pe drum. Cere ceva nou din Cereri."
+  },
+  "link": {
+    "title": "Conectează un dispozitiv",
+    "intro": "Introdu codul afișat pe telefon sau TV.",
+    "signedIn": "{{device}} este conectat",
+    "ready": "Va fi gata în câteva secunde.",
+    "declined": "Refuzat",
+    "notSignedIn": "{{device}} nu a fost conectat.",
+    "another": "Conectează alt dispozitiv",
+    "code": "Cod",
+    "next": "Următorul",
+    "wantsToSignIn": "vrea să se conecteze ca <name>{{name}}</name>",
+    "warning": "Aprobă doar un dispozitiv pe care îl ții în mână sau îl vezi. Primește același acces ca tine.",
+    "decline": "Refuză",
+    "approve": "Conectează"
+  },
+  "profiles": {
+    "whoIsWatching": "Cine se uită?",
+    "signInWithAccount": "Conectează-te cu un cont",
+    "enterPin": "Introdu PIN-ul lui {{name}}",
+    "pin": "PIN",
+    "deleteDigit": "Șterge"
+  },
+  "integrations": {
+    "title": "Radarr și Sonarr",
+    "intro": "Conectează-le ca oamenii să poată cere filme și seriale, să vadă ce urmează și să raporteze probleme cu ce se uită.",
+    "connected": "Conectat · {{url}}",
+    "notConnected": {
+      "radarr": "Neconectat · pentru filme",
+      "sonarr": "Neconectat · pentru seriale"
+    },
+    "change": "Schimbă",
+    "connect": "Conectează",
+    "address": "Adresă",
+    "apiKey": "Cheie API",
+    "keyWhere": "{{app}} → Settings → General",
+    "saved": "Salvat",
+    "answers": "{{app}} {{version}} răspunde la {{url}}",
+    "quality": {
+      "radarr": "Calitate pentru filme noi",
+      "sonarr": "Calitate pentru seriale noi"
+    },
+    "folder": "Dosar",
+    "confirmDisconnect": "Deconectezi {{app}}? Titlurile care sunt deja acolo rămân.",
+    "disconnect": "Deconectează",
+    "testing": "Se testează…",
+    "test": "Testează",
+    "whoCanAdd": "Cine poate adăuga filme și seriale",
+    "mode": {
+      "approve": {
+        "label": "Cerere, apoi aprobă un administrator",
+        "detail": "Oricine are cont poate cere un titlu. Așteaptă un administrator."
+      },
+      "auto": {
+        "label": "Adaugă imediat",
+        "detail": "Ce cer oamenii ajunge direct în Radarr sau Sonarr."
+      },
+      "off": {
+        "label": "Doar administratorii adaugă titluri",
+        "detail": "Toți ceilalți pot vedea în continuare ce urmează și pot raporta probleme."
+      }
+    }
+  },
+  "requests": {
+    "tab": {
+      "ask": "Cere ceva",
+      "requests": "Cereri",
+      "yourRequests": "Cererile tale",
+      "problems": "Probleme",
+      "yourReports": "Raportările tale"
+    },
+    "movies": "Filme",
+    "shows": "Seriale",
+    "findMovie": "Găsește un film…",
+    "findShow": "Găsește un serial…",
+    "nothingFound": "Nimic găsit pentru „{{q}}”",
+    "ready": "Gata de vizionat",
+    "askedFor": "Cerut",
+    "onItsWay": "Pe drum",
+    "add": "Adaugă",
+    "askForIt": "Cere-l",
+    "state": {
+      "pending": "Așteaptă aprobarea",
+      "approved": "Pe drum",
+      "declined": "Refuzat",
+      "failed": "Nu s-a putut adăuga"
+    },
+    "none": "Nicio cerere încă.",
+    "retry": "Reîncearcă",
+    "approve": "Aprobă",
+    "remove": "Elimină cererea pentru {{title}}",
+    "removedFromLibrary": "Eliminat din bibliotecă",
+    "noProblems": "Nimeni nu a raportat vreo problemă.",
+    "noReports": "Nu ai raportat nicio problemă. Folosește „Raportează o problemă” pe un titlu.",
+    "fileReplaced": "Fișier înlocuit",
+    "closed": "Închis",
+    "confirmReplace": "Ștergi acest fișier al {{title}} și descarci altă copie? Cea nouă apare după ce se descarcă și biblioteca este scanată.",
+    "replaceFile": "Înlocuiește fișierul",
+    "close": "Închide"
+  },
+  "settings": {
+    "tmdbNotice": "Afișele și descrierile provin de la <link>TMDB</link>. Acest produs folosește API-ul TMDB, dar nu este aprobat sau certificat de TMDB.",
+    "libraries": {
+      "title": "Biblioteci",
+      "none": "Nicio bibliotecă încă.",
+      "scan": "Scanează",
+      "remove": "Elimină {{name}}",
+      "confirmRemove": "Elimini „{{name}}”? Fișierele tale rămân unde sunt.",
+      "kind": {
+        "movies": "Filme",
+        "tv": "Seriale TV",
+        "music": "Muzică"
+      },
+      "type": "Tip",
+      "folders": "Dosare",
+      "up": "Un dosar mai sus",
+      "added": "Adăugat",
+      "useFolder": "Folosește acest dosar",
+      "noSubfolders": "Fără subdosare"
+    },
+    "people": {
+      "title": "Persoane",
+      "admin": "Administrator",
+      "passwordChanged": "Parola a fost schimbată. {{name}} a fost deconectat peste tot.",
+      "you": "(tu)",
+      "removeAdmin": "Elimină administratorul",
+      "makeAdmin": "Fă administrator",
+      "resetPassword": "Resetează parola",
+      "remove": "Elimină",
+      "newPasswordFor": "Parolă nouă pentru {{name}}",
+      "setPassword": "Setează parola",
+      "confirmRemove": "Elimini <name>{{name}}</name>? Istoricul de vizionare, lista de vizionat, descărcările și cererile dispar și ele, iar persoana este deconectată peste tot. Nu se poate anula."
+    },
+    "account": {
+      "title": "Contul tău",
+      "changePassword": "Schimbă parola",
+      "current": "Parola actuală",
+      "new": "Parolă nouă",
+      "again": "Parola nouă din nou",
+      "hint": "Cel puțin 8 caractere. Celelalte dispozitive ale tale vor fi deconectate.",
+      "mismatch": "Parolele noi nu se potrivesc.",
+      "changed": "Parola a fost schimbată. Celelalte dispozitive ale tale au fost deconectate."
+    },
+    "devices": {
+      "aWhileAgo": "acum ceva timp",
+      "justNow": "chiar acum",
+      "title": "Dispozitivele tale",
+      "unknown": "Dispozitiv necunoscut",
+      "this": "Acest dispozitiv",
+      "lastUsed": "Folosit ultima dată {{when}}",
+      "confirmSignOut": "Deconectezi „{{name}}”?"
+    },
+    "version": "Server Matinee {{version}} · API v{{api}}",
+    "home": {
+      "title": "Rețeaua de acasă",
+      "requireSignIn": "Cere conectare acasă",
+      "required": "Toți se conectează, acasă și în deplasare.",
+      "open": "Telefoanele, televizoarele și browserele din rețeaua de acasă pot viziona fără conectare. Folosesc un cont comun Acasă și nu pot schimba nimic. În afara casei, toți se conectează."
+    },
+    "remote": {
+      "title": "Acces la distanță",
+      "publicURL": "În afara casei, aplicațiile se conectează la <url>{{url}}</url>, adresa cu care a fost configurat acest server.",
+      "toggle": "Vizionează în afara casei",
+      "hint": "Matinee îi cere routerului tău să deschidă un port și obține un certificat, ca aplicațiile să se conecteze în siguranță de oriunde. Din exterior, toți se conectează.",
+      "working": "Se deschide un port pe router și se obține un certificat…",
+      "ready": "Aplicațiile ajung la acest server la <url>{{url}}</url> când sunt în afara casei.",
+      "router": "Routerul tău a deschis portul prin {{router}}.",
+      "pickUp": "Vor prelua această adresă data viitoare când sunt în rețeaua ta de acasă.",
+      "sharedAddress": "Matinee nu poate ocoli asta singur încă.",
+      "retry": "Matinee încearcă din nou la fiecare jumătate de oră."
+    },
+    "playback": {
+      "title": "Redare",
+      "autoPlay": "Redă episodul următor",
+      "autoPlayHint": "Când încep genericele, episodul următor pornește după o numărătoare inversă de 10 secunde pe care o poți anula.",
+      "binge": "Sari peste numărătoare",
+      "bingeHint": "Treci direct la episodul următor când încep genericele. După trei la rând fără să atingi nimic, ești întrebat dacă încă te uiți."
+    },
+    "trailers": {
+      "title": "Trailere",
+      "remote": "Trailere de pe YouTube",
+      "remoteOn": "Filmele și serialele oferă trailerele lor de la TMDB, redate de pe YouTube. Fișierele trailer de lângă fișierele tale media apar mereu.",
+      "remoteOff": "Apar doar fișierele trailer de lângă fișierele tale media, ca „Movie (2020)-trailer.mkv” sau orice dintr-un dosar Trailers."
+    },
+    "transcoding": {
+      "title": "Transcodare",
+      "intro": "Fișierele pe care un dispozitiv nu le poate reda așa cum sunt se convertesc în timp ce te uiți. Un GPU face asta mai repede și cu mai puțină încărcare pe server.",
+      "convertingWith": "Se convertește cu",
+      "active": "{{name}}.",
+      "activeOn": "{{name}} pe {{detail}}.",
+      "fullGPU": "Video este decodat, redimensionat și codat pe GPU.",
+      "encodeOnly": "Video este codat pe GPU și decodat pe CPU.",
+      "fallback": "Dacă GPU-ul nu poate procesa un fișier, acesta este redat prin CPU.",
+      "testing": "Se testează GPU-ul acestui server…",
+      "cpuOff": "CPU-ul. Transcodarea hardware este dezactivată.",
+      "cpuFailed": "CPU-ul, pentru că acceleratorul ales nu a funcționat pe acest server.",
+      "cpuNoGPU": "CPU-ul. Niciun GPU de pe acest server nu a trecut testul.",
+      "hardware": "Accelerare hardware",
+      "auto": "Automat: cel mai bun care funcționează",
+      "off": "Dezactivat: folosește mereu CPU-ul",
+      "notFound": "{{name}} (negăsit pe acest server)",
+      "accelerator": {
+        "nvenc": "NVIDIA NVENC",
+        "vaapi": "VAAPI (AMD și Intel pe Linux)",
+        "qsv": "Intel Quick Sync",
+        "videotoolbox": "VideoToolbox (Mac)",
+        "amf": "AMD AMF (Windows)",
+        "v4l2m2m": "V4L2 (Raspberry Pi)"
+      }
+    }
+  },
+  "language": {
+    "title": "Limbă",
+    "label": "Afișează Matinee în",
+    "hint": "Limba ta te urmează în aplicațiile Matinee de pe telefon și TV. Titlurile și descrierile vin și ele în această limbă, acolo unde TMDB le are.",
+    "guestHint": "Toți cei de acasă fără cont folosesc această limbă.",
+    "automatic": "Automat ({{language}})",
+    "machine": "Această limbă a fost tradusă automat, așa că unele cuvinte pot suna ciudat.",
+    "help": "Ajută la îmbunătățirea ei"
+  }
+}

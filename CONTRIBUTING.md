@@ -43,6 +43,7 @@ internal/stream      direct play and HLS transcoding
 internal/subtitle    subtitle discovery and conversion
 internal/store       SQLite / PostgreSQL storage and migrations
 web/src              React web player (pages/, components/, player/)
+i18n                 text in every language, shared with the apps
 deploy/helm/matinee  Helm chart
 ```
 
@@ -68,6 +69,7 @@ Run `gofmt -w` on Go files you touch.
 - The HTTP API is what the apps talk to. Add fields and routes; don't rename or remove them.
 - In the web player, use the colors and spacing already defined in `web/src/styles.css`, handle loading, error and empty states, and check your change at 390 px wide.
 - UI text is short and plain: "Add library", not "Click here to add a new library to your server".
+- UI text goes in `i18n/locales/en/` and the code shows it with `t()`; a test fails on text written straight into a component. Add the new keys to the other languages too, translated or, if you can't, in English. See [i18n/README.md](i18n/README.md).
 
 ## Pull requests
 

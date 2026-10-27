@@ -1,0 +1,684 @@
+{
+  "loading": "Laddar",
+  "nav": {
+    "home": "Hem",
+    "watchList": "Bevakningslista",
+    "collections": "Samlingar",
+    "scanning": "Skannar",
+    "search": "Sök",
+    "comingSoon": "Kommer snart",
+    "requests": "Önskemål",
+    "signIn": "Logga in",
+    "settings": "Inställningar",
+    "switchProfile": "Byt profil",
+    "signOut": "Logga ut"
+  },
+  "cantReachServer": "Når inte servern. Försöker igen…",
+  "player": {
+    "subtitlesFailed": "Kunde inte ladda de här undertexterna",
+    "off": "Av",
+    "convertsVideo": "Konverterar video",
+    "file": "Fil",
+    "seek": "Spola",
+    "previous": "Föregående",
+    "pause": "Pausa",
+    "next": "Nästa",
+    "closePlayer": "Stäng spelaren",
+    "failedDetail": "Uppspelningen misslyckades. Filen kan vara skadad eller i ett format servern inte kan konvertera.",
+    "failed": "Uppspelningen misslyckades",
+    "back10": "Bakåt 10 sekunder",
+    "forward10": "Framåt 10 sekunder",
+    "unmute": "Slå på ljudet",
+    "mute": "Stäng av ljudet",
+    "converting": "Konverterar",
+    "fullscreen": "Helskärm"
+  },
+  "somethingWentWrong": "Något gick fel",
+  "oneMoment": "Ett ögonblick…",
+  "auth": {
+    "username": "Användarnamn",
+    "password": "Lösenord",
+    "signIn": "Logga in",
+    "welcomeBack": "Välkommen tillbaka.",
+    "setUp": "Konfigurera Matinee",
+    "setUpHint": "Skapa administratörskontot. Du kan lägga till familj och vänner senare.",
+    "createAccount": "Skapa konto"
+  },
+  "home": {
+    "welcome": "Välkommen till Matinee",
+    "welcomeHint": "Lägg till en mapp med filmer, serier eller musik för att komma igång.",
+    "addLibrary": "Lägg till ett bibliotek",
+    "continueWatching": "Fortsätt titta",
+    "recentlyAdded": "Nyligen tillagt",
+    "newReleases": "Nya premiärer",
+    "scanning": "Skannar ditt bibliotek",
+    "scanningHint": "Nya titlar dyker upp här så fort de hittas.",
+    "removeNamed": "Ta bort {{title}} från Fortsätt titta",
+    "remove": "Ta bort från Fortsätt titta"
+  },
+  "hero": {
+    "upNext": "Nästa",
+    "justAdded": "Nytillagt",
+    "details": "Detaljer"
+  },
+  "item": {
+    "resume": "Fortsätt",
+    "resumeLeft": "Fortsätt · {{left}} kvar",
+    "play": "Spela",
+    "resumeFrom": "Fortsätt från {{time}}",
+    "resumeEpisode": "Fortsätt avsnitt {{episode}}",
+    "playEpisode": "Spela avsnitt {{episode}}",
+    "shuffle": "Blanda",
+    "seasons": "Säsonger",
+    "albums": "Album",
+    "episodes": "Avsnitt"
+  },
+  "row": {
+    "back": "Bläddra bakåt",
+    "forward": "Bläddra framåt"
+  },
+  "artwork": {
+    "fetching": "Hämtar detaljer…"
+  },
+  "close": "Stäng",
+  "file": {
+    "audio": "Ljud",
+    "subtitles": "Undertexter",
+    "title": "Fildetaljer",
+    "notYet": "Matinee har inte tittat närmare på den här filen än. Den läser varje fil långsamt i bakgrunden, så det här fylls i av sig självt.",
+    "unreadable": "Matinee kunde inte läsa filen: {{error}}",
+    "stale": "Filen har ändrats sedan detta registrerades; den granskas snart igen.",
+    "file": "Fil",
+    "location": "Plats",
+    "size": "Storlek",
+    "format": "Format",
+    "length": "Längd",
+    "bitrate": "Bithastighet",
+    "chapters": "Kapitel",
+    "video": "Video",
+    "videoN": "Video {{n}}",
+    "codec": "Kodek",
+    "resolution": "Upplösning",
+    "frameRate": "Bildfrekvens",
+    "fps": "{{rate}} fps",
+    "bitDepth": "Bitdjup",
+    "dynamicRange": "Dynamiskt omfång",
+    "dvProfile": "profil {{profile}}",
+    "dvProfileLevel": "profil {{profile}}, nivå {{level}}",
+    "fallback": "{{format}} som reserv",
+    "color": "Färg",
+    "trackN": "Spår {{n}}",
+    "default": "Standard",
+    "forced": "Tvingade",
+    "commentary": "Kommentar",
+    "audioDescription": "Syntolkning",
+    "separateFile": "Separat fil",
+    "inFile": "I filen",
+    "sdh": "SDH",
+    "recorded": "Registrerad {{when}}",
+    "queued": "I kö; den granskas härnäst.",
+    "analyzeAgain": "Analysera igen"
+  },
+  "listSeparator": ", ",
+  "credits": {
+    "seriesCast": "Seriens rollista",
+    "cast": "Rollista",
+    "guestStars": "Gästroller",
+    "starring": "I huvudrollerna",
+    "moreDetails": "Fler detaljer",
+    "crew": "Team",
+    "about": "Om",
+    "awards": "Priser",
+    "won": "Vann",
+    "nominated": "Nominerad",
+    "wonIn": "Vann {{year}}",
+    "nominatedIn": "Nominerad {{year}}",
+    "showAll": "Visa alla {{count}}",
+    "awardsSource": "Priser från Wikidata."
+  },
+  "cancel": "Avbryt",
+  "upNext": {
+    "upNext": "Nästa",
+    "stillWatching": "Tittar du fortfarande?",
+    "youMightLike": "Du kanske gillar",
+    "playingIn": "Spelas om {{seconds}}",
+    "playNow": "Spela nu",
+    "keepWatching": "Fortsätt titta",
+    "haveALook": "Ta en titt",
+    "stop": "Stoppa"
+  },
+  "goBack": "Gå tillbaka",
+  "back": "Tillbaka",
+  "trailer": {
+    "trailer": "Trailer",
+    "named": "Trailer för {{title}}",
+    "wontPlay": "Den här trailern går inte att spela."
+  },
+  "watchList": {
+    "on": "På din bevakningslista",
+    "add": "Lägg till på bevakningslistan",
+    "empty": "Inget sparat än",
+    "emptyHint": "Öppna en film eller serie och välj Bevakningslista för att spara den här till senare. Filmer försvinner från listan när du har sett dem.",
+    "browse": "Bläddra"
+  },
+  "related": {
+    "moreLikeThis": "Mer som detta"
+  },
+  "boxSet": {
+    "notFound": "Boxen hittades inte",
+    "notFoundHint": "Ingen av dess titlar finns i ett bibliotek just nu.",
+    "boxSet": "Box"
+  },
+  "search": {
+    "placeholder": "Filmer, serier, artister, album…",
+    "nothing": "Inget matchar ”{{q}}”",
+    "lookingForNew": "Letar du efter något nytt?",
+    "addIt": "Lägg till",
+    "askForIt": "Önska den"
+  },
+  "person": {
+    "notFound": "Personen hittades inte",
+    "showLess": "Visa mindre",
+    "readMore": "Läs mer",
+    "inLibrary": "I ditt bibliotek"
+  },
+  "library": {
+    "library": "Bibliotek",
+    "matches_one": "{{count}} träff",
+    "matches_other": "{{count}} träffar",
+    "scanning": "Skannar…",
+    "nothingUnwatched": "Inget osett här",
+    "nothingMatches": "Inget matchar",
+    "seenEverything": "Du har sett allt i det här biblioteket.",
+    "clearFilters": "Rensa filter",
+    "appearAsFound": "Titlar visas allteftersom de hittas.",
+    "noMedia": "Matinee letade i {{paths}} och hittade inga medier."
+  },
+  "nothingHereYet": "Inget här än",
+  "collection": {
+    "notFound": "Samlingen hittades inte",
+    "notFoundHint": "Den kan ha tagits bort.",
+    "smart": "Smart samling",
+    "collection": "Samling",
+    "shuffledDaily": "Blandas varje dag",
+    "editRules": "Redigera regler",
+    "edit": "Redigera",
+    "delete": "Ta bort samlingen",
+    "deleteConfirm": "Ta bort {{name}}? Titlarna finns kvar i ditt bibliotek.",
+    "nothingMatchesYet": "Inget matchar än",
+    "joinByRules": "Titlar läggs till av sig själva när de matchar reglerna.",
+    "howToAdd": "Öppna en film eller serie och välj Samlingar för att lägga till den."
+  },
+  "collections": {
+    "newShort": "Ny",
+    "new": "Ny samling",
+    "newSmartShort": "Ny smart",
+    "newSmart": "Ny smart samling",
+    "none": "Inga samlingar än",
+    "noneHint": "En smart samling fyller sig själv utifrån regler, till exempel osedd 80-talsaction. Boxar visas här när två av deras titlar finns i ett bibliotek.",
+    "yours": "Dina",
+    "shared": "Delade",
+    "forEveryone": "Samlingar för alla",
+    "boxSets": "Boxar",
+    "sort": {
+      "own": "Egen ordning",
+      "title": "Titel",
+      "added": "Tillagd",
+      "released": "Premiärdatum",
+      "year": "År",
+      "rating": "Betyg",
+      "runtime": "Speltid",
+      "lastPlayed": "Senast spelad",
+      "shuffle": "Blanda dagligen"
+    },
+    "smartShort": "Smart",
+    "editNamed": "Redigera {{name}}",
+    "name": "Namn",
+    "smartExample": "Osedd 80-talsaction",
+    "manualExample": "Filmkväll",
+    "rules": "Regler",
+    "rulesHint": "Titlar som matchar de här filtren läggs till av sig själva när biblioteket ändras.",
+    "shuffleDaily": "Blanda varje dag",
+    "order": "Ordning",
+    "orderAdded": "Ordningen titlarna lades till i",
+    "direction": "Riktning",
+    "usual": "Vanlig",
+    "ascending": "Stigande",
+    "descending": "Fallande",
+    "showAsRow": "Visa som rad",
+    "onHome": "På Hem",
+    "onLibraryPage": "På en bibliotekssida",
+    "shareWithEveryone": "Dela med alla på den här servern",
+    "saveAs": "Spara som samling"
+  },
+  "save": "Spara",
+  "create": "Skapa",
+  "loadingDots": "Laddar…",
+  "filters": {
+    "title": "Filter",
+    "inUse_one": "Filter, {{count}} används",
+    "inUse_other": "Filter, {{count}} används",
+    "sortBy": "Sortera efter",
+    "highestFirst": "Högst först",
+    "lowestFirst": "Lägst först",
+    "highestFirstSwitch": "Högst först; byt till lägst först",
+    "lowestFirstSwitch": "Lägst först; byt till högst först",
+    "not": "Inte {{label}}",
+    "remove": "Ta bort {{label}}",
+    "chip": {
+      "words": "”{{q}}”",
+      "directedBy": "Regi av {{name}}",
+      "with": "Med {{name}}",
+      "releasedWithin": "Premiär {{within}}",
+      "releasedAfter": "Premiär efter {{date}}",
+      "releasedBefore": "Premiär före {{date}}",
+      "addedWithin": "Tillagd {{within}}",
+      "addedAfter": "Tillagd efter {{date}}",
+      "addedBefore": "Tillagd före {{date}}",
+      "ratingMin": "Betyg {{rating}}+",
+      "ratingMax": "Betyg {{rating}} eller lägre",
+      "certification": "Betyg {{rating}}",
+      "watchList": "På min bevakningslista"
+    },
+    "collection": "Samling",
+    "active": "Filter som används",
+    "clearAll": "Rensa allt",
+    "more_one": "{{count}} till",
+    "more_other": "{{count}} till",
+    "any": "Någon",
+    "all": "Alla",
+    "anyTime": "När som helst",
+    "runtime": {
+      "under30": "Under 30 min",
+      "30to60": "30–60 min",
+      "overHour": "Över en timme",
+      "under90": "Under 90 min",
+      "90to120": "90 min – 2 timmar",
+      "over2Hours": "Över 2 timmar"
+    },
+    "wordsInTitle": "Ord i titeln",
+    "onlyWatchList": "Bara titlar på min bevakningslista",
+    "fromYear": "Från år",
+    "toYear": "Till år",
+    "from": "Från",
+    "to": "till",
+    "toPlaceholder": "Till",
+    "lastWeek": "Senaste veckan",
+    "last30Days": "Senaste 30 dagarna",
+    "last3Months": "Senaste 3 månaderna",
+    "lastYear": "Senaste året",
+    "ratingAtLeast": "{{rating}}+",
+    "findPerson": "Hitta en person",
+    "nobody": "Ingen med det namnet i det här biblioteket.",
+    "showResults": "Visa resultat",
+    "section": {
+      "title": "Titel",
+      "watched": "Sedd",
+      "genre": "Genre",
+      "year": "År",
+      "firstAired": "Första sändning",
+      "released": "Premiär",
+      "added": "Tillagd",
+      "rating": "Betyg",
+      "episodeLength": "Avsnittslängd",
+      "runtime": "Speltid",
+      "quality": "Kvalitet",
+      "network": "Kanal eller studio",
+      "studio": "Studio",
+      "ageRating": "Åldersgräns",
+      "language": "Originalspråk",
+      "country": "Land",
+      "creator": "Skapad eller regisserad av",
+      "director": "Regissör",
+      "people": "Skådespelare och team"
+    }
+  },
+  "appearance": {
+    "title": "Utseende",
+    "useServerTheme": "Använd serverns tema ({{name}})",
+    "guestHint": "Alla hemma utan konto delar det här temat.",
+    "hint": "Ditt tema följer med dig till Matinee-apparna på telefonen och TV:n.",
+    "theme": "Tema",
+    "preview": {
+      "tonight": "I kväll",
+      "trailer": "Trailer"
+    },
+    "serverTheme": "Serverns tema",
+    "serverThemeHint": "Det alla ser tills de väljer ett eget, och på inloggningssidan.",
+    "custom": "{{name}} (eget)",
+    "addYourOwn": "Lägg till ett eget genom att lägga en temafil i serverns <code>themes</code>-mapp, i dess datamapp.",
+    "howTo": "Så gör du ett tema",
+    "skipped": "Hoppade över {{problem}}"
+  },
+  "newFiles": {
+    "title": "Nya filer",
+    "intro": "Matinee märker filer du lägger till, byter namn på eller tar bort och uppdaterar biblioteket några sekunder efter att de kopierats klart.",
+    "watch": "Bevaka nya filer",
+    "summary": {
+      "some": "Vissa mappar kontrolleras var {{every}}",
+      "watching": "Bevakar nya filer",
+      "polling": "Kontrolleras efter nya filer var {{every}}",
+      "pollingShare": "Kontrolleras efter nya filer var {{every}} (nätverksresurs)",
+      "off": "Bevakas inte efter nya filer"
+    },
+    "mode": {
+      "auto": {
+        "label": "Automatiskt",
+        "hint": "Direkt på serverns egna diskar. Nätverksresurser (SMB, NFS) meddelar inte ändringar, så Matinee kontrollerar dem var {{every}}."
+      },
+      "poll": {
+        "label": "Kontrollera med timer",
+        "hint": "Varje mapp kontrolleras var {{every}}. Välj detta om nya filer på en disk inte dyker upp av sig själva."
+      },
+      "off": {
+        "label": "Av",
+        "hint": "Nya filer dyker upp vid nästa fullständiga skanning, eller när du trycker på Skanna."
+      }
+    },
+    "rescan": "Varje bibliotek skannas också om helt var {{every}}, vilket fångar allt annat, som en fil som ersatts på en nätverksresurs.",
+    "rescanOff": "Fullständiga omskanningar är avstängda på den här servern (MATINEE_SCAN_INTERVAL=0)."
+  },
+  "analysis": {
+    "title": "Medieanalys",
+    "intro": "Matinee läser långsamt varje fil för att ta reda på kvalitet, ljud och språk, och igen när en fil ändras.",
+    "state": {
+      "lookingAt": "Tittar på {{file}}",
+      "working": "Arbetar",
+      "waiting": "Väntar på att uppspelningen ska bli klar",
+      "slowDisk": "Filerna är långsamma att läsa; vilar några minuter",
+      "allDone": "Alla filer är analyserade",
+      "upToDate": "Aktuell",
+      "paused": "Pausad"
+    },
+    "progress": "{{done}} av {{total}}",
+    "unreadable_one": "{{count}} fil kunde inte läsas.",
+    "unreadable_other": "{{count}} filer kunde inte läsas.",
+    "speed": "Hastighet",
+    "mode": {
+      "gentle": {
+        "label": "Försiktig",
+        "hint": "En fil med några sekunders mellanrum, och ingen medan servern konverterar något för uppspelning."
+      },
+      "normal": {
+        "label": "Normal",
+        "hint": "Filer i följd, fortfarande med lägsta prioritet."
+      },
+      "off": {
+        "label": "Av",
+        "hint": "Pausad tills du slår på den igen."
+      }
+    }
+  },
+  "profileSettings": {
+    "title": "Profiler",
+    "intro": "Profiler delar en inloggning men har egna framsteg, bevakningslista och tema. Barnprofiler ser bara det du tillåter. En PIN-kod håller en profil, eller själva kontot, för dess ägare.",
+    "pinFor": "En fyrsiffrig PIN-kod för {{name}}",
+    "homeDevices": "Enheter i ditt hemnätverk som inte har loggat in",
+    "account": "Konto",
+    "removePin": "Ta bort PIN-kod",
+    "addPin": "Lägg till PIN-kod",
+    "hasPin": "Har PIN-kod",
+    "edit": "Redigera {{name}}",
+    "remove": "Ta bort {{name}}",
+    "confirmRemove": "Ta bort {{name}}? Framsteg och bevakningslista försvinner också.",
+    "add": "Lägg till profil",
+    "name": "Namn",
+    "newPin": "Ny PIN-kod",
+    "pinOptional": "PIN-kod (valfritt)",
+    "unchanged": "Oförändrad",
+    "fourDigits": "4 siffror",
+    "removeThePin": "Ta bort PIN-koden",
+    "colour": "Färg",
+    "kidsMode": "Barnläge",
+    "kidsOff": "Av: ser allt",
+    "kidsLevel": "{{name}}: {{ratings}}",
+    "kidsLibraries": "Vad den här profilen ser i varje bibliotek. Efter åldersgräns döljer titlar över nivån {{level}} och titlar utan åldersgräns. Barnprofiler kan inte öppna Inställningar eller göra önskemål.",
+    "libraryMode": {
+      "hidden": "Dolt",
+      "rated": "Efter åldersgräns",
+      "all": "Allt"
+    }
+  },
+  "report": {
+    "thanks": "Tack, en administratör tittar på det.",
+    "button": "Rapportera ett problem",
+    "whatsWrong": "Vad är fel med {{title}}?",
+    "details": "Detaljer (valfritt)",
+    "detailsExample": "T.ex.: inget ljud efter 20 minuter",
+    "send": "Skicka"
+  },
+  "quality": {
+    "label": "Kvalitet",
+    "forShow": "Kvalitet för serien",
+    "confirm": "Byta till {{name}}? {{app}} letar efter kopior som matchar.",
+    "searching": "Söker…"
+  },
+  "upcoming": {
+    "nothingYet": "Inget att visa än",
+    "connect": "Anslut Radarr eller Sonarr för att se filmer och avsnitt som är på väg.",
+    "openSettings": "Öppna inställningar",
+    "notConnected": "En administratör har inte anslutit Radarr eller Sonarr till den här servern.",
+    "intro": "Nya avsnitt och filmpremiärer de kommande två månaderna som inte har kommit än.",
+    "unavailable": "{{apps}} svarade inte, så vissa kan saknas.",
+    "nothing": "Inget på väg. Önska något nytt under Önskemål."
+  },
+  "link": {
+    "title": "Logga in en enhet",
+    "intro": "Ange koden som visas på din telefon eller TV.",
+    "signedIn": "{{device}} är inloggad",
+    "ready": "Den är redo om några sekunder.",
+    "declined": "Nekad",
+    "notSignedIn": "{{device}} loggades inte in.",
+    "another": "Logga in en annan enhet",
+    "code": "Kod",
+    "next": "Nästa",
+    "wantsToSignIn": "vill logga in som <name>{{name}}</name>",
+    "warning": "Godkänn bara en enhet du håller i eller kan se. Den får samma åtkomst som du.",
+    "decline": "Neka",
+    "approve": "Logga in"
+  },
+  "profiles": {
+    "whoIsWatching": "Vem tittar?",
+    "signInWithAccount": "Logga in med ett konto",
+    "enterPin": "Ange PIN-koden för {{name}}",
+    "pin": "PIN-kod",
+    "deleteDigit": "Radera"
+  },
+  "integrations": {
+    "title": "Radarr och Sonarr",
+    "intro": "Anslut dem så att alla kan önska filmer och serier, se vad som kommer snart och rapportera problem med det de tittar på.",
+    "connected": "Ansluten · {{url}}",
+    "notConnected": {
+      "radarr": "Inte ansluten · för filmer",
+      "sonarr": "Inte ansluten · för serier"
+    },
+    "change": "Ändra",
+    "connect": "Anslut",
+    "address": "Adress",
+    "apiKey": "API-nyckel",
+    "keyWhere": "{{app}} → Settings → General",
+    "saved": "Sparad",
+    "answers": "{{app}} {{version}} svarar på {{url}}",
+    "quality": {
+      "radarr": "Kvalitet för nya filmer",
+      "sonarr": "Kvalitet för nya serier"
+    },
+    "folder": "Mapp",
+    "confirmDisconnect": "Koppla från {{app}}? Titlar som redan finns där blir kvar.",
+    "disconnect": "Koppla från",
+    "testing": "Testar…",
+    "test": "Testa",
+    "whoCanAdd": "Vem kan lägga till filmer och serier",
+    "mode": {
+      "approve": {
+        "label": "Önska, sedan godkänner en administratör",
+        "detail": "Alla med konto kan önska en titel. Den väntar på en administratör."
+      },
+      "auto": {
+        "label": "Lägg till direkt",
+        "detail": "Det folk önskar går direkt till Radarr eller Sonarr."
+      },
+      "off": {
+        "label": "Bara administratörer lägger till titlar",
+        "detail": "Alla andra kan fortfarande se vad som kommer snart och rapportera problem."
+      }
+    }
+  },
+  "requests": {
+    "tab": {
+      "ask": "Önska något",
+      "requests": "Önskemål",
+      "yourRequests": "Dina önskemål",
+      "problems": "Problem",
+      "yourReports": "Dina rapporter"
+    },
+    "movies": "Filmer",
+    "shows": "Serier",
+    "findMovie": "Hitta en film…",
+    "findShow": "Hitta en serie…",
+    "nothingFound": "Inget hittades för ”{{q}}”",
+    "ready": "Redo att ses",
+    "askedFor": "Önskad",
+    "onItsWay": "På väg",
+    "add": "Lägg till",
+    "askForIt": "Önska den",
+    "state": {
+      "pending": "Väntar på godkännande",
+      "approved": "På väg",
+      "declined": "Nekad",
+      "failed": "Kunde inte läggas till"
+    },
+    "none": "Inga önskemål än.",
+    "retry": "Försök igen",
+    "approve": "Godkänn",
+    "remove": "Ta bort önskemålet för {{title}}",
+    "removedFromLibrary": "Borttagen från biblioteket",
+    "noProblems": "Ingen har rapporterat något problem.",
+    "noReports": "Du har inte rapporterat några problem. Använd ”Rapportera ett problem” på en titel.",
+    "fileReplaced": "Filen ersatt",
+    "closed": "Stängd",
+    "confirmReplace": "Radera den här filen för {{title}} och ladda ner en annan kopia? Den nya visas när den har laddats ner och biblioteket har skannats.",
+    "replaceFile": "Ersätt fil",
+    "close": "Stäng"
+  },
+  "settings": {
+    "tmdbNotice": "Affischer och beskrivningar kommer från <link>TMDB</link>. Den här produkten använder TMDB:s API men är inte godkänd eller certifierad av TMDB.",
+    "libraries": {
+      "title": "Bibliotek",
+      "none": "Inga bibliotek än.",
+      "scan": "Skanna",
+      "remove": "Ta bort {{name}}",
+      "confirmRemove": "Ta bort ”{{name}}”? Dina filer stannar där de är.",
+      "kind": {
+        "movies": "Filmer",
+        "tv": "TV-serier",
+        "music": "Musik"
+      },
+      "type": "Typ",
+      "folders": "Mappar",
+      "up": "Upp en mapp",
+      "added": "Tillagd",
+      "useFolder": "Använd den här mappen",
+      "noSubfolders": "Inga undermappar"
+    },
+    "people": {
+      "title": "Personer",
+      "admin": "Administratör",
+      "passwordChanged": "Lösenordet har ändrats. {{name}} loggades ut överallt.",
+      "you": "(du)",
+      "removeAdmin": "Ta bort administratör",
+      "makeAdmin": "Gör till administratör",
+      "resetPassword": "Återställ lösenord",
+      "remove": "Ta bort",
+      "newPasswordFor": "Nytt lösenord för {{name}}",
+      "setPassword": "Ange lösenord",
+      "confirmRemove": "Ta bort <name>{{name}}</name>? Visningshistorik, bevakningslista, nedladdningar och önskemål försvinner också, och personen loggas ut överallt. Det går inte att ångra."
+    },
+    "account": {
+      "title": "Ditt konto",
+      "changePassword": "Byt lösenord",
+      "current": "Nuvarande lösenord",
+      "new": "Nytt lösenord",
+      "again": "Nytt lösenord igen",
+      "hint": "Minst 8 tecken. Dina andra enheter loggas ut.",
+      "mismatch": "De nya lösenorden matchar inte.",
+      "changed": "Lösenordet har ändrats. Dina andra enheter loggades ut."
+    },
+    "devices": {
+      "aWhileAgo": "för ett tag sedan",
+      "justNow": "nyss",
+      "title": "Dina enheter",
+      "unknown": "Okänd enhet",
+      "this": "Den här enheten",
+      "lastUsed": "Senast använd {{when}}",
+      "confirmSignOut": "Logga ut ”{{name}}”?"
+    },
+    "version": "Matinee-server {{version}} · API v{{api}}",
+    "home": {
+      "title": "Hemnätverk",
+      "requireSignIn": "Kräv inloggning hemma",
+      "required": "Alla loggar in, hemma och borta.",
+      "open": "Telefoner, TV-apparater och webbläsare i ditt hemnätverk kan titta utan att logga in. De delar ett Hem-konto och kan inte ändra något. Borta från hemmet loggar alla in."
+    },
+    "remote": {
+      "title": "Fjärråtkomst",
+      "publicURL": "Borta från hemmet ansluter apparna till <url>{{url}}</url>, adressen servern konfigurerades med.",
+      "toggle": "Titta borta från hemmet",
+      "hint": "Matinee ber din router att öppna en port och skaffar ett certifikat så att apparna ansluter säkert var som helst. Alla loggar in utifrån.",
+      "working": "Öppnar en port i routern och skaffar ett certifikat…",
+      "ready": "Apparna når servern på <url>{{url}}</url> när de är borta från hemmet.",
+      "router": "Din router öppnade porten via {{router}}.",
+      "pickUp": "De hämtar den här adressen nästa gång de är i ditt hemnätverk.",
+      "sharedAddress": "Matinee kan inte ta sig runt det här på egen hand än.",
+      "retry": "Matinee försöker igen varje halvtimme."
+    },
+    "playback": {
+      "title": "Uppspelning",
+      "autoPlay": "Spela nästa avsnitt",
+      "autoPlayHint": "När eftertexterna börjar spelas nästa avsnitt efter en nedräkning på 10 sekunder som du kan avbryta.",
+      "binge": "Hoppa över nedräkningen",
+      "bingeHint": "Gå direkt till nästa avsnitt när eftertexterna börjar. Efter tre i rad utan att du rört något får du frågan om du fortfarande tittar."
+    },
+    "trailers": {
+      "title": "Trailers",
+      "remote": "Trailers från YouTube",
+      "remoteOn": "Filmer och serier erbjuder sina trailers från TMDB, som spelas från YouTube. Trailerfiler bredvid dina medier visas alltid också.",
+      "remoteOff": "Bara trailerfiler bredvid dina medier visas, som ”Movie (2020)-trailer.mkv” eller allt i en Trailers-mapp."
+    },
+    "transcoding": {
+      "title": "Omkodning",
+      "intro": "Filer som en enhet inte kan spela som de är konverteras medan du tittar. En GPU gör det snabbare och belastar servern mindre.",
+      "convertingWith": "Konverterar med",
+      "active": "{{name}}.",
+      "activeOn": "{{name}} på {{detail}}.",
+      "fullGPU": "Video avkodas, skalas om och kodas på GPU:n.",
+      "encodeOnly": "Video kodas på GPU:n och avkodas på CPU:n.",
+      "fallback": "Om GPU:n inte klarar en fil spelas den via CPU:n i stället.",
+      "testing": "Testar serverns GPU…",
+      "cpuOff": "CPU:n. Hårdvaruomkodning är avstängd.",
+      "cpuFailed": "CPU:n, eftersom acceleratorn du valde inte fungerade på den här servern.",
+      "cpuNoGPU": "CPU:n. Ingen GPU på den här servern klarade testet.",
+      "hardware": "Hårdvaruacceleration",
+      "auto": "Automatiskt: den bästa som fungerar",
+      "off": "Av: använd alltid CPU:n",
+      "notFound": "{{name}} (finns inte på den här servern)",
+      "accelerator": {
+        "nvenc": "NVIDIA NVENC",
+        "vaapi": "VAAPI (AMD och Intel på Linux)",
+        "qsv": "Intel Quick Sync",
+        "videotoolbox": "VideoToolbox (Mac)",
+        "amf": "AMD AMF (Windows)",
+        "v4l2m2m": "V4L2 (Raspberry Pi)"
+      }
+    }
+  },
+  "language": {
+    "title": "Språk",
+    "label": "Visa Matinee på",
+    "hint": "Ditt språk följer med dig till Matinee-apparna på telefonen och TV:n. Titlar och beskrivningar kommer också på det, där TMDB har dem.",
+    "guestHint": "Alla hemma utan konto delar det här språket.",
+    "automatic": "Automatiskt ({{language}})",
+    "machine": "Det här språket är maskinöversatt, så vissa ord kan låta konstiga.",
+    "help": "Hjälp till att förbättra det"
+  }
+}

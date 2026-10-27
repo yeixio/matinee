@@ -1,0 +1,310 @@
+{
+  "duration": {
+    "minutes": "{{minutes}} منٹ",
+    "hoursMinutes": "{{hours}} گھنٹے {{minutes}} منٹ"
+  },
+  "episodeCode": "سیزن {{season}} · قسط {{episode}}",
+  "seasonN": "سیزن {{season}}",
+  "specials": "خصوصی اقساط",
+  "media": {
+    "mono": "مونو",
+    "stereo": "اسٹیریو",
+    "lossless": "لاس لیس",
+    "hiRes": "Hi-Res",
+    "dolbyVisionProfile": "Dolby Vision پروفائل {{profile}}",
+    "withBase": "{{format}}، دوسری اسکرینوں کے لیے {{base}} کے ساتھ",
+    "bitDepth": "{{bits}} بٹ",
+    "forced": "لازمی",
+    "sdh": "SDH"
+  },
+  "people": {
+    "episodes_one": "{{count}} قسط",
+    "episodes_other": "{{count}} اقساط",
+    "lines": {
+      "createdBy": "تخلیق کار",
+      "director_one": "ہدایت کار",
+      "director_other": "ہدایت کار",
+      "writer_one": "مصنف",
+      "writer_other": "مصنفین",
+      "basedOn": "ماخوذ از",
+      "music": "موسیقی"
+    },
+    "died": "وفات {{date}}",
+    "bornIn": "پیدائش {{place}} میں",
+    "bornOnIn": "پیدائش {{date}}، {{place}} میں",
+    "bornOn": "پیدائش {{date}}",
+    "dollars": "${{amount}}"
+  },
+  "facts": {
+    "firstAired": "پہلی نشریات",
+    "released": "ریلیز",
+    "aired": "نشر ہوا",
+    "ended": "ختم",
+    "status": "حیثیت",
+    "seasons": "سیزن",
+    "seasonsValue_one": "{{seasons}} ({{count}} قسط)",
+    "seasonsValue_other": "{{seasons}} ({{count}} اقساط)",
+    "rated": "عمر کی درجہ بندی",
+    "genres": "اصناف",
+    "originalTitle": "اصل عنوان",
+    "originalLanguage": "اصل زبان",
+    "spokenLanguages": "بولی جانے والی زبانیں",
+    "studio_one": "اسٹوڈیو",
+    "studio_other": "اسٹوڈیوز",
+    "network_one": "نیٹ ورک",
+    "network_other": "نیٹ ورکس",
+    "country_one": "ملک",
+    "country_other": "ممالک",
+    "collection": "مجموعہ",
+    "budget": "بجٹ",
+    "boxOffice": "باکس آفس"
+  },
+  "showStatus": {
+    "Returning Series": "جاری سیریز",
+    "Ended": "ختم ہو چکی",
+    "Canceled": "منسوخ",
+    "In Production": "زیرِ تیاری",
+    "Planned": "منصوبہ بند",
+    "Pilot": "پائلٹ"
+  },
+  "genres": {
+    "Action": "ایکشن",
+    "Adventure": "مہم جوئی",
+    "Animation": "اینیمیشن",
+    "Comedy": "کامیڈی",
+    "Crime": "جرائم",
+    "Documentary": "دستاویزی",
+    "Drama": "ڈراما",
+    "Family": "خاندانی",
+    "Fantasy": "فینٹسی",
+    "History": "تاریخ",
+    "Horror": "ہارر",
+    "Music": "موسیقی",
+    "Mystery": "پراسرار",
+    "Romance": "رومانس",
+    "Science Fiction": "سائنس فکشن",
+    "Thriller": "تھرلر",
+    "War": "جنگ",
+    "Western": "ویسٹرن",
+    "Reality": "ریئلٹی",
+    "TV Movie": "ٹی وی فلم",
+    "Action & Adventure": "ایکشن اور مہم جوئی",
+    "Kids": "بچے",
+    "News": "خبریں",
+    "Sci-Fi & Fantasy": "سائنس فکشن اور فینٹسی",
+    "Soap": "سوپ",
+    "Talk": "ٹاک شو",
+    "War & Politics": "جنگ اور سیاست"
+  },
+  "jobs": {
+    "Director": "ہدایت کار",
+    "Creator": "تخلیق کار",
+    "Screenplay": "اسکرین پلے",
+    "Writer": "مصنف",
+    "Teleplay": "ٹیلی پلے",
+    "Story": "کہانی",
+    "Novel": "ناول",
+    "Characters": "کردار",
+    "Author": "مصنف",
+    "Original Music Composer": "اصل موسیقی کے موسیقار",
+    "Music": "موسیقی",
+    "Director of Photography": "ڈائریکٹر آف فوٹوگرافی",
+    "Editor": "ایڈیٹر",
+    "Producer": "پروڈیوسر",
+    "Executive Producer": "ایگزیکٹو پروڈیوسر",
+    "Casting": "کاسٹنگ",
+    "Production Design": "پروڈکشن ڈیزائن",
+    "Costume Design": "ملبوسات کا ڈیزائن"
+  },
+  "kids": {
+    "littleKids": "چھوٹے بچے",
+    "kids": "بچے",
+    "teens": "نوعمر",
+    "andYounger": "{{ratings}} اور اس سے کم"
+  },
+  "sort": {
+    "title": "عنوان",
+    "added": "شامل کرنے کی تاریخ",
+    "released": "ریلیز کی تاریخ",
+    "year": "سال",
+    "rating": "ریٹنگ",
+    "runtime": "دورانیہ",
+    "lastPlayed": "آخری بار دیکھا"
+  },
+  "watched": {
+    "unwatched": "نہ دیکھے گئے",
+    "inProgress": "جاری",
+    "watched": "دیکھے گئے",
+    "notStarted": "شروع نہیں ہوئے"
+  },
+  "genreRows": {
+    "Action": "ایکشن سے بھرپور",
+    "Adventure": "مہم جوئیاں",
+    "Animation": "پسندیدہ اینیمیشن",
+    "Comedy": "کامیڈیز",
+    "Crime": "جرائم کی کہانیاں",
+    "Documentary": "دستاویزی فلمیں",
+    "Drama": "ڈرامے",
+    "Family": "پورے خاندان کے لیے",
+    "Fantasy": "فینٹسی کی دنیائیں",
+    "Horror": "ہارر",
+    "Mystery": "پراسرار کہانیاں",
+    "Romance": "رومانس",
+    "Science Fiction": "پسندیدہ سائنس فکشن",
+    "Thriller": "تھرلرز",
+    "War": "جنگ کی کہانیاں",
+    "Western": "ویسٹرنز"
+  },
+  "count": {
+    "episodes_one": "{{count}} قسط",
+    "episodes_other": "{{count}} اقساط",
+    "seasons_one": "{{count}} سیزن",
+    "seasons_other": "{{count}} سیزن",
+    "albums_one": "{{count}} البم",
+    "albums_other": "{{count}} البمز",
+    "tracks_one": "{{count}} ٹریک",
+    "tracks_other": "{{count}} ٹریکس",
+    "titles_one": "{{count}} عنوان",
+    "titles_other": "{{count}} عنوانات"
+  },
+  "awards": {
+    "academy": {
+      "won_one": "{{count}} اکیڈمی ایوارڈ جیتا",
+      "won_other": "{{count}} اکیڈمی ایوارڈز جیتے",
+      "nominated_one": "{{count}} اکیڈمی ایوارڈ کے لیے نامزد",
+      "nominated_other": "{{count}} اکیڈمی ایوارڈز کے لیے نامزد"
+    },
+    "emmy": {
+      "won_one": "{{count}} پرائم ٹائم ایمی جیتا",
+      "won_other": "{{count}} پرائم ٹائم ایمیز جیتے",
+      "nominated_one": "{{count}} پرائم ٹائم ایمی کے لیے نامزد",
+      "nominated_other": "{{count}} پرائم ٹائم ایمیز کے لیے نامزد"
+    },
+    "globe": {
+      "won_one": "{{count}} گولڈن گلوب جیتا",
+      "won_other": "{{count}} گولڈن گلوبز جیتے",
+      "nominated_one": "{{count}} گولڈن گلوب کے لیے نامزد",
+      "nominated_other": "{{count}} گولڈن گلوبز کے لیے نامزد"
+    },
+    "bafta": {
+      "won_one": "{{count}} بافٹا جیتا",
+      "won_other": "{{count}} بافٹا جیتے",
+      "nominated_one": "{{count}} بافٹا کے لیے نامزد",
+      "nominated_other": "{{count}} بافٹا کے لیے نامزد"
+    },
+    "wins_one": "{{count}} جیت",
+    "wins_other": "{{count}} جیتیں",
+    "nominations_one": "{{count}} نامزدگی",
+    "nominations_other": "{{count}} نامزدگیاں",
+    "winsAndNominations": "{{wins}} اور {{nominations}}"
+  },
+  "departments": {
+    "Acting": "اداکار",
+    "Directing": "ہدایت کاری",
+    "Writing": "تحریر",
+    "Production": "پروڈکشن",
+    "Sound": "آواز",
+    "Camera": "کیمرا",
+    "Editing": "ایڈیٹنگ",
+    "Art": "آرٹ",
+    "Crew": "عملہ",
+    "Visual Effects": "بصری اثرات",
+    "Costume & Make-Up": "ملبوسات اور میک اپ",
+    "Lighting": "روشنی",
+    "Creator": "تخلیق کار"
+  },
+  "starters": {
+    "recent": "حال ہی میں شامل",
+    "unwatched": "نہ دیکھے گئے",
+    "tonight": "آج رات کے لیے مختصر"
+  },
+  "filter": {
+    "decade": "{{decade}} کی دہائی",
+    "yearRange": "{{from}}–{{to}}",
+    "yearOrLater": "{{year}} یا بعد",
+    "yearOrEarlier": "{{year}} یا پہلے",
+    "lastYear": "پچھلا سال",
+    "lastWeeks_one": "پچھلا ہفتہ",
+    "lastWeeks_other": "پچھلے {{count}} ہفتے",
+    "lastDays_one": "پچھلا {{count}} دن",
+    "lastDays_other": "پچھلے {{count}} دن",
+    "runtime": {
+      "titles": {
+        "between": "{{min}}–{{max}} منٹ",
+        "over": "{{min}} منٹ سے زیادہ",
+        "under": "{{max}} منٹ سے کم"
+      },
+      "episodes": {
+        "between": "اقساط {{min}}–{{max}} منٹ",
+        "over": "اقساط {{min}} منٹ سے زیادہ",
+        "under": "اقساط {{max}} منٹ سے کم"
+      }
+    }
+  },
+  "themes": {
+    "clean": {
+      "name": "صاف",
+      "description": "سادہ سفید، ایک نیلا، کوئی سیرف نہیں۔ بس پوسٹر۔"
+    },
+    "dark": {
+      "name": "گہرا",
+      "description": "اصلی سیاہ اور صاف سفید۔ آنکھوں کے لیے آرام دہ، اور OLED اسکرین کے لیے بھی۔"
+    },
+    "drive-in": {
+      "name": "ڈرائیو اِن",
+      "description": "ستر کی دہائی کے بھورے رنگ اور سینما بورڈ کا کہربائی رنگ، جیسے ڈرائیو اِن میں ایک رات۔"
+    },
+    "high-contrast": {
+      "name": "زیادہ کنٹراسٹ",
+      "description": "سیاہ، سفید اور چمکدار پیلا، تاکہ کمرے کے دوسرے کونے سے بھی متن صاف پڑھا جائے۔"
+    },
+    "light": {
+      "name": "ہلکا",
+      "description": "کورل کے ساتھ گرم کاغذی سفید، روشن کمرے کے لیے۔"
+    },
+    "matinee": {
+      "name": "Matinee",
+      "description": "کورل جھلک کے ساتھ تھیٹر کا گرم اندھیرا۔ گھر کا اپنا انداز۔"
+    },
+    "sci-fi": {
+      "name": "سائنس فکشن",
+      "description": "گہرے خلا کا نیوی رنگ، نیون سیان چمک اور مستقبل جیسا ٹائپ فیس۔"
+    }
+  },
+  "every": {
+    "seconds_one": "{{count}} سیکنڈ",
+    "seconds_other": "{{count}} سیکنڈ",
+    "minutes_one": "{{count}} منٹ",
+    "minutes_other": "{{count}} منٹ",
+    "hours_one": "{{count}} گھنٹہ",
+    "hours_other": "{{count}} گھنٹے"
+  },
+  "avatars": {
+    "coral": "کورل",
+    "amber": "کہربائی",
+    "lime": "لائم",
+    "teal": "ٹیل",
+    "sky": "آسمانی نیلا",
+    "violet": "بنفشی",
+    "pink": "گلابی",
+    "slate": "سلیٹی"
+  },
+  "day": {
+    "today": "آج",
+    "tomorrow": "کل (آنے والا)",
+    "yesterday": "کل (گزرا ہوا)"
+  },
+  "release": {
+    "cinemas": "سینما گھروں میں",
+    "digital": "ڈیجیٹل ریلیز",
+    "physical": "ڈسک پر",
+    "airs": "نشر ہوگا"
+  },
+  "issue": {
+    "video": "تصویر",
+    "audio": "آواز",
+    "subtitles": "سب ٹائٹلز",
+    "wrong": "غلط عنوان",
+    "other": "کچھ اور"
+  }
+}

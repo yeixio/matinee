@@ -1,0 +1,684 @@
+{
+  "loading": "Betöltés",
+  "nav": {
+    "home": "Kezdőlap",
+    "watchList": "Megnézendők",
+    "collections": "Gyűjtemények",
+    "scanning": "Keresés a mappákban",
+    "search": "Keresés",
+    "comingSoon": "Hamarosan",
+    "requests": "Kérések",
+    "signIn": "Bejelentkezés",
+    "settings": "Beállítások",
+    "switchProfile": "Profilváltás",
+    "signOut": "Kijelentkezés"
+  },
+  "cantReachServer": "A szerver nem érhető el. Újrapróbálás…",
+  "player": {
+    "subtitlesFailed": "Nem sikerült betölteni ezeket a feliratokat",
+    "off": "Ki",
+    "convertsVideo": "Videót alakít át",
+    "file": "Fájl",
+    "seek": "Ugrás",
+    "previous": "Előző",
+    "pause": "Szünet",
+    "next": "Következő",
+    "closePlayer": "Lejátszó bezárása",
+    "failedDetail": "A lejátszás nem sikerült. Lehet, hogy a fájl sérült, vagy olyan formátumú, amit a szerver nem tud átalakítani.",
+    "failed": "A lejátszás nem sikerült",
+    "back10": "Vissza 10 másodpercet",
+    "forward10": "Előre 10 másodpercet",
+    "unmute": "Hang be",
+    "mute": "Némítás",
+    "converting": "Átalakítás",
+    "fullscreen": "Teljes képernyő"
+  },
+  "somethingWentWrong": "Valami hiba történt",
+  "oneMoment": "Egy pillanat…",
+  "auth": {
+    "username": "Felhasználónév",
+    "password": "Jelszó",
+    "signIn": "Bejelentkezés",
+    "welcomeBack": "Üdv újra.",
+    "setUp": "A Matinee beállítása",
+    "setUpHint": "Hozd létre a rendszergazdai fiókot. A családot és a barátokat később is hozzáadhatod.",
+    "createAccount": "Fiók létrehozása"
+  },
+  "home": {
+    "welcome": "Üdv a Matinee-ben",
+    "welcomeHint": "Kezdésként adj hozzá egy filmeket, sorozatokat vagy zenét tartalmazó mappát.",
+    "addLibrary": "Könyvtár hozzáadása",
+    "continueWatching": "Nézd tovább",
+    "recentlyAdded": "Nemrég hozzáadva",
+    "newReleases": "Új megjelenések",
+    "scanning": "A könyvtárad átvizsgálása",
+    "scanningHint": "Az új címek itt jelennek meg, amint megtaláljuk őket.",
+    "removeNamed": "{{title}} eltávolítása a Nézd tovább sorból",
+    "remove": "Eltávolítás a Nézd tovább sorból"
+  },
+  "hero": {
+    "upNext": "Következik",
+    "justAdded": "Épp most hozzáadva",
+    "details": "Részletek"
+  },
+  "item": {
+    "resume": "Folytatás",
+    "resumeLeft": "Folytatás · még {{left}}",
+    "play": "Lejátszás",
+    "resumeFrom": "Folytatás innen: {{time}}",
+    "resumeEpisode": "{{episode}}. rész folytatása",
+    "playEpisode": "{{episode}}. rész lejátszása",
+    "shuffle": "Keverés",
+    "seasons": "Évadok",
+    "albums": "Albumok",
+    "episodes": "Részek"
+  },
+  "row": {
+    "back": "Vissza",
+    "forward": "Előre"
+  },
+  "artwork": {
+    "fetching": "Részletek lekérése…"
+  },
+  "close": "Bezárás",
+  "file": {
+    "audio": "Hang",
+    "subtitles": "Feliratok",
+    "title": "Fájl részletei",
+    "notYet": "A Matinee még nem nézte meg részletesen ezt a fájlt. A háttérben lassan minden fájlt beolvas, így ez magától kitöltődik.",
+    "unreadable": "A Matinee nem tudta beolvasni ezt a fájlt: {{error}}",
+    "stale": "A fájl megváltozott a rögzítés óta; hamarosan újra megnézi.",
+    "file": "Fájl",
+    "location": "Hely",
+    "size": "Méret",
+    "format": "Formátum",
+    "length": "Hossz",
+    "bitrate": "Bitráta",
+    "chapters": "Fejezetek",
+    "video": "Videó",
+    "videoN": "{{n}}. videó",
+    "codec": "Kodek",
+    "resolution": "Felbontás",
+    "frameRate": "Képkockasebesség",
+    "fps": "{{rate}} fps",
+    "bitDepth": "Bitmélység",
+    "dynamicRange": "Dinamikatartomány",
+    "dvProfile": "{{profile}}. profil",
+    "dvProfileLevel": "{{profile}}. profil, {{level}}. szint",
+    "fallback": "{{format}} tartalék",
+    "color": "Szín",
+    "trackN": "{{n}}. sáv",
+    "default": "Alapértelmezett",
+    "forced": "Kényszerített",
+    "commentary": "Kommentár",
+    "audioDescription": "Hangos leírás",
+    "separateFile": "Külön fájl",
+    "inFile": "A fájlban",
+    "sdh": "SDH",
+    "recorded": "Rögzítve: {{when}}",
+    "queued": "Sorban áll; ez következik.",
+    "analyzeAgain": "Újraelemzés"
+  },
+  "listSeparator": ", ",
+  "credits": {
+    "seriesCast": "A sorozat szereplői",
+    "cast": "Szereplők",
+    "guestStars": "Vendégszereplők",
+    "starring": "Főszereplők",
+    "moreDetails": "További részletek",
+    "crew": "Stáb",
+    "about": "Névjegy",
+    "awards": "Díjak",
+    "won": "Nyert",
+    "nominated": "Jelölve",
+    "wonIn": "Nyert: {{year}}",
+    "nominatedIn": "Jelölve: {{year}}",
+    "showAll": "Mind a(z) {{count}} megjelenítése",
+    "awardsSource": "Díjak a Wikidatából."
+  },
+  "cancel": "Mégse",
+  "upNext": {
+    "upNext": "Következik",
+    "stillWatching": "Még nézed?",
+    "youMightLike": "Ez is tetszhet",
+    "playingIn": "Indul {{seconds}} múlva",
+    "playNow": "Lejátszás most",
+    "keepWatching": "Nézem tovább",
+    "haveALook": "Nézz bele",
+    "stop": "Leállítás"
+  },
+  "goBack": "Vissza",
+  "back": "Vissza",
+  "trailer": {
+    "trailer": "Előzetes",
+    "named": "{{title}} – előzetes",
+    "wontPlay": "Ez az előzetes nem játszható le."
+  },
+  "watchList": {
+    "on": "A megnézendőid között",
+    "add": "Hozzáadás a megnézendőkhöz",
+    "empty": "Még nincs semmi mentve",
+    "emptyHint": "Nyiss meg egy filmet vagy sorozatot, és válaszd a Megnézendők lehetőséget, hogy későbbre itt legyen. A filmek lekerülnek a listáról, ha megnézted őket.",
+    "browse": "Böngészés"
+  },
+  "related": {
+    "moreLikeThis": "Hasonlók"
+  },
+  "boxSet": {
+    "notFound": "A filmsorozat nem található",
+    "notFoundHint": "Egyik címe sincs most könyvtárban.",
+    "boxSet": "Filmsorozat"
+  },
+  "search": {
+    "placeholder": "Filmek, sorozatok, előadók, albumok…",
+    "nothing": "Semmi sem egyezik ezzel: „{{q}}”",
+    "lookingForNew": "Valami újat keresel?",
+    "addIt": "Hozzáadás",
+    "askForIt": "Kérd"
+  },
+  "person": {
+    "notFound": "A személy nem található",
+    "showLess": "Kevesebb",
+    "readMore": "Tovább",
+    "inLibrary": "A könyvtáradban"
+  },
+  "library": {
+    "library": "Könyvtár",
+    "matches_one": "{{count}} találat",
+    "matches_other": "{{count}} találat",
+    "scanning": "Átvizsgálás…",
+    "nothingUnwatched": "Itt nincs semmi, amit ne láttál volna",
+    "nothingMatches": "Semmi sem egyezik",
+    "seenEverything": "Mindent láttál ebben a könyvtárban.",
+    "clearFilters": "Szűrők törlése",
+    "appearAsFound": "A címek megjelennek, ahogy előkerülnek.",
+    "noMedia": "A Matinee itt keresett: {{paths}}, de nem talált médiát."
+  },
+  "nothingHereYet": "Még nincs itt semmi",
+  "collection": {
+    "notFound": "A gyűjtemény nem található",
+    "notFoundHint": "Lehet, hogy törölték.",
+    "smart": "Okos gyűjtemény",
+    "collection": "Gyűjtemény",
+    "shuffledDaily": "Naponta keverve",
+    "editRules": "Szabályok szerkesztése",
+    "edit": "Szerkesztés",
+    "delete": "Gyűjtemény törlése",
+    "deleteConfirm": "Törlöd: {{name}}? A címek a könyvtáradban maradnak.",
+    "nothingMatchesYet": "Még semmi sem egyezik",
+    "joinByRules": "A címek maguktól bekerülnek, ha megfelelnek a szabályoknak.",
+    "howToAdd": "Nyiss meg egy filmet vagy sorozatot, és a Gyűjtemények lehetőséggel add hozzá."
+  },
+  "collections": {
+    "newShort": "Új",
+    "new": "Új gyűjtemény",
+    "newSmartShort": "Új okos",
+    "newSmart": "Új okos gyűjtemény",
+    "none": "Még nincsenek gyűjtemények",
+    "noneHint": "Egy okos gyűjtemény szabályok alapján tölti meg magát, például nem látott 80-as évekbeli akcióval. A filmsorozatok akkor jelennek meg itt, ha két címük már könyvtárban van.",
+    "yours": "Saját",
+    "shared": "Megosztott",
+    "forEveryone": "Gyűjtemények mindenkinek",
+    "boxSets": "Filmsorozatok",
+    "sort": {
+      "own": "Saját sorrend",
+      "title": "Cím",
+      "added": "Hozzáadás dátuma",
+      "released": "Megjelenés dátuma",
+      "year": "Év",
+      "rating": "Értékelés",
+      "runtime": "Játékidő",
+      "lastPlayed": "Legutóbb lejátszva",
+      "shuffle": "Napi keverés"
+    },
+    "smartShort": "Okos",
+    "editNamed": "{{name}} szerkesztése",
+    "name": "Név",
+    "smartExample": "Nem látott 80-as évekbeli akció",
+    "manualExample": "Filmest",
+    "rules": "Szabályok",
+    "rulesHint": "Az ezeknek a szűrőknek megfelelő címek maguktól bekerülnek, ahogy a könyvtár változik.",
+    "shuffleDaily": "Keverés minden nap",
+    "order": "Sorrend",
+    "orderAdded": "A címek hozzáadásának sorrendje",
+    "direction": "Irány",
+    "usual": "Szokásos",
+    "ascending": "Növekvő",
+    "descending": "Csökkenő",
+    "showAsRow": "Megjelenítés sorként",
+    "onHome": "A kezdőlapon",
+    "onLibraryPage": "Egy könyvtároldalon",
+    "shareWithEveryone": "Megosztás mindenkivel ezen a szerveren",
+    "saveAs": "Mentés gyűjteményként"
+  },
+  "save": "Mentés",
+  "create": "Létrehozás",
+  "loadingDots": "Betöltés…",
+  "filters": {
+    "title": "Szűrők",
+    "inUse_one": "Szűrők, {{count}} használatban",
+    "inUse_other": "Szűrők, {{count}} használatban",
+    "sortBy": "Rendezés",
+    "highestFirst": "Legmagasabb elöl",
+    "lowestFirst": "Legalacsonyabb elöl",
+    "highestFirstSwitch": "Legmagasabb elöl; váltás legalacsonyabb elölre",
+    "lowestFirstSwitch": "Legalacsonyabb elöl; váltás legmagasabb elölre",
+    "not": "Nem {{label}}",
+    "remove": "{{label}} eltávolítása",
+    "chip": {
+      "words": "„{{q}}”",
+      "directedBy": "Rendezte: {{name}}",
+      "with": "Szereplő: {{name}}",
+      "releasedWithin": "Megjelent: {{within}}",
+      "releasedAfter": "Megjelent {{date}} után",
+      "releasedBefore": "Megjelent {{date}} előtt",
+      "addedWithin": "Hozzáadva: {{within}}",
+      "addedAfter": "Hozzáadva {{date}} után",
+      "addedBefore": "Hozzáadva {{date}} előtt",
+      "ratingMin": "Értékelés {{rating}}+",
+      "ratingMax": "Értékelés legfeljebb {{rating}}",
+      "certification": "Értékelés {{rating}}",
+      "watchList": "A megnézendőim között"
+    },
+    "collection": "Gyűjtemény",
+    "active": "Használt szűrők",
+    "clearAll": "Összes törlése",
+    "more_one": "még {{count}}",
+    "more_other": "még {{count}}",
+    "any": "Bármelyik",
+    "all": "Mind",
+    "anyTime": "Bármikor",
+    "runtime": {
+      "under30": "30 percnél rövidebb",
+      "30to60": "30–60 perc",
+      "overHour": "Egy óránál hosszabb",
+      "under90": "90 percnél rövidebb",
+      "90to120": "90 perc – 2 óra",
+      "over2Hours": "2 óránál hosszabb"
+    },
+    "wordsInTitle": "Szavak a címben",
+    "onlyWatchList": "Csak a megnézendőim",
+    "fromYear": "Évtől",
+    "toYear": "Évig",
+    "from": "Ettől",
+    "to": "eddig",
+    "toPlaceholder": "Eddig",
+    "lastWeek": "Elmúlt hét",
+    "last30Days": "Elmúlt 30 nap",
+    "last3Months": "Elmúlt 3 hónap",
+    "lastYear": "Elmúlt év",
+    "ratingAtLeast": "{{rating}}+",
+    "findPerson": "Személy keresése",
+    "nobody": "Ilyen nevű személy nincs ebben a könyvtárban.",
+    "showResults": "Találatok mutatása",
+    "section": {
+      "title": "Cím",
+      "watched": "Látott",
+      "genre": "Műfaj",
+      "year": "Év",
+      "firstAired": "Első adás",
+      "released": "Megjelenés",
+      "added": "Hozzáadva",
+      "rating": "Értékelés",
+      "episodeLength": "Részek hossza",
+      "runtime": "Játékidő",
+      "quality": "Minőség",
+      "network": "Csatorna vagy stúdió",
+      "studio": "Stúdió",
+      "ageRating": "Korhatár",
+      "language": "Eredeti nyelv",
+      "country": "Ország",
+      "creator": "Alkotó vagy rendező",
+      "director": "Rendező",
+      "people": "Szereplők és stáb"
+    }
+  },
+  "appearance": {
+    "title": "Megjelenés",
+    "useServerTheme": "A szerver témájának használata ({{name}})",
+    "guestHint": "Mindenki, aki otthon fiók nélkül néz, ezt a témát használja.",
+    "hint": "A témád követ a telefonos és tévés Matinee-alkalmazásokba.",
+    "theme": "Téma",
+    "preview": {
+      "tonight": "Ma este",
+      "trailer": "Előzetes"
+    },
+    "serverTheme": "Szervertéma",
+    "serverThemeHint": "Ezt látja mindenki, amíg nem választ sajátot, és a bejelentkezési oldalon.",
+    "custom": "{{name}} (egyéni)",
+    "addYourOwn": "Saját téma hozzáadásához tegyél egy témafájlt a szerver adatmappájában lévő <code>themes</code> mappába.",
+    "howTo": "Hogyan készíts témát",
+    "skipped": "Kihagyva: {{problem}}"
+  },
+  "newFiles": {
+    "title": "Új fájlok",
+    "intro": "A Matinee észreveszi a hozzáadott, átnevezett vagy törölt fájlokat, és néhány másodperccel a másolás befejezése után frissíti a könyvtárat.",
+    "watch": "Új fájlok figyelése",
+    "summary": {
+      "some": "Néhány mappa ellenőrzése {{every}}ként",
+      "watching": "Új fájlok figyelése",
+      "polling": "Új fájlok ellenőrzése {{every}}ként",
+      "pollingShare": "Új fájlok ellenőrzése {{every}}ként (hálózati megosztás)",
+      "off": "Az új fájlok nincsenek figyelve"
+    },
+    "mode": {
+      "auto": {
+        "label": "Automatikus",
+        "hint": "Azonnal a szerver saját lemezein. A hálózati megosztások (SMB, NFS) nem jelzik a változásokat, ezért a Matinee {{every}}ként ellenőrzi őket."
+      },
+      "poll": {
+        "label": "Ellenőrzés időzítővel",
+        "hint": "Minden mappa ellenőrzése {{every}}ként. Ezt válaszd, ha a lemezen lévő új fájlok maguktól nem jelennek meg."
+      },
+      "off": {
+        "label": "Ki",
+        "hint": "Az új fájlok a következő teljes átvizsgáláskor jelennek meg, vagy ha megnyomod az Átvizsgálás gombot."
+      }
+    },
+    "rescan": "Minden könyvtár teljes újravizsgálata is megtörténik {{every}}ként, ami minden mást is elkap, például egy megosztáson helyben lecserélt fájlt.",
+    "rescanOff": "A teljes átvizsgálás ki van kapcsolva ezen a szerveren (MATINEE_SCAN_INTERVAL=0)."
+  },
+  "analysis": {
+    "title": "Médiaelemzés",
+    "intro": "A Matinee lassan beolvas minden fájlt a minőség, a hang és a nyelvek miatt, és újra, ha egy fájl megváltozik.",
+    "state": {
+      "lookingAt": "Vizsgálja: {{file}}",
+      "working": "Dolgozik",
+      "waiting": "Vár, amíg a lejátszás véget ér",
+      "slowDisk": "A fájlok lassan olvashatók; néhány perc pihenő",
+      "allDone": "Minden fájl elemezve",
+      "upToDate": "Naprakész",
+      "paused": "Szüneteltetve"
+    },
+    "progress": "{{done}}/{{total}}",
+    "unreadable_one": "{{count}} fájlt nem sikerült beolvasni.",
+    "unreadable_other": "{{count}} fájlt nem sikerült beolvasni.",
+    "speed": "Sebesség",
+    "mode": {
+      "gentle": {
+        "label": "Kíméletes",
+        "hint": "Néhány másodpercenként egy fájl, és egy sem, amíg a szerver valamit lejátszáshoz alakít át."
+      },
+      "normal": {
+        "label": "Normál",
+        "hint": "Fájlok egymás után, továbbra is a legalacsonyabb prioritással."
+      },
+      "off": {
+        "label": "Ki",
+        "hint": "Szüneteltetve, amíg újra be nem kapcsolod."
+      }
+    }
+  },
+  "profileSettings": {
+    "title": "Profilok",
+    "intro": "A profilok egy bejelentkezést használnak, de saját haladásuk, megnézendőik és témájuk van. A gyerekprofilok csak azt látják, amit engedsz. A PIN-kód a profilt vagy magát a fiókot a tulajdonosánál tartja.",
+    "pinFor": "4 számjegyű PIN-kód ehhez: {{name}}",
+    "homeDevices": "Az otthoni hálózat be nem jelentkezett eszközei",
+    "account": "Fiók",
+    "removePin": "PIN-kód eltávolítása",
+    "addPin": "PIN-kód hozzáadása",
+    "hasPin": "Van PIN-kódja",
+    "edit": "{{name}} szerkesztése",
+    "remove": "{{name}} eltávolítása",
+    "confirmRemove": "Eltávolítod: {{name}}? A haladás és a megnézendők is törlődnek.",
+    "add": "Profil hozzáadása",
+    "name": "Név",
+    "newPin": "Új PIN-kód",
+    "pinOptional": "PIN-kód (nem kötelező)",
+    "unchanged": "Változatlan",
+    "fourDigits": "4 számjegy",
+    "removeThePin": "PIN-kód eltávolítása",
+    "colour": "Szín",
+    "kidsMode": "Gyerekmód",
+    "kidsOff": "Ki: mindent lát",
+    "kidsLevel": "{{name}}: {{ratings}}",
+    "kidsLibraries": "Mit lát ez a profil az egyes könyvtárakban. A Korhatár szerint elrejti a(z) {{level}} szint feletti és a korhatár nélküli címeket. A gyerekprofilok nem nyithatják meg a Beállításokat, és nem kérhetnek.",
+    "libraryMode": {
+      "hidden": "Rejtett",
+      "rated": "Korhatár szerint",
+      "all": "Minden"
+    }
+  },
+  "report": {
+    "thanks": "Köszönjük, egy rendszergazda megnézi.",
+    "button": "Probléma jelentése",
+    "whatsWrong": "Mi a baj ezzel: {{title}}?",
+    "details": "Részletek (nem kötelező)",
+    "detailsExample": "Pl.: 20 perc után nincs hang",
+    "send": "Küldés"
+  },
+  "quality": {
+    "label": "Minőség",
+    "forShow": "A sorozat minősége",
+    "confirm": "Váltás erre: {{name}}? A(z) {{app}} megfelelő példányokat keres.",
+    "searching": "Keresés…"
+  },
+  "upcoming": {
+    "nothingYet": "Még nincs mit mutatni",
+    "connect": "Csatlakoztasd a Radarrt vagy a Sonarrt, hogy lásd a közeledő filmeket és részeket.",
+    "openSettings": "Beállítások megnyitása",
+    "notConnected": "Egy rendszergazda nem csatlakoztatta a Radarrt vagy a Sonarrt ehhez a szerverhez.",
+    "intro": "A következő két hónap új részei és filmmegjelenései, amelyek még nincsenek itt.",
+    "unavailable": "A(z) {{apps}} nem válaszolt, így egyesek hiányozhatnak.",
+    "nothing": "Semmi sincs úton. Kérj valami újat a Kérések között."
+  },
+  "link": {
+    "title": "Eszköz bejelentkeztetése",
+    "intro": "Írd be a kódot, amit a telefonod vagy a tévéd mutat.",
+    "signedIn": "{{device}} bejelentkezett",
+    "ready": "Néhány másodpercen belül kész lesz.",
+    "declined": "Elutasítva",
+    "notSignedIn": "{{device}} nem lett bejelentkeztetve.",
+    "another": "Másik eszköz bejelentkeztetése",
+    "code": "Kód",
+    "next": "Tovább",
+    "wantsToSignIn": "be szeretne jelentkezni mint <name>{{name}}</name>",
+    "warning": "Csak olyan eszközt hagyj jóvá, amelyet a kezedben tartasz vagy látsz. Ugyanazt a hozzáférést kapja, mint te.",
+    "decline": "Elutasítás",
+    "approve": "Bejelentkeztetés"
+  },
+  "profiles": {
+    "whoIsWatching": "Ki néz?",
+    "signInWithAccount": "Bejelentkezés fiókkal",
+    "enterPin": "Írd be {{name}} PIN-kódját",
+    "pin": "PIN-kód",
+    "deleteDigit": "Törlés"
+  },
+  "integrations": {
+    "title": "Radarr és Sonarr",
+    "intro": "Csatlakoztasd őket, hogy mások filmeket és sorozatokat kérhessenek, lássák, mi jön hamarosan, és jelenthessék a nézett tartalmak hibáit.",
+    "connected": "Csatlakoztatva · {{url}}",
+    "notConnected": {
+      "radarr": "Nincs csatlakoztatva · filmekhez",
+      "sonarr": "Nincs csatlakoztatva · sorozatokhoz"
+    },
+    "change": "Módosítás",
+    "connect": "Csatlakoztatás",
+    "address": "Cím",
+    "apiKey": "API-kulcs",
+    "keyWhere": "{{app}} → Settings → General",
+    "saved": "Mentve",
+    "answers": "{{app}} {{version}} válaszol itt: {{url}}",
+    "quality": {
+      "radarr": "Új filmek minősége",
+      "sonarr": "Új sorozatok minősége"
+    },
+    "folder": "Mappa",
+    "confirmDisconnect": "Leválasztod: {{app}}? A benne lévő címek ott maradnak.",
+    "disconnect": "Leválasztás",
+    "testing": "Tesztelés…",
+    "test": "Teszt",
+    "whoCanAdd": "Ki adhat hozzá filmeket és sorozatokat",
+    "mode": {
+      "approve": {
+        "label": "Kérés, majd egy rendszergazda jóváhagyja",
+        "detail": "Bárki kérhet címet, akinek van fiókja. Rendszergazdára vár."
+      },
+      "auto": {
+        "label": "Azonnali hozzáadás",
+        "detail": "A kérések egyenesen a Radarrba vagy a Sonarrba kerülnek."
+      },
+      "off": {
+        "label": "Csak rendszergazdák adhatnak hozzá címeket",
+        "detail": "Mindenki más továbbra is láthatja, mi jön hamarosan, és jelenthet problémákat."
+      }
+    }
+  },
+  "requests": {
+    "tab": {
+      "ask": "Kérj valamit",
+      "requests": "Kérések",
+      "yourRequests": "A kéréseid",
+      "problems": "Problémák",
+      "yourReports": "A jelentéseid"
+    },
+    "movies": "Filmek",
+    "shows": "Sorozatok",
+    "findMovie": "Film keresése…",
+    "findShow": "Sorozat keresése…",
+    "nothingFound": "Nincs találat erre: „{{q}}”",
+    "ready": "Megnézhető",
+    "askedFor": "Kérve",
+    "onItsWay": "Úton",
+    "add": "Hozzáadás",
+    "askForIt": "Kérd",
+    "state": {
+      "pending": "Jóváhagyásra vár",
+      "approved": "Úton",
+      "declined": "Elutasítva",
+      "failed": "Nem sikerült hozzáadni"
+    },
+    "none": "Még nincsenek kérések.",
+    "retry": "Újra",
+    "approve": "Jóváhagyás",
+    "remove": "A(z) {{title}} kérés eltávolítása",
+    "removedFromLibrary": "Eltávolítva a könyvtárból",
+    "noProblems": "Senki sem jelentett problémát.",
+    "noReports": "Még nem jelentettél problémát. Használd a „Probléma jelentése” lehetőséget egy címnél.",
+    "fileReplaced": "Fájl lecserélve",
+    "closed": "Lezárva",
+    "confirmReplace": "Törlöd a(z) {{title}} fájlját, és letöltesz egy másik példányt? Az új akkor jelenik meg, ha letöltődött és a könyvtár átvizsgálása megtörtént.",
+    "replaceFile": "Fájl cseréje",
+    "close": "Lezárás"
+  },
+  "settings": {
+    "tmdbNotice": "A plakátok és leírások a <link>TMDB</link>-től származnak. Ez a termék a TMDB API-t használja, de a TMDB nem hagyta jóvá és nem tanúsította.",
+    "libraries": {
+      "title": "Könyvtárak",
+      "none": "Még nincsenek könyvtárak.",
+      "scan": "Átvizsgálás",
+      "remove": "{{name}} eltávolítása",
+      "confirmRemove": "Eltávolítod: „{{name}}”? A fájljaid maradnak, ahol vannak.",
+      "kind": {
+        "movies": "Filmek",
+        "tv": "Tévésorozatok",
+        "music": "Zene"
+      },
+      "type": "Típus",
+      "folders": "Mappák",
+      "up": "Egy mappával feljebb",
+      "added": "Hozzáadva",
+      "useFolder": "Ez a mappa",
+      "noSubfolders": "Nincsenek almappák"
+    },
+    "people": {
+      "title": "Személyek",
+      "admin": "Rendszergazda",
+      "passwordChanged": "Jelszó módosítva. {{name}} mindenhol ki lett jelentkeztetve.",
+      "you": "(te)",
+      "removeAdmin": "Rendszergazdai jog elvétele",
+      "makeAdmin": "Rendszergazdává tétel",
+      "resetPassword": "Jelszó visszaállítása",
+      "remove": "Eltávolítás",
+      "newPasswordFor": "Új jelszó neki: {{name}}",
+      "setPassword": "Jelszó beállítása",
+      "confirmRemove": "Eltávolítod: <name>{{name}}</name>? A nézési előzmények, a megnézendők, a letöltések és a kérések is törlődnek, és mindenhol kijelentkezik. Ez nem vonható vissza."
+    },
+    "account": {
+      "title": "A fiókod",
+      "changePassword": "Jelszó módosítása",
+      "current": "Jelenlegi jelszó",
+      "new": "Új jelszó",
+      "again": "Új jelszó újra",
+      "hint": "Legalább 8 karakter. A többi eszközöd kijelentkezik.",
+      "mismatch": "Az új jelszavak nem egyeznek.",
+      "changed": "Jelszó módosítva. A többi eszközöd kijelentkezett."
+    },
+    "devices": {
+      "aWhileAgo": "nemrég",
+      "justNow": "épp most",
+      "title": "Az eszközeid",
+      "unknown": "Ismeretlen eszköz",
+      "this": "Ez az eszköz",
+      "lastUsed": "Utoljára használva: {{when}}",
+      "confirmSignOut": "Kijelentkezteted: „{{name}}”?"
+    },
+    "version": "Matinee szerver {{version}} · API v{{api}}",
+    "home": {
+      "title": "Otthoni hálózat",
+      "requireSignIn": "Bejelentkezés megkövetelése otthon",
+      "required": "Mindenki bejelentkezik, otthon és máshol is.",
+      "open": "Az otthoni hálózat telefonjai, tévéi és böngészői bejelentkezés nélkül nézhetnek. Egy közös Otthon fiókot használnak, és semmit sem módosíthatnak. Otthonon kívül mindenki bejelentkezik."
+    },
+    "remote": {
+      "title": "Távoli hozzáférés",
+      "publicURL": "Otthonon kívül az alkalmazások ide csatlakoznak: <url>{{url}}</url>, ezzel a címmel lett beállítva a szerver.",
+      "toggle": "Nézés otthonon kívül",
+      "hint": "A Matinee megkéri a routeredet, hogy nyisson egy portot, és szerez egy tanúsítványt, így az alkalmazások bárhonnan biztonságosan csatlakoznak. Kívülről mindenki bejelentkezik.",
+      "working": "Port nyitása a routeren és tanúsítvány beszerzése…",
+      "ready": "Az alkalmazások otthonon kívül itt érik el a szervert: <url>{{url}}</url>.",
+      "router": "A routered megnyitotta a portot ezen keresztül: {{router}}.",
+      "pickUp": "Ezt a címet akkor veszik át, amikor legközelebb az otthoni hálózaton vannak.",
+      "sharedAddress": "A Matinee ezt egyelőre nem tudja magától megkerülni.",
+      "retry": "A Matinee félóránként újrapróbálja."
+    },
+    "playback": {
+      "title": "Lejátszás",
+      "autoPlay": "A következő rész lejátszása",
+      "autoPlayHint": "Amikor elindul a stáblista, a következő rész egy 10 másodperces, megszakítható visszaszámlálás után indul.",
+      "binge": "Visszaszámlálás kihagyása",
+      "bingeHint": "A stáblista indulásakor egyből a következő részre ugrik. Három egymást követő rész után, ha semmihez sem nyúltál, megkérdezi, nézed-e még."
+    },
+    "trailers": {
+      "title": "Előzetesek",
+      "remote": "Előzetesek a YouTube-ról",
+      "remoteOn": "A filmek és sorozatok a TMDB-ről kínálják az előzeteseiket, amelyek a YouTube-ról játszódnak le. A médiád mellett lévő előzetesfájlok mindig megjelennek.",
+      "remoteOff": "Csak a médiád mellett lévő előzetesfájlok jelennek meg, például „Movie (2020)-trailer.mkv” vagy bármi egy Trailers mappában."
+    },
+    "transcoding": {
+      "title": "Átkódolás",
+      "intro": "Azokat a fájlokat, amelyeket egy eszköz nem tud eredeti formájukban lejátszani, nézés közben átalakítja. A GPU ezt gyorsabban és kisebb szerverterheléssel végzi.",
+      "convertingWith": "Átalakítás ezzel:",
+      "active": "{{name}}.",
+      "activeOn": "{{name}}, {{detail}}.",
+      "fullGPU": "A videó dekódolása, átméretezése és kódolása a GPU-n történik.",
+      "encodeOnly": "A videó kódolása a GPU-n, dekódolása a CPU-n történik.",
+      "fallback": "Ha a GPU nem bír egy fájllal, az a CPU-n keresztül játszódik le.",
+      "testing": "A szerver GPU-jának tesztelése…",
+      "cpuOff": "A CPU. A hardveres átkódolás ki van kapcsolva.",
+      "cpuFailed": "A CPU, mert a választott gyorsító nem működött ezen a szerveren.",
+      "cpuNoGPU": "A CPU. A szerver egyik GPU-ja sem ment át a teszten.",
+      "hardware": "Hardveres gyorsítás",
+      "auto": "Automatikus: a legjobb működő",
+      "off": "Ki: mindig a CPU",
+      "notFound": "{{name}} (nem található ezen a szerveren)",
+      "accelerator": {
+        "nvenc": "NVIDIA NVENC",
+        "vaapi": "VAAPI (AMD és Intel Linuxon)",
+        "qsv": "Intel Quick Sync",
+        "videotoolbox": "VideoToolbox (Mac)",
+        "amf": "AMD AMF (Windows)",
+        "v4l2m2m": "V4L2 (Raspberry Pi)"
+      }
+    }
+  },
+  "language": {
+    "title": "Nyelv",
+    "label": "A Matinee nyelve",
+    "hint": "A nyelved követ a telefonos és tévés Matinee-alkalmazásokba. A címek és a leírások is ezen a nyelven jelennek meg, ahol a TMDB-ben megvannak.",
+    "guestHint": "Mindenki, aki otthon fiók nélkül néz, ezt a nyelvet használja.",
+    "automatic": "Automatikus ({{language}})",
+    "machine": "Ezt a nyelvet gép fordította, így egyes szavak furcsán hangozhatnak.",
+    "help": "Segíts javítani"
+  }
+}

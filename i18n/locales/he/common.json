@@ -1,0 +1,337 @@
+{
+  "duration": {
+    "minutes": "{{minutes}} דק׳",
+    "hoursMinutes": "{{hours}} שע׳ {{minutes}} דק׳"
+  },
+  "episodeCode": "ע{{season}} · פ{{episode}}",
+  "seasonN": "עונה {{season}}",
+  "specials": "ספיישלים",
+  "media": {
+    "mono": "מונו",
+    "stereo": "סטריאו",
+    "lossless": "ללא אובדן",
+    "hiRes": "Hi-Res",
+    "dolbyVisionProfile": "Dolby Vision פרופיל {{profile}}",
+    "withBase": "{{format}}, עם {{base}} למסכים אחרים",
+    "bitDepth": "{{bits}} ביט",
+    "forced": "כפויות",
+    "sdh": "SDH"
+  },
+  "people": {
+    "episodes_one": "פרק אחד",
+    "episodes_other": "{{count}} פרקים",
+    "episodes_two": "שני פרקים",
+    "lines": {
+      "createdBy": "נוצר על ידי",
+      "director_one": "במאי",
+      "director_other": "במאים",
+      "director_two": "במאים",
+      "writer_one": "תסריטאי",
+      "writer_other": "תסריטאים",
+      "writer_two": "תסריטאים",
+      "basedOn": "מבוסס על",
+      "music": "מוזיקה"
+    },
+    "died": "נפטר/ה {{date}}",
+    "bornIn": "נולד/ה ב{{place}}",
+    "bornOnIn": "נולד/ה {{date}} ב{{place}}",
+    "bornOn": "נולד/ה {{date}}",
+    "dollars": "${{amount}}"
+  },
+  "facts": {
+    "firstAired": "שודר לראשונה",
+    "released": "יצא לאקרנים",
+    "aired": "שודר",
+    "ended": "הסתיים",
+    "status": "סטטוס",
+    "seasons": "עונות",
+    "seasonsValue_one": "{{seasons}} (פרק אחד)",
+    "seasonsValue_other": "{{seasons}} ({{count}} פרקים)",
+    "seasonsValue_two": "{{seasons}} (שני פרקים)",
+    "rated": "דירוג גיל",
+    "genres": "ז׳אנרים",
+    "originalTitle": "שם מקורי",
+    "originalLanguage": "שפת מקור",
+    "spokenLanguages": "שפות מדוברות",
+    "studio_one": "אולפן",
+    "studio_other": "אולפנים",
+    "studio_two": "אולפנים",
+    "network_one": "רשת",
+    "network_other": "רשתות",
+    "network_two": "רשתות",
+    "country_one": "מדינה",
+    "country_other": "מדינות",
+    "country_two": "מדינות",
+    "collection": "אוסף",
+    "budget": "תקציב",
+    "boxOffice": "קופות"
+  },
+  "showStatus": {
+    "Returning Series": "סדרה ממשיכה",
+    "Ended": "הסתיימה",
+    "Canceled": "בוטלה",
+    "In Production": "בהפקה",
+    "Planned": "מתוכננת",
+    "Pilot": "פיילוט"
+  },
+  "genres": {
+    "Action": "אקשן",
+    "Adventure": "הרפתקאות",
+    "Animation": "אנימציה",
+    "Comedy": "קומדיה",
+    "Crime": "פשע",
+    "Documentary": "תיעודי",
+    "Drama": "דרמה",
+    "Family": "משפחה",
+    "Fantasy": "פנטזיה",
+    "History": "היסטוריה",
+    "Horror": "אימה",
+    "Music": "מוזיקה",
+    "Mystery": "מסתורין",
+    "Romance": "רומנטיקה",
+    "Science Fiction": "מדע בדיוני",
+    "Thriller": "מותחן",
+    "War": "מלחמה",
+    "Western": "מערבון",
+    "Reality": "ריאליטי",
+    "TV Movie": "סרט טלוויזיה",
+    "Action & Adventure": "אקשן והרפתקאות",
+    "Kids": "ילדים",
+    "News": "חדשות",
+    "Sci-Fi & Fantasy": "מדע בדיוני ופנטזיה",
+    "Soap": "אופרת סבון",
+    "Talk": "אירוח",
+    "War & Politics": "מלחמה ופוליטיקה"
+  },
+  "jobs": {
+    "Director": "במאי",
+    "Creator": "יוצר",
+    "Screenplay": "תסריט",
+    "Writer": "תסריטאי",
+    "Teleplay": "תסריט טלוויזיה",
+    "Story": "סיפור",
+    "Novel": "רומן",
+    "Characters": "דמויות",
+    "Author": "סופר",
+    "Original Music Composer": "מלחין המוזיקה המקורית",
+    "Music": "מוזיקה",
+    "Director of Photography": "צלם ראשי",
+    "Editor": "עורך",
+    "Producer": "מפיק",
+    "Executive Producer": "מפיק בפועל",
+    "Casting": "ליהוק",
+    "Production Design": "עיצוב הפקה",
+    "Costume Design": "עיצוב תלבושות"
+  },
+  "kids": {
+    "littleKids": "ילדים קטנים",
+    "kids": "ילדים",
+    "teens": "בני נוער",
+    "andYounger": "{{ratings}} ומטה"
+  },
+  "sort": {
+    "title": "שם",
+    "added": "תאריך הוספה",
+    "released": "תאריך יציאה",
+    "year": "שנה",
+    "rating": "דירוג",
+    "runtime": "משך",
+    "lastPlayed": "נצפה לאחרונה"
+  },
+  "watched": {
+    "unwatched": "לא נצפו",
+    "inProgress": "בצפייה",
+    "watched": "נצפו",
+    "notStarted": "לא התחילו"
+  },
+  "genreRows": {
+    "Action": "מלאי אקשן",
+    "Adventure": "הרפתקאות",
+    "Animation": "אנימציה אהובה",
+    "Comedy": "קומדיות",
+    "Crime": "סיפורי פשע",
+    "Documentary": "סרטים תיעודיים",
+    "Drama": "דרמות",
+    "Family": "לכל המשפחה",
+    "Fantasy": "עולמות פנטזיה",
+    "Horror": "אימה",
+    "Mystery": "תעלומות",
+    "Romance": "רומנטיקה",
+    "Science Fiction": "מדע בדיוני אהוב",
+    "Thriller": "מותחנים",
+    "War": "סיפורי מלחמה",
+    "Western": "מערבונים"
+  },
+  "count": {
+    "episodes_one": "פרק אחד",
+    "episodes_other": "{{count}} פרקים",
+    "episodes_two": "שני פרקים",
+    "seasons_one": "עונה אחת",
+    "seasons_other": "{{count}} עונות",
+    "seasons_two": "שתי עונות",
+    "albums_one": "אלבום אחד",
+    "albums_other": "{{count}} אלבומים",
+    "albums_two": "שני אלבומים",
+    "tracks_one": "רצועה אחת",
+    "tracks_other": "{{count}} רצועות",
+    "tracks_two": "שתי רצועות",
+    "titles_one": "כותר אחד",
+    "titles_other": "{{count}} כותרים",
+    "titles_two": "שני כותרים"
+  },
+  "awards": {
+    "academy": {
+      "won_one": "זכה בפרס אוסקר אחד",
+      "won_other": "זכה ב־{{count}} פרסי אוסקר",
+      "won_two": "זכה ב־{{count}} פרסי אוסקר",
+      "nominated_one": "מועמד לפרס אוסקר אחד",
+      "nominated_other": "מועמד ל־{{count}} פרסי אוסקר",
+      "nominated_two": "מועמד ל־{{count}} פרסי אוסקר"
+    },
+    "emmy": {
+      "won_one": "זכה בפרס אמי אחד",
+      "won_other": "זכה ב־{{count}} פרסי אמי",
+      "won_two": "זכה ב־{{count}} פרסי אמי",
+      "nominated_one": "מועמד לפרס אמי אחד",
+      "nominated_other": "מועמד ל־{{count}} פרסי אמי",
+      "nominated_two": "מועמד ל־{{count}} פרסי אמי"
+    },
+    "globe": {
+      "won_one": "זכה בגלובוס הזהב אחד",
+      "won_other": "זכה ב־{{count}} פרסי גלובוס הזהב",
+      "won_two": "זכה ב־{{count}} פרסי גלובוס הזהב",
+      "nominated_one": "מועמד לגלובוס הזהב אחד",
+      "nominated_other": "מועמד ל־{{count}} פרסי גלובוס הזהב",
+      "nominated_two": "מועמד ל־{{count}} פרסי גלובוס הזהב"
+    },
+    "bafta": {
+      "won_one": "זכה בפרס BAFTA אחד",
+      "won_other": "זכה ב־{{count}} פרסי BAFTA",
+      "won_two": "זכה ב־{{count}} פרסי BAFTA",
+      "nominated_one": "מועמד לפרס BAFTA אחד",
+      "nominated_other": "מועמד ל־{{count}} פרסי BAFTA",
+      "nominated_two": "מועמד ל־{{count}} פרסי BAFTA"
+    },
+    "wins_one": "זכייה אחת",
+    "wins_other": "{{count}} זכיות",
+    "wins_two": "שתי זכיות",
+    "nominations_one": "מועמדות אחת",
+    "nominations_other": "{{count}} מועמדויות",
+    "nominations_two": "שתי מועמדויות",
+    "winsAndNominations": "{{wins}} ו־{{nominations}}"
+  },
+  "departments": {
+    "Acting": "שחקן",
+    "Directing": "בימוי",
+    "Writing": "כתיבה",
+    "Production": "הפקה",
+    "Sound": "סאונד",
+    "Camera": "צילום",
+    "Editing": "עריכה",
+    "Art": "אמנות",
+    "Crew": "צוות",
+    "Visual Effects": "אפקטים חזותיים",
+    "Costume & Make-Up": "תלבושות ואיפור",
+    "Lighting": "תאורה",
+    "Creator": "יוצר"
+  },
+  "starters": {
+    "recent": "נוספו לאחרונה",
+    "unwatched": "לא נצפו",
+    "tonight": "קצר מספיק להערב"
+  },
+  "filter": {
+    "decade": "שנות ה־{{decade}}",
+    "yearRange": "{{from}}–{{to}}",
+    "yearOrLater": "{{year}} ואילך",
+    "yearOrEarlier": "{{year}} ולפני",
+    "lastYear": "השנה האחרונה",
+    "lastWeeks_one": "השבוע האחרון",
+    "lastWeeks_other": "{{count}} השבועות האחרונים",
+    "lastWeeks_two": "השבועיים האחרונים",
+    "lastDays_one": "היום האחרון",
+    "lastDays_other": "{{count}} הימים האחרונים",
+    "lastDays_two": "היומיים האחרונים",
+    "runtime": {
+      "titles": {
+        "between": "{{min}}–{{max}} דק׳",
+        "over": "מעל {{min}} דק׳",
+        "under": "פחות מ־{{max}} דק׳"
+      },
+      "episodes": {
+        "between": "פרקים של {{min}}–{{max}} דק׳",
+        "over": "פרקים של מעל {{min}} דק׳",
+        "under": "פרקים של פחות מ־{{max}} דק׳"
+      }
+    }
+  },
+  "themes": {
+    "clean": {
+      "name": "נקי",
+      "description": "לבן פשוט, כחול אחד, בלי סריפים. רק הפוסטרים."
+    },
+    "dark": {
+      "name": "כהה",
+      "description": "שחור אמיתי ולבן חד. נעים לעיניים ולמסך OLED."
+    },
+    "drive-in": {
+      "name": "דרייב־אין",
+      "description": "חומים של שנות השבעים וענבר של שלט קולנוע, כמו ערב בדרייב־אין."
+    },
+    "high-contrast": {
+      "name": "ניגודיות גבוהה",
+      "description": "שחור, לבן וצהוב בוהק, לטקסט הכי ברור מקצה החדר."
+    },
+    "light": {
+      "name": "בהיר",
+      "description": "לבן נייר חם עם אלמוג, לחדר מואר."
+    },
+    "matinee": {
+      "name": "Matinee",
+      "description": "חושך חם של אולם קולנוע עם נגיעת אלמוג. המראה של הבית."
+    },
+    "sci-fi": {
+      "name": "מדע בדיוני",
+      "description": "כחול כהה של חלל עמוק עם זוהר ציאן ניאון וגופן עתידני."
+    }
+  },
+  "every": {
+    "seconds_one": "שנייה אחת",
+    "seconds_other": "{{count}} שניות",
+    "seconds_two": "שתי שניות",
+    "minutes_one": "דקה אחת",
+    "minutes_other": "{{count}} דקות",
+    "minutes_two": "שתי דקות",
+    "hours_one": "שעה אחת",
+    "hours_other": "{{count}} שעות",
+    "hours_two": "שעתיים"
+  },
+  "avatars": {
+    "coral": "אלמוג",
+    "amber": "ענבר",
+    "lime": "ליים",
+    "teal": "טורקיז",
+    "sky": "תכלת",
+    "violet": "סגול",
+    "pink": "ורוד",
+    "slate": "צפחה"
+  },
+  "day": {
+    "today": "היום",
+    "tomorrow": "מחר",
+    "yesterday": "אתמול"
+  },
+  "release": {
+    "cinemas": "בבתי הקולנוע",
+    "digital": "יציאה דיגיטלית",
+    "physical": "בדיסק",
+    "airs": "משודר"
+  },
+  "issue": {
+    "video": "תמונה",
+    "audio": "סאונד",
+    "subtitles": "כתוביות",
+    "wrong": "שם שגוי",
+    "other": "משהו אחר"
+  }
+}

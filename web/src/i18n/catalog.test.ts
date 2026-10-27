@@ -55,6 +55,19 @@ function duplicateKeys(raw: string): string[] {
 const placeholders = (text: string) => [...text.matchAll(/\{\{\s*([^},\s]+)[^}]*\}\}/g)].map((m) => m[1]).sort()
 const baseKey = (key: string) => key.replace(pluralSuffix, '')
 
+/**
+ * Whether a plural category stands for one number only in this language,
+ * such as Arabic's _two, so its text may spell the number out instead of
+ * using {{count}}. Russian's _one also covers 21, 31 and so on, so it
+ * may not.
+ */
+function singleNumber(language: string, category: string): boolean {
+  const rules = new Intl.PluralRules(language)
+  let numbers = 0
+  for (let n = 0; n <= 200; n++) if (rules.select(n) === category) numbers++
+  return numbers === 1
+}
+
 const fileOf = (filePath: string) => /locales\/([^/]+)\/([^/]+)\.json$/.exec(filePath)
 
 function readLocale(language: string): Record<string, Flat> {
@@ -89,7 +102,12 @@ function compareToEnglish(language: string, en: Record<string, Flat>, translated
         continue
       }
       const englishText = en[ns][key] ?? en[ns][`${baseKey(key)}_other`]
-      if (placeholders(text).join() !== placeholders(englishText).join()) {
+      const category = pluralSuffix.exec(key)?.[1]
+      const own = placeholders(text)
+      const expected = placeholders(englishText).filter(
+        (name) => !(name === 'count' && !own.includes('count') && category && singleNumber(language, category)),
+      )
+      if (own.join() !== expected.join()) {
         problems.push(`${language} ${ns}:${key} has placeholders ${placeholders(text).join(',') || 'none'}, English has ${placeholders(englishText).join(',') || 'none'}`)
       }
       if (pluralSuffix.test(key)) {

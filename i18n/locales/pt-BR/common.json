@@ -1,0 +1,337 @@
+{
+  "duration": {
+    "minutes": "{{minutes}} min",
+    "hoursMinutes": "{{hours}} h {{minutes}} min"
+  },
+  "episodeCode": "T{{season}} · E{{episode}}",
+  "seasonN": "Temporada {{season}}",
+  "specials": "Especiais",
+  "media": {
+    "mono": "Mono",
+    "stereo": "Estéreo",
+    "lossless": "Sem perdas",
+    "hiRes": "Alta resolução",
+    "dolbyVisionProfile": "Dolby Vision perfil {{profile}}",
+    "withBase": "{{format}}, com {{base}} para outras telas",
+    "bitDepth": "{{bits}} bits",
+    "forced": "Forçadas",
+    "sdh": "SDH"
+  },
+  "people": {
+    "episodes_one": "{{count}} episódio",
+    "episodes_many": "{{count}} episódios",
+    "episodes_other": "{{count}} episódios",
+    "lines": {
+      "createdBy": "Criada por",
+      "director_one": "Direção",
+      "director_many": "Direção",
+      "director_other": "Direção",
+      "writer_one": "Roteiro",
+      "writer_many": "Roteiro",
+      "writer_other": "Roteiro",
+      "basedOn": "Baseado em",
+      "music": "Música"
+    },
+    "died": "Morreu em {{date}}",
+    "bornIn": "Nasceu em {{place}}",
+    "bornOnIn": "Nasceu em {{date}} em {{place}}",
+    "bornOn": "Nasceu em {{date}}",
+    "dollars": "US$ {{amount}}"
+  },
+  "facts": {
+    "firstAired": "Primeira exibição",
+    "released": "Lançamento",
+    "aired": "Exibido",
+    "ended": "Encerrada",
+    "status": "Situação",
+    "seasons": "Temporadas",
+    "seasonsValue_one": "{{seasons}} ({{count}} episódio)",
+    "seasonsValue_many": "{{seasons}} ({{count}} episódios)",
+    "seasonsValue_other": "{{seasons}} ({{count}} episódios)",
+    "rated": "Classificação",
+    "genres": "Gêneros",
+    "originalTitle": "Título original",
+    "originalLanguage": "Idioma original",
+    "spokenLanguages": "Idiomas falados",
+    "studio_one": "Estúdio",
+    "studio_many": "Estúdios",
+    "studio_other": "Estúdios",
+    "network_one": "Emissora",
+    "network_many": "Emissoras",
+    "network_other": "Emissoras",
+    "country_one": "País",
+    "country_many": "Países",
+    "country_other": "Países",
+    "collection": "Coleção",
+    "budget": "Orçamento",
+    "boxOffice": "Bilheteria"
+  },
+  "showStatus": {
+    "Returning Series": "Em exibição",
+    "Ended": "Encerrada",
+    "Canceled": "Cancelada",
+    "In Production": "Em produção",
+    "Planned": "Planejada",
+    "Pilot": "Piloto"
+  },
+  "genres": {
+    "Action": "Ação",
+    "Adventure": "Aventura",
+    "Animation": "Animação",
+    "Comedy": "Comédia",
+    "Crime": "Crime",
+    "Documentary": "Documentário",
+    "Drama": "Drama",
+    "Family": "Família",
+    "Fantasy": "Fantasia",
+    "History": "História",
+    "Horror": "Terror",
+    "Music": "Música",
+    "Mystery": "Mistério",
+    "Romance": "Romance",
+    "Science Fiction": "Ficção científica",
+    "Thriller": "Suspense",
+    "War": "Guerra",
+    "Western": "Faroeste",
+    "Reality": "Reality",
+    "TV Movie": "Filme para TV",
+    "Action & Adventure": "Ação e aventura",
+    "Kids": "Infantil",
+    "News": "Notícias",
+    "Sci-Fi & Fantasy": "Ficção científica e fantasia",
+    "Soap": "Novela",
+    "Talk": "Entrevistas",
+    "War & Politics": "Guerra e política"
+  },
+  "jobs": {
+    "Director": "Direção",
+    "Creator": "Criação",
+    "Screenplay": "Roteiro",
+    "Writer": "Roteirista",
+    "Teleplay": "Roteiro para TV",
+    "Story": "História",
+    "Novel": "Romance",
+    "Characters": "Personagens",
+    "Author": "Autoria",
+    "Original Music Composer": "Trilha sonora original",
+    "Music": "Música",
+    "Director of Photography": "Direção de fotografia",
+    "Editor": "Montagem",
+    "Producer": "Produção",
+    "Executive Producer": "Produção executiva",
+    "Casting": "Elenco",
+    "Production Design": "Design de produção",
+    "Costume Design": "Figurino"
+  },
+  "kids": {
+    "littleKids": "Crianças pequenas",
+    "kids": "Crianças",
+    "teens": "Adolescentes",
+    "andYounger": "{{ratings}} e menores"
+  },
+  "sort": {
+    "title": "Título",
+    "added": "Data de inclusão",
+    "released": "Data de lançamento",
+    "year": "Ano",
+    "rating": "Avaliação",
+    "runtime": "Duração",
+    "lastPlayed": "Assistido por último"
+  },
+  "watched": {
+    "unwatched": "Não assistidos",
+    "inProgress": "Em andamento",
+    "watched": "Assistidos",
+    "notStarted": "Não iniciados"
+  },
+  "genreRows": {
+    "Action": "Cheios de ação",
+    "Adventure": "Aventuras",
+    "Animation": "Animações favoritas",
+    "Comedy": "Comédias",
+    "Crime": "Histórias de crime",
+    "Documentary": "Documentários",
+    "Drama": "Dramas",
+    "Family": "Para toda a família",
+    "Fantasy": "Mundos de fantasia",
+    "Horror": "Terror",
+    "Mystery": "Mistérios",
+    "Romance": "Romance",
+    "Science Fiction": "Ficção científica favorita",
+    "Thriller": "Suspenses",
+    "War": "Histórias de guerra",
+    "Western": "Faroestes"
+  },
+  "count": {
+    "episodes_one": "{{count}} episódio",
+    "episodes_many": "{{count}} episódios",
+    "episodes_other": "{{count}} episódios",
+    "seasons_one": "{{count}} temporada",
+    "seasons_many": "{{count}} temporadas",
+    "seasons_other": "{{count}} temporadas",
+    "albums_one": "{{count}} álbum",
+    "albums_many": "{{count}} álbuns",
+    "albums_other": "{{count}} álbuns",
+    "tracks_one": "{{count}} faixa",
+    "tracks_many": "{{count}} faixas",
+    "tracks_other": "{{count}} faixas",
+    "titles_one": "{{count}} título",
+    "titles_many": "{{count}} títulos",
+    "titles_other": "{{count}} títulos"
+  },
+  "awards": {
+    "academy": {
+      "won_one": "Ganhou {{count}} Oscar",
+      "won_many": "Ganhou {{count}} Oscars",
+      "won_other": "Ganhou {{count}} Oscars",
+      "nominated_one": "Indicado a {{count}} Oscar",
+      "nominated_many": "Indicado a {{count}} Oscars",
+      "nominated_other": "Indicado a {{count}} Oscars"
+    },
+    "emmy": {
+      "won_one": "Ganhou {{count}} Primetime Emmy",
+      "won_many": "Ganhou {{count}} Primetime Emmys",
+      "won_other": "Ganhou {{count}} Primetime Emmys",
+      "nominated_one": "Indicado a {{count}} Primetime Emmy",
+      "nominated_many": "Indicado a {{count}} Primetime Emmys",
+      "nominated_other": "Indicado a {{count}} Primetime Emmys"
+    },
+    "globe": {
+      "won_one": "Ganhou {{count}} Globo de Ouro",
+      "won_many": "Ganhou {{count}} Globos de Ouro",
+      "won_other": "Ganhou {{count}} Globos de Ouro",
+      "nominated_one": "Indicado a {{count}} Globo de Ouro",
+      "nominated_many": "Indicado a {{count}} Globos de Ouro",
+      "nominated_other": "Indicado a {{count}} Globos de Ouro"
+    },
+    "bafta": {
+      "won_one": "Ganhou {{count}} BAFTA",
+      "won_many": "Ganhou {{count}} BAFTAs",
+      "won_other": "Ganhou {{count}} BAFTAs",
+      "nominated_one": "Indicado a {{count}} BAFTA",
+      "nominated_many": "Indicado a {{count}} BAFTAs",
+      "nominated_other": "Indicado a {{count}} BAFTAs"
+    },
+    "wins_one": "{{count}} vitória",
+    "wins_many": "{{count}} vitórias",
+    "wins_other": "{{count}} vitórias",
+    "nominations_one": "{{count}} indicação",
+    "nominations_many": "{{count}} indicações",
+    "nominations_other": "{{count}} indicações",
+    "winsAndNominations": "{{wins}} e {{nominations}}"
+  },
+  "departments": {
+    "Acting": "Atuação",
+    "Directing": "Direção",
+    "Writing": "Roteiro",
+    "Production": "Produção",
+    "Sound": "Som",
+    "Camera": "Câmera",
+    "Editing": "Montagem",
+    "Art": "Arte",
+    "Crew": "Equipe",
+    "Visual Effects": "Efeitos visuais",
+    "Costume & Make-Up": "Figurino e maquiagem",
+    "Lighting": "Iluminação",
+    "Creator": "Criação"
+  },
+  "starters": {
+    "recent": "Adicionados recentemente",
+    "unwatched": "Não assistidos",
+    "tonight": "Curtos o bastante para hoje à noite"
+  },
+  "filter": {
+    "decade": "Anos {{decade}}",
+    "yearRange": "{{from}}–{{to}}",
+    "yearOrLater": "{{year}} ou depois",
+    "yearOrEarlier": "{{year}} ou antes",
+    "lastYear": "no último ano",
+    "lastWeeks_one": "na última semana",
+    "lastWeeks_many": "nas últimas {{count}} semanas",
+    "lastWeeks_other": "nas últimas {{count}} semanas",
+    "lastDays_one": "no último {{count}} dia",
+    "lastDays_many": "nos últimos {{count}} dias",
+    "lastDays_other": "nos últimos {{count}} dias",
+    "runtime": {
+      "titles": {
+        "between": "{{min}}–{{max}} min",
+        "over": "Mais de {{min}} min",
+        "under": "Menos de {{max}} min"
+      },
+      "episodes": {
+        "between": "Episódios de {{min}}–{{max}} min",
+        "over": "Episódios com mais de {{min}} min",
+        "under": "Episódios com menos de {{max}} min"
+      }
+    }
+  },
+  "themes": {
+    "clean": {
+      "name": "Limpo",
+      "description": "Branco puro, um azul, sem serifas. Só os pôsteres."
+    },
+    "dark": {
+      "name": "Escuro",
+      "description": "Preto puro e branco nítido. Confortável para os olhos e para telas OLED."
+    },
+    "drive-in": {
+      "name": "Drive-in",
+      "description": "Marrons dos anos 70 e âmbar de letreiro, como uma noite no drive-in."
+    },
+    "high-contrast": {
+      "name": "Alto contraste",
+      "description": "Preto, branco e amarelo vivo, para o texto mais legível do outro lado da sala."
+    },
+    "light": {
+      "name": "Claro",
+      "description": "Branco papel quente com coral, para um ambiente iluminado."
+    },
+    "matinee": {
+      "name": "Matinee",
+      "description": "O escuro aconchegante do cinema com um toque coral. O visual da casa."
+    },
+    "sci-fi": {
+      "name": "Ficção científica",
+      "description": "Azul-marinho do espaço profundo com brilho ciano neon e uma fonte futurista."
+    }
+  },
+  "every": {
+    "seconds_one": "{{count}} segundo",
+    "seconds_many": "{{count}} segundos",
+    "seconds_other": "{{count}} segundos",
+    "minutes_one": "{{count}} minuto",
+    "minutes_many": "{{count}} minutos",
+    "minutes_other": "{{count}} minutos",
+    "hours_one": "{{count}} hora",
+    "hours_many": "{{count}} horas",
+    "hours_other": "{{count}} horas"
+  },
+  "avatars": {
+    "coral": "Coral",
+    "amber": "Âmbar",
+    "lime": "Lima",
+    "teal": "Verde-azulado",
+    "sky": "Azul-céu",
+    "violet": "Violeta",
+    "pink": "Rosa",
+    "slate": "Ardósia"
+  },
+  "day": {
+    "today": "Hoje",
+    "tomorrow": "Amanhã",
+    "yesterday": "Ontem"
+  },
+  "release": {
+    "cinemas": "Nos cinemas",
+    "digital": "Lançamento digital",
+    "physical": "Em disco",
+    "airs": "Vai ao ar"
+  },
+  "issue": {
+    "video": "Imagem",
+    "audio": "Som",
+    "subtitles": "Legendas",
+    "wrong": "Título errado",
+    "other": "Outra coisa"
+  }
+}

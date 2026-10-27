@@ -1,0 +1,692 @@
+{
+  "loading": "Načítání",
+  "nav": {
+    "home": "Domů",
+    "watchList": "Seznam ke zhlédnutí",
+    "collections": "Kolekce",
+    "scanning": "Prohledávání",
+    "search": "Hledat",
+    "comingSoon": "Brzy",
+    "requests": "Žádosti",
+    "signIn": "Přihlásit se",
+    "settings": "Nastavení",
+    "switchProfile": "Přepnout profil",
+    "signOut": "Odhlásit se"
+  },
+  "cantReachServer": "Server není dostupný. Zkouším znovu…",
+  "player": {
+    "subtitlesFailed": "Tyto titulky se nepodařilo načíst",
+    "off": "Vypnuto",
+    "convertsVideo": "Převádí video",
+    "file": "Soubor",
+    "seek": "Přetočit",
+    "previous": "Předchozí",
+    "pause": "Pozastavit",
+    "next": "Další",
+    "closePlayer": "Zavřít přehrávač",
+    "failedDetail": "Přehrávání selhalo. Soubor může být poškozený nebo ve formátu, který server neumí převést.",
+    "failed": "Přehrávání selhalo",
+    "back10": "Zpět o 10 sekund",
+    "forward10": "Vpřed o 10 sekund",
+    "unmute": "Zapnout zvuk",
+    "mute": "Ztlumit",
+    "converting": "Převádí se",
+    "fullscreen": "Celá obrazovka"
+  },
+  "somethingWentWrong": "Něco se pokazilo",
+  "oneMoment": "Moment…",
+  "auth": {
+    "username": "Uživatelské jméno",
+    "password": "Heslo",
+    "signIn": "Přihlásit se",
+    "welcomeBack": "Vítej zpět.",
+    "setUp": "Nastavit Matinee",
+    "setUpHint": "Vytvoř účet správce. Rodinu a přátele můžeš přidat později.",
+    "createAccount": "Vytvořit účet"
+  },
+  "home": {
+    "welcome": "Vítej v Matinee",
+    "welcomeHint": "Začni přidáním složky s filmy, seriály nebo hudbou.",
+    "addLibrary": "Přidat knihovnu",
+    "continueWatching": "Pokračovat ve sledování",
+    "recentlyAdded": "Nedávno přidané",
+    "newReleases": "Novinky",
+    "scanning": "Prohledávám tvou knihovnu",
+    "scanningHint": "Nové tituly se tu objeví, jakmile se najdou.",
+    "removeNamed": "Odebrat {{title}} z Pokračovat ve sledování",
+    "remove": "Odebrat z Pokračovat ve sledování"
+  },
+  "hero": {
+    "upNext": "Další na řadě",
+    "justAdded": "Právě přidáno",
+    "details": "Podrobnosti"
+  },
+  "item": {
+    "resume": "Pokračovat",
+    "resumeLeft": "Pokračovat · zbývá {{left}}",
+    "play": "Přehrát",
+    "resumeFrom": "Pokračovat od {{time}}",
+    "resumeEpisode": "Pokračovat v dílu {{episode}}",
+    "playEpisode": "Přehrát díl {{episode}}",
+    "shuffle": "Náhodně",
+    "seasons": "Řady",
+    "albums": "Alba",
+    "episodes": "Díly"
+  },
+  "row": {
+    "back": "Posunout zpět",
+    "forward": "Posunout vpřed"
+  },
+  "artwork": {
+    "fetching": "Načítám podrobnosti…"
+  },
+  "close": "Zavřít",
+  "file": {
+    "audio": "Zvuk",
+    "subtitles": "Titulky",
+    "title": "Podrobnosti souboru",
+    "notYet": "Matinee se na tento soubor ještě podrobně nepodíval. Každý soubor čte pomalu na pozadí, takže se to doplní samo.",
+    "unreadable": "Matinee nemohl tento soubor přečíst: {{error}}",
+    "stale": "Soubor se od tohoto záznamu změnil; brzy se na něj podívá znovu.",
+    "file": "Soubor",
+    "location": "Umístění",
+    "size": "Velikost",
+    "format": "Formát",
+    "length": "Délka",
+    "bitrate": "Datový tok",
+    "chapters": "Kapitoly",
+    "video": "Video",
+    "videoN": "Video {{n}}",
+    "codec": "Kodek",
+    "resolution": "Rozlišení",
+    "frameRate": "Snímková frekvence",
+    "fps": "{{rate}} fps",
+    "bitDepth": "Bitová hloubka",
+    "dynamicRange": "Dynamický rozsah",
+    "dvProfile": "profil {{profile}}",
+    "dvProfileLevel": "profil {{profile}}, úroveň {{level}}",
+    "fallback": "záloha {{format}}",
+    "color": "Barva",
+    "trackN": "Stopa {{n}}",
+    "default": "Výchozí",
+    "forced": "Vynucené",
+    "commentary": "Komentář",
+    "audioDescription": "Audiopopis",
+    "separateFile": "Samostatný soubor",
+    "inFile": "V souboru",
+    "sdh": "SDH",
+    "recorded": "Zaznamenáno {{when}}",
+    "queued": "Ve frontě; je na řadě.",
+    "analyzeAgain": "Analyzovat znovu"
+  },
+  "listSeparator": ", ",
+  "credits": {
+    "seriesCast": "Obsazení seriálu",
+    "cast": "Obsazení",
+    "guestStars": "Hosté",
+    "starring": "Hrají",
+    "moreDetails": "Další podrobnosti",
+    "crew": "Štáb",
+    "about": "O titulu",
+    "awards": "Ocenění",
+    "won": "Vyhrál(a)",
+    "nominated": "Nominace",
+    "wonIn": "Vyhrál(a) {{year}}",
+    "nominatedIn": "Nominace {{year}}",
+    "showAll": "Zobrazit všech {{count}}",
+    "awardsSource": "Ocenění z Wikidat."
+  },
+  "cancel": "Zrušit",
+  "upNext": {
+    "upNext": "Další na řadě",
+    "stillWatching": "Ještě se díváš?",
+    "youMightLike": "Mohlo by se ti líbit",
+    "playingIn": "Přehraje se za {{seconds}}",
+    "playNow": "Přehrát hned",
+    "keepWatching": "Sledovat dál",
+    "haveALook": "Podívej se",
+    "stop": "Zastavit"
+  },
+  "goBack": "Jít zpět",
+  "back": "Zpět",
+  "trailer": {
+    "trailer": "Upoutávka",
+    "named": "Upoutávka: {{title}}",
+    "wontPlay": "Tuto upoutávku nelze přehrát."
+  },
+  "watchList": {
+    "on": "Na tvém seznamu ke zhlédnutí",
+    "add": "Přidat na seznam ke zhlédnutí",
+    "empty": "Zatím nic uloženého",
+    "emptyHint": "Otevři film nebo seriál a zvol Seznam ke zhlédnutí, aby tu na tebe počkal. Filmy ze seznamu zmizí, jakmile je zhlédneš.",
+    "browse": "Procházet"
+  },
+  "related": {
+    "moreLikeThis": "Podobné"
+  },
+  "boxSet": {
+    "notFound": "Kolekce nenalezena",
+    "notFoundHint": "Žádný z jejích titulů teď není v knihovně.",
+    "boxSet": "Kolekce"
+  },
+  "search": {
+    "placeholder": "Filmy, seriály, interpreti, alba…",
+    "nothing": "Nic neodpovídá „{{q}}“",
+    "lookingForNew": "Hledáš něco nového?",
+    "addIt": "Přidat",
+    "askForIt": "Požádat o něj"
+  },
+  "person": {
+    "notFound": "Osoba nenalezena",
+    "showLess": "Zobrazit méně",
+    "readMore": "Číst dál",
+    "inLibrary": "Ve tvé knihovně"
+  },
+  "library": {
+    "library": "Knihovna",
+    "matches_few": "{{count}} výsledky",
+    "matches_many": "{{count}} výsledků",
+    "matches_one": "{{count}} výsledek",
+    "matches_other": "{{count}} výsledků",
+    "scanning": "Prohledávání…",
+    "nothingUnwatched": "Nic nezhlédnutého",
+    "nothingMatches": "Nic neodpovídá",
+    "seenEverything": "V této knihovně jsi viděl(a) všechno.",
+    "clearFilters": "Vymazat filtry",
+    "appearAsFound": "Tituly se objevují, jak se nacházejí.",
+    "noMedia": "Matinee hledal v {{paths}} a nenašel žádná média."
+  },
+  "nothingHereYet": "Zatím tu nic není",
+  "collection": {
+    "notFound": "Kolekce nenalezena",
+    "notFoundHint": "Možná byla smazána.",
+    "smart": "Chytrá kolekce",
+    "collection": "Kolekce",
+    "shuffledDaily": "Denně zamíchaná",
+    "editRules": "Upravit pravidla",
+    "edit": "Upravit",
+    "delete": "Smazat kolekci",
+    "deleteConfirm": "Smazat {{name}}? Tituly zůstanou v knihovně.",
+    "nothingMatchesYet": "Zatím nic neodpovídá",
+    "joinByRules": "Tituly se přidají samy, když odpovídají pravidlům.",
+    "howToAdd": "Otevři film nebo seriál a přidej ho volbou Kolekce."
+  },
+  "collections": {
+    "newShort": "Nová",
+    "new": "Nová kolekce",
+    "newSmartShort": "Nová chytrá",
+    "newSmart": "Nová chytrá kolekce",
+    "none": "Zatím žádné kolekce",
+    "noneHint": "Chytrá kolekce se plní sama podle pravidel, třeba nezhlédnutá akce z 80. let. Filmové série se tu objeví, jakmile jsou dva jejich tituly v knihovně.",
+    "yours": "Tvoje",
+    "shared": "Sdílené",
+    "forEveryone": "Kolekce pro všechny",
+    "boxSets": "Filmové série",
+    "sort": {
+      "own": "Vlastní pořadí",
+      "title": "Název",
+      "added": "Datum přidání",
+      "released": "Datum vydání",
+      "year": "Rok",
+      "rating": "Hodnocení",
+      "runtime": "Délka",
+      "lastPlayed": "Naposledy přehráno",
+      "shuffle": "Denně zamíchat"
+    },
+    "smartShort": "Chytrá",
+    "editNamed": "Upravit {{name}}",
+    "name": "Název",
+    "smartExample": "Nezhlédnutá akce z 80. let",
+    "manualExample": "Filmový večer",
+    "rules": "Pravidla",
+    "rulesHint": "Tituly odpovídající těmto filtrům se přidají samy, jak se knihovna mění.",
+    "shuffleDaily": "Zamíchat každý den",
+    "order": "Pořadí",
+    "orderAdded": "Pořadí, v jakém byly tituly přidány",
+    "direction": "Směr",
+    "usual": "Obvyklý",
+    "ascending": "Vzestupně",
+    "descending": "Sestupně",
+    "showAsRow": "Zobrazit jako řádek",
+    "onHome": "Na Domů",
+    "onLibraryPage": "Na stránce knihovny",
+    "shareWithEveryone": "Sdílet se všemi na tomto serveru",
+    "saveAs": "Uložit jako kolekci"
+  },
+  "save": "Uložit",
+  "create": "Vytvořit",
+  "loadingDots": "Načítání…",
+  "filters": {
+    "title": "Filtry",
+    "inUse_few": "Filtry, {{count}} použity",
+    "inUse_many": "Filtry, {{count}} použito",
+    "inUse_one": "Filtry, {{count}} použit",
+    "inUse_other": "Filtry, {{count}} použito",
+    "sortBy": "Řadit podle",
+    "highestFirst": "Nejvyšší první",
+    "lowestFirst": "Nejnižší první",
+    "highestFirstSwitch": "Nejvyšší první; přepnout na nejnižší první",
+    "lowestFirstSwitch": "Nejnižší první; přepnout na nejvyšší první",
+    "not": "Ne {{label}}",
+    "remove": "Odebrat {{label}}",
+    "chip": {
+      "words": "„{{q}}“",
+      "directedBy": "Režie: {{name}}",
+      "with": "Hraje: {{name}}",
+      "releasedWithin": "Vydáno {{within}}",
+      "releasedAfter": "Vydáno po {{date}}",
+      "releasedBefore": "Vydáno před {{date}}",
+      "addedWithin": "Přidáno {{within}}",
+      "addedAfter": "Přidáno po {{date}}",
+      "addedBefore": "Přidáno před {{date}}",
+      "ratingMin": "Hodnocení {{rating}}+",
+      "ratingMax": "Hodnocení {{rating}} a méně",
+      "certification": "Hodnocení {{rating}}",
+      "watchList": "Na mém seznamu ke zhlédnutí"
+    },
+    "collection": "Kolekce",
+    "active": "Použité filtry",
+    "clearAll": "Vymazat vše",
+    "more_few": "a {{count}} další",
+    "more_many": "a {{count}} dalších",
+    "more_one": "a {{count}} další",
+    "more_other": "a {{count}} dalších",
+    "any": "Libovolný",
+    "all": "Vše",
+    "anyTime": "Kdykoli",
+    "runtime": {
+      "under30": "Pod 30 min",
+      "30to60": "30–60 min",
+      "overHour": "Přes hodinu",
+      "under90": "Pod 90 min",
+      "90to120": "90 min – 2 hodiny",
+      "over2Hours": "Přes 2 hodiny"
+    },
+    "wordsInTitle": "Slova v názvu",
+    "onlyWatchList": "Jen tituly z mého seznamu ke zhlédnutí",
+    "fromYear": "Od roku",
+    "toYear": "Do roku",
+    "from": "Od",
+    "to": "do",
+    "toPlaceholder": "Do",
+    "lastWeek": "Poslední týden",
+    "last30Days": "Posledních 30 dní",
+    "last3Months": "Poslední 3 měsíce",
+    "lastYear": "Poslední rok",
+    "ratingAtLeast": "{{rating}}+",
+    "findPerson": "Najít osobu",
+    "nobody": "V této knihovně nikdo takový není.",
+    "showResults": "Zobrazit výsledky",
+    "section": {
+      "title": "Název",
+      "watched": "Zhlédnuto",
+      "genre": "Žánr",
+      "year": "Rok",
+      "firstAired": "První vysílání",
+      "released": "Vydáno",
+      "added": "Přidáno",
+      "rating": "Hodnocení",
+      "episodeLength": "Délka dílu",
+      "runtime": "Délka",
+      "quality": "Kvalita",
+      "network": "Stanice nebo studio",
+      "studio": "Studio",
+      "ageRating": "Přístupnost",
+      "language": "Původní jazyk",
+      "country": "Země",
+      "creator": "Vytvořil(a) nebo režíroval(a)",
+      "director": "Režie",
+      "people": "Herci a štáb"
+    }
+  },
+  "appearance": {
+    "title": "Vzhled",
+    "useServerTheme": "Použít motiv serveru ({{name}})",
+    "guestHint": "Všichni doma bez účtu sdílejí tento motiv.",
+    "hint": "Tvůj motiv tě následuje do aplikací Matinee v telefonu a televizi.",
+    "theme": "Motiv",
+    "preview": {
+      "tonight": "Dnes večer",
+      "trailer": "Upoutávka"
+    },
+    "serverTheme": "Motiv serveru",
+    "serverThemeHint": "Co všichni vidí, dokud si nevyberou vlastní, a na přihlašovací stránce.",
+    "custom": "{{name}} (vlastní)",
+    "addYourOwn": "Vlastní motiv přidáš tak, že vložíš soubor motivu do složky <code>themes</code> v datové složce serveru.",
+    "howTo": "Jak vytvořit motiv",
+    "skipped": "Přeskočeno: {{problem}}"
+  },
+  "newFiles": {
+    "title": "Nové soubory",
+    "intro": "Matinee si všimne souborů, které přidáš, přejmenuješ nebo smažeš, a pár sekund po dokončení kopírování aktualizuje knihovnu.",
+    "watch": "Sledovat nové soubory",
+    "summary": {
+      "some": "Některé složky se kontrolují každých {{every}}",
+      "watching": "Sleduje nové soubory",
+      "polling": "Nové soubory se kontrolují každých {{every}}",
+      "pollingShare": "Nové soubory se kontrolují každých {{every}} (síťové úložiště)",
+      "off": "Nové soubory se nesledují"
+    },
+    "mode": {
+      "auto": {
+        "label": "Automaticky",
+        "hint": "Okamžitě na vlastních discích serveru. Síťová úložiště (SMB, NFS) změny neohlašují, takže je Matinee kontroluje každých {{every}}."
+      },
+      "poll": {
+        "label": "Kontrolovat v intervalu",
+        "hint": "Každá složka se kontroluje každých {{every}}. Zvol tuto možnost, pokud se nové soubory na disku neobjevují samy."
+      },
+      "off": {
+        "label": "Vypnuto",
+        "hint": "Nové soubory se objeví při dalším úplném prohledání nebo když stiskneš Prohledat."
+      }
+    },
+    "rescan": "Každá knihovna se také celá znovu prohledá každých {{every}}, což zachytí vše ostatní, například soubor nahrazený na síťovém úložišti.",
+    "rescanOff": "Úplné prohledávání je na tomto serveru vypnuté (MATINEE_SCAN_INTERVAL=0)."
+  },
+  "analysis": {
+    "title": "Analýza médií",
+    "intro": "Matinee pomalu čte každý soubor kvůli kvalitě, zvuku a jazykům, a znovu pokaždé, když se soubor změní.",
+    "state": {
+      "lookingAt": "Zkoumá {{file}}",
+      "working": "Pracuje",
+      "waiting": "Čeká na konec přehrávání",
+      "slowDisk": "Soubory se čtou pomalu; pár minut odpočívá",
+      "allDone": "Všechny soubory jsou analyzované",
+      "upToDate": "Aktuální",
+      "paused": "Pozastaveno"
+    },
+    "progress": "{{done}} z {{total}}",
+    "unreadable_few": "{{count}} soubory nešly přečíst.",
+    "unreadable_many": "{{count}} souborů nešlo přečíst.",
+    "unreadable_one": "{{count}} soubor nešel přečíst.",
+    "unreadable_other": "{{count}} souborů nešlo přečíst.",
+    "speed": "Rychlost",
+    "mode": {
+      "gentle": {
+        "label": "Šetrně",
+        "hint": "Jeden soubor každých pár sekund a žádný, když server něco převádí pro přehrávání."
+      },
+      "normal": {
+        "label": "Normálně",
+        "hint": "Soubory jeden za druhým, stále s nejnižší prioritou."
+      },
+      "off": {
+        "label": "Vypnuto",
+        "hint": "Pozastaveno, dokud to znovu nezapneš."
+      }
+    }
+  },
+  "profileSettings": {
+    "title": "Profily",
+    "intro": "Profily sdílejí přihlášení, ale mají vlastní postup, seznam ke zhlédnutí a motiv. Dětské profily vidí jen to, co povolíš. PIN udrží profil, nebo samotný účet, pro jeho majitele.",
+    "pinFor": "Čtyřmístný PIN pro {{name}}",
+    "homeDevices": "Zařízení v domácí síti, která se nepřihlásila",
+    "account": "Účet",
+    "removePin": "Odebrat PIN",
+    "addPin": "Přidat PIN",
+    "hasPin": "Má PIN",
+    "edit": "Upravit {{name}}",
+    "remove": "Odebrat {{name}}",
+    "confirmRemove": "Odebrat {{name}}? Postup i seznam ke zhlédnutí zmizí taky.",
+    "add": "Přidat profil",
+    "name": "Jméno",
+    "newPin": "Nový PIN",
+    "pinOptional": "PIN (nepovinné)",
+    "unchanged": "Beze změny",
+    "fourDigits": "4 číslice",
+    "removeThePin": "Odebrat PIN",
+    "colour": "Barva",
+    "kidsMode": "Dětský režim",
+    "kidsOff": "Vypnuto: vidí vše",
+    "kidsLevel": "{{name}}: {{ratings}}",
+    "kidsLibraries": "Co tento profil vidí v jednotlivých knihovnách. Podle přístupnosti skryje tituly nad úrovní {{level}} a tituly bez hodnocení. Dětské profily nemohou otevřít Nastavení ani posílat žádosti.",
+    "libraryMode": {
+      "hidden": "Skryto",
+      "rated": "Podle přístupnosti",
+      "all": "Vše"
+    }
+  },
+  "report": {
+    "thanks": "Díky, správce se na to podívá.",
+    "button": "Nahlásit problém",
+    "whatsWrong": "Co je špatně s {{title}}?",
+    "details": "Podrobnosti (nepovinné)",
+    "detailsExample": "Např.: po 20 minutách žádný zvuk",
+    "send": "Odeslat"
+  },
+  "quality": {
+    "label": "Kvalita",
+    "forShow": "Kvalita pro seriál",
+    "confirm": "Přepnout na {{name}}? {{app}} vyhledá odpovídající kopie.",
+    "searching": "Hledám…"
+  },
+  "upcoming": {
+    "nothingYet": "Zatím není co ukázat",
+    "connect": "Připoj Radarr nebo Sonarr a uvidíš filmy a díly, které jsou na cestě.",
+    "openSettings": "Otevřít nastavení",
+    "notConnected": "Správce k tomuto serveru nepřipojil Radarr ani Sonarr.",
+    "intro": "Nové díly a filmové premiéry v příštích dvou měsících, které tu ještě nejsou.",
+    "unavailable": "{{apps}} neodpověděl, takže něco může chybět.",
+    "nothing": "Nic není na cestě. Požádej o něco nového v Žádostech."
+  },
+  "link": {
+    "title": "Přihlásit zařízení",
+    "intro": "Zadej kód, který ukazuje tvůj telefon nebo televize.",
+    "signedIn": "{{device}} je přihlášeno",
+    "ready": "Za pár sekund bude připravené.",
+    "declined": "Odmítnuto",
+    "notSignedIn": "{{device}} nebylo přihlášeno.",
+    "another": "Přihlásit další zařízení",
+    "code": "Kód",
+    "next": "Další",
+    "wantsToSignIn": "se chce přihlásit jako <name>{{name}}</name>",
+    "warning": "Schval jen zařízení, které držíš nebo vidíš. Získá stejný přístup jako ty.",
+    "decline": "Odmítnout",
+    "approve": "Přihlásit"
+  },
+  "profiles": {
+    "whoIsWatching": "Kdo se dívá?",
+    "signInWithAccount": "Přihlásit se účtem",
+    "enterPin": "Zadej PIN pro {{name}}",
+    "pin": "PIN",
+    "deleteDigit": "Smazat"
+  },
+  "integrations": {
+    "title": "Radarr a Sonarr",
+    "intro": "Připoj je, aby si lidé mohli žádat o filmy a seriály, vidět, co brzy přijde, a hlásit problémy s tím, na co se dívají.",
+    "connected": "Připojeno · {{url}}",
+    "notConnected": {
+      "radarr": "Nepřipojeno · pro filmy",
+      "sonarr": "Nepřipojeno · pro seriály"
+    },
+    "change": "Změnit",
+    "connect": "Připojit",
+    "address": "Adresa",
+    "apiKey": "API klíč",
+    "keyWhere": "{{app}} → Settings → General",
+    "saved": "Uloženo",
+    "answers": "{{app}} {{version}} odpovídá na {{url}}",
+    "quality": {
+      "radarr": "Kvalita nových filmů",
+      "sonarr": "Kvalita nových seriálů"
+    },
+    "folder": "Složka",
+    "confirmDisconnect": "Odpojit {{app}}? Tituly, které už v něm jsou, tam zůstanou.",
+    "disconnect": "Odpojit",
+    "testing": "Testuji…",
+    "test": "Otestovat",
+    "whoCanAdd": "Kdo může přidávat filmy a seriály",
+    "mode": {
+      "approve": {
+        "label": "Požádat, pak schválí správce",
+        "detail": "Kdokoli s účtem může požádat o titul. Počká na správce."
+      },
+      "auto": {
+        "label": "Přidat hned",
+        "detail": "Žádosti jdou rovnou do Radarru nebo Sonarru."
+      },
+      "off": {
+        "label": "Tituly přidávají jen správci",
+        "detail": "Ostatní stále vidí, co brzy přijde, a mohou hlásit problémy."
+      }
+    }
+  },
+  "requests": {
+    "tab": {
+      "ask": "Požádat o něco",
+      "requests": "Žádosti",
+      "yourRequests": "Tvoje žádosti",
+      "problems": "Problémy",
+      "yourReports": "Tvoje hlášení"
+    },
+    "movies": "Filmy",
+    "shows": "Seriály",
+    "findMovie": "Najít film…",
+    "findShow": "Najít seriál…",
+    "nothingFound": "Pro „{{q}}“ nic nenalezeno",
+    "ready": "Připraveno ke zhlédnutí",
+    "askedFor": "Vyžádáno",
+    "onItsWay": "Na cestě",
+    "add": "Přidat",
+    "askForIt": "Požádat o něj",
+    "state": {
+      "pending": "Čeká na schválení",
+      "approved": "Na cestě",
+      "declined": "Odmítnuto",
+      "failed": "Nepodařilo se přidat"
+    },
+    "none": "Zatím žádné žádosti.",
+    "retry": "Zkusit znovu",
+    "approve": "Schválit",
+    "remove": "Odebrat žádost o {{title}}",
+    "removedFromLibrary": "Odebráno z knihovny",
+    "noProblems": "Nikdo nenahlásil žádný problém.",
+    "noReports": "Nenahlásil(a) jsi žádné problémy. Použij „Nahlásit problém“ u titulu.",
+    "fileReplaced": "Soubor nahrazen",
+    "closed": "Uzavřeno",
+    "confirmReplace": "Smazat tento soubor titulu {{title}} a stáhnout jinou kopii? Nová se objeví, až se stáhne a knihovna se prohledá.",
+    "replaceFile": "Nahradit soubor",
+    "close": "Uzavřít"
+  },
+  "settings": {
+    "tmdbNotice": "Plakáty a popisy pocházejí z <link>TMDB</link>. Tento produkt používá API TMDB, ale TMDB jej neschválila ani necertifikovala.",
+    "libraries": {
+      "title": "Knihovny",
+      "none": "Zatím žádné knihovny.",
+      "scan": "Prohledat",
+      "remove": "Odebrat {{name}}",
+      "confirmRemove": "Odebrat „{{name}}“? Tvoje soubory zůstanou, kde jsou.",
+      "kind": {
+        "movies": "Filmy",
+        "tv": "Seriály",
+        "music": "Hudba"
+      },
+      "type": "Typ",
+      "folders": "Složky",
+      "up": "O složku výš",
+      "added": "Přidáno",
+      "useFolder": "Použít tuto složku",
+      "noSubfolders": "Žádné podsložky"
+    },
+    "people": {
+      "title": "Lidé",
+      "admin": "Správce",
+      "passwordChanged": "Heslo změněno. {{name}} byl(a) všude odhlášen(a).",
+      "you": "(ty)",
+      "removeAdmin": "Odebrat správce",
+      "makeAdmin": "Udělat správcem",
+      "resetPassword": "Obnovit heslo",
+      "remove": "Odebrat",
+      "newPasswordFor": "Nové heslo pro {{name}}",
+      "setPassword": "Nastavit heslo",
+      "confirmRemove": "Odebrat <name>{{name}}</name>? Historie sledování, seznam ke zhlédnutí, stažené soubory a žádosti zmizí taky a dotyčný bude všude odhlášen. Nelze vrátit zpět."
+    },
+    "account": {
+      "title": "Tvůj účet",
+      "changePassword": "Změnit heslo",
+      "current": "Současné heslo",
+      "new": "Nové heslo",
+      "again": "Nové heslo znovu",
+      "hint": "Alespoň 8 znaků. Tvoje ostatní zařízení budou odhlášena.",
+      "mismatch": "Nová hesla se neshodují.",
+      "changed": "Heslo změněno. Tvoje ostatní zařízení byla odhlášena."
+    },
+    "devices": {
+      "aWhileAgo": "před chvílí",
+      "justNow": "právě teď",
+      "title": "Tvoje zařízení",
+      "unknown": "Neznámé zařízení",
+      "this": "Toto zařízení",
+      "lastUsed": "Naposledy použito {{when}}",
+      "confirmSignOut": "Odhlásit „{{name}}“?"
+    },
+    "version": "Server Matinee {{version}} · API v{{api}}",
+    "home": {
+      "title": "Domácí síť",
+      "requireSignIn": "Vyžadovat přihlášení doma",
+      "required": "Všichni se přihlašují, doma i venku.",
+      "open": "Telefony, televize a prohlížeče v domácí síti mohou sledovat bez přihlášení. Sdílejí jeden účet Domov a nemohou nic měnit. Mimo domov se přihlašují všichni."
+    },
+    "remote": {
+      "title": "Vzdálený přístup",
+      "publicURL": "Mimo domov se aplikace připojují k <url>{{url}}</url>, adrese, se kterou byl server nastaven.",
+      "toggle": "Sledovat mimo domov",
+      "hint": "Matinee požádá tvůj router o otevření portu a získá certifikát, aby se aplikace odkudkoli připojovaly bezpečně. Zvenku se přihlašují všichni.",
+      "working": "Otevírám port na routeru a získávám certifikát…",
+      "ready": "Mimo domov aplikace dosáhnou na tento server na <url>{{url}}</url>.",
+      "router": "Tvůj router otevřel port přes {{router}}.",
+      "pickUp": "Tuto adresu si převezmou, až budou příště v domácí síti.",
+      "sharedAddress": "Matinee to zatím neumí obejít sám.",
+      "retry": "Matinee to zkusí znovu každou půlhodinu."
+    },
+    "playback": {
+      "title": "Přehrávání",
+      "autoPlay": "Přehrát další díl",
+      "autoPlayHint": "Když začnou titulky, další díl se spustí po 10sekundovém odpočtu, který můžeš zrušit.",
+      "binge": "Přeskočit odpočet",
+      "bingeHint": "Při začátku titulků rovnou přejde na další díl. Po třech dílech v řadě bez jakékoli akce se tě zeptá, jestli se ještě díváš."
+    },
+    "trailers": {
+      "title": "Upoutávky",
+      "remote": "Upoutávky z YouTube",
+      "remoteOn": "Filmy a seriály nabízejí upoutávky z TMDB, které se přehrávají z YouTube. Soubory upoutávek vedle tvých médií se zobrazují vždy.",
+      "remoteOff": "Zobrazují se jen soubory upoutávek vedle tvých médií, například „Movie (2020)-trailer.mkv“ nebo cokoli ve složce Trailers."
+    },
+    "transcoding": {
+      "title": "Překódování",
+      "intro": "Soubory, které zařízení neumí přehrát tak, jak jsou, se převádějí během sledování. GPU to zvládne rychleji a méně zatíží server.",
+      "convertingWith": "Převádí se pomocí",
+      "active": "{{name}}.",
+      "activeOn": "{{name}} na {{detail}}.",
+      "fullGPU": "Video se dekóduje, škáluje a kóduje na GPU.",
+      "encodeOnly": "Video se kóduje na GPU a dekóduje na CPU.",
+      "fallback": "Pokud GPU soubor nezvládne, přehraje se místo toho přes CPU.",
+      "testing": "Testuji GPU tohoto serveru…",
+      "cpuOff": "CPU. Hardwarové překódování je vypnuté.",
+      "cpuFailed": "CPU, protože zvolený akcelerátor na tomto serveru nefungoval.",
+      "cpuNoGPU": "CPU. Žádné GPU na tomto serveru neprošlo testem.",
+      "hardware": "Hardwarová akcelerace",
+      "auto": "Automaticky: nejlepší funkční",
+      "off": "Vypnuto: vždy používat CPU",
+      "notFound": "{{name}} (na tomto serveru nenalezeno)",
+      "accelerator": {
+        "nvenc": "NVIDIA NVENC",
+        "vaapi": "VAAPI (AMD a Intel v Linuxu)",
+        "qsv": "Intel Quick Sync",
+        "videotoolbox": "VideoToolbox (Mac)",
+        "amf": "AMD AMF (Windows)",
+        "v4l2m2m": "V4L2 (Raspberry Pi)"
+      }
+    }
+  },
+  "language": {
+    "title": "Jazyk",
+    "label": "Zobrazit Matinee v jazyce",
+    "hint": "Tvůj jazyk tě následuje do aplikací Matinee v telefonu a televizi. Názvy a popisy jsou v něm také, pokud je TMDB má.",
+    "guestHint": "Všichni doma bez účtu sdílejí tento jazyk.",
+    "automatic": "Automaticky ({{language}})",
+    "machine": "Tento jazyk byl přeložen strojově, takže některá slova mohou znít zvláštně.",
+    "help": "Pomoz ho vylepšit"
+  }
+}

@@ -1,0 +1,310 @@
+{
+  "duration": {
+    "minutes": "{{minutes}} دقیقه",
+    "hoursMinutes": "{{hours}} ساعت و {{minutes}} دقیقه"
+  },
+  "episodeCode": "ف{{season}} · ق{{episode}}",
+  "seasonN": "فصل {{season}}",
+  "specials": "ویژه‌ها",
+  "media": {
+    "mono": "مونو",
+    "stereo": "استریو",
+    "lossless": "بی‌اتلاف",
+    "hiRes": "Hi-Res",
+    "dolbyVisionProfile": "Dolby Vision پروفایل {{profile}}",
+    "withBase": "{{format}}، با {{base}} برای صفحه‌های دیگر",
+    "bitDepth": "{{bits}} بیتی",
+    "forced": "اجباری",
+    "sdh": "SDH"
+  },
+  "people": {
+    "episodes_one": "{{count}} قسمت",
+    "episodes_other": "{{count}} قسمت",
+    "lines": {
+      "createdBy": "ساخته‌ی",
+      "director_one": "کارگردان",
+      "director_other": "کارگردانان",
+      "writer_one": "نویسنده",
+      "writer_other": "نویسندگان",
+      "basedOn": "بر اساس",
+      "music": "موسیقی"
+    },
+    "died": "درگذشت {{date}}",
+    "bornIn": "متولد {{place}}",
+    "bornOnIn": "متولد {{date}} در {{place}}",
+    "bornOn": "متولد {{date}}",
+    "dollars": "${{amount}}"
+  },
+  "facts": {
+    "firstAired": "نخستین پخش",
+    "released": "اکران",
+    "aired": "پخش",
+    "ended": "پایان",
+    "status": "وضعیت",
+    "seasons": "فصل‌ها",
+    "seasonsValue_one": "{{seasons}} ({{count}} قسمت)",
+    "seasonsValue_other": "{{seasons}} ({{count}} قسمت)",
+    "rated": "رده‌ی سنی",
+    "genres": "ژانرها",
+    "originalTitle": "عنوان اصلی",
+    "originalLanguage": "زبان اصلی",
+    "spokenLanguages": "زبان‌های گفتاری",
+    "studio_one": "استودیو",
+    "studio_other": "استودیوها",
+    "network_one": "شبکه",
+    "network_other": "شبکه‌ها",
+    "country_one": "کشور",
+    "country_other": "کشورها",
+    "collection": "مجموعه",
+    "budget": "بودجه",
+    "boxOffice": "فروش گیشه"
+  },
+  "showStatus": {
+    "Returning Series": "سریال در حال ادامه",
+    "Ended": "پایان‌یافته",
+    "Canceled": "لغوشده",
+    "In Production": "در حال تولید",
+    "Planned": "برنامه‌ریزی‌شده",
+    "Pilot": "پایلوت"
+  },
+  "genres": {
+    "Action": "اکشن",
+    "Adventure": "ماجراجویی",
+    "Animation": "انیمیشن",
+    "Comedy": "کمدی",
+    "Crime": "جنایی",
+    "Documentary": "مستند",
+    "Drama": "درام",
+    "Family": "خانوادگی",
+    "Fantasy": "فانتزی",
+    "History": "تاریخی",
+    "Horror": "ترسناک",
+    "Music": "موسیقی",
+    "Mystery": "معمایی",
+    "Romance": "عاشقانه",
+    "Science Fiction": "علمی‌تخیلی",
+    "Thriller": "هیجان‌انگیز",
+    "War": "جنگی",
+    "Western": "وسترن",
+    "Reality": "واقع‌نما",
+    "TV Movie": "فیلم تلویزیونی",
+    "Action & Adventure": "اکشن و ماجراجویی",
+    "Kids": "کودکان",
+    "News": "خبری",
+    "Sci-Fi & Fantasy": "علمی‌تخیلی و فانتزی",
+    "Soap": "سریال آبکی",
+    "Talk": "گفت‌وگو",
+    "War & Politics": "جنگ و سیاست"
+  },
+  "jobs": {
+    "Director": "کارگردان",
+    "Creator": "سازنده",
+    "Screenplay": "فیلم‌نامه",
+    "Writer": "نویسنده",
+    "Teleplay": "فیلم‌نامه‌ی تلویزیونی",
+    "Story": "داستان",
+    "Novel": "رمان",
+    "Characters": "شخصیت‌ها",
+    "Author": "نویسنده‌ی کتاب",
+    "Original Music Composer": "آهنگساز موسیقی متن",
+    "Music": "موسیقی",
+    "Director of Photography": "مدیر فیلم‌برداری",
+    "Editor": "تدوینگر",
+    "Producer": "تهیه‌کننده",
+    "Executive Producer": "تهیه‌کننده‌ی اجرایی",
+    "Casting": "انتخاب بازیگر",
+    "Production Design": "طراحی صحنه",
+    "Costume Design": "طراحی لباس"
+  },
+  "kids": {
+    "littleKids": "کودکان خردسال",
+    "kids": "کودکان",
+    "teens": "نوجوانان",
+    "andYounger": "{{ratings}} و پایین‌تر"
+  },
+  "sort": {
+    "title": "عنوان",
+    "added": "تاریخ افزودن",
+    "released": "تاریخ انتشار",
+    "year": "سال",
+    "rating": "امتیاز",
+    "runtime": "مدت",
+    "lastPlayed": "آخرین تماشا"
+  },
+  "watched": {
+    "unwatched": "دیده‌نشده",
+    "inProgress": "در حال تماشا",
+    "watched": "دیده‌شده",
+    "notStarted": "شروع‌نشده"
+  },
+  "genreRows": {
+    "Action": "پر از اکشن",
+    "Adventure": "ماجراجویی‌ها",
+    "Animation": "انیمیشن‌های محبوب",
+    "Comedy": "کمدی‌ها",
+    "Crime": "داستان‌های جنایی",
+    "Documentary": "مستندها",
+    "Drama": "درام‌ها",
+    "Family": "برای همه‌ی خانواده",
+    "Fantasy": "دنیاهای فانتزی",
+    "Horror": "ترسناک",
+    "Mystery": "معماها",
+    "Romance": "عاشقانه",
+    "Science Fiction": "علمی‌تخیلی‌های محبوب",
+    "Thriller": "هیجان‌انگیزها",
+    "War": "داستان‌های جنگی",
+    "Western": "وسترن‌ها"
+  },
+  "count": {
+    "episodes_one": "{{count}} قسمت",
+    "episodes_other": "{{count}} قسمت",
+    "seasons_one": "{{count}} فصل",
+    "seasons_other": "{{count}} فصل",
+    "albums_one": "{{count}} آلبوم",
+    "albums_other": "{{count}} آلبوم",
+    "tracks_one": "{{count}} قطعه",
+    "tracks_other": "{{count}} قطعه",
+    "titles_one": "{{count}} عنوان",
+    "titles_other": "{{count}} عنوان"
+  },
+  "awards": {
+    "academy": {
+      "won_one": "برنده‌ی {{count}} جایزه‌ی اسکار",
+      "won_other": "برنده‌ی {{count}} جایزه‌ی اسکار",
+      "nominated_one": "نامزد {{count}} جایزه‌ی اسکار",
+      "nominated_other": "نامزد {{count}} جایزه‌ی اسکار"
+    },
+    "emmy": {
+      "won_one": "برنده‌ی {{count}} جایزه‌ی امی",
+      "won_other": "برنده‌ی {{count}} جایزه‌ی امی",
+      "nominated_one": "نامزد {{count}} جایزه‌ی امی",
+      "nominated_other": "نامزد {{count}} جایزه‌ی امی"
+    },
+    "globe": {
+      "won_one": "برنده‌ی {{count}} گلدن گلوب",
+      "won_other": "برنده‌ی {{count}} گلدن گلوب",
+      "nominated_one": "نامزد {{count}} گلدن گلوب",
+      "nominated_other": "نامزد {{count}} گلدن گلوب"
+    },
+    "bafta": {
+      "won_one": "برنده‌ی {{count}} بفتا",
+      "won_other": "برنده‌ی {{count}} بفتا",
+      "nominated_one": "نامزد {{count}} بفتا",
+      "nominated_other": "نامزد {{count}} بفتا"
+    },
+    "wins_one": "{{count}} برد",
+    "wins_other": "{{count}} برد",
+    "nominations_one": "{{count}} نامزدی",
+    "nominations_other": "{{count}} نامزدی",
+    "winsAndNominations": "{{wins}} و {{nominations}}"
+  },
+  "departments": {
+    "Acting": "بازیگر",
+    "Directing": "کارگردانی",
+    "Writing": "نویسندگی",
+    "Production": "تولید",
+    "Sound": "صدا",
+    "Camera": "دوربین",
+    "Editing": "تدوین",
+    "Art": "هنری",
+    "Crew": "عوامل",
+    "Visual Effects": "جلوه‌های ویژه‌ی بصری",
+    "Costume & Make-Up": "لباس و گریم",
+    "Lighting": "نورپردازی",
+    "Creator": "سازنده"
+  },
+  "starters": {
+    "recent": "تازه افزوده‌شده",
+    "unwatched": "دیده‌نشده",
+    "tonight": "کوتاه، برای امشب"
+  },
+  "filter": {
+    "decade": "دهه‌ی {{decade}}",
+    "yearRange": "{{from}}–{{to}}",
+    "yearOrLater": "{{year}} به بعد",
+    "yearOrEarlier": "{{year}} و قبل‌تر",
+    "lastYear": "سال گذشته",
+    "lastWeeks_one": "هفته‌ی گذشته",
+    "lastWeeks_other": "{{count}} هفته‌ی گذشته",
+    "lastDays_one": "{{count}} روز گذشته",
+    "lastDays_other": "{{count}} روز گذشته",
+    "runtime": {
+      "titles": {
+        "between": "{{min}}–{{max}} دقیقه",
+        "over": "بیش از {{min}} دقیقه",
+        "under": "کمتر از {{max}} دقیقه"
+      },
+      "episodes": {
+        "between": "قسمت‌های {{min}}–{{max}} دقیقه‌ای",
+        "over": "قسمت‌های بیش از {{min}} دقیقه",
+        "under": "قسمت‌های کمتر از {{max}} دقیقه"
+      }
+    }
+  },
+  "themes": {
+    "clean": {
+      "name": "ساده",
+      "description": "سفید ساده، یک آبی، بدون سریف. فقط پوسترها."
+    },
+    "dark": {
+      "name": "تیره",
+      "description": "سیاه واقعی و سفید شفاف. راحت برای چشم و برای صفحه‌ی OLED."
+    },
+    "drive-in": {
+      "name": "سینمای ماشینی",
+      "description": "قهوه‌ای‌های دهه‌ی هفتاد و کهربایی تابلوی سینما، مثل شبی در سینمای ماشینی."
+    },
+    "high-contrast": {
+      "name": "کنتراست بالا",
+      "description": "سیاه، سفید و زرد روشن، برای خواناترین متن از آن سر اتاق."
+    },
+    "light": {
+      "name": "روشن",
+      "description": "سفید کاغذی گرم با مرجانی، برای اتاق روشن."
+    },
+    "matinee": {
+      "name": "Matinee",
+      "description": "تاریکی گرم سالن سینما با رنگ مرجانی. ظاهر اصلی."
+    },
+    "sci-fi": {
+      "name": "علمی‌تخیلی",
+      "description": "سرمه‌ای اعماق فضا با درخشش فیروزه‌ای نئون و قلمی آینده‌نگر."
+    }
+  },
+  "every": {
+    "seconds_one": "{{count}} ثانیه",
+    "seconds_other": "{{count}} ثانیه",
+    "minutes_one": "{{count}} دقیقه",
+    "minutes_other": "{{count}} دقیقه",
+    "hours_one": "{{count}} ساعت",
+    "hours_other": "{{count}} ساعت"
+  },
+  "avatars": {
+    "coral": "مرجانی",
+    "amber": "کهربایی",
+    "lime": "لیمویی",
+    "teal": "سبزآبی",
+    "sky": "آبی آسمانی",
+    "violet": "بنفش",
+    "pink": "صورتی",
+    "slate": "سنگی"
+  },
+  "day": {
+    "today": "امروز",
+    "tomorrow": "فردا",
+    "yesterday": "دیروز"
+  },
+  "release": {
+    "cinemas": "در سینماها",
+    "digital": "انتشار دیجیتال",
+    "physical": "روی دیسک",
+    "airs": "پخش"
+  },
+  "issue": {
+    "video": "تصویر",
+    "audio": "صدا",
+    "subtitles": "زیرنویس",
+    "wrong": "عنوان اشتباه",
+    "other": "چیز دیگر"
+  }
+}

@@ -1,0 +1,310 @@
+{
+  "duration": {
+    "minutes": "{{minutes}} perc",
+    "hoursMinutes": "{{hours}} ó {{minutes}} p"
+  },
+  "episodeCode": "{{season}}. évad · {{episode}}. rész",
+  "seasonN": "{{season}}. évad",
+  "specials": "Különkiadások",
+  "media": {
+    "mono": "Mono",
+    "stereo": "Sztereó",
+    "lossless": "Veszteségmentes",
+    "hiRes": "Hi-Res",
+    "dolbyVisionProfile": "Dolby Vision {{profile}}. profil",
+    "withBase": "{{format}}, más kijelzőkre {{base}}",
+    "bitDepth": "{{bits}} bites",
+    "forced": "Kényszerített",
+    "sdh": "SDH"
+  },
+  "people": {
+    "episodes_one": "{{count}} rész",
+    "episodes_other": "{{count}} rész",
+    "lines": {
+      "createdBy": "Alkotó",
+      "director_one": "Rendező",
+      "director_other": "Rendezők",
+      "writer_one": "Író",
+      "writer_other": "Írók",
+      "basedOn": "Az alapján",
+      "music": "Zene"
+    },
+    "died": "Elhunyt: {{date}}",
+    "bornIn": "Született: {{place}}",
+    "bornOnIn": "Született: {{date}}, {{place}}",
+    "bornOn": "Született: {{date}}",
+    "dollars": "{{amount}} $"
+  },
+  "facts": {
+    "firstAired": "Első adás",
+    "released": "Megjelenés",
+    "aired": "Adásban",
+    "ended": "Befejeződött",
+    "status": "Állapot",
+    "seasons": "Évadok",
+    "seasonsValue_one": "{{seasons}} ({{count}} rész)",
+    "seasonsValue_other": "{{seasons}} ({{count}} rész)",
+    "rated": "Korhatár",
+    "genres": "Műfajok",
+    "originalTitle": "Eredeti cím",
+    "originalLanguage": "Eredeti nyelv",
+    "spokenLanguages": "Beszélt nyelvek",
+    "studio_one": "Stúdió",
+    "studio_other": "Stúdiók",
+    "network_one": "Csatorna",
+    "network_other": "Csatornák",
+    "country_one": "Ország",
+    "country_other": "Országok",
+    "collection": "Gyűjtemény",
+    "budget": "Költségvetés",
+    "boxOffice": "Jegybevétel"
+  },
+  "showStatus": {
+    "Returning Series": "Folytatódik",
+    "Ended": "Befejeződött",
+    "Canceled": "Elkaszálva",
+    "In Production": "Gyártás alatt",
+    "Planned": "Tervezett",
+    "Pilot": "Pilot"
+  },
+  "genres": {
+    "Action": "Akció",
+    "Adventure": "Kaland",
+    "Animation": "Animáció",
+    "Comedy": "Vígjáték",
+    "Crime": "Krimi",
+    "Documentary": "Dokumentum",
+    "Drama": "Dráma",
+    "Family": "Családi",
+    "Fantasy": "Fantasy",
+    "History": "Történelmi",
+    "Horror": "Horror",
+    "Music": "Zenés",
+    "Mystery": "Rejtély",
+    "Romance": "Romantikus",
+    "Science Fiction": "Sci-fi",
+    "Thriller": "Thriller",
+    "War": "Háborús",
+    "Western": "Western",
+    "Reality": "Valóságshow",
+    "TV Movie": "Tévéfilm",
+    "Action & Adventure": "Akció és kaland",
+    "Kids": "Gyerekeknek",
+    "News": "Hírek",
+    "Sci-Fi & Fantasy": "Sci-fi és fantasy",
+    "Soap": "Szappanopera",
+    "Talk": "Talkshow",
+    "War & Politics": "Háború és politika"
+  },
+  "jobs": {
+    "Director": "Rendező",
+    "Creator": "Alkotó",
+    "Screenplay": "Forgatókönyv",
+    "Writer": "Író",
+    "Teleplay": "Tévés forgatókönyv",
+    "Story": "Történet",
+    "Novel": "Regény",
+    "Characters": "Szereplők",
+    "Author": "Szerző",
+    "Original Music Composer": "Eredeti zene",
+    "Music": "Zene",
+    "Director of Photography": "Operatőr",
+    "Editor": "Vágó",
+    "Producer": "Producer",
+    "Executive Producer": "Executive producer",
+    "Casting": "Szereposztás",
+    "Production Design": "Látványtervezés",
+    "Costume Design": "Jelmeztervezés"
+  },
+  "kids": {
+    "littleKids": "Kisgyerekek",
+    "kids": "Gyerekek",
+    "teens": "Tinik",
+    "andYounger": "{{ratings}} és fiatalabbak"
+  },
+  "sort": {
+    "title": "Cím",
+    "added": "Hozzáadás dátuma",
+    "released": "Megjelenés dátuma",
+    "year": "Év",
+    "rating": "Értékelés",
+    "runtime": "Játékidő",
+    "lastPlayed": "Legutóbb nézve"
+  },
+  "watched": {
+    "unwatched": "Nem látott",
+    "inProgress": "Folyamatban",
+    "watched": "Látott",
+    "notStarted": "Nem kezdett"
+  },
+  "genreRows": {
+    "Action": "Akciódús",
+    "Adventure": "Kalandok",
+    "Animation": "Kedvenc animációk",
+    "Comedy": "Vígjátékok",
+    "Crime": "Krimik",
+    "Documentary": "Dokumentumfilmek",
+    "Drama": "Drámák",
+    "Family": "Az egész családnak",
+    "Fantasy": "Fantasy világok",
+    "Horror": "Horror",
+    "Mystery": "Rejtélyek",
+    "Romance": "Romantika",
+    "Science Fiction": "Kedvenc sci-fik",
+    "Thriller": "Thrillerek",
+    "War": "Háborús történetek",
+    "Western": "Westernek"
+  },
+  "count": {
+    "episodes_one": "{{count}} rész",
+    "episodes_other": "{{count}} rész",
+    "seasons_one": "{{count}} évad",
+    "seasons_other": "{{count}} évad",
+    "albums_one": "{{count}} album",
+    "albums_other": "{{count}} album",
+    "tracks_one": "{{count}} szám",
+    "tracks_other": "{{count}} szám",
+    "titles_one": "{{count}} cím",
+    "titles_other": "{{count}} cím"
+  },
+  "awards": {
+    "academy": {
+      "won_one": "{{count}} Oscar-díjat nyert",
+      "won_other": "{{count}} Oscar-díjat nyert",
+      "nominated_one": "{{count}} Oscar-jelölés",
+      "nominated_other": "{{count}} Oscar-jelölés"
+    },
+    "emmy": {
+      "won_one": "{{count}} Primetime Emmy-díjat nyert",
+      "won_other": "{{count}} Primetime Emmy-díjat nyert",
+      "nominated_one": "{{count}} Primetime Emmy-jelölés",
+      "nominated_other": "{{count}} Primetime Emmy-jelölés"
+    },
+    "globe": {
+      "won_one": "{{count}} Golden Globe-díjat nyert",
+      "won_other": "{{count}} Golden Globe-díjat nyert",
+      "nominated_one": "{{count}} Golden Globe-jelölés",
+      "nominated_other": "{{count}} Golden Globe-jelölés"
+    },
+    "bafta": {
+      "won_one": "{{count}} BAFTA-díjat nyert",
+      "won_other": "{{count}} BAFTA-díjat nyert",
+      "nominated_one": "{{count}} BAFTA-jelölés",
+      "nominated_other": "{{count}} BAFTA-jelölés"
+    },
+    "wins_one": "{{count}} díj",
+    "wins_other": "{{count}} díj",
+    "nominations_one": "{{count}} jelölés",
+    "nominations_other": "{{count}} jelölés",
+    "winsAndNominations": "{{wins}} és {{nominations}}"
+  },
+  "departments": {
+    "Acting": "Színész",
+    "Directing": "Rendezés",
+    "Writing": "Írás",
+    "Production": "Gyártás",
+    "Sound": "Hang",
+    "Camera": "Kamera",
+    "Editing": "Vágás",
+    "Art": "Látvány",
+    "Crew": "Stáb",
+    "Visual Effects": "Vizuális effektek",
+    "Costume & Make-Up": "Jelmez és smink",
+    "Lighting": "Világítás",
+    "Creator": "Alkotó"
+  },
+  "starters": {
+    "recent": "Nemrég hozzáadva",
+    "unwatched": "Nem látott",
+    "tonight": "Elég rövid ma estére"
+  },
+  "filter": {
+    "decade": "{{decade}}-as évek",
+    "yearRange": "{{from}}–{{to}}",
+    "yearOrLater": "{{year}} vagy később",
+    "yearOrEarlier": "{{year}} vagy korábban",
+    "lastYear": "az elmúlt évben",
+    "lastWeeks_one": "az elmúlt héten",
+    "lastWeeks_other": "az elmúlt {{count}} hétben",
+    "lastDays_one": "az elmúlt {{count}} napban",
+    "lastDays_other": "az elmúlt {{count}} napban",
+    "runtime": {
+      "titles": {
+        "between": "{{min}}–{{max}} perc",
+        "over": "{{min}} percnél hosszabb",
+        "under": "{{max}} percnél rövidebb"
+      },
+      "episodes": {
+        "between": "Részek {{min}}–{{max}} perc",
+        "over": "Részek {{min}} percnél hosszabbak",
+        "under": "Részek {{max}} percnél rövidebbek"
+      }
+    }
+  },
+  "themes": {
+    "clean": {
+      "name": "Tiszta",
+      "description": "Fehér, egy kék, talpak nélkül. Csak a plakátok."
+    },
+    "dark": {
+      "name": "Sötét",
+      "description": "Mélyfekete és éles fehér. Kíméli a szemet és az OLED-kijelzőt."
+    },
+    "drive-in": {
+      "name": "Autósmozi",
+      "description": "Hetvenes évekbeli barnák és borostyán neonfények, mint egy este az autósmoziban."
+    },
+    "high-contrast": {
+      "name": "Nagy kontraszt",
+      "description": "Fekete, fehér és élénksárga, hogy a szöveg a szoba túloldaláról is a legtisztábban olvasható legyen."
+    },
+    "light": {
+      "name": "Világos",
+      "description": "Meleg papírfehér korallal, világos szobához."
+    },
+    "matinee": {
+      "name": "Matinee",
+      "description": "Meleg színházi sötét korall kiemeléssel. A ház saját stílusa."
+    },
+    "sci-fi": {
+      "name": "Sci-fi",
+      "description": "Mély űrkék neon ciánkék ragyogással és futurisztikus betűtípussal."
+    }
+  },
+  "every": {
+    "seconds_one": "{{count}} másodperc",
+    "seconds_other": "{{count}} másodperc",
+    "minutes_one": "{{count}} perc",
+    "minutes_other": "{{count}} perc",
+    "hours_one": "{{count}} óra",
+    "hours_other": "{{count}} óra"
+  },
+  "avatars": {
+    "coral": "Korall",
+    "amber": "Borostyán",
+    "lime": "Lime",
+    "teal": "Kékeszöld",
+    "sky": "Égszínkék",
+    "violet": "Ibolya",
+    "pink": "Rózsaszín",
+    "slate": "Palaszürke"
+  },
+  "day": {
+    "today": "Ma",
+    "tomorrow": "Holnap",
+    "yesterday": "Tegnap"
+  },
+  "release": {
+    "cinemas": "Mozikban",
+    "digital": "Digitális megjelenés",
+    "physical": "Lemezen",
+    "airs": "Adásban"
+  },
+  "issue": {
+    "video": "Kép",
+    "audio": "Hang",
+    "subtitles": "Feliratok",
+    "wrong": "Rossz cím",
+    "other": "Valami más"
+  }
+}

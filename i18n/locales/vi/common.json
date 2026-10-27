@@ -1,0 +1,283 @@
+{
+  "duration": {
+    "minutes": "{{minutes}} phút",
+    "hoursMinutes": "{{hours}} giờ {{minutes}} phút"
+  },
+  "episodeCode": "P{{season}} · T{{episode}}",
+  "seasonN": "Phần {{season}}",
+  "specials": "Tập đặc biệt",
+  "media": {
+    "mono": "Mono",
+    "stereo": "Stereo",
+    "lossless": "Lossless",
+    "hiRes": "Hi-Res",
+    "dolbyVisionProfile": "Dolby Vision hồ sơ {{profile}}",
+    "withBase": "{{format}}, kèm {{base}} cho các màn hình khác",
+    "bitDepth": "{{bits}}-bit",
+    "forced": "Bắt buộc",
+    "sdh": "SDH"
+  },
+  "people": {
+    "episodes_other": "{{count}} tập",
+    "lines": {
+      "createdBy": "Sáng tạo bởi",
+      "director_other": "Đạo diễn",
+      "writer_other": "Biên kịch",
+      "basedOn": "Dựa trên",
+      "music": "Âm nhạc"
+    },
+    "died": "Mất {{date}}",
+    "bornIn": "Sinh tại {{place}}",
+    "bornOnIn": "Sinh {{date}} tại {{place}}",
+    "bornOn": "Sinh {{date}}",
+    "dollars": "${{amount}}"
+  },
+  "facts": {
+    "firstAired": "Phát sóng lần đầu",
+    "released": "Phát hành",
+    "aired": "Đã phát sóng",
+    "ended": "Đã kết thúc",
+    "status": "Trạng thái",
+    "seasons": "Các phần",
+    "seasonsValue_other": "{{seasons}} ({{count}} tập)",
+    "rated": "Phân loại",
+    "genres": "Thể loại",
+    "originalTitle": "Tên gốc",
+    "originalLanguage": "Ngôn ngữ gốc",
+    "spokenLanguages": "Ngôn ngữ nói",
+    "studio_other": "Hãng phim",
+    "network_other": "Kênh",
+    "country_other": "Quốc gia",
+    "collection": "Bộ sưu tập",
+    "budget": "Kinh phí",
+    "boxOffice": "Doanh thu phòng vé"
+  },
+  "showStatus": {
+    "Returning Series": "Đang tiếp tục",
+    "Ended": "Đã kết thúc",
+    "Canceled": "Đã bị hủy",
+    "In Production": "Đang sản xuất",
+    "Planned": "Đã lên kế hoạch",
+    "Pilot": "Tập thử nghiệm"
+  },
+  "genres": {
+    "Action": "Hành động",
+    "Adventure": "Phiêu lưu",
+    "Animation": "Hoạt hình",
+    "Comedy": "Hài",
+    "Crime": "Hình sự",
+    "Documentary": "Tài liệu",
+    "Drama": "Chính kịch",
+    "Family": "Gia đình",
+    "Fantasy": "Giả tưởng",
+    "History": "Lịch sử",
+    "Horror": "Kinh dị",
+    "Music": "Âm nhạc",
+    "Mystery": "Bí ẩn",
+    "Romance": "Lãng mạn",
+    "Science Fiction": "Khoa học viễn tưởng",
+    "Thriller": "Gây cấn",
+    "War": "Chiến tranh",
+    "Western": "Miền Tây",
+    "Reality": "Truyền hình thực tế",
+    "TV Movie": "Phim truyền hình",
+    "Action & Adventure": "Hành động & Phiêu lưu",
+    "Kids": "Thiếu nhi",
+    "News": "Tin tức",
+    "Sci-Fi & Fantasy": "Viễn tưởng & Giả tưởng",
+    "Soap": "Phim dài tập",
+    "Talk": "Trò chuyện",
+    "War & Politics": "Chiến tranh & Chính trị"
+  },
+  "jobs": {
+    "Director": "Đạo diễn",
+    "Creator": "Người sáng tạo",
+    "Screenplay": "Kịch bản",
+    "Writer": "Biên kịch",
+    "Teleplay": "Kịch bản truyền hình",
+    "Story": "Cốt truyện",
+    "Novel": "Tiểu thuyết",
+    "Characters": "Nhân vật",
+    "Author": "Tác giả",
+    "Original Music Composer": "Nhạc gốc",
+    "Music": "Âm nhạc",
+    "Director of Photography": "Quay phim",
+    "Editor": "Dựng phim",
+    "Producer": "Nhà sản xuất",
+    "Executive Producer": "Giám đốc sản xuất",
+    "Casting": "Tuyển vai",
+    "Production Design": "Thiết kế sản xuất",
+    "Costume Design": "Thiết kế trang phục"
+  },
+  "kids": {
+    "littleKids": "Trẻ nhỏ",
+    "kids": "Trẻ em",
+    "teens": "Thiếu niên",
+    "andYounger": "{{ratings}} trở xuống"
+  },
+  "sort": {
+    "title": "Tên",
+    "added": "Ngày thêm",
+    "released": "Ngày phát hành",
+    "year": "Năm",
+    "rating": "Điểm",
+    "runtime": "Thời lượng",
+    "lastPlayed": "Xem lần cuối"
+  },
+  "watched": {
+    "unwatched": "Chưa xem",
+    "inProgress": "Đang xem",
+    "watched": "Đã xem",
+    "notStarted": "Chưa bắt đầu"
+  },
+  "genreRows": {
+    "Action": "Đầy hành động",
+    "Adventure": "Phiêu lưu",
+    "Animation": "Hoạt hình yêu thích",
+    "Comedy": "Phim hài",
+    "Crime": "Chuyện hình sự",
+    "Documentary": "Phim tài liệu",
+    "Drama": "Chính kịch",
+    "Family": "Cho cả gia đình",
+    "Fantasy": "Thế giới giả tưởng",
+    "Horror": "Kinh dị",
+    "Mystery": "Bí ẩn",
+    "Romance": "Lãng mạn",
+    "Science Fiction": "Viễn tưởng yêu thích",
+    "Thriller": "Phim gây cấn",
+    "War": "Chuyện chiến tranh",
+    "Western": "Phim miền Tây"
+  },
+  "count": {
+    "episodes_other": "{{count}} tập",
+    "seasons_other": "{{count}} phần",
+    "albums_other": "{{count}} album",
+    "tracks_other": "{{count}} bài",
+    "titles_other": "{{count}} mục"
+  },
+  "awards": {
+    "academy": {
+      "won_other": "Đoạt {{count}} giải Oscar",
+      "nominated_other": "Được đề cử {{count}} giải Oscar"
+    },
+    "emmy": {
+      "won_other": "Đoạt {{count}} giải Primetime Emmy",
+      "nominated_other": "Được đề cử {{count}} giải Primetime Emmy"
+    },
+    "globe": {
+      "won_other": "Đoạt {{count}} giải Quả Cầu Vàng",
+      "nominated_other": "Được đề cử {{count}} giải Quả Cầu Vàng"
+    },
+    "bafta": {
+      "won_other": "Đoạt {{count}} giải BAFTA",
+      "nominated_other": "Được đề cử {{count}} giải BAFTA"
+    },
+    "wins_other": "{{count}} giải",
+    "nominations_other": "{{count}} đề cử",
+    "winsAndNominations": "{{wins}} và {{nominations}}"
+  },
+  "departments": {
+    "Acting": "Diễn viên",
+    "Directing": "Đạo diễn",
+    "Writing": "Biên kịch",
+    "Production": "Sản xuất",
+    "Sound": "Âm thanh",
+    "Camera": "Máy quay",
+    "Editing": "Dựng phim",
+    "Art": "Mỹ thuật",
+    "Crew": "Đoàn làm phim",
+    "Visual Effects": "Hiệu ứng hình ảnh",
+    "Costume & Make-Up": "Trang phục & Hóa trang",
+    "Lighting": "Ánh sáng",
+    "Creator": "Người sáng tạo"
+  },
+  "starters": {
+    "recent": "Mới thêm",
+    "unwatched": "Chưa xem",
+    "tonight": "Đủ ngắn cho tối nay"
+  },
+  "filter": {
+    "decade": "Thập niên {{decade}}",
+    "yearRange": "{{from}}–{{to}}",
+    "yearOrLater": "Từ {{year}} trở về sau",
+    "yearOrEarlier": "Từ {{year}} trở về trước",
+    "lastYear": "năm qua",
+    "lastWeeks_other": "{{count}} tuần qua",
+    "lastDays_other": "{{count}} ngày qua",
+    "runtime": {
+      "titles": {
+        "between": "{{min}}–{{max}} phút",
+        "over": "Trên {{min}} phút",
+        "under": "Dưới {{max}} phút"
+      },
+      "episodes": {
+        "between": "Tập {{min}}–{{max}} phút",
+        "over": "Tập trên {{min}} phút",
+        "under": "Tập dưới {{max}} phút"
+      }
+    }
+  },
+  "themes": {
+    "clean": {
+      "name": "Gọn gàng",
+      "description": "Trắng trơn, một màu xanh, không chân chữ. Chỉ có áp phích."
+    },
+    "dark": {
+      "name": "Tối",
+      "description": "Đen tuyền và trắng sắc nét. Dịu mắt, và hợp với màn hình OLED."
+    },
+    "drive-in": {
+      "name": "Rạp ngoài trời",
+      "description": "Tông nâu thập niên 70 và hổ phách bảng hiệu, như một đêm ở rạp ngoài trời."
+    },
+    "high-contrast": {
+      "name": "Tương phản cao",
+      "description": "Đen, trắng và vàng tươi, để chữ rõ nhất từ phía bên kia căn phòng."
+    },
+    "light": {
+      "name": "Sáng",
+      "description": "Trắng giấy ấm với màu san hô, cho căn phòng sáng sủa."
+    },
+    "matinee": {
+      "name": "Matinee",
+      "description": "Bóng tối rạp hát ấm áp với điểm nhấn san hô. Giao diện đặc trưng."
+    },
+    "sci-fi": {
+      "name": "Viễn tưởng",
+      "description": "Xanh đêm vũ trụ với ánh neon xanh lam và kiểu chữ tương lai."
+    }
+  },
+  "every": {
+    "seconds_other": "{{count}} giây",
+    "minutes_other": "{{count}} phút",
+    "hours_other": "{{count}} giờ"
+  },
+  "avatars": {
+    "coral": "San hô",
+    "amber": "Hổ phách",
+    "lime": "Xanh chanh",
+    "teal": "Xanh mòng két",
+    "sky": "Xanh da trời",
+    "violet": "Tím",
+    "pink": "Hồng",
+    "slate": "Xám đá"
+  },
+  "day": {
+    "today": "Hôm nay",
+    "tomorrow": "Ngày mai",
+    "yesterday": "Hôm qua"
+  },
+  "release": {
+    "cinemas": "Ngoài rạp",
+    "digital": "Phát hành kỹ thuật số",
+    "physical": "Trên đĩa",
+    "airs": "Phát sóng"
+  },
+  "issue": {
+    "video": "Hình ảnh",
+    "audio": "Âm thanh",
+    "subtitles": "Phụ đề",
+    "wrong": "Sai tên",
+    "other": "Vấn đề khác"
+  }
+}

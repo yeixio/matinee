@@ -1,0 +1,310 @@
+{
+  "duration": {
+    "minutes": "{{minutes}} Min.",
+    "hoursMinutes": "{{hours}} Std. {{minutes}} Min."
+  },
+  "episodeCode": "S{{season}} · F{{episode}}",
+  "seasonN": "Staffel {{season}}",
+  "specials": "Specials",
+  "media": {
+    "mono": "Mono",
+    "stereo": "Stereo",
+    "lossless": "Verlustfrei",
+    "hiRes": "Hi-Res",
+    "dolbyVisionProfile": "Dolby Vision Profil {{profile}}",
+    "withBase": "{{format}}, mit {{base}} für andere Bildschirme",
+    "bitDepth": "{{bits}} Bit",
+    "forced": "Erzwungen",
+    "sdh": "SDH"
+  },
+  "people": {
+    "episodes_one": "{{count}} Folge",
+    "episodes_other": "{{count}} Folgen",
+    "lines": {
+      "createdBy": "Erfunden von",
+      "director_one": "Regie",
+      "director_other": "Regie",
+      "writer_one": "Drehbuch",
+      "writer_other": "Drehbuch",
+      "basedOn": "Nach",
+      "music": "Musik"
+    },
+    "died": "Gestorben {{date}}",
+    "bornIn": "Geboren in {{place}}",
+    "bornOnIn": "Geboren {{date}} in {{place}}",
+    "bornOn": "Geboren {{date}}",
+    "dollars": "{{amount}} $"
+  },
+  "facts": {
+    "firstAired": "Erstausstrahlung",
+    "released": "Erschienen",
+    "aired": "Ausgestrahlt",
+    "ended": "Beendet",
+    "status": "Status",
+    "seasons": "Staffeln",
+    "seasonsValue_one": "{{seasons}} ({{count}} Folge)",
+    "seasonsValue_other": "{{seasons}} ({{count}} Folgen)",
+    "rated": "Altersfreigabe",
+    "genres": "Genres",
+    "originalTitle": "Originaltitel",
+    "originalLanguage": "Originalsprache",
+    "spokenLanguages": "Gesprochene Sprachen",
+    "studio_one": "Studio",
+    "studio_other": "Studios",
+    "network_one": "Sender",
+    "network_other": "Sender",
+    "country_one": "Land",
+    "country_other": "Länder",
+    "collection": "Sammlung",
+    "budget": "Budget",
+    "boxOffice": "Einspielergebnis"
+  },
+  "showStatus": {
+    "Returning Series": "Wird fortgesetzt",
+    "Ended": "Beendet",
+    "Canceled": "Abgesetzt",
+    "In Production": "In Produktion",
+    "Planned": "Geplant",
+    "Pilot": "Pilotfolge"
+  },
+  "genres": {
+    "Action": "Action",
+    "Adventure": "Abenteuer",
+    "Animation": "Animation",
+    "Comedy": "Komödie",
+    "Crime": "Krimi",
+    "Documentary": "Dokumentarfilm",
+    "Drama": "Drama",
+    "Family": "Familie",
+    "Fantasy": "Fantasy",
+    "History": "Historie",
+    "Horror": "Horror",
+    "Music": "Musik",
+    "Mystery": "Mystery",
+    "Romance": "Liebesfilm",
+    "Science Fiction": "Science-Fiction",
+    "Thriller": "Thriller",
+    "War": "Kriegsfilm",
+    "Western": "Western",
+    "Reality": "Reality",
+    "TV Movie": "TV-Film",
+    "Action & Adventure": "Action & Abenteuer",
+    "Kids": "Kinder",
+    "News": "Nachrichten",
+    "Sci-Fi & Fantasy": "Sci-Fi & Fantasy",
+    "Soap": "Seifenoper",
+    "Talk": "Talkshow",
+    "War & Politics": "Krieg & Politik"
+  },
+  "jobs": {
+    "Director": "Regie",
+    "Creator": "Schöpfer",
+    "Screenplay": "Drehbuch",
+    "Writer": "Autor",
+    "Teleplay": "Fernsehdrehbuch",
+    "Story": "Geschichte",
+    "Novel": "Roman",
+    "Characters": "Figuren",
+    "Author": "Autor",
+    "Original Music Composer": "Filmmusik",
+    "Music": "Musik",
+    "Director of Photography": "Kamera",
+    "Editor": "Schnitt",
+    "Producer": "Produktion",
+    "Executive Producer": "Ausführende Produktion",
+    "Casting": "Casting",
+    "Production Design": "Szenenbild",
+    "Costume Design": "Kostümbild"
+  },
+  "kids": {
+    "littleKids": "Kleinkinder",
+    "kids": "Kinder",
+    "teens": "Jugendliche",
+    "andYounger": "{{ratings}} und jünger"
+  },
+  "sort": {
+    "title": "Titel",
+    "added": "Hinzugefügt am",
+    "released": "Erscheinungsdatum",
+    "year": "Jahr",
+    "rating": "Bewertung",
+    "runtime": "Laufzeit",
+    "lastPlayed": "Zuletzt gesehen"
+  },
+  "watched": {
+    "unwatched": "Ungesehen",
+    "inProgress": "Angefangen",
+    "watched": "Gesehen",
+    "notStarted": "Nicht angefangen"
+  },
+  "genreRows": {
+    "Action": "Actiongeladen",
+    "Adventure": "Abenteuer",
+    "Animation": "Animierte Lieblinge",
+    "Comedy": "Komödien",
+    "Crime": "Krimis",
+    "Documentary": "Dokumentarfilme",
+    "Drama": "Dramen",
+    "Family": "Für die ganze Familie",
+    "Fantasy": "Fantasywelten",
+    "Horror": "Horror",
+    "Mystery": "Mysterys",
+    "Romance": "Romantik",
+    "Science Fiction": "Sci-Fi-Lieblinge",
+    "Thriller": "Thriller",
+    "War": "Kriegsgeschichten",
+    "Western": "Western"
+  },
+  "count": {
+    "episodes_one": "{{count}} Folge",
+    "episodes_other": "{{count}} Folgen",
+    "seasons_one": "{{count}} Staffel",
+    "seasons_other": "{{count}} Staffeln",
+    "albums_one": "{{count}} Album",
+    "albums_other": "{{count}} Alben",
+    "tracks_one": "{{count}} Titel",
+    "tracks_other": "{{count}} Titel",
+    "titles_one": "{{count}} Titel",
+    "titles_other": "{{count}} Titel"
+  },
+  "awards": {
+    "academy": {
+      "won_one": "{{count}} Oscar gewonnen",
+      "won_other": "{{count}} Oscars gewonnen",
+      "nominated_one": "Für {{count}} Oscar nominiert",
+      "nominated_other": "Für {{count}} Oscars nominiert"
+    },
+    "emmy": {
+      "won_one": "{{count}} Primetime Emmy gewonnen",
+      "won_other": "{{count}} Primetime Emmys gewonnen",
+      "nominated_one": "Für {{count}} Primetime Emmy nominiert",
+      "nominated_other": "Für {{count}} Primetime Emmys nominiert"
+    },
+    "globe": {
+      "won_one": "{{count}} Golden Globe gewonnen",
+      "won_other": "{{count}} Golden Globes gewonnen",
+      "nominated_one": "Für {{count}} Golden Globe nominiert",
+      "nominated_other": "Für {{count}} Golden Globes nominiert"
+    },
+    "bafta": {
+      "won_one": "{{count}} BAFTA gewonnen",
+      "won_other": "{{count}} BAFTAs gewonnen",
+      "nominated_one": "Für {{count}} BAFTA nominiert",
+      "nominated_other": "Für {{count}} BAFTAs nominiert"
+    },
+    "wins_one": "{{count}} Auszeichnung",
+    "wins_other": "{{count}} Auszeichnungen",
+    "nominations_one": "{{count}} Nominierung",
+    "nominations_other": "{{count}} Nominierungen",
+    "winsAndNominations": "{{wins}} und {{nominations}}"
+  },
+  "departments": {
+    "Acting": "Schauspiel",
+    "Directing": "Regie",
+    "Writing": "Drehbuch",
+    "Production": "Produktion",
+    "Sound": "Ton",
+    "Camera": "Kamera",
+    "Editing": "Schnitt",
+    "Art": "Ausstattung",
+    "Crew": "Crew",
+    "Visual Effects": "Visuelle Effekte",
+    "Costume & Make-Up": "Kostüm & Maske",
+    "Lighting": "Licht",
+    "Creator": "Schöpfer"
+  },
+  "starters": {
+    "recent": "Kürzlich hinzugefügt",
+    "unwatched": "Ungesehen",
+    "tonight": "Kurz genug für heute Abend"
+  },
+  "filter": {
+    "decade": "{{decade}}er",
+    "yearRange": "{{from}}–{{to}}",
+    "yearOrLater": "{{year}} oder später",
+    "yearOrEarlier": "{{year}} oder früher",
+    "lastYear": "im letzten Jahr",
+    "lastWeeks_one": "in der letzten Woche",
+    "lastWeeks_other": "in den letzten {{count}} Wochen",
+    "lastDays_one": "am letzten {{count}} Tag",
+    "lastDays_other": "in den letzten {{count}} Tagen",
+    "runtime": {
+      "titles": {
+        "between": "{{min}}–{{max}} Min.",
+        "over": "Über {{min}} Min.",
+        "under": "Unter {{max}} Min."
+      },
+      "episodes": {
+        "between": "Folgen {{min}}–{{max}} Min.",
+        "over": "Folgen über {{min}} Min.",
+        "under": "Folgen unter {{max}} Min."
+      }
+    }
+  },
+  "themes": {
+    "clean": {
+      "name": "Schlicht",
+      "description": "Reines Weiß, ein Blau, keine Serifen. Nur die Poster zählen."
+    },
+    "dark": {
+      "name": "Dunkel",
+      "description": "Echtes Schwarz und klares Weiß. Schonend für die Augen und für OLED-Bildschirme."
+    },
+    "drive-in": {
+      "name": "Autokino",
+      "description": "Siebziger-Braun und Bernstein wie eine Leuchtreklame, wie ein Abend im Autokino."
+    },
+    "high-contrast": {
+      "name": "Hoher Kontrast",
+      "description": "Schwarz, Weiß und helles Gelb, für den klarsten Text quer durch den Raum."
+    },
+    "light": {
+      "name": "Hell",
+      "description": "Warmes Papierweiß mit Koralle, für einen hellen Raum."
+    },
+    "matinee": {
+      "name": "Matinee",
+      "description": "Warmes Kinodunkel mit Korallenakzent. Der Hauslook."
+    },
+    "sci-fi": {
+      "name": "Sci-Fi",
+      "description": "Tiefes Weltraumblau mit neoncyanem Leuchten und futuristischer Schrift."
+    }
+  },
+  "every": {
+    "seconds_one": "{{count}} Sekunde",
+    "seconds_other": "{{count}} Sekunden",
+    "minutes_one": "{{count}} Minute",
+    "minutes_other": "{{count}} Minuten",
+    "hours_one": "{{count}} Stunde",
+    "hours_other": "{{count}} Stunden"
+  },
+  "avatars": {
+    "coral": "Koralle",
+    "amber": "Bernstein",
+    "lime": "Limette",
+    "teal": "Petrol",
+    "sky": "Himmelblau",
+    "violet": "Violett",
+    "pink": "Rosa",
+    "slate": "Schiefer"
+  },
+  "day": {
+    "today": "Heute",
+    "tomorrow": "Morgen",
+    "yesterday": "Gestern"
+  },
+  "release": {
+    "cinemas": "Im Kino",
+    "digital": "Digital erhältlich",
+    "physical": "Auf Disc",
+    "airs": "Läuft"
+  },
+  "issue": {
+    "video": "Bild",
+    "audio": "Ton",
+    "subtitles": "Untertitel",
+    "wrong": "Falscher Titel",
+    "other": "Etwas anderes"
+  }
+}

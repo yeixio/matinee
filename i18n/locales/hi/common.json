@@ -1,0 +1,310 @@
+{
+  "duration": {
+    "minutes": "{{minutes}} मि॰",
+    "hoursMinutes": "{{hours}} घं॰ {{minutes}} मि॰"
+  },
+  "episodeCode": "सी{{season}} · ए{{episode}}",
+  "seasonN": "सीज़न {{season}}",
+  "specials": "स्पेशल",
+  "media": {
+    "mono": "मोनो",
+    "stereo": "स्टीरियो",
+    "lossless": "लॉसलेस",
+    "hiRes": "Hi-Res",
+    "dolbyVisionProfile": "Dolby Vision प्रोफ़ाइल {{profile}}",
+    "withBase": "{{format}}, दूसरी स्क्रीन के लिए {{base}} के साथ",
+    "bitDepth": "{{bits}}-बिट",
+    "forced": "फ़ोर्स्ड",
+    "sdh": "SDH"
+  },
+  "people": {
+    "episodes_one": "{{count}} एपिसोड",
+    "episodes_other": "{{count}} एपिसोड",
+    "lines": {
+      "createdBy": "निर्माता",
+      "director_one": "निर्देशक",
+      "director_other": "निर्देशक",
+      "writer_one": "लेखक",
+      "writer_other": "लेखक",
+      "basedOn": "आधारित",
+      "music": "संगीत"
+    },
+    "died": "निधन {{date}}",
+    "bornIn": "जन्म स्थान {{place}}",
+    "bornOnIn": "जन्म {{date}}, {{place}}",
+    "bornOn": "जन्म {{date}}",
+    "dollars": "${{amount}}"
+  },
+  "facts": {
+    "firstAired": "पहला प्रसारण",
+    "released": "रिलीज़",
+    "aired": "प्रसारित",
+    "ended": "समाप्त",
+    "status": "स्थिति",
+    "seasons": "सीज़न",
+    "seasonsValue_one": "{{seasons}} ({{count}} एपिसोड)",
+    "seasonsValue_other": "{{seasons}} ({{count}} एपिसोड)",
+    "rated": "रेटिंग",
+    "genres": "शैलियाँ",
+    "originalTitle": "मूल शीर्षक",
+    "originalLanguage": "मूल भाषा",
+    "spokenLanguages": "बोली गई भाषाएँ",
+    "studio_one": "स्टूडियो",
+    "studio_other": "स्टूडियो",
+    "network_one": "नेटवर्क",
+    "network_other": "नेटवर्क",
+    "country_one": "देश",
+    "country_other": "देश",
+    "collection": "संग्रह",
+    "budget": "बजट",
+    "boxOffice": "बॉक्स ऑफ़िस"
+  },
+  "showStatus": {
+    "Returning Series": "जारी सीरीज़",
+    "Ended": "समाप्त",
+    "Canceled": "रद्द",
+    "In Production": "निर्माणाधीन",
+    "Planned": "योजना में",
+    "Pilot": "पायलट"
+  },
+  "genres": {
+    "Action": "एक्शन",
+    "Adventure": "एडवेंचर",
+    "Animation": "एनिमेशन",
+    "Comedy": "कॉमेडी",
+    "Crime": "क्राइम",
+    "Documentary": "डॉक्यूमेंट्री",
+    "Drama": "ड्रामा",
+    "Family": "फ़ैमिली",
+    "Fantasy": "फ़ैंटेसी",
+    "History": "इतिहास",
+    "Horror": "हॉरर",
+    "Music": "संगीत",
+    "Mystery": "रहस्य",
+    "Romance": "रोमांस",
+    "Science Fiction": "साइंस फ़िक्शन",
+    "Thriller": "थ्रिलर",
+    "War": "युद्ध",
+    "Western": "वेस्टर्न",
+    "Reality": "रियलिटी",
+    "TV Movie": "टीवी फ़िल्म",
+    "Action & Adventure": "एक्शन और एडवेंचर",
+    "Kids": "बच्चे",
+    "News": "समाचार",
+    "Sci-Fi & Fantasy": "साइ-फ़ाई और फ़ैंटेसी",
+    "Soap": "धारावाहिक",
+    "Talk": "टॉक शो",
+    "War & Politics": "युद्ध और राजनीति"
+  },
+  "jobs": {
+    "Director": "निर्देशक",
+    "Creator": "निर्माता",
+    "Screenplay": "पटकथा",
+    "Writer": "लेखक",
+    "Teleplay": "टीवी पटकथा",
+    "Story": "कहानी",
+    "Novel": "उपन्यास",
+    "Characters": "पात्र",
+    "Author": "लेखक",
+    "Original Music Composer": "मूल संगीतकार",
+    "Music": "संगीत",
+    "Director of Photography": "छायाकार",
+    "Editor": "संपादक",
+    "Producer": "प्रोड्यूसर",
+    "Executive Producer": "एग्ज़ीक्यूटिव प्रोड्यूसर",
+    "Casting": "कास्टिंग",
+    "Production Design": "प्रोडक्शन डिज़ाइन",
+    "Costume Design": "कॉस्ट्यूम डिज़ाइन"
+  },
+  "kids": {
+    "littleKids": "छोटे बच्चे",
+    "kids": "बच्चे",
+    "teens": "किशोर",
+    "andYounger": "{{ratings}} और उससे कम"
+  },
+  "sort": {
+    "title": "शीर्षक",
+    "added": "जोड़ने की तारीख",
+    "released": "रिलीज़ की तारीख",
+    "year": "वर्ष",
+    "rating": "रेटिंग",
+    "runtime": "अवधि",
+    "lastPlayed": "पिछली बार देखा"
+  },
+  "watched": {
+    "unwatched": "नहीं देखा",
+    "inProgress": "जारी",
+    "watched": "देखा",
+    "notStarted": "शुरू नहीं किया"
+  },
+  "genreRows": {
+    "Action": "एक्शन से भरपूर",
+    "Adventure": "एडवेंचर",
+    "Animation": "पसंदीदा एनिमेशन",
+    "Comedy": "कॉमेडी",
+    "Crime": "अपराध कथाएँ",
+    "Documentary": "डॉक्यूमेंट्री",
+    "Drama": "ड्रामा",
+    "Family": "पूरे परिवार के लिए",
+    "Fantasy": "फ़ैंटेसी की दुनिया",
+    "Horror": "हॉरर",
+    "Mystery": "रहस्य",
+    "Romance": "रोमांस",
+    "Science Fiction": "पसंदीदा साइ-फ़ाई",
+    "Thriller": "थ्रिलर",
+    "War": "युद्ध कथाएँ",
+    "Western": "वेस्टर्न"
+  },
+  "count": {
+    "episodes_one": "{{count}} एपिसोड",
+    "episodes_other": "{{count}} एपिसोड",
+    "seasons_one": "{{count}} सीज़न",
+    "seasons_other": "{{count}} सीज़न",
+    "albums_one": "{{count}} एल्बम",
+    "albums_other": "{{count}} एल्बम",
+    "tracks_one": "{{count}} ट्रैक",
+    "tracks_other": "{{count}} ट्रैक",
+    "titles_one": "{{count}} टाइटल",
+    "titles_other": "{{count}} टाइटल"
+  },
+  "awards": {
+    "academy": {
+      "won_one": "{{count}} ऑस्कर जीता",
+      "won_other": "{{count}} ऑस्कर जीते",
+      "nominated_one": "{{count}} ऑस्कर के लिए नामांकित",
+      "nominated_other": "{{count}} ऑस्कर के लिए नामांकित"
+    },
+    "emmy": {
+      "won_one": "{{count}} प्राइमटाइम एमी जीता",
+      "won_other": "{{count}} प्राइमटाइम एमी जीते",
+      "nominated_one": "{{count}} प्राइमटाइम एमी के लिए नामांकित",
+      "nominated_other": "{{count}} प्राइमटाइम एमी के लिए नामांकित"
+    },
+    "globe": {
+      "won_one": "{{count}} गोल्डन ग्लोब जीता",
+      "won_other": "{{count}} गोल्डन ग्लोब जीते",
+      "nominated_one": "{{count}} गोल्डन ग्लोब के लिए नामांकित",
+      "nominated_other": "{{count}} गोल्डन ग्लोब के लिए नामांकित"
+    },
+    "bafta": {
+      "won_one": "{{count}} बाफ़्टा जीता",
+      "won_other": "{{count}} बाफ़्टा जीते",
+      "nominated_one": "{{count}} बाफ़्टा के लिए नामांकित",
+      "nominated_other": "{{count}} बाफ़्टा के लिए नामांकित"
+    },
+    "wins_one": "{{count}} जीत",
+    "wins_other": "{{count}} जीत",
+    "nominations_one": "{{count}} नामांकन",
+    "nominations_other": "{{count}} नामांकन",
+    "winsAndNominations": "{{wins}} और {{nominations}}"
+  },
+  "departments": {
+    "Acting": "अभिनेता",
+    "Directing": "निर्देशन",
+    "Writing": "लेखन",
+    "Production": "प्रोडक्शन",
+    "Sound": "ध्वनि",
+    "Camera": "कैमरा",
+    "Editing": "संपादन",
+    "Art": "कला",
+    "Crew": "टीम",
+    "Visual Effects": "विज़ुअल इफ़ेक्ट्स",
+    "Costume & Make-Up": "कॉस्ट्यूम और मेकअप",
+    "Lighting": "लाइटिंग",
+    "Creator": "निर्माता"
+  },
+  "starters": {
+    "recent": "हाल ही में जोड़ा गया",
+    "unwatched": "नहीं देखा",
+    "tonight": "आज रात के लिए काफ़ी छोटा"
+  },
+  "filter": {
+    "decade": "{{decade}} का दशक",
+    "yearRange": "{{from}}–{{to}}",
+    "yearOrLater": "{{year}} या बाद",
+    "yearOrEarlier": "{{year}} या पहले",
+    "lastYear": "पिछले एक साल में",
+    "lastWeeks_one": "पिछले एक हफ़्ते में",
+    "lastWeeks_other": "पिछले {{count}} हफ़्तों में",
+    "lastDays_one": "पिछले {{count}} दिन में",
+    "lastDays_other": "पिछले {{count}} दिनों में",
+    "runtime": {
+      "titles": {
+        "between": "{{min}}–{{max}} मि॰",
+        "over": "{{min}} मि॰ से ज़्यादा",
+        "under": "{{max}} मि॰ से कम"
+      },
+      "episodes": {
+        "between": "एपिसोड {{min}}–{{max}} मि॰",
+        "over": "एपिसोड {{min}} मि॰ से ज़्यादा",
+        "under": "एपिसोड {{max}} मि॰ से कम"
+      }
+    }
+  },
+  "themes": {
+    "clean": {
+      "name": "साफ़",
+      "description": "सादा सफ़ेद, एक नीला, बिना सेरिफ़। सिर्फ़ पोस्टर।"
+    },
+    "dark": {
+      "name": "डार्क",
+      "description": "गहरा काला और साफ़ सफ़ेद। आँखों और OLED स्क्रीन के लिए आरामदेह।"
+    },
+    "drive-in": {
+      "name": "ड्राइव-इन",
+      "description": "सत्तर के दशक के भूरे रंग और एम्बर बत्तियाँ, जैसे ड्राइव-इन में एक शाम।"
+    },
+    "high-contrast": {
+      "name": "हाई कंट्रास्ट",
+      "description": "काला, सफ़ेद और चमकीला पीला, ताकि कमरे के उस पार से भी टेक्स्ट साफ़ दिखे।"
+    },
+    "light": {
+      "name": "लाइट",
+      "description": "कोरल के साथ गर्म कागज़ी सफ़ेद, रोशन कमरे के लिए।"
+    },
+    "matinee": {
+      "name": "Matinee",
+      "description": "कोरल रंग के साथ थिएटर का गर्म अंधेरा। घर का अपना रूप।"
+    },
+    "sci-fi": {
+      "name": "साइ-फ़ाई",
+      "description": "नियॉन सियान चमक और भविष्यवादी फ़ॉन्ट के साथ गहरा अंतरिक्ष नीला।"
+    }
+  },
+  "every": {
+    "seconds_one": "{{count}} सेकंड",
+    "seconds_other": "{{count}} सेकंड",
+    "minutes_one": "{{count}} मिनट",
+    "minutes_other": "{{count}} मिनट",
+    "hours_one": "{{count}} घंटा",
+    "hours_other": "{{count}} घंटे"
+  },
+  "avatars": {
+    "coral": "कोरल",
+    "amber": "एम्बर",
+    "lime": "लाइम",
+    "teal": "टील",
+    "sky": "आसमानी नीला",
+    "violet": "बैंगनी",
+    "pink": "गुलाबी",
+    "slate": "स्लेट"
+  },
+  "day": {
+    "today": "आज",
+    "tomorrow": "कल",
+    "yesterday": "कल (बीता हुआ)"
+  },
+  "release": {
+    "cinemas": "सिनेमाघरों में",
+    "digital": "डिजिटल रिलीज़",
+    "physical": "डिस्क पर",
+    "airs": "प्रसारण"
+  },
+  "issue": {
+    "video": "तस्वीर",
+    "audio": "आवाज़",
+    "subtitles": "सबटाइटल",
+    "wrong": "गलत शीर्षक",
+    "other": "कुछ और"
+  }
+}

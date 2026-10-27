@@ -1,0 +1,364 @@
+{
+  "duration": {
+    "minutes": "{{minutes}} мин",
+    "hoursMinutes": "{{hours}} ч {{minutes}} мин"
+  },
+  "episodeCode": "С{{season}} · Э{{episode}}",
+  "seasonN": "Сезон {{season}}",
+  "specials": "Спецвыпуски",
+  "media": {
+    "mono": "Моно",
+    "stereo": "Стерео",
+    "lossless": "Без потерь",
+    "hiRes": "Hi-Res",
+    "dolbyVisionProfile": "Dolby Vision, профиль {{profile}}",
+    "withBase": "{{format}}, с {{base}} для других экранов",
+    "bitDepth": "{{bits}} бит",
+    "forced": "Принудительные",
+    "sdh": "SDH"
+  },
+  "people": {
+    "episodes_few": "{{count}} эпизода",
+    "episodes_many": "{{count}} эпизодов",
+    "episodes_one": "{{count}} эпизод",
+    "episodes_other": "{{count}} эпизодов",
+    "lines": {
+      "createdBy": "Создатели",
+      "director_few": "Режиссёры",
+      "director_many": "Режиссёры",
+      "director_one": "Режиссёр",
+      "director_other": "Режиссёры",
+      "writer_few": "Сценаристы",
+      "writer_many": "Сценаристы",
+      "writer_one": "Сценарист",
+      "writer_other": "Сценаристы",
+      "basedOn": "По мотивам",
+      "music": "Музыка"
+    },
+    "died": "Умер(ла) {{date}}",
+    "bornIn": "Место рождения: {{place}}",
+    "bornOnIn": "Родился(ась) {{date}}, {{place}}",
+    "bornOn": "Родился(ась) {{date}}",
+    "dollars": "{{amount}} $"
+  },
+  "facts": {
+    "firstAired": "Первый показ",
+    "released": "Выход",
+    "aired": "В эфире",
+    "ended": "Завершён",
+    "status": "Статус",
+    "seasons": "Сезоны",
+    "seasonsValue_few": "{{seasons}} ({{count}} эпизода)",
+    "seasonsValue_many": "{{seasons}} ({{count}} эпизодов)",
+    "seasonsValue_one": "{{seasons}} ({{count}} эпизод)",
+    "seasonsValue_other": "{{seasons}} ({{count}} эпизодов)",
+    "rated": "Рейтинг",
+    "genres": "Жанры",
+    "originalTitle": "Оригинальное название",
+    "originalLanguage": "Язык оригинала",
+    "spokenLanguages": "Языки",
+    "studio_few": "Студии",
+    "studio_many": "Студии",
+    "studio_one": "Студия",
+    "studio_other": "Студии",
+    "network_few": "Каналы",
+    "network_many": "Каналы",
+    "network_one": "Канал",
+    "network_other": "Каналы",
+    "country_few": "Страны",
+    "country_many": "Страны",
+    "country_one": "Страна",
+    "country_other": "Страны",
+    "collection": "Коллекция",
+    "budget": "Бюджет",
+    "boxOffice": "Сборы"
+  },
+  "showStatus": {
+    "Returning Series": "Продолжается",
+    "Ended": "Завершён",
+    "Canceled": "Закрыт",
+    "In Production": "В производстве",
+    "Planned": "Запланирован",
+    "Pilot": "Пилот"
+  },
+  "genres": {
+    "Action": "Боевик",
+    "Adventure": "Приключения",
+    "Animation": "Мультфильм",
+    "Comedy": "Комедия",
+    "Crime": "Криминал",
+    "Documentary": "Документальный",
+    "Drama": "Драма",
+    "Family": "Семейный",
+    "Fantasy": "Фэнтези",
+    "History": "История",
+    "Horror": "Ужасы",
+    "Music": "Музыка",
+    "Mystery": "Детектив",
+    "Romance": "Мелодрама",
+    "Science Fiction": "Фантастика",
+    "Thriller": "Триллер",
+    "War": "Военный",
+    "Western": "Вестерн",
+    "Reality": "Реалити-шоу",
+    "TV Movie": "Телефильм",
+    "Action & Adventure": "Боевик и приключения",
+    "Kids": "Детский",
+    "News": "Новости",
+    "Sci-Fi & Fantasy": "Фантастика и фэнтези",
+    "Soap": "Мыльная опера",
+    "Talk": "Ток-шоу",
+    "War & Politics": "Война и политика"
+  },
+  "jobs": {
+    "Director": "Режиссёр",
+    "Creator": "Создатель",
+    "Screenplay": "Сценарий",
+    "Writer": "Сценарист",
+    "Teleplay": "Телесценарий",
+    "Story": "Сюжет",
+    "Novel": "Роман",
+    "Characters": "Персонажи",
+    "Author": "Автор",
+    "Original Music Composer": "Композитор",
+    "Music": "Музыка",
+    "Director of Photography": "Оператор",
+    "Editor": "Монтажёр",
+    "Producer": "Продюсер",
+    "Executive Producer": "Исполнительный продюсер",
+    "Casting": "Кастинг",
+    "Production Design": "Художник-постановщик",
+    "Costume Design": "Художник по костюмам"
+  },
+  "kids": {
+    "littleKids": "Малыши",
+    "kids": "Дети",
+    "teens": "Подростки",
+    "andYounger": "{{ratings}} и младше"
+  },
+  "sort": {
+    "title": "Название",
+    "added": "Дата добавления",
+    "released": "Дата выхода",
+    "year": "Год",
+    "rating": "Оценка",
+    "runtime": "Длительность",
+    "lastPlayed": "Последний просмотр"
+  },
+  "watched": {
+    "unwatched": "Не просмотрено",
+    "inProgress": "Начато",
+    "watched": "Просмотрено",
+    "notStarted": "Не начато"
+  },
+  "genreRows": {
+    "Action": "Сплошной экшен",
+    "Adventure": "Приключения",
+    "Animation": "Любимые мультфильмы",
+    "Comedy": "Комедии",
+    "Crime": "Криминальные истории",
+    "Documentary": "Документальные",
+    "Drama": "Драмы",
+    "Family": "Для всей семьи",
+    "Fantasy": "Фантастические миры",
+    "Horror": "Ужасы",
+    "Mystery": "Детективы",
+    "Romance": "Мелодрамы",
+    "Science Fiction": "Любимая фантастика",
+    "Thriller": "Триллеры",
+    "War": "Военные истории",
+    "Western": "Вестерны"
+  },
+  "count": {
+    "episodes_few": "{{count}} эпизода",
+    "episodes_many": "{{count}} эпизодов",
+    "episodes_one": "{{count}} эпизод",
+    "episodes_other": "{{count}} эпизодов",
+    "seasons_few": "{{count}} сезона",
+    "seasons_many": "{{count}} сезонов",
+    "seasons_one": "{{count}} сезон",
+    "seasons_other": "{{count}} сезонов",
+    "albums_few": "{{count}} альбома",
+    "albums_many": "{{count}} альбомов",
+    "albums_one": "{{count}} альбом",
+    "albums_other": "{{count}} альбомов",
+    "tracks_few": "{{count}} трека",
+    "tracks_many": "{{count}} треков",
+    "tracks_one": "{{count}} трек",
+    "tracks_other": "{{count}} треков",
+    "titles_few": "{{count}} фильма или сериала",
+    "titles_many": "{{count}} фильмов и сериалов",
+    "titles_one": "{{count}} фильм или сериал",
+    "titles_other": "{{count}} фильмов и сериалов"
+  },
+  "awards": {
+    "academy": {
+      "won_few": "{{count}} премии «Оскар»",
+      "won_many": "{{count}} премий «Оскар»",
+      "won_one": "{{count}} премия «Оскар»",
+      "won_other": "{{count}} премий «Оскар»",
+      "nominated_few": "{{count}} номинации на «Оскар»",
+      "nominated_many": "{{count}} номинаций на «Оскар»",
+      "nominated_one": "{{count}} номинация на «Оскар»",
+      "nominated_other": "{{count}} номинаций на «Оскар»"
+    },
+    "emmy": {
+      "won_few": "{{count}} премии Primetime Emmy",
+      "won_many": "{{count}} премий Primetime Emmy",
+      "won_one": "{{count}} премия Primetime Emmy",
+      "won_other": "{{count}} премий Primetime Emmy",
+      "nominated_few": "{{count}} номинации на Primetime Emmy",
+      "nominated_many": "{{count}} номинаций на Primetime Emmy",
+      "nominated_one": "{{count}} номинация на Primetime Emmy",
+      "nominated_other": "{{count}} номинаций на Primetime Emmy"
+    },
+    "globe": {
+      "won_few": "{{count}} «Золотых глобуса»",
+      "won_many": "{{count}} «Золотых глобусов»",
+      "won_one": "{{count}} «Золотой глобус»",
+      "won_other": "{{count}} «Золотых глобусов»",
+      "nominated_few": "{{count}} номинации на «Золотой глобус»",
+      "nominated_many": "{{count}} номинаций на «Золотой глобус»",
+      "nominated_one": "{{count}} номинация на «Золотой глобус»",
+      "nominated_other": "{{count}} номинаций на «Золотой глобус»"
+    },
+    "bafta": {
+      "won_few": "{{count}} премии BAFTA",
+      "won_many": "{{count}} премий BAFTA",
+      "won_one": "{{count}} премия BAFTA",
+      "won_other": "{{count}} премий BAFTA",
+      "nominated_few": "{{count}} номинации на BAFTA",
+      "nominated_many": "{{count}} номинаций на BAFTA",
+      "nominated_one": "{{count}} номинация на BAFTA",
+      "nominated_other": "{{count}} номинаций на BAFTA"
+    },
+    "wins_few": "{{count}} победы",
+    "wins_many": "{{count}} побед",
+    "wins_one": "{{count}} победа",
+    "wins_other": "{{count}} побед",
+    "nominations_few": "{{count}} номинации",
+    "nominations_many": "{{count}} номинаций",
+    "nominations_one": "{{count}} номинация",
+    "nominations_other": "{{count}} номинаций",
+    "winsAndNominations": "{{wins}} и {{nominations}}"
+  },
+  "departments": {
+    "Acting": "Актёр",
+    "Directing": "Режиссура",
+    "Writing": "Сценарий",
+    "Production": "Производство",
+    "Sound": "Звук",
+    "Camera": "Операторская работа",
+    "Editing": "Монтаж",
+    "Art": "Художники",
+    "Crew": "Съёмочная группа",
+    "Visual Effects": "Визуальные эффекты",
+    "Costume & Make-Up": "Костюмы и грим",
+    "Lighting": "Свет",
+    "Creator": "Создатель"
+  },
+  "starters": {
+    "recent": "Недавно добавленные",
+    "unwatched": "Не просмотрено",
+    "tonight": "Как раз на вечер"
+  },
+  "filter": {
+    "decade": "{{decade}}-е",
+    "yearRange": "{{from}}–{{to}}",
+    "yearOrLater": "{{year}} и позже",
+    "yearOrEarlier": "{{year}} и раньше",
+    "lastYear": "за последний год",
+    "lastWeeks_few": "за последние {{count}} недели",
+    "lastWeeks_many": "за последние {{count}} недель",
+    "lastWeeks_one": "за последнюю неделю",
+    "lastWeeks_other": "за последние {{count}} недель",
+    "lastDays_few": "за последние {{count}} дня",
+    "lastDays_many": "за последние {{count}} дней",
+    "lastDays_one": "за последний {{count}} день",
+    "lastDays_other": "за последние {{count}} дней",
+    "runtime": {
+      "titles": {
+        "between": "{{min}}–{{max}} мин",
+        "over": "Больше {{min}} мин",
+        "under": "Меньше {{max}} мин"
+      },
+      "episodes": {
+        "between": "Эпизоды по {{min}}–{{max}} мин",
+        "over": "Эпизоды больше {{min}} мин",
+        "under": "Эпизоды меньше {{max}} мин"
+      }
+    }
+  },
+  "themes": {
+    "clean": {
+      "name": "Чистая",
+      "description": "Белый фон, один синий, без засечек. Только постеры."
+    },
+    "dark": {
+      "name": "Тёмная",
+      "description": "Чистый чёрный и чёткий белый. Бережёт глаза и OLED-экран."
+    },
+    "drive-in": {
+      "name": "Автокинотеатр",
+      "description": "Коричневые тона семидесятых и янтарные вывески, как вечер в автокинотеатре."
+    },
+    "high-contrast": {
+      "name": "Высокий контраст",
+      "description": "Чёрный, белый и ярко-жёлтый, чтобы текст было видно через всю комнату."
+    },
+    "light": {
+      "name": "Светлая",
+      "description": "Тёплый бумажный белый с коралловым, для светлой комнаты."
+    },
+    "matinee": {
+      "name": "Matinee",
+      "description": "Тёплый полумрак зала с коралловым акцентом. Фирменный вид."
+    },
+    "sci-fi": {
+      "name": "Фантастика",
+      "description": "Глубокий космический синий с неоновым голубым свечением и футуристичным шрифтом."
+    }
+  },
+  "every": {
+    "seconds_few": "{{count}} секунды",
+    "seconds_many": "{{count}} секунд",
+    "seconds_one": "{{count}} секунда",
+    "seconds_other": "{{count}} секунды",
+    "minutes_few": "{{count}} минуты",
+    "minutes_many": "{{count}} минут",
+    "minutes_one": "{{count}} минута",
+    "minutes_other": "{{count}} минуты",
+    "hours_few": "{{count}} часа",
+    "hours_many": "{{count}} часов",
+    "hours_one": "{{count}} час",
+    "hours_other": "{{count}} часа"
+  },
+  "avatars": {
+    "coral": "Коралловый",
+    "amber": "Янтарный",
+    "lime": "Лаймовый",
+    "teal": "Бирюзовый",
+    "sky": "Небесно-голубой",
+    "violet": "Фиолетовый",
+    "pink": "Розовый",
+    "slate": "Грифельный"
+  },
+  "day": {
+    "today": "Сегодня",
+    "tomorrow": "Завтра",
+    "yesterday": "Вчера"
+  },
+  "release": {
+    "cinemas": "В кино",
+    "digital": "Цифровой релиз",
+    "physical": "На диске",
+    "airs": "В эфире"
+  },
+  "issue": {
+    "video": "Изображение",
+    "audio": "Звук",
+    "subtitles": "Субтитры",
+    "wrong": "Неверное название",
+    "other": "Другое"
+  }
+}

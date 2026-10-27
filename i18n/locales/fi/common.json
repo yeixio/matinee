@@ -1,0 +1,310 @@
+{
+  "duration": {
+    "minutes": "{{minutes}} min",
+    "hoursMinutes": "{{hours}} t {{minutes}} min"
+  },
+  "episodeCode": "K{{season}} · J{{episode}}",
+  "seasonN": "Kausi {{season}}",
+  "specials": "Erikoisjaksot",
+  "media": {
+    "mono": "Mono",
+    "stereo": "Stereo",
+    "lossless": "Häviötön",
+    "hiRes": "Hi-Res",
+    "dolbyVisionProfile": "Dolby Vision -profiili {{profile}}",
+    "withBase": "{{format}}, ja {{base}} muille näytöille",
+    "bitDepth": "{{bits}}-bittinen",
+    "forced": "Pakotetut",
+    "sdh": "SDH"
+  },
+  "people": {
+    "episodes_one": "{{count}} jakso",
+    "episodes_other": "{{count}} jaksoa",
+    "lines": {
+      "createdBy": "Luonut",
+      "director_one": "Ohjaaja",
+      "director_other": "Ohjaajat",
+      "writer_one": "Käsikirjoittaja",
+      "writer_other": "Käsikirjoittajat",
+      "basedOn": "Perustuu teokseen",
+      "music": "Musiikki"
+    },
+    "died": "Kuollut {{date}}",
+    "bornIn": "Syntynyt: {{place}}",
+    "bornOnIn": "Syntynyt {{date}}, {{place}}",
+    "bornOn": "Syntynyt {{date}}",
+    "dollars": "{{amount}} $"
+  },
+  "facts": {
+    "firstAired": "Ensiesitys",
+    "released": "Julkaistu",
+    "aired": "Esitetty",
+    "ended": "Päättynyt",
+    "status": "Tila",
+    "seasons": "Kaudet",
+    "seasonsValue_one": "{{seasons}} ({{count}} jakso)",
+    "seasonsValue_other": "{{seasons}} ({{count}} jaksoa)",
+    "rated": "Ikäraja",
+    "genres": "Lajityypit",
+    "originalTitle": "Alkuperäinen nimi",
+    "originalLanguage": "Alkuperäinen kieli",
+    "spokenLanguages": "Puhutut kielet",
+    "studio_one": "Studio",
+    "studio_other": "Studiot",
+    "network_one": "Kanava",
+    "network_other": "Kanavat",
+    "country_one": "Maa",
+    "country_other": "Maat",
+    "collection": "Kokoelma",
+    "budget": "Budjetti",
+    "boxOffice": "Lipputulot"
+  },
+  "showStatus": {
+    "Returning Series": "Jatkuu",
+    "Ended": "Päättynyt",
+    "Canceled": "Lopetettu",
+    "In Production": "Tuotannossa",
+    "Planned": "Suunnitteilla",
+    "Pilot": "Pilotti"
+  },
+  "genres": {
+    "Action": "Toiminta",
+    "Adventure": "Seikkailu",
+    "Animation": "Animaatio",
+    "Comedy": "Komedia",
+    "Crime": "Rikos",
+    "Documentary": "Dokumentti",
+    "Drama": "Draama",
+    "Family": "Perhe",
+    "Fantasy": "Fantasia",
+    "History": "Historia",
+    "Horror": "Kauhu",
+    "Music": "Musiikki",
+    "Mystery": "Mysteeri",
+    "Romance": "Romantiikka",
+    "Science Fiction": "Tieteisfiktio",
+    "Thriller": "Trilleri",
+    "War": "Sota",
+    "Western": "Lännenelokuva",
+    "Reality": "Tosi-tv",
+    "TV Movie": "TV-elokuva",
+    "Action & Adventure": "Toiminta ja seikkailu",
+    "Kids": "Lapset",
+    "News": "Uutiset",
+    "Sci-Fi & Fantasy": "Scifi ja fantasia",
+    "Soap": "Saippuasarja",
+    "Talk": "Keskusteluohjelma",
+    "War & Politics": "Sota ja politiikka"
+  },
+  "jobs": {
+    "Director": "Ohjaaja",
+    "Creator": "Luoja",
+    "Screenplay": "Käsikirjoitus",
+    "Writer": "Käsikirjoittaja",
+    "Teleplay": "TV-käsikirjoitus",
+    "Story": "Tarina",
+    "Novel": "Romaani",
+    "Characters": "Henkilöt",
+    "Author": "Kirjailija",
+    "Original Music Composer": "Alkuperäismusiikki",
+    "Music": "Musiikki",
+    "Director of Photography": "Kuvaaja",
+    "Editor": "Leikkaaja",
+    "Producer": "Tuottaja",
+    "Executive Producer": "Vastaava tuottaja",
+    "Casting": "Roolitus",
+    "Production Design": "Lavastus",
+    "Costume Design": "Puvustus"
+  },
+  "kids": {
+    "littleKids": "Pienet lapset",
+    "kids": "Lapset",
+    "teens": "Nuoret",
+    "andYounger": "{{ratings}} ja nuoremmat"
+  },
+  "sort": {
+    "title": "Nimi",
+    "added": "Lisätty",
+    "released": "Julkaisupäivä",
+    "year": "Vuosi",
+    "rating": "Arvio",
+    "runtime": "Kesto",
+    "lastPlayed": "Viimeksi katsottu"
+  },
+  "watched": {
+    "unwatched": "Katsomattomat",
+    "inProgress": "Kesken",
+    "watched": "Katsotut",
+    "notStarted": "Aloittamatta"
+  },
+  "genreRows": {
+    "Action": "Toiminnantäyteisiä",
+    "Adventure": "Seikkailuja",
+    "Animation": "Animaatiosuosikit",
+    "Comedy": "Komediat",
+    "Crime": "Rikostarinat",
+    "Documentary": "Dokumentit",
+    "Drama": "Draamat",
+    "Family": "Koko perheelle",
+    "Fantasy": "Fantasiamaailmat",
+    "Horror": "Kauhu",
+    "Mystery": "Mysteerit",
+    "Romance": "Romantiikka",
+    "Science Fiction": "Scifisuosikit",
+    "Thriller": "Trillerit",
+    "War": "Sotatarinat",
+    "Western": "Lännenelokuvat"
+  },
+  "count": {
+    "episodes_one": "{{count}} jakso",
+    "episodes_other": "{{count}} jaksoa",
+    "seasons_one": "{{count}} kausi",
+    "seasons_other": "{{count}} kautta",
+    "albums_one": "{{count}} albumi",
+    "albums_other": "{{count}} albumia",
+    "tracks_one": "{{count}} kappale",
+    "tracks_other": "{{count}} kappaletta",
+    "titles_one": "{{count}} nimike",
+    "titles_other": "{{count}} nimikettä"
+  },
+  "awards": {
+    "academy": {
+      "won_one": "Voitti {{count}} Oscarin",
+      "won_other": "Voitti {{count}} Oscaria",
+      "nominated_one": "Ehdolla {{count}} Oscariin",
+      "nominated_other": "Ehdolla {{count}} Oscariin"
+    },
+    "emmy": {
+      "won_one": "Voitti {{count}} Primetime Emmyn",
+      "won_other": "Voitti {{count}} Primetime Emmyä",
+      "nominated_one": "Ehdolla {{count}} Primetime Emmyyn",
+      "nominated_other": "Ehdolla {{count}} Primetime Emmyyn"
+    },
+    "globe": {
+      "won_one": "Voitti {{count}} Golden Globen",
+      "won_other": "Voitti {{count}} Golden Globea",
+      "nominated_one": "Ehdolla {{count}} Golden Globeen",
+      "nominated_other": "Ehdolla {{count}} Golden Globeen"
+    },
+    "bafta": {
+      "won_one": "Voitti {{count}} BAFTAn",
+      "won_other": "Voitti {{count}} BAFTAa",
+      "nominated_one": "Ehdolla {{count}} BAFTAan",
+      "nominated_other": "Ehdolla {{count}} BAFTAan"
+    },
+    "wins_one": "{{count}} voitto",
+    "wins_other": "{{count}} voittoa",
+    "nominations_one": "{{count}} ehdokkuus",
+    "nominations_other": "{{count}} ehdokkuutta",
+    "winsAndNominations": "{{wins}} ja {{nominations}}"
+  },
+  "departments": {
+    "Acting": "Näyttelijä",
+    "Directing": "Ohjaus",
+    "Writing": "Käsikirjoitus",
+    "Production": "Tuotanto",
+    "Sound": "Ääni",
+    "Camera": "Kamera",
+    "Editing": "Leikkaus",
+    "Art": "Lavastus",
+    "Crew": "Työryhmä",
+    "Visual Effects": "Erikoistehosteet",
+    "Costume & Make-Up": "Puvustus ja maskeeraus",
+    "Lighting": "Valaistus",
+    "Creator": "Luoja"
+  },
+  "starters": {
+    "recent": "Äskettäin lisätyt",
+    "unwatched": "Katsomattomat",
+    "tonight": "Tarpeeksi lyhyt tähän iltaan"
+  },
+  "filter": {
+    "decade": "{{decade}}-luku",
+    "yearRange": "{{from}}–{{to}}",
+    "yearOrLater": "{{year}} tai myöhemmin",
+    "yearOrEarlier": "{{year}} tai aiemmin",
+    "lastYear": "viimeisen vuoden aikana",
+    "lastWeeks_one": "viimeisen viikon aikana",
+    "lastWeeks_other": "viimeisen {{count}} viikon aikana",
+    "lastDays_one": "viimeisen {{count}} päivän aikana",
+    "lastDays_other": "viimeisen {{count}} päivän aikana",
+    "runtime": {
+      "titles": {
+        "between": "{{min}}–{{max}} min",
+        "over": "Yli {{min}} min",
+        "under": "Alle {{max}} min"
+      },
+      "episodes": {
+        "between": "Jaksot {{min}}–{{max}} min",
+        "over": "Jaksot yli {{min}} min",
+        "under": "Jaksot alle {{max}} min"
+      }
+    }
+  },
+  "themes": {
+    "clean": {
+      "name": "Puhdas",
+      "description": "Valkoista, yksi sininen, ei pääteviivoja. Vain julisteet."
+    },
+    "dark": {
+      "name": "Tumma",
+      "description": "Syvää mustaa ja terävää valkoista. Silmäystävällinen ja sopii OLED-näytölle."
+    },
+    "drive-in": {
+      "name": "Drive-in",
+      "description": "Seitsemänkymmentäluvun ruskeaa ja meripihkaisia valokylttejä, kuin ilta drive-inissä."
+    },
+    "high-contrast": {
+      "name": "Suuri kontrasti",
+      "description": "Mustaa, valkoista ja kirkkaan keltaista, jotta teksti näkyy selvimmin huoneen toiselta puolelta."
+    },
+    "light": {
+      "name": "Vaalea",
+      "description": "Lämmintä paperinvalkoista ja korallia, valoisaan huoneeseen."
+    },
+    "matinee": {
+      "name": "Matinee",
+      "description": "Lämmin teatterihämärä korallikorostuksella. Talon oma tyyli."
+    },
+    "sci-fi": {
+      "name": "Scifi",
+      "description": "Syvää avaruudensinistä, neonsyaanin hehkua ja futuristinen kirjasin."
+    }
+  },
+  "every": {
+    "seconds_one": "{{count}} sekunti",
+    "seconds_other": "{{count}} sekuntia",
+    "minutes_one": "{{count}} minuutti",
+    "minutes_other": "{{count}} minuuttia",
+    "hours_one": "{{count}} tunti",
+    "hours_other": "{{count}} tuntia"
+  },
+  "avatars": {
+    "coral": "Koralli",
+    "amber": "Meripihka",
+    "lime": "Lime",
+    "teal": "Sinivihreä",
+    "sky": "Taivaansininen",
+    "violet": "Violetti",
+    "pink": "Pinkki",
+    "slate": "Liuske"
+  },
+  "day": {
+    "today": "Tänään",
+    "tomorrow": "Huomenna",
+    "yesterday": "Eilen"
+  },
+  "release": {
+    "cinemas": "Elokuvateattereissa",
+    "digital": "Digitaalinen julkaisu",
+    "physical": "Levyllä",
+    "airs": "Esitetään"
+  },
+  "issue": {
+    "video": "Kuva",
+    "audio": "Ääni",
+    "subtitles": "Tekstitykset",
+    "wrong": "Väärä nimike",
+    "other": "Jotain muuta"
+  }
+}

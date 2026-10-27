@@ -1,0 +1,283 @@
+{
+  "duration": {
+    "minutes": "{{minutes}} 分鐘",
+    "hoursMinutes": "{{hours}} 小時 {{minutes}} 分鐘"
+  },
+  "episodeCode": "第 {{season}} 季 · 第 {{episode}} 集",
+  "seasonN": "第 {{season}} 季",
+  "specials": "特別篇",
+  "media": {
+    "mono": "單聲道",
+    "stereo": "立體聲",
+    "lossless": "無損",
+    "hiRes": "高解析度",
+    "dolbyVisionProfile": "Dolby Vision 配置 {{profile}}",
+    "withBase": "{{format}}，其他螢幕使用 {{base}}",
+    "bitDepth": "{{bits}} 位",
+    "forced": "強制",
+    "sdh": "SDH"
+  },
+  "people": {
+    "episodes_other": "{{count}} 集",
+    "lines": {
+      "createdBy": "創作者",
+      "director_other": "導演",
+      "writer_other": "編劇",
+      "basedOn": "改編自",
+      "music": "音樂"
+    },
+    "died": "逝於 {{date}}",
+    "bornIn": "出生於{{place}}",
+    "bornOnIn": "{{date}}出生於{{place}}",
+    "bornOn": "{{date}}出生",
+    "dollars": "${{amount}}"
+  },
+  "facts": {
+    "firstAired": "首播",
+    "released": "上映",
+    "aired": "已播出",
+    "ended": "已完結",
+    "status": "狀態",
+    "seasons": "季",
+    "seasonsValue_other": "{{seasons}}（{{count}} 集）",
+    "rated": "分級",
+    "genres": "類型",
+    "originalTitle": "原名",
+    "originalLanguage": "原始語言",
+    "spokenLanguages": "對白語言",
+    "studio_other": "製片公司",
+    "network_other": "電視網",
+    "country_other": "國家/地區",
+    "collection": "系列",
+    "budget": "預算",
+    "boxOffice": "票房"
+  },
+  "showStatus": {
+    "Returning Series": "連載中",
+    "Ended": "已完結",
+    "Canceled": "已取消",
+    "In Production": "製作中",
+    "Planned": "籌備中",
+    "Pilot": "試播集"
+  },
+  "genres": {
+    "Action": "動作",
+    "Adventure": "冒險",
+    "Animation": "動畫",
+    "Comedy": "喜劇",
+    "Crime": "犯罪",
+    "Documentary": "紀錄片",
+    "Drama": "劇情",
+    "Family": "家庭",
+    "Fantasy": "奇幻",
+    "History": "歷史",
+    "Horror": "恐怖",
+    "Music": "音樂",
+    "Mystery": "懸疑",
+    "Romance": "愛情",
+    "Science Fiction": "科幻",
+    "Thriller": "驚悚",
+    "War": "戰爭",
+    "Western": "西部",
+    "Reality": "真人秀",
+    "TV Movie": "電視電影",
+    "Action & Adventure": "動作冒險",
+    "Kids": "兒童",
+    "News": "新聞",
+    "Sci-Fi & Fantasy": "科幻奇幻",
+    "Soap": "肥皂劇",
+    "Talk": "脫口秀",
+    "War & Politics": "戰爭政治"
+  },
+  "jobs": {
+    "Director": "導演",
+    "Creator": "創作者",
+    "Screenplay": "劇本",
+    "Writer": "編劇",
+    "Teleplay": "電視劇本",
+    "Story": "故事",
+    "Novel": "小說",
+    "Characters": "角色",
+    "Author": "作者",
+    "Original Music Composer": "原創配樂",
+    "Music": "音樂",
+    "Director of Photography": "攝影指導",
+    "Editor": "剪輯",
+    "Producer": "製片人",
+    "Executive Producer": "執行製片人",
+    "Casting": "選角",
+    "Production Design": "美術設計",
+    "Costume Design": "服裝設計"
+  },
+  "kids": {
+    "littleKids": "幼兒",
+    "kids": "兒童",
+    "teens": "青少年",
+    "andYounger": "{{ratings}} 及以下"
+  },
+  "sort": {
+    "title": "標題",
+    "added": "新增日期",
+    "released": "上映日期",
+    "year": "年份",
+    "rating": "評分",
+    "runtime": "片長",
+    "lastPlayed": "上次觀看"
+  },
+  "watched": {
+    "unwatched": "未看",
+    "inProgress": "看到一半",
+    "watched": "已看",
+    "notStarted": "未開始"
+  },
+  "genreRows": {
+    "Action": "火爆動作",
+    "Adventure": "冒險",
+    "Animation": "人氣動畫",
+    "Comedy": "喜劇",
+    "Crime": "犯罪故事",
+    "Documentary": "紀錄片",
+    "Drama": "劇情片",
+    "Family": "全家共賞",
+    "Fantasy": "奇幻世界",
+    "Horror": "恐怖",
+    "Mystery": "懸疑",
+    "Romance": "愛情",
+    "Science Fiction": "人氣科幻",
+    "Thriller": "驚悚",
+    "War": "戰爭故事",
+    "Western": "西部片"
+  },
+  "count": {
+    "episodes_other": "{{count}} 集",
+    "seasons_other": "{{count}} 季",
+    "albums_other": "{{count}} 張專輯",
+    "tracks_other": "{{count}} 首曲目",
+    "titles_other": "{{count}} 部作品"
+  },
+  "awards": {
+    "academy": {
+      "won_other": "獲得 {{count}} 項奧斯卡獎",
+      "nominated_other": "獲得 {{count}} 項奧斯卡獎提名"
+    },
+    "emmy": {
+      "won_other": "獲得 {{count}} 項黃金時段艾美獎",
+      "nominated_other": "獲得 {{count}} 項黃金時段艾美獎提名"
+    },
+    "globe": {
+      "won_other": "獲得 {{count}} 項金球獎",
+      "nominated_other": "獲得 {{count}} 項金球獎提名"
+    },
+    "bafta": {
+      "won_other": "獲得 {{count}} 項英國電影學院獎",
+      "nominated_other": "獲得 {{count}} 項英國電影學院獎提名"
+    },
+    "wins_other": "{{count}} 項獲獎",
+    "nominations_other": "{{count}} 項提名",
+    "winsAndNominations": "{{wins}}，{{nominations}}"
+  },
+  "departments": {
+    "Acting": "演員",
+    "Directing": "導演",
+    "Writing": "編劇",
+    "Production": "製作",
+    "Sound": "聲音",
+    "Camera": "攝影",
+    "Editing": "剪輯",
+    "Art": "美術",
+    "Crew": "劇組",
+    "Visual Effects": "視覺效果",
+    "Costume & Make-Up": "服裝與化妝",
+    "Lighting": "燈光",
+    "Creator": "創作者"
+  },
+  "starters": {
+    "recent": "最近新增",
+    "unwatched": "未看",
+    "tonight": "今晚看剛好"
+  },
+  "filter": {
+    "decade": "{{decade}} 年代",
+    "yearRange": "{{from}}–{{to}}",
+    "yearOrLater": "{{year}} 年及以後",
+    "yearOrEarlier": "{{year}} 年及以前",
+    "lastYear": "過去一年",
+    "lastWeeks_other": "過去 {{count}} 週",
+    "lastDays_other": "過去 {{count}} 天",
+    "runtime": {
+      "titles": {
+        "between": "{{min}}–{{max}} 分鐘",
+        "over": "超過 {{min}} 分鐘",
+        "under": "不到 {{max}} 分鐘"
+      },
+      "episodes": {
+        "between": "每集 {{min}}–{{max}} 分鐘",
+        "over": "每集超過 {{min}} 分鐘",
+        "under": "每集不到 {{max}} 分鐘"
+      }
+    }
+  },
+  "themes": {
+    "clean": {
+      "name": "簡潔",
+      "description": "純白底色，一抹藍色，無襯線字型。只有海報。"
+    },
+    "dark": {
+      "name": "深色",
+      "description": "純黑與清爽的白。護眼，也適合 OLED 螢幕。"
+    },
+    "drive-in": {
+      "name": "汽車影院",
+      "description": "七十年代的棕色與琥珀色霓虹招牌，就像汽車影院的夜晚。"
+    },
+    "high-contrast": {
+      "name": "高對比度",
+      "description": "黑、白與亮黃，讓文字在房間另一頭也最清晰。"
+    },
+    "light": {
+      "name": "淺色",
+      "description": "溫暖的紙白配珊瑚色，適合明亮的房間。"
+    },
+    "matinee": {
+      "name": "Matinee",
+      "description": "溫暖的影院暗色配珊瑚色點綴。預設外觀。"
+    },
+    "sci-fi": {
+      "name": "科幻",
+      "description": "深空藏青配霓虹青色光暈與未來感字型。"
+    }
+  },
+  "every": {
+    "seconds_other": "{{count}} 秒",
+    "minutes_other": "{{count}} 分鐘",
+    "hours_other": "{{count}} 小時"
+  },
+  "avatars": {
+    "coral": "珊瑚色",
+    "amber": "琥珀色",
+    "lime": "青檸色",
+    "teal": "青綠色",
+    "sky": "天藍色",
+    "violet": "紫羅蘭色",
+    "pink": "粉色",
+    "slate": "石板灰"
+  },
+  "day": {
+    "today": "今天",
+    "tomorrow": "明天",
+    "yesterday": "昨天"
+  },
+  "release": {
+    "cinemas": "院線上映",
+    "digital": "數位發行",
+    "physical": "光碟發行",
+    "airs": "播出"
+  },
+  "issue": {
+    "video": "畫面",
+    "audio": "聲音",
+    "subtitles": "字幕",
+    "wrong": "標題錯誤",
+    "other": "其他問題"
+  }
+}

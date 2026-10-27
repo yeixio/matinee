@@ -1,0 +1,684 @@
+{
+  "loading": "Ladataan",
+  "nav": {
+    "home": "Koti",
+    "watchList": "Katselulista",
+    "collections": "Kokoelmat",
+    "scanning": "Skannataan",
+    "search": "Haku",
+    "comingSoon": "Tulossa",
+    "requests": "Toiveet",
+    "signIn": "Kirjaudu sisään",
+    "settings": "Asetukset",
+    "switchProfile": "Vaihda profiilia",
+    "signOut": "Kirjaudu ulos"
+  },
+  "cantReachServer": "Palvelimeen ei saada yhteyttä. Yritetään uudelleen…",
+  "player": {
+    "subtitlesFailed": "Näitä tekstityksiä ei voitu ladata",
+    "off": "Pois",
+    "convertsVideo": "Muuntaa videota",
+    "file": "Tiedosto",
+    "seek": "Siirry",
+    "previous": "Edellinen",
+    "pause": "Tauko",
+    "next": "Seuraava",
+    "closePlayer": "Sulje soitin",
+    "failedDetail": "Toisto epäonnistui. Tiedosto voi olla vioittunut tai muodossa, jota palvelin ei osaa muuntaa.",
+    "failed": "Toisto epäonnistui",
+    "back10": "Taaksepäin 10 sekuntia",
+    "forward10": "Eteenpäin 10 sekuntia",
+    "unmute": "Poista mykistys",
+    "mute": "Mykistä",
+    "converting": "Muunnetaan",
+    "fullscreen": "Koko näyttö"
+  },
+  "somethingWentWrong": "Jokin meni pieleen",
+  "oneMoment": "Hetkinen…",
+  "auth": {
+    "username": "Käyttäjänimi",
+    "password": "Salasana",
+    "signIn": "Kirjaudu sisään",
+    "welcomeBack": "Tervetuloa takaisin.",
+    "setUp": "Ota Matinee käyttöön",
+    "setUpHint": "Luo ylläpitäjän tili. Voit lisätä perheen ja ystävät myöhemmin.",
+    "createAccount": "Luo tili"
+  },
+  "home": {
+    "welcome": "Tervetuloa Matineeen",
+    "welcomeHint": "Aloita lisäämällä kansio, jossa on elokuvia, sarjoja tai musiikkia.",
+    "addLibrary": "Lisää kirjasto",
+    "continueWatching": "Jatka katsomista",
+    "recentlyAdded": "Äskettäin lisätyt",
+    "newReleases": "Uudet julkaisut",
+    "scanning": "Kirjastoa skannataan",
+    "scanningHint": "Uudet nimikkeet näkyvät tässä heti, kun ne löytyvät.",
+    "removeNamed": "Poista {{title}} Jatka katsomista -rivistä",
+    "remove": "Poista Jatka katsomista -rivistä"
+  },
+  "hero": {
+    "upNext": "Seuraavaksi",
+    "justAdded": "Juuri lisätty",
+    "details": "Tiedot"
+  },
+  "item": {
+    "resume": "Jatka",
+    "resumeLeft": "Jatka · {{left}} jäljellä",
+    "play": "Toista",
+    "resumeFrom": "Jatka kohdasta {{time}}",
+    "resumeEpisode": "Jatka jaksoa {{episode}}",
+    "playEpisode": "Toista jakso {{episode}}",
+    "shuffle": "Sekoita",
+    "seasons": "Kaudet",
+    "albums": "Albumit",
+    "episodes": "Jaksot"
+  },
+  "row": {
+    "back": "Vieritä taaksepäin",
+    "forward": "Vieritä eteenpäin"
+  },
+  "artwork": {
+    "fetching": "Haetaan tietoja…"
+  },
+  "close": "Sulje",
+  "file": {
+    "audio": "Ääni",
+    "subtitles": "Tekstitykset",
+    "title": "Tiedoston tiedot",
+    "notYet": "Matinee ei ole vielä tutkinut tätä tiedostoa tarkemmin. Se lukee jokaisen tiedoston hitaasti taustalla, joten tämä täyttyy itsestään.",
+    "unreadable": "Matinee ei voinut lukea tätä tiedostoa: {{error}}",
+    "stale": "Tiedosto on muuttunut tämän tallennuksen jälkeen; se tutkitaan pian uudelleen.",
+    "file": "Tiedosto",
+    "location": "Sijainti",
+    "size": "Koko",
+    "format": "Muoto",
+    "length": "Kesto",
+    "bitrate": "Bittinopeus",
+    "chapters": "Kappaleet",
+    "video": "Video",
+    "videoN": "Video {{n}}",
+    "codec": "Koodekki",
+    "resolution": "Tarkkuus",
+    "frameRate": "Kuvataajuus",
+    "fps": "{{rate}} fps",
+    "bitDepth": "Bittisyvyys",
+    "dynamicRange": "Dynaaminen alue",
+    "dvProfile": "profiili {{profile}}",
+    "dvProfileLevel": "profiili {{profile}}, taso {{level}}",
+    "fallback": "{{format}} varalla",
+    "color": "Väri",
+    "trackN": "Raita {{n}}",
+    "default": "Oletus",
+    "forced": "Pakotettu",
+    "commentary": "Kommentaari",
+    "audioDescription": "Kuvailutulkkaus",
+    "separateFile": "Erillinen tiedosto",
+    "inFile": "Tiedostossa",
+    "sdh": "SDH",
+    "recorded": "Tallennettu {{when}}",
+    "queued": "Jonossa; se on seuraavana vuorossa.",
+    "analyzeAgain": "Analysoi uudelleen"
+  },
+  "listSeparator": ", ",
+  "credits": {
+    "seriesCast": "Sarjan näyttelijät",
+    "cast": "Näyttelijät",
+    "guestStars": "Vierailevat tähdet",
+    "starring": "Pääosissa",
+    "moreDetails": "Lisätietoja",
+    "crew": "Työryhmä",
+    "about": "Tietoja",
+    "awards": "Palkinnot",
+    "won": "Voitti",
+    "nominated": "Ehdolla",
+    "wonIn": "Voitti {{year}}",
+    "nominatedIn": "Ehdolla {{year}}",
+    "showAll": "Näytä kaikki {{count}}",
+    "awardsSource": "Palkinnot Wikidatasta."
+  },
+  "cancel": "Peruuta",
+  "upNext": {
+    "upNext": "Seuraavaksi",
+    "stillWatching": "Katsotko vielä?",
+    "youMightLike": "Saattaisit pitää",
+    "playingIn": "Alkaa {{seconds}} kuluttua",
+    "playNow": "Toista nyt",
+    "keepWatching": "Jatka katsomista",
+    "haveALook": "Kurkista",
+    "stop": "Lopeta"
+  },
+  "goBack": "Palaa",
+  "back": "Takaisin",
+  "trailer": {
+    "trailer": "Traileri",
+    "named": "{{title}}: traileri",
+    "wontPlay": "Tätä traileria ei voi toistaa."
+  },
+  "watchList": {
+    "on": "Katselulistallasi",
+    "add": "Lisää katselulistalle",
+    "empty": "Mitään ei ole vielä tallennettu",
+    "emptyHint": "Avaa elokuva tai sarja ja valitse Katselulista, niin se odottaa täällä myöhempää varten. Elokuvat poistuvat listalta, kun olet katsonut ne.",
+    "browse": "Selaa"
+  },
+  "related": {
+    "moreLikeThis": "Lisää samanlaisia"
+  },
+  "boxSet": {
+    "notFound": "Boksia ei löytynyt",
+    "notFoundHint": "Mikään sen nimikkeistä ei ole nyt kirjastossa.",
+    "boxSet": "Boksi"
+  },
+  "search": {
+    "placeholder": "Elokuvia, sarjoja, artisteja, albumeja…",
+    "nothing": "Mikään ei vastaa hakua ”{{q}}”",
+    "lookingForNew": "Etsitkö jotain uutta?",
+    "addIt": "Lisää se",
+    "askForIt": "Toivo sitä"
+  },
+  "person": {
+    "notFound": "Henkilöä ei löytynyt",
+    "showLess": "Näytä vähemmän",
+    "readMore": "Lue lisää",
+    "inLibrary": "Kirjastossasi"
+  },
+  "library": {
+    "library": "Kirjasto",
+    "matches_one": "{{count}} osuma",
+    "matches_other": "{{count}} osumaa",
+    "scanning": "Skannataan…",
+    "nothingUnwatched": "Ei katsomatonta täällä",
+    "nothingMatches": "Mikään ei vastaa",
+    "seenEverything": "Olet katsonut kaiken tässä kirjastossa.",
+    "clearFilters": "Tyhjennä suodattimet",
+    "appearAsFound": "Nimikkeet näkyvät sitä mukaa kuin niitä löytyy.",
+    "noMedia": "Matinee etsi kohteesta {{paths}} eikä löytänyt mediaa."
+  },
+  "nothingHereYet": "Täällä ei ole vielä mitään",
+  "collection": {
+    "notFound": "Kokoelmaa ei löytynyt",
+    "notFoundHint": "Se on ehkä poistettu.",
+    "smart": "Älykäs kokoelma",
+    "collection": "Kokoelma",
+    "shuffledDaily": "Sekoitetaan päivittäin",
+    "editRules": "Muokkaa sääntöjä",
+    "edit": "Muokkaa",
+    "delete": "Poista kokoelma",
+    "deleteConfirm": "Poistetaanko {{name}}? Nimikkeet jäävät kirjastoosi.",
+    "nothingMatchesYet": "Mikään ei vielä vastaa",
+    "joinByRules": "Nimikkeet liittyvät itsestään, kun ne vastaavat sääntöjä.",
+    "howToAdd": "Avaa elokuva tai sarja ja lisää se valitsemalla Kokoelmat."
+  },
+  "collections": {
+    "newShort": "Uusi",
+    "new": "Uusi kokoelma",
+    "newSmartShort": "Uusi älykäs",
+    "newSmart": "Uusi älykäs kokoelma",
+    "none": "Ei vielä kokoelmia",
+    "noneHint": "Älykäs kokoelma täyttyy itsestään sääntöjen mukaan, esimerkiksi katsomaton 80-luvun toiminta. Boksit näkyvät täällä, kun kaksi niiden nimikkeistä on kirjastossa.",
+    "yours": "Omat",
+    "shared": "Jaetut",
+    "forEveryone": "Kokoelmat kaikille",
+    "boxSets": "Boksit",
+    "sort": {
+      "own": "Oma järjestys",
+      "title": "Nimi",
+      "added": "Lisätty",
+      "released": "Julkaisupäivä",
+      "year": "Vuosi",
+      "rating": "Arvio",
+      "runtime": "Kesto",
+      "lastPlayed": "Viimeksi toistettu",
+      "shuffle": "Sekoita päivittäin"
+    },
+    "smartShort": "Älykäs",
+    "editNamed": "Muokkaa: {{name}}",
+    "name": "Nimi",
+    "smartExample": "Katsomaton 80-luvun toiminta",
+    "manualExample": "Leffailta",
+    "rules": "Säännöt",
+    "rulesHint": "Näitä suodattimia vastaavat nimikkeet liittyvät itsestään, kun kirjasto muuttuu.",
+    "shuffleDaily": "Sekoita joka päivä",
+    "order": "Järjestys",
+    "orderAdded": "Järjestys, jossa nimikkeet lisättiin",
+    "direction": "Suunta",
+    "usual": "Tavallinen",
+    "ascending": "Nouseva",
+    "descending": "Laskeva",
+    "showAsRow": "Näytä rivinä",
+    "onHome": "Kotisivulla",
+    "onLibraryPage": "Kirjastosivulla",
+    "shareWithEveryone": "Jaa kaikille tämän palvelimen käyttäjille",
+    "saveAs": "Tallenna kokoelmaksi"
+  },
+  "save": "Tallenna",
+  "create": "Luo",
+  "loadingDots": "Ladataan…",
+  "filters": {
+    "title": "Suodattimet",
+    "inUse_one": "Suodattimet, {{count}} käytössä",
+    "inUse_other": "Suodattimet, {{count}} käytössä",
+    "sortBy": "Järjestä",
+    "highestFirst": "Suurin ensin",
+    "lowestFirst": "Pienin ensin",
+    "highestFirstSwitch": "Suurin ensin; vaihda pienin ensin",
+    "lowestFirstSwitch": "Pienin ensin; vaihda suurin ensin",
+    "not": "Ei {{label}}",
+    "remove": "Poista {{label}}",
+    "chip": {
+      "words": "”{{q}}”",
+      "directedBy": "Ohjannut {{name}}",
+      "with": "Mukana {{name}}",
+      "releasedWithin": "Julkaistu {{within}}",
+      "releasedAfter": "Julkaistu {{date}} jälkeen",
+      "releasedBefore": "Julkaistu ennen {{date}}",
+      "addedWithin": "Lisätty {{within}}",
+      "addedAfter": "Lisätty {{date}} jälkeen",
+      "addedBefore": "Lisätty ennen {{date}}",
+      "ratingMin": "Arvio {{rating}}+",
+      "ratingMax": "Arvio {{rating}} tai alle",
+      "certification": "Arvio {{rating}}",
+      "watchList": "Katselulistallani"
+    },
+    "collection": "Kokoelma",
+    "active": "Käytössä olevat suodattimet",
+    "clearAll": "Tyhjennä kaikki",
+    "more_one": "{{count}} lisää",
+    "more_other": "{{count}} lisää",
+    "any": "Mikä tahansa",
+    "all": "Kaikki",
+    "anyTime": "Milloin tahansa",
+    "runtime": {
+      "under30": "Alle 30 min",
+      "30to60": "30–60 min",
+      "overHour": "Yli tunti",
+      "under90": "Alle 90 min",
+      "90to120": "90 min – 2 tuntia",
+      "over2Hours": "Yli 2 tuntia"
+    },
+    "wordsInTitle": "Sanoja nimessä",
+    "onlyWatchList": "Vain katselulistani nimikkeet",
+    "fromYear": "Vuodesta",
+    "toYear": "Vuoteen",
+    "from": "Alkaen",
+    "to": "–",
+    "toPlaceholder": "Asti",
+    "lastWeek": "Viime viikko",
+    "last30Days": "Viimeiset 30 päivää",
+    "last3Months": "Viimeiset 3 kuukautta",
+    "lastYear": "Viime vuosi",
+    "ratingAtLeast": "{{rating}}+",
+    "findPerson": "Etsi henkilö",
+    "nobody": "Tällä nimellä ei ole ketään tässä kirjastossa.",
+    "showResults": "Näytä tulokset",
+    "section": {
+      "title": "Nimi",
+      "watched": "Katsottu",
+      "genre": "Lajityyppi",
+      "year": "Vuosi",
+      "firstAired": "Ensiesitys",
+      "released": "Julkaistu",
+      "added": "Lisätty",
+      "rating": "Arvio",
+      "episodeLength": "Jakson pituus",
+      "runtime": "Kesto",
+      "quality": "Laatu",
+      "network": "Kanava tai studio",
+      "studio": "Studio",
+      "ageRating": "Ikäraja",
+      "language": "Alkuperäinen kieli",
+      "country": "Maa",
+      "creator": "Luonut tai ohjannut",
+      "director": "Ohjaaja",
+      "people": "Näyttelijät ja työryhmä"
+    }
+  },
+  "appearance": {
+    "title": "Ulkoasu",
+    "useServerTheme": "Käytä palvelimen teemaa ({{name}})",
+    "guestHint": "Kaikki kotona ilman tiliä käyttävät tätä teemaa.",
+    "hint": "Teemasi seuraa sinua Matinee-sovelluksiin puhelimessa ja televisiossa.",
+    "theme": "Teema",
+    "preview": {
+      "tonight": "Tänä iltana",
+      "trailer": "Traileri"
+    },
+    "serverTheme": "Palvelimen teema",
+    "serverThemeHint": "Mitä kaikki näkevät, kunnes valitsevat omansa, sekä kirjautumissivulla.",
+    "custom": "{{name}} (oma)",
+    "addYourOwn": "Lisää oma teema laittamalla teematiedosto palvelimen <code>themes</code>-kansioon sen datakansiossa.",
+    "howTo": "Näin teet teeman",
+    "skipped": "Ohitettiin {{problem}}"
+  },
+  "newFiles": {
+    "title": "Uudet tiedostot",
+    "intro": "Matinee huomaa lisäämäsi, uudelleennimeämäsi tai poistamasi tiedostot ja päivittää kirjaston muutama sekunti kopioinnin päätyttyä.",
+    "watch": "Seuraa uusia tiedostoja",
+    "summary": {
+      "some": "Osa kansioista tarkistetaan {{every}} välein",
+      "watching": "Seurataan uusia tiedostoja",
+      "polling": "Uudet tiedostot tarkistetaan {{every}} välein",
+      "pollingShare": "Uudet tiedostot tarkistetaan {{every}} välein (verkkojako)",
+      "off": "Uusia tiedostoja ei seurata"
+    },
+    "mode": {
+      "auto": {
+        "label": "Automaattinen",
+        "hint": "Heti palvelimen omilla levyillä. Verkkojaot (SMB, NFS) eivät ilmoita muutoksista, joten Matinee tarkistaa ne {{every}} välein."
+      },
+      "poll": {
+        "label": "Tarkista ajastetusti",
+        "hint": "Jokainen kansio tarkistetaan {{every}} välein. Valitse tämä, jos levyn uudet tiedostot eivät ilmesty itsestään."
+      },
+      "off": {
+        "label": "Pois",
+        "hint": "Uudet tiedostot ilmestyvät seuraavassa täydessä skannauksessa tai kun painat Skannaa."
+      }
+    },
+    "rescan": "Jokainen kirjasto skannataan myös kokonaan {{every}} välein, mikä löytää kaiken muun, kuten verkkojaossa korvatun tiedoston.",
+    "rescanOff": "Täydet skannaukset ovat pois päältä tällä palvelimella (MATINEE_SCAN_INTERVAL=0)."
+  },
+  "analysis": {
+    "title": "Media-analyysi",
+    "intro": "Matinee lukee hitaasti jokaisen tiedoston selvittääkseen laadun, äänen ja kielet, ja uudelleen aina tiedoston muuttuessa.",
+    "state": {
+      "lookingAt": "Tutkitaan: {{file}}",
+      "working": "Työskennellään",
+      "waiting": "Odotetaan toiston päättymistä",
+      "slowDisk": "Tiedostot ovat hitaita lukea; levätään muutama minuutti",
+      "allDone": "Kaikki tiedostot on analysoitu",
+      "upToDate": "Ajan tasalla",
+      "paused": "Tauolla"
+    },
+    "progress": "{{done}}/{{total}}",
+    "unreadable_one": "{{count}} tiedostoa ei voitu lukea.",
+    "unreadable_other": "{{count}} tiedostoa ei voitu lukea.",
+    "speed": "Nopeus",
+    "mode": {
+      "gentle": {
+        "label": "Kevyt",
+        "hint": "Yksi tiedosto muutaman sekunnin välein, eikä yhtään, kun palvelin muuntaa jotain toistoa varten."
+      },
+      "normal": {
+        "label": "Normaali",
+        "hint": "Tiedostot peräkkäin, yhä alimmalla prioriteetilla."
+      },
+      "off": {
+        "label": "Pois",
+        "hint": "Tauolla, kunnes kytket sen takaisin päälle."
+      }
+    }
+  },
+  "profileSettings": {
+    "title": "Profiilit",
+    "intro": "Profiilit jakavat kirjautumisen, mutta niillä on oma edistyminen, katselulista ja teema. Lasten profiilit näkevät vain sen, minkä sallit. PIN-koodi pitää profiilin tai itse tilin omistajallaan.",
+    "pinFor": "Nelinumeroinen PIN-koodi profiilille {{name}}",
+    "homeDevices": "Kotiverkon laitteet, jotka eivät ole kirjautuneet",
+    "account": "Tili",
+    "removePin": "Poista PIN-koodi",
+    "addPin": "Lisää PIN-koodi",
+    "hasPin": "PIN-koodi käytössä",
+    "edit": "Muokkaa: {{name}}",
+    "remove": "Poista {{name}}",
+    "confirmRemove": "Poistetaanko {{name}}? Myös edistyminen ja katselulista poistuvat.",
+    "add": "Lisää profiili",
+    "name": "Nimi",
+    "newPin": "Uusi PIN-koodi",
+    "pinOptional": "PIN-koodi (valinnainen)",
+    "unchanged": "Ennallaan",
+    "fourDigits": "4 numeroa",
+    "removeThePin": "Poista PIN-koodi",
+    "colour": "Väri",
+    "kidsMode": "Lapsitila",
+    "kidsOff": "Pois: näkee kaiken",
+    "kidsLevel": "{{name}}: {{ratings}}",
+    "kidsLibraries": "Mitä tämä profiili näkee kussakin kirjastossa. Ikärajan mukaan piilottaa tason {{level}} ylittävät nimikkeet sekä nimikkeet ilman ikärajaa. Lasten profiilit eivät voi avata Asetuksia tai esittää toiveita.",
+    "libraryMode": {
+      "hidden": "Piilotettu",
+      "rated": "Ikärajan mukaan",
+      "all": "Kaikki"
+    }
+  },
+  "report": {
+    "thanks": "Kiitos, ylläpitäjä katsoo asiaa.",
+    "button": "Ilmoita ongelmasta",
+    "whatsWrong": "Mikä nimikkeessä {{title}} on vialla?",
+    "details": "Lisätiedot (valinnainen)",
+    "detailsExample": "Esim.: ei ääntä 20 minuutin jälkeen",
+    "send": "Lähetä"
+  },
+  "quality": {
+    "label": "Laatu",
+    "forShow": "Sarjan laatu",
+    "confirm": "Vaihdetaanko {{name}}? {{app}} etsii vastaavia kopioita.",
+    "searching": "Haetaan…"
+  },
+  "upcoming": {
+    "nothingYet": "Ei vielä mitään näytettävää",
+    "connect": "Yhdistä Radarr tai Sonarr nähdäksesi tulossa olevat elokuvat ja jaksot.",
+    "openSettings": "Avaa asetukset",
+    "notConnected": "Ylläpitäjä ei ole yhdistänyt Radarria tai Sonarria tähän palvelimeen.",
+    "intro": "Uudet jaksot ja elokuvajulkaisut seuraavan kahden kuukauden ajalta, joita ei vielä ole.",
+    "unavailable": "{{apps}} ei vastannut, joten osa voi puuttua.",
+    "nothing": "Ei mitään tulossa. Toivo jotain uutta Toiveista."
+  },
+  "link": {
+    "title": "Kirjaa laite sisään",
+    "intro": "Anna koodi, jonka puhelimesi tai televisiosi näyttää.",
+    "signedIn": "{{device}} on kirjautunut sisään",
+    "ready": "Se on valmis muutamassa sekunnissa.",
+    "declined": "Hylätty",
+    "notSignedIn": "{{device}} ei kirjautunut sisään.",
+    "another": "Kirjaa toinen laite sisään",
+    "code": "Koodi",
+    "next": "Seuraava",
+    "wantsToSignIn": "haluaa kirjautua käyttäjänä <name>{{name}}</name>",
+    "warning": "Hyväksy vain laite, joka on kädessäsi tai näkyvissäsi. Se saa samat oikeudet kuin sinä.",
+    "decline": "Hylkää",
+    "approve": "Kirjaudu sisään"
+  },
+  "profiles": {
+    "whoIsWatching": "Kuka katsoo?",
+    "signInWithAccount": "Kirjaudu tilillä",
+    "enterPin": "Anna profiilin {{name}} PIN-koodi",
+    "pin": "PIN-koodi",
+    "deleteDigit": "Poista"
+  },
+  "integrations": {
+    "title": "Radarr ja Sonarr",
+    "intro": "Yhdistä ne, niin muut voivat toivoa elokuvia ja sarjoja, nähdä mitä on tulossa ja ilmoittaa ongelmista katsomissaan.",
+    "connected": "Yhdistetty · {{url}}",
+    "notConnected": {
+      "radarr": "Ei yhdistetty · elokuville",
+      "sonarr": "Ei yhdistetty · sarjoille"
+    },
+    "change": "Muuta",
+    "connect": "Yhdistä",
+    "address": "Osoite",
+    "apiKey": "API-avain",
+    "keyWhere": "{{app}} → Settings → General",
+    "saved": "Tallennettu",
+    "answers": "{{app}} {{version}} vastaa osoitteessa {{url}}",
+    "quality": {
+      "radarr": "Uusien elokuvien laatu",
+      "sonarr": "Uusien sarjojen laatu"
+    },
+    "folder": "Kansio",
+    "confirmDisconnect": "Katkaistaanko yhteys: {{app}}? Siellä jo olevat nimikkeet jäävät sinne.",
+    "disconnect": "Katkaise yhteys",
+    "testing": "Testataan…",
+    "test": "Testaa",
+    "whoCanAdd": "Kuka voi lisätä elokuvia ja sarjoja",
+    "mode": {
+      "approve": {
+        "label": "Toivo, sitten ylläpitäjä hyväksyy",
+        "detail": "Kuka tahansa tilin omaava voi toivoa nimikettä. Se odottaa ylläpitäjää."
+      },
+      "auto": {
+        "label": "Lisää heti",
+        "detail": "Toiveet menevät suoraan Radarriin tai Sonarriin."
+      },
+      "off": {
+        "label": "Vain ylläpitäjät lisäävät nimikkeitä",
+        "detail": "Muut näkevät silti, mitä on tulossa, ja voivat ilmoittaa ongelmista."
+      }
+    }
+  },
+  "requests": {
+    "tab": {
+      "ask": "Toivo jotain",
+      "requests": "Toiveet",
+      "yourRequests": "Omat toiveesi",
+      "problems": "Ongelmat",
+      "yourReports": "Omat ilmoituksesi"
+    },
+    "movies": "Elokuvat",
+    "shows": "Sarjat",
+    "findMovie": "Etsi elokuva…",
+    "findShow": "Etsi sarja…",
+    "nothingFound": "Haulla ”{{q}}” ei löytynyt mitään",
+    "ready": "Valmis katsottavaksi",
+    "askedFor": "Toivottu",
+    "onItsWay": "Tulossa",
+    "add": "Lisää",
+    "askForIt": "Toivo sitä",
+    "state": {
+      "pending": "Odottaa hyväksyntää",
+      "approved": "Tulossa",
+      "declined": "Hylätty",
+      "failed": "Lisääminen epäonnistui"
+    },
+    "none": "Ei vielä toiveita.",
+    "retry": "Yritä uudelleen",
+    "approve": "Hyväksy",
+    "remove": "Poista toive: {{title}}",
+    "removedFromLibrary": "Poistettu kirjastosta",
+    "noProblems": "Kukaan ei ole ilmoittanut ongelmasta.",
+    "noReports": "Et ole ilmoittanut ongelmista. Käytä nimikkeen kohtaa ”Ilmoita ongelmasta”.",
+    "fileReplaced": "Tiedosto korvattu",
+    "closed": "Suljettu",
+    "confirmReplace": "Poistetaanko tämä nimikkeen {{title}} tiedosto ja ladataanko toinen kopio? Uusi näkyy, kun se on ladattu ja kirjasto skannattu.",
+    "replaceFile": "Korvaa tiedosto",
+    "close": "Sulje"
+  },
+  "settings": {
+    "tmdbNotice": "Julisteet ja kuvaukset tulevat <link>TMDB</link>:stä. Tämä tuote käyttää TMDB:n rajapintaa, mutta TMDB ei ole hyväksynyt tai sertifioinut sitä.",
+    "libraries": {
+      "title": "Kirjastot",
+      "none": "Ei vielä kirjastoja.",
+      "scan": "Skannaa",
+      "remove": "Poista {{name}}",
+      "confirmRemove": "Poistetaanko ”{{name}}”? Tiedostosi pysyvät paikoillaan.",
+      "kind": {
+        "movies": "Elokuvat",
+        "tv": "TV-sarjat",
+        "music": "Musiikki"
+      },
+      "type": "Tyyppi",
+      "folders": "Kansiot",
+      "up": "Yksi kansio ylös",
+      "added": "Lisätty",
+      "useFolder": "Käytä tätä kansiota",
+      "noSubfolders": "Ei alikansioita"
+    },
+    "people": {
+      "title": "Ihmiset",
+      "admin": "Ylläpitäjä",
+      "passwordChanged": "Salasana vaihdettu. {{name}} kirjattiin ulos kaikkialta.",
+      "you": "(sinä)",
+      "removeAdmin": "Poista ylläpitäjyys",
+      "makeAdmin": "Tee ylläpitäjäksi",
+      "resetPassword": "Nollaa salasana",
+      "remove": "Poista",
+      "newPasswordFor": "Uusi salasana käyttäjälle {{name}}",
+      "setPassword": "Aseta salasana",
+      "confirmRemove": "Poistetaanko <name>{{name}}</name>? Myös katseluhistoria, katselulista, lataukset ja toiveet poistuvat, ja hänet kirjataan ulos kaikkialta. Tätä ei voi perua."
+    },
+    "account": {
+      "title": "Oma tili",
+      "changePassword": "Vaihda salasana",
+      "current": "Nykyinen salasana",
+      "new": "Uusi salasana",
+      "again": "Uusi salasana uudelleen",
+      "hint": "Vähintään 8 merkkiä. Muut laitteesi kirjataan ulos.",
+      "mismatch": "Uudet salasanat eivät täsmää.",
+      "changed": "Salasana vaihdettu. Muut laitteesi kirjattiin ulos."
+    },
+    "devices": {
+      "aWhileAgo": "jokin aika sitten",
+      "justNow": "juuri nyt",
+      "title": "Laitteesi",
+      "unknown": "Tuntematon laite",
+      "this": "Tämä laite",
+      "lastUsed": "Viimeksi käytetty {{when}}",
+      "confirmSignOut": "Kirjataanko ”{{name}}” ulos?"
+    },
+    "version": "Matinee-palvelin {{version}} · API v{{api}}",
+    "home": {
+      "title": "Kotiverkko",
+      "requireSignIn": "Vaadi kirjautuminen kotona",
+      "required": "Kaikki kirjautuvat, kotona ja muualla.",
+      "open": "Kotiverkon puhelimet, televisiot ja selaimet voivat katsoa kirjautumatta. Ne jakavat yhden Koti-tilin eivätkä voi muuttaa mitään. Kodin ulkopuolella kaikki kirjautuvat."
+    },
+    "remote": {
+      "title": "Etäkäyttö",
+      "publicURL": "Kodin ulkopuolella sovellukset yhdistävät osoitteeseen <url>{{url}}</url>, jolla tämä palvelin otettiin käyttöön.",
+      "toggle": "Katso kodin ulkopuolella",
+      "hint": "Matinee pyytää reititintäsi avaamaan portin ja hankkii varmenteen, jotta sovellukset yhdistävät turvallisesti mistä tahansa. Kaikki kirjautuvat ulkoa.",
+      "working": "Avataan porttia reitittimeen ja hankitaan varmennetta…",
+      "ready": "Sovellukset tavoittavat tämän palvelimen osoitteesta <url>{{url}}</url>, kun ne ovat kodin ulkopuolella.",
+      "router": "Reitittimesi avasi portin käyttäen {{router}}.",
+      "pickUp": "Ne poimivat tämän osoitteen, kun ne seuraavan kerran ovat kotiverkossasi.",
+      "sharedAddress": "Matinee ei vielä pääse tämän ohi omin avuin.",
+      "retry": "Matinee yrittää uudelleen puolen tunnin välein."
+    },
+    "playback": {
+      "title": "Toisto",
+      "autoPlay": "Toista seuraava jakso",
+      "autoPlayHint": "Kun lopputekstit alkavat, seuraava jakso alkaa 10 sekunnin lähtölaskennan jälkeen, jonka voit perua.",
+      "binge": "Ohita lähtölaskenta",
+      "bingeHint": "Siirry suoraan seuraavaan jaksoon, kun lopputekstit alkavat. Kun kolme jaksoa on mennyt peräkkäin koskematta mihinkään, sinulta kysytään, katsotko vielä."
+    },
+    "trailers": {
+      "title": "Trailerit",
+      "remote": "Trailerit YouTubesta",
+      "remoteOn": "Elokuvat ja sarjat tarjoavat trailerinsa TMDB:stä, ja ne toistetaan YouTubesta. Median vieressä olevat traileritiedostot näkyvät aina myös.",
+      "remoteOff": "Vain median vieressä olevat traileritiedostot näkyvät, kuten ”Movie (2020)-trailer.mkv” tai mikä tahansa Trailers-kansiossa."
+    },
+    "transcoding": {
+      "title": "Transkoodaus",
+      "intro": "Tiedostot, joita laite ei voi toistaa sellaisenaan, muunnetaan katsellessa. Näytönohjain tekee sen nopeammin ja kuormittaa palvelinta vähemmän.",
+      "convertingWith": "Muunnetaan käyttäen",
+      "active": "{{name}}.",
+      "activeOn": "{{name}}, {{detail}}.",
+      "fullGPU": "Video puretaan, skaalataan ja koodataan näytönohjaimella.",
+      "encodeOnly": "Video koodataan näytönohjaimella ja puretaan suorittimella.",
+      "fallback": "Jos näytönohjain ei pysty käsittelemään tiedostoa, se toistetaan suorittimen kautta.",
+      "testing": "Testataan palvelimen näytönohjainta…",
+      "cpuOff": "Suoritin. Laitteistotranskoodaus on pois päältä.",
+      "cpuFailed": "Suoritin, koska valitsemasi kiihdytin ei toiminut tällä palvelimella.",
+      "cpuNoGPU": "Suoritin. Mikään tämän palvelimen näytönohjain ei läpäissyt testiä.",
+      "hardware": "Laitteistokiihdytys",
+      "auto": "Automaattinen: paras toimiva",
+      "off": "Pois: käytä aina suoritinta",
+      "notFound": "{{name}} (ei löydy tältä palvelimelta)",
+      "accelerator": {
+        "nvenc": "NVIDIA NVENC",
+        "vaapi": "VAAPI (AMD ja Intel Linuxilla)",
+        "qsv": "Intel Quick Sync",
+        "videotoolbox": "VideoToolbox (Mac)",
+        "amf": "AMD AMF (Windows)",
+        "v4l2m2m": "V4L2 (Raspberry Pi)"
+      }
+    }
+  },
+  "language": {
+    "title": "Kieli",
+    "label": "Matineen kieli",
+    "hint": "Kielesi seuraa sinua Matinee-sovelluksiin puhelimessa ja televisiossa. Myös nimet ja kuvaukset tulevat sillä, kun TMDB:ssä on ne.",
+    "guestHint": "Kaikki kotona ilman tiliä käyttävät tätä kieltä.",
+    "automatic": "Automaattinen ({{language}})",
+    "machine": "Tämä kieli on konekäännetty, joten jotkin sanat voivat kuulostaa oudoilta.",
+    "help": "Auta parantamaan sitä"
+  }
+}

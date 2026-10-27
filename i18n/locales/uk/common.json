@@ -1,0 +1,364 @@
+{
+  "duration": {
+    "minutes": "{{minutes}} хв",
+    "hoursMinutes": "{{hours}} год {{minutes}} хв"
+  },
+  "episodeCode": "С{{season}} · Е{{episode}}",
+  "seasonN": "Сезон {{season}}",
+  "specials": "Спецвипуски",
+  "media": {
+    "mono": "Моно",
+    "stereo": "Стерео",
+    "lossless": "Без втрат",
+    "hiRes": "Hi-Res",
+    "dolbyVisionProfile": "Dolby Vision, профіль {{profile}}",
+    "withBase": "{{format}}, з {{base}} для інших екранів",
+    "bitDepth": "{{bits}} біт",
+    "forced": "Примусові",
+    "sdh": "SDH"
+  },
+  "people": {
+    "episodes_few": "{{count}} епізоди",
+    "episodes_many": "{{count}} епізодів",
+    "episodes_one": "{{count}} епізод",
+    "episodes_other": "{{count}} епізодів",
+    "lines": {
+      "createdBy": "Автори",
+      "director_few": "Режисери",
+      "director_many": "Режисери",
+      "director_one": "Режисер",
+      "director_other": "Режисери",
+      "writer_few": "Сценаристи",
+      "writer_many": "Сценаристи",
+      "writer_one": "Сценарист",
+      "writer_other": "Сценаристи",
+      "basedOn": "За мотивами",
+      "music": "Музика"
+    },
+    "died": "Помер(ла) {{date}}",
+    "bornIn": "Місце народження: {{place}}",
+    "bornOnIn": "Народився(лася) {{date}}, {{place}}",
+    "bornOn": "Народився(лася) {{date}}",
+    "dollars": "{{amount}} $"
+  },
+  "facts": {
+    "firstAired": "Перший показ",
+    "released": "Вихід",
+    "aired": "В ефірі",
+    "ended": "Завершено",
+    "status": "Статус",
+    "seasons": "Сезони",
+    "seasonsValue_few": "{{seasons}} ({{count}} епізоди)",
+    "seasonsValue_many": "{{seasons}} ({{count}} епізодів)",
+    "seasonsValue_one": "{{seasons}} ({{count}} епізод)",
+    "seasonsValue_other": "{{seasons}} ({{count}} епізодів)",
+    "rated": "Рейтинг",
+    "genres": "Жанри",
+    "originalTitle": "Оригінальна назва",
+    "originalLanguage": "Мова оригіналу",
+    "spokenLanguages": "Мови",
+    "studio_few": "Студії",
+    "studio_many": "Студії",
+    "studio_one": "Студія",
+    "studio_other": "Студії",
+    "network_few": "Канали",
+    "network_many": "Канали",
+    "network_one": "Канал",
+    "network_other": "Канали",
+    "country_few": "Країни",
+    "country_many": "Країни",
+    "country_one": "Країна",
+    "country_other": "Країни",
+    "collection": "Колекція",
+    "budget": "Бюджет",
+    "boxOffice": "Касові збори"
+  },
+  "showStatus": {
+    "Returning Series": "Триває",
+    "Ended": "Завершено",
+    "Canceled": "Закрито",
+    "In Production": "У виробництві",
+    "Planned": "Заплановано",
+    "Pilot": "Пілот"
+  },
+  "genres": {
+    "Action": "Бойовик",
+    "Adventure": "Пригоди",
+    "Animation": "Анімація",
+    "Comedy": "Комедія",
+    "Crime": "Кримінал",
+    "Documentary": "Документальний",
+    "Drama": "Драма",
+    "Family": "Сімейний",
+    "Fantasy": "Фентезі",
+    "History": "Історичний",
+    "Horror": "Жахи",
+    "Music": "Музика",
+    "Mystery": "Детектив",
+    "Romance": "Мелодрама",
+    "Science Fiction": "Фантастика",
+    "Thriller": "Трилер",
+    "War": "Воєнний",
+    "Western": "Вестерн",
+    "Reality": "Реаліті",
+    "TV Movie": "Телефільм",
+    "Action & Adventure": "Бойовик і пригоди",
+    "Kids": "Дитячий",
+    "News": "Новини",
+    "Sci-Fi & Fantasy": "Фантастика і фентезі",
+    "Soap": "Мильна опера",
+    "Talk": "Ток-шоу",
+    "War & Politics": "Війна і політика"
+  },
+  "jobs": {
+    "Director": "Режисер",
+    "Creator": "Автор",
+    "Screenplay": "Сценарій",
+    "Writer": "Сценарист",
+    "Teleplay": "Телесценарій",
+    "Story": "Сюжет",
+    "Novel": "Роман",
+    "Characters": "Персонажі",
+    "Author": "Автор",
+    "Original Music Composer": "Композитор",
+    "Music": "Музика",
+    "Director of Photography": "Оператор",
+    "Editor": "Монтажер",
+    "Producer": "Продюсер",
+    "Executive Producer": "Виконавчий продюсер",
+    "Casting": "Кастинг",
+    "Production Design": "Художник-постановник",
+    "Costume Design": "Художник з костюмів"
+  },
+  "kids": {
+    "littleKids": "Малюки",
+    "kids": "Діти",
+    "teens": "Підлітки",
+    "andYounger": "{{ratings}} і молодші"
+  },
+  "sort": {
+    "title": "Назва",
+    "added": "Дата додавання",
+    "released": "Дата виходу",
+    "year": "Рік",
+    "rating": "Оцінка",
+    "runtime": "Тривалість",
+    "lastPlayed": "Останній перегляд"
+  },
+  "watched": {
+    "unwatched": "Не переглянуто",
+    "inProgress": "Розпочато",
+    "watched": "Переглянуто",
+    "notStarted": "Не розпочато"
+  },
+  "genreRows": {
+    "Action": "Суцільний екшн",
+    "Adventure": "Пригоди",
+    "Animation": "Улюблені мультфільми",
+    "Comedy": "Комедії",
+    "Crime": "Кримінальні історії",
+    "Documentary": "Документальні",
+    "Drama": "Драми",
+    "Family": "Для всієї родини",
+    "Fantasy": "Фантастичні світи",
+    "Horror": "Жахи",
+    "Mystery": "Детективи",
+    "Romance": "Мелодрами",
+    "Science Fiction": "Улюблена фантастика",
+    "Thriller": "Трилери",
+    "War": "Воєнні історії",
+    "Western": "Вестерни"
+  },
+  "count": {
+    "episodes_few": "{{count}} епізоди",
+    "episodes_many": "{{count}} епізодів",
+    "episodes_one": "{{count}} епізод",
+    "episodes_other": "{{count}} епізодів",
+    "seasons_few": "{{count}} сезони",
+    "seasons_many": "{{count}} сезонів",
+    "seasons_one": "{{count}} сезон",
+    "seasons_other": "{{count}} сезонів",
+    "albums_few": "{{count}} альбоми",
+    "albums_many": "{{count}} альбомів",
+    "albums_one": "{{count}} альбом",
+    "albums_other": "{{count}} альбомів",
+    "tracks_few": "{{count}} треки",
+    "tracks_many": "{{count}} треків",
+    "tracks_one": "{{count}} трек",
+    "tracks_other": "{{count}} треків",
+    "titles_few": "{{count}} фільми чи серіали",
+    "titles_many": "{{count}} фільмів і серіалів",
+    "titles_one": "{{count}} фільм чи серіал",
+    "titles_other": "{{count}} фільмів і серіалів"
+  },
+  "awards": {
+    "academy": {
+      "won_few": "{{count}} премії «Оскар»",
+      "won_many": "{{count}} премій «Оскар»",
+      "won_one": "{{count}} премія «Оскар»",
+      "won_other": "{{count}} премій «Оскар»",
+      "nominated_few": "{{count}} номінації на «Оскар»",
+      "nominated_many": "{{count}} номінацій на «Оскар»",
+      "nominated_one": "{{count}} номінація на «Оскар»",
+      "nominated_other": "{{count}} номінацій на «Оскар»"
+    },
+    "emmy": {
+      "won_few": "{{count}} премії Primetime Emmy",
+      "won_many": "{{count}} премій Primetime Emmy",
+      "won_one": "{{count}} премія Primetime Emmy",
+      "won_other": "{{count}} премій Primetime Emmy",
+      "nominated_few": "{{count}} номінації на Primetime Emmy",
+      "nominated_many": "{{count}} номінацій на Primetime Emmy",
+      "nominated_one": "{{count}} номінація на Primetime Emmy",
+      "nominated_other": "{{count}} номінацій на Primetime Emmy"
+    },
+    "globe": {
+      "won_few": "{{count}} «Золоті глобуси»",
+      "won_many": "{{count}} «Золотих глобусів»",
+      "won_one": "{{count}} «Золотий глобус»",
+      "won_other": "{{count}} «Золотих глобусів»",
+      "nominated_few": "{{count}} номінації на «Золотий глобус»",
+      "nominated_many": "{{count}} номінацій на «Золотий глобус»",
+      "nominated_one": "{{count}} номінація на «Золотий глобус»",
+      "nominated_other": "{{count}} номінацій на «Золотий глобус»"
+    },
+    "bafta": {
+      "won_few": "{{count}} премії BAFTA",
+      "won_many": "{{count}} премій BAFTA",
+      "won_one": "{{count}} премія BAFTA",
+      "won_other": "{{count}} премій BAFTA",
+      "nominated_few": "{{count}} номінації на BAFTA",
+      "nominated_many": "{{count}} номінацій на BAFTA",
+      "nominated_one": "{{count}} номінація на BAFTA",
+      "nominated_other": "{{count}} номінацій на BAFTA"
+    },
+    "wins_few": "{{count}} перемоги",
+    "wins_many": "{{count}} перемог",
+    "wins_one": "{{count}} перемога",
+    "wins_other": "{{count}} перемог",
+    "nominations_few": "{{count}} номінації",
+    "nominations_many": "{{count}} номінацій",
+    "nominations_one": "{{count}} номінація",
+    "nominations_other": "{{count}} номінацій",
+    "winsAndNominations": "{{wins}} і {{nominations}}"
+  },
+  "departments": {
+    "Acting": "Актор",
+    "Directing": "Режисура",
+    "Writing": "Сценарій",
+    "Production": "Виробництво",
+    "Sound": "Звук",
+    "Camera": "Операторська робота",
+    "Editing": "Монтаж",
+    "Art": "Художники",
+    "Crew": "Знімальна група",
+    "Visual Effects": "Візуальні ефекти",
+    "Costume & Make-Up": "Костюми і грим",
+    "Lighting": "Світло",
+    "Creator": "Автор"
+  },
+  "starters": {
+    "recent": "Нещодавно додані",
+    "unwatched": "Не переглянуто",
+    "tonight": "Якраз на вечір"
+  },
+  "filter": {
+    "decade": "{{decade}}-ті",
+    "yearRange": "{{from}}–{{to}}",
+    "yearOrLater": "{{year}} і пізніше",
+    "yearOrEarlier": "{{year}} і раніше",
+    "lastYear": "за останній рік",
+    "lastWeeks_few": "за останні {{count}} тижні",
+    "lastWeeks_many": "за останні {{count}} тижнів",
+    "lastWeeks_one": "за останній тиждень",
+    "lastWeeks_other": "за останні {{count}} тижнів",
+    "lastDays_few": "за останні {{count}} дні",
+    "lastDays_many": "за останні {{count}} днів",
+    "lastDays_one": "за останній {{count}} день",
+    "lastDays_other": "за останні {{count}} днів",
+    "runtime": {
+      "titles": {
+        "between": "{{min}}–{{max}} хв",
+        "over": "Понад {{min}} хв",
+        "under": "Менше {{max}} хв"
+      },
+      "episodes": {
+        "between": "Епізоди по {{min}}–{{max}} хв",
+        "over": "Епізоди понад {{min}} хв",
+        "under": "Епізоди менше {{max}} хв"
+      }
+    }
+  },
+  "themes": {
+    "clean": {
+      "name": "Чиста",
+      "description": "Білий фон, один синій, без засічок. Лише постери."
+    },
+    "dark": {
+      "name": "Темна",
+      "description": "Чистий чорний і чіткий білий. Береже очі та OLED-екран."
+    },
+    "drive-in": {
+      "name": "Автокінотеатр",
+      "description": "Коричневі тони сімдесятих і бурштинові вивіски, як вечір в автокінотеатрі."
+    },
+    "high-contrast": {
+      "name": "Висока контрастність",
+      "description": "Чорний, білий і яскраво-жовтий, щоб текст було видно з іншого кінця кімнати."
+    },
+    "light": {
+      "name": "Світла",
+      "description": "Теплий паперовий білий з кораловим, для світлої кімнати."
+    },
+    "matinee": {
+      "name": "Matinee",
+      "description": "Теплий напівморок зали з кораловим акцентом. Фірмовий вигляд."
+    },
+    "sci-fi": {
+      "name": "Фантастика",
+      "description": "Глибокий космічний синій з неоновим блакитним сяйвом і футуристичним шрифтом."
+    }
+  },
+  "every": {
+    "seconds_few": "{{count}} секунди",
+    "seconds_many": "{{count}} секунд",
+    "seconds_one": "{{count}} секунда",
+    "seconds_other": "{{count}} секунди",
+    "minutes_few": "{{count}} хвилини",
+    "minutes_many": "{{count}} хвилин",
+    "minutes_one": "{{count}} хвилина",
+    "minutes_other": "{{count}} хвилини",
+    "hours_few": "{{count}} години",
+    "hours_many": "{{count}} годин",
+    "hours_one": "{{count}} година",
+    "hours_other": "{{count}} години"
+  },
+  "avatars": {
+    "coral": "Кораловий",
+    "amber": "Бурштиновий",
+    "lime": "Лаймовий",
+    "teal": "Бірюзовий",
+    "sky": "Небесно-блакитний",
+    "violet": "Фіолетовий",
+    "pink": "Рожевий",
+    "slate": "Сланцевий"
+  },
+  "day": {
+    "today": "Сьогодні",
+    "tomorrow": "Завтра",
+    "yesterday": "Учора"
+  },
+  "release": {
+    "cinemas": "У кіно",
+    "digital": "Цифровий реліз",
+    "physical": "На диску",
+    "airs": "В ефірі"
+  },
+  "issue": {
+    "video": "Зображення",
+    "audio": "Звук",
+    "subtitles": "Субтитри",
+    "wrong": "Неправильна назва",
+    "other": "Інше"
+  }
+}

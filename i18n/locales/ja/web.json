@@ -1,0 +1,680 @@
+{
+  "loading": "読み込み中",
+  "nav": {
+    "home": "ホーム",
+    "watchList": "ウォッチリスト",
+    "collections": "コレクション",
+    "scanning": "スキャン中",
+    "search": "検索",
+    "comingSoon": "近日公開",
+    "requests": "リクエスト",
+    "signIn": "サインイン",
+    "settings": "設定",
+    "switchProfile": "プロフィールを切り替え",
+    "signOut": "サインアウト"
+  },
+  "cantReachServer": "サーバーに接続できません。再試行しています…",
+  "player": {
+    "subtitlesFailed": "この字幕を読み込めませんでした",
+    "off": "オフ",
+    "convertsVideo": "動画を変換",
+    "file": "ファイル",
+    "seek": "シーク",
+    "previous": "前へ",
+    "pause": "一時停止",
+    "next": "次へ",
+    "closePlayer": "プレーヤーを閉じる",
+    "failedDetail": "再生できませんでした。ファイルが壊れているか、サーバーが変換できない形式の可能性があります。",
+    "failed": "再生できませんでした",
+    "back10": "10秒戻る",
+    "forward10": "10秒進む",
+    "unmute": "ミュート解除",
+    "mute": "ミュート",
+    "converting": "変換中",
+    "fullscreen": "フルスクリーン"
+  },
+  "somethingWentWrong": "問題が発生しました",
+  "oneMoment": "少々お待ちください…",
+  "auth": {
+    "username": "ユーザー名",
+    "password": "パスワード",
+    "signIn": "サインイン",
+    "welcomeBack": "おかえりなさい。",
+    "setUp": "Matinee のセットアップ",
+    "setUpHint": "管理者アカウントを作成します。家族や友人は後から追加できます。",
+    "createAccount": "アカウントを作成"
+  },
+  "home": {
+    "welcome": "Matinee へようこそ",
+    "welcomeHint": "まずは映画、番組、音楽のフォルダを追加しましょう。",
+    "addLibrary": "ライブラリを追加",
+    "continueWatching": "視聴を続ける",
+    "recentlyAdded": "最近追加",
+    "newReleases": "新作",
+    "scanning": "ライブラリをスキャンしています",
+    "scanningHint": "新しいタイトルは見つかり次第ここに表示されます。",
+    "removeNamed": "「{{title}}」を視聴を続けるから削除",
+    "remove": "視聴を続けるから削除"
+  },
+  "hero": {
+    "upNext": "次はこちら",
+    "justAdded": "追加されたばかり",
+    "details": "詳細"
+  },
+  "item": {
+    "resume": "続きから再生",
+    "resumeLeft": "続きから再生 · 残り{{left}}",
+    "play": "再生",
+    "resumeFrom": "{{time}}から再生",
+    "resumeEpisode": "第{{episode}}話の続きから再生",
+    "playEpisode": "第{{episode}}話を再生",
+    "shuffle": "シャッフル",
+    "seasons": "シーズン",
+    "albums": "アルバム",
+    "episodes": "エピソード"
+  },
+  "row": {
+    "back": "前へスクロール",
+    "forward": "次へスクロール"
+  },
+  "artwork": {
+    "fetching": "詳細を取得しています…"
+  },
+  "close": "閉じる",
+  "file": {
+    "audio": "音声",
+    "subtitles": "字幕",
+    "title": "ファイルの詳細",
+    "notYet": "Matinee はまだこのファイルを詳しく調べていません。バックグラウンドでゆっくり全ファイルを読み込むので、ここは自動的に埋まります。",
+    "unreadable": "Matinee はこのファイルを読み込めませんでした: {{error}}",
+    "stale": "記録後にファイルが変更されました。まもなく再度調べます。",
+    "file": "ファイル",
+    "location": "場所",
+    "size": "サイズ",
+    "format": "形式",
+    "length": "長さ",
+    "bitrate": "ビットレート",
+    "chapters": "チャプター",
+    "video": "映像",
+    "videoN": "映像{{n}}",
+    "codec": "コーデック",
+    "resolution": "解像度",
+    "frameRate": "フレームレート",
+    "fps": "{{rate}} fps",
+    "bitDepth": "ビット深度",
+    "dynamicRange": "ダイナミックレンジ",
+    "dvProfile": "プロファイル{{profile}}",
+    "dvProfileLevel": "プロファイル{{profile}}、レベル{{level}}",
+    "fallback": "{{format}}フォールバック",
+    "color": "色",
+    "trackN": "トラック{{n}}",
+    "default": "デフォルト",
+    "forced": "強制",
+    "commentary": "コメンタリー",
+    "audioDescription": "音声解説",
+    "separateFile": "別ファイル",
+    "inFile": "ファイル内",
+    "sdh": "SDH",
+    "recorded": "{{when}}に記録",
+    "queued": "待機中。次に調べます。",
+    "analyzeAgain": "再分析"
+  },
+  "listSeparator": "、",
+  "credits": {
+    "seriesCast": "シリーズのキャスト",
+    "cast": "キャスト",
+    "guestStars": "ゲスト出演",
+    "starring": "出演",
+    "moreDetails": "詳細情報",
+    "crew": "スタッフ",
+    "about": "概要",
+    "awards": "受賞歴",
+    "won": "受賞",
+    "nominated": "ノミネート",
+    "wonIn": "{{year}}年 受賞",
+    "nominatedIn": "{{year}}年 ノミネート",
+    "showAll": "{{count}}件すべて表示",
+    "awardsSource": "受賞歴は Wikidata より。"
+  },
+  "cancel": "キャンセル",
+  "upNext": {
+    "upNext": "次はこちら",
+    "stillWatching": "まだ観ていますか？",
+    "youMightLike": "おすすめ",
+    "playingIn": "{{seconds}}後に再生",
+    "playNow": "今すぐ再生",
+    "keepWatching": "観続ける",
+    "haveALook": "のぞいてみる",
+    "stop": "停止"
+  },
+  "goBack": "戻る",
+  "back": "戻る",
+  "trailer": {
+    "trailer": "予告編",
+    "named": "「{{title}}」の予告編",
+    "wontPlay": "この予告編は再生できません。"
+  },
+  "watchList": {
+    "on": "ウォッチリストに追加済み",
+    "add": "ウォッチリストに追加",
+    "empty": "まだ何も保存されていません",
+    "emptyHint": "映画や番組を開いて「ウォッチリスト」を選ぶと、後で観るためにここに保存されます。映画は観終わるとリストから外れます。",
+    "browse": "ブラウズ"
+  },
+  "related": {
+    "moreLikeThis": "似た作品"
+  },
+  "boxSet": {
+    "notFound": "ボックスセットが見つかりません",
+    "notFoundHint": "このセットの作品は現在どのライブラリにもありません。",
+    "boxSet": "ボックスセット"
+  },
+  "search": {
+    "placeholder": "映画、番組、アーティスト、アルバム…",
+    "nothing": "「{{q}}」に一致するものはありません",
+    "lookingForNew": "何か新しいものをお探しですか？",
+    "addIt": "追加する",
+    "askForIt": "リクエストする"
+  },
+  "person": {
+    "notFound": "人物が見つかりません",
+    "showLess": "閉じる",
+    "readMore": "続きを読む",
+    "inLibrary": "ライブラリにあり"
+  },
+  "library": {
+    "library": "ライブラリ",
+    "matches_other": "{{count}}件一致",
+    "scanning": "スキャン中…",
+    "nothingUnwatched": "未視聴のものはありません",
+    "nothingMatches": "一致するものはありません",
+    "seenEverything": "このライブラリはすべて観ました。",
+    "clearFilters": "フィルタをクリア",
+    "appearAsFound": "タイトルは見つかり次第表示されます。",
+    "noMedia": "Matinee は {{paths}} を探しましたが、メディアは見つかりませんでした。"
+  },
+  "nothingHereYet": "まだ何もありません",
+  "collection": {
+    "notFound": "コレクションが見つかりません",
+    "notFoundHint": "削除された可能性があります。",
+    "smart": "スマートコレクション",
+    "collection": "コレクション",
+    "shuffledDaily": "毎日シャッフル",
+    "editRules": "ルールを編集",
+    "edit": "編集",
+    "delete": "コレクションを削除",
+    "deleteConfirm": "「{{name}}」を削除しますか？タイトルはライブラリに残ります。",
+    "nothingMatchesYet": "まだ一致するものはありません",
+    "joinByRules": "ルールに合うタイトルは自動的に追加されます。",
+    "howToAdd": "映画や番組を開いて「コレクション」を選ぶと追加できます。"
+  },
+  "collections": {
+    "newShort": "新規",
+    "new": "新しいコレクション",
+    "newSmartShort": "新しいスマート",
+    "newSmart": "新しいスマートコレクション",
+    "none": "まだコレクションはありません",
+    "noneHint": "スマートコレクションは「未視聴の80年代アクション」のようなルールに沿って自動で埋まります。ボックスセットは、その作品が2本ライブラリに入るとここに表示されます。",
+    "yours": "自分の",
+    "shared": "共有",
+    "forEveryone": "みんなのコレクション",
+    "boxSets": "ボックスセット",
+    "sort": {
+      "own": "自分で並べる",
+      "title": "タイトル",
+      "added": "追加日",
+      "released": "公開日",
+      "year": "年",
+      "rating": "評価",
+      "runtime": "上映時間",
+      "lastPlayed": "最後に再生",
+      "shuffle": "毎日シャッフル"
+    },
+    "smartShort": "スマート",
+    "editNamed": "「{{name}}」を編集",
+    "name": "名前",
+    "smartExample": "未視聴の80年代アクション",
+    "manualExample": "映画の夜",
+    "rules": "ルール",
+    "rulesHint": "これらのフィルタに合うタイトルは、ライブラリの変化に合わせて自動的に追加されます。",
+    "shuffleDaily": "毎日シャッフル",
+    "order": "並び順",
+    "orderAdded": "タイトルを追加した順",
+    "direction": "方向",
+    "usual": "通常",
+    "ascending": "昇順",
+    "descending": "降順",
+    "showAsRow": "列として表示",
+    "onHome": "ホーム",
+    "onLibraryPage": "ライブラリページ",
+    "shareWithEveryone": "このサーバーの全員と共有",
+    "saveAs": "コレクションとして保存"
+  },
+  "save": "保存",
+  "create": "作成",
+  "loadingDots": "読み込み中…",
+  "filters": {
+    "title": "フィルタ",
+    "inUse_other": "フィルタ（{{count}}件使用中）",
+    "sortBy": "並べ替え",
+    "highestFirst": "高い順",
+    "lowestFirst": "低い順",
+    "highestFirstSwitch": "高い順。低い順に切り替え",
+    "lowestFirstSwitch": "低い順。高い順に切り替え",
+    "not": "{{label}}以外",
+    "remove": "{{label}}を削除",
+    "chip": {
+      "words": "「{{q}}」",
+      "directedBy": "監督: {{name}}",
+      "with": "出演: {{name}}",
+      "releasedWithin": "{{within}}に公開",
+      "releasedAfter": "{{date}}以降に公開",
+      "releasedBefore": "{{date}}より前に公開",
+      "addedWithin": "{{within}}に追加",
+      "addedAfter": "{{date}}以降に追加",
+      "addedBefore": "{{date}}より前に追加",
+      "ratingMin": "評価{{rating}}以上",
+      "ratingMax": "評価{{rating}}以下",
+      "certification": "{{rating}}指定",
+      "watchList": "自分のウォッチリストにある"
+    },
+    "collection": "コレクション",
+    "active": "使用中のフィルタ",
+    "clearAll": "すべてクリア",
+    "more_other": "他{{count}}件",
+    "any": "指定なし",
+    "all": "すべて",
+    "anyTime": "いつでも",
+    "runtime": {
+      "under30": "30分未満",
+      "30to60": "30〜60分",
+      "overHour": "1時間超",
+      "under90": "90分未満",
+      "90to120": "90分〜2時間",
+      "over2Hours": "2時間超"
+    },
+    "wordsInTitle": "タイトルの語句",
+    "onlyWatchList": "ウォッチリストのタイトルのみ",
+    "fromYear": "開始年",
+    "toYear": "終了年",
+    "from": "開始",
+    "to": "〜",
+    "toPlaceholder": "終了",
+    "lastWeek": "先週",
+    "last30Days": "過去30日",
+    "last3Months": "過去3か月",
+    "lastYear": "昨年",
+    "ratingAtLeast": "{{rating}}以上",
+    "findPerson": "人物を探す",
+    "nobody": "このライブラリにその名前の人はいません。",
+    "showResults": "結果を表示",
+    "section": {
+      "title": "タイトル",
+      "watched": "視聴済み",
+      "genre": "ジャンル",
+      "year": "年",
+      "firstAired": "初回放送",
+      "released": "公開",
+      "added": "追加",
+      "rating": "評価",
+      "episodeLength": "1話の長さ",
+      "runtime": "上映時間",
+      "quality": "画質",
+      "network": "放送局または制作会社",
+      "studio": "制作会社",
+      "ageRating": "年齢制限",
+      "language": "原語",
+      "country": "国",
+      "creator": "クリエイターまたは監督",
+      "director": "監督",
+      "people": "キャストとスタッフ"
+    }
+  },
+  "appearance": {
+    "title": "外観",
+    "useServerTheme": "サーバーのテーマを使う（{{name}}）",
+    "guestHint": "アカウントのない家族全員がこのテーマを共有します。",
+    "hint": "テーマはスマホやテレビの Matinee アプリにも引き継がれます。",
+    "theme": "テーマ",
+    "preview": {
+      "tonight": "今夜",
+      "trailer": "予告編"
+    },
+    "serverTheme": "サーバーのテーマ",
+    "serverThemeHint": "各自がテーマを選ぶまで全員に表示され、サインインページにも使われます。",
+    "custom": "{{name}}（カスタム）",
+    "addYourOwn": "自分のテーマを追加するには、サーバーのデータフォルダ内の <code>themes</code> フォルダにテーマファイルを置きます。",
+    "howTo": "テーマの作り方",
+    "skipped": "スキップ: {{problem}}"
+  },
+  "newFiles": {
+    "title": "新しいファイル",
+    "intro": "Matinee は追加・名前変更・削除されたファイルに気づき、コピー完了の数秒後にライブラリを更新します。",
+    "watch": "新しいファイルを監視",
+    "summary": {
+      "some": "一部のフォルダは{{every}}ごとに確認",
+      "watching": "新しいファイルを監視中",
+      "polling": "{{every}}ごとに新しいファイルを確認",
+      "pollingShare": "{{every}}ごとに新しいファイルを確認（ネットワーク共有）",
+      "off": "新しいファイルを監視していません"
+    },
+    "mode": {
+      "auto": {
+        "label": "自動",
+        "hint": "サーバー自身のディスクは即時。ネットワーク共有（SMB、NFS）は変更を通知しないため、Matinee が{{every}}ごとに確認します。"
+      },
+      "poll": {
+        "label": "タイマーで確認",
+        "hint": "すべてのフォルダを{{every}}ごとに確認します。ディスク上の新しいファイルが自動で表示されない場合に選んでください。"
+      },
+      "off": {
+        "label": "オフ",
+        "hint": "新しいファイルは次回のフルスキャン時、または「スキャン」を押したときに表示されます。"
+      }
+    },
+    "rescan": "各ライブラリは{{every}}ごとにフルスキャンもされ、共有上で置き換えられたファイルなど、その他の変更も拾います。",
+    "rescanOff": "このサーバーではフルスキャンがオフです（MATINEE_SCAN_INTERVAL=0）。"
+  },
+  "analysis": {
+    "title": "メディア分析",
+    "intro": "Matinee は各ファイルの画質・音声・言語をゆっくり読み取り、ファイルが変わるたびに読み直します。",
+    "state": {
+      "lookingAt": "{{file}} を確認中",
+      "working": "作業中",
+      "waiting": "再生の終了を待っています",
+      "slowDisk": "ファイルの読み込みが遅いため、数分休憩しています",
+      "allDone": "すべてのファイルを分析済み",
+      "upToDate": "最新",
+      "paused": "一時停止中"
+    },
+    "progress": "{{done}} / {{total}}",
+    "unreadable_other": "{{count}}件のファイルを読み込めませんでした。",
+    "speed": "速度",
+    "mode": {
+      "gentle": {
+        "label": "控えめ",
+        "hint": "数秒ごとに1ファイル。サーバーが再生用に変換している間は止まります。"
+      },
+      "normal": {
+        "label": "通常",
+        "hint": "ファイルを連続で処理。優先度は最低のままです。"
+      },
+      "off": {
+        "label": "オフ",
+        "hint": "再度オンにするまで一時停止します。"
+      }
+    }
+  },
+  "profileSettings": {
+    "title": "プロフィール",
+    "intro": "プロフィールはサインインを共有しつつ、視聴状況・ウォッチリスト・テーマはそれぞれ別です。キッズプロフィールには許可したものだけが表示されます。PIN でプロフィールやアカウント自体を本人専用にできます。",
+    "pinFor": "{{name}}の4桁のPIN",
+    "homeDevices": "サインインしていない自宅ネットワークのデバイス",
+    "account": "アカウント",
+    "removePin": "PINを削除",
+    "addPin": "PINを追加",
+    "hasPin": "PINあり",
+    "edit": "{{name}}を編集",
+    "remove": "{{name}}を削除",
+    "confirmRemove": "{{name}}を削除しますか？視聴状況とウォッチリストも削除されます。",
+    "add": "プロフィールを追加",
+    "name": "名前",
+    "newPin": "新しいPIN",
+    "pinOptional": "PIN（任意）",
+    "unchanged": "変更なし",
+    "fourDigits": "4桁",
+    "removeThePin": "PINを削除",
+    "colour": "色",
+    "kidsMode": "キッズモード",
+    "kidsOff": "オフ: すべて表示",
+    "kidsLevel": "{{name}}: {{ratings}}",
+    "kidsLibraries": "このプロフィールが各ライブラリで見られるもの。「レーティング別」では{{level}}レベルを超える作品とレーティングのない作品を隠します。キッズプロフィールは設定を開いたりリクエストしたりできません。",
+    "libraryMode": {
+      "hidden": "非表示",
+      "rated": "レーティング別",
+      "all": "すべて"
+    }
+  },
+  "report": {
+    "thanks": "ありがとうございます。管理者が確認します。",
+    "button": "問題を報告",
+    "whatsWrong": "「{{title}}」のどこに問題がありますか？",
+    "details": "詳細（任意）",
+    "detailsExample": "例: 20分後に音が出ない",
+    "send": "送信"
+  },
+  "quality": {
+    "label": "画質",
+    "forShow": "番組の画質",
+    "confirm": "{{name}}に切り替えますか？{{app}}が合うコピーを探します。",
+    "searching": "検索中…"
+  },
+  "upcoming": {
+    "nothingYet": "まだ表示するものがありません",
+    "connect": "Radarr か Sonarr を接続すると、これから届く映画やエピソードが表示されます。",
+    "openSettings": "設定を開く",
+    "notConnected": "管理者がこのサーバーに Radarr も Sonarr も接続していません。",
+    "intro": "今後2か月以内の、まだ届いていない新エピソードと映画の公開。",
+    "unavailable": "{{apps}}が応答しなかったため、一部が欠けている可能性があります。",
+    "nothing": "予定はありません。リクエストから新しいものを頼んでみましょう。"
+  },
+  "link": {
+    "title": "デバイスをサインイン",
+    "intro": "スマホやテレビに表示されているコードを入力してください。",
+    "signedIn": "{{device}}がサインインしました",
+    "ready": "数秒で準備ができます。",
+    "declined": "拒否しました",
+    "notSignedIn": "{{device}}はサインインしませんでした。",
+    "another": "別のデバイスをサインイン",
+    "code": "コード",
+    "next": "次へ",
+    "wantsToSignIn": "が<name>{{name}}</name>としてサインインしようとしています",
+    "warning": "手元にある、または目の前にあるデバイスだけを承認してください。あなたと同じアクセス権を持ちます。",
+    "decline": "拒否",
+    "approve": "サインイン"
+  },
+  "profiles": {
+    "whoIsWatching": "誰が観ますか？",
+    "signInWithAccount": "アカウントでサインイン",
+    "enterPin": "{{name}}のPINを入力",
+    "pin": "PIN",
+    "deleteDigit": "削除"
+  },
+  "integrations": {
+    "title": "Radarr と Sonarr",
+    "intro": "接続すると、映画や番組のリクエスト、近日公開の確認、視聴中の問題の報告ができるようになります。",
+    "connected": "接続済み · {{url}}",
+    "notConnected": {
+      "radarr": "未接続 · 映画用",
+      "sonarr": "未接続 · 番組用"
+    },
+    "change": "変更",
+    "connect": "接続",
+    "address": "アドレス",
+    "apiKey": "APIキー",
+    "keyWhere": "{{app}} → Settings → General",
+    "saved": "保存しました",
+    "answers": "{{app}} {{version}} が {{url}} で応答しています",
+    "quality": {
+      "radarr": "新しい映画の画質",
+      "sonarr": "新しい番組の画質"
+    },
+    "folder": "フォルダ",
+    "confirmDisconnect": "{{app}}の接続を解除しますか？すでにあるタイトルはそのまま残ります。",
+    "disconnect": "接続を解除",
+    "testing": "テスト中…",
+    "test": "テスト",
+    "whoCanAdd": "映画や番組を追加できる人",
+    "mode": {
+      "approve": {
+        "label": "リクエストして管理者が承認",
+        "detail": "アカウントがあれば誰でもタイトルをリクエストできます。管理者の承認を待ちます。"
+      },
+      "auto": {
+        "label": "すぐに追加",
+        "detail": "リクエストはそのまま Radarr か Sonarr に送られます。"
+      },
+      "off": {
+        "label": "管理者のみ追加",
+        "detail": "他の人も近日公開の確認や問題の報告はできます。"
+      }
+    }
+  },
+  "requests": {
+    "tab": {
+      "ask": "リクエストする",
+      "requests": "リクエスト",
+      "yourRequests": "自分のリクエスト",
+      "problems": "問題",
+      "yourReports": "自分の報告"
+    },
+    "movies": "映画",
+    "shows": "番組",
+    "findMovie": "映画を探す…",
+    "findShow": "番組を探す…",
+    "nothingFound": "「{{q}}」は見つかりませんでした",
+    "ready": "視聴可能",
+    "askedFor": "リクエスト済み",
+    "onItsWay": "準備中",
+    "add": "追加",
+    "askForIt": "リクエストする",
+    "state": {
+      "pending": "承認待ち",
+      "approved": "準備中",
+      "declined": "拒否",
+      "failed": "追加できませんでした"
+    },
+    "none": "まだリクエストはありません。",
+    "retry": "再試行",
+    "approve": "承認",
+    "remove": "「{{title}}」のリクエストを削除",
+    "removedFromLibrary": "ライブラリから削除済み",
+    "noProblems": "問題の報告はありません。",
+    "noReports": "まだ問題を報告していません。タイトルの「問題を報告」を使ってください。",
+    "fileReplaced": "ファイルを置き換え済み",
+    "closed": "クローズ済み",
+    "confirmReplace": "「{{title}}」のこのファイルを削除して、別のコピーをダウンロードしますか？新しいものはダウンロードとライブラリのスキャン後に表示されます。",
+    "replaceFile": "ファイルを置き換え",
+    "close": "クローズ"
+  },
+  "settings": {
+    "tmdbNotice": "ポスターと説明文は <link>TMDB</link> から取得しています。この製品は TMDB API を使用していますが、TMDB による承認や認定は受けていません。",
+    "libraries": {
+      "title": "ライブラリ",
+      "none": "まだライブラリはありません。",
+      "scan": "スキャン",
+      "remove": "{{name}}を削除",
+      "confirmRemove": "「{{name}}」を削除しますか？ファイルはそのまま残ります。",
+      "kind": {
+        "movies": "映画",
+        "tv": "テレビ番組",
+        "music": "音楽"
+      },
+      "type": "種類",
+      "folders": "フォルダ",
+      "up": "1つ上のフォルダ",
+      "added": "追加済み",
+      "useFolder": "このフォルダを使う",
+      "noSubfolders": "サブフォルダはありません"
+    },
+    "people": {
+      "title": "メンバー",
+      "admin": "管理者",
+      "passwordChanged": "パスワードを変更しました。{{name}}はすべてのデバイスからサインアウトしました。",
+      "you": "（あなた）",
+      "removeAdmin": "管理者から外す",
+      "makeAdmin": "管理者にする",
+      "resetPassword": "パスワードをリセット",
+      "remove": "削除",
+      "newPasswordFor": "{{name}}の新しいパスワード",
+      "setPassword": "パスワードを設定",
+      "confirmRemove": "<name>{{name}}</name>を削除しますか？視聴履歴、ウォッチリスト、ダウンロード、リクエストも削除され、すべてのデバイスからサインアウトします。元に戻せません。"
+    },
+    "account": {
+      "title": "自分のアカウント",
+      "changePassword": "パスワードを変更",
+      "current": "現在のパスワード",
+      "new": "新しいパスワード",
+      "again": "新しいパスワード（確認）",
+      "hint": "8文字以上。他のデバイスはサインアウトされます。",
+      "mismatch": "新しいパスワードが一致しません。",
+      "changed": "パスワードを変更しました。他のデバイスはサインアウトしました。"
+    },
+    "devices": {
+      "aWhileAgo": "少し前",
+      "justNow": "たった今",
+      "title": "自分のデバイス",
+      "unknown": "不明なデバイス",
+      "this": "このデバイス",
+      "lastUsed": "最終使用: {{when}}",
+      "confirmSignOut": "「{{name}}」をサインアウトしますか？"
+    },
+    "version": "Matinee サーバー {{version}} · API v{{api}}",
+    "home": {
+      "title": "自宅ネットワーク",
+      "requireSignIn": "自宅でもサインインを必須にする",
+      "required": "自宅でも外出先でも全員サインインします。",
+      "open": "自宅ネットワークのスマホ、テレビ、ブラウザはサインインなしで視聴できます。共通の「自宅」アカウントを使い、何も変更できません。外出先では全員サインインします。"
+    },
+    "remote": {
+      "title": "リモートアクセス",
+      "publicURL": "外出先では、アプリはこのサーバーのセットアップ時のアドレス <url>{{url}}</url> に接続します。",
+      "toggle": "外出先で観る",
+      "hint": "Matinee がルーターにポートを開けるよう依頼し、証明書を取得して、どこからでも安全に接続できるようにします。外部からは全員サインインします。",
+      "working": "ルーターのポートを開けて証明書を取得しています…",
+      "ready": "外出先ではアプリは <url>{{url}}</url> でこのサーバーに接続します。",
+      "router": "ルーターが{{router}}でポートを開けました。",
+      "pickUp": "次に自宅ネットワークにつないだときにこのアドレスを取得します。",
+      "sharedAddress": "Matinee はまだ自力でこれを回避できません。",
+      "retry": "Matinee は30分ごとに再試行します。"
+    },
+    "playback": {
+      "title": "再生",
+      "autoPlay": "次のエピソードを再生",
+      "autoPlayHint": "エンドクレジットが始まると、キャンセルできる10秒のカウントダウンの後に次のエピソードを再生します。",
+      "binge": "カウントダウンをスキップ",
+      "bingeHint": "エンドクレジットが始まったらすぐ次のエピソードへ。何も操作せずに3話続くと、まだ観ているか確認します。"
+    },
+    "trailers": {
+      "title": "予告編",
+      "remote": "YouTube の予告編",
+      "remoteOn": "映画や番組で TMDB の予告編を YouTube から再生できます。メディアの横にある予告編ファイルは常に表示されます。",
+      "remoteOff": "「Movie (2020)-trailer.mkv」や Trailers フォルダ内のファイルなど、メディアの横にある予告編ファイルだけを表示します。"
+    },
+    "transcoding": {
+      "title": "トランスコード",
+      "intro": "デバイスがそのまま再生できないファイルは、視聴中に変換されます。GPU を使うと速く、サーバーの負荷も軽くなります。",
+      "convertingWith": "変換に使用",
+      "active": "{{name}}。",
+      "activeOn": "{{detail}}上の{{name}}。",
+      "fullGPU": "映像のデコード、リサイズ、エンコードを GPU で行います。",
+      "encodeOnly": "映像のエンコードは GPU、デコードは CPU で行います。",
+      "fallback": "GPU で処理できないファイルは CPU で再生します。",
+      "testing": "このサーバーの GPU をテストしています…",
+      "cpuOff": "CPU。ハードウェアトランスコードはオフです。",
+      "cpuFailed": "CPU。選んだアクセラレータがこのサーバーで動作しなかったためです。",
+      "cpuNoGPU": "CPU。このサーバーにはテストに合格した GPU がありません。",
+      "hardware": "ハードウェアアクセラレーション",
+      "auto": "自動: 動作する中で最適なもの",
+      "off": "オフ: 常に CPU を使う",
+      "notFound": "{{name}}（このサーバーにはありません）",
+      "accelerator": {
+        "nvenc": "NVIDIA NVENC",
+        "vaapi": "VAAPI（Linux の AMD と Intel）",
+        "qsv": "Intel Quick Sync",
+        "videotoolbox": "VideoToolbox（Mac）",
+        "amf": "AMD AMF（Windows）",
+        "v4l2m2m": "V4L2（Raspberry Pi）"
+      }
+    }
+  },
+  "language": {
+    "title": "言語",
+    "label": "Matinee の表示言語",
+    "hint": "言語はスマホやテレビの Matinee アプリにも引き継がれます。TMDB にあれば、タイトルや説明文もその言語で表示されます。",
+    "guestHint": "アカウントのない家族全員がこの言語を共有します。",
+    "automatic": "自動（{{language}}）",
+    "machine": "この言語は機械翻訳のため、不自然な表現があるかもしれません。",
+    "help": "改善に協力する"
+  }
+}

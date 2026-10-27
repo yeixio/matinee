@@ -1,0 +1,310 @@
+{
+  "duration": {
+    "minutes": "{{minutes}} min",
+    "hoursMinutes": "{{hours}} h {{minutes}} min"
+  },
+  "episodeCode": "S{{season}} · A{{episode}}",
+  "seasonN": "Säsong {{season}}",
+  "specials": "Specialavsnitt",
+  "media": {
+    "mono": "Mono",
+    "stereo": "Stereo",
+    "lossless": "Förlustfri",
+    "hiRes": "Hi-Res",
+    "dolbyVisionProfile": "Dolby Vision profil {{profile}}",
+    "withBase": "{{format}}, med {{base}} för andra skärmar",
+    "bitDepth": "{{bits}} bitar",
+    "forced": "Tvingade",
+    "sdh": "SDH"
+  },
+  "people": {
+    "episodes_one": "{{count}} avsnitt",
+    "episodes_other": "{{count}} avsnitt",
+    "lines": {
+      "createdBy": "Skapad av",
+      "director_one": "Regissör",
+      "director_other": "Regissörer",
+      "writer_one": "Manusförfattare",
+      "writer_other": "Manusförfattare",
+      "basedOn": "Baserad på",
+      "music": "Musik"
+    },
+    "died": "Död {{date}}",
+    "bornIn": "Född i {{place}}",
+    "bornOnIn": "Född {{date}} i {{place}}",
+    "bornOn": "Född {{date}}",
+    "dollars": "{{amount}} $"
+  },
+  "facts": {
+    "firstAired": "Första sändning",
+    "released": "Premiär",
+    "aired": "Sänd",
+    "ended": "Avslutad",
+    "status": "Status",
+    "seasons": "Säsonger",
+    "seasonsValue_one": "{{seasons}} ({{count}} avsnitt)",
+    "seasonsValue_other": "{{seasons}} ({{count}} avsnitt)",
+    "rated": "Åldersgräns",
+    "genres": "Genrer",
+    "originalTitle": "Originaltitel",
+    "originalLanguage": "Originalspråk",
+    "spokenLanguages": "Talade språk",
+    "studio_one": "Studio",
+    "studio_other": "Studior",
+    "network_one": "Kanal",
+    "network_other": "Kanaler",
+    "country_one": "Land",
+    "country_other": "Länder",
+    "collection": "Samling",
+    "budget": "Budget",
+    "boxOffice": "Biointäkter"
+  },
+  "showStatus": {
+    "Returning Series": "Fortsätter",
+    "Ended": "Avslutad",
+    "Canceled": "Nedlagd",
+    "In Production": "I produktion",
+    "Planned": "Planerad",
+    "Pilot": "Pilot"
+  },
+  "genres": {
+    "Action": "Action",
+    "Adventure": "Äventyr",
+    "Animation": "Animerat",
+    "Comedy": "Komedi",
+    "Crime": "Kriminal",
+    "Documentary": "Dokumentär",
+    "Drama": "Drama",
+    "Family": "Familj",
+    "Fantasy": "Fantasy",
+    "History": "Historia",
+    "Horror": "Skräck",
+    "Music": "Musik",
+    "Mystery": "Mysterium",
+    "Romance": "Romantik",
+    "Science Fiction": "Science fiction",
+    "Thriller": "Thriller",
+    "War": "Krig",
+    "Western": "Western",
+    "Reality": "Reality",
+    "TV Movie": "TV-film",
+    "Action & Adventure": "Action och äventyr",
+    "Kids": "Barn",
+    "News": "Nyheter",
+    "Sci-Fi & Fantasy": "Sci-fi och fantasy",
+    "Soap": "Såpa",
+    "Talk": "Talkshow",
+    "War & Politics": "Krig och politik"
+  },
+  "jobs": {
+    "Director": "Regi",
+    "Creator": "Skapare",
+    "Screenplay": "Manus",
+    "Writer": "Manusförfattare",
+    "Teleplay": "TV-manus",
+    "Story": "Berättelse",
+    "Novel": "Roman",
+    "Characters": "Karaktärer",
+    "Author": "Författare",
+    "Original Music Composer": "Originalmusik",
+    "Music": "Musik",
+    "Director of Photography": "Foto",
+    "Editor": "Klippning",
+    "Producer": "Producent",
+    "Executive Producer": "Exekutiv producent",
+    "Casting": "Rollbesättning",
+    "Production Design": "Scenografi",
+    "Costume Design": "Kostym"
+  },
+  "kids": {
+    "littleKids": "Små barn",
+    "kids": "Barn",
+    "teens": "Tonåringar",
+    "andYounger": "{{ratings}} och yngre"
+  },
+  "sort": {
+    "title": "Titel",
+    "added": "Tillagd",
+    "released": "Premiärdatum",
+    "year": "År",
+    "rating": "Betyg",
+    "runtime": "Speltid",
+    "lastPlayed": "Senast sedd"
+  },
+  "watched": {
+    "unwatched": "Osedda",
+    "inProgress": "Påbörjade",
+    "watched": "Sedda",
+    "notStarted": "Inte påbörjade"
+  },
+  "genreRows": {
+    "Action": "Fullt med action",
+    "Adventure": "Äventyr",
+    "Animation": "Animerade favoriter",
+    "Comedy": "Komedier",
+    "Crime": "Kriminalhistorier",
+    "Documentary": "Dokumentärer",
+    "Drama": "Draman",
+    "Family": "För hela familjen",
+    "Fantasy": "Fantasyvärldar",
+    "Horror": "Skräck",
+    "Mystery": "Mysterier",
+    "Romance": "Romantik",
+    "Science Fiction": "Sci-fi-favoriter",
+    "Thriller": "Thrillers",
+    "War": "Krigshistorier",
+    "Western": "Westerns"
+  },
+  "count": {
+    "episodes_one": "{{count}} avsnitt",
+    "episodes_other": "{{count}} avsnitt",
+    "seasons_one": "{{count}} säsong",
+    "seasons_other": "{{count}} säsonger",
+    "albums_one": "{{count}} album",
+    "albums_other": "{{count}} album",
+    "tracks_one": "{{count}} spår",
+    "tracks_other": "{{count}} spår",
+    "titles_one": "{{count}} titel",
+    "titles_other": "{{count}} titlar"
+  },
+  "awards": {
+    "academy": {
+      "won_one": "Vann {{count}} Oscar",
+      "won_other": "Vann {{count}} Oscars",
+      "nominated_one": "Nominerad till {{count}} Oscar",
+      "nominated_other": "Nominerad till {{count}} Oscars"
+    },
+    "emmy": {
+      "won_one": "Vann {{count}} Primetime Emmy",
+      "won_other": "Vann {{count}} Primetime Emmys",
+      "nominated_one": "Nominerad till {{count}} Primetime Emmy",
+      "nominated_other": "Nominerad till {{count}} Primetime Emmys"
+    },
+    "globe": {
+      "won_one": "Vann {{count}} Golden Globe",
+      "won_other": "Vann {{count}} Golden Globes",
+      "nominated_one": "Nominerad till {{count}} Golden Globe",
+      "nominated_other": "Nominerad till {{count}} Golden Globes"
+    },
+    "bafta": {
+      "won_one": "Vann {{count}} BAFTA",
+      "won_other": "Vann {{count}} BAFTA",
+      "nominated_one": "Nominerad till {{count}} BAFTA",
+      "nominated_other": "Nominerad till {{count}} BAFTA"
+    },
+    "wins_one": "{{count}} vinst",
+    "wins_other": "{{count}} vinster",
+    "nominations_one": "{{count}} nominering",
+    "nominations_other": "{{count}} nomineringar",
+    "winsAndNominations": "{{wins}} och {{nominations}}"
+  },
+  "departments": {
+    "Acting": "Skådespelare",
+    "Directing": "Regi",
+    "Writing": "Manus",
+    "Production": "Produktion",
+    "Sound": "Ljud",
+    "Camera": "Kamera",
+    "Editing": "Klippning",
+    "Art": "Scenografi",
+    "Crew": "Team",
+    "Visual Effects": "Visuella effekter",
+    "Costume & Make-Up": "Kostym och smink",
+    "Lighting": "Ljussättning",
+    "Creator": "Skapare"
+  },
+  "starters": {
+    "recent": "Nyligen tillagt",
+    "unwatched": "Osett",
+    "tonight": "Kort nog för i kväll"
+  },
+  "filter": {
+    "decade": "{{decade}}-talet",
+    "yearRange": "{{from}}–{{to}}",
+    "yearOrLater": "{{year}} eller senare",
+    "yearOrEarlier": "{{year}} eller tidigare",
+    "lastYear": "det senaste året",
+    "lastWeeks_one": "den senaste veckan",
+    "lastWeeks_other": "de senaste {{count}} veckorna",
+    "lastDays_one": "den senaste {{count}} dagen",
+    "lastDays_other": "de senaste {{count}} dagarna",
+    "runtime": {
+      "titles": {
+        "between": "{{min}}–{{max}} min",
+        "over": "Över {{min}} min",
+        "under": "Under {{max}} min"
+      },
+      "episodes": {
+        "between": "Avsnitt {{min}}–{{max}} min",
+        "over": "Avsnitt över {{min}} min",
+        "under": "Avsnitt under {{max}} min"
+      }
+    }
+  },
+  "themes": {
+    "clean": {
+      "name": "Ren",
+      "description": "Vitt, en blå ton, inga seriffer. Bara affischerna."
+    },
+    "dark": {
+      "name": "Mörk",
+      "description": "Helsvart och skarpt vitt. Skonsamt för ögonen och för en OLED-skärm."
+    },
+    "drive-in": {
+      "name": "Drive-in",
+      "description": "Sjuttiotalsbrunt och bärnstensgula skyltljus, som en kväll på drive-in."
+    },
+    "high-contrast": {
+      "name": "Hög kontrast",
+      "description": "Svart, vitt och klargult, för tydligast möjliga text tvärs över rummet."
+    },
+    "light": {
+      "name": "Ljus",
+      "description": "Varmt pappersvitt med korall, för ett ljust rum."
+    },
+    "matinee": {
+      "name": "Matinee",
+      "description": "Varmt biomörker med en korallaccent. Husets eget utseende."
+    },
+    "sci-fi": {
+      "name": "Sci-fi",
+      "description": "Rymdblått med ett neoncyan sken och ett futuristiskt typsnitt."
+    }
+  },
+  "every": {
+    "seconds_one": "{{count}} sekund",
+    "seconds_other": "{{count}} sekunder",
+    "minutes_one": "{{count}} minut",
+    "minutes_other": "{{count}} minuter",
+    "hours_one": "{{count}} timme",
+    "hours_other": "{{count}} timmar"
+  },
+  "avatars": {
+    "coral": "Korall",
+    "amber": "Bärnsten",
+    "lime": "Lime",
+    "teal": "Blågrön",
+    "sky": "Himmelsblå",
+    "violet": "Violett",
+    "pink": "Rosa",
+    "slate": "Skiffer"
+  },
+  "day": {
+    "today": "Idag",
+    "tomorrow": "Imorgon",
+    "yesterday": "Igår"
+  },
+  "release": {
+    "cinemas": "På bio",
+    "digital": "Digital release",
+    "physical": "På skiva",
+    "airs": "Sänds"
+  },
+  "issue": {
+    "video": "Bild",
+    "audio": "Ljud",
+    "subtitles": "Undertexter",
+    "wrong": "Fel titel",
+    "other": "Något annat"
+  }
+}

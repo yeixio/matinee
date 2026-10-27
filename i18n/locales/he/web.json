@@ -1,0 +1,688 @@
+{
+  "loading": "טוען",
+  "nav": {
+    "home": "בית",
+    "watchList": "רשימת צפייה",
+    "collections": "אוספים",
+    "scanning": "סורק",
+    "search": "חיפוש",
+    "comingSoon": "בקרוב",
+    "requests": "בקשות",
+    "signIn": "כניסה",
+    "settings": "הגדרות",
+    "switchProfile": "החלפת פרופיל",
+    "signOut": "יציאה"
+  },
+  "cantReachServer": "אין חיבור לשרת. מנסה שוב…",
+  "player": {
+    "subtitlesFailed": "לא ניתן לטעון את הכתוביות האלה",
+    "off": "כבוי",
+    "convertsVideo": "ממיר וידאו",
+    "file": "קובץ",
+    "seek": "דילוג",
+    "previous": "הקודם",
+    "pause": "השהיה",
+    "next": "הבא",
+    "closePlayer": "סגירת הנגן",
+    "failedDetail": "הניגון נכשל. ייתכן שהקובץ פגום או בפורמט שהשרת לא יכול להמיר.",
+    "failed": "הניגון נכשל",
+    "back10": "10 שניות אחורה",
+    "forward10": "10 שניות קדימה",
+    "unmute": "ביטול השתקה",
+    "mute": "השתקה",
+    "converting": "ממיר",
+    "fullscreen": "מסך מלא"
+  },
+  "somethingWentWrong": "משהו השתבש",
+  "oneMoment": "רק רגע…",
+  "auth": {
+    "username": "שם משתמש",
+    "password": "סיסמה",
+    "signIn": "כניסה",
+    "welcomeBack": "ברוך שובך.",
+    "setUp": "הגדרת Matinee",
+    "setUpHint": "צור את חשבון המנהל. אפשר להוסיף משפחה וחברים אחר כך.",
+    "createAccount": "יצירת חשבון"
+  },
+  "home": {
+    "welcome": "ברוכים הבאים ל־Matinee",
+    "welcomeHint": "כדי להתחיל, הוסף תיקייה של סרטים, סדרות או מוזיקה.",
+    "addLibrary": "הוספת ספרייה",
+    "continueWatching": "להמשיך לצפות",
+    "recentlyAdded": "נוספו לאחרונה",
+    "newReleases": "יציאות חדשות",
+    "scanning": "סורק את הספרייה שלך",
+    "scanningHint": "כותרים חדשים יופיעו כאן ברגע שיימצאו.",
+    "removeNamed": "הסרת {{title}} מ„להמשיך לצפות”",
+    "remove": "הסרה מ„להמשיך לצפות”"
+  },
+  "hero": {
+    "upNext": "הבא בתור",
+    "justAdded": "נוסף עכשיו",
+    "details": "פרטים"
+  },
+  "item": {
+    "resume": "המשך",
+    "resumeLeft": "המשך · נשארו {{left}}",
+    "play": "ניגון",
+    "resumeFrom": "המשך מ־{{time}}",
+    "resumeEpisode": "המשך פרק {{episode}}",
+    "playEpisode": "נגן פרק {{episode}}",
+    "shuffle": "ערבוב",
+    "seasons": "עונות",
+    "albums": "אלבומים",
+    "episodes": "פרקים"
+  },
+  "row": {
+    "back": "גלילה אחורה",
+    "forward": "גלילה קדימה"
+  },
+  "artwork": {
+    "fetching": "מביא פרטים…"
+  },
+  "close": "סגירה",
+  "file": {
+    "audio": "שמע",
+    "subtitles": "כתוביות",
+    "title": "פרטי הקובץ",
+    "notYet": "Matinee עוד לא בדק את הקובץ הזה לעומק. הוא קורא כל קובץ לאט ברקע, כך שזה יתמלא מעצמו.",
+    "unreadable": "Matinee לא הצליח לקרוא את הקובץ: {{error}}",
+    "stale": "הקובץ השתנה מאז שזה נרשם; הוא ייבדק שוב בקרוב.",
+    "file": "קובץ",
+    "location": "מיקום",
+    "size": "גודל",
+    "format": "פורמט",
+    "length": "אורך",
+    "bitrate": "קצב סיביות",
+    "chapters": "פרקים",
+    "video": "וידאו",
+    "videoN": "וידאו {{n}}",
+    "codec": "קודק",
+    "resolution": "רזולוציה",
+    "frameRate": "קצב פריימים",
+    "fps": "{{rate}} פריימים לשנייה",
+    "bitDepth": "עומק סיביות",
+    "dynamicRange": "טווח דינמי",
+    "dvProfile": "פרופיל {{profile}}",
+    "dvProfileLevel": "פרופיל {{profile}}, רמה {{level}}",
+    "fallback": "גיבוי {{format}}",
+    "color": "צבע",
+    "trackN": "רצועה {{n}}",
+    "default": "ברירת מחדל",
+    "forced": "כפויות",
+    "commentary": "פרשנות",
+    "audioDescription": "תיאור קולי",
+    "separateFile": "קובץ נפרד",
+    "inFile": "בתוך הקובץ",
+    "sdh": "SDH",
+    "recorded": "נרשם {{when}}",
+    "queued": "בתור; ייבדק הבא.",
+    "analyzeAgain": "לנתח שוב"
+  },
+  "listSeparator": ", ",
+  "credits": {
+    "seriesCast": "שחקני הסדרה",
+    "cast": "שחקנים",
+    "guestStars": "שחקנים אורחים",
+    "starring": "בכיכובם של",
+    "moreDetails": "עוד פרטים",
+    "crew": "צוות",
+    "about": "אודות",
+    "awards": "פרסים",
+    "won": "זכה",
+    "nominated": "מועמד",
+    "wonIn": "זכה {{year}}",
+    "nominatedIn": "מועמד {{year}}",
+    "showAll": "הצג את כל {{count}}",
+    "awardsSource": "הפרסים מ־Wikidata."
+  },
+  "cancel": "ביטול",
+  "upNext": {
+    "upNext": "הבא בתור",
+    "stillWatching": "עדיין צופים?",
+    "youMightLike": "אולי תאהב גם",
+    "playingIn": "מתחיל בעוד {{seconds}}",
+    "playNow": "נגן עכשיו",
+    "keepWatching": "להמשיך לצפות",
+    "haveALook": "הצצה",
+    "stop": "עצירה"
+  },
+  "goBack": "חזרה",
+  "back": "חזרה",
+  "trailer": {
+    "trailer": "טריילר",
+    "named": "הטריילר של {{title}}",
+    "wontPlay": "הטריילר הזה לא מתנגן."
+  },
+  "watchList": {
+    "on": "ברשימת הצפייה שלך",
+    "add": "הוספה לרשימת הצפייה",
+    "empty": "עוד לא נשמר כלום",
+    "emptyHint": "פתח סרט או סדרה ובחר „רשימת צפייה” כדי לשמור אותם כאן לאחר כך. סרטים יוצאים מהרשימה אחרי שצפית בהם.",
+    "browse": "עיון"
+  },
+  "related": {
+    "moreLikeThis": "עוד כמו זה"
+  },
+  "boxSet": {
+    "notFound": "הסט לא נמצא",
+    "notFoundHint": "אף אחד מהכותרים שלו לא נמצא עכשיו בספרייה.",
+    "boxSet": "סט"
+  },
+  "search": {
+    "placeholder": "סרטים, סדרות, אמנים, אלבומים…",
+    "nothing": "אין התאמות ל„{{q}}”",
+    "lookingForNew": "מחפש משהו חדש?",
+    "addIt": "להוסיף",
+    "askForIt": "לבקש"
+  },
+  "person": {
+    "notFound": "האדם לא נמצא",
+    "showLess": "הצג פחות",
+    "readMore": "קרא עוד",
+    "inLibrary": "בספרייה שלך"
+  },
+  "library": {
+    "library": "ספרייה",
+    "matches_one": "התאמה אחת",
+    "matches_other": "{{count}} התאמות",
+    "matches_two": "שתי התאמות",
+    "scanning": "סורק…",
+    "nothingUnwatched": "אין כאן שום דבר שלא נצפה",
+    "nothingMatches": "אין התאמות",
+    "seenEverything": "ראית כבר הכול בספרייה הזו.",
+    "clearFilters": "ניקוי מסננים",
+    "appearAsFound": "כותרים יופיעו כשיימצאו.",
+    "noMedia": "Matinee חיפש ב־{{paths}} ולא מצא מדיה."
+  },
+  "nothingHereYet": "אין כאן עדיין כלום",
+  "collection": {
+    "notFound": "האוסף לא נמצא",
+    "notFoundHint": "ייתכן שהוא נמחק.",
+    "smart": "אוסף חכם",
+    "collection": "אוסף",
+    "shuffledDaily": "מעורבב כל יום",
+    "editRules": "עריכת כללים",
+    "edit": "עריכה",
+    "delete": "מחיקת האוסף",
+    "deleteConfirm": "למחוק את {{name}}? הכותרים נשארים בספרייה שלך.",
+    "nothingMatchesYet": "עדיין אין התאמות",
+    "joinByRules": "כותרים מצטרפים מעצמם כשהם מתאימים לכללים.",
+    "howToAdd": "פתח סרט או סדרה ובחר „אוספים” כדי להוסיף אותם."
+  },
+  "collections": {
+    "newShort": "חדש",
+    "new": "אוסף חדש",
+    "newSmartShort": "חכם חדש",
+    "newSmart": "אוסף חכם חדש",
+    "none": "עוד אין אוספים",
+    "noneHint": "אוסף חכם מתמלא מעצמו לפי כללים, כמו אקשן משנות ה־80 שלא נצפה. סטים מופיעים כאן ברגע ששניים מהכותרים שלהם נמצאים בספרייה.",
+    "yours": "שלך",
+    "shared": "משותפים",
+    "forEveryone": "אוספים לכולם",
+    "boxSets": "סטים",
+    "sort": {
+      "own": "סדר משלי",
+      "title": "שם",
+      "added": "תאריך הוספה",
+      "released": "תאריך יציאה",
+      "year": "שנה",
+      "rating": "דירוג",
+      "runtime": "משך",
+      "lastPlayed": "נוגן לאחרונה",
+      "shuffle": "ערבוב יומי"
+    },
+    "smartShort": "חכם",
+    "editNamed": "עריכת {{name}}",
+    "name": "שם",
+    "smartExample": "אקשן משנות ה־80 שלא נצפה",
+    "manualExample": "ערב סרט",
+    "rules": "כללים",
+    "rulesHint": "כותרים שמתאימים למסננים האלה מצטרפים מעצמם כשהספרייה משתנה.",
+    "shuffleDaily": "ערבוב כל יום",
+    "order": "סדר",
+    "orderAdded": "סדר הוספת הכותרים",
+    "direction": "כיוון",
+    "usual": "רגיל",
+    "ascending": "עולה",
+    "descending": "יורד",
+    "showAsRow": "הצגה כשורה",
+    "onHome": "בדף הבית",
+    "onLibraryPage": "בדף ספרייה",
+    "shareWithEveryone": "שיתוף עם כל מי שבשרת הזה",
+    "saveAs": "שמירה כאוסף"
+  },
+  "save": "שמירה",
+  "create": "יצירה",
+  "loadingDots": "טוען…",
+  "filters": {
+    "title": "מסננים",
+    "inUse_one": "מסננים, אחד בשימוש",
+    "inUse_other": "מסננים, {{count}} בשימוש",
+    "inUse_two": "מסננים, {{count}} בשימוש",
+    "sortBy": "מיון לפי",
+    "highestFirst": "הגבוה ביותר קודם",
+    "lowestFirst": "הנמוך ביותר קודם",
+    "highestFirstSwitch": "הגבוה ביותר קודם; החלפה לנמוך ביותר קודם",
+    "lowestFirstSwitch": "הנמוך ביותר קודם; החלפה לגבוה ביותר קודם",
+    "not": "לא {{label}}",
+    "remove": "הסרת {{label}}",
+    "chip": {
+      "words": "„{{q}}”",
+      "directedBy": "בבימוי {{name}}",
+      "with": "עם {{name}}",
+      "releasedWithin": "יצא ב{{within}}",
+      "releasedAfter": "יצא אחרי {{date}}",
+      "releasedBefore": "יצא לפני {{date}}",
+      "addedWithin": "נוסף ב{{within}}",
+      "addedAfter": "נוסף אחרי {{date}}",
+      "addedBefore": "נוסף לפני {{date}}",
+      "ratingMin": "דירוג {{rating}}+",
+      "ratingMax": "דירוג {{rating}} ומטה",
+      "certification": "דירוג {{rating}}",
+      "watchList": "ברשימת הצפייה שלי"
+    },
+    "collection": "אוסף",
+    "active": "מסננים בשימוש",
+    "clearAll": "ניקוי הכול",
+    "more_one": "עוד אחד",
+    "more_other": "עוד {{count}}",
+    "more_two": "עוד שניים",
+    "any": "כלשהו",
+    "all": "הכול",
+    "anyTime": "בכל זמן",
+    "runtime": {
+      "under30": "פחות מ־30 דק׳",
+      "30to60": "30–60 דק׳",
+      "overHour": "יותר משעה",
+      "under90": "פחות מ־90 דק׳",
+      "90to120": "90 דק׳ – שעתיים",
+      "over2Hours": "יותר משעתיים"
+    },
+    "wordsInTitle": "מילים בשם",
+    "onlyWatchList": "רק כותרים ברשימת הצפייה שלי",
+    "fromYear": "משנה",
+    "toYear": "עד שנה",
+    "from": "מ־",
+    "to": "עד",
+    "toPlaceholder": "עד",
+    "lastWeek": "השבוע האחרון",
+    "last30Days": "30 הימים האחרונים",
+    "last3Months": "3 החודשים האחרונים",
+    "lastYear": "השנה האחרונה",
+    "ratingAtLeast": "{{rating}}+",
+    "findPerson": "חיפוש אדם",
+    "nobody": "אין אף אחד בשם הזה בספרייה.",
+    "showResults": "הצגת התוצאות",
+    "section": {
+      "title": "שם",
+      "watched": "נצפה",
+      "genre": "ז׳אנר",
+      "year": "שנה",
+      "firstAired": "שודר לראשונה",
+      "released": "יצא לאקרנים",
+      "added": "נוסף",
+      "rating": "דירוג",
+      "episodeLength": "אורך פרק",
+      "runtime": "משך",
+      "quality": "איכות",
+      "network": "רשת או אולפן",
+      "studio": "אולפן",
+      "ageRating": "דירוג גיל",
+      "language": "שפת מקור",
+      "country": "מדינה",
+      "creator": "נוצר או בוים על ידי",
+      "director": "במאי",
+      "people": "שחקנים וצוות"
+    }
+  },
+  "appearance": {
+    "title": "מראה",
+    "useServerTheme": "להשתמש בערכת הנושא של השרת ({{name}})",
+    "guestHint": "כל מי שבבית בלי חשבון חולק את ערכת הנושא הזו.",
+    "hint": "ערכת הנושא שלך עוברת איתך לאפליקציות Matinee בטלפון ובטלוויזיה.",
+    "theme": "ערכת נושא",
+    "preview": {
+      "tonight": "הערב",
+      "trailer": "טריילר"
+    },
+    "serverTheme": "ערכת הנושא של השרת",
+    "serverThemeHint": "מה שכולם רואים עד שהם בוחרים משלהם, וגם בדף הכניסה.",
+    "custom": "{{name}} (מותאם אישית)",
+    "addYourOwn": "כדי להוסיף משלך, שים קובץ ערכת נושא בתיקייה <code>themes</code> של השרת, בתוך תיקיית הנתונים שלו.",
+    "howTo": "איך יוצרים ערכת נושא",
+    "skipped": "דולג: {{problem}}"
+  },
+  "newFiles": {
+    "title": "קבצים חדשים",
+    "intro": "Matinee מבחין בקבצים שאתה מוסיף, משנה את שמם או מוחק, ומעדכן את הספרייה כמה שניות אחרי שההעתקה שלהם מסתיימת.",
+    "watch": "מעקב אחרי קבצים חדשים",
+    "summary": {
+      "some": "חלק מהתיקיות נבדקות כל {{every}}",
+      "watching": "עוקב אחרי קבצים חדשים",
+      "polling": "נבדק לקבצים חדשים כל {{every}}",
+      "pollingShare": "נבדק לקבצים חדשים כל {{every}} (שיתוף רשת)",
+      "off": "אין מעקב אחרי קבצים חדשים"
+    },
+    "mode": {
+      "auto": {
+        "label": "אוטומטי",
+        "hint": "מיד בדיסקים של השרת עצמו. שיתופי רשת (SMB, NFS) לא מודיעים על שינויים, אז Matinee בודק אותם כל {{every}}."
+      },
+      "poll": {
+        "label": "בדיקה לפי טיימר",
+        "hint": "כל תיקייה נבדקת כל {{every}}. בחר באפשרות הזו אם קבצים חדשים בדיסק לא מופיעים מעצמם."
+      },
+      "off": {
+        "label": "כבוי",
+        "hint": "קבצים חדשים יופיעו בסריקה המלאה הבאה, או כשתלחץ על „סריקה”."
+      }
+    },
+    "rescan": "כל ספרייה גם נסרקת מחדש במלואה כל {{every}}, וזה תופס כל דבר אחר, כמו קובץ שהוחלף במקומו בשיתוף.",
+    "rescanOff": "סריקות מלאות כבויות בשרת הזה (MATINEE_SCAN_INTERVAL=0)."
+  },
+  "analysis": {
+    "title": "ניתוח מדיה",
+    "intro": "Matinee קורא לאט כל קובץ כדי לזהות את האיכות, הסאונד והשפות שלו, ושוב בכל פעם שקובץ משתנה.",
+    "state": {
+      "lookingAt": "בודק את {{file}}",
+      "working": "עובד",
+      "waiting": "מחכה לסיום הניגון",
+      "slowDisk": "הקבצים איטיים לקריאה; נח לכמה דקות",
+      "allDone": "כל הקבצים נותחו",
+      "upToDate": "מעודכן",
+      "paused": "מושהה"
+    },
+    "progress": "{{done}} מתוך {{total}}",
+    "unreadable_one": "לא ניתן היה לקרוא קובץ אחד.",
+    "unreadable_other": "לא ניתן היה לקרוא {{count}} קבצים.",
+    "unreadable_two": "לא ניתן היה לקרוא שני קבצים.",
+    "speed": "מהירות",
+    "mode": {
+      "gentle": {
+        "label": "עדין",
+        "hint": "קובץ אחד כל כמה שניות, ואף אחד בזמן שהשרת ממיר משהו לניגון."
+      },
+      "normal": {
+        "label": "רגיל",
+        "hint": "קבצים ברצף, עדיין בעדיפות הנמוכה ביותר."
+      },
+      "off": {
+        "label": "כבוי",
+        "hint": "מושהה עד שתפעיל שוב."
+      }
+    }
+  },
+  "profileSettings": {
+    "title": "פרופילים",
+    "intro": "פרופילים חולקים כניסה אחת אבל שומרים התקדמות, רשימת צפייה וערכת נושא משלהם. פרופילי ילדים רואים רק מה שאתה מאשר. קוד PIN שומר פרופיל, או את החשבון עצמו, לבעליו.",
+    "pinFor": "קוד PIN בן 4 ספרות עבור {{name}}",
+    "homeDevices": "מכשירים ברשת הביתית שלא נכנסו לחשבון",
+    "account": "חשבון",
+    "removePin": "הסרת PIN",
+    "addPin": "הוספת PIN",
+    "hasPin": "יש PIN",
+    "edit": "עריכת {{name}}",
+    "remove": "הסרת {{name}}",
+    "confirmRemove": "להסיר את {{name}}? ההתקדמות ורשימת הצפייה יימחקו גם הן.",
+    "add": "הוספת פרופיל",
+    "name": "שם",
+    "newPin": "PIN חדש",
+    "pinOptional": "PIN (לא חובה)",
+    "unchanged": "ללא שינוי",
+    "fourDigits": "4 ספרות",
+    "removeThePin": "הסרת ה־PIN",
+    "colour": "צבע",
+    "kidsMode": "מצב ילדים",
+    "kidsOff": "כבוי: רואה הכול",
+    "kidsLevel": "{{name}}: {{ratings}}",
+    "kidsLibraries": "מה הפרופיל הזה רואה בכל ספרייה. „לפי דירוג” מסתיר כותרים עם דירוג מעל רמת {{level}} וכותרים ללא דירוג. פרופילי ילדים לא יכולים לפתוח את ההגדרות או לשלוח בקשות.",
+    "libraryMode": {
+      "hidden": "מוסתר",
+      "rated": "לפי דירוג",
+      "all": "הכול"
+    }
+  },
+  "report": {
+    "thanks": "תודה, מנהל יבדוק את זה.",
+    "button": "דיווח על בעיה",
+    "whatsWrong": "מה הבעיה עם {{title}}?",
+    "details": "פרטים (לא חובה)",
+    "detailsExample": "למשל: אין קול אחרי 20 דקות",
+    "send": "שליחה"
+  },
+  "quality": {
+    "label": "איכות",
+    "forShow": "איכות לסדרה",
+    "confirm": "לעבור ל־{{name}}? {{app}} יחפש עותקים שמתאימים.",
+    "searching": "מחפש…"
+  },
+  "upcoming": {
+    "nothingYet": "עדיין אין מה להציג",
+    "connect": "חבר את Radarr או Sonarr כדי לראות את הסרטים והפרקים שבדרך.",
+    "openSettings": "פתיחת ההגדרות",
+    "notConnected": "מנהל עדיין לא חיבר את Radarr או Sonarr לשרת הזה.",
+    "intro": "פרקים חדשים וסרטים שיוצאים בחודשיים הקרובים ועוד לא הגיעו.",
+    "unavailable": "{{apps}} לא ענה, אז ייתכן שחלק חסרים.",
+    "nothing": "שום דבר לא בדרך. בקש משהו חדש מ„בקשות”."
+  },
+  "link": {
+    "title": "כניסה במכשיר",
+    "intro": "הזן את הקוד שמוצג בטלפון או בטלוויזיה.",
+    "signedIn": "{{device}} מחובר",
+    "ready": "הוא יהיה מוכן בעוד כמה שניות.",
+    "declined": "נדחה",
+    "notSignedIn": "{{device}} לא חובר.",
+    "another": "כניסה במכשיר נוסף",
+    "code": "קוד",
+    "next": "הבא",
+    "wantsToSignIn": "רוצה להיכנס בתור <name>{{name}}</name>",
+    "warning": "אשר רק מכשיר שאתה מחזיק או רואה. הוא מקבל את אותה גישה שיש לך.",
+    "decline": "דחייה",
+    "approve": "כניסה"
+  },
+  "profiles": {
+    "whoIsWatching": "מי צופה?",
+    "signInWithAccount": "כניסה עם חשבון",
+    "enterPin": "הזן את ה־PIN של {{name}}",
+    "pin": "PIN",
+    "deleteDigit": "מחיקה"
+  },
+  "integrations": {
+    "title": "Radarr ו־Sonarr",
+    "intro": "חבר אותם כדי שאנשים יוכלו לבקש סרטים וסדרות, לראות מה מגיע בקרוב ולדווח על בעיות במה שהם צופים.",
+    "connected": "מחובר · {{url}}",
+    "notConnected": {
+      "radarr": "לא מחובר · לסרטים",
+      "sonarr": "לא מחובר · לסדרות"
+    },
+    "change": "שינוי",
+    "connect": "חיבור",
+    "address": "כתובת",
+    "apiKey": "מפתח API",
+    "keyWhere": "{{app}} → Settings → General",
+    "saved": "נשמר",
+    "answers": "{{app}} {{version}} עונה בכתובת {{url}}",
+    "quality": {
+      "radarr": "איכות לסרטים חדשים",
+      "sonarr": "איכות לסדרות חדשות"
+    },
+    "folder": "תיקייה",
+    "confirmDisconnect": "לנתק את {{app}}? כותרים שכבר נמצאים בו נשארים שם.",
+    "disconnect": "ניתוק",
+    "testing": "בודק…",
+    "test": "בדיקה",
+    "whoCanAdd": "מי יכול להוסיף סרטים וסדרות",
+    "mode": {
+      "approve": {
+        "label": "מבקשים, ואז מנהל מאשר",
+        "detail": "כל מי שיש לו חשבון יכול לבקש כותר. הבקשה מחכה למנהל."
+      },
+      "auto": {
+        "label": "הוספה מיידית",
+        "detail": "מה שאנשים מבקשים עובר ישר ל־Radarr או Sonarr."
+      },
+      "off": {
+        "label": "רק מנהלים מוסיפים כותרים",
+        "detail": "כל השאר עדיין יכולים לראות מה מגיע בקרוב ולדווח על בעיות."
+      }
+    }
+  },
+  "requests": {
+    "tab": {
+      "ask": "לבקש משהו",
+      "requests": "בקשות",
+      "yourRequests": "הבקשות שלך",
+      "problems": "בעיות",
+      "yourReports": "הדיווחים שלך"
+    },
+    "movies": "סרטים",
+    "shows": "סדרות",
+    "findMovie": "חיפוש סרט…",
+    "findShow": "חיפוש סדרה…",
+    "nothingFound": "לא נמצא דבר עבור „{{q}}”",
+    "ready": "מוכן לצפייה",
+    "askedFor": "התבקש",
+    "onItsWay": "בדרך",
+    "add": "הוספה",
+    "askForIt": "לבקש",
+    "state": {
+      "pending": "ממתין לאישור",
+      "approved": "בדרך",
+      "declined": "נדחה",
+      "failed": "לא ניתן להוסיף"
+    },
+    "none": "עוד אין בקשות.",
+    "retry": "ניסיון חוזר",
+    "approve": "אישור",
+    "remove": "הסרת הבקשה עבור {{title}}",
+    "removedFromLibrary": "הוסר מהספרייה",
+    "noProblems": "אף אחד לא דיווח על בעיה.",
+    "noReports": "לא דיווחת על בעיות. השתמש ב„דיווח על בעיה” בכותר.",
+    "fileReplaced": "הקובץ הוחלף",
+    "closed": "סגור",
+    "confirmReplace": "למחוק את הקובץ הזה של {{title}} ולהוריד עותק אחר? החדש יופיע אחרי שיורד והספרייה תיסרק.",
+    "replaceFile": "החלפת הקובץ",
+    "close": "סגירה"
+  },
+  "settings": {
+    "tmdbNotice": "פוסטרים ותיאורים מגיעים מ־<link>TMDB</link>. המוצר הזה משתמש ב־API של TMDB אך אינו מאושר או מוסמך על ידי TMDB.",
+    "libraries": {
+      "title": "ספריות",
+      "none": "עוד אין ספריות.",
+      "scan": "סריקה",
+      "remove": "הסרת {{name}}",
+      "confirmRemove": "להסיר את „{{name}}”? הקבצים שלך נשארים במקומם.",
+      "kind": {
+        "movies": "סרטים",
+        "tv": "סדרות טלוויזיה",
+        "music": "מוזיקה"
+      },
+      "type": "סוג",
+      "folders": "תיקיות",
+      "up": "תיקייה אחת למעלה",
+      "added": "נוסף",
+      "useFolder": "שימוש בתיקייה הזו",
+      "noSubfolders": "אין תיקיות משנה"
+    },
+    "people": {
+      "title": "אנשים",
+      "admin": "מנהל",
+      "passwordChanged": "הסיסמה שונתה. {{name}} נותק מכל המכשירים.",
+      "you": "(אתה)",
+      "removeAdmin": "הסרת הרשאות מנהל",
+      "makeAdmin": "הפיכה למנהל",
+      "resetPassword": "איפוס סיסמה",
+      "remove": "הסרה",
+      "newPasswordFor": "סיסמה חדשה עבור {{name}}",
+      "setPassword": "הגדרת סיסמה",
+      "confirmRemove": "להסיר את <name>{{name}}</name>? היסטוריית הצפייה, רשימת הצפייה, ההורדות והבקשות יימחקו גם הן, והוא ינותק מכל המכשירים. אי אפשר לבטל את זה."
+    },
+    "account": {
+      "title": "החשבון שלך",
+      "changePassword": "שינוי סיסמה",
+      "current": "הסיסמה הנוכחית",
+      "new": "סיסמה חדשה",
+      "again": "סיסמה חדשה שוב",
+      "hint": "לפחות 8 תווים. המכשירים האחרים שלך ינותקו.",
+      "mismatch": "הסיסמאות החדשות לא תואמות.",
+      "changed": "הסיסמה שונתה. המכשירים האחרים שלך נותקו."
+    },
+    "devices": {
+      "aWhileAgo": "לפני זמן מה",
+      "justNow": "הרגע",
+      "title": "המכשירים שלך",
+      "unknown": "מכשיר לא מוכר",
+      "this": "המכשיר הזה",
+      "lastUsed": "שימוש אחרון {{when}}",
+      "confirmSignOut": "לנתק את „{{name}}”?"
+    },
+    "version": "שרת Matinee {{version}} · API v{{api}}",
+    "home": {
+      "title": "רשת ביתית",
+      "requireSignIn": "לבקש כניסה גם בבית",
+      "required": "כולם נכנסים לחשבון, בבית ומחוצה לו.",
+      "open": "טלפונים, טלוויזיות ודפדפנים ברשת הביתית יכולים לצפות בלי להיכנס. הם חולקים חשבון בית אחד ולא יכולים לשנות כלום. מחוץ לבית, כולם נכנסים לחשבון."
+    },
+    "remote": {
+      "title": "גישה מרחוק",
+      "publicURL": "מחוץ לבית, האפליקציות מתחברות ל־<url>{{url}}</url>, הכתובת שאיתה השרת הוגדר.",
+      "toggle": "צפייה מחוץ לבית",
+      "hint": "Matinee מבקש מהנתב לפתוח פורט ומשיג תעודה כדי שהאפליקציות יתחברו בצורה מאובטחת מכל מקום. מבחוץ, כולם נכנסים לחשבון.",
+      "working": "פותח פורט בנתב ומשיג תעודה…",
+      "ready": "האפליקציות מגיעות לשרת הזה בכתובת <url>{{url}}</url> כשהן מחוץ לבית.",
+      "router": "הנתב שלך פתח את הפורט דרך {{router}}.",
+      "pickUp": "הן יקבלו את הכתובת הזו בפעם הבאה שהן ברשת הביתית.",
+      "sharedAddress": "Matinee עוד לא יכול לעקוף את זה בעצמו.",
+      "retry": "Matinee מנסה שוב כל חצי שעה."
+    },
+    "playback": {
+      "title": "ניגון",
+      "autoPlay": "ניגון הפרק הבא",
+      "autoPlayHint": "כשהקרדיטים מתחילים, הפרק הבא מתנגן אחרי ספירה לאחור של 10 שניות שאפשר לבטל.",
+      "binge": "דילוג על הספירה לאחור",
+      "bingeHint": "מעבר ישר לפרק הבא כשהקרדיטים מתחילים. אחרי שלושה ברצף בלי לגעת בכלום, תישאל אם אתה עדיין צופה."
+    },
+    "trailers": {
+      "title": "טריילרים",
+      "remote": "טריילרים מ־YouTube",
+      "remoteOn": "סרטים וסדרות מציעים את הטריילרים שלהם מ־TMDB, שמתנגנים מ־YouTube. קובצי טריילר שליד המדיה שלך תמיד מופיעים גם.",
+      "remoteOff": "מופיעים רק קובצי טריילר שליד המדיה שלך, כמו „Movie (2020)-trailer.mkv” או כל דבר בתיקייה Trailers."
+    },
+    "transcoding": {
+      "title": "המרה",
+      "intro": "קבצים שמכשיר לא יכול לנגן כמו שהם מומרים בזמן הצפייה. מעבד גרפי עושה את זה מהר יותר ובפחות עומס על השרת.",
+      "convertingWith": "ממיר באמצעות",
+      "active": "{{name}}.",
+      "activeOn": "{{name}} על {{detail}}.",
+      "fullGPU": "הווידאו מפוענח, משנה גודל ומקודד במעבד הגרפי.",
+      "encodeOnly": "הווידאו מקודד במעבד הגרפי ומפוענח במעבד.",
+      "fallback": "אם המעבד הגרפי לא מסתדר עם קובץ, הוא מתנגן דרך המעבד במקום.",
+      "testing": "בודק את המעבד הגרפי של השרת…",
+      "cpuOff": "המעבד. המרת חומרה כבויה.",
+      "cpuFailed": "המעבד, כי המאיץ שבחרת לא עבד בשרת הזה.",
+      "cpuNoGPU": "המעבד. אף מעבד גרפי בשרת הזה לא עבר את הבדיקה.",
+      "hardware": "האצת חומרה",
+      "auto": "אוטומטי: הטוב ביותר שעובד",
+      "off": "כבוי: תמיד להשתמש במעבד",
+      "notFound": "{{name}} (לא נמצא בשרת הזה)",
+      "accelerator": {
+        "nvenc": "NVIDIA NVENC",
+        "vaapi": "VAAPI (AMD ו־Intel ב־Linux)",
+        "qsv": "Intel Quick Sync",
+        "videotoolbox": "VideoToolbox (Mac)",
+        "amf": "AMD AMF (Windows)",
+        "v4l2m2m": "V4L2 (Raspberry Pi)"
+      }
+    }
+  },
+  "language": {
+    "title": "שפה",
+    "label": "להציג את Matinee ב",
+    "hint": "השפה שלך עוברת איתך לאפליקציות Matinee בטלפון ובטלוויזיה. גם שמות ותיאורים מגיעים בה, כשיש אותם ב־TMDB.",
+    "guestHint": "כל מי שבבית בלי חשבון חולק את השפה הזו.",
+    "automatic": "אוטומטי ({{language}})",
+    "machine": "השפה הזו תורגמה במכונה, אז ייתכן שחלק מהמילים יישמעו מוזר.",
+    "help": "עזרו לשפר אותה"
+  }
+}

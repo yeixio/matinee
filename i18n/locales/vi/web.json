@@ -1,0 +1,680 @@
+{
+  "loading": "Đang tải",
+  "nav": {
+    "home": "Trang chủ",
+    "watchList": "Danh sách xem",
+    "collections": "Bộ sưu tập",
+    "scanning": "Đang quét",
+    "search": "Tìm kiếm",
+    "comingSoon": "Sắp ra mắt",
+    "requests": "Yêu cầu",
+    "signIn": "Đăng nhập",
+    "settings": "Cài đặt",
+    "switchProfile": "Đổi hồ sơ",
+    "signOut": "Đăng xuất"
+  },
+  "cantReachServer": "Không kết nối được máy chủ. Đang thử lại…",
+  "player": {
+    "subtitlesFailed": "Không tải được phụ đề này",
+    "off": "Tắt",
+    "convertsVideo": "Chuyển đổi video",
+    "file": "Tệp",
+    "seek": "Tua",
+    "previous": "Trước",
+    "pause": "Tạm dừng",
+    "next": "Tiếp",
+    "closePlayer": "Đóng trình phát",
+    "failedDetail": "Phát thất bại. Tệp có thể bị hỏng hoặc ở định dạng máy chủ không chuyển đổi được.",
+    "failed": "Phát thất bại",
+    "back10": "Lùi 10 giây",
+    "forward10": "Tới 10 giây",
+    "unmute": "Bật tiếng",
+    "mute": "Tắt tiếng",
+    "converting": "Đang chuyển đổi",
+    "fullscreen": "Toàn màn hình"
+  },
+  "somethingWentWrong": "Đã xảy ra lỗi",
+  "oneMoment": "Chờ một chút…",
+  "auth": {
+    "username": "Tên người dùng",
+    "password": "Mật khẩu",
+    "signIn": "Đăng nhập",
+    "welcomeBack": "Chào mừng bạn trở lại.",
+    "setUp": "Thiết lập Matinee",
+    "setUpHint": "Tạo tài khoản quản trị. Bạn có thể thêm gia đình và bạn bè sau.",
+    "createAccount": "Tạo tài khoản"
+  },
+  "home": {
+    "welcome": "Chào mừng đến với Matinee",
+    "welcomeHint": "Thêm một thư mục phim, chương trình hoặc nhạc để bắt đầu.",
+    "addLibrary": "Thêm thư viện",
+    "continueWatching": "Xem tiếp",
+    "recentlyAdded": "Mới thêm",
+    "newReleases": "Mới phát hành",
+    "scanning": "Đang quét thư viện của bạn",
+    "scanningHint": "Nội dung mới sẽ hiện ở đây ngay khi được tìm thấy.",
+    "removeNamed": "Xóa {{title}} khỏi Xem tiếp",
+    "remove": "Xóa khỏi Xem tiếp"
+  },
+  "hero": {
+    "upNext": "Tiếp theo",
+    "justAdded": "Vừa thêm",
+    "details": "Chi tiết"
+  },
+  "item": {
+    "resume": "Xem tiếp",
+    "resumeLeft": "Xem tiếp · còn {{left}}",
+    "play": "Phát",
+    "resumeFrom": "Xem tiếp từ {{time}}",
+    "resumeEpisode": "Xem tiếp tập {{episode}}",
+    "playEpisode": "Phát tập {{episode}}",
+    "shuffle": "Phát ngẫu nhiên",
+    "seasons": "Các phần",
+    "albums": "Album",
+    "episodes": "Các tập"
+  },
+  "row": {
+    "back": "Cuộn lùi",
+    "forward": "Cuộn tới"
+  },
+  "artwork": {
+    "fetching": "Đang lấy chi tiết…"
+  },
+  "close": "Đóng",
+  "file": {
+    "audio": "Âm thanh",
+    "subtitles": "Phụ đề",
+    "title": "Chi tiết tệp",
+    "notYet": "Matinee chưa xem kỹ tệp này. Nó đọc từng tệp chậm rãi ở chế độ nền, nên phần này sẽ tự điền vào.",
+    "unreadable": "Matinee không đọc được tệp này: {{error}}",
+    "stale": "Tệp đã thay đổi kể từ lần ghi nhận này; nó sẽ sớm được xem lại.",
+    "file": "Tệp",
+    "location": "Vị trí",
+    "size": "Kích thước",
+    "format": "Định dạng",
+    "length": "Độ dài",
+    "bitrate": "Tốc độ bit",
+    "chapters": "Chương",
+    "video": "Video",
+    "videoN": "Video {{n}}",
+    "codec": "Codec",
+    "resolution": "Độ phân giải",
+    "frameRate": "Tốc độ khung hình",
+    "fps": "{{rate}} fps",
+    "bitDepth": "Độ sâu bit",
+    "dynamicRange": "Dải tương phản động",
+    "dvProfile": "hồ sơ {{profile}}",
+    "dvProfileLevel": "hồ sơ {{profile}}, mức {{level}}",
+    "fallback": "dự phòng {{format}}",
+    "color": "Màu",
+    "trackN": "Rãnh {{n}}",
+    "default": "Mặc định",
+    "forced": "Bắt buộc",
+    "commentary": "Bình luận",
+    "audioDescription": "Mô tả âm thanh",
+    "separateFile": "Tệp riêng",
+    "inFile": "Trong tệp",
+    "sdh": "SDH",
+    "recorded": "Ghi nhận {{when}}",
+    "queued": "Đang chờ; sẽ được xem tiếp theo.",
+    "analyzeAgain": "Phân tích lại"
+  },
+  "listSeparator": ", ",
+  "credits": {
+    "seriesCast": "Diễn viên của loạt phim",
+    "cast": "Diễn viên",
+    "guestStars": "Khách mời",
+    "starring": "Diễn viên chính",
+    "moreDetails": "Thêm chi tiết",
+    "crew": "Đoàn làm phim",
+    "about": "Giới thiệu",
+    "awards": "Giải thưởng",
+    "won": "Đoạt giải",
+    "nominated": "Được đề cử",
+    "wonIn": "Đoạt giải {{year}}",
+    "nominatedIn": "Được đề cử {{year}}",
+    "showAll": "Hiện tất cả {{count}}",
+    "awardsSource": "Giải thưởng từ Wikidata."
+  },
+  "cancel": "Hủy",
+  "upNext": {
+    "upNext": "Tiếp theo",
+    "stillWatching": "Bạn vẫn đang xem chứ?",
+    "youMightLike": "Có thể bạn sẽ thích",
+    "playingIn": "Phát sau {{seconds}}",
+    "playNow": "Phát ngay",
+    "keepWatching": "Xem tiếp",
+    "haveALook": "Xem thử",
+    "stop": "Dừng"
+  },
+  "goBack": "Quay lại",
+  "back": "Quay lại",
+  "trailer": {
+    "trailer": "Trailer",
+    "named": "Trailer {{title}}",
+    "wontPlay": "Không phát được trailer này."
+  },
+  "watchList": {
+    "on": "Có trong danh sách xem",
+    "add": "Thêm vào danh sách xem",
+    "empty": "Chưa lưu gì",
+    "emptyHint": "Mở một phim hoặc chương trình và chọn Danh sách xem để giữ nó ở đây xem sau. Phim sẽ rời danh sách khi bạn đã xem xong.",
+    "browse": "Duyệt"
+  },
+  "related": {
+    "moreLikeThis": "Nội dung tương tự"
+  },
+  "boxSet": {
+    "notFound": "Không tìm thấy bộ phim",
+    "notFoundHint": "Hiện không có phim nào của bộ này trong thư viện.",
+    "boxSet": "Bộ phim"
+  },
+  "search": {
+    "placeholder": "Phim, chương trình, nghệ sĩ, album…",
+    "nothing": "Không có kết quả cho \"{{q}}\"",
+    "lookingForNew": "Bạn đang tìm thứ gì mới?",
+    "addIt": "Thêm",
+    "askForIt": "Yêu cầu"
+  },
+  "person": {
+    "notFound": "Không tìm thấy người này",
+    "showLess": "Thu gọn",
+    "readMore": "Đọc thêm",
+    "inLibrary": "Có trong thư viện của bạn"
+  },
+  "library": {
+    "library": "Thư viện",
+    "matches_other": "{{count}} kết quả",
+    "scanning": "Đang quét…",
+    "nothingUnwatched": "Không còn gì chưa xem ở đây",
+    "nothingMatches": "Không có kết quả",
+    "seenEverything": "Bạn đã xem hết mọi thứ trong thư viện này.",
+    "clearFilters": "Xóa bộ lọc",
+    "appearAsFound": "Nội dung hiện ra khi được tìm thấy.",
+    "noMedia": "Matinee đã tìm trong {{paths}} nhưng không thấy nội dung nào."
+  },
+  "nothingHereYet": "Chưa có gì ở đây",
+  "collection": {
+    "notFound": "Không tìm thấy bộ sưu tập",
+    "notFoundHint": "Có thể nó đã bị xóa.",
+    "smart": "Bộ sưu tập thông minh",
+    "collection": "Bộ sưu tập",
+    "shuffledDaily": "Xáo trộn hằng ngày",
+    "editRules": "Sửa quy tắc",
+    "edit": "Sửa",
+    "delete": "Xóa bộ sưu tập",
+    "deleteConfirm": "Xóa {{name}}? Các mục vẫn ở trong thư viện của bạn.",
+    "nothingMatchesYet": "Chưa có gì khớp",
+    "joinByRules": "Nội dung tự được thêm vào khi khớp với quy tắc.",
+    "howToAdd": "Mở một phim hoặc chương trình và chọn Bộ sưu tập để thêm nó."
+  },
+  "collections": {
+    "newShort": "Mới",
+    "new": "Bộ sưu tập mới",
+    "newSmartShort": "Thông minh mới",
+    "newSmart": "Bộ sưu tập thông minh mới",
+    "none": "Chưa có bộ sưu tập nào",
+    "noneHint": "Bộ sưu tập thông minh tự lấp đầy theo quy tắc, ví dụ phim hành động thập niên 80 chưa xem. Các bộ phim xuất hiện ở đây khi có hai phim của bộ trong thư viện.",
+    "yours": "Của bạn",
+    "shared": "Được chia sẻ",
+    "forEveryone": "Bộ sưu tập cho mọi người",
+    "boxSets": "Các bộ phim",
+    "sort": {
+      "own": "Thứ tự riêng",
+      "title": "Tên",
+      "added": "Ngày thêm",
+      "released": "Ngày phát hành",
+      "year": "Năm",
+      "rating": "Điểm",
+      "runtime": "Thời lượng",
+      "lastPlayed": "Phát lần cuối",
+      "shuffle": "Xáo trộn hằng ngày"
+    },
+    "smartShort": "Thông minh",
+    "editNamed": "Sửa {{name}}",
+    "name": "Tên",
+    "smartExample": "Hành động thập niên 80 chưa xem",
+    "manualExample": "Đêm xem phim",
+    "rules": "Quy tắc",
+    "rulesHint": "Nội dung khớp với các bộ lọc này sẽ tự được thêm vào khi thư viện thay đổi.",
+    "shuffleDaily": "Xáo trộn mỗi ngày",
+    "order": "Thứ tự",
+    "orderAdded": "Thứ tự các mục được thêm",
+    "direction": "Hướng",
+    "usual": "Thông thường",
+    "ascending": "Tăng dần",
+    "descending": "Giảm dần",
+    "showAsRow": "Hiện thành một hàng",
+    "onHome": "Trên Trang chủ",
+    "onLibraryPage": "Trên trang thư viện",
+    "shareWithEveryone": "Chia sẻ với mọi người trên máy chủ này",
+    "saveAs": "Lưu thành bộ sưu tập"
+  },
+  "save": "Lưu",
+  "create": "Tạo",
+  "loadingDots": "Đang tải…",
+  "filters": {
+    "title": "Bộ lọc",
+    "inUse_other": "Bộ lọc, đang dùng {{count}}",
+    "sortBy": "Sắp xếp theo",
+    "highestFirst": "Cao nhất trước",
+    "lowestFirst": "Thấp nhất trước",
+    "highestFirstSwitch": "Cao nhất trước; chuyển sang thấp nhất trước",
+    "lowestFirstSwitch": "Thấp nhất trước; chuyển sang cao nhất trước",
+    "not": "Không phải {{label}}",
+    "remove": "Bỏ {{label}}",
+    "chip": {
+      "words": "\"{{q}}\"",
+      "directedBy": "Đạo diễn {{name}}",
+      "with": "Có {{name}}",
+      "releasedWithin": "Phát hành trong {{within}}",
+      "releasedAfter": "Phát hành sau {{date}}",
+      "releasedBefore": "Phát hành trước {{date}}",
+      "addedWithin": "Thêm trong {{within}}",
+      "addedAfter": "Thêm sau {{date}}",
+      "addedBefore": "Thêm trước {{date}}",
+      "ratingMin": "Điểm {{rating}}+",
+      "ratingMax": "Điểm {{rating}} trở xuống",
+      "certification": "Điểm {{rating}}",
+      "watchList": "Trong danh sách xem của tôi"
+    },
+    "collection": "Bộ sưu tập",
+    "active": "Bộ lọc đang dùng",
+    "clearAll": "Xóa tất cả",
+    "more_other": "thêm {{count}}",
+    "any": "Bất kỳ",
+    "all": "Tất cả",
+    "anyTime": "Bất kỳ lúc nào",
+    "runtime": {
+      "under30": "Dưới 30 phút",
+      "30to60": "30–60 phút",
+      "overHour": "Trên một giờ",
+      "under90": "Dưới 90 phút",
+      "90to120": "90 phút – 2 giờ",
+      "over2Hours": "Trên 2 giờ"
+    },
+    "wordsInTitle": "Từ trong tên",
+    "onlyWatchList": "Chỉ mục trong danh sách xem của tôi",
+    "fromYear": "Từ năm",
+    "toYear": "Đến năm",
+    "from": "Từ",
+    "to": "đến",
+    "toPlaceholder": "Đến",
+    "lastWeek": "Tuần trước",
+    "last30Days": "30 ngày qua",
+    "last3Months": "3 tháng qua",
+    "lastYear": "Năm qua",
+    "ratingAtLeast": "{{rating}}+",
+    "findPerson": "Tìm người",
+    "nobody": "Không có ai tên như vậy trong thư viện này.",
+    "showResults": "Hiện kết quả",
+    "section": {
+      "title": "Tên",
+      "watched": "Đã xem",
+      "genre": "Thể loại",
+      "year": "Năm",
+      "firstAired": "Phát sóng lần đầu",
+      "released": "Phát hành",
+      "added": "Ngày thêm",
+      "rating": "Điểm",
+      "episodeLength": "Độ dài tập",
+      "runtime": "Thời lượng",
+      "quality": "Chất lượng",
+      "network": "Kênh hoặc hãng phim",
+      "studio": "Hãng phim",
+      "ageRating": "Phân loại độ tuổi",
+      "language": "Ngôn ngữ gốc",
+      "country": "Quốc gia",
+      "creator": "Sáng tạo hoặc đạo diễn bởi",
+      "director": "Đạo diễn",
+      "people": "Diễn viên và đoàn làm phim"
+    }
+  },
+  "appearance": {
+    "title": "Giao diện",
+    "useServerTheme": "Dùng chủ đề của máy chủ ({{name}})",
+    "guestHint": "Mọi người ở nhà không có tài khoản dùng chung chủ đề này.",
+    "hint": "Chủ đề của bạn theo bạn sang ứng dụng Matinee trên điện thoại và TV.",
+    "theme": "Chủ đề",
+    "preview": {
+      "tonight": "Tối nay",
+      "trailer": "Trailer"
+    },
+    "serverTheme": "Chủ đề máy chủ",
+    "serverThemeHint": "Thứ mọi người thấy cho đến khi tự chọn, và trên trang đăng nhập.",
+    "custom": "{{name}} (tùy chỉnh)",
+    "addYourOwn": "Để thêm chủ đề riêng, đặt một tệp chủ đề vào thư mục <code>themes</code> của máy chủ, trong thư mục dữ liệu của nó.",
+    "howTo": "Cách tạo chủ đề",
+    "skipped": "Đã bỏ qua {{problem}}"
+  },
+  "newFiles": {
+    "title": "Tệp mới",
+    "intro": "Matinee nhận ra các tệp bạn thêm, đổi tên hoặc xóa và cập nhật thư viện vài giây sau khi chúng sao chép xong.",
+    "watch": "Theo dõi tệp mới",
+    "summary": {
+      "some": "Một số thư mục được kiểm tra mỗi {{every}}",
+      "watching": "Đang theo dõi tệp mới",
+      "polling": "Kiểm tra tệp mới mỗi {{every}}",
+      "pollingShare": "Kiểm tra tệp mới mỗi {{every}} (thư mục mạng)",
+      "off": "Không theo dõi tệp mới"
+    },
+    "mode": {
+      "auto": {
+        "label": "Tự động",
+        "hint": "Ngay lập tức trên ổ đĩa của chính máy chủ. Thư mục mạng (SMB, NFS) không báo thay đổi, nên Matinee kiểm tra chúng mỗi {{every}}."
+      },
+      "poll": {
+        "label": "Kiểm tra theo hẹn giờ",
+        "hint": "Mỗi thư mục được kiểm tra mỗi {{every}}. Chọn mục này nếu tệp mới trên ổ đĩa không tự hiện ra."
+      },
+      "off": {
+        "label": "Tắt",
+        "hint": "Tệp mới hiện ra ở lần quét đầy đủ tiếp theo, hoặc khi bạn bấm Quét."
+      }
+    },
+    "rescan": "Mỗi thư viện cũng được quét lại toàn bộ mỗi {{every}}, để bắt mọi thứ khác, như một tệp bị thay thế tại chỗ trên thư mục mạng.",
+    "rescanOff": "Quét lại toàn bộ đã bị tắt trên máy chủ này (MATINEE_SCAN_INTERVAL=0)."
+  },
+  "analysis": {
+    "title": "Phân tích nội dung",
+    "intro": "Matinee chậm rãi đọc từng tệp để biết chất lượng, âm thanh và ngôn ngữ, và đọc lại mỗi khi tệp thay đổi.",
+    "state": {
+      "lookingAt": "Đang xem {{file}}",
+      "working": "Đang làm việc",
+      "waiting": "Đang chờ phát xong",
+      "slowDisk": "Tệp đọc chậm; nghỉ vài phút",
+      "allDone": "Mọi tệp đã được phân tích",
+      "upToDate": "Đã cập nhật",
+      "paused": "Đã tạm dừng"
+    },
+    "progress": "{{done}} / {{total}}",
+    "unreadable_other": "{{count}} tệp không đọc được.",
+    "speed": "Tốc độ",
+    "mode": {
+      "gentle": {
+        "label": "Nhẹ nhàng",
+        "hint": "Một tệp mỗi vài giây, và không tệp nào khi máy chủ đang chuyển đổi gì đó để phát."
+      },
+      "normal": {
+        "label": "Bình thường",
+        "hint": "Các tệp liên tiếp, vẫn ở mức ưu tiên thấp nhất."
+      },
+      "off": {
+        "label": "Tắt",
+        "hint": "Tạm dừng cho đến khi bạn bật lại."
+      }
+    }
+  },
+  "profileSettings": {
+    "title": "Hồ sơ",
+    "intro": "Các hồ sơ dùng chung một lần đăng nhập nhưng giữ tiến độ, danh sách xem và chủ đề riêng. Hồ sơ trẻ em chỉ thấy những gì bạn cho phép. Mã PIN giữ một hồ sơ, hoặc chính tài khoản, cho chủ của nó.",
+    "pinFor": "Mã PIN 4 chữ số cho {{name}}",
+    "homeDevices": "Thiết bị trong mạng gia đình chưa đăng nhập",
+    "account": "Tài khoản",
+    "removePin": "Xóa mã PIN",
+    "addPin": "Thêm mã PIN",
+    "hasPin": "Có mã PIN",
+    "edit": "Sửa {{name}}",
+    "remove": "Xóa {{name}}",
+    "confirmRemove": "Xóa {{name}}? Tiến độ và danh sách xem cũng bị xóa theo.",
+    "add": "Thêm hồ sơ",
+    "name": "Tên",
+    "newPin": "Mã PIN mới",
+    "pinOptional": "Mã PIN (không bắt buộc)",
+    "unchanged": "Không đổi",
+    "fourDigits": "4 chữ số",
+    "removeThePin": "Xóa mã PIN",
+    "colour": "Màu",
+    "kidsMode": "Chế độ trẻ em",
+    "kidsOff": "Tắt: thấy mọi thứ",
+    "kidsLevel": "{{name}}: {{ratings}}",
+    "kidsLibraries": "Những gì hồ sơ này thấy trong mỗi thư viện. Theo phân loại sẽ ẩn nội dung phân loại cao hơn mức {{level}} và nội dung chưa phân loại. Hồ sơ trẻ em không thể mở Cài đặt hay gửi yêu cầu.",
+    "libraryMode": {
+      "hidden": "Ẩn",
+      "rated": "Theo phân loại",
+      "all": "Mọi thứ"
+    }
+  },
+  "report": {
+    "thanks": "Cảm ơn, quản trị viên sẽ xem xét.",
+    "button": "Báo lỗi",
+    "whatsWrong": "{{title}} bị làm sao?",
+    "details": "Chi tiết (không bắt buộc)",
+    "detailsExample": "Ví dụ: mất tiếng sau 20 phút",
+    "send": "Gửi"
+  },
+  "quality": {
+    "label": "Chất lượng",
+    "forShow": "Chất lượng cho chương trình",
+    "confirm": "Chuyển sang {{name}}? {{app}} sẽ tìm các bản khớp.",
+    "searching": "Đang tìm…"
+  },
+  "upcoming": {
+    "nothingYet": "Chưa có gì để hiển thị",
+    "connect": "Kết nối Radarr hoặc Sonarr để xem các phim và tập sắp đến.",
+    "openSettings": "Mở cài đặt",
+    "notConnected": "Quản trị viên chưa kết nối Radarr hoặc Sonarr với máy chủ này.",
+    "intro": "Các tập mới và phim phát hành trong hai tháng tới mà chưa có.",
+    "unavailable": "{{apps}} không phản hồi, nên có thể thiếu một số mục.",
+    "nothing": "Không có gì sắp đến. Yêu cầu nội dung mới trong Yêu cầu."
+  },
+  "link": {
+    "title": "Đăng nhập thiết bị",
+    "intro": "Nhập mã đang hiện trên điện thoại hoặc TV của bạn.",
+    "signedIn": "{{device}} đã đăng nhập",
+    "ready": "Nó sẽ sẵn sàng sau vài giây.",
+    "declined": "Đã từ chối",
+    "notSignedIn": "{{device}} chưa được đăng nhập.",
+    "another": "Đăng nhập thiết bị khác",
+    "code": "Mã",
+    "next": "Tiếp",
+    "wantsToSignIn": "muốn đăng nhập với tư cách <name>{{name}}</name>",
+    "warning": "Chỉ phê duyệt thiết bị bạn đang cầm hoặc nhìn thấy. Nó sẽ có quyền truy cập giống bạn.",
+    "decline": "Từ chối",
+    "approve": "Đăng nhập"
+  },
+  "profiles": {
+    "whoIsWatching": "Ai đang xem?",
+    "signInWithAccount": "Đăng nhập bằng tài khoản",
+    "enterPin": "Nhập mã PIN của {{name}}",
+    "pin": "Mã PIN",
+    "deleteDigit": "Xóa"
+  },
+  "integrations": {
+    "title": "Radarr và Sonarr",
+    "intro": "Kết nối chúng để mọi người có thể yêu cầu phim và chương trình, xem những gì sắp ra mắt và báo lỗi về những gì họ xem.",
+    "connected": "Đã kết nối · {{url}}",
+    "notConnected": {
+      "radarr": "Chưa kết nối · cho phim",
+      "sonarr": "Chưa kết nối · cho chương trình"
+    },
+    "change": "Thay đổi",
+    "connect": "Kết nối",
+    "address": "Địa chỉ",
+    "apiKey": "Khóa API",
+    "keyWhere": "{{app}} → Settings → General",
+    "saved": "Đã lưu",
+    "answers": "{{app}} {{version}} phản hồi tại {{url}}",
+    "quality": {
+      "radarr": "Chất lượng cho phim mới",
+      "sonarr": "Chất lượng cho chương trình mới"
+    },
+    "folder": "Thư mục",
+    "confirmDisconnect": "Ngắt kết nối {{app}}? Các mục đã có trong đó vẫn giữ nguyên.",
+    "disconnect": "Ngắt kết nối",
+    "testing": "Đang kiểm tra…",
+    "test": "Kiểm tra",
+    "whoCanAdd": "Ai có thể thêm phim và chương trình",
+    "mode": {
+      "approve": {
+        "label": "Yêu cầu, rồi quản trị viên phê duyệt",
+        "detail": "Ai có tài khoản cũng có thể yêu cầu một nội dung. Yêu cầu sẽ chờ quản trị viên."
+      },
+      "auto": {
+        "label": "Thêm ngay",
+        "detail": "Những gì mọi người yêu cầu sẽ chuyển thẳng tới Radarr hoặc Sonarr."
+      },
+      "off": {
+        "label": "Chỉ quản trị viên thêm nội dung",
+        "detail": "Những người khác vẫn xem được những gì sắp ra mắt và báo lỗi."
+      }
+    }
+  },
+  "requests": {
+    "tab": {
+      "ask": "Yêu cầu nội dung",
+      "requests": "Yêu cầu",
+      "yourRequests": "Yêu cầu của bạn",
+      "problems": "Sự cố",
+      "yourReports": "Báo cáo của bạn"
+    },
+    "movies": "Phim",
+    "shows": "Chương trình",
+    "findMovie": "Tìm phim…",
+    "findShow": "Tìm chương trình…",
+    "nothingFound": "Không tìm thấy gì cho \"{{q}}\"",
+    "ready": "Sẵn sàng để xem",
+    "askedFor": "Đã yêu cầu",
+    "onItsWay": "Đang đến",
+    "add": "Thêm",
+    "askForIt": "Yêu cầu",
+    "state": {
+      "pending": "Chờ phê duyệt",
+      "approved": "Đang đến",
+      "declined": "Đã từ chối",
+      "failed": "Không thêm được"
+    },
+    "none": "Chưa có yêu cầu nào.",
+    "retry": "Thử lại",
+    "approve": "Phê duyệt",
+    "remove": "Xóa yêu cầu cho {{title}}",
+    "removedFromLibrary": "Đã xóa khỏi thư viện",
+    "noProblems": "Chưa ai báo lỗi.",
+    "noReports": "Bạn chưa báo lỗi nào. Dùng \"Báo lỗi\" trên một nội dung.",
+    "fileReplaced": "Đã thay tệp",
+    "closed": "Đã đóng",
+    "confirmReplace": "Xóa tệp này của {{title}} và tải bản khác? Bản mới sẽ hiện ra sau khi tải xong và thư viện được quét.",
+    "replaceFile": "Thay tệp",
+    "close": "Đóng"
+  },
+  "settings": {
+    "tmdbNotice": "Áp phích và mô tả lấy từ <link>TMDB</link>. Sản phẩm này dùng API của TMDB nhưng không được TMDB xác nhận hay chứng nhận.",
+    "libraries": {
+      "title": "Thư viện",
+      "none": "Chưa có thư viện nào.",
+      "scan": "Quét",
+      "remove": "Xóa {{name}}",
+      "confirmRemove": "Xóa \"{{name}}\"? Tệp của bạn vẫn ở nguyên chỗ cũ.",
+      "kind": {
+        "movies": "Phim",
+        "tv": "Chương trình TV",
+        "music": "Nhạc"
+      },
+      "type": "Loại",
+      "folders": "Thư mục",
+      "up": "Lên một thư mục",
+      "added": "Đã thêm",
+      "useFolder": "Dùng thư mục này",
+      "noSubfolders": "Không có thư mục con"
+    },
+    "people": {
+      "title": "Mọi người",
+      "admin": "Quản trị viên",
+      "passwordChanged": "Đã đổi mật khẩu. {{name}} đã bị đăng xuất ở mọi nơi.",
+      "you": "(bạn)",
+      "removeAdmin": "Bỏ quyền quản trị",
+      "makeAdmin": "Đặt làm quản trị viên",
+      "resetPassword": "Đặt lại mật khẩu",
+      "remove": "Xóa",
+      "newPasswordFor": "Mật khẩu mới cho {{name}}",
+      "setPassword": "Đặt mật khẩu",
+      "confirmRemove": "Xóa <name>{{name}}</name>? Lịch sử xem, danh sách xem, nội dung tải xuống và yêu cầu cũng bị xóa, và người đó bị đăng xuất ở mọi nơi. Không thể hoàn tác."
+    },
+    "account": {
+      "title": "Tài khoản của bạn",
+      "changePassword": "Đổi mật khẩu",
+      "current": "Mật khẩu hiện tại",
+      "new": "Mật khẩu mới",
+      "again": "Nhập lại mật khẩu mới",
+      "hint": "Ít nhất 8 ký tự. Các thiết bị khác của bạn sẽ bị đăng xuất.",
+      "mismatch": "Mật khẩu mới không khớp.",
+      "changed": "Đã đổi mật khẩu. Các thiết bị khác của bạn đã bị đăng xuất."
+    },
+    "devices": {
+      "aWhileAgo": "một lúc trước",
+      "justNow": "vừa xong",
+      "title": "Thiết bị của bạn",
+      "unknown": "Thiết bị không xác định",
+      "this": "Thiết bị này",
+      "lastUsed": "Dùng lần cuối {{when}}",
+      "confirmSignOut": "Đăng xuất \"{{name}}\"?"
+    },
+    "version": "Máy chủ Matinee {{version}} · API v{{api}}",
+    "home": {
+      "title": "Mạng gia đình",
+      "requireSignIn": "Yêu cầu đăng nhập ở nhà",
+      "required": "Mọi người đều đăng nhập, ở nhà lẫn bên ngoài.",
+      "open": "Điện thoại, TV và trình duyệt trong mạng gia đình có thể xem mà không cần đăng nhập. Chúng dùng chung một tài khoản Nhà và không thể thay đổi gì. Khi ra ngoài, mọi người đều đăng nhập."
+    },
+    "remote": {
+      "title": "Truy cập từ xa",
+      "publicURL": "Khi ra ngoài, ứng dụng kết nối tới <url>{{url}}</url>, địa chỉ máy chủ này được thiết lập.",
+      "toggle": "Xem khi ra ngoài",
+      "hint": "Matinee nhờ bộ định tuyến mở một cổng và lấy chứng chỉ để ứng dụng kết nối an toàn từ bất cứ đâu. Từ bên ngoài, mọi người đều đăng nhập.",
+      "working": "Đang mở cổng trên bộ định tuyến và lấy chứng chỉ…",
+      "ready": "Ứng dụng kết nối tới máy chủ này tại <url>{{url}}</url> khi ở ngoài nhà.",
+      "router": "Bộ định tuyến của bạn đã mở cổng qua {{router}}.",
+      "pickUp": "Chúng sẽ nhận địa chỉ này vào lần tới ở trong mạng gia đình.",
+      "sharedAddress": "Matinee chưa thể tự vượt qua chuyện này.",
+      "retry": "Matinee thử lại mỗi nửa giờ."
+    },
+    "playback": {
+      "title": "Phát lại",
+      "autoPlay": "Phát tập tiếp theo",
+      "autoPlayHint": "Khi danh đề bắt đầu, tập tiếp theo sẽ phát sau 10 giây đếm ngược mà bạn có thể hủy.",
+      "binge": "Bỏ qua đếm ngược",
+      "bingeHint": "Chuyển thẳng sang tập tiếp theo khi danh đề bắt đầu. Sau ba tập liên tiếp không chạm vào gì, bạn sẽ được hỏi có còn xem không."
+    },
+    "trailers": {
+      "title": "Trailer",
+      "remote": "Trailer từ YouTube",
+      "remoteOn": "Phim và chương trình có trailer từ TMDB, phát từ YouTube. Tệp trailer nằm cạnh nội dung của bạn luôn được hiện.",
+      "remoteOff": "Chỉ hiện tệp trailer nằm cạnh nội dung của bạn, như \"Movie (2020)-trailer.mkv\" hoặc bất cứ thứ gì trong thư mục Trailers."
+    },
+    "transcoding": {
+      "title": "Chuyển mã",
+      "intro": "Các tệp mà thiết bị không phát được nguyên trạng sẽ được chuyển đổi trong lúc bạn xem. GPU làm việc này nhanh hơn và ít tải cho máy chủ hơn.",
+      "convertingWith": "Chuyển đổi bằng",
+      "active": "{{name}}.",
+      "activeOn": "{{name}} trên {{detail}}.",
+      "fullGPU": "Video được giải mã, đổi kích thước và mã hóa trên GPU.",
+      "encodeOnly": "Video được mã hóa trên GPU và giải mã trên CPU.",
+      "fallback": "Nếu GPU không xử lý được một tệp, tệp đó sẽ phát qua CPU.",
+      "testing": "Đang kiểm tra GPU của máy chủ…",
+      "cpuOff": "CPU. Chuyển mã phần cứng đang tắt.",
+      "cpuFailed": "CPU, vì bộ tăng tốc bạn chọn không hoạt động trên máy chủ này.",
+      "cpuNoGPU": "CPU. Không GPU nào trên máy chủ này vượt qua bài kiểm tra.",
+      "hardware": "Tăng tốc phần cứng",
+      "auto": "Tự động: loại tốt nhất hoạt động được",
+      "off": "Tắt: luôn dùng CPU",
+      "notFound": "{{name}} (không tìm thấy trên máy chủ này)",
+      "accelerator": {
+        "nvenc": "NVIDIA NVENC",
+        "vaapi": "VAAPI (AMD và Intel trên Linux)",
+        "qsv": "Intel Quick Sync",
+        "videotoolbox": "VideoToolbox (Mac)",
+        "amf": "AMD AMF (Windows)",
+        "v4l2m2m": "V4L2 (Raspberry Pi)"
+      }
+    }
+  },
+  "language": {
+    "title": "Ngôn ngữ",
+    "label": "Hiển thị Matinee bằng",
+    "hint": "Ngôn ngữ của bạn theo bạn sang ứng dụng Matinee trên điện thoại và TV. Tên và mô tả cũng hiển thị bằng ngôn ngữ đó, nếu TMDB có.",
+    "guestHint": "Mọi người ở nhà không có tài khoản dùng chung ngôn ngữ này.",
+    "automatic": "Tự động ({{language}})",
+    "machine": "Ngôn ngữ này được dịch bằng máy, nên một số từ có thể đọc hơi lạ.",
+    "help": "Giúp cải thiện"
+  }
+}

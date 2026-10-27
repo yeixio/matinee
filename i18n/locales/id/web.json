@@ -1,0 +1,680 @@
+{
+  "loading": "Memuat",
+  "nav": {
+    "home": "Beranda",
+    "watchList": "Daftar tonton",
+    "collections": "Koleksi",
+    "scanning": "Memindai",
+    "search": "Cari",
+    "comingSoon": "Segera hadir",
+    "requests": "Permintaan",
+    "signIn": "Masuk",
+    "settings": "Pengaturan",
+    "switchProfile": "Ganti profil",
+    "signOut": "Keluar"
+  },
+  "cantReachServer": "Server tidak dapat dijangkau. Mencoba lagi…",
+  "player": {
+    "subtitlesFailed": "Tidak dapat memuat subtitel ini",
+    "off": "Mati",
+    "convertsVideo": "Mengonversi video",
+    "file": "File",
+    "seek": "Lompat",
+    "previous": "Sebelumnya",
+    "pause": "Jeda",
+    "next": "Berikutnya",
+    "closePlayer": "Tutup pemutar",
+    "failedDetail": "Pemutaran gagal. File mungkin rusak atau dalam format yang tidak bisa dikonversi server.",
+    "failed": "Pemutaran gagal",
+    "back10": "Mundur 10 detik",
+    "forward10": "Maju 10 detik",
+    "unmute": "Bunyikan",
+    "mute": "Bisukan",
+    "converting": "Mengonversi",
+    "fullscreen": "Layar penuh"
+  },
+  "somethingWentWrong": "Terjadi kesalahan",
+  "oneMoment": "Sebentar…",
+  "auth": {
+    "username": "Nama pengguna",
+    "password": "Kata sandi",
+    "signIn": "Masuk",
+    "welcomeBack": "Selamat datang kembali.",
+    "setUp": "Siapkan Matinee",
+    "setUpHint": "Buat akun admin. Kamu bisa menambahkan keluarga dan teman nanti.",
+    "createAccount": "Buat akun"
+  },
+  "home": {
+    "welcome": "Selamat datang di Matinee",
+    "welcomeHint": "Tambahkan folder berisi film, acara, atau musik untuk memulai.",
+    "addLibrary": "Tambah perpustakaan",
+    "continueWatching": "Lanjutkan menonton",
+    "recentlyAdded": "Baru ditambahkan",
+    "newReleases": "Rilis baru",
+    "scanning": "Memindai perpustakaanmu",
+    "scanningHint": "Judul baru muncul di sini begitu ditemukan.",
+    "removeNamed": "Hapus {{title}} dari Lanjutkan menonton",
+    "remove": "Hapus dari Lanjutkan menonton"
+  },
+  "hero": {
+    "upNext": "Selanjutnya",
+    "justAdded": "Baru saja ditambahkan",
+    "details": "Detail"
+  },
+  "item": {
+    "resume": "Lanjutkan",
+    "resumeLeft": "Lanjutkan · sisa {{left}}",
+    "play": "Putar",
+    "resumeFrom": "Lanjutkan dari {{time}}",
+    "resumeEpisode": "Lanjutkan episode {{episode}}",
+    "playEpisode": "Putar episode {{episode}}",
+    "shuffle": "Acak",
+    "seasons": "Musim",
+    "albums": "Album",
+    "episodes": "Episode"
+  },
+  "row": {
+    "back": "Gulir mundur",
+    "forward": "Gulir maju"
+  },
+  "artwork": {
+    "fetching": "Mengambil detail…"
+  },
+  "close": "Tutup",
+  "file": {
+    "audio": "Audio",
+    "subtitles": "Subtitel",
+    "title": "Detail file",
+    "notYet": "Matinee belum memeriksa file ini secara rinci. Matinee membaca setiap file perlahan di latar belakang, jadi ini akan terisi sendiri.",
+    "unreadable": "Matinee tidak dapat membaca file ini: {{error}}",
+    "stale": "File berubah sejak ini dicatat; akan diperiksa lagi segera.",
+    "file": "File",
+    "location": "Lokasi",
+    "size": "Ukuran",
+    "format": "Format",
+    "length": "Durasi",
+    "bitrate": "Bitrate",
+    "chapters": "Bab",
+    "video": "Video",
+    "videoN": "Video {{n}}",
+    "codec": "Codec",
+    "resolution": "Resolusi",
+    "frameRate": "Frame rate",
+    "fps": "{{rate}} fps",
+    "bitDepth": "Kedalaman bit",
+    "dynamicRange": "Rentang dinamis",
+    "dvProfile": "profil {{profile}}",
+    "dvProfileLevel": "profil {{profile}}, level {{level}}",
+    "fallback": "cadangan {{format}}",
+    "color": "Warna",
+    "trackN": "Trek {{n}}",
+    "default": "Bawaan",
+    "forced": "Paksa",
+    "commentary": "Komentar",
+    "audioDescription": "Deskripsi audio",
+    "separateFile": "File terpisah",
+    "inFile": "Di dalam file",
+    "sdh": "SDH",
+    "recorded": "Dicatat {{when}}",
+    "queued": "Dalam antrean; berikutnya diperiksa.",
+    "analyzeAgain": "Analisis lagi"
+  },
+  "listSeparator": ", ",
+  "credits": {
+    "seriesCast": "Pemeran serial",
+    "cast": "Pemeran",
+    "guestStars": "Bintang tamu",
+    "starring": "Dibintangi",
+    "moreDetails": "Detail lainnya",
+    "crew": "Kru",
+    "about": "Tentang",
+    "awards": "Penghargaan",
+    "won": "Menang",
+    "nominated": "Dinominasikan",
+    "wonIn": "Menang {{year}}",
+    "nominatedIn": "Dinominasikan {{year}}",
+    "showAll": "Tampilkan semua {{count}}",
+    "awardsSource": "Penghargaan dari Wikidata."
+  },
+  "cancel": "Batal",
+  "upNext": {
+    "upNext": "Selanjutnya",
+    "stillWatching": "Masih menonton?",
+    "youMightLike": "Mungkin kamu suka",
+    "playingIn": "Diputar dalam {{seconds}}",
+    "playNow": "Putar sekarang",
+    "keepWatching": "Terus menonton",
+    "haveALook": "Lihat-lihat",
+    "stop": "Berhenti"
+  },
+  "goBack": "Kembali",
+  "back": "Kembali",
+  "trailer": {
+    "trailer": "Trailer",
+    "named": "Trailer {{title}}",
+    "wontPlay": "Trailer ini tidak bisa diputar."
+  },
+  "watchList": {
+    "on": "Ada di daftar tontonmu",
+    "add": "Tambah ke daftar tonton",
+    "empty": "Belum ada yang disimpan",
+    "emptyHint": "Buka film atau acara dan pilih Daftar tonton untuk menyimpannya di sini. Film keluar dari daftar setelah kamu menontonnya.",
+    "browse": "Jelajahi"
+  },
+  "related": {
+    "moreLikeThis": "Yang serupa"
+  },
+  "boxSet": {
+    "notFound": "Box set tidak ditemukan",
+    "notFoundHint": "Tidak ada judulnya yang ada di perpustakaan sekarang.",
+    "boxSet": "Box set"
+  },
+  "search": {
+    "placeholder": "Film, acara, artis, album…",
+    "nothing": "Tidak ada yang cocok dengan \"{{q}}\"",
+    "lookingForNew": "Mencari sesuatu yang baru?",
+    "addIt": "Tambahkan",
+    "askForIt": "Minta"
+  },
+  "person": {
+    "notFound": "Orang tidak ditemukan",
+    "showLess": "Lebih sedikit",
+    "readMore": "Baca selengkapnya",
+    "inLibrary": "Di perpustakaanmu"
+  },
+  "library": {
+    "library": "Perpustakaan",
+    "matches_other": "{{count}} hasil",
+    "scanning": "Memindai…",
+    "nothingUnwatched": "Tidak ada yang belum ditonton di sini",
+    "nothingMatches": "Tidak ada yang cocok",
+    "seenEverything": "Kamu sudah menonton semua yang ada di perpustakaan ini.",
+    "clearFilters": "Hapus filter",
+    "appearAsFound": "Judul muncul saat ditemukan.",
+    "noMedia": "Matinee mencari di {{paths}} dan tidak menemukan media."
+  },
+  "nothingHereYet": "Belum ada apa-apa di sini",
+  "collection": {
+    "notFound": "Koleksi tidak ditemukan",
+    "notFoundHint": "Mungkin sudah dihapus.",
+    "smart": "Koleksi pintar",
+    "collection": "Koleksi",
+    "shuffledDaily": "Diacak setiap hari",
+    "editRules": "Edit aturan",
+    "edit": "Edit",
+    "delete": "Hapus koleksi",
+    "deleteConfirm": "Hapus {{name}}? Judulnya tetap ada di perpustakaanmu.",
+    "nothingMatchesYet": "Belum ada yang cocok",
+    "joinByRules": "Judul masuk sendiri saat cocok dengan aturan.",
+    "howToAdd": "Buka film atau acara dan pilih Koleksi untuk menambahkannya."
+  },
+  "collections": {
+    "newShort": "Baru",
+    "new": "Koleksi baru",
+    "newSmartShort": "Pintar baru",
+    "newSmart": "Koleksi pintar baru",
+    "none": "Belum ada koleksi",
+    "noneHint": "Koleksi pintar terisi sendiri dari aturan, misalnya film aksi 80-an yang belum ditonton. Box set muncul di sini begitu dua judulnya ada di perpustakaan.",
+    "yours": "Milikmu",
+    "shared": "Dibagikan",
+    "forEveryone": "Koleksi untuk semua",
+    "boxSets": "Box set",
+    "sort": {
+      "own": "Urutan sendiri",
+      "title": "Judul",
+      "added": "Tanggal ditambahkan",
+      "released": "Tanggal rilis",
+      "year": "Tahun",
+      "rating": "Rating",
+      "runtime": "Durasi",
+      "lastPlayed": "Terakhir diputar",
+      "shuffle": "Acak harian"
+    },
+    "smartShort": "Pintar",
+    "editNamed": "Edit {{name}}",
+    "name": "Nama",
+    "smartExample": "Aksi 80-an yang belum ditonton",
+    "manualExample": "Malam film",
+    "rules": "Aturan",
+    "rulesHint": "Judul yang cocok dengan filter ini masuk sendiri saat perpustakaan berubah.",
+    "shuffleDaily": "Acak setiap hari",
+    "order": "Urutan",
+    "orderAdded": "Urutan judul ditambahkan",
+    "direction": "Arah",
+    "usual": "Biasa",
+    "ascending": "Naik",
+    "descending": "Turun",
+    "showAsRow": "Tampilkan sebagai baris",
+    "onHome": "Di Beranda",
+    "onLibraryPage": "Di halaman perpustakaan",
+    "shareWithEveryone": "Bagikan ke semua orang di server ini",
+    "saveAs": "Simpan sebagai koleksi"
+  },
+  "save": "Simpan",
+  "create": "Buat",
+  "loadingDots": "Memuat…",
+  "filters": {
+    "title": "Filter",
+    "inUse_other": "Filter, {{count}} dipakai",
+    "sortBy": "Urutkan menurut",
+    "highestFirst": "Tertinggi dulu",
+    "lowestFirst": "Terendah dulu",
+    "highestFirstSwitch": "Tertinggi dulu; ganti ke terendah dulu",
+    "lowestFirstSwitch": "Terendah dulu; ganti ke tertinggi dulu",
+    "not": "Bukan {{label}}",
+    "remove": "Hapus {{label}}",
+    "chip": {
+      "words": "\"{{q}}\"",
+      "directedBy": "Disutradarai oleh {{name}}",
+      "with": "Dengan {{name}}",
+      "releasedWithin": "Rilis dalam {{within}}",
+      "releasedAfter": "Rilis setelah {{date}}",
+      "releasedBefore": "Rilis sebelum {{date}}",
+      "addedWithin": "Ditambahkan dalam {{within}}",
+      "addedAfter": "Ditambahkan setelah {{date}}",
+      "addedBefore": "Ditambahkan sebelum {{date}}",
+      "ratingMin": "Rating {{rating}}+",
+      "ratingMax": "Rating {{rating}} atau kurang",
+      "certification": "Rating {{rating}}",
+      "watchList": "Di daftar tontonku"
+    },
+    "collection": "Koleksi",
+    "active": "Filter yang dipakai",
+    "clearAll": "Hapus semua",
+    "more_other": "{{count}} lagi",
+    "any": "Apa saja",
+    "all": "Semua",
+    "anyTime": "Kapan saja",
+    "runtime": {
+      "under30": "Kurang dari 30 mnt",
+      "30to60": "30–60 mnt",
+      "overHour": "Lebih dari satu jam",
+      "under90": "Kurang dari 90 mnt",
+      "90to120": "90 mnt – 2 jam",
+      "over2Hours": "Lebih dari 2 jam"
+    },
+    "wordsInTitle": "Kata dalam judul",
+    "onlyWatchList": "Hanya judul di daftar tontonku",
+    "fromYear": "Dari tahun",
+    "toYear": "Sampai tahun",
+    "from": "Dari",
+    "to": "sampai",
+    "toPlaceholder": "Sampai",
+    "lastWeek": "Minggu lalu",
+    "last30Days": "30 hari terakhir",
+    "last3Months": "3 bulan terakhir",
+    "lastYear": "Tahun lalu",
+    "ratingAtLeast": "{{rating}}+",
+    "findPerson": "Cari orang",
+    "nobody": "Tidak ada yang bernama itu di perpustakaan ini.",
+    "showResults": "Tampilkan hasil",
+    "section": {
+      "title": "Judul",
+      "watched": "Sudah ditonton",
+      "genre": "Genre",
+      "year": "Tahun",
+      "firstAired": "Pertama tayang",
+      "released": "Rilis",
+      "added": "Ditambahkan",
+      "rating": "Rating",
+      "episodeLength": "Durasi episode",
+      "runtime": "Durasi",
+      "quality": "Kualitas",
+      "network": "Jaringan atau studio",
+      "studio": "Studio",
+      "ageRating": "Rating usia",
+      "language": "Bahasa asli",
+      "country": "Negara",
+      "creator": "Dibuat atau disutradarai oleh",
+      "director": "Sutradara",
+      "people": "Pemeran dan kru"
+    }
+  },
+  "appearance": {
+    "title": "Tampilan",
+    "useServerTheme": "Gunakan tema server ({{name}})",
+    "guestHint": "Semua orang di rumah tanpa akun berbagi tema ini.",
+    "hint": "Temamu ikut ke aplikasi Matinee di ponsel dan TV-mu.",
+    "theme": "Tema",
+    "preview": {
+      "tonight": "Malam ini",
+      "trailer": "Trailer"
+    },
+    "serverTheme": "Tema server",
+    "serverThemeHint": "Yang dilihat semua orang sampai mereka memilih sendiri, dan di halaman masuk.",
+    "custom": "{{name}} (kustom)",
+    "addYourOwn": "Untuk menambahkan temamu sendiri, taruh file tema di folder <code>themes</code> server, di dalam folder datanya.",
+    "howTo": "Cara membuat tema",
+    "skipped": "Dilewati {{problem}}"
+  },
+  "newFiles": {
+    "title": "File baru",
+    "intro": "Matinee menyadari file yang kamu tambahkan, ganti nama, atau hapus, lalu memperbarui perpustakaan beberapa detik setelah penyalinan selesai.",
+    "watch": "Pantau file baru",
+    "summary": {
+      "some": "Beberapa folder diperiksa setiap {{every}}",
+      "watching": "Memantau file baru",
+      "polling": "File baru diperiksa setiap {{every}}",
+      "pollingShare": "File baru diperiksa setiap {{every}} (folder jaringan)",
+      "off": "File baru tidak dipantau"
+    },
+    "mode": {
+      "auto": {
+        "label": "Otomatis",
+        "hint": "Langsung di disk milik server sendiri. Folder jaringan (SMB, NFS) tidak mengumumkan perubahan, jadi Matinee memeriksanya setiap {{every}}."
+      },
+      "poll": {
+        "label": "Periksa dengan pengatur waktu",
+        "hint": "Setiap folder diperiksa setiap {{every}}. Pilih ini jika file baru di disk tidak muncul sendiri."
+      },
+      "off": {
+        "label": "Mati",
+        "hint": "File baru muncul pada pemindaian penuh berikutnya, atau saat kamu menekan Pindai."
+      }
+    },
+    "rescan": "Setiap perpustakaan juga dipindai ulang penuh setiap {{every}}, yang menangkap hal lain, seperti file yang diganti di tempat pada folder jaringan.",
+    "rescanOff": "Pemindaian ulang penuh dimatikan di server ini (MATINEE_SCAN_INTERVAL=0)."
+  },
+  "analysis": {
+    "title": "Analisis media",
+    "intro": "Matinee membaca setiap file perlahan untuk kualitas, suara, dan bahasanya, dan membacanya lagi setiap kali file berubah.",
+    "state": {
+      "lookingAt": "Memeriksa {{file}}",
+      "working": "Bekerja",
+      "waiting": "Menunggu pemutaran selesai",
+      "slowDisk": "File lambat dibaca; istirahat beberapa menit",
+      "allDone": "Semua file sudah dianalisis",
+      "upToDate": "Terbaru",
+      "paused": "Dijeda"
+    },
+    "progress": "{{done}} dari {{total}}",
+    "unreadable_other": "{{count}} file tidak dapat dibaca.",
+    "speed": "Kecepatan",
+    "mode": {
+      "gentle": {
+        "label": "Lembut",
+        "hint": "Satu file setiap beberapa detik, dan tidak ada saat server sedang mengonversi sesuatu untuk diputar."
+      },
+      "normal": {
+        "label": "Normal",
+        "hint": "File berturut-turut, tetap dengan prioritas terendah."
+      },
+      "off": {
+        "label": "Mati",
+        "hint": "Dijeda sampai kamu menyalakannya lagi."
+      }
+    }
+  },
+  "profileSettings": {
+    "title": "Profil",
+    "intro": "Profil berbagi satu login tetapi menyimpan kemajuan, daftar tonton, dan tema masing-masing. Profil anak hanya melihat yang kamu izinkan. PIN menjaga profil, atau akun itu sendiri, untuk pemiliknya.",
+    "pinFor": "PIN 4 digit untuk {{name}}",
+    "homeDevices": "Perangkat di jaringan rumahmu yang belum masuk",
+    "account": "Akun",
+    "removePin": "Hapus PIN",
+    "addPin": "Tambah PIN",
+    "hasPin": "Punya PIN",
+    "edit": "Edit {{name}}",
+    "remove": "Hapus {{name}}",
+    "confirmRemove": "Hapus {{name}}? Kemajuan dan daftar tontonnya juga ikut terhapus.",
+    "add": "Tambah profil",
+    "name": "Nama",
+    "newPin": "PIN baru",
+    "pinOptional": "PIN (opsional)",
+    "unchanged": "Tidak berubah",
+    "fourDigits": "4 digit",
+    "removeThePin": "Hapus PIN",
+    "colour": "Warna",
+    "kidsMode": "Mode anak",
+    "kidsOff": "Mati: melihat semuanya",
+    "kidsLevel": "{{name}}: {{ratings}}",
+    "kidsLibraries": "Apa yang dilihat profil ini di setiap perpustakaan. Menurut rating menyembunyikan judul dengan rating di atas tingkat {{level}} dan judul tanpa rating. Profil anak tidak bisa membuka Pengaturan atau membuat permintaan.",
+    "libraryMode": {
+      "hidden": "Disembunyikan",
+      "rated": "Menurut rating",
+      "all": "Semuanya"
+    }
+  },
+  "report": {
+    "thanks": "Terima kasih, admin akan memeriksanya.",
+    "button": "Laporkan masalah",
+    "whatsWrong": "Ada apa dengan {{title}}?",
+    "details": "Detail (opsional)",
+    "detailsExample": "Misalnya: tidak ada suara setelah 20 menit",
+    "send": "Kirim"
+  },
+  "quality": {
+    "label": "Kualitas",
+    "forShow": "Kualitas untuk acara",
+    "confirm": "Ganti ke {{name}}? {{app}} akan mencari salinan yang cocok.",
+    "searching": "Mencari…"
+  },
+  "upcoming": {
+    "nothingYet": "Belum ada yang bisa ditampilkan",
+    "connect": "Hubungkan Radarr atau Sonarr untuk melihat film dan episode yang sedang dalam perjalanan.",
+    "openSettings": "Buka pengaturan",
+    "notConnected": "Admin belum menghubungkan Radarr atau Sonarr ke server ini.",
+    "intro": "Episode baru dan rilis film selama dua bulan ke depan yang belum masuk.",
+    "unavailable": "{{apps}} tidak menjawab, jadi mungkin ada yang terlewat.",
+    "nothing": "Tidak ada yang sedang dalam perjalanan. Minta sesuatu yang baru dari Permintaan."
+  },
+  "link": {
+    "title": "Masukkan perangkat",
+    "intro": "Masukkan kode yang ditampilkan ponsel atau TV-mu.",
+    "signedIn": "{{device}} sudah masuk",
+    "ready": "Akan siap dalam beberapa detik.",
+    "declined": "Ditolak",
+    "notSignedIn": "{{device}} tidak dimasukkan.",
+    "another": "Masukkan perangkat lain",
+    "code": "Kode",
+    "next": "Berikutnya",
+    "wantsToSignIn": "ingin masuk sebagai <name>{{name}}</name>",
+    "warning": "Hanya setujui perangkat yang kamu pegang atau bisa kamu lihat. Perangkat itu mendapat akses yang sama denganmu.",
+    "decline": "Tolak",
+    "approve": "Masukkan"
+  },
+  "profiles": {
+    "whoIsWatching": "Siapa yang menonton?",
+    "signInWithAccount": "Masuk dengan akun",
+    "enterPin": "Masukkan PIN {{name}}",
+    "pin": "PIN",
+    "deleteDigit": "Hapus"
+  },
+  "integrations": {
+    "title": "Radarr dan Sonarr",
+    "intro": "Hubungkan keduanya agar orang bisa meminta film dan acara, melihat yang akan datang, dan melaporkan masalah pada yang mereka tonton.",
+    "connected": "Terhubung · {{url}}",
+    "notConnected": {
+      "radarr": "Tidak terhubung · untuk film",
+      "sonarr": "Tidak terhubung · untuk acara"
+    },
+    "change": "Ubah",
+    "connect": "Hubungkan",
+    "address": "Alamat",
+    "apiKey": "Kunci API",
+    "keyWhere": "{{app}} → Settings → General",
+    "saved": "Tersimpan",
+    "answers": "{{app}} {{version}} menjawab di {{url}}",
+    "quality": {
+      "radarr": "Kualitas untuk film baru",
+      "sonarr": "Kualitas untuk acara baru"
+    },
+    "folder": "Folder",
+    "confirmDisconnect": "Putuskan {{app}}? Judul yang sudah ada di sana tetap ada.",
+    "disconnect": "Putuskan",
+    "testing": "Menguji…",
+    "test": "Uji",
+    "whoCanAdd": "Siapa yang boleh menambahkan film dan acara",
+    "mode": {
+      "approve": {
+        "label": "Minta, lalu admin menyetujui",
+        "detail": "Siapa pun yang punya akun boleh meminta judul. Permintaannya menunggu admin."
+      },
+      "auto": {
+        "label": "Langsung tambahkan",
+        "detail": "Permintaan orang langsung masuk ke Radarr atau Sonarr."
+      },
+      "off": {
+        "label": "Hanya admin yang menambahkan judul",
+        "detail": "Semua orang lain tetap bisa melihat yang akan datang dan melaporkan masalah."
+      }
+    }
+  },
+  "requests": {
+    "tab": {
+      "ask": "Minta sesuatu",
+      "requests": "Permintaan",
+      "yourRequests": "Permintaanmu",
+      "problems": "Masalah",
+      "yourReports": "Laporanmu"
+    },
+    "movies": "Film",
+    "shows": "Acara",
+    "findMovie": "Cari film…",
+    "findShow": "Cari acara…",
+    "nothingFound": "Tidak ada yang ditemukan untuk \"{{q}}\"",
+    "ready": "Siap ditonton",
+    "askedFor": "Diminta",
+    "onItsWay": "Dalam perjalanan",
+    "add": "Tambah",
+    "askForIt": "Minta",
+    "state": {
+      "pending": "Menunggu persetujuan",
+      "approved": "Dalam perjalanan",
+      "declined": "Ditolak",
+      "failed": "Tidak dapat ditambahkan"
+    },
+    "none": "Belum ada permintaan.",
+    "retry": "Coba lagi",
+    "approve": "Setujui",
+    "remove": "Hapus permintaan untuk {{title}}",
+    "removedFromLibrary": "Dihapus dari perpustakaan",
+    "noProblems": "Belum ada yang melaporkan masalah.",
+    "noReports": "Kamu belum melaporkan masalah apa pun. Gunakan \"Laporkan masalah\" pada sebuah judul.",
+    "fileReplaced": "File diganti",
+    "closed": "Ditutup",
+    "confirmReplace": "Hapus file {{title}} ini dan unduh salinan lain? Yang baru muncul setelah selesai diunduh dan perpustakaan dipindai.",
+    "replaceFile": "Ganti file",
+    "close": "Tutup"
+  },
+  "settings": {
+    "tmdbNotice": "Poster dan deskripsi berasal dari <link>TMDB</link>. Produk ini menggunakan API TMDB tetapi tidak didukung atau disertifikasi oleh TMDB.",
+    "libraries": {
+      "title": "Perpustakaan",
+      "none": "Belum ada perpustakaan.",
+      "scan": "Pindai",
+      "remove": "Hapus {{name}}",
+      "confirmRemove": "Hapus \"{{name}}\"? File-mu tetap di tempatnya.",
+      "kind": {
+        "movies": "Film",
+        "tv": "Acara TV",
+        "music": "Musik"
+      },
+      "type": "Jenis",
+      "folders": "Folder",
+      "up": "Naik satu folder",
+      "added": "Ditambahkan",
+      "useFolder": "Gunakan folder ini",
+      "noSubfolders": "Tidak ada subfolder"
+    },
+    "people": {
+      "title": "Orang",
+      "admin": "Admin",
+      "passwordChanged": "Kata sandi diubah. {{name}} dikeluarkan dari semua perangkat.",
+      "you": "(kamu)",
+      "removeAdmin": "Cabut admin",
+      "makeAdmin": "Jadikan admin",
+      "resetPassword": "Atur ulang kata sandi",
+      "remove": "Hapus",
+      "newPasswordFor": "Kata sandi baru untuk {{name}}",
+      "setPassword": "Atur kata sandi",
+      "confirmRemove": "Hapus <name>{{name}}</name>? Riwayat tontonan, daftar tonton, unduhan, dan permintaannya juga ikut terhapus, dan ia dikeluarkan dari semua perangkat. Ini tidak dapat dibatalkan."
+    },
+    "account": {
+      "title": "Akunmu",
+      "changePassword": "Ubah kata sandi",
+      "current": "Kata sandi saat ini",
+      "new": "Kata sandi baru",
+      "again": "Ulangi kata sandi baru",
+      "hint": "Minimal 8 karakter. Perangkatmu yang lain akan dikeluarkan.",
+      "mismatch": "Kata sandi baru tidak cocok.",
+      "changed": "Kata sandi diubah. Perangkatmu yang lain sudah dikeluarkan."
+    },
+    "devices": {
+      "aWhileAgo": "beberapa waktu lalu",
+      "justNow": "baru saja",
+      "title": "Perangkatmu",
+      "unknown": "Perangkat tidak dikenal",
+      "this": "Perangkat ini",
+      "lastUsed": "Terakhir dipakai {{when}}",
+      "confirmSignOut": "Keluarkan \"{{name}}\"?"
+    },
+    "version": "Server Matinee {{version}} · API v{{api}}",
+    "home": {
+      "title": "Jaringan rumah",
+      "requireSignIn": "Minta login di rumah",
+      "required": "Semua orang masuk, di rumah maupun di luar.",
+      "open": "Ponsel, TV, dan browser di jaringan rumahmu bisa menonton tanpa masuk. Mereka berbagi satu akun Rumah dan tidak bisa mengubah apa pun. Di luar rumah, semua orang masuk."
+    },
+    "remote": {
+      "title": "Akses jarak jauh",
+      "publicURL": "Di luar rumah, aplikasi terhubung ke <url>{{url}}</url>, alamat yang dipakai saat server ini disiapkan.",
+      "toggle": "Tonton di luar rumah",
+      "hint": "Matinee meminta router-mu membuka port dan mendapatkan sertifikat agar aplikasi terhubung dengan aman dari mana saja. Semua orang masuk dari luar.",
+      "working": "Membuka port di router dan mendapatkan sertifikat…",
+      "ready": "Aplikasi menjangkau server ini di <url>{{url}}</url> saat berada di luar rumah.",
+      "router": "Router-mu membuka port lewat {{router}}.",
+      "pickUp": "Mereka akan mengambil alamat ini saat berikutnya berada di jaringan rumahmu.",
+      "sharedAddress": "Matinee belum bisa mengatasi ini sendiri.",
+      "retry": "Matinee mencoba lagi setiap setengah jam."
+    },
+    "playback": {
+      "title": "Pemutaran",
+      "autoPlay": "Putar episode berikutnya",
+      "autoPlayHint": "Saat kredit dimulai, episode berikutnya diputar setelah hitung mundur 10 detik yang bisa kamu batalkan.",
+      "binge": "Lewati hitung mundur",
+      "bingeHint": "Langsung ke episode berikutnya saat kredit dimulai. Setelah tiga berturut-turut tanpa menyentuh apa pun, kamu akan ditanya apakah masih menonton."
+    },
+    "trailers": {
+      "title": "Trailer",
+      "remote": "Trailer dari YouTube",
+      "remoteOn": "Film dan acara menawarkan trailer dari TMDB, yang diputar dari YouTube. File trailer di samping mediamu juga selalu ditampilkan.",
+      "remoteOff": "Hanya file trailer di samping mediamu yang ditampilkan, seperti \"Movie (2020)-trailer.mkv\" atau apa pun di folder Trailers."
+    },
+    "transcoding": {
+      "title": "Transkode",
+      "intro": "File yang tidak bisa diputar perangkat apa adanya dikonversi saat kamu menonton. GPU melakukannya lebih cepat dan dengan beban server lebih ringan.",
+      "convertingWith": "Mengonversi dengan",
+      "active": "{{name}}.",
+      "activeOn": "{{name}} di {{detail}}.",
+      "fullGPU": "Video didekode, diubah ukurannya, dan dienkode di GPU.",
+      "encodeOnly": "Video dienkode di GPU dan didekode di CPU.",
+      "fallback": "Jika GPU tidak sanggup menangani file, file diputar lewat CPU.",
+      "testing": "Menguji GPU server ini…",
+      "cpuOff": "CPU. Transkode perangkat keras dimatikan.",
+      "cpuFailed": "CPU, karena akselerator yang kamu pilih tidak berfungsi di server ini.",
+      "cpuNoGPU": "CPU. Tidak ada GPU di server ini yang lolos uji.",
+      "hardware": "Akselerasi perangkat keras",
+      "auto": "Otomatis: yang terbaik yang berfungsi",
+      "off": "Mati: selalu gunakan CPU",
+      "notFound": "{{name}} (tidak ditemukan di server ini)",
+      "accelerator": {
+        "nvenc": "NVIDIA NVENC",
+        "vaapi": "VAAPI (AMD dan Intel di Linux)",
+        "qsv": "Intel Quick Sync",
+        "videotoolbox": "VideoToolbox (Mac)",
+        "amf": "AMD AMF (Windows)",
+        "v4l2m2m": "V4L2 (Raspberry Pi)"
+      }
+    }
+  },
+  "language": {
+    "title": "Bahasa",
+    "label": "Tampilkan Matinee dalam",
+    "hint": "Bahasamu ikut ke aplikasi Matinee di ponsel dan TV-mu. Judul dan deskripsi juga tampil dalam bahasa itu, jika TMDB memilikinya.",
+    "guestHint": "Semua orang di rumah tanpa akun berbagi bahasa ini.",
+    "automatic": "Otomatis ({{language}})",
+    "machine": "Bahasa ini diterjemahkan oleh mesin, jadi beberapa kata mungkin terdengar janggal.",
+    "help": "Bantu memperbaikinya"
+  }
+}
