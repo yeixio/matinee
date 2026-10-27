@@ -56,6 +56,7 @@ kubectl create secret generic matinee-tmdb --from-literal=tmdb-api-key=your-key
 | `downloads.persistence` | on, 50Gi | Where [downloads for the apps](/docs/apps/downloads/) are prepared. Set `storageClass` or `existingClaim`. |
 | `postgresql.enabled` | `true` | The bundled database. To use your own, turn it off and set `database.url` or `database.existingSecret`. |
 | `discovery.*` | on | Lets the apps find the server at home; see below. |
+| `remoteAccess.*` | off | Watching away from home when the ingress only works at home; see below. |
 | `gpu.type` | `none` | `vaapi` (AMD, Intel) or `nvidia` for [hardware transcoding](/docs/server/transcoding/). |
 | `nodeSelector`, `tolerations`, `affinity` | none | Keep Matinee on the node with the GPU, for example. |
 | `env` | none | Any other [setting](/docs/server/configuration/), such as `MATINEE_RATING_COUNTRY`. |
@@ -71,7 +72,10 @@ Run one replica for now: a transcode in progress lives in the pod that started i
 
 The chart runs a small announcer on a node's host network so the apps find the server at home, pointing them at your ingress address. It also opens port 7172 on Matinee's node (`discovery.homePort`) as the [home network's own way in](/docs/server/home-network/#how-matinee-knows-youre-at-home), so devices at home can watch without signing in while everything through the ingress signs in. Set `discovery.homePort=0` to turn that off, `discovery.url` if your ingress is managed outside the chart, and `discovery.enabled=false` to keep the server unlisted.
 
-[Remote access](/docs/server/remote-access/) isn't offered in the chart: your ingress is the way in from outside.
+<!-- since: v0.1.1 -->
+## Watching away from home
+
+If your ingress is reachable from the internet, it's the way in from outside and there's nothing to set. If it only works at home, set `remoteAccess.enabled=true` and Matinee sets up [remote access](/docs/server/remote-access/) itself: it asks your router for a port and gets its own certificate. Talking to the router takes the node's own network, so the pod then runs on its node's host network, with ports 7171, the home port and `remoteAccess.port` (7443) opened on that node. Its key, certificate and [Matinee Connect](/docs/server/remote-access/#matinee-connect) subscription go on a small volume (`remoteAccess.persistence`) so the server keeps its identity across restarts. Don't set `MATINEE_PUBLIC_URL` alongside it.
 
 ## Following the latest build
 

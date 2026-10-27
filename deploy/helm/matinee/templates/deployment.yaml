@@ -19,6 +19,12 @@ spec:
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
     spec:
+      {{- if .Values.remoteAccess.enabled }}
+      # Remote access talks to the home router, which only the node's own
+      # network reaches.
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+      {{- end }}
       {{- $gpu := .Values.gpu }}
       {{- $podSecurity := deepCopy .Values.podSecurityContext }}
       {{- $security := deepCopy .Values.securityContext }}
@@ -61,8 +67,16 @@ spec:
             # The home network's own way in, on the node's address, so the
             # server sees each device's real address (an ingress hides it).
             - name: home
+              {{- if .Values.remoteAccess.enabled }}
+              containerPort: {{ .Values.discovery.homePort }}
+              {{- else }}
               containerPort: 7172
+              {{- end }}
               hostPort: {{ .Values.discovery.homePort }}
+            {{- end }}
+            {{- if .Values.remoteAccess.enabled }}
+            - name: remote
+              containerPort: {{ .Values.remoteAccess.port }}
             {{- end }}
           env:
             - name: MATINEE_ADDR
@@ -74,13 +88,22 @@ spec:
             # The pod network doesn't reach the home network; discovery.yaml announces it instead.
             - name: MATINEE_DISCOVERY
               value: "false"
+            {{- if .Values.remoteAccess.enabled }}
+            - name: MATINEE_REMOTE_ADDR
+              value: ":{{ .Values.remoteAccess.port }}"
+            {{- else }}
             # Remote access asks the home router for a port, which a pod
-            # can't do; the ingress is the way in from outside.
+            # can't do off the host network; the ingress is the way in.
             - name: MATINEE_REMOTE_ADDR
               value: "off"
+            {{- end }}
             {{- if .Values.discovery.homePort }}
             - name: MATINEE_HOME_ADDR
+              {{- if .Values.remoteAccess.enabled }}
+              value: ":{{ .Values.discovery.homePort }}"
+              {{- else }}
               value: ":7172"
+              {{- end }}
             {{- end }}
             - name: MATINEE_DATABASE_URL
               valueFrom:
@@ -128,6 +151,10 @@ spec:
             {{- end }}
             - name: tmp
               mountPath: /tmp
+            {{- if .Values.remoteAccess.enabled }}
+            - name: remote
+              mountPath: /cache/remote
+            {{- end }}
             {{- range .Values.media }}
             - name: media-{{ .name }}
               mountPath: {{ .mountPath }}
@@ -149,6 +176,11 @@ spec:
         - name: downloads
           persistentVolumeClaim:
             claimName: {{ .Values.downloads.persistence.existingClaim | default (printf "%s-downloads" (include "matinee.fullname" .)) }}
+        {{- end }}
+        {{- if .Values.remoteAccess.enabled }}
+        - name: remote
+          persistentVolumeClaim:
+            claimName: {{ .Values.remoteAccess.persistence.existingClaim | default (printf "%s-remote" (include "matinee.fullname" .)) }}
         {{- end }}
         {{- range .Values.media }}
         - name: media-{{ .name }}

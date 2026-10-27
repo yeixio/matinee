@@ -60,7 +60,7 @@ With a [Matinee Connect](#matinee-connect) subscription, Matinee asks the lookup
 
 ## Where it's available
 
-Remote access needs Matinee on the host's network: apt, dnf, Homebrew, source, or Docker with `network_mode: host`. It isn't offered in the Helm chart, where the ingress is the way in. To not offer it at all, set `MATINEE_REMOTE_ADDR=off`.
+Remote access needs Matinee on the host's network: apt, dnf, Homebrew, source, or Docker with `network_mode: host`. In the Helm chart, the ingress is usually the way in; if yours only works at home, set `remoteAccess.enabled=true` ([Kubernetes](/docs/server/kubernetes/#watching-away-from-home)). To not offer it at all, set `MATINEE_REMOTE_ADDR=off`.
 
 ## Using your own domain instead
 
