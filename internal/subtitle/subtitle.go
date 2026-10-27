@@ -16,8 +16,12 @@ import (
 
 // Track is one subtitle track a player can offer.
 type Track struct {
-	ID       string `json:"id"` // "e<N>" for embedded stream N, "x<hash>" for a sidecar file
-	Label    string `json:"label"`
+	ID    string `json:"id"`    // "e<N>" for embedded stream N, "x<hash>" for a sidecar file
+	Label string `json:"label"` // in English, such as "English (SDH)"
+	// Note is the track's own title, where it says more than its language
+	// and flags, such as "Commentary", so apps can build a label in their
+	// own language.
+	Note     string `json:"note,omitempty"`
 	Language string `json:"language,omitempty"` // ISO 639-1 where known, e.g. "en"
 	Codec    string `json:"codec"`
 	Forced   bool   `json:"forced,omitempty"`
@@ -65,7 +69,7 @@ func List(videoPath string, embedded []probe.Subtitle) []Track {
 		}
 		code, name := lookupLanguage(s.Language)
 		t.Language = code
-		t.Label = label(name, s.Title, t.Forced, t.SDH)
+		t.Label, t.Note = label(name, s.Title, t.Forced, t.SDH), note(name, s.Title, t.Forced, t.SDH)
 		if t.Label == "" {
 			t.Label = fmt.Sprintf("Track %d", s.Index+1)
 		}
@@ -129,6 +133,7 @@ func Sidecars(videoPath string) []Track {
 			}
 		}
 		t.Label = label(langName, strings.Join(extra, " "), t.Forced, t.SDH)
+		t.Note = note(langName, strings.Join(extra, " "), t.Forced, t.SDH)
 		if t.Label == "" {
 			t.Label = strings.ToUpper(strings.TrimPrefix(ext, ".")) + " file"
 		}
@@ -147,9 +152,7 @@ func label(lang, title string, forced, sdh bool) string {
 	if sdh {
 		notes = append(notes, "SDH")
 	}
-	// Titles often just repeat the language or the flags.
-	if t := strings.TrimSpace(title); t != "" && !strings.EqualFold(t, lang) &&
-		!(forced && strings.EqualFold(t, "forced")) && !(sdh && strings.EqualFold(t, "sdh")) {
+	if t := note(lang, title, forced, sdh); t != "" {
 		notes = append(notes, t)
 	}
 	if lang == "" {
@@ -162,6 +165,16 @@ func label(lang, title string, forced, sdh bool) string {
 		return lang
 	}
 	return lang + " (" + strings.Join(notes, ", ") + ")"
+}
+
+// note is a track's title where it adds to its language and flags: titles
+// often just repeat them.
+func note(lang, title string, forced, sdh bool) string {
+	t := strings.TrimSpace(title)
+	if strings.EqualFold(t, lang) || forced && strings.EqualFold(t, "forced") || sdh && strings.EqualFold(t, "sdh") {
+		return ""
+	}
+	return t
 }
 
 // Find returns the track with the given id.

@@ -1,8 +1,10 @@
+import i18n, { formatLocale } from './i18n'
+
 export function duration(ms?: number): string {
   if (!ms) return ''
   const mins = Math.max(1, Math.round(ms / 60000))
-  if (mins < 60) return `${mins}m`
-  return `${Math.floor(mins / 60)}h ${mins % 60}m`
+  if (mins < 60) return i18n.t('common:duration.minutes', { minutes: mins })
+  return i18n.t('common:duration.hoursMinutes', { hours: Math.floor(mins / 60), minutes: mins % 60 })
 }
 
 export function clock(sec: number): string {
@@ -36,5 +38,19 @@ export function progressFraction(positionMs?: number, durationMs?: number): numb
 
 // "S1 · E2" for an episode.
 export function episodeCode(season?: number, episode?: number): string {
-  return `S${season ?? 0} · E${episode ?? '?'}`
+  return i18n.t('common:episodeCode', { season: season ?? 0, episode: episode ?? '?' })
+}
+
+// A season's name: the online match's, or "Season 2" and "Specials" in the
+// page's language for the names a scan gives.
+export function seasonTitle(item: { kind: string; title: string; index?: number }): string {
+  if (item.kind !== 'season') return item.title
+  if (item.index === 0 && (item.title === 'Specials' || item.title === 'Season 0')) return i18n.t('common:specials')
+  const n = /^Season (\d+)$/.exec(item.title)
+  return n ? i18n.t('common:seasonN', { season: Number(n[1]) }) : item.title
+}
+
+// A rating out of 10 with one decimal, such as 7.9 or 7,9.
+export function ratingLabel(rating: number): string {
+  return new Intl.NumberFormat(formatLocale(), { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(rating)
 }

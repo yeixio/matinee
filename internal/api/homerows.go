@@ -49,8 +49,10 @@ type HomeRow struct {
 	Title string `json:"title"`
 	Genre string `json:"genre"`
 	// CollectionID is set on the rows of collections pinned to Home.
-	CollectionID string       `json:"collectionId,omitempty"`
-	Items        []store.Item `json:"items"`
+	CollectionID string `json:"collectionId,omitempty"`
+	// Starter is set on a built-in collection's row (see store.starters).
+	Starter string       `json:"starter,omitempty"`
+	Items   []store.Item `json:"items"`
 }
 
 // dayNumber counts days, so each date picks the same rows all day.

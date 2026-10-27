@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { lazy, Suspense, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { api, ApiError } from './api'
 import Shell from './components/Shell'
@@ -18,6 +19,7 @@ import { SwitchProfile, WhoIsWatching } from './pages/Profiles'
 import { askedFor, isKids, rememberAsked, shouldAsk } from './profiles'
 import { Spinner } from './components/ui'
 import { ThemeSync } from './theme'
+import { LanguageSync } from './i18n/sync'
 
 const Watch = lazy(() => import('./pages/Watch'))
 const Settings = lazy(() => import('./pages/Settings'))
@@ -30,12 +32,14 @@ export default function App() {
   return (
     <>
       <ThemeSync userId={me.data?.id} />
+      <LanguageSync userId={me.data?.id} />
       <Screens />
     </>
   )
 }
 
 function Screens() {
+  const { t } = useTranslation()
   const me = useQuery({ queryKey: ['me'], queryFn: api.me, staleTime: Infinity })
   const unauthenticated = me.error instanceof ApiError && me.error.status === 401
   const setup = useQuery({ queryKey: ['setup'], queryFn: api.setup, enabled: unauthenticated })
@@ -61,7 +65,7 @@ function Screens() {
   }
   if (unauthenticated) return setup.data?.needsSetup ? <Setup /> : <Login />
   if (me.isError) {
-    return <div className="grid h-dvh place-items-center text-muted">Can't reach the server. Retrying…</div>
+    return <div className="grid h-dvh place-items-center text-muted">{t('cantReachServer')}</div>
   }
   if (pathname !== '/sign-in' && shouldAsk(me.data, profiles.data?.profiles, asked)) {
     return <WhoIsWatching me={me.data} onDone={() => setAsked(askedFor())} />

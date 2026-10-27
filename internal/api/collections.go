@@ -450,7 +450,7 @@ func (s *Server) pinnedRows(ctx context.Context, u store.User) ([]HomeRow, error
 			return nil, err
 		}
 		if len(items) > 0 {
-			rows = append(rows, HomeRow{ID: "collection:" + c.ID, Title: c.Name, CollectionID: c.ID, Items: items})
+			rows = append(rows, HomeRow{ID: "collection:" + c.ID, Title: c.Name, CollectionID: c.ID, Starter: c.Starter, Items: items})
 		}
 	}
 	return rows, nil

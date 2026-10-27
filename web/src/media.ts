@@ -2,6 +2,7 @@
 // the details page and filters, and labels for the File details panel.
 import type { AudioStream, HDR, Item, ItemDetail, MediaInfo, VideoStream } from './api'
 import { resolution } from './format'
+import i18n, { formatLocale } from './i18n'
 
 export const hdrLabel: Record<HDR, string> = {
   'dolby-vision': 'Dolby Vision',
@@ -18,14 +19,24 @@ export const filterTags: { tag: string; label: string }[] = [
   { tag: 'atmos', label: 'Dolby Atmos' },
   { tag: '5.1', label: '5.1' },
   { tag: '7.1', label: '7.1' },
-  { tag: 'lossless', label: 'Lossless' },
-  { tag: 'hi-res', label: 'Hi-Res' },
+  {
+    tag: 'lossless',
+    get label() {
+      return i18n.t('common:media.lossless')
+    },
+  },
+  {
+    tag: 'hi-res',
+    get label() {
+      return i18n.t('common:media.hiRes')
+    },
+  },
 ]
 
 export function channelLabel(n: number, layout?: string): string {
   if (n <= 0) return ''
-  if (n === 1) return 'Mono'
-  if (n === 2) return 'Stereo'
+  if (n === 1) return i18n.t('common:media.mono')
+  if (n === 2) return i18n.t('common:media.stereo')
   if (layout && /^\d\.\d/.test(layout)) return layout.replace(/\(.*\)$/, '')
   return n <= 5 ? `${n}.0` : `${n - 1}.1`
 }
@@ -52,7 +63,10 @@ export function qualityBadges(item: Item | ItemDetail): Badge[] {
     else if (best?.dtsx) out.push({ label: 'DTS:X' })
     if (best && best.channels > 2) out.push({ label: channelLabel(best.channels, best.channelLayout) })
     if (!v && best && isLossless(best.codec)) {
-      out.push({ label: (best.bitDepth ?? 0) > 16 || (best.sampleRate ?? 0) > 48000 ? 'Hi-Res' : 'Lossless', title: audioTitle(best) })
+      out.push({
+        label: (best.bitDepth ?? 0) > 16 || (best.sampleRate ?? 0) > 48000 ? i18n.t('common:media.hiRes') : i18n.t('common:media.lossless'),
+        title: audioTitle(best),
+      })
     }
     return out
   }
@@ -68,7 +82,7 @@ export function qualityBadges(item: Item | ItemDetail): Badge[] {
       hdr && { label: hdrLabel[hdr] },
       tags.includes('atmos') ? { label: 'Dolby Atmos' } : tags.includes('dts-x') && { label: 'DTS:X' },
       ch && { label: ch },
-      tags.includes('hi-res') ? { label: 'Hi-Res' } : tags.includes('lossless') && { label: 'Lossless' },
+      tags.includes('hi-res') ? { label: i18n.t('common:media.hiRes') } : tags.includes('lossless') && { label: i18n.t('common:media.lossless') },
     ].filter((b): b is Badge => !!b)
   }
   const res = resolution(item.width, item.height)
@@ -81,27 +95,34 @@ function audioRank(a: AudioStream): number {
 
 function hdrTitle(v: VideoStream): string {
   if (v.hdr !== 'dolby-vision') return hdrLabel[v.hdr!]
-  const p = v.dvProfile ? ` profile ${v.dvProfile}` : ''
-  return v.hdrBase ? `Dolby Vision${p}, with ${hdrLabel[v.hdrBase]} for other screens` : `Dolby Vision${p}`
+  const dv = v.dvProfile ? i18n.t('common:media.dolbyVisionProfile', { profile: v.dvProfile }) : 'Dolby Vision'
+  return v.hdrBase ? i18n.t('common:media.withBase', { format: dv, base: hdrLabel[v.hdrBase] }) : dv
 }
 
 export function isLossless(codec: string) {
   return ['flac', 'alac', 'wavpack', 'ape', 'tta', 'truehd', 'mlp'].includes(codec) || codec.startsWith('pcm_')
 }
 
-const names = (() => {
-  try {
-    return new Intl.DisplayNames(['en'], { type: 'language' })
-  } catch {
-    return undefined
-  }
-})()
+const displayNames = new Map<string, Intl.DisplayNames | undefined>()
 
-// "eng" or "en" to "English". Unknown or undetermined codes give "".
+// Language names in the page's language.
+function names(): Intl.DisplayNames | undefined {
+  const locale = formatLocale()
+  if (!displayNames.has(locale)) {
+    try {
+      displayNames.set(locale, new Intl.DisplayNames([locale], { type: 'language' }))
+    } catch {
+      displayNames.set(locale, undefined)
+    }
+  }
+  return displayNames.get(locale)
+}
+
+// "eng" or "en" to "English" (or "Englisch" in German). Unknown or undetermined codes give "".
 export function languageName(code?: string): string {
   if (!code || code === 'und' || code === 'mis' || code === 'zxx') return ''
   try {
-    const n = names?.of(code)
+    const n = names()?.of(code)
     if (n && n !== code && n !== 'root') return n
   } catch {
     // not a language code
@@ -162,8 +183,9 @@ export function containerName(c: string): string {
 
 export function bitrateLabel(bps?: number): string {
   if (!bps) return ''
-  if (bps >= 1_000_000) return `${(bps / 1_000_000).toFixed(bps >= 10_000_000 ? 0 : 1)} Mb/s`
-  return `${Math.round(bps / 1000)} kb/s`
+  const digits = bps >= 10_000_000 ? 0 : 1
+  if (bps >= 1_000_000) return `${decimal(bps / 1_000_000, digits)} Mb/s`
+  return `${decimal(Math.round(bps / 1000), 0)} kb/s`
 }
 
 export function sizeLabel(bytes?: number): string {
@@ -175,7 +197,12 @@ export function sizeLabel(bytes?: number): string {
     n /= 1000
     i++
   }
-  return `${n.toFixed(n >= 100 || i === 0 ? 0 : 1)} ${units[i]}`
+  return `${decimal(n, n >= 100 || i === 0 ? 0 : 1)} ${units[i]}`
+}
+
+// A number with exactly this many decimals, in the page's format: 1.5 or 1,5.
+function decimal(n: number, digits: number): string {
+  return new Intl.NumberFormat(formatLocale(), { minimumFractionDigits: digits, maximumFractionDigits: digits }).format(n)
 }
 
 export function audioTitle(a: AudioStream): string {
@@ -183,7 +210,49 @@ export function audioTitle(a: AudioStream): string {
   if (a.atmos) parts.push('Atmos')
   if (a.dtsx) parts.push('DTS:X')
   parts.push(channelLabel(a.channels, a.channelLayout))
-  if (a.bitDepth && isLossless(a.codec)) parts.push(`${a.bitDepth}-bit`)
-  if (a.sampleRate) parts.push(`${a.sampleRate % 1000 ? (a.sampleRate / 1000).toFixed(1) : a.sampleRate / 1000} kHz`)
+  if (a.bitDepth && isLossless(a.codec)) parts.push(i18n.t('common:media.bitDepth', { bits: a.bitDepth }))
+  if (a.sampleRate) parts.push(`${decimal(a.sampleRate / 1000, a.sampleRate % 1000 ? 1 : 0)} kHz`)
   return parts.filter(Boolean).join(' · ')
+}
+
+// A subtitle track's name in the page's language, such as "Deutsch (Erzwungen)".
+export function subtitleLabel(s: { label: string; language?: string; forced?: boolean; sdh?: boolean; note?: string }): string {
+  const lang = languageName(s.language)
+  if (!lang) return s.label
+  const notes = [s.forced && i18n.t('common:media.forced'), s.sdh && i18n.t('common:media.sdh'), s.note].filter(Boolean)
+  return notes.length ? `${lang} (${notes.join(', ')})` : lang
+}
+
+// The awards worth naming in a title's one-line summary, in order of preference.
+const majorAwards: [string, string][] = [
+  ['Academy Award for', 'academy'],
+  ['Primetime Emmy Award for', 'emmy'],
+  ['Golden Globe Award for', 'globe'],
+  ['BAFTA Award for', 'bafta'],
+  ['British Academy Film Award for', 'bafta'],
+]
+
+// Sums awards up in a line, such as "Won 4 Academy Awards · 31 wins and 62
+// nominations", in the page's language.
+export function awardSummary(awards: { name: string; won: boolean }[]): string {
+  if (awards.length === 0) return ''
+  const parts: string[] = []
+  for (const won of [true, false]) {
+    for (const [prefix, key] of majorAwards) {
+      const n = awards.filter((a) => a.won === won && a.name.startsWith(prefix)).length
+      if (n === 0) continue
+      parts.push(i18n.t(`common:awards.${key}.${won ? 'won' : 'nominated'}`, { count: n }))
+      break
+    }
+    if (parts.length > 0) break
+  }
+  const wins = awards.filter((a) => a.won).length
+  const noms = awards.length - wins
+  const total =
+    wins && noms
+      ? i18n.t('common:awards.winsAndNominations', { wins: i18n.t('common:awards.wins', { count: wins }), nominations: i18n.t('common:awards.nominations', { count: noms }) })
+      : wins
+        ? i18n.t('common:awards.wins', { count: wins })
+        : i18n.t('common:awards.nominations', { count: noms })
+  return [...parts, total].join(' · ')
 }

@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Check, Clapperboard, PlugZap, Tv } from 'lucide-react'
 import { useEffect, useState, type FormEvent } from 'react'
+import { useTranslation } from 'react-i18next'
 import { api, type ArrApp, type ConnectionCheck, type Integration, type RequestMode } from '../api'
 import { Button, Field, inputClass } from '../components/ui'
 
@@ -9,21 +10,15 @@ const apps: {
   name: string
   port: number
   icon: typeof Tv
-  what: string
 }[] = [
-  {
-    app: 'radarr',
-    name: 'Radarr',
-    port: 7878,
-    icon: Clapperboard,
-    what: 'movies',
-  },
-  { app: 'sonarr', name: 'Sonarr', port: 8989, icon: Tv, what: 'shows' },
+  { app: 'radarr', name: 'Radarr', port: 7878, icon: Clapperboard },
+  { app: 'sonarr', name: 'Sonarr', port: 8989, icon: Tv },
 ]
 
 // Admins connect Radarr and Sonarr here. The address and key are kept on
 // the server; this page only learns whether a key is saved.
 export function Integrations() {
+  const { t } = useTranslation()
   const { data } = useQuery({
     queryKey: ['integrations'],
     queryFn: api.integrations,
@@ -31,9 +26,9 @@ export function Integrations() {
   return (
     <section className="space-y-4">
       <div>
-        <h2 className="text-lg font-semibold">Radarr and Sonarr</h2>
+        <h2 className="text-lg font-semibold">{t('integrations.title')}</h2>
         <p className="mt-1 text-sm text-muted">
-          Connect them so people can ask for movies and shows, see what's coming soon, and report problems with what they watch.
+          {t('integrations.intro')}
         </p>
       </div>
       <div className="space-y-3">{apps.map((a) => (data ? <Connection key={a.app} {...a} saved={data[a.app]} /> : null))}</div>
@@ -42,7 +37,8 @@ export function Integrations() {
   )
 }
 
-function Connection({ app, name, port, icon: Icon, what, saved }: (typeof apps)[number] & { saved: Integration }) {
+function Connection({ app, name, port, icon: Icon, saved }: (typeof apps)[number] & { saved: Integration }) {
+  const { t } = useTranslation()
   const qc = useQueryClient()
   const [open, setOpen] = useState(false)
   const [url, setUrl] = useState(saved.url)
@@ -111,7 +107,7 @@ function Connection({ app, name, port, icon: Icon, what, saved }: (typeof apps)[
         </span>
         <div className="min-w-0 flex-1">
           <div className="font-medium">{name}</div>
-          <div className="truncate text-xs text-muted">{saved.connected ? `Connected · ${saved.url}` : `Not connected · for ${what}`}</div>
+          <div className="truncate text-xs text-muted">{saved.connected ? t('integrations.connected', { url: saved.url }) : t(`integrations.notConnected.${app}`)}</div>
         </div>
         {!open && (
           <Button
@@ -119,14 +115,14 @@ function Connection({ app, name, port, icon: Icon, what, saved }: (typeof apps)[
             icon={saved.connected ? undefined : <PlugZap className="size-4" />}
             onClick={() => setOpen(true)}
           >
-            {saved.connected ? 'Change' : 'Connect'}
+            {saved.connected ? t('integrations.change') : t('integrations.connect')}
           </Button>
         )}
       </div>
       {open && (
         <form onSubmit={submit} className="space-y-4 border-t border-line/60 p-4">
           <div className="grid gap-3 sm:grid-cols-2">
-            <Field label="Address">
+            <Field label={t('integrations.address')}>
               <input
                 className={inputClass}
                 value={url}
@@ -138,7 +134,7 @@ function Connection({ app, name, port, icon: Icon, what, saved }: (typeof apps)[
                 required
               />
             </Field>
-            <Field label="API key">
+            <Field label={t('integrations.apiKey')}>
               <input
                 className={inputClass}
                 type="password"
@@ -148,7 +144,7 @@ function Connection({ app, name, port, icon: Icon, what, saved }: (typeof apps)[
                   setApiKey(e.target.value)
                   setChecked(undefined)
                 }}
-                placeholder={keyNeeded ? `${name} → Settings → General` : 'Saved'}
+                placeholder={keyNeeded ? t('integrations.keyWhere', { app: name }) : t('integrations.saved')}
                 required={keyNeeded}
               />
             </Field>
@@ -158,11 +154,11 @@ function Connection({ app, name, port, icon: Icon, what, saved }: (typeof apps)[
               <p className="flex items-start gap-2 text-sm text-accent">
                 <Check className="mt-0.5 size-4 shrink-0" />
                 <span className="min-w-0 break-all">
-                  {checked.appName} {checked.version} answers at {checked.url}
+                  {t('integrations.answers', { app: checked.appName, version: checked.version, url: checked.url })}
                 </span>
               </p>
               <div className="grid gap-3 sm:grid-cols-2">
-                <Field label={`Quality for new ${what}`}>
+                <Field label={t(`integrations.quality.${app}`)}>
                   <select className={inputClass} value={profile} onChange={(e) => setProfile(Number(e.target.value))}>
                     {checked.qualityProfiles.map((p) => (
                       <option key={p.id} value={p.id}>
@@ -171,7 +167,7 @@ function Connection({ app, name, port, icon: Icon, what, saved }: (typeof apps)[
                     ))}
                   </select>
                 </Field>
-                <Field label="Folder">
+                <Field label={t('integrations.folder')}>
                   <select className={inputClass} value={root} onChange={(e) => setRoot(e.target.value)}>
                     {checked.rootFolders.map((f) => (
                       <option key={f.path} value={f.path}>
@@ -189,21 +185,21 @@ function Connection({ app, name, port, icon: Icon, what, saved }: (typeof apps)[
               <Button
                 type="button"
                 variant="danger"
-                className="mr-auto"
+                className="me-auto"
                 disabled={disconnect.isPending}
-                onClick={() => confirm(`Disconnect ${name}? Titles already in it stay there.`) && disconnect.mutate()}
+                onClick={() => confirm(t('integrations.confirmDisconnect', { app: name })) && disconnect.mutate()}
               >
-                Disconnect
+                {t('integrations.disconnect')}
               </Button>
             )}
             <Button type="button" variant="ghost" onClick={() => setOpen(false)}>
-              Cancel
+              {t('cancel')}
             </Button>
             <Button type="button" disabled={!url || (keyNeeded && !apiKey) || test.isPending} onClick={() => test.mutate()}>
-              {test.isPending ? 'Testing…' : 'Test'}
+              {test.isPending ? t('integrations.testing') : t('integrations.test')}
             </Button>
             <Button variant="primary" disabled={!checked || save.isPending}>
-              Save
+              {t('save')}
             </Button>
           </div>
         </form>
@@ -212,25 +208,10 @@ function Connection({ app, name, port, icon: Icon, what, saved }: (typeof apps)[
   )
 }
 
-const modes: { value: RequestMode; label: string; detail: string }[] = [
-  {
-    value: 'approve',
-    label: 'Ask, then an admin approves',
-    detail: 'Anyone with an account can ask for a title. It waits for an admin.',
-  },
-  {
-    value: 'auto',
-    label: 'Add right away',
-    detail: 'What people ask for goes straight to Radarr or Sonarr.',
-  },
-  {
-    value: 'off',
-    label: 'Only admins add titles',
-    detail: 'Everyone else can still see what’s coming soon and report problems.',
-  },
-]
+const modes: RequestMode[] = ['approve', 'auto', 'off']
 
 function RequestModeSetting() {
+  const { t } = useTranslation()
   const qc = useQueryClient()
   const { data } = useQuery({ queryKey: ['settings'], queryFn: api.settings })
   const save = useMutation({
@@ -239,20 +220,20 @@ function RequestModeSetting() {
   })
   return (
     <fieldset className="space-y-2 pt-2">
-      <legend className="mb-2 text-sm font-medium">Who can add movies and shows</legend>
+      <legend className="mb-2 text-sm font-medium">{t('integrations.whoCanAdd')}</legend>
       {modes.map((m) => (
-        <label key={m.value} className="flex cursor-pointer items-start gap-3 rounded-xl border border-line/60 bg-surface/50 p-3">
+        <label key={m} className="flex cursor-pointer items-start gap-3 rounded-xl border border-line/60 bg-surface/50 p-3">
           <input
             type="radio"
             name="requests"
             className="mt-1 accent-[var(--color-accent)]"
-            checked={data?.requests === m.value}
+            checked={data?.requests === m}
             disabled={!data || save.isPending}
-            onChange={() => save.mutate({ requests: m.value })}
+            onChange={() => save.mutate({ requests: m })}
           />
           <span>
-            <span className="block text-sm font-medium">{m.label}</span>
-            <span className="block text-sm text-muted">{m.detail}</span>
+            <span className="block text-sm font-medium">{t(`integrations.mode.${m}.label`)}</span>
+            <span className="block text-sm text-muted">{t(`integrations.mode.${m}.detail`)}</span>
           </span>
         </label>
       ))}

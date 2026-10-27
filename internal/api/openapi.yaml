@@ -814,6 +814,7 @@ paths:
                         title: { type: string, examples: [Sci-fi favorites] }
                         genre: { type: string, description: Empty on a collection's row., examples: [Science Fiction] }
                         collectionId: { type: string, description: Set on a pinned collection's row. }
+                        starter: { type: string, examples: [tonight], description: Set on a built-in collection's row, which apps may name in their own language while it keeps its English name. }
                         items: { type: array, items: { $ref: "#/components/schemas/Item" } }
   /search:
     get:
@@ -1801,6 +1802,10 @@ components:
       properties:
         error: { type: string, description: In English. }
         code: { type: string, example: no_such_theme, description: The message's key in the errors catalog. }
+        params:
+          type: object
+          additionalProperties: { type: string }
+          description: "For a message that names something, such as {{title}} is already on its way: the names, to put into the catalog's message."
     ServerInfo:
       type: object
       properties:
@@ -2360,7 +2365,8 @@ components:
       type: object
       properties:
         id: { type: string }
-        label: { type: string }
+        label: { type: string, description: 'In English, such as "English (SDH)".' }
+        note: { type: string, example: Commentary, description: The track's own title where it says more than its language and flags. }
         language: { type: string }
         codec: { type: string }
         forced: { type: boolean }

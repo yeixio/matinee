@@ -1,4 +1,5 @@
 import { keepPreviousData, useQuery } from '@tanstack/react-query'
+import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { api, pendingRefetch } from '../api'
 import { GridSkeleton, PosterGrid } from '../components/Card'
@@ -9,6 +10,7 @@ import { Button, EmptyState } from '../components/ui'
 import { activeCount, clearPicks, toSearchParams, useLibraryFilter } from '../filter'
 
 export default function Library() {
+  const { t } = useTranslation()
   const id = Number(useParams().id)
   const { data: libraries } = useLibraries()
   const lib = libraries?.find((l) => l.id === id)
@@ -26,15 +28,15 @@ export default function Library() {
     <div className="space-y-6">
       <div className="flex items-center gap-3">
         {lib && <LibraryIcon kind={lib.kind} className="size-6 text-accent" />}
-        <h1 className="text-2xl font-bold tracking-tight">{lib?.name ?? 'Library'}</h1>
+        <h1 className="text-2xl font-bold tracking-tight">{lib?.name ?? t('library.library')}</h1>
         {items && (
           <span className={`text-sm text-muted transition-opacity ${isPlaceholderData ? 'opacity-50' : ''}`}>
-            {items.length} {filtered ? (items.length === 1 ? 'match' : 'matches') : ''}
+            {filtered ? t('library.matches', { count: items.length }) : items.length}
           </span>
         )}
-        {lib?.scanning && <span className="animate-pulse text-sm text-accent">Scanning…</span>}
+        {lib?.scanning && <span className="animate-pulse text-sm text-accent">{t('library.scanning')}</span>}
         {filtered && (
-          <div className="ml-auto">
+          <div className="ms-auto">
             <SaveAsCollectionButton filter={filter} library={id} />
           </div>
         )}
@@ -49,18 +51,18 @@ export default function Library() {
           <PosterGrid items={items} />
         </div>
       ) : filtered ? (
-        <EmptyState title={onlyUnwatched ? 'Nothing unwatched here' : 'Nothing matches'}>
+        <EmptyState title={onlyUnwatched ? t('library.nothingUnwatched') : t('library.nothingMatches')}>
           {onlyUnwatched ? (
-            'You’ve seen everything in this library.'
+            t('library.seenEverything')
           ) : (
             <Button className="mt-2" onClick={() => setFilter(clearPicks(filter))}>
-              Clear filters
+              {t('library.clearFilters')}
             </Button>
           )}
         </EmptyState>
       ) : (
-        <EmptyState title={lib?.scanning ? 'Scanning…' : 'Nothing here yet'}>
-          {lib?.scanning ? 'Titles appear as they are found.' : `Matinee looked in ${lib?.paths.join(', ')} and found no media.`}
+        <EmptyState title={lib?.scanning ? t('library.scanning') : t('nothingHereYet')}>
+          {lib?.scanning ? t('library.appearAsFound') : t('library.noMedia', { paths: lib?.paths.join(', ') })}
         </EmptyState>
       )}
     </div>

@@ -281,9 +281,21 @@ func writeError(w http.ResponseWriter, status int, msg string) {
 	writeJSON(w, status, map[string]string{"error": msg, "code": errorCode(msg)})
 }
 
+// writeErrorWith is writeError for a message that names something, such as a
+// title: template marks each name {{like_this}}, and params has them, so a
+// client can put them into the message in its own language.
+func writeErrorWith(w http.ResponseWriter, status int, template string, params map[string]string) {
+	msg := template
+	for k, v := range params {
+		msg = strings.ReplaceAll(msg, "{{"+k+"}}", v)
+	}
+	writeJSON(w, status, map[string]any{"error": msg, "code": errorCode(template), "params": params})
+}
+
 // errorCode names an error message for the catalog: "no such theme" is
-// no_such_theme. Messages with details in them, such as a title, get codes
-// the catalog doesn't have, and show in English.
+// no_such_theme, and "{{title}} is already on its way" is
+// title_is_already_on_its_way. Messages with details pasted in get codes the
+// catalog doesn't have, and show in English.
 func errorCode(msg string) string {
 	var b strings.Builder
 	under := false

@@ -3,6 +3,7 @@
 // bookmarked or saved as it is.
 import { useCallback, useEffect, useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import i18n from './i18n'
 
 export type Watched = 'unwatched' | 'inProgress' | 'watched' | 'notStarted'
 export type SortField = 'title' | 'added' | 'released' | 'year' | 'rating' | 'runtime' | 'lastPlayed'
@@ -108,25 +109,19 @@ export function fromSearchParams(p: URLSearchParams): ItemFilter {
   return f as ItemFilter
 }
 
-export const sortLabels: Record<SortField, string> = {
-  title: 'Title',
-  added: 'Date added',
-  released: 'Release date',
-  year: 'Year',
-  rating: 'Rating',
-  runtime: 'Runtime',
-  lastPlayed: 'Last watched',
-}
+// Labels in the page's language, read when shown.
+const labels = <K extends string>(prefix: string, keys: K[]) =>
+  Object.defineProperties(
+    {} as Record<K, string>,
+    Object.fromEntries(keys.map((k) => [k, { enumerable: true, get: () => i18n.t(`${prefix}.${k}`) }])),
+  )
+
+export const sortLabels = labels<SortField>('common:sort', ['title', 'added', 'released', 'year', 'rating', 'runtime', 'lastPlayed'])
 
 // Title and runtime run low to high unless asked, the rest high to low (as on the server).
 export const defaultDesc = (s: SortField) => s !== 'title' && s !== 'runtime'
 
-export const watchedLabels: Record<Watched, string> = {
-  unwatched: 'Unwatched',
-  inProgress: 'In progress',
-  watched: 'Watched',
-  notStarted: 'Not started',
-}
+export const watchedLabels = labels<Watched>('common:watched', ['unwatched', 'inProgress', 'watched', 'notStarted'])
 
 // Fields that pick titles, as opposed to sorting them.
 const pickFields = (Object.keys(fields) as (keyof ItemFilter)[]).filter((k) => !['library', 'sort', 'order', 'limit'].includes(k))
@@ -159,23 +154,24 @@ export function decades(min?: number, max?: number): number[] {
 
 export function yearLabel(f: ItemFilter): string | undefined {
   const { yearMin: a, yearMax: b } = f
-  if (a && b && a % 10 === 0 && b === a + 9) return `${a}s`
-  if (a && b) return a === b ? `${a}` : `${a}–${b}`
-  if (a) return `${a} or later`
-  if (b) return `${b} or earlier`
+  if (a && b && a % 10 === 0 && b === a + 9) return i18n.t('common:filter.decade', { decade: a })
+  if (a && b) return a === b ? `${a}` : i18n.t('common:filter.yearRange', { from: a, to: b })
+  if (a) return i18n.t('common:filter.yearOrLater', { year: a })
+  if (b) return i18n.t('common:filter.yearOrEarlier', { year: b })
 }
 
+// withinLabel is a stretch of time up to now, as in "Added in the last week".
 export function withinLabel(days: number): string {
-  if (days === 365) return 'the last year'
-  if (days % 7 === 0 && days < 28) return days === 7 ? 'the last week' : `the last ${days / 7} weeks`
-  return `the last ${days} days`
+  if (days === 365) return i18n.t('common:filter.lastYear')
+  if (days % 7 === 0 && days < 28) return i18n.t('common:filter.lastWeeks', { count: days / 7 })
+  return i18n.t('common:filter.lastDays', { count: days })
 }
 
 export function runtimeLabel(f: ItemFilter, shows: boolean): string | undefined {
   const { runtimeMin: a, runtimeMax: b } = f
-  const text = a && b ? `${a}–${b} min` : a ? `over ${a} min` : b ? `under ${b} min` : undefined
-  if (!text) return
-  return shows ? `Episodes ${text}` : text[0].toUpperCase() + text.slice(1)
+  const which = a && b ? 'between' : a ? 'over' : b ? 'under' : undefined
+  if (!which) return
+  return i18n.t(`common:filter.runtime.${shows ? 'episodes' : 'titles'}.${which}`, { min: a, max: b })
 }
 
 const storageKey = (libraryId: number) => `matinee-library-filter:${libraryId}`

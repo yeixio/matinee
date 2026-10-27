@@ -1,6 +1,7 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { Lock, LogIn } from 'lucide-react'
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { api, ApiError, type ProfileChoice, type User } from '../api'
 import { Logo } from '../components/Shell'
@@ -22,6 +23,7 @@ export function Avatar({ name, avatar, className = 'size-9 text-sm' }: { name: s
 // WhoIsWatching is the profile picker: shown once after signing in when the
 // account has profiles, and from the avatar menu to switch.
 export function WhoIsWatching({ me, onDone }: { me: User; onDone?: () => void }) {
+  const { t } = useTranslation()
   const qc = useQueryClient()
   const { data } = useQuery({ queryKey: ['profiles'], queryFn: api.profiles })
   const [locked, setLocked] = useState<ProfileChoice | null>(null)
@@ -36,7 +38,7 @@ export function WhoIsWatching({ me, onDone }: { me: User; onDone?: () => void })
     try {
       await api.selectProfile(p.id, pin)
     } catch (err) {
-      setError(err instanceof ApiError ? err.message : 'Something went wrong')
+      setError(err instanceof ApiError ? err.message : t('somethingWentWrong'))
       return
     }
     rememberAsked(me)
@@ -55,7 +57,7 @@ export function WhoIsWatching({ me, onDone }: { me: User; onDone?: () => void })
           <PinEntry profile={locked} error={error} onSubmit={(pin) => pick(locked, pin)} onCancel={() => setLocked(null)} />
         ) : (
           <>
-            <h1 className="font-display text-3xl font-semibold tracking-tight md:text-4xl">Who's watching?</h1>
+            <h1 className="font-display text-3xl font-semibold tracking-tight md:text-4xl">{t('profiles.whoIsWatching')}</h1>
             <ul className="mt-10 flex flex-wrap justify-center gap-6 md:gap-10">
               {data?.profiles.map((p) => (
                 <li key={p.id}>
@@ -72,7 +74,7 @@ export function WhoIsWatching({ me, onDone }: { me: User; onDone?: () => void })
                         }`}
                       />
                       {p.hasPin && (
-                        <span className="absolute right-0 bottom-0 grid size-7 place-items-center rounded-full bg-raised text-muted">
+                        <span className="absolute end-0 bottom-0 grid size-7 place-items-center rounded-full bg-raised text-muted">
                           <Lock className="size-3.5" />
                         </span>
                       )}
@@ -87,7 +89,7 @@ export function WhoIsWatching({ me, onDone }: { me: User; onDone?: () => void })
             {me.guest && (
               // At home without signing in; an account brings its own profiles.
               <a href="/sign-in" className="mt-12 inline-flex items-center gap-2 text-sm text-muted hover:text-text">
-                <LogIn className="size-4" /> Sign in with an account
+                <LogIn className="size-4 rtl:-scale-x-100" /> {t('profiles.signInWithAccount')}
               </a>
             )}
           </>
@@ -98,6 +100,7 @@ export function WhoIsWatching({ me, onDone }: { me: User; onDone?: () => void })
 }
 
 function PinEntry({ profile, error, onSubmit, onCancel }: { profile: ProfileChoice; error: string; onSubmit: (pin: string) => void; onCancel: () => void }) {
+  const { t } = useTranslation()
   const [pin, setPin] = useState('')
   const type = (next: string) => {
     const digits = next.replace(/\D/g, '').slice(0, 4)
@@ -110,10 +113,10 @@ function PinEntry({ profile, error, onSubmit, onCancel }: { profile: ProfileChoi
   return (
     <div className="mx-auto flex max-w-xs flex-col items-center">
       <Avatar name={profile.name} avatar={profile.avatar} className="size-20 text-3xl" />
-      <h1 className="mt-4 text-xl font-semibold">Enter {profile.name}'s PIN</h1>
+      <h1 className="mt-4 text-xl font-semibold">{t('profiles.enterPin', { name: profile.name })}</h1>
       <input
         autoFocus
-        aria-label="PIN"
+        aria-label={t('profiles.pin')}
         type="password"
         inputMode="numeric"
         autoComplete="off"
@@ -126,7 +129,7 @@ function PinEntry({ profile, error, onSubmit, onCancel }: { profile: ProfileChoi
           <span key={i} className={`size-4 rounded-full border-2 ${i < pin.length ? 'border-accent bg-accent' : 'border-line'}`} />
         ))}
       </div>
-      <div className="mt-8 grid grid-cols-3 gap-3">
+      <div className="mt-8 grid grid-cols-3 gap-3" dir="ltr">
         {['1', '2', '3', '4', '5', '6', '7', '8', '9', '', '0', '⌫'].map((k, i) =>
           k === '' ? (
             <span key={i} />
@@ -134,7 +137,7 @@ function PinEntry({ profile, error, onSubmit, onCancel }: { profile: ProfileChoi
             <button
               key={i}
               type="button"
-              aria-label={k === '⌫' ? 'Delete' : k}
+              aria-label={k === '⌫' ? t('profiles.deleteDigit') : k}
               onClick={() => type(k === '⌫' ? pin.slice(0, -1) : pin + k)}
               className="grid size-16 place-items-center rounded-full bg-text/5 text-xl font-medium hover:bg-text/10 focus-visible:outline-2 focus-visible:outline-accent"
             >
@@ -145,7 +148,7 @@ function PinEntry({ profile, error, onSubmit, onCancel }: { profile: ProfileChoi
       </div>
       {error && <p className="mt-6 text-sm text-danger">{error}</p>}
       <Button variant="ghost" className="mt-6" onClick={onCancel}>
-        Back
+        {t('back')}
       </Button>
     </div>
   )

@@ -234,9 +234,10 @@ type Video struct {
 	Type string // Trailer or Teaser
 }
 
-// Trailers lists a movie's, show's or season's trailers, best first: official
-// trailers, then other trailers, then teasers. kind is movie or show; season
-// is 0 for a whole show.
+// Trailers lists a movie's, show's or season's trailers, best first: those
+// in the context's language (store.WithLanguage), then English ones; within
+// each, official trailers, then other trailers, then teasers. kind is movie
+// or show; season is 0 for a whole show.
 func (t *TMDB) Trailers(ctx context.Context, kind string, id int64, season int) ([]Video, error) {
 	path := fmt.Sprintf("/movie/%d/videos", id)
 	switch {
@@ -253,17 +254,26 @@ func (t *TMDB) Trailers(ctx context.Context, kind string, id int64, season int) 
 			Type        string `json:"type"`
 			Official    bool   `json:"official"`
 			PublishedAt string `json:"published_at"`
+			Language    string `json:"iso_639_1"`
 		} `json:"results"`
 	}
-	params := url.Values{"include_video_language": {"en,null"}}
+	languages := "en,null"
+	own := strings.Split(i18n.TMDBLanguage(store.LanguageFrom(ctx)), "-")[0]
+	if own != "" && own != i18n.Source {
+		languages = own + "," + languages
+	}
+	params := url.Values{"include_video_language": {languages}}
 	if err := t.get(ctx, path, params, &res); err != nil {
 		if err == errNotFound {
 			return nil, nil
 		}
 		return nil, err
 	}
-	rank := func(typ string, official bool) int {
+	rank := func(lang, typ string, official bool) int {
 		r := 0
+		if own != "" && lang != own {
+			r += 4
+		}
 		if typ != "Trailer" {
 			r += 2
 		}
@@ -279,7 +289,7 @@ func (t *TMDB) Trailers(ctx context.Context, kind string, id int64, season int) 
 		}
 	}
 	sort.SliceStable(vids, func(i, j int) bool {
-		ri, rj := rank(vids[i].Type, vids[i].Official), rank(vids[j].Type, vids[j].Official)
+		ri, rj := rank(vids[i].Language, vids[i].Type, vids[i].Official), rank(vids[j].Language, vids[j].Type, vids[j].Official)
 		if ri != rj {
 			return ri < rj
 		}

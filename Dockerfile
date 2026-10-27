@@ -6,6 +6,8 @@ RUN corepack enable
 COPY web/package.json web/pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
 COPY web/ ./
+# The text in every language, shared with the server and the apps.
+COPY i18n/ /src/i18n/
 RUN pnpm build
 
 FROM --platform=$BUILDPLATFORM golang:1.26-alpine AS server

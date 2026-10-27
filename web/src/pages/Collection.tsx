@@ -1,13 +1,15 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Pencil, Shuffle, Sparkles, Trash2 } from 'lucide-react'
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import { api, pendingRefetch } from '../api'
 import { GridSkeleton, PosterGrid } from '../components/Card'
-import { CollectionEditor, invalidateCollections, PinBadges } from '../components/Collections'
+import { CollectionEditor, collectionName, invalidateCollections, PinBadges } from '../components/Collections'
 import { Button, EmptyState } from '../components/ui'
 
 export default function CollectionPage() {
+  const { t } = useTranslation()
   const id = useParams().id ?? ''
   const qc = useQueryClient()
   const navigate = useNavigate()
@@ -25,24 +27,24 @@ export default function CollectionPage() {
     },
   })
 
-  if (error) return <EmptyState title="Collection not found">It may have been deleted.</EmptyState>
+  if (error) return <EmptyState title={t('collection.notFound')}>{t('collection.notFoundHint')}</EmptyState>
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-center gap-3">
-        {c?.kind === 'smart' && <Sparkles className="size-6 text-accent" aria-label="Smart collection" />}
-        <h1 className="text-2xl font-bold tracking-tight">{c?.name ?? 'Collection'}</h1>
+        {c?.kind === 'smart' && <Sparkles className="size-6 text-accent" aria-label={t('collection.smart')} />}
+        <h1 className="text-2xl font-bold tracking-tight">{c ? collectionName(c) : t('collection.collection')}</h1>
         {c && <span className="text-sm text-muted">{c.count}</span>}
-        {c?.sort === 'shuffle' && <Shuffle className="size-4 text-muted" aria-label="Shuffled daily" />}
+        {c?.sort === 'shuffle' && <Shuffle className="size-4 text-muted" aria-label={t('collection.shuffledDaily')} />}
         {c && <PinBadges c={c} />}
         {c?.canEdit && (
-          <div className="ml-auto flex gap-2">
+          <div className="ms-auto flex gap-2">
             <Button onClick={() => setEditing(true)} icon={<Pencil className="size-4" />}>
-              {c.kind === 'smart' ? 'Edit rules' : 'Edit'}
+              {c.kind === 'smart' ? t('collection.editRules') : t('collection.edit')}
             </Button>
             <Button
               variant="danger"
-              aria-label="Delete collection"
-              onClick={() => confirm(`Delete ${c.name}? The titles stay in your library.`) && remove.mutate()}
+              aria-label={t('collection.delete')}
+              onClick={() => confirm(t('collection.deleteConfirm', { name: collectionName(c) })) && remove.mutate()}
               icon={<Trash2 className="size-4" />}
             />
           </div>
@@ -53,9 +55,9 @@ export default function CollectionPage() {
       ) : c.items.length > 0 ? (
         <PosterGrid items={c.items} />
       ) : c.kind === 'smart' ? (
-        <EmptyState title="Nothing matches yet">Titles join by themselves when they match the rules.</EmptyState>
+        <EmptyState title={t('collection.nothingMatchesYet')}>{t('collection.joinByRules')}</EmptyState>
       ) : (
-        <EmptyState title="Nothing here yet">Open a movie or show and choose Collections to add it.</EmptyState>
+        <EmptyState title={t('nothingHereYet')}>{t('collection.howToAdd')}</EmptyState>
       )}
       {editing && c && <CollectionEditor collection={c} onClose={() => setEditing(false)} />}
     </div>

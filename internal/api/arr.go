@@ -103,16 +103,16 @@ func (s *Server) arrError(w http.ResponseWriter, r *http.Request, app arr.App, e
 	case errors.As(err, &bad):
 		writeError(w, http.StatusBadRequest, bad.Error())
 	case errors.Is(err, errNotConnected):
-		writeError(w, http.StatusConflict, app.Name()+" isn't connected")
+		writeErrorWith(w, http.StatusConflict, "{{app}} isn't connected", map[string]string{"app": app.Name()})
 	case errors.Is(err, arr.ErrNotFound):
-		writeError(w, http.StatusNotFound, app.Name()+" doesn't have this title")
+		writeErrorWith(w, http.StatusNotFound, "{{app}} doesn't have this title", map[string]string{"app": app.Name()})
 	case errors.As(err, &ae):
 		s.Log.Warn("arr", "app", app, "err", err)
-		msg := ae.Message
 		if !currentUser(r).IsAdmin {
-			msg = app.Name() + " isn't answering right now. Try again later."
+			writeErrorWith(w, http.StatusBadGateway, "{{app}} isn't answering right now. Try again later.", map[string]string{"app": app.Name()})
+			return
 		}
-		writeError(w, http.StatusBadGateway, msg)
+		writeError(w, http.StatusBadGateway, ae.Message)
 	default:
 		s.serverError(w, err)
 	}
@@ -220,7 +220,7 @@ func (s *Server) candidate(ctx context.Context, app arr.App, in arr.Config) (arr
 	in.URL, in.APIKey = u, strings.TrimSpace(in.APIKey)
 	if in.APIKey == "" {
 		if saved.APIKey == "" || saved.URL != in.URL {
-			return in, badRequest("enter the API key (in " + app.Name() + " under Settings → General)")
+			return in, badRequest("enter the API key (under Settings → General)")
 		}
 		in.APIKey = saved.APIKey
 	}
@@ -315,7 +315,7 @@ func (s *Server) putIntegration(w http.ResponseWriter, r *http.Request) {
 		c.QualityProfileID = res.QualityProfiles[0].ID
 	}
 	if !slices.ContainsFunc(res.QualityProfiles, func(p arr.QualityProfile) bool { return p.ID == c.QualityProfileID }) {
-		writeError(w, http.StatusBadRequest, app.Name()+" has no such quality profile")
+		writeErrorWith(w, http.StatusBadRequest, "{{app}} has no such quality profile", map[string]string{"app": app.Name()})
 		return
 	}
 	if c.RootFolder == "" && len(res.RootFolders) > 0 {
@@ -589,10 +589,10 @@ func (s *Server) createRequest(w http.ResponseWriter, r *http.Request) {
 	}
 	switch st.Status {
 	case titleAvailable:
-		writeError(w, http.StatusConflict, t.Title+" is already in your library")
+		writeErrorWith(w, http.StatusConflict, "{{title}} is already in your library", map[string]string{"title": t.Title})
 		return
 	case titleAdded:
-		writeError(w, http.StatusConflict, t.Title+" is already on its way")
+		writeErrorWith(w, http.StatusConflict, "{{title}} is already on its way", map[string]string{"title": t.Title})
 		return
 	case titleRequested:
 		writeError(w, http.StatusConflict, "someone already asked for "+t.Title)

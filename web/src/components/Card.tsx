@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom'
 import { useWindowVirtualizer } from '@tanstack/react-virtual'
 import { useQueryClient } from '@tanstack/react-query'
 import { api, type Item } from '../api'
-import { episodeCode, progressFraction } from '../format'
+import { episodeCode, progressFraction, seasonTitle } from '../format'
+import i18n from '../i18n'
 import { Artwork } from './Artwork'
 
 export const itemLink = (item: Item) => `/item/${item.id}`
@@ -14,11 +15,11 @@ function subtitle(item: Item): string {
     case 'episode':
       return item.showTitle ? `${episodeCode(item.seasonIndex, item.index)} · ${item.title}` : ''
     case 'season':
-      return item.childCount ? `${item.childCount} episodes` : ''
+      return item.childCount ? i18n.t('common:count.episodes', { count: item.childCount }) : ''
     case 'show':
-      return item.childCount === 1 ? '1 season' : item.childCount ? `${item.childCount} seasons` : ''
+      return item.childCount ? i18n.t('common:count.seasons', { count: item.childCount }) : ''
     case 'artist':
-      return item.childCount === 1 ? '1 album' : item.childCount ? `${item.childCount} albums` : ''
+      return item.childCount ? i18n.t('common:count.albums', { count: item.childCount }) : ''
     default:
       return item.year ? String(item.year) : ''
   }
@@ -49,7 +50,7 @@ export function PosterCard({ item, wide = false }: { item: Item; wide?: boolean 
           </div>
         )}
         {item.played && (
-          <span className="absolute top-2 right-2 grid size-6 place-items-center rounded-full bg-accent text-on-accent shadow">
+          <span className="absolute top-2 end-2 grid size-6 place-items-center rounded-full bg-accent text-on-accent shadow">
             <Check className="size-4" strokeWidth={3} />
           </span>
         )}
@@ -60,7 +61,7 @@ export function PosterCard({ item, wide = false }: { item: Item; wide?: boolean 
         )}
       </div>
       <div className="mt-2 px-0.5">
-        <div className="truncate text-sm font-medium text-text group-hover:text-accent-strong">{item.showTitle || item.title}</div>
+        <div className="truncate text-sm font-medium text-text group-hover:text-accent-strong">{item.showTitle || seasonTitle(item)}</div>
         <div className="truncate text-xs text-muted">{subtitle(item)}</div>
       </div>
     </Link>

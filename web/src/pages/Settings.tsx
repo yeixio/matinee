@@ -1,8 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { ChevronLeft, Folder, FolderOpen, KeyRound, Monitor, Plus, RefreshCw, Trash2, UserPlus, X } from 'lucide-react'
 import { useState, type FormEvent } from 'react'
+import { Trans, useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { api, type PlaybackPrefs, type RemoteStatus, type User } from '../api'
+import { LanguagePicker } from '../components/LanguagePicker'
 import { NewFiles, watchSummary } from '../components/LibraryWatch'
 import { MediaAnalysis } from '../components/MediaAnalysis'
 import { Profiles } from '../components/ProfileSettings'
@@ -10,13 +12,16 @@ import { Appearance } from '../components/ThemePicker'
 import { LibraryIcon, useLibraries } from '../components/Shell'
 import { Button, Field, inputClass } from '../components/ui'
 import { Integrations } from './Integrations'
+import i18n, { formatLocale } from '../i18n'
 import { DeviceIcon } from './Link'
 
 export default function Settings() {
+  const { t } = useTranslation()
   const { data: me } = useQuery<User>({ queryKey: ['me'], queryFn: api.me, staleTime: Infinity })
   return (
     <div className="max-w-3xl space-y-12">
-      <h1 className="text-2xl font-bold tracking-tight">Settings</h1>
+      <h1 className="text-2xl font-bold tracking-tight">{t('nav.settings')}</h1>
+      {me && <LanguagePicker me={me} />}
       {me && <Appearance me={me} />}
       {me && <Playback />}
       {me?.isAdmin && <Libraries />}
@@ -33,11 +38,10 @@ export default function Settings() {
       <Devices />
       {/* TMDB's API terms ask apps that use it for this notice. */}
       <p className="text-xs text-faint">
-        Posters and descriptions come from{' '}
-        <a href="https://www.themoviedb.org/" target="_blank" rel="noreferrer" className="underline hover:text-muted">
-          TMDB
-        </a>
-        . This product uses the TMDB API but is not endorsed or certified by TMDB.
+        <Trans
+          i18nKey="settings.tmdbNotice"
+          components={{ link: <a href="https://www.themoviedb.org/" target="_blank" rel="noreferrer" className="underline hover:text-muted" /> }}
+        />
       </p>
       <ServerVersion />
     </div>
@@ -45,6 +49,7 @@ export default function Settings() {
 }
 
 function Libraries() {
+  const { t } = useTranslation()
   const qc = useQueryClient()
   const { data: libraries = [] } = useLibraries()
   const { data: settings } = useQuery({ queryKey: ['settings'], queryFn: api.settings })
@@ -62,16 +67,16 @@ function Libraries() {
   return (
     <section className="space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold">Libraries</h2>
+        <h2 className="text-lg font-semibold">{t('settings.libraries.title')}</h2>
         {!adding && (
           <Button icon={<Plus className="size-4" />} onClick={() => setAdding(true)}>
-            Add library
+            {t('home.addLibrary')}
           </Button>
         )}
       </div>
       {adding && <AddLibrary onDone={() => setAdding(false)} />}
       <div className="divide-y divide-line/60 rounded-xl border border-line/60 bg-surface/50">
-        {libraries.length === 0 && !adding && <p className="p-5 text-sm text-muted">No libraries yet.</p>}
+        {libraries.length === 0 && !adding && <p className="p-5 text-sm text-muted">{t('settings.libraries.none')}</p>}
         {libraries.map((l) => (
           <div key={l.id} className="flex items-center gap-4 p-4">
             <span className="grid size-10 place-items-center rounded-lg bg-text/5 text-accent">
@@ -88,13 +93,13 @@ function Libraries() {
               disabled={l.scanning}
               onClick={() => scan.mutate(l.id)}
             >
-              <span className="hidden sm:inline">{l.scanning ? 'Scanning' : 'Scan'}</span>
+              <span className="hidden sm:inline">{l.scanning ? t('nav.scanning') : t('settings.libraries.scan')}</span>
             </Button>
             <Button
               variant="ghost"
               icon={<Trash2 className="size-4" />}
-              aria-label={`Remove ${l.name}`}
-              onClick={() => confirm(`Remove "${l.name}"? Your files stay where they are.`) && remove.mutate(l.id)}
+              aria-label={t('settings.libraries.remove', { name: l.name })}
+              onClick={() => confirm(t('settings.libraries.confirmRemove', { name: l.name })) && remove.mutate(l.id)}
             />
           </div>
         ))}
@@ -103,19 +108,17 @@ function Libraries() {
   )
 }
 
-const kinds = [
-  { value: 'movies', label: 'Movies' },
-  { value: 'tv', label: 'TV shows' },
-  { value: 'music', label: 'Music' },
-]
+const kinds = ['movies', 'tv', 'music']
+const kindName = (kind: string) => i18n.t(`settings.libraries.kind.${kind}`)
 
 function AddLibrary({ onDone }: { onDone: () => void }) {
+  const { t } = useTranslation()
   const qc = useQueryClient()
   const [kind, setKind] = useState('movies')
   const [name, setName] = useState('')
   const [paths, setPaths] = useState<string[]>([])
   const create = useMutation({
-    mutationFn: () => api.createLibrary(name || kinds.find((k) => k.value === kind)!.label, kind, paths),
+    mutationFn: () => api.createLibrary(name || kindName(kind), kind, paths),
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ['libraries'] })
       onDone()
@@ -128,27 +131,27 @@ function AddLibrary({ onDone }: { onDone: () => void }) {
 
   return (
     <form onSubmit={submit} className="space-y-5 rounded-xl border border-accent/30 bg-surface p-5">
-      <Field label="Type">
+      <Field label={t('settings.libraries.type')}>
         <div className="grid grid-cols-3 gap-2">
           {kinds.map((k) => (
             <button
               type="button"
-              key={k.value}
-              onClick={() => setKind(k.value)}
+              key={k}
+              onClick={() => setKind(k)}
               className={`flex h-16 flex-col items-center justify-center gap-1 rounded-lg border text-sm transition-colors ${
-                kind === k.value ? 'border-accent bg-accent/10 text-text' : 'border-line text-muted hover:border-faint'
+                kind === k ? 'border-accent bg-accent/10 text-text' : 'border-line text-muted hover:border-faint'
               }`}
             >
-              <LibraryIcon kind={k.value} />
-              {k.label}
+              <LibraryIcon kind={k} />
+              {kindName(k)}
             </button>
           ))}
         </div>
       </Field>
-      <Field label="Name">
-        <input className={inputClass} value={name} onChange={(e) => setName(e.target.value)} placeholder={kinds.find((k) => k.value === kind)!.label} />
+      <Field label={t('profileSettings.name')}>
+        <input className={inputClass} value={name} onChange={(e) => setName(e.target.value)} placeholder={kindName(kind)} />
       </Field>
-      <Field label="Folders">
+      <Field label={t('settings.libraries.folders')}>
         {/* The picker stays put and chosen folders appear below it, so nothing new lands
             under the finger after a tap (a quick second tap used to hit a chip's remove button). */}
         <div className="space-y-2">
@@ -157,7 +160,7 @@ function AddLibrary({ onDone }: { onDone: () => void }) {
             <div key={p} className="flex items-center gap-2 rounded-lg bg-text/5 px-3 py-2 text-sm">
               <Folder className="size-4 text-accent" />
               <span className="flex-1 truncate">{p}</span>
-              <button type="button" onClick={() => setPaths(paths.filter((x) => x !== p))} aria-label={`Remove ${p}`}>
+              <button type="button" onClick={() => setPaths(paths.filter((x) => x !== p))} aria-label={t('filters.remove', { label: p })}>
                 <X className="size-4 text-muted hover:text-text" />
               </button>
             </div>
@@ -167,10 +170,10 @@ function AddLibrary({ onDone }: { onDone: () => void }) {
       {create.error && <p className="text-sm text-danger">{create.error.message}</p>}
       <div className="flex justify-end gap-2">
         <Button type="button" variant="ghost" onClick={onDone}>
-          Cancel
+          {t('cancel')}
         </Button>
         <Button variant="primary" disabled={paths.length === 0 || create.isPending}>
-          Add library
+          {t('home.addLibrary')}
         </Button>
       </div>
     </form>
@@ -180,6 +183,7 @@ function AddLibrary({ onDone }: { onDone: () => void }) {
 // Browse the server's folders, since the media lives on the server, not this device.
 function FolderPicker({ picked, onPick }: { picked: string[]; onPick: (path: string) => void }) {
   // Empty asks the server for its media root (MATINEE_MEDIA_ROOT), so the picker opens on the media.
+  const { t } = useTranslation()
   const [path, setPath] = useState('')
   const { data, error } = useQuery({ queryKey: ['fs', path], queryFn: () => api.browse(path) })
   const join = (dir: string) => {
@@ -194,11 +198,11 @@ function FolderPicker({ picked, onPick }: { picked: string[]; onPick: (path: str
           disabled={!data || data.path === data.parent}
           onClick={() => data && setPath(data.parent)}
           className="rounded p-1 text-muted hover:text-text disabled:opacity-30"
-          aria-label="Up one folder"
+          aria-label={t('settings.libraries.up')}
         >
-          <ChevronLeft className="size-4" />
+          <ChevronLeft className="size-4 rtl:-scale-x-100" />
         </button>
-        <span className="flex-1 truncate font-mono text-xs text-muted">{data?.path ?? path}</span>
+        <span className="flex-1 truncate font-mono text-xs text-muted" dir="ltr">{data?.path ?? path}</span>
         <Button
           type="button"
           variant="primary"
@@ -206,18 +210,18 @@ function FolderPicker({ picked, onPick }: { picked: string[]; onPick: (path: str
           disabled={!data || picked.includes(data.path)}
           onClick={() => data && onPick(data.path)}
         >
-          {data && picked.includes(data.path) ? 'Added' : 'Use this folder'}
+          {data && picked.includes(data.path) ? t('settings.libraries.added') : t('settings.libraries.useFolder')}
         </Button>
       </div>
       <div className="max-h-60 overflow-y-auto">
         {error && <p className="p-3 text-sm text-danger">{error.message}</p>}
-        {data?.dirs.length === 0 && <p className="p-3 text-sm text-faint">No subfolders</p>}
+        {data?.dirs.length === 0 && <p className="p-3 text-sm text-faint">{t('settings.libraries.noSubfolders')}</p>}
         {data?.dirs.map((d) => (
           <button
             type="button"
             key={d}
             onClick={() => setPath(join(d))}
-            className="flex w-full items-center gap-2 px-3 py-2 text-left text-sm hover:bg-text/5"
+            className="flex w-full items-center gap-2 px-3 py-2 text-start text-sm hover:bg-text/5"
           >
             <FolderOpen className="size-4 text-faint" /> {d}
           </button>
@@ -228,6 +232,7 @@ function FolderPicker({ picked, onPick }: { picked: string[]; onPick: (path: str
 }
 
 function Users({ me }: { me: User }) {
+  const { t } = useTranslation()
   const qc = useQueryClient()
   const { data: users = [] } = useQuery({ queryKey: ['users'], queryFn: api.users })
   const [username, setUsername] = useState('')
@@ -244,7 +249,7 @@ function Users({ me }: { me: User }) {
   })
   return (
     <section className="space-y-4">
-      <h2 className="text-lg font-semibold">People</h2>
+      <h2 className="text-lg font-semibold">{t('settings.people.title')}</h2>
       <div className="divide-y divide-line/60 rounded-xl border border-line/60 bg-surface/50">
         {users.map((u) => (
           <Person key={u.id} user={u} isMe={u.id === me.id} />
@@ -257,17 +262,17 @@ function Users({ me }: { me: User }) {
         }}
         className="grid gap-3 sm:grid-cols-[1fr_1fr_auto_auto] sm:items-end"
       >
-        <Field label="Username">
+        <Field label={t('auth.username')}>
           <input className={inputClass} value={username} onChange={(e) => setUsername(e.target.value)} required />
         </Field>
-        <Field label="Password">
+        <Field label={t('auth.password')}>
           <input className={inputClass} type="password" minLength={8} value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="new-password" required />
         </Field>
         <label className="flex h-11 items-center gap-2 text-sm text-muted">
-          <input type="checkbox" checked={isAdmin} onChange={(e) => setIsAdmin(e.target.checked)} className="accent-accent" /> Admin
+          <input type="checkbox" checked={isAdmin} onChange={(e) => setIsAdmin(e.target.checked)} className="accent-accent" /> {t('settings.people.admin')}
         </label>
         <Button variant="primary" icon={<UserPlus className="size-4" />} disabled={create.isPending}>
-          Add
+          {t('requests.add')}
         </Button>
       </form>
       {create.error && <p className="text-sm text-danger">{create.error.message}</p>}
@@ -282,6 +287,7 @@ const actionClass = 'h-9 whitespace-nowrap px-2 text-xs sm:px-3 sm:text-sm'
 // Admins change their own password under Your account, and can't remove
 // themselves or take away their own admin, so another admin is always left.
 function Person({ user, isMe }: { user: User; isMe: boolean }) {
+  const { t } = useTranslation()
   const qc = useQueryClient()
   const [mode, setMode] = useState<'idle' | 'reset' | 'remove'>('idle')
   const [password, setPassword] = useState('')
@@ -297,7 +303,7 @@ function Person({ user, isMe }: { user: User; isMe: boolean }) {
     mutationFn: () => api.resetPassword(user.id, password),
     onSuccess: () => {
       close()
-      setDone(`Password changed. ${user.username} was signed out everywhere.`)
+      setDone(t('settings.people.passwordChanged', { name: user.username }))
     },
   })
   const remove = useMutation({ mutationFn: () => api.deleteUser(user.id), onSuccess: refresh })
@@ -315,13 +321,13 @@ function Person({ user, isMe }: { user: User; isMe: boolean }) {
         <span className="grid size-9 shrink-0 place-items-center rounded-full bg-text/10 text-sm font-semibold uppercase">{user.username[0]}</span>
         <span className="min-w-0 flex-1 truncate">
           {user.username}
-          {isMe && <span className="text-muted"> (you)</span>}
+          {isMe && <span className="text-muted"> {t('settings.people.you')}</span>}
         </span>
-        {user.isAdmin && <span className="rounded bg-accent/15 px-2 py-0.5 text-xs text-accent">Admin</span>}
+        {user.isAdmin && <span className="rounded bg-accent/15 px-2 py-0.5 text-xs text-accent">{t('settings.people.admin')}</span>}
         {!isMe && mode === 'idle' && (
           <div className="grid w-full grid-cols-3 gap-1 sm:flex sm:w-auto">
             <Button variant="ghost" className={actionClass} disabled={admin.isPending} onClick={() => admin.mutate()}>
-              {user.isAdmin ? 'Remove admin' : 'Make admin'}
+              {user.isAdmin ? t('settings.people.removeAdmin') : t('settings.people.makeAdmin')}
             </Button>
             <Button
               variant="ghost"
@@ -329,7 +335,7 @@ function Person({ user, isMe }: { user: User; isMe: boolean }) {
               icon={<KeyRound className="hidden size-4 sm:block" />}
               onClick={() => (setDone(''), setMode('reset'))}
             >
-              Reset password
+              {t('settings.people.resetPassword')}
             </Button>
             <Button
               variant="ghost"
@@ -337,7 +343,7 @@ function Person({ user, isMe }: { user: User; isMe: boolean }) {
               icon={<Trash2 className="hidden size-4 sm:block" />}
               onClick={() => (setDone(''), setMode('remove'))}
             >
-              Remove
+              {t('settings.people.remove')}
             </Button>
           </div>
         )}
@@ -350,7 +356,7 @@ function Person({ user, isMe }: { user: User; isMe: boolean }) {
           }}
           className="grid gap-3 sm:grid-cols-[1fr_auto_auto] sm:items-end"
         >
-          <Field label={`New password for ${user.username}`}>
+          <Field label={t('settings.people.newPasswordFor', { name: user.username })}>
             <input
               className={inputClass}
               type="password"
@@ -363,25 +369,24 @@ function Person({ user, isMe }: { user: User; isMe: boolean }) {
             />
           </Field>
           <Button type="button" variant="ghost" onClick={close}>
-            Cancel
+            {t('cancel')}
           </Button>
           <Button variant="primary" disabled={reset.isPending}>
-            Set password
+            {t('settings.people.setPassword')}
           </Button>
         </form>
       )}
       {mode === 'remove' && (
         <div className="space-y-3 rounded-lg border border-danger/40 bg-danger/5 p-3">
           <p className="text-sm">
-            Remove <strong>{user.username}</strong>? Their watch history, watch list, downloads and requests go too, and
-            they're signed out everywhere. This can't be undone.
+            <Trans i18nKey="settings.people.confirmRemove" values={{ name: user.username }} components={{ name: <strong /> }} />
           </p>
           <div className="flex flex-wrap justify-end gap-2">
             <Button variant="ghost" onClick={close}>
-              Cancel
+              {t('cancel')}
             </Button>
             <Button variant="danger" icon={<Trash2 className="size-4" />} disabled={remove.isPending} onClick={() => remove.mutate()}>
-              Remove {user.username}
+              {t('profileSettings.remove', { name: user.username })}
             </Button>
           </div>
         </div>
@@ -394,6 +399,7 @@ function Person({ user, isMe }: { user: User; isMe: boolean }) {
 
 // Account lets the signed-in person change their own password.
 function Account() {
+  const { t } = useTranslation()
   const [current, setCurrent] = useState('')
   const [next, setNext] = useState('')
   const [again, setAgain] = useState('')
@@ -410,7 +416,7 @@ function Account() {
   const mismatch = again !== '' && again !== next
   return (
     <section className="space-y-4">
-      <h2 className="text-lg font-semibold">Your account</h2>
+      <h2 className="text-lg font-semibold">{t('settings.account.title')}</h2>
       <form
         onSubmit={(e) => {
           e.preventDefault()
@@ -418,9 +424,9 @@ function Account() {
         }}
         className="space-y-3 rounded-xl border border-line/60 bg-surface/50 p-4"
       >
-        <h3 className="font-medium">Change password</h3>
+        <h3 className="font-medium">{t('settings.account.changePassword')}</h3>
         <div className="grid gap-3 sm:grid-cols-3">
-          <Field label="Current password">
+          <Field label={t('settings.account.current')}>
             <input
               className={inputClass}
               type="password"
@@ -430,7 +436,7 @@ function Account() {
               required
             />
           </Field>
-          <Field label="New password">
+          <Field label={t('settings.account.new')}>
             <input
               className={inputClass}
               type="password"
@@ -441,7 +447,7 @@ function Account() {
               required
             />
           </Field>
-          <Field label="New password again">
+          <Field label={t('settings.account.again')}>
             <input
               className={inputClass}
               type="password"
@@ -454,54 +460,57 @@ function Account() {
           </Field>
         </div>
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <p className="text-xs text-muted">At least 8 characters. Your other devices will be signed out.</p>
+          <p className="text-xs text-muted">{t('settings.account.hint')}</p>
           <Button variant="primary" icon={<KeyRound className="size-4" />} disabled={change.isPending || mismatch}>
-            Change password
+            {t('settings.account.changePassword')}
           </Button>
         </div>
-        {mismatch && <p className="text-sm text-danger">The new passwords don't match.</p>}
+        {mismatch && <p className="text-sm text-danger">{t('settings.account.mismatch')}</p>}
         {change.error && <p className="text-sm text-danger">{change.error.message}</p>}
-        {done && <p className="text-sm text-muted">Password changed. Your other devices were signed out.</p>}
+        {done && <p className="text-sm text-muted">{t('settings.account.changed')}</p>}
       </form>
     </section>
   )
 }
 
 function lastSeen(unix: number) {
-  if (!unix) return 'a while ago'
+  if (!unix) return i18n.t('settings.devices.aWhileAgo')
   const mins = Math.round((Date.now() / 1000 - unix) / 60)
-  if (mins < 10) return 'just now'
-  if (mins < 60) return `${mins} min ago`
-  if (mins < 60 * 24) return `${Math.round(mins / 60)} h ago`
-  return new Date(unix * 1000).toLocaleDateString()
+  if (mins < 10) return i18n.t('settings.devices.justNow')
+  const rtf = new Intl.RelativeTimeFormat(formatLocale(), { style: 'short' })
+  if (mins < 60) return rtf.format(-mins, 'minute')
+  if (mins < 60 * 24) return rtf.format(-Math.round(mins / 60), 'hour')
+  return new Date(unix * 1000).toLocaleDateString(formatLocale())
 }
 
 function ServerVersion() {
+  const { t } = useTranslation()
   const { data } = useQuery({ queryKey: ['server'], queryFn: api.server, staleTime: Infinity })
   if (!data) return null
   return (
     <p className="text-xs text-faint">
       {/* Builds from main are "main-<commit>"; the short commit is enough. */}
-      Matinee server {data.version.replace(/^main-([0-9a-f]{7})[0-9a-f]+$/, 'main-$1')} · API v{data.apiVersion}
+      {t('settings.version', { version: data.version.replace(/^main-([0-9a-f]{7})[0-9a-f]+$/, 'main-$1'), api: data.apiVersion })}
     </p>
   )
 }
 
 function HomeNetwork() {
+  const { t } = useTranslation()
   const qc = useQueryClient()
   const { data } = useQuery({ queryKey: ['settings'], queryFn: api.settings })
   const save = useMutation({ mutationFn: api.saveSettings, onSuccess: (s) => qc.setQueryData(['settings'], s) })
   const required = data?.requireSignInAtHome ?? false
   return (
     <section className="space-y-4">
-      <h2 className="text-lg font-semibold">Home network</h2>
+      <h2 className="text-lg font-semibold">{t('settings.home.title')}</h2>
       <label className="flex cursor-pointer items-start gap-4 rounded-xl border border-line/60 bg-surface/50 p-4">
         <span className="min-w-0 flex-1">
-          <span className="block font-medium">Ask for sign-in at home</span>
+          <span className="block font-medium">{t('settings.home.requireSignIn')}</span>
           <span className="mt-1 block text-sm text-muted">
             {required
-              ? 'Everyone signs in, at home and away.'
-              : "Phones, TVs and browsers on your home network can watch without signing in. They share one Home account and can't change anything. Away from home, everyone signs in."}
+              ? t('settings.home.required')
+              : t('settings.home.open')}
           </span>
         </span>
         <input
@@ -517,6 +526,7 @@ function HomeNetwork() {
 }
 
 function RemoteAccess() {
+  const { t } = useTranslation()
   const qc = useQueryClient()
   const { data } = useQuery({
     queryKey: ['settings'],
@@ -530,20 +540,19 @@ function RemoteAccess() {
   if (!remote && !data.publicURL) return null
   return (
     <section className="space-y-4">
-      <h2 className="text-lg font-semibold">Remote access</h2>
+      <h2 className="text-lg font-semibold">{t('settings.remote.title')}</h2>
       {data.publicURL ? (
         <p className="rounded-xl border border-line/60 bg-surface/50 p-4 text-sm text-muted">
-          Away from home, the apps connect to <span className="font-medium text-text">{data.publicURL}</span>, the address this
-          server was set up with.
+          <Trans i18nKey="settings.remote.publicURL" values={{ url: data.publicURL }} components={{ url: <span className="font-medium text-text" dir="ltr" /> }} />
         </p>
       ) : (
         <label className="flex cursor-pointer items-start gap-4 rounded-xl border border-line/60 bg-surface/50 p-4">
           <span className="min-w-0 flex-1">
-            <span className="block font-medium">Watch away from home</span>
+            <span className="block font-medium">{t('settings.remote.toggle')}</span>
             <span className="mt-1 block text-sm text-muted">
               {data.remoteAccess
                 ? <RemoteState status={remote} />
-                : 'Matinee asks your router to open a port and gets a certificate so the apps connect securely from anywhere. Everyone signs in from outside.'}
+                : t('settings.remote.hint')}
             </span>
           </span>
           <input
@@ -560,27 +569,26 @@ function RemoteAccess() {
 }
 
 function RemoteState({ status }: { status?: RemoteStatus }) {
-  if (!status || status.state === 'working' || status.state === 'off') return <>Opening a port on your router and getting a certificate…</>
+  const { t } = useTranslation()
+  if (!status || status.state === 'working' || status.state === 'off') return <>{t('settings.remote.working')}</>
   if (status.state === 'ready')
     return (
       <>
-        The apps reach this server at <span className="font-medium text-text">{status.url}</span> when they’re away from home.
-        {status.router && ` Your router opened the port over ${status.router}.`} They pick this address up next time they’re
-        on your home network.
+        <Trans i18nKey="settings.remote.ready" values={{ url: status.url }} components={{ url: <span className="font-medium text-text" dir="ltr" /> }} />
+        {status.router && ` ${t('settings.remote.router', { router: status.router })}`} {t('settings.remote.pickUp')}
       </>
     )
   return (
     <>
-      <span className="block text-danger">{status.problem}</span>
-      {status.sharedAddress
-        ? ' Matinee can’t get around this by itself yet.'
-        : ' Matinee tries again every half hour.'}
+      <span className="block text-danger">{status.problem}</span>{' '}
+      {status.sharedAddress ? t('settings.remote.sharedAddress') : t('settings.remote.retry')}
     </>
   )
 }
 
 // Each person's own auto-play choices, which follow them to every device.
 function Playback() {
+  const { t } = useTranslation()
   const qc = useQueryClient()
   const { data } = useQuery({ queryKey: ['playback'], queryFn: api.playback })
   const save = useMutation({ mutationFn: api.setPlayback, onSuccess: (p) => qc.setQueryData(['playback'], p) })
@@ -602,16 +610,16 @@ function Playback() {
   )
   return (
     <section className="space-y-4">
-      <h2 className="text-lg font-semibold">Playback</h2>
+      <h2 className="text-lg font-semibold">{t('settings.playback.title')}</h2>
       {toggle(
-        'Play the next episode',
-        'When the credits start, the next episode plays after a 10-second countdown you can cancel.',
+        t('settings.playback.autoPlay'),
+        t('settings.playback.autoPlayHint'),
         prefs.autoPlay,
         { autoPlay: !prefs.autoPlay },
       )}
       {toggle(
-        'Skip the countdown',
-        'Go straight into the next episode when the credits start. After three in a row without touching anything, you’re asked if you’re still watching.',
+        t('settings.playback.binge'),
+        t('settings.playback.bingeHint'),
         prefs.autoPlay && prefs.binge,
         { binge: !prefs.binge },
         !prefs.autoPlay,
@@ -621,20 +629,21 @@ function Playback() {
 }
 
 function Trailers() {
+  const { t } = useTranslation()
   const qc = useQueryClient()
   const { data } = useQuery({ queryKey: ['settings'], queryFn: api.settings })
   const save = useMutation({ mutationFn: api.saveSettings, onSuccess: (s) => qc.setQueryData(['settings'], s) })
   const remote = data?.remoteTrailers ?? true
   return (
     <section className="space-y-4">
-      <h2 className="text-lg font-semibold">Trailers</h2>
+      <h2 className="text-lg font-semibold">{t('settings.trailers.title')}</h2>
       <label className="flex cursor-pointer items-start gap-4 rounded-xl border border-line/60 bg-surface/50 p-4">
         <span className="min-w-0 flex-1">
-          <span className="block font-medium">Trailers from YouTube</span>
+          <span className="block font-medium">{t('settings.trailers.remote')}</span>
           <span className="mt-1 block text-sm text-muted">
             {remote
-              ? 'Movies and shows offer their trailers from TMDB, which play from YouTube. Trailer files next to your media always show too.'
-              : 'Only trailer files next to your media show, like "Movie (2020)-trailer.mkv" or anything in a Trailers folder.'}
+              ? t('settings.trailers.remoteOn')
+              : t('settings.trailers.remoteOff')}
           </span>
         </span>
         <input
@@ -652,16 +661,10 @@ function Trailers() {
 }
 
 // Every accelerator the server knows, so an admin can pick one before it's set up.
-const accelerators: { id: string; name: string }[] = [
-  { id: 'nvenc', name: 'NVIDIA NVENC' },
-  { id: 'vaapi', name: 'VAAPI (AMD and Intel on Linux)' },
-  { id: 'qsv', name: 'Intel Quick Sync' },
-  { id: 'videotoolbox', name: 'VideoToolbox (Mac)' },
-  { id: 'amf', name: 'AMD AMF (Windows)' },
-  { id: 'v4l2m2m', name: 'V4L2 (Raspberry Pi)' },
-]
+const accelerators = ['nvenc', 'vaapi', 'qsv', 'videotoolbox', 'amf', 'v4l2m2m']
 
 function Transcoding() {
+  const { t } = useTranslation()
   const qc = useQueryClient()
   const { data } = useQuery({
     queryKey: ['settings'],
@@ -676,39 +679,41 @@ function Transcoding() {
   let status: string
   if (!hw) status = ''
   else if (active)
-    status = `${active.name}${active.detail ? ` on ${active.detail}` : ''}. ${
-      active.decode ? 'Video is decoded, resized and encoded on the GPU.' : 'Video is encoded on the GPU and decoded on the CPU.'
-    } If the GPU can't handle a file, it plays through the CPU instead.`
-  else if (hw.detecting) status = 'Testing this server’s GPU…'
-  else if (data?.hardwareAcceleration === 'off') status = 'The CPU. Hardware transcoding is off.'
-  else if (data?.hardwareAcceleration !== 'auto') status = 'The CPU, because the accelerator you chose didn’t work on this server.'
-  else status = 'The CPU. No GPU on this server passed its test.'
+    status = [
+      active.detail ? t('settings.transcoding.activeOn', { name: active.name, detail: active.detail }) : t('settings.transcoding.active', { name: active.name }),
+      active.decode ? t('settings.transcoding.fullGPU') : t('settings.transcoding.encodeOnly'),
+      t('settings.transcoding.fallback'),
+    ].join(' ')
+  else if (hw.detecting) status = t('settings.transcoding.testing')
+  else if (data?.hardwareAcceleration === 'off') status = t('settings.transcoding.cpuOff')
+  else if (data?.hardwareAcceleration !== 'auto') status = t('settings.transcoding.cpuFailed')
+  else status = t('settings.transcoding.cpuNoGPU')
   return (
     <section className="space-y-4">
-      <h2 className="text-lg font-semibold">Transcoding</h2>
+      <h2 className="text-lg font-semibold">{t('settings.transcoding.title')}</h2>
       <p className="text-sm text-muted">
-        Files a device can’t play as they are get converted while you watch. A GPU does that faster and with less load on the
-        server.
+        {t('settings.transcoding.intro')}
       </p>
       <div className="space-y-4 rounded-xl border border-line/60 bg-surface/50 p-4">
         <div>
-          <span className="block text-sm font-medium">Converting with</span>
+          <span className="block text-sm font-medium">{t('settings.transcoding.convertingWith')}</span>
           <span className="mt-1 block text-sm text-muted">{status}</span>
           {!active && hw?.problem && <span className="mt-2 block text-sm text-danger">{hw.problem}</span>}
         </div>
-        <Field label="Hardware acceleration">
+        <Field label={t('settings.transcoding.hardware')}>
           <select
             className={inputClass}
             value={data?.hardwareAcceleration ?? 'auto'}
             disabled={!data || save.isPending}
             onChange={(e) => save.mutate({ hardwareAcceleration: e.target.value })}
           >
-            <option value="auto">Automatic: the best one that works</option>
-            <option value="off">Off: always use the CPU</option>
+            <option value="auto">{t('settings.transcoding.auto')}</option>
+            <option value="off">{t('settings.transcoding.off')}</option>
             {accelerators.map((a) => (
-              <option key={a.id} value={a.id}>
-                {a.name}
-                {hw && !hw.detecting && !found.has(a.id) ? ' (not found on this server)' : ''}
+              <option key={a} value={a}>
+                {hw && !hw.detecting && !found.has(a)
+                  ? t('settings.transcoding.notFound', { name: t(`settings.transcoding.accelerator.${a}`) })
+                  : t(`settings.transcoding.accelerator.${a}`)}
               </option>
             ))}
           </select>
@@ -719,6 +724,7 @@ function Transcoding() {
 }
 
 function Devices() {
+  const { t } = useTranslation()
   const qc = useQueryClient()
   const { data: devices = [] } = useQuery({ queryKey: ['devices'], queryFn: api.devices })
   const navigate = useNavigate()
@@ -726,8 +732,8 @@ function Devices() {
   return (
     <section className="space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold">Your devices</h2>
-        <Button onClick={() => navigate('/link')}>Sign in a device</Button>
+        <h2 className="text-lg font-semibold">{t('settings.devices.title')}</h2>
+        <Button onClick={() => navigate('/link')}>{t('link.title')}</Button>
       </div>
       <div className="divide-y divide-line/60 rounded-xl border border-line/60 bg-surface/50">
         {devices.map((d) => (
@@ -736,16 +742,16 @@ function Devices() {
               {d.platform === 'web' ? <Monitor className="size-5" /> : <DeviceIcon platform={d.platform} />}
             </span>
             <div className="min-w-0 flex-1">
-              <div className="truncate font-medium">{d.deviceName || 'Unknown device'}</div>
-              <div className="text-xs text-muted">{d.current ? 'This device' : `Last used ${lastSeen(d.lastSeenAt)}`}</div>
+              <div className="truncate font-medium">{d.deviceName || t('settings.devices.unknown')}</div>
+              <div className="text-xs text-muted">{d.current ? t('settings.devices.this') : t('settings.devices.lastUsed', { when: lastSeen(d.lastSeenAt) })}</div>
             </div>
             {!d.current && (
               <Button
                 variant="ghost"
                 disabled={signOut.isPending}
-                onClick={() => confirm(`Sign out "${d.deviceName}"?`) && signOut.mutate(d.id)}
+                onClick={() => confirm(t('settings.devices.confirmSignOut', { name: d.deviceName })) && signOut.mutate(d.id)}
               >
-                Sign out
+                {t('nav.signOut')}
               </Button>
             )}
           </div>

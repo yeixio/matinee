@@ -1,0 +1,310 @@
+{
+  "duration": {
+    "minutes": "{{minutes}}m",
+    "hoursMinutes": "{{hours}}h {{minutes}}m"
+  },
+  "episodeCode": "S{{season}} · E{{episode}}",
+  "seasonN": "Season {{season}}",
+  "specials": "Specials",
+  "media": {
+    "mono": "Mono",
+    "stereo": "Stereo",
+    "lossless": "Lossless",
+    "hiRes": "Hi-Res",
+    "dolbyVisionProfile": "Dolby Vision profile {{profile}}",
+    "withBase": "{{format}}, with {{base}} for other screens",
+    "bitDepth": "{{bits}}-bit",
+    "forced": "Forced",
+    "sdh": "SDH"
+  },
+  "people": {
+    "episodes_one": "{{count}} episode",
+    "episodes_other": "{{count}} episodes",
+    "lines": {
+      "createdBy": "Created by",
+      "director_one": "Director",
+      "director_other": "Directors",
+      "writer_one": "Writer",
+      "writer_other": "Writers",
+      "basedOn": "Based on",
+      "music": "Music"
+    },
+    "died": "Died {{date}}",
+    "bornIn": "Born in {{place}}",
+    "bornOnIn": "Born {{date}} in {{place}}",
+    "bornOn": "Born {{date}}",
+    "dollars": "${{amount}}"
+  },
+  "facts": {
+    "firstAired": "First aired",
+    "released": "Released",
+    "aired": "Aired",
+    "ended": "Ended",
+    "status": "Status",
+    "seasons": "Seasons",
+    "seasonsValue_one": "{{seasons}} ({{count}} episode)",
+    "seasonsValue_other": "{{seasons}} ({{count}} episodes)",
+    "rated": "Rated",
+    "genres": "Genres",
+    "originalTitle": "Original title",
+    "originalLanguage": "Original language",
+    "spokenLanguages": "Spoken languages",
+    "studio_one": "Studio",
+    "studio_other": "Studios",
+    "network_one": "Network",
+    "network_other": "Networks",
+    "country_one": "Country",
+    "country_other": "Countries",
+    "collection": "Collection",
+    "budget": "Budget",
+    "boxOffice": "Box office"
+  },
+  "showStatus": {
+    "Returning Series": "Returning series",
+    "Ended": "Ended",
+    "Canceled": "Canceled",
+    "In Production": "In production",
+    "Planned": "Planned",
+    "Pilot": "Pilot"
+  },
+  "genres": {
+    "Action": "Action",
+    "Adventure": "Adventure",
+    "Animation": "Animation",
+    "Comedy": "Comedy",
+    "Crime": "Crime",
+    "Documentary": "Documentary",
+    "Drama": "Drama",
+    "Family": "Family",
+    "Fantasy": "Fantasy",
+    "History": "History",
+    "Horror": "Horror",
+    "Music": "Music",
+    "Mystery": "Mystery",
+    "Romance": "Romance",
+    "Science Fiction": "Science Fiction",
+    "Thriller": "Thriller",
+    "War": "War",
+    "Western": "Western",
+    "Reality": "Reality",
+    "TV Movie": "TV Movie",
+    "Action & Adventure": "Action & Adventure",
+    "Kids": "Kids",
+    "News": "News",
+    "Sci-Fi & Fantasy": "Sci-Fi & Fantasy",
+    "Soap": "Soap",
+    "Talk": "Talk",
+    "War & Politics": "War & Politics"
+  },
+  "jobs": {
+    "Director": "Director",
+    "Creator": "Creator",
+    "Screenplay": "Screenplay",
+    "Writer": "Writer",
+    "Teleplay": "Teleplay",
+    "Story": "Story",
+    "Novel": "Novel",
+    "Characters": "Characters",
+    "Author": "Author",
+    "Original Music Composer": "Original Music Composer",
+    "Music": "Music",
+    "Director of Photography": "Director of Photography",
+    "Editor": "Editor",
+    "Producer": "Producer",
+    "Executive Producer": "Executive Producer",
+    "Casting": "Casting",
+    "Production Design": "Production Design",
+    "Costume Design": "Costume Design"
+  },
+  "kids": {
+    "littleKids": "Little kids",
+    "kids": "Kids",
+    "teens": "Teens",
+    "andYounger": "{{ratings}} and younger"
+  },
+  "sort": {
+    "title": "Title",
+    "added": "Date added",
+    "released": "Release date",
+    "year": "Year",
+    "rating": "Rating",
+    "runtime": "Runtime",
+    "lastPlayed": "Last watched"
+  },
+  "watched": {
+    "unwatched": "Unwatched",
+    "inProgress": "In progress",
+    "watched": "Watched",
+    "notStarted": "Not started"
+  },
+  "genreRows": {
+    "Action": "Action-packed",
+    "Adventure": "Adventures",
+    "Animation": "Animated favorites",
+    "Comedy": "Comedies",
+    "Crime": "Crime stories",
+    "Documentary": "Documentaries",
+    "Drama": "Dramas",
+    "Family": "For the whole family",
+    "Fantasy": "Fantasy worlds",
+    "Horror": "Horror",
+    "Mystery": "Mysteries",
+    "Romance": "Romance",
+    "Science Fiction": "Sci-fi favorites",
+    "Thriller": "Thrillers",
+    "War": "War stories",
+    "Western": "Westerns"
+  },
+  "count": {
+    "episodes_one": "{{count}} episode",
+    "episodes_other": "{{count}} episodes",
+    "seasons_one": "{{count}} season",
+    "seasons_other": "{{count}} seasons",
+    "albums_one": "{{count}} album",
+    "albums_other": "{{count}} albums",
+    "tracks_one": "{{count}} track",
+    "tracks_other": "{{count}} tracks",
+    "titles_one": "{{count}} title",
+    "titles_other": "{{count}} titles"
+  },
+  "awards": {
+    "academy": {
+      "won_one": "Won {{count}} Academy Award",
+      "won_other": "Won {{count}} Academy Awards",
+      "nominated_one": "Nominated for {{count}} Academy Award",
+      "nominated_other": "Nominated for {{count}} Academy Awards"
+    },
+    "emmy": {
+      "won_one": "Won {{count}} Primetime Emmy",
+      "won_other": "Won {{count}} Primetime Emmys",
+      "nominated_one": "Nominated for {{count}} Primetime Emmy",
+      "nominated_other": "Nominated for {{count}} Primetime Emmys"
+    },
+    "globe": {
+      "won_one": "Won {{count}} Golden Globe",
+      "won_other": "Won {{count}} Golden Globes",
+      "nominated_one": "Nominated for {{count}} Golden Globe",
+      "nominated_other": "Nominated for {{count}} Golden Globes"
+    },
+    "bafta": {
+      "won_one": "Won {{count}} BAFTA",
+      "won_other": "Won {{count}} BAFTAs",
+      "nominated_one": "Nominated for {{count}} BAFTA",
+      "nominated_other": "Nominated for {{count}} BAFTAs"
+    },
+    "wins_one": "{{count}} win",
+    "wins_other": "{{count}} wins",
+    "nominations_one": "{{count}} nomination",
+    "nominations_other": "{{count}} nominations",
+    "winsAndNominations": "{{wins}} and {{nominations}}"
+  },
+  "departments": {
+    "Acting": "Actor",
+    "Directing": "Directing",
+    "Writing": "Writing",
+    "Production": "Production",
+    "Sound": "Sound",
+    "Camera": "Camera",
+    "Editing": "Editing",
+    "Art": "Art",
+    "Crew": "Crew",
+    "Visual Effects": "Visual Effects",
+    "Costume & Make-Up": "Costume & Make-Up",
+    "Lighting": "Lighting",
+    "Creator": "Creator"
+  },
+  "starters": {
+    "recent": "Recently added",
+    "unwatched": "Unwatched",
+    "tonight": "Short enough for tonight"
+  },
+  "filter": {
+    "decade": "{{decade}}s",
+    "yearRange": "{{from}}–{{to}}",
+    "yearOrLater": "{{year}} or later",
+    "yearOrEarlier": "{{year}} or earlier",
+    "lastYear": "the last year",
+    "lastWeeks_one": "the last week",
+    "lastWeeks_other": "the last {{count}} weeks",
+    "lastDays_one": "the last {{count}} day",
+    "lastDays_other": "the last {{count}} days",
+    "runtime": {
+      "titles": {
+        "between": "{{min}}–{{max}} min",
+        "over": "Over {{min}} min",
+        "under": "Under {{max}} min"
+      },
+      "episodes": {
+        "between": "Episodes {{min}}–{{max}} min",
+        "over": "Episodes over {{min}} min",
+        "under": "Episodes under {{max}} min"
+      }
+    }
+  },
+  "themes": {
+    "clean": {
+      "name": "Clean",
+      "description": "Plain white, one blue, no serifs. Nothing but the posters."
+    },
+    "dark": {
+      "name": "Dark",
+      "description": "True black and crisp white. Easy on the eyes, and on an OLED screen."
+    },
+    "drive-in": {
+      "name": "Drive-in",
+      "description": "Seventies browns and marquee amber, like a night at the drive-in."
+    },
+    "high-contrast": {
+      "name": "High contrast",
+      "description": "Black, white and bright yellow, for the clearest text from across the room."
+    },
+    "light": {
+      "name": "Light",
+      "description": "Warm paper white with coral, for a bright room."
+    },
+    "matinee": {
+      "name": "Matinee",
+      "description": "Warm theatre dark with a coral accent. The house look."
+    },
+    "sci-fi": {
+      "name": "Sci-fi",
+      "description": "Deep space navy with a neon cyan glow and a futuristic typeface."
+    }
+  },
+  "every": {
+    "seconds_one": "{{count}} second",
+    "seconds_other": "{{count}} seconds",
+    "minutes_one": "{{count}} minute",
+    "minutes_other": "{{count}} minutes",
+    "hours_one": "{{count}} hour",
+    "hours_other": "{{count}} hours"
+  },
+  "avatars": {
+    "coral": "Coral",
+    "amber": "Amber",
+    "lime": "Lime",
+    "teal": "Teal",
+    "sky": "Sky blue",
+    "violet": "Violet",
+    "pink": "Pink",
+    "slate": "Slate"
+  },
+  "day": {
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "yesterday": "Yesterday"
+  },
+  "release": {
+    "cinemas": "In cinemas",
+    "digital": "Digital release",
+    "physical": "On disc",
+    "airs": "Airs"
+  },
+  "issue": {
+    "video": "Picture",
+    "audio": "Sound",
+    "subtitles": "Subtitles",
+    "wrong": "Wrong title",
+    "other": "Something else"
+  }
+}

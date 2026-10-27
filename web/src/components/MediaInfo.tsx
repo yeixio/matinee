@@ -1,8 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { FileVideo, RefreshCw, X } from 'lucide-react'
 import { useEffect, useState, type ReactNode } from 'react'
+import { useTranslation } from 'react-i18next'
 import { api, type ItemDetail, type User } from '../api'
 import { duration } from '../format'
+import { formatLocale } from '../i18n'
 import {
   audioLanguages,
   audioTitle,
@@ -13,6 +15,7 @@ import {
   languageName,
   qualityBadges,
   sizeLabel,
+  subtitleLabel,
 } from '../media'
 import { Button } from './ui'
 
@@ -36,6 +39,7 @@ export function QualityBadges({ item }: { item: ItemDetail }) {
 
 // Audio and subtitle languages, the other thing people check before pressing Play.
 export function Languages({ item }: { item: ItemDetail }) {
+  const { t } = useTranslation()
   const audio = item.mediaInfo ? audioLanguages(item.mediaInfo) : []
   const subs: string[] = []
   for (const s of item.subtitles ?? []) {
@@ -48,13 +52,13 @@ export function Languages({ item }: { item: ItemDetail }) {
     <dl className="flex flex-wrap gap-x-6 gap-y-1 text-sm">
       {audio.length > 0 && (
         <div className="flex gap-2">
-          <dt className="text-muted">Audio</dt>
+          <dt className="text-muted">{t('file.audio')}</dt>
           <dd title={audio.join(', ')}>{list(audio)}</dd>
         </div>
       )}
       {subs.length > 0 && (
         <div className="flex gap-2">
-          <dt className="text-muted">Subtitles</dt>
+          <dt className="text-muted">{t('file.subtitles')}</dt>
           <dd title={subs.join(', ')}>{list(subs)}</dd>
         </div>
       )}
@@ -63,12 +67,13 @@ export function Languages({ item }: { item: ItemDetail }) {
 }
 
 export function FileDetailsButton({ item, user }: { item: ItemDetail; user?: User }) {
+  const { t } = useTranslation()
   const [open, setOpen] = useState(false)
   if (!item.playable) return null
   return (
     <>
       <Button variant="ghost" icon={<FileVideo className="size-4" />} onClick={() => setOpen(true)}>
-        File details
+        {t('file.title')}
       </Button>
       {open && <FileDetails item={item} user={user} onClose={() => setOpen(false)} />}
     </>
@@ -76,6 +81,7 @@ export function FileDetailsButton({ item, user }: { item: ItemDetail; user?: Use
 }
 
 function FileDetails({ item, user, onClose }: { item: ItemDetail; user?: User; onClose: () => void }) {
+  const { t } = useTranslation()
   const qc = useQueryClient()
   const again = useMutation({
     mutationFn: () => api.reanalyze(item.id),
@@ -94,83 +100,84 @@ function FileDetails({ item, user, onClose }: { item: ItemDetail; user?: User; o
       <div
         role="dialog"
         aria-modal="true"
-        aria-label="File details"
+        aria-label={t('file.title')}
         onClick={(e) => e.stopPropagation()}
         className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-t-2xl border border-line/60 bg-surface p-5 shadow-2xl sm:rounded-2xl md:p-6"
       >
         <div className="mb-5 flex items-start justify-between gap-4">
           <div className="min-w-0">
-            <h2 className="text-lg font-semibold">File details</h2>
+            <h2 className="text-lg font-semibold">{t('file.title')}</h2>
             <p className="truncate text-sm text-muted" title={item.filePath}>
               {fileName ?? item.title}
             </p>
           </div>
-          <button onClick={onClose} aria-label="Close" className="text-muted hover:text-text">
+          <button onClick={onClose} aria-label={t('close')} className="text-muted hover:text-text">
             <X className="size-5" />
           </button>
         </div>
 
         {!mi ? (
-          <p className="text-sm text-muted">
-            Matinee hasn't looked at this file in detail yet. It reads every file slowly in the background, so this fills in
-            on its own.
-          </p>
+          <p className="text-sm text-muted">{t('file.notYet')}</p>
         ) : (
           <div className="space-y-6">
-            {mi.error && <p className="text-sm text-danger">Matinee couldn't read this file: {mi.error}</p>}
+            {mi.error && <p className="text-sm text-danger">{t('file.unreadable', { error: mi.error })}</p>}
             {item.mediaInfoStale && (
-              <p className="text-sm text-muted">The file changed since this was recorded; it will be looked at again soon.</p>
+              <p className="text-sm text-muted">{t('file.stale')}</p>
             )}
-            <Section title="File">
+            <Section title={t('file.file')}>
               <Facts
                 rows={[
-                  ['Location', user?.isAdmin ? item.filePath : undefined],
-                  ['Size', sizeLabel(mi.size || item.fileSize)],
-                  ['Format', containerName(mi.container)],
-                  ['Length', duration(mi.durationMs)],
-                  ['Bitrate', bitrateLabel(mi.bitrate)],
-                  ['Chapters', mi.chapters ? String(mi.chapters) : ''],
+                  [t('file.location'), user?.isAdmin ? item.filePath : undefined],
+                  [t('file.size'), sizeLabel(mi.size || item.fileSize)],
+                  [t('file.format'), containerName(mi.container)],
+                  [t('file.length'), duration(mi.durationMs)],
+                  [t('file.bitrate'), bitrateLabel(mi.bitrate)],
+                  [t('file.chapters'), mi.chapters ? String(mi.chapters) : ''],
                 ]}
               />
             </Section>
 
             {mi.video.map((v) => (
-              <Section key={`v${v.index}`} title={mi.video.length > 1 ? `Video ${v.index + 1}` : 'Video'}>
+              <Section key={`v${v.index}`} title={mi.video.length > 1 ? t('file.videoN', { n: v.index + 1 }) : t('file.video')}>
                 <Facts
                   rows={[
-                    ['Codec', [codecName(v.codec), v.profile].filter(Boolean).join(' · ')],
-                    ['Resolution', `${v.resolution} · ${v.width}×${v.height}`],
-                    ['Frame rate', v.frameRate ? `${v.frameRate} fps` : ''],
-                    ['Bit depth', v.bitDepth ? `${v.bitDepth}-bit` : ''],
+                    [t('file.codec'), [codecName(v.codec), v.profile].filter(Boolean).join(' · ')],
+                    [t('file.resolution'), `${v.resolution} · ${v.width}×${v.height}`],
+                    [t('file.frameRate'), v.frameRate ? t('file.fps', { rate: v.frameRate }) : ''],
+                    [t('file.bitDepth'), v.bitDepth ? t('common:media.bitDepth', { bits: v.bitDepth }) : ''],
                     [
-                      'Dynamic range',
+                      t('file.dynamicRange'),
                       v.hdr
-                        ? [hdrLabel[v.hdr], v.dvProfile ? `profile ${v.dvProfile}${v.dvLevel ? `, level ${v.dvLevel}` : ''}` : '', v.hdrBase ? `${hdrLabel[v.hdrBase]} fallback` : '']
+                        ? [
+                            hdrLabel[v.hdr],
+                            v.dvProfile ? (v.dvLevel ? t('file.dvProfileLevel', { profile: v.dvProfile, level: v.dvLevel }) : t('file.dvProfile', { profile: v.dvProfile })) : '',
+                            v.hdrBase ? t('file.fallback', { format: hdrLabel[v.hdrBase] }) : '',
+                          ]
                             .filter(Boolean)
                             .join(' · ')
                         : 'SDR',
                     ],
-                    ['Color', [v.colorPrimaries, v.colorTransfer, v.pixFmt].filter(Boolean).join(' · ')],
-                    ['Bitrate', bitrateLabel(v.bitrate)],
+                    [t('file.color'), [v.colorPrimaries, v.colorTransfer, v.pixFmt].filter(Boolean).join(' · ')],
+                    [t('file.bitrate'), bitrateLabel(v.bitrate)],
                   ]}
                 />
               </Section>
             ))}
 
             {mi.audio.length > 0 && (
-              <Section title={`Audio · ${mi.audio.length}`}>
+              <Section title={`${t('file.audio')} · ${mi.audio.length}`}>
                 <Tracks
                   rows={mi.audio.map((a) => ({
                     key: a.index,
-                    name: [languageName(a.language) || `Track ${a.index + 1}`, a.title && a.title !== languageName(a.language) ? a.title : '']
+                    name: [languageName(a.language) || t('file.trackN', { n: a.index + 1 }), a.title && a.title !== languageName(a.language) ? a.title : '']
                       .filter(Boolean)
                       .join(' · '),
                     detail: [audioTitle(a), bitrateLabel(a.bitrate)].filter(Boolean).join(' · '),
                     flags: [
-                      a.default && 'Default',
-                      a.forced && 'Forced',
-                      a.commentary && 'Commentary',
-                      a.descriptive && 'Audio description',
+                      a.default && t('file.default'),
+                      a.forced && t('file.forced'),
+                      a.commentary && t('file.commentary'),
+                      a.descriptive && t('file.audioDescription'),
                     ],
                   }))}
                 />
@@ -178,30 +185,30 @@ function FileDetails({ item, user, onClose }: { item: ItemDetail; user?: User; o
             )}
 
             {(item.subtitles?.length ?? 0) > 0 && (
-              <Section title={`Subtitles · ${item.subtitles!.length}`}>
+              <Section title={`${t('file.subtitles')} · ${item.subtitles!.length}`}>
                 <Tracks
                   rows={item.subtitles!.map((s, i) => ({
                     key: i,
-                    name: s.label,
-                    detail: [codecName(s.codec), s.external ? 'Separate file' : 'In the file'].join(' · '),
-                    flags: [s.default && 'Default', s.forced && 'Forced', s.sdh && 'SDH'],
+                    name: subtitleLabel(s),
+                    detail: [codecName(s.codec), s.external ? t('file.separateFile') : t('file.inFile')].join(' · '),
+                    flags: [s.default && t('file.default'), s.forced && t('file.forced'), s.sdh && t('file.sdh')],
                   }))}
                 />
               </Section>
             )}
 
             <p className="text-xs text-faint">
-              Recorded {new Date(mi.analyzedAt * 1000).toLocaleString()}
+              {t('file.recorded', { when: new Date(mi.analyzedAt * 1000).toLocaleString(formatLocale()) })}
             </p>
           </div>
         )}
 
         {user?.isAdmin && (
           <div className="mt-5 flex items-center justify-end gap-3">
-            {again.isSuccess && <span className="text-sm text-muted">Queued; it's looked at next.</span>}
+            {again.isSuccess && <span className="text-sm text-muted">{t('file.queued')}</span>}
             {again.error && <span className="text-sm text-danger">{again.error.message}</span>}
             <Button variant="ghost" icon={<RefreshCw className="size-4" />} disabled={again.isPending || again.isSuccess} onClick={() => again.mutate()}>
-              Analyze again
+              {t('file.analyzeAgain')}
             </Button>
           </div>
         )}

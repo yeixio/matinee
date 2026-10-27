@@ -1,6 +1,7 @@
 import type Hls from 'hls.js'
 import { Pause, Play, SkipBack, SkipForward, X } from 'lucide-react'
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { api, fileUrl, type Item } from '../api'
 import { Artwork } from '../components/Artwork'
@@ -113,6 +114,7 @@ export function AudioProvider({ children }: { children: ReactNode }) {
 }
 
 function NowPlaying({ audio, state }: { audio: React.RefObject<HTMLAudioElement | null>; state: AudioState }) {
+  const { t } = useTranslation()
   const [time, setTime] = useState(0)
   const [dur, setDur] = useState(0)
   useEffect(() => {
@@ -135,7 +137,7 @@ function NowPlaying({ audio, state }: { audio: React.RefObject<HTMLAudioElement 
   }
   return (
     <div
-      className="fixed inset-x-0 bottom-[calc(57px+env(safe-area-inset-bottom))] z-30 border-t border-line/60 bg-surface/95 backdrop-blur md:bottom-0 md:left-60"
+      className="fixed inset-x-0 bottom-[calc(57px+env(safe-area-inset-bottom))] z-30 border-t border-line/60 bg-surface/95 backdrop-blur md:bottom-0 md:start-60"
     >
       <input
         type="range"
@@ -144,7 +146,7 @@ function NowPlaying({ audio, state }: { audio: React.RefObject<HTMLAudioElement 
         step={0.1}
         value={time}
         onChange={seek}
-        aria-label="Seek"
+        aria-label={t('player.seek')}
         className="absolute inset-x-0 -top-1.5 h-3 w-full cursor-pointer appearance-none bg-transparent accent-accent"
         style={{ background: `linear-gradient(to right, var(--color-accent) ${dur ? (time / dur) * 100 : 0}%, transparent 0) center / 100% 3px no-repeat` }}
       />
@@ -159,13 +161,13 @@ function NowPlaying({ audio, state }: { audio: React.RefObject<HTMLAudioElement 
           </div>
         </div>
         <div className="flex items-center gap-1">
-          <button onClick={state.prev} className="rounded-full p-2 text-muted hover:text-text" aria-label="Previous">
+          <button onClick={state.prev} className="rounded-full p-2 text-muted hover:text-text" aria-label={t('player.previous')}>
             <SkipBack className="size-5 fill-current" />
           </button>
           <button
             onClick={state.toggle}
             className="grid size-11 place-items-center rounded-full bg-text text-ink hover:scale-105"
-            aria-label={state.playing ? 'Pause' : 'Play'}
+            aria-label={state.playing ? t('player.pause') : t('item.play')}
           >
             {state.playing ? <Pause className="size-5 fill-current" /> : <Play className="size-5 translate-x-0.5 fill-current" />}
           </button>
@@ -173,11 +175,11 @@ function NowPlaying({ audio, state }: { audio: React.RefObject<HTMLAudioElement 
             onClick={state.next}
             disabled={state.index >= state.queue.length - 1}
             className="rounded-full p-2 text-muted hover:text-text disabled:opacity-30"
-            aria-label="Next"
+            aria-label={t('player.next')}
           >
             <SkipForward className="size-5 fill-current" />
           </button>
-          <button onClick={state.stop} className="ml-1 hidden rounded-full p-2 text-faint hover:text-text md:block" aria-label="Close player">
+          <button onClick={state.stop} className="ms-1 hidden rounded-full p-2 text-faint hover:text-text md:block" aria-label={t('player.closePlayer')}>
             <X className="size-5" />
           </button>
         </div>

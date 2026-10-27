@@ -1,6 +1,8 @@
 import { Captions, Check } from 'lucide-react'
 import { Fragment, useEffect, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import type { SubtitleTrack } from '../api'
+import { subtitleLabel } from '../media'
 import { activeCues, spans, type Cue } from './vtt'
 
 const prefKey = 'matinee.subtitles'
@@ -64,6 +66,7 @@ export function SubtitleOverlay({ cues, position, lifted }: { cues: Cue[]; posit
       {shown.map((cue, i) => (
         <div
           key={`${cue.start}-${i}`}
+          dir="auto"
           className="rounded bg-black/55 px-[0.4em] py-[0.1em] leading-snug font-medium whitespace-pre-line text-white [text-shadow:0_1px_3px_rgb(0_0_0/0.9)]"
           style={{ fontSize: 'clamp(1rem, 2.4vw + 0.35rem, 2.75rem)' }}
         >
@@ -91,6 +94,7 @@ type MenuProps = {
 
 // SubtitleMenu is the captions button and its list of tracks.
 export function SubtitleMenu({ tracks, selected, onSelect, onOpenChange }: MenuProps) {
+  const { t: tr } = useTranslation()
   const [open, setOpen] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
   const toggle = (v: boolean) => {
@@ -115,7 +119,7 @@ export function SubtitleMenu({ tracks, selected, onSelect, onOpenChange }: MenuP
         role="menuitemradio"
         aria-checked={active}
         onClick={() => choose(t)}
-        className="flex w-full items-center gap-3 rounded-md px-3 py-2 text-left text-sm hover:bg-white/10"
+        className="flex w-full items-center gap-3 rounded-md px-3 py-2 text-start text-sm hover:bg-white/10"
       >
         <Check className={`size-4 shrink-0 ${active ? 'text-accent' : 'invisible'}`} />
         <span className="min-w-0 flex-1 truncate">{label}</span>
@@ -129,18 +133,20 @@ export function SubtitleMenu({ tracks, selected, onSelect, onOpenChange }: MenuP
       <button
         onClick={() => toggle(!open)}
         className={`rounded-full p-2 hover:bg-white/10 ${selected ? 'text-accent' : ''}`}
-        aria-label="Subtitles"
+        aria-label={tr('file.subtitles')}
         aria-haspopup="menu"
         aria-expanded={open}
       >
         <Captions className="size-6" />
       </button>
       {open && (
-        <div className="absolute right-0 bottom-full mb-2 w-64 rounded-xl border border-white/10 bg-black/90 p-1.5 shadow-2xl backdrop-blur">
-          <div className="px-3 pt-1.5 pb-1 text-xs font-medium tracking-wide text-white/50 uppercase">Subtitles</div>
+        <div className="absolute end-0 bottom-full mb-2 w-64 rounded-xl border border-white/10 bg-black/90 p-1.5 shadow-2xl backdrop-blur">
+          <div className="px-3 pt-1.5 pb-1 text-xs font-medium tracking-wide text-white/50 uppercase">{tr('file.subtitles')}</div>
           <ul role="menu" className="max-h-72 overflow-y-auto">
-            {item('off', 'Off', !selected, undefined)}
-            {tracks.map((t) => item(t.id, t.label, t.id === selected, t, t.burnIn ? 'Converts video' : t.external ? 'File' : undefined))}
+            {item('off', tr('player.off'), !selected, undefined)}
+            {tracks.map((t) =>
+              item(t.id, subtitleLabel(t), t.id === selected, t, t.burnIn ? tr('player.convertsVideo') : t.external ? tr('player.file') : undefined),
+            )}
           </ul>
         </div>
       )}

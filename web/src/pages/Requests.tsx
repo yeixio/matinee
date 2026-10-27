@@ -1,17 +1,20 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Check, Clock, RefreshCw, Search as SearchIcon, Trash2, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link, useSearchParams } from 'react-router-dom'
 import { api, type Issue, type Title, type TitleKind, type TitleRequest, type User } from '../api'
-import { issueKinds, RemotePoster, useRequestOptions } from '../components/Arr'
+import { issueKindLabel, RemotePoster, useRequestOptions } from '../components/Arr'
 import { Button, EmptyState, Spinner } from '../components/ui'
 import { episodeCode } from '../format'
+import i18n, { formatLocale } from '../i18n'
 
 type Tab = 'ask' | 'requests' | 'problems'
 
 // Asking for movies and shows, the requests made, and problems reported.
 // Admins see everyone's and act on them here.
 export default function Requests() {
+  const { t } = useTranslation()
   const { data: me } = useQuery<User>({
     queryKey: ['me'],
     queryFn: api.me,
@@ -27,38 +30,38 @@ export default function Requests() {
     )
   }
   const tabs: { id: Tab; label: string; count?: number }[] = [
-    ...(opts.canRequest ? [{ id: 'ask' as Tab, label: 'Ask for something' }] : []),
+    ...(opts.canRequest ? [{ id: 'ask' as Tab, label: t('requests.tab.ask') }] : []),
     {
       id: 'requests',
-      label: me.isAdmin ? 'Requests' : 'Your requests',
+      label: me.isAdmin ? t('requests.tab.requests') : t('requests.tab.yourRequests'),
       count: opts.pendingRequests,
     },
     {
       id: 'problems',
-      label: me.isAdmin ? 'Problems' : 'Your reports',
+      label: me.isAdmin ? t('requests.tab.problems') : t('requests.tab.yourReports'),
       count: opts.openIssues,
     },
   ]
-  const tab = tabs.find((t) => t.id === params.get('tab'))?.id ?? tabs[0].id
+  const tab = tabs.find((x) => x.id === params.get('tab'))?.id ?? tabs[0].id
 
   return (
     <div className="max-w-5xl space-y-6">
-      <h1 className="text-2xl font-bold tracking-tight">Requests</h1>
+      <h1 className="text-2xl font-bold tracking-tight">{t('nav.requests')}</h1>
       <nav className="flex gap-1 overflow-x-auto border-b border-line/60">
-        {tabs.map((t) => (
+        {tabs.map((x) => (
           <button
-            key={t.id}
+            key={x.id}
             onClick={() =>
-              setParams(t.id === tabs[0].id ? {} : { tab: t.id }, {
+              setParams(x.id === tabs[0].id ? {} : { tab: x.id }, {
                 replace: true,
               })
             }
             className={`-mb-px flex items-center gap-2 border-b-2 px-3 py-2 text-sm whitespace-nowrap transition-colors ${
-              tab === t.id ? 'border-accent text-text' : 'border-transparent text-muted hover:text-text'
+              tab === x.id ? 'border-accent text-text' : 'border-transparent text-muted hover:text-text'
             }`}
           >
-            {t.label}
-            {!!t.count && <span className="rounded-full bg-accent px-1.5 text-xs font-semibold text-on-accent">{t.count}</span>}
+            {x.label}
+            {!!x.count && <span className="rounded-full bg-accent px-1.5 text-xs font-semibold text-on-accent">{x.count}</span>}
           </button>
         ))}
       </nav>
@@ -70,6 +73,7 @@ export default function Requests() {
 }
 
 function Ask() {
+  const { t } = useTranslation()
   const qc = useQueryClient()
   const { data: opts } = useRequestOptions()
   const [params, setParams] = useSearchParams()
@@ -83,11 +87,11 @@ function Ask() {
 
   // Searching goes out to the internet through Radarr or Sonarr, so wait for a pause in typing.
   useEffect(() => {
-    const t = window.setTimeout(() => {
+    const timer = window.setTimeout(() => {
       setQ(text.trim())
       setParams(text.trim() ? { q: text.trim(), kind } : {}, { replace: true })
     }, 400)
-    return () => window.clearTimeout(t)
+    return () => window.clearTimeout(timer)
   }, [text, kind, setParams])
 
   const { data, isFetching, error } = useQuery({
@@ -98,7 +102,7 @@ function Ask() {
     staleTime: 60_000,
   })
   const ask = useMutation({
-    mutationFn: (t: Title) => api.createRequest(t, profile),
+    mutationFn: (title: Title) => api.createRequest(title, profile),
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ['titleSearch'] })
       qc.invalidateQueries({ queryKey: ['requests'] })
@@ -122,25 +126,25 @@ function Ask() {
                 }}
                 className={`rounded-md px-3 py-1.5 text-sm ${kind === k ? 'bg-text font-medium text-ink' : 'text-muted hover:text-text'}`}
               >
-                {k === 'movie' ? 'Movies' : 'Shows'}
+                {k === 'movie' ? t('requests.movies') : t('requests.shows')}
               </button>
             ))}
           </div>
         )}
         <div className="relative flex-1">
-          <SearchIcon className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-faint" />
+          <SearchIcon className="absolute top-1/2 start-3 size-4 -translate-y-1/2 text-faint" />
           <input
             autoFocus
             value={text}
             onChange={(e) => setText(e.target.value)}
-            placeholder={kind === 'movie' ? 'Find a movie…' : 'Find a show…'}
-            className="h-11 w-full rounded-lg border border-line bg-surface pr-4 pl-10 text-sm placeholder:text-faint focus:border-accent focus:outline-none"
+            placeholder={kind === 'movie' ? t('requests.findMovie') : t('requests.findShow')}
+            className="h-11 w-full rounded-lg border border-line bg-surface ps-10 pe-4 text-sm placeholder:text-faint focus:border-accent focus:outline-none"
           />
-          {isFetching && <div className="absolute top-1/2 right-3 size-2 -translate-y-1/2 animate-pulse rounded-full bg-accent" />}
+          {isFetching && <div className="absolute top-1/2 end-3 size-2 -translate-y-1/2 animate-pulse rounded-full bg-accent" />}
         </div>
         {profiles.length > 1 && (
           <label className="flex shrink-0 items-center gap-2 text-sm text-muted">
-            Quality
+            {t('quality.label')}
             <select
               className="h-11 rounded-lg border border-line bg-surface px-2 text-sm text-text focus:border-accent focus:outline-none"
               value={profile ?? defaultProfile ?? ''}
@@ -157,33 +161,33 @@ function Ask() {
       </div>
       {error && <p className="text-sm text-danger">{error.message}</p>}
       {ask.error && <p className="text-sm text-danger">{ask.error.message}</p>}
-      {q.length > 1 && data && data.length === 0 && <EmptyState title={`Nothing found for "${q}"`} />}
+      {q.length > 1 && data && data.length === 0 && <EmptyState title={t('requests.nothingFound', { q })} />}
       <div className="grid gap-x-4 gap-y-6" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))' }}>
-        {data?.map((t) => (
-          <div key={`${t.tmdbId}-${t.tvdbId}`} className="animate-fade">
-            <RemotePoster src={t.poster} title={t.title} className="rounded-xl ring-1 ring-text/5" />
+        {data?.map((title) => (
+          <div key={`${title.tmdbId}-${title.tvdbId}`} className="animate-fade">
+            <RemotePoster src={title.poster} title={title.title} className="rounded-xl ring-1 ring-text/5" />
             <div className="mt-2 px-0.5">
-              <div className="truncate text-sm font-medium" title={t.title}>
-                {t.title}
+              <div className="truncate text-sm font-medium" title={title.title}>
+                {title.title}
               </div>
-              <div className="text-xs text-muted">{t.year || ''}</div>
+              <div className="text-xs text-muted">{title.year || ''}</div>
               <div className="mt-2">
-                {t.status === 'available' ? (
-                  <Link to={`/item/${t.itemId}`} className="flex h-9 items-center gap-1.5 text-sm text-accent">
-                    <Check className="size-4" /> Ready to watch
+                {title.status === 'available' ? (
+                  <Link to={`/item/${title.itemId}`} className="flex h-9 items-center gap-1.5 text-sm text-accent">
+                    <Check className="size-4" /> {t('requests.ready')}
                   </Link>
-                ) : t.status ? (
+                ) : title.status ? (
                   <span className="flex h-9 items-center gap-1.5 text-sm text-muted">
-                    <Clock className="size-4" /> {t.status === 'requested' ? 'Asked for' : 'On its way'}
+                    <Clock className="size-4" /> {title.status === 'requested' ? t('requests.askedFor') : t('requests.onItsWay')}
                   </span>
                 ) : (
                   <Button
                     variant="secondary"
                     className="h-9 w-full"
-                    disabled={ask.isPending && ask.variables === t}
-                    onClick={() => ask.mutate(t)}
+                    disabled={ask.isPending && ask.variables === title}
+                    onClick={() => ask.mutate(title)}
                   >
-                    {opts?.autoApprove ? 'Add' : 'Ask for it'}
+                    {opts?.autoApprove ? t('requests.add') : t('requests.askForIt')}
                   </Button>
                 )}
               </div>
@@ -195,21 +199,17 @@ function Ask() {
   )
 }
 
-const stateLabel: Record<TitleRequest['state'], string> = {
-  pending: 'Waiting for approval',
-  approved: 'On its way',
-  declined: 'Declined',
-  failed: "Couldn't add",
-}
+const stateLabel = (state: TitleRequest['state']) => i18n.t(`requests.state.${state}`)
 
 function ago(unix: number) {
-  return new Date(unix * 1000).toLocaleDateString(undefined, {
+  return new Date(unix * 1000).toLocaleDateString(formatLocale(), {
     day: 'numeric',
     month: 'short',
   })
 }
 
 function RequestList({ admin }: { admin: boolean }) {
+  const { t } = useTranslation()
   const qc = useQueryClient()
   const { data, isPending } = useQuery({
     queryKey: ['requests', admin],
@@ -235,7 +235,7 @@ function RequestList({ admin }: { admin: boolean }) {
   const busy = approve.isPending || decline.isPending || remove.isPending
 
   if (isPending) return <Spinner />
-  if (!data?.length) return <p className="text-muted">No requests yet.</p>
+  if (!data?.length) return <p className="text-muted">{t('requests.none')}</p>
   return (
     <div className="divide-y divide-line/60 rounded-xl border border-line/60 bg-surface/50">
       {(approve.error || decline.error || remove.error) && (
@@ -257,7 +257,7 @@ function RequestList({ admin }: { admin: boolean }) {
             </div>
             <div className="truncate text-xs text-muted">
               <span className={r.state === 'failed' ? 'text-danger' : r.itemId ? 'text-accent' : ''}>
-                {r.itemId ? 'Ready to watch' : stateLabel[r.state]}
+                {r.itemId ? t('requests.ready') : stateLabel(r.state)}
               </span>
               {admin && ` · ${r.username}`} · {ago(r.createdAt)}
             </div>
@@ -267,7 +267,7 @@ function RequestList({ admin }: { admin: boolean }) {
               </div>
             )}
           </div>
-          <div className="ml-auto flex gap-1">
+          <div className="ms-auto flex gap-1">
             {admin && (r.state === 'pending' || r.state === 'failed') && (
               <Button
                 variant="primary"
@@ -276,12 +276,12 @@ function RequestList({ admin }: { admin: boolean }) {
                 icon={r.state === 'failed' ? <RefreshCw className="size-4" /> : <Check className="size-4" />}
                 onClick={() => approve.mutate(r.id)}
               >
-                {r.state === 'failed' ? 'Retry' : 'Approve'}
+                {r.state === 'failed' ? t('requests.retry') : t('requests.approve')}
               </Button>
             )}
             {admin && r.state === 'pending' && (
               <Button variant="ghost" className="h-9" disabled={busy} icon={<X className="size-4" />} onClick={() => decline.mutate(r.id)}>
-                Decline
+                {t('link.decline')}
               </Button>
             )}
             {r.state !== 'pending' || !admin ? (
@@ -290,7 +290,7 @@ function RequestList({ admin }: { admin: boolean }) {
                 className="h-9"
                 disabled={busy}
                 icon={<Trash2 className="size-4" />}
-                aria-label={`Remove the request for ${r.title}`}
+                aria-label={t('requests.remove', { title: r.title })}
                 onClick={() => remove.mutate(r.id)}
               />
             ) : null}
@@ -303,12 +303,13 @@ function RequestList({ admin }: { admin: boolean }) {
 
 function issueTitle(x: Issue) {
   const it = x.item
-  if (!it) return 'Removed from the library'
+  if (!it) return i18n.t('requests.removedFromLibrary')
   if (it.kind === 'episode' && it.showTitle) return `${it.showTitle} · ${episodeCode(it.seasonIndex, it.index)}`
   return it.title
 }
 
 function Problems({ admin }: { admin: boolean }) {
+  const { t } = useTranslation()
   const qc = useQueryClient()
   const { data, isPending } = useQuery({
     queryKey: ['issues', admin],
@@ -332,7 +333,7 @@ function Problems({ admin }: { admin: boolean }) {
   if (!data?.length) {
     return (
       <p className="text-muted">
-        {admin ? 'Nobody has reported a problem.' : 'You haven’t reported any problems. Use “Report a problem” on a title.'}
+        {admin ? t('requests.noProblems') : t('requests.noReports')}
       </p>
     )
   }
@@ -352,9 +353,9 @@ function Problems({ admin }: { admin: boolean }) {
               )}
             </div>
             <div className="text-xs text-muted">
-              {issueKinds.find((k) => k.value === x.kind)?.label ?? x.kind}
+              {issueKindLabel(x.kind)}
               {admin && ` · ${x.username}`} · {ago(x.createdAt)}
-              {x.resolved && ` · ${x.resolution === 'replaced' ? 'File replaced' : 'Closed'}`}
+              {x.resolved && ` · ${x.resolution === 'replaced' ? t('requests.fileReplaced') : t('requests.closed')}`}
             </div>
             {x.note && <p className="mt-1 text-sm text-text/85">{x.note}</p>}
           </div>
@@ -365,16 +366,14 @@ function Problems({ admin }: { admin: boolean }) {
                   disabled={busy}
                   icon={<RefreshCw className="size-4" />}
                   onClick={() =>
-                    confirm(
-                      `Delete this file of ${issueTitle(x)} and download another copy? The new one shows up after it downloads and the library is scanned.`,
-                    ) && replace.mutate(x.id)
+                    confirm(t('requests.confirmReplace', { title: issueTitle(x) })) && replace.mutate(x.id)
                   }
                 >
-                  Replace file
+                  {t('requests.replaceFile')}
                 </Button>
               )}
               <Button variant="ghost" disabled={busy} onClick={() => resolve.mutate(x.id)}>
-                Close
+                {t('requests.close')}
               </Button>
             </div>
           )}

@@ -1,4 +1,5 @@
 import { Play, X } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import type { Item } from '../api'
 import { Artwork } from '../components/Artwork'
 import { episodeCode } from '../format'
@@ -24,14 +25,15 @@ export function UpNextCard({
   onCancel: () => void
   lifted: boolean // the player's controls are showing
 }) {
-  const heading = { countdown: 'Up next', still: 'Still watching?', similar: 'You might like' }[mode]
+  const { t } = useTranslation()
+  const heading = { countdown: t('upNext.upNext'), still: t('upNext.stillWatching'), similar: t('upNext.youMightLike') }[mode]
   const sub = item.kind === 'episode' ? `${episodeCode(item.seasonIndex, item.index)} · ${item.title}` : item.year ? String(item.year) : ''
   const title = item.kind === 'episode' ? item.showTitle || item.title : item.title
   return (
     <div
       role="dialog"
       aria-label={heading}
-      className={`absolute right-4 z-10 w-[min(20rem,calc(100%-2rem))] overflow-hidden rounded-xl bg-black/85 shadow-2xl ring-1 ring-white/10 backdrop-blur transition-[bottom] duration-300 md:right-8 ${
+      className={`absolute end-4 z-10 w-[min(20rem,calc(100%-2rem))] overflow-hidden rounded-xl bg-black/85 shadow-2xl ring-1 ring-white/10 backdrop-blur transition-[bottom] duration-300 md:end-8 ${
         lifted ? 'bottom-32' : 'bottom-8'
       }`}
       onClick={(e) => e.stopPropagation()}
@@ -62,7 +64,7 @@ export function UpNextCard({
           )}
           {mode === 'countdown' && (
             <div className="mt-1 text-sm text-white/60 tabular-nums" aria-live="polite">
-              Playing in {left}
+              {t('upNext.playingIn', { seconds: left })}
             </div>
           )}
         </div>
@@ -73,14 +75,14 @@ export function UpNextCard({
             className="inline-flex h-10 flex-1 items-center justify-center gap-2 rounded-lg bg-accent px-4 text-sm font-semibold text-on-accent hover:bg-accent-strong"
           >
             <Play className="size-4 fill-current" />
-            {{ countdown: 'Play now', still: 'Keep watching', similar: 'Have a look' }[mode]}
+            {{ countdown: t('upNext.playNow'), still: t('upNext.keepWatching'), similar: t('upNext.haveALook') }[mode]}
           </button>
           <button
             onClick={onCancel}
             className="inline-flex h-10 items-center justify-center gap-2 rounded-lg bg-white/10 px-4 text-sm hover:bg-white/15"
           >
             {mode === 'similar' ? <X className="size-4" /> : null}
-            {mode === 'similar' ? 'Close' : mode === 'still' ? 'Stop' : 'Cancel'}
+            {mode === 'similar' ? t('close') : mode === 'still' ? t('upNext.stop') : t('cancel')}
           </button>
         </div>
       </div>
