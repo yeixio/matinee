@@ -352,6 +352,8 @@ func (s *Server) deleteIntegration(w http.ResponseWriter, r *http.Request) {
 type requestOptions struct {
 	Movies bool `json:"movies"` // Radarr is connected
 	Shows  bool `json:"shows"`  // Sonarr is connected
+	// Discover says Overseerr is connected, for the Discover tab (see discover.go).
+	Discover bool `json:"discover"`
 	// CanRequest says this account may ask for titles, and AutoApprove that
 	// what it asks for is added without waiting for an admin.
 	CanRequest  bool `json:"canRequest"`
@@ -386,6 +388,12 @@ func (s *Server) getRequestOptions(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	out := requestOptions{Movies: conn[arr.Radarr], Shows: conn[arr.Sonarr], CanReport: !u.Guest}
+	oc, err := s.overseerrConfig(ctx)
+	if err != nil {
+		s.serverError(w, err)
+		return
+	}
+	out.Discover = oc.URL != ""
 	can, auto, err := s.canRequest(ctx, u)
 	if err != nil {
 		s.serverError(w, err)
