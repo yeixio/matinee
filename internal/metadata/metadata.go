@@ -7,6 +7,8 @@ import (
 	"context"
 	"log/slog"
 	"slices"
+	"sync"
+	"sync/atomic"
 
 	"github.com/yeixio/matinee/internal/store"
 )
@@ -44,6 +46,9 @@ type Fetcher struct {
 	// Awards looks up titles' awards, if set.
 	Awards AwardSource
 	Log    *slog.Logger
+
+	translating      sync.Mutex  // one TranslateAll at a time
+	translatePending atomic.Bool // TranslateAll was asked to run (again)
 }
 
 // Kinds lists every item kind some provider looks up.
@@ -103,6 +108,7 @@ func (f *Fetcher) FetchLibrary(ctx context.Context, lib store.Library) {
 	}
 	f.fetchGenres(ctx, lib)
 	f.FetchDetails(ctx, lib)
+	f.FetchTranslations(ctx, lib)
 }
 
 // fetchGenres fills in genres for movies and shows matched before Matinee
