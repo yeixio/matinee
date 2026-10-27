@@ -9,7 +9,7 @@ import { existsSync, mkdirSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { chromium } from 'playwright'
 import { backdrop, cover, portrait, poster } from './art.mjs'
-import { albums, movies, people, shows } from './catalog.mjs'
+import { albums, discover, movies, people, shows } from './catalog.mjs'
 
 const ff = (...args) => execFileSync('ffmpeg', ['-v', 'error', '-y', ...args])
 
@@ -87,6 +87,10 @@ export async function makeLibrary(root) {
       art(`poster-${s.id}-s${si + 1}.jpg`, poster(s.scene ?? s.id, s.title, true, undefined, `Season ${si + 1}`, (s.hue ?? 0) + si * 40), 780, 1170)
       eps.forEach((_, ei) => art(`still-${s.id}-${si + 1}-${ei + 1}.jpg`, backdrop(s.scene ?? s.id, false, undefined, (s.hue ?? 0) + si * 40 + ei * 25), 1280, 720))
     })
+  }
+  for (const t of discover) {
+    art(`poster-${t.id}.jpg`, poster(t.scene, t.title, true, undefined, '', t.hue), 780, 1170)
+    art(`backdrop-${t.id}.jpg`, backdrop(t.scene, true, undefined, t.hue), 1920, 1080)
   }
   for (const p of people) art(`person-${p.id}.jpg`, portrait(p.id), 632, 632)
   albums.forEach((a, i) => {

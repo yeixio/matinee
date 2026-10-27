@@ -263,7 +263,9 @@ type result struct {
 	} `json:"mediaInfo"`
 }
 
-const imageBase = "https://image.tmdb.org/t/p/"
+// A variable so the docs' screenshot server can point a build at a
+// stand-in (go build -ldflags "-X ...").
+var imageBase = "https://image.tmdb.org/t/p/"
 
 func image(size, path string) string {
 	if path == "" {

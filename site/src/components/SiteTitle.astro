@@ -34,9 +34,12 @@ const base = import.meta.env.BASE_URL
     })
     .catch(() => {})
   select.addEventListener('change', () => {
-    // Keep the reader on the same page in the other version.
-    const page = location.pathname.slice(base.length)
-    location.href = select.value + page
+    // Keep the reader on the same page in the other version, or its
+    // guide's first page when that version doesn't have this one.
+    const page = select.value + location.pathname.slice(base.length)
+    fetch(page, { method: 'HEAD' })
+      .then((r) => (location.href = r.ok ? page : select.value + 'docs/'))
+      .catch(() => (location.href = page))
   })
 </script>
 

@@ -17,9 +17,21 @@ const note =
 {
   note ? (
     <div class="sl-banner" data-pagefind-ignore>
-      {note} <a href={`/${page}`}>Read the guide for the latest release{latest ? ` (${latest})` : ''}</a>.
+      {note} <a href={`/${page}`} data-fallback="/docs/">Read the guide for the latest release{latest ? ` (${latest})` : ''}</a>.
     </div>
   ) : (
     <Default />
   )
 }
+
+<script>
+  // This page may be newer than the latest release; then go to its guide's start.
+  for (const a of document.querySelectorAll<HTMLAnchorElement>('a[data-fallback]')) {
+    a.addEventListener('click', (e) => {
+      e.preventDefault()
+      fetch(a.href, { method: 'HEAD' })
+        .then((r) => (location.href = r.ok ? a.href : a.dataset.fallback!))
+        .catch(() => (location.href = a.href))
+    })
+  }
+</script>

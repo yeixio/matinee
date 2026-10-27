@@ -194,3 +194,34 @@ export const keywords = [
   { id: 2, name: 'island' },
   { id: 3, name: 'broadcast' },
 ]
+
+// Titles the demo library doesn't have, for the Discover tab (fake-overseerr.mjs).
+// list: which of Overseerr's lists each is on; status: Overseerr's media
+// status (2 asked for, 3 on its way).
+export const discover = [
+  { id: 301, kind: 'movie', title: 'The Cartographer\'s Daughter', date: '2025-09-12', vote: 7.9, scene: 107, hue: 30, lists: ['trending', 'popular-movies'], overview: 'A mapmaker\'s daughter finds an island on her father\'s last map that no ship has ever reached.' },
+  { id: 302, kind: 'tv', title: 'Night Shift at the Planetarium', date: '2025-02-03', vote: 8.2, scene: 105, hue: 200, lists: ['trending', 'popular-shows'], seasons: 2, overview: 'The staff of a city planetarium keep the stars running after closing time, and the stars keep them company.' },
+  { id: 303, kind: 'movie', title: 'Under the Pier', date: '2024-07-19', vote: 7.1, scene: 102, hue: 300, lists: ['trending', 'popular-movies'], status: 2, overview: 'Three cousins spend a summer looking for the treasure their grandmother swore she buried under the old pier.' },
+  { id: 304, kind: 'movie', title: 'Copper Sky', date: '2025-05-30', vote: 7.6, scene: 108, hue: 60, lists: ['trending', 'popular-movies'], overview: 'In a desert town that runs on one radio station, the night DJ starts taking requests from someone who isn\'t there.' },
+  { id: 305, kind: 'tv', title: 'The Lamplighters', date: '2024-10-11', vote: 8.0, scene: 116, hue: 250, lists: ['trending', 'popular-shows'], seasons: 3, overview: 'In the last city still lit by gas, a guild of lamplighters guards a secret older than electricity.' },
+  { id: 306, kind: 'movie', title: 'Winter Orchard', date: '2023-12-08', vote: 7.4, scene: 109, hue: 160, lists: ['popular-movies'], overview: 'A family gathers at the apple farm for one last harvest before it\'s sold.' },
+  { id: 307, kind: 'movie', title: 'Second Projector', date: '2025-01-24', vote: 6.9, scene: 104, hue: 90, lists: ['popular-movies', 'trending'], status: 3, overview: 'A small-town cinema gets a projector from a closed movie palace, and every film it shows ends differently.' },
+  { id: 308, kind: 'tv', title: 'Lighthouse Kitchen', date: '2023-04-17', vote: 7.7, scene: 101, hue: 330, lists: ['popular-shows'], seasons: 4, overview: 'A chef takes over the restaurant at the end of the world\'s longest pier.' },
+  { id: 309, kind: 'tv', title: 'Orbit Academy', date: '2024-09-02', vote: 7.5, scene: 106, hue: 40, lists: ['popular-shows', 'trending'], seasons: 2, overview: 'The first class of a school on a space station learns that homework is harder in zero gravity.' },
+  { id: 310, kind: 'movie', title: 'The Tidewater Waltz', date: '2026-12-18', vote: 0, scene: 111, hue: 200, lists: ['upcoming-movies'], overview: 'Two rival dance-hall owners on a flooded boardwalk agree to one last dance-off.' },
+  { id: 311, kind: 'movie', title: 'Lantern Season', date: '2026-11-26', vote: 0, scene: 116, hue: 20, lists: ['upcoming-movies', 'trending'], overview: 'A girl who builds paper lanterns sets one free on the wrong night and has to bring it back.' },
+  { id: 312, kind: 'movie', title: 'Quiet Signals', date: '2027-02-12', vote: 0, scene: 202, hue: 120, lists: ['upcoming-movies'], overview: 'A radio astronomer hears a song in the static, and so does her daughter, three hundred miles away.' },
+  { id: 313, kind: 'tv', title: 'Greenhouse', date: '2026-11-09', vote: 0, scene: 109, hue: 80, lists: ['upcoming-shows'], seasons: 1, overview: 'A botanist inherits a greenhouse where every plant is from a place that doesn\'t exist.' },
+  { id: 314, kind: 'tv', title: 'The Ferry Years', date: '2027-01-15', vote: 0, scene: 111, hue: 280, lists: ['upcoming-shows'], seasons: 1, overview: 'Thirty years in the lives of the people who ride the same morning ferry.' },
+  { id: 315, kind: 'movie', title: 'Beacon Road', date: '2022-08-26', vote: 7.3, scene: 202, hue: 0, lists: [], overview: 'A snowplow driver and a stranded musician cross a mountain pass the night the beacons go dark.' },
+  { id: 316, kind: 'movie', title: 'The Last Ferry Out', date: '2021-05-07', vote: 7.0, scene: 111, hue: 60, lists: [], overview: 'The final crossing of a ferry line, and everyone who came to say goodbye.' },
+  { id: 317, kind: 'tv', title: 'Reel Life', date: '2023-01-20', vote: 7.8, scene: 101, hue: 180, lists: [], seasons: 2, overview: 'A family of projectionists runs the oldest cinema in the county, one disaster at a time.' },
+]
+
+// What Overseerr recommends for a title in the demo library, by TMDB id.
+export const recommendations = {
+  101: [317, 315, 307, 304, 301, 116, 316, 305],
+  102: [316, 308, 303, 306, 314, 301],
+  201: [308, 317, 309, 302, 305, 306],
+  default: [301, 304, 305, 309],
+}

@@ -12,7 +12,7 @@ import { mkdirSync } from 'node:fs'
 import path from 'node:path'
 import { chromium } from 'playwright'
 import sharp from 'sharp'
-import { addLibraries, admin, api, origin, setUp, startServer } from './server.mjs'
+import { addLibraries, admin, api, origin, overseerrURL, setUp, startServer } from './server.mjs'
 
 const out = path.resolve(import.meta.dirname, '../../docs/guide/images')
 const only = new Set(process.argv.slice(2))
@@ -293,6 +293,39 @@ try {
 
     await page.goto(`${origin}/link`)
     await shot(page, 'link')
+    await page.context().close()
+  }
+
+  // --- Discover, last so the other screenshots don't show its tab ---
+  {
+    const page = await open(desktop, token)
+    // With profiles set up, a new browser asks who's watching first.
+    await page.goto(origin + '/profiles')
+    await page.getByRole('button', { name: admin.username }).first().click()
+    await sleep(500)
+    await page.goto(origin + '/settings')
+    const card = page.getByText('Not connected · for Discover').locator('xpath=ancestor::div[contains(@class, "rounded-xl")][1]')
+    await card.getByRole('button', { name: 'Connect' }).click()
+    await card.getByLabel('Address').fill(overseerrURL)
+    await card.getByLabel('API key').fill('demo-overseerr-key')
+    await card.getByRole('button', { name: 'Test' }).click()
+    await card.getByText('answers at').waitFor()
+    await dress(page, { [overseerrURL]: 'http://overseerr:5055' })
+    await card.locator('input').first().evaluate((i) => (i.value = 'http://overseerr:5055'))
+    await shot(page, 'overseerr-connect', { target: card })
+    await card.getByRole('button', { name: 'Save' }).click()
+    await page.getByText('Connected · ').first().waitFor()
+
+    await page.goto(origin + '/discover')
+    await page.getByRole('heading', { name: 'Trending' }).waitFor()
+    await shot(page, 'discover')
+    await page.getByText('Night Shift at the Planetarium').first().click()
+    await page.getByRole('button', { name: 'Request the show' }).waitFor()
+    await shot(page, 'discover-title')
+    await page.getByRole('button', { name: 'Close' }).click()
+    await page.getByPlaceholder('Find any movie or show…').fill('ferry')
+    await page.getByText('The Ferry Years').first().waitFor()
+    await shot(page, 'discover-search')
     await page.context().close()
   }
 } finally {
