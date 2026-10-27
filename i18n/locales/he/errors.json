@@ -18,6 +18,7 @@
   "bad_item": "פריט שגוי",
   "bad_library": "ספרייה שגויה",
   "bad_request": "בקשה שגויה",
+  "billing_couldnt_be_reached_try_again_in_a_minute": "אין גישה לחיוב; נסו שוב בעוד דקה",
   "box_set_not_found": "הסט לא נמצא",
   "cant_read_that_folder": "לא ניתן לקרוא את התיקייה הזו",
   "collection_not_found": "האוסף לא נמצא",
@@ -67,6 +68,7 @@
   "password_must_be_at_most_72_bytes": "הסיסמה יכולה להכיל לכל היותר 72 בתים",
   "person_not_found": "האדם לא נמצא",
   "picture_subtitles_need_a_converted_quality_not_the_original_file": "כתוביות תמונה דורשות איכות מומרת, לא את הקובץ המקורי",
+  "plan_must_be_monthly_or_yearly": "plan חייב להיות monthly או yearly",
   "remoteforwardedport_must_be_443_80_or_0": "remoteForwardedPort חייב להיות 443, 80 או 0",
   "replaced_by_a_newer_seek": "הוחלף בדילוג חדש יותר",
   "request_not_found": "הבקשה לא נמצאה",
@@ -83,6 +85,7 @@
   "this_code_expired_ask_for_another": "תוקף הקוד הזה פג; בקש קוד אחר",
   "this_download_belongs_to_another_device": "ההורדה הזו שייכת למכשיר אחר",
   "this_server_doesnt_watch_library_folders": "השרת הזה לא עוקב אחרי תיקיות ספרייה",
+  "this_server_has_no_matinee_connect_subscription_bought_in_its_settings": "לשרת הזה אין מינוי Matinee Connect שנקנה בהגדרות שלו",
   "title_is_already_in_your_library": "{{title}} כבר נמצא בספרייה שלך",
   "title_is_already_on_its_way": "{{title}} כבר בדרך",
   "too_many_wrong_pins_try_again_in_a_minute": "יותר מדי קודי PIN שגויים; נסה שוב בעוד דקה",
@@ -103,5 +106,7 @@
   "no_such_row": "אין שורה כזו",
   "tmdb_didnt_accept_that_key": "TMDB לא קיבל את המפתח הזה",
   "tmdb_couldnt_be_reached_to_check_the_key": "לא ניתן היה להתחבר ל-TMDB כדי לבדוק את המפתח",
-  "this_server_cant_change_its_tmdb_key": "השרת הזה לא יכול לשנות את מפתח ה-TMDB שלו"
+  "this_server_cant_change_its_tmdb_key": "השרת הזה לא יכול לשנות את מפתח ה-TMDB שלו",
+  "this_server_doesnt_offer_remote_access": "השרת הזה לא מציע גישה מרחוק",
+  "this_server_doesnt_use_matinee_connect": "השרת הזה לא משתמש ב-Matinee Connect"
 }

@@ -64,6 +64,45 @@ type registration struct {
 	// Port is the router's external port that reaches the server; 0 takes
 	// the registration down.
 	Port int `json:"port"`
+	// Pass shows the server's subscription is paid (pass.go).
+	Pass string `json:"pass,omitempty"`
+}
+
+// checkRequest asks whether the service reaches the caller on Port.
+type checkRequest struct {
+	Time int64  `json:"time"`
+	Port int    `json:"port"`
+	Pass string `json:"pass,omitempty"`
+}
+
+// subscriptionRequest trades a paid Checkout Session for a pass.
+type subscriptionRequest struct {
+	Time    int64  `json:"time"`
+	Session string `json:"session"`
+}
+
+func (r *registration) time() int64        { return r.Time }
+func (r *checkRequest) time() int64        { return r.Time }
+func (r *subscriptionRequest) time() int64 { return r.Time }
+
+// validSession reports whether s looks like a Checkout Session's id.
+func validSession(s string) bool {
+	if len(s) < 4 || len(s) > 255 || !strings.HasPrefix(s, "cs_") {
+		return false
+	}
+	for _, c := range s {
+		if !(c == '_' || c >= '0' && c <= '9' || c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z') {
+			return false
+		}
+	}
+	return true
+}
+
+// Pass is the service's answer to a subscription: the pass to send with
+// registrations and checks, and until when (Unix seconds) it's good.
+type Pass struct {
+	Pass  string `json:"pass"`
+	Until int64  `json:"until"`
 }
 
 // Registered is the service's answer to a registration.

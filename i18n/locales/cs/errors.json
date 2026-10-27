@@ -18,6 +18,7 @@
   "bad_item": "neplatná položka",
   "bad_library": "neplatná knihovna",
   "bad_request": "neplatný požadavek",
+  "billing_couldnt_be_reached_try_again_in_a_minute": "fakturace není dostupná; zkus to znovu za minutu",
   "box_set_not_found": "filmová série nenalezena",
   "cant_read_that_folder": "tuto složku nelze přečíst",
   "collection_not_found": "kolekce nenalezena",
@@ -67,6 +68,7 @@
   "password_must_be_at_most_72_bytes": "heslo smí mít nejvýš 72 bajtů",
   "person_not_found": "osoba nenalezena",
   "picture_subtitles_need_a_converted_quality_not_the_original_file": "obrázkové titulky potřebují převedenou kvalitu, ne původní soubor",
+  "plan_must_be_monthly_or_yearly": "plan musí být monthly nebo yearly",
   "remoteforwardedport_must_be_443_80_or_0": "remoteForwardedPort musí být 443, 80 nebo 0",
   "replaced_by_a_newer_seek": "nahrazeno novějším přetočením",
   "request_not_found": "žádost nenalezena",
@@ -83,6 +85,7 @@
   "this_code_expired_ask_for_another": "kód vypršel; požádej o nový",
   "this_download_belongs_to_another_device": "toto stahování patří jinému zařízení",
   "this_server_doesnt_watch_library_folders": "tento server nesleduje složky knihoven",
+  "this_server_has_no_matinee_connect_subscription_bought_in_its_settings": "tento server nemá v nastavení zakoupené předplatné Matinee Connect",
   "title_is_already_in_your_library": "{{title}} už je v tvé knihovně",
   "title_is_already_on_its_way": "{{title}} už je na cestě",
   "too_many_wrong_pins_try_again_in_a_minute": "příliš mnoho špatných PINů; zkus to znovu za minutu",
@@ -103,5 +106,7 @@
   "no_such_row": "taková řada neexistuje",
   "tmdb_didnt_accept_that_key": "TMDB tento klíč nepřijalo",
   "tmdb_couldnt_be_reached_to_check_the_key": "TMDB se nepodařilo kontaktovat kvůli ověření klíče",
-  "this_server_cant_change_its_tmdb_key": "tento server nemůže změnit svůj klíč TMDB"
+  "this_server_cant_change_its_tmdb_key": "tento server nemůže změnit svůj klíč TMDB",
+  "this_server_doesnt_offer_remote_access": "tento server nenabízí vzdálený přístup",
+  "this_server_doesnt_use_matinee_connect": "tento server nepoužívá Matinee Connect"
 }

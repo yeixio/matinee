@@ -18,6 +18,7 @@
   "bad_item": "รายการไม่ถูกต้อง",
   "bad_library": "คลังไม่ถูกต้อง",
   "bad_request": "คำขอไม่ถูกต้อง",
+  "billing_couldnt_be_reached_try_again_in_a_minute": "ติดต่อระบบชำระเงินไม่ได้ ลองอีกครั้งในอีกหนึ่งนาที",
   "box_set_not_found": "ไม่พบชุดภาพยนตร์",
   "cant_read_that_folder": "อ่านโฟลเดอร์นั้นไม่ได้",
   "collection_not_found": "ไม่พบคอลเลกชัน",
@@ -67,6 +68,7 @@
   "password_must_be_at_most_72_bytes": "รหัสผ่านต้องไม่เกิน 72 ไบต์",
   "person_not_found": "ไม่พบบุคคล",
   "picture_subtitles_need_a_converted_quality_not_the_original_file": "คำบรรยายแบบภาพต้องใช้คุณภาพที่แปลงแล้ว ไม่ใช่ไฟล์ต้นฉบับ",
+  "plan_must_be_monthly_or_yearly": "plan ต้องเป็น monthly หรือ yearly",
   "remoteforwardedport_must_be_443_80_or_0": "remoteForwardedPort ต้องเป็น 443, 80 หรือ 0",
   "replaced_by_a_newer_seek": "ถูกแทนที่ด้วยการข้ามที่ใหม่กว่า",
   "request_not_found": "ไม่พบคำขอ",
@@ -83,6 +85,7 @@
   "this_code_expired_ask_for_another": "รหัสนี้หมดอายุแล้ว ขอรหัสใหม่",
   "this_download_belongs_to_another_device": "การดาวน์โหลดนี้เป็นของอุปกรณ์อื่น",
   "this_server_doesnt_watch_library_folders": "เซิร์ฟเวอร์นี้ไม่ได้เฝ้าดูโฟลเดอร์คลัง",
+  "this_server_has_no_matinee_connect_subscription_bought_in_its_settings": "เซิร์ฟเวอร์นี้ไม่มีการสมัคร Matinee Connect ที่ซื้อจากการตั้งค่า",
   "title_is_already_in_your_library": "{{title}} อยู่ในคลังของคุณแล้ว",
   "title_is_already_on_its_way": "{{title}} กำลังมาแล้ว",
   "too_many_wrong_pins_try_again_in_a_minute": "ป้อน PIN ผิดหลายครั้งเกินไป ลองใหม่ในอีกหนึ่งนาที",
@@ -103,5 +106,7 @@
   "no_such_row": "ไม่มีแถวนี้",
   "tmdb_didnt_accept_that_key": "TMDB ไม่ยอมรับคีย์นี้",
   "tmdb_couldnt_be_reached_to_check_the_key": "ไม่สามารถติดต่อ TMDB เพื่อตรวจสอบคีย์ได้",
-  "this_server_cant_change_its_tmdb_key": "เซิร์ฟเวอร์นี้เปลี่ยนคีย์ TMDB ของตัวเองไม่ได้"
+  "this_server_cant_change_its_tmdb_key": "เซิร์ฟเวอร์นี้เปลี่ยนคีย์ TMDB ของตัวเองไม่ได้",
+  "this_server_doesnt_offer_remote_access": "เซิร์ฟเวอร์นี้ไม่มีการเข้าถึงระยะไกล",
+  "this_server_doesnt_use_matinee_connect": "เซิร์ฟเวอร์นี้ไม่ได้ใช้ Matinee Connect"
 }

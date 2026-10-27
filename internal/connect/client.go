@@ -66,30 +66,77 @@ func (c *Client) LookupURL() string {
 
 // Register tells the service this server is reachable on the router's
 // external port, at whatever address the request comes from; port 0 takes
-// the registration down.
-func (c *Client) Register(ctx context.Context, port int) (Registered, error) {
-	payload, err := json.Marshal(registration{Time: time.Now().Unix(), Port: port})
-	if err != nil {
-		return Registered{}, err
-	}
-	in := signed{
-		Key:     c.Key.Public().(ed25519.PublicKey),
-		Payload: payload,
-		Sig:     ed25519.Sign(c.Key, append([]byte(signContext), payload...)),
-	}
+// the registration down. pass shows the subscription is paid.
+func (c *Client) Register(ctx context.Context, port int, pass string) (Registered, error) {
 	var out Registered
-	return out, c.post(ctx, "/v1/register", in, &out)
+	return out, c.postSigned(ctx, "/v1/register", registration{Time: time.Now().Unix(), Port: port, Pass: pass}, &out)
 }
 
 // Check asks the service for this home's public address and whether it
 // can reach the server there on the router's external port.
-func (c *Client) Check(ctx context.Context, port int) (netip.Addr, bool, error) {
+func (c *Client) Check(ctx context.Context, port int, pass string) (netip.Addr, bool, error) {
 	var out Checked
-	if err := c.post(ctx, "/v1/check", map[string]int{"port": port}, &out); err != nil {
+	if err := c.postSigned(ctx, "/v1/check", checkRequest{Time: time.Now().Unix(), Port: port, Pass: pass}, &out); err != nil {
 		return netip.Addr{}, false, err
 	}
 	ip, err := netip.ParseAddr(out.IP)
 	return ip, out.Reachable, err
+}
+
+// Subscribe trades the Checkout Session that bought this server's
+// subscription for a pass. It returns ErrNotPaid while the checkout isn't
+// paid, and ErrEnded once the subscription has ended.
+func (c *Client) Subscribe(ctx context.Context, session string) (Pass, error) {
+	var out Pass
+	err := c.postSigned(ctx, "/v1/subscription", subscriptionRequest{Time: time.Now().Unix(), Session: session}, &out)
+	var se *StatusError
+	if errors.As(err, &se) {
+		switch se.Code {
+		case http.StatusPaymentRequired:
+			return out, ErrNotPaid
+		case http.StatusGone, http.StatusNotFound:
+			return out, ErrEnded
+		}
+	}
+	return out, err
+}
+
+// What Subscribe returns for a checkout that isn't paid, or a
+// subscription that has ended (or a checkout that never was one).
+var (
+	ErrNotPaid = errors.New("the checkout isn't paid yet")
+	ErrEnded   = errors.New("the subscription has ended")
+)
+
+// StatusError is the service turning a request down.
+type StatusError struct {
+	URL     string
+	Code    int
+	Message string
+}
+
+func (e *StatusError) Error() string {
+	return fmt.Sprintf("%s answered %d %s", e.URL, e.Code, e.Message)
+}
+
+// NeedsSubscription reports whether err is the service turning away a
+// server without a paid subscription.
+func NeedsSubscription(err error) bool {
+	var se *StatusError
+	return errors.As(err, &se) && se.Code == http.StatusPaymentRequired
+}
+
+func (c *Client) postSigned(ctx context.Context, path string, payload any, out any) error {
+	b, err := json.Marshal(payload)
+	if err != nil {
+		return err
+	}
+	in := signed{
+		Key:     c.Key.Public().(ed25519.PublicKey),
+		Payload: b,
+		Sig:     ed25519.Sign(c.Key, append([]byte(signContext), b...)),
+	}
+	return c.post(ctx, path, in, out)
 }
 
 func (c *Client) post(ctx context.Context, path string, in, out any) error {
@@ -118,7 +165,7 @@ func (c *Client) post(ctx context.Context, path string, in, out any) error {
 			Error string `json:"error"`
 		}
 		json.NewDecoder(resp.Body).Decode(&e)
-		return fmt.Errorf("%s answered %d %s", c.URL, resp.StatusCode, e.Error)
+		return &StatusError{URL: c.URL, Code: resp.StatusCode, Message: e.Error}
 	}
 	return json.NewDecoder(resp.Body).Decode(out)
 }

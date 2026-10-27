@@ -698,6 +698,18 @@
       "save": "Simpan kunci",
       "remove": "Hapus kunci tersimpan",
       "saved": "Tersimpan. Matinee sedang melengkapi poster dan detail."
+    },
+    "connect": {
+      "title": "Matinee Connect",
+      "about": "Membuat aplikasi tetap bisa menemukan server ini saat alamat internet rumahmu berubah. Layanan ini hanya tahu alamatnya: video selalu langsung dari server ini ke aplikasi.",
+      "active": "Aktif sampai {{date}}. Diperpanjang otomatis.",
+      "manage": "Kelola langganan",
+      "waiting": "Menunggu pembayaran selesai…",
+      "openCheckout": "Buka pembayaran lagi",
+      "ended": "Langganan sudah berakhir. Sampai kamu berlangganan lagi, aplikasi hanya tahu alamat baru saat di rumah.",
+      "perYear": "{{price}} per tahun",
+      "perMonth": "{{price}} per bulan",
+      "paid": "Ditagih di muka oleh Yeix. Batalkan kapan saja; tetap berlaku sampai akhir periode yang dibayar."
     }
   },
   "language": {

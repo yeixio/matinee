@@ -3,7 +3,7 @@ import { ChevronLeft, Folder, FolderOpen, KeyRound, Monitor, Plus, RefreshCw, Tr
 import { useState, type FormEvent } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { api, type PlaybackPrefs, type RemoteStatus, type User } from '../api'
+import { api, type ConnectStatus, type PlaybackPrefs, type RemoteStatus, type User } from '../api'
 import { LanguagePicker } from '../components/LanguagePicker'
 import { NewFiles, watchSummary } from '../components/LibraryWatch'
 import { MediaAnalysis } from '../components/MediaAnalysis'
@@ -533,8 +533,9 @@ function RemoteAccess() {
   const { data } = useQuery({
     queryKey: ['settings'],
     queryFn: api.settings,
-    // Opening the port and getting a certificate takes a little while.
-    refetchInterval: (q) => (q.state.data?.remote?.state === 'working' ? 2000 : false),
+    // Opening the port and getting a certificate takes a little while, and
+    // so does a payment going through.
+    refetchInterval: (q) => (q.state.data?.remote?.state === 'working' || q.state.data?.remote?.connect?.state === 'checkout' ? 2000 : false),
   })
   const save = useMutation({ mutationFn: api.saveSettings, onSuccess: (s) => qc.setQueryData(['settings'], s) })
   if (!data) return null
@@ -566,6 +567,7 @@ function RemoteAccess() {
           />
         </label>
       )}
+      {!data.publicURL && data.remoteAccess && remote?.connect && <MatineeConnect status={remote.connect} />}
       {!data.publicURL && data.remoteAccess && (
         <div className="rounded-xl border border-line/60 bg-surface/50 p-4">
           <Field label={t('settings.remote.forward')}>
@@ -586,6 +588,70 @@ function RemoteAccess() {
         </div>
       )}
     </section>
+  )
+}
+
+// Matinee Connect: the paid service that keeps the apps able to find the
+// server when the home's address changes. Bought here, paid on yeix.io.
+function MatineeConnect({ status }: { status: ConnectStatus }) {
+  const { t } = useTranslation()
+  const offer = status.state === 'none' || status.state === 'ended'
+  const plans = useQuery({ queryKey: ['connectPlans'], queryFn: api.connectPlans, enabled: offer, staleTime: 60 * 60 * 1000, retry: false })
+  const [error, setError] = useState('')
+  // The page opens in a new tab; it's opened before the request so it isn't
+  // blocked as a popup.
+  const open = (get: () => Promise<{ url: string }>) => {
+    const tab = window.open('', '_blank')
+    setError('')
+    get()
+      .then(({ url }) => {
+        if (tab) tab.location.href = url
+        else window.location.href = url
+      })
+      .catch((e: Error) => {
+        tab?.close()
+        setError(e.message)
+      })
+  }
+  const until = status.until ? new Date(status.until).toLocaleDateString(formatLocale()) : ''
+  return (
+    <div className="space-y-3 rounded-xl border border-line/60 bg-surface/50 p-4">
+      <div>
+        <span className="block font-medium">{t('settings.connect.title')}</span>
+        <span className="mt-1 block text-sm text-muted">{t('settings.connect.about')}</span>
+      </div>
+      {status.state === 'active' && (
+        <div className="flex flex-wrap items-center gap-3">
+          <span className="text-sm">{t('settings.connect.active', { date: until })}</span>
+          <Button onClick={() => open(api.connectManage)}>{t('settings.connect.manage')}</Button>
+        </div>
+      )}
+      {status.state === 'checkout' && (
+        <p className="text-sm text-muted">
+          {t('settings.connect.waiting')}{' '}
+          {status.checkout && (
+            <a className="text-accent underline" href={status.checkout} target="_blank" rel="noreferrer">
+              {t('settings.connect.openCheckout')}
+            </a>
+          )}
+        </p>
+      )}
+      {offer && (
+        <>
+          {status.state === 'ended' && <p className="text-sm text-danger">{t('settings.connect.ended')}</p>}
+          <div className="flex flex-wrap gap-3">
+            {(plans.data ?? []).map((p) => (
+              <Button key={p.id} variant={p.id === 'yearly' ? 'primary' : 'secondary'} onClick={() => open(() => api.connectSubscribe(p.id))}>
+                {t(p.interval === 'year' ? 'settings.connect.perYear' : 'settings.connect.perMonth', { price: p.price })}
+              </Button>
+            ))}
+          </div>
+          {plans.isError && <p className="text-sm text-danger">{(plans.error as Error).message}</p>}
+          <p className="text-xs text-faint">{t('settings.connect.paid')}</p>
+        </>
+      )}
+      {(error || status.problem) && <p className="text-sm text-danger">{error || status.problem}</p>}
+    </div>
   )
 }
 

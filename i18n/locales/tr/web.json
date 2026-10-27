@@ -702,6 +702,18 @@
       "save": "Anahtarı kaydet",
       "remove": "Kayıtlı anahtarı kaldır",
       "saved": "Kaydedildi. Matinee şimdi afişleri ve ayrıntıları dolduruyor."
+    },
+    "connect": {
+      "title": "Matinee Connect",
+      "about": "Evinin internet adresi değiştiğinde uygulamaların bu sunucuyu bulmaya devam etmesini sağlar. Hizmet yalnızca adresi bilir: video her zaman doğrudan bu sunucudan uygulamalara gider.",
+      "active": "{{date}} tarihine kadar etkin. Kendiliğinden yenilenir.",
+      "manage": "Aboneliği yönet",
+      "waiting": "Ödemenin tamamlanması bekleniyor…",
+      "openCheckout": "Ödemeyi yeniden aç",
+      "ended": "Abonelik sona erdi. Yeniden abone olana kadar uygulamalar yeni adresi yalnızca evdeyken öğrenir.",
+      "perYear": "Yıllık {{price}}",
+      "perMonth": "Aylık {{price}}",
+      "paid": "Yeix tarafından peşin faturalandırılır. İstediğin zaman iptal et; ödediğin dönemin sonuna kadar sürer."
     }
   },
   "language": {

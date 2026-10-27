@@ -543,6 +543,57 @@ paths:
             application/json:
               schema: { $ref: "#/components/schemas/Settings" }
 
+  /settings/connect/plans:
+    get:
+      summary: What Matinee Connect costs (admins only)
+      description: |
+        Matinee Connect is the paid service that lets the apps find this
+        server after its public address changes (docs/connect.md). 404 when
+        the server uses a service that needs no subscription.
+      responses:
+        "200":
+          description: The plans.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  plans:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id: { type: string, enum: [monthly, yearly] }
+                        price: { type: string, description: Ready to show, such as `$3.99`. }
+                        interval: { type: string, enum: [month, year] }
+  /settings/connect/subscribe:
+    post:
+      summary: Start buying Matinee Connect for this server (admins only)
+      description: Opens a checkout; open `url` for the person to pay. `remote.connect` in the settings says when it's active.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                plan: { type: string, enum: [monthly, yearly] }
+      responses:
+        "200":
+          description: The checkout's page.
+          content:
+            application/json:
+              schema: { type: object, properties: { url: { type: string } } }
+  /settings/connect/manage:
+    post:
+      summary: Change the card or cancel Matinee Connect (admins only)
+      responses:
+        "200":
+          description: The billing page to open.
+          content:
+            application/json:
+              schema: { type: object, properties: { url: { type: string } } }
+
   /users:
     get:
       summary: Everyone with an account (admins only)
@@ -2095,6 +2146,14 @@ components:
             forwardedPort: { type: integer, description: The router port forwarded by hand, when one is. }
             listenPort: { type: integer, description: The server's remote access port, where a forward made by hand goes. }
             findable: { type: boolean, description: The connect service knows the current address, so apps away from home find the server after it changes. }
+            connect:
+              type: object
+              description: The Matinee Connect subscription that pays for being findable. Missing when the server uses a service that needs none.
+              properties:
+                state: { type: string, enum: [none, checkout, active, ended], description: "`checkout`: a checkout is open, waiting for payment." }
+                until: { type: string, format: date-time, description: Paid up until, renewals included as they're paid. }
+                checkout: { type: string, description: The open checkout's page. }
+                problem: { type: string }
             certificateExpires: { type: string, format: date-time }
             checkedAt: { type: string, format: date-time }
         publicURL:

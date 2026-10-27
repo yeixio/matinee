@@ -706,6 +706,18 @@
       "save": "Salva chiave",
       "remove": "Rimuovi la chiave salvata",
       "saved": "Salvata. Matinee sta completando locandine e dettagli."
+    },
+    "connect": {
+      "title": "Matinee Connect",
+      "about": "Permette alle app di trovare questo server anche quando cambia l’indirizzo internet di casa. Conosce solo l’indirizzo: i video vanno sempre direttamente da questo server alle app.",
+      "active": "Attivo fino al {{date}}. Si rinnova da solo.",
+      "manage": "Gestisci abbonamento",
+      "waiting": "In attesa che il pagamento vada a buon fine…",
+      "openCheckout": "Riapri il pagamento",
+      "ended": "L’abbonamento è scaduto. Finché non ti riabboni, le app scoprono un nuovo indirizzo solo quando sono a casa.",
+      "perYear": "{{price}} all’anno",
+      "perMonth": "{{price}} al mese",
+      "paid": "Addebitato in anticipo da Yeix. Puoi annullare quando vuoi; resta attivo fino alla fine del periodo pagato."
     }
   },
   "language": {

@@ -702,6 +702,18 @@
       "save": "Lagre nøkkel",
       "remove": "Fjern lagret nøkkel",
       "saved": "Lagret. Matinee fyller nå inn plakater og detaljer."
+    },
+    "connect": {
+      "title": "Matinee Connect",
+      "about": "Gjør at appene finner denne serveren også når internettadressen hjemme endres. Tjenesten kjenner bare adressen: video går alltid rett fra serveren til appene.",
+      "active": "Aktiv til {{date}}. Fornyes automatisk.",
+      "manage": "Administrer abonnement",
+      "waiting": "Venter på at betalingen går gjennom …",
+      "openCheckout": "Åpne betalingen igjen",
+      "ended": "Abonnementet er avsluttet. Til du abonnerer igjen, får appene en ny adresse bare når de er hjemme.",
+      "perYear": "{{price}} i året",
+      "perMonth": "{{price}} i måneden",
+      "paid": "Belastes på forskudd av Yeix. Si opp når du vil; det varer ut perioden du har betalt for."
     }
   },
   "language": {

@@ -706,6 +706,18 @@
       "save": "Guardar clave",
       "remove": "Quitar la clave guardada",
       "saved": "Guardada. Matinee está completando pósteres y detalles."
+    },
+    "connect": {
+      "title": "Matinee Connect",
+      "about": "Permite que las apps sigan encontrando este servidor cuando cambia la dirección de internet de tu casa. Solo conoce la dirección: el vídeo siempre va directo de este servidor a las apps.",
+      "active": "Activo hasta el {{date}}. Se renueva solo.",
+      "manage": "Gestionar suscripción",
+      "waiting": "Esperando a que se complete el pago…",
+      "openCheckout": "Abrir de nuevo el pago",
+      "ended": "La suscripción ha terminado. Hasta que vuelvas a suscribirte, las apps solo conocen una dirección nueva cuando están en casa.",
+      "perYear": "{{price}} al año",
+      "perMonth": "{{price}} al mes",
+      "paid": "Yeix lo cobra por adelantado. Cancela cuando quieras; dura hasta el final del periodo pagado."
     }
   },
   "language": {

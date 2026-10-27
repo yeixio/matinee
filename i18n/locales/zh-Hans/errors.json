@@ -18,6 +18,7 @@
   "bad_item": "项目无效",
   "bad_library": "媒体库无效",
   "bad_request": "请求无效",
+  "billing_couldnt_be_reached_try_again_in_a_minute": "无法连接计费服务，请一分钟后重试",
   "box_set_not_found": "找不到电影系列",
   "cant_read_that_folder": "无法读取该文件夹",
   "collection_not_found": "找不到合集",
@@ -67,6 +68,7 @@
   "password_must_be_at_most_72_bytes": "密码最多 72 个字节",
   "person_not_found": "找不到此人",
   "picture_subtitles_need_a_converted_quality_not_the_original_file": "图形字幕需要转换后的画质，不能用原始文件",
+  "plan_must_be_monthly_or_yearly": "plan 必须是 monthly 或 yearly",
   "remoteforwardedport_must_be_443_80_or_0": "remoteForwardedPort 必须是 443、80 或 0",
   "replaced_by_a_newer_seek": "已被更新的跳转取代",
   "request_not_found": "找不到该请求",
@@ -83,6 +85,7 @@
   "this_code_expired_ask_for_another": "此代码已过期，请重新获取",
   "this_download_belongs_to_another_device": "此下载属于另一台设备",
   "this_server_doesnt_watch_library_folders": "此服务器未监视媒体库文件夹",
+  "this_server_has_no_matinee_connect_subscription_bought_in_its_settings": "此服务器没有在其设置中购买 Matinee Connect 订阅",
   "title_is_already_in_your_library": "《{{title}}》已在你的媒体库中",
   "title_is_already_on_its_way": "《{{title}}》已在路上",
   "too_many_wrong_pins_try_again_in_a_minute": "PIN 错误次数过多，请一分钟后再试",
@@ -103,5 +106,7 @@
   "no_such_row": "没有这一行",
   "tmdb_didnt_accept_that_key": "TMDB 未接受该密钥",
   "tmdb_couldnt_be_reached_to_check_the_key": "无法连接 TMDB 来验证密钥",
-  "this_server_cant_change_its_tmdb_key": "此服务器无法更改其 TMDB 密钥"
+  "this_server_cant_change_its_tmdb_key": "此服务器无法更改其 TMDB 密钥",
+  "this_server_doesnt_offer_remote_access": "此服务器不提供远程访问",
+  "this_server_doesnt_use_matinee_connect": "此服务器未使用 Matinee Connect"
 }

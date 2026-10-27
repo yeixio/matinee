@@ -18,6 +18,7 @@
   "bad_item": "elemento non valido",
   "bad_library": "libreria non valida",
   "bad_request": "richiesta non valida",
+  "billing_couldnt_be_reached_try_again_in_a_minute": "impossibile raggiungere la fatturazione; riprova tra un minuto",
   "box_set_not_found": "cofanetto non trovato",
   "cant_read_that_folder": "impossibile leggere quella cartella",
   "collection_not_found": "collezione non trovata",
@@ -67,6 +68,7 @@
   "password_must_be_at_most_72_bytes": "la password può avere al massimo 72 byte",
   "person_not_found": "persona non trovata",
   "picture_subtitles_need_a_converted_quality_not_the_original_file": "i sottotitoli grafici richiedono una qualità convertita, non il file originale",
+  "plan_must_be_monthly_or_yearly": "plan deve essere monthly o yearly",
   "remoteforwardedport_must_be_443_80_or_0": "remoteForwardedPort deve essere 443, 80 o 0",
   "replaced_by_a_newer_seek": "sostituito da uno spostamento più recente",
   "request_not_found": "richiesta non trovata",
@@ -83,6 +85,7 @@
   "this_code_expired_ask_for_another": "questo codice è scaduto; chiedine un altro",
   "this_download_belongs_to_another_device": "questo download appartiene a un altro dispositivo",
   "this_server_doesnt_watch_library_folders": "questo server non controlla le cartelle delle librerie",
+  "this_server_has_no_matinee_connect_subscription_bought_in_its_settings": "questo server non ha un abbonamento Matinee Connect acquistato nelle sue impostazioni",
   "title_is_already_in_your_library": "{{title}} è già nella tua libreria",
   "title_is_already_on_its_way": "{{title}} è già in arrivo",
   "too_many_wrong_pins_try_again_in_a_minute": "troppi PIN sbagliati; riprova tra un minuto",
@@ -103,5 +106,7 @@
   "no_such_row": "riga inesistente",
   "tmdb_didnt_accept_that_key": "TMDB non ha accettato questa chiave",
   "tmdb_couldnt_be_reached_to_check_the_key": "Impossibile raggiungere TMDB per verificare la chiave",
-  "this_server_cant_change_its_tmdb_key": "questo server non può cambiare la sua chiave TMDB"
+  "this_server_cant_change_its_tmdb_key": "questo server non può cambiare la sua chiave TMDB",
+  "this_server_doesnt_offer_remote_access": "questo server non offre l’accesso remoto",
+  "this_server_doesnt_use_matinee_connect": "questo server non usa Matinee Connect"
 }

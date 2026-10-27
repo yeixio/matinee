@@ -18,6 +18,7 @@
   "bad_item": "غلط آئٹم",
   "bad_library": "غلط لائبریری",
   "bad_request": "غلط درخواست",
+  "billing_couldnt_be_reached_try_again_in_a_minute": "بلنگ تک رسائی نہیں ہو سکی؛ ایک منٹ بعد دوبارہ کوشش کریں",
   "box_set_not_found": "باکس سیٹ نہیں ملا",
   "cant_read_that_folder": "وہ فولڈر پڑھا نہیں جا سکتا",
   "collection_not_found": "مجموعہ نہیں ملا",
@@ -67,6 +68,7 @@
   "password_must_be_at_most_72_bytes": "پاس ورڈ زیادہ سے زیادہ 72 بائٹس کا ہو سکتا ہے",
   "person_not_found": "شخص نہیں ملا",
   "picture_subtitles_need_a_converted_quality_not_the_original_file": "تصویری سب ٹائٹلز کو تبدیل شدہ معیار چاہیے، اصل فائل نہیں",
+  "plan_must_be_monthly_or_yearly": "plan کو monthly یا yearly ہونا چاہیے",
   "remoteforwardedport_must_be_443_80_or_0": "remoteForwardedPort کو 443، 80 یا 0 ہونا چاہیے",
   "replaced_by_a_newer_seek": "نئے سیک سے بدل دیا گیا",
   "request_not_found": "درخواست نہیں ملی",
@@ -83,6 +85,7 @@
   "this_code_expired_ask_for_another": "اس کوڈ کی میعاد ختم ہو گئی؛ دوسرا مانگیں",
   "this_download_belongs_to_another_device": "یہ ڈاؤن لوڈ کسی اور آلے کا ہے",
   "this_server_doesnt_watch_library_folders": "یہ سرور لائبریری فولڈرز پر نظر نہیں رکھتا",
+  "this_server_has_no_matinee_connect_subscription_bought_in_its_settings": "اس سرور کی سیٹنگز میں خریدی گئی کوئی Matinee Connect سبسکرپشن نہیں ہے",
   "title_is_already_in_your_library": "{{title}} پہلے سے آپ کی لائبریری میں ہے",
   "title_is_already_on_its_way": "{{title}} پہلے سے راستے میں ہے",
   "too_many_wrong_pins_try_again_in_a_minute": "بہت زیادہ غلط PIN؛ ایک منٹ بعد دوبارہ کوشش کریں",
@@ -103,5 +106,7 @@
   "no_such_row": "ایسی کوئی قطار نہیں",
   "tmdb_didnt_accept_that_key": "TMDB نے یہ کلید قبول نہیں کی",
   "tmdb_couldnt_be_reached_to_check_the_key": "کلید جانچنے کے لیے TMDB تک رسائی نہیں ہو سکی",
-  "this_server_cant_change_its_tmdb_key": "یہ سرور اپنی TMDB کلید تبدیل نہیں کر سکتا"
+  "this_server_cant_change_its_tmdb_key": "یہ سرور اپنی TMDB کلید تبدیل نہیں کر سکتا",
+  "this_server_doesnt_offer_remote_access": "یہ سرور ریموٹ رسائی پیش نہیں کرتا",
+  "this_server_doesnt_use_matinee_connect": "یہ سرور Matinee Connect استعمال نہیں کرتا"
 }

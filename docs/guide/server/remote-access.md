@@ -16,7 +16,7 @@ Turn on **Settings → Remote access → Watch away from home** and Matinee sets
 3. **Tells the apps.** The apps pick up the outside address while they're at home and use it when they're away.
 
 <!-- since: v0.1.1 -->
-4. **Keeps the apps able to find it.** Matinee tells a small lookup service run by the Matinee project its current public address every few minutes. If your address changes while you're away, the apps look the server up there and connect to the new address. Settings says so once it works.
+4. **Keeps the apps able to find it**, with a Matinee Connect subscription (below). Matinee tells a small lookup service its current public address every few minutes. If your address changes while you're away, the apps look the server up there and connect to the new address. Settings says so once it works.
 
 ![Remote access while it opens a port and gets a certificate](../images/remote-access-working.webp)
 
@@ -27,6 +27,13 @@ Everyone signs in from outside. Nothing that arrives through this port counts as
 The apps always connect straight to your server. The lookup service only ever learns the server's public address and a random id that comes from a key on your server; it never sees your library, your accounts, or anything you watch, and nothing streams through it. There is no relay. If the internet can't reach your server directly, Matinee tells you what to change rather than sending your video through someone else's computer.
 
 To not use the lookup service, set `MATINEE_CONNECT_URL=off`. The apps then learn a new address only when they're back home.
+
+<!-- since: v0.1.1 -->
+### Matinee Connect
+
+Opening a port, the certificate and the apps picking up the address are free. The lookup service, and the check for a port you forwarded yourself, run on servers Yeix pays for, so they come with a Matinee Connect subscription for your server. In **Settings → Remote access**, pick monthly or yearly; checkout opens on yeix.io, and Settings shows the subscription as soon as it's paid. Each period is paid in advance, and you can change your card or cancel from **Manage** at any time; it keeps working to the end of the period you paid for.
+
+If you run your own lookup service (`MATINEE_CONNECT_URL`, see [the connect service](https://github.com/yeixio/matinee/blob/main/docs/connect.md)), no subscription is needed.
 
 ## When it doesn't work
 
@@ -49,7 +56,7 @@ If your router won't open a port when asked, and you'd rather not turn on UPnP, 
 1. Forward TCP port **443** on the router to port **7443** on the computer running Matinee. If 443 is taken, use port 80 instead.
 2. In **Settings → Remote access**, set **Router port** to the port you forwarded.
 
-Matinee asks the lookup service to try connecting to that port from outside, so if the forward doesn't work yet, Settings says so right away. Let's Encrypt then checks through the same port and the certificate renews there by itself. Only 443 and 80 work, since those are the ports Let's Encrypt checks.
+With a [Matinee Connect](#matinee-connect) subscription, Matinee asks the lookup service to try connecting to that port from outside, so if the forward doesn't work yet, Settings says so right away. Let's Encrypt then checks through the same port and the certificate renews there by itself. Only 443 and 80 work, since those are the ports Let's Encrypt checks. Without a subscription, turn on UPnP or NAT-PMP instead, or use your own domain.
 
 ## Where it's available
 

@@ -706,6 +706,18 @@
       "save": "Salvar chave",
       "remove": "Remover chave salva",
       "saved": "Salva. O Matinee está preenchendo pôsteres e detalhes agora."
+    },
+    "connect": {
+      "title": "Matinee Connect",
+      "about": "Mantém os apps encontrando este servidor quando o endereço de internet da sua casa muda. O serviço só conhece o endereço: o vídeo sempre vai direto deste servidor para os apps.",
+      "active": "Ativa até {{date}}. Renova sozinha.",
+      "manage": "Gerenciar assinatura",
+      "waiting": "Esperando o pagamento ser concluído…",
+      "openCheckout": "Abrir o pagamento de novo",
+      "ended": "A assinatura terminou. Até você assinar de novo, os apps só descobrem um endereço novo quando estão em casa.",
+      "perYear": "{{price}} por ano",
+      "perMonth": "{{price}} por mês",
+      "paid": "Cobrado antecipadamente pela Yeix. Cancele quando quiser; vale até o fim do período pago."
     }
   },
   "language": {

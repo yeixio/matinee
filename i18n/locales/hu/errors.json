@@ -18,6 +18,7 @@
   "bad_item": "hibás elem",
   "bad_library": "hibás könyvtár",
   "bad_request": "hibás kérés",
+  "billing_couldnt_be_reached_try_again_in_a_minute": "a számlázás nem érhető el; próbáld újra egy perc múlva",
   "box_set_not_found": "a filmsorozat nem található",
   "cant_read_that_folder": "a mappa nem olvasható",
   "collection_not_found": "a gyűjtemény nem található",
@@ -67,6 +68,7 @@
   "password_must_be_at_most_72_bytes": "a jelszó legfeljebb 72 bájt lehet",
   "person_not_found": "a személy nem található",
   "picture_subtitles_need_a_converted_quality_not_the_original_file": "a képes feliratokhoz átalakított minőség kell, nem az eredeti fájl",
+  "plan_must_be_monthly_or_yearly": "a plan értéke monthly vagy yearly lehet",
   "remoteforwardedport_must_be_443_80_or_0": "a remoteForwardedPort értéke 443, 80 vagy 0 lehet",
   "replaced_by_a_newer_seek": "egy újabb ugrás felváltotta",
   "request_not_found": "a kérés nem található",
@@ -83,6 +85,7 @@
   "this_code_expired_ask_for_another": "a kód lejárt; kérj újat",
   "this_download_belongs_to_another_device": "ez a letöltés egy másik eszközé",
   "this_server_doesnt_watch_library_folders": "ez a szerver nem figyeli a könyvtármappákat",
+  "this_server_has_no_matinee_connect_subscription_bought_in_its_settings": "ehhez a szerverhez nem vásároltak Matinee Connect-előfizetést a beállításaiban",
   "title_is_already_in_your_library": "{{title}} már a könyvtáradban van",
   "title_is_already_on_its_way": "{{title}} már úton van",
   "too_many_wrong_pins_try_again_in_a_minute": "túl sok hibás PIN-kód; próbáld újra egy perc múlva",
@@ -103,5 +106,7 @@
   "no_such_row": "nincs ilyen sor",
   "tmdb_didnt_accept_that_key": "A TMDB nem fogadta el ezt a kulcsot",
   "tmdb_couldnt_be_reached_to_check_the_key": "A TMDB nem érhető el a kulcs ellenőrzéséhez",
-  "this_server_cant_change_its_tmdb_key": "ez a szerver nem tudja módosítani a TMDB-kulcsát"
+  "this_server_cant_change_its_tmdb_key": "ez a szerver nem tudja módosítani a TMDB-kulcsát",
+  "this_server_doesnt_offer_remote_access": "ez a szerver nem kínál távoli elérést",
+  "this_server_doesnt_use_matinee_connect": "ez a szerver nem használja a Matinee Connectet"
 }

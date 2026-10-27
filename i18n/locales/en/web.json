@@ -702,6 +702,18 @@
       "save": "Save key",
       "remove": "Remove saved key",
       "saved": "Saved. Matinee is filling in posters and details now."
+    },
+    "connect": {
+      "title": "Matinee Connect",
+      "about": "Keeps the apps able to find this server when your home’s internet address changes. It only ever learns the address: video always goes straight from this server to the apps.",
+      "active": "Active until {{date}}. It renews by itself.",
+      "manage": "Manage subscription",
+      "waiting": "Waiting for the payment to go through…",
+      "openCheckout": "Open the checkout again",
+      "ended": "The subscription has ended. Until you subscribe again, the apps learn a new address only when they’re home.",
+      "perYear": "{{price}} a year",
+      "perMonth": "{{price}} a month",
+      "paid": "Billed in advance by Yeix. Cancel anytime; it runs to the end of the period you paid for."
     }
   },
   "language": {

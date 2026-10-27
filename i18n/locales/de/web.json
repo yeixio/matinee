@@ -702,6 +702,18 @@
       "save": "Schlüssel speichern",
       "remove": "Gespeicherten Schlüssel entfernen",
       "saved": "Gespeichert. Matinee ergänzt jetzt Poster und Details."
+    },
+    "connect": {
+      "title": "Matinee Connect",
+      "about": "Damit die Apps diesen Server weiter finden, wenn sich die Internetadresse deines Zuhauses ändert. Der Dienst erfährt nur die Adresse: Videos gehen immer direkt von diesem Server zu den Apps.",
+      "active": "Aktiv bis {{date}}. Verlängert sich automatisch.",
+      "manage": "Abo verwalten",
+      "waiting": "Warte, bis die Zahlung durch ist …",
+      "openCheckout": "Bezahlseite wieder öffnen",
+      "ended": "Das Abo ist abgelaufen. Bis du es erneuerst, erfahren die Apps eine neue Adresse nur, wenn sie zu Hause sind.",
+      "perYear": "{{price}} pro Jahr",
+      "perMonth": "{{price}} pro Monat",
+      "paid": "Wird im Voraus von Yeix abgerechnet. Jederzeit kündbar; es läuft bis zum Ende des bezahlten Zeitraums."
     }
   },
   "language": {
