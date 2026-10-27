@@ -60,13 +60,17 @@ const movieDetail = movie && (await get(`/items/${movie.id}`))
 // H.264 plays as it is, so the player shot doesn't wait on a conversion.
 let playable = movieDetail?.subtitles?.length && movie.videoCodec === 'h264' ? movie : undefined
 let subtitled = movieDetail?.subtitles?.length ? movie : undefined
-let boxSet = movieDetail?.details?.collection
+let boxSet
 for (const m of movies.filter((m) => m.hasBackdrop).slice(0, 40)) {
   if (playable && boxSet) break
   const d = await get(`/items/${m.id}`)
   if (!playable && d.subtitles?.length && m.videoCodec === 'h264') playable = m
   if (!subtitled && d.subtitles?.length) subtitled = m
-  if (!boxSet && d.details?.collection) boxSet = d.details.collection
+  // Only a box set with some of its films here has a page to show.
+  if (!boxSet && d.details?.collection) {
+    const set = await get(`/box-sets/${d.details.collection.id}`).catch(() => null)
+    if (list(set?.items ?? []).length) boxSet = d.details.collection
+  }
 }
 playable ??= subtitled ?? movie
 const person = movieDetail?.credits?.cast?.find((c) => c.hasPhoto)
@@ -87,7 +91,12 @@ console.log({ movie: movie?.title, playable: playable?.title, boxSet: boxSet?.na
 
 // --- Shoot ---
 const browser = await chromium.launch()
-const { open: openContext, shot } = capture(browser, { origin, only: new Set(names) })
+const { open: openContext, shot: save, wanted } = capture(browser, { origin, only: new Set(names) })
+const taken = new Set()
+const shot = async (page, name, options) => {
+  await save(page, name, options)
+  if (wanted(name)) taken.add(name)
+}
 
 async function open(options) {
   const page = await openContext(options)
@@ -247,12 +256,12 @@ try {
   await browser.close()
 }
 
-// The landing page shows some of the same screens.
+// The landing page shows some of the same screens; only the ones retaken here.
 const assets = path.resolve(import.meta.dirname, '../src/assets')
 for (const name of ['home', 'movie', 'up-next', 'filters', 'collections', 'album']) {
-  if (!names.length || names.includes(name)) copyFileSync(path.join(out, `${name}.webp`), path.join(assets, `${name}.webp`))
+  if (taken.has(name)) copyFileSync(path.join(out, `${name}.webp`), path.join(assets, `${name}.webp`))
 }
-if (!names.length || names.includes('file-details')) {
+if (taken.has('file-details')) {
   const file = path.join(out, 'file-details.webp')
   const { width, height } = await sharp(file).metadata()
   await sharp(file)
