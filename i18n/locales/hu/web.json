@@ -633,6 +633,7 @@
     "remote": {
       "title": "Távoli hozzáférés",
       "publicURL": "Otthonon kívül az alkalmazások ide csatlakoznak: <url>{{url}}</url>, ezzel a címmel lett beállítva a szerver.",
+      "publicURLHomeOnly": "A(z) <url>{{url}}</url>, amellyel ezt a szervert beállították, csak az otthoni hálózatod egyik címére vezet, ezért az alkalmazások otthonon kívül nem tudják használni.",
       "toggle": "Nézés otthonon kívül",
       "hint": "A Matinee megkéri a routeredet, hogy nyisson egy portot, és szerez egy tanúsítványt, így az alkalmazások bárhonnan biztonságosan csatlakoznak. Kívülről mindenki bejelentkezik.",
       "working": "Port nyitása a routeren és tanúsítvány beszerzése…",

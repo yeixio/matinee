@@ -633,6 +633,7 @@
     "remote": {
       "title": "Ekstern tilgang",
       "publicURL": "Borte fra hjemmet kobler appene seg til <url>{{url}}</url>, adressen denne serveren ble satt opp med.",
+      "publicURLHomeOnly": "<url>{{url}}</url>, adressen serveren ble satt opp med, leder bare til en adresse på hjemmenettet ditt, så appene kan ikke bruke den borte fra hjemmet.",
       "toggle": "Se borte fra hjemmet",
       "hint": "Matinee ber ruteren din åpne en port og skaffer et sertifikat, så appene kobler seg sikkert til fra hvor som helst. Alle logger inn utenfra.",
       "working": "Åpner en port på ruteren og skaffer et sertifikat…",

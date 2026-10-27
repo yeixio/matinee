@@ -73,6 +73,9 @@ type Server struct {
 	Remote *remote.Manager
 	// PublicURL is the address set with MATINEE_PUBLIC_URL, if any.
 	PublicURL string
+	// LookupHost resolves PublicURL's host; nil uses the system resolver.
+	LookupHost  func(ctx context.Context, host string) ([]string, error)
+	publicCheck publicCheck // whether PublicURL's address is public (see remote.go)
 
 	// HomeListener means the home network has its own listener (HomeHandler),
 	// so requests to the main one never count as coming from home.

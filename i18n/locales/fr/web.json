@@ -637,6 +637,7 @@
     "remote": {
       "title": "Accès à distance",
       "publicURL": "Hors de chez vous, les apps se connectent à <url>{{url}}</url>, l’adresse avec laquelle ce serveur a été configuré.",
+      "publicURLHomeOnly": "<url>{{url}}</url>, l’adresse avec laquelle ce serveur a été configuré, ne mène qu’à une adresse de votre réseau domestique : les apps ne peuvent donc pas l’utiliser hors de chez vous.",
       "toggle": "Regarder hors de chez vous",
       "hint": "Matinee demande à votre routeur d’ouvrir un port et obtient un certificat pour que les apps se connectent en toute sécurité depuis n’importe où. Depuis l’extérieur, tout le monde se connecte.",
       "working": "Ouverture d’un port sur votre routeur et obtention d’un certificat…",

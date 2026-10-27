@@ -629,6 +629,7 @@
     "remote": {
       "title": "遠端存取",
       "publicURL": "外出時，App 會連線到 <url>{{url}}</url>，也就是設定此伺服器時使用的地址。",
+      "publicURLHomeOnly": "設定此伺服器時使用的位址 <url>{{url}}</url> 只指向你家庭網路中的位址，因此 App 在外面無法使用它。",
       "toggle": "在外觀看",
       "hint": "Matinee 會請求路由器開啟一個埠並取得憑證，讓 App可以在任何地方安全連線。從外部存取時所有人都需要登入。",
       "working": "正在路由器上開啟埠並取得憑證…",

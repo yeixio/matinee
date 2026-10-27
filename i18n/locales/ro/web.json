@@ -637,6 +637,7 @@
     "remote": {
       "title": "Acces la distanță",
       "publicURL": "În afara casei, aplicațiile se conectează la <url>{{url}}</url>, adresa cu care a fost configurat acest server.",
+      "publicURLHomeOnly": "<url>{{url}}</url>, adresa cu care a fost configurat acest server, duce doar la o adresă din rețeaua ta de acasă, așa că aplicațiile nu o pot folosi în afara casei.",
       "toggle": "Vizionează în afara casei",
       "hint": "Matinee îi cere routerului tău să deschidă un port și obține un certificat, ca aplicațiile să se conecteze în siguranță de oriunde. Din exterior, toți se conectează.",
       "working": "Se deschide un port pe router și se obține un certificat…",

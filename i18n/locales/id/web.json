@@ -629,6 +629,7 @@
     "remote": {
       "title": "Akses jarak jauh",
       "publicURL": "Di luar rumah, aplikasi terhubung ke <url>{{url}}</url>, alamat yang dipakai saat server ini disiapkan.",
+      "publicURLHomeOnly": "<url>{{url}}</url>, alamat yang dipakai saat menyiapkan server ini, hanya mengarah ke alamat di jaringan rumahmu, jadi aplikasi tidak bisa memakainya di luar rumah.",
       "toggle": "Tonton di luar rumah",
       "hint": "Matinee meminta router-mu membuka port dan mendapatkan sertifikat agar aplikasi terhubung dengan aman dari mana saja. Semua orang masuk dari luar.",
       "working": "Membuka port di router dan mendapatkan sertifikat…",

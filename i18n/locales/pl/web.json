@@ -641,6 +641,7 @@
     "remote": {
       "title": "Dostęp zdalny",
       "publicURL": "Poza domem aplikacje łączą się z <url>{{url}}</url>, adresem, z którym skonfigurowano ten serwer.",
+      "publicURLHomeOnly": "<url>{{url}}</url>, adres, z którym skonfigurowano ten serwer, prowadzi tylko do adresu w Twojej sieci domowej, więc aplikacje nie mogą go używać poza domem.",
       "toggle": "Oglądaj poza domem",
       "hint": "Matinee prosi router o otwarcie portu i pobiera certyfikat, aby aplikacje łączyły się bezpiecznie z dowolnego miejsca. Z zewnątrz wszyscy się logują.",
       "working": "Otwieranie portu na routerze i pobieranie certyfikatu…",

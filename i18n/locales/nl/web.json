@@ -633,6 +633,7 @@
     "remote": {
       "title": "Toegang op afstand",
       "publicURL": "Buitenshuis maken de apps verbinding met <url>{{url}}</url>, het adres waarmee deze server is ingesteld.",
+      "publicURLHomeOnly": "<url>{{url}}</url>, het adres waarmee deze server is ingesteld, leidt alleen naar een adres in je thuisnetwerk, dus de apps kunnen het buitenshuis niet gebruiken.",
       "toggle": "Buitenshuis kijken",
       "hint": "Matinee vraagt je router een poort te openen en haalt een certificaat op, zodat de apps overal veilig verbinding maken. Van buitenaf logt iedereen in.",
       "working": "Poort op je router openen en een certificaat ophalen…",

@@ -629,6 +629,7 @@
     "remote": {
       "title": "Akses jauh",
       "publicURL": "Di luar rumah, apl bersambung ke <url>{{url}}</url>, alamat yang digunakan semasa pelayan ini disediakan.",
+      "publicURLHomeOnly": "<url>{{url}}</url>, alamat yang digunakan semasa menyediakan pelayan ini, hanya menuju ke alamat dalam rangkaian rumah anda, jadi apl tidak boleh menggunakannya di luar rumah.",
       "toggle": "Tonton di luar rumah",
       "hint": "Matinee meminta penghala anda membuka port dan mendapatkan sijil supaya apl bersambung dengan selamat dari mana-mana. Semua orang log masuk dari luar.",
       "working": "Membuka port pada penghala dan mendapatkan sijil…",

@@ -633,6 +633,7 @@
     "remote": {
       "title": "Uzaktan erişim",
       "publicURL": "Evden uzaktayken uygulamalar, bu sunucunun kurulduğu adres olan <url>{{url}}</url> adresine bağlanır.",
+      "publicURLHomeOnly": "Bu sunucunun kurulduğu adres olan <url>{{url}}</url> yalnızca ev ağındaki bir adrese gidiyor, bu yüzden uygulamalar onu evin dışında kullanamaz.",
       "toggle": "Evden uzakta izle",
       "hint": "Matinee yönlendiricinden bir port açmasını ister ve bir sertifika alır, böylece uygulamalar her yerden güvenle bağlanır. Dışarıdan herkes giriş yapar.",
       "working": "Yönlendiricide port açılıyor ve sertifika alınıyor…",

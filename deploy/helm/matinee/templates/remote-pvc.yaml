@@ -1,0 +1,20 @@
+{{- $r := .Values.remoteAccess }}
+{{- if and $r.enabled (not $r.persistence.existingClaim) }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "matinee.fullname" . }}-remote
+  labels:
+    {{- include "matinee.labels" . | nindent 4 }}
+  annotations:
+    # The server's identity; keep it if the chart is uninstalled.
+    helm.sh/resource-policy: keep
+spec:
+  accessModes: [ReadWriteOnce]
+  {{- with $r.persistence.storageClass }}
+  storageClassName: {{ . | quote }}
+  {{- end }}
+  resources:
+    requests:
+      storage: {{ $r.persistence.size }}
+{{- end }}

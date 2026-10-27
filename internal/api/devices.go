@@ -39,7 +39,7 @@ func (s *Server) serverInfo(w http.ResponseWriter, r *http.Request) {
 		s.serverError(w, err)
 		return
 	}
-	serverID, lookupURL := s.lookup()
+	serverID, lookupURL := s.lookup(r.Context())
 	writeJSON(w, http.StatusOK, map[string]any{
 		"product":    "matinee",
 		"version":    version.Version,
@@ -50,7 +50,7 @@ func (s *Server) serverInfo(w http.ResponseWriter, r *http.Request) {
 		"homeAccess": home,
 		// Where to reach this server away from home; apps keep it from
 		// their last visit. Empty when the server has no such address.
-		"remoteURL": s.remoteURL(),
+		"remoteURL": s.remoteURL(r.Context()),
 		// When the outside address changes while an app is away, it finds
 		// the new one at lookupURL (internal/connect). Empty without one.
 		"serverId":  serverID,

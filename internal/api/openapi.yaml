@@ -2160,6 +2160,10 @@ components:
           type: string
           readOnly: true
           description: The address set with `MATINEE_PUBLIC_URL`, which apps use away from home. Ignored in a `PUT`.
+        publicURLHomeOnly:
+          type: boolean
+          readOnly: true
+          description: True when `publicURL`'s name doesn't resolve to a public address, so it only works at home and remote access is offered as if it weren't set.
         libraryWatch:
           type: string
           enum: [auto, poll, off]

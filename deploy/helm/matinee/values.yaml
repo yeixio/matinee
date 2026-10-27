@@ -111,6 +111,24 @@ discovery:
   homePort: 7172
   resources: {}
 
+# Watching away from home without an ingress the internet can reach
+# (docs/guide/server/remote-access.md). Matinee asks the home router for a
+# port and gets its own certificate, which it can only do from the node's
+# network, so this runs the pod on the host network of its node: its ports
+# (7171, the home port and remoteAccess.port) are opened on that node.
+# Leave it off when your ingress is already reachable from the internet.
+remoteAccess:
+  enabled: false
+  # The port on the node that the router forwards to.
+  port: 7443
+  # The server's key, certificate and Matinee Connect subscription. The key
+  # is the server's identity to the apps and to Matinee Connect, so it's
+  # kept on a volume that survives restarts.
+  persistence:
+    size: 64Mi
+    storageClass: ""
+    existingClaim: ""
+
 # Hardware transcoding. Matinee tests the GPUs it can see at startup and uses
 # the best one that works (Settings → Transcoding shows which, and lets an
 # admin pick another or turn it off). These values give the pod a GPU. To run

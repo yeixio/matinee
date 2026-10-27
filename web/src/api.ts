@@ -61,6 +61,8 @@ export type Settings = {
   remote?: RemoteStatus
   // The address set with MATINEE_PUBLIC_URL, which the apps use away from home.
   publicURL?: string
+  // publicURL's name doesn't resolve to a public address: it only works at home.
+  publicURLHomeOnly?: boolean
   // How library folders are watched for new files.
   libraryWatch: WatchMode
   // Set on the server's command line: how often polled folders are checked,

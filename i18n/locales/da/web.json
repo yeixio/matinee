@@ -633,6 +633,7 @@
     "remote": {
       "title": "Fjernadgang",
       "publicURL": "Uden for hjemmet forbinder apps til <url>{{url}}</url>, adressen denne server blev sat op med.",
+      "publicURLHomeOnly": "<url>{{url}}</url>, adressen serveren blev sat op med, fører kun til en adresse på dit hjemmenetværk, så apps kan ikke bruge den uden for hjemmet.",
       "toggle": "Se uden for hjemmet",
       "hint": "Matinee beder din router om at åbne en port og henter et certifikat, så apps forbinder sikkert hvor som helst fra. Alle logger ind udefra.",
       "working": "Åbner en port på din router og henter et certifikat…",
