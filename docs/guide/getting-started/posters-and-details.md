@@ -29,7 +29,9 @@ Restart Matinee. The next scan fills in what's missing; you can start one from *
 
 ## Why isn't a key built in?
 
-TMDB's free keys are for personal use, and a key shipped inside Matinee would be shared by every server in the world. Once donations and app sales bring in enough, the project will license a key and build it into the official images so new servers get artwork with no setup. Until then, each server brings its own.
+TMDB's free keys are for personal use, and a key shipped inside Matinee would be shared by every server in the world. Once donations and app sales reach $150 a month, Matinee will license a commercial TMDB key and build it into the official images and packages, so new servers get artwork with no setup. Until then, each server brings its own.
+
+You can help get there by [donating to Matinee](https://yeix.io/matinee/donate), once or monthly, or by buying the [phone and TV apps](/docs/apps/phone-and-tv/).
 
 ## Without a key
 

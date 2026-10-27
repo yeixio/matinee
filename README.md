@@ -4,6 +4,8 @@ A fast, self-hosted media server for your movies, TV and music. Point it at your
 
 **[matinee.yeix.io](https://matinee.yeix.io)** has the user guide, with screenshots of every feature.
 
+[![Donate to Matinee](https://img.shields.io/badge/Donate-Support_Matinee-ff6a55?style=for-the-badge&logo=stripe&logoColor=white)](https://yeix.io/matinee/donate)
+
 ![Home in the web player](docs/guide/images/home.webp)
 
 <p>
@@ -166,7 +168,9 @@ Matinee looks up posters, backdrops and descriptions on [TMDB](https://www.themo
 
 Restart Matinee. The next library scan fills in the artwork.
 
-**Why isn't a key built in?** TMDB's free keys are for personal use, and a key shipped inside Matinee would be shared by every server. Once donations or client app sales bring in enough, we'll license a TMDB key for the project and build it into the official images, so new servers get artwork with no setup. Until then, you use your own key.
+The [guide](https://matinee.yeix.io/docs/getting-started/posters-and-details/) has the same steps with a table for every kind of install.
+
+**Why isn't a key built in?** TMDB's free keys are for personal use, and a key shipped inside Matinee would be shared by every server. Once [donations](https://yeix.io/matinee/donate) and app sales reach $150 a month, Matinee will license a commercial TMDB key and build it into the official images and packages, so new servers get artwork with no setup. Until then, you use your own key.
 
 ### Radarr and Sonarr
 
@@ -287,6 +291,12 @@ The Go tests build real media files with FFmpeg and run a full scan, browse, pla
 ## Releasing
 
 Push a version tag, such as `git tag v0.2.0 && git push origin v0.2.0`. The release workflow tests, then publishes `ghcr.io/yeixio/matinee:0.2.0` (and `0.2`, `latest`) for amd64, arm64 and armv7, pushes the Helm chart to `oci://ghcr.io/yeixio/charts/matinee` with that version, and attaches single-binary archives for Linux, macOS and Windows plus `.deb` and `.rpm` packages to a GitHub release. It then installs the packages from freshly built apt and dnf repositories in Debian, Ubuntu and Fedora containers, publishes those repositories on the `packages` branch, and opens a pull request updating `Formula/matinee.rb` for Homebrew. A tag with a suffix (`v0.2.0-beta.1`) is a pre-release: it leaves `latest`, Homebrew, apt and dnf alone. Packaging details and the signing key setup are in [docs/packaging.md](docs/packaging.md).
+
+## Support Matinee
+
+Matinee's server is free and always will be. [Donations](https://yeix.io/matinee/donate) (once or monthly, by card) and the paid phone and TV apps fund its development. The first goal: once they reach $150 a month, Matinee will license a commercial TMDB key so new servers get posters and descriptions with no setup. Until then, each server needs [its own free key](#posters-and-descriptions-tmdb-key).
+
+[![Donate to Matinee](https://img.shields.io/badge/Donate-Support_Matinee-ff6a55?style=for-the-badge&logo=stripe&logoColor=white)](https://yeix.io/matinee/donate)
 
 ## Contributing
 
