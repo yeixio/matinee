@@ -67,6 +67,7 @@
   "password_must_be_at_most_72_bytes": "parola en fazla 72 bayt olmalı",
   "person_not_found": "kişi bulunamadı",
   "picture_subtitles_need_a_converted_quality_not_the_original_file": "resim altyazıları orijinal dosya değil, dönüştürülmüş bir kalite gerektirir",
+  "remoteforwardedport_must_be_443_80_or_0": "remoteForwardedPort 443, 80 veya 0 olmalı",
   "replaced_by_a_newer_seek": "daha yeni bir ilerletmeyle değiştirildi",
   "request_not_found": "istek bulunamadı",
   "requests_must_be_off_approve_or_auto": "requests off, approve veya auto olmalı",

@@ -67,6 +67,7 @@
   "password_must_be_at_most_72_bytes": "รหัสผ่านต้องไม่เกิน 72 ไบต์",
   "person_not_found": "ไม่พบบุคคล",
   "picture_subtitles_need_a_converted_quality_not_the_original_file": "คำบรรยายแบบภาพต้องใช้คุณภาพที่แปลงแล้ว ไม่ใช่ไฟล์ต้นฉบับ",
+  "remoteforwardedport_must_be_443_80_or_0": "remoteForwardedPort ต้องเป็น 443, 80 หรือ 0",
   "replaced_by_a_newer_seek": "ถูกแทนที่ด้วยการข้ามที่ใหม่กว่า",
   "request_not_found": "ไม่พบคำขอ",
   "requests_must_be_off_approve_or_auto": "requests ต้องเป็น off, approve หรือ auto",

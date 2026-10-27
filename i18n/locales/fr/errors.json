@@ -67,6 +67,7 @@
   "password_must_be_at_most_72_bytes": "le mot de passe doit comporter au plus 72 octets",
   "person_not_found": "personne introuvable",
   "picture_subtitles_need_a_converted_quality_not_the_original_file": "les sous-titres en image nécessitent une qualité convertie, pas le fichier original",
+  "remoteforwardedport_must_be_443_80_or_0": "remoteForwardedPort doit valoir 443, 80 ou 0",
   "replaced_by_a_newer_seek": "remplacé par un déplacement plus récent",
   "request_not_found": "demande introuvable",
   "requests_must_be_off_approve_or_auto": "requests doit valoir off, approve ou auto",

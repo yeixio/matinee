@@ -67,6 +67,7 @@
   "password_must_be_at_most_72_bytes": "das Passwort darf höchstens 72 Byte haben",
   "person_not_found": "Person nicht gefunden",
   "picture_subtitles_need_a_converted_quality_not_the_original_file": "Bilduntertitel brauchen eine umgewandelte Qualität, nicht die Originaldatei",
+  "remoteforwardedport_must_be_443_80_or_0": "remoteForwardedPort muss 443, 80 oder 0 sein",
   "replaced_by_a_newer_seek": "durch einen neueren Sprung ersetzt",
   "request_not_found": "Wunsch nicht gefunden",
   "requests_must_be_off_approve_or_auto": "requests muss off, approve oder auto sein",

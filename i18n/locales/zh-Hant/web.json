@@ -635,8 +635,13 @@
       "ready": "外出時，App 透過 <url>{{url}}</url> 存取此伺服器。",
       "router": "路由器已透過 {{router}} 開啟埠。",
       "pickUp": "它們下次連上家庭網路時會取得這個地址。",
-      "sharedAddress": "Matinee 暫時無法自行解決這個問題。",
-      "retry": "Matinee 每半小時重試一次。"
+      "retry": "Matinee 每半小時重試一次。",
+      "forward": "路由器埠",
+      "forwardAuto": "讓路由器自動開啟（UPnP 或 NAT-PMP）",
+      "forwardPort": "我已自行轉送埠 {{port}}",
+      "forwardHint": "如果路由器不會依要求開啟埠，請在其設定中將埠 443（或 80）轉送到這台電腦的埠 {{port}}，然後在這裡選擇該埠。",
+      "findable": "即使家中的網際網路位址改變，App 也能找到這台伺服器。",
+      "direct": "App 一律直接連線到這台伺服器，從不經過他人的伺服器，因此需要網路業者提供的公開位址。"
     },
     "playback": {
       "title": "播放",

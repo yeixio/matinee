@@ -67,6 +67,7 @@
   "password_must_be_at_most_72_bytes": "הסיסמה יכולה להכיל לכל היותר 72 בתים",
   "person_not_found": "האדם לא נמצא",
   "picture_subtitles_need_a_converted_quality_not_the_original_file": "כתוביות תמונה דורשות איכות מומרת, לא את הקובץ המקורי",
+  "remoteforwardedport_must_be_443_80_or_0": "remoteForwardedPort חייב להיות 443, 80 או 0",
   "replaced_by_a_newer_seek": "הוחלף בדילוג חדש יותר",
   "request_not_found": "הבקשה לא נמצאה",
   "requests_must_be_off_approve_or_auto": "requests חייב להיות off, approve או auto",

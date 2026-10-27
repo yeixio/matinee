@@ -67,6 +67,7 @@
   "password_must_be_at_most_72_bytes": "密码最多 72 个字节",
   "person_not_found": "找不到此人",
   "picture_subtitles_need_a_converted_quality_not_the_original_file": "图形字幕需要转换后的画质，不能用原始文件",
+  "remoteforwardedport_must_be_443_80_or_0": "remoteForwardedPort 必须是 443、80 或 0",
   "replaced_by_a_newer_seek": "已被更新的跳转取代",
   "request_not_found": "找不到该请求",
   "requests_must_be_off_approve_or_auto": "requests 必须是 off、approve 或 auto",

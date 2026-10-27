@@ -43,6 +43,33 @@ func TestRemoteAccessSetting(t *testing.T) {
 	}
 }
 
+func TestRemoteForwardedPortSetting(t *testing.T) {
+	m := &remote.Manager{Addr: "127.0.0.1:0", Dir: t.TempDir(), Handler: http.NotFoundHandler(), Log: slog.New(slog.NewTextHandler(io.Discard, nil))}
+	c, _ := newTestServer(t, func(s *Server) { s.Remote = m })
+	var login struct{ Token string }
+	c.do("POST", "/api/v1/setup", credentials{"admin", "correct horse"}, &login)
+	c.token = login.Token
+
+	var set serverSettings
+	if code := c.do("PUT", "/api/v1/settings", map[string]any{"remoteForwardedPort": 7443}, &set); code != http.StatusBadRequest {
+		t.Fatalf("port the certificate check can't use: %d", code)
+	}
+	if code := c.do("PUT", "/api/v1/settings", map[string]any{"remoteForwardedPort": 443}, &set); code != 200 || set.RemoteForwardedPort != 443 {
+		t.Fatalf("set 443: %d %+v", code, set)
+	}
+	c.do("GET", "/api/v1/settings", nil, &set)
+	if set.RemoteForwardedPort != 443 {
+		t.Fatalf("kept %d", set.RemoteForwardedPort)
+	}
+
+	// Without an outside address, the apps get no lookup either.
+	var info struct{ ServerID, LookupURL *string }
+	c.do("GET", "/api/v1/server", nil, &info)
+	if info.ServerID == nil || *info.ServerID != "" || info.LookupURL == nil || *info.LookupURL != "" {
+		t.Fatalf("server %+v", info)
+	}
+}
+
 func TestPublicURLIsRemoteURL(t *testing.T) {
 	c, _ := newTestServer(t, func(s *Server) { s.PublicURL = "https://matinee.example.com" })
 	var info struct{ RemoteURL string }

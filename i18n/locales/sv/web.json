@@ -639,8 +639,13 @@
       "ready": "Apparna når servern på <url>{{url}}</url> när de är borta från hemmet.",
       "router": "Din router öppnade porten via {{router}}.",
       "pickUp": "De hämtar den här adressen nästa gång de är i ditt hemnätverk.",
-      "sharedAddress": "Matinee kan inte ta sig runt det här på egen hand än.",
-      "retry": "Matinee försöker igen varje halvtimme."
+      "retry": "Matinee försöker igen varje halvtimme.",
+      "forward": "Routerport",
+      "forwardAuto": "Be routern öppna en (UPnP eller NAT-PMP)",
+      "forwardPort": "Jag vidarebefordrade port {{port}} själv",
+      "forwardHint": "Om routern inte öppnar en port när den blir ombedd, vidarebefordra port 443 (eller 80) i dess inställningar till port {{port}} på den här datorn och välj sedan den porten här.",
+      "findable": "Om hemmets internetadress ändras hittar apparna ändå den här servern.",
+      "direct": "Apparna ansluter alltid direkt till den här servern, aldrig via någon annans, så det behövs en offentlig adress från din internetleverantör."
     },
     "playback": {
       "title": "Uppspelning",

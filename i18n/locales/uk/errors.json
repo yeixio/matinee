@@ -67,6 +67,7 @@
   "password_must_be_at_most_72_bytes": "пароль має бути не довшим за 72 байти",
   "person_not_found": "людину не знайдено",
   "picture_subtitles_need_a_converted_quality_not_the_original_file": "графічним субтитрам потрібна перекодована якість, а не вихідний файл",
+  "remoteforwardedport_must_be_443_80_or_0": "remoteForwardedPort має бути 443, 80 або 0",
   "replaced_by_a_newer_seek": "замінено новішим перемотуванням",
   "request_not_found": "запит не знайдено",
   "requests_must_be_off_approve_or_auto": "requests має бути off, approve або auto",

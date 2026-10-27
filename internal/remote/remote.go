@@ -4,8 +4,12 @@
 // serves the API over HTTPS there. The apps learn the address while at
 // home (GET /api/v1/server) and use it when they're away.
 //
-// It can't help when the internet provider shares one public address
-// among customers, or with a second router in the way; Status says so.
+// When the router won't open ports, an admin can forward one by hand
+// (SetForwardedPort). While it's ready, the server registers its address
+// with the connect service, so the apps can find it after the address
+// changes (internal/connect). Media never goes through anything but this
+// port: when the internet provider shares one public address among
+// customers, or a second router is in the way, Status says what to change.
 package remote
 
 import (
@@ -22,6 +26,8 @@ import (
 	"sync"
 	"sync/atomic"
 	"time"
+
+	"github.com/yeixio/matinee/internal/connect"
 )
 
 // Status is what Settings shows about remote access.
@@ -39,7 +45,16 @@ type Status struct {
 	// SharedAddress means the router has no public address of its own (the
 	// provider shares one, or another router sits in front), which only a
 	// relay can get around.
-	SharedAddress      bool       `json:"sharedAddress,omitempty"`
+	SharedAddress bool `json:"sharedAddress,omitempty"`
+	// ForwardedPort is the router port an admin forwarded by hand; 0 means
+	// the router is asked to open one.
+	ForwardedPort int `json:"forwardedPort,omitempty"`
+	// ListenPort is this server's remote access port, where a port
+	// forwarded by hand should go.
+	ListenPort int `json:"listenPort,omitempty"`
+	// Findable means the connect service knows the current address, so
+	// the apps find this server even after the address changes.
+	Findable           bool       `json:"findable,omitempty"`
 	CertificateExpires *time.Time `json:"certificateExpires,omitempty"`
 	CheckedAt          *time.Time `json:"checkedAt,omitempty"`
 }
@@ -57,6 +72,9 @@ type Manager struct {
 	Dir     string       // keeps the certificate and the CA account key
 	Handler http.Handler // serves the API
 	Log     *slog.Logger
+	// Connect is the service the apps look this server up with; nil for
+	// none, which also rules out a port forwarded by hand.
+	Connect *connect.Client
 
 	// For tests: the ACME directory (default Let's Encrypt), an HTTP client
 	// for it, a router, challenges to try, and accepting private addresses.
@@ -66,15 +84,16 @@ type Manager struct {
 	Challenges   []challenge
 	AllowPrivate bool
 
-	mu       sync.Mutex
-	enabled  bool
-	status   Status
-	wake     chan struct{}
-	srv      *http.Server
-	port     int    // the listener's port
-	router   router // nil until found
-	mapped   int    // external port forwarded to the listener; 0 if none
-	lastFail time.Time
+	mu        sync.Mutex
+	enabled   bool
+	forwarded int // the router port an admin forwarded by hand; 0 for none
+	status    Status
+	wake      chan struct{}
+	srv       *http.Server
+	port      int    // the listener's port
+	router    router // nil until found
+	mapped    int    // external port forwarded to the listener; 0 if none
+	lastFail  time.Time
 
 	cert            atomic.Pointer[tls.Certificate]
 	alpnCert        atomic.Pointer[tls.Certificate]
@@ -118,6 +137,34 @@ func (m *Manager) poke() {
 	case w <- struct{}{}:
 	default:
 	}
+}
+
+// SetForwardedPort says the admin forwarded the router's port ext (443 or
+// 80) to this server's remote access port by hand; 0 goes back to asking
+// the router.
+func (m *Manager) SetForwardedPort(ext int) {
+	m.mu.Lock()
+	changed := m.forwarded != ext
+	m.forwarded = ext
+	if changed {
+		m.lastFail = time.Time{}
+		if m.enabled {
+			m.status = Status{Enabled: true, State: StateWorking}
+		}
+	}
+	m.mu.Unlock()
+	if changed {
+		m.poke()
+	}
+}
+
+// Lookup is this server's id with the connect service and the address the
+// apps look it up at, or "" without the service.
+func (m *Manager) Lookup() (id, url string) {
+	if m.Connect == nil {
+		return "", ""
+	}
+	return m.Connect.ID(), m.Connect.LookupURL()
 }
 
 // Status reports how remote access is doing.
@@ -189,6 +236,7 @@ func (m *Manager) check(ctx context.Context) {
 		m.Log.Warn("remote access isn't working", "err", err)
 	} else {
 		st.State = StateReady
+		st.Findable = m.register(ctx, m.mapped, st.URL)
 	}
 	m.mu.Lock()
 	if err != nil {
@@ -207,7 +255,21 @@ func (m *Manager) setUp(ctx context.Context) (Status, error) {
 	if err := m.listen(); err != nil {
 		return st, fmt.Errorf("couldn't listen on %s: %w", m.Addr, err)
 	}
+	m.mu.Lock()
+	forwarded := m.forwarded
+	m.mu.Unlock()
+	st.ForwardedPort, st.ListenPort = forwarded, m.port
+	if fr, ok := m.router.(*forwardedPort); (forwarded != 0) != ok || ok && fr.ext != forwarded {
+		m.dropRouter(ctx)
+	}
 	r := m.router
+	if r == nil && forwarded != 0 {
+		if m.Connect == nil {
+			return st, errors.New("a port forwarded by hand needs the connect service, which this server has turned off (MATINEE_CONNECT_URL)")
+		}
+		r = &forwardedPort{ext: forwarded, internal: m.port, check: m.Connect.Check}
+		m.router = r
+	}
 	if r == nil {
 		find := m.FindRouter
 		if find == nil {
@@ -216,12 +278,21 @@ func (m *Manager) setUp(ctx context.Context) (Status, error) {
 		var err error
 		if r, err = find(ctx); err != nil {
 			m.Log.Debug("no router for remote access", "err", err)
-			return st, errors.New("no router on this network offered to open a port. Turn on UPnP or NAT-PMP in the router's settings. If Matinee runs in a container, give it the host's network")
+			msg := "no router on this network offered to open a port. Turn on UPnP or NAT-PMP in the router's settings"
+			if m.Connect != nil {
+				msg += ", or forward port 443 to port " + strconv.Itoa(m.port) + " on this computer yourself and pick it under Router port"
+			}
+			return st, errors.New(msg + ". If Matinee runs in a container, give it the host's network")
 		}
 		m.router = r
 	}
 	st.Router = r.Name()
 	ip, err := r.ExternalIP(ctx)
+	var missing *forwardMissing
+	if errors.As(err, &missing) {
+		st.PublicIP = missing.ip.String()
+		return st, err
+	}
 	if err != nil {
 		m.router = nil
 		return st, fmt.Errorf("the router wouldn't say its internet address: %w", err)
@@ -229,7 +300,7 @@ func (m *Manager) setUp(ctx context.Context) (Status, error) {
 	st.PublicIP = ip.String()
 	if !m.AllowPrivate && !public(ip) {
 		st.SharedAddress = true
-		return st, errors.New("this router has no internet address of its own (" + ip.String() + "): the internet provider shares one among customers, or another router sits in front of this one, so the internet can't reach this server directly")
+		return st, errors.New("this router has no internet address of its own (" + ip.String() + "): the internet provider shares one among customers, or another router sits in front of this one, so the internet can't reach this server directly. Ask the provider for a public address, or put the router in front into bridge mode")
 	}
 	want := m.mapped
 	if want == 0 {
@@ -274,12 +345,8 @@ func current(c *tls.Certificate, ip netip.Addr) bool {
 	return match && time.Until(c.Leaf.NotAfter) > life/3
 }
 
-// public reports whether ip is reachable from the internet: not private,
-// and not in the 100.64.0.0/10 range providers share among customers.
-func public(ip netip.Addr) bool {
-	shared := netip.MustParsePrefix("100.64.0.0/10")
-	return ip.IsGlobalUnicast() && !ip.IsPrivate() && !shared.Contains(ip)
-}
+// public reports whether ip is reachable from the internet.
+func public(ip netip.Addr) bool { return connect.Public(ip) }
 
 // sentence turns an error into something to show people.
 func sentence(s string) string {
@@ -293,12 +360,7 @@ func sentence(s string) string {
 	return s
 }
 
-func url(ip netip.Addr, port int) string {
-	if port == 443 {
-		return "https://" + ip.String()
-	}
-	return "https://" + net.JoinHostPort(ip.String(), strconv.Itoa(port))
-}
+func url(ip netip.Addr, port int) string { return connect.URL(ip, port) }
 
 func (m *Manager) listen() error {
 	if m.srv != nil {
@@ -324,8 +386,43 @@ func (m *Manager) listen() error {
 	return nil
 }
 
-// stop takes the forward down and closes the listener.
+// register tells the connect service the router's port ext reaches this
+// server, and reports whether it worked. The service registers the address
+// the request comes from, which should be the one the certificate is for.
+func (m *Manager) register(ctx context.Context, ext int, want string) bool {
+	if m.Connect == nil {
+		return false
+	}
+	reg, err := m.Connect.Register(ctx, ext)
+	if err != nil {
+		m.Log.Warn("couldn't tell the connect service this server's address; the apps find it when they're home", "err", err)
+		return false
+	}
+	if reg.URL != want {
+		m.Log.Warn("the connect service sees this server at another address", "service", reg.URL, "certificate", want)
+		return false
+	}
+	return true
+}
+
+// dropRouter takes the forward down, for a switch to or from a port
+// forwarded by hand.
+func (m *Manager) dropRouter(ctx context.Context) {
+	if m.router != nil && m.mapped != 0 {
+		m.router.Unmap(ctx, m.port, m.mapped)
+	}
+	m.mapped, m.router = 0, nil
+}
+
+// stop takes the forward and the registration down and closes the listener.
 func (m *Manager) stop(ctx context.Context) {
+	if m.Connect != nil && m.mapped != 0 {
+		ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
+		if _, err := m.Connect.Register(ctx, 0); err != nil {
+			m.Log.Debug("couldn't take the connect registration down; it expires by itself", "err", err)
+		}
+		cancel()
+	}
 	if m.router != nil && m.mapped != 0 {
 		ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
 		if err := m.router.Unmap(ctx, m.port, m.mapped); err != nil {

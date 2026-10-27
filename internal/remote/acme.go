@@ -161,26 +161,25 @@ func (m *Manager) challengeOrder() []challenge {
 // port to it, until done is called. It listens on a port of its own, since
 // NAT-PMP routers keep one forward per internal port.
 func (m *Manager) openChallenge(ctx context.Context, client *acme.Client, r router, chal *acme.Challenge, identifier string, ext int) (done func(), err error) {
+	if fr, ok := r.(*forwardedPort); ok {
+		// A port forwarded by hand goes to the remote access listener,
+		// which answers the challenge itself.
+		if fr.ext != ext {
+			return nil, fmt.Errorf("only port %d is forwarded", fr.ext)
+		}
+		if err := m.prepareChallenge(client, chal, identifier); err != nil {
+			return nil, err
+		}
+		return m.clearChallenge, nil
+	}
 	l, err := net.Listen("tcp", ":0")
 	if err != nil {
 		return nil, err
 	}
 	internal := l.Addr().(*net.TCPAddr).Port
-	switch chal.Type {
-	case "http-01":
-		resp, err := client.HTTP01ChallengeResponse(chal.Token)
-		if err != nil {
-			l.Close()
-			return nil, err
-		}
-		m.httpToken.Store(&httpAnswer{path: client.HTTP01ChallengePath(chal.Token), body: resp})
-	case "tls-alpn-01":
-		cert, err := client.TLSALPN01ChallengeCert(chal.Token, identifier)
-		if err != nil {
-			l.Close()
-			return nil, err
-		}
-		m.alpnCert.Store(&cert)
+	if err := m.prepareChallenge(client, chal, identifier); err != nil {
+		l.Close()
+		return nil, err
 	}
 	srv := &http.Server{Handler: m.challengeHandler(), ReadHeaderTimeout: 10 * time.Second}
 	go srv.Serve(newMixedListener(l, m.tlsConfig()))
@@ -192,14 +191,37 @@ func (m *Manager) openChallenge(ctx context.Context, client *acme.Client, r rout
 	done = func() {
 		r.Unmap(context.WithoutCancel(ctx), internal, ext)
 		srv.Close()
-		m.httpToken.Store(nil)
-		m.alpnCert.Store(nil)
+		m.clearChallenge()
 	}
 	if err != nil {
 		done()
 		return nil, err
 	}
 	return done, nil
+}
+
+// prepareChallenge has the listeners answer chal.
+func (m *Manager) prepareChallenge(client *acme.Client, chal *acme.Challenge, identifier string) error {
+	switch chal.Type {
+	case "http-01":
+		resp, err := client.HTTP01ChallengeResponse(chal.Token)
+		if err != nil {
+			return err
+		}
+		m.httpToken.Store(&httpAnswer{path: client.HTTP01ChallengePath(chal.Token), body: resp})
+	case "tls-alpn-01":
+		cert, err := client.TLSALPN01ChallengeCert(chal.Token, identifier)
+		if err != nil {
+			return err
+		}
+		m.alpnCert.Store(&cert)
+	}
+	return nil
+}
+
+func (m *Manager) clearChallenge() {
+	m.httpToken.Store(nil)
+	m.alpnCert.Store(nil)
 }
 
 type httpAnswer struct{ path, body string }

@@ -639,8 +639,13 @@
       "ready": "Sovellukset tavoittavat tämän palvelimen osoitteesta <url>{{url}}</url>, kun ne ovat kodin ulkopuolella.",
       "router": "Reitittimesi avasi portin käyttäen {{router}}.",
       "pickUp": "Ne poimivat tämän osoitteen, kun ne seuraavan kerran ovat kotiverkossasi.",
-      "sharedAddress": "Matinee ei vielä pääse tämän ohi omin avuin.",
-      "retry": "Matinee yrittää uudelleen puolen tunnin välein."
+      "retry": "Matinee yrittää uudelleen puolen tunnin välein.",
+      "forward": "Reitittimen portti",
+      "forwardAuto": "Pyydä reititintä avaamaan portti (UPnP tai NAT-PMP)",
+      "forwardPort": "Ohjasin portin {{port}} itse",
+      "forwardHint": "Jos reititin ei avaa porttia pyydettäessä, ohjaa sen asetuksissa portti 443 (tai 80) tämän tietokoneen porttiin {{port}} ja valitse se portti tästä.",
+      "findable": "Vaikka kotisi internetosoite vaihtuisi, sovellukset löytävät tämän palvelimen.",
+      "direct": "Sovellukset yhdistävät aina suoraan tähän palvelimeen, eivät koskaan kenenkään muun kautta, joten tähän tarvitaan julkinen osoite internetpalveluntarjoajalta."
     },
     "playback": {
       "title": "Toisto",

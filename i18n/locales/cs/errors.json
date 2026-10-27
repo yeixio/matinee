@@ -67,6 +67,7 @@
   "password_must_be_at_most_72_bytes": "heslo smí mít nejvýš 72 bajtů",
   "person_not_found": "osoba nenalezena",
   "picture_subtitles_need_a_converted_quality_not_the_original_file": "obrázkové titulky potřebují převedenou kvalitu, ne původní soubor",
+  "remoteforwardedport_must_be_443_80_or_0": "remoteForwardedPort musí být 443, 80 nebo 0",
   "replaced_by_a_newer_seek": "nahrazeno novějším přetočením",
   "request_not_found": "žádost nenalezena",
   "requests_must_be_off_approve_or_auto": "requests musí být off, approve nebo auto",

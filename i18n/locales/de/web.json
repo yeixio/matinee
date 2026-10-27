@@ -639,8 +639,13 @@
       "ready": "Unterwegs erreichen die Apps diesen Server unter <url>{{url}}</url>.",
       "router": "Dein Router hat den Port über {{router}} geöffnet.",
       "pickUp": "Sie übernehmen diese Adresse, wenn sie das nächste Mal in deinem Heimnetz sind.",
-      "sharedAddress": "Das kann Matinee noch nicht selbst umgehen.",
-      "retry": "Matinee versucht es jede halbe Stunde erneut."
+      "retry": "Matinee versucht es jede halbe Stunde erneut.",
+      "forward": "Router-Port",
+      "forwardAuto": "Den Router einen öffnen lassen (UPnP oder NAT-PMP)",
+      "forwardPort": "Ich habe Port {{port}} selbst weitergeleitet",
+      "forwardHint": "Wenn dein Router auf Anfrage keinen Port öffnet, leite in seinen Einstellungen Port 443 (oder 80) an Port {{port}} auf diesem Computer weiter und wähle den Port dann hier aus.",
+      "findable": "Wenn sich die Internetadresse deines Zuhauses ändert, finden die Apps diesen Server trotzdem.",
+      "direct": "Die Apps verbinden sich immer direkt mit diesem Server, nie über einen fremden, deshalb braucht es eine öffentliche Adresse von deinem Internetanbieter."
     },
     "playback": {
       "title": "Wiedergabe",

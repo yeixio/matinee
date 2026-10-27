@@ -152,6 +152,10 @@ type serverSettings struct {
 	// RemoteAccess opens a port on the router so the apps reach this server
 	// away from home (see remote.go). Off unless an admin turns it on.
 	RemoteAccess bool `json:"remoteAccess"`
+	// RemoteForwardedPort is the router port (443 or 80) an admin forwarded
+	// to the remote access port by hand, for routers that won't open one
+	// when asked; 0 asks the router.
+	RemoteForwardedPort int `json:"remoteForwardedPort"`
 	// Remote says how remote access is doing; nil when this server can't
 	// offer it (MATINEE_REMOTE_ADDR=off). It can't be changed.
 	Remote *remote.Status `json:"remote,omitempty"`
@@ -195,6 +199,10 @@ func (s *Server) settings(ctx context.Context) (serverSettings, error) {
 	if err != nil {
 		return serverSettings{}, err
 	}
+	forwarded, err := RemoteForwardedPort(ctx, s.Store)
+	if err != nil {
+		return serverSettings{}, err
+	}
 	tmdb, err := s.tmdbStatus(ctx)
 	if err != nil {
 		return serverSettings{}, err
@@ -202,7 +210,7 @@ func (s *Server) settings(ctx context.Context) (serverSettings, error) {
 	themes, problems := s.themes()
 	def, err := s.defaultTheme(ctx, themes)
 	set := serverSettings{RequireSignInAtHome: required, Requests: mode, RemoteTrailers: trailers, HolidayRows: holidaysOn, Theme: def,
-		RemoteAccess: remoteOn, Remote: s.remoteStatus(), PublicURL: s.PublicURL, TMDB: tmdb,
+		RemoteAccess: remoteOn, RemoteForwardedPort: forwarded, Remote: s.remoteStatus(), PublicURL: s.PublicURL, TMDB: tmdb,
 		ThemeProblems: []string{}, HardwareAcceleration: hwaccel.Auto, Hardware: &hwaccel.Status{Available: []hwaccel.Accel{}}}
 	for _, p := range problems {
 		set.ThemeProblems = append(set.ThemeProblems, p.Error())
@@ -238,6 +246,7 @@ func (s *Server) putSettings(w http.ResponseWriter, r *http.Request) {
 		HolidayRows          *bool   `json:"holidayRows"`
 		Theme                *string `json:"theme"`
 		RemoteAccess         *bool   `json:"remoteAccess"`
+		RemoteForwardedPort  *int    `json:"remoteForwardedPort"`
 		LibraryWatch         *string `json:"libraryWatch"`
 		// TMDBKey replaces the TMDB key; "" goes back to the environment's.
 		TMDBKey *string `json:"tmdbKey"`
@@ -330,6 +339,16 @@ func (s *Server) putSettings(w http.ResponseWriter, r *http.Request) {
 	}
 	if in.HolidayRows != nil {
 		if err := s.Store.SetSetting(ctx, settingHolidayRows, strconv.FormatBool(*in.HolidayRows)); err != nil {
+			s.serverError(w, err)
+			return
+		}
+	}
+	if in.RemoteForwardedPort != nil {
+		if !validForwardedPort(*in.RemoteForwardedPort) {
+			writeError(w, http.StatusBadRequest, "remoteForwardedPort must be 443, 80 or 0")
+			return
+		}
+		if err := s.setRemoteForwardedPort(ctx, *in.RemoteForwardedPort); err != nil {
 			s.serverError(w, err)
 			return
 		}

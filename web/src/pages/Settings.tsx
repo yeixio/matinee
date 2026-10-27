@@ -566,6 +566,25 @@ function RemoteAccess() {
           />
         </label>
       )}
+      {!data.publicURL && data.remoteAccess && (
+        <div className="rounded-xl border border-line/60 bg-surface/50 p-4">
+          <Field label={t('settings.remote.forward')}>
+            <select
+              className={inputClass}
+              value={data.remoteForwardedPort}
+              disabled={save.isPending}
+              onChange={(e) => save.mutate({ remoteForwardedPort: Number(e.target.value) })}
+            >
+              <option value={0}>{t('settings.remote.forwardAuto')}</option>
+              <option value={443}>{t('settings.remote.forwardPort', { port: 443 })}</option>
+              <option value={80}>{t('settings.remote.forwardPort', { port: 80 })}</option>
+            </select>
+          </Field>
+          <p className="mt-2 text-sm text-muted">
+            {t('settings.remote.forwardHint', { port: String(remote?.listenPort || 7443) })}
+          </p>
+        </div>
+      )}
     </section>
   )
 }
@@ -578,12 +597,13 @@ function RemoteState({ status }: { status?: RemoteStatus }) {
       <>
         <Trans i18nKey="settings.remote.ready" values={{ url: status.url }} components={{ url: <span className="font-medium text-text" dir="ltr" /> }} />
         {status.router && ` ${t('settings.remote.router', { router: status.router })}`} {t('settings.remote.pickUp')}
+        {status.findable && ` ${t('settings.remote.findable')}`}
       </>
     )
   return (
     <>
       <span className="block text-danger">{status.problem}</span>{' '}
-      {status.sharedAddress ? t('settings.remote.sharedAddress') : t('settings.remote.retry')}
+      {status.sharedAddress ? t('settings.remote.direct') : t('settings.remote.retry')}
     </>
   )
 }

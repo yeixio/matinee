@@ -67,6 +67,7 @@
   "password_must_be_at_most_72_bytes": "hasło może mieć najwyżej 72 bajty",
   "person_not_found": "nie znaleziono osoby",
   "picture_subtitles_need_a_converted_quality_not_the_original_file": "napisy graficzne wymagają przekonwertowanej jakości, a nie oryginalnego pliku",
+  "remoteforwardedport_must_be_443_80_or_0": "remoteForwardedPort musi wynosić 443, 80 lub 0",
   "replaced_by_a_newer_seek": "zastąpione nowszym przewinięciem",
   "request_not_found": "nie znaleziono prośby",
   "requests_must_be_off_approve_or_auto": "requests musi mieć wartość off, approve lub auto",

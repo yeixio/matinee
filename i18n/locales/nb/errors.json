@@ -67,6 +67,7 @@
   "password_must_be_at_most_72_bytes": "passordet kan være på høyst 72 byte",
   "person_not_found": "personen ble ikke funnet",
   "picture_subtitles_need_a_converted_quality_not_the_original_file": "bildeundertekster krever en konvertert kvalitet, ikke originalfilen",
+  "remoteforwardedport_must_be_443_80_or_0": "remoteForwardedPort må være 443, 80 eller 0",
   "replaced_by_a_newer_seek": "erstattet av en nyere spoling",
   "request_not_found": "ønsket ble ikke funnet",
   "requests_must_be_off_approve_or_auto": "requests må være off, approve eller auto",
