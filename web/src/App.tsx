@@ -24,6 +24,7 @@ const Settings = lazy(() => import('./pages/Settings'))
 const Link = lazy(() => import('./pages/Link'))
 const Requests = lazy(() => import('./pages/Requests'))
 const Upcoming = lazy(() => import('./pages/Upcoming'))
+const Discover = lazy(() => import('./pages/Discover'))
 
 export default function App() {
   const me = useQuery({ queryKey: ['me'], queryFn: api.me, staleTime: Infinity })
@@ -88,6 +89,7 @@ function Screens() {
           <Route path="/box-set/:id" element={<BoxSetPage />} />
           <Route path="/settings" element={grownUps(<Settings />)} />
           <Route path="/upcoming" element={grownUps(<Upcoming />)} />
+          <Route path="/discover" element={grownUps(<Discover />)} />
           <Route path="/requests" element={grownUps(me.data.guest ? <Login /> : <Requests />)} />
           {/* At home people can watch without signing in; these need a real account. */}
           <Route path="/link" element={grownUps(me.data.guest ? <Login /> : <Link user={me.data} />)} />

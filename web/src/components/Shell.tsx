@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { CalendarClock, Clapperboard, Home, Inbox, Layers, LogIn, LogOut, Music, Search, Settings, Tv } from 'lucide-react'
+import { CalendarClock, Clapperboard, Compass, Home, Inbox, Layers, LogIn, LogOut, Music, Search, Settings, Tv } from 'lucide-react'
 import { NavLink, Outlet } from 'react-router-dom'
 import { api, type Library, type User } from '../api'
 import { Avatar } from '../pages/Profiles'
@@ -61,6 +61,7 @@ export default function Shell({ user }: { user: User }) {
   const kids = isKids(user)
   const { data: opts } = useRequestOptions(!kids)
   const arr = !kids && !!opts && (opts.movies || opts.shows)
+  const discover = !kids && !!opts?.discover
   const waiting = kids ? 0 : (opts?.pendingRequests ?? 0) + (opts?.openIssues ?? 0)
   const { data: who } = useQuery({ queryKey: ['profiles'], queryFn: api.profiles, retry: false })
   const hasProfiles = (who?.profiles.length ?? 0) > 1
@@ -89,6 +90,11 @@ export default function Shell({ user }: { user: User }) {
             <NavLink to="/collections" className={topLink}>
               Collections
             </NavLink>
+            {discover && (
+              <NavLink to="/discover" className={topLink}>
+                Discover
+              </NavLink>
+            )}
             {libraries.map((l) => (
               <NavLink key={l.id} to={`/library/${l.id}`} className={topLink} onMouseEnter={() => prefetchLibrary(l.id)} onFocus={() => prefetchLibrary(l.id)}>
                 <span className="truncate">{l.name}</span>
@@ -165,11 +171,17 @@ export default function Shell({ user }: { user: User }) {
         <NavLink to="/" end className={tabLink}>
           <Home className="size-5" /> Home
         </NavLink>
-        {libraries.slice(0, 3).map((l) => (
+        {/* Discover takes a library's place when it's there. */}
+        {libraries.slice(0, discover ? 2 : 3).map((l) => (
           <NavLink key={l.id} to={`/library/${l.id}`} className={tabLink} onTouchStart={() => prefetchLibrary(l.id)}>
             <LibraryIcon kind={l.kind} /> <span className="max-w-16 truncate">{l.name}</span>
           </NavLink>
         ))}
+        {discover && (
+          <NavLink to="/discover" className={tabLink}>
+            <Compass className="size-5" /> Discover
+          </NavLink>
+        )}
         <NavLink to="/search" className={tabLink}>
           <Search className="size-5" /> Search
         </NavLink>

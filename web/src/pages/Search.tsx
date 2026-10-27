@@ -44,13 +44,24 @@ export default function Search() {
       </div>
       {q && data && (data.length > 0 ? <PosterGrid items={data} /> : <EmptyState title={`Nothing matches "${q}"`} />)}
       {/* Not in the library? Ask for it. */}
-      {q && data && opts?.canRequest && (
+      {q && data && opts?.discover ? (
+        <p className="text-center text-sm text-muted">
+          Looking for something new?{' '}
+          <Link to={`/discover?q=${encodeURIComponent(q)}`} className="text-accent hover:text-accent-strong">
+            Find it in Discover
+          </Link>
+        </p>
+      ) : (
+        q &&
+        data &&
+        opts?.canRequest && (
         <p className="text-center text-sm text-muted">
           Looking for something new?{' '}
           <Link to={`/requests?q=${encodeURIComponent(q)}`} className="text-accent hover:text-accent-strong">
             {opts.autoApprove ? 'Add it' : 'Ask for it'}
           </Link>
         </p>
+        )
       )}
     </div>
   )

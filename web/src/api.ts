@@ -136,6 +136,8 @@ export type TitleKind = 'movie' | 'show'
 export type RequestOptions = {
   movies: boolean
   shows: boolean
+  // Overseerr is connected, so there's a Discover tab. Older servers leave it out.
+  discover?: boolean
   canRequest: boolean
   autoApprove: boolean
   canReport: boolean
@@ -159,6 +161,29 @@ export type Title = {
   itemId?: number
   requestId?: string
 }
+
+// A movie or show from Overseerr, for the Discover tab. status: in a library
+// (available, see itemId), on its way (added), or waiting for approval in
+// Overseerr (requested).
+export type DiscoverTitle = {
+  kind: TitleKind
+  tmdbId: number
+  title: string
+  year?: number
+  overview?: string
+  poster?: string
+  backdrop?: string
+  rating?: number
+  status?: 'available' | 'added' | 'requested'
+  itemId?: number
+}
+
+export type DiscoverRow = { id: string; title: string; items: DiscoverTitle[] }
+
+export type OverseerrConnection = { connected: boolean; url: string; hasApiKey: boolean; requestAs: number }
+export type OverseerrConfig = { url: string; apiKey?: string; requestAs?: number }
+export type OverseerrUser = { id: number; name: string }
+export type OverseerrCheck = { url: string; version: string; owner: OverseerrUser; users: OverseerrUser[] }
 
 export type TitleRequest = {
   id: string
@@ -591,6 +616,13 @@ export const api = {
   saveIntegration: (app: ArrApp, c: IntegrationConfig) => request<Integration>('PUT', `/api/v1/integrations/${app}`, c),
   deleteIntegration: (app: ArrApp) => request<void>('DELETE', `/api/v1/integrations/${app}`),
   requestOptions: () => request<RequestOptions>('GET', '/api/v1/requests/options'),
+  overseerr: () => request<OverseerrConnection>('GET', '/api/v1/integrations/overseerr'),
+  testOverseerr: (c: OverseerrConfig) => request<OverseerrCheck>('POST', '/api/v1/integrations/overseerr/test', c),
+  saveOverseerr: (c: OverseerrConfig) => request<OverseerrConnection>('PUT', '/api/v1/integrations/overseerr', c),
+  deleteOverseerr: () => request<void>('DELETE', '/api/v1/integrations/overseerr'),
+  discover: () => request<{ rows: DiscoverRow[]; canRequest: boolean }>('GET', '/api/v1/discover'),
+  discoverSearch: (q: string) => request<DiscoverTitle[]>('GET', `/api/v1/discover/search?q=${encodeURIComponent(q)}`),
+  discoverRequest: (t: DiscoverTitle) => request<DiscoverTitle>('POST', '/api/v1/discover/requests', { kind: t.kind, tmdbId: t.tmdbId }),
   searchTitles: (kind: TitleKind, q: string) =>
     request<Title[]>('GET', `/api/v1/requests/search?kind=${kind}&q=${encodeURIComponent(q)}`),
   requests: (all = false) => request<TitleRequest[]>('GET', `/api/v1/requests${all ? '?all=1' : ''}`),

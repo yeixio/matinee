@@ -69,6 +69,7 @@ type Server struct {
 	homeSignIn      homeSetting
 	setUp           atomic.Bool     // the first account exists
 	arrCache        ttlCache        // answers from Radarr and Sonarr (see arr.go)
+	discoverCache   ttlCache        // answers from Overseerr (see discover.go)
 	trailerCache    ttlCache        // trailer files' probes and TMDB's trailer lists (see trailers.go)
 	pins            pinGuard        // wrong profile PINs (see profiles.go)
 	holidayKeywords holidayKeywords // TMDB's ids for holiday keywords (see holidays.go)
@@ -196,6 +197,13 @@ func (s *Server) routes() []route {
 		{"PUT /integrations/{app}", adminOnly, s.putIntegration},
 		{"DELETE /integrations/{app}", adminOnly, s.deleteIntegration},
 		{"POST /integrations/{app}/test", adminOnly, s.testIntegration},
+		{"GET /integrations/overseerr", adminOnly, s.getOverseerr},
+		{"PUT /integrations/overseerr", adminOnly, s.putOverseerr},
+		{"DELETE /integrations/overseerr", adminOnly, s.deleteOverseerr},
+		{"POST /integrations/overseerr/test", adminOnly, s.testOverseerr},
+		{"GET /discover", reader, grownUps(s.discover)},
+		{"GET /discover/search", reader, grownUps(s.discoverSearch)},
+		{"POST /discover/requests", signedIn, grownUps(s.discoverRequest)},
 		{"GET /requests/options", reader, grownUps(s.getRequestOptions)},
 		{"GET /requests/search", signedIn, grownUps(s.searchTitles)},
 		{"GET /requests", signedIn, grownUps(s.listRequests)},

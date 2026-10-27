@@ -460,3 +460,38 @@ func (s *Store) RemoveMissing(ctx context.Context, libraryID int64, seen func(pa
 	}
 	return len(gone), nil
 }
+
+// Watched is a movie or show someone played lately, for recommendations.
+type Watched struct {
+	ItemID int64
+	Kind   string // movie or show
+	Title  string
+	TMDBID int
+}
+
+// RecentlyWatched lists the movies and shows with a TMDB id that the user
+// played lately, newest first. Watching an episode counts for its show.
+func (s *Store) RecentlyWatched(ctx context.Context, userID int64, limit int) ([]Watched, error) {
+	rows, err := s.db.QueryContext(ctx, `
+		SELECT t.id, t.kind, t.title, t.tmdb_id FROM (
+			SELECT CASE WHEN i.kind = 'episode' THEN se.parent_id ELSE i.id END AS tid, MAX(p.updated_at) AS at
+			FROM progress p JOIN items i ON i.id = p.item_id LEFT JOIN items se ON se.id = i.parent_id
+			WHERE p.user_id = ? AND i.kind IN ('movie', 'episode') AND (p.played = 1 OR p.position_ms > 0)
+			GROUP BY CASE WHEN i.kind = 'episode' THEN se.parent_id ELSE i.id END
+		) r JOIN items t ON t.id = r.tid
+		WHERE t.kind IN ('movie', 'show') AND t.tmdb_id IS NOT NULL AND t.tmdb_id > 0
+		ORDER BY r.at DESC, t.id DESC LIMIT ?`, userID, limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var out []Watched
+	for rows.Next() {
+		var w Watched
+		if err := rows.Scan(&w.ItemID, &w.Kind, &w.Title, &w.TMDBID); err != nil {
+			return nil, err
+		}
+		out = append(out, w)
+	}
+	return out, rows.Err()
+}

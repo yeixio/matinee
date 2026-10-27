@@ -1341,6 +1341,132 @@ paths:
         "400": { $ref: "#/components/responses/Error" }
         "502": { $ref: "#/components/responses/Error" }
 
+  /integrations/overseerr:
+    get:
+      summary: The Overseerr connection (admins only)
+      description: Overseerr (or Jellyseerr, which serves the same API) fills the Discover tab. The API key is never returned.
+      responses:
+        "200":
+          description: The connection.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/OverseerrConnection" }
+    put:
+      summary: Connect Overseerr (admins only)
+      description: |
+        Checks the address and key first. Leave `apiKey` out to keep the saved
+        one; it's only kept for the saved address. `requestAs` is the
+        Overseerr user that people without an Overseerr account of the same
+        name ask as (0 for the API key's owner).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/OverseerrConfig" }
+      responses:
+        "200":
+          description: Connected.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/OverseerrConnection" }
+        "400": { $ref: "#/components/responses/Error" }
+        "502": { $ref: "#/components/responses/Error" }
+    delete:
+      summary: Disconnect Overseerr (admins only)
+      responses:
+        "204": { description: Disconnected. The Discover tab goes away. }
+  /integrations/overseerr/test:
+    post:
+      summary: Check an Overseerr connection without saving it (admins only)
+      description: Leave the body out to check the saved connection.
+      requestBody:
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/OverseerrConfig" }
+      responses:
+        "200":
+          description: It answers. Lists Overseerr's users to pick `requestAs` from.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  url: { type: string }
+                  version: { type: string }
+                  owner: { $ref: "#/components/schemas/OverseerrUser" }
+                  users: { type: array, items: { $ref: "#/components/schemas/OverseerrUser" } }
+        "400": { $ref: "#/components/responses/Error" }
+        "502": { $ref: "#/components/responses/Error" }
+  /discover:
+    get:
+      summary: The Discover tab
+      description: |
+        Rows of movies and shows from Overseerr: titles like the ones this
+        person watched lately ("Because you watched …", leaving out what's in
+        a library already), then trending, popular and upcoming titles. Empty
+        rows are left out. Lists are kept for up to half an hour. Answers 409
+        when Overseerr isn't connected. Not for kids profiles.
+      responses:
+        "200":
+          description: The rows.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  rows:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id: { type: string, description: "trending, popular-movies, popular-shows, upcoming-movies, upcoming-shows, or because-{item id}" }
+                        title: { type: string }
+                        items: { type: array, items: { $ref: "#/components/schemas/DiscoverTitle" } }
+                  canRequest: { type: boolean, description: This account may ask for titles. }
+        "409": { $ref: "#/components/responses/Error" }
+        "502": { $ref: "#/components/responses/Error" }
+  /discover/search:
+    get:
+      summary: Find any movie or show through Overseerr
+      parameters:
+        - { name: q, in: query, required: true, schema: { type: string } }
+      responses:
+        "200":
+          description: Matching titles.
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: "#/components/schemas/DiscoverTitle" } }
+        "409": { $ref: "#/components/responses/Error" }
+        "502": { $ref: "#/components/responses/Error" }
+  /discover/requests:
+    post:
+      summary: Ask for a movie or show through Overseerr
+      description: |
+        Asks for a movie, or every season of a show, as the Overseerr user
+        with this person's name (or their account's, for a profile), else as
+        the admin's pick. Overseerr's permissions for that user decide
+        whether it needs approval. Who may ask follows the server's
+        `requests` setting.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [kind, tmdbId]
+              properties:
+                kind: { type: string, enum: [movie, show] }
+                tmdbId: { type: integer }
+      responses:
+        "201":
+          description: Asked for. `status` is requested (waiting for approval) or added.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/DiscoverTitle" }
+        "403": { $ref: "#/components/responses/Error" }
+        "409": { $ref: "#/components/responses/Error" }
+        "502": { $ref: "#/components/responses/Error" }
+
   /requests/options:
     get:
       summary: What this account can ask for
@@ -1358,6 +1484,7 @@ paths:
                 properties:
                   movies: { type: boolean }
                   shows: { type: boolean }
+                  discover: { type: boolean, description: Overseerr is connected, so there's a Discover tab (see /discover). }
                   canRequest: { type: boolean }
                   autoApprove: { type: boolean, description: What this account asks for is added without waiting for an admin. }
                   canReport: { type: boolean }
@@ -1939,6 +2066,40 @@ components:
         apiKey: { type: string }
         qualityProfileId: { type: integer }
         rootFolder: { type: string }
+    OverseerrConfig:
+      type: object
+      properties:
+        url: { type: string, description: "Such as http://overseerr:5055. Without a scheme, http is assumed." }
+        apiKey: { type: string }
+        requestAs: { type: integer, description: "The Overseerr user people without an Overseerr account ask as; 0 for the API key's owner." }
+    OverseerrConnection:
+      type: object
+      properties:
+        connected: { type: boolean }
+        url: { type: string }
+        hasApiKey: { type: boolean }
+        requestAs: { type: integer }
+    OverseerrUser:
+      type: object
+      properties:
+        id: { type: integer }
+        name: { type: string }
+    DiscoverTitle:
+      type: object
+      properties:
+        kind: { type: string, enum: [movie, show] }
+        tmdbId: { type: integer }
+        title: { type: string }
+        year: { type: integer }
+        overview: { type: string }
+        poster: { type: string, description: An image URL on the internet. }
+        backdrop: { type: string, description: An image URL on the internet. }
+        rating: { type: number, description: "TMDB's rating, out of 10." }
+        status:
+          type: string
+          enum: [available, added, requested]
+          description: "In a library (see itemId), on its way, or waiting for approval in Overseerr. Left out when nobody asked for it."
+        itemId: { type: integer, description: The library item, when available. }
     QualityProfile:
       type: object
       properties:
