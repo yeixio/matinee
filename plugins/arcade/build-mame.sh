@@ -27,7 +27,11 @@ fi
 
 emmake make -j"$(nproc)" SUBTARGET="$name" SOURCES="$sources" NOWERROR=1 REGENIE=1
 
+# The build is <name>.html, .js and .wasm (mame<name> in older MAMEs);
+# the player brings its own page.
+built=$name
+[ -f "$built.js" ] || built=mame$name
 mkdir -p "$out"
-cp "mame$name.js" "$out/$name.js"
-cp "mame$name.wasm" "$out/$name.wasm"
+cp "$built.js" "$out/$name.js"
+cp "$built.wasm" "$out/$name.wasm"
 ls -la "$out/$name".*
