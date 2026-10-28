@@ -3,7 +3,7 @@
 Plays arcade games in Matinee's web player with [MAME](https://www.mamedev.org)
 built to WebAssembly. The [user guide](https://matinee.yeix.io/docs/server/arcade/)
 covers using it; this is about building it. It's also the reference for
-[writing plugins](../../docs/plugins.md).
+[writing plugins](https://matinee.yeix.io/docs/plugins/overview/).
 
 - `main.go`: the server part. It files each ROM set in an Arcade library
   using MAME's list of games (`gamedb`), picks up artwork from `snap`,

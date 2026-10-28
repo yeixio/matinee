@@ -1,0 +1,24 @@
+package main
+
+import (
+	"os"
+	"path/filepath"
+	"testing"
+
+	plugin "github.com/yeixio/matinee/pluginsdk"
+)
+
+func TestIndex(t *testing.T) {
+	dir := t.TempDir()
+	path := filepath.Join(dir, "Hello{{.Ext}}")
+	if err := os.WriteFile(path, []byte("hello"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	res, err := index(plugin.IndexRequest{Root: dir, Path: path, Size: 5})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if res.Item == nil || res.Item.Kind != "{{.Item}}" || res.Item.Title != "Hello" {
+		t.Fatalf("got %+v", res.Item)
+	}
+}

@@ -116,8 +116,10 @@ function startMAME(files, state) {
         '-nvram_directory', '/nvram',
         '-skip_gameinfo',
         // Browsers have WebGL, which is OpenGL ES 2, but not the desktop
-        // OpenGL SDL draws with by default.
-        '-video', 'soft',
+        // OpenGL MAME draws with by default. accel draws through an SDL
+        // renderer, and opengles2 is SDL's WebGL one. (The browser build
+        // has no soft renderer: asking for it falls back to OpenGL.)
+        '-video', 'accel',
         '-renderdriver', 'opengles2',
         '-sound', 'js',
         '-resolution', `${w}x${h}`,

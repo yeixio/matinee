@@ -20,7 +20,7 @@ import (
 	"github.com/yeixio/matinee/internal/store"
 )
 
-// Plugins (internal/plugin, docs/plugins.md). Admins install them from a
+// Plugins (internal/plugin, docs/guide/plugins). Admins install them from a
 // link, a file or the catalog of official plugins, look at what each may
 // reach, and turn them on. Players load in a sandboxed frame (see
 // pluginFile); what they keep per person goes in plugin storage.

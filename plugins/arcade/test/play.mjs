@@ -114,7 +114,14 @@ try {
   await page.screenshot({ path: screenshot })
   check(lit(await readFile(screenshot)) > 0.01, 'the game draws something')
 
-  await player().locator('#save').click({ force: true })
+  // The player's status line clears itself, so log what it says.
+  await player().evaluate(() => {
+    const el = document.getElementById('status')
+    new MutationObserver(() => el.textContent && console.log('status: ' + el.textContent)).observe(el, { childList: true, characterData: true, subtree: true })
+  })
+  // A pointer click can land on the game, which sits over the bar while
+  // it plays, so press the button itself.
+  await player().evaluate(() => document.getElementById('save').click())
   await page.waitForFunction((key) => window.storage.get(key)?.byteLength > 0, `states/${game}/resume.sta`, { timeout: 20_000 })
   check(true, 'a saved state was kept')
 
@@ -130,6 +137,28 @@ try {
   check(true, 'continued from the saved state')
 } catch (err) {
   check(false, err.message)
+  // What the player shows, to tell why from the log alone.
+  const state = await page
+    .frames()
+    .find((f) => f.url().endsWith('/player/index.html'))
+    ?.evaluate(() => {
+      const fs = globalThis.Module?.FS ?? globalThis.FS
+      let files
+      try {
+        files = fs.readdir('/').join(' ')
+      } catch (e) {
+        files = String(e)
+      }
+      return {
+        status: document.getElementById('status')?.textContent,
+        saveDisabled: document.getElementById('save')?.disabled,
+        running: !!globalThis.JSMAME?.running,
+        save: typeof globalThis.JSMAME?.save,
+        files,
+      }
+    })
+    .catch((e) => String(e))
+  console.log('player:', JSON.stringify(state))
   await page.screenshot({ path: screenshot }).catch(() => {})
 } finally {
   await browser.close()
