@@ -336,6 +336,19 @@ var migrations = []string{
 		PRIMARY KEY (item_id, language)
 	)`,
 	"ALTER TABLE items ADD COLUMN translations_at BIGINT",
+	// 47–49: plugins (internal/plugin). An item of a kind a plugin adds
+	// keeps the plugin's facts and data, and a plugin's player keeps things
+	// such as saved games per person.
+	"ALTER TABLE items ADD COLUMN facts TEXT", // JSON list of {label, value}
+	"ALTER TABLE items ADD COLUMN plugin_data TEXT",
+	`CREATE TABLE plugin_storage (
+		plugin_id  TEXT NOT NULL,
+		user_id    BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+		key        TEXT NOT NULL,
+		value      BYTEA NOT NULL, -- a BLOB in SQLite
+		updated_at BIGINT NOT NULL, -- milliseconds
+		PRIMARY KEY (plugin_id, user_id, key)
+	)`,
 }
 
 func now() int64 { return time.Now().Unix() }

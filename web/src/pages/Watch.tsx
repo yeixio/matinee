@@ -13,6 +13,8 @@ import { defaultTrack, savePreference, SubtitleMenu, SubtitleOverlay } from '../
 import { UpNextCard, type UpNextMode } from '../player/UpNext'
 import { COUNTDOWN_SECONDS, stillWatching, upNextAt } from '../player/autoplay'
 import { parseVTT, type Cue } from '../player/vtt'
+import { PluginPlayer } from '../player/PluginPlayer'
+import { playerFor, usePlayers } from '../plugins'
 
 const displayTitle = (item: ItemDetail) => {
   const show = item.parents.find((p) => p.kind === 'show')
@@ -24,10 +26,42 @@ const displayTitle = (item: ItemDetail) => {
 }
 
 // Each episode gets a fresh player, so auto-play can move on to the next.
+// Items of a plugin's kinds play in the plugin's own player.
 export default function Watch() {
   const id = Number(useParams().id)
+  const navigate = useNavigate()
+  const { data: item } = useQuery({ queryKey: ['item', id], queryFn: () => api.item(id) })
+  const { data: players, isPending } = usePlayers()
+  const plugin = item && playerFor(players, item.kind)
+  const exit = useCallback(() => navigate(-1), [navigate])
+  if (item && plugin) return <PluginPlayer item={item} player={plugin} onExit={exit} />
+  if (!item || (isPending && !builtInKinds.includes(item.kind))) {
+    return (
+      <div className="fixed inset-0 grid place-items-center bg-black">
+        <Spinner />
+      </div>
+    )
+  }
+  if (!builtInKinds.includes(item.kind)) return <NoPlayer onExit={exit} />
   return <Player key={id} id={id} />
 }
+
+// NoPlayer is for an item of a plugin's kind while the plugin is off.
+function NoPlayer({ onExit }: { onExit: () => void }) {
+  const { t } = useTranslation()
+  return (
+    <div className="fixed inset-0 grid place-items-center bg-black p-6 text-center text-white">
+      <div className="max-w-sm space-y-4">
+        <p>{t('plugins.noPlayer')}</p>
+        <button onClick={onExit} className="rounded-full bg-white/15 px-4 py-2 text-sm hover:bg-white/25">
+          {t('back')}
+        </button>
+      </div>
+    </div>
+  )
+}
+
+const builtInKinds = ['movie', 'episode', 'track']
 
 function Player({ id }: { id: number }) {
   const { t: tr } = useTranslation()

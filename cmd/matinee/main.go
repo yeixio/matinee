@@ -30,6 +30,7 @@ import (
 	"github.com/yeixio/matinee/internal/hwaccel"
 	"github.com/yeixio/matinee/internal/kube"
 	"github.com/yeixio/matinee/internal/metadata"
+	"github.com/yeixio/matinee/internal/plugin"
 	"github.com/yeixio/matinee/internal/probe"
 	"github.com/yeixio/matinee/internal/rating"
 	"github.com/yeixio/matinee/internal/remote"
@@ -131,9 +132,23 @@ func run() error {
 		Prober: probe.Prober{Path: cfg.FFprobePath, Timeout: 2 * time.Minute, LowPriority: true},
 		Busy:   func() bool { return transcoder.Active() > 0 },
 	}
+	// Plugins add library kinds, details and event handlers (internal/plugin).
+	var plugins *plugin.Manager
+	if cfg.Plugins {
+		plugins, err = plugin.Open(ctx, cfg.PluginDir(), db, log)
+		if err != nil {
+			return fmt.Errorf("plugins: %w", err)
+		}
+		defer plugins.Close(context.Background())
+		fetcher.Plugins = plugins.Providers
+		db.SetMetadataKinds(fetcher.Kinds()...)
+		plugins.OnChange = func() { db.SetMetadataKinds(fetcher.Kinds()...) }
+		scanner.Added = func(ctx context.Context, lib store.Library, id int64) { plugins.ItemAdded(ctx, id) }
+	}
 	scanner.AfterScan = func(ctx context.Context, lib store.Library) {
 		analyzer.Wake()
 		fetcher.FetchLibrary(ctx, lib)
+		plugins.Emit(plugin.LibraryEvent(plugin.EventLibraryScanned, lib.ID, lib.Name, lib.Kind))
 	}
 	go analyzer.Run(ctx)
 
@@ -152,6 +167,7 @@ func run() error {
 		MediaRoot: cfg.MediaRoot, Name: cfg.ServerName,
 		HomeListener: cfg.HomeAddr != "", ThemeDir: cfg.ThemeDir(),
 		PublicURL: cfg.PublicURL,
+		Plugins:   plugins, PluginCatalog: cfg.PluginCatalog,
 	}
 	if _, problems := theme.Load(cfg.ThemeDir()); len(problems) > 0 {
 		for _, p := range problems {

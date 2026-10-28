@@ -1,7 +1,8 @@
 // A stand-in for themoviedb.org that knows only the demo library
 // (catalog.mjs), so the screenshot server gets posters, descriptions, cast
 // and crew without a key or the internet. It answers the requests
-// internal/metadata makes, and serves the artwork library.mjs rendered.
+// internal/metadata makes, and serves the artwork library.mjs rendered and
+// the list of official plugins.
 
 import { createReadStream, existsSync } from 'node:fs'
 import http from 'node:http'
@@ -113,6 +114,11 @@ export function startFakeTMDB(port, images) {
       if (!existsSync(file)) return res.writeHead(404).end()
       res.writeHead(200, { 'Content-Type': 'image/jpeg' })
       return createReadStream(file).pipe(res)
+    }
+    // The official plugins, as the website lists them.
+    if (url.pathname === '/plugins.json') {
+      res.writeHead(200, { 'Content-Type': 'application/json' })
+      return createReadStream(path.resolve(import.meta.dirname, '../public/plugins.json')).pipe(res)
     }
     const body = answer(url.pathname, url.searchParams)
     if (!body) return res.writeHead(404, { 'Content-Type': 'application/json' }).end('{"status_code":34}')

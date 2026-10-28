@@ -331,7 +331,46 @@ export type Item = {
   // What the background analysis found, like 4k, hdr, dolby-vision, atmos,
   // 5.1 (see openapi.yaml). Shows and seasons get their episodes' tags.
   mediaTags?: string[]
+  // Items of a plugin's kinds: labelled lines the plugin found, and what it
+  // keeps with the item for its player.
+  facts?: { label: string; value: string }[]
+  pluginData?: Record<string, unknown>
 }
+
+// A plugin as Settings shows it (internal/plugin, docs/plugins.md).
+export type Plugin = {
+  id: string
+  name: string
+  version: string
+  api: number
+  description?: string
+  author?: string
+  license?: string
+  homepage?: string
+  icon?: string
+  server?: string
+  libraryKinds?: { name: string; label: string; description?: string; extensions: string[]; itemKinds: string[] }[]
+  metadata?: string[]
+  events?: string[]
+  players?: { itemKinds: string[]; entry: string }[]
+  settings?: { key: string; label: string; description?: string; secret?: boolean }[]
+  permissions?: { network?: string[] }
+  enabled: boolean
+  running: boolean
+  // Why an enabled plugin isn't running.
+  problem?: string
+  // This server runs the plugin API version it was made for.
+  supported: boolean
+  // Its settings; secret ones come back as ••••••.
+  config: Record<string, string>
+  hasIcon: boolean
+}
+// An official plugin from the catalog; installed is the version here, if any.
+export type CatalogPlugin = { id: string; name: string; description: string; version: string; url: string; homepage?: string; installed?: string }
+// A player a running plugin has: its page is pluginFileUrl(plugin, entry).
+export type PluginPlayer = { plugin: string; itemKinds: string[]; entry: string }
+// A kind of library; plugins' kinds have their own label.
+export type LibraryKind = { name: string; label?: string; description?: string; plugin?: string }
 
 // Only movies and shows go on a watch list.
 export const canWatchList = (item: Item) => item.kind === 'movie' || item.kind === 'show'
@@ -579,6 +618,11 @@ async function request<T>(method: string, path: string, body?: unknown): Promise
     headers: body === undefined ? undefined : { 'Content-Type': 'application/json' },
     body: body === undefined ? undefined : JSON.stringify(body),
   })
+  return response<T>(res)
+}
+
+// response reads an API answer, throwing an ApiError for a failure.
+export async function response<T>(res: Response): Promise<T> {
   if (!res.ok) {
     let message = res.statusText
     let code: string | undefined
@@ -745,6 +789,23 @@ export const api = {
   trailers: (id: number) => request<Trailer[]>('GET', `/api/v1/items/${id}/trailers`),
   startTrailerHls: (id: number, trailer: string) =>
     request<{ url: string; startSec: number }>('POST', `/api/v1/items/${id}/trailers/${encodeURIComponent(trailer)}/hls`),
+  libraryKinds: () => request<LibraryKind[]>('GET', '/api/v1/library-kinds'),
+  plugins: () => request<Plugin[]>('GET', '/api/v1/plugins'),
+  pluginCatalog: () => request<CatalogPlugin[]>('GET', '/api/v1/plugins/catalog'),
+  installPluginFrom: (url: string) => request<Plugin>('POST', '/api/v1/plugins', { url }),
+  installPluginFile: async (file: Blob) => {
+    const res = await fetch('/api/v1/plugins', {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/octet-stream' },
+      body: file,
+    })
+    return response<Plugin>(res)
+  },
+  updatePlugin: (id: string, changes: { enabled?: boolean; config?: Record<string, string> }) =>
+    request<Plugin>('PUT', `/api/v1/plugins/${encodeURIComponent(id)}`, changes),
+  removePlugin: (id: string) => request<void>('DELETE', `/api/v1/plugins/${encodeURIComponent(id)}`),
+  players: () => request<PluginPlayer[]>('GET', '/api/v1/players'),
   subtitles: async (id: number, track: string) => {
     const res = await fetch(`/api/v1/items/${id}/subtitles/${encodeURIComponent(track)}.vtt`, { credentials: 'same-origin' })
     if (!res.ok) throw new ApiError(res.status, i18n.t('web:player.subtitlesFailed'))
@@ -755,4 +816,6 @@ export const api = {
 export const imageUrl = (id: number, type: 'poster' | 'backdrop') => `/api/v1/items/${id}/image/${type}`
 export const personImageUrl = (id: number) => `/api/v1/people/${id}/image`
 export const fileUrl = (id: number) => `/api/v1/items/${id}/file`
+export const pluginFileUrl = (plugin: string, path: string) =>
+  `/api/v1/plugins/${encodeURIComponent(plugin)}/files/${path.split('/').map(encodeURIComponent).join('/')}`
 export const trailerFileUrl = (id: number, trailer: string) => `/api/v1/items/${id}/trailers/${encodeURIComponent(trailer)}/file`

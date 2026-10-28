@@ -16,7 +16,8 @@ import (
 func TestOpenAPIMatchesRoutes(t *testing.T) {
 	var served []string
 	for _, rt := range (&Server{}).routes() {
-		served = append(served, rt.pattern)
+		// A wildcard that takes the rest of the path, {path...}, is {path} in OpenAPI.
+		served = append(served, strings.ReplaceAll(rt.pattern, "...}", "}"))
 	}
 	pathLine := regexp.MustCompile(`^  (/\S*):$`)
 	methodLine := regexp.MustCompile(`^    (get|post|put|delete|patch):`)

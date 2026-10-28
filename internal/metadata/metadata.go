@@ -5,6 +5,7 @@ package metadata
 
 import (
 	"context"
+	"encoding/json"
 	"log/slog"
 	"slices"
 	"sync"
@@ -22,6 +23,9 @@ type Query struct {
 	Season  int
 	Episode int
 	Artist  string // the album's artist
+	// For a plugin's kinds: the item's file and what the plugin keeps with it.
+	Path string
+	Data json.RawMessage
 }
 
 // Provider identifies items with an online database. Lookup returns nil, nil
@@ -43,6 +47,9 @@ type GenreProvider interface {
 type Fetcher struct {
 	Store     *store.Store
 	Providers []Provider
+	// Plugins lists providers that plugins add for their own item kinds, as
+	// they are now; nil for none.
+	Plugins func() []Provider
 	// Awards looks up titles' awards, if set.
 	Awards AwardSource
 	Log    *slog.Logger
@@ -51,10 +58,17 @@ type Fetcher struct {
 	translatePending atomic.Bool // TranslateAll was asked to run (again)
 }
 
+func (f *Fetcher) all() []Provider {
+	if f.Plugins == nil {
+		return f.Providers
+	}
+	return append(slices.Clip(f.Providers), f.Plugins()...)
+}
+
 // Kinds lists every item kind some provider looks up.
 func (f *Fetcher) Kinds() []string {
 	var kinds []string
-	for _, p := range f.Providers {
+	for _, p := range f.all() {
 		kinds = append(kinds, p.Kinds()...)
 	}
 	return kinds
@@ -64,7 +78,7 @@ func (f *Fetcher) Kinds() []string {
 // key doesn't.
 func (f *Fetcher) active() []Provider {
 	var ps []Provider
-	for _, p := range f.Providers {
+	for _, p := range f.all() {
 		if len(p.Kinds()) > 0 {
 			ps = append(ps, p)
 		}
@@ -73,7 +87,7 @@ func (f *Fetcher) active() []Provider {
 }
 
 func (f *Fetcher) provider(kind string) Provider {
-	for _, p := range f.Providers {
+	for _, p := range f.all() {
 		if slices.Contains(p.Kinds(), kind) {
 			return p
 		}
@@ -159,7 +173,7 @@ const (
 )
 
 func (f *Fetcher) query(ctx context.Context, it store.Item) (Query, queryState) {
-	q := Query{Kind: it.Kind, Title: it.Title}
+	q := Query{Kind: it.Kind, Title: it.Title, Path: it.Path, Data: it.PluginData}
 	if it.Year != nil {
 		q.Year = *it.Year
 	}

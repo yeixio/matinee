@@ -25,6 +25,8 @@ type Scanner struct {
 	Log    *slog.Logger
 	// AfterScan runs once a library scan finishes, e.g. to fetch metadata.
 	AfterScan func(ctx context.Context, lib store.Library)
+	// Added runs for each file a scan adds, e.g. to tell plugins.
+	Added func(ctx context.Context, lib store.Library, itemID int64)
 
 	mu      sync.Mutex
 	running map[int64]bool
@@ -105,6 +107,9 @@ func (s *Scanner) scan(ctx context.Context, lib store.Library, paths []string) (
 	if !ok {
 		return Stats{}, fmt.Errorf("unknown library kind %q", lib.Kind)
 	}
+	if sk, ok := kind.(Session); ok {
+		defer sk.BeginScan(ctx, lib)()
+	}
 	// Trailers are found when someone opens a title (see trailers.go), not listed as titles.
 	video := kind.Name() == "movies" || kind.Name() == "tv"
 	partial := paths != nil
@@ -172,7 +177,8 @@ func (s *Scanner) scan(ctx context.Context, lib store.Library, paths []string) (
 			case err != nil && !errors.Is(err, store.ErrNotFound):
 				return err
 			}
-			if err := s.indexFile(ctx, kind, lib, root, path, info); err != nil {
+			newID, err := s.indexFile(ctx, kind, lib, root, path, info)
+			if err != nil {
 				switch {
 				case errors.Is(err, errUnplayable):
 					// Leave it out; if it was listed before, the cleanup below removes it.
@@ -194,6 +200,9 @@ func (s *Scanner) scan(ctx context.Context, lib store.Library, paths []string) (
 			}
 			if id == 0 {
 				st.Added++
+				if s.Added != nil {
+					s.Added(ctx, lib, newID)
+				}
 			} else {
 				st.Updated++
 			}
@@ -288,24 +297,28 @@ func under(p string, dirs []string) bool {
 	return false
 }
 
-func (s *Scanner) indexFile(ctx context.Context, kind Kind, lib store.Library, root, path string, info fs.FileInfo) error {
+func (s *Scanner) indexFile(ctx context.Context, kind Kind, lib store.Library, root, path string, info fs.FileInfo) (int64, error) {
 	if info.Size() == 0 {
-		return fmt.Errorf("%w: empty file", errUnplayable)
+		return 0, fmt.Errorf("%w: empty file", errUnplayable)
 	}
-	pr, err := s.Prober.Probe(ctx, path)
+	var pr probe.Result
+	var err error
+	if _, ok := kind.(Unprobed); !ok {
+		pr, err = s.Prober.Probe(ctx, path)
+	}
 	switch {
 	case errors.Is(err, context.DeadlineExceeded):
-		return fmt.Errorf("%w: %v", errProbeTimeout, err)
+		return 0, fmt.Errorf("%w: %v", errProbeTimeout, err)
 	case errors.Is(err, context.Canceled):
-		return err
+		return 0, err
 	case err != nil:
-		return fmt.Errorf("%w: %v", errUnplayable, err)
-	case !kind.Playable(pr):
-		return fmt.Errorf("%w: no playable stream", errUnplayable)
+		return 0, fmt.Errorf("%w: %v", errUnplayable, err)
+	case !isUnprobed(kind) && !kind.Playable(pr):
+		return 0, fmt.Errorf("%w: no playable stream", errUnplayable)
 	}
 	it, err := kind.Index(ctx, s.Store, File{Library: lib, Root: root, Path: path, Info: info, Probe: pr})
 	if err != nil {
-		return err
+		return 0, err
 	}
 	it.LibraryID, it.Path, it.Size, it.Mtime = lib.ID, path, info.Size(), info.ModTime().Unix()
 	it.Container, it.VideoCodec, it.AudioCodec = pr.Container, pr.VideoCodec, pr.AudioCodec
@@ -319,6 +332,14 @@ func (s *Scanner) indexFile(ctx context.Context, kind Kind, lib store.Library, r
 		subs, _ := json.Marshal(pr.SubtitleList())
 		it.SubtitleStreams = string(subs)
 	}
-	_, err = s.Store.UpsertFile(ctx, it)
-	return err
+	id, err := s.Store.UpsertFile(ctx, it)
+	if err == nil && it.Details != nil {
+		err = s.Store.ApplyMetadata(ctx, id, it.Details)
+	}
+	return id, err
+}
+
+func isUnprobed(k Kind) bool {
+	_, ok := k.(Unprobed)
+	return ok
 }

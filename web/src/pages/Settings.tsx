@@ -3,10 +3,11 @@ import { ChevronLeft, Folder, FolderOpen, KeyRound, Monitor, Plus, RefreshCw, Tr
 import { useState, type FormEvent } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { api, type ConnectStatus, type PlaybackPrefs, type RemoteStatus, type User } from '../api'
+import { api, type ConnectStatus, type LibraryKind, type PlaybackPrefs, type RemoteStatus, type User } from '../api'
 import { LanguagePicker } from '../components/LanguagePicker'
 import { NewFiles, watchSummary } from '../components/LibraryWatch'
 import { MediaAnalysis } from '../components/MediaAnalysis'
+import { Plugins } from '../components/PluginSettings'
 import { Profiles } from '../components/ProfileSettings'
 import { Appearance } from '../components/ThemePicker'
 import { LibraryIcon, useLibraries } from '../components/Shell'
@@ -36,6 +37,7 @@ export default function Settings() {
       {me?.isAdmin && <HolidayRows />}
       {me?.isAdmin && <Transcoding />}
       {me?.isAdmin && <Integrations />}
+      {me?.isAdmin && <Plugins />}
       {me && !me.guest && <Account />}
       <Devices />
       {/* TMDB's API terms ask apps that use it for this notice. */}
@@ -110,13 +112,17 @@ function Libraries() {
   )
 }
 
-const kinds = ['movies', 'tv', 'music']
-const kindName = (kind: string) => i18n.t(`settings.libraries.kind.${kind}`)
+const builtInKinds: LibraryKind[] = [{ name: 'movies' }, { name: 'tv' }, { name: 'music' }]
 
 function AddLibrary({ onDone }: { onDone: () => void }) {
   const { t } = useTranslation()
   const qc = useQueryClient()
+  // Plugins can add kinds of their own, with their own labels.
+  const { data: fromServer } = useQuery({ queryKey: ['libraryKinds'], queryFn: api.libraryKinds, retry: false })
+  const kinds = [...builtInKinds, ...(fromServer ?? []).filter((k) => k.plugin)]
   const [kind, setKind] = useState('movies')
+  const kindName = (name: string) => kinds.find((k) => k.name === name)?.label ?? i18n.t(`settings.libraries.kind.${name}`)
+  const description = kinds.find((k) => k.name === kind)?.description
   const [name, setName] = useState('')
   const [paths, setPaths] = useState<string[]>([])
   const create = useMutation({
@@ -135,7 +141,7 @@ function AddLibrary({ onDone }: { onDone: () => void }) {
     <form onSubmit={submit} className="space-y-5 rounded-xl border border-accent/30 bg-surface p-5">
       <Field label={t('settings.libraries.type')}>
         <div className="grid grid-cols-3 gap-2">
-          {kinds.map((k) => (
+          {kinds.map(({ name: k }) => (
             <button
               type="button"
               key={k}
@@ -149,6 +155,7 @@ function AddLibrary({ onDone }: { onDone: () => void }) {
             </button>
           ))}
         </div>
+        {description && <span className="block text-sm text-muted">{description}</span>}
       </Field>
       <Field label={t('profileSettings.name')}>
         <input className={inputClass} value={name} onChange={(e) => setName(e.target.value)} placeholder={kindName(kind)} />

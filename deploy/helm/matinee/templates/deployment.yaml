@@ -149,6 +149,10 @@ spec:
             - name: downloads
               mountPath: /cache/downloads
             {{- end }}
+            {{- if .Values.plugins.persistence.enabled }}
+            - name: plugins
+              mountPath: /cache/plugins
+            {{- end }}
             - name: tmp
               mountPath: /tmp
             {{- if .Values.remoteAccess.enabled }}
@@ -176,6 +180,11 @@ spec:
         - name: downloads
           persistentVolumeClaim:
             claimName: {{ .Values.downloads.persistence.existingClaim | default (printf "%s-downloads" (include "matinee.fullname" .)) }}
+        {{- end }}
+        {{- if .Values.plugins.persistence.enabled }}
+        - name: plugins
+          persistentVolumeClaim:
+            claimName: {{ .Values.plugins.persistence.existingClaim | default (printf "%s-plugins" (include "matinee.fullname" .)) }}
         {{- end }}
         {{- if .Values.remoteAccess.enabled }}
         - name: remote

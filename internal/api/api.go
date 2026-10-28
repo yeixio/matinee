@@ -22,6 +22,7 @@ import (
 	"github.com/yeixio/matinee/internal/auth"
 	"github.com/yeixio/matinee/internal/download"
 	"github.com/yeixio/matinee/internal/hwaccel"
+	"github.com/yeixio/matinee/internal/plugin"
 	"github.com/yeixio/matinee/internal/probe"
 	"github.com/yeixio/matinee/internal/remote"
 	"github.com/yeixio/matinee/internal/scan"
@@ -84,6 +85,7 @@ type Server struct {
 	setUp           atomic.Bool     // the first account exists
 	arrCache        ttlCache        // answers from Radarr and Sonarr (see arr.go)
 	discoverCache   ttlCache        // answers from Overseerr (see discover.go)
+	catalogCache    ttlCache        // the official plugins (see plugins.go)
 	trailerCache    ttlCache        // trailer files' probes and TMDB's trailer lists (see trailers.go)
 	pins            pinGuard        // wrong profile PINs (see profiles.go)
 	holidayKeywords holidayKeywords // TMDB's ids for holiday keywords (see holidays.go)
@@ -92,6 +94,12 @@ type Server struct {
 	// Translate looks up translations for every library, when people start
 	// using a language; nil without an online provider that has them.
 	Translate func(context.Context)
+
+	// Plugins are the installed plugins (see plugins.go); nil means this
+	// server doesn't run them. PluginCatalog lists the official ones; empty
+	// for none.
+	Plugins       *plugin.Manager
+	PluginCatalog string
 
 	// BackgroundCtx scopes scans started by API calls; it outlives any one request.
 	BackgroundCtx context.Context
@@ -245,6 +253,20 @@ func (s *Server) routes() []route {
 		{"GET /issues", signedIn, grownUps(s.listIssues)},
 		{"POST /issues/{id}/resolve", adminOnly, s.resolveIssue},
 		{"POST /issues/{id}/replace", adminOnly, s.replaceIssue},
+
+		{"GET /library-kinds", adminOnly, s.listLibraryKinds},
+		{"GET /plugins", adminOnly, s.listPlugins},
+		{"POST /plugins", adminOnly, s.installPlugin},
+		{"GET /plugins/catalog", adminOnly, s.pluginCatalog},
+		{"PUT /plugins/{plugin}", adminOnly, s.updatePlugin},
+		{"DELETE /plugins/{plugin}", adminOnly, s.removePlugin},
+		{"GET /plugins/{plugin}/files/{path...}", public, s.pluginFile},
+		{"GET /plugins/{plugin}/storage", reader, s.listPluginStorage},
+		{"GET /plugins/{plugin}/storage/{key...}", reader, s.getPluginValue},
+		{"PUT /plugins/{plugin}/storage/{key...}", reader, s.putPluginValue},
+		{"DELETE /plugins/{plugin}/storage/{key...}", reader, s.deletePluginValue},
+		{"GET /plugins/{plugin}/libraries/{id}/file", reader, s.pluginLibraryFile},
+		{"GET /players", reader, s.listPlayers},
 	}
 }
 
@@ -938,6 +960,7 @@ func (s *Server) setProgress(w http.ResponseWriter, r *http.Request) {
 		s.serverError(w, err)
 		return
 	}
+	s.Plugins.Played(currentUser(r), it, req.PositionMs, req.Played)
 	w.WriteHeader(http.StatusNoContent)
 }
 

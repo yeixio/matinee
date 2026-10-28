@@ -36,6 +36,8 @@ type Config struct {
 	RemoteAddr    string        // HTTPS listen address for remote access (internal/remote); empty means the server doesn't offer it
 	ConnectURL    string        // the service the apps find this server through when its address changes (internal/connect); empty for none
 	BillingURL    string        // where that service's subscription is bought; empty for a service that needs none
+	Plugins       bool          // run plugins (internal/plugin)
+	PluginCatalog string        // where the list of official plugins is; empty for none
 }
 
 // Database is what store.Open takes: the PostgreSQL URL, or the SQLite file.
@@ -51,6 +53,9 @@ func (c Config) ImageDir() string     { return filepath.Join(c.DataDir, "images"
 func (c Config) SubtitleDir() string  { return filepath.Join(c.DataDir, "subtitles") }
 func (c Config) DownloadDir() string  { return filepath.Join(c.DataDir, "downloads") }
 func (c Config) RemoteDir() string    { return filepath.Join(c.DataDir, "remote") }
+
+// PluginDir holds installed plugins and what they keep (internal/plugin).
+func (c Config) PluginDir() string { return filepath.Join(c.DataDir, "plugins") }
 
 // ThemeDir holds an admin's own theme files (docs/themes.md).
 func (c Config) ThemeDir() string { return filepath.Join(c.DataDir, "themes") }
@@ -76,6 +81,8 @@ func Load(args []string) (Config, error) {
 	fs.StringVar(&c.RemoteAddr, "remote-addr", env("MATINEE_REMOTE_ADDR", ":7443"), "HTTPS listen address for remote access, which an admin turns on in Settings; off to not offer it")
 	fs.StringVar(&c.ConnectURL, "connect-url", env("MATINEE_CONNECT_URL", connect.DefaultURL), "service that tells the apps this server's current address while remote access is on (it never carries media); off for none")
 	fs.StringVar(&c.BillingURL, "billing-url", env("MATINEE_BILLING_URL", ""), "where the connect service's subscription is bought; defaults to yeix.io for the Matinee project's service, off for none")
+	fs.BoolVar(&c.Plugins, "plugins", env("MATINEE_PLUGINS", "true") != "false", "let admins install plugins in Settings")
+	fs.StringVar(&c.PluginCatalog, "plugin-catalog", env("MATINEE_PLUGIN_CATALOG", "https://matinee.yeix.io/plugins.json"), "list of official plugins Settings offers; off for none")
 	interval := fs.String("scan-interval", env("MATINEE_SCAN_INTERVAL", "15m"), "periodic rescan interval, 0 to disable")
 	watchPoll := fs.String("watch-poll-interval", env("MATINEE_WATCH_POLL_INTERVAL", "30s"), "how often folders on network shares are checked for new files")
 	if err := fs.Parse(args); err != nil {
@@ -88,6 +95,9 @@ func Load(args []string) (Config, error) {
 	c.ScanInterval = d
 	if c.RemoteAddr == "off" {
 		c.RemoteAddr = ""
+	}
+	if c.PluginCatalog == "off" {
+		c.PluginCatalog = ""
 	}
 	if c.ConnectURL == "off" {
 		c.ConnectURL = ""

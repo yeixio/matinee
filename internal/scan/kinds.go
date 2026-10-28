@@ -8,6 +8,7 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+	"sync"
 
 	"github.com/yeixio/matinee/internal/probe"
 	"github.com/yeixio/matinee/internal/store"
@@ -35,19 +36,57 @@ type File struct {
 	Probe   probe.Result
 }
 
-var kinds = map[string]Kind{}
+// Unprobed is a Kind whose files aren't audio or video, such as a plugin's
+// games. They aren't run through ffprobe, so Playable isn't asked.
+type Unprobed interface {
+	Kind
+	Unprobed()
+}
 
-// Register adds a library kind. Call it from init.
-func Register(k Kind) { kinds[k.Name()] = k }
+// Session is a Kind that sets something up for a whole scan, such as a
+// plugin's sandbox. The scanner calls BeginScan before the first file and
+// the function it returns after the last.
+type Session interface {
+	Kind
+	BeginScan(ctx context.Context, lib store.Library) (end func())
+}
+
+// ErrSkip from Index leaves a file out, like one with nothing playable.
+var ErrSkip = errUnplayable
+
+var (
+	kindsMu sync.RWMutex
+	kinds   = map[string]Kind{}
+)
+
+// Register adds a library kind. Built-in kinds register from init; plugins
+// register theirs while the server runs.
+func Register(k Kind) {
+	kindsMu.Lock()
+	defer kindsMu.Unlock()
+	kinds[k.Name()] = k
+}
+
+// Unregister removes a library kind, when a plugin is turned off. Libraries
+// of that kind keep their items but aren't scanned.
+func Unregister(name string) {
+	kindsMu.Lock()
+	defer kindsMu.Unlock()
+	delete(kinds, name)
+}
 
 // KindByName returns a registered library kind.
 func KindByName(name string) (Kind, bool) {
+	kindsMu.RLock()
+	defer kindsMu.RUnlock()
 	k, ok := kinds[name]
 	return k, ok
 }
 
 // KindNames lists the registered library kinds.
 func KindNames() []string {
+	kindsMu.RLock()
+	defer kindsMu.RUnlock()
 	names := make([]string, 0, len(kinds))
 	for n := range kinds {
 		names = append(names, n)

@@ -228,6 +228,8 @@ Every setting is a flag or an environment variable.
 | `MATINEE_PUBLIC_URL` | empty | The address the apps should connect to, such as `https://matinee.example.com`, at home and away; empty uses this machine's IP and port at home, and remote access's address away |
 | `MATINEE_HOME_ADDR` | empty | A second listen address just for the home network, such as `:7172`, when the main one is behind a proxy. Only devices that connect here can watch without signing in (see above) |
 | `MATINEE_REMOTE_ADDR` | `:7443` | HTTPS listen address for remote access, which an admin turns on in Settings ([more](#reaching-it-away-from-home)); `off` to not offer it |
+| `MATINEE_PLUGINS` | `true` | Let admins install plugins in Settings ([docs/plugins.md](docs/plugins.md)); `false` turns them off |
+| `MATINEE_PLUGIN_CATALOG` | `https://matinee.yeix.io/plugins.json` | The list of official plugins Settings offers; `off` for none |
 | `MATINEE_FFMPEG`, `MATINEE_FFPROBE` | `ffmpeg`, `ffprobe` | Paths to FFmpeg |
 | `MATINEE_VAAPI_DEVICE` | empty | The GPU to use for VAAPI, such as `/dev/dri/renderD129`, on a machine with several; empty tries each |
 
@@ -270,11 +272,13 @@ internal/artwork     poster and backdrop serving and caching
 internal/stream      direct play and HLS transcoding
 internal/hwaccel     finds the GPU and builds FFmpeg's arguments for it
 internal/store       SQLite / PostgreSQL storage
+internal/plugin      runs plugins: WebAssembly in a sandbox (wazero)
+pluginsdk/           the SDK for writing plugins (MIT licensed)
 web/                 React + Vite web player
 deploy/helm/matinee  Helm chart
 ```
 
-Library kinds and metadata providers are interfaces so plugins can add more later, such as an arcade (MAME) library.
+Plugins add library kinds, details, players and reactions to events without changing Matinee; [docs/plugins.md](docs/plugins.md) explains how to write one.
 
 The API is plain JSON over HTTP under `/api/v1`, open to any client, and documented in [`openapi.yaml`](internal/api/openapi.yaml) (also served at `/api/v1/openapi.yaml`). Within v1 it only grows; breaking changes would go in a v2 served alongside it. Kubernetes probes are at `/healthz` (process up) and `/readyz` (database reachable).
 
