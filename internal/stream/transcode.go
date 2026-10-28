@@ -251,6 +251,7 @@ func (t *Transcoder) ServeFile(w http.ResponseWriter, r *http.Request, userID in
 		http.NotFound(w, r)
 		return
 	}
+	allowAnyOrigin(w)
 	path := filepath.Join(s.dir, name)
 	if name != "index.m3u8" {
 		if err := waitFor(r.Context(), s, path, 15*time.Second); err != nil {

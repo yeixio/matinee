@@ -297,7 +297,10 @@
     "forward10": "ข้ามไป 10 วินาที",
     "endsAt": "จบเวลา {{time}}",
     "position": "ตำแหน่ง",
-    "positionOf": "{{at}} จาก {{total}}"
+    "positionOf": "{{at}} จาก {{total}}",
+    "castingTo": "กำลังเล่นบน {{name}}",
+    "airPlaying": "กำลังเล่นบนทีวีผ่าน AirPlay",
+    "castControls": "แสดงตัวควบคุม"
   },
   "library": {
     "nothingUnwatched": "ไม่มีเรื่องที่ยังไม่ได้ดูที่นี่",

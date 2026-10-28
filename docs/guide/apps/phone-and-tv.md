@@ -1,6 +1,6 @@
 ---
 title: The phone and TV apps
-description: The Matinee apps for iPhone, iPad, Android, Apple TV, Android TV and Google TV, how they find your server, and what they can do.
+description: The Matinee apps for iPhone, iPad, Android, Mac, Apple TV, Android TV, Google TV and Fire TV, how they find your server, and what they can do.
 sidebar:
   order: 1
 ---
@@ -20,7 +20,16 @@ The Matinee apps bring your library to phones, tablets and TVs, with the device'
 | Matinee for phones and tablets | iPhone, iPad, Android phones and tablets |
 | Matinee for TV | Apple TV, Android TV and Google TV |
 
-The apps are a one-time purchase in the App Store and Google Play. The server stays free and open source; buying an app is how the project is funded.
+<!-- since: v0.1.1 -->
+| Also | Runs on |
+| --- | --- |
+| Matinee for phones and tablets | Macs with Apple silicon and Apple Vision Pro (the iPad app, from the App Store), Fire tablets |
+| Matinee for TV | Fire TV, from the Amazon Appstore |
+
+On any other TV with AirPlay or Chromecast, [cast from your phone](/docs/apps/casting/).
+<!-- /since -->
+
+The apps are a one-time purchase in the App Store, Google Play and the Amazon Appstore. The server stays free and open source; buying an app is how the project is funded.
 
 ## Connecting to your server
 
@@ -53,6 +62,10 @@ The TV app has a layout made for the couch and a remote: tabs along the top, big
 On Apple TV, the **top shelf** (the banner above Matinee's icon on the home screen) shows your Continue watching, watch list and Recently added. Select one to open it, or press Play to start it.
 
 Android TV and Google TV install the same app as Android phones, from Google Play.
+
+<!-- since: v0.1.1 -->
+Fire TV installs it from the Amazon Appstore. The remote's rewind and fast-forward buttons skip back and ahead 10 seconds, like left and right.
+<!-- /since -->
 
 <!-- since: v0.1.1 -->
 ## Sleep timer

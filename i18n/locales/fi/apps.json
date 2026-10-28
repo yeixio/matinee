@@ -302,7 +302,10 @@
     "forward10": "Eteenpäin 10 sekuntia",
     "endsAt": "Päättyy klo {{time}}",
     "position": "Kohta",
-    "positionOf": "{{at}} / {{total}}"
+    "positionOf": "{{at}} / {{total}}",
+    "castingTo": "Toistetaan laitteella {{name}}",
+    "airPlaying": "Toistetaan televisiossa AirPlayn kautta",
+    "castControls": "Näytä säätimet"
   },
   "library": {
     "nothingUnwatched": "Ei katsomatonta täällä",

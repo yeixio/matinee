@@ -297,7 +297,10 @@
     "forward10": "10秒進む",
     "endsAt": "{{time}} に終了",
     "position": "再生位置",
-    "positionOf": "{{at}} / {{total}}"
+    "positionOf": "{{at}} / {{total}}",
+    "castingTo": "{{name}} で再生中",
+    "airPlaying": "AirPlay でテレビで再生中",
+    "castControls": "コントロールを表示"
   },
   "library": {
     "nothingUnwatched": "未視聴のものはありません",

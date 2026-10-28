@@ -312,7 +312,10 @@
     "forward10": "Вперед на 10 секунд",
     "endsAt": "Закінчиться о {{time}}",
     "position": "Позиція",
-    "positionOf": "{{at}} з {{total}}"
+    "positionOf": "{{at}} з {{total}}",
+    "castingTo": "Відтворюється на {{name}}",
+    "airPlaying": "Відтворюється на телевізорі через AirPlay",
+    "castControls": "Показати керування"
   },
   "library": {
     "nothingUnwatched": "Тут немає непереглянутого",

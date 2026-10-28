@@ -302,7 +302,10 @@
     "forward10": "Előre 10 másodpercet",
     "endsAt": "Vége: {{time}}",
     "position": "Pozíció",
-    "positionOf": "{{at}} / {{total}}"
+    "positionOf": "{{at}} / {{total}}",
+    "castingTo": "Lejátszás itt: {{name}}",
+    "airPlaying": "Lejátszás a tévén AirPlay-jel",
+    "castControls": "Vezérlők megjelenítése"
   },
   "library": {
     "nothingUnwatched": "Itt nincs semmi, amit ne láttál volna",

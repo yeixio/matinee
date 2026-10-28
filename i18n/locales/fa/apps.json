@@ -302,7 +302,10 @@
     "forward10": "۱۰ ثانیه جلو",
     "endsAt": "پایان در {{time}}",
     "position": "موقعیت",
-    "positionOf": "{{at}} از {{total}}"
+    "positionOf": "{{at}} از {{total}}",
+    "castingTo": "در حال پخش روی {{name}}",
+    "airPlaying": "در حال پخش روی تلویزیون با AirPlay",
+    "castControls": "نمایش کنترل‌ها"
   },
   "library": {
     "nothingUnwatched": "اینجا چیز دیده‌نشده‌ای نیست",

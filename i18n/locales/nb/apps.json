@@ -302,7 +302,10 @@
     "forward10": "Frem 10 sekunder",
     "endsAt": "Slutter {{time}}",
     "position": "Posisjon",
-    "positionOf": "{{at}} av {{total}}"
+    "positionOf": "{{at}} av {{total}}",
+    "castingTo": "Spilles av på {{name}}",
+    "airPlaying": "Spilles av på TV-en med AirPlay",
+    "castControls": "Vis kontroller"
   },
   "library": {
     "nothingUnwatched": "Ingenting usett her",

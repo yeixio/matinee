@@ -302,7 +302,10 @@
     "forward10": "10 saniye ileri",
     "endsAt": "Bitiş: {{time}}",
     "position": "Konum",
-    "positionOf": "{{at}} / {{total}}"
+    "positionOf": "{{at}} / {{total}}",
+    "castingTo": "{{name}} üzerinde oynatılıyor",
+    "airPlaying": "AirPlay ile TV'nizde oynatılıyor",
+    "castControls": "Kontrolleri göster"
   },
   "library": {
     "nothingUnwatched": "Burada izlenmemiş bir şey yok",

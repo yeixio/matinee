@@ -302,7 +302,10 @@
     "forward10": "Framåt 10 sekunder",
     "endsAt": "Slutar {{time}}",
     "position": "Position",
-    "positionOf": "{{at}} av {{total}}"
+    "positionOf": "{{at}} av {{total}}",
+    "castingTo": "Spelas upp på {{name}}",
+    "airPlaying": "Spelas upp på din tv med AirPlay",
+    "castControls": "Visa kontroller"
   },
   "library": {
     "nothingUnwatched": "Inget osett här",

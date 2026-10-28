@@ -312,7 +312,10 @@
     "forward10": "Vpřed o 10 sekund",
     "endsAt": "Skončí v {{time}}",
     "position": "Pozice",
-    "positionOf": "{{at}} z {{total}}"
+    "positionOf": "{{at}} z {{total}}",
+    "castingTo": "Přehrává se na {{name}}",
+    "airPlaying": "Přehrává se na televizi přes AirPlay",
+    "castControls": "Zobrazit ovládání"
   },
   "library": {
     "nothingUnwatched": "Nic nezhlédnutého",
