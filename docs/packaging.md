@@ -52,3 +52,16 @@ scripts/test-packages.sh
 ## Hosting
 
 The repositories live on the `packages` branch, replaced by one commit each release so old packages don't pile up in git history, and are served by raw.githubusercontent.com. That needs no setup beyond this repository being public. If downloads outgrow it, the same directory can be served from GitHub Pages or a CDN under a project domain: set `PACKAGES_URL` for `scripts/package-repos.sh` and update the URLs in the README.
+
+## NAS app stores
+
+`packaging/` also holds Matinee's entries for NAS app stores. Each store keeps its own copy, so a new release means a pull request to that store with the new image tag and digest (`docker buildx imagetools inspect ghcr.io/yeixio/matinee:<version>` prints the digest).
+
+| Folder | Store | Where it goes |
+| --- | --- | --- |
+| `unraid/` | Unraid Community Applications | Served from this repository; the template points at `:latest`, so it needs no update per release |
+| `umbrel/matinee/` | Umbrel App Store | `getumbrel/umbrel-apps`, as the `matinee/` folder |
+| `zimaos/Matinee/` | ZimaOS / CasaOS App Store | `IceWhaleTech/CasaOS-AppStore`, under `Apps/` |
+| `truenas/matinee/` | TrueNAS Apps (community train) | `truenas/apps`, under `ix-dev/community/` |
+
+Before sending a store an update, test it the way that store asks: Umbrel through umbrelOS (a device or its container image), TrueNAS with the repository's own test runner, ZimaOS with `scripts/build_dist.sh`.

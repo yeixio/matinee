@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!-- Unraid template for Matinee. Unraid users can add it with
+     https://raw.githubusercontent.com/yeixio/matinee/main/packaging/unraid/matinee.xml
+     and it's what Community Applications lists. -->
+<Container version="2">
+  <Name>Matinee</Name>
+  <Repository>ghcr.io/yeixio/matinee:latest</Repository>
+  <Registry>https://github.com/yeixio/matinee/pkgs/container/matinee</Registry>
+  <Network>host</Network>
+  <MyIP/>
+  <Shell>bash</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/yeixio/matinee/issues</Support>
+  <Project>https://matinee.yeix.io</Project>
+  <Overview>Matinee is a free and open source media server for your movies, TV shows and music. It finds posters, descriptions, cast and trailers for everything in your shares, then streams to any web browser and to the Matinee apps for iPhone, iPad, Android, Apple TV and Android TV. It transcodes with your GPU when there is one, gives everyone in the house their own profile with a kids mode, and keeps your place across devices.&#xD;
+&#xD;
+Open the WebUI to create the admin account, then add libraries from /media. Pass /dev/dri for an Intel or AMD GPU. The guide is at https://matinee.yeix.io/docs/getting-started/nas/</Overview>
+  <Category>MediaServer:Video MediaServer:Music</Category>
+  <WebUI>http://[IP]:[PORT:7171]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/yeixio/matinee/main/packaging/unraid/matinee.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/yeixio/matinee/main/packaging/unraid/matinee.png</Icon>
+  <!-- Root in the container, so Matinee can write to the appdata folder Unraid
+       creates and use /dev/dri without extra groups. -->
+  <ExtraParams>--user 0:0</ExtraParams>
+  <PostArgs/>
+  <CPUset/>
+  <DonateText>Matinee is free. Donations help pay for a shared posters-and-details key.</DonateText>
+  <DonateLink>https://yeix.io/matinee/donate</DonateLink>
+  <Requires/>
+  <Config Name="Web UI port" Target="7171" Default="7171" Mode="tcp" Description="The port Matinee answers on. With host networking this is the port on your server. Change it with MATINEE_ADDR below." Type="Port" Display="always" Required="true" Mask="false">7171</Config>
+  <Config Name="Appdata" Target="/data" Default="/mnt/user/appdata/matinee" Mode="rw" Description="Matinee's database, image cache and scratch space for converting video. Keep it on the cache drive." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/matinee</Config>
+  <Config Name="Media" Target="/media" Default="/mnt/user/" Mode="ro" Description="Your media shares, read-only. Matinee's library picker starts here." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/</Config>
+  <Config Name="GPU (Intel or AMD)" Target="/dev/dri" Default="/dev/dri" Mode="" Description="Hardware transcoding. Remove this if your server has no GPU. For NVIDIA, add --runtime=nvidia to Extra Parameters and NVIDIA_VISIBLE_DEVICES below." Type="Device" Display="always" Required="false" Mask="false">/dev/dri</Config>
+  <Config Name="MATINEE_ADDR" Target="MATINEE_ADDR" Default=":7171" Mode="" Description="Listen address and port." Type="Variable" Display="advanced" Required="false" Mask="false">:7171</Config>
+  <Config Name="MATINEE_MEDIA_ROOT" Target="MATINEE_MEDIA_ROOT" Default="/media" Mode="" Description="Folder the library picker starts in." Type="Variable" Display="advanced" Required="false" Mask="false">/media</Config>
+  <Config Name="MATINEE_TMDB_KEY" Target="MATINEE_TMDB_KEY" Default="" Mode="" Description="Optional themoviedb.org key for posters and details. You can also add it later in Settings." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+  <Config Name="MATINEE_SERVER_NAME" Target="MATINEE_SERVER_NAME" Default="Matinee" Mode="" Description="The name the phone and TV apps show for this server." Type="Variable" Display="advanced" Required="false" Mask="false">Matinee</Config>
+  <Config Name="NVIDIA_VISIBLE_DEVICES" Target="NVIDIA_VISIBLE_DEVICES" Default="" Mode="" Description="For an NVIDIA GPU with the Nvidia Driver plugin: all, or the GPU's UUID. Leave empty otherwise." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+</Container>

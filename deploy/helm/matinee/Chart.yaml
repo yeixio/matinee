@@ -19,7 +19,7 @@ annotations:
     - name: Website
       url: https://matinee.yeix.io
     - name: Kubernetes guide
-      url: https://matinee.yeix.io/docs/guide/server/kubernetes/
+      url: https://matinee.yeix.io/docs/server/kubernetes/
     - name: Source
       url: https://github.com/yeixio/matinee
     - name: Support

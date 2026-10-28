@@ -1,0 +1,11 @@
+categories:
+- media
+icon_url: https://raw.githubusercontent.com/yeixio/matinee/main/site/public/favicon.svg
+screenshots:
+- https://raw.githubusercontent.com/yeixio/matinee/main/docs/guide/images/home.webp
+- https://raw.githubusercontent.com/yeixio/matinee/main/docs/guide/images/movie.webp
+tags:
+- media
+- movies
+- tv
+- music

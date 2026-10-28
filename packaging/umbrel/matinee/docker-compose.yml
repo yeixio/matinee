@@ -1,0 +1,21 @@
+services:
+  app_proxy:
+    environment:
+      APP_HOST: matinee_server_1
+      APP_PORT: 7171
+      # Matinee has its own accounts, and its phone and TV apps can't sign in
+      # to Umbrel, so they need to reach the server directly.
+      PROXY_AUTH_ADD: "false"
+
+  server:
+    image: ghcr.io/yeixio/matinee:0.1.0@sha256:2ea3e841c000f3c44b82c9b0c7d40efa20dfa5ef3451f6f43377b76d1e1b36fa
+    restart: on-failure
+    user: "1000:1000"
+    environment:
+      MATINEE_DATA_DIR: /data
+      # The folder picker in Settings → Libraries starts here.
+      MATINEE_MEDIA_ROOT: /media
+      MATINEE_SCAN_INTERVAL: 15m
+    volumes:
+      - ${APP_DATA_DIR}/data/matinee:/data
+      - ${UMBREL_ROOT}/data/storage/downloads:/media/downloads:ro
