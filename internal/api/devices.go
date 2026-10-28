@@ -51,6 +51,10 @@ func (s *Server) serverInfo(w http.ResponseWriter, r *http.Request) {
 		// Where to reach this server away from home; apps keep it from
 		// their last visit. Empty when the server has no such address.
 		"remoteURL": s.remoteURL(r.Context()),
+		// remoteURL is known to work from outside: the public URL leads
+		// there, or remote access passed its outside check. Otherwise
+		// remoteURL is only the public URL, which may work over a VPN.
+		"remoteReady": s.remoteReady(r.Context()),
 		// When the outside address changes while an app is away, it finds
 		// the new one at lookupURL (internal/connect). Empty without one.
 		"serverId":  serverID,

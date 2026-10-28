@@ -37,10 +37,13 @@ func TestRemoteAccessSetting(t *testing.T) {
 	}
 
 	// No address yet, so the apps get none.
-	var info struct{ RemoteURL *string }
+	var info struct {
+		RemoteURL   *string
+		RemoteReady bool
+	}
 	c.do("GET", "/api/v1/server", nil, &info)
-	if info.RemoteURL == nil || *info.RemoteURL != "" {
-		t.Fatalf("remoteURL %v", info.RemoteURL)
+	if info.RemoteURL == nil || *info.RemoteURL != "" || info.RemoteReady {
+		t.Fatalf("remoteURL %v ready %v", info.RemoteURL, info.RemoteReady)
 	}
 }
 
@@ -76,10 +79,13 @@ func TestPublicURLIsRemoteURL(t *testing.T) {
 		s.PublicURL = "https://matinee.example.com"
 		s.LookupHost = resolveTo("203.0.113.7")
 	})
-	var info struct{ RemoteURL string }
+	var info struct {
+		RemoteURL   string
+		RemoteReady bool
+	}
 	c.do("GET", "/api/v1/server", nil, &info)
-	if info.RemoteURL != "https://matinee.example.com" {
-		t.Fatalf("remoteURL %q", info.RemoteURL)
+	if info.RemoteURL != "https://matinee.example.com" || !info.RemoteReady {
+		t.Fatalf("server %+v", info)
 	}
 	var login struct{ Token string }
 	c.do("POST", "/api/v1/setup", credentials{"admin", "correct horse"}, &login)
@@ -119,6 +125,9 @@ func TestHomeOnlyPublicURL(t *testing.T) {
 		// it may work through a VPN.
 		if got := s.remoteURL(context.Background()); got != tc.url {
 			t.Errorf("%s: remoteURL %q", tc.url, got)
+		}
+		if got := s.remoteReady(context.Background()); got == tc.home {
+			t.Errorf("%s: remoteReady %v", tc.url, got)
 		}
 	}
 }

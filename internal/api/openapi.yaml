@@ -2077,6 +2077,14 @@ components:
             while at home and try it when the home address doesn't answer.
             If the public IP changes while they're away, they look the
             server up at `lookupURL`.
+        remoteReady:
+          type: boolean
+          description: |
+            `remoteURL` is known to work away from home: the public URL
+            leads to a public address, or remote access passed its outside
+            check. False when there's no such address, or when `remoteURL`
+            is only a public URL that leads home (it may still work over a
+            VPN).
         serverId:
           type: string
           description: This server's id with the connect service (docs/connect.md). Empty when remote access isn't working or the service is off.

@@ -157,6 +157,11 @@ func (s *Server) remoteURL(ctx context.Context) string {
 	return s.PublicURL
 }
 
+// remoteReady reports whether remoteURL is known to work away from home.
+func (s *Server) remoteReady(ctx context.Context) bool {
+	return s.publicURLIsPublic(ctx) || s.Remote != nil && s.Remote.URL() != ""
+}
+
 func (s *Server) setRemoteAccess(ctx context.Context, on bool) error {
 	if err := s.Store.SetSetting(ctx, SettingRemoteAccess, strconv.FormatBool(on)); err != nil {
 		return err

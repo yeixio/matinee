@@ -13,7 +13,7 @@ Turn on **Settings → Remote access → Watch away from home** and Matinee sets
 
 1. **Opens a port.** It asks your router to forward a port to it (7443, or another the router picks) over UPnP or NAT-PMP. Most home routers allow this; if yours doesn't, turn on UPnP in its settings.
 2. **Gets a certificate.** It gets an HTTPS certificate for your public IP address from [Let's Encrypt](https://letsencrypt.org/), so phones and browsers trust the connection. For the check, Let's Encrypt connects once through port 443 or 80, which Matinee forwards for a minute and closes again. This also proves the internet can reach the server. The certificate lasts six days and renews by itself, and a new one is fetched when your address changes.
-3. **Tells the apps.** The apps pick up the outside address while they're at home and use it when they're away.
+3. **Tells the apps.** The apps pick up the outside address while they're at home and use it when they're away, including when the server's usual address is a name that only works at home. On a phone, **Settings** shows the server under its address: at home it says whether it's ready to watch away from home, and away it shows the address it's connected to.
 
 <!-- since: v0.1.1 -->
 4. **Keeps the apps able to find it**, with a Matinee Connect subscription (below). Matinee tells a small lookup service its current public address every few minutes. If your address changes while you're away, the apps look the server up there and connect to the new address. Settings says so once it works.
