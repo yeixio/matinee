@@ -115,5 +115,19 @@
   "tmdb_couldnt_be_reached_to_check_the_key": "TMDB gick inte att nå för att kontrollera nyckeln",
   "this_server_cant_change_its_tmdb_key": "den här servern kan inte byta sin TMDB-nyckel",
   "this_server_doesnt_offer_remote_access": "den här servern erbjuder inte fjärråtkomst",
-  "this_server_doesnt_use_matinee_connect": "den här servern använder inte Matinee Connect"
+  "this_server_doesnt_use_matinee_connect": "den här servern använder inte Matinee Connect",
+  "bad_client_id": "ogiltigt klient-id",
+  "minutes_must_be_between_0_and_1440": "minutes måste vara mellan 0 och 1440",
+  "minutes_or_endofitem_is_required": "minutes eller endOfItem krävs",
+  "muted_is_required": "muted krävs",
+  "no_such_client": "klienten finns inte",
+  "positionms_is_required": "positionMs krävs",
+  "say_hello_first": "säg hej först (hello)",
+  "that_client_cant_do_that": "klienten kan inte göra det",
+  "that_client_is_offline": "klienten är offline",
+  "that_client_isnt_answering": "klienten svarar inte",
+  "this_client_id_belongs_to_someone_else": "klient-id:t tillhör någon annan",
+  "track_is_required": "track krävs",
+  "unknown_command": "okänt kommando",
+  "volume_must_be_between_0_and_1": "volume måste vara mellan 0 och 1"
 }

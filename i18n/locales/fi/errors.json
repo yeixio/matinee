@@ -115,5 +115,19 @@
   "tmdb_couldnt_be_reached_to_check_the_key": "TMDB:hen ei saatu yhteyttä avaimen tarkistamiseksi",
   "this_server_cant_change_its_tmdb_key": "tämä palvelin ei voi vaihtaa TMDB-avaintaan",
   "this_server_doesnt_offer_remote_access": "tämä palvelin ei tarjoa etäkäyttöä",
-  "this_server_doesnt_use_matinee_connect": "tämä palvelin ei käytä Matinee Connectia"
+  "this_server_doesnt_use_matinee_connect": "tämä palvelin ei käytä Matinee Connectia",
+  "bad_client_id": "virheellinen asiakastunnus",
+  "minutes_must_be_between_0_and_1440": "minutes on oltava välillä 0–1440",
+  "minutes_or_endofitem_is_required": "minutes tai endOfItem vaaditaan",
+  "muted_is_required": "muted vaaditaan",
+  "no_such_client": "asiakasta ei ole",
+  "positionms_is_required": "positionMs vaaditaan",
+  "say_hello_first": "tervehdi ensin (hello)",
+  "that_client_cant_do_that": "asiakas ei osaa tehdä sitä",
+  "that_client_is_offline": "asiakas ei ole yhteydessä",
+  "that_client_isnt_answering": "asiakas ei vastaa",
+  "this_client_id_belongs_to_someone_else": "asiakastunnus kuuluu jollekulle muulle",
+  "track_is_required": "track vaaditaan",
+  "unknown_command": "tuntematon komento",
+  "volume_must_be_between_0_and_1": "volume on oltava välillä 0–1"
 }

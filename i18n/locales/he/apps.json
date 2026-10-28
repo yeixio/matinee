@@ -423,5 +423,8 @@
     "notConnected": "מנהל עדיין לא חיבר את Radarr או Sonarr לשרת הזה.",
     "connect": "מנהל יכול לחבר את Radarr או Sonarr בהגדרות של Matinee באתר.",
     "nothing": "אין כרגע שום דבר בדרך."
+  },
+  "remote": {
+    "controlledBy": "נשלט מ-{{name}}"
   }
 }

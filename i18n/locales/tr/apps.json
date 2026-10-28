@@ -416,5 +416,8 @@
     "notConnected": "Bir yönetici bu sunucuya Radarr veya Sonarr bağlamamış.",
     "connect": "Bir yönetici Radarr veya Sonarr'ı web'deki Matinee Ayarlar bölümünden bağlayabilir.",
     "nothing": "Şu anda yolda bir şey yok."
+  },
+  "remote": {
+    "controlledBy": "{{name}} tarafından kontrol ediliyor"
   }
 }

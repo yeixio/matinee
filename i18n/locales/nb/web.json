@@ -786,5 +786,8 @@
     "confirmRemove": "Fjerne {{name}}? Bibliotekene blir værende, men oppdateres ikke lenger, og det den har lagret for alle, som lagrede spill, slettes.",
     "saved": "Lagret",
     "noPlayer": "Dette trenger en utvidelse som er slått av. En administrator kan slå den på i Innstillinger, under Utvidelser."
+  },
+  "remote": {
+    "controlledBy": "Styrt fra {{name}}"
   }
 }

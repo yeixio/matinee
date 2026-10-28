@@ -409,5 +409,8 @@
     "notConnected": "관리자가 이 서버에 Radarr나 Sonarr를 연결하지 않았습니다.",
     "connect": "관리자가 웹의 Matinee 설정에서 Radarr 또는 Sonarr를 연결할 수 있어요.",
     "nothing": "지금은 예정된 것이 없어요."
+  },
+  "remote": {
+    "controlledBy": "{{name}}에서 제어함"
   }
 }

@@ -20,6 +20,16 @@ const { open, dress, shot } = capture(browser, { origin, only: new Set(process.a
 const section = (page, heading) => page.locator('section').filter({ has: page.getByRole('heading', { name: heading, exact: true, level: 2 }) }).first()
 
 let token
+// Whether a screenshot was asked for (all of them when none were named).
+const only = new Set(process.argv.slice(2))
+const wanted = (name) => only.size === 0 || only.has(name)
+
+/** Signs in as Home Assistant does, with a code an admin approves, and returns its token. */
+async function homeAssistant() {
+  const code = await api(null, 'POST', '/auth/device', { deviceName: 'Home Assistant', platform: 'homeassistant' })
+  await api(token, 'POST', `/auth/device/${code.userCode}/approve`)
+  return (await api(null, 'POST', '/auth/device/token', { deviceCode: code.deviceCode })).token
+}
 const find = async (title, kinds = ['movie', 'show']) => (await api(token, 'GET', `/search?q=${encodeURIComponent(title)}`)).find((i) => i.title === title && kinds.includes(i.kind))
 const children = async (id) => {
   const r = await api(token, 'GET', `/items/${id}/children`)
@@ -155,6 +165,27 @@ try {
     await page.getByRole('menuitemradio', { name: '30 minutes' }).click()
     await page.getByRole('button', { name: /^Sleep timer/ }).click()
     await shot(page, 'player-sleep')
+    await page.getByRole('menuitemradio', { name: 'Off' }).click()
+
+    // Home Assistant pauses the film (see docs/guide/server/home-assistant.md).
+    if (wanted('player-remote')) {
+      const ha = await homeAssistant()
+      await page.mouse.click(700, 300) // plays again
+      await sleep(1500)
+      const [client] = (await api(ha, 'GET', '/clients')).filter((c) => c.playing)
+      await api(ha, 'POST', `/clients/${client.id}/commands`, { type: 'pause' })
+      const notice = page.getByText('Controlled from Home Assistant')
+      await notice.waitFor()
+      // The notice leaves after 3 seconds, before the shot settles: keep a copy.
+      await notice.evaluate((el) => {
+        const box = el.parentElement
+        const copy = box.cloneNode(true)
+        copy.dataset.pinned = ''
+        box.parentElement.append(copy)
+      })
+      await shot(page, 'player-remote')
+      await page.evaluate(() => document.querySelector('[data-pinned]')?.remove())
+    }
 
     // Up next: an episode just before its end.
     await page.goto(`${origin}/watch/${eps[3].id}`)
@@ -225,6 +256,12 @@ try {
 
     await page.goto(`${origin}/link`)
     await shot(page, 'link')
+
+    // Home Assistant asking to sign in, as its setup shows the code.
+    const code = await api(null, 'POST', '/auth/device', { deviceName: 'Home Assistant', platform: 'homeassistant' })
+    await page.goto(`${origin}/link?code=${code.userCode}`)
+    await page.getByText('Home Assistant', { exact: true }).waitFor()
+    await shot(page, 'link-home-assistant')
     await page.context().close()
   }
 

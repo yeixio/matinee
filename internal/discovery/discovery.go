@@ -22,6 +22,7 @@ type Announcement struct {
 	Port    int    // where this host serves Matinee
 	URL     string // optional: the server's address away from home
 	Version string
+	UUID    string // the server's own id (api.ServerUUID)
 	// Home means this host's IP and Port reach Matinee directly from the home
 	// network, so devices there can use it without signing in. Otherwise
 	// apps connect to URL.
@@ -31,6 +32,9 @@ type Announcement struct {
 // TXT is the record the apps read: who's answering, and where to connect.
 func (a Announcement) TXT() []string {
 	txt := []string{"product=matinee", "version=" + a.Version}
+	if a.UUID != "" {
+		txt = append(txt, "id="+a.UUID)
+	}
 	if a.URL != "" {
 		txt = append(txt, "url="+strings.TrimRight(a.URL, "/"))
 	}

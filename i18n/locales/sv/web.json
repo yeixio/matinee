@@ -786,5 +786,8 @@
     "confirmRemove": "Ta bort {{name}}? Dess bibliotek finns kvar men slutar uppdateras, och det som det sparat åt alla, som sparade spel, raderas.",
     "saved": "Sparat",
     "noPlayer": "Det här kräver ett tillägg som är avstängt. En administratör kan slå på det i Inställningar, under Tillägg."
+  },
+  "remote": {
+    "controlledBy": "Styrs från {{name}}"
   }
 }

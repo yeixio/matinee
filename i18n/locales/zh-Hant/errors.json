@@ -115,5 +115,19 @@
   "tmdb_couldnt_be_reached_to_check_the_key": "無法連線到 TMDB 以檢查金鑰",
   "this_server_cant_change_its_tmdb_key": "此伺服器無法變更其 TMDB 金鑰",
   "this_server_doesnt_offer_remote_access": "此伺服器不提供遠端存取",
-  "this_server_doesnt_use_matinee_connect": "此伺服器未使用 Matinee Connect"
+  "this_server_doesnt_use_matinee_connect": "此伺服器未使用 Matinee Connect",
+  "bad_client_id": "用戶端 ID 無效",
+  "minutes_must_be_between_0_and_1440": "minutes 必須介於 0 到 1440",
+  "minutes_or_endofitem_is_required": "需要 minutes 或 endOfItem",
+  "muted_is_required": "需要 muted",
+  "no_such_client": "沒有這個用戶端",
+  "positionms_is_required": "需要 positionMs",
+  "say_hello_first": "請先傳送 hello",
+  "that_client_cant_do_that": "該用戶端無法執行此操作",
+  "that_client_is_offline": "該用戶端已離線",
+  "that_client_isnt_answering": "該用戶端沒有回應",
+  "this_client_id_belongs_to_someone_else": "此用戶端 ID 屬於其他人",
+  "track_is_required": "需要 track",
+  "unknown_command": "未知的指令",
+  "volume_must_be_between_0_and_1": "volume 必須介於 0 到 1"
 }

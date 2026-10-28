@@ -416,5 +416,8 @@
     "notConnected": "An admin hasn't connected Radarr or Sonarr to this server.",
     "connect": "An admin can connect Radarr or Sonarr in Settings in Matinee on the web.",
     "nothing": "Nothing on the way right now."
+  },
+  "remote": {
+    "controlledBy": "Controlled from {{name}}"
   }
 }

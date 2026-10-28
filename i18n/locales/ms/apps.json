@@ -409,5 +409,8 @@
     "notConnected": "Pentadbir belum menyambungkan Radarr atau Sonarr ke pelayan ini.",
     "connect": "Pentadbir boleh menyambungkan Radarr atau Sonarr dalam Tetapan Matinee di web.",
     "nothing": "Tiada apa-apa yang akan datang buat masa ini."
+  },
+  "remote": {
+    "controlledBy": "Dikawal dari {{name}}"
   }
 }

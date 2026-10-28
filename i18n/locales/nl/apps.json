@@ -416,5 +416,8 @@
     "notConnected": "Een beheerder heeft Radarr of Sonarr nog niet aan deze server gekoppeld.",
     "connect": "Een beheerder kan Radarr of Sonarr koppelen via Instellingen in Matinee op het web.",
     "nothing": "Er komt op dit moment niets aan."
+  },
+  "remote": {
+    "controlledBy": "Bediend vanaf {{name}}"
   }
 }

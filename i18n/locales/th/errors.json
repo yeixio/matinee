@@ -115,5 +115,19 @@
   "tmdb_couldnt_be_reached_to_check_the_key": "ไม่สามารถติดต่อ TMDB เพื่อตรวจสอบคีย์ได้",
   "this_server_cant_change_its_tmdb_key": "เซิร์ฟเวอร์นี้เปลี่ยนคีย์ TMDB ของตัวเองไม่ได้",
   "this_server_doesnt_offer_remote_access": "เซิร์ฟเวอร์นี้ไม่มีการเข้าถึงระยะไกล",
-  "this_server_doesnt_use_matinee_connect": "เซิร์ฟเวอร์นี้ไม่ได้ใช้ Matinee Connect"
+  "this_server_doesnt_use_matinee_connect": "เซิร์ฟเวอร์นี้ไม่ได้ใช้ Matinee Connect",
+  "bad_client_id": "รหัสไคลเอนต์ไม่ถูกต้อง",
+  "minutes_must_be_between_0_and_1440": "minutes ต้องอยู่ระหว่าง 0 ถึง 1440",
+  "minutes_or_endofitem_is_required": "ต้องระบุ minutes หรือ endOfItem",
+  "muted_is_required": "ต้องระบุ muted",
+  "no_such_client": "ไม่มีไคลเอนต์นี้",
+  "positionms_is_required": "ต้องระบุ positionMs",
+  "say_hello_first": "ทักทายก่อน (hello)",
+  "that_client_cant_do_that": "ไคลเอนต์นี้ทำแบบนั้นไม่ได้",
+  "that_client_is_offline": "ไคลเอนต์นี้ออฟไลน์อยู่",
+  "that_client_isnt_answering": "ไคลเอนต์นี้ไม่ตอบสนอง",
+  "this_client_id_belongs_to_someone_else": "รหัสไคลเอนต์นี้เป็นของคนอื่น",
+  "track_is_required": "ต้องระบุ track",
+  "unknown_command": "คำสั่งที่ไม่รู้จัก",
+  "volume_must_be_between_0_and_1": "volume ต้องอยู่ระหว่าง 0 ถึง 1"
 }

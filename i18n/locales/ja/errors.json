@@ -115,5 +115,19 @@
   "tmdb_couldnt_be_reached_to_check_the_key": "キーを確認するために TMDB に接続できませんでした",
   "this_server_cant_change_its_tmdb_key": "このサーバーは TMDB キーを変更できません",
   "this_server_doesnt_offer_remote_access": "このサーバーはリモートアクセスを提供していません",
-  "this_server_doesnt_use_matinee_connect": "このサーバーは Matinee Connect を使っていません"
+  "this_server_doesnt_use_matinee_connect": "このサーバーは Matinee Connect を使っていません",
+  "bad_client_id": "クライアント ID が正しくありません",
+  "minutes_must_be_between_0_and_1440": "minutes は 0〜1440 にしてください",
+  "minutes_or_endofitem_is_required": "minutes か endOfItem が必要です",
+  "muted_is_required": "muted が必要です",
+  "no_such_client": "そのクライアントはありません",
+  "positionms_is_required": "positionMs が必要です",
+  "say_hello_first": "先に hello を送ってください",
+  "that_client_cant_do_that": "そのクライアントはその操作に対応していません",
+  "that_client_is_offline": "そのクライアントはオフラインです",
+  "that_client_isnt_answering": "そのクライアントが応答しません",
+  "this_client_id_belongs_to_someone_else": "このクライアント ID は別の人のものです",
+  "track_is_required": "track が必要です",
+  "unknown_command": "不明なコマンドです",
+  "volume_must_be_between_0_and_1": "volume は 0〜1 にしてください"
 }

@@ -786,5 +786,8 @@
     "confirmRemove": "{{name}} entfernen? Seine Mediatheken bleiben, werden aber nicht mehr aktualisiert, und was es für alle gespeichert hat, etwa Spielstände, wird gelöscht.",
     "saved": "Gespeichert",
     "noPlayer": "Dafür wird ein Plugin gebraucht, das ausgeschaltet ist. Ein Admin kann es in den Einstellungen unter Plugins einschalten."
+  },
+  "remote": {
+    "controlledBy": "Gesteuert von {{name}}"
   }
 }

@@ -790,5 +790,8 @@
     "confirmRemove": "¿Quitar {{name}}? Sus bibliotecas se quedan pero dejan de actualizarse, y lo que guardó para todos, como partidas guardadas, se borra.",
     "saved": "Guardado",
     "noPlayer": "Esto necesita un complemento que está desactivado. Un administrador puede activarlo en Ajustes, en Complementos."
+  },
+  "remote": {
+    "controlledBy": "Controlado desde {{name}}"
   }
 }

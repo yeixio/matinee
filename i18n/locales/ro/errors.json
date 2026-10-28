@@ -115,5 +115,19 @@
   "tmdb_couldnt_be_reached_to_check_the_key": "TMDB nu a putut fi contactat pentru verificarea cheii",
   "this_server_cant_change_its_tmdb_key": "acest server nu își poate schimba cheia TMDB",
   "this_server_doesnt_offer_remote_access": "acest server nu oferă acces de la distanță",
-  "this_server_doesnt_use_matinee_connect": "acest server nu folosește Matinee Connect"
+  "this_server_doesnt_use_matinee_connect": "acest server nu folosește Matinee Connect",
+  "bad_client_id": "id de client nevalid",
+  "minutes_must_be_between_0_and_1440": "minutes trebuie să fie între 0 și 1440",
+  "minutes_or_endofitem_is_required": "este nevoie de minutes sau endOfItem",
+  "muted_is_required": "este nevoie de muted",
+  "no_such_client": "nu există acest client",
+  "positionms_is_required": "este nevoie de positionMs",
+  "say_hello_first": "salută mai întâi (hello)",
+  "that_client_cant_do_that": "acest client nu poate face asta",
+  "that_client_is_offline": "acest client este offline",
+  "that_client_isnt_answering": "acest client nu răspunde",
+  "this_client_id_belongs_to_someone_else": "acest id de client aparține altcuiva",
+  "track_is_required": "este nevoie de track",
+  "unknown_command": "comandă necunoscută",
+  "volume_must_be_between_0_and_1": "volume trebuie să fie între 0 și 1"
 }

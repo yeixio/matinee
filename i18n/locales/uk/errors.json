@@ -115,5 +115,19 @@
   "tmdb_couldnt_be_reached_to_check_the_key": "Не вдалося зв’язатися з TMDB, щоб перевірити ключ",
   "this_server_cant_change_its_tmdb_key": "цей сервер не може змінити свій ключ TMDB",
   "this_server_doesnt_offer_remote_access": "цей сервер не пропонує віддалений доступ",
-  "this_server_doesnt_use_matinee_connect": "цей сервер не використовує Matinee Connect"
+  "this_server_doesnt_use_matinee_connect": "цей сервер не використовує Matinee Connect",
+  "bad_client_id": "неправильний ідентифікатор клієнта",
+  "minutes_must_be_between_0_and_1440": "minutes має бути від 0 до 1440",
+  "minutes_or_endofitem_is_required": "потрібно вказати minutes або endOfItem",
+  "muted_is_required": "потрібно вказати muted",
+  "no_such_client": "такого клієнта немає",
+  "positionms_is_required": "потрібно вказати positionMs",
+  "say_hello_first": "спершу привітайтеся (hello)",
+  "that_client_cant_do_that": "цей клієнт так не вміє",
+  "that_client_is_offline": "цей клієнт не в мережі",
+  "that_client_isnt_answering": "цей клієнт не відповідає",
+  "this_client_id_belongs_to_someone_else": "цей ідентифікатор клієнта належить іншому",
+  "track_is_required": "потрібно вказати track",
+  "unknown_command": "невідома команда",
+  "volume_must_be_between_0_and_1": "volume має бути від 0 до 1"
 }

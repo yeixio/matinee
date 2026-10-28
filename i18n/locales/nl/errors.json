@@ -115,5 +115,19 @@
   "tmdb_couldnt_be_reached_to_check_the_key": "TMDB was niet bereikbaar om de sleutel te controleren",
   "this_server_cant_change_its_tmdb_key": "deze server kan zijn TMDB-sleutel niet wijzigen",
   "this_server_doesnt_offer_remote_access": "deze server biedt geen toegang op afstand",
-  "this_server_doesnt_use_matinee_connect": "deze server gebruikt Matinee Connect niet"
+  "this_server_doesnt_use_matinee_connect": "deze server gebruikt Matinee Connect niet",
+  "bad_client_id": "ongeldige client-id",
+  "minutes_must_be_between_0_and_1440": "minutes moet tussen 0 en 1440 liggen",
+  "minutes_or_endofitem_is_required": "minutes of endOfItem is verplicht",
+  "muted_is_required": "muted is verplicht",
+  "no_such_client": "die client bestaat niet",
+  "positionms_is_required": "positionMs is verplicht",
+  "say_hello_first": "eerst hallo zeggen (hello)",
+  "that_client_cant_do_that": "die client kan dat niet",
+  "that_client_is_offline": "die client is offline",
+  "that_client_isnt_answering": "die client reageert niet",
+  "this_client_id_belongs_to_someone_else": "deze client-id is van iemand anders",
+  "track_is_required": "track is verplicht",
+  "unknown_command": "onbekende opdracht",
+  "volume_must_be_between_0_and_1": "volume moet tussen 0 en 1 liggen"
 }

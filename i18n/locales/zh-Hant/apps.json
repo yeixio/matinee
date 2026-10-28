@@ -409,5 +409,8 @@
     "notConnected": "管理員尚未將 Radarr 或 Sonarr 連線到此伺服器。",
     "connect": "管理員可以在網頁版 Matinee 的設定中連接 Radarr 或 Sonarr。",
     "nothing": "目前沒有即將推出的內容。"
+  },
+  "remote": {
+    "controlledBy": "由 {{name}} 控制"
   }
 }

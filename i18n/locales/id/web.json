@@ -782,5 +782,8 @@
     "confirmRemove": "Hapus {{name}}? Perpustakaannya tetap ada tetapi tidak diperbarui lagi, dan yang disimpannya untuk semua orang, seperti simpanan game, akan dihapus.",
     "saved": "Tersimpan",
     "noPlayer": "Ini memerlukan plugin yang sedang nonaktif. Admin bisa mengaktifkannya di Pengaturan, bagian Plugin."
+  },
+  "remote": {
+    "controlledBy": "Dikendalikan dari {{name}}"
   }
 }

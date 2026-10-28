@@ -115,5 +115,19 @@
   "tmdb_couldnt_be_reached_to_check_the_key": "Fikk ikke kontakt med TMDB for å sjekke nøkkelen",
   "this_server_cant_change_its_tmdb_key": "denne serveren kan ikke endre TMDB-nøkkelen sin",
   "this_server_doesnt_offer_remote_access": "denne serveren tilbyr ikke fjerntilgang",
-  "this_server_doesnt_use_matinee_connect": "denne serveren bruker ikke Matinee Connect"
+  "this_server_doesnt_use_matinee_connect": "denne serveren bruker ikke Matinee Connect",
+  "bad_client_id": "ugyldig klient-ID",
+  "minutes_must_be_between_0_and_1440": "minutes må være mellom 0 og 1440",
+  "minutes_or_endofitem_is_required": "minutes eller endOfItem kreves",
+  "muted_is_required": "muted kreves",
+  "no_such_client": "klienten finnes ikke",
+  "positionms_is_required": "positionMs kreves",
+  "say_hello_first": "si hei først (hello)",
+  "that_client_cant_do_that": "klienten kan ikke gjøre det",
+  "that_client_is_offline": "klienten er frakoblet",
+  "that_client_isnt_answering": "klienten svarer ikke",
+  "this_client_id_belongs_to_someone_else": "klient-ID-en tilhører noen andre",
+  "track_is_required": "track kreves",
+  "unknown_command": "ukjent kommando",
+  "volume_must_be_between_0_and_1": "volume må være mellom 0 og 1"
 }

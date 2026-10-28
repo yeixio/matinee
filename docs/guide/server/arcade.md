@@ -3,7 +3,7 @@ title: Arcade games
 description: Play arcade games in the web player with the Arcade plugin, which runs MAME, and keep everyone's place in each game.
 since: v0.1.1
 sidebar:
-  order: 9
+  order: 10
 ---
 
 The **Arcade** plugin adds an Arcade library for your MAME ROM sets. Each game gets a page with its name, year and maker, artwork, and a **Play** button that runs it in the web player with [MAME](https://www.mamedev.org), with the keyboard or a gamepad. Matinee remembers where each person left off.

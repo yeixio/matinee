@@ -430,5 +430,8 @@
     "notConnected": "Správce k tomuto serveru nepřipojil Radarr ani Sonarr.",
     "connect": "Správce může připojit Radarr nebo Sonarr v Nastavení Matinee na webu.",
     "nothing": "Momentálně nic nového nepřichází."
+  },
+  "remote": {
+    "controlledBy": "Ovládáno z {{name}}"
   }
 }

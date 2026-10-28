@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { CheckCircle2, Smartphone, Tv, XCircle } from 'lucide-react'
+import { CheckCircle2, House, Smartphone, Tv, XCircle } from 'lucide-react'
 import { useState, type FormEvent } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import { useSearchParams } from 'react-router-dom'
@@ -11,6 +11,7 @@ const clean = (code: string) => code.toUpperCase().replace(/[^A-Z0-9]/g, '').sli
 const pretty = (code: string) => (code.length > 4 ? `${code.slice(0, 4)}-${code.slice(4)}` : code)
 
 export function DeviceIcon({ platform, className = 'size-5' }: { platform: string; className?: string }) {
+  if (platform === 'homeassistant') return <House className={className} />
   return /tv/.test(platform) ? <Tv className={className} /> : <Smartphone className={className} />
 }
 

@@ -115,5 +115,19 @@
   "tmdb_couldnt_be_reached_to_check_the_key": "TMDB se nepodařilo kontaktovat kvůli ověření klíče",
   "this_server_cant_change_its_tmdb_key": "tento server nemůže změnit svůj klíč TMDB",
   "this_server_doesnt_offer_remote_access": "tento server nenabízí vzdálený přístup",
-  "this_server_doesnt_use_matinee_connect": "tento server nepoužívá Matinee Connect"
+  "this_server_doesnt_use_matinee_connect": "tento server nepoužívá Matinee Connect",
+  "bad_client_id": "neplatné ID klienta",
+  "minutes_must_be_between_0_and_1440": "minutes musí být mezi 0 a 1440",
+  "minutes_or_endofitem_is_required": "je potřeba minutes nebo endOfItem",
+  "muted_is_required": "je potřeba muted",
+  "no_such_client": "takový klient neexistuje",
+  "positionms_is_required": "je potřeba positionMs",
+  "say_hello_first": "nejdřív se ohlaste (hello)",
+  "that_client_cant_do_that": "tento klient to neumí",
+  "that_client_is_offline": "tento klient je offline",
+  "that_client_isnt_answering": "tento klient neodpovídá",
+  "this_client_id_belongs_to_someone_else": "toto ID klienta patří někomu jinému",
+  "track_is_required": "je potřeba track",
+  "unknown_command": "neznámý příkaz",
+  "volume_must_be_between_0_and_1": "volume musí být mezi 0 a 1"
 }

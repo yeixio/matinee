@@ -115,5 +115,19 @@
   "tmdb_couldnt_be_reached_to_check_the_key": "키를 확인하려고 했지만 TMDB에 연결할 수 없습니다",
   "this_server_cant_change_its_tmdb_key": "이 서버는 TMDB 키를 바꿀 수 없습니다",
   "this_server_doesnt_offer_remote_access": "이 서버는 원격 접속을 제공하지 않습니다",
-  "this_server_doesnt_use_matinee_connect": "이 서버는 Matinee Connect를 사용하지 않습니다"
+  "this_server_doesnt_use_matinee_connect": "이 서버는 Matinee Connect를 사용하지 않습니다",
+  "bad_client_id": "클라이언트 ID가 올바르지 않습니다",
+  "minutes_must_be_between_0_and_1440": "minutes는 0에서 1440 사이여야 합니다",
+  "minutes_or_endofitem_is_required": "minutes 또는 endOfItem이 필요합니다",
+  "muted_is_required": "muted가 필요합니다",
+  "no_such_client": "그런 클라이언트가 없습니다",
+  "positionms_is_required": "positionMs가 필요합니다",
+  "say_hello_first": "먼저 hello를 보내세요",
+  "that_client_cant_do_that": "그 클라이언트는 그 작업을 할 수 없습니다",
+  "that_client_is_offline": "그 클라이언트는 오프라인입니다",
+  "that_client_isnt_answering": "그 클라이언트가 응답하지 않습니다",
+  "this_client_id_belongs_to_someone_else": "이 클라이언트 ID는 다른 사람의 것입니다",
+  "track_is_required": "track이 필요합니다",
+  "unknown_command": "알 수 없는 명령입니다",
+  "volume_must_be_between_0_and_1": "volume은 0에서 1 사이여야 합니다"
 }

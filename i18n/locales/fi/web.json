@@ -786,5 +786,8 @@
     "confirmRemove": "Poistetaanko {{name}}? Sen kirjastot jäävät mutta eivät enää päivity, ja se, mitä se tallensi kaikille, kuten pelitallennukset, poistetaan.",
     "saved": "Tallennettu",
     "noPlayer": "Tähän tarvitaan laajennus, joka on pois käytöstä. Ylläpitäjä voi ottaa sen käyttöön asetuksista kohdasta Laajennukset."
+  },
+  "remote": {
+    "controlledBy": "Ohjattu laitteesta {{name}}"
   }
 }

@@ -46,6 +46,7 @@ func (s *Server) serverInfo(w http.ResponseWriter, r *http.Request) {
 		"apiVersion": APIVersion,
 		"needsSetup": n == 0,
 		"name":       cmp.Or(s.Name, "Matinee"),
+		"uuid":       s.UUID,
 		// This device may browse and play without signing in.
 		"homeAccess": home,
 		// Where to reach this server away from home; apps keep it from

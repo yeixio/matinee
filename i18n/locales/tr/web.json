@@ -786,5 +786,8 @@
     "confirmRemove": "{{name}} kaldırılsın mı? Kütüphaneleri kalır ama artık güncellenmez; herkes için kaydettikleri, örneğin oyun kayıtları, silinir.",
     "saved": "Kaydedildi",
     "noPlayer": "Bunun için kapalı olan bir eklenti gerekiyor. Bir yönetici Ayarlar'daki Eklentiler bölümünden açabilir."
+  },
+  "remote": {
+    "controlledBy": "{{name}} tarafından kontrol ediliyor"
   }
 }

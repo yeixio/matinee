@@ -790,5 +790,8 @@
     "confirmRemove": "Supprimer {{name}} ? Ses bibliothèques restent mais ne sont plus mises à jour, et ce qu’elle a enregistré pour tout le monde, comme les sauvegardes de jeux, est effacé.",
     "saved": "Enregistré",
     "noPlayer": "Il faut pour cela une extension qui est désactivée. Un administrateur peut l’activer dans Réglages, sous Extensions."
+  },
+  "remote": {
+    "controlledBy": "Contrôlé depuis {{name}}"
   }
 }

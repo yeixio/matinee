@@ -416,5 +416,8 @@
     "notConnected": "مدیری هنوز Radarr یا Sonarr را به این سرور وصل نکرده است.",
     "connect": "مدیر می‌تواند Radarr یا Sonarr را از تنظیمات Matinee در وب وصل کند.",
     "nothing": "فعلاً چیزی در راه نیست."
+  },
+  "remote": {
+    "controlledBy": "کنترل از {{name}}"
   }
 }

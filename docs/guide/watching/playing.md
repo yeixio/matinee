@@ -60,6 +60,13 @@ Over its last 30 seconds the sound fades out, then the player pauses where you a
 The [phone and TV apps](/docs/apps/phone-and-tv/#sleep-timer) have the same timer.
 
 <!-- /since -->
+<!-- since: v0.1.1 -->
+## Controlled from another device
+
+The player can be paused, moved or started from [Home Assistant](/docs/server/home-assistant/). When that happens it says so for a moment, such as **Controlled from Home Assistant**. Each browser counts as one player; the tab with a video open is the one that listens.
+
+<!-- /since -->
+
 ## How any file gets to play
 
 Browsers and devices can't play every kind of video file, so Matinee does whatever is cheapest for each one:

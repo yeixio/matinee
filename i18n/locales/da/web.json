@@ -786,5 +786,8 @@
     "confirmRemove": "Fjern {{name}}? Dens biblioteker bliver, men opdateres ikke længere, og det, den har gemt for alle, som gemte spil, slettes.",
     "saved": "Gemt",
     "noPlayer": "Det her kræver en udvidelse, der er slået fra. En administrator kan slå den til i Indstillinger under Udvidelser."
+  },
+  "remote": {
+    "controlledBy": "Styret fra {{name}}"
   }
 }

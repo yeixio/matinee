@@ -14,6 +14,7 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+	"sync"
 	"sync/atomic"
 	"time"
 
@@ -22,6 +23,7 @@ import (
 	"github.com/yeixio/matinee/internal/auth"
 	"github.com/yeixio/matinee/internal/download"
 	"github.com/yeixio/matinee/internal/hwaccel"
+	"github.com/yeixio/matinee/internal/live"
 	"github.com/yeixio/matinee/internal/plugin"
 	"github.com/yeixio/matinee/internal/probe"
 	"github.com/yeixio/matinee/internal/remote"
@@ -48,6 +50,9 @@ type Server struct {
 	Log          *slog.Logger
 	MediaRoot    string // where the folder picker starts; empty means /
 	Name         string // what the apps call this server
+	// UUID names this server for good, whatever its name or address (see
+	// ServerUUID); Home Assistant tells servers apart by it.
+	UUID string
 	// TrailerSource lists trailers online; nil, or TMDB without a key,
 	// offers none.
 	TrailerSource TrailerSource
@@ -100,6 +105,11 @@ type Server struct {
 	// for none.
 	Plugins       *plugin.Manager
 	PluginCatalog string
+
+	// Live keeps track of open players and runs the event feed (see
+	// live.go); nil makes one.
+	Live     *live.Hub
+	liveOnce sync.Once
 
 	// BackgroundCtx scopes scans started by API calls; it outlives any one request.
 	BackgroundCtx context.Context
@@ -267,6 +277,14 @@ func (s *Server) routes() []route {
 		{"DELETE /plugins/{plugin}/storage/{key...}", reader, s.deletePluginValue},
 		{"GET /plugins/{plugin}/libraries/{id}/file", reader, s.pluginLibraryFile},
 		{"GET /players", reader, s.listPlayers},
+
+		{"PUT /clients/{client}", reader, s.putClient},
+		{"DELETE /clients/{client}", reader, s.deleteClient},
+		{"GET /clients/{client}/commands", reader, s.clientCommands},
+		{"GET /clients", signedIn, grownUps(s.listClients)},
+		{"GET /clients/{client}", signedIn, grownUps(s.getClient)},
+		{"POST /clients/{client}/commands", signedIn, grownUps(s.sendCommand)},
+		{"GET /events", adminOnly, s.events},
 	}
 }
 
@@ -445,6 +463,9 @@ type statusRecorder struct {
 }
 
 func (s *statusRecorder) WriteHeader(code int) { s.status = code; s.ResponseWriter.WriteHeader(code) }
+
+// Unwrap lets http.ResponseController reach the connection, for streams.
+func (s *statusRecorder) Unwrap() http.ResponseWriter { return s.ResponseWriter }
 
 func (s *Server) logRequests(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -644,10 +665,15 @@ type libraryView struct {
 	Scanning bool `json:"scanning"`
 	// Watch says how each folder is watched for new files (scan.FolderWatch).
 	Watch []scan.FolderWatch `json:"watch"`
+	// Counts are how many titles (movies, shows, artists) and how many
+	// files the library has, for admins who ask with ?counts=1, such as
+	// Home Assistant's sensors.
+	Titles *int `json:"titles,omitempty"`
+	Files  *int `json:"files,omitempty"`
 }
 
 func (s *Server) libraryView(l store.Library, scanning bool) libraryView {
-	v := libraryView{l, scanning, nil}
+	v := libraryView{Library: l, Scanning: scanning}
 	if s.Watcher != nil {
 		v.Watch = s.Watcher.Status(l.ID)
 	}
@@ -663,6 +689,13 @@ func (s *Server) listLibraries(w http.ResponseWriter, r *http.Request) {
 		s.serverError(w, err)
 		return
 	}
+	var counts map[int64]store.LibraryCount
+	if r.URL.Query().Get("counts") == "1" && currentUser(r).IsAdmin {
+		if counts, err = s.Store.LibraryCounts(r.Context()); err != nil {
+			s.serverError(w, err)
+			return
+		}
+	}
 	out := []libraryView{}
 	for _, l := range libs {
 		ok, err := s.Store.LibraryVisible(r.Context(), currentUser(r), l.ID)
@@ -671,7 +704,12 @@ func (s *Server) listLibraries(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		if ok {
-			out = append(out, s.libraryView(l, s.Scanner.Running(l.ID)))
+			v := s.libraryView(l, s.Scanner.Running(l.ID))
+			if counts != nil {
+				c := counts[l.ID]
+				v.Titles, v.Files = &c.Titles, &c.Files
+			}
+			out = append(out, v)
 		}
 	}
 	writeJSON(w, http.StatusOK, out)

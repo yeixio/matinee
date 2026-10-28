@@ -115,5 +115,19 @@
   "tmdb_couldnt_be_reached_to_check_the_key": "कुंजी जाँचने के लिए TMDB तक नहीं पहुँचा जा सका",
   "this_server_cant_change_its_tmdb_key": "यह सर्वर अपनी TMDB कुंजी नहीं बदल सकता",
   "this_server_doesnt_offer_remote_access": "यह सर्वर रिमोट एक्सेस नहीं देता",
-  "this_server_doesnt_use_matinee_connect": "यह सर्वर Matinee Connect का उपयोग नहीं करता"
+  "this_server_doesnt_use_matinee_connect": "यह सर्वर Matinee Connect का उपयोग नहीं करता",
+  "bad_client_id": "क्लाइंट आईडी अमान्य है",
+  "minutes_must_be_between_0_and_1440": "minutes 0 से 1440 के बीच होना चाहिए",
+  "minutes_or_endofitem_is_required": "minutes या endOfItem ज़रूरी है",
+  "muted_is_required": "muted ज़रूरी है",
+  "no_such_client": "ऐसा कोई क्लाइंट नहीं है",
+  "positionms_is_required": "positionMs ज़रूरी है",
+  "say_hello_first": "पहले hello भेजें",
+  "that_client_cant_do_that": "वह क्लाइंट ऐसा नहीं कर सकता",
+  "that_client_is_offline": "वह क्लाइंट ऑफ़लाइन है",
+  "that_client_isnt_answering": "वह क्लाइंट जवाब नहीं दे रहा",
+  "this_client_id_belongs_to_someone_else": "यह क्लाइंट आईडी किसी और की है",
+  "track_is_required": "track ज़रूरी है",
+  "unknown_command": "अज्ञात कमांड",
+  "volume_must_be_between_0_and_1": "volume 0 से 1 के बीच होना चाहिए"
 }

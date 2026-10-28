@@ -782,5 +782,8 @@
     "confirmRemove": "Gỡ bỏ {{name}}? Các thư viện của nó vẫn còn nhưng không cập nhật nữa, và những gì nó đã lưu cho mọi người, như bản lưu trò chơi, sẽ bị xóa.",
     "saved": "Đã lưu",
     "noPlayer": "Cần một tiện ích đang bị tắt. Quản trị viên có thể bật nó trong Cài đặt, mục Tiện ích."
+  },
+  "remote": {
+    "controlledBy": "Được điều khiển từ {{name}}"
   }
 }

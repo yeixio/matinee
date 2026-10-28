@@ -629,7 +629,13 @@ func (s *Store) SessionUser(ctx context.Context, token string) (u User, homeOnly
 		return u, false, err
 	}
 	if now()-seen > seenEvery {
-		s.db.ExecContext(ctx, "UPDATE sessions SET last_seen_at = ? WHERE token = ?", now(), token)
+		// A device in use stays signed in: its session runs out a whole
+		// SessionTTL after it was last used, not after it signed in, so
+		// something always on, like a TV or Home Assistant, never has to
+		// sign in again.
+		s.db.ExecContext(ctx, `UPDATE sessions SET last_seen_at = ?,
+			expires_at = CASE WHEN last_seen_at > 0 THEN expires_at + (? - last_seen_at) ELSE expires_at END
+			WHERE token = ?`, now(), now(), token)
 	}
 	return u, homeOnly, nil
 }
@@ -679,6 +685,32 @@ func (s *Store) CreateLibrary(ctx context.Context, name, kind string, paths []st
 		return Library{}, err
 	}
 	return Library{ID: id, Name: name, Kind: kind, Paths: paths}, nil
+}
+
+// LibraryCount is how big a library is: its titles (movies, shows,
+// artists) and its files.
+type LibraryCount struct{ Titles, Files int }
+
+// LibraryCounts counts every library's titles and files.
+func (s *Store) LibraryCounts(ctx context.Context) (map[int64]LibraryCount, error) {
+	rows, err := s.db.QueryContext(ctx, `SELECT library_id,
+		SUM(CASE WHEN parent_id IS NULL THEN 1 ELSE 0 END),
+		SUM(CASE WHEN path IS NOT NULL AND path <> '' THEN 1 ELSE 0 END)
+		FROM items GROUP BY library_id`)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	out := map[int64]LibraryCount{}
+	for rows.Next() {
+		var id int64
+		var c LibraryCount
+		if err := rows.Scan(&id, &c.Titles, &c.Files); err != nil {
+			return nil, err
+		}
+		out[id] = c
+	}
+	return out, rows.Err()
 }
 
 func (s *Store) Libraries(ctx context.Context) ([]Library, error) {
