@@ -115,6 +115,8 @@ function startMAME(files, state) {
         '-cfg_directory', '/cfg',
         '-nvram_directory', '/nvram',
         '-skip_gameinfo',
+        // Browsers have WebGL but not the desktop OpenGL MAME draws with.
+        '-video', 'soft',
         '-sound', 'js',
         '-resolution', `${w}x${h}`,
         ...(state ? ['-state', statePath] : []),
