@@ -166,7 +166,7 @@ func TestRemoteControl(t *testing.T) {
 			"playing": map[string]any{"itemId": big, "positionMs": pos, "paused": paused}}
 	}
 	tv.do("PUT", "/api/v1/clients/tv-1234567", playing(1000, false), nil)
-	if e := next(live.EventPlaybackStarted); e.Item.Title != "Big" || e.User.Name == "" {
+	if e := next(live.EventPlaybackStarted); e.Item.Title != "Big" || e.User.Name == "" || e.Client.ID != "tv-1234567" {
 		t.Fatalf("started: %+v", e)
 	}
 	tv.do("PUT", "/api/v1/clients/tv-1234567", playing(5000, true), nil)

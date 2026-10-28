@@ -3222,7 +3222,7 @@ components:
       properties:
         type: { type: string, examples: [playback.started] }
         time: { type: integer, description: Milliseconds. }
-        client: { $ref: "#/components/schemas/Client" }
+        client: { allOf: [{ $ref: "#/components/schemas/Client" }], description: "client.updated, and playback events: the client playing." }
         clients: { type: array, items: { $ref: "#/components/schemas/Client" }, description: snapshot only. }
         clientId: { type: string, description: client.removed only. }
         item: { $ref: "#/components/schemas/LiveItem" }

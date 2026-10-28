@@ -165,8 +165,8 @@ type Command struct {
 // Event is one entry in the feed.
 type Event struct {
 	Type     string   `json:"type"`
-	Time     int64    `json:"time"` // milliseconds
-	Client   *Client  `json:"client,omitempty"`
+	Time     int64    `json:"time"`               // milliseconds
+	Client   *Client  `json:"client,omitempty"`   // client.updated, and the client for playback events
 	ClientID string   `json:"clientId,omitempty"` // client.removed
 	Item     *Item    `json:"item,omitempty"`
 	User     *User    `json:"user,omitempty"`
@@ -253,19 +253,19 @@ func (h *Hub) Report(id string, account int64, user User, hello Hello, playing *
 	}
 	switch {
 	case before != nil && (playing == nil || before.Item.ID != playing.Item.ID):
-		h.publish(Event{Type: EventPlaybackStopped, Item: &before.Item, User: &p.User, PositionMs: before.PositionMs,
+		h.publish(Event{Type: EventPlaybackStopped, Item: &before.Item, User: &p.User, Client: p.copy(), PositionMs: before.PositionMs,
 			Finished: before.DurationMs > 0 && before.PositionMs >= before.DurationMs*92/100})
 		if playing != nil {
-			h.publish(Event{Type: EventPlaybackStarted, Item: &p.Playing.Item, User: &p.User, PositionMs: playing.PositionMs})
+			h.publish(Event{Type: EventPlaybackStarted, Item: &p.Playing.Item, User: &p.User, Client: p.copy(), PositionMs: playing.PositionMs})
 		}
 	case before == nil && playing != nil:
-		h.publish(Event{Type: EventPlaybackStarted, Item: &p.Playing.Item, User: &p.User, PositionMs: playing.PositionMs})
+		h.publish(Event{Type: EventPlaybackStarted, Item: &p.Playing.Item, User: &p.User, Client: p.copy(), PositionMs: playing.PositionMs})
 	case before != nil && before.Paused != playing.Paused:
 		typ := EventPlaybackResumed
 		if playing.Paused {
 			typ = EventPlaybackPaused
 		}
-		h.publish(Event{Type: typ, Item: &p.Playing.Item, User: &p.User, PositionMs: playing.PositionMs})
+		h.publish(Event{Type: typ, Item: &p.Playing.Item, User: &p.User, Client: p.copy(), PositionMs: playing.PositionMs})
 	}
 	h.publish(Event{Type: EventClientUpdated, Client: p.copy()})
 	return nil
@@ -278,7 +278,7 @@ func (h *Hub) stopped(p *Client, finished bool) {
 	}
 	pl := p.Playing
 	p.Playing = nil
-	h.publish(Event{Type: EventPlaybackStopped, Item: &pl.Item, User: &p.User, PositionMs: pl.PositionMs, Finished: finished})
+	h.publish(Event{Type: EventPlaybackStopped, Item: &pl.Item, User: &p.User, Client: p.copy(), PositionMs: pl.PositionMs, Finished: finished})
 }
 
 // Leave is a player closing: it goes offline at once.
