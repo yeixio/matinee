@@ -1,0 +1,85 @@
+name: matinee
+services:
+  matinee:
+    image: ghcr.io/yeixio/matinee:0.1.0
+    # Root in the container, so Matinee can write to the AppData folder
+    # ZimaOS creates and use the GPU without extra groups.
+    user: "0:0"
+    restart: unless-stopped
+    network_mode: bridge
+    ports:
+      - target: 7171
+        published: "7171"
+        protocol: tcp
+    devices:
+      - /dev/dri:/dev/dri
+    environment:
+      MATINEE_DATA_DIR: /data
+      MATINEE_MEDIA_ROOT: /media
+      TZ: $TZ
+    volumes:
+      - type: bind
+        source: /DATA/AppData/$AppID/data
+        target: /data
+      - type: bind
+        source: /DATA/Media
+        target: /media
+        read_only: true
+    x-casaos:
+      envs:
+        - container: TZ
+          description:
+            en_US: Time zone
+        - container: MATINEE_MEDIA_ROOT
+          description:
+            en_US: Folder the library picker starts in
+      ports:
+        - container: "7171"
+          description:
+            en_US: Web UI and app port
+      volumes:
+        - container: /data
+          description:
+            en_US: Matinee's database, image cache and transcoding scratch space
+        - container: /media
+          description:
+            en_US: Your media, read-only. Add libraries from here in Matinee.
+
+x-casaos:
+  id: io.yeix.matinee
+  main: matinee
+  index: /
+  port_map: "7171"
+  scheme: http
+  icon: icon.svg
+  screenshot_link:
+    - screenshot-1.webp
+    - screenshot-2.webp
+    - screenshot-3.webp
+    - screenshot-4.webp
+  title:
+    en_US: Matinee
+  tagline:
+    en_US: Your movies, TV and music, streamed to every screen
+  description:
+    en_US: |-
+      Matinee is a free and open source media server for your movies, TV shows and music. It finds posters, descriptions, cast and trailers for everything in your folders, then streams to any web browser and to the Matinee apps for iPhone, iPad, Android, Apple TV and Android TV.
+
+      It transcodes with your GPU when there is one, gives everyone in the house their own profile with a kids mode, and keeps your place across devices.
+
+      On first open, create the admin account, then add a library from /media (your ZimaOS Media folder).
+  author: Yeix
+  developer: Yeix
+  category: Media
+  architectures:
+    - amd64
+    - arm64
+    - arm
+  version: "0.1.0"
+  update_at: "2026-10-28"
+  release_notes:
+    en_US: First release in the ZimaOS app store.
+  website: https://matinee.yeix.io
+  repo: https://github.com/yeixio/matinee
+  support: https://github.com/yeixio/matinee/issues
+  docs: https://matinee.yeix.io/docs/

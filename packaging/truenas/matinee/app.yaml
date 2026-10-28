@@ -1,0 +1,42 @@
+annotations:
+  min_scale_version: 24.10.2.2
+app_version: 0.1.0
+capabilities: []
+categories:
+- media
+changelog_url: https://github.com/yeixio/matinee/releases
+date_added: '2026-10-28'
+description: Matinee is a media server for your movies, TV shows and music, with a
+  web player and apps for phones and TVs.
+home: https://matinee.yeix.io
+host_mounts: []
+icon: https://raw.githubusercontent.com/yeixio/matinee/main/site/public/favicon.svg
+keywords:
+- media
+- movies
+- series
+- tv
+- music
+- streaming
+lib_version: 2.3.17
+lib_version_hash: b02a8040f1971a601638300b595bbd5b72f0664ba13fdf7759c212867caeed24
+maintainers:
+- email: dev@truenas.com
+  name: truenas
+  url: https://www.truenas.com/
+name: matinee
+run_as_context:
+- description: Container [matinee] can run as any non-root user and group.
+  gid: 568
+  group_name: Host group is [apps]
+  uid: 568
+  user_name: Host user is [apps]
+screenshots:
+- https://raw.githubusercontent.com/yeixio/matinee/main/docs/guide/images/home.webp
+- https://raw.githubusercontent.com/yeixio/matinee/main/docs/guide/images/movie.webp
+sources:
+- https://github.com/yeixio/matinee
+- https://github.com/yeixio/matinee/pkgs/container/matinee
+title: Matinee
+train: community
+version: 1.0.0

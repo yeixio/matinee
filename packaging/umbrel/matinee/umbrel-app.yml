@@ -1,0 +1,65 @@
+manifestVersion: 1.1
+id: matinee
+storage:
+  dataRoot: data
+folderAccess:
+  - id: umbrel-downloads
+    name: Downloads
+    note: Media in your Downloads folder. In Matinee, add a library and pick a folder under /media/downloads. Read-only, so Matinee never changes your files.
+    mounts:
+      - service: server
+        targetPath: /media/downloads
+        readOnly: true
+  - id: media-library
+    name: Media Library
+    note: Select another folder that holds movies, TV shows or music, then add a library from /media/library in Matinee. Read-only, so Matinee never changes your files.
+    mounts:
+      - service: server
+        targetPath: /media/library
+        readOnly: true
+category: media
+name: Matinee
+version: "0.1.0"
+tagline: Your movies, TV and music, streamed to every screen
+description: >-
+  On first open, Matinee asks you to create the admin account, then helps you add a library. Your Downloads folder appears under /media/downloads, and you can pick another folder in the app's settings on Umbrel, which shows up under /media/library.
+
+
+  Matinee is a free and open source media server for your movies, TV shows and music. It finds posters, descriptions, cast and trailers for everything in your folders, then streams to any web browser and to the Matinee apps for iPhone, iPad, Android, Apple TV and Android TV.
+
+
+  - Hardware transcoding with your GPU when there is one, so videos play smoothly on any device
+
+  - A profile for each person in the house, with a kids mode and an optional PIN
+
+  - Continue watching, a watch list and up next, kept in sync across your devices
+
+  - Collections, filters, a calendar of what's coming soon and holiday rows on the home screen
+
+  - Optional requests through Radarr, Sonarr and Overseerr
+
+  - 32 languages and a choice of themes
+
+
+  To show posters and details, Matinee uses a free key from The Movie Database (themoviedb.org). The admin can add one in Settings, and Matinee walks you through getting it.
+releaseNotes: ""
+
+developer: Yeix
+website: https://matinee.yeix.io
+dependencies: []
+repo: https://github.com/yeixio/matinee
+support: https://github.com/yeixio/matinee/issues
+
+port: 7171
+gallery: []
+path: ""
+
+defaultUsername: ""
+defaultPassword: ""
+
+permissions:
+  - STORAGE_DOWNLOADS
+  - GPU
+
+submitter: Yeix
+submission: ""
