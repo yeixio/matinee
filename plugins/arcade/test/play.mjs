@@ -130,6 +130,28 @@ try {
   check(true, 'continued from the saved state')
 } catch (err) {
   check(false, err.message)
+  // What the player shows, to tell why from the log alone.
+  const state = await page
+    .frames()
+    .find((f) => f.url().endsWith('/player/index.html'))
+    ?.evaluate(() => {
+      const fs = globalThis.Module?.FS ?? globalThis.FS
+      let files
+      try {
+        files = fs.readdir('/').join(' ')
+      } catch (e) {
+        files = String(e)
+      }
+      return {
+        status: document.getElementById('status')?.textContent,
+        saveDisabled: document.getElementById('save')?.disabled,
+        running: !!globalThis.JSMAME?.running,
+        save: typeof globalThis.JSMAME?.save,
+        files,
+      }
+    })
+    .catch((e) => String(e))
+  console.log('player:', JSON.stringify(state))
   await page.screenshot({ path: screenshot }).catch(() => {})
 } finally {
   await browser.close()
