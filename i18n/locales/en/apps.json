@@ -302,7 +302,10 @@
     "forward10": "Forward 10 seconds",
     "endsAt": "Ends at {{time}}",
     "position": "Position",
-    "positionOf": "{{at}} of {{total}}"
+    "positionOf": "{{at}} of {{total}}",
+    "castingTo": "Playing on {{name}}",
+    "airPlaying": "Playing on your TV with AirPlay",
+    "castControls": "Show controls"
   },
   "library": {
     "nothingUnwatched": "Nothing unwatched here",

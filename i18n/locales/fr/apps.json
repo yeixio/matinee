@@ -307,7 +307,10 @@
     "forward10": "Avancer de 10 secondes",
     "endsAt": "Se termine à {{time}}",
     "position": "Position",
-    "positionOf": "{{at}} sur {{total}}"
+    "positionOf": "{{at}} sur {{total}}",
+    "castingTo": "Lecture sur {{name}}",
+    "airPlaying": "Lecture sur votre téléviseur avec AirPlay",
+    "castControls": "Afficher les commandes"
   },
   "library": {
     "nothingUnwatched": "Rien de non vu ici",

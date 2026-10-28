@@ -41,6 +41,14 @@ func ServeDirect(w http.ResponseWriter, r *http.Request, it store.Item) {
 		http.Error(w, "file unavailable", http.StatusNotFound)
 		return
 	}
+	allowAnyOrigin(w)
 	w.Header().Set("Content-Type", MimeType(it.Path))
 	http.ServeContent(w, r, "", info.ModTime(), f)
+}
+
+// allowAnyOrigin lets a cast device's player page (Chromecast's, served from
+// Google) read the media. The links are signed with ?token=, and no cookies
+// are sent cross-origin, so this exposes nothing a link doesn't already.
+func allowAnyOrigin(w http.ResponseWriter) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 }

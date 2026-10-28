@@ -297,7 +297,10 @@
     "forward10": "Tới 10 giây",
     "endsAt": "Kết thúc lúc {{time}}",
     "position": "Vị trí",
-    "positionOf": "{{at}} / {{total}}"
+    "positionOf": "{{at}} / {{total}}",
+    "castingTo": "Đang phát trên {{name}}",
+    "airPlaying": "Đang phát trên TV qua AirPlay",
+    "castControls": "Hiện điều khiển"
   },
   "library": {
     "nothingUnwatched": "Không còn gì chưa xem ở đây",

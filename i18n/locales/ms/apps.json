@@ -297,7 +297,10 @@
     "forward10": "Maju 10 saat",
     "endsAt": "Tamat pada {{time}}",
     "position": "Kedudukan",
-    "positionOf": "{{at}} daripada {{total}}"
+    "positionOf": "{{at}} daripada {{total}}",
+    "castingTo": "Dimainkan di {{name}}",
+    "airPlaying": "Dimainkan di TV anda dengan AirPlay",
+    "castControls": "Tunjukkan kawalan"
   },
   "library": {
     "nothingUnwatched": "Tiada yang belum ditonton di sini",

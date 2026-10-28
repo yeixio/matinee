@@ -297,7 +297,10 @@
     "forward10": "Maju 10 detik",
     "endsAt": "Selesai pukul {{time}}",
     "position": "Posisi",
-    "positionOf": "{{at}} dari {{total}}"
+    "positionOf": "{{at}} dari {{total}}",
+    "castingTo": "Diputar di {{name}}",
+    "airPlaying": "Diputar di TV Anda dengan AirPlay",
+    "castControls": "Tampilkan kontrol"
   },
   "library": {
     "nothingUnwatched": "Tidak ada yang belum ditonton di sini",

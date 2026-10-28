@@ -307,7 +307,10 @@
     "forward10": "10 שניות קדימה",
     "endsAt": "מסתיים ב-{{time}}",
     "position": "מיקום",
-    "positionOf": "{{at}} מתוך {{total}}"
+    "positionOf": "{{at}} מתוך {{total}}",
+    "castingTo": "מתנגן ב-{{name}}",
+    "airPlaying": "מתנגן בטלוויזיה דרך AirPlay",
+    "castControls": "הצגת פקדים"
   },
   "library": {
     "nothingUnwatched": "אין כאן שום דבר שלא נצפה",

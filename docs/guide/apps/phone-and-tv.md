@@ -20,6 +20,10 @@ The Matinee apps bring your library to phones, tablets and TVs, with the device'
 | Matinee for phones and tablets | iPhone, iPad, Android phones and tablets |
 | Matinee for TV | Apple TV, Android TV and Google TV |
 
+<!-- since: v0.1.1 -->
+On any other TV with AirPlay or Chromecast, [cast from your phone](/docs/apps/casting/).
+<!-- /since -->
+
 The apps are a one-time purchase in the App Store and Google Play. The server stays free and open source; buying an app is how the project is funded.
 
 ## Connecting to your server

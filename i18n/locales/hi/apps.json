@@ -302,7 +302,10 @@
     "forward10": "10 सेकंड आगे",
     "endsAt": "{{time}} पर खत्म",
     "position": "स्थिति",
-    "positionOf": "{{total}} में से {{at}}"
+    "positionOf": "{{total}} में से {{at}}",
+    "castingTo": "{{name}} पर चल रहा है",
+    "airPlaying": "AirPlay से आपके टीवी पर चल रहा है",
+    "castControls": "नियंत्रण दिखाएँ"
   },
   "library": {
     "nothingUnwatched": "यहाँ बिना देखा कुछ नहीं",

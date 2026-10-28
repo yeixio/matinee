@@ -297,7 +297,10 @@
     "forward10": "前進 10 秒",
     "endsAt": "{{time}} 結束",
     "position": "播放位置",
-    "positionOf": "{{at}} / {{total}}"
+    "positionOf": "{{at}} / {{total}}",
+    "castingTo": "正在 {{name}} 上播放",
+    "airPlaying": "正在透過 AirPlay 在電視上播放",
+    "castControls": "顯示控制項"
   },
   "library": {
     "nothingUnwatched": "這裡沒有未看的內容",

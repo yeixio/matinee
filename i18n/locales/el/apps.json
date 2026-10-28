@@ -302,7 +302,10 @@
     "forward10": "Μπροστά 10 δευτερόλεπτα",
     "endsAt": "Τελειώνει στις {{time}}",
     "position": "Θέση",
-    "positionOf": "{{at}} από {{total}}"
+    "positionOf": "{{at}} από {{total}}",
+    "castingTo": "Αναπαραγωγή σε {{name}}",
+    "airPlaying": "Αναπαραγωγή στην τηλεόρασή σας μέσω AirPlay",
+    "castControls": "Εμφάνιση χειριστηρίων"
   },
   "library": {
     "nothingUnwatched": "Τίποτα που δεν έχεις δει εδώ",

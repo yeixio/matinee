@@ -307,7 +307,10 @@
     "forward10": "Avanti di 10 secondi",
     "endsAt": "Finisce alle {{time}}",
     "position": "Posizione",
-    "positionOf": "{{at}} di {{total}}"
+    "positionOf": "{{at}} di {{total}}",
+    "castingTo": "In riproduzione su {{name}}",
+    "airPlaying": "In riproduzione sulla TV con AirPlay",
+    "castControls": "Mostra controlli"
   },
   "library": {
     "nothingUnwatched": "Niente da vedere qui",

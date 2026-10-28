@@ -322,7 +322,10 @@
     "forward10": "تقدّم 10 ثوانٍ",
     "endsAt": "ينتهي عند {{time}}",
     "position": "الموضع",
-    "positionOf": "{{at}} من {{total}}"
+    "positionOf": "{{at}} من {{total}}",
+    "castingTo": "يُعرض على {{name}}",
+    "airPlaying": "يُعرض على التلفزيون عبر AirPlay",
+    "castControls": "إظهار عناصر التحكم"
   },
   "library": {
     "nothingUnwatched": "لا شيء لم تشاهده هنا",

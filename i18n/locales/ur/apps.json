@@ -302,7 +302,10 @@
     "forward10": "10 سیکنڈ آگے",
     "endsAt": "{{time}} پر ختم",
     "position": "مقام",
-    "positionOf": "{{total}} میں سے {{at}}"
+    "positionOf": "{{total}} میں سے {{at}}",
+    "castingTo": "{{name}} پر چل رہا ہے",
+    "airPlaying": "AirPlay کے ذریعے آپ کے ٹی وی پر چل رہا ہے",
+    "castControls": "کنٹرولز دکھائیں"
   },
   "library": {
     "nothingUnwatched": "یہاں کچھ بھی ان دیکھا نہیں",

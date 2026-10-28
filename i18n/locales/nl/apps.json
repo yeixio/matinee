@@ -302,7 +302,10 @@
     "forward10": "10 seconden vooruit",
     "endsAt": "Eindigt om {{time}}",
     "position": "Positie",
-    "positionOf": "{{at}} van {{total}}"
+    "positionOf": "{{at}} van {{total}}",
+    "castingTo": "Speelt af op {{name}}",
+    "airPlaying": "Speelt af op je tv via AirPlay",
+    "castControls": "Bediening tonen"
   },
   "library": {
     "nothingUnwatched": "Niets ongezien hier",

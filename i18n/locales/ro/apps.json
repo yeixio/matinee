@@ -307,7 +307,10 @@
     "forward10": "Înainte 10 secunde",
     "endsAt": "Se termină la {{time}}",
     "position": "Poziție",
-    "positionOf": "{{at}} din {{total}}"
+    "positionOf": "{{at}} din {{total}}",
+    "castingTo": "Se redă pe {{name}}",
+    "airPlaying": "Se redă pe televizor prin AirPlay",
+    "castControls": "Arată comenzile"
   },
   "library": {
     "nothingUnwatched": "Nimic nevăzut aici",
