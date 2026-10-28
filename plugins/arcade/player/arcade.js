@@ -115,8 +115,10 @@ function startMAME(files, state) {
         '-cfg_directory', '/cfg',
         '-nvram_directory', '/nvram',
         '-skip_gameinfo',
-        // Browsers have WebGL but not the desktop OpenGL MAME draws with.
+        // Browsers have WebGL, which is OpenGL ES 2, but not the desktop
+        // OpenGL SDL draws with by default.
         '-video', 'soft',
+        '-renderdriver', 'opengles2',
         '-sound', 'js',
         '-resolution', `${w}x${h}`,
         ...(state ? ['-state', statePath] : []),
