@@ -245,7 +245,19 @@ func (s *Server) servePluginFile(w http.ResponseWriter, r *http.Request, id, nam
 	} else if ext == ".js" || ext == ".mjs" {
 		h.Set("Content-Type", "text/javascript; charset=utf-8")
 	}
-	http.ServeFile(w, r, file)
+	// Not http.ServeFile, which sends .../index.html off to the folder.
+	f, err := os.Open(file)
+	if err != nil {
+		http.NotFound(w, r)
+		return
+	}
+	defer f.Close()
+	info, err := f.Stat()
+	if err != nil || !info.Mode().IsRegular() {
+		http.NotFound(w, r)
+		return
+	}
+	http.ServeContent(w, r, path.Base(name), info.ModTime(), f)
 }
 
 // pluginRunning checks the plugin in the path is running and returns its id.

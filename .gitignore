@@ -23,3 +23,7 @@ web/dist/*
 demo-media/
 web/*.tsbuildinfo
 /matinee
+
+# Arcade plugin
+plugins/arcade/test/node_modules/
+plugins/arcade/test/package-lock.json

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Arcade</title>
+    <link rel="stylesheet" href="arcade.css" />
+    <script type="module" src="arcade.js"></script>
+  </head>
+  <body>
+    <main id="screen">
+      <canvas id="canvas" tabindex="0" oncontextmenu="event.preventDefault()"></canvas>
+    </main>
+
+    <section id="start" hidden>
+      <h1 id="title"></h1>
+      <p id="message"></p>
+      <div id="choices">
+        <button id="continue" class="primary" hidden></button>
+        <button id="play" class="primary" hidden></button>
+      </div>
+      <dl id="keys" hidden></dl>
+    </section>
+
+    <nav id="bar" hidden>
+      <span id="status" role="status"></span>
+      <button id="save"></button>
+      <button id="load"></button>
+      <button id="help"></button>
+      <button id="full"></button>
+    </nav>
+
+    <dialog id="helpbox">
+      <dl id="helpkeys"></dl>
+      <form method="dialog"><button id="close"></button></form>
+    </dialog>
+  </body>
+</html>

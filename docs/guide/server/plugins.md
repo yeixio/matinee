@@ -6,7 +6,7 @@ sidebar:
   order: 8
 ---
 
-Plugins add things Matinee doesn't do by itself: a new kind of library with its own player, such as arcade games, or something that happens when a title is added or someone starts watching. Only admins can add them, in **Settings → Plugins**.
+Plugins add things Matinee doesn't do by itself: a new kind of library with its own player, such as [arcade games](/docs/server/arcade/), or something that happens when a title is added or someone starts watching. Only admins can add them, in **Settings → Plugins**.
 
 ## Adding a plugin
 

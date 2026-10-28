@@ -1,0 +1,163 @@
+name: Arcade plugin
+
+# Builds the arcade plugin (plugins/arcade): its server part, the game list
+# from MAME's XML list, and MAME itself built to WebAssembly once per driver
+# in drivers.txt. Then it plays a game in Chromium to check the package
+# works. On main, a new version in plugin.json is published as a release
+# (arcade-v<version>), which the official plugin list points at.
+on:
+  push:
+    branches: [main]
+    paths: ['plugins/arcade/**', 'pluginsdk/**', '.github/workflows/arcade.yml']
+  pull_request:
+    paths: ['plugins/arcade/**', 'pluginsdk/**', '.github/workflows/arcade.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  server:
+    name: Server part and game list
+    runs-on: ubuntu-latest
+    outputs:
+      drivers: ${{ steps.drivers.outputs.list }}
+    defaults:
+      run:
+        working-directory: plugins/arcade
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: plugins/arcade/go.mod
+          cache: false
+      - run: go vet ./...
+      - run: go test ./...
+      - id: drivers
+        run: echo "list=$(grep -v '^#' drivers.txt | grep . | jq -Rsc 'split("\n") | map(select(. != ""))')" >> "$GITHUB_OUTPUT"
+      - name: Game list
+        run: |
+          v=$(cat mame-version)
+          curl -fsSL -o lx.zip "https://github.com/mamedev/mame/releases/download/mame$v/mame${v}lx.zip"
+          go run ./cmd/gamedb lx.zip games.json.gz
+      - uses: actions/upload-artifact@v4
+        with:
+          name: games
+          path: plugins/arcade/games.json.gz
+
+  mame:
+    name: MAME (${{ matrix.driver }})
+    needs: server
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    strategy:
+      fail-fast: false
+      matrix:
+        driver: ${{ fromJSON(needs.server.outputs.drivers) }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: v
+        run: |
+          echo "mame=$(cat plugins/arcade/mame-version)" >> "$GITHUB_OUTPUT"
+          echo "emsdk=$(cat plugins/arcade/emsdk-version)" >> "$GITHUB_OUTPUT"
+          echo "name=$(echo '${{ matrix.driver }}' | cut -d, -f1 | sed 's#/#_#g; s#\.cpp$##')" >> "$GITHUB_OUTPUT"
+      # A build only changes with MAME, Emscripten or the build script.
+      - id: cache
+        uses: actions/cache@v4
+        with:
+          path: out
+          key: mame-${{ steps.v.outputs.mame }}-emsdk-${{ steps.v.outputs.emsdk }}-${{ matrix.driver }}-${{ hashFiles('plugins/arcade/build-mame.sh') }}
+      - if: steps.cache.outputs.cache-hit != 'true'
+        uses: actions/checkout@v4
+        with:
+          repository: mamedev/mame
+          ref: mame${{ steps.v.outputs.mame }}
+          path: mame-src
+          fetch-depth: 1
+      - if: steps.cache.outputs.cache-hit != 'true'
+        uses: mymindstorm/setup-emsdk@v14
+        with:
+          version: ${{ steps.v.outputs.emsdk }}
+      - if: steps.cache.outputs.cache-hit != 'true'
+        run: plugins/arcade/build-mame.sh mame-src '${{ matrix.driver }}' out
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mame-${{ steps.v.outputs.name }}
+          path: out
+
+  package:
+    name: Package and play
+    needs: [server, mame]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: plugins/arcade/go.mod
+          cache: false
+      - uses: actions/download-artifact@v4
+        with:
+          name: games
+          path: build
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: mame-*
+          merge-multiple: true
+          path: build/mame
+      # Only for MAME's license, which the package carries.
+      - run: curl -fsSL -o build/COPYING "https://raw.githubusercontent.com/mamedev/mame/mame$(cat plugins/arcade/mame-version)/COPYING"
+      - name: Package
+        run: |
+          mkdir -p build/mame-src && mv build/COPYING build/mame-src/
+          plugins/arcade/package.sh build/games.json.gz build/mame build/mame-src arcade.matinee-plugin
+          mkdir unpacked && unzip -q arcade.matinee-plugin -d unpacked
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Play gridlee
+        run: |
+          mkdir roms
+          curl -fsSL -o roms/gridlee.zip https://www.mamedev.org/roms/gridlee/gridlee.zip
+          cd plugins/arcade/test
+          npm install --no-package-lock --no-fund --no-audit
+          npx playwright install --with-deps chromium
+          node play.mjs "$GITHUB_WORKSPACE/unpacked" "$GITHUB_WORKSPACE/roms" gridlee "$GITHUB_WORKSPACE/gridlee.png"
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gridlee-screenshot
+          path: gridlee.png
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@v4
+        with:
+          name: arcade.matinee-plugin
+          path: arcade.matinee-plugin
+          compression-level: 0
+
+  publish:
+    name: Publish
+    needs: package
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: arcade.matinee-plugin
+      - name: Release a new version
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          v=$(jq -r .version plugins/arcade/plugin.json)
+          tag="arcade-v$v"
+          if gh release view "$tag" > /dev/null 2>&1; then
+            echo "$tag is out already"
+            exit 0
+          fi
+          gh release create "$tag" arcade.matinee-plugin \
+            --target "$GITHUB_SHA" \
+            --title "Arcade plugin $v" \
+            --notes "The arcade plugin for Matinee, with MAME $(cat plugins/arcade/mame-version | sed 's/^0/0./'). Install it in Settings → Plugins. See https://matinee.yeix.io/docs/server/arcade/." \
+            --latest=false

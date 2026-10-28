@@ -1,3 +1,12 @@
 {
-  "plugins": []
+  "plugins": [
+    {
+      "id": "arcade",
+      "name": "Arcade",
+      "description": "Play arcade games in the web player with MAME. Adds an Arcade library for MAME ROM sets.",
+      "version": "1.0.0",
+      "url": "https://github.com/yeixio/matinee/releases/download/arcade-v1.0.0/arcade.matinee-plugin",
+      "homepage": "https://matinee.yeix.io/docs/server/arcade/"
+    }
+  ]
 }
