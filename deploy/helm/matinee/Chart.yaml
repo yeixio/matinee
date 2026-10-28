@@ -8,3 +8,19 @@ home: https://matinee.yeix.io
 sources:
   - https://github.com/yeixio/matinee
 keywords: [media-server, self-hosted, home-media, streaming, movies, tv, music, transcoding]
+icon: https://raw.githubusercontent.com/yeixio/matinee/main/site/public/favicon.svg
+maintainers:
+  - name: Yeix
+    url: https://matinee.yeix.io
+annotations:
+  # Read by Artifact Hub (artifacthub.io), which lists the chart.
+  artifacthub.io/license: AGPL-3.0-or-later
+  artifacthub.io/links: |
+    - name: Website
+      url: https://matinee.yeix.io
+    - name: Kubernetes guide
+      url: https://matinee.yeix.io/docs/guide/server/kubernetes/
+    - name: Source
+      url: https://github.com/yeixio/matinee
+    - name: Support
+      url: https://github.com/yeixio/matinee/issues
