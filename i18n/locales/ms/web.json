@@ -782,5 +782,8 @@
     "confirmRemove": "Buang {{name}}? Pustakanya kekal tetapi tidak dikemas kini lagi, dan apa yang disimpannya untuk semua orang, seperti simpanan permainan, akan dipadam.",
     "saved": "Disimpan",
     "noPlayer": "Ini memerlukan pemalam yang dimatikan. Pentadbir boleh menghidupkannya dalam Tetapan, di bawah Pemalam."
+  },
+  "remote": {
+    "controlledBy": "Dikawal dari {{name}}"
   }
 }

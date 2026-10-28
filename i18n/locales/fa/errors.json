@@ -115,5 +115,19 @@
   "tmdb_couldnt_be_reached_to_check_the_key": "برای بررسی کلید نمی‌توان به TMDB دسترسی پیدا کرد",
   "this_server_cant_change_its_tmdb_key": "این سرور نمی‌تواند کلید TMDB خود را تغییر دهد",
   "this_server_doesnt_offer_remote_access": "این سرور دسترسی از راه دور ارائه نمی‌دهد",
-  "this_server_doesnt_use_matinee_connect": "این سرور از Matinee Connect استفاده نمی‌کند"
+  "this_server_doesnt_use_matinee_connect": "این سرور از Matinee Connect استفاده نمی‌کند",
+  "bad_client_id": "شناسه کلاینت نامعتبر است",
+  "minutes_must_be_between_0_and_1440": "minutes باید بین ۰ و ۱۴۴۰ باشد",
+  "minutes_or_endofitem_is_required": "minutes یا endOfItem لازم است",
+  "muted_is_required": "muted لازم است",
+  "no_such_client": "چنین کلاینتی وجود ندارد",
+  "positionms_is_required": "positionMs لازم است",
+  "say_hello_first": "اول hello بفرستید",
+  "that_client_cant_do_that": "این کلاینت نمی‌تواند این کار را بکند",
+  "that_client_is_offline": "این کلاینت آفلاین است",
+  "that_client_isnt_answering": "این کلاینت پاسخ نمی‌دهد",
+  "this_client_id_belongs_to_someone_else": "این شناسه کلاینت متعلق به شخص دیگری است",
+  "track_is_required": "track لازم است",
+  "unknown_command": "فرمان ناشناخته",
+  "volume_must_be_between_0_and_1": "volume باید بین ۰ و ۱ باشد"
 }

@@ -115,5 +115,19 @@
   "tmdb_couldnt_be_reached_to_check_the_key": "TMDB tidak dapat dihubungi untuk menyemak kunci",
   "this_server_cant_change_its_tmdb_key": "pelayan ini tidak boleh menukar kunci TMDB-nya",
   "this_server_doesnt_offer_remote_access": "pelayan ini tidak menawarkan akses jauh",
-  "this_server_doesnt_use_matinee_connect": "pelayan ini tidak menggunakan Matinee Connect"
+  "this_server_doesnt_use_matinee_connect": "pelayan ini tidak menggunakan Matinee Connect",
+  "bad_client_id": "id klien tidak sah",
+  "minutes_must_be_between_0_and_1440": "minutes mesti antara 0 dan 1440",
+  "minutes_or_endofitem_is_required": "minutes atau endOfItem diperlukan",
+  "muted_is_required": "muted diperlukan",
+  "no_such_client": "klien itu tidak wujud",
+  "positionms_is_required": "positionMs diperlukan",
+  "say_hello_first": "sapa dahulu (hello)",
+  "that_client_cant_do_that": "klien itu tidak boleh melakukannya",
+  "that_client_is_offline": "klien itu di luar talian",
+  "that_client_isnt_answering": "klien itu tidak menjawab",
+  "this_client_id_belongs_to_someone_else": "id klien ini milik orang lain",
+  "track_is_required": "track diperlukan",
+  "unknown_command": "arahan tidak dikenali",
+  "volume_must_be_between_0_and_1": "volume mesti antara 0 dan 1"
 }

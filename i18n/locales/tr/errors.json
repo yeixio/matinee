@@ -115,5 +115,19 @@
   "tmdb_couldnt_be_reached_to_check_the_key": "Anahtarı doğrulamak için TMDB'ye ulaşılamadı",
   "this_server_cant_change_its_tmdb_key": "bu sunucu TMDB anahtarını değiştiremez",
   "this_server_doesnt_offer_remote_access": "bu sunucu uzaktan erişim sunmuyor",
-  "this_server_doesnt_use_matinee_connect": "bu sunucu Matinee Connect kullanmıyor"
+  "this_server_doesnt_use_matinee_connect": "bu sunucu Matinee Connect kullanmıyor",
+  "bad_client_id": "geçersiz istemci kimliği",
+  "minutes_must_be_between_0_and_1440": "minutes 0 ile 1440 arasında olmalı",
+  "minutes_or_endofitem_is_required": "minutes veya endOfItem gerekli",
+  "muted_is_required": "muted gerekli",
+  "no_such_client": "böyle bir istemci yok",
+  "positionms_is_required": "positionMs gerekli",
+  "say_hello_first": "önce merhaba deyin (hello)",
+  "that_client_cant_do_that": "bu istemci bunu yapamıyor",
+  "that_client_is_offline": "bu istemci çevrimdışı",
+  "that_client_isnt_answering": "bu istemci yanıt vermiyor",
+  "this_client_id_belongs_to_someone_else": "bu istemci kimliği başkasına ait",
+  "track_is_required": "track gerekli",
+  "unknown_command": "bilinmeyen komut",
+  "volume_must_be_between_0_and_1": "volume 0 ile 1 arasında olmalı"
 }

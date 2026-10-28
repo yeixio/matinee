@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { lazy, Suspense, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
+import { Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import { api, ApiError } from './api'
 import Shell from './components/Shell'
 import { AudioProvider } from './player/AudioPlayer'
@@ -21,6 +21,7 @@ import { askedFor, isKids, rememberAsked, shouldAsk } from './profiles'
 import { Spinner } from './components/ui'
 import { ThemeSync } from './theme'
 import { LanguageSync } from './i18n/sync'
+import { remote } from './remote'
 
 const Watch = lazy(() => import('./pages/Watch'))
 const Settings = lazy(() => import('./pages/Settings'))
@@ -79,6 +80,7 @@ function Screens() {
 
   return (
     <AudioProvider>
+      <RemoteSync />
       <Suspense fallback={null}>
       <Routes>
         <Route path="/watch/:id" element={<Watch />} />
@@ -107,4 +109,12 @@ function Screens() {
       </Suspense>
     </AudioProvider>
   )
+}
+
+// Lets Home Assistant and people's other devices see and control this
+// browser (see remote.ts).
+function RemoteSync() {
+  const navigate = useNavigate()
+  useEffect(() => remote.start((path) => navigate(path)), [navigate])
+  return null
 }

@@ -29,6 +29,7 @@ import (
 	"github.com/yeixio/matinee/internal/download"
 	"github.com/yeixio/matinee/internal/hwaccel"
 	"github.com/yeixio/matinee/internal/kube"
+	"github.com/yeixio/matinee/internal/live"
 	"github.com/yeixio/matinee/internal/metadata"
 	"github.com/yeixio/matinee/internal/plugin"
 	"github.com/yeixio/matinee/internal/probe"
@@ -143,12 +144,23 @@ func run() error {
 		fetcher.Plugins = plugins.Providers
 		db.SetMetadataKinds(fetcher.Kinds()...)
 		plugins.OnChange = func() { db.SetMetadataKinds(fetcher.Kinds()...) }
-		scanner.Added = func(ctx context.Context, lib store.Library, id int64) { plugins.ItemAdded(ctx, id) }
+	}
+	// What's playing where, remote control, and the event feed for home
+	// automation (internal/live).
+	hub := live.New()
+	go hub.Run(ctx)
+	scanner.Added = func(ctx context.Context, lib store.Library, id int64) {
+		plugins.ItemAdded(ctx, id)
+		if it, err := db.Item(ctx, 0, id); err == nil {
+			e := api.LiveItem(it)
+			hub.Publish(live.Event{Type: live.EventItemAdded, Item: &e, Library: &live.Library{ID: lib.ID, Name: lib.Name, Kind: lib.Kind}})
+		}
 	}
 	scanner.AfterScan = func(ctx context.Context, lib store.Library) {
 		analyzer.Wake()
 		fetcher.FetchLibrary(ctx, lib)
 		plugins.Emit(plugin.LibraryEvent(plugin.EventLibraryScanned, lib.ID, lib.Name, lib.Kind))
+		hub.Publish(live.Event{Type: live.EventLibraryScanned, Library: &live.Library{ID: lib.ID, Name: lib.Name, Kind: lib.Kind}})
 	}
 	go analyzer.Run(ctx)
 
@@ -168,6 +180,7 @@ func run() error {
 		HomeListener: cfg.HomeAddr != "", ThemeDir: cfg.ThemeDir(),
 		PublicURL: cfg.PublicURL,
 		Plugins:   plugins, PluginCatalog: cfg.PluginCatalog,
+		Live: hub,
 	}
 	if _, problems := theme.Load(cfg.ThemeDir()); len(problems) > 0 {
 		for _, p := range problems {

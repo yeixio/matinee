@@ -115,5 +115,19 @@
   "tmdb_couldnt_be_reached_to_check_the_key": "לא ניתן היה להתחבר ל-TMDB כדי לבדוק את המפתח",
   "this_server_cant_change_its_tmdb_key": "השרת הזה לא יכול לשנות את מפתח ה-TMDB שלו",
   "this_server_doesnt_offer_remote_access": "השרת הזה לא מציע גישה מרחוק",
-  "this_server_doesnt_use_matinee_connect": "השרת הזה לא משתמש ב-Matinee Connect"
+  "this_server_doesnt_use_matinee_connect": "השרת הזה לא משתמש ב-Matinee Connect",
+  "bad_client_id": "מזהה לקוח לא תקין",
+  "minutes_must_be_between_0_and_1440": "minutes חייב להיות בין 0 ל-1440",
+  "minutes_or_endofitem_is_required": "נדרש minutes או endOfItem",
+  "muted_is_required": "נדרש muted",
+  "no_such_client": "אין לקוח כזה",
+  "positionms_is_required": "נדרש positionMs",
+  "say_hello_first": "קודם שלחו hello",
+  "that_client_cant_do_that": "הלקוח הזה לא יכול לעשות את זה",
+  "that_client_is_offline": "הלקוח הזה לא מחובר",
+  "that_client_isnt_answering": "הלקוח הזה לא עונה",
+  "this_client_id_belongs_to_someone_else": "מזהה הלקוח הזה שייך למישהו אחר",
+  "track_is_required": "נדרש track",
+  "unknown_command": "פקודה לא מוכרת",
+  "volume_must_be_between_0_and_1": "volume חייב להיות בין 0 ל-1"
 }

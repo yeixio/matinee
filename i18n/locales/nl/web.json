@@ -786,5 +786,8 @@
     "confirmRemove": "{{name}} verwijderen? De bibliotheken blijven maar worden niet meer bijgewerkt, en wat het voor iedereen bewaarde, zoals opgeslagen spellen, wordt gewist.",
     "saved": "Opgeslagen",
     "noPlayer": "Hiervoor is een plug-in nodig die uit staat. Een beheerder kan hem aanzetten in Instellingen, onder Plug-ins."
+  },
+  "remote": {
+    "controlledBy": "Bediend vanaf {{name}}"
   }
 }

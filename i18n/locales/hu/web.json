@@ -786,5 +786,8 @@
     "confirmRemove": "Eltávolítod ezt: {{name}}? A könyvtárai megmaradnak, de nem frissülnek tovább, és amit mindenkinek mentett, például a játékmentések, törlődik.",
     "saved": "Mentve",
     "noPlayer": "Ehhez egy kikapcsolt bővítmény kell. Egy rendszergazda bekapcsolhatja a Beállítások Bővítmények részében."
+  },
+  "remote": {
+    "controlledBy": "Vezérelve innen: {{name}}"
   }
 }

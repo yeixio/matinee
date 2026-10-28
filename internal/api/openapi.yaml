@@ -2091,6 +2091,120 @@ paths:
                     itemKinds: { type: array, items: { type: string }, examples: [[game]] }
                     entry: { type: string, examples: [player/index.html] }
 
+  /clients/{client}:
+    put:
+      summary: Say hello and what this player plays
+      description: |
+        Every open web player and app reports here when it opens, whenever
+        what it plays changes (play, pause, seek, a new item), and about
+        every 10 seconds while playing, so people and home automation can
+        see what's on and send it commands. `client` is an id the player
+        made up once and keeps, such as a UUID. Works for the home guest.
+        Then ask for commands with `GET /clients/{client}/commands`.
+      parameters: [{ $ref: "#/components/parameters/ClientID" }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ClientReport" }
+      responses:
+        "200":
+          description: Noted.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  pollSeconds: { type: integer, description: The longest wait to ask for in GET /clients/{client}/commands. }
+        "400": { $ref: "#/components/responses/Error" }
+        "404": { $ref: "#/components/responses/Error" }
+        "409": { $ref: "#/components/responses/Error" }
+    delete:
+      summary: Say this player closed
+      parameters: [{ $ref: "#/components/parameters/ClientID" }]
+      responses:
+        "204": { description: It shows as offline. }
+    get:
+      summary: One client (grown-ups who signed in)
+      parameters: [{ $ref: "#/components/parameters/ClientID" }]
+      responses:
+        "200":
+          description: The client.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Client" }
+        "404": { $ref: "#/components/responses/Error" }
+  /clients/{client}/commands:
+    get:
+      summary: Wait for commands for this player
+      description: |
+        Answers as soon as there's a command, or with none after `wait`
+        seconds (at most 30). Ask again right away. A player that stops
+        asking for 45 seconds shows as offline. 404 means the server
+        doesn't know this player (it restarted): say hello again.
+      parameters:
+        - { $ref: "#/components/parameters/ClientID" }
+        - { name: wait, in: query, schema: { type: integer, minimum: 0, maximum: 30 } }
+      responses:
+        "200":
+          description: Commands, oldest first; do each in turn.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  commands: { type: array, items: { $ref: "#/components/schemas/Command" } }
+        "404": { $ref: "#/components/responses/Error" }
+    post:
+      summary: Ask a player to do something
+      description: |
+        Admins can control every player; anyone else who signed in, their
+        own account's. Kids profiles can't. A player only takes the
+        commands it lists in `commands`.
+      parameters: [{ $ref: "#/components/parameters/ClientID" }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/Command" }
+      responses:
+        "202":
+          description: Sent; the player will report the change.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Command" }
+        "400": { $ref: "#/components/responses/Error" }
+        "404": { $ref: "#/components/responses/Error" }
+        "409": { $ref: "#/components/responses/Error" }
+        "503": { $ref: "#/components/responses/Error" }
+  /clients:
+    get:
+      summary: Open players (grown-ups who signed in)
+      description: Admins see every player; anyone else, their own account's. Online ones first.
+      responses:
+        "200":
+          description: Clients.
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: "#/components/schemas/Client" } }
+  /events:
+    get:
+      summary: Follow what happens, live (admins only)
+      description: |
+        Server-sent events (`text/event-stream`). Each event's name is its
+        `type` and its data is an Event. The first is `snapshot`, with every
+        client in `clients`; after that come `client.updated`,
+        `client.removed`, `playback.started`, `playback.paused`,
+        `playback.resumed`, `playback.stopped`, `item.added` and
+        `library.scanned`. A follower that falls far behind is cut off;
+        reconnect and start from the new snapshot.
+      responses:
+        "200":
+          description: The feed.
+          content:
+            text/event-stream:
+              schema: { $ref: "#/components/schemas/Event" }
+
 components:
   securitySchemes:
     bearer:
@@ -2107,6 +2221,8 @@ components:
       { name: id, in: path, required: true, schema: { type: string } }
     IssueID:
       { name: id, in: path, required: true, schema: { type: string } }
+    ClientID:
+      { name: client, in: path, required: true, schema: { type: string, pattern: "^[A-Za-z0-9._-]{8,64}$" }, description: The id the player made up for itself. }
     PluginID:
       { name: plugin, in: path, required: true, schema: { type: string }, examples: { arcade: { value: arcade } } }
     UserCode:
@@ -3009,3 +3125,114 @@ components:
         createdAt: { type: integer }
         updatedAt: { type: integer }
         finishedAt: { type: integer, description: When the device said it has the whole file. }
+    LiveItem:
+      type: object
+      properties:
+        id: { type: integer }
+        libraryId: { type: integer }
+        kind: { type: string }
+        title: { type: string }
+        year: { type: integer }
+        showTitle: { type: string }
+        season: { type: integer }
+        episode: { type: integer }
+    ClientReport:
+      type: object
+      required: [name, platform, commands]
+      properties:
+        name: { type: string, examples: [Living room TV] }
+        platform: { type: string, examples: [tvos] }
+        app: { type: string, examples: [Matinee] }
+        version: { type: string }
+        commands: { type: array, items: { $ref: "#/components/schemas/CommandType" }, description: The commands this player takes; empty for none. }
+        playing:
+          type: [object, "null"]
+          description: What's open in the player; null or absent for nothing.
+          required: [itemId, positionMs, paused]
+          properties:
+            itemId: { type: integer }
+            positionMs: { type: integer }
+            durationMs: { type: integer, description: Defaults to the item's. }
+            paused: { type: boolean }
+            buffering: { type: boolean }
+            volume: { type: number, minimum: 0, maximum: 1, description: Only for players with their own volume. }
+            muted: { type: boolean }
+            subtitles: { type: string, description: The subtitle track showing; empty for none. }
+            transcoding: { type: boolean }
+            sleepAt: { type: integer, description: When the sleep timer stops playback, in milliseconds; 0 for no timer. }
+            sleepAtEnd: { type: boolean, description: The sleep timer stops at the end of this item. }
+    CommandType:
+      type: string
+      enum: [play, pause, stop, seek, next, previous, playItem, volume, mute, sleep, subtitles]
+    Command:
+      type: object
+      required: [type]
+      properties:
+        id: { type: string, readOnly: true }
+        type: { $ref: "#/components/schemas/CommandType" }
+        positionMs: { type: integer, description: "seek: where to; playItem: where to start (default: where the person left off)." }
+        itemId: { type: integer, description: "playItem: what to play. A show or season plays its next episode." }
+        item: { allOf: [{ $ref: "#/components/schemas/LiveItem" }], readOnly: true }
+        volume: { type: number, minimum: 0, maximum: 1 }
+        muted: { type: boolean }
+        minutes: { type: integer, minimum: 0, maximum: 1440, description: "sleep: stop after this many minutes; 0 cancels the timer." }
+        endOfItem: { type: boolean, description: "sleep: stop at the end of what's playing." }
+        track: { type: string, description: "subtitles: the track to show; empty for none." }
+        from: { type: string, readOnly: true, description: Who sent it, such as the name of the device that signed in. }
+    Client:
+      type: object
+      properties:
+        id: { type: string }
+        name: { type: string }
+        platform: { type: string }
+        app: { type: string }
+        version: { type: string }
+        commands: { type: array, items: { $ref: "#/components/schemas/CommandType" } }
+        user:
+          type: object
+          properties:
+            id: { type: integer }
+            name: { type: string }
+            guest: { type: boolean }
+        online: { type: boolean }
+        lastSeen: { type: integer }
+        remote: { type: boolean, description: Away from home. }
+        playing:
+          type: object
+          description: Absent when nothing plays. positionMs was true at updatedAt and moves on unless paused.
+          properties:
+            item: { $ref: "#/components/schemas/LiveItem" }
+            positionMs: { type: integer }
+            durationMs: { type: integer }
+            paused: { type: boolean }
+            buffering: { type: boolean }
+            volume: { type: number }
+            muted: { type: boolean }
+            subtitles: { type: string }
+            transcoding: { type: boolean }
+            sleepAt: { type: integer }
+            sleepAtEnd: { type: boolean }
+            updatedAt: { type: integer }
+    Event:
+      type: object
+      properties:
+        type: { type: string, examples: [playback.started] }
+        time: { type: integer, description: Milliseconds. }
+        client: { $ref: "#/components/schemas/Client" }
+        clients: { type: array, items: { $ref: "#/components/schemas/Client" }, description: snapshot only. }
+        clientId: { type: string, description: client.removed only. }
+        item: { $ref: "#/components/schemas/LiveItem" }
+        user:
+          type: object
+          properties:
+            id: { type: integer }
+            name: { type: string }
+            guest: { type: boolean }
+        library:
+          type: object
+          properties:
+            id: { type: integer }
+            name: { type: string }
+            kind: { type: string }
+        positionMs: { type: integer }
+        finished: { type: boolean, description: "playback.stopped: it got to the end." }

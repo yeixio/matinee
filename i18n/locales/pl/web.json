@@ -794,5 +794,8 @@
     "confirmRemove": "Usunąć {{name}}? Jej biblioteki zostaną, ale przestaną się aktualizować, a to, co zapisała dla wszystkich, na przykład zapisy gier, zostanie usunięte.",
     "saved": "Zapisano",
     "noPlayer": "Do tego potrzebna jest wyłączona wtyczka. Administrator może ją włączyć w Ustawieniach, w sekcji Wtyczki."
+  },
+  "remote": {
+    "controlledBy": "Sterowane z {{name}}"
   }
 }

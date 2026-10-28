@@ -115,5 +115,19 @@
   "tmdb_couldnt_be_reached_to_check_the_key": "无法连接 TMDB 来验证密钥",
   "this_server_cant_change_its_tmdb_key": "此服务器无法更改其 TMDB 密钥",
   "this_server_doesnt_offer_remote_access": "此服务器不提供远程访问",
-  "this_server_doesnt_use_matinee_connect": "此服务器未使用 Matinee Connect"
+  "this_server_doesnt_use_matinee_connect": "此服务器未使用 Matinee Connect",
+  "bad_client_id": "客户端 ID 无效",
+  "minutes_must_be_between_0_and_1440": "minutes 必须在 0 到 1440 之间",
+  "minutes_or_endofitem_is_required": "需要 minutes 或 endOfItem",
+  "muted_is_required": "需要 muted",
+  "no_such_client": "没有这个客户端",
+  "positionms_is_required": "需要 positionMs",
+  "say_hello_first": "请先发送 hello",
+  "that_client_cant_do_that": "该客户端无法执行此操作",
+  "that_client_is_offline": "该客户端已离线",
+  "that_client_isnt_answering": "该客户端没有响应",
+  "this_client_id_belongs_to_someone_else": "此客户端 ID 属于其他人",
+  "track_is_required": "需要 track",
+  "unknown_command": "未知命令",
+  "volume_must_be_between_0_and_1": "volume 必须在 0 到 1 之间"
 }

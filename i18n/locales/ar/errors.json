@@ -115,5 +115,19 @@
   "tmdb_couldnt_be_reached_to_check_the_key": "تعذّر الوصول إلى TMDB للتحقق من المفتاح",
   "this_server_cant_change_its_tmdb_key": "لا يمكن لهذا الخادم تغيير مفتاح TMDB الخاص به",
   "this_server_doesnt_offer_remote_access": "لا يوفّر هذا الخادم الوصول عن بُعد",
-  "this_server_doesnt_use_matinee_connect": "لا يستخدم هذا الخادم Matinee Connect"
+  "this_server_doesnt_use_matinee_connect": "لا يستخدم هذا الخادم Matinee Connect",
+  "bad_client_id": "معرّف العميل غير صالح",
+  "minutes_must_be_between_0_and_1440": "يجب أن تكون minutes بين 0 و1440",
+  "minutes_or_endofitem_is_required": "يلزم minutes أو endOfItem",
+  "muted_is_required": "يلزم muted",
+  "no_such_client": "لا يوجد عميل كهذا",
+  "positionms_is_required": "يلزم positionMs",
+  "say_hello_first": "أرسل hello أولًا",
+  "that_client_cant_do_that": "لا يستطيع هذا العميل فعل ذلك",
+  "that_client_is_offline": "هذا العميل غير متصل",
+  "that_client_isnt_answering": "هذا العميل لا يستجيب",
+  "this_client_id_belongs_to_someone_else": "معرّف العميل هذا يخص شخصًا آخر",
+  "track_is_required": "يلزم track",
+  "unknown_command": "أمر غير معروف",
+  "volume_must_be_between_0_and_1": "يجب أن تكون volume بين 0 و1"
 }

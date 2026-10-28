@@ -115,5 +115,19 @@
   "tmdb_couldnt_be_reached_to_check_the_key": "Không thể kết nối TMDB để kiểm tra khóa",
   "this_server_cant_change_its_tmdb_key": "máy chủ này không thể đổi khóa TMDB của nó",
   "this_server_doesnt_offer_remote_access": "máy chủ này không cung cấp truy cập từ xa",
-  "this_server_doesnt_use_matinee_connect": "máy chủ này không dùng Matinee Connect"
+  "this_server_doesnt_use_matinee_connect": "máy chủ này không dùng Matinee Connect",
+  "bad_client_id": "id máy khách không hợp lệ",
+  "minutes_must_be_between_0_and_1440": "minutes phải từ 0 đến 1440",
+  "minutes_or_endofitem_is_required": "cần minutes hoặc endOfItem",
+  "muted_is_required": "cần muted",
+  "no_such_client": "không có máy khách đó",
+  "positionms_is_required": "cần positionMs",
+  "say_hello_first": "hãy chào trước (hello)",
+  "that_client_cant_do_that": "máy khách đó không làm được việc này",
+  "that_client_is_offline": "máy khách đó đang ngoại tuyến",
+  "that_client_isnt_answering": "máy khách đó không phản hồi",
+  "this_client_id_belongs_to_someone_else": "id máy khách này thuộc về người khác",
+  "track_is_required": "cần track",
+  "unknown_command": "lệnh không xác định",
+  "volume_must_be_between_0_and_1": "volume phải từ 0 đến 1"
 }

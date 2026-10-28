@@ -115,5 +115,19 @@
   "tmdb_couldnt_be_reached_to_check_the_key": "Não foi possível acessar o TMDB para verificar a chave",
   "this_server_cant_change_its_tmdb_key": "este servidor não pode mudar sua chave do TMDB",
   "this_server_doesnt_offer_remote_access": "este servidor não oferece acesso remoto",
-  "this_server_doesnt_use_matinee_connect": "este servidor não usa o Matinee Connect"
+  "this_server_doesnt_use_matinee_connect": "este servidor não usa o Matinee Connect",
+  "bad_client_id": "id de cliente inválido",
+  "minutes_must_be_between_0_and_1440": "minutes deve estar entre 0 e 1440",
+  "minutes_or_endofitem_is_required": "minutes ou endOfItem é obrigatório",
+  "muted_is_required": "muted é obrigatório",
+  "no_such_client": "esse cliente não existe",
+  "positionms_is_required": "positionMs é obrigatório",
+  "say_hello_first": "diga olá primeiro (hello)",
+  "that_client_cant_do_that": "esse cliente não consegue fazer isso",
+  "that_client_is_offline": "esse cliente está offline",
+  "that_client_isnt_answering": "esse cliente não está respondendo",
+  "this_client_id_belongs_to_someone_else": "este id de cliente pertence a outra pessoa",
+  "track_is_required": "track é obrigatório",
+  "unknown_command": "comando desconhecido",
+  "volume_must_be_between_0_and_1": "volume deve estar entre 0 e 1"
 }

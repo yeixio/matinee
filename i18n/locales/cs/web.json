@@ -794,5 +794,8 @@
     "confirmRemove": "Odebrat {{name}}? Jeho knihovny zůstanou, ale přestanou se aktualizovat, a co pro všechny uložil, třeba uložené hry, se smaže.",
     "saved": "Uloženo",
     "noPlayer": "K tomu je potřeba doplněk, který je vypnutý. Správce ho může zapnout v Nastavení v části Doplňky."
+  },
+  "remote": {
+    "controlledBy": "Ovládáno z {{name}}"
   }
 }

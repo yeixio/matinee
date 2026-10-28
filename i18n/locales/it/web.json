@@ -790,5 +790,8 @@
     "confirmRemove": "Rimuovere {{name}}? Le sue librerie restano ma non si aggiornano più, e ciò che ha salvato per tutti, come i salvataggi dei giochi, viene eliminato.",
     "saved": "Salvato",
     "noPlayer": "Serve un plugin che è disattivato. Un amministratore può attivarlo in Impostazioni, sotto Plugin."
+  },
+  "remote": {
+    "controlledBy": "Controllato da {{name}}"
   }
 }

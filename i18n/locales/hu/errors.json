@@ -115,5 +115,19 @@
   "tmdb_couldnt_be_reached_to_check_the_key": "A TMDB nem érhető el a kulcs ellenőrzéséhez",
   "this_server_cant_change_its_tmdb_key": "ez a szerver nem tudja módosítani a TMDB-kulcsát",
   "this_server_doesnt_offer_remote_access": "ez a szerver nem kínál távoli elérést",
-  "this_server_doesnt_use_matinee_connect": "ez a szerver nem használja a Matinee Connectet"
+  "this_server_doesnt_use_matinee_connect": "ez a szerver nem használja a Matinee Connectet",
+  "bad_client_id": "érvénytelen kliensazonosító",
+  "minutes_must_be_between_0_and_1440": "a minutes értéke 0 és 1440 között lehet",
+  "minutes_or_endofitem_is_required": "minutes vagy endOfItem szükséges",
+  "muted_is_required": "muted szükséges",
+  "no_such_client": "nincs ilyen kliens",
+  "positionms_is_required": "positionMs szükséges",
+  "say_hello_first": "előbb köszönj (hello)",
+  "that_client_cant_do_that": "ez a kliens erre nem képes",
+  "that_client_is_offline": "ez a kliens offline",
+  "that_client_isnt_answering": "ez a kliens nem válaszol",
+  "this_client_id_belongs_to_someone_else": "ez a kliensazonosító valaki másé",
+  "track_is_required": "track szükséges",
+  "unknown_command": "ismeretlen parancs",
+  "volume_must_be_between_0_and_1": "a volume értéke 0 és 1 között lehet"
 }

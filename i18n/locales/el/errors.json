@@ -115,5 +115,19 @@
   "tmdb_couldnt_be_reached_to_check_the_key": "Δεν ήταν δυνατή η σύνδεση με το TMDB για έλεγχο του κλειδιού",
   "this_server_cant_change_its_tmdb_key": "αυτός ο διακομιστής δεν μπορεί να αλλάξει το κλειδί TMDB του",
   "this_server_doesnt_offer_remote_access": "αυτός ο διακομιστής δεν προσφέρει απομακρυσμένη πρόσβαση",
-  "this_server_doesnt_use_matinee_connect": "αυτός ο διακομιστής δεν χρησιμοποιεί το Matinee Connect"
+  "this_server_doesnt_use_matinee_connect": "αυτός ο διακομιστής δεν χρησιμοποιεί το Matinee Connect",
+  "bad_client_id": "μη έγκυρο αναγνωριστικό πελάτη",
+  "minutes_must_be_between_0_and_1440": "το minutes πρέπει να είναι από 0 έως 1440",
+  "minutes_or_endofitem_is_required": "απαιτείται minutes ή endOfItem",
+  "muted_is_required": "απαιτείται muted",
+  "no_such_client": "δεν υπάρχει τέτοιος πελάτης",
+  "positionms_is_required": "απαιτείται positionMs",
+  "say_hello_first": "πείτε πρώτα γεια (hello)",
+  "that_client_cant_do_that": "αυτός ο πελάτης δεν μπορεί να το κάνει",
+  "that_client_is_offline": "αυτός ο πελάτης είναι εκτός σύνδεσης",
+  "that_client_isnt_answering": "αυτός ο πελάτης δεν απαντά",
+  "this_client_id_belongs_to_someone_else": "αυτό το αναγνωριστικό πελάτη ανήκει σε άλλον",
+  "track_is_required": "απαιτείται track",
+  "unknown_command": "άγνωστη εντολή",
+  "volume_must_be_between_0_and_1": "το volume πρέπει να είναι από 0 έως 1"
 }

@@ -23,7 +23,7 @@ var updateErrors = flag.Bool("update-errors", false, "rewrite i18n/locales/en/er
 const errorsCatalog = "../../i18n/locales/en/errors.json"
 
 // Functions whose string results are error messages for writeError.
-var messageFuncs = []string{"validate", "validatePassword", "changes", "apply"}
+var messageFuncs = []string{"validate", "validatePassword", "changes", "apply", "checkCommand"}
 
 // Catalog keys ending like these are one form of a plural.
 var pluralForm = regexp.MustCompile(`_(zero|one|two|few|many|other)$`)

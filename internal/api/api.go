@@ -14,6 +14,7 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+	"sync"
 	"sync/atomic"
 	"time"
 
@@ -22,6 +23,7 @@ import (
 	"github.com/yeixio/matinee/internal/auth"
 	"github.com/yeixio/matinee/internal/download"
 	"github.com/yeixio/matinee/internal/hwaccel"
+	"github.com/yeixio/matinee/internal/live"
 	"github.com/yeixio/matinee/internal/plugin"
 	"github.com/yeixio/matinee/internal/probe"
 	"github.com/yeixio/matinee/internal/remote"
@@ -100,6 +102,11 @@ type Server struct {
 	// for none.
 	Plugins       *plugin.Manager
 	PluginCatalog string
+
+	// Live keeps track of open players and runs the event feed (see
+	// live.go); nil makes one.
+	Live     *live.Hub
+	liveOnce sync.Once
 
 	// BackgroundCtx scopes scans started by API calls; it outlives any one request.
 	BackgroundCtx context.Context
@@ -267,6 +274,14 @@ func (s *Server) routes() []route {
 		{"DELETE /plugins/{plugin}/storage/{key...}", reader, s.deletePluginValue},
 		{"GET /plugins/{plugin}/libraries/{id}/file", reader, s.pluginLibraryFile},
 		{"GET /players", reader, s.listPlayers},
+
+		{"PUT /clients/{client}", reader, s.putClient},
+		{"DELETE /clients/{client}", reader, s.deleteClient},
+		{"GET /clients/{client}/commands", reader, s.clientCommands},
+		{"GET /clients", signedIn, grownUps(s.listClients)},
+		{"GET /clients/{client}", signedIn, grownUps(s.getClient)},
+		{"POST /clients/{client}/commands", signedIn, grownUps(s.sendCommand)},
+		{"GET /events", adminOnly, s.events},
 	}
 }
 
@@ -445,6 +460,9 @@ type statusRecorder struct {
 }
 
 func (s *statusRecorder) WriteHeader(code int) { s.status = code; s.ResponseWriter.WriteHeader(code) }
+
+// Unwrap lets http.ResponseController reach the connection, for streams.
+func (s *statusRecorder) Unwrap() http.ResponseWriter { return s.ResponseWriter }
 
 func (s *Server) logRequests(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

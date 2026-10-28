@@ -234,3 +234,13 @@ func isUniqueViolation(err error) bool {
 	msg := err.Error()
 	return strings.Contains(msg, "UNIQUE") || strings.Contains(msg, "unique") || strings.Contains(msg, "23505")
 }
+
+// SessionDeviceName is the name of the device a session token belongs to.
+func (s *Store) SessionDeviceName(ctx context.Context, token string) (string, error) {
+	var name string
+	err := s.db.QueryRowContext(ctx, "SELECT device_name FROM sessions WHERE token = ?", token).Scan(&name)
+	if errors.Is(err, sql.ErrNoRows) {
+		return "", ErrNotFound
+	}
+	return name, err
+}

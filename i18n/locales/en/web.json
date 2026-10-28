@@ -786,5 +786,8 @@
     "confirmRemove": "Remove {{name}}? Its libraries stay but stop updating, and what it saved for everyone, such as saved games, is deleted.",
     "saved": "Saved",
     "noPlayer": "This needs a plugin that's turned off. An admin can turn it on in Settings, under Plugins."
+  },
+  "remote": {
+    "controlledBy": "Controlled from {{name}}"
   }
 }

@@ -790,5 +790,8 @@
     "confirmRemove": "Remover {{name}}? As bibliotecas dele ficam, mas param de atualizar, e o que ele guardou para todos, como jogos salvos, é apagado.",
     "saved": "Salvo",
     "noPlayer": "Isso precisa de um plugin que está desligado. Um administrador pode ligá-lo em Configurações, em Plugins."
+  },
+  "remote": {
+    "controlledBy": "Controlado por {{name}}"
   }
 }

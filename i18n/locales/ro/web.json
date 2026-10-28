@@ -790,5 +790,8 @@
     "confirmRemove": "Elimini {{name}}? Bibliotecile lui rămân, dar nu se mai actualizează, iar ce a salvat pentru toți, cum ar fi jocurile salvate, se șterge.",
     "saved": "Salvat",
     "noPlayer": "E nevoie de un plugin care e oprit. Un administrator îl poate porni din Setări, la Pluginuri."
+  },
+  "remote": {
+    "controlledBy": "Controlat de pe {{name}}"
   }
 }

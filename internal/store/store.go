@@ -629,7 +629,13 @@ func (s *Store) SessionUser(ctx context.Context, token string) (u User, homeOnly
 		return u, false, err
 	}
 	if now()-seen > seenEvery {
-		s.db.ExecContext(ctx, "UPDATE sessions SET last_seen_at = ? WHERE token = ?", now(), token)
+		// A device in use stays signed in: its session runs out a whole
+		// SessionTTL after it was last used, not after it signed in, so
+		// something always on, like a TV or Home Assistant, never has to
+		// sign in again.
+		s.db.ExecContext(ctx, `UPDATE sessions SET last_seen_at = ?,
+			expires_at = CASE WHEN last_seen_at > 0 THEN expires_at + (? - last_seen_at) ELSE expires_at END
+			WHERE token = ?`, now(), now(), token)
 	}
 	return u, homeOnly, nil
 }

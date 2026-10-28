@@ -3,7 +3,7 @@ import type Hls from 'hls.js'
 import { ArrowLeft, Maximize, Minimize, Moon, Pause, Play, RotateCcw, RotateCw, Volume2, VolumeX } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { api, fileUrl, type ItemDetail, type SubtitleTrack } from '../api'
 import { Spinner } from '../components/ui'
 import { clock, episodeCode } from '../format'
@@ -17,6 +17,7 @@ import { SleepMenu } from '../player/SleepMenu'
 import { parseVTT, type Cue } from '../player/vtt'
 import { PluginPlayer } from '../player/PluginPlayer'
 import { playerFor, usePlayers } from '../plugins'
+import { remote, watchPath, type CommandType, type PlayerHooks } from '../remote'
 
 const displayTitle = (item: ItemDetail) => {
   const show = item.parents.find((p) => p.kind === 'show')
@@ -118,6 +119,11 @@ function Player({ id }: { id: number }) {
   // Sleep timer: fades the sound out, then pauses. "End" stops auto-play.
   const { sleep, left: sleepLeft } = useSleep()
   const [slept, setSlept] = useState(false)
+  // The volume people chose; the sleep timer fades from it.
+  const volume = useRef(1)
+  // Where to start, when Home Assistant or another device said (?t=seconds).
+  const [params] = useSearchParams()
+  const startAt = params.get('t')
 
   const duration = item?.durationMs ? item.durationMs / 1000 : 0
   const position = useCallback(() => offset.current + (video.current?.currentTime ?? 0), [])
@@ -191,13 +197,13 @@ function Player({ id }: { id: number }) {
   useEffect(() => {
     const el = video.current
     if (!item || !el || mode) return
-    const resume = !item.played && item.positionMs ? item.positionMs / 1000 : 0
+    const resume = startAt !== null ? Number(startAt) || 0 : !item.played && item.positionMs ? item.positionMs / 1000 : 0
     const pick = defaultTrack(item.subtitles ?? [])
     setSub(pick)
     if (pick?.burnIn) startHls(resume, pick.id)
     else if (canDirectPlay(item, el)) playDirect(resume)
     else startHls(resume)
-  }, [item, mode, startHls, playDirect])
+  }, [item, mode, startHls, playDirect, startAt])
 
   // Text subtitles are drawn by the player; fetch the cues when the choice changes.
   useEffect(() => {
@@ -238,11 +244,11 @@ function Player({ id }: { id: number }) {
   useEffect(() => {
     const el = video.current
     if (!el) return
-    el.volume = sleepVolume(sleepLeft)
+    el.volume = volume.current * sleepVolume(sleepLeft)
     if (sleepLeft === 0) {
       sleepTimer.set(undefined)
       el.pause()
-      el.volume = 1
+      el.volume = volume.current
       setSlept(true)
     }
   }, [sleepLeft])
@@ -427,6 +433,103 @@ function Player({ id }: { id: number }) {
     }
   })
 
+  // Remote control (see remote.ts): say what's playing, and do what Home
+  // Assistant or another device asks.
+  const [notice, setNotice] = useState<string>()
+  const noticeTimer = useRef<number>(undefined)
+  const hooks = useRef<PlayerHooks>(undefined)
+  hooks.current = {
+    commands: () => {
+      const c: CommandType[] = ['play', 'pause', 'stop', 'seek', 'previous', 'playItem', 'volume', 'mute', 'sleep']
+      if (upNext?.next) c.push('next')
+      if (item?.subtitles?.length) c.push('subtitles')
+      return c
+    },
+    state: () => {
+      const el = video.current
+      if (!item || !el) return undefined
+      return {
+        itemId: item.id,
+        positionMs: Math.round(position() * 1000),
+        durationMs: item.durationMs,
+        paused: el.paused,
+        buffering: waiting,
+        volume: volume.current,
+        muted: el.muted,
+        subtitles: sub?.id ?? '',
+        transcoding: mode === 'hls',
+        sleepAt: sleep && sleep !== 'end' ? sleep.at : undefined,
+        sleepAtEnd: sleep === 'end',
+      }
+    },
+    handle: (c) => {
+      const el = video.current
+      if (!el || !item) return
+      if (c.from) {
+        setNotice(tr('remote.controlledBy', { name: c.from }))
+        window.clearTimeout(noticeTimer.current)
+        noticeTimer.current = window.setTimeout(() => setNotice(undefined), 3000)
+      }
+      switch (c.type) {
+        case 'play':
+          el.play().catch(() => {})
+          break
+        case 'pause':
+          el.pause()
+          break
+        case 'stop':
+          navigate(-1)
+          break
+        case 'seek':
+          seek((c.positionMs ?? 0) / 1000)
+          break
+        case 'previous':
+          seek(0)
+          break
+        case 'next':
+          playNext(false)
+          break
+        case 'playItem':
+          if (c.itemId === item.id) {
+            if (c.positionMs !== undefined) seek(c.positionMs / 1000)
+            el.play().catch(() => {})
+          } else if (c.itemId) navigate(watchPath(c.itemId, c.positionMs), { replace: true })
+          break
+        case 'volume':
+          volume.current = Math.max(0, Math.min(1, c.volume ?? 1))
+          el.volume = volume.current * sleepVolume(sleepLeft)
+          remote.report()
+          break
+        case 'mute':
+          el.muted = !!c.muted
+          break
+        case 'sleep':
+          if (c.endOfItem) sleepTimer.set('end')
+          else if (c.minutes) sleepTimer.after(c.minutes)
+          else sleepTimer.set(undefined)
+          break
+        case 'subtitles':
+          selectSub(c.track ? item.subtitles?.find((t) => t.id === c.track) : undefined)
+          break
+      }
+    },
+  }
+  useEffect(
+    () =>
+      remote.attach({
+        commands: () => hooks.current!.commands(),
+        state: () => hooks.current!.state(),
+        handle: (c) => hooks.current!.handle(c),
+      }),
+    [],
+  )
+  useEffect(() => remote.report(), [item, paused, waiting, muted, sub, sleep, mode, upNext])
+  useEffect(() => {
+    if (paused) return
+    const t = window.setInterval(remote.report, 10_000)
+    return () => window.clearInterval(t)
+  }, [paused])
+
   const t = item ? displayTitle(item) : { title: '', sub: '' }
   const shown = scrub ?? time
   const frac = duration ? Math.min(1, shown / duration) : 0
@@ -459,6 +562,7 @@ function Player({ id }: { id: number }) {
         onPlaying={() => setWaiting(false)}
         onCanPlay={() => setWaiting(false)}
         onVolumeChange={() => setMuted(!!video.current?.muted)}
+        onSeeked={() => remote.report()}
         onEnded={ended}
         onError={() => mode === 'direct' && startHls(position())}
       />
@@ -490,6 +594,12 @@ function Player({ id }: { id: number }) {
             <Moon className="size-4 text-accent" />
             {tr('sleep.paused')}
           </div>
+        </div>
+      )}
+
+      {notice && (
+        <div className="pointer-events-none absolute inset-x-0 top-20 flex justify-center p-4">
+          <div className="rounded-full bg-black/70 px-4 py-2 text-sm text-white/80 backdrop-blur">{notice}</div>
         </div>
       )}
 
