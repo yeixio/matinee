@@ -430,5 +430,8 @@
     "notConnected": "Administrator nie połączył Radarr ani Sonarr z tym serwerem.",
     "connect": "Administrator może połączyć Radarr lub Sonarr w Ustawieniach Matinee w przeglądarce.",
     "nothing": "Na razie nic nie nadchodzi."
+  },
+  "remote": {
+    "controlledBy": "Sterowane z {{name}}"
   }
 }

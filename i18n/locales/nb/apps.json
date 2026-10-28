@@ -416,5 +416,8 @@
     "notConnected": "En administrator har ikke koblet Radarr eller Sonarr til denne serveren.",
     "connect": "En administrator kan koble til Radarr eller Sonarr under Innstillinger i Matinee på nettet.",
     "nothing": "Ingenting er på vei akkurat nå."
+  },
+  "remote": {
+    "controlledBy": "Styrt fra {{name}}"
   }
 }

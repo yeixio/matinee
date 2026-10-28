@@ -416,5 +416,8 @@
     "notConnected": "کسی ایڈمن نے ابھی Radarr یا Sonarr کو اس سرور سے نہیں جوڑا۔",
     "connect": "کوئی ایڈمن ویب پر Matinee کی ترتیبات میں Radarr یا Sonarr جوڑ سکتا ہے۔",
     "nothing": "ابھی کچھ بھی آنے والا نہیں ہے۔"
+  },
+  "remote": {
+    "controlledBy": "{{name}} سے کنٹرول کیا گیا"
   }
 }

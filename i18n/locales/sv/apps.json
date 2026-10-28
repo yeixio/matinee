@@ -416,5 +416,8 @@
     "notConnected": "En administratör har inte anslutit Radarr eller Sonarr till den här servern.",
     "connect": "En administratör kan ansluta Radarr eller Sonarr under Inställningar i Matinee på webben.",
     "nothing": "Inget är på väg just nu."
+  },
+  "remote": {
+    "controlledBy": "Styrs från {{name}}"
   }
 }

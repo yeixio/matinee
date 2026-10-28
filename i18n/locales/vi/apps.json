@@ -409,5 +409,8 @@
     "notConnected": "Quản trị viên chưa kết nối Radarr hoặc Sonarr với máy chủ này.",
     "connect": "Quản trị viên có thể kết nối Radarr hoặc Sonarr trong Cài đặt của Matinee trên web.",
     "nothing": "Hiện chưa có gì sắp ra mắt."
+  },
+  "remote": {
+    "controlledBy": "Được điều khiển từ {{name}}"
   }
 }

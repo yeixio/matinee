@@ -416,5 +416,8 @@
     "notConnected": "Egy rendszergazda nem csatlakoztatta a Radarrt vagy a Sonarrt ehhez a szerverhez.",
     "connect": "Egy rendszergazda a Matinee webes Beállításaiban kapcsolhatja be a Radarrt vagy a Sonarrt.",
     "nothing": "Most semmi sem érkezik."
+  },
+  "remote": {
+    "controlledBy": "Vezérelve innen: {{name}}"
   }
 }

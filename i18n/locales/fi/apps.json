@@ -416,5 +416,8 @@
     "notConnected": "Ylläpitäjä ei ole yhdistänyt Radarria tai Sonarria tähän palvelimeen.",
     "connect": "Ylläpitäjä voi yhdistää Radarrin tai Sonarrin Matineen asetuksista verkossa.",
     "nothing": "Mitään ei ole tulossa juuri nyt."
+  },
+  "remote": {
+    "controlledBy": "Ohjattu laitteesta {{name}}"
   }
 }

@@ -423,5 +423,8 @@
     "notConnected": "Un administrator nu a conectat Radarr sau Sonarr la acest server.",
     "connect": "Un administrator poate conecta Radarr sau Sonarr din Setările Matinee pe web.",
     "nothing": "Momentan nu vine nimic."
+  },
+  "remote": {
+    "controlledBy": "Controlat de pe {{name}}"
   }
 }

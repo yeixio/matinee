@@ -2,7 +2,7 @@
 title: Kubernetes
 description: Run Matinee on Kubernetes with the Helm chart, with its bundled PostgreSQL, your media mounts, a GPU, and automatic updates.
 sidebar:
-  order: 10
+  order: 11
 ---
 
 Matinee has a Helm chart. It runs the server with a bundled PostgreSQL whose credentials are generated into a Secret on the first install, so there's nothing to set up, and it works the same under Argo CD or Flux.

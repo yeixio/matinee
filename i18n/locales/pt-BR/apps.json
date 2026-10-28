@@ -423,5 +423,8 @@
     "notConnected": "Nenhum administrador conectou o Radarr ou o Sonarr a este servidor.",
     "connect": "Um administrador pode conectar o Radarr ou o Sonarr nas Configurações do Matinee na web.",
     "nothing": "Nada a caminho no momento."
+  },
+  "remote": {
+    "controlledBy": "Controlado por {{name}}"
   }
 }

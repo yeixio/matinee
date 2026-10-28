@@ -67,3 +67,9 @@ The apps have the same [sleep timer](/docs/watching/playing/#sleep-timer) as the
 Once the timer pauses playback, the phone or TV is free to lock or go to sleep by itself.
 
 <!-- /since -->
+
+<!-- since: v0.1.1 -->
+## Controlled from Home Assistant
+
+While the app is open, [Home Assistant](/docs/server/home-assistant/) can see what it plays and control it: pause, seek, start a film, set the sleep timer. The app says **Controlled from Home Assistant** for a moment when that happens. On a TV, the volume stays with the TV.
+<!-- /since -->

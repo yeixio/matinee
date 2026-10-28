@@ -430,5 +430,8 @@
     "notConnected": "Администратор не подключил Radarr или Sonarr к этому серверу.",
     "connect": "Администратор может подключить Radarr или Sonarr в Настройках Matinee в браузере.",
     "nothing": "Пока ничего не ожидается."
+  },
+  "remote": {
+    "controlledBy": "Управление с {{name}}"
   }
 }
