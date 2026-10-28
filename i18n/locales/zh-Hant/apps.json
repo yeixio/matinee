@@ -313,6 +313,15 @@
     "haveALook": "看一看",
     "stop": "停止"
   },
+  "sleep": {
+    "title": "睡眠定時",
+    "endOfEpisode": "本集結束時",
+    "endOfMovie": "本片結束時",
+    "endOfItem": "播放結束時",
+    "left": "剩餘 {{time}}",
+    "atEnd": "播放結束時停止",
+    "paused": "已被睡眠定時暫停"
+  },
   "close": "關閉",
   "trailer": {
     "trailer": "預告片",

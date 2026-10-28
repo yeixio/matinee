@@ -148,6 +148,15 @@
     "haveALook": "Dai un’occhiata",
     "stop": "Ferma"
   },
+  "sleep": {
+    "title": "Timer di spegnimento",
+    "endOfEpisode": "Fine di questo episodio",
+    "endOfMovie": "Fine di questo film",
+    "endOfItem": "Quando finisce",
+    "left": "Mancano {{time}}",
+    "atEnd": "Si ferma alla fine",
+    "paused": "In pausa per il timer"
+  },
   "goBack": "Torna indietro",
   "back": "Indietro",
   "trailer": {

@@ -148,6 +148,15 @@
     "haveALook": "Lihat-lihat",
     "stop": "Henti"
   },
+  "sleep": {
+    "title": "Pemasa tidur",
+    "endOfEpisode": "Penghujung episod ini",
+    "endOfMovie": "Penghujung filem ini",
+    "endOfItem": "Apabila ini tamat",
+    "left": "Tinggal {{time}}",
+    "atEnd": "Berhenti di penghujung",
+    "paused": "Dijeda oleh pemasa tidur"
+  },
   "goBack": "Kembali",
   "back": "Kembali",
   "trailer": {

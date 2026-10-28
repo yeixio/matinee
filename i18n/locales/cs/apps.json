@@ -328,6 +328,15 @@
     "haveALook": "Podívej se",
     "stop": "Zastavit"
   },
+  "sleep": {
+    "title": "Časovač vypnutí",
+    "endOfEpisode": "Konec této epizody",
+    "endOfMovie": "Konec tohoto filmu",
+    "endOfItem": "Až to skončí",
+    "left": "Zbývá {{time}}",
+    "atEnd": "Zastaví se na konci",
+    "paused": "Pozastaveno časovačem"
+  },
   "close": "Zavřít",
   "trailer": {
     "trailer": "Upoutávka",

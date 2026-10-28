@@ -148,6 +148,15 @@
     "haveALook": "Kurkista",
     "stop": "Lopeta"
   },
+  "sleep": {
+    "title": "Uniajastin",
+    "endOfEpisode": "Tämän jakson loppu",
+    "endOfMovie": "Tämän elokuvan loppu",
+    "endOfItem": "Kun tämä loppuu",
+    "left": "{{time}} jäljellä",
+    "atEnd": "Pysähtyy lopussa",
+    "paused": "Uniajastin keskeytti toiston"
+  },
   "goBack": "Palaa",
   "back": "Takaisin",
   "trailer": {

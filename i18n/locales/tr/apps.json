@@ -318,6 +318,15 @@
     "haveALook": "Bir göz at",
     "stop": "Durdur"
   },
+  "sleep": {
+    "title": "Uyku zamanlayıcısı",
+    "endOfEpisode": "Bu bölümün sonu",
+    "endOfMovie": "Bu filmin sonu",
+    "endOfItem": "Bu bittiğinde",
+    "left": "{{time}} kaldı",
+    "atEnd": "Sonunda durur",
+    "paused": "Uyku zamanlayıcısı duraklattı"
+  },
   "close": "Kapat",
   "trailer": {
     "trailer": "Fragman",

@@ -148,6 +148,15 @@
     "haveALook": "Zobacz",
     "stop": "Zatrzymaj"
   },
+  "sleep": {
+    "title": "Wyłącznik czasowy",
+    "endOfEpisode": "Koniec tego odcinka",
+    "endOfMovie": "Koniec tego filmu",
+    "endOfItem": "Gdy to się skończy",
+    "left": "Zostało {{time}}",
+    "atEnd": "Zatrzyma się na końcu",
+    "paused": "Wstrzymano przez wyłącznik czasowy"
+  },
   "goBack": "Wróć",
   "back": "Wstecz",
   "trailer": {

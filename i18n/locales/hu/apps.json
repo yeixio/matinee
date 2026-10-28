@@ -318,6 +318,15 @@
     "haveALook": "Nézz bele",
     "stop": "Leállítás"
   },
+  "sleep": {
+    "title": "Elalvási időzítő",
+    "endOfEpisode": "Az epizód végén",
+    "endOfMovie": "A film végén",
+    "endOfItem": "Amikor ez véget ér",
+    "left": "Még {{time}}",
+    "atEnd": "A végén megáll",
+    "paused": "Az elalvási időzítő szüneteltette"
+  },
   "close": "Bezárás",
   "trailer": {
     "trailer": "Előzetes",

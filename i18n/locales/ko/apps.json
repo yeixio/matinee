@@ -313,6 +313,15 @@
     "haveALook": "둘러보기",
     "stop": "정지"
   },
+  "sleep": {
+    "title": "취침 타이머",
+    "endOfEpisode": "이 에피소드가 끝날 때",
+    "endOfMovie": "이 영화가 끝날 때",
+    "endOfItem": "재생이 끝날 때",
+    "left": "{{time}} 남음",
+    "atEnd": "끝나면 정지",
+    "paused": "취침 타이머로 일시정지됨"
+  },
   "close": "닫기",
   "trailer": {
     "trailer": "예고편",
