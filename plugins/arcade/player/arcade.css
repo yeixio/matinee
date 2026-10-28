@@ -136,6 +136,8 @@ dd {
    takes the other one, and fades while the game is played. */
 #bar {
   position: fixed;
+  /* Above the game's canvas, however SDL styles it. */
+  z-index: 1;
   top: 1rem;
   inset-inline-end: 1rem;
   display: flex;
