@@ -23,6 +23,10 @@ func TestTXT(t *testing.T) {
 	if !slices.Contains(got, "home=1") || !slices.Contains(got, "url=https://matinee.example.com") {
 		t.Fatalf("with a home port: %q", got)
 	}
+	got = Announcement{Port: 7171, Version: "1.2.0", UUID: "0f8fad5b-d9cb-469f-a165-70867728950e"}.TXT()
+	if !slices.Contains(got, "id=0f8fad5b-d9cb-469f-a165-70867728950e") {
+		t.Fatalf("with an id: %q", got)
+	}
 }
 
 func TestHomeInterfacesSkipContainersAndVPNs(t *testing.T) {

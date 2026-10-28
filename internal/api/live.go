@@ -2,6 +2,7 @@ package api
 
 import (
 	"context"
+	"crypto/rand"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -359,6 +360,24 @@ func (s *Server) events(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 	}
+}
+
+const settingUUID = "server_uuid"
+
+// ServerUUID is this server's own id, made up the first time it runs. It
+// stays the same when the server is renamed or moves.
+func ServerUUID(ctx context.Context, db *store.Store) (string, error) {
+	id, err := db.Setting(ctx, settingUUID)
+	if err != nil || id != "" {
+		return id, err
+	}
+	b := make([]byte, 16)
+	if _, err := rand.Read(b); err != nil {
+		return "", err
+	}
+	b[6], b[8] = b[6]&0x0f|0x40, b[8]&0x3f|0x80
+	id = fmt.Sprintf("%x-%x-%x-%x-%x", b[0:4], b[4:6], b[6:8], b[8:10], b[10:])
+	return id, db.SetSetting(ctx, settingUUID, id)
 }
 
 // live is the server's hub; tests and servers that didn't set one get

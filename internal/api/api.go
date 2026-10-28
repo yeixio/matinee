@@ -50,6 +50,9 @@ type Server struct {
 	Log          *slog.Logger
 	MediaRoot    string // where the folder picker starts; empty means /
 	Name         string // what the apps call this server
+	// UUID names this server for good, whatever its name or address (see
+	// ServerUUID); Home Assistant tells servers apart by it.
+	UUID string
 	// TrailerSource lists trailers online; nil, or TMDB without a key,
 	// offers none.
 	TrailerSource TrailerSource

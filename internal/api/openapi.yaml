@@ -2393,6 +2393,7 @@ components:
     ServerInfo:
       type: object
       properties:
+        uuid: { type: string, description: "This server's own id, which never changes. Home Assistant tells servers apart by it." }
         product: { type: string, const: matinee }
         version: { type: string }
         apiVersion: { type: integer }
