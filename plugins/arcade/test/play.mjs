@@ -119,7 +119,9 @@ try {
     const el = document.getElementById('status')
     new MutationObserver(() => el.textContent && console.log('status: ' + el.textContent)).observe(el, { childList: true, characterData: true, subtree: true })
   })
-  await player().locator('#save').click({ force: true })
+  // A pointer click can land on the game, which sits over the bar while
+  // it plays, so press the button itself.
+  await player().evaluate(() => document.getElementById('save').click())
   await page.waitForFunction((key) => window.storage.get(key)?.byteLength > 0, `states/${game}/resume.sta`, { timeout: 20_000 })
   check(true, 'a saved state was kept')
 
