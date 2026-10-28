@@ -148,6 +148,15 @@
     "haveALook": "Tag et kig",
     "stop": "Stop"
   },
+  "sleep": {
+    "title": "Sovetimer",
+    "endOfEpisode": "Slutningen af dette afsnit",
+    "endOfMovie": "Slutningen af denne film",
+    "endOfItem": "Når dette slutter",
+    "left": "{{time}} tilbage",
+    "atEnd": "Stopper ved slutningen",
+    "paused": "Sat på pause af sovetimeren"
+  },
   "goBack": "Gå tilbage",
   "back": "Tilbage",
   "trailer": {

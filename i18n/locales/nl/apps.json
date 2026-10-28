@@ -318,6 +318,15 @@
     "haveALook": "Even kijken",
     "stop": "Stoppen"
   },
+  "sleep": {
+    "title": "Slaaptimer",
+    "endOfEpisode": "Einde van deze aflevering",
+    "endOfMovie": "Einde van deze film",
+    "endOfItem": "Als dit afloopt",
+    "left": "Nog {{time}}",
+    "atEnd": "Stopt aan het einde",
+    "paused": "Gepauzeerd door de slaaptimer"
+  },
   "close": "Sluiten",
   "trailer": {
     "trailer": "Trailer",

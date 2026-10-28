@@ -148,6 +148,15 @@
     "haveALook": "Dar uma olhada",
     "stop": "Parar"
   },
+  "sleep": {
+    "title": "Timer para dormir",
+    "endOfEpisode": "Fim deste episódio",
+    "endOfMovie": "Fim deste filme",
+    "endOfItem": "Quando isto acabar",
+    "left": "Faltam {{time}}",
+    "atEnd": "Para no final",
+    "paused": "Pausado pelo timer"
+  },
   "goBack": "Voltar",
   "back": "Voltar",
   "trailer": {

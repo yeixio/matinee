@@ -148,6 +148,15 @@
     "haveALook": "Have a look",
     "stop": "Stop"
   },
+  "sleep": {
+    "title": "Sleep timer",
+    "endOfEpisode": "End of this episode",
+    "endOfMovie": "End of this movie",
+    "endOfItem": "When this ends",
+    "left": "{{time}} left",
+    "atEnd": "Stops at the end",
+    "paused": "Paused by the sleep timer"
+  },
   "goBack": "Go back",
   "back": "Back",
   "trailer": {

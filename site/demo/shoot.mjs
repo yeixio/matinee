@@ -150,6 +150,11 @@ try {
     await shot(page, 'player')
     await page.getByRole('button', { name: 'Subtitles' }).click()
     await shot(page, 'player-subtitles')
+    await page.mouse.click(700, 300) // closes the menu, and pauses
+    await page.getByRole('button', { name: 'Sleep timer' }).click()
+    await page.getByRole('menuitemradio', { name: '30 minutes' }).click()
+    await page.getByRole('button', { name: /^Sleep timer/ }).click()
+    await shot(page, 'player-sleep')
 
     // Up next: an episode just before its end.
     await page.goto(`${origin}/watch/${eps[3].id}`)

@@ -53,3 +53,17 @@ The TV app has a layout made for the couch and a remote: tabs along the top, big
 On Apple TV, the **top shelf** (the banner above Matinee's icon on the home screen) shows your Continue watching, watch list and Recently added. Select one to open it, or press Play to start it.
 
 Android TV and Google TV install the same app as Android phones, from Google Play.
+
+<!-- since: v0.1.1 -->
+## Sleep timer
+
+The apps have the same [sleep timer](/docs/watching/playing/#sleep-timer) as the browser: a set number of minutes, or the end of this episode or movie, then the sound fades out and playback pauses.
+
+- **On a phone or tablet**, tap the moon at the top of the player, next to the title.
+- **On a TV**, press down on the remote while the player's controls show, then pick a time. The moon at the bottom of the controls shows the time left.
+
+![The sleep timer's choices on a TV](../images/app-tv-sleep.webp)
+
+Once the timer pauses playback, the phone or TV is free to lock or go to sleep by itself.
+
+<!-- /since -->

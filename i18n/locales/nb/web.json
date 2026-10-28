@@ -148,6 +148,15 @@
     "haveALook": "Ta en titt",
     "stop": "Stopp"
   },
+  "sleep": {
+    "title": "Innsovningstidtaker",
+    "endOfEpisode": "Slutten av denne episoden",
+    "endOfMovie": "Slutten av denne filmen",
+    "endOfItem": "Når dette er ferdig",
+    "left": "{{time}} igjen",
+    "atEnd": "Stopper på slutten",
+    "paused": "Satt på pause av innsovningstidtakeren"
+  },
   "goBack": "Gå tilbake",
   "back": "Tilbake",
   "trailer": {

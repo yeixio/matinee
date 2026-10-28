@@ -148,6 +148,15 @@
     "haveALook": "のぞいてみる",
     "stop": "停止"
   },
+  "sleep": {
+    "title": "スリープタイマー",
+    "endOfEpisode": "このエピソードの終わり",
+    "endOfMovie": "この映画の終わり",
+    "endOfItem": "再生が終わったら",
+    "left": "残り {{time}}",
+    "atEnd": "終わりで停止",
+    "paused": "スリープタイマーで一時停止しました"
+  },
   "goBack": "戻る",
   "back": "戻る",
   "trailer": {

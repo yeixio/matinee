@@ -323,6 +323,15 @@
     "haveALook": "Aruncă o privire",
     "stop": "Oprește"
   },
+  "sleep": {
+    "title": "Temporizator de somn",
+    "endOfEpisode": "Finalul acestui episod",
+    "endOfMovie": "Finalul acestui film",
+    "endOfItem": "Când se termină",
+    "left": "Mai sunt {{time}}",
+    "atEnd": "Se oprește la final",
+    "paused": "Pus pe pauză de temporizator"
+  },
   "close": "Închide",
   "trailer": {
     "trailer": "Trailer",

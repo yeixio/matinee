@@ -148,6 +148,15 @@
     "haveALook": "Ta en titt",
     "stop": "Stoppa"
   },
+  "sleep": {
+    "title": "Insomningstimer",
+    "endOfEpisode": "Slutet av det här avsnittet",
+    "endOfMovie": "Slutet av den här filmen",
+    "endOfItem": "När det här tar slut",
+    "left": "{{time}} kvar",
+    "atEnd": "Stannar vid slutet",
+    "paused": "Pausad av insomningstimern"
+  },
   "goBack": "Gå tillbaka",
   "back": "Tillbaka",
   "trailer": {
