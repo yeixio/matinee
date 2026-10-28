@@ -114,6 +114,11 @@ try {
   await page.screenshot({ path: screenshot })
   check(lit(await readFile(screenshot)) > 0.01, 'the game draws something')
 
+  // The player's status line clears itself, so log what it says.
+  await player().evaluate(() => {
+    const el = document.getElementById('status')
+    new MutationObserver(() => el.textContent && console.log('status: ' + el.textContent)).observe(el, { childList: true, characterData: true, subtree: true })
+  })
   await player().locator('#save').click({ force: true })
   await page.waitForFunction((key) => window.storage.get(key)?.byteLength > 0, `states/${game}/resume.sta`, { timeout: 20_000 })
   check(true, 'a saved state was kept')
