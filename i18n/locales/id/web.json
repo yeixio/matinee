@@ -148,6 +148,15 @@
     "haveALook": "Lihat-lihat",
     "stop": "Berhenti"
   },
+  "sleep": {
+    "title": "Timer tidur",
+    "endOfEpisode": "Akhir episode ini",
+    "endOfMovie": "Akhir film ini",
+    "endOfItem": "Saat ini selesai",
+    "left": "Sisa {{time}}",
+    "atEnd": "Berhenti di akhir",
+    "paused": "Dijeda oleh timer tidur"
+  },
   "goBack": "Kembali",
   "back": "Kembali",
   "trailer": {

@@ -148,6 +148,15 @@
     "haveALook": "הצצה",
     "stop": "עצירה"
   },
+  "sleep": {
+    "title": "טיימר שינה",
+    "endOfEpisode": "סוף הפרק הזה",
+    "endOfMovie": "סוף הסרט הזה",
+    "endOfItem": "כשזה ייגמר",
+    "left": "נותרו {{time}}",
+    "atEnd": "ייעצר בסוף",
+    "paused": "הושהה על ידי טיימר השינה"
+  },
   "goBack": "חזרה",
   "back": "חזרה",
   "trailer": {

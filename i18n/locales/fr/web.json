@@ -148,6 +148,15 @@
     "haveALook": "Jeter un œil",
     "stop": "Arrêter"
   },
+  "sleep": {
+    "title": "Minuterie de sommeil",
+    "endOfEpisode": "Fin de cet épisode",
+    "endOfMovie": "Fin de ce film",
+    "endOfItem": "À la fin",
+    "left": "Encore {{time}}",
+    "atEnd": "S’arrête à la fin",
+    "paused": "Mis en pause par la minuterie"
+  },
   "goBack": "Retour",
   "back": "Retour",
   "trailer": {

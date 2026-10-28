@@ -313,6 +313,15 @@
     "haveALook": "Xem thử",
     "stop": "Dừng"
   },
+  "sleep": {
+    "title": "Hẹn giờ ngủ",
+    "endOfEpisode": "Hết tập này",
+    "endOfMovie": "Hết phim này",
+    "endOfItem": "Khi nội dung này kết thúc",
+    "left": "Còn {{time}}",
+    "atEnd": "Dừng khi kết thúc",
+    "paused": "Đã tạm dừng bởi hẹn giờ ngủ"
+  },
   "close": "Đóng",
   "trailer": {
     "trailer": "Trailer",

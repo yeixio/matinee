@@ -148,6 +148,15 @@
     "haveALook": "Echar un vistazo",
     "stop": "Detener"
   },
+  "sleep": {
+    "title": "Temporizador",
+    "endOfEpisode": "Final de este episodio",
+    "endOfMovie": "Final de esta película",
+    "endOfItem": "Cuando esto termine",
+    "left": "Quedan {{time}}",
+    "atEnd": "Se detiene al final",
+    "paused": "Pausado por el temporizador"
+  },
   "goBack": "Volver",
   "back": "Atrás",
   "trailer": {

@@ -1,6 +1,6 @@
 ---
 title: Playing
-description: The player's controls and shortcuts, subtitles, resuming, the next-episode countdown, and how Matinee gets any file to play.
+description: The player's controls and shortcuts, subtitles, resuming, the next-episode countdown, the sleep timer, and how Matinee gets any file to play.
 sidebar:
   order: 4
 ---
@@ -48,6 +48,18 @@ You choose how this works for you under **Settings → Playback**: turn off **Pl
 
 ![The Playback settings](../images/playback.webp)
 
+<!-- since: v0.1.1 -->
+## Sleep timer
+
+The moon button in the player's controls sets a sleep timer: **15**, **30**, **45**, **60** or **90 minutes**, or the **end of this episode** (or movie). The button shows the time left while it runs. Pick **Off** to cancel it, or pick a time again to start over from now.
+
+![The sleep timer menu, set to 30 minutes](../images/player-sleep.webp)
+
+Over its last 30 seconds the sound fades out, then the player pauses where you are, so you pick up from there next time. A timer keeps running into the next episode when [Up next](#up-next) plays it. Set to the end of an episode, it plays no next episode: the episode counts as watched and the player closes. Leaving the player turns the timer off.
+
+The [phone and TV apps](/docs/apps/phone-and-tv/#sleep-timer) have the same timer.
+
+<!-- /since -->
 ## How any file gets to play
 
 Browsers and devices can't play every kind of video file, so Matinee does whatever is cheapest for each one:

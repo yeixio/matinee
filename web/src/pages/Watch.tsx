@@ -1,6 +1,6 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import type Hls from 'hls.js'
-import { ArrowLeft, Maximize, Minimize, Pause, Play, RotateCcw, RotateCw, Volume2, VolumeX } from 'lucide-react'
+import { ArrowLeft, Maximize, Minimize, Moon, Pause, Play, RotateCcw, RotateCw, Volume2, VolumeX } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -12,6 +12,8 @@ import { canDirectPlay } from '../player/direct'
 import { defaultTrack, savePreference, SubtitleMenu, SubtitleOverlay } from '../player/Subtitles'
 import { UpNextCard, type UpNextMode } from '../player/UpNext'
 import { COUNTDOWN_SECONDS, stillWatching, upNextAt } from '../player/autoplay'
+import { sleepTimer, sleepVolume, useSleep } from '../player/sleep'
+import { SleepMenu } from '../player/SleepMenu'
 import { parseVTT, type Cue } from '../player/vtt'
 import { PluginPlayer } from '../player/PluginPlayer'
 import { playerFor, usePlayers } from '../plugins'
@@ -113,6 +115,9 @@ function Player({ id }: { id: number }) {
   const cardClosed = useRef(false)
   // Set once this episode is done with, so leaving doesn't save a position.
   const finished = useRef(false)
+  // Sleep timer: fades the sound out, then pauses. "End" stops auto-play.
+  const { sleep, left: sleepLeft } = useSleep()
+  const [slept, setSlept] = useState(false)
 
   const duration = item?.durationMs ? item.durationMs / 1000 : 0
   const position = useCallback(() => offset.current + (video.current?.currentTime ?? 0), [])
@@ -222,7 +227,25 @@ function Player({ id }: { id: number }) {
     else startHls(position(), burn)
   }
 
-  useEffect(() => () => hls.current?.destroy(), [])
+  useEffect(
+    () => () => {
+      hls.current?.destroy()
+      sleepTimer.leave()
+    },
+    [],
+  )
+
+  useEffect(() => {
+    const el = video.current
+    if (!el) return
+    el.volume = sleepVolume(sleepLeft)
+    if (sleepLeft === 0) {
+      sleepTimer.set(undefined)
+      el.pause()
+      el.volume = 1
+      setSlept(true)
+    }
+  }, [sleepLeft])
 
   // Save progress every 10 seconds and when leaving.
   useEffect(() => {
@@ -295,7 +318,7 @@ function Player({ id }: { id: number }) {
     else document.documentElement.requestFullscreen()
   }
 
-  const autoPlay = prefs?.autoPlay ?? true
+  const autoPlay = (prefs?.autoPlay ?? true) && sleep !== 'end'
   const at = upNextAt(duration, item?.mediaInfo?.creditsMs)
 
   // Done with this episode: mark it watched and play the next.
@@ -305,6 +328,7 @@ function Player({ id }: { id: number }) {
       if (!item || !next || finished.current) return
       finished.current = true
       if (auto) stillWatching.autoPlayed()
+      sleepTimer.carryOver()
       api.setProgress(item.id, 0, true).catch(() => {})
       navigate(`/watch/${next.id}`, { replace: true })
     },
@@ -330,10 +354,10 @@ function Player({ id }: { id: number }) {
       if (stillWatching.shouldAsk()) setCard('still')
       else if (prefs?.binge) playNext(true)
       else setCard('countdown')
-    } else if (upNext.similar && !cardClosed.current) {
+    } else if (upNext.similar && !cardClosed.current && sleep !== 'end') {
       setCard('similar')
     }
-  }, [item, at, upNext, time, card, autoPlay, prefs, playNext])
+  }, [item, at, upNext, time, card, autoPlay, prefs, playNext, sleep])
 
   // Count down while the video plays.
   useEffect(() => {
@@ -348,6 +372,7 @@ function Player({ id }: { id: number }) {
 
   const ended = () => {
     if (!item) return
+    if (sleep === 'end') sleepTimer.set(undefined)
     if (upNext?.next && autoPlay) {
       if (stillWatching.shouldAsk()) setCard('still')
       else playNext(true)
@@ -423,6 +448,7 @@ function Player({ id }: { id: number }) {
         onTimeUpdate={() => setTime(position())}
         onPlay={() => {
           setPaused(false)
+          setSlept(false)
           poke()
         }}
         onPause={() => {
@@ -456,6 +482,15 @@ function Player({ id }: { id: number }) {
             } else toDetails()
           }}
         />
+      )}
+
+      {slept && paused && !error && (
+        <div className="pointer-events-none absolute inset-x-0 top-1/2 flex -translate-y-1/2 justify-center p-6">
+          <div className="flex items-center gap-2 rounded-full bg-black/70 px-4 py-2 text-sm text-white/80 backdrop-blur">
+            <Moon className="size-4 text-accent" />
+            {tr('sleep.paused')}
+          </div>
+        </div>
       )}
 
       {(waiting || !item) && !error && (
@@ -527,6 +562,17 @@ function Player({ id }: { id: number }) {
             </div>
             <div className="ms-auto flex items-center gap-2">
               {mode === 'hls' && <span className="hidden rounded bg-white/10 px-2 py-0.5 text-xs text-white/60 sm:inline">{tr('player.converting')}</span>}
+              {item && (
+                <SleepMenu
+                  sleep={sleep}
+                  left={sleepLeft}
+                  kind={item.kind}
+                  onOpenChange={(open) => {
+                    menuOpen.current = open
+                    poke()
+                  }}
+                />
+              )}
               {!!item?.subtitles?.length && (
                 <SubtitleMenu
                   tracks={item.subtitles}
