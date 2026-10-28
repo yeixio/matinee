@@ -68,6 +68,7 @@ export async function startServer() {
       MATINEE_SCAN_INTERVAL: '0',
       MATINEE_MEDIA_ROOT: media,
       MATINEE_SERVER_NAME: 'Home theater',
+      MATINEE_PLUGIN_CATALOG: `http://127.0.0.1:${tmdbPort}/plugins.json`,
     },
     stdio: ['ignore', 'ignore', process.env.DEBUG ? 'inherit' : 'ignore'],
   })

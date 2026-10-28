@@ -3,6 +3,7 @@ package store
 import (
 	"context"
 	"database/sql"
+	"encoding/json"
 	"errors"
 	"strings"
 	"unicode"
@@ -57,6 +58,22 @@ type Item struct {
 	// SubtitleStreams is the probed embedded subtitle streams as JSON, only
 	// set when upserting a file. See Store.SubtitleStreams.
 	SubtitleStreams string `json:"-"`
+
+	// Facts are labelled lines a plugin found for an item of a kind it
+	// adds, such as Manufacturer: Namco, shown on its page.
+	Facts []Fact `json:"facts,omitempty"`
+	// PluginData is what a plugin keeps with an item of a kind it adds, as
+	// JSON, for the plugin's player.
+	PluginData json.RawMessage `json:"pluginData,omitempty"`
+	// Details are applied with ApplyMetadata after a scan files the item,
+	// when the library kind already knows them (a plugin's kinds can).
+	Details *Metadata `json:"-"`
+}
+
+// Fact is one labelled line about an item.
+type Fact struct {
+	Label string `json:"label"`
+	Value string `json:"value"`
 }
 
 // itemCols selects an item plus the given user's progress and whether it's
@@ -73,7 +90,8 @@ const itemCols = `
 	EXISTS (SELECT 1 FROM watchlist wl WHERE wl.user_id = me.id AND wl.item_id = i.id),
 	COALESCE(i.media_tags, ''),
 	COALESCE(i.genres, ''),
-	CASE WHEN i.kind = 'episode' THEN (SELECT se.parent_id FROM items se WHERE se.id = i.parent_id) END`
+	CASE WHEN i.kind = 'episode' THEN (SELECT se.parent_id FROM items se WHERE se.id = i.parent_id) END,
+	COALESCE(i.facts, ''), COALESCE(i.plugin_data, '')`
 
 const itemFrom = ` FROM (SELECT CAST(? AS BIGINT) AS id) me CROSS JOIN items i LEFT JOIN progress p ON p.item_id = i.id AND p.user_id = me.id`
 
@@ -88,12 +106,12 @@ func scanItem(r scanner) (Item, error) {
 	var seasonIdx sql.NullInt64
 	var showTitle sql.NullString
 	var showID sql.NullInt64
-	var tags, genres string
+	var tags, genres, facts, data string
 	err := r.Scan(&it.ID, &it.LibraryID, &parent, &it.Kind, &it.Title, &year, &idx, &disc,
 		&dur, &it.Container, &it.VideoCodec, &it.AudioCodec, &w, &h, &it.AddedAt, &it.Path, &it.Size, &it.Mtime,
 		&it.ChildCount, &it.PositionMs, &it.Played,
 		&it.Overview, &rating, &it.Poster, &it.Backdrop, &tmdb, &it.MetaAt,
-		&showTitle, &seasonIdx, &it.OnWatchList, &tags, &genres, &showID)
+		&showTitle, &seasonIdx, &it.OnWatchList, &tags, &genres, &showID, &facts, &data)
 	if err != nil {
 		return it, err
 	}
@@ -116,6 +134,12 @@ func scanItem(r scanner) (Item, error) {
 	it.Playable = it.Path != ""
 	it.MediaTags = splitTags(tags)
 	it.HasPoster, it.HasBackdrop = it.Poster != "", it.Backdrop != ""
+	if facts != "" {
+		json.Unmarshal([]byte(facts), &it.Facts)
+	}
+	if data != "" {
+		it.PluginData = json.RawMessage(data)
+	}
 	return it, nil
 }
 
@@ -309,8 +333,9 @@ func (s *Store) UpsertFile(ctx context.Context, it Item) (int64, error) {
 	var id int64
 	err := s.db.QueryRowContext(ctx, `
 		INSERT INTO items (library_id, parent_id, kind, title, sort_title, year, index_number, disc_number,
-			path, size, mtime, duration_ms, container, video_codec, audio_codec, width, height, poster, backdrop, subtitle_streams, added_at)
-		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			path, size, mtime, duration_ms, container, video_codec, audio_codec, width, height, poster, backdrop, subtitle_streams,
+			facts, plugin_data, added_at)
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 		ON CONFLICT (path) DO UPDATE SET
 			library_id = excluded.library_id, parent_id = excluded.parent_id, kind = excluded.kind,
 			title = excluded.title, sort_title = excluded.sort_title, year = excluded.year,
@@ -318,12 +343,14 @@ func (s *Store) UpsertFile(ctx context.Context, it Item) (int64, error) {
 			size = excluded.size, mtime = excluded.mtime, duration_ms = excluded.duration_ms,
 			container = excluded.container, video_codec = excluded.video_codec, audio_codec = excluded.audio_codec,
 			width = excluded.width, height = excluded.height, subtitle_streams = excluded.subtitle_streams,
+			facts = excluded.facts, plugin_data = excluded.plugin_data,
 			media_info = NULL, media_tags = NULL, -- the file changed; analyzed again soon
 			poster = COALESCE(excluded.poster, items.poster), backdrop = COALESCE(excluded.backdrop, items.backdrop)
 		RETURNING id`,
 		it.LibraryID, it.ParentID, it.Kind, it.Title, SortTitle(it.Title), it.Year, it.IndexNumber, it.DiscNumber,
 		it.Path, it.Size, it.Mtime, it.DurationMs, nullStr(it.Container), nullStr(it.VideoCodec), nullStr(it.AudioCodec),
-		it.Width, it.Height, nullStr(it.Poster), nullStr(it.Backdrop), nullStr(it.SubtitleStreams), now()).Scan(&id)
+		it.Width, it.Height, nullStr(it.Poster), nullStr(it.Backdrop), nullStr(it.SubtitleStreams),
+		nullJSON(it.Facts), nullStr(string(it.PluginData)), now()).Scan(&id)
 	return id, err
 }
 
@@ -394,6 +421,8 @@ type Metadata struct {
 	Backdrop string // URL
 	// Genres of a movie or show; nil when the provider doesn't say.
 	Genres []string
+	// Facts are labelled lines from a plugin; nil keeps what the item has.
+	Facts []Fact
 }
 
 // ApplyMetadata stores a provider match (nil for no match) without
@@ -407,14 +436,23 @@ func (s *Store) ApplyMetadata(ctx context.Context, id int64, m *Metadata) error 
 		UPDATE items SET
 			tmdb_id = ?, mbid = ?, overview = ?, rating = ?,
 			year = COALESCE(year, ?), poster = COALESCE(poster, ?), backdrop = COALESCE(backdrop, ?),
-			genres = COALESCE(?, genres),
+			genres = COALESCE(?, genres), facts = COALESCE(?, facts),
 			title = CASE WHEN kind = 'episode' AND ? != '' AND title LIKE 'Episode %' THEN ? ELSE title END,
 			meta_at = ?, details_at = NULL
 		WHERE id = ?`,
 		nullInt64(m.TMDBID), nullStr(m.MBID), nullStr(m.Overview), nullFloat(m.Rating), nullInt(m.Year), nullStr(m.Poster), nullStr(m.Backdrop),
-		encodeGenres(m.Genres),
+		encodeGenres(m.Genres), nullJSON(m.Facts),
 		m.Title, m.Title, now(), id)
 	return err
+}
+
+// nullJSON encodes v as JSON, or NULL when it's empty.
+func nullJSON[T any](v []T) any {
+	if len(v) == 0 {
+		return nil
+	}
+	b, _ := json.Marshal(v)
+	return string(b)
 }
 
 func nullInt(n int) any {

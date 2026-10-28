@@ -1,0 +1,16 @@
+{
+  "id": "testkit",
+  "name": "Test kit",
+  "version": "1.0.0",
+  "api": 1,
+  "description": "Exercises the plugin API in Matinee's tests.",
+  "server": "server.wasm",
+  "libraryKinds": [
+    {"name": "games", "label": "Games", "extensions": [".game"], "itemKinds": ["game", "system"]}
+  ],
+  "metadata": ["game"],
+  "events": ["item.added", "library.scanned", "playback.started", "playback.stopped"],
+  "players": [{"itemKinds": ["game"], "entry": "player/index.html"}],
+  "settings": [{"key": "greeting", "label": "Greeting"}, {"key": "token", "label": "Token", "secret": true}],
+  "permissions": {"network": ["example.test"]}
+}

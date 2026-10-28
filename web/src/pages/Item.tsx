@@ -140,6 +140,7 @@ function Header({ item, kids }: { item: ItemDetail; kids?: Item[] }) {
           )}
 
           <KeyPeople item={item} />
+          <Facts item={item} />
 
           <div className="flex flex-wrap gap-3">
             {item.playable && item.kind !== 'track' && (
@@ -265,5 +266,21 @@ function TrackList({ items }: { items: Item[] }) {
         )
       })}
     </section>
+  )
+}
+
+// Facts are labelled lines a plugin found for an item of its kinds, such as
+// who made a game.
+function Facts({ item }: { item: Item }) {
+  if (!item.facts?.length) return null
+  return (
+    <dl className="grid max-w-3xl grid-cols-[auto_1fr] gap-x-6 gap-y-1 text-sm">
+      {item.facts.map((f, i) => (
+        <div key={i} className="contents">
+          <dt className="text-muted">{f.label}</dt>
+          <dd className="text-text/85">{f.value}</dd>
+        </div>
+      ))}
+    </dl>
   )
 }

@@ -53,6 +53,9 @@ func TestMigrateFromVersion1(t *testing.T) {
 		"ALTER TABLE users DROP COLUMN display_name",
 		"ALTER TABLE users DROP COLUMN parent_id",
 		"ALTER TABLE items DROP COLUMN released",
+		"ALTER TABLE items DROP COLUMN facts",
+		"ALTER TABLE items DROP COLUMN plugin_data",
+		"DROP TABLE plugin_storage",
 		"UPDATE schema_version SET version = 1",
 	} {
 		if _, err := s.db.ExecContext(ctx, q); err != nil {

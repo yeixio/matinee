@@ -54,6 +54,18 @@ cache:
   sizeLimit: 50Gi
   medium: ""  # "Memory" puts it in RAM (counts against the memory limit)
 
+# Installed plugins (docs/guide/server/plugins.md) and what they keep. Admins
+# install them in Settings, so they go on a volume that survives restarts;
+# set enabled: false to keep them in the cache above (they're gone after a
+# restart).
+plugins:
+  persistence:
+    enabled: true
+    size: 5Gi
+    storageClass: ""
+    # Or use a claim you made yourself.
+    existingClaim: ""
+
 # Files converted for offline downloads. They take a while to make, so they
 # go on a volume that survives restarts; set enabled: false to keep them in
 # the cache above (they're remade after a restart if a device still needs one).

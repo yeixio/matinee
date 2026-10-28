@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { CalendarClock, Clapperboard, Compass, Home, Inbox, Layers, LogIn, LogOut, Music, Search, Settings, Tv } from 'lucide-react'
+import { CalendarClock, Clapperboard, Compass, Home, Inbox, Layers, LogIn, LogOut, Music, Puzzle, Search, Settings, Tv } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { NavLink, Outlet } from 'react-router-dom'
 import { api, type Library, type User } from '../api'
@@ -11,7 +11,8 @@ import { useRequestOptions } from './Arr'
 export function LibraryIcon({ kind, className = 'size-5' }: { kind: string; className?: string }) {
   if (kind === 'tv') return <Tv className={className} />
   if (kind === 'music') return <Music className={className} />
-  return <Clapperboard className={className} />
+  if (kind === 'movies') return <Clapperboard className={className} />
+  return <Puzzle className={className} /> // a plugin's kind
 }
 
 const ticket = 'M12 14H52a6 6 0 0 1 6 6v6a6 6 0 0 0 0 12v6a6 6 0 0 1-6 6H12a6 6 0 0 1-6-6v-6a6 6 0 0 0 0-12v-6a6 6 0 0 1 6-6Z'

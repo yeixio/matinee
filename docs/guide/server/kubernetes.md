@@ -2,7 +2,7 @@
 title: Kubernetes
 description: Run Matinee on Kubernetes with the Helm chart, with its bundled PostgreSQL, your media mounts, a GPU, and automatic updates.
 sidebar:
-  order: 8
+  order: 9
 ---
 
 Matinee has a Helm chart. It runs the server with a bundled PostgreSQL whose credentials are generated into a Secret on the first install, so there's nothing to set up, and it works the same under Argo CD or Flux.
@@ -54,6 +54,7 @@ kubectl create secret generic matinee-tmdb --from-literal=tmdb-api-key=your-key
 | `tmdb.existingSecret` | empty | The Secret with your TMDB key. |
 | `media` | none | Your media folders. |
 | `downloads.persistence` | on, 50Gi | Where [downloads for the apps](/docs/apps/downloads/) are prepared. Set `storageClass` or `existingClaim`. |
+| `plugins.persistence` | on, 5Gi | Where installed [plugins](/docs/server/plugins/) and what they keep live. Set `storageClass` or `existingClaim`. |
 | `postgresql.enabled` | `true` | The bundled database. To use your own, turn it off and set `database.url` or `database.existingSecret`. |
 | `discovery.*` | on | Lets the apps find the server at home; see below. |
 | `remoteAccess.*` | off | Watching away from home when the ingress only works at home; see below. |

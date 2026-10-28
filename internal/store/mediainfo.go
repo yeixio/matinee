@@ -35,7 +35,7 @@ type AnalysisFile struct {
 func (s *Store) AnalysisFiles(ctx context.Context, afterID int64, limit int) ([]AnalysisFile, error) {
 	rows, err := s.db.QueryContext(ctx, `
 		SELECT id, title, path, COALESCE(size, 0), COALESCE(mtime, 0), COALESCE(media_key, '')
-		FROM items WHERE path IS NOT NULL AND id > ? ORDER BY id LIMIT ?`, afterID, limit)
+		FROM items WHERE path IS NOT NULL AND kind IN ('movie', 'episode', 'track') AND id > ? ORDER BY id LIMIT ?`, afterID, limit)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ func (s *Store) AnalysisCounts(ctx context.Context, version int) (total, done, u
 		SELECT COUNT(*),
 			COALESCE(SUM(CASE WHEN media_key = CAST(? AS TEXT) || CAST(COALESCE(size, 0) AS TEXT) || ':' || CAST(COALESCE(mtime, 0) AS TEXT) THEN 1 ELSE 0 END), 0),
 			COALESCE(SUM(CASE WHEN media_tags = 'unreadable' THEN 1 ELSE 0 END), 0)
-		FROM items WHERE path IS NOT NULL`, "v"+strconv.Itoa(version)+":").Scan(&total, &done, &unreadable)
+		FROM items WHERE path IS NOT NULL AND kind IN ('movie', 'episode', 'track')`, "v"+strconv.Itoa(version)+":").Scan(&total, &done, &unreadable)
 	return
 }
 

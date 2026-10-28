@@ -1,0 +1,17 @@
+{{- $p := .Values.plugins.persistence }}
+{{- if and $p.enabled (not $p.existingClaim) }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "matinee.fullname" . }}-plugins
+  labels:
+    {{- include "matinee.labels" . | nindent 4 }}
+spec:
+  accessModes: [ReadWriteOnce]
+  {{- with $p.storageClass }}
+  storageClassName: {{ . | quote }}
+  {{- end }}
+  resources:
+    requests:
+      storage: {{ $p.size }}
+{{- end }}
