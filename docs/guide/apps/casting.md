@@ -26,7 +26,7 @@ Chromecast works with Chromecast devices, Google TV Streamer, and TVs with Chrom
 
 Most files play on the Chromecast as they are. Anything it can't play (MKV files, HEVC, surround audio) is converted by the server as it plays, the same way as for a browser. See [Transcoding](/docs/server/transcoding/) for what that takes.
 
-Casting isn't offered on Fire tablets, which have no Google Cast, or in the TV apps.
+Casting isn't offered in the TV apps.
 
 ## When it doesn't work
 
