@@ -152,15 +152,11 @@ func (k *libraryKind) Index(ctx context.Context, st *store.Store, f scan.File) (
 	if w == nil {
 		return store.Item{}, scan.ErrSkip
 	}
-	own := k.p.ItemKinds()
-	if !slices.Contains(k.k.ItemKinds, w.Kind) || strings.TrimSpace(w.Title) == "" {
-		return store.Item{}, fmt.Errorf("the plugin filed %q as a %q item, which its library kind doesn't have", f.Path, w.Kind)
+	if err := checkItem(w, k.k, k.p.ItemKinds()); err != nil {
+		return store.Item{}, fmt.Errorf("%s: %w", f.Path, err)
 	}
 	var parentID *int64
 	for _, pa := range w.Parents {
-		if !slices.Contains(own, pa.Kind) || strings.TrimSpace(pa.Title) == "" {
-			return store.Item{}, fmt.Errorf("the plugin put %q in a %q, which isn't one of its item kinds", f.Path, pa.Kind)
-		}
 		id, err := st.EnsureContainer(ctx, f.Library.ID, parentID, pa.Kind, clip(pa.Title, 500), nonZero(pa.Index), nonZero(pa.Year))
 		if err != nil {
 			return store.Item{}, err
@@ -179,15 +175,33 @@ func (k *libraryKind) Index(ctx context.Context, st *store.Store, f scan.File) (
 		Facts: cleanFacts(w.Facts),
 	}
 	if len(w.Data) > 0 && string(w.Data) != "null" {
-		if len(w.Data) > maxDataSize || !json.Valid(w.Data) {
-			return store.Item{}, fmt.Errorf("the plugin's data for %q is too large or not JSON", f.Path)
-		}
 		it.PluginData = w.Data
 	}
 	if d := w.wireDetails; d.Overview != "" || len(d.Genres) > 0 || d.Rating > 0 {
 		it.Details = &store.Metadata{Overview: clip(d.Overview, 10000), Genres: clipAll(d.Genres, 20), Rating: d.Rating}
 	}
 	return it, nil
+}
+
+// checkItem refuses an item a plugin filed that Matinee can't keep: one of
+// a kind its library kind doesn't have, in containers that aren't the
+// plugin's, or with too much data.
+func checkItem(w *wireItem, k LibraryKind, own []string) error {
+	if !slices.Contains(k.ItemKinds, w.Kind) {
+		return fmt.Errorf("the plugin filed it as a %q item, which library kind %s doesn't have", w.Kind, k.Name)
+	}
+	if strings.TrimSpace(w.Title) == "" {
+		return errors.New("the plugin filed it without a title")
+	}
+	for _, pa := range w.Parents {
+		if !slices.Contains(own, pa.Kind) || strings.TrimSpace(pa.Title) == "" {
+			return fmt.Errorf("the plugin put it in a %q with title %q; parents need a title and one of the plugin's item kinds", pa.Kind, pa.Title)
+		}
+	}
+	if len(w.Data) > 0 && string(w.Data) != "null" && (len(w.Data) > maxDataSize || !json.Valid(w.Data)) {
+		return errors.New("the plugin's data for it is larger than 64 KB or not JSON")
+	}
+	return nil
 }
 
 // art turns a picture the plugin named into one Matinee can show: a file

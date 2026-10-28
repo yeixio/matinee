@@ -55,4 +55,4 @@ Plugins live in the `plugins` folder of Matinee's data folder. With the [Helm ch
 
 To turn plugins off on a server altogether, set `MATINEE_PLUGINS=false` ([settings reference](/docs/server/configuration/)).
 
-Writing a plugin? See [docs/plugins.md](https://github.com/yeixio/matinee/blob/main/docs/plugins.md) in the Matinee repository.
+Writing a plugin? Start with [How plugins work](/docs/plugins/overview/) and [Your first plugin](/docs/plugins/first-plugin/).

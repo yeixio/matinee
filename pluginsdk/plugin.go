@@ -23,7 +23,7 @@
 // and only the hosts its manifest lists.
 //
 // The wire format between Matinee and a plugin is JSON over the plugin's
-// memory; docs/plugins.md describes it for plugins written in other
+// memory; docs/guide/plugins/server.md describes it for plugins written in other
 // languages.
 package plugin
 

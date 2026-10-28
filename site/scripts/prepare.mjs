@@ -65,7 +65,11 @@ notes.forEach((v, i) => {
 })
 
 // The sidebar comes from the guide's sidebar.json, plus the release notes.
-const sidebar = JSON.parse(readFileSync(path.join(out, 'sidebar.json'), 'utf8'))
+// A section whose pages all came after this release is left out.
+const hasPages = (dir) => existsSync(dir) && walk(dir).some((f) => /\.mdx?$/.test(f))
+const sidebar = JSON.parse(readFileSync(path.join(out, 'sidebar.json'), 'utf8')).filter(
+  (group) => !group.items?.every((i) => i.autogenerate && !hasPages(path.join(out, i.autogenerate.directory.replace(/^docs\/?/, '')))),
+)
 if (notes.length) sidebar.push({ label: 'Release notes', collapsed: true, items: [{ autogenerate: { directory: 'docs/releases' } }] })
 writeFileSync(path.join(out, 'sidebar.json'), JSON.stringify(sidebar, null, 2))
 console.log(`docs ${version}: ${walk(out).filter((f) => /\.mdx?$/.test(f)).length} pages`)

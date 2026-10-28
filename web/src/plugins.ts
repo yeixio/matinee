@@ -1,4 +1,4 @@
-// Plugins' players (docs/plugins.md). A player is a page from the plugin,
+// Plugins' players (docs/guide/plugins). A player is a page from the plugin,
 // shown in a sandboxed frame with no origin of its own, so it can't use the
 // session. It asks the web player for what it needs with postMessage, and
 // answer() does only these few things for it, as whoever is watching.

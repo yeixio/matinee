@@ -337,7 +337,7 @@ export type Item = {
   pluginData?: Record<string, unknown>
 }
 
-// A plugin as Settings shows it (internal/plugin, docs/plugins.md).
+// A plugin as Settings shows it (internal/plugin, docs/guide/plugins).
 export type Plugin = {
   id: string
   name: string

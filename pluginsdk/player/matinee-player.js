@@ -57,7 +57,7 @@ export function connect() {
           put: (key, value) => call('storage.put', { key, value }, value instanceof ArrayBuffer ? [value] : []),
           delete: (key) => call('storage.delete', { key }),
         },
-        // Where the person is, for Continue Watching; finished marks it played.
+        // Saves how far the person got; finished marks the item played.
         progress: (positionMs, finished = false) => call('progress', { positionMs, finished }),
         exit: () => call('exit'),
       })

@@ -54,6 +54,16 @@
     ]
   },
   {
+    "label": "Building plugins",
+    "items": [
+      {
+        "autogenerate": {
+          "directory": "docs/plugins"
+        }
+      }
+    ]
+  },
+  {
     "label": "Help",
     "items": [
       {

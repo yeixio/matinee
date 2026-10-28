@@ -1,0 +1,32 @@
+// Command {{.ID}} is the server part of the {{.Name}} plugin for Matinee: it
+// tells Matinee what each file in a {{.Name}} library is.
+package main
+
+import (
+	"path/filepath"
+	"strings"
+
+	plugin "github.com/yeixio/matinee/pluginsdk"
+)
+
+func init() {
+	plugin.Register(plugin.Handlers{Index: index})
+}
+
+// main is never called: Matinee calls the handlers registered above.
+func main() {}
+
+// index files one file of a library. Here every file is an item named
+// after it; return an empty result to skip a file.
+func index(r plugin.IndexRequest) (plugin.IndexResult, error) {
+	name := strings.TrimSuffix(filepath.Base(r.Path), filepath.Ext(r.Path))
+	return plugin.IndexResult{Item: &plugin.Item{
+		Kind:  "{{.Item}}",
+		Title: name,
+		Details: plugin.Details{
+			Facts: []plugin.Fact{{"{{"}}Label: "File", Value: filepath.Base(r.Path){{"}}"}},
+		},
+		// The player gets this with the item.
+		Data: map[string]any{"size": r.Size},
+	}}, nil
+}

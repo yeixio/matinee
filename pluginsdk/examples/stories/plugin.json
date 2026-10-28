@@ -1,0 +1,23 @@
+{
+  "id": "stories",
+  "name": "Stories",
+  "version": "1.0.0",
+  "api": 1,
+  "description": "Read short stories kept as text and Markdown files.",
+  "author": "The Matinee authors",
+  "license": "MIT",
+  "homepage": "https://matinee.yeix.io/docs/plugins/first-plugin/",
+  "icon": "icon.png",
+  "server": "server.wasm",
+  "libraryKinds": [
+    {
+      "name": "stories",
+      "label": "Stories",
+      "description": "Text and Markdown files, one story each. A folder of them is a book.",
+      "extensions": [".txt", ".md"],
+      "itemKinds": ["story", "book"]
+    }
+  ],
+  "events": ["playback.stopped"],
+  "players": [{ "itemKinds": ["story"], "entry": "player/index.html" }]
+}

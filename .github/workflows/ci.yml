@@ -41,6 +41,30 @@ jobs:
           MATINEE_TEST_DATABASE_URL: ${{ matrix.database == 'postgres' && 'postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable' || '' }}
         run: go test -count=1 -race ./...
 
+  plugin-sdk:
+    name: Plugin SDK
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - name: SDK
+        working-directory: pluginsdk
+        run: |
+          go vet ./...
+          GOOS=wasip1 GOARCH=wasm go vet .
+          go test -count=1 ./...
+      - name: Stories example
+        working-directory: pluginsdk/examples/stories
+        run: |
+          go vet ./...
+          go test -count=1 ./...
+      - name: Build and scan the Stories example with matinee-plugin
+        run: |
+          go run ./cmd/matinee-plugin build pluginsdk/examples/stories
+          go run ./cmd/matinee-plugin scan pluginsdk/examples/stories pluginsdk/examples/stories/testdata/library
+
   web:
     runs-on: ubuntu-latest
     steps:

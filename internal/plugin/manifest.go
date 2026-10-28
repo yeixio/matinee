@@ -1,6 +1,6 @@
 // Package plugin installs and runs plugins: library kinds, details and
 // event handlers in a sandboxed WebAssembly module (wazero), and players
-// that the web player loads in a sandboxed frame. docs/plugins.md describes
+// that the web player loads in a sandboxed frame. docs/guide/plugins describes
 // the package format and the API.
 package plugin
 
