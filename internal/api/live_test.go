@@ -13,13 +13,14 @@ import (
 	"time"
 
 	"github.com/yeixio/matinee/internal/live"
+	"github.com/yeixio/matinee/internal/scan"
 	"github.com/yeixio/matinee/internal/store"
 	"github.com/yeixio/matinee/internal/store/storetest"
 )
 
 func TestRemoteControl(t *testing.T) {
 	db := storetest.Open(t)
-	srv := &Server{Store: db, Log: slog.New(slog.NewTextHandler(io.Discard, nil))}
+	srv := &Server{Store: db, Scanner: &scan.Scanner{Store: db}, Log: slog.New(slog.NewTextHandler(io.Discard, nil))}
 	ts := httptest.NewServer(srv.Handler())
 	t.Cleanup(ts.Close)
 	admin := &client{t: t, base: ts.URL}
@@ -192,6 +193,20 @@ func TestRemoteControl(t *testing.T) {
 	}
 	if code := tv.do("GET", "/api/v1/clients/nobody-1234/commands", nil, nil); code != http.StatusNotFound {
 		t.Fatalf("unknown client asks for commands: %d", code)
+	}
+
+	// Home Assistant's sensors count what each library has.
+	var libs []struct {
+		Name          string
+		Titles, Files *int
+	}
+	if code := admin.do("GET", "/api/v1/libraries?counts=1", nil, &libs); code != 200 || len(libs) != 2 || libs[0].Name != "Movies" ||
+		*libs[0].Titles != 1 || *libs[0].Files != 1 || *libs[1].Titles != 1 || *libs[1].Files != 3 {
+		t.Fatalf("counts: %d %+v", code, libs)
+	}
+	libs = nil
+	if ellen.do("GET", "/api/v1/libraries?counts=1", nil, &libs); libs[0].Titles != nil {
+		t.Fatal("only admins get counts")
 	}
 
 	// Ellen's own iPad shows up for her, and she can control it.

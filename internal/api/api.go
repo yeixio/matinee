@@ -662,10 +662,15 @@ type libraryView struct {
 	Scanning bool `json:"scanning"`
 	// Watch says how each folder is watched for new files (scan.FolderWatch).
 	Watch []scan.FolderWatch `json:"watch"`
+	// Counts are how many titles (movies, shows, artists) and how many
+	// files the library has, for admins who ask with ?counts=1, such as
+	// Home Assistant's sensors.
+	Titles *int `json:"titles,omitempty"`
+	Files  *int `json:"files,omitempty"`
 }
 
 func (s *Server) libraryView(l store.Library, scanning bool) libraryView {
-	v := libraryView{l, scanning, nil}
+	v := libraryView{Library: l, Scanning: scanning}
 	if s.Watcher != nil {
 		v.Watch = s.Watcher.Status(l.ID)
 	}
@@ -681,6 +686,13 @@ func (s *Server) listLibraries(w http.ResponseWriter, r *http.Request) {
 		s.serverError(w, err)
 		return
 	}
+	var counts map[int64]store.LibraryCount
+	if r.URL.Query().Get("counts") == "1" && currentUser(r).IsAdmin {
+		if counts, err = s.Store.LibraryCounts(r.Context()); err != nil {
+			s.serverError(w, err)
+			return
+		}
+	}
 	out := []libraryView{}
 	for _, l := range libs {
 		ok, err := s.Store.LibraryVisible(r.Context(), currentUser(r), l.ID)
@@ -689,7 +701,12 @@ func (s *Server) listLibraries(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		if ok {
-			out = append(out, s.libraryView(l, s.Scanner.Running(l.ID)))
+			v := s.libraryView(l, s.Scanner.Running(l.ID))
+			if counts != nil {
+				c := counts[l.ID]
+				v.Titles, v.Files = &c.Titles, &c.Files
+			}
+			out = append(out, v)
 		}
 	}
 	writeJSON(w, http.StatusOK, out)

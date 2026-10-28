@@ -687,6 +687,32 @@ func (s *Store) CreateLibrary(ctx context.Context, name, kind string, paths []st
 	return Library{ID: id, Name: name, Kind: kind, Paths: paths}, nil
 }
 
+// LibraryCount is how big a library is: its titles (movies, shows,
+// artists) and its files.
+type LibraryCount struct{ Titles, Files int }
+
+// LibraryCounts counts every library's titles and files.
+func (s *Store) LibraryCounts(ctx context.Context) (map[int64]LibraryCount, error) {
+	rows, err := s.db.QueryContext(ctx, `SELECT library_id,
+		SUM(CASE WHEN parent_id IS NULL THEN 1 ELSE 0 END),
+		SUM(CASE WHEN path IS NOT NULL AND path <> '' THEN 1 ELSE 0 END)
+		FROM items GROUP BY library_id`)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	out := map[int64]LibraryCount{}
+	for rows.Next() {
+		var id int64
+		var c LibraryCount
+		if err := rows.Scan(&id, &c.Titles, &c.Files); err != nil {
+			return nil, err
+		}
+		out[id] = c
+	}
+	return out, rows.Err()
+}
+
 func (s *Store) Libraries(ctx context.Context) ([]Library, error) {
 	rows, err := s.db.QueryContext(ctx, "SELECT id, name, kind FROM libraries ORDER BY name")
 	if err != nil {

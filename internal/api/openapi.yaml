@@ -683,6 +683,8 @@ paths:
   /libraries:
     get:
       summary: All libraries
+      parameters:
+        - { name: counts, in: query, schema: { type: string, enum: ["1"] }, description: "Admins: include titles and files." }
       responses:
         "200":
           description: Libraries, by name.
@@ -2816,6 +2818,8 @@ components:
         kind: { type: string, examples: [movies, tv, music] }
         paths: { type: array, items: { type: string } }
         scanning: { type: boolean }
+        titles: { type: integer, description: "Movies, shows or artists; with ?counts=1, for admins." }
+        files: { type: integer, description: "Playable files; with ?counts=1, for admins." }
         watch:
           type: array
           description: How each folder is watched for new files. Empty just after the server starts.
