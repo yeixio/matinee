@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<mame build="0.289 (mame0289)" debug="no" mameconfig="10">
+	<machine name="neogeo" sourcefile="snk/neogeo.cpp" isbios="yes">
+		<description>Neo-Geo MV-6F</description>
+		<year>1990</year>
+		<manufacturer>SNK</manufacturer>
+		<rom name="sp-s2.sp1" size="131072"/>
+		<input players="2" coins="2"><control type="joy" player="1" buttons="4" ways="8"/></input>
+	</machine>
+	<machine name="ng_memcard" sourcefile="src/devices/bus/neogeo_memcard" isdevice="yes" runnable="no">
+		<description>Memory card</description>
+	</machine>
+	<machine name="namco51" sourcefile="src/mame/namco/namco51.cpp" isdevice="yes" runnable="no">
+		<description>Namco 51xx</description>
+		<rom name="51xx.bin" size="1024"/>
+	</machine>
+	<machine name="puckman" sourcefile="pacman/pacman.cpp">
+		<description>Puck Man (Japan set 1)</description>
+		<year>1980</year>
+		<manufacturer>Namco</manufacturer>
+		<rom name="pm1_prg1.6e" size="2048"/>
+		<device_ref name="z80"/>
+		<display tag="screen" type="raster" rotate="90" width="288" height="224" refresh="60.606061"/>
+		<input players="2" coins="2"><control type="joy" player="1" ways="4"/></input>
+		<driver status="good" emulation="good" savestate="supported"/>
+	</machine>
+	<machine name="pacman" sourcefile="pacman/pacman.cpp" cloneof="puckman" romof="puckman">
+		<description>Pac-Man (Midway)</description>
+		<year>1980</year>
+		<manufacturer>Namco (Midway license)</manufacturer>
+		<display tag="screen" type="raster" rotate="90" width="288" height="224" refresh="60.606061"/>
+		<input players="2" coins="2"><control type="joy" player="1" ways="4"/><control type="joy" player="2" ways="4"/></input>
+		<driver status="good" emulation="good" savestate="supported"/>
+	</machine>
+	<machine name="galaga" sourcefile="namco/galaga.cpp">
+		<description>Galaga (Namco rev. B)</description>
+		<year>1981</year>
+		<manufacturer>Namco</manufacturer>
+		<device_ref name="namco51"/>
+		<display tag="screen" type="raster" rotate="90" width="288" height="224"/>
+		<input players="2" coins="2"><control type="joy" player="1" buttons="1" ways="2"/></input>
+		<driver status="good" emulation="good" savestate="supported"/>
+	</machine>
+	<machine name="mslug" sourcefile="snk/neogeo.cpp" romof="neogeo">
+		<description>Metal Slug - Super Vehicle-001</description>
+		<year>1996</year>
+		<manufacturer>Nazca</manufacturer>
+		<device_ref name="ng_memcard"/>
+		<display tag="screen" type="raster" rotate="0" width="320" height="224"/>
+		<input players="2" coins="2"><control type="joy" player="1" buttons="4" ways="8"/></input>
+		<driver status="good" emulation="good" savestate="supported"/>
+	</machine>
+	<machine name="apple2e" sourcefile="apple/apple2e.cpp">
+		<description>Apple //e</description>
+		<year>1983</year>
+		<manufacturer>Apple Computer</manufacturer>
+		<input players="1"><control type="keyboard"/></input>
+	</machine>
+	<machine name="kinst" sourcefile="midway/kinst.cpp">
+		<description>Killer Instinct (v1.5d)</description>
+		<year>1994</year>
+		<manufacturer>Rare / Nintendo</manufacturer>
+		<disk name="kinst" sha1="0"/>
+		<input players="2" coins="2"><control type="joy" player="1" buttons="6" ways="8"/></input>
+		<driver status="good" emulation="good" savestate="unsupported"/>
+	</machine>
+</mame>

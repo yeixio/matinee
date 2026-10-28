@@ -1,0 +1,21 @@
+# The MAME drivers the arcade plugin's player can run, one source file per
+# line, under src/mame in MAME's source. Each becomes its own WebAssembly
+# build, so a game loads only the emulation it needs. A game whose driver
+# isn't here still shows in the library, marked as not playable yet.
+
+# Free ROMs from mamedev.org; the plugin's tests play gridlee.
+bally/gridlee.cpp
+exidy/exidy.cpp
+williams/williams.cpp
+
+# Classics
+pacman/pacman.cpp
+galaxian/galaxian.cpp
+namco/galaga.cpp
+nintendo/dkong.cpp
+atari/asteroid.cpp
+atari/centiped.cpp
+atari/missile.cpp
+capcom/1942.cpp
+capcom/cps1.cpp
+snk/neogeo.cpp

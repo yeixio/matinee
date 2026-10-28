@@ -274,11 +274,12 @@ internal/hwaccel     finds the GPU and builds FFmpeg's arguments for it
 internal/store       SQLite / PostgreSQL storage
 internal/plugin      runs plugins: WebAssembly in a sandbox (wazero)
 pluginsdk/           the SDK for writing plugins (MIT licensed)
+plugins/arcade/      the Arcade plugin: MAME in the web player
 web/                 React + Vite web player
 deploy/helm/matinee  Helm chart
 ```
 
-Plugins add library kinds, details, players and reactions to events without changing Matinee; [docs/plugins.md](docs/plugins.md) explains how to write one.
+Plugins add library kinds, details, players and reactions to events without changing Matinee; [docs/plugins.md](docs/plugins.md) explains how to write one. The [Arcade plugin](plugins/arcade) is the first: it plays arcade games in the web player with MAME.
 
 The API is plain JSON over HTTP under `/api/v1`, open to any client, and documented in [`openapi.yaml`](internal/api/openapi.yaml) (also served at `/api/v1/openapi.yaml`). Within v1 it only grows; breaking changes would go in a v2 served alongside it. Kubernetes probes are at `/healthz` (process up) and `/readyz` (database reachable).
 

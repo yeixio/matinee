@@ -2,7 +2,7 @@
 title: Settings reference
 description: Every server setting you can give Matinee as an environment variable or a flag.
 sidebar:
-  order: 10
+  order: 11
 ---
 
 Most of Matinee is set up in the web player under **Settings**. A few things about the server itself are set when it starts, as environment variables or flags:

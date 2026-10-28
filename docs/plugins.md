@@ -3,8 +3,8 @@
 A plugin adds to Matinee without changing it: a new kind of library with
 its own way of reading files, details for that library's titles, a player
 for them in the web player, and reactions to what happens on the server.
-The arcade plugin, which plays games with MAME, is the reference: it uses
-every part described here.
+The [arcade plugin](../plugins/arcade), which plays games with MAME, is the
+reference: it uses every part described here.
 
 People running Matinee install plugins in **Settings → Plugins** (see the
 [user guide](guide/server/plugins.md)). This page is for people writing them.

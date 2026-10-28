@@ -1,0 +1,9 @@
+{
+  "name": "matinee-arcade-test",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "playwright": "1.63.0",
+    "pngjs": "7.0.0"
+  }
+}

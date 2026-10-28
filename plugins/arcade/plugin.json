@@ -1,0 +1,24 @@
+{
+  "id": "arcade",
+  "name": "Arcade",
+  "version": "1.0.0",
+  "api": 1,
+  "description": "Play arcade games in the web player with MAME. Adds an Arcade library for MAME ROM sets.",
+  "author": "The Matinee authors",
+  "license": "AGPL-3.0-or-later AND GPL-2.0-or-later",
+  "homepage": "https://matinee.yeix.io/docs/server/arcade/",
+  "icon": "icon.png",
+  "server": "server.wasm",
+  "libraryKinds": [
+    {
+      "name": "arcade",
+      "label": "Arcade",
+      "description": "MAME ROM sets, one zip or 7z file per game.",
+      "extensions": [".zip", ".7z"],
+      "itemKinds": ["game"]
+    }
+  ],
+  "metadata": ["game"],
+  "players": [{ "itemKinds": ["game"], "entry": "player/index.html" }],
+  "permissions": { "network": ["raw.githubusercontent.com"] }
+}
