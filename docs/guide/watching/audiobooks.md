@@ -53,6 +53,12 @@ A book counts as finished when you reach its last minute. Playing a finished boo
 
 The moon button in the full player stops the book after 15, 30, 45, 60 or 90 minutes, or at the **End of this chapter**. The sound fades out over the last 30 seconds. Your place is saved, so the book starts again where you dozed off.
 
+## In the apps
+
+The phone and tablet apps have the same audiobook library and pages, and a player made for books. Tap **Play** or **Resume** and the book keeps going above the tabs while you browse, with the screen locked and with the app in the background; the lock screen shows the book and its cover. Tap the player for the full one, with the chapter's progress, back 15 and ahead 30 seconds, previous and next chapter, the list of chapters, the speed and the sleep timer. The speed is kept for each profile on the device.
+
+On a TV, a book's page has **Play** or **Resume** and **Start over**. The TV plays a book a part at a time, keeps your place in the book as it goes, and moves on to the next part by itself. Downloads on a phone work for books too, a part at a time.
+
 ## Series and narrators
 
 Matinee reads who wrote and who reads a book, and the series it's in, from the tags in its files:
