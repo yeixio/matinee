@@ -95,6 +95,9 @@ jobs:
       - run: helm template t deploy/helm/matinee --set gpu.type=vaapi --set 'gpu.vaapi.groups={993}' > /dev/null
       - run: helm template t deploy/helm/matinee --set gpu.type=vaapi --set gpu.vaapi.resource=amd.com/gpu > /dev/null
       - run: helm template t deploy/helm/matinee --set gpu.type=nvidia > /dev/null
+      # Recreate needs no drain delay; RollingUpdate waits 5s for the Service.
+      - run: "helm template t deploy/helm/matinee | grep -q 'terminationGracePeriodSeconds: 20'"
+      - run: "helm template t deploy/helm/matinee --set strategy.type=RollingUpdate | grep -q 'terminationGracePeriodSeconds: 25'"
 
   docker:
     runs-on: ubuntu-latest

@@ -37,6 +37,10 @@ Most of Matinee is set up in the web player under **Settings**. A few things abo
 | `MATINEE_CONNECT_URL` | `https://connect.matinee.yeix.io` | The lookup service that helps the apps find the server after its address changes. It only learns the address, never carries media; `off` to not use it |
 | `MATINEE_PLUGINS` | `true` | Let admins install [plugins](/docs/server/plugins/); `false` turns plugins off |
 | `MATINEE_PLUGIN_CATALOG` | `https://matinee.yeix.io/plugins.json` | The list of official plugins **Add plugin** offers; `off` for none |
+<!-- since: v0.1.4 -->
+| `MATINEE_DRAIN_DELAY` | `0s` | On shutdown, how long to keep serving after telling players the server is restarting, so a load balancer can move to another copy ([more](/docs/getting-started/updating/#updating-while-people-are-watching)) |
+| `MATINEE_SHUTDOWN_TIMEOUT` | `10s` | On shutdown, how long requests in flight get to finish |
+<!-- /since -->
 | `MATINEE_FFMPEG`, `MATINEE_FFPROBE` | `ffmpeg`, `ffprobe` | Paths to FFmpeg |
 | `MATINEE_VAAPI_DEVICE` | empty | The GPU to use for VAAPI on a machine with several, such as `/dev/dri/renderD129` |
 

@@ -421,5 +421,17 @@
     "noNarrators": "Még nincsenek felolvasók",
     "fromTags": "A sorozatok és a felolvasók a könyvek címkéiből vagy az olyan mappákból jönnek, mint Szerző/Sorozat/Könyv.",
     "length": "Hossz"
+  },
+  "reconnect": {
+    "heads": "A szerver újraindul. A lejátszás egy pillanatra megállhat.",
+    "restarting": "A szerver újraindul",
+    "restartingDetail": "Ez általában frissítést jelent. Ha visszatér, ott folytatod, ahol abbahagytad.",
+    "unreachable": "A szerver nem érhető el",
+    "unreachableDetail": "Újrapróbálkozás. Ha visszatér, ott folytatod, ahol abbahagytad.",
+    "gaveUp": "A szerver még mindig nem érhető el",
+    "gaveUpDetail": "Ellenőrizd, hogy fut-e a szerver, és online-e ez az eszköz, majd próbáld újra.",
+    "tryAgain": "Újra",
+    "updated": "A szerver frissült erre: {{version}}. Ott folytatod, ahol abbahagytad.",
+    "restarted": "A szerver újraindult. Ott folytatod, ahol abbahagytad."
   }
 }

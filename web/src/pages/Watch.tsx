@@ -19,6 +19,7 @@ import { PluginPlayer } from '../player/PluginPlayer'
 import { useAudio } from '../player/AudioPlayer'
 import { playerFor, usePlayers } from '../plugins'
 import { remote, watchPath, type CommandType, type PlayerHooks } from '../remote'
+import { health, onRestarting, outcome, restarting, waitForServer, type Health, type Waiting } from '../player/reconnect'
 
 const displayTitle = (item: ItemDetail) => {
   const show = item.parents.find((p) => p.kind === 'show')
@@ -79,6 +80,11 @@ function NoPlayer({ onExit }: { onExit: () => void }) {
 
 const builtInKinds = ['movie', 'episode']
 
+// Why the player is getting playback going again (see recover): a transcode
+// or direct play that errored, buffering that went on too long, or the
+// viewer pressing Try again.
+type Cause = 'transcode' | 'direct' | 'stall' | 'retry'
+
 function Player({ id }: { id: number }) {
   const { t: tr } = useTranslation()
   const navigate = useNavigate()
@@ -110,7 +116,15 @@ function Player({ id }: { id: number }) {
   // A transcode that dies partway (say, the server's GPU gave up) is started
   // again once from where it stopped; the server then uses its CPU.
   const recovered = useRef(false)
-  const restartHls = useRef<(at: number) => void>(undefined)
+  // When the server itself goes away (an update, a restart, the network),
+  // the player says why it's waiting and picks up where it was (see recover).
+  const [away, setAway] = useState<Waiting | 'gaveUp'>()
+  const server = useRef<Health>(undefined) // as of when it last answered
+  const recovering = useRef<AbortController>(undefined)
+  const recoverRef = useRef<(at: number, cause: Cause) => void>(undefined)
+  const resumeAt = useRef(0)
+  const modeNow = useRef(mode)
+  modeNow.current = mode
   // While the seek bar is held, where it points. The seek happens on release.
   const [scrub, setScrub] = useState<number>()
   const scrubAt = useRef<number>(undefined)
@@ -163,13 +177,7 @@ function Player({ id }: { id: number }) {
           h.loadSource(url)
           h.attachMedia(el)
           h.on(Hls.Events.ERROR, (_, d) => {
-            if (!d.fatal) return
-            if (!recovered.current && seq === hlsSeq.current) {
-              recovered.current = true
-              restartHls.current?.(position())
-              return
-            }
-            setError(i18n.t('player.failedDetail'))
+            if (d.fatal && seq === hlsSeq.current) recoverRef.current?.(position(), 'transcode')
           })
           hls.current = h
         } else {
@@ -185,10 +193,6 @@ function Player({ id }: { id: number }) {
     },
     [item, position],
   )
-  useEffect(() => {
-    restartHls.current = startHls
-  }, [startHls])
-
   const playDirect = useCallback(
     (at: number) => {
       const el = video.current
@@ -249,10 +253,80 @@ function Player({ id }: { id: number }) {
   useEffect(
     () => () => {
       hls.current?.destroy()
+      recovering.current?.abort()
       sleepTimer.leave()
     },
     [],
   )
+
+  // What the server was when playback started, to tell later what happened
+  // if it goes away.
+  useEffect(() => {
+    health()
+      .then((h) => (server.current ??= h))
+      .catch(() => {})
+  }, [])
+
+  // recover works out why playback stopped and gets it going again at `at`.
+  // When the server is fine, it's this file: a direct play the browser can't
+  // manage converts instead, and a transcode that died is started again once.
+  // When the server is away or came back different, the player says so,
+  // waits for it, and picks up where it was.
+  const recover = async (at: number, cause: Cause) => {
+    if (recovering.current || finished.current) return
+    const ctl = new AbortController()
+    recovering.current = ctl
+    resumeAt.current = at
+    const resume = () => (modeNow.current === 'direct' ? playDirect(at) : startHls(at))
+    try {
+      let now: Health | undefined
+      try {
+        now = await health(ctl.signal)
+      } catch {
+        // Away: wait for it below.
+      }
+      if (ctl.signal.aborted) return
+      if (now && now.state !== 'restarting' && outcome(server.current, now) === 'same') {
+        server.current = now
+        if (cause === 'retry') resume()
+        else if (cause === 'direct') startHls(at)
+        else if (cause === 'transcode' && !recovered.current) {
+          recovered.current = true
+          startHls(at)
+        } else if (cause === 'transcode') setError(i18n.t('player.failedDetail'))
+        return
+      }
+      hls.current?.destroy()
+      hls.current = null
+      if (!now || now.state === 'restarting') {
+        setAway(restarting() ? 'restarting' : 'unreachable')
+        now = await waitForServer(setAway, ctl.signal)
+      }
+      const what = outcome(server.current, now)
+      server.current = now
+      setAway(undefined)
+      if (what === 'updated') flash(tr('common:reconnect.updated', { version: now.version }), 6000)
+      else if (what === 'restarted') flash(tr('common:reconnect.restarted'), 6000)
+      resume()
+    } catch {
+      if (!ctl.signal.aborted) setAway('gaveUp')
+    } finally {
+      if (recovering.current === ctl) recovering.current = undefined
+    }
+  }
+  recoverRef.current = recover
+
+  // A player that sits buffering for a while may have lost the server
+  // without an error (a file playing directly just stops arriving).
+  useEffect(() => {
+    if (!waiting || paused || error || away) return
+    const t = window.setTimeout(() => recoverRef.current?.(position(), 'stall'), 10_000)
+    return () => window.clearTimeout(t)
+  }, [waiting, paused, error, away, position])
+
+  // Heads-up as soon as the server says it's restarting; what's buffered
+  // often carries playback through.
+  useEffect(() => onRestarting(() => flash(tr('common:reconnect.heads'), 8000)), []) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     const el = video.current
@@ -450,6 +524,11 @@ function Player({ id }: { id: number }) {
   // Assistant or another device asks.
   const [notice, setNotice] = useState<string>()
   const noticeTimer = useRef<number>(undefined)
+  const flash = (text: string, ms = 3000) => {
+    setNotice(text)
+    window.clearTimeout(noticeTimer.current)
+    noticeTimer.current = window.setTimeout(() => setNotice(undefined), ms)
+  }
   const hooks = useRef<PlayerHooks>(undefined)
   hooks.current = {
     commands: () => {
@@ -478,11 +557,7 @@ function Player({ id }: { id: number }) {
     handle: (c) => {
       const el = video.current
       if (!el || !item) return
-      if (c.from) {
-        setNotice(tr('remote.controlledBy', { name: c.from }))
-        window.clearTimeout(noticeTimer.current)
-        noticeTimer.current = window.setTimeout(() => setNotice(undefined), 3000)
-      }
+      if (c.from) flash(tr('remote.controlledBy', { name: c.from }))
       switch (c.type) {
         case 'play':
           el.play().catch(() => {})
@@ -577,7 +652,7 @@ function Player({ id }: { id: number }) {
         onVolumeChange={() => setMuted(!!video.current?.muted)}
         onSeeked={() => remote.report()}
         onEnded={ended}
-        onError={() => mode === 'direct' && startHls(position())}
+        onError={() => recoverRef.current?.(position(), mode === 'direct' ? 'direct' : 'transcode')}
       />
 
       {sub && !sub.burnIn && !error && <SubtitleOverlay cues={cues} position={position} lifted={chrome} />}
@@ -616,9 +691,34 @@ function Player({ id }: { id: number }) {
         </div>
       )}
 
-      {(waiting || !item) && !error && (
+      {(waiting || !item) && !error && !away && (
         <div className="pointer-events-none absolute inset-0 grid place-items-center">
           <Spinner className="size-12" />
+        </div>
+      )}
+      {away && !error && (
+        <div role="status" className="absolute inset-0 z-10 grid place-items-center bg-black/60 p-6 text-center text-white">
+          <div className="max-w-sm space-y-3">
+            {away !== 'gaveUp' && <Spinner className="mx-auto size-10" />}
+            <p className="text-lg font-semibold">{tr(`common:reconnect.${away}`)}</p>
+            <p className="text-sm text-white/70">{tr(`common:reconnect.${away}Detail`)}</p>
+            <div className="flex justify-center gap-4 pt-2 text-sm">
+              {away === 'gaveUp' && (
+                <button
+                  onClick={() => {
+                    setAway(undefined)
+                    recover(resumeAt.current, 'retry')
+                  }}
+                  className="rounded-full bg-accent px-4 py-2 font-semibold text-on-accent hover:bg-accent-strong"
+                >
+                  {tr('common:reconnect.tryAgain')}
+                </button>
+              )}
+              <button onClick={() => navigate(-1)} className="rounded-full bg-white/15 px-4 py-2 hover:bg-white/25">
+                {tr('goBack')}
+              </button>
+            </div>
+          </div>
         </div>
       )}
       {error && (

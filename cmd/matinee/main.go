@@ -17,6 +17,7 @@ import (
 	"path/filepath"
 	"strconv"
 	"strings"
+	"sync"
 	"syscall"
 	"time"
 
@@ -210,6 +211,8 @@ func run() error {
 		db.SetMetadataKinds(fetcher.Kinds()...)
 		scanner.ScanAll(ctx)
 	}
+	serving, stopServing := context.WithCancel(context.Background())
+	defer stopServing()
 	if cfg.RemoteAddr != "" {
 		apiServer.Remote = &remote.Manager{Addr: cfg.RemoteAddr, Dir: cfg.RemoteDir(), Handler: apiServer.RemoteHandler(), Log: log}
 		if cfg.ConnectURL != "" {
@@ -232,7 +235,8 @@ func run() error {
 		}
 		apiServer.Remote.SetForwardedPort(port)
 		apiServer.Remote.SetEnabled(on)
-		go apiServer.Remote.Run(ctx)
+		// Remote access keeps serving while the server drains (see below).
+		go apiServer.Remote.Run(serving)
 	}
 	downloads.SubtitleStream = apiServer.BurnStream
 	go downloads.Run(ctx)
@@ -292,13 +296,21 @@ func run() error {
 			return err
 		}
 	case <-ctx.Done():
-		log.Info("shutting down")
-		shutdownCtx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+		// Players hear that the server is restarting, so they can say so
+		// and pick up where they were once it's back (a deploy or restart).
+		log.Info("shutting down", "drain_delay", cfg.DrainDelay, "timeout", cfg.ShutdownTimeout)
+		apiServer.Drain()
+		time.Sleep(cfg.DrainDelay)
+		shutdownCtx, cancel := context.WithTimeout(context.Background(), cfg.ShutdownTimeout)
 		defer cancel()
-		srv.Shutdown(shutdownCtx)
-		if homeSrv != nil {
-			homeSrv.Shutdown(shutdownCtx)
+		var wg sync.WaitGroup
+		for _, s := range []*http.Server{srv, homeSrv} {
+			if s != nil {
+				wg.Go(func() { s.Shutdown(shutdownCtx) })
+			}
 		}
+		wg.Wait()
+		stopServing()
 	}
 	return nil
 }

@@ -421,5 +421,17 @@
     "noNarrators": "Henüz seslendiren yok",
     "fromTags": "Seriler ve seslendirenler kitapların etiketlerinden ya da Yazar/Seri/Kitap gibi klasörlerden gelir.",
     "length": "Süre"
+  },
+  "reconnect": {
+    "heads": "Sunucu yeniden başlatılıyor. Oynatma bir anlığına durabilir.",
+    "restarting": "Sunucu yeniden başlatılıyor",
+    "restartingDetail": "Bu genellikle güncellendiği anlamına gelir. Geri geldiğinde kaldığın yerden devam edersin.",
+    "unreachable": "Sunucuya ulaşılamıyor",
+    "unreachableDetail": "Yeniden deneniyor. Geri geldiğinde kaldığın yerden devam edersin.",
+    "gaveUp": "Sunucuya hâlâ ulaşılamıyor",
+    "gaveUpDetail": "Sunucunun çalıştığını ve bu cihazın çevrimiçi olduğunu kontrol edip yeniden dene.",
+    "tryAgain": "Yeniden dene",
+    "updated": "Sunucu {{version}} sürümüne güncellendi. Kaldığın yerden devam ediliyor.",
+    "restarted": "Sunucu yeniden başladı. Kaldığın yerden devam ediliyor."
   }
 }

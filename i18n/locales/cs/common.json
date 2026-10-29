@@ -477,5 +477,17 @@
     "noNarrators": "Zatím žádní interpreti",
     "fromTags": "Série a interpreti pocházejí ze štítků knih nebo ze složek jako Autor/Série/Kniha.",
     "length": "Délka"
+  },
+  "reconnect": {
+    "heads": "Server se restartuje. Přehrávání se může na chvíli zastavit.",
+    "restarting": "Server se restartuje",
+    "restartingDetail": "Obvykle to znamená aktualizaci. Až se vrátí, budete pokračovat tam, kde jste skončili.",
+    "unreachable": "Server není dostupný",
+    "unreachableDetail": "Zkouším to znovu. Až se vrátí, budete pokračovat tam, kde jste skončili.",
+    "gaveUp": "Server stále není dostupný",
+    "gaveUpDetail": "Zkontrolujte, že server běží a toto zařízení je online, a zkuste to znovu.",
+    "tryAgain": "Zkusit znovu",
+    "updated": "Server byl aktualizován na {{version}}. Pokračujete tam, kde jste skončili.",
+    "restarted": "Server se restartoval. Pokračujete tam, kde jste skončili."
   }
 }

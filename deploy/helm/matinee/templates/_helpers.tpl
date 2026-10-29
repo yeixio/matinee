@@ -48,3 +48,14 @@ true
 {{- printf "%s://%s" (ternary "https" "http" (not (empty .Values.ingress.tls))) (first .Values.ingress.hosts).host -}}
 {{- end -}}
 {{- end -}}
+
+{{/* Seconds to keep serving on shutdown before stopping (see shutdown in values.yaml). */}}
+{{- define "matinee.drainDelay" -}}
+{{- if ne (toString .Values.shutdown.drainDelaySeconds) "" -}}
+{{- .Values.shutdown.drainDelaySeconds -}}
+{{- else if eq .Values.strategy.type "RollingUpdate" -}}
+5
+{{- else -}}
+0
+{{- end -}}
+{{- end -}}

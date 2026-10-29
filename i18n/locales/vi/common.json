@@ -393,5 +393,17 @@
     "noNarrators": "Chưa có người đọc nào",
     "fromTags": "Bộ sách và người đọc lấy từ thẻ của sách, hoặc từ các thư mục như Tác giả/Bộ sách/Sách.",
     "length": "Thời lượng"
+  },
+  "reconnect": {
+    "heads": "Máy chủ đang khởi động lại. Phát lại có thể dừng trong giây lát.",
+    "restarting": "Máy chủ đang khởi động lại",
+    "restartingDetail": "Thường là do máy chủ đang được cập nhật. Bạn sẽ xem tiếp từ chỗ đã dừng khi máy chủ hoạt động lại.",
+    "unreachable": "Không kết nối được máy chủ",
+    "unreachableDetail": "Đang thử lại. Bạn sẽ xem tiếp từ chỗ đã dừng khi máy chủ hoạt động lại.",
+    "gaveUp": "Vẫn không kết nối được máy chủ",
+    "gaveUpDetail": "Hãy kiểm tra máy chủ đang chạy và thiết bị này đang trực tuyến, rồi thử lại.",
+    "tryAgain": "Thử lại",
+    "updated": "Máy chủ đã được cập nhật lên {{version}}. Đang xem tiếp từ chỗ đã dừng.",
+    "restarted": "Máy chủ đã khởi động lại. Đang xem tiếp từ chỗ đã dừng."
   }
 }

@@ -147,7 +147,8 @@ func (s *Server) clientCommands(w http.ResponseWriter, r *http.Request) {
 	if cmds == nil {
 		cmds = []live.Command{}
 	}
-	writeJSON(w, http.StatusOK, map[string]any{"commands": cmds})
+	// restarting: the server is shutting down, for an update or a restart.
+	writeJSON(w, http.StatusOK, map[string]any{"commands": cmds, "restarting": s.live().Closing()})
 }
 
 // controls says which clients a person may see and control: an admin's are

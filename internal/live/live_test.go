@@ -78,3 +78,36 @@ func TestSlowSubscriberIsCutOff(t *testing.T) {
 		t.Fatalf("got %d events before the feed closed", n)
 	}
 }
+
+func TestCloseEndsHeldPolls(t *testing.T) {
+	h := New()
+	h.Report("web-123456", 1, User{ID: 1}, Hello{Name: "Web"}, nil, false)
+	done := make(chan time.Duration)
+	go func() {
+		start := time.Now()
+		h.Poll(context.Background(), "web-123456", 1, 25*time.Second)
+		done <- time.Since(start)
+	}()
+	time.Sleep(50 * time.Millisecond)
+	if h.Closing() {
+		t.Fatal("closing before Close")
+	}
+	h.Close()
+	h.Close() // twice is fine
+	select {
+	case <-done:
+	case <-time.After(time.Second):
+		t.Fatal("held poll still waiting after Close")
+	}
+	if !h.Closing() {
+		t.Fatal("not closing after Close")
+	}
+
+	// Once closing, a poll waits a little rather than none, so players
+	// that ask again at once don't spin.
+	start := time.Now()
+	h.Poll(context.Background(), "web-123456", 1, 25*time.Second)
+	if d := time.Since(start); d < closingWait/2 || d > closingWait+time.Second {
+		t.Fatalf("poll after Close took %v", d)
+	}
+}

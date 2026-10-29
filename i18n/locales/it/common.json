@@ -449,5 +449,17 @@
     "noNarrators": "Ancora nessun narratore",
     "fromTags": "Serie e narratori vengono dai tag dei libri o da cartelle come Autore/Serie/Libro.",
     "length": "Durata"
+  },
+  "reconnect": {
+    "heads": "Il server si sta riavviando. La riproduzione potrebbe fermarsi per un attimo.",
+    "restarting": "Il server si sta riavviando",
+    "restartingDetail": "Di solito significa che è in aggiornamento. Riprenderai da dove eri rimasto quando torna.",
+    "unreachable": "Impossibile raggiungere il server",
+    "unreachableDetail": "Nuovo tentativo in corso. Riprenderai da dove eri rimasto quando torna.",
+    "gaveUp": "Il server è ancora irraggiungibile",
+    "gaveUpDetail": "Controlla che il server sia acceso e che questo dispositivo sia online, poi riprova.",
+    "tryAgain": "Riprova",
+    "updated": "Il server è stato aggiornato a {{version}}. Riprendi da dove eri rimasto.",
+    "restarted": "Il server si è riavviato. Riprendi da dove eri rimasto."
   }
 }

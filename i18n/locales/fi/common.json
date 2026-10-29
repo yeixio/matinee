@@ -421,5 +421,17 @@
     "noNarrators": "Ei vielä lukijoita",
     "fromTags": "Sarjat ja lukijat tulevat kirjojen tageista tai kansioista kuten Kirjailija/Sarja/Kirja.",
     "length": "Kesto"
+  },
+  "reconnect": {
+    "heads": "Palvelin käynnistyy uudelleen. Toisto voi pysähtyä hetkeksi.",
+    "restarting": "Palvelin käynnistyy uudelleen",
+    "restartingDetail": "Yleensä se tarkoittaa päivitystä. Jatkat siitä, mihin jäit, kun se palaa.",
+    "unreachable": "Palvelimeen ei saada yhteyttä",
+    "unreachableDetail": "Yritetään uudelleen. Jatkat siitä, mihin jäit, kun se palaa.",
+    "gaveUp": "Palvelimeen ei vieläkään saada yhteyttä",
+    "gaveUpDetail": "Tarkista, että palvelin on käynnissä ja laite on verkossa, ja yritä uudelleen.",
+    "tryAgain": "Yritä uudelleen",
+    "updated": "Palvelin päivitettiin versioon {{version}}. Jatketaan siitä, mihin jäit.",
+    "restarted": "Palvelin käynnistyi uudelleen. Jatketaan siitä, mihin jäit."
   }
 }

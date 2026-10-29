@@ -421,5 +421,17 @@
     "noNarrators": "Noch keine Sprecher",
     "fromTags": "Reihen und Sprecher stammen aus den Tags der Bücher oder aus Ordnern wie Autor/Reihe/Buch.",
     "length": "Länge"
+  },
+  "reconnect": {
+    "heads": "Der Server startet neu. Die Wiedergabe kann kurz stocken.",
+    "restarting": "Der Server startet neu",
+    "restartingDetail": "Meist wird er gerade aktualisiert. Sobald er zurück ist, geht es dort weiter, wo du warst.",
+    "unreachable": "Server nicht erreichbar",
+    "unreachableDetail": "Neuer Versuch läuft. Sobald er zurück ist, geht es dort weiter, wo du warst.",
+    "gaveUp": "Server immer noch nicht erreichbar",
+    "gaveUpDetail": "Prüfe, ob der Server läuft und dieses Gerät online ist, und versuche es dann erneut.",
+    "tryAgain": "Erneut versuchen",
+    "updated": "Der Server wurde auf {{version}} aktualisiert. Es geht dort weiter, wo du warst.",
+    "restarted": "Der Server wurde neu gestartet. Es geht dort weiter, wo du warst."
   }
 }
