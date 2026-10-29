@@ -1,18 +1,77 @@
 name: Release
 
-# Push a tag such as v0.2.0 to release. A tag with a suffix (v0.2.0-beta.1)
-# is a pre-release: it gets its own image tag but doesn't move :latest.
+# Press Run workflow under Actions → Release to release main. It picks the
+# next version (patch by default), checks that main passed CI and has its
+# notes in docs/release-notes/<tag>.md, tags it and ships it. Pushing a tag
+# such as v0.2.0 by hand still works too.
+#
+# A version with a suffix (v0.2.0-beta.1) is a pre-release: it gets its own
+# image tag but doesn't move :latest, and needs no notes file.
 on:
   push:
     tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: Which part of the last version goes up
+        type: choice
+        options: [patch, minor, major]
+        default: patch
+      version:
+        description: Or an exact version, such as v0.3.0-beta.1
+        type: string
+        required: false
+      force:
+        description: Release even if CI didn't pass on this commit
+        type: boolean
+        default: false
 
 permissions:
+  # actions: read lets a pressed release check CI on the commit.
+  actions: read
   contents: write
   packages: write
   pull-requests: write
 
+# One release at a time, so two presses can't pick the same version.
+concurrency:
+  group: release
+  cancel-in-progress: false
+
 jobs:
+  # The tag this run releases: the pushed tag, or a new one on main.
+  tag:
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.tag.outputs.tag }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - id: tag
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BUMP: ${{ inputs.bump }}
+          VERSION: ${{ inputs.version }}
+          FORCE: ${{ inputs.force && '1' || '' }}
+          NOTES_DIR: docs/release-notes
+        run: |
+          if [ "$GITHUB_EVENT_NAME" = push ]; then
+            echo "tag=$GITHUB_REF_NAME" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          if [ "$GITHUB_REF" != refs/heads/main ]; then
+            echo "::error::Release from main, not $GITHUB_REF_NAME."
+            exit 1
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          scripts/cut-release.sh
+
   test:
+    needs: tag
+    env:
+      TAG: ${{ needs.tag.outputs.tag }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -25,7 +84,9 @@ jobs:
       - run: go test -count=1 ./...
 
   image:
-    needs: test
+    needs: [tag, test]
+    env:
+      TAG: ${{ needs.tag.outputs.tag }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -43,9 +104,9 @@ jobs:
           flavor: latest=false
           # v1.2.3 publishes 1.2.3, 1.2 and latest; the chart's appVersion is 1.2.3.
           tags: |
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}},enable=${{ !contains(github.ref_name, '-') }}
-            type=raw,value=latest,enable=${{ !contains(github.ref_name, '-') }}
+            type=semver,pattern={{version}},value=${{ needs.tag.outputs.tag }}
+            type=semver,pattern={{major}}.{{minor}},value=${{ needs.tag.outputs.tag }},enable=${{ !contains(needs.tag.outputs.tag, '-') }}
+            type=raw,value=latest,enable=${{ !contains(needs.tag.outputs.tag, '-') }}
       - uses: docker/build-push-action@v6
         with:
           context: .
@@ -54,14 +115,16 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          build-args: VERSION=${{ github.ref_name }}
+          build-args: VERSION=${{ needs.tag.outputs.tag }}
           secrets: |
             tmdb_key=${{ secrets.TMDB_API_KEY }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
   chart:
-    needs: image
+    needs: [tag, image]
+    env:
+      TAG: ${{ needs.tag.outputs.tag }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -70,7 +133,7 @@ jobs:
         env:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          VERSION="${GITHUB_REF_NAME#v}"
+          VERSION="${TAG#v}"
           echo "$TOKEN" | helm registry login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
           helm package deploy/helm/matinee --version "$VERSION" --app-version "$VERSION" -d dist
           helm push "dist/matinee-$VERSION.tgz" oci://ghcr.io/${{ github.repository_owner }}/charts
@@ -80,7 +143,9 @@ jobs:
           path: dist/*.tgz
 
   binaries:
-    needs: test
+    needs: [tag, test]
+    env:
+      TAG: ${{ needs.tag.outputs.tag }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -99,14 +164,16 @@ jobs:
       - name: Build archives
         env:
           TMDB_KEY: ${{ secrets.TMDB_API_KEY }}
-        run: VERSION="${GITHUB_REF_NAME#v}" scripts/release-binaries.sh
+        run: VERSION="${TAG#v}" scripts/release-binaries.sh
       - uses: actions/upload-artifact@v4
         with:
           name: binaries
           path: dist/*
 
   packages:
-    needs: binaries
+    needs: [tag, binaries]
+    env:
+      TAG: ${{ needs.tag.outputs.tag }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -124,19 +191,19 @@ jobs:
           go install github.com/goreleaser/nfpm/v2/cmd/nfpm@v2.41.3
           echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
       - name: Build .deb and .rpm packages
-        run: VERSION="${GITHUB_REF_NAME#v}" scripts/package-linux.sh
+        run: VERSION="${TAG#v}" scripts/package-linux.sh
       # A stable release publishes the repositories, so it fails without the
       # signing key rather than publishing them unsigned.
       - name: Build the apt and dnf repositories
         env:
           PACKAGE_SIGNING_KEY: ${{ secrets.PACKAGE_SIGNING_KEY }}
           PACKAGE_SIGNING_PASSPHRASE: ${{ secrets.PACKAGE_SIGNING_PASSPHRASE }}
-          PACKAGE_REQUIRE_SIGNING: ${{ !contains(github.ref_name, '-') && '1' || '' }}
+          PACKAGE_REQUIRE_SIGNING: ${{ !contains(needs.tag.outputs.tag, '-') && '1' || '' }}
         run: scripts/package-repos.sh dist/packages
       # Fresh Debian, Ubuntu and Fedora add the repositories as the README
       # says, install Matinee and start it, before anything is published.
       - name: Test the repositories
-        if: ${{ !contains(github.ref_name, '-') }}
+        if: ${{ !contains(needs.tag.outputs.tag, '-') }}
         run: scripts/test-packages.sh dist/packages
       - uses: actions/upload-artifact@v4
         with:
@@ -150,7 +217,9 @@ jobs:
           path: dist/packages
 
   release:
-    needs: [image, chart, binaries, packages]
+    needs: [tag, image, chart, binaries, packages]
+    env:
+      TAG: ${{ needs.tag.outputs.tag }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -169,38 +238,24 @@ jobs:
       - name: Checksum everything attached
         run: cd dist && rm -f SHA256SUMS.txt && sha256sum -- * > SHA256SUMS.txt
       - name: Write the release notes
-        run: |
-          VERSION="${GITHUB_REF_NAME#v}"
-          # docs/release-notes/<tag>.md, when there is one, opens the notes.
-          : > notes.md
-          if [ -f "docs/release-notes/${GITHUB_REF_NAME}.md" ]; then
-            cat "docs/release-notes/${GITHUB_REF_NAME}.md" >> notes.md
-          fi
-          cat >> notes.md <<EOF
-          ### Install
-
-          - **Docker:** \`docker pull ghcr.io/${GITHUB_REPOSITORY}:${VERSION}\`
-          - **Kubernetes:** \`helm install matinee oci://ghcr.io/${GITHUB_REPOSITORY_OWNER}/charts/matinee --version ${VERSION}\`
-          - **Homebrew (macOS, Linux):** \`brew tap yeixio/matinee https://github.com/yeixio/matinee && brew install yeixio/matinee/matinee\`
-          - **Debian, Ubuntu, Fedora, RHEL:** add the apt or dnf repository as the [README](https://github.com/${GITHUB_REPOSITORY}#debian-and-ubuntu) shows, or install the \`.deb\` or \`.rpm\` below. Either runs Matinee as a service on port 7171.
-          - **Single binary:** download the archive for your system below. FFmpeg must be on the PATH.
-          EOF
-          if [[ "$GITHUB_REF_NAME" == *-* ]]; then
-            printf '\n**Pre-release.** Homebrew, apt and dnf keep the latest stable release; use the packages or archives below to try this one.\n' >> notes.md
-          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: scripts/release-notes.sh "$TAG" > notes.md
       - uses: softprops/action-gh-release@v2
         with:
-          name: Matinee ${{ github.ref_name }}
-          prerelease: ${{ contains(github.ref_name, '-') }}
-          generate_release_notes: true
+          tag_name: ${{ needs.tag.outputs.tag }}
+          name: Matinee ${{ needs.tag.outputs.tag }}
+          prerelease: ${{ contains(needs.tag.outputs.tag, '-') }}
           body_path: notes.md
           files: dist/*
 
   # Homebrew, apt and dnf serve stable releases; a pre-release must not
   # replace what their users install.
   publish-packages:
-    needs: release
-    if: ${{ !contains(github.ref_name, '-') }}
+    needs: [tag, release]
+    if: ${{ !contains(needs.tag.outputs.tag, '-') }}
+    env:
+      TAG: ${{ needs.tag.outputs.tag }}
     runs-on: ubuntu-latest
     concurrency:
       group: publish-packages
@@ -232,7 +287,7 @@ jobs:
           cd "$work"
           git init -q -b packages
           git add -A
-          git commit -qm "Packages for ${GITHUB_REF_NAME}"
+          git commit -qm "Packages for ${TAG}"
           git push --force "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:packages
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -241,7 +296,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
-          VERSION="${GITHUB_REF_NAME#v}" scripts/write-brew-formula.sh
+          VERSION="${TAG#v}" scripts/write-brew-formula.sh
           cp Formula/matinee.rb /tmp/matinee.rb
           git fetch origin main
           git checkout -f -B formula origin/main
@@ -252,13 +307,13 @@ jobs:
             echo "The Homebrew formula on main is current."
             exit 0
           fi
-          git commit -m "Publish the Homebrew formula for ${GITHUB_REF_NAME#v}"
+          git commit -m "Publish the Homebrew formula for ${TAG#v}"
           # formula is a release branch, replaced each release.
           git push --force origin HEAD:formula
           if [ -z "$(gh pr list --head formula --base main --state open --json number --jq '.[0].number')" ]; then
             gh pr create --base main --head formula \
-              --title "Publish the Homebrew formula for ${GITHUB_REF_NAME#v}" \
-              --body "Updates Formula/matinee.rb from the ${GITHUB_REF_NAME} release."
+              --title "Publish the Homebrew formula for ${TAG#v}" \
+              --body "Updates Formula/matinee.rb from the ${TAG} release."
           fi
           # The workflow token can open the pull request but not approve it,
           # so a required review leaves it open rather than failing the release.

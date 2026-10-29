@@ -295,7 +295,12 @@ The Go tests build real media files with FFmpeg and run a full scan, browse, pla
 
 ## Releasing
 
-Push a version tag, such as `git tag v0.2.0 && git push origin v0.2.0`. The release workflow tests, then publishes `ghcr.io/yeixio/matinee:0.2.0` (and `0.2`, `latest`) for amd64, arm64 and armv7, pushes the Helm chart to `oci://ghcr.io/yeixio/charts/matinee` with that version, and attaches single-binary archives for Linux, macOS and Windows plus `.deb` and `.rpm` packages to a GitHub release. It then installs the packages from freshly built apt and dnf repositories in Debian, Ubuntu and Fedora containers, publishes those repositories on the `packages` branch, and opens a pull request updating `Formula/matinee.rb` for Homebrew. A tag with a suffix (`v0.2.0-beta.1`) is a pre-release: it leaves `latest`, Homebrew, apt and dnf alone. Packaging details and the signing key setup are in [docs/packaging.md](docs/packaging.md).
+1. Merge the release notes as `docs/release-notes/<tag>.md`, such as `docs/release-notes/v0.2.0.md`. They open the GitHub release.
+2. Under **Actions → Release**, press **Run workflow** on `main` and pick **patch**, **minor** or **major** (or type an exact version, such as `v0.3.0-beta.1`).
+
+The workflow picks the next version after the last release, and stops without tagging if that version's notes are missing, if CI hasn't passed on `main` (it waits while CI is still running), or if `main` hasn't changed since the last release. Pushing a tag by hand (`git tag v0.2.0 && git push origin v0.2.0`) still releases too. Notes that change after a release is out are copied to its GitHub release when they reach `main`.
+
+The release workflow tests, then publishes `ghcr.io/yeixio/matinee:0.2.0` (and `0.2`, `latest`) for amd64, arm64 and armv7, pushes the Helm chart to `oci://ghcr.io/yeixio/charts/matinee` with that version, and attaches single-binary archives for Linux, macOS and Windows plus `.deb` and `.rpm` packages to a GitHub release. It then installs the packages from freshly built apt and dnf repositories in Debian, Ubuntu and Fedora containers, publishes those repositories on the `packages` branch, and opens a pull request updating `Formula/matinee.rb` for Homebrew. A tag with a suffix (`v0.2.0-beta.1`) is a pre-release: it leaves `latest`, Homebrew, apt and dnf alone. Packaging details and the signing key setup are in [docs/packaging.md](docs/packaging.md).
 
 ## Support Matinee
 
