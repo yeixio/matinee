@@ -421,5 +421,17 @@
     "noNarrators": "Ingen indlæsere endnu",
     "fromTags": "Serier og indlæsere kommer fra bøgernes tags eller fra mapper som Forfatter/Serie/Bog.",
     "length": "Længde"
+  },
+  "reconnect": {
+    "heads": "Serveren genstarter. Afspilningen kan stoppe et øjeblik.",
+    "restarting": "Serveren genstarter",
+    "restartingDetail": "Det betyder som regel, at den bliver opdateret. Du fortsætter, hvor du var, når den er tilbage.",
+    "unreachable": "Kan ikke få forbindelse til serveren",
+    "unreachableDetail": "Prøver igen. Du fortsætter, hvor du var, når den er tilbage.",
+    "gaveUp": "Kan stadig ikke få forbindelse til serveren",
+    "gaveUpDetail": "Tjek, at serveren kører, og at enheden er online, og prøv igen.",
+    "tryAgain": "Prøv igen",
+    "updated": "Serveren er opdateret til {{version}}. Du fortsætter, hvor du var.",
+    "restarted": "Serveren genstartede. Du fortsætter, hvor du var."
   }
 }

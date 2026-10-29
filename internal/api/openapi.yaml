@@ -47,6 +47,13 @@ paths:
   /health:
     get:
       summary: Health check
+      description: |
+        Players ask this when playback breaks off. `state` is `restarting`
+        while the server shuts down for an update or a restart (every answer
+        then also has the header `Matinee-Restarting: 1`). `bootId` changes
+        each time the server starts: the same one as before means only the
+        connection dropped, a new one that the server restarted, and a new
+        `version` besides that it was updated.
       security: []
       responses:
         "200":
@@ -59,6 +66,8 @@ paths:
                   status: { type: string, const: ok }
                   version: { type: string }
                   apiVersion: { type: integer }
+                  state: { type: string, enum: [ok, restarting] }
+                  bootId: { type: string }
   /server/proof:
     post:
       summary: Prove this is the server behind serverId
@@ -2307,7 +2316,10 @@ paths:
         Answers as soon as there's a command, or with none after `wait`
         seconds (at most 30). Ask again right away. A player that stops
         asking for 45 seconds shows as offline. 404 means the server
-        doesn't know this player (it restarted): say hello again.
+        doesn't know this player (it restarted): say hello again. When the
+        server starts shutting down, every waiting request answers at once
+        with `restarting: true`, so a player can tell its viewer and pick up
+        where it was once the server is back (see `/health`).
       parameters:
         - { $ref: "#/components/parameters/ClientID" }
         - { name: wait, in: query, schema: { type: integer, minimum: 0, maximum: 30 } }
@@ -2320,6 +2332,7 @@ paths:
                 type: object
                 properties:
                   commands: { type: array, items: { $ref: "#/components/schemas/Command" } }
+                  restarting: { type: boolean }
         "404": { $ref: "#/components/responses/Error" }
     post:
       summary: Ask a player to do something

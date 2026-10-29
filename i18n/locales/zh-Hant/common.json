@@ -393,5 +393,17 @@
     "noNarrators": "還沒有朗讀者",
     "fromTags": "系列和朗讀者來自書籍的標籤，或「作者/系列/書籍」這樣的資料夾。",
     "length": "長度"
+  },
+  "reconnect": {
+    "heads": "伺服器正在重新啟動，播放可能會暫停片刻。",
+    "restarting": "伺服器正在重新啟動",
+    "restartingDetail": "這通常表示正在更新。恢復後會從你離開的地方繼續播放。",
+    "unreachable": "無法連線到伺服器",
+    "unreachableDetail": "正在重試。恢復後會從你離開的地方繼續播放。",
+    "gaveUp": "仍無法連線到伺服器",
+    "gaveUpDetail": "請確認伺服器正在執行且此裝置已連網，然後再試一次。",
+    "tryAgain": "再試一次",
+    "updated": "伺服器已更新至 {{version}}，從你離開的地方繼續播放。",
+    "restarted": "伺服器已重新啟動，從你離開的地方繼續播放。"
   }
 }

@@ -393,5 +393,17 @@
     "noNarrators": "Belum ada narator",
     "fromTags": "Seri dan narator diambil dari tag buku, atau dari folder seperti Penulis/Seri/Buku.",
     "length": "Durasi"
+  },
+  "reconnect": {
+    "heads": "Server sedang dimulai ulang. Pemutaran mungkin berhenti sebentar.",
+    "restarting": "Server sedang dimulai ulang",
+    "restartingDetail": "Biasanya ini berarti server sedang diperbarui. Kamu akan lanjut dari posisi terakhir setelah server kembali.",
+    "unreachable": "Tidak dapat menjangkau server",
+    "unreachableDetail": "Mencoba lagi. Kamu akan lanjut dari posisi terakhir setelah server kembali.",
+    "gaveUp": "Masih tidak dapat menjangkau server",
+    "gaveUpDetail": "Pastikan server berjalan dan perangkat ini online, lalu coba lagi.",
+    "tryAgain": "Coba lagi",
+    "updated": "Server diperbarui ke {{version}}. Melanjutkan dari posisi terakhir.",
+    "restarted": "Server dimulai ulang. Melanjutkan dari posisi terakhir."
   }
 }

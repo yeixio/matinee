@@ -39,6 +39,11 @@ type Config struct {
 	BillingURL    string        // where that service's subscription is bought; empty for a service that needs none
 	Plugins       bool          // run plugins (internal/plugin)
 	PluginCatalog string        // where the list of official plugins is; empty for none
+	// On SIGTERM the server first tells players it's restarting and waits
+	// DrainDelay (so a load balancer stops sending it requests), then gives
+	// requests in flight up to ShutdownTimeout to finish.
+	DrainDelay      time.Duration
+	ShutdownTimeout time.Duration
 }
 
 // Database is what store.Open takes: the PostgreSQL URL, or the SQLite file.
@@ -87,6 +92,8 @@ func Load(args []string) (Config, error) {
 	fs.BoolVar(&c.Plugins, "plugins", env("MATINEE_PLUGINS", "true") != "false", "let admins install plugins in Settings")
 	fs.StringVar(&c.PluginCatalog, "plugin-catalog", env("MATINEE_PLUGIN_CATALOG", "https://matinee.yeix.io/plugins.json"), "list of official plugins Settings offers; off for none")
 	interval := fs.String("scan-interval", env("MATINEE_SCAN_INTERVAL", "15m"), "periodic rescan interval, 0 to disable")
+	drainDelay := fs.String("drain-delay", env("MATINEE_DRAIN_DELAY", "0s"), "on shutdown, how long to keep serving after telling players the server is restarting (the Helm chart uses 5s)")
+	shutdownTimeout := fs.String("shutdown-timeout", env("MATINEE_SHUTDOWN_TIMEOUT", "10s"), "on shutdown, how long requests in flight get to finish")
 	watchPoll := fs.String("watch-poll-interval", env("MATINEE_WATCH_POLL_INTERVAL", "30s"), "how often folders on network shares are checked for new files")
 	if err := fs.Parse(args); err != nil {
 		return c, err
@@ -113,6 +120,12 @@ func Load(args []string) (Config, error) {
 	}
 	if c.WatchPoll, err = time.ParseDuration(*watchPoll); err != nil || c.WatchPoll < time.Second {
 		return c, fmt.Errorf("watch-poll-interval: want a duration of at least 1s, like 30s")
+	}
+	if c.DrainDelay, err = time.ParseDuration(*drainDelay); err != nil || c.DrainDelay < 0 {
+		return c, fmt.Errorf("drain-delay: want a duration, like 5s")
+	}
+	if c.ShutdownTimeout, err = time.ParseDuration(*shutdownTimeout); err != nil || c.ShutdownTimeout < 0 {
+		return c, fmt.Errorf("shutdown-timeout: want a duration, like 10s")
 	}
 	if err := os.MkdirAll(c.TranscodeDir(), 0o755); err != nil {
 		return c, fmt.Errorf("create data dir: %w", err)

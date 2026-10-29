@@ -5,6 +5,7 @@
 import { type ItemFilter, toSearchParams } from './filter'
 import i18n from './i18n'
 import type { LevelsJSON } from './player/levels'
+import { heardRestarting, RESTARTING_HEADER } from './player/reconnect'
 
 // guest is the shared account of a device at home that hasn't signed in, or
 // one of its profiles. Profiles have accountId; kids profiles have kidsLevel
@@ -644,6 +645,7 @@ async function request<T>(method: string, path: string, body?: unknown): Promise
 
 // response reads an API answer, throwing an ApiError for a failure.
 export async function response<T>(res: Response): Promise<T> {
+  if (res.headers.get(RESTARTING_HEADER)) heardRestarting()
   if (!res.ok) {
     let message = res.statusText
     let code: string | undefined

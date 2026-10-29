@@ -421,5 +421,17 @@
     "noNarrators": "Nog geen vertellers",
     "fromTags": "Reeksen en vertellers komen uit de tags van de boeken, of uit mappen zoals Auteur/Reeks/Boek.",
     "length": "Lengte"
+  },
+  "reconnect": {
+    "heads": "De server wordt opnieuw gestart. Het afspelen kan even haperen.",
+    "restarting": "De server wordt opnieuw gestart",
+    "restartingDetail": "Meestal betekent dit een update. Zodra hij terug is, ga je verder waar je was.",
+    "unreachable": "Kan de server niet bereiken",
+    "unreachableDetail": "Opnieuw proberen. Zodra hij terug is, ga je verder waar je was.",
+    "gaveUp": "Kan de server nog steeds niet bereiken",
+    "gaveUpDetail": "Controleer of de server draait en dit apparaat online is, en probeer het opnieuw.",
+    "tryAgain": "Opnieuw proberen",
+    "updated": "De server is bijgewerkt naar {{version}}. Je gaat verder waar je was.",
+    "restarted": "De server is opnieuw gestart. Je gaat verder waar je was."
   }
 }

@@ -477,5 +477,17 @@
     "noNarrators": "Brak lektorów",
     "fromTags": "Serie i lektorzy pochodzą z tagów książek albo z folderów typu Autor/Seria/Książka.",
     "length": "Długość"
+  },
+  "reconnect": {
+    "heads": "Serwer uruchamia się ponownie. Odtwarzanie może na chwilę się zatrzymać.",
+    "restarting": "Serwer uruchamia się ponownie",
+    "restartingDetail": "Zwykle oznacza to aktualizację. Gdy wróci, odtwarzanie wznowi się w tym samym miejscu.",
+    "unreachable": "Nie można połączyć się z serwerem",
+    "unreachableDetail": "Ponawianie próby. Gdy wróci, odtwarzanie wznowi się w tym samym miejscu.",
+    "gaveUp": "Nadal nie można połączyć się z serwerem",
+    "gaveUpDetail": "Sprawdź, czy serwer działa, a to urządzenie jest online, i spróbuj ponownie.",
+    "tryAgain": "Spróbuj ponownie",
+    "updated": "Serwer zaktualizowano do wersji {{version}}. Wznawianie w tym samym miejscu.",
+    "restarted": "Serwer uruchomił się ponownie. Wznawianie w tym samym miejscu."
   }
 }

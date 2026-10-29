@@ -421,5 +421,17 @@
     "noNarrators": "No narrators yet",
     "fromTags": "Series and narrators come from the books’ tags, or from folders like Author/Series/Book.",
     "length": "Length"
+  },
+  "reconnect": {
+    "heads": "The server is restarting. Playback may pause for a moment.",
+    "restarting": "The server is restarting",
+    "restartingDetail": "This usually means it's being updated. You'll pick up where you left off once it's back.",
+    "unreachable": "Can't reach the server",
+    "unreachableDetail": "Trying again. You'll pick up where you left off once it's back.",
+    "gaveUp": "Still can't reach the server",
+    "gaveUpDetail": "Check that the server is running and this device is online, then try again.",
+    "tryAgain": "Try again",
+    "updated": "The server was updated to {{version}}. Picking up where you left off.",
+    "restarted": "The server restarted. Picking up where you left off."
   }
 }

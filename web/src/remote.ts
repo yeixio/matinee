@@ -6,6 +6,7 @@
 // lock talks to the server, and another takes over when it closes.
 
 import { ApiError } from './api'
+import { heardRestarting, RESTARTING_HEADER } from './player/reconnect'
 
 export type CommandType =
   | 'play'
@@ -97,6 +98,7 @@ async function send(method: string, url: string, body?: unknown, signal?: AbortS
     headers: body === undefined ? undefined : { 'Content-Type': 'application/json' },
     body: body === undefined ? undefined : JSON.stringify(body),
   })
+  if (res.headers.get(RESTARTING_HEADER)) heardRestarting()
   if (!res.ok) throw new ApiError(res.status, res.statusText)
   return res.status === 204 ? undefined : res.json()
 }
@@ -145,6 +147,8 @@ async function loop(signal: AbortSignal) {
     try {
       const res = await send('GET', `${path()}/commands?wait=${WAIT_SECONDS}`, undefined, signal)
       failures = 0
+      // The server is shutting down; players say so (player/reconnect.ts).
+      if (res?.restarting) heardRestarting()
       for (const c of (res?.commands ?? []) as Command[]) handle(c)
     } catch (e) {
       if (signal.aborted) return

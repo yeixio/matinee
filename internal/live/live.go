@@ -183,11 +183,32 @@ type Hub struct {
 	subs    map[chan Event]struct{}
 	now     func() time.Time
 	seq     int
+	// closing is closed when the server starts shutting down (see Close).
+	closing   chan struct{}
+	closeOnce sync.Once
 }
 
 // New makes a hub. Run it so players go offline when they leave.
 func New() *Hub {
-	return &Hub{clients: map[string]*Client{}, subs: map[chan Event]struct{}{}, now: time.Now}
+	return &Hub{clients: map[string]*Client{}, subs: map[chan Event]struct{}{}, now: time.Now, closing: make(chan struct{})}
+}
+
+// closingWait is how long Poll holds a request once the server is shutting
+// down, so older players that ask again at once don't spin.
+const closingWait = 2 * time.Second
+
+// Close is the server shutting down: every held Poll returns at once, so
+// players hear about it (see Closing) and the server isn't kept waiting.
+func (h *Hub) Close() { h.closeOnce.Do(func() { close(h.closing) }) }
+
+// Closing says whether the server is shutting down.
+func (h *Hub) Closing() bool {
+	select {
+	case <-h.closing:
+		return true
+	default:
+		return false
+	}
 }
 
 // Run marks quiet players offline, until ctx ends.
@@ -324,6 +345,10 @@ func (h *Hub) Poll(ctx context.Context, id string, account int64, wait time.Dura
 	}
 	take()
 	if len(cmds) == 0 && wait > 0 {
+		closing := h.closing
+		if h.Closing() {
+			wait, closing = min(wait, closingWait), nil
+		}
 		t := time.NewTimer(min(wait, MaxWait))
 		defer t.Stop()
 		select {
@@ -331,6 +356,7 @@ func (h *Hub) Poll(ctx context.Context, id string, account int64, wait time.Dura
 			cmds = append(cmds, c)
 			take()
 		case <-t.C:
+		case <-closing:
 		case <-ctx.Done():
 		}
 	}

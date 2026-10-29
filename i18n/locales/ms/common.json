@@ -393,5 +393,17 @@
     "noNarrators": "Belum ada pencerita",
     "fromTags": "Siri dan pencerita diambil daripada tag buku, atau daripada folder seperti Pengarang/Siri/Buku.",
     "length": "Tempoh"
+  },
+  "reconnect": {
+    "heads": "Pelayan sedang dimulakan semula. Main balik mungkin terhenti seketika.",
+    "restarting": "Pelayan sedang dimulakan semula",
+    "restartingDetail": "Biasanya ini bermakna pelayan sedang dikemas kini. Anda akan sambung dari tempat terakhir apabila ia kembali.",
+    "unreachable": "Tidak dapat mencapai pelayan",
+    "unreachableDetail": "Mencuba lagi. Anda akan sambung dari tempat terakhir apabila ia kembali.",
+    "gaveUp": "Masih tidak dapat mencapai pelayan",
+    "gaveUpDetail": "Pastikan pelayan berjalan dan peranti ini dalam talian, kemudian cuba lagi.",
+    "tryAgain": "Cuba lagi",
+    "updated": "Pelayan dikemas kini ke {{version}}. Menyambung dari tempat terakhir.",
+    "restarted": "Pelayan dimulakan semula. Menyambung dari tempat terakhir."
   }
 }

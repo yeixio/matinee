@@ -8,6 +8,25 @@ image:
 # Several replicas need sticky sessions (see service.sessionAffinity).
 replicaCount: 1
 
+# How an upgrade replaces the pod. Recreate (the default) stops the old pod
+# before starting the new one: players show that the server is restarting
+# and pick up where they were once it's back. RollingUpdate starts the new
+# pod first, so the break is only a few seconds, but only works when two pods
+# can run at once: discovery.homePort 0, remoteAccess off (both take ports on
+# the node), and volumes the new pod can mount next to the old one.
+#   strategy: {type: RollingUpdate, rollingUpdate: {maxSurge: 1, maxUnavailable: 0}}
+strategy:
+  type: Recreate
+
+# On shutdown Matinee tells players it's restarting at once, waits
+# drainDelaySeconds so the Service stops sending it requests (empty: 5 with
+# RollingUpdate, 0 with Recreate, where no other pod could take them), then
+# gives requests in flight up to timeoutSeconds to finish (a film playing
+# straight from its file is one long request, so keep this short).
+shutdown:
+  drainDelaySeconds: ""
+  timeoutSeconds: 10
+
 service:
   type: ClusterIP
   port: 7171

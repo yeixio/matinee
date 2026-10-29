@@ -66,6 +66,19 @@ The [phone and TV apps](/docs/apps/phone-and-tv/#sleep-timer) have the same time
 The player can be paused, moved or started from [Home Assistant](/docs/server/home-assistant/). When that happens it says so for a moment, such as **Controlled from Home Assistant**. Each browser counts as one player; the tab with a video open, or with music playing, is the one that listens. [Who signs in, and when](/docs/household/signing-in/#who-can-control-which-player) says who may control it.
 
 <!-- /since -->
+<!-- since: v0.1.4 -->
+## When the server restarts or updates
+
+If the server goes away while you watch, for an update, a restart or a network hiccup, the player doesn't give up. It says what's going on and picks up where you were once the server is back:
+
+- **The server is restarting** when the server said it was shutting down, which usually means an update. Matinee says so the moment it starts, and what's already loaded often carries the picture through.
+- **Can't reach the server** when it went quiet without saying why: it crashed, lost power, or this device lost its connection.
+
+Once the server answers again, playback carries on from the same spot. A short note says what happened: **The server was updated to** a new version, or **The server restarted**. A connection that only dropped for a moment just carries on.
+
+After three minutes without the server, the player stops trying and offers **Try again**. The [phone and TV apps](/docs/apps/phone-and-tv/) do the same.
+
+<!-- /since -->
 
 ## How any file gets to play
 

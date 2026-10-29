@@ -6,9 +6,9 @@ metadata:
     {{- include "matinee.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
-  # Stop the old pod before starting the new one so transcodes don't double up.
+  # See strategy in values.yaml.
   strategy:
-    type: Recreate
+    {{- toYaml .Values.strategy | nindent 4 }}
   selector:
     matchLabels:
       {{- include "matinee.selectorLabels" . | nindent 6 }}
@@ -54,6 +54,8 @@ spec:
       {{- end }}
       securityContext:
         {{- toYaml $podSecurity | nindent 8 }}
+      # Room for the drain delay and requests in flight (see shutdown in values.yaml).
+      terminationGracePeriodSeconds: {{ add (include "matinee.drainDelay" . | atoi) .Values.shutdown.timeoutSeconds 10 }}
       containers:
         - name: matinee
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
@@ -81,6 +83,10 @@ spec:
           env:
             - name: MATINEE_ADDR
               value: ":7171"
+            - name: MATINEE_DRAIN_DELAY
+              value: "{{ include "matinee.drainDelay" . }}s"
+            - name: MATINEE_SHUTDOWN_TIMEOUT
+              value: "{{ .Values.shutdown.timeoutSeconds }}s"
             - name: MATINEE_DATA_DIR
               value: /cache
             - name: MATINEE_MEDIA_ROOT

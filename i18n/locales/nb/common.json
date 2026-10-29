@@ -421,5 +421,17 @@
     "noNarrators": "Ingen opplesere ennå",
     "fromTags": "Serier og opplesere kommer fra bøkenes tagger, eller fra mapper som Forfatter/Serie/Bok.",
     "length": "Lengde"
+  },
+  "reconnect": {
+    "heads": "Serveren starter på nytt. Avspillingen kan stoppe et øyeblikk.",
+    "restarting": "Serveren starter på nytt",
+    "restartingDetail": "Som regel betyr det at den oppdateres. Du fortsetter der du var når den er tilbake.",
+    "unreachable": "Får ikke kontakt med serveren",
+    "unreachableDetail": "Prøver igjen. Du fortsetter der du var når den er tilbake.",
+    "gaveUp": "Får fortsatt ikke kontakt med serveren",
+    "gaveUpDetail": "Sjekk at serveren kjører og at enheten er på nett, og prøv igjen.",
+    "tryAgain": "Prøv igjen",
+    "updated": "Serveren er oppdatert til {{version}}. Du fortsetter der du var.",
+    "restarted": "Serveren startet på nytt. Du fortsetter der du var."
   }
 }

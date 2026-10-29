@@ -449,5 +449,17 @@
     "noNarrators": "Încă nu există naratori",
     "fromTags": "Seriile și naratorii vin din etichetele cărților sau din dosare precum Autor/Serie/Carte.",
     "length": "Durată"
+  },
+  "reconnect": {
+    "heads": "Serverul repornește. Redarea se poate opri pentru o clipă.",
+    "restarting": "Serverul repornește",
+    "restartingDetail": "De obicei înseamnă că se actualizează. Vei continua de unde ai rămas când revine.",
+    "unreachable": "Serverul nu poate fi accesat",
+    "unreachableDetail": "Se încearcă din nou. Vei continua de unde ai rămas când revine.",
+    "gaveUp": "Serverul tot nu poate fi accesat",
+    "gaveUpDetail": "Verifică dacă serverul funcționează și dacă dispozitivul este online, apoi încearcă din nou.",
+    "tryAgain": "Încearcă din nou",
+    "updated": "Serverul a fost actualizat la {{version}}. Continui de unde ai rămas.",
+    "restarted": "Serverul a repornit. Continui de unde ai rămas."
   }
 }

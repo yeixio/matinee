@@ -449,5 +449,17 @@
     "noNarrators": "Pas encore de narrateurs",
     "fromTags": "Les séries et les narrateurs viennent des tags des livres, ou de dossiers comme Auteur/Série/Livre.",
     "length": "Durée"
+  },
+  "reconnect": {
+    "heads": "Le serveur redémarre. La lecture peut s'interrompre un instant.",
+    "restarting": "Le serveur redémarre",
+    "restartingDetail": "C'est généralement une mise à jour. Vous reprendrez là où vous en étiez dès son retour.",
+    "unreachable": "Impossible de joindre le serveur",
+    "unreachableDetail": "Nouvelle tentative. Vous reprendrez là où vous en étiez dès son retour.",
+    "gaveUp": "Toujours impossible de joindre le serveur",
+    "gaveUpDetail": "Vérifiez que le serveur fonctionne et que cet appareil est connecté, puis réessayez.",
+    "tryAgain": "Réessayer",
+    "updated": "Le serveur a été mis à jour vers {{version}}. Reprise là où vous en étiez.",
+    "restarted": "Le serveur a redémarré. Reprise là où vous en étiez."
   }
 }

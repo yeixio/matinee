@@ -449,5 +449,17 @@
     "noNarrators": "Nenhum narrador ainda",
     "fromTags": "Séries e narradores vêm das tags dos livros ou de pastas como Autor/Série/Livro.",
     "length": "Duração"
+  },
+  "reconnect": {
+    "heads": "O servidor está reiniciando. A reprodução pode pausar por um instante.",
+    "restarting": "O servidor está reiniciando",
+    "restartingDetail": "Geralmente isso significa que ele está sendo atualizado. Você continua de onde parou assim que ele voltar.",
+    "unreachable": "Não foi possível acessar o servidor",
+    "unreachableDetail": "Tentando de novo. Você continua de onde parou assim que ele voltar.",
+    "gaveUp": "Ainda não foi possível acessar o servidor",
+    "gaveUpDetail": "Verifique se o servidor está ligado e se este dispositivo está online, e tente de novo.",
+    "tryAgain": "Tentar de novo",
+    "updated": "O servidor foi atualizado para {{version}}. Continuando de onde você parou.",
+    "restarted": "O servidor reiniciou. Continuando de onde você parou."
   }
 }

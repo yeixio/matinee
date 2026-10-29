@@ -23,6 +23,17 @@ Updates move your database forward by themselves on the first start. Going back 
 
 Docker images are tagged by version (`0.1.0`, `0.1`) as well as `latest`, so you can pin a version and move up on your own schedule.
 
+<!-- since: v0.1.4 -->
+### Updating while people are watching
+
+You don't need to wait for everyone to finish. When Matinee stops, it first tells every open player that it's restarting, lets requests in flight finish, and only then exits. Players say **The server is restarting**, wait for it, and [pick up where they were](/docs/watching/playing/#when-the-server-restarts-or-updates), so an update is a pause of however long the new version takes to start.
+
+With Helm, the chart replaces the pod by stopping the old one before starting the new one (`strategy: Recreate`), because the home network port, remote access and the volumes it uses all belong to one pod at a time. With the bundled database and Matinee pinned to a node (`nodeSelector` or `affinity`), the chart's setup step pulls the new image onto that node before the old pod stops, which keeps the pause short. If your install uses none of those (`discovery.homePort: 0`, `remoteAccess.enabled: false`, and volumes two pods can mount at once), set `strategy.type: RollingUpdate` so the new pod starts first and the pause is only a few seconds. `shutdown.drainDelaySeconds` and `shutdown.timeoutSeconds` tune how long the old pod keeps serving.
+
+Outside Kubernetes, `MATINEE_DRAIN_DELAY` and `MATINEE_SHUTDOWN_TIMEOUT` (or `--drain-delay` and `--shutdown-timeout`) do the same.
+
+<!-- /since -->
+
 ## What to back up
 
 Everything Matinee knows lives in its data folder (`MATINEE_DATA_DIR`):

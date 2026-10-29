@@ -92,6 +92,7 @@ type Server struct {
 	HomeListener    bool
 	homeSignIn      homeSetting
 	setUp           atomic.Bool     // the first account exists
+	draining        atomic.Bool     // the server is shutting down (see drain.go)
 	arrCache        ttlCache        // answers from Radarr and Sonarr (see arr.go)
 	discoverCache   ttlCache        // answers from Overseerr (see discover.go)
 	catalogCache    ttlCache        // the official plugins (see plugins.go)
@@ -145,7 +146,10 @@ type route struct {
 func (s *Server) routes() []route {
 	return []route{
 		{"GET /health", public, func(w http.ResponseWriter, r *http.Request) {
-			writeJSON(w, http.StatusOK, map[string]any{"status": "ok", "version": version.Version, "apiVersion": APIVersion})
+			// state is "restarting" while the server shuts down; players
+			// compare bootId before and after losing the server (drain.go).
+			writeJSON(w, http.StatusOK, map[string]any{"status": "ok", "version": version.Version, "apiVersion": APIVersion,
+				"state": s.serverState(), "bootId": bootID})
 		}},
 		{"GET /server", public, s.serverInfo},
 		{"POST /server/proof", public, s.proveServer},
@@ -303,9 +307,14 @@ func (s *Server) routes() []route {
 func (s *Server) Handler() http.Handler {
 	mux := http.NewServeMux()
 
-	// Kubernetes probes: alive means the process answers, ready means the database does too.
+	// Kubernetes probes: alive means the process answers, ready means the
+	// database does too and the server isn't shutting down.
 	mux.HandleFunc("GET /healthz", func(w http.ResponseWriter, r *http.Request) { w.Write([]byte("ok")) })
 	mux.HandleFunc("GET /readyz", func(w http.ResponseWriter, r *http.Request) {
+		if s.draining.Load() {
+			http.Error(w, "restarting", http.StatusServiceUnavailable)
+			return
+		}
 		ctx, cancel := context.WithTimeout(r.Context(), 2*time.Second)
 		defer cancel()
 		if err := s.Store.Ping(ctx); err != nil {
@@ -331,7 +340,7 @@ func (s *Server) Handler() http.Handler {
 		writeError(w, http.StatusNotFound, "no such endpoint")
 	})
 	mux.Handle("/", s.webHandler())
-	return s.logRequests(mux)
+	return s.logRequests(s.markRestarting(mux))
 }
 
 // ---- helpers ----

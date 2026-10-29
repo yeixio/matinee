@@ -393,5 +393,17 @@
     "noNarrators": "还没有朗读者",
     "fromTags": "系列和朗读者来自图书的标签，或“作者/系列/图书”这样的文件夹。",
     "length": "时长"
+  },
+  "reconnect": {
+    "heads": "服务器正在重启，播放可能会暂停片刻。",
+    "restarting": "服务器正在重启",
+    "restartingDetail": "这通常表示正在更新。恢复后会从你离开的地方继续播放。",
+    "unreachable": "无法连接服务器",
+    "unreachableDetail": "正在重试。恢复后会从你离开的地方继续播放。",
+    "gaveUp": "仍无法连接服务器",
+    "gaveUpDetail": "请确认服务器正在运行且此设备已联网，然后重试。",
+    "tryAgain": "重试",
+    "updated": "服务器已更新到 {{version}}，从你离开的地方继续播放。",
+    "restarted": "服务器已重启，从你离开的地方继续播放。"
   }
 }
