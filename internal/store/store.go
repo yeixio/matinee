@@ -349,6 +349,12 @@ var migrations = []string{
 		updated_at BIGINT NOT NULL, -- milliseconds
 		PRIMARY KEY (plugin_id, user_id, key)
 	)`,
+	// 50–53: audiobooks (see books.go). A file's own chapters, and a book's
+	// narrators and place in a series.
+	"ALTER TABLE items ADD COLUMN chapters TEXT",  // JSON list of probe.Chapter
+	"ALTER TABLE items ADD COLUMN narrators TEXT", // |Name|Name|, like genres
+	"ALTER TABLE items ADD COLUMN series TEXT",
+	"ALTER TABLE items ADD COLUMN series_index REAL",
 }
 
 func now() int64 { return time.Now().Unix() }

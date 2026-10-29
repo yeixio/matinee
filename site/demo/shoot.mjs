@@ -153,6 +153,27 @@ try {
       await sleep(1000)
       await shot(page, 'artist')
     }
+
+    // Audiobooks: an hour into the first book of a series.
+    const tide = await find('The Tide Keeper', ['book'])
+    if (tide && libs.audiobooks) {
+      await api(token, 'PUT', `/items/${tide.id}/progress`, { positionMs: 63 * 60000 })
+      // The album above is still playing; close its player first.
+      const close = page.getByRole('button', { name: 'Close player' })
+      if (await close.count()) await close.first().click()
+      await page.goto(`${origin}/library/${libs.audiobooks.id}`)
+      await sleep(1000)
+      await shot(page, 'audiobooks')
+      await page.goto(`${origin}/item/${tide.id}`)
+      await page.getByRole('button', { name: 'Resume' }).click()
+      await page.evaluate(() => window.scrollTo(0, 0))
+      await sleep(1500)
+      await shot(page, 'book')
+      await page.getByRole('button', { name: 'Open the player' }).click()
+      await sleep(1200)
+      await shot(page, 'book-player')
+      await page.keyboard.press('Escape')
+    }
     await page.context().close()
   }
 

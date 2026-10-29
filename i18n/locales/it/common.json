@@ -177,7 +177,10 @@
     "tracks_other": "{{count}} tracce",
     "titles_one": "{{count}} titolo",
     "titles_many": "{{count}} titoli",
-    "titles_other": "{{count}} titoli"
+    "titles_other": "{{count}} titoli",
+    "books_one": "{{count}} libro",
+    "books_many": "{{count}} di libri",
+    "books_other": "{{count}} libri"
   },
   "awards": {
     "academy": {
@@ -404,5 +407,38 @@
     "minimize": "Riduci",
     "readMore": "Leggi tutto",
     "less": "Mostra meno"
+  },
+  "books": {
+    "overview": "Panoramica",
+    "books": "Libri",
+    "authors": "Autori",
+    "series": "Serie",
+    "narrators": "Narratori",
+    "audiobook": "Audiolibro",
+    "author": "Autore",
+    "continueListening": "Continua ad ascoltare",
+    "nowListening": "In ascolto",
+    "openPlayer": "Apri il player",
+    "chapters": "Capitoli",
+    "previousChapter": "Capitolo precedente",
+    "nextChapter": "Capitolo successivo",
+    "backSeconds": "Indietro di {{seconds}} secondi",
+    "aheadSeconds": "Avanti di {{seconds}} secondi",
+    "speed": "Velocità",
+    "left": "{{time}} rimanenti",
+    "leftInBook": "{{time}} rimanenti nel libro",
+    "resume": "Riprendi",
+    "markFinished": "Segna come finito",
+    "markUnfinished": "Segna come non finito",
+    "finished": "Finito",
+    "bookOf": "Libro {{n}} di {{series}}",
+    "bookN": "Libro {{n}}",
+    "inSeries": "Altro da {{series}}",
+    "narratedBy": "Letto da {{names}}",
+    "narratedByLabel": "Letto da",
+    "noSeries": "Ancora nessuna serie",
+    "noNarrators": "Ancora nessun narratore",
+    "fromTags": "Serie e narratori vengono dai tag dei libri o da cartelle come Autore/Serie/Libro.",
+    "length": "Durata"
   }
 }

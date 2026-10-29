@@ -155,7 +155,8 @@
     "endOfItem": "When this ends",
     "left": "{{time}} left",
     "atEnd": "Stops at the end",
-    "paused": "Paused by the sleep timer"
+    "paused": "Paused by the sleep timer",
+    "endOfChapter": "End of this chapter"
   },
   "goBack": "Go back",
   "back": "Back",
@@ -591,7 +592,8 @@
       "kind": {
         "movies": "Movies",
         "tv": "TV shows",
-        "music": "Music"
+        "music": "Music",
+        "audiobooks": "Audiobooks"
       },
       "type": "Type",
       "folders": "Folders",

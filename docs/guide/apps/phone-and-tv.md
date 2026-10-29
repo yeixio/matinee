@@ -46,6 +46,9 @@ On a TV, sign-in starts with a code instead of a password: see [Signing in a dev
 <!-- since: v0.1.1 -->
 - **Music on phones** with its own player: artists, albums and songs, a player above the tabs that keeps going while you browse, and a full player with the queue. See [Music](/docs/watching/music/#on-the-phone-apps).
 <!-- /since -->
+<!-- since: v0.1.2 -->
+- **Audiobooks** on phones with a player made for books: chapters, back and ahead, the speed and a sleep timer that can stop at the end of a chapter. A TV plays them too. See [Audiobooks](/docs/watching/audiobooks/#in-the-apps).
+<!-- /since -->
 - **Downloads** on phones and tablets, to [watch offline](/docs/apps/downloads/).
 - **Coming soon**, with [Radarr or Sonarr](/docs/server/radarr-and-sonarr/#coming-soon) connected: a row at the end of Home, and the next two months day by day. On a phone, the calendar along the top jumps to a day; on a TV, each day is a row.
 

@@ -15,7 +15,8 @@ import (
 )
 
 // Kind is a type of library: which files belong in it and how they're filed.
-// Movies, TV and music are built in; library-type plugins will register more.
+// Movies, TV, music and audiobooks are built in; library-type plugins
+// register more.
 type Kind interface {
 	Name() string
 	Wants(path string) bool
@@ -49,6 +50,13 @@ type Unprobed interface {
 type Session interface {
 	Kind
 	BeginScan(ctx context.Context, lib store.Library) (end func())
+}
+
+// Finisher is a Kind with work to do once a scan has filed every file,
+// such as adding up a book's parts.
+type Finisher interface {
+	Kind
+	FinishScan(ctx context.Context, st *store.Store, lib store.Library) error
 }
 
 // ErrSkip from Index leaves a file out, like one with nothing playable.
@@ -99,6 +107,7 @@ func init() {
 	Register(movies{})
 	Register(tv{})
 	Register(music{})
+	Register(audiobooks{})
 }
 
 // findArt returns the first of names that exists in dir.

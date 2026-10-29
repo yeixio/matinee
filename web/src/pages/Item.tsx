@@ -16,6 +16,7 @@ import { WatchListButton } from '../components/WatchListButton'
 import { clock, duration, progressFraction, ratingLabel, seasonTitle } from '../format'
 import { genreName } from '../people'
 import { AlbumPage, ArtistPage } from './MusicItem'
+import { AuthorPage, BookPage } from './BookItem'
 
 export default function ItemPage() {
   const id = Number(useParams().id)
@@ -40,8 +41,10 @@ export default function ItemPage() {
   }
   if (item.kind === 'album') return <AlbumPage item={item} tracks={children} />
   if (item.kind === 'artist') return <ArtistPage item={item} albums={children} />
-  // A song opens its album.
-  if (item.kind === 'track' && item.parentId) return <Navigate to={`/item/${item.parentId}`} replace />
+  if (item.kind === 'book') return <BookPage item={item} />
+  if (item.kind === 'author') return <AuthorPage item={item} books={children} />
+  // A song opens its album, and a book's part its book.
+  if ((item.kind === 'track' || item.kind === 'part') && item.parentId) return <Navigate to={`/item/${item.parentId}`} replace />
 
   return (
     <div className="animate-fade space-y-10">

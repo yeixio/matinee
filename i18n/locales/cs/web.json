@@ -155,7 +155,8 @@
     "endOfItem": "Až to skončí",
     "left": "Zbývá {{time}}",
     "atEnd": "Zastaví se na konci",
-    "paused": "Pozastaveno časovačem"
+    "paused": "Pozastaveno časovačem",
+    "endOfChapter": "Konec této kapitoly"
   },
   "goBack": "Jít zpět",
   "back": "Zpět",
@@ -599,7 +600,8 @@
       "kind": {
         "movies": "Filmy",
         "tv": "Seriály",
-        "music": "Hudba"
+        "music": "Hudba",
+        "audiobooks": "Audioknihy"
       },
       "type": "Typ",
       "folders": "Složky",

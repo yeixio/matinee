@@ -21,6 +21,14 @@ type Result struct {
 	HasCover   bool              // an embedded picture, like album art in a FLAC or MP3
 	Tags       map[string]string // lower-cased keys: title, artist, album_artist, album, track, disc, date
 	Subtitles  []Subtitle        // embedded subtitle streams, in file order
+	Chapters   []Chapter         // marked chapters, such as an audiobook's, in order
+}
+
+// Chapter is a marked part of a file, with its own title.
+type Chapter struct {
+	Title   string `json:"title,omitempty"`
+	StartMs int64  `json:"startMs"`
+	EndMs   int64  `json:"endMs"`
 }
 
 // Subtitle is an embedded subtitle stream.
@@ -50,7 +58,7 @@ func (p Prober) Probe(ctx context.Context, file string) (Result, error) {
 	ctx, cancel := context.WithTimeout(ctx, timeout)
 	defer cancel()
 	out, err := exec.CommandContext(ctx, p.Path, "-v", "error", "-print_format", "json",
-		"-show_format", "-show_streams", file).Output()
+		"-show_format", "-show_streams", "-show_chapters", file).Output()
 	if err != nil {
 		if ctx.Err() != nil {
 			// Timed out or cancelled: says nothing about the file itself.
@@ -75,6 +83,11 @@ type ffprobeOutput struct {
 		Disposition map[string]int    `json:"disposition"`
 		Tags        map[string]string `json:"tags"`
 	} `json:"streams"`
+	Chapters []struct {
+		StartTime string            `json:"start_time"`
+		EndTime   string            `json:"end_time"`
+		Tags      map[string]string `json:"tags"`
+	} `json:"chapters"`
 }
 
 func parse(data []byte) (Result, error) {
@@ -120,6 +133,14 @@ func parse(data []byte) (Result, error) {
 				}
 			}
 		}
+	}
+	for _, c := range o.Chapters {
+		start, err1 := strconv.ParseFloat(c.StartTime, 64)
+		end, err2 := strconv.ParseFloat(c.EndTime, 64)
+		if err1 != nil || err2 != nil || end <= start {
+			continue
+		}
+		r.Chapters = append(r.Chapters, Chapter{Title: tag(c.Tags, "title"), StartMs: int64(start * 1000), EndMs: int64(end * 1000)})
 	}
 	return r, nil
 }

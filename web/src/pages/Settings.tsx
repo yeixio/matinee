@@ -112,7 +112,7 @@ function Libraries() {
   )
 }
 
-const builtInKinds: LibraryKind[] = [{ name: 'movies' }, { name: 'tv' }, { name: 'music' }]
+const builtInKinds: LibraryKind[] = [{ name: 'movies' }, { name: 'tv' }, { name: 'music' }, { name: 'audiobooks' }]
 
 function AddLibrary({ onDone }: { onDone: () => void }) {
   const { t } = useTranslation()

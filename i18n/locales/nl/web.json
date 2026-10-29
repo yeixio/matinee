@@ -155,7 +155,8 @@
     "endOfItem": "Als dit afloopt",
     "left": "Nog {{time}}",
     "atEnd": "Stopt aan het einde",
-    "paused": "Gepauzeerd door de slaaptimer"
+    "paused": "Gepauzeerd door de slaaptimer",
+    "endOfChapter": "Einde van dit hoofdstuk"
   },
   "goBack": "Ga terug",
   "back": "Terug",
@@ -591,7 +592,8 @@
       "kind": {
         "movies": "Films",
         "tv": "Tv-series",
-        "music": "Muziek"
+        "music": "Muziek",
+        "audiobooks": "Luisterboeken"
       },
       "type": "Type",
       "folders": "Mappen",

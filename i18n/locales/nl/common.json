@@ -165,7 +165,9 @@
     "tracks_one": "{{count}} nummer",
     "tracks_other": "{{count}} nummers",
     "titles_one": "{{count}} titel",
-    "titles_other": "{{count}} titels"
+    "titles_other": "{{count}} titels",
+    "books_one": "{{count}} boek",
+    "books_other": "{{count}} boeken"
   },
   "awards": {
     "academy": {
@@ -377,5 +379,38 @@
     "minimize": "Minimaliseren",
     "readMore": "Meer lezen",
     "less": "Minder tonen"
+  },
+  "books": {
+    "overview": "Overzicht",
+    "books": "Boeken",
+    "authors": "Auteurs",
+    "series": "Reeksen",
+    "narrators": "Vertellers",
+    "audiobook": "Luisterboek",
+    "author": "Auteur",
+    "continueListening": "Verder luisteren",
+    "nowListening": "Nu aan het luisteren",
+    "openPlayer": "Speler openen",
+    "chapters": "Hoofdstukken",
+    "previousChapter": "Vorig hoofdstuk",
+    "nextChapter": "Volgend hoofdstuk",
+    "backSeconds": "{{seconds}} seconden terug",
+    "aheadSeconds": "{{seconds}} seconden vooruit",
+    "speed": "Snelheid",
+    "left": "Nog {{time}}",
+    "leftInBook": "Nog {{time}} in het boek",
+    "resume": "Hervatten",
+    "markFinished": "Markeren als uitgelezen",
+    "markUnfinished": "Markeren als niet uitgelezen",
+    "finished": "Uitgelezen",
+    "bookOf": "Deel {{n}} van {{series}}",
+    "bookN": "Deel {{n}}",
+    "inSeries": "Meer uit {{series}}",
+    "narratedBy": "Voorgelezen door {{names}}",
+    "narratedByLabel": "Voorgelezen door",
+    "noSeries": "Nog geen reeksen",
+    "noNarrators": "Nog geen vertellers",
+    "fromTags": "Reeksen en vertellers komen uit de tags van de boeken, of uit mappen zoals Auteur/Reeks/Boek.",
+    "length": "Lengte"
   }
 }

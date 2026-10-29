@@ -333,7 +333,8 @@
     "endOfItem": "Când se termină",
     "left": "Mai sunt {{time}}",
     "atEnd": "Se oprește la final",
-    "paused": "Pus pe pauză de temporizator"
+    "paused": "Pus pe pauză de temporizator",
+    "endOfChapter": "Sfârșitul acestui capitol"
   },
   "close": "Închide",
   "trailer": {
@@ -365,7 +366,9 @@
     "season": "Sezon",
     "album": "Album",
     "artist": "Artist",
-    "track": "Piesă"
+    "track": "Piesă",
+    "book": "Audiobook",
+    "author": "Autor"
   },
   "profiles": {
     "whoIsWatching": "Cine se uită?",

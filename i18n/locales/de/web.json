@@ -155,7 +155,8 @@
     "endOfItem": "Wenn das hier endet",
     "left": "Noch {{time}}",
     "atEnd": "Stoppt am Ende",
-    "paused": "Vom Sleep-Timer pausiert"
+    "paused": "Vom Sleep-Timer pausiert",
+    "endOfChapter": "Ende dieses Kapitels"
   },
   "goBack": "Zurück",
   "back": "Zurück",
@@ -591,7 +592,8 @@
       "kind": {
         "movies": "Filme",
         "tv": "Serien",
-        "music": "Musik"
+        "music": "Musik",
+        "audiobooks": "Hörbücher"
       },
       "type": "Art",
       "folders": "Ordner",

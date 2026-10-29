@@ -153,7 +153,8 @@
     "seasons_other": "{{count}} musim",
     "albums_other": "{{count}} album",
     "tracks_other": "{{count}} lagu",
-    "titles_other": "{{count}} tajuk"
+    "titles_other": "{{count}} tajuk",
+    "books_other": "{{count}} buku"
   },
   "awards": {
     "academy": {
@@ -350,5 +351,38 @@
     "minimize": "Kecilkan",
     "readMore": "Baca lagi",
     "less": "Tunjukkan kurang"
+  },
+  "books": {
+    "overview": "Gambaran keseluruhan",
+    "books": "Buku",
+    "authors": "Pengarang",
+    "series": "Siri",
+    "narrators": "Pencerita",
+    "audiobook": "Buku audio",
+    "author": "Pengarang",
+    "continueListening": "Teruskan mendengar",
+    "nowListening": "Sedang didengar",
+    "openPlayer": "Buka pemain",
+    "chapters": "Bab",
+    "previousChapter": "Bab sebelumnya",
+    "nextChapter": "Bab seterusnya",
+    "backSeconds": "Undur {{seconds}} saat",
+    "aheadSeconds": "Maju {{seconds}} saat",
+    "speed": "Kelajuan",
+    "left": "Tinggal {{time}}",
+    "leftInBook": "Tinggal {{time}} dalam buku",
+    "resume": "Sambung",
+    "markFinished": "Tandakan selesai",
+    "markUnfinished": "Tandakan belum selesai",
+    "finished": "Selesai",
+    "bookOf": "Buku {{n}} dalam {{series}}",
+    "bookN": "Buku {{n}}",
+    "inSeries": "Lagi dalam {{series}}",
+    "narratedBy": "Dibacakan oleh {{names}}",
+    "narratedByLabel": "Dibacakan oleh",
+    "noSeries": "Belum ada siri",
+    "noNarrators": "Belum ada pencerita",
+    "fromTags": "Siri dan pencerita diambil daripada tag buku, atau daripada folder seperti Pengarang/Siri/Buku.",
+    "length": "Tempoh"
   }
 }

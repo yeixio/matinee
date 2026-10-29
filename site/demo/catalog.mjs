@@ -193,6 +193,31 @@ export const albums = [
   { artist: 'The Midnight Reels', album: 'Matinee Idols', year: 2024, scene: 103, hue: 200, tracks: ['Front Row', 'Cartoon Short', 'Popcorn Line', 'House Lights'] },
 ]
 
+// Made-up audiobooks: a series in two books (one file with chapters inside,
+// then a folder with a file per chapter), and two books on their own.
+export const audiobooks = [
+  {
+    author: 'Mara Ellison', series: 'The Lantern Coast', index: 1, title: 'The Tide Keeper', narrator: 'Owen Hale', year: 2020, scene: 102, hue: 190, whole: true,
+    overview: 'A lighthouse keeper on a fogbound coast finds a logbook written in her own hand, dated forty years from now.',
+    chapters: ['Opening Credits', 'The Harbor Light', 'Fog Bells', 'The Keeper\'s Log', 'Low Water', 'Storm Season', 'The Long Night', 'Morning Tide', 'End Credits'],
+  },
+  {
+    author: 'Mara Ellison', series: 'The Lantern Coast', index: 2, title: 'Salt and Signal', narrator: 'Owen Hale', year: 2022, scene: 202, hue: 20, whole: false,
+    overview: 'The signal from the drowned radio tower is getting stronger, and only the keeper knows what it is counting down to.',
+    chapters: ['The Tower', 'Static', 'A Voice at Low Tide', 'Salt Roads', 'The Signal', 'Homecoming'],
+  },
+  {
+    author: 'Theo Marchetti', title: 'The Quiet Booth', narrator: 'Ines Calder', year: 2019, scene: 105, hue: 300, whole: true,
+    overview: 'A retired projectionist spends one last summer running the films nobody else remembers.',
+    chapters: ['Reel One', 'Reel Two', 'Intermission', 'Reel Three', 'Reel Four', 'The Last Show'],
+  },
+  {
+    author: 'June Okafor', title: 'The Last Matinee', narrator: 'June Okafor', year: 2024, scene: 103, hue: 40, whole: true,
+    overview: 'Three generations of one family, and the small-town cinema that kept them together.',
+    chapters: ['Previews', 'Grandmother\'s Ticket', 'The Balcony', 'Double Feature', 'Closing Night', 'Credits'],
+  },
+]
+
 export const keywords = [
   { id: 1, name: 'cinema' },
   { id: 2, name: 'island' },

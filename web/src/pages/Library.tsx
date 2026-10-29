@@ -7,6 +7,7 @@ import { PinnedCollections, SaveAsCollectionButton } from '../components/Collect
 import { FilterBar } from '../components/FilterBar'
 import { LibraryIcon, useLibraries } from '../components/Shell'
 import { Button, EmptyState } from '../components/ui'
+import Books from './Books'
 import Music from './Music'
 import { activeCount, clearPicks, toSearchParams, useLibraryFilter } from '../filter'
 
@@ -16,6 +17,8 @@ export default function Library() {
   const lib = libraries?.find((l) => l.id === id)
   // Music has its own page: artists, albums and songs.
   if (lib?.kind === 'music') return <Music lib={lib} />
+  // So do audiobooks: books, authors, series and narrators.
+  if (lib?.kind === 'audiobooks') return <Books lib={lib} />
   return <Titles id={id} lib={lib} />
 }
 

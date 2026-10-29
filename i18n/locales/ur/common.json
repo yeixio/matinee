@@ -165,7 +165,9 @@
     "tracks_one": "{{count}} ٹریک",
     "tracks_other": "{{count}} ٹریکس",
     "titles_one": "{{count}} عنوان",
-    "titles_other": "{{count}} عنوانات"
+    "titles_other": "{{count}} عنوانات",
+    "books_one": "{{count}} کتاب",
+    "books_other": "{{count}} کتابیں"
   },
   "awards": {
     "academy": {
@@ -377,5 +379,38 @@
     "minimize": "چھوٹا کریں",
     "readMore": "مزید پڑھیں",
     "less": "کم دکھائیں"
+  },
+  "books": {
+    "overview": "جائزہ",
+    "books": "کتابیں",
+    "authors": "مصنفین",
+    "series": "سلسلے",
+    "narrators": "راوی",
+    "audiobook": "آڈیو بک",
+    "author": "مصنف",
+    "continueListening": "سننا جاری رکھیں",
+    "nowListening": "ابھی سن رہے ہیں",
+    "openPlayer": "پلیئر کھولیں",
+    "chapters": "ابواب",
+    "previousChapter": "پچھلا باب",
+    "nextChapter": "اگلا باب",
+    "backSeconds": "{{seconds}} سیکنڈ پیچھے",
+    "aheadSeconds": "{{seconds}} سیکنڈ آگے",
+    "speed": "رفتار",
+    "left": "{{time}} باقی",
+    "leftInBook": "کتاب میں {{time}} باقی",
+    "resume": "دوبارہ شروع کریں",
+    "markFinished": "مکمل کے طور پر نشان لگائیں",
+    "markUnfinished": "نامکمل کے طور پر نشان لگائیں",
+    "finished": "مکمل",
+    "bookOf": "{{series}} کی کتاب {{n}}",
+    "bookN": "کتاب {{n}}",
+    "inSeries": "{{series}} میں مزید",
+    "narratedBy": "آواز: {{names}}",
+    "narratedByLabel": "آواز:",
+    "noSeries": "ابھی کوئی سلسلہ نہیں",
+    "noNarrators": "ابھی کوئی راوی نہیں",
+    "fromTags": "سلسلے اور راوی کتابوں کے ٹیگز سے، یا مصنف/سلسلہ/کتاب جیسے فولڈرز سے آتے ہیں۔",
+    "length": "دورانیہ"
   }
 }

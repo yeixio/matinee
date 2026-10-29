@@ -155,7 +155,8 @@
     "endOfItem": "Cuando esto termine",
     "left": "Quedan {{time}}",
     "atEnd": "Se detiene al final",
-    "paused": "Pausado por el temporizador"
+    "paused": "Pausado por el temporizador",
+    "endOfChapter": "Final de este capítulo"
   },
   "goBack": "Volver",
   "back": "Atrás",
@@ -595,7 +596,8 @@
       "kind": {
         "movies": "Películas",
         "tv": "Series de TV",
-        "music": "Música"
+        "music": "Música",
+        "audiobooks": "Audiolibros"
       },
       "type": "Tipo",
       "folders": "Carpetas",

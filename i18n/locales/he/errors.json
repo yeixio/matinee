@@ -19,6 +19,7 @@
   "bad_library": "ספרייה שגויה",
   "bad_request": "בקשה שגויה",
   "billing_couldnt_be_reached_try_again_in_a_minute": "אין גישה לחיוב; נסו שוב בעוד דקה",
+  "book_not_found": "הספר לא נמצא",
   "box_set_not_found": "הסט לא נמצא",
   "cant_read_that_folder": "לא ניתן לקרוא את התיקייה הזו",
   "collection_not_found": "האוסף לא נמצא",

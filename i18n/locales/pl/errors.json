@@ -19,6 +19,7 @@
   "bad_library": "nieprawidłowa biblioteka",
   "bad_request": "nieprawidłowe żądanie",
   "billing_couldnt_be_reached_try_again_in_a_minute": "nie udało się połączyć z rozliczeniami; spróbuj ponownie za minutę",
+  "book_not_found": "nie znaleziono książki",
   "box_set_not_found": "nie znaleziono boksu",
   "cant_read_that_folder": "nie można odczytać tego folderu",
   "collection_not_found": "nie znaleziono kolekcji",

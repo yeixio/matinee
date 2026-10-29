@@ -165,7 +165,9 @@
     "tracks_one": "{{count}} ट्रैक",
     "tracks_other": "{{count}} ट्रैक",
     "titles_one": "{{count}} टाइटल",
-    "titles_other": "{{count}} टाइटल"
+    "titles_other": "{{count}} टाइटल",
+    "books_one": "{{count}} किताब",
+    "books_other": "{{count}} किताबें"
   },
   "awards": {
     "academy": {
@@ -377,5 +379,38 @@
     "minimize": "छोटा करें",
     "readMore": "और पढ़ें",
     "less": "कम दिखाएँ"
+  },
+  "books": {
+    "overview": "अवलोकन",
+    "books": "किताबें",
+    "authors": "लेखक",
+    "series": "सीरीज़",
+    "narrators": "वाचक",
+    "audiobook": "ऑडियोबुक",
+    "author": "लेखक",
+    "continueListening": "सुनना जारी रखें",
+    "nowListening": "अभी सुन रहे हैं",
+    "openPlayer": "प्लेयर खोलें",
+    "chapters": "अध्याय",
+    "previousChapter": "पिछला अध्याय",
+    "nextChapter": "अगला अध्याय",
+    "backSeconds": "{{seconds}} सेकंड पीछे",
+    "aheadSeconds": "{{seconds}} सेकंड आगे",
+    "speed": "गति",
+    "left": "{{time}} बाकी",
+    "leftInBook": "किताब में {{time}} बाकी",
+    "resume": "फिर से शुरू करें",
+    "markFinished": "पूरी हुई के रूप में चिह्नित करें",
+    "markUnfinished": "अधूरी के रूप में चिह्नित करें",
+    "finished": "पूरी हुई",
+    "bookOf": "{{series}} की किताब {{n}}",
+    "bookN": "किताब {{n}}",
+    "inSeries": "{{series}} में और",
+    "narratedBy": "वाचन: {{names}}",
+    "narratedByLabel": "वाचन:",
+    "noSeries": "अभी कोई सीरीज़ नहीं",
+    "noNarrators": "अभी कोई वाचक नहीं",
+    "fromTags": "सीरीज़ और वाचक किताबों के टैग से, या लेखक/सीरीज़/किताब जैसे फ़ोल्डरों से आते हैं।",
+    "length": "अवधि"
   }
 }

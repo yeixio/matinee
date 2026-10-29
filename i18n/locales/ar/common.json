@@ -213,7 +213,13 @@
     "titles_one": "عنوان واحد",
     "titles_other": "{{count}} عنوان",
     "titles_two": "عنوانان",
-    "titles_zero": "{{count}} عنوان"
+    "titles_zero": "{{count}} عنوان",
+    "books_zero": "{{count}} كتاب",
+    "books_one": "كتاب واحد",
+    "books_two": "كتابان",
+    "books_few": "{{count}} كتب",
+    "books_many": "{{count}} كتابًا",
+    "books_other": "{{count}} كتاب"
   },
   "awards": {
     "academy": {
@@ -485,5 +491,38 @@
     "minimize": "تصغير",
     "readMore": "قراءة المزيد",
     "less": "عرض أقل"
+  },
+  "books": {
+    "overview": "نظرة عامة",
+    "books": "الكتب",
+    "authors": "المؤلفون",
+    "series": "السلاسل",
+    "narrators": "الرواة",
+    "audiobook": "كتاب صوتي",
+    "author": "المؤلف",
+    "continueListening": "متابعة الاستماع",
+    "nowListening": "قيد الاستماع",
+    "openPlayer": "فتح المشغّل",
+    "chapters": "الفصول",
+    "previousChapter": "الفصل السابق",
+    "nextChapter": "الفصل التالي",
+    "backSeconds": "رجوع {{seconds}} ثانية",
+    "aheadSeconds": "تقديم {{seconds}} ثانية",
+    "speed": "السرعة",
+    "left": "متبقٍ {{time}}",
+    "leftInBook": "متبقٍ {{time}} من الكتاب",
+    "resume": "استئناف",
+    "markFinished": "تعليم كمكتمل",
+    "markUnfinished": "تعليم كغير مكتمل",
+    "finished": "مكتمل",
+    "bookOf": "الكتاب {{n}} من {{series}}",
+    "bookN": "الكتاب {{n}}",
+    "inSeries": "المزيد من {{series}}",
+    "narratedBy": "بصوت {{names}}",
+    "narratedByLabel": "بصوت",
+    "noSeries": "لا توجد سلاسل بعد",
+    "noNarrators": "لا يوجد رواة بعد",
+    "fromTags": "تأتي السلاسل والرواة من وسوم الكتب، أو من مجلدات مثل المؤلف/السلسلة/الكتاب.",
+    "length": "المدة"
   }
 }

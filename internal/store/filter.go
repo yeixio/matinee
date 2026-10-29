@@ -19,8 +19,9 @@ import (
 // such as addedWithin, are worked out each time the filter runs.
 type ItemFilter struct {
 	Library []int64 `json:"library,omitempty"` // none: every library
-	// Kind limits results to movie, show, artist, album, episode or track.
-	// Without it, a library's top level is listed: movies, shows or artists.
+	// Kind limits results to movie, show, artist, album, episode, track,
+	// author, book or part. Without it, a library's top level is listed:
+	// movies, shows, artists or authors.
 	Kind []string `json:"kind,omitempty"`
 	Q    string   `json:"q,omitempty"` // words in the title
 
@@ -67,13 +68,16 @@ type ItemFilter struct {
 
 	WatchList bool `json:"watchList,omitempty"` // only titles on the person's watch list
 
+	Series   []string `json:"series,omitempty"`   // books in these series
+	Narrator []string `json:"narrator,omitempty"` // books any of these people narrate
+
 	Sort  string `json:"sort,omitempty"`  // see SortFields; title by default
 	Order string `json:"order,omitempty"` // asc or desc; each sort has its own default
 	Limit int    `json:"limit,omitempty"`
 }
 
 // SortFields are the orders a filter can list titles in.
-var SortFields = []string{"title", "added", "released", "year", "rating", "runtime", "lastPlayed"}
+var SortFields = []string{"title", "added", "released", "year", "rating", "runtime", "lastPlayed", "series"}
 
 // WatchedStates are the values ItemFilter.Watched takes.
 var WatchedStates = []string{"unwatched", "inProgress", "watched", "notStarted", "started"}
@@ -147,6 +151,7 @@ func ParseItemFilter(q url.Values) (ItemFilter, error) {
 	f.Studio, f.Country, f.Language, f.Certification = strs("studio"), strs("country"), strs("language"), strs("certification")
 	f.Collection = ints("collection")
 	f.WatchList = q.Get("watchList") == "true" || q.Get("watchList") == "1"
+	f.Series, f.Narrator = strs("series"), strs("narrator")
 	f.Sort, f.Order, f.Limit = q.Get("sort"), q.Get("order"), num("limit")
 	if err != nil {
 		return f, err
@@ -162,7 +167,7 @@ func (f ItemFilter) Validate() error {
 		}
 	}
 	for _, k := range f.Kind {
-		if !slices.Contains([]string{"movie", "show", "season", "episode", "artist", "album", "track"}, k) {
+		if !slices.Contains([]string{"movie", "show", "season", "episode", "artist", "album", "track", "author", "book", "part"}, k) {
 			return fmt.Errorf("kind: unknown kind %q", k)
 		}
 	}
@@ -236,6 +241,8 @@ func (f ItemFilter) Values() url.Values {
 	if f.WatchList {
 		q.Set("watchList", "true")
 	}
+	strs("series", f.Series)
+	strs("narrator", f.Narrator)
 	str("sort", f.Sort)
 	str("order", f.Order)
 	num("limit", f.Limit)
@@ -291,7 +298,7 @@ var (
 		(SELECT MAX(f.added_at) ` + level(2, "") + ` AND f.path IS NOT NULL),
 		(SELECT MAX(f.added_at) ` + level(1, "") + ` AND f.path IS NOT NULL), i.added_at) END`
 	// A show's runtime is its average episode's, an album's its whole length.
-	runtimeExpr = `CASE WHEN i.path IS NOT NULL THEN i.duration_ms
+	runtimeExpr = `CASE WHEN i.path IS NOT NULL OR i.kind = 'book' THEN i.duration_ms
 		WHEN i.kind = 'album' THEN (SELECT SUM(f.duration_ms) ` + level(1, "") + `)
 		WHEN i.kind = 'artist' THEN (SELECT SUM(f.duration_ms) ` + level(2, "") + `)
 		ELSE COALESCE((SELECT AVG(f.duration_ms) ` + level(2, "") + ` AND f.path IS NOT NULL),
@@ -320,6 +327,7 @@ var sortExprs = map[string]struct {
 	"rating":     {"i.rating", true},
 	"runtime":    {runtimeExpr, false},
 	"lastPlayed": {lastPlayedExpr, true},
+	"series":     {"i.series_index", false}, // a book's place in its series
 }
 
 // likeEscape makes s match itself in a LIKE pattern with ESCAPE '\'.
@@ -451,6 +459,17 @@ func (f ItemFilter) sql(today time.Time) (where, order string, args []any) {
 	terms("collection", cols)
 	if f.WatchList {
 		add("EXISTS (SELECT 1 FROM watchlist wl WHERE wl.user_id = me.id AND wl.item_id = i.id)")
+	}
+	if len(f.Series) > 0 {
+		add("i.series IN ("+placeholders(len(f.Series))+")", anyArgs(f.Series)...)
+	}
+	if len(f.Narrator) > 0 {
+		var or []string
+		for _, n := range f.Narrator {
+			or = append(or, `i.narrators LIKE ? ESCAPE '\'`)
+			args = append(args, "%|"+likeEscape(n)+"|%")
+		}
+		conds = append(conds, "("+strings.Join(or, " OR ")+")")
 	}
 
 	by, ok := sortExprs[f.Sort]

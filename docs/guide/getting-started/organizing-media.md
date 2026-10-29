@@ -1,6 +1,6 @@
 ---
 title: Organizing your media
-description: How to name movie, TV and music folders and files so Matinee recognizes them, plus artwork, subtitles and trailer files.
+description: How to name movie, TV, music and audiobook folders and files so Matinee recognizes them, plus artwork, subtitles and trailer files.
 sidebar:
   order: 3
 ---
@@ -57,6 +57,28 @@ Music/
 
 Matinee reads the tags in your music files (artist, album, track number, title) and falls back to the folder and file names. Covers can also be embedded in the files.
 
+<!-- since: v0.1.2 -->
+## Audiobooks
+
+One folder per author, then either a file per book or a folder per book. A series gets a folder of its own, with each book's number at the start of its folder:
+
+```
+Audiobooks/
+└── Mara Ellison/
+    ├── author.jpg
+    └── The Lantern Coast/
+        ├── Book 1 - The Tide Keeper/
+        │   ├── cover.jpg
+        │   └── The Tide Keeper.m4b
+        └── Book 2 - Salt and Signal/
+            ├── cover.jpg
+            ├── 01 - The Tower.mp3
+            └── 02 - Static.mp3
+```
+
+An `.m4b` (or any single file) keeps its chapters inside; a folder of files is a chapter per file, in track-number order. Discs can go in `CD 1`, `CD 2` folders inside the book's folder. Tags in the files win over the folder names: see [Audiobooks](/docs/watching/audiobooks/#series-and-narrators) for which ones.
+
+<!-- /since -->
 ## Artwork files
 
 Images next to your media always win over anything looked up online:
@@ -67,6 +89,8 @@ Images next to your media always win over anything looked up online:
 | `fanart.jpg` | movie or show folder | the backdrop behind the title |
 | `cover.jpg` or `folder.jpg` | album folder | the album cover |
 | `artist.jpg` | artist folder | the artist's photo |
+| `cover.jpg` or `folder.jpg` | audiobook folder | the book's cover |
+| `author.jpg` | author folder | the author's photo |
 
 ## Subtitles
 

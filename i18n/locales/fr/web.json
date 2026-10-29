@@ -155,7 +155,8 @@
     "endOfItem": "À la fin",
     "left": "Encore {{time}}",
     "atEnd": "S’arrête à la fin",
-    "paused": "Mis en pause par la minuterie"
+    "paused": "Mis en pause par la minuterie",
+    "endOfChapter": "Fin de ce chapitre"
   },
   "goBack": "Retour",
   "back": "Retour",
@@ -595,7 +596,8 @@
       "kind": {
         "movies": "Films",
         "tv": "Séries TV",
-        "music": "Musique"
+        "music": "Musique",
+        "audiobooks": "Livres audio"
       },
       "type": "Type",
       "folders": "Dossiers",

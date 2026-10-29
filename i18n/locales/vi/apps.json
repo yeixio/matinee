@@ -323,7 +323,8 @@
     "endOfItem": "Khi nội dung này kết thúc",
     "left": "Còn {{time}}",
     "atEnd": "Dừng khi kết thúc",
-    "paused": "Đã tạm dừng bởi hẹn giờ ngủ"
+    "paused": "Đã tạm dừng bởi hẹn giờ ngủ",
+    "endOfChapter": "Hết chương này"
   },
   "close": "Đóng",
   "trailer": {
@@ -353,7 +354,9 @@
     "season": "Mùa",
     "album": "Album",
     "artist": "Nghệ sĩ",
-    "track": "Bài hát"
+    "track": "Bài hát",
+    "book": "Sách nói",
+    "author": "Tác giả"
   },
   "profiles": {
     "whoIsWatching": "Ai đang xem?",

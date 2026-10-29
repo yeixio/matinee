@@ -333,7 +333,8 @@
     "endOfItem": "À la fin",
     "left": "Encore {{time}}",
     "atEnd": "S’arrête à la fin",
-    "paused": "Mis en pause par la minuterie"
+    "paused": "Mis en pause par la minuterie",
+    "endOfChapter": "Fin de ce chapitre"
   },
   "close": "Fermer",
   "trailer": {
@@ -365,7 +366,9 @@
     "season": "Saison",
     "album": "Album",
     "artist": "Artiste",
-    "track": "Piste"
+    "track": "Piste",
+    "book": "Livre audio",
+    "author": "Auteur"
   },
   "profiles": {
     "whoIsWatching": "Qui regarde ?",

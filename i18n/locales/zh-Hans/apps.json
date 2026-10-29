@@ -323,7 +323,8 @@
     "endOfItem": "播放结束时",
     "left": "剩余 {{time}}",
     "atEnd": "播放结束时停止",
-    "paused": "已被睡眠定时暂停"
+    "paused": "已被睡眠定时暂停",
+    "endOfChapter": "本章结束时"
   },
   "close": "关闭",
   "trailer": {
@@ -353,7 +354,9 @@
     "season": "季",
     "album": "专辑",
     "artist": "艺人",
-    "track": "曲目"
+    "track": "曲目",
+    "book": "有声书",
+    "author": "作者"
   },
   "profiles": {
     "whoIsWatching": "谁在看？",

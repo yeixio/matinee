@@ -19,6 +19,7 @@
   "bad_library": "媒體庫無效",
   "bad_request": "請求無效",
   "billing_couldnt_be_reached_try_again_in_a_minute": "無法連線至計費服務，請一分鐘後再試",
+  "book_not_found": "找不到書籍",
   "box_set_not_found": "找不到電影系列",
   "cant_read_that_folder": "無法讀取該資料夾",
   "collection_not_found": "找不到合集",

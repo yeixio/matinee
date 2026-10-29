@@ -224,6 +224,11 @@ func (s *Scanner) scan(ctx context.Context, lib store.Library, paths []string) (
 		return st, err
 	}
 	st.Removed = removed
+	if fk, ok := kind.(Finisher); ok && (!partial || st.Added+st.Updated+st.Removed > 0) {
+		if err := fk.FinishScan(ctx, s.Store, lib); err != nil {
+			return st, err
+		}
+	}
 	st.Took = time.Since(start)
 	changed := st.Added+st.Updated+st.Removed > 0
 	if s.AfterScan != nil && (!partial || changed) {

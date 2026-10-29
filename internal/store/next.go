@@ -8,9 +8,11 @@ import (
 // else the first of the following season. Specials (season 0) only lead to
 // other specials, and regular seasons never lead into specials. It returns
 // ErrNotFound after a show's last episode, or for anything that isn't an
-// episode. Only episodes the user may see count (see visibleToMe).
+// episode. Only episodes the user may see count (see visibleToMe). An
+// audiobook's part leads to the book's next part, for players that play a
+// book a part at a time.
 func (s *Store) NextEpisode(ctx context.Context, userID int64, ep Item) (Item, error) {
-	if ep.Kind != "episode" || ep.ParentID == nil {
+	if ep.Kind != "episode" && ep.Kind != "part" || ep.ParentID == nil {
 		return Item{}, ErrNotFound
 	}
 	season, err := s.Item(ctx, userID, *ep.ParentID)
@@ -31,7 +33,7 @@ func (s *Store) NextEpisode(ctx context.Context, userID int64, ep Item) (Item, e
 			break
 		}
 	}
-	if season.ParentID == nil || isSpecials(season) {
+	if ep.Kind == "part" || season.ParentID == nil || isSpecials(season) {
 		return Item{}, ErrNotFound
 	}
 	seasons, err := s.Children(ctx, userID, *season.ParentID)

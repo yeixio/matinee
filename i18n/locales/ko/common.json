@@ -153,7 +153,8 @@
     "seasons_other": "시즌 {{count}}개",
     "albums_other": "앨범 {{count}}개",
     "tracks_other": "{{count}}곡",
-    "titles_other": "작품 {{count}}편"
+    "titles_other": "작품 {{count}}편",
+    "books_other": "{{count}}권"
   },
   "awards": {
     "academy": {
@@ -350,5 +351,38 @@
     "minimize": "최소화",
     "readMore": "더 읽기",
     "less": "접기"
+  },
+  "books": {
+    "overview": "개요",
+    "books": "책",
+    "authors": "저자",
+    "series": "시리즈",
+    "narrators": "낭독자",
+    "audiobook": "오디오북",
+    "author": "저자",
+    "continueListening": "이어서 듣기",
+    "nowListening": "지금 듣는 중",
+    "openPlayer": "플레이어 열기",
+    "chapters": "챕터",
+    "previousChapter": "이전 챕터",
+    "nextChapter": "다음 챕터",
+    "backSeconds": "{{seconds}}초 뒤로",
+    "aheadSeconds": "{{seconds}}초 앞으로",
+    "speed": "속도",
+    "left": "{{time}} 남음",
+    "leftInBook": "책 끝까지 {{time}} 남음",
+    "resume": "이어서 재생",
+    "markFinished": "다 들음으로 표시",
+    "markUnfinished": "다 듣지 않음으로 표시",
+    "finished": "다 들음",
+    "bookOf": "{{series}} {{n}}권",
+    "bookN": "{{n}}권",
+    "inSeries": "{{series}}의 다른 책",
+    "narratedBy": "낭독: {{names}}",
+    "narratedByLabel": "낭독:",
+    "noSeries": "아직 시리즈가 없습니다",
+    "noNarrators": "아직 낭독자가 없습니다",
+    "fromTags": "시리즈와 낭독자는 책의 태그나 저자/시리즈/책 같은 폴더에서 가져옵니다.",
+    "length": "길이"
   }
 }

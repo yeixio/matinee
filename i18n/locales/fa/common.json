@@ -165,7 +165,9 @@
     "tracks_one": "{{count}} قطعه",
     "tracks_other": "{{count}} قطعه",
     "titles_one": "{{count}} عنوان",
-    "titles_other": "{{count}} عنوان"
+    "titles_other": "{{count}} عنوان",
+    "books_one": "{{count}} کتاب",
+    "books_other": "{{count}} کتاب"
   },
   "awards": {
     "academy": {
@@ -377,5 +379,38 @@
     "minimize": "کوچک کردن",
     "readMore": "بیشتر بخوانید",
     "less": "نمایش کمتر"
+  },
+  "books": {
+    "overview": "نمای کلی",
+    "books": "کتاب‌ها",
+    "authors": "نویسندگان",
+    "series": "مجموعه‌ها",
+    "narrators": "گویندگان",
+    "audiobook": "کتاب صوتی",
+    "author": "نویسنده",
+    "continueListening": "ادامهٔ شنیدن",
+    "nowListening": "در حال پخش",
+    "openPlayer": "باز کردن پخش‌کننده",
+    "chapters": "فصل‌ها",
+    "previousChapter": "فصل قبلی",
+    "nextChapter": "فصل بعدی",
+    "backSeconds": "{{seconds}} ثانیه عقب",
+    "aheadSeconds": "{{seconds}} ثانیه جلو",
+    "speed": "سرعت",
+    "left": "{{time}} مانده",
+    "leftInBook": "{{time}} تا پایان کتاب",
+    "resume": "ادامه",
+    "markFinished": "علامت‌گذاری به‌عنوان تمام‌شده",
+    "markUnfinished": "علامت‌گذاری به‌عنوان تمام‌نشده",
+    "finished": "تمام‌شده",
+    "bookOf": "کتاب {{n}} از {{series}}",
+    "bookN": "کتاب {{n}}",
+    "inSeries": "بیشتر از {{series}}",
+    "narratedBy": "با صدای {{names}}",
+    "narratedByLabel": "با صدای",
+    "noSeries": "هنوز مجموعه‌ای نیست",
+    "noNarrators": "هنوز گوینده‌ای نیست",
+    "fromTags": "مجموعه‌ها و گویندگان از برچسب‌های کتاب‌ها یا از پوشه‌هایی مثل نویسنده/مجموعه/کتاب می‌آیند.",
+    "length": "مدت"
   }
 }

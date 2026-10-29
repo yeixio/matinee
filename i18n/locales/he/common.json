@@ -177,7 +177,10 @@
     "tracks_two": "שתי רצועות",
     "titles_one": "כותר אחד",
     "titles_other": "{{count}} כותרים",
-    "titles_two": "שני כותרים"
+    "titles_two": "שני כותרים",
+    "books_one": "ספר אחד",
+    "books_two": "שני ספרים",
+    "books_other": "{{count}} ספרים"
   },
   "awards": {
     "academy": {
@@ -404,5 +407,38 @@
     "minimize": "מזעור",
     "readMore": "קריאת המשך",
     "less": "הצגת פחות"
+  },
+  "books": {
+    "overview": "סקירה",
+    "books": "ספרים",
+    "authors": "סופרים",
+    "series": "סדרות",
+    "narrators": "קריינים",
+    "audiobook": "ספר שמע",
+    "author": "סופר",
+    "continueListening": "להמשיך להאזין",
+    "nowListening": "מאזינים עכשיו",
+    "openPlayer": "פתיחת הנגן",
+    "chapters": "פרקים",
+    "previousChapter": "הפרק הקודם",
+    "nextChapter": "הפרק הבא",
+    "backSeconds": "{{seconds}} שניות אחורה",
+    "aheadSeconds": "{{seconds}} שניות קדימה",
+    "speed": "מהירות",
+    "left": "נותרו {{time}}",
+    "leftInBook": "נותרו {{time}} לסוף הספר",
+    "resume": "המשך",
+    "markFinished": "סימון כגמור",
+    "markUnfinished": "סימון כלא גמור",
+    "finished": "גמור",
+    "bookOf": "ספר {{n}} בסדרה {{series}}",
+    "bookN": "ספר {{n}}",
+    "inSeries": "עוד בסדרה {{series}}",
+    "narratedBy": "בקריינות {{names}}",
+    "narratedByLabel": "בקריינות",
+    "noSeries": "עדיין אין סדרות",
+    "noNarrators": "עדיין אין קריינים",
+    "fromTags": "הסדרות והקריינים נלקחים מהתגיות של הספרים, או מתיקיות כמו סופר/סדרה/ספר.",
+    "length": "אורך"
   }
 }

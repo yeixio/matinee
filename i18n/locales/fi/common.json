@@ -165,7 +165,9 @@
     "tracks_one": "{{count}} kappale",
     "tracks_other": "{{count}} kappaletta",
     "titles_one": "{{count}} nimike",
-    "titles_other": "{{count}} nimikettä"
+    "titles_other": "{{count}} nimikettä",
+    "books_one": "{{count}} kirja",
+    "books_other": "{{count}} kirjaa"
   },
   "awards": {
     "academy": {
@@ -377,5 +379,38 @@
     "minimize": "Pienennä",
     "readMore": "Lue lisää",
     "less": "Näytä vähemmän"
+  },
+  "books": {
+    "overview": "Yleiskatsaus",
+    "books": "Kirjat",
+    "authors": "Kirjailijat",
+    "series": "Sarjat",
+    "narrators": "Lukijat",
+    "audiobook": "Äänikirja",
+    "author": "Kirjailija",
+    "continueListening": "Jatka kuuntelua",
+    "nowListening": "Nyt kuunneltavana",
+    "openPlayer": "Avaa soitin",
+    "chapters": "Luvut",
+    "previousChapter": "Edellinen luku",
+    "nextChapter": "Seuraava luku",
+    "backSeconds": "{{seconds}} sekuntia taaksepäin",
+    "aheadSeconds": "{{seconds}} sekuntia eteenpäin",
+    "speed": "Nopeus",
+    "left": "{{time}} jäljellä",
+    "leftInBook": "Kirjaa jäljellä {{time}}",
+    "resume": "Jatka",
+    "markFinished": "Merkitse kuunnelluksi",
+    "markUnfinished": "Merkitse kuuntelemattomaksi",
+    "finished": "Kuunneltu",
+    "bookOf": "{{series}}, osa {{n}}",
+    "bookN": "Osa {{n}}",
+    "inSeries": "Lisää sarjasta {{series}}",
+    "narratedBy": "Lukijana {{names}}",
+    "narratedByLabel": "Lukijana",
+    "noSeries": "Ei vielä sarjoja",
+    "noNarrators": "Ei vielä lukijoita",
+    "fromTags": "Sarjat ja lukijat tulevat kirjojen tageista tai kansioista kuten Kirjailija/Sarja/Kirja.",
+    "length": "Kesto"
   }
 }

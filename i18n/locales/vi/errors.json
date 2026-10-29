@@ -19,6 +19,7 @@
   "bad_library": "thư viện không hợp lệ",
   "bad_request": "yêu cầu không hợp lệ",
   "billing_couldnt_be_reached_try_again_in_a_minute": "không kết nối được tới hệ thống thanh toán; hãy thử lại sau một phút",
+  "book_not_found": "không tìm thấy sách",
   "box_set_not_found": "không tìm thấy bộ phim",
   "cant_read_that_folder": "không đọc được thư mục đó",
   "collection_not_found": "không tìm thấy bộ sưu tập",

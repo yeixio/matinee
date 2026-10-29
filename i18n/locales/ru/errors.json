@@ -19,6 +19,7 @@
   "bad_library": "неверная медиатека",
   "bad_request": "неверный запрос",
   "billing_couldnt_be_reached_try_again_in_a_minute": "не удалось связаться с оплатой; попробуйте через минуту",
+  "book_not_found": "книга не найдена",
   "box_set_not_found": "подборка не найдена",
   "cant_read_that_folder": "не удаётся прочитать эту папку",
   "collection_not_found": "коллекция не найдена",

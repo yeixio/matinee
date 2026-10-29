@@ -328,7 +328,8 @@
     "endOfItem": "جب یہ ختم ہو",
     "left": "{{time}} باقی",
     "atEnd": "آخر میں رک جائے گا",
-    "paused": "سلیپ ٹائمر نے روک دیا"
+    "paused": "سلیپ ٹائمر نے روک دیا",
+    "endOfChapter": "اس باب کے آخر میں"
   },
   "close": "بند کریں",
   "trailer": {
@@ -359,7 +360,9 @@
     "season": "سیزن",
     "album": "البم",
     "artist": "فنکار",
-    "track": "ٹریک"
+    "track": "ٹریک",
+    "book": "آڈیو بک",
+    "author": "مصنف"
   },
   "profiles": {
     "whoIsWatching": "کون دیکھ رہا ہے؟",

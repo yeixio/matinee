@@ -23,6 +23,10 @@ function subtitle(item: Item): string {
     case 'album':
     case 'track':
       return item.artist || (item.year ? String(item.year) : '')
+    case 'author':
+      return item.childCount ? i18n.t('common:count.books', { count: item.childCount }) : ''
+    case 'book':
+      return item.author || (item.year ? String(item.year) : '')
     default:
       return item.year ? String(item.year) : ''
   }
@@ -35,7 +39,7 @@ export function PosterCard({ item, wide = false }: { item: Item; wide?: boolean 
     qc.prefetchQuery({ queryKey: ['item', item.id], queryFn: () => api.item(item.id) })
     if (!item.playable) qc.prefetchQuery({ queryKey: ['children', item.id], queryFn: () => api.children(item.id) })
   }
-  const square = item.kind === 'album' || item.kind === 'artist'
+  const square = ['album', 'artist', 'book', 'author'].includes(item.kind)
   const frac = progressFraction(item.positionMs, item.durationMs)
   return (
     <Link to={itemLink(item)} onMouseEnter={prefetch} onFocus={prefetch} className="group block animate-fade">
@@ -112,7 +116,7 @@ function VirtualPosterGrid({ items, wide }: { items: Item[]; wide: boolean }) {
   const min = wide ? 240 : 140
   const cols = Math.max(1, Math.floor((width + gapX) / (min + gapX)))
   const colWidth = width ? (width - gapX * (cols - 1)) / cols : min
-  const square = items[0]?.kind === 'album' || items[0]?.kind === 'artist'
+  const square = ['album', 'artist', 'book', 'author'].includes(items[0]?.kind)
   const ratio = wide ? 9 / 16 : square ? 1 : 3 / 2
   const rowHeight = Math.round(colWidth * ratio + captionHeight + gapY)
 

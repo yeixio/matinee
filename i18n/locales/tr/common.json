@@ -165,7 +165,9 @@
     "tracks_one": "{{count}} parça",
     "tracks_other": "{{count}} parça",
     "titles_one": "{{count}} yapım",
-    "titles_other": "{{count}} yapım"
+    "titles_other": "{{count}} yapım",
+    "books_one": "{{count}} kitap",
+    "books_other": "{{count}} kitap"
   },
   "awards": {
     "academy": {
@@ -377,5 +379,38 @@
     "minimize": "Küçült",
     "readMore": "Devamını oku",
     "less": "Daha az göster"
+  },
+  "books": {
+    "overview": "Genel bakış",
+    "books": "Kitaplar",
+    "authors": "Yazarlar",
+    "series": "Seriler",
+    "narrators": "Seslendirenler",
+    "audiobook": "Sesli kitap",
+    "author": "Yazar",
+    "continueListening": "Dinlemeye devam et",
+    "nowListening": "Şimdi dinleniyor",
+    "openPlayer": "Oynatıcıyı aç",
+    "chapters": "Bölümler",
+    "previousChapter": "Önceki bölüm",
+    "nextChapter": "Sonraki bölüm",
+    "backSeconds": "{{seconds}} saniye geri",
+    "aheadSeconds": "{{seconds}} saniye ileri",
+    "speed": "Hız",
+    "left": "{{time}} kaldı",
+    "leftInBook": "Kitabın bitmesine {{time}} kaldı",
+    "resume": "Devam et",
+    "markFinished": "Bitti olarak işaretle",
+    "markUnfinished": "Bitmedi olarak işaretle",
+    "finished": "Bitti",
+    "bookOf": "{{series}} serisinin {{n}}. kitabı",
+    "bookN": "{{n}}. kitap",
+    "inSeries": "{{series}} serisinden daha fazlası",
+    "narratedBy": "Seslendiren: {{names}}",
+    "narratedByLabel": "Seslendiren:",
+    "noSeries": "Henüz seri yok",
+    "noNarrators": "Henüz seslendiren yok",
+    "fromTags": "Seriler ve seslendirenler kitapların etiketlerinden ya da Yazar/Seri/Kitap gibi klasörlerden gelir.",
+    "length": "Süre"
   }
 }

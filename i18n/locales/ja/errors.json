@@ -19,6 +19,7 @@
   "bad_library": "ライブラリが不正です",
   "bad_request": "リクエストが不正です",
   "billing_couldnt_be_reached_try_again_in_a_minute": "課金サービスに接続できません。1 分後にもう一度お試しください",
+  "book_not_found": "本が見つかりません",
   "box_set_not_found": "ボックスセットが見つかりません",
   "cant_read_that_folder": "そのフォルダを読み込めません",
   "collection_not_found": "コレクションが見つかりません",

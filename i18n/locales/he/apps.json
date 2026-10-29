@@ -333,7 +333,8 @@
     "endOfItem": "כשזה ייגמר",
     "left": "נותרו {{time}}",
     "atEnd": "ייעצר בסוף",
-    "paused": "הושהה על ידי טיימר השינה"
+    "paused": "הושהה על ידי טיימר השינה",
+    "endOfChapter": "סוף הפרק הזה"
   },
   "close": "סגירה",
   "trailer": {
@@ -365,7 +366,9 @@
     "season": "עונה",
     "album": "אלבום",
     "artist": "אמן",
-    "track": "רצועה"
+    "track": "רצועה",
+    "book": "ספר שמע",
+    "author": "סופר"
   },
   "profiles": {
     "whoIsWatching": "מי צופה?",

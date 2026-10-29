@@ -153,7 +153,8 @@
     "seasons_other": "{{count}} phần",
     "albums_other": "{{count}} album",
     "tracks_other": "{{count}} bài",
-    "titles_other": "{{count}} mục"
+    "titles_other": "{{count}} mục",
+    "books_other": "{{count}} cuốn sách"
   },
   "awards": {
     "academy": {
@@ -350,5 +351,38 @@
     "minimize": "Thu nhỏ",
     "readMore": "Đọc thêm",
     "less": "Ẩn bớt"
+  },
+  "books": {
+    "overview": "Tổng quan",
+    "books": "Sách",
+    "authors": "Tác giả",
+    "series": "Bộ sách",
+    "narrators": "Người đọc",
+    "audiobook": "Sách nói",
+    "author": "Tác giả",
+    "continueListening": "Nghe tiếp",
+    "nowListening": "Đang nghe",
+    "openPlayer": "Mở trình phát",
+    "chapters": "Chương",
+    "previousChapter": "Chương trước",
+    "nextChapter": "Chương sau",
+    "backSeconds": "Lùi {{seconds}} giây",
+    "aheadSeconds": "Tới {{seconds}} giây",
+    "speed": "Tốc độ",
+    "left": "Còn {{time}}",
+    "leftInBook": "Còn {{time}} nữa là hết sách",
+    "resume": "Tiếp tục",
+    "markFinished": "Đánh dấu đã nghe xong",
+    "markUnfinished": "Đánh dấu chưa nghe xong",
+    "finished": "Đã nghe xong",
+    "bookOf": "Tập {{n}} của {{series}}",
+    "bookN": "Tập {{n}}",
+    "inSeries": "Thêm trong {{series}}",
+    "narratedBy": "Người đọc: {{names}}",
+    "narratedByLabel": "Người đọc:",
+    "noSeries": "Chưa có bộ sách nào",
+    "noNarrators": "Chưa có người đọc nào",
+    "fromTags": "Bộ sách và người đọc lấy từ thẻ của sách, hoặc từ các thư mục như Tác giả/Bộ sách/Sách.",
+    "length": "Thời lượng"
   }
 }

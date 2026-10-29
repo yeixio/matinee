@@ -189,7 +189,11 @@
     "titles_one": "{{count}} tytuł",
     "titles_few": "{{count}} tytuły",
     "titles_many": "{{count}} tytułów",
-    "titles_other": "{{count}} tytułu"
+    "titles_other": "{{count}} tytułu",
+    "books_one": "{{count}} książka",
+    "books_few": "{{count}} książki",
+    "books_many": "{{count}} książek",
+    "books_other": "{{count}} książki"
   },
   "awards": {
     "academy": {
@@ -431,5 +435,38 @@
     "minimize": "Minimalizuj",
     "readMore": "Czytaj dalej",
     "less": "Pokaż mniej"
+  },
+  "books": {
+    "overview": "Przegląd",
+    "books": "Książki",
+    "authors": "Autorzy",
+    "series": "Serie",
+    "narrators": "Lektorzy",
+    "audiobook": "Audiobook",
+    "author": "Autor",
+    "continueListening": "Słuchaj dalej",
+    "nowListening": "Teraz słuchasz",
+    "openPlayer": "Otwórz odtwarzacz",
+    "chapters": "Rozdziały",
+    "previousChapter": "Poprzedni rozdział",
+    "nextChapter": "Następny rozdział",
+    "backSeconds": "Cofnij o {{seconds}} sekund",
+    "aheadSeconds": "Do przodu o {{seconds}} sekund",
+    "speed": "Prędkość",
+    "left": "Zostało {{time}}",
+    "leftInBook": "Do końca książki zostało {{time}}",
+    "resume": "Wznów",
+    "markFinished": "Oznacz jako ukończoną",
+    "markUnfinished": "Oznacz jako nieukończoną",
+    "finished": "Ukończona",
+    "bookOf": "Tom {{n}} z serii {{series}}",
+    "bookN": "Tom {{n}}",
+    "inSeries": "Więcej z serii {{series}}",
+    "narratedBy": "Czyta {{names}}",
+    "narratedByLabel": "Czyta",
+    "noSeries": "Brak serii",
+    "noNarrators": "Brak lektorów",
+    "fromTags": "Serie i lektorzy pochodzą z tagów książek albo z folderów typu Autor/Seria/Książka.",
+    "length": "Długość"
   }
 }
