@@ -3,9 +3,10 @@ import { Search as SearchIcon } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link, useSearchParams } from 'react-router-dom'
-import { api } from '../api'
+import { api, type Item } from '../api'
 import { useRequestOptions } from '../components/Arr'
 import { PosterGrid } from '../components/Card'
+import { Tracks } from '../components/Tracks'
 import { EmptyState } from '../components/ui'
 
 export default function Search() {
@@ -44,7 +45,7 @@ export default function Search() {
         />
         {isFetching && <div className="absolute end-4 top-1/2 size-2 -translate-y-1/2 animate-pulse rounded-full bg-accent" />}
       </div>
-      {q && data && (data.length > 0 ? <PosterGrid items={data} /> : <EmptyState title={tr('search.nothing', { q })} />)}
+      {q && data && (data.length > 0 ? <Results items={data} /> : <EmptyState title={tr('search.nothing', { q })} />)}
       {/* Not in the library? Ask for it. */}
       {q && data && opts?.discover ? (
         <p className="text-center text-sm text-muted">
@@ -65,6 +66,23 @@ export default function Search() {
         </p>
         )
       )}
+    </div>
+  )
+}
+
+// Songs are a list that plays from a click; everything else is posters.
+function Results({ items }: { items: Item[] }) {
+  const { t } = useTranslation()
+  const songs = items.filter((i) => i.kind === 'track')
+  const rest = items.filter((i) => i.kind !== 'track')
+  if (!songs.length) return <PosterGrid items={items} />
+  return (
+    <div className="space-y-8">
+      {rest.length > 0 && <PosterGrid items={rest} />}
+      <section className="space-y-3">
+        <h2 className="text-lg font-semibold">{t('common:music.songs')}</h2>
+        <Tracks items={songs} showArt showArtist showAlbum numbered={false} />
+      </section>
     </div>
   )
 }

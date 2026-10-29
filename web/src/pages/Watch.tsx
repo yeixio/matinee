@@ -16,6 +16,7 @@ import { sleepTimer, sleepVolume, useSleep } from '../player/sleep'
 import { SleepMenu } from '../player/SleepMenu'
 import { parseVTT, type Cue } from '../player/vtt'
 import { PluginPlayer } from '../player/PluginPlayer'
+import { useAudio } from '../player/AudioPlayer'
 import { playerFor, usePlayers } from '../plugins'
 import { remote, watchPath, type CommandType, type PlayerHooks } from '../remote'
 
@@ -37,6 +38,18 @@ export default function Watch() {
   const { data: players, isPending } = usePlayers()
   const plugin = item && playerFor(players, item.kind)
   const exit = useCallback(() => navigate(-1), [navigate])
+  const audio = useAudio()
+  // Songs play in the music player, which keeps going while you browse.
+  const song = item?.kind === 'track'
+  const t = useSearchParams()[0].get('t')
+  useEffect(() => {
+    if (!item) return
+    if (song) {
+      audio.playItem(item, t ? Number(t) * 1000 : undefined)
+      navigate(item.parentId ? `/item/${item.parentId}` : '/', { replace: true })
+    } else audio.pause()
+  }, [item?.id]) // eslint-disable-line react-hooks/exhaustive-deps
+  if (song) return null
   if (item && plugin) return <PluginPlayer item={item} player={plugin} onExit={exit} />
   if (!item || (isPending && !builtInKinds.includes(item.kind))) {
     return (
@@ -64,7 +77,7 @@ function NoPlayer({ onExit }: { onExit: () => void }) {
   )
 }
 
-const builtInKinds = ['movie', 'episode', 'track']
+const builtInKinds = ['movie', 'episode']
 
 function Player({ id }: { id: number }) {
   const { t: tr } = useTranslation()

@@ -20,6 +20,9 @@ function subtitle(item: Item): string {
       return item.childCount ? i18n.t('common:count.seasons', { count: item.childCount }) : ''
     case 'artist':
       return item.childCount ? i18n.t('common:count.albums', { count: item.childCount }) : ''
+    case 'album':
+    case 'track':
+      return item.artist || (item.year ? String(item.year) : '')
     default:
       return item.year ? String(item.year) : ''
   }
