@@ -67,6 +67,7 @@
   "only_an_admin_can_change_a_shared_collection": "साझा संग्रह को सिर्फ़ एडमिन बदल सकता है",
   "only_an_admin_can_share_a_collection": "संग्रह को सिर्फ़ एडमिन साझा कर सकता है",
   "only_movies_and_shows_go_on_a_watch_list": "वॉच लिस्ट में सिर्फ़ फ़िल्में और शो जा सकते हैं",
+  "only_music_and_audiobook_libraries": "केवल संगीत और ऑडियोबुक लाइब्रेरी",
   "order_is_asc_or_desc": "order asc या desc होता है",
   "password_must_be_at_least_8_characters": "पासवर्ड कम से कम 8 अक्षरों का होना चाहिए",
   "password_must_be_at_most_72_bytes": "पासवर्ड ज़्यादा से ज़्यादा 72 बाइट का होना चाहिए",

@@ -591,6 +591,8 @@
       "title": "Bibliotecas",
       "none": "Nenhuma biblioteca ainda.",
       "scan": "Verificar",
+      "findArtwork": "Buscar imagens",
+      "findingArtwork": "Procurando as capas que faltam em {{name}}. Elas aparecem conforme são encontradas.",
       "remove": "Remover {{name}}",
       "confirmRemove": "Remover “{{name}}”? Seus arquivos continuam onde estão.",
       "kind": {

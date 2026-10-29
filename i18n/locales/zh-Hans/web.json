@@ -583,6 +583,8 @@
       "title": "媒体库",
       "none": "还没有媒体库。",
       "scan": "扫描",
+      "findArtwork": "查找图片",
+      "findingArtwork": "正在为 {{name}} 查找缺失的封面，找到后会立即显示。",
       "remove": "移除{{name}}",
       "confirmRemove": "要移除“{{name}}”吗？你的文件会留在原处。",
       "kind": {

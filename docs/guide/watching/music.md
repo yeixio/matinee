@@ -83,6 +83,20 @@ The music keeps playing while you browse. What's playing shows at the top of the
 
 Matinee uses `cover.jpg` or `folder.jpg` in an album's folder, or a cover embedded in the music files, and `artist.jpg` in an artist's folder. Anything missing comes from MusicBrainz, the Cover Art Archive and Wikidata, which need no key. To use only your own files, set `MATINEE_MUSICBRAINZ=false`.
 
+<!-- since: v0.1.3 -->
+
+Cover names can be in any case and can be `.jpg`, `.jpeg`, `.png` or `.webp`: `Folder.JPG`, `front.png`, `AlbumArt_…_Large.jpg` and an image with "cover" or "front" in its name all count, and so does the only image in a folder. Back covers, disc scans and booklet pages don't. For an album split into `CD 1` and `CD 2` folders, put the cover in the album's folder above them.
+
+Albums tagged as a compilation without an album artist are filed under **Various Artists**, so their songs stay on one album with one cover.
+
+### Finding missing covers
+
+When covers are missing, check the album's folder first: a cover added after the album was scanned is picked up on the next scan. To look again for everything that's missing, an admin opens **Settings**, finds the music library under **Libraries**, and clicks **Find artwork**. Matinee scans the library's folders and looks up every artist and album without a picture of its own on MusicBrainz again, even ones it couldn't match before. Covers show up as they're found; with a big library that takes a while, since MusicBrainz answers about one question a second.
+
+Online lookups go by the album and artist names in your tags. An edition note like "(Deluxe Edition)" or "[2011 Remaster]" is tried with and without, and an album without a cover of its own in the Cover Art Archive takes the cover of one of its releases. If an album still has none, fix its tags, or add a `cover.jpg`.
+
+<!-- /since -->
+
 ## Tags
 
 Artist, album, track number and title come from the tags in your files, so tag them with your favorite tagger before adding them. Without tags, Matinee uses the [folder and file names](/docs/getting-started/organizing-media/#music).

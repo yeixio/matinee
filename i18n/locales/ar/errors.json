@@ -67,6 +67,7 @@
   "only_an_admin_can_change_a_shared_collection": "المسؤول فقط يمكنه تغيير مجموعة مشتركة",
   "only_an_admin_can_share_a_collection": "المسؤول فقط يمكنه مشاركة مجموعة",
   "only_movies_and_shows_go_on_a_watch_list": "الأفلام والمسلسلات فقط تدخل قائمة المشاهدة",
+  "only_music_and_audiobook_libraries": "مكتبات الموسيقى والكتب الصوتية فقط",
   "order_is_asc_or_desc": "order هو asc أو desc",
   "password_must_be_at_least_8_characters": "يجب أن تكون كلمة المرور 8 أحرف على الأقل",
   "password_must_be_at_most_72_bytes": "يجب ألا تتجاوز كلمة المرور 72 بايت",

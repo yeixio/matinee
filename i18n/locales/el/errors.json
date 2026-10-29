@@ -67,6 +67,7 @@
   "only_an_admin_can_change_a_shared_collection": "μόνο ένας διαχειριστής μπορεί να αλλάξει μια κοινόχρηστη συλλογή",
   "only_an_admin_can_share_a_collection": "μόνο ένας διαχειριστής μπορεί να μοιραστεί μια συλλογή",
   "only_movies_and_shows_go_on_a_watch_list": "μόνο ταινίες και σειρές μπαίνουν σε λίστα παρακολούθησης",
+  "only_music_and_audiobook_libraries": "μόνο βιβλιοθήκες μουσικής και ηχητικών βιβλίων",
   "order_is_asc_or_desc": "το order είναι asc ή desc",
   "password_must_be_at_least_8_characters": "ο κωδικός πρέπει να έχει τουλάχιστον 8 χαρακτήρες",
   "password_must_be_at_most_72_bytes": "ο κωδικός πρέπει να έχει το πολύ 72 byte",

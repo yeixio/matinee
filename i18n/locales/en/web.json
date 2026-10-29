@@ -587,6 +587,8 @@
       "title": "Libraries",
       "none": "No libraries yet.",
       "scan": "Scan",
+      "findArtwork": "Find artwork",
+      "findingArtwork": "Looking for missing covers in {{name}}. They show up as they're found.",
       "remove": "Remove {{name}}",
       "confirmRemove": "Remove “{{name}}”? Your files stay where they are.",
       "kind": {

@@ -67,6 +67,7 @@
   "only_an_admin_can_change_a_shared_collection": "bara en administratör kan ändra en delad samling",
   "only_an_admin_can_share_a_collection": "bara en administratör kan dela en samling",
   "only_movies_and_shows_go_on_a_watch_list": "bara filmer och serier kan läggas på en bevakningslista",
+  "only_music_and_audiobook_libraries": "bara musik- och ljudboksbibliotek",
   "order_is_asc_or_desc": "order är asc eller desc",
   "password_must_be_at_least_8_characters": "lösenordet måste ha minst 8 tecken",
   "password_must_be_at_most_72_bytes": "lösenordet får vara högst 72 byte",

@@ -41,7 +41,7 @@ func (audiobooks) Index(ctx context.Context, st *store.Store, f File) (store.Ite
 		return store.Item{}, err
 	}
 	if b.AuthorDir != "" {
-		if photo := findArt(b.AuthorDir, "author.jpg", "author.png"); photo != "" {
+		if photo := findNamed(b.AuthorDir, "author", "folder", "photo"); photo != "" {
 			if err := st.SetArt(ctx, authorID, photo, ""); err != nil {
 				return store.Item{}, err
 			}
@@ -51,11 +51,7 @@ func (audiobooks) Index(ctx context.Context, st *store.Store, f File) (store.Ite
 	if err != nil {
 		return store.Item{}, err
 	}
-	s := stem(f.Path)
-	cover := findArt(filepath.Dir(f.Path), s+".jpg", s+".png")
-	if cover == "" && b.BookDir != "" {
-		cover = findArt(b.BookDir, "cover.jpg", "folder.jpg", "front.jpg", "cover.png", "folder.png")
-	}
+	cover := bookCover(b, f.Path)
 	if cover == "" && f.Probe.HasCover {
 		cover = "embedded:" + f.Path
 	}
@@ -74,9 +70,34 @@ func (audiobooks) Index(ctx context.Context, st *store.Store, f File) (store.Ite
 	}, nil
 }
 
-// FinishScan adds up each book's length once its parts are in.
+// FinishScan adds up each book's length once its parts are in, and picks
+// up covers added to book folders since their files were scanned.
 func (audiobooks) FinishScan(ctx context.Context, st *store.Store, lib store.Library) error {
-	return st.SumBookLengths(ctx, lib.ID)
+	if err := st.SumBookLengths(ctx, lib.ID); err != nil {
+		return err
+	}
+	return fillFolderArt(ctx, st, lib, "book", func(root, path string) string {
+		return bookCover(ParseBookPath(root, path), path)
+	})
+}
+
+// bookCover finds a book's cover: an image named after the file (as when
+// several books share a folder), or the usual cover images in the book's
+// own folder or the CD folder the file is in.
+func bookCover(b BookFile, path string) string {
+	if c := findNamed(filepath.Dir(path), stem(path)); c != "" {
+		return c
+	}
+	if b.BookDir == "" {
+		return "" // the folder's other images belong to other books or the author
+	}
+	if c := findCover(b.BookDir, b.Book); c != "" {
+		return c
+	}
+	if dir := filepath.Dir(path); dir != b.BookDir {
+		return findCover(dir)
+	}
+	return ""
 }
 
 // BookFile is what an audiobook file's place on disk and its tags say.

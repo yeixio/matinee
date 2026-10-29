@@ -67,6 +67,7 @@
   "only_an_admin_can_change_a_shared_collection": "kun en administrator kan ændre en delt samling",
   "only_an_admin_can_share_a_collection": "kun en administrator kan dele en samling",
   "only_movies_and_shows_go_on_a_watch_list": "kun film og serier kan komme på en se-liste",
+  "only_music_and_audiobook_libraries": "kun musik- og lydbogsbiblioteker",
   "order_is_asc_or_desc": "order er asc eller desc",
   "password_must_be_at_least_8_characters": "adgangskoden skal være mindst 8 tegn",
   "password_must_be_at_most_72_bytes": "adgangskoden må højst være 72 byte",

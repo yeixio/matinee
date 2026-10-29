@@ -67,6 +67,7 @@
   "only_an_admin_can_change_a_shared_collection": "共有コレクションを変更できるのは管理者だけです",
   "only_an_admin_can_share_a_collection": "コレクションを共有できるのは管理者だけです",
   "only_movies_and_shows_go_on_a_watch_list": "ウォッチリストに入れられるのは映画と番組だけです",
+  "only_music_and_audiobook_libraries": "音楽とオーディオブックのライブラリのみ",
   "order_is_asc_or_desc": "order は asc か desc です",
   "password_must_be_at_least_8_characters": "パスワードは8文字以上にしてください",
   "password_must_be_at_most_72_bytes": "パスワードは72バイト以下にしてください",

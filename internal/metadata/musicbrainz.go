@@ -7,10 +7,12 @@ import (
 	"net/http"
 	"net/url"
 	"path"
+	"regexp"
 	"strconv"
 	"strings"
 	"sync"
 	"time"
+	"unicode"
 
 	"github.com/yeixio/matinee/internal/store"
 )
@@ -95,31 +97,147 @@ func (m *MusicBrainz) artist(ctx context.Context, name string) (*store.Metadata,
 }
 
 func (m *MusicBrainz) album(ctx context.Context, q Query) (*store.Metadata, error) {
-	query := "releasegroup:" + luceneQuote(q.Title)
-	if q.Artist != "" {
-		query += " AND artist:" + luceneQuote(q.Artist)
+	// "OK Computer (Deluxe Edition) [Remastered]" is filed as "OK Computer".
+	titles := []string{q.Title}
+	if c := plainAlbumTitle(q.Title); c != "" && c != q.Title {
+		titles = append(titles, c)
+	}
+	for _, title := range titles {
+		rg, err := m.releaseGroup(ctx, title, q.Artist)
+		if err != nil {
+			return nil, err
+		}
+		if rg == nil {
+			continue
+		}
+		y, _ := strconv.Atoi(strings.SplitN(rg.FirstRelease, "-", 2)[0])
+		// Local covers win over this (see Store.ApplyMetadata).
+		return &store.Metadata{MBID: rg.ID, Year: y, Poster: m.cover(ctx, rg.ID)}, nil
+	}
+	return nil, nil
+}
+
+type releaseGroup struct {
+	ID           string `json:"id"`
+	Title        string `json:"title"`
+	Score        int    `json:"score"`
+	FirstRelease string `json:"first-release-date"`
+}
+
+// releaseGroup searches for an album by its title and artist. A confident
+// answer is taken, and so is a less confident one with exactly this title,
+// since search scores drop for short or common titles.
+func (m *MusicBrainz) releaseGroup(ctx context.Context, title, artist string) (*releaseGroup, error) {
+	query := "releasegroup:" + luceneQuote(title)
+	if artist != "" {
+		query += " AND artist:" + luceneQuote(artist)
 	}
 	var res struct {
-		ReleaseGroups []struct {
-			ID           string `json:"id"`
-			Score        int    `json:"score"`
-			FirstRelease string `json:"first-release-date"`
-		} `json:"release-groups"`
+		ReleaseGroups []releaseGroup `json:"release-groups"`
 	}
 	if err := m.mb(ctx, "/release-group", url.Values{"query": {query}, "limit": {"5"}}, &res); err != nil {
 		return nil, err
 	}
-	if len(res.ReleaseGroups) == 0 || res.ReleaseGroups[0].Score < minScore {
+	if len(res.ReleaseGroups) == 0 {
 		return nil, nil
 	}
-	rg := res.ReleaseGroups[0]
-	y, _ := strconv.Atoi(strings.SplitN(rg.FirstRelease, "-", 2)[0])
-	return &store.Metadata{
-		MBID: rg.ID, Year: y,
-		// Local covers win over this (see Store.ApplyMetadata), and the image
-		// endpoint falls back to the title card if the archive has none.
-		Poster: m.CoverURL + "/release-group/" + rg.ID + "/front-500",
-	}, nil
+	if res.ReleaseGroups[0].Score >= minScore {
+		return &res.ReleaseGroups[0], nil
+	}
+	if artist == "" {
+		return nil, nil // a title alone is too little to go on
+	}
+	for _, rg := range res.ReleaseGroups {
+		if rg.Score >= 60 && sameName(rg.Title, title) {
+			return &rg, nil
+		}
+	}
+	return nil, nil
+}
+
+// cover returns the Cover Art Archive's front cover for an album. Not
+// every album has one for the album as a whole, so when it doesn't, the
+// first of its releases with a front cover is used; "" when none has one.
+// If the archive can't be reached, the album's cover URL is kept, and the
+// image endpoint tries it again when it's shown.
+func (m *MusicBrainz) cover(ctx context.Context, rgid string) string {
+	front := m.CoverURL + "/release-group/" + rgid + "/front-500"
+	switch ok, err := m.exists(ctx, front); {
+	case err != nil || ok:
+		return front
+	}
+	var res struct {
+		Releases []struct {
+			ID  string `json:"id"`
+			CAA struct {
+				Front bool `json:"front"`
+			} `json:"cover-art-archive"`
+		} `json:"releases"`
+	}
+	if err := m.mb(ctx, "/release", url.Values{"release-group": {rgid}, "limit": {"50"}}, &res); err != nil {
+		return ""
+	}
+	for _, r := range res.Releases {
+		if r.CAA.Front {
+			return m.CoverURL + "/release/" + r.ID + "/front-500"
+		}
+	}
+	return ""
+}
+
+// exists asks the Cover Art Archive whether it has an image, without
+// downloading it: it answers with a redirect to the file or a 404.
+func (m *MusicBrainz) exists(ctx context.Context, u string) (bool, error) {
+	req, err := http.NewRequestWithContext(ctx, "HEAD", u, nil)
+	if err != nil {
+		return false, err
+	}
+	req.Header.Set("User-Agent", m.UserAgent)
+	c := *m.Client
+	c.CheckRedirect = func(*http.Request, []*http.Request) error { return http.ErrUseLastResponse }
+	resp, err := c.Do(req)
+	if err != nil {
+		return false, err
+	}
+	resp.Body.Close()
+	switch {
+	case resp.StatusCode < 400:
+		return true, nil
+	case resp.StatusCode == http.StatusNotFound:
+		return false, nil
+	}
+	return false, fmt.Errorf("%s: %s", req.URL.Host, resp.Status)
+}
+
+// editionRe matches a bracketed note on an album title about its edition,
+// such as "(Deluxe Edition)", "[2011 Remaster]" or "(Disc 1)".
+var editionRe = regexp.MustCompile(`(?i)\s*[(\[][^)\]]*\b(deluxe|remaster(ed)?|expanded|edition|anniversary|bonus|special|explicit|version|mono|stereo|reissue|limited|collector'?s|disc|cd|disk)\b[^)\]]*[)\]]\s*$`)
+
+// discSuffixRe matches " CD1" or " - Disc 2" at the end of an album title.
+var discSuffixRe = regexp.MustCompile(`(?i)[\s-]+(cd|dis[ck])\s*\d{1,2}$`)
+
+// plainAlbumTitle takes edition and disc notes off an album title.
+func plainAlbumTitle(t string) string {
+	for {
+		c := discSuffixRe.ReplaceAllString(editionRe.ReplaceAllString(t, ""), "")
+		if c == t {
+			return strings.TrimSpace(c)
+		}
+		t = c
+	}
+}
+
+// sameName compares titles ignoring case, punctuation and spacing.
+func sameName(a, b string) bool {
+	norm := func(s string) string {
+		return strings.Map(func(r rune) rune {
+			if unicode.IsLetter(r) || unicode.IsDigit(r) {
+				return unicode.ToLower(r)
+			}
+			return -1
+		}, s)
+	}
+	return norm(a) != "" && norm(a) == norm(b)
 }
 
 // wikidataID finds the artist's Wikidata entity among its MusicBrainz links.

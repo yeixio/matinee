@@ -67,6 +67,7 @@
   "only_an_admin_can_change_a_shared_collection": "alleen een beheerder kan een gedeelde collectie wijzigen",
   "only_an_admin_can_share_a_collection": "alleen een beheerder kan een collectie delen",
   "only_movies_and_shows_go_on_a_watch_list": "alleen films en series kunnen op de kijklijst",
+  "only_music_and_audiobook_libraries": "alleen muziek- en luisterboekbibliotheken",
   "order_is_asc_or_desc": "order is asc of desc",
   "password_must_be_at_least_8_characters": "het wachtwoord moet minstens 8 tekens hebben",
   "password_must_be_at_most_72_bytes": "het wachtwoord mag hoogstens 72 bytes zijn",

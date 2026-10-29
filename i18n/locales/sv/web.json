@@ -587,6 +587,8 @@
       "title": "Bibliotek",
       "none": "Inga bibliotek än.",
       "scan": "Skanna",
+      "findArtwork": "Hitta bilder",
+      "findingArtwork": "Letar efter omslag som saknas i {{name}}. De visas allteftersom de hittas.",
       "remove": "Ta bort {{name}}",
       "confirmRemove": "Ta bort ”{{name}}”? Dina filer stannar där de är.",
       "kind": {

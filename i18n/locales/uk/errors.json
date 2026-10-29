@@ -67,6 +67,7 @@
   "only_an_admin_can_change_a_shared_collection": "спільну колекцію може змінювати лише адміністратор",
   "only_an_admin_can_share_a_collection": "відкрити колекцію для всіх може лише адміністратор",
   "only_movies_and_shows_go_on_a_watch_list": "до списку «Хочу подивитися» можна додавати лише фільми й серіали",
+  "only_music_and_audiobook_libraries": "лише для медіатек музики й аудіокниг",
   "order_is_asc_or_desc": "order — asc або desc",
   "password_must_be_at_least_8_characters": "пароль має містити щонайменше 8 символів",
   "password_must_be_at_most_72_bytes": "пароль має бути не довшим за 72 байти",

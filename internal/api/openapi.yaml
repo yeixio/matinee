@@ -767,6 +767,25 @@ paths:
       parameters: [{ $ref: "#/components/parameters/ID" }]
       responses:
         "202": { description: Scanning. Watch `scanning` on GET /libraries. }
+  /libraries/{id}/artwork:
+    post:
+      summary: Find missing artwork in a music or audiobook library (admins only)
+      description: >
+        Scans the library, which picks up covers added to folders since, then
+        looks up online again every artist, album, author and book without a
+        picture from its own files, including ones not matched before.
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      responses:
+        "202":
+          description: Looking. Watch `scanning` on GET /libraries.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  lookingUp: { type: integer, description: How many items will be looked up online again }
+        "400": { $ref: "#/components/responses/Error" }
+        "404": { $ref: "#/components/responses/Error" }
   /libraries/{id}/items:
     get:
       summary: A library's top level (movies, shows or artists), filtered and sorted

@@ -67,6 +67,7 @@
   "only_an_admin_can_change_a_shared_collection": "paylaşılan bir koleksiyonu yalnızca bir yönetici değiştirebilir",
   "only_an_admin_can_share_a_collection": "bir koleksiyonu yalnızca bir yönetici paylaşabilir",
   "only_movies_and_shows_go_on_a_watch_list": "izleme listesine yalnızca filmler ve diziler eklenebilir",
+  "only_music_and_audiobook_libraries": "yalnızca müzik ve sesli kitap kitaplıkları",
   "order_is_asc_or_desc": "order asc veya desc olur",
   "password_must_be_at_least_8_characters": "parola en az 8 karakter olmalı",
   "password_must_be_at_most_72_bytes": "parola en fazla 72 bayt olmalı",

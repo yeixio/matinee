@@ -583,6 +583,8 @@
       "title": "라이브러리",
       "none": "아직 라이브러리가 없습니다.",
       "scan": "스캔",
+      "findArtwork": "이미지 찾기",
+      "findingArtwork": "{{name}}에서 빠진 커버를 찾고 있어요. 찾는 대로 표시됩니다.",
       "remove": "{{name}} 삭제",
       "confirmRemove": "\"{{name}}\"을(를) 삭제할까요? 파일은 그대로 남습니다.",
       "kind": {

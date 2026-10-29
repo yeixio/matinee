@@ -591,6 +591,8 @@
       "title": "Bibliotecas",
       "none": "Aún no hay bibliotecas.",
       "scan": "Escanear",
+      "findArtwork": "Buscar imágenes",
+      "findingArtwork": "Buscando las portadas que faltan en {{name}}. Aparecerán a medida que se encuentren.",
       "remove": "Quitar {{name}}",
       "confirmRemove": "¿Quitar «{{name}}»? Tus archivos se quedan donde están.",
       "kind": {

@@ -67,6 +67,7 @@
   "only_an_admin_can_change_a_shared_collection": "megosztott gyűjteményt csak rendszergazda módosíthat",
   "only_an_admin_can_share_a_collection": "gyűjteményt csak rendszergazda oszthat meg",
   "only_movies_and_shows_go_on_a_watch_list": "a megnézendők közé csak filmek és sorozatok kerülhetnek",
+  "only_music_and_audiobook_libraries": "csak zenei és hangoskönyv-könyvtárak",
   "order_is_asc_or_desc": "az order értéke asc vagy desc",
   "password_must_be_at_least_8_characters": "a jelszónak legalább 8 karakteresnek kell lennie",
   "password_must_be_at_most_72_bytes": "a jelszó legfeljebb 72 bájt lehet",

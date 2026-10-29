@@ -67,6 +67,7 @@
   "only_an_admin_can_change_a_shared_collection": "só um administrador pode alterar uma coleção compartilhada",
   "only_an_admin_can_share_a_collection": "só um administrador pode compartilhar uma coleção",
   "only_movies_and_shows_go_on_a_watch_list": "só filmes e séries entram na lista",
+  "only_music_and_audiobook_libraries": "apenas bibliotecas de música e audiolivros",
   "order_is_asc_or_desc": "order é asc ou desc",
   "password_must_be_at_least_8_characters": "a senha deve ter pelo menos 8 caracteres",
   "password_must_be_at_most_72_bytes": "a senha deve ter no máximo 72 bytes",

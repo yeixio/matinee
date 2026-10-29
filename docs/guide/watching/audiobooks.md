@@ -72,3 +72,22 @@ Matinee reads who wrote and who reads a book, and the series it's in, from the t
 | `description` | the book's description |
 
 Without tags, the folder names work: `Author/Series/Book 2 - Title/` puts the book second in its series. A `desc.txt` in a book's folder gives its description, and a `reader.txt` its narrators. Covers come from `cover.jpg` or `folder.jpg` in the book's folder, or from a cover embedded in the files, and an author's photo from `author.jpg` in their folder.
+
+<!-- since: v0.1.3 -->
+
+## Covers and author photos
+
+A book's cover comes from, in order:
+
+1. An image named like the book's file, such as `The Hobbit.jpg` next to `The Hobbit.m4b`. This works for books that share a folder.
+2. A cover in the book's own folder: `cover.jpg`, `folder.jpg`, `front.png`, an image with "cover" in its name, or the folder's only image. Names can be in any case, and `.jpeg`, `.png` and `.webp` work too.
+3. The cover embedded in the book's file, which most `.m4b` files have.
+4. Open Library, which needs no key, by the book's title and author.
+
+An author's photo comes from `author.jpg` (or `folder.jpg`) in their folder, or from Open Library. To use only your own files, set `MATINEE_OPENLIBRARY=false`.
+
+Open Library's covers are of the printed book, which most audiobook covers are made from. A book is only matched when Open Library has the same title by the same author; notes like "(Unabridged)" are left out of the search.
+
+To look again for missing covers, for example after adding images to book folders, an admin opens **Settings**, finds the audiobook library under **Libraries**, and clicks **Find artwork**.
+
+<!-- /since -->

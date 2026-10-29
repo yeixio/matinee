@@ -220,6 +220,7 @@ Every setting is a flag or an environment variable.
 | `MATINEE_RATING_COUNTRY` | `US` | Whose age ratings to use for kids profiles, such as `GB`, `CA`, `AU` or `DE`. Titles pick up a new country's ratings when their details are next refreshed |
 | `MATINEE_MEDIA_ROOT` | `/` | Folder the library picker opens in |
 | `MATINEE_MUSICBRAINZ` | `true` | Look up artists and albums on MusicBrainz, with covers from the Cover Art Archive and artist photos from Wikidata. No key needed. Set `false` to use only local artwork |
+| `MATINEE_OPENLIBRARY` | `true` | Look up audiobook covers and author photos on Open Library. No key needed. Set `false` to use only local artwork |
 | `MATINEE_WIKIDATA` | `true` | Look up the awards movies and shows won or were nominated for on Wikidata. No key needed. Set `false` to skip awards |
 | `MATINEE_SCAN_INTERVAL` | `15m` | How often libraries are rescanned in full; `0` turns it off |
 | `MATINEE_WATCH_POLL_INTERVAL` | `30s` | How often folders on network shares are checked for new files. A big library on a slow share is checked less often by itself, so the share stays responsive |

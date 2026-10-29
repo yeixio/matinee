@@ -591,6 +591,8 @@
       "title": "Biblioteci",
       "none": "Nicio bibliotecă încă.",
       "scan": "Scanează",
+      "findArtwork": "Caută imagini",
+      "findingArtwork": "Se caută copertele lipsă din {{name}}. Apar pe măsură ce sunt găsite.",
       "remove": "Elimină {{name}}",
       "confirmRemove": "Elimini „{{name}}”? Fișierele tale rămân unde sunt.",
       "kind": {

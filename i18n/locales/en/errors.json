@@ -77,6 +77,7 @@
   "only_an_admin_can_change_a_shared_collection": "only an admin can change a shared collection",
   "only_an_admin_can_share_a_collection": "only an admin can share a collection",
   "only_movies_and_shows_go_on_a_watch_list": "only movies and shows go on a watch list",
+  "only_music_and_audiobook_libraries": "only music and audiobook libraries",
   "order_is_asc_or_desc": "order is asc or desc",
   "overseerr_doesnt_know_this_title": "Overseerr doesn't know this title",
   "overseerr_has_no_such_user": "Overseerr has no such user",

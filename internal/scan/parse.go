@@ -155,6 +155,15 @@ func ParseTrackPath(libraryRoot, path string) TrackInfo {
 	}
 	if rel, err := filepath.Rel(libraryRoot, path); err == nil {
 		parts := strings.Split(filepath.ToSlash(rel), "/")
+		// Artist/Album/CD 1/track: the disc folder isn't the album.
+		if n := len(parts); n >= 3 {
+			if m := discDirRe.FindStringSubmatch(parts[n-2]); m != nil {
+				if info.Disc == 0 {
+					info.Disc, _ = strconv.Atoi(m[1])
+				}
+				parts = append(parts[:n-2], parts[n-1])
+			}
+		}
 		if len(parts) >= 3 {
 			info.Artist = parts[len(parts)-3]
 			info.Album = parts[len(parts)-2]

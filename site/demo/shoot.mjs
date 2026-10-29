@@ -254,6 +254,13 @@ try {
     const page = await open(desktop, token)
     await page.goto(`${origin}/settings`)
     await shot(page, 'people', { target: section(page, 'People') })
+    if (wanted('find-artwork')) {
+      const libraries = section(page, 'Libraries')
+      const music = libraries.locator('div.flex.items-center.gap-4').filter({ hasText: 'Music' }).first()
+      await music.getByRole('button', { name: 'Find artwork' }).click()
+      await libraries.getByText('Looking for missing covers').waitFor()
+      await shot(page, 'find-artwork', { target: libraries })
+    }
     const profiles = section(page, 'Profiles')
     await profiles.getByRole('button', { name: 'Add profile' }).last().click()
     await profiles.getByLabel('Name').fill('Riley')

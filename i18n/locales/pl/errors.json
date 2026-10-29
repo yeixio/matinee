@@ -67,6 +67,7 @@
   "only_an_admin_can_change_a_shared_collection": "tylko administrator może zmienić udostępnioną kolekcję",
   "only_an_admin_can_share_a_collection": "tylko administrator może udostępnić kolekcję",
   "only_movies_and_shows_go_on_a_watch_list": "na listę do obejrzenia trafiają tylko filmy i seriale",
+  "only_music_and_audiobook_libraries": "tylko biblioteki muzyki i audiobooków",
   "order_is_asc_or_desc": "order to asc lub desc",
   "password_must_be_at_least_8_characters": "hasło musi mieć co najmniej 8 znaków",
   "password_must_be_at_most_72_bytes": "hasło może mieć najwyżej 72 bajty",

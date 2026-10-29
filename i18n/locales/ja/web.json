@@ -583,6 +583,8 @@
       "title": "ライブラリ",
       "none": "まだライブラリはありません。",
       "scan": "スキャン",
+      "findArtwork": "画像を探す",
+      "findingArtwork": "{{name}} で足りないカバーを探しています。見つかりしだい表示されます。",
       "remove": "{{name}}を削除",
       "confirmRemove": "「{{name}}」を削除しますか？ファイルはそのまま残ります。",
       "kind": {

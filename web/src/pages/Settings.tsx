@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { ChevronLeft, Folder, FolderOpen, KeyRound, Monitor, Plus, RefreshCw, Trash2, UserPlus, X } from 'lucide-react'
+import { ChevronLeft, Folder, FolderOpen, Image as ImageIcon, KeyRound, Monitor, Plus, RefreshCw, Trash2, UserPlus, X } from 'lucide-react'
 import { useState, type FormEvent } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
@@ -60,6 +60,14 @@ function Libraries() {
   const [adding, setAdding] = useState(false)
   const refresh = () => qc.invalidateQueries({ queryKey: ['libraries'] })
   const scan = useMutation({ mutationFn: api.scanLibrary, onSuccess: () => setTimeout(refresh, 300) })
+  const [findingArt, setFindingArt] = useState<number[]>([])
+  const findArt = useMutation({
+    mutationFn: api.findArtwork,
+    onSuccess: (_, id) => {
+      setFindingArt((ids) => [...ids, id])
+      setTimeout(refresh, 300)
+    },
+  })
   const remove = useMutation({
     mutationFn: api.deleteLibrary,
     onSuccess: () => {
@@ -90,7 +98,20 @@ function Libraries() {
               <div className="font-medium">{l.name}</div>
               <div className="truncate text-xs text-muted">{l.paths.join(' · ')}</div>
               {l.watch.length > 0 && <div className="truncate text-xs text-faint">{watchSummary(l, settings?.watchPollSeconds || 30)}</div>}
+              {findingArt.includes(l.id) && <div className="text-xs text-accent">{t('settings.libraries.findingArtwork', { name: l.name })}</div>}
             </div>
+            {(l.kind === 'music' || l.kind === 'audiobooks') && (
+              <Button
+                variant="ghost"
+                icon={<ImageIcon className="size-4" />}
+                aria-label={t('settings.libraries.findArtwork')}
+                title={t('settings.libraries.findArtwork')}
+                disabled={l.scanning}
+                onClick={() => findArt.mutate(l.id)}
+              >
+                <span className="hidden md:inline">{t('settings.libraries.findArtwork')}</span>
+              </Button>
+            )}
             <Button
               variant="ghost"
               icon={<RefreshCw className={`size-4 ${l.scanning ? 'animate-spin' : ''}`} />}

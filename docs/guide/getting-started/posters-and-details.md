@@ -52,6 +52,9 @@ Everything else works without one. Titles are named from your files, and any [ar
 Two more sources need no key and are on by default:
 
 - **MusicBrainz** fills in artists and albums, with covers from the Cover Art Archive and artist photos from Wikidata. Set `MATINEE_MUSICBRAINZ=false` to use only your own files.
+<!-- since: v0.1.3 -->
+- **Open Library** fills in audiobook covers and author photos for books without their own. Set `MATINEE_OPENLIBRARY=false` to use only your own files.
+<!-- /since -->
 - **Wikidata** adds the awards a movie or show won or was nominated for. Set `MATINEE_WIKIDATA=false` to skip them.
 
 ## Age ratings in your country

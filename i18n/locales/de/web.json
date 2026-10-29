@@ -587,6 +587,8 @@
       "title": "Mediatheken",
       "none": "Noch keine Mediatheken.",
       "scan": "Scannen",
+      "findArtwork": "Bilder suchen",
+      "findingArtwork": "Fehlende Cover in {{name}} werden gesucht. Sie erscheinen, sobald sie gefunden sind.",
       "remove": "{{name}} entfernen",
       "confirmRemove": "„{{name}}“ entfernen? Deine Dateien bleiben, wo sie sind.",
       "kind": {
