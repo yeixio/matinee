@@ -94,7 +94,7 @@ export async function makeLibrary(root) {
   }
   for (const p of people) art(`person-${p.id}.jpg`, portrait(p.id), 632, 632)
   albums.forEach((a, i) => {
-    art(`cover-${i}.jpg`, cover(a.scene, a.album, a.artist), 600, 600)
+    art(`cover-${i}.jpg`, cover(a.scene, a.album, a.artist, a.hue ?? 0), 600, 600)
     art(`artist-${i}.jpg`, portrait(40 + i * 3), 632, 632)
   })
   await render(jobs)

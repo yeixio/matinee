@@ -187,6 +187,10 @@ export const albums = [
   { artist: 'Aurora Static', album: 'Signal Fires', year: 2021, scene: 202, tracks: ['Opening Credits', 'Velvet Seats', 'Intermission', 'Projector Hum', 'Snowline', 'Encore'] },
   { artist: 'The Midnight Reels', album: 'Late Show', year: 2019, scene: 105, tracks: ['Neon Marquee', 'Back Row', 'Usher\'s Waltz', 'Double Feature', 'Closing Time'] },
   { artist: 'Harbor Choir', album: 'Lights on the Water', year: 2023, scene: 102, tracks: ['Quay', 'Night Ferry', 'Lanterns', 'Tide Tables'] },
+  { artist: 'Aurora Static', album: 'Night Signals', year: 2018, scene: 104, tracks: ['Dial Tone', 'Static Bloom', 'Last Broadcast', 'Antenna Song', 'Test Pattern'] },
+  { artist: 'Paper Lanterns', album: 'Small Hours', year: 2022, scene: 106, hue: 40, tracks: ['Kettle', 'Porch Light', 'Small Hours', 'Fog Lamp'] },
+  { artist: 'Cobalt Avenue', album: 'Drive-In', year: 2020, scene: 108, hue: 300, tracks: ['Headlights', 'Speaker Post', 'Second Feature', 'Tail Lights', 'Gravel'] },
+  { artist: 'The Midnight Reels', album: 'Matinee Idols', year: 2024, scene: 103, hue: 200, tracks: ['Front Row', 'Cartoon Short', 'Popcorn Line', 'House Lights'] },
 ]
 
 export const keywords = [

@@ -323,6 +323,10 @@ export type Item = {
   hasBackdrop: boolean
   showTitle?: string
   seasonIndex?: number
+  // Albums and tracks: the artist; tracks: the album too (its id is parentId).
+  artist?: string
+  artistId?: number
+  album?: string
   // True until the server has looked the item up online.
   pending?: boolean
   onWatchList?: boolean
@@ -758,6 +762,8 @@ export const api = {
   search: (q: string) => request<Item[]>('GET', `/api/v1/search?q=${encodeURIComponent(q)}`),
   item: (id: number) => request<ItemDetail>('GET', `/api/v1/items/${id}`),
   children: (id: number) => request<Item[]>('GET', `/api/v1/items/${id}/children`),
+  // Every track of an artist or album, in playing order.
+  tracks: (id: number) => request<Item[]>('GET', `/api/v1/items/${id}/tracks`),
   related: (id: number) => request<Related>('GET', `/api/v1/items/${id}/related`),
   next: (id: number) => request<NextUp>('GET', `/api/v1/items/${id}/next`),
   person: (id: number) => request<Person>('GET', `/api/v1/people/${id}`),

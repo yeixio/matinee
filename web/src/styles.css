@@ -23,10 +23,16 @@
   --font-display: 'Fraunces Variable', ui-serif, Georgia, serif;
   --animate-fade: fade 240ms ease-out;
   --animate-shimmer: shimmer 1.4s linear infinite;
+  --animate-eq: eq 0.9s ease-in-out infinite;
 
   @keyframes fade {
     from { opacity: 0; transform: translateY(4px); }
     to { opacity: 1; transform: none; }
+  }
+  /* The bars beside the song that's playing. */
+  @keyframes eq {
+    0%, 100% { height: 30%; }
+    50% { height: 100%; }
   }
   @keyframes shimmer {
     from { background-position: -200% 0; }

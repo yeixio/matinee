@@ -48,7 +48,8 @@ type ItemFilter struct {
 	RuntimeMax int `json:"runtimeMax,omitempty"`
 
 	// Watched is unwatched (something left to play), inProgress (started,
-	// not finished), watched (all played) or notStarted (none played), for
+	// not finished), watched (all played), notStarted (none played) or
+	// started (any of it played or begun, such as albums listened to), for
 	// the person asking.
 	Watched string `json:"watched,omitempty"`
 
@@ -75,7 +76,7 @@ type ItemFilter struct {
 var SortFields = []string{"title", "added", "released", "year", "rating", "runtime", "lastPlayed"}
 
 // WatchedStates are the values ItemFilter.Watched takes.
-var WatchedStates = []string{"unwatched", "inProgress", "watched", "notStarted"}
+var WatchedStates = []string{"unwatched", "inProgress", "watched", "notStarted", "started"}
 
 var dateRE = regexp.MustCompile(`^\d{4}-\d{2}-\d{2}$`)
 
@@ -417,6 +418,8 @@ func (f ItemFilter) sql(today time.Time) (where, order string, args []any) {
 		add(anyStarted + " AND " + anyUnplayed)
 	case "notStarted":
 		add("NOT " + anyStarted)
+	case "started":
+		add(anyStarted)
 	}
 	for _, t := range f.Tag {
 		add(hasTag, repeat(3, "%,"+likeEscape(t)+",%")...)

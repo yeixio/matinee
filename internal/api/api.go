@@ -201,6 +201,7 @@ func (s *Server) routes() []route {
 		{"GET /search", reader, s.search},
 		{"GET /items/{id}", reader, s.getItem},
 		{"GET /items/{id}/children", reader, s.itemChildren},
+		{"GET /items/{id}/tracks", reader, s.itemTracks},
 		{"GET /items/{id}/related", reader, s.itemRelated},
 		{"GET /items/{id}/next", reader, s.itemNext},
 		{"GET /people/{id}", reader, s.getPerson},
@@ -963,6 +964,22 @@ func (s *Server) itemChildren(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	items, err := s.Store.Children(r.Context(), currentUser(r).ID, id)
+	if err != nil {
+		s.serverError(w, err)
+		return
+	}
+	writeJSON(w, http.StatusOK, items)
+}
+
+// itemTracks lists every track of an artist or album, for playing or
+// shuffling them all.
+func (s *Server) itemTracks(w http.ResponseWriter, r *http.Request) {
+	id, ok := pathID(r)
+	if !ok {
+		writeError(w, http.StatusBadRequest, "bad id")
+		return
+	}
+	items, err := s.Store.Tracks(r.Context(), currentUser(r).ID, id)
 	if err != nil {
 		s.serverError(w, err)
 		return

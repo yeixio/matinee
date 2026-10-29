@@ -214,6 +214,21 @@ func TestEndToEnd(t *testing.T) {
 	if len(tracks) != 1 || tracks[0].Title != "Test Song" || *tracks[0].IndexNumber != 4 {
 		t.Fatalf("tracks: %+v", tracks)
 	}
+	// A player names what's playing: a track's album and artist, an album's artist.
+	if tracks[0].Album != "Test Album" || tracks[0].Artist != "Test Artist" || tracks[0].ArtistID == nil || *tracks[0].ArtistID != artists[0].ID {
+		t.Fatalf("track names its album and artist: %+v", tracks[0])
+	}
+	if albums[0].Artist != "Test Artist" || *albums[0].ArtistID != artists[0].ID || albums[0].Album != "" {
+		t.Fatalf("album names its artist: %+v", albums[0])
+	}
+	// Every track of an artist, of an album, or a track's album.
+	for _, id := range []int64{artists[0].ID, albums[0].ID, tracks[0].ID} {
+		var all []store.Item
+		c.do("GET", "/api/items/"+itoa(id)+"/tracks", nil, &all)
+		if len(all) != 1 || all[0].ID != tracks[0].ID {
+			t.Fatalf("tracks of %d: %+v", id, all)
+		}
+	}
 
 	// Search by word prefix.
 	var found []store.Item

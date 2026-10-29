@@ -79,7 +79,7 @@ function Screens() {
   const grownUps = (page: React.ReactNode) => (kids ? <Navigate to="/" replace /> : page)
 
   return (
-    <AudioProvider>
+    <AudioProvider user={me.data.id}>
       <RemoteSync />
       <Suspense fallback={null}>
       <Routes>

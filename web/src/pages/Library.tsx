@@ -1,19 +1,26 @@
 import { keepPreviousData, useQuery } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
-import { api, pendingRefetch } from '../api'
+import { api, pendingRefetch, type Library as LibraryInfo } from '../api'
 import { GridSkeleton, PosterGrid } from '../components/Card'
 import { PinnedCollections, SaveAsCollectionButton } from '../components/Collections'
 import { FilterBar } from '../components/FilterBar'
 import { LibraryIcon, useLibraries } from '../components/Shell'
 import { Button, EmptyState } from '../components/ui'
+import Music from './Music'
 import { activeCount, clearPicks, toSearchParams, useLibraryFilter } from '../filter'
 
 export default function Library() {
-  const { t } = useTranslation()
   const id = Number(useParams().id)
   const { data: libraries } = useLibraries()
   const lib = libraries?.find((l) => l.id === id)
+  // Music has its own page: artists, albums and songs.
+  if (lib?.kind === 'music') return <Music lib={lib} />
+  return <Titles id={id} lib={lib} />
+}
+
+function Titles({ id, lib }: { id: number; lib?: LibraryInfo }) {
+  const { t } = useTranslation()
   const [filter, setFilter] = useLibraryFilter(id)
   const { data: items, isPending, isPlaceholderData } = useQuery({
     queryKey: ['library', id, toSearchParams(filter).toString()],

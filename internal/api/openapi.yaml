@@ -937,6 +937,15 @@ paths:
       parameters: [{ $ref: "#/components/parameters/ID" }]
       responses:
         "200": { $ref: "#/components/responses/Items" }
+  /items/{id}/tracks:
+    get:
+      summary: Every track of an artist or album
+      description: |
+        In playing order: the artist's albums oldest first, then each album
+        by disc and track number. For a track, its album's tracks.
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      responses:
+        "200": { $ref: "#/components/responses/Items" }
   /items/{id}/related:
     get:
       summary: Titles in the library like a movie or show
@@ -2287,8 +2296,8 @@ components:
         runtimeMax: { type: integer }
         watched:
           type: string
-          enum: [unwatched, inProgress, watched, notStarted]
-          description: For the signed-in person. unwatched has something left to play; watched has everything played.
+          enum: [unwatched, inProgress, watched, notStarted, started]
+          description: For the signed-in person. unwatched has something left to play; watched has everything played; started has anything played or begun.
         tag: { type: array, items: { type: string }, description: Media tags such as 4k, hdr or atmos (see Item.mediaTags); all must match. }
         notTag: { type: array, items: { type: string } }
         person: { type: array, items: { type: integer }, description: TMDB person ids credited in any role, including episodes; all must match. }
@@ -2859,6 +2868,9 @@ components:
         hasBackdrop: { type: boolean }
         showTitle: { type: string, description: "Episodes: the show's title." }
         seasonIndex: { type: integer, description: "Episodes: the season number." }
+        artist: { type: string, description: "Albums and tracks: the artist's name." }
+        artistId: { type: integer, description: "Albums and tracks: the artist's id." }
+        album: { type: string, description: "Tracks: the album's title (its id is parentId)." }
         onWatchList: { type: boolean, description: "On the signed-in person's watch list." }
         genres: { type: array, items: { type: string }, description: "Movies and shows: genres from the online match.", examples: [[Science Fiction, Drama]] }
         mediaTags:

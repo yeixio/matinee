@@ -58,6 +58,23 @@ A device stays signed in as long as it's used at least once every 90 days, so a 
 
 **Settings → Your devices** lists every device signed in as you. Sign out any you don't recognize, or one you've lost. Changing your password signs out all your other devices, and an admin [resetting someone's password](/docs/household/people/#manage-accounts) signs that person out everywhere.
 
+## Who can control which player
+
+Every open browser player and app can be seen and controlled through the server, which is how [Home Assistant](/docs/server/home-assistant/) pauses a film or starts an album. Who may do that depends on who is signed in:
+
+| Who | Their players can be controlled | They can control |
+| --- | --- | --- |
+| A device at home, not signed in (Home) | yes, by admins | nothing |
+| Someone signed in | yes, by themselves and admins | their own account's players, including its profiles |
+| An admin, or Home Assistant | yes | every player on the server |
+
+Starting something on a player plays it as whoever uses that player, so a kids profile only gets what it could pick itself. A player that's being controlled says so for a moment, such as **Controlled from Home Assistant**.
+
+<!-- since: v0.1.1 -->
+The music player takes the same commands as the video player: play, pause, skip to the next or previous song, move around the song, and start an album, an artist or a song, which plays in the music player while the person keeps browsing.
+
+<!-- /since -->
+
 ## Keeping your server safe
 
 - Give every account a password you don't use anywhere else. Matinee asks for at least 8 characters; longer is better, especially for admins, once remote access is on.

@@ -5,7 +5,8 @@ import { useCallback, useEffect, useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import i18n from './i18n'
 
-export type Watched = 'unwatched' | 'inProgress' | 'watched' | 'notStarted'
+// started (anything played) only lists what was listened to; Filters don't offer it.
+export type Watched = 'unwatched' | 'inProgress' | 'watched' | 'notStarted' | 'started'
 export type SortField = 'title' | 'added' | 'released' | 'year' | 'rating' | 'runtime' | 'lastPlayed'
 
 export type ItemFilter = {

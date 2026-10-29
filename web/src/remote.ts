@@ -75,7 +75,10 @@ export function clientId(): string {
 }
 let fallbackId: string | undefined
 
-let player: PlayerHooks | undefined
+// Open players, newest last: the newest gets commands. The music player is
+// always there underneath, and the video player goes on top while it's open.
+const players: PlayerHooks[] = []
+const top = () => players[players.length - 1]
 let navigate: ((to: string) => void) | undefined
 let running = false
 // This tab holds the lock, so it's the one talking to the server.
@@ -103,8 +106,8 @@ function hello() {
     name: '', // the server names it after the browser
     platform: 'web',
     app: 'Matinee web',
-    commands: player ? player.commands() : ['playItem'],
-    playing: player?.state() ?? null,
+    commands: top()?.commands() ?? ['playItem'],
+    playing: top()?.state() ?? null,
   }
 }
 
@@ -121,6 +124,7 @@ async function report() {
 
 // Commands that need no player: start something.
 function handle(c: Command) {
+  const player = top()
   if (player) {
     player.handle(c)
     return
@@ -193,13 +197,16 @@ export const remote = {
     window.addEventListener('pagehide', leave)
     acquire()
   },
-  // A player opened; it gets commands until the returned function is called.
-  attach(hooks: PlayerHooks) {
-    player = hooks
-    if (running && !active) acquire(true)
+  // A player opened; it gets commands until the returned function is
+  // called. A background player (the music player, always there) doesn't
+  // take the turn from another tab.
+  attach(hooks: PlayerHooks, background = false) {
+    players.push(hooks)
+    if (running && !active && !background) acquire(true)
     else remote.report()
     return () => {
-      if (player === hooks) player = undefined
+      const i = players.indexOf(hooks)
+      if (i >= 0) players.splice(i, 1)
       remote.report()
     }
   },

@@ -63,7 +63,7 @@ The [phone and TV apps](/docs/apps/phone-and-tv/#sleep-timer) have the same time
 <!-- since: v0.1.1 -->
 ## Controlled from another device
 
-The player can be paused, moved or started from [Home Assistant](/docs/server/home-assistant/). When that happens it says so for a moment, such as **Controlled from Home Assistant**. Each browser counts as one player; the tab with a video open is the one that listens.
+The player can be paused, moved or started from [Home Assistant](/docs/server/home-assistant/). When that happens it says so for a moment, such as **Controlled from Home Assistant**. Each browser counts as one player; the tab with a video open, or with music playing, is the one that listens. [Who signs in, and when](/docs/household/signing-in/#who-can-control-which-player) says who may control it.
 
 <!-- /since -->
 

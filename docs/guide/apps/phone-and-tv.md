@@ -43,6 +43,9 @@ On a TV, sign-in starts with a code instead of a password: see [Signing in a dev
 - **Home, libraries, search, and every title's page**, as in the browser, with cast and crew, trailers, file details and the [filters](/docs/watching/browsing/#filters).
 - **Your profile and theme.** The [profile picker](/docs/household/profiles/) and [your theme](/docs/household/themes/) follow you from the server.
 - **Playback that picks up where you left off**, with the [Up next](/docs/watching/playing/#up-next) countdown, picture in picture on phones, and music that keeps playing in the background.
+<!-- since: v0.1.1 -->
+- **Music on phones** with its own player: artists, albums and songs, a player above the tabs that keeps going while you browse, and a full player with the queue. See [Music](/docs/watching/music/#on-the-phone-apps).
+<!-- /since -->
 - **Downloads** on phones and tablets, to [watch offline](/docs/apps/downloads/).
 - **Coming soon**, with [Radarr or Sonarr](/docs/server/radarr-and-sonarr/#coming-soon) connected: a row at the end of Home, and the next two months day by day. On a phone, the calendar along the top jumps to a day; on a TV, each day is a row.
 

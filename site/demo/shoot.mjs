@@ -142,8 +142,16 @@ try {
     if (album) {
       await page.goto(`${origin}/item/${album.id}`)
       await page.getByRole('button', { name: 'Play' }).first().click()
+      await page.evaluate(() => window.scrollTo(0, 0))
       await sleep(1500)
       await shot(page, 'album')
+      await page.getByRole('button', { name: 'Open the player' }).click()
+      await sleep(1200)
+      await shot(page, 'now-playing')
+      await page.keyboard.press('Escape')
+      await page.goto(`${origin}/item/${album.artistId}`)
+      await sleep(1000)
+      await shot(page, 'artist')
     }
     await page.context().close()
   }

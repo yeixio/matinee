@@ -38,7 +38,12 @@ type Item struct {
 	ShowTitle   string `json:"showTitle,omitempty"`
 	SeasonIndex *int   `json:"seasonIndex,omitempty"`
 	showID      int64
-	OnWatchList bool `json:"onWatchList,omitempty"`
+	// For albums and tracks: who made it, and for tracks the album it's
+	// on (the album's id is ParentID), so a player can say what's playing.
+	Artist      string `json:"artist,omitempty"`
+	ArtistID    *int64 `json:"artistId,omitempty"`
+	Album       string `json:"album,omitempty"`
+	OnWatchList bool   `json:"onWatchList,omitempty"`
 	// Genres of a movie or show, from its online match.
 	Genres []string `json:"genres,omitempty"`
 	// MediaTags sums up what the background analysis found, such as 4k,
@@ -91,7 +96,12 @@ const itemCols = `
 	COALESCE(i.media_tags, ''),
 	COALESCE(i.genres, ''),
 	CASE WHEN i.kind = 'episode' THEN (SELECT se.parent_id FROM items se WHERE se.id = i.parent_id) END,
-	COALESCE(i.facts, ''), COALESCE(i.plugin_data, '')`
+	COALESCE(i.facts, ''), COALESCE(i.plugin_data, ''),
+	CASE WHEN i.kind = 'album' THEN (SELECT ar.title FROM items ar WHERE ar.id = i.parent_id)
+		WHEN i.kind = 'track' THEN (SELECT ar.title FROM items al JOIN items ar ON ar.id = al.parent_id WHERE al.id = i.parent_id) END,
+	CASE WHEN i.kind = 'album' THEN i.parent_id
+		WHEN i.kind = 'track' THEN (SELECT al.parent_id FROM items al WHERE al.id = i.parent_id) END,
+	CASE WHEN i.kind = 'track' THEN (SELECT al.title FROM items al WHERE al.id = i.parent_id) END`
 
 const itemFrom = ` FROM (SELECT CAST(? AS BIGINT) AS id) me CROSS JOIN items i LEFT JOIN progress p ON p.item_id = i.id AND p.user_id = me.id`
 
@@ -107,11 +117,14 @@ func scanItem(r scanner) (Item, error) {
 	var showTitle sql.NullString
 	var showID sql.NullInt64
 	var tags, genres, facts, data string
+	var artist, album sql.NullString
+	var artistID sql.NullInt64
 	err := r.Scan(&it.ID, &it.LibraryID, &parent, &it.Kind, &it.Title, &year, &idx, &disc,
 		&dur, &it.Container, &it.VideoCodec, &it.AudioCodec, &w, &h, &it.AddedAt, &it.Path, &it.Size, &it.Mtime,
 		&it.ChildCount, &it.PositionMs, &it.Played,
 		&it.Overview, &rating, &it.Poster, &it.Backdrop, &tmdb, &it.MetaAt,
-		&showTitle, &seasonIdx, &it.OnWatchList, &tags, &genres, &showID, &facts, &data)
+		&showTitle, &seasonIdx, &it.OnWatchList, &tags, &genres, &showID, &facts, &data,
+		&artist, &artistID, &album)
 	if err != nil {
 		return it, err
 	}
@@ -130,6 +143,10 @@ func scanItem(r scanner) (Item, error) {
 		it.TMDBID = &tmdb.Int64
 	}
 	it.ShowTitle, it.SeasonIndex, it.showID = showTitle.String, intPtr(seasonIdx), showID.Int64
+	it.Artist, it.Album = artist.String, album.String
+	if artistID.Valid {
+		it.ArtistID = &artistID.Int64
+	}
 	it.Genres = decodeGenres(genres)
 	it.Playable = it.Path != ""
 	it.MediaTags = splitTags(tags)
@@ -222,6 +239,16 @@ func (s *Store) Children(ctx context.Context, userID, parentID int64) ([]Item, e
 		return nil, err
 	}
 	return items, s.fillContainerTags(ctx, items)
+}
+
+// Tracks lists every track under an artist or album, in order: albums
+// oldest first, then by disc and track. For a track, it's its album's.
+func (s *Store) Tracks(ctx context.Context, userID, id int64) ([]Item, error) {
+	return s.queryItems(ctx, `i.kind = 'track' AND (i.parent_id = ? OR i.parent_id IN (SELECT a.id FROM items a WHERE a.parent_id = ?)
+		OR i.parent_id = (SELECT t.parent_id FROM items t WHERE t.id = ? AND t.kind = 'track'))`,
+		`(SELECT COALESCE(al.year, 0) FROM items al WHERE al.id = i.parent_id), (SELECT al.sort_title FROM items al WHERE al.id = i.parent_id),
+		i.parent_id, COALESCE(i.disc_number, 0), COALESCE(i.index_number, 0), i.sort_title`,
+		userID, id, id, id)
 }
 
 // Search matches titles by word prefix, e.g. "star wa" finds "Star Wars".
