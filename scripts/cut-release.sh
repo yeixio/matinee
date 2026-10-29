@@ -27,8 +27,11 @@ fail() {
 last="$(git tag -l 'v[0-9]*' --sort=-v:refname | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | head -n1 || true)"
 last="${last:-v0.0.0}"
 
-if [ -n "${VERSION:-}" ]; then
-  tag="v${VERSION#v}"
+# Spaces and a capital V, as phones type it, are fine: " V1.2.3" is v1.2.3.
+VERSION="$(printf '%s' "${VERSION:-}" | tr -d '[:space:]')"
+VERSION="${VERSION#[vV]}"
+if [ -n "$VERSION" ]; then
+  tag="v${VERSION}"
 else
   IFS=. read -r major minor patch <<<"${last#v}"
   case "$BUMP" in
@@ -77,8 +80,11 @@ if [ -z "${FORCE:-}" ]; then
   fi
   if [ "$status" != completed ]; then
     echo "Waiting for $CI_WORKFLOW on ${sha:0:7} to finish..."
-    gh run watch "$run_id" --interval 30 >/dev/null || true
-    conclusion="$(gh run view "$run_id" --json conclusion --jq .conclusion)"
+    # Polled rather than gh run watch, which needs checks: read.
+    while [ "$status" != completed ]; do
+      sleep 30
+      read -r status conclusion <<<"$(gh run view "$run_id" --json status,conclusion --jq '"\(.status) \(.conclusion)"')"
+    done
   fi
   if [ "$conclusion" != success ]; then
     fail "$CI_WORKFLOW didn't pass on ${sha:0:7} ($conclusion). Fix it first, or set FORCE."

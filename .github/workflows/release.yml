@@ -18,7 +18,7 @@ on:
         options: [patch, minor, major]
         default: patch
       version:
-        description: Or an exact version, such as v0.3.0-beta.1
+        description: Or an exact version, such as v0.3.0-beta.1 (leave empty to bump)
         type: string
         required: false
       force:
