@@ -42,6 +42,8 @@ When Matinee opens a port for [remote access](/docs/server/remote-access/), that
 ### Matinee Connect never carries your video
 
 [Matinee Connect](/docs/server/remote-access/#matinee-connect) only helps the apps find your server's current address. The apps then connect straight to your server and sign in there, as above. Connect never sees your library, your accounts, your passwords or anything you watch, and nothing streams through it: there is no relay. It can't let anyone into your server, because getting in still takes an account on the server itself.
+
+Before an app uses an address it got from Connect, the server there has to prove it's yours: it signs a random challenge with a key that never leaves your server, and the app checks the signature against the server it paired with at home. So even someone who took over Connect, or who ends up with your old internet address, can't pose as your server to collect sign-ins.
 <!-- /since -->
 
 ## Signing in a TV or other device with a code
@@ -73,6 +75,14 @@ Starting something on a player plays it as whoever uses that player, so a kids p
 <!-- since: v0.1.1 -->
 The music player takes the same commands as the video player: play, pause, skip to the next or previous song, move around the song, and start an album, an artist or a song, which plays in the music player while the person keeps browsing.
 
+<!-- /since -->
+
+<!-- since: v0.1.1 -->
+## Guessing passwords doesn't work
+
+After 5 wrong passwords for one account, Matinee makes whoever is trying wait before the next try: 30 seconds at first, then twice as long after each wrong one, up to 15 minutes. One internet address gets 20 wrong passwords across all accounts before it has to wait too. A right password starts the count over.
+
+At home nothing counts and nobody waits, so someone guessing from outside can never lock your household out: sign in at home and the account is clear again.
 <!-- /since -->
 
 ## Keeping your server safe

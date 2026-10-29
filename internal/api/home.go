@@ -66,10 +66,8 @@ func (s *Server) fromHome(r *http.Request) bool {
 }
 
 func directFromPrivateNetwork(r *http.Request) bool {
-	for _, h := range []string{"X-Forwarded-For", "X-Real-Ip", "Forwarded"} {
-		if r.Header.Get(h) != "" {
-			return false
-		}
+	if !direct(r) {
+		return false
 	}
 	host, _, err := net.SplitHostPort(r.RemoteAddr)
 	if err != nil {

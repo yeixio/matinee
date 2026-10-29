@@ -1,13 +1,17 @@
 package api
 
 import (
+	"bytes"
 	"context"
+	"crypto/ed25519"
+	"encoding/json"
 	"io"
 	"log/slog"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 
+	"github.com/yeixio/matinee/internal/connect"
 	"github.com/yeixio/matinee/internal/remote"
 )
 
@@ -153,5 +157,49 @@ func TestRemotePortIsNeverHome(t *testing.T) {
 	c.do("GET", "/api/v1/server", nil, &info)
 	if !info.HomeAccess {
 		t.Fatal("main port should give home access from loopback")
+	}
+}
+
+func TestProveServer(t *testing.T) {
+	_, key, _ := ed25519.GenerateKey(nil)
+	m := &remote.Manager{Addr: "127.0.0.1:0", Dir: t.TempDir(), Handler: http.NotFoundHandler(), Log: slog.New(slog.NewTextHandler(io.Discard, nil)),
+		Connect: &connect.Client{Key: key}}
+	c, _ := newTestServer(t, func(s *Server) { s.Remote = m; s.PublicURL = "https://Matinee.example.com" })
+
+	nonce := []byte("0123456789abcdef0123")
+	prove := func(host string) (int, []byte, []byte) {
+		body, _ := json.Marshal(map[string]any{"nonce": nonce})
+		r := httptest.NewRequest("POST", "/api/v1/server/proof", bytes.NewReader(body))
+		r.Host = host
+		w := httptest.NewRecorder()
+		c.srv.Handler().ServeHTTP(w, r)
+		var out struct{ Key, Signature []byte }
+		json.Unmarshal(w.Body.Bytes(), &out)
+		return w.Code, out.Key, out.Signature
+	}
+
+	for _, host := range []string{"matinee.example.com", "matinee.example.com:443"} {
+		code, pub, sig := prove(host)
+		if code != http.StatusOK {
+			t.Fatalf("%s: %d", host, code)
+		}
+		if connect.ID(pub) != m.Connect.ID() {
+			t.Fatalf("%s: key leads to %s, want %s", host, connect.ID(pub), m.Connect.ID())
+		}
+		if !ed25519.Verify(pub, connect.ProofMessage("matinee.example.com", nonce), sig) {
+			t.Fatalf("%s: signature doesn't check out", host)
+		}
+	}
+	// Someone else's address, as when another server passes the request on.
+	if code, _, _ := prove("203.0.113.9:7443"); code != http.StatusForbidden {
+		t.Fatalf("another address: %d", code)
+	}
+	body, _ := json.Marshal(map[string]any{"nonce": []byte("short")})
+	r := httptest.NewRequest("POST", "/api/v1/server/proof", bytes.NewReader(body))
+	r.Host = "matinee.example.com"
+	w := httptest.NewRecorder()
+	c.srv.Handler().ServeHTTP(w, r)
+	if w.Code != http.StatusBadRequest {
+		t.Fatalf("short nonce: %d", w.Code)
 	}
 }

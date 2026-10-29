@@ -59,6 +59,41 @@ paths:
                   status: { type: string, const: ok }
                   version: { type: string }
                   apiVersion: { type: integer }
+  /server/proof:
+    post:
+      summary: Prove this is the server behind serverId
+      description: |
+        For an app that found an address through the connect service. Send a
+        random nonce (16 to 64 bytes); the server signs
+        `"matinee-server-proof v1\n" + host + "\n" + nonce` with its key,
+        where host is the address the request was made to, without `:443`.
+        Check that the key's id (connect.ID) is the `serverId` you saved and
+        that the signature checks out before sending a token. The server only
+        signs for its own outside address, so a proof can't be passed along by
+        another server.
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [nonce]
+              properties:
+                nonce: { type: string, format: byte }
+      responses:
+        "200":
+          description: The proof.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  key: { type: string, format: byte, description: The server's ed25519 public key. }
+                  signature: { type: string, format: byte }
+        "400": { $ref: "#/components/responses/Error" }
+        "403": { $ref: "#/components/responses/Error" }
+        "404": { $ref: "#/components/responses/Error" }
   /server:
     get:
       summary: What this server is
@@ -110,6 +145,11 @@ paths:
   /auth/login:
     post:
       summary: Sign in with a username and password
+      description: |
+        After a few wrong passwords for one username, or many from one
+        address, sign-in is refused with 429 and a `Retry-After` header for a
+        while, longer each time, up to 15 minutes. Requests from home are
+        never refused or counted.
       security: []
       requestBody:
         required: true
@@ -122,6 +162,7 @@ paths:
       responses:
         "200": { $ref: "#/components/responses/SignedIn" }
         "401": { $ref: "#/components/responses/Error" }
+        "429": { $ref: "#/components/responses/Error" }
   /auth/logout:
     post:
       summary: Sign this device out
@@ -2440,6 +2481,11 @@ components:
             "updated"}`, then try each URL. The service only knows addresses;
             everything else goes straight to the server. Empty when there's
             none.
+        serverProof:
+          type: boolean
+          description: |
+            `POST /server/proof` works here. An app that saw this asks a
+            looked-up address for proof before sending its token there.
     Settings:
       type: object
       properties:
