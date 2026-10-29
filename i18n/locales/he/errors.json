@@ -97,6 +97,8 @@
   "title_is_already_on_its_way": "{{title}} כבר בדרך",
   "too_many_wrong_pins_try_again_in_a_minute": "יותר מדי קודי PIN שגויים; נסה שוב בעוד דקה",
   "too_many_wrong_passwords_try_again_later": "יותר מדי סיסמאות שגויות; נסה שוב מאוחר יותר",
+  "that_isnt_this_servers_address": "זו לא הכתובת של השרת הזה",
+  "this_server_has_no_id_to_prove": "לשרת הזה אין מזהה להוכיח",
   "unknown_quality": "איכות לא ידועה",
   "unknown_sort": "מיון לא ידוע",
   "username_is_required": "נדרש שם משתמש",

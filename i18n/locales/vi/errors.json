@@ -97,6 +97,8 @@
   "title_is_already_on_its_way": "{{title}} đang trên đường đến",
   "too_many_wrong_pins_try_again_in_a_minute": "nhập sai mã PIN quá nhiều lần; hãy thử lại sau một phút",
   "too_many_wrong_passwords_try_again_later": "nhập sai mật khẩu quá nhiều lần; hãy thử lại sau",
+  "that_isnt_this_servers_address": "đó không phải địa chỉ của máy chủ này",
+  "this_server_has_no_id_to_prove": "máy chủ này không có id để chứng minh",
   "unknown_quality": "chất lượng không xác định",
   "unknown_sort": "cách sắp xếp không xác định",
   "username_is_required": "cần có tên người dùng",

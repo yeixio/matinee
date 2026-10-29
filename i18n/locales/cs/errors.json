@@ -97,6 +97,8 @@
   "title_is_already_on_its_way": "{{title}} už je na cestě",
   "too_many_wrong_pins_try_again_in_a_minute": "příliš mnoho špatných PINů; zkus to znovu za minutu",
   "too_many_wrong_passwords_try_again_later": "příliš mnoho špatných hesel; zkus to znovu později",
+  "that_isnt_this_servers_address": "to není adresa tohoto serveru",
+  "this_server_has_no_id_to_prove": "tento server nemá žádné ID, které by mohl prokázat",
   "unknown_quality": "neznámá kvalita",
   "unknown_sort": "neznámé řazení",
   "username_is_required": "uživatelské jméno je povinné",

@@ -97,6 +97,8 @@
   "title_is_already_on_its_way": "{{title}} از قبل در راه است",
   "too_many_wrong_pins_try_again_in_a_minute": "PIN اشتباه بیش از حد؛ یک دقیقه دیگر دوباره امتحان کنید",
   "too_many_wrong_passwords_try_again_later": "رمز عبور اشتباه بیش از حد؛ بعداً دوباره امتحان کنید",
+  "that_isnt_this_servers_address": "این نشانی این سرور نیست",
+  "this_server_has_no_id_to_prove": "این سرور شناسه‌ای برای اثبات ندارد",
   "unknown_quality": "کیفیت ناشناخته",
   "unknown_sort": "مرتب‌سازی ناشناخته",
   "username_is_required": "نام کاربری لازم است",

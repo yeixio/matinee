@@ -97,6 +97,8 @@
   "title_is_already_on_its_way": "{{title}} sudah dalam perjalanan",
   "too_many_wrong_pins_try_again_in_a_minute": "terlalu banyak PIN salah; cuba lagi dalam seminit",
   "too_many_wrong_passwords_try_again_later": "terlalu banyak kata laluan salah; cuba lagi nanti",
+  "that_isnt_this_servers_address": "itu bukan alamat pelayan ini",
+  "this_server_has_no_id_to_prove": "pelayan ini tiada id untuk dibuktikan",
   "unknown_quality": "kualiti tidak diketahui",
   "unknown_sort": "isihan tidak diketahui",
   "username_is_required": "nama pengguna diperlukan",

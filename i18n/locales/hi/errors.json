@@ -97,6 +97,8 @@
   "title_is_already_on_its_way": "{{title}} पहले से रास्ते में है",
   "too_many_wrong_pins_try_again_in_a_minute": "बहुत ज़्यादा गलत PIN; एक मिनट बाद फिर कोशिश करें",
   "too_many_wrong_passwords_try_again_later": "बहुत ज़्यादा गलत पासवर्ड; बाद में फिर कोशिश करें",
+  "that_isnt_this_servers_address": "यह इस सर्वर का पता नहीं है",
+  "this_server_has_no_id_to_prove": "इस सर्वर के पास साबित करने के लिए कोई id नहीं है",
   "unknown_quality": "अज्ञात क्वालिटी",
   "unknown_sort": "अज्ञात क्रम",
   "username_is_required": "उपयोगकर्ता नाम ज़रूरी है",
