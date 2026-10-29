@@ -99,7 +99,18 @@ func TestAudiobooks(t *testing.T) {
 		t.Fatalf("started over: %+v", started)
 	}
 
-	// A player that plays one part at a time saves its place in the book.
+	// A player that plays one part at a time goes on to the next, and saves
+	// its place in the book.
+	var next nextView
+	c.do("GET", "/api/v1/items/"+itoa(b.Parts[0].ID)+"/next", nil, &next)
+	if next.Next == nil || next.Next.ID != b.Parts[1].ID {
+		t.Fatalf("next part: %+v", next)
+	}
+	next = nextView{}
+	c.do("GET", "/api/v1/items/"+itoa(b.Parts[2].ID)+"/next", nil, &next)
+	if next.Next != nil {
+		t.Fatalf("after the last part: %+v", next)
+	}
 	parts := b.Parts
 	part := func(i int) string { return "/api/v1/items/" + itoa(parts[i].ID) + "/progress" }
 	reload := func() {
