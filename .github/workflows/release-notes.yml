@@ -1,0 +1,47 @@
+name: Release notes
+
+# When docs/release-notes/<tag>.md changes on main after its release is out,
+# the release on GitHub gets the new notes. Run it by hand to refresh one.
+on:
+  push:
+    branches: [main]
+    paths: ["docs/release-notes/v*.md"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: The release to refresh, such as v0.1.1
+        type: string
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Refresh the releases whose notes changed
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ inputs.tag }}
+          BEFORE: ${{ github.event.before }}
+        run: |
+          set -euo pipefail
+          if [ -n "$TAG" ]; then
+            tags="$TAG"
+          else
+            tags="$(git diff --name-only "$BEFORE" HEAD -- 'docs/release-notes/v*.md' | sed 's|.*/||; s|\.md$||')"
+          fi
+          for tag in $tags; do
+            # Notes merged before their release are picked up by Release itself.
+            if ! gh api "repos/${GITHUB_REPOSITORY}/releases/tags/${tag}" --silent 2>/dev/null; then
+              echo "No release for $tag yet."
+              continue
+            fi
+            scripts/release-notes.sh "$tag" > notes.md
+            gh release edit "$tag" --notes-file notes.md
+            echo "Refreshed the notes for $tag."
+          done
