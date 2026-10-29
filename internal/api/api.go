@@ -93,6 +93,7 @@ type Server struct {
 	catalogCache    ttlCache        // the official plugins (see plugins.go)
 	trailerCache    ttlCache        // trailer files' probes and TMDB's trailer lists (see trailers.go)
 	pins            pinGuard        // wrong profile PINs (see profiles.go)
+	signIns         signInGuard     // wrong passwords (see signin.go)
 	holidayKeywords holidayKeywords // TMDB's ids for holiday keywords (see holidays.go)
 	langs           languages       // profiles' languages (see languages.go)
 
@@ -143,6 +144,7 @@ func (s *Server) routes() []route {
 			writeJSON(w, http.StatusOK, map[string]any{"status": "ok", "version": version.Version, "apiVersion": APIVersion})
 		}},
 		{"GET /server", public, s.serverInfo},
+		{"POST /server/proof", public, s.proveServer},
 		{"GET /openapi.yaml", public, serveOpenAPI},
 		{"GET /setup", public, s.getSetup},
 		{"POST /setup", public, s.postSetup},
@@ -569,8 +571,17 @@ func (s *Server) login(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	}
+	keys, home := s.signInKeys(r, req.Username)
+	if wait := s.signIns.locked(keys); wait > 0 && !home {
+		tooManySignIns(w, wait)
+		return
+	}
 	u, token, err := auth.Login(r.Context(), s.Store, strings.TrimSpace(req.Username), req.Password, requestDevice(r, req.DeviceName, req.Platform))
 	if errors.Is(err, auth.ErrBadCredentials) {
+		if !home {
+			s.signIns.record(keys, false)
+		}
+		s.Log.Info("wrong password", "from", r.RemoteAddr)
 		writeError(w, http.StatusUnauthorized, err.Error())
 		return
 	}
@@ -578,6 +589,7 @@ func (s *Server) login(w http.ResponseWriter, r *http.Request) {
 		s.serverError(w, err)
 		return
 	}
+	s.signIns.record(keys, true)
 	setSessionCookie(w, r, token)
 	writeJSON(w, http.StatusOK, map[string]any{"user": u, "token": token})
 }

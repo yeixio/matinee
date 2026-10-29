@@ -60,8 +60,18 @@ doesn't answer, it calls `GET <lookupURL>`:
 { "id": "…", "urls": ["https://203.0.113.7:7443"], "updated": 1793145600 }
 ```
 
-and tries each URL, checking (as always) that the server there is the one it
-paired with. A 404 means the server hasn't registered in the last half hour.
+and tries each URL. Before it sends its token to one, it makes the server
+there prove it holds the key behind `serverId`: it posts a random nonce to
+`POST /api/v1/server/proof`, checks that the returned key's id is the
+`serverId` it saved and that the signature over
+`"matinee-server-proof v1\n" + host + "\n" + nonce` checks out. The server
+only signs for its own outside address (its remote access URL or
+`MATINEE_PUBLIC_URL`), so another server can't pass its proof along. Servers
+that offer this say `"serverProof": true` in `GET /api/v1/server`, and apps
+that saw that never trust a looked-up address without the proof, so nobody
+who takes over the service or the server's old address can collect tokens.
+A 404 from the lookup means the server hasn't registered in the last half
+hour.
 
 ## Running it
 

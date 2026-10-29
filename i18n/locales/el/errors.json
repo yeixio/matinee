@@ -96,6 +96,7 @@
   "title_is_already_in_your_library": "το {{title}} είναι ήδη στη βιβλιοθήκη σου",
   "title_is_already_on_its_way": "το {{title}} είναι ήδη στον δρόμο",
   "too_many_wrong_pins_try_again_in_a_minute": "πάρα πολλά λάθος PIN· δοκίμασε ξανά σε ένα λεπτό",
+  "too_many_wrong_passwords_try_again_later": "πάρα πολλοί λάθος κωδικοί· δοκίμασε ξανά αργότερα",
   "unknown_quality": "άγνωστη ποιότητα",
   "unknown_sort": "άγνωστη ταξινόμηση",
   "username_is_required": "το όνομα χρήστη είναι υποχρεωτικό",

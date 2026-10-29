@@ -96,6 +96,7 @@
   "title_is_already_in_your_library": "{{title}} finns redan i ditt bibliotek",
   "title_is_already_on_its_way": "{{title}} är redan på väg",
   "too_many_wrong_pins_try_again_in_a_minute": "för många felaktiga PIN-koder; försök igen om en minut",
+  "too_many_wrong_passwords_try_again_later": "för många felaktiga lösenord; försök igen senare",
   "unknown_quality": "okänd kvalitet",
   "unknown_sort": "okänd sortering",
   "username_is_required": "användarnamn krävs",

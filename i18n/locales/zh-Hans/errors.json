@@ -96,6 +96,7 @@
   "title_is_already_in_your_library": "《{{title}}》已在你的媒体库中",
   "title_is_already_on_its_way": "《{{title}}》已在路上",
   "too_many_wrong_pins_try_again_in_a_minute": "PIN 错误次数过多，请一分钟后再试",
+  "too_many_wrong_passwords_try_again_later": "密码错误次数过多，请稍后再试",
   "unknown_quality": "未知画质",
   "unknown_sort": "未知排序",
   "username_is_required": "用户名为必填项",

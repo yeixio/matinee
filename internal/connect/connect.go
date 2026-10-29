@@ -140,3 +140,22 @@ func URL(ip netip.Addr, port int) string {
 	}
 	return "https://" + net.JoinHostPort(ip.String(), strconv.Itoa(port))
 }
+
+// proofContext starts what a server signs to prove to an app that it holds
+// the key behind its id (Prove).
+const proofContext = "matinee-server-proof v1\n"
+
+// ProofMessage is what a server reached at host signs for an app's nonce.
+// host is the address the app asked for, without a :443 port.
+func ProofMessage(host string, nonce []byte) []byte {
+	return append([]byte(proofContext+host+"\n"), nonce...)
+}
+
+// Prove signs nonce from an app that reached this server at host. The app
+// checks the key leads to the id it knows and the signature is right, so
+// whoever answers at an address the connect service gave out has to be the
+// server itself, not someone passing its answers along: the host is signed
+// too, and the server only signs its own.
+func (c *Client) Prove(host string, nonce []byte) (pub ed25519.PublicKey, sig []byte) {
+	return c.Key.Public().(ed25519.PublicKey), ed25519.Sign(c.Key, ProofMessage(host, nonce))
+}

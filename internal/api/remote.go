@@ -8,6 +8,7 @@ import (
 	"net/netip"
 	"net/url"
 	"strconv"
+	"strings"
 	"sync"
 	"time"
 
@@ -141,6 +142,41 @@ func (s *Server) lookup(ctx context.Context) (id, url string) {
 		return "", ""
 	}
 	return s.Remote.Lookup()
+}
+
+// proveServer answers an app that found this server through the connect
+// service and wants proof it's really this server (connect.Client.Prove)
+// before it sends its token. It only signs for the server's own outside
+// address, so another server can't pass the proof along as its own.
+func (s *Server) proveServer(w http.ResponseWriter, r *http.Request) {
+	var req struct {
+		Nonce []byte `json:"nonce"`
+	}
+	if err := readJSON(r, &req); err != nil || len(req.Nonce) < 16 || len(req.Nonce) > 64 {
+		writeError(w, http.StatusBadRequest, "invalid request")
+		return
+	}
+	if s.Remote == nil || s.Remote.Connect == nil {
+		writeError(w, http.StatusNotFound, "this server has no id to prove")
+		return
+	}
+	host := withoutHTTPSPort(r.Host)
+	own := false
+	for _, u := range []string{s.Remote.URL(), s.PublicURL} {
+		if p, err := url.Parse(u); err == nil && u != "" && p.Scheme == "https" && withoutHTTPSPort(p.Host) == host {
+			own = true
+		}
+	}
+	if !own {
+		writeError(w, http.StatusForbidden, "that isn't this server's address")
+		return
+	}
+	pub, sig := s.Remote.Connect.Prove(host, req.Nonce)
+	writeJSON(w, http.StatusOK, map[string]any{"key": []byte(pub), "signature": sig})
+}
+
+func withoutHTTPSPort(host string) string {
+	return strings.ToLower(strings.TrimSuffix(host, ":443"))
 }
 
 // remoteURL is where the apps reach this server away from home, or "".

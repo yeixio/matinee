@@ -60,6 +60,10 @@ func (s *Server) serverInfo(w http.ResponseWriter, r *http.Request) {
 		// the new one at lookupURL (internal/connect). Empty without one.
 		"serverId":  serverID,
 		"lookupURL": lookupURL,
+		// POST /server/proof proves this server holds serverId's key, so
+		// apps that saw this ask for proof before trusting a looked-up
+		// address.
+		"serverProof": serverID != "",
 	})
 }
 
