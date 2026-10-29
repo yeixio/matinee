@@ -2,7 +2,7 @@
 title: Themes
 description: Pick one of seven built-in looks for the web player and apps, or add your own.
 sidebar:
-  order: 3
+  order: 4
 ---
 
 Matinee has seven built-in themes. Everyone picks their own under **Settings → Appearance**, and their pick follows them to the phone and TV apps.
