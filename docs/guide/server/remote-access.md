@@ -20,7 +20,7 @@ Turn on **Settings → Remote access → Watch away from home** and Matinee sets
 
 ![Remote access while it opens a port and gets a certificate](../images/remote-access-working.webp)
 
-Everyone signs in from outside. Nothing that arrives through this port counts as [home](/docs/server/home-network/).
+Everyone signs in from outside. Nothing that arrives through this port counts as [home](/docs/server/home-network/); [Who has to sign in](/docs/household/signing-in/) explains the rules.
 
 ### The video never goes through anyone else
 

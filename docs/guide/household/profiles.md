@@ -2,7 +2,7 @@
 title: Profiles and kids mode
 description: Profiles share one sign-in but keep their own progress, watch list and theme. Kids profiles only see what's rated for them.
 sidebar:
-  order: 2
+  order: 3
 ---
 
 A profile is a person on a shared sign-in: one account (or the Home account on your network), several people, each with their own place in every show, their own watch list and their own theme. When an account has profiles, Matinee asks **Who's watching?** when it opens.
