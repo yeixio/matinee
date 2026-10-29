@@ -378,7 +378,16 @@
     "openPlayer": "Åbn afspilleren",
     "minimize": "Minimer",
     "readMore": "Læs mere",
-    "less": "Vis mindre"
+    "less": "Vis mindre",
+    "visualizer": "Visualisering",
+    "changeLook": "Skift udseende",
+    "lookHint": "Venstre og højre skifter udseende",
+    "paused": "Sat på pause",
+    "look": {
+      "bars": "Søjler",
+      "halo": "Glorie",
+      "pulse": "Puls"
+    }
   },
   "books": {
     "overview": "Oversigt",

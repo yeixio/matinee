@@ -133,5 +133,8 @@
   "this_client_id_belongs_to_someone_else": "questo id client appartiene a qualcun altro",
   "track_is_required": "serve track",
   "unknown_command": "comando sconosciuto",
-  "volume_must_be_between_0_and_1": "volume deve essere tra 0 e 1"
+  "volume_must_be_between_0_and_1": "volume deve essere tra 0 e 1",
+  "couldnt_read_the_songs_sound": "impossibile leggere l'audio del brano",
+  "no_levels_on_this_server": "nessun livello su questo server",
+  "not_a_song": "non è un brano"
 }

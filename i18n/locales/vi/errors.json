@@ -133,5 +133,8 @@
   "this_client_id_belongs_to_someone_else": "id máy khách này thuộc về người khác",
   "track_is_required": "cần track",
   "unknown_command": "lệnh không xác định",
-  "volume_must_be_between_0_and_1": "volume phải từ 0 đến 1"
+  "volume_must_be_between_0_and_1": "volume phải từ 0 đến 1",
+  "couldnt_read_the_songs_sound": "không đọc được âm thanh của bài hát",
+  "no_levels_on_this_server": "máy chủ này không có mức âm",
+  "not_a_song": "không phải bài hát"
 }

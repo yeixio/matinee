@@ -133,5 +133,8 @@
   "this_client_id_belongs_to_someone_else": "מזהה הלקוח הזה שייך למישהו אחר",
   "track_is_required": "נדרש track",
   "unknown_command": "פקודה לא מוכרת",
-  "volume_must_be_between_0_and_1": "volume חייב להיות בין 0 ל-1"
+  "volume_must_be_between_0_and_1": "volume חייב להיות בין 0 ל-1",
+  "couldnt_read_the_songs_sound": "לא ניתן לקרוא את הצליל של השיר",
+  "no_levels_on_this_server": "אין רמות בשרת הזה",
+  "not_a_song": "זה לא שיר"
 }

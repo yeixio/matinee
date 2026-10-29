@@ -133,5 +133,8 @@
   "this_client_id_belongs_to_someone_else": "รหัสไคลเอนต์นี้เป็นของคนอื่น",
   "track_is_required": "ต้องระบุ track",
   "unknown_command": "คำสั่งที่ไม่รู้จัก",
-  "volume_must_be_between_0_and_1": "volume ต้องอยู่ระหว่าง 0 ถึง 1"
+  "volume_must_be_between_0_and_1": "volume ต้องอยู่ระหว่าง 0 ถึง 1",
+  "couldnt_read_the_songs_sound": "อ่านเสียงของเพลงไม่ได้",
+  "no_levels_on_this_server": "เซิร์ฟเวอร์นี้ไม่มีระดับเสียง",
+  "not_a_song": "ไม่ใช่เพลง"
 }

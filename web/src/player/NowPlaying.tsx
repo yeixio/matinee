@@ -1,4 +1,4 @@
-import { ChevronDown, GripVertical, ListMusic, X } from 'lucide-react'
+import { AudioWaveform, ChevronDown, GripVertical, ListMusic, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
@@ -8,6 +8,7 @@ import { clock } from '../format'
 import { useAudio, useAudioTime } from './AudioPlayer'
 import { Controls, Seek, VolumeControl } from './MusicBar'
 import { upNext } from './queue'
+import { Visualizer } from './Visualizer'
 
 // The full player: the cover large, the controls, and what's coming up,
 // which can be reordered by dragging, or played or removed.
@@ -18,10 +19,12 @@ export function NowPlaying() {
   const item = s.current!
   // Phones show the cover or the queue; wider screens show both.
   const [showQueue, setShowQueue] = useState(false)
+  const [visual, setVisual] = useState(false)
   const close = () => s.setExpanded(false)
 
   useEffect(() => {
-    const esc = (e: KeyboardEvent) => e.key === 'Escape' && close()
+    // The visualizer closes itself first.
+    const esc = (e: KeyboardEvent) => e.key === 'Escape' && !visual && close()
     window.addEventListener('keydown', esc)
     document.body.style.overflow = 'hidden'
     return () => {
@@ -49,7 +52,17 @@ export function NowPlaying() {
         <button onClick={close} className="rounded-full p-2 text-muted hover:bg-text/10 hover:text-text" aria-label={t('common:music.minimize')} title={t('common:music.minimize')}>
           <ChevronDown className="size-6" />
         </button>
+        {/* As wide as the visualizer button, so the title stays in the middle. */}
+        <div className="w-10" />
         <div className="flex-1 text-center text-xs font-semibold tracking-widest text-muted uppercase">{t('common:music.nowPlaying')}</div>
+        <button
+          onClick={() => setVisual(true)}
+          className="rounded-full p-2 text-muted hover:bg-text/10 hover:text-text"
+          aria-label={t('common:music.visualizer')}
+          title={t('common:music.visualizer')}
+        >
+          <AudioWaveform className="size-6" />
+        </button>
         <button
           onClick={() => setShowQueue(!showQueue)}
           aria-pressed={showQueue}
@@ -91,6 +104,7 @@ export function NowPlaying() {
           <Queue />
         </section>
       </div>
+      {visual && <Visualizer onClose={() => setVisual(false)} />}
     </div>
   )
 }

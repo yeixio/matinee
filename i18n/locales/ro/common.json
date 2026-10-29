@@ -406,7 +406,16 @@
     "openPlayer": "Deschide playerul",
     "minimize": "Minimizează",
     "readMore": "Citește mai mult",
-    "less": "Arată mai puțin"
+    "less": "Arată mai puțin",
+    "visualizer": "Vizualizator",
+    "changeLook": "Schimbă aspectul",
+    "lookHint": "Stânga și dreapta schimbă aspectul",
+    "paused": "Pe pauză",
+    "look": {
+      "bars": "Bare",
+      "halo": "Aură",
+      "pulse": "Puls"
+    }
   },
   "books": {
     "overview": "Prezentare",

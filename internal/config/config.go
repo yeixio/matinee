@@ -51,6 +51,7 @@ func (c Config) Database() string {
 func (c Config) TranscodeDir() string { return filepath.Join(c.DataDir, "transcode") }
 func (c Config) ImageDir() string     { return filepath.Join(c.DataDir, "images") }
 func (c Config) SubtitleDir() string  { return filepath.Join(c.DataDir, "subtitles") }
+func (c Config) LevelsDir() string    { return filepath.Join(c.DataDir, "levels") }
 func (c Config) DownloadDir() string  { return filepath.Join(c.DataDir, "downloads") }
 func (c Config) RemoteDir() string    { return filepath.Join(c.DataDir, "remote") }
 

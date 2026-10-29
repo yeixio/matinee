@@ -378,7 +378,16 @@
     "openPlayer": "Player öffnen",
     "minimize": "Minimieren",
     "readMore": "Weiterlesen",
-    "less": "Weniger anzeigen"
+    "less": "Weniger anzeigen",
+    "visualizer": "Visualisierung",
+    "changeLook": "Aussehen ändern",
+    "lookHint": "Links und rechts ändern das Aussehen",
+    "paused": "Pausiert",
+    "look": {
+      "bars": "Balken",
+      "halo": "Halo",
+      "pulse": "Puls"
+    }
   },
   "books": {
     "overview": "Übersicht",

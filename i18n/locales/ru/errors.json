@@ -133,5 +133,8 @@
   "this_client_id_belongs_to_someone_else": "этот идентификатор клиента принадлежит другому",
   "track_is_required": "нужно указать track",
   "unknown_command": "неизвестная команда",
-  "volume_must_be_between_0_and_1": "volume должно быть от 0 до 1"
+  "volume_must_be_between_0_and_1": "volume должно быть от 0 до 1",
+  "couldnt_read_the_songs_sound": "не удалось прочитать звук песни",
+  "no_levels_on_this_server": "на этом сервере нет уровней",
+  "not_a_song": "это не песня"
 }

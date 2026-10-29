@@ -406,7 +406,16 @@
     "openPlayer": "פתיחת הנגן",
     "minimize": "מזעור",
     "readMore": "קריאת המשך",
-    "less": "הצגת פחות"
+    "less": "הצגת פחות",
+    "visualizer": "חזותיות",
+    "changeLook": "שינוי מראה",
+    "lookHint": "שמאלה וימינה משנים את המראה",
+    "paused": "מושהה",
+    "look": {
+      "bars": "עמודות",
+      "halo": "הילה",
+      "pulse": "דופק"
+    }
   },
   "books": {
     "overview": "סקירה",

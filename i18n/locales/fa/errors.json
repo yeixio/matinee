@@ -133,5 +133,8 @@
   "this_client_id_belongs_to_someone_else": "این شناسه کلاینت متعلق به شخص دیگری است",
   "track_is_required": "track لازم است",
   "unknown_command": "فرمان ناشناخته",
-  "volume_must_be_between_0_and_1": "volume باید بین ۰ و ۱ باشد"
+  "volume_must_be_between_0_and_1": "volume باید بین ۰ و ۱ باشد",
+  "couldnt_read_the_songs_sound": "صدای آهنگ خوانده نشد",
+  "no_levels_on_this_server": "این سرور سطحی ندارد",
+  "not_a_song": "آهنگ نیست"
 }

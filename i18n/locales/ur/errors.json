@@ -133,5 +133,8 @@
   "this_client_id_belongs_to_someone_else": "یہ کلائنٹ آئی ڈی کسی اور کی ہے",
   "track_is_required": "track ضروری ہے",
   "unknown_command": "نامعلوم کمانڈ",
-  "volume_must_be_between_0_and_1": "volume کو 0 اور 1 کے درمیان ہونا چاہیے"
+  "volume_must_be_between_0_and_1": "volume کو 0 اور 1 کے درمیان ہونا چاہیے",
+  "couldnt_read_the_songs_sound": "گانے کی آواز پڑھی نہیں جا سکی",
+  "no_levels_on_this_server": "اس سرور پر سطحیں نہیں ہیں",
+  "not_a_song": "یہ گانا نہیں ہے"
 }

@@ -378,7 +378,16 @@
     "openPlayer": "Oynatıcıyı aç",
     "minimize": "Küçült",
     "readMore": "Devamını oku",
-    "less": "Daha az göster"
+    "less": "Daha az göster",
+    "visualizer": "Görselleştirici",
+    "changeLook": "Görünümü değiştir",
+    "lookHint": "Sol ve sağ görünümü değiştirir",
+    "paused": "Duraklatıldı",
+    "look": {
+      "bars": "Çubuklar",
+      "halo": "Hale",
+      "pulse": "Nabız"
+    }
   },
   "books": {
     "overview": "Genel bakış",

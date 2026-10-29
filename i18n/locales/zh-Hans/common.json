@@ -350,7 +350,16 @@
     "openPlayer": "打开播放器",
     "minimize": "最小化",
     "readMore": "阅读更多",
-    "less": "收起"
+    "less": "收起",
+    "visualizer": "可视化效果",
+    "changeLook": "更换样式",
+    "lookHint": "左右键更换样式",
+    "paused": "已暂停",
+    "look": {
+      "bars": "柱状",
+      "halo": "光环",
+      "pulse": "脉动"
+    }
   },
   "books": {
     "overview": "概览",

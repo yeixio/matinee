@@ -127,13 +127,24 @@ export async function makeLibrary(root) {
     a.tracks.forEach((t, n) => {
       const file = path.join(dir, `${String(n + 1).padStart(2, '0')} ${t}.flac`)
       if (existsSync(file)) return
-      ff('-f', 'lavfi', '-i', `sine=f=${180 + n * 40}:d=${150 + n * 23}`, '-af', 'volume=0.05', '-ar', '22050',
+      // A little tune, so the visualizer has a beat, a bass line and some hiss to show.
+      ff('-f', 'lavfi', '-i', `aevalsrc='${tune(110 + n * 20)}':s=22050:d=${150 + n * 23}`, '-af', 'volume=0.05', '-sample_fmt', 's16',
         '-metadata', `artist=${a.artist}`, '-metadata', `album_artist=${a.artist}`, '-metadata', `album=${a.album}`,
         '-metadata', `title=${t}`, '-metadata', `track=${n + 1}`, '-metadata', `date=${a.year}`, file)
     })
   })
   audiobooks.forEach((b, i) => book(path.join(media, 'Audiobooks'), b, path.join(images, `book-${i}.jpg`), path.join(root, 'silence')))
   return { media, images }
+}
+
+/** A kick on every beat, a bass note that swells, a chord over it and a hi-hat between beats, at f Hz. */
+function tune(f) {
+  return [
+    `0.6*sin(2*PI*55*t)*exp(-9*mod(t,0.5))`,
+    `0.35*sin(2*PI*${f}*t)*(0.55+0.45*sin(2*PI*0.25*t))`,
+    `0.12*sin(2*PI*${f * 2.5}*t)+0.08*sin(2*PI*${f * 3}*t)*abs(sin(PI*0.5*t))`,
+    `0.08*sin(2*PI*3520*t)*exp(-30*mod(t+0.25,0.5))`,
+  ].join('+')
 }
 
 /**

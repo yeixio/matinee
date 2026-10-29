@@ -173,3 +173,7 @@ func LeadingInt(s string) int {
 	n, _ := strconv.Atoi(s[:end])
 	return n
 }
+
+// LowerPriority makes a running process give way to everything else on the
+// machine, for CPU and (where the system allows) for disk.
+func LowerPriority(pid int) { lowerPriority(pid) }

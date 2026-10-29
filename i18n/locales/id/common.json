@@ -350,7 +350,16 @@
     "openPlayer": "Buka pemutar",
     "minimize": "Perkecil",
     "readMore": "Baca selengkapnya",
-    "less": "Tampilkan lebih sedikit"
+    "less": "Tampilkan lebih sedikit",
+    "visualizer": "Visualisasi",
+    "changeLook": "Ganti tampilan",
+    "lookHint": "Kiri dan kanan mengganti tampilan",
+    "paused": "Dijeda",
+    "look": {
+      "bars": "Batang",
+      "halo": "Halo",
+      "pulse": "Denyut"
+    }
   },
   "books": {
     "overview": "Ringkasan",

@@ -133,5 +133,8 @@
   "this_client_id_belongs_to_someone_else": "asiakastunnus kuuluu jollekulle muulle",
   "track_is_required": "track vaaditaan",
   "unknown_command": "tuntematon komento",
-  "volume_must_be_between_0_and_1": "volume on oltava välillä 0–1"
+  "volume_must_be_between_0_and_1": "volume on oltava välillä 0–1",
+  "couldnt_read_the_songs_sound": "kappaleen ääntä ei voitu lukea",
+  "no_levels_on_this_server": "tällä palvelimella ei ole tasoja",
+  "not_a_song": "ei kappale"
 }

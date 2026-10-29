@@ -28,6 +28,7 @@ import (
 	"github.com/yeixio/matinee/internal/probe"
 	"github.com/yeixio/matinee/internal/remote"
 	"github.com/yeixio/matinee/internal/scan"
+	"github.com/yeixio/matinee/internal/spectrum"
 	"github.com/yeixio/matinee/internal/store"
 	"github.com/yeixio/matinee/internal/stream"
 	"github.com/yeixio/matinee/internal/subtitle"
@@ -46,10 +47,13 @@ type Server struct {
 	Analyzer     *analyze.Analyzer // nil when media analysis is off for this server
 	Art          *artwork.Cache
 	Subtitles    *subtitle.Converter
-	Web          fs.FS // built web player; nil serves a placeholder
-	Log          *slog.Logger
-	MediaRoot    string // where the folder picker starts; empty means /
-	Name         string // what the apps call this server
+	// Levels works out songs' sound levels for the music visualizer; nil
+	// means the visualizer has nothing to draw from.
+	Levels    *spectrum.Analyzer
+	Web       fs.FS // built web player; nil serves a placeholder
+	Log       *slog.Logger
+	MediaRoot string // where the folder picker starts; empty means /
+	Name      string // what the apps call this server
 	// UUID names this server for good, whatever its name or address (see
 	// ServerUUID); Home Assistant tells servers apart by it.
 	UUID string
@@ -206,6 +210,7 @@ func (s *Server) routes() []route {
 		{"GET /items/{id}", reader, s.getItem},
 		{"GET /items/{id}/children", reader, s.itemChildren},
 		{"GET /items/{id}/tracks", reader, s.itemTracks},
+		{"GET /items/{id}/levels", reader, s.itemLevels},
 		{"GET /items/{id}/book", reader, s.getBook},
 		{"GET /items/{id}/related", reader, s.itemRelated},
 		{"GET /items/{id}/next", reader, s.itemNext},
@@ -1010,6 +1015,40 @@ func (s *Server) itemTracks(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	writeJSON(w, http.StatusOK, items)
+}
+
+// itemLevels sends a song's sound levels, moment by moment, for the music
+// visualizer (see internal/spectrum). The first time takes a moment, while
+// the server listens to the song; after that they're kept.
+func (s *Server) itemLevels(w http.ResponseWriter, r *http.Request) {
+	it, ok := s.loadItem(w, r)
+	if !ok {
+		return
+	}
+	if it.Kind != "track" {
+		writeError(w, http.StatusBadRequest, "not a song")
+		return
+	}
+	if s.Levels == nil {
+		writeError(w, http.StatusNotFound, "no levels on this server")
+		return
+	}
+	levels, err := s.Levels.Levels(r.Context(), it.Path)
+	if err != nil {
+		if r.Context().Err() == nil {
+			s.Log.Warn("working out a song's levels", "item", it.ID, "err", err)
+		}
+		writeError(w, http.StatusUnprocessableEntity, "couldn't read the song's sound")
+		return
+	}
+	// The song's file doesn't change without its id's levels changing too, so
+	// a day is safe; a new file is a new scan anyway.
+	w.Header().Set("Cache-Control", "private, max-age=86400")
+	writeLargeJSON(w, r, struct {
+		FPS    int    `json:"fps"`
+		Bands  int    `json:"bands"`
+		Levels []byte `json:"levels"`
+	}{spectrum.FPS, spectrum.Bands, levels})
 }
 
 func (s *Server) setProgress(w http.ResponseWriter, r *http.Request) {

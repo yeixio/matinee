@@ -133,5 +133,8 @@
   "this_client_id_belongs_to_someone_else": "此用戶端 ID 屬於其他人",
   "track_is_required": "需要 track",
   "unknown_command": "未知的指令",
-  "volume_must_be_between_0_and_1": "volume 必須介於 0 到 1"
+  "volume_must_be_between_0_and_1": "volume 必須介於 0 到 1",
+  "couldnt_read_the_songs_sound": "無法讀取歌曲的聲音",
+  "no_levels_on_this_server": "此伺服器沒有音量資料",
+  "not_a_song": "不是歌曲"
 }

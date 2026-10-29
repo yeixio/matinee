@@ -406,7 +406,16 @@
     "openPlayer": "Abrir o player",
     "minimize": "Minimizar",
     "readMore": "Ler mais",
-    "less": "Mostrar menos"
+    "less": "Mostrar menos",
+    "visualizer": "Visualizador",
+    "changeLook": "Mudar o visual",
+    "lookHint": "Esquerda e direita mudam o visual",
+    "paused": "Pausado",
+    "look": {
+      "bars": "Barras",
+      "halo": "Halo",
+      "pulse": "Pulso"
+    }
   },
   "books": {
     "overview": "Visão geral",

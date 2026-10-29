@@ -350,7 +350,16 @@
     "openPlayer": "開啟播放器",
     "minimize": "最小化",
     "readMore": "閱讀更多",
-    "less": "收合"
+    "less": "收合",
+    "visualizer": "視覺化效果",
+    "changeLook": "更換樣式",
+    "lookHint": "左右鍵更換樣式",
+    "paused": "已暫停",
+    "look": {
+      "bars": "柱狀",
+      "halo": "光環",
+      "pulse": "脈動"
+    }
   },
   "books": {
     "overview": "總覽",

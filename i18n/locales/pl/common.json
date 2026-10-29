@@ -434,7 +434,16 @@
     "openPlayer": "Otwórz odtwarzacz",
     "minimize": "Minimalizuj",
     "readMore": "Czytaj dalej",
-    "less": "Pokaż mniej"
+    "less": "Pokaż mniej",
+    "visualizer": "Wizualizacja",
+    "changeLook": "Zmień wygląd",
+    "lookHint": "W lewo i w prawo zmieniają wygląd",
+    "paused": "Wstrzymano",
+    "look": {
+      "bars": "Słupki",
+      "halo": "Aureola",
+      "pulse": "Puls"
+    }
   },
   "books": {
     "overview": "Przegląd",

@@ -1011,6 +1011,31 @@ paths:
       parameters: [{ $ref: "#/components/parameters/ID" }]
       responses:
         "200": { $ref: "#/components/responses/Items" }
+  /items/{id}/levels:
+    get:
+      summary: A song's sound levels, for the music visualizer
+      description: |
+        How loud each part of the song's sound is, moment by moment: fps
+        moments a second, each with bands values from the bass up to the
+        treble (40 Hz to 5 kHz, spaced the way ears hear them). Each value is
+        a byte, 0 for silence to 255 for as loud as that band gets in the
+        song; levels is all of them in order, base64 encoded. The first
+        request for a song takes a moment while the server listens to it.
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      responses:
+        "200":
+          description: The levels.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [fps, bands, levels]
+                properties:
+                  fps: { type: integer, example: 20 }
+                  bands: { type: integer, example: 24 }
+                  levels: { type: string, format: byte }
+        "400": { description: Not a song. }
+        "422": { description: The song's sound couldn't be read. }
   /items/{id}/book:
     get:
       summary: An audiobook with its parts and chapters
