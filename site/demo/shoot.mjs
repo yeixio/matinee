@@ -158,6 +158,9 @@ try {
     const tide = await find('The Tide Keeper', ['book'])
     if (tide && libs.audiobooks) {
       await api(token, 'PUT', `/items/${tide.id}/progress`, { positionMs: 63 * 60000 })
+      // The album above is still playing; close its player first.
+      const close = page.getByRole('button', { name: 'Close player' })
+      if (await close.count()) await close.first().click()
       await page.goto(`${origin}/library/${libs.audiobooks.id}`)
       await sleep(1000)
       await shot(page, 'audiobooks')
