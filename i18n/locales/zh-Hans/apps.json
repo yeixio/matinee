@@ -300,7 +300,11 @@
     "positionOf": "{{at}} / {{total}}",
     "castingTo": "正在 {{name}} 上播放",
     "airPlaying": "正在通过 AirPlay 在电视上播放",
-    "castControls": "显示控制"
+    "castControls": "显示控制",
+    "audioNeedsUpdate": "请更新服务器上的 Matinee，以便在这里选择音轨",
+    "trackFailed": "无法切换到该音轨",
+    "subtitlesFailed": "无法加载这些字幕",
+    "convertsVideo": "会转换视频"
   },
   "library": {
     "nothingUnwatched": "这里没有未看的内容",

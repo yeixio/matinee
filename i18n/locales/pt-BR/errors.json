@@ -137,5 +137,6 @@
   "volume_must_be_between_0_and_1": "volume deve estar entre 0 e 1",
   "couldnt_read_the_songs_sound": "não foi possível ler o som da música",
   "no_levels_on_this_server": "sem níveis neste servidor",
-  "not_a_song": "não é uma música"
+  "not_a_song": "não é uma música",
+  "no_such_audio_track": "essa faixa de áudio não existe"
 }

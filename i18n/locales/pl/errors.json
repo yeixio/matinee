@@ -137,5 +137,6 @@
   "volume_must_be_between_0_and_1": "volume musi być od 0 do 1",
   "couldnt_read_the_songs_sound": "nie udało się odczytać dźwięku utworu",
   "no_levels_on_this_server": "brak poziomów na tym serwerze",
-  "not_a_song": "to nie jest utwór"
+  "not_a_song": "to nie jest utwór",
+  "no_such_audio_track": "nie ma takiej ścieżki dźwiękowej"
 }

@@ -325,7 +325,11 @@
     "positionOf": "{{at}} من {{total}}",
     "castingTo": "يُعرض على {{name}}",
     "airPlaying": "يُعرض على التلفزيون عبر AirPlay",
-    "castControls": "إظهار عناصر التحكم"
+    "castControls": "إظهار عناصر التحكم",
+    "audioNeedsUpdate": "حدّث Matinee على الخادم لاختيار الصوت هنا",
+    "trackFailed": "تعذّر التبديل إلى هذا المسار",
+    "subtitlesFailed": "تعذّر تحميل هذه الترجمة",
+    "convertsVideo": "يحوّل الفيديو"
   },
   "library": {
     "nothingUnwatched": "لا شيء لم تشاهده هنا",

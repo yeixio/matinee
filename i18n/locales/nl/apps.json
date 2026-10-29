@@ -305,7 +305,11 @@
     "positionOf": "{{at}} van {{total}}",
     "castingTo": "Speelt af op {{name}}",
     "airPlaying": "Speelt af op je tv via AirPlay",
-    "castControls": "Bediening tonen"
+    "castControls": "Bediening tonen",
+    "audioNeedsUpdate": "Werk Matinee op de server bij om hier de audio te kiezen",
+    "trackFailed": "Kan niet naar die track overschakelen",
+    "subtitlesFailed": "Kan deze ondertitels niet laden",
+    "convertsVideo": "Zet de video om"
   },
   "library": {
     "nothingUnwatched": "Niets ongezien hier",

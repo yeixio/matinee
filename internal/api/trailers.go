@@ -223,7 +223,7 @@ func (s *Server) trailerHLS(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	start, _ := strconv.ParseFloat(r.URL.Query().Get("start"), 64)
-	id, err := s.Transcoder.Start(r.Context(), currentUser(r).ID, t, start, -1)
+	id, err := s.Transcoder.Start(r.Context(), currentUser(r).ID, t, start, -1, 0)
 	if errors.Is(err, stream.ErrSuperseded) {
 		writeError(w, http.StatusConflict, "replaced by a newer seek")
 		return

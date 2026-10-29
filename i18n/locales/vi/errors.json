@@ -137,5 +137,6 @@
   "volume_must_be_between_0_and_1": "volume phải từ 0 đến 1",
   "couldnt_read_the_songs_sound": "không đọc được âm thanh của bài hát",
   "no_levels_on_this_server": "máy chủ này không có mức âm",
-  "not_a_song": "không phải bài hát"
+  "not_a_song": "không phải bài hát",
+  "no_such_audio_track": "không có rãnh âm thanh này"
 }

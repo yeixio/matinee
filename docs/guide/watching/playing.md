@@ -30,6 +30,10 @@ The subtitles button lists every subtitle track: the ones inside the file and th
 
 Matinee remembers the language you pick and uses it again for the next episode and the next film. Text subtitles (SRT, WebVTT, ASS) are drawn by the player, so they stay sharp at any size. Picture subtitles from Blu-rays and DVDs can't be drawn that way, so Matinee burns them into the picture while it converts the video.
 
+<!-- since: v0.1.4 -->
+In the [phone and TV apps](/docs/apps/phone-and-tv/#watching-on-a-tv), subtitles and the sound track are in the player too: on a TV, press down on the remote while something plays.
+<!-- /since -->
+
 ## Picking up where you left off
 
 Matinee saves your place as you watch, for you alone (or your [profile](/docs/household/profiles/)). Stop on the TV and carry on in the browser, or the other way round. A title counts as watched once you're past the credits, or past 92% if Matinee can't tell where the credits start.

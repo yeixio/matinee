@@ -305,7 +305,11 @@
     "positionOf": "{{at}} από {{total}}",
     "castingTo": "Αναπαραγωγή σε {{name}}",
     "airPlaying": "Αναπαραγωγή στην τηλεόρασή σας μέσω AirPlay",
-    "castControls": "Εμφάνιση χειριστηρίων"
+    "castControls": "Εμφάνιση χειριστηρίων",
+    "audioNeedsUpdate": "Ενημερώστε το Matinee στον διακομιστή για να επιλέγετε τον ήχο εδώ",
+    "trackFailed": "Δεν ήταν δυνατή η αλλαγή σε αυτό το κομμάτι",
+    "subtitlesFailed": "Δεν ήταν δυνατή η φόρτωση αυτών των υποτίτλων",
+    "convertsVideo": "Μετατρέπει το βίντεο"
   },
   "library": {
     "nothingUnwatched": "Τίποτα που δεν έχεις δει εδώ",

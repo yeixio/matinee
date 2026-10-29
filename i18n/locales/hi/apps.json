@@ -305,7 +305,11 @@
     "positionOf": "{{total}} में से {{at}}",
     "castingTo": "{{name}} पर चल रहा है",
     "airPlaying": "AirPlay से आपके टीवी पर चल रहा है",
-    "castControls": "नियंत्रण दिखाएँ"
+    "castControls": "नियंत्रण दिखाएँ",
+    "audioNeedsUpdate": "यहाँ ऑडियो चुनने के लिए सर्वर पर Matinee अपडेट करें",
+    "trackFailed": "उस ट्रैक पर नहीं जा सके",
+    "subtitlesFailed": "ये सबटाइटल लोड नहीं हो सके",
+    "convertsVideo": "वीडियो बदलता है"
   },
   "library": {
     "nothingUnwatched": "यहाँ बिना देखा कुछ नहीं",

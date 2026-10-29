@@ -305,7 +305,11 @@
     "positionOf": "{{at}} av {{total}}",
     "castingTo": "Spelas upp på {{name}}",
     "airPlaying": "Spelas upp på din tv med AirPlay",
-    "castControls": "Visa kontroller"
+    "castControls": "Visa kontroller",
+    "audioNeedsUpdate": "Uppdatera Matinee på servern för att välja ljud här",
+    "trackFailed": "Det gick inte att byta till det spåret",
+    "subtitlesFailed": "Det gick inte att läsa in undertexterna",
+    "convertsVideo": "Konverterar videon"
   },
   "library": {
     "nothingUnwatched": "Inget osett här",

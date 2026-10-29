@@ -137,5 +137,6 @@
   "volume_must_be_between_0_and_1": "volume musí být mezi 0 a 1",
   "couldnt_read_the_songs_sound": "zvuk skladby se nepodařilo přečíst",
   "no_levels_on_this_server": "na tomto serveru nejsou úrovně",
-  "not_a_song": "není to skladba"
+  "not_a_song": "není to skladba",
+  "no_such_audio_track": "taková zvuková stopa neexistuje"
 }

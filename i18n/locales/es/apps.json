@@ -310,7 +310,11 @@
     "positionOf": "{{at}} de {{total}}",
     "castingTo": "Reproduciendo en {{name}}",
     "airPlaying": "Reproduciendo en tu televisor con AirPlay",
-    "castControls": "Mostrar controles"
+    "castControls": "Mostrar controles",
+    "audioNeedsUpdate": "Actualiza Matinee en el servidor para elegir el audio aquí",
+    "trackFailed": "No se pudo cambiar a esa pista",
+    "subtitlesFailed": "No se pudieron cargar estos subtítulos",
+    "convertsVideo": "Convierte el vídeo"
   },
   "library": {
     "nothingUnwatched": "No queda nada sin ver",

@@ -305,7 +305,11 @@
     "positionOf": "{{at}} af {{total}}",
     "castingTo": "Afspilles på {{name}}",
     "airPlaying": "Afspilles på dit tv med AirPlay",
-    "castControls": "Vis betjening"
+    "castControls": "Vis betjening",
+    "audioNeedsUpdate": "Opdater Matinee på serveren for at vælge lyden her",
+    "trackFailed": "Kunne ikke skifte til det spor",
+    "subtitlesFailed": "Kunne ikke indlæse disse undertekster",
+    "convertsVideo": "Konverterer video"
   },
   "library": {
     "nothingUnwatched": "Intet uset her",

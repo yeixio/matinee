@@ -300,7 +300,11 @@
     "positionOf": "{{at}} / {{total}}",
     "castingTo": "{{name}} で再生中",
     "airPlaying": "AirPlay でテレビで再生中",
-    "castControls": "コントロールを表示"
+    "castControls": "コントロールを表示",
+    "audioNeedsUpdate": "ここで音声を選ぶには、サーバーの Matinee を更新してください",
+    "trackFailed": "そのトラックに切り替えられませんでした",
+    "subtitlesFailed": "この字幕を読み込めませんでした",
+    "convertsVideo": "動画を変換します"
   },
   "library": {
     "nothingUnwatched": "未視聴のものはありません",

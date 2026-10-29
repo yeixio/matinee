@@ -300,7 +300,11 @@
     "positionOf": "{{at}} จาก {{total}}",
     "castingTo": "กำลังเล่นบน {{name}}",
     "airPlaying": "กำลังเล่นบนทีวีผ่าน AirPlay",
-    "castControls": "แสดงตัวควบคุม"
+    "castControls": "แสดงตัวควบคุม",
+    "audioNeedsUpdate": "อัปเดต Matinee บนเซิร์ฟเวอร์เพื่อเลือกเสียงที่นี่",
+    "trackFailed": "สลับไปยังแทร็กนั้นไม่ได้",
+    "subtitlesFailed": "โหลดคำบรรยายนี้ไม่ได้",
+    "convertsVideo": "แปลงวิดีโอ"
   },
   "library": {
     "nothingUnwatched": "ไม่มีเรื่องที่ยังไม่ได้ดูที่นี่",

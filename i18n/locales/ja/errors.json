@@ -137,5 +137,6 @@
   "volume_must_be_between_0_and_1": "volume は 0〜1 にしてください",
   "couldnt_read_the_songs_sound": "曲の音声を読み取れませんでした",
   "no_levels_on_this_server": "このサーバーにはレベルがありません",
-  "not_a_song": "曲ではありません"
+  "not_a_song": "曲ではありません",
+  "no_such_audio_track": "その音声トラックはありません"
 }

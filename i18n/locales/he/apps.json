@@ -310,7 +310,11 @@
     "positionOf": "{{at}} מתוך {{total}}",
     "castingTo": "מתנגן ב-{{name}}",
     "airPlaying": "מתנגן בטלוויזיה דרך AirPlay",
-    "castControls": "הצגת פקדים"
+    "castControls": "הצגת פקדים",
+    "audioNeedsUpdate": "עדכנו את Matinee בשרת כדי לבחור כאן את השמע",
+    "trackFailed": "לא ניתן לעבור לרצועה הזו",
+    "subtitlesFailed": "לא ניתן לטעון את הכתוביות האלה",
+    "convertsVideo": "ממיר את הווידאו"
   },
   "library": {
     "nothingUnwatched": "אין כאן שום דבר שלא נצפה",

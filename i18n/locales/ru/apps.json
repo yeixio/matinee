@@ -315,7 +315,11 @@
     "positionOf": "{{at}} из {{total}}",
     "castingTo": "Воспроизводится на {{name}}",
     "airPlaying": "Воспроизводится на телевизоре через AirPlay",
-    "castControls": "Показать управление"
+    "castControls": "Показать управление",
+    "audioNeedsUpdate": "Обновите Matinee на сервере, чтобы выбирать звук здесь",
+    "trackFailed": "Не удалось переключиться на эту дорожку",
+    "subtitlesFailed": "Не удалось загрузить эти субтитры",
+    "convertsVideo": "Перекодирует видео"
   },
   "library": {
     "nothingUnwatched": "Здесь нет непросмотренного",

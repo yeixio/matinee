@@ -137,5 +137,6 @@
   "volume_must_be_between_0_and_1": "volume muss zwischen 0 und 1 liegen",
   "couldnt_read_the_songs_sound": "der Ton des Songs konnte nicht gelesen werden",
   "no_levels_on_this_server": "keine Pegel auf diesem Server",
-  "not_a_song": "kein Song"
+  "not_a_song": "kein Song",
+  "no_such_audio_track": "diese Tonspur gibt es nicht"
 }

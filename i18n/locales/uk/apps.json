@@ -315,7 +315,11 @@
     "positionOf": "{{at}} з {{total}}",
     "castingTo": "Відтворюється на {{name}}",
     "airPlaying": "Відтворюється на телевізорі через AirPlay",
-    "castControls": "Показати керування"
+    "castControls": "Показати керування",
+    "audioNeedsUpdate": "Оновіть Matinee на сервері, щоб вибирати звук тут",
+    "trackFailed": "Не вдалося перемкнутися на цю доріжку",
+    "subtitlesFailed": "Не вдалося завантажити ці субтитри",
+    "convertsVideo": "Перекодовує відео"
   },
   "library": {
     "nothingUnwatched": "Тут немає непереглянутого",

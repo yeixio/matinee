@@ -305,7 +305,11 @@
     "positionOf": "{{at}} / {{total}}",
     "castingTo": "Toistetaan laitteella {{name}}",
     "airPlaying": "Toistetaan televisiossa AirPlayn kautta",
-    "castControls": "Näytä säätimet"
+    "castControls": "Näytä säätimet",
+    "audioNeedsUpdate": "Päivitä Matinee palvelimella, niin voit valita äänen täällä",
+    "trackFailed": "Raitaan ei voitu vaihtaa",
+    "subtitlesFailed": "Tekstityksiä ei voitu ladata",
+    "convertsVideo": "Muuntaa videon"
   },
   "library": {
     "nothingUnwatched": "Ei katsomatonta täällä",

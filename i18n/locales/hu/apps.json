@@ -305,7 +305,11 @@
     "positionOf": "{{at}} / {{total}}",
     "castingTo": "Lejátszás itt: {{name}}",
     "airPlaying": "Lejátszás a tévén AirPlay-jel",
-    "castControls": "Vezérlők megjelenítése"
+    "castControls": "Vezérlők megjelenítése",
+    "audioNeedsUpdate": "Frissítse a Matinee-t a szerveren, hogy itt választhasson hangot",
+    "trackFailed": "Nem sikerült átváltani erre a sávra",
+    "subtitlesFailed": "Nem sikerült betölteni ezt a feliratot",
+    "convertsVideo": "Átalakítja a videót"
   },
   "library": {
     "nothingUnwatched": "Itt nincs semmi, amit ne láttál volna",
