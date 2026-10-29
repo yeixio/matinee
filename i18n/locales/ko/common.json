@@ -350,7 +350,16 @@
     "openPlayer": "플레이어 열기",
     "minimize": "최소화",
     "readMore": "더 읽기",
-    "less": "접기"
+    "less": "접기",
+    "visualizer": "시각화",
+    "changeLook": "모양 바꾸기",
+    "lookHint": "왼쪽과 오른쪽으로 모양 바꾸기",
+    "paused": "일시정지됨",
+    "look": {
+      "bars": "막대",
+      "halo": "후광",
+      "pulse": "펄스"
+    }
   },
   "books": {
     "overview": "개요",

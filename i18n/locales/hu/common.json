@@ -378,7 +378,16 @@
     "openPlayer": "Lejátszó megnyitása",
     "minimize": "Kis méret",
     "readMore": "Tovább",
-    "less": "Kevesebb"
+    "less": "Kevesebb",
+    "visualizer": "Vizualizáció",
+    "changeLook": "Megjelenés váltása",
+    "lookHint": "Balra és jobbra váltja a megjelenést",
+    "paused": "Szüneteltetve",
+    "look": {
+      "bars": "Oszlopok",
+      "halo": "Glória",
+      "pulse": "Pulzus"
+    }
   },
   "books": {
     "overview": "Áttekintés",

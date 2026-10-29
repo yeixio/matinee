@@ -133,5 +133,8 @@
   "this_client_id_belongs_to_someone_else": "id klien ini milik orang lain",
   "track_is_required": "track diperlukan",
   "unknown_command": "arahan tidak dikenali",
-  "volume_must_be_between_0_and_1": "volume mesti antara 0 dan 1"
+  "volume_must_be_between_0_and_1": "volume mesti antara 0 dan 1",
+  "couldnt_read_the_songs_sound": "tidak dapat membaca bunyi lagu",
+  "no_levels_on_this_server": "tiada aras pada pelayan ini",
+  "not_a_song": "bukan lagu"
 }

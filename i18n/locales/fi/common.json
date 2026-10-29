@@ -378,7 +378,16 @@
     "openPlayer": "Avaa soitin",
     "minimize": "Pienennä",
     "readMore": "Lue lisää",
-    "less": "Näytä vähemmän"
+    "less": "Näytä vähemmän",
+    "visualizer": "Visualisointi",
+    "changeLook": "Vaihda ulkoasua",
+    "lookHint": "Vasen ja oikea vaihtavat ulkoasua",
+    "paused": "Tauolla",
+    "look": {
+      "bars": "Palkit",
+      "halo": "Sädekehä",
+      "pulse": "Syke"
+    }
   },
   "books": {
     "overview": "Yleiskatsaus",

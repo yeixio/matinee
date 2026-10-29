@@ -52,6 +52,33 @@ The [phone apps](/docs/apps/phone-and-tv/) have the same library, album and arti
 
 <!-- /since -->
 
+<!-- since: v0.1.3 -->
+## The visualizer
+
+The visualizer fills the screen with the song that's playing: bars that jump with it, a halo round the cover, or rings that pulse with the beat. Open it with the visualizer button at the top of the full player. The left and right arrow keys, or the button at the top right, change the look, and Matinee remembers the one you pick. **Space** pauses, and **Esc** closes it. The buttons and the song's name fade away after a few seconds; move the mouse to bring them back.
+
+![The visualizer's bars](../images/visualizer.webp)
+
+![The halo round the cover](../images/visualizer-halo.webp)
+
+On a phone, tap the visualizer button at the top of the full player. Tap the look's name to change it, and tap anywhere to show or hide the buttons.
+
+The visualizer moves in time with the music on every device, even a TV, because the server listens to each song and works out how loud its bass, middle and treble are, moment by moment. It does that the first time anyone opens the visualizer on a song (and for the next song in the queue while it's open), which takes a moment, then keeps the result. Until it's ready, and for songs a phone plays offline, a slow wave fills in.
+
+## On a TV
+
+Apple TV and Android TV have the same music library as the browser, with **Overview**, **Artists**, **Albums** and **Songs** along the top and **Shuffle all**. An album or artist page has **Play** and **Shuffle**, and selecting a song plays the album from there. Hold select on a song for **Play next**, **Add to queue**, **Go to album** and **Go to artist**.
+
+The music keeps playing while you browse. What's playing shows at the top of the screen, next to the server's name; select it for the player. The player has the cover, how far along the song is, shuffle, back, play, next and repeat, and the queue in a row below it, where selecting a song plays it now. The play/pause button on the remote plays and pauses the music from any screen.
+
+![The music player on a TV](../images/app-tv-music.webp)
+
+**Visualizer** in the player opens the visualizer; left and right on the remote change its look, and play/pause or select pauses.
+
+![The visualizer on a TV](../images/app-tv-visualizer.webp)
+
+<!-- /since -->
+
 ## Covers and artist photos
 
 Matinee uses `cover.jpg` or `folder.jpg` in an album's folder, or a cover embedded in the music files, and `artist.jpg` in an artist's folder. Anything missing comes from MusicBrainz, the Cover Art Archive and Wikidata, which need no key. To use only your own files, set `MATINEE_MUSICBRAINZ=false`.

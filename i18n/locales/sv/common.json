@@ -378,7 +378,16 @@
     "openPlayer": "Öppna spelaren",
     "minimize": "Minimera",
     "readMore": "Läs mer",
-    "less": "Visa mindre"
+    "less": "Visa mindre",
+    "visualizer": "Visualisering",
+    "changeLook": "Byt utseende",
+    "lookHint": "Vänster och höger byter utseende",
+    "paused": "Pausad",
+    "look": {
+      "bars": "Staplar",
+      "halo": "Gloria",
+      "pulse": "Puls"
+    }
   },
   "books": {
     "overview": "Översikt",

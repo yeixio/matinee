@@ -406,7 +406,16 @@
     "openPlayer": "Abrir el reproductor",
     "minimize": "Minimizar",
     "readMore": "Leer más",
-    "less": "Mostrar menos"
+    "less": "Mostrar menos",
+    "visualizer": "Visualizador",
+    "changeLook": "Cambiar el aspecto",
+    "lookHint": "Izquierda y derecha cambian el aspecto",
+    "paused": "En pausa",
+    "look": {
+      "bars": "Barras",
+      "halo": "Halo",
+      "pulse": "Pulso"
+    }
   },
   "books": {
     "overview": "Resumen",

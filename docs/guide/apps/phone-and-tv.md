@@ -46,6 +46,10 @@ On a TV, sign-in starts with a code instead of a password: see [Signing in a dev
 <!-- since: v0.1.1 -->
 - **Music on phones** with its own player: artists, albums and songs, a player above the tabs that keeps going while you browse, and a full player with the queue. See [Music](/docs/watching/music/#on-the-phone-apps).
 <!-- /since -->
+<!-- since: v0.1.3 -->
+- **Music on a TV** too: the library's tabs, album and artist pages, a player with the queue, and music that keeps playing while you browse, with what's playing at the top of the screen. See [Music](/docs/watching/music/#on-a-tv).
+- **The music visualizer** on phones and TVs, in time with the song. See [The visualizer](/docs/watching/music/#the-visualizer).
+<!-- /since -->
 <!-- since: v0.1.2 -->
 - **Audiobooks** on phones with a player made for books: chapters, back and ahead, the speed and a sleep timer that can stop at the end of a chapter. A TV plays them too. See [Audiobooks](/docs/watching/audiobooks/#in-the-apps).
 <!-- /since -->

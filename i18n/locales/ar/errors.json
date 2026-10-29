@@ -133,5 +133,8 @@
   "this_client_id_belongs_to_someone_else": "معرّف العميل هذا يخص شخصًا آخر",
   "track_is_required": "يلزم track",
   "unknown_command": "أمر غير معروف",
-  "volume_must_be_between_0_and_1": "يجب أن تكون volume بين 0 و1"
+  "volume_must_be_between_0_and_1": "يجب أن تكون volume بين 0 و1",
+  "couldnt_read_the_songs_sound": "تعذّرت قراءة صوت الأغنية",
+  "no_levels_on_this_server": "لا توجد مستويات على هذا الخادم",
+  "not_a_song": "ليست أغنية"
 }

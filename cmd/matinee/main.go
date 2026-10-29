@@ -36,6 +36,7 @@ import (
 	"github.com/yeixio/matinee/internal/rating"
 	"github.com/yeixio/matinee/internal/remote"
 	"github.com/yeixio/matinee/internal/scan"
+	"github.com/yeixio/matinee/internal/spectrum"
 	"github.com/yeixio/matinee/internal/store"
 	"github.com/yeixio/matinee/internal/stream"
 	"github.com/yeixio/matinee/internal/subtitle"
@@ -179,6 +180,7 @@ func run() error {
 		Store: db, Scanner: scanner, Watcher: watcher, ScanInterval: cfg.ScanInterval, Transcoder: transcoder, HW: hw, Downloads: downloads, Analyzer: analyzer,
 		Art:       artwork.NewCache(cfg.ImageDir(), cfg.FFmpegPath),
 		Subtitles: subtitle.NewConverter(cfg.FFmpegPath, cfg.SubtitleDir()),
+		Levels:    spectrum.New(cfg.FFmpegPath, cfg.LevelsDir()),
 		Web:       web.FS(), Log: log, BackgroundCtx: ctx,
 		MediaRoot: cfg.MediaRoot, Name: cfg.ServerName,
 		HomeListener: cfg.HomeAddr != "", ThemeDir: cfg.ThemeDir(),

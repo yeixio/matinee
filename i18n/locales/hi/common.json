@@ -378,7 +378,16 @@
     "openPlayer": "प्लेयर खोलें",
     "minimize": "छोटा करें",
     "readMore": "और पढ़ें",
-    "less": "कम दिखाएँ"
+    "less": "कम दिखाएँ",
+    "visualizer": "विज़ुअलाइज़र",
+    "changeLook": "रूप बदलें",
+    "lookHint": "बाएँ और दाएँ से रूप बदलें",
+    "paused": "रुका हुआ",
+    "look": {
+      "bars": "बार",
+      "halo": "प्रभामंडल",
+      "pulse": "धड़कन"
+    }
   },
   "books": {
     "overview": "अवलोकन",

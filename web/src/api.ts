@@ -4,6 +4,7 @@
 
 import { type ItemFilter, toSearchParams } from './filter'
 import i18n from './i18n'
+import type { LevelsJSON } from './player/levels'
 
 // guest is the shared account of a device at home that hasn't signed in, or
 // one of its profiles. Profiles have accountId; kids profiles have kidsLevel
@@ -780,6 +781,8 @@ export const api = {
   children: (id: number) => request<Item[]>('GET', `/api/v1/items/${id}/children`),
   // Every track of an artist or album, in playing order.
   tracks: (id: number) => request<Item[]>('GET', `/api/v1/items/${id}/tracks`),
+  // A song's sound levels, for the visualizer (player/levels.ts).
+  levels: (id: number) => request<LevelsJSON>('GET', `/api/v1/items/${id}/levels`),
   book: (id: number) => request<Book>('GET', `/api/v1/items/${id}/book`),
   series: (library: number) => request<BookGroup[]>('GET', `/api/v1/libraries/${library}/series`),
   narrators: (library: number) => request<BookGroup[]>('GET', `/api/v1/libraries/${library}/narrators`),

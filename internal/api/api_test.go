@@ -22,6 +22,7 @@ import (
 	"github.com/yeixio/matinee/internal/hwaccel"
 	"github.com/yeixio/matinee/internal/probe"
 	"github.com/yeixio/matinee/internal/scan"
+	"github.com/yeixio/matinee/internal/spectrum"
 	"github.com/yeixio/matinee/internal/store"
 	"github.com/yeixio/matinee/internal/store/storetest"
 	"github.com/yeixio/matinee/internal/stream"
@@ -95,6 +96,7 @@ func newTestServerStore(t *testing.T, opts ...func(*Server)) (*client, string, *
 		Store:     db, Scanner: &scan.Scanner{Store: db, Prober: probe.Prober{Path: "ffprobe"}, Log: log},
 		Transcoder: tc, HW: hw, Downloads: dl, Art: artwork.NewCache(filepath.Join(tmp, "images"), "ffmpeg"),
 		Subtitles: subtitle.NewConverter("ffmpeg", filepath.Join(tmp, "subtitles")), Log: log, BackgroundCtx: ctx,
+		Levels: spectrum.New("ffmpeg", filepath.Join(tmp, "levels")),
 	}
 	dl.SubtitleStream = srv.BurnStream
 	// Not running: tests that want it start srv.Analyzer.Run themselves.
@@ -228,6 +230,18 @@ func TestEndToEnd(t *testing.T) {
 		if len(all) != 1 || all[0].ID != tracks[0].ID {
 			t.Fatalf("tracks of %d: %+v", id, all)
 		}
+	}
+
+	// The visualizer's levels for a song, and none for anything else.
+	var levels struct {
+		FPS, Bands int
+		Levels     []byte
+	}
+	if code := c.do("GET", "/api/items/"+itoa(tracks[0].ID)+"/levels", nil, &levels); code != 200 || levels.FPS != spectrum.FPS || levels.Bands != spectrum.Bands || len(levels.Levels) == 0 || len(levels.Levels)%levels.Bands != 0 {
+		t.Fatalf("levels: %d %d fps, %d bands, %d bytes", code, levels.FPS, levels.Bands, len(levels.Levels))
+	}
+	if code := c.do("GET", "/api/items/"+itoa(albums[0].ID)+"/levels", nil, nil); code != 400 {
+		t.Fatalf("an album's levels: %d, want 400", code)
 	}
 
 	// Search by word prefix.

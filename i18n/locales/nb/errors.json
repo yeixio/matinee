@@ -133,5 +133,8 @@
   "this_client_id_belongs_to_someone_else": "klient-ID-en tilhører noen andre",
   "track_is_required": "track kreves",
   "unknown_command": "ukjent kommando",
-  "volume_must_be_between_0_and_1": "volume må være mellom 0 og 1"
+  "volume_must_be_between_0_and_1": "volume må være mellom 0 og 1",
+  "couldnt_read_the_songs_sound": "kunne ikke lese lyden i sangen",
+  "no_levels_on_this_server": "ingen nivåer på denne serveren",
+  "not_a_song": "ikke en sang"
 }

@@ -133,5 +133,8 @@
   "this_client_id_belongs_to_someone_else": "ez a kliensazonosító valaki másé",
   "track_is_required": "track szükséges",
   "unknown_command": "ismeretlen parancs",
-  "volume_must_be_between_0_and_1": "a volume értéke 0 és 1 között lehet"
+  "volume_must_be_between_0_and_1": "a volume értéke 0 és 1 között lehet",
+  "couldnt_read_the_songs_sound": "nem sikerült beolvasni a dal hangját",
+  "no_levels_on_this_server": "ezen a szerveren nincsenek szintek",
+  "not_a_song": "nem dal"
 }

@@ -133,5 +133,8 @@
   "this_client_id_belongs_to_someone_else": "id klien ini milik orang lain",
   "track_is_required": "track wajib diisi",
   "unknown_command": "perintah tidak dikenal",
-  "volume_must_be_between_0_and_1": "volume harus antara 0 dan 1"
+  "volume_must_be_between_0_and_1": "volume harus antara 0 dan 1",
+  "couldnt_read_the_songs_sound": "tidak dapat membaca suara lagu",
+  "no_levels_on_this_server": "tidak ada level di server ini",
+  "not_a_song": "bukan lagu"
 }

@@ -434,7 +434,16 @@
     "openPlayer": "Otevřít přehrávač",
     "minimize": "Minimalizovat",
     "readMore": "Číst dál",
-    "less": "Zobrazit méně"
+    "less": "Zobrazit méně",
+    "visualizer": "Vizualizace",
+    "changeLook": "Změnit vzhled",
+    "lookHint": "Vlevo a vpravo mění vzhled",
+    "paused": "Pozastaveno",
+    "look": {
+      "bars": "Sloupce",
+      "halo": "Svatozář",
+      "pulse": "Puls"
+    }
   },
   "books": {
     "overview": "Přehled",

@@ -350,7 +350,16 @@
     "openPlayer": "プレーヤーを開く",
     "minimize": "最小化",
     "readMore": "続きを読む",
-    "less": "表示を減らす"
+    "less": "表示を減らす",
+    "visualizer": "ビジュアライザー",
+    "changeLook": "見た目を変える",
+    "lookHint": "左右で見た目を変更",
+    "paused": "一時停止中",
+    "look": {
+      "bars": "バー",
+      "halo": "ハロー",
+      "pulse": "パルス"
+    }
   },
   "books": {
     "overview": "概要",

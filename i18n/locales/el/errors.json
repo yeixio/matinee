@@ -133,5 +133,8 @@
   "this_client_id_belongs_to_someone_else": "αυτό το αναγνωριστικό πελάτη ανήκει σε άλλον",
   "track_is_required": "απαιτείται track",
   "unknown_command": "άγνωστη εντολή",
-  "volume_must_be_between_0_and_1": "το volume πρέπει να είναι από 0 έως 1"
+  "volume_must_be_between_0_and_1": "το volume πρέπει να είναι από 0 έως 1",
+  "couldnt_read_the_songs_sound": "δεν ήταν δυνατή η ανάγνωση του ήχου του τραγουδιού",
+  "no_levels_on_this_server": "δεν υπάρχουν επίπεδα σε αυτόν τον διακομιστή",
+  "not_a_song": "δεν είναι τραγούδι"
 }

@@ -350,7 +350,16 @@
     "openPlayer": "Mở trình phát",
     "minimize": "Thu nhỏ",
     "readMore": "Đọc thêm",
-    "less": "Ẩn bớt"
+    "less": "Ẩn bớt",
+    "visualizer": "Hiệu ứng hình ảnh",
+    "changeLook": "Đổi giao diện",
+    "lookHint": "Trái và phải để đổi giao diện",
+    "paused": "Đã tạm dừng",
+    "look": {
+      "bars": "Thanh",
+      "halo": "Vầng sáng",
+      "pulse": "Nhịp đập"
+    }
   },
   "books": {
     "overview": "Tổng quan",

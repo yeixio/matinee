@@ -378,7 +378,16 @@
     "openPlayer": "Speler openen",
     "minimize": "Minimaliseren",
     "readMore": "Meer lezen",
-    "less": "Minder tonen"
+    "less": "Minder tonen",
+    "visualizer": "Visualisatie",
+    "changeLook": "Uiterlijk wijzigen",
+    "lookHint": "Links en rechts wijzigen het uiterlijk",
+    "paused": "Gepauzeerd",
+    "look": {
+      "bars": "Balken",
+      "halo": "Halo",
+      "pulse": "Puls"
+    }
   },
   "books": {
     "overview": "Overzicht",
