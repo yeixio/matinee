@@ -583,6 +583,8 @@
       "title": "媒體庫",
       "none": "還沒有媒體庫。",
       "scan": "掃描",
+      "findArtwork": "尋找圖片",
+      "findingArtwork": "正在為 {{name}} 尋找缺少的封面，找到後會立即顯示。",
       "remove": "移除{{name}}",
       "confirmRemove": "要移除「{{name}}」嗎？你的檔案會留在原處。",
       "kind": {

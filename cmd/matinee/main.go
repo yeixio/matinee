@@ -115,6 +115,9 @@ func run() error {
 	if cfg.MusicBrainz {
 		fetcher.Providers = append(fetcher.Providers, metadata.NewMusicBrainz(version.Version))
 	}
+	if cfg.OpenLibrary {
+		fetcher.Providers = append(fetcher.Providers, metadata.NewOpenLibrary(version.Version))
+	}
 	db.SetMetadataKinds(fetcher.Kinds()...)
 	// Testing the GPU takes a few seconds; transcodes use the CPU until it's done.
 	hw := hwaccel.NewManager(cfg.FFmpegPath, log)

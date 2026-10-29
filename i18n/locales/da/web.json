@@ -587,6 +587,8 @@
       "title": "Biblioteker",
       "none": "Ingen biblioteker endnu.",
       "scan": "Scan",
+      "findArtwork": "Find billeder",
+      "findingArtwork": "Leder efter manglende covers i {{name}}. De vises, efterhånden som de findes.",
       "remove": "Fjern {{name}}",
       "confirmRemove": "Fjern \"{{name}}\"? Dine filer bliver, hvor de er.",
       "kind": {

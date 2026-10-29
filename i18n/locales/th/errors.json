@@ -67,6 +67,7 @@
   "only_an_admin_can_change_a_shared_collection": "มีแต่ผู้ดูแลที่เปลี่ยนคอลเลกชันที่แชร์ได้",
   "only_an_admin_can_share_a_collection": "มีแต่ผู้ดูแลที่แชร์คอลเลกชันได้",
   "only_movies_and_shows_go_on_a_watch_list": "เพิ่มในรายการที่จะดูได้เฉพาะภาพยนตร์และรายการ",
+  "only_music_and_audiobook_libraries": "เฉพาะคลังเพลงและหนังสือเสียงเท่านั้น",
   "order_is_asc_or_desc": "order เป็น asc หรือ desc",
   "password_must_be_at_least_8_characters": "รหัสผ่านต้องมีอย่างน้อย 8 ตัวอักษร",
   "password_must_be_at_most_72_bytes": "รหัสผ่านต้องไม่เกิน 72 ไบต์",

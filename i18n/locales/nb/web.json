@@ -587,6 +587,8 @@
       "title": "Biblioteker",
       "none": "Ingen biblioteker ennå.",
       "scan": "Skann",
+      "findArtwork": "Finn bilder",
+      "findingArtwork": "Leter etter manglende omslag i {{name}}. De vises etter hvert som de blir funnet.",
       "remove": "Fjern {{name}}",
       "confirmRemove": "Fjerne «{{name}}»? Filene dine blir der de er.",
       "kind": {

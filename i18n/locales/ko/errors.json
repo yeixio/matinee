@@ -67,6 +67,7 @@
   "only_an_admin_can_change_a_shared_collection": "공유 컬렉션은 관리자만 바꿀 수 있습니다",
   "only_an_admin_can_share_a_collection": "컬렉션은 관리자만 공유할 수 있습니다",
   "only_movies_and_shows_go_on_a_watch_list": "볼 목록에는 영화와 프로그램만 넣을 수 있습니다",
+  "only_music_and_audiobook_libraries": "음악 및 오디오북 라이브러리만 가능",
   "order_is_asc_or_desc": "order는 asc 또는 desc입니다",
   "password_must_be_at_least_8_characters": "비밀번호는 8자 이상이어야 합니다",
   "password_must_be_at_most_72_bytes": "비밀번호는 72바이트 이하여야 합니다",

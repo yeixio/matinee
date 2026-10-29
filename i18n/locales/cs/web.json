@@ -595,6 +595,8 @@
       "title": "Knihovny",
       "none": "Zatím žádné knihovny.",
       "scan": "Prohledat",
+      "findArtwork": "Najít obrázky",
+      "findingArtwork": "Hledáme chybějící obaly v knihovně {{name}}. Objeví se, jakmile se najdou.",
       "remove": "Odebrat {{name}}",
       "confirmRemove": "Odebrat „{{name}}“? Tvoje soubory zůstanou, kde jsou.",
       "kind": {

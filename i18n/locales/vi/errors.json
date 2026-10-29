@@ -67,6 +67,7 @@
   "only_an_admin_can_change_a_shared_collection": "chỉ quản trị viên mới có thể đổi bộ sưu tập được chia sẻ",
   "only_an_admin_can_share_a_collection": "chỉ quản trị viên mới có thể chia sẻ bộ sưu tập",
   "only_movies_and_shows_go_on_a_watch_list": "chỉ phim và chương trình mới vào được danh sách xem",
+  "only_music_and_audiobook_libraries": "chỉ thư viện nhạc và sách nói",
   "order_is_asc_or_desc": "order là asc hoặc desc",
   "password_must_be_at_least_8_characters": "mật khẩu phải có ít nhất 8 ký tự",
   "password_must_be_at_most_72_bytes": "mật khẩu tối đa 72 byte",

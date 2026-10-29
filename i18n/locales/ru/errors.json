@@ -67,6 +67,7 @@
   "only_an_admin_can_change_a_shared_collection": "общую коллекцию может менять только администратор",
   "only_an_admin_can_share_a_collection": "открыть коллекцию для всех может только администратор",
   "only_movies_and_shows_go_on_a_watch_list": "в список «Хочу посмотреть» можно добавлять только фильмы и сериалы",
+  "only_music_and_audiobook_libraries": "только для медиатек музыки и аудиокниг",
   "order_is_asc_or_desc": "order — asc или desc",
   "password_must_be_at_least_8_characters": "пароль должен быть не короче 8 символов",
   "password_must_be_at_most_72_bytes": "пароль должен быть не длиннее 72 байт",

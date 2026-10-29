@@ -682,6 +682,8 @@ export const api = {
     request<Library>('POST', '/api/v1/libraries', { name, kind, paths }),
   deleteLibrary: (id: number) => request<void>('DELETE', `/api/v1/libraries/${id}`),
   scanLibrary: (id: number) => request<void>('POST', `/api/v1/libraries/${id}/scan`),
+  // Looks again in the folders and online for a music or audiobook library's missing covers.
+  findArtwork: (id: number) => request<{ lookingUp: number }>('POST', `/api/v1/libraries/${id}/artwork`),
   libraryItems: (id: number, filter: ItemFilter = {}) => {
     const q = toSearchParams({ ...filter, library: undefined }).toString()
     return request<Item[]>('GET', `/api/v1/libraries/${id}/items${q ? `?${q}` : ''}`)

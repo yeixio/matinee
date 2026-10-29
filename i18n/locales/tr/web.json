@@ -587,6 +587,8 @@
       "title": "Kütüphaneler",
       "none": "Henüz kütüphane yok.",
       "scan": "Tara",
+      "findArtwork": "Görselleri bul",
+      "findingArtwork": "{{name}} içindeki eksik kapaklar aranıyor. Bulundukça görünecekler.",
       "remove": "{{name}} kaldır",
       "confirmRemove": "\"{{name}}\" kaldırılsın mı? Dosyaların olduğu yerde kalır.",
       "kind": {

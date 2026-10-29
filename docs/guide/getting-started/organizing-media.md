@@ -92,6 +92,12 @@ Images next to your media always win over anything looked up online:
 | `cover.jpg` or `folder.jpg` | audiobook folder | the book's cover |
 | `author.jpg` | author folder | the author's photo |
 
+<!-- since: v0.1.3 -->
+
+Cover names for albums and books can be in any case and can end in `.jpg`, `.jpeg`, `.png` or `.webp`. `front.jpg`, an image with "cover" or "front" in its name, or the only image in the folder work too. An album's cover can sit above its `CD 1` and `CD 2` folders. See [Music](/docs/watching/music/#covers-and-artist-photos) and [Audiobooks](/docs/watching/audiobooks/#covers-and-author-photos).
+
+<!-- /since -->
+
 ## Subtitles
 
 Put subtitle files next to the video, named like the video plus a language code:

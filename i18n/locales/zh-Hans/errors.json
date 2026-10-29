@@ -67,6 +67,7 @@
   "only_an_admin_can_change_a_shared_collection": "只有管理员能更改共享合集",
   "only_an_admin_can_share_a_collection": "只有管理员能共享合集",
   "only_movies_and_shows_go_on_a_watch_list": "只有电影和剧集可以加入待看清单",
+  "only_music_and_audiobook_libraries": "仅限音乐和有声书资料库",
   "order_is_asc_or_desc": "order 为 asc 或 desc",
   "password_must_be_at_least_8_characters": "密码至少需要 8 个字符",
   "password_must_be_at_most_72_bytes": "密码最多 72 个字节",

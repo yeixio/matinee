@@ -591,6 +591,8 @@
       "title": "Bibliothèques",
       "none": "Aucune bibliothèque pour l’instant.",
       "scan": "Analyser",
+      "findArtwork": "Trouver les images",
+      "findingArtwork": "Recherche des pochettes manquantes dans {{name}}. Elles s'affichent au fur et à mesure.",
       "remove": "Retirer {{name}}",
       "confirmRemove": "Retirer « {{name}} » ? Vos fichiers restent où ils sont.",
       "kind": {

@@ -85,3 +85,66 @@ func TestMusicBrainzFillsArtistsAndAlbums(t *testing.T) {
 		t.Fatalf("everything should be looked up: %+v", left)
 	}
 }
+
+// An edition note comes off the title when the full title finds nothing,
+// and an album without a cover of its own takes one of its releases'.
+func TestMusicBrainzAlbumCovers(t *testing.T) {
+	mux := http.NewServeMux()
+	mux.HandleFunc("GET /ws/2/release-group", func(w http.ResponseWriter, r *http.Request) {
+		res := []map[string]any{}
+		switch r.URL.Query().Get("query") {
+		case `releasegroup:"Kid A" AND artist:"Radiohead"`:
+			res = append(res, map[string]any{"id": "kida", "title": "Kid A", "score": 100})
+		case `releasegroup:"Amnesiac" AND artist:"Radiohead"`:
+			// Short titles score low but match exactly.
+			res = append(res, map[string]any{"id": "other", "title": "Amnesiac Live", "score": 70},
+				map[string]any{"id": "amnesiac", "title": "Amnesiac", "score": 65})
+		}
+		json.NewEncoder(w).Encode(map[string]any{"release-groups": res})
+	})
+	mux.HandleFunc("GET /ws/2/release", func(w http.ResponseWriter, r *http.Request) {
+		if r.URL.Query().Get("release-group") != "amnesiac" {
+			json.NewEncoder(w).Encode(map[string]any{"releases": []any{}})
+			return
+		}
+		json.NewEncoder(w).Encode(map[string]any{"releases": []map[string]any{
+			{"id": "promo", "cover-art-archive": map[string]any{"front": false}},
+			{"id": "cd", "cover-art-archive": map[string]any{"front": true}},
+		}})
+	})
+	mux.HandleFunc("HEAD /caa/release-group/kida/front-500", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "https://archive.example/kida.jpg", http.StatusTemporaryRedirect)
+	})
+	mux.HandleFunc("HEAD /caa/release-group/amnesiac/front-500", http.NotFound)
+	ts := httptest.NewServer(mux)
+	t.Cleanup(ts.Close)
+	mb := NewMusicBrainz("test")
+	mb.BaseURL, mb.CoverURL, mb.Interval = ts.URL+"/ws/2", ts.URL+"/caa", 0
+
+	ctx := context.Background()
+	md, err := mb.Lookup(ctx, Query{Kind: "album", Title: "Kid A (Deluxe Edition) [Remastered]", Artist: "Radiohead"})
+	if err != nil || md == nil || md.MBID != "kida" || md.Poster != ts.URL+"/caa/release-group/kida/front-500" {
+		t.Fatalf("edition note: %+v %v", md, err)
+	}
+	md, err = mb.Lookup(ctx, Query{Kind: "album", Title: "Amnesiac", Artist: "Radiohead"})
+	if err != nil || md == nil || md.MBID != "amnesiac" || md.Poster != ts.URL+"/caa/release/cd/front-500" {
+		t.Fatalf("release cover: %+v %v", md, err)
+	}
+	if md, _ := mb.Lookup(ctx, Query{Kind: "album", Title: "Nothing", Artist: "Radiohead"}); md != nil {
+		t.Fatalf("no match: %+v", md)
+	}
+}
+
+func TestPlainAlbumTitle(t *testing.T) {
+	for in, want := range map[string]string{
+		"OK Computer (Deluxe Edition)":        "OK Computer",
+		"Abbey Road [2019 Remaster] (Disc 1)": "Abbey Road",
+		"The Wall CD2":                        "The Wall",
+		"(What's the Story) Morning Glory?":   "(What's the Story) Morning Glory?",
+		"Help!":                               "Help!",
+	} {
+		if got := plainAlbumTitle(in); got != want {
+			t.Errorf("plainAlbumTitle(%q) = %q, want %q", in, got, want)
+		}
+	}
+}

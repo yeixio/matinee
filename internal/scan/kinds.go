@@ -210,13 +210,13 @@ func (music) Index(ctx context.Context, st *store.Store, f File) (store.Item, er
 	}
 	// An artist photo sits in the artist's folder, one up from the album.
 	if artistDir := filepath.Dir(filepath.Dir(f.Path)); artistDir != f.Root && strings.HasPrefix(artistDir, f.Root) {
-		if photo := findArt(artistDir, "artist.jpg", "artist.png"); photo != "" {
+		if photo := findNamed(artistDir, "artist", "folder", "photo"); photo != "" {
 			if err := st.SetArt(ctx, artistID, photo, ""); err != nil {
 				return store.Item{}, err
 			}
 		}
 	}
-	cover := findArt(filepath.Dir(f.Path), "cover.jpg", "folder.jpg", "front.jpg", "cover.png", "folder.png")
+	cover := albumCover(f.Root, f.Path)
 	if cover == "" && f.Probe.HasCover {
 		cover = "embedded:" + f.Path
 	}
@@ -231,18 +231,32 @@ func (music) Index(ctx context.Context, st *store.Store, f File) (store.Item, er
 	}, nil
 }
 
+// FinishScan picks up covers added to album folders since their tracks were scanned.
+func (music) FinishScan(ctx context.Context, st *store.Store, lib store.Library) error {
+	return fillFolderArt(ctx, st, lib, "album", albumCover)
+}
+
 // trackFromTags prefers embedded tags and falls back to the folder layout.
 func trackFromTags(tags map[string]string, fromPath TrackInfo) TrackInfo {
 	t := fromPath
-	pick := func(dst *string, keys ...string) {
+	pick := func(dst *string, keys ...string) bool {
 		for _, k := range keys {
 			if v := strings.TrimSpace(tags[k]); v != "" {
 				*dst = v
-				return
+				return true
 			}
 		}
+		return false
 	}
-	pick(&t.Artist, "album_artist", "albumartist", "artist")
+	if !pick(&t.Artist, "album_artist", "albumartist") {
+		if isCompilation(tags) {
+			// Without an album artist, a compilation's tracks would each
+			// file the album under their own artist.
+			t.Artist = "Various Artists"
+		} else {
+			pick(&t.Artist, "artist")
+		}
+	}
 	pick(&t.Album, "album")
 	pick(&t.Title, "title")
 	if n := probe.LeadingInt(tags["track"]); n > 0 {
@@ -261,6 +275,16 @@ func trackFromTags(tags map[string]string, fromPath TrackInfo) TrackInfo {
 		t.Album = "Unknown Album"
 	}
 	return t
+}
+
+// isCompilation reports whether the tags mark a various-artists album.
+func isCompilation(tags map[string]string) bool {
+	for _, k := range []string{"compilation", "tcmp", "cpil"} {
+		if v := strings.TrimSpace(tags[k]); v == "1" || strings.EqualFold(v, "true") {
+			return true
+		}
+	}
+	return false
 }
 
 func seasonTitle(n int) string {

@@ -193,6 +193,7 @@ func (s *Server) routes() []route {
 		{"POST /libraries", adminOnly, s.createLibrary},
 		{"DELETE /libraries/{id}", adminOnly, s.deleteLibrary},
 		{"POST /libraries/{id}/scan", adminOnly, s.scanLibrary},
+		{"POST /libraries/{id}/artwork", adminOnly, s.refreshLibraryArtwork},
 		{"GET /libraries/{id}/items", reader, s.libraryItems},
 		{"GET /libraries/{id}/filters", reader, s.libraryFilters},
 		{"GET /libraries/{id}/people", reader, s.libraryPeople},
@@ -814,6 +815,37 @@ func (s *Server) scanLibrary(w http.ResponseWriter, r *http.Request) {
 	}
 	go s.Scanner.Scan(s.BackgroundCtx, lib)
 	w.WriteHeader(http.StatusAccepted)
+}
+
+// refreshLibraryArtwork looks again for the covers and photos a music or
+// audiobook library is missing: in the folders, where covers added since
+// the last scan turn up, and online, for everything without one of its own.
+func (s *Server) refreshLibraryArtwork(w http.ResponseWriter, r *http.Request) {
+	id, ok := pathID(r)
+	if !ok {
+		writeError(w, http.StatusBadRequest, "bad id")
+		return
+	}
+	lib, err := s.Store.Library(r.Context(), id)
+	if errors.Is(err, store.ErrNotFound) {
+		writeError(w, http.StatusNotFound, "library not found")
+		return
+	} else if err != nil {
+		s.serverError(w, err)
+		return
+	}
+	if lib.Kind != "music" && lib.Kind != "audiobooks" {
+		writeError(w, http.StatusBadRequest, "only music and audiobook libraries")
+		return
+	}
+	n, err := s.Store.ResetArtLookups(r.Context(), lib.ID)
+	if err != nil {
+		s.serverError(w, err)
+		return
+	}
+	// A full scan checks the folders, then looks up what's still missing.
+	go s.Scanner.Scan(s.BackgroundCtx, lib)
+	writeJSON(w, http.StatusAccepted, map[string]int64{"lookingUp": n})
 }
 
 // browseFS lists subfolders so admins can pick library folders from the browser.

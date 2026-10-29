@@ -8,6 +8,7 @@ import (
 	"encoding/json"
 	"log/slog"
 	"slices"
+	"strings"
 	"sync"
 	"sync/atomic"
 
@@ -22,7 +23,7 @@ type Query struct {
 	ShowID  int64 // provider id of the season's or episode's show
 	Season  int
 	Episode int
-	Artist  string // the album's artist
+	Artist  string // the album's artist, or the book's author
 	// For a plugin's kinds: the item's file and what the plugin keeps with it.
 	Path string
 	Data json.RawMessage
@@ -193,6 +194,18 @@ func (f *Fetcher) query(ctx context.Context, it store.Item) (Query, queryState) 
 		}
 		if artist.Title != "Unknown Artist" {
 			q.Artist = artist.Title
+		}
+		return q, ready
+	case "author", "book":
+		// Open Library has only pictures (and a year) to add, so an author or
+		// book with its own from the folder or the file isn't looked up.
+		if it.Poster != "" && !strings.HasPrefix(it.Poster, "http") || it.Title == "Unknown Author" || it.Title == "Unknown Book" {
+			return q, noMatch
+		}
+		if it.Kind == "book" && it.ParentID != nil {
+			if author, err := f.Store.Item(ctx, 0, *it.ParentID); err == nil && author.Title != "Unknown Author" {
+				q.Artist = author.Title
+			}
 		}
 		return q, ready
 	case "season":

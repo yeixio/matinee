@@ -67,6 +67,7 @@
   "only_an_admin_can_change_a_shared_collection": "hanya admin yang bisa mengubah koleksi bersama",
   "only_an_admin_can_share_a_collection": "hanya admin yang bisa membagikan koleksi",
   "only_movies_and_shows_go_on_a_watch_list": "hanya film dan acara yang bisa masuk daftar tonton",
+  "only_music_and_audiobook_libraries": "hanya pustaka musik dan buku audio",
   "order_is_asc_or_desc": "order adalah asc atau desc",
   "password_must_be_at_least_8_characters": "kata sandi minimal 8 karakter",
   "password_must_be_at_most_72_bytes": "kata sandi maksimal 72 byte",

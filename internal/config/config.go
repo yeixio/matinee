@@ -28,6 +28,7 @@ type Config struct {
 	DatabaseURL   string        // postgres:// URL; empty uses SQLite in DataDir
 	MediaRoot     string        // where the folder picker starts when adding a library
 	MusicBrainz   bool          // look up artists and albums on MusicBrainz (no key needed)
+	OpenLibrary   bool          // look up audiobook covers and author photos on Open Library (no key needed)
 	Wikidata      bool          // look up movies' and shows' awards on Wikidata (no key needed)
 	Discovery     bool          // announce the server on the local network so the apps find it
 	ServerName    string        // the name the apps show for this server
@@ -75,6 +76,7 @@ func Load(args []string) (Config, error) {
 	fs.StringVar(&c.MediaRoot, "media-root", env("MATINEE_MEDIA_ROOT", "/"), "folder the library picker starts in")
 	fs.BoolVar(&c.Wikidata, "wikidata", env("MATINEE_WIKIDATA", "true") != "false", "look up awards on wikidata.org")
 	fs.BoolVar(&c.MusicBrainz, "musicbrainz", env("MATINEE_MUSICBRAINZ", "true") != "false", "look up artists and albums on musicbrainz.org")
+	fs.BoolVar(&c.OpenLibrary, "openlibrary", env("MATINEE_OPENLIBRARY", "true") != "false", "look up audiobook covers and author photos on openlibrary.org")
 	fs.BoolVar(&c.Discovery, "discovery", env("MATINEE_DISCOVERY", "true") != "false", "announce this server on the local network so the apps find it")
 	fs.StringVar(&c.ServerName, "server-name", env("MATINEE_SERVER_NAME", "Matinee"), "the name the apps show for this server")
 	fs.StringVar(&c.PublicURL, "public-url", env("MATINEE_PUBLIC_URL", ""), "the address the apps should connect to, such as https://matinee.example.com")

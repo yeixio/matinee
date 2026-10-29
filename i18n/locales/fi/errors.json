@@ -67,6 +67,7 @@
   "only_an_admin_can_change_a_shared_collection": "vain ylläpitäjä voi muuttaa jaettua kokoelmaa",
   "only_an_admin_can_share_a_collection": "vain ylläpitäjä voi jakaa kokoelman",
   "only_movies_and_shows_go_on_a_watch_list": "katselulistalle voi lisätä vain elokuvia ja sarjoja",
+  "only_music_and_audiobook_libraries": "vain musiikki- ja äänikirjakirjastot",
   "order_is_asc_or_desc": "order on asc tai desc",
   "password_must_be_at_least_8_characters": "salasanassa on oltava vähintään 8 merkkiä",
   "password_must_be_at_most_72_bytes": "salasana saa olla enintään 72 tavua",

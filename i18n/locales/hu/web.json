@@ -587,6 +587,8 @@
       "title": "Könyvtárak",
       "none": "Még nincsenek könyvtárak.",
       "scan": "Átvizsgálás",
+      "findArtwork": "Képek keresése",
+      "findingArtwork": "A hiányzó borítók keresése itt: {{name}}. Ahogy előkerülnek, megjelennek.",
       "remove": "{{name}} eltávolítása",
       "confirmRemove": "Eltávolítod: „{{name}}”? A fájljaid maradnak, ahol vannak.",
       "kind": {

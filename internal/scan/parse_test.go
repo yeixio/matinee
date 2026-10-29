@@ -57,3 +57,27 @@ func TestParseTrackPath(t *testing.T) {
 		t.Errorf("disc-track prefix: got %+v", got)
 	}
 }
+
+// Artist/Album/CD 1/track files belong to the album, on disc 1.
+func TestParseTrackPathDiscFolder(t *testing.T) {
+	got := ParseTrackPath("/music", "/music/Pink Floyd/The Wall/CD 2/03 Hey You.flac")
+	want := TrackInfo{Artist: "Pink Floyd", Album: "The Wall", Title: "Hey You", Track: 3, Disc: 2}
+	if got != want {
+		t.Errorf("got %+v, want %+v", got, want)
+	}
+}
+
+// A compilation without an album artist files under Various Artists
+// rather than splitting into one album per track artist.
+func TestTrackFromTagsCompilation(t *testing.T) {
+	path := TrackInfo{Artist: "Mixes", Album: "Summer"}
+	if got := trackFromTags(map[string]string{"artist": "Someone", "album": "Summer Hits", "compilation": "1"}, path); got.Artist != "Various Artists" {
+		t.Errorf("compilation: %+v", got)
+	}
+	if got := trackFromTags(map[string]string{"artist": "Someone", "album_artist": "DJ Mix", "compilation": "1"}, path); got.Artist != "DJ Mix" {
+		t.Errorf("album artist wins: %+v", got)
+	}
+	if got := trackFromTags(map[string]string{"artist": "Someone"}, path); got.Artist != "Someone" {
+		t.Errorf("track artist: %+v", got)
+	}
+}

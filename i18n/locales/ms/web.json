@@ -583,6 +583,8 @@
       "title": "Pustaka",
       "none": "Belum ada pustaka.",
       "scan": "Imbas",
+      "findArtwork": "Cari gambar",
+      "findingArtwork": "Mencari kulit yang tiada dalam {{name}}. Ia dipaparkan sebaik sahaja ditemui.",
       "remove": "Alih keluar {{name}}",
       "confirmRemove": "Alih keluar \"{{name}}\"? Fail anda kekal di tempatnya.",
       "kind": {

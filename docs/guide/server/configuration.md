@@ -23,6 +23,9 @@ Most of Matinee is set up in the web player under **Settings**. A few things abo
 | `MATINEE_RATING_COUNTRY` | `US` | Whose age ratings [kids profiles](/docs/household/profiles/) use, such as `GB`, `CA`, `AU` or `DE` |
 | `MATINEE_MEDIA_ROOT` | `/` | Folder the library picker opens in |
 | `MATINEE_MUSICBRAINZ` | `true` | Look up artists and albums on MusicBrainz, with covers and artist photos. Set `false` to use only local artwork |
+<!-- since: v0.1.3 -->
+| `MATINEE_OPENLIBRARY` | `true` | Look up audiobook covers and author photos on Open Library. Set `false` to use only local artwork |
+<!-- /since -->
 | `MATINEE_WIKIDATA` | `true` | Look up awards on Wikidata. Set `false` to skip awards |
 | `MATINEE_SCAN_INTERVAL` | `15m` | How often libraries are rescanned in full; `0` turns it off ([more](/docs/server/new-files/)) |
 | `MATINEE_WATCH_POLL_INTERVAL` | `30s` | How often folders on network shares are checked for new files |

@@ -595,6 +595,8 @@
       "title": "Biblioteki",
       "none": "Brak bibliotek.",
       "scan": "Skanuj",
+      "findArtwork": "Znajdź obrazy",
+      "findingArtwork": "Szukamy brakujących okładek w {{name}}. Pojawią się, gdy tylko zostaną znalezione.",
       "remove": "Usuń: {{name}}",
       "confirmRemove": "Usunąć „{{name}}”? Twoje pliki zostaną tam, gdzie są.",
       "kind": {

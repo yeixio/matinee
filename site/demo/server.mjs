@@ -64,6 +64,7 @@ export async function startServer() {
       MATINEE_TMDB_KEY: 'demo0000000000000000000000007c3e', // a made-up key, as long as a real one
       MATINEE_WIKIDATA: 'false',
       MATINEE_MUSICBRAINZ: 'false',
+      MATINEE_OPENLIBRARY: 'false',
       MATINEE_DISCOVERY: 'false',
       MATINEE_SCAN_INTERVAL: '0',
       MATINEE_MEDIA_ROOT: media,

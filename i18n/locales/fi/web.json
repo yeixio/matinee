@@ -587,6 +587,8 @@
       "title": "Kirjastot",
       "none": "Ei vielä kirjastoja.",
       "scan": "Skannaa",
+      "findArtwork": "Etsi kuvat",
+      "findingArtwork": "Etsitään puuttuvia kansikuvia kirjastosta {{name}}. Ne näkyvät sitä mukaa kuin niitä löytyy.",
       "remove": "Poista {{name}}",
       "confirmRemove": "Poistetaanko ”{{name}}”? Tiedostosi pysyvät paikoillaan.",
       "kind": {

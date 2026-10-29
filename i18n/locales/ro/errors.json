@@ -67,6 +67,7 @@
   "only_an_admin_can_change_a_shared_collection": "doar un administrator poate schimba o colecție partajată",
   "only_an_admin_can_share_a_collection": "doar un administrator poate partaja o colecție",
   "only_movies_and_shows_go_on_a_watch_list": "doar filmele și serialele pot fi puse pe o listă de vizionat",
+  "only_music_and_audiobook_libraries": "doar biblioteci de muzică și cărți audio",
   "order_is_asc_or_desc": "order este asc sau desc",
   "password_must_be_at_least_8_characters": "parola trebuie să aibă cel puțin 8 caractere",
   "password_must_be_at_most_72_bytes": "parola trebuie să aibă cel mult 72 de octeți",

@@ -587,6 +587,8 @@
       "title": "Bibliotheken",
       "none": "Nog geen bibliotheken.",
       "scan": "Scannen",
+      "findArtwork": "Afbeeldingen zoeken",
+      "findingArtwork": "Ontbrekende hoezen in {{name}} worden gezocht. Ze verschijnen zodra ze gevonden zijn.",
       "remove": "{{name}} verwijderen",
       "confirmRemove": "‘{{name}}’ verwijderen? Je bestanden blijven waar ze zijn.",
       "kind": {

@@ -591,6 +591,8 @@
       "title": "Librerie",
       "none": "Ancora nessuna libreria.",
       "scan": "Scansiona",
+      "findArtwork": "Trova immagini",
+      "findingArtwork": "Ricerca delle copertine mancanti in {{name}}. Compaiono man mano che vengono trovate.",
       "remove": "Rimuovi {{name}}",
       "confirmRemove": "Rimuovere «{{name}}»? I tuoi file restano dove sono.",
       "kind": {

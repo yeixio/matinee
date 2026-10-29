@@ -67,6 +67,7 @@
   "only_an_admin_can_change_a_shared_collection": "sdílenou kolekci může měnit jen správce",
   "only_an_admin_can_share_a_collection": "kolekci může sdílet jen správce",
   "only_movies_and_shows_go_on_a_watch_list": "na seznam ke zhlédnutí patří jen filmy a seriály",
+  "only_music_and_audiobook_libraries": "jen hudební knihovny a knihovny audioknih",
   "order_is_asc_or_desc": "order je asc nebo desc",
   "password_must_be_at_least_8_characters": "heslo musí mít alespoň 8 znaků",
   "password_must_be_at_most_72_bytes": "heslo smí mít nejvýš 72 bajtů",

@@ -453,7 +453,8 @@ func (s *Store) SetArt(ctx context.Context, id int64, poster, backdrop string) e
 }
 
 // NeedsMetadata lists a library's items of the given kinds not yet looked
-// up online, shows before seasons and episodes so those can use the show's match.
+// up online, shows before seasons and episodes so those can use the show's
+// match, and items without artwork before those looked up again.
 func (s *Store) NeedsMetadata(ctx context.Context, libraryID int64, kinds []string) ([]Item, error) {
 	if len(kinds) == 0 {
 		return nil, nil
@@ -464,7 +465,7 @@ func (s *Store) NeedsMetadata(ctx context.Context, libraryID int64, kinds []stri
 		args = append(args, k)
 	}
 	return s.queryItems(ctx, "i.library_id = ? AND i.meta_at IS NULL AND i.kind IN ("+in+")",
-		"CASE i.kind WHEN 'show' THEN 0 WHEN 'season' THEN 1 ELSE 2 END, i.id", args...)
+		"CASE i.kind WHEN 'show' THEN 0 WHEN 'season' THEN 1 ELSE 2 END, CASE WHEN i.poster IS NULL THEN 0 ELSE 1 END, i.id", args...)
 }
 
 // Metadata is what an online provider knows about an item.
@@ -484,7 +485,8 @@ type Metadata struct {
 }
 
 // ApplyMetadata stores a provider match (nil for no match) without
-// overwriting local artwork or the year from the file name.
+// overwriting local artwork or the year from the file name. Artwork from
+// an earlier lookup gives way to the new match's.
 func (s *Store) ApplyMetadata(ctx context.Context, id int64, m *Metadata) error {
 	if m == nil {
 		_, err := s.db.ExecContext(ctx, "UPDATE items SET meta_at = ? WHERE id = ?", now(), id)
@@ -492,8 +494,10 @@ func (s *Store) ApplyMetadata(ctx context.Context, id int64, m *Metadata) error 
 	}
 	_, err := s.db.ExecContext(ctx, `
 		UPDATE items SET
-			tmdb_id = ?, mbid = ?, overview = ?, rating = ?,
-			year = COALESCE(year, ?), poster = COALESCE(poster, ?), backdrop = COALESCE(backdrop, ?),
+			tmdb_id = ?, mbid = ?, overview = COALESCE(?, overview), rating = ?,
+			year = COALESCE(year, ?),
+			poster = CASE WHEN poster IS NULL OR poster LIKE 'http%' THEN COALESCE(?, poster) ELSE poster END,
+			backdrop = CASE WHEN backdrop IS NULL OR backdrop LIKE 'http%' THEN COALESCE(?, backdrop) ELSE backdrop END,
 			genres = COALESCE(?, genres), facts = COALESCE(?, facts),
 			title = CASE WHEN kind = 'episode' AND ? != '' AND title LIKE 'Episode %' THEN ? ELSE title END,
 			meta_at = ?, details_at = NULL
