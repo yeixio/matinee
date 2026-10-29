@@ -64,11 +64,11 @@ func TestAudiobooks(t *testing.T) {
 		t.Fatalf("narrators: %+v", groups)
 	}
 
-	// Halfway through is a place to come back to, on Home.
-	c.do("PUT", "/api/v1/items/"+id+"/progress", map[string]any{"positionMs": 60_000}, nil)
+	// A way in is a place to come back to, on Home. (Its last minute would finish it.)
+	c.do("PUT", "/api/v1/items/"+id+"/progress", map[string]any{"positionMs": 30_000}, nil)
 	var home struct{ Rows []HomeRow }
 	c.do("GET", "/api/v1/home", nil, &home)
-	if len(home.Rows) == 0 || home.Rows[0].ID != "continueListening" || home.Rows[0].Items[0].PositionMs != 60_000 {
+	if len(home.Rows) == 0 || home.Rows[0].ID != "continueListening" || home.Rows[0].Items[0].PositionMs != 30_000 {
 		t.Fatalf("home rows: %+v", home.Rows)
 	}
 	var started []store.Item
