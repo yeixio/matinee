@@ -68,6 +68,33 @@ func (s *Server) setBookProgress(w http.ResponseWriter, r *http.Request, it stor
 	w.WriteHeader(http.StatusNoContent)
 }
 
+// setPartProgress saves a place in one part of a book, from a player that
+// plays parts one at a time (like the TV's), as a place in the whole book.
+// Finishing a part moves on to the next; finishing the last finishes the book.
+func (s *Server) setPartProgress(w http.ResponseWriter, r *http.Request, part store.Item, positionMs int64, played bool) {
+	b, err := s.Store.Book(r.Context(), currentUser(r).ID, part.ID)
+	if err != nil {
+		s.serverError(w, err)
+		return
+	}
+	for i, p := range b.Parts {
+		if p.ID != part.ID {
+			continue
+		}
+		last := i == len(b.Parts)-1
+		switch {
+		case played && last:
+		case played:
+			positionMs, played = b.Parts[i+1].StartMs, false
+		default:
+			positionMs += p.StartMs
+		}
+		s.setBookProgress(w, r, b.Item, positionMs, played)
+		return
+	}
+	writeError(w, http.StatusNotFound, "book not found")
+}
+
 // librarySeries lists an audiobook library's series.
 func (s *Server) librarySeries(w http.ResponseWriter, r *http.Request) {
 	s.bookGroups(w, r, s.Store.Series)

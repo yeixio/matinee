@@ -98,4 +98,28 @@ func TestAudiobooks(t *testing.T) {
 	if len(started) != 1 {
 		t.Fatalf("started over: %+v", started)
 	}
+
+	// A player that plays one part at a time saves its place in the book.
+	parts := b.Parts
+	part := func(i int) string { return "/api/v1/items/" + itoa(parts[i].ID) + "/progress" }
+	reload := func() {
+		b = bookView{} // fields left out of the answer mustn't linger
+		c.do("GET", "/api/v1/items/"+id+"/book", nil, &b)
+	}
+	c.do("PUT", part(1), map[string]any{"positionMs": 10_000}, nil)
+	reload()
+	if b.PositionMs != b.Parts[1].StartMs+10_000 || b.Played {
+		t.Fatalf("place from a part: %d", b.PositionMs)
+	}
+	// (This book is short enough that its last minute starts in part 2.)
+	c.do("PUT", part(0), map[string]any{"positionMs": 0, "played": true}, nil)
+	reload()
+	if b.PositionMs != b.Parts[1].StartMs || b.Played {
+		t.Fatalf("after a part: %d", b.PositionMs)
+	}
+	c.do("PUT", part(2), map[string]any{"positionMs": 0, "played": true}, nil)
+	reload()
+	if !b.Played {
+		t.Fatalf("after the last part: %+v", b.Item)
+	}
 }

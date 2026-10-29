@@ -1029,6 +1029,10 @@ func (s *Server) setProgress(w http.ResponseWriter, r *http.Request) {
 		s.setBookProgress(w, r, it, req.PositionMs, req.Played)
 		return
 	}
+	if it.Kind == "part" {
+		s.setPartProgress(w, r, it, req.PositionMs, req.Played)
+		return
+	}
 	// Past 92% counts as watched, the way credits usually start.
 	// So does reaching the closing credits, when a chapter says where they are.
 	if it.DurationMs != nil && *it.DurationMs > 0 && req.PositionMs > *it.DurationMs*92/100 {

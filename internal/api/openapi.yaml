@@ -1126,7 +1126,9 @@ paths:
         A position past 92% of the duration marks the item played. For an
         audiobook, the position is on the whole book's clock (see
         /items/{id}/book), and reaching its last minute finishes it; its
-        parts count as played with it.
+        parts count as played with it. A position in one of a book's parts
+        is saved as the place in the book, and a played part moves the
+        place on to the next part.
       parameters: [{ $ref: "#/components/parameters/ID" }]
       requestBody:
         required: true
