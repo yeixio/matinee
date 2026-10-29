@@ -7,6 +7,8 @@ import (
 	"errors"
 	"strings"
 	"unicode"
+
+	"github.com/yeixio/matinee/internal/probe"
 )
 
 // Item is anything browsable: a playable file or a container of other items.
@@ -40,10 +42,19 @@ type Item struct {
 	showID      int64
 	// For albums and tracks: who made it, and for tracks the album it's
 	// on (the album's id is ParentID), so a player can say what's playing.
-	Artist      string `json:"artist,omitempty"`
-	ArtistID    *int64 `json:"artistId,omitempty"`
-	Album       string `json:"album,omitempty"`
-	OnWatchList bool   `json:"onWatchList,omitempty"`
+	Artist   string `json:"artist,omitempty"`
+	ArtistID *int64 `json:"artistId,omitempty"`
+	Album    string `json:"album,omitempty"`
+	// For books and their parts: who wrote it, and for a part the book's
+	// title (the book's id is ParentID). Books also name their narrators
+	// and their place in a series, such as 2 or 2.5.
+	Author      string   `json:"author,omitempty"`
+	AuthorID    *int64   `json:"authorId,omitempty"`
+	Book        string   `json:"book,omitempty"`
+	Narrators   []string `json:"narrators,omitempty"`
+	Series      string   `json:"series,omitempty"`
+	SeriesIndex *float64 `json:"seriesIndex,omitempty"`
+	OnWatchList bool     `json:"onWatchList,omitempty"`
 	// Genres of a movie or show, from its online match.
 	Genres []string `json:"genres,omitempty"`
 	// MediaTags sums up what the background analysis found, such as 4k,
@@ -63,6 +74,9 @@ type Item struct {
 	// SubtitleStreams is the probed embedded subtitle streams as JSON, only
 	// set when upserting a file. See Store.SubtitleStreams.
 	SubtitleStreams string `json:"-"`
+	// Chapters are a file's own marked chapters, only set when upserting a
+	// file. See Store.Book.
+	Chapters []probe.Chapter `json:"-"`
 
 	// Facts are labelled lines a plugin found for an item of a kind it
 	// adds, such as Manufacturer: Namco, shown on its page.
@@ -97,11 +111,12 @@ const itemCols = `
 	COALESCE(i.genres, ''),
 	CASE WHEN i.kind = 'episode' THEN (SELECT se.parent_id FROM items se WHERE se.id = i.parent_id) END,
 	COALESCE(i.facts, ''), COALESCE(i.plugin_data, ''),
-	CASE WHEN i.kind = 'album' THEN (SELECT ar.title FROM items ar WHERE ar.id = i.parent_id)
-		WHEN i.kind = 'track' THEN (SELECT ar.title FROM items al JOIN items ar ON ar.id = al.parent_id WHERE al.id = i.parent_id) END,
-	CASE WHEN i.kind = 'album' THEN i.parent_id
-		WHEN i.kind = 'track' THEN (SELECT al.parent_id FROM items al WHERE al.id = i.parent_id) END,
-	CASE WHEN i.kind = 'track' THEN (SELECT al.title FROM items al WHERE al.id = i.parent_id) END`
+	CASE WHEN i.kind IN ('album', 'book') THEN (SELECT ar.title FROM items ar WHERE ar.id = i.parent_id)
+		WHEN i.kind IN ('track', 'part') THEN (SELECT ar.title FROM items al JOIN items ar ON ar.id = al.parent_id WHERE al.id = i.parent_id) END,
+	CASE WHEN i.kind IN ('album', 'book') THEN i.parent_id
+		WHEN i.kind IN ('track', 'part') THEN (SELECT al.parent_id FROM items al WHERE al.id = i.parent_id) END,
+	CASE WHEN i.kind IN ('track', 'part') THEN (SELECT al.title FROM items al WHERE al.id = i.parent_id) END,
+	COALESCE(i.narrators, ''), COALESCE(i.series, ''), i.series_index`
 
 const itemFrom = ` FROM (SELECT CAST(? AS BIGINT) AS id) me CROSS JOIN items i LEFT JOIN progress p ON p.item_id = i.id AND p.user_id = me.id`
 
@@ -119,12 +134,14 @@ func scanItem(r scanner) (Item, error) {
 	var tags, genres, facts, data string
 	var artist, album sql.NullString
 	var artistID sql.NullInt64
+	var narrators string
+	var seriesIdx sql.NullFloat64
 	err := r.Scan(&it.ID, &it.LibraryID, &parent, &it.Kind, &it.Title, &year, &idx, &disc,
 		&dur, &it.Container, &it.VideoCodec, &it.AudioCodec, &w, &h, &it.AddedAt, &it.Path, &it.Size, &it.Mtime,
 		&it.ChildCount, &it.PositionMs, &it.Played,
 		&it.Overview, &rating, &it.Poster, &it.Backdrop, &tmdb, &it.MetaAt,
 		&showTitle, &seasonIdx, &it.OnWatchList, &tags, &genres, &showID, &facts, &data,
-		&artist, &artistID, &album)
+		&artist, &artistID, &album, &narrators, &it.Series, &seriesIdx)
 	if err != nil {
 		return it, err
 	}
@@ -143,9 +160,20 @@ func scanItem(r scanner) (Item, error) {
 		it.TMDBID = &tmdb.Int64
 	}
 	it.ShowTitle, it.SeasonIndex, it.showID = showTitle.String, intPtr(seasonIdx), showID.Int64
-	it.Artist, it.Album = artist.String, album.String
-	if artistID.Valid {
-		it.ArtistID = &artistID.Int64
+	if it.Kind == "book" || it.Kind == "part" {
+		it.Author, it.Book = artist.String, album.String
+		if artistID.Valid {
+			it.AuthorID = &artistID.Int64
+		}
+	} else {
+		it.Artist, it.Album = artist.String, album.String
+		if artistID.Valid {
+			it.ArtistID = &artistID.Int64
+		}
+	}
+	it.Narrators = decodeGenres(narrators)
+	if seriesIdx.Valid {
+		it.SeriesIndex = &seriesIdx.Float64
 	}
 	it.Genres = decodeGenres(genres)
 	it.Playable = it.Path != ""
@@ -232,9 +260,12 @@ func (s *Store) TopLevel(ctx context.Context, userID, libraryID int64) ([]Item, 
 	return items, s.fillContainerTags(ctx, items)
 }
 
-// Children lists seasons of a show, episodes of a season, albums of an artist or tracks of an album.
+// Children lists seasons of a show, episodes of a season, albums of an
+// artist, tracks of an album, books of an author or parts of a book.
 func (s *Store) Children(ctx context.Context, userID, parentID int64) ([]Item, error) {
-	items, err := s.queryItems(ctx, "i.parent_id = ?", "COALESCE(i.disc_number, 0), COALESCE(i.index_number, 0), i.sort_title", userID, parentID)
+	// An author's books go series by series, each in reading order.
+	items, err := s.queryItems(ctx, "i.parent_id = ?",
+		"COALESCE(i.disc_number, 0), COALESCE(i.index_number, 0), COALESCE(i.series, ''), COALESCE(i.series_index, 0), i.sort_title", userID, parentID)
 	if err != nil {
 		return nil, err
 	}
@@ -276,18 +307,18 @@ func (s *Store) Search(ctx context.Context, userID int64, q string, limit int) (
 	}
 	if s.db.dialect == postgres {
 		return s.queryItems(ctx,
-			"(to_tsvector('simple', i.title) @@ to_tsquery('simple', ?) OR "+translated+") AND i.kind <> 'season'",
+			"(to_tsvector('simple', i.title) @@ to_tsquery('simple', ?) OR "+translated+") AND i.kind NOT IN ('season', 'part')",
 			"i.sort_title LIMIT ?", append(append([]any{userID, strings.Join(words, ":* & ") + ":*"}, args...), limit)...)
 	}
 	return s.queryItems(ctx,
-		"(i.id IN (SELECT rowid FROM items_fts WHERE items_fts MATCH ?) OR "+translated+") AND i.kind <> 'season'",
+		"(i.id IN (SELECT rowid FROM items_fts WHERE items_fts MATCH ?) OR "+translated+") AND i.kind NOT IN ('season', 'part')",
 		"i.sort_title LIMIT ?", append(append([]any{userID, `"` + strings.Join(words, `"* "`) + `"*`}, args...), limit)...)
 }
 
-// RecentlyAdded lists the newest movies, albums and shows. A show counts as
+// RecentlyAdded lists the newest movies, albums, books and shows. A show counts as
 // new when an episode is, so a fresh season doesn't fill the row with episodes.
 func (s *Store) RecentlyAdded(ctx context.Context, userID int64, limit int) ([]Item, error) {
-	return s.queryItems(ctx, "i.kind IN ('movie', 'show', 'album')", `
+	return s.queryItems(ctx, "i.kind IN ('movie', 'show', 'album', 'book')", `
 		CASE WHEN i.kind = 'show' THEN (
 			SELECT MAX(e.added_at) FROM items se JOIN items e ON e.parent_id = se.id WHERE se.parent_id = i.id
 		) ELSE i.added_at END DESC, i.id DESC LIMIT ?`, userID, limit)
@@ -361,8 +392,8 @@ func (s *Store) UpsertFile(ctx context.Context, it Item) (int64, error) {
 	err := s.db.QueryRowContext(ctx, `
 		INSERT INTO items (library_id, parent_id, kind, title, sort_title, year, index_number, disc_number,
 			path, size, mtime, duration_ms, container, video_codec, audio_codec, width, height, poster, backdrop, subtitle_streams,
-			facts, plugin_data, added_at)
-		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			facts, plugin_data, chapters, added_at)
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 		ON CONFLICT (path) DO UPDATE SET
 			library_id = excluded.library_id, parent_id = excluded.parent_id, kind = excluded.kind,
 			title = excluded.title, sort_title = excluded.sort_title, year = excluded.year,
@@ -370,14 +401,14 @@ func (s *Store) UpsertFile(ctx context.Context, it Item) (int64, error) {
 			size = excluded.size, mtime = excluded.mtime, duration_ms = excluded.duration_ms,
 			container = excluded.container, video_codec = excluded.video_codec, audio_codec = excluded.audio_codec,
 			width = excluded.width, height = excluded.height, subtitle_streams = excluded.subtitle_streams,
-			facts = excluded.facts, plugin_data = excluded.plugin_data,
+			facts = excluded.facts, plugin_data = excluded.plugin_data, chapters = excluded.chapters,
 			media_info = NULL, media_tags = NULL, -- the file changed; analyzed again soon
 			poster = COALESCE(excluded.poster, items.poster), backdrop = COALESCE(excluded.backdrop, items.backdrop)
 		RETURNING id`,
 		it.LibraryID, it.ParentID, it.Kind, it.Title, SortTitle(it.Title), it.Year, it.IndexNumber, it.DiscNumber,
 		it.Path, it.Size, it.Mtime, it.DurationMs, nullStr(it.Container), nullStr(it.VideoCodec), nullStr(it.AudioCodec),
 		it.Width, it.Height, nullStr(it.Poster), nullStr(it.Backdrop), nullStr(it.SubtitleStreams),
-		nullJSON(it.Facts), nullStr(string(it.PluginData)), now()).Scan(&id)
+		nullJSON(it.Facts), nullStr(string(it.PluginData)), nullJSON(it.Chapters), now()).Scan(&id)
 	return id, err
 }
 

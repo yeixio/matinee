@@ -153,7 +153,8 @@
     "seasons_other": "{{count}} 季",
     "albums_other": "{{count}} 張專輯",
     "tracks_other": "{{count}} 首曲目",
-    "titles_other": "{{count}} 部作品"
+    "titles_other": "{{count}} 部作品",
+    "books_other": "{{count}} 本書"
   },
   "awards": {
     "academy": {
@@ -350,5 +351,38 @@
     "minimize": "最小化",
     "readMore": "閱讀更多",
     "less": "收合"
+  },
+  "books": {
+    "overview": "總覽",
+    "books": "書籍",
+    "authors": "作者",
+    "series": "系列",
+    "narrators": "朗讀者",
+    "audiobook": "有聲書",
+    "author": "作者",
+    "continueListening": "繼續收聽",
+    "nowListening": "正在收聽",
+    "openPlayer": "開啟播放器",
+    "chapters": "章節",
+    "previousChapter": "上一章",
+    "nextChapter": "下一章",
+    "backSeconds": "倒退 {{seconds}} 秒",
+    "aheadSeconds": "快轉 {{seconds}} 秒",
+    "speed": "速度",
+    "left": "剩餘 {{time}}",
+    "leftInBook": "全書剩餘 {{time}}",
+    "resume": "繼續",
+    "markFinished": "標示為已聽完",
+    "markUnfinished": "標示為未聽完",
+    "finished": "已聽完",
+    "bookOf": "{{series}} 第 {{n}} 冊",
+    "bookN": "第 {{n}} 冊",
+    "inSeries": "{{series}} 的更多書籍",
+    "narratedBy": "朗讀：{{names}}",
+    "narratedByLabel": "朗讀：",
+    "noSeries": "還沒有系列",
+    "noNarrators": "還沒有朗讀者",
+    "fromTags": "系列和朗讀者來自書籍的標籤，或「作者/系列/書籍」這樣的資料夾。",
+    "length": "長度"
   }
 }

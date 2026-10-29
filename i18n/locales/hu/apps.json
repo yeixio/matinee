@@ -328,7 +328,8 @@
     "endOfItem": "Amikor ez véget ér",
     "left": "Még {{time}}",
     "atEnd": "A végén megáll",
-    "paused": "Az elalvási időzítő szüneteltette"
+    "paused": "Az elalvási időzítő szüneteltette",
+    "endOfChapter": "A fejezet végén"
   },
   "close": "Bezárás",
   "trailer": {
@@ -359,7 +360,9 @@
     "season": "Évad",
     "album": "Album",
     "artist": "Előadó",
-    "track": "Szám"
+    "track": "Szám",
+    "book": "Hangoskönyv",
+    "author": "Szerző"
   },
   "profiles": {
     "whoIsWatching": "Ki néz?",

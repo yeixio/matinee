@@ -189,7 +189,11 @@
     "titles_few": "{{count}} фільми чи серіали",
     "titles_many": "{{count}} фільмів і серіалів",
     "titles_one": "{{count}} фільм чи серіал",
-    "titles_other": "{{count}} фільмів і серіалів"
+    "titles_other": "{{count}} фільмів і серіалів",
+    "books_one": "{{count}} книжка",
+    "books_few": "{{count}} книжки",
+    "books_many": "{{count}} книжок",
+    "books_other": "{{count}} книжки"
   },
   "awards": {
     "academy": {
@@ -431,5 +435,38 @@
     "minimize": "Згорнути",
     "readMore": "Читати далі",
     "less": "Згорнути текст"
+  },
+  "books": {
+    "overview": "Огляд",
+    "books": "Книжки",
+    "authors": "Автори",
+    "series": "Серії",
+    "narrators": "Читці",
+    "audiobook": "Аудіокнижка",
+    "author": "Автор",
+    "continueListening": "Слухати далі",
+    "nowListening": "Зараз звучить",
+    "openPlayer": "Відкрити плеєр",
+    "chapters": "Розділи",
+    "previousChapter": "Попередній розділ",
+    "nextChapter": "Наступний розділ",
+    "backSeconds": "Назад на {{seconds}} секунд",
+    "aheadSeconds": "Уперед на {{seconds}} секунд",
+    "speed": "Швидкість",
+    "left": "Залишилося {{time}}",
+    "leftInBook": "До кінця книжки {{time}}",
+    "resume": "Продовжити",
+    "markFinished": "Позначити як прослухану",
+    "markUnfinished": "Позначити як непрослухану",
+    "finished": "Прослухано",
+    "bookOf": "Книжка {{n}} серії «{{series}}»",
+    "bookN": "Книжка {{n}}",
+    "inSeries": "Ще із серії «{{series}}»",
+    "narratedBy": "Читає {{names}}",
+    "narratedByLabel": "Читає",
+    "noSeries": "Серій поки немає",
+    "noNarrators": "Читців поки немає",
+    "fromTags": "Серії та читці беруться з тегів книжок або з тек на кшталт Автор/Серія/Книжка.",
+    "length": "Тривалість"
   }
 }

@@ -323,7 +323,8 @@
     "endOfItem": "재생이 끝날 때",
     "left": "{{time}} 남음",
     "atEnd": "끝나면 정지",
-    "paused": "취침 타이머로 일시정지됨"
+    "paused": "취침 타이머로 일시정지됨",
+    "endOfChapter": "이 챕터가 끝날 때"
   },
   "close": "닫기",
   "trailer": {
@@ -353,7 +354,9 @@
     "season": "시즌",
     "album": "앨범",
     "artist": "아티스트",
-    "track": "트랙"
+    "track": "트랙",
+    "book": "오디오북",
+    "author": "저자"
   },
   "profiles": {
     "whoIsWatching": "누가 보나요?",

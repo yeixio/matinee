@@ -155,7 +155,8 @@
     "endOfItem": "Khi nội dung này kết thúc",
     "left": "Còn {{time}}",
     "atEnd": "Dừng khi kết thúc",
-    "paused": "Đã tạm dừng bởi hẹn giờ ngủ"
+    "paused": "Đã tạm dừng bởi hẹn giờ ngủ",
+    "endOfChapter": "Hết chương này"
   },
   "goBack": "Quay lại",
   "back": "Quay lại",
@@ -587,7 +588,8 @@
       "kind": {
         "movies": "Phim",
         "tv": "Chương trình TV",
-        "music": "Nhạc"
+        "music": "Nhạc",
+        "audiobooks": "Sách nói"
       },
       "type": "Loại",
       "folders": "Thư mục",

@@ -155,7 +155,8 @@
     "endOfItem": "Bu bittiğinde",
     "left": "{{time}} kaldı",
     "atEnd": "Sonunda durur",
-    "paused": "Uyku zamanlayıcısı duraklattı"
+    "paused": "Uyku zamanlayıcısı duraklattı",
+    "endOfChapter": "Bu bölümün sonu"
   },
   "goBack": "Geri dön",
   "back": "Geri",
@@ -591,7 +592,8 @@
       "kind": {
         "movies": "Filmler",
         "tv": "TV dizileri",
-        "music": "Müzik"
+        "music": "Müzik",
+        "audiobooks": "Sesli kitaplar"
       },
       "type": "Tür",
       "folders": "Klasörler",

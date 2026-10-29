@@ -19,6 +19,7 @@
   "bad_library": "مكتبة غير صالحة",
   "bad_request": "طلب غير صالح",
   "billing_couldnt_be_reached_try_again_in_a_minute": "تعذّر الوصول إلى الفوترة؛ حاول مرة أخرى بعد دقيقة",
+  "book_not_found": "الكتاب غير موجود",
   "box_set_not_found": "لم يُعثر على السلسلة",
   "cant_read_that_folder": "تتعذّر قراءة هذا المجلد",
   "collection_not_found": "لم يُعثر على المجموعة",

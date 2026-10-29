@@ -327,6 +327,14 @@ export type Item = {
   artist?: string
   artistId?: number
   album?: string
+  // Books and their parts: the author; parts: the book too (its id is
+  // parentId). Books name their narrators and place in a series.
+  author?: string
+  authorId?: number
+  book?: string
+  narrators?: string[]
+  series?: string
+  seriesIndex?: number
   // True until the server has looked the item up online.
   pending?: boolean
   onWatchList?: boolean
@@ -340,6 +348,14 @@ export type Item = {
   facts?: { label: string; value: string }[]
   pluginData?: Record<string, unknown>
 }
+
+// An audiobook with its parts (files) and chapters, all on the book's own
+// clock, which runs across the parts (GET /items/{id}/book).
+export type BookPart = Item & { startMs: number; mimeType: string }
+export type BookChapter = { title: string; startMs: number; endMs: number; partId: number }
+export type Book = Item & { parts: BookPart[]; chapters: BookChapter[] }
+// A series or a narrator, with a few of its books for artwork.
+export type BookGroup = { name: string; books: number; itemIds: number[] }
 
 // A plugin as Settings shows it (internal/plugin, docs/guide/plugins).
 export type Plugin = {
@@ -764,6 +780,9 @@ export const api = {
   children: (id: number) => request<Item[]>('GET', `/api/v1/items/${id}/children`),
   // Every track of an artist or album, in playing order.
   tracks: (id: number) => request<Item[]>('GET', `/api/v1/items/${id}/tracks`),
+  book: (id: number) => request<Book>('GET', `/api/v1/items/${id}/book`),
+  series: (library: number) => request<BookGroup[]>('GET', `/api/v1/libraries/${library}/series`),
+  narrators: (library: number) => request<BookGroup[]>('GET', `/api/v1/libraries/${library}/narrators`),
   related: (id: number) => request<Related>('GET', `/api/v1/items/${id}/related`),
   next: (id: number) => request<NextUp>('GET', `/api/v1/items/${id}/next`),
   person: (id: number) => request<Person>('GET', `/api/v1/people/${id}`),

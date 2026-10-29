@@ -7,7 +7,8 @@ import i18n from './i18n'
 
 // started (anything played) only lists what was listened to; Filters don't offer it.
 export type Watched = 'unwatched' | 'inProgress' | 'watched' | 'notStarted' | 'started'
-export type SortField = 'title' | 'added' | 'released' | 'year' | 'rating' | 'runtime' | 'lastPlayed'
+// series is a book's place in its series.
+export type SortField = 'title' | 'added' | 'released' | 'year' | 'rating' | 'runtime' | 'lastPlayed' | 'series'
 
 export type ItemFilter = {
   library?: number[]
@@ -38,6 +39,8 @@ export type ItemFilter = {
   certification?: string[]
   collection?: number[]
   watchList?: boolean
+  series?: string[]
+  narrator?: string[]
   sort?: SortField
   order?: 'asc' | 'desc'
   limit?: number
@@ -74,6 +77,8 @@ const fields: Record<keyof ItemFilter, FieldType> = {
   certification: 'strings',
   collection: 'numbers',
   watchList: 'bool',
+  series: 'strings',
+  narrator: 'strings',
   sort: 'string',
   order: 'string',
   limit: 'number',

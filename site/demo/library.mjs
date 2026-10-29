@@ -9,7 +9,7 @@ import { existsSync, mkdirSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { chromium } from 'playwright'
 import { backdrop, cover, portrait, poster } from './art.mjs'
-import { albums, discover, movies, people, shows } from './catalog.mjs'
+import { albums, audiobooks, discover, movies, people, shows } from './catalog.mjs'
 
 const ff = (...args) => execFileSync('ffmpeg', ['-v', 'error', '-y', ...args])
 
@@ -97,6 +97,7 @@ export async function makeLibrary(root) {
     art(`cover-${i}.jpg`, cover(a.scene, a.album, a.artist, a.hue ?? 0), 600, 600)
     art(`artist-${i}.jpg`, portrait(40 + i * 3), 632, 632)
   })
+  audiobooks.forEach((b, i) => art(`book-${i}.jpg`, cover(b.scene, b.title, b.author, b.hue ?? 0), 600, 600))
   await render(jobs)
 
   for (const m of movies) {
@@ -131,7 +132,56 @@ export async function makeLibrary(root) {
         '-metadata', `title=${t}`, '-metadata', `track=${n + 1}`, '-metadata', `date=${a.year}`, file)
     })
   })
+  audiobooks.forEach((b, i) => book(path.join(media, 'Audiobooks'), b, path.join(images, `book-${i}.jpg`), path.join(root, 'silence')))
   return { media, images }
+}
+
+/**
+ * An audiobook: one .m4b with its chapters marked inside, or a folder with a
+ * file per chapter. Chapters run 20 to 50 minutes of silence, copied, so
+ * hours of book take seconds to make.
+ */
+function book(root, b, coverFile, silenceDir) {
+  const name = b.series ? `Book ${b.index} - ${b.title}` : b.title
+  const dir = path.join(root, b.author, ...(b.series ? [b.series] : []), name)
+  mkdirSync(dir, { recursive: true })
+  execFileSync('cp', [coverFile, path.join(dir, 'cover.jpg')])
+  writeFileSync(path.join(dir, 'desc.txt'), b.overview + '\n')
+  const minutes = b.chapters.map((_, i) => (i === 0 || i === b.chapters.length - 1 ? 2 : 20 + ((i * 13) % 31)))
+  const silence = silenceFile(silenceDir)
+  const tags = ['-metadata', `artist=${b.author}`, '-metadata', `album_artist=${b.author}`, '-metadata', `album=${b.title}`,
+    '-metadata', `composer=${b.narrator}`, '-metadata', `date=${b.year}`, '-metadata', 'genre=Audiobook']
+  if (b.whole) {
+    const file = path.join(dir, `${b.title}.m4b`)
+    if (existsSync(file)) return
+    let meta = ';FFMETADATA1\n'
+    let at = 0
+    b.chapters.forEach((c, i) => {
+      meta += `[CHAPTER]\nTIMEBASE=1/1000\nSTART=${at}\nEND=${at + minutes[i] * 60000}\ntitle=${c}\n`
+      at += minutes[i] * 60000
+    })
+    const metaFile = path.join(silenceDir, `chapters-${b.title}.txt`)
+    writeFileSync(metaFile, meta)
+    ff('-stream_loop', '-1', '-i', silence, '-i', metaFile, '-t', String(at / 1000), '-map', '0:a', '-map_metadata', '1', '-map_chapters', '1',
+      ...tags, '-metadata', `title=${b.title}`, '-c:a', 'copy', '-f', 'mp4', file)
+    return
+  }
+  b.chapters.forEach((c, i) => {
+    const file = path.join(dir, `${String(i + 1).padStart(2, '0')} - ${c}.m4a`)
+    if (existsSync(file)) return
+    ff('-stream_loop', '-1', '-i', silence, '-t', String(minutes[i] * 60), '-map', '0:a', ...tags,
+      '-metadata', `title=${c}`, '-metadata', `track=${i + 1}/${b.chapters.length}`, '-c:a', 'copy', file)
+  })
+}
+
+/** Ten minutes of quiet stereo AAC, for audiobooks. */
+function silenceFile(dir) {
+  const file = path.join(dir, 'silence-book.m4a')
+  if (!existsSync(file)) {
+    mkdirSync(dir, { recursive: true })
+    ff('-f', 'lavfi', '-i', 'anullsrc=r=22050:cl=mono', '-t', '600', '-c:a', 'aac', '-b:a', '16k', file)
+  }
+  return file
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {

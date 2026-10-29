@@ -155,7 +155,8 @@
     "endOfItem": "Quando finisce",
     "left": "Mancano {{time}}",
     "atEnd": "Si ferma alla fine",
-    "paused": "In pausa per il timer"
+    "paused": "In pausa per il timer",
+    "endOfChapter": "Fine di questo capitolo"
   },
   "goBack": "Torna indietro",
   "back": "Indietro",
@@ -595,7 +596,8 @@
       "kind": {
         "movies": "Film",
         "tv": "Serie TV",
-        "music": "Musica"
+        "music": "Musica",
+        "audiobooks": "Audiolibri"
       },
       "type": "Tipo",
       "folders": "Cartelle",

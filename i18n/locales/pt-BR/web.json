@@ -155,7 +155,8 @@
     "endOfItem": "Quando isto acabar",
     "left": "Faltam {{time}}",
     "atEnd": "Para no final",
-    "paused": "Pausado pelo timer"
+    "paused": "Pausado pelo timer",
+    "endOfChapter": "Fim deste capítulo"
   },
   "goBack": "Voltar",
   "back": "Voltar",
@@ -595,7 +596,8 @@
       "kind": {
         "movies": "Filmes",
         "tv": "Séries de TV",
-        "music": "Música"
+        "music": "Música",
+        "audiobooks": "Audiolivros"
       },
       "type": "Tipo",
       "folders": "Pastas",

@@ -83,7 +83,7 @@ export function ArtistPage({ item, albums }: { item: ItemDetail; albums?: Item[]
   )
 }
 
-function Hero({ item, label, round, children }: { item: ItemDetail; label: string; round: boolean; children: React.ReactNode }) {
+export function Hero({ item, label, round, children }: { item: ItemDetail; label: string; round: boolean; children: React.ReactNode }) {
   return (
     <section className="relative -mx-4 -mt-4 md:-mx-8 md:-mt-8">
       {/* The cover, blurred, colors the top of the page. */}
@@ -140,7 +140,7 @@ function Actions({ item, tracks }: { item: ItemDetail; tracks?: Item[] }) {
 }
 
 // A biography, cut short until opened.
-function Overview({ text }: { text: string }) {
+export function Overview({ text }: { text: string }) {
   const { t } = useTranslation()
   const [open, setOpen] = useState(false)
   return (

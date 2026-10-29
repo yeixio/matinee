@@ -26,7 +26,7 @@ Then [invite your household](/docs/household/people/), [set up profiles](/docs/h
 
 ## Finding your way around this guide
 
-- **Watching** covers everything people do day to day: Home, browsing and filters, title pages, the player, the watch list, collections and music.
+- **Watching** covers everything people do day to day: Home, browsing and filters, title pages, the player, the watch list, collections, music and audiobooks.
 - **Phone and TV apps** covers the Matinee apps, signing in a device with a code, and offline downloads.
 - **Your household** covers accounts, profiles and kids mode, and themes.
 - **Running the server** is for whoever looks after Matinee: the home network, remote access, hardware transcoding, how new files are found, media analysis, Radarr and Sonarr, Kubernetes and every setting.

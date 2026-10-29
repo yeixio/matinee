@@ -177,7 +177,10 @@
     "tracks_other": "{{count}} de piese",
     "titles_few": "{{count}} titluri",
     "titles_one": "{{count}} titlu",
-    "titles_other": "{{count}} de titluri"
+    "titles_other": "{{count}} de titluri",
+    "books_one": "{{count}} carte",
+    "books_few": "{{count}} cărți",
+    "books_other": "{{count}} de cărți"
   },
   "awards": {
     "academy": {
@@ -404,5 +407,38 @@
     "minimize": "Minimizează",
     "readMore": "Citește mai mult",
     "less": "Arată mai puțin"
+  },
+  "books": {
+    "overview": "Prezentare",
+    "books": "Cărți",
+    "authors": "Autori",
+    "series": "Serii",
+    "narrators": "Naratori",
+    "audiobook": "Audiobook",
+    "author": "Autor",
+    "continueListening": "Continuă ascultarea",
+    "nowListening": "Asculți acum",
+    "openPlayer": "Deschide playerul",
+    "chapters": "Capitole",
+    "previousChapter": "Capitolul anterior",
+    "nextChapter": "Capitolul următor",
+    "backSeconds": "Înapoi {{seconds}} secunde",
+    "aheadSeconds": "Înainte {{seconds}} secunde",
+    "speed": "Viteză",
+    "left": "Au mai rămas {{time}}",
+    "leftInBook": "Au mai rămas {{time}} din carte",
+    "resume": "Reia",
+    "markFinished": "Marchează ca terminată",
+    "markUnfinished": "Marchează ca neterminată",
+    "finished": "Terminată",
+    "bookOf": "Volumul {{n}} din {{series}}",
+    "bookN": "Volumul {{n}}",
+    "inSeries": "Mai multe din {{series}}",
+    "narratedBy": "Narat de {{names}}",
+    "narratedByLabel": "Narat de",
+    "noSeries": "Încă nu există serii",
+    "noNarrators": "Încă nu există naratori",
+    "fromTags": "Seriile și naratorii vin din etichetele cărților sau din dosare precum Autor/Serie/Carte.",
+    "length": "Durată"
   }
 }

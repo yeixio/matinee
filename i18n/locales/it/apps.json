@@ -333,7 +333,8 @@
     "endOfItem": "Quando finisce",
     "left": "Mancano {{time}}",
     "atEnd": "Si ferma alla fine",
-    "paused": "In pausa per il timer"
+    "paused": "In pausa per il timer",
+    "endOfChapter": "Fine di questo capitolo"
   },
   "close": "Chiudi",
   "trailer": {
@@ -365,7 +366,9 @@
     "season": "Stagione",
     "album": "Album",
     "artist": "Artista",
-    "track": "Brano"
+    "track": "Brano",
+    "book": "Audiolibro",
+    "author": "Autore"
   },
   "profiles": {
     "whoIsWatching": "Chi sta guardando?",

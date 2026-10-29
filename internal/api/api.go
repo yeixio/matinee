@@ -192,6 +192,8 @@ func (s *Server) routes() []route {
 		{"GET /libraries/{id}/items", reader, s.libraryItems},
 		{"GET /libraries/{id}/filters", reader, s.libraryFilters},
 		{"GET /libraries/{id}/people", reader, s.libraryPeople},
+		{"GET /libraries/{id}/series", reader, s.librarySeries},
+		{"GET /libraries/{id}/narrators", reader, s.libraryNarrators},
 		{"GET /items", reader, s.filterItems},
 		{"GET /fs", adminOnly, s.browseFS},
 		{"GET /analysis", adminOnly, s.getAnalysis},
@@ -204,6 +206,7 @@ func (s *Server) routes() []route {
 		{"GET /items/{id}", reader, s.getItem},
 		{"GET /items/{id}/children", reader, s.itemChildren},
 		{"GET /items/{id}/tracks", reader, s.itemTracks},
+		{"GET /items/{id}/book", reader, s.getBook},
 		{"GET /items/{id}/related", reader, s.itemRelated},
 		{"GET /items/{id}/next", reader, s.itemNext},
 		{"GET /people/{id}", reader, s.getPerson},
@@ -860,6 +863,11 @@ func (s *Server) home(w http.ResponseWriter, r *http.Request) {
 		s.serverError(w, err)
 		return
 	}
+	listening, err := s.Store.ContinueListening(ctx, uid, continueItems+1)
+	if err != nil {
+		s.serverError(w, err)
+		return
+	}
 	more := map[string]bool{}
 	cont, more[rowContinue] = cut(cont, continueItems)
 	recent, more[rowRecent] = cut(recent, homeRowItems)
@@ -880,9 +888,14 @@ func (s *Server) home(w http.ResponseWriter, r *http.Request) {
 		s.serverError(w, err)
 		return
 	}
-	// A holiday coming up comes first, then pinned collections, then the
-	// day's genres.
+	// Books someone is listening to come first, then a holiday coming up,
+	// then pinned collections, then the day's genres.
 	rows = append(append(holidayRows, pinned...), rows...)
+	if len(listening) > 0 {
+		row := HomeRow{ID: rowListening, Title: "Continue listening"}
+		row.Items, row.More = cut(listening, continueItems)
+		rows = append([]HomeRow{row}, rows...)
+	}
 	writeJSON(w, http.StatusOK, map[string]any{
 		"continueWatching": cont, "watchList": watchList, "recentlyAdded": recent,
 		"newReleases": releases, "rows": rows,
@@ -1012,6 +1025,10 @@ func (s *Server) setProgress(w http.ResponseWriter, r *http.Request) {
 		writeError(w, http.StatusBadRequest, "invalid request")
 		return
 	}
+	if it.Kind == "book" {
+		s.setBookProgress(w, r, it, req.PositionMs, req.Played)
+		return
+	}
 	// Past 92% counts as watched, the way credits usually start.
 	// So does reaching the closing credits, when a chapter says where they are.
 	if it.DurationMs != nil && *it.DurationMs > 0 && req.PositionMs > *it.DurationMs*92/100 {
@@ -1046,8 +1063,8 @@ func (s *Server) hideFromContinueWatching(w http.ResponseWriter, r *http.Request
 	w.WriteHeader(http.StatusNoContent)
 }
 
-// itemImage serves a poster or backdrop. Seasons and tracks without their
-// own poster borrow their show's or album's.
+// itemImage serves a poster or backdrop. Seasons, tracks and book parts
+// without their own poster borrow their show's, album's or book's.
 func (s *Server) itemImage(w http.ResponseWriter, r *http.Request) {
 	it, ok := s.loadItem(w, r)
 	if !ok {
@@ -1074,7 +1091,7 @@ func (s *Server) itemImage(w http.ResponseWriter, r *http.Request) {
 			s.Art.Serve(w, r, src)
 			return
 		}
-		borrow := kind == "poster" && (it.Kind == "season" || it.Kind == "track") ||
+		borrow := kind == "poster" && (it.Kind == "season" || it.Kind == "track" || it.Kind == "part") ||
 			kind == "backdrop" && (it.Kind == "season" || it.Kind == "episode")
 		if !borrow || it.ParentID == nil {
 			break

@@ -155,7 +155,8 @@
     "endOfItem": "播放結束時",
     "left": "剩餘 {{time}}",
     "atEnd": "播放結束時停止",
-    "paused": "已被睡眠定時暫停"
+    "paused": "已被睡眠定時暫停",
+    "endOfChapter": "本章結束時"
   },
   "goBack": "返回",
   "back": "返回",
@@ -587,7 +588,8 @@
       "kind": {
         "movies": "電影",
         "tv": "電視劇",
-        "music": "音樂"
+        "music": "音樂",
+        "audiobooks": "有聲書"
       },
       "type": "類型",
       "folders": "資料夾",

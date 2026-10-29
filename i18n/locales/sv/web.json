@@ -155,7 +155,8 @@
     "endOfItem": "När det här tar slut",
     "left": "{{time}} kvar",
     "atEnd": "Stannar vid slutet",
-    "paused": "Pausad av insomningstimern"
+    "paused": "Pausad av insomningstimern",
+    "endOfChapter": "Slutet av det här kapitlet"
   },
   "goBack": "Gå tillbaka",
   "back": "Tillbaka",
@@ -591,7 +592,8 @@
       "kind": {
         "movies": "Filmer",
         "tv": "TV-serier",
-        "music": "Musik"
+        "music": "Musik",
+        "audiobooks": "Ljudböcker"
       },
       "type": "Typ",
       "folders": "Mappar",

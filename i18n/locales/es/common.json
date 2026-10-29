@@ -177,7 +177,10 @@
     "tracks_other": "{{count}} pistas",
     "titles_one": "{{count}} título",
     "titles_many": "{{count}} títulos",
-    "titles_other": "{{count}} títulos"
+    "titles_other": "{{count}} títulos",
+    "books_one": "{{count}} libro",
+    "books_many": "{{count}} de libros",
+    "books_other": "{{count}} libros"
   },
   "awards": {
     "academy": {
@@ -404,5 +407,38 @@
     "minimize": "Minimizar",
     "readMore": "Leer más",
     "less": "Mostrar menos"
+  },
+  "books": {
+    "overview": "Resumen",
+    "books": "Libros",
+    "authors": "Autores",
+    "series": "Series",
+    "narrators": "Narradores",
+    "audiobook": "Audiolibro",
+    "author": "Autor",
+    "continueListening": "Seguir escuchando",
+    "nowListening": "Escuchando ahora",
+    "openPlayer": "Abrir el reproductor",
+    "chapters": "Capítulos",
+    "previousChapter": "Capítulo anterior",
+    "nextChapter": "Capítulo siguiente",
+    "backSeconds": "Atrás {{seconds}} segundos",
+    "aheadSeconds": "Adelante {{seconds}} segundos",
+    "speed": "Velocidad",
+    "left": "Quedan {{time}}",
+    "leftInBook": "Quedan {{time}} del libro",
+    "resume": "Reanudar",
+    "markFinished": "Marcar como terminado",
+    "markUnfinished": "Marcar como no terminado",
+    "finished": "Terminado",
+    "bookOf": "Libro {{n}} de {{series}}",
+    "bookN": "Libro {{n}}",
+    "inSeries": "Más de {{series}}",
+    "narratedBy": "Narrado por {{names}}",
+    "narratedByLabel": "Narrado por",
+    "noSeries": "Aún no hay series",
+    "noNarrators": "Aún no hay narradores",
+    "fromTags": "Las series y los narradores salen de las etiquetas de los libros o de carpetas como Autor/Serie/Libro.",
+    "length": "Duración"
   }
 }

@@ -323,7 +323,8 @@
     "endOfItem": "再生が終わったら",
     "left": "残り {{time}}",
     "atEnd": "終わりで停止",
-    "paused": "スリープタイマーで一時停止しました"
+    "paused": "スリープタイマーで一時停止しました",
+    "endOfChapter": "このチャプターの終わり"
   },
   "close": "閉じる",
   "trailer": {
@@ -353,7 +354,9 @@
     "season": "シーズン",
     "album": "アルバム",
     "artist": "アーティスト",
-    "track": "曲"
+    "track": "曲",
+    "book": "オーディオブック",
+    "author": "著者"
   },
   "profiles": {
     "whoIsWatching": "誰が観ますか？",

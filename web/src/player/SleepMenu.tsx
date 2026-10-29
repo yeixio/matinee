@@ -5,7 +5,7 @@ import { clock } from '../format'
 import { SLEEP_MINUTES, sleepTimer, type Sleep } from './sleep'
 
 // The moon button in the player's controls and its menu: Off, a few
-// lengths of time, or the end of what's playing. While a timer runs the
+// lengths of time, or the end of what's playing (for a book, the chapter). While a timer runs the
 // button shows the time left, or that it stops at the end.
 export function SleepMenu({
   sleep,
@@ -54,7 +54,8 @@ export function SleepMenu({
   )
   const timed = !!sleep && sleep !== 'end'
   const status = timed && left !== undefined ? tr('sleep.left', { time: clock(left) }) : sleep === 'end' ? tr('sleep.atEnd') : undefined
-  const endLabel = kind === 'episode' ? tr('sleep.endOfEpisode') : kind === 'movie' ? tr('sleep.endOfMovie') : tr('sleep.endOfItem')
+  const endLabel =
+    kind === 'episode' ? tr('sleep.endOfEpisode') : kind === 'movie' ? tr('sleep.endOfMovie') : kind === 'chapter' ? tr('sleep.endOfChapter') : tr('sleep.endOfItem')
 
   return (
     <div ref={ref} className="relative">

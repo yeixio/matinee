@@ -16,7 +16,7 @@ import (
 // the row's own page. Rows are:
 //
 //	continueWatching, recentlyAdded, newReleases, watchList
-//	genre:{genre}, holiday:{id}, collection:{id}   (Home's other rows)
+//	continueListening, genre:{genre}, holiday:{id}, collection:{id}   (Home's other rows)
 //	related:{item id}                              (More like this)
 
 // Home's own rows, each a list in the /home answer.
@@ -25,6 +25,9 @@ const (
 	rowRecent    = "recentlyAdded"
 	rowReleases  = "newReleases"
 	rowWatchList = "watchList"
+	// Books someone is listening to, a row among Home's others, so apps
+	// that don't know it still show it.
+	rowListening = "continueListening"
 )
 
 const (
@@ -64,6 +67,9 @@ func (s *Server) fullRow(ctx context.Context, u store.User, id string) (HomeRow,
 	case rowContinue:
 		row.Title = "Continue watching"
 		row.Items, err = s.Store.ContinueWatching(ctx, u.ID, rowAllItems)
+	case rowListening:
+		row.Title = "Continue listening"
+		row.Items, err = s.Store.ContinueListening(ctx, u.ID, rowAllItems)
 	case rowRecent:
 		row.Title = "Recently added"
 		row.Items, err = s.Store.RecentlyAdded(ctx, u.ID, rowAllItems)

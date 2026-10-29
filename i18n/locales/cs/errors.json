@@ -19,6 +19,7 @@
   "bad_library": "neplatná knihovna",
   "bad_request": "neplatný požadavek",
   "billing_couldnt_be_reached_try_again_in_a_minute": "fakturace není dostupná; zkus to znovu za minutu",
+  "book_not_found": "kniha nenalezena",
   "box_set_not_found": "filmová série nenalezena",
   "cant_read_that_folder": "tuto složku nelze přečíst",
   "collection_not_found": "kolekce nenalezena",

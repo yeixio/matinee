@@ -155,7 +155,8 @@
     "endOfItem": "Apabila ini tamat",
     "left": "Tinggal {{time}}",
     "atEnd": "Berhenti di penghujung",
-    "paused": "Dijeda oleh pemasa tidur"
+    "paused": "Dijeda oleh pemasa tidur",
+    "endOfChapter": "Akhir bab ini"
   },
   "goBack": "Kembali",
   "back": "Kembali",
@@ -587,7 +588,8 @@
       "kind": {
         "movies": "Filem",
         "tv": "Rancangan TV",
-        "music": "Muzik"
+        "music": "Muzik",
+        "audiobooks": "Buku audio"
       },
       "type": "Jenis",
       "folders": "Folder",

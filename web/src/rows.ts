@@ -6,6 +6,7 @@ import { genreRowTitle } from './people'
 // Home's own rows, by the ids the server gives them, with their names.
 const ownRows: Record<string, string> = {
   continueWatching: 'home.continueWatching',
+  continueListening: 'common:books.continueListening',
   recentlyAdded: 'home.recentlyAdded',
   newReleases: 'home.newReleases',
   watchList: 'nav.watchList',

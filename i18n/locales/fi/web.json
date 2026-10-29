@@ -155,7 +155,8 @@
     "endOfItem": "Kun tämä loppuu",
     "left": "{{time}} jäljellä",
     "atEnd": "Pysähtyy lopussa",
-    "paused": "Uniajastin keskeytti toiston"
+    "paused": "Uniajastin keskeytti toiston",
+    "endOfChapter": "Tämän luvun loppu"
   },
   "goBack": "Palaa",
   "back": "Takaisin",
@@ -591,7 +592,8 @@
       "kind": {
         "movies": "Elokuvat",
         "tv": "TV-sarjat",
-        "music": "Musiikki"
+        "music": "Musiikki",
+        "audiobooks": "Äänikirjat"
       },
       "type": "Tyyppi",
       "folders": "Kansiot",

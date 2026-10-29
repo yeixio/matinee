@@ -155,7 +155,8 @@
     "endOfItem": "Gdy to się skończy",
     "left": "Zostało {{time}}",
     "atEnd": "Zatrzyma się na końcu",
-    "paused": "Wstrzymano przez wyłącznik czasowy"
+    "paused": "Wstrzymano przez wyłącznik czasowy",
+    "endOfChapter": "Koniec tego rozdziału"
   },
   "goBack": "Wróć",
   "back": "Wstecz",
@@ -599,7 +600,8 @@
       "kind": {
         "movies": "Filmy",
         "tv": "Seriale",
-        "music": "Muzyka"
+        "music": "Muzyka",
+        "audiobooks": "Audiobooki"
       },
       "type": "Typ",
       "folders": "Foldery",

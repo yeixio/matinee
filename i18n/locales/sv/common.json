@@ -165,7 +165,9 @@
     "tracks_one": "{{count}} spår",
     "tracks_other": "{{count}} spår",
     "titles_one": "{{count}} titel",
-    "titles_other": "{{count}} titlar"
+    "titles_other": "{{count}} titlar",
+    "books_one": "{{count}} bok",
+    "books_other": "{{count}} böcker"
   },
   "awards": {
     "academy": {
@@ -377,5 +379,38 @@
     "minimize": "Minimera",
     "readMore": "Läs mer",
     "less": "Visa mindre"
+  },
+  "books": {
+    "overview": "Översikt",
+    "books": "Böcker",
+    "authors": "Författare",
+    "series": "Serier",
+    "narrators": "Uppläsare",
+    "audiobook": "Ljudbok",
+    "author": "Författare",
+    "continueListening": "Fortsätt lyssna",
+    "nowListening": "Spelas nu",
+    "openPlayer": "Öppna spelaren",
+    "chapters": "Kapitel",
+    "previousChapter": "Föregående kapitel",
+    "nextChapter": "Nästa kapitel",
+    "backSeconds": "{{seconds}} sekunder bakåt",
+    "aheadSeconds": "{{seconds}} sekunder framåt",
+    "speed": "Hastighet",
+    "left": "{{time}} kvar",
+    "leftInBook": "{{time}} kvar av boken",
+    "resume": "Fortsätt",
+    "markFinished": "Markera som utläst",
+    "markUnfinished": "Markera som inte utläst",
+    "finished": "Utläst",
+    "bookOf": "Del {{n}} i {{series}}",
+    "bookN": "Del {{n}}",
+    "inSeries": "Mer i {{series}}",
+    "narratedBy": "Uppläst av {{names}}",
+    "narratedByLabel": "Uppläst av",
+    "noSeries": "Inga serier än",
+    "noNarrators": "Inga uppläsare än",
+    "fromTags": "Serier och uppläsare kommer från böckernas taggar eller från mappar som Författare/Serie/Bok.",
+    "length": "Längd"
   }
 }

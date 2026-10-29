@@ -19,6 +19,7 @@
   "bad_library": "गलत लाइब्रेरी",
   "bad_request": "गलत अनुरोध",
   "billing_couldnt_be_reached_try_again_in_a_minute": "बिलिंग से संपर्क नहीं हो सका; एक मिनट बाद फिर कोशिश करें",
+  "book_not_found": "किताब नहीं मिली",
   "box_set_not_found": "बॉक्स सेट नहीं मिला",
   "cant_read_that_folder": "वह फ़ोल्डर पढ़ा नहीं जा सकता",
   "collection_not_found": "संग्रह नहीं मिला",

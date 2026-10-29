@@ -100,6 +100,7 @@ export const libraries = [
   { name: 'Movies', kind: 'movies', dir: 'Movies' },
   { name: 'TV Shows', kind: 'tv', dir: 'TV' },
   { name: 'Music', kind: 'music', dir: 'Music' },
+  { name: 'Audiobooks', kind: 'audiobooks', dir: 'Audiobooks' },
 ]
 
 /** Adds the libraries not there yet, then waits for their details and the media analysis. */

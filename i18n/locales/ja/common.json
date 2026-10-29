@@ -153,7 +153,8 @@
     "seasons_other": "{{count}}シーズン",
     "albums_other": "{{count}}枚のアルバム",
     "tracks_other": "{{count}}曲",
-    "titles_other": "{{count}}作品"
+    "titles_other": "{{count}}作品",
+    "books_other": "{{count}}冊"
   },
   "awards": {
     "academy": {
@@ -350,5 +351,38 @@
     "minimize": "最小化",
     "readMore": "続きを読む",
     "less": "表示を減らす"
+  },
+  "books": {
+    "overview": "概要",
+    "books": "本",
+    "authors": "著者",
+    "series": "シリーズ",
+    "narrators": "ナレーター",
+    "audiobook": "オーディオブック",
+    "author": "著者",
+    "continueListening": "続きを聴く",
+    "nowListening": "再生中",
+    "openPlayer": "プレーヤーを開く",
+    "chapters": "チャプター",
+    "previousChapter": "前のチャプター",
+    "nextChapter": "次のチャプター",
+    "backSeconds": "{{seconds}}秒戻る",
+    "aheadSeconds": "{{seconds}}秒進む",
+    "speed": "再生速度",
+    "left": "残り{{time}}",
+    "leftInBook": "本の残り{{time}}",
+    "resume": "再開",
+    "markFinished": "聴き終わったことにする",
+    "markUnfinished": "聴き終わっていないことにする",
+    "finished": "聴き終わった",
+    "bookOf": "{{series}} 第{{n}}巻",
+    "bookN": "第{{n}}巻",
+    "inSeries": "{{series}}の他の巻",
+    "narratedBy": "ナレーター: {{names}}",
+    "narratedByLabel": "ナレーター:",
+    "noSeries": "シリーズはまだありません",
+    "noNarrators": "ナレーターはまだいません",
+    "fromTags": "シリーズとナレーターは本のタグ、または「著者/シリーズ/本」のようなフォルダーから取得されます。",
+    "length": "長さ"
   }
 }

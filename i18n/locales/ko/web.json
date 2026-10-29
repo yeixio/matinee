@@ -155,7 +155,8 @@
     "endOfItem": "재생이 끝날 때",
     "left": "{{time}} 남음",
     "atEnd": "끝나면 정지",
-    "paused": "취침 타이머로 일시정지됨"
+    "paused": "취침 타이머로 일시정지됨",
+    "endOfChapter": "이 챕터가 끝날 때"
   },
   "goBack": "돌아가기",
   "back": "뒤로",
@@ -587,7 +588,8 @@
       "kind": {
         "movies": "영화",
         "tv": "TV 프로그램",
-        "music": "음악"
+        "music": "음악",
+        "audiobooks": "오디오북"
       },
       "type": "유형",
       "folders": "폴더",

@@ -155,7 +155,8 @@
     "endOfItem": "Când se termină",
     "left": "Mai sunt {{time}}",
     "atEnd": "Se oprește la final",
-    "paused": "Pus pe pauză de temporizator"
+    "paused": "Pus pe pauză de temporizator",
+    "endOfChapter": "Sfârșitul acestui capitol"
   },
   "goBack": "Înapoi",
   "back": "Înapoi",
@@ -595,7 +596,8 @@
       "kind": {
         "movies": "Filme",
         "tv": "Seriale TV",
-        "music": "Muzică"
+        "music": "Muzică",
+        "audiobooks": "Audiobookuri"
       },
       "type": "Tip",
       "folders": "Dosare",

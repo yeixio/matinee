@@ -165,7 +165,9 @@
     "tracks_one": "{{count}} nummer",
     "tracks_other": "{{count}} numre",
     "titles_one": "{{count}} titel",
-    "titles_other": "{{count}} titler"
+    "titles_other": "{{count}} titler",
+    "books_one": "{{count}} bog",
+    "books_other": "{{count}} bøger"
   },
   "awards": {
     "academy": {
@@ -377,5 +379,38 @@
     "minimize": "Minimer",
     "readMore": "Læs mere",
     "less": "Vis mindre"
+  },
+  "books": {
+    "overview": "Oversigt",
+    "books": "Bøger",
+    "authors": "Forfattere",
+    "series": "Serier",
+    "narrators": "Indlæsere",
+    "audiobook": "Lydbog",
+    "author": "Forfatter",
+    "continueListening": "Lyt videre",
+    "nowListening": "Afspilles nu",
+    "openPlayer": "Åbn afspilleren",
+    "chapters": "Kapitler",
+    "previousChapter": "Forrige kapitel",
+    "nextChapter": "Næste kapitel",
+    "backSeconds": "{{seconds}} sekunder tilbage",
+    "aheadSeconds": "{{seconds}} sekunder frem",
+    "speed": "Hastighed",
+    "left": "{{time}} tilbage",
+    "leftInBook": "{{time}} tilbage af bogen",
+    "resume": "Genoptag",
+    "markFinished": "Markér som færdig",
+    "markUnfinished": "Markér som ikke færdig",
+    "finished": "Færdig",
+    "bookOf": "Bog {{n}} i {{series}}",
+    "bookN": "Bog {{n}}",
+    "inSeries": "Mere i {{series}}",
+    "narratedBy": "Indlæst af {{names}}",
+    "narratedByLabel": "Indlæst af",
+    "noSeries": "Ingen serier endnu",
+    "noNarrators": "Ingen indlæsere endnu",
+    "fromTags": "Serier og indlæsere kommer fra bøgernes tags eller fra mapper som Forfatter/Serie/Bog.",
+    "length": "Længde"
   }
 }

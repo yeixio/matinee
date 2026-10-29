@@ -153,7 +153,8 @@
     "seasons_other": "{{count}} ซีซัน",
     "albums_other": "{{count}} อัลบั้ม",
     "tracks_other": "{{count}} เพลง",
-    "titles_other": "{{count}} เรื่อง"
+    "titles_other": "{{count}} เรื่อง",
+    "books_other": "{{count}} เล่ม"
   },
   "awards": {
     "academy": {
@@ -350,5 +351,38 @@
     "minimize": "ย่อ",
     "readMore": "อ่านเพิ่มเติม",
     "less": "แสดงน้อยลง"
+  },
+  "books": {
+    "overview": "ภาพรวม",
+    "books": "หนังสือ",
+    "authors": "ผู้แต่ง",
+    "series": "ซีรีส์",
+    "narrators": "ผู้อ่าน",
+    "audiobook": "หนังสือเสียง",
+    "author": "ผู้แต่ง",
+    "continueListening": "ฟังต่อ",
+    "nowListening": "กำลังฟัง",
+    "openPlayer": "เปิดเครื่องเล่น",
+    "chapters": "บท",
+    "previousChapter": "บทก่อนหน้า",
+    "nextChapter": "บทถัดไป",
+    "backSeconds": "ย้อนกลับ {{seconds}} วินาที",
+    "aheadSeconds": "ข้ามไป {{seconds}} วินาที",
+    "speed": "ความเร็ว",
+    "left": "เหลือ {{time}}",
+    "leftInBook": "เหลืออีก {{time}} จะจบเล่ม",
+    "resume": "เล่นต่อ",
+    "markFinished": "ทำเครื่องหมายว่าฟังจบแล้ว",
+    "markUnfinished": "ทำเครื่องหมายว่ายังฟังไม่จบ",
+    "finished": "ฟังจบแล้ว",
+    "bookOf": "เล่ม {{n}} ของ {{series}}",
+    "bookN": "เล่ม {{n}}",
+    "inSeries": "เพิ่มเติมใน {{series}}",
+    "narratedBy": "อ่านโดย {{names}}",
+    "narratedByLabel": "อ่านโดย",
+    "noSeries": "ยังไม่มีซีรีส์",
+    "noNarrators": "ยังไม่มีผู้อ่าน",
+    "fromTags": "ซีรีส์และผู้อ่านมาจากแท็กของหนังสือ หรือจากโฟลเดอร์แบบ ผู้แต่ง/ซีรีส์/หนังสือ",
+    "length": "ความยาว"
   }
 }

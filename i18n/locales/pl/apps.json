@@ -338,7 +338,8 @@
     "endOfItem": "Gdy to się skończy",
     "left": "Zostało {{time}}",
     "atEnd": "Zatrzyma się na końcu",
-    "paused": "Wstrzymano przez wyłącznik czasowy"
+    "paused": "Wstrzymano przez wyłącznik czasowy",
+    "endOfChapter": "Koniec tego rozdziału"
   },
   "close": "Zamknij",
   "trailer": {
@@ -371,7 +372,9 @@
     "season": "Sezon",
     "album": "Album",
     "artist": "Wykonawca",
-    "track": "Utwór"
+    "track": "Utwór",
+    "book": "Audiobook",
+    "author": "Autor"
   },
   "profiles": {
     "whoIsWatching": "Kto ogląda?",

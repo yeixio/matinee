@@ -323,7 +323,8 @@
     "endOfItem": "Apabila ini tamat",
     "left": "Tinggal {{time}}",
     "atEnd": "Berhenti di penghujung",
-    "paused": "Dijeda oleh pemasa tidur"
+    "paused": "Dijeda oleh pemasa tidur",
+    "endOfChapter": "Akhir bab ini"
   },
   "close": "Tutup",
   "trailer": {
@@ -353,7 +354,9 @@
     "season": "Musim",
     "album": "Album",
     "artist": "Artis",
-    "track": "Lagu"
+    "track": "Lagu",
+    "book": "Buku audio",
+    "author": "Pengarang"
   },
   "profiles": {
     "whoIsWatching": "Siapa yang menonton?",

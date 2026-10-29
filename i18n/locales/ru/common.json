@@ -189,7 +189,11 @@
     "titles_few": "{{count}} фильма или сериала",
     "titles_many": "{{count}} фильмов и сериалов",
     "titles_one": "{{count}} фильм или сериал",
-    "titles_other": "{{count}} фильмов и сериалов"
+    "titles_other": "{{count}} фильмов и сериалов",
+    "books_one": "{{count}} книга",
+    "books_few": "{{count}} книги",
+    "books_many": "{{count}} книг",
+    "books_other": "{{count}} книги"
   },
   "awards": {
     "academy": {
@@ -431,5 +435,38 @@
     "minimize": "Свернуть",
     "readMore": "Читать дальше",
     "less": "Скрыть"
+  },
+  "books": {
+    "overview": "Обзор",
+    "books": "Книги",
+    "authors": "Авторы",
+    "series": "Серии",
+    "narrators": "Чтецы",
+    "audiobook": "Аудиокнига",
+    "author": "Автор",
+    "continueListening": "Продолжить слушать",
+    "nowListening": "Сейчас звучит",
+    "openPlayer": "Открыть плеер",
+    "chapters": "Главы",
+    "previousChapter": "Предыдущая глава",
+    "nextChapter": "Следующая глава",
+    "backSeconds": "Назад на {{seconds}} секунд",
+    "aheadSeconds": "Вперёд на {{seconds}} секунд",
+    "speed": "Скорость",
+    "left": "Осталось {{time}}",
+    "leftInBook": "До конца книги {{time}}",
+    "resume": "Продолжить",
+    "markFinished": "Отметить как прослушанную",
+    "markUnfinished": "Отметить как непрослушанную",
+    "finished": "Прослушана",
+    "bookOf": "Книга {{n}} серии «{{series}}»",
+    "bookN": "Книга {{n}}",
+    "inSeries": "Ещё из серии «{{series}}»",
+    "narratedBy": "Читает {{names}}",
+    "narratedByLabel": "Читает",
+    "noSeries": "Серий пока нет",
+    "noNarrators": "Чтецов пока нет",
+    "fromTags": "Серии и чтецы берутся из тегов книг или из папок вида Автор/Серия/Книга.",
+    "length": "Длительность"
   }
 }

@@ -745,7 +745,7 @@ paths:
               required: [name, kind, paths]
               properties:
                 name: { type: string }
-                kind: { type: string, examples: [movies, tv, music] }
+                kind: { type: string, examples: [movies, tv, music, audiobooks] }
                 paths: { type: array, items: { type: string }, description: Folders on the server. }
       responses:
         "201":
@@ -808,6 +808,28 @@ paths:
           content:
             application/json:
               schema: { type: array, items: { $ref: "#/components/schemas/FilterPerson" } }
+        "404": { $ref: "#/components/responses/Error" }
+  /libraries/{id}/series:
+    get:
+      summary: An audiobook library's series
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      responses:
+        "200":
+          description: Series by name. List a series' books with /libraries/{id}/items?kind=book&series=…&sort=series.
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: "#/components/schemas/BookGroup" } }
+        "404": { $ref: "#/components/responses/Error" }
+  /libraries/{id}/narrators:
+    get:
+      summary: Who narrates an audiobook library's books
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      responses:
+        "200":
+          description: Narrators by name. List their books with /libraries/{id}/items?kind=book&narrator=….
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: "#/components/schemas/BookGroup" } }
         "404": { $ref: "#/components/responses/Error" }
   /items:
     get:
@@ -896,7 +918,9 @@ paths:
                   rows:
                     type: array
                     description: >-
-                      Rows shown below the others. First, in the 30 days before a holiday
+                      Rows shown below the others. First, Continue listening (id
+                      continueListening): up to 20 audiobooks the person started and
+                      didn't finish, the latest first; left out when there are none. Then, in the 30 days before a holiday
                       (a week for New Year's Eve), a row of up to 20 titles for it, if at
                       least four fit; unless an admin turned holiday rows off. Then the collections pinned to Home
                       (shared ones and the person's own, empty ones left out), each with
@@ -906,7 +930,7 @@ paths:
                     items:
                       type: object
                       properties:
-                        id: { type: string, examples: ["genre:Science Fiction", "collection:4f1c9e0a2b7d3e5f6a8b9c0d", "holiday:halloween"] }
+                        id: { type: string, examples: ["genre:Science Fiction", "collection:4f1c9e0a2b7d3e5f6a8b9c0d", "holiday:halloween", continueListening] }
                         title: { type: string, examples: [Sci-fi favorites] }
                         genre: { type: string, description: Empty on a collection's or a holiday's row., examples: [Science Fiction] }
                         holiday:
@@ -931,7 +955,7 @@ paths:
       description: |
         For the See more at the end of a row. Rows are Home's lists
         (continueWatching, recentlyAdded, newReleases, watchList), Home's
-        other rows by their id (genre:{genre}, holiday:{id},
+        other rows by their id (continueListening, genre:{genre}, holiday:{id},
         collection:{id}), and related:{item id} for the titles like one
         (More like this). Up to 1,000 titles, in the row's order; a genre's
         or a holiday's best rated first.
@@ -974,7 +998,7 @@ paths:
         "404": { $ref: "#/components/responses/Error" }
   /items/{id}/children:
     get:
-      summary: Seasons of a show, episodes of a season, albums of an artist, tracks of an album
+      summary: Seasons of a show, episodes of a season, albums of an artist, tracks of an album, books of an author, parts of a book
       parameters: [{ $ref: "#/components/parameters/ID" }]
       responses:
         "200": { $ref: "#/components/responses/Items" }
@@ -987,6 +1011,46 @@ paths:
       parameters: [{ $ref: "#/components/parameters/ID" }]
       responses:
         "200": { $ref: "#/components/responses/Items" }
+  /items/{id}/book:
+    get:
+      summary: An audiobook with its parts and chapters
+      description: |
+        A book plays as one long listen across its parts, the files it comes
+        in. Times are on the book's own clock: a part starts where the one
+        before it ends. Chapters are the parts' own marked chapters, or one
+        per part for parts without any. positionMs and played are the
+        signed-in person's place in the whole book. For a part, its book.
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      responses:
+        "200":
+          description: The book.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - { $ref: "#/components/schemas/Item" }
+                  - type: object
+                    properties:
+                      parts:
+                        type: array
+                        description: In playing order. Play each with /items/{id}/file, or /items/{id}/hls when the format won't play.
+                        items:
+                          allOf:
+                            - { $ref: "#/components/schemas/Item" }
+                            - type: object
+                              properties:
+                                startMs: { type: integer, description: Where on the book's clock the part starts. }
+                                mimeType: { type: string }
+                      chapters:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            title: { type: string }
+                            startMs: { type: integer }
+                            endMs: { type: integer }
+                            partId: { type: integer, description: The part the chapter is in. }
+        "404": { $ref: "#/components/responses/Error" }
   /items/{id}/related:
     get:
       summary: Titles in the library like a movie or show
@@ -1058,7 +1122,11 @@ paths:
   /items/{id}/progress:
     put:
       summary: Save where playback is
-      description: A position past 92% of the duration marks the item played.
+      description: |
+        A position past 92% of the duration marks the item played. For an
+        audiobook, the position is on the whole book's clock (see
+        /items/{id}/book), and reaching its last minute finishes it; its
+        parts count as played with it.
       parameters: [{ $ref: "#/components/parameters/ID" }]
       requestBody:
         required: true
@@ -1083,7 +1151,7 @@ paths:
   /items/{id}/image/{type}:
     get:
       summary: An item's poster or backdrop
-      description: Seasons and tracks without their own poster get their show's or album's.
+      description: Seasons, tracks and book parts without their own poster get their show's, album's or book's.
       parameters:
         - $ref: "#/components/parameters/ID"
         - { name: type, in: path, required: true, schema: { type: string, enum: [poster, backdrop] } }
@@ -2319,7 +2387,7 @@ components:
       type: object
       properties:
         library: { type: array, items: { type: integer }, description: Library ids; none means every library. }
-        kind: { type: array, items: { type: string, enum: [movie, show, season, episode, artist, album, track] }, description: Without it, libraries' top level is listed. }
+        kind: { type: array, items: { type: string, enum: [movie, show, season, episode, artist, album, track, author, book, part] }, description: Without it, libraries' top level is listed. }
         q: { type: string, description: Words in the title. }
         genre: { type: array, items: { type: string } }
         notGenre: { type: array, items: { type: string } }
@@ -2349,7 +2417,9 @@ components:
         certification: { type: array, items: { type: string }, description: e.g. PG-13 or TV-MA. }
         collection: { type: array, items: { type: integer }, description: TMDB collection ids. }
         watchList: { type: boolean, description: Only titles on the signed-in person's watch list. }
-        sort: { type: string, enum: [title, added, released, year, rating, runtime, lastPlayed], default: title }
+        series: { type: array, items: { type: string }, description: Books in these series. }
+        narrator: { type: array, items: { type: string }, description: Books any of these people narrate. }
+        sort: { type: string, enum: [title, added, released, year, rating, runtime, lastPlayed, series], default: title, description: "series is a book's place in its series." }
         order: { type: string, enum: [asc, desc], description: Title and runtime run low to high by default, the others high to low. Titles missing the field go last. }
         limit: { type: integer }
     FilterValue:
@@ -2885,6 +2955,13 @@ components:
               path: { type: string }
               method: { type: string, enum: [events, polling, off] }
               reason: { type: string, description: 'Why a folder is polled, such as "network share (cifs)".' }
+    BookGroup:
+      type: object
+      description: A series or a narrator of audiobooks.
+      properties:
+        name: { type: string }
+        books: { type: integer, description: How many books. }
+        itemIds: { type: array, items: { type: integer }, description: Up to four of its books, first in reading order, for artwork. }
     Item:
       type: object
       description: Anything browsable. Fields without a value are left out.
@@ -2892,7 +2969,7 @@ components:
         id: { type: integer }
         libraryId: { type: integer }
         parentId: { type: integer }
-        kind: { type: string, examples: [movie, show, season, episode, artist, album, track] }
+        kind: { type: string, examples: [movie, show, season, episode, artist, album, track, author, book, part] }
         title: { type: string }
         year: { type: integer }
         index: { type: integer, description: Season, episode or track number. }
@@ -2917,6 +2994,12 @@ components:
         artist: { type: string, description: "Albums and tracks: the artist's name." }
         artistId: { type: integer, description: "Albums and tracks: the artist's id." }
         album: { type: string, description: "Tracks: the album's title (its id is parentId)." }
+        author: { type: string, description: "Books and their parts: the author's name." }
+        authorId: { type: integer, description: "Books and their parts: the author's id." }
+        book: { type: string, description: "Book parts: the book's title (its id is parentId)." }
+        narrators: { type: array, items: { type: string }, description: "Books: who reads them." }
+        series: { type: string, description: "Books: the series the book is in." }
+        seriesIndex: { type: number, description: "Books: its place in the series, such as 2 or 2.5." }
         onWatchList: { type: boolean, description: "On the signed-in person's watch list." }
         genres: { type: array, items: { type: string }, description: "Movies and shows: genres from the online match.", examples: [[Science Fiction, Drama]] }
         mediaTags:

@@ -328,7 +328,8 @@
     "endOfItem": "Kun tämä loppuu",
     "left": "{{time}} jäljellä",
     "atEnd": "Pysähtyy lopussa",
-    "paused": "Uniajastin keskeytti toiston"
+    "paused": "Uniajastin keskeytti toiston",
+    "endOfChapter": "Tämän luvun loppu"
   },
   "close": "Sulje",
   "trailer": {
@@ -359,7 +360,9 @@
     "season": "Kausi",
     "album": "Albumi",
     "artist": "Artisti",
-    "track": "Kappale"
+    "track": "Kappale",
+    "book": "Äänikirja",
+    "author": "Kirjailija"
   },
   "profiles": {
     "whoIsWatching": "Kuka katsoo?",

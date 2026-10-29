@@ -165,7 +165,9 @@
     "tracks_one": "{{count}} szám",
     "tracks_other": "{{count}} szám",
     "titles_one": "{{count}} cím",
-    "titles_other": "{{count}} cím"
+    "titles_other": "{{count}} cím",
+    "books_one": "{{count}} könyv",
+    "books_other": "{{count}} könyv"
   },
   "awards": {
     "academy": {
@@ -377,5 +379,38 @@
     "minimize": "Kis méret",
     "readMore": "Tovább",
     "less": "Kevesebb"
+  },
+  "books": {
+    "overview": "Áttekintés",
+    "books": "Könyvek",
+    "authors": "Szerzők",
+    "series": "Sorozatok",
+    "narrators": "Felolvasók",
+    "audiobook": "Hangoskönyv",
+    "author": "Szerző",
+    "continueListening": "Hallgatás folytatása",
+    "nowListening": "Most szól",
+    "openPlayer": "Lejátszó megnyitása",
+    "chapters": "Fejezetek",
+    "previousChapter": "Előző fejezet",
+    "nextChapter": "Következő fejezet",
+    "backSeconds": "{{seconds}} másodperccel vissza",
+    "aheadSeconds": "{{seconds}} másodperccel előre",
+    "speed": "Sebesség",
+    "left": "Még {{time}}",
+    "leftInBook": "Még {{time}} a könyvből",
+    "resume": "Folytatás",
+    "markFinished": "Megjelölés befejezettként",
+    "markUnfinished": "Megjelölés befejezetlenként",
+    "finished": "Befejezve",
+    "bookOf": "{{series}} {{n}}. kötet",
+    "bookN": "{{n}}. kötet",
+    "inSeries": "Továbbiak: {{series}}",
+    "narratedBy": "Felolvassa: {{names}}",
+    "narratedByLabel": "Felolvassa:",
+    "noSeries": "Még nincsenek sorozatok",
+    "noNarrators": "Még nincsenek felolvasók",
+    "fromTags": "A sorozatok és a felolvasók a könyvek címkéiből vagy az olyan mappákból jönnek, mint Szerző/Sorozat/Könyv.",
+    "length": "Hossz"
   }
 }

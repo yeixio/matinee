@@ -165,7 +165,9 @@
     "tracks_one": "{{count}} κομμάτι",
     "tracks_other": "{{count}} κομμάτια",
     "titles_one": "{{count}} τίτλος",
-    "titles_other": "{{count}} τίτλοι"
+    "titles_other": "{{count}} τίτλοι",
+    "books_one": "{{count}} βιβλίο",
+    "books_other": "{{count}} βιβλία"
   },
   "awards": {
     "academy": {
@@ -377,5 +379,38 @@
     "minimize": "Ελαχιστοποίηση",
     "readMore": "Διαβάστε περισσότερα",
     "less": "Λιγότερα"
+  },
+  "books": {
+    "overview": "Επισκόπηση",
+    "books": "Βιβλία",
+    "authors": "Συγγραφείς",
+    "series": "Σειρές",
+    "narrators": "Αφηγητές",
+    "audiobook": "Ηχητικό βιβλίο",
+    "author": "Συγγραφέας",
+    "continueListening": "Συνέχεια ακρόασης",
+    "nowListening": "Ακούτε τώρα",
+    "openPlayer": "Άνοιγμα του player",
+    "chapters": "Κεφάλαια",
+    "previousChapter": "Προηγούμενο κεφάλαιο",
+    "nextChapter": "Επόμενο κεφάλαιο",
+    "backSeconds": "Πίσω {{seconds}} δευτερόλεπτα",
+    "aheadSeconds": "Μπροστά {{seconds}} δευτερόλεπτα",
+    "speed": "Ταχύτητα",
+    "left": "Απομένουν {{time}}",
+    "leftInBook": "Απομένουν {{time}} στο βιβλίο",
+    "resume": "Συνέχεια",
+    "markFinished": "Σήμανση ως ολοκληρωμένο",
+    "markUnfinished": "Σήμανση ως μη ολοκληρωμένο",
+    "finished": "Ολοκληρώθηκε",
+    "bookOf": "Βιβλίο {{n}} της σειράς {{series}}",
+    "bookN": "Βιβλίο {{n}}",
+    "inSeries": "Περισσότερα από {{series}}",
+    "narratedBy": "Αφήγηση: {{names}}",
+    "narratedByLabel": "Αφήγηση:",
+    "noSeries": "Δεν υπάρχουν ακόμα σειρές",
+    "noNarrators": "Δεν υπάρχουν ακόμα αφηγητές",
+    "fromTags": "Οι σειρές και οι αφηγητές προέρχονται από τις ετικέτες των βιβλίων ή από φακέλους όπως Συγγραφέας/Σειρά/Βιβλίο.",
+    "length": "Διάρκεια"
   }
 }

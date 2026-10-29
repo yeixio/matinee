@@ -333,7 +333,8 @@
     "endOfItem": "Quando isto acabar",
     "left": "Faltam {{time}}",
     "atEnd": "Para no final",
-    "paused": "Pausado pelo timer"
+    "paused": "Pausado pelo timer",
+    "endOfChapter": "Fim deste capítulo"
   },
   "close": "Fechar",
   "trailer": {
@@ -365,7 +366,9 @@
     "season": "Temporada",
     "album": "Álbum",
     "artist": "Artista",
-    "track": "Faixa"
+    "track": "Faixa",
+    "book": "Audiolivro",
+    "author": "Autor"
   },
   "profiles": {
     "whoIsWatching": "Quem está assistindo?",

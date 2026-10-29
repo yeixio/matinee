@@ -153,7 +153,8 @@
     "seasons_other": "{{count}} 季",
     "albums_other": "{{count}} 张专辑",
     "tracks_other": "{{count}} 首曲目",
-    "titles_other": "{{count}} 部作品"
+    "titles_other": "{{count}} 部作品",
+    "books_other": "{{count}} 本书"
   },
   "awards": {
     "academy": {
@@ -350,5 +351,38 @@
     "minimize": "最小化",
     "readMore": "阅读更多",
     "less": "收起"
+  },
+  "books": {
+    "overview": "概览",
+    "books": "图书",
+    "authors": "作者",
+    "series": "系列",
+    "narrators": "朗读者",
+    "audiobook": "有声书",
+    "author": "作者",
+    "continueListening": "继续收听",
+    "nowListening": "正在收听",
+    "openPlayer": "打开播放器",
+    "chapters": "章节",
+    "previousChapter": "上一章",
+    "nextChapter": "下一章",
+    "backSeconds": "后退 {{seconds}} 秒",
+    "aheadSeconds": "前进 {{seconds}} 秒",
+    "speed": "速度",
+    "left": "剩余 {{time}}",
+    "leftInBook": "全书剩余 {{time}}",
+    "resume": "继续",
+    "markFinished": "标记为已听完",
+    "markUnfinished": "标记为未听完",
+    "finished": "已听完",
+    "bookOf": "{{series}} 第 {{n}} 册",
+    "bookN": "第 {{n}} 册",
+    "inSeries": "{{series}} 的更多图书",
+    "narratedBy": "朗读：{{names}}",
+    "narratedByLabel": "朗读：",
+    "noSeries": "还没有系列",
+    "noNarrators": "还没有朗读者",
+    "fromTags": "系列和朗读者来自图书的标签，或“作者/系列/图书”这样的文件夹。",
+    "length": "时长"
   }
 }

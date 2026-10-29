@@ -19,6 +19,7 @@
   "bad_library": "hibás könyvtár",
   "bad_request": "hibás kérés",
   "billing_couldnt_be_reached_try_again_in_a_minute": "a számlázás nem érhető el; próbáld újra egy perc múlva",
+  "book_not_found": "a könyv nem található",
   "box_set_not_found": "a filmsorozat nem található",
   "cant_read_that_folder": "a mappa nem olvasható",
   "collection_not_found": "a gyűjtemény nem található",

@@ -189,7 +189,11 @@
     "titles_few": "{{count}} tituly",
     "titles_many": "{{count}} titulů",
     "titles_one": "{{count}} titul",
-    "titles_other": "{{count}} titulů"
+    "titles_other": "{{count}} titulů",
+    "books_one": "{{count}} kniha",
+    "books_few": "{{count}} knihy",
+    "books_many": "{{count}} knihy",
+    "books_other": "{{count}} knih"
   },
   "awards": {
     "academy": {
@@ -431,5 +435,38 @@
     "minimize": "Minimalizovat",
     "readMore": "Číst dál",
     "less": "Zobrazit méně"
+  },
+  "books": {
+    "overview": "Přehled",
+    "books": "Knihy",
+    "authors": "Autoři",
+    "series": "Série",
+    "narrators": "Interpreti",
+    "audiobook": "Audiokniha",
+    "author": "Autor",
+    "continueListening": "Pokračovat v poslechu",
+    "nowListening": "Právě posloucháte",
+    "openPlayer": "Otevřít přehrávač",
+    "chapters": "Kapitoly",
+    "previousChapter": "Předchozí kapitola",
+    "nextChapter": "Další kapitola",
+    "backSeconds": "O {{seconds}} sekund zpět",
+    "aheadSeconds": "O {{seconds}} sekund vpřed",
+    "speed": "Rychlost",
+    "left": "Zbývá {{time}}",
+    "leftInBook": "Do konce knihy zbývá {{time}}",
+    "resume": "Pokračovat",
+    "markFinished": "Označit jako dočtené",
+    "markUnfinished": "Označit jako nedočtené",
+    "finished": "Dočteno",
+    "bookOf": "Díl {{n}} série {{series}}",
+    "bookN": "Díl {{n}}",
+    "inSeries": "Další ze série {{series}}",
+    "narratedBy": "Čte {{names}}",
+    "narratedByLabel": "Čte",
+    "noSeries": "Zatím žádné série",
+    "noNarrators": "Zatím žádní interpreti",
+    "fromTags": "Série a interpreti pocházejí ze štítků knih nebo ze složek jako Autor/Série/Kniha.",
+    "length": "Délka"
   }
 }

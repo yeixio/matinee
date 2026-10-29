@@ -19,6 +19,7 @@
   "bad_library": "ungültige Mediathek",
   "bad_request": "ungültige Anfrage",
   "billing_couldnt_be_reached_try_again_in_a_minute": "die Abrechnung ist nicht erreichbar. Versuch es in einer Minute noch einmal",
+  "book_not_found": "Buch nicht gefunden",
   "box_set_not_found": "Box-Set nicht gefunden",
   "cant_read_that_folder": "dieser Ordner lässt sich nicht lesen",
   "collection_not_found": "Sammlung nicht gefunden",

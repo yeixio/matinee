@@ -155,7 +155,8 @@
     "endOfItem": "Når dette er ferdig",
     "left": "{{time}} igjen",
     "atEnd": "Stopper på slutten",
-    "paused": "Satt på pause av innsovningstidtakeren"
+    "paused": "Satt på pause av innsovningstidtakeren",
+    "endOfChapter": "Slutten av dette kapitlet"
   },
   "goBack": "Gå tilbake",
   "back": "Tilbake",
@@ -591,7 +592,8 @@
       "kind": {
         "movies": "Filmer",
         "tv": "TV-serier",
-        "music": "Musikk"
+        "music": "Musikk",
+        "audiobooks": "Lydbøker"
       },
       "type": "Type",
       "folders": "Mapper",

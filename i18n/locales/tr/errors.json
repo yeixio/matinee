@@ -19,6 +19,7 @@
   "bad_library": "hatalı kütüphane",
   "bad_request": "hatalı istek",
   "billing_couldnt_be_reached_try_again_in_a_minute": "faturalandırmaya ulaşılamadı; bir dakika sonra tekrar dene",
+  "book_not_found": "kitap bulunamadı",
   "box_set_not_found": "film serisi bulunamadı",
   "cant_read_that_folder": "bu klasör okunamıyor",
   "collection_not_found": "koleksiyon bulunamadı",

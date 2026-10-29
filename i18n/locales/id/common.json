@@ -153,7 +153,8 @@
     "seasons_other": "{{count}} musim",
     "albums_other": "{{count}} album",
     "tracks_other": "{{count}} lagu",
-    "titles_other": "{{count}} judul"
+    "titles_other": "{{count}} judul",
+    "books_other": "{{count}} buku"
   },
   "awards": {
     "academy": {
@@ -350,5 +351,38 @@
     "minimize": "Perkecil",
     "readMore": "Baca selengkapnya",
     "less": "Tampilkan lebih sedikit"
+  },
+  "books": {
+    "overview": "Ringkasan",
+    "books": "Buku",
+    "authors": "Penulis",
+    "series": "Seri",
+    "narrators": "Narator",
+    "audiobook": "Buku audio",
+    "author": "Penulis",
+    "continueListening": "Lanjutkan mendengarkan",
+    "nowListening": "Sedang didengarkan",
+    "openPlayer": "Buka pemutar",
+    "chapters": "Bab",
+    "previousChapter": "Bab sebelumnya",
+    "nextChapter": "Bab berikutnya",
+    "backSeconds": "Mundur {{seconds}} detik",
+    "aheadSeconds": "Maju {{seconds}} detik",
+    "speed": "Kecepatan",
+    "left": "Sisa {{time}}",
+    "leftInBook": "Sisa {{time}} di buku ini",
+    "resume": "Lanjutkan",
+    "markFinished": "Tandai selesai",
+    "markUnfinished": "Tandai belum selesai",
+    "finished": "Selesai",
+    "bookOf": "Buku {{n}} dari {{series}}",
+    "bookN": "Buku {{n}}",
+    "inSeries": "Lainnya di {{series}}",
+    "narratedBy": "Dibacakan oleh {{names}}",
+    "narratedByLabel": "Dibacakan oleh",
+    "noSeries": "Belum ada seri",
+    "noNarrators": "Belum ada narator",
+    "fromTags": "Seri dan narator diambil dari tag buku, atau dari folder seperti Penulis/Seri/Buku.",
+    "length": "Durasi"
   }
 }

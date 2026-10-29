@@ -155,7 +155,8 @@
     "endOfItem": "Amikor ez véget ér",
     "left": "Még {{time}}",
     "atEnd": "A végén megáll",
-    "paused": "Az elalvási időzítő szüneteltette"
+    "paused": "Az elalvási időzítő szüneteltette",
+    "endOfChapter": "A fejezet végén"
   },
   "goBack": "Vissza",
   "back": "Vissza",
@@ -591,7 +592,8 @@
       "kind": {
         "movies": "Filmek",
         "tv": "Tévésorozatok",
-        "music": "Zene"
+        "music": "Zene",
+        "audiobooks": "Hangoskönyvek"
       },
       "type": "Típus",
       "folders": "Mappák",

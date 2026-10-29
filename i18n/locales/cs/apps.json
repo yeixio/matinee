@@ -338,7 +338,8 @@
     "endOfItem": "Až to skončí",
     "left": "Zbývá {{time}}",
     "atEnd": "Zastaví se na konci",
-    "paused": "Pozastaveno časovačem"
+    "paused": "Pozastaveno časovačem",
+    "endOfChapter": "Konec této kapitoly"
   },
   "close": "Zavřít",
   "trailer": {
@@ -371,7 +372,9 @@
     "season": "Řada",
     "album": "Album",
     "artist": "Interpret",
-    "track": "Skladba"
+    "track": "Skladba",
+    "book": "Audiokniha",
+    "author": "Autor"
   },
   "profiles": {
     "whoIsWatching": "Kdo se dívá?",

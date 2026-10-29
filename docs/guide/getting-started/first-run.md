@@ -13,7 +13,7 @@ Pick a username and a password of at least 8 characters, then **Create account**
 
 ## Add your libraries
 
-A library is a set of folders holding one kind of media: movies, TV shows or music. Most people have three, one of each.
+A library is a set of folders holding one kind of media: movies, TV shows, music or audiobooks. Most people have three or four, one of each.
 
 1. Open **Settings** (the gear at the top right) and find **Libraries**.
 2. Click **Add a library** and pick the type.
