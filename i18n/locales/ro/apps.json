@@ -310,7 +310,11 @@
     "positionOf": "{{at}} din {{total}}",
     "castingTo": "Se redă pe {{name}}",
     "airPlaying": "Se redă pe televizor prin AirPlay",
-    "castControls": "Arată comenzile"
+    "castControls": "Arată comenzile",
+    "audioNeedsUpdate": "Actualizează Matinee pe server ca să alegi sunetul aici",
+    "trackFailed": "Nu s-a putut trece la acea pistă",
+    "subtitlesFailed": "Nu s-au putut încărca aceste subtitrări",
+    "convertsVideo": "Convertește videoclipul"
   },
   "library": {
     "nothingUnwatched": "Nimic nevăzut aici",

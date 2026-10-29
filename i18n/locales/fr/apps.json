@@ -310,7 +310,11 @@
     "positionOf": "{{at}} sur {{total}}",
     "castingTo": "Lecture sur {{name}}",
     "airPlaying": "Lecture sur votre téléviseur avec AirPlay",
-    "castControls": "Afficher les commandes"
+    "castControls": "Afficher les commandes",
+    "audioNeedsUpdate": "Mettez à jour Matinee sur le serveur pour choisir l'audio ici",
+    "trackFailed": "Impossible de passer à cette piste",
+    "subtitlesFailed": "Impossible de charger ces sous-titres",
+    "convertsVideo": "Convertit la vidéo"
   },
   "library": {
     "nothingUnwatched": "Rien de non vu ici",

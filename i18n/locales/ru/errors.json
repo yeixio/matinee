@@ -137,5 +137,6 @@
   "volume_must_be_between_0_and_1": "volume должно быть от 0 до 1",
   "couldnt_read_the_songs_sound": "не удалось прочитать звук песни",
   "no_levels_on_this_server": "на этом сервере нет уровней",
-  "not_a_song": "это не песня"
+  "not_a_song": "это не песня",
+  "no_such_audio_track": "такой звуковой дорожки нет"
 }

@@ -137,5 +137,6 @@
   "volume_must_be_between_0_and_1": "volume trebuie să fie între 0 și 1",
   "couldnt_read_the_songs_sound": "sunetul melodiei nu a putut fi citit",
   "no_levels_on_this_server": "nu există niveluri pe acest server",
-  "not_a_song": "nu este o melodie"
+  "not_a_song": "nu este o melodie",
+  "no_such_audio_track": "nu există o astfel de pistă audio"
 }

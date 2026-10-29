@@ -1216,7 +1216,18 @@ func (s *Server) startHLS(w http.ResponseWriter, r *http.Request) {
 			burn = t.Stream
 		}
 	}
-	id, err := s.Transcoder.Start(r.Context(), currentUser(r).ID, it, start, burn)
+	// audio picks one of the file's audio streams (its index among them, as
+	// in the item's mediaInfo), for another language or a commentary.
+	audio := 0
+	if a := r.URL.Query().Get("audio"); a != "" {
+		n, err := strconv.Atoi(a)
+		if mi, _ := s.mediaInfo(r, it); err != nil || n < 0 || (mi != nil && n >= len(mi.Audio)) {
+			writeError(w, http.StatusBadRequest, "no such audio track")
+			return
+		}
+		audio = n
+	}
+	id, err := s.Transcoder.Start(r.Context(), currentUser(r).ID, it, start, burn, audio)
 	if errors.Is(err, stream.ErrSuperseded) {
 		// The player already asked for a newer position; it ignores this answer.
 		writeError(w, http.StatusConflict, "replaced by a newer seek")
@@ -1227,7 +1238,8 @@ func (s *Server) startHLS(w http.ResponseWriter, r *http.Request) {
 		writeError(w, http.StatusInternalServerError, "couldn't start playback for this file")
 		return
 	}
-	writeJSON(w, http.StatusOK, map[string]any{"url": "/api/v1/hls/" + id + "/index.m3u8", "startSec": start})
+	// audio says the server chose the track, so apps know it can.
+	writeJSON(w, http.StatusOK, map[string]any{"url": "/api/v1/hls/" + id + "/index.m3u8", "startSec": start, "audio": audio})
 }
 
 // subtitleTracks lists a video's subtitle tracks. Files scanned before

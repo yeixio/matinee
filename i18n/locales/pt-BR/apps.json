@@ -310,7 +310,11 @@
     "positionOf": "{{at}} de {{total}}",
     "castingTo": "Reproduzindo em {{name}}",
     "airPlaying": "Reproduzindo na sua TV com AirPlay",
-    "castControls": "Mostrar controles"
+    "castControls": "Mostrar controles",
+    "audioNeedsUpdate": "Atualize o Matinee no servidor para escolher o áudio aqui",
+    "trackFailed": "Não foi possível trocar para essa faixa",
+    "subtitlesFailed": "Não foi possível carregar estas legendas",
+    "convertsVideo": "Converte o vídeo"
   },
   "library": {
     "nothingUnwatched": "Nada para assistir aqui",

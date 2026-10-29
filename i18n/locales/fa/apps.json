@@ -305,7 +305,11 @@
     "positionOf": "{{at}} از {{total}}",
     "castingTo": "در حال پخش روی {{name}}",
     "airPlaying": "در حال پخش روی تلویزیون با AirPlay",
-    "castControls": "نمایش کنترل‌ها"
+    "castControls": "نمایش کنترل‌ها",
+    "audioNeedsUpdate": "برای انتخاب صدا در اینجا، Matinee را روی سرور به‌روز کنید",
+    "trackFailed": "تغییر به این قطعه ممکن نشد",
+    "subtitlesFailed": "این زیرنویس‌ها بارگیری نشدند",
+    "convertsVideo": "ویدیو را تبدیل می‌کند"
   },
   "library": {
     "nothingUnwatched": "اینجا چیز دیده‌نشده‌ای نیست",

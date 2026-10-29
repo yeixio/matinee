@@ -137,5 +137,6 @@
   "volume_must_be_between_0_and_1": "volume harus antara 0 dan 1",
   "couldnt_read_the_songs_sound": "tidak dapat membaca suara lagu",
   "no_levels_on_this_server": "tidak ada level di server ini",
-  "not_a_song": "bukan lagu"
+  "not_a_song": "bukan lagu",
+  "no_such_audio_track": "trek audio tersebut tidak ada"
 }

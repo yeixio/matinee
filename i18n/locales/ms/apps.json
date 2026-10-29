@@ -300,7 +300,11 @@
     "positionOf": "{{at}} daripada {{total}}",
     "castingTo": "Dimainkan di {{name}}",
     "airPlaying": "Dimainkan di TV anda dengan AirPlay",
-    "castControls": "Tunjukkan kawalan"
+    "castControls": "Tunjukkan kawalan",
+    "audioNeedsUpdate": "Kemas kini Matinee pada pelayan untuk memilih audio di sini",
+    "trackFailed": "Tidak dapat bertukar ke trek itu",
+    "subtitlesFailed": "Tidak dapat memuatkan sari kata ini",
+    "convertsVideo": "Menukar video"
   },
   "library": {
     "nothingUnwatched": "Tiada yang belum ditonton di sini",

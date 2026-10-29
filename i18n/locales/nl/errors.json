@@ -137,5 +137,6 @@
   "volume_must_be_between_0_and_1": "volume moet tussen 0 en 1 liggen",
   "couldnt_read_the_songs_sound": "het geluid van het nummer kon niet worden gelezen",
   "no_levels_on_this_server": "geen niveaus op deze server",
-  "not_a_song": "geen nummer"
+  "not_a_song": "geen nummer",
+  "no_such_audio_track": "deze audiotrack bestaat niet"
 }

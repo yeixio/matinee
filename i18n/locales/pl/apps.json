@@ -315,7 +315,11 @@
     "positionOf": "{{at}} z {{total}}",
     "castingTo": "Odtwarzanie na {{name}}",
     "airPlaying": "Odtwarzanie na telewizorze przez AirPlay",
-    "castControls": "Pokaż sterowanie"
+    "castControls": "Pokaż sterowanie",
+    "audioNeedsUpdate": "Zaktualizuj Matinee na serwerze, aby wybrać tu dźwięk",
+    "trackFailed": "Nie udało się przełączyć na tę ścieżkę",
+    "subtitlesFailed": "Nie udało się wczytać tych napisów",
+    "convertsVideo": "Konwertuje wideo"
   },
   "library": {
     "nothingUnwatched": "Nie ma tu nic nieobejrzanego",

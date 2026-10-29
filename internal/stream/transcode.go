@@ -92,11 +92,12 @@ func NewTranscoder(ffmpeg, dir string, hw Accelerator, log *slog.Logger) *Transc
 // Start begins a transcode of item from startSec and returns the session id
 // once the first segment is ready. A user watching an item has at most one
 // session for it, so seeking far ahead replaces the old one. burnSub is an
-// embedded subtitle stream to draw into the video, or -1 for none.
+// embedded subtitle stream to draw into the video, or -1 for none. audio is
+// which of the file's audio streams to play (FFmpeg's 0:a:N), 0 for the first.
 //
 // With a hardware accelerator, a transcode that fails to start on the GPU
 // starts again with less of it on the GPU, and finally on the CPU alone.
-func (t *Transcoder) Start(ctx context.Context, userID int64, it store.Item, startSec float64, burnSub int) (string, error) {
+func (t *Transcoder) Start(ctx context.Context, userID int64, it store.Item, startSec float64, burnSub, audio int) (string, error) {
 	t.mu.Lock()
 	for id, s := range t.sessions {
 		if s.userID == userID && s.itemID == it.ID {
@@ -113,7 +114,7 @@ func (t *Transcoder) Start(ctx context.Context, userID int64, it store.Item, sta
 	video := hwaccel.Video{Codec: it.VideoCodec, BurnSub: burnSub, MaxWidth: maxWidth, KeyframeSeconds: segmentSeconds}
 	modes := t.plan(accel, it.ID, video)
 	for i, mode := range modes {
-		id, err := t.start(ctx, userID, it, startSec, accel, mode, video)
+		id, err := t.start(ctx, userID, it, startSec, accel, mode, video, audio)
 		if err == nil || i == len(modes)-1 || errors.Is(err, ErrSuperseded) || ctx.Err() != nil {
 			return id, err
 		}
@@ -150,7 +151,7 @@ func (t *Transcoder) hwFailed(itemID int64, kind hwaccel.Kind, mode hwaccel.Mode
 	}
 }
 
-func (t *Transcoder) start(ctx context.Context, userID int64, it store.Item, startSec float64, accel *hwaccel.Accel, mode hwaccel.Mode, video hwaccel.Video) (string, error) {
+func (t *Transcoder) start(ctx context.Context, userID int64, it store.Item, startSec float64, accel *hwaccel.Accel, mode hwaccel.Mode, video hwaccel.Video, audio int) (string, error) {
 	b := make([]byte, 12)
 	rand.Read(b)
 	id := hex.EncodeToString(b)
@@ -160,10 +161,14 @@ func (t *Transcoder) start(ctx context.Context, userID int64, it store.Item, sta
 	}
 
 	args := []string{"-hide_banner", "-loglevel", "error", "-nostdin"}
+	if audio < 0 {
+		audio = 0
+	}
+	audioMap := "0:a:" + strconv.Itoa(audio)
 	var output []string
 	switch {
 	case it.VideoCodec == "":
-		output = []string{"-vn", "-map", "0:a:0", "-c:a", "aac", "-b:a", "256k"}
+		output = []string{"-vn", "-map", audioMap, "-c:a", "aac", "-b:a", "256k"}
 	case it.VideoCodec == "h264" && video.BurnSub < 0:
 		// Already browser-friendly video: repackage instead of re-encoding. Far cheaper.
 		output = []string{"-map", "0:v:0", "-c:v", "copy"}
@@ -173,7 +178,7 @@ func (t *Transcoder) start(ctx context.Context, userID int64, it store.Item, sta
 		args = append(args, input...)
 	}
 	if it.VideoCodec != "" {
-		output = append(output, "-map", "0:a:0?", "-sn", "-c:a", "aac", "-ac", "2", "-b:a", "192k")
+		output = append(output, "-map", audioMap+"?", "-sn", "-c:a", "aac", "-ac", "2", "-b:a", "192k")
 	}
 	if startSec > 0 {
 		args = append(args, "-ss", strconv.FormatFloat(startSec, 'f', 3, 64))
@@ -213,7 +218,7 @@ func (t *Transcoder) start(ctx context.Context, userID int64, it store.Item, sta
 	t.sessions[id] = s
 	t.mu.Unlock()
 	t.Log.Info("transcode started", "session", id, "item", it.ID, "start", startSec,
-		"videoCopy", it.VideoCodec == "h264" && video.BurnSub < 0, "burnSub", video.BurnSub, "accel", kind, "mode", mode)
+		"videoCopy", it.VideoCodec == "h264" && video.BurnSub < 0, "burnSub", video.BurnSub, "audio", audio, "accel", kind, "mode", mode)
 
 	// Wait for the first segment so the player can start right away. A GPU
 	// that hasn't made one in a while is stuck, and the CPU gets a turn.

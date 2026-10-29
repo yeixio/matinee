@@ -37,7 +37,7 @@ func TestStartSupersededByNewerSeek(t *testing.T) {
 
 	first := make(chan error, 1)
 	go func() {
-		_, err := tr.Start(context.Background(), 7, it, 10, -1)
+		_, err := tr.Start(context.Background(), 7, it, 10, -1, 0)
 		first <- err
 	}()
 	// Let the first FFmpeg get going, then replace it.
@@ -50,7 +50,7 @@ func TestStartSupersededByNewerSeek(t *testing.T) {
 		}
 		time.Sleep(10 * time.Millisecond)
 	}
-	id, err := tr.Start(context.Background(), 7, it, 40, -1)
+	id, err := tr.Start(context.Background(), 7, it, 40, -1, 0)
 	if err != nil {
 		t.Fatalf("newer start: %v", err)
 	}
@@ -110,7 +110,7 @@ func TestStartFallsBackToCPU(t *testing.T) {
 	if got := tr.plan(gpu, it.ID, hwaccel.Video{Codec: "mpeg4", BurnSub: -1}); !slices.Equal(got, []hwaccel.Mode{hwaccel.Encode, hwaccel.CPU}) {
 		t.Fatalf("plan before failing: %v", got)
 	}
-	id, err := tr.Start(context.Background(), 7, it, 0, -1)
+	id, err := tr.Start(context.Background(), 7, it, 0, -1, 0)
 	if err != nil {
 		t.Fatalf("start: %v\n%s", err, logs.String())
 	}

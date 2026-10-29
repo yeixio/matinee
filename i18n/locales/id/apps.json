@@ -300,7 +300,11 @@
     "positionOf": "{{at}} dari {{total}}",
     "castingTo": "Diputar di {{name}}",
     "airPlaying": "Diputar di TV Anda dengan AirPlay",
-    "castControls": "Tampilkan kontrol"
+    "castControls": "Tampilkan kontrol",
+    "audioNeedsUpdate": "Perbarui Matinee di server untuk memilih audio di sini",
+    "trackFailed": "Tidak dapat beralih ke trek itu",
+    "subtitlesFailed": "Tidak dapat memuat subtitle ini",
+    "convertsVideo": "Mengonversi video"
   },
   "library": {
     "nothingUnwatched": "Tidak ada yang belum ditonton di sini",

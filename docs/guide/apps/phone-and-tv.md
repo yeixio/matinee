@@ -68,13 +68,38 @@ On Apple TV, the **top shelf** (the banner above Matinee's icon on the home scre
 
 Android TV and Google TV install the same app as Android phones, from Google Play.
 
+<!-- since: v0.1.4 -->
+## Watching on a TV
+
+The remote works the way it does in your TV's own player:
+
+| Press | While something plays |
+| --- | --- |
+| Select, or Play/Pause | Pause, and play again |
+| Left or right | Back or forward 10 seconds (hold for a minute); rewind and fast forward on remotes that have them do the same |
+| Up | Show the bar: where you are, the time left and when it ends |
+| Down | Show the bar and go to the buttons under it: **Audio**, **Subtitles** and **Sleep timer** |
+| Up or Back, on the buttons | Back to the bar |
+| Back | Leave the player |
+
+![The player on a TV, with subtitles on and the buttons under the bar](../images/app-tv-player.webp)
+
+On the buttons, left and right move between them and select opens one. **Audio** lists every sound track in the file, by language, with commentaries and audio description marked and the format of each (such as Dolby TrueHD · Atmos · 7.1). **Subtitles** lists the subtitles in the file and the [files next to it](/docs/getting-started/organizing-media/#subtitles), and **Off**. The one in use has a check, and the button says what's on.
+
+![Picking the audio track on a TV](../images/app-tv-audio.webp)
+
+The app remembers the subtitle language you pick for the next episode and the next film, as the browser does. Picture subtitles from Blu-rays and DVDs, and another sound track in a file the TV can't play as it is, need the server to convert the video again from where you are, so the picture pauses for a moment.
+
+On a phone or tablet, the audio and subtitles buttons are at the top of the player, next to the title.
+<!-- /since -->
+
 <!-- since: v0.1.1 -->
 ## Sleep timer
 
 The apps have the same [sleep timer](/docs/watching/playing/#sleep-timer) as the browser: a set number of minutes, or the end of this episode or movie, then the sound fades out and playback pauses.
 
 - **On a phone or tablet**, tap the moon at the top of the player, next to the title.
-- **On a TV**, press down on the remote while the player's controls show, then pick a time. The moon at the bottom of the controls shows the time left.
+- **On a TV**, press down on the remote while something plays to reach the sleep timer, then pick a time. The moon at the bottom of the controls shows the time left.
 
 ![The sleep timer's choices on a TV](../images/app-tv-sleep.webp)
 

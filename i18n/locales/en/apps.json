@@ -305,7 +305,11 @@
     "positionOf": "{{at}} of {{total}}",
     "castingTo": "Playing on {{name}}",
     "airPlaying": "Playing on your TV with AirPlay",
-    "castControls": "Show controls"
+    "castControls": "Show controls",
+    "audioNeedsUpdate": "Update Matinee on the server to pick the audio here",
+    "trackFailed": "Couldn't switch to that track",
+    "subtitlesFailed": "Couldn't load these subtitles",
+    "convertsVideo": "Converts video"
   },
   "library": {
     "nothingUnwatched": "Nothing unwatched here",

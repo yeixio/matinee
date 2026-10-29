@@ -300,7 +300,11 @@
     "positionOf": "{{at}} / {{total}}",
     "castingTo": "Đang phát trên {{name}}",
     "airPlaying": "Đang phát trên TV qua AirPlay",
-    "castControls": "Hiện điều khiển"
+    "castControls": "Hiện điều khiển",
+    "audioNeedsUpdate": "Cập nhật Matinee trên máy chủ để chọn âm thanh tại đây",
+    "trackFailed": "Không thể chuyển sang rãnh đó",
+    "subtitlesFailed": "Không thể tải phụ đề này",
+    "convertsVideo": "Chuyển đổi video"
   },
   "library": {
     "nothingUnwatched": "Không còn gì chưa xem ở đây",

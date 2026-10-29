@@ -305,7 +305,11 @@
     "positionOf": "{{at}} von {{total}}",
     "castingTo": "Läuft auf {{name}}",
     "airPlaying": "Läuft per AirPlay auf deinem Fernseher",
-    "castControls": "Steuerung anzeigen"
+    "castControls": "Steuerung anzeigen",
+    "audioNeedsUpdate": "Aktualisiere Matinee auf dem Server, um hier die Tonspur zu wählen",
+    "trackFailed": "Konnte nicht zu dieser Spur wechseln",
+    "subtitlesFailed": "Diese Untertitel konnten nicht geladen werden",
+    "convertsVideo": "Wandelt das Video um"
   },
   "library": {
     "nothingUnwatched": "Hier ist nichts ungesehen",

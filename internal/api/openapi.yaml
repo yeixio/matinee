@@ -1229,6 +1229,7 @@ paths:
         - $ref: "#/components/parameters/ID"
         - { name: start, in: query, schema: { type: number }, description: Seconds into the file. }
         - { name: subtitle, in: query, schema: { type: string }, description: A subtitle track to burn in (picture-based tracks). }
+        - { name: audio, in: query, schema: { type: integer, minimum: 0 }, description: "Which audio stream to play: its index among the file's audio streams (mediaInfo.audio[].index). The first when left out." }
       responses:
         "200":
           description: An HLS playlist to play.
@@ -1239,6 +1240,8 @@ paths:
                 properties:
                   url: { type: string, example: /api/v1/hls/abc123/index.m3u8 }
                   startSec: { type: number }
+                  audio: { type: integer, description: The audio stream playing. Servers from before audio choice leave it out. }
+        "400": { description: No such subtitle or audio track. }
         "409": { description: A newer start for the same item replaced this one. }
   /items/{id}/trailers:
     get:

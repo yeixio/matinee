@@ -137,5 +137,6 @@
   "volume_must_be_between_0_and_1": "volume 必須介於 0 到 1",
   "couldnt_read_the_songs_sound": "無法讀取歌曲的聲音",
   "no_levels_on_this_server": "此伺服器沒有音量資料",
-  "not_a_song": "不是歌曲"
+  "not_a_song": "不是歌曲",
+  "no_such_audio_track": "沒有這個音軌"
 }

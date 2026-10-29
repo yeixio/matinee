@@ -137,5 +137,6 @@
   "volume_must_be_between_0_and_1": "volume 0 ile 1 arasında olmalı",
   "couldnt_read_the_songs_sound": "şarkının sesi okunamadı",
   "no_levels_on_this_server": "bu sunucuda seviye yok",
-  "not_a_song": "şarkı değil"
+  "not_a_song": "şarkı değil",
+  "no_such_audio_track": "böyle bir ses parçası yok"
 }
