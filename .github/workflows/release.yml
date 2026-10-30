@@ -81,7 +81,19 @@ jobs:
       - name: Install ffmpeg
         run: sudo apt-get update && sudo apt-get install -y --no-install-recommends ffmpeg
       - run: make lint
-      - run: go test -count=1 ./...
+      - name: Test
+        run: |
+          set -o pipefail
+          # Job logs can't be read from everywhere, so failing tests also go
+          # in an annotation on the run.
+          if ! go test -count=1 ./... 2>&1 | tee "$RUNNER_TEMP/test.log"; then
+            summary="$(grep -E -B2 -A12 '^\s*--- FAIL|^panic:|^FAIL' "$RUNNER_TEMP/test.log" | head -n 60)"
+            summary="${summary//'%'/'%25'}"
+            summary="${summary//$'\r'/}"
+            summary="${summary//$'\n'/'%0A'}"
+            echo "::error title=Tests failed::$summary"
+            exit 1
+          fi
 
   image:
     needs: [tag, test]
