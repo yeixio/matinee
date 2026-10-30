@@ -57,7 +57,18 @@ The moon button in the full player stops the book after 15, 30, 45, 60 or 90 min
 
 The phone and tablet apps have the same audiobook library and pages, and a player made for books. Tap **Play** or **Resume** and the book keeps going above the tabs while you browse, with the screen locked and with the app in the background; the lock screen shows the book and its cover. Tap the player for the full one, with the chapter's progress, back 15 and ahead 30 seconds, previous and next chapter, the list of chapters, the speed and the sleep timer. The speed is kept for each profile on the device.
 
-On a TV, a book's page has **Play** or **Resume** and **Start over**. The TV plays a book a part at a time, keeps your place in the book as it goes, and moves on to the next part by itself. Downloads on a phone work for books too, a part at a time.
+Downloads on a phone work for books too, a part at a time.
+
+<!-- since: v0.1.5 -->
+## On a TV
+
+Apple TV and Android TV have a player made for books too. On a book's page, **Play** or **Resume** starts it where you left off and opens the player; **Start over** goes back to the beginning. The player has the cover, the chapter playing with how much of it is left, and how long until the end of the book (with the time it ends at, counting the speed in). The buttons, in one row for the remote, are **Previous chapter**, **Back 15 seconds**, play and pause, **Ahead 30 seconds** and **Next chapter**, then the **Speed** (0.75× to 3×) and the **Sleep timer**, which can stop at the end of the chapter. The chapters sit in a row below; select one to play from its start.
+
+![The audiobook player on a TV](../images/app-tv-book.webp)
+
+The book keeps playing while you browse, like music: the book shows at the top of the screen next to the server's name, and selecting it opens the player again. The play/pause button on the remote plays and pauses it from any screen. Your place in the book is kept on the whole book's clock, so you can carry on from a phone or the browser.
+
+<!-- /since -->
 
 <!-- since: v0.1.5 -->
 ## When the server restarts
