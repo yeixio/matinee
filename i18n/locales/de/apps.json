@@ -429,5 +429,11 @@
   },
   "remote": {
     "controlledBy": "Gesteuert von {{name}}"
+  },
+  "car": {
+    "listenNow": "Jetzt hören",
+    "music": "Musik",
+    "audiobooks": "Hörbücher",
+    "signIn": "Öffne Matinee auf deinem Handy und melde dich an, um im Auto zu hören."
   }
 }

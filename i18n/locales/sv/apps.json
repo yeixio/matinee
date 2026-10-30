@@ -429,5 +429,11 @@
   },
   "remote": {
     "controlledBy": "Styrs från {{name}}"
+  },
+  "car": {
+    "listenNow": "Lyssna nu",
+    "music": "Musik",
+    "audiobooks": "Ljudböcker",
+    "signIn": "Öppna Matinee i telefonen och logga in för att lyssna i bilen."
   }
 }

@@ -422,5 +422,11 @@
   },
   "remote": {
     "controlledBy": "由 {{name}} 控制"
+  },
+  "car": {
+    "listenNow": "立即收聽",
+    "music": "音樂",
+    "audiobooks": "有聲書",
+    "signIn": "在手機上開啟 Matinee 並登入，即可在車上收聽。"
   }
 }

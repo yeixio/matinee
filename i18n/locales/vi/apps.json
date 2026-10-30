@@ -422,5 +422,11 @@
   },
   "remote": {
     "controlledBy": "Được điều khiển từ {{name}}"
+  },
+  "car": {
+    "listenNow": "Nghe ngay",
+    "music": "Nhạc",
+    "audiobooks": "Sách nói",
+    "signIn": "Mở Matinee trên điện thoại và đăng nhập để nghe trên xe."
   }
 }

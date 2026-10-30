@@ -429,5 +429,11 @@
   },
   "remote": {
     "controlledBy": "Vezérelve innen: {{name}}"
+  },
+  "car": {
+    "listenNow": "Hallgasd most",
+    "music": "Zene",
+    "audiobooks": "Hangoskönyvek",
+    "signIn": "Nyisd meg a Matinee-t a telefonodon, és jelentkezz be, hogy az autóban is hallgathasd."
   }
 }

@@ -436,5 +436,11 @@
   },
   "remote": {
     "controlledBy": "Contrôlé depuis {{name}}"
+  },
+  "car": {
+    "listenNow": "Écouter",
+    "music": "Musique",
+    "audiobooks": "Livres audio",
+    "signIn": "Ouvrez Matinee sur votre téléphone et connectez-vous pour écouter en voiture."
   }
 }

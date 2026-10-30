@@ -422,5 +422,11 @@
   },
   "remote": {
     "controlledBy": "Dikendalikan dari {{name}}"
+  },
+  "car": {
+    "listenNow": "Dengarkan",
+    "music": "Musik",
+    "audiobooks": "Buku audio",
+    "signIn": "Buka Matinee di ponsel Anda dan masuk untuk mendengarkan di mobil."
   }
 }

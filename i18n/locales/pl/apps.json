@@ -443,5 +443,11 @@
   },
   "remote": {
     "controlledBy": "Sterowane z {{name}}"
+  },
+  "car": {
+    "listenNow": "Słuchaj teraz",
+    "music": "Muzyka",
+    "audiobooks": "Audiobooki",
+    "signIn": "Otwórz Matinee na telefonie i zaloguj się, aby słuchać w samochodzie."
   }
 }
