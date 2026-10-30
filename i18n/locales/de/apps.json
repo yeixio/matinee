@@ -434,7 +434,8 @@
     "listenNow": "Jetzt hören",
     "music": "Musik",
     "audiobooks": "Hörbücher",
-    "signIn": "Öffne Matinee auf deinem Handy und melde dich an, um im Auto zu hören."
+    "signIn": "Öffne Matinee auf deinem Handy und melde dich an, um im Auto zu hören.",
+    "loading": "Wird geladen…"
   },
   "watch": {
     "tileName": "Läuft gerade",

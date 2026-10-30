@@ -427,7 +427,8 @@
     "listenNow": "지금 듣기",
     "music": "음악",
     "audiobooks": "오디오북",
-    "signIn": "차에서 들으려면 휴대폰에서 Matinee를 열고 로그인하세요."
+    "signIn": "차에서 들으려면 휴대폰에서 Matinee를 열고 로그인하세요.",
+    "loading": "불러오는 중…"
   },
   "watch": {
     "tileName": "지금 재생 중",

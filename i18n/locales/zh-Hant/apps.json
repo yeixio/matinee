@@ -427,7 +427,8 @@
     "listenNow": "立即收聽",
     "music": "音樂",
     "audiobooks": "有聲書",
-    "signIn": "在手機上開啟 Matinee 並登入，即可在車上收聽。"
+    "signIn": "在手機上開啟 Matinee 並登入，即可在車上收聽。",
+    "loading": "正在載入…"
   },
   "watch": {
     "tileName": "正在播放",

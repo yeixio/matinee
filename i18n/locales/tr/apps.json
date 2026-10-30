@@ -434,7 +434,8 @@
     "listenNow": "Şimdi dinle",
     "music": "Müzik",
     "audiobooks": "Sesli kitaplar",
-    "signIn": "Arabada dinlemek için telefonunuzda Matinee'yi açıp oturum açın."
+    "signIn": "Arabada dinlemek için telefonunuzda Matinee'yi açıp oturum açın.",
+    "loading": "Yükleniyor…"
   },
   "watch": {
     "tileName": "Şimdi oynatılıyor",

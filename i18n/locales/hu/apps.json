@@ -434,7 +434,8 @@
     "listenNow": "Hallgasd most",
     "music": "Zene",
     "audiobooks": "Hangoskönyvek",
-    "signIn": "Nyisd meg a Matinee-t a telefonodon, és jelentkezz be, hogy az autóban is hallgathasd."
+    "signIn": "Nyisd meg a Matinee-t a telefonodon, és jelentkezz be, hogy az autóban is hallgathasd.",
+    "loading": "Betöltés…"
   },
   "watch": {
     "tileName": "Most szól",

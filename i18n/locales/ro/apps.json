@@ -441,7 +441,8 @@
     "listenNow": "Ascultă acum",
     "music": "Muzică",
     "audiobooks": "Cărți audio",
-    "signIn": "Deschide Matinee pe telefon și conectează-te ca să asculți în mașină."
+    "signIn": "Deschide Matinee pe telefon și conectează-te ca să asculți în mașină.",
+    "loading": "Se încarcă…"
   },
   "watch": {
     "tileName": "Se redă acum",

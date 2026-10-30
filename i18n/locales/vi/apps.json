@@ -427,7 +427,8 @@
     "listenNow": "Nghe ngay",
     "music": "Nhạc",
     "audiobooks": "Sách nói",
-    "signIn": "Mở Matinee trên điện thoại và đăng nhập để nghe trên xe."
+    "signIn": "Mở Matinee trên điện thoại và đăng nhập để nghe trên xe.",
+    "loading": "Đang tải…"
   },
   "watch": {
     "tileName": "Đang phát",

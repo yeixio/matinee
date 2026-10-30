@@ -434,7 +434,8 @@
     "listenNow": "Lyssna nu",
     "music": "Musik",
     "audiobooks": "Ljudböcker",
-    "signIn": "Öppna Matinee i telefonen och logga in för att lyssna i bilen."
+    "signIn": "Öppna Matinee i telefonen och logga in för att lyssna i bilen.",
+    "loading": "Läser in…"
   },
   "watch": {
     "tileName": "Spelas nu",
