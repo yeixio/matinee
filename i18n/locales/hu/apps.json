@@ -489,5 +489,15 @@
     "back15": "15 másodperc vissza",
     "ahead30": "30 másodperc előre",
     "storageUsed": "{{size}} ezen az órán"
+  },
+  "tvUnlock": {
+    "title": "Matinee feloldása",
+    "body": "Egyetlen {{price}} összegű fizetés végleg feloldja a Matinee-t minden Samsung és LG tévén, amely ezt a szervert használja.",
+    "scan": "Olvasd be a kódot a telefonoddal, vagy nyisd meg: {{url}}",
+    "trialUntil": "Ingyenes próbaidőszak eddig: {{date}}.",
+    "trialOver": "Az ingyenes próbaidőszak lejárt. Oldd fel a Matinee-t, hogy tovább nézhess és hallgathass.",
+    "waiting": "Ez a képernyő magától bezárul, amint fizettél.",
+    "unlocked": "A Matinee fel van oldva ezen a tévén.",
+    "updateServer": "Ahhoz, hogy itt feloldd a Matinee-t, előbb frissítsd a Matinee-szervered."
   }
 }

@@ -496,5 +496,15 @@
     "back15": "Indietro di 15 secondi",
     "ahead30": "Avanti di 30 secondi",
     "storageUsed": "{{size}} su questo orologio"
+  },
+  "tvUnlock": {
+    "title": "Sblocca Matinee",
+    "body": "Un unico pagamento di {{price}} sblocca Matinee per sempre su tutti i televisori Samsung e LG che usano questo server.",
+    "scan": "Inquadra il codice con il telefono o vai su {{url}}",
+    "trialUntil": "Prova gratuita fino al {{date}}.",
+    "trialOver": "La prova gratuita è terminata. Sblocca Matinee per continuare a guardare e ascoltare.",
+    "waiting": "Questa schermata si chiude da sola dopo il pagamento.",
+    "unlocked": "Matinee è sbloccato su questo televisore.",
+    "updateServer": "Per sbloccare Matinee qui, aggiorna prima il tuo server Matinee."
   }
 }

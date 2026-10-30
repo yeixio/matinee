@@ -496,5 +496,15 @@
     "back15": "Înapoi 15 secunde",
     "ahead30": "Înainte 30 de secunde",
     "storageUsed": "{{size}} pe acest ceas"
+  },
+  "tvUnlock": {
+    "title": "Deblochează Matinee",
+    "body": "O singură plată de {{price}} deblochează Matinee pentru totdeauna pe toate televizoarele Samsung și LG care folosesc acest server.",
+    "scan": "Scanează codul cu telefonul sau mergi la {{url}}",
+    "trialUntil": "Probă gratuită până la {{date}}.",
+    "trialOver": "Proba gratuită s-a încheiat. Deblochează Matinee ca să poți viziona și asculta în continuare.",
+    "waiting": "Acest ecran se închide singur după ce ai plătit.",
+    "unlocked": "Matinee este deblocat pe acest televizor.",
+    "updateServer": "Pentru a debloca Matinee aici, actualizează mai întâi serverul Matinee."
   }
 }

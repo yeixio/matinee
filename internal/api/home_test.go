@@ -198,3 +198,58 @@ func TestLibraryWatchSetting(t *testing.T) {
 	c.do("PUT", "/api/v1/settings", map[string]any{"libraryWatch": "off"}, nil)
 	watch(scan.MethodOff)
 }
+
+// A page from another origin, like a website open at home, gets neither the
+// guest account nor home's sign-in leniency, but can read the API with a token
+// (the Samsung and LG TV apps run from file:// pages).
+func TestCrossOriginFromHome(t *testing.T) {
+	c, _ := newTestServer(t)
+	var login struct{ Token string }
+	c.do("POST", "/api/v1/setup", credentials{"admin", "correct horse"}, &login)
+
+	send := func(method, path, origin, token string, headers ...string) *http.Response {
+		t.Helper()
+		req, _ := http.NewRequest(method, c.base+path, nil)
+		if origin != "" {
+			req.Header.Set("Origin", origin)
+		}
+		if token != "" {
+			req.Header.Set("Authorization", "Bearer "+token)
+		}
+		for i := 0; i+1 < len(headers); i += 2 {
+			req.Header.Set(headers[i], headers[i+1])
+		}
+		res, err := http.DefaultClient.Do(req)
+		if err != nil {
+			t.Fatal(err)
+		}
+		res.Body.Close()
+		return res
+	}
+
+	if res := send("GET", "/api/v1/home", "", ""); res.StatusCode != http.StatusOK {
+		t.Fatalf("guest at home: %d", res.StatusCode)
+	}
+	for _, origin := range []string{"null", "https://example.com"} {
+		res := send("GET", "/api/v1/home", origin, "")
+		if res.StatusCode != http.StatusUnauthorized {
+			t.Errorf("%s: guest got %d", origin, res.StatusCode)
+		}
+		if got := res.Header.Get("Access-Control-Allow-Origin"); got != "*" {
+			t.Errorf("%s: Access-Control-Allow-Origin %q", origin, got)
+		}
+		if res := send("GET", "/api/v1/home", origin, login.Token); res.StatusCode != http.StatusOK {
+			t.Errorf("%s with a token: %d", origin, res.StatusCode)
+		}
+	}
+
+	res := send("OPTIONS", "/api/v1/auth/device", "null", "", "Access-Control-Request-Method", "POST", "Access-Control-Request-Headers", "authorization,content-type", "Access-Control-Request-Private-Network", "true")
+	if res.StatusCode != http.StatusNoContent || res.Header.Get("Access-Control-Allow-Headers") != "authorization,content-type" || res.Header.Get("Access-Control-Allow-Private-Network") != "true" {
+		t.Errorf("preflight: %d %v", res.StatusCode, res.Header)
+	}
+
+	// The server's own pages are no other origin.
+	if res := send("GET", "/api/v1/home", c.base, ""); res.StatusCode != http.StatusOK || res.Header.Get("Access-Control-Allow-Origin") != "" {
+		t.Errorf("same origin: %d %v", res.StatusCode, res.Header)
+	}
+}

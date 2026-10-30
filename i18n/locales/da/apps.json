@@ -489,5 +489,15 @@
     "back15": "15 sekunder tilbage",
     "ahead30": "30 sekunder frem",
     "storageUsed": "{{size}} på dette ur"
+  },
+  "tvUnlock": {
+    "title": "Lås Matinee op",
+    "body": "Én betaling på {{price}} låser Matinee op for altid på alle Samsung- og LG-tv'er, der bruger denne server.",
+    "scan": "Scan koden med din telefon, eller gå til {{url}}",
+    "trialUntil": "Gratis prøveperiode indtil {{date}}.",
+    "trialOver": "Den gratis prøveperiode er slut. Lås Matinee op for at blive ved med at se og lytte.",
+    "waiting": "Denne skærm lukker af sig selv, når du har betalt.",
+    "unlocked": "Matinee er låst op på dette tv.",
+    "updateServer": "Opdater din Matinee-server først for at låse Matinee op her."
   }
 }

@@ -489,5 +489,15 @@
     "back15": "15 seconden terug",
     "ahead30": "30 seconden vooruit",
     "storageUsed": "{{size}} op dit horloge"
+  },
+  "tvUnlock": {
+    "title": "Matinee ontgrendelen",
+    "body": "Eén betaling van {{price}} ontgrendelt Matinee voorgoed op elke Samsung- en LG-tv die deze server gebruikt.",
+    "scan": "Scan de code met je telefoon of ga naar {{url}}",
+    "trialUntil": "Gratis proefperiode tot {{date}}.",
+    "trialOver": "De gratis proefperiode is voorbij. Ontgrendel Matinee om te blijven kijken en luisteren.",
+    "waiting": "Dit scherm sluit vanzelf zodra je hebt betaald.",
+    "unlocked": "Matinee is ontgrendeld op deze tv.",
+    "updateServer": "Werk eerst je Matinee-server bij om Matinee hier te ontgrendelen."
   }
 }

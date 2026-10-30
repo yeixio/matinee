@@ -503,5 +503,15 @@
     "back15": "Zpět o 15 sekund",
     "ahead30": "Vpřed o 30 sekund",
     "storageUsed": "{{size}} v těchto hodinkách"
+  },
+  "tvUnlock": {
+    "title": "Odemknout Matinee",
+    "body": "Jedna platba {{price}} natrvalo odemkne Matinee na všech televizorech Samsung a LG, které používají tento server.",
+    "scan": "Naskenujte kód telefonem nebo přejděte na {{url}}",
+    "trialUntil": "Zkušební verze zdarma do {{date}}.",
+    "trialOver": "Zkušební verze zdarma skončila. Odemkněte Matinee, abyste mohli dál sledovat a poslouchat.",
+    "waiting": "Tato obrazovka se po zaplacení sama zavře.",
+    "unlocked": "Matinee je na tomto televizoru odemčeno.",
+    "updateServer": "Chcete-li zde Matinee odemknout, nejprve aktualizujte svůj server Matinee."
   }
 }

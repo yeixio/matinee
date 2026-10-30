@@ -85,7 +85,8 @@ func directFromPrivateNetwork(r *http.Request) bool {
 
 // homeAccess reports whether a request may use the guest account.
 func (s *Server) homeAccess(r *http.Request) (bool, error) {
-	if !s.fromHome(r) {
+	// Not for a page from somewhere else, such as a website open at home (cors.go).
+	if !s.fromHome(r) || crossOrigin(r) {
 		return false, nil
 	}
 	required, err := s.homeSignInRequired(r.Context())

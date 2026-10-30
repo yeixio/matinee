@@ -341,7 +341,7 @@ func (s *Server) Handler() http.Handler {
 		writeError(w, http.StatusNotFound, "no such endpoint")
 	})
 	mux.Handle("/", s.webHandler())
-	return s.logRequests(s.markRestarting(mux))
+	return s.logRequests(s.markRestarting(allowOtherOrigins(mux)))
 }
 
 // ---- helpers ----
