@@ -355,6 +355,9 @@ var migrations = []string{
 	"ALTER TABLE items ADD COLUMN narrators TEXT", // |Name|Name|, like genres
 	"ALTER TABLE items ADD COLUMN series TEXT",
 	"ALTER TABLE items ADD COLUMN series_index REAL",
+	// 54: a track's own artist, kept when it isn't the album's, such as
+	// each artist on a soundtrack or compilation (see music.go).
+	"ALTER TABLE items ADD COLUMN track_artist TEXT",
 }
 
 func now() int64 { return time.Now().Unix() }

@@ -109,3 +109,11 @@ Online lookups go by the album and artist names in your tags. An edition note li
 ## Tags
 
 Artist, album, track number and title come from the tags in your files, so tag them with your favorite tagger before adding them. Without tags, Matinee uses the [folder and file names](/docs/getting-started/organizing-media/#music).
+
+<!-- since: v0.1.7 -->
+### Soundtracks and compilations
+
+An album is filed under its album artist tag. A soundtrack or compilation whose files don't have one still shows as one album: songs in the same folder with the same album name stay together. The album goes under the artist the folder is named for, such as `Some Composer/Some Film (2001)`, when that artist has songs on it, and under **Various Artists** otherwise. Each song keeps its own artist, which the album page shows under the song's title, and the player names while it plays.
+
+Albums split up by an older version join up again on the next scan of the library, with nothing to do on your part.
+<!-- /since -->

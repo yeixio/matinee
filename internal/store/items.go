@@ -42,6 +42,9 @@ type Item struct {
 	showID      int64
 	// For albums and tracks: who made it, and for tracks the album it's
 	// on (the album's id is ParentID), so a player can say what's playing.
+	// A track on a soundtrack or compilation names its own artist, with
+	// that artist's id only when the library has a page for them. The
+	// scanner sets Artist on a track only when it isn't the album's.
 	Artist   string `json:"artist,omitempty"`
 	ArtistID *int64 `json:"artistId,omitempty"`
 	Album    string `json:"album,omitempty"`
@@ -112,8 +115,11 @@ const itemCols = `
 	CASE WHEN i.kind = 'episode' THEN (SELECT se.parent_id FROM items se WHERE se.id = i.parent_id) END,
 	COALESCE(i.facts, ''), COALESCE(i.plugin_data, ''),
 	CASE WHEN i.kind IN ('album', 'book') THEN (SELECT ar.title FROM items ar WHERE ar.id = i.parent_id)
+		WHEN i.track_artist IS NOT NULL THEN i.track_artist
 		WHEN i.kind IN ('track', 'part') THEN (SELECT ar.title FROM items al JOIN items ar ON ar.id = al.parent_id WHERE al.id = i.parent_id) END,
 	CASE WHEN i.kind IN ('album', 'book') THEN i.parent_id
+		WHEN i.track_artist IS NOT NULL THEN (SELECT MIN(ar.id) FROM items ar
+			WHERE ar.library_id = i.library_id AND ar.kind = 'artist' AND ar.parent_id IS NULL AND ar.title = i.track_artist)
 		WHEN i.kind IN ('track', 'part') THEN (SELECT al.parent_id FROM items al WHERE al.id = i.parent_id) END,
 	CASE WHEN i.kind IN ('track', 'part') THEN (SELECT al.title FROM items al WHERE al.id = i.parent_id) END,
 	COALESCE(i.narrators, ''), COALESCE(i.series, ''), i.series_index`
@@ -392,8 +398,8 @@ func (s *Store) UpsertFile(ctx context.Context, it Item) (int64, error) {
 	err := s.db.QueryRowContext(ctx, `
 		INSERT INTO items (library_id, parent_id, kind, title, sort_title, year, index_number, disc_number,
 			path, size, mtime, duration_ms, container, video_codec, audio_codec, width, height, poster, backdrop, subtitle_streams,
-			facts, plugin_data, chapters, added_at)
-		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			facts, plugin_data, chapters, track_artist, added_at)
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 		ON CONFLICT (path) DO UPDATE SET
 			library_id = excluded.library_id, parent_id = excluded.parent_id, kind = excluded.kind,
 			title = excluded.title, sort_title = excluded.sort_title, year = excluded.year,
@@ -402,13 +408,14 @@ func (s *Store) UpsertFile(ctx context.Context, it Item) (int64, error) {
 			container = excluded.container, video_codec = excluded.video_codec, audio_codec = excluded.audio_codec,
 			width = excluded.width, height = excluded.height, subtitle_streams = excluded.subtitle_streams,
 			facts = excluded.facts, plugin_data = excluded.plugin_data, chapters = excluded.chapters,
+			track_artist = excluded.track_artist,
 			media_info = NULL, media_tags = NULL, -- the file changed; analyzed again soon
 			poster = COALESCE(excluded.poster, items.poster), backdrop = COALESCE(excluded.backdrop, items.backdrop)
 		RETURNING id`,
 		it.LibraryID, it.ParentID, it.Kind, it.Title, SortTitle(it.Title), it.Year, it.IndexNumber, it.DiscNumber,
 		it.Path, it.Size, it.Mtime, it.DurationMs, nullStr(it.Container), nullStr(it.VideoCodec), nullStr(it.AudioCodec),
 		it.Width, it.Height, nullStr(it.Poster), nullStr(it.Backdrop), nullStr(it.SubtitleStreams),
-		nullJSON(it.Facts), nullStr(string(it.PluginData)), nullJSON(it.Chapters), now()).Scan(&id)
+		nullJSON(it.Facts), nullStr(string(it.PluginData)), nullJSON(it.Chapters), trackArtist(it), now()).Scan(&id)
 	return id, err
 }
 
