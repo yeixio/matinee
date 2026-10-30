@@ -7,6 +7,7 @@ import { Artwork } from '../components/Artwork'
 import { GridSkeleton } from '../components/Card'
 import { LibraryIcon } from '../components/Shell'
 import { Row, RowItem } from '../components/Row'
+import { ViewTabs } from '../components/ViewTabs'
 import { TrackMenu, Tracks } from '../components/Tracks'
 import { Button, EmptyState, Spinner } from '../components/ui'
 import type { ItemFilter, SortField } from '../filter'
@@ -43,21 +44,7 @@ export default function Music({ lib }: { lib: Library }) {
           {t('common:music.shuffleAll')}
         </Button>
       </div>
-      <nav className="scrollbar-none -mx-4 flex gap-2 overflow-x-auto px-4 md:mx-0 md:px-0" role="tablist">
-        {views.map((v) => (
-          <button
-            key={v}
-            role="tab"
-            aria-selected={view === v}
-            onClick={() => pick(v)}
-            className={`shrink-0 rounded-full px-4 py-1.5 text-sm transition-colors ${
-              view === v ? 'bg-text font-medium text-ink' : 'bg-text/5 text-muted hover:bg-text/10 hover:text-text'
-            }`}
-          >
-            {t(`common:music.${v}`)}
-          </button>
-        ))}
-      </nav>
+      <ViewTabs views={views} view={view} label={(v) => t(`common:music.${v}`)} onPick={pick} />
       {view === 'overview' ? <Overview lib={lib} onMore={pick} /> : <All lib={lib} view={view} />}
     </div>
   )

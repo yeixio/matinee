@@ -3,6 +3,7 @@
   "nav": {
     "home": "หน้าแรก",
     "watchList": "รายการที่จะดู",
+    "libraries": "คลัง",
     "collections": "คอลเลกชัน",
     "scanning": "กำลังสแกน",
     "search": "ค้นหา",

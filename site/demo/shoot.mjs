@@ -246,6 +246,8 @@ try {
     await shot(page, 'phone-home', { maxWidth: 1170 })
     await page.goto(`${origin}/item/${lm.id}`)
     await shot(page, 'phone-movie', { maxWidth: 1170 })
+    await page.goto(`${origin}/libraries`)
+    await shot(page, 'phone-libraries', { maxWidth: 1170 })
     await page.context().close()
   }
 

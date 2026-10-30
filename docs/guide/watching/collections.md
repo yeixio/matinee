@@ -5,7 +5,7 @@ sidebar:
   order: 6
 ---
 
-A collection is a set of titles with a name. **Collections** in the top bar lists them.
+A collection is a set of titles with a name. **Collections** in the top bar (under **Libraries** on a phone) lists them.
 
 ![The Collections page: three smart collections for everyone and two box sets](../images/collections.webp)
 

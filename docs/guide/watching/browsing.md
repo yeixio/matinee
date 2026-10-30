@@ -5,7 +5,7 @@ sidebar:
   order: 2
 ---
 
-Each library has its own page in the top bar: **Movies**, **TV Shows**, **Music**, or whatever you named them.
+Each library has its own page in the top bar (under **Libraries** on a phone): **Movies**, **TV Shows**, **Music**, or whatever you named them.
 
 ![The Movies library: a grid of posters with Filters and sorting at the top](../images/library.webp)
 
@@ -48,14 +48,20 @@ Click the magnifying glass at the top (or **Search** in the apps) and start typi
 
 ## On a phone
 
-The web player works on phones and tablets too. The libraries move into a menu, and everything else is the same.
+The web player works on phones and tablets too. On a narrow screen it's laid out like the phone app, with tabs along the bottom: **Home**, **Libraries**, **Discover** (when [Overseerr](/docs/server/overseerr/) is connected), **Search** and **Settings**.
+
+<!-- since: v0.1.5 -->
+**Libraries** lists every library, then your **Watch list**, **Collections**, **Coming soon** and **Requests**, and **Sign out** at the end. In a music or audiobook library, the views along the top (**Overview**, **Artists**, **Albums** and so on) share the width so they all fit.
+<!-- /since -->
 
 <div class="pair">
 
 ![Home on a phone (phone)](../images/phone-home.webp)
 
-![A movie's page on a phone (phone)](../images/phone-movie.webp)
+![The Libraries tab on a phone (phone)](../images/phone-libraries.webp)
 
 </div>
+
+![A movie's page on a phone (phone)](../images/phone-movie.webp)
 
 For the best experience on a phone or TV, get the [Matinee apps](/docs/apps/phone-and-tv/).

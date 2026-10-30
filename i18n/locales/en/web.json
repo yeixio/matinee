@@ -3,6 +3,7 @@
   "nav": {
     "home": "Home",
     "watchList": "Watch list",
+    "libraries": "Libraries",
     "collections": "Collections",
     "scanning": "Scanning",
     "search": "Search",
