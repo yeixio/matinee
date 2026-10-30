@@ -5,6 +5,7 @@ import (
 	"os/exec"
 	"path/filepath"
 	"testing"
+	"time"
 
 	"github.com/yeixio/matinee/internal/store"
 )
@@ -132,5 +133,40 @@ func TestAudiobooks(t *testing.T) {
 	reload()
 	if !b.Played {
 		t.Fatalf("after the last part: %+v", b.Item)
+	}
+
+	// A place recorded offline, such as on a watch, lands on the book, from
+	// the book or a part, unless the book's place changed since.
+	sync := func(events ...store.ProgressEvent) (res struct{ Applied, Skipped int }) {
+		if code := c.do("POST", "/api/v1/sync/progress", map[string]any{"events": events}, &res); code != 200 {
+			t.Fatalf("sync: %d", code)
+		}
+		return
+	}
+	at := time.Now().Unix()
+	if res := sync(store.ProgressEvent{ItemID: b.ID, PositionMs: 20_000, At: at}); res.Applied != 1 {
+		t.Fatalf("book sync: %+v", res)
+	}
+	reload()
+	if b.PositionMs != 20_000 || b.Played {
+		t.Fatalf("place from an offline book: %d %v", b.PositionMs, b.Played)
+	}
+	if res := sync(store.ProgressEvent{ItemID: parts[1].ID, PositionMs: 5_000, At: at}); res.Applied != 1 {
+		t.Fatalf("part sync: %+v", res)
+	}
+	reload()
+	if b.PositionMs != b.Parts[1].StartMs+5_000 {
+		t.Fatalf("place from an offline part: %d", b.PositionMs)
+	}
+	if res := sync(store.ProgressEvent{ItemID: b.ID, PositionMs: 1_000, At: at - 3600}); res.Skipped != 1 {
+		t.Fatalf("older offline place: %+v", res)
+	}
+	if res := sync(store.ProgressEvent{ItemID: parts[2].ID, Played: true, At: at + 1}); res.Applied != 1 {
+		t.Fatalf("finishing offline: %+v", res)
+	}
+	reload()
+	c.do("GET", "/api/v1/items?kind=book&watched=watched", nil, &finished)
+	if !b.Played || len(finished) != 1 {
+		t.Fatalf("finished offline: %+v", b.Item)
 	}
 }

@@ -474,6 +474,27 @@
     "sleepMinutes": "{{minutes}} min",
     "sleepEndOfItem": "À la fin de celui-ci",
     "sleepsAt": "S'arrête à {{time}}",
-    "episode": "{{show}} · S{{season}} É{{episode}}"
+    "episode": "{{show}} · S{{season}} É{{episode}}",
+    "thisWatch": "Cette montre",
+    "onThisWatch": "Sur cette montre",
+    "nothingDownloaded": "Rien sur cette montre pour l'instant. Ajoutez de la musique et des livres audio pour écouter sans votre téléphone.",
+    "addMusicAndBooks": "Ajouter musique et livres",
+    "search": "Rechercher",
+    "searchHint": "Album ou livre",
+    "continueListening": "Reprendre l'écoute",
+    "newAlbums": "Nouveaux albums",
+    "newBooks": "Nouveaux livres audio",
+    "noResults": "Aucun résultat.",
+    "download": "Télécharger",
+    "downloading": "Téléchargement · {{percent}} %",
+    "preparing": "Préparation…",
+    "downloadFailed": "Échec du téléchargement",
+    "downloaded": "Téléchargé",
+    "remove": "Retirer de la montre",
+    "connectHeadphones": "Connectez un casque Bluetooth pour écouter.",
+    "bluetooth": "Réglages Bluetooth",
+    "back15": "Reculer de 15 secondes",
+    "ahead30": "Avancer de 30 secondes",
+    "storageUsed": "{{size}} sur cette montre"
   }
 }

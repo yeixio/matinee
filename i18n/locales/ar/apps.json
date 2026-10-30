@@ -495,6 +495,27 @@
     "sleepMinutes": "{{minutes}} د",
     "sleepEndOfItem": "عند انتهاء هذا",
     "sleepsAt": "يتوقف عند {{time}}",
-    "episode": "{{show}} · م{{season}} ح{{episode}}"
+    "episode": "{{show}} · م{{season}} ح{{episode}}",
+    "thisWatch": "هذه الساعة",
+    "onThisWatch": "على هذه الساعة",
+    "nothingDownloaded": "لا شيء على هذه الساعة بعد. أضف موسيقى وكتبًا صوتية للاستماع دون هاتفك.",
+    "addMusicAndBooks": "إضافة موسيقى وكتب",
+    "search": "بحث",
+    "searchHint": "ألبوم أو كتاب",
+    "continueListening": "متابعة الاستماع",
+    "newAlbums": "ألبومات جديدة",
+    "newBooks": "كتب صوتية جديدة",
+    "noResults": "لم يُعثر على شيء.",
+    "download": "تنزيل",
+    "downloading": "جارٍ التنزيل · {{percent}}٪",
+    "preparing": "جارٍ التجهيز…",
+    "downloadFailed": "تعذّر التنزيل",
+    "downloaded": "تم التنزيل",
+    "remove": "إزالة من الساعة",
+    "connectHeadphones": "وصّل سماعات بلوتوث للاستماع.",
+    "bluetooth": "إعدادات البلوتوث",
+    "back15": "رجوع 15 ثانية",
+    "ahead30": "تقدّم 30 ثانية",
+    "storageUsed": "{{size}} على هذه الساعة"
   }
 }

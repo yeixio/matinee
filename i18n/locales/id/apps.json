@@ -460,6 +460,27 @@
     "sleepMinutes": "{{minutes}} mnt",
     "sleepEndOfItem": "Saat ini selesai",
     "sleepsAt": "Berhenti pukul {{time}}",
-    "episode": "{{show}} · M{{season}} E{{episode}}"
+    "episode": "{{show}} · M{{season}} E{{episode}}",
+    "thisWatch": "Jam ini",
+    "onThisWatch": "Di jam ini",
+    "nothingDownloaded": "Belum ada apa pun di jam ini. Tambahkan musik dan buku audio untuk mendengarkan tanpa ponsel.",
+    "addMusicAndBooks": "Tambah musik dan buku",
+    "search": "Cari",
+    "searchHint": "Album atau buku",
+    "continueListening": "Lanjutkan mendengarkan",
+    "newAlbums": "Album baru",
+    "newBooks": "Buku audio baru",
+    "noResults": "Tidak ditemukan apa pun.",
+    "download": "Unduh",
+    "downloading": "Mengunduh · {{percent}}%",
+    "preparing": "Menyiapkan…",
+    "downloadFailed": "Gagal mengunduh",
+    "downloaded": "Terunduh",
+    "remove": "Hapus dari jam",
+    "connectHeadphones": "Hubungkan headphone Bluetooth untuk mendengarkan.",
+    "bluetooth": "Pengaturan Bluetooth",
+    "back15": "Mundur 15 detik",
+    "ahead30": "Maju 30 detik",
+    "storageUsed": "{{size}} di jam ini"
   }
 }

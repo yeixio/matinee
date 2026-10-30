@@ -467,6 +467,27 @@
     "sleepMinutes": "{{minutes}} perc",
     "sleepEndOfItem": "Ha ez véget ér",
     "sleepsAt": "Leáll: {{time}}",
-    "episode": "{{show}} · {{season}}. évad {{episode}}. rész"
+    "episode": "{{show}} · {{season}}. évad {{episode}}. rész",
+    "thisWatch": "Ez az óra",
+    "onThisWatch": "Ezen az órán",
+    "nothingDownloaded": "Ezen az órán még nincs semmi. Adj hozzá zenét és hangoskönyveket, hogy telefon nélkül hallgathasd.",
+    "addMusicAndBooks": "Zene és könyvek hozzáadása",
+    "search": "Keresés",
+    "searchHint": "Album vagy könyv",
+    "continueListening": "Hallgatás folytatása",
+    "newAlbums": "Új albumok",
+    "newBooks": "Új hangoskönyvek",
+    "noResults": "Nincs találat.",
+    "download": "Letöltés",
+    "downloading": "Letöltés · {{percent}}%",
+    "preparing": "Előkészítés…",
+    "downloadFailed": "Nem sikerült letölteni",
+    "downloaded": "Letöltve",
+    "remove": "Eltávolítás az óráról",
+    "connectHeadphones": "A hallgatáshoz csatlakoztass Bluetooth-fejhallgatót.",
+    "bluetooth": "Bluetooth-beállítások",
+    "back15": "15 másodperc vissza",
+    "ahead30": "30 másodperc előre",
+    "storageUsed": "{{size}} ezen az órán"
   }
 }

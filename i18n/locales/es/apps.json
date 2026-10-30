@@ -474,6 +474,27 @@
     "sleepMinutes": "{{minutes}} min",
     "sleepEndOfItem": "Cuando termine esto",
     "sleepsAt": "Se detiene a las {{time}}",
-    "episode": "{{show}} · T{{season}} E{{episode}}"
+    "episode": "{{show}} · T{{season}} E{{episode}}",
+    "thisWatch": "Este reloj",
+    "onThisWatch": "En este reloj",
+    "nothingDownloaded": "Aún no hay nada en este reloj. Añade música y audiolibros para escuchar sin el teléfono.",
+    "addMusicAndBooks": "Añadir música y libros",
+    "search": "Buscar",
+    "searchHint": "Álbum o libro",
+    "continueListening": "Seguir escuchando",
+    "newAlbums": "Álbumes nuevos",
+    "newBooks": "Audiolibros nuevos",
+    "noResults": "No se encontró nada.",
+    "download": "Descargar",
+    "downloading": "Descargando · {{percent}} %",
+    "preparing": "Preparándolo…",
+    "downloadFailed": "No se pudo descargar",
+    "downloaded": "Descargado",
+    "remove": "Quitar del reloj",
+    "connectHeadphones": "Conecta auriculares Bluetooth para escuchar.",
+    "bluetooth": "Ajustes de Bluetooth",
+    "back15": "Atrás 15 segundos",
+    "ahead30": "Adelante 30 segundos",
+    "storageUsed": "{{size}} en este reloj"
   }
 }

@@ -467,6 +467,27 @@
     "sleepMinutes": "{{minutes}} मिनट",
     "sleepEndOfItem": "जब यह खत्म हो",
     "sleepsAt": "{{time}} पर रुकेगा",
-    "episode": "{{show}} · सी{{season}} ए{{episode}}"
+    "episode": "{{show}} · सी{{season}} ए{{episode}}",
+    "thisWatch": "यह घड़ी",
+    "onThisWatch": "इस घड़ी पर",
+    "nothingDownloaded": "इस घड़ी पर अभी कुछ नहीं है। फ़ोन के बिना सुनने के लिए संगीत और ऑडियोबुक जोड़ें।",
+    "addMusicAndBooks": "संगीत और किताबें जोड़ें",
+    "search": "खोजें",
+    "searchHint": "एल्बम या किताब",
+    "continueListening": "सुनना जारी रखें",
+    "newAlbums": "नए एल्बम",
+    "newBooks": "नई ऑडियोबुक",
+    "noResults": "कुछ नहीं मिला।",
+    "download": "डाउनलोड करें",
+    "downloading": "डाउनलोड हो रहा है · {{percent}}%",
+    "preparing": "तैयार किया जा रहा है…",
+    "downloadFailed": "डाउनलोड नहीं हो सका",
+    "downloaded": "डाउनलोड हो गया",
+    "remove": "घड़ी से हटाएं",
+    "connectHeadphones": "सुनने के लिए ब्लूटूथ हेडफ़ोन कनेक्ट करें।",
+    "bluetooth": "ब्लूटूथ सेटिंग",
+    "back15": "15 सेकंड पीछे",
+    "ahead30": "30 सेकंड आगे",
+    "storageUsed": "इस घड़ी पर {{size}}"
   }
 }

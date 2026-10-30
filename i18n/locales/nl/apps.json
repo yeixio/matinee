@@ -467,6 +467,27 @@
     "sleepMinutes": "{{minutes}} min",
     "sleepEndOfItem": "Als dit afgelopen is",
     "sleepsAt": "Stopt om {{time}}",
-    "episode": "{{show}} · S{{season}} A{{episode}}"
+    "episode": "{{show}} · S{{season}} A{{episode}}",
+    "thisWatch": "Dit horloge",
+    "onThisWatch": "Op dit horloge",
+    "nothingDownloaded": "Nog niets op dit horloge. Voeg muziek en luisterboeken toe om zonder je telefoon te luisteren.",
+    "addMusicAndBooks": "Muziek en boeken toevoegen",
+    "search": "Zoeken",
+    "searchHint": "Album of boek",
+    "continueListening": "Verder luisteren",
+    "newAlbums": "Nieuwe albums",
+    "newBooks": "Nieuwe luisterboeken",
+    "noResults": "Niets gevonden.",
+    "download": "Downloaden",
+    "downloading": "Downloaden · {{percent}}%",
+    "preparing": "Wordt klaargemaakt…",
+    "downloadFailed": "Downloaden mislukt",
+    "downloaded": "Gedownload",
+    "remove": "Verwijderen van horloge",
+    "connectHeadphones": "Verbind een Bluetooth-koptelefoon om te luisteren.",
+    "bluetooth": "Bluetooth-instellingen",
+    "back15": "15 seconden terug",
+    "ahead30": "30 seconden vooruit",
+    "storageUsed": "{{size}} op dit horloge"
   }
 }

@@ -467,6 +467,27 @@
     "sleepMinutes": "{{minutes}} min",
     "sleepEndOfItem": "När den här slutar",
     "sleepsAt": "Stannar {{time}}",
-    "episode": "{{show}} · S{{season}} A{{episode}}"
+    "episode": "{{show}} · S{{season}} A{{episode}}",
+    "thisWatch": "Den här klockan",
+    "onThisWatch": "På den här klockan",
+    "nothingDownloaded": "Inget på den här klockan än. Lägg till musik och ljudböcker för att lyssna utan telefonen.",
+    "addMusicAndBooks": "Lägg till musik och böcker",
+    "search": "Sök",
+    "searchHint": "Album eller bok",
+    "continueListening": "Fortsätt lyssna",
+    "newAlbums": "Nya album",
+    "newBooks": "Nya ljudböcker",
+    "noResults": "Inget hittades.",
+    "download": "Ladda ned",
+    "downloading": "Laddar ned · {{percent}} %",
+    "preparing": "Förbereder …",
+    "downloadFailed": "Kunde inte ladda ned",
+    "downloaded": "Nedladdad",
+    "remove": "Ta bort från klockan",
+    "connectHeadphones": "Anslut Bluetooth-hörlurar för att lyssna.",
+    "bluetooth": "Bluetooth-inställningar",
+    "back15": "15 sekunder bakåt",
+    "ahead30": "30 sekunder framåt",
+    "storageUsed": "{{size}} på den här klockan"
   }
 }

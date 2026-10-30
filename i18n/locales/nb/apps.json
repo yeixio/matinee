@@ -467,6 +467,27 @@
     "sleepMinutes": "{{minutes}} min",
     "sleepEndOfItem": "Når denne slutter",
     "sleepsAt": "Stopper {{time}}",
-    "episode": "{{show}} · S{{season}} E{{episode}}"
+    "episode": "{{show}} · S{{season}} E{{episode}}",
+    "thisWatch": "Denne klokken",
+    "onThisWatch": "På denne klokken",
+    "nothingDownloaded": "Ingenting på denne klokken ennå. Legg til musikk og lydbøker for å lytte uten telefonen.",
+    "addMusicAndBooks": "Legg til musikk og bøker",
+    "search": "Søk",
+    "searchHint": "Album eller bok",
+    "continueListening": "Fortsett å lytte",
+    "newAlbums": "Nye album",
+    "newBooks": "Nye lydbøker",
+    "noResults": "Fant ingenting.",
+    "download": "Last ned",
+    "downloading": "Laster ned · {{percent}} %",
+    "preparing": "Gjør klar …",
+    "downloadFailed": "Kunne ikke laste ned",
+    "downloaded": "Lastet ned",
+    "remove": "Fjern fra klokken",
+    "connectHeadphones": "Koble til Bluetooth-hodetelefoner for å lytte.",
+    "bluetooth": "Bluetooth-innstillinger",
+    "back15": "15 sekunder tilbake",
+    "ahead30": "30 sekunder frem",
+    "storageUsed": "{{size}} på denne klokken"
   }
 }

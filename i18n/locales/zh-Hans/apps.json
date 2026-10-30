@@ -460,6 +460,27 @@
     "sleepMinutes": "{{minutes}} 分钟",
     "sleepEndOfItem": "播完这一集/首时",
     "sleepsAt": "将于 {{time}} 停止",
-    "episode": "{{show}} · 第 {{season}} 季第 {{episode}} 集"
+    "episode": "{{show}} · 第 {{season}} 季第 {{episode}} 集",
+    "thisWatch": "这块手表",
+    "onThisWatch": "手表上",
+    "nothingDownloaded": "这块手表上还没有内容。添加音乐和有声书，不带手机也能听。",
+    "addMusicAndBooks": "添加音乐和书",
+    "search": "搜索",
+    "searchHint": "专辑或书",
+    "continueListening": "继续收听",
+    "newAlbums": "新专辑",
+    "newBooks": "新有声书",
+    "noResults": "没有找到任何内容。",
+    "download": "下载",
+    "downloading": "正在下载 · {{percent}}%",
+    "preparing": "正在准备…",
+    "downloadFailed": "无法下载",
+    "downloaded": "已下载",
+    "remove": "从手表移除",
+    "connectHeadphones": "连接蓝牙耳机即可收听。",
+    "bluetooth": "蓝牙设置",
+    "back15": "后退 15 秒",
+    "ahead30": "前进 30 秒",
+    "storageUsed": "手表上 {{size}}"
   }
 }

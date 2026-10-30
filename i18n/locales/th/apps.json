@@ -460,6 +460,27 @@
     "sleepMinutes": "{{minutes}} นาที",
     "sleepEndOfItem": "เมื่อเรื่องนี้จบ",
     "sleepsAt": "หยุดเวลา {{time}}",
-    "episode": "{{show}} · ซ.{{season}} ต.{{episode}}"
+    "episode": "{{show}} · ซ.{{season}} ต.{{episode}}",
+    "thisWatch": "นาฬิกาเรือนนี้",
+    "onThisWatch": "ในนาฬิกาเรือนนี้",
+    "nothingDownloaded": "ยังไม่มีอะไรในนาฬิกาเรือนนี้ เพิ่มเพลงและหนังสือเสียงเพื่อฟังได้โดยไม่ต้องใช้โทรศัพท์",
+    "addMusicAndBooks": "เพิ่มเพลงและหนังสือ",
+    "search": "ค้นหา",
+    "searchHint": "อัลบั้มหรือหนังสือ",
+    "continueListening": "ฟังต่อ",
+    "newAlbums": "อัลบั้มใหม่",
+    "newBooks": "หนังสือเสียงใหม่",
+    "noResults": "ไม่พบสิ่งใด",
+    "download": "ดาวน์โหลด",
+    "downloading": "กำลังดาวน์โหลด · {{percent}}%",
+    "preparing": "กำลังเตรียม…",
+    "downloadFailed": "ดาวน์โหลดไม่สำเร็จ",
+    "downloaded": "ดาวน์โหลดแล้ว",
+    "remove": "ลบออกจากนาฬิกา",
+    "connectHeadphones": "เชื่อมต่อหูฟังบลูทูธเพื่อฟัง",
+    "bluetooth": "การตั้งค่าบลูทูธ",
+    "back15": "ย้อนกลับ 15 วินาที",
+    "ahead30": "ข้ามไป 30 วินาที",
+    "storageUsed": "{{size}} ในนาฬิกาเรือนนี้"
   }
 }

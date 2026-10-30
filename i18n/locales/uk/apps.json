@@ -481,6 +481,27 @@
     "sleepMinutes": "{{minutes}} хв",
     "sleepEndOfItem": "Коли це закінчиться",
     "sleepsAt": "Зупиниться о {{time}}",
-    "episode": "{{show}} · С{{season}} Е{{episode}}"
+    "episode": "{{show}} · С{{season}} Е{{episode}}",
+    "thisWatch": "Цей годинник",
+    "onThisWatch": "На цьому годиннику",
+    "nothingDownloaded": "На цьому годиннику ще нічого немає. Додайте музику й аудіокниги, щоб слухати без телефона.",
+    "addMusicAndBooks": "Додати музику й книги",
+    "search": "Пошук",
+    "searchHint": "Альбом або книга",
+    "continueListening": "Продовжити слухати",
+    "newAlbums": "Нові альбоми",
+    "newBooks": "Нові аудіокниги",
+    "noResults": "Нічого не знайдено.",
+    "download": "Завантажити",
+    "downloading": "Завантаження · {{percent}}%",
+    "preparing": "Підготовка…",
+    "downloadFailed": "Не вдалося завантажити",
+    "downloaded": "Завантажено",
+    "remove": "Видалити з годинника",
+    "connectHeadphones": "Під'єднайте Bluetooth-навушники, щоб слухати.",
+    "bluetooth": "Налаштування Bluetooth",
+    "back15": "Назад на 15 секунд",
+    "ahead30": "Уперед на 30 секунд",
+    "storageUsed": "{{size}} на цьому годиннику"
   }
 }

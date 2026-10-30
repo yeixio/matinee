@@ -467,6 +467,27 @@
     "sleepMinutes": "{{minutes}} min",
     "sleepEndOfItem": "When this one ends",
     "sleepsAt": "Stops at {{time}}",
-    "episode": "{{show}} · S{{season}} E{{episode}}"
+    "episode": "{{show}} · S{{season}} E{{episode}}",
+    "thisWatch": "This watch",
+    "onThisWatch": "On this watch",
+    "nothingDownloaded": "Nothing on this watch yet. Add music and audiobooks to listen without your phone.",
+    "addMusicAndBooks": "Add music and books",
+    "search": "Search",
+    "searchHint": "Album or book",
+    "continueListening": "Continue listening",
+    "newAlbums": "New albums",
+    "newBooks": "New audiobooks",
+    "noResults": "Nothing found.",
+    "download": "Download",
+    "downloading": "Downloading · {{percent}}%",
+    "preparing": "Getting it ready…",
+    "downloadFailed": "Couldn't download",
+    "downloaded": "Downloaded",
+    "remove": "Remove from watch",
+    "connectHeadphones": "Connect Bluetooth headphones to listen.",
+    "bluetooth": "Bluetooth settings",
+    "back15": "Back 15 seconds",
+    "ahead30": "Ahead 30 seconds",
+    "storageUsed": "{{size}} on this watch"
   }
 }

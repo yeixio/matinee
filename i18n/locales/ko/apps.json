@@ -460,6 +460,27 @@
     "sleepMinutes": "{{minutes}}분",
     "sleepEndOfItem": "이 항목이 끝나면",
     "sleepsAt": "{{time}}에 정지",
-    "episode": "{{show}} · 시즌 {{season}} {{episode}}화"
+    "episode": "{{show}} · 시즌 {{season}} {{episode}}화",
+    "thisWatch": "이 워치",
+    "onThisWatch": "이 워치에 있음",
+    "nothingDownloaded": "이 워치에 아직 아무것도 없습니다. 휴대폰 없이 들으려면 음악과 오디오북을 추가하세요.",
+    "addMusicAndBooks": "음악 및 책 추가",
+    "search": "검색",
+    "searchHint": "앨범 또는 책",
+    "continueListening": "이어서 듣기",
+    "newAlbums": "새 앨범",
+    "newBooks": "새 오디오북",
+    "noResults": "찾은 항목이 없습니다.",
+    "download": "다운로드",
+    "downloading": "다운로드 중 · {{percent}}%",
+    "preparing": "준비 중…",
+    "downloadFailed": "다운로드할 수 없음",
+    "downloaded": "다운로드됨",
+    "remove": "워치에서 제거",
+    "connectHeadphones": "들으려면 블루투스 헤드폰을 연결하세요.",
+    "bluetooth": "블루투스 설정",
+    "back15": "15초 뒤로",
+    "ahead30": "30초 앞으로",
+    "storageUsed": "이 워치에 {{size}}"
   }
 }
