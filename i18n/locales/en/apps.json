@@ -489,5 +489,15 @@
     "back15": "Back 15 seconds",
     "ahead30": "Ahead 30 seconds",
     "storageUsed": "{{size}} on this watch"
+  },
+  "tvUnlock": {
+    "title": "Unlock Matinee",
+    "body": "One payment of {{price}} unlocks Matinee for good on every Samsung and LG TV that uses this server.",
+    "scan": "Scan the code with your phone, or go to {{url}}",
+    "trialUntil": "Free trial until {{date}}.",
+    "trialOver": "The free trial is over. Unlock Matinee to keep watching and listening.",
+    "waiting": "This screen closes by itself once you've paid.",
+    "unlocked": "Matinee is unlocked on this TV.",
+    "updateServer": "To unlock Matinee here, update your Matinee server first."
   }
 }

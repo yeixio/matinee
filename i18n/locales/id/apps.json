@@ -482,5 +482,15 @@
     "back15": "Mundur 15 detik",
     "ahead30": "Maju 30 detik",
     "storageUsed": "{{size}} di jam ini"
+  },
+  "tvUnlock": {
+    "title": "Buka Matinee",
+    "body": "Satu kali pembayaran {{price}} membuka Matinee selamanya di semua TV Samsung dan LG yang menggunakan server ini.",
+    "scan": "Pindai kode dengan ponsel Anda, atau buka {{url}}",
+    "trialUntil": "Uji coba gratis hingga {{date}}.",
+    "trialOver": "Uji coba gratis telah berakhir. Buka Matinee untuk terus menonton dan mendengarkan.",
+    "waiting": "Layar ini akan tertutup sendiri setelah Anda membayar.",
+    "unlocked": "Matinee sudah terbuka di TV ini.",
+    "updateServer": "Untuk membuka Matinee di sini, perbarui server Matinee Anda terlebih dahulu."
   }
 }

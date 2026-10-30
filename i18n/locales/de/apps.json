@@ -489,5 +489,15 @@
     "back15": "15 Sekunden zurück",
     "ahead30": "30 Sekunden vor",
     "storageUsed": "{{size}} auf dieser Uhr"
+  },
+  "tvUnlock": {
+    "title": "Matinee freischalten",
+    "body": "Eine Zahlung von {{price}} schaltet Matinee dauerhaft auf allen Samsung- und LG-Fernsehern frei, die diesen Server nutzen.",
+    "scan": "Scanne den Code mit deinem Handy oder öffne {{url}}",
+    "trialUntil": "Kostenlos testen bis {{date}}.",
+    "trialOver": "Der kostenlose Test ist vorbei. Schalte Matinee frei, um weiter zu schauen und zu hören.",
+    "waiting": "Dieser Bildschirm schließt sich von selbst, sobald du bezahlt hast.",
+    "unlocked": "Matinee ist auf diesem Fernseher freigeschaltet.",
+    "updateServer": "Aktualisiere zuerst deinen Matinee-Server, um Matinee hier freizuschalten."
   }
 }

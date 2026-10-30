@@ -482,5 +482,15 @@
     "back15": "15초 뒤로",
     "ahead30": "30초 앞으로",
     "storageUsed": "이 워치에 {{size}}"
+  },
+  "tvUnlock": {
+    "title": "Matinee 잠금 해제",
+    "body": "{{price}}를 한 번 결제하면 이 서버를 사용하는 모든 Samsung 및 LG TV에서 Matinee 잠금이 영구적으로 해제됩니다.",
+    "scan": "휴대폰으로 코드를 스캔하거나 {{url}}(으)로 이동하세요",
+    "trialUntil": "{{date}}까지 무료 체험.",
+    "trialOver": "무료 체험이 끝났습니다. 계속 보고 들으려면 Matinee 잠금을 해제하세요.",
+    "waiting": "결제가 완료되면 이 화면은 자동으로 닫힙니다.",
+    "unlocked": "이 TV에서 Matinee 잠금이 해제되었습니다.",
+    "updateServer": "여기서 Matinee 잠금을 해제하려면 먼저 Matinee 서버를 업데이트하세요."
   }
 }

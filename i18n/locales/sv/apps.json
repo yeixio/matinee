@@ -489,5 +489,15 @@
     "back15": "15 sekunder bakåt",
     "ahead30": "30 sekunder framåt",
     "storageUsed": "{{size}} på den här klockan"
+  },
+  "tvUnlock": {
+    "title": "Lås upp Matinee",
+    "body": "En betalning på {{price}} låser upp Matinee för gott på alla Samsung- och LG-tv-apparater som använder den här servern.",
+    "scan": "Skanna koden med telefonen eller gå till {{url}}",
+    "trialUntil": "Gratis provperiod till {{date}}.",
+    "trialOver": "Den gratis provperioden är slut. Lås upp Matinee för att fortsätta titta och lyssna.",
+    "waiting": "Den här skärmen stängs av sig själv när du har betalat.",
+    "unlocked": "Matinee är upplåst på den här tv:n.",
+    "updateServer": "Uppdatera din Matinee-server först för att låsa upp Matinee här."
   }
 }

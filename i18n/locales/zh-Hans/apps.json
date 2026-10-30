@@ -482,5 +482,15 @@
     "back15": "后退 15 秒",
     "ahead30": "前进 30 秒",
     "storageUsed": "手表上 {{size}}"
+  },
+  "tvUnlock": {
+    "title": "解锁 Matinee",
+    "body": "只需支付一次 {{price}}，即可在使用此服务器的所有三星和 LG 电视上永久解锁 Matinee。",
+    "scan": "用手机扫描二维码，或访问 {{url}}",
+    "trialUntil": "免费试用至 {{date}}。",
+    "trialOver": "免费试用已结束。解锁 Matinee 即可继续观看和收听。",
+    "waiting": "付款完成后，此界面会自动关闭。",
+    "unlocked": "此电视上的 Matinee 已解锁。",
+    "updateServer": "要在此解锁 Matinee，请先更新你的 Matinee 服务器。"
   }
 }

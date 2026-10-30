@@ -482,5 +482,15 @@
     "back15": "15秒戻る",
     "ahead30": "30秒進む",
     "storageUsed": "このウォッチ内 {{size}}"
+  },
+  "tvUnlock": {
+    "title": "Matinee のロックを解除",
+    "body": "{{price}} を一度お支払いいただくと、このサーバーを使うすべての Samsung と LG のテレビで Matinee のロックがずっと解除されます。",
+    "scan": "スマートフォンでコードを読み取るか、{{url}} を開いてください",
+    "trialUntil": "無料トライアルは {{date}} までです。",
+    "trialOver": "無料トライアルは終了しました。引き続き視聴するには Matinee のロックを解除してください。",
+    "waiting": "お支払いが済むと、この画面は自動的に閉じます。",
+    "unlocked": "このテレビで Matinee のロックが解除されました。",
+    "updateServer": "ここで Matinee のロックを解除するには、まず Matinee サーバーを更新してください。"
   }
 }
