@@ -96,4 +96,8 @@ Browsers and devices can't play every kind of video file, so Matinee does whatev
 2. **Repackages it**, when the video is H.264 but the container isn't one the device takes (an MKV in a browser, for example). This costs almost nothing.
 3. **Converts it while you watch** with FFmpeg, for everything else, such as HEVC a browser can't decode or picture subtitles to burn in. Matinee uses the server's GPU if it has one. See [Hardware transcoding](/docs/server/transcoding/).
 
+<!-- since: v0.1.5 -->
+When an admin turns on [adaptive quality](/docs/server/streaming-quality/), the player also has a **Quality** button. **Auto** plays the file as it is and moves to a lighter stream if the connection can't keep up; you can also pick a fixed quality such as **480p**, or **Original**.
+
+<!-- /since -->
 You don't pick any of this; it happens on its own. The [File details](/docs/watching/title-pages/#file-details) show a file's codecs if you want to know which it'll be.

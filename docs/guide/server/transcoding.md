@@ -22,6 +22,10 @@ At startup Matinee tests what the machine's FFmpeg can use, with a one-second te
 
 ![The Transcoding settings, using the CPU on a server without a GPU](../images/transcoding.webp)
 
+<!-- since: v0.1.5 -->
+The same section turns on [adaptive quality](/docs/server/streaming-quality/), which makes several qualities at once so playback steps down on a slow connection.
+
+<!-- /since -->
 If the GPU can't handle a file (an old codec, a profile it doesn't decode), that playback starts again on the CPU, and the file keeps using the CPU from then on, so nobody sees an error.
 
 ## Giving Matinee a GPU
