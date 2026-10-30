@@ -489,5 +489,14 @@
     "tryAgain": "Zkusit znovu",
     "updated": "Server byl aktualizován na {{version}}. Pokračujete tam, kde jste skončili.",
     "restarted": "Server se restartoval. Pokračujete tam, kde jste skončili."
+  },
+  "quality": {
+    "title": "Kvalita",
+    "auto": "Auto",
+    "autoNow": "Auto · {{quality}}",
+    "original": "Původní",
+    "mbps": "{{n}} Mb/s",
+    "hint": "Auto sníží kvalitu obrazu, když připojení nestíhá, a zase ji zvýší, když se zlepší.",
+    "fellBack": "Přepnuto na automatickou kvalitu, aby přehrávání bylo plynulé"
   }
 }

@@ -688,6 +688,13 @@
       "auto": "Tự động: loại tốt nhất hoạt động được",
       "off": "Tắt: luôn dùng CPU",
       "notFound": "{{name}} (không tìm thấy trên máy chủ này)",
+      "adaptive": "Chất lượng thích ứng",
+      "adaptiveDetail": "Trình phát có Tự động và các mức chất lượng cố định. Tự động giảm hình khi kết nối chậm và tăng lại khi phục hồi. Video được chuyển đổi sẽ được tạo ở nhiều mức chất lượng cùng lúc, khiến máy chủ phải làm việc nhiều hơn.",
+      "steps": "Các mức chất lượng",
+      "stepsDetail": "Các mức chất lượng dùng để tạo luồng thích ứng và có thể chọn. Không có GPU, Tự động dùng mức tốt nhất và một mức ở giữa.",
+      "cap": "Giới hạn khi ở ngoài nhà",
+      "noCap": "Không giới hạn",
+      "capDetail": "Chất lượng tốt nhất mà thiết bị ở ngoài nhà nhận được, kể cả khi tắt chất lượng thích ứng. Mọi thứ tốt hơn sẽ được chuyển đổi xuống mức này.",
       "accelerator": {
         "nvenc": "NVIDIA NVENC",
         "vaapi": "VAAPI (AMD và Intel trên Linux)",

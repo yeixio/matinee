@@ -696,6 +696,13 @@
       "auto": "Automatica: la migliore che funziona",
       "off": "Disattivata: usa sempre la CPU",
       "notFound": "{{name}} (non trovato su questo server)",
+      "adaptive": "Qualità adattiva",
+      "adaptiveDetail": "I player offrono Auto e qualità fisse. Auto abbassa l’immagine quando la connessione è lenta e la rialza quando si riprende. Il video convertito viene creato in più qualità insieme, il che impegna di più il server.",
+      "steps": "Livelli di qualità",
+      "stepsDetail": "Le qualità in cui vengono creati gli stream adattivi e che si possono scegliere. Senza GPU, Auto usa la migliore e una intermedia.",
+      "cap": "Limite fuori casa",
+      "noCap": "Nessun limite",
+      "capDetail": "La qualità migliore che riceve un dispositivo fuori casa, anche con la qualità adattiva spenta. Tutto ciò che è migliore viene convertito a quel livello.",
       "accelerator": {
         "nvenc": "NVIDIA NVENC",
         "vaapi": "VAAPI (AMD e Intel su Linux)",

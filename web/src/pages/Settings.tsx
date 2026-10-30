@@ -939,7 +939,92 @@ function Transcoding() {
           </select>
         </Field>
       </div>
+      <StreamingQuality />
     </section>
+  )
+}
+
+// Every quality step the server offers, best first (see internal/stream/quality.go).
+const qualitySteps = [
+  { id: '1080p', mbps: 8 },
+  { id: '720p', mbps: 4 },
+  { id: '480p', mbps: 1.5 },
+  { id: '360p', mbps: 0.7 },
+]
+
+// Adaptive quality, the steps it uses, and the cap away from home.
+function StreamingQuality() {
+  const { t, i18n } = useTranslation()
+  const qc = useQueryClient()
+  const { data } = useQuery({ queryKey: ['settings'], queryFn: api.settings })
+  const save = useMutation({
+    mutationFn: api.saveSettings,
+    onSuccess: (s) => {
+      qc.setQueryData(['settings'], s)
+      qc.invalidateQueries({ queryKey: ['streaming'] })
+    },
+  })
+  const on = data?.adaptiveQuality ?? false
+  const steps = data?.qualitySteps ?? qualitySteps.map((s) => s.id)
+  const label = (s: (typeof qualitySteps)[number]) =>
+    `${s.id} · ${t('common:quality.mbps', { n: new Intl.NumberFormat(i18n.language, { maximumFractionDigits: 1 }).format(s.mbps) })}`
+  const toggleStep = (id: string, checked: boolean) => {
+    const next = qualitySteps.map((s) => s.id).filter((s) => (s === id ? checked : steps.includes(s)))
+    if (next.length) save.mutate({ qualitySteps: next })
+  }
+  return (
+    <div className="space-y-4 rounded-xl border border-line/60 bg-surface/50 p-4">
+      <label className="flex cursor-pointer items-start gap-4">
+        <span className="min-w-0 flex-1">
+          <span className="block font-medium">{t('settings.transcoding.adaptive')}</span>
+          <span className="mt-1 block text-sm text-muted">{t('settings.transcoding.adaptiveDetail')}</span>
+        </span>
+        <input
+          type="checkbox"
+          className="mt-1 size-5 accent-[var(--color-accent)]"
+          checked={on}
+          disabled={!data || save.isPending}
+          onChange={(e) => save.mutate({ adaptiveQuality: e.target.checked })}
+        />
+      </label>
+      {on && (
+        <fieldset>
+          <legend className="text-sm font-medium">{t('settings.transcoding.steps')}</legend>
+          <p className="mt-1 text-sm text-muted">{t('settings.transcoding.stepsDetail')}</p>
+          <div className="mt-2 flex flex-wrap gap-x-5 gap-y-2">
+            {qualitySteps.map((s) => (
+              <label key={s.id} className="flex cursor-pointer items-center gap-2 text-sm">
+                <input
+                  type="checkbox"
+                  className="size-4 accent-[var(--color-accent)]"
+                  checked={steps.includes(s.id)}
+                  // The last one left stays: an adaptive stream needs at least one.
+                  disabled={!data || save.isPending || (steps.length === 1 && steps.includes(s.id))}
+                  onChange={(e) => toggleStep(s.id, e.target.checked)}
+                />
+                {label(s)}
+              </label>
+            ))}
+          </div>
+        </fieldset>
+      )}
+      <Field label={t('settings.transcoding.cap')}>
+        <select
+          className={inputClass}
+          value={data?.remoteQualityCap ?? ''}
+          disabled={!data || save.isPending}
+          onChange={(e) => save.mutate({ remoteQualityCap: e.target.value })}
+        >
+          <option value="">{t('settings.transcoding.noCap')}</option>
+          {qualitySteps.map((s) => (
+            <option key={s.id} value={s.id}>
+              {label(s)}
+            </option>
+          ))}
+        </select>
+      </Field>
+      <p className="-mt-2 text-sm text-muted">{t('settings.transcoding.capDetail')}</p>
+    </div>
   )
 }
 

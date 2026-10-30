@@ -489,5 +489,14 @@
     "tryAgain": "Spróbuj ponownie",
     "updated": "Serwer zaktualizowano do wersji {{version}}. Wznawianie w tym samym miejscu.",
     "restarted": "Serwer uruchomił się ponownie. Wznawianie w tym samym miejscu."
+  },
+  "quality": {
+    "title": "Jakość",
+    "auto": "Auto",
+    "autoNow": "Auto · {{quality}}",
+    "original": "Oryginalna",
+    "mbps": "{{n}} Mb/s",
+    "hint": "Auto obniża jakość obrazu, gdy połączenie nie nadąża, i podnosi ją, gdy się poprawi.",
+    "fellBack": "Przełączono na jakość automatyczną, aby odtwarzanie było płynne"
   }
 }

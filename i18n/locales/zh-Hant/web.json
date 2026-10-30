@@ -688,6 +688,13 @@
       "auto": "自動：可用的最佳選項",
       "off": "關：始終使用 CPU",
       "notFound": "{{name}}（此伺服器上未找到）",
+      "adaptive": "自適應畫質",
+      "adaptiveDetail": "播放器會提供自動和固定畫質。網路慢時自動會降低畫質，恢復後再調高。需要轉檔的影片會同時產生多種畫質，伺服器負擔會更重。",
+      "steps": "畫質等級",
+      "stepsDetail": "自適應串流會產生、並可供選擇的畫質。沒有 GPU 時，自動只用最高畫質和一個中間畫質。",
+      "cap": "在外時的上限",
+      "noCap": "不限",
+      "capDetail": "裝置不在家時能取得的最高畫質，即使關閉自適應畫質也適用。更高的畫質會轉檔到這個等級。",
       "accelerator": {
         "nvenc": "NVIDIA NVENC",
         "vaapi": "VAAPI（Linux 上的 AMD 和 Intel）",

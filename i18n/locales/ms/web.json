@@ -688,6 +688,13 @@
       "auto": "Automatik: yang terbaik yang berfungsi",
       "off": "Mati: sentiasa gunakan CPU",
       "notFound": "{{name}} (tidak ditemui pada pelayan ini)",
+      "adaptive": "Kualiti adaptif",
+      "adaptiveDetail": "Pemain menawarkan Auto dan kualiti tetap. Auto menurunkan gambar apabila sambungan perlahan dan menaikkannya apabila pulih. Video yang ditukar dibuat dalam beberapa kualiti serentak, yang lebih membebankan pelayan.",
+      "steps": "Tahap kualiti",
+      "stepsDetail": "Kualiti yang digunakan untuk membuat strim adaptif dan boleh dipilih. Tanpa GPU, Auto menggunakan yang terbaik dan satu di tengah.",
+      "cap": "Had di luar rumah",
+      "noCap": "Tiada had",
+      "capDetail": "Kualiti terbaik yang diterima peranti di luar rumah, walaupun kualiti adaptif dimatikan. Apa-apa yang lebih baik ditukar turun kepadanya.",
       "accelerator": {
         "nvenc": "NVIDIA NVENC",
         "vaapi": "VAAPI (AMD dan Intel pada Linux)",

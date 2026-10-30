@@ -433,5 +433,14 @@
     "tryAgain": "Försök igen",
     "updated": "Servern har uppdaterats till {{version}}. Du fortsätter där du var.",
     "restarted": "Servern startade om. Du fortsätter där du var."
+  },
+  "quality": {
+    "title": "Kvalitet",
+    "auto": "Auto",
+    "autoNow": "Auto · {{quality}}",
+    "original": "Original",
+    "mbps": "{{n}} Mbit/s",
+    "hint": "Auto sänker bildkvaliteten när anslutningen inte hänger med och höjer den igen när den återhämtar sig.",
+    "fellBack": "Bytte till automatisk kvalitet för att spela smidigt"
   }
 }

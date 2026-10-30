@@ -700,6 +700,13 @@
       "auto": "Automaticky: nejlepší funkční",
       "off": "Vypnuto: vždy používat CPU",
       "notFound": "{{name}} (na tomto serveru nenalezeno)",
+      "adaptive": "Adaptivní kvalita",
+      "adaptiveDetail": "Přehrávače nabízejí Auto a pevné kvality. Auto při pomalém připojení sníží obraz a po zlepšení ho zase zvýší. Převáděné video vzniká v několika kvalitách najednou, což server víc zatěžuje.",
+      "steps": "Stupně kvality",
+      "stepsDetail": "Kvality, ve kterých adaptivní streamy vznikají a které lze vybrat. Bez GPU používá Auto nejlepší a jednu prostřední.",
+      "cap": "Limit mimo domov",
+      "noCap": "Bez limitu",
+      "capDetail": "Nejlepší kvalita, kterou zařízení mimo domov dostane, i s vypnutou adaptivní kvalitou. Cokoli lepšího se na ni převede.",
       "accelerator": {
         "nvenc": "NVIDIA NVENC",
         "vaapi": "VAAPI (AMD a Intel v Linuxu)",

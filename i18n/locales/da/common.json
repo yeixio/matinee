@@ -433,5 +433,14 @@
     "tryAgain": "Prøv igen",
     "updated": "Serveren er opdateret til {{version}}. Du fortsætter, hvor du var.",
     "restarted": "Serveren genstartede. Du fortsætter, hvor du var."
+  },
+  "quality": {
+    "title": "Kvalitet",
+    "auto": "Auto",
+    "autoNow": "Auto · {{quality}}",
+    "original": "Original",
+    "mbps": "{{n}} Mbit/s",
+    "hint": "Auto sænker billedkvaliteten, når forbindelsen ikke kan følge med, og hæver den igen, når den kommer sig.",
+    "fellBack": "Skiftede til automatisk kvalitet for at afspille uden afbrydelser"
   }
 }

@@ -692,6 +692,13 @@
       "auto": "Automatisch: de beste die werkt",
       "off": "Uit: altijd de CPU gebruiken",
       "notFound": "{{name}} (niet gevonden op deze server)",
+      "adaptive": "Adaptieve kwaliteit",
+      "adaptiveDetail": "Spelers bieden Auto en vaste kwaliteiten. Auto verlaagt het beeld bij een trage verbinding en verhoogt het weer als die herstelt. Omgezette video wordt in meerdere kwaliteiten tegelijk gemaakt, wat de server zwaarder belast.",
+      "steps": "Kwaliteitsstappen",
+      "stepsDetail": "De kwaliteiten waarin adaptieve streams worden gemaakt en die mensen kunnen kiezen. Zonder GPU gebruikt Auto de beste en een middelste.",
+      "cap": "Limiet buiten de deur",
+      "noCap": "Geen limiet",
+      "capDetail": "De beste kwaliteit die een apparaat buitenshuis krijgt, ook met adaptieve kwaliteit uit. Alles wat beter is, wordt daarnaar omgezet.",
       "accelerator": {
         "nvenc": "NVIDIA NVENC",
         "vaapi": "VAAPI (AMD en Intel op Linux)",

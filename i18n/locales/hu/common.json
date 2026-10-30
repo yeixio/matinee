@@ -433,5 +433,14 @@
     "tryAgain": "Újra",
     "updated": "A szerver frissült erre: {{version}}. Ott folytatod, ahol abbahagytad.",
     "restarted": "A szerver újraindult. Ott folytatod, ahol abbahagytad."
+  },
+  "quality": {
+    "title": "Minőség",
+    "auto": "Auto",
+    "autoNow": "Auto · {{quality}}",
+    "original": "Eredeti",
+    "mbps": "{{n}} Mb/s",
+    "hint": "Az Auto csökkenti a képminőséget, ha a kapcsolat nem bírja, és visszaemeli, amikor helyreáll.",
+    "fellBack": "Átváltottunk automatikus minőségre, hogy akadás nélkül menjen tovább"
   }
 }

@@ -433,5 +433,14 @@
     "tryAgain": "Try again",
     "updated": "The server was updated to {{version}}. Picking up where you left off.",
     "restarted": "The server restarted. Picking up where you left off."
+  },
+  "quality": {
+    "title": "Quality",
+    "auto": "Auto",
+    "autoNow": "Auto · {{quality}}",
+    "original": "Original",
+    "mbps": "{{n}} Mbps",
+    "hint": "Auto steps the picture down when the connection can't keep up, and back up when it recovers.",
+    "fellBack": "Switched to Auto quality to keep playing smoothly"
   }
 }

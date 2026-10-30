@@ -405,5 +405,14 @@
     "tryAgain": "Thử lại",
     "updated": "Máy chủ đã được cập nhật lên {{version}}. Đang xem tiếp từ chỗ đã dừng.",
     "restarted": "Máy chủ đã khởi động lại. Đang xem tiếp từ chỗ đã dừng."
+  },
+  "quality": {
+    "title": "Chất lượng",
+    "auto": "Tự động",
+    "autoNow": "Tự động · {{quality}}",
+    "original": "Gốc",
+    "mbps": "{{n}} Mbps",
+    "hint": "Tự động giảm chất lượng hình khi kết nối không theo kịp và tăng lại khi kết nối phục hồi.",
+    "fellBack": "Đã chuyển sang chất lượng tự động để phát mượt mà"
   }
 }

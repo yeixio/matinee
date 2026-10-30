@@ -697,6 +697,13 @@
       "auto": "Automatic: the best one that works",
       "off": "Off: always use the CPU",
       "notFound": "{{name}} (not found on this server)",
+      "adaptive": "Adaptive quality",
+      "adaptiveDetail": "Players offer Auto and fixed qualities. Auto steps the picture down when the connection is slow and back up when it recovers. Converted video is made in several qualities at once, which takes more from the server.",
+      "steps": "Quality steps",
+      "stepsDetail": "The qualities adaptive streams are made in and people can pick. Without a GPU, Auto uses the best one and one from the middle.",
+      "cap": "Limit away from home",
+      "noCap": "No limit",
+      "capDetail": "The best quality a device away from home gets, even with adaptive quality off. Anything better is converted down to it.",
       "accelerator": {
         "nvenc": "NVIDIA NVENC",
         "vaapi": "VAAPI (AMD and Intel on Linux)",

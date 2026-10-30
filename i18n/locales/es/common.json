@@ -461,5 +461,14 @@
     "tryAgain": "Reintentar",
     "updated": "El servidor se actualizó a {{version}}. Sigues donde lo dejaste.",
     "restarted": "El servidor se reinició. Sigues donde lo dejaste."
+  },
+  "quality": {
+    "title": "Calidad",
+    "auto": "Auto",
+    "autoNow": "Auto · {{quality}}",
+    "original": "Original",
+    "mbps": "{{n}} Mbps",
+    "hint": "Auto baja la calidad de imagen cuando la conexión no da abasto y la vuelve a subir cuando se recupera.",
+    "fellBack": "Se cambió a calidad automática para seguir reproduciendo sin cortes"
   }
 }

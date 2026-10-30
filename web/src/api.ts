@@ -51,6 +51,12 @@ export type Settings = {
   remoteTrailers: boolean
   // A row of titles for a holiday on Home in the weeks before it.
   holidayRows: boolean
+  // Transcodes become adaptive streams of qualitySteps, and people can pick
+  // a quality in the player (see GET /streaming).
+  adaptiveQuality: boolean
+  qualitySteps: string[]
+  // The best quality step away from home, adaptive or not; '' for no cap.
+  remoteQualityCap: string
   // The theme people see until they pick their own.
   theme: string
   // Theme files on the server that couldn't be loaded, and why.
@@ -528,6 +534,13 @@ export type EmbeddedSubtitle = {
 }
 
 // A file's streams in detail, from the server's background analysis.
+// One picture quality the server streams at (see GET /streaming).
+export type QualityStep = { id: string; label: string; width: number; height: number; videoBps: number; audioBps: number }
+// Which qualities this device may offer: Auto, steps and Original with
+// adaptive quality on; cap is the best it may stream right now (away from
+// home), or null.
+export type Streaming = { adaptive: boolean; steps: QualityStep[]; cap: QualityStep | null }
+
 export type MediaInfo = {
   container: string
   size: number
@@ -813,11 +826,14 @@ export const api = {
   hideFromContinueWatching: (id: number) => request<void>('DELETE', `/api/v1/continue-watching/${id}`),
   setProgress: (id: number, positionMs: number, played = false) =>
     request<void>('PUT', `/api/v1/items/${id}/progress`, { positionMs, played }),
-  startHls: (id: number, startSec = 0, burnSubtitle?: string) =>
-    request<{ url: string; startSec: number }>(
+  // quality: auto (adaptive), original, or a step's id. The answer says
+  // which the server made.
+  startHls: (id: number, startSec = 0, burnSubtitle?: string, quality?: string) =>
+    request<{ url: string; startSec: number; quality?: string }>(
       'POST',
-      `/api/v1/items/${id}/hls?start=${startSec}${burnSubtitle ? `&subtitle=${encodeURIComponent(burnSubtitle)}` : ''}`,
+      `/api/v1/items/${id}/hls?start=${startSec}${burnSubtitle ? `&subtitle=${encodeURIComponent(burnSubtitle)}` : ''}${quality ? `&quality=${encodeURIComponent(quality)}` : ''}`,
     ),
+  streaming: () => request<Streaming>('GET', '/api/v1/streaming'),
   trailers: (id: number) => request<Trailer[]>('GET', `/api/v1/items/${id}/trailers`),
   startTrailerHls: (id: number, trailer: string) =>
     request<{ url: string; startSec: number }>('POST', `/api/v1/items/${id}/trailers/${encodeURIComponent(trailer)}/hls`),

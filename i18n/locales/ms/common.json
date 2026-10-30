@@ -405,5 +405,14 @@
     "tryAgain": "Cuba lagi",
     "updated": "Pelayan dikemas kini ke {{version}}. Menyambung dari tempat terakhir.",
     "restarted": "Pelayan dimulakan semula. Menyambung dari tempat terakhir."
+  },
+  "quality": {
+    "title": "Kualiti",
+    "auto": "Auto",
+    "autoNow": "Auto · {{quality}}",
+    "original": "Asal",
+    "mbps": "{{n}} Mbps",
+    "hint": "Auto menurunkan kualiti gambar apabila sambungan tidak dapat mengikut, dan menaikkannya semula apabila pulih.",
+    "fellBack": "Ditukar kepada kualiti automatik supaya main dengan lancar"
   }
 }

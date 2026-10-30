@@ -461,5 +461,14 @@
     "tryAgain": "Réessayer",
     "updated": "Le serveur a été mis à jour vers {{version}}. Reprise là où vous en étiez.",
     "restarted": "Le serveur a redémarré. Reprise là où vous en étiez."
+  },
+  "quality": {
+    "title": "Qualité",
+    "auto": "Auto",
+    "autoNow": "Auto · {{quality}}",
+    "original": "Originale",
+    "mbps": "{{n}} Mb/s",
+    "hint": "Auto baisse la qualité d’image quand la connexion ne suit pas, puis la remonte quand elle se rétablit.",
+    "fellBack": "Passage en qualité automatique pour une lecture fluide"
   }
 }

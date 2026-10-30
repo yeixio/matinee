@@ -688,6 +688,13 @@
       "auto": "Otomatis: yang terbaik yang berfungsi",
       "off": "Mati: selalu gunakan CPU",
       "notFound": "{{name}} (tidak ditemukan di server ini)",
+      "adaptive": "Kualitas adaptif",
+      "adaptiveDetail": "Pemutar menawarkan Otomatis dan kualitas tetap. Otomatis menurunkan gambar saat koneksi lambat dan menaikkannya saat pulih. Video yang dikonversi dibuat dalam beberapa kualitas sekaligus, yang lebih membebani server.",
+      "steps": "Tingkat kualitas",
+      "stepsDetail": "Kualitas yang dipakai untuk membuat stream adaptif dan bisa dipilih. Tanpa GPU, Otomatis memakai yang terbaik dan satu yang di tengah.",
+      "cap": "Batas di luar rumah",
+      "noCap": "Tanpa batas",
+      "capDetail": "Kualitas terbaik yang didapat perangkat di luar rumah, bahkan saat kualitas adaptif mati. Yang lebih baik dikonversi turun ke kualitas ini.",
       "accelerator": {
         "nvenc": "NVIDIA NVENC",
         "vaapi": "VAAPI (AMD dan Intel di Linux)",

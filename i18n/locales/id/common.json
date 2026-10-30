@@ -405,5 +405,14 @@
     "tryAgain": "Coba lagi",
     "updated": "Server diperbarui ke {{version}}. Melanjutkan dari posisi terakhir.",
     "restarted": "Server dimulai ulang. Melanjutkan dari posisi terakhir."
+  },
+  "quality": {
+    "title": "Kualitas",
+    "auto": "Otomatis",
+    "autoNow": "Otomatis · {{quality}}",
+    "original": "Asli",
+    "mbps": "{{n}} Mbps",
+    "hint": "Otomatis menurunkan kualitas gambar saat koneksi tidak mampu mengikuti, lalu menaikkannya lagi saat koneksi pulih.",
+    "fellBack": "Beralih ke kualitas otomatis agar tetap diputar lancar"
   }
 }
