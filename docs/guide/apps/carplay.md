@@ -41,6 +41,10 @@ The car and the iPhone share one player. If music is playing on the iPhone when 
 
 If the server restarts, or the car loses its connection for a while, Matinee keeps trying for a few minutes and picks up where it was. Downloads play without the server at all.
 
+### With no signal
+
+Where the car has no connection, Matinee still shows the lists you've opened on this drive, with what needs your server greyed out. Your downloads stay playable. When the signal comes back, the lists fill in again by themselves.
+
 ## Something isn't working
 
 - **"Open Matinee on your phone and sign in"**: the iPhone app isn't signed in, or it's using the Home account away from home. Sign in on the iPhone; the car picks it up by itself.

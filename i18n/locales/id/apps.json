@@ -427,7 +427,8 @@
     "listenNow": "Dengarkan",
     "music": "Musik",
     "audiobooks": "Buku audio",
-    "signIn": "Buka Matinee di ponsel Anda dan masuk untuk mendengarkan di mobil."
+    "signIn": "Buka Matinee di ponsel Anda dan masuk untuk mendengarkan di mobil.",
+    "loading": "Memuat…"
   },
   "watch": {
     "tileName": "Sedang diputar",

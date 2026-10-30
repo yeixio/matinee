@@ -441,7 +441,8 @@
     "listenNow": "Écouter",
     "music": "Musique",
     "audiobooks": "Livres audio",
-    "signIn": "Ouvrez Matinee sur votre téléphone et connectez-vous pour écouter en voiture."
+    "signIn": "Ouvrez Matinee sur votre téléphone et connectez-vous pour écouter en voiture.",
+    "loading": "Chargement…"
   },
   "watch": {
     "tileName": "En cours de lecture",

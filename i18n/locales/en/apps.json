@@ -434,7 +434,8 @@
     "listenNow": "Listen now",
     "music": "Music",
     "audiobooks": "Audiobooks",
-    "signIn": "Open Matinee on your phone and sign in to listen in the car."
+    "signIn": "Open Matinee on your phone and sign in to listen in the car.",
+    "loading": "Loading…"
   },
   "watch": {
     "tileName": "Now playing",

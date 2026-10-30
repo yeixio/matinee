@@ -434,7 +434,8 @@
     "listenNow": "Lyt nu",
     "music": "Musik",
     "audiobooks": "Lydbøger",
-    "signIn": "Åbn Matinee på din telefon, og log ind for at lytte i bilen."
+    "signIn": "Åbn Matinee på din telefon, og log ind for at lytte i bilen.",
+    "loading": "Indlæser…"
   },
   "watch": {
     "tileName": "Afspiller nu",

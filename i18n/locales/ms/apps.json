@@ -427,7 +427,8 @@
     "listenNow": "Dengar sekarang",
     "music": "Muzik",
     "audiobooks": "Buku audio",
-    "signIn": "Buka Matinee pada telefon anda dan log masuk untuk mendengar di dalam kereta."
+    "signIn": "Buka Matinee pada telefon anda dan log masuk untuk mendengar di dalam kereta.",
+    "loading": "Memuatkan…"
   },
   "watch": {
     "tileName": "Sedang dimainkan",

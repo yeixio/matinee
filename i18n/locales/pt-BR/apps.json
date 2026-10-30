@@ -441,7 +441,8 @@
     "listenNow": "Ouvir agora",
     "music": "Música",
     "audiobooks": "Audiolivros",
-    "signIn": "Abra o Matinee no celular e entre para ouvir no carro."
+    "signIn": "Abra o Matinee no celular e entre para ouvir no carro.",
+    "loading": "Carregando…"
   },
   "watch": {
     "tileName": "Tocando agora",

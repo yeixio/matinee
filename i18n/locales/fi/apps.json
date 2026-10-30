@@ -434,7 +434,8 @@
     "listenNow": "Kuuntele nyt",
     "music": "Musiikki",
     "audiobooks": "Äänikirjat",
-    "signIn": "Avaa Matinee puhelimessasi ja kirjaudu sisään kuunnellaksesi autossa."
+    "signIn": "Avaa Matinee puhelimessasi ja kirjaudu sisään kuunnellaksesi autossa.",
+    "loading": "Ladataan…"
   },
   "watch": {
     "tileName": "Nyt toistossa",

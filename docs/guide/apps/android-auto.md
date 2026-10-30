@@ -52,6 +52,12 @@ The car and the phone share one player. If music is playing on the phone when yo
 
 If the server restarts, or the car loses its connection for a while, Matinee keeps trying for a few minutes and picks up where it was. Downloads play without the server at all.
 
+<!-- since: v0.1.7 -->
+### With no signal
+
+Where the car has no connection, the lists you've opened on this drive show only what's downloaded, marked with a downloaded icon, so everything you see plays. When the signal comes back, the rest is there again.
+<!-- /since -->
+
 ## Something isn't working
 
 - **"Open Matinee on your phone and sign in"**: the phone app isn't signed in, or it's using the Home account away from home. Sign in on the phone and try again.
