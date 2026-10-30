@@ -433,5 +433,14 @@
     "tryAgain": "Yeniden dene",
     "updated": "Sunucu {{version}} sürümüne güncellendi. Kaldığın yerden devam ediliyor.",
     "restarted": "Sunucu yeniden başladı. Kaldığın yerden devam ediliyor."
+  },
+  "quality": {
+    "title": "Kalite",
+    "auto": "Otomatik",
+    "autoNow": "Otomatik · {{quality}}",
+    "original": "Orijinal",
+    "mbps": "{{n}} Mbps",
+    "hint": "Otomatik, bağlantı yetişemediğinde görüntü kalitesini düşürür, toparlandığında yeniden yükseltir.",
+    "fellBack": "Kesintisiz oynatmak için otomatik kaliteye geçildi"
   }
 }

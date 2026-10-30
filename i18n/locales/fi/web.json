@@ -692,6 +692,13 @@
       "auto": "Automaattinen: paras toimiva",
       "off": "Pois: käytä aina suoritinta",
       "notFound": "{{name}} (ei löydy tältä palvelimelta)",
+      "adaptive": "Mukautuva laatu",
+      "adaptiveDetail": "Soittimet tarjoavat Auton ja kiinteät laadut. Auto laskee kuvaa hitaalla yhteydellä ja nostaa sen, kun yhteys paranee. Muunnettu video tehdään useassa laadussa kerralla, mikä kuormittaa palvelinta enemmän.",
+      "steps": "Laatutasot",
+      "stepsDetail": "Laadut, joissa mukautuvat suoratoistot tehdään ja joista voi valita. Ilman näytönohjainta Auto käyttää parasta ja yhtä keskimmäistä.",
+      "cap": "Raja kodin ulkopuolella",
+      "noCap": "Ei rajaa",
+      "capDetail": "Paras laatu, jonka laite saa kodin ulkopuolella, myös kun mukautuva laatu on pois päältä. Parempi muunnetaan siihen.",
       "accelerator": {
         "nvenc": "NVIDIA NVENC",
         "vaapi": "VAAPI (AMD ja Intel Linuxilla)",

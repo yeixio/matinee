@@ -8,12 +8,14 @@ import (
 	"net/http"
 	"net/netip"
 	"strconv"
+	"strings"
 	"sync"
 
 	"github.com/yeixio/matinee/internal/hwaccel"
 	"github.com/yeixio/matinee/internal/metadata"
 	"github.com/yeixio/matinee/internal/remote"
 	"github.com/yeixio/matinee/internal/scan"
+	"github.com/yeixio/matinee/internal/stream"
 )
 
 // Devices on the home network can browse and play without signing in,
@@ -142,6 +144,14 @@ type serverSettings struct {
 	// HolidayRows shows a row of titles for a holiday on Home in the weeks
 	// before it (see holidays.go). On unless an admin turns it off.
 	HolidayRows bool `json:"holidayRows"`
+	// AdaptiveQuality makes transcodes adaptive streams of the quality steps
+	// in QualitySteps, and lets people pick a step (see quality.go). Off
+	// unless an admin turns it on.
+	AdaptiveQuality bool     `json:"adaptiveQuality"`
+	QualitySteps    []string `json:"qualitySteps"`
+	// RemoteQualityCap is the best quality step a stream away from home
+	// may use, or "" for no cap. It applies with adaptive quality off too.
+	RemoteQualityCap string `json:"remoteQualityCap"`
 	// Theme is what everyone sees until they pick their own (see themes.go).
 	Theme string `json:"theme"`
 	// ThemeProblems lists theme files in the themes folder that couldn't be
@@ -209,9 +219,13 @@ func (s *Server) settings(ctx context.Context) (serverSettings, error) {
 	if err != nil {
 		return serverSettings{}, err
 	}
+	quality, err := s.qualitySettings(ctx)
+	if err != nil {
+		return serverSettings{}, err
+	}
 	themes, problems := s.themes()
 	def, err := s.defaultTheme(ctx, themes)
-	set := serverSettings{RequireSignInAtHome: required, Requests: mode, RemoteTrailers: trailers, HolidayRows: holidaysOn, Theme: def,
+	set := serverSettings{AdaptiveQuality: quality.Adaptive, QualitySteps: stepIDs(quality.Steps), RemoteQualityCap: quality.Cap, RequireSignInAtHome: required, Requests: mode, RemoteTrailers: trailers, HolidayRows: holidaysOn, Theme: def,
 		RemoteAccess: remoteOn, RemoteForwardedPort: forwarded, Remote: s.remoteStatus(), PublicURL: s.PublicURL, PublicURLHomeOnly: s.PublicURL != "" && !s.publicURLIsPublic(ctx), TMDB: tmdb,
 		ThemeProblems: []string{}, HardwareAcceleration: hwaccel.Auto, Hardware: &hwaccel.Status{Available: []hwaccel.Accel{}}}
 	for _, p := range problems {
@@ -241,15 +255,18 @@ func (s *Server) getSettings(w http.ResponseWriter, r *http.Request) {
 // putSettings changes the settings it's sent; ones left out stay as they are.
 func (s *Server) putSettings(w http.ResponseWriter, r *http.Request) {
 	var in struct {
-		RequireSignInAtHome  *bool   `json:"requireSignInAtHome"`
-		Requests             *string `json:"requests"`
-		HardwareAcceleration *string `json:"hardwareAcceleration"`
-		RemoteTrailers       *bool   `json:"remoteTrailers"`
-		HolidayRows          *bool   `json:"holidayRows"`
-		Theme                *string `json:"theme"`
-		RemoteAccess         *bool   `json:"remoteAccess"`
-		RemoteForwardedPort  *int    `json:"remoteForwardedPort"`
-		LibraryWatch         *string `json:"libraryWatch"`
+		RequireSignInAtHome  *bool     `json:"requireSignInAtHome"`
+		Requests             *string   `json:"requests"`
+		HardwareAcceleration *string   `json:"hardwareAcceleration"`
+		RemoteTrailers       *bool     `json:"remoteTrailers"`
+		HolidayRows          *bool     `json:"holidayRows"`
+		AdaptiveQuality      *bool     `json:"adaptiveQuality"`
+		QualitySteps         *[]string `json:"qualitySteps"`
+		RemoteQualityCap     *string   `json:"remoteQualityCap"`
+		Theme                *string   `json:"theme"`
+		RemoteAccess         *bool     `json:"remoteAccess"`
+		RemoteForwardedPort  *int      `json:"remoteForwardedPort"`
+		LibraryWatch         *string   `json:"libraryWatch"`
 		// TMDBKey replaces the TMDB key; "" goes back to the environment's.
 		TMDBKey *string `json:"tmdbKey"`
 		// Read-only; accepted so a client can send back what it got.
@@ -335,6 +352,38 @@ func (s *Server) putSettings(w http.ResponseWriter, r *http.Request) {
 	}
 	if in.RemoteTrailers != nil {
 		if err := s.Store.SetSetting(ctx, settingRemoteTrailers, strconv.FormatBool(*in.RemoteTrailers)); err != nil {
+			s.serverError(w, err)
+			return
+		}
+	}
+	if in.QualitySteps != nil {
+		for _, id := range *in.QualitySteps {
+			if _, ok := stream.StepByID(id); !ok {
+				writeError(w, http.StatusBadRequest, "qualitySteps must be quality steps")
+				return
+			}
+		}
+		if len(*in.QualitySteps) == 0 {
+			writeError(w, http.StatusBadRequest, "pick at least one quality step")
+			return
+		}
+		if err := s.Store.SetSetting(ctx, settingQualitySteps, strings.Join(*in.QualitySteps, ",")); err != nil {
+			s.serverError(w, err)
+			return
+		}
+	}
+	if c := in.RemoteQualityCap; c != nil {
+		if _, ok := stream.StepByID(*c); !ok && *c != "" {
+			writeError(w, http.StatusBadRequest, "remoteQualityCap must be a quality step or empty")
+			return
+		}
+		if err := s.Store.SetSetting(ctx, settingRemoteQualityCap, *c); err != nil {
+			s.serverError(w, err)
+			return
+		}
+	}
+	if in.AdaptiveQuality != nil {
+		if err := s.Store.SetSetting(ctx, settingAdaptiveQuality, strconv.FormatBool(*in.AdaptiveQuality)); err != nil {
 			s.serverError(w, err)
 			return
 		}

@@ -14,6 +14,8 @@ import { UpNextCard, type UpNextMode } from '../player/UpNext'
 import { COUNTDOWN_SECONDS, stillWatching, upNextAt } from '../player/autoplay'
 import { sleepTimer, sleepVolume, useSleep } from '../player/sleep'
 import { SleepMenu } from '../player/SleepMenu'
+import { QualityMenu } from '../player/QualityMenu'
+import { LONG_STALL_MS, levelName, overCap, Rebuffers, startQuality, type Quality } from '../player/quality'
 import { parseVTT, type Cue } from '../player/vtt'
 import { PluginPlayer } from '../player/PluginPlayer'
 import { useAudio } from '../player/AudioPlayer'
@@ -151,6 +153,18 @@ function Player({ id }: { id: number }) {
   // Where to start, when Home Assistant or another device said (?t=seconds).
   const [params] = useSearchParams()
   const startAt = params.get('t')
+  // Streaming quality (see player/quality.ts): what the viewer picked, and
+  // which step of an adaptive stream is playing.
+  const { data: streaming, isFetched: streamingKnown } = useQuery({
+    queryKey: ['streaming'],
+    queryFn: api.streaming,
+    staleTime: 60_000,
+    retry: false,
+  })
+  const [quality, setQuality] = useState<Quality>()
+  const qualityNow = useRef<Quality>('original')
+  const [level, setLevel] = useState<string>()
+  const rebuffers = useRef(new Rebuffers())
 
   const duration = item?.durationMs ? item.durationMs / 1000 : 0
   const position = useCallback(() => offset.current + (video.current?.currentTime ?? 0), [])
@@ -162,11 +176,12 @@ function Player({ id }: { id: number }) {
       const seq = ++hlsSeq.current
       setWaiting(true)
       setError('')
+      setLevel(undefined)
       hls.current?.destroy()
       hls.current = null
       burned.current = burn
       try {
-        const { url } = await api.startHls(item.id, Math.floor(at), burn)
+        const { url } = await api.startHls(item.id, Math.floor(at), burn, qualityNow.current)
         if (seq !== hlsSeq.current) return
         offset.current = Math.floor(at)
         // hls.js is only downloaded when a file needs converting.
@@ -178,6 +193,10 @@ function Player({ id }: { id: number }) {
           h.attachMedia(el)
           h.on(Hls.Events.ERROR, (_, d) => {
             if (d.fatal && seq === hlsSeq.current) recoverRef.current?.(position(), 'transcode')
+          })
+          // An adaptive stream says which step it's on.
+          h.on(Hls.Events.LEVEL_SWITCHED, (_, d) => {
+            if (seq === hlsSeq.current && h.levels.length > 1) setLevel(levelName(h.levels[d.level]))
           })
           hls.current = h
         } else {
@@ -201,6 +220,8 @@ function Player({ id }: { id: number }) {
       hls.current?.destroy()
       hls.current = null
       burned.current = undefined
+      setLevel(undefined)
+      rebuffers.current.reset()
       setMode('direct')
       offset.current = 0
       el.src = fileUrl(item.id)
@@ -210,17 +231,44 @@ function Player({ id }: { id: number }) {
     [item],
   )
 
+  // direct says whether the file can play as it is: the browser can play
+  // it, the viewer picked Auto or Original, and it's within any cap.
+  const direct = (q: Quality) => {
+    const el = video.current
+    return !!item && !!el && (q === 'auto' || q === 'original') && canDirectPlay(item, el) && !overCap(item, streaming?.cap)
+  }
+
   // Pick direct play or a transcode, and resume where the viewer left off.
   useEffect(() => {
     const el = video.current
-    if (!item || !el || mode) return
+    if (!item || !el || mode || !streamingKnown) return
     const resume = startAt !== null ? Number(startAt) || 0 : !item.played && item.positionMs ? item.positionMs / 1000 : 0
     const pick = defaultTrack(item.subtitles ?? [])
+    const q = startQuality(streaming)
+    qualityNow.current = q
+    setQuality(q)
     setSub(pick)
     if (pick?.burnIn) startHls(resume, pick.id)
-    else if (canDirectPlay(item, el)) playDirect(resume)
+    else if (direct(q)) playDirect(resume)
     else startHls(resume)
-  }, [item, mode, startHls, playDirect, startAt])
+  }, [item, mode, startHls, playDirect, startAt, streamingKnown]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Picking a quality starts playback again at the same spot.
+  const selectQuality = (q: Quality) => {
+    qualityNow.current = q
+    setQuality(q)
+    if (!burned.current && direct(q)) playDirect(position())
+    else startHls(position())
+  }
+
+  // Auto playing a file as it is moves to an adaptive stream when the
+  // connection can't keep up with it.
+  const fallBack = () => {
+    if (modeNow.current !== 'direct' || qualityNow.current !== 'auto' || !streaming?.adaptive) return false
+    flash(tr('common:quality.fellBack'), 6000)
+    startHls(position())
+    return true
+  }
 
   // Text subtitles are drawn by the player; fetch the cues when the choice changes.
   useEffect(() => {
@@ -246,7 +294,7 @@ function Player({ id }: { id: number }) {
     if (t) lastSub.current = t
     const burn = t?.burnIn ? t.id : undefined
     if (burn === burned.current) return
-    if (!burn && canDirectPlay(item, el)) playDirect(position())
+    if (!burn && direct(qualityNow.current)) playDirect(position())
     else startHls(position(), burn)
   }
 
@@ -289,6 +337,7 @@ function Player({ id }: { id: number }) {
       if (now && now.state !== 'restarting' && outcome(server.current, now) === 'same') {
         server.current = now
         if (cause === 'retry') resume()
+        else if (cause === 'stall' && fallBack()) return
         else if (cause === 'direct') startHls(at)
         else if (cause === 'transcode' && !recovered.current) {
           recovered.current = true
@@ -318,11 +367,14 @@ function Player({ id }: { id: number }) {
 
   // A player that sits buffering for a while may have lost the server
   // without an error (a file playing directly just stops arriving).
+  // Auto gives a file playing as it is less time before moving to an
+  // adaptive stream.
+  const canFallBack = mode === 'direct' && quality === 'auto' && !!streaming?.adaptive
   useEffect(() => {
     if (!waiting || paused || error || away) return
-    const t = window.setTimeout(() => recoverRef.current?.(position(), 'stall'), 10_000)
+    const t = window.setTimeout(() => recoverRef.current?.(position(), 'stall'), canFallBack ? LONG_STALL_MS : 10_000)
     return () => window.clearTimeout(t)
-  }, [waiting, paused, error, away, position])
+  }, [waiting, paused, error, away, position, canFallBack])
 
   // Heads-up as soon as the server says it's restarting; what's buffered
   // often carries playback through.
@@ -646,7 +698,15 @@ function Player({ id }: { id: number }) {
           setPaused(true)
           setChrome(true)
         }}
-        onWaiting={() => setWaiting(true)}
+        onWaiting={() => {
+          setWaiting(true)
+          // Buffering again and again (not after a seek) means the
+          // connection can't keep up with the file as it is.
+          if (canFallBack && !video.current?.seeking && time > 1 && rebuffers.current.add()) {
+            rebuffers.current.reset()
+            fallBack()
+          }
+        }}
         onPlaying={() => setWaiting(false)}
         onCanPlay={() => setWaiting(false)}
         onVolumeChange={() => setMuted(!!video.current?.muted)}
@@ -784,7 +844,21 @@ function Player({ id }: { id: number }) {
               {clock(shown)} <span className="text-white/40">/ {clock(duration)}</span>
             </div>
             <div className="ms-auto flex items-center gap-2">
-              {mode === 'hls' && <span className="hidden rounded bg-white/10 px-2 py-0.5 text-xs text-white/60 sm:inline">{tr('player.converting')}</span>}
+              {mode === 'hls' && !streaming?.adaptive && (
+                <span className="hidden rounded bg-white/10 px-2 py-0.5 text-xs text-white/60 sm:inline">{tr('player.converting')}</span>
+              )}
+              {streaming?.adaptive && quality && (
+                <QualityMenu
+                  steps={streaming.steps}
+                  selected={quality}
+                  playing={mode === 'direct' ? tr('common:quality.original') : level}
+                  onSelect={selectQuality}
+                  onOpenChange={(open) => {
+                    menuOpen.current = open
+                    poke()
+                  }}
+                />
+              )}
               {item && (
                 <SleepMenu
                   sleep={sleep}

@@ -692,6 +692,13 @@
       "auto": "Automatiskt: den bästa som fungerar",
       "off": "Av: använd alltid CPU:n",
       "notFound": "{{name}} (finns inte på den här servern)",
+      "adaptive": "Adaptiv kvalitet",
+      "adaptiveDetail": "Spelarna erbjuder Auto och fasta kvaliteter. Auto sänker bilden när anslutningen är långsam och höjer den när den återhämtar sig. Konverterad video görs i flera kvaliteter samtidigt, vilket belastar servern mer.",
+      "steps": "Kvalitetssteg",
+      "stepsDetail": "Kvaliteterna som adaptiva strömmar görs i och som man kan välja. Utan GPU använder Auto den bästa och en i mitten.",
+      "cap": "Gräns borta från hemmet",
+      "noCap": "Ingen gräns",
+      "capDetail": "Den bästa kvaliteten en enhet borta från hemmet får, även med adaptiv kvalitet av. Allt bättre konverteras ner till den.",
       "accelerator": {
         "nvenc": "NVIDIA NVENC",
         "vaapi": "VAAPI (AMD och Intel på Linux)",

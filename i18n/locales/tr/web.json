@@ -692,6 +692,13 @@
       "auto": "Otomatik: çalışan en iyisi",
       "off": "Kapalı: her zaman CPU kullan",
       "notFound": "{{name}} (bu sunucuda bulunamadı)",
+      "adaptive": "Uyarlanabilir kalite",
+      "adaptiveDetail": "Oynatıcılar Otomatik ve sabit kaliteler sunar. Otomatik, bağlantı yavaşken görüntüyü düşürür, toparlandığında yükseltir. Dönüştürülen video aynı anda birkaç kalitede hazırlanır, bu da sunucuyu daha çok yorar.",
+      "steps": "Kalite seviyeleri",
+      "stepsDetail": "Uyarlanabilir yayınların hazırlandığı ve seçilebilen kaliteler. GPU yoksa Otomatik en iyisini ve ortadakilerden birini kullanır.",
+      "cap": "Ev dışında sınır",
+      "noCap": "Sınır yok",
+      "capDetail": "Ev dışındaki bir cihazın alacağı en iyi kalite; uyarlanabilir kalite kapalıyken de geçerlidir. Daha iyisi bu kaliteye dönüştürülür.",
       "accelerator": {
         "nvenc": "NVIDIA NVENC",
         "vaapi": "VAAPI (Linux'ta AMD ve Intel)",

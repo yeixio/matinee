@@ -405,5 +405,14 @@
     "tryAgain": "再試一次",
     "updated": "伺服器已更新至 {{version}}，從你離開的地方繼續播放。",
     "restarted": "伺服器已重新啟動，從你離開的地方繼續播放。"
+  },
+  "quality": {
+    "title": "畫質",
+    "auto": "自動",
+    "autoNow": "自動 · {{quality}}",
+    "original": "原始畫質",
+    "mbps": "{{n}} Mbps",
+    "hint": "自動會在網路跟不上時降低畫質，網路恢復後再調高。",
+    "fellBack": "已切換為自動畫質，讓播放保持流暢"
   }
 }

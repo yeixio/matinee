@@ -433,5 +433,14 @@
     "tryAgain": "Opnieuw proberen",
     "updated": "De server is bijgewerkt naar {{version}}. Je gaat verder waar je was.",
     "restarted": "De server is opnieuw gestart. Je gaat verder waar je was."
+  },
+  "quality": {
+    "title": "Kwaliteit",
+    "auto": "Auto",
+    "autoNow": "Auto · {{quality}}",
+    "original": "Origineel",
+    "mbps": "{{n}} Mbps",
+    "hint": "Auto verlaagt de beeldkwaliteit als de verbinding het niet bijhoudt, en verhoogt die weer zodra ze herstelt.",
+    "fellBack": "Overgeschakeld op automatische kwaliteit om soepel door te spelen"
   }
 }

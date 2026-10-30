@@ -433,5 +433,14 @@
     "tryAgain": "Yritä uudelleen",
     "updated": "Palvelin päivitettiin versioon {{version}}. Jatketaan siitä, mihin jäit.",
     "restarted": "Palvelin käynnistyi uudelleen. Jatketaan siitä, mihin jäit."
+  },
+  "quality": {
+    "title": "Laatu",
+    "auto": "Auto",
+    "autoNow": "Auto · {{quality}}",
+    "original": "Alkuperäinen",
+    "mbps": "{{n}} Mbit/s",
+    "hint": "Auto laskee kuvanlaatua, kun yhteys ei pysy perässä, ja nostaa sen taas, kun yhteys paranee.",
+    "fellBack": "Vaihdettiin automaattiseen laatuun, jotta toisto jatkuu sujuvasti"
   }
 }

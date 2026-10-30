@@ -205,6 +205,23 @@ try {
     await shot(page, 'player-sleep')
     await page.getByRole('menuitemradio', { name: 'Off' }).click()
 
+    // Adaptive quality: an admin turns it on, and the player offers Auto,
+    // the quality steps and Original (see docs/guide/server/streaming-quality.md).
+    if (wanted('player-quality')) {
+      await api(token, 'PUT', '/settings', { adaptiveQuality: true })
+      await page.reload()
+      await sleep(2500)
+      await page.mouse.move(700, 500)
+      await page.getByRole('button', { name: /^Quality/ }).click()
+      await page.getByRole('menuitemradio', { name: /720p/ }).click()
+      await sleep(4000)
+      await page.mouse.move(720, 520)
+      await page.getByRole('button', { name: /^Quality/ }).click()
+      await shot(page, 'player-quality')
+      await page.mouse.click(700, 300) // closes the menu, and pauses
+      await api(token, 'PUT', '/settings', { adaptiveQuality: false })
+    }
+
     // Home Assistant pauses the film (see docs/guide/server/home-assistant.md).
     if (wanted('player-remote')) {
       const ha = await homeAssistant()
@@ -280,6 +297,15 @@ try {
     await shot(page, 'trailers', { target: section(page, 'Trailers') })
     await shot(page, 'holiday-rows', { target: section(page, 'Home') })
     await shot(page, 'transcoding', { target: section(page, 'Transcoding') })
+    if (wanted('adaptive-quality')) {
+      await api(token, 'PUT', '/settings', { adaptiveQuality: true, remoteQualityCap: '720p' })
+      await page.reload()
+      await sleep(1000)
+      await shot(page, 'adaptive-quality', { target: section(page, 'Transcoding') })
+      await api(token, 'PUT', '/settings', { adaptiveQuality: false, remoteQualityCap: '' })
+      await page.reload()
+      await sleep(1000)
+    }
     await shot(page, 'devices', { target: section(page, 'Your devices') })
     await shot(page, 'account', { target: section(page, 'Your account') })
     const plugins = section(page, 'Plugins')

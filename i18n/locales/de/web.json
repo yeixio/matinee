@@ -692,6 +692,13 @@
       "auto": "Automatisch: die beste, die funktioniert",
       "off": "Aus: immer die CPU verwenden",
       "notFound": "{{name}} (auf diesem Server nicht gefunden)",
+      "adaptive": "Adaptive Qualität",
+      "adaptiveDetail": "Player bieten Auto und feste Qualitäten an. Auto senkt das Bild bei langsamer Verbindung und hebt es wieder an, wenn sie sich erholt. Umgewandeltes Video entsteht gleich in mehreren Qualitäten, was den Server stärker belastet.",
+      "steps": "Qualitätsstufen",
+      "stepsDetail": "Die Qualitäten, in denen adaptive Streams entstehen und die man wählen kann. Ohne GPU nutzt Auto die beste und eine mittlere.",
+      "cap": "Limit unterwegs",
+      "noCap": "Kein Limit",
+      "capDetail": "Die beste Qualität, die ein Gerät unterwegs bekommt, auch ohne adaptive Qualität. Alles Bessere wird darauf heruntergerechnet.",
       "accelerator": {
         "nvenc": "NVIDIA NVENC",
         "vaapi": "VAAPI (AMD und Intel unter Linux)",

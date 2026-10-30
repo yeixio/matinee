@@ -433,5 +433,14 @@
     "tryAgain": "Erneut versuchen",
     "updated": "Der Server wurde auf {{version}} aktualisiert. Es geht dort weiter, wo du warst.",
     "restarted": "Der Server wurde neu gestartet. Es geht dort weiter, wo du warst."
+  },
+  "quality": {
+    "title": "Qualität",
+    "auto": "Auto",
+    "autoNow": "Auto · {{quality}}",
+    "original": "Original",
+    "mbps": "{{n}} Mbit/s",
+    "hint": "Auto senkt die Bildqualität, wenn die Verbindung nicht mithält, und hebt sie wieder an, sobald sie sich erholt.",
+    "fellBack": "Auf automatische Qualität umgestellt, damit es flüssig weiterläuft"
   }
 }

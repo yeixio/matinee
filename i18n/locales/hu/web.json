@@ -692,6 +692,13 @@
       "auto": "Automatikus: a legjobb működő",
       "off": "Ki: mindig a CPU",
       "notFound": "{{name}} (nem található ezen a szerveren)",
+      "adaptive": "Adaptív minőség",
+      "adaptiveDetail": "A lejátszók Autót és rögzített minőségeket kínálnak. Az Auto lassú kapcsolatnál csökkenti a képet, és visszaemeli, ha a kapcsolat helyreáll. Az átalakított videó egyszerre több minőségben készül, ami jobban terheli a szervert.",
+      "steps": "Minőségi fokozatok",
+      "stepsDetail": "A minőségek, amelyekben az adaptív streamek készülnek, és amelyek közül választani lehet. GPU nélkül az Auto a legjobbat és egy középsőt használja.",
+      "cap": "Korlát otthonon kívül",
+      "noCap": "Nincs korlát",
+      "capDetail": "A legjobb minőség, amelyet egy eszköz otthonon kívül kap, kikapcsolt adaptív minőség mellett is. A jobbat erre alakítjuk át.",
       "accelerator": {
         "nvenc": "NVIDIA NVENC",
         "vaapi": "VAAPI (AMD és Intel Linuxon)",

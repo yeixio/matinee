@@ -81,6 +81,34 @@ func TestArgs(t *testing.T) {
 			output: "-filter_complex [0:s:2][0:v:0]scale2ref[sub][vid];[vid][sub]overlay=eof_action=pass,scale='min(1920,iw)':-2,format=nv12,hwupload[v] -map [v] " +
 				"-c:v h264_vaapi -rc_mode VBR -b:v 8M -maxrate 10M -bufsize 20M -profile:v high",
 		},
+		{
+			name: "one quality step on the cpu", accel: nil, mode: CPU,
+			video:  Video{Codec: "hevc", BurnSub: -1, Renditions: []Rendition{{MaxWidth: 1280, MaxRate: 4_000_000}}},
+			output: "-map 0:v:0 -vf scale='min(1280,iw)':-2 -c:v libx264 -preset veryfast -crf 22 -maxrate 4000000 -bufsize 8000000 -pix_fmt yuv420p",
+		},
+		{
+			name: "adaptive on the cpu", accel: nil, mode: CPU,
+			video: Video{Codec: "hevc", BurnSub: -1, KeyframeSeconds: 4, Renditions: []Rendition{{1920, 8_000_000}, {854, 1_500_000}}},
+			output: "-filter_complex [0:v:0]split=2[s0][s1];[s0]scale='min(1920,iw)':-2[v0];[s1]scale='min(854,iw)':-2[v1] -map [v0] -map [v1] " +
+				"-c:v:0 libx264 -preset:v:0 veryfast -crf:v:0 22 -maxrate:v:0 8000000 -bufsize:v:0 16000000 -pix_fmt:v:0 yuv420p -force_key_frames:v:0 expr:gte(t,n_forced*4) " +
+				"-c:v:1 libx264 -preset:v:1 veryfast -crf:v:1 22 -maxrate:v:1 1500000 -bufsize:v:1 3000000 -pix_fmt:v:1 yuv420p -force_key_frames:v:1 expr:gte(t,n_forced*4)",
+		},
+		{
+			name: "adaptive vaapi full", accel: &Accel{Kind: VAAPI, Device: "/dev/dri/renderD128"}, mode: Full,
+			video: Video{Codec: "hevc", BurnSub: -1, Renditions: []Rendition{{1280, 4_000_000}, {640, 700_000}}},
+			input: "-hwaccel vaapi -hwaccel_device /dev/dri/renderD128 -hwaccel_output_format vaapi",
+			output: "-filter_complex [0:v:0]split=2[s0][s1];[s0]scale_vaapi=w='min(1280,iw)':h=-2:format=nv12[v0];[s1]scale_vaapi=w='min(640,iw)':h=-2:format=nv12[v1] -map [v0] -map [v1] " +
+				"-c:v:0 h264_vaapi -rc_mode:v:0 VBR -b:v:0 3200000 -maxrate:v:0 4000000 -bufsize:v:0 8000000 -profile:v:0 high " +
+				"-c:v:1 h264_vaapi -rc_mode:v:1 VBR -b:v:1 560000 -maxrate:v:1 700000 -bufsize:v:1 1400000 -profile:v:1 high",
+		},
+		{
+			name: "adaptive with a burned-in subtitle", accel: &Accel{Kind: NVENC}, mode: Encode,
+			video: Video{Codec: "hevc", BurnSub: 1, Renditions: []Rendition{{1920, 8_000_000}, {1280, 4_000_000}}},
+			output: "-filter_complex [0:s:1][0:v:0]scale2ref[sub][vid];[vid][sub]overlay=eof_action=pass,split=2[s0][s1];" +
+				"[s0]scale='min(1920,iw)':-2,format=yuv420p[v0];[s1]scale='min(1280,iw)':-2,format=yuv420p[v1] -map [v0] -map [v1] " +
+				"-c:v:0 h264_nvenc -preset:v:0 p4 -tune:v:0 hq -rc:v:0 vbr -cq:v:0 23 -b:v:0 6400000 -maxrate:v:0 8000000 -bufsize:v:0 16000000 -profile:v:0 high -forced-idr:v:0 1 " +
+				"-c:v:1 h264_nvenc -preset:v:1 p4 -tune:v:1 hq -rc:v:1 vbr -cq:v:1 23 -b:v:1 3200000 -maxrate:v:1 4000000 -bufsize:v:1 8000000 -profile:v:1 high -forced-idr:v:1 1",
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

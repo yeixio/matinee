@@ -696,6 +696,13 @@
       "auto": "Automat: cel mai bun care funcționează",
       "off": "Dezactivat: folosește mereu CPU-ul",
       "notFound": "{{name}} (negăsit pe acest server)",
+      "adaptive": "Calitate adaptivă",
+      "adaptiveDetail": "Playerele oferă Auto și calități fixe. Auto scade imaginea când conexiunea e lentă și o crește când își revine. Videoclipul convertit se face în mai multe calități deodată, ceea ce solicită mai mult serverul.",
+      "steps": "Trepte de calitate",
+      "stepsDetail": "Calitățile în care se fac fluxurile adaptive și dintre care se poate alege. Fără GPU, Auto folosește cea mai bună și una din mijloc.",
+      "cap": "Limită în afara casei",
+      "noCap": "Fără limită",
+      "capDetail": "Cea mai bună calitate pe care o primește un dispozitiv în afara casei, chiar și cu calitatea adaptivă oprită. Orice e mai bun se convertește la ea.",
       "accelerator": {
         "nvenc": "NVIDIA NVENC",
         "vaapi": "VAAPI (AMD și Intel pe Linux)",
