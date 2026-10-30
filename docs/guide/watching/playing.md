@@ -71,7 +71,7 @@ The player can be paused, moved or started from [Home Assistant](/docs/server/ho
 
 <!-- /since -->
 <!-- since: v0.1.5 -->
-A [Wear OS watch](/docs/apps/wear-os/) can control the player too: it says **Controlled from** with the watch's name.
+A [Wear OS watch](/docs/apps/wear-os/) or an [Apple Watch](/docs/apps/apple-watch/) can control the player too: it says **Controlled from** with the watch's name.
 
 <!-- /since -->
 <!-- since: v0.1.4 -->
