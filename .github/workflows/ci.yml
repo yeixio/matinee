@@ -6,31 +6,6 @@ on:
   pull_request:
 
 jobs:
-  release-test:
-    name: Release test (temporary)
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-go@v5
-        with:
-          go-version-file: go.mod
-      - name: Install ffmpeg
-        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends ffmpeg
-      - name: Test
-        env:
-          TAG: v0.1.6
-        run: |
-          set -o pipefail
-          cat /etc/os-release | head -2; ffmpeg -version | head -1; go version
-          if ! go test -count=1 ./... 2>&1 | tee "$RUNNER_TEMP/test.log"; then
-            summary="$(grep -E -B2 -A12 '^\s*--- FAIL|^panic:|^FAIL' "$RUNNER_TEMP/test.log" | head -n 60)"
-            summary="${summary//'%'/'%25'}"
-            summary="${summary//$'\r'/}"
-            summary="${summary//$'\n'/'%0A'}"
-            echo "::error title=Tests failed::$summary"
-            exit 1
-          fi
-          echo "::notice title=env::$(grep PRETTY /etc/os-release) $(ffmpeg -version | head -1)"
   go:
     name: Go (${{ matrix.database }})
     runs-on: ubuntu-latest
