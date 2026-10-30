@@ -11,6 +11,7 @@ import (
 	"fmt"
 	"slices"
 	"strconv"
+	"strings"
 )
 
 // Kind names a hardware video backend. The values are stored as the
@@ -119,6 +120,19 @@ type Video struct {
 	// KeyframeSeconds forces a keyframe this often, so HLS segments start
 	// on one. 0 leaves it to the encoder.
 	KeyframeSeconds int
+	// Renditions, when set, are the pictures to make instead of one at
+	// MaxWidth with the default rates. Several make an adaptive stream:
+	// the video is decoded once and split, each copy resized and encoded
+	// on its own, as video streams 0, 1 and so on.
+	Renditions []Rendition
+}
+
+// Rendition is one picture size and bitrate a transcode makes.
+type Rendition struct {
+	MaxWidth int
+	// MaxRate is the peak video bitrate in bits per second; 0 uses the
+	// default rates.
+	MaxRate int
 }
 
 // Rates for hardware encoders, which have no constant-quality mode common to
@@ -148,18 +162,35 @@ func Args(a *Accel, m Mode, v Video) (input, output []string) {
 	if a == nil {
 		m = CPU
 	}
-	scale := fmt.Sprintf("scale='min(%d,iw)':-2", v.MaxWidth)
+	renditions := v.Renditions
+	if len(renditions) == 0 {
+		renditions = []Rendition{{MaxWidth: v.MaxWidth}}
+	}
 	keyframes := []string{}
 	if v.KeyframeSeconds > 0 {
 		keyframes = []string{"-force_key_frames", fmt.Sprintf("expr:gte(t,n_forced*%d)", v.KeyframeSeconds)}
 	}
-
-	if m == CPU {
-		enc := []string{"-c:v", "libx264", "-preset", "veryfast", "-crf", "22",
-			"-maxrate", maxrate, "-bufsize", bufsize, "-pix_fmt", "yuv420p"}
-		return nil, append(videoFilter(v, scale), append(enc, keyframes...)...)
+	input, chain := filters(a, m, v.Codec)
+	chains := make([]string, len(renditions))
+	var enc []string
+	for i, r := range renditions {
+		chains[i] = chain(r.MaxWidth)
+		e := append(encodeArgs(a, m, r.MaxRate), keyframes...)
+		if len(renditions) > 1 {
+			e = perStream(e, i)
+		}
+		enc = append(enc, e...)
 	}
+	return input, append(videoFilter(v, chains), enc...)
+}
 
+// filters returns the input arguments for mode m on a, and the filter chain
+// that resizes a frame to fit a width and hands it to the encoder.
+func filters(a *Accel, m Mode, codec string) (input []string, chain func(width int) string) {
+	scale := func(w int) string { return fmt.Sprintf("scale='min(%d,iw)':-2", w) }
+	if m == CPU {
+		return nil, scale
+	}
 	k := a.Kind
 	// The software filters' last step hands the encoder frames in a format
 	// it takes: VAAPI's encoder only takes frames already on the GPU.
@@ -171,61 +202,111 @@ func Args(a *Accel, m Mode, v Video) (input, output []string) {
 	case QSV:
 		upload = "format=nv12"
 	}
-	chain := scale + "," + upload
-
-	if m == Full {
-		switch k {
-		case VAAPI:
-			input = []string{"-hwaccel", "vaapi", "-hwaccel_device", a.Device, "-hwaccel_output_format", "vaapi"}
-			chain = fmt.Sprintf("scale_vaapi=w='min(%d,iw)':h=-2:format=nv12", v.MaxWidth)
-		case NVENC:
-			input = []string{"-hwaccel", "cuda", "-hwaccel_output_format", "cuda"}
-			chain = fmt.Sprintf("scale_cuda=w='min(%d,iw)':h=-2:format=yuv420p", v.MaxWidth)
-		case QSV:
-			input = []string{"-hwaccel", "qsv"}
-			if a.Device != "" {
-				input = append(input, "-qsv_device", a.Device)
-			}
-			input = append(input, "-hwaccel_output_format", "qsv", "-c:v", qsvDecoder[v.Codec])
-			chain = fmt.Sprintf("scale_qsv=w='min(%d,iw)':h=-2:format=nv12", v.MaxWidth)
-		case VideoToolbox:
-			// Decoded frames come back to memory for the software resize,
-			// which is cheap next to decoding.
-			input = []string{"-hwaccel", "videotoolbox"}
-		case AMF:
-			input = []string{"-hwaccel", "auto"}
-		}
+	chain = func(w int) string { return scale(w) + "," + upload }
+	if m != Full {
+		return input, chain
 	}
-
-	var enc []string
 	switch k {
 	case VAAPI:
-		enc = []string{"-c:v", encoder[k], "-rc_mode", "VBR", "-b:v", bitrate, "-maxrate", maxrate, "-bufsize", bufsize,
-			"-profile:v", "high"}
+		input = []string{"-hwaccel", "vaapi", "-hwaccel_device", a.Device, "-hwaccel_output_format", "vaapi"}
+		chain = func(w int) string { return fmt.Sprintf("scale_vaapi=w='min(%d,iw)':h=-2:format=nv12", w) }
 	case NVENC:
-		enc = []string{"-c:v", encoder[k], "-preset", "p4", "-tune", "hq", "-rc", "vbr", "-cq", "23",
-			"-b:v", bitrate, "-maxrate", maxrate, "-bufsize", bufsize, "-profile:v", "high", "-forced-idr", "1"}
+		input = []string{"-hwaccel", "cuda", "-hwaccel_output_format", "cuda"}
+		chain = func(w int) string { return fmt.Sprintf("scale_cuda=w='min(%d,iw)':h=-2:format=yuv420p", w) }
 	case QSV:
-		enc = []string{"-c:v", encoder[k], "-preset", "veryfast", "-b:v", bitrate, "-maxrate", maxrate, "-bufsize", bufsize,
-			"-profile:v", "high", "-forced_idr", "1"}
+		input = []string{"-hwaccel", "qsv"}
+		if a.Device != "" {
+			input = append(input, "-qsv_device", a.Device)
+		}
+		input = append(input, "-hwaccel_output_format", "qsv", "-c:v", qsvDecoder[codec])
+		chain = func(w int) string { return fmt.Sprintf("scale_qsv=w='min(%d,iw)':h=-2:format=nv12", w) }
 	case VideoToolbox:
-		enc = []string{"-c:v", encoder[k], "-b:v", bitrate, "-profile:v", "high"}
+		// Decoded frames come back to memory for the software resize,
+		// which is cheap next to decoding.
+		input = []string{"-hwaccel", "videotoolbox"}
 	case AMF:
-		enc = []string{"-c:v", encoder[k], "-usage", "transcoding", "-quality", "speed", "-rc", "vbr_peak",
-			"-b:v", bitrate, "-maxrate", maxrate, "-bufsize", bufsize, "-profile:v", "high"}
-	case V4L2:
-		enc = []string{"-c:v", encoder[k], "-b:v", bitrate}
+		input = []string{"-hwaccel", "auto"}
 	}
-	return input, append(videoFilter(v, chain), append(enc, keyframes...)...)
+	return input, chain
 }
 
-// videoFilter maps the video through chain, drawing in a burned-in subtitle first.
-func videoFilter(v Video, chain string) []string {
+// encodeArgs returns the encoder and its rate options for mode m on a, peaking
+// at maxRate bits per second (0 for the defaults).
+func encodeArgs(a *Accel, m Mode, maxRate int) []string {
+	if m == CPU {
+		peak, buf := maxrate, bufsize
+		if maxRate > 0 {
+			peak, buf = strconv.Itoa(maxRate), strconv.Itoa(2*maxRate)
+		}
+		return []string{"-c:v", "libx264", "-preset", "veryfast", "-crf", "22",
+			"-maxrate", peak, "-bufsize", buf, "-pix_fmt", "yuv420p"}
+	}
+	b, peak, buf := bitrate, maxrate, bufsize
+	if maxRate > 0 {
+		b, peak, buf = strconv.Itoa(maxRate*4/5), strconv.Itoa(maxRate), strconv.Itoa(2*maxRate)
+	}
+	k := a.Kind
+	switch k {
+	case VAAPI:
+		return []string{"-c:v", encoder[k], "-rc_mode", "VBR", "-b:v", b, "-maxrate", peak, "-bufsize", buf,
+			"-profile:v", "high"}
+	case NVENC:
+		return []string{"-c:v", encoder[k], "-preset", "p4", "-tune", "hq", "-rc", "vbr", "-cq", "23",
+			"-b:v", b, "-maxrate", peak, "-bufsize", buf, "-profile:v", "high", "-forced-idr", "1"}
+	case QSV:
+		return []string{"-c:v", encoder[k], "-preset", "veryfast", "-b:v", b, "-maxrate", peak, "-bufsize", buf,
+			"-profile:v", "high", "-forced_idr", "1"}
+	case VideoToolbox:
+		return []string{"-c:v", encoder[k], "-b:v", b, "-profile:v", "high"}
+	case AMF:
+		return []string{"-c:v", encoder[k], "-usage", "transcoding", "-quality", "speed", "-rc", "vbr_peak",
+			"-b:v", b, "-maxrate", peak, "-bufsize", buf, "-profile:v", "high"}
+	case V4L2:
+		return []string{"-c:v", encoder[k], "-b:v", b}
+	}
+	return nil
+}
+
+// perStream points each option in opts at output video stream i only
+// (-b:v becomes -b:v:1, -preset becomes -preset:v:1).
+func perStream(opts []string, i int) []string {
+	out := make([]string, len(opts))
+	for j, o := range opts {
+		switch {
+		case j%2 == 1:
+			out[j] = o // a value
+		case strings.HasSuffix(o, ":v"):
+			out[j] = o + ":" + strconv.Itoa(i)
+		default:
+			out[j] = o + ":v:" + strconv.Itoa(i)
+		}
+	}
+	return out
+}
+
+// videoFilter maps the video through each chain, drawing in a burned-in
+// subtitle first. Several chains split the picture, one copy for each.
+func videoFilter(v Video, chains []string) []string {
+	src, graph := "[0:v:0]", ""
 	if v.BurnSub >= 0 {
 		// Picture subtitles are drawn at the video's size (their canvas can
 		// differ, e.g. 1080p subtitles on a cropped 800-line video).
-		graph := "[0:s:" + strconv.Itoa(v.BurnSub) + "][0:v:0]scale2ref[sub][vid];[vid][sub]overlay=eof_action=pass," + chain + "[v]"
-		return []string{"-filter_complex", graph, "-map", "[v]"}
+		graph = "[0:s:" + strconv.Itoa(v.BurnSub) + "][0:v:0]scale2ref[sub][vid];[vid][sub]overlay=eof_action=pass"
+		if len(chains) == 1 {
+			return []string{"-filter_complex", graph + "," + chains[0] + "[v]", "-map", "[v]"}
+		}
+		src, graph = "", graph+","
+	} else if len(chains) == 1 {
+		return []string{"-map", "0:v:0", "-vf", chains[0]}
 	}
-	return []string{"-map", "0:v:0", "-vf", chain}
+	var maps []string
+	graph += src + "split=" + strconv.Itoa(len(chains))
+	for i := range chains {
+		graph += fmt.Sprintf("[s%d]", i)
+	}
+	for i, c := range chains {
+		graph += fmt.Sprintf(";[s%d]%s[v%d]", i, c, i)
+		maps = append(maps, "-map", fmt.Sprintf("[v%d]", i))
+	}
+	return append([]string{"-filter_complex", graph}, maps...)
 }

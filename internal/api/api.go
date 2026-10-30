@@ -171,6 +171,7 @@ func (s *Server) routes() []route {
 		{"PUT /me/language", reader, s.putMyLanguage},
 		{"GET /languages", public, s.listLanguages},
 		{"GET /me/playback", reader, s.getMyPlayback},
+		{"GET /streaming", reader, s.getStreaming},
 		{"PUT /me/playback", reader, s.putMyPlayback},
 		{"PUT /me/password", signedIn, s.changeMyPassword},
 		{"GET /themes", public, s.listThemes},
@@ -1236,7 +1237,17 @@ func (s *Server) startHLS(w http.ResponseWriter, r *http.Request) {
 		}
 		audio = n
 	}
-	id, err := s.Transcoder.Start(r.Context(), currentUser(r).ID, it, start, burn, audio)
+	// quality is auto (adaptive), original, or one quality step's id.
+	steps, quality, err := s.hlsSteps(r, it, r.URL.Query().Get("quality"))
+	if errors.Is(err, errBadQuality) {
+		writeError(w, http.StatusBadRequest, err.Error())
+		return
+	}
+	if err != nil {
+		s.serverError(w, err)
+		return
+	}
+	id, err := s.Transcoder.Start(r.Context(), currentUser(r).ID, it, start, burn, audio, steps...)
 	if errors.Is(err, stream.ErrSuperseded) {
 		// The player already asked for a newer position; it ignores this answer.
 		writeError(w, http.StatusConflict, "replaced by a newer seek")
@@ -1248,7 +1259,9 @@ func (s *Server) startHLS(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// audio says the server chose the track, so apps know it can.
-	writeJSON(w, http.StatusOK, map[string]any{"url": "/api/v1/hls/" + id + "/index.m3u8", "startSec": start, "audio": audio})
+	// quality is what the server made, which a cap or adaptive quality
+	// being off can make different from what the player asked for.
+	writeJSON(w, http.StatusOK, map[string]any{"url": "/api/v1/hls/" + id + "/" + stream.Playlist(steps), "startSec": start, "audio": audio, "quality": quality})
 }
 
 // subtitleTracks lists a video's subtitle tracks. Files scanned before

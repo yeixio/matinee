@@ -107,7 +107,7 @@ func TestStartFallsBackToCPU(t *testing.T) {
 	defer tr.Close()
 	it := store.Item{ID: 1, Path: src, VideoCodec: "mpeg4"}
 
-	if got := tr.plan(gpu, it.ID, hwaccel.Video{Codec: "mpeg4", BurnSub: -1}); !slices.Equal(got, []hwaccel.Mode{hwaccel.Encode, hwaccel.CPU}) {
+	if got := tr.plan(gpu, it.ID, hwaccel.Video{Codec: "mpeg4", BurnSub: -1}, false); !slices.Equal(got, []hwaccel.Mode{hwaccel.Encode, hwaccel.CPU}) {
 		t.Fatalf("plan before failing: %v", got)
 	}
 	id, err := tr.Start(context.Background(), 7, it, 0, -1, 0)
@@ -117,15 +117,19 @@ func TestStartFallsBackToCPU(t *testing.T) {
 	if id == "" || !strings.Contains(logs.String(), "transcode failed on the GPU") {
 		t.Fatalf("didn't fall back:\n%s", logs.String())
 	}
-	if got := tr.plan(gpu, it.ID, hwaccel.Video{Codec: "mpeg4", BurnSub: -1}); !slices.Equal(got, []hwaccel.Mode{hwaccel.CPU}) {
+	if got := tr.plan(gpu, it.ID, hwaccel.Video{Codec: "mpeg4", BurnSub: -1}, false); !slices.Equal(got, []hwaccel.Mode{hwaccel.CPU}) {
 		t.Fatalf("plan after failing: %v", got)
 	}
 	// Another item still gets the GPU first.
-	if got := tr.plan(gpu, 2, hwaccel.Video{Codec: "hevc", BurnSub: -1}); !slices.Equal(got, []hwaccel.Mode{hwaccel.Full, hwaccel.Encode, hwaccel.CPU}) {
+	if got := tr.plan(gpu, 2, hwaccel.Video{Codec: "hevc", BurnSub: -1}, false); !slices.Equal(got, []hwaccel.Mode{hwaccel.Full, hwaccel.Encode, hwaccel.CPU}) {
 		t.Fatalf("plan for another item: %v", got)
 	}
 	// Copied video never touches the GPU.
-	if got := tr.plan(gpu, 3, hwaccel.Video{Codec: "h264", BurnSub: -1}); !slices.Equal(got, []hwaccel.Mode{hwaccel.CPU}) {
+	if got := tr.plan(gpu, 3, hwaccel.Video{Codec: "h264", BurnSub: -1}, true); !slices.Equal(got, []hwaccel.Mode{hwaccel.CPU}) {
 		t.Fatalf("plan for h264: %v", got)
+	}
+	// H.264 that's re-encoded for a lower quality does.
+	if got := tr.plan(gpu, 3, hwaccel.Video{Codec: "h264", BurnSub: -1}, false); !slices.Equal(got, []hwaccel.Mode{hwaccel.Full, hwaccel.Encode, hwaccel.CPU}) {
+		t.Fatalf("plan for h264 at a lower quality: %v", got)
 	}
 }

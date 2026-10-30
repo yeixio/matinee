@@ -389,6 +389,33 @@ paths:
             application/json:
               schema: { $ref: "#/components/schemas/PlaybackPrefs" }
         "400": { $ref: "#/components/responses/Error" }
+  /streaming:
+    get:
+      summary: The streaming qualities this device may offer
+      description: |
+        With adaptive quality on (an admin's choice, off by default), players
+        offer Auto, the quality steps listed here and Original, and pass the
+        choice to `POST /items/{id}/hls` as `quality`. Away from home a cap
+        can apply whether adaptive quality is on or off: a file bigger than
+        `cap` should play through a transcode rather than directly.
+      responses:
+        "200":
+          description: What to offer.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  adaptive: { type: boolean, description: "Adaptive quality is on: offer Auto, the steps and Original." }
+                  steps:
+                    type: array
+                    description: The quality steps to offer, best first, within the cap. Empty with adaptive quality off.
+                    items: { $ref: "#/components/schemas/QualityStep" }
+                  cap:
+                    description: The best quality this device may stream now (it's away from home and an admin set a cap), or null.
+                    oneOf:
+                      - { $ref: "#/components/schemas/QualityStep" }
+                      - { type: "null" }
   /themes:
     get:
       summary: The themes people can pick, and the server's default
@@ -1239,6 +1266,15 @@ paths:
         - { name: start, in: query, schema: { type: number }, description: Seconds into the file. }
         - { name: subtitle, in: query, schema: { type: string }, description: A subtitle track to burn in (picture-based tracks). }
         - { name: audio, in: query, schema: { type: integer, minimum: 0 }, description: "Which audio stream to play: its index among the file's audio streams (mediaInfo.audio[].index). The first when left out." }
+        - name: quality
+          in: query
+          schema: { type: string, example: auto }
+          description: |
+            `auto` for an adaptive stream of several quality steps (a master
+            playlist), a step's id (`720p`) for that quality alone, or
+            `original` (the default) for the file's own picture where it can.
+            With adaptive quality off every request gets `original`; away from
+            home a cap brings anything better down to it. See `GET /streaming`.
       responses:
         "200":
           description: An HLS playlist to play.
@@ -1247,10 +1283,11 @@ paths:
               schema:
                 type: object
                 properties:
-                  url: { type: string, example: /api/v1/hls/abc123/index.m3u8 }
+                  url: { type: string, example: /api/v1/hls/abc123/index.m3u8, description: "index.m3u8, or master.m3u8 for an adaptive stream." }
                   startSec: { type: number }
                   audio: { type: integer, description: The audio stream playing. Servers from before audio choice leave it out. }
-        "400": { description: No such subtitle or audio track. }
+                  quality: { type: string, description: "The quality made: auto, original or a step's id. Servers from before quality choice leave it out." }
+        "400": { description: No such subtitle or audio track, or quality step. }
         "409": { description: A newer start for the same item replaced this one. }
   /items/{id}/trailers:
     get:
@@ -2618,6 +2655,15 @@ components:
           description: |
             `POST /server/proof` works here. An app that saw this asks a
             looked-up address for proof before sending its token there.
+    QualityStep:
+      type: object
+      properties:
+        id: { type: string, example: 720p }
+        label: { type: string, example: 720p }
+        width: { type: integer, description: The widest the picture gets. }
+        height: { type: integer }
+        videoBps: { type: integer, description: Peak video bitrate, bits per second. }
+        audioBps: { type: integer, description: Audio bitrate, bits per second. }
     Settings:
       type: object
       properties:
@@ -2638,6 +2684,17 @@ components:
         holidayRows:
           type: boolean
           description: Show a row of titles for a holiday on Home in the weeks before it. On by default.
+        adaptiveQuality:
+          type: boolean
+          description: Transcodes become adaptive streams of qualitySteps, and people can pick a quality in the player. Off by default.
+        qualitySteps:
+          type: array
+          items: { type: string, enum: ["1080p", "720p", "480p", "360p"] }
+          description: The quality steps adaptive streams use. All of them by default.
+        remoteQualityCap:
+          type: string
+          enum: ["", "1080p", "720p", "480p", "360p"]
+          description: The best quality step a stream away from home may use, adaptive quality on or off. Empty for no cap (the default).
         theme:
           type: string
           description: The theme everyone sees until they pick their own. `matinee` by default.
