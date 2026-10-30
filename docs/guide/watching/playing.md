@@ -70,6 +70,10 @@ The [phone and TV apps](/docs/apps/phone-and-tv/#sleep-timer) have the same time
 The player can be paused, moved or started from [Home Assistant](/docs/server/home-assistant/). When that happens it says so for a moment, such as **Controlled from Home Assistant**. Each browser counts as one player; the tab with a video open, or with music playing, is the one that listens. [Who signs in, and when](/docs/household/signing-in/#who-can-control-which-player) says who may control it.
 
 <!-- /since -->
+<!-- since: v0.1.5 -->
+A [Wear OS watch](/docs/apps/wear-os/) can control the player too: it says **Controlled from** with the watch's name.
+
+<!-- /since -->
 <!-- since: v0.1.4 -->
 ## When the server restarts or updates
 
