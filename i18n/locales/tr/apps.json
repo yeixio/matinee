@@ -467,6 +467,27 @@
     "sleepMinutes": "{{minutes}} dk",
     "sleepEndOfItem": "Bu bittiğinde",
     "sleepsAt": "{{time}} itibarıyla durur",
-    "episode": "{{show}} · S{{season}} B{{episode}}"
+    "episode": "{{show}} · S{{season}} B{{episode}}",
+    "thisWatch": "Bu saat",
+    "onThisWatch": "Bu saatte",
+    "nothingDownloaded": "Bu saatte henüz bir şey yok. Telefonsuz dinlemek için müzik ve sesli kitap ekle.",
+    "addMusicAndBooks": "Müzik ve kitap ekle",
+    "search": "Ara",
+    "searchHint": "Albüm veya kitap",
+    "continueListening": "Dinlemeye devam et",
+    "newAlbums": "Yeni albümler",
+    "newBooks": "Yeni sesli kitaplar",
+    "noResults": "Hiçbir şey bulunamadı.",
+    "download": "İndir",
+    "downloading": "İndiriliyor · %{{percent}}",
+    "preparing": "Hazırlanıyor…",
+    "downloadFailed": "İndirilemedi",
+    "downloaded": "İndirildi",
+    "remove": "Saatten kaldır",
+    "connectHeadphones": "Dinlemek için Bluetooth kulaklık bağla.",
+    "bluetooth": "Bluetooth ayarları",
+    "back15": "15 saniye geri",
+    "ahead30": "30 saniye ileri",
+    "storageUsed": "Bu saatte {{size}}"
   }
 }

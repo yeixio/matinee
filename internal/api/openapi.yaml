@@ -1596,7 +1596,9 @@ paths:
       description: |
         Each event is applied unless the item's progress changed more recently
         (on another device, say), so the latest change wins. Send events in
-        batches of up to 1000. Times in the future count as now.
+        batches of up to 1000. Times in the future count as now. A place in an
+        audiobook, or in one of its parts, is kept on the book on its whole
+        clock, as with PUT /items/{id}/progress.
       requestBody:
         required: true
         content:

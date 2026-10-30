@@ -467,6 +467,27 @@
     "sleepMinutes": "{{minutes}} min",
     "sleepEndOfItem": "Kun tämä loppuu",
     "sleepsAt": "Pysähtyy klo {{time}}",
-    "episode": "{{show}} · K{{season}} J{{episode}}"
+    "episode": "{{show}} · K{{season}} J{{episode}}",
+    "thisWatch": "Tämä kello",
+    "onThisWatch": "Tässä kellossa",
+    "nothingDownloaded": "Tässä kellossa ei ole vielä mitään. Lisää musiikkia ja äänikirjoja kuunneltavaksi ilman puhelinta.",
+    "addMusicAndBooks": "Lisää musiikkia ja kirjoja",
+    "search": "Hae",
+    "searchHint": "Albumi tai kirja",
+    "continueListening": "Jatka kuuntelua",
+    "newAlbums": "Uudet albumit",
+    "newBooks": "Uudet äänikirjat",
+    "noResults": "Mitään ei löytynyt.",
+    "download": "Lataa",
+    "downloading": "Ladataan · {{percent}} %",
+    "preparing": "Valmistellaan…",
+    "downloadFailed": "Lataus epäonnistui",
+    "downloaded": "Ladattu",
+    "remove": "Poista kellosta",
+    "connectHeadphones": "Yhdistä Bluetooth-kuulokkeet kuunnellaksesi.",
+    "bluetooth": "Bluetooth-asetukset",
+    "back15": "15 sekuntia taaksepäin",
+    "ahead30": "30 sekuntia eteenpäin",
+    "storageUsed": "{{size}} tässä kellossa"
   }
 }

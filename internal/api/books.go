@@ -54,18 +54,25 @@ func (s *Server) getBook(w http.ResponseWriter, r *http.Request) {
 // setBookProgress saves a place in a whole book. Reaching the last minute
 // finishes it.
 func (s *Server) setBookProgress(w http.ResponseWriter, r *http.Request, it store.Item, positionMs int64, played bool) {
-	if it.DurationMs != nil && *it.DurationMs > 0 && positionMs >= *it.DurationMs-bookFinishedMs {
-		played = true
-	}
-	if played {
-		positionMs = 0
-	}
+	positionMs, played = bookFinish(it, positionMs, played)
 	if err := s.Store.SetBookProgress(r.Context(), currentUser(r).ID, it.ID, positionMs, played); err != nil {
 		s.serverError(w, err)
 		return
 	}
 	s.Plugins.Played(currentUser(r), it, positionMs, played)
 	w.WriteHeader(http.StatusNoContent)
+}
+
+// bookFinish says whether a place in a book finishes it, which saves it as
+// played and back at the start.
+func bookFinish(book store.Item, positionMs int64, played bool) (int64, bool) {
+	if book.DurationMs != nil && *book.DurationMs > 0 && positionMs >= *book.DurationMs-bookFinishedMs {
+		played = true
+	}
+	if played {
+		positionMs = 0
+	}
+	return positionMs, played
 }
 
 // setPartProgress saves a place in one part of a book, from a player that
@@ -77,8 +84,18 @@ func (s *Server) setPartProgress(w http.ResponseWriter, r *http.Request, part st
 		s.serverError(w, err)
 		return
 	}
+	positionMs, played, ok := partPlace(b, part.ID, positionMs, played)
+	if !ok {
+		writeError(w, http.StatusNotFound, "book not found")
+		return
+	}
+	s.setBookProgress(w, r, b.Item, positionMs, played)
+}
+
+// partPlace turns a place in one of a book's parts into a place in the book.
+func partPlace(b store.Book, partID, positionMs int64, played bool) (int64, bool, bool) {
 	for i, p := range b.Parts {
-		if p.ID != part.ID {
+		if p.ID != partID {
 			continue
 		}
 		last := i == len(b.Parts)-1
@@ -89,10 +106,28 @@ func (s *Server) setPartProgress(w http.ResponseWriter, r *http.Request, part st
 		default:
 			positionMs += p.StartMs
 		}
-		s.setBookProgress(w, r, b.Item, positionMs, played)
-		return
+		return positionMs, played, true
 	}
-	writeError(w, http.StatusNotFound, "book not found")
+	return 0, false, false
+}
+
+// syncBookProgress applies a place in a book, or in one of its parts,
+// recorded offline (see syncProgress): on the book, unless the book's place
+// changed more recently elsewhere.
+func (s *Server) syncBookProgress(ctx context.Context, userID int64, it store.Item, e store.ProgressEvent) (bool, error) {
+	b, err := s.Store.Book(ctx, userID, it.ID)
+	if err != nil {
+		return false, err
+	}
+	if it.Kind == "part" {
+		var ok bool
+		if e.PositionMs, e.Played, ok = partPlace(b, it.ID, e.PositionMs, e.Played); !ok {
+			return false, nil
+		}
+	}
+	e.ItemID = b.ID
+	e.PositionMs, e.Played = bookFinish(b.Item, e.PositionMs, e.Played)
+	return s.Store.MergeBookProgress(ctx, userID, e)
 }
 
 // librarySeries lists an audiobook library's series.

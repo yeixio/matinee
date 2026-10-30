@@ -467,6 +467,27 @@
     "sleepMinutes": "{{minutes}} λ.",
     "sleepEndOfItem": "Όταν τελειώσει αυτό",
     "sleepsAt": "Σταματά στις {{time}}",
-    "episode": "{{show}} · Σ{{season}} Ε{{episode}}"
+    "episode": "{{show}} · Σ{{season}} Ε{{episode}}",
+    "thisWatch": "Αυτό το ρολόι",
+    "onThisWatch": "Σε αυτό το ρολόι",
+    "nothingDownloaded": "Δεν υπάρχει τίποτα ακόμα σε αυτό το ρολόι. Πρόσθεσε μουσική και ηχητικά βιβλία για να ακούς χωρίς το κινητό.",
+    "addMusicAndBooks": "Προσθήκη μουσικής και βιβλίων",
+    "search": "Αναζήτηση",
+    "searchHint": "Άλμπουμ ή βιβλίο",
+    "continueListening": "Συνέχεια ακρόασης",
+    "newAlbums": "Νέα άλμπουμ",
+    "newBooks": "Νέα ηχητικά βιβλία",
+    "noResults": "Δεν βρέθηκε τίποτα.",
+    "download": "Λήψη",
+    "downloading": "Λήψη · {{percent}}%",
+    "preparing": "Προετοιμασία…",
+    "downloadFailed": "Η λήψη απέτυχε",
+    "downloaded": "Έγινε λήψη",
+    "remove": "Αφαίρεση από το ρολόι",
+    "connectHeadphones": "Σύνδεσε ακουστικά Bluetooth για να ακούσεις.",
+    "bluetooth": "Ρυθμίσεις Bluetooth",
+    "back15": "Πίσω 15 δευτερόλεπτα",
+    "ahead30": "Μπροστά 30 δευτερόλεπτα",
+    "storageUsed": "{{size}} σε αυτό το ρολόι"
   }
 }

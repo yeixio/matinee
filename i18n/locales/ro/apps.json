@@ -474,6 +474,27 @@
     "sleepMinutes": "{{minutes}} min",
     "sleepEndOfItem": "Când se termină acesta",
     "sleepsAt": "Se oprește la {{time}}",
-    "episode": "{{show}} · S{{season}} E{{episode}}"
+    "episode": "{{show}} · S{{season}} E{{episode}}",
+    "thisWatch": "Acest ceas",
+    "onThisWatch": "Pe acest ceas",
+    "nothingDownloaded": "Încă nimic pe acest ceas. Adaugă muzică și cărți audio ca să asculți fără telefon.",
+    "addMusicAndBooks": "Adaugă muzică și cărți",
+    "search": "Caută",
+    "searchHint": "Album sau carte",
+    "continueListening": "Continuă ascultarea",
+    "newAlbums": "Albume noi",
+    "newBooks": "Cărți audio noi",
+    "noResults": "Nu s-a găsit nimic.",
+    "download": "Descarcă",
+    "downloading": "Se descarcă · {{percent}}%",
+    "preparing": "Se pregătește…",
+    "downloadFailed": "Descărcarea nu a reușit",
+    "downloaded": "Descărcat",
+    "remove": "Elimină de pe ceas",
+    "connectHeadphones": "Conectează căști Bluetooth ca să asculți.",
+    "bluetooth": "Setări Bluetooth",
+    "back15": "Înapoi 15 secunde",
+    "ahead30": "Înainte 30 de secunde",
+    "storageUsed": "{{size}} pe acest ceas"
   }
 }

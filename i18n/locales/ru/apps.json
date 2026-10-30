@@ -481,6 +481,27 @@
     "sleepMinutes": "{{minutes}} мин",
     "sleepEndOfItem": "Когда это закончится",
     "sleepsAt": "Остановится в {{time}}",
-    "episode": "{{show}} · С{{season}} Э{{episode}}"
+    "episode": "{{show}} · С{{season}} Э{{episode}}",
+    "thisWatch": "Эти часы",
+    "onThisWatch": "На этих часах",
+    "nothingDownloaded": "На этих часах пока ничего нет. Добавьте музыку и аудиокниги, чтобы слушать без телефона.",
+    "addMusicAndBooks": "Добавить музыку и книги",
+    "search": "Поиск",
+    "searchHint": "Альбом или книга",
+    "continueListening": "Продолжить прослушивание",
+    "newAlbums": "Новые альбомы",
+    "newBooks": "Новые аудиокниги",
+    "noResults": "Ничего не найдено.",
+    "download": "Скачать",
+    "downloading": "Загрузка · {{percent}}%",
+    "preparing": "Подготовка…",
+    "downloadFailed": "Не удалось скачать",
+    "downloaded": "Скачано",
+    "remove": "Удалить с часов",
+    "connectHeadphones": "Подключите Bluetooth-наушники, чтобы слушать.",
+    "bluetooth": "Настройки Bluetooth",
+    "back15": "Назад на 15 секунд",
+    "ahead30": "Вперёд на 30 секунд",
+    "storageUsed": "{{size}} на этих часах"
   }
 }

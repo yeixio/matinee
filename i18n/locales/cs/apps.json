@@ -481,6 +481,27 @@
     "sleepMinutes": "{{minutes}} min",
     "sleepEndOfItem": "Po skončení tohoto",
     "sleepsAt": "Zastaví v {{time}}",
-    "episode": "{{show}} · S{{season}} E{{episode}}"
+    "episode": "{{show}} · S{{season}} E{{episode}}",
+    "thisWatch": "Tyto hodinky",
+    "onThisWatch": "V těchto hodinkách",
+    "nothingDownloaded": "V těchto hodinkách zatím nic není. Přidejte hudbu a audioknihy a poslouchejte bez telefonu.",
+    "addMusicAndBooks": "Přidat hudbu a knihy",
+    "search": "Hledat",
+    "searchHint": "Album nebo kniha",
+    "continueListening": "Pokračovat v poslechu",
+    "newAlbums": "Nová alba",
+    "newBooks": "Nové audioknihy",
+    "noResults": "Nic nenalezeno.",
+    "download": "Stáhnout",
+    "downloading": "Stahování · {{percent}} %",
+    "preparing": "Připravuje se…",
+    "downloadFailed": "Stažení se nezdařilo",
+    "downloaded": "Staženo",
+    "remove": "Odebrat z hodinek",
+    "connectHeadphones": "Pro poslech připojte sluchátka Bluetooth.",
+    "bluetooth": "Nastavení Bluetooth",
+    "back15": "Zpět o 15 sekund",
+    "ahead30": "Vpřed o 30 sekund",
+    "storageUsed": "{{size}} v těchto hodinkách"
   }
 }

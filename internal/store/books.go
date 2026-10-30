@@ -158,12 +158,28 @@ func (s *Store) SetBookProgress(ctx context.Context, userID, bookID, positionMs 
 	if err := s.SetProgress(ctx, userID, bookID, positionMs, played); err != nil {
 		return err
 	}
+	return s.markParts(ctx, userID, bookID, played, now())
+}
+
+// MergeBookProgress is SetBookProgress for a place recorded offline: it
+// applies unless the book's place changed more recently (see
+// MergeProgress), and reports whether it did.
+func (s *Store) MergeBookProgress(ctx context.Context, userID int64, e ProgressEvent) (bool, error) {
+	ok, err := s.MergeProgress(ctx, userID, e)
+	if err != nil || !ok {
+		return ok, err
+	}
+	return true, s.markParts(ctx, userID, e.ItemID, e.Played, e.At)
+}
+
+// markParts plays a book's parts with the book, or unplays them.
+func (s *Store) markParts(ctx context.Context, userID, bookID int64, played bool, at int64) error {
 	if played {
 		_, err := s.db.ExecContext(ctx, `
 			INSERT INTO progress (user_id, item_id, position_ms, played, updated_at)
 			SELECT ?, id, 0, 1, ? FROM items WHERE parent_id = ? AND path IS NOT NULL
 			ON CONFLICT (user_id, item_id) DO UPDATE SET played = 1, position_ms = 0, updated_at = excluded.updated_at`,
-			userID, now(), bookID)
+			userID, at, bookID)
 		return err
 	}
 	_, err := s.db.ExecContext(ctx, `

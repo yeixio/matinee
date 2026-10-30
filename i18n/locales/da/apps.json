@@ -467,6 +467,27 @@
     "sleepMinutes": "{{minutes}} min",
     "sleepEndOfItem": "Når denne slutter",
     "sleepsAt": "Stopper kl. {{time}}",
-    "episode": "{{show}} · S{{season}} A{{episode}}"
+    "episode": "{{show}} · S{{season}} A{{episode}}",
+    "thisWatch": "Dette ur",
+    "onThisWatch": "På dette ur",
+    "nothingDownloaded": "Intet på dette ur endnu. Tilføj musik og lydbøger for at lytte uden din telefon.",
+    "addMusicAndBooks": "Tilføj musik og bøger",
+    "search": "Søg",
+    "searchHint": "Album eller bog",
+    "continueListening": "Lyt videre",
+    "newAlbums": "Nye album",
+    "newBooks": "Nye lydbøger",
+    "noResults": "Intet fundet.",
+    "download": "Download",
+    "downloading": "Downloader · {{percent}} %",
+    "preparing": "Gør klar …",
+    "downloadFailed": "Kunne ikke downloade",
+    "downloaded": "Downloadet",
+    "remove": "Fjern fra uret",
+    "connectHeadphones": "Forbind Bluetooth-høretelefoner for at lytte.",
+    "bluetooth": "Bluetooth-indstillinger",
+    "back15": "15 sekunder tilbage",
+    "ahead30": "30 sekunder frem",
+    "storageUsed": "{{size}} på dette ur"
   }
 }
