@@ -39,7 +39,8 @@ export function AlbumPage({ item, tracks }: { item: ItemDetail; tracks?: Item[] 
       {item.overview && <Overview text={item.overview} />}
       {tracks && (
         <div className="relative">
-          <Tracks items={tracks} />
+          {/* A soundtrack or compilation names each song's artist. */}
+          <Tracks items={tracks} showArtist={tracks.some((t) => t.artist !== item.artist)} />
         </div>
       )}
       {!!others?.length && (

@@ -137,12 +137,14 @@ func stripYear(s string) string {
 
 // TrackInfo is a music file's place in the library, from tags or folders.
 type TrackInfo struct {
-	Artist string
-	Album  string
-	Title  string
-	Track  int
-	Disc   int
-	Year   int
+	Artist string // the album's artist, which the album is filed under
+	// TrackArtist is the track's own artist from its tags, when they name one.
+	TrackArtist string
+	Album       string
+	Title       string
+	Track       int
+	Disc        int
+	Year        int
 }
 
 // ParseTrackPath reads "Artist/Album/01 - Title.flac" for files without tags.
