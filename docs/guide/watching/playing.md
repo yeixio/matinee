@@ -83,6 +83,10 @@ Once the server answers again, playback carries on from the same spot. A short n
 After three minutes without the server, the player stops trying and offers **Try again**. The [phone and TV apps](/docs/apps/phone-and-tv/) do the same.
 
 <!-- /since -->
+<!-- since: v0.1.5 -->
+Music and audiobooks do it too, in the browser and in the apps. A card at the top of the screen says why the song or book stopped, and once the server is back it carries on from the same moment, with the same queue, or the same place in the book. See [Music](/docs/watching/music/#when-the-server-restarts) and [Audiobooks](/docs/watching/audiobooks/#when-the-server-restarts).
+
+<!-- /since -->
 
 ## How any file gets to play
 
