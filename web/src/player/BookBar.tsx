@@ -25,7 +25,7 @@ export function BookBar() {
         <div className="h-full bg-accent" style={{ width: `${end > start ? ((time - start) / (end - start)) * 100 : 0}%` }} />
       </div>
       {s.notice && (
-        <div role="status" className="absolute -top-12 start-1/2 -translate-x-1/2 animate-fade rounded-full bg-text px-4 py-2 text-sm font-medium whitespace-nowrap text-ink shadow-lg rtl:translate-x-1/2">
+        <div role="status" className="absolute -top-12 start-1/2 -translate-x-1/2 w-max max-w-[calc(100vw-2rem)] animate-fade rounded-full bg-text px-4 py-2 text-center text-sm font-medium text-ink shadow-lg rtl:translate-x-1/2">
           {s.notice}
         </div>
       )}

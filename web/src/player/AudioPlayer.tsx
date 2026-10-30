@@ -11,6 +11,8 @@ import { BookPlayer } from './BookPlayer'
 import * as Q from './queue'
 import { MusicBar } from './MusicBar'
 import { NowPlaying } from './NowPlaying'
+import { health, onRestarting, outcome, restarting, waitForServer, type Health, type Waiting } from './reconnect'
+import { Away, Toast } from './Away'
 import { sleepTimer, sleepVolume, useSleep } from './sleep'
 
 export type AudioState = {
@@ -32,6 +34,11 @@ export type AudioState = {
   audio: React.RefObject<HTMLAudioElement | null>
   // A moment's note, such as "Added to the queue".
   notice?: string
+  // Why playback is waiting for the server, while it's away, or that it
+  // gave up waiting.
+  away?: Waiting | 'gaveUp'
+  // After giving up: tries the server again, and picks up where it was.
+  reconnect: () => void
   // The full player, over the page.
   expanded: boolean
   setExpanded: (open: boolean) => void
@@ -133,6 +140,10 @@ function restore(user: number | undefined): { queue: Q.Queue; time: number; book
 
 const VOLUME_KEY = 'matinee.music.volume'
 
+// Why a track stopped: the file or server failed, it sat loading, or the
+// person asked to try again.
+type Cause = 'error' | 'stall' | 'retry'
+
 // Music and audiobooks keep playing while you browse: one <audio> element
 // lives above the routes, with the queue, the bar along the bottom and the
 // full player. A book's parts are the queue, played in order.
@@ -152,17 +163,20 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
   speedRef.current = speed
   const qc = useQueryClient()
   const [playing, setPlaying] = useState(false)
+  const playingRef = useRef(playing)
+  playingRef.current = playing
   // The volume before the sleep timer began fading it.
   const fadeFrom = useRef<number>(undefined)
   const [expanded, setExpanded] = useState(false)
   const { t } = useTranslation()
   const [notice, setNotice] = useState<string>()
   const noticeTimer = useRef<number>(undefined)
-  const note = useCallback((text: string) => {
+  const note = useCallback((text: string, ms = 2500) => {
     setNotice(text)
     window.clearTimeout(noticeTimer.current)
-    noticeTimer.current = window.setTimeout(() => setNotice(undefined), 2500)
+    noticeTimer.current = window.setTimeout(() => setNotice(undefined), ms)
   }, [])
+  const [away, setAway] = useState<Waiting | 'gaveUp'>()
   const current = Q.current(queue)
   const entry = queue.entries[queue.pos]
   // Where the next track to load starts, and whether it plays: a restored
@@ -172,6 +186,12 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
   const reported = useRef(new Set<string>())
   const queueRef = useRef(queue)
   queueRef.current = queue
+  // How the track playing is loaded (a transcode for formats the browser
+  // can't play), and the last place it got to, to pick up from if the
+  // server goes away.
+  const viaHlsNow = useRef(false)
+  const lastTime = useRef(0)
+  const recoverRef = useRef<(cause: Cause) => void>(undefined)
 
   const load = useCallback(async (item: Item, viaHls = false) => {
     const el = audio.current
@@ -181,17 +201,31 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
     const at = resumeAt.current?.time
     const autoplay = resumeAt.current?.play ?? true
     resumeAt.current = undefined
+    viaHlsNow.current = viaHls
+    lastTime.current = at ?? 0
     if (!viaHls) {
       el.src = fileUrl(item.id)
     } else {
-      const { url } = await api.startHls(item.id, at ?? 0)
+      let url: string
+      try {
+        url = (await api.startHls(item.id, at ?? 0)).url
+      } catch {
+        // The server may be away: find out, and come back here once it's back.
+        resumeAt.current = { time: at ?? 0, play: autoplay }
+        recoverRef.current?.('error')
+        return
+      }
       const { default: Hls } = await import('hls.js')
       if (el.canPlayType('application/vnd.apple.mpegurl')) {
         el.src = url
       } else if (Hls.isSupported()) {
-        hls.current = new Hls()
-        hls.current.loadSource(url)
-        hls.current.attachMedia(el)
+        const h = new Hls()
+        hls.current = h
+        h.on(Hls.Events.ERROR, (_, d) => {
+          if (d.fatal && hls.current === h) recoverRef.current?.('error')
+        })
+        h.loadSource(url)
+        h.attachMedia(el)
       }
     }
     // A new source starts at the default rate, so books keep their speed.
@@ -204,6 +238,9 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
 
   // A new entry (not just a new track: the same song queued twice plays again).
   useEffect(() => {
+    recovering.current?.abort()
+    recovering.current = undefined
+    setAway(undefined)
     if (current) load(current)
     else {
       audio.current?.pause()
@@ -211,10 +248,100 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
     }
   }, [entry?.key]) // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Formats the browser can't decode (ALAC, WMA…) fall back to a transcode.
-  const onError = () => {
-    if (current && !hls.current) load(current, true)
+  // What the server was when the player started, to tell later what
+  // happened if it goes away.
+  const server = useRef<Health>(undefined)
+  useEffect(() => {
+    health()
+      .then((h) => (server.current ??= h))
+      .catch(() => {})
+  }, [])
+  const recovering = useRef<AbortController>(undefined)
+  useEffect(() => () => recovering.current?.abort(), [])
+
+  // recover works out why the track stopped and gets it going again where
+  // it was. When the server is fine, it's the file: formats the browser
+  // can't decode (ALAC, WMA…) fall back to a transcode. When the server is
+  // away or came back different, the player says so, waits for it, and
+  // picks up where it was.
+  const recover = useCallback(
+    async (cause: Cause) => {
+      const el = audio.current
+      const item = Q.current(queueRef.current)
+      if (!el || !item || recovering.current) return
+      const ctl = new AbortController()
+      recovering.current = ctl
+      // A track that failed to load keeps the place it was to start from.
+      const wanted = resumeAt.current
+      const at = wanted?.time ?? (el.currentTime || lastTime.current)
+      const play = cause === 'retry' || (wanted?.play ?? (!el.paused || playingRef.current))
+      const resume = (viaHls = viaHlsNow.current) => {
+        resumeAt.current = { time: at, play }
+        load(item, viaHls)
+      }
+      try {
+        let now: Health | undefined
+        try {
+          now = await health(ctl.signal)
+        } catch {
+          // Away: wait for it below.
+        }
+        if (ctl.signal.aborted) return
+        if (now && now.state !== 'restarting' && outcome(server.current, now) === 'same') {
+          server.current = now
+          if (cause === 'error' && !viaHlsNow.current) resume(true)
+          else if (cause !== 'error') resume()
+          return
+        }
+        hls.current?.destroy()
+        hls.current = null
+        el.pause()
+        if (!now || now.state === 'restarting') {
+          setAway(restarting() ? 'restarting' : 'unreachable')
+          now = await waitForServer(setAway, ctl.signal)
+        }
+        const what = outcome(server.current, now)
+        server.current = now
+        setAway(undefined)
+        if (what === 'updated') note(t('common:reconnect.updated', { version: now.version }), 6000)
+        else if (what === 'restarted') note(t('common:reconnect.restarted'), 6000)
+        // Still the same track: the person may have moved on meanwhile.
+        if (Q.current(queueRef.current)?.id === item.id) resume()
+      } catch {
+        if (!ctl.signal.aborted) {
+          resumeAt.current = { time: at, play: true }
+          setAway('gaveUp')
+        }
+      } finally {
+        if (recovering.current === ctl) recovering.current = undefined
+      }
+    },
+    [load, note, t],
+  )
+  recoverRef.current = recover
+  const onError = () => recover('error')
+
+  // A track that sits loading for a while may have lost the server without
+  // an error (a file playing directly just stops arriving).
+  const stallTimer = useRef<number>(undefined)
+  const onWaiting = () => {
+    window.clearTimeout(stallTimer.current)
+    stallTimer.current = window.setTimeout(() => {
+      if (!audio.current?.paused) recover('stall')
+    }, 10_000)
   }
+  const onPlaying = () => window.clearTimeout(stallTimer.current)
+  useEffect(() => () => window.clearTimeout(stallTimer.current), [])
+
+  // Heads-up as soon as the server says it's restarting; what's buffered
+  // often carries the song through.
+  useEffect(
+    () =>
+      onRestarting(() => {
+        if (Q.current(queueRef.current)) note(t('common:reconnect.heads'), 8000)
+      }),
+    [note, t],
+  )
 
   // A track counts as played at its end, or when skipped past halfway, so
   // albums show up under Recently played.
@@ -483,6 +610,11 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
       playing,
       audio,
       notice,
+      away,
+      reconnect: () => {
+        setAway(undefined)
+        recover('retry')
+      },
       expanded,
       setExpanded,
       play,
@@ -530,6 +662,9 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
       setShuffle: (on) => setQueue((q) => Q.setShuffle(q, on)),
       cycleRepeat: () => setQueue((q) => Q.cycleRepeat(q)),
       stop: () => {
+        recovering.current?.abort()
+        recovering.current = undefined
+        setAway(undefined)
         reportBook()
         el()?.pause()
         hls.current?.destroy()
@@ -541,7 +676,7 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
         setQueue(Q.emptyQueue)
       },
     }
-  }, [queue, current, book, speed, user, playing, notice, expanded, advance, markPlayed, playItem, playBook, seekBook, bookNow, reportBook, leaveBook, note, t])
+  }, [queue, current, book, speed, user, playing, notice, away, recover, expanded, advance, markPlayed, playItem, playBook, seekBook, bookNow, reportBook, leaveBook, note, t])
 
   useMediaSession(value)
   useRemote(value)
@@ -554,9 +689,16 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
         onEnded={() => advance(true)}
-        onTimeUpdate={onTime}
+        onTimeUpdate={(e) => {
+          if (e.currentTarget.currentTime > 0) lastTime.current = e.currentTarget.currentTime
+          onTime()
+        }}
+        onWaiting={onWaiting}
+        onPlaying={onPlaying}
         onError={onError}
       />
+      {current && away && !watching && <Away away={away} onRetry={value.reconnect} onStop={value.stop} />}
+      {current && expanded && notice && !away && !watching && <Toast text={notice} />}
       {current && !watching && (book ? <BookBar /> : <MusicBar />)}
       {current && expanded && !watching && (book ? <BookPlayer /> : <NowPlaying />)}
     </AudioContext.Provider>

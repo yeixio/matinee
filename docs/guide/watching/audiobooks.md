@@ -59,6 +59,13 @@ The phone and tablet apps have the same audiobook library and pages, and a playe
 
 On a TV, a book's page has **Play** or **Resume** and **Start over**. The TV plays a book a part at a time, keeps your place in the book as it goes, and moves on to the next part by itself. Downloads on a phone work for books too, a part at a time.
 
+<!-- since: v0.1.5 -->
+## When the server restarts
+
+If the server restarts or updates while you listen, the book doesn't lose your place. What's already loaded keeps playing; if it runs out first, a card at the top of the screen says the server is restarting, or can't be reached, and the book carries on from the same moment once it's back, at the same speed. After three minutes the player offers **Try again**. The phone and TV apps do the same.
+
+<!-- /since -->
+
 ## Series and narrators
 
 Matinee reads who wrote and who reads a book, and the series it's in, from the tags in its files:

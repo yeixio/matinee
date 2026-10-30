@@ -79,6 +79,13 @@ The music keeps playing while you browse. What's playing shows at the top of the
 
 <!-- /since -->
 
+<!-- since: v0.1.5 -->
+## When the server restarts
+
+Updating or restarting the server doesn't lose your music. What's already loaded keeps playing, and if the song runs out before the server is back, a card at the top of the screen says **The server is restarting** or **Can't reach the server**. Once it answers, the song carries on from the same moment, with the rest of the queue as it was, and a short note says whether the server was updated or restarted. After three minutes the player offers **Try again**. The phone and TV apps do the same.
+
+<!-- /since -->
+
 ## Covers and artist photos
 
 Matinee uses `cover.jpg` or `folder.jpg` in an album's folder, or a cover embedded in the music files, and `artist.jpg` in an artist's folder. Anything missing comes from MusicBrainz, the Cover Art Archive and Wikidata, which need no key. To use only your own files, set `MATINEE_MUSICBRAINZ=false`.
