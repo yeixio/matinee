@@ -3,6 +3,7 @@
   "nav": {
     "home": "首页",
     "watchList": "待看清单",
+    "libraries": "媒体库",
     "collections": "合集",
     "scanning": "正在扫描",
     "search": "搜索",

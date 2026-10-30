@@ -1,7 +1,7 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { BookHeadphones, CalendarClock, Clapperboard, Compass, Home, Inbox, Layers, LogIn, LogOut, Music, Puzzle, Search, Settings, Tv } from 'lucide-react'
+import { BookHeadphones, CalendarClock, Clapperboard, Compass, Home, Inbox, LibraryBig, LogIn, LogOut, Music, Puzzle, Search, Settings, Tv } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
-import { NavLink, Outlet } from 'react-router-dom'
+import { matchPath, NavLink, Outlet, useLocation } from 'react-router-dom'
 import { api, type Library, type User } from '../api'
 import { Avatar } from '../pages/Profiles'
 import { useAudio } from '../player/AudioPlayer'
@@ -54,6 +54,19 @@ export function useLibraries() {
   })
 }
 
+// The pages the phone tab bar's Libraries tab leads to.
+const libraryPages = ['/libraries', '/library/:id', '/watchlist', '/collections', '/collection/:id', '/box-set/:id', '/upcoming', '/requests']
+
+export function useSignOut() {
+  const qc = useQueryClient()
+  return async () => {
+    await api.logout()
+    forgetAsked()
+    qc.clear()
+    window.location.href = '/'
+  }
+}
+
 export default function Shell({ user }: { user: User }) {
   const { t } = useTranslation()
   const { data: libraries = [] } = useLibraries()
@@ -69,12 +82,9 @@ export default function Shell({ user }: { user: User }) {
   const waiting = kids ? 0 : (opts?.pendingRequests ?? 0) + (opts?.openIssues ?? 0)
   const { data: who } = useQuery({ queryKey: ['profiles'], queryFn: api.profiles, retry: false })
   const hasProfiles = (who?.profiles.length ?? 0) > 1
-  const logout = async () => {
-    await api.logout()
-    forgetAsked()
-    qc.clear()
-    window.location.href = '/'
-  }
+  const logout = useSignOut()
+  const { pathname } = useLocation()
+  const inLibraries = libraryPages.some((p) => matchPath(p, pathname))
 
   return (
     <div className="min-h-dvh">
@@ -107,15 +117,11 @@ export default function Shell({ user }: { user: User }) {
             ))}
           </nav>
           <div className="ms-auto flex items-center gap-1">
-            {/* On phones the tab bar has no room, so collections get an icon up here. */}
-            <NavLink to="/collections" className={(a) => `md:hidden ${iconLink(a)}`} aria-label={t('nav.collections')} title={t('nav.collections')}>
-              <Layers className="size-5" />
-            </NavLink>
             <NavLink to="/search" className="hidden rounded-full p-2 text-muted hover:bg-text/5 hover:text-text md:block" aria-label={t('nav.search')}>
               <Search className="size-5" />
             </NavLink>
             {arr && (
-              <NavLink to="/upcoming" className={iconLink} aria-label={t('nav.comingSoon')} title={t('nav.comingSoon')}>
+              <NavLink to="/upcoming" className={(a) => `hidden md:block ${iconLink(a)}`} aria-label={t('nav.comingSoon')} title={t('nav.comingSoon')}>
                 <CalendarClock className="size-5" />
               </NavLink>
             )}
@@ -131,12 +137,12 @@ export default function Shell({ user }: { user: User }) {
             )}
             {user.guest && !kids ? (
               // Watching at home without an account; signing in brings your own progress and settings.
-              <NavLink to="/sign-in" className="flex items-center gap-2 rounded-full px-3 py-1.5 text-sm text-muted hover:bg-text/5 hover:text-text">
+              <NavLink to="/sign-in" className="hidden items-center gap-2 rounded-full px-3 py-1.5 text-sm text-muted hover:bg-text/5 hover:text-text md:flex">
                 <LogIn className="size-4 rtl:-scale-x-100" /> {t('nav.signIn')}
               </NavLink>
             ) : (
               !kids && (
-                <NavLink to="/settings" className="rounded-full p-2 text-muted hover:bg-text/5 hover:text-text" aria-label={t('nav.settings')}>
+                <NavLink to="/settings" className="hidden rounded-full p-2 text-muted hover:bg-text/5 hover:text-text md:block" aria-label={t('nav.settings')}>
                   <Settings className="size-5" />
                 </NavLink>
               )
@@ -167,7 +173,7 @@ export default function Shell({ user }: { user: User }) {
         <Outlet />
       </main>
 
-      {/* Mobile tab bar */}
+      {/* Phone tab bar, as in the phone app: libraries and the rest of the desktop bar live under Libraries. */}
       <nav
         className="fixed inset-x-0 bottom-0 z-30 flex border-t border-line/60 bg-ink/90 backdrop-blur md:hidden"
         style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
@@ -175,12 +181,9 @@ export default function Shell({ user }: { user: User }) {
         <NavLink to="/" end className={tabLink}>
           <Home className="size-5" /> {t('nav.home')}
         </NavLink>
-        {/* Discover takes a library's place when it's there. */}
-        {libraries.slice(0, discover ? 2 : 3).map((l) => (
-          <NavLink key={l.id} to={`/library/${l.id}`} className={tabLink} onTouchStart={() => prefetchLibrary(l.id)}>
-            <LibraryIcon kind={l.kind} /> <span className="max-w-16 truncate">{l.name}</span>
-          </NavLink>
-        ))}
+        <NavLink to="/libraries" className={() => tabLink({ isActive: inLibraries })}>
+          <LibraryBig className="size-5" /> {t('nav.libraries')}
+        </NavLink>
         {discover && (
           <NavLink to="/discover" className={tabLink}>
             <Compass className="size-5" /> {t('nav.discover')}
@@ -189,6 +192,17 @@ export default function Shell({ user }: { user: User }) {
         <NavLink to="/search" className={tabLink}>
           <Search className="size-5" /> {t('nav.search')}
         </NavLink>
+        {user.guest && !kids ? (
+          <NavLink to="/sign-in" className={tabLink}>
+            <LogIn className="size-5 rtl:-scale-x-100" /> {t('nav.signIn')}
+          </NavLink>
+        ) : (
+          !kids && (
+            <NavLink to="/settings" className={tabLink}>
+              <Settings className="size-5" /> {t('nav.settings')}
+            </NavLink>
+          )
+        )}
       </nav>
     </div>
   )

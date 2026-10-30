@@ -7,6 +7,7 @@ import Shell from './components/Shell'
 import { AudioProvider } from './player/AudioPlayer'
 import Home from './pages/Home'
 import Library from './pages/Library'
+import Libraries from './pages/Libraries'
 import ItemPage from './pages/Item'
 import PersonPage from './pages/Person'
 import Search from './pages/Search'
@@ -87,6 +88,7 @@ function Screens() {
         <Route path="/profiles" element={<SwitchProfile me={me.data} />} />
         <Route element={<Shell user={me.data} />}>
           <Route index element={<Home />} />
+          <Route path="/libraries" element={<Libraries />} />
           <Route path="/library/:id" element={<Library />} />
           <Route path="/item/:id" element={<ItemPage />} />
           <Route path="/person/:id" element={<PersonPage />} />
