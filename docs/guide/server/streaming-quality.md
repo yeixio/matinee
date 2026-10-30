@@ -33,6 +33,8 @@ With adaptive quality on, the player has a **Quality** button next to the subtit
 - **A fixed step**, such as **480p**, always plays at that quality. Handy to save mobile data.
 - **Original** plays the file as it is, or as close to it as the device allows, and never steps down.
 
+The phone and TV apps have the same **Quality** choice from version 1.0.14: on a phone it's the gauge at the top of the player, on a TV it sits under the progress bar with Audio, Subtitles and Sleep timer.
+
 ## Limit away from home
 
 **Limit away from home** sets the best quality a device gets when it isn't on your home network, for a slow upload at home or someone's data plan. Anything better is converted down to it, and the player only offers steps up to it. The limit works even with adaptive quality off: a file over it plays as one converted stream at the limit.
