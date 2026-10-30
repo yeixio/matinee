@@ -51,7 +51,10 @@ On a TV, sign-in starts with a code instead of a password: see [Signing in a dev
 - **The music visualizer** on phones and TVs, in time with the song. See [The visualizer](/docs/watching/music/#the-visualizer).
 <!-- /since -->
 <!-- since: v0.1.2 -->
-- **Audiobooks** on phones with a player made for books: chapters, back and ahead, the speed and a sleep timer that can stop at the end of a chapter. A TV plays them too. See [Audiobooks](/docs/watching/audiobooks/#in-the-apps).
+- **Audiobooks** on phones with a player made for books: chapters, back and ahead, the speed and a sleep timer that can stop at the end of a chapter. See [Audiobooks](/docs/watching/audiobooks/#in-the-apps).
+<!-- /since -->
+<!-- since: v0.1.5 -->
+- **Audiobooks on a TV** with the same kind of player: the chapters in a row, back 15 and ahead 30 seconds, the speed and the sleep timer, and the book playing on while you browse. See [Audiobooks](/docs/watching/audiobooks/#on-a-tv).
 <!-- /since -->
 - **Downloads** on phones and tablets, to [watch offline](/docs/apps/downloads/).
 - **Coming soon**, with [Radarr or Sonarr](/docs/server/radarr-and-sonarr/#coming-soon) connected: a row at the end of Home, and the next two months day by day. On a phone, the calendar along the top jumps to a day; on a TV, each day is a row.
