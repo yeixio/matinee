@@ -436,5 +436,11 @@
   },
   "remote": {
     "controlledBy": "Controlat de pe {{name}}"
+  },
+  "car": {
+    "listenNow": "Ascultă acum",
+    "music": "Muzică",
+    "audiobooks": "Cărți audio",
+    "signIn": "Deschide Matinee pe telefon și conectează-te ca să asculți în mașină."
   }
 }

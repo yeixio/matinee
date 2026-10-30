@@ -443,5 +443,11 @@
   },
   "remote": {
     "controlledBy": "Ovládáno z {{name}}"
+  },
+  "car": {
+    "listenNow": "Poslouchat",
+    "music": "Hudba",
+    "audiobooks": "Audioknihy",
+    "signIn": "Otevřete Matinee v telefonu a přihlaste se, abyste mohli poslouchat v autě."
   }
 }

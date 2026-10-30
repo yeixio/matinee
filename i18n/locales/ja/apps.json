@@ -422,5 +422,11 @@
   },
   "remote": {
     "controlledBy": "{{name}} から操作されました"
+  },
+  "car": {
+    "listenNow": "今すぐ聴く",
+    "music": "音楽",
+    "audiobooks": "オーディオブック",
+    "signIn": "車で聴くには、スマートフォンで Matinee を開いてサインインしてください。"
   }
 }

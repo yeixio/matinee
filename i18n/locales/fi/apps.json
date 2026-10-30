@@ -429,5 +429,11 @@
   },
   "remote": {
     "controlledBy": "Ohjattu laitteesta {{name}}"
+  },
+  "car": {
+    "listenNow": "Kuuntele nyt",
+    "music": "Musiikki",
+    "audiobooks": "Äänikirjat",
+    "signIn": "Avaa Matinee puhelimessasi ja kirjaudu sisään kuunnellaksesi autossa."
   }
 }

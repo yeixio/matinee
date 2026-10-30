@@ -429,5 +429,11 @@
   },
   "remote": {
     "controlledBy": "{{name}} tarafından kontrol ediliyor"
+  },
+  "car": {
+    "listenNow": "Şimdi dinle",
+    "music": "Müzik",
+    "audiobooks": "Sesli kitaplar",
+    "signIn": "Arabada dinlemek için telefonunuzda Matinee'yi açıp oturum açın."
   }
 }

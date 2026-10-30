@@ -422,5 +422,11 @@
   },
   "remote": {
     "controlledBy": "ควบคุมจาก {{name}}"
+  },
+  "car": {
+    "listenNow": "ฟังเลย",
+    "music": "เพลง",
+    "audiobooks": "หนังสือเสียง",
+    "signIn": "เปิด Matinee บนโทรศัพท์แล้วลงชื่อเข้าใช้เพื่อฟังในรถ"
   }
 }

@@ -436,5 +436,11 @@
   },
   "remote": {
     "controlledBy": "נשלט מ-{{name}}"
+  },
+  "car": {
+    "listenNow": "האזנה עכשיו",
+    "music": "מוזיקה",
+    "audiobooks": "ספרי שמע",
+    "signIn": "פתחו את Matinee בטלפון והתחברו כדי להאזין ברכב."
   }
 }

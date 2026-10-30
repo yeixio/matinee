@@ -429,5 +429,11 @@
   },
   "remote": {
     "controlledBy": "Styrt fra {{name}}"
+  },
+  "car": {
+    "listenNow": "Lytt nå",
+    "music": "Musikk",
+    "audiobooks": "Lydbøker",
+    "signIn": "Åpne Matinee på telefonen og logg på for å lytte i bilen."
   }
 }
