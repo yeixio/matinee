@@ -460,6 +460,27 @@
     "sleepMinutes": "{{minutes}} 分",
     "sleepEndOfItem": "この作品の終わり",
     "sleepsAt": "{{time}} に停止",
-    "episode": "{{show}} · S{{season}} E{{episode}}"
+    "episode": "{{show}} · S{{season}} E{{episode}}",
+    "thisWatch": "このウォッチ",
+    "onThisWatch": "このウォッチ内",
+    "nothingDownloaded": "このウォッチにはまだ何もありません。音楽やオーディオブックを追加すると、スマートフォンなしで聴けます。",
+    "addMusicAndBooks": "音楽と本を追加",
+    "search": "検索",
+    "searchHint": "アルバムまたは本",
+    "continueListening": "続きを聴く",
+    "newAlbums": "新着アルバム",
+    "newBooks": "新着オーディオブック",
+    "noResults": "見つかりませんでした。",
+    "download": "ダウンロード",
+    "downloading": "ダウンロード中 · {{percent}}%",
+    "preparing": "準備中…",
+    "downloadFailed": "ダウンロードできませんでした",
+    "downloaded": "ダウンロード済み",
+    "remove": "ウォッチから削除",
+    "connectHeadphones": "聴くにはBluetoothヘッドホンを接続してください。",
+    "bluetooth": "Bluetooth設定",
+    "back15": "15秒戻る",
+    "ahead30": "30秒進む",
+    "storageUsed": "このウォッチ内 {{size}}"
   }
 }

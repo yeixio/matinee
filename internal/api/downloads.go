@@ -270,7 +270,8 @@ const maxSyncEvents = 1000
 
 // syncProgress takes watch progress a device recorded while offline. Each
 // change is applied unless the item's progress changed more recently
-// elsewhere, so the latest change wins.
+// elsewhere, so the latest change wins. A place in an audiobook, or in one
+// of its parts, is kept on the book.
 func (s *Server) syncProgress(w http.ResponseWriter, r *http.Request) {
 	var req struct {
 		Events []store.ProgressEvent `json:"events"`
@@ -288,7 +289,8 @@ func (s *Server) syncProgress(w http.ResponseWriter, r *http.Request) {
 	applied, skipped := 0, 0
 	for _, e := range req.Events {
 		it, err := s.Store.Item(r.Context(), u.ID, e.ItemID)
-		if errors.Is(err, store.ErrNotFound) || err == nil && !it.Playable {
+		book := err == nil && (it.Kind == "book" || it.Kind == "part")
+		if errors.Is(err, store.ErrNotFound) || err == nil && !it.Playable && !book {
 			skipped++ // removed from the library since
 			continue
 		}
@@ -299,6 +301,20 @@ func (s *Server) syncProgress(w http.ResponseWriter, r *http.Request) {
 		// A device clock running ahead mustn't make its changes win forever.
 		if now := time.Now().Unix(); e.At > now || e.At <= 0 {
 			e.At = now
+		}
+		if book {
+			// A place in a book is kept on the book, on its whole clock.
+			ok, err := s.syncBookProgress(r.Context(), u.ID, it, e)
+			if err != nil {
+				s.serverError(w, err)
+				return
+			}
+			if ok {
+				applied++
+			} else {
+				skipped++
+			}
+			continue
 		}
 		if it.DurationMs != nil && *it.DurationMs > 0 && e.PositionMs > *it.DurationMs*92/100 {
 			e.Played, e.PositionMs = true, 0

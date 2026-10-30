@@ -460,6 +460,27 @@
     "sleepMinutes": "{{minutes}} 分鐘",
     "sleepEndOfItem": "播完這一集/首時",
     "sleepsAt": "將於 {{time}} 停止",
-    "episode": "{{show}} · 第 {{season}} 季第 {{episode}} 集"
+    "episode": "{{show}} · 第 {{season}} 季第 {{episode}} 集",
+    "thisWatch": "這支手錶",
+    "onThisWatch": "手錶上",
+    "nothingDownloaded": "這支手錶上還沒有內容。加入音樂和有聲書，不帶手機也能聽。",
+    "addMusicAndBooks": "加入音樂和書",
+    "search": "搜尋",
+    "searchHint": "專輯或書",
+    "continueListening": "繼續收聽",
+    "newAlbums": "新專輯",
+    "newBooks": "新有聲書",
+    "noResults": "找不到任何內容。",
+    "download": "下載",
+    "downloading": "正在下載 · {{percent}}%",
+    "preparing": "正在準備…",
+    "downloadFailed": "無法下載",
+    "downloaded": "已下載",
+    "remove": "從手錶移除",
+    "connectHeadphones": "連接藍牙耳機即可收聽。",
+    "bluetooth": "藍牙設定",
+    "back15": "倒退 15 秒",
+    "ahead30": "快轉 30 秒",
+    "storageUsed": "手錶上 {{size}}"
   }
 }

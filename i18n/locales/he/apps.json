@@ -474,6 +474,27 @@
     "sleepMinutes": "{{minutes}} דק׳",
     "sleepEndOfItem": "כשזה יסתיים",
     "sleepsAt": "ייעצר ב-{{time}}",
-    "episode": "{{show}} · ע{{season}} פ{{episode}}"
+    "episode": "{{show}} · ע{{season}} פ{{episode}}",
+    "thisWatch": "השעון הזה",
+    "onThisWatch": "בשעון הזה",
+    "nothingDownloaded": "עדיין אין כלום בשעון הזה. אפשר להוסיף מוזיקה וספרי שמע כדי להאזין בלי הטלפון.",
+    "addMusicAndBooks": "הוספת מוזיקה וספרים",
+    "search": "חיפוש",
+    "searchHint": "אלבום או ספר",
+    "continueListening": "להמשיך להאזין",
+    "newAlbums": "אלבומים חדשים",
+    "newBooks": "ספרי שמע חדשים",
+    "noResults": "לא נמצא דבר.",
+    "download": "הורדה",
+    "downloading": "מוריד · {{percent}}%",
+    "preparing": "בהכנה…",
+    "downloadFailed": "ההורדה נכשלה",
+    "downloaded": "הורד",
+    "remove": "הסרה מהשעון",
+    "connectHeadphones": "יש לחבר אוזניות Bluetooth כדי להאזין.",
+    "bluetooth": "הגדרות Bluetooth",
+    "back15": "15 שניות אחורה",
+    "ahead30": "30 שניות קדימה",
+    "storageUsed": "{{size}} בשעון הזה"
   }
 }

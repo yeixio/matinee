@@ -9,6 +9,12 @@ The phone and tablet apps can download a movie, an episode, a whole season or an
 
 ![A season in the phone app](../images/app-phone-season.webp)
 
+<!-- since: v0.1.6 -->
+
+Watches can have their own downloads of albums and audiobooks too: see [Wear OS watches](/docs/apps/wear-os/#listening-on-the-watch) and [Apple Watch](/docs/apps/apple-watch/#listening-on-the-watch).
+
+<!-- /since -->
+
 Downloads need you to be [signed in](/docs/apps/phone-and-tv/#at-home-and-away), so they're yours and not the shared Home account's. They aren't offered on TVs.
 
 ## How downloads work

@@ -460,6 +460,27 @@
     "sleepMinutes": "{{minutes}} phút",
     "sleepEndOfItem": "Khi phần này kết thúc",
     "sleepsAt": "Dừng lúc {{time}}",
-    "episode": "{{show}} · P{{season}} T{{episode}}"
+    "episode": "{{show}} · P{{season}} T{{episode}}",
+    "thisWatch": "Đồng hồ này",
+    "onThisWatch": "Trên đồng hồ này",
+    "nothingDownloaded": "Chưa có gì trên đồng hồ này. Thêm nhạc và sách nói để nghe mà không cần điện thoại.",
+    "addMusicAndBooks": "Thêm nhạc và sách",
+    "search": "Tìm kiếm",
+    "searchHint": "Album hoặc sách",
+    "continueListening": "Nghe tiếp",
+    "newAlbums": "Album mới",
+    "newBooks": "Sách nói mới",
+    "noResults": "Không tìm thấy gì.",
+    "download": "Tải xuống",
+    "downloading": "Đang tải · {{percent}}%",
+    "preparing": "Đang chuẩn bị…",
+    "downloadFailed": "Không tải xuống được",
+    "downloaded": "Đã tải xuống",
+    "remove": "Xóa khỏi đồng hồ",
+    "connectHeadphones": "Kết nối tai nghe Bluetooth để nghe.",
+    "bluetooth": "Cài đặt Bluetooth",
+    "back15": "Lùi 15 giây",
+    "ahead30": "Tới 30 giây",
+    "storageUsed": "{{size}} trên đồng hồ này"
   }
 }
