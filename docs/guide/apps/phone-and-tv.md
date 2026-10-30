@@ -61,6 +61,9 @@ On a TV, sign-in starts with a code instead of a password: see [Signing in a dev
 - **Android Auto**: music and audiobooks in the car, from the car's screen, its buttons or by voice. See [Android Auto](/docs/apps/android-auto/).
 - **Wear OS watches**: a remote on your wrist for whatever Matinee plays on your phone, TV or computer, with a tile and a complication. See [Wear OS watches](/docs/apps/wear-os/).
 <!-- /since -->
+<!-- since: v0.1.6 -->
+- **Apple Watch**: the same remote on your wrist, with a complication for your watch face. See [Apple Watch](/docs/apps/apple-watch/).
+<!-- /since -->
 - **Coming soon**, with [Radarr or Sonarr](/docs/server/radarr-and-sonarr/#coming-soon) connected: a row at the end of Home, and the next two months day by day. On a phone, the calendar along the top jumps to a day; on a TV, each day is a row.
 
 ## On a TV
