@@ -23,7 +23,7 @@ The phone can stay in your pocket with the app closed: the car starts Matinee by
 Matinee has up to four tabs along the top of the car's screen:
 
 - **Listen now**: the books you're partway through, then the albums you've played lately.
-- **Music**: **Shuffle all**, every **Artist** and **Album**, and the albums added lately. Pick an album to see its songs; pick a song to play the album from there.
+- **Music**: **Shuffle all**, your **Playlists**, every **Artist** and **Album**, and the albums added lately. Pick an album to see its songs; pick a song to play the album from there. Pick a playlist to play it from the top. Playlists need app version 1.0.19 or later.
 - **Audiobooks**: every book, with how far along you are in each.
 - **Downloads**: the songs and books downloaded to your phone (see [Downloads](/docs/apps/downloads/)). These play with no connection, so they still work where the signal drops. The tab shows up once something is downloaded.
 
@@ -35,6 +35,9 @@ Ask the car's assistant to play something on Matinee:
 
 - "Play *album or artist* on Matinee"
 - "Play *book title* on Matinee"
+<!-- since: v0.1.7 -->
+- "Play *playlist name* on Matinee", with the playlist's name as you wrote it (app version 1.0.19 or later)
+<!-- /since -->
 - "Play Matinee" picks up whatever you last played, or shuffles your music if there's nothing to pick up.
 
 ## Listening to a book

@@ -12,6 +12,7 @@ import ItemPage from './pages/Item'
 import PersonPage from './pages/Person'
 import Search from './pages/Search'
 import WatchList from './pages/WatchList'
+import PlaylistPage, { PlaylistsPage } from './pages/Playlist'
 import Collections from './pages/Collections'
 import CollectionPage from './pages/Collection'
 import BoxSetPage from './pages/BoxSet'
@@ -94,6 +95,8 @@ function Screens() {
           <Route path="/person/:id" element={<PersonPage />} />
           <Route path="/search" element={<Search />} />
           <Route path="/watchlist" element={<WatchList />} />
+          <Route path="/playlists" element={<PlaylistsPage />} />
+          <Route path="/playlist/:id" element={<PlaylistPage />} />
           <Route path="/collections" element={<Collections />} />
           <Route path="/collection/:id" element={<CollectionPage />} />
           <Route path="/box-set/:id" element={<BoxSetPage />} />

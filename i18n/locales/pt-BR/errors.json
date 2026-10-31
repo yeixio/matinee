@@ -143,5 +143,10 @@
   "not_a_song": "não é uma música",
   "no_such_audio_track": "essa faixa de áudio não existe",
   "nothing_found_to_play": "nada encontrado para tocar",
-  "say_what_to_play": "diga o que tocar"
+  "say_what_to_play": "diga o que tocar",
+  "a_playlist_needs_a_name": "uma playlist precisa de um nome",
+  "a_playlist_holds_up_to_5000_songs": "uma playlist comporta até 5000 músicas",
+  "items_is_required": "items é obrigatório",
+  "only_music_goes_on_a_playlist": "só música entra em uma playlist",
+  "playlist_not_found": "playlist não encontrada"
 }

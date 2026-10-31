@@ -143,5 +143,10 @@
   "not_a_song": "không phải bài hát",
   "no_such_audio_track": "không có rãnh âm thanh này",
   "nothing_found_to_play": "không tìm thấy gì để phát",
-  "say_what_to_play": "hãy nói nội dung cần phát"
+  "say_what_to_play": "hãy nói nội dung cần phát",
+  "a_playlist_needs_a_name": "danh sách phát cần có tên",
+  "a_playlist_holds_up_to_5000_songs": "một danh sách phát chứa tối đa 5000 bài hát",
+  "items_is_required": "bắt buộc phải có items",
+  "only_music_goes_on_a_playlist": "chỉ có nhạc mới vào được danh sách phát",
+  "playlist_not_found": "không tìm thấy danh sách phát"
 }

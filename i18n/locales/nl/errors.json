@@ -143,5 +143,10 @@
   "not_a_song": "geen nummer",
   "no_such_audio_track": "deze audiotrack bestaat niet",
   "nothing_found_to_play": "niets gevonden om af te spelen",
-  "say_what_to_play": "zeg wat er moet worden afgespeeld"
+  "say_what_to_play": "zeg wat er moet worden afgespeeld",
+  "a_playlist_needs_a_name": "een afspeellijst heeft een naam nodig",
+  "a_playlist_holds_up_to_5000_songs": "een afspeellijst bevat maximaal 5000 nummers",
+  "items_is_required": "items is verplicht",
+  "only_music_goes_on_a_playlist": "alleen muziek past in een afspeellijst",
+  "playlist_not_found": "afspeellijst niet gevonden"
 }

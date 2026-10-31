@@ -1,8 +1,9 @@
-import { AudioWaveform, ChevronDown, GripVertical, ListMusic, X } from 'lucide-react'
+import { AudioWaveform, ChevronDown, GripVertical, ListMusic, ListPlus, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { Artwork } from '../components/Artwork'
+import { NewPlaylistDialog } from '../components/Playlists'
 import { Equalizer } from '../components/Tracks'
 import { clock } from '../format'
 import { useAudio, useAudioTime } from './AudioPlayer'
@@ -115,6 +116,7 @@ function Queue() {
   const next = upNext(s.queue)
   const [dragging, setDragging] = useState<number>()
   const [over, setOver] = useState<number>()
+  const [saving, setSaving] = useState(false)
   const item = s.current!
   return (
     <div className="flex min-h-0 flex-1 flex-col gap-4">
@@ -129,14 +131,24 @@ function Queue() {
           <Equalizer playing={s.playing} className="me-2" />
         </div>
       </div>
-      <div className="flex items-center justify-between">
-        <h3 className="text-sm font-semibold text-muted">{t('common:music.upNext')}</h3>
+      <div className="flex items-center gap-1">
+        <h3 className="me-auto text-sm font-semibold text-muted">{t('common:music.upNext')}</h3>
         {next.length > 0 && (
-          <button onClick={s.clearUpNext} className="rounded-full px-3 py-1 text-xs text-muted hover:bg-text/10 hover:text-text">
-            {t('common:music.clearQueue')}
-          </button>
+          <>
+            <button
+              onClick={() => setSaving(true)}
+              className="flex items-center gap-1.5 rounded-full px-3 py-1 text-xs text-muted hover:bg-text/10 hover:text-text"
+            >
+              <ListPlus className="size-3.5" />
+              {t('common:music.saveQueue')}
+            </button>
+            <button onClick={s.clearUpNext} className="rounded-full px-3 py-1 text-xs text-muted hover:bg-text/10 hover:text-text">
+              {t('common:music.clearQueue')}
+            </button>
+          </>
         )}
       </div>
+      {saving && <NewPlaylistDialog songs={async () => s.queue.entries.map((e) => e.item)} onClose={() => setSaving(false)} />}
       {next.length === 0 ? (
         <p className="text-sm text-faint">{t('common:music.queueEnd')}</p>
       ) : (

@@ -143,5 +143,10 @@
   "not_a_song": "inte en låt",
   "no_such_audio_track": "ljudspåret finns inte",
   "nothing_found_to_play": "hittade inget att spela upp",
-  "say_what_to_play": "säg vad som ska spelas upp"
+  "say_what_to_play": "säg vad som ska spelas upp",
+  "a_playlist_needs_a_name": "en spellista behöver ett namn",
+  "a_playlist_holds_up_to_5000_songs": "en spellista rymmer högst 5000 låtar",
+  "items_is_required": "items krävs",
+  "only_music_goes_on_a_playlist": "bara musik kan läggas i en spellista",
+  "playlist_not_found": "spellistan hittades inte"
 }

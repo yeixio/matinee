@@ -143,5 +143,10 @@
   "not_a_song": "bukan lagu",
   "no_such_audio_track": "trek audio tersebut tidak ada",
   "nothing_found_to_play": "tidak ada yang ditemukan untuk diputar",
-  "say_what_to_play": "sebutkan apa yang ingin diputar"
+  "say_what_to_play": "sebutkan apa yang ingin diputar",
+  "a_playlist_needs_a_name": "playlist perlu nama",
+  "a_playlist_holds_up_to_5000_songs": "playlist memuat paling banyak 5000 lagu",
+  "items_is_required": "items wajib diisi",
+  "only_music_goes_on_a_playlist": "hanya musik yang bisa masuk playlist",
+  "playlist_not_found": "playlist tidak ditemukan"
 }

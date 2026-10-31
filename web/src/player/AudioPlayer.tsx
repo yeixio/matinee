@@ -32,8 +32,9 @@ export type AudioState = {
   skip: (seconds: number) => void
   playing: boolean
   audio: React.RefObject<HTMLAudioElement | null>
-  // A moment's note, such as "Added to the queue".
+  // A moment's note, such as "Added to the queue", and a way to show one.
   notice?: string
+  say: (text: string) => void
   // Why playback is waiting for the server, while it's away, or that it
   // gave up waiting.
   away?: Waiting | 'gaveUp'
@@ -610,6 +611,7 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
       playing,
       audio,
       notice,
+      say: note,
       away,
       reconnect: () => {
         setAway(undefined)
@@ -698,7 +700,7 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
         onError={onError}
       />
       {current && away && !watching && <Away away={away} onRetry={value.reconnect} onStop={value.stop} />}
-      {current && expanded && notice && !away && !watching && <Toast text={notice} />}
+      {(!current || expanded) && notice && !away && !watching && <Toast text={notice} />}
       {current && !watching && (book ? <BookBar /> : <MusicBar />)}
       {current && expanded && !watching && (book ? <BookPlayer /> : <NowPlaying />)}
     </AudioContext.Provider>

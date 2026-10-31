@@ -143,5 +143,10 @@
   "not_a_song": "це не пісня",
   "no_such_audio_track": "такої звукової доріжки немає",
   "nothing_found_to_play": "нічого не знайдено для відтворення",
-  "say_what_to_play": "скажіть, що відтворити"
+  "say_what_to_play": "скажіть, що відтворити",
+  "a_playlist_needs_a_name": "плейлисту потрібна назва",
+  "a_playlist_holds_up_to_5000_songs": "у плейлисті може бути до 5000 пісень",
+  "items_is_required": "items обов'язковий",
+  "only_music_goes_on_a_playlist": "до плейлиста можна додати лише музику",
+  "playlist_not_found": "плейлист не знайдено"
 }

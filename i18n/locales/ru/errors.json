@@ -143,5 +143,10 @@
   "not_a_song": "это не песня",
   "no_such_audio_track": "такой звуковой дорожки нет",
   "nothing_found_to_play": "нечего воспроизвести",
-  "say_what_to_play": "скажите, что воспроизвести"
+  "say_what_to_play": "скажите, что воспроизвести",
+  "a_playlist_needs_a_name": "у плейлиста должно быть название",
+  "a_playlist_holds_up_to_5000_songs": "в плейлисте может быть до 5000 песен",
+  "items_is_required": "items обязателен",
+  "only_music_goes_on_a_playlist": "в плейлист можно добавить только музыку",
+  "playlist_not_found": "плейлист не найден"
 }

@@ -143,5 +143,10 @@
   "not_a_song": "není to skladba",
   "no_such_audio_track": "taková zvuková stopa neexistuje",
   "nothing_found_to_play": "nic k přehrání nenalezeno",
-  "say_what_to_play": "řekněte, co přehrát"
+  "say_what_to_play": "řekněte, co přehrát",
+  "a_playlist_needs_a_name": "playlist potřebuje název",
+  "a_playlist_holds_up_to_5000_songs": "playlist pojme nejvýše 5000 skladeb",
+  "items_is_required": "items je povinné",
+  "only_music_goes_on_a_playlist": "do playlistu patří jen hudba",
+  "playlist_not_found": "playlist nenalezen"
 }

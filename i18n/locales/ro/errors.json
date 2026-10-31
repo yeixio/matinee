@@ -143,5 +143,10 @@
   "not_a_song": "nu este o melodie",
   "no_such_audio_track": "nu există o astfel de pistă audio",
   "nothing_found_to_play": "nu s-a găsit nimic de redat",
-  "say_what_to_play": "spune ce să redea"
+  "say_what_to_play": "spune ce să redea",
+  "a_playlist_needs_a_name": "un playlist are nevoie de un nume",
+  "a_playlist_holds_up_to_5000_songs": "un playlist cuprinde cel mult 5000 de melodii",
+  "items_is_required": "items este obligatoriu",
+  "only_music_goes_on_a_playlist": "într-un playlist intră doar muzică",
+  "playlist_not_found": "playlistul nu a fost găsit"
 }

@@ -143,5 +143,10 @@
   "not_a_song": "ليست أغنية",
   "no_such_audio_track": "لا يوجد مسار صوتي كهذا",
   "nothing_found_to_play": "لم يُعثر على شيء لتشغيله",
-  "say_what_to_play": "قل ما تريد تشغيله"
+  "say_what_to_play": "قل ما تريد تشغيله",
+  "a_playlist_needs_a_name": "قائمة التشغيل تحتاج إلى اسم",
+  "a_playlist_holds_up_to_5000_songs": "تتسع قائمة التشغيل لـ 5000 أغنية كحد أقصى",
+  "items_is_required": "items مطلوب",
+  "only_music_goes_on_a_playlist": "الموسيقى فقط تُضاف إلى قائمة التشغيل",
+  "playlist_not_found": "لم يتم العثور على قائمة التشغيل"
 }

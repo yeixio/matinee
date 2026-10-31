@@ -1,6 +1,6 @@
 ---
 title: Music
-description: Browse artists, albums and songs, line up a queue, and keep music playing while you browse.
+description: Browse artists, albums and songs, make playlists, line up a queue, and keep music playing while you browse.
 sidebar:
   order: 7
 ---
@@ -46,10 +46,37 @@ The **⋯** button on any song, album or artist has:
 
 Shuffle mixes what's left in the queue and keeps the song that's playing; turning it off puts the queue back in order.
 
+<!-- since: v0.1.7 -->
+## Playlists
+
+Playlists are songs you put together in your own order. They're yours alone: everyone who signs in, and each [profile](/docs/household/profiles/), has their own. Devices at home that haven't signed in share one set for the household.
+
+The **Playlists** tab in a music library lists them, and the overview shows them too. Click **New playlist** to make an empty one, then add songs to it.
+
+![The Playlists tab, with a card to make a new one](../images/playlists.webp)
+
+To add to a playlist, pick **Add to playlist** in the **⋯** menu of any song, album or artist, then pick the playlist, or **New playlist** to make one with them on it. An album adds all its songs in order, and an artist adds every song they have. A song can be on a playlist more than once.
+
+![Picking a playlist to add an album to](../images/add-to-playlist.webp)
+
+A playlist's page has **Play** and **Shuffle**, **Rename** and **Delete playlist**. Drag songs by the handle at their left to change the order, or use **Move up** and **Move down** in a song's **⋯** menu. **Remove from playlist** takes a song off; it stays in your library. Deleting a playlist doesn't delete any music either.
+
+![A playlist's page with its songs](../images/playlist.webp)
+
+**Save as playlist** above the queue in the full player keeps what's playing and what's up next as a new playlist.
+
+Songs your profile can't see, such as in a library a kids profile doesn't have, don't show or play from a playlist.
+
+<!-- /since -->
+
 ## On the phone apps
 
 The [phone apps](/docs/apps/phone-and-tv/) have the same library, album and artist pages, a player above the tabs, and a full player with the queue. Music keeps playing when you lock the phone or switch apps, with the song on the lock screen, and downloaded albums play offline.
 
+<!-- /since -->
+
+<!-- since: v0.1.7 -->
+From version 1.0.19 the phone apps have playlists too: the **Playlists** tab, **Add to playlist** in the menu of any song, album or artist (tap **⋯** or hold a song), and **Save as playlist** above the queue. On a playlist's page, **⋯** renames or deletes it, and each song's menu moves it up or down or removes it.
 <!-- /since -->
 
 <!-- since: v0.1.3 -->
@@ -68,6 +95,12 @@ The visualizer moves in time with the music on every device, even a TV, because 
 ## On a TV
 
 Apple TV and Android TV have the same music library as the browser, with **Overview**, **Artists**, **Albums** and **Songs** along the top and **Shuffle all**. An album or artist page has **Play** and **Shuffle**, and selecting a song plays the album from there. Hold select on a song for **Play next**, **Add to queue**, **Go to album** and **Go to artist**.
+
+<!-- since: v0.1.7 -->
+From version 1.0.19 a **Playlists** tab lists your playlists, and a playlist's page has **Play**, **Shuffle** and its songs. Make and change playlists on the web or a phone; the TV plays them.
+
+![A playlist on a TV](../images/app-tv-playlist.webp)
+<!-- /since -->
 
 The music keeps playing while you browse. What's playing shows at the top of the screen, next to the server's name; select it for the player. The player has the cover, how far along the song is, shuffle, back, play, next and repeat, and the queue in a row below it, where selecting a song plays it now. The play/pause button on the remote plays and pauses the music from any screen.
 

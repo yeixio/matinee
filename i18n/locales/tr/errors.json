@@ -143,5 +143,10 @@
   "not_a_song": "şarkı değil",
   "no_such_audio_track": "böyle bir ses parçası yok",
   "nothing_found_to_play": "çalınacak bir şey bulunamadı",
-  "say_what_to_play": "neyin çalınacağını söyleyin"
+  "say_what_to_play": "neyin çalınacağını söyleyin",
+  "a_playlist_needs_a_name": "çalma listesinin bir adı olmalı",
+  "a_playlist_holds_up_to_5000_songs": "bir çalma listesi en fazla 5000 şarkı alır",
+  "items_is_required": "items gerekli",
+  "only_music_goes_on_a_playlist": "çalma listesine yalnızca müzik eklenebilir",
+  "playlist_not_found": "çalma listesi bulunamadı"
 }
