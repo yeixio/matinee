@@ -85,7 +85,7 @@ try {
 
   // --- Watching ---
   {
-    const page = await open(desktop, token)
+    let page = await open(desktop, token)
     await page.goto(origin)
     await shot(page, 'home')
     await page.mouse.wheel(0, 700)
@@ -213,8 +213,9 @@ try {
     // Podcasts: three shows from the stand-in host, two followed, one
     // episode part-way through and one played (see docs/guide/watching/podcasts.md).
     if (['podcasts', 'podcast', 'podcast-player', 'podcasts-add', 'podcast-search'].some(wanted)) {
-      const close = page.getByRole('button', { name: 'Close player' })
-      if (await close.count()) await close.first().click()
+      // A fresh page, so the book above isn't in the player.
+      await page.context().close()
+      page = await open(desktop, token)
       const lib = await api(token, 'POST', '/libraries', { name: 'Podcasts', kind: 'podcasts', paths: [] })
       await api(token, 'PUT', '/integrations/podcastindex', { key: 'DEMOKEY0000000000000', secret: 'demo-secret-0000000000000000000000000000' })
       const shows = []

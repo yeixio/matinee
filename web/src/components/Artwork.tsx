@@ -17,8 +17,8 @@ export function Artwork({
   label?: boolean
 }) {
   const { t } = useTranslation()
-  // Seasons, tracks, episodes and book parts borrow artwork from their show, album or book on the server.
-  const borrows = item.kind === 'season' || item.kind === 'track' || item.kind === 'episode' || item.kind === 'part'
+  // Seasons, tracks, episodes, book parts and podcast episodes borrow artwork from their show, album or book on the server.
+  const borrows = item.kind === 'season' || item.kind === 'track' || item.kind === 'episode' || item.kind === 'part' || item.kind === 'podcastEpisode'
   // An episode without its own still shows the show's backdrop instead.
   const src = type === 'poster' && item.kind === 'episode' && !item.hasPoster ? 'backdrop' : type
   const has = (src === 'poster' ? item.hasPoster : item.hasBackdrop) || borrows
