@@ -21,3 +21,9 @@ func (s *Store) ForgetFilterBackfill(ctx context.Context) error {
 }
 
 func (s *Store) BackfillFilters(ctx context.Context) error { return s.backfillFilters(ctx) }
+
+// SetMetaAt backdates an item's online lookup.
+func (s *Store) SetMetaAt(ctx context.Context, id, at int64) error {
+	_, err := s.db.ExecContext(ctx, "UPDATE items SET meta_at = ? WHERE id = ?", at, id)
+	return err
+}

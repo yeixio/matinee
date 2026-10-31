@@ -106,6 +106,22 @@ Online lookups go by the album and artist names in your tags. An edition note li
 
 <!-- /since -->
 
+<!-- since: v0.1.7 -->
+### How albums are matched online
+
+Files tagged with MusicBrainz Picard, Lidarr or beets carry the MusicBrainz id of their album, and Matinee uses it to find the exact album, and the cover of the very release you have. That's the surest way to get every cover: tag your music with one of them, or turn on tag writing in Lidarr.
+
+Without ids, Matinee goes by the names in your tags and copes with messy ones:
+
+- Notes about the copy, like "(CD 2)", "- Disk 1", "(SAMPLE)", "(Promo)" or "[FLAC]", come off the title.
+- The artist's name comes off the start or end, so "Perfecto Fluoro- Oakenfold" is found as "Perfecto Fluoro".
+- A title a letter or two off, like "Fluro", is matched to the artist's album that's closest to it, and to one with a longer title only when the year agrees.
+- A DJ mix or compilation filed under its DJ, like "Cream Anthems 2001", is matched to the Various Artists album of that name and year.
+
+Albums still without a cover are looked up again every month, as the online databases keep growing. Updating to this version looks again for every album without a cover, and reads the ids from the files of albums scanned before, once, on the next scan.
+
+<!-- /since -->
+
 ## Tags
 
 Artist, album, track number and title come from the tags in your files, so tag them with your favorite tagger before adding them. Without tags, Matinee uses the [folder and file names](/docs/getting-started/organizing-media/#music).

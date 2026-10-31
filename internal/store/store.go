@@ -358,6 +358,13 @@ var migrations = []string{
 	// 54: a track's own artist, kept when it isn't the album's, such as
 	// each artist on a soundtrack or compilation (see music.go).
 	"ALTER TABLE items ADD COLUMN track_artist TEXT",
+	// 55–58: the MusicBrainz release and release group an album's files are
+	// tagged with, whether its files' tags have been read for them, and a
+	// fresh look online for every album still without a cover (see art.go).
+	"ALTER TABLE items ADD COLUMN mb_release TEXT",
+	"ALTER TABLE items ADD COLUMN mb_group TEXT",
+	"ALTER TABLE items ADD COLUMN tags_read INTEGER NOT NULL DEFAULT 0",
+	"UPDATE items SET meta_at = NULL WHERE kind = 'album' AND poster IS NULL",
 }
 
 func now() int64 { return time.Now().Unix() }
