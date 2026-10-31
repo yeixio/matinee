@@ -52,6 +52,17 @@ Click the cover for the full player. Where a book has its chapters, an episode h
 
 Matinee saves your place while you listen. Episodes you're part-way through show in **Continue listening**, and an episode counts as played once you reach its last minute.
 
+## In the apps
+
+The [phone and TV apps](/docs/apps/phone-and-tv/) have podcasts too.
+
+- **On a phone or tablet**, a podcast library opens on **Shows**, **Latest** and **Add shows**, like the browser. A show's page has Play latest, Follow, Mark all played, Check for new episodes and its episodes, with **Unplayed** to hide the ones you've heard. An episode's page can mark it played or [download it](/docs/apps/downloads/) to listen offline.
+- **On a TV**, a show's page has Play latest and Follow, and its episodes in a list below. Select one to play it.
+
+Episodes play in the apps' audiobook player, with the same skips, speed and sleep timer, and the show notes where a book shows its chapters. Your place carries over between the apps and the browser.
+
+Android Auto, CarPlay and the watches don't list podcasts yet, but a watch can still pause and skip an episode playing on your phone.
+
 ## Setting up podcast search
 
 Search uses [Podcast Index](https://podcastindex.org), a free and open directory of podcasts. It needs an API key and secret, which are free:
