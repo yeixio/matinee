@@ -12,7 +12,13 @@ $data = Join-Path $env:LOCALAPPDATA "Matinee"
 $base = "http://localhost:7171/api/v1"
 
 function Check($ok, $what) {
-  if (-not $ok) { throw "FAILED: $what" }
+  if (-not $ok) {
+    # The server's log and what's running say why.
+    Get-Process matinee, matinee-tray -ErrorAction SilentlyContinue | Format-Table -AutoSize | Out-String | Write-Host
+    $log = Join-Path $data "Logs\matinee.log"
+    if (Test-Path $log) { Write-Host "--- $log"; Get-Content $log -Tail 80 | Write-Host }
+    throw "FAILED: $what"
+  }
   Write-Host "ok: $what"
 }
 
@@ -62,9 +68,9 @@ Check ($uninst.DisplayName -eq "Matinee") "listed in Installed apps as $($uninst
 Start-Process -FilePath (Join-Path $dir "matinee-tray.exe")
 $health = $null
 foreach ($i in 1..60) {
-  try { $health = Invoke-RestMethod "$base/health" -TimeoutSec 2; break } catch { Start-Sleep 1 }
+  try { $health = Invoke-RestMethod "$base/health" -TimeoutSec 2; break } catch { $err = $_; Start-Sleep 1 }
 }
-Check ($health.status -eq "ok") "server answers ($($health.version))"
+Check ($health.status -eq "ok") "server answers ($($health.version)$err)"
 Check ((Get-Process matinee -ErrorAction SilentlyContinue).Count -eq 1) "one server running"
 Check (Test-Path (Join-Path $data "matinee.db")) "database in $data"
 Check (Test-Path (Join-Path $data "Logs\matinee.log")) "log in $data\Logs"
