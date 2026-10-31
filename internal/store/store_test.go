@@ -63,6 +63,9 @@ func TestMigrateFromVersion1(t *testing.T) {
 		"ALTER TABLE items DROP COLUMN track_artist",
 		"DROP TABLE playlist_items",
 		"DROP TABLE playlists",
+		"ALTER TABLE items DROP COLUMN mb_release",
+		"ALTER TABLE items DROP COLUMN mb_group",
+		"ALTER TABLE items DROP COLUMN tags_read",
 		"UPDATE schema_version SET version = 1",
 	} {
 		if _, err := s.db.ExecContext(ctx, q); err != nil {

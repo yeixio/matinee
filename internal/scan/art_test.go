@@ -99,3 +99,75 @@ func TestScanFindsAlbumCovers(t *testing.T) {
 		t.Fatalf("a cover added later: %+v", albums)
 	}
 }
+
+// The MusicBrainz ids that Picard and Lidarr tag files with are kept on
+// the album, from ID3 and Vorbis tags alike, and read again for the
+// albums Find artwork resets.
+func TestScanKeepsAlbumIDs(t *testing.T) {
+	ffmpeg, err := exec.LookPath("ffmpeg")
+	if err != nil {
+		t.Skip("ffmpeg not installed")
+	}
+	ffprobe, err := exec.LookPath("ffprobe")
+	if err != nil {
+		t.Skip("ffprobe not installed")
+	}
+	root := t.TempDir()
+	song := func(rel string, tags ...string) {
+		p := filepath.Join(root, rel)
+		os.MkdirAll(filepath.Dir(p), 0o755)
+		args := []string{"-loglevel", "error", "-f", "lavfi", "-i", "sine=d=1"}
+		for _, tg := range tags {
+			args = append(args, "-metadata", tg)
+		}
+		if out, err := exec.Command(ffmpeg, append(args, p)...).CombinedOutput(); err != nil {
+			t.Fatalf("make song: %v\n%s", err, out)
+		}
+	}
+	song("Band/MP3/01 A.mp3", "album=MP3", "MusicBrainz Album Id=6A1E1A70-8C62-4F4F-9E8C-3B9C1B4B2F10",
+		"MusicBrainz Release Group Id=0b6d2f0e-2c4c-4a4e-9a7c-2e5b8c1d4f00")
+	song("Band/FLAC/01 B.flac", "album=FLAC", "MUSICBRAINZ_ALBUMID=11111111-2222-3333-4444-555555555555;66666666-2222-3333-4444-555555555555")
+	song("Band/None/01 C.mp3", "album=None")
+
+	st := storetest.Open(t)
+	ctx := context.Background()
+	lib, _ := st.CreateLibrary(ctx, "Music", "music", []string{root})
+	s := &Scanner{Store: st, Prober: probe.Prober{Path: ffprobe}, Log: slog.New(slog.NewTextHandler(io.Discard, nil))}
+	check := func(when string) {
+		t.Helper()
+		artists, _ := st.TopLevel(ctx, 0, lib.ID)
+		albums, _ := st.Children(ctx, 0, artists[0].ID)
+		got := map[string][2]string{}
+		for _, a := range albums {
+			r, g, err := st.AlbumTags(ctx, a.ID)
+			if err != nil {
+				t.Fatal(err)
+			}
+			got[a.Title] = [2]string{r, g}
+		}
+		want := map[string][2]string{
+			"MP3":  {"6a1e1a70-8c62-4f4f-9e8c-3b9c1b4b2f10", "0b6d2f0e-2c4c-4a4e-9a7c-2e5b8c1d4f00"},
+			"FLAC": {"11111111-2222-3333-4444-555555555555", ""},
+			"None": {"", ""},
+		}
+		if len(got) != len(want) {
+			t.Fatalf("%s: albums %+v", when, got)
+		}
+		for k, v := range want {
+			if got[k] != v {
+				t.Errorf("%s: %s ids %q, want %q", when, k, got[k], v)
+			}
+		}
+	}
+	if _, err := s.Scan(ctx, lib); err != nil {
+		t.Fatal(err)
+	}
+	check("first scan")
+	if _, err := st.ResetArtLookups(ctx, lib.ID); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := s.Scan(ctx, lib); err != nil {
+		t.Fatal(err)
+	}
+	check("after Find artwork")
+}

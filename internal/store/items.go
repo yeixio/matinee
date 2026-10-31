@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"errors"
 	"strings"
+	"time"
 	"unicode"
 
 	"github.com/yeixio/matinee/internal/probe"
@@ -459,8 +460,12 @@ func (s *Store) SetArt(ctx context.Context, id int64, poster, backdrop string) e
 	return err
 }
 
+// artRetry is how long an album or book without a cover waits before it
+// is looked up online again.
+const artRetry = 30 * 24 * time.Hour
+
 // NeedsMetadata lists a library's items of the given kinds not yet looked
-// up online, shows before seasons and episodes so those can use the show's
+// up online, or albums and books without a cover looked up over artRetry ago, shows before seasons and episodes so those can use the show's
 // match, and items without artwork before those looked up again.
 func (s *Store) NeedsMetadata(ctx context.Context, libraryID int64, kinds []string) ([]Item, error) {
 	if len(kinds) == 0 {
@@ -471,7 +476,10 @@ func (s *Store) NeedsMetadata(ctx context.Context, libraryID int64, kinds []stri
 	for _, k := range kinds {
 		args = append(args, k)
 	}
-	return s.queryItems(ctx, "i.library_id = ? AND i.meta_at IS NULL AND i.kind IN ("+in+")",
+	// Albums and books still without a cover are looked up again now and
+	// then, since the online databases keep growing.
+	args = append(args, now()-int64(artRetry/time.Second))
+	return s.queryItems(ctx, "i.library_id = ? AND i.kind IN ("+in+") AND (i.meta_at IS NULL OR i.poster IS NULL AND i.kind IN ('album', 'book') AND i.meta_at < ?)",
 		"CASE i.kind WHEN 'show' THEN 0 WHEN 'season' THEN 1 ELSE 2 END, CASE WHEN i.poster IS NULL THEN 0 ELSE 1 END, i.id", args...)
 }
 

@@ -24,6 +24,9 @@ type Query struct {
 	Season  int
 	Episode int
 	Artist  string // the album's artist, or the book's author
+	// MusicBrainz ids from an album's tags, when its files have them.
+	ReleaseID      string
+	ReleaseGroupID string
 	// For a plugin's kinds: the item's file and what the plugin keeps with it.
 	Path string
 	Data json.RawMessage
@@ -195,6 +198,7 @@ func (f *Fetcher) query(ctx context.Context, it store.Item) (Query, queryState) 
 		if artist.Title != "Unknown Artist" {
 			q.Artist = artist.Title
 		}
+		q.ReleaseID, q.ReleaseGroupID, _ = f.Store.AlbumTags(ctx, it.ID)
 		return q, ready
 	case "author", "book":
 		// Open Library has only pictures (and a year) to add, so an author or

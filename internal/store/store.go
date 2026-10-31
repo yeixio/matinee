@@ -376,6 +376,13 @@ var migrations = []string{
 	)`,
 	"CREATE INDEX playlist_items_playlist ON playlist_items(playlist_id, position)",
 	"CREATE INDEX playlist_items_item ON playlist_items(item_id)",
+	// 59–62: the MusicBrainz release and release group an album's files are
+	// tagged with, whether its files' tags have been read for them, and a
+	// fresh look online for every album still without a cover (see art.go).
+	"ALTER TABLE items ADD COLUMN mb_release TEXT",
+	"ALTER TABLE items ADD COLUMN mb_group TEXT",
+	"ALTER TABLE items ADD COLUMN tags_read INTEGER NOT NULL DEFAULT 0",
+	"UPDATE items SET meta_at = NULL WHERE kind = 'album' AND poster IS NULL",
 }
 
 func now() int64 { return time.Now().Unix() }
