@@ -397,7 +397,7 @@ try {
       await importing.getByRole('button', { name: 'Start' }).click()
       await importing.getByRole('button', { name: /Found on this computer/ }).click()
       await importing.getByRole('button', { name: 'Use it' }).click()
-      await importing.getByText('Found in your libraries: 2131 of 2140').waitFor()
+      await importing.getByText(/Found in your libraries: 2,131/).waitFor()
       await shot(imp, 'import', { target: importing })
       await imp.context().close()
     }
