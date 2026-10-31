@@ -21,6 +21,7 @@ import phoneDetails from '../assets/app-phone-details.webp'
 const base = import.meta.env.BASE_URL
 const guide = (path = '') => `${base}docs/${path}`
 const github = 'https://github.com/yeixio/matinee'
+const macDownload = `${github}/releases/latest/download/Matinee-Server.dmg`
 const donate = 'https://yeix.io/matinee/donate'
 
 // Tells search engines what Matinee is, for richer results.
@@ -91,7 +92,7 @@ const features = [
 ]
 
 const steps = [
-  { n: '1', title: 'Install it', body: 'One Docker command, a package for Debian, Ubuntu, Fedora or Homebrew, or a Helm chart.' },
+  { n: '1', title: 'Install it', body: 'The Mac app, one Docker command, a package for Debian, Ubuntu, Fedora or Homebrew, or a Helm chart.' },
   { n: '2', title: 'Point it at your folders', body: 'Movies, TV and music. Matinee names everything from your file and folder names.' },
   { n: '3', title: 'Press play', body: 'Artwork and details fill themselves in, new files appear in seconds, and every screen in the house can watch.' },
 ]
@@ -233,6 +234,13 @@ const installs = [
               <pre><code>{i.code}</code></pre>
             </div>
           ))}
+        </div>
+        <div class="mac">
+          <a class="button primary" href={macDownload}>Download for Mac</a>
+          <p>
+            Matinee Server runs from the menu bar with everything built in, and updates itself. macOS 13 or later, Apple
+            silicon and Intel. <a href={guide('getting-started/mac/')}>How it works</a>
+          </p>
         </div>
         <p class="also">
           Also packaged for <a href={guide('getting-started/install/#debian-and-ubuntu')}>Debian and Ubuntu</a>{' '}
@@ -579,6 +587,20 @@ const installs = [
   }
   .install .also {
     margin-top: 24px;
+  }
+  .install .mac {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 12px 20px;
+    margin-top: 28px;
+  }
+  .install .mac p {
+    margin: 0;
+    max-width: 460px;
+    color: var(--muted);
+    text-align: left;
   }
 
   .open {

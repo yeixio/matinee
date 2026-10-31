@@ -1,6 +1,6 @@
 ---
 title: Install Matinee
-description: Run Matinee with Docker, a Debian, Ubuntu or Fedora package, Homebrew, Helm on Kubernetes, or from source.
+description: Run Matinee with Docker, the Mac app, a Debian, Ubuntu or Fedora package, Homebrew, Helm on Kubernetes, or from source.
 sidebar:
   order: 1
 ---
@@ -9,6 +9,10 @@ Matinee runs on Linux and macOS, on amd64 and arm64 (and armv7 for older NAS box
 
 On Unraid, TrueNAS SCALE or ZimaOS, see [Install on a NAS](/docs/getting-started/nas/).
 
+<!-- since: v0.1.8 -->
+On a Mac, the easiest way is the [Matinee Server app](/docs/getting-started/mac/): download it, drag it to Applications, and it runs the server from the menu bar with FFmpeg built in and updates itself.
+
+<!-- /since -->
 ## Docker
 
 ```sh
@@ -63,6 +67,12 @@ If the `matinee` user can't read a network share, mount the share with that user
 
 The repositories and packages are signed with the key "Matinee packages &lt;hello@yeix.io&gt;", fingerprint `4EE3 3F8C EE07 6BB0 C9A7  C559 21F5 BE9F 726A 2895`.
 
+<!-- since: v0.1.8 -->
+## Mac app
+
+[Download Matinee Server for Mac](https://github.com/yeixio/matinee/releases/latest/download/Matinee-Server.dmg) (macOS 13 or later, Apple silicon and Intel), open it and drag **Matinee Server** to **Applications**. [Matinee Server for Mac](/docs/getting-started/mac/) walks through the rest.
+
+<!-- /since -->
 ## macOS and Linux with Homebrew
 
 ```sh

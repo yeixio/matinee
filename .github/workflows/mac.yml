@@ -1,0 +1,163 @@
+name: Mac app
+
+# Builds Matinee Server.app, the menu-bar app that runs the server on a Mac
+# (macos/, scripts/build-mac-app.sh). Pull requests that touch it get an
+# unsigned build, its tests and the guide's pictures of it; Release calls this
+# for a signed, notarized disk image and the update feed.
+#
+# Secrets for a release build (without them the release goes ahead without
+# the Mac app and says which are missing):
+#   DEVELOPER_ID_P12_BASE64, DEVELOPER_ID_PASSWORD  Developer ID Application
+#                                                   certificate and its password
+#   ASC_API_KEY_ID, ASC_API_ISSUER_ID, ASC_API_KEY_P8_BASE64
+#                                                   App Store Connect API key,
+#                                                   for notarizing
+#   SPARKLE_PRIVATE_KEY                             update signing key
+#                                                   (macos/Resources/sparkle.swift new-key)
+on:
+  pull_request:
+    paths:
+      - macos/**
+      - scripts/build-mac-*.sh
+      - .github/workflows/mac.yml
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+      tag:
+        description: The release, such as v0.2.0
+        type: string
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: macos-15
+    timeout-minutes: 75
+    env:
+      TAG: ${{ inputs.tag }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - uses: pnpm/action-setup@v4
+        with:
+          package_json_file: web/package.json
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: web/pnpm-lock.yaml
+      - run: make web
+
+      # FFmpeg takes a while to build, so it's kept until its script changes.
+      - id: ffmpeg-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/mac-ffmpeg
+          key: mac-ffmpeg-${{ hashFiles('scripts/build-mac-ffmpeg.sh') }}
+      - name: Build FFmpeg
+        if: steps.ffmpeg-cache.outputs.cache-hit != 'true'
+        run: |
+          brew install nasm pkgconf
+          scripts/build-mac-ffmpeg.sh ~/mac-ffmpeg
+
+      - name: Test the app
+        run: swift test --package-path macos
+
+      - name: Signing and notarizing
+        id: secrets
+        if: inputs.tag != ''
+        env:
+          DEVELOPER_ID_P12_BASE64: ${{ secrets.DEVELOPER_ID_P12_BASE64 }}
+          DEVELOPER_ID_PASSWORD: ${{ secrets.DEVELOPER_ID_PASSWORD }}
+          ASC_API_KEY_ID: ${{ secrets.ASC_API_KEY_ID }}
+          ASC_API_ISSUER_ID: ${{ secrets.ASC_API_ISSUER_ID }}
+          ASC_API_KEY_P8_BASE64: ${{ secrets.ASC_API_KEY_P8_BASE64 }}
+          SPARKLE_PRIVATE_KEY: ${{ secrets.SPARKLE_PRIVATE_KEY }}
+        run: |
+          set -euo pipefail
+          missing=()
+          for name in DEVELOPER_ID_P12_BASE64 DEVELOPER_ID_PASSWORD ASC_API_KEY_ID ASC_API_ISSUER_ID ASC_API_KEY_P8_BASE64 SPARKLE_PRIVATE_KEY; do
+            [ -n "${!name:-}" ] || missing+=("$name")
+          done
+          if [ ${#missing[@]} -gt 0 ]; then
+            echo "::warning title=Mac app not released::Secrets not set for this repository: ${missing[*]}. The release goes ahead without the Mac app; see docs/mac-app.md."
+            echo "ready=" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          keychain="$RUNNER_TEMP/signing.keychain-db"
+          password="$(uuidgen)"
+          echo "$DEVELOPER_ID_P12_BASE64" | base64 --decode > "$RUNNER_TEMP/developer-id.p12"
+          security create-keychain -p "$password" "$keychain"
+          security set-keychain-settings -lut 21600 "$keychain"
+          security unlock-keychain -p "$password" "$keychain"
+          security import "$RUNNER_TEMP/developer-id.p12" -P "$DEVELOPER_ID_PASSWORD" -A -t cert -f pkcs12 -k "$keychain"
+          rm -f "$RUNNER_TEMP/developer-id.p12"
+          security list-keychains -d user -s "$keychain" $(security list-keychains -d user | xargs)
+          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$password" "$keychain" > /dev/null
+          identity="$(security find-identity -v -p codesigning "$keychain" | awk '/Developer ID Application/ {print $2; exit}')"
+          if [ -z "$identity" ]; then
+            echo "::error::DEVELOPER_ID_P12_BASE64 has no Developer ID Application certificate in it."
+            exit 1
+          fi
+          echo "$ASC_API_KEY_P8_BASE64" | base64 --decode > "$RUNNER_TEMP/AuthKey.p8"
+          {
+            echo "MAC_SIGN_IDENTITY=$identity"
+            echo "ASC_API_KEY=$RUNNER_TEMP/AuthKey.p8"
+            echo "ASC_API_KEY_ID=$ASC_API_KEY_ID"
+            echo "ASC_API_ISSUER_ID=$ASC_API_ISSUER_ID"
+          } >> "$GITHUB_ENV"
+          echo "ready=1" >> "$GITHUB_OUTPUT"
+
+      - name: Build the app
+        env:
+          TMDB_KEY: ${{ inputs.tag != '' && secrets.TMDB_API_KEY || '' }}
+          SPARKLE_PRIVATE_KEY: ${{ steps.secrets.outputs.ready && secrets.SPARKLE_PRIVATE_KEY || '' }}
+        run: |
+          version="${TAG#v}"
+          [ -n "$version" ] || version="0.0.0-dev.$(git rev-parse --short HEAD)"
+          FFMPEG_DIR=~/mac-ffmpeg VERSION="$version" scripts/build-mac-app.sh
+
+      - name: Run it
+        run: |
+          set -euo pipefail
+          app="dist/mac/Matinee Server.app/Contents/MacOS"
+          lipo -archs "$app/matinee" "$app/ffmpeg" "$app/ffprobe" "$app/Matinee Server"
+          "$app/ffmpeg" -hide_banner -version | head -n 1
+          # The bundled server answers with the bundled FFmpeg.
+          data="$(mktemp -d)"
+          MATINEE_DATA_DIR="$data" MATINEE_ADDR=127.0.0.1:7199 MATINEE_DISCOVERY=false \
+            MATINEE_FFMPEG="$app/ffmpeg" MATINEE_FFPROBE="$app/ffprobe" "$app/matinee" > "$data/log" 2>&1 &
+          server=$!
+          ok=""
+          for _ in $(seq 30); do curl -fsS http://127.0.0.1:7199/healthz && { ok=1; break; }; sleep 1; done
+          kill "$server"
+          [ -n "$ok" ] || { cat "$data/log"; echo "::error::The bundled server didn't answer."; exit 1; }
+          # The app draws its windows for the guide and quits.
+          "$app/Matinee Server" --snapshots "$PWD/dist/mac-snapshots" &
+          pid=$!
+          for _ in $(seq 60); do kill -0 "$pid" 2>/dev/null || break; sleep 1; done
+          if kill -0 "$pid" 2>/dev/null; then kill "$pid"; echo "::error::The app didn't quit after drawing its windows."; exit 1; fi
+          wait "$pid"
+          ls -l dist/mac-snapshots
+          test -s dist/mac-snapshots/mac-menu-light.png
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mac-snapshots
+          path: dist/mac-snapshots
+      - uses: actions/upload-artifact@v4
+        if: inputs.tag == ''
+        with:
+          name: mac-app
+          path: dist/mac/Matinee-Server.dmg
+      - uses: actions/upload-artifact@v4
+        if: steps.secrets.outputs.ready
+        with:
+          name: mac-release
+          path: |
+            dist/mac/Matinee-Server.dmg
+            dist/mac/appcast.xml

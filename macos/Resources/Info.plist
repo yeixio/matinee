@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!-- scripts/build-mac-app.sh fills in @VERSION@ and @SPARKLE_PUBLIC_KEY@. -->
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>Matinee Server</string>
+	<key>CFBundleExecutable</key>
+	<string>Matinee Server</string>
+	<key>CFBundleIconFile</key>
+	<string>AppIcon</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.yeix.matinee.server</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>Matinee Server</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>@VERSION@</string>
+	<key>CFBundleVersion</key>
+	<string>@VERSION@</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.entertainment</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>13.0</string>
+	<key>LSUIElement</key>
+	<true/>
+	<key>NSHumanReadableCopyright</key>
+	<string>Matinee is free software under the GNU AGPL 3.0 or later.</string>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Matinee announces itself on your home network so the phone and TV apps can find it.</string>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_matinee._tcp</string>
+	</array>
+	<key>SUFeedURL</key>
+	<string>https://github.com/yeixio/matinee/releases/latest/download/appcast.xml</string>
+	<key>SUPublicEDKey</key>
+	<string>@SPARKLE_PUBLIC_KEY@</string>
+	<key>SUEnableAutomaticChecks</key>
+	<true/>
+</dict>
+</plist>

@@ -182,6 +182,15 @@ jobs:
           name: binaries
           path: dist/*
 
+  # Matinee Server.app: signed, notarized and with its update feed when the
+  # signing secrets are set (see mac.yml), otherwise left out.
+  mac:
+    needs: [tag, test]
+    uses: ./.github/workflows/mac.yml
+    with:
+      tag: ${{ needs.tag.outputs.tag }}
+    secrets: inherit
+
   packages:
     needs: [tag, binaries]
     env:
@@ -229,7 +238,7 @@ jobs:
           path: dist/packages
 
   release:
-    needs: [tag, image, chart, binaries, packages]
+    needs: [tag, image, chart, binaries, packages, mac]
     env:
       TAG: ${{ needs.tag.outputs.tag }}
     runs-on: ubuntu-latest
@@ -247,12 +256,22 @@ jobs:
         with:
           name: packages
           path: dist
+      # The Mac app's disk image and appcast.xml, its update feed, which the
+      # app reads from the latest release. Missing when the Mac app wasn't
+      # signed.
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: mac-release
+          merge-multiple: true
+          path: dist
       - name: Checksum everything attached
         run: cd dist && rm -f SHA256SUMS.txt && sha256sum -- * > SHA256SUMS.txt
       - name: Write the release notes
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: scripts/release-notes.sh "$TAG" > notes.md
+        run: |
+          if [ -f dist/Matinee-Server.dmg ]; then export MAC_APP=1; fi
+          scripts/release-notes.sh "$TAG" > notes.md
       - uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ needs.tag.outputs.tag }}
