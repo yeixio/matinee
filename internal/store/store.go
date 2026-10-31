@@ -358,7 +358,7 @@ var migrations = []string{
 	// 54: a track's own artist, kept when it isn't the album's, such as
 	// each artist on a soundtrack or compilation (see music.go).
 	"ALTER TABLE items ADD COLUMN track_artist TEXT",
-	// 55–57: playlists of songs, each person's own (see playlists.go). A
+	// 55–58: playlists of songs, each person's own (see playlists.go). A
 	// song can be on one more than once, so each place has its own id.
 	`CREATE TABLE playlists (
 		id         TEXT PRIMARY KEY,
