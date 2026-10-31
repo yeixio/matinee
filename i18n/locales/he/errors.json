@@ -148,5 +148,20 @@
   "a_playlist_holds_up_to_5000_songs": "פלייליסט מכיל עד 5000 שירים",
   "items_is_required": "items הוא שדה חובה",
   "only_music_goes_on_a_playlist": "רק מוזיקה נכנסת לפלייליסט",
-  "playlist_not_found": "הפלייליסט לא נמצא"
+  "playlist_not_found": "הפלייליסט לא נמצא",
+  "podcast_index_couldnt_be_reached_to_check_the_key": "לא ניתן היה להגיע ל-Podcast Index כדי לבדוק את המפתח",
+  "podcast_index_didnt_accept_that_key": "Podcast Index לא קיבל את המפתח הזה",
+  "podcast_index_didnt_accept_the_servers_key": "Podcast Index לא קיבל את המפתח של השרת",
+  "podcast_index_isnt_answering_right_now_try_again_later": "Podcast Index לא עונה כרגע. נסו שוב מאוחר יותר.",
+  "enter_both_the_api_key_and_the_api_secret": "יש להזין גם את מפתח ה-API וגם את סוד ה-API",
+  "enter_the_feeds_web_address_starting_with_https": "יש להזין את כתובת הפיד, שמתחילה ב-https://",
+  "not_a_podcast": "זה לא פודקאסט",
+  "not_a_podcast_library": "זו לא ספריית פודקאסטים",
+  "that_feed_has_no_episodes_to_listen_to": "לפיד הזה אין פרקים להאזנה",
+  "that_isnt_a_podcast_feed": "זה לא פיד של פודקאסט",
+  "that_isnt_an_opml_file": "זה לא קובץ OPML",
+  "the_feed_couldnt_be_read_check_the_address_and_try_again": "לא ניתן היה לקרוא את הפיד. בדקו את הכתובת ונסו שוב.",
+  "the_feed_couldnt_be_read_right_now": "לא ניתן לקרוא את הפיד כרגע",
+  "the_file_is_too_big": "הקובץ גדול מדי",
+  "this_library_already_has_a_show_with_that_name": "בספרייה הזו כבר יש תוכנית בשם הזה"
 }

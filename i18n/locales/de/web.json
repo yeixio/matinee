@@ -596,14 +596,17 @@
         "movies": "Filme",
         "tv": "Serien",
         "music": "Musik",
-        "audiobooks": "Hörbücher"
+        "audiobooks": "Hörbücher",
+        "podcasts": "Podcasts"
       },
       "type": "Art",
       "folders": "Ordner",
       "up": "Einen Ordner höher",
       "added": "Hinzugefügt",
       "useFolder": "Diesen Ordner verwenden",
-      "noSubfolders": "Keine Unterordner"
+      "noSubfolders": "Keine Unterordner",
+      "podcastsNoFolders": "Podcasts brauchen keinen Ordner. Füge Sendungen in der Mediathek hinzu, sobald sie angelegt ist.",
+      "podcastsChecked": "Jede Stunde auf neue Folgen geprüft"
     },
     "people": {
       "title": "Personen",
@@ -724,6 +727,16 @@
       "save": "Schlüssel speichern",
       "remove": "Gespeicherten Schlüssel entfernen",
       "saved": "Gespeichert. Matinee ergänzt jetzt Poster und Details."
+    },
+    "podcastIndex": {
+      "title": "Podcast-Suche",
+      "intro": "Die Podcast-Suche nutzt Podcast Index, ein freies und offenes Verzeichnis. Einen kostenlosen API-Schlüssel und das Secret bekommst du auf <site>api.podcastindex.org</site>. Sendungen lassen sich auch ohne über ihre Feed-Adresse hinzufügen.",
+      "using": "Verwendet den Schlüssel, der auf {{hint}} endet.",
+      "none": "Noch kein Schlüssel, daher fügen alle Sendungen über ihre Feed-Adresse hinzu.",
+      "key": "API-Schlüssel",
+      "secret": "API-Secret",
+      "save": "Schlüssel speichern",
+      "remove": "Schlüssel entfernen"
     },
     "connect": {
       "title": "Matinee Connect",

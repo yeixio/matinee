@@ -592,14 +592,17 @@
         "movies": "Filem",
         "tv": "Rancangan TV",
         "music": "Muzik",
-        "audiobooks": "Buku audio"
+        "audiobooks": "Buku audio",
+        "podcasts": "Podcast"
       },
       "type": "Jenis",
       "folders": "Folder",
       "up": "Naik satu folder",
       "added": "Ditambah",
       "useFolder": "Gunakan folder ini",
-      "noSubfolders": "Tiada subfolder"
+      "noSubfolders": "Tiada subfolder",
+      "podcastsNoFolders": "Podcast tidak memerlukan folder. Tambah rancangan dari pustaka setelah ia dicipta.",
+      "podcastsChecked": "Episod baharu disemak setiap jam"
     },
     "people": {
       "title": "Orang",
@@ -720,6 +723,16 @@
       "save": "Simpan kunci",
       "remove": "Buang kunci yang disimpan",
       "saved": "Disimpan. Matinee sedang melengkapkan poster dan butiran."
+    },
+    "podcastIndex": {
+      "title": "Carian podcast",
+      "intro": "Carian podcast menggunakan Podcast Index, direktori yang bebas dan terbuka. Dapatkan kunci dan rahsia API percuma di <site>api.podcastindex.org</site>. Tanpanya, rancangan sentiasa boleh ditambah melalui alamat suapan.",
+      "using": "Menggunakan kunci yang berakhir dengan {{hint}}.",
+      "none": "Belum ada kunci, jadi rancangan ditambah melalui alamat suapan.",
+      "key": "Kunci API",
+      "secret": "Rahsia API",
+      "save": "Simpan kunci",
+      "remove": "Alih keluar kunci"
     },
     "connect": {
       "title": "Matinee Connect",

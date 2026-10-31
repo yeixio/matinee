@@ -596,14 +596,17 @@
         "movies": "Filmek",
         "tv": "Tévésorozatok",
         "music": "Zene",
-        "audiobooks": "Hangoskönyvek"
+        "audiobooks": "Hangoskönyvek",
+        "podcasts": "Podcastok"
       },
       "type": "Típus",
       "folders": "Mappák",
       "up": "Egy mappával feljebb",
       "added": "Hozzáadva",
       "useFolder": "Ez a mappa",
-      "noSubfolders": "Nincsenek almappák"
+      "noSubfolders": "Nincsenek almappák",
+      "podcastsNoFolders": "A podcastokhoz nem kell mappa. A könyvtár létrehozása után ott adhatsz hozzá műsorokat.",
+      "podcastsChecked": "Óránként ellenőrzi az új epizódokat"
     },
     "people": {
       "title": "Személyek",
@@ -724,6 +727,16 @@
       "save": "Kulcs mentése",
       "remove": "Mentett kulcs eltávolítása",
       "saved": "Mentve. A Matinee most kiegészíti a plakátokat és részleteket."
+    },
+    "podcastIndex": {
+      "title": "Podcastkeresés",
+      "intro": "A podcastkeresés a Podcast Indexet használja, amely szabad és nyílt katalógus. Ingyenes API-kulcsot és titkos kulcsot itt kaphatsz: <site>api.podcastindex.org</site>. Nélkülük is bármikor hozzáadhatók műsorok a hírcsatorna címével.",
+      "using": "A(z) {{hint}} végű kulcs van használatban.",
+      "none": "Még nincs kulcs, ezért a műsorokat a hírcsatorna címével lehet hozzáadni.",
+      "key": "API-kulcs",
+      "secret": "API titkos kulcs",
+      "save": "Kulcs mentése",
+      "remove": "Kulcs eltávolítása"
     },
     "connect": {
       "title": "Matinee Connect",

@@ -148,5 +148,20 @@
   "a_playlist_holds_up_to_5000_songs": "เพลย์ลิสต์หนึ่งรายการมีได้สูงสุด 5000 เพลง",
   "items_is_required": "ต้องระบุ items",
   "only_music_goes_on_a_playlist": "เพลย์ลิสต์ใส่ได้เฉพาะเพลง",
-  "playlist_not_found": "ไม่พบเพลย์ลิสต์"
+  "playlist_not_found": "ไม่พบเพลย์ลิสต์",
+  "podcast_index_couldnt_be_reached_to_check_the_key": "ติดต่อ Podcast Index เพื่อตรวจคีย์ไม่ได้",
+  "podcast_index_didnt_accept_that_key": "Podcast Index ไม่ยอมรับคีย์นั้น",
+  "podcast_index_didnt_accept_the_servers_key": "Podcast Index ไม่ยอมรับคีย์ของเซิร์ฟเวอร์",
+  "podcast_index_isnt_answering_right_now_try_again_later": "Podcast Index ไม่ตอบสนองในขณะนี้ ลองใหม่ภายหลัง",
+  "enter_both_the_api_key_and_the_api_secret": "ใส่ทั้งคีย์ API และซีเคร็ต API",
+  "enter_the_feeds_web_address_starting_with_https": "ใส่ที่อยู่เว็บของฟีด ซึ่งขึ้นต้นด้วย https://",
+  "not_a_podcast": "ไม่ใช่พอดแคสต์",
+  "not_a_podcast_library": "ไม่ใช่คลังพอดแคสต์",
+  "that_feed_has_no_episodes_to_listen_to": "ฟีดนั้นไม่มีตอนให้ฟัง",
+  "that_isnt_a_podcast_feed": "นั่นไม่ใช่ฟีดพอดแคสต์",
+  "that_isnt_an_opml_file": "นั่นไม่ใช่ไฟล์ OPML",
+  "the_feed_couldnt_be_read_check_the_address_and_try_again": "อ่านฟีดไม่ได้ ตรวจสอบที่อยู่แล้วลองอีกครั้ง",
+  "the_feed_couldnt_be_read_right_now": "ขณะนี้อ่านฟีดไม่ได้",
+  "the_file_is_too_big": "ไฟล์ใหญ่เกินไป",
+  "this_library_already_has_a_show_with_that_name": "คลังนี้มีรายการชื่อนี้อยู่แล้ว"
 }

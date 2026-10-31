@@ -148,5 +148,20 @@
   "a_playlist_holds_up_to_5000_songs": "en spellista rymmer högst 5000 låtar",
   "items_is_required": "items krävs",
   "only_music_goes_on_a_playlist": "bara musik kan läggas i en spellista",
-  "playlist_not_found": "spellistan hittades inte"
+  "playlist_not_found": "spellistan hittades inte",
+  "podcast_index_couldnt_be_reached_to_check_the_key": "Det gick inte att nå Podcast Index för att kontrollera nyckeln",
+  "podcast_index_didnt_accept_that_key": "Podcast Index godtog inte den nyckeln",
+  "podcast_index_didnt_accept_the_servers_key": "Podcast Index godtog inte serverns nyckel",
+  "podcast_index_isnt_answering_right_now_try_again_later": "Podcast Index svarar inte just nu. Försök igen senare.",
+  "enter_both_the_api_key_and_the_api_secret": "ange både API-nyckeln och API-hemligheten",
+  "enter_the_feeds_web_address_starting_with_https": "ange flödets webbadress, som börjar med https://",
+  "not_a_podcast": "inte en podd",
+  "not_a_podcast_library": "inte ett poddbibliotek",
+  "that_feed_has_no_episodes_to_listen_to": "det flödet har inga avsnitt att lyssna på",
+  "that_isnt_a_podcast_feed": "det är inte ett poddflöde",
+  "that_isnt_an_opml_file": "det är inte en OPML-fil",
+  "the_feed_couldnt_be_read_check_the_address_and_try_again": "flödet kunde inte läsas. Kontrollera adressen och försök igen.",
+  "the_feed_couldnt_be_read_right_now": "flödet kan inte läsas just nu",
+  "the_file_is_too_big": "filen är för stor",
+  "this_library_already_has_a_show_with_that_name": "det här biblioteket har redan ett program med det namnet"
 }

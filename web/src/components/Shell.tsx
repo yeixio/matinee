@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { BookHeadphones, CalendarClock, Clapperboard, Compass, Home, Inbox, LibraryBig, LogIn, LogOut, Music, Puzzle, Search, Settings, Tv } from 'lucide-react'
+import { BookHeadphones, CalendarClock, Clapperboard, Compass, Home, Inbox, LibraryBig, LogIn, LogOut, Music, Podcast, Puzzle, Search, Settings, Tv } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { matchPath, NavLink, Outlet, useLocation } from 'react-router-dom'
 import { api, type Library, type User } from '../api'
@@ -12,6 +12,7 @@ export function LibraryIcon({ kind, className = 'size-5' }: { kind: string; clas
   if (kind === 'tv') return <Tv className={className} />
   if (kind === 'music') return <Music className={className} />
   if (kind === 'audiobooks') return <BookHeadphones className={className} />
+  if (kind === 'podcasts') return <Podcast className={className} />
   if (kind === 'movies') return <Clapperboard className={className} />
   return <Puzzle className={className} /> // a plugin's kind
 }

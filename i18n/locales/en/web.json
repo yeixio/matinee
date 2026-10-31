@@ -596,14 +596,17 @@
         "movies": "Movies",
         "tv": "TV shows",
         "music": "Music",
-        "audiobooks": "Audiobooks"
+        "audiobooks": "Audiobooks",
+        "podcasts": "Podcasts"
       },
       "type": "Type",
       "folders": "Folders",
       "up": "Up one folder",
       "added": "Added",
       "useFolder": "Use this folder",
-      "noSubfolders": "No subfolders"
+      "noSubfolders": "No subfolders",
+      "podcastsNoFolders": "Podcasts don't need a folder. Add shows from the library once it's created.",
+      "podcastsChecked": "Checked for new episodes every hour"
     },
     "people": {
       "title": "People",
@@ -724,6 +727,16 @@
       "save": "Save key",
       "remove": "Remove saved key",
       "saved": "Saved. Matinee is filling in posters and details now."
+    },
+    "podcastIndex": {
+      "title": "Podcast search",
+      "intro": "Searching for podcasts uses Podcast Index, a free and open directory. Get a free API key and secret at <site>api.podcastindex.org</site>. Shows can always be added by their feed address without one.",
+      "using": "Using the key ending in {{hint}}.",
+      "none": "No key yet, so people add shows by their feed address.",
+      "key": "API key",
+      "secret": "API secret",
+      "save": "Save key",
+      "remove": "Remove key"
     },
     "connect": {
       "title": "Matinee Connect",

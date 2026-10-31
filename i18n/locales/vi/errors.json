@@ -148,5 +148,20 @@
   "a_playlist_holds_up_to_5000_songs": "một danh sách phát chứa tối đa 5000 bài hát",
   "items_is_required": "bắt buộc phải có items",
   "only_music_goes_on_a_playlist": "chỉ có nhạc mới vào được danh sách phát",
-  "playlist_not_found": "không tìm thấy danh sách phát"
+  "playlist_not_found": "không tìm thấy danh sách phát",
+  "podcast_index_couldnt_be_reached_to_check_the_key": "Không kết nối được Podcast Index để kiểm tra khóa",
+  "podcast_index_didnt_accept_that_key": "Podcast Index không chấp nhận khóa đó",
+  "podcast_index_didnt_accept_the_servers_key": "Podcast Index không chấp nhận khóa của máy chủ",
+  "podcast_index_isnt_answering_right_now_try_again_later": "Podcast Index hiện không phản hồi. Hãy thử lại sau.",
+  "enter_both_the_api_key_and_the_api_secret": "hãy nhập cả khóa API và mã bí mật API",
+  "enter_the_feeds_web_address_starting_with_https": "hãy nhập địa chỉ web của nguồn cấp, bắt đầu bằng https://",
+  "not_a_podcast": "không phải podcast",
+  "not_a_podcast_library": "không phải thư viện podcast",
+  "that_feed_has_no_episodes_to_listen_to": "nguồn cấp đó không có tập nào để nghe",
+  "that_isnt_a_podcast_feed": "đó không phải nguồn cấp podcast",
+  "that_isnt_an_opml_file": "đó không phải tệp OPML",
+  "the_feed_couldnt_be_read_check_the_address_and_try_again": "không đọc được nguồn cấp. Hãy kiểm tra địa chỉ rồi thử lại.",
+  "the_feed_couldnt_be_read_right_now": "hiện không đọc được nguồn cấp",
+  "the_file_is_too_big": "tệp quá lớn",
+  "this_library_already_has_a_show_with_that_name": "thư viện này đã có chương trình cùng tên"
 }

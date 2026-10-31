@@ -148,5 +148,20 @@
   "a_playlist_holds_up_to_5000_songs": "uma playlist comporta até 5000 músicas",
   "items_is_required": "items é obrigatório",
   "only_music_goes_on_a_playlist": "só música entra em uma playlist",
-  "playlist_not_found": "playlist não encontrada"
+  "playlist_not_found": "playlist não encontrada",
+  "podcast_index_couldnt_be_reached_to_check_the_key": "Não foi possível contatar o Podcast Index para verificar a chave",
+  "podcast_index_didnt_accept_that_key": "O Podcast Index não aceitou essa chave",
+  "podcast_index_didnt_accept_the_servers_key": "O Podcast Index não aceitou a chave do servidor",
+  "podcast_index_isnt_answering_right_now_try_again_later": "O Podcast Index não está respondendo agora. Tente mais tarde.",
+  "enter_both_the_api_key_and_the_api_secret": "informe a chave e o segredo de API",
+  "enter_the_feeds_web_address_starting_with_https": "informe o endereço web do feed, começando com https://",
+  "not_a_podcast": "não é um podcast",
+  "not_a_podcast_library": "não é uma biblioteca de podcasts",
+  "that_feed_has_no_episodes_to_listen_to": "esse feed não tem episódios para ouvir",
+  "that_isnt_a_podcast_feed": "isso não é um feed de podcast",
+  "that_isnt_an_opml_file": "isso não é um arquivo OPML",
+  "the_feed_couldnt_be_read_check_the_address_and_try_again": "não foi possível ler o feed. Confira o endereço e tente de novo.",
+  "the_feed_couldnt_be_read_right_now": "não é possível ler o feed agora",
+  "the_file_is_too_big": "o arquivo é grande demais",
+  "this_library_already_has_a_show_with_that_name": "esta biblioteca já tem um programa com esse nome"
 }

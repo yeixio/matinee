@@ -592,14 +592,17 @@
         "movies": "Phim",
         "tv": "Chương trình TV",
         "music": "Nhạc",
-        "audiobooks": "Sách nói"
+        "audiobooks": "Sách nói",
+        "podcasts": "Podcast"
       },
       "type": "Loại",
       "folders": "Thư mục",
       "up": "Lên một thư mục",
       "added": "Đã thêm",
       "useFolder": "Dùng thư mục này",
-      "noSubfolders": "Không có thư mục con"
+      "noSubfolders": "Không có thư mục con",
+      "podcastsNoFolders": "Podcast không cần thư mục. Hãy thêm chương trình từ thư viện sau khi tạo.",
+      "podcastsChecked": "Kiểm tra tập mới mỗi giờ"
     },
     "people": {
       "title": "Mọi người",
@@ -720,6 +723,16 @@
       "save": "Lưu khóa",
       "remove": "Xóa khóa đã lưu",
       "saved": "Đã lưu. Matinee đang bổ sung áp phích và chi tiết."
+    },
+    "podcastIndex": {
+      "title": "Tìm podcast",
+      "intro": "Tìm podcast dùng Podcast Index, một danh mục tự do và mở. Lấy khóa và mã bí mật API miễn phí tại <site>api.podcastindex.org</site>. Không có chúng, bạn vẫn luôn thêm được chương trình bằng địa chỉ nguồn cấp.",
+      "using": "Đang dùng khóa kết thúc bằng {{hint}}.",
+      "none": "Chưa có khóa, nên chương trình được thêm bằng địa chỉ nguồn cấp.",
+      "key": "Khóa API",
+      "secret": "Mã bí mật API",
+      "save": "Lưu khóa",
+      "remove": "Xóa khóa"
     },
     "connect": {
       "title": "Matinee Connect",

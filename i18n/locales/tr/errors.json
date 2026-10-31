@@ -148,5 +148,20 @@
   "a_playlist_holds_up_to_5000_songs": "bir çalma listesi en fazla 5000 şarkı alır",
   "items_is_required": "items gerekli",
   "only_music_goes_on_a_playlist": "çalma listesine yalnızca müzik eklenebilir",
-  "playlist_not_found": "çalma listesi bulunamadı"
+  "playlist_not_found": "çalma listesi bulunamadı",
+  "podcast_index_couldnt_be_reached_to_check_the_key": "Anahtarı denetlemek için Podcast Index’e ulaşılamadı",
+  "podcast_index_didnt_accept_that_key": "Podcast Index bu anahtarı kabul etmedi",
+  "podcast_index_didnt_accept_the_servers_key": "Podcast Index sunucunun anahtarını kabul etmedi",
+  "podcast_index_isnt_answering_right_now_try_again_later": "Podcast Index şu anda yanıt vermiyor. Daha sonra yeniden deneyin.",
+  "enter_both_the_api_key_and_the_api_secret": "API anahtarını ve gizli anahtarı girin",
+  "enter_the_feeds_web_address_starting_with_https": "akışın https:// ile başlayan web adresini girin",
+  "not_a_podcast": "bu bir podcast değil",
+  "not_a_podcast_library": "bu bir podcast kitaplığı değil",
+  "that_feed_has_no_episodes_to_listen_to": "bu akışta dinlenecek bölüm yok",
+  "that_isnt_a_podcast_feed": "bu bir podcast akışı değil",
+  "that_isnt_an_opml_file": "bu bir OPML dosyası değil",
+  "the_feed_couldnt_be_read_check_the_address_and_try_again": "akış okunamadı. Adresi kontrol edip yeniden deneyin.",
+  "the_feed_couldnt_be_read_right_now": "akış şu anda okunamıyor",
+  "the_file_is_too_big": "dosya çok büyük",
+  "this_library_already_has_a_show_with_that_name": "bu kitaplıkta bu adda bir program zaten var"
 }

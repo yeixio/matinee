@@ -148,5 +148,20 @@
   "a_playlist_holds_up_to_5000_songs": "playlist pojme nejvýše 5000 skladeb",
   "items_is_required": "items je povinné",
   "only_music_goes_on_a_playlist": "do playlistu patří jen hudba",
-  "playlist_not_found": "playlist nenalezen"
+  "playlist_not_found": "playlist nenalezen",
+  "podcast_index_couldnt_be_reached_to_check_the_key": "Podcast Index se nepodařilo kontaktovat kvůli kontrole klíče",
+  "podcast_index_didnt_accept_that_key": "Podcast Index tento klíč nepřijal",
+  "podcast_index_didnt_accept_the_servers_key": "Podcast Index nepřijal klíč serveru",
+  "podcast_index_isnt_answering_right_now_try_again_later": "Podcast Index teď neodpovídá. Zkuste to později.",
+  "enter_both_the_api_key_and_the_api_secret": "zadejte klíč API i tajný klíč API",
+  "enter_the_feeds_web_address_starting_with_https": "zadejte webovou adresu kanálu začínající https://",
+  "not_a_podcast": "není podcast",
+  "not_a_podcast_library": "není knihovna podcastů",
+  "that_feed_has_no_episodes_to_listen_to": "tento kanál nemá žádné díly k poslechu",
+  "that_isnt_a_podcast_feed": "to není podcastový kanál",
+  "that_isnt_an_opml_file": "to není soubor OPML",
+  "the_feed_couldnt_be_read_check_the_address_and_try_again": "kanál se nepodařilo načíst. Zkontrolujte adresu a zkuste to znovu.",
+  "the_feed_couldnt_be_read_right_now": "kanál teď nelze načíst",
+  "the_file_is_too_big": "soubor je příliš velký",
+  "this_library_already_has_a_show_with_that_name": "tato knihovna už má pořad s tímto názvem"
 }

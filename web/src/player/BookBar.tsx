@@ -59,14 +59,16 @@ export function BookBar() {
 
         <div className="hidden items-center justify-end gap-1 md:flex">
           <SpeedMenu s={s} />
-          <button
-            onClick={open}
-            className="rounded-full p-2 text-muted hover:bg-text/5 hover:text-text"
-            aria-label={t('common:books.chapters')}
-            title={t('common:books.chapters')}
-          >
-            <ListOrdered className="size-5" />
-          </button>
+          {!B.isEpisode(book) && (
+            <button
+              onClick={open}
+              className="rounded-full p-2 text-muted hover:bg-text/5 hover:text-text"
+              aria-label={t('common:books.chapters')}
+              title={t('common:books.chapters')}
+            >
+              <ListOrdered className="size-5" />
+            </button>
+          )}
           <VolumeControl s={s} />
           <button onClick={s.stop} className="rounded-full p-2 text-faint hover:bg-text/5 hover:text-text" aria-label={t('player.closePlayer')} title={t('player.closePlayer')}>
             <X className="size-5" />
@@ -84,7 +86,8 @@ export function BookControls({ s, compact = false, large = false }: { s: AudioSt
   const { time } = useBookTime()
   const lastChapter = !!s.book && B.nextChapterStart(s.book.chapters, time) === undefined
   const icon = large ? 'size-7' : 'size-5'
-  const chapterBtn = `rounded-full p-2 text-muted transition-colors hover:text-text disabled:opacity-30 ${compact ? 'hidden md:block' : ''}`
+  // A podcast episode has no chapters to go between.
+  const chapterBtn = `rounded-full p-2 text-muted transition-colors hover:text-text disabled:opacity-30 ${B.isEpisode(s.book) ? 'hidden' : compact ? 'hidden md:block' : ''}`
   const jump = (sec: number, Icon: typeof RotateCcw, label: string) => (
     <button onClick={() => s.skip(sec)} className="relative rounded-full p-2 text-muted transition-colors hover:text-text" aria-label={label} title={label}>
       <Icon className={large ? 'size-9' : 'size-7'} strokeWidth={1.5} />

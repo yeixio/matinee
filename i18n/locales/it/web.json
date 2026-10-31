@@ -600,14 +600,17 @@
         "movies": "Film",
         "tv": "Serie TV",
         "music": "Musica",
-        "audiobooks": "Audiolibri"
+        "audiobooks": "Audiolibri",
+        "podcasts": "Podcast"
       },
       "type": "Tipo",
       "folders": "Cartelle",
       "up": "Cartella superiore",
       "added": "Aggiunta",
       "useFolder": "Usa questa cartella",
-      "noSubfolders": "Nessuna sottocartella"
+      "noSubfolders": "Nessuna sottocartella",
+      "podcastsNoFolders": "I podcast non hanno bisogno di una cartella. Aggiungi i programmi dalla libreria dopo averla creata.",
+      "podcastsChecked": "Nuovi episodi controllati ogni ora"
     },
     "people": {
       "title": "Persone",
@@ -728,6 +731,16 @@
       "save": "Salva chiave",
       "remove": "Rimuovi la chiave salvata",
       "saved": "Salvata. Matinee sta completando locandine e dettagli."
+    },
+    "podcastIndex": {
+      "title": "Ricerca podcast",
+      "intro": "La ricerca podcast usa Podcast Index, un elenco libero e aperto. Ottieni una chiave e un secret API gratuiti su <site>api.podcastindex.org</site>. Senza, i programmi si possono sempre aggiungere con l’indirizzo del feed.",
+      "using": "Si usa la chiave che termina con {{hint}}.",
+      "none": "Ancora nessuna chiave, quindi i programmi si aggiungono con l’indirizzo del feed.",
+      "key": "Chiave API",
+      "secret": "Secret API",
+      "save": "Salva chiave",
+      "remove": "Rimuovi chiave"
     },
     "connect": {
       "title": "Matinee Connect",

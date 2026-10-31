@@ -9,6 +9,7 @@ import { LibraryIcon, useLibraries } from '../components/Shell'
 import { Button, EmptyState } from '../components/ui'
 import Books from './Books'
 import Music from './Music'
+import Podcasts from './Podcasts'
 import { activeCount, clearPicks, toSearchParams, useLibraryFilter } from '../filter'
 
 export default function Library() {
@@ -19,6 +20,8 @@ export default function Library() {
   if (lib?.kind === 'music') return <Music lib={lib} />
   // So do audiobooks: books, authors, series and narrators.
   if (lib?.kind === 'audiobooks') return <Books lib={lib} />
+  // And podcasts: shows, the latest episodes, and finding shows to add.
+  if (lib?.kind === 'podcasts') return <Podcasts lib={lib} />
   return <Titles id={id} lib={lib} />
 }
 

@@ -600,14 +600,17 @@
         "movies": "Filmes",
         "tv": "Séries de TV",
         "music": "Música",
-        "audiobooks": "Audiolivros"
+        "audiobooks": "Audiolivros",
+        "podcasts": "Podcasts"
       },
       "type": "Tipo",
       "folders": "Pastas",
       "up": "Subir uma pasta",
       "added": "Adicionada",
       "useFolder": "Usar esta pasta",
-      "noSubfolders": "Nenhuma subpasta"
+      "noSubfolders": "Nenhuma subpasta",
+      "podcastsNoFolders": "Podcasts não precisam de pasta. Adicione programas pela biblioteca depois de criá-la.",
+      "podcastsChecked": "Episódios novos verificados a cada hora"
     },
     "people": {
       "title": "Pessoas",
@@ -728,6 +731,16 @@
       "save": "Salvar chave",
       "remove": "Remover chave salva",
       "saved": "Salva. O Matinee está preenchendo pôsteres e detalhes agora."
+    },
+    "podcastIndex": {
+      "title": "Busca de podcasts",
+      "intro": "A busca de podcasts usa o Podcast Index, um diretório livre e aberto. Consiga uma chave e um segredo de API gratuitos em <site>api.podcastindex.org</site>. Sem eles, sempre dá para adicionar programas pelo endereço do feed.",
+      "using": "Usando a chave terminada em {{hint}}.",
+      "none": "Nenhuma chave ainda, então os programas são adicionados pelo endereço do feed.",
+      "key": "Chave de API",
+      "secret": "Segredo de API",
+      "save": "Salvar chave",
+      "remove": "Remover chave"
     },
     "connect": {
       "title": "Matinee Connect",

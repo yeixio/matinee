@@ -148,5 +148,20 @@
   "a_playlist_holds_up_to_5000_songs": "une playlist contient au plus 5000 morceaux",
   "items_is_required": "items est obligatoire",
   "only_music_goes_on_a_playlist": "seule la musique va dans une playlist",
-  "playlist_not_found": "playlist introuvable"
+  "playlist_not_found": "playlist introuvable",
+  "podcast_index_couldnt_be_reached_to_check_the_key": "Podcast Index est injoignable pour vérifier la clé",
+  "podcast_index_didnt_accept_that_key": "Podcast Index n’a pas accepté cette clé",
+  "podcast_index_didnt_accept_the_servers_key": "Podcast Index n’a pas accepté la clé du serveur",
+  "podcast_index_isnt_answering_right_now_try_again_later": "Podcast Index ne répond pas pour le moment. Réessayez plus tard.",
+  "enter_both_the_api_key_and_the_api_secret": "saisissez la clé et le secret d’API",
+  "enter_the_feeds_web_address_starting_with_https": "saisissez l’adresse web du flux, en commençant par https://",
+  "not_a_podcast": "ce n’est pas un podcast",
+  "not_a_podcast_library": "ce n’est pas une bibliothèque de podcasts",
+  "that_feed_has_no_episodes_to_listen_to": "ce flux n’a aucun épisode à écouter",
+  "that_isnt_a_podcast_feed": "ce n’est pas un flux de podcast",
+  "that_isnt_an_opml_file": "ce n’est pas un fichier OPML",
+  "the_feed_couldnt_be_read_check_the_address_and_try_again": "le flux n’a pas pu être lu. Vérifiez l’adresse et réessayez.",
+  "the_feed_couldnt_be_read_right_now": "le flux ne peut pas être lu pour le moment",
+  "the_file_is_too_big": "le fichier est trop volumineux",
+  "this_library_already_has_a_show_with_that_name": "cette bibliothèque a déjà une émission de ce nom"
 }

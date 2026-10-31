@@ -592,14 +592,17 @@
         "movies": "电影",
         "tv": "电视剧",
         "music": "音乐",
-        "audiobooks": "有声书"
+        "audiobooks": "有声书",
+        "podcasts": "播客"
       },
       "type": "类型",
       "folders": "文件夹",
       "up": "上一级文件夹",
       "added": "已添加",
       "useFolder": "使用此文件夹",
-      "noSubfolders": "没有子文件夹"
+      "noSubfolders": "没有子文件夹",
+      "podcastsNoFolders": "播客不需要文件夹。媒体库创建后，在那里添加节目。",
+      "podcastsChecked": "每小时检查新单集"
     },
     "people": {
       "title": "成员",
@@ -720,6 +723,16 @@
       "save": "保存密钥",
       "remove": "移除已保存的密钥",
       "saved": "已保存。Matinee 正在补全海报和详情。"
+    },
+    "podcastIndex": {
+      "title": "播客搜索",
+      "intro": "播客搜索使用 Podcast Index，一个自由开放的目录。在 <site>api.podcastindex.org</site> 免费获取 API 密钥和密文。没有它们，也随时可以用订阅源地址添加节目。",
+      "using": "正在使用以 {{hint}} 结尾的密钥。",
+      "none": "还没有密钥，所以节目通过订阅源地址添加。",
+      "key": "API 密钥",
+      "secret": "API 密文",
+      "save": "保存密钥",
+      "remove": "移除密钥"
     },
     "connect": {
       "title": "Matinee Connect",

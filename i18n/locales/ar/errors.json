@@ -148,5 +148,20 @@
   "a_playlist_holds_up_to_5000_songs": "تتسع قائمة التشغيل لـ 5000 أغنية كحد أقصى",
   "items_is_required": "items مطلوب",
   "only_music_goes_on_a_playlist": "الموسيقى فقط تُضاف إلى قائمة التشغيل",
-  "playlist_not_found": "لم يتم العثور على قائمة التشغيل"
+  "playlist_not_found": "لم يتم العثور على قائمة التشغيل",
+  "podcast_index_couldnt_be_reached_to_check_the_key": "تعذّر الوصول إلى Podcast Index للتحقق من المفتاح",
+  "podcast_index_didnt_accept_that_key": "لم يقبل Podcast Index هذا المفتاح",
+  "podcast_index_didnt_accept_the_servers_key": "لم يقبل Podcast Index مفتاح الخادم",
+  "podcast_index_isnt_answering_right_now_try_again_later": "لا يستجيب Podcast Index الآن. حاول لاحقًا.",
+  "enter_both_the_api_key_and_the_api_secret": "أدخل مفتاح API وسرّ API معًا",
+  "enter_the_feeds_web_address_starting_with_https": "أدخل عنوان الخلاصة على الويب، بدءًا بـ https://",
+  "not_a_podcast": "ليس بودكاست",
+  "not_a_podcast_library": "ليست مكتبة بودكاست",
+  "that_feed_has_no_episodes_to_listen_to": "لا تحتوي هذه الخلاصة على حلقات للاستماع",
+  "that_isnt_a_podcast_feed": "هذه ليست خلاصة بودكاست",
+  "that_isnt_an_opml_file": "هذا ليس ملف OPML",
+  "the_feed_couldnt_be_read_check_the_address_and_try_again": "تعذّرت قراءة الخلاصة. تحقّق من العنوان وحاول مجددًا.",
+  "the_feed_couldnt_be_read_right_now": "تتعذّر قراءة الخلاصة الآن",
+  "the_file_is_too_big": "الملف كبير جدًا",
+  "this_library_already_has_a_show_with_that_name": "في هذه المكتبة برنامج بهذا الاسم بالفعل"
 }

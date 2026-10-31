@@ -343,6 +343,10 @@ export type Item = {
   narrators?: string[]
   series?: string
   seriesIndex?: number
+  // Podcasts and their episodes: who makes the show (author); episodes: the
+  // show's title (its id is parentId) and the day it came out, YYYY-MM-DD.
+  podcast?: string
+  released?: string
   // True until the server has looked the item up online.
   pending?: boolean
   onWatchList?: boolean
@@ -639,7 +643,36 @@ export type ItemDetail = Item & {
   fileSize?: number
   details?: Details
   credits?: Credits
+  // Podcasts: their feed and whether the person follows them.
+  feed?: PodcastFeed
+  // Podcast episodes: their web page and type.
+  episode?: { link?: string; episodeType: 'full' | 'trailer' | 'bonus' }
 }
+
+export type PodcastFeed = {
+  feedUrl: string
+  link?: string // the show's website
+  refreshedAt: number // Unix seconds
+  error?: string // admins only: why the last check failed
+  following: boolean
+  unplayed: number
+}
+// A show in Podcast Index, with its id when a library has it already.
+export type DirectoryShow = {
+  indexId: number
+  title: string
+  author?: string
+  description?: string
+  image?: string
+  feedUrl: string
+  link?: string
+  language?: string
+  categories?: string[]
+  episodes?: number
+  itemId?: number
+}
+export type FollowedShow = Item & { unplayed: number }
+export type OpmlImport = { added: number; problems: { title: string; feedUrl: string; error: string }[] }
 
 export type AnalysisMode = 'gentle' | 'normal' | 'off'
 export type AnalysisStatus = {
@@ -820,6 +853,29 @@ export const api = {
   book: (id: number) => request<Book>('GET', `/api/v1/items/${id}/book`),
   series: (library: number) => request<BookGroup[]>('GET', `/api/v1/libraries/${library}/series`),
   narrators: (library: number) => request<BookGroup[]>('GET', `/api/v1/libraries/${library}/narrators`),
+  // Podcasts: finding shows in Podcast Index, adding them by their feed,
+  // following them, and moving them between apps as OPML.
+  podcastDirectory: (q: { q?: string; lang?: string }) =>
+    request<{ connected: boolean; shows: DirectoryShow[] }>('GET', `/api/v1/podcasts/directory?${new URLSearchParams(q as Record<string, string>)}`),
+  followedPodcasts: () => request<FollowedShow[]>('GET', '/api/v1/podcasts/following'),
+  addPodcast: (libraryId: number, feedUrl: string) => request<Item>('POST', '/api/v1/podcasts', { libraryId, feedUrl }),
+  deletePodcast: (id: number) => request<void>('DELETE', `/api/v1/podcasts/${id}`),
+  refreshPodcast: (id: number) => request<{ added: number }>('POST', `/api/v1/podcasts/${id}/refresh`),
+  followPodcast: (id: number, follow: boolean) => request<void>(follow ? 'PUT' : 'DELETE', `/api/v1/podcasts/${id}/follow`),
+  markPodcastPlayed: (id: number, played: boolean) => request<void>('PUT', `/api/v1/podcasts/${id}/played`, { played }),
+  importOpml: async (library: number, file: Blob) => {
+    const res = await fetch(`/api/v1/libraries/${library}/opml`, {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: { 'Content-Type': 'text/x-opml' },
+      body: file,
+    })
+    return response<OpmlImport>(res)
+  },
+  podcastIndex: () => request<{ connected: boolean; hint?: string }>('GET', '/api/v1/integrations/podcastindex'),
+  savePodcastIndex: (key: string, secret: string) =>
+    request<{ connected: boolean; hint?: string }>('PUT', '/api/v1/integrations/podcastindex', { key, secret }),
+  deletePodcastIndex: () => request<void>('DELETE', '/api/v1/integrations/podcastindex'),
   related: (id: number) => request<Related>('GET', `/api/v1/items/${id}/related`),
   next: (id: number) => request<NextUp>('GET', `/api/v1/items/${id}/next`),
   person: (id: number) => request<Person>('GET', `/api/v1/people/${id}`),
@@ -892,6 +948,7 @@ export const api = {
 export const imageUrl = (id: number, type: 'poster' | 'backdrop') => `/api/v1/items/${id}/image/${type}`
 export const personImageUrl = (id: number) => `/api/v1/people/${id}/image`
 export const fileUrl = (id: number) => `/api/v1/items/${id}/file`
+export const opmlUrl = (library: number) => `/api/v1/libraries/${library}/opml`
 export const pluginFileUrl = (plugin: string, path: string) =>
   `/api/v1/plugins/${encodeURIComponent(plugin)}/files/${path.split('/').map(encodeURIComponent).join('/')}`
 export const trailerFileUrl = (id: number, trailer: string) => `/api/v1/items/${id}/trailers/${encodeURIComponent(trailer)}/file`

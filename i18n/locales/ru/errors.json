@@ -148,5 +148,20 @@
   "a_playlist_holds_up_to_5000_songs": "в плейлисте может быть до 5000 песен",
   "items_is_required": "items обязателен",
   "only_music_goes_on_a_playlist": "в плейлист можно добавить только музыку",
-  "playlist_not_found": "плейлист не найден"
+  "playlist_not_found": "плейлист не найден",
+  "podcast_index_couldnt_be_reached_to_check_the_key": "Не удалось связаться с Podcast Index для проверки ключа",
+  "podcast_index_didnt_accept_that_key": "Podcast Index не принял этот ключ",
+  "podcast_index_didnt_accept_the_servers_key": "Podcast Index не принял ключ сервера",
+  "podcast_index_isnt_answering_right_now_try_again_later": "Podcast Index сейчас не отвечает. Попробуйте позже.",
+  "enter_both_the_api_key_and_the_api_secret": "введите ключ API и секрет API",
+  "enter_the_feeds_web_address_starting_with_https": "введите веб-адрес ленты, начинающийся с https://",
+  "not_a_podcast": "это не подкаст",
+  "not_a_podcast_library": "это не медиатека подкастов",
+  "that_feed_has_no_episodes_to_listen_to": "в этой ленте нет выпусков для прослушивания",
+  "that_isnt_a_podcast_feed": "это не лента подкаста",
+  "that_isnt_an_opml_file": "это не файл OPML",
+  "the_feed_couldnt_be_read_check_the_address_and_try_again": "не удалось прочитать ленту. Проверьте адрес и попробуйте снова.",
+  "the_feed_couldnt_be_read_right_now": "ленту сейчас не удаётся прочитать",
+  "the_file_is_too_big": "файл слишком большой",
+  "this_library_already_has_a_show_with_that_name": "в этой медиатеке уже есть шоу с таким названием"
 }

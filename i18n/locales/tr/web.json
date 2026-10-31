@@ -596,14 +596,17 @@
         "movies": "Filmler",
         "tv": "TV dizileri",
         "music": "Müzik",
-        "audiobooks": "Sesli kitaplar"
+        "audiobooks": "Sesli kitaplar",
+        "podcasts": "Podcast’ler"
       },
       "type": "Tür",
       "folders": "Klasörler",
       "up": "Bir klasör yukarı",
       "added": "Eklendi",
       "useFolder": "Bu klasörü kullan",
-      "noSubfolders": "Alt klasör yok"
+      "noSubfolders": "Alt klasör yok",
+      "podcastsNoFolders": "Podcast’ler klasöre ihtiyaç duymaz. Kitaplık oluşturulduktan sonra programları oradan ekleyin.",
+      "podcastsChecked": "Yeni bölümler saatte bir denetlenir"
     },
     "people": {
       "title": "Kişiler",
@@ -724,6 +727,16 @@
       "save": "Anahtarı kaydet",
       "remove": "Kayıtlı anahtarı kaldır",
       "saved": "Kaydedildi. Matinee şimdi afişleri ve ayrıntıları dolduruyor."
+    },
+    "podcastIndex": {
+      "title": "Podcast arama",
+      "intro": "Podcast arama, özgür ve açık bir dizin olan Podcast Index’i kullanır. Ücretsiz bir API anahtarı ve gizli anahtarı <site>api.podcastindex.org</site> adresinden alın. Bunlar olmadan da programlar her zaman akış adresiyle eklenebilir.",
+      "using": "{{hint}} ile biten anahtar kullanılıyor.",
+      "none": "Henüz anahtar yok; programlar akış adresiyle ekleniyor.",
+      "key": "API anahtarı",
+      "secret": "API gizli anahtarı",
+      "save": "Anahtarı kaydet",
+      "remove": "Anahtarı kaldır"
     },
     "connect": {
       "title": "Matinee Connect",
