@@ -78,14 +78,6 @@ Check (Test-Path (Join-Path $data "matinee.env")) "settings file"
 $run = (Get-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" -ErrorAction SilentlyContinue).Matinee
 Check ($run -like "*matinee-tray.exe*--background*") "starts at sign-in ($run)"
 
-# The icon, its menu and the welcome need a taskbar. Windows' Arm runners
-# don't run Explorer, so there the tray app waits for one and only the
-# server is checked; the x64 run checks the rest.
-if ([Win]::FindWindow("Shell_TrayWnd", $null) -eq [IntPtr]::Zero) {
-  Write-Host "no taskbar on this runner: not checking the icon, its menu or the welcome"
-  $noTaskbar = $true
-}
-if (-not $noTaskbar) {
 $welcome = [IntPtr]::Zero
 foreach ($i in 1..60) {
   $welcome = [Win]::FindWindow("#32770", "Welcome to Matinee")
@@ -102,7 +94,16 @@ Shot "welcome"
 Start-Process -FilePath (Join-Path $dir "matinee-tray.exe") -ArgumentList "--background" -Wait
 Check ((Get-Process matinee-tray).Count -eq 1) "a second start exits"
 
-# The tray menu, opened the way a click opens it.
+# The tray menu, opened the way a click opens it. On the windows-11-arm
+# runner the notification area turns down icons (Shell_NotifyIcon fails
+# with E_FAIL even for a blank one), which the tray app logs; there the
+# icon is reported rather than checked, and the x64 run checks it.
+$log = Get-Content (Join-Path $data "Logs\matinee.log") -Raw
+if ($env:PROCESSOR_ARCHITECTURE -eq "ARM64" -and $log -notmatch "tray: icon ready") {
+  Write-Host "::warning::this runner's notification area takes no icons: not checking the tray menu"
+  $noIcon = $true
+}
+if (-not $noIcon) {
 $tray = [Win]::FindWindow("SystrayClass", $null)
 Check ($tray -ne [IntPtr]::Zero) "tray icon window"
 $screen = [System.Windows.Forms.Screen]::PrimaryScreen.Bounds

@@ -120,16 +120,30 @@ func main() {
 			fmt.Fprintln(a.log, "tray: start at sign-in:", err)
 		}
 	}
+	// The welcome and the browser don't need the icon, so they come
+	// first: right after sign-in the taskbar can take a while.
+	if firstRun {
+		go messageBox("Welcome to Matinee",
+			"Matinee is running. Its ticket icon sits in the notification area at the bottom right of the screen, next to the clock.\n\n"+
+				"Your browser opens Matinee next, to create your account and add your movies, shows and music. "+
+				"Pick folders on this PC, or type a network share such as \\\\nas\\media.\n\n"+
+				"Matinee keeps running in the background and starts when you sign in. Right-click the icon to stop it or quit.",
+			mbInfo)
+	}
+	if firstRun || !*background {
+		go a.openWhenUp()
+	}
+
 	waitForTaskbar(func(err error) { fmt.Fprintln(a.log, "tray:", err) })
 
-	systray.Run(func() { a.ready(firstRun, *background) }, func() {
+	systray.Run(a.ready, func() {
 		a.server.Stop(stopTimeout)
 		fmt.Fprintln(a.log, "tray: quit")
 		logFile.Close()
 	})
 }
 
-func (a *app) ready(firstRun, background bool) {
+func (a *app) ready() {
 	fmt.Fprintln(a.log, "tray: icon ready")
 	systray.SetIcon(iconOff)
 	systray.SetTooltip("Matinee")
@@ -152,18 +166,6 @@ func (a *app) ready(firstRun, background bool) {
 
 	if startsAtLogin() {
 		login.Check()
-	}
-
-	if firstRun {
-		go messageBox("Welcome to Matinee",
-			"Matinee is running. Its ticket icon sits in the notification area at the bottom right of the screen, next to the clock.\n\n"+
-				"Your browser opens Matinee next, to create your account and add your movies, shows and music. "+
-				"Pick folders on this PC, or type a network share such as \\\\nas\\media.\n\n"+
-				"Matinee keeps running in the background and starts when you sign in. Right-click the icon to stop it or quit.",
-			mbInfo)
-	}
-	if firstRun || !background {
-		go a.openWhenUp()
 	}
 
 	go a.watch(status, startStop, restart)
