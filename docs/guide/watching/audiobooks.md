@@ -66,6 +66,10 @@ Apple TV and Android TV have a player made for books too. On a book's page, **Pl
 
 ![The audiobook player on a TV](../images/app-tv-book.webp)
 
+<!-- since: v0.1.7 -->
+From version 1.0.19 you can scrub through the book with the remote, as in the music player: press up from the buttons to the bar, then left and right go back or ahead 10 seconds (hold to go faster). Keep pressing to go past the end of a chapter into the next; the chapter's name and the time update as you go, and the book moves there once you stop. Select on the bar plays or pauses, and rewind and fast forward on the remote skip 10 seconds from anywhere in the player.
+<!-- /since -->
+
 The book keeps playing while you browse, like music: the book shows at the top of the screen next to the server's name, and selecting it opens the player again. The play/pause button on the remote plays and pauses it from any screen. Your place in the book is kept on the whole book's clock, so you can carry on from a phone or the browser.
 
 <!-- /since -->
