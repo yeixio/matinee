@@ -7,6 +7,23 @@ extension Color {
     static let matinee = Color(red: 1, green: 0x6a / 255, blue: 0x55 / 255)
 }
 
+/// Matinee's coral button, drawn by SwiftUI so it looks the same in every
+/// window state (and in the guide's pictures).
+struct CoralButtonStyle: ButtonStyle {
+    var large = false
+    @Environment(\.isEnabled) private var enabled
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .font(large ? .body.weight(.semibold) : .callout.weight(.semibold))
+            .foregroundStyle(Color(red: 0x1a / 255, green: 0x0e / 255, blue: 0x0c / 255))
+            .padding(.horizontal, large ? 14 : 12)
+            .padding(.vertical, large ? 8 : 5)
+            .background(RoundedRectangle(cornerRadius: large ? 8 : 6).fill(Color.matinee))
+            .opacity(enabled ? (configuration.isPressed ? 0.8 : 1) : 0.45)
+    }
+}
+
 struct MenuActions {
     var gettingStarted: () -> Void = {}
     var settings: () -> Void = {}
@@ -29,9 +46,7 @@ struct MenuView: View {
                 Label("Open Matinee", systemImage: "play.rectangle.fill")
                     .frame(maxWidth: .infinity)
             }
-            .buttonStyle(.borderedProminent)
-            .tint(.matinee)
-            .controlSize(.large)
+            .buttonStyle(CoralButtonStyle(large: true))
             .disabled(server.state != .running && server.state != .elsewhere)
 
             Divider()
@@ -167,7 +182,7 @@ struct WelcomeView: View {
             Step(number: 1, title: "Create your account") {
                 Text("Open Matinee in your browser and make the admin account. Anyone on your home network can watch without signing in unless you change that.")
                 Button("Open Matinee") { NSWorkspace.shared.open(server.localURL) }
-                    .buttonStyle(.borderedProminent).tint(.matinee)
+                    .buttonStyle(CoralButtonStyle())
                     .disabled(server.state != .running)
             }
 
@@ -189,7 +204,9 @@ struct WelcomeView: View {
             HStack {
                 Link("Read the guide", destination: URL(string: "https://matinee.yeix.io/docs/getting-started/mac/")!)
                 Spacer()
-                Button("Done", action: close).keyboardShortcut(.defaultAction)
+                Button("Done", action: close)
+                    .buttonStyle(CoralButtonStyle())
+                    .keyboardShortcut(.defaultAction)
             }
         }
         .padding(24)
