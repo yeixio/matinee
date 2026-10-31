@@ -753,6 +753,36 @@
       "perYear": "{{price}} évente",
       "perMonth": "{{price}} havonta",
       "paid": "A Yeix előre számláz. Bármikor lemondhatod; a kifizetett időszak végéig érvényes."
+    },
+    "groups": {
+      "you": {
+        "title": "Te",
+        "hint": "Nyelv, megjelenés, lejátszás és az eszközeid"
+      },
+      "libraries": {
+        "title": "Könyvtárak",
+        "hint": "Mappák, új fájlok, elemzés és importálás"
+      },
+      "people": {
+        "title": "Személyek és profilok",
+        "hint": "Fiókok, adminok és profilok"
+      },
+      "content": {
+        "title": "Tartalom",
+        "hint": "Plakátok, podcastkeresés, előzetesek és a Kezdőlap sorai"
+      },
+      "streaming": {
+        "title": "Streamelés",
+        "hint": "Átkódolás és minőség"
+      },
+      "network": {
+        "title": "Hálózat",
+        "hint": "Otthoni hálózat és távoli elérés"
+      },
+      "add-ons": {
+        "title": "Bővítmények",
+        "hint": "Radarr, Sonarr, Overseerr és pluginok"
+      }
     }
   },
   "language": {

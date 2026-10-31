@@ -749,6 +749,36 @@
       "perYear": "年額 {{price}}",
       "perMonth": "月額 {{price}}",
       "paid": "Yeix が前払いで請求します。いつでも解約でき、支払い済みの期間の終わりまで使えます。"
+    },
+    "groups": {
+      "you": {
+        "title": "あなた",
+        "hint": "言語、外観、再生、デバイス"
+      },
+      "libraries": {
+        "title": "ライブラリ",
+        "hint": "フォルダ、新しいファイル、解析、インポート"
+      },
+      "people": {
+        "title": "ユーザーとプロフィール",
+        "hint": "アカウント、管理者、プロフィール"
+      },
+      "content": {
+        "title": "コンテンツ",
+        "hint": "ポスター、ポッドキャスト検索、予告編、ホームの列"
+      },
+      "streaming": {
+        "title": "ストリーミング",
+        "hint": "トランスコードと画質"
+      },
+      "network": {
+        "title": "ネットワーク",
+        "hint": "ホームネットワークとリモートアクセス"
+      },
+      "add-ons": {
+        "title": "アドオン",
+        "hint": "Radarr、Sonarr、Overseerr、プラグイン"
+      }
     }
   },
   "language": {

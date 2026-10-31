@@ -146,7 +146,7 @@ function AddShows({ lib, me }: { lib: Library; me: User }) {
         <div className="rounded-xl border border-line/60 bg-surface/50 p-5 text-sm text-muted">
           <p>{t('common:podcasts.noDirectory')}</p>
           {me.isAdmin && (
-            <Link to="/settings#podcast-index" className="mt-2 inline-block font-medium text-accent hover:underline">
+            <Link to="/settings/content#podcast-index" className="mt-2 inline-block font-medium text-accent hover:underline">
               {t('common:podcasts.setUpDirectory')}
             </Link>
           )}

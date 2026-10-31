@@ -749,6 +749,36 @@
       "perYear": "每年 {{price}}",
       "perMonth": "每月 {{price}}",
       "paid": "由 Yeix 预先收费。可随时取消，有效期持续到已付费周期结束。"
+    },
+    "groups": {
+      "you": {
+        "title": "你",
+        "hint": "语言、外观、播放和你的设备"
+      },
+      "libraries": {
+        "title": "媒体库",
+        "hint": "文件夹、新文件、分析和导入"
+      },
+      "people": {
+        "title": "用户和档案",
+        "hint": "账户、管理员和档案"
+      },
+      "content": {
+        "title": "内容",
+        "hint": "海报、播客搜索、预告片和首页行"
+      },
+      "streaming": {
+        "title": "串流",
+        "hint": "转码和画质"
+      },
+      "network": {
+        "title": "网络",
+        "hint": "家庭网络和远程访问"
+      },
+      "add-ons": {
+        "title": "附加功能",
+        "hint": "Radarr、Sonarr、Overseerr 和插件"
+      }
     }
   },
   "language": {

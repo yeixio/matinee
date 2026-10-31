@@ -753,6 +753,36 @@
       "perYear": "{{price}} vuodessa",
       "perMonth": "{{price}} kuukaudessa",
       "paid": "Yeix laskuttaa etukäteen. Peru milloin vain; tilaus on voimassa maksetun jakson loppuun."
+    },
+    "groups": {
+      "you": {
+        "title": "Sinä",
+        "hint": "Kieli, ulkoasu, toisto ja laitteesi"
+      },
+      "libraries": {
+        "title": "Kirjastot",
+        "hint": "Kansiot, uudet tiedostot, analyysi ja tuonti"
+      },
+      "people": {
+        "title": "Ihmiset ja profiilit",
+        "hint": "Tilit, ylläpitäjät ja profiilit"
+      },
+      "content": {
+        "title": "Sisältö",
+        "hint": "Julisteet, podcast-haku, trailerit ja Kotinäkymän rivit"
+      },
+      "streaming": {
+        "title": "Suoratoisto",
+        "hint": "Transkoodaus ja laatu"
+      },
+      "network": {
+        "title": "Verkko",
+        "hint": "Kotiverkko ja etäkäyttö"
+      },
+      "add-ons": {
+        "title": "Lisäosat",
+        "hint": "Radarr, Sonarr, Overseerr ja laajennukset"
+      }
     }
   },
   "language": {

@@ -53,7 +53,7 @@ export default function Discover() {
         {me?.isAdmin ? (
           <>
             <p>{t('discover.connectIt')}</p>
-            <Link to="/settings">
+            <Link to="/settings/add-ons#overseerr">
               <Button variant="primary" className="mt-6">
                 {t('discover.openSettings')}
               </Button>

@@ -761,6 +761,36 @@
       "perYear": "{{price}} rocznie",
       "perMonth": "{{price}} miesięcznie",
       "paid": "Płatne z góry na rzecz Yeix. Możesz anulować w każdej chwili; działa do końca opłaconego okresu."
+    },
+    "groups": {
+      "you": {
+        "title": "Ty",
+        "hint": "Język, wygląd, odtwarzanie i Twoje urządzenia"
+      },
+      "libraries": {
+        "title": "Biblioteki",
+        "hint": "Foldery, nowe pliki, analiza i import"
+      },
+      "people": {
+        "title": "Osoby i profile",
+        "hint": "Konta, administratorzy i profile"
+      },
+      "content": {
+        "title": "Treści",
+        "hint": "Plakaty, wyszukiwanie podcastów, zwiastuny i rzędy na stronie głównej"
+      },
+      "streaming": {
+        "title": "Strumieniowanie",
+        "hint": "Transkodowanie i jakość"
+      },
+      "network": {
+        "title": "Sieć",
+        "hint": "Sieć domowa i dostęp zdalny"
+      },
+      "add-ons": {
+        "title": "Dodatki",
+        "hint": "Radarr, Sonarr, Overseerr i wtyczki"
+      }
     }
   },
   "language": {

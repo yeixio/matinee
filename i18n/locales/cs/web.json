@@ -761,6 +761,36 @@
       "perYear": "{{price}} ročně",
       "perMonth": "{{price}} měsíčně",
       "paid": "Účtuje Yeix předem. Zrušit můžeš kdykoli; platí do konce zaplaceného období."
+    },
+    "groups": {
+      "you": {
+        "title": "Vy",
+        "hint": "Jazyk, vzhled, přehrávání a vaše zařízení"
+      },
+      "libraries": {
+        "title": "Knihovny",
+        "hint": "Složky, nové soubory, analýza a import"
+      },
+      "people": {
+        "title": "Lidé a profily",
+        "hint": "Účty, správci a profily"
+      },
+      "content": {
+        "title": "Obsah",
+        "hint": "Plakáty, hledání podcastů, trailery a řady na Domů"
+      },
+      "streaming": {
+        "title": "Streamování",
+        "hint": "Překódování a kvalita"
+      },
+      "network": {
+        "title": "Síť",
+        "hint": "Domácí síť a vzdálený přístup"
+      },
+      "add-ons": {
+        "title": "Doplňky",
+        "hint": "Radarr, Sonarr, Overseerr a pluginy"
+      }
     }
   },
   "language": {

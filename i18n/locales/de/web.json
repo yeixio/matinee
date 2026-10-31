@@ -753,6 +753,36 @@
       "perYear": "{{price}} pro Jahr",
       "perMonth": "{{price}} pro Monat",
       "paid": "Wird im Voraus von Yeix abgerechnet. Jederzeit kündbar; es läuft bis zum Ende des bezahlten Zeitraums."
+    },
+    "groups": {
+      "you": {
+        "title": "Du",
+        "hint": "Sprache, Aussehen, Wiedergabe und deine Geräte"
+      },
+      "libraries": {
+        "title": "Mediatheken",
+        "hint": "Ordner, neue Dateien, Analyse und Import"
+      },
+      "people": {
+        "title": "Personen und Profile",
+        "hint": "Konten, Admins und Profile"
+      },
+      "content": {
+        "title": "Inhalte",
+        "hint": "Poster, Podcast-Suche, Trailer und Reihen auf der Startseite"
+      },
+      "streaming": {
+        "title": "Streaming",
+        "hint": "Transkodierung und Qualität"
+      },
+      "network": {
+        "title": "Netzwerk",
+        "hint": "Heimnetz und Fernzugriff"
+      },
+      "add-ons": {
+        "title": "Erweiterungen",
+        "hint": "Radarr, Sonarr, Overseerr und Plugins"
+      }
     }
   },
   "language": {

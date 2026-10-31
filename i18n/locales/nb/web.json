@@ -753,6 +753,36 @@
       "perYear": "{{price}} i året",
       "perMonth": "{{price}} i måneden",
       "paid": "Belastes på forskudd av Yeix. Si opp når du vil; det varer ut perioden du har betalt for."
+    },
+    "groups": {
+      "you": {
+        "title": "Deg",
+        "hint": "Språk, utseende, avspilling og enhetene dine"
+      },
+      "libraries": {
+        "title": "Biblioteker",
+        "hint": "Mapper, nye filer, analyse og import"
+      },
+      "people": {
+        "title": "Personer og profiler",
+        "hint": "Kontoer, administratorer og profiler"
+      },
+      "content": {
+        "title": "Innhold",
+        "hint": "Plakater, podkastsøk, trailere og rader på Hjem"
+      },
+      "streaming": {
+        "title": "Strømming",
+        "hint": "Omkoding og kvalitet"
+      },
+      "network": {
+        "title": "Nettverk",
+        "hint": "Hjemmenettverk og fjerntilgang"
+      },
+      "add-ons": {
+        "title": "Tillegg",
+        "hint": "Radarr, Sonarr, Overseerr og programtillegg"
+      }
     }
   },
   "language": {

@@ -102,6 +102,7 @@ function Screens() {
           <Route path="/box-set/:id" element={<BoxSetPage />} />
           <Route path="/row/:id" element={<RowPage />} />
           <Route path="/settings" element={grownUps(<Settings />)} />
+          <Route path="/settings/:group" element={grownUps(<Settings />)} />
           <Route path="/upcoming" element={grownUps(<Upcoming />)} />
           <Route path="/discover" element={grownUps(<Discover />)} />
           <Route path="/discover/row/:id" element={grownUps(<DiscoverRowPage />)} />

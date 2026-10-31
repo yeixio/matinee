@@ -30,7 +30,7 @@ export default function Upcoming() {
         {me?.isAdmin ? (
           <>
             <p>{t('upcoming.connect')}</p>
-            <Link to="/settings">
+            <Link to="/settings/add-ons#arr">
               <Button variant="primary" className="mt-6">
                 {t('upcoming.openSettings')}
               </Button>
