@@ -218,6 +218,47 @@ export const audiobooks = [
   },
 ]
 
+// Made-up podcasts for the guide (fake-podcasts.mjs serves their feeds and
+// stands in for Podcast Index). follow: added and followed in the demo;
+// the others only show up in the directory. Episodes are newest first:
+// [title, minutes, days ago, notes].
+export const podcasts = [
+  {
+    title: 'Projection Booth', author: 'Rosa Lind & Dev Arora', scene: 101, hue: 10, follow: true, categories: ['TV & Film', 'Film History'],
+    description: 'Two projectionists talk about the films they run, the ones they wish they could, and what goes wrong behind the little window.',
+    episodes: [
+      ['The Double Feature, Explained', 52, 1, 'Why two films for the price of one, and why it stopped.'],
+      ['Changeover Cues', 47, 8, 'The little circles in the corner of the frame, and the people who watched for them.'],
+      ['Intermission Music', 39, 15, 'What played while the lobby filled up, with a listener-picked top five.'],
+      ['Our Worst Nights in the Booth', 58, 22, 'Broken reels, a fire alarm and one very long Tuesday.'],
+      ['Seventy Millimeter', 44, 29, 'The big format, the big machines and the films still shot for them.'],
+    ],
+  },
+  {
+    title: 'Small Hours Radio', author: 'Paper Lanterns', scene: 106, hue: 40, follow: true, categories: ['Music', 'Music Commentary'],
+    description: 'A band on the road plays something quiet every week and tells the story of the song.',
+    episodes: [
+      ['Fog Lamp, Slowed Down', 24, 3, 'The B-side, played the way it was first written, on a borrowed piano.'],
+      ['Live from the Kettle Club', 31, 10, 'Three songs from a hundred-seat room in the rain.'],
+      ['Porch Light Demos', 27, 17, 'The tapes that became the album, with the mistakes left in.'],
+      ['A Bonus Hour of Requests', 61, 20, 'You asked, we played.', 'bonus'],
+    ],
+  },
+  {
+    title: 'The Lighthouse Hour', author: 'Coastline Audio', scene: 102, hue: 190, follow: false, categories: ['History', 'Society & Culture'],
+    description: 'Keepers, shipwrecks and the lights that guided them home, one lighthouse at a time.',
+    episodes: [
+      ['The Keeper Who Stayed', 41, 5, 'Forty winters on a rock, and the logbook she left behind.'],
+      ['Fog Signals', 36, 12, 'Horns, bells and cannons: how lighthouses talked when nobody could see them.'],
+      ['Season Two Starts Here', 3, 40, 'What is coming this season.', 'trailer'],
+    ],
+  },
+  { title: 'Night Shift Science', author: 'Orbit Academy Press', scene: 105, hue: 220, categories: ['Science', 'Astronomy'], description: 'Questions about the sky, answered after dark by people who stay up for a living.', episodes: [['Why the Moon Looks Bigger Low Down', 28, 2, '']] },
+  { title: 'Kitchen at the End of the Pier', author: 'Lighthouse Kitchen', scene: 109, hue: 330, categories: ['Arts', 'Food'], description: 'A chef, a fishing fleet and whatever came in on the boats this morning.', episodes: [['Mackerel Season', 33, 4, '']] },
+  { title: 'Drive-In Diaries', author: 'Cobalt Avenue', scene: 108, hue: 300, categories: ['TV & Film', 'Leisure'], description: 'Stories from the last drive-in theaters, told from the front seat.', episodes: [['Speaker Posts', 35, 6, '']] },
+  { title: 'Lantern Coast Mysteries', author: 'Mara Ellison', scene: 202, hue: 20, categories: ['Fiction', 'Drama'], description: 'An audio drama from the world of The Lantern Coast, a new chapter every fortnight.', episodes: [['Part One: The Drowned Tower', 45, 9, '']] },
+]
+
 export const keywords = [
   { id: 1, name: 'cinema' },
   { id: 2, name: 'island' },

@@ -15,6 +15,10 @@ Pick a username and a password of at least 8 characters, then **Create account**
 
 A library is a set of folders holding one kind of media: movies, TV shows, music or audiobooks. Most people have three or four, one of each.
 
+<!-- since: v0.1.7 -->
+A podcast library is the one kind without folders: its shows come from their feeds on the internet. See [Podcasts](/docs/watching/podcasts/).
+<!-- /since -->
+
 1. Open **Settings** (the gear at the top right) and find **Libraries**.
 2. Click **Add a library** and pick the type.
 3. Give it a name, or keep the suggested one. This is the name in the top bar.

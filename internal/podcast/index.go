@@ -21,8 +21,9 @@ import (
 // anyone can use with a free key. Matinee asks it only to find shows: once
 // someone follows one, its episodes come from the show's own feed.
 
-// IndexBase is Podcast Index's API.
-const IndexBase = "https://api.podcastindex.org/api/1.0"
+// IndexBase is Podcast Index's API. The docs' screenshot server points it
+// at a stand-in at build time.
+var IndexBase = "https://api.podcastindex.org/api/1.0"
 
 // IndexKey is an admin's Podcast Index key and secret, from
 // api.podcastindex.org. They stay on the server.

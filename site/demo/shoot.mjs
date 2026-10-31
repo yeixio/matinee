@@ -10,7 +10,8 @@
 
 import { chromium } from 'playwright'
 import { capture, desktop, phone, sleep } from './capture.mjs'
-import { addLibraries, admin, api, origin, overseerrURL, setUp, startServer } from './server.mjs'
+import { feedURL } from './fake-podcasts.mjs'
+import { addLibraries, admin, api, origin, overseerrURL, podcastsPort, setUp, startServer } from './server.mjs'
 
 const { media, stop } = await startServer()
 const browser = await chromium.launch()
@@ -207,6 +208,43 @@ try {
       await sleep(1200)
       await shot(page, 'book-player')
       await page.keyboard.press('Escape')
+    }
+
+    // Podcasts: three shows from the stand-in host, two followed, one
+    // episode part-way through and one played (see docs/guide/watching/podcasts.md).
+    if (['podcasts', 'podcast', 'podcast-player', 'podcasts-add', 'podcast-search'].some(wanted)) {
+      const close = page.getByRole('button', { name: 'Close player' })
+      if (await close.count()) await close.first().click()
+      const lib = await api(token, 'POST', '/libraries', { name: 'Podcasts', kind: 'podcasts', paths: [] })
+      await api(token, 'PUT', '/integrations/podcastindex', { key: 'DEMOKEY0000000000000', secret: 'demo-secret-0000000000000000000000000000' })
+      const shows = []
+      for (const i of [0, 1, 2]) shows.push(await api(token, 'POST', '/podcasts', { libraryId: lib.id, feedUrl: feedURL(podcastsPort, i) }))
+      await api(token, 'DELETE', `/podcasts/${shows[2].id}/follow`)
+      const booth = await children(shows[0].id)
+      await api(token, 'PUT', `/items/${booth[1].id}/progress`, { positionMs: 18 * 60000 })
+      await api(token, 'PUT', `/items/${booth[2].id}/progress`, { positionMs: 0, played: true })
+
+      await page.goto(`${origin}/library/${lib.id}`)
+      await sleep(1000)
+      await shot(page, 'podcasts')
+      await page.goto(`${origin}/item/${shows[0].id}`)
+      await page.getByRole('button', { name: 'Resume' }).or(page.getByRole('button', { name: 'Play latest' })).first().click()
+      await page.evaluate(() => window.scrollTo(0, 0))
+      await sleep(1500)
+      await shot(page, 'podcast')
+      await page.getByRole('button', { name: 'Open the player' }).click()
+      await page.getByRole('button', { name: 'Show notes' }).click().catch(() => {})
+      await sleep(1200)
+      await shot(page, 'podcast-player')
+      await page.keyboard.press('Escape')
+      await page.getByRole('button', { name: 'Close player' }).first().click()
+      await page.goto(`${origin}/library/${lib.id}?view=add`)
+      await sleep(1000)
+      await shot(page, 'podcasts-add')
+      await page.getByRole('searchbox').or(page.getByPlaceholder('Search podcasts')).first().fill('film')
+      await page.keyboard.press('Enter')
+      await sleep(1200)
+      await shot(page, 'podcast-search')
     }
     await page.context().close()
   }

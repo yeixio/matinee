@@ -32,6 +32,7 @@ Matinee is a fast, free and open source, self-hosted media server for your movie
 - **Picks up where you left off.** Resume points, watched marks, Continue Watching and Recently Added, per person.
 - **Collections.** Smart collections fill themselves from rules, using the same filters as the library pages ("unwatched 80s action", "kids movies under 90 minutes"), and follow each person's own watched state. Keep collections by hand too, find box sets like a trilogy filled in from TMDB, and pin any collection to Home or a library page as a row, sorted by any field or shuffled daily. New servers start with Recently added, Unwatched and Short enough for tonight.
 - **Music** with a player that keeps going while you browse.
+- **Podcasts** straight from each show's own feed, with no account anywhere. Find shows with a free [Podcast Index](https://podcastindex.org) key or by feed address, bring them over from another app with OPML, follow the ones you like and get their new episodes on Home. Episodes play in the audiobook player, with speed, skips, a sleep timer and your place saved. [Guide](https://matinee.yeix.io/docs/watching/podcasts/).
 - **Knows what's in every file.** In the background, Matinee slowly reads each file for its resolution, HDR (HDR10, HDR10+, HLG, Dolby Vision), codecs and bitrates, audio channels, Atmos and languages, and subtitles. The essentials show as badges on each title and as library filters (4K, HDR, Dolby Atmos…); everything else is under File details. It reads one file at a time at the lowest priority, waits while someone's watching something being converted, and looks at a file again only when it changes, so network shares stay responsive. Admins can see its progress, or slow it down or pause it, under Settings.
 - **Posters and descriptions** from [TMDB](https://www.themoviedb.org/) with a free API key ([how to get one](#posters-and-descriptions-tmdb-key)). Your own artwork files always win, and everything else works without a key.
 - **Search** as you type.
@@ -221,6 +222,7 @@ Every setting is a flag or an environment variable.
 | `MATINEE_MEDIA_ROOT` | `/` | Folder the library picker opens in |
 | `MATINEE_MUSICBRAINZ` | `true` | Look up artists and albums on MusicBrainz, with covers from the Cover Art Archive and artist photos from Wikidata. No key needed. Set `false` to use only local artwork |
 | `MATINEE_OPENLIBRARY` | `true` | Look up audiobook covers and author photos on Open Library. No key needed. Set `false` to use only local artwork |
+| `MATINEE_PODCASTS_HOME_NETWORK` | `false` | Let podcast feeds and episodes come from addresses on the home network too, for shows you host yourself. Off, Matinee only fetches them from the internet |
 | `MATINEE_WIKIDATA` | `true` | Look up the awards movies and shows won or were nominated for on Wikidata. No key needed. Set `false` to skip awards |
 | `MATINEE_SCAN_INTERVAL` | `15m` | How often libraries are rescanned in full; `0` turns it off |
 | `MATINEE_WATCH_POLL_INTERVAL` | `30s` | How often folders on network shares are checked for new files. A big library on a slow share is checked less often by itself, so the share stays responsive |
@@ -266,7 +268,7 @@ One Go binary with the web player embedded. It talks to SQLite or PostgreSQL and
 ```
 cmd/matinee          entry point
 internal/api         HTTP API, auth, serves the web player
-internal/scan        library scanning; library kinds (movies, tv, music) register here
+internal/scan        library scanning; library kinds (movies, tv, music, audiobooks, podcasts) register here
 internal/analyze     background media analysis (HDR, codecs, audio, languages)
 internal/metadata    online metadata providers (TMDB)
 internal/artwork     poster and backdrop serving and caching

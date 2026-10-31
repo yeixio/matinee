@@ -7,6 +7,7 @@ import { execFileSync, spawn } from 'node:child_process'
 import { mkdirSync, rmSync } from 'node:fs'
 import path from 'node:path'
 import { startFakeOverseerr } from './fake-overseerr.mjs'
+import { startFakePodcasts } from './fake-podcasts.mjs'
 import { startFakeTMDB } from './fake-tmdb.mjs'
 import { makeLibrary } from './library.mjs'
 
@@ -15,6 +16,8 @@ export const cache = path.join(import.meta.dirname, '.cache')
 const tmdbPort = 7399
 /** Where the stand-in Overseerr listens, for Settings → Overseerr. */
 export const overseerrURL = 'http://127.0.0.1:7400'
+/** Where the stand-in podcast host and Podcast Index listen. */
+export const podcastsPort = 7401
 export const port = 7398
 export const origin = `http://127.0.0.1:${port}`
 export const admin = { username: 'sam', password: 'popcorn-and-ice' }
@@ -42,16 +45,17 @@ export async function api(token, method, p, body) {
 }
 
 export async function startServer() {
-  const { media, images } = await makeLibrary(cache)
+  const { media, images, episode } = await makeLibrary(cache)
   const fake = await startFakeTMDB(tmdbPort, images)
   const overseerr = await startFakeOverseerr(Number(new URL(overseerrURL).port))
+  const podcasts = await startFakePodcasts(podcastsPort, images, episode)
 
   const bin = path.join(cache, 'matinee')
   const pkg = 'github.com/yeixio/matinee/internal/metadata'
   // The server embeds the web player, so build it from this checkout first.
   execFileSync('pnpm', ['install', '--frozen-lockfile'], { cwd: path.join(repo, 'web'), stdio: 'inherit' })
   execFileSync('pnpm', ['build'], { cwd: path.join(repo, 'web'), stdio: 'inherit' })
-  execFileSync('go', ['build', '-o', bin, '-ldflags', `-X github.com/yeixio/matinee/internal/version.Version=${version()} -X ${pkg}.TMDBBaseURL=http://127.0.0.1:${tmdbPort}/3 -X ${pkg}.TMDBImageURL=http://127.0.0.1:${tmdbPort}/t/p/ -X github.com/yeixio/matinee/internal/overseerr.imageBase=http://127.0.0.1:${tmdbPort}/t/p/`, './cmd/matinee'], { cwd: repo, stdio: 'inherit' })
+  execFileSync('go', ['build', '-o', bin, '-ldflags', `-X github.com/yeixio/matinee/internal/version.Version=${version()} -X ${pkg}.TMDBBaseURL=http://127.0.0.1:${tmdbPort}/3 -X ${pkg}.TMDBImageURL=http://127.0.0.1:${tmdbPort}/t/p/ -X github.com/yeixio/matinee/internal/overseerr.imageBase=http://127.0.0.1:${tmdbPort}/t/p/ -X github.com/yeixio/matinee/internal/podcast.IndexBase=http://127.0.0.1:${podcastsPort}/api/1.0`, './cmd/matinee'], { cwd: repo, stdio: 'inherit' })
 
   const data = path.join(cache, 'data')
   rmSync(data, { recursive: true, force: true })
@@ -69,6 +73,8 @@ export async function startServer() {
       MATINEE_SCAN_INTERVAL: '0',
       MATINEE_MEDIA_ROOT: media,
       MATINEE_SERVER_NAME: 'Home theater',
+      // The stand-in podcast host is on this machine.
+      MATINEE_PODCASTS_HOME_NETWORK: 'true',
       MATINEE_PLUGIN_CATALOG: `http://127.0.0.1:${tmdbPort}/plugins.json`,
     },
     stdio: ['ignore', 'ignore', process.env.DEBUG ? 'inherit' : 'ignore'],
@@ -77,6 +83,7 @@ export async function startServer() {
     proc.kill()
     fake.close()
     overseerr.close()
+    podcasts.close()
   }
   for (let i = 0; ; i++) {
     try {
