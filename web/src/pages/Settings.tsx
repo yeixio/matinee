@@ -13,6 +13,7 @@ import { Appearance } from '../components/ThemePicker'
 import { LibraryIcon, useLibraries } from '../components/Shell'
 import { Button, Field, inputClass } from '../components/ui'
 import { Integrations } from './Integrations'
+import { ImportSettings } from '../components/ImportSettings'
 import i18n, { formatLocale } from '../i18n'
 import { DeviceIcon } from './Link'
 
@@ -26,6 +27,7 @@ export default function Settings() {
       {me && <Appearance me={me} />}
       {me && <Playback />}
       {me?.isAdmin && <Libraries />}
+      {me?.isAdmin && <ImportSettings />}
       {me?.isAdmin && <NewFiles />}
       {me?.isAdmin && <MediaAnalysis />}
       {me?.isAdmin && <TMDBKey />}
@@ -217,7 +219,7 @@ function AddLibrary({ onDone }: { onDone: () => void }) {
 }
 
 // Browse the server's folders, since the media lives on the server, not this device.
-function FolderPicker({ picked, onPick }: { picked: string[]; onPick: (path: string) => void }) {
+export function FolderPicker({ picked, onPick }: { picked: string[]; onPick: (path: string) => void }) {
   // Empty asks the server for its media root (MATINEE_MEDIA_ROOT), so the picker opens on the media.
   const { t } = useTranslation()
   const [path, setPath] = useState('')

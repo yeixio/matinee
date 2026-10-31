@@ -1,5 +1,5 @@
-import { useQuery } from '@tanstack/react-query'
-import { Check, ChevronRight, LoaderCircle, Play } from 'lucide-react'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { Check, ChevronRight, ImageOff, LoaderCircle, Play } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import { api, pendingRefetch, type Item, type ItemDetail, type User } from '../api'
@@ -178,10 +178,27 @@ function Header({ item, kids }: { item: ItemDetail; kids?: Item[] }) {
             <ReportProblem item={item} />
             <MoreDetailsButton item={item} />
             <FileDetailsButton item={item} user={me} />
+            {me?.isAdmin && item.posterTag && <ResetPosterButton item={item} />}
           </div>
         </div>
       </div>
     </section>
+  )
+}
+
+// A poster of its own, such as one imported from another media server, can
+// give way to the automatic one.
+function ResetPosterButton({ item }: { item: ItemDetail }) {
+  const { t } = useTranslation()
+  const qc = useQueryClient()
+  const reset = useMutation({
+    mutationFn: () => api.resetCover(item.id),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ['item', item.id] }),
+  })
+  return (
+    <Button variant="ghost" icon={<ImageOff className="size-4" />} disabled={reset.isPending} onClick={() => reset.mutate()}>
+      {t('item.resetPoster')}
+    </Button>
   )
 }
 

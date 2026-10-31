@@ -428,7 +428,8 @@ func (s *Store) UpsertFile(ctx context.Context, it Item) (int64, error) {
 			facts = excluded.facts, plugin_data = excluded.plugin_data, chapters = excluded.chapters,
 			track_artist = excluded.track_artist,
 			media_info = NULL, media_tags = NULL, -- the file changed; analyzed again soon
-			poster = COALESCE(excluded.poster, items.poster), backdrop = COALESCE(excluded.backdrop, items.backdrop)
+			poster = CASE WHEN items.poster LIKE 'chosen:%' THEN items.poster ELSE COALESCE(excluded.poster, items.poster) END,
+			backdrop = COALESCE(excluded.backdrop, items.backdrop)
 		RETURNING id`,
 		it.LibraryID, it.ParentID, it.Kind, it.Title, SortTitle(it.Title), it.Year, it.IndexNumber, it.DiscNumber,
 		it.Path, it.Size, it.Mtime, it.DurationMs, nullStr(it.Container), nullStr(it.VideoCodec), nullStr(it.AudioCodec),
