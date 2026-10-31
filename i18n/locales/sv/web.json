@@ -596,14 +596,17 @@
         "movies": "Filmer",
         "tv": "TV-serier",
         "music": "Musik",
-        "audiobooks": "Ljudböcker"
+        "audiobooks": "Ljudböcker",
+        "podcasts": "Poddar"
       },
       "type": "Typ",
       "folders": "Mappar",
       "up": "Upp en mapp",
       "added": "Tillagd",
       "useFolder": "Använd den här mappen",
-      "noSubfolders": "Inga undermappar"
+      "noSubfolders": "Inga undermappar",
+      "podcastsNoFolders": "Poddar behöver ingen mapp. Lägg till program från biblioteket när det har skapats.",
+      "podcastsChecked": "Kollas efter nya avsnitt varje timme"
     },
     "people": {
       "title": "Personer",
@@ -724,6 +727,16 @@
       "save": "Spara nyckel",
       "remove": "Ta bort sparad nyckel",
       "saved": "Sparad. Matinee fyller nu i affischer och detaljer."
+    },
+    "podcastIndex": {
+      "title": "Poddsökning",
+      "intro": "Poddsökningen använder Podcast Index, en fri och öppen katalog. Skaffa en gratis API-nyckel och hemlighet på <site>api.podcastindex.org</site>. Utan dem kan program alltid läggas till med flödesadressen.",
+      "using": "Använder nyckeln som slutar på {{hint}}.",
+      "none": "Ingen nyckel än, så program läggs till med flödesadressen.",
+      "key": "API-nyckel",
+      "secret": "API-hemlighet",
+      "save": "Spara nyckel",
+      "remove": "Ta bort nyckel"
     },
     "connect": {
       "title": "Matinee Connect",

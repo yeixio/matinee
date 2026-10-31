@@ -600,14 +600,17 @@
         "movies": "Films",
         "tv": "Séries TV",
         "music": "Musique",
-        "audiobooks": "Livres audio"
+        "audiobooks": "Livres audio",
+        "podcasts": "Podcasts"
       },
       "type": "Type",
       "folders": "Dossiers",
       "up": "Dossier parent",
       "added": "Ajouté",
       "useFolder": "Utiliser ce dossier",
-      "noSubfolders": "Aucun sous-dossier"
+      "noSubfolders": "Aucun sous-dossier",
+      "podcastsNoFolders": "Les podcasts n’ont pas besoin de dossier. Ajoutez des émissions depuis la bibliothèque une fois créée.",
+      "podcastsChecked": "Nouveaux épisodes vérifiés toutes les heures"
     },
     "people": {
       "title": "Personnes",
@@ -728,6 +731,16 @@
       "save": "Enregistrer la clé",
       "remove": "Supprimer la clé enregistrée",
       "saved": "Enregistrée. Matinee complète maintenant les affiches et les détails."
+    },
+    "podcastIndex": {
+      "title": "Recherche de podcasts",
+      "intro": "La recherche de podcasts utilise Podcast Index, un annuaire libre et ouvert. Obtenez une clé et un secret d’API gratuits sur <site>api.podcastindex.org</site>. Sans eux, on peut toujours ajouter une émission avec l’adresse de son flux.",
+      "using": "Utilise la clé se terminant par {{hint}}.",
+      "none": "Pas encore de clé : les émissions s’ajoutent avec l’adresse de leur flux.",
+      "key": "Clé d’API",
+      "secret": "Secret d’API",
+      "save": "Enregistrer la clé",
+      "remove": "Retirer la clé"
     },
     "connect": {
       "title": "Matinee Connect",

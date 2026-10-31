@@ -596,14 +596,17 @@
         "movies": "Filmer",
         "tv": "TV-serier",
         "music": "Musikk",
-        "audiobooks": "Lydbøker"
+        "audiobooks": "Lydbøker",
+        "podcasts": "Podkaster"
       },
       "type": "Type",
       "folders": "Mapper",
       "up": "Opp én mappe",
       "added": "Lagt til",
       "useFolder": "Bruk denne mappen",
-      "noSubfolders": "Ingen undermapper"
+      "noSubfolders": "Ingen undermapper",
+      "podcastsNoFolders": "Podkaster trenger ingen mappe. Legg til programmer fra biblioteket når det er opprettet.",
+      "podcastsChecked": "Sjekkes for nye episoder hver time"
     },
     "people": {
       "title": "Personer",
@@ -724,6 +727,16 @@
       "save": "Lagre nøkkel",
       "remove": "Fjern lagret nøkkel",
       "saved": "Lagret. Matinee fyller nå inn plakater og detaljer."
+    },
+    "podcastIndex": {
+      "title": "Podkastsøk",
+      "intro": "Podkastsøk bruker Podcast Index, en fri og åpen katalog. Skaff en gratis API-nøkkel og hemmelighet på <site>api.podcastindex.org</site>. Uten dem kan programmer alltid legges til med feedadressen.",
+      "using": "Bruker nøkkelen som slutter på {{hint}}.",
+      "none": "Ingen nøkkel ennå, så programmer legges til med feedadressen.",
+      "key": "API-nøkkel",
+      "secret": "API-hemmelighet",
+      "save": "Lagre nøkkel",
+      "remove": "Fjern nøkkel"
     },
     "connect": {
       "title": "Matinee Connect",

@@ -27,6 +27,9 @@ type Scanner struct {
 	AfterScan func(ctx context.Context, lib store.Library)
 	// Added runs for each file a scan adds, e.g. to tell plugins.
 	Added func(ctx context.Context, lib store.Library, itemID int64)
+	// Refresh brings a library of a Remote kind, such as podcasts, up to
+	// date; nil leaves them as they are.
+	Refresh func(ctx context.Context, lib store.Library) (added, failed int, err error)
 
 	mu      sync.Mutex
 	running map[int64]bool
@@ -106,6 +109,14 @@ func (s *Scanner) scan(ctx context.Context, lib store.Library, paths []string) (
 	kind, ok := KindByName(lib.Kind)
 	if !ok {
 		return Stats{}, fmt.Errorf("unknown library kind %q", lib.Kind)
+	}
+	if _, ok := kind.(Remote); ok {
+		if s.Refresh == nil || paths != nil {
+			return Stats{}, nil
+		}
+		start := time.Now()
+		added, failed, err := s.Refresh(ctx, lib)
+		return Stats{Added: added, Failed: failed, Took: time.Since(start)}, err
 	}
 	if sk, ok := kind.(Session); ok {
 		defer sk.BeginScan(ctx, lib)()

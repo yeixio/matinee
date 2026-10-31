@@ -1,7 +1,7 @@
 // Audiobook playback, as plain functions the player and its tests share. A
 // book plays as one long listen across its parts (files); every time here
 // is on the book's own clock, in seconds, which runs across the parts.
-import type { Book, BookChapter } from '../api'
+import type { Book, BookChapter, Item } from '../api'
 
 // Speeds the speed menu offers.
 export const SPEEDS = [0.75, 0.9, 1, 1.1, 1.2, 1.3, 1.5, 1.75, 2, 2.5, 3]
@@ -89,3 +89,18 @@ export function saveSpeed(user: number | undefined, speed: number) {
 export function speedLabel(speed: number, locale?: string): string {
   return `${speed.toLocaleString(locale, { maximumFractionDigits: 2 })}×`
 }
+
+// A podcast episode plays like a book of one part with no chapters, so it
+// gets the book player: speed, skipping back and ahead, the sleep timer and
+// its place kept on the server. The bar names the show where a book names
+// its author.
+export function episodeBook(ep: Item): Book {
+  return {
+    ...ep,
+    author: ep.podcast ?? ep.author,
+    parts: [{ ...ep, startMs: 0, mimeType: '' }],
+    chapters: [],
+  }
+}
+
+export const isEpisode = (b?: Pick<Item, 'kind'>) => b?.kind === 'podcastEpisode'

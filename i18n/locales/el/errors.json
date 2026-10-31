@@ -148,5 +148,20 @@
   "a_playlist_holds_up_to_5000_songs": "μια λίστα αναπαραγωγής χωράει έως 5000 τραγούδια",
   "items_is_required": "το items είναι υποχρεωτικό",
   "only_music_goes_on_a_playlist": "μόνο μουσική μπαίνει σε λίστα αναπαραγωγής",
-  "playlist_not_found": "η λίστα αναπαραγωγής δεν βρέθηκε"
+  "playlist_not_found": "η λίστα αναπαραγωγής δεν βρέθηκε",
+  "podcast_index_couldnt_be_reached_to_check_the_key": "Δεν ήταν δυνατή η σύνδεση με το Podcast Index για έλεγχο του κλειδιού",
+  "podcast_index_didnt_accept_that_key": "Το Podcast Index δεν δέχτηκε αυτό το κλειδί",
+  "podcast_index_didnt_accept_the_servers_key": "Το Podcast Index δεν δέχτηκε το κλειδί του διακομιστή",
+  "podcast_index_isnt_answering_right_now_try_again_later": "Το Podcast Index δεν απαντά αυτή τη στιγμή. Δοκιμάστε αργότερα.",
+  "enter_both_the_api_key_and_the_api_secret": "εισαγάγετε το κλειδί και το μυστικό API",
+  "enter_the_feeds_web_address_starting_with_https": "εισαγάγετε τη διεύθυνση της ροής, που αρχίζει με https://",
+  "not_a_podcast": "δεν είναι podcast",
+  "not_a_podcast_library": "δεν είναι βιβλιοθήκη podcast",
+  "that_feed_has_no_episodes_to_listen_to": "αυτή η ροή δεν έχει επεισόδια για ακρόαση",
+  "that_isnt_a_podcast_feed": "αυτό δεν είναι ροή podcast",
+  "that_isnt_an_opml_file": "αυτό δεν είναι αρχείο OPML",
+  "the_feed_couldnt_be_read_check_the_address_and_try_again": "η ροή δεν διαβάστηκε. Ελέγξτε τη διεύθυνση και δοκιμάστε ξανά.",
+  "the_feed_couldnt_be_read_right_now": "η ροή δεν μπορεί να διαβαστεί αυτή τη στιγμή",
+  "the_file_is_too_big": "το αρχείο είναι πολύ μεγάλο",
+  "this_library_already_has_a_show_with_that_name": "αυτή η βιβλιοθήκη έχει ήδη εκπομπή με αυτό το όνομα"
 }

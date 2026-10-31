@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { ChevronLeft, Folder, FolderOpen, Image as ImageIcon, KeyRound, Monitor, Plus, RefreshCw, Trash2, UserPlus, X } from 'lucide-react'
-import { useState, type FormEvent } from 'react'
+import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { api, type ConnectStatus, type LibraryKind, type PlaybackPrefs, type RemoteStatus, type User } from '../api'
@@ -29,6 +29,7 @@ export default function Settings() {
       {me?.isAdmin && <NewFiles />}
       {me?.isAdmin && <MediaAnalysis />}
       {me?.isAdmin && <TMDBKey />}
+      {me?.isAdmin && <PodcastIndexKey />}
       {me?.isAdmin && <Users me={me} />}
       {me?.isAdmin && <Profiles />}
       {me?.isAdmin && <HomeNetwork />}
@@ -96,7 +97,7 @@ function Libraries() {
             </span>
             <div className="min-w-0 flex-1">
               <div className="font-medium">{l.name}</div>
-              <div className="truncate text-xs text-muted">{l.paths.join(' · ')}</div>
+              <div className="truncate text-xs text-muted">{l.kind === 'podcasts' ? t('settings.libraries.podcastsChecked') : l.paths.join(' · ')}</div>
               {l.watch.length > 0 && <div className="truncate text-xs text-faint">{watchSummary(l, settings?.watchPollSeconds || 30)}</div>}
               {findingArt.includes(l.id) && <div className="text-xs text-accent">{t('settings.libraries.findingArtwork', { name: l.name })}</div>}
             </div>
@@ -133,7 +134,7 @@ function Libraries() {
   )
 }
 
-const builtInKinds: LibraryKind[] = [{ name: 'movies' }, { name: 'tv' }, { name: 'music' }, { name: 'audiobooks' }]
+const builtInKinds: LibraryKind[] = [{ name: 'movies' }, { name: 'tv' }, { name: 'music' }, { name: 'audiobooks' }, { name: 'podcasts' }]
 
 function AddLibrary({ onDone }: { onDone: () => void }) {
   const { t } = useTranslation()
@@ -181,6 +182,10 @@ function AddLibrary({ onDone }: { onDone: () => void }) {
       <Field label={t('profileSettings.name')}>
         <input className={inputClass} value={name} onChange={(e) => setName(e.target.value)} placeholder={kindName(kind)} />
       </Field>
+      {/* Podcasts come from their feeds, not from folders. */}
+      {kind === 'podcasts' ? (
+        <p className="text-sm text-muted">{t('settings.libraries.podcastsNoFolders')}</p>
+      ) : (
       <Field label={t('settings.libraries.folders')}>
         {/* The picker stays put and chosen folders appear below it, so nothing new lands
             under the finger after a tap (a quick second tap used to hit a chip's remove button). */}
@@ -197,12 +202,13 @@ function AddLibrary({ onDone }: { onDone: () => void }) {
           ))}
         </div>
       </Field>
+      )}
       {create.error && <p className="text-sm text-danger">{create.error.message}</p>}
       <div className="flex justify-end gap-2">
         <Button type="button" variant="ghost" onClick={onDone}>
           {t('cancel')}
         </Button>
-        <Button variant="primary" disabled={paths.length === 0 || create.isPending}>
+        <Button variant="primary" disabled={(kind !== 'podcasts' && paths.length === 0) || create.isPending}>
           {t('home.addLibrary')}
         </Button>
       </div>
@@ -812,6 +818,72 @@ function TMDBKey() {
           {tmdb?.source === 'settings' && (
             <Button type="button" variant="ghost" disabled={save.isPending} onClick={() => save.mutate('')}>
               {t('settings.tmdb.remove')}
+            </Button>
+          )}
+        </div>
+      </form>
+    </section>
+  )
+}
+
+// Podcast Index finds shows to add to podcast libraries. Its free key and
+// secret come from api.podcastindex.org; they stay on the server.
+function PodcastIndexKey() {
+  const { t } = useTranslation()
+  const qc = useQueryClient()
+  const { data } = useQuery({ queryKey: ['podcastIndex'], queryFn: api.podcastIndex })
+  const [key, setKey] = useState('')
+  const [secret, setSecret] = useState('')
+  const save = useMutation({
+    mutationFn: () => api.savePodcastIndex(key, secret),
+    onSuccess: (v) => {
+      qc.setQueryData(['podcastIndex'], v)
+      qc.invalidateQueries({ queryKey: ['podcasts', 'directory'] })
+      setKey('')
+      setSecret('')
+    },
+  })
+  const remove = useMutation({
+    mutationFn: api.deletePodcastIndex,
+    onSuccess: () => {
+      qc.setQueryData(['podcastIndex'], { connected: false })
+      qc.invalidateQueries({ queryKey: ['podcasts', 'directory'] })
+    },
+  })
+  const submit = (e: FormEvent) => {
+    e.preventDefault()
+    save.mutate()
+  }
+  // A podcast library's Add page links here.
+  const here = useRef<HTMLElement>(null)
+  useEffect(() => {
+    if (window.location.hash === '#podcast-index') here.current?.scrollIntoView()
+  }, [])
+  return (
+    <section ref={here} id="podcast-index" className="scroll-mt-24 space-y-4">
+      <h2 className="text-lg font-semibold">{t('settings.podcastIndex.title')}</h2>
+      <p className="text-sm text-muted">
+        <Trans
+          i18nKey="settings.podcastIndex.intro"
+          components={{ site: <a href="https://api.podcastindex.org/" target="_blank" rel="noreferrer" className="text-accent underline" /> }}
+        />
+      </p>
+      <form onSubmit={submit} className="space-y-3 rounded-xl border border-line/60 bg-surface/50 p-4">
+        <p className="text-sm">{data?.connected ? t('settings.podcastIndex.using', { hint: data.hint ?? '…' }) : t('settings.podcastIndex.none')}</p>
+        <Field label={t('settings.podcastIndex.key')}>
+          <input autoComplete="off" spellCheck={false} className={inputClass} value={key} onChange={(e) => setKey(e.target.value)} />
+        </Field>
+        <Field label={t('settings.podcastIndex.secret')}>
+          <input type="password" autoComplete="off" spellCheck={false} className={inputClass} value={secret} onChange={(e) => setSecret(e.target.value)} />
+        </Field>
+        {(save.error || remove.error) && <p className="text-sm text-danger">{(save.error ?? remove.error)?.message}</p>}
+        <div className="flex flex-wrap gap-2">
+          <Button type="submit" variant="primary" icon={<KeyRound className="size-4" />} disabled={!key.trim() || !secret.trim() || save.isPending}>
+            {t('settings.podcastIndex.save')}
+          </Button>
+          {data?.connected && (
+            <Button type="button" variant="ghost" disabled={remove.isPending} onClick={() => remove.mutate()}>
+              {t('settings.podcastIndex.remove')}
             </Button>
           )}
         </div>

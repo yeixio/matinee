@@ -600,14 +600,17 @@
         "movies": "Filme",
         "tv": "Seriale TV",
         "music": "Muzică",
-        "audiobooks": "Audiobookuri"
+        "audiobooks": "Audiobookuri",
+        "podcasts": "Podcasturi"
       },
       "type": "Tip",
       "folders": "Dosare",
       "up": "Un dosar mai sus",
       "added": "Adăugat",
       "useFolder": "Folosește acest dosar",
-      "noSubfolders": "Fără subdosare"
+      "noSubfolders": "Fără subdosare",
+      "podcastsNoFolders": "Podcasturile nu au nevoie de un dosar. Adaugă emisiuni din bibliotecă după ce o creezi.",
+      "podcastsChecked": "Episoadele noi sunt verificate în fiecare oră"
     },
     "people": {
       "title": "Persoane",
@@ -728,6 +731,16 @@
       "save": "Salvează cheia",
       "remove": "Elimină cheia salvată",
       "saved": "Salvată. Matinee completează acum afișele și detaliile."
+    },
+    "podcastIndex": {
+      "title": "Căutare de podcasturi",
+      "intro": "Căutarea de podcasturi folosește Podcast Index, un catalog liber și deschis. Obține gratuit o cheie și un secret API pe <site>api.podcastindex.org</site>. Și fără ele, emisiunile se pot adăuga oricând după adresa fluxului.",
+      "using": "Se folosește cheia care se termină în {{hint}}.",
+      "none": "Încă nu există cheie, așa că emisiunile se adaugă după adresa fluxului.",
+      "key": "Cheie API",
+      "secret": "Secret API",
+      "save": "Salvează cheia",
+      "remove": "Elimină cheia"
     },
     "connect": {
       "title": "Matinee Connect",

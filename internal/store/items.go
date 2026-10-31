@@ -58,7 +58,12 @@ type Item struct {
 	Narrators   []string `json:"narrators,omitempty"`
 	Series      string   `json:"series,omitempty"`
 	SeriesIndex *float64 `json:"seriesIndex,omitempty"`
-	OnWatchList bool     `json:"onWatchList,omitempty"`
+	// For podcasts and their episodes: who makes the show, and for an
+	// episode the show's title (the show's id is ParentID) and the day it
+	// came out, as 2006-01-02.
+	Podcast     string `json:"podcast,omitempty"`
+	Released    string `json:"released,omitempty"`
+	OnWatchList bool   `json:"onWatchList,omitempty"`
 	// Genres of a movie or show, from its online match.
 	Genres []string `json:"genres,omitempty"`
 	// MediaTags sums up what the background analysis found, such as 4k,
@@ -115,15 +120,18 @@ const itemCols = `
 	COALESCE(i.genres, ''),
 	CASE WHEN i.kind = 'episode' THEN (SELECT se.parent_id FROM items se WHERE se.id = i.parent_id) END,
 	COALESCE(i.facts, ''), COALESCE(i.plugin_data, ''),
-	CASE WHEN i.kind IN ('album', 'book') THEN (SELECT ar.title FROM items ar WHERE ar.id = i.parent_id)
+	CASE WHEN i.kind = 'podcast' THEN (SELECT pc.author FROM podcasts pc WHERE pc.item_id = i.id)
+		WHEN i.kind = 'podcastEpisode' THEN (SELECT pc.author FROM podcasts pc WHERE pc.item_id = i.parent_id)
+		WHEN i.kind IN ('album', 'book') THEN (SELECT ar.title FROM items ar WHERE ar.id = i.parent_id)
 		WHEN i.track_artist IS NOT NULL THEN i.track_artist
 		WHEN i.kind IN ('track', 'part') THEN (SELECT ar.title FROM items al JOIN items ar ON ar.id = al.parent_id WHERE al.id = i.parent_id) END,
 	CASE WHEN i.kind IN ('album', 'book') THEN i.parent_id
 		WHEN i.track_artist IS NOT NULL THEN (SELECT MIN(ar.id) FROM items ar
 			WHERE ar.library_id = i.library_id AND ar.kind = 'artist' AND ar.parent_id IS NULL AND ar.title = i.track_artist)
 		WHEN i.kind IN ('track', 'part') THEN (SELECT al.parent_id FROM items al WHERE al.id = i.parent_id) END,
-	CASE WHEN i.kind IN ('track', 'part') THEN (SELECT al.title FROM items al WHERE al.id = i.parent_id) END,
-	COALESCE(i.narrators, ''), COALESCE(i.series, ''), i.series_index`
+	CASE WHEN i.kind IN ('track', 'part', 'podcastEpisode') THEN (SELECT al.title FROM items al WHERE al.id = i.parent_id) END,
+	COALESCE(i.narrators, ''), COALESCE(i.series, ''), i.series_index,
+	CASE WHEN i.kind = 'podcastEpisode' THEN COALESCE(i.released, '') ELSE '' END`
 
 const itemFrom = ` FROM (SELECT CAST(? AS BIGINT) AS id) me CROSS JOIN items i LEFT JOIN progress p ON p.item_id = i.id AND p.user_id = me.id`
 
@@ -148,7 +156,7 @@ func scanItem(r scanner) (Item, error) {
 		&it.ChildCount, &it.PositionMs, &it.Played,
 		&it.Overview, &rating, &it.Poster, &it.Backdrop, &tmdb, &it.MetaAt,
 		&showTitle, &seasonIdx, &it.OnWatchList, &tags, &genres, &showID, &facts, &data,
-		&artist, &artistID, &album, &narrators, &it.Series, &seriesIdx)
+		&artist, &artistID, &album, &narrators, &it.Series, &seriesIdx, &it.Released)
 	if err != nil {
 		return it, err
 	}
@@ -167,12 +175,15 @@ func scanItem(r scanner) (Item, error) {
 		it.TMDBID = &tmdb.Int64
 	}
 	it.ShowTitle, it.SeasonIndex, it.showID = showTitle.String, intPtr(seasonIdx), showID.Int64
-	if it.Kind == "book" || it.Kind == "part" {
+	switch it.Kind {
+	case "podcast", "podcastEpisode":
+		it.Author, it.Podcast = artist.String, album.String
+	case "book", "part":
 		it.Author, it.Book = artist.String, album.String
 		if artistID.Valid {
 			it.AuthorID = &artistID.Int64
 		}
-	} else {
+	default:
 		it.Artist, it.Album = artist.String, album.String
 		if artistID.Valid {
 			it.ArtistID = &artistID.Int64
@@ -268,11 +279,13 @@ func (s *Store) TopLevel(ctx context.Context, userID, libraryID int64) ([]Item, 
 }
 
 // Children lists seasons of a show, episodes of a season, albums of an
-// artist, tracks of an album, books of an author or parts of a book.
+// artist, tracks of an album, books of an author, parts of a book or
+// episodes of a podcast.
 func (s *Store) Children(ctx context.Context, userID, parentID int64) ([]Item, error) {
 	// An author's books go series by series, each in reading order.
+	// A podcast's episodes go newest first.
 	items, err := s.queryItems(ctx, "i.parent_id = ?",
-		"COALESCE(i.disc_number, 0), COALESCE(i.index_number, 0), COALESCE(i.series, ''), COALESCE(i.series_index, 0), i.sort_title", userID, parentID)
+		"COALESCE((SELECT -pe.published FROM podcast_episodes pe WHERE pe.item_id = i.id), 0), COALESCE(i.disc_number, 0), COALESCE(i.index_number, 0), COALESCE(i.series, ''), COALESCE(i.series_index, 0), i.sort_title", userID, parentID)
 	if err != nil {
 		return nil, err
 	}
@@ -314,11 +327,11 @@ func (s *Store) Search(ctx context.Context, userID int64, q string, limit int) (
 	}
 	if s.db.dialect == postgres {
 		return s.queryItems(ctx,
-			"(to_tsvector('simple', i.title) @@ to_tsquery('simple', ?) OR "+translated+") AND i.kind NOT IN ('season', 'part')",
+			"(to_tsvector('simple', i.title) @@ to_tsquery('simple', ?) OR "+translated+") AND i.kind NOT IN ('season', 'part', 'podcastEpisode')",
 			"i.sort_title LIMIT ?", append(append([]any{userID, strings.Join(words, ":* & ") + ":*"}, args...), limit)...)
 	}
 	return s.queryItems(ctx,
-		"(i.id IN (SELECT rowid FROM items_fts WHERE items_fts MATCH ?) OR "+translated+") AND i.kind NOT IN ('season', 'part')",
+		"(i.id IN (SELECT rowid FROM items_fts WHERE items_fts MATCH ?) OR "+translated+") AND i.kind NOT IN ('season', 'part', 'podcastEpisode')",
 		"i.sort_title LIMIT ?", append(append([]any{userID, `"` + strings.Join(words, `"* "`) + `"*`}, args...), limit)...)
 }
 

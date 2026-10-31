@@ -148,5 +148,20 @@
   "a_playlist_holds_up_to_5000_songs": "playlist memuat paling banyak 5000 lagu",
   "items_is_required": "items wajib diisi",
   "only_music_goes_on_a_playlist": "hanya musik yang bisa masuk playlist",
-  "playlist_not_found": "playlist tidak ditemukan"
+  "playlist_not_found": "playlist tidak ditemukan",
+  "podcast_index_couldnt_be_reached_to_check_the_key": "Podcast Index tidak bisa dihubungi untuk memeriksa kunci",
+  "podcast_index_didnt_accept_that_key": "Podcast Index tidak menerima kunci itu",
+  "podcast_index_didnt_accept_the_servers_key": "Podcast Index tidak menerima kunci server",
+  "podcast_index_isnt_answering_right_now_try_again_later": "Podcast Index sedang tidak merespons. Coba lagi nanti.",
+  "enter_both_the_api_key_and_the_api_secret": "masukkan kunci API dan rahasia API",
+  "enter_the_feeds_web_address_starting_with_https": "masukkan alamat web feed, diawali https://",
+  "not_a_podcast": "bukan podcast",
+  "not_a_podcast_library": "bukan pustaka podcast",
+  "that_feed_has_no_episodes_to_listen_to": "feed itu tidak punya episode untuk didengarkan",
+  "that_isnt_a_podcast_feed": "itu bukan feed podcast",
+  "that_isnt_an_opml_file": "itu bukan file OPML",
+  "the_feed_couldnt_be_read_check_the_address_and_try_again": "feed tidak bisa dibaca. Periksa alamatnya lalu coba lagi.",
+  "the_feed_couldnt_be_read_right_now": "feed tidak bisa dibaca saat ini",
+  "the_file_is_too_big": "file terlalu besar",
+  "this_library_already_has_a_show_with_that_name": "pustaka ini sudah punya acara dengan nama itu"
 }

@@ -383,6 +383,36 @@ var migrations = []string{
 	"ALTER TABLE items ADD COLUMN mb_group TEXT",
 	"ALTER TABLE items ADD COLUMN tags_read INTEGER NOT NULL DEFAULT 0",
 	"UPDATE items SET meta_at = NULL WHERE kind = 'album' AND poster IS NULL",
+	// 63–66: podcasts (see podcasts.go). A show's feed, each episode's id in
+	// it, and the shows each person follows.
+	`CREATE TABLE podcasts (
+		item_id       BIGINT PRIMARY KEY REFERENCES items(id) ON DELETE CASCADE,
+		feed_url      TEXT NOT NULL,
+		link          TEXT NOT NULL DEFAULT '',
+		author        TEXT NOT NULL DEFAULT '',
+		language      TEXT NOT NULL DEFAULT '',
+		etag          TEXT NOT NULL DEFAULT '',
+		last_modified TEXT NOT NULL DEFAULT '',
+		refreshed_at  BIGINT NOT NULL DEFAULT 0,
+		error         TEXT NOT NULL DEFAULT ''
+	)`,
+	`CREATE TABLE podcast_episodes (
+		item_id      BIGINT PRIMARY KEY REFERENCES items(id) ON DELETE CASCADE,
+		podcast_id   BIGINT NOT NULL REFERENCES items(id) ON DELETE CASCADE,
+		guid         TEXT NOT NULL,
+		published    BIGINT NOT NULL DEFAULT 0, -- Unix seconds; 0 when the feed doesn't say
+		mime_type    TEXT NOT NULL DEFAULT '',
+		link         TEXT NOT NULL DEFAULT '',
+		episode_type TEXT NOT NULL DEFAULT 'full', -- full, trailer or bonus
+		UNIQUE (podcast_id, guid)
+	)`,
+	"CREATE INDEX podcast_episodes_published ON podcast_episodes(published)",
+	`CREATE TABLE podcast_follows (
+		user_id     BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+		item_id     BIGINT NOT NULL REFERENCES items(id) ON DELETE CASCADE,
+		followed_at BIGINT NOT NULL, -- milliseconds
+		PRIMARY KEY (user_id, item_id)
+	)`,
 }
 
 func now() int64 { return time.Now().Unix() }

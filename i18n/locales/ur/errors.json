@@ -148,5 +148,20 @@
   "a_playlist_holds_up_to_5000_songs": "ایک پلے لسٹ میں زیادہ سے زیادہ 5000 گانے آ سکتے ہیں",
   "items_is_required": "items ضروری ہے",
   "only_music_goes_on_a_playlist": "پلے لسٹ میں صرف موسیقی شامل ہو سکتی ہے",
-  "playlist_not_found": "پلے لسٹ نہیں ملی"
+  "playlist_not_found": "پلے لسٹ نہیں ملی",
+  "podcast_index_couldnt_be_reached_to_check_the_key": "کلید جانچنے کے لیے Podcast Index سے رابطہ نہیں ہو سکا",
+  "podcast_index_didnt_accept_that_key": "Podcast Index نے وہ کلید قبول نہیں کی",
+  "podcast_index_didnt_accept_the_servers_key": "Podcast Index نے سرور کی کلید قبول نہیں کی",
+  "podcast_index_isnt_answering_right_now_try_again_later": "Podcast Index ابھی جواب نہیں دے رہا۔ بعد میں دوبارہ کوشش کریں۔",
+  "enter_both_the_api_key_and_the_api_secret": "API کلید اور API سیکرٹ دونوں درج کریں",
+  "enter_the_feeds_web_address_starting_with_https": "فیڈ کا ویب ایڈریس درج کریں، جو https:// سے شروع ہو",
+  "not_a_podcast": "یہ پوڈکاسٹ نہیں ہے",
+  "not_a_podcast_library": "یہ پوڈکاسٹ لائبریری نہیں ہے",
+  "that_feed_has_no_episodes_to_listen_to": "اس فیڈ میں سننے کے لیے کوئی قسط نہیں",
+  "that_isnt_a_podcast_feed": "یہ پوڈکاسٹ فیڈ نہیں ہے",
+  "that_isnt_an_opml_file": "یہ OPML فائل نہیں ہے",
+  "the_feed_couldnt_be_read_check_the_address_and_try_again": "فیڈ پڑھی نہیں جا سکی۔ ایڈریس چیک کریں اور دوبارہ کوشش کریں۔",
+  "the_feed_couldnt_be_read_right_now": "فیڈ ابھی پڑھی نہیں جا سکتی",
+  "the_file_is_too_big": "فائل بہت بڑی ہے",
+  "this_library_already_has_a_show_with_that_name": "اس لائبریری میں اس نام کا شو پہلے سے موجود ہے"
 }

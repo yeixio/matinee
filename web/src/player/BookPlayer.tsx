@@ -1,4 +1,4 @@
-import { ChevronDown, ListOrdered } from 'lucide-react'
+import { ChevronDown, FileText, ListOrdered } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
@@ -26,6 +26,9 @@ export function BookPlayer() {
   // Phones show the cover or the chapters; wider screens show both.
   const [showChapters, setShowChapters] = useState(false)
   const close = () => s.setExpanded(false)
+  // A podcast episode has show notes where a book has chapters.
+  const episode = B.isEpisode(book)
+  const sideLabel = episode ? t('common:podcasts.showNotes') : t('common:books.chapters')
 
   useEffect(() => {
     const esc = (e: KeyboardEvent) => e.key === 'Escape' && close()
@@ -60,10 +63,10 @@ export function BookPlayer() {
           onClick={() => setShowChapters(!showChapters)}
           aria-pressed={showChapters}
           className={`rounded-full p-2 hover:bg-text/10 lg:invisible ${showChapters ? 'text-accent' : 'text-muted'}`}
-          aria-label={t('common:books.chapters')}
-          title={t('common:books.chapters')}
+          aria-label={sideLabel}
+          title={sideLabel}
         >
-          <ListOrdered className="size-6" />
+          {episode ? <FileText className="size-6" /> : <ListOrdered className="size-6" />}
         </button>
       </header>
 
@@ -72,7 +75,9 @@ export function BookPlayer() {
           <Artwork item={book} type="poster" className="mx-auto aspect-square w-full max-w-sm shrink rounded-2xl shadow-2xl shadow-black/60 ring-1 ring-text/10" />
           <div className="min-w-0 space-y-1 text-center">
             <h2 className="truncate text-2xl font-semibold md:text-3xl">{book.title}</h2>
-            <p className="truncate text-muted">{link(`/item/${book.authorId}`, book.authorId ? book.author : undefined)}</p>
+            <p className="truncate text-muted">
+              {episode ? link(`/item/${book.parentId}`, book.podcast) : link(`/item/${book.authorId}`, book.authorId ? book.author : undefined)}
+            </p>
           </div>
           <div className="space-y-1">
             <div className="truncate text-center text-sm font-medium">{ch?.title}</div>
@@ -81,14 +86,14 @@ export function BookPlayer() {
               <span>{clock(time - start)}</span>
               <span>-{clock(B.timeLeft(time, end, s.speed))}</span>
             </div>
-            <div className="text-center text-xs text-muted">{t('common:books.leftInBook', { time: duration(B.timeLeft(time, dur, s.speed) * 1000) })}</div>
+            {!episode && <div className="text-center text-xs text-muted">{t('common:books.leftInBook', { time: duration(B.timeLeft(time, dur, s.speed) * 1000) })}</div>}
           </div>
           <div className="flex justify-center">
             <BookControls s={s} large />
           </div>
           <div className="flex items-center justify-center gap-2">
             <SpeedMenu s={s} large />
-            <SleepMenu sleep={sleep} left={left} kind="chapter" onOpenChange={() => {}} />
+            <SleepMenu sleep={sleep} left={left} kind={episode ? 'episode' : 'chapter'} onOpenChange={() => {}} />
             <div className="hidden md:block">
               <VolumeControl s={s} />
             </div>
@@ -96,8 +101,14 @@ export function BookPlayer() {
         </section>
 
         <section className={`min-h-0 w-full max-w-md flex-col lg:flex lg:max-w-xl lg:flex-1 lg:pt-4 ${showChapters ? 'mx-auto flex' : 'hidden'}`}>
-          <h3 className="mb-2 px-2 text-sm font-semibold tracking-wide text-muted uppercase">{t('common:books.chapters')}</h3>
-          <Chapters onPick={() => setShowChapters(false)} />
+          <h3 className="mb-2 px-2 text-sm font-semibold tracking-wide text-muted uppercase">{sideLabel}</h3>
+          {episode ? (
+            <div className="scrollbar-none min-h-0 flex-1 overflow-y-auto px-2 pb-6 text-sm leading-relaxed whitespace-pre-line text-muted">
+              {book.overview || t('common:podcasts.noShowNotes')}
+            </div>
+          ) : (
+            <Chapters onPick={() => setShowChapters(false)} />
+          )}
         </section>
       </div>
     </div>

@@ -167,7 +167,7 @@ func (f ItemFilter) Validate() error {
 		}
 	}
 	for _, k := range f.Kind {
-		if !slices.Contains([]string{"movie", "show", "season", "episode", "artist", "album", "track", "author", "book", "part"}, k) {
+		if !slices.Contains([]string{"movie", "show", "season", "episode", "artist", "album", "track", "author", "book", "part", "podcast", "podcastEpisode"}, k) {
 			return fmt.Errorf("kind: unknown kind %q", k)
 		}
 	}

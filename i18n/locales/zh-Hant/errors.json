@@ -148,5 +148,20 @@
   "a_playlist_holds_up_to_5000_songs": "一個播放列表最多可容納 5000 首歌曲",
   "items_is_required": "items 為必填",
   "only_music_goes_on_a_playlist": "播放列表只能加入音樂",
-  "playlist_not_found": "找不到播放列表"
+  "playlist_not_found": "找不到播放列表",
+  "podcast_index_couldnt_be_reached_to_check_the_key": "無法連線到 Podcast Index 來檢查金鑰",
+  "podcast_index_didnt_accept_that_key": "Podcast Index 不接受該金鑰",
+  "podcast_index_didnt_accept_the_servers_key": "Podcast Index 不接受伺服器的金鑰",
+  "podcast_index_isnt_answering_right_now_try_again_later": "Podcast Index 目前沒有回應。請稍後再試。",
+  "enter_both_the_api_key_and_the_api_secret": "請輸入 API 金鑰和 API 密碼",
+  "enter_the_feeds_web_address_starting_with_https": "請輸入訂閱來源的網址，以 https:// 開頭",
+  "not_a_podcast": "不是 Podcast",
+  "not_a_podcast_library": "不是 Podcast 媒體庫",
+  "that_feed_has_no_episodes_to_listen_to": "該訂閱來源沒有可收聽的單集",
+  "that_isnt_a_podcast_feed": "這不是 Podcast 訂閱來源",
+  "that_isnt_an_opml_file": "這不是 OPML 檔案",
+  "the_feed_couldnt_be_read_check_the_address_and_try_again": "無法讀取訂閱來源。請檢查網址後再試一次。",
+  "the_feed_couldnt_be_read_right_now": "目前無法讀取訂閱來源",
+  "the_file_is_too_big": "檔案太大",
+  "this_library_already_has_a_show_with_that_name": "此媒體庫已有同名節目"
 }

@@ -604,14 +604,17 @@
         "movies": "Filmy",
         "tv": "Seriály",
         "music": "Hudba",
-        "audiobooks": "Audioknihy"
+        "audiobooks": "Audioknihy",
+        "podcasts": "Podcasty"
       },
       "type": "Typ",
       "folders": "Složky",
       "up": "O složku výš",
       "added": "Přidáno",
       "useFolder": "Použít tuto složku",
-      "noSubfolders": "Žádné podsložky"
+      "noSubfolders": "Žádné podsložky",
+      "podcastsNoFolders": "Podcasty nepotřebují složku. Pořady přidáte v knihovně, jakmile ji vytvoříte.",
+      "podcastsChecked": "Nové díly se kontrolují každou hodinu"
     },
     "people": {
       "title": "Lidé",
@@ -732,6 +735,16 @@
       "save": "Uložit klíč",
       "remove": "Odebrat uložený klíč",
       "saved": "Uloženo. Matinee teď doplňuje plakáty a podrobnosti."
+    },
+    "podcastIndex": {
+      "title": "Hledání podcastů",
+      "intro": "Hledání podcastů používá Podcast Index, svobodný a otevřený katalog. Bezplatný klíč a tajný klíč API získáte na <site>api.podcastindex.org</site>. I bez nich lze pořady vždy přidat adresou kanálu.",
+      "using": "Používá se klíč končící na {{hint}}.",
+      "none": "Zatím bez klíče, takže se pořady přidávají adresou kanálu.",
+      "key": "Klíč API",
+      "secret": "Tajný klíč API",
+      "save": "Uložit klíč",
+      "remove": "Odebrat klíč"
     },
     "connect": {
       "title": "Matinee Connect",

@@ -15,6 +15,7 @@ import (
 	"testing"
 
 	"github.com/yeixio/matinee/internal/auth"
+	"github.com/yeixio/matinee/internal/podcast"
 	"github.com/yeixio/matinee/internal/store"
 )
 
@@ -33,7 +34,8 @@ var pluralForm = regexp.MustCompile(`_(zero|one|two|few|many|other)$`)
 // the validation functions return. Messages from other packages are listed.
 func apiErrorMessages(t *testing.T) []string {
 	t.Helper()
-	msgs := []string{auth.ErrBadCredentials.Error(), store.ErrLastAdmin.Error()}
+	msgs := []string{auth.ErrBadCredentials.Error(), store.ErrLastAdmin.Error(), store.ErrPodcastTitleTaken.Error(),
+		podcast.ErrBadURL.Error(), podcast.ErrNotFeed.Error(), podcast.ErrNoEpisodes.Error()}
 	files, err := filepath.Glob("*.go")
 	if err != nil {
 		t.Fatal(err)

@@ -148,5 +148,20 @@
   "a_playlist_holds_up_to_5000_songs": "у плейлисті може бути до 5000 пісень",
   "items_is_required": "items обов'язковий",
   "only_music_goes_on_a_playlist": "до плейлиста можна додати лише музику",
-  "playlist_not_found": "плейлист не знайдено"
+  "playlist_not_found": "плейлист не знайдено",
+  "podcast_index_couldnt_be_reached_to_check_the_key": "Не вдалося зв’язатися з Podcast Index, щоб перевірити ключ",
+  "podcast_index_didnt_accept_that_key": "Podcast Index не прийняв цей ключ",
+  "podcast_index_didnt_accept_the_servers_key": "Podcast Index не прийняв ключ сервера",
+  "podcast_index_isnt_answering_right_now_try_again_later": "Podcast Index зараз не відповідає. Спробуйте пізніше.",
+  "enter_both_the_api_key_and_the_api_secret": "введіть ключ API і секрет API",
+  "enter_the_feeds_web_address_starting_with_https": "введіть вебадресу стрічки, що починається з https://",
+  "not_a_podcast": "це не подкаст",
+  "not_a_podcast_library": "це не бібліотека подкастів",
+  "that_feed_has_no_episodes_to_listen_to": "у цій стрічці немає випусків для прослуховування",
+  "that_isnt_a_podcast_feed": "це не стрічка подкасту",
+  "that_isnt_an_opml_file": "це не файл OPML",
+  "the_feed_couldnt_be_read_check_the_address_and_try_again": "не вдалося прочитати стрічку. Перевірте адресу й спробуйте ще раз.",
+  "the_feed_couldnt_be_read_right_now": "стрічку зараз не вдається прочитати",
+  "the_file_is_too_big": "файл завеликий",
+  "this_library_already_has_a_show_with_that_name": "у цій бібліотеці вже є шоу з такою назвою"
 }

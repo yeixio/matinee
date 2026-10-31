@@ -596,14 +596,17 @@
         "movies": "Elokuvat",
         "tv": "TV-sarjat",
         "music": "Musiikki",
-        "audiobooks": "Äänikirjat"
+        "audiobooks": "Äänikirjat",
+        "podcasts": "Podcastit"
       },
       "type": "Tyyppi",
       "folders": "Kansiot",
       "up": "Yksi kansio ylös",
       "added": "Lisätty",
       "useFolder": "Käytä tätä kansiota",
-      "noSubfolders": "Ei alikansioita"
+      "noSubfolders": "Ei alikansioita",
+      "podcastsNoFolders": "Podcastit eivät tarvitse kansiota. Lisää ohjelmia kirjastosta, kun se on luotu.",
+      "podcastsChecked": "Uudet jaksot tarkistetaan tunnin välein"
     },
     "people": {
       "title": "Ihmiset",
@@ -724,6 +727,16 @@
       "save": "Tallenna avain",
       "remove": "Poista tallennettu avain",
       "saved": "Tallennettu. Matinee täydentää nyt julisteita ja tietoja."
+    },
+    "podcastIndex": {
+      "title": "Podcastien haku",
+      "intro": "Podcastien haku käyttää Podcast Indexiä, vapaata ja avointa hakemistoa. Hanki ilmainen API-avain ja salaisuus osoitteesta <site>api.podcastindex.org</site>. Ilman niitäkin ohjelmia voi aina lisätä syötteen osoitteella.",
+      "using": "Käytössä avain, joka päättyy {{hint}}.",
+      "none": "Ei vielä avainta, joten ohjelmat lisätään syötteen osoitteella.",
+      "key": "API-avain",
+      "secret": "API-salaisuus",
+      "save": "Tallenna avain",
+      "remove": "Poista avain"
     },
     "connect": {
       "title": "Matinee Connect",

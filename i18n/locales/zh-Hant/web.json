@@ -592,14 +592,17 @@
         "movies": "電影",
         "tv": "電視劇",
         "music": "音樂",
-        "audiobooks": "有聲書"
+        "audiobooks": "有聲書",
+        "podcasts": "Podcast"
       },
       "type": "類型",
       "folders": "資料夾",
       "up": "上一級資料夾",
       "added": "已新增",
       "useFolder": "使用此資料夾",
-      "noSubfolders": "沒有子資料夾"
+      "noSubfolders": "沒有子資料夾",
+      "podcastsNoFolders": "Podcast 不需要資料夾。媒體庫建立後，在那裡加入節目。",
+      "podcastsChecked": "每小時檢查新單集"
     },
     "people": {
       "title": "成員",
@@ -720,6 +723,16 @@
       "save": "儲存金鑰",
       "remove": "移除已儲存的金鑰",
       "saved": "已儲存。Matinee 正在補齊海報與詳細資料。"
+    },
+    "podcastIndex": {
+      "title": "Podcast 搜尋",
+      "intro": "Podcast 搜尋使用 Podcast Index，一個自由開放的目錄。在 <site>api.podcastindex.org</site> 免費取得 API 金鑰和密碼。沒有它們，也隨時可以用訂閱來源網址加入節目。",
+      "using": "正在使用結尾為 {{hint}} 的金鑰。",
+      "none": "還沒有金鑰，所以節目透過訂閱來源網址加入。",
+      "key": "API 金鑰",
+      "secret": "API 密碼",
+      "save": "儲存金鑰",
+      "remove": "移除金鑰"
     },
     "connect": {
       "title": "Matinee Connect",

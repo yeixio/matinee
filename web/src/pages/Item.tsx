@@ -17,6 +17,7 @@ import { clock, duration, progressFraction, ratingLabel, seasonTitle } from '../
 import { genreName } from '../people'
 import { AlbumPage, ArtistPage } from './MusicItem'
 import { AuthorPage, BookPage } from './BookItem'
+import { EpisodePage, PodcastPage } from './PodcastItem'
 
 export default function ItemPage() {
   const id = Number(useParams().id)
@@ -43,6 +44,8 @@ export default function ItemPage() {
   if (item.kind === 'artist') return <ArtistPage item={item} albums={children} />
   if (item.kind === 'book') return <BookPage item={item} />
   if (item.kind === 'author') return <AuthorPage item={item} books={children} />
+  if (item.kind === 'podcast') return <PodcastPage item={item} episodes={children} />
+  if (item.kind === 'podcastEpisode') return <EpisodePage item={item} />
   // A song opens its album, and a book's part its book.
   if ((item.kind === 'track' || item.kind === 'part') && item.parentId) return <Navigate to={`/item/${item.parentId}`} replace />
 

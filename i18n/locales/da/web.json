@@ -596,14 +596,17 @@
         "movies": "Film",
         "tv": "Tv-serier",
         "music": "Musik",
-        "audiobooks": "Lydbøger"
+        "audiobooks": "Lydbøger",
+        "podcasts": "Podcasts"
       },
       "type": "Type",
       "folders": "Mapper",
       "up": "Én mappe op",
       "added": "Tilføjet",
       "useFolder": "Brug denne mappe",
-      "noSubfolders": "Ingen undermapper"
+      "noSubfolders": "Ingen undermapper",
+      "podcastsNoFolders": "Podcasts behøver ingen mappe. Tilføj programmer fra biblioteket, når det er oprettet.",
+      "podcastsChecked": "Tjekkes for nye afsnit hver time"
     },
     "people": {
       "title": "Personer",
@@ -724,6 +727,16 @@
       "save": "Gem nøgle",
       "remove": "Fjern gemt nøgle",
       "saved": "Gemt. Matinee udfylder nu plakater og detaljer."
+    },
+    "podcastIndex": {
+      "title": "Podcastsøgning",
+      "intro": "Podcastsøgning bruger Podcast Index, et frit og åbent katalog. Få en gratis API-nøgle og hemmelighed på <site>api.podcastindex.org</site>. Uden dem kan programmer altid tilføjes med feedadressen.",
+      "using": "Bruger nøglen, der ender på {{hint}}.",
+      "none": "Ingen nøgle endnu, så programmer tilføjes med feedadressen.",
+      "key": "API-nøgle",
+      "secret": "API-hemmelighed",
+      "save": "Gem nøgle",
+      "remove": "Fjern nøgle"
     },
     "connect": {
       "title": "Matinee Connect",

@@ -9,7 +9,7 @@ import { existsSync, mkdirSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { chromium } from 'playwright'
 import { backdrop, cover, portrait, poster } from './art.mjs'
-import { albums, audiobooks, discover, movies, people, shows } from './catalog.mjs'
+import { albums, audiobooks, discover, movies, people, podcasts, shows } from './catalog.mjs'
 
 const ff = (...args) => execFileSync('ffmpeg', ['-v', 'error', '-y', ...args])
 
@@ -98,6 +98,7 @@ export async function makeLibrary(root) {
     art(`artist-${i}.jpg`, portrait(40 + i * 3), 632, 632)
   })
   audiobooks.forEach((b, i) => art(`book-${i}.jpg`, cover(b.scene, b.title, b.author, b.hue ?? 0), 600, 600))
+  podcasts.forEach((p, i) => art(`podcast-${i}.jpg`, cover(p.scene, p.title, p.author, p.hue ?? 0), 600, 600))
   await render(jobs)
 
   for (const m of movies) {
@@ -134,7 +135,10 @@ export async function makeLibrary(root) {
     })
   })
   audiobooks.forEach((b, i) => book(path.join(media, 'Audiobooks'), b, path.join(images, `book-${i}.jpg`), path.join(root, 'silence')))
-  return { media, images }
+  // Every podcast episode plays the same hour of quiet; fake-podcasts.mjs serves it.
+  const episode = path.join(root, 'silence', 'podcast-episode.m4a')
+  if (!existsSync(episode)) ff('-stream_loop', '-1', '-i', silenceFile(path.join(root, 'silence')), '-t', '3600', '-map', '0:a', '-c:a', 'copy', episode)
+  return { media, images, episode }
 }
 
 /** A kick on every beat, a bass note that swells, a chord over it and a hi-hat between beats, at f Hz. */

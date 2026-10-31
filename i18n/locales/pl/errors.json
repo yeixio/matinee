@@ -148,5 +148,20 @@
   "a_playlist_holds_up_to_5000_songs": "playlista mieści do 5000 utworów",
   "items_is_required": "items jest wymagane",
   "only_music_goes_on_a_playlist": "na playlistę trafia tylko muzyka",
-  "playlist_not_found": "nie znaleziono playlisty"
+  "playlist_not_found": "nie znaleziono playlisty",
+  "podcast_index_couldnt_be_reached_to_check_the_key": "Nie udało się połączyć z Podcast Index, aby sprawdzić klucz",
+  "podcast_index_didnt_accept_that_key": "Podcast Index nie zaakceptował tego klucza",
+  "podcast_index_didnt_accept_the_servers_key": "Podcast Index nie zaakceptował klucza serwera",
+  "podcast_index_isnt_answering_right_now_try_again_later": "Podcast Index teraz nie odpowiada. Spróbuj później.",
+  "enter_both_the_api_key_and_the_api_secret": "podaj klucz i sekret API",
+  "enter_the_feeds_web_address_starting_with_https": "podaj adres internetowy kanału, zaczynający się od https://",
+  "not_a_podcast": "to nie jest podcast",
+  "not_a_podcast_library": "to nie jest biblioteka podcastów",
+  "that_feed_has_no_episodes_to_listen_to": "ten kanał nie ma odcinków do odsłuchania",
+  "that_isnt_a_podcast_feed": "to nie jest kanał podcastu",
+  "that_isnt_an_opml_file": "to nie jest plik OPML",
+  "the_feed_couldnt_be_read_check_the_address_and_try_again": "nie udało się odczytać kanału. Sprawdź adres i spróbuj ponownie.",
+  "the_feed_couldnt_be_read_right_now": "teraz nie da się odczytać kanału",
+  "the_file_is_too_big": "plik jest za duży",
+  "this_library_already_has_a_show_with_that_name": "ta biblioteka ma już audycję o tej nazwie"
 }

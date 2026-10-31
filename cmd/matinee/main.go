@@ -33,6 +33,7 @@ import (
 	"github.com/yeixio/matinee/internal/live"
 	"github.com/yeixio/matinee/internal/metadata"
 	"github.com/yeixio/matinee/internal/plugin"
+	"github.com/yeixio/matinee/internal/podcast"
 	"github.com/yeixio/matinee/internal/probe"
 	"github.com/yeixio/matinee/internal/rating"
 	"github.com/yeixio/matinee/internal/remote"
@@ -240,6 +241,16 @@ func run() error {
 	}
 	downloads.SubtitleStream = apiServer.BurnStream
 	go downloads.Run(ctx)
+	// Podcast libraries follow their shows' feeds; scanning one checks them now.
+	podcasts := &podcast.Manager{Store: db, Log: log, Added: func(ctx context.Context, libraryID, id int64) {
+		if lib, err := db.Library(ctx, libraryID); err == nil {
+			scanner.Added(ctx, lib, id)
+		}
+	}}
+	apiServer.Podcasts = podcasts
+	scanner.Refresh = podcasts.RefreshStale
+	stream.AllowHomeNetwork.Store(cfg.PodcastsHomeNetwork)
+	go podcasts.Run(ctx)
 
 	srv := &http.Server{
 		Addr:              cfg.Addr,
