@@ -47,8 +47,9 @@ Check ($p.ExitCode -eq 0) "installer exits 0 (got $($p.ExitCode))"
 foreach ($f in "matinee.exe", "matinee-tray.exe", "uninstall.exe", "LICENSE.txt", "ffmpeg\ffmpeg.exe", "ffmpeg\ffprobe.exe", "ffmpeg\LICENSE.txt") {
   Check (Test-Path (Join-Path $dir $f)) "installed $f"
 }
-& (Join-Path $dir "ffmpeg\ffmpeg.exe") -hide_banner -version | Select-Object -First 1
-Check ($LASTEXITCODE -eq 0) "bundled ffmpeg runs"
+# Read all of its output: stopping after the first line would end ffmpeg early.
+$out = & (Join-Path $dir "ffmpeg\ffmpeg.exe") -hide_banner -version
+Check ($LASTEXITCODE -eq 0) "bundled ffmpeg runs: $($out | Select-Object -First 1)"
 Check (Test-Path "$env:ProgramData\Microsoft\Windows\Start Menu\Programs\Matinee.lnk") "Start menu shortcut"
 $rule = Get-NetFirewallRule -DisplayName "Matinee" -ErrorAction SilentlyContinue
 Check ($null -ne $rule) "firewall rule"
