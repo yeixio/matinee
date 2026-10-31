@@ -106,6 +106,12 @@ The music keeps playing while you browse. What's playing shows at the top of the
 
 ![The music player on a TV](../images/app-tv-music.webp)
 
+<!-- since: v0.1.7 -->
+From version 1.0.19 you can scrub through the song with the remote. Press up from the player's buttons to reach the bar under the song's name; a dot shows on it. Then left and right go back or ahead 10 seconds (hold to go faster), and a swipe on the Siri Remote does the same. Presses in a row add up: the time under the bar shows where you'll land, and the song moves there once you stop pressing. Select on the bar plays or pauses, and down goes back to the buttons. The rewind and fast forward buttons on remotes that have them skip 10 seconds from anywhere in the player. This works on Apple TV, Android TV, and Samsung and LG TVs.
+
+![Scrubbing through a song on a TV](../images/app-tv-music-scrub.webp)
+<!-- /since -->
+
 **Visualizer** in the player opens the visualizer; left and right on the remote change its look, and play/pause or select pauses.
 
 ![The visualizer on a TV](../images/app-tv-visualizer.webp)
