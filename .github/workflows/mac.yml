@@ -9,6 +9,8 @@ name: Mac app
 # the Mac app and says which are missing):
 #   DEVELOPER_ID_P12_BASE64, DEVELOPER_ID_PASSWORD  Developer ID Application
 #                                                   certificate and its password
+#                                                   (or Toskar's MACOS_CERTIFICATE_P12_BASE64,
+#                                                   MACOS_CERTIFICATE_PASSWORD)
 #   ASC_API_KEY_ID, ASC_API_ISSUER_ID, ASC_API_KEY_P8_BASE64
 #                                                   App Store Connect API key,
 #                                                   for notarizing
@@ -71,8 +73,10 @@ jobs:
         id: secrets
         if: inputs.tag != ''
         env:
-          DEVELOPER_ID_P12_BASE64: ${{ secrets.DEVELOPER_ID_P12_BASE64 }}
-          DEVELOPER_ID_PASSWORD: ${{ secrets.DEVELOPER_ID_PASSWORD }}
+          # Or the yeix organization's Developer ID certificate that Toskar
+          # signs with, under its names there.
+          DEVELOPER_ID_P12_BASE64: ${{ secrets.DEVELOPER_ID_P12_BASE64 || secrets.MACOS_CERTIFICATE_P12_BASE64 }}
+          DEVELOPER_ID_PASSWORD: ${{ secrets.DEVELOPER_ID_PASSWORD || secrets.MACOS_CERTIFICATE_PASSWORD }}
           ASC_API_KEY_ID: ${{ secrets.ASC_API_KEY_ID }}
           ASC_API_ISSUER_ID: ${{ secrets.ASC_API_ISSUER_ID }}
           ASC_API_KEY_P8_BASE64: ${{ secrets.ASC_API_KEY_P8_BASE64 }}

@@ -57,7 +57,16 @@ are missing:
 
 ### The Developer ID certificate
 
-Only the Apple Developer account holder can make one. In Xcode: **Settings →
+One Developer ID Application certificate signs any number of apps, and Toskar
+already has one: if `MACOS_CERTIFICATE_P12_BASE64` and
+`MACOS_CERTIFICATE_PASSWORD` are yeixio organization secrets, share them with
+yeixio/matinee and the workflow uses them. Otherwise, set them (or the
+`DEVELOPER_ID_*` names) on this repository from the same .p12. A Mac Installer
+Distribution or Apple Distribution certificate won't do: those only sign for
+the Mac App Store, and Gatekeeper and the notary service refuse them for a
+download.
+
+To make a new one instead: only the Apple Developer account holder can make one. In Xcode: **Settings →
 Accounts →** the team **→ Manage Certificates… → + → Developer ID Application**.
 Then in Keychain Access, under **My Certificates**, right-click
 "Developer ID Application: …" → **Export…** as .p12 with a password, and:
