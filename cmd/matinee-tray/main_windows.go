@@ -11,6 +11,7 @@ import (
 	"flag"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -104,6 +105,15 @@ func main() {
 		RestartDelay: 3 * time.Second,
 	}
 	fmt.Fprintf(a.log, "tray: Matinee %s starting, data in %s\n", version.Version, a.dataDir)
+	// The tray library reports its own trouble through the log package.
+	log.SetOutput(logFile)
+	log.SetPrefix("tray: ")
+
+	// The server starts before the icon, so it runs even if the
+	// notification area isn't there (no Explorer, or a broken shell).
+	if err := a.server.Start(); err != nil {
+		fmt.Fprintln(a.log, "tray:", err)
+	}
 
 	systray.Run(func() { a.ready(firstRun, *background) }, func() {
 		a.server.Stop(stopTimeout)
@@ -113,6 +123,7 @@ func main() {
 }
 
 func (a *app) ready(firstRun, background bool) {
+	fmt.Fprintln(a.log, "tray: icon ready")
 	systray.SetIcon(iconOff)
 	systray.SetTooltip("Matinee")
 
@@ -142,9 +153,6 @@ func (a *app) ready(firstRun, background bool) {
 		login.Check()
 	}
 
-	if err := a.server.Start(); err != nil {
-		fmt.Fprintln(a.log, "tray:", err)
-	}
 	if firstRun {
 		go messageBox("Welcome to Matinee",
 			"Matinee is running. Its ticket icon sits in the notification area at the bottom right of the screen, next to the clock.\n\n"+
