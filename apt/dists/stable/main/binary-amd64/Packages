@@ -1,0 +1,20 @@
+Package: matinee
+Version: 0.1.8
+Architecture: amd64
+Maintainer: YEIXIO LLC <hello@yeix.io>
+Installed-Size: 26216
+Depends: ffmpeg
+Filename: pool/main/matinee_0.1.8_amd64.deb
+Size: 10174724
+MD5sum: c619d71d689cfcbc6dbb378c90412e94
+SHA1: 7de26220bd9aa924665eb6cf3aa75d1e4c7ab670
+SHA256: 7e3f928f75f8ce9aaa802354e53d34a187b9744445ce4a03d25047bd469daa56
+Section: video
+Priority: optional
+Homepage: https://matinee.yeix.io
+Description: Self-hosted media server for movies, TV and music
+ A fast, free and open source, self-hosted media server for your movies, TV
+ and music. Runs as matinee.service on port 7171, with its data in
+ /var/lib/matinee.
+License: AGPL-3.0-or-later
+
