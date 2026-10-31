@@ -66,6 +66,7 @@ On a TV, sign-in starts with a code instead of a password: see [Signing in a dev
 <!-- /since -->
 <!-- since: v0.1.7 -->
 - **CarPlay**: music and audiobooks in the car, from the car's screen and its buttons. See [CarPlay](/docs/apps/carplay/).
+- **Siri and Google Assistant**: "play … on Matinee" for music, audiobooks and playlists, with the app closed. See [Siri and Google Assistant](/docs/apps/voice/).
 <!-- /since -->
 - **Coming soon**, with [Radarr or Sonarr](/docs/server/radarr-and-sonarr/#coming-soon) connected: a row at the end of Home, and the next two months day by day. On a phone, the calendar along the top jumps to a day; on a TV, each day is a row.
 

@@ -141,5 +141,7 @@
   "couldnt_read_the_songs_sound": "อ่านเสียงของเพลงไม่ได้",
   "no_levels_on_this_server": "เซิร์ฟเวอร์นี้ไม่มีระดับเสียง",
   "not_a_song": "ไม่ใช่เพลง",
-  "no_such_audio_track": "ไม่มีแทร็กเสียงนี้"
+  "no_such_audio_track": "ไม่มีแทร็กเสียงนี้",
+  "nothing_found_to_play": "ไม่พบสิ่งที่จะเล่น",
+  "say_what_to_play": "บอกสิ่งที่ต้องการเล่น"
 }

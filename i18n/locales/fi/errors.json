@@ -141,5 +141,7 @@
   "couldnt_read_the_songs_sound": "kappaleen ääntä ei voitu lukea",
   "no_levels_on_this_server": "tällä palvelimella ei ole tasoja",
   "not_a_song": "ei kappale",
-  "no_such_audio_track": "ääniraitaa ei ole"
+  "no_such_audio_track": "ääniraitaa ei ole",
+  "nothing_found_to_play": "mitään toistettavaa ei löytynyt",
+  "say_what_to_play": "kerro, mitä toistetaan"
 }

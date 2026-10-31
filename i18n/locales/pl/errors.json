@@ -141,5 +141,7 @@
   "couldnt_read_the_songs_sound": "nie udało się odczytać dźwięku utworu",
   "no_levels_on_this_server": "brak poziomów na tym serwerze",
   "not_a_song": "to nie jest utwór",
-  "no_such_audio_track": "nie ma takiej ścieżki dźwiękowej"
+  "no_such_audio_track": "nie ma takiej ścieżki dźwiękowej",
+  "nothing_found_to_play": "nie znaleziono niczego do odtworzenia",
+  "say_what_to_play": "powiedz, co odtworzyć"
 }

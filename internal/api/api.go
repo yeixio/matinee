@@ -213,6 +213,7 @@ func (s *Server) routes() []route {
 		{"GET /home", reader, s.home},
 		{"GET /rows/{id}", reader, s.rowPage},
 		{"GET /search", reader, s.search},
+		{"GET /search/play", reader, s.searchPlay},
 		{"GET /items/{id}", reader, s.getItem},
 		{"GET /items/{id}/children", reader, s.itemChildren},
 		{"GET /items/{id}/tracks", reader, s.itemTracks},

@@ -141,5 +141,7 @@
   "couldnt_read_the_songs_sound": "não foi possível ler o som da música",
   "no_levels_on_this_server": "sem níveis neste servidor",
   "not_a_song": "não é uma música",
-  "no_such_audio_track": "essa faixa de áudio não existe"
+  "no_such_audio_track": "essa faixa de áudio não existe",
+  "nothing_found_to_play": "nada encontrado para tocar",
+  "say_what_to_play": "diga o que tocar"
 }

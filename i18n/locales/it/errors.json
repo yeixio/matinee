@@ -141,5 +141,7 @@
   "couldnt_read_the_songs_sound": "impossibile leggere l'audio del brano",
   "no_levels_on_this_server": "nessun livello su questo server",
   "not_a_song": "non è un brano",
-  "no_such_audio_track": "questa traccia audio non esiste"
+  "no_such_audio_track": "questa traccia audio non esiste",
+  "nothing_found_to_play": "non è stato trovato nulla da riprodurre",
+  "say_what_to_play": "di' cosa riprodurre"
 }

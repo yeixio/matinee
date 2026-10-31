@@ -141,5 +141,7 @@
   "couldnt_read_the_songs_sound": "曲の音声を読み取れませんでした",
   "no_levels_on_this_server": "このサーバーにはレベルがありません",
   "not_a_song": "曲ではありません",
-  "no_such_audio_track": "その音声トラックはありません"
+  "no_such_audio_track": "その音声トラックはありません",
+  "nothing_found_to_play": "再生できるものが見つかりません",
+  "say_what_to_play": "再生するものを言ってください"
 }

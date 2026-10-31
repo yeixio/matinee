@@ -141,5 +141,7 @@
   "couldnt_read_the_songs_sound": "گانے کی آواز پڑھی نہیں جا سکی",
   "no_levels_on_this_server": "اس سرور پر سطحیں نہیں ہیں",
   "not_a_song": "یہ گانا نہیں ہے",
-  "no_such_audio_track": "ایسا کوئی آڈیو ٹریک نہیں ہے"
+  "no_such_audio_track": "ایسا کوئی آڈیو ٹریک نہیں ہے",
+  "nothing_found_to_play": "چلانے کے لیے کچھ نہیں ملا",
+  "say_what_to_play": "بتائیں کہ کیا چلانا ہے"
 }

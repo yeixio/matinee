@@ -141,5 +141,7 @@
   "couldnt_read_the_songs_sound": "şarkının sesi okunamadı",
   "no_levels_on_this_server": "bu sunucuda seviye yok",
   "not_a_song": "şarkı değil",
-  "no_such_audio_track": "böyle bir ses parçası yok"
+  "no_such_audio_track": "böyle bir ses parçası yok",
+  "nothing_found_to_play": "çalınacak bir şey bulunamadı",
+  "say_what_to_play": "neyin çalınacağını söyleyin"
 }

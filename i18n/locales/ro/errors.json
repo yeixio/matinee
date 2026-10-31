@@ -141,5 +141,7 @@
   "couldnt_read_the_songs_sound": "sunetul melodiei nu a putut fi citit",
   "no_levels_on_this_server": "nu există niveluri pe acest server",
   "not_a_song": "nu este o melodie",
-  "no_such_audio_track": "nu există o astfel de pistă audio"
+  "no_such_audio_track": "nu există o astfel de pistă audio",
+  "nothing_found_to_play": "nu s-a găsit nimic de redat",
+  "say_what_to_play": "spune ce să redea"
 }

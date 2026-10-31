@@ -141,5 +141,7 @@
   "couldnt_read_the_songs_sound": "het geluid van het nummer kon niet worden gelezen",
   "no_levels_on_this_server": "geen niveaus op deze server",
   "not_a_song": "geen nummer",
-  "no_such_audio_track": "deze audiotrack bestaat niet"
+  "no_such_audio_track": "deze audiotrack bestaat niet",
+  "nothing_found_to_play": "niets gevonden om af te spelen",
+  "say_what_to_play": "zeg wat er moet worden afgespeeld"
 }

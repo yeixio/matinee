@@ -141,5 +141,7 @@
   "couldnt_read_the_songs_sound": "kunne ikke lese lyden i sangen",
   "no_levels_on_this_server": "ingen nivåer på denne serveren",
   "not_a_song": "ikke en sang",
-  "no_such_audio_track": "lydsporet finnes ikke"
+  "no_such_audio_track": "lydsporet finnes ikke",
+  "nothing_found_to_play": "fant ingenting å spille av",
+  "say_what_to_play": "si hva som skal spilles av"
 }
