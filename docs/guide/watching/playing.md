@@ -48,7 +48,7 @@ After three episodes in a row with nobody touching anything, Matinee asks **Stil
 
 Matinee finds where the credits start from the file's chapters (a chapter called *Credits*, *End Credits* or *Outro* in the second half of the file). Without one, the card shows 30 seconds before the end.
 
-You choose how this works for you under **Settings → Playback**: turn off **Play the next episode**, or turn on **Skip the countdown** to go straight on when the credits start. Your choice follows you to the apps.
+You choose how this works for you under **Settings → You → Playback**: turn off **Play the next episode**, or turn on **Skip the countdown** to go straight on when the credits start. Your choice follows you to the apps.
 
 ![The Playback settings](../images/playback.webp)
 

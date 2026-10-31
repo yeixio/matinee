@@ -109,8 +109,8 @@ export default function Settings() {
                   <Link
                     to={`/settings/${g.id}`}
                     aria-current={g.id === group.id ? 'page' : undefined}
-                    className={`flex items-center gap-3 rounded-xl border border-line/60 bg-surface/50 px-4 py-3.5 font-medium md:border-0 md:bg-transparent md:px-3 md:py-2 md:text-sm ${
-                      g.id === group.id ? 'md:bg-text/10 md:text-text' : 'md:text-muted md:hover:bg-text/5 md:hover:text-text'
+                    className={`flex items-center gap-3 rounded-xl border border-line/60 bg-surface/50 px-4 py-3.5 font-medium md:border-0 md:px-3 md:py-2 md:text-sm ${
+                      g.id === group.id ? 'md:bg-text/10 md:text-text' : 'md:bg-transparent md:text-muted md:hover:bg-text/5 md:hover:text-text'
                     }`}
                   >
                     <g.icon className="size-5 shrink-0 text-muted md:size-4" />

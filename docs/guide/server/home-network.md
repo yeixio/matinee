@@ -23,7 +23,7 @@ To keep a server unlisted, set `MATINEE_DISCOVERY=false` (`discovery.enabled=fal
 
 Phones, TVs and browsers on your home network can browse and play without an account. They share one **Home** account, so they share its watch progress, and they can't change anything: no settings, no downloads, no approving devices, no requests. Away from home, everyone signs in.
 
-To make everyone sign in at home too, turn on **Settings → Home network → Ask for sign-in at home**.
+To make everyone sign in at home too, turn on **Settings → Network → Home network → Ask for sign-in at home**.
 
 ![The Home network setting](../images/home-network.webp)
 

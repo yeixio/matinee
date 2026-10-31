@@ -88,7 +88,7 @@ The page rescans the folder and reloads the player's files every time, so change
 
 ## In a Matinee server
 
-Build the package and install it with **Settings → Plugins → Add plugin → From a file**. Installing a new build replaces the old one and keeps it on.
+Build the package and install it with **Settings → Add-ons → Plugins → Add plugin → From a file**. Installing a new build replaces the old one and keeps it on.
 
 Matinee logs what plugins do with `plugin=<id>`. That includes your `plugin.Info` lines, what the plugin prints, and its errors:
 

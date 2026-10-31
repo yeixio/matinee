@@ -9,7 +9,7 @@ If you use [Radarr](https://radarr.video/) for movies or [Sonarr](https://sonarr
 
 ## Connecting
 
-1. Open **Settings → Radarr and Sonarr** and click **Connect** next to Radarr (or Sonarr).
+1. Open **Settings → Add-ons → Radarr and Sonarr** and click **Connect** next to Radarr (or Sonarr).
 2. Enter its address, such as `http://radarr:7878`, and its API key. You'll find the key in Radarr or Sonarr under **Settings → General**.
 3. Click **Test**, then pick the quality profile and root folder that new titles get, and **Save**.
 

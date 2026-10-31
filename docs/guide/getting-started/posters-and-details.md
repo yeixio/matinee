@@ -19,7 +19,7 @@ Matinee looks up posters, backdrops, descriptions, genres, cast and crew, age ra
 ## Give it to Matinee
 
 <!-- since: v0.1.1 -->
-The easiest way is in the web player. As an admin, open **Settings → Posters and details**, paste the key and click **Save key**. Matinee checks the key with TMDB, starts using it right away and fills in posters and details for your libraries, with no restart.
+The easiest way is in the web player. As an admin, open **Settings → Content → Posters and details**, paste the key and click **Save key**. Matinee checks the key with TMDB, starts using it right away and fills in posters and details for your libraries, with no restart.
 
 ![The Posters and details setting, with a field for the TMDB key](../images/tmdb-key.webp)
 

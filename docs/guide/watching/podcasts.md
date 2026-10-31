@@ -68,7 +68,7 @@ Android Auto, CarPlay and the watches don't list podcasts yet, but a watch can s
 Search uses [Podcast Index](https://podcastindex.org), a free and open directory of podcasts. It needs an API key and secret, which are free:
 
 1. Sign up at [api.podcastindex.org](https://api.podcastindex.org/) with your email address. The key and secret arrive by email.
-2. In Matinee, open **Settings** and find **Podcast search**.
+2. In Matinee, open **Settings → Content → Podcast search**.
 3. Enter the **API key** and **API secret**, and click **Save key**.
 
 Matinee checks the key with Podcast Index before saving it. The key stays on your server, which does the searching; only the covers in the results load from each show's own host. Podcast Index is only used to find shows. Once a show is added, its episodes come from the show's own feed.

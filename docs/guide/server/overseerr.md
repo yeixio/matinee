@@ -10,7 +10,7 @@ If you run [Overseerr](https://overseerr.dev/), or Jellyseerr, which works the s
 
 ## Connecting
 
-1. Open **Settings → Radarr and Sonarr**. Overseerr is at the bottom of the section.
+1. Open **Settings → Add-ons → Radarr and Sonarr**. Overseerr is at the bottom of the section.
 2. Click **Connect** and enter Overseerr's address, such as `http://overseerr:5055`, and its API key. You'll find the key in Overseerr under **Settings → General**.
 3. Click **Test**. Matinee checks the address and key and lists Overseerr's users.
 4. Choose whose name requests are made in for people who don't have an Overseerr account, then **Save**.

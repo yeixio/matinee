@@ -6,7 +6,7 @@ sidebar:
   order: 1
 ---
 
-A plugin adds something to Matinee without changing Matinee itself. People install plugins in **Settings → Plugins** ([see the user guide](/docs/server/plugins/)). This part of the guide is for people who write them.
+A plugin adds something to Matinee without changing Matinee itself. People install plugins in **Settings → Add-ons → Plugins** ([see the user guide](/docs/server/plugins/)). This part of the guide is for people who write them.
 
 ## What a plugin can do
 

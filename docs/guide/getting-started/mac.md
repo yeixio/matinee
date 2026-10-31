@@ -79,4 +79,4 @@ Then `brew uninstall matinee` if you like.
 
 ## Hardware transcoding
 
-When a device can't play a file as it is, Matinee converts it with the Mac's own video hardware (VideoToolbox), which it finds by itself. **Settings → Transcoding** in Matinee shows it in use. See [Hardware transcoding](/docs/server/transcoding/).
+When a device can't play a file as it is, Matinee converts it with the Mac's own video hardware (VideoToolbox), which it finds by itself. **Settings → Streaming → Transcoding** in Matinee shows it in use. See [Hardware transcoding](/docs/server/transcoding/).

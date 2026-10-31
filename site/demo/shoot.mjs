@@ -18,6 +18,11 @@ const { media, stop } = await startServer()
 const browser = await chromium.launch()
 const { open, dress, shot } = capture(browser, { origin, only: new Set(process.argv.slice(2)), paths: media })
 
+/** Opens a Settings group, such as 'libraries' or 'you'. */
+const settings = async (page, group) => {
+  await page.goto(`${origin}/settings/${group}`)
+  await sleep(500)
+}
 /** A settings section, by its heading. */
 const section = (page, heading) => page.locator('section').filter({ has: page.getByRole('heading', { name: heading, exact: true, level: 2 }) }).first()
 
@@ -54,7 +59,7 @@ try {
   await api(token, 'PUT', '/analysis', { mode: 'normal' })
   {
     const page = await open(desktop, token)
-    await page.goto(origin + '/settings')
+    await settings(page, 'libraries')
     await page.getByRole('button', { name: 'Add a library' }).click()
     await page.getByRole('button', { name: 'Movies', exact: true }).click()
     await page.locator('form button', { hasText: 'Movies' }).last().click() // the folder
@@ -350,15 +355,18 @@ try {
     await shot(page, 'phone-movie', { maxWidth: 1170 })
     await page.goto(`${origin}/libraries`)
     await shot(page, 'phone-libraries', { maxWidth: 1170 })
+    await page.goto(`${origin}/settings`)
+    await shot(page, 'phone-settings', { maxWidth: 1170 })
     await page.context().close()
   }
 
   // --- People, profiles, themes ---
   {
     const page = await open(desktop, token)
-    await page.goto(`${origin}/settings`)
+    await settings(page, 'people')
     await shot(page, 'people', { target: section(page, 'People') })
     if (wanted('find-artwork')) {
+      await settings(page, 'libraries')
       const libraries = section(page, 'Libraries')
       const music = libraries.locator('div.flex.items-center.gap-4').filter({ hasText: 'Music' }).first()
       await music.getByRole('button', { name: 'Find artwork' }).click()
@@ -392,7 +400,7 @@ try {
           },
         })
       })
-      await imp.goto(`${origin}/settings`)
+      await settings(imp, 'libraries')
       const importing = section(imp, 'Import from another media server')
       await importing.getByRole('button', { name: 'Start' }).click()
       await importing.getByRole('button', { name: /Found on this computer/ }).click()
@@ -401,6 +409,7 @@ try {
       await shot(imp, 'import', { target: importing })
       await imp.context().close()
     }
+    await settings(page, 'people')
     const profiles = section(page, 'Profiles')
     await profiles.getByRole('button', { name: 'Add profile' }).last().click()
     await profiles.getByLabel('Name').fill('Riley')
@@ -409,14 +418,19 @@ try {
     await profiles.getByRole('button', { name: /save|add/i }).last().click()
     await sleep(800)
     await shot(page, 'profiles', { target: section(page, 'Profiles') })
+    await settings(page, 'you')
     await shot(page, 'themes', { target: section(page, 'Appearance') })
     await shot(page, 'playback', { target: section(page, 'Playback') })
+    await settings(page, 'libraries')
     await shot(page, 'new-files', { target: section(page, 'New files') })
     await shot(page, 'media-analysis', { target: section(page, 'Media analysis') })
+    await settings(page, 'content')
     await shot(page, 'tmdb-key', { target: section(page, 'Posters and details') })
-    await shot(page, 'home-network', { target: section(page, 'Home network') })
     await shot(page, 'trailers', { target: section(page, 'Trailers') })
     await shot(page, 'holiday-rows', { target: section(page, 'Home') })
+    await settings(page, 'network')
+    await shot(page, 'home-network', { target: section(page, 'Home network') })
+    await settings(page, 'streaming')
     await shot(page, 'transcoding', { target: section(page, 'Transcoding') })
     if (wanted('adaptive-quality')) {
       await api(token, 'PUT', '/settings', { adaptiveQuality: true, remoteQualityCap: '720p' })
@@ -427,8 +441,12 @@ try {
       await page.reload()
       await sleep(1000)
     }
+    await settings(page, 'you')
     await shot(page, 'devices', { target: section(page, 'Your devices') })
     await shot(page, 'account', { target: section(page, 'Your account') })
+    await settings(page, 'libraries')
+    await shot(page, 'settings-groups')
+    await settings(page, 'add-ons')
     const plugins = section(page, 'Plugins')
     await plugins.getByRole('button', { name: 'Add plugin' }).click()
     await shot(page, 'plugins-add', { target: plugins })
@@ -466,7 +484,7 @@ try {
     await page.goto(origin + '/profiles')
     await page.getByRole('button', { name: admin.username }).first().click()
     await sleep(500)
-    await page.goto(origin + '/settings')
+    await settings(page, 'add-ons')
     const card = page.getByText('Not connected · for Discover').locator('xpath=ancestor::div[contains(@class, "rounded-xl")][1]')
     await card.getByRole('button', { name: 'Connect' }).click()
     await card.getByLabel('Address').fill(overseerrURL)

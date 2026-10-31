@@ -5,7 +5,7 @@ sidebar:
   order: 2
 ---
 
-Turn on **Settings → Remote access → Watch away from home** and Matinee sets itself up to be reached from outside your home, with nothing to configure on the router.
+Turn on **Settings → Network → Remote access → Watch away from home** and Matinee sets itself up to be reached from outside your home, with nothing to configure on the router.
 
 ![Remote access turned off](../images/remote-access-off.webp)
 
@@ -31,7 +31,7 @@ To not use the lookup service, set `MATINEE_CONNECT_URL=off`. The apps then lear
 <!-- since: v0.1.1 -->
 ### Matinee Connect
 
-Opening a port, the certificate and the apps picking up the address are free. The lookup service, and the check for a port you forwarded yourself, run on servers Yeix pays for, so they come with a Matinee Connect subscription for your server. In **Settings → Remote access**, pick monthly or yearly; checkout opens on yeix.io, and Settings shows the subscription as soon as it's paid. Each period is paid in advance, and you can change your card or cancel from **Manage** at any time; it keeps working to the end of the period you paid for.
+Opening a port, the certificate and the apps picking up the address are free. The lookup service, and the check for a port you forwarded yourself, run on servers Yeix pays for, so they come with a Matinee Connect subscription for your server. In **Settings → Network → Remote access**, pick monthly or yearly; checkout opens on yeix.io, and Settings shows the subscription as soon as it's paid. Each period is paid in advance, and you can change your card or cancel from **Manage** at any time; it keeps working to the end of the period you paid for.
 
 If you run your own lookup service (`MATINEE_CONNECT_URL`, see [the connect service](https://github.com/yeixio/matinee/blob/main/docs/connect.md)), no subscription is needed.
 
@@ -54,7 +54,7 @@ In both cases, ask your provider for a public address (many give one for free or
 If your router won't open a port when asked, and you'd rather not turn on UPnP, forward one in the router's settings:
 
 1. Forward TCP port **443** on the router to port **7443** on the computer running Matinee. If 443 is taken, use port 80 instead.
-2. In **Settings → Remote access**, set **Router port** to the port you forwarded.
+2. In **Settings → Network → Remote access**, set **Router port** to the port you forwarded.
 
 With a [Matinee Connect](#matinee-connect) subscription, Matinee asks the lookup service to try connecting to that port from outside, so if the forward doesn't work yet, Settings says so right away. Let's Encrypt then checks through the same port and the certificate renews there by itself. Only 443 and 80 work, since those are the ports Let's Encrypt checks. Without a subscription, turn on UPnP or NAT-PMP instead, or use your own domain.
 

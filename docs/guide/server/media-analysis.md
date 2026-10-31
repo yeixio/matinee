@@ -15,7 +15,7 @@ That's where the badges on titles come from, along with the **Quality** [filters
 
 The analysis reads one file at a time at the lowest priority, waits while someone's watching something being converted, and rests for a few minutes when files are slow to read. It looks at a file again only when the file changes, so after the first pass it has little to do.
 
-Admins can see its progress under **Settings → Media analysis** and pick a speed:
+Admins can see its progress under **Settings → Libraries → Media analysis** and pick a speed:
 
 | Speed | |
 | --- | --- |

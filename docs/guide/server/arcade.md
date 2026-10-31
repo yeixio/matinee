@@ -10,7 +10,7 @@ The **Arcade** plugin adds an Arcade library for your MAME ROM sets. Each game g
 
 ## Adding it
 
-1. Open **Settings → Plugins**, click **Add plugin**, and install **Arcade** from the official plugins. (See [Plugins](/docs/server/plugins/) for what installing a plugin means.)
+1. Open **Settings → Add-ons → Plugins**, click **Add plugin**, and install **Arcade** from the official plugins. (See [Plugins](/docs/server/plugins/) for what installing a plugin means.)
 2. Click **Turn on**. Matinee asks first, because the plugin looks up artwork on `raw.githubusercontent.com` for games you have no pictures for.
 3. In **Settings → Libraries**, click **Add a library**, pick **Arcade**, and choose your MAME folder.
 

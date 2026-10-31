@@ -11,7 +11,7 @@ A profile is a person on a shared sign-in: one account (or the Home account on y
 
 ## Add a profile
 
-Admins manage profiles under **Settings → Profiles**. Every account is listed, plus **Home** for devices on your home network that haven't signed in.
+Admins manage profiles under **Settings → People and profiles → Profiles**. Every account is listed, plus **Home** for devices on your home network that haven't signed in.
 
 1. Click **Add profile** under the account it belongs to.
 2. Type a name and pick a color.
