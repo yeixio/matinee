@@ -59,6 +59,14 @@ type Finisher interface {
 	FinishScan(ctx context.Context, st *store.Store, lib store.Library) error
 }
 
+// Remote is a Kind whose items aren't files in folders but come from
+// elsewhere, such as podcasts from their feeds. Scanning a library of it
+// refreshes it with Scanner.Refresh instead of walking folders.
+type Remote interface {
+	Kind
+	Remote()
+}
+
 // ErrSkip from Index leaves a file out, like one with nothing playable.
 var ErrSkip = errUnplayable
 
@@ -108,6 +116,21 @@ func init() {
 	Register(tv{})
 	Register(music{})
 	Register(audiobooks{})
+	Register(podcasts{})
+}
+
+// ---- podcasts ----
+
+// podcasts are shows followed by their feeds (see internal/podcast), so a
+// podcast library has no files to scan.
+type podcasts struct{}
+
+func (podcasts) Name() string               { return "podcasts" }
+func (podcasts) Wants(string) bool          { return false }
+func (podcasts) Playable(probe.Result) bool { return false }
+func (podcasts) Remote()                    {}
+func (podcasts) Index(context.Context, *store.Store, File) (store.Item, error) {
+	return store.Item{}, ErrSkip
 }
 
 // findArt returns the first of names that exists in dir.

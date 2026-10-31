@@ -188,10 +188,10 @@ func (s *Store) markParts(ctx context.Context, userID, bookID int64, played bool
 	return err
 }
 
-// ContinueListening lists books someone started and didn't finish, the
-// latest first, leaving out the ones they took off the row.
+// ContinueListening lists books and podcast episodes someone started and
+// didn't finish, the latest first, leaving out the ones they took off the row.
 func (s *Store) ContinueListening(ctx context.Context, userID int64, limit int) ([]Item, error) {
-	return s.queryItems(ctx, "p.played = 0 AND p.position_ms > 0 AND p.hidden = 0 AND i.kind = 'book'",
+	return s.queryItems(ctx, "p.played = 0 AND p.position_ms > 0 AND p.hidden = 0 AND i.kind IN ('book', 'podcastEpisode')",
 		"p.updated_at DESC LIMIT ?", userID, limit)
 }
 

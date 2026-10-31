@@ -15,6 +15,8 @@ import (
 	"fmt"
 	"io"
 	"log/slog"
+	"net/http"
+	"net/url"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -89,6 +91,20 @@ func NewManager(st *store.Store, ffmpeg, dir string, log *slog.Logger) *Manager 
 // affects its contents, so identical requests share it.
 func (m *Manager) Plan(d *store.Download, it store.Item, q Quality) {
 	d.SourceSize, d.SourceMtime = it.Size, it.Mtime
+	if store.IsRemote(it.Path) && q.Name == store.QualityOriginal {
+		// An episode on the internet: fetched into the cache as it is.
+		sum := sha256.Sum256([]byte(it.Path))
+		mime := stream.MimeType(it.Path)
+		ext := filepath.Ext(store.EpisodeURL(it.Path))
+		if u, err := url.Parse(store.EpisodeURL(it.Path)); err == nil {
+			ext = strings.ToLower(filepath.Ext(u.Path))
+		}
+		if ext == "" || len(ext) > 6 {
+			ext = ".mp3"
+		}
+		d.File, d.MimeType = filepath.Join(m.Dir, hex.EncodeToString(sum[:12])+ext), mime
+		return
+	}
 	if q.Name == store.QualityOriginal {
 		d.File, d.MimeType = it.Path, stream.MimeType(it.Path)
 		return
@@ -103,7 +119,7 @@ func (m *Manager) Plan(d *store.Download, it store.Item, q Quality) {
 
 // Converted says whether a download's file is one Matinee made (and may delete).
 func (m *Manager) Converted(d store.Download) bool {
-	return d.Quality != store.QualityOriginal && filepath.Dir(d.File) == filepath.Clean(m.Dir)
+	return filepath.Dir(d.File) == filepath.Clean(m.Dir)
 }
 
 // Wake tells the queue there's new work.
@@ -238,7 +254,12 @@ func (m *Manager) build(ctx context.Context, d store.Download) (sums, int64, err
 	}
 	part := d.File + ".part"
 	defer os.Remove(part)
-	if err := m.convert(ctx, it, q, burn, part); err != nil {
+	if store.IsRemote(it.Path) && q.Name == store.QualityOriginal {
+		err = m.fetch(ctx, it, part)
+	} else {
+		err = m.convert(ctx, it, q, burn, part)
+	}
+	if err != nil {
 		return sums{}, 0, err
 	}
 	// Only a finished conversion gets the real name, so a file under that
@@ -254,7 +275,7 @@ func (m *Manager) build(ctx context.Context, d store.Download) (sums, int64, err
 // ConvertArgs is the FFmpeg command line converting it to a single MP4 (or
 // M4A, for music) at quality q, writing progress to stdout.
 func ConvertArgs(it store.Item, q Quality, burnSub int, out string) []string {
-	args := []string{"-hide_banner", "-loglevel", "error", "-nostdin", "-nostats", "-progress", "pipe:1", "-i", it.Path}
+	args := append([]string{"-hide_banner", "-loglevel", "error", "-nostdin", "-nostats", "-progress", "pipe:1"}, stream.Input(it)...)
 	if it.VideoCodec == "" {
 		args = append(args, "-vn", "-map", "0:a:0", "-c:a", "aac", "-b:a", "256k", "-movflags", "+faststart", "-f", "ipod", "-y", out)
 		return args
@@ -334,6 +355,54 @@ func (m *Manager) convert(ctx context.Context, it store.Item, q Quality, burnSub
 		return fmt.Errorf("conversion failed: %w", err)
 	}
 	return nil
+}
+
+// fetch copies an episode on the internet into the cache as it is.
+func (m *Manager) fetch(ctx context.Context, it store.Item, out string) error {
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, store.EpisodeURL(it.Path), nil)
+	if err != nil {
+		return err
+	}
+	resp, err := stream.Remote.Do(req)
+	if err != nil {
+		return fmt.Errorf("the show's host isn't answering: %w", err)
+	}
+	defer resp.Body.Close()
+	if resp.StatusCode != http.StatusOK {
+		return fmt.Errorf("the show's host answered %s", resp.Status)
+	}
+	f, err := os.Create(out)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+	total := resp.ContentLength
+	if total <= 0 {
+		total = it.Size
+	}
+	var done int64
+	last := time.Now()
+	buf := make([]byte, 256<<10)
+	for {
+		n, rerr := resp.Body.Read(buf)
+		if n > 0 {
+			if _, err := f.Write(buf[:n]); err != nil {
+				return err
+			}
+			done += int64(n)
+			if total > 0 && time.Since(last) > 2*time.Second {
+				last = time.Now()
+				m.Store.SetDownloadProgress(ctx, strings.TrimSuffix(out, ".part"), int(min(950, done*950/total)))
+			}
+		}
+		if rerr == io.EOF {
+			break
+		}
+		if rerr != nil {
+			return rerr
+		}
+	}
+	return f.Close()
 }
 
 // sums are a prepared file's checksums.
