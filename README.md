@@ -147,6 +147,10 @@ The apt and dnf repositories and the rpm packages are signed with the key "Matin
 
 [Download Matinee Server for Mac](https://github.com/yeixio/matinee/releases/latest/download/Matinee-Server.dmg) (macOS 13 or later), drag it to Applications and open it. It runs the server from the menu bar with FFmpeg built in, and updates itself. See [the guide](https://matinee.yeix.io/docs/getting-started/mac/).
 
+### Windows
+
+Download the installer for [x64 PCs](https://github.com/yeixio/matinee/releases/latest/download/Matinee-Setup-x64.exe) or [Arm PCs](https://github.com/yeixio/matinee/releases/latest/download/Matinee-Setup-arm64.exe) (Windows 10 and 11) and run it. It installs the server with FFmpeg, opens Windows Firewall on private networks, and runs Matinee from an icon in the notification area that starts and stops it, starts it at sign-in, shows its log and installs updates. Data and settings live in `%LOCALAPPDATA%\Matinee`. See [Windows](https://matinee.yeix.io/docs/getting-started/windows/) in the guide.
+
 ### Homebrew (macOS and Linux)
 
 ```sh
@@ -307,7 +311,7 @@ The Go tests build real media files with FFmpeg and run a full scan, browse, pla
 
 The workflow picks the next version after the last release, and stops without tagging if that version's notes are missing, if CI hasn't passed on `main` (it waits while CI is still running), or if `main` hasn't changed since the last release. Pushing a tag by hand (`git tag v0.2.0 && git push origin v0.2.0`) still releases too. Notes that change after a release is out are copied to its GitHub release when they reach `main`.
 
-The release workflow tests, then publishes `ghcr.io/yeixio/matinee:0.2.0` (and `0.2`, `latest`) for amd64, arm64 and armv7, pushes the Helm chart to `oci://ghcr.io/yeixio/charts/matinee` with that version, and attaches single-binary archives for Linux, macOS and Windows plus `.deb` and `.rpm` packages, and the signed Mac app ([docs/mac-app.md](docs/mac-app.md)), to a GitHub release. It then installs the packages from freshly built apt and dnf repositories in Debian, Ubuntu and Fedora containers, publishes those repositories on the `packages` branch, and opens a pull request updating `Formula/matinee.rb` for Homebrew. A tag with a suffix (`v0.2.0-beta.1`) is a pre-release: it leaves `latest`, Homebrew, apt and dnf alone. Packaging details and the signing key setup are in [docs/packaging.md](docs/packaging.md).
+The release workflow tests, then publishes `ghcr.io/yeixio/matinee:0.2.0` (and `0.2`, `latest`) for amd64, arm64 and armv7, pushes the Helm chart to `oci://ghcr.io/yeixio/charts/matinee` with that version, and attaches single-binary archives for Linux, macOS and Windows, Windows installers, and `.deb` and `.rpm` packages, and the signed Mac app ([docs/mac-app.md](docs/mac-app.md)), to a GitHub release. It then installs the packages from freshly built apt and dnf repositories in Debian, Ubuntu and Fedora containers, publishes those repositories on the `packages` branch, and opens a pull request updating `Formula/matinee.rb` for Homebrew. A tag with a suffix (`v0.2.0-beta.1`) is a pre-release: it leaves `latest`, Homebrew, apt and dnf alone. Packaging details and the signing key setup are in [docs/packaging.md](docs/packaging.md).
 
 ## Support Matinee
 

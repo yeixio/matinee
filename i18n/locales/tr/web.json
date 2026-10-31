@@ -605,6 +605,9 @@
       "added": "Eklendi",
       "useFolder": "Bu klasörü kullan",
       "noSubfolders": "Alt klasör yok",
+      "goTo": "Ya da bir klasör yazın, örneğin \\\\nas\\media",
+      "go": "Git",
+      "drives": "Sürücüler",
       "podcastsNoFolders": "Podcast’ler klasöre ihtiyaç duymaz. Kitaplık oluşturulduktan sonra programları oradan ekleyin.",
       "podcastsChecked": "Yeni bölümler saatte bir denetlenir"
     },

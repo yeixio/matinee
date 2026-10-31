@@ -605,6 +605,9 @@
       "added": "Added",
       "useFolder": "Use this folder",
       "noSubfolders": "No subfolders",
+      "goTo": "Or type a folder, such as \\\\nas\\media",
+      "go": "Go",
+      "drives": "Drives",
       "podcastsNoFolders": "Podcasts don't need a folder. Add shows from the library once it's created.",
       "podcastsChecked": "Checked for new episodes every hour"
     },

@@ -27,6 +27,8 @@ web/*.tsbuildinfo
 # Arcade plugin
 plugins/arcade/test/node_modules/
 plugins/arcade/test/package-lock.json
+/.cache/
+cmd/matinee-tray/rsrc_windows_*.syso
 
 # Mac app
 /macos/.build/

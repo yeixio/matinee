@@ -605,6 +605,9 @@
       "added": "Tillagd",
       "useFolder": "Använd den här mappen",
       "noSubfolders": "Inga undermappar",
+      "goTo": "Eller skriv en mapp, till exempel \\\\nas\\media",
+      "go": "Gå",
+      "drives": "Enheter",
       "podcastsNoFolders": "Poddar behöver ingen mapp. Lägg till program från biblioteket när det har skapats.",
       "podcastsChecked": "Kollas efter nya avsnitt varje timme"
     },

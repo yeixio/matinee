@@ -145,6 +145,11 @@ jobs:
           ls -l dist/mac-snapshots
           test -s dist/mac-snapshots/mac-menu-light.png
 
+      # The pictures go in the log as well, for checking them where the
+      # artifact can't be downloaded.
+      - name: Print the pictures
+        if: inputs.tag == ''
+        run: for f in dist/mac-snapshots/*-light.png; do echo "SNAPSHOT $(basename "$f") $(base64 -i "$f" | tr -d '\n')"; done
       - uses: actions/upload-artifact@v4
         with:
           name: mac-snapshots

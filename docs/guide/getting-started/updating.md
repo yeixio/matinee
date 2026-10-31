@@ -20,6 +20,10 @@ The bottom of **Settings** shows the server's version, such as `Matinee server v
 | Mac app | It offers each new version by itself; **Check for updates** in its menu looks now |
 | Helm | `helm upgrade matinee oci://ghcr.io/yeixio/charts/matinee --version <new version> -f my-values.yaml` |
 
+<!-- since: v0.1.8 -->
+On Windows, Matinee updates itself from its icon next to the clock. See [Windows](/docs/getting-started/windows/#updates).
+<!-- /since -->
+
 Updates move your database forward by themselves on the first start. Going back to an older version after that isn't supported, so take a backup first if you might want to.
 
 Docker images are tagged by version (`0.1.0`, `0.1`) as well as `latest`, so you can pin a version and move up on your own schedule.

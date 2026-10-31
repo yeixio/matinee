@@ -609,6 +609,9 @@
       "added": "Ajouté",
       "useFolder": "Utiliser ce dossier",
       "noSubfolders": "Aucun sous-dossier",
+      "goTo": "Ou saisissez un dossier, comme \\\\nas\\media",
+      "go": "Ouvrir",
+      "drives": "Lecteurs",
       "podcastsNoFolders": "Les podcasts n’ont pas besoin de dossier. Ajoutez des émissions depuis la bibliothèque une fois créée.",
       "podcastsChecked": "Nouveaux épisodes vérifiés toutes les heures"
     },

@@ -609,6 +609,9 @@
       "added": "Adăugat",
       "useFolder": "Folosește acest dosar",
       "noSubfolders": "Fără subdosare",
+      "goTo": "Sau scrie un dosar, de exemplu \\\\nas\\media",
+      "go": "Mergi",
+      "drives": "Unități",
       "podcastsNoFolders": "Podcasturile nu au nevoie de un dosar. Adaugă emisiuni din bibliotecă după ce o creezi.",
       "podcastsChecked": "Episoadele noi sunt verificate în fiecare oră"
     },
