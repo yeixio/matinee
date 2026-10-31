@@ -24,6 +24,12 @@ cat <<NOTES
 - **Kubernetes:** \`helm install matinee oci://ghcr.io/${owner}/charts/matinee --version ${version}\`
 - **Homebrew (macOS, Linux):** \`brew tap yeixio/matinee https://github.com/yeixio/matinee && brew install yeixio/matinee/matinee\`
 - **Debian, Ubuntu, Fedora, RHEL:** add the apt or dnf repository as the [README](https://github.com/${repo}#debian-and-ubuntu) shows, or install the \`.deb\` or \`.rpm\` below. Either runs Matinee as a service on port 7171.
+NOTES
+# The Mac app is attached only when it was signed (see mac.yml).
+if [ -n "${MAC_APP:-}" ] || gh release view "$tag" -R "$repo" --json assets --jq '.assets[].name' 2>/dev/null | grep -qx Matinee-Server.dmg; then
+  echo "- **Mac app:** download \`Matinee-Server.dmg\` below and drag Matinee Server to Applications. It runs the server from the menu bar and updates itself (macOS 13 or later)."
+fi
+cat <<NOTES
 - **Single binary:** download the archive for your system below. FFmpeg must be on the PATH.
 NOTES
 

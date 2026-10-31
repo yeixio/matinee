@@ -17,6 +17,7 @@ The bottom of **Settings** shows the server's version, such as `Matinee server v
 | apt | `sudo apt-get update && sudo apt-get upgrade` |
 | dnf | `sudo dnf upgrade matinee` |
 | Homebrew | `brew upgrade matinee && brew services restart matinee` |
+| Mac app | It offers each new version by itself; **Check for updates** in its menu looks now |
 | Helm | `helm upgrade matinee oci://ghcr.io/yeixio/charts/matinee --version <new version> -f my-values.yaml` |
 
 <!-- since: v0.1.8 -->

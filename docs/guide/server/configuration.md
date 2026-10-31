@@ -12,6 +12,7 @@ Most of Matinee is set up in the web player under **Settings**. A few things abo
 | Docker | `-e NAME=value` on `docker run`, or `environment:` in Compose |
 | apt, dnf | `/etc/matinee/matinee.env`, then `sudo systemctl restart matinee` |
 | Homebrew | `$(brew --prefix)/etc/matinee/matinee.env`, then `brew services restart matinee` |
+| Mac app | **Settings → Edit advanced settings** in its menu (`~/Library/Application Support/Matinee Server/matinee.env`), then **Restart server** |
 | Helm | `env:` in your values |
 
 | Variable | Default | What it does |

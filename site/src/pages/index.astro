@@ -21,6 +21,7 @@ import phoneDetails from '../assets/app-phone-details.webp'
 const base = import.meta.env.BASE_URL
 const guide = (path = '') => `${base}docs/${path}`
 const github = 'https://github.com/yeixio/matinee'
+const macDownload = `${github}/releases/latest/download/Matinee-Server.dmg`
 const donate = 'https://yeix.io/matinee/donate'
 
 // Tells search engines what Matinee is, for richer results.
@@ -107,7 +108,7 @@ const steps = [
     n: '1',
     title: 'Install it',
     body: hasWindows
-      ? 'A Windows installer, one Docker command, a package for Debian, Ubuntu, Fedora or Homebrew, or a Helm chart.'
+      ? 'Apps for Mac and Windows, one Docker command, a package for Debian, Ubuntu, Fedora or Homebrew, or a Helm chart.'
       : 'One Docker command, a package for Debian, Ubuntu, Fedora or Homebrew, or a Helm chart.',
   },
   { n: '2', title: 'Point it at your folders', body: 'Movies, TV and music. Matinee names everything from your file and folder names.' },
@@ -245,12 +246,25 @@ const installs = [
           <code>http://your-server:7171</code> and follow the setup.
         </p>
         {hasWindows && (
-          <div class="windows">
+          <>
+          <div class="download">
+            <div>
+              <h3>Mac</h3>
+              <p>Matinee Server runs from the menu bar with everything included, and updates itself. macOS 13 or later, Apple silicon and Intel.</p>
+            </div>
+            <div class="download-links">
+              <a class="button primary" href={macDownload}>Download for Mac</a>
+              <span>
+                <a href={guide('getting-started/mac/')}>Guide</a>
+              </span>
+            </div>
+          </div>
+          <div class="download">
             <div>
               <h3>Windows 10 and 11</h3>
               <p>An installer with everything included. Matinee runs from an icon next to the clock and starts when you sign in.</p>
             </div>
-            <div class="windows-links">
+            <div class="download-links">
               <a class="button primary" id="windows-download" href={windowsDownload('x64')} data-arm={windowsDownload('arm64')}>
                 Download for Windows
               </a>
@@ -260,6 +274,7 @@ const installs = [
               </span>
             </div>
           </div>
+          </>
         )}
         <div class="install-grid">
           {installs.map((i) => (
@@ -622,7 +637,7 @@ const installs = [
     color: var(--text);
     line-height: 1.55;
   }
-  .windows {
+  .download {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -634,17 +649,17 @@ const installs = [
     border-radius: 14px;
     text-align: left;
   }
-  .windows h3 {
+  .download h3 {
     font-family: var(--sans);
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--muted);
   }
-  .windows p {
+  .download p {
     margin: 0;
   }
-  .windows-links {
+  .download-links {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -653,7 +668,7 @@ const installs = [
     font-size: 0.85rem;
   }
   @media (max-width: 640px) {
-    .windows {
+    .download {
       flex-direction: column;
       align-items: stretch;
     }
