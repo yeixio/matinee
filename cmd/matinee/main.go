@@ -7,6 +7,7 @@ import (
 	"errors"
 	"flag"
 	"fmt"
+	"io"
 	"log/slog"
 	"net"
 	"net/http"
@@ -88,6 +89,15 @@ func run() error {
 
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
 	defer stop()
+	// Windows has no SIGTERM, so the Windows tray app (cmd/matinee-tray)
+	// stops the server by closing its stdin. That also stops it if the tray
+	// app dies.
+	if os.Getenv("MATINEE_STOP_ON_STDIN_CLOSE") == "1" {
+		go func() {
+			io.Copy(io.Discard, os.Stdin)
+			stop()
+		}()
+	}
 
 	// Titles looked up before kids profiles get their rating levels now.
 	country := strings.ToUpper(cfg.RatingCountry)

@@ -609,6 +609,9 @@
       "added": "Aggiunta",
       "useFolder": "Usa questa cartella",
       "noSubfolders": "Nessuna sottocartella",
+      "goTo": "Oppure scrivi una cartella, come \\\\nas\\media",
+      "go": "Vai",
+      "drives": "Unità",
       "podcastsNoFolders": "I podcast non hanno bisogno di una cartella. Aggiungi i programmi dalla libreria dopo averla creata.",
       "podcastsChecked": "Nuovi episodi controllati ogni ora"
     },

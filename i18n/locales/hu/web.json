@@ -605,6 +605,9 @@
       "added": "Hozzáadva",
       "useFolder": "Ez a mappa",
       "noSubfolders": "Nincsenek almappák",
+      "goTo": "Vagy írj be egy mappát, például \\\\nas\\media",
+      "go": "Ugrás",
+      "drives": "Meghajtók",
       "podcastsNoFolders": "A podcastokhoz nem kell mappa. A könyvtár létrehozása után ott adhatsz hozzá műsorokat.",
       "podcastsChecked": "Óránként ellenőrzi az új epizódokat"
     },

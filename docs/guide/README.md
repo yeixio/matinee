@@ -17,5 +17,8 @@ on `main` becomes the next release's guide.
   It only looks (as the Home guest), so it changes nothing on the server.
   Write captions that don't name the titles on screen, since they differ
   between the two.
+- The Windows screenshots (`windows-*.webp`) come from CI instead: the
+  Windows install test (`scripts/test-windows-install.ps1`) takes them on a
+  fresh Windows runner and keeps them on the `windows-shots-x64` branch.
 
 Preview the site with `cd site && pnpm install && pnpm dev`.

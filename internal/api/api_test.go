@@ -307,10 +307,18 @@ func TestEndToEnd(t *testing.T) {
 	}
 
 	// The folder picker opens at the media root when no path is given.
-	var root struct{ Path string }
+	var root struct {
+		Path  string
+		Dirs  []string
+		Paths []string
+	}
 	c.do("GET", "/api/fs", nil, &root)
 	if root.Path != tmp {
 		t.Fatalf("folder picker starts at %q, want the media root %q", root.Path, tmp)
+	}
+	// Each subfolder comes with its full path, written the server's way.
+	if len(root.Dirs) == 0 || len(root.Paths) != len(root.Dirs) || root.Paths[0] != filepath.Join(tmp, root.Dirs[0]) {
+		t.Fatalf("folder picker paths: dirs %q, paths %q", root.Dirs, root.Paths)
 	}
 
 	// Non-admins can browse but not manage libraries.

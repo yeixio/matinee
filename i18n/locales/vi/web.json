@@ -601,6 +601,9 @@
       "added": "Đã thêm",
       "useFolder": "Dùng thư mục này",
       "noSubfolders": "Không có thư mục con",
+      "goTo": "Hoặc nhập một thư mục, ví dụ \\\\nas\\media",
+      "go": "Đi",
+      "drives": "Ổ đĩa",
       "podcastsNoFolders": "Podcast không cần thư mục. Hãy thêm chương trình từ thư viện sau khi tạo.",
       "podcastsChecked": "Kiểm tra tập mới mỗi giờ"
     },

@@ -228,8 +228,62 @@ jobs:
           name: package-repos
           path: dist/packages
 
+  # The Windows installers: the server, the tray app and FFmpeg. They're
+  # signed once the Azure signing secrets and variables are set (see
+  # docs/packaging.md), and unsigned until then.
+  windows:
+    needs: [tag, test]
+    env:
+      TAG: ${{ needs.tag.outputs.tag }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - uses: pnpm/action-setup@v4
+        with:
+          package_json_file: web/package.json
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: web/pnpm-lock.yaml
+      - run: make web
+      - name: Install NSIS
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends nsis
+      - name: Set up signing
+        if: ${{ vars.AZURE_SIGNING_ACCOUNT != '' }}
+        env:
+          AZURE_CLIENT_ID: ${{ secrets.AZURE_SIGNING_CLIENT_ID }}
+          AZURE_CLIENT_SECRET: ${{ secrets.AZURE_SIGNING_CLIENT_SECRET }}
+          AZURE_TENANT_ID: ${{ secrets.AZURE_SIGNING_TENANT_ID }}
+        run: |
+          set -euo pipefail
+          curl -fsSL -o "$RUNNER_TEMP/jsign.jar" https://github.com/ebourg/jsign/releases/download/7.1/jsign-7.1.jar
+          echo "cfb48b07fdd2ee199bfc9e71d8dccdde67a799c4793602e446c7a101be62b3c4  $RUNNER_TEMP/jsign.jar" | sha256sum -c -
+          az login --service-principal -u "$AZURE_CLIENT_ID" -p "$AZURE_CLIENT_SECRET" --tenant "$AZURE_TENANT_ID" --allow-no-subscriptions > /dev/null
+          token=$(az account get-access-token --resource https://codesigning.azure.net --query accessToken -o tsv)
+          echo "::add-mask::$token"
+          {
+            echo "WINDOWS_SIGNING=1"
+            echo "JSIGN_JAR=$RUNNER_TEMP/jsign.jar"
+            echo "AZURE_SIGNING_TOKEN=$token"
+          } >> "$GITHUB_ENV"
+      - name: Build the installers
+        env:
+          TMDB_KEY: ${{ secrets.TMDB_API_KEY }}
+          AZURE_SIGNING_ENDPOINT: ${{ vars.AZURE_SIGNING_ENDPOINT }}
+          AZURE_SIGNING_ACCOUNT: ${{ vars.AZURE_SIGNING_ACCOUNT }}
+          AZURE_SIGNING_PROFILE: ${{ vars.AZURE_SIGNING_PROFILE }}
+        run: VERSION="${TAG#v}" scripts/package-windows.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows
+          path: dist/Matinee-Setup-*.exe
+
   release:
-    needs: [tag, image, chart, binaries, packages]
+    needs: [tag, image, chart, binaries, packages, windows]
     env:
       TAG: ${{ needs.tag.outputs.tag }}
     runs-on: ubuntu-latest
@@ -246,6 +300,10 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: packages
+          path: dist
+      - uses: actions/download-artifact@v4
+        with:
+          name: windows
           path: dist
       - name: Checksum everything attached
         run: cd dist && rm -f SHA256SUMS.txt && sha256sum -- * > SHA256SUMS.txt

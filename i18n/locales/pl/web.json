@@ -613,6 +613,9 @@
       "added": "Dodano",
       "useFolder": "Użyj tego folderu",
       "noSubfolders": "Brak podfolderów",
+      "goTo": "Lub wpisz folder, np. \\\\nas\\media",
+      "go": "Przejdź",
+      "drives": "Dyski",
       "podcastsNoFolders": "Podcasty nie potrzebują folderu. Dodawaj audycje w bibliotece po jej utworzeniu.",
       "podcastsChecked": "Nowe odcinki sprawdzane co godzinę"
     },
