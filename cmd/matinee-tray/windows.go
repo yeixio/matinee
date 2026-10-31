@@ -4,6 +4,7 @@ package main
 
 import (
 	"errors"
+	"fmt"
 	"os"
 	"os/exec"
 	"syscall"
@@ -22,19 +23,68 @@ const (
 	mbError = windows.MB_OK | windows.MB_ICONERROR
 )
 
-var findWindow = windows.NewLazySystemDLL("user32.dll").NewProc("FindWindowW")
+var (
+	user32           = windows.NewLazySystemDLL("user32.dll")
+	findWindow       = user32.NewProc("FindWindowW")
+	createWindow     = user32.NewProc("CreateWindowExW")
+	destroyWindow    = user32.NewProc("DestroyWindow")
+	shellNotifyIcon  = windows.NewLazySystemDLL("shell32.dll").NewProc("Shell_NotifyIconW")
+	errTaskbarAbsent = errors.New("no taskbar yet")
+)
 
-// waitForTaskbar waits until the taskbar is there to hold the icon. At
-// sign-in Windows can start Matinee before Explorer has made the taskbar,
-// and an icon added before then fails.
-func waitForTaskbar() {
-	class, _ := windows.UTF16PtrFromString("Shell_TrayWnd")
-	for {
-		if h, _, _ := findWindow.Call(uintptr(unsafe.Pointer(class)), 0); h != 0 {
+// waitForTaskbar waits until the notification area takes icons. At sign-in
+// Windows can start Matinee before Explorer is ready for them, and an icon
+// added then fails for good, so this adds and removes a blank one until it
+// works, for up to five minutes.
+func waitForTaskbar(log func(error)) {
+	var last error
+	for range 150 {
+		err := tryNotifyIcon()
+		if err == nil {
 			return
 		}
+		if last == nil || err.Error() != last.Error() {
+			log(err)
+		}
+		last = err
 		time.Sleep(2 * time.Second)
 	}
+}
+
+func tryNotifyIcon() error {
+	tray, _ := windows.UTF16PtrFromString("Shell_TrayWnd")
+	if h, _, _ := findWindow.Call(uintptr(unsafe.Pointer(tray)), 0); h == 0 {
+		return errTaskbarAbsent
+	}
+	class, _ := windows.UTF16PtrFromString("STATIC")
+	hwnd, _, err := createWindow.Call(0, uintptr(unsafe.Pointer(class)), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	if hwnd == 0 {
+		return err
+	}
+	defer destroyWindow.Call(hwnd)
+	// NOTIFYICONDATAW, as far as the fields an empty icon needs.
+	var nid struct {
+		Size           uint32
+		Wnd            windows.Handle
+		ID, Flags, Msg uint32
+		Icon           windows.Handle
+		Tip            [128]uint16
+		State, Mask    uint32
+		Info           [256]uint16
+		Timeout, Ver   uint32
+		InfoTitle      [64]uint16
+		InfoFlags      uint32
+		GUID           windows.GUID
+		BalloonIcon    windows.Handle
+	}
+	nid.Size = uint32(unsafe.Sizeof(nid))
+	nid.Wnd = windows.Handle(hwnd)
+	nid.ID = 0x4d54
+	if r, _, err := shellNotifyIcon.Call(0 /* NIM_ADD */, uintptr(unsafe.Pointer(&nid))); r == 0 {
+		return fmt.Errorf("the notification area doesn't take icons yet: %w", err)
+	}
+	shellNotifyIcon.Call(2 /* NIM_DELETE */, uintptr(unsafe.Pointer(&nid)))
+	return nil
 }
 
 // singleInstance is false when Matinee is already running for this user.

@@ -86,8 +86,12 @@ if ([Win]::FindWindow("Shell_TrayWnd", $null) -eq [IntPtr]::Zero) {
   $noTaskbar = $true
 }
 if (-not $noTaskbar) {
-Start-Sleep 2
-$welcome = [Win]::FindWindow("#32770", "Welcome to Matinee")
+$welcome = [IntPtr]::Zero
+foreach ($i in 1..60) {
+  $welcome = [Win]::FindWindow("#32770", "Welcome to Matinee")
+  if ($welcome -ne [IntPtr]::Zero) { break }
+  Start-Sleep 1
+}
 Check ($welcome -ne [IntPtr]::Zero) "welcome message shows"
 [Win]::SetForegroundWindow($welcome) | Out-Null
 Start-Sleep 1

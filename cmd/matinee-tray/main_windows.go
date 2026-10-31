@@ -120,7 +120,7 @@ func main() {
 			fmt.Fprintln(a.log, "tray: start at sign-in:", err)
 		}
 	}
-	waitForTaskbar()
+	waitForTaskbar(func(err error) { fmt.Fprintln(a.log, "tray:", err) })
 
 	systray.Run(func() { a.ready(firstRun, *background) }, func() {
 		a.server.Stop(stopTimeout)
