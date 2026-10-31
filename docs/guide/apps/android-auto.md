@@ -25,7 +25,14 @@ Matinee has up to four tabs along the top of the car's screen:
 - **Listen now**: the books you're partway through, then the albums you've played lately.
 - **Music**: **Shuffle all**, your **Playlists**, every **Artist** and **Album**, and the albums added lately. Pick an album to see its songs; pick a song to play the album from there. Pick a playlist to play it from the top. Playlists need app version 1.0.19 or later.
 - **Audiobooks**: every book, with how far along you are in each.
+<!-- since: v0.1.8 -->
+- **Podcasts**: the episodes you're partway through, **New episodes** of the shows you follow, and the shows you follow (every show on the server, if you don't follow any). Pick a show to see its episodes, newest first. Podcasts need app version 1.0.20 or later and a podcast library on the server (see [Podcasts](/docs/watching/podcasts/)).
+<!-- /since -->
 - **Downloads**: the songs and books downloaded to your phone (see [Downloads](/docs/apps/downloads/)). These play with no connection, so they still work where the signal drops. The tab shows up once something is downloaded.
+
+<!-- since: v0.1.8 -->
+Cars show four tabs at most. With music, audiobooks, podcasts and downloads all there, the **Downloads** tab makes room: your downloads still play from the other tabs, marked as downloaded, and the tab comes back when the car has no signal. Episodes you downloaded on the phone play in the car too.
+<!-- /since -->
 
 Use the car's **search** button to find an artist, album, song or book by name.
 
@@ -49,6 +56,12 @@ A book picks up exactly where you left off, on your phone, the web or a TV. The 
 
 **Next** and **Previous** move by chapter. Your place is saved every few seconds, so it's there when you open the book again at home.
 
+<!-- since: v0.1.8 -->
+## Listening to a podcast
+
+An episode plays like a book: it starts where you left off on any device, with the same back 15 seconds, ahead 30 seconds and speed buttons. Episodes you're partway through also show under **Listen now**. Playing an episode to its end marks it played, and the car saves your place every few seconds, so the phone and the web show how far you got.
+
+<!-- /since -->
 ## The phone and the car together
 
 The car and the phone share one player. If music is playing on the phone when you get in, the car shows it and its buttons control it. With the app open on the phone, what you pick in the car plays there too, so the phone shows the same song or book.

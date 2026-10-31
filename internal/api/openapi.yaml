@@ -899,7 +899,7 @@ paths:
     get:
       summary: Browse the server's folders, to pick library folders (admins only)
       parameters:
-        - { name: path, in: query, schema: { type: string }, description: Empty starts at the server's media folder. }
+        - { name: path, in: query, schema: { type: string }, description: "Empty starts at the server's media folder. On a Windows server, / lists the drives." }
       responses:
         "200":
           description: Subfolders.
@@ -910,7 +910,9 @@ paths:
                 properties:
                   path: { type: string }
                   parent: { type: string }
-                  dirs: { type: array, items: { type: string } }
+                  dirs: { type: array, items: { type: string }, description: The subfolders' names. }
+                  paths: { type: array, items: { type: string }, description: The subfolders' full paths, in the same order. }
+                  drives: { type: boolean, description: "True when this is a Windows server's list of drives, which isn't a folder to pick." }
   /analysis:
     get:
       summary: How far the background media analysis is (admins only)

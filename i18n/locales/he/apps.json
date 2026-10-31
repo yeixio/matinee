@@ -441,6 +441,7 @@
     "listenNow": "האזנה עכשיו",
     "music": "מוזיקה",
     "audiobooks": "ספרי שמע",
+    "podcasts": "פודקאסטים",
     "signIn": "פתחו את Matinee בטלפון והתחברו כדי להאזין ברכב.",
     "loading": "בטעינה…"
   },
@@ -496,7 +497,11 @@
     "bluetooth": "הגדרות Bluetooth",
     "back15": "15 שניות אחורה",
     "ahead30": "30 שניות קדימה",
-    "storageUsed": "{{size}} בשעון הזה"
+    "storageUsed": "{{size}} בשעון הזה",
+    "playlists": "פלייליסטים",
+    "newEpisodes": "פרקים חדשים",
+    "following": "במעקב",
+    "noEpisodes": "אין עדיין פרקים."
   },
   "tvUnlock": {
     "title": "שחרור Matinee",

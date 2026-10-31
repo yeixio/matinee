@@ -605,6 +605,9 @@
       "added": "Lisätty",
       "useFolder": "Käytä tätä kansiota",
       "noSubfolders": "Ei alikansioita",
+      "goTo": "Tai kirjoita kansio, esimerkiksi \\\\nas\\media",
+      "go": "Siirry",
+      "drives": "Asemat",
       "podcastsNoFolders": "Podcastit eivät tarvitse kansiota. Lisää ohjelmia kirjastosta, kun se on luotu.",
       "podcastsChecked": "Uudet jaksot tarkistetaan tunnin välein"
     },

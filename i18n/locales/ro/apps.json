@@ -441,6 +441,7 @@
     "listenNow": "Ascultă acum",
     "music": "Muzică",
     "audiobooks": "Cărți audio",
+    "podcasts": "Podcasturi",
     "signIn": "Deschide Matinee pe telefon și conectează-te ca să asculți în mașină.",
     "loading": "Se încarcă…"
   },
@@ -496,7 +497,11 @@
     "bluetooth": "Setări Bluetooth",
     "back15": "Înapoi 15 secunde",
     "ahead30": "Înainte 30 de secunde",
-    "storageUsed": "{{size}} pe acest ceas"
+    "storageUsed": "{{size}} pe acest ceas",
+    "playlists": "Playlisturi",
+    "newEpisodes": "Episoade noi",
+    "following": "Urmărite",
+    "noEpisodes": "Încă nu există episoade."
   },
   "tvUnlock": {
     "title": "Deblochează Matinee",

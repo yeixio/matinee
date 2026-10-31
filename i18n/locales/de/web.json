@@ -605,6 +605,9 @@
       "added": "Hinzugefügt",
       "useFolder": "Diesen Ordner verwenden",
       "noSubfolders": "Keine Unterordner",
+      "goTo": "Oder einen Ordner eingeben, z. B. \\\\nas\\media",
+      "go": "Öffnen",
+      "drives": "Laufwerke",
       "podcastsNoFolders": "Podcasts brauchen keinen Ordner. Füge Sendungen in der Mediathek hinzu, sobald sie angelegt ist.",
       "podcastsChecked": "Jede Stunde auf neue Folgen geprüft"
     },

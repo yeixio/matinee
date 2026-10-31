@@ -427,6 +427,7 @@
     "listenNow": "立即收听",
     "music": "音乐",
     "audiobooks": "有声书",
+    "podcasts": "播客",
     "signIn": "在手机上打开 Matinee 并登录，即可在车上收听。",
     "loading": "正在加载…"
   },
@@ -482,7 +483,11 @@
     "bluetooth": "蓝牙设置",
     "back15": "后退 15 秒",
     "ahead30": "前进 30 秒",
-    "storageUsed": "手表上 {{size}}"
+    "storageUsed": "手表上 {{size}}",
+    "playlists": "播放列表",
+    "newEpisodes": "新单集",
+    "following": "已关注",
+    "noEpisodes": "还没有单集。"
   },
   "tvUnlock": {
     "title": "解锁 Matinee",

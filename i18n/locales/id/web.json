@@ -601,6 +601,9 @@
       "added": "Ditambahkan",
       "useFolder": "Gunakan folder ini",
       "noSubfolders": "Tidak ada subfolder",
+      "goTo": "Atau ketik folder, misalnya \\\\nas\\media",
+      "go": "Buka",
+      "drives": "Drive",
       "podcastsNoFolders": "Podcast tidak memerlukan folder. Tambahkan acara dari pustaka setelah dibuat.",
       "podcastsChecked": "Episode baru diperiksa setiap jam"
     },

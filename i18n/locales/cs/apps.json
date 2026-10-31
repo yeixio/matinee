@@ -448,6 +448,7 @@
     "listenNow": "Poslouchat",
     "music": "Hudba",
     "audiobooks": "Audioknihy",
+    "podcasts": "Podcasty",
     "signIn": "Otevřete Matinee v telefonu a přihlaste se, abyste mohli poslouchat v autě.",
     "loading": "Načítání…"
   },
@@ -503,7 +504,11 @@
     "bluetooth": "Nastavení Bluetooth",
     "back15": "Zpět o 15 sekund",
     "ahead30": "Vpřed o 30 sekund",
-    "storageUsed": "{{size}} v těchto hodinkách"
+    "storageUsed": "{{size}} v těchto hodinkách",
+    "playlists": "Playlisty",
+    "newEpisodes": "Nové díly",
+    "following": "Sledované",
+    "noEpisodes": "Zatím žádné díly."
   },
   "tvUnlock": {
     "title": "Odemknout Matinee",

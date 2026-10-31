@@ -448,6 +448,7 @@
     "listenNow": "Słuchaj teraz",
     "music": "Muzyka",
     "audiobooks": "Audiobooki",
+    "podcasts": "Podcasty",
     "signIn": "Otwórz Matinee na telefonie i zaloguj się, aby słuchać w samochodzie.",
     "loading": "Wczytywanie…"
   },
@@ -503,7 +504,11 @@
     "bluetooth": "Ustawienia Bluetooth",
     "back15": "15 sekund wstecz",
     "ahead30": "30 sekund naprzód",
-    "storageUsed": "{{size}} na tym zegarku"
+    "storageUsed": "{{size}} na tym zegarku",
+    "playlists": "Playlisty",
+    "newEpisodes": "Nowe odcinki",
+    "following": "Obserwowane",
+    "noEpisodes": "Brak odcinków."
   },
   "tvUnlock": {
     "title": "Odblokuj Matinee",

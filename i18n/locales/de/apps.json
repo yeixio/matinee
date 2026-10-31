@@ -434,6 +434,7 @@
     "listenNow": "Jetzt hören",
     "music": "Musik",
     "audiobooks": "Hörbücher",
+    "podcasts": "Podcasts",
     "signIn": "Öffne Matinee auf deinem Handy und melde dich an, um im Auto zu hören.",
     "loading": "Wird geladen…"
   },
@@ -489,7 +490,11 @@
     "bluetooth": "Bluetooth-Einstellungen",
     "back15": "15 Sekunden zurück",
     "ahead30": "30 Sekunden vor",
-    "storageUsed": "{{size}} auf dieser Uhr"
+    "storageUsed": "{{size}} auf dieser Uhr",
+    "playlists": "Playlists",
+    "newEpisodes": "Neue Folgen",
+    "following": "Gefolgt",
+    "noEpisodes": "Noch keine Folgen."
   },
   "tvUnlock": {
     "title": "Matinee freischalten",

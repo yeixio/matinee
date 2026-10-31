@@ -434,6 +434,7 @@
     "listenNow": "Hallgasd most",
     "music": "Zene",
     "audiobooks": "Hangoskönyvek",
+    "podcasts": "Podcastok",
     "signIn": "Nyisd meg a Matinee-t a telefonodon, és jelentkezz be, hogy az autóban is hallgathasd.",
     "loading": "Betöltés…"
   },
@@ -489,7 +490,11 @@
     "bluetooth": "Bluetooth-beállítások",
     "back15": "15 másodperc vissza",
     "ahead30": "30 másodperc előre",
-    "storageUsed": "{{size}} ezen az órán"
+    "storageUsed": "{{size}} ezen az órán",
+    "playlists": "Lejátszási listák",
+    "newEpisodes": "Új epizódok",
+    "following": "Követett",
+    "noEpisodes": "Még nincsenek epizódok."
   },
   "tvUnlock": {
     "title": "Matinee feloldása",

@@ -605,6 +605,9 @@
       "added": "Tilføjet",
       "useFolder": "Brug denne mappe",
       "noSubfolders": "Ingen undermapper",
+      "goTo": "Eller skriv en mappe, fx \\\\nas\\media",
+      "go": "Gå",
+      "drives": "Drev",
       "podcastsNoFolders": "Podcasts behøver ingen mappe. Tilføj programmer fra biblioteket, når det er oprettet.",
       "podcastsChecked": "Tjekkes for nye afsnit hver time"
     },

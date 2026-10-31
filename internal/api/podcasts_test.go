@@ -172,6 +172,22 @@ func TestPodcasts(t *testing.T) {
 	if !epPage.Played || epPage.PositionMs != 0 {
 		t.Fatalf("finished: %+v", epPage.Item)
 	}
+	// A watch's place, sent later, finishes an episode the same way.
+	sync := func(id, ms int64) {
+		events := []map[string]any{{"itemId": id, "positionMs": ms, "played": false, "at": time.Now().Unix()}}
+		if code := c.do("POST", "/api/v1/sync/progress", map[string]any{"events": events}, nil); code != 200 {
+			t.Fatalf("sync: %d", code)
+		}
+		epPage = itemView{}
+		c.do("GET", "/api/v1/items/"+itoa(id), nil, &epPage)
+	}
+	if sync(eps[1].ID, 500_000); epPage.Played || epPage.PositionMs != 500_000 {
+		t.Fatalf("synced place: %+v", epPage.Item)
+	}
+	if sync(eps[1].ID, 545_000); !epPage.Played || epPage.PositionMs != 0 {
+		t.Fatalf("synced finish: %+v", epPage.Item)
+	}
+	c.do("PUT", "/api/v1/items/"+itoa(eps[1].ID)+"/progress", map[string]any{"positionMs": 0, "played": false}, nil)
 
 	// A refresh finds a new episode, and only asks for changes.
 	feed.episodes.Store(4)

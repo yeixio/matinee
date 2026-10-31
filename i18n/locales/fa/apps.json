@@ -434,6 +434,7 @@
     "listenNow": "اکنون گوش دهید",
     "music": "موسیقی",
     "audiobooks": "کتاب‌های صوتی",
+    "podcasts": "پادکست‌ها",
     "signIn": "Matinee را در تلفن خود باز کنید و وارد شوید تا در خودرو گوش دهید.",
     "loading": "در حال بارگذاری…"
   },
@@ -489,7 +490,11 @@
     "bluetooth": "تنظیمات بلوتوث",
     "back15": "۱۵ ثانیه عقب",
     "ahead30": "۳۰ ثانیه جلو",
-    "storageUsed": "{{size}} روی این ساعت"
+    "storageUsed": "{{size}} روی این ساعت",
+    "playlists": "فهرست‌های پخش",
+    "newEpisodes": "قسمت‌های تازه",
+    "following": "دنبال‌شده",
+    "noEpisodes": "هنوز قسمتی نیست."
   },
   "tvUnlock": {
     "title": "باز کردن Matinee",

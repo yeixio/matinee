@@ -769,7 +769,10 @@ export const api = {
   libraryPeople: (id: number, q: string, role?: 'cast' | 'director') =>
     request<FilterPerson[]>('GET', `/api/v1/libraries/${id}/people?${new URLSearchParams({ q, ...(role ? { role } : {}) })}`),
   browse: (path: string) =>
-    request<{ path: string; parent: string; dirs: string[] }>('GET', `/api/v1/fs?path=${encodeURIComponent(path)}`),
+    request<{ path: string; parent: string; dirs: string[]; paths?: string[]; drives?: boolean }>(
+      'GET',
+      `/api/v1/fs?path=${encodeURIComponent(path)}`,
+    ),
 
   analysis: () => request<AnalysisStatus>('GET', '/api/v1/analysis'),
   setAnalysisMode: (mode: AnalysisMode) => request<AnalysisStatus>('PUT', '/api/v1/analysis', { mode }),

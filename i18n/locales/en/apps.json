@@ -434,6 +434,7 @@
     "listenNow": "Listen now",
     "music": "Music",
     "audiobooks": "Audiobooks",
+    "podcasts": "Podcasts",
     "signIn": "Open Matinee on your phone and sign in to listen in the car.",
     "loading": "Loading…"
   },
@@ -489,7 +490,11 @@
     "bluetooth": "Bluetooth settings",
     "back15": "Back 15 seconds",
     "ahead30": "Ahead 30 seconds",
-    "storageUsed": "{{size}} on this watch"
+    "storageUsed": "{{size}} on this watch",
+    "playlists": "Playlists",
+    "newEpisodes": "New episodes",
+    "following": "Following",
+    "noEpisodes": "No episodes yet."
   },
   "tvUnlock": {
     "title": "Unlock Matinee",

@@ -29,6 +29,10 @@ A podcast library is the one kind without folders: its shows come from their fee
 
 The folder picker shows folders on the **server**, not on the computer you're using, since that's where Matinee reads your media. It opens in the folder set by `MATINEE_MEDIA_ROOT` (`/media` in the Docker image).
 
+<!-- since: v0.1.8 -->
+To jump to a folder, type its path into the box under the picker and press **Go**. On a Windows server, go up to **Drives** to switch drives, and type a network share as `\\nas\media`. See [Windows](/docs/getting-started/windows/#folders-and-network-shares).
+<!-- /since -->
+
 ## Matinee takes it from there
 
 As soon as a library is added, Matinee:
