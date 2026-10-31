@@ -141,5 +141,12 @@
   "couldnt_read_the_songs_sound": "无法读取歌曲的声音",
   "no_levels_on_this_server": "此服务器没有音量数据",
   "not_a_song": "不是歌曲",
-  "no_such_audio_track": "没有这个音轨"
+  "no_such_audio_track": "没有这个音轨",
+  "nothing_found_to_play": "没有找到可播放的内容",
+  "say_what_to_play": "请说出要播放的内容",
+  "a_playlist_needs_a_name": "播放列表需要一个名称",
+  "a_playlist_holds_up_to_5000_songs": "一个播放列表最多可容纳 5000 首歌曲",
+  "items_is_required": "items 为必填项",
+  "only_music_goes_on_a_playlist": "播放列表只能添加音乐",
+  "playlist_not_found": "找不到播放列表"
 }

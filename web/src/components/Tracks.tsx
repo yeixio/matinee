@@ -1,4 +1,4 @@
-import { Disc3, Ellipsis, ListEnd, ListStart, Mic2, Play } from 'lucide-react'
+import { Disc3, Ellipsis, GripVertical, ListEnd, ListPlus, ListStart, Mic2, Play } from 'lucide-react'
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link, useNavigate } from 'react-router-dom'
@@ -6,6 +6,7 @@ import type { Item } from '../api'
 import { clock } from '../format'
 import { useAudio } from '../player/AudioPlayer'
 import { Artwork } from './Artwork'
+import { AddToPlaylistDialog } from './Playlists'
 
 // The bars that bounce beside the track that's playing.
 export function Equalizer({ playing, className = '' }: { playing: boolean; className?: string }) {
@@ -22,32 +23,63 @@ export function Equalizer({ playing, className = '' }: { playing: boolean; class
   )
 }
 
+// One more choice in a song's ⋯ menu, such as removing it from a playlist.
+export type MenuEntry = { icon: ReactNode; label: string; onClick: () => void }
+
 // A list of songs: click one to play the list from there. Each has a menu
-// to play it next, queue it, or go to its album or artist.
-export function Tracks({
+// to play it next, queue it, add it to a playlist, or go to its album or
+// artist. With onMove, songs can be dragged into a new order.
+export function Tracks<T extends Item>({
   items,
   showArt = false,
   showAlbum = false,
   showArtist = false,
   numbered = true,
+  menu,
+  onMove,
 }: {
-  items: Item[]
+  items: T[]
   showArt?: boolean
   showAlbum?: boolean
   showArtist?: boolean
   numbered?: boolean
+  menu?: (item: T, index: number) => MenuEntry[]
+  onMove?: (from: number, to: number) => void
 }) {
   const audio = useAudio()
+  const [dragging, setDragging] = useState<number>()
+  const [over, setOver] = useState<number>()
   const discs = new Set(items.map((t) => t.disc ?? 1)).size > 1
   return (
     <ol className="space-y-0.5">
       {items.map((t, i) => {
         const current = audio.current?.id === t.id
+        const drag = onMove && {
+          draggable: true,
+          onDragStart: () => setDragging(i),
+          onDragEnd: () => {
+            setDragging(undefined)
+            setOver(undefined)
+          },
+          onDragOver: (ev: React.DragEvent) => {
+            ev.preventDefault()
+            setOver(i)
+          },
+          onDrop: () => {
+            if (dragging !== undefined && dragging !== i) onMove(dragging, i)
+            setDragging(undefined)
+            setOver(undefined)
+          },
+        }
         return (
           <li
-            key={`${t.id}-${i}`}
-            className={`group flex items-center gap-3 rounded-lg px-2 py-1.5 transition-colors hover:bg-text/5 md:gap-4 md:px-3 ${current ? 'bg-text/5' : ''}`}
+            key={'entryId' in t ? String(t.entryId) : `${t.id}-${i}`}
+            {...drag}
+            className={`group flex items-center gap-3 rounded-lg px-2 py-1.5 transition-colors hover:bg-text/5 md:gap-4 md:px-3 ${current ? 'bg-text/5' : ''} ${
+              dragging === i ? 'opacity-40' : ''
+            } ${over === i && dragging !== i ? 'ring-1 ring-accent/60' : ''}`}
           >
+            {onMove && <GripVertical className="-me-1 hidden size-4 shrink-0 cursor-grab text-faint md:block" aria-hidden />}
             <button onClick={() => audio.play(items, i, { shuffle: false })} className="flex min-w-0 flex-1 items-center gap-3 text-start md:gap-4">
               {numbered && (
                 <span className="grid w-7 shrink-0 place-items-center text-sm text-faint tabular-nums">
@@ -88,7 +120,7 @@ export function Tracks({
               </Link>
             )}
             <span className="w-12 shrink-0 text-end text-sm text-muted tabular-nums">{t.durationMs ? clock(t.durationMs / 1000) : ''}</span>
-            <TrackMenu item={t} />
+            <TrackMenu item={t} extra={menu?.(t, i)} />
           </li>
         )
       })}
@@ -97,11 +129,22 @@ export function Tracks({
 }
 
 // The ⋯ menu on a song, an album or an artist.
-export function TrackMenu({ item, items, className = '' }: { item: Item; items?: () => Promise<Item[]>; className?: string }) {
+export function TrackMenu({
+  item,
+  items,
+  extra,
+  className = '',
+}: {
+  item: Item
+  items?: () => Promise<Item[]>
+  extra?: MenuEntry[]
+  className?: string
+}) {
   const { t } = useTranslation()
   const audio = useAudio()
   const navigate = useNavigate()
   const [open, setOpen] = useState(false)
+  const [picking, setPicking] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
   useEffect(() => {
     if (!open) return
@@ -122,7 +165,7 @@ export function TrackMenu({ item, items, className = '' }: { item: Item; items?:
   const albumId = item.kind === 'track' ? item.parentId : undefined
   const artistId = item.kind === 'artist' ? undefined : item.artistId
   const entry = (icon: ReactNode, label: string, onClick: () => void) => (
-    <li>
+    <li key={label}>
       <button role="menuitem" onClick={act(onClick)} className="flex w-full items-center gap-3 rounded-md px-3 py-2 text-start text-sm hover:bg-text/10">
         {icon}
         <span className="truncate">{label}</span>
@@ -145,10 +188,13 @@ export function TrackMenu({ item, items, className = '' }: { item: Item; items?:
         <ul role="menu" className="absolute end-0 top-full z-40 mt-1 w-56 animate-fade rounded-xl border border-line bg-raised p-1 shadow-2xl shadow-black/50">
           {entry(<ListStart className="size-4 text-muted" />, t('common:music.playNext'), () => songs().then(audio.playNext))}
           {entry(<ListEnd className="size-4 text-muted" />, t('common:music.addToQueue'), () => songs().then(audio.addToQueue))}
+          {entry(<ListPlus className="size-4 text-muted" />, t('common:music.addToPlaylist'), () => setPicking(true))}
+          {extra?.map((e) => entry(e.icon, e.label, e.onClick))}
           {albumId && entry(<Disc3 className="size-4 text-muted" />, t('common:music.goToAlbum'), () => navigate(`/item/${albumId}`))}
           {artistId && entry(<Mic2 className="size-4 text-muted" />, t('common:music.goToArtist'), () => navigate(`/item/${artistId}`))}
         </ul>
       )}
+      {picking && <AddToPlaylistDialog songs={songs} onClose={() => setPicking(false)} />}
     </div>
   )
 }

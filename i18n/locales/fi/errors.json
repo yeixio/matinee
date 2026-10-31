@@ -141,5 +141,12 @@
   "couldnt_read_the_songs_sound": "kappaleen ääntä ei voitu lukea",
   "no_levels_on_this_server": "tällä palvelimella ei ole tasoja",
   "not_a_song": "ei kappale",
-  "no_such_audio_track": "ääniraitaa ei ole"
+  "no_such_audio_track": "ääniraitaa ei ole",
+  "nothing_found_to_play": "mitään toistettavaa ei löytynyt",
+  "say_what_to_play": "kerro, mitä toistetaan",
+  "a_playlist_needs_a_name": "soittolista tarvitsee nimen",
+  "a_playlist_holds_up_to_5000_songs": "soittolistalle mahtuu enintään 5000 kappaletta",
+  "items_is_required": "items vaaditaan",
+  "only_music_goes_on_a_playlist": "soittolistalle käy vain musiikki",
+  "playlist_not_found": "soittolistaa ei löytynyt"
 }

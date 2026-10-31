@@ -141,5 +141,12 @@
   "couldnt_read_the_songs_sound": "صدای آهنگ خوانده نشد",
   "no_levels_on_this_server": "این سرور سطحی ندارد",
   "not_a_song": "آهنگ نیست",
-  "no_such_audio_track": "چنین قطعهٔ صوتی وجود ندارد"
+  "no_such_audio_track": "چنین قطعهٔ صوتی وجود ندارد",
+  "nothing_found_to_play": "چیزی برای پخش پیدا نشد",
+  "say_what_to_play": "بگویید چه چیزی پخش شود",
+  "a_playlist_needs_a_name": "فهرست پخش به نام نیاز دارد",
+  "a_playlist_holds_up_to_5000_songs": "فهرست پخش حداکثر 5000 آهنگ جا می‌گیرد",
+  "items_is_required": "items الزامی است",
+  "only_music_goes_on_a_playlist": "فقط موسیقی به فهرست پخش اضافه می‌شود",
+  "playlist_not_found": "فهرست پخش پیدا نشد"
 }

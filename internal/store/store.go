@@ -358,7 +358,25 @@ var migrations = []string{
 	// 54: a track's own artist, kept when it isn't the album's, such as
 	// each artist on a soundtrack or compilation (see music.go).
 	"ALTER TABLE items ADD COLUMN track_artist TEXT",
-	// 55–58: the MusicBrainz release and release group an album's files are
+	// 55–58: playlists of songs, each person's own (see playlists.go). A
+	// song can be on one more than once, so each place has its own id.
+	`CREATE TABLE playlists (
+		id         TEXT PRIMARY KEY,
+		user_id    BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+		name       TEXT NOT NULL,
+		created_at BIGINT NOT NULL, -- milliseconds
+		updated_at BIGINT NOT NULL
+	)`,
+	`CREATE TABLE playlist_items (
+		id          TEXT PRIMARY KEY,
+		playlist_id TEXT NOT NULL REFERENCES playlists(id) ON DELETE CASCADE,
+		item_id     BIGINT NOT NULL REFERENCES items(id) ON DELETE CASCADE,
+		position    INTEGER NOT NULL,
+		added_at    BIGINT NOT NULL -- milliseconds
+	)`,
+	"CREATE INDEX playlist_items_playlist ON playlist_items(playlist_id, position)",
+	"CREATE INDEX playlist_items_item ON playlist_items(item_id)",
+	// 59–62: the MusicBrainz release and release group an album's files are
 	// tagged with, whether its files' tags have been read for them, and a
 	// fresh look online for every album still without a cover (see art.go).
 	"ALTER TABLE items ADD COLUMN mb_release TEXT",

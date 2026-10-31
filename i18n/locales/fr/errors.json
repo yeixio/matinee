@@ -141,5 +141,12 @@
   "couldnt_read_the_songs_sound": "impossible de lire le son du morceau",
   "no_levels_on_this_server": "pas de niveaux sur ce serveur",
   "not_a_song": "ce n'est pas un morceau",
-  "no_such_audio_track": "cette piste audio n'existe pas"
+  "no_such_audio_track": "cette piste audio n'existe pas",
+  "nothing_found_to_play": "rien à lire n'a été trouvé",
+  "say_what_to_play": "dites ce qu'il faut lire",
+  "a_playlist_needs_a_name": "une playlist doit avoir un nom",
+  "a_playlist_holds_up_to_5000_songs": "une playlist contient au plus 5000 morceaux",
+  "items_is_required": "items est obligatoire",
+  "only_music_goes_on_a_playlist": "seule la musique va dans une playlist",
+  "playlist_not_found": "playlist introuvable"
 }

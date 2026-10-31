@@ -65,6 +65,10 @@ func (t *tx) ExecContext(ctx context.Context, q string, args ...any) (sql.Result
 	return t.Tx.ExecContext(ctx, t.d.rebind(q), args...)
 }
 
+func (t *tx) QueryContext(ctx context.Context, q string, args ...any) (*sql.Rows, error) {
+	return t.Tx.QueryContext(ctx, t.d.rebind(q), args...)
+}
+
 func (t *tx) QueryRowContext(ctx context.Context, q string, args ...any) *sql.Row {
 	return t.Tx.QueryRowContext(ctx, t.d.rebind(q), args...)
 }

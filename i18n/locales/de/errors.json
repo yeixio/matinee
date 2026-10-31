@@ -141,5 +141,12 @@
   "couldnt_read_the_songs_sound": "der Ton des Songs konnte nicht gelesen werden",
   "no_levels_on_this_server": "keine Pegel auf diesem Server",
   "not_a_song": "kein Song",
-  "no_such_audio_track": "diese Tonspur gibt es nicht"
+  "no_such_audio_track": "diese Tonspur gibt es nicht",
+  "nothing_found_to_play": "nichts zum Abspielen gefunden",
+  "say_what_to_play": "sag, was abgespielt werden soll",
+  "a_playlist_needs_a_name": "eine Playlist braucht einen Namen",
+  "a_playlist_holds_up_to_5000_songs": "eine Playlist fasst bis zu 5000 Songs",
+  "items_is_required": "items ist erforderlich",
+  "only_music_goes_on_a_playlist": "nur Musik kommt in eine Playlist",
+  "playlist_not_found": "Playlist nicht gefunden"
 }

@@ -141,5 +141,12 @@
   "couldnt_read_the_songs_sound": "tidak dapat membaca bunyi lagu",
   "no_levels_on_this_server": "tiada aras pada pelayan ini",
   "not_a_song": "bukan lagu",
-  "no_such_audio_track": "trek audio itu tiada"
+  "no_such_audio_track": "trek audio itu tiada",
+  "nothing_found_to_play": "tiada apa-apa ditemui untuk dimainkan",
+  "say_what_to_play": "sebut apa yang hendak dimainkan",
+  "a_playlist_needs_a_name": "senarai main memerlukan nama",
+  "a_playlist_holds_up_to_5000_songs": "senarai main boleh memuatkan sehingga 5000 lagu",
+  "items_is_required": "items diperlukan",
+  "only_music_goes_on_a_playlist": "hanya muzik boleh dimasukkan ke senarai main",
+  "playlist_not_found": "senarai main tidak ditemui"
 }
