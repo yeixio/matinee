@@ -125,7 +125,7 @@ jobs:
         run: |
           set -euo pipefail
           app="dist/mac/Matinee Server.app/Contents/MacOS"
-          lipo -archs "$app/matinee" "$app/ffmpeg" "$app/ffprobe" "$app/Matinee Server"
+          for f in matinee ffmpeg ffprobe "Matinee Server"; do lipo -info "$app/$f"; done
           "$app/ffmpeg" -hide_banner -version | head -n 1
           # The bundled server answers with the bundled FFmpeg.
           data="$(mktemp -d)"
