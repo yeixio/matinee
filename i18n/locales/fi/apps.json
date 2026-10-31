@@ -500,5 +500,15 @@
     "waiting": "Tämä näkymä sulkeutuu itsestään, kun olet maksanut.",
     "unlocked": "Matinee on avattu tässä televisiossa.",
     "updateServer": "Päivitä ensin Matinee-palvelimesi, jotta voit avata Matineen täällä."
+  },
+  "cover": {
+    "change": "Vaihda kansikuva",
+    "title": "Valitse kansikuva",
+    "looking": "Etsitään kansikuvia verkosta…",
+    "none": "Verkosta ei löytynyt kansikuvia. Liitä kuvan osoite alle.",
+    "addressPlaceholder": "Liitä kuvan osoite",
+    "use": "Käytä",
+    "reset": "Käytä automaattista kansikuvaa",
+    "chosenNote": "Tämä kansikuva on valittu käsin, joten tarkistukset säilyttävät sen."
   }
 }

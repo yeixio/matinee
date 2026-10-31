@@ -514,5 +514,15 @@
     "waiting": "Tato obrazovka se po zaplacení sama zavře.",
     "unlocked": "Matinee je na tomto televizoru odemčeno.",
     "updateServer": "Chcete-li zde Matinee odemknout, nejprve aktualizujte svůj server Matinee."
+  },
+  "cover": {
+    "change": "Změnit obal",
+    "title": "Vyberte obal",
+    "looking": "Hledání obalů na internetu…",
+    "none": "Na internetu se nenašly žádné obaly. Níže vložte adresu obrázku.",
+    "addressPlaceholder": "Vložte adresu obrázku",
+    "use": "Použít",
+    "reset": "Použít automatický obal",
+    "chosenNote": "Tento obal byl vybrán ručně, takže ho prohledávání zachová."
   }
 }

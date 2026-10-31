@@ -818,5 +818,19 @@
   },
   "remote": {
     "controlledBy": "Controlat de pe {{name}}"
+  },
+  "cover": {
+    "change": "Schimbă coperta",
+    "title": "Coperta pentru {{title}}",
+    "looking": "Se caută coperți online…",
+    "none": "Nu s-au găsit coperți online. Lipește adresa unei imagini sau încarcă una.",
+    "pick": "Folosește {{cover}}",
+    "address": "Adresa imaginii",
+    "addressPlaceholder": "Lipește adresa unei imagini",
+    "use": "Folosește",
+    "upload": "Încarcă o imagine",
+    "reset": "Folosește coperta automată",
+    "chosenNote": "Această copertă a fost aleasă manual, așa că scanările o păstrează.",
+    "saving": "Se salvează coperta…"
   }
 }

@@ -163,5 +163,10 @@
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "no se pudo leer el feed. Revisa la dirección e inténtalo de nuevo.",
   "the_feed_couldnt_be_read_right_now": "ahora mismo no se puede leer el feed",
   "the_file_is_too_big": "el archivo es demasiado grande",
-  "this_library_already_has_a_show_with_that_name": "esta biblioteca ya tiene un programa con ese nombre"
+  "this_library_already_has_a_show_with_that_name": "esta biblioteca ya tiene un programa con ese nombre",
+  "only_albums_and_books_have_covers_to_pick": "solo los álbumes y los libros tienen portadas para elegir",
+  "that_isnt_a_jpeg_png_webp_or_gif_image": "eso no es una imagen JPEG, PNG, WebP ni GIF",
+  "the_covers_address_must_start_with_http_or_https": "la dirección de la portada debe empezar por http:// o https://",
+  "the_image_is_too_big_20_mb_at_most": "la imagen es demasiado grande (20 MB como máximo)",
+  "couldnt_get_an_image_from_that_address": "no se pudo obtener una imagen de esa dirección"
 }

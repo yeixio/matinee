@@ -163,5 +163,10 @@
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "syötettä ei voitu lukea. Tarkista osoite ja yritä uudelleen.",
   "the_feed_couldnt_be_read_right_now": "syötettä ei voi lukea juuri nyt",
   "the_file_is_too_big": "tiedosto on liian suuri",
-  "this_library_already_has_a_show_with_that_name": "tässä kirjastossa on jo samanniminen ohjelma"
+  "this_library_already_has_a_show_with_that_name": "tässä kirjastossa on jo samanniminen ohjelma",
+  "only_albums_and_books_have_covers_to_pick": "vain albumeille ja kirjoille voi valita kansikuvan",
+  "that_isnt_a_jpeg_png_webp_or_gif_image": "se ei ole JPEG-, PNG-, WebP- tai GIF-kuva",
+  "the_covers_address_must_start_with_http_or_https": "kansikuvan osoitteen täytyy alkaa http:// tai https://",
+  "the_image_is_too_big_20_mb_at_most": "kuva on liian suuri (enintään 20 Mt)",
+  "couldnt_get_an_image_from_that_address": "kuvaa ei saatu tuosta osoitteesta"
 }

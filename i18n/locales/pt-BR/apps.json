@@ -507,5 +507,15 @@
     "waiting": "Esta tela fecha sozinha assim que o pagamento for feito.",
     "unlocked": "O Matinee está desbloqueado nesta TV.",
     "updateServer": "Para desbloquear o Matinee aqui, atualize primeiro o seu servidor Matinee."
+  },
+  "cover": {
+    "change": "Trocar capa",
+    "title": "Escolher uma capa",
+    "looking": "Procurando capas na internet…",
+    "none": "Nenhuma capa encontrada na internet. Cole abaixo o endereço de uma imagem.",
+    "addressPlaceholder": "Cole o endereço de uma imagem",
+    "use": "Usar",
+    "reset": "Usar a capa automática",
+    "chosenNote": "Esta capa foi escolhida manualmente, então as verificações a mantêm."
   }
 }

@@ -493,5 +493,15 @@
     "waiting": "Skrin ini akan tertutup sendiri sebaik sahaja anda membayar.",
     "unlocked": "Matinee telah dibuka kunci pada TV ini.",
     "updateServer": "Untuk membuka kunci Matinee di sini, kemas kini pelayan Matinee anda dahulu."
+  },
+  "cover": {
+    "change": "Tukar kulit",
+    "title": "Pilih kulit",
+    "looking": "Mencari kulit dalam talian…",
+    "none": "Tiada kulit ditemui dalam talian. Tampal alamat imej di bawah.",
+    "addressPlaceholder": "Tampal alamat imej",
+    "use": "Guna",
+    "reset": "Guna kulit automatik",
+    "chosenNote": "Kulit ini dipilih secara manual, jadi imbasan mengekalkannya."
   }
 }

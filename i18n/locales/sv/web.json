@@ -814,5 +814,19 @@
   },
   "remote": {
     "controlledBy": "Styrs från {{name}}"
+  },
+  "cover": {
+    "change": "Byt omslag",
+    "title": "Omslag för {{title}}",
+    "looking": "Letar efter omslag på nätet …",
+    "none": "Inga omslag hittades på nätet. Klistra in adressen till en bild eller ladda upp en.",
+    "pick": "Använd {{cover}}",
+    "address": "Bildadress",
+    "addressPlaceholder": "Klistra in adressen till en bild",
+    "use": "Använd",
+    "upload": "Ladda upp en bild",
+    "reset": "Använd det automatiska omslaget",
+    "chosenNote": "Det här omslaget valdes för hand, så genomsökningar behåller det.",
+    "saving": "Sparar omslaget …"
   }
 }

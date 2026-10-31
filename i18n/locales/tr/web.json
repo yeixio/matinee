@@ -814,5 +814,19 @@
   },
   "remote": {
     "controlledBy": "{{name}} tarafından kontrol ediliyor"
+  },
+  "cover": {
+    "change": "Kapağı değiştir",
+    "title": "{{title}} için kapak",
+    "looking": "İnternette kapak aranıyor…",
+    "none": "İnternette kapak bulunamadı. Bir görselin adresini yapıştırın ya da bir görsel yükleyin.",
+    "pick": "{{cover}} kullan",
+    "address": "Görsel adresi",
+    "addressPlaceholder": "Bir görselin adresini yapıştırın",
+    "use": "Kullan",
+    "upload": "Görsel yükle",
+    "reset": "Otomatik kapağı kullan",
+    "chosenNote": "Bu kapak elle seçildi, bu yüzden taramalar onu korur.",
+    "saving": "Kapak kaydediliyor…"
   }
 }

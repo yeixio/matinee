@@ -814,5 +814,19 @@
   },
   "remote": {
     "controlledBy": "Ohjattu laitteesta {{name}}"
+  },
+  "cover": {
+    "change": "Vaihda kansikuva",
+    "title": "Kansikuva: {{title}}",
+    "looking": "Etsitään kansikuvia verkosta…",
+    "none": "Verkosta ei löytynyt kansikuvia. Liitä kuvan osoite tai lataa oma kuva.",
+    "pick": "Käytä: {{cover}}",
+    "address": "Kuvan osoite",
+    "addressPlaceholder": "Liitä kuvan osoite",
+    "use": "Käytä",
+    "upload": "Lataa kuva",
+    "reset": "Käytä automaattista kansikuvaa",
+    "chosenNote": "Tämä kansikuva on valittu käsin, joten tarkistukset säilyttävät sen.",
+    "saving": "Tallennetaan kansikuvaa…"
   }
 }

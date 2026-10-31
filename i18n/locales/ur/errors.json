@@ -163,5 +163,10 @@
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "فیڈ پڑھی نہیں جا سکی۔ ایڈریس چیک کریں اور دوبارہ کوشش کریں۔",
   "the_feed_couldnt_be_read_right_now": "فیڈ ابھی پڑھی نہیں جا سکتی",
   "the_file_is_too_big": "فائل بہت بڑی ہے",
-  "this_library_already_has_a_show_with_that_name": "اس لائبریری میں اس نام کا شو پہلے سے موجود ہے"
+  "this_library_already_has_a_show_with_that_name": "اس لائبریری میں اس نام کا شو پہلے سے موجود ہے",
+  "only_albums_and_books_have_covers_to_pick": "صرف البمز اور کتابوں کے سرورق چنے جا سکتے ہیں",
+  "that_isnt_a_jpeg_png_webp_or_gif_image": "یہ JPEG، PNG، WebP یا GIF تصویر نہیں ہے",
+  "the_covers_address_must_start_with_http_or_https": "سرورق کا پتا http:// یا https:// سے شروع ہونا چاہیے",
+  "the_image_is_too_big_20_mb_at_most": "تصویر بہت بڑی ہے (زیادہ سے زیادہ 20 MB)",
+  "couldnt_get_an_image_from_that_address": "اس پتے سے تصویر نہیں مل سکی"
 }

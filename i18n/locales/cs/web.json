@@ -822,5 +822,19 @@
   },
   "remote": {
     "controlledBy": "Ovládáno z {{name}}"
+  },
+  "cover": {
+    "change": "Změnit obal",
+    "title": "Obal: {{title}}",
+    "looking": "Hledání obalů na internetu…",
+    "none": "Na internetu se nenašly žádné obaly. Vložte adresu obrázku nebo nějaký nahrajte.",
+    "pick": "Použít: {{cover}}",
+    "address": "Adresa obrázku",
+    "addressPlaceholder": "Vložte adresu obrázku",
+    "use": "Použít",
+    "upload": "Nahrát obrázek",
+    "reset": "Použít automatický obal",
+    "chosenNote": "Tento obal byl vybrán ručně, takže ho prohledávání zachová.",
+    "saving": "Ukládání obalu…"
   }
 }

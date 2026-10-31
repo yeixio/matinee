@@ -163,5 +163,10 @@
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "לא ניתן היה לקרוא את הפיד. בדקו את הכתובת ונסו שוב.",
   "the_feed_couldnt_be_read_right_now": "לא ניתן לקרוא את הפיד כרגע",
   "the_file_is_too_big": "הקובץ גדול מדי",
-  "this_library_already_has_a_show_with_that_name": "בספרייה הזו כבר יש תוכנית בשם הזה"
+  "this_library_already_has_a_show_with_that_name": "בספרייה הזו כבר יש תוכנית בשם הזה",
+  "only_albums_and_books_have_covers_to_pick": "רק לאלבומים ולספרים יש עטיפות לבחירה",
+  "that_isnt_a_jpeg_png_webp_or_gif_image": "זו לא תמונת JPEG,‏ PNG,‏ WebP או GIF",
+  "the_covers_address_must_start_with_http_or_https": "כתובת העטיפה חייבת להתחיל ב־http:// או ב־https://",
+  "the_image_is_too_big_20_mb_at_most": "התמונה גדולה מדי (20MB לכל היותר)",
+  "couldnt_get_an_image_from_that_address": "לא ניתן היה לקבל תמונה מהכתובת הזו"
 }

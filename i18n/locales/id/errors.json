@@ -163,5 +163,10 @@
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "feed tidak bisa dibaca. Periksa alamatnya lalu coba lagi.",
   "the_feed_couldnt_be_read_right_now": "feed tidak bisa dibaca saat ini",
   "the_file_is_too_big": "file terlalu besar",
-  "this_library_already_has_a_show_with_that_name": "pustaka ini sudah punya acara dengan nama itu"
+  "this_library_already_has_a_show_with_that_name": "pustaka ini sudah punya acara dengan nama itu",
+  "only_albums_and_books_have_covers_to_pick": "hanya album dan buku yang punya sampul untuk dipilih",
+  "that_isnt_a_jpeg_png_webp_or_gif_image": "itu bukan gambar JPEG, PNG, WebP, atau GIF",
+  "the_covers_address_must_start_with_http_or_https": "alamat sampul harus diawali http:// atau https://",
+  "the_image_is_too_big_20_mb_at_most": "gambar terlalu besar (maksimal 20 MB)",
+  "couldnt_get_an_image_from_that_address": "tidak bisa mengambil gambar dari alamat itu"
 }

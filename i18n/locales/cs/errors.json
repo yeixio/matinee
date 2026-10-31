@@ -163,5 +163,10 @@
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "kanál se nepodařilo načíst. Zkontrolujte adresu a zkuste to znovu.",
   "the_feed_couldnt_be_read_right_now": "kanál teď nelze načíst",
   "the_file_is_too_big": "soubor je příliš velký",
-  "this_library_already_has_a_show_with_that_name": "tato knihovna už má pořad s tímto názvem"
+  "this_library_already_has_a_show_with_that_name": "tato knihovna už má pořad s tímto názvem",
+  "only_albums_and_books_have_covers_to_pick": "obaly lze vybírat jen u alb a knih",
+  "that_isnt_a_jpeg_png_webp_or_gif_image": "to není obrázek JPEG, PNG, WebP ani GIF",
+  "the_covers_address_must_start_with_http_or_https": "adresa obalu musí začínat http:// nebo https://",
+  "the_image_is_too_big_20_mb_at_most": "obrázek je příliš velký (nejvýše 20 MB)",
+  "couldnt_get_an_image_from_that_address": "z této adresy se nepodařilo získat obrázek"
 }

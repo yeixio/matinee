@@ -114,11 +114,17 @@ func run() error {
 	if cfg.Wikidata {
 		fetcher.Awards = metadata.NewWikidata(version.Version)
 	}
+	// Covers for admins to pick share the lookups' clients, which keep to
+	// each service's rate limit.
+	var mb *metadata.MusicBrainz
+	var ol *metadata.OpenLibrary
 	if cfg.MusicBrainz {
-		fetcher.Providers = append(fetcher.Providers, metadata.NewMusicBrainz(version.Version))
+		mb = metadata.NewMusicBrainz(version.Version)
+		fetcher.Providers = append(fetcher.Providers, mb)
 	}
 	if cfg.OpenLibrary {
-		fetcher.Providers = append(fetcher.Providers, metadata.NewOpenLibrary(version.Version))
+		ol = metadata.NewOpenLibrary(version.Version)
+		fetcher.Providers = append(fetcher.Providers, ol)
 	}
 	db.SetMetadataKinds(fetcher.Kinds()...)
 	// Testing the GPU takes a few seconds; transcodes use the CPU until it's done.
@@ -184,6 +190,7 @@ func run() error {
 	apiServer := &api.Server{
 		Store: db, Scanner: scanner, Watcher: watcher, ScanInterval: cfg.ScanInterval, Transcoder: transcoder, HW: hw, Downloads: downloads, Analyzer: analyzer,
 		Art:       artwork.NewCache(cfg.ImageDir(), cfg.FFmpegPath),
+		Covers:    metadata.NewCovers(version.Version, mb, ol),
 		Subtitles: subtitle.NewConverter(cfg.FFmpegPath, cfg.SubtitleDir()),
 		Levels:    spectrum.New(cfg.FFmpegPath, cfg.LevelsDir()),
 		Web:       web.FS(), Log: log, BackgroundCtx: ctx,

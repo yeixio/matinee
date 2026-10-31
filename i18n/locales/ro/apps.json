@@ -507,5 +507,15 @@
     "waiting": "Acest ecran se închide singur după ce ai plătit.",
     "unlocked": "Matinee este deblocat pe acest televizor.",
     "updateServer": "Pentru a debloca Matinee aici, actualizează mai întâi serverul Matinee."
+  },
+  "cover": {
+    "change": "Schimbă coperta",
+    "title": "Alege o copertă",
+    "looking": "Se caută coperți online…",
+    "none": "Nu s-au găsit coperți online. Lipește mai jos adresa unei imagini.",
+    "addressPlaceholder": "Lipește adresa unei imagini",
+    "use": "Folosește",
+    "reset": "Folosește coperta automată",
+    "chosenNote": "Această copertă a fost aleasă manual, așa că scanările o păstrează."
   }
 }

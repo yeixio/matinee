@@ -163,5 +163,10 @@
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "فید خوانده نشد. نشانی را بررسی کنید و دوباره امتحان کنید.",
   "the_feed_couldnt_be_read_right_now": "اکنون نمی‌توان فید را خواند",
   "the_file_is_too_big": "فایل خیلی بزرگ است",
-  "this_library_already_has_a_show_with_that_name": "این کتابخانه از قبل برنامه‌ای با این نام دارد"
+  "this_library_already_has_a_show_with_that_name": "این کتابخانه از قبل برنامه‌ای با این نام دارد",
+  "only_albums_and_books_have_covers_to_pick": "فقط آلبوم‌ها و کتاب‌ها جلد قابل انتخاب دارند",
+  "that_isnt_a_jpeg_png_webp_or_gif_image": "این تصویر JPEG، PNG، WebP یا GIF نیست",
+  "the_covers_address_must_start_with_http_or_https": "نشانی جلد باید با http:// یا https:// شروع شود",
+  "the_image_is_too_big_20_mb_at_most": "تصویر خیلی بزرگ است (حداکثر ۲۰ مگابایت)",
+  "couldnt_get_an_image_from_that_address": "نشد از این نشانی تصویری گرفت"
 }

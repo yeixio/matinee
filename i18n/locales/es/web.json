@@ -818,5 +818,19 @@
   },
   "remote": {
     "controlledBy": "Controlado desde {{name}}"
+  },
+  "cover": {
+    "change": "Cambiar portada",
+    "title": "Portada de {{title}}",
+    "looking": "Buscando portadas en internet…",
+    "none": "No se encontraron portadas en internet. Pega la dirección de una imagen o sube una.",
+    "pick": "Usar {{cover}}",
+    "address": "Dirección de la imagen",
+    "addressPlaceholder": "Pega la dirección de una imagen",
+    "use": "Usar",
+    "upload": "Subir una imagen",
+    "reset": "Usar la portada automática",
+    "chosenNote": "Esta portada se eligió a mano, así que los escaneos la conservan.",
+    "saving": "Guardando la portada…"
   }
 }

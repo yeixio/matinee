@@ -500,5 +500,15 @@
     "waiting": "Den här skärmen stängs av sig själv när du har betalat.",
     "unlocked": "Matinee är upplåst på den här tv:n.",
     "updateServer": "Uppdatera din Matinee-server först för att låsa upp Matinee här."
+  },
+  "cover": {
+    "change": "Byt omslag",
+    "title": "Välj ett omslag",
+    "looking": "Letar efter omslag på nätet …",
+    "none": "Inga omslag hittades på nätet. Klistra in adressen till en bild nedan.",
+    "addressPlaceholder": "Klistra in adressen till en bild",
+    "use": "Använd",
+    "reset": "Använd det automatiska omslaget",
+    "chosenNote": "Det här omslaget valdes för hand, så genomsökningar behåller det."
   }
 }

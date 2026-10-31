@@ -818,5 +818,19 @@
   },
   "remote": {
     "controlledBy": "Controlado por {{name}}"
+  },
+  "cover": {
+    "change": "Trocar capa",
+    "title": "Capa de {{title}}",
+    "looking": "Procurando capas na internet…",
+    "none": "Nenhuma capa encontrada na internet. Cole o endereço de uma imagem ou envie uma.",
+    "pick": "Usar {{cover}}",
+    "address": "Endereço da imagem",
+    "addressPlaceholder": "Cole o endereço de uma imagem",
+    "use": "Usar",
+    "upload": "Enviar uma imagem",
+    "reset": "Usar a capa automática",
+    "chosenNote": "Esta capa foi escolhida manualmente, então as verificações a mantêm.",
+    "saving": "Salvando a capa…"
   }
 }

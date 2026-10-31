@@ -814,5 +814,19 @@
   },
   "remote": {
     "controlledBy": "Gesteuert von {{name}}"
+  },
+  "cover": {
+    "change": "Cover ändern",
+    "title": "Cover für {{title}}",
+    "looking": "Covers werden online gesucht …",
+    "none": "Online wurden keine Covers gefunden. Füge die Adresse eines Bildes ein oder lade eines hoch.",
+    "pick": "{{cover}} verwenden",
+    "address": "Bildadresse",
+    "addressPlaceholder": "Adresse eines Bildes einfügen",
+    "use": "Verwenden",
+    "upload": "Bild hochladen",
+    "reset": "Automatisches Cover verwenden",
+    "chosenNote": "Dieses Cover wurde von Hand gewählt, deshalb behalten Scans es bei.",
+    "saving": "Cover wird gespeichert …"
   }
 }

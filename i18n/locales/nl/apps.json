@@ -500,5 +500,15 @@
     "waiting": "Dit scherm sluit vanzelf zodra je hebt betaald.",
     "unlocked": "Matinee is ontgrendeld op deze tv.",
     "updateServer": "Werk eerst je Matinee-server bij om Matinee hier te ontgrendelen."
+  },
+  "cover": {
+    "change": "Hoes wijzigen",
+    "title": "Kies een hoes",
+    "looking": "Online naar hoezen zoeken…",
+    "none": "Online geen hoezen gevonden. Plak hieronder het adres van een afbeelding.",
+    "addressPlaceholder": "Plak het adres van een afbeelding",
+    "use": "Gebruiken",
+    "reset": "Automatische hoes gebruiken",
+    "chosenNote": "Deze hoes is met de hand gekozen, dus scans laten hem staan."
   }
 }

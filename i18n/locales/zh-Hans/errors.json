@@ -163,5 +163,10 @@
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "无法读取订阅源。请检查地址后重试。",
   "the_feed_couldnt_be_read_right_now": "现在无法读取订阅源",
   "the_file_is_too_big": "文件太大",
-  "this_library_already_has_a_show_with_that_name": "此媒体库已有同名节目"
+  "this_library_already_has_a_show_with_that_name": "此媒体库已有同名节目",
+  "only_albums_and_books_have_covers_to_pick": "只有专辑和图书可以选择封面",
+  "that_isnt_a_jpeg_png_webp_or_gif_image": "这不是 JPEG、PNG、WebP 或 GIF 图片",
+  "the_covers_address_must_start_with_http_or_https": "封面地址必须以 http:// 或 https:// 开头",
+  "the_image_is_too_big_20_mb_at_most": "图片太大(最多 20 MB)",
+  "couldnt_get_an_image_from_that_address": "无法从该地址获取图片"
 }

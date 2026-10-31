@@ -113,3 +113,10 @@ Open Library's covers are of the printed book, which most audiobook covers are m
 To look again for missing covers, for example after adding images to book folders, an admin opens **Settings**, finds the audiobook library under **Libraries**, and clicks **Find artwork**.
 
 <!-- /since -->
+
+<!-- since: v0.1.7 -->
+### Picking a cover yourself
+
+An admin can pick a book's cover by hand: click the cover on the book's page in the browser, or tap or long-press it in the phone apps. The picker offers Open Library's covers of the printed editions and Apple's audiobook covers, or takes the address of an image online, or, in the browser, an image you upload. The cover you pick stays through scans; **Use the automatic cover** goes back. It works the same as [picking an album's cover](/docs/watching/music/#picking-a-cover-yourself).
+
+<!-- /since -->

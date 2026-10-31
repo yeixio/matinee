@@ -328,6 +328,8 @@ export type Item = {
   overview?: string
   rating?: number
   hasPoster: boolean
+  // Set when an admin picked the cover; it goes on the image URL so a cached old one isn't shown.
+  posterTag?: string
   hasBackdrop: boolean
   showTitle?: string
   seasonIndex?: number
@@ -684,6 +686,15 @@ export type AnalysisStatus = {
   current?: string
 }
 
+// CoverOption is a cover found online that an admin can pick for an album or book.
+export interface CoverOption {
+  url: string
+  thumb: string
+  source: string
+  title: string
+  detail?: string
+}
+
 // message is in the page's language where the catalog has the server's
 // error code (errors.json), else the server's English.
 export class ApiError extends Error {
@@ -863,6 +874,18 @@ export const api = {
   refreshPodcast: (id: number) => request<{ added: number }>('POST', `/api/v1/podcasts/${id}/refresh`),
   followPodcast: (id: number, follow: boolean) => request<void>(follow ? 'PUT' : 'DELETE', `/api/v1/podcasts/${id}/follow`),
   markPodcastPlayed: (id: number, played: boolean) => request<void>('PUT', `/api/v1/podcasts/${id}/played`, { played }),
+  covers: (id: number) => request<{ options: CoverOption[]; chosen: boolean; chosenSource?: string }>('GET', `/api/v1/items/${id}/covers`),
+  setCover: (id: number, url: string) => request<Item>('PUT', `/api/v1/items/${id}/cover`, { url }),
+  uploadCover: async (id: number, file: Blob) => {
+    const res = await fetch(`/api/v1/items/${id}/cover`, {
+      method: 'PUT',
+      credentials: 'same-origin',
+      headers: { 'Content-Type': file.type || 'application/octet-stream' },
+      body: file,
+    })
+    return response<Item>(res)
+  },
+  resetCover: (id: number) => request<void>('DELETE', `/api/v1/items/${id}/cover`),
   importOpml: async (library: number, file: Blob) => {
     const res = await fetch(`/api/v1/libraries/${library}/opml`, {
       method: 'POST',
@@ -945,7 +968,8 @@ export const api = {
   },
 }
 
-export const imageUrl = (id: number, type: 'poster' | 'backdrop') => `/api/v1/items/${id}/image/${type}`
+export const imageUrl = (id: number, type: 'poster' | 'backdrop', tag?: string) =>
+  `/api/v1/items/${id}/image/${type}${tag ? `?v=${encodeURIComponent(tag)}` : ''}`
 export const personImageUrl = (id: number) => `/api/v1/people/${id}/image`
 export const fileUrl = (id: number) => `/api/v1/items/${id}/file`
 export const opmlUrl = (library: number) => `/api/v1/libraries/${library}/opml`

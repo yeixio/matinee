@@ -163,5 +163,10 @@
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "تعذّرت قراءة الخلاصة. تحقّق من العنوان وحاول مجددًا.",
   "the_feed_couldnt_be_read_right_now": "تتعذّر قراءة الخلاصة الآن",
   "the_file_is_too_big": "الملف كبير جدًا",
-  "this_library_already_has_a_show_with_that_name": "في هذه المكتبة برنامج بهذا الاسم بالفعل"
+  "this_library_already_has_a_show_with_that_name": "في هذه المكتبة برنامج بهذا الاسم بالفعل",
+  "only_albums_and_books_have_covers_to_pick": "الألبومات والكتب وحدها لها أغلفة يمكن اختيارها",
+  "that_isnt_a_jpeg_png_webp_or_gif_image": "هذه ليست صورة JPEG أو PNG أو WebP أو GIF",
+  "the_covers_address_must_start_with_http_or_https": "يجب أن يبدأ عنوان الغلاف بـ http:// أو https://",
+  "the_image_is_too_big_20_mb_at_most": "الصورة كبيرة جدًا (20 ميغابايت على الأكثر)",
+  "couldnt_get_an_image_from_that_address": "تعذّر جلب صورة من هذا العنوان"
 }

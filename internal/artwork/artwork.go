@@ -22,6 +22,9 @@ type Cache struct {
 	Dir    string
 	FFmpeg string
 	Client *http.Client
+	// Chosen loads a cover an admin picked, for a "chosen:" source; nil
+	// has none.
+	Chosen func(ctx context.Context, src string) ([]byte, error)
 
 	mu       sync.Mutex
 	inflight map[string]*sync.Mutex
@@ -33,7 +36,8 @@ func NewCache(dir, ffmpeg string) *Cache {
 }
 
 // Serve writes the image src points at: a local path, an http(s) URL
-// (downloaded once, then served from the cache), or "embedded:<audio file>".
+// (downloaded once, then served from the cache), "embedded:<audio file>",
+// or "chosen:…" for a cover an admin picked.
 // Further sources are tried in turn when one can't be had.
 func (c *Cache) Serve(w http.ResponseWriter, r *http.Request, src string, fallbacks ...string) {
 	for _, s := range append([]string{src}, fallbacks...) {
@@ -68,6 +72,14 @@ func (c *Cache) resolve(ctx context.Context, src string) (string, error) {
 			ext = ".jpg"
 		}
 		return c.cached(src, ext, func(dst string) error { return c.download(ctx, src, dst) })
+	case strings.HasPrefix(src, "chosen:") && c.Chosen != nil:
+		return c.cached(src, "", func(dst string) error {
+			data, err := c.Chosen(ctx, src)
+			if err != nil {
+				return err
+			}
+			return os.WriteFile(dst, data, 0o644)
+		})
 	case strings.HasPrefix(src, "embedded:"):
 		audio := strings.TrimPrefix(src, "embedded:")
 		return c.cached(src, ".jpg", func(dst string) error { return c.extract(ctx, audio, dst) })

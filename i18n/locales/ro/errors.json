@@ -163,5 +163,10 @@
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "fluxul nu a putut fi citit. Verifică adresa și încearcă din nou.",
   "the_feed_couldnt_be_read_right_now": "fluxul nu poate fi citit acum",
   "the_file_is_too_big": "fișierul este prea mare",
-  "this_library_already_has_a_show_with_that_name": "această bibliotecă are deja o emisiune cu acest nume"
+  "this_library_already_has_a_show_with_that_name": "această bibliotecă are deja o emisiune cu acest nume",
+  "only_albums_and_books_have_covers_to_pick": "doar albumele și cărțile au coperți de ales",
+  "that_isnt_a_jpeg_png_webp_or_gif_image": "aceasta nu este o imagine JPEG, PNG, WebP sau GIF",
+  "the_covers_address_must_start_with_http_or_https": "adresa copertei trebuie să înceapă cu http:// sau https://",
+  "the_image_is_too_big_20_mb_at_most": "imaginea este prea mare (cel mult 20 MB)",
+  "couldnt_get_an_image_from_that_address": "nu s-a putut obține o imagine de la acea adresă"
 }

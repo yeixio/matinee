@@ -163,5 +163,10 @@
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "a hírcsatornát nem sikerült beolvasni. Ellenőrizd a címet, és próbáld újra.",
   "the_feed_couldnt_be_read_right_now": "a hírcsatorna most nem olvasható be",
   "the_file_is_too_big": "a fájl túl nagy",
-  "this_library_already_has_a_show_with_that_name": "ebben a könyvtárban már van ilyen nevű műsor"
+  "this_library_already_has_a_show_with_that_name": "ebben a könyvtárban már van ilyen nevű műsor",
+  "only_albums_and_books_have_covers_to_pick": "csak albumokhoz és könyvekhez lehet borítót választani",
+  "that_isnt_a_jpeg_png_webp_or_gif_image": "ez nem JPEG, PNG, WebP vagy GIF kép",
+  "the_covers_address_must_start_with_http_or_https": "a borító címének http:// vagy https:// előtaggal kell kezdődnie",
+  "the_image_is_too_big_20_mb_at_most": "a kép túl nagy (legfeljebb 20 MB)",
+  "couldnt_get_an_image_from_that_address": "erről a címről nem sikerült képet letölteni"
 }

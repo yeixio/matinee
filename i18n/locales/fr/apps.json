@@ -507,5 +507,15 @@
     "waiting": "Cet écran se fermera tout seul une fois le paiement effectué.",
     "unlocked": "Matinee est débloqué sur ce téléviseur.",
     "updateServer": "Pour débloquer Matinee ici, mettez d'abord à jour votre serveur Matinee."
+  },
+  "cover": {
+    "change": "Changer la pochette",
+    "title": "Choisir une pochette",
+    "looking": "Recherche de pochettes en ligne…",
+    "none": "Aucune pochette trouvée en ligne. Collez l'adresse d'une image ci-dessous.",
+    "addressPlaceholder": "Collez l'adresse d'une image",
+    "use": "Utiliser",
+    "reset": "Utiliser la pochette automatique",
+    "chosenNote": "Cette pochette a été choisie à la main, les analyses la conservent donc."
   }
 }
