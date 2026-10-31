@@ -78,6 +78,14 @@ Check (Test-Path (Join-Path $data "matinee.env")) "settings file"
 $run = (Get-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" -ErrorAction SilentlyContinue).Matinee
 Check ($run -like "*matinee-tray.exe*--background*") "starts at sign-in ($run)"
 
+# The icon, its menu and the welcome need a taskbar. Windows' Arm runners
+# don't run Explorer, so there the tray app waits for one and only the
+# server is checked; the x64 run checks the rest.
+if ([Win]::FindWindow("Shell_TrayWnd", $null) -eq [IntPtr]::Zero) {
+  Write-Host "no taskbar on this runner: not checking the icon, its menu or the welcome"
+  $noTaskbar = $true
+}
+if (-not $noTaskbar) {
 Start-Sleep 2
 $welcome = [Win]::FindWindow("#32770", "Welcome to Matinee")
 Check ($welcome -ne [IntPtr]::Zero) "welcome message shows"
@@ -101,6 +109,7 @@ Start-Sleep 2
 Shot "tray-menu" ($screen.Width - 420) ($screen.Height - 480) 420 480
 Shot "tray-desktop"
 [System.Windows.Forms.SendKeys]::SendWait("{ESC}")
+}
 
 # The folder picker lists this PC's drives and full Windows paths.
 $login = Invoke-RestMethod -Method Post "$base/setup" -ContentType "application/json" -Body '{"username":"admin","password":"windows-test-1"}'

@@ -114,6 +114,13 @@ func main() {
 	if err := a.server.Start(); err != nil {
 		fmt.Fprintln(a.log, "tray:", err)
 	}
+	// Matinee starts at sign-in unless someone turns that off.
+	if firstRun {
+		if err := setStartAtLogin(true); err != nil {
+			fmt.Fprintln(a.log, "tray: start at sign-in:", err)
+		}
+	}
+	waitForTaskbar()
 
 	systray.Run(func() { a.ready(firstRun, *background) }, func() {
 		a.server.Stop(stopTimeout)
@@ -143,12 +150,6 @@ func (a *app) ready(firstRun, background bool) {
 	systray.AddSeparator()
 	quit := systray.AddMenuItem("Quit Matinee", "Stop the server and close Matinee")
 
-	// Matinee starts at sign-in unless someone turns that off.
-	if firstRun {
-		if err := setStartAtLogin(true); err != nil {
-			fmt.Fprintln(a.log, "tray: start at sign-in:", err)
-		}
-	}
 	if startsAtLogin() {
 		login.Check()
 	}

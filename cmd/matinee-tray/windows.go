@@ -7,6 +7,8 @@ import (
 	"os"
 	"os/exec"
 	"syscall"
+	"time"
+	"unsafe"
 
 	"golang.org/x/sys/windows"
 	"golang.org/x/sys/windows/registry"
@@ -19,6 +21,21 @@ const (
 	mbInfo  = windows.MB_OK | windows.MB_ICONINFORMATION
 	mbError = windows.MB_OK | windows.MB_ICONERROR
 )
+
+var findWindow = windows.NewLazySystemDLL("user32.dll").NewProc("FindWindowW")
+
+// waitForTaskbar waits until the taskbar is there to hold the icon. At
+// sign-in Windows can start Matinee before Explorer has made the taskbar,
+// and an icon added before then fails.
+func waitForTaskbar() {
+	class, _ := windows.UTF16PtrFromString("Shell_TrayWnd")
+	for {
+		if h, _, _ := findWindow.Call(uintptr(unsafe.Pointer(class)), 0); h != 0 {
+			return
+		}
+		time.Sleep(2 * time.Second)
+	}
+}
 
 // singleInstance is false when Matinee is already running for this user.
 func singleInstance() bool {
