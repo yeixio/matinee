@@ -4,6 +4,7 @@ import (
 	"context"
 	"os"
 	"path/filepath"
+	"regexp"
 	"strings"
 	"unicode"
 
@@ -170,4 +171,69 @@ func rootOf(roots []string, path string) string {
 		}
 	}
 	return best
+}
+
+// mbidRe matches a MusicBrainz id; a tag can hold several, split by ";" or "/".
+var mbidRe = regexp.MustCompile(`(?i)[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}`)
+
+// albumIDs returns the MusicBrainz release and release group ids that
+// Picard, Lidarr and beets write into tracks' tags. FFmpeg reads them as
+// MUSICBRAINZ_ALBUMID from FLAC and Ogg, and "MusicBrainz Album Id" from
+// MP3 and MP4.
+func albumIDs(tags map[string]string) (release, group string) {
+	pick := func(keys ...string) string {
+		for _, k := range keys {
+			if id := mbidRe.FindString(tags[k]); id != "" {
+				return strings.ToLower(id)
+			}
+		}
+		return ""
+	}
+	return pick("musicbrainz_albumid", "musicbrainz album id"),
+		pick("musicbrainz_releasegroupid", "musicbrainz release group id")
+}
+
+// readAlbumTags reads, once, the tags of albums without a cover that were
+// scanned before Matinee kept their MusicBrainz ids, since scans skip
+// unchanged files. A few files of each album are read, for the ids and for
+// a picture in them.
+func (s *Scanner) readAlbumTags(ctx context.Context, lib store.Library) error {
+	albums, err := s.Store.AlbumsToReadTags(ctx, lib.ID)
+	if err != nil {
+		return err
+	}
+	for _, a := range albums {
+		var release, group, cover string
+		for i, p := range a.Paths {
+			if i == 3 || cover != "" {
+				break
+			}
+			pr, err := s.Prober.Probe(ctx, p)
+			if err != nil {
+				if ctx.Err() != nil {
+					return ctx.Err()
+				}
+				continue
+			}
+			r, g := albumIDs(pr.Tags)
+			if release == "" {
+				release = r
+			}
+			if group == "" {
+				group = g
+			}
+			if pr.HasCover {
+				cover = "embedded:" + p
+			}
+		}
+		if cover != "" {
+			if err := s.Store.SetArt(ctx, a.ID, cover, ""); err != nil {
+				return err
+			}
+		}
+		if err := s.Store.SetAlbumTags(ctx, a.ID, release, group); err != nil {
+			return err
+		}
+	}
+	return nil
 }

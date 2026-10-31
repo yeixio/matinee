@@ -592,14 +592,17 @@
         "movies": "Film",
         "tv": "Acara TV",
         "music": "Musik",
-        "audiobooks": "Buku audio"
+        "audiobooks": "Buku audio",
+        "podcasts": "Podcast"
       },
       "type": "Jenis",
       "folders": "Folder",
       "up": "Naik satu folder",
       "added": "Ditambahkan",
       "useFolder": "Gunakan folder ini",
-      "noSubfolders": "Tidak ada subfolder"
+      "noSubfolders": "Tidak ada subfolder",
+      "podcastsNoFolders": "Podcast tidak memerlukan folder. Tambahkan acara dari pustaka setelah dibuat.",
+      "podcastsChecked": "Episode baru diperiksa setiap jam"
     },
     "people": {
       "title": "Orang",
@@ -721,6 +724,16 @@
       "remove": "Hapus kunci tersimpan",
       "saved": "Tersimpan. Matinee sedang melengkapi poster dan detail."
     },
+    "podcastIndex": {
+      "title": "Pencarian podcast",
+      "intro": "Pencarian podcast memakai Podcast Index, direktori yang bebas dan terbuka. Dapatkan kunci dan rahasia API gratis di <site>api.podcastindex.org</site>. Tanpa itu, acara selalu bisa ditambahkan lewat alamat feed-nya.",
+      "using": "Memakai kunci yang berakhiran {{hint}}.",
+      "none": "Belum ada kunci, jadi acara ditambahkan lewat alamat feed-nya.",
+      "key": "Kunci API",
+      "secret": "Rahasia API",
+      "save": "Simpan kunci",
+      "remove": "Hapus kunci"
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Membuat aplikasi tetap bisa menemukan server ini saat alamat internet rumahmu berubah. Layanan ini hanya tahu alamatnya: video selalu langsung dari server ini ke aplikasi.",
@@ -797,5 +810,19 @@
   },
   "remote": {
     "controlledBy": "Dikendalikan dari {{name}}"
+  },
+  "cover": {
+    "change": "Ganti sampul",
+    "title": "Sampul untuk {{title}}",
+    "looking": "Mencari sampul secara online…",
+    "none": "Tidak ada sampul yang ditemukan online. Tempel alamat gambar, atau unggah gambar.",
+    "pick": "Gunakan {{cover}}",
+    "address": "Alamat gambar",
+    "addressPlaceholder": "Tempel alamat gambar",
+    "use": "Gunakan",
+    "upload": "Unggah gambar",
+    "reset": "Gunakan sampul otomatis",
+    "chosenNote": "Sampul ini dipilih secara manual, jadi pemindaian tetap mempertahankannya.",
+    "saving": "Menyimpan sampul…"
   }
 }

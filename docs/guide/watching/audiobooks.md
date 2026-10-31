@@ -66,6 +66,10 @@ Apple TV and Android TV have a player made for books too. On a book's page, **Pl
 
 ![The audiobook player on a TV](../images/app-tv-book.webp)
 
+<!-- since: v0.1.7 -->
+From version 1.0.19 you can scrub through the book with the remote, as in the music player: press up from the buttons to the bar, then left and right go back or ahead 10 seconds (hold to go faster). Keep pressing to go past the end of a chapter into the next; the chapter's name and the time update as you go, and the book moves there once you stop. Select on the bar plays or pauses, and rewind and fast forward on the remote skip 10 seconds from anywhere in the player.
+<!-- /since -->
+
 The book keeps playing while you browse, like music: the book shows at the top of the screen next to the server's name, and selecting it opens the player again. The play/pause button on the remote plays and pauses it from any screen. Your place in the book is kept on the whole book's clock, so you can carry on from a phone or the browser.
 
 <!-- /since -->
@@ -107,5 +111,12 @@ An author's photo comes from `author.jpg` (or `folder.jpg`) in their folder, or 
 Open Library's covers are of the printed book, which most audiobook covers are made from. A book is only matched when Open Library has the same title by the same author; notes like "(Unabridged)" are left out of the search.
 
 To look again for missing covers, for example after adding images to book folders, an admin opens **Settings**, finds the audiobook library under **Libraries**, and clicks **Find artwork**.
+
+<!-- /since -->
+
+<!-- since: v0.1.7 -->
+### Picking a cover yourself
+
+An admin can pick a book's cover by hand: click the cover on the book's page in the browser, or tap or long-press it in the phone apps. The picker offers Open Library's covers of the printed editions and Apple's audiobook covers, or takes the address of an image online, or, in the browser, an image you upload. The cover you pick stays through scans; **Use the automatic cover** goes back. It works the same as [picking an album's cover](/docs/watching/music/#picking-a-cover-yourself).
 
 <!-- /since -->

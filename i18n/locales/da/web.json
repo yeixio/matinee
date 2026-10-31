@@ -596,14 +596,17 @@
         "movies": "Film",
         "tv": "Tv-serier",
         "music": "Musik",
-        "audiobooks": "Lydbøger"
+        "audiobooks": "Lydbøger",
+        "podcasts": "Podcasts"
       },
       "type": "Type",
       "folders": "Mapper",
       "up": "Én mappe op",
       "added": "Tilføjet",
       "useFolder": "Brug denne mappe",
-      "noSubfolders": "Ingen undermapper"
+      "noSubfolders": "Ingen undermapper",
+      "podcastsNoFolders": "Podcasts behøver ingen mappe. Tilføj programmer fra biblioteket, når det er oprettet.",
+      "podcastsChecked": "Tjekkes for nye afsnit hver time"
     },
     "people": {
       "title": "Personer",
@@ -725,6 +728,16 @@
       "remove": "Fjern gemt nøgle",
       "saved": "Gemt. Matinee udfylder nu plakater og detaljer."
     },
+    "podcastIndex": {
+      "title": "Podcastsøgning",
+      "intro": "Podcastsøgning bruger Podcast Index, et frit og åbent katalog. Få en gratis API-nøgle og hemmelighed på <site>api.podcastindex.org</site>. Uden dem kan programmer altid tilføjes med feedadressen.",
+      "using": "Bruger nøglen, der ender på {{hint}}.",
+      "none": "Ingen nøgle endnu, så programmer tilføjes med feedadressen.",
+      "key": "API-nøgle",
+      "secret": "API-hemmelighed",
+      "save": "Gem nøgle",
+      "remove": "Fjern nøgle"
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Gør at apps kan finde denne server, også når dit hjems internetadresse ændrer sig. Tjenesten kender kun adressen: video går altid direkte fra serveren til apps.",
@@ -801,5 +814,19 @@
   },
   "remote": {
     "controlledBy": "Styret fra {{name}}"
+  },
+  "cover": {
+    "change": "Skift cover",
+    "title": "Cover til {{title}}",
+    "looking": "Leder efter covers på nettet …",
+    "none": "Der blev ikke fundet nogen covers på nettet. Indsæt adressen på et billede, eller upload et.",
+    "pick": "Brug {{cover}}",
+    "address": "Billedadresse",
+    "addressPlaceholder": "Indsæt adressen på et billede",
+    "use": "Brug",
+    "upload": "Upload et billede",
+    "reset": "Brug det automatiske cover",
+    "chosenNote": "Dette cover er valgt i hånden, så scanninger beholder det.",
+    "saving": "Gemmer coveret …"
   }
 }

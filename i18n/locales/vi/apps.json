@@ -427,7 +427,8 @@
     "listenNow": "Nghe ngay",
     "music": "Nhạc",
     "audiobooks": "Sách nói",
-    "signIn": "Mở Matinee trên điện thoại và đăng nhập để nghe trên xe."
+    "signIn": "Mở Matinee trên điện thoại và đăng nhập để nghe trên xe.",
+    "loading": "Đang tải…"
   },
   "watch": {
     "tileName": "Đang phát",
@@ -482,5 +483,25 @@
     "back15": "Lùi 15 giây",
     "ahead30": "Tới 30 giây",
     "storageUsed": "{{size}} trên đồng hồ này"
+  },
+  "tvUnlock": {
+    "title": "Mở khóa Matinee",
+    "body": "Thanh toán một lần {{price}} để mở khóa Matinee vĩnh viễn trên mọi TV Samsung và LG dùng máy chủ này.",
+    "scan": "Quét mã bằng điện thoại, hoặc truy cập {{url}}",
+    "trialUntil": "Dùng thử miễn phí đến {{date}}.",
+    "trialOver": "Thời gian dùng thử miễn phí đã hết. Hãy mở khóa Matinee để tiếp tục xem và nghe.",
+    "waiting": "Màn hình này sẽ tự đóng sau khi bạn thanh toán.",
+    "unlocked": "Matinee đã được mở khóa trên TV này.",
+    "updateServer": "Để mở khóa Matinee tại đây, hãy cập nhật máy chủ Matinee của bạn trước."
+  },
+  "cover": {
+    "change": "Đổi ảnh bìa",
+    "title": "Chọn ảnh bìa",
+    "looking": "Đang tìm ảnh bìa trên mạng…",
+    "none": "Không tìm thấy ảnh bìa nào trên mạng. Hãy dán địa chỉ một hình ảnh bên dưới.",
+    "addressPlaceholder": "Dán địa chỉ một hình ảnh",
+    "use": "Dùng",
+    "reset": "Dùng ảnh bìa tự động",
+    "chosenNote": "Ảnh bìa này được chọn thủ công nên các lần quét sẽ giữ nguyên."
   }
 }

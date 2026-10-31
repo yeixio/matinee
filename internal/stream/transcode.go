@@ -214,7 +214,7 @@ func (t *Transcoder) start(ctx context.Context, userID int64, it store.Item, sta
 	if startSec > 0 {
 		args = append(args, "-ss", strconv.FormatFloat(startSec, 'f', 3, 64))
 	}
-	args = append(args, "-i", it.Path)
+	args = append(args, Input(it)...)
 	args = append(args, output...)
 	args = append(args, "-f", "hls", "-hls_time", strconv.Itoa(segmentSeconds), "-hls_list_size", "0", "-hls_playlist_type", "event")
 	firstSegments := []string{filepath.Join(dir, "seg00000.ts")}

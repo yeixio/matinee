@@ -434,7 +434,8 @@
     "listenNow": "Jetzt hören",
     "music": "Musik",
     "audiobooks": "Hörbücher",
-    "signIn": "Öffne Matinee auf deinem Handy und melde dich an, um im Auto zu hören."
+    "signIn": "Öffne Matinee auf deinem Handy und melde dich an, um im Auto zu hören.",
+    "loading": "Wird geladen…"
   },
   "watch": {
     "tileName": "Läuft gerade",
@@ -489,5 +490,25 @@
     "back15": "15 Sekunden zurück",
     "ahead30": "30 Sekunden vor",
     "storageUsed": "{{size}} auf dieser Uhr"
+  },
+  "tvUnlock": {
+    "title": "Matinee freischalten",
+    "body": "Eine Zahlung von {{price}} schaltet Matinee dauerhaft auf allen Samsung- und LG-Fernsehern frei, die diesen Server nutzen.",
+    "scan": "Scanne den Code mit deinem Handy oder öffne {{url}}",
+    "trialUntil": "Kostenlos testen bis {{date}}.",
+    "trialOver": "Der kostenlose Test ist vorbei. Schalte Matinee frei, um weiter zu schauen und zu hören.",
+    "waiting": "Dieser Bildschirm schließt sich von selbst, sobald du bezahlt hast.",
+    "unlocked": "Matinee ist auf diesem Fernseher freigeschaltet.",
+    "updateServer": "Aktualisiere zuerst deinen Matinee-Server, um Matinee hier freizuschalten."
+  },
+  "cover": {
+    "change": "Cover ändern",
+    "title": "Cover wählen",
+    "looking": "Covers werden online gesucht …",
+    "none": "Online wurden keine Covers gefunden. Füge unten die Adresse eines Bildes ein.",
+    "addressPlaceholder": "Adresse eines Bildes einfügen",
+    "use": "Verwenden",
+    "reset": "Automatisches Cover verwenden",
+    "chosenNote": "Dieses Cover wurde von Hand gewählt, deshalb behalten Scans es bei."
   }
 }

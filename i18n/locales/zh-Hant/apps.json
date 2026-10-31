@@ -427,7 +427,8 @@
     "listenNow": "立即收聽",
     "music": "音樂",
     "audiobooks": "有聲書",
-    "signIn": "在手機上開啟 Matinee 並登入，即可在車上收聽。"
+    "signIn": "在手機上開啟 Matinee 並登入，即可在車上收聽。",
+    "loading": "正在載入…"
   },
   "watch": {
     "tileName": "正在播放",
@@ -482,5 +483,25 @@
     "back15": "倒退 15 秒",
     "ahead30": "快轉 30 秒",
     "storageUsed": "手錶上 {{size}}"
+  },
+  "tvUnlock": {
+    "title": "解鎖 Matinee",
+    "body": "只需付款一次 {{price}}，即可在使用此伺服器的所有 Samsung 和 LG 電視上永久解鎖 Matinee。",
+    "scan": "用手機掃描條碼，或前往 {{url}}",
+    "trialUntil": "免費試用至 {{date}}。",
+    "trialOver": "免費試用已結束。解鎖 Matinee 即可繼續觀看和收聽。",
+    "waiting": "付款完成後，此畫面會自動關閉。",
+    "unlocked": "這台電視上的 Matinee 已解鎖。",
+    "updateServer": "若要在此解鎖 Matinee，請先更新你的 Matinee 伺服器。"
+  },
+  "cover": {
+    "change": "更換封面",
+    "title": "選擇封面",
+    "looking": "正在網路上尋找封面…",
+    "none": "網路上找不到封面。在下方貼上圖片網址。",
+    "addressPlaceholder": "貼上圖片網址",
+    "use": "使用",
+    "reset": "使用自動封面",
+    "chosenNote": "這個封面是手動選擇的,掃描時會保留。"
   }
 }

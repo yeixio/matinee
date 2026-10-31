@@ -441,7 +441,8 @@
     "listenNow": "Écouter",
     "music": "Musique",
     "audiobooks": "Livres audio",
-    "signIn": "Ouvrez Matinee sur votre téléphone et connectez-vous pour écouter en voiture."
+    "signIn": "Ouvrez Matinee sur votre téléphone et connectez-vous pour écouter en voiture.",
+    "loading": "Chargement…"
   },
   "watch": {
     "tileName": "En cours de lecture",
@@ -496,5 +497,25 @@
     "back15": "Reculer de 15 secondes",
     "ahead30": "Avancer de 30 secondes",
     "storageUsed": "{{size}} sur cette montre"
+  },
+  "tvUnlock": {
+    "title": "Débloquer Matinee",
+    "body": "Un seul paiement de {{price}} débloque Matinee pour de bon sur tous les téléviseurs Samsung et LG qui utilisent ce serveur.",
+    "scan": "Scannez le code avec votre téléphone ou allez sur {{url}}",
+    "trialUntil": "Essai gratuit jusqu'au {{date}}.",
+    "trialOver": "L'essai gratuit est terminé. Débloquez Matinee pour continuer à regarder et à écouter.",
+    "waiting": "Cet écran se fermera tout seul une fois le paiement effectué.",
+    "unlocked": "Matinee est débloqué sur ce téléviseur.",
+    "updateServer": "Pour débloquer Matinee ici, mettez d'abord à jour votre serveur Matinee."
+  },
+  "cover": {
+    "change": "Changer la pochette",
+    "title": "Choisir une pochette",
+    "looking": "Recherche de pochettes en ligne…",
+    "none": "Aucune pochette trouvée en ligne. Collez l'adresse d'une image ci-dessous.",
+    "addressPlaceholder": "Collez l'adresse d'une image",
+    "use": "Utiliser",
+    "reset": "Utiliser la pochette automatique",
+    "chosenNote": "Cette pochette a été choisie à la main, les analyses la conservent donc."
   }
 }

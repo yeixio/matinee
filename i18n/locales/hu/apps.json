@@ -434,7 +434,8 @@
     "listenNow": "Hallgasd most",
     "music": "Zene",
     "audiobooks": "Hangoskönyvek",
-    "signIn": "Nyisd meg a Matinee-t a telefonodon, és jelentkezz be, hogy az autóban is hallgathasd."
+    "signIn": "Nyisd meg a Matinee-t a telefonodon, és jelentkezz be, hogy az autóban is hallgathasd.",
+    "loading": "Betöltés…"
   },
   "watch": {
     "tileName": "Most szól",
@@ -489,5 +490,25 @@
     "back15": "15 másodperc vissza",
     "ahead30": "30 másodperc előre",
     "storageUsed": "{{size}} ezen az órán"
+  },
+  "tvUnlock": {
+    "title": "Matinee feloldása",
+    "body": "Egyetlen {{price}} összegű fizetés végleg feloldja a Matinee-t minden Samsung és LG tévén, amely ezt a szervert használja.",
+    "scan": "Olvasd be a kódot a telefonoddal, vagy nyisd meg: {{url}}",
+    "trialUntil": "Ingyenes próbaidőszak eddig: {{date}}.",
+    "trialOver": "Az ingyenes próbaidőszak lejárt. Oldd fel a Matinee-t, hogy tovább nézhess és hallgathass.",
+    "waiting": "Ez a képernyő magától bezárul, amint fizettél.",
+    "unlocked": "A Matinee fel van oldva ezen a tévén.",
+    "updateServer": "Ahhoz, hogy itt feloldd a Matinee-t, előbb frissítsd a Matinee-szervered."
+  },
+  "cover": {
+    "change": "Borító módosítása",
+    "title": "Válasszon borítót",
+    "looking": "Borítók keresése az interneten…",
+    "none": "Nem található borító az interneten. Illessze be lent egy kép címét.",
+    "addressPlaceholder": "Illessze be egy kép címét",
+    "use": "Használat",
+    "reset": "Automatikus borító használata",
+    "chosenNote": "Ezt a borítót kézzel választották, ezért a vizsgálatok megtartják."
   }
 }

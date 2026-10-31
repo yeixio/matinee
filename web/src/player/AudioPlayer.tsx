@@ -25,15 +25,17 @@ export type AudioState = {
   speed: number
   setSpeed: (speed: number) => void
   // Plays a book (or a part's book) from where the person left off, or
-  // from a time on the book's clock.
-  playBook: (id: number, atSec?: number) => Promise<void>
+  // from a time on the book's clock. A podcast episode plays as a book of
+  // one part (see book.episodeBook).
+  playBook: (id: number, atSec?: number, episode?: Item) => Promise<void>
   // Goes to a time on the book's clock, or jumps by seconds.
   seekBook: (sec: number) => void
   skip: (seconds: number) => void
   playing: boolean
   audio: React.RefObject<HTMLAudioElement | null>
-  // A moment's note, such as "Added to the queue".
+  // A moment's note, such as "Added to the queue", and a way to show one.
   notice?: string
+  say: (text: string) => void
   // Why playback is waiting for the server, while it's away, or that it
   // gave up waiting.
   away?: Waiting | 'gaveUp'
@@ -92,6 +94,7 @@ export function useAudioTime() {
 
 export const musicKinds = ['artist', 'album', 'track']
 export const bookKinds = ['book', 'part']
+export const podcastKinds = ['podcast', 'podcastEpisode']
 
 // The playing book's time and length on its own clock, in seconds, and
 // the chapter playing.
@@ -379,7 +382,13 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
         const b = bookRef.current
         if (b && auto) {
           // The end of the book: it's finished, and starts over next time.
-          api.setProgress(b.id, 0, true).then(() => qc.invalidateQueries({ queryKey: ['item', b.id] })).catch(() => {})
+          api
+            .setProgress(b.id, 0, true)
+            .then(() => {
+              qc.invalidateQueries({ queryKey: ['item', b.id] })
+              if (B.isEpisode(b)) qc.invalidateQueries({ queryKey: ['children', b.parentId] })
+            })
+            .catch(() => {})
           resumeAt.current = { time: 0, play: false }
           setQueue((q) => Q.jump(q, 0))
           return
@@ -456,6 +465,7 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
       wasPlaying.current = false
       reportBook()
       qc.invalidateQueries({ queryKey: ['item', book.id] })
+      if (B.isEpisode(book)) qc.invalidateQueries({ queryKey: ['children', book.parentId] })
     }
   }, [book, playing, reportBook, qc])
   useEffect(() => {
@@ -485,8 +495,8 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
   )
 
   const playBook = useCallback(
-    async (id: number, atSec?: number) => {
-      const b = await api.book(id)
+    async (id: number, atSec?: number, episode?: Item) => {
+      const b = episode ? B.episodeBook(episode) : await api.book(id)
       if (!b.parts.length) return
       const el = audio.current
       const from = atSec ?? (b.played ? 0 : (b.positionMs ?? 0) / 1000)
@@ -519,6 +529,12 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
     async (item: Item, positionMs?: number) => {
       if (bookKinds.includes(item.kind)) {
         await playBook(item.id, positionMs !== undefined ? positionMs / 1000 : undefined)
+        return
+      }
+      if (item.kind === 'podcastEpisode') {
+        // Fresh, for the person's place in it.
+        const ep = await api.item(item.id)
+        await playBook(ep.id, positionMs !== undefined ? positionMs / 1000 : undefined, ep)
         return
       }
       if (!musicKinds.includes(item.kind)) {
@@ -610,6 +626,7 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
       playing,
       audio,
       notice,
+      say: note,
       away,
       reconnect: () => {
         setAway(undefined)
@@ -689,6 +706,17 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
         onEnded={() => advance(true)}
+        onDurationChange={(e) => {
+          // Feeds often leave an episode's length out, or get it wrong.
+          const b = bookRef.current
+          const d = e.currentTarget.duration
+          if (B.isEpisode(b) && b && Number.isFinite(d) && d > 0 && Math.abs((b.durationMs ?? 0) - d * 1000) > 2000) {
+            const durationMs = Math.round(d * 1000)
+            const fixed = { ...b, durationMs, parts: [{ ...b.parts[0], durationMs }] }
+            bookRef.current = fixed
+            setBook(fixed)
+          }
+        }}
         onTimeUpdate={(e) => {
           if (e.currentTarget.currentTime > 0) lastTime.current = e.currentTarget.currentTime
           onTime()
@@ -698,7 +726,7 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
         onError={onError}
       />
       {current && away && !watching && <Away away={away} onRetry={value.reconnect} onStop={value.stop} />}
-      {current && expanded && notice && !away && !watching && <Toast text={notice} />}
+      {(!current || expanded) && notice && !away && !watching && <Toast text={notice} />}
       {current && !watching && (book ? <BookBar /> : <MusicBar />)}
       {current && expanded && !watching && (book ? <BookPlayer /> : <NowPlaying />)}
     </AudioContext.Provider>
@@ -751,7 +779,7 @@ function useMediaSession(s: AudioState) {
     const art = new URL(imageUrl(item.id, 'poster'), window.location.href).href
     const b = s.book
     ms.metadata = b
-      ? new MediaMetadata({ title: b.title, artist: b.author ?? '', album: b.series ?? '', artwork: [{ src: art }] })
+      ? new MediaMetadata({ title: b.title, artist: b.author ?? '', album: b.podcast ?? b.series ?? '', artwork: [{ src: art }] })
       : new MediaMetadata({ title: item.title, artist: item.artist ?? '', album: item.album ?? '', artwork: [{ src: art }] })
   }, [ms, item, s.book])
 

@@ -596,14 +596,17 @@
         "movies": "Filmek",
         "tv": "Tévésorozatok",
         "music": "Zene",
-        "audiobooks": "Hangoskönyvek"
+        "audiobooks": "Hangoskönyvek",
+        "podcasts": "Podcastok"
       },
       "type": "Típus",
       "folders": "Mappák",
       "up": "Egy mappával feljebb",
       "added": "Hozzáadva",
       "useFolder": "Ez a mappa",
-      "noSubfolders": "Nincsenek almappák"
+      "noSubfolders": "Nincsenek almappák",
+      "podcastsNoFolders": "A podcastokhoz nem kell mappa. A könyvtár létrehozása után ott adhatsz hozzá műsorokat.",
+      "podcastsChecked": "Óránként ellenőrzi az új epizódokat"
     },
     "people": {
       "title": "Személyek",
@@ -725,6 +728,16 @@
       "remove": "Mentett kulcs eltávolítása",
       "saved": "Mentve. A Matinee most kiegészíti a plakátokat és részleteket."
     },
+    "podcastIndex": {
+      "title": "Podcastkeresés",
+      "intro": "A podcastkeresés a Podcast Indexet használja, amely szabad és nyílt katalógus. Ingyenes API-kulcsot és titkos kulcsot itt kaphatsz: <site>api.podcastindex.org</site>. Nélkülük is bármikor hozzáadhatók műsorok a hírcsatorna címével.",
+      "using": "A(z) {{hint}} végű kulcs van használatban.",
+      "none": "Még nincs kulcs, ezért a műsorokat a hírcsatorna címével lehet hozzáadni.",
+      "key": "API-kulcs",
+      "secret": "API titkos kulcs",
+      "save": "Kulcs mentése",
+      "remove": "Kulcs eltávolítása"
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Így az alkalmazások akkor is megtalálják ezt a szervert, ha megváltozik az otthoni internetcímed. A szolgáltatás csak a címet ismeri: a videó mindig közvetlenül ettől a szervertől megy az alkalmazásokhoz.",
@@ -801,5 +814,19 @@
   },
   "remote": {
     "controlledBy": "Vezérelve innen: {{name}}"
+  },
+  "cover": {
+    "change": "Borító módosítása",
+    "title": "Borító: {{title}}",
+    "looking": "Borítók keresése az interneten…",
+    "none": "Nem található borító az interneten. Illessze be egy kép címét, vagy töltsön fel egyet.",
+    "pick": "{{cover}} használata",
+    "address": "Kép címe",
+    "addressPlaceholder": "Illessze be egy kép címét",
+    "use": "Használat",
+    "upload": "Kép feltöltése",
+    "reset": "Automatikus borító használata",
+    "chosenNote": "Ezt a borítót kézzel választották, ezért a vizsgálatok megtartják.",
+    "saving": "Borító mentése…"
   }
 }

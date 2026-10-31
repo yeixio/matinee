@@ -27,6 +27,9 @@ Scroll down for rows of posters. Each row scrolls sideways, and a row with a **â
 | **Watch list** | What you've saved to [watch later](/docs/watching/watch-list/). |
 | **Pinned collections** | Any [collection](/docs/watching/collections/) pinned to Home, such as "Short enough for tonight". |
 | **Genres** | A few genres from your library, different each day. |
+<!-- since: v0.1.7 -->
+| **New episodes** | Episodes from the last two weeks of the [podcasts](/docs/watching/podcasts/) you follow that you haven't started. |
+<!-- /since -->
 | **Coming soon** | With [Radarr or Sonarr](/docs/server/radarr-and-sonarr/) connected: new episodes and movies due in the next two months. |
 
 <!-- since: v0.1.1 -->

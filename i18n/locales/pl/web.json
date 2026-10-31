@@ -604,14 +604,17 @@
         "movies": "Filmy",
         "tv": "Seriale",
         "music": "Muzyka",
-        "audiobooks": "Audiobooki"
+        "audiobooks": "Audiobooki",
+        "podcasts": "Podcasty"
       },
       "type": "Typ",
       "folders": "Foldery",
       "up": "Folder wyżej",
       "added": "Dodano",
       "useFolder": "Użyj tego folderu",
-      "noSubfolders": "Brak podfolderów"
+      "noSubfolders": "Brak podfolderów",
+      "podcastsNoFolders": "Podcasty nie potrzebują folderu. Dodawaj audycje w bibliotece po jej utworzeniu.",
+      "podcastsChecked": "Nowe odcinki sprawdzane co godzinę"
     },
     "people": {
       "title": "Osoby",
@@ -733,6 +736,16 @@
       "remove": "Usuń zapisany klucz",
       "saved": "Zapisano. Matinee uzupełnia teraz plakaty i szczegóły."
     },
+    "podcastIndex": {
+      "title": "Wyszukiwanie podcastów",
+      "intro": "Wyszukiwanie podcastów korzysta z Podcast Index, wolnego i otwartego katalogu. Darmowy klucz i sekret API zdobędziesz na <site>api.podcastindex.org</site>. Bez nich audycje zawsze można dodać po adresie kanału.",
+      "using": "Używany jest klucz kończący się na {{hint}}.",
+      "none": "Brak klucza, więc audycje dodaje się po adresie kanału.",
+      "key": "Klucz API",
+      "secret": "Sekret API",
+      "save": "Zapisz klucz",
+      "remove": "Usuń klucz"
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Pozwala aplikacjom znaleźć ten serwer, gdy zmieni się adres internetowy Twojego domu. Usługa zna tylko adres: wideo zawsze płynie prosto z tego serwera do aplikacji.",
@@ -809,5 +822,19 @@
   },
   "remote": {
     "controlledBy": "Sterowane z {{name}}"
+  },
+  "cover": {
+    "change": "Zmień okładkę",
+    "title": "Okładka: {{title}}",
+    "looking": "Szukanie okładek w internecie…",
+    "none": "Nie znaleziono okładek w internecie. Wklej adres obrazu albo prześlij własny.",
+    "pick": "Użyj: {{cover}}",
+    "address": "Adres obrazu",
+    "addressPlaceholder": "Wklej adres obrazu",
+    "use": "Użyj",
+    "upload": "Prześlij obraz",
+    "reset": "Użyj automatycznej okładki",
+    "chosenNote": "Ta okładka została wybrana ręcznie, więc skanowanie jej nie zmienia.",
+    "saving": "Zapisywanie okładki…"
   }
 }

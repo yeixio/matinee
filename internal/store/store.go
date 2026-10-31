@@ -355,6 +355,73 @@ var migrations = []string{
 	"ALTER TABLE items ADD COLUMN narrators TEXT", // |Name|Name|, like genres
 	"ALTER TABLE items ADD COLUMN series TEXT",
 	"ALTER TABLE items ADD COLUMN series_index REAL",
+	// 54: a track's own artist, kept when it isn't the album's, such as
+	// each artist on a soundtrack or compilation (see music.go).
+	"ALTER TABLE items ADD COLUMN track_artist TEXT",
+	// 55–58: playlists of songs, each person's own (see playlists.go). A
+	// song can be on one more than once, so each place has its own id.
+	`CREATE TABLE playlists (
+		id         TEXT PRIMARY KEY,
+		user_id    BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+		name       TEXT NOT NULL,
+		created_at BIGINT NOT NULL, -- milliseconds
+		updated_at BIGINT NOT NULL
+	)`,
+	`CREATE TABLE playlist_items (
+		id          TEXT PRIMARY KEY,
+		playlist_id TEXT NOT NULL REFERENCES playlists(id) ON DELETE CASCADE,
+		item_id     BIGINT NOT NULL REFERENCES items(id) ON DELETE CASCADE,
+		position    INTEGER NOT NULL,
+		added_at    BIGINT NOT NULL -- milliseconds
+	)`,
+	"CREATE INDEX playlist_items_playlist ON playlist_items(playlist_id, position)",
+	"CREATE INDEX playlist_items_item ON playlist_items(item_id)",
+	// 59–62: the MusicBrainz release and release group an album's files are
+	// tagged with, whether its files' tags have been read for them, and a
+	// fresh look online for every album still without a cover (see art.go).
+	"ALTER TABLE items ADD COLUMN mb_release TEXT",
+	"ALTER TABLE items ADD COLUMN mb_group TEXT",
+	"ALTER TABLE items ADD COLUMN tags_read INTEGER NOT NULL DEFAULT 0",
+	"UPDATE items SET meta_at = NULL WHERE kind = 'album' AND poster IS NULL",
+	// 63–66: podcasts (see podcasts.go). A show's feed, each episode's id in
+	// it, and the shows each person follows.
+	`CREATE TABLE podcasts (
+		item_id       BIGINT PRIMARY KEY REFERENCES items(id) ON DELETE CASCADE,
+		feed_url      TEXT NOT NULL,
+		link          TEXT NOT NULL DEFAULT '',
+		author        TEXT NOT NULL DEFAULT '',
+		language      TEXT NOT NULL DEFAULT '',
+		etag          TEXT NOT NULL DEFAULT '',
+		last_modified TEXT NOT NULL DEFAULT '',
+		refreshed_at  BIGINT NOT NULL DEFAULT 0,
+		error         TEXT NOT NULL DEFAULT ''
+	)`,
+	`CREATE TABLE podcast_episodes (
+		item_id      BIGINT PRIMARY KEY REFERENCES items(id) ON DELETE CASCADE,
+		podcast_id   BIGINT NOT NULL REFERENCES items(id) ON DELETE CASCADE,
+		guid         TEXT NOT NULL,
+		published    BIGINT NOT NULL DEFAULT 0, -- Unix seconds; 0 when the feed doesn't say
+		mime_type    TEXT NOT NULL DEFAULT '',
+		link         TEXT NOT NULL DEFAULT '',
+		episode_type TEXT NOT NULL DEFAULT 'full', -- full, trailer or bonus
+		UNIQUE (podcast_id, guid)
+	)`,
+	"CREATE INDEX podcast_episodes_published ON podcast_episodes(published)",
+	`CREATE TABLE podcast_follows (
+		user_id     BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+		item_id     BIGINT NOT NULL REFERENCES items(id) ON DELETE CASCADE,
+		followed_at BIGINT NOT NULL, -- milliseconds
+		PRIMARY KEY (user_id, item_id)
+	)`,
+	// 67: covers an admin picked or uploaded for an album or book (see
+	// images.go), kept here so they outlive the image cache.
+	`CREATE TABLE item_images (
+		item_id      BIGINT PRIMARY KEY REFERENCES items(id) ON DELETE CASCADE,
+		data         BYTEA NOT NULL, -- a BLOB in SQLite
+		content_type TEXT NOT NULL,
+		source       TEXT NOT NULL DEFAULT '', -- where it came from: a URL, or "upload"
+		created_at   BIGINT NOT NULL
+	)`,
 }
 
 func now() int64 { return time.Now().Unix() }

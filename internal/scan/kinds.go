@@ -59,6 +59,14 @@ type Finisher interface {
 	FinishScan(ctx context.Context, st *store.Store, lib store.Library) error
 }
 
+// Remote is a Kind whose items aren't files in folders but come from
+// elsewhere, such as podcasts from their feeds. Scanning a library of it
+// refreshes it with Scanner.Refresh instead of walking folders.
+type Remote interface {
+	Kind
+	Remote()
+}
+
 // ErrSkip from Index leaves a file out, like one with nothing playable.
 var ErrSkip = errUnplayable
 
@@ -108,6 +116,21 @@ func init() {
 	Register(tv{})
 	Register(music{})
 	Register(audiobooks{})
+	Register(podcasts{})
+}
+
+// ---- podcasts ----
+
+// podcasts are shows followed by their feeds (see internal/podcast), so a
+// podcast library has no files to scan.
+type podcasts struct{}
+
+func (podcasts) Name() string               { return "podcasts" }
+func (podcasts) Wants(string) bool          { return false }
+func (podcasts) Playable(probe.Result) bool { return false }
+func (podcasts) Remote()                    {}
+func (podcasts) Index(context.Context, *store.Store, File) (store.Item, error) {
+	return store.Item{}, ErrSkip
 }
 
 // findArt returns the first of names that exists in dir.
@@ -225,16 +248,140 @@ func (music) Index(ctx context.Context, st *store.Store, f File) (store.Item, er
 			return store.Item{}, err
 		}
 	}
-	return store.Item{
+	release, group := albumIDs(f.Probe.Tags)
+	if err := st.SetAlbumTags(ctx, albumID, release, group); err != nil {
+		return store.Item{}, err
+	}
+	it := store.Item{
 		Kind: "track", ParentID: &albumID, Title: tr.Title,
 		IndexNumber: nonZero(tr.Track), DiscNumber: nonZero(tr.Disc), Year: nonZero(tr.Year),
-	}, nil
+	}
+	if tr.TrackArtist != tr.Artist {
+		it.Artist = tr.TrackArtist
+	}
+	return it, nil
 }
 
-// FinishScan picks up covers added to album folders since their tracks were scanned.
+// FinishScan joins albums split by artist, and picks up covers added to
+// album folders since their tracks were scanned.
 func (music) FinishScan(ctx context.Context, st *store.Store, lib store.Library) error {
+	if err := mergeSplitAlbums(ctx, st, lib); err != nil {
+		return err
+	}
 	return fillFolderArt(ctx, st, lib, "album", albumCover)
 }
+
+// mergeSplitAlbums makes one album of the albums with the same title whose
+// tracks share a folder. A soundtrack or compilation whose files name no
+// album artist is first filed under each track's artist, one album each;
+// its folder says they are one album. The album goes under the artist its
+// folder is named for when that is one of theirs, and under Various
+// Artists otherwise.
+func mergeSplitAlbums(ctx context.Context, st *store.Store, lib store.Library) error {
+	albums, err := st.AlbumsWithFiles(ctx, lib.ID)
+	if err != nil {
+		return err
+	}
+	// Albums that share a title and a folder are one; join them up.
+	group := make([]int, len(albums))
+	for i := range group {
+		group[i] = i
+	}
+	find := func(i int) int {
+		for group[i] != i {
+			group[i] = group[group[i]]
+			i = group[i]
+		}
+		return i
+	}
+	first := map[string]int{}
+	for i, a := range albums {
+		for _, p := range a.Paths {
+			dir := albumDir(rootOf(lib.Paths, p), p)
+			if dir == "" {
+				continue
+			}
+			key := strings.ToLower(a.Title) + "\x00" + dir
+			if j, ok := first[key]; ok {
+				group[find(i)] = find(j)
+			} else {
+				first[key] = i
+			}
+		}
+	}
+	members := map[int][]int{}
+	for i := range albums {
+		members[find(i)] = append(members[find(i)], i)
+	}
+	for _, m := range members {
+		if len(m) < 2 {
+			continue
+		}
+		if ctx.Err() != nil {
+			return ctx.Err()
+		}
+		p := albums[m[0]].Paths[0]
+		folderArtist := ParseTrackPath(rootOf(lib.Paths, p), p).Artist
+		artistID := int64(0)
+		for _, i := range m {
+			if strings.EqualFold(albums[i].Artist, folderArtist) {
+				artistID = albums[i].ArtistID
+				break
+			}
+		}
+		if artistID == 0 {
+			for _, i := range m {
+				if strings.EqualFold(albums[i].Artist, variousArtists) {
+					artistID = albums[i].ArtistID
+					break
+				}
+			}
+		}
+		if artistID == 0 {
+			if artistID, err = st.EnsureContainer(ctx, lib.ID, nil, "artist", variousArtists, nil, nil); err != nil {
+				return err
+			}
+		}
+		// Keep the album with the most tracks, best one already filed
+		// under the right artist, so its page stays where it was.
+		best := m[0]
+		for _, i := range m[1:] {
+			a, b := albums[i], albums[best]
+			if (a.ArtistID == artistID) != (b.ArtistID == artistID) {
+				if a.ArtistID == artistID {
+					best = i
+				}
+			} else if len(a.Paths) > len(b.Paths) {
+				best = i
+			}
+		}
+		var from []int64
+		for _, i := range m {
+			if i != best {
+				from = append(from, albums[i].ID)
+			}
+		}
+		if err := st.MergeAlbums(ctx, albums[best].ID, artistID, from); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// albumDir is the folder an album's track is in, above any CD 1 folder,
+// or "" for loose files at the top of the library, which share no album.
+func albumDir(root, path string) string {
+	dir := filepath.Dir(path)
+	if dir != root && under(dir, []string{root}) && discDirRe.MatchString(filepath.Base(dir)) {
+		dir = filepath.Dir(dir)
+	}
+	if dir == root || !under(dir, []string{root}) {
+		return ""
+	}
+	return dir
+}
+
+const variousArtists = "Various Artists"
 
 // trackFromTags prefers embedded tags and falls back to the folder layout.
 func trackFromTags(tags map[string]string, fromPath TrackInfo) TrackInfo {
@@ -248,13 +395,16 @@ func trackFromTags(tags map[string]string, fromPath TrackInfo) TrackInfo {
 		}
 		return false
 	}
-	if !pick(&t.Artist, "album_artist", "albumartist") {
+	pick(&t.TrackArtist, "artist")
+	// Taggers spell the album artist several ways; FFmpeg reads ID3's
+	// TPE2 and MP4's aART as album_artist, and Vorbis comments as written.
+	if !pick(&t.Artist, "album_artist", "albumartist", "album artist") {
 		if isCompilation(tags) {
 			// Without an album artist, a compilation's tracks would each
 			// file the album under their own artist.
-			t.Artist = "Various Artists"
-		} else {
-			pick(&t.Artist, "artist")
+			t.Artist = variousArtists
+		} else if t.TrackArtist != "" {
+			t.Artist = t.TrackArtist
 		}
 	}
 	pick(&t.Album, "album")
@@ -279,7 +429,7 @@ func trackFromTags(tags map[string]string, fromPath TrackInfo) TrackInfo {
 
 // isCompilation reports whether the tags mark a various-artists album.
 func isCompilation(tags map[string]string) bool {
-	for _, k := range []string{"compilation", "tcmp", "cpil"} {
+	for _, k := range []string{"compilation", "tcmp", "cpil", "itunescompilation"} {
 		if v := strings.TrimSpace(tags[k]); v == "1" || strings.EqualFold(v, "true") {
 			return true
 		}

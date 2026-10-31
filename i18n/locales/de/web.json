@@ -596,14 +596,17 @@
         "movies": "Filme",
         "tv": "Serien",
         "music": "Musik",
-        "audiobooks": "Hörbücher"
+        "audiobooks": "Hörbücher",
+        "podcasts": "Podcasts"
       },
       "type": "Art",
       "folders": "Ordner",
       "up": "Einen Ordner höher",
       "added": "Hinzugefügt",
       "useFolder": "Diesen Ordner verwenden",
-      "noSubfolders": "Keine Unterordner"
+      "noSubfolders": "Keine Unterordner",
+      "podcastsNoFolders": "Podcasts brauchen keinen Ordner. Füge Sendungen in der Mediathek hinzu, sobald sie angelegt ist.",
+      "podcastsChecked": "Jede Stunde auf neue Folgen geprüft"
     },
     "people": {
       "title": "Personen",
@@ -725,6 +728,16 @@
       "remove": "Gespeicherten Schlüssel entfernen",
       "saved": "Gespeichert. Matinee ergänzt jetzt Poster und Details."
     },
+    "podcastIndex": {
+      "title": "Podcast-Suche",
+      "intro": "Die Podcast-Suche nutzt Podcast Index, ein freies und offenes Verzeichnis. Einen kostenlosen API-Schlüssel und das Secret bekommst du auf <site>api.podcastindex.org</site>. Sendungen lassen sich auch ohne über ihre Feed-Adresse hinzufügen.",
+      "using": "Verwendet den Schlüssel, der auf {{hint}} endet.",
+      "none": "Noch kein Schlüssel, daher fügen alle Sendungen über ihre Feed-Adresse hinzu.",
+      "key": "API-Schlüssel",
+      "secret": "API-Secret",
+      "save": "Schlüssel speichern",
+      "remove": "Schlüssel entfernen"
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Damit die Apps diesen Server weiter finden, wenn sich die Internetadresse deines Zuhauses ändert. Der Dienst erfährt nur die Adresse: Videos gehen immer direkt von diesem Server zu den Apps.",
@@ -801,5 +814,19 @@
   },
   "remote": {
     "controlledBy": "Gesteuert von {{name}}"
+  },
+  "cover": {
+    "change": "Cover ändern",
+    "title": "Cover für {{title}}",
+    "looking": "Covers werden online gesucht …",
+    "none": "Online wurden keine Covers gefunden. Füge die Adresse eines Bildes ein oder lade eines hoch.",
+    "pick": "{{cover}} verwenden",
+    "address": "Bildadresse",
+    "addressPlaceholder": "Adresse eines Bildes einfügen",
+    "use": "Verwenden",
+    "upload": "Bild hochladen",
+    "reset": "Automatisches Cover verwenden",
+    "chosenNote": "Dieses Cover wurde von Hand gewählt, deshalb behalten Scans es bei.",
+    "saving": "Cover wird gespeichert …"
   }
 }

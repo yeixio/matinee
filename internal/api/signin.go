@@ -47,7 +47,7 @@ type signInFails struct {
 // still clears the username.
 func (s *Server) signInKeys(r *http.Request, username string) (keys []string, home bool) {
 	keys = []string{"user:" + strings.ToLower(strings.TrimSpace(username))}
-	if s.fromHome(r) {
+	if s.fromHome(r) && !crossOrigin(r) {
 		return keys, true
 	}
 	if direct(r) {

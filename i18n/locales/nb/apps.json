@@ -434,7 +434,8 @@
     "listenNow": "Lytt nå",
     "music": "Musikk",
     "audiobooks": "Lydbøker",
-    "signIn": "Åpne Matinee på telefonen og logg på for å lytte i bilen."
+    "signIn": "Åpne Matinee på telefonen og logg på for å lytte i bilen.",
+    "loading": "Laster inn …"
   },
   "watch": {
     "tileName": "Spilles nå",
@@ -489,5 +490,25 @@
     "back15": "15 sekunder tilbake",
     "ahead30": "30 sekunder frem",
     "storageUsed": "{{size}} på denne klokken"
+  },
+  "tvUnlock": {
+    "title": "Lås opp Matinee",
+    "body": "Én betaling på {{price}} låser opp Matinee for godt på alle Samsung- og LG-TV-er som bruker denne serveren.",
+    "scan": "Skann koden med telefonen, eller gå til {{url}}",
+    "trialUntil": "Gratis prøveperiode til {{date}}.",
+    "trialOver": "Den gratis prøveperioden er over. Lås opp Matinee for å fortsette å se og lytte.",
+    "waiting": "Denne skjermen lukkes av seg selv når du har betalt.",
+    "unlocked": "Matinee er låst opp på denne TV-en.",
+    "updateServer": "Oppdater Matinee-serveren din først for å låse opp Matinee her."
+  },
+  "cover": {
+    "change": "Bytt omslag",
+    "title": "Velg et omslag",
+    "looking": "Leter etter omslag på nettet …",
+    "none": "Fant ingen omslag på nettet. Lim inn adressen til et bilde nedenfor.",
+    "addressPlaceholder": "Lim inn adressen til et bilde",
+    "use": "Bruk",
+    "reset": "Bruk det automatiske omslaget",
+    "chosenNote": "Dette omslaget ble valgt for hånd, så skanninger beholder det."
   }
 }

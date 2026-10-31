@@ -7,6 +7,7 @@ import (
 	"log/slog"
 	"net/http"
 	"net/http/httptest"
+	"slices"
 	"strings"
 	"testing"
 
@@ -140,11 +141,130 @@ func TestPlainAlbumTitle(t *testing.T) {
 		"OK Computer (Deluxe Edition)":        "OK Computer",
 		"Abbey Road [2019 Remaster] (Disc 1)": "Abbey Road",
 		"The Wall CD2":                        "The Wall",
+		"A Lively Mind (SAMPLE)":              "A Lively Mind",
+		"Fluro - Disk 1":                      "Fluro",
+		"Discovery (CD1) [FLAC]":              "Discovery",
 		"(What's the Story) Morning Glory?":   "(What's the Story) Morning Glory?",
 		"Help!":                               "Help!",
 	} {
 		if got := plainAlbumTitle(in); got != want {
 			t.Errorf("plainAlbumTitle(%q) = %q, want %q", in, got, want)
+		}
+	}
+}
+
+// Messy album names from Mike's library: a tagged MusicBrainz id, a disc
+// note and the DJ's name, a misspelling, a "(SAMPLE)" copy, and a DJ mix
+// MusicBrainz credits to Various Artists.
+func TestMusicBrainzMessyAlbums(t *testing.T) {
+	var queries []string
+	mux := http.NewServeMux()
+	mux.HandleFunc("GET /ws/2/release-group", func(w http.ResponseWriter, r *http.Request) {
+		q := r.URL.Query().Get("query")
+		queries = append(queries, q)
+		res := []map[string]any{}
+		switch q {
+		case `releasegroup:"Perfecto Fluoro" AND artist:"Paul Oakenfold"`:
+			res = append(res, map[string]any{"id": "fluoro", "title": "Perfecto Fluoro", "score": 100, "first-release-date": "1996-09-02"})
+		case `releasegroup:(fluro~) AND artist:"Paul Oakenfold"`:
+			res = append(res,
+				map[string]any{"id": "flour", "title": "Flour", "score": 60, "first-release-date": "2001"},
+				map[string]any{"id": "fluoro", "title": "Perfecto Fluoro", "score": 55, "first-release-date": "1996-09-02"})
+		case `releasegroup:"A Lively Mind" AND artist:"Paul Oakenfold"`:
+			res = append(res, map[string]any{"id": "lively", "title": "A Lively Mind", "score": 100, "first-release-date": "2006-06-05"})
+		case `releasegroup:"Cream Anthems 2001" AND artist:"Various Artists"`:
+			res = append(res,
+				map[string]any{"id": "anthems-other", "title": "Cream Anthems 2001", "score": 100, "first-release-date": "2002",
+					"artist-credit": []map[string]any{{"name": "Various Artists"}}},
+				map[string]any{"id": "anthems", "title": "Cream Anthems 2001", "score": 100, "first-release-date": "2001-03-12",
+					"artist-credit": []map[string]any{{"name": "Various Artists"}}})
+		}
+		json.NewEncoder(w).Encode(map[string]any{"release-groups": res})
+	})
+	mux.HandleFunc("GET /ws/2/release/{id}", func(w http.ResponseWriter, r *http.Request) {
+		switch r.PathValue("id") {
+		case "6a1e1a70-8c62-4f4f-9e8c-3b9c1b4b2f10":
+			json.NewEncoder(w).Encode(map[string]any{
+				"release-group":     map[string]any{"id": "tranceport", "first-release-date": "1998-11-03"},
+				"cover-art-archive": map[string]any{"front": true}})
+		default:
+			http.NotFound(w, r)
+		}
+	})
+	ts := httptest.NewServer(mux)
+	t.Cleanup(ts.Close)
+	mb := NewMusicBrainz("test")
+	mb.BaseURL, mb.CoverURL, mb.Interval = ts.URL+"/ws/2", "https://covers", 0
+	ctx := context.Background()
+
+	for _, c := range []struct {
+		q    Query
+		mbid string
+	}{
+		{Query{Title: "Tranceport", Artist: "Paul Oakenfold", ReleaseID: "6a1e1a70-8c62-4f4f-9e8c-3b9c1b4b2f10"}, "tranceport"},
+		{Query{Title: "Perfecto Fluoro- Oakenfold (CD 2)", Artist: "Paul Oakenfold", Year: 1996}, "fluoro"},
+		{Query{Title: "Fluro - Disk 1", Artist: "Paul Oakenfold", Year: 1996}, "fluoro"},
+		{Query{Title: "A Lively Mind (SAMPLE)", Artist: "Paul Oakenfold", Year: 2006}, "lively"},
+		{Query{Title: "Cream Anthems 2001", Artist: "Paul Oakenfold", Year: 2001}, "anthems"},
+		{Query{Title: "Fluro", Artist: "Paul Oakenfold"}, ""},              // no year: too far from "Perfecto Fluoro"
+		{Query{Title: "Cream Anthems 2001", Artist: "Paul Oakenfold"}, ""}, // no year: two of them
+		// A tagged id MusicBrainz doesn't know falls back to the search.
+		{Query{Title: "A Lively Mind", Artist: "Paul Oakenfold", ReleaseID: "00000000-0000-0000-0000-000000000000"}, "lively"},
+	} {
+		c.q.Kind = "album"
+		md, err := mb.Lookup(ctx, c.q)
+		if err != nil {
+			t.Fatalf("%q: %v", c.q.Title, err)
+		}
+		if got := ""; md != nil {
+			got = md.MBID
+			if got != c.mbid {
+				t.Errorf("%q matched %q, want %q (queries %q)", c.q.Title, got, c.mbid, queries)
+			}
+		} else if c.mbid != "" {
+			t.Errorf("%q matched nothing, want %q (queries %q)", c.q.Title, c.mbid, queries)
+		}
+		queries = nil
+	}
+	md, _ := mb.Lookup(ctx, Query{Kind: "album", Title: "Tranceport", ReleaseID: "6a1e1a70-8c62-4f4f-9e8c-3b9c1b4b2f10"})
+	if md.Poster != "https://covers/release/6a1e1a70-8c62-4f4f-9e8c-3b9c1b4b2f10/front-500" || md.Year != 1998 {
+		t.Fatalf("tagged release: %+v", md)
+	}
+}
+
+func TestAlbumTitles(t *testing.T) {
+	for _, c := range []struct {
+		title, artist string
+		want          []string
+	}{
+		{"Perfecto Fluoro- Oakenfold (CD 2)", "Paul Oakenfold", []string{"Perfecto Fluoro- Oakenfold (CD 2)", "Perfecto Fluoro- Oakenfold", "Perfecto Fluoro"}},
+		{"Radiohead - OK Computer", "Radiohead", []string{"Radiohead - OK Computer", "OK Computer"}},
+		{"The Blueprint", "Jay-Z", []string{"The Blueprint"}},
+		{"Hard Knock Life - Z", "Jay-Z", []string{"Hard Knock Life - Z", "Hard Knock Life"}},
+		{"Re-Mixed", "Mix", []string{"Re-Mixed"}},
+		{"Live: Paris", "Paris Band", []string{"Live: Paris"}},
+	} {
+		if got := albumTitles(c.title, c.artist); !slices.Equal(got, c.want) {
+			t.Errorf("albumTitles(%q, %q) = %q, want %q", c.title, c.artist, got, c.want)
+		}
+	}
+}
+
+func TestSimilarTitle(t *testing.T) {
+	for _, c := range []struct {
+		ours, theirs string
+		sameYear     bool
+		want         bool
+	}{
+		{"Fluro", "Perfecto Fluoro", true, true},
+		{"Fluro", "Perfecto Fluoro", false, false},
+		{"Perfecto Fluro", "Perfecto Fluoro", false, true},
+		{"Fluro", "Flour", true, false},
+		{"Live", "Live at Brixton", true, false}, // too short to go on
+		{"Tranceport", "Trance Port", false, true},
+	} {
+		if got := similarTitle(c.ours, c.theirs, c.sameYear); got != c.want {
+			t.Errorf("similarTitle(%q, %q, %v) = %v", c.ours, c.theirs, c.sameYear, got)
 		}
 	}
 }

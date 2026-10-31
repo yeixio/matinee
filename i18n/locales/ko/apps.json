@@ -427,7 +427,8 @@
     "listenNow": "지금 듣기",
     "music": "음악",
     "audiobooks": "오디오북",
-    "signIn": "차에서 들으려면 휴대폰에서 Matinee를 열고 로그인하세요."
+    "signIn": "차에서 들으려면 휴대폰에서 Matinee를 열고 로그인하세요.",
+    "loading": "불러오는 중…"
   },
   "watch": {
     "tileName": "지금 재생 중",
@@ -482,5 +483,25 @@
     "back15": "15초 뒤로",
     "ahead30": "30초 앞으로",
     "storageUsed": "이 워치에 {{size}}"
+  },
+  "tvUnlock": {
+    "title": "Matinee 잠금 해제",
+    "body": "{{price}}를 한 번 결제하면 이 서버를 사용하는 모든 Samsung 및 LG TV에서 Matinee 잠금이 영구적으로 해제됩니다.",
+    "scan": "휴대폰으로 코드를 스캔하거나 {{url}}(으)로 이동하세요",
+    "trialUntil": "{{date}}까지 무료 체험.",
+    "trialOver": "무료 체험이 끝났습니다. 계속 보고 들으려면 Matinee 잠금을 해제하세요.",
+    "waiting": "결제가 완료되면 이 화면은 자동으로 닫힙니다.",
+    "unlocked": "이 TV에서 Matinee 잠금이 해제되었습니다.",
+    "updateServer": "여기서 Matinee 잠금을 해제하려면 먼저 Matinee 서버를 업데이트하세요."
+  },
+  "cover": {
+    "change": "커버 변경",
+    "title": "커버 선택",
+    "looking": "온라인에서 커버를 찾는 중…",
+    "none": "온라인에서 커버를 찾지 못했습니다. 아래에 이미지 주소를 붙여 넣으세요.",
+    "addressPlaceholder": "이미지 주소 붙여 넣기",
+    "use": "사용",
+    "reset": "자동 커버 사용",
+    "chosenNote": "이 커버는 직접 고른 것이라 스캔해도 유지됩니다."
   }
 }

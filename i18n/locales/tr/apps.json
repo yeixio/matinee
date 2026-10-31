@@ -434,7 +434,8 @@
     "listenNow": "Şimdi dinle",
     "music": "Müzik",
     "audiobooks": "Sesli kitaplar",
-    "signIn": "Arabada dinlemek için telefonunuzda Matinee'yi açıp oturum açın."
+    "signIn": "Arabada dinlemek için telefonunuzda Matinee'yi açıp oturum açın.",
+    "loading": "Yükleniyor…"
   },
   "watch": {
     "tileName": "Şimdi oynatılıyor",
@@ -489,5 +490,25 @@
     "back15": "15 saniye geri",
     "ahead30": "30 saniye ileri",
     "storageUsed": "Bu saatte {{size}}"
+  },
+  "tvUnlock": {
+    "title": "Matinee'nin kilidini aç",
+    "body": "Tek seferlik {{price}} ödeme, bu sunucuyu kullanan tüm Samsung ve LG televizyonlarda Matinee'nin kilidini kalıcı olarak açar.",
+    "scan": "Kodu telefonunla tara ya da {{url}} adresine git",
+    "trialUntil": "Ücretsiz deneme {{date}} tarihine kadar.",
+    "trialOver": "Ücretsiz deneme sona erdi. İzlemeye ve dinlemeye devam etmek için Matinee'nin kilidini aç.",
+    "waiting": "Ödeme yaptığında bu ekran kendiliğinden kapanır.",
+    "unlocked": "Matinee bu televizyonda kilitsiz.",
+    "updateServer": "Matinee'nin kilidini burada açmak için önce Matinee sunucunu güncelle."
+  },
+  "cover": {
+    "change": "Kapağı değiştir",
+    "title": "Bir kapak seçin",
+    "looking": "İnternette kapak aranıyor…",
+    "none": "İnternette kapak bulunamadı. Aşağıya bir görselin adresini yapıştırın.",
+    "addressPlaceholder": "Bir görselin adresini yapıştırın",
+    "use": "Kullan",
+    "reset": "Otomatik kapağı kullan",
+    "chosenNote": "Bu kapak elle seçildi, bu yüzden taramalar onu korur."
   }
 }

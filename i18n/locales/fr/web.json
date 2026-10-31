@@ -600,14 +600,17 @@
         "movies": "Films",
         "tv": "Séries TV",
         "music": "Musique",
-        "audiobooks": "Livres audio"
+        "audiobooks": "Livres audio",
+        "podcasts": "Podcasts"
       },
       "type": "Type",
       "folders": "Dossiers",
       "up": "Dossier parent",
       "added": "Ajouté",
       "useFolder": "Utiliser ce dossier",
-      "noSubfolders": "Aucun sous-dossier"
+      "noSubfolders": "Aucun sous-dossier",
+      "podcastsNoFolders": "Les podcasts n’ont pas besoin de dossier. Ajoutez des émissions depuis la bibliothèque une fois créée.",
+      "podcastsChecked": "Nouveaux épisodes vérifiés toutes les heures"
     },
     "people": {
       "title": "Personnes",
@@ -729,6 +732,16 @@
       "remove": "Supprimer la clé enregistrée",
       "saved": "Enregistrée. Matinee complète maintenant les affiches et les détails."
     },
+    "podcastIndex": {
+      "title": "Recherche de podcasts",
+      "intro": "La recherche de podcasts utilise Podcast Index, un annuaire libre et ouvert. Obtenez une clé et un secret d’API gratuits sur <site>api.podcastindex.org</site>. Sans eux, on peut toujours ajouter une émission avec l’adresse de son flux.",
+      "using": "Utilise la clé se terminant par {{hint}}.",
+      "none": "Pas encore de clé : les émissions s’ajoutent avec l’adresse de leur flux.",
+      "key": "Clé d’API",
+      "secret": "Secret d’API",
+      "save": "Enregistrer la clé",
+      "remove": "Retirer la clé"
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Permet aux apps de retrouver ce serveur quand l’adresse internet de votre domicile change. Le service ne connaît que l’adresse : la vidéo va toujours directement de ce serveur aux apps.",
@@ -805,5 +818,19 @@
   },
   "remote": {
     "controlledBy": "Contrôlé depuis {{name}}"
+  },
+  "cover": {
+    "change": "Changer la pochette",
+    "title": "Pochette de {{title}}",
+    "looking": "Recherche de pochettes en ligne…",
+    "none": "Aucune pochette trouvée en ligne. Collez l'adresse d'une image ou importez-en une.",
+    "pick": "Utiliser {{cover}}",
+    "address": "Adresse de l'image",
+    "addressPlaceholder": "Collez l'adresse d'une image",
+    "use": "Utiliser",
+    "upload": "Importer une image",
+    "reset": "Utiliser la pochette automatique",
+    "chosenNote": "Cette pochette a été choisie à la main, les analyses la conservent donc.",
+    "saving": "Enregistrement de la pochette…"
   }
 }

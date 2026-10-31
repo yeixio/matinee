@@ -20,6 +20,7 @@ import (
 	"github.com/yeixio/matinee/internal/artwork"
 	"github.com/yeixio/matinee/internal/download"
 	"github.com/yeixio/matinee/internal/hwaccel"
+	"github.com/yeixio/matinee/internal/podcast"
 	"github.com/yeixio/matinee/internal/probe"
 	"github.com/yeixio/matinee/internal/scan"
 	"github.com/yeixio/matinee/internal/spectrum"
@@ -99,6 +100,8 @@ func newTestServerStore(t *testing.T, opts ...func(*Server)) (*client, string, *
 		Levels: spectrum.New("ffmpeg", filepath.Join(tmp, "levels")),
 	}
 	dl.SubtitleStream = srv.BurnStream
+	srv.Podcasts = &podcast.Manager{Store: db, Log: log}
+	srv.Scanner.Refresh = srv.Podcasts.RefreshStale
 	// Not running: tests that want it start srv.Analyzer.Run themselves.
 	srv.Analyzer = &analyze.Analyzer{Store: db, Prober: probe.Prober{Path: "ffprobe"}, Log: log}
 	for _, o := range opts {

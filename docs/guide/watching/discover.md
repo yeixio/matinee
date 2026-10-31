@@ -3,7 +3,7 @@ title: Discover
 description: Find new movies and shows to watch, with recommendations based on what you watched, and ask for them.
 since: v0.1.1
 sidebar:
-  order: 9
+  order: 10
 ---
 
 When an admin has [connected Overseerr](/docs/server/overseerr/), a **Discover** tab appears next to your libraries, on the web and in the apps. It's for finding things you don't have yet.

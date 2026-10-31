@@ -781,7 +781,7 @@ paths:
               required: [name, kind, paths]
               properties:
                 name: { type: string }
-                kind: { type: string, examples: [movies, tv, music, audiobooks] }
+                kind: { type: string, examples: [movies, tv, music, audiobooks, podcasts] }
                 paths: { type: array, items: { type: string }, description: Folders on the server. }
       responses:
         "201":
@@ -974,8 +974,10 @@ paths:
                     type: array
                     description: >-
                       Rows shown below the others. First, Continue listening (id
-                      continueListening): up to 20 audiobooks the person started and
-                      didn't finish, the latest first; left out when there are none. Then, in the 30 days before a holiday
+                      continueListening): up to 20 audiobooks and podcast episodes the person started and
+                      didn't finish, the latest first; left out when there are none. Then New episodes (id
+                      newEpisodes): up to 30 episodes from the last two weeks of the podcasts the person
+                      follows that they haven't started, newest first; left out when there are none. Then, in the 30 days before a holiday
                       (a week for New Year's Eve), a row of up to 20 titles for it, if at
                       least four fit; unless an admin turned holiday rows off. Then the collections pinned to Home
                       (shared ones and the person's own, empty ones left out), each with
@@ -1010,7 +1012,7 @@ paths:
       description: |
         For the See more at the end of a row. Rows are Home's lists
         (continueWatching, recentlyAdded, newReleases, watchList), Home's
-        other rows by their id (continueListening, genre:{genre}, holiday:{id},
+        other rows by their id (continueListening, newEpisodes, genre:{genre}, holiday:{id},
         collection:{id}), and related:{item id} for the titles like one
         (More like this). Up to 1,000 titles, in the row's order; a genre's
         or a holiday's best rated first.
@@ -1040,6 +1042,35 @@ paths:
         - { name: q, in: query, required: true, schema: { type: string } }
       responses:
         "200": { $ref: "#/components/responses/Items" }
+  /search/play:
+    get:
+      summary: The one thing to play for what someone asked for out loud
+      description: |
+        For voice requests ("play Abbey Road on Matinee") from Siri, Google
+        Assistant and Android Auto. q is what was said, such as "Yesterday
+        by the Beatles", "the album Thriller" or "The Hobbit audiobook", or
+        just the title when the phone already split it up into kind,
+        artist and album. Picks an artist, album, song or audiobook: of the
+        kind asked for, by whoever was named, closest title first, and for
+        a plain "play X" an artist over an album over a book over a song.
+      parameters:
+        - { name: q, in: query, schema: { type: string } }
+        - { name: kind, in: query, schema: { type: string, enum: [artist, album, track, book] } }
+        - { name: artist, in: query, description: Who made it, or who wrote a book., schema: { type: string } }
+        - { name: album, in: query, description: The album a song is on., schema: { type: string } }
+      responses:
+        "200":
+          description: What to play.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [kind, item]
+                properties:
+                  kind: { type: string, enum: [artist, album, track, book] }
+                  item: { $ref: "#/components/schemas/Item" }
+        "400": { $ref: "#/components/responses/Error" }
+        "404": { $ref: "#/components/responses/Error" }
   /items/{id}:
     get:
       summary: One item, with its parents and subtitle tracks
@@ -1131,6 +1162,157 @@ paths:
                             endMs: { type: integer }
                             partId: { type: integer, description: The part the chapter is in. }
         "404": { $ref: "#/components/responses/Error" }
+  /podcasts/directory:
+    get:
+      summary: Find podcasts in Podcast Index
+      description: |
+        Searches Podcast Index (podcastindex.org) with `q`, or lists what's
+        trending in a language with `lang` (such as en). `connected` is false
+        when no admin entered a Podcast Index key, and then `shows` is empty:
+        shows can still be added by their feed's address. A show a library
+        has already carries its `itemId`. Not on kids profiles.
+      parameters:
+        - { name: q, in: query, schema: { type: string } }
+        - { name: lang, in: query, schema: { type: string } }
+      responses:
+        "200":
+          description: Shows.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  connected: { type: boolean }
+                  shows: { type: array, items: { $ref: "#/components/schemas/DirectoryShow" } }
+        "502": { $ref: "#/components/responses/Error" }
+  /podcasts/following:
+    get:
+      summary: The podcasts the signed-in person follows
+      description: The show with the newest episode first, each with how many of its episodes the person hasn't played.
+      responses:
+        "200":
+          description: Shows.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  allOf:
+                    - { $ref: "#/components/schemas/Item" }
+                    - type: object
+                      properties:
+                        unplayed: { type: integer }
+  /podcasts:
+    post:
+      summary: Add a podcast to a podcast library
+      description: |
+        Reads the show's feed and adds the show with its episodes, or finds
+        it if the library has it already, and follows it for the signed-in
+        person. feed://, podcast:// and addresses without https:// work too.
+        Episodes play through /items/{id}/file and /items/{id}/hls like any
+        other item: the server fetches them from the show's host. Not on
+        kids profiles.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [libraryId, feedUrl]
+              properties:
+                libraryId: { type: integer }
+                feedUrl: { type: string }
+      responses:
+        "201":
+          description: The show.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Item" }
+        "400": { $ref: "#/components/responses/Error" }
+        "502": { $ref: "#/components/responses/Error" }
+  /podcasts/{id}:
+    delete:
+      summary: Remove a podcast and its episodes (admins only)
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      responses:
+        "204": { description: Removed. }
+        "404": { $ref: "#/components/responses/Error" }
+  /podcasts/{id}/refresh:
+    post:
+      summary: Check a podcast's feed for new episodes now
+      description: Feeds are checked every hour anyway, and scanning a podcast library checks all of its shows.
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      responses:
+        "200":
+          description: How many episodes are new.
+          content:
+            application/json:
+              schema: { type: object, properties: { added: { type: integer } } }
+        "502": { $ref: "#/components/responses/Error" }
+  /podcasts/{id}/follow:
+    put:
+      summary: Follow a podcast
+      description: New episodes of the shows someone follows are on Home's newEpisodes row.
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      responses:
+        "204": { description: Following. }
+    delete:
+      summary: Stop following a podcast
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      responses:
+        "204": { description: Not following. }
+  /podcasts/{id}/played:
+    put:
+      summary: Mark every episode of a podcast played or unplayed
+      description: Unplayed also forgets where the person was in each.
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { type: object, properties: { played: { type: boolean } } }
+      responses:
+        "204": { description: Marked. }
+  /libraries/{id}/opml:
+    get:
+      summary: A podcast library's shows as an OPML file
+      description: For moving them to another podcast app or server.
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      responses:
+        "200":
+          description: The file.
+          content:
+            text/x-opml: {}
+        "400": { $ref: "#/components/responses/Error" }
+    post:
+      summary: Add every podcast in an OPML file
+      description: |
+        The body is an OPML file exported from another podcast app. Each show
+        is added and followed for the signed-in person; the answer lists the
+        ones that couldn't be. Not on kids profiles.
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      requestBody:
+        required: true
+        content:
+          text/x-opml: {}
+      responses:
+        "200":
+          description: What was added.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  added: { type: integer }
+                  problems:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title: { type: string }
+                        feedUrl: { type: string }
+                        error: { type: string }
+        "400": { $ref: "#/components/responses/Error" }
   /items/{id}/related:
     get:
       summary: Titles in the library like a movie or show
@@ -1241,6 +1423,63 @@ paths:
       responses:
         "200": { description: The image., content: { image/*: {} } }
         "404": { description: No image. }
+  /items/{id}/covers:
+    get:
+      summary: Covers to pick from for an album or book (admins)
+      description: |
+        Found online by the album's tagged MusicBrainz ids or its title and
+        artist: each edition's front cover on the Cover Art Archive, then
+        Apple's and Deezer's. For a book: Open Library's and Apple's. None
+        needs a key. Sources that don't answer are left out.
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      responses:
+        "200":
+          description: The covers, and whether the item has a picked cover now.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  options:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        url: { type: string, description: The full-size image. }
+                        thumb: { type: string, description: A small one for the list. }
+                        source: { type: string, example: Cover Art Archive }
+                        title: { type: string }
+                        detail: { type: string, description: "Which edition: date, country, format." }
+                  chosen: { type: boolean }
+                  chosenSource: { type: string, description: "Where the picked cover came from: its URL, or upload." }
+        "400": { $ref: "#/components/responses/Error" }
+  /items/{id}/cover:
+    put:
+      summary: Pick an album's or book's cover (admins)
+      description: |
+        Send `{"url": "https://…"}` as JSON for an image online, which the
+        server downloads, or the image itself (JPEG, PNG, WebP or GIF, up to
+        20 MB) as the body. The cover is kept on the server and wins over
+        the folder's, the files' and online ones until it's reset. The item
+        gets a `posterTag`; add it to the image URL as `?v=` so clients
+        don't show the old cover from a cache.
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      requestBody:
+        content:
+          application/json: { schema: { type: object, properties: { url: { type: string } } } }
+          image/*: {}
+      responses:
+        "200": { description: The item with its new cover., content: { application/json: { schema: { $ref: "#/components/schemas/Item" } } } }
+        "400": { $ref: "#/components/responses/Error" }
+        "413": { $ref: "#/components/responses/Error" }
+        "502": { $ref: "#/components/responses/Error" }
+    delete:
+      summary: Go back to the automatic cover (admins)
+      description: Forgets the picked cover; a scan of the library finds one in the folder, the files or online again.
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      responses:
+        "204": { description: Reset. }
+        "400": { $ref: "#/components/responses/Error" }
   /items/{id}/file:
     get:
       summary: The original file, for direct play and downloads
@@ -1368,6 +1607,119 @@ paths:
       parameters: [{ $ref: "#/components/parameters/ID" }]
       responses:
         "204": { description: Off the list (or it wasn't on it). }
+
+  /playlists:
+    get:
+      summary: The person's playlists, or the ones with a given name
+      description: |
+        Playlists are songs someone puts in their own order. Each person and
+        profile has their own; devices at home that haven't signed in share
+        the Home account's. Counts, lengths and covers only go by songs the
+        person may play. Without q, the most recently changed come first.
+      parameters:
+        - name: q
+          in: query
+          description: |
+            Find playlists by name, as someone would say it: the same name
+            first, then names starting with it, then names holding it. Case,
+            accents and punctuation don't count. Others are left out.
+          schema: { type: string }
+      responses:
+        "200":
+          description: Playlists, without their songs.
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: "#/components/schemas/Playlist" } }
+    post:
+      summary: Make a playlist
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name]
+              properties:
+                name: { type: string, maxLength: 100 }
+                items:
+                  type: array
+                  description: Songs to start with. An album or artist adds all their songs, in album order.
+                  items: { type: integer }
+      responses:
+        "201": { $ref: "#/components/responses/PlaylistWithSongs" }
+        "400": { $ref: "#/components/responses/Error" }
+        "404": { $ref: "#/components/responses/Error" }
+  /playlists/{id}:
+    parameters: [{ $ref: "#/components/parameters/PlaylistID" }]
+    get:
+      summary: A playlist and its songs, in order
+      responses:
+        "200": { $ref: "#/components/responses/PlaylistWithSongs" }
+        "404": { $ref: "#/components/responses/Error" }
+    put:
+      summary: Rename a playlist
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name]
+              properties:
+                name: { type: string, maxLength: 100 }
+      responses:
+        "200": { $ref: "#/components/responses/PlaylistWithSongs" }
+        "400": { $ref: "#/components/responses/Error" }
+        "404": { $ref: "#/components/responses/Error" }
+    delete:
+      summary: Delete a playlist
+      responses:
+        "204": { description: Deleted. }
+        "404": { $ref: "#/components/responses/Error" }
+  /playlists/{id}/items:
+    parameters: [{ $ref: "#/components/parameters/PlaylistID" }]
+    post:
+      summary: Add songs to the end of a playlist
+      description: An album or artist adds all their songs. A song already on the playlist goes on again.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [items]
+              properties:
+                items: { type: array, items: { type: integer } }
+      responses:
+        "200": { $ref: "#/components/responses/PlaylistWithSongs" }
+        "400": { $ref: "#/components/responses/Error" }
+        "404": { $ref: "#/components/responses/Error" }
+  /playlists/{id}/entries/{entry}:
+    parameters:
+      - { $ref: "#/components/parameters/PlaylistID" }
+      - { name: entry, in: path, required: true, schema: { type: string }, description: The entry's entryId. }
+    delete:
+      summary: Take one song off a playlist
+      responses:
+        "200": { $ref: "#/components/responses/PlaylistWithSongs" }
+        "404": { $ref: "#/components/responses/Error" }
+  /playlists/{id}/order:
+    parameters: [{ $ref: "#/components/parameters/PlaylistID" }]
+    put:
+      summary: Put a playlist's songs in a new order
+      description: Entries left out follow in the order they had; ids not on the playlist are ignored.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [entries]
+              properties:
+                entries: { type: array, items: { type: string } }
+      responses:
+        "200": { $ref: "#/components/responses/PlaylistWithSongs" }
+        "404": { $ref: "#/components/responses/Error" }
 
   /collections:
     get:
@@ -1698,6 +2050,41 @@ paths:
         "400": { $ref: "#/components/responses/Error" }
         "502": { $ref: "#/components/responses/Error" }
 
+  /integrations/podcastindex:
+    get:
+      summary: The Podcast Index key (admins only)
+      description: Podcast Index (podcastindex.org) finds shows to add. Its key and secret are never returned; `hint` is the key's last four characters.
+      responses:
+        "200":
+          description: Whether a key is set.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/PodcastIndexConnection" }
+    put:
+      summary: Set the Podcast Index key (admins only)
+      description: The free key and secret from api.podcastindex.org. They're checked with Podcast Index first.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [key, secret]
+              properties:
+                key: { type: string }
+                secret: { type: string }
+      responses:
+        "200":
+          description: Set.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/PodcastIndexConnection" }
+        "400": { $ref: "#/components/responses/Error" }
+        "502": { $ref: "#/components/responses/Error" }
+    delete:
+      summary: Forget the Podcast Index key (admins only)
+      responses:
+        "204": { description: Forgotten. }
   /integrations/overseerr:
     get:
       summary: The Overseerr connection (admins only)
@@ -2446,6 +2833,8 @@ components:
       { name: client, in: path, required: true, schema: { type: string, pattern: "^[A-Za-z0-9._-]{8,64}$" }, description: The id the player made up for itself. }
     PluginID:
       { name: plugin, in: path, required: true, schema: { type: string }, examples: { arcade: { value: arcade } } }
+    PlaylistID:
+      { name: id, in: path, required: true, schema: { type: string } }
     UserCode:
       { name: code, in: path, required: true, schema: { type: string }, description: "The code as typed; case, dashes and spaces don't matter." }
     Filter:
@@ -2470,6 +2859,11 @@ components:
             properties:
               user: { $ref: "#/components/schemas/User" }
               token: { type: string }
+    PlaylistWithSongs:
+      description: The playlist and its songs.
+      content:
+        application/json:
+          schema: { $ref: "#/components/schemas/PlaylistWithSongs" }
     Items:
       description: Items.
       content:
@@ -2488,7 +2882,7 @@ components:
       type: object
       properties:
         library: { type: array, items: { type: integer }, description: Library ids; none means every library. }
-        kind: { type: array, items: { type: string, enum: [movie, show, season, episode, artist, album, track, author, book, part] }, description: Without it, libraries' top level is listed. }
+        kind: { type: array, items: { type: string, enum: [movie, show, season, episode, artist, album, track, author, book, part, podcast, podcastEpisode] }, description: Without it, libraries' top level is listed. }
         q: { type: string, description: Words in the title. }
         genre: { type: array, items: { type: string } }
         notGenre: { type: array, items: { type: string } }
@@ -3083,6 +3477,50 @@ components:
         name: { type: string }
         books: { type: integer, description: How many books. }
         itemIds: { type: array, items: { type: integer }, description: Up to four of its books, first in reading order, for artwork. }
+    Playlist:
+      type: object
+      properties:
+        id: { type: string }
+        name: { type: string }
+        count: { type: integer, description: Songs the person may play. }
+        durationMs: { type: integer }
+        albumIds: { type: array, items: { type: integer }, description: "Up to four different albums on it, for a cover." }
+        createdAt: { type: integer, description: Milliseconds. }
+        updatedAt: { type: integer, description: Milliseconds. }
+    PlaylistWithSongs:
+      allOf:
+        - $ref: "#/components/schemas/Playlist"
+        - type: object
+          properties:
+            entries:
+              type: array
+              description: The songs in order. Each is an Item with its place's own entryId, since a song can be on a playlist twice.
+              items:
+                allOf:
+                  - $ref: "#/components/schemas/Item"
+                  - type: object
+                    properties:
+                      entryId: { type: string }
+    DirectoryShow:
+      type: object
+      description: A podcast in Podcast Index.
+      properties:
+        indexId: { type: integer }
+        title: { type: string }
+        author: { type: string }
+        description: { type: string }
+        image: { type: string, description: An image address on the internet. }
+        feedUrl: { type: string, description: Add it with POST /podcasts. }
+        link: { type: string }
+        language: { type: string }
+        categories: { type: array, items: { type: string } }
+        episodes: { type: integer }
+        itemId: { type: integer, description: The show's id when a library has it already. }
+    PodcastIndexConnection:
+      type: object
+      properties:
+        connected: { type: boolean }
+        hint: { type: string }
     Item:
       type: object
       description: Anything browsable. Fields without a value are left out.
@@ -3090,7 +3528,7 @@ components:
         id: { type: integer }
         libraryId: { type: integer }
         parentId: { type: integer }
-        kind: { type: string, examples: [movie, show, season, episode, artist, album, track, author, book, part] }
+        kind: { type: string, examples: [movie, show, season, episode, artist, album, track, author, book, part, podcast, podcastEpisode] }
         title: { type: string }
         year: { type: integer }
         index: { type: integer, description: Season, episode or track number. }
@@ -3109,18 +3547,21 @@ components:
         overview: { type: string }
         rating: { type: number }
         hasPoster: { type: boolean }
+        posterTag: { type: string, description: "Set when an admin picked the cover; add it to the image URL as ?v= so a cached old cover isn't shown." }
         hasBackdrop: { type: boolean }
         showTitle: { type: string, description: "Episodes: the show's title." }
         seasonIndex: { type: integer, description: "Episodes: the season number." }
         artist: { type: string, description: "Albums and tracks: the artist's name." }
         artistId: { type: integer, description: "Albums and tracks: the artist's id." }
         album: { type: string, description: "Tracks: the album's title (its id is parentId)." }
-        author: { type: string, description: "Books and their parts: the author's name." }
+        author: { type: string, description: "Books and their parts: the author's name. Podcasts and their episodes: who makes the show." }
         authorId: { type: integer, description: "Books and their parts: the author's id." }
         book: { type: string, description: "Book parts: the book's title (its id is parentId)." }
         narrators: { type: array, items: { type: string }, description: "Books: who reads them." }
         series: { type: string, description: "Books: the series the book is in." }
         seriesIndex: { type: number, description: "Books: its place in the series, such as 2 or 2.5." }
+        podcast: { type: string, description: "Podcast episodes: the show's title (its id is parentId)." }
+        released: { type: string, description: "Podcast episodes: the day it came out, as YYYY-MM-DD." }
         onWatchList: { type: boolean, description: "On the signed-in person's watch list." }
         genres: { type: array, items: { type: string }, description: "Movies and shows: genres from the online match.", examples: [[Science Fiction, Drama]] }
         mediaTags:
@@ -3193,6 +3634,22 @@ components:
             fileSize: { type: integer, description: Bytes. }
             details: { $ref: "#/components/schemas/Details" }
             credits: { $ref: "#/components/schemas/Credits" }
+            feed:
+              type: object
+              description: Podcasts only.
+              properties:
+                feedUrl: { type: string }
+                link: { type: string, description: The show's website. }
+                refreshedAt: { type: integer, description: When the feed was last checked, in Unix seconds. }
+                error: { type: string, description: Why the last check failed. Admins only. }
+                following: { type: boolean }
+                unplayed: { type: integer, description: Episodes the person hasn't played. }
+            episode:
+              type: object
+              description: Podcast episodes only.
+              properties:
+                link: { type: string, description: The episode's web page. }
+                episodeType: { type: string, enum: [full, trailer, bonus] }
     MediaInfo:
       type: object
       description: A file's streams in detail, from the background analysis. Left out until the file is analyzed.

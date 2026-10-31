@@ -441,7 +441,8 @@
     "listenNow": "Ascultă acum",
     "music": "Muzică",
     "audiobooks": "Cărți audio",
-    "signIn": "Deschide Matinee pe telefon și conectează-te ca să asculți în mașină."
+    "signIn": "Deschide Matinee pe telefon și conectează-te ca să asculți în mașină.",
+    "loading": "Se încarcă…"
   },
   "watch": {
     "tileName": "Se redă acum",
@@ -496,5 +497,25 @@
     "back15": "Înapoi 15 secunde",
     "ahead30": "Înainte 30 de secunde",
     "storageUsed": "{{size}} pe acest ceas"
+  },
+  "tvUnlock": {
+    "title": "Deblochează Matinee",
+    "body": "O singură plată de {{price}} deblochează Matinee pentru totdeauna pe toate televizoarele Samsung și LG care folosesc acest server.",
+    "scan": "Scanează codul cu telefonul sau mergi la {{url}}",
+    "trialUntil": "Probă gratuită până la {{date}}.",
+    "trialOver": "Proba gratuită s-a încheiat. Deblochează Matinee ca să poți viziona și asculta în continuare.",
+    "waiting": "Acest ecran se închide singur după ce ai plătit.",
+    "unlocked": "Matinee este deblocat pe acest televizor.",
+    "updateServer": "Pentru a debloca Matinee aici, actualizează mai întâi serverul Matinee."
+  },
+  "cover": {
+    "change": "Schimbă coperta",
+    "title": "Alege o copertă",
+    "looking": "Se caută coperți online…",
+    "none": "Nu s-au găsit coperți online. Lipește mai jos adresa unei imagini.",
+    "addressPlaceholder": "Lipește adresa unei imagini",
+    "use": "Folosește",
+    "reset": "Folosește coperta automată",
+    "chosenNote": "Această copertă a fost aleasă manual, așa că scanările o păstrează."
   }
 }

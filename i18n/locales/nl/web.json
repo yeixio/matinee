@@ -596,14 +596,17 @@
         "movies": "Films",
         "tv": "Tv-series",
         "music": "Muziek",
-        "audiobooks": "Luisterboeken"
+        "audiobooks": "Luisterboeken",
+        "podcasts": "Podcasts"
       },
       "type": "Type",
       "folders": "Mappen",
       "up": "Eén map omhoog",
       "added": "Toegevoegd",
       "useFolder": "Deze map gebruiken",
-      "noSubfolders": "Geen submappen"
+      "noSubfolders": "Geen submappen",
+      "podcastsNoFolders": "Podcasts hebben geen map nodig. Voeg programma’s toe vanuit de bibliotheek zodra die bestaat.",
+      "podcastsChecked": "Elk uur gecontroleerd op nieuwe afleveringen"
     },
     "people": {
       "title": "Mensen",
@@ -725,6 +728,16 @@
       "remove": "Opgeslagen sleutel verwijderen",
       "saved": "Opgeslagen. Matinee vult nu posters en details aan."
     },
+    "podcastIndex": {
+      "title": "Podcasts zoeken",
+      "intro": "Podcasts zoeken gebruikt Podcast Index, een vrije en open lijst. Haal een gratis API-sleutel en secret op bij <site>api.podcastindex.org</site>. Zonder sleutel kun je programma’s altijd toevoegen met hun feedadres.",
+      "using": "Gebruikt de sleutel die eindigt op {{hint}}.",
+      "none": "Nog geen sleutel, dus programma’s worden toegevoegd met hun feedadres.",
+      "key": "API-sleutel",
+      "secret": "API-secret",
+      "save": "Sleutel opslaan",
+      "remove": "Sleutel verwijderen"
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Zorgt dat de apps deze server blijven vinden als het internetadres van je huis verandert. De dienst kent alleen het adres: video gaat altijd rechtstreeks van deze server naar de apps.",
@@ -801,5 +814,19 @@
   },
   "remote": {
     "controlledBy": "Bediend vanaf {{name}}"
+  },
+  "cover": {
+    "change": "Hoes wijzigen",
+    "title": "Hoes voor {{title}}",
+    "looking": "Online naar hoezen zoeken…",
+    "none": "Online geen hoezen gevonden. Plak het adres van een afbeelding of upload er een.",
+    "pick": "{{cover}} gebruiken",
+    "address": "Adres van de afbeelding",
+    "addressPlaceholder": "Plak het adres van een afbeelding",
+    "use": "Gebruiken",
+    "upload": "Afbeelding uploaden",
+    "reset": "Automatische hoes gebruiken",
+    "chosenNote": "Deze hoes is met de hand gekozen, dus scans laten hem staan.",
+    "saving": "Hoes opslaan…"
   }
 }

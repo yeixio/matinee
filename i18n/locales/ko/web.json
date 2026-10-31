@@ -592,14 +592,17 @@
         "movies": "영화",
         "tv": "TV 프로그램",
         "music": "음악",
-        "audiobooks": "오디오북"
+        "audiobooks": "오디오북",
+        "podcasts": "팟캐스트"
       },
       "type": "유형",
       "folders": "폴더",
       "up": "상위 폴더로",
       "added": "추가됨",
       "useFolder": "이 폴더 사용",
-      "noSubfolders": "하위 폴더 없음"
+      "noSubfolders": "하위 폴더 없음",
+      "podcastsNoFolders": "팟캐스트에는 폴더가 필요 없습니다. 보관함을 만든 뒤 그곳에서 프로그램을 추가하세요.",
+      "podcastsChecked": "매시간 새 에피소드 확인"
     },
     "people": {
       "title": "사용자",
@@ -721,6 +724,16 @@
       "remove": "저장한 키 삭제",
       "saved": "저장했습니다. Matinee가 지금 포스터와 상세 정보를 채우고 있습니다."
     },
+    "podcastIndex": {
+      "title": "팟캐스트 검색",
+      "intro": "팟캐스트 검색은 자유롭고 열린 디렉터리인 Podcast Index를 사용합니다. 무료 API 키와 시크릿은 <site>api.podcastindex.org</site>에서 받을 수 있습니다. 없어도 프로그램은 언제든 피드 주소로 추가할 수 있습니다.",
+      "using": "{{hint}}(으)로 끝나는 키를 사용 중입니다.",
+      "none": "아직 키가 없어 프로그램은 피드 주소로 추가합니다.",
+      "key": "API 키",
+      "secret": "API 시크릿",
+      "save": "키 저장",
+      "remove": "키 삭제"
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "집 인터넷 주소가 바뀌어도 앱이 이 서버를 계속 찾을 수 있게 합니다. 서비스는 주소만 알며, 영상은 항상 이 서버에서 앱으로 바로 전송됩니다.",
@@ -797,5 +810,19 @@
   },
   "remote": {
     "controlledBy": "{{name}}에서 제어함"
+  },
+  "cover": {
+    "change": "커버 변경",
+    "title": "{{title}} 커버",
+    "looking": "온라인에서 커버를 찾는 중…",
+    "none": "온라인에서 커버를 찾지 못했습니다. 이미지 주소를 붙여 넣거나 이미지를 업로드하세요.",
+    "pick": "{{cover}} 사용",
+    "address": "이미지 주소",
+    "addressPlaceholder": "이미지 주소 붙여 넣기",
+    "use": "사용",
+    "upload": "이미지 업로드",
+    "reset": "자동 커버 사용",
+    "chosenNote": "이 커버는 직접 고른 것이라 스캔해도 유지됩니다.",
+    "saving": "커버 저장 중…"
   }
 }

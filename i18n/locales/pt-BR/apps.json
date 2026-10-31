@@ -441,7 +441,8 @@
     "listenNow": "Ouvir agora",
     "music": "Música",
     "audiobooks": "Audiolivros",
-    "signIn": "Abra o Matinee no celular e entre para ouvir no carro."
+    "signIn": "Abra o Matinee no celular e entre para ouvir no carro.",
+    "loading": "Carregando…"
   },
   "watch": {
     "tileName": "Tocando agora",
@@ -496,5 +497,25 @@
     "back15": "Voltar 15 segundos",
     "ahead30": "Avançar 30 segundos",
     "storageUsed": "{{size}} neste relógio"
+  },
+  "tvUnlock": {
+    "title": "Desbloquear o Matinee",
+    "body": "Um único pagamento de {{price}} desbloqueia o Matinee para sempre em todas as TVs Samsung e LG que usam este servidor.",
+    "scan": "Escaneie o código com o celular ou acesse {{url}}",
+    "trialUntil": "Teste grátis até {{date}}.",
+    "trialOver": "O teste grátis terminou. Desbloqueie o Matinee para continuar assistindo e ouvindo.",
+    "waiting": "Esta tela fecha sozinha assim que o pagamento for feito.",
+    "unlocked": "O Matinee está desbloqueado nesta TV.",
+    "updateServer": "Para desbloquear o Matinee aqui, atualize primeiro o seu servidor Matinee."
+  },
+  "cover": {
+    "change": "Trocar capa",
+    "title": "Escolher uma capa",
+    "looking": "Procurando capas na internet…",
+    "none": "Nenhuma capa encontrada na internet. Cole abaixo o endereço de uma imagem.",
+    "addressPlaceholder": "Cole o endereço de uma imagem",
+    "use": "Usar",
+    "reset": "Usar a capa automática",
+    "chosenNote": "Esta capa foi escolhida manualmente, então as verificações a mantêm."
   }
 }

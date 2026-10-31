@@ -427,7 +427,8 @@
     "listenNow": "Dengar sekarang",
     "music": "Muzik",
     "audiobooks": "Buku audio",
-    "signIn": "Buka Matinee pada telefon anda dan log masuk untuk mendengar di dalam kereta."
+    "signIn": "Buka Matinee pada telefon anda dan log masuk untuk mendengar di dalam kereta.",
+    "loading": "Memuatkan…"
   },
   "watch": {
     "tileName": "Sedang dimainkan",
@@ -482,5 +483,25 @@
     "back15": "Undur 15 saat",
     "ahead30": "Maju 30 saat",
     "storageUsed": "{{size}} pada jam ini"
+  },
+  "tvUnlock": {
+    "title": "Buka kunci Matinee",
+    "body": "Satu bayaran sebanyak {{price}} membuka kunci Matinee untuk selamanya pada setiap TV Samsung dan LG yang menggunakan pelayan ini.",
+    "scan": "Imbas kod dengan telefon anda, atau pergi ke {{url}}",
+    "trialUntil": "Percubaan percuma hingga {{date}}.",
+    "trialOver": "Percubaan percuma telah tamat. Buka kunci Matinee untuk terus menonton dan mendengar.",
+    "waiting": "Skrin ini akan tertutup sendiri sebaik sahaja anda membayar.",
+    "unlocked": "Matinee telah dibuka kunci pada TV ini.",
+    "updateServer": "Untuk membuka kunci Matinee di sini, kemas kini pelayan Matinee anda dahulu."
+  },
+  "cover": {
+    "change": "Tukar kulit",
+    "title": "Pilih kulit",
+    "looking": "Mencari kulit dalam talian…",
+    "none": "Tiada kulit ditemui dalam talian. Tampal alamat imej di bawah.",
+    "addressPlaceholder": "Tampal alamat imej",
+    "use": "Guna",
+    "reset": "Guna kulit automatik",
+    "chosenNote": "Kulit ini dipilih secara manual, jadi imbasan mengekalkannya."
   }
 }

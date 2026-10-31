@@ -77,7 +77,16 @@ func TestTrackFromTagsCompilation(t *testing.T) {
 	if got := trackFromTags(map[string]string{"artist": "Someone", "album_artist": "DJ Mix", "compilation": "1"}, path); got.Artist != "DJ Mix" {
 		t.Errorf("album artist wins: %+v", got)
 	}
-	if got := trackFromTags(map[string]string{"artist": "Someone"}, path); got.Artist != "Someone" {
+	if got := trackFromTags(map[string]string{"artist": "Someone"}, path); got.Artist != "Someone" || got.TrackArtist != "Someone" {
 		t.Errorf("track artist: %+v", got)
+	}
+	if got := trackFromTags(map[string]string{"artist": "Someone", "album artist": "DJ Mix"}, path); got.Artist != "DJ Mix" || got.TrackArtist != "Someone" {
+		t.Errorf("album artist spelled with a space: %+v", got)
+	}
+	if got := trackFromTags(map[string]string{"artist": "Someone", "itunescompilation": "1"}, path); got.Artist != "Various Artists" {
+		t.Errorf("iTunes compilation flag: %+v", got)
+	}
+	if got := trackFromTags(map[string]string{}, path); got.Artist != "Mixes" || got.TrackArtist != "" {
+		t.Errorf("no tags: %+v", got)
 	}
 }

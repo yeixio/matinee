@@ -434,7 +434,8 @@
     "listenNow": "Kuuntele nyt",
     "music": "Musiikki",
     "audiobooks": "Äänikirjat",
-    "signIn": "Avaa Matinee puhelimessasi ja kirjaudu sisään kuunnellaksesi autossa."
+    "signIn": "Avaa Matinee puhelimessasi ja kirjaudu sisään kuunnellaksesi autossa.",
+    "loading": "Ladataan…"
   },
   "watch": {
     "tileName": "Nyt toistossa",
@@ -489,5 +490,25 @@
     "back15": "15 sekuntia taaksepäin",
     "ahead30": "30 sekuntia eteenpäin",
     "storageUsed": "{{size}} tässä kellossa"
+  },
+  "tvUnlock": {
+    "title": "Avaa Matinee",
+    "body": "Yksi {{price}} maksu avaa Matineen pysyvästi kaikkiin tätä palvelinta käyttäviin Samsung- ja LG-televisioihin.",
+    "scan": "Skannaa koodi puhelimella tai mene osoitteeseen {{url}}",
+    "trialUntil": "Ilmainen kokeilu {{date}} asti.",
+    "trialOver": "Ilmainen kokeilu on päättynyt. Avaa Matinee, niin voit jatkaa katselua ja kuuntelua.",
+    "waiting": "Tämä näkymä sulkeutuu itsestään, kun olet maksanut.",
+    "unlocked": "Matinee on avattu tässä televisiossa.",
+    "updateServer": "Päivitä ensin Matinee-palvelimesi, jotta voit avata Matineen täällä."
+  },
+  "cover": {
+    "change": "Vaihda kansikuva",
+    "title": "Valitse kansikuva",
+    "looking": "Etsitään kansikuvia verkosta…",
+    "none": "Verkosta ei löytynyt kansikuvia. Liitä kuvan osoite alle.",
+    "addressPlaceholder": "Liitä kuvan osoite",
+    "use": "Käytä",
+    "reset": "Käytä automaattista kansikuvaa",
+    "chosenNote": "Tämä kansikuva on valittu käsin, joten tarkistukset säilyttävät sen."
   }
 }

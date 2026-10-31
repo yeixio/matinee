@@ -600,14 +600,17 @@
         "movies": "Películas",
         "tv": "Series de TV",
         "music": "Música",
-        "audiobooks": "Audiolibros"
+        "audiobooks": "Audiolibros",
+        "podcasts": "Pódcasts"
       },
       "type": "Tipo",
       "folders": "Carpetas",
       "up": "Subir una carpeta",
       "added": "Añadida",
       "useFolder": "Usar esta carpeta",
-      "noSubfolders": "No hay subcarpetas"
+      "noSubfolders": "No hay subcarpetas",
+      "podcastsNoFolders": "Los pódcasts no necesitan carpeta. Añade programas desde la biblioteca una vez creada.",
+      "podcastsChecked": "Se buscan episodios nuevos cada hora"
     },
     "people": {
       "title": "Personas",
@@ -729,6 +732,16 @@
       "remove": "Quitar la clave guardada",
       "saved": "Guardada. Matinee está completando pósteres y detalles."
     },
+    "podcastIndex": {
+      "title": "Búsqueda de pódcasts",
+      "intro": "La búsqueda de pódcasts usa Podcast Index, un directorio libre y abierto. Consigue una clave y un secreto de API gratuitos en <site>api.podcastindex.org</site>. Sin ellos, los programas siempre se pueden añadir con la dirección de su feed.",
+      "using": "Usando la clave que termina en {{hint}}.",
+      "none": "Aún no hay clave, así que los programas se añaden con la dirección de su feed.",
+      "key": "Clave de API",
+      "secret": "Secreto de API",
+      "save": "Guardar clave",
+      "remove": "Quitar clave"
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Permite que las apps sigan encontrando este servidor cuando cambia la dirección de internet de tu casa. Solo conoce la dirección: el vídeo siempre va directo de este servidor a las apps.",
@@ -805,5 +818,19 @@
   },
   "remote": {
     "controlledBy": "Controlado desde {{name}}"
+  },
+  "cover": {
+    "change": "Cambiar portada",
+    "title": "Portada de {{title}}",
+    "looking": "Buscando portadas en internet…",
+    "none": "No se encontraron portadas en internet. Pega la dirección de una imagen o sube una.",
+    "pick": "Usar {{cover}}",
+    "address": "Dirección de la imagen",
+    "addressPlaceholder": "Pega la dirección de una imagen",
+    "use": "Usar",
+    "upload": "Subir una imagen",
+    "reset": "Usar la portada automática",
+    "chosenNote": "Esta portada se eligió a mano, así que los escaneos la conservan.",
+    "saving": "Guardando la portada…"
   }
 }

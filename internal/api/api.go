@@ -25,6 +25,7 @@ import (
 	"github.com/yeixio/matinee/internal/hwaccel"
 	"github.com/yeixio/matinee/internal/live"
 	"github.com/yeixio/matinee/internal/plugin"
+	"github.com/yeixio/matinee/internal/podcast"
 	"github.com/yeixio/matinee/internal/probe"
 	"github.com/yeixio/matinee/internal/remote"
 	"github.com/yeixio/matinee/internal/scan"
@@ -46,7 +47,9 @@ type Server struct {
 	Downloads    *download.Manager
 	Analyzer     *analyze.Analyzer // nil when media analysis is off for this server
 	Art          *artwork.Cache
-	Subtitles    *subtitle.Converter
+	// Covers finds covers for admins to pick from; nil offers none online.
+	Covers    CoverFinder
+	Subtitles *subtitle.Converter
 	// Levels works out songs' sound levels for the music visualizer; nil
 	// means the visualizer has nothing to draw from.
 	Levels    *spectrum.Analyzer
@@ -116,6 +119,12 @@ type Server struct {
 	// live.go); nil makes one.
 	Live     *live.Hub
 	liveOnce sync.Once
+
+	// Podcasts follows podcast libraries' shows (see podcasts.go).
+	// PodcastIndexBase is Podcast Index's API; empty is the real one.
+	Podcasts         *podcast.Manager
+	PodcastIndexBase string
+	podcastCache     ttlCache // Podcast Index's answers
 
 	// BackgroundCtx scopes scans started by API calls; it outlives any one request.
 	BackgroundCtx context.Context
@@ -213,11 +222,22 @@ func (s *Server) routes() []route {
 		{"GET /home", reader, s.home},
 		{"GET /rows/{id}", reader, s.rowPage},
 		{"GET /search", reader, s.search},
+		{"GET /search/play", reader, s.searchPlay},
 		{"GET /items/{id}", reader, s.getItem},
 		{"GET /items/{id}/children", reader, s.itemChildren},
 		{"GET /items/{id}/tracks", reader, s.itemTracks},
 		{"GET /items/{id}/levels", reader, s.itemLevels},
 		{"GET /items/{id}/book", reader, s.getBook},
+		{"GET /podcasts/directory", reader, grownUps(s.podcastDirectory)},
+		{"GET /podcasts/following", reader, s.followedPodcasts},
+		{"POST /podcasts", signedIn, grownUps(s.addPodcast)},
+		{"DELETE /podcasts/{id}", adminOnly, s.deletePodcast},
+		{"POST /podcasts/{id}/refresh", signedIn, grownUps(s.refreshPodcast)},
+		{"PUT /podcasts/{id}/follow", reader, s.followPodcast},
+		{"DELETE /podcasts/{id}/follow", reader, s.unfollowPodcast},
+		{"PUT /podcasts/{id}/played", reader, s.markPodcastPlayed},
+		{"GET /libraries/{id}/opml", reader, s.exportPodcasts},
+		{"POST /libraries/{id}/opml", signedIn, grownUps(s.importPodcasts)},
 		{"GET /items/{id}/related", reader, s.itemRelated},
 		{"GET /items/{id}/next", reader, s.itemNext},
 		{"GET /people/{id}", reader, s.getPerson},
@@ -225,6 +245,9 @@ func (s *Server) routes() []route {
 		{"PUT /items/{id}/progress", reader, s.setProgress},
 		{"DELETE /continue-watching/{id}", reader, s.hideFromContinueWatching},
 		{"GET /items/{id}/image/{type}", reader, s.itemImage},
+		{"GET /items/{id}/covers", adminOnly, s.coverOptions},
+		{"PUT /items/{id}/cover", adminOnly, s.setCover},
+		{"DELETE /items/{id}/cover", adminOnly, s.resetCover},
 		{"GET /items/{id}/file", reader, s.directFile},
 		{"GET /items/{id}/subtitles/{track}", reader, s.subtitleFile},
 		{"GET /items/{id}/trailers", reader, s.listTrailers},
@@ -244,6 +267,14 @@ func (s *Server) routes() []route {
 		{"GET /watchlist", reader, s.getWatchList},
 		{"PUT /watchlist/{id}", reader, s.addToWatchList},
 		{"DELETE /watchlist/{id}", reader, s.removeFromWatchList},
+		{"GET /playlists", reader, s.listPlaylists},
+		{"POST /playlists", reader, s.createPlaylist},
+		{"GET /playlists/{id}", reader, s.getPlaylist},
+		{"PUT /playlists/{id}", reader, s.renamePlaylist},
+		{"DELETE /playlists/{id}", reader, s.deletePlaylist},
+		{"POST /playlists/{id}/items", reader, s.addToPlaylist},
+		{"DELETE /playlists/{id}/entries/{entry}", reader, s.removeFromPlaylist},
+		{"PUT /playlists/{id}/order", reader, s.orderPlaylist},
 
 		{"GET /downloads/qualities", signedIn, s.downloadQualities},
 		{"POST /downloads", signedIn, s.createDownload},
@@ -258,6 +289,9 @@ func (s *Server) routes() []route {
 		{"PUT /integrations/{app}", adminOnly, s.putIntegration},
 		{"DELETE /integrations/{app}", adminOnly, s.deleteIntegration},
 		{"POST /integrations/{app}/test", adminOnly, s.testIntegration},
+		{"GET /integrations/podcastindex", adminOnly, s.getPodcastIndex},
+		{"PUT /integrations/podcastindex", adminOnly, s.putPodcastIndex},
+		{"DELETE /integrations/podcastindex", adminOnly, s.deletePodcastIndex},
 		{"GET /integrations/overseerr", adminOnly, s.getOverseerr},
 		{"PUT /integrations/overseerr", adminOnly, s.putOverseerr},
 		{"DELETE /integrations/overseerr", adminOnly, s.deleteOverseerr},
@@ -307,6 +341,9 @@ func (s *Server) routes() []route {
 
 func (s *Server) Handler() http.Handler {
 	mux := http.NewServeMux()
+	if s.Art != nil && s.Art.Chosen == nil {
+		s.Art.Chosen = s.chosenCover
+	}
 
 	// Kubernetes probes: alive means the process answers, ready means the
 	// database does too and the server isn't shutting down.
@@ -341,7 +378,7 @@ func (s *Server) Handler() http.Handler {
 		writeError(w, http.StatusNotFound, "no such endpoint")
 	})
 	mux.Handle("/", s.webHandler())
-	return s.logRequests(s.markRestarting(mux))
+	return s.logRequests(s.markRestarting(allowOtherOrigins(mux)))
 }
 
 // ---- helpers ----
@@ -766,7 +803,10 @@ func (s *Server) createLibrary(w http.ResponseWriter, r *http.Request) {
 		writeError(w, http.StatusBadRequest, "kind must be one of: "+strings.Join(scan.KindNames(), ", "))
 		return
 	}
-	if len(req.Paths) == 0 {
+	if req.Kind == "podcasts" {
+		// Shows come from their feeds; a podcast library has no folders.
+		req.Paths = nil
+	} else if len(req.Paths) == 0 {
 		writeError(w, http.StatusBadRequest, "add at least one folder")
 		return
 	}
@@ -823,7 +863,12 @@ func (s *Server) scanLibrary(w http.ResponseWriter, r *http.Request) {
 		s.serverError(w, err)
 		return
 	}
-	go s.Scanner.Scan(s.BackgroundCtx, lib)
+	if lib.Kind == "podcasts" && s.Podcasts != nil {
+		// Every show's feed, now, however recently it was checked.
+		go s.Podcasts.RefreshLibrary(s.BackgroundCtx, lib)
+	} else {
+		go s.Scanner.Scan(s.BackgroundCtx, lib)
+	}
 	w.WriteHeader(http.StatusAccepted)
 }
 
@@ -915,6 +960,11 @@ func (s *Server) home(w http.ResponseWriter, r *http.Request) {
 		s.serverError(w, err)
 		return
 	}
+	episodes, err := s.Store.NewEpisodes(ctx, uid, now.AddDate(0, 0, -newEpisodeDays).Unix(), homeRowItems+1)
+	if err != nil {
+		s.serverError(w, err)
+		return
+	}
 	more := map[string]bool{}
 	cont, more[rowContinue] = cut(cont, continueItems)
 	recent, more[rowRecent] = cut(recent, homeRowItems)
@@ -935,9 +985,15 @@ func (s *Server) home(w http.ResponseWriter, r *http.Request) {
 		s.serverError(w, err)
 		return
 	}
-	// Books someone is listening to come first, then a holiday coming up,
+	// Books and episodes someone is listening to come first, then new
+	// episodes of the shows they follow, then a holiday coming up,
 	// then pinned collections, then the day's genres.
 	rows = append(append(holidayRows, pinned...), rows...)
+	if len(episodes) > 0 {
+		row := HomeRow{ID: rowNewEpisodes, Title: "New episodes"}
+		row.Items, row.More = cut(episodes, homeRowItems)
+		rows = append([]HomeRow{row}, rows...)
+	}
 	if len(listening) > 0 {
 		row := HomeRow{ID: rowListening, Title: "Continue listening"}
 		row.Items, row.More = cut(listening, continueItems)
@@ -995,6 +1051,10 @@ type itemView struct {
 	// once looked up; Details stays absent until then.
 	Details *store.Details `json:"details,omitempty"`
 	Credits *store.Credits `json:"credits,omitempty"`
+	// Podcast is a show's feed and whether the person follows it; Episode
+	// is a podcast episode's link and type.
+	Podcast *podcastView       `json:"feed,omitempty"`
+	Episode *store.EpisodeInfo `json:"episode,omitempty"`
 }
 
 func (s *Server) getItem(w http.ResponseWriter, r *http.Request) {
@@ -1023,6 +1083,10 @@ func (s *Server) getItem(w http.ResponseWriter, r *http.Request) {
 		p = parent.ParentID
 	}
 	if err := s.addDetails(r.Context(), &v); err != nil {
+		s.serverError(w, err)
+		return
+	}
+	if err := s.addPodcastDetails(r.Context(), currentUser(r), &v); err != nil {
 		s.serverError(w, err)
 		return
 	}
@@ -1114,6 +1178,21 @@ func (s *Server) setProgress(w http.ResponseWriter, r *http.Request) {
 		s.setPartProgress(w, r, it, req.PositionMs, req.Played)
 		return
 	}
+	if it.Kind == "podcastEpisode" {
+		if it.DurationMs != nil && *it.DurationMs > 0 && req.PositionMs >= *it.DurationMs-podcastFinishedMs {
+			req.Played = true
+		}
+		if req.Played {
+			req.PositionMs = 0
+		}
+		if err := s.Store.SetProgress(r.Context(), currentUser(r).ID, it.ID, req.PositionMs, req.Played); err != nil {
+			s.serverError(w, err)
+			return
+		}
+		s.Plugins.Played(currentUser(r), it, req.PositionMs, req.Played)
+		w.WriteHeader(http.StatusNoContent)
+		return
+	}
 	// Past 92% counts as watched, the way credits usually start.
 	// So does reaching the closing credits, when a chapter says where they are.
 	if it.DurationMs != nil && *it.DurationMs > 0 && req.PositionMs > *it.DurationMs*92/100 {
@@ -1148,8 +1227,9 @@ func (s *Server) hideFromContinueWatching(w http.ResponseWriter, r *http.Request
 	w.WriteHeader(http.StatusNoContent)
 }
 
-// itemImage serves a poster or backdrop. Seasons, tracks and book parts
-// without their own poster borrow their show's, album's or book's.
+// itemImage serves a poster or backdrop. Seasons, tracks, book parts and
+// podcast episodes without their own poster borrow their show's, album's,
+// book's or podcast's.
 func (s *Server) itemImage(w http.ResponseWriter, r *http.Request) {
 	it, ok := s.loadItem(w, r)
 	if !ok {
@@ -1176,7 +1256,7 @@ func (s *Server) itemImage(w http.ResponseWriter, r *http.Request) {
 			s.Art.Serve(w, r, src)
 			return
 		}
-		borrow := kind == "poster" && (it.Kind == "season" || it.Kind == "track" || it.Kind == "part") ||
+		borrow := kind == "poster" && (it.Kind == "season" || it.Kind == "track" || it.Kind == "part" || it.Kind == "podcastEpisode") ||
 			kind == "backdrop" && (it.Kind == "season" || it.Kind == "episode")
 		if !borrow || it.ParentID == nil {
 			break

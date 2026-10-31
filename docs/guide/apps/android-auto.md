@@ -23,7 +23,7 @@ The phone can stay in your pocket with the app closed: the car starts Matinee by
 Matinee has up to four tabs along the top of the car's screen:
 
 - **Listen now**: the books you're partway through, then the albums you've played lately.
-- **Music**: **Shuffle all**, every **Artist** and **Album**, and the albums added lately. Pick an album to see its songs; pick a song to play the album from there.
+- **Music**: **Shuffle all**, your **Playlists**, every **Artist** and **Album**, and the albums added lately. Pick an album to see its songs; pick a song to play the album from there. Pick a playlist to play it from the top. Playlists need app version 1.0.19 or later.
 - **Audiobooks**: every book, with how far along you are in each.
 - **Downloads**: the songs and books downloaded to your phone (see [Downloads](/docs/apps/downloads/)). These play with no connection, so they still work where the signal drops. The tab shows up once something is downloaded.
 
@@ -35,6 +35,9 @@ Ask the car's assistant to play something on Matinee:
 
 - "Play *album or artist* on Matinee"
 - "Play *book title* on Matinee"
+<!-- since: v0.1.7 -->
+- "Play *playlist name* on Matinee", with the playlist's name as you wrote it (app version 1.0.19 or later)
+<!-- /since -->
 - "Play Matinee" picks up whatever you last played, or shuffles your music if there's nothing to pick up.
 
 ## Listening to a book
@@ -51,6 +54,12 @@ A book picks up exactly where you left off, on your phone, the web or a TV. The 
 The car and the phone share one player. If music is playing on the phone when you get in, the car shows it and its buttons control it. With the app open on the phone, what you pick in the car plays there too, so the phone shows the same song or book.
 
 If the server restarts, or the car loses its connection for a while, Matinee keeps trying for a few minutes and picks up where it was. Downloads play without the server at all.
+
+<!-- since: v0.1.7 -->
+### With no signal
+
+Where the car has no connection, the lists you've opened on this drive show only what's downloaded, marked with a downloaded icon, so everything you see plays. When the signal comes back, the rest is there again.
+<!-- /since -->
 
 ## Something isn't working
 

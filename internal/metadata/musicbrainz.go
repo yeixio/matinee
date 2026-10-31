@@ -3,11 +3,13 @@ package metadata
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"net/http"
 	"net/url"
 	"path"
 	"regexp"
+	"slices"
 	"strconv"
 	"strings"
 	"sync"
@@ -59,6 +61,9 @@ func (m *MusicBrainz) Lookup(ctx context.Context, q Query) (*store.Metadata, err
 	return nil, nil
 }
 
+// errUnknownID is MusicBrainz saying an id isn't one of its own.
+var errUnknownID = errors.New("musicbrainz: not found")
+
 // minScore is how sure MusicBrainz's search must be (0-100) before we take its answer.
 const minScore = 90
 
@@ -97,22 +102,81 @@ func (m *MusicBrainz) artist(ctx context.Context, name string) (*store.Metadata,
 }
 
 func (m *MusicBrainz) album(ctx context.Context, q Query) (*store.Metadata, error) {
-	// "OK Computer (Deluxe Edition) [Remastered]" is filed as "OK Computer".
-	titles := []string{q.Title}
-	if c := plainAlbumTitle(q.Title); c != "" && c != q.Title {
-		titles = append(titles, c)
+	// Files tagged by MusicBrainz Picard, Lidarr or beets name their album
+	// outright, which beats any search.
+	if md, err := m.albumByID(ctx, q); md != nil || err != nil {
+		return md, err
 	}
+	// "OK Computer (Deluxe Edition) [Remastered]" is filed as "OK Computer",
+	// and "Perfecto Fluoro- Oakenfold (CD 2)" as "Perfecto Fluoro".
+	titles := albumTitles(q.Title, q.Artist)
 	for _, title := range titles {
 		rg, err := m.releaseGroup(ctx, title, q.Artist)
 		if err != nil {
 			return nil, err
 		}
-		if rg == nil {
-			continue
+		if rg != nil {
+			return m.albumMetadata(ctx, rg), nil
 		}
-		y, _ := strconv.Atoi(strings.SplitN(rg.FirstRelease, "-", 2)[0])
-		// Local covers win over this (see Store.ApplyMetadata).
-		return &store.Metadata{MBID: rg.ID, Year: y, Poster: m.cover(ctx, rg.ID)}, nil
+	}
+	if q.Artist == "" {
+		return nil, nil
+	}
+	plain := titles[len(titles)-1]
+	// A misspelled or shortened title, like "Fluro" for "Perfecto Fluoro".
+	rg, err := m.fuzzyReleaseGroup(ctx, plain, q.Artist, q.Year)
+	if err != nil || rg != nil {
+		return m.albumMetadata(ctx, rg), err
+	}
+	// A DJ mix or compilation filed under its DJ, which MusicBrainz credits
+	// to Various Artists.
+	rg, err = m.compilation(ctx, plain, q.Year)
+	return m.albumMetadata(ctx, rg), err
+}
+
+// albumMetadata is the year and cover of a matched album; nil for none.
+func (m *MusicBrainz) albumMetadata(ctx context.Context, rg *releaseGroup) *store.Metadata {
+	if rg == nil {
+		return nil
+	}
+	// Local covers win over this (see Store.ApplyMetadata).
+	return &store.Metadata{MBID: rg.ID, Year: rg.year(), Poster: m.cover(ctx, rg.ID)}
+}
+
+// albumByID looks an album up by the MusicBrainz ids in its files' tags.
+// An id MusicBrainz doesn't know (since merged away, or mistyped) leaves
+// the album to the search.
+func (m *MusicBrainz) albumByID(ctx context.Context, q Query) (*store.Metadata, error) {
+	if q.ReleaseID != "" {
+		var rel struct {
+			ReleaseGroup releaseGroup `json:"release-group"`
+			CAA          struct {
+				Front bool `json:"front"`
+			} `json:"cover-art-archive"`
+		}
+		err := m.mb(ctx, "/release/"+url.PathEscape(q.ReleaseID), url.Values{"inc": {"release-groups"}}, &rel)
+		switch {
+		case errors.Is(err, errUnknownID):
+		case err != nil:
+			return nil, err
+		case rel.CAA.Front:
+			// This very release's cover, the edition the files came from.
+			return &store.Metadata{MBID: rel.ReleaseGroup.ID, Year: rel.ReleaseGroup.year(),
+				Poster: m.CoverURL + "/release/" + url.PathEscape(q.ReleaseID) + "/front-500"}, nil
+		case rel.ReleaseGroup.ID != "":
+			return m.albumMetadata(ctx, &rel.ReleaseGroup), nil
+		}
+	}
+	if q.ReleaseGroupID != "" {
+		var rg releaseGroup
+		err := m.mb(ctx, "/release-group/"+url.PathEscape(q.ReleaseGroupID), url.Values{}, &rg)
+		switch {
+		case errors.Is(err, errUnknownID):
+		case err != nil:
+			return nil, err
+		case rg.ID != "":
+			return m.albumMetadata(ctx, &rg), nil
+		}
 	}
 	return nil, nil
 }
@@ -122,6 +186,14 @@ type releaseGroup struct {
 	Title        string `json:"title"`
 	Score        int    `json:"score"`
 	FirstRelease string `json:"first-release-date"`
+	ArtistCredit []struct {
+		Name string `json:"name"`
+	} `json:"artist-credit"`
+}
+
+func (rg *releaseGroup) year() int {
+	y, _ := strconv.Atoi(strings.SplitN(rg.FirstRelease, "-", 2)[0])
+	return y
 }
 
 // releaseGroup searches for an album by its title and artist. A confident
@@ -153,6 +225,59 @@ func (m *MusicBrainz) releaseGroup(ctx context.Context, title, artist string) (*
 		}
 	}
 	return nil, nil
+}
+
+// fuzzyReleaseGroup searches the artist's albums for one whose title is
+// close to this one: a letter off, or with words left out when the year
+// says it's the same album.
+func (m *MusicBrainz) fuzzyReleaseGroup(ctx context.Context, title, artist string, year int) (*releaseGroup, error) {
+	var terms []string
+	for _, w := range words(title) {
+		if len([]rune(w)) >= 4 {
+			w += "~"
+		}
+		terms = append(terms, w)
+	}
+	if len(terms) == 0 {
+		return nil, nil
+	}
+	query := "releasegroup:(" + strings.Join(terms, " AND ") + ") AND artist:" + luceneQuote(artist)
+	var res struct {
+		ReleaseGroups []releaseGroup `json:"release-groups"`
+	}
+	if err := m.mb(ctx, "/release-group", url.Values{"query": {query}, "limit": {"10"}}, &res); err != nil {
+		return nil, err
+	}
+	for _, rg := range res.ReleaseGroups {
+		if similarTitle(title, rg.Title, year != 0 && rg.year() == year) {
+			return &rg, nil
+		}
+	}
+	return nil, nil
+}
+
+// compilation searches for a Various Artists album with exactly this
+// title, from this year when the files say. Without a year, the title must
+// name only one such album.
+func (m *MusicBrainz) compilation(ctx context.Context, title string, year int) (*releaseGroup, error) {
+	query := "releasegroup:" + luceneQuote(title) + ` AND artist:"Various Artists"`
+	var res struct {
+		ReleaseGroups []releaseGroup `json:"release-groups"`
+	}
+	if err := m.mb(ctx, "/release-group", url.Values{"query": {query}, "limit": {"10"}}, &res); err != nil {
+		return nil, err
+	}
+	var found []releaseGroup
+	for _, rg := range res.ReleaseGroups {
+		various := len(rg.ArtistCredit) == 1 && strings.EqualFold(rg.ArtistCredit[0].Name, "Various Artists")
+		if various && sameName(rg.Title, title) && (year == 0 || rg.year() == year) {
+			found = append(found, rg)
+		}
+	}
+	if len(found) == 0 || year == 0 && len(found) > 1 {
+		return nil, nil
+	}
+	return &found[0], nil
 }
 
 // cover returns the Cover Art Archive's front cover for an album. Not
@@ -209,9 +334,10 @@ func (m *MusicBrainz) exists(ctx context.Context, u string) (bool, error) {
 	return false, fmt.Errorf("%s: %s", req.URL.Host, resp.Status)
 }
 
-// editionRe matches a bracketed note on an album title about its edition,
-// such as "(Deluxe Edition)", "[2011 Remaster]" or "(Disc 1)".
-var editionRe = regexp.MustCompile(`(?i)\s*[(\[][^)\]]*\b(deluxe|remaster(ed)?|expanded|edition|anniversary|bonus|special|explicit|version|mono|stereo|reissue|limited|collector'?s|disc|cd|disk)\b[^)\]]*[)\]]\s*$`)
+// editionRe matches a bracketed note on an album title about its edition
+// or the copy at hand, such as "(Deluxe Edition)", "[2011 Remaster]",
+// "(Disc 1)", "(CD2)", "(SAMPLE)" or "[FLAC]".
+var editionRe = regexp.MustCompile(`(?i)\s*[(\[][^)\]]*\b(deluxe|remaster(ed)?|expanded|edition|anniversary|bonus|special|explicit|version|mono|stereo|reissue|limited|collector'?s|disc|cd|disk|(cd|dis[ck])\s*\d{1,2}|sample|promo|advance|bootleg|import|retail|web|flac|mp3|aac|vinyl|lp|\d{3}\s*kbps|v0)\b[^)\]]*[)\]]\s*$`)
 
 // discSuffixRe matches " CD1" or " - Disc 2" at the end of an album title.
 var discSuffixRe = regexp.MustCompile(`(?i)[\s-]+(cd|dis[ck])\s*\d{1,2}$`)
@@ -225,6 +351,109 @@ func plainAlbumTitle(t string) string {
 		}
 		t = c
 	}
+}
+
+// albumTitles lists the titles to search for an album by, as tagged first
+// and then with edition notes and its artist's name taken off.
+func albumTitles(title, artist string) []string {
+	out := []string{title}
+	for _, t := range []string{plainAlbumTitle(title), withoutArtist(plainAlbumTitle(title), artist)} {
+		if t != "" && !slices.Contains(out, t) {
+			out = append(out, t)
+		}
+	}
+	return out
+}
+
+// artistSepRe matches a dash or colon between an album's title and its
+// artist's name, with a space on one side at least, so "Jay-Z" holds.
+var artistSepRe = regexp.MustCompile(`\s+[-–—:]\s*|\s*[-–—:]\s+`)
+
+// withoutArtist takes the artist's name off the end or start of an album
+// title: "Perfecto Fluoro- Oakenfold" is "Perfecto Fluoro", and
+// "Radiohead - OK Computer" is "OK Computer".
+func withoutArtist(title, artist string) string {
+	seps := artistSepRe.FindAllStringIndex(title, -1)
+	if artist == "" || len(seps) == 0 {
+		return title
+	}
+	if last := seps[len(seps)-1]; last[0] > 0 && namesArtist(title[last[1]:], artist) {
+		return title[:last[0]]
+	}
+	if first := seps[0]; first[1] < len(title) && namesArtist(title[:first[0]], artist) {
+		return title[first[1]:]
+	}
+	return title
+}
+
+// namesArtist reports whether part is the artist's name, or the last word
+// of it, as with "Oakenfold" for Paul Oakenfold.
+func namesArtist(part, artist string) bool {
+	pw, aw := words(part), words(artist)
+	return len(pw) > 0 && len(aw) > 0 && (slices.Equal(pw, aw) || len(pw) == 1 && pw[0] == aw[len(aw)-1])
+}
+
+// words splits s into lower-case words of letters and digits.
+func words(s string) []string {
+	return strings.FieldsFunc(strings.ToLower(s), func(r rune) bool { return !unicode.IsLetter(r) && !unicode.IsDigit(r) })
+}
+
+// similarTitle reports whether a tagged title is close enough to a
+// MusicBrainz one: the same but for a typo or two, or, when the years
+// match too, a title whose every word (give or take a letter) is in it.
+func similarTitle(ours, theirs string, sameYear bool) bool {
+	a, b := strings.Join(words(ours), ""), strings.Join(words(theirs), "")
+	if a == "" || b == "" {
+		return false
+	}
+	if editDistance(a, b) <= typos(a) {
+		return true
+	}
+	if !sameYear || len([]rune(a)) < 5 {
+		return false
+	}
+	theirWords := words(theirs)
+	for _, w := range words(ours) {
+		i := slices.IndexFunc(theirWords, func(t string) bool { return editDistance(w, t) <= typos(w) })
+		if i < 0 {
+			return false
+		}
+		theirWords = slices.Delete(theirWords, i, i+1)
+	}
+	return true
+}
+
+// typos is how many letters a word of this length may be off by.
+func typos(s string) int {
+	switch n := len([]rune(s)); {
+	case n < 5:
+		return 0
+	case n < 10:
+		return 1
+	}
+	return 2
+}
+
+// editDistance counts the letters to add, drop or change to turn a into b.
+func editDistance(a, b string) int {
+	ra, rb := []rune(a), []rune(b)
+	prev := make([]int, len(rb)+1)
+	cur := make([]int, len(rb)+1)
+	for j := range prev {
+		prev[j] = j
+	}
+	for i := 1; i <= len(ra); i++ {
+		cur[0] = i
+		for j := 1; j <= len(rb); j++ {
+			cost := 1
+			if ra[i-1] == rb[j-1] {
+				cost = 0
+			}
+			cur[j] = min(prev[j]+1, cur[j-1]+1, prev[j-1]+cost)
+		}
+		prev, cur = cur, prev
+	}
+	return prev[len(rb)]
 }
 
 // sameName compares titles ignoring case, punctuation and spacing.
@@ -333,6 +562,9 @@ func (m *MusicBrainz) getJSON(ctx context.Context, u string, out any) error {
 		return err
 	}
 	defer resp.Body.Close()
+	if resp.StatusCode == http.StatusNotFound {
+		return fmt.Errorf("%s: %s: %w", req.URL.Host, resp.Status, errUnknownID)
+	}
 	if resp.StatusCode != http.StatusOK {
 		return fmt.Errorf("%s: %s", req.URL.Host, resp.Status)
 	}

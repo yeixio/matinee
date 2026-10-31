@@ -328,6 +328,8 @@ export type Item = {
   overview?: string
   rating?: number
   hasPoster: boolean
+  // Set when an admin picked the cover; it goes on the image URL so a cached old one isn't shown.
+  posterTag?: string
   hasBackdrop: boolean
   showTitle?: string
   seasonIndex?: number
@@ -343,6 +345,10 @@ export type Item = {
   narrators?: string[]
   series?: string
   seriesIndex?: number
+  // Podcasts and their episodes: who makes the show (author); episodes: the
+  // show's title (its id is parentId) and the day it came out, YYYY-MM-DD.
+  podcast?: string
+  released?: string
   // True until the server has looked the item up online.
   pending?: boolean
   onWatchList?: boolean
@@ -474,6 +480,23 @@ export type CollectionInput = {
   pinLibrary?: number | null
   shared?: boolean
 }
+
+/** A playlist: songs someone put in their own order. Each person and profile has their own. */
+export type Playlist = {
+  id: string
+  name: string
+  /** Songs the person may play, and how long they last. */
+  count: number
+  durationMs: number
+  /** Up to four different albums on it, for its cover. */
+  albumIds: number[]
+  createdAt: number
+  updatedAt: number
+}
+
+/** A song in its place on a playlist; the same song can be on it twice, so each place has its own entryId. */
+export type PlaylistEntry = Item & { entryId: string }
+export type PlaylistDetail = Playlist & { entries: PlaylistEntry[] }
 
 /** One of TMDB's collections, such as a trilogy, with two or more titles in the library. */
 export type BoxSet = { id: number; name: string; count: number; itemIds: number[] }
@@ -622,7 +645,36 @@ export type ItemDetail = Item & {
   fileSize?: number
   details?: Details
   credits?: Credits
+  // Podcasts: their feed and whether the person follows them.
+  feed?: PodcastFeed
+  // Podcast episodes: their web page and type.
+  episode?: { link?: string; episodeType: 'full' | 'trailer' | 'bonus' }
 }
+
+export type PodcastFeed = {
+  feedUrl: string
+  link?: string // the show's website
+  refreshedAt: number // Unix seconds
+  error?: string // admins only: why the last check failed
+  following: boolean
+  unplayed: number
+}
+// A show in Podcast Index, with its id when a library has it already.
+export type DirectoryShow = {
+  indexId: number
+  title: string
+  author?: string
+  description?: string
+  image?: string
+  feedUrl: string
+  link?: string
+  language?: string
+  categories?: string[]
+  episodes?: number
+  itemId?: number
+}
+export type FollowedShow = Item & { unplayed: number }
+export type OpmlImport = { added: number; problems: { title: string; feedUrl: string; error: string }[] }
 
 export type AnalysisMode = 'gentle' | 'normal' | 'off'
 export type AnalysisStatus = {
@@ -632,6 +684,15 @@ export type AnalysisStatus = {
   done: number
   unreadable: number
   current?: string
+}
+
+// CoverOption is a cover found online that an admin can pick for an album or book.
+export interface CoverOption {
+  url: string
+  thumb: string
+  source: string
+  title: string
+  detail?: string
 }
 
 // message is in the page's language where the catalog has the server's
@@ -803,6 +864,41 @@ export const api = {
   book: (id: number) => request<Book>('GET', `/api/v1/items/${id}/book`),
   series: (library: number) => request<BookGroup[]>('GET', `/api/v1/libraries/${library}/series`),
   narrators: (library: number) => request<BookGroup[]>('GET', `/api/v1/libraries/${library}/narrators`),
+  // Podcasts: finding shows in Podcast Index, adding them by their feed,
+  // following them, and moving them between apps as OPML.
+  podcastDirectory: (q: { q?: string; lang?: string }) =>
+    request<{ connected: boolean; shows: DirectoryShow[] }>('GET', `/api/v1/podcasts/directory?${new URLSearchParams(q as Record<string, string>)}`),
+  followedPodcasts: () => request<FollowedShow[]>('GET', '/api/v1/podcasts/following'),
+  addPodcast: (libraryId: number, feedUrl: string) => request<Item>('POST', '/api/v1/podcasts', { libraryId, feedUrl }),
+  deletePodcast: (id: number) => request<void>('DELETE', `/api/v1/podcasts/${id}`),
+  refreshPodcast: (id: number) => request<{ added: number }>('POST', `/api/v1/podcasts/${id}/refresh`),
+  followPodcast: (id: number, follow: boolean) => request<void>(follow ? 'PUT' : 'DELETE', `/api/v1/podcasts/${id}/follow`),
+  markPodcastPlayed: (id: number, played: boolean) => request<void>('PUT', `/api/v1/podcasts/${id}/played`, { played }),
+  covers: (id: number) => request<{ options: CoverOption[]; chosen: boolean; chosenSource?: string }>('GET', `/api/v1/items/${id}/covers`),
+  setCover: (id: number, url: string) => request<Item>('PUT', `/api/v1/items/${id}/cover`, { url }),
+  uploadCover: async (id: number, file: Blob) => {
+    const res = await fetch(`/api/v1/items/${id}/cover`, {
+      method: 'PUT',
+      credentials: 'same-origin',
+      headers: { 'Content-Type': file.type || 'application/octet-stream' },
+      body: file,
+    })
+    return response<Item>(res)
+  },
+  resetCover: (id: number) => request<void>('DELETE', `/api/v1/items/${id}/cover`),
+  importOpml: async (library: number, file: Blob) => {
+    const res = await fetch(`/api/v1/libraries/${library}/opml`, {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: { 'Content-Type': 'text/x-opml' },
+      body: file,
+    })
+    return response<OpmlImport>(res)
+  },
+  podcastIndex: () => request<{ connected: boolean; hint?: string }>('GET', '/api/v1/integrations/podcastindex'),
+  savePodcastIndex: (key: string, secret: string) =>
+    request<{ connected: boolean; hint?: string }>('PUT', '/api/v1/integrations/podcastindex', { key, secret }),
+  deletePodcastIndex: () => request<void>('DELETE', '/api/v1/integrations/podcastindex'),
   related: (id: number) => request<Related>('GET', `/api/v1/items/${id}/related`),
   next: (id: number) => request<NextUp>('GET', `/api/v1/items/${id}/next`),
   person: (id: number) => request<Person>('GET', `/api/v1/people/${id}`),
@@ -821,6 +917,17 @@ export const api = {
     request<void>('DELETE', `/api/v1/collections/${encodeURIComponent(id)}/items/${item}`),
   boxSet: (id: number) => request<{ id: number; name: string; items: Item[] }>('GET', `/api/v1/box-sets/${id}`),
   watchList: () => request<Item[]>('GET', '/api/v1/watchlist'),
+  playlists: (q?: string) => request<Playlist[]>('GET', `/api/v1/playlists${q ? `?q=${encodeURIComponent(q)}` : ''}`),
+  playlist: (id: string) => request<PlaylistDetail>('GET', `/api/v1/playlists/${encodeURIComponent(id)}`),
+  createPlaylist: (name: string, items: number[] = []) => request<PlaylistDetail>('POST', '/api/v1/playlists', { name, items }),
+  renamePlaylist: (id: string, name: string) => request<PlaylistDetail>('PUT', `/api/v1/playlists/${encodeURIComponent(id)}`, { name }),
+  deletePlaylist: (id: string) => request<void>('DELETE', `/api/v1/playlists/${encodeURIComponent(id)}`),
+  addToPlaylist: (id: string, items: number[]) =>
+    request<PlaylistDetail>('POST', `/api/v1/playlists/${encodeURIComponent(id)}/items`, { items }),
+  removeFromPlaylist: (id: string, entry: string) =>
+    request<PlaylistDetail>('DELETE', `/api/v1/playlists/${encodeURIComponent(id)}/entries/${encodeURIComponent(entry)}`),
+  orderPlaylist: (id: string, entries: string[]) =>
+    request<PlaylistDetail>('PUT', `/api/v1/playlists/${encodeURIComponent(id)}/order`, { entries }),
   addToWatchList: (id: number) => request<void>('PUT', `/api/v1/watchlist/${id}`),
   removeFromWatchList: (id: number) => request<void>('DELETE', `/api/v1/watchlist/${id}`),
   hideFromContinueWatching: (id: number) => request<void>('DELETE', `/api/v1/continue-watching/${id}`),
@@ -861,9 +968,11 @@ export const api = {
   },
 }
 
-export const imageUrl = (id: number, type: 'poster' | 'backdrop') => `/api/v1/items/${id}/image/${type}`
+export const imageUrl = (id: number, type: 'poster' | 'backdrop', tag?: string) =>
+  `/api/v1/items/${id}/image/${type}${tag ? `?v=${encodeURIComponent(tag)}` : ''}`
 export const personImageUrl = (id: number) => `/api/v1/people/${id}/image`
 export const fileUrl = (id: number) => `/api/v1/items/${id}/file`
+export const opmlUrl = (library: number) => `/api/v1/libraries/${library}/opml`
 export const pluginFileUrl = (plugin: string, path: string) =>
   `/api/v1/plugins/${encodeURIComponent(plugin)}/files/${path.split('/').map(encodeURIComponent).join('/')}`
 export const trailerFileUrl = (id: number, trailer: string) => `/api/v1/items/${id}/trailers/${encodeURIComponent(trailer)}/file`

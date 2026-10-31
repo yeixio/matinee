@@ -448,7 +448,8 @@
     "listenNow": "Słuchaj teraz",
     "music": "Muzyka",
     "audiobooks": "Audiobooki",
-    "signIn": "Otwórz Matinee na telefonie i zaloguj się, aby słuchać w samochodzie."
+    "signIn": "Otwórz Matinee na telefonie i zaloguj się, aby słuchać w samochodzie.",
+    "loading": "Wczytywanie…"
   },
   "watch": {
     "tileName": "Teraz odtwarzane",
@@ -503,5 +504,25 @@
     "back15": "15 sekund wstecz",
     "ahead30": "30 sekund naprzód",
     "storageUsed": "{{size}} na tym zegarku"
+  },
+  "tvUnlock": {
+    "title": "Odblokuj Matinee",
+    "body": "Jedna płatność w wysokości {{price}} odblokowuje Matinee na zawsze na każdym telewizorze Samsung i LG, który korzysta z tego serwera.",
+    "scan": "Zeskanuj kod telefonem lub wejdź na {{url}}",
+    "trialUntil": "Bezpłatny okres próbny do {{date}}.",
+    "trialOver": "Bezpłatny okres próbny dobiegł końca. Odblokuj Matinee, aby dalej oglądać i słuchać.",
+    "waiting": "Ten ekran zamknie się sam po dokonaniu płatności.",
+    "unlocked": "Matinee jest odblokowane na tym telewizorze.",
+    "updateServer": "Aby odblokować tutaj Matinee, najpierw zaktualizuj swój serwer Matinee."
+  },
+  "cover": {
+    "change": "Zmień okładkę",
+    "title": "Wybierz okładkę",
+    "looking": "Szukanie okładek w internecie…",
+    "none": "Nie znaleziono okładek w internecie. Wklej poniżej adres obrazu.",
+    "addressPlaceholder": "Wklej adres obrazu",
+    "use": "Użyj",
+    "reset": "Użyj automatycznej okładki",
+    "chosenNote": "Ta okładka została wybrana ręcznie, więc skanowanie jej nie zmienia."
   }
 }

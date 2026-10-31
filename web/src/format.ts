@@ -54,3 +54,13 @@ export function seasonTitle(item: { kind: string; title: string; index?: number 
 export function ratingLabel(rating: number): string {
   return new Intl.NumberFormat(formatLocale(), { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(rating)
 }
+
+// A day like 2026-10-30 in the page's language: "Oct 30", with the year
+// when it isn't this year's.
+export function shortDate(day?: string, locale?: string): string {
+  if (!day) return ''
+  const d = new Date(`${day}T12:00:00`)
+  if (Number.isNaN(d.getTime())) return ''
+  const thisYear = d.getFullYear() === new Date().getFullYear()
+  return d.toLocaleDateString(locale, thisYear ? { month: 'short', day: 'numeric' } : { year: 'numeric', month: 'short', day: 'numeric' })
+}

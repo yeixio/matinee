@@ -600,14 +600,17 @@
         "movies": "Filmes",
         "tv": "Séries de TV",
         "music": "Música",
-        "audiobooks": "Audiolivros"
+        "audiobooks": "Audiolivros",
+        "podcasts": "Podcasts"
       },
       "type": "Tipo",
       "folders": "Pastas",
       "up": "Subir uma pasta",
       "added": "Adicionada",
       "useFolder": "Usar esta pasta",
-      "noSubfolders": "Nenhuma subpasta"
+      "noSubfolders": "Nenhuma subpasta",
+      "podcastsNoFolders": "Podcasts não precisam de pasta. Adicione programas pela biblioteca depois de criá-la.",
+      "podcastsChecked": "Episódios novos verificados a cada hora"
     },
     "people": {
       "title": "Pessoas",
@@ -729,6 +732,16 @@
       "remove": "Remover chave salva",
       "saved": "Salva. O Matinee está preenchendo pôsteres e detalhes agora."
     },
+    "podcastIndex": {
+      "title": "Busca de podcasts",
+      "intro": "A busca de podcasts usa o Podcast Index, um diretório livre e aberto. Consiga uma chave e um segredo de API gratuitos em <site>api.podcastindex.org</site>. Sem eles, sempre dá para adicionar programas pelo endereço do feed.",
+      "using": "Usando a chave terminada em {{hint}}.",
+      "none": "Nenhuma chave ainda, então os programas são adicionados pelo endereço do feed.",
+      "key": "Chave de API",
+      "secret": "Segredo de API",
+      "save": "Salvar chave",
+      "remove": "Remover chave"
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Mantém os apps encontrando este servidor quando o endereço de internet da sua casa muda. O serviço só conhece o endereço: o vídeo sempre vai direto deste servidor para os apps.",
@@ -805,5 +818,19 @@
   },
   "remote": {
     "controlledBy": "Controlado por {{name}}"
+  },
+  "cover": {
+    "change": "Trocar capa",
+    "title": "Capa de {{title}}",
+    "looking": "Procurando capas na internet…",
+    "none": "Nenhuma capa encontrada na internet. Cole o endereço de uma imagem ou envie uma.",
+    "pick": "Usar {{cover}}",
+    "address": "Endereço da imagem",
+    "addressPlaceholder": "Cole o endereço de uma imagem",
+    "use": "Usar",
+    "upload": "Enviar uma imagem",
+    "reset": "Usar a capa automática",
+    "chosenNote": "Esta capa foi escolhida manualmente, então as verificações a mantêm.",
+    "saving": "Salvando a capa…"
   }
 }

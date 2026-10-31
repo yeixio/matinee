@@ -1,6 +1,6 @@
 ---
 title: Music
-description: Browse artists, albums and songs, line up a queue, and keep music playing while you browse.
+description: Browse artists, albums and songs, make playlists, line up a queue, and keep music playing while you browse.
 sidebar:
   order: 7
 ---
@@ -46,10 +46,37 @@ The **⋯** button on any song, album or artist has:
 
 Shuffle mixes what's left in the queue and keeps the song that's playing; turning it off puts the queue back in order.
 
+<!-- since: v0.1.7 -->
+## Playlists
+
+Playlists are songs you put together in your own order. They're yours alone: everyone who signs in, and each [profile](/docs/household/profiles/), has their own. Devices at home that haven't signed in share one set for the household.
+
+The **Playlists** tab in a music library lists them, and the overview shows them too. Click **New playlist** to make an empty one, then add songs to it.
+
+![The Playlists tab, with a card to make a new one](../images/playlists.webp)
+
+To add to a playlist, pick **Add to playlist** in the **⋯** menu of any song, album or artist, then pick the playlist, or **New playlist** to make one with them on it. An album adds all its songs in order, and an artist adds every song they have. A song can be on a playlist more than once.
+
+![Picking a playlist to add an album to](../images/add-to-playlist.webp)
+
+A playlist's page has **Play** and **Shuffle**, **Rename** and **Delete playlist**. Drag songs by the handle at their left to change the order, or use **Move up** and **Move down** in a song's **⋯** menu. **Remove from playlist** takes a song off; it stays in your library. Deleting a playlist doesn't delete any music either.
+
+![A playlist's page with its songs](../images/playlist.webp)
+
+**Save as playlist** above the queue in the full player keeps what's playing and what's up next as a new playlist.
+
+Songs your profile can't see, such as in a library a kids profile doesn't have, don't show or play from a playlist.
+
+<!-- /since -->
+
 ## On the phone apps
 
 The [phone apps](/docs/apps/phone-and-tv/) have the same library, album and artist pages, a player above the tabs, and a full player with the queue. Music keeps playing when you lock the phone or switch apps, with the song on the lock screen, and downloaded albums play offline.
 
+<!-- /since -->
+
+<!-- since: v0.1.7 -->
+From version 1.0.19 the phone apps have playlists too: the **Playlists** tab, **Add to playlist** in the menu of any song, album or artist (tap **⋯** or hold a song), and **Save as playlist** above the queue. On a playlist's page, **⋯** renames or deletes it, and each song's menu moves it up or down or removes it.
 <!-- /since -->
 
 <!-- since: v0.1.3 -->
@@ -69,9 +96,21 @@ The visualizer moves in time with the music on every device, even a TV, because 
 
 Apple TV and Android TV have the same music library as the browser, with **Overview**, **Artists**, **Albums** and **Songs** along the top and **Shuffle all**. An album or artist page has **Play** and **Shuffle**, and selecting a song plays the album from there. Hold select on a song for **Play next**, **Add to queue**, **Go to album** and **Go to artist**.
 
+<!-- since: v0.1.7 -->
+From version 1.0.19 a **Playlists** tab lists your playlists, and a playlist's page has **Play**, **Shuffle** and its songs. Make and change playlists on the web or a phone; the TV plays them.
+
+![A playlist on a TV](../images/app-tv-playlist.webp)
+<!-- /since -->
+
 The music keeps playing while you browse. What's playing shows at the top of the screen, next to the server's name; select it for the player. The player has the cover, how far along the song is, shuffle, back, play, next and repeat, and the queue in a row below it, where selecting a song plays it now. The play/pause button on the remote plays and pauses the music from any screen.
 
 ![The music player on a TV](../images/app-tv-music.webp)
+
+<!-- since: v0.1.7 -->
+From version 1.0.19 you can scrub through the song with the remote. Press up from the player's buttons to reach the bar under the song's name; a dot shows on it. Then left and right go back or ahead 10 seconds (hold to go faster), and a swipe on the Siri Remote does the same. Presses in a row add up: the time under the bar shows where you'll land, and the song moves there once you stop pressing. Select on the bar plays or pauses, and down goes back to the buttons. The rewind and fast forward buttons on remotes that have them skip 10 seconds from anywhere in the player. This works on Apple TV, Android TV, and Samsung and LG TVs.
+
+![Scrubbing through a song on a TV](../images/app-tv-music-scrub.webp)
+<!-- /since -->
 
 **Visualizer** in the player opens the visualizer; left and right on the remote change its look, and play/pause or select pauses.
 
@@ -106,6 +145,50 @@ Online lookups go by the album and artist names in your tags. An edition note li
 
 <!-- /since -->
 
+<!-- since: v0.1.7 -->
+### How albums are matched online
+
+Files tagged with MusicBrainz Picard, Lidarr or beets carry the MusicBrainz id of their album, and Matinee uses it to find the exact album, and the cover of the very release you have. That's the surest way to get every cover: tag your music with one of them, or turn on tag writing in Lidarr.
+
+Without ids, Matinee goes by the names in your tags and copes with messy ones:
+
+- Notes about the copy, like "(CD 2)", "- Disk 1", "(SAMPLE)", "(Promo)" or "[FLAC]", come off the title.
+- The artist's name comes off the start or end, so "Perfecto Fluoro- Oakenfold" is found as "Perfecto Fluoro".
+- A title a letter or two off, like "Fluro", is matched to the artist's album that's closest to it, and to one with a longer title only when the year agrees.
+- A DJ mix or compilation filed under its DJ, like "Cream Anthems 2001", is matched to the Various Artists album of that name and year.
+
+Albums still without a cover are looked up again every month, as the online databases keep growing. Updating to this version looks again for every album without a cover, and reads the ids from the files of albums scanned before, once, on the next scan.
+
+<!-- /since -->
+
+<!-- since: v0.1.7 -->
+### Picking a cover yourself
+
+When an album has the wrong cover, or none, an admin can pick one. In the browser, click the cover on the album's page (**Change cover** shows when you point at it). In the phone apps, tap or long-press the cover.
+
+![Picking a cover for an album](../images/cover-picker.webp)
+
+Matinee looks online for covers to pick from, with no key needed:
+
+- **Cover Art Archive:** the front cover of each edition MusicBrainz knows about, with its date, country and format, so you can pick the CD, the vinyl or the deluxe edition.
+- **Apple and Deezer:** their store covers for albums with that name by that artist.
+
+Click one to use it. If none is right, paste the address of an image you found online and click **Use**, or, in the browser, **Upload an image** from your computer (JPEG, PNG, WebP or GIF, up to 20 MB).
+
+The server keeps the cover you pick, so it stays through scans, restarts and updates, even when a `cover.jpg` turns up in the album's folder later. To undo it, open the picker again and click **Use the automatic cover**: Matinee looks in the folder, the files and online again, as it does for any album.
+
+TVs show the cover you picked, but picking one happens in the browser or a phone app.
+
+<!-- /since -->
+
 ## Tags
 
 Artist, album, track number and title come from the tags in your files, so tag them with your favorite tagger before adding them. Without tags, Matinee uses the [folder and file names](/docs/getting-started/organizing-media/#music).
+
+<!-- since: v0.1.7 -->
+### Soundtracks and compilations
+
+An album is filed under its album artist tag. A soundtrack or compilation whose files don't have one still shows as one album: songs in the same folder with the same album name stay together. The album goes under the artist the folder is named for, such as `Some Composer/Some Film (2001)`, when that artist has songs on it, and under **Various Artists** otherwise. Each song keeps its own artist, which the album page shows under the song's title, and the player names while it plays.
+
+Albums split up by an older version join up again on the next scan of the library, with nothing to do on your part.
+<!-- /since -->

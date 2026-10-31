@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"errors"
 	"strings"
+	"time"
 	"unicode"
 
 	"github.com/yeixio/matinee/internal/probe"
@@ -35,13 +36,19 @@ type Item struct {
 	Overview    string   `json:"overview,omitempty"`
 	Rating      *float64 `json:"rating,omitempty"`
 	HasPoster   bool     `json:"hasPoster"`
-	HasBackdrop bool     `json:"hasBackdrop"`
+	// PosterTag changes with a cover an admin picked, for clients to add
+	// to the image URL as ?v= so they don't show the old one from a cache.
+	PosterTag   string `json:"posterTag,omitempty"`
+	HasBackdrop bool   `json:"hasBackdrop"`
 	// For episodes: the show's title and season number, for cards outside the show's pages.
 	ShowTitle   string `json:"showTitle,omitempty"`
 	SeasonIndex *int   `json:"seasonIndex,omitempty"`
 	showID      int64
 	// For albums and tracks: who made it, and for tracks the album it's
 	// on (the album's id is ParentID), so a player can say what's playing.
+	// A track on a soundtrack or compilation names its own artist, with
+	// that artist's id only when the library has a page for them. The
+	// scanner sets Artist on a track only when it isn't the album's.
 	Artist   string `json:"artist,omitempty"`
 	ArtistID *int64 `json:"artistId,omitempty"`
 	Album    string `json:"album,omitempty"`
@@ -54,7 +61,12 @@ type Item struct {
 	Narrators   []string `json:"narrators,omitempty"`
 	Series      string   `json:"series,omitempty"`
 	SeriesIndex *float64 `json:"seriesIndex,omitempty"`
-	OnWatchList bool     `json:"onWatchList,omitempty"`
+	// For podcasts and their episodes: who makes the show, and for an
+	// episode the show's title (the show's id is ParentID) and the day it
+	// came out, as 2006-01-02.
+	Podcast     string `json:"podcast,omitempty"`
+	Released    string `json:"released,omitempty"`
+	OnWatchList bool   `json:"onWatchList,omitempty"`
 	// Genres of a movie or show, from its online match.
 	Genres []string `json:"genres,omitempty"`
 	// MediaTags sums up what the background analysis found, such as 4k,
@@ -111,12 +123,18 @@ const itemCols = `
 	COALESCE(i.genres, ''),
 	CASE WHEN i.kind = 'episode' THEN (SELECT se.parent_id FROM items se WHERE se.id = i.parent_id) END,
 	COALESCE(i.facts, ''), COALESCE(i.plugin_data, ''),
-	CASE WHEN i.kind IN ('album', 'book') THEN (SELECT ar.title FROM items ar WHERE ar.id = i.parent_id)
+	CASE WHEN i.kind = 'podcast' THEN (SELECT pc.author FROM podcasts pc WHERE pc.item_id = i.id)
+		WHEN i.kind = 'podcastEpisode' THEN (SELECT pc.author FROM podcasts pc WHERE pc.item_id = i.parent_id)
+		WHEN i.kind IN ('album', 'book') THEN (SELECT ar.title FROM items ar WHERE ar.id = i.parent_id)
+		WHEN i.track_artist IS NOT NULL THEN i.track_artist
 		WHEN i.kind IN ('track', 'part') THEN (SELECT ar.title FROM items al JOIN items ar ON ar.id = al.parent_id WHERE al.id = i.parent_id) END,
 	CASE WHEN i.kind IN ('album', 'book') THEN i.parent_id
+		WHEN i.track_artist IS NOT NULL THEN (SELECT MIN(ar.id) FROM items ar
+			WHERE ar.library_id = i.library_id AND ar.kind = 'artist' AND ar.parent_id IS NULL AND ar.title = i.track_artist)
 		WHEN i.kind IN ('track', 'part') THEN (SELECT al.parent_id FROM items al WHERE al.id = i.parent_id) END,
-	CASE WHEN i.kind IN ('track', 'part') THEN (SELECT al.title FROM items al WHERE al.id = i.parent_id) END,
-	COALESCE(i.narrators, ''), COALESCE(i.series, ''), i.series_index`
+	CASE WHEN i.kind IN ('track', 'part', 'podcastEpisode') THEN (SELECT al.title FROM items al WHERE al.id = i.parent_id) END,
+	COALESCE(i.narrators, ''), COALESCE(i.series, ''), i.series_index,
+	CASE WHEN i.kind = 'podcastEpisode' THEN COALESCE(i.released, '') ELSE '' END`
 
 const itemFrom = ` FROM (SELECT CAST(? AS BIGINT) AS id) me CROSS JOIN items i LEFT JOIN progress p ON p.item_id = i.id AND p.user_id = me.id`
 
@@ -141,7 +159,7 @@ func scanItem(r scanner) (Item, error) {
 		&it.ChildCount, &it.PositionMs, &it.Played,
 		&it.Overview, &rating, &it.Poster, &it.Backdrop, &tmdb, &it.MetaAt,
 		&showTitle, &seasonIdx, &it.OnWatchList, &tags, &genres, &showID, &facts, &data,
-		&artist, &artistID, &album, &narrators, &it.Series, &seriesIdx)
+		&artist, &artistID, &album, &narrators, &it.Series, &seriesIdx, &it.Released)
 	if err != nil {
 		return it, err
 	}
@@ -160,12 +178,15 @@ func scanItem(r scanner) (Item, error) {
 		it.TMDBID = &tmdb.Int64
 	}
 	it.ShowTitle, it.SeasonIndex, it.showID = showTitle.String, intPtr(seasonIdx), showID.Int64
-	if it.Kind == "book" || it.Kind == "part" {
+	switch it.Kind {
+	case "podcast", "podcastEpisode":
+		it.Author, it.Podcast = artist.String, album.String
+	case "book", "part":
 		it.Author, it.Book = artist.String, album.String
 		if artistID.Valid {
 			it.AuthorID = &artistID.Int64
 		}
-	} else {
+	default:
 		it.Artist, it.Album = artist.String, album.String
 		if artistID.Valid {
 			it.ArtistID = &artistID.Int64
@@ -179,6 +200,7 @@ func scanItem(r scanner) (Item, error) {
 	it.Playable = it.Path != ""
 	it.MediaTags = splitTags(tags)
 	it.HasPoster, it.HasBackdrop = it.Poster != "", it.Backdrop != ""
+	it.PosterTag = chosenTag(it.Poster)
 	if facts != "" {
 		json.Unmarshal([]byte(facts), &it.Facts)
 	}
@@ -261,11 +283,13 @@ func (s *Store) TopLevel(ctx context.Context, userID, libraryID int64) ([]Item, 
 }
 
 // Children lists seasons of a show, episodes of a season, albums of an
-// artist, tracks of an album, books of an author or parts of a book.
+// artist, tracks of an album, books of an author, parts of a book or
+// episodes of a podcast.
 func (s *Store) Children(ctx context.Context, userID, parentID int64) ([]Item, error) {
 	// An author's books go series by series, each in reading order.
+	// A podcast's episodes go newest first.
 	items, err := s.queryItems(ctx, "i.parent_id = ?",
-		"COALESCE(i.disc_number, 0), COALESCE(i.index_number, 0), COALESCE(i.series, ''), COALESCE(i.series_index, 0), i.sort_title", userID, parentID)
+		"COALESCE((SELECT -pe.published FROM podcast_episodes pe WHERE pe.item_id = i.id), 0), COALESCE(i.disc_number, 0), COALESCE(i.index_number, 0), COALESCE(i.series, ''), COALESCE(i.series_index, 0), i.sort_title", userID, parentID)
 	if err != nil {
 		return nil, err
 	}
@@ -307,11 +331,11 @@ func (s *Store) Search(ctx context.Context, userID int64, q string, limit int) (
 	}
 	if s.db.dialect == postgres {
 		return s.queryItems(ctx,
-			"(to_tsvector('simple', i.title) @@ to_tsquery('simple', ?) OR "+translated+") AND i.kind NOT IN ('season', 'part')",
+			"(to_tsvector('simple', i.title) @@ to_tsquery('simple', ?) OR "+translated+") AND i.kind NOT IN ('season', 'part', 'podcastEpisode')",
 			"i.sort_title LIMIT ?", append(append([]any{userID, strings.Join(words, ":* & ") + ":*"}, args...), limit)...)
 	}
 	return s.queryItems(ctx,
-		"(i.id IN (SELECT rowid FROM items_fts WHERE items_fts MATCH ?) OR "+translated+") AND i.kind NOT IN ('season', 'part')",
+		"(i.id IN (SELECT rowid FROM items_fts WHERE items_fts MATCH ?) OR "+translated+") AND i.kind NOT IN ('season', 'part', 'podcastEpisode')",
 		"i.sort_title LIMIT ?", append(append([]any{userID, `"` + strings.Join(words, `"* "`) + `"*`}, args...), limit)...)
 }
 
@@ -392,8 +416,8 @@ func (s *Store) UpsertFile(ctx context.Context, it Item) (int64, error) {
 	err := s.db.QueryRowContext(ctx, `
 		INSERT INTO items (library_id, parent_id, kind, title, sort_title, year, index_number, disc_number,
 			path, size, mtime, duration_ms, container, video_codec, audio_codec, width, height, poster, backdrop, subtitle_streams,
-			facts, plugin_data, chapters, added_at)
-		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			facts, plugin_data, chapters, track_artist, added_at)
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 		ON CONFLICT (path) DO UPDATE SET
 			library_id = excluded.library_id, parent_id = excluded.parent_id, kind = excluded.kind,
 			title = excluded.title, sort_title = excluded.sort_title, year = excluded.year,
@@ -402,13 +426,14 @@ func (s *Store) UpsertFile(ctx context.Context, it Item) (int64, error) {
 			container = excluded.container, video_codec = excluded.video_codec, audio_codec = excluded.audio_codec,
 			width = excluded.width, height = excluded.height, subtitle_streams = excluded.subtitle_streams,
 			facts = excluded.facts, plugin_data = excluded.plugin_data, chapters = excluded.chapters,
+			track_artist = excluded.track_artist,
 			media_info = NULL, media_tags = NULL, -- the file changed; analyzed again soon
 			poster = COALESCE(excluded.poster, items.poster), backdrop = COALESCE(excluded.backdrop, items.backdrop)
 		RETURNING id`,
 		it.LibraryID, it.ParentID, it.Kind, it.Title, SortTitle(it.Title), it.Year, it.IndexNumber, it.DiscNumber,
 		it.Path, it.Size, it.Mtime, it.DurationMs, nullStr(it.Container), nullStr(it.VideoCodec), nullStr(it.AudioCodec),
 		it.Width, it.Height, nullStr(it.Poster), nullStr(it.Backdrop), nullStr(it.SubtitleStreams),
-		nullJSON(it.Facts), nullStr(string(it.PluginData)), nullJSON(it.Chapters), now()).Scan(&id)
+		nullJSON(it.Facts), nullStr(string(it.PluginData)), nullJSON(it.Chapters), trackArtist(it), now()).Scan(&id)
 	return id, err
 }
 
@@ -444,16 +469,22 @@ func (s *Store) SetSubtitleStreams(ctx context.Context, id int64, streams string
 }
 
 // SetArt records artwork found on disk. Local art wins over anything fetched
-// online, since a file next to the media is the user's own choice.
+// online, since a file next to the media is the user's own choice, and a
+// cover an admin picked wins over both.
 func (s *Store) SetArt(ctx context.Context, id int64, poster, backdrop string) error {
 	_, err := s.db.ExecContext(ctx, `
-		UPDATE items SET poster = COALESCE(?, poster), backdrop = COALESCE(?, backdrop) WHERE id = ?`,
+		UPDATE items SET poster = CASE WHEN poster LIKE 'chosen:%' THEN poster ELSE COALESCE(?, poster) END,
+			backdrop = COALESCE(?, backdrop) WHERE id = ?`,
 		nullStr(poster), nullStr(backdrop), id)
 	return err
 }
 
+// artRetry is how long an album or book without a cover waits before it
+// is looked up online again.
+const artRetry = 30 * 24 * time.Hour
+
 // NeedsMetadata lists a library's items of the given kinds not yet looked
-// up online, shows before seasons and episodes so those can use the show's
+// up online, or albums and books without a cover looked up over artRetry ago, shows before seasons and episodes so those can use the show's
 // match, and items without artwork before those looked up again.
 func (s *Store) NeedsMetadata(ctx context.Context, libraryID int64, kinds []string) ([]Item, error) {
 	if len(kinds) == 0 {
@@ -464,7 +495,10 @@ func (s *Store) NeedsMetadata(ctx context.Context, libraryID int64, kinds []stri
 	for _, k := range kinds {
 		args = append(args, k)
 	}
-	return s.queryItems(ctx, "i.library_id = ? AND i.meta_at IS NULL AND i.kind IN ("+in+")",
+	// Albums and books still without a cover are looked up again now and
+	// then, since the online databases keep growing.
+	args = append(args, now()-int64(artRetry/time.Second))
+	return s.queryItems(ctx, "i.library_id = ? AND i.kind IN ("+in+") AND (i.meta_at IS NULL OR i.poster IS NULL AND i.kind IN ('album', 'book') AND i.meta_at < ?)",
 		"CASE i.kind WHEN 'show' THEN 0 WHEN 'season' THEN 1 ELSE 2 END, CASE WHEN i.poster IS NULL THEN 0 ELSE 1 END, i.id", args...)
 }
 

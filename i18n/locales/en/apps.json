@@ -434,7 +434,8 @@
     "listenNow": "Listen now",
     "music": "Music",
     "audiobooks": "Audiobooks",
-    "signIn": "Open Matinee on your phone and sign in to listen in the car."
+    "signIn": "Open Matinee on your phone and sign in to listen in the car.",
+    "loading": "Loading…"
   },
   "watch": {
     "tileName": "Now playing",
@@ -489,5 +490,25 @@
     "back15": "Back 15 seconds",
     "ahead30": "Ahead 30 seconds",
     "storageUsed": "{{size}} on this watch"
+  },
+  "tvUnlock": {
+    "title": "Unlock Matinee",
+    "body": "One payment of {{price}} unlocks Matinee for good on every Samsung and LG TV that uses this server.",
+    "scan": "Scan the code with your phone, or go to {{url}}",
+    "trialUntil": "Free trial until {{date}}.",
+    "trialOver": "The free trial is over. Unlock Matinee to keep watching and listening.",
+    "waiting": "This screen closes by itself once you've paid.",
+    "unlocked": "Matinee is unlocked on this TV.",
+    "updateServer": "To unlock Matinee here, update your Matinee server first."
+  },
+  "cover": {
+    "change": "Change cover",
+    "title": "Pick a cover",
+    "looking": "Looking for covers online…",
+    "none": "No covers found online. Paste an image's address below.",
+    "addressPlaceholder": "Paste an image's address",
+    "use": "Use",
+    "reset": "Use the automatic cover",
+    "chosenNote": "This cover was picked by hand, so scans keep it."
   }
 }

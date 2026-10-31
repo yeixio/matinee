@@ -592,14 +592,17 @@
         "movies": "Filem",
         "tv": "Rancangan TV",
         "music": "Muzik",
-        "audiobooks": "Buku audio"
+        "audiobooks": "Buku audio",
+        "podcasts": "Podcast"
       },
       "type": "Jenis",
       "folders": "Folder",
       "up": "Naik satu folder",
       "added": "Ditambah",
       "useFolder": "Gunakan folder ini",
-      "noSubfolders": "Tiada subfolder"
+      "noSubfolders": "Tiada subfolder",
+      "podcastsNoFolders": "Podcast tidak memerlukan folder. Tambah rancangan dari pustaka setelah ia dicipta.",
+      "podcastsChecked": "Episod baharu disemak setiap jam"
     },
     "people": {
       "title": "Orang",
@@ -721,6 +724,16 @@
       "remove": "Buang kunci yang disimpan",
       "saved": "Disimpan. Matinee sedang melengkapkan poster dan butiran."
     },
+    "podcastIndex": {
+      "title": "Carian podcast",
+      "intro": "Carian podcast menggunakan Podcast Index, direktori yang bebas dan terbuka. Dapatkan kunci dan rahsia API percuma di <site>api.podcastindex.org</site>. Tanpanya, rancangan sentiasa boleh ditambah melalui alamat suapan.",
+      "using": "Menggunakan kunci yang berakhir dengan {{hint}}.",
+      "none": "Belum ada kunci, jadi rancangan ditambah melalui alamat suapan.",
+      "key": "Kunci API",
+      "secret": "Rahsia API",
+      "save": "Simpan kunci",
+      "remove": "Alih keluar kunci"
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Membolehkan apl terus menemui pelayan ini apabila alamat internet rumah anda berubah. Perkhidmatan ini hanya tahu alamatnya: video sentiasa terus dari pelayan ini ke apl.",
@@ -797,5 +810,19 @@
   },
   "remote": {
     "controlledBy": "Dikawal dari {{name}}"
+  },
+  "cover": {
+    "change": "Tukar kulit",
+    "title": "Kulit untuk {{title}}",
+    "looking": "Mencari kulit dalam talian…",
+    "none": "Tiada kulit ditemui dalam talian. Tampal alamat imej, atau muat naik satu.",
+    "pick": "Guna {{cover}}",
+    "address": "Alamat imej",
+    "addressPlaceholder": "Tampal alamat imej",
+    "use": "Guna",
+    "upload": "Muat naik imej",
+    "reset": "Guna kulit automatik",
+    "chosenNote": "Kulit ini dipilih secara manual, jadi imbasan mengekalkannya.",
+    "saving": "Menyimpan kulit…"
   }
 }
