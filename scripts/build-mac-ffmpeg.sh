@@ -11,6 +11,8 @@ FFMPEG_SHA256=${FFMPEG_SHA256:-}
 # x264's stable branch, pinned to a commit.
 X264_COMMIT=${X264_COMMIT:-}
 MACOS_MIN=13.0
+# Assembly files too, not only C, are built for this macOS.
+export MACOSX_DEPLOYMENT_TARGET=$MACOS_MIN
 
 out="$(mkdir -p "$1" && cd "$1" && pwd)"
 work="$(mktemp -d)"
@@ -57,7 +59,7 @@ for arch in arm64 x86_64; do
 	(cd "$src" && PKG_CONFIG_PATH="$prefix/lib/pkgconfig" ./configure \
 		--prefix="$prefix" --cc=clang --arch="$ffarch" --target-os=darwin ${cross[@]+"${cross[@]}"} \
 		--extra-cflags="$flags -I$prefix/include" --extra-ldflags="$flags -L$prefix/lib" \
-		--pkg-config-flags=--static \
+		--pkg-config-flags=--static --extra-libs=-liconv \
 		--enable-gpl --enable-libx264 \
 		--disable-autodetect --enable-videotoolbox --enable-audiotoolbox \
 		--enable-zlib --enable-bzlib --enable-iconv --enable-securetransport \
