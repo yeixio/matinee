@@ -255,6 +255,8 @@ jobs:
     name: Windows (${{ matrix.arch }})
     needs: windows
     runs-on: ${{ matrix.runner }}
+    permissions:
+      contents: write
     strategy:
       fail-fast: false
       matrix:
@@ -280,3 +282,19 @@ jobs:
           name: windows-shots-${{ matrix.arch }}
           path: shots
           retention-days: 3
+      # The guide's Windows screenshots come from here (docs/guide/README.md).
+      # They're also kept on the windows-shots-<arch> branches, one commit
+      # each, where they can be fetched without an Actions token.
+      - name: Keep the screenshots on a windows-shots branch
+        if: ${{ always() && (github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository) }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -d shots || exit 0
+          cd shots
+          git init -q -b windows-shots
+          git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' add -A
+          git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -qm "Windows ${{ matrix.arch }} screenshots from ${GITHUB_SHA}"
+          git push -q --force "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:refs/heads/windows-shots-${{ matrix.arch }}"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
