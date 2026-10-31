@@ -810,5 +810,19 @@
   },
   "remote": {
     "controlledBy": "Dikawal dari {{name}}"
+  },
+  "cover": {
+    "change": "Tukar kulit",
+    "title": "Kulit untuk {{title}}",
+    "looking": "Mencari kulit dalam talian…",
+    "none": "Tiada kulit ditemui dalam talian. Tampal alamat imej, atau muat naik satu.",
+    "pick": "Guna {{cover}}",
+    "address": "Alamat imej",
+    "addressPlaceholder": "Tampal alamat imej",
+    "use": "Guna",
+    "upload": "Muat naik imej",
+    "reset": "Guna kulit automatik",
+    "chosenNote": "Kulit ini dipilih secara manual, jadi imbasan mengekalkannya.",
+    "saving": "Menyimpan kulit…"
   }
 }

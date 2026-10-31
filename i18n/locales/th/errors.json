@@ -163,5 +163,10 @@
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "อ่านฟีดไม่ได้ ตรวจสอบที่อยู่แล้วลองอีกครั้ง",
   "the_feed_couldnt_be_read_right_now": "ขณะนี้อ่านฟีดไม่ได้",
   "the_file_is_too_big": "ไฟล์ใหญ่เกินไป",
-  "this_library_already_has_a_show_with_that_name": "คลังนี้มีรายการชื่อนี้อยู่แล้ว"
+  "this_library_already_has_a_show_with_that_name": "คลังนี้มีรายการชื่อนี้อยู่แล้ว",
+  "only_albums_and_books_have_covers_to_pick": "เลือกปกได้เฉพาะอัลบั้มและหนังสือ",
+  "that_isnt_a_jpeg_png_webp_or_gif_image": "นั่นไม่ใช่รูปภาพ JPEG, PNG, WebP หรือ GIF",
+  "the_covers_address_must_start_with_http_or_https": "ที่อยู่ของปกต้องขึ้นต้นด้วย http:// หรือ https://",
+  "the_image_is_too_big_20_mb_at_most": "รูปภาพใหญ่เกินไป (ไม่เกิน 20 MB)",
+  "couldnt_get_an_image_from_that_address": "ดึงรูปภาพจากที่อยู่นั้นไม่ได้"
 }

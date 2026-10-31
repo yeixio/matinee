@@ -155,6 +155,26 @@ Albums still without a cover are looked up again every month, as the online data
 
 <!-- /since -->
 
+<!-- since: v0.1.7 -->
+### Picking a cover yourself
+
+When an album has the wrong cover, or none, an admin can pick one. In the browser, click the cover on the album's page (**Change cover** shows when you point at it). In the phone apps, tap or long-press the cover.
+
+![Picking a cover for an album](../images/cover-picker.webp)
+
+Matinee looks online for covers to pick from, with no key needed:
+
+- **Cover Art Archive:** the front cover of each edition MusicBrainz knows about, with its date, country and format, so you can pick the CD, the vinyl or the deluxe edition.
+- **Apple and Deezer:** their store covers for albums with that name by that artist.
+
+Click one to use it. If none is right, paste the address of an image you found online and click **Use**, or, in the browser, **Upload an image** from your computer (JPEG, PNG, WebP or GIF, up to 20 MB).
+
+The server keeps the cover you pick, so it stays through scans, restarts and updates, even when a `cover.jpg` turns up in the album's folder later. To undo it, open the picker again and click **Use the automatic cover**: Matinee looks in the folder, the files and online again, as it does for any album.
+
+TVs show the cover you picked, but picking one happens in the browser or a phone app.
+
+<!-- /since -->
+
 ## Tags
 
 Artist, album, track number and title come from the tags in your files, so tag them with your favorite tagger before adding them. Without tags, Matinee uses the [folder and file names](/docs/getting-started/organizing-media/#music).

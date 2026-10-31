@@ -818,5 +818,19 @@
   },
   "remote": {
     "controlledBy": "Contrôlé depuis {{name}}"
+  },
+  "cover": {
+    "change": "Changer la pochette",
+    "title": "Pochette de {{title}}",
+    "looking": "Recherche de pochettes en ligne…",
+    "none": "Aucune pochette trouvée en ligne. Collez l'adresse d'une image ou importez-en une.",
+    "pick": "Utiliser {{cover}}",
+    "address": "Adresse de l'image",
+    "addressPlaceholder": "Collez l'adresse d'une image",
+    "use": "Utiliser",
+    "upload": "Importer une image",
+    "reset": "Utiliser la pochette automatique",
+    "chosenNote": "Cette pochette a été choisie à la main, les analyses la conservent donc.",
+    "saving": "Enregistrement de la pochette…"
   }
 }

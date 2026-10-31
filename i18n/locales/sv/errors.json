@@ -163,5 +163,10 @@
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "flödet kunde inte läsas. Kontrollera adressen och försök igen.",
   "the_feed_couldnt_be_read_right_now": "flödet kan inte läsas just nu",
   "the_file_is_too_big": "filen är för stor",
-  "this_library_already_has_a_show_with_that_name": "det här biblioteket har redan ett program med det namnet"
+  "this_library_already_has_a_show_with_that_name": "det här biblioteket har redan ett program med det namnet",
+  "only_albums_and_books_have_covers_to_pick": "bara album och böcker har omslag att välja",
+  "that_isnt_a_jpeg_png_webp_or_gif_image": "det är ingen JPEG-, PNG-, WebP- eller GIF-bild",
+  "the_covers_address_must_start_with_http_or_https": "omslagets adress måste börja med http:// eller https://",
+  "the_image_is_too_big_20_mb_at_most": "bilden är för stor (högst 20 MB)",
+  "couldnt_get_an_image_from_that_address": "kunde inte hämta någon bild från den adressen"
 }

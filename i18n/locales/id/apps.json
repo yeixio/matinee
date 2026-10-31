@@ -493,5 +493,15 @@
     "waiting": "Layar ini akan tertutup sendiri setelah Anda membayar.",
     "unlocked": "Matinee sudah terbuka di TV ini.",
     "updateServer": "Untuk membuka Matinee di sini, perbarui server Matinee Anda terlebih dahulu."
+  },
+  "cover": {
+    "change": "Ganti sampul",
+    "title": "Pilih sampul",
+    "looking": "Mencari sampul secara online…",
+    "none": "Tidak ada sampul yang ditemukan online. Tempel alamat gambar di bawah.",
+    "addressPlaceholder": "Tempel alamat gambar",
+    "use": "Gunakan",
+    "reset": "Gunakan sampul otomatis",
+    "chosenNote": "Sampul ini dipilih secara manual, jadi pemindaian tetap mempertahankannya."
   }
 }

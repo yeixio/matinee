@@ -40,7 +40,7 @@ export function Artwork({
       )}
       {has && !failed && (
         <img
-          src={imageUrl(item.id, src)}
+          src={imageUrl(item.id, src, src === 'poster' ? item.posterTag : undefined)}
           alt=""
           loading="lazy"
           decoding="async"

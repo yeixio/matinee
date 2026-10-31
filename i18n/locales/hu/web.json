@@ -814,5 +814,19 @@
   },
   "remote": {
     "controlledBy": "Vezérelve innen: {{name}}"
+  },
+  "cover": {
+    "change": "Borító módosítása",
+    "title": "Borító: {{title}}",
+    "looking": "Borítók keresése az interneten…",
+    "none": "Nem található borító az interneten. Illessze be egy kép címét, vagy töltsön fel egyet.",
+    "pick": "{{cover}} használata",
+    "address": "Kép címe",
+    "addressPlaceholder": "Illessze be egy kép címét",
+    "use": "Használat",
+    "upload": "Kép feltöltése",
+    "reset": "Automatikus borító használata",
+    "chosenNote": "Ezt a borítót kézzel választották, ezért a vizsgálatok megtartják.",
+    "saving": "Borító mentése…"
   }
 }

@@ -500,5 +500,15 @@
     "waiting": "Ez a képernyő magától bezárul, amint fizettél.",
     "unlocked": "A Matinee fel van oldva ezen a tévén.",
     "updateServer": "Ahhoz, hogy itt feloldd a Matinee-t, előbb frissítsd a Matinee-szervered."
+  },
+  "cover": {
+    "change": "Borító módosítása",
+    "title": "Válasszon borítót",
+    "looking": "Borítók keresése az interneten…",
+    "none": "Nem található borító az interneten. Illessze be lent egy kép címét.",
+    "addressPlaceholder": "Illessze be egy kép címét",
+    "use": "Használat",
+    "reset": "Automatikus borító használata",
+    "chosenNote": "Ezt a borítót kézzel választották, ezért a vizsgálatok megtartják."
   }
 }

@@ -500,5 +500,15 @@
     "waiting": "Denne skærm lukker af sig selv, når du har betalt.",
     "unlocked": "Matinee er låst op på dette tv.",
     "updateServer": "Opdater din Matinee-server først for at låse Matinee op her."
+  },
+  "cover": {
+    "change": "Skift cover",
+    "title": "Vælg et cover",
+    "looking": "Leder efter covers på nettet …",
+    "none": "Der blev ikke fundet nogen covers på nettet. Indsæt adressen på et billede nedenfor.",
+    "addressPlaceholder": "Indsæt adressen på et billede",
+    "use": "Brug",
+    "reset": "Brug det automatiske cover",
+    "chosenNote": "Dette cover er valgt i hånden, så scanninger beholder det."
   }
 }

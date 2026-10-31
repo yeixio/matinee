@@ -163,5 +163,10 @@
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "फ़ीड पढ़ा नहीं जा सका। पता जाँचें और फिर कोशिश करें।",
   "the_feed_couldnt_be_read_right_now": "फ़ीड अभी पढ़ा नहीं जा सकता",
   "the_file_is_too_big": "फ़ाइल बहुत बड़ी है",
-  "this_library_already_has_a_show_with_that_name": "इस लाइब्रेरी में उस नाम का शो पहले से है"
+  "this_library_already_has_a_show_with_that_name": "इस लाइब्रेरी में उस नाम का शो पहले से है",
+  "only_albums_and_books_have_covers_to_pick": "सिर्फ़ एल्बम और किताबों के कवर चुने जा सकते हैं",
+  "that_isnt_a_jpeg_png_webp_or_gif_image": "यह JPEG, PNG, WebP या GIF इमेज नहीं है",
+  "the_covers_address_must_start_with_http_or_https": "कवर का पता http:// या https:// से शुरू होना चाहिए",
+  "the_image_is_too_big_20_mb_at_most": "इमेज बहुत बड़ी है (ज़्यादा से ज़्यादा 20 MB)",
+  "couldnt_get_an_image_from_that_address": "उस पते से इमेज नहीं मिल सकी"
 }

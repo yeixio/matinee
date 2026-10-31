@@ -814,5 +814,19 @@
   },
   "remote": {
     "controlledBy": "Styret fra {{name}}"
+  },
+  "cover": {
+    "change": "Skift cover",
+    "title": "Cover til {{title}}",
+    "looking": "Leder efter covers på nettet …",
+    "none": "Der blev ikke fundet nogen covers på nettet. Indsæt adressen på et billede, eller upload et.",
+    "pick": "Brug {{cover}}",
+    "address": "Billedadresse",
+    "addressPlaceholder": "Indsæt adressen på et billede",
+    "use": "Brug",
+    "upload": "Upload et billede",
+    "reset": "Brug det automatiske cover",
+    "chosenNote": "Dette cover er valgt i hånden, så scanninger beholder det.",
+    "saving": "Gemmer coveret …"
   }
 }

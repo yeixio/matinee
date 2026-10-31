@@ -810,5 +810,19 @@
   },
   "remote": {
     "controlledBy": "{{name}}에서 제어함"
+  },
+  "cover": {
+    "change": "커버 변경",
+    "title": "{{title}} 커버",
+    "looking": "온라인에서 커버를 찾는 중…",
+    "none": "온라인에서 커버를 찾지 못했습니다. 이미지 주소를 붙여 넣거나 이미지를 업로드하세요.",
+    "pick": "{{cover}} 사용",
+    "address": "이미지 주소",
+    "addressPlaceholder": "이미지 주소 붙여 넣기",
+    "use": "사용",
+    "upload": "이미지 업로드",
+    "reset": "자동 커버 사용",
+    "chosenNote": "이 커버는 직접 고른 것이라 스캔해도 유지됩니다.",
+    "saving": "커버 저장 중…"
   }
 }

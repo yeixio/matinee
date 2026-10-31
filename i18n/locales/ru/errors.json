@@ -163,5 +163,10 @@
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "не удалось прочитать ленту. Проверьте адрес и попробуйте снова.",
   "the_feed_couldnt_be_read_right_now": "ленту сейчас не удаётся прочитать",
   "the_file_is_too_big": "файл слишком большой",
-  "this_library_already_has_a_show_with_that_name": "в этой медиатеке уже есть шоу с таким названием"
+  "this_library_already_has_a_show_with_that_name": "в этой медиатеке уже есть шоу с таким названием",
+  "only_albums_and_books_have_covers_to_pick": "обложку можно выбрать только для альбомов и книг",
+  "that_isnt_a_jpeg_png_webp_or_gif_image": "это не изображение JPEG, PNG, WebP или GIF",
+  "the_covers_address_must_start_with_http_or_https": "адрес обложки должен начинаться с http:// или https://",
+  "the_image_is_too_big_20_mb_at_most": "изображение слишком большое (не больше 20 МБ)",
+  "couldnt_get_an_image_from_that_address": "не удалось получить изображение по этому адресу"
 }

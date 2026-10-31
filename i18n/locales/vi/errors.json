@@ -163,5 +163,10 @@
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "không đọc được nguồn cấp. Hãy kiểm tra địa chỉ rồi thử lại.",
   "the_feed_couldnt_be_read_right_now": "hiện không đọc được nguồn cấp",
   "the_file_is_too_big": "tệp quá lớn",
-  "this_library_already_has_a_show_with_that_name": "thư viện này đã có chương trình cùng tên"
+  "this_library_already_has_a_show_with_that_name": "thư viện này đã có chương trình cùng tên",
+  "only_albums_and_books_have_covers_to_pick": "chỉ album và sách mới có ảnh bìa để chọn",
+  "that_isnt_a_jpeg_png_webp_or_gif_image": "đó không phải ảnh JPEG, PNG, WebP hay GIF",
+  "the_covers_address_must_start_with_http_or_https": "địa chỉ ảnh bìa phải bắt đầu bằng http:// hoặc https://",
+  "the_image_is_too_big_20_mb_at_most": "ảnh quá lớn (tối đa 20 MB)",
+  "couldnt_get_an_image_from_that_address": "không lấy được hình ảnh từ địa chỉ đó"
 }

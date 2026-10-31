@@ -822,5 +822,19 @@
   },
   "remote": {
     "controlledBy": "Sterowane z {{name}}"
+  },
+  "cover": {
+    "change": "Zmień okładkę",
+    "title": "Okładka: {{title}}",
+    "looking": "Szukanie okładek w internecie…",
+    "none": "Nie znaleziono okładek w internecie. Wklej adres obrazu albo prześlij własny.",
+    "pick": "Użyj: {{cover}}",
+    "address": "Adres obrazu",
+    "addressPlaceholder": "Wklej adres obrazu",
+    "use": "Użyj",
+    "upload": "Prześlij obraz",
+    "reset": "Użyj automatycznej okładki",
+    "chosenNote": "Ta okładka została wybrana ręcznie, więc skanowanie jej nie zmienia.",
+    "saving": "Zapisywanie okładki…"
   }
 }

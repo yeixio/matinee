@@ -810,5 +810,19 @@
   },
   "remote": {
     "controlledBy": "Dikendalikan dari {{name}}"
+  },
+  "cover": {
+    "change": "Ganti sampul",
+    "title": "Sampul untuk {{title}}",
+    "looking": "Mencari sampul secara online…",
+    "none": "Tidak ada sampul yang ditemukan online. Tempel alamat gambar, atau unggah gambar.",
+    "pick": "Gunakan {{cover}}",
+    "address": "Alamat gambar",
+    "addressPlaceholder": "Tempel alamat gambar",
+    "use": "Gunakan",
+    "upload": "Unggah gambar",
+    "reset": "Gunakan sampul otomatis",
+    "chosenNote": "Sampul ini dipilih secara manual, jadi pemindaian tetap mempertahankannya.",
+    "saving": "Menyimpan sampul…"
   }
 }

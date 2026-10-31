@@ -163,5 +163,10 @@
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "η ροή δεν διαβάστηκε. Ελέγξτε τη διεύθυνση και δοκιμάστε ξανά.",
   "the_feed_couldnt_be_read_right_now": "η ροή δεν μπορεί να διαβαστεί αυτή τη στιγμή",
   "the_file_is_too_big": "το αρχείο είναι πολύ μεγάλο",
-  "this_library_already_has_a_show_with_that_name": "αυτή η βιβλιοθήκη έχει ήδη εκπομπή με αυτό το όνομα"
+  "this_library_already_has_a_show_with_that_name": "αυτή η βιβλιοθήκη έχει ήδη εκπομπή με αυτό το όνομα",
+  "only_albums_and_books_have_covers_to_pick": "μόνο τα άλμπουμ και τα βιβλία έχουν εξώφυλλα για επιλογή",
+  "that_isnt_a_jpeg_png_webp_or_gif_image": "αυτή δεν είναι εικόνα JPEG, PNG, WebP ή GIF",
+  "the_covers_address_must_start_with_http_or_https": "η διεύθυνση του εξωφύλλου πρέπει να ξεκινά με http:// ή https://",
+  "the_image_is_too_big_20_mb_at_most": "η εικόνα είναι πολύ μεγάλη (έως 20 MB)",
+  "couldnt_get_an_image_from_that_address": "δεν ήταν δυνατή η λήψη εικόνας από αυτή τη διεύθυνση"
 }

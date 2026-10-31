@@ -810,5 +810,19 @@
   },
   "remote": {
     "controlledBy": "由 {{name}} 控制"
+  },
+  "cover": {
+    "change": "更换封面",
+    "title": "{{title}} 的封面",
+    "looking": "正在网上查找封面…",
+    "none": "网上没有找到封面。粘贴图片地址,或上传一张图片。",
+    "pick": "使用 {{cover}}",
+    "address": "图片地址",
+    "addressPlaceholder": "粘贴图片地址",
+    "use": "使用",
+    "upload": "上传图片",
+    "reset": "使用自动封面",
+    "chosenNote": "这个封面是手动选择的,扫描时会保留。",
+    "saving": "正在保存封面…"
   }
 }

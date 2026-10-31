@@ -413,6 +413,15 @@ var migrations = []string{
 		followed_at BIGINT NOT NULL, -- milliseconds
 		PRIMARY KEY (user_id, item_id)
 	)`,
+	// 67: covers an admin picked or uploaded for an album or book (see
+	// images.go), kept here so they outlive the image cache.
+	`CREATE TABLE item_images (
+		item_id      BIGINT PRIMARY KEY REFERENCES items(id) ON DELETE CASCADE,
+		data         BYTEA NOT NULL, -- a BLOB in SQLite
+		content_type TEXT NOT NULL,
+		source       TEXT NOT NULL DEFAULT '', -- where it came from: a URL, or "upload"
+		created_at   BIGINT NOT NULL
+	)`,
 }
 
 func now() int64 { return time.Now().Unix() }

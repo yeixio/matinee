@@ -163,5 +163,10 @@
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "le flux n’a pas pu être lu. Vérifiez l’adresse et réessayez.",
   "the_feed_couldnt_be_read_right_now": "le flux ne peut pas être lu pour le moment",
   "the_file_is_too_big": "le fichier est trop volumineux",
-  "this_library_already_has_a_show_with_that_name": "cette bibliothèque a déjà une émission de ce nom"
+  "this_library_already_has_a_show_with_that_name": "cette bibliothèque a déjà une émission de ce nom",
+  "only_albums_and_books_have_covers_to_pick": "seuls les albums et les livres ont des pochettes à choisir",
+  "that_isnt_a_jpeg_png_webp_or_gif_image": "ce n'est pas une image JPEG, PNG, WebP ou GIF",
+  "the_covers_address_must_start_with_http_or_https": "l'adresse de la pochette doit commencer par http:// ou https://",
+  "the_image_is_too_big_20_mb_at_most": "l'image est trop lourde (20 Mo au maximum)",
+  "couldnt_get_an_image_from_that_address": "impossible d'obtenir une image à cette adresse"
 }

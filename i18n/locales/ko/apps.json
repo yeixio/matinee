@@ -493,5 +493,15 @@
     "waiting": "결제가 완료되면 이 화면은 자동으로 닫힙니다.",
     "unlocked": "이 TV에서 Matinee 잠금이 해제되었습니다.",
     "updateServer": "여기서 Matinee 잠금을 해제하려면 먼저 Matinee 서버를 업데이트하세요."
+  },
+  "cover": {
+    "change": "커버 변경",
+    "title": "커버 선택",
+    "looking": "온라인에서 커버를 찾는 중…",
+    "none": "온라인에서 커버를 찾지 못했습니다. 아래에 이미지 주소를 붙여 넣으세요.",
+    "addressPlaceholder": "이미지 주소 붙여 넣기",
+    "use": "사용",
+    "reset": "자동 커버 사용",
+    "chosenNote": "이 커버는 직접 고른 것이라 스캔해도 유지됩니다."
   }
 }

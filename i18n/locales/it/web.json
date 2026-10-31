@@ -818,5 +818,19 @@
   },
   "remote": {
     "controlledBy": "Controllato da {{name}}"
+  },
+  "cover": {
+    "change": "Cambia copertina",
+    "title": "Copertina di {{title}}",
+    "looking": "Ricerca di copertine online…",
+    "none": "Nessuna copertina trovata online. Incolla l'indirizzo di un'immagine o caricane una.",
+    "pick": "Usa {{cover}}",
+    "address": "Indirizzo dell'immagine",
+    "addressPlaceholder": "Incolla l'indirizzo di un'immagine",
+    "use": "Usa",
+    "upload": "Carica un'immagine",
+    "reset": "Usa la copertina automatica",
+    "chosenNote": "Questa copertina è stata scelta a mano, quindi le scansioni la mantengono.",
+    "saving": "Salvataggio della copertina…"
   }
 }

@@ -810,5 +810,19 @@
   },
   "remote": {
     "controlledBy": "Được điều khiển từ {{name}}"
+  },
+  "cover": {
+    "change": "Đổi ảnh bìa",
+    "title": "Ảnh bìa cho {{title}}",
+    "looking": "Đang tìm ảnh bìa trên mạng…",
+    "none": "Không tìm thấy ảnh bìa nào trên mạng. Hãy dán địa chỉ một hình ảnh hoặc tải lên.",
+    "pick": "Dùng {{cover}}",
+    "address": "Địa chỉ hình ảnh",
+    "addressPlaceholder": "Dán địa chỉ một hình ảnh",
+    "use": "Dùng",
+    "upload": "Tải ảnh lên",
+    "reset": "Dùng ảnh bìa tự động",
+    "chosenNote": "Ảnh bìa này được chọn thủ công nên các lần quét sẽ giữ nguyên.",
+    "saving": "Đang lưu ảnh bìa…"
   }
 }

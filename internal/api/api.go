@@ -47,7 +47,9 @@ type Server struct {
 	Downloads    *download.Manager
 	Analyzer     *analyze.Analyzer // nil when media analysis is off for this server
 	Art          *artwork.Cache
-	Subtitles    *subtitle.Converter
+	// Covers finds covers for admins to pick from; nil offers none online.
+	Covers    CoverFinder
+	Subtitles *subtitle.Converter
 	// Levels works out songs' sound levels for the music visualizer; nil
 	// means the visualizer has nothing to draw from.
 	Levels    *spectrum.Analyzer
@@ -243,6 +245,9 @@ func (s *Server) routes() []route {
 		{"PUT /items/{id}/progress", reader, s.setProgress},
 		{"DELETE /continue-watching/{id}", reader, s.hideFromContinueWatching},
 		{"GET /items/{id}/image/{type}", reader, s.itemImage},
+		{"GET /items/{id}/covers", adminOnly, s.coverOptions},
+		{"PUT /items/{id}/cover", adminOnly, s.setCover},
+		{"DELETE /items/{id}/cover", adminOnly, s.resetCover},
 		{"GET /items/{id}/file", reader, s.directFile},
 		{"GET /items/{id}/subtitles/{track}", reader, s.subtitleFile},
 		{"GET /items/{id}/trailers", reader, s.listTrailers},
@@ -336,6 +341,9 @@ func (s *Server) routes() []route {
 
 func (s *Server) Handler() http.Handler {
 	mux := http.NewServeMux()
+	if s.Art != nil && s.Art.Chosen == nil {
+		s.Art.Chosen = s.chosenCover
+	}
 
 	// Kubernetes probes: alive means the process answers, ready means the
 	// database does too and the server isn't shutting down.

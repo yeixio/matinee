@@ -814,5 +814,19 @@
   },
   "remote": {
     "controlledBy": "Controlled from {{name}}"
+  },
+  "cover": {
+    "change": "Change cover",
+    "title": "Cover for {{title}}",
+    "looking": "Looking for covers online…",
+    "none": "No covers found online. Paste an image's address, or upload one.",
+    "pick": "Use {{cover}}",
+    "address": "Image address",
+    "addressPlaceholder": "Paste an image's address",
+    "use": "Use",
+    "upload": "Upload an image",
+    "reset": "Use the automatic cover",
+    "chosenNote": "This cover was picked by hand, so scans keep it.",
+    "saving": "Saving the cover…"
   }
 }

@@ -36,7 +36,10 @@ type Item struct {
 	Overview    string   `json:"overview,omitempty"`
 	Rating      *float64 `json:"rating,omitempty"`
 	HasPoster   bool     `json:"hasPoster"`
-	HasBackdrop bool     `json:"hasBackdrop"`
+	// PosterTag changes with a cover an admin picked, for clients to add
+	// to the image URL as ?v= so they don't show the old one from a cache.
+	PosterTag   string `json:"posterTag,omitempty"`
+	HasBackdrop bool   `json:"hasBackdrop"`
 	// For episodes: the show's title and season number, for cards outside the show's pages.
 	ShowTitle   string `json:"showTitle,omitempty"`
 	SeasonIndex *int   `json:"seasonIndex,omitempty"`
@@ -197,6 +200,7 @@ func scanItem(r scanner) (Item, error) {
 	it.Playable = it.Path != ""
 	it.MediaTags = splitTags(tags)
 	it.HasPoster, it.HasBackdrop = it.Poster != "", it.Backdrop != ""
+	it.PosterTag = chosenTag(it.Poster)
 	if facts != "" {
 		json.Unmarshal([]byte(facts), &it.Facts)
 	}
@@ -465,10 +469,12 @@ func (s *Store) SetSubtitleStreams(ctx context.Context, id int64, streams string
 }
 
 // SetArt records artwork found on disk. Local art wins over anything fetched
-// online, since a file next to the media is the user's own choice.
+// online, since a file next to the media is the user's own choice, and a
+// cover an admin picked wins over both.
 func (s *Store) SetArt(ctx context.Context, id int64, poster, backdrop string) error {
 	_, err := s.db.ExecContext(ctx, `
-		UPDATE items SET poster = COALESCE(?, poster), backdrop = COALESCE(?, backdrop) WHERE id = ?`,
+		UPDATE items SET poster = CASE WHEN poster LIKE 'chosen:%' THEN poster ELSE COALESCE(?, poster) END,
+			backdrop = COALESCE(?, backdrop) WHERE id = ?`,
 		nullStr(poster), nullStr(backdrop), id)
 	return err
 }

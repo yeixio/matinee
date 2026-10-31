@@ -1,11 +1,12 @@
 import { useQuery } from '@tanstack/react-query'
-import { Pause, Play, Shuffle } from 'lucide-react'
+import { Image as ImageIcon, Pause, Play, Shuffle } from 'lucide-react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
-import { api, type Item, type ItemDetail } from '../api'
+import { api, type Item, type ItemDetail, type User } from '../api'
 import { Artwork } from '../components/Artwork'
 import { AddToCollectionButton } from '../components/Collections'
+import { CoverPicker } from '../components/CoverPicker'
 import { Row, RowItem } from '../components/Row'
 import { TrackMenu, Tracks } from '../components/Tracks'
 import { Button } from '../components/ui'
@@ -93,11 +94,7 @@ export function Hero({ item, label, round, children }: { item: ItemDetail; label
         <div className="absolute inset-0 bg-gradient-to-b from-ink/10 via-ink/60 to-ink" />
       </div>
       <div className="relative flex flex-col items-center gap-6 px-4 pt-8 pb-2 text-center sm:flex-row sm:items-end sm:text-start md:gap-8 md:px-8 md:pt-20">
-        <Artwork
-          item={item}
-          type="poster"
-          className={`aspect-square w-48 shrink-0 shadow-2xl shadow-black/60 ring-1 ring-text/10 md:w-60 ${round ? 'rounded-full' : 'rounded-xl'}`}
-        />
+        <HeroCover item={item} round={round} />
         <div className="min-w-0 flex-1 space-y-3 pb-1">
           <div className="text-xs font-semibold tracking-widest text-muted uppercase">{label}</div>
           <h1 className="text-3xl font-bold tracking-tight text-balance md:text-6xl">{item.title}</h1>
@@ -107,6 +104,38 @@ export function Hero({ item, label, round, children }: { item: ItemDetail; label
         </div>
       </div>
     </section>
+  )
+}
+
+// The cover, which an admin clicks to pick another for an album or book.
+function HeroCover({ item, round }: { item: ItemDetail; round: boolean }) {
+  const { t } = useTranslation()
+  const { data: me } = useQuery<User>({ queryKey: ['me'], queryFn: api.me, staleTime: Infinity })
+  const [picking, setPicking] = useState(false)
+  const cover = (
+    <Artwork
+      item={item}
+      type="poster"
+      className={`aspect-square w-48 shrink-0 shadow-2xl shadow-black/60 ring-1 ring-text/10 md:w-60 ${round ? 'rounded-full' : 'rounded-xl'}`}
+    />
+  )
+  if (!me?.isAdmin || (item.kind !== 'album' && item.kind !== 'book')) return cover
+  return (
+    <>
+      <button
+        type="button"
+        onClick={() => setPicking(true)}
+        title={t('cover.change')}
+        aria-label={t('cover.change')}
+        className="group relative shrink-0 rounded-xl focus-visible:outline-2 focus-visible:outline-accent"
+      >
+        {cover}
+        <span className="absolute inset-x-0 bottom-0 flex items-center justify-center gap-1.5 rounded-b-xl bg-black/60 py-2 text-xs font-semibold text-white opacity-0 transition group-hover:opacity-100 group-focus-visible:opacity-100">
+          <ImageIcon className="size-3.5" /> {t('cover.change')}
+        </span>
+      </button>
+      {picking && <CoverPicker item={item} onClose={() => setPicking(false)} />}
+    </>
   )
 }
 

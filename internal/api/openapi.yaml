@@ -1423,6 +1423,63 @@ paths:
       responses:
         "200": { description: The image., content: { image/*: {} } }
         "404": { description: No image. }
+  /items/{id}/covers:
+    get:
+      summary: Covers to pick from for an album or book (admins)
+      description: |
+        Found online by the album's tagged MusicBrainz ids or its title and
+        artist: each edition's front cover on the Cover Art Archive, then
+        Apple's and Deezer's. For a book: Open Library's and Apple's. None
+        needs a key. Sources that don't answer are left out.
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      responses:
+        "200":
+          description: The covers, and whether the item has a picked cover now.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  options:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        url: { type: string, description: The full-size image. }
+                        thumb: { type: string, description: A small one for the list. }
+                        source: { type: string, example: Cover Art Archive }
+                        title: { type: string }
+                        detail: { type: string, description: "Which edition: date, country, format." }
+                  chosen: { type: boolean }
+                  chosenSource: { type: string, description: "Where the picked cover came from: its URL, or upload." }
+        "400": { $ref: "#/components/responses/Error" }
+  /items/{id}/cover:
+    put:
+      summary: Pick an album's or book's cover (admins)
+      description: |
+        Send `{"url": "https://…"}` as JSON for an image online, which the
+        server downloads, or the image itself (JPEG, PNG, WebP or GIF, up to
+        20 MB) as the body. The cover is kept on the server and wins over
+        the folder's, the files' and online ones until it's reset. The item
+        gets a `posterTag`; add it to the image URL as `?v=` so clients
+        don't show the old cover from a cache.
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      requestBody:
+        content:
+          application/json: { schema: { type: object, properties: { url: { type: string } } } }
+          image/*: {}
+      responses:
+        "200": { description: The item with its new cover., content: { application/json: { schema: { $ref: "#/components/schemas/Item" } } } }
+        "400": { $ref: "#/components/responses/Error" }
+        "413": { $ref: "#/components/responses/Error" }
+        "502": { $ref: "#/components/responses/Error" }
+    delete:
+      summary: Go back to the automatic cover (admins)
+      description: Forgets the picked cover; a scan of the library finds one in the folder, the files or online again.
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      responses:
+        "204": { description: Reset. }
+        "400": { $ref: "#/components/responses/Error" }
   /items/{id}/file:
     get:
       summary: The original file, for direct play and downloads
@@ -3490,6 +3547,7 @@ components:
         overview: { type: string }
         rating: { type: number }
         hasPoster: { type: boolean }
+        posterTag: { type: string, description: "Set when an admin picked the cover; add it to the image URL as ?v= so a cached old cover isn't shown." }
         hasBackdrop: { type: boolean }
         showTitle: { type: string, description: "Episodes: the show's title." }
         seasonIndex: { type: integer, description: "Episodes: the season number." }

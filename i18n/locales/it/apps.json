@@ -507,5 +507,15 @@
     "waiting": "Questa schermata si chiude da sola dopo il pagamento.",
     "unlocked": "Matinee è sbloccato su questo televisore.",
     "updateServer": "Per sbloccare Matinee qui, aggiorna prima il tuo server Matinee."
+  },
+  "cover": {
+    "change": "Cambia copertina",
+    "title": "Scegli una copertina",
+    "looking": "Ricerca di copertine online…",
+    "none": "Nessuna copertina trovata online. Incolla qui sotto l'indirizzo di un'immagine.",
+    "addressPlaceholder": "Incolla l'indirizzo di un'immagine",
+    "use": "Usa",
+    "reset": "Usa la copertina automatica",
+    "chosenNote": "Questa copertina è stata scelta a mano, quindi le scansioni la mantengono."
   }
 }

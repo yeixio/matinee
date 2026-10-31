@@ -500,5 +500,15 @@
     "waiting": "Denne skjermen lukkes av seg selv når du har betalt.",
     "unlocked": "Matinee er låst opp på denne TV-en.",
     "updateServer": "Oppdater Matinee-serveren din først for å låse opp Matinee her."
+  },
+  "cover": {
+    "change": "Bytt omslag",
+    "title": "Velg et omslag",
+    "looking": "Leter etter omslag på nettet …",
+    "none": "Fant ingen omslag på nettet. Lim inn adressen til et bilde nedenfor.",
+    "addressPlaceholder": "Lim inn adressen til et bilde",
+    "use": "Bruk",
+    "reset": "Bruk det automatiske omslaget",
+    "chosenNote": "Dette omslaget ble valgt for hånd, så skanninger beholder det."
   }
 }

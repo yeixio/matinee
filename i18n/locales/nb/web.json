@@ -814,5 +814,19 @@
   },
   "remote": {
     "controlledBy": "Styrt fra {{name}}"
+  },
+  "cover": {
+    "change": "Bytt omslag",
+    "title": "Omslag for {{title}}",
+    "looking": "Leter etter omslag på nettet …",
+    "none": "Fant ingen omslag på nettet. Lim inn adressen til et bilde, eller last opp et.",
+    "pick": "Bruk {{cover}}",
+    "address": "Bildeadresse",
+    "addressPlaceholder": "Lim inn adressen til et bilde",
+    "use": "Bruk",
+    "upload": "Last opp et bilde",
+    "reset": "Bruk det automatiske omslaget",
+    "chosenNote": "Dette omslaget ble valgt for hånd, så skanninger beholder det.",
+    "saving": "Lagrer omslaget …"
   }
 }

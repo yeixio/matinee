@@ -163,5 +163,10 @@
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "der Feed konnte nicht gelesen werden. Prüfe die Adresse und versuche es noch einmal.",
   "the_feed_couldnt_be_read_right_now": "der Feed kann gerade nicht gelesen werden",
   "the_file_is_too_big": "die Datei ist zu groß",
-  "this_library_already_has_a_show_with_that_name": "diese Mediathek hat schon eine Sendung mit diesem Namen"
+  "this_library_already_has_a_show_with_that_name": "diese Mediathek hat schon eine Sendung mit diesem Namen",
+  "only_albums_and_books_have_covers_to_pick": "nur Alben und Bücher haben Covers zum Auswählen",
+  "that_isnt_a_jpeg_png_webp_or_gif_image": "das ist kein JPEG-, PNG-, WebP- oder GIF-Bild",
+  "the_covers_address_must_start_with_http_or_https": "die Adresse des Covers muss mit http:// oder https:// beginnen",
+  "the_image_is_too_big_20_mb_at_most": "das Bild ist zu groß (höchstens 20 MB)",
+  "couldnt_get_an_image_from_that_address": "von dieser Adresse konnte kein Bild geladen werden"
 }

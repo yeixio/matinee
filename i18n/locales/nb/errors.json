@@ -163,5 +163,10 @@
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "feeden kunne ikke leses. Sjekk adressen og prøv igjen.",
   "the_feed_couldnt_be_read_right_now": "feeden kan ikke leses akkurat nå",
   "the_file_is_too_big": "filen er for stor",
-  "this_library_already_has_a_show_with_that_name": "dette biblioteket har allerede et program med det navnet"
+  "this_library_already_has_a_show_with_that_name": "dette biblioteket har allerede et program med det navnet",
+  "only_albums_and_books_have_covers_to_pick": "bare album og bøker har omslag å velge",
+  "that_isnt_a_jpeg_png_webp_or_gif_image": "det er ikke et JPEG-, PNG-, WebP- eller GIF-bilde",
+  "the_covers_address_must_start_with_http_or_https": "adressen til omslaget må begynne med http:// eller https://",
+  "the_image_is_too_big_20_mb_at_most": "bildet er for stort (maks 20 MB)",
+  "couldnt_get_an_image_from_that_address": "fikk ikke hentet noe bilde fra den adressen"
 }

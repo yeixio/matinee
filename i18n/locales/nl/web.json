@@ -814,5 +814,19 @@
   },
   "remote": {
     "controlledBy": "Bediend vanaf {{name}}"
+  },
+  "cover": {
+    "change": "Hoes wijzigen",
+    "title": "Hoes voor {{title}}",
+    "looking": "Online naar hoezen zoeken…",
+    "none": "Online geen hoezen gevonden. Plak het adres van een afbeelding of upload er een.",
+    "pick": "{{cover}} gebruiken",
+    "address": "Adres van de afbeelding",
+    "addressPlaceholder": "Plak het adres van een afbeelding",
+    "use": "Gebruiken",
+    "upload": "Afbeelding uploaden",
+    "reset": "Automatische hoes gebruiken",
+    "chosenNote": "Deze hoes is met de hand gekozen, dus scans laten hem staan.",
+    "saving": "Hoes opslaan…"
   }
 }
