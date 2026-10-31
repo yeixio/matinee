@@ -441,6 +441,7 @@
     "listenNow": "Écouter",
     "music": "Musique",
     "audiobooks": "Livres audio",
+    "podcasts": "Podcasts",
     "signIn": "Ouvrez Matinee sur votre téléphone et connectez-vous pour écouter en voiture.",
     "loading": "Chargement…"
   },
@@ -496,7 +497,11 @@
     "bluetooth": "Réglages Bluetooth",
     "back15": "Reculer de 15 secondes",
     "ahead30": "Avancer de 30 secondes",
-    "storageUsed": "{{size}} sur cette montre"
+    "storageUsed": "{{size}} sur cette montre",
+    "playlists": "Playlists",
+    "newEpisodes": "Nouveaux épisodes",
+    "following": "Suivis",
+    "noEpisodes": "Aucun épisode pour l’instant."
   },
   "tvUnlock": {
     "title": "Débloquer Matinee",

@@ -441,6 +441,7 @@
     "listenNow": "Ouvir agora",
     "music": "Música",
     "audiobooks": "Audiolivros",
+    "podcasts": "Podcasts",
     "signIn": "Abra o Matinee no celular e entre para ouvir no carro.",
     "loading": "Carregando…"
   },
@@ -496,7 +497,11 @@
     "bluetooth": "Configurações de Bluetooth",
     "back15": "Voltar 15 segundos",
     "ahead30": "Avançar 30 segundos",
-    "storageUsed": "{{size}} neste relógio"
+    "storageUsed": "{{size}} neste relógio",
+    "playlists": "Playlists",
+    "newEpisodes": "Episódios novos",
+    "following": "Seguindo",
+    "noEpisodes": "Nenhum episódio ainda."
   },
   "tvUnlock": {
     "title": "Desbloquear o Matinee",

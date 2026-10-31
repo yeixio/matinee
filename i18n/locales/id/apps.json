@@ -427,6 +427,7 @@
     "listenNow": "Dengarkan",
     "music": "Musik",
     "audiobooks": "Buku audio",
+    "podcasts": "Podcast",
     "signIn": "Buka Matinee di ponsel Anda dan masuk untuk mendengarkan di mobil.",
     "loading": "Memuat…"
   },
@@ -482,7 +483,11 @@
     "bluetooth": "Pengaturan Bluetooth",
     "back15": "Mundur 15 detik",
     "ahead30": "Maju 30 detik",
-    "storageUsed": "{{size}} di jam ini"
+    "storageUsed": "{{size}} di jam ini",
+    "playlists": "Playlist",
+    "newEpisodes": "Episode baru",
+    "following": "Diikuti",
+    "noEpisodes": "Belum ada episode."
   },
   "tvUnlock": {
     "title": "Buka Matinee",

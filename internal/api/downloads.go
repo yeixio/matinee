@@ -271,7 +271,8 @@ const maxSyncEvents = 1000
 // syncProgress takes watch progress a device recorded while offline. Each
 // change is applied unless the item's progress changed more recently
 // elsewhere, so the latest change wins. A place in an audiobook, or in one
-// of its parts, is kept on the book.
+// of its parts, is kept on the book; a podcast episode finishes in its last
+// minute, the way it does when played live.
 func (s *Server) syncProgress(w http.ResponseWriter, r *http.Request) {
 	var req struct {
 		Events []store.ProgressEvent `json:"events"`
@@ -316,7 +317,15 @@ func (s *Server) syncProgress(w http.ResponseWriter, r *http.Request) {
 			}
 			continue
 		}
-		if it.DurationMs != nil && *it.DurationMs > 0 && e.PositionMs > *it.DurationMs*92/100 {
+		if it.Kind == "podcastEpisode" {
+			// The last minute of an episode finishes it, as it does live.
+			if it.DurationMs != nil && *it.DurationMs > 0 && e.PositionMs >= *it.DurationMs-podcastFinishedMs {
+				e.Played = true
+			}
+			if e.Played {
+				e.PositionMs = 0
+			}
+		} else if it.DurationMs != nil && *it.DurationMs > 0 && e.PositionMs > *it.DurationMs*92/100 {
 			e.Played, e.PositionMs = true, 0
 		}
 		ok, err := s.Store.MergeProgress(r.Context(), u.ID, e)

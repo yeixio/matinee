@@ -427,6 +427,7 @@
     "listenNow": "Nghe ngay",
     "music": "Nhạc",
     "audiobooks": "Sách nói",
+    "podcasts": "Podcast",
     "signIn": "Mở Matinee trên điện thoại và đăng nhập để nghe trên xe.",
     "loading": "Đang tải…"
   },
@@ -482,7 +483,11 @@
     "bluetooth": "Cài đặt Bluetooth",
     "back15": "Lùi 15 giây",
     "ahead30": "Tới 30 giây",
-    "storageUsed": "{{size}} trên đồng hồ này"
+    "storageUsed": "{{size}} trên đồng hồ này",
+    "playlists": "Danh sách phát",
+    "newEpisodes": "Tập mới",
+    "following": "Đang theo dõi",
+    "noEpisodes": "Chưa có tập nào."
   },
   "tvUnlock": {
     "title": "Mở khóa Matinee",

@@ -448,6 +448,7 @@
     "listenNow": "Слухати",
     "music": "Музика",
     "audiobooks": "Аудіокниги",
+    "podcasts": "Подкасти",
     "signIn": "Відкрийте Matinee на телефоні й увійдіть, щоб слухати в машині.",
     "loading": "Завантаження…"
   },
@@ -503,7 +504,11 @@
     "bluetooth": "Налаштування Bluetooth",
     "back15": "Назад на 15 секунд",
     "ahead30": "Уперед на 30 секунд",
-    "storageUsed": "{{size}} на цьому годиннику"
+    "storageUsed": "{{size}} на цьому годиннику",
+    "playlists": "Плейлисти",
+    "newEpisodes": "Нові випуски",
+    "following": "Ви стежите",
+    "noEpisodes": "Ще немає випусків."
   },
   "tvUnlock": {
     "title": "Розблокувати Matinee",

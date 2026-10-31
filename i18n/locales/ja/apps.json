@@ -427,6 +427,7 @@
     "listenNow": "今すぐ聴く",
     "music": "音楽",
     "audiobooks": "オーディオブック",
+    "podcasts": "ポッドキャスト",
     "signIn": "車で聴くには、スマートフォンで Matinee を開いてサインインしてください。",
     "loading": "読み込み中…"
   },
@@ -482,7 +483,11 @@
     "bluetooth": "Bluetooth設定",
     "back15": "15秒戻る",
     "ahead30": "30秒進む",
-    "storageUsed": "このウォッチ内 {{size}}"
+    "storageUsed": "このウォッチ内 {{size}}",
+    "playlists": "プレイリスト",
+    "newEpisodes": "新しいエピソード",
+    "following": "フォロー中",
+    "noEpisodes": "まだエピソードがありません。"
   },
   "tvUnlock": {
     "title": "Matinee のロックを解除",

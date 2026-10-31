@@ -434,6 +434,7 @@
     "listenNow": "Lytt nå",
     "music": "Musikk",
     "audiobooks": "Lydbøker",
+    "podcasts": "Podkaster",
     "signIn": "Åpne Matinee på telefonen og logg på for å lytte i bilen.",
     "loading": "Laster inn …"
   },
@@ -489,7 +490,11 @@
     "bluetooth": "Bluetooth-innstillinger",
     "back15": "15 sekunder tilbake",
     "ahead30": "30 sekunder frem",
-    "storageUsed": "{{size}} på denne klokken"
+    "storageUsed": "{{size}} på denne klokken",
+    "playlists": "Spillelister",
+    "newEpisodes": "Nye episoder",
+    "following": "Følger",
+    "noEpisodes": "Ingen episoder ennå."
   },
   "tvUnlock": {
     "title": "Lås opp Matinee",

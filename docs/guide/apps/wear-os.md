@@ -43,6 +43,18 @@ Put albums and audiobooks on the watch and listen with Bluetooth headphones, wit
 2. Tap **Add music and books**. Search for an album or a book by its name or by who made it, or pick from **Continue listening**, **New albums** and **New audiobooks**.
 3. Tap one to download it. It shows up under **On this watch** with how far along it is.
 
+<!-- since: v0.1.8 -->
+#### Playlists and podcasts
+
+With app version 1.0.20 or later, the same screen also lists:
+
+- **Playlists**: your music playlists. Tapping one puts its songs on the watch as they are right now; to pick up songs you add later, remove it from the watch and add it again.
+- **New episodes** of the podcasts you follow, and episodes you're partway through under **Continue listening**.
+- **Following**: the shows you follow. Tap a show to see its newest episodes and download the ones you want.
+
+See [Podcasts](/docs/watching/podcasts/) for following shows; you do that on your phone or the web.
+<!-- /since -->
+
 Downloads carry on in the background with the app closed, and pick up where they stopped if the connection drops. They're much quicker over Wi-Fi than through your phone, so leave the watch on its charger at home for a big audiobook. Each file is checked once it's on the watch, so a broken download never plays.
 
 Files the watch plays as they are, such as MP3, AAC, FLAC and Opus, arrive as they are. Anything else is turned into AAC by the server first, which takes a moment longer.
@@ -55,6 +67,10 @@ Tap an album or a book under **On this watch**, then **Play**. The watch switche
 
 - **Music** plays from the first song, with **Previous** and **Next**.
 - **Books** start where you left off, on any device, and show the chapter you're in, with back 15 seconds and ahead 30 seconds.
+<!-- since: v0.1.8 -->
+- **Playlists** play from the first song, with **Previous** and **Next**.
+- **Podcast episodes** play like books: they start where you left off, with back 15 seconds and ahead 30 seconds. Your place goes back to the server the same way, and listening to the last minute marks the episode played everywhere.
+<!-- /since -->
 - Turning the crown, or the volume buttons, sets the watch's volume.
 - **The sleep timer** works the same as for other players, and stops the watch's player.
 

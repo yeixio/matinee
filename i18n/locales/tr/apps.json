@@ -434,6 +434,7 @@
     "listenNow": "Şimdi dinle",
     "music": "Müzik",
     "audiobooks": "Sesli kitaplar",
+    "podcasts": "Podcast’ler",
     "signIn": "Arabada dinlemek için telefonunuzda Matinee'yi açıp oturum açın.",
     "loading": "Yükleniyor…"
   },
@@ -489,7 +490,11 @@
     "bluetooth": "Bluetooth ayarları",
     "back15": "15 saniye geri",
     "ahead30": "30 saniye ileri",
-    "storageUsed": "Bu saatte {{size}}"
+    "storageUsed": "Bu saatte {{size}}",
+    "playlists": "Çalma listeleri",
+    "newEpisodes": "Yeni bölümler",
+    "following": "Takip edilenler",
+    "noEpisodes": "Henüz bölüm yok."
   },
   "tvUnlock": {
     "title": "Matinee'nin kilidini aç",

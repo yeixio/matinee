@@ -462,6 +462,7 @@
     "listenNow": "استمع الآن",
     "music": "الموسيقى",
     "audiobooks": "الكتب الصوتية",
+    "podcasts": "بودكاست",
     "signIn": "افتح Matinee على هاتفك وسجّل الدخول للاستماع في السيارة.",
     "loading": "جارٍ التحميل…"
   },
@@ -517,7 +518,11 @@
     "bluetooth": "إعدادات البلوتوث",
     "back15": "رجوع 15 ثانية",
     "ahead30": "تقدّم 30 ثانية",
-    "storageUsed": "{{size}} على هذه الساعة"
+    "storageUsed": "{{size}} على هذه الساعة",
+    "playlists": "قوائم التشغيل",
+    "newEpisodes": "حلقات جديدة",
+    "following": "تتابعها",
+    "noEpisodes": "لا توجد حلقات بعد."
   },
   "tvUnlock": {
     "title": "فتح Matinee",
