@@ -434,6 +434,7 @@
     "listenNow": "अभी सुनें",
     "music": "संगीत",
     "audiobooks": "ऑडियोबुक",
+    "podcasts": "पॉडकास्ट",
     "signIn": "कार में सुनने के लिए अपने फ़ोन पर Matinee खोलें और साइन इन करें।",
     "loading": "लोड हो रहा है…"
   },
@@ -489,7 +490,11 @@
     "bluetooth": "ब्लूटूथ सेटिंग",
     "back15": "15 सेकंड पीछे",
     "ahead30": "30 सेकंड आगे",
-    "storageUsed": "इस घड़ी पर {{size}}"
+    "storageUsed": "इस घड़ी पर {{size}}",
+    "playlists": "प्लेलिस्ट",
+    "newEpisodes": "नए एपिसोड",
+    "following": "फ़ॉलो किए गए",
+    "noEpisodes": "अभी कोई एपिसोड नहीं।"
   },
   "tvUnlock": {
     "title": "Matinee अनलॉक करें",

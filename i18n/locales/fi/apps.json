@@ -434,6 +434,7 @@
     "listenNow": "Kuuntele nyt",
     "music": "Musiikki",
     "audiobooks": "Äänikirjat",
+    "podcasts": "Podcastit",
     "signIn": "Avaa Matinee puhelimessasi ja kirjaudu sisään kuunnellaksesi autossa.",
     "loading": "Ladataan…"
   },
@@ -489,7 +490,11 @@
     "bluetooth": "Bluetooth-asetukset",
     "back15": "15 sekuntia taaksepäin",
     "ahead30": "30 sekuntia eteenpäin",
-    "storageUsed": "{{size}} tässä kellossa"
+    "storageUsed": "{{size}} tässä kellossa",
+    "playlists": "Soittolistat",
+    "newEpisodes": "Uudet jaksot",
+    "following": "Seuratut",
+    "noEpisodes": "Ei vielä jaksoja."
   },
   "tvUnlock": {
     "title": "Avaa Matinee",

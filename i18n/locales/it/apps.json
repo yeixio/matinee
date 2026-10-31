@@ -441,6 +441,7 @@
     "listenNow": "Ascolta ora",
     "music": "Musica",
     "audiobooks": "Audiolibri",
+    "podcasts": "Podcast",
     "signIn": "Apri Matinee sul telefono e accedi per ascoltare in auto.",
     "loading": "Caricamento…"
   },
@@ -496,7 +497,11 @@
     "bluetooth": "Impostazioni Bluetooth",
     "back15": "Indietro di 15 secondi",
     "ahead30": "Avanti di 30 secondi",
-    "storageUsed": "{{size}} su questo orologio"
+    "storageUsed": "{{size}} su questo orologio",
+    "playlists": "Playlist",
+    "newEpisodes": "Nuovi episodi",
+    "following": "Seguiti",
+    "noEpisodes": "Ancora nessun episodio."
   },
   "tvUnlock": {
     "title": "Sblocca Matinee",

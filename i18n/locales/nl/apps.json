@@ -434,6 +434,7 @@
     "listenNow": "Nu luisteren",
     "music": "Muziek",
     "audiobooks": "Luisterboeken",
+    "podcasts": "Podcasts",
     "signIn": "Open Matinee op je telefoon en log in om in de auto te luisteren.",
     "loading": "Laden…"
   },
@@ -489,7 +490,11 @@
     "bluetooth": "Bluetooth-instellingen",
     "back15": "15 seconden terug",
     "ahead30": "30 seconden vooruit",
-    "storageUsed": "{{size}} op dit horloge"
+    "storageUsed": "{{size}} op dit horloge",
+    "playlists": "Afspeellijsten",
+    "newEpisodes": "Nieuwe afleveringen",
+    "following": "Gevolgd",
+    "noEpisodes": "Nog geen afleveringen."
   },
   "tvUnlock": {
     "title": "Matinee ontgrendelen",

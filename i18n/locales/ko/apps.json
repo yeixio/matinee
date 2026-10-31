@@ -427,6 +427,7 @@
     "listenNow": "지금 듣기",
     "music": "음악",
     "audiobooks": "오디오북",
+    "podcasts": "팟캐스트",
     "signIn": "차에서 들으려면 휴대폰에서 Matinee를 열고 로그인하세요.",
     "loading": "불러오는 중…"
   },
@@ -482,7 +483,11 @@
     "bluetooth": "블루투스 설정",
     "back15": "15초 뒤로",
     "ahead30": "30초 앞으로",
-    "storageUsed": "이 워치에 {{size}}"
+    "storageUsed": "이 워치에 {{size}}",
+    "playlists": "플레이리스트",
+    "newEpisodes": "새 에피소드",
+    "following": "팔로우 중",
+    "noEpisodes": "아직 에피소드가 없습니다."
   },
   "tvUnlock": {
     "title": "Matinee 잠금 해제",

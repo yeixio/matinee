@@ -434,6 +434,7 @@
     "listenNow": "ابھی سنیں",
     "music": "موسیقی",
     "audiobooks": "آڈیو بکس",
+    "podcasts": "پوڈکاسٹس",
     "signIn": "گاڑی میں سننے کے لیے اپنے فون پر Matinee کھولیں اور سائن ان کریں۔",
     "loading": "لوڈ ہو رہا ہے…"
   },
@@ -489,7 +490,11 @@
     "bluetooth": "بلوٹوتھ کی ترتیبات",
     "back15": "15 سیکنڈ پیچھے",
     "ahead30": "30 سیکنڈ آگے",
-    "storageUsed": "اس گھڑی پر {{size}}"
+    "storageUsed": "اس گھڑی پر {{size}}",
+    "playlists": "پلے لسٹس",
+    "newEpisodes": "نئی اقساط",
+    "following": "فالو کیے گئے",
+    "noEpisodes": "ابھی کوئی قسط نہیں۔"
   },
   "tvUnlock": {
     "title": "Matinee ان لاک کریں",

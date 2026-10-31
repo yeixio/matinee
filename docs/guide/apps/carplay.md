@@ -25,7 +25,14 @@ Matinee has up to four tabs along the top of the car's screen:
 - **Listen now**: the books you're partway through, then the albums you've played lately.
 - **Music**: **Shuffle all**, your **Playlists**, every **Artist** and **Album**, and the albums added lately. Pick an album to see its songs; pick a song to play the album from there. Pick a playlist to play it from the top. Playlists need app version 1.0.19 or later.
 - **Audiobooks**: every book, with how far along you are in each.
+<!-- since: v0.1.8 -->
+- **Podcasts**: the episodes you're partway through, **New episodes** of the shows you follow, and the shows you follow (every show on the server, if you don't follow any). Pick a show to see its episodes, newest first. Podcasts need app version 1.0.20 or later and a podcast library on the server (see [Podcasts](/docs/watching/podcasts/)).
+<!-- /since -->
 - **Downloads**: the songs and books downloaded to your iPhone (see [Downloads](/docs/apps/downloads/)). These play with no connection, so they still work where the signal drops. The tab shows up once something is downloaded.
+
+<!-- since: v0.1.8 -->
+Cars show four tabs at most. With music, audiobooks, podcasts and downloads all there, the **Downloads** tab makes room: your downloads still play from the other tabs, marked as downloaded, and the tab comes back when the car has no signal. Episodes you downloaded on the iPhone play in the car too.
+<!-- /since -->
 
 Picking something opens CarPlay's **Now Playing** screen, with the cover, the time and the buttons. Tap **Now Playing** on the CarPlay home screen or in Matinee to get back to it.
 
@@ -35,6 +42,12 @@ A book picks up exactly where you left off, on your iPhone, the web or a TV. For
 
 Your place is saved every few seconds, so it's there when you open the book again at home.
 
+<!-- since: v0.1.8 -->
+## Listening to a podcast
+
+An episode plays like a book: it starts where you left off on any device, with the same back 15 seconds, ahead 30 seconds and speed buttons. Episodes you're partway through also show under **Listen now**. Playing an episode to its end marks it played, and the car saves your place every few seconds, so the phone and the web show how far you got.
+
+<!-- /since -->
 ## The iPhone and the car together
 
 The car and the iPhone share one player. If music is playing on the iPhone when you get in, the car shows it and its buttons control it. With the app open on the iPhone, what you pick in the car plays there too, so the iPhone shows the same song or book.

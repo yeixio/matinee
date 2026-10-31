@@ -427,6 +427,7 @@
     "listenNow": "ฟังเลย",
     "music": "เพลง",
     "audiobooks": "หนังสือเสียง",
+    "podcasts": "พอดแคสต์",
     "signIn": "เปิด Matinee บนโทรศัพท์แล้วลงชื่อเข้าใช้เพื่อฟังในรถ",
     "loading": "กำลังโหลด…"
   },
@@ -482,7 +483,11 @@
     "bluetooth": "การตั้งค่าบลูทูธ",
     "back15": "ย้อนกลับ 15 วินาที",
     "ahead30": "ข้ามไป 30 วินาที",
-    "storageUsed": "{{size}} ในนาฬิกาเรือนนี้"
+    "storageUsed": "{{size}} ในนาฬิกาเรือนนี้",
+    "playlists": "เพลย์ลิสต์",
+    "newEpisodes": "ตอนใหม่",
+    "following": "กำลังติดตาม",
+    "noEpisodes": "ยังไม่มีตอน"
   },
   "tvUnlock": {
     "title": "ปลดล็อก Matinee",

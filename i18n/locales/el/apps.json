@@ -434,6 +434,7 @@
     "listenNow": "Ακούστε τώρα",
     "music": "Μουσική",
     "audiobooks": "Ηχητικά βιβλία",
+    "podcasts": "Podcast",
     "signIn": "Ανοίξτε το Matinee στο τηλέφωνό σας και συνδεθείτε για να ακούτε στο αυτοκίνητο.",
     "loading": "Φόρτωση…"
   },
@@ -489,7 +490,11 @@
     "bluetooth": "Ρυθμίσεις Bluetooth",
     "back15": "Πίσω 15 δευτερόλεπτα",
     "ahead30": "Μπροστά 30 δευτερόλεπτα",
-    "storageUsed": "{{size}} σε αυτό το ρολόι"
+    "storageUsed": "{{size}} σε αυτό το ρολόι",
+    "playlists": "Λίστες αναπαραγωγής",
+    "newEpisodes": "Νέα επεισόδια",
+    "following": "Ακολουθείτε",
+    "noEpisodes": "Δεν υπάρχουν ακόμη επεισόδια."
   },
   "tvUnlock": {
     "title": "Ξεκλείδωμα του Matinee",

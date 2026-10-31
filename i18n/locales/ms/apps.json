@@ -427,6 +427,7 @@
     "listenNow": "Dengar sekarang",
     "music": "Muzik",
     "audiobooks": "Buku audio",
+    "podcasts": "Podcast",
     "signIn": "Buka Matinee pada telefon anda dan log masuk untuk mendengar di dalam kereta.",
     "loading": "Memuatkan…"
   },
@@ -482,7 +483,11 @@
     "bluetooth": "Tetapan Bluetooth",
     "back15": "Undur 15 saat",
     "ahead30": "Maju 30 saat",
-    "storageUsed": "{{size}} pada jam ini"
+    "storageUsed": "{{size}} pada jam ini",
+    "playlists": "Senarai main",
+    "newEpisodes": "Episod baharu",
+    "following": "Diikuti",
+    "noEpisodes": "Belum ada episod."
   },
   "tvUnlock": {
     "title": "Buka kunci Matinee",
