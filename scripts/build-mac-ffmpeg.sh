@@ -74,7 +74,8 @@ for tool in ffmpeg ffprobe; do
 	lipo -create -output "$out/$tool" "$work/$tool-arm64.bin" "$work/$tool-x86_64.bin"
 	strip -x "$out/$tool"
 	# Only system libraries, so it runs on any Mac.
-	if otool -L "$out/$tool" | tail -n +2 | grep -Ev '^\s*(/usr/lib/|/System/)'; then
+	# (Library lines are indented; the others name the file and architecture.)
+	if otool -L "$out/$tool" | grep -E '^\s' | grep -Ev '^\s*(/usr/lib/|/System/)'; then
 		echo "::error::$tool links a library outside macOS"
 		exit 1
 	fi
