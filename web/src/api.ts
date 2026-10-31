@@ -697,6 +697,32 @@ export interface CoverOption {
 
 // message is in the page's language where the catalog has the server's
 // error code (errors.json), else the server's English.
+// An import from another media server. path is its data folder on the
+// server ('' for an uploaded database); changes turn its paths into Matinee's.
+export type PathChange = { from: string; to: string; files?: number }
+export type ImportRequest = {
+  path: string
+  changes: PathChange[]
+  accounts?: Record<string, number>
+  watched?: boolean
+  collections?: boolean
+  posters?: boolean
+}
+export type ImportPreview = {
+  database: string
+  canPosters: boolean
+  accounts: { id: number; name: string; watched: number; inProgress: number; found: number; suggested: number }[]
+  viewers: { id: number; name: string; profileOf?: string }[]
+  files: number
+  matched: number
+  unmatched: string[]
+  suggested: PathChange[]
+  collections: number
+  posters: number
+}
+export type ImportResult = { watched: number; inProgress: number; kept: number; collections: number; collectionItems: number; posters: number }
+export type ImportStatus = { running: boolean; done: number; total: number; result?: ImportResult; error?: string }
+
 export class ApiError extends Error {
   status: number
   code?: string
@@ -889,6 +915,20 @@ export const api = {
     return response<Item>(res)
   },
   resetCover: (id: number) => request<void>('DELETE', `/api/v1/items/${id}/cover`),
+  // Bringing history over from another media server (Settings → Import).
+  findImports: () => request<{ found: string[]; uploaded: boolean }>('GET', '/api/v1/import/find'),
+  uploadImport: async (file: Blob) => {
+    const res = await fetch('/api/v1/import/upload', {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/octet-stream' },
+      body: file,
+    })
+    return response<void>(res)
+  },
+  previewImport: (req: ImportRequest) => request<ImportPreview>('POST', '/api/v1/import/preview', req),
+  runImport: (req: ImportRequest) => request<void>('POST', '/api/v1/import/run', req),
+  importStatus: () => request<ImportStatus>('GET', '/api/v1/import'),
   importOpml: async (library: number, file: Blob) => {
     const res = await fetch(`/api/v1/libraries/${library}/opml`, {
       method: 'POST',

@@ -133,8 +133,14 @@ func (s *Server) setCover(w http.ResponseWriter, r *http.Request) {
 // resetCover forgets a picked cover; the folder, the files and online
 // lookups fill it in again, with a scan of its library.
 func (s *Server) resetCover(w http.ResponseWriter, r *http.Request) {
-	it, ok := s.pickableCover(w, r)
+	// Any item with a poster of its own can go back to automatic art, such
+	// as a movie whose poster was brought over from another server.
+	it, ok := s.loadItem(w, r)
 	if !ok {
+		return
+	}
+	if it.Kind != "album" && it.Kind != "book" && it.PosterTag == "" {
+		writeError(w, http.StatusBadRequest, "only albums and books have covers to pick")
 		return
 	}
 	if err := s.Store.ClearChosenImage(r.Context(), it.ID); err != nil {

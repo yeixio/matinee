@@ -2,7 +2,7 @@
 title: Updating and backups
 description: Keep Matinee up to date, see which version you run, and back up what matters.
 sidebar:
-  order: 5
+  order: 6
 ---
 
 ## Which version am I running?

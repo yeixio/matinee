@@ -365,6 +365,42 @@ try {
       await libraries.getByText('Looking for missing covers').waitFor()
       await shot(page, 'find-artwork', { target: libraries })
     }
+    if (wanted('import')) {
+      // The other server's data, as the import reads it; the demo has none.
+      const viewers = await api(token, 'GET', '/users')
+      const me = viewers[0]
+      const imp = await open(desktop, token)
+      const folder = '/var/lib/mediaserver/Library/Application Support/Media Server'
+      await imp.route('**/api/v1/import/find', (route) => route.fulfill({ json: { found: [folder], uploaded: false } }))
+      await imp.route('**/api/v1/import/preview', (route) => {
+        const changed = (route.request().postDataJSON().changes ?? []).length > 0
+        route.fulfill({
+          json: {
+            database: folder + '/Plug-in Support/Databases/library.db',
+            canPosters: true,
+            accounts: [
+              { id: 1, name: me.username, watched: 412, inProgress: 6, found: changed ? 409 : 0, suggested: me.id },
+              { id: 5001, name: 'Sam', watched: 118, inProgress: 3, found: changed ? 117 : 0, suggested: 0 },
+            ],
+            viewers: viewers.map((v) => ({ id: v.id, name: v.username })),
+            files: 2140,
+            matched: changed ? 2131 : 0,
+            unmatched: changed ? ['/data/movies/Old Rip (2003)/Old Rip.avi'] : ['/data/movies/Night Harbor (2019)/Night Harbor.mkv'],
+            suggested: changed ? [] : [{ from: '/data', to: '/media', files: 2131 }],
+            collections: 7,
+            posters: 23,
+          },
+        })
+      })
+      await imp.goto(`${origin}/settings`)
+      const importing = section(imp, 'Import from another media server')
+      await importing.getByRole('button', { name: 'Start' }).click()
+      await importing.getByRole('button', { name: /Found on this computer/ }).click()
+      await importing.getByRole('button', { name: 'Use it' }).click()
+      await importing.getByText(/Found in your libraries: 2,131/).waitFor()
+      await shot(imp, 'import', { target: importing })
+      await imp.context().close()
+    }
     const profiles = section(page, 'Profiles')
     await profiles.getByRole('button', { name: 'Add profile' }).last().click()
     await profiles.getByLabel('Name').fill('Riley')
