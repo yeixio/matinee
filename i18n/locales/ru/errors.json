@@ -141,5 +141,7 @@
   "couldnt_read_the_songs_sound": "не удалось прочитать звук песни",
   "no_levels_on_this_server": "на этом сервере нет уровней",
   "not_a_song": "это не песня",
-  "no_such_audio_track": "такой звуковой дорожки нет"
+  "no_such_audio_track": "такой звуковой дорожки нет",
+  "nothing_found_to_play": "нечего воспроизвести",
+  "say_what_to_play": "скажите, что воспроизвести"
 }

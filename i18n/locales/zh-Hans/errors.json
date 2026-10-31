@@ -141,5 +141,7 @@
   "couldnt_read_the_songs_sound": "无法读取歌曲的声音",
   "no_levels_on_this_server": "此服务器没有音量数据",
   "not_a_song": "不是歌曲",
-  "no_such_audio_track": "没有这个音轨"
+  "no_such_audio_track": "没有这个音轨",
+  "nothing_found_to_play": "没有找到可播放的内容",
+  "say_what_to_play": "请说出要播放的内容"
 }

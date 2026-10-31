@@ -141,5 +141,7 @@
   "couldnt_read_the_songs_sound": "der Ton des Songs konnte nicht gelesen werden",
   "no_levels_on_this_server": "keine Pegel auf diesem Server",
   "not_a_song": "kein Song",
-  "no_such_audio_track": "diese Tonspur gibt es nicht"
+  "no_such_audio_track": "diese Tonspur gibt es nicht",
+  "nothing_found_to_play": "nichts zum Abspielen gefunden",
+  "say_what_to_play": "sag, was abgespielt werden soll"
 }

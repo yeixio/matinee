@@ -141,5 +141,7 @@
   "couldnt_read_the_songs_sound": "nem sikerült beolvasni a dal hangját",
   "no_levels_on_this_server": "ezen a szerveren nincsenek szintek",
   "not_a_song": "nem dal",
-  "no_such_audio_track": "nincs ilyen hangsáv"
+  "no_such_audio_track": "nincs ilyen hangsáv",
+  "nothing_found_to_play": "nem található lejátszható tartalom",
+  "say_what_to_play": "mondd meg, mit játsszon le"
 }

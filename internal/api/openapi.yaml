@@ -1040,6 +1040,35 @@ paths:
         - { name: q, in: query, required: true, schema: { type: string } }
       responses:
         "200": { $ref: "#/components/responses/Items" }
+  /search/play:
+    get:
+      summary: The one thing to play for what someone asked for out loud
+      description: |
+        For voice requests ("play Abbey Road on Matinee") from Siri, Google
+        Assistant and Android Auto. q is what was said, such as "Yesterday
+        by the Beatles", "the album Thriller" or "The Hobbit audiobook", or
+        just the title when the phone already split it up into kind,
+        artist and album. Picks an artist, album, song or audiobook: of the
+        kind asked for, by whoever was named, closest title first, and for
+        a plain "play X" an artist over an album over a book over a song.
+      parameters:
+        - { name: q, in: query, schema: { type: string } }
+        - { name: kind, in: query, schema: { type: string, enum: [artist, album, track, book] } }
+        - { name: artist, in: query, description: Who made it, or who wrote a book., schema: { type: string } }
+        - { name: album, in: query, description: The album a song is on., schema: { type: string } }
+      responses:
+        "200":
+          description: What to play.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [kind, item]
+                properties:
+                  kind: { type: string, enum: [artist, album, track, book] }
+                  item: { $ref: "#/components/schemas/Item" }
+        "400": { $ref: "#/components/responses/Error" }
+        "404": { $ref: "#/components/responses/Error" }
   /items/{id}:
     get:
       summary: One item, with its parents and subtitle tracks

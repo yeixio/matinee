@@ -141,5 +141,7 @@
   "couldnt_read_the_songs_sound": "tidak dapat membaca bunyi lagu",
   "no_levels_on_this_server": "tiada aras pada pelayan ini",
   "not_a_song": "bukan lagu",
-  "no_such_audio_track": "trek audio itu tiada"
+  "no_such_audio_track": "trek audio itu tiada",
+  "nothing_found_to_play": "tiada apa-apa ditemui untuk dimainkan",
+  "say_what_to_play": "sebut apa yang hendak dimainkan"
 }

@@ -141,5 +141,7 @@
   "couldnt_read_the_songs_sound": "לא ניתן לקרוא את הצליל של השיר",
   "no_levels_on_this_server": "אין רמות בשרת הזה",
   "not_a_song": "זה לא שיר",
-  "no_such_audio_track": "אין רצועת שמע כזו"
+  "no_such_audio_track": "אין רצועת שמע כזו",
+  "nothing_found_to_play": "לא נמצא מה לנגן",
+  "say_what_to_play": "אמרו מה לנגן"
 }

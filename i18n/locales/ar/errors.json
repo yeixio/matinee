@@ -141,5 +141,7 @@
   "couldnt_read_the_songs_sound": "تعذّرت قراءة صوت الأغنية",
   "no_levels_on_this_server": "لا توجد مستويات على هذا الخادم",
   "not_a_song": "ليست أغنية",
-  "no_such_audio_track": "لا يوجد مسار صوتي كهذا"
+  "no_such_audio_track": "لا يوجد مسار صوتي كهذا",
+  "nothing_found_to_play": "لم يُعثر على شيء لتشغيله",
+  "say_what_to_play": "قل ما تريد تشغيله"
 }

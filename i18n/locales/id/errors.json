@@ -141,5 +141,7 @@
   "couldnt_read_the_songs_sound": "tidak dapat membaca suara lagu",
   "no_levels_on_this_server": "tidak ada level di server ini",
   "not_a_song": "bukan lagu",
-  "no_such_audio_track": "trek audio tersebut tidak ada"
+  "no_such_audio_track": "trek audio tersebut tidak ada",
+  "nothing_found_to_play": "tidak ada yang ditemukan untuk diputar",
+  "say_what_to_play": "sebutkan apa yang ingin diputar"
 }
