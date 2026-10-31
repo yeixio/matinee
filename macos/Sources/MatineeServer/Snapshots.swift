@@ -24,8 +24,13 @@ enum Snapshots {
         let host = NSHostingView(rootView: view.background(Color(nsColor: .windowBackgroundColor)))
         let size = host.fittingSize
         host.frame = NSRect(origin: .zero, size: size)
-        let window = NSWindow(contentRect: host.frame, styleMask: [.borderless], backing: .buffered, defer: false)
+        // A key window, so buttons draw as they do in use rather than
+        // greyed out like a window in the background.
+        let window = KeyWindow(contentRect: host.frame, styleMask: [.borderless], backing: .buffered, defer: false)
         window.contentView = host
+        window.setFrameOrigin(NSPoint(x: -10000, y: -10000))
+        NSApp.activate(ignoringOtherApps: true)
+        window.makeKeyAndOrderFront(nil)
         window.layoutIfNeeded()
         host.layoutSubtreeIfNeeded()
         host.display()
@@ -36,6 +41,12 @@ enum Snapshots {
         rep.size = size
         host.cacheDisplay(in: host.bounds, to: rep)
         try? rep.representation(using: .png, properties: [:])?.write(to: url)
+        window.orderOut(nil)
         print("wrote \(url.path) (\(Int(size.width))×\(Int(size.height)))")
     }
+}
+
+private final class KeyWindow: NSWindow {
+    override var canBecomeKey: Bool { true }
+    override var canBecomeMain: Bool { true }
 }

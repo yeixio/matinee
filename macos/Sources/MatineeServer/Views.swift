@@ -96,11 +96,11 @@ struct StatusHeader: View {
 
     private var status: String {
         switch server.state {
-        case .running: return String(localized: "Running on port \(server.port)")
+        case .running: return String(localized: "Running on port \(String(server.port))")
         case .starting: return String(localized: "Starting…")
         case .stopping: return String(localized: "Stopping…")
         case .stopped: return String(localized: "Stopped")
-        case .elsewhere: return String(localized: "Another Matinee is using port \(server.port)")
+        case .elsewhere: return String(localized: "Another Matinee is using port \(String(server.port))")
         case .failed: return String(localized: "Not running")
         }
     }
@@ -228,7 +228,8 @@ struct ShareField: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             HStack {
-                TextField("smb://nas.local/Movies", text: $text)
+                TextField("Share address", text: $text, prompt: Text(verbatim: "smb://nas.local/Movies"))
+                    .labelsHidden()
                     .textFieldStyle(.roundedBorder)
                     .onSubmit(add)
                 Button("Connect", action: add).disabled(busy || text.isEmpty)

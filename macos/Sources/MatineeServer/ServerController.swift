@@ -153,7 +153,7 @@ final class ServerController: ObservableObject {
                 } else if Date().timeIntervalSince(started) > 120 {
                     // Still not answering: a first start with a big library
                     // can take a while, so keep it running but say so.
-                    self.state = .failed(String(localized: "The server started but isn't answering on port \(self.port). Check the log."))
+                    self.state = .failed(String(localized: "The server started but isn't answering on port \(String(self.port)). Check the log."))
                     timer.invalidate()
                 }
             }
