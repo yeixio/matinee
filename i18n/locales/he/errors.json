@@ -143,5 +143,10 @@
   "not_a_song": "זה לא שיר",
   "no_such_audio_track": "אין רצועת שמע כזו",
   "nothing_found_to_play": "לא נמצא מה לנגן",
-  "say_what_to_play": "אמרו מה לנגן"
+  "say_what_to_play": "אמרו מה לנגן",
+  "a_playlist_needs_a_name": "לפלייליסט צריך להיות שם",
+  "a_playlist_holds_up_to_5000_songs": "פלייליסט מכיל עד 5000 שירים",
+  "items_is_required": "items הוא שדה חובה",
+  "only_music_goes_on_a_playlist": "רק מוזיקה נכנסת לפלייליסט",
+  "playlist_not_found": "הפלייליסט לא נמצא"
 }

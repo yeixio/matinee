@@ -5,6 +5,8 @@ import { Link, useSearchParams } from 'react-router-dom'
 import { api, pendingRefetch, type Item, type Library } from '../api'
 import { Artwork } from '../components/Artwork'
 import { GridSkeleton } from '../components/Card'
+import { PlaylistCard, usePlaylists } from '../components/Playlists'
+import { PlaylistGrid } from './Playlist'
 import { LibraryIcon } from '../components/Shell'
 import { Row, RowItem } from '../components/Row'
 import { ViewTabs } from '../components/ViewTabs'
@@ -13,11 +15,11 @@ import { Button, EmptyState, Spinner } from '../components/ui'
 import type { ItemFilter, SortField } from '../filter'
 import { useAudio } from '../player/AudioPlayer'
 
-type View = 'overview' | 'artists' | 'albums' | 'songs'
-const views: View[] = ['overview', 'artists', 'albums', 'songs']
+type View = 'overview' | 'artists' | 'albums' | 'songs' | 'playlists'
+const views: View[] = ['overview', 'playlists', 'artists', 'albums', 'songs']
 
 // How each view sorts, and the orders it offers.
-const sorts: Record<Exclude<View, 'overview'>, SortField[]> = {
+const sorts: Record<Exclude<View, 'overview' | 'playlists'>, SortField[]> = {
   artists: ['title', 'added', 'lastPlayed'],
   albums: ['added', 'title', 'year', 'lastPlayed'],
   songs: ['title', 'added', 'lastPlayed'],
@@ -45,7 +47,7 @@ export default function Music({ lib }: { lib: Library }) {
         </Button>
       </div>
       <ViewTabs views={views} view={view} label={(v) => t(`common:music.${v}`)} onPick={pick} />
-      {view === 'overview' ? <Overview lib={lib} onMore={pick} /> : <All lib={lib} view={view} />}
+      {view === 'overview' ? <Overview lib={lib} onMore={pick} /> : view === 'playlists' ? <PlaylistGrid /> : <All lib={lib} view={view} />}
     </div>
   )
 }
@@ -64,6 +66,7 @@ function Overview({ lib, onMore }: { lib: Library; onMore: (v: View) => void }) 
   const played = useMusic(lib, { kind: ['album'], watched: 'started', sort: 'lastPlayed', limit: 12 }, 'played')
   const added = useMusic(lib, { kind: ['album'], sort: 'added', limit: 12 }, 'added')
   const artists = useMusic(lib, { kind: ['artist'], sort: 'lastPlayed', limit: 12 }, 'artists')
+  const playlists = usePlaylists()
   if (added.isPending) return <GridSkeleton />
   if (!added.data?.length) {
     return (
@@ -82,6 +85,20 @@ function Overview({ lib, onMore }: { lib: Library; onMore: (v: View) => void }) 
             </RowItem>
           ))}
         </Row>
+      )}
+      {!!playlists.data?.length && (
+        <section>
+          <button onClick={() => onMore('playlists')} className="mb-3 text-lg font-semibold tracking-tight hover:text-accent-strong">
+            {t('common:music.playlists')}
+          </button>
+          <div className="scrollbar-none -mx-4 flex gap-4 overflow-x-auto px-4 pb-2 md:-mx-8 md:px-8">
+            {playlists.data.slice(0, 12).map((p) => (
+              <div key={p.id} className="w-36 shrink-0 md:w-44">
+                <PlaylistCard playlist={p} />
+              </div>
+            ))}
+          </div>
+        </section>
       )}
       <Row title={t('common:music.recentlyAdded')}>
         {added.data.map((a) => (
@@ -108,7 +125,7 @@ function Overview({ lib, onMore }: { lib: Library; onMore: (v: View) => void }) 
   )
 }
 
-function All({ lib, view }: { lib: Library; view: Exclude<View, 'overview'> }) {
+function All({ lib, view }: { lib: Library; view: Exclude<View, 'overview' | 'playlists'> }) {
   const { t } = useTranslation()
   const [params, setParams] = useSearchParams()
   const sort = (sorts[view].includes(params.get('sort') as SortField) ? params.get('sort') : sorts[view][0]) as SortField

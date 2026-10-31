@@ -163,6 +163,31 @@ try {
       await shot(page, 'artist')
     }
 
+    // Playlists: two made from songs across albums, then adding to one.
+    {
+      const songs = await api(token, 'GET', `/libraries/${libs.music.id}/items?kind=track&sort=title`)
+      const pick = (n, step) => songs.filter((_, i) => i % step === 0).slice(0, n).map((s) => s.id)
+      const drive = await api(token, 'POST', '/playlists', { name: 'Night drive', items: pick(9, 2) })
+      await api(token, 'POST', '/playlists', { name: 'Sunday morning', items: pick(6, 3).reverse() })
+      await api(token, 'POST', '/playlists', { name: 'Focus', items: [] })
+      await page.goto(`${origin}/library/${libs.music.id}?view=playlists`)
+      await sleep(1000)
+      await shot(page, 'playlists')
+      await page.goto(`${origin}/playlist/${drive.id}`)
+      await sleep(1000)
+      await page.evaluate(() => window.scrollTo(0, 0))
+      await shot(page, 'playlist')
+      if (album) {
+        await page.goto(`${origin}/item/${album.id}`)
+        await sleep(800)
+        await page.getByRole('button', { name: 'More options' }).first().click()
+        await page.getByRole('menuitem', { name: 'Add to playlist' }).click()
+        await sleep(600)
+        await shot(page, 'add-to-playlist', { target: page.getByRole('dialog') })
+        await page.keyboard.press('Escape')
+      }
+    }
+
     // Audiobooks: an hour into the first book of a series.
     const tide = await find('The Tide Keeper', ['book'])
     if (tide && libs.audiobooks) {

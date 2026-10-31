@@ -143,5 +143,10 @@
   "not_a_song": "ikke en sang",
   "no_such_audio_track": "lydsporet findes ikke",
   "nothing_found_to_play": "intet fundet at afspille",
-  "say_what_to_play": "sig, hvad der skal afspilles"
+  "say_what_to_play": "sig, hvad der skal afspilles",
+  "a_playlist_needs_a_name": "en playliste skal have et navn",
+  "a_playlist_holds_up_to_5000_songs": "en playliste kan rumme op til 5000 sange",
+  "items_is_required": "items er påkrævet",
+  "only_music_goes_on_a_playlist": "kun musik kan komme på en playliste",
+  "playlist_not_found": "playlisten blev ikke fundet"
 }

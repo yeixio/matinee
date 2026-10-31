@@ -1398,6 +1398,119 @@ paths:
       responses:
         "204": { description: Off the list (or it wasn't on it). }
 
+  /playlists:
+    get:
+      summary: The person's playlists, or the ones with a given name
+      description: |
+        Playlists are songs someone puts in their own order. Each person and
+        profile has their own; devices at home that haven't signed in share
+        the Home account's. Counts, lengths and covers only go by songs the
+        person may play. Without q, the most recently changed come first.
+      parameters:
+        - name: q
+          in: query
+          description: |
+            Find playlists by name, as someone would say it: the same name
+            first, then names starting with it, then names holding it. Case,
+            accents and punctuation don't count. Others are left out.
+          schema: { type: string }
+      responses:
+        "200":
+          description: Playlists, without their songs.
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: "#/components/schemas/Playlist" } }
+    post:
+      summary: Make a playlist
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name]
+              properties:
+                name: { type: string, maxLength: 100 }
+                items:
+                  type: array
+                  description: Songs to start with. An album or artist adds all their songs, in album order.
+                  items: { type: integer }
+      responses:
+        "201": { $ref: "#/components/responses/PlaylistWithSongs" }
+        "400": { $ref: "#/components/responses/Error" }
+        "404": { $ref: "#/components/responses/Error" }
+  /playlists/{id}:
+    parameters: [{ $ref: "#/components/parameters/PlaylistID" }]
+    get:
+      summary: A playlist and its songs, in order
+      responses:
+        "200": { $ref: "#/components/responses/PlaylistWithSongs" }
+        "404": { $ref: "#/components/responses/Error" }
+    put:
+      summary: Rename a playlist
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name]
+              properties:
+                name: { type: string, maxLength: 100 }
+      responses:
+        "200": { $ref: "#/components/responses/PlaylistWithSongs" }
+        "400": { $ref: "#/components/responses/Error" }
+        "404": { $ref: "#/components/responses/Error" }
+    delete:
+      summary: Delete a playlist
+      responses:
+        "204": { description: Deleted. }
+        "404": { $ref: "#/components/responses/Error" }
+  /playlists/{id}/items:
+    parameters: [{ $ref: "#/components/parameters/PlaylistID" }]
+    post:
+      summary: Add songs to the end of a playlist
+      description: An album or artist adds all their songs. A song already on the playlist goes on again.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [items]
+              properties:
+                items: { type: array, items: { type: integer } }
+      responses:
+        "200": { $ref: "#/components/responses/PlaylistWithSongs" }
+        "400": { $ref: "#/components/responses/Error" }
+        "404": { $ref: "#/components/responses/Error" }
+  /playlists/{id}/entries/{entry}:
+    parameters:
+      - { $ref: "#/components/parameters/PlaylistID" }
+      - { name: entry, in: path, required: true, schema: { type: string }, description: The entry's entryId. }
+    delete:
+      summary: Take one song off a playlist
+      responses:
+        "200": { $ref: "#/components/responses/PlaylistWithSongs" }
+        "404": { $ref: "#/components/responses/Error" }
+  /playlists/{id}/order:
+    parameters: [{ $ref: "#/components/parameters/PlaylistID" }]
+    put:
+      summary: Put a playlist's songs in a new order
+      description: Entries left out follow in the order they had; ids not on the playlist are ignored.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [entries]
+              properties:
+                entries: { type: array, items: { type: string } }
+      responses:
+        "200": { $ref: "#/components/responses/PlaylistWithSongs" }
+        "404": { $ref: "#/components/responses/Error" }
+
   /collections:
     get:
       summary: Collections and box sets
@@ -2475,6 +2588,8 @@ components:
       { name: client, in: path, required: true, schema: { type: string, pattern: "^[A-Za-z0-9._-]{8,64}$" }, description: The id the player made up for itself. }
     PluginID:
       { name: plugin, in: path, required: true, schema: { type: string }, examples: { arcade: { value: arcade } } }
+    PlaylistID:
+      { name: id, in: path, required: true, schema: { type: string } }
     UserCode:
       { name: code, in: path, required: true, schema: { type: string }, description: "The code as typed; case, dashes and spaces don't matter." }
     Filter:
@@ -2499,6 +2614,11 @@ components:
             properties:
               user: { $ref: "#/components/schemas/User" }
               token: { type: string }
+    PlaylistWithSongs:
+      description: The playlist and its songs.
+      content:
+        application/json:
+          schema: { $ref: "#/components/schemas/PlaylistWithSongs" }
     Items:
       description: Items.
       content:
@@ -3112,6 +3232,30 @@ components:
         name: { type: string }
         books: { type: integer, description: How many books. }
         itemIds: { type: array, items: { type: integer }, description: Up to four of its books, first in reading order, for artwork. }
+    Playlist:
+      type: object
+      properties:
+        id: { type: string }
+        name: { type: string }
+        count: { type: integer, description: Songs the person may play. }
+        durationMs: { type: integer }
+        albumIds: { type: array, items: { type: integer }, description: "Up to four different albums on it, for a cover." }
+        createdAt: { type: integer, description: Milliseconds. }
+        updatedAt: { type: integer, description: Milliseconds. }
+    PlaylistWithSongs:
+      allOf:
+        - $ref: "#/components/schemas/Playlist"
+        - type: object
+          properties:
+            entries:
+              type: array
+              description: The songs in order. Each is an Item with its place's own entryId, since a song can be on a playlist twice.
+              items:
+                allOf:
+                  - $ref: "#/components/schemas/Item"
+                  - type: object
+                    properties:
+                      entryId: { type: string }
     Item:
       type: object
       description: Anything browsable. Fields without a value are left out.

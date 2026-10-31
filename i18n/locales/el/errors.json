@@ -143,5 +143,10 @@
   "not_a_song": "δεν είναι τραγούδι",
   "no_such_audio_track": "δεν υπάρχει τέτοιο κομμάτι ήχου",
   "nothing_found_to_play": "δεν βρέθηκε τίποτα για αναπαραγωγή",
-  "say_what_to_play": "πείτε τι να παίξει"
+  "say_what_to_play": "πείτε τι να παίξει",
+  "a_playlist_needs_a_name": "μια λίστα αναπαραγωγής χρειάζεται όνομα",
+  "a_playlist_holds_up_to_5000_songs": "μια λίστα αναπαραγωγής χωράει έως 5000 τραγούδια",
+  "items_is_required": "το items είναι υποχρεωτικό",
+  "only_music_goes_on_a_playlist": "μόνο μουσική μπαίνει σε λίστα αναπαραγωγής",
+  "playlist_not_found": "η λίστα αναπαραγωγής δεν βρέθηκε"
 }

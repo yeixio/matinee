@@ -475,6 +475,23 @@ export type CollectionInput = {
   shared?: boolean
 }
 
+/** A playlist: songs someone put in their own order. Each person and profile has their own. */
+export type Playlist = {
+  id: string
+  name: string
+  /** Songs the person may play, and how long they last. */
+  count: number
+  durationMs: number
+  /** Up to four different albums on it, for its cover. */
+  albumIds: number[]
+  createdAt: number
+  updatedAt: number
+}
+
+/** A song in its place on a playlist; the same song can be on it twice, so each place has its own entryId. */
+export type PlaylistEntry = Item & { entryId: string }
+export type PlaylistDetail = Playlist & { entries: PlaylistEntry[] }
+
 /** One of TMDB's collections, such as a trilogy, with two or more titles in the library. */
 export type BoxSet = { id: number; name: string; count: number; itemIds: number[] }
 
@@ -821,6 +838,17 @@ export const api = {
     request<void>('DELETE', `/api/v1/collections/${encodeURIComponent(id)}/items/${item}`),
   boxSet: (id: number) => request<{ id: number; name: string; items: Item[] }>('GET', `/api/v1/box-sets/${id}`),
   watchList: () => request<Item[]>('GET', '/api/v1/watchlist'),
+  playlists: (q?: string) => request<Playlist[]>('GET', `/api/v1/playlists${q ? `?q=${encodeURIComponent(q)}` : ''}`),
+  playlist: (id: string) => request<PlaylistDetail>('GET', `/api/v1/playlists/${encodeURIComponent(id)}`),
+  createPlaylist: (name: string, items: number[] = []) => request<PlaylistDetail>('POST', '/api/v1/playlists', { name, items }),
+  renamePlaylist: (id: string, name: string) => request<PlaylistDetail>('PUT', `/api/v1/playlists/${encodeURIComponent(id)}`, { name }),
+  deletePlaylist: (id: string) => request<void>('DELETE', `/api/v1/playlists/${encodeURIComponent(id)}`),
+  addToPlaylist: (id: string, items: number[]) =>
+    request<PlaylistDetail>('POST', `/api/v1/playlists/${encodeURIComponent(id)}/items`, { items }),
+  removeFromPlaylist: (id: string, entry: string) =>
+    request<PlaylistDetail>('DELETE', `/api/v1/playlists/${encodeURIComponent(id)}/entries/${encodeURIComponent(entry)}`),
+  orderPlaylist: (id: string, entries: string[]) =>
+    request<PlaylistDetail>('PUT', `/api/v1/playlists/${encodeURIComponent(id)}/order`, { entries }),
   addToWatchList: (id: number) => request<void>('PUT', `/api/v1/watchlist/${id}`),
   removeFromWatchList: (id: number) => request<void>('DELETE', `/api/v1/watchlist/${id}`),
   hideFromContinueWatching: (id: number) => request<void>('DELETE', `/api/v1/continue-watching/${id}`),

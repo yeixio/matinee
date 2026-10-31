@@ -143,5 +143,10 @@
   "not_a_song": "ไม่ใช่เพลง",
   "no_such_audio_track": "ไม่มีแทร็กเสียงนี้",
   "nothing_found_to_play": "ไม่พบสิ่งที่จะเล่น",
-  "say_what_to_play": "บอกสิ่งที่ต้องการเล่น"
+  "say_what_to_play": "บอกสิ่งที่ต้องการเล่น",
+  "a_playlist_needs_a_name": "เพลย์ลิสต์ต้องมีชื่อ",
+  "a_playlist_holds_up_to_5000_songs": "เพลย์ลิสต์หนึ่งรายการมีได้สูงสุด 5000 เพลง",
+  "items_is_required": "ต้องระบุ items",
+  "only_music_goes_on_a_playlist": "เพลย์ลิสต์ใส่ได้เฉพาะเพลง",
+  "playlist_not_found": "ไม่พบเพลย์ลิสต์"
 }

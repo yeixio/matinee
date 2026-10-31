@@ -143,5 +143,10 @@
   "not_a_song": "不是歌曲",
   "no_such_audio_track": "沒有這個音軌",
   "nothing_found_to_play": "找不到可播放的內容",
-  "say_what_to_play": "請說出要播放的內容"
+  "say_what_to_play": "請說出要播放的內容",
+  "a_playlist_needs_a_name": "播放列表需要一個名稱",
+  "a_playlist_holds_up_to_5000_songs": "一個播放列表最多可容納 5000 首歌曲",
+  "items_is_required": "items 為必填",
+  "only_music_goes_on_a_playlist": "播放列表只能加入音樂",
+  "playlist_not_found": "找不到播放列表"
 }

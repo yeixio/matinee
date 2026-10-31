@@ -143,5 +143,10 @@
   "not_a_song": "यह गाना नहीं है",
   "no_such_audio_track": "ऐसा कोई ऑडियो ट्रैक नहीं है",
   "nothing_found_to_play": "चलाने के लिए कुछ नहीं मिला",
-  "say_what_to_play": "बताएँ कि क्या चलाना है"
+  "say_what_to_play": "बताएँ कि क्या चलाना है",
+  "a_playlist_needs_a_name": "प्लेलिस्ट को एक नाम चाहिए",
+  "a_playlist_holds_up_to_5000_songs": "एक प्लेलिस्ट में अधिकतम 5000 गाने आते हैं",
+  "items_is_required": "items ज़रूरी है",
+  "only_music_goes_on_a_playlist": "प्लेलिस्ट में सिर्फ़ संगीत जोड़ा जा सकता है",
+  "playlist_not_found": "प्लेलिस्ट नहीं मिली"
 }
