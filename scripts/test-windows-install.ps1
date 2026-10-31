@@ -91,8 +91,15 @@ Shot "welcome"
 [System.Windows.Forms.SendKeys]::SendWait("{ENTER}")
 
 # A second start opens the running one rather than starting another server.
-Start-Process -FilePath (Join-Path $dir "matinee-tray.exe") -ArgumentList "--background" -Wait
-Check ((Get-Process matinee-tray).Count -eq 1) "a second start exits"
+# Windows can list an exiting process for a moment, so allow it a few seconds.
+$second = Start-Process -FilePath (Join-Path $dir "matinee-tray.exe") -ArgumentList "--background" -PassThru
+$exited = $second.WaitForExit(15000)
+foreach ($i in 1..10) {
+  $trays = @(Get-Process matinee-tray -ErrorAction SilentlyContinue)
+  if ($trays.Count -eq 1) { break }
+  Start-Sleep 1
+}
+Check ($exited -and $trays.Count -eq 1) "a second start exits (exited: $exited, trays running: $($trays.Count))"
 
 # The tray menu, opened the way a click opens it. On the windows-11-arm
 # runner the notification area turns down icons (Shell_NotifyIcon fails
