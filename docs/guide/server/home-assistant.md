@@ -29,7 +29,7 @@ You need a Matinee admin account, and Home Assistant 2026.1 or newer.
 
 ![Approving Home Assistant on the server's /link page](../images/link-home-assistant.webp)
 
-Home Assistant then appears in Matinee under **Settings → Your devices**, where you can sign it out at any time. It stays signed in as long as it's in use, so you won't have to do this again.
+Home Assistant then appears in Matinee under **Settings → You → Your devices**, where you can sign it out at any time. It stays signed in as long as it's in use, so you won't have to do this again.
 
 ## Controlling players
 
@@ -124,5 +124,5 @@ actions:
 - **Matinee wasn't discovered.** Discovery only works when Home Assistant and Matinee are on the same network. Add it by address instead. A server in Kubernetes is discovered when the Helm chart's discovery is on (see [Kubernetes](/docs/server/kubernetes/#the-apps-at-home)).
 - **"That account isn't a Matinee admin".** Approve the code while signed in as an admin. Home Assistant needs to see and control every player, which only admins may.
 - **A player doesn't show up.** Update the app or reload the web player: players from before this feature don't report what they play.
-- **Home Assistant asks to sign in again.** Someone signed it out under **Settings → Your devices**, or removed the admin account it used. Click **Reconfigure** and approve a new code.
+- **Home Assistant asks to sign in again.** Someone signed it out under **Settings → You → Your devices**, or removed the admin account it used. Click **Reconfigure** and approve a new code.
 - **Players show as unavailable.** Home Assistant lost its connection to Matinee and reconnects by itself, waiting a little longer each time, up to a minute.

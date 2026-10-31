@@ -22,7 +22,7 @@ A package can be up to 1 GB, with up to 20,000 files and 2 GB unpacked.
 
 ## Share it
 
-Put the `.matinee-plugin` file anywhere people can download it over https. A release on GitHub, GitLab or Codeberg works well, since each version gets its own address. Admins install it with **Settings → Plugins → Add plugin → From a link**, and the link they paste is the file's address. They can also download it and use **From a file**.
+Put the `.matinee-plugin` file anywhere people can download it over https. A release on GitHub, GitLab or Codeberg works well, since each version gets its own address. Admins install it with **Settings → Add-ons → Plugins → Add plugin → From a link**, and the link they paste is the file's address. They can also download it and use **From a file**.
 
 Say on your plugin's page:
 

@@ -753,6 +753,36 @@
       "perYear": "{{price}} per jaar",
       "perMonth": "{{price}} per maand",
       "paid": "Vooraf gefactureerd door Yeix. Altijd opzegbaar; het loopt tot het eind van de betaalde periode."
+    },
+    "groups": {
+      "you": {
+        "title": "Jij",
+        "hint": "Taal, uiterlijk, afspelen en je apparaten"
+      },
+      "libraries": {
+        "title": "Bibliotheken",
+        "hint": "Mappen, nieuwe bestanden, analyse en importeren"
+      },
+      "people": {
+        "title": "Personen en profielen",
+        "hint": "Accounts, beheerders en profielen"
+      },
+      "content": {
+        "title": "Inhoud",
+        "hint": "Posters, podcasts zoeken, trailers en rijen op Home"
+      },
+      "streaming": {
+        "title": "Streamen",
+        "hint": "Transcoderen en kwaliteit"
+      },
+      "network": {
+        "title": "Netwerk",
+        "hint": "Thuisnetwerk en toegang op afstand"
+      },
+      "add-ons": {
+        "title": "Uitbreidingen",
+        "hint": "Radarr, Sonarr, Overseerr en plug-ins"
+      }
     }
   },
   "language": {

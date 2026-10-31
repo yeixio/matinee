@@ -12,7 +12,7 @@ It's off until an admin turns it on, because it asks more of the server.
 
 ## Turning it on
 
-In **Settings → Transcoding**, turn on **Adaptive quality**, then pick the **Quality steps** players can use:
+In **Settings → Streaming → Transcoding**, turn on **Adaptive quality**, then pick the **Quality steps** players can use:
 
 | Step | Picture | Video | Sound |
 | --- | --- | --- | --- |
@@ -21,7 +21,7 @@ In **Settings → Transcoding**, turn on **Adaptive quality**, then pick the **Q
 | 480p | up to 854 wide | 1.5 Mbps | stereo, 96 kbps |
 | 360p | up to 640 wide | 0.7 Mbps | stereo, 96 kbps |
 
-![Settings → Transcoding with adaptive quality on, all four quality steps picked and a 720p limit away from home](../images/adaptive-quality.webp)
+![Settings → Streaming → Transcoding with adaptive quality on, all four quality steps picked and a 720p limit away from home](../images/adaptive-quality.webp)
 
 ## Picking a quality
 

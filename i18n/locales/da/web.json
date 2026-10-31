@@ -753,6 +753,36 @@
       "perYear": "{{price}} om året",
       "perMonth": "{{price}} om måneden",
       "paid": "Opkræves forud af Yeix. Opsig når som helst; det kører til udgangen af den betalte periode."
+    },
+    "groups": {
+      "you": {
+        "title": "Dig",
+        "hint": "Sprog, udseende, afspilning og dine enheder"
+      },
+      "libraries": {
+        "title": "Biblioteker",
+        "hint": "Mapper, nye filer, analyse og import"
+      },
+      "people": {
+        "title": "Personer og profiler",
+        "hint": "Konti, administratorer og profiler"
+      },
+      "content": {
+        "title": "Indhold",
+        "hint": "Plakater, podcastsøgning, trailere og rækker på Hjem"
+      },
+      "streaming": {
+        "title": "Streaming",
+        "hint": "Omkodning og kvalitet"
+      },
+      "network": {
+        "title": "Netværk",
+        "hint": "Hjemmenetværk og fjernadgang"
+      },
+      "add-ons": {
+        "title": "Tilføjelser",
+        "hint": "Radarr, Sonarr, Overseerr og plugins"
+      }
     }
   },
   "language": {

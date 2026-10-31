@@ -16,7 +16,7 @@ The watch app comes with the Android app from Google Play, version 1.0.14 or lat
 2. On the watch, open the Play Store, find **Matinee** under the apps on your phone, and install it.
 3. Open **Matinee** on the watch, with your phone nearby. The phone signs the watch in by itself; you don't type anything on the watch.
 
-The watch then shows up under **Settings → Your devices** with its own name (see [Your devices](/docs/apps/signing-in/#your-devices)), so you can sign it out from there like any other device. The phone app doesn't need to be open, then or later.
+The watch then shows up under **Settings → You → Your devices** with its own name (see [Your devices](/docs/apps/signing-in/#your-devices)), so you can sign it out from there like any other device. The phone app doesn't need to be open, then or later.
 
 ## What's on the watch
 

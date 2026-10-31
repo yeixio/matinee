@@ -749,6 +749,36 @@
       "perYear": "연 {{price}}",
       "perMonth": "월 {{price}}",
       "paid": "Yeix가 선불로 청구합니다. 언제든 해지할 수 있으며 결제한 기간이 끝날 때까지 유지됩니다."
+    },
+    "groups": {
+      "you": {
+        "title": "내 설정",
+        "hint": "언어, 모양, 재생 및 내 기기"
+      },
+      "libraries": {
+        "title": "라이브러리",
+        "hint": "폴더, 새 파일, 분석 및 가져오기"
+      },
+      "people": {
+        "title": "사용자 및 프로필",
+        "hint": "계정, 관리자 및 프로필"
+      },
+      "content": {
+        "title": "콘텐츠",
+        "hint": "포스터, 팟캐스트 검색, 예고편 및 홈 행"
+      },
+      "streaming": {
+        "title": "스트리밍",
+        "hint": "트랜스코딩 및 화질"
+      },
+      "network": {
+        "title": "네트워크",
+        "hint": "홈 네트워크 및 원격 액세스"
+      },
+      "add-ons": {
+        "title": "부가 기능",
+        "hint": "Radarr, Sonarr, Overseerr 및 플러그인"
+      }
     }
   },
   "language": {

@@ -110,7 +110,7 @@ An author's photo comes from `author.jpg` (or `folder.jpg`) in their folder, or 
 
 Open Library's covers are of the printed book, which most audiobook covers are made from. A book is only matched when Open Library has the same title by the same author; notes like "(Unabridged)" are left out of the search.
 
-To look again for missing covers, for example after adding images to book folders, an admin opens **Settings**, finds the audiobook library under **Libraries**, and clicks **Find artwork**.
+To look again for missing covers, for example after adding images to book folders, an admin opens **Settings → Libraries**, finds the audiobook library, and clicks **Find artwork**.
 
 <!-- /since -->
 

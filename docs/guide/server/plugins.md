@@ -6,11 +6,11 @@ sidebar:
   order: 9
 ---
 
-Plugins add things Matinee doesn't do by itself: a new kind of library with its own player, such as [arcade games](/docs/server/arcade/), or something that happens when a title is added or someone starts watching. Only admins can add them, in **Settings → Plugins**.
+Plugins add things Matinee doesn't do by itself: a new kind of library with its own player, such as [arcade games](/docs/server/arcade/), or something that happens when a title is added or someone starts watching. Only admins can add them, in **Settings → Add-ons → Plugins**.
 
 ## Adding a plugin
 
-1. Open **Settings → Plugins** and click **Add plugin**.
+1. Open **Settings → Add-ons → Plugins** and click **Add plugin**.
 2. Pick one of the **Official plugins** and click **Install**. You can also install one from a link someone gave you, with **From a link**, or a `.matinee-plugin` file you downloaded, with **From a file**.
 3. The plugin appears in the list, turned off. Click its name to see what it adds and what it can reach (below), then click **Turn on**.
 

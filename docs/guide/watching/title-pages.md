@@ -66,6 +66,6 @@ An admin can click **Analyze again** after changing a file in place. Normally Ma
 
 ## Trailers from YouTube
 
-Trailers from TMDB play from YouTube. An admin who'd rather not offer them can turn off **Settings → Trailers → Trailers from YouTube**; trailer files next to your media always show.
+Trailers from TMDB play from YouTube. An admin who'd rather not offer them can turn off **Settings → Content → Trailers → Trailers from YouTube**; trailer files next to your media always show.
 
 ![The Trailers setting](../images/trailers.webp)

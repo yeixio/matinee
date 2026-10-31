@@ -749,6 +749,36 @@
       "perYear": "{{price}} per tahun",
       "perMonth": "{{price}} per bulan",
       "paid": "Ditagih di muka oleh Yeix. Batalkan kapan saja; tetap berlaku sampai akhir periode yang dibayar."
+    },
+    "groups": {
+      "you": {
+        "title": "Anda",
+        "hint": "Bahasa, tampilan, pemutaran, dan perangkat Anda"
+      },
+      "libraries": {
+        "title": "Pustaka",
+        "hint": "Folder, file baru, analisis, dan impor"
+      },
+      "people": {
+        "title": "Orang dan profil",
+        "hint": "Akun, admin, dan profil"
+      },
+      "content": {
+        "title": "Konten",
+        "hint": "Poster, pencarian podcast, trailer, dan baris Beranda"
+      },
+      "streaming": {
+        "title": "Streaming",
+        "hint": "Transkode dan kualitas"
+      },
+      "network": {
+        "title": "Jaringan",
+        "hint": "Jaringan rumah dan akses jarak jauh"
+      },
+      "add-ons": {
+        "title": "Pengaya",
+        "hint": "Radarr, Sonarr, Overseerr, dan plugin"
+      }
     }
   },
   "language": {

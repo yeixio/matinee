@@ -5,9 +5,9 @@ sidebar:
   order: 4
 ---
 
-Matinee has seven built-in themes. Everyone picks their own under **Settings → Appearance**, and their pick follows them to the phone and TV apps.
+Matinee has seven built-in themes. Everyone picks their own under **Settings → You → Appearance**, and their pick follows them to the phone and TV apps.
 
-![Settings → Appearance with the seven themes](../images/themes.webp)
+![Settings → You → Appearance with the seven themes](../images/themes.webp)
 
 | Theme | Look |
 | --- | --- |
@@ -58,6 +58,6 @@ A theme is a small JSON file of colors and font names. It holds no code, so it's
    }
    ```
 
-3. Open **Settings → Appearance**. The new theme is there straight away; the apps pick it up the next time they open.
+3. Open **Settings → You → Appearance**. The new theme is there straight away; the apps pick it up the next time they open.
 
 If a file has a mistake, admins see it under **Server theme**. Every field is described in the [theme file reference](https://github.com/yeixio/matinee/blob/main/docs/themes.md).

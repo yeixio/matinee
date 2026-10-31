@@ -16,7 +16,7 @@ The watch app comes with the iPhone app from the App Store, version 1.0.15 or la
 2. Matinee installs on your watch by itself if automatic app installs are on. If it doesn't, open the **Watch** app on your iPhone, find **Matinee** under **Available apps**, and tap **Install**.
 3. Open **Matinee** on the watch, with your iPhone nearby. The iPhone signs the watch in by itself; you don't type anything on the watch.
 
-The watch then shows up under **Settings → Your devices** with its own name (see [Your devices](/docs/apps/signing-in/#your-devices)), so you can sign it out from there like any other device. The iPhone app doesn't need to be open, then or later.
+The watch then shows up under **Settings → You → Your devices** with its own name (see [Your devices](/docs/apps/signing-in/#your-devices)), so you can sign it out from there like any other device. The iPhone app doesn't need to be open, then or later.
 
 ## What's on the watch
 

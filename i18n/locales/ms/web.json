@@ -749,6 +749,36 @@
       "perYear": "{{price}} setahun",
       "perMonth": "{{price}} sebulan",
       "paid": "Dibilkan terlebih dahulu oleh Yeix. Batalkan bila-bila masa; ia berterusan hingga akhir tempoh yang dibayar."
+    },
+    "groups": {
+      "you": {
+        "title": "Anda",
+        "hint": "Bahasa, rupa, main balik dan peranti anda"
+      },
+      "libraries": {
+        "title": "Pustaka",
+        "hint": "Folder, fail baharu, analisis dan import"
+      },
+      "people": {
+        "title": "Orang dan profil",
+        "hint": "Akaun, pentadbir dan profil"
+      },
+      "content": {
+        "title": "Kandungan",
+        "hint": "Poster, carian podcast, treler dan baris Laman Utama"
+      },
+      "streaming": {
+        "title": "Penstriman",
+        "hint": "Transkod dan kualiti"
+      },
+      "network": {
+        "title": "Rangkaian",
+        "hint": "Rangkaian rumah dan akses jauh"
+      },
+      "add-ons": {
+        "title": "Tambahan",
+        "hint": "Radarr, Sonarr, Overseerr dan pemalam"
+      }
     }
   },
   "language": {

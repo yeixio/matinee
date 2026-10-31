@@ -753,6 +753,36 @@
       "perYear": "{{price}} per år",
       "perMonth": "{{price}} per månad",
       "paid": "Debiteras i förskott av Yeix. Säg upp när du vill; den gäller till slutet av den betalda perioden."
+    },
+    "groups": {
+      "you": {
+        "title": "Du",
+        "hint": "Språk, utseende, uppspelning och dina enheter"
+      },
+      "libraries": {
+        "title": "Bibliotek",
+        "hint": "Mappar, nya filer, analys och import"
+      },
+      "people": {
+        "title": "Personer och profiler",
+        "hint": "Konton, administratörer och profiler"
+      },
+      "content": {
+        "title": "Innehåll",
+        "hint": "Affischer, poddsökning, trailers och rader på Hem"
+      },
+      "streaming": {
+        "title": "Strömning",
+        "hint": "Omkodning och kvalitet"
+      },
+      "network": {
+        "title": "Nätverk",
+        "hint": "Hemnätverk och fjärråtkomst"
+      },
+      "add-ons": {
+        "title": "Tillägg",
+        "hint": "Radarr, Sonarr, Overseerr och plugins"
+      }
     }
   },
   "language": {

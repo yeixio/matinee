@@ -749,6 +749,36 @@
       "perYear": "{{price}} mỗi năm",
       "perMonth": "{{price}} mỗi tháng",
       "paid": "Yeix thu tiền trước. Hủy bất cứ lúc nào; gói vẫn dùng được đến hết kỳ đã trả."
+    },
+    "groups": {
+      "you": {
+        "title": "Bạn",
+        "hint": "Ngôn ngữ, giao diện, phát và thiết bị của bạn"
+      },
+      "libraries": {
+        "title": "Thư viện",
+        "hint": "Thư mục, tệp mới, phân tích và nhập"
+      },
+      "people": {
+        "title": "Người dùng và hồ sơ",
+        "hint": "Tài khoản, quản trị viên và hồ sơ"
+      },
+      "content": {
+        "title": "Nội dung",
+        "hint": "Áp phích, tìm podcast, trailer và các hàng ở Trang chủ"
+      },
+      "streaming": {
+        "title": "Phát trực tuyến",
+        "hint": "Chuyển mã và chất lượng"
+      },
+      "network": {
+        "title": "Mạng",
+        "hint": "Mạng gia đình và truy cập từ xa"
+      },
+      "add-ons": {
+        "title": "Tiện ích bổ sung",
+        "hint": "Radarr, Sonarr, Overseerr và plugin"
+      }
     }
   },
   "language": {

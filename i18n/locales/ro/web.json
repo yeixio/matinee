@@ -757,6 +757,36 @@
       "perYear": "{{price}} pe an",
       "perMonth": "{{price}} pe lună",
       "paid": "Facturat în avans de Yeix. Anulezi oricând; rămâne activ până la finalul perioadei plătite."
+    },
+    "groups": {
+      "you": {
+        "title": "Tu",
+        "hint": "Limbă, aspect, redare și dispozitivele tale"
+      },
+      "libraries": {
+        "title": "Biblioteci",
+        "hint": "Dosare, fișiere noi, analiză și import"
+      },
+      "people": {
+        "title": "Persoane și profiluri",
+        "hint": "Conturi, administratori și profiluri"
+      },
+      "content": {
+        "title": "Conținut",
+        "hint": "Postere, căutare podcasturi, trailere și rânduri pe Acasă"
+      },
+      "streaming": {
+        "title": "Streaming",
+        "hint": "Transcodare și calitate"
+      },
+      "network": {
+        "title": "Rețea",
+        "hint": "Rețeaua de acasă și acces la distanță"
+      },
+      "add-ons": {
+        "title": "Suplimente",
+        "hint": "Radarr, Sonarr, Overseerr și pluginuri"
+      }
     }
   },
   "language": {

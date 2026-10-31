@@ -19,7 +19,7 @@ A phone, TV or browser on your home network can browse and play without an accou
 
 A profile picked at home this way only works at home. If that phone leaves the house, it has to sign in.
 
-To make everyone sign in at home too, turn on **Settings → Home network → Ask for sign-in at home**. Until the first admin account exists, nobody gets in as Home: setting up the server comes first.
+To make everyone sign in at home too, turn on **Settings → Network → Home network → Ask for sign-in at home**. Until the first admin account exists, nobody gets in as Home: setting up the server comes first.
 
 ## How Matinee decides you're at home
 
@@ -36,7 +36,7 @@ Matinee goes by the address a connection comes from, and when it can't be sure, 
 
 Away from home, every device signs in with a username and password, or with a code (below). Until then the server answers only what's needed to sign in: its name, its sign-in page, and the code sign-in. Your library, posters, video and settings all need a signed-in account.
 
-When Matinee opens a port for [remote access](/docs/server/remote-access/), that port only speaks HTTPS, with a certificate from Let's Encrypt, so passwords and video are encrypted on the way. Admins choose who has an account under [Settings → People](/docs/household/people/); nobody can make one for themselves.
+When Matinee opens a port for [remote access](/docs/server/remote-access/), that port only speaks HTTPS, with a certificate from Let's Encrypt, so passwords and video are encrypted on the way. Admins choose who has an account under [Settings → People and profiles → People](/docs/household/people/); nobody can make one for themselves.
 
 <!-- since: v0.1.1 -->
 ### Matinee Connect never carries your video
@@ -58,7 +58,7 @@ Typing a password with a remote is no fun, so TVs and other devices can show a s
 
 A device stays signed in as long as it's used at least once every 90 days, so a TV or [Home Assistant](/docs/server/home-assistant/) doesn't keep asking.
 
-**Settings → Your devices** lists every device signed in as you. Sign out any you don't recognize, or one you've lost. Changing your password signs out all your other devices, and an admin [resetting someone's password](/docs/household/people/#manage-accounts) signs that person out everywhere.
+**Settings → You → Your devices** lists every device signed in as you. Sign out any you don't recognize, or one you've lost. Changing your password signs out all your other devices, and an admin [resetting someone's password](/docs/household/people/#manage-accounts) signs that person out everywhere.
 
 ## Who can control which player
 

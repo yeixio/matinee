@@ -1,8 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { ChevronLeft, Folder, FolderOpen, Image as ImageIcon, KeyRound, Monitor, Plus, RefreshCw, Trash2, UserPlus, X } from 'lucide-react'
-import { useEffect, useRef, useState, type FormEvent } from 'react'
+import { ChevronLeft, ChevronRight, Folder, FolderOpen, Gauge, Globe, Image as ImageIcon, KeyRound, LibraryBig, Monitor, Plus, Puzzle, RefreshCw, Trash2, UserPlus, UserRound, UsersRound, X, type LucideIcon } from 'lucide-react'
+import { useEffect, useState, type FormEvent, type ReactNode } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router-dom'
+import { Link, Navigate, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { api, type ConnectStatus, type LibraryKind, type PlaybackPrefs, type RemoteStatus, type User } from '../api'
 import { LanguagePicker } from '../components/LanguagePicker'
 import { NewFiles, watchSummary } from '../components/LibraryWatch'
@@ -17,32 +17,68 @@ import { ImportSettings } from '../components/ImportSettings'
 import i18n, { formatLocale } from '../i18n'
 import { DeviceIcon } from './Link'
 
+// Settings, in groups: everyone's own settings first, then the server's,
+// one group per page. Desktop lists the groups down the side; a phone opens
+// on the list and each group is its own page, as in the phone app.
+type SettingsGroup = { id: string; icon: LucideIcon; sections: [string, ReactNode][] }
+
+/** Which group each section lives in, so /settings#<section> links still land. */
+export const settingsSections: Record<string, string> = {
+  language: 'you', appearance: 'you', playback: 'you', account: 'you', devices: 'you',
+  libraries: 'libraries', import: 'libraries', 'new-files': 'libraries', 'media-analysis': 'libraries',
+  people: 'people', profiles: 'people',
+  posters: 'content', 'podcast-index': 'content', trailers: 'content', 'home-rows': 'content',
+  transcoding: 'streaming',
+  'home-network': 'network', 'remote-access': 'network',
+  arr: 'add-ons', overseerr: 'add-ons', plugins: 'add-ons',
+}
+
 export default function Settings() {
   const { t } = useTranslation()
+  const { group: groupId } = useParams()
+  const { hash } = useLocation()
   const { data: me } = useQuery<User>({ queryKey: ['me'], queryFn: api.me, staleTime: Infinity })
-  return (
-    <div className="max-w-3xl space-y-12">
-      <h1 className="text-2xl font-bold tracking-tight">{t('nav.settings')}</h1>
-      {me && <LanguagePicker me={me} />}
-      {me && <Appearance me={me} />}
-      {me && <Playback />}
-      {me?.isAdmin && <Libraries />}
-      {me?.isAdmin && <ImportSettings />}
-      {me?.isAdmin && <NewFiles />}
-      {me?.isAdmin && <MediaAnalysis />}
-      {me?.isAdmin && <TMDBKey />}
-      {me?.isAdmin && <PodcastIndexKey />}
-      {me?.isAdmin && <Users me={me} />}
-      {me?.isAdmin && <Profiles />}
-      {me?.isAdmin && <HomeNetwork />}
-      {me?.isAdmin && <RemoteAccess />}
-      {me?.isAdmin && <Trailers />}
-      {me?.isAdmin && <HolidayRows />}
-      {me?.isAdmin && <Transcoding />}
-      {me?.isAdmin && <Integrations />}
-      {me?.isAdmin && <Plugins />}
-      {me && !me.guest && <Account />}
-      <Devices />
+  useScrollToHash(hash)
+  if (!me) return null
+
+  const admin = me.isAdmin
+  const groups: SettingsGroup[] = [
+    {
+      id: 'you',
+      icon: UserRound,
+      sections: [
+        ['language', <LanguagePicker me={me} />],
+        ['appearance', <Appearance me={me} />],
+        ['playback', <Playback />],
+        ['account', !me.guest && <Account />],
+        ['devices', <Devices />],
+      ],
+    },
+    ...(admin
+      ? [
+          { id: 'libraries', icon: LibraryBig, sections: [['libraries', <Libraries />], ['import', <ImportSettings />], ['new-files', <NewFiles />], ['media-analysis', <MediaAnalysis />]] },
+          { id: 'people', icon: UsersRound, sections: [['people', <Users me={me} />], ['profiles', <Profiles />]] },
+          { id: 'content', icon: ImageIcon, sections: [['posters', <TMDBKey />], ['podcast-index', <PodcastIndexKey />], ['trailers', <Trailers />], ['home-rows', <HolidayRows />]] },
+          { id: 'streaming', icon: Gauge, sections: [['transcoding', <Transcoding />]] },
+          { id: 'network', icon: Globe, sections: [['home-network', <HomeNetwork />], ['remote-access', <RemoteAccess />]] },
+          { id: 'add-ons', icon: Puzzle, sections: [['arr', <Integrations />], ['plugins', <Plugins />]] },
+        ] satisfies SettingsGroup[]
+      : []),
+  ]
+
+  // An old link to a section (/settings#podcast-index) goes to its group.
+  const wantGroup = settingsSections[hash.slice(1)]
+  if (wantGroup && wantGroup !== (groupId ?? 'you') && groups.some((g) => g.id === wantGroup)) {
+    return <Navigate replace to={`/settings/${wantGroup}${hash}`} />
+  }
+  const group = groups.find((g) => g.id === (groupId ?? groups[0].id))
+  if (!group) return <Navigate replace to="/settings" />
+  const single = groups.length === 1
+  // On a phone, /settings is the list of groups; desktop shows the first group beside it.
+  const index = !groupId && !single
+
+  const footer = (
+    <div className="space-y-3">
       {/* TMDB's API terms ask apps that use it for this notice. */}
       <p className="text-xs text-faint">
         <Trans
@@ -53,6 +89,70 @@ export default function Settings() {
       <ServerVersion />
     </div>
   )
+  return (
+    <div className="max-w-5xl">
+      <h1 className={`text-2xl font-bold tracking-tight ${groupId ? 'hidden md:block' : ''}`}>{t('nav.settings')}</h1>
+      {groupId && (
+        <div className="md:hidden">
+          <Link to="/settings" className="-ms-1 inline-flex items-center gap-1 text-sm text-muted hover:text-text">
+            <ChevronLeft className="size-4 rtl:-scale-x-100" /> {t('nav.settings')}
+          </Link>
+          <h1 className="mt-2 text-2xl font-bold tracking-tight">{t(`settings.groups.${group.id}.title`)}</h1>
+        </div>
+      )}
+      <div className={`mt-8 ${single ? '' : 'md:grid md:grid-cols-[14rem_minmax(0,1fr)] md:gap-12'}`}>
+        {!single && (
+          <nav aria-label={t('nav.settings')} className={`${index ? '' : 'hidden'} md:block`}>
+            <ul className="space-y-2.5 md:sticky md:top-24 md:space-y-1">
+              {groups.map((g) => (
+                <li key={g.id}>
+                  <Link
+                    to={`/settings/${g.id}`}
+                    aria-current={g.id === group.id ? 'page' : undefined}
+                    className={`flex items-center gap-3 rounded-xl border border-line/60 bg-surface/50 px-4 py-3.5 font-medium md:border-0 md:px-3 md:py-2 md:text-sm ${
+                      g.id === group.id ? 'md:bg-text/10 md:text-text' : 'md:bg-transparent md:text-muted md:hover:bg-text/5 md:hover:text-text'
+                    }`}
+                  >
+                    <g.icon className="size-5 shrink-0 text-muted md:size-4" />
+                    <span className="min-w-0 flex-1">
+                      {t(`settings.groups.${g.id}.title`)}
+                      <span className="block text-xs font-normal text-faint md:hidden">{t(`settings.groups.${g.id}.hint`)}</span>
+                    </span>
+                    <ChevronRight className="size-4 text-faint md:hidden rtl:-scale-x-100" />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        )}
+        <div className={`max-w-3xl space-y-12 ${index ? 'hidden md:block' : ''}`}>
+          {group.sections
+            .filter(([, el]) => el)
+            .map(([id, el]) => (
+              <div key={id} id={id} className="scroll-mt-24">
+                {el}
+              </div>
+            ))}
+          {footer}
+        </div>
+        {index && <div className="mt-12 md:hidden">{footer}</div>}
+      </div>
+    </div>
+  )
+}
+
+/** Scrolls to the section a link names once it's on the page. */
+function useScrollToHash(hash: string) {
+  useEffect(() => {
+    if (!hash) return
+    let tries = 0
+    const timer = setInterval(() => {
+      const el = document.getElementById(decodeURIComponent(hash.slice(1)))
+      if (el || ++tries > 20) clearInterval(timer)
+      el?.scrollIntoView()
+    }, 100)
+    return () => clearInterval(timer)
+  }, [hash])
 }
 
 function Libraries() {
@@ -883,13 +983,8 @@ function PodcastIndexKey() {
     e.preventDefault()
     save.mutate()
   }
-  // A podcast library's Add page links here.
-  const here = useRef<HTMLElement>(null)
-  useEffect(() => {
-    if (window.location.hash === '#podcast-index') here.current?.scrollIntoView()
-  }, [])
   return (
-    <section ref={here} id="podcast-index" className="scroll-mt-24 space-y-4">
+    <section className="space-y-4">
       <h2 className="text-lg font-semibold">{t('settings.podcastIndex.title')}</h2>
       <p className="text-sm text-muted">
         <Trans

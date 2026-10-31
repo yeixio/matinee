@@ -8,7 +8,7 @@ sidebar:
 
 Moving from another media server? Matinee can read that server's data folder and bring over what people watched, where they stopped, the collections you made and the posters you uploaded. Your films and shows stay where they are: Matinee only reads the other server's data and never changes it.
 
-![Settings → Import from another media server, with a suggested path change taken and two people to match](../images/import.webp)
+![Settings → Libraries → Import from another media server, with a suggested path change taken and two people to match](../images/import.webp)
 
 ## Before you start
 
@@ -19,7 +19,7 @@ The data folder is the one that holds folders called `Plug-in Support`, `Metadat
 
 ## Import
 
-Open **Settings → Import from another media server** and press **Start**.
+Open **Settings → Libraries → Import from another media server** and press **Start**.
 
 1. **Where from.** Matinee looks in the usual places on the computer it runs on and lists any data folder it finds. Otherwise press **Pick a folder** and browse to the data folder, or a folder above it. You can also **Upload a database file** from your own computer; that brings over history and collections, but not posters, which live in the data folder beside it.
 2. **Files.** Matinee matches the other server's files to its own by path, and says how many it found. If the two servers see the same share under different folders (say `/data` there and `/media` here, which is common with Docker), Matinee spots the difference and suggests a path change: press **Use it**. You can add your own changes too, then press **Check again**. **Files Matinee doesn't have** lists a few that still don't match, so you can see why.
