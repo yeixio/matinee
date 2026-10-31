@@ -601,6 +601,9 @@
       "added": "Ditambah",
       "useFolder": "Gunakan folder ini",
       "noSubfolders": "Tiada subfolder",
+      "goTo": "Atau taip folder, contohnya \\\\nas\\media",
+      "go": "Pergi",
+      "drives": "Pemacu",
       "podcastsNoFolders": "Podcast tidak memerlukan folder. Tambah rancangan dari pustaka setelah ia dicipta.",
       "podcastsChecked": "Episod baharu disemak setiap jam"
     },

@@ -605,6 +605,9 @@
       "added": "Toegevoegd",
       "useFolder": "Deze map gebruiken",
       "noSubfolders": "Geen submappen",
+      "goTo": "Of typ een map, zoals \\\\nas\\media",
+      "go": "Ga",
+      "drives": "Stations",
       "podcastsNoFolders": "Podcasts hebben geen map nodig. Voeg programma’s toe vanuit de bibliotheek zodra die bestaat.",
       "podcastsChecked": "Elk uur gecontroleerd op nieuwe afleveringen"
     },

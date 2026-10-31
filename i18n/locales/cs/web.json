@@ -613,6 +613,9 @@
       "added": "Přidáno",
       "useFolder": "Použít tuto složku",
       "noSubfolders": "Žádné podsložky",
+      "goTo": "Nebo zadejte složku, například \\\\nas\\media",
+      "go": "Přejít",
+      "drives": "Jednotky",
       "podcastsNoFolders": "Podcasty nepotřebují složku. Pořady přidáte v knihovně, jakmile ji vytvoříte.",
       "podcastsChecked": "Nové díly se kontrolují každou hodinu"
     },

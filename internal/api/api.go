@@ -904,6 +904,9 @@ func (s *Server) refreshLibraryArtwork(w http.ResponseWriter, r *http.Request) {
 }
 
 // browseFS lists subfolders so admins can pick library folders from the browser.
+// paths has each subfolder's full path, so the browser needn't know how this
+// server's paths are written. On Windows, / lists the drives (drives is true),
+// since there's no one root above them.
 func (s *Server) browseFS(w http.ResponseWriter, r *http.Request) {
 	dir := r.URL.Query().Get("path")
 	if dir == "" {
@@ -911,6 +914,11 @@ func (s *Server) browseFS(w http.ResponseWriter, r *http.Request) {
 	}
 	if dir == "" {
 		dir = "/"
+	}
+	if isDriveList(dir) {
+		drives := listDrives()
+		writeJSON(w, http.StatusOK, map[string]any{"path": "/", "parent": "/", "dirs": drives, "paths": drives, "drives": true})
+		return
 	}
 	dir = filepath.Clean(dir)
 	entries, err := os.ReadDir(dir)
@@ -925,8 +933,11 @@ func (s *Server) browseFS(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	sort.Strings(dirs)
-	parent := filepath.Dir(dir)
-	writeJSON(w, http.StatusOK, map[string]any{"path": dir, "parent": parent, "dirs": dirs})
+	paths := make([]string, len(dirs))
+	for i, d := range dirs {
+		paths[i] = filepath.Join(dir, d)
+	}
+	writeJSON(w, http.StatusOK, map[string]any{"path": dir, "parent": parentDir(dir), "dirs": dirs, "paths": paths})
 }
 
 // ---- browsing ----

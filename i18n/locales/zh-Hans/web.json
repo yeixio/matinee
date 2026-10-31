@@ -601,6 +601,9 @@
       "added": "已添加",
       "useFolder": "使用此文件夹",
       "noSubfolders": "没有子文件夹",
+      "goTo": "或输入文件夹，例如 \\\\nas\\media",
+      "go": "前往",
+      "drives": "驱动器",
       "podcastsNoFolders": "播客不需要文件夹。媒体库创建后，在那里添加节目。",
       "podcastsChecked": "每小时检查新单集"
     },

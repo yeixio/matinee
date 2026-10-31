@@ -601,6 +601,9 @@
       "added": "已新增",
       "useFolder": "使用此資料夾",
       "noSubfolders": "沒有子資料夾",
+      "goTo": "或輸入資料夾，例如 \\\\nas\\media",
+      "go": "前往",
+      "drives": "磁碟機",
       "podcastsNoFolders": "Podcast 不需要資料夾。媒體庫建立後，在那裡加入節目。",
       "podcastsChecked": "每小時檢查新單集"
     },

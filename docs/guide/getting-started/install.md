@@ -1,13 +1,19 @@
 ---
 title: Install Matinee
-description: Run Matinee with Docker, a Debian, Ubuntu or Fedora package, Homebrew, Helm on Kubernetes, or from source.
+description: Run Matinee with the Windows installer, Docker, a Debian, Ubuntu or Fedora package, Homebrew, Helm on Kubernetes, or from source.
 sidebar:
   order: 1
 ---
 
-Matinee runs on Linux and macOS, on amd64 and arm64 (and armv7 for older NAS boxes and Raspberry Pis). On Windows, run it in Docker. Pick whichever way of installing suits the machine. Every option ends the same way: open `http://<your server>:7171` in a browser and [finish setup](/docs/getting-started/first-run/).
+Matinee runs on Linux and macOS, on amd64 and arm64 (and armv7 for older NAS boxes and Raspberry Pis). Pick whichever way of installing suits the machine. Every option ends the same way: open `http://<your server>:7171` in a browser and [finish setup](/docs/getting-started/first-run/).
 
 On Unraid, TrueNAS SCALE or ZimaOS, see [Install on a NAS](/docs/getting-started/nas/).
+
+<!-- since: v0.1.8 -->
+## Windows
+
+Download the installer for [most PCs](https://github.com/yeixio/matinee/releases/latest/download/Matinee-Setup-x64.exe) or [Arm PCs](https://github.com/yeixio/matinee/releases/latest/download/Matinee-Setup-arm64.exe) and open it. It runs Matinee from an icon next to the clock, with FFmpeg included. See [Windows](/docs/getting-started/windows/).
+<!-- /since -->
 
 ## Docker
 

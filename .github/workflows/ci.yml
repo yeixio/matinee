@@ -223,3 +223,60 @@ jobs:
           VERSION=0.0.0-ci scripts/package-linux.sh
       - name: Install from signed apt and dnf repositories
         run: scripts/test-packages.sh
+
+  windows:
+    name: Windows installers
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - name: Install NSIS
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends nsis
+      # The installer is under test here, not the web player, so a stand-in
+      # page saves building it. It's numbered as the next release, so the
+      # tray app doesn't offer the current one as an update.
+      - name: Build the installers
+        run: |
+          echo '<!doctype html><title>Matinee</title>' > web/dist/index.html
+          last=$(git tag -l 'v*' --sort=-v:refname | grep -v -- - | head -n 1)
+          last=${last#v}
+          VERSION="${last%.*}.$(( ${last##*.} + 1 ))" scripts/package-windows.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows-installers
+          path: dist/Matinee-Setup-*.exe
+          retention-days: 1
+
+  windows-test:
+    name: Windows (${{ matrix.arch }})
+    needs: windows
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { arch: x64, runner: windows-latest }
+          - { arch: arm64, runner: windows-11-arm }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - name: Test the tray app and the folder picker on Windows
+        run: go test -count=1 ./cmd/matinee-tray/ ; if ($?) { go test -count=1 -run TestWindowsFolderPicker ./internal/api/ }
+      - uses: actions/download-artifact@v4
+        with:
+          name: windows-installers
+          path: dist
+      - name: Install, run and uninstall
+        run: scripts/test-windows-install.ps1 -Installer (Get-Item dist\Matinee-Setup-${{ matrix.arch }}.exe).FullName -Shots shots
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-shots-${{ matrix.arch }}
+          path: shots
+          retention-days: 3

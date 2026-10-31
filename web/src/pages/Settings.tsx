@@ -221,11 +221,16 @@ function FolderPicker({ picked, onPick }: { picked: string[]; onPick: (path: str
   // Empty asks the server for its media root (MATINEE_MEDIA_ROOT), so the picker opens on the media.
   const { t } = useTranslation()
   const [path, setPath] = useState('')
+  const [typed, setTyped] = useState('')
   const { data, error } = useQuery({ queryKey: ['fs', path], queryFn: () => api.browse(path) })
-  const join = (dir: string) => {
+  // The server sends each subfolder's full path, written its own way (C:\Movies on Windows).
+  const join = (i: number, dir: string) => {
+    if (data?.paths?.[i]) return data.paths[i]
     const base = data?.path ?? path
     return base.endsWith('/') ? base + dir : `${base}/${dir}`
   }
+  // A Windows server's list of drives isn't a folder to use.
+  const usable = data && !data.drives
   return (
     <div className="overflow-hidden rounded-lg border border-line">
       <div className="flex items-center gap-2 border-b border-line bg-text/5 px-2 py-2">
@@ -238,25 +243,47 @@ function FolderPicker({ picked, onPick }: { picked: string[]; onPick: (path: str
         >
           <ChevronLeft className="size-4 rtl:-scale-x-100" />
         </button>
-        <span className="flex-1 truncate font-mono text-xs text-muted" dir="ltr">{data?.path ?? path}</span>
+        <span className="flex-1 truncate font-mono text-xs text-muted" dir="ltr">
+          {data?.drives ? t('settings.libraries.drives') : (data?.path ?? path)}
+        </span>
         <Button
           type="button"
           variant="primary"
           className="h-8 px-3 text-xs"
-          disabled={!data || picked.includes(data.path)}
-          onClick={() => data && onPick(data.path)}
+          disabled={!usable || picked.includes(data.path)}
+          onClick={() => usable && onPick(data.path)}
         >
-          {data && picked.includes(data.path) ? t('settings.libraries.added') : t('settings.libraries.useFolder')}
+          {usable && picked.includes(data.path) ? t('settings.libraries.added') : t('settings.libraries.useFolder')}
+        </Button>
+      </div>
+      {/* Network shares that aren't mapped to a drive (\\nas\media) can't be browsed to, only typed. */}
+      <div className="flex items-center gap-2 border-b border-line px-2 py-2">
+        <input
+          className="h-8 flex-1 rounded-md border border-line bg-transparent px-2 font-mono text-xs"
+          dir="ltr"
+          value={typed}
+          onChange={(e) => setTyped(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault()
+              if (typed.trim()) setPath(typed.trim())
+            }
+          }}
+          placeholder={t('settings.libraries.goTo')}
+          aria-label={t('settings.libraries.goTo')}
+        />
+        <Button type="button" variant="ghost" className="h-8 px-3 text-xs" disabled={!typed.trim()} onClick={() => setPath(typed.trim())}>
+          {t('settings.libraries.go')}
         </Button>
       </div>
       <div className="max-h-60 overflow-y-auto">
         {error && <p className="p-3 text-sm text-danger">{error.message}</p>}
         {data?.dirs.length === 0 && <p className="p-3 text-sm text-faint">{t('settings.libraries.noSubfolders')}</p>}
-        {data?.dirs.map((d) => (
+        {data?.dirs.map((d, i) => (
           <button
             type="button"
             key={d}
-            onClick={() => setPath(join(d))}
+            onClick={() => setPath(join(i, d))}
             className="flex w-full items-center gap-2 px-3 py-2 text-start text-sm hover:bg-text/5"
           >
             <FolderOpen className="size-4 text-faint" /> {d}

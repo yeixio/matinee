@@ -601,6 +601,9 @@
       "added": "추가됨",
       "useFolder": "이 폴더 사용",
       "noSubfolders": "하위 폴더 없음",
+      "goTo": "또는 폴더 입력(예: \\\\nas\\media)",
+      "go": "이동",
+      "drives": "드라이브",
       "podcastsNoFolders": "팟캐스트에는 폴더가 필요 없습니다. 보관함을 만든 뒤 그곳에서 프로그램을 추가하세요.",
       "podcastsChecked": "매시간 새 에피소드 확인"
     },
