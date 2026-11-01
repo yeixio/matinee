@@ -127,14 +127,23 @@
       "downloading": "正在下载",
       "starting": "正在开始…",
       "paused": "已暂停"
-    }
+    },
+    "filter": {
+      "active": "下载中（{{n}}）",
+      "done": "已下载（{{n}}）"
+    },
+    "noneActive": "当前没有正在下载的内容。",
+    "noneDone": "还没有下载完成的内容。"
   },
   "settings": {
     "quality": {
       "auto": "最适合此手机",
       "autoHint": "此手机能播放时使用原始文件，否则为 1080p",
       "upTo": "两小时电影最多 {{size}}",
-      "title": "下载画质（音乐始终为原始质量）"
+      "title": "下载画质（音乐始终为原始质量）",
+      "ask": "每次询问",
+      "askHint": "每次下载视频时选择画质",
+      "holdHint": "长按视频上的“下载”，可只为它选择画质。"
     },
     "serversHint": "切换或添加服务器",
     "atHome": "在家观看",
@@ -367,7 +376,11 @@
     "album": "下载专辑",
     "season": "下载整季",
     "more_other": "再下载 {{count}} 个",
-    "someFailed": "无法开始所有下载"
+    "someFailed": "无法开始所有下载",
+    "couldNotStart": "无法开始下载",
+    "qualityTitle": "下载画质",
+    "about": "约 {{size}}",
+    "autoShort": "原始文件或 1080p"
   },
   "kind": {
     "movie": "电影",

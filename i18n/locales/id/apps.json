@@ -127,14 +127,23 @@
       "downloading": "Mengunduh",
       "starting": "Memulai…",
       "paused": "Dijeda"
-    }
+    },
+    "filter": {
+      "active": "Mengunduh ({{n}})",
+      "done": "Terunduh ({{n}})"
+    },
+    "noneActive": "Tidak ada yang sedang diunduh.",
+    "noneDone": "Belum ada unduhan yang selesai."
   },
   "settings": {
     "quality": {
       "auto": "Terbaik untuk ponsel ini",
       "autoHint": "File asli jika ponsel ini bisa memutarnya, jika tidak 1080p",
       "upTo": "Hingga {{size}} untuk film dua jam",
-      "title": "Kualitas unduhan (musik selalu asli)"
+      "title": "Kualitas unduhan (musik selalu asli)",
+      "ask": "Tanya setiap kali",
+      "askHint": "Pilih kualitas setiap kali mengunduh video",
+      "holdHint": "Tahan Unduh pada video untuk memilih kualitas khusus untuk video itu."
     },
     "serversHint": "Ganti atau tambah server",
     "atHome": "Menonton di rumah",
@@ -367,7 +376,11 @@
     "album": "Unduh album",
     "season": "Unduh musim",
     "more_other": "Unduh {{count}} lagi",
-    "someFailed": "Tidak semua unduhan dapat dimulai"
+    "someFailed": "Tidak semua unduhan dapat dimulai",
+    "couldNotStart": "Tidak bisa memulai unduhan",
+    "qualityTitle": "Kualitas unduhan",
+    "about": "Sekitar {{size}}",
+    "autoShort": "Asli atau 1080p"
   },
   "kind": {
     "movie": "Film",

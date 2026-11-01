@@ -127,14 +127,23 @@
       "downloading": "Baixando",
       "starting": "Iniciando…",
       "paused": "Pausada"
-    }
+    },
+    "filter": {
+      "active": "Baixando ({{n}})",
+      "done": "Baixados ({{n}})"
+    },
+    "noneActive": "Nada está sendo baixado agora.",
+    "noneDone": "Nenhum download terminou ainda."
   },
   "settings": {
     "quality": {
       "auto": "Melhor para este celular",
       "autoHint": "O arquivo original quando este celular consegue reproduzi-lo; caso contrário, 1080p",
       "upTo": "Até {{size}} para um filme de duas horas",
-      "title": "Qualidade do download (música é sempre a original)"
+      "title": "Qualidade do download (música é sempre a original)",
+      "ask": "Perguntar sempre",
+      "askHint": "Escolha uma qualidade sempre que baixar um vídeo",
+      "holdHint": "Toque e segure Baixar em um vídeo para escolher a qualidade só para ele."
     },
     "serversHint": "Trocar ou adicionar servidores",
     "atHome": "Assistindo em casa",
@@ -379,7 +388,11 @@
     "more_many": "Baixar mais {{count}}",
     "more_one": "Baixar mais {{count}}",
     "more_other": "Baixar mais {{count}}",
-    "someFailed": "Não foi possível iniciar todos os downloads"
+    "someFailed": "Não foi possível iniciar todos os downloads",
+    "couldNotStart": "Não foi possível iniciar o download",
+    "qualityTitle": "Qualidade do download",
+    "about": "Cerca de {{size}}",
+    "autoShort": "Original ou 1080p"
   },
   "kind": {
     "movie": "Filme",

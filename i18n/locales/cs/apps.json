@@ -127,14 +127,23 @@
       "downloading": "Stahování",
       "starting": "Spouštění…",
       "paused": "Pozastaveno"
-    }
+    },
+    "filter": {
+      "active": "Stahuje se ({{n}})",
+      "done": "Staženo ({{n}})"
+    },
+    "noneActive": "Právě se nic nestahuje.",
+    "noneDone": "Zatím se nic nedostahovalo."
   },
   "settings": {
     "quality": {
       "auto": "Nejlepší pro tento telefon",
       "autoHint": "Původní soubor, pokud ho tento telefon přehraje, jinak 1080p",
       "upTo": "Až {{size}} na dvouhodinový film",
-      "title": "Kvalita stahování (hudba je vždy v originále)"
+      "title": "Kvalita stahování (hudba je vždy v originále)",
+      "ask": "Ptát se pokaždé",
+      "askHint": "Vyberte kvalitu při každém stažení videa",
+      "holdHint": "Podržením Stáhnout u videa vyberete kvalitu jen pro něj."
     },
     "serversHint": "Přepnout nebo přidat servery",
     "atHome": "Sledujete doma",
@@ -385,7 +394,11 @@
     "more_many": "Stáhnout ještě {{count}}",
     "more_one": "Stáhnout ještě {{count}}",
     "more_other": "Stáhnout ještě {{count}}",
-    "someFailed": "Nepodařilo se spustit všechna stahování"
+    "someFailed": "Nepodařilo se spustit všechna stahování",
+    "couldNotStart": "Stahování se nepodařilo spustit",
+    "qualityTitle": "Kvalita stahování",
+    "about": "Asi {{size}}",
+    "autoShort": "Originál nebo 1080p"
   },
   "kind": {
     "movie": "Film",
