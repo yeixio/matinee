@@ -431,6 +431,28 @@
     "signIn": "Buka Matinee pada telefon anda dan log masuk untuk mendengar di dalam kereta.",
     "loading": "Memuatkan…"
   },
+  "automotive": {
+    "signInNeeded": "Log masuk ke pelayan Matinee anda untuk mendengar dalam kereta ini.",
+    "signIn": "Log masuk",
+    "title": "Log masuk ke Matinee",
+    "nearby": "Pelayan dalam rangkaian ini",
+    "looking": "Mencari pelayan… Jika kereta tidak bersambung ke Wi-Fi rumah, taip alamat pelayan anda.",
+    "address": "Alamat pelayan anda",
+    "addressHint": "matinee.example.com",
+    "next": "Seterusnya",
+    "notMatinee": "Tidak dapat mencapai pelayan Matinee di situ. Semak alamat, dan pastikan pelayan boleh dicapai dari luar rumah.",
+    "goTo": "Pada telefon atau komputer anda, pergi ke {{link}} dan masukkan kod ini:",
+    "scan": "Atau imbas dengan kamera telefon anda.",
+    "waiting": "Menunggu anda meluluskan kereta ini…",
+    "expired": "Kod ini telah tamat tempoh.",
+    "declined": "Log masuk telah ditolak.",
+    "newCode": "Dapatkan kod baharu",
+    "back": "Kembali",
+    "signedIn": "Log masuk ke {{server}} sebagai {{name}}.",
+    "listenHint": "Pilih Matinee dalam apl media kereta untuk mendengar. Anda boleh log keluar di sini semasa kereta diletakkan.",
+    "signOut": "Log keluar",
+    "done": "Selesai"
+  },
   "watch": {
     "tileName": "Sedang dimainkan",
     "complicationName": "Matinee",

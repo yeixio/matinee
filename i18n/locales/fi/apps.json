@@ -438,6 +438,28 @@
     "signIn": "Avaa Matinee puhelimessasi ja kirjaudu sisään kuunnellaksesi autossa.",
     "loading": "Ladataan…"
   },
+  "automotive": {
+    "signInNeeded": "Kirjaudu Matinee-palvelimellesi kuunnellaksesi tässä autossa.",
+    "signIn": "Kirjaudu",
+    "title": "Kirjaudu Matineeen",
+    "nearby": "Palvelimet tässä verkossa",
+    "looking": "Etsitään palvelimia… Jos auto ei ole kodin Wi-Fi-verkossa, kirjoita palvelimesi osoite.",
+    "address": "Palvelimesi osoite",
+    "addressHint": "matinee.example.com",
+    "next": "Seuraava",
+    "notMatinee": "Matinee-palvelinta ei tavoiteta sieltä. Tarkista osoite ja että palvelimeen pääsee kodin ulkopuolelta.",
+    "goTo": "Mene puhelimella tai tietokoneella osoitteeseen {{link}} ja syötä tämä koodi:",
+    "scan": "Tai skannaa se puhelimen kameralla.",
+    "waiting": "Odotetaan, että hyväksyt tämän auton…",
+    "expired": "Koodi vanheni.",
+    "declined": "Kirjautuminen hylättiin.",
+    "newCode": "Hae uusi koodi",
+    "back": "Takaisin",
+    "signedIn": "Kirjautunut palvelimelle {{server}} käyttäjänä {{name}}.",
+    "listenHint": "Valitse Matinee auton mediasovelluksista kuunnellaksesi. Voit kirjautua ulos täällä, kun auto on pysäköity.",
+    "signOut": "Kirjaudu ulos",
+    "done": "Valmis"
+  },
   "watch": {
     "tileName": "Nyt toistossa",
     "complicationName": "Matinee",

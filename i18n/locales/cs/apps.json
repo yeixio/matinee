@@ -452,6 +452,28 @@
     "signIn": "Otevřete Matinee v telefonu a přihlaste se, abyste mohli poslouchat v autě.",
     "loading": "Načítání…"
   },
+  "automotive": {
+    "signInNeeded": "Přihlaste se ke svému serveru Matinee a poslouchejte v tomto autě.",
+    "signIn": "Přihlásit se",
+    "title": "Přihlásit se k Matinee",
+    "nearby": "Servery v této síti",
+    "looking": "Hledání serverů… Pokud auto není na domácí Wi-Fi, zadejte adresu svého serveru.",
+    "address": "Adresa vašeho serveru",
+    "addressHint": "matinee.example.com",
+    "next": "Další",
+    "notMatinee": "Tam není dostupný žádný server Matinee. Zkontrolujte adresu a jestli je server dostupný i mimo domov.",
+    "goTo": "V telefonu nebo počítači otevřete {{link}} a zadejte tento kód:",
+    "scan": "Nebo ho naskenujte fotoaparátem telefonu.",
+    "waiting": "Čeká se, až toto auto schválíte…",
+    "expired": "Platnost kódu vypršela.",
+    "declined": "Přihlášení bylo zamítnuto.",
+    "newCode": "Získat nový kód",
+    "back": "Zpět",
+    "signedIn": "Přihlášeno k {{server}} jako {{name}}.",
+    "listenHint": "Pro poslech vyberte Matinee v multimediálních aplikacích auta. Odhlásit se můžete tady, když auto parkuje.",
+    "signOut": "Odhlásit se",
+    "done": "Hotovo"
+  },
   "watch": {
     "tileName": "Právě hraje",
     "complicationName": "Matinee",

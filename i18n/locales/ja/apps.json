@@ -431,6 +431,28 @@
     "signIn": "車で聴くには、スマートフォンで Matinee を開いてサインインしてください。",
     "loading": "読み込み中…"
   },
+  "automotive": {
+    "signInNeeded": "この車で聴くには、Matinee サーバーにサインインしてください。",
+    "signIn": "サインイン",
+    "title": "Matinee にサインイン",
+    "nearby": "このネットワーク上のサーバー",
+    "looking": "サーバーを探しています… 車が自宅の Wi-Fi につながっていない場合は、サーバーのアドレスを入力してください。",
+    "address": "サーバーのアドレス",
+    "addressHint": "matinee.example.com",
+    "next": "次へ",
+    "notMatinee": "そこにある Matinee サーバーに接続できません。アドレスと、サーバーに外出先から接続できるかを確認してください。",
+    "goTo": "スマートフォンかパソコンで {{link}} を開き、このコードを入力してください:",
+    "scan": "またはスマートフォンのカメラでスキャンしてください。",
+    "waiting": "この車の承認を待っています…",
+    "expired": "このコードは期限切れです。",
+    "declined": "サインインが拒否されました。",
+    "newCode": "新しいコードを取得",
+    "back": "戻る",
+    "signedIn": "{{server}} に {{name}} としてサインインしています。",
+    "listenHint": "聴くには、車のメディアアプリで Matinee を選んでください。サインアウトは駐車中にここからできます。",
+    "signOut": "サインアウト",
+    "done": "完了"
+  },
   "watch": {
     "tileName": "再生中",
     "complicationName": "Matinee",

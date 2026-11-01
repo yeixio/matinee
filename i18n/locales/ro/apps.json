@@ -445,6 +445,28 @@
     "signIn": "Deschide Matinee pe telefon și conectează-te ca să asculți în mașină.",
     "loading": "Se încarcă…"
   },
+  "automotive": {
+    "signInNeeded": "Conectează-te la serverul tău Matinee ca să asculți în această mașină.",
+    "signIn": "Conectează-te",
+    "title": "Conectează-te la Matinee",
+    "nearby": "Servere în această rețea",
+    "looking": "Se caută servere… Dacă mașina nu e pe Wi-Fi-ul de acasă, scrie adresa serverului tău.",
+    "address": "Adresa serverului tău",
+    "addressHint": "matinee.example.com",
+    "next": "Înainte",
+    "notMatinee": "Nu se poate ajunge la un server Matinee acolo. Verifică adresa și dacă serverul poate fi accesat din afara casei.",
+    "goTo": "Pe telefon sau calculator, mergi la {{link}} și introdu acest cod:",
+    "scan": "Sau scanează-l cu camera telefonului.",
+    "waiting": "Se așteaptă să aprobi această mașină…",
+    "expired": "Acest cod a expirat.",
+    "declined": "Conectarea a fost refuzată.",
+    "newCode": "Obține un cod nou",
+    "back": "Înapoi",
+    "signedIn": "Conectat la {{server}} ca {{name}}.",
+    "listenHint": "Alege Matinee în aplicațiile media ale mașinii ca să asculți. Te poți deconecta de aici când mașina e parcată.",
+    "signOut": "Deconectează-te",
+    "done": "Gata"
+  },
   "watch": {
     "tileName": "Se redă acum",
     "complicationName": "Matinee",

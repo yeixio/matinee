@@ -438,6 +438,28 @@
     "signIn": "Öffne Matinee auf deinem Handy und melde dich an, um im Auto zu hören.",
     "loading": "Wird geladen…"
   },
+  "automotive": {
+    "signInNeeded": "Melde dich bei deinem Matinee-Server an, um in diesem Auto zu hören.",
+    "signIn": "Anmelden",
+    "title": "Bei Matinee anmelden",
+    "nearby": "Server in diesem Netzwerk",
+    "looking": "Suche nach Servern… Wenn das Auto nicht in deinem WLAN zu Hause ist, gib die Adresse deines Servers ein.",
+    "address": "Adresse deines Servers",
+    "addressHint": "matinee.example.com",
+    "next": "Weiter",
+    "notMatinee": "Dort ist kein Matinee-Server erreichbar. Prüfe die Adresse und ob der Server von unterwegs erreichbar ist.",
+    "goTo": "Gehe auf deinem Handy oder Computer zu {{link}} und gib diesen Code ein:",
+    "scan": "Oder scanne ihn mit der Kamera deines Handys.",
+    "waiting": "Warte darauf, dass du dieses Auto bestätigst…",
+    "expired": "Dieser Code ist abgelaufen.",
+    "declined": "Die Anmeldung wurde abgelehnt.",
+    "newCode": "Neuen Code anfordern",
+    "back": "Zurück",
+    "signedIn": "Bei {{server}} angemeldet als {{name}}.",
+    "listenHint": "Wähle Matinee in den Medien-Apps des Autos, um zu hören. Abmelden kannst du dich hier, wenn das Auto parkt.",
+    "signOut": "Abmelden",
+    "done": "Fertig"
+  },
   "watch": {
     "tileName": "Läuft gerade",
     "complicationName": "Matinee",

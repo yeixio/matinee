@@ -10,6 +10,10 @@ With the Android app on your phone, Matinee shows up in Android Auto with your m
 
 This needs the Android app version 1.0.14 or later, signed in to your server. There's nothing to set up on the server.
 
+<!-- since: v0.1.9 -->
+If your car has Android built in ("Google built-in") and runs apps without a phone, install Matinee on the car itself instead: see [Cars with Android built in](/docs/apps/android-automotive/).
+<!-- /since -->
+
 ## Getting started
 
 1. Sign in to your server in the Matinee app on your phone. The car uses the same server and the same account, or the profile you picked. Signing in again isn't needed for the car.
