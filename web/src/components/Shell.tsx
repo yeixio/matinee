@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { BookHeadphones, CalendarClock, Clapperboard, Compass, Home, Inbox, LibraryBig, LogIn, LogOut, Music, Podcast, Puzzle, Search, Settings, Tv } from 'lucide-react'
+import { BookHeadphones, CalendarClock, Clapperboard, Compass, Home, Inbox, LibraryBig, LogIn, LogOut, Music, Podcast, Puzzle, Search, Settings, Tv, Users } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { matchPath, NavLink, Outlet, useLocation } from 'react-router-dom'
 import { api, type Library, type User } from '../api'
@@ -120,6 +120,9 @@ export default function Shell({ user }: { user: User }) {
           <div className="ms-auto flex items-center gap-1">
             <NavLink to="/search" className="hidden rounded-full p-2 text-muted hover:bg-text/5 hover:text-text md:block" aria-label={t('nav.search')}>
               <Search className="size-5" />
+            </NavLink>
+            <NavLink to="/together" className={(a) => `hidden md:block ${iconLink(a)}`} aria-label={t('common:together.title')} title={t('common:together.title')}>
+              <Users className="size-5" />
             </NavLink>
             {arr && (
               <NavLink to="/upcoming" className={(a) => `hidden md:block ${iconLink(a)}`} aria-label={t('nav.comingSoon')} title={t('nav.comingSoon')}>

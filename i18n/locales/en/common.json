@@ -546,5 +546,41 @@
     "importing": "Adding your shows…",
     "imported_one": "Added {{count}} show.",
     "imported_other": "Added {{count}} shows."
+  },
+  "together": {
+    "title": "Watch together",
+    "intro": "Watch this with friends or family on other devices. Play, pause and skipping stay in step for everyone.",
+    "start": "Start Watch together",
+    "share": "Send this code or link to whoever's joining.",
+    "shareText": "Join me on Matinee with code {{code}}",
+    "copyLink": "Copy link",
+    "copied": "Copied",
+    "watchingWith_one": "Watching together: {{count}} person",
+    "watchingWith_other": "Watching together: {{count}} people",
+    "host": "Started it",
+    "leave": "Leave",
+    "end": "End for everyone",
+    "joinIn": "Press play to join in",
+    "did": {
+      "join": "{{name}} joined",
+      "leave": "{{name}} left",
+      "play": "{{name}} pressed play",
+      "pause": "{{name}} paused",
+      "seek": "{{name}} skipped"
+    },
+    "typeCode": "Type the code someone shared with you.",
+    "code": "Code",
+    "next": "Next",
+    "notFound": "That code doesn't work",
+    "tryAnother": "Try another code",
+    "notShared": "This isn't shared with you",
+    "notSharedHint": "Ask whoever runs this server to share that library with you.",
+    "hostedBy_one": "{{name}} is watching. Join in.",
+    "hostedBy_other": "{{name}} and others are watching ({{count}} so far). Join in.",
+    "waiting": "Nobody's watching right now.",
+    "join": "Join",
+    "shareLink": "Share link",
+    "you": "(you)",
+    "settingsHint": "Join friends with a code"
   }
 }

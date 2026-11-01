@@ -45,6 +45,7 @@ import (
 	"github.com/yeixio/matinee/internal/stream"
 	"github.com/yeixio/matinee/internal/subtitle"
 	"github.com/yeixio/matinee/internal/theme"
+	"github.com/yeixio/matinee/internal/together"
 	"github.com/yeixio/matinee/internal/version"
 	"github.com/yeixio/matinee/web"
 )
@@ -175,6 +176,9 @@ func run() error {
 	// automation (internal/live).
 	hub := live.New()
 	go hub.Run(ctx)
+	// Watch together sessions (internal/together).
+	sessions := together.New()
+	go sessions.Run(ctx)
 	scanner.Added = func(ctx context.Context, lib store.Library, id int64) {
 		plugins.ItemAdded(ctx, id)
 		if it, err := db.Item(ctx, 0, id); err == nil {
@@ -212,7 +216,7 @@ func run() error {
 		HomeListener: cfg.HomeAddr != "", ThemeDir: cfg.ThemeDir(),
 		PublicURL: cfg.PublicURL,
 		Plugins:   plugins, PluginCatalog: cfg.PluginCatalog,
-		Live: hub, UUID: uuid,
+		Live: hub, Together: sessions, UUID: uuid,
 	}
 	if _, problems := theme.Load(cfg.ThemeDir()); len(problems) > 0 {
 		for _, p := range problems {

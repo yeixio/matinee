@@ -187,5 +187,21 @@
   "that_isnt_a_media_server_database_matinee_can_read": "itu bukan pangkalan data pelayan media yang boleh dibaca oleh Matinee",
   "the_covers_address_must_start_with_http_or_https": "alamat kulit mesti bermula dengan http:// atau https://",
   "the_image_is_too_big_20_mb_at_most": "imej terlalu besar (paling banyak 20 MB)",
-  "couldnt_get_an_image_from_that_address": "tidak dapat mendapatkan imej daripada alamat itu"
+  "couldnt_get_an_image_from_that_address": "tidak dapat mendapatkan imej daripada alamat itu",
+  "admins_see_every_library_make_them_a_regular_account_first": "pentadbir melihat semua pustaka; jadikan akaun biasa dahulu",
+  "bad_wait": "masa menunggu tidak sah",
+  "invites_last_1_to_30_days": "jemputan sah 1 hingga 30 hari",
+  "join_the_session_first": "sertai sesi dahulu",
+  "no_such_invite": "jemputan itu tiada",
+  "pick_at_least_one_library_to_share": "pilih sekurang-kurangnya satu pustaka untuk dikongsi",
+  "that_isnt_in_a_library_shared_with_you": "itu tiada dalam pustaka yang dikongsi dengan anda",
+  "that_session_is_still_going_join_it": "sesi itu masih berjalan; sertainya",
+  "that_watch_together_code_doesnt_work_it_may_have_ended": "kod tonton bersama itu tidak berfungsi; mungkin sesi sudah tamat",
+  "this_invite_has_expired_ask_for_another": "jemputan ini sudah tamat tempoh; minta yang baharu",
+  "this_invite_link_doesnt_work_ask_for_another": "pautan jemputan ini tidak berfungsi; minta yang baharu",
+  "this_invite_was_already_used": "jemputan ini sudah digunakan",
+  "this_watch_together_session_is_full": "sesi tonton bersama ini sudah penuh",
+  "too_many_watch_together_sessions_right_now": "terlalu banyak sesi tonton bersama sekarang",
+  "unknown_action": "tindakan tidak diketahui",
+  "usernames_are_at_most_40_characters": "nama pengguna paling banyak 40 aksara"
 }

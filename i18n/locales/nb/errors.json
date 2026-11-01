@@ -187,5 +187,21 @@
   "that_isnt_a_media_server_database_matinee_can_read": "det er ikke en medieserverdatabase Matinee kan lese",
   "the_covers_address_must_start_with_http_or_https": "adressen til omslaget må begynne med http:// eller https://",
   "the_image_is_too_big_20_mb_at_most": "bildet er for stort (maks 20 MB)",
-  "couldnt_get_an_image_from_that_address": "fikk ikke hentet noe bilde fra den adressen"
+  "couldnt_get_an_image_from_that_address": "fikk ikke hentet noe bilde fra den adressen",
+  "admins_see_every_library_make_them_a_regular_account_first": "administratorer ser alle biblioteker; gjør det til en vanlig konto først",
+  "bad_wait": "ugyldig ventetid",
+  "invites_last_1_to_30_days": "invitasjoner varer 1 til 30 dager",
+  "join_the_session_first": "bli med i økten først",
+  "no_such_invite": "invitasjonen finnes ikke",
+  "pick_at_least_one_library_to_share": "velg minst ett bibliotek å dele",
+  "that_isnt_in_a_library_shared_with_you": "det er ikke i et bibliotek som er delt med deg",
+  "that_session_is_still_going_join_it": "økten pågår fortsatt; bli med i den",
+  "that_watch_together_code_doesnt_work_it_may_have_ended": "koden for Se sammen fungerer ikke; økten kan være avsluttet",
+  "this_invite_has_expired_ask_for_another": "invitasjonen har utløpt; be om en ny",
+  "this_invite_link_doesnt_work_ask_for_another": "invitasjonslenken fungerer ikke; be om en ny",
+  "this_invite_was_already_used": "invitasjonen er allerede brukt",
+  "this_watch_together_session_is_full": "økten for Se sammen er full",
+  "too_many_watch_together_sessions_right_now": "for mange økter for Se sammen akkurat nå",
+  "unknown_action": "ukjent handling",
+  "usernames_are_at_most_40_characters": "brukernavn kan ha høyst 40 tegn"
 }

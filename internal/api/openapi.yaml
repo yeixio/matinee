@@ -677,12 +677,16 @@ paths:
       summary: Everyone with an account (admins only)
       responses:
         "200":
-          description: Users.
+          description: Users. Friends come with the libraries they see.
           content:
             application/json:
               schema:
                 type: array
-                items: { $ref: "#/components/schemas/User" }
+                items:
+                  allOf:
+                    - $ref: "#/components/schemas/User"
+                    - properties:
+                        libraries: { type: array, items: { type: integer }, description: "For friends, the libraries they see." }
     post:
       summary: Add an account (admins only)
       requestBody:
@@ -703,8 +707,12 @@ paths:
         "409": { $ref: "#/components/responses/Error" }
   /users/{id}:
     patch:
-      summary: Make an account an admin or not (admins only)
-      description: The last admin can't stop being one (409).
+      summary: Make an account an admin or not, or a friend (admins only)
+      description: |
+        The last admin can't stop being one (409). A friend sees only
+        `libraries`; libraries added later stay hidden from them until
+        shared. Admins can't be friends (409). `friend: false` lets the
+        account see every library again.
       parameters:
         - { name: id, in: path, required: true, schema: { type: integer } }
       requestBody:
@@ -715,6 +723,8 @@ paths:
               type: object
               properties:
                 isAdmin: { type: boolean }
+                friend: { type: boolean }
+                libraries: { type: array, items: { type: integer }, description: "The libraries a friend sees; at least one." }
       responses:
         "200":
           description: The account as it is now.
@@ -758,6 +768,115 @@ paths:
         "400": { $ref: "#/components/responses/Error" }
         "404": { $ref: "#/components/responses/Error" }
 
+  /invites:
+    get:
+      summary: Friend invites (admins only)
+      description: Open invites, and used or expired ones from the last 30 days, newest first.
+      responses:
+        "200":
+          description: Invites.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invites: { type: array, items: { $ref: "#/components/schemas/Invite" } }
+                  remoteReady:
+                    type: boolean
+                    description: The server can be reached from outside, so friends away from home can use the link.
+    post:
+      summary: Invite a friend (admins only)
+      description: |
+        Makes a link one person can use to make an account that sees only
+        `libraries`. It lasts `days` (1 to 30, 7 if left out).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [libraries]
+              properties:
+                name: { type: string, description: "Who it's for, to tell invites apart." }
+                libraries: { type: array, items: { type: integer } }
+                days: { type: integer, minimum: 1, maximum: 30 }
+      responses:
+        "201":
+          description: Created.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Invite" }
+        "400": { $ref: "#/components/responses/Error" }
+  /invites/{code}:
+    delete:
+      summary: Take an invite back (admins only)
+      description: Accounts already made from it stay.
+      parameters:
+        - { name: code, in: path, required: true, schema: { type: string } }
+      responses:
+        "204": { description: Gone. }
+        "404": { $ref: "#/components/responses/Error" }
+  /join/{code}:
+    get:
+      summary: What an invite is for
+      description: |
+        Needs no sign-in. 404 for a code that never worked, 410 for one
+        that was used or expired. Wrong codes count like wrong passwords.
+      parameters:
+        - { name: code, in: path, required: true, schema: { type: string } }
+      responses:
+        "200":
+          description: The invite.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  server: { type: string }
+                  invitedBy: { type: string }
+                  name: { type: string }
+                  libraries:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id: { type: integer }
+                        name: { type: string }
+                        kind: { type: string }
+                  expiresAt: { type: integer }
+                  remoteURL: { type: string, description: "Where apps reach this server away from home; empty without one." }
+        "404": { $ref: "#/components/responses/Error" }
+        "410": { $ref: "#/components/responses/Error" }
+        "429": { $ref: "#/components/responses/Error" }
+    post:
+      summary: Make a friend account from an invite
+      description: Makes the account and signs it in, like `/auth/login`. The invite can't be used again.
+      parameters:
+        - { name: code, in: path, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/Credentials"
+                - properties:
+                    deviceName: { type: string }
+                    platform: { type: string }
+      responses:
+        "200":
+          description: Signed in.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user: { $ref: "#/components/schemas/User" }
+                  token: { type: string }
+        "400": { $ref: "#/components/responses/Error" }
+        "404": { $ref: "#/components/responses/Error" }
+        "409": { $ref: "#/components/responses/Error" }
+        "410": { $ref: "#/components/responses/Error" }
   /libraries:
     get:
       summary: All libraries
@@ -3054,6 +3173,127 @@ paths:
             text/event-stream:
               schema: { $ref: "#/components/schemas/Event" }
 
+  /together:
+    post:
+      summary: Start Watch together
+      description: |
+        Starts a session around what this player has open, with a six
+        character code to share. A player is in one session at a time.
+        `resume` starts a session again under its old code after the server
+        restarted (404 if it was ended, 409 if someone already resumed it:
+        join it instead).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/TogetherRequest" }
+      responses:
+        "201":
+          description: Started.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/TogetherState" }
+        "403": { $ref: "#/components/responses/Error" }
+        "404": { $ref: "#/components/responses/Error" }
+        "409": { $ref: "#/components/responses/Error" }
+  /together/{code}:
+    get:
+      summary: Look at a session before joining
+      parameters: [{ $ref: "#/components/parameters/TogetherCode" }]
+      responses:
+        "200":
+          description: The session, and whether this person can watch what it plays.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/TogetherState"
+                  - properties:
+                      canWatch: { type: boolean }
+        "404": { $ref: "#/components/responses/Error" }
+  /together/{code}/join:
+    post:
+      summary: Join a session
+      description: 403 when what it plays isn't in a library this person sees.
+      parameters: [{ $ref: "#/components/parameters/TogetherCode" }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/TogetherRequest" }
+      responses:
+        "200":
+          description: Joined.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/TogetherState" }
+        "403": { $ref: "#/components/responses/Error" }
+        "404": { $ref: "#/components/responses/Error" }
+        "409": { $ref: "#/components/responses/Error" }
+  /together/{code}/actions:
+    post:
+      summary: Play, pause, seek or switch titles for everyone
+      description: |
+        `action` is play, pause, seek (keeps playing or paused) or item
+        (everyone switches to `itemId`). `positionMs` is where it happens.
+      parameters: [{ $ref: "#/components/parameters/TogetherCode" }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/TogetherRequest" }
+      responses:
+        "200":
+          description: The session now.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/TogetherState" }
+        "400": { $ref: "#/components/responses/Error" }
+        "403": { $ref: "#/components/responses/Error" }
+        "404": { $ref: "#/components/responses/Error" }
+  /together/{code}/state:
+    get:
+      summary: Follow a session
+      description: |
+        Answers once the session's version differs from `since`, or after
+        `wait` seconds (at most 25). Ask again right away. A member who
+        stops asking for 70 seconds leaves. `ended` means someone ended it.
+        404 means the server lost it (it restarted): start it again with
+        `resume`, or join it if someone already did.
+      parameters:
+        - { $ref: "#/components/parameters/TogetherCode" }
+        - { name: client, in: query, required: true, schema: { type: string } }
+        - { name: since, in: query, schema: { type: integer } }
+        - { name: wait, in: query, schema: { type: integer, minimum: 0, maximum: 25 } }
+      responses:
+        "200":
+          description: The session.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/TogetherState" }
+        "403": { $ref: "#/components/responses/Error" }
+        "404": { $ref: "#/components/responses/Error" }
+  /together/{code}/members/{client}:
+    delete:
+      summary: Leave a session
+      parameters:
+        - { $ref: "#/components/parameters/TogetherCode" }
+        - { $ref: "#/components/parameters/ClientID" }
+      responses:
+        "204": { description: Left. }
+  /together/{code}/end:
+    post:
+      summary: End a session for everyone
+      parameters: [{ $ref: "#/components/parameters/TogetherCode" }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/TogetherRequest" }
+      responses:
+        "204": { description: Ended. }
+        "403": { $ref: "#/components/responses/Error" }
+        "404": { $ref: "#/components/responses/Error" }
 components:
   securitySchemes:
     bearer:
@@ -3072,6 +3312,8 @@ components:
       { name: id, in: path, required: true, schema: { type: string } }
     ClientID:
       { name: client, in: path, required: true, schema: { type: string, pattern: "^[A-Za-z0-9._-]{8,64}$" }, description: The id the player made up for itself. }
+    TogetherCode:
+      { name: code, in: path, required: true, schema: { type: string }, description: "A Watch together code; case and dashes don't matter." }
     PluginID:
       { name: plugin, in: path, required: true, schema: { type: string }, examples: { arcade: { value: arcade } } }
     PlaylistID:
@@ -3680,6 +3922,69 @@ components:
             coming soon or manage devices.
         avatar: { type: string, description: "A colour name: coral, amber, lime, teal, sky, violet, pink or slate." }
         hasPin: { type: boolean }
+        friend:
+          type: boolean
+          description: An account made from an invite, or one of its profiles; it sees only the libraries it was given.
+    Invite:
+      type: object
+      properties:
+        code: { type: string }
+        url: { type: string, description: "The link to send; it opens the invite page in the web player." }
+        name: { type: string }
+        libraries: { type: array, items: { type: integer } }
+        createdBy: { type: string }
+        createdAt: { type: integer }
+        expiresAt: { type: integer }
+        usedBy: { type: string, description: "The account made from it." }
+        usedAt: { type: integer }
+        state: { type: string, enum: [open, used, expired] }
+    TogetherRequest:
+      type: object
+      required: [clientId]
+      properties:
+        clientId: { type: string, description: "The player's own id, as for /clients." }
+        device: { type: string }
+        platform: { type: string }
+        itemId: { type: integer }
+        positionMs: { type: integer }
+        paused: { type: boolean }
+        action: { type: string, enum: [play, pause, seek, item] }
+        resume: { type: string }
+    TogetherState:
+      type: object
+      description: |
+        Playback was at `positionMs` at `updatedAt` (server clock), and has
+        moved on since unless paused. Compare `serverTime` with the
+        device's clock to work out where it is now.
+      properties:
+        code: { type: string }
+        version: { type: integer }
+        itemId: { type: integer }
+        positionMs: { type: integer }
+        paused: { type: boolean }
+        updatedAt: { type: integer }
+        serverTime: { type: integer }
+        ended: { type: boolean }
+        members:
+          type: array
+          items:
+            type: object
+            properties:
+              clientId: { type: string }
+              userId: { type: integer }
+              name: { type: string }
+              device: { type: string }
+              platform: { type: string }
+              host: { type: boolean }
+              joinedAt: { type: integer }
+        last:
+          type: object
+          description: The latest thing someone did, such as pause.
+          properties:
+            action: { type: string, enum: [start, join, leave, play, pause, seek, item] }
+            by: { type: string }
+            clientId: { type: string }
+            at: { type: integer }
     ProfileChoice:
       type: object
       properties:

@@ -546,5 +546,41 @@
     "imported_one": "{{count}} program eklendi.",
     "newEpisodesCount_other": "{{count}} yeni bölüm",
     "imported_other": "{{count}} program eklendi."
+  },
+  "together": {
+    "title": "Birlikte izle",
+    "intro": "Bunu arkadaşlarınla ya da ailenle başka cihazlarda izle. Oynatma, duraklatma ve atlama herkes için eşit kalır.",
+    "start": "Birlikte izlemeyi başlat",
+    "share": "Bu kodu ya da bağlantıyı katılacak kişilere gönder.",
+    "shareText": "Matinee'de benimle izle, kod: {{code}}",
+    "copyLink": "Bağlantıyı kopyala",
+    "copied": "Kopyalandı",
+    "watchingWith_one": "Birlikte izleniyor: {{count}} kişi",
+    "watchingWith_other": "Birlikte izleniyor: {{count}} kişi",
+    "host": "Başlatan",
+    "leave": "Ayrıl",
+    "end": "Herkes için bitir",
+    "joinIn": "Katılmak için oynat'a bas",
+    "did": {
+      "join": "{{name}} katıldı",
+      "leave": "{{name}} ayrıldı",
+      "play": "{{name}} oynattı",
+      "pause": "{{name}} duraklattı",
+      "seek": "{{name}} atladı"
+    },
+    "typeCode": "Sana gönderilen kodu yaz.",
+    "code": "Kod",
+    "next": "İleri",
+    "notFound": "Bu kod çalışmıyor",
+    "tryAnother": "Başka bir kod dene",
+    "notShared": "Bu seninle paylaşılmadı",
+    "notSharedHint": "Bu sunucuyu yöneten kişiden o kitaplığı seninle paylaşmasını iste.",
+    "hostedBy_one": "{{name}} izliyor. Katıl.",
+    "hostedBy_other": "{{name}} ve diğerleri izliyor (şimdilik {{count}} kişi). Katıl.",
+    "waiting": "Şu an kimse izlemiyor.",
+    "join": "Katıl",
+    "shareLink": "Bağlantıyı paylaş",
+    "you": "(sen)",
+    "settingsHint": "Bir kodla arkadaşlarına katıl"
   }
 }

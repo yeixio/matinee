@@ -3,12 +3,13 @@ import { ChevronLeft, ChevronRight, Folder, FolderOpen, Gauge, Globe, Image as I
 import { useEffect, useState, type FormEvent, type ReactNode } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import { Link, Navigate, useLocation, useNavigate, useParams } from 'react-router-dom'
-import { api, type ConnectStatus, type LibraryKind, type PlaybackPrefs, type RemoteStatus, type User } from '../api'
+import { api, type ConnectStatus, type LibraryKind, type PlaybackPrefs, type RemoteStatus, type User, type Account as AccountInfo } from '../api'
 import { LanguagePicker } from '../components/LanguagePicker'
 import { NewFiles, watchSummary } from '../components/LibraryWatch'
 import { MediaAnalysis } from '../components/MediaAnalysis'
 import { Plugins } from '../components/PluginSettings'
 import { Profiles } from '../components/ProfileSettings'
+import { FriendLibraries, Friends } from '../components/FriendSettings'
 import { Appearance } from '../components/ThemePicker'
 import { LibraryIcon, useLibraries } from '../components/Shell'
 import { Button, Field, inputClass } from '../components/ui'
@@ -26,7 +27,7 @@ type SettingsGroup = { id: string; icon: LucideIcon; sections: [string, ReactNod
 export const settingsSections: Record<string, string> = {
   language: 'you', appearance: 'you', playback: 'you', account: 'you', devices: 'you',
   libraries: 'libraries', import: 'libraries', 'new-files': 'libraries', 'media-analysis': 'libraries',
-  people: 'people', profiles: 'people',
+  people: 'people', friends: 'people', profiles: 'people',
   posters: 'content', 'podcast-index': 'content', subtitles: 'content', trailers: 'content', 'home-rows': 'content',
   transcoding: 'streaming',
   'home-network': 'network', 'remote-access': 'network',
@@ -57,7 +58,7 @@ export default function Settings() {
     ...(admin
       ? [
           { id: 'libraries', icon: LibraryBig, sections: [['libraries', <Libraries />], ['import', <ImportSettings />], ['new-files', <NewFiles />], ['media-analysis', <MediaAnalysis />]] },
-          { id: 'people', icon: UsersRound, sections: [['people', <Users me={me} />], ['profiles', <Profiles />]] },
+          { id: 'people', icon: UsersRound, sections: [['people', <Users me={me} />], ['friends', <Friends />], ['profiles', <Profiles />]] },
           { id: 'content', icon: ImageIcon, sections: [['posters', <TMDBKey />], ['podcast-index', <PodcastIndexKey />], ['subtitles', <OpenSubtitlesKey />], ['trailers', <Trailers />], ['home-rows', <HolidayRows />]] },
           { id: 'streaming', icon: Gauge, sections: [['transcoding', <Transcoding />]] },
           { id: 'network', icon: Globe, sections: [['home-network', <HomeNetwork />], ['remote-access', <RemoteAccess />]] },
@@ -451,10 +452,10 @@ const actionClass = 'h-9 whitespace-nowrap px-2 text-xs sm:px-3 sm:text-sm'
 // Person is one account in the admin's list, with what an admin can do to it.
 // Admins change their own password under Your account, and can't remove
 // themselves or take away their own admin, so another admin is always left.
-function Person({ user, isMe }: { user: User; isMe: boolean }) {
+function Person({ user, isMe }: { user: AccountInfo; isMe: boolean }) {
   const { t } = useTranslation()
   const qc = useQueryClient()
-  const [mode, setMode] = useState<'idle' | 'reset' | 'remove'>('idle')
+  const [mode, setMode] = useState<'idle' | 'reset' | 'remove' | 'libraries'>('idle')
   const [password, setPassword] = useState('')
   const [done, setDone] = useState('')
   const refresh = () => qc.invalidateQueries({ queryKey: ['users'] })
@@ -489,11 +490,19 @@ function Person({ user, isMe }: { user: User; isMe: boolean }) {
           {isMe && <span className="text-muted"> {t('settings.people.you')}</span>}
         </span>
         {user.isAdmin && <span className="rounded bg-accent/15 px-2 py-0.5 text-xs text-accent">{t('settings.people.admin')}</span>}
+        {user.friend && <span className="rounded bg-text/10 px-2 py-0.5 text-xs text-muted">{t('friends.badge')}</span>}
         {!isMe && mode === 'idle' && (
           <div className="grid w-full grid-cols-3 gap-1 sm:flex sm:w-auto">
-            <Button variant="ghost" className={actionClass} disabled={admin.isPending} onClick={() => admin.mutate()}>
-              {user.isAdmin ? t('settings.people.removeAdmin') : t('settings.people.makeAdmin')}
-            </Button>
+            {/* Friends can't be admins; what they see is theirs to change instead. */}
+            {user.friend ? (
+              <Button variant="ghost" className={actionClass} onClick={() => (setDone(''), setMode('libraries'))}>
+                {t('friends.libraries')}
+              </Button>
+            ) : (
+              <Button variant="ghost" className={actionClass} disabled={admin.isPending} onClick={() => admin.mutate()}>
+                {user.isAdmin ? t('settings.people.removeAdmin') : t('settings.people.makeAdmin')}
+              </Button>
+            )}
             <Button
               variant="ghost"
               className={actionClass}
@@ -541,6 +550,7 @@ function Person({ user, isMe }: { user: User; isMe: boolean }) {
           </Button>
         </form>
       )}
+      {mode === 'libraries' && <FriendLibraries user={user} onDone={close} />}
       {mode === 'remove' && (
         <div className="space-y-3 rounded-lg border border-danger/40 bg-danger/5 p-3">
           <p className="text-sm">

@@ -456,6 +456,26 @@ var migrations = []string{
 		file_key  TEXT NOT NULL, -- the file and detector version looked at, see MediaKey
 		looked_at BIGINT NOT NULL
 	)`,
+	// 72–75: friends (see friends.go). A friend account sees only the
+	// libraries it was given, and so do its profiles. Invites are links an
+	// admin sends; each one makes one friend account.
+	"ALTER TABLE users ADD COLUMN friend INTEGER NOT NULL DEFAULT 0",
+	`CREATE TABLE friend_libraries (
+		user_id    BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+		library_id BIGINT NOT NULL REFERENCES libraries(id) ON DELETE CASCADE,
+		PRIMARY KEY (user_id, library_id)
+	)`,
+	`CREATE TABLE invites (
+		code       TEXT PRIMARY KEY,
+		name       TEXT NOT NULL DEFAULT '', -- who it's for, as the admin wrote it
+		libraries  TEXT NOT NULL DEFAULT '[]', -- library ids, as JSON
+		created_by BIGINT REFERENCES users(id) ON DELETE SET NULL,
+		created_at BIGINT NOT NULL,
+		expires_at BIGINT NOT NULL,
+		used_by    BIGINT REFERENCES users(id) ON DELETE SET NULL,
+		used_at    BIGINT
+	)`,
+	"CREATE INDEX invites_created ON invites(created_at)",
 }
 
 func now() int64 { return time.Now().Unix() }
@@ -486,8 +506,11 @@ type User struct {
 	KidsLevel int    `json:"kidsLevel,omitempty"`
 	Avatar    string `json:"avatar,omitempty"` // a colour name the apps know, such as coral
 	HasPIN    bool   `json:"hasPin,omitempty"`
-	hash      string
-	pinHash   string
+	// Friend is an account made from an invite, or one of its profiles: it
+	// sees only the libraries it was given (see friends.go).
+	Friend  bool `json:"friend,omitempty"`
+	hash    string
+	pinHash string
 }
 
 func (u User) PasswordHash() string { return u.hash }
@@ -504,14 +527,15 @@ func (u User) Account() int64 {
 // userCols selects a user for scanUser; u is the users table.
 const userCols = `u.id, u.username, u.is_admin, u.password_hash, u.guest, COALESCE(u.parent_id, 0),
 	u.display_name, u.pin_hash, u.kids_level, u.avatar,
-	COALESCE((SELECT a.guest FROM users a WHERE a.id = u.parent_id), 0)`
+	COALESCE((SELECT a.guest FROM users a WHERE a.id = u.parent_id), 0),
+	COALESCE((SELECT a.friend FROM users a WHERE a.id = u.parent_id), u.friend)`
 
 func scanUserRow(r scanner, extra ...any) (User, error) {
 	var u User
 	var parentGuest bool
 	var display string
 	err := r.Scan(append([]any{&u.ID, &u.Username, &u.IsAdmin, &u.hash, &u.Guest, &u.AccountID,
-		&display, &u.pinHash, &u.KidsLevel, &u.Avatar, &parentGuest}, extra...)...)
+		&display, &u.pinHash, &u.KidsLevel, &u.Avatar, &parentGuest, &u.Friend}, extra...)...)
 	if err != nil {
 		return u, err
 	}

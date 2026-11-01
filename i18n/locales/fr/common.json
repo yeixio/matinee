@@ -576,5 +576,43 @@
     "imported_many": "{{count}} d’émissions ajoutées.",
     "newEpisodesCount_other": "{{count}} nouveaux épisodes",
     "imported_other": "{{count}} émissions ajoutées."
+  },
+  "together": {
+    "title": "Regarder ensemble",
+    "intro": "Regardez ceci avec vos amis ou votre famille sur d'autres appareils. Lecture, pause et sauts restent synchronisés pour tout le monde.",
+    "start": "Lancer Regarder ensemble",
+    "share": "Envoyez ce code ou ce lien aux personnes qui vous rejoignent.",
+    "shareText": "Rejoins-moi sur Matinee avec le code {{code}}",
+    "copyLink": "Copier le lien",
+    "copied": "Copié",
+    "watchingWith_one": "Regarder ensemble : {{count}} personne",
+    "watchingWith_many": "Regarder ensemble : {{count}} personnes",
+    "watchingWith_other": "Regarder ensemble : {{count}} personnes",
+    "host": "L'a lancé",
+    "leave": "Quitter",
+    "end": "Arrêter pour tout le monde",
+    "joinIn": "Appuyez sur lecture pour vous joindre",
+    "did": {
+      "join": "{{name}} a rejoint",
+      "leave": "{{name}} est parti",
+      "play": "{{name}} a lancé la lecture",
+      "pause": "{{name}} a mis en pause",
+      "seek": "{{name}} a sauté"
+    },
+    "typeCode": "Saisissez le code qu'on vous a envoyé.",
+    "code": "Code",
+    "next": "Suivant",
+    "notFound": "Ce code ne fonctionne pas",
+    "tryAnother": "Essayer un autre code",
+    "notShared": "Ce titre n'est pas partagé avec vous",
+    "notSharedHint": "Demandez à la personne qui gère ce serveur de partager cette bibliothèque avec vous.",
+    "hostedBy_one": "{{name}} regarde. Rejoignez-le.",
+    "hostedBy_many": "{{name}} et d'autres regardent ({{count}} pour l'instant). Rejoignez-les.",
+    "hostedBy_other": "{{name}} et d'autres regardent ({{count}} pour l'instant). Rejoignez-les.",
+    "waiting": "Personne ne regarde pour l'instant.",
+    "join": "Rejoindre",
+    "shareLink": "Partager le lien",
+    "you": "(vous)",
+    "settingsHint": "Rejoindre des amis avec un code"
   }
 }

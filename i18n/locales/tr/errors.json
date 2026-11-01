@@ -187,5 +187,21 @@
   "that_isnt_a_media_server_database_matinee_can_read": "bu, Matinee'nin okuyabileceği bir medya sunucusu veritabanı değil",
   "the_covers_address_must_start_with_http_or_https": "kapağın adresi http:// veya https:// ile başlamalı",
   "the_image_is_too_big_20_mb_at_most": "görsel çok büyük (en fazla 20 MB)",
-  "couldnt_get_an_image_from_that_address": "bu adresten görsel alınamadı"
+  "couldnt_get_an_image_from_that_address": "bu adresten görsel alınamadı",
+  "admins_see_every_library_make_them_a_regular_account_first": "yöneticiler tüm kitaplıkları görür; önce normal hesap yap",
+  "bad_wait": "geçersiz bekleme",
+  "invites_last_1_to_30_days": "davetler 1 ile 30 gün arası geçerlidir",
+  "join_the_session_first": "önce oturuma katıl",
+  "no_such_invite": "böyle bir davet yok",
+  "pick_at_least_one_library_to_share": "paylaşmak için en az bir kitaplık seç",
+  "that_isnt_in_a_library_shared_with_you": "bu, seninle paylaşılan bir kitaplıkta değil",
+  "that_session_is_still_going_join_it": "o oturum hâlâ sürüyor; ona katıl",
+  "that_watch_together_code_doesnt_work_it_may_have_ended": "bu Birlikte izle kodu çalışmıyor; oturum bitmiş olabilir",
+  "this_invite_has_expired_ask_for_another": "bu davetin süresi doldu; yenisini iste",
+  "this_invite_link_doesnt_work_ask_for_another": "bu davet bağlantısı çalışmıyor; yenisini iste",
+  "this_invite_was_already_used": "bu davet zaten kullanıldı",
+  "this_watch_together_session_is_full": "bu Birlikte izle oturumu dolu",
+  "too_many_watch_together_sessions_right_now": "şu anda çok fazla Birlikte izle oturumu var",
+  "unknown_action": "bilinmeyen işlem",
+  "usernames_are_at_most_40_characters": "kullanıcı adları en fazla 40 karakter olabilir"
 }

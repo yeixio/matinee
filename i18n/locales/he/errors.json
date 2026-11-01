@@ -187,5 +187,21 @@
   "that_isnt_a_media_server_database_matinee_can_read": "זה לא מסד נתונים של שרת מדיה ש-Matinee יכול לקרוא",
   "the_covers_address_must_start_with_http_or_https": "כתובת העטיפה חייבת להתחיל ב־http:// או ב־https://",
   "the_image_is_too_big_20_mb_at_most": "התמונה גדולה מדי (20MB לכל היותר)",
-  "couldnt_get_an_image_from_that_address": "לא ניתן היה לקבל תמונה מהכתובת הזו"
+  "couldnt_get_an_image_from_that_address": "לא ניתן היה לקבל תמונה מהכתובת הזו",
+  "admins_see_every_library_make_them_a_regular_account_first": "מנהלים רואים את כל הספריות; קודם הפכו את החשבון לרגיל",
+  "bad_wait": "זמן המתנה לא תקין",
+  "invites_last_1_to_30_days": "הזמנות תקפות בין יום אחד ל-30 ימים",
+  "join_the_session_first": "קודם הצטרפו לסשן",
+  "no_such_invite": "אין הזמנה כזו",
+  "pick_at_least_one_library_to_share": "בחרו לפחות ספרייה אחת לשיתוף",
+  "that_isnt_in_a_library_shared_with_you": "זה לא נמצא בספרייה ששותפה איתך",
+  "that_session_is_still_going_join_it": "הסשן עדיין פעיל; הצטרפו אליו",
+  "that_watch_together_code_doesnt_work_it_may_have_ended": "קוד הצפייה המשותפת לא עובד; ייתכן שהסשן הסתיים",
+  "this_invite_has_expired_ask_for_another": "תוקף ההזמנה פג; בקשו הזמנה חדשה",
+  "this_invite_link_doesnt_work_ask_for_another": "קישור ההזמנה לא עובד; בקשו קישור חדש",
+  "this_invite_was_already_used": "ההזמנה כבר נוצלה",
+  "this_watch_together_session_is_full": "סשן הצפייה המשותפת מלא",
+  "too_many_watch_together_sessions_right_now": "יש כרגע יותר מדי סשנים של צפייה משותפת",
+  "unknown_action": "פעולה לא מוכרת",
+  "usernames_are_at_most_40_characters": "שם משתמש יכול להכיל עד 40 תווים"
 }

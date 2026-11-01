@@ -546,5 +546,41 @@
     "imported_one": "{{count}} programma toegevoegd.",
     "newEpisodesCount_other": "{{count}} nieuwe afleveringen",
     "imported_other": "{{count}} programma’s toegevoegd."
+  },
+  "together": {
+    "title": "Samen kijken",
+    "intro": "Kijk dit met vrienden of familie op andere apparaten. Afspelen, pauzeren en doorspoelen blijven voor iedereen gelijk.",
+    "start": "Samen kijken starten",
+    "share": "Stuur deze code of link naar wie meekijkt.",
+    "shareText": "Kijk met me mee op Matinee met code {{code}}",
+    "copyLink": "Link kopiëren",
+    "copied": "Gekopieerd",
+    "watchingWith_one": "Samen kijken: {{count}} persoon",
+    "watchingWith_other": "Samen kijken: {{count}} personen",
+    "host": "Heeft het gestart",
+    "leave": "Verlaten",
+    "end": "Voor iedereen stoppen",
+    "joinIn": "Druk op afspelen om mee te kijken",
+    "did": {
+      "join": "{{name}} kijkt mee",
+      "leave": "{{name}} is weg",
+      "play": "{{name}} drukte op afspelen",
+      "pause": "{{name}} pauzeerde",
+      "seek": "{{name}} spoelde door"
+    },
+    "typeCode": "Typ de code die je hebt gekregen.",
+    "code": "Code",
+    "next": "Volgende",
+    "notFound": "Die code werkt niet",
+    "tryAnother": "Een andere code proberen",
+    "notShared": "Dit is niet met je gedeeld",
+    "notSharedHint": "Vraag wie deze server beheert om die bibliotheek met je te delen.",
+    "hostedBy_one": "{{name}} kijkt. Kijk mee.",
+    "hostedBy_other": "{{name}} en anderen kijken ({{count}} tot nu toe). Kijk mee.",
+    "waiting": "Er kijkt nu niemand.",
+    "join": "Meekijken",
+    "shareLink": "Link delen",
+    "you": "(jij)",
+    "settingsHint": "Met een code meekijken met vrienden"
   }
 }

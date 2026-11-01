@@ -187,5 +187,21 @@
   "that_isnt_a_media_server_database_matinee_can_read": "这不是 Matinee 能读取的媒体服务器数据库",
   "the_covers_address_must_start_with_http_or_https": "封面地址必须以 http:// 或 https:// 开头",
   "the_image_is_too_big_20_mb_at_most": "图片太大(最多 20 MB)",
-  "couldnt_get_an_image_from_that_address": "无法从该地址获取图片"
+  "couldnt_get_an_image_from_that_address": "无法从该地址获取图片",
+  "admins_see_every_library_make_them_a_regular_account_first": "管理员能看到所有媒体库；请先改为普通账户",
+  "bad_wait": "等待时间无效",
+  "invites_last_1_to_30_days": "邀请有效期为 1 到 30 天",
+  "join_the_session_first": "请先加入会话",
+  "no_such_invite": "没有这个邀请",
+  "pick_at_least_one_library_to_share": "至少选择一个要共享的媒体库",
+  "that_isnt_in_a_library_shared_with_you": "它不在共享给你的媒体库中",
+  "that_session_is_still_going_join_it": "该会话仍在进行；请加入",
+  "that_watch_together_code_doesnt_work_it_may_have_ended": "这个一起看代码无效；会话可能已结束",
+  "this_invite_has_expired_ask_for_another": "这个邀请已过期；请再要一个",
+  "this_invite_link_doesnt_work_ask_for_another": "这个邀请链接无效；请再要一个",
+  "this_invite_was_already_used": "这个邀请已被使用",
+  "this_watch_together_session_is_full": "这个一起看会话已满",
+  "too_many_watch_together_sessions_right_now": "目前一起看的会话太多",
+  "unknown_action": "未知操作",
+  "usernames_are_at_most_40_characters": "用户名最多 40 个字符"
 }

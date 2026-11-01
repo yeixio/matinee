@@ -516,5 +516,39 @@
     "importing": "正在加入你的節目…",
     "newEpisodesCount_other": "{{count}} 個新單集",
     "imported_other": "已加入 {{count}} 個節目。"
+  },
+  "together": {
+    "title": "一起看",
+    "intro": "和朋友或家人在不同裝置上一起看。播放、暫停和跳轉會為所有人保持同步。",
+    "start": "開始一起看",
+    "share": "把這個代碼或連結傳給一起看的人。",
+    "shareText": "來 Matinee 和我一起看，代碼 {{code}}",
+    "copyLink": "複製連結",
+    "copied": "已複製",
+    "watchingWith_other": "一起看：{{count}} 人",
+    "host": "發起人",
+    "leave": "離開",
+    "end": "為所有人結束",
+    "joinIn": "按播放加入",
+    "did": {
+      "join": "{{name}} 加入了",
+      "leave": "{{name}} 離開了",
+      "play": "{{name}} 開始播放",
+      "pause": "{{name}} 暫停了",
+      "seek": "{{name}} 跳轉了"
+    },
+    "typeCode": "輸入你收到的代碼。",
+    "code": "代碼",
+    "next": "下一步",
+    "notFound": "這個代碼無效",
+    "tryAnother": "換個代碼",
+    "notShared": "這沒有分享給你",
+    "notSharedHint": "請這台伺服器的管理者把那個媒體庫分享給你。",
+    "hostedBy_other": "{{name}} 等人正在看（目前 {{count}} 人）。一起來看吧。",
+    "waiting": "還沒有人在看。",
+    "join": "加入",
+    "shareLink": "分享連結",
+    "you": "（你）",
+    "settingsHint": "用代碼和朋友一起看"
   }
 }

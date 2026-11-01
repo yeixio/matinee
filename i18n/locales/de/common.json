@@ -546,5 +546,41 @@
     "imported_one": "{{count}} Sendung hinzugefügt.",
     "newEpisodesCount_other": "{{count}} neue Folgen",
     "imported_other": "{{count}} Sendungen hinzugefügt."
+  },
+  "together": {
+    "title": "Gemeinsam schauen",
+    "intro": "Schau das mit Freunden oder Familie auf anderen Geräten. Abspielen, Pausieren und Springen bleiben für alle im Takt.",
+    "start": "Gemeinsam schauen starten",
+    "share": "Schick diesen Code oder Link an alle, die mitschauen.",
+    "shareText": "Schau mit mir auf Matinee, Code {{code}}",
+    "copyLink": "Link kopieren",
+    "copied": "Kopiert",
+    "watchingWith_one": "Gemeinsam schauen: {{count}} Person",
+    "watchingWith_other": "Gemeinsam schauen: {{count}} Personen",
+    "host": "Hat gestartet",
+    "leave": "Verlassen",
+    "end": "Für alle beenden",
+    "joinIn": "Zum Mitschauen auf Abspielen drücken",
+    "did": {
+      "join": "{{name}} ist dabei",
+      "leave": "{{name}} ist gegangen",
+      "play": "{{name}} hat auf Abspielen gedrückt",
+      "pause": "{{name}} hat pausiert",
+      "seek": "{{name}} ist gesprungen"
+    },
+    "typeCode": "Gib den Code ein, den du bekommen hast.",
+    "code": "Code",
+    "next": "Weiter",
+    "notFound": "Dieser Code funktioniert nicht",
+    "tryAnother": "Anderen Code versuchen",
+    "notShared": "Das ist nicht für dich freigegeben",
+    "notSharedHint": "Bitte die Person, die diesen Server betreibt, dir diese Mediathek freizugeben.",
+    "hostedBy_one": "{{name}} schaut gerade. Schau mit.",
+    "hostedBy_other": "{{name}} und andere schauen gerade ({{count}} bisher). Schau mit.",
+    "waiting": "Gerade schaut niemand.",
+    "join": "Mitschauen",
+    "shareLink": "Link teilen",
+    "you": "(du)",
+    "settingsHint": "Mit einem Code bei Freunden mitschauen"
   }
 }

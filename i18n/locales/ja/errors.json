@@ -187,5 +187,21 @@
   "that_isnt_a_media_server_database_matinee_can_read": "Matinee が読み取れるメディアサーバーのデータベースではありません",
   "the_covers_address_must_start_with_http_or_https": "カバーのアドレスは http:// または https:// で始まる必要があります",
   "the_image_is_too_big_20_mb_at_most": "画像が大きすぎます(最大 20 MB)",
-  "couldnt_get_an_image_from_that_address": "そのアドレスから画像を取得できませんでした"
+  "couldnt_get_an_image_from_that_address": "そのアドレスから画像を取得できませんでした",
+  "admins_see_every_library_make_them_a_regular_account_first": "管理者はすべてのライブラリを見られます。先に通常のアカウントにしてください",
+  "bad_wait": "待ち時間が正しくありません",
+  "invites_last_1_to_30_days": "招待の有効期間は1〜30日です",
+  "join_the_session_first": "先にセッションに参加してください",
+  "no_such_invite": "その招待はありません",
+  "pick_at_least_one_library_to_share": "共有するライブラリを1つ以上選んでください",
+  "that_isnt_in_a_library_shared_with_you": "それはあなたに共有されたライブラリにありません",
+  "that_session_is_still_going_join_it": "そのセッションはまだ続いています。参加してください",
+  "that_watch_together_code_doesnt_work_it_may_have_ended": "そのコードは使えません。セッションが終わったのかもしれません",
+  "this_invite_has_expired_ask_for_another": "この招待は期限切れです。新しい招待を頼んでください",
+  "this_invite_link_doesnt_work_ask_for_another": "この招待リンクは使えません。新しいリンクを頼んでください",
+  "this_invite_was_already_used": "この招待はもう使われています",
+  "this_watch_together_session_is_full": "このセッションは満員です",
+  "too_many_watch_together_sessions_right_now": "いまはいっしょに見るセッションが多すぎます",
+  "unknown_action": "不明な操作です",
+  "usernames_are_at_most_40_characters": "ユーザー名は40文字までです"
 }

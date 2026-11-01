@@ -516,5 +516,39 @@
     "importing": "Menambah rancangan anda…",
     "newEpisodesCount_other": "{{count}} episod baharu",
     "imported_other": "{{count}} rancangan ditambah."
+  },
+  "together": {
+    "title": "Tonton bersama",
+    "intro": "Tonton ini bersama rakan atau keluarga pada peranti lain. Main, jeda dan lompat kekal selari untuk semua orang.",
+    "start": "Mula tonton bersama",
+    "share": "Hantar kod atau pautan ini kepada sesiapa yang ikut menonton.",
+    "shareText": "Tonton bersama saya di Matinee, kod {{code}}",
+    "copyLink": "Salin pautan",
+    "copied": "Disalin",
+    "watchingWith_other": "Tonton bersama: {{count}} orang",
+    "host": "Yang memulakan",
+    "leave": "Keluar",
+    "end": "Tamatkan untuk semua",
+    "joinIn": "Tekan main untuk menyertai",
+    "did": {
+      "join": "{{name}} menyertai",
+      "leave": "{{name}} keluar",
+      "play": "{{name}} memainkan",
+      "pause": "{{name}} menjeda",
+      "seek": "{{name}} melompat"
+    },
+    "typeCode": "Taip kod yang anda terima.",
+    "code": "Kod",
+    "next": "Seterusnya",
+    "notFound": "Kod itu tidak berfungsi",
+    "tryAnother": "Cuba kod lain",
+    "notShared": "Ini tidak dikongsi dengan anda",
+    "notSharedHint": "Minta pemilik pelayan ini berkongsi pustaka ini dengan anda.",
+    "hostedBy_other": "{{name}} sedang menonton ({{count}} orang setakat ini). Sertai mereka.",
+    "waiting": "Belum ada yang menonton.",
+    "join": "Sertai",
+    "shareLink": "Kongsi pautan",
+    "you": "(anda)",
+    "settingsHint": "Sertai rakan menonton dengan kod"
   }
 }

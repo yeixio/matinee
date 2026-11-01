@@ -21,6 +21,7 @@ const HeaderRestarting = "Matinee-Restarting"
 func (s *Server) Drain() {
 	s.draining.Store(true)
 	s.live().Close()
+	s.together().Close()
 }
 
 // serverState is what /health says: "ok", or "restarting" while draining.

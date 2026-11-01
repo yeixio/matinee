@@ -187,5 +187,21 @@
   "that_isnt_a_media_server_database_matinee_can_read": "นั่นไม่ใช่ฐานข้อมูลเซิร์ฟเวอร์สื่อที่ Matinee อ่านได้",
   "the_covers_address_must_start_with_http_or_https": "ที่อยู่ของปกต้องขึ้นต้นด้วย http:// หรือ https://",
   "the_image_is_too_big_20_mb_at_most": "รูปภาพใหญ่เกินไป (ไม่เกิน 20 MB)",
-  "couldnt_get_an_image_from_that_address": "ดึงรูปภาพจากที่อยู่นั้นไม่ได้"
+  "couldnt_get_an_image_from_that_address": "ดึงรูปภาพจากที่อยู่นั้นไม่ได้",
+  "admins_see_every_library_make_them_a_regular_account_first": "ผู้ดูแลเห็นทุกคลัง ให้เปลี่ยนเป็นบัญชีทั่วไปก่อน",
+  "bad_wait": "เวลารอไม่ถูกต้อง",
+  "invites_last_1_to_30_days": "คำเชิญใช้ได้ 1 ถึง 30 วัน",
+  "join_the_session_first": "เข้าร่วมเซสชันก่อน",
+  "no_such_invite": "ไม่มีคำเชิญนี้",
+  "pick_at_least_one_library_to_share": "เลือกอย่างน้อยหนึ่งคลังที่จะแชร์",
+  "that_isnt_in_a_library_shared_with_you": "รายการนี้ไม่อยู่ในคลังที่แชร์กับคุณ",
+  "that_session_is_still_going_join_it": "เซสชันนั้นยังดำเนินอยู่ ให้เข้าร่วมแทน",
+  "that_watch_together_code_doesnt_work_it_may_have_ended": "รหัสดูด้วยกันนี้ใช้ไม่ได้ เซสชันอาจจบไปแล้ว",
+  "this_invite_has_expired_ask_for_another": "คำเชิญนี้หมดอายุแล้ว ขอคำเชิญใหม่",
+  "this_invite_link_doesnt_work_ask_for_another": "ลิงก์เชิญนี้ใช้ไม่ได้ ขอลิงก์ใหม่",
+  "this_invite_was_already_used": "คำเชิญนี้ถูกใช้ไปแล้ว",
+  "this_watch_together_session_is_full": "เซสชันดูด้วยกันนี้เต็มแล้ว",
+  "too_many_watch_together_sessions_right_now": "ตอนนี้มีเซสชันดูด้วยกันมากเกินไป",
+  "unknown_action": "การกระทำที่ไม่รู้จัก",
+  "usernames_are_at_most_40_characters": "ชื่อผู้ใช้ยาวได้ไม่เกิน 40 อักขระ"
 }

@@ -187,5 +187,21 @@
   "that_isnt_a_media_server_database_matinee_can_read": "đó không phải cơ sở dữ liệu máy chủ media mà Matinee đọc được",
   "the_covers_address_must_start_with_http_or_https": "địa chỉ ảnh bìa phải bắt đầu bằng http:// hoặc https://",
   "the_image_is_too_big_20_mb_at_most": "ảnh quá lớn (tối đa 20 MB)",
-  "couldnt_get_an_image_from_that_address": "không lấy được hình ảnh từ địa chỉ đó"
+  "couldnt_get_an_image_from_that_address": "không lấy được hình ảnh từ địa chỉ đó",
+  "admins_see_every_library_make_them_a_regular_account_first": "quản trị viên thấy mọi thư viện; hãy chuyển thành tài khoản thường trước",
+  "bad_wait": "thời gian chờ không hợp lệ",
+  "invites_last_1_to_30_days": "lời mời có hiệu lực từ 1 đến 30 ngày",
+  "join_the_session_first": "hãy tham gia phiên trước",
+  "no_such_invite": "không có lời mời này",
+  "pick_at_least_one_library_to_share": "chọn ít nhất một thư viện để chia sẻ",
+  "that_isnt_in_a_library_shared_with_you": "nội dung này không nằm trong thư viện được chia sẻ với bạn",
+  "that_session_is_still_going_join_it": "phiên đó vẫn đang diễn ra; hãy tham gia",
+  "that_watch_together_code_doesnt_work_it_may_have_ended": "mã xem cùng nhau này không dùng được; có thể phiên đã kết thúc",
+  "this_invite_has_expired_ask_for_another": "lời mời này đã hết hạn; hãy xin lời mời khác",
+  "this_invite_link_doesnt_work_ask_for_another": "liên kết mời này không dùng được; hãy xin liên kết khác",
+  "this_invite_was_already_used": "lời mời này đã được dùng",
+  "this_watch_together_session_is_full": "phiên xem cùng nhau này đã đầy",
+  "too_many_watch_together_sessions_right_now": "hiện có quá nhiều phiên xem cùng nhau",
+  "unknown_action": "hành động không xác định",
+  "usernames_are_at_most_40_characters": "tên người dùng tối đa 40 ký tự"
 }
