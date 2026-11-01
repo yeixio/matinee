@@ -408,6 +408,7 @@
     "state": {
       "lookingAt": "Meneliti {{file}}",
       "intros": "Mencari intro dalam {{season}}",
+      "thumbnails": "Membuat pratonton bar untuk {{title}}",
       "working": "Sedang bekerja",
       "waiting": "Menunggu main balik selesai",
       "slowDisk": "Fail lambat dibaca; berehat beberapa minit",
@@ -436,6 +437,25 @@
       "label": "Cari intro rancangan TV",
       "hint": "Selepas semua fail dianalisis, Matinee mendengar permulaan episod setiap musim untuk mencari intro yang dikongsi, supaya pemain boleh menawarkan Langkau intro.",
       "progress": "{{done}} daripada {{total}} episod disemak, {{found}} ada intro"
+    },
+    "thumbnails": {
+      "label": "Pratonton pada bar main",
+      "hint": "Gambar kecil daripada setiap video yang muncul di atas bar semasa anda menyorot. Kira-kira 4 MB setiap filem.",
+      "progress": "{{done}} daripada {{total}} video sedia",
+      "mode": {
+        "all": {
+          "label": "Semua video",
+          "hint": "Dibuat di latar belakang untuk setiap video, selepas analisis dan pada kelajuannya."
+        },
+        "onPlay": {
+          "label": "Semasa dimainkan",
+          "hint": "Dibuat kali pertama seseorang memainkan video. Menjimatkan masa dan ruang untuk pustaka besar."
+        },
+        "off": {
+          "label": "Mati",
+          "hint": "Tiada yang dibuat, dan bar hanya menunjukkan masa."
+        }
+      }
     }
   },
   "profileSettings": {

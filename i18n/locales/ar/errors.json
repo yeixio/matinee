@@ -127,6 +127,7 @@
   "tmdbid_is_required": "tmdbId مطلوب",
   "todays_subtitle_downloads_are_used_up_try_again_tomorrow": "نفدت تنزيلات الترجمات لهذا اليوم. حاول مجددًا غدًا.",
   "no_such_row": "لا يوجد صف كهذا",
+  "no_such_sheet": "لا توجد ورقة كهذه",
   "tmdb_didnt_accept_that_key": "لم يقبل TMDB هذا المفتاح",
   "tmdb_couldnt_be_reached_to_check_the_key": "تعذّر الوصول إلى TMDB للتحقق من المفتاح",
   "this_server_cant_change_its_tmdb_key": "لا يمكن لهذا الخادم تغيير مفتاح TMDB الخاص به",
@@ -201,6 +202,7 @@
   "this_invite_link_doesnt_work_ask_for_another": "رابط الدعوة هذا لا يعمل؛ اطلب رابطًا جديدًا",
   "this_invite_was_already_used": "استُخدمت هذه الدعوة بالفعل",
   "this_watch_together_session_is_full": "جلسة المشاهدة معًا هذه ممتلئة",
+  "thumbnails_must_be_all_onplay_or_off": "يجب أن تكون الصور المصغرة all أو onPlay أو off",
   "too_many_watch_together_sessions_right_now": "هناك جلسات مشاهدة معًا كثيرة جدًا الآن",
   "unknown_action": "إجراء غير معروف",
   "usernames_are_at_most_40_characters": "اسم المستخدم 40 حرفًا على الأكثر"

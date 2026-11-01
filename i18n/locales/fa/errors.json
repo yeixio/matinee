@@ -127,6 +127,7 @@
   "tmdbid_is_required": "tmdbId لازم است",
   "todays_subtitle_downloads_are_used_up_try_again_tomorrow": "دانلودهای زیرنویس امروز تمام شده است. فردا دوباره امتحان کنید.",
   "no_such_row": "چنین ردیفی وجود ندارد",
+  "no_such_sheet": "چنین برگه‌ای وجود ندارد",
   "tmdb_didnt_accept_that_key": "TMDB این کلید را نپذیرفت",
   "tmdb_couldnt_be_reached_to_check_the_key": "برای بررسی کلید نمی‌توان به TMDB دسترسی پیدا کرد",
   "this_server_cant_change_its_tmdb_key": "این سرور نمی‌تواند کلید TMDB خود را تغییر دهد",
@@ -201,6 +202,7 @@
   "this_invite_link_doesnt_work_ask_for_another": "این پیوند دعوت کار نمی‌کند؛ پیوند دیگری بخواهید",
   "this_invite_was_already_used": "این دعوت قبلاً استفاده شده است",
   "this_watch_together_session_is_full": "این جلسه تماشای باهم پر است",
+  "thumbnails_must_be_all_onplay_or_off": "تصاویر کوچک باید all، onPlay یا off باشند",
   "too_many_watch_together_sessions_right_now": "اکنون جلسه‌های تماشای باهم بیش از حد زیاد است",
   "unknown_action": "کنش ناشناخته",
   "usernames_are_at_most_40_characters": "نام کاربری حداکثر ۴۰ نویسه است"

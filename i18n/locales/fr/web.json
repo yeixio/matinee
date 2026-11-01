@@ -414,6 +414,7 @@
     "state": {
       "lookingAt": "Examen de {{file}}",
       "intros": "Recherche des intros dans {{season}}",
+      "thumbnails": "Création des aperçus de la barre pour {{title}}",
       "working": "En cours",
       "waiting": "En attente de la fin de la lecture",
       "slowDisk": "Les fichiers sont lents à lire ; pause de quelques minutes",
@@ -444,6 +445,25 @@
       "label": "Trouver les intros des séries",
       "hint": "Une fois tous les fichiers analysés, Matinee écoute le début des épisodes de chaque saison pour trouver l’intro qu’ils partagent, afin que les lecteurs proposent Passer l’intro.",
       "progress": "{{done}} épisodes sur {{total}} vérifiés, {{found}} avec une intro"
+    },
+    "thumbnails": {
+      "label": "Aperçus dans la barre de lecture",
+      "hint": "De petites images de chaque vidéo, affichées au-dessus de la barre quand vous la faites défiler. Environ 4 Mo par film.",
+      "progress": "{{done}} vidéos prêtes sur {{total}}",
+      "mode": {
+        "all": {
+          "label": "Toutes les vidéos",
+          "hint": "Créés pour chaque vidéo en arrière-plan, après l'analyse et à son rythme."
+        },
+        "onPlay": {
+          "label": "À la lecture",
+          "hint": "Créés la première fois qu'une vidéo est lue. Économise du temps et de la place pour les grandes médiathèques."
+        },
+        "off": {
+          "label": "Désactivés",
+          "hint": "Aucun n'est créé et la barre n'affiche que le temps."
+        }
+      }
     }
   },
   "profileSettings": {

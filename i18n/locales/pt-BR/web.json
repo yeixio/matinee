@@ -414,6 +414,7 @@
     "state": {
       "lookingAt": "Analisando {{file}}",
       "intros": "Procurando aberturas em {{season}}",
+      "thumbnails": "Criando prévias da barra para {{title}}",
       "working": "Trabalhando",
       "waiting": "Esperando a reprodução terminar",
       "slowDisk": "Os arquivos estão lentos para ler; pausa de alguns minutos",
@@ -444,6 +445,25 @@
       "label": "Encontrar aberturas de séries",
       "hint": "Depois que todos os arquivos forem analisados, o Matinee escuta o início dos episódios de cada temporada para achar a abertura que eles têm em comum, para que os players ofereçam Pular abertura.",
       "progress": "{{done}} de {{total}} episódios verificados, {{found}} com abertura"
+    },
+    "thumbnails": {
+      "label": "Prévias na barra de reprodução",
+      "hint": "Pequenas imagens de cada vídeo que aparecem acima da barra enquanto você avança ou volta. Ocupam cerca de 4 MB por filme.",
+      "progress": "{{done}} de {{total}} vídeos prontos",
+      "mode": {
+        "all": {
+          "label": "Todos os vídeos",
+          "hint": "Criadas para cada vídeo em segundo plano, depois da análise e no ritmo dela."
+        },
+        "onPlay": {
+          "label": "Ao reproduzir",
+          "hint": "Criadas na primeira vez que alguém reproduz um vídeo. Economiza tempo e espaço em bibliotecas grandes."
+        },
+        "off": {
+          "label": "Desligadas",
+          "hint": "Nenhuma é criada, e a barra mostra só o tempo."
+        }
+      }
     }
   },
   "profileSettings": {

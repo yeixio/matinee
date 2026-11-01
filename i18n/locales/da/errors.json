@@ -127,6 +127,7 @@
   "tmdbid_is_required": "tmdbId er påkrævet",
   "todays_subtitle_downloads_are_used_up_try_again_tomorrow": "dagens downloads af undertekster er brugt op. Prøv igen i morgen.",
   "no_such_row": "rækken findes ikke",
+  "no_such_sheet": "intet sådant ark",
   "tmdb_didnt_accept_that_key": "TMDB accepterede ikke den nøgle",
   "tmdb_couldnt_be_reached_to_check_the_key": "TMDB kunne ikke nås for at tjekke nøglen",
   "this_server_cant_change_its_tmdb_key": "denne server kan ikke ændre sin TMDB-nøgle",
@@ -201,6 +202,7 @@
   "this_invite_link_doesnt_work_ask_for_another": "invitationslinket virker ikke; bed om et nyt",
   "this_invite_was_already_used": "invitationen er allerede brugt",
   "this_watch_together_session_is_full": "sessionen til Se sammen er fuld",
+  "thumbnails_must_be_all_onplay_or_off": "miniaturer skal være all, onPlay eller off",
   "too_many_watch_together_sessions_right_now": "for mange sessioner til Se sammen lige nu",
   "unknown_action": "ukendt handling",
   "usernames_are_at_most_40_characters": "brugernavne må højst være 40 tegn"

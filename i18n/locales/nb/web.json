@@ -411,6 +411,7 @@
     "state": {
       "lookingAt": "Ser på {{file}}",
       "intros": "Ser etter introer i {{season}}",
+      "thumbnails": "Lager forhåndsbilder for {{title}}",
       "working": "Arbeider",
       "waiting": "Venter på at avspillingen blir ferdig",
       "slowDisk": "Filene er trege å lese; hviler noen minutter",
@@ -440,6 +441,25 @@
       "label": "Finn introer i serier",
       "hint": "Når alle filene er analysert, lytter Matinee til begynnelsen av episodene i hver sesong etter introen de har felles, slik at avspillerne kan tilby Hopp over intro.",
       "progress": "{{done}} av {{total}} episoder sjekket, {{found}} med intro"
+    },
+    "thumbnails": {
+      "label": "Forhåndsbilder i tidslinjen",
+      "hint": "Små bilder fra hver video som vises over tidslinjen når du spoler. De tar omtrent 4 MB per film.",
+      "progress": "{{done}} av {{total}} videoer klare",
+      "mode": {
+        "all": {
+          "label": "Alle videoer",
+          "hint": "Lages i bakgrunnen for hver video, etter analysen og i samme tempo."
+        },
+        "onPlay": {
+          "label": "Ved avspilling",
+          "hint": "Lages første gang noen spiller av en video. Sparer tid og plass i store biblioteker."
+        },
+        "off": {
+          "label": "Av",
+          "hint": "Ingen lages, og tidslinjen viser bare tiden."
+        }
+      }
     }
   },
   "profileSettings": {

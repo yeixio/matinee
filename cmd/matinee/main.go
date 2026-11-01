@@ -45,6 +45,7 @@ import (
 	"github.com/yeixio/matinee/internal/stream"
 	"github.com/yeixio/matinee/internal/subtitle"
 	"github.com/yeixio/matinee/internal/theme"
+	"github.com/yeixio/matinee/internal/thumbs"
 	"github.com/yeixio/matinee/internal/together"
 	"github.com/yeixio/matinee/internal/version"
 	"github.com/yeixio/matinee/web"
@@ -150,6 +151,13 @@ func run() error {
 	transcoder := stream.NewTranscoder(cfg.FFmpegPath, cfg.TranscodeDir(), hw, log)
 	defer transcoder.Close()
 
+	thumbnails := &thumbs.Generator{Store: db, FFmpeg: cfg.FFmpegPath, Dir: cfg.ThumbnailDir(), Log: log, LowPriority: probe.LowerPriority}
+	if err := os.MkdirAll(cfg.ThumbnailDir(), 0o755); err != nil {
+		return err
+	}
+	// Videos someone plays get their pictures right away.
+	go thumbnails.Serve(ctx)
+
 	// Media analysis reads every file once more, slowly and at the lowest
 	// priority, for the details the scan doesn't need (see internal/analyze).
 	analyzer := &analyze.Analyzer{
@@ -159,6 +167,8 @@ func run() error {
 		// Then it finds each TV episode's intro by matching the audio of a
 		// season's episodes (see internal/intro).
 		Intros: &intro.Detector{Store: db, FFmpeg: cfg.FFmpegPath, Log: log, LowPriority: probe.LowerPriority},
+		// And the seek bar's pictures of every video (see internal/thumbs).
+		Thumbs: thumbnails,
 	}
 	// Plugins add library kinds, details and event handlers (internal/plugin).
 	var plugins *plugin.Manager
@@ -206,7 +216,7 @@ func run() error {
 		return err
 	}
 	apiServer := &api.Server{
-		Store: db, Scanner: scanner, Watcher: watcher, ScanInterval: cfg.ScanInterval, Transcoder: transcoder, HW: hw, Downloads: downloads, Analyzer: analyzer,
+		Store: db, Scanner: scanner, Watcher: watcher, ScanInterval: cfg.ScanInterval, Transcoder: transcoder, HW: hw, Downloads: downloads, Analyzer: analyzer, Thumbs: thumbnails,
 		Art:       artwork.NewCache(cfg.ImageDir(), cfg.FFmpegPath),
 		Covers:    metadata.NewCovers(version.Version, mb, ol),
 		Subtitles: subtitle.NewConverter(cfg.FFmpegPath, cfg.SubtitleDir()),

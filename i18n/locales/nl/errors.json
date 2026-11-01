@@ -127,6 +127,7 @@
   "tmdbid_is_required": "tmdbId is verplicht",
   "todays_subtitle_downloads_are_used_up_try_again_tomorrow": "de ondertiteldownloads van vandaag zijn op. Probeer het morgen opnieuw.",
   "no_such_row": "deze rij bestaat niet",
+  "no_such_sheet": "zo'n blad bestaat niet",
   "tmdb_didnt_accept_that_key": "TMDB heeft die sleutel niet geaccepteerd",
   "tmdb_couldnt_be_reached_to_check_the_key": "TMDB was niet bereikbaar om de sleutel te controleren",
   "this_server_cant_change_its_tmdb_key": "deze server kan zijn TMDB-sleutel niet wijzigen",
@@ -201,6 +202,7 @@
   "this_invite_link_doesnt_work_ask_for_another": "deze uitnodigingslink werkt niet; vraag een nieuwe",
   "this_invite_was_already_used": "deze uitnodiging is al gebruikt",
   "this_watch_together_session_is_full": "deze sessie voor samen kijken is vol",
+  "thumbnails_must_be_all_onplay_or_off": "miniaturen moeten all, onPlay of off zijn",
   "too_many_watch_together_sessions_right_now": "er zijn nu te veel sessies voor samen kijken",
   "unknown_action": "onbekende actie",
   "usernames_are_at_most_40_characters": "gebruikersnamen zijn hooguit 40 tekens"

@@ -414,6 +414,7 @@
     "state": {
       "lookingAt": "Se analizează {{file}}",
       "intros": "Se caută introuri în {{season}}",
+      "thumbnails": "Se creează previzualizări pentru {{title}}",
       "working": "Lucrează",
       "waiting": "Așteaptă terminarea redării",
       "slowDisk": "Fișierele se citesc greu; pauză câteva minute",
@@ -444,6 +445,25 @@
       "label": "Găsește introurile serialelor",
       "hint": "După ce toate fișierele sunt analizate, Matinee ascultă începutul episoadelor din fiecare sezon pentru a găsi introul comun, ca playerele să poată oferi Sari peste intro.",
       "progress": "{{done}} din {{total}} episoade verificate, {{found}} cu intro"
+    },
+    "thumbnails": {
+      "label": "Previzualizări pe bara de redare",
+      "hint": "Imagini mici din fiecare videoclip, afișate deasupra barei când derulezi. Ocupă cam 4 MB pe film.",
+      "progress": "{{done}} din {{total}} videoclipuri gata",
+      "mode": {
+        "all": {
+          "label": "Toate videoclipurile",
+          "hint": "Se creează în fundal pentru fiecare videoclip, după analiză și în ritmul ei."
+        },
+        "onPlay": {
+          "label": "La redare",
+          "hint": "Se creează prima dată când cineva redă un videoclip. Economisește timp și spațiu în bibliotecile mari."
+        },
+        "off": {
+          "label": "Dezactivate",
+          "hint": "Nu se creează niciuna, iar bara arată doar timpul."
+        }
+      }
     }
   },
   "profileSettings": {

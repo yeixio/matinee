@@ -63,6 +63,10 @@ kubectl create secret generic matinee-tmdb --from-literal=tmdb-api-key=your-key
 | `env` | none | Any other [setting](/docs/server/configuration/), such as `MATINEE_RATING_COUNTRY`. |
 | `resources` | none | Requests and limits. Transcoding without a GPU wants several CPU cores. |
 
+<!-- since: v0.1.11 -->
+`thumbnails.persistence` (on, 20Gi) keeps the [seek bar previews](/docs/watching/seek-previews/), about 4 MB per movie. Set `storageClass` or `existingClaim`, or a bigger `size` for a big library.
+<!-- /since -->
+
 Transcodes and the image cache use a local `emptyDir`, so they're fast and never land on network storage.
 
 ## Replicas

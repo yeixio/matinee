@@ -127,6 +127,7 @@
   "tmdbid_is_required": "нужен tmdbId",
   "todays_subtitle_downloads_are_used_up_try_again_tomorrow": "лимит загрузок субтитров на сегодня исчерпан. Попробуйте завтра.",
   "no_such_row": "такого ряда нет",
+  "no_such_sheet": "такого листа нет",
   "tmdb_didnt_accept_that_key": "TMDB не принял этот ключ",
   "tmdb_couldnt_be_reached_to_check_the_key": "Не удалось связаться с TMDB, чтобы проверить ключ",
   "this_server_cant_change_its_tmdb_key": "этот сервер не может сменить свой ключ TMDB",
@@ -201,6 +202,7 @@
   "this_invite_link_doesnt_work_ask_for_another": "эта ссылка-приглашение не работает; попросите новую",
   "this_invite_was_already_used": "это приглашение уже использовано",
   "this_watch_together_session_is_full": "в этом сеансе совместного просмотра нет мест",
+  "thumbnails_must_be_all_onplay_or_off": "миниатюры должны быть all, onPlay или off",
   "too_many_watch_together_sessions_right_now": "сейчас слишком много сеансов совместного просмотра",
   "unknown_action": "неизвестное действие",
   "usernames_are_at_most_40_characters": "имя пользователя не длиннее 40 символов"

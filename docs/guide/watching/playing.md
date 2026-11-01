@@ -22,6 +22,10 @@ Press **Play** on any movie or episode. The player fills the window; move the mo
 
 Drag along the bar at the bottom, or click anywhere on it, to jump.
 
+<!-- since: v0.1.11 -->
+Hover over the bar, or drag it, to see a picture of that moment above it before you jump. See [Seek bar previews](/docs/watching/seek-previews/).
+<!-- /since -->
+
 ## Subtitles
 
 The subtitles button lists every subtitle track: the ones inside the file and the [files next to it](/docs/getting-started/organizing-media/#subtitles). Pick one, or **Off**.

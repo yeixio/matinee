@@ -127,6 +127,7 @@
   "tmdbid_is_required": "tmdbId diperlukan",
   "todays_subtitle_downloads_are_used_up_try_again_tomorrow": "muat turun sari kata hari ini sudah habis. Cuba lagi esok.",
   "no_such_row": "baris tidak wujud",
+  "no_such_sheet": "tiada helaian sedemikian",
   "tmdb_didnt_accept_that_key": "TMDB tidak menerima kunci itu",
   "tmdb_couldnt_be_reached_to_check_the_key": "TMDB tidak dapat dihubungi untuk menyemak kunci",
   "this_server_cant_change_its_tmdb_key": "pelayan ini tidak boleh menukar kunci TMDB-nya",
@@ -201,6 +202,7 @@
   "this_invite_link_doesnt_work_ask_for_another": "pautan jemputan ini tidak berfungsi; minta yang baharu",
   "this_invite_was_already_used": "jemputan ini sudah digunakan",
   "this_watch_together_session_is_full": "sesi tonton bersama ini sudah penuh",
+  "thumbnails_must_be_all_onplay_or_off": "lakaran kecil mesti all, onPlay atau off",
   "too_many_watch_together_sessions_right_now": "terlalu banyak sesi tonton bersama sekarang",
   "unknown_action": "tindakan tidak diketahui",
   "usernames_are_at_most_40_characters": "nama pengguna paling banyak 40 aksara"

@@ -127,6 +127,7 @@
   "tmdbid_is_required": "需要 tmdbId",
   "todays_subtitle_downloads_are_used_up_try_again_tomorrow": "今天的字幕下载次数已用完。请明天再试。",
   "no_such_row": "没有这一行",
+  "no_such_sheet": "没有这张拼图",
   "tmdb_didnt_accept_that_key": "TMDB 未接受该密钥",
   "tmdb_couldnt_be_reached_to_check_the_key": "无法连接 TMDB 来验证密钥",
   "this_server_cant_change_its_tmdb_key": "此服务器无法更改其 TMDB 密钥",
@@ -201,6 +202,7 @@
   "this_invite_link_doesnt_work_ask_for_another": "这个邀请链接无效；请再要一个",
   "this_invite_was_already_used": "这个邀请已被使用",
   "this_watch_together_session_is_full": "这个一起看会话已满",
+  "thumbnails_must_be_all_onplay_or_off": "缩略图必须是 all、onPlay 或 off",
   "too_many_watch_together_sessions_right_now": "目前一起看的会话太多",
   "unknown_action": "未知操作",
   "usernames_are_at_most_40_characters": "用户名最多 40 个字符"

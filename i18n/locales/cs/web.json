@@ -417,6 +417,7 @@
     "state": {
       "lookingAt": "Zkoumá {{file}}",
       "intros": "Hledání úvodů v: {{season}}",
+      "thumbnails": "Vytvářím náhledy pro {{title}}",
       "working": "Pracuje",
       "waiting": "Čeká na konec přehrávání",
       "slowDisk": "Soubory se čtou pomalu; pár minut odpočívá",
@@ -448,6 +449,25 @@
       "label": "Hledat úvody seriálů",
       "hint": "Jakmile jsou všechny soubory analyzované, Matinee poslouchá začátky epizod každé řady a hledá úvod, který mají společný, aby přehrávače mohly nabídnout Přeskočit úvod.",
       "progress": "Zkontrolováno {{done}} z {{total}} epizod, {{found}} s úvodem"
+    },
+    "thumbnails": {
+      "label": "Náhledy na časové ose",
+      "hint": "Malé obrázky z každého videa, které se při posouvání zobrazují nad časovou osou. Zabírají asi 4 MB na film.",
+      "progress": "Hotovo {{done}} z {{total}} videí",
+      "mode": {
+        "all": {
+          "label": "Všechna videa",
+          "hint": "Vytvářejí se na pozadí pro každé video, po analýze a jejím tempem."
+        },
+        "onPlay": {
+          "label": "Při přehrání",
+          "hint": "Vytvoří se, když někdo video poprvé přehraje. Šetří čas i místo u velkých knihoven."
+        },
+        "off": {
+          "label": "Vypnuto",
+          "hint": "Žádné se nevytvářejí a časová osa ukazuje jen čas."
+        }
+      }
     }
   },
   "profileSettings": {

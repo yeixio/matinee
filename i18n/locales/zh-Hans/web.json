@@ -408,6 +408,7 @@
     "state": {
       "lookingAt": "正在查看 {{file}}",
       "intros": "正在查找 {{season}} 的片头",
+      "thumbnails": "正在为 {{title}} 生成预览图",
       "working": "工作中",
       "waiting": "正在等待播放结束",
       "slowDisk": "文件读取较慢，休息几分钟",
@@ -436,6 +437,25 @@
       "label": "查找剧集片头",
       "hint": "所有文件分析完成后，Matinee 会比对每季各集开头的音频，找出共同的片头，让播放器可以提供“跳过片头”。",
       "progress": "已检查 {{total}} 集中的 {{done}} 集，{{found}} 集有片头"
+    },
+    "thumbnails": {
+      "label": "进度条预览图",
+      "hint": "拖动进度条时显示在上方的各视频小图。每部电影约占 4 MB。",
+      "progress": "已完成 {{done}}/{{total}} 个视频",
+      "mode": {
+        "all": {
+          "label": "所有视频",
+          "hint": "在分析之后，以相同速度在后台为每个视频生成。"
+        },
+        "onPlay": {
+          "label": "播放时",
+          "hint": "有人第一次播放视频时生成。适合大型媒体库，节省时间和空间。"
+        },
+        "off": {
+          "label": "关闭",
+          "hint": "不生成预览图，进度条只显示时间。"
+        }
+      }
     }
   },
   "profileSettings": {

@@ -411,6 +411,7 @@
     "state": {
       "lookingAt": "Untersucht {{file}}",
       "intros": "Suche Intros in {{season}}",
+      "thumbnails": "Erstelle Vorschaubilder für {{title}}",
       "working": "Arbeitet",
       "waiting": "Wartet, bis die Wiedergabe endet",
       "slowDisk": "Dateien lesen sich langsam; Pause für ein paar Minuten",
@@ -440,6 +441,25 @@
       "label": "TV-Intros finden",
       "hint": "Sobald alle Dateien analysiert sind, hört Matinee sich den Anfang der Folgen jeder Staffel an und sucht das gemeinsame Intro, damit Player „Intro überspringen“ anbieten können.",
       "progress": "{{done}} von {{total}} Folgen geprüft, {{found}} mit Intro"
+    },
+    "thumbnails": {
+      "label": "Vorschaubilder in der Zeitleiste",
+      "hint": "Kleine Bilder jedes Videos, die beim Spulen über der Zeitleiste erscheinen. Sie belegen etwa 4 MB pro Film.",
+      "progress": "{{done}} von {{total}} Videos fertig",
+      "mode": {
+        "all": {
+          "label": "Alle Videos",
+          "hint": "Werden im Hintergrund für jedes Video erstellt, nach der Analyse und in ihrem Tempo."
+        },
+        "onPlay": {
+          "label": "Beim Abspielen",
+          "hint": "Werden erstellt, wenn jemand ein Video zum ersten Mal abspielt. Spart Zeit und Platz bei großen Mediatheken."
+        },
+        "off": {
+          "label": "Aus",
+          "hint": "Es werden keine erstellt, und die Zeitleiste zeigt nur die Zeit."
+        }
+      }
     }
   },
   "profileSettings": {
