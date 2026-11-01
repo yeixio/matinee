@@ -45,7 +45,7 @@ Hover over a card in **Continue watching** and click **×**. It disappears from 
 <!-- since: v0.1.1 -->
 ## Holiday rows
 
-In the month before Valentine's Day, Easter, Halloween, Thanksgiving and Christmas, and the week before New Year's Eve, Home leads with a row for the occasion, picked from your library by keywords, titles and descriptions. Halloween fills up with horror and Valentine's Day with romance when there aren't enough matches. An admin can turn holiday rows off under **Settings → Home**.
+In the month before Valentine's Day, Easter, Halloween, Thanksgiving and Christmas, and the week before New Year's Eve, Home leads with a row for the occasion, picked from your library by keywords, titles and descriptions. Halloween fills up with horror and Valentine's Day with romance when there aren't enough matches. An admin can turn holiday rows off under **Settings → Content → Home**.
 
 ![The Holiday rows setting](../images/holiday-rows.webp)
 <!-- /since -->

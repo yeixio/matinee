@@ -515,5 +515,13 @@
     "use": "Kullan",
     "reset": "Otomatik kapağı kullan",
     "chosenNote": "Bu kapak elle seçildi, bu yüzden taramalar onu korur."
+  },
+  "rating": {
+    "rate": "Puan ver",
+    "yours": "Puanın: 5 üzerinden {{stars}}",
+    "stars": "5 üzerinden {{stars}}",
+    "halfHint": "Yarım yıldız için tekrar basın",
+    "clearHint": "Kaldırmak için tekrar basın",
+    "failed": "Puanınız kaydedilemedi"
   }
 }

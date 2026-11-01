@@ -18,6 +18,11 @@ const { media, stop } = await startServer()
 const browser = await chromium.launch()
 const { open, dress, shot } = capture(browser, { origin, only: new Set(process.argv.slice(2)), paths: media })
 
+/** Opens a Settings group, such as 'libraries' or 'you'. */
+const settings = async (page, group) => {
+  await page.goto(`${origin}/settings/${group}`)
+  await sleep(500)
+}
 /** A settings section, by its heading. */
 const section = (page, heading) => page.locator('section').filter({ has: page.getByRole('heading', { name: heading, exact: true, level: 2 }) }).first()
 
@@ -54,7 +59,7 @@ try {
   await api(token, 'PUT', '/analysis', { mode: 'normal' })
   {
     const page = await open(desktop, token)
-    await page.goto(origin + '/settings')
+    await settings(page, 'libraries')
     await page.getByRole('button', { name: 'Add a library' }).click()
     await page.getByRole('button', { name: 'Movies', exact: true }).click()
     await page.locator('form button', { hasText: 'Movies' }).last().click() // the folder
@@ -117,6 +122,15 @@ try {
     await dress(page, { '0.1 fps': '23.976 fps', '96.2 MB': '58.4 GB', '103 kb/s': '62.8 Mb/s' })
     await shot(page, 'file-details', { target: page.getByRole('dialog') })
     await page.keyboard.press('Escape')
+    if (wanted('rating')) {
+      await page.evaluate(() => window.scrollTo(0, 0))
+      await page.getByRole('button', { name: '4 out of 5', exact: true }).click()
+      const stars = page.getByRole('group', { name: /Your rating/ })
+      await stars.waitFor()
+      await page.mouse.move(0, 0)
+      await shot(page, 'rating', { target: stars.locator('..') })
+      await api(token, 'DELETE', `/items/${lm.id}/rating`)
+    }
 
     await page.goto(`${origin}/person/1`)
     await shot(page, 'person')
@@ -233,7 +247,7 @@ try {
 
     // Podcasts: three shows from the stand-in host, two followed, one
     // episode part-way through and one played (see docs/guide/watching/podcasts.md).
-    if (['podcasts', 'podcast', 'podcast-player', 'podcasts-add', 'podcast-search'].some(wanted)) {
+    if (['podcasts', 'podcast', 'podcast-player', 'podcasts-add', 'podcast-browse', 'podcast-search'].some(wanted)) {
       // A fresh page, so the book above isn't in the player.
       await page.context().close()
       page = await open(desktop, token)
@@ -263,6 +277,9 @@ try {
       await page.goto(`${origin}/library/${lib.id}?view=add`)
       await sleep(1000)
       await shot(page, 'podcasts-add')
+      await page.getByRole('button', { name: 'TV & film' }).click()
+      await sleep(1200)
+      await shot(page, 'podcast-browse')
       await page.getByRole('searchbox').or(page.getByPlaceholder('Search podcasts')).first().fill('film')
       await page.keyboard.press('Enter')
       await sleep(1200)
@@ -350,21 +367,61 @@ try {
     await shot(page, 'phone-movie', { maxWidth: 1170 })
     await page.goto(`${origin}/libraries`)
     await shot(page, 'phone-libraries', { maxWidth: 1170 })
+    await page.goto(`${origin}/settings`)
+    await shot(page, 'phone-settings', { maxWidth: 1170 })
     await page.context().close()
   }
 
   // --- People, profiles, themes ---
   {
     const page = await open(desktop, token)
-    await page.goto(`${origin}/settings`)
+    await settings(page, 'people')
     await shot(page, 'people', { target: section(page, 'People') })
     if (wanted('find-artwork')) {
+      await settings(page, 'libraries')
       const libraries = section(page, 'Libraries')
       const music = libraries.locator('div.flex.items-center.gap-4').filter({ hasText: 'Music' }).first()
       await music.getByRole('button', { name: 'Find artwork' }).click()
       await libraries.getByText('Looking for missing covers').waitFor()
       await shot(page, 'find-artwork', { target: libraries })
     }
+    if (wanted('import')) {
+      // The other server's data, as the import reads it; the demo has none.
+      const viewers = await api(token, 'GET', '/users')
+      const me = viewers[0]
+      const imp = await open(desktop, token)
+      const folder = '/var/lib/mediaserver/Library/Application Support/Media Server'
+      await imp.route('**/api/v1/import/find', (route) => route.fulfill({ json: { found: [folder], uploaded: false } }))
+      await imp.route('**/api/v1/import/preview', (route) => {
+        const changed = (route.request().postDataJSON().changes ?? []).length > 0
+        route.fulfill({
+          json: {
+            database: folder + '/Plug-in Support/Databases/library.db',
+            canPosters: true,
+            accounts: [
+              { id: 1, name: me.username, watched: 412, inProgress: 6, rated: 96, found: changed ? 409 : 0, suggested: me.id },
+              { id: 5001, name: 'Sam', watched: 118, inProgress: 3, rated: 0, found: changed ? 117 : 0, suggested: 0 },
+            ],
+            viewers: viewers.map((v) => ({ id: v.id, name: v.username })),
+            files: 2140,
+            matched: changed ? 2131 : 0,
+            unmatched: changed ? ['/data/movies/Old Rip (2003)/Old Rip.avi'] : ['/data/movies/Night Harbor (2019)/Night Harbor.mkv'],
+            suggested: changed ? [] : [{ from: '/data', to: '/media', files: 2131 }],
+            collections: 7,
+            posters: 23,
+          },
+        })
+      })
+      await settings(imp, 'libraries')
+      const importing = section(imp, 'Import from another media server')
+      await importing.getByRole('button', { name: 'Start' }).click()
+      await importing.getByRole('button', { name: /Found on this computer/ }).click()
+      await importing.getByRole('button', { name: 'Use it' }).click()
+      await importing.getByText(/Found in your libraries: 2,131/).waitFor()
+      await shot(imp, 'import', { target: importing })
+      await imp.context().close()
+    }
+    await settings(page, 'people')
     const profiles = section(page, 'Profiles')
     await profiles.getByRole('button', { name: 'Add profile' }).last().click()
     await profiles.getByLabel('Name').fill('Riley')
@@ -373,14 +430,19 @@ try {
     await profiles.getByRole('button', { name: /save|add/i }).last().click()
     await sleep(800)
     await shot(page, 'profiles', { target: section(page, 'Profiles') })
+    await settings(page, 'you')
     await shot(page, 'themes', { target: section(page, 'Appearance') })
     await shot(page, 'playback', { target: section(page, 'Playback') })
+    await settings(page, 'libraries')
     await shot(page, 'new-files', { target: section(page, 'New files') })
     await shot(page, 'media-analysis', { target: section(page, 'Media analysis') })
+    await settings(page, 'content')
     await shot(page, 'tmdb-key', { target: section(page, 'Posters and details') })
-    await shot(page, 'home-network', { target: section(page, 'Home network') })
     await shot(page, 'trailers', { target: section(page, 'Trailers') })
     await shot(page, 'holiday-rows', { target: section(page, 'Home') })
+    await settings(page, 'network')
+    await shot(page, 'home-network', { target: section(page, 'Home network') })
+    await settings(page, 'streaming')
     await shot(page, 'transcoding', { target: section(page, 'Transcoding') })
     if (wanted('adaptive-quality')) {
       await api(token, 'PUT', '/settings', { adaptiveQuality: true, remoteQualityCap: '720p' })
@@ -391,8 +453,12 @@ try {
       await page.reload()
       await sleep(1000)
     }
+    await settings(page, 'you')
     await shot(page, 'devices', { target: section(page, 'Your devices') })
     await shot(page, 'account', { target: section(page, 'Your account') })
+    await settings(page, 'libraries')
+    await shot(page, 'settings-groups')
+    await settings(page, 'add-ons')
     const plugins = section(page, 'Plugins')
     await plugins.getByRole('button', { name: 'Add plugin' }).click()
     await shot(page, 'plugins-add', { target: plugins })
@@ -430,7 +496,7 @@ try {
     await page.goto(origin + '/profiles')
     await page.getByRole('button', { name: admin.username }).first().click()
     await sleep(500)
-    await page.goto(origin + '/settings')
+    await settings(page, 'add-ons')
     const card = page.getByText('Not connected · for Discover').locator('xpath=ancestor::div[contains(@class, "rounded-xl")][1]')
     await card.getByRole('button', { name: 'Connect' }).click()
     await card.getByLabel('Address').fill(overseerrURL)

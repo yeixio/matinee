@@ -5,6 +5,30 @@ sidebar:
   order: 12
 ---
 
+<!-- since: v0.1.9 -->
+## Settings in the web player
+
+**Settings** is split into groups. On a computer they're listed down the left side; on a phone, **Settings** in the tab bar opens the list and each group is its own page. Everyone sees **You**; admins see the rest.
+
+| Group | What's in it |
+| --- | --- |
+| **You** | Language, Appearance, Playback, Your account and Your devices |
+| **Libraries** | Libraries, Import from another media server, New files and Media analysis |
+| **People and profiles** | People and Profiles |
+| **Content** | Posters and details, Podcast search, Trailers and Home (holiday rows) |
+| **Streaming** | Transcoding and streaming quality |
+| **Network** | Home network and Remote access |
+| **Add-ons** | Radarr and Sonarr, Overseerr, and Plugins |
+
+The server's version is at the bottom of every group.
+
+![Settings on a computer, with the groups down the left side and Libraries open](../images/settings-groups.webp)
+
+![Settings on a phone, listing the groups (phone)](../images/phone-settings.webp)
+<!-- /since -->
+
+## Server settings
+
 Most of Matinee is set up in the web player under **Settings**. A few things about the server itself are set when it starts, as environment variables or flags:
 
 | Install | Where they go |

@@ -73,7 +73,8 @@
     "shuffle": "셔플",
     "seasons": "시즌",
     "albums": "앨범",
-    "episodes": "에피소드"
+    "episodes": "에피소드",
+    "resetPoster": "자동 포스터 사용"
   },
   "row": {
     "back": "뒤로 스크롤",
@@ -748,6 +749,36 @@
       "perYear": "연 {{price}}",
       "perMonth": "월 {{price}}",
       "paid": "Yeix가 선불로 청구합니다. 언제든 해지할 수 있으며 결제한 기간이 끝날 때까지 유지됩니다."
+    },
+    "groups": {
+      "you": {
+        "title": "내 설정",
+        "hint": "언어, 모양, 재생 및 내 기기"
+      },
+      "libraries": {
+        "title": "라이브러리",
+        "hint": "폴더, 새 파일, 분석 및 가져오기"
+      },
+      "people": {
+        "title": "사용자 및 프로필",
+        "hint": "계정, 관리자 및 프로필"
+      },
+      "content": {
+        "title": "콘텐츠",
+        "hint": "포스터, 팟캐스트 검색, 예고편 및 홈 행"
+      },
+      "streaming": {
+        "title": "스트리밍",
+        "hint": "트랜스코딩 및 화질"
+      },
+      "network": {
+        "title": "네트워크",
+        "hint": "홈 네트워크 및 원격 액세스"
+      },
+      "add-ons": {
+        "title": "부가 기능",
+        "hint": "Radarr, Sonarr, Overseerr 및 플러그인"
+      }
     }
   },
   "language": {
@@ -827,5 +858,52 @@
     "reset": "자동 커버 사용",
     "chosenNote": "이 커버는 직접 고른 것이라 스캔해도 유지됩니다.",
     "saving": "커버 저장 중…"
+  },
+  "import": {
+    "title": "다른 미디어 서버에서 가져오기",
+    "intro": "시청 완료 표시, 이어 보기 위치, 컬렉션, 직접 올린 포스터를 가져옵니다. 미디어 파일은 그대로 있습니다.",
+    "start": "시작",
+    "where": "가져올 곳",
+    "whereHelp": "이 서버에서 보이는 다른 서버의 데이터 폴더를 고르거나, 그 서버의 라이브러리 데이터베이스를 업로드하세요.",
+    "foundHere": "이 컴퓨터에서 찾음",
+    "pickFolder": "폴더 고르기",
+    "uploadDatabase": "데이터베이스 파일 업로드",
+    "uploading": "업로드 중…",
+    "reading": "읽는 중…",
+    "uploaded": "업로드한 데이터베이스",
+    "files": "파일",
+    "matched": "라이브러리에서 찾은 파일: {{files}}개 중 {{matched}}개",
+    "suggestion": "이 서버에서는 경로가 다릅니다. 이 변경으로 찾는 파일: {{number}}",
+    "useChange": "사용",
+    "notFound": "Matinee에 없는 파일",
+    "from": "그쪽 경로",
+    "to": "여기 경로",
+    "addChange": "경로 변경 추가",
+    "checkAgain": "다시 확인",
+    "people": "사람",
+    "peopleHelp": "각 사람이 여기서 누구인지 고르세요. 건너뛴 사람의 기록은 가져오지 않습니다.",
+    "history": "시청 완료: {{watched}} · 시청 중: {{inProgress}} · 라이브러리에 있음: {{found}}",
+    "rated": "평가함: {{number}}",
+    "whoIs": "여기서 {{name}}",
+    "skip": "건너뛰기",
+    "profileOf": "{{name}} ({{account}})",
+    "what": "가져올 항목",
+    "watched": "시청 완료 표시와 이어 보기 위치",
+    "collections": "컬렉션 ({{number}})",
+    "posters": "업로드한 포스터 ({{number}})",
+    "ratings": "평점 ({{number}})",
+    "noPosters": "포스터 (데이터 폴더에서만 가능, 업로드한 데이터베이스에서는 불가)",
+    "run": "가져오기",
+    "running": "가져오는 중… {{total}}개 중 {{done}}개",
+    "stopped": "가져오기가 중간에 멈췄습니다. 다시 실행하면 마무리되며, 같은 항목을 두 번 가져오지 않습니다.",
+    "done": "가져오기 완료",
+    "summary": "시청 완료: {{watched}} · 이어 보기 위치: {{inProgress}} · 컬렉션: {{collections}} · 포스터: {{posters}}",
+    "kept": "여기서 더 최근에 봐서 그대로 둔 항목: {{number}}",
+    "ratingsDone": "가져온 평점: {{number}}"
+  },
+  "rating": {
+    "rate": "평가하기",
+    "yours": "내 평점: 5점 중 {{stars}}",
+    "stars": "5점 중 {{stars}}"
   }
 }

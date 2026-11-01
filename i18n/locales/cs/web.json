@@ -73,7 +73,8 @@
     "shuffle": "Náhodně",
     "seasons": "Řady",
     "albums": "Alba",
-    "episodes": "Díly"
+    "episodes": "Díly",
+    "resetPoster": "Použít automatický plakát"
   },
   "row": {
     "back": "Posunout zpět",
@@ -760,6 +761,36 @@
       "perYear": "{{price}} ročně",
       "perMonth": "{{price}} měsíčně",
       "paid": "Účtuje Yeix předem. Zrušit můžeš kdykoli; platí do konce zaplaceného období."
+    },
+    "groups": {
+      "you": {
+        "title": "Vy",
+        "hint": "Jazyk, vzhled, přehrávání a vaše zařízení"
+      },
+      "libraries": {
+        "title": "Knihovny",
+        "hint": "Složky, nové soubory, analýza a import"
+      },
+      "people": {
+        "title": "Lidé a profily",
+        "hint": "Účty, správci a profily"
+      },
+      "content": {
+        "title": "Obsah",
+        "hint": "Plakáty, hledání podcastů, trailery a řady na Domů"
+      },
+      "streaming": {
+        "title": "Streamování",
+        "hint": "Překódování a kvalita"
+      },
+      "network": {
+        "title": "Síť",
+        "hint": "Domácí síť a vzdálený přístup"
+      },
+      "add-ons": {
+        "title": "Doplňky",
+        "hint": "Radarr, Sonarr, Overseerr a pluginy"
+      }
     }
   },
   "language": {
@@ -839,5 +870,52 @@
     "reset": "Použít automatický obal",
     "chosenNote": "Tento obal byl vybrán ručně, takže ho prohledávání zachová.",
     "saving": "Ukládání obalu…"
+  },
+  "import": {
+    "title": "Importovat z jiného mediálního serveru",
+    "intro": "Přeneste značky zhlédnutí, místa pro pokračování, kolekce a vlastní plakáty. Vaše mediální soubory zůstanou, kde jsou.",
+    "start": "Začít",
+    "where": "Odkud",
+    "whereHelp": "Vyberte datovou složku druhého serveru tak, jak ji vidí tento server, nebo nahrajte jeho databázi knihovny.",
+    "foundHere": "Nalezeno v tomto počítači",
+    "pickFolder": "Vybrat složku",
+    "uploadDatabase": "Nahrát soubor databáze",
+    "uploading": "Nahrávání…",
+    "reading": "Načítání…",
+    "uploaded": "Nahraná databáze",
+    "files": "Soubory",
+    "matched": "Nalezeno ve vašich knihovnách: {{matched}} z {{files}}",
+    "suggestion": "Cesty na tomto serveru vypadají jinak. Soubory, které tato změna najde: {{number}}",
+    "useChange": "Použít",
+    "notFound": "Soubory, které Matinee nemá",
+    "from": "Jejich cesta",
+    "to": "Cesta zde",
+    "addChange": "Přidat změnu cesty",
+    "checkAgain": "Zkontrolovat znovu",
+    "people": "Lidé",
+    "peopleHelp": "Vyberte, kdo je tady kdo. Historie přeskočených lidí se nepřenese.",
+    "history": "Zhlédnuto: {{watched}} · Rozkoukáno: {{inProgress}} · Ve vašich knihovnách: {{found}}",
+    "rated": "Ohodnoceno: {{number}}",
+    "whoIs": "Kdo je zde {{name}}",
+    "skip": "Přeskočit",
+    "profileOf": "{{name}} ({{account}})",
+    "what": "Přenést",
+    "watched": "Značky zhlédnutí a místa pro pokračování",
+    "collections": "Kolekce ({{number}})",
+    "posters": "Nahrané plakáty ({{number}})",
+    "ratings": "Hodnocení ({{number}})",
+    "noPosters": "Plakáty (jen z datové složky, ne z nahrané databáze)",
+    "run": "Importovat",
+    "running": "Importuje se… {{done}} z {{total}}",
+    "stopped": "Import se zastavil v polovině. Spusťte ho znovu, aby se dokončil; nic se nepřenese dvakrát.",
+    "done": "Import dokončen",
+    "summary": "Zhlédnuto: {{watched}} · Místa pro pokračování: {{inProgress}} · Kolekce: {{collections}} · Plakáty: {{posters}}",
+    "kept": "Ponecháno beze změny, protože se zde sledovalo později: {{number}}",
+    "ratingsDone": "Přenesená hodnocení: {{number}}"
+  },
+  "rating": {
+    "rate": "Ohodnotit",
+    "yours": "Vaše hodnocení: {{stars}} z 5",
+    "stars": "{{stars}} z 5"
   }
 }

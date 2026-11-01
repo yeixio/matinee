@@ -522,5 +522,13 @@
     "use": "Utiliser",
     "reset": "Utiliser la pochette automatique",
     "chosenNote": "Cette pochette a été choisie à la main, les analyses la conservent donc."
+  },
+  "rating": {
+    "rate": "Noter",
+    "yours": "Votre note : {{stars}} sur 5",
+    "stars": "{{stars}} sur 5",
+    "halfHint": "Appuyez à nouveau pour une demi-étoile",
+    "clearHint": "Appuyez à nouveau pour la retirer",
+    "failed": "Impossible d'enregistrer votre note"
   }
 }

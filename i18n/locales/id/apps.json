@@ -508,5 +508,13 @@
     "use": "Gunakan",
     "reset": "Gunakan sampul otomatis",
     "chosenNote": "Sampul ini dipilih secara manual, jadi pemindaian tetap mempertahankannya."
+  },
+  "rating": {
+    "rate": "Beri rating",
+    "yours": "Rating Anda: {{stars}} dari 5",
+    "stars": "{{stars}} dari 5",
+    "halfHint": "Tekan lagi untuk setengah bintang",
+    "clearHint": "Tekan lagi untuk menghapus rating",
+    "failed": "Tidak dapat menyimpan rating Anda"
   }
 }

@@ -515,5 +515,13 @@
     "use": "Bruk",
     "reset": "Bruk det automatiske omslaget",
     "chosenNote": "Dette omslaget ble valgt for hånd, så skanninger beholder det."
+  },
+  "rating": {
+    "rate": "Gi vurdering",
+    "yours": "Din vurdering: {{stars}} av 5",
+    "stars": "{{stars}} av 5",
+    "halfHint": "Trykk igjen for en halv stjerne",
+    "clearHint": "Trykk igjen for å fjerne vurderingen",
+    "failed": "Kunne ikke lagre vurderingen din"
   }
 }

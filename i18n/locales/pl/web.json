@@ -73,7 +73,8 @@
     "shuffle": "Losowo",
     "seasons": "Sezony",
     "albums": "Albumy",
-    "episodes": "Odcinki"
+    "episodes": "Odcinki",
+    "resetPoster": "Użyj automatycznego plakatu"
   },
   "row": {
     "back": "Przewiń wstecz",
@@ -760,6 +761,36 @@
       "perYear": "{{price}} rocznie",
       "perMonth": "{{price}} miesięcznie",
       "paid": "Płatne z góry na rzecz Yeix. Możesz anulować w każdej chwili; działa do końca opłaconego okresu."
+    },
+    "groups": {
+      "you": {
+        "title": "Ty",
+        "hint": "Język, wygląd, odtwarzanie i Twoje urządzenia"
+      },
+      "libraries": {
+        "title": "Biblioteki",
+        "hint": "Foldery, nowe pliki, analiza i import"
+      },
+      "people": {
+        "title": "Osoby i profile",
+        "hint": "Konta, administratorzy i profile"
+      },
+      "content": {
+        "title": "Treści",
+        "hint": "Plakaty, wyszukiwanie podcastów, zwiastuny i rzędy na stronie głównej"
+      },
+      "streaming": {
+        "title": "Strumieniowanie",
+        "hint": "Transkodowanie i jakość"
+      },
+      "network": {
+        "title": "Sieć",
+        "hint": "Sieć domowa i dostęp zdalny"
+      },
+      "add-ons": {
+        "title": "Dodatki",
+        "hint": "Radarr, Sonarr, Overseerr i wtyczki"
+      }
     }
   },
   "language": {
@@ -839,5 +870,52 @@
     "reset": "Użyj automatycznej okładki",
     "chosenNote": "Ta okładka została wybrana ręcznie, więc skanowanie jej nie zmienia.",
     "saving": "Zapisywanie okładki…"
+  },
+  "import": {
+    "title": "Importuj z innego serwera multimediów",
+    "intro": "Przenieś oznaczenia obejrzanych, miejsca wznowienia, kolekcje i własne plakaty. Pliki multimedialne zostają tam, gdzie są.",
+    "start": "Zacznij",
+    "where": "Skąd",
+    "whereHelp": "Wybierz folder danych drugiego serwera, tak jak widzi go ten serwer, albo wyślij jego bazę danych biblioteki.",
+    "foundHere": "Znaleziono na tym komputerze",
+    "pickFolder": "Wybierz folder",
+    "uploadDatabase": "Wyślij plik bazy danych",
+    "uploading": "Wysyłanie…",
+    "reading": "Odczytywanie…",
+    "uploaded": "Wysłana baza danych",
+    "files": "Pliki",
+    "matched": "Znalezione w twoich bibliotekach: {{matched}} z {{files}}",
+    "suggestion": "Ścieżki na tym serwerze wyglądają inaczej. Pliki znalezione dzięki tej zmianie: {{number}}",
+    "useChange": "Użyj",
+    "notFound": "Pliki, których Matinee nie ma",
+    "from": "Ich ścieżka",
+    "to": "Ścieżka tutaj",
+    "addChange": "Dodaj zmianę ścieżki",
+    "checkAgain": "Sprawdź ponownie",
+    "people": "Osoby",
+    "peopleHelp": "Wybierz, kim jest tutaj każda osoba. Historia pominiętych osób nie zostanie przeniesiona.",
+    "history": "Obejrzane: {{watched}} · W trakcie: {{inProgress}} · W twoich bibliotekach: {{found}}",
+    "rated": "Ocenione: {{number}}",
+    "whoIs": "Kim jest tutaj {{name}}",
+    "skip": "Pomiń",
+    "profileOf": "{{name}} ({{account}})",
+    "what": "Przenieś",
+    "watched": "Oznaczenia obejrzanych i miejsca wznowienia",
+    "collections": "Kolekcje ({{number}})",
+    "posters": "Wysłane plakaty ({{number}})",
+    "ratings": "Oceny ({{number}})",
+    "noPosters": "Plakaty (tylko z folderu danych, nie z wysłanej bazy danych)",
+    "run": "Importuj",
+    "running": "Importowanie… {{done}} z {{total}}",
+    "stopped": "Import zatrzymał się w połowie. Uruchom go ponownie, aby dokończyć; nic nie zostanie przeniesione dwa razy.",
+    "done": "Import zakończony",
+    "summary": "Obejrzane: {{watched}} · Miejsca wznowienia: {{inProgress}} · Kolekcje: {{collections}} · Plakaty: {{posters}}",
+    "kept": "Pozostawione bez zmian, bo oglądane tu później: {{number}}",
+    "ratingsDone": "Przeniesione oceny: {{number}}"
+  },
+  "rating": {
+    "rate": "Oceń",
+    "yours": "Twoja ocena: {{stars}} na 5",
+    "stars": "{{stars}} na 5"
   }
 }

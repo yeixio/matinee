@@ -515,5 +515,13 @@
     "use": "Gebruiken",
     "reset": "Automatische hoes gebruiken",
     "chosenNote": "Deze hoes is met de hand gekozen, dus scans laten hem staan."
+  },
+  "rating": {
+    "rate": "Beoordelen",
+    "yours": "Jouw beoordeling: {{stars}} van 5",
+    "stars": "{{stars}} van 5",
+    "halfHint": "Druk nog eens voor een halve ster",
+    "clearHint": "Druk nog eens om je beoordeling te wissen",
+    "failed": "Je beoordeling kon niet worden opgeslagen"
   }
 }

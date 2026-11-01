@@ -292,7 +292,7 @@ matinee-plugin build
 
 The tool checks the plugin the way Matinee will, builds `server.wasm`, and writes `stories.matinee-plugin`. Then, in Matinee:
 
-1. Open **Settings → Plugins**, click **Add plugin**, choose **From a file**, and pick `stories.matinee-plugin`.
+1. Open **Settings → Add-ons → Plugins**, click **Add plugin**, choose **From a file**, and pick `stories.matinee-plugin`.
 2. Click **Stories** in the list, then **Turn on**.
 3. In **Settings → Libraries**, click **Add a library**, pick **Stories**, and choose a folder of stories.
 

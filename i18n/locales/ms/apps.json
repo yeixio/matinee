@@ -508,5 +508,13 @@
     "use": "Guna",
     "reset": "Guna kulit automatik",
     "chosenNote": "Kulit ini dipilih secara manual, jadi imbasan mengekalkannya."
+  },
+  "rating": {
+    "rate": "Beri penarafan",
+    "yours": "Penarafan anda: {{stars}} daripada 5",
+    "stars": "{{stars}} daripada 5",
+    "halfHint": "Tekan lagi untuk separuh bintang",
+    "clearHint": "Tekan lagi untuk membuang penilaian",
+    "failed": "Tidak dapat menyimpan penilaian anda"
   }
 }

@@ -73,7 +73,8 @@
     "shuffle": "Acak",
     "seasons": "Musim",
     "albums": "Album",
-    "episodes": "Episode"
+    "episodes": "Episode",
+    "resetPoster": "Gunakan poster otomatis"
   },
   "row": {
     "back": "Gulir mundur",
@@ -748,6 +749,36 @@
       "perYear": "{{price}} per tahun",
       "perMonth": "{{price}} per bulan",
       "paid": "Ditagih di muka oleh Yeix. Batalkan kapan saja; tetap berlaku sampai akhir periode yang dibayar."
+    },
+    "groups": {
+      "you": {
+        "title": "Anda",
+        "hint": "Bahasa, tampilan, pemutaran, dan perangkat Anda"
+      },
+      "libraries": {
+        "title": "Pustaka",
+        "hint": "Folder, file baru, analisis, dan impor"
+      },
+      "people": {
+        "title": "Orang dan profil",
+        "hint": "Akun, admin, dan profil"
+      },
+      "content": {
+        "title": "Konten",
+        "hint": "Poster, pencarian podcast, trailer, dan baris Beranda"
+      },
+      "streaming": {
+        "title": "Streaming",
+        "hint": "Transkode dan kualitas"
+      },
+      "network": {
+        "title": "Jaringan",
+        "hint": "Jaringan rumah dan akses jarak jauh"
+      },
+      "add-ons": {
+        "title": "Pengaya",
+        "hint": "Radarr, Sonarr, Overseerr, dan plugin"
+      }
     }
   },
   "language": {
@@ -827,5 +858,52 @@
     "reset": "Gunakan sampul otomatis",
     "chosenNote": "Sampul ini dipilih secara manual, jadi pemindaian tetap mempertahankannya.",
     "saving": "Menyimpan sampul…"
+  },
+  "import": {
+    "title": "Impor dari server media lain",
+    "intro": "Bawa tanda sudah ditonton, titik lanjut tonton, koleksi, dan poster khusus. File media Anda tetap di tempatnya.",
+    "start": "Mulai",
+    "where": "Dari mana",
+    "whereHelp": "Pilih folder data server lain seperti yang dilihat server ini, atau unggah basis data pustakanya.",
+    "foundHere": "Ditemukan di komputer ini",
+    "pickFolder": "Pilih folder",
+    "uploadDatabase": "Unggah file basis data",
+    "uploading": "Mengunggah…",
+    "reading": "Membaca…",
+    "uploaded": "Basis data yang diunggah",
+    "files": "File",
+    "matched": "Ditemukan di pustaka Anda: {{matched}} dari {{files}}",
+    "suggestion": "Jalur di server ini terlihat berbeda. File yang ditemukan dengan perubahan ini: {{number}}",
+    "useChange": "Gunakan",
+    "notFound": "File yang tidak dimiliki Matinee",
+    "from": "Jalur di sana",
+    "to": "Jalur di sini",
+    "addChange": "Tambah perubahan jalur",
+    "checkAgain": "Periksa lagi",
+    "people": "Orang",
+    "peopleHelp": "Pilih siapa setiap orang di sini. Riwayat orang yang dilewati tidak dibawa.",
+    "history": "Ditonton: {{watched}} · Sedang ditonton: {{inProgress}} · Di pustaka Anda: {{found}}",
+    "rated": "Diberi rating: {{number}}",
+    "whoIs": "Siapa {{name}} di sini",
+    "skip": "Lewati",
+    "profileOf": "{{name}} ({{account}})",
+    "what": "Bawa",
+    "watched": "Tanda sudah ditonton dan titik lanjut tonton",
+    "collections": "Koleksi ({{number}})",
+    "posters": "Poster yang diunggah ({{number}})",
+    "ratings": "Rating ({{number}})",
+    "noPosters": "Poster (hanya dari folder data, bukan dari basis data yang diunggah)",
+    "run": "Impor",
+    "running": "Mengimpor… {{done}} dari {{total}}",
+    "stopped": "Impor berhenti di tengah jalan. Jalankan lagi untuk menyelesaikannya; tidak ada yang dibawa dua kali.",
+    "done": "Impor selesai",
+    "summary": "Ditonton: {{watched}} · Titik lanjut tonton: {{inProgress}} · Koleksi: {{collections}} · Poster: {{posters}}",
+    "kept": "Dibiarkan apa adanya karena ditonton lebih baru di sini: {{number}}",
+    "ratingsDone": "Rating yang dibawa: {{number}}"
+  },
+  "rating": {
+    "rate": "Beri rating",
+    "yours": "Rating Anda: {{stars}} dari 5",
+    "stars": "{{stars}} dari 5"
   }
 }

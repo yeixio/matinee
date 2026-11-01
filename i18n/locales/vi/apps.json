@@ -508,5 +508,13 @@
     "use": "Dùng",
     "reset": "Dùng ảnh bìa tự động",
     "chosenNote": "Ảnh bìa này được chọn thủ công nên các lần quét sẽ giữ nguyên."
+  },
+  "rating": {
+    "rate": "Đánh giá",
+    "yours": "Đánh giá của bạn: {{stars}}/5",
+    "stars": "{{stars}}/5",
+    "halfHint": "Nhấn lần nữa để chọn nửa sao",
+    "clearHint": "Nhấn lần nữa để bỏ đánh giá",
+    "failed": "Không lưu được đánh giá của bạn"
   }
 }

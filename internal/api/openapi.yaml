@@ -913,6 +913,111 @@ paths:
                   dirs: { type: array, items: { type: string }, description: The subfolders' names. }
                   paths: { type: array, items: { type: string }, description: The subfolders' full paths, in the same order. }
                   drives: { type: boolean, description: "True when this is a Windows server's list of drives, which isn't a folder to pick." }
+  /import:
+    get:
+      summary: How the import from another media server is going (admins only)
+      responses:
+        "200":
+          description: Whether one is running, how far along it is, and what the last one did.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  running: { type: boolean }
+                  done: { type: integer }
+                  total: { type: integer }
+                  result: { $ref: "#/components/schemas/ImportResult" }
+                  error: { type: string }
+  /import/find:
+    get:
+      summary: Another media server's data folders found on this computer (admins only)
+      responses:
+        "200":
+          description: Folders found where that server keeps its data by default, and whether a database was uploaded.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  found: { type: array, items: { type: string } }
+                  uploaded: { type: boolean }
+  /import/upload:
+    post:
+      summary: Upload another media server's library database (admins only)
+      description: >
+        For a server that can't see the other one's data folder. The body is
+        the database file itself. An import from an upload brings over watch
+        history and collections, but not posters, which live beside it.
+      requestBody:
+        content:
+          application/octet-stream: {}
+      responses:
+        "204": { description: Uploaded and readable. }
+        "400": { $ref: "#/components/responses/Error" }
+  /import/preview:
+    post:
+      summary: What an import would bring over (admins only)
+      description: >
+        Reads the other server's data and matches its files to Matinee's by
+        path, after the path changes given. Suggests path changes that would
+        match more files, and the Matinee account or profile each of its
+        accounts most likely is.
+      requestBody:
+        content:
+          application/json: { schema: { $ref: "#/components/schemas/ImportRequest" } }
+      responses:
+        "200":
+          description: The preview.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  database: { type: string, description: The database read. }
+                  canPosters: { type: boolean, description: "False for an uploaded database, which has no posters beside it." }
+                  accounts:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id: { type: integer }
+                        name: { type: string }
+                        watched: { type: integer }
+                        inProgress: { type: integer }
+                        rated: { type: integer }
+                        found: { type: integer, description: How many of those Matinee has. }
+                        suggested: { type: integer, description: "A Matinee account or profile id, or 0." }
+                  viewers:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id: { type: integer }
+                        name: { type: string }
+                        profileOf: { type: string }
+                  files: { type: integer }
+                  matched: { type: integer }
+                  unmatched: { type: array, items: { type: string }, description: A few files Matinee doesn't have. }
+                  suggested: { type: array, items: { $ref: "#/components/schemas/PathChange" } }
+                  collections: { type: integer }
+                  posters: { type: integer }
+        "400": { $ref: "#/components/responses/Error" }
+  /import/run:
+    post:
+      summary: Start an import (admins only)
+      description: >
+        Runs in the background; GET /import follows it. Watched marks and
+        places only replace Matinee's when the other server's are newer, and
+        collections are added to rather than made twice, so it's safe to run
+        again.
+      requestBody:
+        content:
+          application/json: { schema: { $ref: "#/components/schemas/ImportRequest" } }
+      responses:
+        "202": { description: Started. }
+        "400": { $ref: "#/components/responses/Error" }
+        "409": { $ref: "#/components/responses/Error" }
   /analysis:
     get:
       summary: How far the background media analysis is (admins only)
@@ -1169,13 +1274,17 @@ paths:
       summary: Find podcasts in Podcast Index
       description: |
         Searches Podcast Index (podcastindex.org) with `q`, or lists what's
-        trending in a language with `lang` (such as en). `connected` is false
-        when no admin entered a Podcast Index key, and then `shows` is empty:
-        shows can still be added by their feed's address. A show a library
-        has already carries its `itemId`. Not on kids profiles.
+        trending in a language with `lang` (such as en), in every category or
+        in one `category` (an `id` from `categories`, such as comedy).
+        `categories` lists the kinds of shows to browse, with English names
+        the apps translate by id (podcasts.categories.<id>). `connected` is
+        false when no admin entered a Podcast Index key, and then `shows` is
+        empty: shows can still be added by their feed's address. A show a
+        library has already carries its `itemId`. Not on kids profiles.
       parameters:
         - { name: q, in: query, schema: { type: string } }
         - { name: lang, in: query, schema: { type: string } }
+        - { name: category, in: query, schema: { type: string } }
       responses:
         "200":
           description: Shows.
@@ -1186,6 +1295,13 @@ paths:
                 properties:
                   connected: { type: boolean }
                   shows: { type: array, items: { $ref: "#/components/schemas/DirectoryShow" } }
+                  categories:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id: { type: string }
+                        name: { type: string }
         "502": { $ref: "#/components/responses/Error" }
   /podcasts/following:
     get:
@@ -1477,7 +1593,10 @@ paths:
         "502": { $ref: "#/components/responses/Error" }
     delete:
       summary: Go back to the automatic cover (admins)
-      description: Forgets the picked cover; a scan of the library finds one in the folder, the files or online again.
+      description: >
+        Forgets the picked cover; a scan of the library finds one in the
+        folder, the files or online again. Works for any item with a
+        `posterTag`, such as a movie whose poster was imported.
       parameters: [{ $ref: "#/components/parameters/ID" }]
       responses:
         "204": { description: Reset. }
@@ -1595,6 +1714,22 @@ paths:
         haven't signed in share the Home account's list.
       responses:
         "200": { $ref: "#/components/responses/Items" }
+  /items/{id}/rating:
+    put:
+      summary: Rate a title, song, book or podcast
+      description: Ratings are each person's own, from 1 to 10 (half stars out of five). Items carry it as `myRating`.
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      requestBody:
+        content:
+          application/json: { schema: { type: object, required: [rating], properties: { rating: { type: integer, minimum: 1, maximum: 10 } } } }
+      responses:
+        "204": { description: Rated. }
+        "400": { $ref: "#/components/responses/Error" }
+    delete:
+      summary: Take back a rating
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      responses:
+        "204": { description: Done. }
   /watchlist/{id}:
     put:
       summary: Add a movie or show to the watch list
@@ -2874,6 +3009,33 @@ components:
             type: array
             items: { $ref: "#/components/schemas/Item" }
   schemas:
+    PathChange:
+      type: object
+      description: Turns the start of the other server's paths into Matinee's.
+      properties:
+        from: { type: string, example: /data }
+        to: { type: string, example: /mnt/media }
+        files: { type: integer, description: "In suggestions: how many files it matches." }
+    ImportRequest:
+      type: object
+      properties:
+        path: { type: string, description: "The other server's data folder, a folder above it, or its database, on this server. Empty uses the uploaded database." }
+        changes: { type: array, items: { $ref: "#/components/schemas/PathChange" } }
+        accounts: { type: object, additionalProperties: { type: integer }, description: "For running: the other server's account ids mapped to Matinee account or profile ids. Accounts left out are skipped." }
+        watched: { type: boolean, description: Bring over watched marks and places to resume from. }
+        collections: { type: boolean, description: Bring over collections, as shared collections. }
+        posters: { type: boolean, description: Bring over posters someone uploaded there. }
+        ratings: { type: boolean, description: "Bring over each person's ratings, as their own ratings here." }
+    ImportResult:
+      type: object
+      properties:
+        watched: { type: integer }
+        inProgress: { type: integer }
+        kept: { type: integer, description: Left alone because they were watched more recently on Matinee. }
+        collections: { type: integer }
+        collectionItems: { type: integer }
+        posters: { type: integer }
+        ratings: { type: integer, description: Ratings given or changed. }
     ItemFilter:
       description: >
         Picks titles by their metadata. The same field names are used as query
@@ -2916,7 +3078,7 @@ components:
         watchList: { type: boolean, description: Only titles on the signed-in person's watch list. }
         series: { type: array, items: { type: string }, description: Books in these series. }
         narrator: { type: array, items: { type: string }, description: Books any of these people narrate. }
-        sort: { type: string, enum: [title, added, released, year, rating, runtime, lastPlayed, series], default: title, description: "series is a book's place in its series." }
+        sort: { type: string, enum: [title, added, released, year, rating, myRating, runtime, lastPlayed, series], default: title, description: "series is a book's place in its series; myRating is the person's own rating." }
         order: { type: string, enum: [asc, desc], description: Title and runtime run low to high by default, the others high to low. Titles missing the field go last. }
         limit: { type: integer }
     FilterValue:
@@ -3548,6 +3710,7 @@ components:
         played: { type: boolean }
         overview: { type: string }
         rating: { type: number }
+        myRating: { type: integer, minimum: 1, maximum: 10, description: "The person's own rating: 1 to 10, half stars out of five. Missing when they haven't rated it." }
         hasPoster: { type: boolean }
         posterTag: { type: string, description: "Set when an admin picked the cover; add it to the image URL as ?v= so a cached old cover isn't shown." }
         hasBackdrop: { type: boolean }

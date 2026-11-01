@@ -73,7 +73,8 @@
     "shuffle": "Zufällig",
     "seasons": "Staffeln",
     "albums": "Alben",
-    "episodes": "Folgen"
+    "episodes": "Folgen",
+    "resetPoster": "Automatisches Poster verwenden"
   },
   "row": {
     "back": "Zurückblättern",
@@ -752,6 +753,36 @@
       "perYear": "{{price}} pro Jahr",
       "perMonth": "{{price}} pro Monat",
       "paid": "Wird im Voraus von Yeix abgerechnet. Jederzeit kündbar; es läuft bis zum Ende des bezahlten Zeitraums."
+    },
+    "groups": {
+      "you": {
+        "title": "Du",
+        "hint": "Sprache, Aussehen, Wiedergabe und deine Geräte"
+      },
+      "libraries": {
+        "title": "Mediatheken",
+        "hint": "Ordner, neue Dateien, Analyse und Import"
+      },
+      "people": {
+        "title": "Personen und Profile",
+        "hint": "Konten, Admins und Profile"
+      },
+      "content": {
+        "title": "Inhalte",
+        "hint": "Poster, Podcast-Suche, Trailer und Reihen auf der Startseite"
+      },
+      "streaming": {
+        "title": "Streaming",
+        "hint": "Transkodierung und Qualität"
+      },
+      "network": {
+        "title": "Netzwerk",
+        "hint": "Heimnetz und Fernzugriff"
+      },
+      "add-ons": {
+        "title": "Erweiterungen",
+        "hint": "Radarr, Sonarr, Overseerr und Plugins"
+      }
     }
   },
   "language": {
@@ -831,5 +862,52 @@
     "reset": "Automatisches Cover verwenden",
     "chosenNote": "Dieses Cover wurde von Hand gewählt, deshalb behalten Scans es bei.",
     "saving": "Cover wird gespeichert …"
+  },
+  "import": {
+    "title": "Aus einem anderen Medienserver importieren",
+    "intro": "Übernimm Gesehen-Markierungen, Fortsetzungspunkte, Sammlungen und eigene Poster. Deine Mediendateien bleiben, wo sie sind.",
+    "start": "Starten",
+    "where": "Woher",
+    "whereHelp": "Wähle den Datenordner des anderen Servers, so wie dieser Server ihn sieht, oder lade seine Bibliotheksdatenbank hoch.",
+    "foundHere": "Auf diesem Computer gefunden",
+    "pickFolder": "Ordner wählen",
+    "uploadDatabase": "Datenbankdatei hochladen",
+    "uploading": "Wird hochgeladen…",
+    "reading": "Wird gelesen…",
+    "uploaded": "Hochgeladene Datenbank",
+    "files": "Dateien",
+    "matched": "In deinen Mediatheken gefunden: {{matched}} von {{files}}",
+    "suggestion": "Die Pfade sehen auf diesem Server anders aus. Dateien, die diese Änderung findet: {{number}}",
+    "useChange": "Übernehmen",
+    "notFound": "Dateien, die Matinee nicht hat",
+    "from": "Ihr Pfad",
+    "to": "Pfad hier",
+    "addChange": "Pfadänderung hinzufügen",
+    "checkAgain": "Erneut prüfen",
+    "people": "Personen",
+    "peopleHelp": "Wähle, wer jede Person hier ist. Der Verlauf übersprungener Personen wird nicht übernommen.",
+    "history": "Gesehen: {{watched}} · Angefangen: {{inProgress}} · In deinen Mediatheken: {{found}}",
+    "rated": "Bewertet: {{number}}",
+    "whoIs": "Wer {{name}} hier ist",
+    "skip": "Überspringen",
+    "profileOf": "{{name}} ({{account}})",
+    "what": "Übernehmen",
+    "watched": "Gesehen-Markierungen und Fortsetzungspunkte",
+    "collections": "Sammlungen ({{number}})",
+    "posters": "Hochgeladene Poster ({{number}})",
+    "ratings": "Bewertungen ({{number}})",
+    "noPosters": "Poster (nur aus einem Datenordner, nicht aus einer hochgeladenen Datenbank)",
+    "run": "Importieren",
+    "running": "Wird importiert… {{done}} von {{total}}",
+    "stopped": "Der Import wurde unterbrochen. Starte ihn erneut, um ihn abzuschließen; nichts wird doppelt übernommen.",
+    "done": "Import abgeschlossen",
+    "summary": "Gesehen: {{watched}} · Fortsetzungspunkte: {{inProgress}} · Sammlungen: {{collections}} · Poster: {{posters}}",
+    "kept": "Unverändert gelassen, weil sie hier zuletzt geschaut wurden: {{number}}",
+    "ratingsDone": "Übernommene Bewertungen: {{number}}"
+  },
+  "rating": {
+    "rate": "Bewerten",
+    "yours": "Deine Bewertung: {{stars}} von 5",
+    "stars": "{{stars}} von 5"
   }
 }

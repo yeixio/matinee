@@ -9,7 +9,7 @@ Copy a film into a library folder and it shows up in Matinee a few seconds after
 
 ![The New files settings, with Automatic picked](../images/new-files.webp)
 
-**Settings → New files** has three ways to watch:
+**Settings → Libraries → New files** has three ways to watch:
 
 | Mode | How it works |
 | --- | --- |

@@ -7,6 +7,7 @@ import { api, type Item, type ItemDetail, type User } from '../api'
 import { Artwork } from '../components/Artwork'
 import { AddToCollectionButton } from '../components/Collections'
 import { CoverPicker } from '../components/CoverPicker'
+import { StarRating } from '../components/StarRating'
 import { Row, RowItem } from '../components/Row'
 import { TrackMenu, Tracks } from '../components/Tracks'
 import { Button } from '../components/ui'
@@ -164,6 +165,7 @@ function Actions({ item, tracks }: { item: ItemDetail; tracks?: Item[] }) {
         {t('common:music.shuffle')}
       </Button>
       <AddToCollectionButton item={item} />
+      <StarRating item={item} />
       <TrackMenu item={item} items={async () => tracks ?? api.tracks(item.id)} />
     </div>
   )

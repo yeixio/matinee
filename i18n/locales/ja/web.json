@@ -73,7 +73,8 @@
     "shuffle": "シャッフル",
     "seasons": "シーズン",
     "albums": "アルバム",
-    "episodes": "エピソード"
+    "episodes": "エピソード",
+    "resetPoster": "自動のポスターを使う"
   },
   "row": {
     "back": "前へスクロール",
@@ -748,6 +749,36 @@
       "perYear": "年額 {{price}}",
       "perMonth": "月額 {{price}}",
       "paid": "Yeix が前払いで請求します。いつでも解約でき、支払い済みの期間の終わりまで使えます。"
+    },
+    "groups": {
+      "you": {
+        "title": "あなた",
+        "hint": "言語、外観、再生、デバイス"
+      },
+      "libraries": {
+        "title": "ライブラリ",
+        "hint": "フォルダ、新しいファイル、解析、インポート"
+      },
+      "people": {
+        "title": "ユーザーとプロフィール",
+        "hint": "アカウント、管理者、プロフィール"
+      },
+      "content": {
+        "title": "コンテンツ",
+        "hint": "ポスター、ポッドキャスト検索、予告編、ホームの列"
+      },
+      "streaming": {
+        "title": "ストリーミング",
+        "hint": "トランスコードと画質"
+      },
+      "network": {
+        "title": "ネットワーク",
+        "hint": "ホームネットワークとリモートアクセス"
+      },
+      "add-ons": {
+        "title": "アドオン",
+        "hint": "Radarr、Sonarr、Overseerr、プラグイン"
+      }
     }
   },
   "language": {
@@ -827,5 +858,52 @@
     "reset": "自動のカバーを使う",
     "chosenNote": "このカバーは手動で選ばれたため、スキャンしても変わりません。",
     "saving": "カバーを保存しています…"
+  },
+  "import": {
+    "title": "別のメディアサーバーからインポート",
+    "intro": "視聴済みの印、続きから再生する位置、コレクション、カスタムポスターを引き継ぎます。メディアファイルはそのままの場所に残ります。",
+    "start": "始める",
+    "where": "インポート元",
+    "whereHelp": "このサーバーから見た、もう一方のサーバーのデータフォルダを選ぶか、そのライブラリデータベースをアップロードしてください。",
+    "foundHere": "このコンピュータで見つかりました",
+    "pickFolder": "フォルダを選ぶ",
+    "uploadDatabase": "データベースファイルをアップロード",
+    "uploading": "アップロード中…",
+    "reading": "読み込み中…",
+    "uploaded": "アップロードしたデータベース",
+    "files": "ファイル",
+    "matched": "ライブラリで見つかったファイル: {{files}} 件中 {{matched}} 件",
+    "suggestion": "このサーバーではパスが異なるようです。この変更で見つかるファイル: {{number}}",
+    "useChange": "使う",
+    "notFound": "Matinee にないファイル",
+    "from": "向こうのパス",
+    "to": "ここでのパス",
+    "addChange": "パスの変更を追加",
+    "checkAgain": "もう一度確認",
+    "people": "ユーザー",
+    "peopleHelp": "それぞれの人がここで誰にあたるかを選んでください。スキップした人の履歴は引き継がれません。",
+    "history": "視聴済み: {{watched}} · 視聴中: {{inProgress}} · ライブラリ内: {{found}}",
+    "rated": "評価済み: {{number}}",
+    "whoIs": "ここでの {{name}}",
+    "skip": "スキップ",
+    "profileOf": "{{name}}（{{account}}）",
+    "what": "引き継ぐもの",
+    "watched": "視聴済みの印と続きから再生する位置",
+    "collections": "コレクション（{{number}}）",
+    "posters": "アップロードされたポスター（{{number}}）",
+    "ratings": "評価（{{number}}）",
+    "noPosters": "ポスター（データフォルダからのみ。アップロードしたデータベースからは不可）",
+    "run": "インポート",
+    "running": "インポート中… {{total}} 件中 {{done}} 件",
+    "stopped": "インポートが途中で止まりました。もう一度実行すると完了します。二重に取り込まれることはありません。",
+    "done": "インポートが完了しました",
+    "summary": "視聴済み: {{watched}} · 再生位置: {{inProgress}} · コレクション: {{collections}} · ポスター: {{posters}}",
+    "kept": "ここでより最近に視聴されたため、そのままにしたもの: {{number}}",
+    "ratingsDone": "引き継いだ評価: {{number}}"
+  },
+  "rating": {
+    "rate": "評価する",
+    "yours": "あなたの評価: 5 点中 {{stars}}",
+    "stars": "5 点中 {{stars}}"
   }
 }

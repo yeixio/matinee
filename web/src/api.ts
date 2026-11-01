@@ -327,6 +327,8 @@ export type Item = {
   played?: boolean
   overview?: string
   rating?: number
+  // The person's own rating, 1 to 10: half stars out of five.
+  myRating?: number
   hasPoster: boolean
   // Set when an admin picked the cover; it goes on the image URL so a cached old one isn't shown.
   posterTag?: string
@@ -660,6 +662,8 @@ export type PodcastFeed = {
   unplayed: number
 }
 // A show in Podcast Index, with its id when a library has it already.
+/** A kind of show to browse in Podcast Index; the name is English, translated by id under podcasts.categories. */
+export type PodcastCategory = { id: string; name: string }
 export type DirectoryShow = {
   indexId: number
   title: string
@@ -697,6 +701,41 @@ export interface CoverOption {
 
 // message is in the page's language where the catalog has the server's
 // error code (errors.json), else the server's English.
+// An import from another media server. path is its data folder on the
+// server ('' for an uploaded database); changes turn its paths into Matinee's.
+export type PathChange = { from: string; to: string; files?: number }
+export type ImportRequest = {
+  path: string
+  changes: PathChange[]
+  accounts?: Record<string, number>
+  watched?: boolean
+  collections?: boolean
+  posters?: boolean
+  ratings?: boolean
+}
+export type ImportPreview = {
+  database: string
+  canPosters: boolean
+  accounts: { id: number; name: string; watched: number; inProgress: number; rated: number; found: number; suggested: number }[]
+  viewers: { id: number; name: string; profileOf?: string }[]
+  files: number
+  matched: number
+  unmatched: string[]
+  suggested: PathChange[]
+  collections: number
+  posters: number
+}
+export type ImportResult = {
+  watched: number
+  inProgress: number
+  kept: number
+  collections: number
+  collectionItems: number
+  posters: number
+  ratings: number
+}
+export type ImportStatus = { running: boolean; done: number; total: number; result?: ImportResult; error?: string }
+
 export class ApiError extends Error {
   status: number
   code?: string
@@ -869,8 +908,8 @@ export const api = {
   narrators: (library: number) => request<BookGroup[]>('GET', `/api/v1/libraries/${library}/narrators`),
   // Podcasts: finding shows in Podcast Index, adding them by their feed,
   // following them, and moving them between apps as OPML.
-  podcastDirectory: (q: { q?: string; lang?: string }) =>
-    request<{ connected: boolean; shows: DirectoryShow[] }>('GET', `/api/v1/podcasts/directory?${new URLSearchParams(q as Record<string, string>)}`),
+  podcastDirectory: (q: { q?: string; lang?: string; category?: string }) =>
+    request<{ connected: boolean; shows: DirectoryShow[]; categories?: PodcastCategory[] }>('GET', `/api/v1/podcasts/directory?${new URLSearchParams(q as Record<string, string>)}`),
   followedPodcasts: () => request<FollowedShow[]>('GET', '/api/v1/podcasts/following'),
   addPodcast: (libraryId: number, feedUrl: string) => request<Item>('POST', '/api/v1/podcasts', { libraryId, feedUrl }),
   deletePodcast: (id: number) => request<void>('DELETE', `/api/v1/podcasts/${id}`),
@@ -889,6 +928,20 @@ export const api = {
     return response<Item>(res)
   },
   resetCover: (id: number) => request<void>('DELETE', `/api/v1/items/${id}/cover`),
+  // Bringing history over from another media server (Settings → Import).
+  findImports: () => request<{ found: string[]; uploaded: boolean }>('GET', '/api/v1/import/find'),
+  uploadImport: async (file: Blob) => {
+    const res = await fetch('/api/v1/import/upload', {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/octet-stream' },
+      body: file,
+    })
+    return response<void>(res)
+  },
+  previewImport: (req: ImportRequest) => request<ImportPreview>('POST', '/api/v1/import/preview', req),
+  runImport: (req: ImportRequest) => request<void>('POST', '/api/v1/import/run', req),
+  importStatus: () => request<ImportStatus>('GET', '/api/v1/import'),
   importOpml: async (library: number, file: Blob) => {
     const res = await fetch(`/api/v1/libraries/${library}/opml`, {
       method: 'POST',
@@ -933,6 +986,9 @@ export const api = {
     request<PlaylistDetail>('PUT', `/api/v1/playlists/${encodeURIComponent(id)}/order`, { entries }),
   addToWatchList: (id: number) => request<void>('PUT', `/api/v1/watchlist/${id}`),
   removeFromWatchList: (id: number) => request<void>('DELETE', `/api/v1/watchlist/${id}`),
+  // rating: 1 to 10 (half stars), or null to take it back.
+  rate: (id: number, rating: number | null) =>
+    rating ? request<void>('PUT', `/api/v1/items/${id}/rating`, { rating }) : request<void>('DELETE', `/api/v1/items/${id}/rating`),
   hideFromContinueWatching: (id: number) => request<void>('DELETE', `/api/v1/continue-watching/${id}`),
   setProgress: (id: number, positionMs: number, played = false) =>
     request<void>('PUT', `/api/v1/items/${id}/progress`, { positionMs, played }),

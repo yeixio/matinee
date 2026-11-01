@@ -529,5 +529,13 @@
     "use": "Použít",
     "reset": "Použít automatický obal",
     "chosenNote": "Tento obal byl vybrán ručně, takže ho prohledávání zachová."
+  },
+  "rating": {
+    "rate": "Ohodnotit",
+    "yours": "Vaše hodnocení: {{stars}} z 5",
+    "stars": "{{stars}} z 5",
+    "halfHint": "Stiskněte znovu pro polovinu hvězdičky",
+    "clearHint": "Stiskněte znovu pro zrušení hodnocení",
+    "failed": "Hodnocení se nepodařilo uložit"
   }
 }

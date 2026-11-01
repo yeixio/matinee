@@ -33,7 +33,7 @@ export function Integrations() {
         </p>
       </div>
       <div className="space-y-3">{apps.map((a) => (data ? <Connection key={a.app} {...a} saved={data[a.app]} /> : null))}</div>
-      <div className="pt-4">
+      <div id="overseerr" className="scroll-mt-24 pt-4">
         <h2 className="text-lg font-semibold">Overseerr</h2>
         <p className="mt-1 text-sm text-muted">{t('integrations.overseerr.intro')}</p>
       </div>

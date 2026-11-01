@@ -522,5 +522,13 @@
     "use": "Usa",
     "reset": "Usa la copertina automatica",
     "chosenNote": "Questa copertina è stata scelta a mano, quindi le scansioni la mantengono."
+  },
+  "rating": {
+    "rate": "Valuta",
+    "yours": "Il tuo voto: {{stars}} su 5",
+    "stars": "{{stars}} su 5",
+    "halfHint": "Premi di nuovo per mezza stella",
+    "clearHint": "Premi di nuovo per toglierlo",
+    "failed": "Impossibile salvare il tuo voto"
   }
 }

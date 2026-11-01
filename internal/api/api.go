@@ -104,6 +104,7 @@ type Server struct {
 	signIns         signInGuard     // wrong passwords (see signin.go)
 	holidayKeywords holidayKeywords // TMDB's ids for holiday keywords (see holidays.go)
 	langs           languages       // profiles' languages (see languages.go)
+	imports         importState     // bringing history over from another server (see imports.go)
 
 	// Translate looks up translations for every library, when people start
 	// using a language; nil without an online provider that has them.
@@ -215,6 +216,11 @@ func (s *Server) routes() []route {
 		{"GET /libraries/{id}/narrators", reader, s.libraryNarrators},
 		{"GET /items", reader, s.filterItems},
 		{"GET /fs", adminOnly, s.browseFS},
+		{"GET /import", adminOnly, s.importStatus},
+		{"GET /import/find", adminOnly, s.findImports},
+		{"POST /import/upload", adminOnly, s.uploadImport},
+		{"POST /import/preview", adminOnly, s.previewImport},
+		{"POST /import/run", adminOnly, s.runImport},
 		{"GET /analysis", adminOnly, s.getAnalysis},
 		{"PUT /analysis", adminOnly, s.putAnalysis},
 		{"POST /items/{id}/analyze", adminOnly, s.analyzeItem},
@@ -267,6 +273,8 @@ func (s *Server) routes() []route {
 		{"GET /watchlist", reader, s.getWatchList},
 		{"PUT /watchlist/{id}", reader, s.addToWatchList},
 		{"DELETE /watchlist/{id}", reader, s.removeFromWatchList},
+		{"PUT /items/{id}/rating", reader, s.setRating},
+		{"DELETE /items/{id}/rating", reader, s.clearRating},
 		{"GET /playlists", reader, s.listPlaylists},
 		{"POST /playlists", reader, s.createPlaylist},
 		{"GET /playlists/{id}", reader, s.getPlaylist},

@@ -73,7 +73,8 @@
     "shuffle": "Amestecă",
     "seasons": "Sezoane",
     "albums": "Albume",
-    "episodes": "Episoade"
+    "episodes": "Episoade",
+    "resetPoster": "Folosește afișul automat"
   },
   "row": {
     "back": "Derulează înapoi",
@@ -756,6 +757,36 @@
       "perYear": "{{price}} pe an",
       "perMonth": "{{price}} pe lună",
       "paid": "Facturat în avans de Yeix. Anulezi oricând; rămâne activ până la finalul perioadei plătite."
+    },
+    "groups": {
+      "you": {
+        "title": "Tu",
+        "hint": "Limbă, aspect, redare și dispozitivele tale"
+      },
+      "libraries": {
+        "title": "Biblioteci",
+        "hint": "Dosare, fișiere noi, analiză și import"
+      },
+      "people": {
+        "title": "Persoane și profiluri",
+        "hint": "Conturi, administratori și profiluri"
+      },
+      "content": {
+        "title": "Conținut",
+        "hint": "Postere, căutare podcasturi, trailere și rânduri pe Acasă"
+      },
+      "streaming": {
+        "title": "Streaming",
+        "hint": "Transcodare și calitate"
+      },
+      "network": {
+        "title": "Rețea",
+        "hint": "Rețeaua de acasă și acces la distanță"
+      },
+      "add-ons": {
+        "title": "Suplimente",
+        "hint": "Radarr, Sonarr, Overseerr și pluginuri"
+      }
     }
   },
   "language": {
@@ -835,5 +866,52 @@
     "reset": "Folosește coperta automată",
     "chosenNote": "Această copertă a fost aleasă manual, așa că scanările o păstrează.",
     "saving": "Se salvează coperta…"
+  },
+  "import": {
+    "title": "Importă de pe alt server media",
+    "intro": "Adu marcajele de vizionare, punctele de reluare, colecțiile și afișele personalizate. Fișierele tale rămân unde sunt.",
+    "start": "Începe",
+    "where": "De unde",
+    "whereHelp": "Alege dosarul de date al celuilalt server, așa cum îl vede acest server, sau încarcă baza de date a bibliotecii lui.",
+    "foundHere": "Găsit pe acest computer",
+    "pickFolder": "Alege un dosar",
+    "uploadDatabase": "Încarcă un fișier de bază de date",
+    "uploading": "Se încarcă…",
+    "reading": "Se citește…",
+    "uploaded": "Bază de date încărcată",
+    "files": "Fișiere",
+    "matched": "Găsite în bibliotecile tale: {{matched}} din {{files}}",
+    "suggestion": "Căile arată altfel pe acest server. Fișiere găsite cu această schimbare: {{number}}",
+    "useChange": "Folosește",
+    "notFound": "Fișiere pe care Matinee nu le are",
+    "from": "Calea de acolo",
+    "to": "Calea de aici",
+    "addChange": "Adaugă o schimbare de cale",
+    "checkAgain": "Verifică din nou",
+    "people": "Persoane",
+    "peopleHelp": "Alege cine este fiecare persoană aici. Istoricul persoanelor omise nu este adus.",
+    "history": "Vizionate: {{watched}} · În curs: {{inProgress}} · În bibliotecile tale: {{found}}",
+    "rated": "Evaluate: {{number}}",
+    "whoIs": "Cine este {{name}} aici",
+    "skip": "Omite",
+    "profileOf": "{{name}} ({{account}})",
+    "what": "Adu",
+    "watched": "Marcaje de vizionare și puncte de reluare",
+    "collections": "Colecții ({{number}})",
+    "posters": "Afișe încărcate ({{number}})",
+    "ratings": "Evaluări ({{number}})",
+    "noPosters": "Afișe (doar dintr-un dosar de date, nu dintr-o bază de date încărcată)",
+    "run": "Importă",
+    "running": "Se importă… {{done}} din {{total}}",
+    "stopped": "Importul s-a oprit la jumătate. Rulează-l din nou ca să se termine; nimic nu e adus de două ori.",
+    "done": "Import terminat",
+    "summary": "Vizionate: {{watched}} · Puncte de reluare: {{inProgress}} · Colecții: {{collections}} · Afișe: {{posters}}",
+    "kept": "Lăsate cum erau, pentru că au fost vizionate mai recent aici: {{number}}",
+    "ratingsDone": "Evaluări aduse: {{number}}"
+  },
+  "rating": {
+    "rate": "Evaluează",
+    "yours": "Evaluarea ta: {{stars}} din 5",
+    "stars": "{{stars}} din 5"
   }
 }

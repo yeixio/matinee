@@ -73,7 +73,8 @@
     "shuffle": "隨機播放",
     "seasons": "季",
     "albums": "專輯",
-    "episodes": "劇集"
+    "episodes": "劇集",
+    "resetPoster": "使用自動海報"
   },
   "row": {
     "back": "向前滾動",
@@ -748,6 +749,36 @@
       "perYear": "每年 {{price}}",
       "perMonth": "每月 {{price}}",
       "paid": "由 Yeix 預先收費。可隨時取消，效期持續到已付費期間結束。"
+    },
+    "groups": {
+      "you": {
+        "title": "你",
+        "hint": "語言、外觀、播放和你的裝置"
+      },
+      "libraries": {
+        "title": "媒體庫",
+        "hint": "資料夾、新檔案、分析和匯入"
+      },
+      "people": {
+        "title": "使用者和設定檔",
+        "hint": "帳號、管理員和設定檔"
+      },
+      "content": {
+        "title": "內容",
+        "hint": "海報、Podcast 搜尋、預告片和首頁列"
+      },
+      "streaming": {
+        "title": "串流",
+        "hint": "轉碼和畫質"
+      },
+      "network": {
+        "title": "網路",
+        "hint": "家用網路和遠端存取"
+      },
+      "add-ons": {
+        "title": "附加功能",
+        "hint": "Radarr、Sonarr、Overseerr 和外掛程式"
+      }
     }
   },
   "language": {
@@ -827,5 +858,52 @@
     "reset": "使用自動封面",
     "chosenNote": "這個封面是手動選擇的,掃描時會保留。",
     "saving": "正在儲存封面…"
+  },
+  "import": {
+    "title": "從其他媒體伺服器匯入",
+    "intro": "帶上已看標記、續播位置、合集和自訂海報。你的媒體檔案保持原位不動。",
+    "start": "開始",
+    "where": "來源",
+    "whereHelp": "選擇另一台伺服器的資料資料夾（依本伺服器看到的路徑），或上傳它的媒體庫資料庫檔案。",
+    "foundHere": "在這台電腦上找到",
+    "pickFolder": "選擇資料夾",
+    "uploadDatabase": "上傳資料庫檔案",
+    "uploading": "正在上傳…",
+    "reading": "正在讀取…",
+    "uploaded": "已上傳的資料庫",
+    "files": "檔案",
+    "matched": "在你的媒體庫中找到：{{matched}} / {{files}}",
+    "suggestion": "這台伺服器上的路徑看起來不同。此變更能找到的檔案：{{number}}",
+    "useChange": "使用",
+    "notFound": "Matinee 沒有的檔案",
+    "from": "對方路徑",
+    "to": "這裡的路徑",
+    "addChange": "新增路徑變更",
+    "checkAgain": "重新檢查",
+    "people": "人員",
+    "peopleHelp": "選擇每個人在這裡對應誰。略過的人的紀錄不會被帶過來。",
+    "history": "已看：{{watched}} · 觀看中：{{inProgress}} · 在你的媒體庫中：{{found}}",
+    "rated": "已評分：{{number}}",
+    "whoIs": "{{name}} 在這裡是誰",
+    "skip": "略過",
+    "profileOf": "{{name}}（{{account}}）",
+    "what": "帶上",
+    "watched": "已看標記和續播位置",
+    "collections": "合集（{{number}}）",
+    "posters": "上傳的海報（{{number}}）",
+    "ratings": "評分（{{number}}）",
+    "noPosters": "海報（僅限資料資料夾，上傳的資料庫不含）",
+    "run": "匯入",
+    "running": "正在匯入… {{done}} / {{total}}",
+    "stopped": "匯入中途停止了。再執行一次即可完成，不會重複匯入。",
+    "done": "匯入完成",
+    "summary": "已看：{{watched}} · 續播位置：{{inProgress}} · 合集：{{collections}} · 海報：{{posters}}",
+    "kept": "因在這裡看得更晚而保持不變：{{number}}",
+    "ratingsDone": "帶過來的評分：{{number}}"
+  },
+  "rating": {
+    "rate": "評分",
+    "yours": "你的評分：{{stars}} / 5",
+    "stars": "{{stars}} / 5"
   }
 }

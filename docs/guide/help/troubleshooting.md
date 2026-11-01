@@ -30,16 +30,16 @@ See [Home network](/docs/server/home-network/).
 ## Playback stutters or keeps buffering
 
 - Look at the title's [File details](/docs/watching/title-pages/#file-details). A 4K HEVC or HDR file usually has to be converted for a browser, which is heavy work without a GPU.
-- **Settings → Transcoding** shows whether a GPU is in use. See [Hardware transcoding](/docs/server/transcoding/).
+- **Settings → Streaming → Transcoding** shows whether a GPU is in use. See [Hardware transcoding](/docs/server/transcoding/).
 - Away from home, your home connection's upload speed is the limit. For a trip, [download](/docs/apps/downloads/) in the apps before you go.
 
 ## Remote access doesn't work
 
-**Settings → Remote access** says what's in the way. The usual causes are UPnP turned off on the router (turn it on, or [forward a port yourself](/docs/server/remote-access/#forwarding-a-port-yourself)), a second router in front of yours, or an internet provider that shares one public address between customers. See [Remote access](/docs/server/remote-access/).
+**Settings → Network → Remote access** says what's in the way. The usual causes are UPnP turned off on the router (turn it on, or [forward a port yourself](/docs/server/remote-access/#forwarding-a-port-yourself)), a second router in front of yours, or an internet provider that shares one public address between customers. See [Remote access](/docs/server/remote-access/).
 
 ## I forgot my password
 
-Another admin can reset it under **Settings → People**. That's why it's worth making a second person in the house an admin.
+Another admin can reset it under **Settings → People and profiles → People**. That's why it's worth making a second person in the house an admin.
 
 ## Something else
 

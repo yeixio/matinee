@@ -8,7 +8,7 @@ import i18n from './i18n'
 // started (anything played) only lists what was listened to; Filters don't offer it.
 export type Watched = 'unwatched' | 'inProgress' | 'watched' | 'notStarted' | 'started'
 // series is a book's place in its series.
-export type SortField = 'title' | 'added' | 'released' | 'year' | 'rating' | 'runtime' | 'lastPlayed' | 'series'
+export type SortField = 'title' | 'added' | 'released' | 'year' | 'rating' | 'myRating' | 'runtime' | 'lastPlayed' | 'series'
 
 export type ItemFilter = {
   library?: number[]
@@ -122,7 +122,7 @@ const labels = <K extends string>(prefix: string, keys: K[]) =>
     Object.fromEntries(keys.map((k) => [k, { enumerable: true, get: () => i18n.t(`${prefix}.${k}`) }])),
   )
 
-export const sortLabels = labels<SortField>('common:sort', ['title', 'added', 'released', 'year', 'rating', 'runtime', 'lastPlayed'])
+export const sortLabels = labels<SortField>('common:sort', ['title', 'added', 'released', 'year', 'rating', 'myRating', 'runtime', 'lastPlayed'])
 
 // Title and runtime run low to high unless asked, the rest high to low (as on the server).
 export const defaultDesc = (s: SortField) => s !== 'title' && s !== 'runtime'

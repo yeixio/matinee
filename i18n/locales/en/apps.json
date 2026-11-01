@@ -515,5 +515,13 @@
     "use": "Use",
     "reset": "Use the automatic cover",
     "chosenNote": "This cover was picked by hand, so scans keep it."
+  },
+  "rating": {
+    "rate": "Rate it",
+    "yours": "Your rating: {{stars}} out of 5",
+    "stars": "{{stars}} out of 5",
+    "halfHint": "Press again for half a star",
+    "clearHint": "Press again to take it back",
+    "failed": "Couldn't save your rating"
   }
 }

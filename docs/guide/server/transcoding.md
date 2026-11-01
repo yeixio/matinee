@@ -18,7 +18,7 @@ At startup Matinee tests what the machine's FFmpeg can use, with a one-second te
 | AMD on Windows | AMF |
 | Raspberry Pi and other ARM boards | V4L2 |
 
-**Settings → Transcoding** shows which one is in use, and lets an admin pick another or turn it off.
+**Settings → Streaming → Transcoding** shows which one is in use, and lets an admin pick another or turn it off.
 
 ![The Transcoding settings, using the CPU on a server without a GPU](../images/transcoding.webp)
 
@@ -44,7 +44,7 @@ services:
 
 For NVIDIA, install the NVIDIA Container Toolkit on the host and request a GPU (`--gpus all`, or a `deploy.resources` reservation in Compose; the [`docker-compose.yml`](https://github.com/yeixio/matinee/blob/main/docker-compose.yml) has both examples). The image includes FFmpeg with every Linux backend and the AMD and Intel drivers.
 
-**Kubernetes:** set `gpu.type` to `vaapi` or `nvidia`, and `nodeSelector` to keep Matinee on the node with the GPU. For VAAPI, list the node's render group in `gpu.vaapi.groups`; if it's wrong, **Settings → Transcoding** says which number it needs. See `gpu:` in the chart's [`values.yaml`](https://github.com/yeixio/matinee/blob/main/deploy/helm/matinee/values.yaml).
+**Kubernetes:** set `gpu.type` to `vaapi` or `nvidia`, and `nodeSelector` to keep Matinee on the node with the GPU. For VAAPI, list the node's render group in `gpu.vaapi.groups`; if it's wrong, **Settings → Streaming → Transcoding** says which number it needs. See `gpu:` in the chart's [`values.yaml`](https://github.com/yeixio/matinee/blob/main/deploy/helm/matinee/values.yaml).
 
 **Packages:** Matinee uses the system's FFmpeg and drivers, and its user is already in the `render` and `video` groups.
 

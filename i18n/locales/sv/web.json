@@ -73,7 +73,8 @@
     "shuffle": "Blanda",
     "seasons": "Säsonger",
     "albums": "Album",
-    "episodes": "Avsnitt"
+    "episodes": "Avsnitt",
+    "resetPoster": "Använd den automatiska affischen"
   },
   "row": {
     "back": "Bläddra bakåt",
@@ -752,6 +753,36 @@
       "perYear": "{{price}} per år",
       "perMonth": "{{price}} per månad",
       "paid": "Debiteras i förskott av Yeix. Säg upp när du vill; den gäller till slutet av den betalda perioden."
+    },
+    "groups": {
+      "you": {
+        "title": "Du",
+        "hint": "Språk, utseende, uppspelning och dina enheter"
+      },
+      "libraries": {
+        "title": "Bibliotek",
+        "hint": "Mappar, nya filer, analys och import"
+      },
+      "people": {
+        "title": "Personer och profiler",
+        "hint": "Konton, administratörer och profiler"
+      },
+      "content": {
+        "title": "Innehåll",
+        "hint": "Affischer, poddsökning, trailers och rader på Hem"
+      },
+      "streaming": {
+        "title": "Strömning",
+        "hint": "Omkodning och kvalitet"
+      },
+      "network": {
+        "title": "Nätverk",
+        "hint": "Hemnätverk och fjärråtkomst"
+      },
+      "add-ons": {
+        "title": "Tillägg",
+        "hint": "Radarr, Sonarr, Overseerr och plugins"
+      }
     }
   },
   "language": {
@@ -831,5 +862,52 @@
     "reset": "Använd det automatiska omslaget",
     "chosenNote": "Det här omslaget valdes för hand, så genomsökningar behåller det.",
     "saving": "Sparar omslaget …"
+  },
+  "import": {
+    "title": "Importera från en annan mediaserver",
+    "intro": "Ta med sedda-markeringar, platser att fortsätta från, samlingar och egna affischer. Dina mediefiler stannar där de är.",
+    "start": "Börja",
+    "where": "Varifrån",
+    "whereHelp": "Välj den andra serverns datamapp, så som den här servern ser den, eller ladda upp dess biblioteksdatabas.",
+    "foundHere": "Hittades på den här datorn",
+    "pickFolder": "Välj en mapp",
+    "uploadDatabase": "Ladda upp en databasfil",
+    "uploading": "Laddar upp…",
+    "reading": "Läser…",
+    "uploaded": "Uppladdad databas",
+    "files": "Filer",
+    "matched": "Hittade i dina bibliotek: {{matched}} av {{files}}",
+    "suggestion": "Sökvägarna ser annorlunda ut på den här servern. Filer som ändringen hittar: {{number}}",
+    "useChange": "Använd",
+    "notFound": "Filer som Matinee inte har",
+    "from": "Deras sökväg",
+    "to": "Sökväg här",
+    "addChange": "Lägg till en sökvägsändring",
+    "checkAgain": "Kontrollera igen",
+    "people": "Personer",
+    "peopleHelp": "Välj vem varje person är här. Historiken för överhoppade personer tas inte med.",
+    "history": "Sedda: {{watched}} · Påbörjade: {{inProgress}} · I dina bibliotek: {{found}}",
+    "rated": "Betygsatta: {{number}}",
+    "whoIs": "Vem {{name}} är här",
+    "skip": "Hoppa över",
+    "profileOf": "{{name}} ({{account}})",
+    "what": "Ta med",
+    "watched": "Sedda-markeringar och platser att fortsätta från",
+    "collections": "Samlingar ({{number}})",
+    "posters": "Uppladdade affischer ({{number}})",
+    "ratings": "Betyg ({{number}})",
+    "noPosters": "Affischer (bara från en datamapp, inte från en uppladdad databas)",
+    "run": "Importera",
+    "running": "Importerar… {{done}} av {{total}}",
+    "stopped": "Importen stannade halvvägs. Kör den igen för att bli klar; inget tas med två gånger.",
+    "done": "Importen är klar",
+    "summary": "Sedda: {{watched}} · Platser att fortsätta från: {{inProgress}} · Samlingar: {{collections}} · Affischer: {{posters}}",
+    "kept": "Lämnade som de var eftersom de setts senare här: {{number}}",
+    "ratingsDone": "Betyg som togs med: {{number}}"
+  },
+  "rating": {
+    "rate": "Betygsätt",
+    "yours": "Ditt betyg: {{stars}} av 5",
+    "stars": "{{stars}} av 5"
   }
 }

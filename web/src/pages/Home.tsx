@@ -25,7 +25,7 @@ export default function Home() {
     return (
       <EmptyState title={t('home.welcome')}>
         <p>{t('home.welcomeHint')}</p>
-        <Link to="/settings">
+        <Link to="/settings/libraries">
           <Button variant="primary" className="mt-6">
             {t('home.addLibrary')}
           </Button>

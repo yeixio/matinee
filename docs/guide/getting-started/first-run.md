@@ -19,7 +19,7 @@ A library is a set of folders holding one kind of media: movies, TV shows, music
 A podcast library is the one kind without folders: its shows come from their feeds on the internet. See [Podcasts](/docs/watching/podcasts/).
 <!-- /since -->
 
-1. Open **Settings** (the gear at the top right) and find **Libraries**.
+1. Open **Settings** (the gear at the top right; **Settings** in the tab bar on a phone) and pick **Libraries**.
 2. Click **Add a library** and pick the type.
 3. Give it a name, or keep the suggested one. This is the name in the top bar.
 4. Browse to a folder and click **Use this folder**. A library can have several folders, for example movies on two disks; add each one.

@@ -5,7 +5,7 @@ sidebar:
   order: 1
 ---
 
-Everyone in your household can have their own account, with their own watch history, watch list, collections and theme. Admins add accounts under **Settings → People**.
+Everyone in your household can have their own account, with their own watch history, watch list, collections and theme. Admins add accounts under **Settings → People and profiles → People**.
 
 ![The People settings: two accounts and the admin, with the form to add another](../images/people.webp)
 
@@ -34,7 +34,7 @@ You can't remove yourself, and a server always keeps at least one admin.
 
 ## Change your own password
 
-**Settings → Your account → Change password**. Changing it signs you out on your other devices.
+**Settings → You → Your account → Change password**. Changing it signs you out on your other devices.
 
 ![Your account: changing the password](../images/account.webp)
 

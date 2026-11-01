@@ -73,7 +73,8 @@
     "shuffle": "Karıştır",
     "seasons": "Sezonlar",
     "albums": "Albümler",
-    "episodes": "Bölümler"
+    "episodes": "Bölümler",
+    "resetPoster": "Otomatik posteri kullan"
   },
   "row": {
     "back": "Geri kaydır",
@@ -752,6 +753,36 @@
       "perYear": "Yıllık {{price}}",
       "perMonth": "Aylık {{price}}",
       "paid": "Yeix tarafından peşin faturalandırılır. İstediğin zaman iptal et; ödediğin dönemin sonuna kadar sürer."
+    },
+    "groups": {
+      "you": {
+        "title": "Siz",
+        "hint": "Dil, görünüm, oynatma ve cihazlarınız"
+      },
+      "libraries": {
+        "title": "Kitaplıklar",
+        "hint": "Klasörler, yeni dosyalar, analiz ve içe aktarma"
+      },
+      "people": {
+        "title": "Kişiler ve profiller",
+        "hint": "Hesaplar, yöneticiler ve profiller"
+      },
+      "content": {
+        "title": "İçerik",
+        "hint": "Afişler, podcast arama, fragmanlar ve Ana Sayfa satırları"
+      },
+      "streaming": {
+        "title": "Akış",
+        "hint": "Kod dönüştürme ve kalite"
+      },
+      "network": {
+        "title": "Ağ",
+        "hint": "Ev ağı ve uzaktan erişim"
+      },
+      "add-ons": {
+        "title": "Eklentiler",
+        "hint": "Radarr, Sonarr, Overseerr ve eklentiler"
+      }
     }
   },
   "language": {
@@ -831,5 +862,52 @@
     "reset": "Otomatik kapağı kullan",
     "chosenNote": "Bu kapak elle seçildi, bu yüzden taramalar onu korur.",
     "saving": "Kapak kaydediliyor…"
+  },
+  "import": {
+    "title": "Başka bir medya sunucusundan içe aktar",
+    "intro": "İzlendi işaretlerini, kaldığın yerleri, koleksiyonları ve özel posterleri getir. Medya dosyaların oldukları yerde kalır.",
+    "start": "Başla",
+    "where": "Nereden",
+    "whereHelp": "Diğer sunucunun veri klasörünü bu sunucunun gördüğü şekilde seç ya da kitaplık veritabanını yükle.",
+    "foundHere": "Bu bilgisayarda bulundu",
+    "pickFolder": "Klasör seç",
+    "uploadDatabase": "Veritabanı dosyası yükle",
+    "uploading": "Yükleniyor…",
+    "reading": "Okunuyor…",
+    "uploaded": "Yüklenen veritabanı",
+    "files": "Dosyalar",
+    "matched": "Kitaplıklarında bulunan: {{matched}} / {{files}}",
+    "suggestion": "Yollar bu sunucuda farklı görünüyor. Bu değişikliğin bulduğu dosyalar: {{number}}",
+    "useChange": "Kullan",
+    "notFound": "Matinee'de olmayan dosyalar",
+    "from": "Oradaki yol",
+    "to": "Buradaki yol",
+    "addChange": "Yol değişikliği ekle",
+    "checkAgain": "Yeniden kontrol et",
+    "people": "Kişiler",
+    "peopleHelp": "Her kişinin burada kim olduğunu seç. Atlanan kişilerin geçmişi getirilmez.",
+    "history": "İzlenen: {{watched}} · Devam eden: {{inProgress}} · Kitaplıklarında: {{found}}",
+    "rated": "Puanlanan: {{number}}",
+    "whoIs": "{{name}} burada kim",
+    "skip": "Atla",
+    "profileOf": "{{name}} ({{account}})",
+    "what": "Getir",
+    "watched": "İzlendi işaretleri ve kaldığın yerler",
+    "collections": "Koleksiyonlar ({{number}})",
+    "posters": "Yüklenen posterler ({{number}})",
+    "ratings": "Puanlar ({{number}})",
+    "noPosters": "Posterler (yalnızca bir veri klasöründen, yüklenen veritabanından değil)",
+    "run": "İçe aktar",
+    "running": "İçe aktarılıyor… {{done}} / {{total}}",
+    "stopped": "İçe aktarma yarıda kaldı. Bitirmek için yeniden çalıştır; hiçbir şey iki kez getirilmez.",
+    "done": "İçe aktarma tamamlandı",
+    "summary": "İzlenen: {{watched}} · Kaldığın yerler: {{inProgress}} · Koleksiyonlar: {{collections}} · Posterler: {{posters}}",
+    "kept": "Burada daha yakın zamanda izlendikleri için olduğu gibi bırakıldı: {{number}}",
+    "ratingsDone": "Getirilen puanlar: {{number}}"
+  },
+  "rating": {
+    "rate": "Puan ver",
+    "yours": "Puanın: 5 üzerinden {{stars}}",
+    "stars": "5 üzerinden {{stars}}"
   }
 }

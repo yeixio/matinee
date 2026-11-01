@@ -137,7 +137,7 @@ Albums tagged as a compilation without an album artist are filed under **Various
 
 ### Finding missing covers
 
-When covers are missing, check the album's folder first: a cover added after the album was scanned is picked up on the next scan. To look again for everything that's missing, an admin opens **Settings**, finds the music library under **Libraries**, and clicks **Find artwork**. Matinee scans the library's folders and looks up every artist and album without a picture of its own on MusicBrainz again, even ones it couldn't match before. Covers show up as they're found; with a big library that takes a while, since MusicBrainz answers about one question a second.
+When covers are missing, check the album's folder first: a cover added after the album was scanned is picked up on the next scan. To look again for everything that's missing, an admin opens **Settings → Libraries**, finds the music library, and clicks **Find artwork**. Matinee scans the library's folders and looks up every artist and album without a picture of its own on MusicBrainz again, even ones it couldn't match before. Covers show up as they're found; with a big library that takes a while, since MusicBrainz answers about one question a second.
 
 ![Find artwork on a music library in Settings](../images/find-artwork.webp)
 

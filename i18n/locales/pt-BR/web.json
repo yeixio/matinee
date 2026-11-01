@@ -73,7 +73,8 @@
     "shuffle": "Aleatório",
     "seasons": "Temporadas",
     "albums": "Álbuns",
-    "episodes": "Episódios"
+    "episodes": "Episódios",
+    "resetPoster": "Usar o pôster automático"
   },
   "row": {
     "back": "Rolar para trás",
@@ -756,6 +757,36 @@
       "perYear": "{{price}} por ano",
       "perMonth": "{{price}} por mês",
       "paid": "Cobrado antecipadamente pela Yeix. Cancele quando quiser; vale até o fim do período pago."
+    },
+    "groups": {
+      "you": {
+        "title": "Você",
+        "hint": "Idioma, aparência, reprodução e seus dispositivos"
+      },
+      "libraries": {
+        "title": "Bibliotecas",
+        "hint": "Pastas, arquivos novos, análise e importação"
+      },
+      "people": {
+        "title": "Pessoas e perfis",
+        "hint": "Contas, administradores e perfis"
+      },
+      "content": {
+        "title": "Conteúdo",
+        "hint": "Pôsteres, busca de podcasts, trailers e fileiras do Início"
+      },
+      "streaming": {
+        "title": "Streaming",
+        "hint": "Transcodificação e qualidade"
+      },
+      "network": {
+        "title": "Rede",
+        "hint": "Rede doméstica e acesso remoto"
+      },
+      "add-ons": {
+        "title": "Complementos",
+        "hint": "Radarr, Sonarr, Overseerr e plugins"
+      }
     }
   },
   "language": {
@@ -835,5 +866,52 @@
     "reset": "Usar a capa automática",
     "chosenNote": "Esta capa foi escolhida manualmente, então as verificações a mantêm.",
     "saving": "Salvando a capa…"
+  },
+  "import": {
+    "title": "Importar de outro servidor de mídia",
+    "intro": "Traga marcações de assistido, pontos para continuar, coleções e pôsteres personalizados. Seus arquivos ficam onde estão.",
+    "start": "Começar",
+    "where": "De onde",
+    "whereHelp": "Escolha a pasta de dados do outro servidor, como este servidor a vê, ou envie o banco de dados da biblioteca dele.",
+    "foundHere": "Encontrado neste computador",
+    "pickFolder": "Escolher uma pasta",
+    "uploadDatabase": "Enviar um arquivo de banco de dados",
+    "uploading": "Enviando…",
+    "reading": "Lendo…",
+    "uploaded": "Banco de dados enviado",
+    "files": "Arquivos",
+    "matched": "Encontrados nas suas bibliotecas: {{matched}} de {{files}}",
+    "suggestion": "Os caminhos são diferentes neste servidor. Arquivos que esta mudança encontra: {{number}}",
+    "useChange": "Usar",
+    "notFound": "Arquivos que o Matinee não tem",
+    "from": "Caminho de lá",
+    "to": "Caminho aqui",
+    "addChange": "Adicionar uma mudança de caminho",
+    "checkAgain": "Verificar de novo",
+    "people": "Pessoas",
+    "peopleHelp": "Escolha quem é cada pessoa aqui. O histórico de quem for pulado não é trazido.",
+    "history": "Assistidos: {{watched}} · Em andamento: {{inProgress}} · Nas suas bibliotecas: {{found}}",
+    "rated": "Avaliados: {{number}}",
+    "whoIs": "Quem {{name}} é aqui",
+    "skip": "Pular",
+    "profileOf": "{{name}} ({{account}})",
+    "what": "Trazer",
+    "watched": "Marcações de assistido e pontos para continuar",
+    "collections": "Coleções ({{number}})",
+    "posters": "Pôsteres enviados ({{number}})",
+    "ratings": "Avaliações ({{number}})",
+    "noPosters": "Pôsteres (só de uma pasta de dados, não de um banco de dados enviado)",
+    "run": "Importar",
+    "running": "Importando… {{done}} de {{total}}",
+    "stopped": "A importação parou no meio. Rode de novo para terminar; nada é trazido duas vezes.",
+    "done": "Importação concluída",
+    "summary": "Assistidos: {{watched}} · Pontos para continuar: {{inProgress}} · Coleções: {{collections}} · Pôsteres: {{posters}}",
+    "kept": "Deixados como estavam porque foram assistidos mais recentemente aqui: {{number}}",
+    "ratingsDone": "Avaliações trazidas: {{number}}"
+  },
+  "rating": {
+    "rate": "Avaliar",
+    "yours": "Sua avaliação: {{stars}} de 5",
+    "stars": "{{stars}} de 5"
   }
 }
