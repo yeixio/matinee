@@ -45,7 +45,9 @@
       "online": "網路",
       "remove": "移除{{name}}",
       "source": "字幕來自 OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "略過片頭",
+    "introSkipped": "已略過片頭"
   },
   "somethingWentWrong": "出了點問題",
   "oneMoment": "請稍候…",
@@ -405,6 +407,7 @@
     "intro": "Matinee 會慢慢讀取每個檔案，瞭解畫質、聲音和語言，檔案有變化時會重新讀取。",
     "state": {
       "lookingAt": "正在查看 {{file}}",
+      "intros": "正在尋找 {{season}} 的片頭",
       "working": "工作中",
       "waiting": "正在等待播放結束",
       "slowDisk": "檔案讀取較慢，休息幾分鐘",
@@ -428,6 +431,11 @@
         "label": "關",
         "hint": "已暫停，直到你重新開啟。"
       }
+    },
+    "intros": {
+      "label": "尋找影集片頭",
+      "hint": "所有檔案分析完成後，Matinee 會比對每季各集開頭的音訊，找出共同的片頭，讓播放器可以提供「略過片頭」。",
+      "progress": "已檢查 {{total}} 集中的 {{done}} 集，{{found}} 集有片頭"
     }
   },
   "profileSettings": {
@@ -682,7 +690,9 @@
       "autoPlay": "自動播放下一集",
       "autoPlayHint": "片尾字幕開始時，會在可取消的 10 秒倒計時後播放下一集。",
       "binge": "跳過倒計時",
-      "bingeHint": "片尾字幕一開始就直接進入下一集。連續三集沒有任何操作後，會詢問你是否還在看。"
+      "bingeHint": "片尾字幕一開始就直接進入下一集。連續三集沒有任何操作後，會詢問你是否還在看。",
+      "skipIntros": "自動略過片頭",
+      "skipIntrosHint": "自動略過影集片頭，而不是顯示「略過片頭」按鈕。"
     },
     "trailers": {
       "title": "預告片",

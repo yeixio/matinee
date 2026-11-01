@@ -18,6 +18,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/yeixio/matinee/internal/intro"
 	"github.com/yeixio/matinee/internal/probe"
 	"github.com/yeixio/matinee/internal/store"
 )
@@ -35,13 +36,17 @@ const (
 	Off Mode = "off"
 )
 
-const settingMode = "mediaAnalysis"
+const (
+	settingMode   = "mediaAnalysis"
+	settingIntros = "introDetection" // "off" turns it off
+)
 
 // State says what the analysis is doing right now.
 const (
 	StateAnalyzing = "analyzing"
 	StateWaiting   = "waiting"  // for playback to finish
 	StateSlowDisk  = "slowDisk" // files kept timing out; resting before trying again
+	StateIntros    = "intros"   // looking for the intros of a season's episodes
 	StateIdle      = "idle"     // everything is analyzed
 	StateOff       = "off"
 )
@@ -64,10 +69,15 @@ type Analyzer struct {
 	// Busy reports whether anyone is watching something the server is
 	// transcoding right now. Gentle analysis waits until nobody is.
 	Busy func() bool
+	// Intros, when set, looks for TV episodes' intros once every file is
+	// analyzed, at the same pace and priority.
+	Intros *intro.Detector
 
 	mu         sync.Mutex
 	mode       Mode
 	loaded     bool
+	intros     bool
+	introsSet  bool
 	state      string
 	current    string // title of the file being analyzed
 	retryAfter map[int64]time.Time
@@ -85,6 +95,18 @@ type Status struct {
 	Done       int    `json:"done"`
 	Unreadable int    `json:"unreadable"`
 	Current    string `json:"current,omitempty"`
+	// Intros is how far looking for TV episodes' intros is; absent when
+	// this server doesn't.
+	Intros *IntroStatus `json:"intros,omitempty"`
+}
+
+// IntroStatus counts video episodes: all of them, the ones looked at for an
+// intro, and the ones an intro was found in.
+type IntroStatus struct {
+	On    bool `json:"on"`
+	Total int  `json:"total"`
+	Done  int  `json:"done"`
+	Found int  `json:"found"`
 }
 
 func (a *Analyzer) init() {
@@ -137,6 +159,35 @@ func (a *Analyzer) SetMode(ctx context.Context, m Mode) error {
 	return nil
 }
 
+// IntrosOn says whether to look for intros, an admin setting, on by default.
+func (a *Analyzer) IntrosOn(ctx context.Context) (bool, error) {
+	a.mu.Lock()
+	defer a.mu.Unlock()
+	if !a.introsSet {
+		v, err := a.Store.Setting(ctx, settingIntros)
+		if err != nil {
+			return true, err
+		}
+		a.intros, a.introsSet = v != "off", true
+	}
+	return a.intros, nil
+}
+
+func (a *Analyzer) SetIntrosOn(ctx context.Context, on bool) error {
+	v := "on"
+	if !on {
+		v = "off"
+	}
+	if err := a.Store.SetSetting(ctx, settingIntros, v); err != nil {
+		return err
+	}
+	a.mu.Lock()
+	a.intros, a.introsSet = on, true
+	a.mu.Unlock()
+	a.Wake()
+	return nil
+}
+
 func (a *Analyzer) Status(ctx context.Context) (Status, error) {
 	mode, err := a.Mode(ctx)
 	if err != nil {
@@ -146,9 +197,20 @@ func (a *Analyzer) Status(ctx context.Context) (Status, error) {
 	if err != nil {
 		return Status{}, err
 	}
+	var is *IntroStatus
+	if a.Intros != nil {
+		on, err := a.IntrosOn(ctx)
+		if err != nil {
+			return Status{}, err
+		}
+		is = &IntroStatus{On: on}
+		if is.Total, is.Done, is.Found, err = a.Store.IntroCounts(ctx, intro.Version); err != nil {
+			return Status{}, err
+		}
+	}
 	a.mu.Lock()
 	defer a.mu.Unlock()
-	st := Status{Mode: mode, State: a.state, Total: total, Done: done, Unreadable: unreadable, Current: a.current}
+	st := Status{Mode: mode, State: a.state, Total: total, Done: done, Unreadable: unreadable, Current: a.current, Intros: is}
 	if st.State == "" {
 		st.State = StateIdle
 	}
@@ -158,9 +220,13 @@ func (a *Analyzer) Status(ctx context.Context) (Status, error) {
 	return st, nil
 }
 
-// Reanalyze has one file looked at again soon, whatever its state.
+// Reanalyze has one file looked at again soon, whatever its state, and
+// its intro looked for again.
 func (a *Analyzer) Reanalyze(ctx context.Context, id int64) error {
 	if err := a.Store.ClearMediaKey(ctx, id); err != nil {
+		return err
+	}
+	if err := a.Store.ClearIntro(ctx, id); err != nil {
 		return err
 	}
 	a.mu.Lock()
@@ -200,6 +266,9 @@ func (a *Analyzer) Run(ctx context.Context) {
 			a.Log.Warn("media analysis", "err", err)
 			a.sleep(ctx, time.Minute)
 		case n == 0:
+			if a.findIntros(ctx) > 0 {
+				continue // files may have changed meanwhile
+			}
 			a.setState(StateIdle, "")
 			a.sleep(ctx, idleRecheck)
 		default:
@@ -283,6 +352,62 @@ func (a *Analyzer) pass(ctx context.Context) (int, error) {
 			}
 		}
 	}
+}
+
+// findIntros has the intro detector look at every season that needs it,
+// one season at a time, pausing like the analysis does. It returns how
+// many episodes it looked at.
+func (a *Analyzer) findIntros(ctx context.Context) int {
+	if a.Intros == nil {
+		return 0
+	}
+	if on, _ := a.IntrosOn(ctx); !on {
+		return 0
+	}
+	first := true
+	n, err := a.Intros.Pass(ctx, func(e store.IntroEpisode) bool {
+		mode, _ := a.Mode(ctx)
+		if on, _ := a.IntrosOn(ctx); !on || mode == Off {
+			return false
+		}
+		if !first && mode == Gentle {
+			a.sleep(ctx, gentlePause)
+		}
+		first = false
+		for mode == Gentle && a.Busy != nil && a.Busy() {
+			a.setState(StateWaiting, "")
+			a.sleep(ctx, busyCheck)
+			if ctx.Err() != nil {
+				return false
+			}
+			if mode, _ = a.Mode(ctx); mode == Off {
+				return false
+			}
+		}
+		a.setState(StateIntros, a.seasonName(ctx, e))
+		return ctx.Err() == nil
+	})
+	if err != nil && ctx.Err() == nil {
+		a.Log.Warn("intro detection", "err", err)
+	}
+	if n > 0 {
+		a.Log.Info("intro detection pass done", "episodes", n)
+	}
+	return n
+}
+
+// seasonName names a season the way people do: "Show, Season 2".
+func (a *Analyzer) seasonName(ctx context.Context, e store.IntroEpisode) string {
+	season, err := a.Store.Item(ctx, 0, e.SeasonID)
+	if err != nil {
+		return e.Title
+	}
+	if season.ParentID != nil {
+		if show, err := a.Store.Item(ctx, 0, *season.ParentID); err == nil {
+			return show.Title + " · " + season.Title
+		}
+	}
+	return season.Title
 }
 
 func (a *Analyzer) retryLater(id int64) bool {

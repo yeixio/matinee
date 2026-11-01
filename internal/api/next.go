@@ -73,27 +73,44 @@ type playbackPrefs struct {
 	// Binge skips the countdown: the next episode starts as soon as the
 	// credits do (or the episode ends). Only matters with AutoPlay on.
 	Binge bool `json:"binge"`
+	// SkipIntros jumps past an episode's intro by itself, instead of
+	// offering a Skip intro button. Off by default.
+	SkipIntros bool `json:"skipIntros"`
 }
 
 var defaultPlayback = playbackPrefs{AutoPlay: true}
 
 func userPlaybackKey(userID int64) string { return "playback:user:" + strconv.FormatInt(userID, 10) }
 
-func (s *Server) getMyPlayback(w http.ResponseWriter, r *http.Request) {
+func (s *Server) myPlayback(r *http.Request) (playbackPrefs, error) {
 	raw, err := s.Store.Setting(r.Context(), userPlaybackKey(currentUser(r).ID))
 	if err != nil {
-		s.serverError(w, err)
-		return
+		return defaultPlayback, err
 	}
 	p := defaultPlayback
 	if raw != "" && json.Unmarshal([]byte(raw), &p) != nil {
 		p = defaultPlayback
 	}
+	return p, nil
+}
+
+func (s *Server) getMyPlayback(w http.ResponseWriter, r *http.Request) {
+	p, err := s.myPlayback(r)
+	if err != nil {
+		s.serverError(w, err)
+		return
+	}
 	writeJSON(w, http.StatusOK, p)
 }
 
+// putMyPlayback changes the choices sent and keeps the rest, so an app that
+// doesn't know a newer one leaves it alone.
 func (s *Server) putMyPlayback(w http.ResponseWriter, r *http.Request) {
-	p := defaultPlayback
+	p, err := s.myPlayback(r)
+	if err != nil {
+		s.serverError(w, err)
+		return
+	}
 	if err := readJSON(r, &p); err != nil {
 		writeError(w, http.StatusBadRequest, "bad request")
 		return

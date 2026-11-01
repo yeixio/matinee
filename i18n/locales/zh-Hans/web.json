@@ -45,7 +45,9 @@
       "online": "网上",
       "remove": "移除{{name}}",
       "source": "字幕来自 OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "跳过片头",
+    "introSkipped": "已跳过片头"
   },
   "somethingWentWrong": "出了点问题",
   "oneMoment": "请稍候…",
@@ -405,6 +407,7 @@
     "intro": "Matinee 会慢慢读取每个文件，了解画质、声音和语言，文件有变化时会重新读取。",
     "state": {
       "lookingAt": "正在查看 {{file}}",
+      "intros": "正在查找 {{season}} 的片头",
       "working": "工作中",
       "waiting": "正在等待播放结束",
       "slowDisk": "文件读取较慢，休息几分钟",
@@ -428,6 +431,11 @@
         "label": "关",
         "hint": "已暂停，直到你重新开启。"
       }
+    },
+    "intros": {
+      "label": "查找剧集片头",
+      "hint": "所有文件分析完成后，Matinee 会比对每季各集开头的音频，找出共同的片头，让播放器可以提供“跳过片头”。",
+      "progress": "已检查 {{total}} 集中的 {{done}} 集，{{found}} 集有片头"
     }
   },
   "profileSettings": {
@@ -682,7 +690,9 @@
       "autoPlay": "自动播放下一集",
       "autoPlayHint": "片尾字幕开始时，会在可取消的 10 秒倒计时后播放下一集。",
       "binge": "跳过倒计时",
-      "bingeHint": "片尾字幕一开始就直接进入下一集。连续三集没有任何操作后，会询问你是否还在看。"
+      "bingeHint": "片尾字幕一开始就直接进入下一集。连续三集没有任何操作后，会询问你是否还在看。",
+      "skipIntros": "自动跳过片头",
+      "skipIntrosHint": "自动跳过剧集片头，而不是显示“跳过片头”按钮。"
     },
     "trailers": {
       "title": "预告片",

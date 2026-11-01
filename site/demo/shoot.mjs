@@ -379,6 +379,17 @@ try {
     await page.getByText('Up next').waitFor({ timeout: 20000 })
     await sleep(1500)
     await shot(page, 'up-next')
+
+    // Skip intro: an episode partway into its intro, which a chapter marks
+    // in the demo library (see docs/guide/watching/skipping-intros.md).
+    if (wanted('skip-intro')) {
+      const ep = await api(token, 'GET', `/items/${eps[0].id}`)
+      await api(token, 'PUT', `/items/${ep.id}/progress`, { positionMs: ep.intro.startMs + 3000, played: false })
+      await page.goto(`${origin}/watch/${ep.id}`)
+      await page.getByRole('button', { name: 'Skip intro' }).waitFor({ timeout: 20000 })
+      await sleep(3500) // the controls fade away; the button stays
+      await shot(page, 'skip-intro')
+    }
     await page.context().close()
   }
 
@@ -459,6 +470,14 @@ try {
     await shot(page, 'playback', { target: section(page, 'Playback') })
     await settings(page, 'libraries')
     await shot(page, 'new-files', { target: section(page, 'New files') })
+    // Done, intros too, so the card shows it all finished.
+    for (let i = 0; i < 600; i++) {
+      const a = await api(token, 'GET', '/analysis')
+      if (a.state === 'idle' && (!a.intros || a.intros.done === a.intros.total)) break
+      await sleep(500)
+    }
+    await page.reload()
+    await sleep(800)
     await shot(page, 'media-analysis', { target: section(page, 'Media analysis') })
     await settings(page, 'content')
     await shot(page, 'tmdb-key', { target: section(page, 'Posters and details') })

@@ -447,6 +447,15 @@ var migrations = []string{
 		added_at   BIGINT NOT NULL
 	)`,
 	"CREATE INDEX found_subtitles_item ON found_subtitles(item_id)",
+	// 71: where each episode's intro is, found by matching the audio of a
+	// season's episodes (see intros.go and internal/intro).
+	`CREATE TABLE intros (
+		item_id   BIGINT PRIMARY KEY REFERENCES items(id) ON DELETE CASCADE,
+		start_ms  BIGINT NOT NULL DEFAULT 0, -- both 0 when none was found
+		end_ms    BIGINT NOT NULL DEFAULT 0,
+		file_key  TEXT NOT NULL, -- the file and detector version looked at, see MediaKey
+		looked_at BIGINT NOT NULL
+	)`,
 }
 
 func now() int64 { return time.Now().Unix() }

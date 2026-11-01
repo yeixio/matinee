@@ -45,7 +45,9 @@
       "online": "Online",
       "remove": "Hapus {{name}}",
       "source": "Subtitle dari OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Lewati intro",
+    "introSkipped": "Intro dilewati"
   },
   "somethingWentWrong": "Terjadi kesalahan",
   "oneMoment": "Sebentar…",
@@ -405,6 +407,7 @@
     "intro": "Matinee membaca setiap file perlahan untuk kualitas, suara, dan bahasanya, dan membacanya lagi setiap kali file berubah.",
     "state": {
       "lookingAt": "Memeriksa {{file}}",
+      "intros": "Mencari intro di {{season}}",
       "working": "Bekerja",
       "waiting": "Menunggu pemutaran selesai",
       "slowDisk": "File lambat dibaca; istirahat beberapa menit",
@@ -428,6 +431,11 @@
         "label": "Mati",
         "hint": "Dijeda sampai kamu menyalakannya lagi."
       }
+    },
+    "intros": {
+      "label": "Temukan intro serial",
+      "hint": "Setelah semua file dianalisis, Matinee mendengarkan awal episode tiap musim untuk menemukan intro yang sama, sehingga pemutar dapat menawarkan Lewati intro.",
+      "progress": "{{done}} dari {{total}} episode diperiksa, {{found}} dengan intro"
     }
   },
   "profileSettings": {
@@ -682,7 +690,9 @@
       "autoPlay": "Putar episode berikutnya",
       "autoPlayHint": "Saat kredit dimulai, episode berikutnya diputar setelah hitung mundur 10 detik yang bisa kamu batalkan.",
       "binge": "Lewati hitung mundur",
-      "bingeHint": "Langsung ke episode berikutnya saat kredit dimulai. Setelah tiga berturut-turut tanpa menyentuh apa pun, kamu akan ditanya apakah masih menonton."
+      "bingeHint": "Langsung ke episode berikutnya saat kredit dimulai. Setelah tiga berturut-turut tanpa menyentuh apa pun, kamu akan ditanya apakah masih menonton.",
+      "skipIntros": "Lewati intro otomatis",
+      "skipIntrosHint": "Melewati intro serial dengan sendirinya, alih-alih menampilkan tombol Lewati intro."
     },
     "trailers": {
       "title": "Trailer",

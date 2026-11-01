@@ -45,7 +45,9 @@
       "online": "En línea",
       "remove": "Quitar {{name}}",
       "source": "Subtítulos de OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Saltar intro",
+    "introSkipped": "Intro saltada"
   },
   "somethingWentWrong": "Algo ha salido mal",
   "oneMoment": "Un momento…",
@@ -411,6 +413,7 @@
     "intro": "Matinee lee poco a poco cada archivo para conocer su calidad, sonido e idiomas, y de nuevo cada vez que un archivo cambia.",
     "state": {
       "lookingAt": "Examinando {{file}}",
+      "intros": "Buscando intros en {{season}}",
       "working": "Trabajando",
       "waiting": "Esperando a que termine la reproducción",
       "slowDisk": "Los archivos tardan en leerse; descansando unos minutos",
@@ -436,6 +439,11 @@
         "label": "Desactivado",
         "hint": "En pausa hasta que lo vuelvas a activar."
       }
+    },
+    "intros": {
+      "label": "Encontrar intros de series",
+      "hint": "Cuando todos los archivos estén analizados, Matinee escucha el comienzo de los episodios de cada temporada para encontrar la intro que comparten, y así los reproductores pueden ofrecer Saltar intro.",
+      "progress": "{{done}} de {{total}} episodios revisados, {{found}} con intro"
     }
   },
   "profileSettings": {
@@ -690,7 +698,9 @@
       "autoPlay": "Reproducir el siguiente episodio",
       "autoPlayHint": "Cuando empiezan los créditos, el siguiente episodio se reproduce tras una cuenta atrás de 10 segundos que puedes cancelar.",
       "binge": "Saltar la cuenta atrás",
-      "bingeHint": "Pasa directamente al siguiente episodio cuando empiezan los créditos. Tras tres seguidos sin tocar nada, se te pregunta si sigues viendo."
+      "bingeHint": "Pasa directamente al siguiente episodio cuando empiezan los créditos. Tras tres seguidos sin tocar nada, se te pregunta si sigues viendo.",
+      "skipIntros": "Saltar intros",
+      "skipIntrosHint": "Salta la intro de una serie automáticamente, en lugar de mostrar el botón Saltar intro."
     },
     "trailers": {
       "title": "Tráileres",

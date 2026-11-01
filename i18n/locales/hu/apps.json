@@ -154,6 +154,8 @@
     "autoPlayHint": "Amikor elindul a stáblista, egy 10 másodperces visszaszámlálás után, amelyet megszakíthatsz",
     "binge": "Visszaszámlálás kihagyása",
     "bingeHint": "Rögtön a következő epizód indul. Három egymás utáni után, ha semmihez sem nyúltál, megkérdezzük, nézed-e még",
+    "skipIntros": "Bevezetők átugrása",
+    "skipIntrosHint": "Magától átugorja a sorozat bevezetőjét, ahelyett hogy a Bevezető átugrása gombot mutatná",
     "app": "Matinee {{version}}",
     "appBuild": "Matinee {{version}} ({{build}}. build)",
     "server": "Szerver {{version}}",
@@ -322,7 +324,9 @@
       "machine": "Gépi fordítás",
       "online": "Internetről",
       "source": "Feliratok: OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Bevezető átugrása",
+    "introSkipped": "Bevezető átugorva"
   },
   "library": {
     "nothingUnwatched": "Itt nincs semmi, amit ne láttál volna",

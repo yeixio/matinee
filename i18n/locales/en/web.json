@@ -45,7 +45,9 @@
       "online": "Online",
       "remove": "Remove {{name}}",
       "source": "Subtitles from OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Skip intro",
+    "introSkipped": "Skipped the intro"
   },
   "somethingWentWrong": "Something went wrong",
   "oneMoment": "One moment…",
@@ -408,6 +410,7 @@
     "intro": "Matinee slowly reads each file for its quality, sound and languages, and again whenever a file changes.",
     "state": {
       "lookingAt": "Looking at {{file}}",
+      "intros": "Looking for intros in {{season}}",
       "working": "Working",
       "waiting": "Waiting for playback to finish",
       "slowDisk": "Files are slow to read; resting for a few minutes",
@@ -432,6 +435,11 @@
         "label": "Off",
         "hint": "Paused until you turn it back on."
       }
+    },
+    "intros": {
+      "label": "Find TV intros",
+      "hint": "Once every file is analyzed, Matinee listens to the start of each season’s episodes for the intro they share, so players can offer Skip intro.",
+      "progress": "{{done}} of {{total}} episodes checked, {{found}} with an intro"
     }
   },
   "profileSettings": {
@@ -691,7 +699,9 @@
       "autoPlay": "Play the next episode",
       "autoPlayHint": "When the credits start, the next episode plays after a 10-second countdown you can cancel.",
       "binge": "Skip the countdown",
-      "bingeHint": "Go straight into the next episode when the credits start. After three in a row without touching anything, you’re asked if you’re still watching."
+      "bingeHint": "Go straight into the next episode when the credits start. After three in a row without touching anything, you’re asked if you’re still watching.",
+      "skipIntros": "Skip intros",
+      "skipIntrosHint": "Jump past a show’s intro by itself, instead of offering a Skip intro button."
     },
     "trailers": {
       "title": "Trailers",

@@ -45,7 +45,9 @@
       "online": "Online",
       "remove": "Elimină {{name}}",
       "source": "Subtitrări de pe OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Sari peste intro",
+    "introSkipped": "Intro sărit"
   },
   "somethingWentWrong": "Ceva n-a mers bine",
   "oneMoment": "O clipă…",
@@ -411,6 +413,7 @@
     "intro": "Matinee citește încet fiecare fișier pentru calitate, sunet și limbi, și din nou ori de câte ori un fișier se schimbă.",
     "state": {
       "lookingAt": "Se analizează {{file}}",
+      "intros": "Se caută introuri în {{season}}",
       "working": "Lucrează",
       "waiting": "Așteaptă terminarea redării",
       "slowDisk": "Fișierele se citesc greu; pauză câteva minute",
@@ -436,6 +439,11 @@
         "label": "Dezactivată",
         "hint": "În pauză până o reactivezi."
       }
+    },
+    "intros": {
+      "label": "Găsește introurile serialelor",
+      "hint": "După ce toate fișierele sunt analizate, Matinee ascultă începutul episoadelor din fiecare sezon pentru a găsi introul comun, ca playerele să poată oferi Sari peste intro.",
+      "progress": "{{done}} din {{total}} episoade verificate, {{found}} cu intro"
     }
   },
   "profileSettings": {
@@ -690,7 +698,9 @@
       "autoPlay": "Redă episodul următor",
       "autoPlayHint": "Când încep genericele, episodul următor pornește după o numărătoare inversă de 10 secunde pe care o poți anula.",
       "binge": "Sari peste numărătoare",
-      "bingeHint": "Treci direct la episodul următor când încep genericele. După trei la rând fără să atingi nimic, ești întrebat dacă încă te uiți."
+      "bingeHint": "Treci direct la episodul următor când încep genericele. După trei la rând fără să atingi nimic, ești întrebat dacă încă te uiți.",
+      "skipIntros": "Sari peste introuri",
+      "skipIntrosHint": "Sare singur peste introul unui serial, în loc să afișeze butonul Sari peste intro."
     },
     "trailers": {
       "title": "Trailere",

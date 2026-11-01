@@ -154,6 +154,8 @@
     "autoPlayHint": "Kun lopputekstit alkavat, 10 sekunnin lähtölaskennan jälkeen, jonka voit perua",
     "binge": "Ohita lähtölaskenta",
     "bingeHint": "Siirry suoraan seuraavaan jaksoon. Kun kolme on mennyt peräkkäin koskematta mihinkään, kysymme, katsotko yhä",
+    "skipIntros": "Ohita alkutunnarit",
+    "skipIntrosHint": "Hyppää sarjan alkutunnarin yli itsestään sen sijaan, että näyttäisi Ohita alkutunnari -painikkeen",
     "app": "Matinee {{version}}",
     "appBuild": "Matinee {{version}} (koontiversio {{build}})",
     "server": "Palvelin {{version}}",
@@ -322,7 +324,9 @@
       "machine": "Konekäännetty",
       "online": "Verkosta",
       "source": "Tekstitykset: OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Ohita alkutunnari",
+    "introSkipped": "Alkutunnari ohitettiin"
   },
   "library": {
     "nothingUnwatched": "Ei katsomatonta täällä",

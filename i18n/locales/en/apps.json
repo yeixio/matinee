@@ -154,6 +154,8 @@
     "autoPlayHint": "When the credits start, after a 10-second countdown you can cancel",
     "binge": "Skip the countdown",
     "bingeHint": "Go straight into the next episode. After three in a row untouched, you’re asked if you’re still watching",
+    "skipIntros": "Skip intros",
+    "skipIntrosHint": "Jump past a show’s intro by itself, instead of offering a Skip intro button",
     "app": "Matinee {{version}}",
     "appBuild": "Matinee {{version}} (build {{build}})",
     "server": "Server {{version}}",
@@ -322,7 +324,9 @@
       "machine": "Machine translated",
       "online": "Online",
       "source": "Subtitles from OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Skip intro",
+    "introSkipped": "Skipped the intro"
   },
   "library": {
     "nothingUnwatched": "Nothing unwatched here",

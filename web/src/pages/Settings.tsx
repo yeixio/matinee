@@ -883,6 +883,12 @@ function Playback() {
         { binge: !prefs.binge },
         !prefs.autoPlay,
       )}
+      {toggle(
+        t('settings.playback.skipIntros'),
+        t('settings.playback.skipIntrosHint'),
+        !!prefs.skipIntros,
+        { skipIntros: !prefs.skipIntros },
+      )}
     </section>
   )
 }

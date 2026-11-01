@@ -154,6 +154,8 @@
     "autoPlayHint": "Als de aftiteling begint, na een aftelling van 10 seconden die je kunt annuleren",
     "binge": "De aftelling overslaan",
     "bingeHint": "Ga meteen door naar de volgende aflevering. Na drie op rij zonder iets aan te raken, vragen we of je nog kijkt",
+    "skipIntros": "Intro’s overslaan",
+    "skipIntrosHint": "Slaat de intro van een serie vanzelf over, in plaats van een knop Intro overslaan te tonen",
     "app": "Matinee {{version}}",
     "appBuild": "Matinee {{version}} (build {{build}})",
     "server": "Server {{version}}",
@@ -322,7 +324,9 @@
       "machine": "Machinaal vertaald",
       "online": "Online",
       "source": "Ondertitels van OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Intro overslaan",
+    "introSkipped": "Intro overgeslagen"
   },
   "library": {
     "nothingUnwatched": "Niets ongezien hier",

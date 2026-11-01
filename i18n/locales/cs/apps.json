@@ -154,6 +154,8 @@
     "autoPlayHint": "Když začnou titulky, po 10sekundovém odpočtu, který můžete zrušit",
     "binge": "Přeskočit odpočet",
     "bingeHint": "Rovnou pokračuje dalším dílem. Po třech za sebou bez jakékoli akce se zeptáme, jestli se ještě díváte",
+    "skipIntros": "Přeskakovat úvody",
+    "skipIntrosHint": "Úvod seriálu přeskočí sám, místo aby nabízel tlačítko Přeskočit úvod",
     "app": "Matinee {{version}}",
     "appBuild": "Matinee {{version}} (sestavení {{build}})",
     "server": "Server {{version}}",
@@ -332,7 +334,9 @@
       "machine": "Strojový překlad",
       "online": "Z internetu",
       "source": "Titulky z OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Přeskočit úvod",
+    "introSkipped": "Úvod přeskočen"
   },
   "library": {
     "nothingUnwatched": "Nic nezhlédnutého",

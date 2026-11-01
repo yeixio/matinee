@@ -42,6 +42,12 @@ No subtitles in your language? Once an admin sets up subtitle search, **Find sub
 
 Matinee saves your place as you watch, for you alone (or your [profile](/docs/household/profiles/)). Stop on the TV and carry on in the browser, or the other way round. A title counts as watched once you're past the credits, or past 92% if Matinee can't tell where the credits start.
 
+<!-- since: v0.1.10 -->
+## Skip intro
+
+While a TV episode's intro plays, **Skip intro** in the bottom corner jumps past it. Matinee finds intros by itself, and can skip them for you too. See [Skipping intros](/docs/watching/skipping-intros/).
+<!-- /since -->
+
 ## Up next
 
 When an episode's closing credits start, a card offers the next episode with a 10-second countdown. **Play now** starts it straight away and **Cancel** goes back to the episode's page. The countdown waits while the video is paused.

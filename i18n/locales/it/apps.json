@@ -154,6 +154,8 @@
     "autoPlayHint": "Quando partono i titoli di coda, dopo un conto alla rovescia di 10 secondi che puoi annullare",
     "binge": "Salta il conto alla rovescia",
     "bingeHint": "Passa subito all’episodio successivo. Dopo tre di fila senza toccare nulla, ti chiediamo se stai ancora guardando",
+    "skipIntros": "Salta le intro",
+    "skipIntrosHint": "Salta da solo l’intro di una serie, invece di mostrare il pulsante Salta intro",
     "app": "Matinee {{version}}",
     "appBuild": "Matinee {{version}} (build {{build}})",
     "server": "Server {{version}}",
@@ -327,7 +329,9 @@
       "machine": "Tradotti automaticamente",
       "online": "Online",
       "source": "Sottotitoli da OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Salta intro",
+    "introSkipped": "Intro saltata"
   },
   "library": {
     "nothingUnwatched": "Niente da vedere qui",

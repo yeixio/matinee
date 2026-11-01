@@ -45,7 +45,9 @@
       "online": "İnternetten",
       "remove": "{{name}} kaldır",
       "source": "Altyazılar OpenSubtitles.com'dan"
-    }
+    },
+    "skipIntro": "Girişi atla",
+    "introSkipped": "Giriş atlandı"
   },
   "somethingWentWrong": "Bir şeyler ters gitti",
   "oneMoment": "Bir saniye…",
@@ -408,6 +410,7 @@
     "intro": "Matinee her dosyayı kalitesi, sesi ve dilleri için yavaşça okur; bir dosya değiştiğinde yeniden okur.",
     "state": {
       "lookingAt": "İnceleniyor: {{file}}",
+      "intros": "{{season}} içinde girişler aranıyor",
       "working": "Çalışıyor",
       "waiting": "Oynatmanın bitmesi bekleniyor",
       "slowDisk": "Dosyalar yavaş okunuyor; birkaç dakika dinleniyor",
@@ -432,6 +435,11 @@
         "label": "Kapalı",
         "hint": "Tekrar açana kadar duraklatıldı."
       }
+    },
+    "intros": {
+      "label": "Dizi girişlerini bul",
+      "hint": "Tüm dosyalar analiz edildikten sonra Matinee, her sezonun bölümlerinin başını dinleyerek ortak girişi bulur; böylece oynatıcılar Girişi atla seçeneği sunabilir.",
+      "progress": "{{total}} bölümden {{done}} tanesi kontrol edildi, {{found}} tanesinde giriş var"
     }
   },
   "profileSettings": {
@@ -686,7 +694,9 @@
       "autoPlay": "Sonraki bölümü oynat",
       "autoPlayHint": "Jenerik başladığında, iptal edebileceğin 10 saniyelik bir geri sayımın ardından sonraki bölüm oynar.",
       "binge": "Geri sayımı atla",
-      "bingeHint": "Jenerik başladığında doğrudan sonraki bölüme geç. Hiçbir şeye dokunmadan art arda üç bölümden sonra hâlâ izleyip izlemediğin sorulur."
+      "bingeHint": "Jenerik başladığında doğrudan sonraki bölüme geç. Hiçbir şeye dokunmadan art arda üç bölümden sonra hâlâ izleyip izlemediğin sorulur.",
+      "skipIntros": "Girişleri atla",
+      "skipIntrosHint": "Bir dizinin girişini, Girişi atla düğmesi göstermek yerine kendiliğinden atlar."
     },
     "trailers": {
       "title": "Fragmanlar",

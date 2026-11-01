@@ -9,6 +9,10 @@ In the background, Matinee reads each file for what's inside: resolution, HDR (H
 
 That's where the badges on titles come from, along with the **Quality** [filters](/docs/watching/browsing/#filters) (4K, HDR, Atmos…), the [File details](/docs/watching/title-pages/#file-details), and the timing of [Up next](/docs/watching/playing/#up-next).
 
+<!-- since: v0.1.10 -->
+Once every file is analyzed, Matinee goes on to listen to the start of each season's episodes for the intro they share, for [Skip intro](/docs/watching/skipping-intros/). **Find TV intros** on the same card turns that off, and shows how far it is.
+<!-- /since -->
+
 ![Media analysis: every file analyzed, with the Gentle, Normal and Off speeds](../images/media-analysis.webp)
 
 ## Gentle on your server

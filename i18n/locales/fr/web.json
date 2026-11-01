@@ -45,7 +45,9 @@
       "online": "En ligne",
       "remove": "Retirer {{name}}",
       "source": "Sous-titres d’OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Passer l’intro",
+    "introSkipped": "Intro passée"
   },
   "somethingWentWrong": "Un problème est survenu",
   "oneMoment": "Un instant…",
@@ -411,6 +413,7 @@
     "intro": "Matinee lit lentement chaque fichier pour connaître sa qualité, son son et ses langues, puis de nouveau dès qu’un fichier change.",
     "state": {
       "lookingAt": "Examen de {{file}}",
+      "intros": "Recherche des intros dans {{season}}",
       "working": "En cours",
       "waiting": "En attente de la fin de la lecture",
       "slowDisk": "Les fichiers sont lents à lire ; pause de quelques minutes",
@@ -436,6 +439,11 @@
         "label": "Désactivée",
         "hint": "En pause jusqu’à ce que vous la réactiviez."
       }
+    },
+    "intros": {
+      "label": "Trouver les intros des séries",
+      "hint": "Une fois tous les fichiers analysés, Matinee écoute le début des épisodes de chaque saison pour trouver l’intro qu’ils partagent, afin que les lecteurs proposent Passer l’intro.",
+      "progress": "{{done}} épisodes sur {{total}} vérifiés, {{found}} avec une intro"
     }
   },
   "profileSettings": {
@@ -690,7 +698,9 @@
       "autoPlay": "Lire l’épisode suivant",
       "autoPlayHint": "Quand le générique commence, l’épisode suivant démarre après un compte à rebours de 10 secondes que vous pouvez annuler.",
       "binge": "Passer le compte à rebours",
-      "bingeHint": "Enchaîner directement sur l’épisode suivant au début du générique. Après trois épisodes d’affilée sans rien toucher, on vous demande si vous regardez toujours."
+      "bingeHint": "Enchaîner directement sur l’épisode suivant au début du générique. Après trois épisodes d’affilée sans rien toucher, on vous demande si vous regardez toujours.",
+      "skipIntros": "Passer les intros",
+      "skipIntrosHint": "Passe automatiquement l’intro d’une série, au lieu de proposer un bouton Passer l’intro."
     },
     "trailers": {
       "title": "Bandes-annonces",
