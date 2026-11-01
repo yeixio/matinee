@@ -35,7 +35,10 @@ type Item struct {
 	Played      bool     `json:"played,omitempty"`
 	Overview    string   `json:"overview,omitempty"`
 	Rating      *float64 `json:"rating,omitempty"`
-	HasPoster   bool     `json:"hasPoster"`
+	// MyRating is the person's own rating, 1 to 10 (half stars out of
+	// five); nil when they haven't rated it.
+	MyRating  *int `json:"myRating,omitempty"`
+	HasPoster bool `json:"hasPoster"`
 	// PosterTag changes with a cover an admin picked, for clients to add
 	// to the image URL as ?v= so they don't show the old one from a cache.
 	PosterTag   string `json:"posterTag,omitempty"`
@@ -134,7 +137,8 @@ const itemCols = `
 		WHEN i.kind IN ('track', 'part') THEN (SELECT al.parent_id FROM items al WHERE al.id = i.parent_id) END,
 	CASE WHEN i.kind IN ('track', 'part', 'podcastEpisode') THEN (SELECT al.title FROM items al WHERE al.id = i.parent_id) END,
 	COALESCE(i.narrators, ''), COALESCE(i.series, ''), i.series_index,
-	CASE WHEN i.kind = 'podcastEpisode' THEN COALESCE(i.released, '') ELSE '' END`
+	CASE WHEN i.kind = 'podcastEpisode' THEN COALESCE(i.released, '') ELSE '' END,
+	(SELECT r.rating FROM ratings r WHERE r.user_id = me.id AND r.item_id = i.id)`
 
 const itemFrom = ` FROM (SELECT CAST(? AS BIGINT) AS id) me CROSS JOIN items i LEFT JOIN progress p ON p.item_id = i.id AND p.user_id = me.id`
 
@@ -154,12 +158,13 @@ func scanItem(r scanner) (Item, error) {
 	var artistID sql.NullInt64
 	var narrators string
 	var seriesIdx sql.NullFloat64
+	var mine sql.NullInt64
 	err := r.Scan(&it.ID, &it.LibraryID, &parent, &it.Kind, &it.Title, &year, &idx, &disc,
 		&dur, &it.Container, &it.VideoCodec, &it.AudioCodec, &w, &h, &it.AddedAt, &it.Path, &it.Size, &it.Mtime,
 		&it.ChildCount, &it.PositionMs, &it.Played,
 		&it.Overview, &rating, &it.Poster, &it.Backdrop, &tmdb, &it.MetaAt,
 		&showTitle, &seasonIdx, &it.OnWatchList, &tags, &genres, &showID, &facts, &data,
-		&artist, &artistID, &album, &narrators, &it.Series, &seriesIdx, &it.Released)
+		&artist, &artistID, &album, &narrators, &it.Series, &seriesIdx, &it.Released, &mine)
 	if err != nil {
 		return it, err
 	}
@@ -174,6 +179,7 @@ func scanItem(r scanner) (Item, error) {
 	if rating.Valid {
 		it.Rating = &rating.Float64
 	}
+	it.MyRating = intPtr(mine)
 	if tmdb.Valid {
 		it.TMDBID = &tmdb.Int64
 	}

@@ -891,6 +891,7 @@
     "people": "Personnes",
     "peopleHelp": "Indiquez qui est chaque personne ici. L'historique des personnes ignorées n'est pas récupéré.",
     "history": "Vus : {{watched}} · En cours : {{inProgress}} · Dans vos bibliothèques : {{found}}",
+    "rated": "Notés : {{number}}",
     "whoIs": "Qui est {{name}} ici",
     "skip": "Ignorer",
     "profileOf": "{{name}} ({{account}})",
@@ -898,12 +899,19 @@
     "watched": "Marques « vu » et points de reprise",
     "collections": "Collections ({{number}})",
     "posters": "Affiches envoyées ({{number}})",
+    "ratings": "Notes ({{number}})",
     "noPosters": "Affiches (uniquement depuis un dossier de données, pas une base envoyée)",
     "run": "Importer",
     "running": "Importation… {{done}} sur {{total}}",
     "stopped": "L'importation s'est arrêtée en cours de route. Relancez-la pour terminer ; rien n'est importé deux fois.",
     "done": "Importation terminée",
     "summary": "Vus : {{watched}} · Points de reprise : {{inProgress}} · Collections : {{collections}} · Affiches : {{posters}}",
-    "kept": "Laissés tels quels, car regardés plus récemment ici : {{number}}"
+    "kept": "Laissés tels quels, car regardés plus récemment ici : {{number}}",
+    "ratingsDone": "Notes récupérées : {{number}}"
+  },
+  "rating": {
+    "rate": "Noter",
+    "yours": "Votre note : {{stars}} sur 5",
+    "stars": "{{stars}} sur 5"
   }
 }

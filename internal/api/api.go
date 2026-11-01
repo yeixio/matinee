@@ -273,6 +273,8 @@ func (s *Server) routes() []route {
 		{"GET /watchlist", reader, s.getWatchList},
 		{"PUT /watchlist/{id}", reader, s.addToWatchList},
 		{"DELETE /watchlist/{id}", reader, s.removeFromWatchList},
+		{"PUT /items/{id}/rating", reader, s.setRating},
+		{"DELETE /items/{id}/rating", reader, s.clearRating},
 		{"GET /playlists", reader, s.listPlaylists},
 		{"POST /playlists", reader, s.createPlaylist},
 		{"GET /playlists/{id}", reader, s.getPlaylist},

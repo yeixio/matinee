@@ -887,6 +887,7 @@
     "people": "Mensen",
     "peopleHelp": "Kies wie iedereen hier is. De geschiedenis van overgeslagen mensen wordt niet overgenomen.",
     "history": "Bekeken: {{watched}} · Bezig: {{inProgress}} · In je bibliotheken: {{found}}",
+    "rated": "Beoordeeld: {{number}}",
     "whoIs": "Wie {{name}} hier is",
     "skip": "Overslaan",
     "profileOf": "{{name}} ({{account}})",
@@ -894,12 +895,19 @@
     "watched": "Bekeken-markeringen en hervatpunten",
     "collections": "Collecties ({{number}})",
     "posters": "Geüploade posters ({{number}})",
+    "ratings": "Beoordelingen ({{number}})",
     "noPosters": "Posters (alleen uit een gegevensmap, niet uit een geüploade database)",
     "run": "Importeren",
     "running": "Importeren… {{done}} van {{total}}",
     "stopped": "De import is halverwege gestopt. Start hem opnieuw om af te ronden; niets wordt dubbel overgenomen.",
     "done": "Import klaar",
     "summary": "Bekeken: {{watched}} · Hervatpunten: {{inProgress}} · Collecties: {{collections}} · Posters: {{posters}}",
-    "kept": "Ongewijzigd gelaten omdat ze hier recenter zijn bekeken: {{number}}"
+    "kept": "Ongewijzigd gelaten omdat ze hier recenter zijn bekeken: {{number}}",
+    "ratingsDone": "Overgenomen beoordelingen: {{number}}"
+  },
+  "rating": {
+    "rate": "Beoordelen",
+    "yours": "Jouw beoordeling: {{stars}} van 5",
+    "stars": "{{stars}} van 5"
   }
 }

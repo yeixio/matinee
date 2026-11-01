@@ -887,6 +887,7 @@
     "people": "Személyek",
     "peopleHelp": "Válaszd ki, ki kicsoda itt. A kihagyott személyek előzményei nem kerülnek át.",
     "history": "Megnézve: {{watched}} · Folyamatban: {{inProgress}} · A könyvtáraidban: {{found}}",
+    "rated": "Értékelve: {{number}}",
     "whoIs": "Ki {{name}} itt",
     "skip": "Kihagyás",
     "profileOf": "{{name}} ({{account}})",
@@ -894,12 +895,19 @@
     "watched": "Megnézett jelölések és folytatási pontok",
     "collections": "Gyűjtemények ({{number}})",
     "posters": "Feltöltött plakátok ({{number}})",
+    "ratings": "Értékelések ({{number}})",
     "noPosters": "Plakátok (csak adatmappából, feltöltött adatbázisból nem)",
     "run": "Importálás",
     "running": "Importálás… {{done}} / {{total}}",
     "stopped": "Az importálás félúton leállt. Futtasd újra a befejezéshez; semmi sem kerül át kétszer.",
     "done": "Az importálás kész",
     "summary": "Megnézve: {{watched}} · Folytatási pontok: {{inProgress}} · Gyűjtemények: {{collections}} · Plakátok: {{posters}}",
-    "kept": "Változatlanul hagyva, mert itt később nézték meg őket: {{number}}"
+    "kept": "Változatlanul hagyva, mert itt később nézték meg őket: {{number}}",
+    "ratingsDone": "Áthozott értékelések: {{number}}"
+  },
+  "rating": {
+    "rate": "Értékelés",
+    "yours": "Az értékelésed: {{stars}} / 5",
+    "stars": "{{stars}} / 5"
   }
 }

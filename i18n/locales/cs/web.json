@@ -895,6 +895,7 @@
     "people": "Lidé",
     "peopleHelp": "Vyberte, kdo je tady kdo. Historie přeskočených lidí se nepřenese.",
     "history": "Zhlédnuto: {{watched}} · Rozkoukáno: {{inProgress}} · Ve vašich knihovnách: {{found}}",
+    "rated": "Ohodnoceno: {{number}}",
     "whoIs": "Kdo je zde {{name}}",
     "skip": "Přeskočit",
     "profileOf": "{{name}} ({{account}})",
@@ -902,12 +903,19 @@
     "watched": "Značky zhlédnutí a místa pro pokračování",
     "collections": "Kolekce ({{number}})",
     "posters": "Nahrané plakáty ({{number}})",
+    "ratings": "Hodnocení ({{number}})",
     "noPosters": "Plakáty (jen z datové složky, ne z nahrané databáze)",
     "run": "Importovat",
     "running": "Importuje se… {{done}} z {{total}}",
     "stopped": "Import se zastavil v polovině. Spusťte ho znovu, aby se dokončil; nic se nepřenese dvakrát.",
     "done": "Import dokončen",
     "summary": "Zhlédnuto: {{watched}} · Místa pro pokračování: {{inProgress}} · Kolekce: {{collections}} · Plakáty: {{posters}}",
-    "kept": "Ponecháno beze změny, protože se zde sledovalo později: {{number}}"
+    "kept": "Ponecháno beze změny, protože se zde sledovalo později: {{number}}",
+    "ratingsDone": "Přenesená hodnocení: {{number}}"
+  },
+  "rating": {
+    "rate": "Ohodnotit",
+    "yours": "Vaše hodnocení: {{stars}} z 5",
+    "stars": "{{stars}} z 5"
   }
 }

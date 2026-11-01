@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { api, type Item, type ItemDetail } from '../api'
 import { AddToCollectionButton } from '../components/Collections'
+import { StarRating } from '../components/StarRating'
 import { Equalizer } from '../components/Tracks'
 import { Row, RowItem } from '../components/Row'
 import { Button } from '../components/ui'
@@ -104,6 +105,7 @@ export function BookPage({ item }: { item: ItemDetail }) {
           </Button>
         ) : null}
         <AddToCollectionButton item={item} />
+        <StarRating item={item} />
       </div>
 
       {item.overview && <Overview text={item.overview} />}

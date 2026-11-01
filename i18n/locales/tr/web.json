@@ -887,6 +887,7 @@
     "people": "Kişiler",
     "peopleHelp": "Her kişinin burada kim olduğunu seç. Atlanan kişilerin geçmişi getirilmez.",
     "history": "İzlenen: {{watched}} · Devam eden: {{inProgress}} · Kitaplıklarında: {{found}}",
+    "rated": "Puanlanan: {{number}}",
     "whoIs": "{{name}} burada kim",
     "skip": "Atla",
     "profileOf": "{{name}} ({{account}})",
@@ -894,12 +895,19 @@
     "watched": "İzlendi işaretleri ve kaldığın yerler",
     "collections": "Koleksiyonlar ({{number}})",
     "posters": "Yüklenen posterler ({{number}})",
+    "ratings": "Puanlar ({{number}})",
     "noPosters": "Posterler (yalnızca bir veri klasöründen, yüklenen veritabanından değil)",
     "run": "İçe aktar",
     "running": "İçe aktarılıyor… {{done}} / {{total}}",
     "stopped": "İçe aktarma yarıda kaldı. Bitirmek için yeniden çalıştır; hiçbir şey iki kez getirilmez.",
     "done": "İçe aktarma tamamlandı",
     "summary": "İzlenen: {{watched}} · Kaldığın yerler: {{inProgress}} · Koleksiyonlar: {{collections}} · Posterler: {{posters}}",
-    "kept": "Burada daha yakın zamanda izlendikleri için olduğu gibi bırakıldı: {{number}}"
+    "kept": "Burada daha yakın zamanda izlendikleri için olduğu gibi bırakıldı: {{number}}",
+    "ratingsDone": "Getirilen puanlar: {{number}}"
+  },
+  "rating": {
+    "rate": "Puan ver",
+    "yours": "Puanın: 5 üzerinden {{stars}}",
+    "stars": "5 üzerinden {{stars}}"
   }
 }

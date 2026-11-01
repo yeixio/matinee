@@ -887,6 +887,7 @@
     "people": "Personen",
     "peopleHelp": "Wähle, wer jede Person hier ist. Der Verlauf übersprungener Personen wird nicht übernommen.",
     "history": "Gesehen: {{watched}} · Angefangen: {{inProgress}} · In deinen Mediatheken: {{found}}",
+    "rated": "Bewertet: {{number}}",
     "whoIs": "Wer {{name}} hier ist",
     "skip": "Überspringen",
     "profileOf": "{{name}} ({{account}})",
@@ -894,12 +895,19 @@
     "watched": "Gesehen-Markierungen und Fortsetzungspunkte",
     "collections": "Sammlungen ({{number}})",
     "posters": "Hochgeladene Poster ({{number}})",
+    "ratings": "Bewertungen ({{number}})",
     "noPosters": "Poster (nur aus einem Datenordner, nicht aus einer hochgeladenen Datenbank)",
     "run": "Importieren",
     "running": "Wird importiert… {{done}} von {{total}}",
     "stopped": "Der Import wurde unterbrochen. Starte ihn erneut, um ihn abzuschließen; nichts wird doppelt übernommen.",
     "done": "Import abgeschlossen",
     "summary": "Gesehen: {{watched}} · Fortsetzungspunkte: {{inProgress}} · Sammlungen: {{collections}} · Poster: {{posters}}",
-    "kept": "Unverändert gelassen, weil sie hier zuletzt geschaut wurden: {{number}}"
+    "kept": "Unverändert gelassen, weil sie hier zuletzt geschaut wurden: {{number}}",
+    "ratingsDone": "Übernommene Bewertungen: {{number}}"
+  },
+  "rating": {
+    "rate": "Bewerten",
+    "yours": "Deine Bewertung: {{stars}} von 5",
+    "stars": "{{stars}} von 5"
   }
 }

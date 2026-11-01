@@ -152,6 +152,7 @@ type importRequest struct {
 	Watched     bool             `json:"watched"`
 	Collections bool             `json:"collections"`
 	Posters     bool             `json:"posters"`
+	Ratings     bool             `json:"ratings"`
 }
 
 type importViewer struct {
@@ -276,7 +277,7 @@ func (s *Server) runImport(w http.ResponseWriter, r *http.Request) {
 		}
 		accounts[id] = v
 	}
-	if !req.Collections && !req.Posters && (!req.Watched || len(accounts) == 0) {
+	if !req.Collections && !req.Posters && ((!req.Watched && !req.Ratings) || len(accounts) == 0) {
 		writeError(w, http.StatusBadRequest, "nothing to import")
 		return
 	}
@@ -300,7 +301,7 @@ func (s *Server) runImport(w http.ResponseWriter, r *http.Request) {
 			ctx = context.Background()
 		}
 		res, err := plan.Apply(ctx, s.Store, importer.Options{
-			Accounts: accounts, Watched: req.Watched, Collections: req.Collections, Posters: req.Posters,
+			Accounts: accounts, Watched: req.Watched, Collections: req.Collections, Posters: req.Posters, Ratings: req.Ratings,
 			Step: func(done, total int) {
 				st.mu.Lock()
 				st.done, st.total = done, total
@@ -316,7 +317,7 @@ func (s *Server) runImport(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		s.Log.Info("import finished", "watched", res.Watched, "inProgress", res.InProgress, "kept", res.Kept,
-			"collections", res.Collections, "posters", res.Posters)
+			"collections", res.Collections, "posters", res.Posters, "ratings", res.Ratings)
 		st.result = &res
 	}()
 	w.WriteHeader(http.StatusAccepted)

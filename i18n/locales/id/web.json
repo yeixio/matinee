@@ -883,6 +883,7 @@
     "people": "Orang",
     "peopleHelp": "Pilih siapa setiap orang di sini. Riwayat orang yang dilewati tidak dibawa.",
     "history": "Ditonton: {{watched}} · Sedang ditonton: {{inProgress}} · Di pustaka Anda: {{found}}",
+    "rated": "Diberi rating: {{number}}",
     "whoIs": "Siapa {{name}} di sini",
     "skip": "Lewati",
     "profileOf": "{{name}} ({{account}})",
@@ -890,12 +891,19 @@
     "watched": "Tanda sudah ditonton dan titik lanjut tonton",
     "collections": "Koleksi ({{number}})",
     "posters": "Poster yang diunggah ({{number}})",
+    "ratings": "Rating ({{number}})",
     "noPosters": "Poster (hanya dari folder data, bukan dari basis data yang diunggah)",
     "run": "Impor",
     "running": "Mengimpor… {{done}} dari {{total}}",
     "stopped": "Impor berhenti di tengah jalan. Jalankan lagi untuk menyelesaikannya; tidak ada yang dibawa dua kali.",
     "done": "Impor selesai",
     "summary": "Ditonton: {{watched}} · Titik lanjut tonton: {{inProgress}} · Koleksi: {{collections}} · Poster: {{posters}}",
-    "kept": "Dibiarkan apa adanya karena ditonton lebih baru di sini: {{number}}"
+    "kept": "Dibiarkan apa adanya karena ditonton lebih baru di sini: {{number}}",
+    "ratingsDone": "Rating yang dibawa: {{number}}"
+  },
+  "rating": {
+    "rate": "Beri rating",
+    "yours": "Rating Anda: {{stars}} dari 5",
+    "stars": "{{stars}} dari 5"
   }
 }

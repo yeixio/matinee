@@ -92,6 +92,12 @@ func TestImport(t *testing.T) {
 	src.View(1, "part-2", 60000, 0, 1700001000) // …and a minute into part 2
 	src.View(5001, "movie-ronin", 300000, 0, 1) // Ellen's place, older than Matinee's
 	src.View(5001, "movie-heat", 0, 1, 1700000000)
+	src.Rate(1, "movie-heat", 8, 1700000000)     // four stars, on a watched movie
+	src.Rate(1, "show-sev", 9, 1700000000)       // a show
+	src.Rate(1, "album-ms", 7.0, 1700000000)     // an album
+	src.Rate(1, "part-1", 6, 1700000000)         // a book's part: not rated alone
+	src.Rate(5001, "movie-ronin", 2, 1700000000) // older than Ellen's rating here
+	src.Rate(5001, "movie-gone", 10, 1700000000) // a file Matinee doesn't have
 	src.Collection("Heists", heat, ronin, show)
 	src.Poster(heat, "movie-heat", pngBytes())
 	src.Poster(season, "season-sev1", pngBytes())
@@ -99,6 +105,9 @@ func TestImport(t *testing.T) {
 
 	// Ellen already started Ronin on Matinee, more recently than there.
 	if err := st.SetProgress(ctx, ellen.ID, l.other, 42000, false); err != nil {
+		t.Fatal(err)
+	}
+	if err := st.SetRating(ctx, ellen.ID, l.other, 10); err != nil {
 		t.Fatal(err)
 	}
 
@@ -125,7 +134,8 @@ func TestImport(t *testing.T) {
 		t.Fatalf("after: %d of %d, %v %v", plan.Matched, plan.Files, plan.Unmatched, plan.Suggested)
 	}
 	accounts := plan.Accounts()
-	if len(accounts) != 2 || accounts[0].Watched != 5 || accounts[0].InProgress != 2 || accounts[0].Found != 6 || accounts[1].Found != 2 {
+	if len(accounts) != 2 || accounts[0].Watched != 5 || accounts[0].InProgress != 2 || accounts[0].Found != 6 || accounts[1].Found != 2 ||
+		accounts[0].Rated != 4 || accounts[1].Rated != 2 || accounts[1].Watched != 1 {
 		t.Fatalf("accounts: %+v", accounts)
 	}
 	if plan.Collections() != 1 || plan.Posters() != 2 {
@@ -134,14 +144,14 @@ func TestImport(t *testing.T) {
 
 	res, err := plan.Apply(ctx, st, importer.Options{
 		Accounts: map[int64]int64{1: mike.ID, 5001: ellen.ID},
-		Watched:  true, Collections: true, Posters: true,
+		Watched:  true, Collections: true, Posters: true, Ratings: true,
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	// Mike: Heat, episode 1, the song, the book's progress; Ellen: Heat.
 	// In progress: episode 2. Kept: Ellen's Ronin.
-	if res.Watched != 4 || res.InProgress != 2 || res.Kept != 1 || res.Collections != 1 || res.CollectionItems != 3 || res.Posters != 2 {
+	if res.Watched != 4 || res.InProgress != 2 || res.Kept != 1 || res.Collections != 1 || res.CollectionItems != 3 || res.Posters != 2 || res.Ratings != 3 {
 		t.Fatalf("result: %+v", res)
 	}
 	item := func(user, id int64) store.Item {
@@ -162,6 +172,21 @@ func TestImport(t *testing.T) {
 	}
 	if r := item(ellen.ID, l.other); r.PositionMs != 42000 {
 		t.Fatalf("Ellen's newer place was replaced: %+v", r.PositionMs)
+	}
+	for id, want := range map[int64]int{l.movie: 8, l.show: 9} {
+		if r := item(mike.ID, id).MyRating; r == nil || *r != want {
+			t.Errorf("Mike's rating of %d: %v, want %d", id, r, want)
+		}
+	}
+	albumItem, _ := st.Item(ctx, mike.ID, *item(0, l.track).ParentID)
+	if albumItem.MyRating == nil || *albumItem.MyRating != 7 {
+		t.Errorf("album rating: %v", albumItem.MyRating)
+	}
+	if b := item(mike.ID, l.book); b.MyRating != nil {
+		t.Errorf("a part's rating went to the book: %v", *b.MyRating)
+	}
+	if r := item(ellen.ID, l.other).MyRating; r == nil || *r != 10 {
+		t.Errorf("Ellen's newer rating was replaced: %v", r)
 	}
 	if item(ellen.ID, l.ep1).Played {
 		t.Fatal("Mike's history went to Ellen")

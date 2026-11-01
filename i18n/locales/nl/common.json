@@ -128,6 +128,7 @@
     "released": "Releasedatum",
     "year": "Jaar",
     "rating": "Beoordeling",
+    "myRating": "Mijn beoordeling",
     "runtime": "Speelduur",
     "lastPlayed": "Laatst bekeken"
   },

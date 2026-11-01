@@ -887,6 +887,7 @@
     "people": "Personer",
     "peopleHelp": "Välj vem varje person är här. Historiken för överhoppade personer tas inte med.",
     "history": "Sedda: {{watched}} · Påbörjade: {{inProgress}} · I dina bibliotek: {{found}}",
+    "rated": "Betygsatta: {{number}}",
     "whoIs": "Vem {{name}} är här",
     "skip": "Hoppa över",
     "profileOf": "{{name}} ({{account}})",
@@ -894,12 +895,19 @@
     "watched": "Sedda-markeringar och platser att fortsätta från",
     "collections": "Samlingar ({{number}})",
     "posters": "Uppladdade affischer ({{number}})",
+    "ratings": "Betyg ({{number}})",
     "noPosters": "Affischer (bara från en datamapp, inte från en uppladdad databas)",
     "run": "Importera",
     "running": "Importerar… {{done}} av {{total}}",
     "stopped": "Importen stannade halvvägs. Kör den igen för att bli klar; inget tas med två gånger.",
     "done": "Importen är klar",
     "summary": "Sedda: {{watched}} · Platser att fortsätta från: {{inProgress}} · Samlingar: {{collections}} · Affischer: {{posters}}",
-    "kept": "Lämnade som de var eftersom de setts senare här: {{number}}"
+    "kept": "Lämnade som de var eftersom de setts senare här: {{number}}",
+    "ratingsDone": "Betyg som togs med: {{number}}"
+  },
+  "rating": {
+    "rate": "Betygsätt",
+    "yours": "Ditt betyg: {{stars}} av 5",
+    "stars": "{{stars}} av 5"
   }
 }

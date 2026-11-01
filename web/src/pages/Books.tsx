@@ -18,7 +18,7 @@ type View = 'overview' | 'books' | 'authors' | 'series' | 'narrators'
 const views: View[] = ['overview', 'books', 'authors', 'series', 'narrators']
 
 const sorts: Record<'books' | 'authors', SortField[]> = {
-  books: ['title', 'added', 'lastPlayed', 'year', 'runtime'],
+  books: ['title', 'added', 'lastPlayed', 'year', 'runtime', 'myRating'],
   authors: ['title', 'added', 'lastPlayed'],
 }
 

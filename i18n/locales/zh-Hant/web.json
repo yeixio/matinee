@@ -883,6 +883,7 @@
     "people": "人員",
     "peopleHelp": "選擇每個人在這裡對應誰。略過的人的紀錄不會被帶過來。",
     "history": "已看：{{watched}} · 觀看中：{{inProgress}} · 在你的媒體庫中：{{found}}",
+    "rated": "已評分：{{number}}",
     "whoIs": "{{name}} 在這裡是誰",
     "skip": "略過",
     "profileOf": "{{name}}（{{account}}）",
@@ -890,12 +891,19 @@
     "watched": "已看標記和續播位置",
     "collections": "合集（{{number}}）",
     "posters": "上傳的海報（{{number}}）",
+    "ratings": "評分（{{number}}）",
     "noPosters": "海報（僅限資料資料夾，上傳的資料庫不含）",
     "run": "匯入",
     "running": "正在匯入… {{done}} / {{total}}",
     "stopped": "匯入中途停止了。再執行一次即可完成，不會重複匯入。",
     "done": "匯入完成",
     "summary": "已看：{{watched}} · 續播位置：{{inProgress}} · 合集：{{collections}} · 海報：{{posters}}",
-    "kept": "因在這裡看得更晚而保持不變：{{number}}"
+    "kept": "因在這裡看得更晚而保持不變：{{number}}",
+    "ratingsDone": "帶過來的評分：{{number}}"
+  },
+  "rating": {
+    "rate": "評分",
+    "yours": "你的評分：{{stars}} / 5",
+    "stars": "{{stars}} / 5"
   }
 }

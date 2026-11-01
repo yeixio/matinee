@@ -887,6 +887,7 @@
     "people": "Personer",
     "peopleHelp": "Vælg, hvem hver person er her. Historikken for personer, der springes over, tages ikke med.",
     "history": "Set: {{watched}} · I gang: {{inProgress}} · I dine biblioteker: {{found}}",
+    "rated": "Bedømt: {{number}}",
     "whoIs": "Hvem {{name}} er her",
     "skip": "Spring over",
     "profileOf": "{{name}} ({{account}})",
@@ -894,12 +895,19 @@
     "watched": "Set-markeringer og steder at fortsætte fra",
     "collections": "Samlinger ({{number}})",
     "posters": "Uploadede plakater ({{number}})",
+    "ratings": "Bedømmelser ({{number}})",
     "noPosters": "Plakater (kun fra en datamappe, ikke fra en uploadet database)",
     "run": "Importér",
     "running": "Importerer… {{done}} af {{total}}",
     "stopped": "Importen stoppede halvvejs. Kør den igen for at blive færdig; intet tages med to gange.",
     "done": "Importen er færdig",
     "summary": "Set: {{watched}} · Steder at fortsætte fra: {{inProgress}} · Samlinger: {{collections}} · Plakater: {{posters}}",
-    "kept": "Ladt være, som de var, fordi de blev set senere her: {{number}}"
+    "kept": "Ladt være, som de var, fordi de blev set senere her: {{number}}",
+    "ratingsDone": "Bedømmelser taget med: {{number}}"
+  },
+  "rating": {
+    "rate": "Bedøm",
+    "yours": "Din bedømmelse: {{stars}} af 5",
+    "stars": "{{stars}} af 5"
   }
 }

@@ -58,7 +58,14 @@ type View struct {
 	OffsetMs   int64
 	Count      int64
 	LastViewed int64 // Unix seconds; 0 when unknown
+	// Rating is the account's rating out of 10 (0 for none), and RatedAt
+	// when it was given.
+	Rating  float64
+	RatedAt int64
 }
+
+// Watched says whether the record is about watching, not only a rating.
+func (v View) Watched() bool { return v.Count > 0 || v.OffsetMs > 0 }
 
 // Collection is a named group of items.
 type Collection struct {
@@ -191,17 +198,24 @@ func (s *Snapshot) read(ctx context.Context, db *sql.DB) error {
 		return err
 	}
 
+	// Older databases have no last_rated_at; their ratings count as made
+	// when the row last changed.
+	ratedAt := "updated_at"
+	if hasColumn(ctx, db, "metadata_item_settings", "last_rated_at") {
+		ratedAt = "COALESCE(last_rated_at, updated_at)"
+	}
 	rows, err = db.QueryContext(ctx, `
-		SELECT account_id, guid, COALESCE(view_offset, 0), COALESCE(view_count, 0), last_viewed_at, updated_at
+		SELECT account_id, guid, COALESCE(view_offset, 0), COALESCE(view_count, 0), last_viewed_at, updated_at,
+			COALESCE(rating, 0), `+ratedAt+`
 		FROM metadata_item_settings
-		WHERE guid IS NOT NULL AND (COALESCE(view_count, 0) > 0 OR COALESCE(view_offset, 0) > 0)`)
+		WHERE guid IS NOT NULL AND (COALESCE(view_count, 0) > 0 OR COALESCE(view_offset, 0) > 0 OR COALESCE(rating, 0) > 0)`)
 	if err != nil {
 		return err
 	}
 	for rows.Next() {
 		var v View
-		var last, updated any
-		if err := rows.Scan(&v.AccountID, &v.GUID, &v.OffsetMs, &v.Count, &last, &updated); err != nil {
+		var last, updated, rated any
+		if err := rows.Scan(&v.AccountID, &v.GUID, &v.OffsetMs, &v.Count, &last, &updated, &v.Rating, &rated); err != nil {
 			rows.Close()
 			return err
 		}
@@ -209,6 +223,7 @@ func (s *Snapshot) read(ctx context.Context, db *sql.DB) error {
 		if v.LastViewed == 0 {
 			v.LastViewed = unixTime(updated)
 		}
+		v.RatedAt = unixTime(rated)
 		s.Views = append(s.Views, v)
 	}
 	rows.Close()
@@ -242,6 +257,21 @@ func (s *Snapshot) read(ctx context.Context, db *sql.DB) error {
 	}
 	rows.Close()
 	return rows.Err()
+}
+
+func hasColumn(ctx context.Context, db *sql.DB, table, column string) bool {
+	rows, err := db.QueryContext(ctx, "SELECT name FROM pragma_table_info(?)", table)
+	if err != nil {
+		return false
+	}
+	defer rows.Close()
+	for rows.Next() {
+		var name string
+		if rows.Scan(&name) == nil && name == column {
+			return true
+		}
+	}
+	return false
 }
 
 // unixTime reads a time stored as Unix seconds (newer databases) or as
