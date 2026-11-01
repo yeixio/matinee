@@ -127,14 +127,23 @@
       "downloading": "Download in corso",
       "starting": "Avvio…",
       "paused": "In pausa"
-    }
+    },
+    "filter": {
+      "active": "In download ({{n}})",
+      "done": "Scaricati ({{n}})"
+    },
+    "noneActive": "Nessun download in corso.",
+    "noneDone": "Nessun download è ancora finito."
   },
   "settings": {
     "quality": {
       "auto": "Il meglio per questo telefono",
       "autoHint": "Il file originale se questo telefono può riprodurlo, altrimenti 1080p",
       "upTo": "Fino a {{size}} per un film di due ore",
-      "title": "Qualità di download (la musica è sempre l’originale)"
+      "title": "Qualità di download (la musica è sempre l’originale)",
+      "ask": "Chiedi ogni volta",
+      "askHint": "Scegli una qualità ogni volta che scarichi un video",
+      "holdHint": "Tieni premuto Scarica su un video per sceglierne la qualità solo per quello."
     },
     "serversHint": "Cambia o aggiungi server",
     "atHome": "Guardi da casa",
@@ -379,7 +388,11 @@
     "more_many": "Scarica altri {{count}}",
     "more_one": "Scarica altri {{count}}",
     "more_other": "Scarica altri {{count}}",
-    "someFailed": "Non è stato possibile avviare tutti i download"
+    "someFailed": "Non è stato possibile avviare tutti i download",
+    "couldNotStart": "Impossibile avviare il download",
+    "qualityTitle": "Qualità download",
+    "about": "Circa {{size}}",
+    "autoShort": "Originale o 1080p"
   },
   "kind": {
     "movie": "Film",

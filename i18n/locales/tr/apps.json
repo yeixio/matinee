@@ -127,14 +127,23 @@
       "downloading": "İndiriliyor",
       "starting": "Başlıyor…",
       "paused": "Duraklatıldı"
-    }
+    },
+    "filter": {
+      "active": "İndiriliyor ({{n}})",
+      "done": "İndirildi ({{n}})"
+    },
+    "noneActive": "Şu anda hiçbir şey indirilmiyor.",
+    "noneDone": "Henüz biten bir indirme yok."
   },
   "settings": {
     "quality": {
       "auto": "Bu telefon için en iyisi",
       "autoHint": "Bu telefon oynatabiliyorsa orijinal dosya, yoksa 1080p",
       "upTo": "İki saatlik bir film için en fazla {{size}}",
-      "title": "İndirme kalitesi (müzik her zaman orijinaldir)"
+      "title": "İndirme kalitesi (müzik her zaman orijinaldir)",
+      "ask": "Her seferinde sor",
+      "askHint": "Her video indirişinde bir kalite seç",
+      "holdHint": "Yalnızca o video için kalite seçmek üzere İndir'e basılı tut."
     },
     "serversHint": "Sunucu değiştir veya ekle",
     "atHome": "Evde izliyorsunuz",
@@ -373,7 +382,11 @@
     "season": "Sezonu indir",
     "more_one": "{{count}} tane daha indir",
     "more_other": "{{count}} tane daha indir",
-    "someFailed": "Tüm indirmeler başlatılamadı"
+    "someFailed": "Tüm indirmeler başlatılamadı",
+    "couldNotStart": "İndirme başlatılamadı",
+    "qualityTitle": "İndirme kalitesi",
+    "about": "Yaklaşık {{size}}",
+    "autoShort": "Orijinal veya 1080p"
   },
   "kind": {
     "movie": "Film",

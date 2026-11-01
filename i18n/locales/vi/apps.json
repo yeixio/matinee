@@ -127,14 +127,23 @@
       "downloading": "Đang tải xuống",
       "starting": "Đang bắt đầu…",
       "paused": "Đã tạm dừng"
-    }
+    },
+    "filter": {
+      "active": "Đang tải ({{n}})",
+      "done": "Đã tải ({{n}})"
+    },
+    "noneActive": "Hiện không có gì đang tải.",
+    "noneDone": "Chưa có bản tải nào hoàn tất."
   },
   "settings": {
     "quality": {
       "auto": "Tốt nhất cho điện thoại này",
       "autoHint": "Tệp gốc khi điện thoại này phát được, nếu không thì 1080p",
       "upTo": "Tối đa {{size}} cho một phim dài hai giờ",
-      "title": "Chất lượng tải xuống (nhạc luôn là bản gốc)"
+      "title": "Chất lượng tải xuống (nhạc luôn là bản gốc)",
+      "ask": "Hỏi mỗi lần",
+      "askHint": "Chọn chất lượng mỗi khi bạn tải video",
+      "holdHint": "Nhấn giữ Tải xuống trên một video để chọn chất lượng riêng cho video đó."
     },
     "serversHint": "Đổi hoặc thêm máy chủ",
     "atHome": "Đang xem ở nhà",
@@ -367,7 +376,11 @@
     "album": "Tải album xuống",
     "season": "Tải mùa xuống",
     "more_other": "Tải thêm {{count}}",
-    "someFailed": "Không thể bắt đầu tất cả bản tải xuống"
+    "someFailed": "Không thể bắt đầu tất cả bản tải xuống",
+    "couldNotStart": "Không thể bắt đầu tải xuống",
+    "qualityTitle": "Chất lượng tải xuống",
+    "about": "Khoảng {{size}}",
+    "autoShort": "Bản gốc hoặc 1080p"
   },
   "kind": {
     "movie": "Phim",

@@ -127,14 +127,23 @@
       "downloading": "Laster ned",
       "starting": "Starter…",
       "paused": "Satt på pause"
-    }
+    },
+    "filter": {
+      "active": "Laster ned ({{n}})",
+      "done": "Lastet ned ({{n}})"
+    },
+    "noneActive": "Ingenting lastes ned akkurat nå.",
+    "noneDone": "Ingen nedlastinger er ferdige ennå."
   },
   "settings": {
     "quality": {
       "auto": "Best for denne telefonen",
       "autoHint": "Originalfilen når denne telefonen kan spille den, ellers 1080p",
       "upTo": "Opptil {{size}} for en film på to timer",
-      "title": "Nedlastingskvalitet (musikk er alltid original)"
+      "title": "Nedlastingskvalitet (musikk er alltid original)",
+      "ask": "Spør hver gang",
+      "askHint": "Velg kvalitet hver gang du laster ned en video",
+      "holdHint": "Hold inne Last ned på en video for å velge kvalitet bare for den."
     },
     "serversHint": "Bytt eller legg til servere",
     "atHome": "Ser hjemme",
@@ -373,7 +382,11 @@
     "season": "Last ned sesongen",
     "more_one": "Last ned {{count}} til",
     "more_other": "Last ned {{count}} til",
-    "someFailed": "Kunne ikke starte alle nedlastingene"
+    "someFailed": "Kunne ikke starte alle nedlastingene",
+    "couldNotStart": "Kunne ikke starte nedlastingen",
+    "qualityTitle": "Nedlastingskvalitet",
+    "about": "Omtrent {{size}}",
+    "autoShort": "Original eller 1080p"
   },
   "kind": {
     "movie": "Film",

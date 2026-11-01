@@ -127,14 +127,23 @@
       "downloading": "Downloader",
       "starting": "Starter…",
       "paused": "Sat på pause"
-    }
+    },
+    "filter": {
+      "active": "Downloader ({{n}})",
+      "done": "Downloadet ({{n}})"
+    },
+    "noneActive": "Der downloades ikke noget lige nu.",
+    "noneDone": "Ingen downloads er færdige endnu."
   },
   "settings": {
     "quality": {
       "auto": "Bedst til denne telefon",
       "autoHint": "Den originale fil, når denne telefon kan afspille den, ellers 1080p",
       "upTo": "Op til {{size}} for en film på to timer",
-      "title": "Downloadkvalitet (musik er altid original)"
+      "title": "Downloadkvalitet (musik er altid original)",
+      "ask": "Spørg hver gang",
+      "askHint": "Vælg kvalitet, hver gang du downloader en video",
+      "holdHint": "Hold Download nede på en video for at vælge kvalitet kun til den."
     },
     "serversHint": "Skift eller tilføj servere",
     "atHome": "Ser hjemme",
@@ -373,7 +382,11 @@
     "season": "Download sæson",
     "more_one": "Download {{count}} mere",
     "more_other": "Download {{count}} mere",
-    "someFailed": "Kunne ikke starte alle downloads"
+    "someFailed": "Kunne ikke starte alle downloads",
+    "couldNotStart": "Kunne ikke starte overførslen",
+    "qualityTitle": "Downloadkvalitet",
+    "about": "Cirka {{size}}",
+    "autoShort": "Original eller 1080p"
   },
   "kind": {
     "movie": "Film",

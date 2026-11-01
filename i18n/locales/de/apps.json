@@ -127,14 +127,23 @@
       "downloading": "Wird heruntergeladen",
       "starting": "Startet…",
       "paused": "Pausiert"
-    }
+    },
+    "filter": {
+      "active": "Lädt ({{n}})",
+      "done": "Geladen ({{n}})"
+    },
+    "noneActive": "Gerade wird nichts geladen.",
+    "noneDone": "Noch ist kein Download fertig."
   },
   "settings": {
     "quality": {
       "auto": "Am besten für dieses Handy",
       "autoHint": "Die Originaldatei, wenn dieses Handy sie abspielen kann, sonst 1080p",
       "upTo": "Bis zu {{size}} für einen zweistündigen Film",
-      "title": "Download-Qualität (Musik immer im Original)"
+      "title": "Download-Qualität (Musik immer im Original)",
+      "ask": "Jedes Mal fragen",
+      "askHint": "Bei jedem Video-Download eine Qualität wählen",
+      "holdHint": "Halte Download bei einem Video gedrückt, um nur dafür eine Qualität zu wählen."
     },
     "serversHint": "Server wechseln oder hinzufügen",
     "atHome": "Zu Hause schauen",
@@ -373,7 +382,11 @@
     "season": "Staffel herunterladen",
     "more_one": "{{count}} weiteren herunterladen",
     "more_other": "{{count}} weitere herunterladen",
-    "someFailed": "Nicht alle Downloads konnten starten"
+    "someFailed": "Nicht alle Downloads konnten starten",
+    "couldNotStart": "Download konnte nicht gestartet werden",
+    "qualityTitle": "Download-Qualität",
+    "about": "Etwa {{size}}",
+    "autoShort": "Original oder 1080p"
   },
   "kind": {
     "movie": "Film",

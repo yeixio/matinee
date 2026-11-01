@@ -127,14 +127,23 @@
       "downloading": "Downloaden",
       "starting": "Starten…",
       "paused": "Gepauzeerd"
-    }
+    },
+    "filter": {
+      "active": "Bezig ({{n}})",
+      "done": "Gedownload ({{n}})"
+    },
+    "noneActive": "Er wordt nu niets gedownload.",
+    "noneDone": "Er is nog geen download klaar."
   },
   "settings": {
     "quality": {
       "auto": "Het beste voor deze telefoon",
       "autoHint": "Het originele bestand als deze telefoon het kan afspelen, anders 1080p",
       "upTo": "Tot {{size}} voor een film van twee uur",
-      "title": "Downloadkwaliteit (muziek is altijd het origineel)"
+      "title": "Downloadkwaliteit (muziek is altijd het origineel)",
+      "ask": "Elke keer vragen",
+      "askHint": "Kies een kwaliteit telkens als je een video downloadt",
+      "holdHint": "Houd Downloaden ingedrukt bij een video om alleen daarvoor een kwaliteit te kiezen."
     },
     "serversHint": "Servers wisselen of toevoegen",
     "atHome": "Thuis kijken",
@@ -373,7 +382,11 @@
     "season": "Seizoen downloaden",
     "more_one": "Nog {{count}} downloaden",
     "more_other": "Nog {{count}} downloaden",
-    "someFailed": "Niet alle downloads konden starten"
+    "someFailed": "Niet alle downloads konden starten",
+    "couldNotStart": "Kan de download niet starten",
+    "qualityTitle": "Downloadkwaliteit",
+    "about": "Ongeveer {{size}}",
+    "autoShort": "Origineel of 1080p"
   },
   "kind": {
     "movie": "Film",
