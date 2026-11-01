@@ -411,6 +411,7 @@
     "state": {
       "lookingAt": "Tutkitaan: {{file}}",
       "intros": "Etsitään alkutunnareita: {{season}}",
+      "thumbnails": "Luodaan esikatselukuvia: {{title}}",
       "working": "Työskennellään",
       "waiting": "Odotetaan toiston päättymistä",
       "slowDisk": "Tiedostot ovat hitaita lukea; levätään muutama minuutti",
@@ -440,6 +441,25 @@
       "label": "Etsi sarjojen alkutunnarit",
       "hint": "Kun kaikki tiedostot on analysoitu, Matinee kuuntelee kunkin kauden jaksojen alkua ja etsii niille yhteisen alkutunnarin, jotta soittimet voivat tarjota Ohita alkutunnari -toimintoa.",
       "progress": "{{done}}/{{total}} jaksoa tarkistettu, {{found}} sisältää alkutunnarin"
+    },
+    "thumbnails": {
+      "label": "Esikatselukuvat aikajanalla",
+      "hint": "Pieniä kuvia jokaisesta videosta, jotka näkyvät aikajanan yläpuolella kelatessa. Noin 4 Mt elokuvaa kohden.",
+      "progress": "{{done}}/{{total}} videota valmiina",
+      "mode": {
+        "all": {
+          "label": "Kaikki videot",
+          "hint": "Luodaan taustalla jokaiselle videolle analyysin jälkeen ja sen tahdissa."
+        },
+        "onPlay": {
+          "label": "Toistettaessa",
+          "hint": "Luodaan, kun joku toistaa videon ensimmäisen kerran. Säästää aikaa ja tilaa suurissa kirjastoissa."
+        },
+        "off": {
+          "label": "Pois",
+          "hint": "Kuvia ei luoda, ja aikajana näyttää vain ajan."
+        }
+      }
     }
   },
   "profileSettings": {

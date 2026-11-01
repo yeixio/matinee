@@ -411,6 +411,7 @@
     "state": {
       "lookingAt": "Looking at {{file}}",
       "intros": "Looking for intros in {{season}}",
+      "thumbnails": "Making seek bar previews for {{title}}",
       "working": "Working",
       "waiting": "Waiting for playback to finish",
       "slowDisk": "Files are slow to read; resting for a few minutes",
@@ -440,6 +441,25 @@
       "label": "Find TV intros",
       "hint": "Once every file is analyzed, Matinee listens to the start of each season’s episodes for the intro they share, so players can offer Skip intro.",
       "progress": "{{done}} of {{total}} episodes checked, {{found}} with an intro"
+    },
+    "thumbnails": {
+      "label": "Seek bar previews",
+      "hint": "Small pictures of each video that show above the seek bar while you scrub. They take about 4 MB per movie.",
+      "progress": "{{done}} of {{total}} videos ready",
+      "mode": {
+        "all": {
+          "label": "All videos",
+          "hint": "Made for every video in the background, after the analysis and at its speed."
+        },
+        "onPlay": {
+          "label": "When played",
+          "hint": "Made the first time someone plays a video. Saves time and space on big libraries."
+        },
+        "off": {
+          "label": "Off",
+          "hint": "None are made, and the seek bar shows only the time."
+        }
+      }
     }
   },
   "profileSettings": {

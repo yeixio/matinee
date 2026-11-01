@@ -10,6 +10,7 @@ import (
 	"github.com/yeixio/matinee/internal/intro"
 	"github.com/yeixio/matinee/internal/probe"
 	"github.com/yeixio/matinee/internal/store"
+	"github.com/yeixio/matinee/internal/thumbs"
 )
 
 // getAnalysis shows admins how far the background media analysis is.
@@ -35,13 +36,19 @@ func (s *Server) putAnalysis(w http.ResponseWriter, r *http.Request) {
 	var in struct {
 		Mode   analyze.Mode `json:"mode"`
 		Intros *bool        `json:"intros"` // look for TV episodes' intros
+		// When to make the seek bar's pictures: all, onPlay or off.
+		Thumbnails thumbs.Mode `json:"thumbnails"`
 	}
 	if err := readJSON(r, &in); err != nil {
 		writeError(w, http.StatusBadRequest, "bad request")
 		return
 	}
-	if (in.Mode != "" || in.Intros == nil) && in.Mode != analyze.Gentle && in.Mode != analyze.Normal && in.Mode != analyze.Off {
+	if (in.Mode != "" || (in.Intros == nil && in.Thumbnails == "")) && in.Mode != analyze.Gentle && in.Mode != analyze.Normal && in.Mode != analyze.Off {
 		writeError(w, http.StatusBadRequest, "mode must be gentle, normal or off")
+		return
+	}
+	if in.Thumbnails != "" && in.Thumbnails != thumbs.All && in.Thumbnails != thumbs.OnPlay && in.Thumbnails != thumbs.Off {
+		writeError(w, http.StatusBadRequest, "thumbnails must be all, onPlay or off")
 		return
 	}
 	if in.Mode != "" {
@@ -55,6 +62,13 @@ func (s *Server) putAnalysis(w http.ResponseWriter, r *http.Request) {
 			s.serverError(w, err)
 			return
 		}
+	}
+	if in.Thumbnails != "" && s.Thumbs != nil {
+		if err := s.Thumbs.SetMode(r.Context(), in.Thumbnails); err != nil {
+			s.serverError(w, err)
+			return
+		}
+		s.Analyzer.Wake()
 	}
 	s.getAnalysis(w, r)
 }

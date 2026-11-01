@@ -411,6 +411,7 @@
     "state": {
       "lookingAt": "İnceleniyor: {{file}}",
       "intros": "{{season}} içinde girişler aranıyor",
+      "thumbnails": "{{title}} için önizlemeler hazırlanıyor",
       "working": "Çalışıyor",
       "waiting": "Oynatmanın bitmesi bekleniyor",
       "slowDisk": "Dosyalar yavaş okunuyor; birkaç dakika dinleniyor",
@@ -440,6 +441,25 @@
       "label": "Dizi girişlerini bul",
       "hint": "Tüm dosyalar analiz edildikten sonra Matinee, her sezonun bölümlerinin başını dinleyerek ortak girişi bulur; böylece oynatıcılar Girişi atla seçeneği sunabilir.",
       "progress": "{{total}} bölümden {{done}} tanesi kontrol edildi, {{found}} tanesinde giriş var"
+    },
+    "thumbnails": {
+      "label": "İlerleme çubuğunda önizlemeler",
+      "hint": "Sararken ilerleme çubuğunun üstünde görünen, her videodan küçük resimler. Film başına yaklaşık 4 MB yer kaplar.",
+      "progress": "{{total}} videodan {{done}} tanesi hazır",
+      "mode": {
+        "all": {
+          "label": "Tüm videolar",
+          "hint": "Analizden sonra, onun hızında, her video için arka planda hazırlanır."
+        },
+        "onPlay": {
+          "label": "Oynatılınca",
+          "hint": "Biri videoyu ilk kez oynattığında hazırlanır. Büyük kitaplıklarda zaman ve yer kazandırır."
+        },
+        "off": {
+          "label": "Kapalı",
+          "hint": "Hiçbiri hazırlanmaz ve çubuk yalnızca zamanı gösterir."
+        }
+      }
     }
   },
   "profileSettings": {

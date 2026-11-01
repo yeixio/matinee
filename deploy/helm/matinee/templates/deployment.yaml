@@ -159,6 +159,10 @@ spec:
             - name: plugins
               mountPath: /cache/plugins
             {{- end }}
+            {{- if .Values.thumbnails.persistence.enabled }}
+            - name: thumbnails
+              mountPath: /cache/thumbnails
+            {{- end }}
             - name: tmp
               mountPath: /tmp
             {{- if .Values.remoteAccess.enabled }}
@@ -191,6 +195,11 @@ spec:
         - name: plugins
           persistentVolumeClaim:
             claimName: {{ .Values.plugins.persistence.existingClaim | default (printf "%s-plugins" (include "matinee.fullname" .)) }}
+        {{- end }}
+        {{- if .Values.thumbnails.persistence.enabled }}
+        - name: thumbnails
+          persistentVolumeClaim:
+            claimName: {{ .Values.thumbnails.persistence.existingClaim | default (printf "%s-thumbnails" (include "matinee.fullname" .)) }}
         {{- end }}
         {{- if .Values.remoteAccess.enabled }}
         - name: remote

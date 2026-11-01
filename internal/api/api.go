@@ -33,6 +33,7 @@ import (
 	"github.com/yeixio/matinee/internal/store"
 	"github.com/yeixio/matinee/internal/stream"
 	"github.com/yeixio/matinee/internal/subtitle"
+	"github.com/yeixio/matinee/internal/thumbs"
 	"github.com/yeixio/matinee/internal/together"
 	"github.com/yeixio/matinee/internal/version"
 )
@@ -47,7 +48,9 @@ type Server struct {
 	HW           *hwaccel.Manager // hardware transcoding; nil means the CPU only
 	Downloads    *download.Manager
 	Analyzer     *analyze.Analyzer // nil when media analysis is off for this server
-	Art          *artwork.Cache
+	// Thumbs makes and keeps the seek bar's pictures; nil offers none.
+	Thumbs *thumbs.Generator
+	Art    *artwork.Cache
 	// Covers finds covers for admins to pick from; nil offers none online.
 	Covers    CoverFinder
 	Subtitles *subtitle.Converter
@@ -246,6 +249,8 @@ func (s *Server) routes() []route {
 		{"GET /items/{id}/children", reader, s.itemChildren},
 		{"GET /items/{id}/tracks", reader, s.itemTracks},
 		{"GET /items/{id}/levels", reader, s.itemLevels},
+		{"GET /items/{id}/thumbnails", reader, s.itemThumbnails},
+		{"GET /items/{id}/thumbnails/{sheet}", reader, s.thumbnailSheet},
 		{"GET /items/{id}/book", reader, s.getBook},
 		{"GET /podcasts/directory", reader, grownUps(s.podcastDirectory)},
 		{"GET /podcasts/following", reader, s.followedPodcasts},

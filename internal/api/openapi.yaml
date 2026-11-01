@@ -1161,10 +1161,11 @@ paths:
           application/json:
             schema:
               type: object
-              description: Send mode, intros or both.
+              description: Send any of mode, intros and thumbnails.
               properties:
                 mode: { $ref: "#/components/schemas/AnalysisMode" }
                 intros: { type: boolean, description: Look for TV episodes' intros. On by default. }
+                thumbnails: { $ref: "#/components/schemas/ThumbnailMode" }
       responses:
         "200":
           description: Progress, with the new mode.
@@ -1177,7 +1178,7 @@ paths:
       summary: Analyze one file again soon (admins only)
       parameters: [{ $ref: "#/components/parameters/ID" }]
       responses:
-        "202": { description: Queued. It's analyzed next unless the analysis is off. }
+        "202": { description: Queued. It's analyzed next unless the analysis is off, and its intro and seek bar pictures are made again. }
         "400": { $ref: "#/components/responses/Error" }
         "404": { $ref: "#/components/responses/Error" }
 
@@ -1351,6 +1352,58 @@ paths:
                   levels: { type: string, format: byte }
         "400": { description: Not a song. }
         "422": { description: The song's sound couldn't be read. }
+  /items/{id}/thumbnails:
+    get:
+      summary: A video's seek bar pictures
+      description: |
+        Players ask for this when a video starts, and show the pictures
+        above the seek bar while someone scrubs. There are count pictures,
+        one every intervalMs from the start (picture i shows the moment
+        i × intervalMs), each width by height pixels. They come in sheets,
+        JPEGs of columns by rows pictures laid out left to right and then
+        down: picture i is on sheet i ÷ (columns × rows), at place
+        i mod (columns × rows) on it. Every sheet is the full size; the
+        last one is black after its last picture.
+
+        state is ready when there are pictures. When there aren't, asking
+        has them made now: state is making, and a player asks again in a
+        minute or so. none means there are none yet (the server is busy
+        with others, or the file can't be read), and off that the admin
+        turned them off; both have no other fields.
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      responses:
+        "200":
+          description: The pictures' layout.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [state]
+                properties:
+                  state: { type: string, enum: [ready, making, none, "off"] }
+                  intervalMs: { type: integer, example: 10000 }
+                  width: { type: integer, example: 240 }
+                  height: { type: integer, example: 134 }
+                  columns: { type: integer, example: 10 }
+                  rows: { type: integer, example: 10 }
+                  count: { type: integer, example: 712 }
+                  sheets: { type: integer, example: 8 }
+                  tag: { type: string, description: Changes when the pictures are made again. Send it as ?v= with each sheet so a cached old one isn't used. }
+        "400": { description: Not a movie or episode. }
+  /items/{id}/thumbnails/{sheet}:
+    get:
+      summary: One sheet of a video's seek bar pictures
+      description: A JPEG, see GET /items/{id}/thumbnails. Sheets are numbered from 0.
+      parameters:
+        - { $ref: "#/components/parameters/ID" }
+        - { name: sheet, in: path, required: true, schema: { type: integer } }
+        - { name: v, in: query, schema: { type: string }, description: The pictures' tag. }
+      responses:
+        "200":
+          description: The sheet.
+          content:
+            image/jpeg: {}
+        "404": { $ref: "#/components/responses/Error" }
   /items/{id}/book:
     get:
       summary: An audiobook with its parts and chapters
@@ -4341,11 +4394,11 @@ components:
       type: object
       properties:
         mode: { $ref: "#/components/schemas/AnalysisMode" }
-        state: { type: string, enum: [analyzing, intros, waiting, slowDisk, idle, off], description: "intros: looking for the intros of the season in current. waiting: for playback to end. slowDisk: files kept timing out, so it's resting." }
+        state: { type: string, enum: [analyzing, intros, thumbnails, waiting, slowDisk, idle, off], description: "intros: looking for the intros of the season in current. thumbnails: making the seek bar pictures of the video in current. waiting: for playback to end. slowDisk: files kept timing out, so it's resting." }
         total: { type: integer, description: Files in all libraries. }
         done: { type: integer, description: Files analyzed as they are now. }
         unreadable: { type: integer, description: Files among those done that couldn't be read. }
-        current: { type: string, description: Title of the file being analyzed, or the show and season whose intros are being looked for. }
+        current: { type: string, description: Title of the file being analyzed, the show and season whose intros are being looked for, or the video whose seek bar pictures are being made. }
         intros:
           type: object
           description: Looking for TV episodes' intros. Left out when this server doesn't.
@@ -4354,6 +4407,21 @@ components:
             total: { type: integer, description: TV episodes with video. }
             done: { type: integer, description: Episodes looked at as they are now. }
             found: { type: integer, description: Episodes among those done with an intro found. }
+        thumbnails:
+          type: object
+          description: Making the seek bar's pictures of each video. Left out when this server doesn't.
+          properties:
+            mode: { $ref: "#/components/schemas/ThumbnailMode" }
+            total: { type: integer, description: Movies and episodes with video. }
+            done: { type: integer, description: Videos with pictures made as they are now, or that couldn't be read. }
+    ThumbnailMode:
+      type: string
+      enum: [all, onPlay, "off"]
+      description: |
+        When the seek bar's pictures are made. all (the default): for every
+        video, in the background after the media analysis, at its pace.
+        onPlay: the first time someone plays a video. off: never, and
+        players show none.
     Details:
       type: object
       description: |

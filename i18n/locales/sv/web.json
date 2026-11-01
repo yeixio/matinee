@@ -411,6 +411,7 @@
     "state": {
       "lookingAt": "Tittar på {{file}}",
       "intros": "Letar efter intron i {{season}}",
+      "thumbnails": "Skapar förhandsbilder för {{title}}",
       "working": "Arbetar",
       "waiting": "Väntar på att uppspelningen ska bli klar",
       "slowDisk": "Filerna är långsamma att läsa; vilar några minuter",
@@ -440,6 +441,25 @@
       "label": "Hitta intron i serier",
       "hint": "När alla filer är analyserade lyssnar Matinee på början av varje säsongs avsnitt efter introt de delar, så att spelarna kan erbjuda Hoppa över intro.",
       "progress": "{{done}} av {{total}} avsnitt kontrollerade, {{found}} med intro"
+    },
+    "thumbnails": {
+      "label": "Förhandsbilder i tidslinjen",
+      "hint": "Små bilder ur varje video som visas ovanför tidslinjen när du spolar. De tar ungefär 4 MB per film.",
+      "progress": "{{done}} av {{total}} videor klara",
+      "mode": {
+        "all": {
+          "label": "Alla videor",
+          "hint": "Skapas i bakgrunden för varje video, efter analysen och i samma takt."
+        },
+        "onPlay": {
+          "label": "Vid uppspelning",
+          "hint": "Skapas första gången någon spelar en video. Sparar tid och utrymme i stora bibliotek."
+        },
+        "off": {
+          "label": "Av",
+          "hint": "Inga skapas, och tidslinjen visar bara tiden."
+        }
+      }
     }
   },
   "profileSettings": {

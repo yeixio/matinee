@@ -5,6 +5,7 @@
 import { type ItemFilter, toSearchParams } from './filter'
 import i18n from './i18n'
 import type { LevelsJSON } from './player/levels'
+import type { Thumbnails } from './player/thumbnails'
 import { heardRestarting, RESTARTING_HEADER } from './player/reconnect'
 
 // guest is the shared account of a device at home that hasn't signed in, or
@@ -767,14 +768,18 @@ export type OpmlImport = { added: number; problems: { title: string; feedUrl: st
 export type AnalysisMode = 'gentle' | 'normal' | 'off'
 export type AnalysisStatus = {
   mode: AnalysisMode
-  state: 'analyzing' | 'intros' | 'waiting' | 'slowDisk' | 'idle' | 'off'
+  state: 'analyzing' | 'intros' | 'thumbnails' | 'waiting' | 'slowDisk' | 'idle' | 'off'
   total: number
   done: number
   unreadable: number
-  current?: string // the file, or while looking for intros the show and season
+  current?: string // the file; while looking for intros the show and season; while making thumbnails the video
   // Looking for TV episodes' intros; left out by servers that don't.
   intros?: { on: boolean; total: number; done: number; found: number }
+  // Making the seek bar's pictures; left out by servers that don't.
+  thumbnails?: { mode: ThumbnailMode; total: number; done: number }
 }
+
+export type ThumbnailMode = 'all' | 'onPlay' | 'off'
 
 // CoverOption is a cover found online that an admin can pick for an album or book.
 export interface CoverOption {
@@ -902,6 +907,7 @@ export const api = {
   analysis: () => request<AnalysisStatus>('GET', '/api/v1/analysis'),
   setAnalysisMode: (mode: AnalysisMode) => request<AnalysisStatus>('PUT', '/api/v1/analysis', { mode }),
   setIntroDetection: (intros: boolean) => request<AnalysisStatus>('PUT', '/api/v1/analysis', { intros }),
+  setThumbnailMode: (thumbnails: ThumbnailMode) => request<AnalysisStatus>('PUT', '/api/v1/analysis', { thumbnails }),
   reanalyze: (id: number) => request<void>('POST', `/api/v1/items/${id}/analyze`),
   settings: () => request<Settings>('GET', '/api/v1/settings'),
   // tmdbKey replaces the server's TMDB key; "" goes back to the one it started with.
@@ -1005,6 +1011,8 @@ export const api = {
   tracks: (id: number) => request<Item[]>('GET', `/api/v1/items/${id}/tracks`),
   // A song's sound levels, for the visualizer (player/levels.ts).
   levels: (id: number) => request<LevelsJSON>('GET', `/api/v1/items/${id}/levels`),
+  // A video's seek bar pictures (player/thumbnails.ts); asking has them made.
+  thumbnails: (id: number) => request<Thumbnails>('GET', `/api/v1/items/${id}/thumbnails`),
   book: (id: number) => request<Book>('GET', `/api/v1/items/${id}/book`),
   series: (library: number) => request<BookGroup[]>('GET', `/api/v1/libraries/${library}/series`),
   narrators: (library: number) => request<BookGroup[]>('GET', `/api/v1/libraries/${library}/narrators`),

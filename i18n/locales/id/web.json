@@ -408,6 +408,7 @@
     "state": {
       "lookingAt": "Memeriksa {{file}}",
       "intros": "Mencari intro di {{season}}",
+      "thumbnails": "Membuat pratinjau bilah untuk {{title}}",
       "working": "Bekerja",
       "waiting": "Menunggu pemutaran selesai",
       "slowDisk": "File lambat dibaca; istirahat beberapa menit",
@@ -436,6 +437,25 @@
       "label": "Temukan intro serial",
       "hint": "Setelah semua file dianalisis, Matinee mendengarkan awal episode tiap musim untuk menemukan intro yang sama, sehingga pemutar dapat menawarkan Lewati intro.",
       "progress": "{{done}} dari {{total}} episode diperiksa, {{found}} dengan intro"
+    },
+    "thumbnails": {
+      "label": "Pratinjau di bilah putar",
+      "hint": "Gambar kecil dari setiap video yang muncul di atas bilah saat Anda menggeser. Sekitar 4 MB per film.",
+      "progress": "{{done}} dari {{total}} video siap",
+      "mode": {
+        "all": {
+          "label": "Semua video",
+          "hint": "Dibuat di latar belakang untuk setiap video, setelah analisis dan dengan kecepatannya."
+        },
+        "onPlay": {
+          "label": "Saat diputar",
+          "hint": "Dibuat saat seseorang pertama kali memutar video. Menghemat waktu dan ruang untuk pustaka besar."
+        },
+        "off": {
+          "label": "Mati",
+          "hint": "Tidak ada yang dibuat, dan bilah hanya menampilkan waktu."
+        }
+      }
     }
   },
   "profileSettings": {

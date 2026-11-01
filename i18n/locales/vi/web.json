@@ -408,6 +408,7 @@
     "state": {
       "lookingAt": "Đang xem {{file}}",
       "intros": "Đang tìm đoạn mở đầu trong {{season}}",
+      "thumbnails": "Đang tạo ảnh xem trước cho {{title}}",
       "working": "Đang làm việc",
       "waiting": "Đang chờ phát xong",
       "slowDisk": "Tệp đọc chậm; nghỉ vài phút",
@@ -436,6 +437,25 @@
       "label": "Tìm đoạn mở đầu phim bộ",
       "hint": "Khi mọi tệp đã được phân tích, Matinee nghe phần đầu các tập của từng mùa để tìm đoạn mở đầu chung, nhờ đó trình phát có thể hiện Bỏ qua đoạn mở đầu.",
       "progress": "Đã kiểm tra {{done}}/{{total}} tập, {{found}} tập có đoạn mở đầu"
+    },
+    "thumbnails": {
+      "label": "Ảnh xem trước trên thanh tua",
+      "hint": "Ảnh nhỏ từ mỗi video, hiện phía trên thanh khi bạn tua. Mỗi phim chiếm khoảng 4 MB.",
+      "progress": "Đã xong {{done}}/{{total}} video",
+      "mode": {
+        "all": {
+          "label": "Tất cả video",
+          "hint": "Được tạo nền cho mọi video, sau khi phân tích và theo tốc độ của nó."
+        },
+        "onPlay": {
+          "label": "Khi phát",
+          "hint": "Được tạo lần đầu có người phát video. Tiết kiệm thời gian và dung lượng với thư viện lớn."
+        },
+        "off": {
+          "label": "Tắt",
+          "hint": "Không tạo ảnh nào, thanh chỉ hiện thời gian."
+        }
+      }
     }
   },
   "profileSettings": {

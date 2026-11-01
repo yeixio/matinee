@@ -21,6 +21,7 @@ import (
 	"github.com/yeixio/matinee/internal/intro"
 	"github.com/yeixio/matinee/internal/probe"
 	"github.com/yeixio/matinee/internal/store"
+	"github.com/yeixio/matinee/internal/thumbs"
 )
 
 // Mode is how hard the analysis works, an admin setting.
@@ -44,10 +45,11 @@ const (
 // State says what the analysis is doing right now.
 const (
 	StateAnalyzing = "analyzing"
-	StateWaiting   = "waiting"  // for playback to finish
-	StateSlowDisk  = "slowDisk" // files kept timing out; resting before trying again
-	StateIntros    = "intros"   // looking for the intros of a season's episodes
-	StateIdle      = "idle"     // everything is analyzed
+	StateWaiting   = "waiting"    // for playback to finish
+	StateSlowDisk  = "slowDisk"   // files kept timing out; resting before trying again
+	StateIntros    = "intros"     // looking for the intros of a season's episodes
+	StateThumbs    = "thumbnails" // making a video's seek bar pictures
+	StateIdle      = "idle"       // everything is analyzed
 	StateOff       = "off"
 )
 
@@ -72,6 +74,9 @@ type Analyzer struct {
 	// Intros, when set, looks for TV episodes' intros once every file is
 	// analyzed, at the same pace and priority.
 	Intros *intro.Detector
+	// Thumbs, when set, makes the seek bar's pictures of every video after
+	// that, when the admin has them made for all videos (see thumbs.Mode).
+	Thumbs *thumbs.Generator
 
 	mu         sync.Mutex
 	mode       Mode
@@ -98,6 +103,17 @@ type Status struct {
 	// Intros is how far looking for TV episodes' intros is; absent when
 	// this server doesn't.
 	Intros *IntroStatus `json:"intros,omitempty"`
+	// Thumbnails is how far making the seek bar's pictures is; absent when
+	// this server doesn't.
+	Thumbnails *ThumbStatus `json:"thumbnails,omitempty"`
+}
+
+// ThumbStatus counts videos: all of them, and the ones with seek bar
+// pictures (or that couldn't be read for them).
+type ThumbStatus struct {
+	Mode  thumbs.Mode `json:"mode"`
+	Total int         `json:"total"`
+	Done  int         `json:"done"`
 }
 
 // IntroStatus counts video episodes: all of them, the ones looked at for an
@@ -208,9 +224,20 @@ func (a *Analyzer) Status(ctx context.Context) (Status, error) {
 			return Status{}, err
 		}
 	}
+	var ts *ThumbStatus
+	if a.Thumbs != nil {
+		m, err := a.Thumbs.Mode(ctx)
+		if err != nil {
+			return Status{}, err
+		}
+		ts = &ThumbStatus{Mode: m}
+		if ts.Total, ts.Done, err = a.Store.ThumbnailCounts(ctx, thumbs.Version); err != nil {
+			return Status{}, err
+		}
+	}
 	a.mu.Lock()
 	defer a.mu.Unlock()
-	st := Status{Mode: mode, State: a.state, Total: total, Done: done, Unreadable: unreadable, Current: a.current, Intros: is}
+	st := Status{Mode: mode, State: a.state, Total: total, Done: done, Unreadable: unreadable, Current: a.current, Intros: is, Thumbnails: ts}
 	if st.State == "" {
 		st.State = StateIdle
 	}
@@ -220,13 +247,16 @@ func (a *Analyzer) Status(ctx context.Context) (Status, error) {
 	return st, nil
 }
 
-// Reanalyze has one file looked at again soon, whatever its state, and
-// its intro looked for again.
+// Reanalyze has one file looked at again soon, whatever its state, its
+// intro looked for again and its seek bar pictures made again.
 func (a *Analyzer) Reanalyze(ctx context.Context, id int64) error {
 	if err := a.Store.ClearMediaKey(ctx, id); err != nil {
 		return err
 	}
 	if err := a.Store.ClearIntro(ctx, id); err != nil {
+		return err
+	}
+	if err := a.Store.ClearThumbnails(ctx, id); err != nil {
 		return err
 	}
 	a.mu.Lock()
@@ -266,7 +296,7 @@ func (a *Analyzer) Run(ctx context.Context) {
 			a.Log.Warn("media analysis", "err", err)
 			a.sleep(ctx, time.Minute)
 		case n == 0:
-			if a.findIntros(ctx) > 0 {
+			if a.findIntros(ctx) > 0 || a.makeThumbs(ctx) > 0 {
 				continue // files may have changed meanwhile
 			}
 			a.setState(StateIdle, "")
@@ -392,6 +422,53 @@ func (a *Analyzer) findIntros(ctx context.Context) int {
 	}
 	if n > 0 {
 		a.Log.Info("intro detection pass done", "episodes", n)
+	}
+	return n
+}
+
+// makeThumbs has the thumbnail generator make the seek bar's pictures of
+// every video that needs them, one at a time, pausing like the analysis
+// does. It returns how many videos it made pictures of.
+func (a *Analyzer) makeThumbs(ctx context.Context) int {
+	if a.Thumbs == nil {
+		return 0
+	}
+	if m, _ := a.Thumbs.Mode(ctx); m != thumbs.All {
+		return 0
+	}
+	first := true
+	n, err := a.Thumbs.Pass(ctx, func(f store.ThumbnailFile) bool {
+		mode, _ := a.Mode(ctx)
+		if m, _ := a.Thumbs.Mode(ctx); m != thumbs.All || mode == Off {
+			return false
+		}
+		// Making every video's pictures takes days on a big library; new
+		// files are analyzed first, and the pass picks up after.
+		if len(a.wake) > 0 {
+			return false
+		}
+		if !first && mode == Gentle {
+			a.sleep(ctx, gentlePause)
+		}
+		first = false
+		for mode == Gentle && a.Busy != nil && a.Busy() {
+			a.setState(StateWaiting, "")
+			a.sleep(ctx, busyCheck)
+			if ctx.Err() != nil {
+				return false
+			}
+			if mode, _ = a.Mode(ctx); mode == Off {
+				return false
+			}
+		}
+		a.setState(StateThumbs, f.Title)
+		return ctx.Err() == nil
+	})
+	if err != nil && ctx.Err() == nil {
+		a.Log.Warn("thumbnails", "err", err)
+	}
+	if n > 0 {
+		a.Log.Info("thumbnails pass done", "videos", n)
 	}
 	return n
 }

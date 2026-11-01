@@ -127,6 +127,7 @@
   "tmdbid_is_required": "cần có tmdbId",
   "todays_subtitle_downloads_are_used_up_try_again_tomorrow": "lượt tải phụ đề hôm nay đã hết. Hãy thử lại vào ngày mai.",
   "no_such_row": "không có hàng này",
+  "no_such_sheet": "không có trang ảnh này",
   "tmdb_didnt_accept_that_key": "TMDB không chấp nhận khóa đó",
   "tmdb_couldnt_be_reached_to_check_the_key": "Không thể kết nối TMDB để kiểm tra khóa",
   "this_server_cant_change_its_tmdb_key": "máy chủ này không thể đổi khóa TMDB của nó",
@@ -201,6 +202,7 @@
   "this_invite_link_doesnt_work_ask_for_another": "liên kết mời này không dùng được; hãy xin liên kết khác",
   "this_invite_was_already_used": "lời mời này đã được dùng",
   "this_watch_together_session_is_full": "phiên xem cùng nhau này đã đầy",
+  "thumbnails_must_be_all_onplay_or_off": "ảnh xem trước phải là all, onPlay hoặc off",
   "too_many_watch_together_sessions_right_now": "hiện có quá nhiều phiên xem cùng nhau",
   "unknown_action": "hành động không xác định",
   "usernames_are_at_most_40_characters": "tên người dùng tối đa 40 ký tự"

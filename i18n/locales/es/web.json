@@ -414,6 +414,7 @@
     "state": {
       "lookingAt": "Examinando {{file}}",
       "intros": "Buscando intros en {{season}}",
+      "thumbnails": "Creando vistas previas de la barra para {{title}}",
       "working": "Trabajando",
       "waiting": "Esperando a que termine la reproducción",
       "slowDisk": "Los archivos tardan en leerse; descansando unos minutos",
@@ -444,6 +445,25 @@
       "label": "Encontrar intros de series",
       "hint": "Cuando todos los archivos estén analizados, Matinee escucha el comienzo de los episodios de cada temporada para encontrar la intro que comparten, y así los reproductores pueden ofrecer Saltar intro.",
       "progress": "{{done}} de {{total}} episodios revisados, {{found}} con intro"
+    },
+    "thumbnails": {
+      "label": "Vistas previas en la barra de reproducción",
+      "hint": "Pequeñas imágenes de cada vídeo que aparecen sobre la barra mientras te desplazas. Ocupan unos 4 MB por película.",
+      "progress": "{{done}} de {{total}} vídeos listos",
+      "mode": {
+        "all": {
+          "label": "Todos los vídeos",
+          "hint": "Se crean para cada vídeo en segundo plano, después del análisis y a su ritmo."
+        },
+        "onPlay": {
+          "label": "Al reproducir",
+          "hint": "Se crean la primera vez que alguien reproduce un vídeo. Ahorra tiempo y espacio en bibliotecas grandes."
+        },
+        "off": {
+          "label": "Desactivadas",
+          "hint": "No se crea ninguna y la barra solo muestra el tiempo."
+        }
+      }
     }
   },
   "profileSettings": {

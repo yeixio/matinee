@@ -127,6 +127,7 @@
   "tmdbid_is_required": "tmdbId è obbligatorio",
   "todays_subtitle_downloads_are_used_up_try_again_tomorrow": "i download di sottotitoli di oggi sono esauriti. Riprova domani.",
   "no_such_row": "riga inesistente",
+  "no_such_sheet": "nessun foglio del genere",
   "tmdb_didnt_accept_that_key": "TMDB non ha accettato questa chiave",
   "tmdb_couldnt_be_reached_to_check_the_key": "Impossibile raggiungere TMDB per verificare la chiave",
   "this_server_cant_change_its_tmdb_key": "questo server non può cambiare la sua chiave TMDB",
@@ -201,6 +202,7 @@
   "this_invite_link_doesnt_work_ask_for_another": "questo link di invito non funziona; chiedine un altro",
   "this_invite_was_already_used": "questo invito è già stato usato",
   "this_watch_together_session_is_full": "questa sessione di Guarda insieme è piena",
+  "thumbnails_must_be_all_onplay_or_off": "le miniature devono essere all, onPlay o off",
   "too_many_watch_together_sessions_right_now": "troppe sessioni di Guarda insieme in questo momento",
   "unknown_action": "azione sconosciuta",
   "usernames_are_at_most_40_characters": "i nomi utente hanno al massimo 40 caratteri"

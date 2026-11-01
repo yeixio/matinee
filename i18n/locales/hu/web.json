@@ -411,6 +411,7 @@
     "state": {
       "lookingAt": "Vizsgálja: {{file}}",
       "intros": "Bevezetők keresése: {{season}}",
+      "thumbnails": "Előnézetek készítése: {{title}}",
       "working": "Dolgozik",
       "waiting": "Vár, amíg a lejátszás véget ér",
       "slowDisk": "A fájlok lassan olvashatók; néhány perc pihenő",
@@ -440,6 +441,25 @@
       "label": "Sorozatbevezetők keresése",
       "hint": "Ha minden fájl elemzése kész, a Matinee meghallgatja az évadok epizódjainak elejét, és megkeresi a közös bevezetőt, hogy a lejátszók felajánlhassák a Bevezető átugrása lehetőséget.",
       "progress": "{{done}}/{{total}} epizód ellenőrizve, {{found}} bevezetővel"
+    },
+    "thumbnails": {
+      "label": "Előnézetek az idősávon",
+      "hint": "Kis képek minden videóból, amelyek tekeréskor az idősáv fölött jelennek meg. Filmenként kb. 4 MB-ot foglalnak.",
+      "progress": "{{done}}/{{total}} videó kész",
+      "mode": {
+        "all": {
+          "label": "Minden videó",
+          "hint": "A háttérben készülnek minden videóhoz, az elemzés után és annak tempójában."
+        },
+        "onPlay": {
+          "label": "Lejátszáskor",
+          "hint": "Akkor készülnek, amikor valaki először lejátssza a videót. Nagy könyvtáraknál időt és helyet takarít meg."
+        },
+        "off": {
+          "label": "Ki",
+          "hint": "Nem készülnek, és az idősáv csak az időt mutatja."
+        }
+      }
     }
   },
   "profileSettings": {

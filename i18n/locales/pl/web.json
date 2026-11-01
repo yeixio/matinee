@@ -417,6 +417,7 @@
     "state": {
       "lookingAt": "Sprawdzanie {{file}}",
       "intros": "Szukanie czołówek w: {{season}}",
+      "thumbnails": "Tworzenie podglądów paska dla {{title}}",
       "working": "Pracuje",
       "waiting": "Czeka na koniec odtwarzania",
       "slowDisk": "Pliki czytają się wolno; przerwa na kilka minut",
@@ -448,6 +449,25 @@
       "label": "Wyszukuj czołówki seriali",
       "hint": "Gdy wszystkie pliki zostaną przeanalizowane, Matinee słucha początku odcinków każdego sezonu, by znaleźć wspólną czołówkę, dzięki czemu odtwarzacze mogą zaproponować Pomiń czołówkę.",
       "progress": "Sprawdzono {{done}} z {{total}} odcinków, {{found}} z czołówką"
+    },
+    "thumbnails": {
+      "label": "Podglądy na pasku odtwarzania",
+      "hint": "Małe obrazy z każdego filmu, widoczne nad paskiem podczas przewijania. Zajmują około 4 MB na film.",
+      "progress": "Gotowe: {{done}} z {{total}} filmów",
+      "mode": {
+        "all": {
+          "label": "Wszystkie filmy",
+          "hint": "Tworzone w tle dla każdego filmu, po analizie i w jej tempie."
+        },
+        "onPlay": {
+          "label": "Przy odtwarzaniu",
+          "hint": "Tworzone, gdy ktoś pierwszy raz odtwarza film. Oszczędza czas i miejsce w dużych bibliotekach."
+        },
+        "off": {
+          "label": "Wyłączone",
+          "hint": "Żadne nie są tworzone, a pasek pokazuje tylko czas."
+        }
+      }
     }
   },
   "profileSettings": {

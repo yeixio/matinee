@@ -96,6 +96,18 @@ downloads:
     # Or use a claim you made yourself.
     existingClaim: ""
 
+# The seek bar's preview pictures of each video (docs/guide/watching/playing.md).
+# Making them reads every video, so they go on a volume that survives
+# restarts; about 4 MB per movie. Set enabled: false to keep them in the
+# cache above (they're made again after a restart).
+thumbnails:
+  persistence:
+    enabled: true
+    size: 20Gi
+    storageClass: ""
+    # Or use a claim you made yourself.
+    existingClaim: ""
+
 database:
   # Use an existing PostgreSQL instead of the bundled one (set postgresql.enabled=false):
   # either a full URL here...

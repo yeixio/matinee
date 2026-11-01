@@ -411,6 +411,7 @@
     "state": {
       "lookingAt": "Bekijkt {{file}}",
       "intros": "Intro’s zoeken in {{season}}",
+      "thumbnails": "Voorbeelden voor de tijdbalk maken voor {{title}}",
       "working": "Bezig",
       "waiting": "Wacht tot het afspelen klaar is",
       "slowDisk": "Bestanden lezen traag; een paar minuten pauze",
@@ -440,6 +441,25 @@
       "label": "Intro’s van series vinden",
       "hint": "Zodra alle bestanden zijn geanalyseerd, luistert Matinee naar het begin van de afleveringen van elk seizoen om de intro te vinden die ze delen, zodat spelers Intro overslaan kunnen aanbieden.",
       "progress": "{{done}} van {{total}} afleveringen gecontroleerd, {{found}} met een intro"
+    },
+    "thumbnails": {
+      "label": "Voorbeelden in de tijdbalk",
+      "hint": "Kleine beelden van elke video die boven de tijdbalk verschijnen terwijl je spoelt. Ongeveer 4 MB per film.",
+      "progress": "{{done}} van {{total}} video's klaar",
+      "mode": {
+        "all": {
+          "label": "Alle video's",
+          "hint": "Worden op de achtergrond voor elke video gemaakt, na de analyse en in hetzelfde tempo."
+        },
+        "onPlay": {
+          "label": "Bij afspelen",
+          "hint": "Worden gemaakt als iemand een video voor het eerst afspeelt. Scheelt tijd en ruimte bij grote bibliotheken."
+        },
+        "off": {
+          "label": "Uit",
+          "hint": "Er worden er geen gemaakt en de tijdbalk toont alleen de tijd."
+        }
+      }
     }
   },
   "profileSettings": {

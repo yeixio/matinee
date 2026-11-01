@@ -408,6 +408,7 @@
     "state": {
       "lookingAt": "正在查看 {{file}}",
       "intros": "正在尋找 {{season}} 的片頭",
+      "thumbnails": "正在為 {{title}} 製作預覽圖",
       "working": "工作中",
       "waiting": "正在等待播放結束",
       "slowDisk": "檔案讀取較慢，休息幾分鐘",
@@ -436,6 +437,25 @@
       "label": "尋找影集片頭",
       "hint": "所有檔案分析完成後，Matinee 會比對每季各集開頭的音訊，找出共同的片頭，讓播放器可以提供「略過片頭」。",
       "progress": "已檢查 {{total}} 集中的 {{done}} 集，{{found}} 集有片頭"
+    },
+    "thumbnails": {
+      "label": "進度列預覽圖",
+      "hint": "拖曳進度列時顯示在上方的各影片小圖。每部電影約佔 4 MB。",
+      "progress": "已完成 {{done}}/{{total}} 部影片",
+      "mode": {
+        "all": {
+          "label": "所有影片",
+          "hint": "在分析之後，以相同速度在背景為每部影片製作。"
+        },
+        "onPlay": {
+          "label": "播放時",
+          "hint": "有人第一次播放影片時製作。適合大型媒體庫，節省時間和空間。"
+        },
+        "off": {
+          "label": "關閉",
+          "hint": "不製作預覽圖，進度列只顯示時間。"
+        }
+      }
     }
   },
   "profileSettings": {
