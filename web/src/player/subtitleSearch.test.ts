@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { foundLanguage, searchLanguageChoices, startLanguage } from './findSubtitles'
+import { foundLanguage, searchLanguageChoices, startLanguage } from './subtitleSearch'
 
 describe('subtitle search languages', () => {
   it('starts in the last subtitle language, else the page language', () => {

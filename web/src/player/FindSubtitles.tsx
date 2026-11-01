@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { api, type FoundSubtitle, type SubtitleTrack } from '../api'
 import { languageName } from '../media'
 import { savedPreference } from './Subtitles'
-import { foundLanguage, searchLanguageChoices, startLanguage } from './findSubtitles'
+import { foundLanguage, searchLanguageChoices, startLanguage } from './subtitleSearch'
 
 type Props = {
   itemId: number
