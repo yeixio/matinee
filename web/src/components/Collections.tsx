@@ -1,8 +1,16 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { Check, Layers, LibraryBig, Pin, Plus, Sparkles, X } from 'lucide-react'
-import { useEffect, useRef, useState, type ReactNode } from 'react'
-import { useTranslation } from 'react-i18next'
-import { Link, useNavigate } from 'react-router-dom'
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  Check,
+  Layers,
+  LibraryBig,
+  Pin,
+  Plus,
+  Sparkles,
+  X,
+} from "lucide-react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useTranslation } from "react-i18next";
+import { Link, useNavigate } from "react-router-dom";
 import {
   api,
   imageUrl,
@@ -11,92 +19,127 @@ import {
   type CollectionSort,
   type ItemDetail,
   type User,
-} from '../api'
-import { FilterBar } from './FilterBar'
-import type { ItemFilter } from '../filter'
-import { PosterCard } from './Card'
-import { Row, RowItem } from './Row'
-import { useLibraries } from './Shell'
-import { Button, Field, inputClass } from './ui'
-import i18n from '../i18n'
+} from "../api";
+import { FilterBar } from "./FilterBar";
+import type { ItemFilter } from "../filter";
+import { PosterCard } from "./Card";
+import { Row, RowItem } from "./Row";
+import { useLibraries } from "./Shell";
+import { Button, Field, inputClass } from "./ui";
+import i18n from "../i18n";
 
-export const collectionLink = (c: { id: string }) => `/collection/${encodeURIComponent(c.id)}`
-export const boxSetLink = (id: number) => `/box-set/${id}`
+export const collectionLink = (c: { id: string }) =>
+  `/collection/${encodeURIComponent(c.id)}`;
+export const boxSetLink = (id: number) => `/box-set/${id}`;
 
 /** Everything that shows collections refetches after a change. */
 export function invalidateCollections(qc: ReturnType<typeof useQueryClient>) {
-  qc.invalidateQueries({ queryKey: ['collections'] })
-  qc.invalidateQueries({ queryKey: ['collection'] })
-  qc.invalidateQueries({ queryKey: ['home'] })
+  qc.invalidateQueries({ queryKey: ["collections"] });
+  qc.invalidateQueries({ queryKey: ["collection"] });
+  qc.invalidateQueries({ queryKey: ["home"] });
 }
 
-const sortLabel = (s: CollectionSort) => i18n.t(`collections.sort.${s || 'own'}`)
-const manualSorts: CollectionSort[] = ['', 'title', 'added', 'year', 'rating', 'runtime', 'shuffle']
+const sortLabel = (s: CollectionSort) =>
+  i18n.t(`collections.sort.${s || "own"}`);
+const manualSorts: CollectionSort[] = [
+  "",
+  "title",
+  "added",
+  "year",
+  "rating",
+  "runtime",
+  "shuffle",
+];
 
 /** A cover made from up to four posters, or the collection's initial when it's empty. */
 export function Mosaic({ ids, title }: { ids: number[]; title: string }) {
-  const shown = ids.slice(0, 4)
+  const shown = ids.slice(0, 4);
   return (
     <div className="grid aspect-[2/3] grid-cols-2 grid-rows-2 gap-0.5 overflow-hidden rounded-xl bg-raised ring-1 ring-text/5 transition group-hover:ring-accent/70">
       {shown.length === 0 ? (
-        <div className="col-span-2 row-span-2 grid place-items-center text-4xl font-semibold text-faint">{title[0]}</div>
+        <div className="col-span-2 row-span-2 grid place-items-center text-4xl font-semibold text-faint">
+          {title[0]}
+        </div>
       ) : (
         shown.map((id, i) => (
           <img
             key={id}
-            src={imageUrl(id, 'poster')}
+            src={imageUrl(id, "poster")}
             alt=""
             loading="lazy"
-            className={`size-full object-cover ${shown.length === 1 ? 'col-span-2 row-span-2' : shown.length === 2 ? 'row-span-2' : shown.length === 3 && i === 0 ? 'row-span-2' : ''}`}
+            className={`size-full object-cover ${shown.length === 1 ? "col-span-2 row-span-2" : shown.length === 2 ? "row-span-2" : shown.length === 3 && i === 0 ? "row-span-2" : ""}`}
           />
         ))
       )}
     </div>
-  )
+  );
 }
 
 // A collection's name. The built-in ones are named in the page's language
 // until someone renames them.
 export function collectionName(c: { name: string; starter?: string }): string {
-  if (!c.starter) return c.name
-  const key = `common:starters.${c.starter}`
-  return i18n.exists(key) && c.name === i18n.t(key, { lng: 'en' }) ? i18n.t(key) : c.name
+  if (!c.starter) return c.name;
+  const key = `common:starters.${c.starter}`;
+  return i18n.exists(key) && c.name === i18n.t(key, { lng: "en" })
+    ? i18n.t(key)
+    : c.name;
 }
 
 export function CollectionCard({ c }: { c: Collection }) {
-  const { t } = useTranslation()
-  const name = collectionName(c)
+  const { t } = useTranslation();
+  const name = collectionName(c);
   return (
     <Link to={collectionLink(c)} className="group block animate-fade">
       <Mosaic ids={c.items.map((i) => i.id)} title={name} />
       <div className="mt-2 px-0.5">
         <div className="flex items-center gap-1.5 truncate text-sm font-medium text-text group-hover:text-accent-strong">
-          {c.kind === 'smart' && <Sparkles className="size-3.5 shrink-0 text-accent" aria-label={t('collections.smartShort')} />}
+          {c.kind === "smart" && (
+            <Sparkles
+              className="size-3.5 shrink-0 text-accent"
+              aria-label={t("collections.smartShort")}
+            />
+          )}
           <span className="truncate">{name}</span>
         </div>
-        <div className="truncate text-xs text-muted">{t('common:count.titles', { count: c.count })}</div>
+        <div className="truncate text-xs text-muted">
+          {t("common:count.titles", { count: c.count })}
+        </div>
       </div>
     </Link>
-  )
+  );
 }
 
 export function CardGrid({ children }: { children: ReactNode }) {
   return (
-    <div className="grid gap-x-4 gap-y-6" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))' }}>
+    <div
+      className="grid gap-x-4 gap-y-6"
+      style={{ gridTemplateColumns: "repeat(auto-fill, minmax(140px, 1fr))" }}
+    >
       {children}
     </div>
-  )
+  );
 }
 
-export function Dialog({ title, onClose, children }: { title: string; onClose: () => void; children: ReactNode }) {
-  const { t } = useTranslation()
+export function Dialog({
+  title,
+  onClose,
+  children,
+}: {
+  title: string;
+  onClose: () => void;
+  children: ReactNode;
+}) {
+  const { t } = useTranslation();
   useEffect(() => {
-    const esc = (e: KeyboardEvent) => e.key === 'Escape' && onClose()
-    window.addEventListener('keydown', esc)
-    return () => window.removeEventListener('keydown', esc)
-  }, [onClose])
+    const esc = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    window.addEventListener("keydown", esc);
+    return () => window.removeEventListener("keydown", esc);
+  }, [onClose]);
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/60 backdrop-blur-sm sm:items-center sm:p-6" onClick={onClose}>
+    <div
+      className="fixed inset-0 z-50 flex items-end justify-center bg-black/60 backdrop-blur-sm sm:items-center sm:p-6"
+      onClick={onClose}
+    >
       <div
         role="dialog"
         aria-modal="true"
@@ -106,14 +149,49 @@ export function Dialog({ title, onClose, children }: { title: string; onClose: (
       >
         <div className="mb-5 flex items-start justify-between gap-4">
           <h2 className="text-lg font-semibold">{title}</h2>
-          <button onClick={onClose} aria-label={t('close')} className="text-muted hover:text-text">
+          <button
+            onClick={onClose}
+            aria-label={t("close")}
+            className="text-muted hover:text-text"
+          >
             <X className="size-5" />
           </button>
         </div>
         {children}
       </div>
     </div>
-  )
+  );
+}
+
+/**
+ * Whether a smart collection's rules leave room for both movies and TV
+ * shows: they don't pick a kind of title other than those, and the libraries
+ * they cover have both. Only then does "Include TV shows" mean anything.
+ */
+export function offersTV(
+  filter: ItemFilter,
+  libraries: { id: number; kind: string }[] | undefined,
+): boolean {
+  if (filter.kind?.some((k) => k !== "movie" && k !== "show")) return false;
+  const covered = filter.library?.length
+    ? libraries?.filter((l) => filter.library!.includes(l.id))
+    : libraries;
+  return (
+    !!covered?.some((l) => l.kind === "movies") &&
+    !!covered?.some((l) => l.kind === "tv")
+  );
+}
+
+/** Whether a smart collection's rules let TV shows in. */
+export const includesTV = (filter: ItemFilter | undefined) =>
+  !filter?.kind?.length || filter.kind.includes("show");
+
+/**
+ * The rules with TV shows let in or kept out. A new smart collection is movies
+ * only, like Home's own rows, unless someone ticks "Include TV shows".
+ */
+export function withTV(filter: ItemFilter, tv: boolean): ItemFilter {
+  return { ...filter, kind: tv ? ["movie", "show"] : ["movie"] };
 }
 
 /**
@@ -123,131 +201,214 @@ export function Dialog({ title, onClose, children }: { title: string; onClose: (
  */
 export function CollectionEditor({
   collection,
-  kind = 'smart',
+  kind = "smart",
   start,
   library,
   onClose,
   onSaved,
 }: {
-  collection?: Collection
-  kind?: 'smart' | 'manual'
-  start?: ItemFilter
-  library?: number
-  onClose: () => void
-  onSaved?: (c: Collection) => void
+  collection?: Collection;
+  kind?: "smart" | "manual";
+  start?: ItemFilter;
+  library?: number;
+  onClose: () => void;
+  onSaved?: (c: Collection) => void;
 }) {
-  const { t } = useTranslation()
-  const qc = useQueryClient()
-  const { data: me } = useQuery<User>({ queryKey: ['me'], queryFn: api.me, staleTime: Infinity })
-  const { data: libraries } = useLibraries()
-  const smart = (collection?.kind ?? kind) === 'smart'
-  const [name, setName] = useState(collection ? collectionName(collection) : '')
-  const [filter, setFilter] = useState<ItemFilter>(collection?.filter ?? start ?? (library ? { library: [library] } : {}))
-  const [sort, setSort] = useState<CollectionSort>(collection?.sort ?? '')
-  const [order, setOrder] = useState<'' | 'asc' | 'desc'>(collection?.order ?? '')
-  const [pinHome, setPinHome] = useState(collection?.pinHome ?? false)
-  const [pinLibrary, setPinLibrary] = useState<number | undefined>(collection?.pinLibrary ?? undefined)
-  const [shared, setShared] = useState(collection?.shared ?? false)
+  const { t } = useTranslation();
+  const qc = useQueryClient();
+  const { data: me } = useQuery<User>({
+    queryKey: ["me"],
+    queryFn: api.me,
+    staleTime: Infinity,
+  });
+  const { data: libraries } = useLibraries();
+  const smart = (collection?.kind ?? kind) === "smart";
+  const [name, setName] = useState(
+    collection ? collectionName(collection) : "",
+  );
+  const [filter, setFilter] = useState<ItemFilter>(
+    collection?.filter ?? start ?? (library ? { library: [library] } : {}),
+  );
+  const [sort, setSort] = useState<CollectionSort>(collection?.sort ?? "");
+  const [order, setOrder] = useState<"" | "asc" | "desc">(
+    collection?.order ?? "",
+  );
+  const [pinHome, setPinHome] = useState(collection?.pinHome ?? false);
+  const [pinLibrary, setPinLibrary] = useState<number | undefined>(
+    collection?.pinLibrary ?? undefined,
+  );
+  const [shared, setShared] = useState(collection?.shared ?? false);
+  // Smart collections keep TV shows out unless asked; ones made before keep
+  // what they had until someone changes it.
+  const startTV = collection
+    ? includesTV(collection.filter)
+    : !!start?.kind?.includes("show");
+  const [includeTV, setIncludeTV] = useState(startTV);
+  const tvChoice = smart && offersTV(filter, libraries);
   const save = useMutation({
     mutationFn: () => {
+      const rules =
+        tvChoice && (!collection || includeTV !== startTV)
+          ? withTV(filter, includeTV)
+          : filter;
       const body: CollectionInput = {
         name,
-        sort: smart && sort !== 'shuffle' ? '' : sort,
-        order: smart ? '' : order,
+        sort: smart && sort !== "shuffle" ? "" : sort,
+        order: smart ? "" : order,
         pinHome,
         pinLibrary: pinLibrary ?? null,
-        ...(smart && { filter }),
-      }
+        ...(smart && { filter: rules }),
+      };
       return collection
         ? api.updateCollection(collection.id, body)
-        : api.createCollection({ ...body, kind: smart ? 'smart' : 'manual', shared })
+        : api.createCollection({
+            ...body,
+            kind: smart ? "smart" : "manual",
+            shared,
+          });
     },
     onSuccess: (c) => {
-      invalidateCollections(qc)
-      onSaved?.(c)
-      onClose()
+      invalidateCollections(qc);
+      onSaved?.(c);
+      onClose();
     },
-  })
-  const filterLibrary = filter.library
+  });
+  const filterLibrary = filter.library;
   return (
-    <Dialog title={collection ? t('collections.editNamed', { name: collectionName(collection) }) : smart ? t('collections.newSmart') : t('collections.new')} onClose={onClose}>
+    <Dialog
+      title={
+        collection
+          ? t("collections.editNamed", { name: collectionName(collection) })
+          : smart
+            ? t("collections.newSmart")
+            : t("collections.new")
+      }
+      onClose={onClose}
+    >
       <form
         onSubmit={(e) => {
-          e.preventDefault()
-          save.mutate()
+          e.preventDefault();
+          save.mutate();
         }}
         className="space-y-5"
       >
-        <Field label={t('collections.name')}>
+        <Field label={t("collections.name")}>
           <input
             className={inputClass}
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder={smart ? t('collections.smartExample') : t('collections.manualExample')}
+            placeholder={
+              smart
+                ? t("collections.smartExample")
+                : t("collections.manualExample")
+            }
             autoFocus
             maxLength={100}
           />
         </Field>
         {smart && (
           <div className="space-y-2">
-            <span className="text-xs font-medium tracking-wide text-muted uppercase">{t('collections.rules')}</span>
-            <p className="text-sm text-muted">{t('collections.rulesHint')}</p>
-            <FilterBar value={filter} onChange={setFilter} libraryId={filterLibrary?.length === 1 ? filterLibrary[0] : undefined} />
+            <span className="text-xs font-medium tracking-wide text-muted uppercase">
+              {t("collections.rules")}
+            </span>
+            <p className="text-sm text-muted">{t("collections.rulesHint")}</p>
+            <FilterBar
+              value={filter}
+              onChange={setFilter}
+              libraryId={
+                filterLibrary?.length === 1 ? filterLibrary[0] : undefined
+              }
+            />
           </div>
+        )}
+        {tvChoice && (
+          <label className="flex items-center gap-2 text-sm">
+            <input
+              type="checkbox"
+              checked={includeTV}
+              onChange={(e) => setIncludeTV(e.target.checked)}
+              className="accent-accent"
+            />
+            {t("collections.includeTV")}
+          </label>
         )}
         {smart ? (
           // The rules carry their own order (the filter bar's sort); shuffling is on top of it.
           <label className="flex items-center gap-2 text-sm">
             <input
               type="checkbox"
-              checked={sort === 'shuffle'}
-              onChange={(e) => setSort(e.target.checked ? 'shuffle' : '')}
+              checked={sort === "shuffle"}
+              onChange={(e) => setSort(e.target.checked ? "shuffle" : "")}
               className="accent-accent"
             />
-            {t('collections.shuffleDaily')}
+            {t("collections.shuffleDaily")}
           </label>
         ) : (
           <div className="grid gap-4 sm:grid-cols-2">
-            <Field label={t('collections.order')}>
-              <select className={inputClass} value={sort} onChange={(e) => setSort(e.target.value as CollectionSort)}>
+            <Field label={t("collections.order")}>
+              <select
+                className={inputClass}
+                value={sort}
+                onChange={(e) => setSort(e.target.value as CollectionSort)}
+              >
                 {manualSorts.map((s) => (
                   <option key={s} value={s}>
-                    {s === '' ? t('collections.orderAdded') : sortLabel(s)}
+                    {s === "" ? t("collections.orderAdded") : sortLabel(s)}
                   </option>
                 ))}
               </select>
             </Field>
-            {sort !== '' && sort !== 'shuffle' && (
-              <Field label={t('collections.direction')}>
-                <select className={inputClass} value={order} onChange={(e) => setOrder(e.target.value as '' | 'asc' | 'desc')}>
-                  <option value="">{t('collections.usual')}</option>
-                  <option value="asc">{t('collections.ascending')}</option>
-                  <option value="desc">{t('collections.descending')}</option>
+            {sort !== "" && sort !== "shuffle" && (
+              <Field label={t("collections.direction")}>
+                <select
+                  className={inputClass}
+                  value={order}
+                  onChange={(e) =>
+                    setOrder(e.target.value as "" | "asc" | "desc")
+                  }
+                >
+                  <option value="">{t("collections.usual")}</option>
+                  <option value="asc">{t("collections.ascending")}</option>
+                  <option value="desc">{t("collections.descending")}</option>
                 </select>
               </Field>
             )}
           </div>
         )}
         <fieldset className="space-y-2">
-          <legend className="mb-1 text-xs font-medium tracking-wide text-muted uppercase">{t('collections.showAsRow')}</legend>
+          <legend className="mb-1 text-xs font-medium tracking-wide text-muted uppercase">
+            {t("collections.showAsRow")}
+          </legend>
           <label className="flex items-center gap-2 text-sm">
-            <input type="checkbox" checked={pinHome} onChange={(e) => setPinHome(e.target.checked)} className="accent-accent" /> {t('collections.onHome')}
+            <input
+              type="checkbox"
+              checked={pinHome}
+              onChange={(e) => setPinHome(e.target.checked)}
+              className="accent-accent"
+            />{" "}
+            {t("collections.onHome")}
           </label>
           <label className="flex items-center gap-2 text-sm">
             <input
               type="checkbox"
               checked={pinLibrary !== undefined}
-              onChange={(e) => setPinLibrary(e.target.checked ? (library ?? libraries?.[0]?.id) : undefined)}
+              onChange={(e) =>
+                setPinLibrary(
+                  e.target.checked
+                    ? (library ?? libraries?.[0]?.id)
+                    : undefined,
+                )
+              }
               className="accent-accent"
               disabled={!libraries?.length}
             />
-            {t('collections.onLibraryPage')}
+            {t("collections.onLibraryPage")}
             {pinLibrary !== undefined && (
               <select
                 className="ms-1 rounded-md border border-line bg-surface px-2 py-1 text-sm"
                 value={pinLibrary}
                 onChange={(e) => setPinLibrary(Number(e.target.value))}
-                aria-label={t('library.library')}
+                aria-label={t("library.library")}
               >
                 {libraries?.map((l) => (
                   <option key={l.id} value={l.id}>
@@ -260,59 +421,85 @@ export function CollectionEditor({
         </fieldset>
         {!collection && me?.isAdmin && (
           <label className="flex items-center gap-2 text-sm">
-            <input type="checkbox" checked={shared} onChange={(e) => setShared(e.target.checked)} className="accent-accent" /> {t('collections.shareWithEveryone')}
+            <input
+              type="checkbox"
+              checked={shared}
+              onChange={(e) => setShared(e.target.checked)}
+              className="accent-accent"
+            />{" "}
+            {t("collections.shareWithEveryone")}
           </label>
         )}
-        {save.error && <p className="text-sm text-danger">{save.error.message}</p>}
+        {save.error && (
+          <p className="text-sm text-danger">{save.error.message}</p>
+        )}
         <div className="flex justify-end gap-2">
           <Button type="button" variant="ghost" onClick={onClose}>
-            {t('cancel')}
+            {t("cancel")}
           </Button>
-          <Button type="submit" variant="primary" disabled={!name.trim() || save.isPending}>
-            {collection ? t('save') : t('create')}
+          <Button
+            type="submit"
+            variant="primary"
+            disabled={!name.trim() || save.isPending}
+          >
+            {collection ? t("save") : t("create")}
           </Button>
         </div>
       </form>
     </Dialog>
-  )
+  );
 }
 
 /** Puts a title in the collections kept by hand, or takes it out. */
 export function AddToCollectionButton({ item }: { item: ItemDetail }) {
-  const { t } = useTranslation()
-  const qc = useQueryClient()
-  const { data: me } = useQuery<User>({ queryKey: ['me'], queryFn: api.me, staleTime: Infinity })
-  const [open, setOpen] = useState(false)
-  const [creating, setCreating] = useState(false)
-  const ref = useRef<HTMLDivElement>(null)
+  const { t } = useTranslation();
+  const qc = useQueryClient();
+  const { data: me } = useQuery<User>({
+    queryKey: ["me"],
+    queryFn: api.me,
+    staleTime: Infinity,
+  });
+  const [open, setOpen] = useState(false);
+  const [creating, setCreating] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
   const { data } = useQuery({
-    queryKey: ['collections', { item: item.id }],
+    queryKey: ["collections", { item: item.id }],
     queryFn: () => api.collections({ item: item.id }),
     enabled: open,
-  })
+  });
   const toggle = useMutation({
     mutationFn: ({ c, add }: { c: Collection; add: boolean }) =>
-      add ? api.addToCollection(c.id, item.id) : api.removeFromCollection(c.id, item.id),
+      add
+        ? api.addToCollection(c.id, item.id)
+        : api.removeFromCollection(c.id, item.id),
     onSettled: () => invalidateCollections(qc),
-  })
+  });
   useEffect(() => {
-    if (!open) return
-    const away = (e: MouseEvent) => !ref.current?.contains(e.target as Node) && setOpen(false)
-    document.addEventListener('mousedown', away)
-    return () => document.removeEventListener('mousedown', away)
-  }, [open])
+    if (!open) return;
+    const away = (e: MouseEvent) =>
+      !ref.current?.contains(e.target as Node) && setOpen(false);
+    document.addEventListener("mousedown", away);
+    return () => document.removeEventListener("mousedown", away);
+  }, [open]);
 
-  if (me?.guest || (item.kind !== 'movie' && item.kind !== 'show')) return null
-  const mine = data?.collections.filter((c) => c.kind === 'manual' && c.canEdit) ?? []
+  if (me?.guest || (item.kind !== "movie" && item.kind !== "show")) return null;
+  const mine =
+    data?.collections.filter((c) => c.kind === "manual" && c.canEdit) ?? [];
   return (
     <div ref={ref} className="relative">
-      <Button onClick={() => setOpen(!open)} aria-expanded={open} icon={<Layers className="size-4" />}>
-        {t('nav.collections')}
+      <Button
+        onClick={() => setOpen(!open)}
+        aria-expanded={open}
+        icon={<Layers className="size-4" />}
+      >
+        {t("nav.collections")}
       </Button>
       {open && (
         <div className="absolute top-full start-0 z-30 mt-2 w-64 rounded-xl border border-line/60 bg-surface p-1.5 shadow-2xl">
           {!data ? (
-            <div className="px-3 py-2 text-sm text-muted">{t('loadingDots')}</div>
+            <div className="px-3 py-2 text-sm text-muted">
+              {t("loadingDots")}
+            </div>
           ) : (
             mine.map((c) => (
               <button
@@ -321,19 +508,21 @@ export function AddToCollectionButton({ item }: { item: ItemDetail }) {
                 className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-start text-sm hover:bg-text/5"
                 aria-pressed={!!c.contains}
               >
-                <span className="grid size-4 place-items-center">{c.contains && <Check className="size-4 text-accent" />}</span>
+                <span className="grid size-4 place-items-center">
+                  {c.contains && <Check className="size-4 text-accent" />}
+                </span>
                 <span className="truncate">{collectionName(c)}</span>
               </button>
             ))
           )}
           <button
             onClick={() => {
-              setCreating(true)
-              setOpen(false)
+              setCreating(true);
+              setOpen(false);
             }}
             className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-start text-sm text-muted hover:bg-text/5 hover:text-text"
           >
-            <Plus className="size-4" /> {t('collections.new')}
+            <Plus className="size-4" /> {t("collections.new")}
           </button>
         </div>
       )}
@@ -341,23 +530,27 @@ export function AddToCollectionButton({ item }: { item: ItemDetail }) {
         <CollectionEditor
           kind="manual"
           onClose={() => setCreating(false)}
-          onSaved={(c) => api.addToCollection(c.id, item.id).then(() => invalidateCollections(qc))}
+          onSaved={(c) =>
+            api
+              .addToCollection(c.id, item.id)
+              .then(() => invalidateCollections(qc))
+          }
         />
       )}
     </div>
-  )
+  );
 }
 
 /** Small labels for where a collection shows up. */
 export function PinBadges({ c }: { c: Collection }) {
-  const { t } = useTranslation()
-  const { data: libraries } = useLibraries()
-  const lib = libraries?.find((l) => l.id === c.pinLibrary)
+  const { t } = useTranslation();
+  const { data: libraries } = useLibraries();
+  const lib = libraries?.find((l) => l.id === c.pinLibrary);
   return (
     <>
       {c.pinHome && (
         <span className="flex items-center gap-1 rounded-full bg-text/10 px-2 py-0.5 text-xs text-muted">
-          <Pin className="size-3" /> {t('nav.home')}
+          <Pin className="size-3" /> {t("nav.home")}
         </span>
       )}
       {lib && (
@@ -366,18 +559,26 @@ export function PinBadges({ c }: { c: Collection }) {
         </span>
       )}
     </>
-  )
+  );
 }
 
 /** The collections pinned to a library's page, as rows above its titles. */
 export function PinnedCollections({ library }: { library: number }) {
-  const { data } = useQuery({ queryKey: ['collections', { library }], queryFn: () => api.collections({ library }) })
-  const rows = data?.collections.filter((c) => c.items.length > 0) ?? []
-  if (rows.length === 0) return null
+  const { data } = useQuery({
+    queryKey: ["collections", { library }],
+    queryFn: () => api.collections({ library }),
+  });
+  const rows = data?.collections.filter((c) => c.items.length > 0) ?? [];
+  if (rows.length === 0) return null;
   return (
     <div className="space-y-10">
       {rows.map((c) => (
-        <Row key={c.id} title={collectionName(c)} more={collectionLink(c)} hasMore={c.count > c.items.length}>
+        <Row
+          key={c.id}
+          title={collectionName(c)}
+          more={collectionLink(c)}
+          hasMore={c.count > c.items.length}
+        >
           {c.items.map((it) => (
             <RowItem key={it.id}>
               <PosterCard item={it} />
@@ -386,20 +587,34 @@ export function PinnedCollections({ library }: { library: number }) {
         </Row>
       ))}
     </div>
-  )
+  );
 }
 
 /** Saves the filters someone has on a library page as a smart collection. */
-export function SaveAsCollectionButton({ filter, library }: { filter: ItemFilter; library: number }) {
-  const { t } = useTranslation()
-  const navigate = useNavigate()
-  const { data: me } = useQuery<User>({ queryKey: ['me'], queryFn: api.me, staleTime: Infinity })
-  const [open, setOpen] = useState(false)
-  if (me?.guest) return null
+export function SaveAsCollectionButton({
+  filter,
+  library,
+}: {
+  filter: ItemFilter;
+  library: number;
+}) {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { data: me } = useQuery<User>({
+    queryKey: ["me"],
+    queryFn: api.me,
+    staleTime: Infinity,
+  });
+  const [open, setOpen] = useState(false);
+  if (me?.guest) return null;
   return (
     <>
-      <Button variant="ghost" onClick={() => setOpen(true)} icon={<Sparkles className="size-4" />}>
-        {t('collections.saveAs')}
+      <Button
+        variant="ghost"
+        onClick={() => setOpen(true)}
+        icon={<Sparkles className="size-4" />}
+      >
+        {t("collections.saveAs")}
       </Button>
       {open && (
         <CollectionEditor
@@ -410,5 +625,5 @@ export function SaveAsCollectionButton({ filter, library }: { filter: ItemFilter
         />
       )}
     </>
-  )
+  );
 }

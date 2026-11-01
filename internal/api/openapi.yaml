@@ -1208,12 +1208,12 @@ paths:
                       didn't finish, the latest first; left out when there are none. Then New episodes (id
                       newEpisodes): up to 30 episodes from the last two weeks of the podcasts the person
                       follows that they haven't started, newest first; left out when there are none. Then, in the 30 days before a holiday
-                      (a week for New Year's Eve), a row of up to 20 titles for it, if at
+                      (a week for New Year's Eve), a row of up to 20 movies for it, if at
                       least four fit; unless an admin turned holiday rows off. Then the collections pinned to Home
                       (shared ones and the person's own, empty ones left out), each with
                       up to 20 titles. Then the day's genre rows: a few genres with at
-                      least four titles, different each day, each with up to 20 of its
-                      best-rated titles in a daily order. Empty until titles have genres.
+                      least four movies, different each day, each with up to 20 of its
+                      best-rated movies in a daily order (genre and holiday rows are movies only). Empty until titles have genres.
                     items:
                       type: object
                       properties:

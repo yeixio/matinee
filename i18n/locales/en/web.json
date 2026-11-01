@@ -266,6 +266,7 @@
     "rules": "Rules",
     "rulesHint": "Titles that match these filters join by themselves as the library changes.",
     "shuffleDaily": "Shuffle every day",
+    "includeTV": "Include TV shows",
     "order": "Order",
     "orderAdded": "The order titles were added",
     "direction": "Direction",

@@ -265,6 +265,7 @@
     "rules": "规则",
     "rulesHint": "符合这些筛选条件的作品会随媒体库变化自动加入。",
     "shuffleDaily": "每天随机排序",
+    "includeTV": "包含电视剧",
     "order": "顺序",
     "orderAdded": "作品的添加顺序",
     "direction": "方向",

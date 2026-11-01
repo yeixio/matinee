@@ -40,9 +40,10 @@ func (s *Store) NeedsGenres(ctx context.Context, libraryID int64) ([]Item, error
 		"i.id", 0, libraryID)
 }
 
-// GenreCounts says how many movies and shows the user can see in each genre.
+// GenreCounts says how many movies the user can see in each genre. Home's
+// genre rows are movies only: a show in among them reads as a mistake.
 func (s *Store) GenreCounts(ctx context.Context, userID int64) (map[string]int, error) {
-	rows, err := s.db.QueryContext(ctx, "SELECT i.genres"+itemFrom+" WHERE i.kind IN ('movie', 'show') AND i.genres IS NOT NULL"+visibleToMe, userID)
+	rows, err := s.db.QueryContext(ctx, "SELECT i.genres"+itemFrom+" WHERE i.kind = 'movie' AND i.genres IS NOT NULL"+visibleToMe, userID)
 	if err != nil {
 		return nil, err
 	}
@@ -60,9 +61,10 @@ func (s *Store) GenreCounts(ctx context.Context, userID int64) (map[string]int, 
 	return counts, rows.Err()
 }
 
-// InGenre lists movies and shows in a genre, best rated first.
+// InGenre lists the movies in a genre, best rated first, for Home's genre
+// rows. Libraries filter shows by genre themselves (see ItemFilter).
 func (s *Store) InGenre(ctx context.Context, userID int64, genre string, limit int) ([]Item, error) {
-	return s.queryItems(ctx, "i.kind IN ('movie', 'show') AND i.genres LIKE ?",
+	return s.queryItems(ctx, "i.kind = 'movie' AND i.genres LIKE ?",
 		"COALESCE(i.rating, 0) DESC, i.id DESC LIMIT ?", userID, "%|"+genre+"|%", limit)
 }
 

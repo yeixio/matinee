@@ -266,6 +266,7 @@
     "rules": "Kurallar",
     "rulesHint": "Bu filtrelere uyan yapımlar kütüphane değiştikçe kendiliğinden eklenir.",
     "shuffleDaily": "Her gün karıştır",
+    "includeTV": "TV dizilerini dahil et",
     "order": "Sıra",
     "orderAdded": "Yapımların eklendiği sıra",
     "direction": "Yön",

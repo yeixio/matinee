@@ -28,6 +28,10 @@ New servers start with three smart collections for everyone: **Recently added**,
 5. Admins can tick **Share with everyone on this server**.
 6. Click **Create**.
 
+<!-- since: v0.1.11 -->
+A new smart collection is movies only, like Home's genre rows. Tick **Include TV shows** to let shows in too. The box shows up when the collection covers both a movie library and a TV library. Collections made before keep what they had until you change it.
+<!-- /since -->
+
 ![The New smart collection dialog](../images/smart-collection.webp)
 
 You can also start from a library page: set the filters you want, then click **Save as collection**.
