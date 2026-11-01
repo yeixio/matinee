@@ -102,6 +102,18 @@ notarize() {
 		exit 1
 	fi
 }
+# staple <file>: attaches the notary ticket. Apple's ticket service can lag
+# right after notarizing, which stapler reports as error 68, so it tries again.
+staple() {
+	local try
+	for try in 1 2 3 4 5 6; do
+		xcrun stapler staple "$1" && return 0
+		echo "Stapling $(basename "$1") failed (try $try); waiting for the ticket"
+		sleep 30
+	done
+	echo "::error::Couldn't staple the notary ticket to $(basename "$1")."
+	exit 1
+}
 notary=""
 if [ -n "$identity" ] && [ -n "${ASC_API_KEY:-}" ] && [ -n "${ASC_API_KEY_ID:-}" ] && [ -n "${ASC_API_ISSUER_ID:-}" ]; then
 	notary=1
@@ -111,7 +123,7 @@ if [ -n "$notary" ]; then
 	echo "::group::Notarize the app"
 	ditto -c -k --keepParent "$app" "$work/app.zip"
 	notarize "$work/app.zip"
-	xcrun stapler staple "$app"
+	staple "$app"
 	echo "::endgroup::"
 fi
 
@@ -127,7 +139,7 @@ if [ -n "$identity" ]; then
 fi
 if [ -n "$notary" ]; then
 	notarize "$dmg"
-	xcrun stapler staple "$dmg"
+	staple "$dmg"
 	spctl --assess --type open --context context:primary-signature --verbose=2 "$dmg"
 fi
 echo "::endgroup::"
