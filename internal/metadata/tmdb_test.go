@@ -197,11 +197,12 @@ func TestFetcherBackfillsGenres(t *testing.T) {
 	if left, _ := st.NeedsGenres(ctx, movies.ID); len(left) != 0 {
 		t.Fatalf("still needing genres: %+v", left)
 	}
+	// Home's genre rows count and list movies only.
 	counts, _ := st.GenreCounts(ctx, 0)
-	if counts["Action"] != 2 || counts["Thriller"] != 1 {
+	if counts["Action"] != 1 || counts["Thriller"] != 1 || counts["Adventure"] != 0 {
 		t.Fatalf("counts: %v", counts)
 	}
-	if in, _ := st.InGenre(ctx, 0, "Action", 10); len(in) != 2 {
+	if in, _ := st.InGenre(ctx, 0, "Action", 10); len(in) != 1 || in[0].ID != movie {
 		t.Fatalf("in Action: %+v", in)
 	}
 	// "Action" mustn't match a genre that merely contains it.

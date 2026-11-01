@@ -265,6 +265,7 @@
     "rules": "規則",
     "rulesHint": "符合這些篩選條件的作品會隨媒體庫變化自動加入。",
     "shuffleDaily": "每天隨機排序",
+    "includeTV": "包含電視節目",
     "order": "順序",
     "orderAdded": "作品的新增順序",
     "direction": "方向",

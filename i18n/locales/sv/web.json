@@ -266,6 +266,7 @@
     "rules": "Regler",
     "rulesHint": "Titlar som matchar de här filtren läggs till av sig själva när biblioteket ändras.",
     "shuffleDaily": "Blanda varje dag",
+    "includeTV": "Ta med tv-serier",
     "order": "Ordning",
     "orderAdded": "Ordningen titlarna lades till i",
     "direction": "Riktning",

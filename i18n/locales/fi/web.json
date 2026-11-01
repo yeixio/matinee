@@ -266,6 +266,7 @@
     "rules": "Säännöt",
     "rulesHint": "Näitä suodattimia vastaavat nimikkeet liittyvät itsestään, kun kirjasto muuttuu.",
     "shuffleDaily": "Sekoita joka päivä",
+    "includeTV": "Sisällytä TV-sarjat",
     "order": "Järjestys",
     "orderAdded": "Järjestys, jossa nimikkeet lisättiin",
     "direction": "Suunta",

@@ -265,6 +265,7 @@
     "rules": "ルール",
     "rulesHint": "これらのフィルタに合うタイトルは、ライブラリの変化に合わせて自動的に追加されます。",
     "shuffleDaily": "毎日シャッフル",
+    "includeTV": "テレビ番組を含める",
     "order": "並び順",
     "orderAdded": "タイトルを追加した順",
     "direction": "方向",

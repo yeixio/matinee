@@ -265,6 +265,7 @@
     "rules": "규칙",
     "rulesHint": "이 필터에 맞는 작품은 라이브러리가 바뀌면 자동으로 추가됩니다.",
     "shuffleDaily": "매일 섞기",
+    "includeTV": "TV 프로그램 포함",
     "order": "순서",
     "orderAdded": "작품을 추가한 순서",
     "direction": "방향",

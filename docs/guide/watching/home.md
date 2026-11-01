@@ -32,6 +32,10 @@ Scroll down for rows of posters. Each row scrolls sideways, and a row with a **â
 <!-- /since -->
 | **Coming soon** | With [Radarr or Sonarr](/docs/server/radarr-and-sonarr/) connected: new episodes and movies due in the next two months. |
 
+<!-- since: v0.1.11 -->
+The genre and holiday rows are movies only, so a TV show never turns up among the films. For a row that mixes the two, make a [smart collection](/docs/watching/collections/#make-a-smart-collection) with **Include TV shows** ticked and pin it to Home.
+<!-- /since -->
+
 <!-- since: v0.1.1 -->
 ## See more
 

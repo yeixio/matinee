@@ -265,6 +265,7 @@
     "rules": "Aturan",
     "rulesHint": "Judul yang cocok dengan filter ini masuk sendiri saat perpustakaan berubah.",
     "shuffleDaily": "Acak setiap hari",
+    "includeTV": "Sertakan acara TV",
     "order": "Urutan",
     "orderAdded": "Urutan judul ditambahkan",
     "direction": "Arah",

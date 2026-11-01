@@ -266,6 +266,7 @@
     "rules": "Szabályok",
     "rulesHint": "Az ezeknek a szűrőknek megfelelő címek maguktól bekerülnek, ahogy a könyvtár változik.",
     "shuffleDaily": "Keverés minden nap",
+    "includeTV": "Tévésorozatokkal együtt",
     "order": "Sorrend",
     "orderAdded": "A címek hozzáadásának sorrendje",
     "direction": "Irány",

@@ -265,6 +265,7 @@
     "rules": "Quy tắc",
     "rulesHint": "Nội dung khớp với các bộ lọc này sẽ tự được thêm vào khi thư viện thay đổi.",
     "shuffleDaily": "Xáo trộn mỗi ngày",
+    "includeTV": "Bao gồm chương trình TV",
     "order": "Thứ tự",
     "orderAdded": "Thứ tự các mục được thêm",
     "direction": "Hướng",

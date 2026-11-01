@@ -267,6 +267,7 @@
     "rules": "Règles",
     "rulesHint": "Les titres qui correspondent à ces filtres s’ajoutent tout seuls quand la bibliothèque change.",
     "shuffleDaily": "Mélanger chaque jour",
+    "includeTV": "Inclure les séries TV",
     "order": "Ordre",
     "orderAdded": "L’ordre d’ajout des titres",
     "direction": "Sens",
