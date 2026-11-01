@@ -27,7 +27,7 @@ export const settingsSections: Record<string, string> = {
   language: 'you', appearance: 'you', playback: 'you', account: 'you', devices: 'you',
   libraries: 'libraries', import: 'libraries', 'new-files': 'libraries', 'media-analysis': 'libraries',
   people: 'people', profiles: 'people',
-  posters: 'content', 'podcast-index': 'content', trailers: 'content', 'home-rows': 'content',
+  posters: 'content', 'podcast-index': 'content', subtitles: 'content', trailers: 'content', 'home-rows': 'content',
   transcoding: 'streaming',
   'home-network': 'network', 'remote-access': 'network',
   arr: 'add-ons', overseerr: 'add-ons', plugins: 'add-ons',
@@ -58,7 +58,7 @@ export default function Settings() {
       ? [
           { id: 'libraries', icon: LibraryBig, sections: [['libraries', <Libraries />], ['import', <ImportSettings />], ['new-files', <NewFiles />], ['media-analysis', <MediaAnalysis />]] },
           { id: 'people', icon: UsersRound, sections: [['people', <Users me={me} />], ['profiles', <Profiles />]] },
-          { id: 'content', icon: ImageIcon, sections: [['posters', <TMDBKey />], ['podcast-index', <PodcastIndexKey />], ['trailers', <Trailers />], ['home-rows', <HolidayRows />]] },
+          { id: 'content', icon: ImageIcon, sections: [['posters', <TMDBKey />], ['podcast-index', <PodcastIndexKey />], ['subtitles', <OpenSubtitlesKey />], ['trailers', <Trailers />], ['home-rows', <HolidayRows />]] },
           { id: 'streaming', icon: Gauge, sections: [['transcoding', <Transcoding />]] },
           { id: 'network', icon: Globe, sections: [['home-network', <HomeNetwork />], ['remote-access', <RemoteAccess />]] },
           { id: 'add-ons', icon: Puzzle, sections: [['arr', <Integrations />], ['plugins', <Plugins />]] },
@@ -1008,6 +1008,103 @@ function PodcastIndexKey() {
           {data?.connected && (
             <Button type="button" variant="ghost" disabled={remove.isPending} onClick={() => remove.mutate()}>
               {t('settings.podcastIndex.remove')}
+            </Button>
+          )}
+        </div>
+      </form>
+    </section>
+  )
+}
+
+// OpenSubtitles finds subtitles a video doesn't have, from the player's
+// subtitles menu. Its free API key comes from opensubtitles.com; a free
+// account's username and password let the server fetch more files a day.
+// They stay on the server.
+function OpenSubtitlesKey() {
+  const { t } = useTranslation()
+  const qc = useQueryClient()
+  const { data } = useQuery({ queryKey: ['openSubtitles'], queryFn: api.openSubtitles })
+  const [apiKey, setApiKey] = useState('')
+  const [username, setUsername] = useState<string>()
+  const [password, setPassword] = useState('')
+  const user = username ?? data?.username ?? ''
+  const save = useMutation({
+    mutationFn: () => api.saveOpenSubtitles({ apiKey: apiKey.trim() || undefined, username: user.trim(), password: password || undefined }),
+    onSuccess: (v) => {
+      qc.setQueryData(['openSubtitles'], v)
+      qc.invalidateQueries({ queryKey: ['item'] })
+      setApiKey('')
+      setUsername(undefined)
+      setPassword('')
+    },
+  })
+  const remove = useMutation({
+    mutationFn: api.deleteOpenSubtitles,
+    onSuccess: () => {
+      qc.setQueryData(['openSubtitles'], { connected: false })
+      qc.invalidateQueries({ queryKey: ['item'] })
+    },
+  })
+  const submit = (e: FormEvent) => {
+    e.preventDefault()
+    save.mutate()
+  }
+  const changed = !!apiKey.trim() || !!password || (!!data?.connected && user.trim() !== (data.username ?? ''))
+  const status = data?.connected
+    ? data.username
+      ? t('settings.subtitles.usingAccount', { hint: data.hint ?? '…', username: data.username })
+      : t('settings.subtitles.using', { hint: data.hint ?? '…' })
+    : t('settings.subtitles.none')
+  return (
+    <section className="space-y-4">
+      <h2 className="text-lg font-semibold">{t('settings.subtitles.title')}</h2>
+      <p className="text-sm text-muted">
+        <Trans
+          i18nKey="settings.subtitles.intro"
+          components={{ site: <a href="https://www.opensubtitles.com/consumers" target="_blank" rel="noreferrer" className="text-accent underline" /> }}
+        />
+      </p>
+      <form onSubmit={submit} className="space-y-3 rounded-xl border border-line/60 bg-surface/50 p-4">
+        <p className="text-sm">{status}</p>
+        <Field label={t('settings.subtitles.key')}>
+          <input
+            autoComplete="off"
+            spellCheck={false}
+            className={inputClass}
+            value={apiKey}
+            placeholder={data?.connected ? t('settings.subtitles.keepKey') : undefined}
+            onChange={(e) => setApiKey(e.target.value)}
+          />
+        </Field>
+        <p className="text-xs text-muted">{t('settings.subtitles.accountHint')}</p>
+        <div className="grid gap-3 sm:grid-cols-2">
+          <Field label={t('settings.subtitles.username')}>
+            <input autoComplete="off" spellCheck={false} className={inputClass} value={user} onChange={(e) => setUsername(e.target.value)} />
+          </Field>
+          <Field label={t('settings.subtitles.password')}>
+            <input
+              type="password"
+              autoComplete="new-password"
+              className={inputClass}
+              value={password}
+              placeholder={data?.username && user === data.username ? '••••••••' : undefined}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </Field>
+        </div>
+        {(save.error || remove.error) && <p className="text-sm text-danger">{(save.error ?? remove.error)?.message}</p>}
+        <div className="flex flex-wrap gap-2">
+          <Button
+            type="submit"
+            variant="primary"
+            icon={<KeyRound className="size-4" />}
+            disabled={!(data?.connected ? changed : apiKey.trim()) || save.isPending}
+          >
+            {t('settings.subtitles.save')}
+          </Button>
+          {data?.connected && (
+            <Button type="button" variant="ghost" disabled={remove.isPending} onClick={() => remove.mutate()}>
+              {t('settings.subtitles.remove')}
             </Button>
           )}
         </div>

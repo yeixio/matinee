@@ -33,7 +33,19 @@
     "unmute": "Activar sonido",
     "mute": "Silenciar",
     "converting": "Convirtiendo",
-    "fullscreen": "Pantalla completa"
+    "fullscreen": "Pantalla completa",
+    "findSubtitles": {
+      "open": "Buscar subtítulos…",
+      "title": "Buscar subtítulos",
+      "language": "Idioma",
+      "looking": "Buscando subtítulos en línea…",
+      "none": "No se encontraron subtítulos en {{language}} en línea para este vídeo.",
+      "matchesFile": "Hechos para este archivo",
+      "machine": "Traducción automática",
+      "online": "En línea",
+      "remove": "Quitar {{name}}",
+      "source": "Subtítulos de OpenSubtitles.com"
+    }
   },
   "somethingWentWrong": "Algo ha salido mal",
   "oneMoment": "Un momento…",
@@ -746,6 +758,20 @@
       "save": "Guardar clave",
       "remove": "Quitar clave"
     },
+    "subtitles": {
+      "title": "Búsqueda de subtítulos",
+      "intro": "Cualquiera puede buscar los subtítulos que le faltan a un vídeo desde el menú de subtítulos del reproductor. La búsqueda usa OpenSubtitles.com: consigue una clave de API gratuita en <site>opensubtitles.com/consumers</site>.",
+      "using": "Usando la clave que termina en {{hint}}.",
+      "usingAccount": "Usando la clave que termina en {{hint}}, con la sesión de {{username}}.",
+      "none": "Aún no hay clave, así que el menú de subtítulos del reproductor no tiene búsqueda.",
+      "key": "Clave de API",
+      "keepKey": "Déjalo vacío para conservar la clave guardada",
+      "accountHint": "Opcional: el usuario y la contraseña de una cuenta gratuita de OpenSubtitles permiten al servidor descargar más archivos de subtítulos al día.",
+      "username": "Usuario",
+      "password": "Contraseña",
+      "save": "Guardar",
+      "remove": "Quitar clave"
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Permite que las apps sigan encontrando este servidor cuando cambia la dirección de internet de tu casa. Solo conoce la dirección: el vídeo siempre va directo de este servidor a las apps.",
@@ -773,7 +799,7 @@
       },
       "content": {
         "title": "Contenido",
-        "hint": "Pósteres, búsqueda de pódcasts, tráileres y filas de Inicio"
+        "hint": "Pósteres, búsqueda de pódcasts y subtítulos, tráileres y filas de Inicio"
       },
       "streaming": {
         "title": "Streaming",

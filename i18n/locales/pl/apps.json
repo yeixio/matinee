@@ -319,7 +319,20 @@
     "audioNeedsUpdate": "Zaktualizuj Matinee na serwerze, aby wybrać tu dźwięk",
     "trackFailed": "Nie udało się przełączyć na tę ścieżkę",
     "subtitlesFailed": "Nie udało się wczytać tych napisów",
-    "convertsVideo": "Konwertuje wideo"
+    "convertsVideo": "Konwertuje wideo",
+    "findSubtitles": {
+      "open": "Szukaj napisów…",
+      "title": "Szukaj napisów",
+      "language": "Język",
+      "languageIs": "Język: {{language}}",
+      "looking": "Szukanie napisów w internecie…",
+      "adding": "Dodawanie napisów…",
+      "none": "Nie znaleziono w internecie napisów w języku: {{language}} dla tego wideo.",
+      "matchesFile": "Zrobione do tego pliku",
+      "machine": "Tłumaczenie maszynowe",
+      "online": "Z internetu",
+      "source": "Napisy z OpenSubtitles.com"
+    }
   },
   "library": {
     "nothingUnwatched": "Nie ma tu nic nieobejrzanego",
@@ -451,6 +464,28 @@
     "podcasts": "Podcasty",
     "signIn": "Otwórz Matinee na telefonie i zaloguj się, aby słuchać w samochodzie.",
     "loading": "Wczytywanie…"
+  },
+  "automotive": {
+    "signInNeeded": "Zaloguj się do swojego serwera Matinee, aby słuchać w tym samochodzie.",
+    "signIn": "Zaloguj się",
+    "title": "Zaloguj się do Matinee",
+    "nearby": "Serwery w tej sieci",
+    "looking": "Szukanie serwerów… Jeśli samochód nie jest w domowej sieci Wi-Fi, wpisz adres swojego serwera.",
+    "address": "Adres twojego serwera",
+    "addressHint": "matinee.example.com",
+    "next": "Dalej",
+    "notMatinee": "Nie można połączyć się tam z serwerem Matinee. Sprawdź adres i czy serwer jest dostępny spoza domu.",
+    "goTo": "Na telefonie lub komputerze otwórz {{link}} i wpisz ten kod:",
+    "scan": "Albo zeskanuj go aparatem telefonu.",
+    "waiting": "Czekamy, aż zatwierdzisz ten samochód…",
+    "expired": "Ten kod wygasł.",
+    "declined": "Logowanie zostało odrzucone.",
+    "newCode": "Pobierz nowy kod",
+    "back": "Wstecz",
+    "signedIn": "Zalogowano do {{server}} jako {{name}}.",
+    "listenHint": "Wybierz Matinee w aplikacjach multimedialnych samochodu, aby słuchać. Wylogować się możesz tutaj, gdy samochód stoi zaparkowany.",
+    "signOut": "Wyloguj się",
+    "done": "Gotowe"
   },
   "watch": {
     "tileName": "Teraz odtwarzane",

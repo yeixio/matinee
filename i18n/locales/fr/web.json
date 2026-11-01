@@ -33,7 +33,19 @@
     "unmute": "Réactiver le son",
     "mute": "Couper le son",
     "converting": "Conversion",
-    "fullscreen": "Plein écran"
+    "fullscreen": "Plein écran",
+    "findSubtitles": {
+      "open": "Chercher des sous-titres…",
+      "title": "Chercher des sous-titres",
+      "language": "Langue",
+      "looking": "Recherche de sous-titres en ligne…",
+      "none": "Aucun sous-titre en {{language}} trouvé en ligne pour cette vidéo.",
+      "matchesFile": "Faits pour ce fichier",
+      "machine": "Traduction automatique",
+      "online": "En ligne",
+      "remove": "Retirer {{name}}",
+      "source": "Sous-titres d’OpenSubtitles.com"
+    }
   },
   "somethingWentWrong": "Un problème est survenu",
   "oneMoment": "Un instant…",
@@ -746,6 +758,20 @@
       "save": "Enregistrer la clé",
       "remove": "Retirer la clé"
     },
+    "subtitles": {
+      "title": "Recherche de sous-titres",
+      "intro": "Chacun peut chercher les sous-titres qui manquent à une vidéo depuis le menu des sous-titres du lecteur. La recherche utilise OpenSubtitles.com : obtenez une clé API gratuite sur <site>opensubtitles.com/consumers</site>.",
+      "using": "Utilise la clé se terminant par {{hint}}.",
+      "usingAccount": "Clé se terminant par {{hint}} utilisée, connecté en tant que {{username}}.",
+      "none": "Pas encore de clé, le menu des sous-titres du lecteur n’a donc pas de recherche.",
+      "key": "Clé d’API",
+      "keepKey": "Laissez vide pour garder la clé enregistrée",
+      "accountHint": "Facultatif : le nom d’utilisateur et le mot de passe d’un compte OpenSubtitles gratuit permettent au serveur de récupérer plus de fichiers de sous-titres par jour.",
+      "username": "Nom d’utilisateur",
+      "password": "Mot de passe",
+      "save": "Enregistrer",
+      "remove": "Retirer la clé"
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Permet aux apps de retrouver ce serveur quand l’adresse internet de votre domicile change. Le service ne connaît que l’adresse : la vidéo va toujours directement de ce serveur aux apps.",
@@ -773,7 +799,7 @@
       },
       "content": {
         "title": "Contenu",
-        "hint": "Affiches, recherche de podcasts, bandes-annonces et rangées de l’accueil"
+        "hint": "Affiches, recherche de podcasts et de sous-titres, bandes-annonces et rangées de l’accueil"
       },
       "streaming": {
         "title": "Streaming",

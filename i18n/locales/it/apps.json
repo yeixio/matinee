@@ -314,7 +314,20 @@
     "audioNeedsUpdate": "Aggiorna Matinee sul server per scegliere l'audio qui",
     "trackFailed": "Impossibile passare a quella traccia",
     "subtitlesFailed": "Impossibile caricare questi sottotitoli",
-    "convertsVideo": "Converte il video"
+    "convertsVideo": "Converte il video",
+    "findSubtitles": {
+      "open": "Cerca sottotitoli…",
+      "title": "Cerca sottotitoli",
+      "language": "Lingua",
+      "languageIs": "Lingua: {{language}}",
+      "looking": "Ricerca di sottotitoli online…",
+      "adding": "Aggiunta dei sottotitoli…",
+      "none": "Nessun sottotitolo in {{language}} trovato online per questo video.",
+      "matchesFile": "Fatti per questo file",
+      "machine": "Tradotti automaticamente",
+      "online": "Online",
+      "source": "Sottotitoli da OpenSubtitles.com"
+    }
   },
   "library": {
     "nothingUnwatched": "Niente da vedere qui",
@@ -444,6 +457,28 @@
     "podcasts": "Podcast",
     "signIn": "Apri Matinee sul telefono e accedi per ascoltare in auto.",
     "loading": "Caricamento…"
+  },
+  "automotive": {
+    "signInNeeded": "Accedi al tuo server Matinee per ascoltare in questa auto.",
+    "signIn": "Accedi",
+    "title": "Accedi a Matinee",
+    "nearby": "Server su questa rete",
+    "looking": "Ricerca dei server… Se l'auto non è sul Wi-Fi di casa, digita l'indirizzo del tuo server.",
+    "address": "Indirizzo del tuo server",
+    "addressHint": "matinee.example.com",
+    "next": "Avanti",
+    "notMatinee": "Nessun server Matinee raggiungibile lì. Controlla l'indirizzo e che il server sia raggiungibile fuori casa.",
+    "goTo": "Sul telefono o sul computer, vai su {{link}} e inserisci questo codice:",
+    "scan": "Oppure inquadralo con la fotocamera del telefono.",
+    "waiting": "In attesa che tu approvi questa auto…",
+    "expired": "Questo codice è scaduto.",
+    "declined": "L'accesso è stato rifiutato.",
+    "newCode": "Ottieni un nuovo codice",
+    "back": "Indietro",
+    "signedIn": "Accesso a {{server}} come {{name}}.",
+    "listenHint": "Scegli Matinee nelle app multimediali dell'auto per ascoltare. Puoi uscire da qui quando l'auto è parcheggiata.",
+    "signOut": "Esci",
+    "done": "Fine"
   },
   "watch": {
     "tileName": "In riproduzione",

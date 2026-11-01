@@ -33,7 +33,19 @@
     "unmute": "取消静音",
     "mute": "静音",
     "converting": "正在转换",
-    "fullscreen": "全屏"
+    "fullscreen": "全屏",
+    "findSubtitles": {
+      "open": "查找字幕…",
+      "title": "查找字幕",
+      "language": "语言",
+      "looking": "正在网上查找字幕…",
+      "none": "网上没有找到这个视频的{{language}}字幕。",
+      "matchesFile": "为此文件制作",
+      "machine": "机器翻译",
+      "online": "网上",
+      "remove": "移除{{name}}",
+      "source": "字幕来自 OpenSubtitles.com"
+    }
   },
   "somethingWentWrong": "出了点问题",
   "oneMoment": "请稍候…",
@@ -738,6 +750,20 @@
       "save": "保存密钥",
       "remove": "移除密钥"
     },
+    "subtitles": {
+      "title": "字幕搜索",
+      "intro": "任何人都可以在播放器的字幕菜单里查找视频缺少的字幕。搜索使用 OpenSubtitles.com：在 <site>opensubtitles.com/consumers</site> 获取免费 API 密钥。",
+      "using": "正在使用以 {{hint}} 结尾的密钥。",
+      "usingAccount": "正在使用尾号为 {{hint}} 的密钥，已以 {{username}} 登录。",
+      "none": "还没有密钥，所以播放器的字幕菜单里没有搜索。",
+      "key": "API 密钥",
+      "keepKey": "留空则保留已保存的密钥",
+      "accountHint": "可选：免费 OpenSubtitles 账号的用户名和密码能让服务器每天获取更多字幕文件。",
+      "username": "用户名",
+      "password": "密码",
+      "save": "保存",
+      "remove": "移除密钥"
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "即使家里的互联网地址变了，应用也能找到这台服务器。该服务只知道地址：视频始终从这台服务器直接发送到应用。",
@@ -765,7 +791,7 @@
       },
       "content": {
         "title": "内容",
-        "hint": "海报、播客搜索、预告片和首页行"
+        "hint": "海报、播客和字幕搜索、预告片和主页行"
       },
       "streaming": {
         "title": "串流",

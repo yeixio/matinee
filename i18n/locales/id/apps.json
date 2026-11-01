@@ -304,7 +304,20 @@
     "audioNeedsUpdate": "Perbarui Matinee di server untuk memilih audio di sini",
     "trackFailed": "Tidak dapat beralih ke trek itu",
     "subtitlesFailed": "Tidak dapat memuat subtitle ini",
-    "convertsVideo": "Mengonversi video"
+    "convertsVideo": "Mengonversi video",
+    "findSubtitles": {
+      "open": "Cari subtitle…",
+      "title": "Cari subtitle",
+      "language": "Bahasa",
+      "languageIs": "Bahasa: {{language}}",
+      "looking": "Mencari subtitle secara online…",
+      "adding": "Menambahkan subtitle…",
+      "none": "Tidak ada subtitle {{language}} yang ditemukan online untuk video ini.",
+      "matchesFile": "Dibuat untuk file ini",
+      "machine": "Terjemahan mesin",
+      "online": "Online",
+      "source": "Subtitle dari OpenSubtitles.com"
+    }
   },
   "library": {
     "nothingUnwatched": "Tidak ada yang belum ditonton di sini",
@@ -430,6 +443,28 @@
     "podcasts": "Podcast",
     "signIn": "Buka Matinee di ponsel Anda dan masuk untuk mendengarkan di mobil.",
     "loading": "Memuat…"
+  },
+  "automotive": {
+    "signInNeeded": "Masuk ke server Matinee kamu untuk mendengarkan di mobil ini.",
+    "signIn": "Masuk",
+    "title": "Masuk ke Matinee",
+    "nearby": "Server di jaringan ini",
+    "looking": "Mencari server… Jika mobil tidak tersambung ke Wi-Fi rumah, ketik alamat server kamu.",
+    "address": "Alamat server kamu",
+    "addressHint": "matinee.example.com",
+    "next": "Berikutnya",
+    "notMatinee": "Tidak dapat menjangkau server Matinee di sana. Periksa alamatnya, dan pastikan server bisa dijangkau dari luar rumah.",
+    "goTo": "Di ponsel atau komputer, buka {{link}} lalu masukkan kode ini:",
+    "scan": "Atau pindai dengan kamera ponsel kamu.",
+    "waiting": "Menunggu kamu menyetujui mobil ini…",
+    "expired": "Kode ini sudah kedaluwarsa.",
+    "declined": "Masuk ditolak.",
+    "newCode": "Minta kode baru",
+    "back": "Kembali",
+    "signedIn": "Masuk ke {{server}} sebagai {{name}}.",
+    "listenHint": "Pilih Matinee di aplikasi media mobil untuk mendengarkan. Kamu bisa keluar di sini saat mobil diparkir.",
+    "signOut": "Keluar",
+    "done": "Selesai"
   },
   "watch": {
     "tileName": "Sedang diputar",

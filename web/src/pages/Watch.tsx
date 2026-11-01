@@ -284,6 +284,25 @@ function Player({ id }: { id: number }) {
     }
   }, [item, sub])
 
+  // Subtitles found online are added to the video: show them right away.
+  const foundSub = (t: SubtitleTrack) => {
+    if (!item) return
+    qc.setQueryData<ItemDetail>(['item', id], (it) => (it ? { ...it, subtitles: [...(it.subtitles ?? []).filter((s) => s.id !== t.id), t] } : it))
+    qc.invalidateQueries({ queryKey: ['subtitleSearch', item.id] })
+    selectSub(t)
+  }
+  const removeSub = (t: SubtitleTrack) => {
+    if (!item) return
+    api
+      .removeSubtitle(item.id, t.id)
+      .then(() => {
+        if (sub?.id === t.id) selectSub(undefined)
+        qc.setQueryData<ItemDetail>(['item', id], (it) => (it ? { ...it, subtitles: it.subtitles?.filter((s) => s.id !== t.id) } : it))
+        qc.invalidateQueries({ queryKey: ['subtitleSearch', item.id] })
+      })
+      .catch((e: Error) => flash(e.message, 5000))
+  }
+
   // Picture subtitles are part of the video, so switching to or from one
   // restarts playback at the same spot.
   const selectSub = (t: SubtitleTrack | undefined) => {
@@ -870,15 +889,16 @@ function Player({ id }: { id: number }) {
                   }}
                 />
               )}
-              {!!item?.subtitles?.length && (
+              {item && (!!item.subtitles?.length || item.subtitleSearch) && (
                 <SubtitleMenu
-                  tracks={item.subtitles}
+                  tracks={item.subtitles ?? []}
                   selected={sub?.id}
                   onSelect={selectSub}
                   onOpenChange={(open) => {
                     menuOpen.current = open
                     poke()
                   }}
+                  find={item.subtitleSearch ? { itemId: item.id, onAdded: foundSub, onRemove: removeSub } : undefined}
                 />
               )}
               <button onClick={toggleFull} className="rounded-full p-2 hover:bg-white/10" aria-label={tr('player.fullscreen')}>

@@ -33,7 +33,19 @@
     "unmute": "Activează sunetul",
     "mute": "Dezactivează sunetul",
     "converting": "Se convertește",
-    "fullscreen": "Ecran complet"
+    "fullscreen": "Ecran complet",
+    "findSubtitles": {
+      "open": "Caută subtitrări…",
+      "title": "Caută subtitrări",
+      "language": "Limbă",
+      "looking": "Se caută subtitrări online…",
+      "none": "Nu s-au găsit online subtitrări în {{language}} pentru acest videoclip.",
+      "matchesFile": "Făcute pentru acest fișier",
+      "machine": "Traducere automată",
+      "online": "Online",
+      "remove": "Elimină {{name}}",
+      "source": "Subtitrări de pe OpenSubtitles.com"
+    }
   },
   "somethingWentWrong": "Ceva n-a mers bine",
   "oneMoment": "O clipă…",
@@ -746,6 +758,20 @@
       "save": "Salvează cheia",
       "remove": "Elimină cheia"
     },
+    "subtitles": {
+      "title": "Căutare de subtitrări",
+      "intro": "Oricine poate căuta subtitrările care lipsesc unui videoclip din meniul de subtitrări al playerului. Căutarea folosește OpenSubtitles.com: obține o cheie API gratuită de la <site>opensubtitles.com/consumers</site>.",
+      "using": "Se folosește cheia care se termină în {{hint}}.",
+      "usingAccount": "Se folosește cheia care se termină în {{hint}}, conectat ca {{username}}.",
+      "none": "Încă nu există o cheie, așa că meniul de subtitrări al playerului nu are căutare.",
+      "key": "Cheie API",
+      "keepKey": "Lasă gol pentru a păstra cheia salvată",
+      "accountHint": "Opțional: numele de utilizator și parola unui cont OpenSubtitles gratuit permit serverului să descarce mai multe fișiere de subtitrare pe zi.",
+      "username": "Nume de utilizator",
+      "password": "Parolă",
+      "save": "Salvează",
+      "remove": "Elimină cheia"
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Ajută aplicațiile să găsească acest server când se schimbă adresa de internet a casei. Serviciul află doar adresa: video-ul merge mereu direct de la acest server la aplicații.",
@@ -773,7 +799,7 @@
       },
       "content": {
         "title": "Conținut",
-        "hint": "Postere, căutare podcasturi, trailere și rânduri pe Acasă"
+        "hint": "Postere, căutare de podcasturi și subtitrări, trailere și rândurile din Acasă"
       },
       "streaming": {
         "title": "Streaming",

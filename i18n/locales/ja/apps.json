@@ -304,7 +304,20 @@
     "audioNeedsUpdate": "ここで音声を選ぶには、サーバーの Matinee を更新してください",
     "trackFailed": "そのトラックに切り替えられませんでした",
     "subtitlesFailed": "この字幕を読み込めませんでした",
-    "convertsVideo": "動画を変換します"
+    "convertsVideo": "動画を変換します",
+    "findSubtitles": {
+      "open": "字幕を探す…",
+      "title": "字幕を探す",
+      "language": "言語",
+      "languageIs": "言語: {{language}}",
+      "looking": "オンラインで字幕を探しています…",
+      "adding": "字幕を追加しています…",
+      "none": "この動画の{{language}}字幕はオンラインで見つかりませんでした。",
+      "matchesFile": "このファイル用",
+      "machine": "機械翻訳",
+      "online": "オンライン",
+      "source": "字幕提供: OpenSubtitles.com"
+    }
   },
   "library": {
     "nothingUnwatched": "未視聴のものはありません",
@@ -430,6 +443,28 @@
     "podcasts": "ポッドキャスト",
     "signIn": "車で聴くには、スマートフォンで Matinee を開いてサインインしてください。",
     "loading": "読み込み中…"
+  },
+  "automotive": {
+    "signInNeeded": "この車で聴くには、Matinee サーバーにサインインしてください。",
+    "signIn": "サインイン",
+    "title": "Matinee にサインイン",
+    "nearby": "このネットワーク上のサーバー",
+    "looking": "サーバーを探しています… 車が自宅の Wi-Fi につながっていない場合は、サーバーのアドレスを入力してください。",
+    "address": "サーバーのアドレス",
+    "addressHint": "matinee.example.com",
+    "next": "次へ",
+    "notMatinee": "そこにある Matinee サーバーに接続できません。アドレスと、サーバーに外出先から接続できるかを確認してください。",
+    "goTo": "スマートフォンかパソコンで {{link}} を開き、このコードを入力してください:",
+    "scan": "またはスマートフォンのカメラでスキャンしてください。",
+    "waiting": "この車の承認を待っています…",
+    "expired": "このコードは期限切れです。",
+    "declined": "サインインが拒否されました。",
+    "newCode": "新しいコードを取得",
+    "back": "戻る",
+    "signedIn": "{{server}} に {{name}} としてサインインしています。",
+    "listenHint": "聴くには、車のメディアアプリで Matinee を選んでください。サインアウトは駐車中にここからできます。",
+    "signOut": "サインアウト",
+    "done": "完了"
   },
   "watch": {
     "tileName": "再生中",

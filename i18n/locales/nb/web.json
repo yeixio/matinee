@@ -33,7 +33,19 @@
     "unmute": "Slå på lyd",
     "mute": "Slå av lyd",
     "converting": "Konverterer",
-    "fullscreen": "Fullskjerm"
+    "fullscreen": "Fullskjerm",
+    "findSubtitles": {
+      "open": "Søk etter undertekster…",
+      "title": "Søk etter undertekster",
+      "language": "Språk",
+      "looking": "Søker etter undertekster på nettet…",
+      "none": "Fant ingen undertekster på {{language}} på nettet for denne videoen.",
+      "matchesFile": "Laget for denne filen",
+      "machine": "Maskinoversatt",
+      "online": "Fra nettet",
+      "remove": "Fjern {{name}}",
+      "source": "Undertekster fra OpenSubtitles.com"
+    }
   },
   "somethingWentWrong": "Noe gikk galt",
   "oneMoment": "Et øyeblikk…",
@@ -742,6 +754,20 @@
       "save": "Lagre nøkkel",
       "remove": "Fjern nøkkel"
     },
+    "subtitles": {
+      "title": "Undertekstsøk",
+      "intro": "Alle kan søke etter undertekster en video mangler, fra avspillerens undertekstmeny. Søket bruker OpenSubtitles.com: få en gratis API-nøkkel på <site>opensubtitles.com/consumers</site>.",
+      "using": "Bruker nøkkelen som slutter på {{hint}}.",
+      "usingAccount": "Bruker nøkkelen som slutter på {{hint}}, logget inn som {{username}}.",
+      "none": "Ingen nøkkel ennå, så avspillerens undertekstmeny har ikke søk.",
+      "key": "API-nøkkel",
+      "keepKey": "La stå tomt for å beholde den lagrede nøkkelen",
+      "accountHint": "Valgfritt: brukernavn og passord for en gratis OpenSubtitles-konto lar serveren hente flere undertekstfiler per dag.",
+      "username": "Brukernavn",
+      "password": "Passord",
+      "save": "Lagre",
+      "remove": "Fjern nøkkel"
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Gjør at appene finner denne serveren også når internettadressen hjemme endres. Tjenesten kjenner bare adressen: video går alltid rett fra serveren til appene.",
@@ -769,7 +795,7 @@
       },
       "content": {
         "title": "Innhold",
-        "hint": "Plakater, podkastsøk, trailere og rader på Hjem"
+        "hint": "Plakater, søk etter podkaster og undertekster, trailere og rader på Hjem"
       },
       "streaming": {
         "title": "Strømming",

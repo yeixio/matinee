@@ -1,14 +1,15 @@
-import { Captions, Check } from 'lucide-react'
+import { Captions, Check, Search, X } from 'lucide-react'
 import { Fragment, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import type { SubtitleTrack } from '../api'
 import { subtitleLabel } from '../media'
+import { FindSubtitles } from './FindSubtitles'
 import { activeCues, spans, type Cue } from './vtt'
 
 const prefKey = 'matinee.subtitles'
 
 // The viewer's last choice: a language code, "" for a track without one, or "off".
-function savedPreference(): string | null {
+export function savedPreference(): string | null {
   try {
     return localStorage.getItem(prefKey)
   } catch {
@@ -90,15 +91,26 @@ type MenuProps = {
   selected?: string
   onSelect: (track: SubtitleTrack | undefined) => void
   onOpenChange: (open: boolean) => void
+  /** Set when the viewer can look for more subtitles online. */
+  find?: {
+    itemId: number
+    /** A file found online was added: show it. */
+    onAdded: (track: SubtitleTrack) => void
+    /** A found file was removed. */
+    onRemove: (track: SubtitleTrack) => void
+  }
 }
 
-// SubtitleMenu is the captions button and its list of tracks.
-export function SubtitleMenu({ tracks, selected, onSelect, onOpenChange }: MenuProps) {
+// SubtitleMenu is the captions button and its list of tracks, ending in
+// Find subtitles when the server can look for more online.
+export function SubtitleMenu({ tracks, selected, onSelect, onOpenChange, find }: MenuProps) {
   const { t: tr } = useTranslation()
   const [open, setOpen] = useState(false)
+  const [finding, setFinding] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
   const toggle = (v: boolean) => {
     setOpen(v)
+    if (!v) setFinding(false)
     onOpenChange(v)
   }
 
@@ -114,19 +126,31 @@ export function SubtitleMenu({ tracks, selected, onSelect, onOpenChange }: MenuP
     toggle(false)
   }
   const item = (key: string, label: string, active: boolean, t: SubtitleTrack | undefined, note?: string) => (
-    <li key={key}>
+    <li key={key} className="flex items-center">
       <button
         role="menuitemradio"
         aria-checked={active}
         onClick={() => choose(t)}
-        className="flex w-full items-center gap-3 rounded-md px-3 py-2 text-start text-sm hover:bg-white/10"
+        className="flex min-w-0 flex-1 items-center gap-3 rounded-md px-3 py-2 text-start text-sm hover:bg-white/10"
       >
         <Check className={`size-4 shrink-0 ${active ? 'text-accent' : 'invisible'}`} />
         <span className="min-w-0 flex-1 truncate">{label}</span>
         {note && <span className="shrink-0 text-xs text-white/50">{note}</span>}
       </button>
+      {t?.removable && find && (
+        <button
+          onClick={() => find.onRemove(t)}
+          className="rounded-full p-1.5 text-white/50 hover:bg-white/10 hover:text-white"
+          aria-label={tr('player.findSubtitles.remove', { name: label })}
+          title={tr('player.findSubtitles.remove', { name: label })}
+        >
+          <X className="size-4" />
+        </button>
+      )}
     </li>
   )
+  const note = (t: SubtitleTrack) =>
+    t.burnIn ? tr('player.convertsVideo') : t.found ? tr('player.findSubtitles.online') : t.external ? tr('player.file') : undefined
 
   return (
     <div ref={ref} className="relative">
@@ -140,14 +164,37 @@ export function SubtitleMenu({ tracks, selected, onSelect, onOpenChange }: MenuP
         <Captions className="size-6" />
       </button>
       {open && (
-        <div className="absolute end-0 bottom-full mb-2 w-64 rounded-xl border border-white/10 bg-black/90 p-1.5 shadow-2xl backdrop-blur">
-          <div className="px-3 pt-1.5 pb-1 text-xs font-medium tracking-wide text-white/50 uppercase">{tr('file.subtitles')}</div>
-          <ul role="menu" className="max-h-72 overflow-y-auto">
-            {item('off', tr('player.off'), !selected, undefined)}
-            {tracks.map((t) =>
-              item(t.id, subtitleLabel(t), t.id === selected, t, t.burnIn ? tr('player.convertsVideo') : t.external ? tr('player.file') : undefined),
-            )}
-          </ul>
+        <div
+          className={`absolute end-0 bottom-full mb-2 rounded-xl border border-white/10 bg-black/90 p-1.5 shadow-2xl backdrop-blur ${finding ? '' : 'w-64'}`}
+        >
+          {finding && find ? (
+            <FindSubtitles
+              itemId={find.itemId}
+              onBack={() => setFinding(false)}
+              onAdded={(t) => {
+                find.onAdded(t)
+                toggle(false)
+              }}
+            />
+          ) : (
+            <>
+              <div className="px-3 pt-1.5 pb-1 text-xs font-medium tracking-wide text-white/50 uppercase">{tr('file.subtitles')}</div>
+              <ul role="menu" className="max-h-72 overflow-y-auto">
+                {item('off', tr('player.off'), !selected, undefined)}
+                {tracks.map((t) => item(t.id, subtitleLabel(t), t.id === selected, t, note(t)))}
+              </ul>
+              {find && (
+                <button
+                  role="menuitem"
+                  onClick={() => setFinding(true)}
+                  className="mt-1 flex w-full items-center gap-3 rounded-md border-t border-white/10 px-3 py-2 text-start text-sm hover:bg-white/10"
+                >
+                  <Search className="size-4 shrink-0" />
+                  <span className="min-w-0 flex-1 truncate">{tr('player.findSubtitles.open')}</span>
+                </button>
+              )}
+            </>
+          )}
         </div>
       )}
     </div>

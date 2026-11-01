@@ -314,7 +314,20 @@
     "audioNeedsUpdate": "Atualize o Matinee no servidor para escolher o áudio aqui",
     "trackFailed": "Não foi possível trocar para essa faixa",
     "subtitlesFailed": "Não foi possível carregar estas legendas",
-    "convertsVideo": "Converte o vídeo"
+    "convertsVideo": "Converte o vídeo",
+    "findSubtitles": {
+      "open": "Buscar legendas…",
+      "title": "Buscar legendas",
+      "language": "Idioma",
+      "languageIs": "Idioma: {{language}}",
+      "looking": "Procurando legendas on-line…",
+      "adding": "Adicionando as legendas…",
+      "none": "Nenhuma legenda em {{language}} encontrada on-line para este vídeo.",
+      "matchesFile": "Feitas para este arquivo",
+      "machine": "Tradução automática",
+      "online": "On-line",
+      "source": "Legendas do OpenSubtitles.com"
+    }
   },
   "library": {
     "nothingUnwatched": "Nada para assistir aqui",
@@ -444,6 +457,28 @@
     "podcasts": "Podcasts",
     "signIn": "Abra o Matinee no celular e entre para ouvir no carro.",
     "loading": "Carregando…"
+  },
+  "automotive": {
+    "signInNeeded": "Entre no seu servidor Matinee para ouvir neste carro.",
+    "signIn": "Entrar",
+    "title": "Entrar no Matinee",
+    "nearby": "Servidores nesta rede",
+    "looking": "Procurando servidores… Se o carro não estiver no Wi-Fi da sua casa, digite o endereço do seu servidor.",
+    "address": "Endereço do seu servidor",
+    "addressHint": "matinee.example.com",
+    "next": "Próximo",
+    "notMatinee": "Não foi possível acessar um servidor Matinee aí. Confira o endereço e se o servidor pode ser acessado fora de casa.",
+    "goTo": "No celular ou computador, acesse {{link}} e digite este código:",
+    "scan": "Ou escaneie com a câmera do celular.",
+    "waiting": "Aguardando você aprovar este carro…",
+    "expired": "Este código expirou.",
+    "declined": "O acesso foi recusado.",
+    "newCode": "Gerar um novo código",
+    "back": "Voltar",
+    "signedIn": "Conectado a {{server}} como {{name}}.",
+    "listenHint": "Escolha o Matinee nos apps de mídia do carro para ouvir. Você pode sair aqui com o carro estacionado.",
+    "signOut": "Sair",
+    "done": "Concluído"
   },
   "watch": {
     "tileName": "Tocando agora",

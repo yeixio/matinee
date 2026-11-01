@@ -309,7 +309,20 @@
     "audioNeedsUpdate": "Oppdater Matinee på serveren for å velge lyd her",
     "trackFailed": "Kunne ikke bytte til det sporet",
     "subtitlesFailed": "Kunne ikke laste inn disse undertekstene",
-    "convertsVideo": "Konverterer videoen"
+    "convertsVideo": "Konverterer videoen",
+    "findSubtitles": {
+      "open": "Søk etter undertekster…",
+      "title": "Søk etter undertekster",
+      "language": "Språk",
+      "languageIs": "Språk: {{language}}",
+      "looking": "Søker etter undertekster på nettet…",
+      "adding": "Legger til undertekstene…",
+      "none": "Fant ingen undertekster på {{language}} på nettet for denne videoen.",
+      "matchesFile": "Laget for denne filen",
+      "machine": "Maskinoversatt",
+      "online": "Fra nettet",
+      "source": "Undertekster fra OpenSubtitles.com"
+    }
   },
   "library": {
     "nothingUnwatched": "Ingenting usett her",
@@ -437,6 +450,28 @@
     "podcasts": "Podkaster",
     "signIn": "Åpne Matinee på telefonen og logg på for å lytte i bilen.",
     "loading": "Laster inn …"
+  },
+  "automotive": {
+    "signInNeeded": "Logg inn på Matinee-serveren din for å lytte i denne bilen.",
+    "signIn": "Logg inn",
+    "title": "Logg inn på Matinee",
+    "nearby": "Servere på dette nettverket",
+    "looking": "Leter etter servere… Hvis bilen ikke er på Wi-Fi hjemme, skriv inn adressen til serveren din.",
+    "address": "Adressen til serveren din",
+    "addressHint": "matinee.example.com",
+    "next": "Neste",
+    "notMatinee": "Finner ingen Matinee-server der. Sjekk adressen, og at serveren kan nås hjemmefra.",
+    "goTo": "Gå til {{link}} på telefonen eller datamaskinen og skriv inn denne koden:",
+    "scan": "Eller skann den med kameraet på telefonen.",
+    "waiting": "Venter på at du godkjenner denne bilen…",
+    "expired": "Koden er utløpt.",
+    "declined": "Innloggingen ble avvist.",
+    "newCode": "Få en ny kode",
+    "back": "Tilbake",
+    "signedIn": "Logget inn på {{server}} som {{name}}.",
+    "listenHint": "Velg Matinee blant bilens medieapper for å lytte. Du kan logge ut her når bilen står parkert.",
+    "signOut": "Logg ut",
+    "done": "Ferdig"
   },
   "watch": {
     "tileName": "Spilles nå",

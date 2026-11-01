@@ -309,7 +309,20 @@
     "audioNeedsUpdate": "Opdater Matinee på serveren for at vælge lyden her",
     "trackFailed": "Kunne ikke skifte til det spor",
     "subtitlesFailed": "Kunne ikke indlæse disse undertekster",
-    "convertsVideo": "Konverterer video"
+    "convertsVideo": "Konverterer video",
+    "findSubtitles": {
+      "open": "Find undertekster…",
+      "title": "Find undertekster",
+      "language": "Sprog",
+      "languageIs": "Sprog: {{language}}",
+      "looking": "Leder efter undertekster online…",
+      "adding": "Tilføjer underteksterne…",
+      "none": "Fandt ingen undertekster på {{language}} online til denne video.",
+      "matchesFile": "Lavet til denne fil",
+      "machine": "Maskinoversat",
+      "online": "Online",
+      "source": "Undertekster fra OpenSubtitles.com"
+    }
   },
   "library": {
     "nothingUnwatched": "Intet uset her",
@@ -437,6 +450,28 @@
     "podcasts": "Podcasts",
     "signIn": "Åbn Matinee på din telefon, og log ind for at lytte i bilen.",
     "loading": "Indlæser…"
+  },
+  "automotive": {
+    "signInNeeded": "Log ind på din Matinee-server for at lytte i denne bil.",
+    "signIn": "Log ind",
+    "title": "Log ind på Matinee",
+    "nearby": "Servere på dette netværk",
+    "looking": "Leder efter servere… Hvis bilen ikke er på dit wifi derhjemme, så skriv din servers adresse.",
+    "address": "Din servers adresse",
+    "addressHint": "matinee.example.com",
+    "next": "Næste",
+    "notMatinee": "Kan ikke nå en Matinee-server der. Tjek adressen, og at serveren kan nås hjemmefra.",
+    "goTo": "Gå til {{link}} på din telefon eller computer, og indtast denne kode:",
+    "scan": "Eller scan den med telefonens kamera.",
+    "waiting": "Venter på, at du godkender denne bil…",
+    "expired": "Koden er udløbet.",
+    "declined": "Login blev afvist.",
+    "newCode": "Få en ny kode",
+    "back": "Tilbage",
+    "signedIn": "Logget ind på {{server}} som {{name}}.",
+    "listenHint": "Vælg Matinee blandt bilens medieapps for at lytte. Du kan logge ud her, når bilen holder parkeret.",
+    "signOut": "Log ud",
+    "done": "Færdig"
   },
   "watch": {
     "tileName": "Afspiller nu",

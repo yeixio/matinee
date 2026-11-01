@@ -304,7 +304,20 @@
     "audioNeedsUpdate": "请更新服务器上的 Matinee，以便在这里选择音轨",
     "trackFailed": "无法切换到该音轨",
     "subtitlesFailed": "无法加载这些字幕",
-    "convertsVideo": "会转换视频"
+    "convertsVideo": "会转换视频",
+    "findSubtitles": {
+      "open": "查找字幕…",
+      "title": "查找字幕",
+      "language": "语言",
+      "languageIs": "语言：{{language}}",
+      "looking": "正在网上查找字幕…",
+      "adding": "正在添加字幕…",
+      "none": "网上没有找到这个视频的{{language}}字幕。",
+      "matchesFile": "为此文件制作",
+      "machine": "机器翻译",
+      "online": "网上",
+      "source": "字幕来自 OpenSubtitles.com"
+    }
   },
   "library": {
     "nothingUnwatched": "这里没有未看的内容",
@@ -430,6 +443,28 @@
     "podcasts": "播客",
     "signIn": "在手机上打开 Matinee 并登录，即可在车上收听。",
     "loading": "正在加载…"
+  },
+  "automotive": {
+    "signInNeeded": "登录你的 Matinee 服务器，即可在这辆车上收听。",
+    "signIn": "登录",
+    "title": "登录 Matinee",
+    "nearby": "此网络上的服务器",
+    "looking": "正在查找服务器… 如果车辆没有连接家里的 Wi-Fi，请输入服务器地址。",
+    "address": "你的服务器地址",
+    "addressHint": "matinee.example.com",
+    "next": "下一步",
+    "notMatinee": "无法连接到该地址的 Matinee 服务器。请检查地址，以及服务器能否从外部访问。",
+    "goTo": "在手机或电脑上打开 {{link}} 并输入此代码：",
+    "scan": "或用手机相机扫描。",
+    "waiting": "正在等待你批准这辆车…",
+    "expired": "此代码已过期。",
+    "declined": "登录被拒绝。",
+    "newCode": "获取新代码",
+    "back": "返回",
+    "signedIn": "已以 {{name}} 身份登录 {{server}}。",
+    "listenHint": "在车辆的媒体应用中选择 Matinee 即可收听。停车时可以在这里退出登录。",
+    "signOut": "退出登录",
+    "done": "完成"
   },
   "watch": {
     "tileName": "正在播放",

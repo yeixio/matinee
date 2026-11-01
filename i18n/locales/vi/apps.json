@@ -304,7 +304,20 @@
     "audioNeedsUpdate": "Cập nhật Matinee trên máy chủ để chọn âm thanh tại đây",
     "trackFailed": "Không thể chuyển sang rãnh đó",
     "subtitlesFailed": "Không thể tải phụ đề này",
-    "convertsVideo": "Chuyển đổi video"
+    "convertsVideo": "Chuyển đổi video",
+    "findSubtitles": {
+      "open": "Tìm phụ đề…",
+      "title": "Tìm phụ đề",
+      "language": "Ngôn ngữ",
+      "languageIs": "Ngôn ngữ: {{language}}",
+      "looking": "Đang tìm phụ đề trên mạng…",
+      "adding": "Đang thêm phụ đề…",
+      "none": "Không tìm thấy phụ đề {{language}} trên mạng cho video này.",
+      "matchesFile": "Làm cho chính tệp này",
+      "machine": "Dịch máy",
+      "online": "Trên mạng",
+      "source": "Phụ đề từ OpenSubtitles.com"
+    }
   },
   "library": {
     "nothingUnwatched": "Không còn gì chưa xem ở đây",
@@ -430,6 +443,28 @@
     "podcasts": "Podcast",
     "signIn": "Mở Matinee trên điện thoại và đăng nhập để nghe trên xe.",
     "loading": "Đang tải…"
+  },
+  "automotive": {
+    "signInNeeded": "Đăng nhập vào máy chủ Matinee của bạn để nghe trên xe này.",
+    "signIn": "Đăng nhập",
+    "title": "Đăng nhập vào Matinee",
+    "nearby": "Máy chủ trong mạng này",
+    "looking": "Đang tìm máy chủ… Nếu xe không kết nối Wi-Fi ở nhà, hãy nhập địa chỉ máy chủ của bạn.",
+    "address": "Địa chỉ máy chủ của bạn",
+    "addressHint": "matinee.example.com",
+    "next": "Tiếp",
+    "notMatinee": "Không kết nối được với máy chủ Matinee ở đó. Hãy kiểm tra địa chỉ và máy chủ có truy cập được từ bên ngoài không.",
+    "goTo": "Trên điện thoại hoặc máy tính, hãy vào {{link}} và nhập mã này:",
+    "scan": "Hoặc quét bằng camera điện thoại.",
+    "waiting": "Đang chờ bạn chấp thuận xe này…",
+    "expired": "Mã này đã hết hạn.",
+    "declined": "Đăng nhập đã bị từ chối.",
+    "newCode": "Lấy mã mới",
+    "back": "Quay lại",
+    "signedIn": "Đã đăng nhập vào {{server}} với tên {{name}}.",
+    "listenHint": "Chọn Matinee trong ứng dụng đa phương tiện của xe để nghe. Bạn có thể đăng xuất tại đây khi xe đang đỗ.",
+    "signOut": "Đăng xuất",
+    "done": "Xong"
   },
   "watch": {
     "tileName": "Đang phát",

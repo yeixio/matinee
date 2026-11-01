@@ -314,7 +314,20 @@
     "audioNeedsUpdate": "Actualiza Matinee en el servidor para elegir el audio aquí",
     "trackFailed": "No se pudo cambiar a esa pista",
     "subtitlesFailed": "No se pudieron cargar estos subtítulos",
-    "convertsVideo": "Convierte el vídeo"
+    "convertsVideo": "Convierte el vídeo",
+    "findSubtitles": {
+      "open": "Buscar subtítulos…",
+      "title": "Buscar subtítulos",
+      "language": "Idioma",
+      "languageIs": "Idioma: {{language}}",
+      "looking": "Buscando subtítulos en línea…",
+      "adding": "Añadiendo los subtítulos…",
+      "none": "No se encontraron subtítulos en {{language}} en línea para este vídeo.",
+      "matchesFile": "Hechos para este archivo",
+      "machine": "Traducción automática",
+      "online": "En línea",
+      "source": "Subtítulos de OpenSubtitles.com"
+    }
   },
   "library": {
     "nothingUnwatched": "No queda nada sin ver",
@@ -444,6 +457,28 @@
     "podcasts": "Pódcasts",
     "signIn": "Abre Matinee en tu teléfono e inicia sesión para escuchar en el coche.",
     "loading": "Cargando…"
+  },
+  "automotive": {
+    "signInNeeded": "Inicia sesión en tu servidor Matinee para escuchar en este coche.",
+    "signIn": "Iniciar sesión",
+    "title": "Iniciar sesión en Matinee",
+    "nearby": "Servidores en esta red",
+    "looking": "Buscando servidores… Si el coche no está en el wifi de tu casa, escribe la dirección de tu servidor.",
+    "address": "Dirección de tu servidor",
+    "addressHint": "matinee.example.com",
+    "next": "Siguiente",
+    "notMatinee": "No se puede acceder a un servidor Matinee ahí. Revisa la dirección y que el servidor sea accesible fuera de casa.",
+    "goTo": "En tu móvil u ordenador, ve a {{link}} e introduce este código:",
+    "scan": "O escanéalo con la cámara de tu móvil.",
+    "waiting": "Esperando a que apruebes este coche…",
+    "expired": "Este código ha caducado.",
+    "declined": "Se rechazó el inicio de sesión.",
+    "newCode": "Obtener un código nuevo",
+    "back": "Atrás",
+    "signedIn": "Sesión iniciada en {{server}} como {{name}}.",
+    "listenHint": "Elige Matinee en las apps multimedia del coche para escuchar. Puedes cerrar sesión aquí con el coche aparcado.",
+    "signOut": "Cerrar sesión",
+    "done": "Listo"
   },
   "watch": {
     "tileName": "Reproduciendo",

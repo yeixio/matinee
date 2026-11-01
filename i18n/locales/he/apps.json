@@ -314,7 +314,20 @@
     "audioNeedsUpdate": "עדכנו את Matinee בשרת כדי לבחור כאן את השמע",
     "trackFailed": "לא ניתן לעבור לרצועה הזו",
     "subtitlesFailed": "לא ניתן לטעון את הכתוביות האלה",
-    "convertsVideo": "ממיר את הווידאו"
+    "convertsVideo": "ממיר את הווידאו",
+    "findSubtitles": {
+      "open": "חיפוש כתוביות…",
+      "title": "חיפוש כתוביות",
+      "language": "שפה",
+      "languageIs": "שפה: {{language}}",
+      "looking": "מחפשים כתוביות ברשת…",
+      "adding": "מוסיפים את הכתוביות…",
+      "none": "לא נמצאו ברשת כתוביות ב{{language}} לסרטון הזה.",
+      "matchesFile": "נוצרו לקובץ הזה",
+      "machine": "תרגום מכונה",
+      "online": "מהרשת",
+      "source": "כתוביות מ-OpenSubtitles.com"
+    }
   },
   "library": {
     "nothingUnwatched": "אין כאן שום דבר שלא נצפה",
@@ -444,6 +457,28 @@
     "podcasts": "פודקאסטים",
     "signIn": "פתחו את Matinee בטלפון והתחברו כדי להאזין ברכב.",
     "loading": "בטעינה…"
+  },
+  "automotive": {
+    "signInNeeded": "התחבר לשרת Matinee שלך כדי להאזין ברכב הזה.",
+    "signIn": "התחברות",
+    "title": "התחברות ל-Matinee",
+    "nearby": "שרתים ברשת הזו",
+    "looking": "מחפש שרתים… אם הרכב לא מחובר ל-Wi-Fi בבית, הקלד את כתובת השרת שלך.",
+    "address": "כתובת השרת שלך",
+    "addressHint": "matinee.example.com",
+    "next": "הבא",
+    "notMatinee": "אי אפשר להגיע לשרת Matinee שם. בדוק את הכתובת, ושאפשר להגיע לשרת מחוץ לבית.",
+    "goTo": "בטלפון או במחשב, עבור אל {{link}} והזן את הקוד הזה:",
+    "scan": "או סרוק אותו במצלמת הטלפון.",
+    "waiting": "ממתין לאישור שלך לרכב הזה…",
+    "expired": "תוקף הקוד הזה פג.",
+    "declined": "ההתחברות נדחתה.",
+    "newCode": "קבל קוד חדש",
+    "back": "חזרה",
+    "signedIn": "מחובר ל-{{server}} בתור {{name}}.",
+    "listenHint": "בחר ב-Matinee באפליקציות המדיה של הרכב כדי להאזין. אפשר להתנתק כאן כשהרכב חונה.",
+    "signOut": "התנתקות",
+    "done": "סיום"
   },
   "watch": {
     "tileName": "מתנגן עכשיו",

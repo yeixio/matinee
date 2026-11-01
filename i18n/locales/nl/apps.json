@@ -309,7 +309,20 @@
     "audioNeedsUpdate": "Werk Matinee op de server bij om hier de audio te kiezen",
     "trackFailed": "Kan niet naar die track overschakelen",
     "subtitlesFailed": "Kan deze ondertitels niet laden",
-    "convertsVideo": "Zet de video om"
+    "convertsVideo": "Zet de video om",
+    "findSubtitles": {
+      "open": "Ondertitels zoeken…",
+      "title": "Ondertitels zoeken",
+      "language": "Taal",
+      "languageIs": "Taal: {{language}}",
+      "looking": "Online naar ondertitels zoeken…",
+      "adding": "Ondertitels toevoegen…",
+      "none": "Geen {{language}} ondertitels online gevonden voor deze video.",
+      "matchesFile": "Gemaakt voor dit bestand",
+      "machine": "Machinaal vertaald",
+      "online": "Online",
+      "source": "Ondertitels van OpenSubtitles.com"
+    }
   },
   "library": {
     "nothingUnwatched": "Niets ongezien hier",
@@ -437,6 +450,28 @@
     "podcasts": "Podcasts",
     "signIn": "Open Matinee op je telefoon en log in om in de auto te luisteren.",
     "loading": "Laden…"
+  },
+  "automotive": {
+    "signInNeeded": "Meld je aan bij je Matinee-server om in deze auto te luisteren.",
+    "signIn": "Aanmelden",
+    "title": "Aanmelden bij Matinee",
+    "nearby": "Servers op dit netwerk",
+    "looking": "Zoeken naar servers… Zit de auto niet op je wifi thuis, typ dan het adres van je server.",
+    "address": "Adres van je server",
+    "addressHint": "matinee.example.com",
+    "next": "Volgende",
+    "notMatinee": "Daar is geen Matinee-server bereikbaar. Controleer het adres en of de server buiten je huis bereikbaar is.",
+    "goTo": "Ga op je telefoon of computer naar {{link}} en voer deze code in:",
+    "scan": "Of scan hem met de camera van je telefoon.",
+    "waiting": "Wachten tot je deze auto goedkeurt…",
+    "expired": "Deze code is verlopen.",
+    "declined": "Aanmelden is geweigerd.",
+    "newCode": "Nieuwe code",
+    "back": "Terug",
+    "signedIn": "Aangemeld bij {{server}} als {{name}}.",
+    "listenHint": "Kies Matinee in de media-apps van de auto om te luisteren. Afmelden kan hier als de auto geparkeerd staat.",
+    "signOut": "Afmelden",
+    "done": "Klaar"
   },
   "watch": {
     "tileName": "Speelt nu",

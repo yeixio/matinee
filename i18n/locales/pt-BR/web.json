@@ -33,7 +33,19 @@
     "unmute": "Ativar som",
     "mute": "Silenciar",
     "converting": "Convertendo",
-    "fullscreen": "Tela cheia"
+    "fullscreen": "Tela cheia",
+    "findSubtitles": {
+      "open": "Buscar legendas…",
+      "title": "Buscar legendas",
+      "language": "Idioma",
+      "looking": "Procurando legendas on-line…",
+      "none": "Nenhuma legenda em {{language}} encontrada on-line para este vídeo.",
+      "matchesFile": "Feitas para este arquivo",
+      "machine": "Tradução automática",
+      "online": "On-line",
+      "remove": "Remover {{name}}",
+      "source": "Legendas do OpenSubtitles.com"
+    }
   },
   "somethingWentWrong": "Algo deu errado",
   "oneMoment": "Só um momento…",
@@ -746,6 +758,20 @@
       "save": "Salvar chave",
       "remove": "Remover chave"
     },
+    "subtitles": {
+      "title": "Busca de legendas",
+      "intro": "Qualquer pessoa pode buscar as legendas que faltam em um vídeo pelo menu de legendas do player. A busca usa o OpenSubtitles.com: obtenha uma chave de API gratuita em <site>opensubtitles.com/consumers</site>.",
+      "using": "Usando a chave terminada em {{hint}}.",
+      "usingAccount": "Usando a chave que termina em {{hint}}, conectado como {{username}}.",
+      "none": "Ainda não há chave, então o menu de legendas do player não tem busca.",
+      "key": "Chave de API",
+      "keepKey": "Deixe vazio para manter a chave salva",
+      "accountHint": "Opcional: o usuário e a senha de uma conta gratuita do OpenSubtitles permitem que o servidor baixe mais arquivos de legenda por dia.",
+      "username": "Nome de usuário",
+      "password": "Senha",
+      "save": "Salvar",
+      "remove": "Remover chave"
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Mantém os apps encontrando este servidor quando o endereço de internet da sua casa muda. O serviço só conhece o endereço: o vídeo sempre vai direto deste servidor para os apps.",
@@ -773,7 +799,7 @@
       },
       "content": {
         "title": "Conteúdo",
-        "hint": "Pôsteres, busca de podcasts, trailers e fileiras do Início"
+        "hint": "Pôsteres, busca de podcasts e legendas, trailers e fileiras do Início"
       },
       "streaming": {
         "title": "Streaming",

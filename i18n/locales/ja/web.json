@@ -33,7 +33,19 @@
     "unmute": "ミュート解除",
     "mute": "ミュート",
     "converting": "変換中",
-    "fullscreen": "フルスクリーン"
+    "fullscreen": "フルスクリーン",
+    "findSubtitles": {
+      "open": "字幕を探す…",
+      "title": "字幕を探す",
+      "language": "言語",
+      "looking": "オンラインで字幕を探しています…",
+      "none": "この動画の{{language}}字幕はオンラインで見つかりませんでした。",
+      "matchesFile": "このファイル用",
+      "machine": "機械翻訳",
+      "online": "オンライン",
+      "remove": "{{name}}を削除",
+      "source": "字幕提供: OpenSubtitles.com"
+    }
   },
   "somethingWentWrong": "問題が発生しました",
   "oneMoment": "少々お待ちください…",
@@ -738,6 +750,20 @@
       "save": "キーを保存",
       "remove": "キーを削除"
     },
+    "subtitles": {
+      "title": "字幕検索",
+      "intro": "動画にない字幕は、プレーヤーの字幕メニューから誰でも探せます。検索には OpenSubtitles.com を使います。無料の API キーは <site>opensubtitles.com/consumers</site> で取得できます。",
+      "using": "末尾が {{hint}} のキーを使用中です。",
+      "usingAccount": "末尾が {{hint}} のキーを使用中です。{{username}} としてサインインしています。",
+      "none": "まだキーがないため、プレーヤーの字幕メニューに検索はありません。",
+      "key": "API キー",
+      "keepKey": "保存済みのキーを使い続けるには空欄のままにします",
+      "accountHint": "任意: 無料の OpenSubtitles アカウントのユーザー名とパスワードがあると、サーバーが 1 日に取得できる字幕ファイルが増えます。",
+      "username": "ユーザー名",
+      "password": "パスワード",
+      "save": "保存",
+      "remove": "キーを削除"
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "自宅のインターネットアドレスが変わっても、アプリがこのサーバーを見つけられるようにします。サービスが知るのはアドレスだけで、映像は常にこのサーバーからアプリへ直接届きます。",
@@ -765,7 +791,7 @@
       },
       "content": {
         "title": "コンテンツ",
-        "hint": "ポスター、ポッドキャスト検索、予告編、ホームの列"
+        "hint": "ポスター、ポッドキャストと字幕の検索、予告編、ホームの列"
       },
       "streaming": {
         "title": "ストリーミング",

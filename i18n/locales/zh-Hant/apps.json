@@ -304,7 +304,20 @@
     "audioNeedsUpdate": "請更新伺服器上的 Matinee，以便在這裡選擇音軌",
     "trackFailed": "無法切換到該音軌",
     "subtitlesFailed": "無法載入這些字幕",
-    "convertsVideo": "會轉換影片"
+    "convertsVideo": "會轉換影片",
+    "findSubtitles": {
+      "open": "尋找字幕…",
+      "title": "尋找字幕",
+      "language": "語言",
+      "languageIs": "語言：{{language}}",
+      "looking": "正在網路上尋找字幕…",
+      "adding": "正在加入字幕…",
+      "none": "網路上找不到這部影片的{{language}}字幕。",
+      "matchesFile": "為此檔案製作",
+      "machine": "機器翻譯",
+      "online": "網路",
+      "source": "字幕來自 OpenSubtitles.com"
+    }
   },
   "library": {
     "nothingUnwatched": "這裡沒有未看的內容",
@@ -430,6 +443,28 @@
     "podcasts": "Podcast",
     "signIn": "在手機上開啟 Matinee 並登入，即可在車上收聽。",
     "loading": "正在載入…"
+  },
+  "automotive": {
+    "signInNeeded": "登入你的 Matinee 伺服器，即可在這輛車上收聽。",
+    "signIn": "登入",
+    "title": "登入 Matinee",
+    "nearby": "此網路上的伺服器",
+    "looking": "正在尋找伺服器… 如果車輛沒有連上家裡的 Wi-Fi，請輸入伺服器位址。",
+    "address": "你的伺服器位址",
+    "addressHint": "matinee.example.com",
+    "next": "下一步",
+    "notMatinee": "無法連線到該位址的 Matinee 伺服器。請檢查位址，以及伺服器能否從外部存取。",
+    "goTo": "在手機或電腦上前往 {{link}} 並輸入此代碼：",
+    "scan": "或用手機相機掃描。",
+    "waiting": "正在等待你核准這輛車…",
+    "expired": "此代碼已過期。",
+    "declined": "登入遭到拒絕。",
+    "newCode": "取得新代碼",
+    "back": "返回",
+    "signedIn": "已以 {{name}} 身分登入 {{server}}。",
+    "listenHint": "在車輛的媒體應用程式中選擇 Matinee 即可收聽。停車時可以在這裡登出。",
+    "signOut": "登出",
+    "done": "完成"
   },
   "watch": {
     "tileName": "正在播放",

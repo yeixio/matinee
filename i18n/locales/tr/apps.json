@@ -309,7 +309,20 @@
     "audioNeedsUpdate": "Sesi burada seçmek için sunucudaki Matinee'yi güncelleyin",
     "trackFailed": "O parçaya geçilemedi",
     "subtitlesFailed": "Bu altyazılar yüklenemedi",
-    "convertsVideo": "Videoyu dönüştürür"
+    "convertsVideo": "Videoyu dönüştürür",
+    "findSubtitles": {
+      "open": "Altyazı bul…",
+      "title": "Altyazı bul",
+      "language": "Dil",
+      "languageIs": "Dil: {{language}}",
+      "looking": "İnternette altyazı aranıyor…",
+      "adding": "Altyazı ekleniyor…",
+      "none": "Bu video için internette {{language}} altyazı bulunamadı.",
+      "matchesFile": "Bu dosya için yapılmış",
+      "machine": "Makine çevirisi",
+      "online": "İnternetten",
+      "source": "Altyazılar OpenSubtitles.com'dan"
+    }
   },
   "library": {
     "nothingUnwatched": "Burada izlenmemiş bir şey yok",
@@ -437,6 +450,28 @@
     "podcasts": "Podcast’ler",
     "signIn": "Arabada dinlemek için telefonunuzda Matinee'yi açıp oturum açın.",
     "loading": "Yükleniyor…"
+  },
+  "automotive": {
+    "signInNeeded": "Bu arabada dinlemek için Matinee sunucuna giriş yap.",
+    "signIn": "Giriş yap",
+    "title": "Matinee'ye giriş yap",
+    "nearby": "Bu ağdaki sunucular",
+    "looking": "Sunucular aranıyor… Araba evdeki Wi-Fi'ye bağlı değilse sunucunun adresini yaz.",
+    "address": "Sunucunun adresi",
+    "addressHint": "matinee.example.com",
+    "next": "İleri",
+    "notMatinee": "Orada bir Matinee sunucusuna ulaşılamıyor. Adresi ve sunucuya ev dışından ulaşılabildiğini kontrol et.",
+    "goTo": "Telefonunda veya bilgisayarında {{link}} adresine git ve bu kodu gir:",
+    "scan": "Ya da telefonunun kamerasıyla tara.",
+    "waiting": "Bu arabayı onaylaman bekleniyor…",
+    "expired": "Bu kodun süresi doldu.",
+    "declined": "Giriş reddedildi.",
+    "newCode": "Yeni kod al",
+    "back": "Geri",
+    "signedIn": "{{server}} sunucusuna {{name}} olarak giriş yapıldı.",
+    "listenHint": "Dinlemek için arabanın medya uygulamalarından Matinee'yi seç. Araba parktayken buradan çıkış yapabilirsin.",
+    "signOut": "Çıkış yap",
+    "done": "Bitti"
   },
   "watch": {
     "tileName": "Şimdi oynatılıyor",

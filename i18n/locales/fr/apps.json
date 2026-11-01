@@ -314,7 +314,20 @@
     "audioNeedsUpdate": "Mettez à jour Matinee sur le serveur pour choisir l'audio ici",
     "trackFailed": "Impossible de passer à cette piste",
     "subtitlesFailed": "Impossible de charger ces sous-titres",
-    "convertsVideo": "Convertit la vidéo"
+    "convertsVideo": "Convertit la vidéo",
+    "findSubtitles": {
+      "open": "Chercher des sous-titres…",
+      "title": "Chercher des sous-titres",
+      "language": "Langue",
+      "languageIs": "Langue : {{language}}",
+      "looking": "Recherche de sous-titres en ligne…",
+      "adding": "Ajout des sous-titres…",
+      "none": "Aucun sous-titre en {{language}} trouvé en ligne pour cette vidéo.",
+      "matchesFile": "Faits pour ce fichier",
+      "machine": "Traduction automatique",
+      "online": "En ligne",
+      "source": "Sous-titres d’OpenSubtitles.com"
+    }
   },
   "library": {
     "nothingUnwatched": "Rien de non vu ici",
@@ -444,6 +457,28 @@
     "podcasts": "Podcasts",
     "signIn": "Ouvrez Matinee sur votre téléphone et connectez-vous pour écouter en voiture.",
     "loading": "Chargement…"
+  },
+  "automotive": {
+    "signInNeeded": "Connectez-vous à votre serveur Matinee pour écouter dans cette voiture.",
+    "signIn": "Se connecter",
+    "title": "Se connecter à Matinee",
+    "nearby": "Serveurs sur ce réseau",
+    "looking": "Recherche de serveurs… Si la voiture n'est pas sur le Wi-Fi de votre domicile, saisissez l'adresse de votre serveur.",
+    "address": "Adresse de votre serveur",
+    "addressHint": "matinee.example.com",
+    "next": "Suivant",
+    "notMatinee": "Impossible de joindre un serveur Matinee à cette adresse. Vérifiez l'adresse, et que le serveur est accessible hors de chez vous.",
+    "goTo": "Sur votre téléphone ou ordinateur, allez sur {{link}} et saisissez ce code :",
+    "scan": "Ou scannez-le avec l'appareil photo de votre téléphone.",
+    "waiting": "En attente de votre accord pour cette voiture…",
+    "expired": "Ce code a expiré.",
+    "declined": "La connexion a été refusée.",
+    "newCode": "Obtenir un nouveau code",
+    "back": "Retour",
+    "signedIn": "Connecté à {{server}} en tant que {{name}}.",
+    "listenHint": "Choisissez Matinee dans les applis multimédia de la voiture pour écouter. Vous pouvez vous déconnecter ici quand la voiture est garée.",
+    "signOut": "Se déconnecter",
+    "done": "Terminé"
   },
   "watch": {
     "tileName": "En cours de lecture",

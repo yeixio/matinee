@@ -309,7 +309,20 @@
     "audioNeedsUpdate": "Päivitä Matinee palvelimella, niin voit valita äänen täällä",
     "trackFailed": "Raitaan ei voitu vaihtaa",
     "subtitlesFailed": "Tekstityksiä ei voitu ladata",
-    "convertsVideo": "Muuntaa videon"
+    "convertsVideo": "Muuntaa videon",
+    "findSubtitles": {
+      "open": "Etsi tekstityksiä…",
+      "title": "Etsi tekstityksiä",
+      "language": "Kieli",
+      "languageIs": "Kieli: {{language}}",
+      "looking": "Etsitään tekstityksiä verkosta…",
+      "adding": "Lisätään tekstityksiä…",
+      "none": "Tälle videolle ei löytynyt verkosta tekstityksiä kielellä {{language}}.",
+      "matchesFile": "Tehty tälle tiedostolle",
+      "machine": "Konekäännetty",
+      "online": "Verkosta",
+      "source": "Tekstitykset: OpenSubtitles.com"
+    }
   },
   "library": {
     "nothingUnwatched": "Ei katsomatonta täällä",
@@ -437,6 +450,28 @@
     "podcasts": "Podcastit",
     "signIn": "Avaa Matinee puhelimessasi ja kirjaudu sisään kuunnellaksesi autossa.",
     "loading": "Ladataan…"
+  },
+  "automotive": {
+    "signInNeeded": "Kirjaudu Matinee-palvelimellesi kuunnellaksesi tässä autossa.",
+    "signIn": "Kirjaudu",
+    "title": "Kirjaudu Matineeen",
+    "nearby": "Palvelimet tässä verkossa",
+    "looking": "Etsitään palvelimia… Jos auto ei ole kodin Wi-Fi-verkossa, kirjoita palvelimesi osoite.",
+    "address": "Palvelimesi osoite",
+    "addressHint": "matinee.example.com",
+    "next": "Seuraava",
+    "notMatinee": "Matinee-palvelinta ei tavoiteta sieltä. Tarkista osoite ja että palvelimeen pääsee kodin ulkopuolelta.",
+    "goTo": "Mene puhelimella tai tietokoneella osoitteeseen {{link}} ja syötä tämä koodi:",
+    "scan": "Tai skannaa se puhelimen kameralla.",
+    "waiting": "Odotetaan, että hyväksyt tämän auton…",
+    "expired": "Koodi vanheni.",
+    "declined": "Kirjautuminen hylättiin.",
+    "newCode": "Hae uusi koodi",
+    "back": "Takaisin",
+    "signedIn": "Kirjautunut palvelimelle {{server}} käyttäjänä {{name}}.",
+    "listenHint": "Valitse Matinee auton mediasovelluksista kuunnellaksesi. Voit kirjautua ulos täällä, kun auto on pysäköity.",
+    "signOut": "Kirjaudu ulos",
+    "done": "Valmis"
   },
   "watch": {
     "tileName": "Nyt toistossa",
