@@ -6,6 +6,7 @@
 import { execFileSync, spawn } from 'node:child_process'
 import { mkdirSync, rmSync } from 'node:fs'
 import path from 'node:path'
+import { startFakeOpenSubtitles } from './fake-opensubtitles.mjs'
 import { startFakeOverseerr } from './fake-overseerr.mjs'
 import { startFakePodcasts } from './fake-podcasts.mjs'
 import { startFakeTMDB } from './fake-tmdb.mjs'
@@ -18,6 +19,7 @@ const tmdbPort = 7399
 export const overseerrURL = 'http://127.0.0.1:7400'
 /** Where the stand-in podcast host and Podcast Index listen. */
 export const podcastsPort = 7401
+const openSubtitlesPort = 7402
 export const port = 7398
 export const origin = `http://127.0.0.1:${port}`
 export const admin = { username: 'sam', password: 'popcorn-and-ice' }
@@ -49,13 +51,14 @@ export async function startServer() {
   const fake = await startFakeTMDB(tmdbPort, images)
   const overseerr = await startFakeOverseerr(Number(new URL(overseerrURL).port))
   const podcasts = await startFakePodcasts(podcastsPort, images, episode)
+  const openSubtitles = await startFakeOpenSubtitles(openSubtitlesPort)
 
   const bin = path.join(cache, 'matinee')
   const pkg = 'github.com/yeixio/matinee/internal/metadata'
   // The server embeds the web player, so build it from this checkout first.
   execFileSync('pnpm', ['install', '--frozen-lockfile'], { cwd: path.join(repo, 'web'), stdio: 'inherit' })
   execFileSync('pnpm', ['build'], { cwd: path.join(repo, 'web'), stdio: 'inherit' })
-  execFileSync('go', ['build', '-o', bin, '-ldflags', `-X github.com/yeixio/matinee/internal/version.Version=${version()} -X ${pkg}.TMDBBaseURL=http://127.0.0.1:${tmdbPort}/3 -X ${pkg}.TMDBImageURL=http://127.0.0.1:${tmdbPort}/t/p/ -X github.com/yeixio/matinee/internal/overseerr.imageBase=http://127.0.0.1:${tmdbPort}/t/p/ -X github.com/yeixio/matinee/internal/podcast.IndexBase=http://127.0.0.1:${podcastsPort}/api/1.0`, './cmd/matinee'], { cwd: repo, stdio: 'inherit' })
+  execFileSync('go', ['build', '-o', bin, '-ldflags', `-X github.com/yeixio/matinee/internal/version.Version=${version()} -X ${pkg}.TMDBBaseURL=http://127.0.0.1:${tmdbPort}/3 -X ${pkg}.TMDBImageURL=http://127.0.0.1:${tmdbPort}/t/p/ -X github.com/yeixio/matinee/internal/overseerr.imageBase=http://127.0.0.1:${tmdbPort}/t/p/ -X github.com/yeixio/matinee/internal/podcast.IndexBase=http://127.0.0.1:${podcastsPort}/api/1.0 -X github.com/yeixio/matinee/internal/subtitle.OpenSubtitlesBase=http://127.0.0.1:${openSubtitlesPort}/api/v1`, './cmd/matinee'], { cwd: repo, stdio: 'inherit' })
 
   const data = path.join(cache, 'data')
   rmSync(data, { recursive: true, force: true })
@@ -84,6 +87,7 @@ export async function startServer() {
     fake.close()
     overseerr.close()
     podcasts.close()
+    openSubtitles.close()
   }
   for (let i = 0; ; i++) {
     try {

@@ -314,7 +314,20 @@
     "audioNeedsUpdate": "Actualiza Matinee en el servidor para elegir el audio aquí",
     "trackFailed": "No se pudo cambiar a esa pista",
     "subtitlesFailed": "No se pudieron cargar estos subtítulos",
-    "convertsVideo": "Convierte el vídeo"
+    "convertsVideo": "Convierte el vídeo",
+    "findSubtitles": {
+      "open": "Buscar subtítulos…",
+      "title": "Buscar subtítulos",
+      "language": "Idioma",
+      "languageIs": "Idioma: {{language}}",
+      "looking": "Buscando subtítulos en línea…",
+      "adding": "Añadiendo los subtítulos…",
+      "none": "No se encontraron subtítulos en {{language}} en línea para este vídeo.",
+      "matchesFile": "Hechos para este archivo",
+      "machine": "Traducción automática",
+      "online": "En línea",
+      "source": "Subtítulos de OpenSubtitles.com"
+    }
   },
   "library": {
     "nothingUnwatched": "No queda nada sin ver",

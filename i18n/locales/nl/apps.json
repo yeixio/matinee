@@ -309,7 +309,20 @@
     "audioNeedsUpdate": "Werk Matinee op de server bij om hier de audio te kiezen",
     "trackFailed": "Kan niet naar die track overschakelen",
     "subtitlesFailed": "Kan deze ondertitels niet laden",
-    "convertsVideo": "Zet de video om"
+    "convertsVideo": "Zet de video om",
+    "findSubtitles": {
+      "open": "Ondertitels zoeken…",
+      "title": "Ondertitels zoeken",
+      "language": "Taal",
+      "languageIs": "Taal: {{language}}",
+      "looking": "Online naar ondertitels zoeken…",
+      "adding": "Ondertitels toevoegen…",
+      "none": "Geen {{language}} ondertitels online gevonden voor deze video.",
+      "matchesFile": "Gemaakt voor dit bestand",
+      "machine": "Machinaal vertaald",
+      "online": "Online",
+      "source": "Ondertitels van OpenSubtitles.com"
+    }
   },
   "library": {
     "nothingUnwatched": "Niets ongezien hier",

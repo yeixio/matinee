@@ -314,7 +314,20 @@
     "audioNeedsUpdate": "Actualizează Matinee pe server ca să alegi sunetul aici",
     "trackFailed": "Nu s-a putut trece la acea pistă",
     "subtitlesFailed": "Nu s-au putut încărca aceste subtitrări",
-    "convertsVideo": "Convertește videoclipul"
+    "convertsVideo": "Convertește videoclipul",
+    "findSubtitles": {
+      "open": "Caută subtitrări…",
+      "title": "Caută subtitrări",
+      "language": "Limbă",
+      "languageIs": "Limbă: {{language}}",
+      "looking": "Se caută subtitrări online…",
+      "adding": "Se adaugă subtitrările…",
+      "none": "Nu s-au găsit online subtitrări în {{language}} pentru acest videoclip.",
+      "matchesFile": "Făcute pentru acest fișier",
+      "machine": "Traducere automată",
+      "online": "Online",
+      "source": "Subtitrări de pe OpenSubtitles.com"
+    }
   },
   "library": {
     "nothingUnwatched": "Nimic nevăzut aici",

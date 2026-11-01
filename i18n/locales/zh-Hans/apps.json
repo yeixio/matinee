@@ -304,7 +304,20 @@
     "audioNeedsUpdate": "请更新服务器上的 Matinee，以便在这里选择音轨",
     "trackFailed": "无法切换到该音轨",
     "subtitlesFailed": "无法加载这些字幕",
-    "convertsVideo": "会转换视频"
+    "convertsVideo": "会转换视频",
+    "findSubtitles": {
+      "open": "查找字幕…",
+      "title": "查找字幕",
+      "language": "语言",
+      "languageIs": "语言：{{language}}",
+      "looking": "正在网上查找字幕…",
+      "adding": "正在添加字幕…",
+      "none": "网上没有找到这个视频的{{language}}字幕。",
+      "matchesFile": "为此文件制作",
+      "machine": "机器翻译",
+      "online": "网上",
+      "source": "字幕来自 OpenSubtitles.com"
+    }
   },
   "library": {
     "nothingUnwatched": "这里没有未看的内容",

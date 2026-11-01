@@ -309,7 +309,20 @@
     "audioNeedsUpdate": "Oppdater Matinee på serveren for å velge lyd her",
     "trackFailed": "Kunne ikke bytte til det sporet",
     "subtitlesFailed": "Kunne ikke laste inn disse undertekstene",
-    "convertsVideo": "Konverterer videoen"
+    "convertsVideo": "Konverterer videoen",
+    "findSubtitles": {
+      "open": "Søk etter undertekster…",
+      "title": "Søk etter undertekster",
+      "language": "Språk",
+      "languageIs": "Språk: {{language}}",
+      "looking": "Søker etter undertekster på nettet…",
+      "adding": "Legger til undertekstene…",
+      "none": "Fant ingen undertekster på {{language}} på nettet for denne videoen.",
+      "matchesFile": "Laget for denne filen",
+      "machine": "Maskinoversatt",
+      "online": "Fra nettet",
+      "source": "Undertekster fra OpenSubtitles.com"
+    }
   },
   "library": {
     "nothingUnwatched": "Ingenting usett her",

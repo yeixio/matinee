@@ -33,7 +33,19 @@
     "unmute": "Slå lyd til",
     "mute": "Slå lyd fra",
     "converting": "Konverterer",
-    "fullscreen": "Fuld skærm"
+    "fullscreen": "Fuld skærm",
+    "findSubtitles": {
+      "open": "Find undertekster…",
+      "title": "Find undertekster",
+      "language": "Sprog",
+      "looking": "Leder efter undertekster online…",
+      "none": "Fandt ingen undertekster på {{language}} online til denne video.",
+      "matchesFile": "Lavet til denne fil",
+      "machine": "Maskinoversat",
+      "online": "Online",
+      "remove": "Fjern {{name}}",
+      "source": "Undertekster fra OpenSubtitles.com"
+    }
   },
   "somethingWentWrong": "Noget gik galt",
   "oneMoment": "Et øjeblik…",
@@ -742,6 +754,20 @@
       "save": "Gem nøgle",
       "remove": "Fjern nøgle"
     },
+    "subtitles": {
+      "title": "Søgning efter undertekster",
+      "intro": "Alle kan finde undertekster, en video mangler, i afspillerens undertekstmenu. Søgningen bruger OpenSubtitles.com: få en gratis API-nøgle på <site>opensubtitles.com/consumers</site>.",
+      "using": "Bruger nøglen, der ender på {{hint}}.",
+      "usingAccount": "Bruger nøglen, der ender på {{hint}}, logget ind som {{username}}.",
+      "none": "Ingen nøgle endnu, så afspillerens undertekstmenu har ingen søgning.",
+      "key": "API-nøgle",
+      "keepKey": "Lad stå tomt for at beholde den gemte nøgle",
+      "accountHint": "Valgfrit: brugernavn og adgangskode til en gratis OpenSubtitles-konto lader serveren hente flere undertekstfiler om dagen.",
+      "username": "Brugernavn",
+      "password": "Adgangskode",
+      "save": "Gem",
+      "remove": "Fjern nøgle"
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Gør at apps kan finde denne server, også når dit hjems internetadresse ændrer sig. Tjenesten kender kun adressen: video går altid direkte fra serveren til apps.",
@@ -769,7 +795,7 @@
       },
       "content": {
         "title": "Indhold",
-        "hint": "Plakater, podcastsøgning, trailere og rækker på Hjem"
+        "hint": "Plakater, søgning efter podcasts og undertekster, trailere og rækker på Hjem"
       },
       "streaming": {
         "title": "Streaming",

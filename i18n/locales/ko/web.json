@@ -33,7 +33,19 @@
     "unmute": "음소거 해제",
     "mute": "음소거",
     "converting": "변환 중",
-    "fullscreen": "전체 화면"
+    "fullscreen": "전체 화면",
+    "findSubtitles": {
+      "open": "자막 찾기…",
+      "title": "자막 찾기",
+      "language": "언어",
+      "looking": "온라인에서 자막을 찾는 중…",
+      "none": "이 동영상의 {{language}} 자막을 온라인에서 찾지 못했습니다.",
+      "matchesFile": "이 파일용",
+      "machine": "기계 번역",
+      "online": "온라인",
+      "remove": "{{name}} 삭제",
+      "source": "자막 제공: OpenSubtitles.com"
+    }
   },
   "somethingWentWrong": "문제가 발생했습니다",
   "oneMoment": "잠시만요…",
@@ -738,6 +750,20 @@
       "save": "키 저장",
       "remove": "키 삭제"
     },
+    "subtitles": {
+      "title": "자막 검색",
+      "intro": "동영상에 없는 자막은 누구나 플레이어의 자막 메뉴에서 찾을 수 있습니다. 검색은 OpenSubtitles.com을 사용합니다. 무료 API 키는 <site>opensubtitles.com/consumers</site>에서 받으세요.",
+      "using": "{{hint}}(으)로 끝나는 키를 사용 중입니다.",
+      "usingAccount": "{{hint}}(으)로 끝나는 키를 사용 중이며 {{username}}(으)로 로그인되어 있습니다.",
+      "none": "아직 키가 없어서 플레이어의 자막 메뉴에 검색이 없습니다.",
+      "key": "API 키",
+      "keepKey": "저장된 키를 계속 쓰려면 비워 두세요",
+      "accountHint": "선택 사항: 무료 OpenSubtitles 계정의 사용자 이름과 비밀번호가 있으면 서버가 하루에 더 많은 자막 파일을 받을 수 있습니다.",
+      "username": "사용자 이름",
+      "password": "비밀번호",
+      "save": "저장",
+      "remove": "키 삭제"
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "집 인터넷 주소가 바뀌어도 앱이 이 서버를 계속 찾을 수 있게 합니다. 서비스는 주소만 알며, 영상은 항상 이 서버에서 앱으로 바로 전송됩니다.",
@@ -765,7 +791,7 @@
       },
       "content": {
         "title": "콘텐츠",
-        "hint": "포스터, 팟캐스트 검색, 예고편 및 홈 행"
+        "hint": "포스터, 팟캐스트 및 자막 검색, 예고편, 홈 줄"
       },
       "streaming": {
         "title": "스트리밍",

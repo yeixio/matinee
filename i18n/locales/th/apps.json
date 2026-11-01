@@ -304,7 +304,20 @@
     "audioNeedsUpdate": "อัปเดต Matinee บนเซิร์ฟเวอร์เพื่อเลือกเสียงที่นี่",
     "trackFailed": "สลับไปยังแทร็กนั้นไม่ได้",
     "subtitlesFailed": "โหลดคำบรรยายนี้ไม่ได้",
-    "convertsVideo": "แปลงวิดีโอ"
+    "convertsVideo": "แปลงวิดีโอ",
+    "findSubtitles": {
+      "open": "ค้นหาคำบรรยาย…",
+      "title": "ค้นหาคำบรรยาย",
+      "language": "ภาษา",
+      "languageIs": "ภาษา: {{language}}",
+      "looking": "กำลังค้นหาคำบรรยายทางออนไลน์…",
+      "adding": "กำลังเพิ่มคำบรรยาย…",
+      "none": "ไม่พบคำบรรยายภาษา{{language}}ทางออนไลน์สำหรับวิดีโอนี้",
+      "matchesFile": "ทำมาสำหรับไฟล์นี้",
+      "machine": "แปลด้วยเครื่อง",
+      "online": "ออนไลน์",
+      "source": "คำบรรยายจาก OpenSubtitles.com"
+    }
   },
   "library": {
     "nothingUnwatched": "ไม่มีเรื่องที่ยังไม่ได้ดูที่นี่",

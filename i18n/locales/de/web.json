@@ -33,7 +33,19 @@
     "unmute": "Ton an",
     "mute": "Stumm",
     "converting": "Wird umgewandelt",
-    "fullscreen": "Vollbild"
+    "fullscreen": "Vollbild",
+    "findSubtitles": {
+      "open": "Untertitel suchen…",
+      "title": "Untertitel suchen",
+      "language": "Sprache",
+      "looking": "Suche online nach Untertiteln…",
+      "none": "Online keine Untertitel auf {{language}} für dieses Video gefunden.",
+      "matchesFile": "Für diese Datei erstellt",
+      "machine": "Maschinell übersetzt",
+      "online": "Online",
+      "remove": "{{name}} entfernen",
+      "source": "Untertitel von OpenSubtitles.com"
+    }
   },
   "somethingWentWrong": "Etwas ist schiefgelaufen",
   "oneMoment": "Einen Moment …",
@@ -742,6 +754,20 @@
       "save": "Schlüssel speichern",
       "remove": "Schlüssel entfernen"
     },
+    "subtitles": {
+      "title": "Untertitelsuche",
+      "intro": "Fehlen einem Video Untertitel, kann man sie im Untertitelmenü des Players suchen. Die Suche nutzt OpenSubtitles.com: Einen kostenlosen API-Schlüssel bekommst du auf <site>opensubtitles.com/consumers</site>.",
+      "using": "Verwendet den Schlüssel, der auf {{hint}} endet.",
+      "usingAccount": "Verwendet den Schlüssel, der auf {{hint}} endet, angemeldet als {{username}}.",
+      "none": "Noch kein Schlüssel, daher hat das Untertitelmenü des Players keine Suche.",
+      "key": "API-Schlüssel",
+      "keepKey": "Leer lassen, um den gespeicherten Schlüssel zu behalten",
+      "accountHint": "Optional: Mit Benutzername und Passwort eines kostenlosen OpenSubtitles-Kontos kann der Server mehr Untertiteldateien pro Tag laden.",
+      "username": "Benutzername",
+      "password": "Passwort",
+      "save": "Speichern",
+      "remove": "Schlüssel entfernen"
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Damit die Apps diesen Server weiter finden, wenn sich die Internetadresse deines Zuhauses ändert. Der Dienst erfährt nur die Adresse: Videos gehen immer direkt von diesem Server zu den Apps.",
@@ -769,7 +795,7 @@
       },
       "content": {
         "title": "Inhalte",
-        "hint": "Poster, Podcast-Suche, Trailer und Reihen auf der Startseite"
+        "hint": "Poster, Podcast- und Untertitelsuche, Trailer und Reihen auf der Startseite"
       },
       "streaming": {
         "title": "Streaming",

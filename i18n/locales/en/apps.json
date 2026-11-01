@@ -309,7 +309,20 @@
     "audioNeedsUpdate": "Update Matinee on the server to pick the audio here",
     "trackFailed": "Couldn't switch to that track",
     "subtitlesFailed": "Couldn't load these subtitles",
-    "convertsVideo": "Converts video"
+    "convertsVideo": "Converts video",
+    "findSubtitles": {
+      "open": "Find subtitles…",
+      "title": "Find subtitles",
+      "language": "Language",
+      "languageIs": "Language: {{language}}",
+      "looking": "Looking for subtitles online…",
+      "adding": "Adding the subtitles…",
+      "none": "No {{language}} subtitles found online for this video.",
+      "matchesFile": "Made for this file",
+      "machine": "Machine translated",
+      "online": "Online",
+      "source": "Subtitles from OpenSubtitles.com"
+    }
   },
   "library": {
     "nothingUnwatched": "Nothing unwatched here",

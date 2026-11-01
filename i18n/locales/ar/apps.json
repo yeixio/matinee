@@ -329,7 +329,20 @@
     "audioNeedsUpdate": "حدّث Matinee على الخادم لاختيار الصوت هنا",
     "trackFailed": "تعذّر التبديل إلى هذا المسار",
     "subtitlesFailed": "تعذّر تحميل هذه الترجمة",
-    "convertsVideo": "يحوّل الفيديو"
+    "convertsVideo": "يحوّل الفيديو",
+    "findSubtitles": {
+      "open": "البحث عن ترجمات…",
+      "title": "البحث عن ترجمات",
+      "language": "اللغة",
+      "languageIs": "اللغة: {{language}}",
+      "looking": "جارٍ البحث عن ترجمات على الإنترنت…",
+      "adding": "جارٍ إضافة الترجمة…",
+      "none": "لم يُعثر على ترجمات باللغة {{language}} على الإنترنت لهذا الفيديو.",
+      "matchesFile": "مصنوعة لهذا الملف",
+      "machine": "ترجمة آلية",
+      "online": "من الإنترنت",
+      "source": "الترجمات من OpenSubtitles.com"
+    }
   },
   "library": {
     "nothingUnwatched": "لا شيء لم تشاهده هنا",

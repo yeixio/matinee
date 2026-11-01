@@ -33,7 +33,19 @@
     "unmute": "Bật tiếng",
     "mute": "Tắt tiếng",
     "converting": "Đang chuyển đổi",
-    "fullscreen": "Toàn màn hình"
+    "fullscreen": "Toàn màn hình",
+    "findSubtitles": {
+      "open": "Tìm phụ đề…",
+      "title": "Tìm phụ đề",
+      "language": "Ngôn ngữ",
+      "looking": "Đang tìm phụ đề trên mạng…",
+      "none": "Không tìm thấy phụ đề {{language}} trên mạng cho video này.",
+      "matchesFile": "Làm cho chính tệp này",
+      "machine": "Dịch máy",
+      "online": "Trên mạng",
+      "remove": "Xóa {{name}}",
+      "source": "Phụ đề từ OpenSubtitles.com"
+    }
   },
   "somethingWentWrong": "Đã xảy ra lỗi",
   "oneMoment": "Chờ một chút…",
@@ -738,6 +750,20 @@
       "save": "Lưu khóa",
       "remove": "Xóa khóa"
     },
+    "subtitles": {
+      "title": "Tìm phụ đề",
+      "intro": "Mọi người có thể tìm phụ đề còn thiếu của video từ menu phụ đề trong trình phát. Việc tìm kiếm dùng OpenSubtitles.com: lấy khóa API miễn phí tại <site>opensubtitles.com/consumers</site>.",
+      "using": "Đang dùng khóa kết thúc bằng {{hint}}.",
+      "usingAccount": "Đang dùng khóa kết thúc bằng {{hint}}, đăng nhập là {{username}}.",
+      "none": "Chưa có khóa, nên menu phụ đề của trình phát chưa có tìm kiếm.",
+      "key": "Khóa API",
+      "keepKey": "Để trống để giữ khóa đã lưu",
+      "accountHint": "Không bắt buộc: tên người dùng và mật khẩu của một tài khoản OpenSubtitles miễn phí giúp máy chủ tải được nhiều tệp phụ đề hơn mỗi ngày.",
+      "username": "Tên người dùng",
+      "password": "Mật khẩu",
+      "save": "Lưu",
+      "remove": "Xóa khóa"
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Giúp các ứng dụng vẫn tìm thấy máy chủ này khi địa chỉ internet của nhà bạn thay đổi. Dịch vụ chỉ biết địa chỉ: video luôn đi thẳng từ máy chủ này tới các ứng dụng.",
@@ -765,7 +791,7 @@
       },
       "content": {
         "title": "Nội dung",
-        "hint": "Áp phích, tìm podcast, trailer và các hàng ở Trang chủ"
+        "hint": "Áp phích, tìm podcast và phụ đề, trailer và các hàng ở Trang chủ"
       },
       "streaming": {
         "title": "Phát trực tuyến",

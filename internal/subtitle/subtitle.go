@@ -31,6 +31,10 @@ type Track struct {
 	// BurnIn marks picture-based subtitles (PGS, VobSub, DVB), which browsers
 	// can't render: the server draws them into the video during a transcode.
 	BurnIn bool `json:"burnIn,omitempty"`
+	// Found marks subtitles someone found online for the video (see
+	// OpenSubtitles); Removable says the person asking may remove them.
+	Found     bool `json:"found,omitempty"`
+	Removable bool `json:"removable,omitempty"`
 
 	Stream int    `json:"-"` // embedded: index among the file's subtitle streams
 	Path   string `json:"-"` // external: the sidecar file

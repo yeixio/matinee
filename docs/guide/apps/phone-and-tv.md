@@ -104,6 +104,10 @@ The remote works the way it does in your TV's own player:
 
 On the buttons, left and right move between them and select opens one. **Audio** lists every sound track in the file, by language, with commentaries and audio description marked and the format of each (such as Dolby TrueHD · Atmos · 7.1). **Subtitles** lists the subtitles in the file and the [files next to it](/docs/getting-started/organizing-media/#subtitles), and **Off**. The one in use has a check, and the button says what's on.
 
+<!-- since: v0.1.10 -->
+At the bottom of **Subtitles**, **Find subtitles…** looks for subtitles online when the server has [subtitle search](/docs/watching/finding-subtitles/) set up. Select a result to add it to the video and turn it on.
+<!-- /since -->
+
 ![Picking the audio track on a TV](../images/app-tv-audio.webp)
 
 The app remembers the subtitle language you pick for the next episode and the next film, as the browser does. Picture subtitles from Blu-rays and DVDs, and another sound track in a file the TV can't play as it is, need the server to convert the video again from where you are, so the picture pauses for a moment.

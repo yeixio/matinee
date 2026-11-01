@@ -304,7 +304,20 @@
     "audioNeedsUpdate": "ここで音声を選ぶには、サーバーの Matinee を更新してください",
     "trackFailed": "そのトラックに切り替えられませんでした",
     "subtitlesFailed": "この字幕を読み込めませんでした",
-    "convertsVideo": "動画を変換します"
+    "convertsVideo": "動画を変換します",
+    "findSubtitles": {
+      "open": "字幕を探す…",
+      "title": "字幕を探す",
+      "language": "言語",
+      "languageIs": "言語: {{language}}",
+      "looking": "オンラインで字幕を探しています…",
+      "adding": "字幕を追加しています…",
+      "none": "この動画の{{language}}字幕はオンラインで見つかりませんでした。",
+      "matchesFile": "このファイル用",
+      "machine": "機械翻訳",
+      "online": "オンライン",
+      "source": "字幕提供: OpenSubtitles.com"
+    }
   },
   "library": {
     "nothingUnwatched": "未視聴のものはありません",

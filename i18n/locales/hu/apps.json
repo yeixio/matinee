@@ -309,7 +309,20 @@
     "audioNeedsUpdate": "Frissítse a Matinee-t a szerveren, hogy itt választhasson hangot",
     "trackFailed": "Nem sikerült átváltani erre a sávra",
     "subtitlesFailed": "Nem sikerült betölteni ezt a feliratot",
-    "convertsVideo": "Átalakítja a videót"
+    "convertsVideo": "Átalakítja a videót",
+    "findSubtitles": {
+      "open": "Feliratok keresése…",
+      "title": "Feliratok keresése",
+      "language": "Nyelv",
+      "languageIs": "Nyelv: {{language}}",
+      "looking": "Feliratok keresése az interneten…",
+      "adding": "Feliratok hozzáadása…",
+      "none": "Ehhez a videóhoz nem található {{language}} felirat az interneten.",
+      "matchesFile": "Ehhez a fájlhoz készült",
+      "machine": "Gépi fordítás",
+      "online": "Internetről",
+      "source": "Feliratok: OpenSubtitles.com"
+    }
   },
   "library": {
     "nothingUnwatched": "Itt nincs semmi, amit ne láttál volna",

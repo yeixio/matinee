@@ -33,7 +33,19 @@
     "unmute": "Sesi aç",
     "mute": "Sesi kapat",
     "converting": "Dönüştürülüyor",
-    "fullscreen": "Tam ekran"
+    "fullscreen": "Tam ekran",
+    "findSubtitles": {
+      "open": "Altyazı bul…",
+      "title": "Altyazı bul",
+      "language": "Dil",
+      "looking": "İnternette altyazı aranıyor…",
+      "none": "Bu video için internette {{language}} altyazı bulunamadı.",
+      "matchesFile": "Bu dosya için yapılmış",
+      "machine": "Makine çevirisi",
+      "online": "İnternetten",
+      "remove": "{{name}} kaldır",
+      "source": "Altyazılar OpenSubtitles.com'dan"
+    }
   },
   "somethingWentWrong": "Bir şeyler ters gitti",
   "oneMoment": "Bir saniye…",
@@ -742,6 +754,20 @@
       "save": "Anahtarı kaydet",
       "remove": "Anahtarı kaldır"
     },
+    "subtitles": {
+      "title": "Altyazı arama",
+      "intro": "Herkes, bir videoda eksik olan altyazıları oynatıcının altyazı menüsünden bulabilir. Arama OpenSubtitles.com'u kullanır: <site>opensubtitles.com/consumers</site> adresinden ücretsiz bir API anahtarı alın.",
+      "using": "{{hint}} ile biten anahtar kullanılıyor.",
+      "usingAccount": "{{hint}} ile biten anahtar kullanılıyor, {{username}} olarak oturum açıldı.",
+      "none": "Henüz anahtar yok, bu yüzden oynatıcının altyazı menüsünde arama yok.",
+      "key": "API anahtarı",
+      "keepKey": "Kayıtlı anahtarı korumak için boş bırakın",
+      "accountHint": "İsteğe bağlı: ücretsiz bir OpenSubtitles hesabının kullanıcı adı ve parolası, sunucunun günde daha fazla altyazı dosyası indirmesini sağlar.",
+      "username": "Kullanıcı adı",
+      "password": "Parola",
+      "save": "Kaydet",
+      "remove": "Anahtarı kaldır"
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Evinin internet adresi değiştiğinde uygulamaların bu sunucuyu bulmaya devam etmesini sağlar. Hizmet yalnızca adresi bilir: video her zaman doğrudan bu sunucudan uygulamalara gider.",
@@ -769,7 +795,7 @@
       },
       "content": {
         "title": "İçerik",
-        "hint": "Afişler, podcast arama, fragmanlar ve Ana Sayfa satırları"
+        "hint": "Afişler, podcast ve altyazı arama, fragmanlar ve Ana Sayfa satırları"
       },
       "streaming": {
         "title": "Akış",

@@ -33,7 +33,19 @@
     "unmute": "Poista mykistys",
     "mute": "Mykistä",
     "converting": "Muunnetaan",
-    "fullscreen": "Koko näyttö"
+    "fullscreen": "Koko näyttö",
+    "findSubtitles": {
+      "open": "Etsi tekstityksiä…",
+      "title": "Etsi tekstityksiä",
+      "language": "Kieli",
+      "looking": "Etsitään tekstityksiä verkosta…",
+      "none": "Tälle videolle ei löytynyt verkosta tekstityksiä kielellä {{language}}.",
+      "matchesFile": "Tehty tälle tiedostolle",
+      "machine": "Konekäännetty",
+      "online": "Verkosta",
+      "remove": "Poista {{name}}",
+      "source": "Tekstitykset: OpenSubtitles.com"
+    }
   },
   "somethingWentWrong": "Jokin meni pieleen",
   "oneMoment": "Hetkinen…",
@@ -742,6 +754,20 @@
       "save": "Tallenna avain",
       "remove": "Poista avain"
     },
+    "subtitles": {
+      "title": "Tekstitysten haku",
+      "intro": "Kuka tahansa voi etsiä videolta puuttuvia tekstityksiä soittimen tekstitysvalikosta. Haku käyttää OpenSubtitles.comia: hanki ilmainen API-avain osoitteesta <site>opensubtitles.com/consumers</site>.",
+      "using": "Käytössä avain, joka päättyy {{hint}}.",
+      "usingAccount": "Käytössä avain, joka päättyy {{hint}}, kirjautuneena käyttäjänä {{username}}.",
+      "none": "Avainta ei vielä ole, joten soittimen tekstitysvalikossa ei ole hakua.",
+      "key": "API-avain",
+      "keepKey": "Jätä tyhjäksi, niin tallennettu avain säilyy",
+      "accountHint": "Valinnainen: ilmaisen OpenSubtitles-tilin käyttäjänimellä ja salasanalla palvelin voi hakea enemmän tekstitystiedostoja päivässä.",
+      "username": "Käyttäjänimi",
+      "password": "Salasana",
+      "save": "Tallenna",
+      "remove": "Poista avain"
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Pitää sovellukset löytämässä tämän palvelimen, kun kotisi internetosoite vaihtuu. Palvelu tietää vain osoitteen: video kulkee aina suoraan tältä palvelimelta sovelluksiin.",
@@ -769,7 +795,7 @@
       },
       "content": {
         "title": "Sisältö",
-        "hint": "Julisteet, podcast-haku, trailerit ja Kotinäkymän rivit"
+        "hint": "Julisteet, podcastien ja tekstitysten haku, trailerit ja Kotinäkymän rivit"
       },
       "streaming": {
         "title": "Suoratoisto",

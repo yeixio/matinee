@@ -309,7 +309,20 @@
     "audioNeedsUpdate": "Uppdatera Matinee på servern för att välja ljud här",
     "trackFailed": "Det gick inte att byta till det spåret",
     "subtitlesFailed": "Det gick inte att läsa in undertexterna",
-    "convertsVideo": "Konverterar videon"
+    "convertsVideo": "Konverterar videon",
+    "findSubtitles": {
+      "open": "Sök undertexter…",
+      "title": "Sök undertexter",
+      "language": "Språk",
+      "languageIs": "Språk: {{language}}",
+      "looking": "Söker efter undertexter på nätet…",
+      "adding": "Lägger till undertexterna…",
+      "none": "Hittade inga undertexter på {{language}} på nätet för den här videon.",
+      "matchesFile": "Gjorda för den här filen",
+      "machine": "Maskinöversatta",
+      "online": "Från nätet",
+      "source": "Undertexter från OpenSubtitles.com"
+    }
   },
   "library": {
     "nothingUnwatched": "Inget osett här",

@@ -33,7 +33,19 @@
     "unmute": "Bunyikan",
     "mute": "Bisukan",
     "converting": "Mengonversi",
-    "fullscreen": "Layar penuh"
+    "fullscreen": "Layar penuh",
+    "findSubtitles": {
+      "open": "Cari subtitle…",
+      "title": "Cari subtitle",
+      "language": "Bahasa",
+      "looking": "Mencari subtitle secara online…",
+      "none": "Tidak ada subtitle {{language}} yang ditemukan online untuk video ini.",
+      "matchesFile": "Dibuat untuk file ini",
+      "machine": "Terjemahan mesin",
+      "online": "Online",
+      "remove": "Hapus {{name}}",
+      "source": "Subtitle dari OpenSubtitles.com"
+    }
   },
   "somethingWentWrong": "Terjadi kesalahan",
   "oneMoment": "Sebentar…",
@@ -738,6 +750,20 @@
       "save": "Simpan kunci",
       "remove": "Hapus kunci"
     },
+    "subtitles": {
+      "title": "Pencarian subtitle",
+      "intro": "Siapa pun bisa mencari subtitle yang tidak dimiliki video dari menu subtitle pemutar. Pencarian memakai OpenSubtitles.com: dapatkan kunci API gratis di <site>opensubtitles.com/consumers</site>.",
+      "using": "Memakai kunci yang berakhiran {{hint}}.",
+      "usingAccount": "Memakai kunci yang berakhiran {{hint}}, masuk sebagai {{username}}.",
+      "none": "Belum ada kunci, jadi menu subtitle pemutar belum bisa mencari.",
+      "key": "Kunci API",
+      "keepKey": "Biarkan kosong untuk tetap memakai kunci yang tersimpan",
+      "accountHint": "Opsional: nama pengguna dan kata sandi akun OpenSubtitles gratis membuat server bisa mengambil lebih banyak file subtitle per hari.",
+      "username": "Nama pengguna",
+      "password": "Kata sandi",
+      "save": "Simpan",
+      "remove": "Hapus kunci"
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Membuat aplikasi tetap bisa menemukan server ini saat alamat internet rumahmu berubah. Layanan ini hanya tahu alamatnya: video selalu langsung dari server ini ke aplikasi.",
@@ -765,7 +791,7 @@
       },
       "content": {
         "title": "Konten",
-        "hint": "Poster, pencarian podcast, trailer, dan baris Beranda"
+        "hint": "Poster, pencarian podcast dan subtitle, trailer, dan baris Beranda"
       },
       "streaming": {
         "title": "Streaming",
