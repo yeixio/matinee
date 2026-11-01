@@ -33,7 +33,19 @@
     "unmute": "Zapnout zvuk",
     "mute": "Ztlumit",
     "converting": "Převádí se",
-    "fullscreen": "Celá obrazovka"
+    "fullscreen": "Celá obrazovka",
+    "findSubtitles": {
+      "open": "Najít titulky…",
+      "title": "Najít titulky",
+      "language": "Jazyk",
+      "looking": "Hledání titulků na internetu…",
+      "none": "Pro toto video se na internetu nenašly titulky v jazyce {{language}}.",
+      "matchesFile": "Vytvořené pro tento soubor",
+      "machine": "Strojový překlad",
+      "online": "Z internetu",
+      "remove": "Odebrat {{name}}",
+      "source": "Titulky z OpenSubtitles.com"
+    }
   },
   "somethingWentWrong": "Něco se pokazilo",
   "oneMoment": "Moment…",
@@ -750,6 +762,20 @@
       "save": "Uložit klíč",
       "remove": "Odebrat klíč"
     },
+    "subtitles": {
+      "title": "Hledání titulků",
+      "intro": "Titulky, které videu chybí, může kdokoli najít v nabídce titulků v přehrávači. Hledání používá OpenSubtitles.com: bezplatný klíč API získáte na <site>opensubtitles.com/consumers</site>.",
+      "using": "Používá se klíč končící na {{hint}}.",
+      "usingAccount": "Používá se klíč končící na {{hint}}, přihlášeno jako {{username}}.",
+      "none": "Zatím žádný klíč, takže nabídka titulků v přehrávači nemá hledání.",
+      "key": "Klíč API",
+      "keepKey": "Nechte prázdné, aby zůstal uložený klíč",
+      "accountHint": "Volitelné: uživatelské jméno a heslo bezplatného účtu OpenSubtitles umožní serveru stáhnout víc souborů s titulky denně.",
+      "username": "Uživatelské jméno",
+      "password": "Heslo",
+      "save": "Uložit",
+      "remove": "Odebrat klíč"
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Aplikace díky tomu najdou tento server, i když se změní internetová adresa tvé domácnosti. Služba zná jen adresu: video jde vždy přímo z tohoto serveru do aplikací.",
@@ -777,7 +803,7 @@
       },
       "content": {
         "title": "Obsah",
-        "hint": "Plakáty, hledání podcastů, trailery a řady na Domů"
+        "hint": "Plakáty, hledání podcastů a titulků, upoutávky a řady na Domů"
       },
       "streaming": {
         "title": "Streamování",

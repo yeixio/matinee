@@ -33,7 +33,19 @@
     "unmute": "Slå på ljudet",
     "mute": "Stäng av ljudet",
     "converting": "Konverterar",
-    "fullscreen": "Helskärm"
+    "fullscreen": "Helskärm",
+    "findSubtitles": {
+      "open": "Sök undertexter…",
+      "title": "Sök undertexter",
+      "language": "Språk",
+      "looking": "Söker efter undertexter på nätet…",
+      "none": "Hittade inga undertexter på {{language}} på nätet för den här videon.",
+      "matchesFile": "Gjorda för den här filen",
+      "machine": "Maskinöversatta",
+      "online": "Från nätet",
+      "remove": "Ta bort {{name}}",
+      "source": "Undertexter från OpenSubtitles.com"
+    }
   },
   "somethingWentWrong": "Något gick fel",
   "oneMoment": "Ett ögonblick…",
@@ -742,6 +754,20 @@
       "save": "Spara nyckel",
       "remove": "Ta bort nyckel"
     },
+    "subtitles": {
+      "title": "Sök undertexter",
+      "intro": "Alla kan söka efter undertexter som en video saknar i spelarens undertextmeny. Sökningen använder OpenSubtitles.com: skaffa en gratis API-nyckel på <site>opensubtitles.com/consumers</site>.",
+      "using": "Använder nyckeln som slutar på {{hint}}.",
+      "usingAccount": "Använder nyckeln som slutar på {{hint}}, inloggad som {{username}}.",
+      "none": "Ingen nyckel än, så spelarens undertextmeny har ingen sökning.",
+      "key": "API-nyckel",
+      "keepKey": "Lämna tomt för att behålla den sparade nyckeln",
+      "accountHint": "Valfritt: användarnamn och lösenord för ett gratis OpenSubtitles-konto låter servern hämta fler undertextfiler per dag.",
+      "username": "Användarnamn",
+      "password": "Lösenord",
+      "save": "Spara",
+      "remove": "Ta bort nyckel"
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Gör att apparna hittar den här servern även när hemmets internetadress ändras. Tjänsten känner bara till adressen: video går alltid direkt från servern till apparna.",
@@ -769,7 +795,7 @@
       },
       "content": {
         "title": "Innehåll",
-        "hint": "Affischer, poddsökning, trailers och rader på Hem"
+        "hint": "Affischer, sökning efter poddar och undertexter, trailrar och rader på Hem"
       },
       "streaming": {
         "title": "Strömning",

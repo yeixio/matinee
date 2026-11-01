@@ -33,7 +33,19 @@
     "unmute": "Nyahsenyap",
     "mute": "Senyap",
     "converting": "Menukar",
-    "fullscreen": "Skrin penuh"
+    "fullscreen": "Skrin penuh",
+    "findSubtitles": {
+      "open": "Cari sari kata…",
+      "title": "Cari sari kata",
+      "language": "Bahasa",
+      "looking": "Mencari sari kata dalam talian…",
+      "none": "Tiada sari kata {{language}} ditemui dalam talian untuk video ini.",
+      "matchesFile": "Dibuat untuk fail ini",
+      "machine": "Terjemahan mesin",
+      "online": "Dalam talian",
+      "remove": "Buang {{name}}",
+      "source": "Sari kata daripada OpenSubtitles.com"
+    }
   },
   "somethingWentWrong": "Sesuatu tidak kena",
   "oneMoment": "Sekejap…",
@@ -738,6 +750,20 @@
       "save": "Simpan kunci",
       "remove": "Alih keluar kunci"
     },
+    "subtitles": {
+      "title": "Carian sari kata",
+      "intro": "Sesiapa sahaja boleh mencari sari kata yang tiada pada video daripada menu sari kata pemain. Carian menggunakan OpenSubtitles.com: dapatkan kunci API percuma di <site>opensubtitles.com/consumers</site>.",
+      "using": "Menggunakan kunci yang berakhir dengan {{hint}}.",
+      "usingAccount": "Menggunakan kunci yang berakhir dengan {{hint}}, log masuk sebagai {{username}}.",
+      "none": "Belum ada kunci, jadi menu sari kata pemain tiada carian.",
+      "key": "Kunci API",
+      "keepKey": "Biarkan kosong untuk mengekalkan kunci yang disimpan",
+      "accountHint": "Pilihan: nama pengguna dan kata laluan akaun OpenSubtitles percuma membolehkan pelayan mengambil lebih banyak fail sari kata sehari.",
+      "username": "Nama pengguna",
+      "password": "Kata laluan",
+      "save": "Simpan",
+      "remove": "Alih keluar kunci"
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Membolehkan apl terus menemui pelayan ini apabila alamat internet rumah anda berubah. Perkhidmatan ini hanya tahu alamatnya: video sentiasa terus dari pelayan ini ke apl.",
@@ -765,7 +791,7 @@
       },
       "content": {
         "title": "Kandungan",
-        "hint": "Poster, carian podcast, treler dan baris Laman Utama"
+        "hint": "Poster, carian podcast dan sari kata, treler dan baris Laman Utama"
       },
       "streaming": {
         "title": "Penstriman",

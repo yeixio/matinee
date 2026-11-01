@@ -319,7 +319,20 @@
     "audioNeedsUpdate": "Zaktualizuj Matinee na serwerze, aby wybrać tu dźwięk",
     "trackFailed": "Nie udało się przełączyć na tę ścieżkę",
     "subtitlesFailed": "Nie udało się wczytać tych napisów",
-    "convertsVideo": "Konwertuje wideo"
+    "convertsVideo": "Konwertuje wideo",
+    "findSubtitles": {
+      "open": "Szukaj napisów…",
+      "title": "Szukaj napisów",
+      "language": "Język",
+      "languageIs": "Język: {{language}}",
+      "looking": "Szukanie napisów w internecie…",
+      "adding": "Dodawanie napisów…",
+      "none": "Nie znaleziono w internecie napisów w języku: {{language}} dla tego wideo.",
+      "matchesFile": "Zrobione do tego pliku",
+      "machine": "Tłumaczenie maszynowe",
+      "online": "Z internetu",
+      "source": "Napisy z OpenSubtitles.com"
+    }
   },
   "library": {
     "nothingUnwatched": "Nie ma tu nic nieobejrzanego",

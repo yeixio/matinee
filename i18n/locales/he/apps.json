@@ -314,7 +314,20 @@
     "audioNeedsUpdate": "עדכנו את Matinee בשרת כדי לבחור כאן את השמע",
     "trackFailed": "לא ניתן לעבור לרצועה הזו",
     "subtitlesFailed": "לא ניתן לטעון את הכתוביות האלה",
-    "convertsVideo": "ממיר את הווידאו"
+    "convertsVideo": "ממיר את הווידאו",
+    "findSubtitles": {
+      "open": "חיפוש כתוביות…",
+      "title": "חיפוש כתוביות",
+      "language": "שפה",
+      "languageIs": "שפה: {{language}}",
+      "looking": "מחפשים כתוביות ברשת…",
+      "adding": "מוסיפים את הכתוביות…",
+      "none": "לא נמצאו ברשת כתוביות ב{{language}} לסרטון הזה.",
+      "matchesFile": "נוצרו לקובץ הזה",
+      "machine": "תרגום מכונה",
+      "online": "מהרשת",
+      "source": "כתוביות מ-OpenSubtitles.com"
+    }
   },
   "library": {
     "nothingUnwatched": "אין כאן שום דבר שלא נצפה",

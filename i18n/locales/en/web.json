@@ -33,7 +33,19 @@
     "unmute": "Unmute",
     "mute": "Mute",
     "converting": "Converting",
-    "fullscreen": "Fullscreen"
+    "fullscreen": "Fullscreen",
+    "findSubtitles": {
+      "open": "Find subtitles…",
+      "title": "Find subtitles",
+      "language": "Language",
+      "looking": "Looking for subtitles online…",
+      "none": "No {{language}} subtitles found online for this video.",
+      "matchesFile": "Made for this file",
+      "machine": "Machine translated",
+      "online": "Online",
+      "remove": "Remove {{name}}",
+      "source": "Subtitles from OpenSubtitles.com"
+    }
   },
   "somethingWentWrong": "Something went wrong",
   "oneMoment": "One moment…",
@@ -742,6 +754,20 @@
       "save": "Save key",
       "remove": "Remove key"
     },
+    "subtitles": {
+      "title": "Subtitle search",
+      "intro": "People can find subtitles a video doesn't have from the player's subtitles menu. Searching uses OpenSubtitles.com: get a free API key at <site>opensubtitles.com/consumers</site>.",
+      "using": "Using the key ending in {{hint}}.",
+      "usingAccount": "Using the key ending in {{hint}}, signed in as {{username}}.",
+      "none": "No key yet, so the player's subtitles menu has no search.",
+      "key": "API key",
+      "keepKey": "Leave empty to keep the saved key",
+      "accountHint": "Optional: the username and password of a free OpenSubtitles account let the server fetch more subtitle files a day.",
+      "username": "Username",
+      "password": "Password",
+      "save": "Save",
+      "remove": "Remove key"
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Keeps the apps able to find this server when your home’s internet address changes. It only ever learns the address: video always goes straight from this server to the apps.",
@@ -769,7 +795,7 @@
       },
       "content": {
         "title": "Content",
-        "hint": "Posters, podcast search, trailers and Home rows"
+        "hint": "Posters, podcast and subtitle search, trailers and Home rows"
       },
       "streaming": {
         "title": "Streaming",

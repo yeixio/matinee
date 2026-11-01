@@ -33,7 +33,19 @@
     "unmute": "Hang be",
     "mute": "Némítás",
     "converting": "Átalakítás",
-    "fullscreen": "Teljes képernyő"
+    "fullscreen": "Teljes képernyő",
+    "findSubtitles": {
+      "open": "Feliratok keresése…",
+      "title": "Feliratok keresése",
+      "language": "Nyelv",
+      "looking": "Feliratok keresése az interneten…",
+      "none": "Ehhez a videóhoz nem található {{language}} felirat az interneten.",
+      "matchesFile": "Ehhez a fájlhoz készült",
+      "machine": "Gépi fordítás",
+      "online": "Internetről",
+      "remove": "{{name}} eltávolítása",
+      "source": "Feliratok: OpenSubtitles.com"
+    }
   },
   "somethingWentWrong": "Valami hiba történt",
   "oneMoment": "Egy pillanat…",
@@ -742,6 +754,20 @@
       "save": "Kulcs mentése",
       "remove": "Kulcs eltávolítása"
     },
+    "subtitles": {
+      "title": "Feliratkeresés",
+      "intro": "Bárki kereshet a lejátszó feliratmenüjéből olyan feliratot, ami hiányzik egy videóhoz. A keresés az OpenSubtitles.com-ot használja: ingyenes API-kulcsot itt kaphatsz: <site>opensubtitles.com/consumers</site>.",
+      "using": "A(z) {{hint}} végű kulcs van használatban.",
+      "usingAccount": "A(z) {{hint}} végű kulcs van használatban, bejelentkezve mint {{username}}.",
+      "none": "Még nincs kulcs, ezért a lejátszó feliratmenüjében nincs keresés.",
+      "key": "API-kulcs",
+      "keepKey": "Hagyd üresen a mentett kulcs megtartásához",
+      "accountHint": "Nem kötelező: egy ingyenes OpenSubtitles-fiók felhasználóneve és jelszava több feliratfájl letöltését engedi naponta a szervernek.",
+      "username": "Felhasználónév",
+      "password": "Jelszó",
+      "save": "Mentés",
+      "remove": "Kulcs eltávolítása"
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Így az alkalmazások akkor is megtalálják ezt a szervert, ha megváltozik az otthoni internetcímed. A szolgáltatás csak a címet ismeri: a videó mindig közvetlenül ettől a szervertől megy az alkalmazásokhoz.",
@@ -769,7 +795,7 @@
       },
       "content": {
         "title": "Tartalom",
-        "hint": "Plakátok, podcastkeresés, előzetesek és a Kezdőlap sorai"
+        "hint": "Poszterek, podcast- és feliratkeresés, előzetesek és a Kezdőlap sorai"
       },
       "streaming": {
         "title": "Streamelés",

@@ -309,7 +309,20 @@
     "audioNeedsUpdate": "Päivitä Matinee palvelimella, niin voit valita äänen täällä",
     "trackFailed": "Raitaan ei voitu vaihtaa",
     "subtitlesFailed": "Tekstityksiä ei voitu ladata",
-    "convertsVideo": "Muuntaa videon"
+    "convertsVideo": "Muuntaa videon",
+    "findSubtitles": {
+      "open": "Etsi tekstityksiä…",
+      "title": "Etsi tekstityksiä",
+      "language": "Kieli",
+      "languageIs": "Kieli: {{language}}",
+      "looking": "Etsitään tekstityksiä verkosta…",
+      "adding": "Lisätään tekstityksiä…",
+      "none": "Tälle videolle ei löytynyt verkosta tekstityksiä kielellä {{language}}.",
+      "matchesFile": "Tehty tälle tiedostolle",
+      "machine": "Konekäännetty",
+      "online": "Verkosta",
+      "source": "Tekstitykset: OpenSubtitles.com"
+    }
   },
   "library": {
     "nothingUnwatched": "Ei katsomatonta täällä",

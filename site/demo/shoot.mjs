@@ -324,6 +324,30 @@ try {
       await api(token, 'PUT', '/settings', { adaptiveQuality: false })
     }
 
+    // Subtitle search: an admin enters an OpenSubtitles key, and the
+    // subtitles menu finds more online (see docs/guide/watching/finding-subtitles.md).
+    if (['player-find-subtitles', 'settings-subtitles'].some(wanted)) {
+      await api(token, 'PUT', '/integrations/opensubtitles', { apiKey: 'DEMOKEY000000000000000000000a1b2' })
+      await page.reload()
+      await sleep(2500)
+      await page.mouse.move(700, 500)
+      await page.getByRole('button', { name: 'Subtitles' }).click()
+      await page.getByRole('menuitem', { name: 'Find subtitles…' }).click()
+      await page.getByText('Harbor.Lights.2019.1080p.BluRay').waitFor()
+      await page.mouse.move(720, 520)
+      await shot(page, 'player-find-subtitles')
+      await page.mouse.click(700, 300) // closes the menu, and pauses
+      if (wanted('settings-subtitles')) {
+        const settingsPage = await open(desktop, token)
+        await settings(settingsPage, 'content')
+        await shot(settingsPage, 'settings-subtitles', { target: section(settingsPage, 'Subtitle search') })
+        await settingsPage.context().close()
+      }
+      await api(token, 'DELETE', '/integrations/opensubtitles')
+      await page.reload()
+      await sleep(2000)
+    }
+
     // Home Assistant pauses the film (see docs/guide/server/home-assistant.md).
     if (wanted('player-remote')) {
       const ha = await homeAssistant()

@@ -314,7 +314,20 @@
     "audioNeedsUpdate": "Atualize o Matinee no servidor para escolher o áudio aqui",
     "trackFailed": "Não foi possível trocar para essa faixa",
     "subtitlesFailed": "Não foi possível carregar estas legendas",
-    "convertsVideo": "Converte o vídeo"
+    "convertsVideo": "Converte o vídeo",
+    "findSubtitles": {
+      "open": "Buscar legendas…",
+      "title": "Buscar legendas",
+      "language": "Idioma",
+      "languageIs": "Idioma: {{language}}",
+      "looking": "Procurando legendas on-line…",
+      "adding": "Adicionando as legendas…",
+      "none": "Nenhuma legenda em {{language}} encontrada on-line para este vídeo.",
+      "matchesFile": "Feitas para este arquivo",
+      "machine": "Tradução automática",
+      "online": "On-line",
+      "source": "Legendas do OpenSubtitles.com"
+    }
   },
   "library": {
     "nothingUnwatched": "Nada para assistir aqui",

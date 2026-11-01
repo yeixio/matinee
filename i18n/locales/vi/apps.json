@@ -304,7 +304,20 @@
     "audioNeedsUpdate": "Cập nhật Matinee trên máy chủ để chọn âm thanh tại đây",
     "trackFailed": "Không thể chuyển sang rãnh đó",
     "subtitlesFailed": "Không thể tải phụ đề này",
-    "convertsVideo": "Chuyển đổi video"
+    "convertsVideo": "Chuyển đổi video",
+    "findSubtitles": {
+      "open": "Tìm phụ đề…",
+      "title": "Tìm phụ đề",
+      "language": "Ngôn ngữ",
+      "languageIs": "Ngôn ngữ: {{language}}",
+      "looking": "Đang tìm phụ đề trên mạng…",
+      "adding": "Đang thêm phụ đề…",
+      "none": "Không tìm thấy phụ đề {{language}} trên mạng cho video này.",
+      "matchesFile": "Làm cho chính tệp này",
+      "machine": "Dịch máy",
+      "online": "Trên mạng",
+      "source": "Phụ đề từ OpenSubtitles.com"
+    }
   },
   "library": {
     "nothingUnwatched": "Không còn gì chưa xem ở đây",

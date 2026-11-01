@@ -33,7 +33,19 @@
     "unmute": "Włącz dźwięk",
     "mute": "Wycisz",
     "converting": "Konwertowanie",
-    "fullscreen": "Pełny ekran"
+    "fullscreen": "Pełny ekran",
+    "findSubtitles": {
+      "open": "Szukaj napisów…",
+      "title": "Szukaj napisów",
+      "language": "Język",
+      "looking": "Szukanie napisów w internecie…",
+      "none": "Nie znaleziono w internecie napisów w języku: {{language}} dla tego wideo.",
+      "matchesFile": "Zrobione do tego pliku",
+      "machine": "Tłumaczenie maszynowe",
+      "online": "Z internetu",
+      "remove": "Usuń: {{name}}",
+      "source": "Napisy z OpenSubtitles.com"
+    }
   },
   "somethingWentWrong": "Coś poszło nie tak",
   "oneMoment": "Chwileczkę…",
@@ -750,6 +762,20 @@
       "save": "Zapisz klucz",
       "remove": "Usuń klucz"
     },
+    "subtitles": {
+      "title": "Wyszukiwanie napisów",
+      "intro": "Każdy może poszukać napisów, których brakuje w wideo, z menu napisów w odtwarzaczu. Wyszukiwanie korzysta z OpenSubtitles.com: darmowy klucz API zdobędziesz na <site>opensubtitles.com/consumers</site>.",
+      "using": "Używany jest klucz kończący się na {{hint}}.",
+      "usingAccount": "Używany jest klucz kończący się na {{hint}}, zalogowano jako {{username}}.",
+      "none": "Brak klucza, więc menu napisów w odtwarzaczu nie ma wyszukiwania.",
+      "key": "Klucz API",
+      "keepKey": "Zostaw puste, aby zachować zapisany klucz",
+      "accountHint": "Opcjonalnie: nazwa użytkownika i hasło darmowego konta OpenSubtitles pozwalają serwerowi pobierać więcej plików z napisami dziennie.",
+      "username": "Nazwa użytkownika",
+      "password": "Hasło",
+      "save": "Zapisz",
+      "remove": "Usuń klucz"
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Pozwala aplikacjom znaleźć ten serwer, gdy zmieni się adres internetowy Twojego domu. Usługa zna tylko adres: wideo zawsze płynie prosto z tego serwera do aplikacji.",
@@ -777,7 +803,7 @@
       },
       "content": {
         "title": "Treści",
-        "hint": "Plakaty, wyszukiwanie podcastów, zwiastuny i rzędy na stronie głównej"
+        "hint": "Plakaty, wyszukiwanie podcastów i napisów, zwiastuny i rzędy na stronie głównej"
       },
       "streaming": {
         "title": "Strumieniowanie",

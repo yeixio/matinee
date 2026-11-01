@@ -319,7 +319,20 @@
     "audioNeedsUpdate": "Оновіть Matinee на сервері, щоб вибирати звук тут",
     "trackFailed": "Не вдалося перемкнутися на цю доріжку",
     "subtitlesFailed": "Не вдалося завантажити ці субтитри",
-    "convertsVideo": "Перекодовує відео"
+    "convertsVideo": "Перекодовує відео",
+    "findSubtitles": {
+      "open": "Знайти субтитри…",
+      "title": "Знайти субтитри",
+      "language": "Мова",
+      "languageIs": "Мова: {{language}}",
+      "looking": "Шукаємо субтитри в інтернеті…",
+      "adding": "Додаємо субтитри…",
+      "none": "В інтернеті не знайшлося субтитрів ({{language}}) для цього відео.",
+      "matchesFile": "Зроблені для цього файлу",
+      "machine": "Машинний переклад",
+      "online": "З інтернету",
+      "source": "Субтитри з OpenSubtitles.com"
+    }
   },
   "library": {
     "nothingUnwatched": "Тут немає непереглянутого",

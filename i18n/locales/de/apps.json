@@ -309,7 +309,20 @@
     "audioNeedsUpdate": "Aktualisiere Matinee auf dem Server, um hier die Tonspur zu wählen",
     "trackFailed": "Konnte nicht zu dieser Spur wechseln",
     "subtitlesFailed": "Diese Untertitel konnten nicht geladen werden",
-    "convertsVideo": "Wandelt das Video um"
+    "convertsVideo": "Wandelt das Video um",
+    "findSubtitles": {
+      "open": "Untertitel suchen…",
+      "title": "Untertitel suchen",
+      "language": "Sprache",
+      "languageIs": "Sprache: {{language}}",
+      "looking": "Suche online nach Untertiteln…",
+      "adding": "Untertitel werden hinzugefügt…",
+      "none": "Online keine Untertitel auf {{language}} für dieses Video gefunden.",
+      "matchesFile": "Für diese Datei erstellt",
+      "machine": "Maschinell übersetzt",
+      "online": "Online",
+      "source": "Untertitel von OpenSubtitles.com"
+    }
   },
   "library": {
     "nothingUnwatched": "Hier ist nichts ungesehen",

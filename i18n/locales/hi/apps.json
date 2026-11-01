@@ -309,7 +309,20 @@
     "audioNeedsUpdate": "यहाँ ऑडियो चुनने के लिए सर्वर पर Matinee अपडेट करें",
     "trackFailed": "उस ट्रैक पर नहीं जा सके",
     "subtitlesFailed": "ये सबटाइटल लोड नहीं हो सके",
-    "convertsVideo": "वीडियो बदलता है"
+    "convertsVideo": "वीडियो बदलता है",
+    "findSubtitles": {
+      "open": "सबटाइटल ढूँढें…",
+      "title": "सबटाइटल ढूँढें",
+      "language": "भाषा",
+      "languageIs": "भाषा: {{language}}",
+      "looking": "ऑनलाइन सबटाइटल ढूँढे जा रहे हैं…",
+      "adding": "सबटाइटल जोड़े जा रहे हैं…",
+      "none": "इस वीडियो के लिए ऑनलाइन कोई {{language}} सबटाइटल नहीं मिला।",
+      "matchesFile": "इसी फ़ाइल के लिए बने",
+      "machine": "मशीन से अनुवादित",
+      "online": "ऑनलाइन",
+      "source": "सबटाइटल OpenSubtitles.com से"
+    }
   },
   "library": {
     "nothingUnwatched": "यहाँ बिना देखा कुछ नहीं",

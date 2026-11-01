@@ -319,7 +319,20 @@
     "audioNeedsUpdate": "Aktualizujte Matinee na serveru, abyste zde mohli vybrat zvuk",
     "trackFailed": "Na tuto stopu se nepodařilo přepnout",
     "subtitlesFailed": "Tyto titulky se nepodařilo načíst",
-    "convertsVideo": "Převádí video"
+    "convertsVideo": "Převádí video",
+    "findSubtitles": {
+      "open": "Najít titulky…",
+      "title": "Najít titulky",
+      "language": "Jazyk",
+      "languageIs": "Jazyk: {{language}}",
+      "looking": "Hledání titulků na internetu…",
+      "adding": "Přidávání titulků…",
+      "none": "Pro toto video se na internetu nenašly titulky v jazyce {{language}}.",
+      "matchesFile": "Vytvořené pro tento soubor",
+      "machine": "Strojový překlad",
+      "online": "Z internetu",
+      "source": "Titulky z OpenSubtitles.com"
+    }
   },
   "library": {
     "nothingUnwatched": "Nic nezhlédnutého",

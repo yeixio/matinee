@@ -33,7 +33,19 @@
     "unmute": "Geluid aan",
     "mute": "Dempen",
     "converting": "Omzetten",
-    "fullscreen": "Volledig scherm"
+    "fullscreen": "Volledig scherm",
+    "findSubtitles": {
+      "open": "Ondertitels zoeken…",
+      "title": "Ondertitels zoeken",
+      "language": "Taal",
+      "looking": "Online naar ondertitels zoeken…",
+      "none": "Geen {{language}} ondertitels online gevonden voor deze video.",
+      "matchesFile": "Gemaakt voor dit bestand",
+      "machine": "Machinaal vertaald",
+      "online": "Online",
+      "remove": "{{name}} verwijderen",
+      "source": "Ondertitels van OpenSubtitles.com"
+    }
   },
   "somethingWentWrong": "Er ging iets mis",
   "oneMoment": "Een moment…",
@@ -742,6 +754,20 @@
       "save": "Sleutel opslaan",
       "remove": "Sleutel verwijderen"
     },
+    "subtitles": {
+      "title": "Ondertitels zoeken",
+      "intro": "Iedereen kan ondertitels die een video mist zoeken via het ondertitelmenu van de speler. Zoeken gebruikt OpenSubtitles.com: haal een gratis API-sleutel op <site>opensubtitles.com/consumers</site>.",
+      "using": "Gebruikt de sleutel die eindigt op {{hint}}.",
+      "usingAccount": "De sleutel die eindigt op {{hint}} wordt gebruikt, ingelogd als {{username}}.",
+      "none": "Nog geen sleutel, dus het ondertitelmenu van de speler kan niet zoeken.",
+      "key": "API-sleutel",
+      "keepKey": "Laat leeg om de opgeslagen sleutel te houden",
+      "accountHint": "Optioneel: met de gebruikersnaam en het wachtwoord van een gratis OpenSubtitles-account kan de server meer ondertitelbestanden per dag ophalen.",
+      "username": "Gebruikersnaam",
+      "password": "Wachtwoord",
+      "save": "Opslaan",
+      "remove": "Sleutel verwijderen"
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Zorgt dat de apps deze server blijven vinden als het internetadres van je huis verandert. De dienst kent alleen het adres: video gaat altijd rechtstreeks van deze server naar de apps.",
@@ -769,7 +795,7 @@
       },
       "content": {
         "title": "Inhoud",
-        "hint": "Posters, podcasts zoeken, trailers en rijen op Home"
+        "hint": "Posters, podcasts en ondertitels zoeken, trailers en rijen op Home"
       },
       "streaming": {
         "title": "Streamen",

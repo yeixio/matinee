@@ -304,7 +304,20 @@
     "audioNeedsUpdate": "請更新伺服器上的 Matinee，以便在這裡選擇音軌",
     "trackFailed": "無法切換到該音軌",
     "subtitlesFailed": "無法載入這些字幕",
-    "convertsVideo": "會轉換影片"
+    "convertsVideo": "會轉換影片",
+    "findSubtitles": {
+      "open": "尋找字幕…",
+      "title": "尋找字幕",
+      "language": "語言",
+      "languageIs": "語言：{{language}}",
+      "looking": "正在網路上尋找字幕…",
+      "adding": "正在加入字幕…",
+      "none": "網路上找不到這部影片的{{language}}字幕。",
+      "matchesFile": "為此檔案製作",
+      "machine": "機器翻譯",
+      "online": "網路",
+      "source": "字幕來自 OpenSubtitles.com"
+    }
   },
   "library": {
     "nothingUnwatched": "這裡沒有未看的內容",

@@ -304,7 +304,20 @@
     "audioNeedsUpdate": "Perbarui Matinee di server untuk memilih audio di sini",
     "trackFailed": "Tidak dapat beralih ke trek itu",
     "subtitlesFailed": "Tidak dapat memuat subtitle ini",
-    "convertsVideo": "Mengonversi video"
+    "convertsVideo": "Mengonversi video",
+    "findSubtitles": {
+      "open": "Cari subtitle…",
+      "title": "Cari subtitle",
+      "language": "Bahasa",
+      "languageIs": "Bahasa: {{language}}",
+      "looking": "Mencari subtitle secara online…",
+      "adding": "Menambahkan subtitle…",
+      "none": "Tidak ada subtitle {{language}} yang ditemukan online untuk video ini.",
+      "matchesFile": "Dibuat untuk file ini",
+      "machine": "Terjemahan mesin",
+      "online": "Online",
+      "source": "Subtitle dari OpenSubtitles.com"
+    }
   },
   "library": {
     "nothingUnwatched": "Tidak ada yang belum ditonton di sini",

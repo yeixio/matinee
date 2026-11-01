@@ -33,7 +33,19 @@
     "unmute": "Riattiva audio",
     "mute": "Disattiva audio",
     "converting": "Conversione",
-    "fullscreen": "Schermo intero"
+    "fullscreen": "Schermo intero",
+    "findSubtitles": {
+      "open": "Cerca sottotitoli…",
+      "title": "Cerca sottotitoli",
+      "language": "Lingua",
+      "looking": "Ricerca di sottotitoli online…",
+      "none": "Nessun sottotitolo in {{language}} trovato online per questo video.",
+      "matchesFile": "Fatti per questo file",
+      "machine": "Tradotti automaticamente",
+      "online": "Online",
+      "remove": "Rimuovi {{name}}",
+      "source": "Sottotitoli da OpenSubtitles.com"
+    }
   },
   "somethingWentWrong": "Qualcosa è andato storto",
   "oneMoment": "Un momento…",
@@ -746,6 +758,20 @@
       "save": "Salva chiave",
       "remove": "Rimuovi chiave"
     },
+    "subtitles": {
+      "title": "Ricerca sottotitoli",
+      "intro": "Chiunque può cercare i sottotitoli che mancano a un video dal menu dei sottotitoli del player. La ricerca usa OpenSubtitles.com: ottieni una chiave API gratuita su <site>opensubtitles.com/consumers</site>.",
+      "using": "Si usa la chiave che termina con {{hint}}.",
+      "usingAccount": "Uso della chiave che termina con {{hint}}, con l’accesso di {{username}}.",
+      "none": "Ancora nessuna chiave, quindi il menu dei sottotitoli del player non ha la ricerca.",
+      "key": "Chiave API",
+      "keepKey": "Lascia vuoto per mantenere la chiave salvata",
+      "accountHint": "Facoltativo: nome utente e password di un account OpenSubtitles gratuito permettono al server di scaricare più file di sottotitoli al giorno.",
+      "username": "Nome utente",
+      "password": "Password",
+      "save": "Salva",
+      "remove": "Rimuovi chiave"
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Permette alle app di trovare questo server anche quando cambia l’indirizzo internet di casa. Conosce solo l’indirizzo: i video vanno sempre direttamente da questo server alle app.",
@@ -773,7 +799,7 @@
       },
       "content": {
         "title": "Contenuti",
-        "hint": "Locandine, ricerca podcast, trailer e righe della Home"
+        "hint": "Poster, ricerca di podcast e sottotitoli, trailer e righe della Home"
       },
       "streaming": {
         "title": "Streaming",

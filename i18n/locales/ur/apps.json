@@ -309,7 +309,20 @@
     "audioNeedsUpdate": "یہاں آڈیو چننے کے لیے سرور پر Matinee اپ ڈیٹ کریں",
     "trackFailed": "اس ٹریک پر نہیں جا سکے",
     "subtitlesFailed": "یہ سب ٹائٹلز لوڈ نہیں ہو سکے",
-    "convertsVideo": "ویڈیو تبدیل کرتا ہے"
+    "convertsVideo": "ویڈیو تبدیل کرتا ہے",
+    "findSubtitles": {
+      "open": "سب ٹائٹل تلاش کریں…",
+      "title": "سب ٹائٹل تلاش کریں",
+      "language": "زبان",
+      "languageIs": "زبان: {{language}}",
+      "looking": "آن لائن سب ٹائٹل تلاش کیے جا رہے ہیں…",
+      "adding": "سب ٹائٹل شامل کیے جا رہے ہیں…",
+      "none": "اس ویڈیو کے لیے آن لائن کوئی {{language}} سب ٹائٹل نہیں ملا۔",
+      "matchesFile": "اسی فائل کے لیے بنے",
+      "machine": "مشینی ترجمہ",
+      "online": "آن لائن",
+      "source": "سب ٹائٹل OpenSubtitles.com سے"
+    }
   },
   "library": {
     "nothingUnwatched": "یہاں کچھ بھی ان دیکھا نہیں",

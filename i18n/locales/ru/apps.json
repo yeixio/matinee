@@ -319,7 +319,20 @@
     "audioNeedsUpdate": "Обновите Matinee на сервере, чтобы выбирать звук здесь",
     "trackFailed": "Не удалось переключиться на эту дорожку",
     "subtitlesFailed": "Не удалось загрузить эти субтитры",
-    "convertsVideo": "Перекодирует видео"
+    "convertsVideo": "Перекодирует видео",
+    "findSubtitles": {
+      "open": "Найти субтитры…",
+      "title": "Найти субтитры",
+      "language": "Язык",
+      "languageIs": "Язык: {{language}}",
+      "looking": "Ищем субтитры в интернете…",
+      "adding": "Добавляем субтитры…",
+      "none": "В интернете не нашлось субтитров ({{language}}) для этого видео.",
+      "matchesFile": "Сделаны для этого файла",
+      "machine": "Машинный перевод",
+      "online": "Из интернета",
+      "source": "Субтитры с OpenSubtitles.com"
+    }
   },
   "library": {
     "nothingUnwatched": "Здесь нет непросмотренного",

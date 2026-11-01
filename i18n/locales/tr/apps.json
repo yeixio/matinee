@@ -309,7 +309,20 @@
     "audioNeedsUpdate": "Sesi burada seçmek için sunucudaki Matinee'yi güncelleyin",
     "trackFailed": "O parçaya geçilemedi",
     "subtitlesFailed": "Bu altyazılar yüklenemedi",
-    "convertsVideo": "Videoyu dönüştürür"
+    "convertsVideo": "Videoyu dönüştürür",
+    "findSubtitles": {
+      "open": "Altyazı bul…",
+      "title": "Altyazı bul",
+      "language": "Dil",
+      "languageIs": "Dil: {{language}}",
+      "looking": "İnternette altyazı aranıyor…",
+      "adding": "Altyazı ekleniyor…",
+      "none": "Bu video için internette {{language}} altyazı bulunamadı.",
+      "matchesFile": "Bu dosya için yapılmış",
+      "machine": "Makine çevirisi",
+      "online": "İnternetten",
+      "source": "Altyazılar OpenSubtitles.com'dan"
+    }
   },
   "library": {
     "nothingUnwatched": "Burada izlenmemiş bir şey yok",

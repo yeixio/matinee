@@ -304,7 +304,20 @@
     "audioNeedsUpdate": "Kemas kini Matinee pada pelayan untuk memilih audio di sini",
     "trackFailed": "Tidak dapat bertukar ke trek itu",
     "subtitlesFailed": "Tidak dapat memuatkan sari kata ini",
-    "convertsVideo": "Menukar video"
+    "convertsVideo": "Menukar video",
+    "findSubtitles": {
+      "open": "Cari sari kata…",
+      "title": "Cari sari kata",
+      "language": "Bahasa",
+      "languageIs": "Bahasa: {{language}}",
+      "looking": "Mencari sari kata dalam talian…",
+      "adding": "Menambah sari kata…",
+      "none": "Tiada sari kata {{language}} ditemui dalam talian untuk video ini.",
+      "matchesFile": "Dibuat untuk fail ini",
+      "machine": "Terjemahan mesin",
+      "online": "Dalam talian",
+      "source": "Sari kata daripada OpenSubtitles.com"
+    }
   },
   "library": {
     "nothingUnwatched": "Tiada yang belum ditonton di sini",

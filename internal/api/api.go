@@ -125,7 +125,10 @@ type Server struct {
 	// PodcastIndexBase is Podcast Index's API; empty is the real one.
 	Podcasts         *podcast.Manager
 	PodcastIndexBase string
-	podcastCache     ttlCache // Podcast Index's answers
+	// OpenSubtitlesBase is the OpenSubtitles API; empty is the real one.
+	OpenSubtitlesBase string
+	openSubs          openSubsState
+	podcastCache      ttlCache // Podcast Index's answers
 
 	// BackgroundCtx scopes scans started by API calls; it outlives any one request.
 	BackgroundCtx context.Context
@@ -256,6 +259,9 @@ func (s *Server) routes() []route {
 		{"DELETE /items/{id}/cover", adminOnly, s.resetCover},
 		{"GET /items/{id}/file", reader, s.directFile},
 		{"GET /items/{id}/subtitles/{track}", reader, s.subtitleFile},
+		{"GET /items/{id}/subtitles/search", reader, grownUps(s.searchSubtitles)},
+		{"POST /items/{id}/subtitles", reader, grownUps(s.addFoundSubtitle)},
+		{"DELETE /items/{id}/subtitles/{track}", reader, grownUps(s.removeFoundSubtitle)},
 		{"GET /items/{id}/trailers", reader, s.listTrailers},
 		{"GET /items/{id}/trailers/{trailer}/file", reader, s.trailerFile},
 		{"POST /items/{id}/trailers/{trailer}/hls", reader, s.trailerHLS},
@@ -297,6 +303,9 @@ func (s *Server) routes() []route {
 		{"PUT /integrations/{app}", adminOnly, s.putIntegration},
 		{"DELETE /integrations/{app}", adminOnly, s.deleteIntegration},
 		{"POST /integrations/{app}/test", adminOnly, s.testIntegration},
+		{"GET /integrations/opensubtitles", adminOnly, s.getOpenSubtitles},
+		{"PUT /integrations/opensubtitles", adminOnly, s.putOpenSubtitles},
+		{"DELETE /integrations/opensubtitles", adminOnly, s.deleteOpenSubtitles},
 		{"GET /integrations/podcastindex", adminOnly, s.getPodcastIndex},
 		{"PUT /integrations/podcastindex", adminOnly, s.putPodcastIndex},
 		{"DELETE /integrations/podcastindex", adminOnly, s.deletePodcastIndex},
@@ -1057,7 +1066,9 @@ type itemView struct {
 	store.Item
 	MimeType  string           `json:"mimeType,omitempty"`
 	Subtitles []subtitle.Track `json:"subtitles,omitempty"`
-	Parents   []store.Item     `json:"parents"` // root first: show, season
+	// SubtitleSearch says the person can look for more subtitles online.
+	SubtitleSearch bool         `json:"subtitleSearch,omitempty"`
+	Parents        []store.Item `json:"parents"` // root first: show, season
 	// MediaInfo is the background analysis of a file, every stream in
 	// detail; absent until the file is analyzed. MediaInfoStale is true
 	// while the file changed and is waiting to be analyzed again.
@@ -1092,6 +1103,7 @@ func (s *Server) getItem(w http.ResponseWriter, r *http.Request) {
 	}
 	if it.Playable && it.VideoCodec != "" {
 		v.Subtitles = s.subtitleTracks(r.Context(), it)
+		v.SubtitleSearch = s.canFindSubtitles(r.Context(), currentUser(r), it)
 	}
 	for p := it.ParentID; p != nil; {
 		parent, err := s.Store.Item(r.Context(), currentUser(r).ID, *p)
@@ -1379,7 +1391,9 @@ func (s *Server) subtitleTracks(ctx context.Context, it store.Item) []subtitle.T
 			s.Log.Warn("save subtitle streams", "item", it.ID, "err", err)
 		}
 	}
-	return subtitle.List(it.Path, embedded)
+	tracks := subtitle.List(it.Path, embedded)
+	u, _ := auth.UserFrom(ctx)
+	return append(tracks, s.foundTracks(ctx, u, it)...)
 }
 
 func (s *Server) subtitleFile(w http.ResponseWriter, r *http.Request) {
@@ -1396,6 +1410,12 @@ func (s *Server) subtitleFile(w http.ResponseWriter, r *http.Request) {
 	if !ok {
 		writeError(w, http.StatusNotFound, "no such subtitle track")
 		return
+	}
+	if t.Found {
+		if err := s.ensureFoundFile(r.Context(), it, t); err != nil {
+			s.serverError(w, err)
+			return
+		}
 	}
 	s.Subtitles.Serve(w, r, it.Path, t, tracks)
 }

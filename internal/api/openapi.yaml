@@ -1618,6 +1618,68 @@ paths:
       responses:
         "200": { description: WebVTT., content: { text/vtt: {} } }
         "404": { $ref: "#/components/responses/Error" }
+    delete:
+      summary: Remove subtitles found online
+      description: Only tracks with `found` can be removed, by an admin or whoever added them (`removable`). Not on kids profiles.
+      parameters:
+        - $ref: "#/components/parameters/ID"
+        - { name: track, in: path, required: true, schema: { type: string } }
+      responses:
+        "204": { description: Removed. }
+        "400": { $ref: "#/components/responses/Error" }
+        "403": { $ref: "#/components/responses/Error" }
+        "404": { $ref: "#/components/responses/Error" }
+  /items/{id}/subtitles/search:
+    get:
+      summary: Look for subtitles for a video online
+      description: |
+        Searches OpenSubtitles once an admin entered a key (the item's
+        `subtitleSearch` is true). Files made for this very video file
+        (`matchesFile`, found by the file's hash) come first, then the most
+        downloaded; machine translations come last. `languages` are the ones
+        searched, in OpenSubtitles' codes; without `languages` the person's
+        own language and English. `have` lists the results the video has
+        already. Answers are kept for 15 minutes. Not on kids profiles.
+      parameters:
+        - $ref: "#/components/parameters/ID"
+        - { name: languages, in: query, schema: { type: string, example: "en,pt-BR" }, description: Up to five language codes, comma separated. }
+      responses:
+        "200":
+          description: Results.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  languages: { type: array, items: { type: string } }
+                  results: { type: array, items: { $ref: "#/components/schemas/FoundSubtitle" } }
+                  have: { type: array, items: { type: integer } }
+        "409": { $ref: "#/components/responses/Error" }
+        "502": { $ref: "#/components/responses/Error" }
+  /items/{id}/subtitles:
+    post:
+      summary: Add subtitles found online to a video
+      description: |
+        Send a result from the search as it came. The server fetches the file
+        once and keeps it, and every player lists it with the video's own
+        tracks from then on. Answers with the new track. 429 when the day's
+        OpenSubtitles downloads are used up. Not on kids profiles.
+      parameters:
+        - $ref: "#/components/parameters/ID"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/FoundSubtitle" }
+      responses:
+        "201":
+          description: Added.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/SubtitleTrack" }
+        "409": { $ref: "#/components/responses/Error" }
+        "429": { $ref: "#/components/responses/Error" }
+        "502": { $ref: "#/components/responses/Error" }
   /items/{id}/hls:
     post:
       summary: Start a transcode for players that can't play the file directly
@@ -2220,6 +2282,45 @@ paths:
         "502": { $ref: "#/components/responses/Error" }
     delete:
       summary: Forget the Podcast Index key (admins only)
+      responses:
+        "204": { description: Forgotten. }
+  /integrations/opensubtitles:
+    get:
+      summary: The OpenSubtitles key (admins only)
+      description: OpenSubtitles (opensubtitles.com) finds subtitles a video doesn't have. The key and password are never returned; `hint` is the key's last four characters.
+      responses:
+        "200":
+          description: Whether a key is set.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/OpenSubtitlesConnection" }
+    put:
+      summary: Set the OpenSubtitles key (admins only)
+      description: |
+        The free API key from opensubtitles.com, and optionally a free
+        account's username and password, which let the server fetch more
+        files a day. They're checked with OpenSubtitles first. Leaving out
+        the key, or the password with the same username, keeps the saved one.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                apiKey: { type: string }
+                username: { type: string }
+                password: { type: string }
+      responses:
+        "200":
+          description: Set.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/OpenSubtitlesConnection" }
+        "400": { $ref: "#/components/responses/Error" }
+        "502": { $ref: "#/components/responses/Error" }
+    delete:
+      summary: Forget the OpenSubtitles key (admins only)
       responses:
         "204": { description: Forgotten. }
   /integrations/overseerr:
@@ -3680,6 +3781,27 @@ components:
         categories: { type: array, items: { type: string } }
         episodes: { type: integer }
         itemId: { type: integer, description: The show's id when a library has it already. }
+    OpenSubtitlesConnection:
+      type: object
+      properties:
+        connected: { type: boolean }
+        hint: { type: string }
+        username: { type: string }
+    FoundSubtitle:
+      type: object
+      required: [id]
+      properties:
+        id: { type: integer, description: OpenSubtitles' file id. }
+        language: { type: string, example: pt }
+        variant: { type: string, example: pt-br, description: OpenSubtitles' own language code where it says more. }
+        label: { type: string, example: Portuguese (Brazil), description: In English. }
+        release: { type: string, description: The release the file was made for. }
+        sdh: { type: boolean }
+        forced: { type: boolean }
+        machine: { type: boolean, description: Machine translated. }
+        downloads: { type: integer }
+        matchesFile: { type: boolean, description: Made for this very video file, so its timing fits. }
+        trusted: { type: boolean }
     PodcastIndexConnection:
       type: object
       properties:
@@ -3792,6 +3914,7 @@ components:
           properties:
             mimeType: { type: string }
             subtitles: { type: array, items: { $ref: "#/components/schemas/SubtitleTrack" } }
+            subtitleSearch: { type: boolean, description: "The person can look for more subtitles online (GET /items/{id}/subtitles/search)." }
             parents: { type: array, items: { $ref: "#/components/schemas/Item" }, description: Root first, such as show then season. }
             mediaInfo: { $ref: "#/components/schemas/MediaInfo" }
             mediaInfoStale: { type: boolean, description: The file changed since it was analyzed; a new analysis is on its way. }
@@ -3990,6 +4113,8 @@ components:
         sdh: { type: boolean }
         external: { type: boolean }
         burnIn: { type: boolean, description: Picture-based; only playable burned into a transcode. }
+        found: { type: boolean, description: Found online by someone watching (see /items/{id}/subtitles/search). }
+        removable: { type: boolean, description: The person asking may remove these found subtitles. }
     Download:
       type: object
       properties:

@@ -427,7 +427,29 @@ export type SubtitleTrack = {
   external?: boolean
   // Picture-based subtitles the server draws into a transcode.
   burnIn?: boolean
+  // Found online by someone watching; removable by the person asking.
+  found?: boolean
+  removable?: boolean
 }
+
+/** A subtitle file found online (GET /items/{id}/subtitles/search). */
+export type FoundSubtitle = {
+  id: number
+  language?: string
+  variant?: string // OpenSubtitles' own code where it says more, such as pt-br
+  label: string // in English
+  release?: string
+  sdh?: boolean
+  forced?: boolean
+  machine?: boolean // machine translated
+  downloads: number
+  matchesFile?: boolean // made for this very file
+  trusted?: boolean
+}
+
+export type SubtitleSearch = { languages: string[]; results: FoundSubtitle[]; have: number[] }
+
+export type OpenSubtitlesConnection = { connected: boolean; hint?: string; username?: string }
 
 /** One of the home screen's rows: a holiday coming up, a pinned collection, or a genre (a different few each day). */
 // A row of titles. more: it has more than it shows, and api.row(id) has
@@ -639,6 +661,8 @@ export type PlaybackPrefs = {
 export type ItemDetail = Item & {
   mimeType?: string
   subtitles?: SubtitleTrack[]
+  // The person can look for more subtitles online.
+  subtitleSearch?: boolean
   parents: Item[]
   // Left out until the file is analyzed; stale while it changed and waits to be analyzed again.
   mediaInfo?: MediaInfo
@@ -951,6 +975,14 @@ export const api = {
     })
     return response<OpmlImport>(res)
   },
+  openSubtitles: () => request<OpenSubtitlesConnection>('GET', '/api/v1/integrations/opensubtitles'),
+  saveOpenSubtitles: (v: { apiKey?: string; username?: string; password?: string }) =>
+    request<OpenSubtitlesConnection>('PUT', '/api/v1/integrations/opensubtitles', v),
+  deleteOpenSubtitles: () => request<void>('DELETE', '/api/v1/integrations/opensubtitles'),
+  searchSubtitles: (id: number, language?: string) =>
+    request<SubtitleSearch>('GET', `/api/v1/items/${id}/subtitles/search${language ? `?languages=${encodeURIComponent(language)}` : ''}`),
+  addSubtitle: (id: number, found: FoundSubtitle) => request<SubtitleTrack>('POST', `/api/v1/items/${id}/subtitles`, found),
+  removeSubtitle: (id: number, track: string) => request<void>('DELETE', `/api/v1/items/${id}/subtitles/${encodeURIComponent(track)}`),
   podcastIndex: () => request<{ connected: boolean; hint?: string }>('GET', '/api/v1/integrations/podcastindex'),
   savePodcastIndex: (key: string, secret: string) =>
     request<{ connected: boolean; hint?: string }>('PUT', '/api/v1/integrations/podcastindex', { key, secret }),

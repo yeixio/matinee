@@ -430,6 +430,23 @@ var migrations = []string{
 		rated_at BIGINT NOT NULL,
 		PRIMARY KEY (user_id, item_id)
 	)`,
+	// 69–70: subtitles found online for a video (see foundsubs.go), kept
+	// here rather than next to the video, whose folder may be read-only.
+	`CREATE TABLE found_subtitles (
+		id         TEXT PRIMARY KEY,
+		item_id    BIGINT NOT NULL REFERENCES items(id) ON DELETE CASCADE,
+		language   TEXT NOT NULL DEFAULT '', -- ISO 639-1, such as en
+		label      TEXT NOT NULL DEFAULT '', -- such as "Portuguese (Brazil)"
+		release    TEXT NOT NULL DEFAULT '', -- the release it was made for
+		sdh        INTEGER NOT NULL DEFAULT 0,
+		forced     INTEGER NOT NULL DEFAULT 0,
+		source     TEXT NOT NULL, -- where it came from, such as opensubtitles:<file id>
+		data       BYTEA NOT NULL, -- the subtitle file; a BLOB in SQLite
+		format     TEXT NOT NULL, -- srt or vtt
+		added_by   BIGINT NOT NULL DEFAULT 0, -- the user who added it
+		added_at   BIGINT NOT NULL
+	)`,
+	"CREATE INDEX found_subtitles_item ON found_subtitles(item_id)",
 }
 
 func now() int64 { return time.Now().Unix() }
