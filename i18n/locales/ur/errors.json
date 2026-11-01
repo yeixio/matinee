@@ -187,5 +187,21 @@
   "that_isnt_a_media_server_database_matinee_can_read": "یہ ایسا میڈیا سرور ڈیٹابیس نہیں جسے Matinee پڑھ سکے",
   "the_covers_address_must_start_with_http_or_https": "سرورق کا پتا http:// یا https:// سے شروع ہونا چاہیے",
   "the_image_is_too_big_20_mb_at_most": "تصویر بہت بڑی ہے (زیادہ سے زیادہ 20 MB)",
-  "couldnt_get_an_image_from_that_address": "اس پتے سے تصویر نہیں مل سکی"
+  "couldnt_get_an_image_from_that_address": "اس پتے سے تصویر نہیں مل سکی",
+  "admins_see_every_library_make_them_a_regular_account_first": "ایڈمن ہر لائبریری دیکھتے ہیں؛ پہلے اسے عام اکاؤنٹ بنائیں",
+  "bad_wait": "غلط انتظار کا وقت",
+  "invites_last_1_to_30_days": "دعوتیں 1 سے 30 دن تک چلتی ہیں",
+  "join_the_session_first": "پہلے سیشن میں شامل ہوں",
+  "no_such_invite": "ایسی کوئی دعوت نہیں",
+  "pick_at_least_one_library_to_share": "شیئر کرنے کے لیے کم از کم ایک لائبریری چنیں",
+  "that_isnt_in_a_library_shared_with_you": "یہ آپ کے ساتھ شیئر کی گئی کسی لائبریری میں نہیں ہے",
+  "that_session_is_still_going_join_it": "وہ سیشن ابھی جاری ہے؛ اس میں شامل ہوں",
+  "that_watch_together_code_doesnt_work_it_may_have_ended": "یہ ساتھ دیکھنے کا کوڈ کام نہیں کرتا؛ شاید سیشن ختم ہو گیا",
+  "this_invite_has_expired_ask_for_another": "اس دعوت کی مدت ختم ہو گئی؛ نئی مانگیں",
+  "this_invite_link_doesnt_work_ask_for_another": "یہ دعوتی لنک کام نہیں کرتا؛ نیا مانگیں",
+  "this_invite_was_already_used": "یہ دعوت پہلے ہی استعمال ہو چکی ہے",
+  "this_watch_together_session_is_full": "یہ ساتھ دیکھنے کا سیشن بھر گیا ہے",
+  "too_many_watch_together_sessions_right_now": "ابھی ساتھ دیکھنے کے بہت زیادہ سیشن چل رہے ہیں",
+  "unknown_action": "نامعلوم عمل",
+  "usernames_are_at_most_40_characters": "یوزر نیم زیادہ سے زیادہ 40 حروف کا ہو سکتا ہے"
 }

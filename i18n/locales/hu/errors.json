@@ -187,5 +187,21 @@
   "that_isnt_a_media_server_database_matinee_can_read": "ez nem olyan médiaszerver-adatbázis, amelyet a Matinee be tud olvasni",
   "the_covers_address_must_start_with_http_or_https": "a borító címének http:// vagy https:// előtaggal kell kezdődnie",
   "the_image_is_too_big_20_mb_at_most": "a kép túl nagy (legfeljebb 20 MB)",
-  "couldnt_get_an_image_from_that_address": "erről a címről nem sikerült képet letölteni"
+  "couldnt_get_an_image_from_that_address": "erről a címről nem sikerült képet letölteni",
+  "admins_see_every_library_make_them_a_regular_account_first": "az adminok minden könyvtárat látnak; először tedd normál fiókká",
+  "bad_wait": "érvénytelen várakozás",
+  "invites_last_1_to_30_days": "a meghívók 1–30 napig érvényesek",
+  "join_the_session_first": "előbb csatlakozz a munkamenethez",
+  "no_such_invite": "nincs ilyen meghívó",
+  "pick_at_least_one_library_to_share": "válassz legalább egy megosztandó könyvtárat",
+  "that_isnt_in_a_library_shared_with_you": "ez nincs a veled megosztott könyvtárakban",
+  "that_session_is_still_going_join_it": "ez a munkamenet még tart; csatlakozz hozzá",
+  "that_watch_together_code_doesnt_work_it_may_have_ended": "ez a közös nézési kód nem működik; lehet, hogy véget ért",
+  "this_invite_has_expired_ask_for_another": "ez a meghívó lejárt; kérj másikat",
+  "this_invite_link_doesnt_work_ask_for_another": "ez a meghívólink nem működik; kérj másikat",
+  "this_invite_was_already_used": "ezt a meghívót már felhasználták",
+  "this_watch_together_session_is_full": "ez a közös nézés megtelt",
+  "too_many_watch_together_sessions_right_now": "most túl sok közös nézés fut",
+  "unknown_action": "ismeretlen művelet",
+  "usernames_are_at_most_40_characters": "a felhasználónév legfeljebb 40 karakter"
 }

@@ -187,5 +187,21 @@
   "that_isnt_a_media_server_database_matinee_can_read": "dat is geen mediaserverdatabase die Matinee kan lezen",
   "the_covers_address_must_start_with_http_or_https": "het adres van de hoes moet beginnen met http:// of https://",
   "the_image_is_too_big_20_mb_at_most": "de afbeelding is te groot (maximaal 20 MB)",
-  "couldnt_get_an_image_from_that_address": "kon geen afbeelding ophalen van dat adres"
+  "couldnt_get_an_image_from_that_address": "kon geen afbeelding ophalen van dat adres",
+  "admins_see_every_library_make_them_a_regular_account_first": "beheerders zien elke bibliotheek; maak er eerst een gewoon account van",
+  "bad_wait": "ongeldige wachttijd",
+  "invites_last_1_to_30_days": "uitnodigingen gelden 1 tot 30 dagen",
+  "join_the_session_first": "doe eerst mee aan de sessie",
+  "no_such_invite": "die uitnodiging bestaat niet",
+  "pick_at_least_one_library_to_share": "kies minstens één bibliotheek om te delen",
+  "that_isnt_in_a_library_shared_with_you": "dat staat niet in een bibliotheek die met je gedeeld is",
+  "that_session_is_still_going_join_it": "die sessie loopt nog; doe mee",
+  "that_watch_together_code_doesnt_work_it_may_have_ended": "die code voor samen kijken werkt niet; misschien is het afgelopen",
+  "this_invite_has_expired_ask_for_another": "deze uitnodiging is verlopen; vraag een nieuwe",
+  "this_invite_link_doesnt_work_ask_for_another": "deze uitnodigingslink werkt niet; vraag een nieuwe",
+  "this_invite_was_already_used": "deze uitnodiging is al gebruikt",
+  "this_watch_together_session_is_full": "deze sessie voor samen kijken is vol",
+  "too_many_watch_together_sessions_right_now": "er zijn nu te veel sessies voor samen kijken",
+  "unknown_action": "onbekende actie",
+  "usernames_are_at_most_40_characters": "gebruikersnamen zijn hooguit 40 tekens"
 }

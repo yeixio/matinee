@@ -187,5 +187,21 @@
   "that_isnt_a_media_server_database_matinee_can_read": "to není databáze mediálního serveru, kterou Matinee umí přečíst",
   "the_covers_address_must_start_with_http_or_https": "adresa obalu musí začínat http:// nebo https://",
   "the_image_is_too_big_20_mb_at_most": "obrázek je příliš velký (nejvýše 20 MB)",
-  "couldnt_get_an_image_from_that_address": "z této adresy se nepodařilo získat obrázek"
+  "couldnt_get_an_image_from_that_address": "z této adresy se nepodařilo získat obrázek",
+  "admins_see_every_library_make_them_a_regular_account_first": "správci vidí všechny knihovny; nejprve z účtu udělejte běžný účet",
+  "bad_wait": "neplatná doba čekání",
+  "invites_last_1_to_30_days": "pozvánky platí 1 až 30 dní",
+  "join_the_session_first": "nejprve se připojte k relaci",
+  "no_such_invite": "taková pozvánka neexistuje",
+  "pick_at_least_one_library_to_share": "vyberte alespoň jednu knihovnu ke sdílení",
+  "that_isnt_in_a_library_shared_with_you": "to není v žádné knihovně sdílené s vámi",
+  "that_session_is_still_going_join_it": "ta relace stále běží; připojte se k ní",
+  "that_watch_together_code_doesnt_work_it_may_have_ended": "tento kód společného sledování nefunguje; relace možná skončila",
+  "this_invite_has_expired_ask_for_another": "platnost pozvánky skončila; požádejte o novou",
+  "this_invite_link_doesnt_work_ask_for_another": "tento odkaz s pozvánkou nefunguje; požádejte o nový",
+  "this_invite_was_already_used": "tato pozvánka už byla použita",
+  "this_watch_together_session_is_full": "tato relace společného sledování je plná",
+  "too_many_watch_together_sessions_right_now": "právě teď běží příliš mnoho relací společného sledování",
+  "unknown_action": "neznámá akce",
+  "usernames_are_at_most_40_characters": "uživatelská jména mají nejvýše 40 znaků"
 }

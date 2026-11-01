@@ -19,6 +19,60 @@ export type User = {
   kidsLevel?: number
   avatar?: string
   hasPin?: boolean
+  // An account made from an invite, or one of its profiles: it sees only
+  // the libraries it was given.
+  friend?: boolean
+}
+// An account in People; friends come with the libraries they see.
+export type Account = User & { libraries?: number[] }
+// A link an admin sent to let one friend in (see Friends in Settings).
+export type Invite = {
+  code: string
+  url: string
+  name?: string
+  libraries: number[]
+  createdBy?: string
+  createdAt: number
+  expiresAt: number
+  usedBy?: string
+  usedAt?: number
+  state: 'open' | 'used' | 'expired'
+}
+// What an invite page shows before someone makes their account.
+export type InviteInfo = {
+  server: string
+  invitedBy: string
+  name?: string
+  libraries: { id: number; name: string; kind: string }[]
+  expiresAt: number
+  remoteURL: string
+}
+// A Watch together session (see player/together.ts). Playback was at
+// positionMs at updatedAt on the server's clock, and has moved on since
+// unless paused.
+export type TogetherMember = { clientId: string; userId: number; name: string; device?: string; platform?: string; host?: boolean }
+export type TogetherAction = 'start' | 'join' | 'leave' | 'play' | 'pause' | 'seek' | 'item'
+export type TogetherState = {
+  code: string
+  version: number
+  itemId: number
+  positionMs: number
+  paused: boolean
+  updatedAt: number
+  serverTime: number
+  members: TogetherMember[]
+  last?: { action: TogetherAction; by: string; clientId: string; at: number }
+  ended?: boolean
+}
+export type TogetherRequest = {
+  clientId: string
+  device?: string
+  platform?: string
+  itemId?: number
+  positionMs?: number
+  paused?: boolean
+  action?: TogetherAction
+  resume?: string
 }
 // One entry in "Who's watching?". The account itself comes first.
 export type ProfileChoice = { id: number; name: string; avatar?: string; kidsLevel?: number; hasPin: boolean; account?: boolean }
@@ -810,7 +864,7 @@ export async function response<T>(res: Response): Promise<T> {
 }
 
 export const api = {
-  server: () => request<{ version: string; apiVersion: number; name?: string }>('GET', '/api/v1/server'),
+  server: () => request<{ version: string; apiVersion: number; name?: string; remoteURL?: string }>('GET', '/api/v1/server'),
   setup: () => request<{ needsSetup: boolean }>('GET', '/api/v1/setup'),
   createAdmin: (username: string, password: string) =>
     request<{ user: User }>('POST', '/api/v1/setup', { username, password }),
@@ -865,7 +919,22 @@ export const api = {
   setMyLanguage: (language: string) => request<{ language: string }>('PUT', '/api/v1/me/language', { language }),
   playback: () => request<PlaybackPrefs>('GET', '/api/v1/me/playback'),
   setPlayback: (p: PlaybackPrefs) => request<PlaybackPrefs>('PUT', '/api/v1/me/playback', p),
-  users: () => request<User[]>('GET', '/api/v1/users'),
+  users: () => request<Account[]>('GET', '/api/v1/users'),
+  // friend: false lets the account see every library again.
+  setFriend: (id: number, friend: boolean, libraries?: number[]) =>
+    request<User>('PATCH', `/api/v1/users/${id}`, { friend, ...(libraries ? { libraries } : {}) }),
+  invites: () => request<{ invites: Invite[]; remoteReady: boolean }>('GET', '/api/v1/invites'),
+  createInvite: (name: string, libraries: number[], days: number) => request<Invite>('POST', '/api/v1/invites', { name, libraries, days }),
+  deleteInvite: (code: string) => request<void>('DELETE', `/api/v1/invites/${encodeURIComponent(code)}`),
+  inviteInfo: (code: string) => request<InviteInfo>('GET', `/api/v1/join/${encodeURIComponent(code)}`),
+  acceptInvite: (code: string, username: string, password: string) =>
+    request<{ user: User }>('POST', `/api/v1/join/${encodeURIComponent(code)}`, { username, password }),
+
+  startTogether: (r: TogetherRequest) => request<TogetherState>('POST', '/api/v1/together', r),
+  peekTogether: (code: string) => request<TogetherState & { canWatch: boolean }>('GET', `/api/v1/together/${encodeURIComponent(code)}`),
+  joinTogether: (code: string, r: TogetherRequest) => request<TogetherState>('POST', `/api/v1/together/${encodeURIComponent(code)}/join`, r),
+  actTogether: (code: string, r: TogetherRequest) => request<TogetherState>('POST', `/api/v1/together/${encodeURIComponent(code)}/actions`, r),
+  endTogether: (code: string, r: TogetherRequest) => request<void>('POST', `/api/v1/together/${encodeURIComponent(code)}/end`, r),
   profiles: () => request<{ current: number; profiles: ProfileChoice[] }>('GET', '/api/v1/profiles'),
   selectProfile: (id: number, pin?: string) => request<{ user: User }>('POST', '/api/v1/profiles/select', { id, pin }),
   manageProfiles: () => request<ManagedProfiles>('GET', '/api/v1/profiles/manage'),

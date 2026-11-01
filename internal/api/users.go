@@ -84,25 +84,67 @@ func (s *Server) setPassword(w http.ResponseWriter, r *http.Request, userID int6
 	return true
 }
 
-// updateUser makes an account an admin or not.
+// updateUser makes an account an admin or not, or a friend who sees only
+// some libraries (see friends.go).
 func (s *Server) updateUser(w http.ResponseWriter, r *http.Request) {
 	u, ok := s.pathUser(w, r)
 	if !ok {
 		return
 	}
 	var req struct {
-		IsAdmin *bool `json:"isAdmin"`
+		IsAdmin   *bool    `json:"isAdmin"`
+		Friend    *bool    `json:"friend"`
+		Libraries *[]int64 `json:"libraries"`
 	}
 	if err := readJSON(r, &req); err != nil {
 		writeError(w, http.StatusBadRequest, "invalid request")
 		return
 	}
+	friend, admin := u.Friend, u.IsAdmin
+	if req.Friend != nil {
+		friend = *req.Friend
+	}
 	if req.IsAdmin != nil {
-		if err := s.Store.SetAdmin(r.Context(), u.ID, *req.IsAdmin); err != nil {
+		admin = *req.IsAdmin
+	}
+	if friend && admin {
+		writeError(w, http.StatusConflict, "admins see every library; make them a regular account first")
+		return
+	}
+	setAdmin := func() bool {
+		if req.IsAdmin == nil {
+			return true
+		}
+		if err := s.Store.SetAdmin(r.Context(), u.ID, admin); err != nil {
 			s.userError(w, err)
+			return false
+		}
+		u.IsAdmin = admin
+		return true
+	}
+	// An admin stops being one before becoming a friend.
+	if !admin && !setAdmin() {
+		return
+	}
+	if req.Friend != nil || req.Libraries != nil {
+		var libs []int64
+		if req.Libraries != nil {
+			libs = *req.Libraries
+		} else if friend {
+			all, err := s.Store.FriendLibraries(r.Context())
+			if err != nil {
+				s.serverError(w, err)
+				return
+			}
+			libs = all[u.ID]
+		}
+		if !s.setFriend(w, r, u, friend, libs) {
 			return
 		}
-		u.IsAdmin = *req.IsAdmin
+		u.Friend = friend
+	}
+	if admin && !setAdmin() {
+		return
 	}
 	writeJSON(w, http.StatusOK, u)
 }

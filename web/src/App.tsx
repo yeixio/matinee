@@ -26,6 +26,9 @@ import { LanguageSync } from './i18n/sync'
 import { remote } from './remote'
 
 const Watch = lazy(() => import('./pages/Watch'))
+const InvitePage = lazy(() => import('./pages/Join').then((m) => ({ default: m.InvitePage })))
+const JoinedPage = lazy(() => import('./pages/Join').then((m) => ({ default: m.JoinedPage })))
+const TogetherPage = lazy(() => import('./pages/Join').then((m) => ({ default: m.TogetherPage })))
 const Settings = lazy(() => import('./pages/Settings'))
 const Link = lazy(() => import('./pages/Link'))
 const Requests = lazy(() => import('./pages/Requests'))
@@ -69,6 +72,16 @@ function Screens() {
       </div>
     )
   }
+  // An invite link makes a new account, so it comes before signing in; at
+  // home, before the home network's shared account too.
+  const invite = /^\/join\/([^/]+)/.exec(pathname)?.[1]
+  if (invite && (unauthenticated || me.data?.guest)) {
+    return (
+      <Suspense fallback={null}>
+        <InvitePage code={invite} />
+      </Suspense>
+    )
+  }
   if (unauthenticated) return setup.data?.needsSetup ? <Setup /> : <Login />
   if (me.isError) {
     return <div className="grid h-dvh place-items-center text-muted">{t('cantReachServer')}</div>
@@ -101,6 +114,9 @@ function Screens() {
           <Route path="/collection/:id" element={<CollectionPage />} />
           <Route path="/box-set/:id" element={<BoxSetPage />} />
           <Route path="/row/:id" element={<RowPage />} />
+          <Route path="/join/:code" element={<JoinedPage />} />
+          <Route path="/together" element={<TogetherPage />} />
+          <Route path="/together/:code" element={<TogetherPage />} />
           <Route path="/settings" element={grownUps(<Settings />)} />
           <Route path="/settings/:group" element={grownUps(<Settings />)} />
           <Route path="/upcoming" element={grownUps(<Upcoming />)} />

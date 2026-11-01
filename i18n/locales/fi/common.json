@@ -546,5 +546,41 @@
     "imported_one": "{{count}} ohjelma lisätty.",
     "newEpisodesCount_other": "{{count}} uutta jaksoa",
     "imported_other": "{{count}} ohjelmaa lisätty."
+  },
+  "together": {
+    "title": "Katsokaa yhdessä",
+    "intro": "Katso tätä ystävien tai perheen kanssa muilla laitteilla. Toisto, tauko ja siirtyminen pysyvät kaikilla tahdissa.",
+    "start": "Aloita yhteiskatselu",
+    "share": "Lähetä tämä koodi tai linkki niille, jotka liittyvät.",
+    "shareText": "Katso kanssani Matineessa koodilla {{code}}",
+    "copyLink": "Kopioi linkki",
+    "copied": "Kopioitu",
+    "watchingWith_one": "Yhteiskatselu: {{count}} henkilö",
+    "watchingWith_other": "Yhteiskatselu: {{count}} henkilöä",
+    "host": "Aloitti",
+    "leave": "Poistu",
+    "end": "Lopeta kaikilta",
+    "joinIn": "Liity painamalla toistoa",
+    "did": {
+      "join": "{{name}} liittyi",
+      "leave": "{{name}} poistui",
+      "play": "{{name}} painoi toistoa",
+      "pause": "{{name}} pysäytti",
+      "seek": "{{name}} siirtyi"
+    },
+    "typeCode": "Kirjoita koodi, jonka sait.",
+    "code": "Koodi",
+    "next": "Seuraava",
+    "notFound": "Koodi ei toimi",
+    "tryAnother": "Kokeile toista koodia",
+    "notShared": "Tätä ei ole jaettu sinulle",
+    "notSharedHint": "Pyydä palvelimen ylläpitäjää jakamaan se kirjasto sinulle.",
+    "hostedBy_one": "{{name}} katsoo. Liity mukaan.",
+    "hostedBy_other": "{{name}} ja muut katsovat ({{count}} tähän mennessä). Liity mukaan.",
+    "waiting": "Kukaan ei katso juuri nyt.",
+    "join": "Liity",
+    "shareLink": "Jaa linkki",
+    "you": "(sinä)",
+    "settingsHint": "Liity ystävien seuraan koodilla"
   }
 }

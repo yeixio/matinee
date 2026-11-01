@@ -412,6 +412,50 @@ try {
     const page = await open(desktop, token)
     await settings(page, 'people')
     await shot(page, 'people', { target: section(page, 'People') })
+
+    // Friends: an invite link that shares movies and TV, the page it opens,
+    // and Watch together with the friend who joined (see
+    // docs/guide/household/friends.md and docs/guide/watching/watch-together.md).
+    if (['friends', 'invite', 'together-player', 'together-join'].some(wanted)) {
+      const friends = section(page, 'Friends')
+      await friends.getByLabel("Who's it for").fill('Morgan')
+      await friends.getByRole('button', { name: 'Make invite link' }).click()
+      await friends.getByText('Send this link to your friend:').waitFor()
+      await shot(page, 'friends', { target: friends })
+      const { invites } = await api(token, 'GET', '/invites')
+      const invite = invites.find((i) => i.name === 'Morgan')
+      const guest = await open(desktop)
+      await guest.goto(`${origin}/join/${invite.code}`)
+      await guest.getByLabel('Pick a username').fill('morgan')
+      await guest.getByLabel('Password').fill('morgan-password')
+      await shot(guest, 'invite')
+      await guest.context().close()
+      const morgan = (await api(null, 'POST', `/join/${invite.code}`, { username: 'morgan', password: 'morgan-password' })).token
+
+      const player = await open(desktop, token)
+      const harbor = await find('Harbor Lights')
+      await api(token, 'PUT', `/items/${harbor.id}/progress`, { positionMs: 31 * 60000, played: false })
+      await player.goto(`${origin}/watch/${harbor.id}`)
+      await sleep(2500)
+      await player.mouse.move(700, 500)
+      await player.getByRole('button', { name: 'Watch together' }).click()
+      await player.getByRole('button', { name: 'Start Watch together' }).click()
+      const code = (await player.locator('[role=dialog] .font-mono').textContent()).replace('-', '')
+      if (wanted('together-join')) {
+        const other = await open(desktop, morgan)
+        await other.goto(`${origin}/together/${code}`)
+        await other.getByRole('button', { name: 'Join' }).waitFor()
+        await sleep(1000)
+        await shot(other, 'together-join')
+        await other.context().close()
+      }
+      await api(morgan, 'POST', `/together/${code}/join`, { clientId: 'morgan-living-room', device: 'Living room TV', platform: 'tvos' })
+      await sleep(1500)
+      await player.mouse.move(720, 520)
+      await shot(player, 'together-player')
+      await player.getByRole('button', { name: 'End for everyone' }).click()
+      await player.context().close()
+    }
     if (wanted('find-artwork')) {
       await settings(page, 'libraries')
       const libraries = section(page, 'Libraries')

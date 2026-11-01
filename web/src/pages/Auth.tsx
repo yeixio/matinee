@@ -5,7 +5,7 @@ import { api } from '../api'
 import { Logo } from '../components/Shell'
 import { Button, Field, inputClass } from '../components/ui'
 
-function AuthCard({ title, subtitle, children }: { title: string; subtitle: string; children: React.ReactNode }) {
+export function AuthCard({ title, subtitle, children }: { title: string; subtitle: string; children: React.ReactNode }) {
   return (
     <div className="relative grid min-h-dvh place-items-center overflow-hidden px-4">
       <div className="pointer-events-none absolute -top-40 left-1/2 h-[480px] w-[760px] -translate-x-1/2 rounded-full bg-accent/10 blur-3xl" />

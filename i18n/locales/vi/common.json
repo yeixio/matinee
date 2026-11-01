@@ -516,5 +516,39 @@
     "importing": "Đang thêm chương trình của bạn…",
     "newEpisodesCount_other": "{{count}} tập mới",
     "imported_other": "Đã thêm {{count}} chương trình."
+  },
+  "together": {
+    "title": "Xem cùng nhau",
+    "intro": "Xem cùng bạn bè hoặc gia đình trên các thiết bị khác. Phát, tạm dừng và tua luôn đồng bộ cho mọi người.",
+    "start": "Bắt đầu xem cùng nhau",
+    "share": "Gửi mã hoặc liên kết này cho những ai cùng xem.",
+    "shareText": "Xem cùng mình trên Matinee, mã {{code}}",
+    "copyLink": "Sao chép liên kết",
+    "copied": "Đã sao chép",
+    "watchingWith_other": "Xem cùng nhau: {{count}} người",
+    "host": "Người bắt đầu",
+    "leave": "Rời khỏi",
+    "end": "Kết thúc cho mọi người",
+    "joinIn": "Nhấn phát để tham gia",
+    "did": {
+      "join": "{{name}} đã tham gia",
+      "leave": "{{name}} đã rời đi",
+      "play": "{{name}} đã nhấn phát",
+      "pause": "{{name}} đã tạm dừng",
+      "seek": "{{name}} đã tua"
+    },
+    "typeCode": "Nhập mã bạn nhận được.",
+    "code": "Mã",
+    "next": "Tiếp",
+    "notFound": "Mã đó không dùng được",
+    "tryAnother": "Thử mã khác",
+    "notShared": "Nội dung này chưa được chia sẻ với bạn",
+    "notSharedHint": "Hãy nhờ người quản lý máy chủ này chia sẻ thư viện đó với bạn.",
+    "hostedBy_other": "{{name}} đang xem ({{count}} người đến giờ). Cùng xem nhé.",
+    "waiting": "Chưa có ai đang xem.",
+    "join": "Tham gia",
+    "shareLink": "Chia sẻ liên kết",
+    "you": "(bạn)",
+    "settingsHint": "Xem cùng bạn bè bằng mã"
   }
 }

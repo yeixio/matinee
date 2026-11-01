@@ -546,5 +546,41 @@
     "imported_one": "{{count}} program tillagt.",
     "newEpisodesCount_other": "{{count}} nya avsnitt",
     "imported_other": "{{count}} program tillagda."
+  },
+  "together": {
+    "title": "Titta tillsammans",
+    "intro": "Titta på det här med vänner eller familj på andra enheter. Spela upp, pausa och hoppa hålls i takt för alla.",
+    "start": "Börja titta tillsammans",
+    "share": "Skicka den här koden eller länken till dem som ska vara med.",
+    "shareText": "Titta med mig på Matinee med koden {{code}}",
+    "copyLink": "Kopiera länk",
+    "copied": "Kopierat",
+    "watchingWith_one": "Tittar tillsammans: {{count}} person",
+    "watchingWith_other": "Tittar tillsammans: {{count}} personer",
+    "host": "Startade",
+    "leave": "Lämna",
+    "end": "Avsluta för alla",
+    "joinIn": "Tryck på spela upp för att vara med",
+    "did": {
+      "join": "{{name}} gick med",
+      "leave": "{{name}} lämnade",
+      "play": "{{name}} tryckte på spela upp",
+      "pause": "{{name}} pausade",
+      "seek": "{{name}} hoppade"
+    },
+    "typeCode": "Skriv koden du har fått.",
+    "code": "Kod",
+    "next": "Nästa",
+    "notFound": "Koden fungerar inte",
+    "tryAnother": "Prova en annan kod",
+    "notShared": "Det här är inte delat med dig",
+    "notSharedHint": "Be den som sköter servern att dela biblioteket med dig.",
+    "hostedBy_one": "{{name}} tittar. Var med.",
+    "hostedBy_other": "{{name}} och andra tittar ({{count}} hittills). Var med.",
+    "waiting": "Ingen tittar just nu.",
+    "join": "Gå med",
+    "shareLink": "Dela länk",
+    "you": "(du)",
+    "settingsHint": "Titta med vänner med en kod"
   }
 }
