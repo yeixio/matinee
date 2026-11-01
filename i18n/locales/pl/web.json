@@ -895,6 +895,7 @@
     "people": "Osoby",
     "peopleHelp": "Wybierz, kim jest tutaj każda osoba. Historia pominiętych osób nie zostanie przeniesiona.",
     "history": "Obejrzane: {{watched}} · W trakcie: {{inProgress}} · W twoich bibliotekach: {{found}}",
+    "rated": "Ocenione: {{number}}",
     "whoIs": "Kim jest tutaj {{name}}",
     "skip": "Pomiń",
     "profileOf": "{{name}} ({{account}})",
@@ -902,12 +903,19 @@
     "watched": "Oznaczenia obejrzanych i miejsca wznowienia",
     "collections": "Kolekcje ({{number}})",
     "posters": "Wysłane plakaty ({{number}})",
+    "ratings": "Oceny ({{number}})",
     "noPosters": "Plakaty (tylko z folderu danych, nie z wysłanej bazy danych)",
     "run": "Importuj",
     "running": "Importowanie… {{done}} z {{total}}",
     "stopped": "Import zatrzymał się w połowie. Uruchom go ponownie, aby dokończyć; nic nie zostanie przeniesione dwa razy.",
     "done": "Import zakończony",
     "summary": "Obejrzane: {{watched}} · Miejsca wznowienia: {{inProgress}} · Kolekcje: {{collections}} · Plakaty: {{posters}}",
-    "kept": "Pozostawione bez zmian, bo oglądane tu później: {{number}}"
+    "kept": "Pozostawione bez zmian, bo oglądane tu później: {{number}}",
+    "ratingsDone": "Przeniesione oceny: {{number}}"
+  },
+  "rating": {
+    "rate": "Oceń",
+    "yours": "Twoja ocena: {{stars}} na 5",
+    "stars": "{{stars}} na 5"
   }
 }

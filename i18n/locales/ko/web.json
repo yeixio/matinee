@@ -883,6 +883,7 @@
     "people": "사람",
     "peopleHelp": "각 사람이 여기서 누구인지 고르세요. 건너뛴 사람의 기록은 가져오지 않습니다.",
     "history": "시청 완료: {{watched}} · 시청 중: {{inProgress}} · 라이브러리에 있음: {{found}}",
+    "rated": "평가함: {{number}}",
     "whoIs": "여기서 {{name}}",
     "skip": "건너뛰기",
     "profileOf": "{{name}} ({{account}})",
@@ -890,12 +891,19 @@
     "watched": "시청 완료 표시와 이어 보기 위치",
     "collections": "컬렉션 ({{number}})",
     "posters": "업로드한 포스터 ({{number}})",
+    "ratings": "평점 ({{number}})",
     "noPosters": "포스터 (데이터 폴더에서만 가능, 업로드한 데이터베이스에서는 불가)",
     "run": "가져오기",
     "running": "가져오는 중… {{total}}개 중 {{done}}개",
     "stopped": "가져오기가 중간에 멈췄습니다. 다시 실행하면 마무리되며, 같은 항목을 두 번 가져오지 않습니다.",
     "done": "가져오기 완료",
     "summary": "시청 완료: {{watched}} · 이어 보기 위치: {{inProgress}} · 컬렉션: {{collections}} · 포스터: {{posters}}",
-    "kept": "여기서 더 최근에 봐서 그대로 둔 항목: {{number}}"
+    "kept": "여기서 더 최근에 봐서 그대로 둔 항목: {{number}}",
+    "ratingsDone": "가져온 평점: {{number}}"
+  },
+  "rating": {
+    "rate": "평가하기",
+    "yours": "내 평점: 5점 중 {{stars}}",
+    "stars": "5점 중 {{stars}}"
   }
 }

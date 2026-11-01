@@ -891,6 +891,7 @@
     "people": "Personas",
     "peopleHelp": "Elige quién es cada persona aquí. El historial de las personas omitidas no se trae.",
     "history": "Vistos: {{watched}} · En curso: {{inProgress}} · En tus bibliotecas: {{found}}",
+    "rated": "Valorados: {{number}}",
     "whoIs": "Quién es {{name}} aquí",
     "skip": "Omitir",
     "profileOf": "{{name}} ({{account}})",
@@ -898,12 +899,19 @@
     "watched": "Marcas de visto y puntos para continuar",
     "collections": "Colecciones ({{number}})",
     "posters": "Pósteres subidos ({{number}})",
+    "ratings": "Valoraciones ({{number}})",
     "noPosters": "Pósteres (solo desde una carpeta de datos, no desde una base de datos subida)",
     "run": "Importar",
     "running": "Importando… {{done}} de {{total}}",
     "stopped": "La importación se detuvo a medias. Ejecútala de nuevo para terminar; nada se trae dos veces.",
     "done": "Importación terminada",
     "summary": "Vistos: {{watched}} · Puntos para continuar: {{inProgress}} · Colecciones: {{collections}} · Pósteres: {{posters}}",
-    "kept": "Se dejaron como estaban porque se vieron aquí más recientemente: {{number}}"
+    "kept": "Se dejaron como estaban porque se vieron aquí más recientemente: {{number}}",
+    "ratingsDone": "Valoraciones traídas: {{number}}"
+  },
+  "rating": {
+    "rate": "Valorar",
+    "yours": "Tu valoración: {{stars}} de 5",
+    "stars": "{{stars}} de 5"
   }
 }

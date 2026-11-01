@@ -19,7 +19,7 @@ export function ImportSettings() {
   const [changes, setChanges] = useState<PathChange[]>([])
   const [preview, setPreview] = useState<ImportPreview>()
   const [accounts, setAccounts] = useState<Record<string, number>>({})
-  const [what, setWhat] = useState({ watched: true, collections: true, posters: true })
+  const [what, setWhat] = useState({ watched: true, collections: true, posters: true, ratings: true })
   const fileInput = useRef<HTMLInputElement>(null)
 
   const { data: found } = useQuery({ queryKey: ['importFind'], queryFn: api.findImports, enabled: open })
@@ -61,6 +61,7 @@ export function ImportSettings() {
         watched: what.watched,
         collections: what.collections,
         posters: what.posters && !!preview?.canPosters,
+        ratings: what.ratings,
       }),
     onSuccess: () => qc.invalidateQueries({ queryKey: ['importStatus'] }),
   })
@@ -69,7 +70,7 @@ export function ImportSettings() {
   const running = status?.running || run.isPending
   const anyAccount = Object.values(accounts).some((v) => v > 0)
   const canRun =
-    !!preview && !running && preview.matched > 0 && ((what.watched && anyAccount) || what.collections || (what.posters && preview.canPosters))
+    !!preview && !running && preview.matched > 0 && (((what.watched || what.ratings) && anyAccount) || what.collections || (what.posters && preview.canPosters))
 
   return (
     <section className="space-y-4">
@@ -152,7 +153,10 @@ export function ImportSettings() {
                     <div key={a.id} className="flex flex-col gap-2 sm:flex-row sm:items-center">
                       <div className="min-w-0 flex-1">
                         <div className="truncate font-medium">{a.name}</div>
-                        <div className="text-xs text-muted">{t('import.history', { watched: a.watched, inProgress: a.inProgress, found: a.found })}</div>
+                        <div className="text-xs text-muted">
+                          {t('import.history', { watched: a.watched, inProgress: a.inProgress, found: a.found })}
+                          {a.rated > 0 && ` · ${t('import.rated', { number: a.rated })}`}
+                        </div>
                       </div>
                       <select
                         className={`${inputClass} sm:w-64`}
@@ -178,6 +182,10 @@ export function ImportSettings() {
                 <label className="flex items-center gap-2 text-sm">
                   <input type="checkbox" className="accent-accent" checked={what.watched} onChange={(e) => setWhat({ ...what, watched: e.target.checked })} />
                   {t('import.watched')}
+                </label>
+                <label className="flex items-center gap-2 text-sm">
+                  <input type="checkbox" className="accent-accent" checked={what.ratings} onChange={(e) => setWhat({ ...what, ratings: e.target.checked })} />
+                  {t('import.ratings', { number: preview.accounts.reduce((n, a) => n + (accounts[a.id] ? a.rated : 0), 0) })}
                 </label>
                 <label className="flex items-center gap-2 text-sm">
                   <input
@@ -231,6 +239,7 @@ export function ImportSettings() {
                     posters: status.result.posters,
                   })}
                 </div>
+                {status.result.ratings > 0 && <div className="text-muted">{t('import.ratingsDone', { number: status.result.ratings })}</div>}
                 {status.result.kept > 0 && <div className="text-muted">{t('import.kept', { number: status.result.kept })}</div>}
               </div>
             </div>

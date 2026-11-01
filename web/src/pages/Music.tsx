@@ -21,8 +21,8 @@ const views: View[] = ['overview', 'playlists', 'artists', 'albums', 'songs']
 // How each view sorts, and the orders it offers.
 const sorts: Record<Exclude<View, 'overview' | 'playlists'>, SortField[]> = {
   artists: ['title', 'added', 'lastPlayed'],
-  albums: ['added', 'title', 'year', 'lastPlayed'],
-  songs: ['title', 'added', 'lastPlayed'],
+  albums: ['added', 'title', 'year', 'lastPlayed', 'myRating'],
+  songs: ['title', 'added', 'lastPlayed', 'myRating'],
 }
 const kinds = { artists: 'artist', albums: 'album', songs: 'track' }
 

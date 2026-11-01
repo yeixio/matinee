@@ -77,7 +77,7 @@ type ItemFilter struct {
 }
 
 // SortFields are the orders a filter can list titles in.
-var SortFields = []string{"title", "added", "released", "year", "rating", "runtime", "lastPlayed", "series"}
+var SortFields = []string{"title", "added", "released", "year", "rating", "myRating", "runtime", "lastPlayed", "series"}
 
 // WatchedStates are the values ItemFilter.Watched takes.
 var WatchedStates = []string{"unwatched", "inProgress", "watched", "notStarted", "started"}
@@ -325,6 +325,7 @@ var sortExprs = map[string]struct {
 	"released":   {releasedExpr, true},
 	"year":       {"i.year", true},
 	"rating":     {"i.rating", true},
+	"myRating":   {"(SELECT mr.rating FROM ratings mr WHERE mr.user_id = me.id AND mr.item_id = i.id)", true}, // the person's own
 	"runtime":    {runtimeExpr, false},
 	"lastPlayed": {lastPlayedExpr, true},
 	"series":     {"i.series_index", false}, // a book's place in its series

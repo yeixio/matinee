@@ -128,6 +128,7 @@
     "released": "Release date",
     "year": "Year",
     "rating": "Rating",
+    "myRating": "My rating",
     "runtime": "Runtime",
     "lastPlayed": "Last watched"
   },

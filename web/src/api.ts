@@ -327,6 +327,8 @@ export type Item = {
   played?: boolean
   overview?: string
   rating?: number
+  // The person's own rating, 1 to 10: half stars out of five.
+  myRating?: number
   hasPoster: boolean
   // Set when an admin picked the cover; it goes on the image URL so a cached old one isn't shown.
   posterTag?: string
@@ -709,11 +711,12 @@ export type ImportRequest = {
   watched?: boolean
   collections?: boolean
   posters?: boolean
+  ratings?: boolean
 }
 export type ImportPreview = {
   database: string
   canPosters: boolean
-  accounts: { id: number; name: string; watched: number; inProgress: number; found: number; suggested: number }[]
+  accounts: { id: number; name: string; watched: number; inProgress: number; rated: number; found: number; suggested: number }[]
   viewers: { id: number; name: string; profileOf?: string }[]
   files: number
   matched: number
@@ -722,7 +725,15 @@ export type ImportPreview = {
   collections: number
   posters: number
 }
-export type ImportResult = { watched: number; inProgress: number; kept: number; collections: number; collectionItems: number; posters: number }
+export type ImportResult = {
+  watched: number
+  inProgress: number
+  kept: number
+  collections: number
+  collectionItems: number
+  posters: number
+  ratings: number
+}
 export type ImportStatus = { running: boolean; done: number; total: number; result?: ImportResult; error?: string }
 
 export class ApiError extends Error {
@@ -975,6 +986,9 @@ export const api = {
     request<PlaylistDetail>('PUT', `/api/v1/playlists/${encodeURIComponent(id)}/order`, { entries }),
   addToWatchList: (id: number) => request<void>('PUT', `/api/v1/watchlist/${id}`),
   removeFromWatchList: (id: number) => request<void>('DELETE', `/api/v1/watchlist/${id}`),
+  // rating: 1 to 10 (half stars), or null to take it back.
+  rate: (id: number, rating: number | null) =>
+    rating ? request<void>('PUT', `/api/v1/items/${id}/rating`, { rating }) : request<void>('DELETE', `/api/v1/items/${id}/rating`),
   hideFromContinueWatching: (id: number) => request<void>('DELETE', `/api/v1/continue-watching/${id}`),
   setProgress: (id: number, positionMs: number, played = false) =>
     request<void>('PUT', `/api/v1/items/${id}/progress`, { positionMs, played }),

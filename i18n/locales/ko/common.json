@@ -121,6 +121,7 @@
     "released": "개봉일",
     "year": "연도",
     "rating": "평점",
+    "myRating": "내 평점",
     "runtime": "러닝타임",
     "lastPlayed": "마지막 시청"
   },

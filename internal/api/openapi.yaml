@@ -985,6 +985,7 @@ paths:
                         name: { type: string }
                         watched: { type: integer }
                         inProgress: { type: integer }
+                        rated: { type: integer }
                         found: { type: integer, description: How many of those Matinee has. }
                         suggested: { type: integer, description: "A Matinee account or profile id, or 0." }
                   viewers:
@@ -1713,6 +1714,22 @@ paths:
         haven't signed in share the Home account's list.
       responses:
         "200": { $ref: "#/components/responses/Items" }
+  /items/{id}/rating:
+    put:
+      summary: Rate a title, song, book or podcast
+      description: Ratings are each person's own, from 1 to 10 (half stars out of five). Items carry it as `myRating`.
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      requestBody:
+        content:
+          application/json: { schema: { type: object, required: [rating], properties: { rating: { type: integer, minimum: 1, maximum: 10 } } } }
+      responses:
+        "204": { description: Rated. }
+        "400": { $ref: "#/components/responses/Error" }
+    delete:
+      summary: Take back a rating
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      responses:
+        "204": { description: Done. }
   /watchlist/{id}:
     put:
       summary: Add a movie or show to the watch list
@@ -3008,6 +3025,7 @@ components:
         watched: { type: boolean, description: Bring over watched marks and places to resume from. }
         collections: { type: boolean, description: Bring over collections, as shared collections. }
         posters: { type: boolean, description: Bring over posters someone uploaded there. }
+        ratings: { type: boolean, description: "Bring over each person's ratings, as their own ratings here." }
     ImportResult:
       type: object
       properties:
@@ -3017,6 +3035,7 @@ components:
         collections: { type: integer }
         collectionItems: { type: integer }
         posters: { type: integer }
+        ratings: { type: integer, description: Ratings given or changed. }
     ItemFilter:
       description: >
         Picks titles by their metadata. The same field names are used as query
@@ -3059,7 +3078,7 @@ components:
         watchList: { type: boolean, description: Only titles on the signed-in person's watch list. }
         series: { type: array, items: { type: string }, description: Books in these series. }
         narrator: { type: array, items: { type: string }, description: Books any of these people narrate. }
-        sort: { type: string, enum: [title, added, released, year, rating, runtime, lastPlayed, series], default: title, description: "series is a book's place in its series." }
+        sort: { type: string, enum: [title, added, released, year, rating, myRating, runtime, lastPlayed, series], default: title, description: "series is a book's place in its series; myRating is the person's own rating." }
         order: { type: string, enum: [asc, desc], description: Title and runtime run low to high by default, the others high to low. Titles missing the field go last. }
         limit: { type: integer }
     FilterValue:
@@ -3691,6 +3710,7 @@ components:
         played: { type: boolean }
         overview: { type: string }
         rating: { type: number }
+        myRating: { type: integer, minimum: 1, maximum: 10, description: "The person's own rating: 1 to 10, half stars out of five. Missing when they haven't rated it." }
         hasPoster: { type: boolean }
         posterTag: { type: string, description: "Set when an admin picked the cover; add it to the image URL as ?v= so a cached old cover isn't shown." }
         hasBackdrop: { type: boolean }

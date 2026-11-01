@@ -883,6 +883,7 @@
     "people": "Mọi người",
     "peopleHelp": "Chọn mỗi người là ai ở đây. Lịch sử của người bị bỏ qua sẽ không được mang theo.",
     "history": "Đã xem: {{watched}} · Đang xem: {{inProgress}} · Trong thư viện của bạn: {{found}}",
+    "rated": "Đã đánh giá: {{number}}",
     "whoIs": "{{name}} là ai ở đây",
     "skip": "Bỏ qua",
     "profileOf": "{{name}} ({{account}})",
@@ -890,12 +891,19 @@
     "watched": "Dấu đã xem và vị trí xem tiếp",
     "collections": "Bộ sưu tập ({{number}})",
     "posters": "Áp phích đã tải lên ({{number}})",
+    "ratings": "Đánh giá ({{number}})",
     "noPosters": "Áp phích (chỉ từ thư mục dữ liệu, không từ cơ sở dữ liệu đã tải lên)",
     "run": "Nhập",
     "running": "Đang nhập… {{done}} / {{total}}",
     "stopped": "Quá trình nhập dừng giữa chừng. Chạy lại để hoàn tất; không có gì bị mang theo hai lần.",
     "done": "Đã nhập xong",
     "summary": "Đã xem: {{watched}} · Vị trí xem tiếp: {{inProgress}} · Bộ sưu tập: {{collections}} · Áp phích: {{posters}}",
-    "kept": "Giữ nguyên vì đã được xem gần đây hơn ở đây: {{number}}"
+    "kept": "Giữ nguyên vì đã được xem gần đây hơn ở đây: {{number}}",
+    "ratingsDone": "Số đánh giá đã mang theo: {{number}}"
+  },
+  "rating": {
+    "rate": "Đánh giá",
+    "yours": "Đánh giá của bạn: {{stars}}/5",
+    "stars": "{{stars}}/5"
   }
 }

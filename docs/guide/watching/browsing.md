@@ -15,6 +15,10 @@ A tick on a poster means you've watched it; a coral bar along the bottom shows h
 
 The menu at the top right sorts by **Title**, **Date added**, **Release date**, **Year**, **Rating**, **Runtime** or **Last watched**. The arrow next to it flips the order.
 
+<!-- since: v0.1.9 -->
+**My rating** sorts by your own [ratings](/docs/watching/title-pages/#your-ratings), highest first.
+<!-- /since -->
+
 ## Filters
 
 **Unwatched** next to **Filters** is a one-click filter for what you haven't seen. **Filters** opens everything else:

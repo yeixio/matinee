@@ -422,6 +422,14 @@ var migrations = []string{
 		source       TEXT NOT NULL DEFAULT '', -- where it came from: a URL, or "upload"
 		created_at   BIGINT NOT NULL
 	)`,
+	// 68: each person's own star ratings (see ratings.go).
+	`CREATE TABLE ratings (
+		user_id  BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+		item_id  BIGINT NOT NULL REFERENCES items(id) ON DELETE CASCADE,
+		rating   INTEGER NOT NULL, -- 1 to 10: half stars out of five
+		rated_at BIGINT NOT NULL,
+		PRIMARY KEY (user_id, item_id)
+	)`,
 }
 
 func now() int64 { return time.Now().Unix() }

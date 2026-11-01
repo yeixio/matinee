@@ -3,6 +3,7 @@ package importer
 import (
 	"context"
 	"io/fs"
+	"math"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -22,7 +23,7 @@ type Plan struct {
 	// leaves maps the other server's item to Matinee's files for it.
 	leaves map[int64][]store.FileRef
 	// containers maps its shows, seasons, artists and albums to Matinee's.
-	containers map[int64]int64
+	containers map[int64]container
 	byGUID     map[string][]int64
 	// Files counts the other server's files, and Matched the ones Matinee has.
 	Files, Matched int
@@ -43,7 +44,7 @@ func NewPlan(snap *Snapshot, files []store.FileRef, changes []PathChange) *Plan 
 			byName[n] = append(byName[n], f.Path)
 		}
 	}
-	p := &Plan{snap: snap, Changes: changes, leaves: map[int64][]store.FileRef{}, containers: map[int64]int64{}, byGUID: map[string][]int64{}}
+	p := &Plan{snap: snap, Changes: changes, leaves: map[int64][]store.FileRef{}, containers: map[int64]container{}, byGUID: map[string][]int64{}}
 	for id, it := range snap.Items {
 		if it.GUID != "" {
 			p.byGUID[it.GUID] = append(p.byGUID[it.GUID], id)
@@ -67,11 +68,11 @@ func NewPlan(snap *Snapshot, files []store.FileRef, changes []PathChange) *Plan 
 			// season and show for the other server's.
 			if parent := snap.Items[snap.Items[id].ParentID]; parent != nil && ref.ParentID != 0 {
 				if _, ok := p.containers[parent.ID]; !ok {
-					p.containers[parent.ID] = ref.ParentID
+					p.containers[parent.ID] = container{ref.ParentID, ref.ParentKind}
 				}
 				if gp := snap.Items[parent.ParentID]; gp != nil && ref.GrandparentID != 0 {
 					if _, ok := p.containers[gp.ID]; !ok {
-						p.containers[gp.ID] = ref.GrandparentID
+						p.containers[gp.ID] = container{ref.GrandparentID, ref.GrandparentKind}
 					}
 				}
 			}
@@ -81,6 +82,26 @@ func NewPlan(snap *Snapshot, files []store.FileRef, changes []PathChange) *Plan 
 		p.Suggested = SuggestChanges(all, func(s string) bool { _, ok := known[s]; return ok }, byName, changes)
 	}
 	return p
+}
+
+type container struct {
+	id   int64
+	kind string
+}
+
+// rated lists Matinee's items for one of the other server's that can be
+// rated: not an audiobook's parts, which Matinee rates as the book.
+func (p *Plan) rated(id int64) []int64 {
+	var out []int64
+	for _, r := range p.leaves[id] {
+		if store.RatableKinds[r.Kind] {
+			out = append(out, r.ID)
+		}
+	}
+	if c, ok := p.containers[id]; ok && store.RatableKinds[c.kind] {
+		out = append(out, c.id)
+	}
+	return out
 }
 
 // targets lists Matinee's items for one of the other server's.
@@ -93,7 +114,7 @@ func (p *Plan) targets(id int64) []int64 {
 		return out
 	}
 	if c, ok := p.containers[id]; ok {
-		return []int64{c}
+		return []int64{c.id}
 	}
 	return nil
 }
@@ -104,7 +125,8 @@ type AccountSummary struct {
 	Account
 	Watched    int `json:"watched"`
 	InProgress int `json:"inProgress"`
-	Found      int `json:"found"` // of those, on Matinee
+	Rated      int `json:"rated"`
+	Found      int `json:"found"` // of those watched, on Matinee
 }
 
 // Accounts sums up each account's history.
@@ -118,6 +140,12 @@ func (p *Plan) Accounts() []AccountSummary {
 	for _, v := range p.snap.Views {
 		a := byID[v.AccountID]
 		if a == nil {
+			continue
+		}
+		if v.Rating > 0 {
+			a.Rated++
+		}
+		if !v.Watched() {
 			continue
 		}
 		if v.OffsetMs > 0 {
@@ -216,6 +244,7 @@ type Options struct {
 	Watched     bool
 	Collections bool
 	Posters     bool
+	Ratings     bool
 	// Step is told what's done so far, out of the total, as the import goes.
 	Step func(done, total int)
 }
@@ -228,6 +257,7 @@ type Result struct {
 	Collections     int `json:"collections"`     // made or added to
 	CollectionItems int `json:"collectionItems"` // titles put in them
 	Posters         int `json:"posters"`
+	Ratings         int `json:"ratings"` // given or changed
 }
 
 type bookView struct {
@@ -241,11 +271,9 @@ type bookView struct {
 func (p *Plan) Apply(ctx context.Context, s *store.Store, o Options) (Result, error) {
 	var res Result
 	var views []View
-	if o.Watched {
-		for _, v := range p.snap.Views {
-			if _, ok := o.Accounts[v.AccountID]; ok {
-				views = append(views, v)
-			}
+	for _, v := range p.snap.Views {
+		if _, ok := o.Accounts[v.AccountID]; ok && (o.Watched && v.Watched() || o.Ratings && v.Rating > 0) {
+			views = append(views, v)
 		}
 	}
 	var collections []Collection
@@ -270,6 +298,15 @@ func (p *Plan) Apply(ctx context.Context, s *store.Store, o Options) (Result, er
 			return res, err
 		}
 		user := o.Accounts[v.AccountID]
+		if o.Ratings && v.Rating > 0 {
+			if err := p.rate(ctx, s, user, v, &res); err != nil {
+				return res, err
+			}
+		}
+		if !o.Watched || !v.Watched() {
+			step()
+			continue
+		}
 		at := v.LastViewed
 		if at <= 0 {
 			at = 1 // unknown: older than anything on Matinee
@@ -375,6 +412,31 @@ func (p *Plan) Apply(ctx context.Context, s *store.Store, o Options) (Result, er
 		step()
 	}
 	return res, nil
+}
+
+// rate gives Matinee's items for a record the account's rating, out of 10
+// in whole half stars, unless they were rated here more recently.
+func (p *Plan) rate(ctx context.Context, s *store.Store, user int64, v View, res *Result) error {
+	r := int(math.Round(v.Rating))
+	r = max(1, min(10, r))
+	at := max(v.RatedAt, 1)
+	seen := map[int64]bool{}
+	for _, id := range p.byGUID[v.GUID] {
+		for _, t := range p.rated(id) {
+			if seen[t] {
+				continue
+			}
+			seen[t] = true
+			ok, err := s.MergeRating(ctx, user, t, r, at)
+			if err != nil {
+				return err
+			}
+			if ok {
+				res.Ratings++
+			}
+		}
+	}
+	return nil
 }
 
 func count(res *Result, applied, played bool) {

@@ -887,6 +887,7 @@
     "people": "Henkilöt",
     "peopleHelp": "Valitse, kuka kukin henkilö on täällä. Ohitettujen henkilöiden historiaa ei tuoda.",
     "history": "Katsottu: {{watched}} · Kesken: {{inProgress}} · Kirjastoissasi: {{found}}",
+    "rated": "Arvioitu: {{number}}",
     "whoIs": "Kuka {{name}} on täällä",
     "skip": "Ohita",
     "profileOf": "{{name}} ({{account}})",
@@ -894,12 +895,19 @@
     "watched": "Katsottu-merkinnät ja jatkamiskohdat",
     "collections": "Kokoelmat ({{number}})",
     "posters": "Ladatut julisteet ({{number}})",
+    "ratings": "Arviot ({{number}})",
     "noPosters": "Julisteet (vain datakansiosta, ei ladatusta tietokannasta)",
     "run": "Tuo",
     "running": "Tuodaan… {{done}} / {{total}}",
     "stopped": "Tuonti pysähtyi kesken. Suorita se uudelleen loppuun; mitään ei tuoda kahdesti.",
     "done": "Tuonti valmis",
     "summary": "Katsottu: {{watched}} · Jatkamiskohdat: {{inProgress}} · Kokoelmat: {{collections}} · Julisteet: {{posters}}",
-    "kept": "Jätetty ennalleen, koska ne katsottiin täällä myöhemmin: {{number}}"
+    "kept": "Jätetty ennalleen, koska ne katsottiin täällä myöhemmin: {{number}}",
+    "ratingsDone": "Tuodut arviot: {{number}}"
+  },
+  "rating": {
+    "rate": "Arvioi",
+    "yours": "Arviosi: {{stars}} / 5",
+    "stars": "{{stars}} / 5"
   }
 }

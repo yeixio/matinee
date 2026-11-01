@@ -10,6 +10,7 @@ import { PosterGrid } from '../components/Card'
 import { AddToCollectionButton } from '../components/Collections'
 import { CastRows, KeyPeople, MoreDetailsButton } from '../components/Credits'
 import { RelatedRows } from '../components/Related'
+import { StarRating } from '../components/StarRating'
 import { TrailerButton } from '../components/Trailer'
 import { Button, Spinner } from '../components/ui'
 import { WatchListButton } from '../components/WatchListButton'
@@ -178,6 +179,7 @@ function Header({ item, kids }: { item: ItemDetail; kids?: Item[] }) {
             <ReportProblem item={item} />
             <MoreDetailsButton item={item} />
             <FileDetailsButton item={item} user={me} />
+            <StarRating item={item} />
             {me?.isAdmin && item.posterTag && <ResetPosterButton item={item} />}
           </div>
         </div>

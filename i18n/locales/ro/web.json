@@ -891,6 +891,7 @@
     "people": "Persoane",
     "peopleHelp": "Alege cine este fiecare persoană aici. Istoricul persoanelor omise nu este adus.",
     "history": "Vizionate: {{watched}} · În curs: {{inProgress}} · În bibliotecile tale: {{found}}",
+    "rated": "Evaluate: {{number}}",
     "whoIs": "Cine este {{name}} aici",
     "skip": "Omite",
     "profileOf": "{{name}} ({{account}})",
@@ -898,12 +899,19 @@
     "watched": "Marcaje de vizionare și puncte de reluare",
     "collections": "Colecții ({{number}})",
     "posters": "Afișe încărcate ({{number}})",
+    "ratings": "Evaluări ({{number}})",
     "noPosters": "Afișe (doar dintr-un dosar de date, nu dintr-o bază de date încărcată)",
     "run": "Importă",
     "running": "Se importă… {{done}} din {{total}}",
     "stopped": "Importul s-a oprit la jumătate. Rulează-l din nou ca să se termine; nimic nu e adus de două ori.",
     "done": "Import terminat",
     "summary": "Vizionate: {{watched}} · Puncte de reluare: {{inProgress}} · Colecții: {{collections}} · Afișe: {{posters}}",
-    "kept": "Lăsate cum erau, pentru că au fost vizionate mai recent aici: {{number}}"
+    "kept": "Lăsate cum erau, pentru că au fost vizionate mai recent aici: {{number}}",
+    "ratingsDone": "Evaluări aduse: {{number}}"
+  },
+  "rating": {
+    "rate": "Evaluează",
+    "yours": "Evaluarea ta: {{stars}} din 5",
+    "stars": "{{stars}} din 5"
   }
 }

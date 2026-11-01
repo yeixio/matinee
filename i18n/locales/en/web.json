@@ -887,6 +887,7 @@
     "people": "People",
     "peopleHelp": "Pick who each person is here. Skipped people's history isn't brought over.",
     "history": "Watched: {{watched}} · In progress: {{inProgress}} · In your libraries: {{found}}",
+    "rated": "Rated: {{number}}",
     "whoIs": "Who {{name}} is here",
     "skip": "Skip",
     "profileOf": "{{name}} ({{account}})",
@@ -894,12 +895,19 @@
     "watched": "Watched marks and places to resume from",
     "collections": "Collections ({{number}})",
     "posters": "Posters someone uploaded ({{number}})",
+    "ratings": "Ratings ({{number}})",
     "noPosters": "Posters (only from a data folder, not an uploaded database)",
     "run": "Import",
     "running": "Importing… {{done}} of {{total}}",
     "stopped": "The import stopped partway. Run it again to finish; nothing is brought over twice.",
     "done": "Import finished",
     "summary": "Watched: {{watched}} · Places to resume: {{inProgress}} · Collections: {{collections}} · Posters: {{posters}}",
-    "kept": "Left as they were, because they were watched more recently here: {{number}}"
+    "kept": "Left as they were, because they were watched more recently here: {{number}}",
+    "ratingsDone": "Ratings brought over: {{number}}"
+  },
+  "rating": {
+    "rate": "Rate it",
+    "yours": "Your rating: {{stars}} out of 5",
+    "stars": "{{stars}} out of 5"
   }
 }

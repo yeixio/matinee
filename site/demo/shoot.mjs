@@ -122,6 +122,15 @@ try {
     await dress(page, { '0.1 fps': '23.976 fps', '96.2 MB': '58.4 GB', '103 kb/s': '62.8 Mb/s' })
     await shot(page, 'file-details', { target: page.getByRole('dialog') })
     await page.keyboard.press('Escape')
+    if (wanted('rating')) {
+      await page.evaluate(() => window.scrollTo(0, 0))
+      await page.getByRole('button', { name: '4 out of 5', exact: true }).click()
+      const stars = page.getByRole('group', { name: /Your rating/ })
+      await stars.waitFor()
+      await page.mouse.move(0, 0)
+      await shot(page, 'rating', { target: stars.locator('..') })
+      await api(token, 'DELETE', `/items/${lm.id}/rating`)
+    }
 
     await page.goto(`${origin}/person/1`)
     await shot(page, 'person')
@@ -390,8 +399,8 @@ try {
             database: folder + '/Plug-in Support/Databases/library.db',
             canPosters: true,
             accounts: [
-              { id: 1, name: me.username, watched: 412, inProgress: 6, found: changed ? 409 : 0, suggested: me.id },
-              { id: 5001, name: 'Sam', watched: 118, inProgress: 3, found: changed ? 117 : 0, suggested: 0 },
+              { id: 1, name: me.username, watched: 412, inProgress: 6, rated: 96, found: changed ? 409 : 0, suggested: me.id },
+              { id: 5001, name: 'Sam', watched: 118, inProgress: 3, rated: 0, found: changed ? 117 : 0, suggested: 0 },
             ],
             viewers: viewers.map((v) => ({ id: v.id, name: v.username })),
             files: 2140,

@@ -23,7 +23,7 @@ CREATE INDEX index_title_sort_icu ON metadata_items (title_sort COLLATE icu_root
 CREATE TABLE media_items (id INTEGER PRIMARY KEY, library_section_id integer, section_location_id integer, metadata_item_id integer, duration integer);
 CREATE TABLE media_parts (id INTEGER PRIMARY KEY, media_item_id integer, directory_id integer, hash varchar(255), file varchar(255), "index" integer, size integer, duration integer);
 CREATE TABLE metadata_item_settings (id INTEGER PRIMARY KEY, account_id integer, guid varchar(255), rating float, view_offset integer,
-	view_count integer, last_viewed_at datetime, created_at datetime, updated_at datetime);
+	view_count integer, last_viewed_at datetime, created_at datetime, updated_at datetime, last_rated_at datetime);
 CREATE TABLE tags (id INTEGER PRIMARY KEY, metadata_item_id integer, tag varchar(255), tag_type integer);
 CREATE TABLE taggings (id INTEGER PRIMARY KEY, metadata_item_id integer, tag_id integer, "index" integer);
 `
@@ -118,6 +118,18 @@ func (d *Data) Item(typ int, parent int64, title, guid string, files ...string) 
 func (d *Data) View(account int64, guid string, offsetMs, count, at int64) {
 	d.exec(`INSERT INTO metadata_item_settings (account_id, guid, view_offset, view_count, last_viewed_at) VALUES (?, ?, ?, ?, ?)`,
 		account, guid, offsetMs, count, at)
+}
+
+// Rate records an account's rating of an item, out of 10, at a Unix time.
+func (d *Data) Rate(account int64, guid string, rating float64, at int64) {
+	d.t.Helper()
+	res, err := d.DB.Exec("UPDATE metadata_item_settings SET rating = ?, last_rated_at = ? WHERE account_id = ? AND guid = ?", rating, at, account, guid)
+	if err != nil {
+		d.t.Fatal(err)
+	}
+	if n, _ := res.RowsAffected(); n == 0 {
+		d.exec("INSERT INTO metadata_item_settings (account_id, guid, rating, last_rated_at) VALUES (?, ?, ?, ?)", account, guid, rating, at)
+	}
 }
 
 // Collection puts items in a named collection.

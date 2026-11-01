@@ -883,6 +883,7 @@
     "people": "Orang",
     "peopleHelp": "Pilih siapa setiap orang di sini. Sejarah orang yang dilangkau tidak dibawa.",
     "history": "Ditonton: {{watched}} · Sedang ditonton: {{inProgress}} · Dalam pustaka anda: {{found}}",
+    "rated": "Ditarafkan: {{number}}",
     "whoIs": "Siapa {{name}} di sini",
     "skip": "Langkau",
     "profileOf": "{{name}} ({{account}})",
@@ -890,12 +891,19 @@
     "watched": "Tanda sudah ditonton dan tempat untuk sambung",
     "collections": "Koleksi ({{number}})",
     "posters": "Poster yang dimuat naik ({{number}})",
+    "ratings": "Penarafan ({{number}})",
     "noPosters": "Poster (hanya daripada folder data, bukan pangkalan data yang dimuat naik)",
     "run": "Import",
     "running": "Mengimport… {{done}} daripada {{total}}",
     "stopped": "Import terhenti di pertengahan. Jalankan semula untuk selesaikan; tiada apa yang dibawa dua kali.",
     "done": "Import selesai",
     "summary": "Ditonton: {{watched}} · Tempat untuk sambung: {{inProgress}} · Koleksi: {{collections}} · Poster: {{posters}}",
-    "kept": "Dibiarkan seperti asal kerana ditonton lebih baru di sini: {{number}}"
+    "kept": "Dibiarkan seperti asal kerana ditonton lebih baru di sini: {{number}}",
+    "ratingsDone": "Penarafan dibawa: {{number}}"
+  },
+  "rating": {
+    "rate": "Beri penarafan",
+    "yours": "Penarafan anda: {{stars}} daripada 5",
+    "stars": "{{stars}} daripada 5"
   }
 }
