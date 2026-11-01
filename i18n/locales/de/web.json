@@ -45,7 +45,9 @@
       "online": "Online",
       "remove": "{{name}} entfernen",
       "source": "Untertitel von OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Intro überspringen",
+    "introSkipped": "Intro übersprungen"
   },
   "somethingWentWrong": "Etwas ist schiefgelaufen",
   "oneMoment": "Einen Moment …",
@@ -408,6 +410,7 @@
     "intro": "Matinee liest jede Datei langsam auf Qualität, Ton und Sprachen, und erneut, wenn sich eine Datei ändert.",
     "state": {
       "lookingAt": "Untersucht {{file}}",
+      "intros": "Suche Intros in {{season}}",
       "working": "Arbeitet",
       "waiting": "Wartet, bis die Wiedergabe endet",
       "slowDisk": "Dateien lesen sich langsam; Pause für ein paar Minuten",
@@ -432,6 +435,11 @@
         "label": "Aus",
         "hint": "Pausiert, bis du es wieder einschaltest."
       }
+    },
+    "intros": {
+      "label": "TV-Intros finden",
+      "hint": "Sobald alle Dateien analysiert sind, hört Matinee sich den Anfang der Folgen jeder Staffel an und sucht das gemeinsame Intro, damit Player „Intro überspringen“ anbieten können.",
+      "progress": "{{done}} von {{total}} Folgen geprüft, {{found}} mit Intro"
     }
   },
   "profileSettings": {
@@ -686,7 +694,9 @@
       "autoPlay": "Nächste Folge abspielen",
       "autoPlayHint": "Wenn der Abspann beginnt, startet die nächste Folge nach einem 10-Sekunden-Countdown, den du abbrechen kannst.",
       "binge": "Countdown überspringen",
-      "bingeHint": "Gleich mit der nächsten Folge weitermachen, wenn der Abspann beginnt. Nach drei Folgen am Stück ohne Eingabe wirst du gefragt, ob du noch schaust."
+      "bingeHint": "Gleich mit der nächsten Folge weitermachen, wenn der Abspann beginnt. Nach drei Folgen am Stück ohne Eingabe wirst du gefragt, ob du noch schaust.",
+      "skipIntros": "Intros überspringen",
+      "skipIntrosHint": "Springt automatisch über das Intro einer Serie, statt eine Schaltfläche „Intro überspringen“ anzubieten."
     },
     "trailers": {
       "title": "Trailer",
@@ -935,5 +945,48 @@
     "rate": "Bewerten",
     "yours": "Deine Bewertung: {{stars}} von 5",
     "stars": "{{stars}} von 5"
+  },
+  "invite": {
+    "notWorking": "Diese Einladung funktioniert nicht",
+    "title": "{{server}} beitreten",
+    "invitedBy": "{{name}} hat dich zu Matinee eingeladen.",
+    "invited": "Du bist eingeladen, auf diesem Matinee zu schauen.",
+    "shared": "Für dich freigegeben",
+    "username": "Wähle einen Benutzernamen",
+    "join": "Mein Konto erstellen",
+    "welcome": "Willkommen bei {{server}}",
+    "welcomeHint": "Du kannst direkt hier im Browser schauen oder auf deinem Handy und Fernseher.",
+    "apps": "Auf Handy oder Fernseher schauen",
+    "appsHint": "Hol dir die Matinee-App, wähle Server hinzufügen und gib diese Adresse ein. Melde dich dann mit deinem neuen Benutzernamen und Passwort an.",
+    "copy": "Kopieren",
+    "getApps": "Wo es die Apps gibt",
+    "start": "Loslegen"
+  },
+  "friends": {
+    "title": "Freunde",
+    "hint": "Lade Leute außerhalb deines Haushalts ein. Jeder Einladungslink erstellt ein Konto, das nur die Mediatheken sieht, die du auswählst.",
+    "homeOnly": "Dein Server ist von außerhalb deines Zuhauses noch nicht erreichbar, daher funktionieren Einladungslinks nur in deinem Heimnetz.",
+    "setUpRemote": "Fernzugriff einrichten",
+    "forWho": "Für wen",
+    "forWhoHint": "Optional, zum Beispiel Sam",
+    "lasts": "Link gilt für",
+    "days_one": "{{count}} Tag",
+    "days_other": "{{count}} Tage",
+    "libraries": "Mediatheken",
+    "makeLink": "Einladungslink erstellen",
+    "made": "Schick diesen Link an deinen Freund oder deine Freundin:",
+    "share": "Teilen",
+    "shareTitle": "Schau mit mir auf Matinee",
+    "shareText": "Hier ist deine Einladung zu meinem Matinee.",
+    "onceOnly": "Er funktioniert einmal, bis {{date}}.",
+    "unnamed": "Einladung",
+    "inviteLine": "{{libraries}} · bis {{date}}",
+    "takeBack": "Zurückziehen",
+    "past_one": "{{count}} benutzte oder abgelaufene Einladung",
+    "past_other": "{{count}} benutzte oder abgelaufene Einladungen",
+    "usedBy": "{{name}} ist am {{date}} beigetreten",
+    "expired": "{{name}} ist am {{date}} abgelaufen",
+    "badge": "Freund",
+    "seeEverything": "Alles sehen lassen"
   }
 }

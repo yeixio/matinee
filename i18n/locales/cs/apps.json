@@ -127,14 +127,23 @@
       "downloading": "Stahování",
       "starting": "Spouštění…",
       "paused": "Pozastaveno"
-    }
+    },
+    "filter": {
+      "active": "Stahuje se ({{n}})",
+      "done": "Staženo ({{n}})"
+    },
+    "noneActive": "Právě se nic nestahuje.",
+    "noneDone": "Zatím se nic nedostahovalo."
   },
   "settings": {
     "quality": {
       "auto": "Nejlepší pro tento telefon",
       "autoHint": "Původní soubor, pokud ho tento telefon přehraje, jinak 1080p",
       "upTo": "Až {{size}} na dvouhodinový film",
-      "title": "Kvalita stahování (hudba je vždy v originále)"
+      "title": "Kvalita stahování (hudba je vždy v originále)",
+      "ask": "Ptát se pokaždé",
+      "askHint": "Vyberte kvalitu při každém stažení videa",
+      "holdHint": "Podržením Stáhnout u videa vyberete kvalitu jen pro něj."
     },
     "serversHint": "Přepnout nebo přidat servery",
     "atHome": "Sledujete doma",
@@ -154,6 +163,8 @@
     "autoPlayHint": "Když začnou titulky, po 10sekundovém odpočtu, který můžete zrušit",
     "binge": "Přeskočit odpočet",
     "bingeHint": "Rovnou pokračuje dalším dílem. Po třech za sebou bez jakékoli akce se zeptáme, jestli se ještě díváte",
+    "skipIntros": "Přeskakovat úvody",
+    "skipIntrosHint": "Úvod seriálu přeskočí sám, místo aby nabízel tlačítko Přeskočit úvod",
     "app": "Matinee {{version}}",
     "appBuild": "Matinee {{version}} (sestavení {{build}})",
     "server": "Server {{version}}",
@@ -332,7 +343,9 @@
       "machine": "Strojový překlad",
       "online": "Z internetu",
       "source": "Titulky z OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Přeskočit úvod",
+    "introSkipped": "Úvod přeskočen"
   },
   "library": {
     "nothingUnwatched": "Nic nezhlédnutého",
@@ -381,7 +394,11 @@
     "more_many": "Stáhnout ještě {{count}}",
     "more_one": "Stáhnout ještě {{count}}",
     "more_other": "Stáhnout ještě {{count}}",
-    "someFailed": "Nepodařilo se spustit všechna stahování"
+    "someFailed": "Nepodařilo se spustit všechna stahování",
+    "couldNotStart": "Stahování se nepodařilo spustit",
+    "qualityTitle": "Kvalita stahování",
+    "about": "Asi {{size}}",
+    "autoShort": "Originál nebo 1080p"
   },
   "kind": {
     "movie": "Film",

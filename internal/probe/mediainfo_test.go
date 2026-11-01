@@ -156,3 +156,28 @@ func TestCreditsStart(t *testing.T) {
 		}
 	}
 }
+
+func TestIntroRange(t *testing.T) {
+	ch := func(start, end, title string) chapter {
+		return chapter{StartTime: start, EndTime: end, Tags: map[string]string{"title": title}}
+	}
+	cases := []struct {
+		name       string
+		chapters   []chapter
+		start, end int64
+	}{
+		{"none", nil, 0, 0},
+		{"untitled", []chapter{ch("0", "300", "Chapter 1"), ch("300", "1800", "Chapter 2")}, 0, 0},
+		{"after a cold open", []chapter{ch("0", "184.2", "Prologue"), ch("184.2", "244.7", "Opening Credits"), ch("244.7", "1800", "Episode")}, 184200, 244700},
+		{"anime OP", []chapter{ch("0", "90", "OP"), ch("90", "1290", "Part A"), ch("1290", "1380", "ED")}, 0, 90000},
+		{"no end time", []chapter{{StartTime: "10", Tags: map[string]string{"title": "Intro"}}, ch("70", "1800", "Story")}, 10000, 70000},
+		{"too late", []chapter{ch("1000", "1060", "Intro")}, 0, 0},
+		{"too long", []chapter{ch("0", "900", "Intro")}, 0, 0},
+		{"end credits", []chapter{ch("1700", "1800", "End Credits")}, 0, 0},
+	}
+	for _, c := range cases {
+		if s, e := introRange(c.chapters, 1800000); s != c.start || e != c.end {
+			t.Errorf("%s: %d–%d, want %d–%d", c.name, s, e, c.start, c.end)
+		}
+	}
+}

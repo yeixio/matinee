@@ -127,14 +127,23 @@
       "downloading": "Se descarcă",
       "starting": "Se pornește…",
       "paused": "În pauză"
-    }
+    },
+    "filter": {
+      "active": "Se descarcă ({{n}})",
+      "done": "Descărcate ({{n}})"
+    },
+    "noneActive": "Nu se descarcă nimic acum.",
+    "noneDone": "Nicio descărcare nu s-a terminat încă."
   },
   "settings": {
     "quality": {
       "auto": "Cel mai bun pentru acest telefon",
       "autoHint": "Fișierul original când acest telefon îl poate reda, altfel 1080p",
       "upTo": "Până la {{size}} pentru un film de două ore",
-      "title": "Calitatea descărcării (muzica e mereu originală)"
+      "title": "Calitatea descărcării (muzica e mereu originală)",
+      "ask": "Întreabă de fiecare dată",
+      "askHint": "Alege o calitate de fiecare dată când descarci un video",
+      "holdHint": "Ține apăsat Descarcă pe un video ca să alegi calitatea doar pentru el."
     },
     "serversHint": "Schimbă sau adaugă servere",
     "atHome": "Vizionezi acasă",
@@ -154,6 +163,8 @@
     "autoPlayHint": "Când încep genericele, după o numărătoare inversă de 10 secunde pe care o poți anula",
     "binge": "Sari peste numărătoare",
     "bingeHint": "Trece direct la episodul următor. După trei la rând fără să atingi nimic, te întrebăm dacă te mai uiți",
+    "skipIntros": "Sari peste introuri",
+    "skipIntrosHint": "Sare singur peste introul unui serial, în loc să afișeze butonul Sari peste intro",
     "app": "Matinee {{version}}",
     "appBuild": "Matinee {{version}} (versiunea {{build}})",
     "server": "Server {{version}}",
@@ -327,7 +338,9 @@
       "machine": "Traducere automată",
       "online": "Online",
       "source": "Subtitrări de pe OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Sari peste intro",
+    "introSkipped": "Intro sărit"
   },
   "library": {
     "nothingUnwatched": "Nimic nevăzut aici",
@@ -375,7 +388,11 @@
     "more_few": "Descarcă încă {{count}}",
     "more_one": "Descarcă încă {{count}}",
     "more_other": "Descarcă încă {{count}}",
-    "someFailed": "Nu au putut porni toate descărcările"
+    "someFailed": "Nu au putut porni toate descărcările",
+    "couldNotStart": "Descărcarea nu a putut porni",
+    "qualityTitle": "Calitatea descărcării",
+    "about": "Circa {{size}}",
+    "autoShort": "Original sau 1080p"
   },
   "kind": {
     "movie": "Film",

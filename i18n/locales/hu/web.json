@@ -45,7 +45,9 @@
       "online": "Internetről",
       "remove": "{{name}} eltávolítása",
       "source": "Feliratok: OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Bevezető átugrása",
+    "introSkipped": "Bevezető átugorva"
   },
   "somethingWentWrong": "Valami hiba történt",
   "oneMoment": "Egy pillanat…",
@@ -408,6 +410,7 @@
     "intro": "A Matinee lassan beolvas minden fájlt a minőség, a hang és a nyelvek miatt, és újra, ha egy fájl megváltozik.",
     "state": {
       "lookingAt": "Vizsgálja: {{file}}",
+      "intros": "Bevezetők keresése: {{season}}",
       "working": "Dolgozik",
       "waiting": "Vár, amíg a lejátszás véget ér",
       "slowDisk": "A fájlok lassan olvashatók; néhány perc pihenő",
@@ -432,6 +435,11 @@
         "label": "Ki",
         "hint": "Szüneteltetve, amíg újra be nem kapcsolod."
       }
+    },
+    "intros": {
+      "label": "Sorozatbevezetők keresése",
+      "hint": "Ha minden fájl elemzése kész, a Matinee meghallgatja az évadok epizódjainak elejét, és megkeresi a közös bevezetőt, hogy a lejátszók felajánlhassák a Bevezető átugrása lehetőséget.",
+      "progress": "{{done}}/{{total}} epizód ellenőrizve, {{found}} bevezetővel"
     }
   },
   "profileSettings": {
@@ -686,7 +694,9 @@
       "autoPlay": "A következő rész lejátszása",
       "autoPlayHint": "Amikor elindul a stáblista, a következő rész egy 10 másodperces, megszakítható visszaszámlálás után indul.",
       "binge": "Visszaszámlálás kihagyása",
-      "bingeHint": "A stáblista indulásakor egyből a következő részre ugrik. Három egymást követő rész után, ha semmihez sem nyúltál, megkérdezi, nézed-e még."
+      "bingeHint": "A stáblista indulásakor egyből a következő részre ugrik. Három egymást követő rész után, ha semmihez sem nyúltál, megkérdezi, nézed-e még.",
+      "skipIntros": "Bevezetők átugrása",
+      "skipIntrosHint": "Magától átugorja a sorozat bevezetőjét, ahelyett hogy a Bevezető átugrása gombot mutatná."
     },
     "trailers": {
       "title": "Előzetesek",
@@ -935,5 +945,48 @@
     "rate": "Értékelés",
     "yours": "Az értékelésed: {{stars}} / 5",
     "stars": "{{stars}} / 5"
+  },
+  "invite": {
+    "notWorking": "Ez a meghívó nem működik",
+    "title": "Csatlakozás: {{server}}",
+    "invitedBy": "{{name}} meghívott, hogy nézz a Matinee-n.",
+    "invited": "Meghívást kaptál erre a Matinee-re.",
+    "shared": "Veled megosztva",
+    "username": "Válassz felhasználónevet",
+    "join": "Fiókom létrehozása",
+    "welcome": "Üdv itt: {{server}}",
+    "welcomeHint": "Nézhetsz itt a böngészőben, vagy a telefonodon és a tévén.",
+    "apps": "Nézés telefonon vagy tévén",
+    "appsHint": "Töltsd le a Matinee appot, válaszd a Szerver hozzáadása lehetőséget, és írd be ezt a címet. Utána jelentkezz be az új felhasználóneveddel és jelszavaddal.",
+    "copy": "Másolás",
+    "getApps": "Honnan töltheted le az appokat",
+    "start": "Nézés indítása"
+  },
+  "friends": {
+    "title": "Barátok",
+    "hint": "Hívj meg a háztartásodon kívüli embereket. Minden meghívólink egy fiókot hoz létre, amely csak az általad választott könyvtárakat látja.",
+    "homeOnly": "A szervered még nem érhető el kívülről, ezért a meghívólinkek csak az otthoni hálózaton működnek.",
+    "setUpRemote": "Távoli elérés beállítása",
+    "forWho": "Kinek szól",
+    "forWhoHint": "Nem kötelező, például Sam",
+    "lasts": "A link érvényes",
+    "days_one": "{{count}} napig",
+    "days_other": "{{count}} napig",
+    "libraries": "Könyvtárak",
+    "makeLink": "Meghívólink készítése",
+    "made": "Küldd el ezt a linket a barátodnak:",
+    "share": "Megosztás",
+    "shareTitle": "Nézd velem a Matinee-n",
+    "shareText": "Itt a meghívód a Matinee-mre.",
+    "onceOnly": "Egyszer használható, eddig: {{date}}.",
+    "unnamed": "Meghívó",
+    "inviteLine": "{{libraries}} · eddig: {{date}}",
+    "takeBack": "Visszavonás",
+    "past_one": "{{count}} felhasznált vagy lejárt meghívó",
+    "past_other": "{{count}} felhasznált vagy lejárt meghívó",
+    "usedBy": "{{name}} csatlakozott: {{date}}",
+    "expired": "{{name}} lejárt: {{date}}",
+    "badge": "Barát",
+    "seeEverything": "Minden látható legyen"
   }
 }

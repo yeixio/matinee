@@ -45,7 +45,9 @@
       "online": "Trên mạng",
       "remove": "Xóa {{name}}",
       "source": "Phụ đề từ OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Bỏ qua đoạn mở đầu",
+    "introSkipped": "Đã bỏ qua đoạn mở đầu"
   },
   "somethingWentWrong": "Đã xảy ra lỗi",
   "oneMoment": "Chờ một chút…",
@@ -405,6 +407,7 @@
     "intro": "Matinee chậm rãi đọc từng tệp để biết chất lượng, âm thanh và ngôn ngữ, và đọc lại mỗi khi tệp thay đổi.",
     "state": {
       "lookingAt": "Đang xem {{file}}",
+      "intros": "Đang tìm đoạn mở đầu trong {{season}}",
       "working": "Đang làm việc",
       "waiting": "Đang chờ phát xong",
       "slowDisk": "Tệp đọc chậm; nghỉ vài phút",
@@ -428,6 +431,11 @@
         "label": "Tắt",
         "hint": "Tạm dừng cho đến khi bạn bật lại."
       }
+    },
+    "intros": {
+      "label": "Tìm đoạn mở đầu phim bộ",
+      "hint": "Khi mọi tệp đã được phân tích, Matinee nghe phần đầu các tập của từng mùa để tìm đoạn mở đầu chung, nhờ đó trình phát có thể hiện Bỏ qua đoạn mở đầu.",
+      "progress": "Đã kiểm tra {{done}}/{{total}} tập, {{found}} tập có đoạn mở đầu"
     }
   },
   "profileSettings": {
@@ -682,7 +690,9 @@
       "autoPlay": "Phát tập tiếp theo",
       "autoPlayHint": "Khi danh đề bắt đầu, tập tiếp theo sẽ phát sau 10 giây đếm ngược mà bạn có thể hủy.",
       "binge": "Bỏ qua đếm ngược",
-      "bingeHint": "Chuyển thẳng sang tập tiếp theo khi danh đề bắt đầu. Sau ba tập liên tiếp không chạm vào gì, bạn sẽ được hỏi có còn xem không."
+      "bingeHint": "Chuyển thẳng sang tập tiếp theo khi danh đề bắt đầu. Sau ba tập liên tiếp không chạm vào gì, bạn sẽ được hỏi có còn xem không.",
+      "skipIntros": "Tự bỏ qua đoạn mở đầu",
+      "skipIntrosHint": "Tự động nhảy qua đoạn mở đầu của phim bộ thay vì hiện nút Bỏ qua đoạn mở đầu."
     },
     "trailers": {
       "title": "Trailer",
@@ -931,5 +941,46 @@
     "rate": "Đánh giá",
     "yours": "Đánh giá của bạn: {{stars}}/5",
     "stars": "{{stars}}/5"
+  },
+  "invite": {
+    "notWorking": "Lời mời này không dùng được",
+    "title": "Tham gia {{server}}",
+    "invitedBy": "{{name}} đã mời bạn vào Matinee.",
+    "invited": "Bạn được mời xem trên Matinee này.",
+    "shared": "Được chia sẻ với bạn",
+    "username": "Chọn tên người dùng",
+    "join": "Tạo tài khoản của tôi",
+    "welcome": "Chào mừng đến với {{server}}",
+    "welcomeHint": "Bạn có thể xem ngay trong trình duyệt này, hoặc trên điện thoại và TV.",
+    "apps": "Xem trên điện thoại hoặc TV",
+    "appsHint": "Cài ứng dụng Matinee, chọn Thêm máy chủ và nhập địa chỉ này. Sau đó đăng nhập bằng tên người dùng và mật khẩu mới.",
+    "copy": "Sao chép",
+    "getApps": "Nơi tải ứng dụng",
+    "start": "Bắt đầu xem"
+  },
+  "friends": {
+    "title": "Bạn bè",
+    "hint": "Mời những người ngoài gia đình bạn. Mỗi liên kết mời tạo một tài khoản chỉ thấy các thư viện bạn chọn.",
+    "homeOnly": "Máy chủ của bạn chưa truy cập được từ bên ngoài, nên liên kết mời chỉ dùng được trong mạng gia đình.",
+    "setUpRemote": "Thiết lập truy cập từ xa",
+    "forWho": "Dành cho ai",
+    "forWhoHint": "Không bắt buộc, ví dụ Sam",
+    "lasts": "Liên kết có hiệu lực",
+    "days_other": "{{count}} ngày",
+    "libraries": "Thư viện",
+    "makeLink": "Tạo liên kết mời",
+    "made": "Gửi liên kết này cho bạn của bạn:",
+    "share": "Chia sẻ",
+    "shareTitle": "Xem cùng mình trên Matinee",
+    "shareText": "Đây là lời mời vào Matinee của mình.",
+    "onceOnly": "Liên kết dùng được một lần, đến {{date}}.",
+    "unnamed": "Lời mời",
+    "inviteLine": "{{libraries}} · đến {{date}}",
+    "takeBack": "Thu hồi",
+    "past_other": "{{count}} lời mời đã dùng hoặc hết hạn",
+    "usedBy": "{{name}} đã tham gia ngày {{date}}",
+    "expired": "{{name}} đã hết hạn ngày {{date}}",
+    "badge": "Bạn bè",
+    "seeEverything": "Cho xem tất cả"
   }
 }

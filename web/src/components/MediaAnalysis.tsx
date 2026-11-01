@@ -11,16 +11,21 @@ export function MediaAnalysis() {
   const { data: st } = useQuery({
     queryKey: ['analysis'],
     queryFn: api.analysis,
-    refetchInterval: (q) => (q.state.data?.state === 'analyzing' || q.state.data?.state === 'waiting' ? 3000 : 30_000),
+    refetchInterval: (q) => (['analyzing', 'intros', 'waiting'].includes(q.state.data?.state ?? '') ? 3000 : 30_000),
   })
   const setMode = useMutation({
     mutationFn: api.setAnalysisMode,
+    onSuccess: (s) => qc.setQueryData(['analysis'], s),
+  })
+  const setIntros = useMutation({
+    mutationFn: api.setIntroDetection,
     onSuccess: (s) => qc.setQueryData(['analysis'], s),
   })
   if (!st) return null
   const pct = st.total ? Math.floor((st.done / st.total) * 100) : 100
   const state = {
     analyzing: st.current ? t('analysis.state.lookingAt', { file: st.current }) : t('analysis.state.working'),
+    intros: t('analysis.state.intros', { season: st.current ?? '' }),
     waiting: t('analysis.state.waiting'),
     slowDisk: t('analysis.state.slowDisk'),
     idle: st.done >= st.total ? t('analysis.state.allDone') : t('analysis.state.upToDate'),
@@ -72,6 +77,26 @@ export function MediaAnalysis() {
         <p className="text-xs text-muted">{modes.includes(st.mode) && t(`analysis.mode.${st.mode}.hint`)}</p>
         {setMode.error && <p className="text-sm text-danger">{setMode.error.message}</p>}
       </div>
+      {st.intros && (
+        <label className="flex cursor-pointer items-start gap-4 rounded-xl border border-line/60 bg-surface/50 p-5">
+          <span className="min-w-0 flex-1">
+            <span className="block font-medium">{t('analysis.intros.label')}</span>
+            <span className="mt-1 block text-sm text-muted">{t('analysis.intros.hint')}</span>
+            {st.intros.on && st.intros.total > 0 && (
+              <span className="mt-2 block text-xs text-muted tabular-nums">
+                {t('analysis.intros.progress', { done: st.intros.done, total: st.intros.total, found: st.intros.found })}
+              </span>
+            )}
+          </span>
+          <input
+            type="checkbox"
+            className="mt-1 size-5 accent-[var(--color-accent)]"
+            checked={st.intros.on}
+            disabled={setIntros.isPending}
+            onChange={() => setIntros.mutate(!st.intros!.on)}
+          />
+        </label>
+      )}
     </section>
   )
 }

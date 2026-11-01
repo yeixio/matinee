@@ -45,7 +45,9 @@
       "online": "Från nätet",
       "remove": "Ta bort {{name}}",
       "source": "Undertexter från OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Hoppa över intro",
+    "introSkipped": "Introt hoppades över"
   },
   "somethingWentWrong": "Något gick fel",
   "oneMoment": "Ett ögonblick…",
@@ -408,6 +410,7 @@
     "intro": "Matinee läser långsamt varje fil för att ta reda på kvalitet, ljud och språk, och igen när en fil ändras.",
     "state": {
       "lookingAt": "Tittar på {{file}}",
+      "intros": "Letar efter intron i {{season}}",
       "working": "Arbetar",
       "waiting": "Väntar på att uppspelningen ska bli klar",
       "slowDisk": "Filerna är långsamma att läsa; vilar några minuter",
@@ -432,6 +435,11 @@
         "label": "Av",
         "hint": "Pausad tills du slår på den igen."
       }
+    },
+    "intros": {
+      "label": "Hitta intron i serier",
+      "hint": "När alla filer är analyserade lyssnar Matinee på början av varje säsongs avsnitt efter introt de delar, så att spelarna kan erbjuda Hoppa över intro.",
+      "progress": "{{done}} av {{total}} avsnitt kontrollerade, {{found}} med intro"
     }
   },
   "profileSettings": {
@@ -686,7 +694,9 @@
       "autoPlay": "Spela nästa avsnitt",
       "autoPlayHint": "När eftertexterna börjar spelas nästa avsnitt efter en nedräkning på 10 sekunder som du kan avbryta.",
       "binge": "Hoppa över nedräkningen",
-      "bingeHint": "Gå direkt till nästa avsnitt när eftertexterna börjar. Efter tre i rad utan att du rört något får du frågan om du fortfarande tittar."
+      "bingeHint": "Gå direkt till nästa avsnitt när eftertexterna börjar. Efter tre i rad utan att du rört något får du frågan om du fortfarande tittar.",
+      "skipIntros": "Hoppa över intron",
+      "skipIntrosHint": "Hoppar över en series intro av sig själv, i stället för att visa knappen Hoppa över intro."
     },
     "trailers": {
       "title": "Trailers",
@@ -935,5 +945,48 @@
     "rate": "Betygsätt",
     "yours": "Ditt betyg: {{stars}} av 5",
     "stars": "{{stars}} av 5"
+  },
+  "invite": {
+    "notWorking": "Inbjudan fungerar inte",
+    "title": "Gå med i {{server}}",
+    "invitedBy": "{{name}} har bjudit in dig att titta på Matinee.",
+    "invited": "Du är inbjuden att titta på den här Matinee.",
+    "shared": "Delat med dig",
+    "username": "Välj ett användarnamn",
+    "join": "Skapa mitt konto",
+    "welcome": "Välkommen till {{server}}",
+    "welcomeHint": "Du kan titta direkt här i webbläsaren, eller på telefonen och tv:n.",
+    "apps": "Titta på telefonen eller tv:n",
+    "appsHint": "Skaffa Matinee-appen, välj Lägg till server och skriv den här adressen. Logga sedan in med ditt nya användarnamn och lösenord.",
+    "copy": "Kopiera",
+    "getApps": "Var du hittar apparna",
+    "start": "Börja titta"
+  },
+  "friends": {
+    "title": "Vänner",
+    "hint": "Bjud in personer utanför hushållet. Varje inbjudningslänk skapar ett konto som bara ser de bibliotek du väljer.",
+    "homeOnly": "Servern går inte att nå utifrån än, så inbjudningslänkar fungerar bara i ditt hemnätverk.",
+    "setUpRemote": "Ställ in fjärråtkomst",
+    "forWho": "Vem den är till",
+    "forWhoHint": "Valfritt, till exempel Sam",
+    "lasts": "Länken gäller i",
+    "days_one": "{{count}} dag",
+    "days_other": "{{count}} dagar",
+    "libraries": "Bibliotek",
+    "makeLink": "Skapa inbjudningslänk",
+    "made": "Skicka den här länken till din vän:",
+    "share": "Dela",
+    "shareTitle": "Titta med mig på Matinee",
+    "shareText": "Här är din inbjudan till min Matinee.",
+    "onceOnly": "Den fungerar en gång, till {{date}}.",
+    "unnamed": "Inbjudan",
+    "inviteLine": "{{libraries}} · till {{date}}",
+    "takeBack": "Dra tillbaka",
+    "past_one": "{{count}} använd eller utgången inbjudan",
+    "past_other": "{{count}} använda eller utgångna inbjudningar",
+    "usedBy": "{{name}} gick med {{date}}",
+    "expired": "{{name}} gick ut {{date}}",
+    "badge": "Vän",
+    "seeEverything": "Låt dem se allt"
   }
 }

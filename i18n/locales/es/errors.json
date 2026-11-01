@@ -187,5 +187,21 @@
   "that_isnt_a_media_server_database_matinee_can_read": "eso no es una base de datos de servidor multimedia que Matinee pueda leer",
   "the_covers_address_must_start_with_http_or_https": "la dirección de la portada debe empezar por http:// o https://",
   "the_image_is_too_big_20_mb_at_most": "la imagen es demasiado grande (20 MB como máximo)",
-  "couldnt_get_an_image_from_that_address": "no se pudo obtener una imagen de esa dirección"
+  "couldnt_get_an_image_from_that_address": "no se pudo obtener una imagen de esa dirección",
+  "admins_see_every_library_make_them_a_regular_account_first": "los administradores ven todas las bibliotecas; conviértelo primero en una cuenta normal",
+  "bad_wait": "espera no válida",
+  "invites_last_1_to_30_days": "las invitaciones duran de 1 a 30 días",
+  "join_the_session_first": "únete primero a la sesión",
+  "no_such_invite": "esa invitación no existe",
+  "pick_at_least_one_library_to_share": "elige al menos una biblioteca para compartir",
+  "that_isnt_in_a_library_shared_with_you": "eso no está en ninguna biblioteca compartida contigo",
+  "that_session_is_still_going_join_it": "esa sesión sigue en marcha; únete a ella",
+  "that_watch_together_code_doesnt_work_it_may_have_ended": "ese código de Ver juntos no funciona; puede que haya terminado",
+  "this_invite_has_expired_ask_for_another": "esta invitación caducó; pide otra",
+  "this_invite_link_doesnt_work_ask_for_another": "este enlace de invitación no funciona; pide otro",
+  "this_invite_was_already_used": "esta invitación ya se usó",
+  "this_watch_together_session_is_full": "esta sesión de Ver juntos está llena",
+  "too_many_watch_together_sessions_right_now": "hay demasiadas sesiones de Ver juntos ahora mismo",
+  "unknown_action": "acción desconocida",
+  "usernames_are_at_most_40_characters": "los nombres de usuario tienen como máximo 40 caracteres"
 }

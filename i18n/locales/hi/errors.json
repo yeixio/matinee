@@ -187,5 +187,21 @@
   "that_isnt_a_media_server_database_matinee_can_read": "यह ऐसा मीडिया सर्वर डेटाबेस नहीं है जिसे Matinee पढ़ सके",
   "the_covers_address_must_start_with_http_or_https": "कवर का पता http:// या https:// से शुरू होना चाहिए",
   "the_image_is_too_big_20_mb_at_most": "इमेज बहुत बड़ी है (ज़्यादा से ज़्यादा 20 MB)",
-  "couldnt_get_an_image_from_that_address": "उस पते से इमेज नहीं मिल सकी"
+  "couldnt_get_an_image_from_that_address": "उस पते से इमेज नहीं मिल सकी",
+  "admins_see_every_library_make_them_a_regular_account_first": "एडमिन हर लाइब्रेरी देखते हैं; पहले इसे सामान्य खाता बनाएँ",
+  "bad_wait": "गलत प्रतीक्षा समय",
+  "invites_last_1_to_30_days": "न्योते 1 से 30 दिन तक चलते हैं",
+  "join_the_session_first": "पहले सत्र से जुड़ें",
+  "no_such_invite": "ऐसा कोई न्योता नहीं है",
+  "pick_at_least_one_library_to_share": "शेयर करने के लिए कम से कम एक लाइब्रेरी चुनें",
+  "that_isnt_in_a_library_shared_with_you": "यह आपके साथ शेयर की गई किसी लाइब्रेरी में नहीं है",
+  "that_session_is_still_going_join_it": "वह सत्र अभी चल रहा है; उससे जुड़ें",
+  "that_watch_together_code_doesnt_work_it_may_have_ended": "यह साथ देखने का कोड काम नहीं करता; शायद सत्र ख़त्म हो गया",
+  "this_invite_has_expired_ask_for_another": "इस न्योते की अवधि ख़त्म हो गई; नया माँगें",
+  "this_invite_link_doesnt_work_ask_for_another": "यह न्योता लिंक काम नहीं करता; नया माँगें",
+  "this_invite_was_already_used": "यह न्योता पहले ही इस्तेमाल हो चुका है",
+  "this_watch_together_session_is_full": "यह साथ देखने का सत्र भर गया है",
+  "too_many_watch_together_sessions_right_now": "अभी साथ देखने के बहुत सारे सत्र चल रहे हैं",
+  "unknown_action": "अज्ञात कार्रवाई",
+  "usernames_are_at_most_40_characters": "यूज़रनेम ज़्यादा से ज़्यादा 40 अक्षर का हो सकता है"
 }

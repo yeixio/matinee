@@ -45,7 +45,9 @@
       "online": "On-line",
       "remove": "Remover {{name}}",
       "source": "Legendas do OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Pular abertura",
+    "introSkipped": "Abertura pulada"
   },
   "somethingWentWrong": "Algo deu errado",
   "oneMoment": "Só um momento…",
@@ -411,6 +413,7 @@
     "intro": "O Matinee lê cada arquivo devagar para saber sua qualidade, som e idiomas, e de novo sempre que um arquivo muda.",
     "state": {
       "lookingAt": "Analisando {{file}}",
+      "intros": "Procurando aberturas em {{season}}",
       "working": "Trabalhando",
       "waiting": "Esperando a reprodução terminar",
       "slowDisk": "Os arquivos estão lentos para ler; pausa de alguns minutos",
@@ -436,6 +439,11 @@
         "label": "Desativada",
         "hint": "Pausada até você ativar de novo."
       }
+    },
+    "intros": {
+      "label": "Encontrar aberturas de séries",
+      "hint": "Depois que todos os arquivos forem analisados, o Matinee escuta o início dos episódios de cada temporada para achar a abertura que eles têm em comum, para que os players ofereçam Pular abertura.",
+      "progress": "{{done}} de {{total}} episódios verificados, {{found}} com abertura"
     }
   },
   "profileSettings": {
@@ -690,7 +698,9 @@
       "autoPlay": "Reproduzir o próximo episódio",
       "autoPlayHint": "Quando os créditos começam, o próximo episódio começa depois de uma contagem de 10 segundos que você pode cancelar.",
       "binge": "Pular a contagem",
-      "bingeHint": "Ir direto para o próximo episódio quando os créditos começam. Depois de três seguidos sem tocar em nada, você vai ser perguntado se ainda está assistindo."
+      "bingeHint": "Ir direto para o próximo episódio quando os créditos começam. Depois de três seguidos sem tocar em nada, você vai ser perguntado se ainda está assistindo.",
+      "skipIntros": "Pular aberturas",
+      "skipIntrosHint": "Pula a abertura de uma série sozinho, em vez de mostrar o botão Pular abertura."
     },
     "trailers": {
       "title": "Trailers",
@@ -939,5 +949,50 @@
     "rate": "Avaliar",
     "yours": "Sua avaliação: {{stars}} de 5",
     "stars": "{{stars}} de 5"
+  },
+  "invite": {
+    "notWorking": "Este convite não funciona",
+    "title": "Entrar em {{server}}",
+    "invitedBy": "{{name}} convidou você para assistir no Matinee.",
+    "invited": "Você foi convidado para assistir neste Matinee.",
+    "shared": "Compartilhado com você",
+    "username": "Escolha um nome de usuário",
+    "join": "Criar minha conta",
+    "welcome": "Boas-vindas a {{server}}",
+    "welcomeHint": "Você pode assistir aqui no navegador ou no celular e na TV.",
+    "apps": "Assistir no celular ou na TV",
+    "appsHint": "Baixe o app Matinee, escolha Adicionar servidor e digite este endereço. Depois entre com seu novo nome de usuário e senha.",
+    "copy": "Copiar",
+    "getApps": "Onde baixar os apps",
+    "start": "Começar a assistir"
+  },
+  "friends": {
+    "title": "Amigos",
+    "hint": "Convide pessoas de fora da sua casa. Cada link de convite cria uma conta que vê só as bibliotecas que você escolher.",
+    "homeOnly": "Seu servidor ainda não pode ser acessado de fora de casa, então os links de convite só funcionam na sua rede doméstica.",
+    "setUpRemote": "Configurar acesso remoto",
+    "forWho": "Para quem é",
+    "forWhoHint": "Opcional, por exemplo Sam",
+    "lasts": "O link vale por",
+    "days_one": "{{count}} dia",
+    "days_many": "{{count}} dias",
+    "days_other": "{{count}} dias",
+    "libraries": "Bibliotecas",
+    "makeLink": "Criar link de convite",
+    "made": "Envie este link para seu amigo:",
+    "share": "Compartilhar",
+    "shareTitle": "Assista comigo no Matinee",
+    "shareText": "Aqui está seu convite para o meu Matinee.",
+    "onceOnly": "Funciona uma vez, até {{date}}.",
+    "unnamed": "Convite",
+    "inviteLine": "{{libraries}} · até {{date}}",
+    "takeBack": "Cancelar",
+    "past_one": "{{count}} convite usado ou expirado",
+    "past_many": "{{count}} convites usados ou expirados",
+    "past_other": "{{count}} convites usados ou expirados",
+    "usedBy": "{{name}} entrou em {{date}}",
+    "expired": "{{name}} expirou em {{date}}",
+    "badge": "Amigo",
+    "seeEverything": "Deixar ver tudo"
   }
 }

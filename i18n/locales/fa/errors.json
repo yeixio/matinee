@@ -187,5 +187,21 @@
   "that_isnt_a_media_server_database_matinee_can_read": "این پایگاه دادهٔ سرور رسانه‌ای نیست که Matinee بتواند بخواند",
   "the_covers_address_must_start_with_http_or_https": "نشانی جلد باید با http:// یا https:// شروع شود",
   "the_image_is_too_big_20_mb_at_most": "تصویر خیلی بزرگ است (حداکثر ۲۰ مگابایت)",
-  "couldnt_get_an_image_from_that_address": "نشد از این نشانی تصویری گرفت"
+  "couldnt_get_an_image_from_that_address": "نشد از این نشانی تصویری گرفت",
+  "admins_see_every_library_make_them_a_regular_account_first": "مدیران همه کتابخانه‌ها را می‌بینند؛ اول آن را حساب عادی کنید",
+  "bad_wait": "زمان انتظار نامعتبر",
+  "invites_last_1_to_30_days": "دعوت‌ها ۱ تا ۳۰ روز اعتبار دارند",
+  "join_the_session_first": "اول به جلسه بپیوندید",
+  "no_such_invite": "چنین دعوتی نیست",
+  "pick_at_least_one_library_to_share": "دست‌کم یک کتابخانه برای هم‌رسانی انتخاب کنید",
+  "that_isnt_in_a_library_shared_with_you": "این در کتابخانه‌ای که با شما هم‌رسانی شده نیست",
+  "that_session_is_still_going_join_it": "آن جلسه هنوز ادامه دارد؛ به آن بپیوندید",
+  "that_watch_together_code_doesnt_work_it_may_have_ended": "این کد تماشای باهم کار نمی‌کند؛ شاید جلسه تمام شده باشد",
+  "this_invite_has_expired_ask_for_another": "این دعوت منقضی شده است؛ دعوت دیگری بخواهید",
+  "this_invite_link_doesnt_work_ask_for_another": "این پیوند دعوت کار نمی‌کند؛ پیوند دیگری بخواهید",
+  "this_invite_was_already_used": "این دعوت قبلاً استفاده شده است",
+  "this_watch_together_session_is_full": "این جلسه تماشای باهم پر است",
+  "too_many_watch_together_sessions_right_now": "اکنون جلسه‌های تماشای باهم بیش از حد زیاد است",
+  "unknown_action": "کنش ناشناخته",
+  "usernames_are_at_most_40_characters": "نام کاربری حداکثر ۴۰ نویسه است"
 }

@@ -516,5 +516,39 @@
     "importing": "番組を追加しています…",
     "newEpisodesCount_other": "新しいエピソード {{count}} 件",
     "imported_other": "{{count}} 件の番組を追加しました。"
+  },
+  "together": {
+    "title": "いっしょに見る",
+    "intro": "ほかのデバイスで友だちや家族といっしょに見られます。再生・一時停止・シークは全員でそろいます。",
+    "start": "いっしょに見るを始める",
+    "share": "いっしょに見る人にこのコードかリンクを送ってください。",
+    "shareText": "Matinee でいっしょに見よう。コード {{code}}",
+    "copyLink": "リンクをコピー",
+    "copied": "コピーしました",
+    "watchingWith_other": "いっしょに見ている人: {{count}}人",
+    "host": "開始した人",
+    "leave": "抜ける",
+    "end": "全員で終了",
+    "joinIn": "再生を押して参加",
+    "did": {
+      "join": "{{name}}さんが参加しました",
+      "leave": "{{name}}さんが抜けました",
+      "play": "{{name}}さんが再生しました",
+      "pause": "{{name}}さんが一時停止しました",
+      "seek": "{{name}}さんがシークしました"
+    },
+    "typeCode": "受け取ったコードを入力してください。",
+    "code": "コード",
+    "next": "次へ",
+    "notFound": "このコードは使えません",
+    "tryAnother": "別のコードを試す",
+    "notShared": "これはあなたに共有されていません",
+    "notSharedHint": "このサーバーの管理者に、そのライブラリを共有してもらってください。",
+    "hostedBy_other": "{{name}}さんたちが見ています（現在 {{count}}人）。参加しましょう。",
+    "waiting": "まだ誰も見ていません。",
+    "join": "参加する",
+    "shareLink": "リンクを共有",
+    "you": "（あなた）",
+    "settingsHint": "コードで友だちといっしょに見る"
   }
 }

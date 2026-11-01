@@ -45,7 +45,9 @@
       "online": "Online",
       "remove": "Fjern {{name}}",
       "source": "Undertekster fra OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Spring intro over",
+    "introSkipped": "Introen blev sprunget over"
   },
   "somethingWentWrong": "Noget gik galt",
   "oneMoment": "Et øjeblik…",
@@ -408,6 +410,7 @@
     "intro": "Matinee læser langsomt hver fil for kvalitet, lyd og sprog, og igen hver gang en fil ændres.",
     "state": {
       "lookingAt": "Kigger på {{file}}",
+      "intros": "Leder efter introer i {{season}}",
       "working": "Arbejder",
       "waiting": "Venter på, at afspilningen slutter",
       "slowDisk": "Filerne er langsomme at læse; holder pause et par minutter",
@@ -432,6 +435,11 @@
         "label": "Fra",
         "hint": "Sat på pause, indtil du slår den til igen."
       }
+    },
+    "intros": {
+      "label": "Find introer i serier",
+      "hint": "Når alle filer er analyseret, lytter Matinee til starten af hver sæsons afsnit efter den intro, de har til fælles, så afspillerne kan tilbyde Spring intro over.",
+      "progress": "{{done}} af {{total}} afsnit tjekket, {{found}} med intro"
     }
   },
   "profileSettings": {
@@ -686,7 +694,9 @@
       "autoPlay": "Afspil næste afsnit",
       "autoPlayHint": "Når rulleteksterne starter, afspilles næste afsnit efter en nedtælling på 10 sekunder, som du kan annullere.",
       "binge": "Spring nedtællingen over",
-      "bingeHint": "Gå direkte til næste afsnit, når rulleteksterne starter. Efter tre i træk uden at røre noget bliver du spurgt, om du stadig ser med."
+      "bingeHint": "Gå direkte til næste afsnit, når rulleteksterne starter. Efter tre i træk uden at røre noget bliver du spurgt, om du stadig ser med.",
+      "skipIntros": "Spring introer over",
+      "skipIntrosHint": "Springer en series intro over af sig selv i stedet for at vise knappen Spring intro over."
     },
     "trailers": {
       "title": "Trailere",
@@ -935,5 +945,48 @@
     "rate": "Bedøm",
     "yours": "Din bedømmelse: {{stars}} af 5",
     "stars": "{{stars}} af 5"
+  },
+  "invite": {
+    "notWorking": "Invitationen virker ikke",
+    "title": "Bliv en del af {{server}}",
+    "invitedBy": "{{name}} har inviteret dig til at se med på Matinee.",
+    "invited": "Du er inviteret til at se med på denne Matinee.",
+    "shared": "Delt med dig",
+    "username": "Vælg et brugernavn",
+    "join": "Opret min konto",
+    "welcome": "Velkommen til {{server}}",
+    "welcomeHint": "Du kan se med lige her i browseren eller på din telefon og dit tv.",
+    "apps": "Se på din telefon eller dit tv",
+    "appsHint": "Hent Matinee-appen, vælg Tilføj server, og skriv denne adresse. Log derefter ind med dit nye brugernavn og din nye adgangskode.",
+    "copy": "Kopiér",
+    "getApps": "Hvor du finder apps",
+    "start": "Begynd at se"
+  },
+  "friends": {
+    "title": "Venner",
+    "hint": "Invitér folk uden for husstanden. Hvert invitationslink opretter én konto, der kun ser de biblioteker, du vælger.",
+    "homeOnly": "Din server kan ikke nås udefra endnu, så invitationslinks virker kun på dit hjemmenetværk.",
+    "setUpRemote": "Opsæt fjernadgang",
+    "forWho": "Hvem den er til",
+    "forWhoHint": "Valgfrit, f.eks. Sam",
+    "lasts": "Linket virker i",
+    "days_one": "{{count}} dag",
+    "days_other": "{{count}} dage",
+    "libraries": "Biblioteker",
+    "makeLink": "Lav invitationslink",
+    "made": "Send dette link til din ven:",
+    "share": "Del",
+    "shareTitle": "Se med mig på Matinee",
+    "shareText": "Her er din invitation til min Matinee.",
+    "onceOnly": "Det virker én gang, indtil {{date}}.",
+    "unnamed": "Invitation",
+    "inviteLine": "{{libraries}} · indtil {{date}}",
+    "takeBack": "Træk tilbage",
+    "past_one": "{{count}} brugt eller udløbet invitation",
+    "past_other": "{{count}} brugte eller udløbne invitationer",
+    "usedBy": "{{name}} kom med {{date}}",
+    "expired": "{{name}} udløb {{date}}",
+    "badge": "Ven",
+    "seeEverything": "Lad dem se alt"
   }
 }

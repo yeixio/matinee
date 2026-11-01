@@ -546,5 +546,41 @@
     "imported_one": "{{count}} program lagt til.",
     "newEpisodesCount_other": "{{count}} nye episoder",
     "imported_other": "{{count}} programmer lagt til."
+  },
+  "together": {
+    "title": "Se sammen",
+    "intro": "Se dette med venner eller familie på andre enheter. Avspilling, pause og hopping holdes i takt for alle.",
+    "start": "Start Se sammen",
+    "share": "Send denne koden eller lenken til dem som skal være med.",
+    "shareText": "Se med meg på Matinee med koden {{code}}",
+    "copyLink": "Kopier lenke",
+    "copied": "Kopiert",
+    "watchingWith_one": "Ser sammen: {{count}} person",
+    "watchingWith_other": "Ser sammen: {{count}} personer",
+    "host": "Startet",
+    "leave": "Forlat",
+    "end": "Avslutt for alle",
+    "joinIn": "Trykk på spill av for å bli med",
+    "did": {
+      "join": "{{name}} ble med",
+      "leave": "{{name}} gikk",
+      "play": "{{name}} trykket på spill av",
+      "pause": "{{name}} satte på pause",
+      "seek": "{{name}} hoppet"
+    },
+    "typeCode": "Skriv inn koden du har fått.",
+    "code": "Kode",
+    "next": "Neste",
+    "notFound": "Koden fungerer ikke",
+    "tryAnother": "Prøv en annen kode",
+    "notShared": "Dette er ikke delt med deg",
+    "notSharedHint": "Be den som driver serveren om å dele biblioteket med deg.",
+    "hostedBy_one": "{{name}} ser på. Bli med.",
+    "hostedBy_other": "{{name}} og andre ser på ({{count}} så langt). Bli med.",
+    "waiting": "Ingen ser på akkurat nå.",
+    "join": "Bli med",
+    "shareLink": "Del lenke",
+    "you": "(deg)",
+    "settingsHint": "Se med venner med en kode"
   }
 }

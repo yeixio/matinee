@@ -100,6 +100,10 @@ The remote works the way it does in your TV's own player:
 | Up or Back, on the buttons | Back to the bar |
 | Back | Leave the player |
 
+<!-- since: v0.1.10 -->
+While an episode's intro plays, **Skip intro** shows in the bottom corner, ready for the remote: press select to skip it, or carry on with any other button. See [Skipping intros](/docs/watching/skipping-intros/).
+<!-- /since -->
+
 ![The player on a TV, with subtitles on and the buttons under the bar](../images/app-tv-player.webp)
 
 On the buttons, left and right move between them and select opens one. **Audio** lists every sound track in the file, by language, with commentaries and audio description marked and the format of each (such as Dolby TrueHD · Atmos · 7.1). **Subtitles** lists the subtitles in the file and the [files next to it](/docs/getting-started/organizing-media/#subtitles), and **Off**. The one in use has a check, and the button says what's on.

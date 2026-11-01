@@ -127,14 +127,23 @@
       "downloading": "Laster ned",
       "starting": "Starter…",
       "paused": "Satt på pause"
-    }
+    },
+    "filter": {
+      "active": "Laster ned ({{n}})",
+      "done": "Lastet ned ({{n}})"
+    },
+    "noneActive": "Ingenting lastes ned akkurat nå.",
+    "noneDone": "Ingen nedlastinger er ferdige ennå."
   },
   "settings": {
     "quality": {
       "auto": "Best for denne telefonen",
       "autoHint": "Originalfilen når denne telefonen kan spille den, ellers 1080p",
       "upTo": "Opptil {{size}} for en film på to timer",
-      "title": "Nedlastingskvalitet (musikk er alltid original)"
+      "title": "Nedlastingskvalitet (musikk er alltid original)",
+      "ask": "Spør hver gang",
+      "askHint": "Velg kvalitet hver gang du laster ned en video",
+      "holdHint": "Hold inne Last ned på en video for å velge kvalitet bare for den."
     },
     "serversHint": "Bytt eller legg til servere",
     "atHome": "Ser hjemme",
@@ -154,6 +163,8 @@
     "autoPlayHint": "Når rulleteksten begynner, etter en nedtelling på 10 sekunder som du kan avbryte",
     "binge": "Hopp over nedtellingen",
     "bingeHint": "Gå rett videre til neste episode. Etter tre på rad uten at du har rørt noe, spør vi om du fortsatt ser på",
+    "skipIntros": "Hopp over introer",
+    "skipIntrosHint": "Hopper over introen i en serie av seg selv, i stedet for å vise knappen Hopp over intro",
     "app": "Matinee {{version}}",
     "appBuild": "Matinee {{version}} (bygg {{build}})",
     "server": "Server {{version}}",
@@ -322,7 +333,9 @@
       "machine": "Maskinoversatt",
       "online": "Fra nettet",
       "source": "Undertekster fra OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Hopp over intro",
+    "introSkipped": "Introen ble hoppet over"
   },
   "library": {
     "nothingUnwatched": "Ingenting usett her",
@@ -369,7 +382,11 @@
     "season": "Last ned sesongen",
     "more_one": "Last ned {{count}} til",
     "more_other": "Last ned {{count}} til",
-    "someFailed": "Kunne ikke starte alle nedlastingene"
+    "someFailed": "Kunne ikke starte alle nedlastingene",
+    "couldNotStart": "Kunne ikke starte nedlastingen",
+    "qualityTitle": "Nedlastingskvalitet",
+    "about": "Omtrent {{size}}",
+    "autoShort": "Original eller 1080p"
   },
   "kind": {
     "movie": "Film",

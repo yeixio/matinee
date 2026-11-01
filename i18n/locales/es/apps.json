@@ -127,14 +127,23 @@
       "downloading": "Descargando",
       "starting": "Empezando…",
       "paused": "En pausa"
-    }
+    },
+    "filter": {
+      "active": "Descargando ({{n}})",
+      "done": "Descargado ({{n}})"
+    },
+    "noneActive": "No se está descargando nada ahora.",
+    "noneDone": "Todavía no ha terminado ninguna descarga."
   },
   "settings": {
     "quality": {
       "auto": "Lo mejor para este móvil",
       "autoHint": "El archivo original si este móvil puede reproducirlo; si no, 1080p",
       "upTo": "Hasta {{size}} por una película de dos horas",
-      "title": "Calidad de descarga (la música siempre es la original)"
+      "title": "Calidad de descarga (la música siempre es la original)",
+      "ask": "Preguntar cada vez",
+      "askHint": "Elige una calidad cada vez que descargues un vídeo",
+      "holdHint": "Mantén pulsado Descargar en un vídeo para elegir una calidad solo para él."
     },
     "serversHint": "Cambiar o añadir servidores",
     "atHome": "Viendo en casa",
@@ -154,6 +163,8 @@
     "autoPlayHint": "Cuando empiezan los créditos, tras una cuenta atrás de 10 segundos que puedes cancelar",
     "binge": "Saltar la cuenta atrás",
     "bingeHint": "Pasa directamente al siguiente episodio. Tras tres seguidos sin tocar nada, te preguntamos si sigues viendo",
+    "skipIntros": "Saltar intros",
+    "skipIntrosHint": "Salta la intro de una serie automáticamente, en lugar de mostrar el botón Saltar intro",
     "app": "Matinee {{version}}",
     "appBuild": "Matinee {{version}} (compilación {{build}})",
     "server": "Servidor {{version}}",
@@ -327,7 +338,9 @@
       "machine": "Traducción automática",
       "online": "En línea",
       "source": "Subtítulos de OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Saltar intro",
+    "introSkipped": "Intro saltada"
   },
   "library": {
     "nothingUnwatched": "No queda nada sin ver",
@@ -375,7 +388,11 @@
     "more_many": "Descargar {{count}} más",
     "more_one": "Descargar {{count}} más",
     "more_other": "Descargar {{count}} más",
-    "someFailed": "No se pudieron iniciar todas las descargas"
+    "someFailed": "No se pudieron iniciar todas las descargas",
+    "couldNotStart": "No se pudo iniciar la descarga",
+    "qualityTitle": "Calidad de descarga",
+    "about": "Unos {{size}}",
+    "autoShort": "Original o 1080p"
   },
   "kind": {
     "movie": "Película",

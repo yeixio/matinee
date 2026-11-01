@@ -5,7 +5,7 @@
 // takes seconds.
 
 import { execFileSync } from 'node:child_process'
-import { existsSync, mkdirSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { chromium } from 'playwright'
 import { backdrop, cover, portrait, poster } from './art.mjs'
@@ -42,8 +42,11 @@ function silence(dir, layout) {
   return file
 }
 
-/** A video that holds one picture for its whole length, at one frame every ten seconds. */
-function video(file, still, seconds, { uhd = false, audio = 'stereo', extraAudio = false } = {}) {
+/**
+ * A video that holds one picture for its whole length, at one frame every ten
+ * seconds. chapters, [title, start seconds, end seconds], are marked inside.
+ */
+function video(file, still, seconds, { uhd = false, audio = 'stereo', extraAudio = false, chapters = [] } = {}) {
   if (existsSync(file)) return
   mkdirSync(path.dirname(file), { recursive: true })
   const v = uhd
@@ -56,7 +59,16 @@ function video(file, still, seconds, { uhd = false, audio = 'stereo', extraAudio
   if (extraAudio) args.push('-stream_loop', '-1', '-i', silence(dir, 'stereo'))
   args.push('-t', String(seconds), '-vf', `scale=${uhd ? '3840:2160' : '1920:1080'}`, ...v, '-g', '30', '-map', '0:v', '-map', '1:a', '-c:a', 'copy', '-metadata:s:a:0', 'language=eng')
   if (extraAudio) args.push('-map', '2:a', '-metadata:s:a:1', 'language=eng', '-metadata:s:a:1', "title=Director's commentary")
+  if (chapters.length) {
+    const meta = `${file}.chapters.txt`
+    writeFileSync(meta, ';FFMETADATA1\n' + chapters.map(([title, start, end]) => `[CHAPTER]\nTIMEBASE=1/1000\nSTART=${start * 1000}\nEND=${end * 1000}\ntitle=${title}\n`).join(''))
+    // Inputs given after the options apply to the output only, so put this one first.
+    args.unshift('-i', meta)
+    for (let i = 0; i < args.length; i++) if (args[i] === '-map' && /^\d+:/.test(args[i + 1])) args[i + 1] = args[i + 1].replace(/^\d+/, (n) => String(Number(n) + 1))
+    args.push('-map_chapters', '0')
+  }
   ff(...args, file)
+  if (chapters.length) rmSync(`${file}.chapters.txt`)
 }
 
 function subtitles(file, lines) {
@@ -116,7 +128,10 @@ export async function makeLibrary(root) {
       eps.forEach((_, ei) => {
         const se = `S${String(si + 1).padStart(2, '0')}E${String(ei + 1).padStart(2, '0')}`
         const minutes = s.kids ? 11 : 42 + ((ei * 7) % 9)
-        video(path.join(media, 'TV', s.title, `Season ${si + 1}`, `${s.title} - ${se}.mkv`), path.join(images, `still-${s.id}-${si + 1}-${ei + 1}.jpg`), minutes * 60)
+        // A cold open, then the intro, which players offer to skip.
+        const open = 60 + ei * 15
+        const chapters = s.kids ? [] : [['Cold open', 0, open], ['Intro', open, open + 45], ['Episode', open + 45, minutes * 60]]
+        video(path.join(media, 'TV', s.title, `Season ${si + 1}`, `${s.title} - ${se}.mkv`), path.join(images, `still-${s.id}-${si + 1}-${ei + 1}.jpg`), minutes * 60, { chapters })
       })
     })
   }

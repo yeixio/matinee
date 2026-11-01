@@ -127,14 +127,23 @@
       "downloading": "正在下載",
       "starting": "正在開始…",
       "paused": "已暫停"
-    }
+    },
+    "filter": {
+      "active": "下載中（{{n}}）",
+      "done": "已下載（{{n}}）"
+    },
+    "noneActive": "目前沒有正在下載的內容。",
+    "noneDone": "還沒有下載完成的內容。"
   },
   "settings": {
     "quality": {
       "auto": "最適合此手機",
       "autoHint": "此手機能播放時使用原始檔案，否則為 1080p",
       "upTo": "兩小時電影最多 {{size}}",
-      "title": "下載畫質（音樂一律為原始品質）"
+      "title": "下載畫質（音樂一律為原始品質）",
+      "ask": "每次詢問",
+      "askHint": "每次下載影片時選擇畫質",
+      "holdHint": "長按影片上的「下載」，即可只為它選擇畫質。"
     },
     "serversHint": "切換或加入伺服器",
     "atHome": "在家觀看",
@@ -154,6 +163,8 @@
     "autoPlayHint": "片尾字幕開始時，在可取消的 10 秒倒數後",
     "binge": "跳過倒計時",
     "bingeHint": "直接進入下一集。連續三集都沒有任何操作時，會詢問你是否還在看",
+    "skipIntros": "自動略過片頭",
+    "skipIntrosHint": "自動略過影集片頭，而不是顯示「略過片頭」按鈕",
     "app": "Matinee {{version}}",
     "appBuild": "Matinee {{version}}（建置 {{build}}）",
     "server": "伺服器 {{version}}",
@@ -317,7 +328,9 @@
       "machine": "機器翻譯",
       "online": "網路",
       "source": "字幕來自 OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "略過片頭",
+    "introSkipped": "已略過片頭"
   },
   "library": {
     "nothingUnwatched": "這裡沒有未看的內容",
@@ -363,7 +376,11 @@
     "album": "下載專輯",
     "season": "下載整季",
     "more_other": "再下載 {{count}} 個",
-    "someFailed": "無法開始所有下載"
+    "someFailed": "無法開始所有下載",
+    "couldNotStart": "無法開始下載",
+    "qualityTitle": "下載畫質",
+    "about": "約 {{size}}",
+    "autoShort": "原始檔案或 1080p"
   },
   "kind": {
     "movie": "電影",

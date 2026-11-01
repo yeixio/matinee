@@ -179,6 +179,13 @@ func (s *Store) DeleteProfile(ctx context.Context, id int64) error {
 
 // LibraryVisible reports whether a user may see a library at all.
 func (s *Store) LibraryVisible(ctx context.Context, u User, libraryID int64) (bool, error) {
+	if u.Friend {
+		var n int
+		err := s.db.QueryRowContext(ctx, "SELECT COUNT(*) FROM friend_libraries WHERE user_id = ? AND library_id = ?", u.Account(), libraryID).Scan(&n)
+		if err != nil || n == 0 {
+			return false, err
+		}
+	}
 	if u.KidsLevel == 0 {
 		return true, nil
 	}
@@ -193,8 +200,8 @@ const itemRatingLevel = `COALESCE(i.rating_level,
 	(SELECT g.rating_level FROM items x JOIN items g ON g.id = x.parent_id WHERE x.id = i.parent_id))`
 
 // visibleToMe keeps the items the user in itemFrom's "me" may see: all of
-// them, unless they're a kids profile.
-const visibleToMe = ` AND (
+// them, unless they're a kids profile or a friend (see friends.go).
+const visibleToMe = ` AND NOT ` + friendHidden + ` AND (
 	NOT EXISTS (SELECT 1 FROM users ku WHERE ku.id = me.id AND ku.kids_level > 0) OR
 	EXISTS (SELECT 1 FROM profile_libraries pl JOIN users ku ON ku.id = pl.user_id
 		WHERE pl.user_id = me.id AND pl.library_id = i.library_id AND (pl.mode = 'all' OR ` + itemRatingLevel + ` <= ku.kids_level)))`

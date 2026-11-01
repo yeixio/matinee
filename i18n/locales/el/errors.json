@@ -187,5 +187,21 @@
   "that_isnt_a_media_server_database_matinee_can_read": "αυτό δεν είναι βάση δεδομένων διακομιστή πολυμέσων που μπορεί να διαβάσει το Matinee",
   "the_covers_address_must_start_with_http_or_https": "η διεύθυνση του εξωφύλλου πρέπει να ξεκινά με http:// ή https://",
   "the_image_is_too_big_20_mb_at_most": "η εικόνα είναι πολύ μεγάλη (έως 20 MB)",
-  "couldnt_get_an_image_from_that_address": "δεν ήταν δυνατή η λήψη εικόνας από αυτή τη διεύθυνση"
+  "couldnt_get_an_image_from_that_address": "δεν ήταν δυνατή η λήψη εικόνας από αυτή τη διεύθυνση",
+  "admins_see_every_library_make_them_a_regular_account_first": "οι διαχειριστές βλέπουν όλες τις βιβλιοθήκες· κάντε τον πρώτα κανονικό λογαριασμό",
+  "bad_wait": "μη έγκυρη αναμονή",
+  "invites_last_1_to_30_days": "οι προσκλήσεις διαρκούν 1 έως 30 ημέρες",
+  "join_the_session_first": "μπείτε πρώτα στη συνεδρία",
+  "no_such_invite": "δεν υπάρχει τέτοια πρόσκληση",
+  "pick_at_least_one_library_to_share": "επιλέξτε τουλάχιστον μία βιβλιοθήκη για κοινή χρήση",
+  "that_isnt_in_a_library_shared_with_you": "αυτό δεν είναι σε βιβλιοθήκη κοινόχρηστη με εσάς",
+  "that_session_is_still_going_join_it": "αυτή η συνεδρία συνεχίζεται· μπείτε σε αυτήν",
+  "that_watch_together_code_doesnt_work_it_may_have_ended": "αυτός ο κωδικός παρακολούθησης μαζί δεν λειτουργεί· ίσως έχει τελειώσει",
+  "this_invite_has_expired_ask_for_another": "αυτή η πρόσκληση έληξε· ζητήστε άλλη",
+  "this_invite_link_doesnt_work_ask_for_another": "αυτός ο σύνδεσμος πρόσκλησης δεν λειτουργεί· ζητήστε άλλον",
+  "this_invite_was_already_used": "αυτή η πρόσκληση έχει ήδη χρησιμοποιηθεί",
+  "this_watch_together_session_is_full": "αυτή η συνεδρία παρακολούθησης μαζί είναι γεμάτη",
+  "too_many_watch_together_sessions_right_now": "πάρα πολλές συνεδρίες παρακολούθησης μαζί αυτή τη στιγμή",
+  "unknown_action": "άγνωστη ενέργεια",
+  "usernames_are_at_most_40_characters": "τα ονόματα χρήστη έχουν έως 40 χαρακτήρες"
 }

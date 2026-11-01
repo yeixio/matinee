@@ -516,5 +516,39 @@
     "importing": "正在添加你的节目…",
     "newEpisodesCount_other": "{{count}} 个新单集",
     "imported_other": "已添加 {{count}} 个节目。"
+  },
+  "together": {
+    "title": "一起看",
+    "intro": "和朋友或家人在不同设备上一起看。播放、暂停和跳转对所有人保持同步。",
+    "start": "开始一起看",
+    "share": "把这个代码或链接发给一起看的人。",
+    "shareText": "来 Matinee 和我一起看，代码 {{code}}",
+    "copyLink": "复制链接",
+    "copied": "已复制",
+    "watchingWith_other": "一起看：{{count}} 人",
+    "host": "发起人",
+    "leave": "退出",
+    "end": "为所有人结束",
+    "joinIn": "按播放加入",
+    "did": {
+      "join": "{{name}} 加入了",
+      "leave": "{{name}} 离开了",
+      "play": "{{name}} 开始播放",
+      "pause": "{{name}} 暂停了",
+      "seek": "{{name}} 跳转了"
+    },
+    "typeCode": "输入你收到的代码。",
+    "code": "代码",
+    "next": "下一步",
+    "notFound": "这个代码无效",
+    "tryAnother": "换个代码",
+    "notShared": "这没有共享给你",
+    "notSharedHint": "请让这台服务器的管理者把那个媒体库共享给你。",
+    "hostedBy_other": "{{name}} 等人正在看（目前 {{count}} 人）。一起来看吧。",
+    "waiting": "还没有人在看。",
+    "join": "加入",
+    "shareLink": "分享链接",
+    "you": "（你）",
+    "settingsHint": "用代码和朋友一起看"
   }
 }

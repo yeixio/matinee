@@ -45,7 +45,9 @@
       "online": "Online",
       "remove": "Hapus {{name}}",
       "source": "Subtitle dari OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Lewati intro",
+    "introSkipped": "Intro dilewati"
   },
   "somethingWentWrong": "Terjadi kesalahan",
   "oneMoment": "Sebentar…",
@@ -405,6 +407,7 @@
     "intro": "Matinee membaca setiap file perlahan untuk kualitas, suara, dan bahasanya, dan membacanya lagi setiap kali file berubah.",
     "state": {
       "lookingAt": "Memeriksa {{file}}",
+      "intros": "Mencari intro di {{season}}",
       "working": "Bekerja",
       "waiting": "Menunggu pemutaran selesai",
       "slowDisk": "File lambat dibaca; istirahat beberapa menit",
@@ -428,6 +431,11 @@
         "label": "Mati",
         "hint": "Dijeda sampai kamu menyalakannya lagi."
       }
+    },
+    "intros": {
+      "label": "Temukan intro serial",
+      "hint": "Setelah semua file dianalisis, Matinee mendengarkan awal episode tiap musim untuk menemukan intro yang sama, sehingga pemutar dapat menawarkan Lewati intro.",
+      "progress": "{{done}} dari {{total}} episode diperiksa, {{found}} dengan intro"
     }
   },
   "profileSettings": {
@@ -682,7 +690,9 @@
       "autoPlay": "Putar episode berikutnya",
       "autoPlayHint": "Saat kredit dimulai, episode berikutnya diputar setelah hitung mundur 10 detik yang bisa kamu batalkan.",
       "binge": "Lewati hitung mundur",
-      "bingeHint": "Langsung ke episode berikutnya saat kredit dimulai. Setelah tiga berturut-turut tanpa menyentuh apa pun, kamu akan ditanya apakah masih menonton."
+      "bingeHint": "Langsung ke episode berikutnya saat kredit dimulai. Setelah tiga berturut-turut tanpa menyentuh apa pun, kamu akan ditanya apakah masih menonton.",
+      "skipIntros": "Lewati intro otomatis",
+      "skipIntrosHint": "Melewati intro serial dengan sendirinya, alih-alih menampilkan tombol Lewati intro."
     },
     "trailers": {
       "title": "Trailer",
@@ -931,5 +941,46 @@
     "rate": "Beri rating",
     "yours": "Rating Anda: {{stars}} dari 5",
     "stars": "{{stars}} dari 5"
+  },
+  "invite": {
+    "notWorking": "Undangan ini tidak berfungsi",
+    "title": "Bergabung dengan {{server}}",
+    "invitedBy": "{{name}} mengundangmu ke Matinee.",
+    "invited": "Kamu diundang untuk menonton di Matinee ini.",
+    "shared": "Dibagikan kepadamu",
+    "username": "Pilih nama pengguna",
+    "join": "Buat akun saya",
+    "welcome": "Selamat datang di {{server}}",
+    "welcomeHint": "Kamu bisa menonton langsung di browser ini, atau di ponsel dan TV.",
+    "apps": "Tonton di ponsel atau TV",
+    "appsHint": "Pasang aplikasi Matinee, pilih Tambah server, lalu masukkan alamat ini. Kemudian masuk dengan nama pengguna dan kata sandi barumu.",
+    "copy": "Salin",
+    "getApps": "Tempat mendapatkan aplikasinya",
+    "start": "Mulai menonton"
+  },
+  "friends": {
+    "title": "Teman",
+    "hint": "Undang orang di luar rumahmu. Setiap tautan undangan membuat akun yang hanya melihat perpustakaan yang kamu pilih.",
+    "homeOnly": "Servermu belum bisa dijangkau dari luar rumah, jadi tautan undangan hanya berfungsi di jaringan rumahmu.",
+    "setUpRemote": "Atur akses jarak jauh",
+    "forWho": "Untuk siapa",
+    "forWhoHint": "Opsional, misalnya Sam",
+    "lasts": "Tautan berlaku",
+    "days_other": "{{count}} hari",
+    "libraries": "Perpustakaan",
+    "makeLink": "Buat tautan undangan",
+    "made": "Kirim tautan ini ke temanmu:",
+    "share": "Bagikan",
+    "shareTitle": "Nonton bareng aku di Matinee",
+    "shareText": "Ini undanganmu ke Matinee-ku.",
+    "onceOnly": "Tautan ini berlaku sekali, sampai {{date}}.",
+    "unnamed": "Undangan",
+    "inviteLine": "{{libraries}} · sampai {{date}}",
+    "takeBack": "Tarik kembali",
+    "past_other": "{{count}} undangan terpakai atau kedaluwarsa",
+    "usedBy": "{{name}} bergabung pada {{date}}",
+    "expired": "{{name}} kedaluwarsa pada {{date}}",
+    "badge": "Teman",
+    "seeEverything": "Izinkan melihat semuanya"
   }
 }

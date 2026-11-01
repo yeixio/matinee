@@ -127,14 +127,23 @@
       "downloading": "Đang tải xuống",
       "starting": "Đang bắt đầu…",
       "paused": "Đã tạm dừng"
-    }
+    },
+    "filter": {
+      "active": "Đang tải ({{n}})",
+      "done": "Đã tải ({{n}})"
+    },
+    "noneActive": "Hiện không có gì đang tải.",
+    "noneDone": "Chưa có bản tải nào hoàn tất."
   },
   "settings": {
     "quality": {
       "auto": "Tốt nhất cho điện thoại này",
       "autoHint": "Tệp gốc khi điện thoại này phát được, nếu không thì 1080p",
       "upTo": "Tối đa {{size}} cho một phim dài hai giờ",
-      "title": "Chất lượng tải xuống (nhạc luôn là bản gốc)"
+      "title": "Chất lượng tải xuống (nhạc luôn là bản gốc)",
+      "ask": "Hỏi mỗi lần",
+      "askHint": "Chọn chất lượng mỗi khi bạn tải video",
+      "holdHint": "Nhấn giữ Tải xuống trên một video để chọn chất lượng riêng cho video đó."
     },
     "serversHint": "Đổi hoặc thêm máy chủ",
     "atHome": "Đang xem ở nhà",
@@ -154,6 +163,8 @@
     "autoPlayHint": "Khi phần giới thiệu cuối phim bắt đầu, sau 10 giây đếm ngược mà bạn có thể hủy",
     "binge": "Bỏ qua đếm ngược",
     "bingeHint": "Chuyển thẳng sang tập tiếp theo. Sau ba tập liên tiếp không chạm vào gì, chúng tôi sẽ hỏi bạn có còn đang xem không",
+    "skipIntros": "Tự bỏ qua đoạn mở đầu",
+    "skipIntrosHint": "Tự động nhảy qua đoạn mở đầu của phim bộ thay vì hiện nút Bỏ qua đoạn mở đầu",
     "app": "Matinee {{version}}",
     "appBuild": "Matinee {{version}} (bản dựng {{build}})",
     "server": "Máy chủ {{version}}",
@@ -317,7 +328,9 @@
       "machine": "Dịch máy",
       "online": "Trên mạng",
       "source": "Phụ đề từ OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Bỏ qua đoạn mở đầu",
+    "introSkipped": "Đã bỏ qua đoạn mở đầu"
   },
   "library": {
     "nothingUnwatched": "Không còn gì chưa xem ở đây",
@@ -363,7 +376,11 @@
     "album": "Tải album xuống",
     "season": "Tải mùa xuống",
     "more_other": "Tải thêm {{count}}",
-    "someFailed": "Không thể bắt đầu tất cả bản tải xuống"
+    "someFailed": "Không thể bắt đầu tất cả bản tải xuống",
+    "couldNotStart": "Không thể bắt đầu tải xuống",
+    "qualityTitle": "Chất lượng tải xuống",
+    "about": "Khoảng {{size}}",
+    "autoShort": "Bản gốc hoặc 1080p"
   },
   "kind": {
     "movie": "Phim",

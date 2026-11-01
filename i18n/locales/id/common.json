@@ -516,5 +516,39 @@
     "importing": "Menambahkan acaramu…",
     "newEpisodesCount_other": "{{count}} episode baru",
     "imported_other": "{{count}} acara ditambahkan."
+  },
+  "together": {
+    "title": "Nonton bareng",
+    "intro": "Tonton ini bersama teman atau keluarga di perangkat lain. Putar, jeda, dan lompat tetap sinkron untuk semua orang.",
+    "start": "Mulai nonton bareng",
+    "share": "Kirim kode atau tautan ini ke siapa pun yang ikut menonton.",
+    "shareText": "Nonton bareng aku di Matinee, kode {{code}}",
+    "copyLink": "Salin tautan",
+    "copied": "Disalin",
+    "watchingWith_other": "Nonton bareng: {{count}} orang",
+    "host": "Yang memulai",
+    "leave": "Keluar",
+    "end": "Akhiri untuk semua",
+    "joinIn": "Tekan putar untuk ikut",
+    "did": {
+      "join": "{{name}} ikut bergabung",
+      "leave": "{{name}} keluar",
+      "play": "{{name}} memutar",
+      "pause": "{{name}} menjeda",
+      "seek": "{{name}} melompat"
+    },
+    "typeCode": "Ketik kode yang kamu terima.",
+    "code": "Kode",
+    "next": "Lanjut",
+    "notFound": "Kode itu tidak berfungsi",
+    "tryAnother": "Coba kode lain",
+    "notShared": "Ini tidak dibagikan kepadamu",
+    "notSharedHint": "Minta pemilik server ini untuk membagikan perpustakaan ini kepadamu.",
+    "hostedBy_other": "{{name}} sedang menonton ({{count}} orang sejauh ini). Ikut nonton.",
+    "waiting": "Belum ada yang menonton.",
+    "join": "Ikut nonton",
+    "shareLink": "Bagikan tautan",
+    "you": "(kamu)",
+    "settingsHint": "Ikut menonton bersama teman dengan kode"
   }
 }

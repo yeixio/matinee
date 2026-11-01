@@ -187,5 +187,21 @@
   "that_isnt_a_media_server_database_matinee_can_read": "aceasta nu este o bază de date de server media pe care Matinee o poate citi",
   "the_covers_address_must_start_with_http_or_https": "adresa copertei trebuie să înceapă cu http:// sau https://",
   "the_image_is_too_big_20_mb_at_most": "imaginea este prea mare (cel mult 20 MB)",
-  "couldnt_get_an_image_from_that_address": "nu s-a putut obține o imagine de la acea adresă"
+  "couldnt_get_an_image_from_that_address": "nu s-a putut obține o imagine de la acea adresă",
+  "admins_see_every_library_make_them_a_regular_account_first": "administratorii văd toate bibliotecile; fă-l mai întâi cont obișnuit",
+  "bad_wait": "așteptare nevalidă",
+  "invites_last_1_to_30_days": "invitațiile sunt valabile între 1 și 30 de zile",
+  "join_the_session_first": "alătură-te mai întâi sesiunii",
+  "no_such_invite": "această invitație nu există",
+  "pick_at_least_one_library_to_share": "alege cel puțin o bibliotecă de partajat",
+  "that_isnt_in_a_library_shared_with_you": "acesta nu este într-o bibliotecă partajată cu tine",
+  "that_session_is_still_going_join_it": "sesiunea e încă în desfășurare; alătură-te ei",
+  "that_watch_together_code_doesnt_work_it_may_have_ended": "codul de vizionare împreună nu funcționează; poate s-a încheiat",
+  "this_invite_has_expired_ask_for_another": "invitația a expirat; cere alta",
+  "this_invite_link_doesnt_work_ask_for_another": "linkul de invitație nu funcționează; cere altul",
+  "this_invite_was_already_used": "invitația a fost deja folosită",
+  "this_watch_together_session_is_full": "sesiunea de vizionare împreună este plină",
+  "too_many_watch_together_sessions_right_now": "prea multe sesiuni de vizionare împreună acum",
+  "unknown_action": "acțiune necunoscută",
+  "usernames_are_at_most_40_characters": "numele de utilizator au cel mult 40 de caractere"
 }

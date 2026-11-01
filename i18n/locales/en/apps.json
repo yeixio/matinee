@@ -127,14 +127,23 @@
       "downloading": "Downloading",
       "starting": "Starting…",
       "paused": "Paused"
-    }
+    },
+    "filter": {
+      "active": "Downloading ({{n}})",
+      "done": "Downloaded ({{n}})"
+    },
+    "noneActive": "Nothing is downloading right now.",
+    "noneDone": "Nothing has finished downloading yet."
   },
   "settings": {
     "quality": {
       "auto": "Best for this phone",
       "autoHint": "The original file when this phone plays it, otherwise 1080p",
       "upTo": "Up to {{size}} for a two-hour movie",
-      "title": "Download quality (music is always the original)"
+      "title": "Download quality (music is always the original)",
+      "ask": "Ask each time",
+      "askHint": "Pick a quality whenever you download a video",
+      "holdHint": "Hold Download on any video to pick a quality just for it."
     },
     "serversHint": "Switch or add servers",
     "atHome": "Watching at home",
@@ -154,6 +163,8 @@
     "autoPlayHint": "When the credits start, after a 10-second countdown you can cancel",
     "binge": "Skip the countdown",
     "bingeHint": "Go straight into the next episode. After three in a row untouched, you’re asked if you’re still watching",
+    "skipIntros": "Skip intros",
+    "skipIntrosHint": "Jump past a show’s intro by itself, instead of offering a Skip intro button",
     "app": "Matinee {{version}}",
     "appBuild": "Matinee {{version}} (build {{build}})",
     "server": "Server {{version}}",
@@ -322,7 +333,9 @@
       "machine": "Machine translated",
       "online": "Online",
       "source": "Subtitles from OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Skip intro",
+    "introSkipped": "Skipped the intro"
   },
   "library": {
     "nothingUnwatched": "Nothing unwatched here",
@@ -369,7 +382,11 @@
     "season": "Download season",
     "more_one": "Download {{count}} more",
     "more_other": "Download {{count}} more",
-    "someFailed": "Couldn't start every download"
+    "someFailed": "Couldn't start every download",
+    "couldNotStart": "Couldn't start the download",
+    "qualityTitle": "Download quality",
+    "about": "About {{size}}",
+    "autoShort": "Original or 1080p"
   },
   "kind": {
     "movie": "Movie",

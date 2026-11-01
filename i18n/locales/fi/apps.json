@@ -127,14 +127,23 @@
       "downloading": "Ladataan",
       "starting": "Aloitetaan…",
       "paused": "Tauolla"
-    }
+    },
+    "filter": {
+      "active": "Ladataan ({{n}})",
+      "done": "Ladatut ({{n}})"
+    },
+    "noneActive": "Mitään ei ladata juuri nyt.",
+    "noneDone": "Yksikään lataus ei ole vielä valmis."
   },
   "settings": {
     "quality": {
       "auto": "Paras tälle puhelimelle",
       "autoHint": "Alkuperäinen tiedosto, jos tämä puhelin voi toistaa sen, muuten 1080p",
       "upTo": "Enintään {{size}} kahden tunnin elokuvalle",
-      "title": "Latauslaatu (musiikki on aina alkuperäinen)"
+      "title": "Latauslaatu (musiikki on aina alkuperäinen)",
+      "ask": "Kysy joka kerta",
+      "askHint": "Valitse laatu aina kun lataat videon",
+      "holdHint": "Pidä Lataa-painiketta painettuna videossa valitaksesi laadun vain sille."
     },
     "serversHint": "Vaihda tai lisää palvelimia",
     "atHome": "Katsot kotona",
@@ -154,6 +163,8 @@
     "autoPlayHint": "Kun lopputekstit alkavat, 10 sekunnin lähtölaskennan jälkeen, jonka voit perua",
     "binge": "Ohita lähtölaskenta",
     "bingeHint": "Siirry suoraan seuraavaan jaksoon. Kun kolme on mennyt peräkkäin koskematta mihinkään, kysymme, katsotko yhä",
+    "skipIntros": "Ohita alkutunnarit",
+    "skipIntrosHint": "Hyppää sarjan alkutunnarin yli itsestään sen sijaan, että näyttäisi Ohita alkutunnari -painikkeen",
     "app": "Matinee {{version}}",
     "appBuild": "Matinee {{version}} (koontiversio {{build}})",
     "server": "Palvelin {{version}}",
@@ -322,7 +333,9 @@
       "machine": "Konekäännetty",
       "online": "Verkosta",
       "source": "Tekstitykset: OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Ohita alkutunnari",
+    "introSkipped": "Alkutunnari ohitettiin"
   },
   "library": {
     "nothingUnwatched": "Ei katsomatonta täällä",
@@ -369,7 +382,11 @@
     "season": "Lataa kausi",
     "more_one": "Lataa {{count}} lisää",
     "more_other": "Lataa {{count}} lisää",
-    "someFailed": "Kaikkia latauksia ei voitu aloittaa"
+    "someFailed": "Kaikkia latauksia ei voitu aloittaa",
+    "couldNotStart": "Latausta ei voitu aloittaa",
+    "qualityTitle": "Latauslaatu",
+    "about": "Noin {{size}}",
+    "autoShort": "Alkuperäinen tai 1080p"
   },
   "kind": {
     "movie": "Elokuva",

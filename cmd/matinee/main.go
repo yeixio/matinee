@@ -30,6 +30,7 @@ import (
 	"github.com/yeixio/matinee/internal/discovery"
 	"github.com/yeixio/matinee/internal/download"
 	"github.com/yeixio/matinee/internal/hwaccel"
+	"github.com/yeixio/matinee/internal/intro"
 	"github.com/yeixio/matinee/internal/kube"
 	"github.com/yeixio/matinee/internal/live"
 	"github.com/yeixio/matinee/internal/metadata"
@@ -44,6 +45,7 @@ import (
 	"github.com/yeixio/matinee/internal/stream"
 	"github.com/yeixio/matinee/internal/subtitle"
 	"github.com/yeixio/matinee/internal/theme"
+	"github.com/yeixio/matinee/internal/together"
 	"github.com/yeixio/matinee/internal/version"
 	"github.com/yeixio/matinee/web"
 )
@@ -154,6 +156,9 @@ func run() error {
 		Store: db, Log: log,
 		Prober: probe.Prober{Path: cfg.FFprobePath, Timeout: 2 * time.Minute, LowPriority: true},
 		Busy:   func() bool { return transcoder.Active() > 0 },
+		// Then it finds each TV episode's intro by matching the audio of a
+		// season's episodes (see internal/intro).
+		Intros: &intro.Detector{Store: db, FFmpeg: cfg.FFmpegPath, Log: log, LowPriority: probe.LowerPriority},
 	}
 	// Plugins add library kinds, details and event handlers (internal/plugin).
 	var plugins *plugin.Manager
@@ -171,6 +176,9 @@ func run() error {
 	// automation (internal/live).
 	hub := live.New()
 	go hub.Run(ctx)
+	// Watch together sessions (internal/together).
+	sessions := together.New()
+	go sessions.Run(ctx)
 	scanner.Added = func(ctx context.Context, lib store.Library, id int64) {
 		plugins.ItemAdded(ctx, id)
 		if it, err := db.Item(ctx, 0, id); err == nil {
@@ -208,7 +216,7 @@ func run() error {
 		HomeListener: cfg.HomeAddr != "", ThemeDir: cfg.ThemeDir(),
 		PublicURL: cfg.PublicURL,
 		Plugins:   plugins, PluginCatalog: cfg.PluginCatalog,
-		Live: hub, UUID: uuid,
+		Live: hub, Together: sessions, UUID: uuid,
 	}
 	if _, problems := theme.Load(cfg.ThemeDir()); len(problems) > 0 {
 		for _, p := range problems {

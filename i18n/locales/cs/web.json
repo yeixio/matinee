@@ -45,7 +45,9 @@
       "online": "Z internetu",
       "remove": "Odebrat {{name}}",
       "source": "Titulky z OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Přeskočit úvod",
+    "introSkipped": "Úvod přeskočen"
   },
   "somethingWentWrong": "Něco se pokazilo",
   "oneMoment": "Moment…",
@@ -414,6 +416,7 @@
     "intro": "Matinee pomalu čte každý soubor kvůli kvalitě, zvuku a jazykům, a znovu pokaždé, když se soubor změní.",
     "state": {
       "lookingAt": "Zkoumá {{file}}",
+      "intros": "Hledání úvodů v: {{season}}",
       "working": "Pracuje",
       "waiting": "Čeká na konec přehrávání",
       "slowDisk": "Soubory se čtou pomalu; pár minut odpočívá",
@@ -440,6 +443,11 @@
         "label": "Vypnuto",
         "hint": "Pozastaveno, dokud to znovu nezapneš."
       }
+    },
+    "intros": {
+      "label": "Hledat úvody seriálů",
+      "hint": "Jakmile jsou všechny soubory analyzované, Matinee poslouchá začátky epizod každé řady a hledá úvod, který mají společný, aby přehrávače mohly nabídnout Přeskočit úvod.",
+      "progress": "Zkontrolováno {{done}} z {{total}} epizod, {{found}} s úvodem"
     }
   },
   "profileSettings": {
@@ -694,7 +702,9 @@
       "autoPlay": "Přehrát další díl",
       "autoPlayHint": "Když začnou titulky, další díl se spustí po 10sekundovém odpočtu, který můžeš zrušit.",
       "binge": "Přeskočit odpočet",
-      "bingeHint": "Při začátku titulků rovnou přejde na další díl. Po třech dílech v řadě bez jakékoli akce se tě zeptá, jestli se ještě díváš."
+      "bingeHint": "Při začátku titulků rovnou přejde na další díl. Po třech dílech v řadě bez jakékoli akce se tě zeptá, jestli se ještě díváš.",
+      "skipIntros": "Přeskakovat úvody",
+      "skipIntrosHint": "Úvod seriálu přeskočí sám, místo aby nabízel tlačítko Přeskočit úvod."
     },
     "trailers": {
       "title": "Upoutávky",
@@ -943,5 +953,52 @@
     "rate": "Ohodnotit",
     "yours": "Vaše hodnocení: {{stars}} z 5",
     "stars": "{{stars}} z 5"
+  },
+  "invite": {
+    "notWorking": "Tato pozvánka nefunguje",
+    "title": "Připojit se k {{server}}",
+    "invitedBy": "{{name}} vás zve ke sledování v Matinee.",
+    "invited": "Máte pozvánku ke sledování v tomto Matinee.",
+    "shared": "Sdíleno s vámi",
+    "username": "Vyberte si uživatelské jméno",
+    "join": "Vytvořit účet",
+    "welcome": "Vítejte v {{server}}",
+    "welcomeHint": "Sledovat můžete přímo tady v prohlížeči, nebo na telefonu a televizi.",
+    "apps": "Sledovat na telefonu nebo televizi",
+    "appsHint": "Stáhněte si aplikaci Matinee, zvolte Přidat server a zadejte tuto adresu. Pak se přihlaste novým uživatelským jménem a heslem.",
+    "copy": "Kopírovat",
+    "getApps": "Kde získat aplikace",
+    "start": "Začít sledovat"
+  },
+  "friends": {
+    "title": "Přátelé",
+    "hint": "Pozvěte lidi mimo vaši domácnost. Každý odkaz s pozvánkou vytvoří jeden účet, který vidí jen vybrané knihovny.",
+    "homeOnly": "Váš server zatím není dostupný zvenku, takže odkazy s pozvánkou fungují jen v domácí síti.",
+    "setUpRemote": "Nastavit vzdálený přístup",
+    "forWho": "Pro koho",
+    "forWhoHint": "Nepovinné, třeba Sam",
+    "lasts": "Odkaz platí",
+    "days_one": "{{count}} den",
+    "days_few": "{{count}} dny",
+    "days_many": "{{count}} dne",
+    "days_other": "{{count}} dní",
+    "libraries": "Knihovny",
+    "makeLink": "Vytvořit odkaz s pozvánkou",
+    "made": "Pošlete tento odkaz svému příteli:",
+    "share": "Sdílet",
+    "shareTitle": "Sleduj se mnou v Matinee",
+    "shareText": "Tady je tvoje pozvánka do mého Matinee.",
+    "onceOnly": "Funguje jednou, do {{date}}.",
+    "unnamed": "Pozvánka",
+    "inviteLine": "{{libraries}} · do {{date}}",
+    "takeBack": "Zrušit",
+    "past_one": "{{count}} použitá nebo prošlá pozvánka",
+    "past_few": "{{count}} použité nebo prošlé pozvánky",
+    "past_many": "{{count}} použité nebo prošlé pozvánky",
+    "past_other": "{{count}} použitých nebo prošlých pozvánek",
+    "usedBy": "{{name}} se připojil(a) {{date}}",
+    "expired": "{{name}}: platnost skončila {{date}}",
+    "badge": "Přítel",
+    "seeEverything": "Ukázat vše"
   }
 }

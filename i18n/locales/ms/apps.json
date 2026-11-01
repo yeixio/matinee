@@ -127,14 +127,23 @@
       "downloading": "Memuat turun",
       "starting": "Bermula…",
       "paused": "Dijeda"
-    }
+    },
+    "filter": {
+      "active": "Memuat turun ({{n}})",
+      "done": "Dimuat turun ({{n}})"
+    },
+    "noneActive": "Tiada apa-apa yang dimuat turun sekarang.",
+    "noneDone": "Belum ada muat turun yang selesai."
   },
   "settings": {
     "quality": {
       "auto": "Terbaik untuk telefon ini",
       "autoHint": "Fail asal jika telefon ini boleh memainkannya, jika tidak 1080p",
       "upTo": "Sehingga {{size}} untuk filem dua jam",
-      "title": "Kualiti muat turun (muzik sentiasa asal)"
+      "title": "Kualiti muat turun (muzik sentiasa asal)",
+      "ask": "Tanya setiap kali",
+      "askHint": "Pilih kualiti setiap kali anda memuat turun video",
+      "holdHint": "Tahan Muat turun pada video untuk memilih kualiti untuknya sahaja."
     },
     "serversHint": "Tukar atau tambah pelayan",
     "atHome": "Menonton di rumah",
@@ -154,6 +163,8 @@
     "autoPlayHint": "Apabila kredit bermula, selepas kiraan detik 10 saat yang boleh anda batalkan",
     "binge": "Langkau kira detik",
     "bingeHint": "Terus ke episod seterusnya. Selepas tiga berturut-turut tanpa menyentuh apa-apa, kami bertanya sama ada anda masih menonton",
+    "skipIntros": "Langkau intro secara automatik",
+    "skipIntrosHint": "Melangkau intro rancangan dengan sendirinya, dan bukannya menunjukkan butang Langkau intro",
     "app": "Matinee {{version}}",
     "appBuild": "Matinee {{version}} (binaan {{build}})",
     "server": "Pelayan {{version}}",
@@ -317,7 +328,9 @@
       "machine": "Terjemahan mesin",
       "online": "Dalam talian",
       "source": "Sari kata daripada OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Langkau intro",
+    "introSkipped": "Intro dilangkau"
   },
   "library": {
     "nothingUnwatched": "Tiada yang belum ditonton di sini",
@@ -363,7 +376,11 @@
     "album": "Muat turun album",
     "season": "Muat turun musim",
     "more_other": "Muat turun {{count}} lagi",
-    "someFailed": "Tidak semua muat turun dapat dimulakan"
+    "someFailed": "Tidak semua muat turun dapat dimulakan",
+    "couldNotStart": "Tidak dapat memulakan muat turun",
+    "qualityTitle": "Kualiti muat turun",
+    "about": "Kira-kira {{size}}",
+    "autoShort": "Asal atau 1080p"
   },
   "kind": {
     "movie": "Filem",

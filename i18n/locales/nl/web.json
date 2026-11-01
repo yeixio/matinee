@@ -45,7 +45,9 @@
       "online": "Online",
       "remove": "{{name}} verwijderen",
       "source": "Ondertitels van OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Intro overslaan",
+    "introSkipped": "Intro overgeslagen"
   },
   "somethingWentWrong": "Er ging iets mis",
   "oneMoment": "Een moment…",
@@ -408,6 +410,7 @@
     "intro": "Matinee leest elk bestand langzaam voor de kwaliteit, het geluid en de talen, en opnieuw zodra een bestand verandert.",
     "state": {
       "lookingAt": "Bekijkt {{file}}",
+      "intros": "Intro’s zoeken in {{season}}",
       "working": "Bezig",
       "waiting": "Wacht tot het afspelen klaar is",
       "slowDisk": "Bestanden lezen traag; een paar minuten pauze",
@@ -432,6 +435,11 @@
         "label": "Uit",
         "hint": "Gepauzeerd tot je het weer aanzet."
       }
+    },
+    "intros": {
+      "label": "Intro’s van series vinden",
+      "hint": "Zodra alle bestanden zijn geanalyseerd, luistert Matinee naar het begin van de afleveringen van elk seizoen om de intro te vinden die ze delen, zodat spelers Intro overslaan kunnen aanbieden.",
+      "progress": "{{done}} van {{total}} afleveringen gecontroleerd, {{found}} met een intro"
     }
   },
   "profileSettings": {
@@ -686,7 +694,9 @@
       "autoPlay": "De volgende aflevering afspelen",
       "autoPlayHint": "Als de aftiteling begint, start de volgende aflevering na een aftelling van 10 seconden die je kunt annuleren.",
       "binge": "De aftelling overslaan",
-      "bingeHint": "Meteen door naar de volgende aflevering als de aftiteling begint. Na drie op rij zonder iets aan te raken, wordt gevraagd of je nog kijkt."
+      "bingeHint": "Meteen door naar de volgende aflevering als de aftiteling begint. Na drie op rij zonder iets aan te raken, wordt gevraagd of je nog kijkt.",
+      "skipIntros": "Intro’s overslaan",
+      "skipIntrosHint": "Slaat de intro van een serie vanzelf over, in plaats van een knop Intro overslaan te tonen."
     },
     "trailers": {
       "title": "Trailers",
@@ -935,5 +945,48 @@
     "rate": "Beoordelen",
     "yours": "Jouw beoordeling: {{stars}} van 5",
     "stars": "{{stars}} van 5"
+  },
+  "invite": {
+    "notWorking": "Deze uitnodiging werkt niet",
+    "title": "Lid worden van {{server}}",
+    "invitedBy": "{{name}} heeft je uitgenodigd om mee te kijken op Matinee.",
+    "invited": "Je bent uitgenodigd om op deze Matinee te kijken.",
+    "shared": "Met je gedeeld",
+    "username": "Kies een gebruikersnaam",
+    "join": "Mijn account maken",
+    "welcome": "Welkom bij {{server}}",
+    "welcomeHint": "Je kunt hier in je browser kijken, of op je telefoon en tv.",
+    "apps": "Kijken op je telefoon of tv",
+    "appsHint": "Installeer de Matinee-app, kies Server toevoegen en typ dit adres. Log daarna in met je nieuwe gebruikersnaam en wachtwoord.",
+    "copy": "Kopiëren",
+    "getApps": "Waar je de apps vindt",
+    "start": "Beginnen met kijken"
+  },
+  "friends": {
+    "title": "Vrienden",
+    "hint": "Nodig mensen van buiten je huishouden uit. Elke uitnodigingslink maakt één account dat alleen de bibliotheken ziet die je kiest.",
+    "homeOnly": "Je server is nog niet van buitenaf bereikbaar, dus uitnodigingslinks werken alleen op je thuisnetwerk.",
+    "setUpRemote": "Toegang op afstand instellen",
+    "forWho": "Voor wie",
+    "forWhoHint": "Optioneel, bijvoorbeeld Sam",
+    "lasts": "Link werkt",
+    "days_one": "{{count}} dag",
+    "days_other": "{{count}} dagen",
+    "libraries": "Bibliotheken",
+    "makeLink": "Uitnodigingslink maken",
+    "made": "Stuur deze link naar je vriend:",
+    "share": "Delen",
+    "shareTitle": "Kijk met me mee op Matinee",
+    "shareText": "Hier is je uitnodiging voor mijn Matinee.",
+    "onceOnly": "Hij werkt één keer, tot {{date}}.",
+    "unnamed": "Uitnodiging",
+    "inviteLine": "{{libraries}} · tot {{date}}",
+    "takeBack": "Intrekken",
+    "past_one": "{{count}} gebruikte of verlopen uitnodiging",
+    "past_other": "{{count}} gebruikte of verlopen uitnodigingen",
+    "usedBy": "{{name}} deed mee op {{date}}",
+    "expired": "{{name}} verliep op {{date}}",
+    "badge": "Vriend",
+    "seeEverything": "Alles laten zien"
   }
 }

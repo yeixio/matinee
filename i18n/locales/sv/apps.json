@@ -127,14 +127,23 @@
       "downloading": "Laddar ned",
       "starting": "Startar…",
       "paused": "Pausad"
-    }
+    },
+    "filter": {
+      "active": "Laddar ned ({{n}})",
+      "done": "Nedladdade ({{n}})"
+    },
+    "noneActive": "Inget laddas ned just nu.",
+    "noneDone": "Ingen nedladdning är klar än."
   },
   "settings": {
     "quality": {
       "auto": "Bäst för den här telefonen",
       "autoHint": "Originalfilen om den här telefonen kan spela den, annars 1080p",
       "upTo": "Upp till {{size}} för en två timmar lång film",
-      "title": "Nedladdningskvalitet (musik är alltid original)"
+      "title": "Nedladdningskvalitet (musik är alltid original)",
+      "ask": "Fråga varje gång",
+      "askHint": "Välj kvalitet varje gång du laddar ned en video",
+      "holdHint": "Håll in Ladda ned på en video för att välja kvalitet bara för den."
     },
     "serversHint": "Byt eller lägg till servrar",
     "atHome": "Tittar hemma",
@@ -154,6 +163,8 @@
     "autoPlayHint": "När eftertexterna börjar, efter en nedräkning på 10 sekunder som du kan avbryta",
     "binge": "Hoppa över nedräkningen",
     "bingeHint": "Gå direkt till nästa avsnitt. Efter tre i rad utan att du rört något frågar vi om du fortfarande tittar",
+    "skipIntros": "Hoppa över intron",
+    "skipIntrosHint": "Hoppar över en series intro av sig själv, i stället för att visa knappen Hoppa över intro",
     "app": "Matinee {{version}}",
     "appBuild": "Matinee {{version}} (bygge {{build}})",
     "server": "Server {{version}}",
@@ -322,7 +333,9 @@
       "machine": "Maskinöversatta",
       "online": "Från nätet",
       "source": "Undertexter från OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Hoppa över intro",
+    "introSkipped": "Introt hoppades över"
   },
   "library": {
     "nothingUnwatched": "Inget osett här",
@@ -369,7 +382,11 @@
     "season": "Ladda ned säsongen",
     "more_one": "Ladda ned {{count}} till",
     "more_other": "Ladda ned {{count}} till",
-    "someFailed": "Kunde inte starta alla nedladdningar"
+    "someFailed": "Kunde inte starta alla nedladdningar",
+    "couldNotStart": "Det gick inte att starta nedladdningen",
+    "qualityTitle": "Nedladdningskvalitet",
+    "about": "Cirka {{size}}",
+    "autoShort": "Original eller 1080p"
   },
   "kind": {
     "movie": "Film",

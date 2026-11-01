@@ -127,14 +127,23 @@
       "downloading": "Pobieranie",
       "starting": "Rozpoczynanie…",
       "paused": "Wstrzymano"
-    }
+    },
+    "filter": {
+      "active": "Pobieranie ({{n}})",
+      "done": "Pobrane ({{n}})"
+    },
+    "noneActive": "Nic się teraz nie pobiera.",
+    "noneDone": "Żadne pobieranie jeszcze się nie zakończyło."
   },
   "settings": {
     "quality": {
       "auto": "Najlepsza dla tego telefonu",
       "autoHint": "Oryginalny plik, jeśli ten telefon go odtworzy, w przeciwnym razie 1080p",
       "upTo": "Do {{size}} na dwugodzinny film",
-      "title": "Jakość pobierania (muzyka zawsze w oryginale)"
+      "title": "Jakość pobierania (muzyka zawsze w oryginale)",
+      "ask": "Pytaj za każdym razem",
+      "askHint": "Wybieraj jakość przy każdym pobieraniu wideo",
+      "holdHint": "Przytrzymaj Pobierz przy filmie, aby wybrać jakość tylko dla niego."
     },
     "serversHint": "Zmień lub dodaj serwery",
     "atHome": "Oglądasz w domu",
@@ -154,6 +163,8 @@
     "autoPlayHint": "Gdy zaczynają się napisy końcowe, po 10-sekundowym odliczaniu, które możesz anulować",
     "binge": "Pomiń odliczanie",
     "bingeHint": "Od razu przechodzi do następnego odcinka. Po trzech z rzędu bez dotykania niczego zapytamy, czy nadal oglądasz",
+    "skipIntros": "Pomijaj czołówki",
+    "skipIntrosHint": "Automatycznie przeskakuje czołówkę serialu zamiast pokazywać przycisk Pomiń czołówkę",
     "app": "Matinee {{version}}",
     "appBuild": "Matinee {{version}} (kompilacja {{build}})",
     "server": "Serwer {{version}}",
@@ -332,7 +343,9 @@
       "machine": "Tłumaczenie maszynowe",
       "online": "Z internetu",
       "source": "Napisy z OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Pomiń czołówkę",
+    "introSkipped": "Pominięto czołówkę"
   },
   "library": {
     "nothingUnwatched": "Nie ma tu nic nieobejrzanego",
@@ -381,7 +394,11 @@
     "more_many": "Pobierz jeszcze {{count}}",
     "more_one": "Pobierz jeszcze {{count}}",
     "more_other": "Pobierz jeszcze {{count}}",
-    "someFailed": "Nie udało się rozpocząć wszystkich pobrań"
+    "someFailed": "Nie udało się rozpocząć wszystkich pobrań",
+    "couldNotStart": "Nie udało się rozpocząć pobierania",
+    "qualityTitle": "Jakość pobierania",
+    "about": "Około {{size}}",
+    "autoShort": "Oryginał lub 1080p"
   },
   "kind": {
     "movie": "Film",

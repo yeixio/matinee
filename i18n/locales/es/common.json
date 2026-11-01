@@ -576,5 +576,43 @@
     "imported_many": "Se añadieron {{count}} de programas.",
     "newEpisodesCount_other": "{{count}} episodios nuevos",
     "imported_other": "Se añadieron {{count}} programas."
+  },
+  "together": {
+    "title": "Ver juntos",
+    "intro": "Mira esto con amigos o familia en otros dispositivos. Reproducir, pausar y saltar se mantienen sincronizados para todos.",
+    "start": "Empezar a ver juntos",
+    "share": "Envía este código o enlace a quien se una.",
+    "shareText": "Mira conmigo en Matinee con el código {{code}}",
+    "copyLink": "Copiar enlace",
+    "copied": "Copiado",
+    "watchingWith_one": "Viendo juntos: {{count}} persona",
+    "watchingWith_many": "Viendo juntos: {{count}} personas",
+    "watchingWith_other": "Viendo juntos: {{count}} personas",
+    "host": "Lo empezó",
+    "leave": "Salir",
+    "end": "Terminar para todos",
+    "joinIn": "Pulsa reproducir para unirte",
+    "did": {
+      "join": "{{name}} se unió",
+      "leave": "{{name}} se fue",
+      "play": "{{name}} pulsó reproducir",
+      "pause": "{{name}} pausó",
+      "seek": "{{name}} saltó"
+    },
+    "typeCode": "Escribe el código que te compartieron.",
+    "code": "Código",
+    "next": "Siguiente",
+    "notFound": "Ese código no funciona",
+    "tryAnother": "Probar otro código",
+    "notShared": "Esto no está compartido contigo",
+    "notSharedHint": "Pide a quien administra este servidor que comparta esa biblioteca contigo.",
+    "hostedBy_one": "{{name}} está viendo. Únete.",
+    "hostedBy_many": "{{name}} y otros están viendo ({{count}} por ahora). Únete.",
+    "hostedBy_other": "{{name}} y otros están viendo ({{count}} por ahora). Únete.",
+    "waiting": "Nadie está viendo ahora.",
+    "join": "Unirse",
+    "shareLink": "Compartir enlace",
+    "you": "(tú)",
+    "settingsHint": "Únete a tus amigos con un código"
   }
 }

@@ -187,5 +187,21 @@
   "that_isnt_a_media_server_database_matinee_can_read": "to nie jest baza danych serwera multimediów, którą Matinee potrafi odczytać",
   "the_covers_address_must_start_with_http_or_https": "adres okładki musi zaczynać się od http:// lub https://",
   "the_image_is_too_big_20_mb_at_most": "obraz jest za duży (maksymalnie 20 MB)",
-  "couldnt_get_an_image_from_that_address": "nie udało się pobrać obrazu spod tego adresu"
+  "couldnt_get_an_image_from_that_address": "nie udało się pobrać obrazu spod tego adresu",
+  "admins_see_every_library_make_them_a_regular_account_first": "administratorzy widzą wszystkie biblioteki; najpierw zmień to na zwykłe konto",
+  "bad_wait": "nieprawidłowy czas oczekiwania",
+  "invites_last_1_to_30_days": "zaproszenia działają od 1 do 30 dni",
+  "join_the_session_first": "najpierw dołącz do sesji",
+  "no_such_invite": "nie ma takiego zaproszenia",
+  "pick_at_least_one_library_to_share": "wybierz co najmniej jedną bibliotekę do udostępnienia",
+  "that_isnt_in_a_library_shared_with_you": "tego nie ma w żadnej bibliotece udostępnionej Tobie",
+  "that_session_is_still_going_join_it": "ta sesja wciąż trwa; dołącz do niej",
+  "that_watch_together_code_doesnt_work_it_may_have_ended": "ten kod Oglądaj razem nie działa; sesja mogła się zakończyć",
+  "this_invite_has_expired_ask_for_another": "to zaproszenie wygasło; poproś o nowe",
+  "this_invite_link_doesnt_work_ask_for_another": "ten link z zaproszeniem nie działa; poproś o nowy",
+  "this_invite_was_already_used": "to zaproszenie zostało już wykorzystane",
+  "this_watch_together_session_is_full": "ta sesja Oglądaj razem jest pełna",
+  "too_many_watch_together_sessions_right_now": "teraz jest za dużo sesji Oglądaj razem",
+  "unknown_action": "nieznana czynność",
+  "usernames_are_at_most_40_characters": "nazwy użytkownika mają najwyżej 40 znaków"
 }

@@ -576,5 +576,43 @@
     "imported_few": "S-au adăugat {{count}} emisiuni.",
     "newEpisodesCount_other": "{{count}} de episoade noi",
     "imported_other": "S-au adăugat {{count}} de emisiuni."
+  },
+  "together": {
+    "title": "Vizionare împreună",
+    "intro": "Urmărește asta cu prieteni sau familia pe alte dispozitive. Redarea, pauza și salturile rămân sincronizate pentru toți.",
+    "start": "Pornește vizionarea împreună",
+    "share": "Trimite acest cod sau link celor care se alătură.",
+    "shareText": "Urmărește cu mine pe Matinee cu codul {{code}}",
+    "copyLink": "Copiază linkul",
+    "copied": "Copiat",
+    "watchingWith_one": "Vizionare împreună: {{count}} persoană",
+    "watchingWith_few": "Vizionare împreună: {{count}} persoane",
+    "watchingWith_other": "Vizionare împreună: {{count}} de persoane",
+    "host": "A pornit-o",
+    "leave": "Ieși",
+    "end": "Încheie pentru toți",
+    "joinIn": "Apasă redare ca să te alături",
+    "did": {
+      "join": "{{name}} s-a alăturat",
+      "leave": "{{name}} a plecat",
+      "play": "{{name}} a apăsat redare",
+      "pause": "{{name}} a pus pauză",
+      "seek": "{{name}} a sărit"
+    },
+    "typeCode": "Scrie codul pe care l-ai primit.",
+    "code": "Cod",
+    "next": "Înainte",
+    "notFound": "Codul nu funcționează",
+    "tryAnother": "Încearcă alt cod",
+    "notShared": "Acest titlu nu e partajat cu tine",
+    "notSharedHint": "Roagă persoana care administrează serverul să partajeze biblioteca cu tine.",
+    "hostedBy_one": "{{name}} urmărește. Alătură-te.",
+    "hostedBy_few": "{{name}} și alții urmăresc ({{count}} până acum). Alătură-te.",
+    "hostedBy_other": "{{name}} și alții urmăresc ({{count}} până acum). Alătură-te.",
+    "waiting": "Nu urmărește nimeni acum.",
+    "join": "Alătură-te",
+    "shareLink": "Partajează linkul",
+    "you": "(tu)",
+    "settingsHint": "Alătură-te prietenilor cu un cod"
   }
 }

@@ -127,14 +127,23 @@
       "downloading": "İndiriliyor",
       "starting": "Başlıyor…",
       "paused": "Duraklatıldı"
-    }
+    },
+    "filter": {
+      "active": "İndiriliyor ({{n}})",
+      "done": "İndirildi ({{n}})"
+    },
+    "noneActive": "Şu anda hiçbir şey indirilmiyor.",
+    "noneDone": "Henüz biten bir indirme yok."
   },
   "settings": {
     "quality": {
       "auto": "Bu telefon için en iyisi",
       "autoHint": "Bu telefon oynatabiliyorsa orijinal dosya, yoksa 1080p",
       "upTo": "İki saatlik bir film için en fazla {{size}}",
-      "title": "İndirme kalitesi (müzik her zaman orijinaldir)"
+      "title": "İndirme kalitesi (müzik her zaman orijinaldir)",
+      "ask": "Her seferinde sor",
+      "askHint": "Her video indirişinde bir kalite seç",
+      "holdHint": "Yalnızca o video için kalite seçmek üzere İndir'e basılı tut."
     },
     "serversHint": "Sunucu değiştir veya ekle",
     "atHome": "Evde izliyorsunuz",
@@ -154,6 +163,8 @@
     "autoPlayHint": "Jenerik başladığında, iptal edebileceğiniz 10 saniyelik bir geri sayımdan sonra",
     "binge": "Geri sayımı atla",
     "bingeHint": "Doğrudan sonraki bölüme geçer. Hiçbir şeye dokunmadan üst üste üç bölümden sonra hâlâ izleyip izlemediğiniz sorulur",
+    "skipIntros": "Girişleri atla",
+    "skipIntrosHint": "Bir dizinin girişini, Girişi atla düğmesi göstermek yerine kendiliğinden atlar",
     "app": "Matinee {{version}}",
     "appBuild": "Matinee {{version}} (derleme {{build}})",
     "server": "Sunucu {{version}}",
@@ -322,7 +333,9 @@
       "machine": "Makine çevirisi",
       "online": "İnternetten",
       "source": "Altyazılar OpenSubtitles.com'dan"
-    }
+    },
+    "skipIntro": "Girişi atla",
+    "introSkipped": "Giriş atlandı"
   },
   "library": {
     "nothingUnwatched": "Burada izlenmemiş bir şey yok",
@@ -369,7 +382,11 @@
     "season": "Sezonu indir",
     "more_one": "{{count}} tane daha indir",
     "more_other": "{{count}} tane daha indir",
-    "someFailed": "Tüm indirmeler başlatılamadı"
+    "someFailed": "Tüm indirmeler başlatılamadı",
+    "couldNotStart": "İndirme başlatılamadı",
+    "qualityTitle": "İndirme kalitesi",
+    "about": "Yaklaşık {{size}}",
+    "autoShort": "Orijinal veya 1080p"
   },
   "kind": {
     "movie": "Film",

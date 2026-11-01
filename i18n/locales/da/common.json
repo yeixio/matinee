@@ -546,5 +546,41 @@
     "imported_one": "{{count}} program tilføjet.",
     "newEpisodesCount_other": "{{count}} nye afsnit",
     "imported_other": "{{count}} programmer tilføjet."
+  },
+  "together": {
+    "title": "Se sammen",
+    "intro": "Se det her med venner eller familie på andre enheder. Afspilning, pause og spring holdes i takt for alle.",
+    "start": "Start Se sammen",
+    "share": "Send denne kode eller dette link til dem, der skal være med.",
+    "shareText": "Se med mig på Matinee med koden {{code}}",
+    "copyLink": "Kopiér link",
+    "copied": "Kopieret",
+    "watchingWith_one": "Ser sammen: {{count}} person",
+    "watchingWith_other": "Ser sammen: {{count}} personer",
+    "host": "Startede",
+    "leave": "Forlad",
+    "end": "Afslut for alle",
+    "joinIn": "Tryk på afspil for at være med",
+    "did": {
+      "join": "{{name}} kom med",
+      "leave": "{{name}} gik",
+      "play": "{{name}} trykkede på afspil",
+      "pause": "{{name}} satte på pause",
+      "seek": "{{name}} sprang"
+    },
+    "typeCode": "Skriv den kode, du har fået.",
+    "code": "Kode",
+    "next": "Næste",
+    "notFound": "Koden virker ikke",
+    "tryAnother": "Prøv en anden kode",
+    "notShared": "Det her er ikke delt med dig",
+    "notSharedHint": "Bed den, der driver serveren, om at dele biblioteket med dig.",
+    "hostedBy_one": "{{name}} ser med. Vær med.",
+    "hostedBy_other": "{{name}} og andre ser med ({{count}} indtil nu). Vær med.",
+    "waiting": "Ingen ser med lige nu.",
+    "join": "Vær med",
+    "shareLink": "Del link",
+    "you": "(dig)",
+    "settingsHint": "Se med venner med en kode"
   }
 }

@@ -45,7 +45,9 @@
       "online": "Z internetu",
       "remove": "Usuń: {{name}}",
       "source": "Napisy z OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Pomiń czołówkę",
+    "introSkipped": "Pominięto czołówkę"
   },
   "somethingWentWrong": "Coś poszło nie tak",
   "oneMoment": "Chwileczkę…",
@@ -414,6 +416,7 @@
     "intro": "Matinee powoli czyta każdy plik, aby poznać jego jakość, dźwięk i języki, i robi to ponownie, gdy plik się zmieni.",
     "state": {
       "lookingAt": "Sprawdzanie {{file}}",
+      "intros": "Szukanie czołówek w: {{season}}",
       "working": "Pracuje",
       "waiting": "Czeka na koniec odtwarzania",
       "slowDisk": "Pliki czytają się wolno; przerwa na kilka minut",
@@ -440,6 +443,11 @@
         "label": "Wyłączona",
         "hint": "Wstrzymano do ponownego włączenia."
       }
+    },
+    "intros": {
+      "label": "Wyszukuj czołówki seriali",
+      "hint": "Gdy wszystkie pliki zostaną przeanalizowane, Matinee słucha początku odcinków każdego sezonu, by znaleźć wspólną czołówkę, dzięki czemu odtwarzacze mogą zaproponować Pomiń czołówkę.",
+      "progress": "Sprawdzono {{done}} z {{total}} odcinków, {{found}} z czołówką"
     }
   },
   "profileSettings": {
@@ -694,7 +702,9 @@
       "autoPlay": "Odtwórz następny odcinek",
       "autoPlayHint": "Gdy zaczynają się napisy końcowe, następny odcinek startuje po 10-sekundowym odliczaniu, które możesz anulować.",
       "binge": "Pomiń odliczanie",
-      "bingeHint": "Przejdź od razu do następnego odcinka, gdy zaczynają się napisy końcowe. Po trzech z rzędu bez dotykania niczego pojawi się pytanie, czy nadal oglądasz."
+      "bingeHint": "Przejdź od razu do następnego odcinka, gdy zaczynają się napisy końcowe. Po trzech z rzędu bez dotykania niczego pojawi się pytanie, czy nadal oglądasz.",
+      "skipIntros": "Pomijaj czołówki",
+      "skipIntrosHint": "Automatycznie przeskakuje czołówkę serialu zamiast pokazywać przycisk Pomiń czołówkę."
     },
     "trailers": {
       "title": "Zwiastuny",
@@ -943,5 +953,52 @@
     "rate": "Oceń",
     "yours": "Twoja ocena: {{stars}} na 5",
     "stars": "{{stars}} na 5"
+  },
+  "invite": {
+    "notWorking": "To zaproszenie nie działa",
+    "title": "Dołącz do {{server}}",
+    "invitedBy": "{{name}} zaprasza Cię do oglądania w Matinee.",
+    "invited": "Masz zaproszenie do oglądania w tym Matinee.",
+    "shared": "Udostępnione Tobie",
+    "username": "Wybierz nazwę użytkownika",
+    "join": "Utwórz moje konto",
+    "welcome": "Witaj w {{server}}",
+    "welcomeHint": "Możesz oglądać tutaj w przeglądarce albo na telefonie i telewizorze.",
+    "apps": "Oglądaj na telefonie lub telewizorze",
+    "appsHint": "Pobierz aplikację Matinee, wybierz Dodaj serwer i wpisz ten adres. Potem zaloguj się nową nazwą użytkownika i hasłem.",
+    "copy": "Kopiuj",
+    "getApps": "Gdzie znaleźć aplikacje",
+    "start": "Zacznij oglądać"
+  },
+  "friends": {
+    "title": "Znajomi",
+    "hint": "Zaproś osoby spoza domu. Każdy link z zaproszeniem tworzy jedno konto, które widzi tylko wybrane przez Ciebie biblioteki.",
+    "homeOnly": "Twój serwer nie jest jeszcze dostępny spoza domu, więc linki z zaproszeniem działają tylko w sieci domowej.",
+    "setUpRemote": "Skonfiguruj dostęp zdalny",
+    "forWho": "Dla kogo",
+    "forWhoHint": "Opcjonalnie, np. Sam",
+    "lasts": "Link działa przez",
+    "days_one": "{{count}} dzień",
+    "days_few": "{{count}} dni",
+    "days_many": "{{count}} dni",
+    "days_other": "{{count}} dnia",
+    "libraries": "Biblioteki",
+    "makeLink": "Utwórz link z zaproszeniem",
+    "made": "Wyślij ten link znajomemu:",
+    "share": "Udostępnij",
+    "shareTitle": "Oglądaj ze mną w Matinee",
+    "shareText": "Oto Twoje zaproszenie do mojego Matinee.",
+    "onceOnly": "Działa raz, do {{date}}.",
+    "unnamed": "Zaproszenie",
+    "inviteLine": "{{libraries}} · do {{date}}",
+    "takeBack": "Wycofaj",
+    "past_one": "{{count}} wykorzystane lub wygasłe zaproszenie",
+    "past_few": "{{count}} wykorzystane lub wygasłe zaproszenia",
+    "past_many": "{{count}} wykorzystanych lub wygasłych zaproszeń",
+    "past_other": "{{count}} wykorzystanego lub wygasłego zaproszenia",
+    "usedBy": "{{name}} dołącza {{date}}",
+    "expired": "{{name}}: wygasło {{date}}",
+    "badge": "Znajomy",
+    "seeEverything": "Pokaż wszystko"
   }
 }

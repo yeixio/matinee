@@ -45,7 +45,9 @@
       "online": "オンライン",
       "remove": "{{name}}を削除",
       "source": "字幕提供: OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "イントロをスキップ",
+    "introSkipped": "イントロをスキップしました"
   },
   "somethingWentWrong": "問題が発生しました",
   "oneMoment": "少々お待ちください…",
@@ -405,6 +407,7 @@
     "intro": "Matinee は各ファイルの画質・音声・言語をゆっくり読み取り、ファイルが変わるたびに読み直します。",
     "state": {
       "lookingAt": "{{file}} を確認中",
+      "intros": "{{season}} のイントロを探しています",
       "working": "作業中",
       "waiting": "再生の終了を待っています",
       "slowDisk": "ファイルの読み込みが遅いため、数分休憩しています",
@@ -428,6 +431,11 @@
         "label": "オフ",
         "hint": "再度オンにするまで一時停止します。"
       }
+    },
+    "intros": {
+      "label": "番組のイントロを見つける",
+      "hint": "すべてのファイルの分析が終わると、Matinee は各シーズンのエピソードの冒頭を聴き比べて共通のイントロを見つけ、プレーヤーで「イントロをスキップ」を表示できるようにします。",
+      "progress": "{{total}} 話中 {{done}} 話を確認、イントロあり {{found}} 話"
     }
   },
   "profileSettings": {
@@ -682,7 +690,9 @@
       "autoPlay": "次のエピソードを再生",
       "autoPlayHint": "エンドクレジットが始まると、キャンセルできる10秒のカウントダウンの後に次のエピソードを再生します。",
       "binge": "カウントダウンをスキップ",
-      "bingeHint": "エンドクレジットが始まったらすぐ次のエピソードへ。何も操作せずに3話続くと、まだ観ているか確認します。"
+      "bingeHint": "エンドクレジットが始まったらすぐ次のエピソードへ。何も操作せずに3話続くと、まだ観ているか確認します。",
+      "skipIntros": "イントロを自動でスキップ",
+      "skipIntrosHint": "「イントロをスキップ」ボタンを表示する代わりに、番組のイントロを自動で飛ばします。"
     },
     "trailers": {
       "title": "予告編",
@@ -931,5 +941,46 @@
     "rate": "評価する",
     "yours": "あなたの評価: 5 点中 {{stars}}",
     "stars": "5 点中 {{stars}}"
+  },
+  "invite": {
+    "notWorking": "この招待は使えません",
+    "title": "{{server}} に参加",
+    "invitedBy": "{{name}}さんから Matinee に招待されました。",
+    "invited": "この Matinee で見るよう招待されています。",
+    "shared": "あなたに共有",
+    "username": "ユーザー名を決める",
+    "join": "アカウントを作成",
+    "welcome": "{{server}} へようこそ",
+    "welcomeHint": "このブラウザでそのまま見られます。スマホやテレビでも見られます。",
+    "apps": "スマホやテレビで見る",
+    "appsHint": "Matinee アプリを入れて「サーバーを追加」を選び、このアドレスを入力します。そのあと新しいユーザー名とパスワードでサインインしてください。",
+    "copy": "コピー",
+    "getApps": "アプリの入手先",
+    "start": "見はじめる"
+  },
+  "friends": {
+    "title": "友だち",
+    "hint": "家族以外の人を招待できます。招待リンクごとに、選んだライブラリだけが見えるアカウントが作られます。",
+    "homeOnly": "サーバーはまだ家の外からつながらないため、招待リンクは家のネットワーク内でしか使えません。",
+    "setUpRemote": "リモートアクセスを設定",
+    "forWho": "誰あて",
+    "forWhoHint": "任意。例: Sam",
+    "lasts": "リンクの有効期間",
+    "days_other": "{{count}}日",
+    "libraries": "ライブラリ",
+    "makeLink": "招待リンクを作成",
+    "made": "このリンクを友だちに送ってください:",
+    "share": "共有",
+    "shareTitle": "Matinee でいっしょに見よう",
+    "shareText": "わたしの Matinee への招待です。",
+    "onceOnly": "{{date}} まで、1回だけ使えます。",
+    "unnamed": "招待",
+    "inviteLine": "{{libraries}} · {{date}} まで",
+    "takeBack": "取り消す",
+    "past_other": "使用済みまたは期限切れの招待 {{count}}件",
+    "usedBy": "{{name}}さんが {{date}} に参加",
+    "expired": "{{name}} は {{date}} に期限切れ",
+    "badge": "友だち",
+    "seeEverything": "すべて見られるようにする"
   }
 }

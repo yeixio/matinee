@@ -41,3 +41,8 @@ You can't remove yourself, and a server always keeps at least one admin.
 ## People who don't want an account
 
 On your home network, phones, TVs and browsers can [watch without signing in](/docs/server/home-network/#watching-without-signing-in), sharing one Home account. That's often enough for guests. For a family sharing one account, [profiles](/docs/household/profiles/) are lighter than separate accounts.
+
+<!-- since: v0.1.10 -->
+## People outside your household
+
+For friends and family who live elsewhere, send an [invite link](/docs/household/friends/) instead of making their account yourself. They pick their own username and password, and see only the libraries you share with them.

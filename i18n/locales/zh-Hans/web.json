@@ -45,7 +45,9 @@
       "online": "网上",
       "remove": "移除{{name}}",
       "source": "字幕来自 OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "跳过片头",
+    "introSkipped": "已跳过片头"
   },
   "somethingWentWrong": "出了点问题",
   "oneMoment": "请稍候…",
@@ -405,6 +407,7 @@
     "intro": "Matinee 会慢慢读取每个文件，了解画质、声音和语言，文件有变化时会重新读取。",
     "state": {
       "lookingAt": "正在查看 {{file}}",
+      "intros": "正在查找 {{season}} 的片头",
       "working": "工作中",
       "waiting": "正在等待播放结束",
       "slowDisk": "文件读取较慢，休息几分钟",
@@ -428,6 +431,11 @@
         "label": "关",
         "hint": "已暂停，直到你重新开启。"
       }
+    },
+    "intros": {
+      "label": "查找剧集片头",
+      "hint": "所有文件分析完成后，Matinee 会比对每季各集开头的音频，找出共同的片头，让播放器可以提供“跳过片头”。",
+      "progress": "已检查 {{total}} 集中的 {{done}} 集，{{found}} 集有片头"
     }
   },
   "profileSettings": {
@@ -682,7 +690,9 @@
       "autoPlay": "自动播放下一集",
       "autoPlayHint": "片尾字幕开始时，会在可取消的 10 秒倒计时后播放下一集。",
       "binge": "跳过倒计时",
-      "bingeHint": "片尾字幕一开始就直接进入下一集。连续三集没有任何操作后，会询问你是否还在看。"
+      "bingeHint": "片尾字幕一开始就直接进入下一集。连续三集没有任何操作后，会询问你是否还在看。",
+      "skipIntros": "自动跳过片头",
+      "skipIntrosHint": "自动跳过剧集片头，而不是显示“跳过片头”按钮。"
     },
     "trailers": {
       "title": "预告片",
@@ -931,5 +941,46 @@
     "rate": "评分",
     "yours": "你的评分：{{stars}} / 5",
     "stars": "{{stars}} / 5"
+  },
+  "invite": {
+    "notWorking": "这个邀请无效",
+    "title": "加入 {{server}}",
+    "invitedBy": "{{name}} 邀请你加入 Matinee。",
+    "invited": "你受邀在这个 Matinee 上观看。",
+    "shared": "已共享给你",
+    "username": "选择用户名",
+    "join": "创建我的账户",
+    "welcome": "欢迎来到 {{server}}",
+    "welcomeHint": "你可以直接在这个浏览器里看，也可以在手机和电视上看。",
+    "apps": "在手机或电视上看",
+    "appsHint": "安装 Matinee 应用，选择“添加服务器”并输入这个地址。然后用新的用户名和密码登录。",
+    "copy": "复制",
+    "getApps": "在哪里获取应用",
+    "start": "开始观看"
+  },
+  "friends": {
+    "title": "朋友",
+    "hint": "邀请家庭以外的人。每个邀请链接都会创建一个只能看到你所选媒体库的账户。",
+    "homeOnly": "你的服务器还不能从家外访问，所以邀请链接只能在家庭网络中使用。",
+    "setUpRemote": "设置远程访问",
+    "forWho": "给谁",
+    "forWhoHint": "可选，例如 Sam",
+    "lasts": "链接有效期",
+    "days_other": "{{count}} 天",
+    "libraries": "媒体库",
+    "makeLink": "创建邀请链接",
+    "made": "把这个链接发给你的朋友：",
+    "share": "分享",
+    "shareTitle": "来 Matinee 和我一起看",
+    "shareText": "这是我的 Matinee 邀请。",
+    "onceOnly": "只能使用一次，有效期至 {{date}}。",
+    "unnamed": "邀请",
+    "inviteLine": "{{libraries}} · 至 {{date}}",
+    "takeBack": "收回",
+    "past_other": "{{count}} 个已使用或已过期的邀请",
+    "usedBy": "{{name}} 于 {{date}} 加入",
+    "expired": "{{name}} 于 {{date}} 过期",
+    "badge": "朋友",
+    "seeEverything": "允许查看全部"
   }
 }

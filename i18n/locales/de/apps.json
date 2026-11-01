@@ -127,14 +127,23 @@
       "downloading": "Wird heruntergeladen",
       "starting": "Startet…",
       "paused": "Pausiert"
-    }
+    },
+    "filter": {
+      "active": "Lädt ({{n}})",
+      "done": "Geladen ({{n}})"
+    },
+    "noneActive": "Gerade wird nichts geladen.",
+    "noneDone": "Noch ist kein Download fertig."
   },
   "settings": {
     "quality": {
       "auto": "Am besten für dieses Handy",
       "autoHint": "Die Originaldatei, wenn dieses Handy sie abspielen kann, sonst 1080p",
       "upTo": "Bis zu {{size}} für einen zweistündigen Film",
-      "title": "Download-Qualität (Musik immer im Original)"
+      "title": "Download-Qualität (Musik immer im Original)",
+      "ask": "Jedes Mal fragen",
+      "askHint": "Bei jedem Video-Download eine Qualität wählen",
+      "holdHint": "Halte Download bei einem Video gedrückt, um nur dafür eine Qualität zu wählen."
     },
     "serversHint": "Server wechseln oder hinzufügen",
     "atHome": "Zu Hause schauen",
@@ -154,6 +163,8 @@
     "autoPlayHint": "Wenn der Abspann beginnt, nach einem 10-Sekunden-Countdown, den du abbrechen kannst",
     "binge": "Countdown überspringen",
     "bingeHint": "Direkt in die nächste Folge. Nach drei Folgen ohne Eingabe wirst du gefragt, ob du noch schaust",
+    "skipIntros": "Intros überspringen",
+    "skipIntrosHint": "Springt automatisch über das Intro einer Serie, statt eine Schaltfläche „Intro überspringen“ anzubieten",
     "app": "Matinee {{version}}",
     "appBuild": "Matinee {{version}} (Build {{build}})",
     "server": "Server {{version}}",
@@ -322,7 +333,9 @@
       "machine": "Maschinell übersetzt",
       "online": "Online",
       "source": "Untertitel von OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Intro überspringen",
+    "introSkipped": "Intro übersprungen"
   },
   "library": {
     "nothingUnwatched": "Hier ist nichts ungesehen",
@@ -369,7 +382,11 @@
     "season": "Staffel herunterladen",
     "more_one": "{{count}} weiteren herunterladen",
     "more_other": "{{count}} weitere herunterladen",
-    "someFailed": "Nicht alle Downloads konnten starten"
+    "someFailed": "Nicht alle Downloads konnten starten",
+    "couldNotStart": "Download konnte nicht gestartet werden",
+    "qualityTitle": "Download-Qualität",
+    "about": "Etwa {{size}}",
+    "autoShort": "Original oder 1080p"
   },
   "kind": {
     "movie": "Film",

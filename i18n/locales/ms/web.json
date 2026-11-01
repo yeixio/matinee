@@ -45,7 +45,9 @@
       "online": "Dalam talian",
       "remove": "Buang {{name}}",
       "source": "Sari kata daripada OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Langkau intro",
+    "introSkipped": "Intro dilangkau"
   },
   "somethingWentWrong": "Sesuatu tidak kena",
   "oneMoment": "Sekejap…",
@@ -405,6 +407,7 @@
     "intro": "Matinee membaca setiap fail perlahan-lahan untuk kualiti, bunyi dan bahasanya, dan sekali lagi apabila fail berubah.",
     "state": {
       "lookingAt": "Meneliti {{file}}",
+      "intros": "Mencari intro dalam {{season}}",
       "working": "Sedang bekerja",
       "waiting": "Menunggu main balik selesai",
       "slowDisk": "Fail lambat dibaca; berehat beberapa minit",
@@ -428,6 +431,11 @@
         "label": "Mati",
         "hint": "Dijeda sehingga anda menghidupkannya semula."
       }
+    },
+    "intros": {
+      "label": "Cari intro rancangan TV",
+      "hint": "Selepas semua fail dianalisis, Matinee mendengar permulaan episod setiap musim untuk mencari intro yang dikongsi, supaya pemain boleh menawarkan Langkau intro.",
+      "progress": "{{done}} daripada {{total}} episod disemak, {{found}} ada intro"
     }
   },
   "profileSettings": {
@@ -682,7 +690,9 @@
       "autoPlay": "Main episod seterusnya",
       "autoPlayHint": "Apabila kredit bermula, episod seterusnya dimainkan selepas kira detik 10 saat yang boleh anda batalkan.",
       "binge": "Langkau kira detik",
-      "bingeHint": "Terus ke episod seterusnya apabila kredit bermula. Selepas tiga berturut-turut tanpa menyentuh apa-apa, anda akan ditanya sama ada masih menonton."
+      "bingeHint": "Terus ke episod seterusnya apabila kredit bermula. Selepas tiga berturut-turut tanpa menyentuh apa-apa, anda akan ditanya sama ada masih menonton.",
+      "skipIntros": "Langkau intro secara automatik",
+      "skipIntrosHint": "Melangkau intro rancangan dengan sendirinya, dan bukannya menunjukkan butang Langkau intro."
     },
     "trailers": {
       "title": "Treler",
@@ -931,5 +941,46 @@
     "rate": "Beri penarafan",
     "yours": "Penarafan anda: {{stars}} daripada 5",
     "stars": "{{stars}} daripada 5"
+  },
+  "invite": {
+    "notWorking": "Jemputan ini tidak berfungsi",
+    "title": "Sertai {{server}}",
+    "invitedBy": "{{name}} menjemput anda ke Matinee.",
+    "invited": "Anda dijemput untuk menonton di Matinee ini.",
+    "shared": "Dikongsi dengan anda",
+    "username": "Pilih nama pengguna",
+    "join": "Cipta akaun saya",
+    "welcome": "Selamat datang ke {{server}}",
+    "welcomeHint": "Anda boleh menonton terus dalam pelayar ini, atau pada telefon dan TV.",
+    "apps": "Tonton pada telefon atau TV",
+    "appsHint": "Pasang aplikasi Matinee, pilih Tambah pelayan dan masukkan alamat ini. Kemudian log masuk dengan nama pengguna dan kata laluan baharu anda.",
+    "copy": "Salin",
+    "getApps": "Tempat untuk mendapatkan aplikasi",
+    "start": "Mula menonton"
+  },
+  "friends": {
+    "title": "Rakan",
+    "hint": "Jemput orang di luar isi rumah anda. Setiap pautan jemputan mencipta akaun yang hanya melihat pustaka yang anda pilih.",
+    "homeOnly": "Pelayan anda belum boleh dicapai dari luar rumah, jadi pautan jemputan hanya berfungsi di rangkaian rumah anda.",
+    "setUpRemote": "Sediakan akses jauh",
+    "forWho": "Untuk siapa",
+    "forWhoHint": "Pilihan, contohnya Sam",
+    "lasts": "Pautan sah selama",
+    "days_other": "{{count}} hari",
+    "libraries": "Pustaka",
+    "makeLink": "Buat pautan jemputan",
+    "made": "Hantar pautan ini kepada rakan anda:",
+    "share": "Kongsi",
+    "shareTitle": "Tonton bersama saya di Matinee",
+    "shareText": "Ini jemputan anda ke Matinee saya.",
+    "onceOnly": "Ia berfungsi sekali, sehingga {{date}}.",
+    "unnamed": "Jemputan",
+    "inviteLine": "{{libraries}} · sehingga {{date}}",
+    "takeBack": "Tarik balik",
+    "past_other": "{{count}} jemputan yang digunakan atau tamat tempoh",
+    "usedBy": "{{name}} menyertai pada {{date}}",
+    "expired": "{{name}} tamat tempoh pada {{date}}",
+    "badge": "Rakan",
+    "seeEverything": "Benarkan lihat semua"
   }
 }

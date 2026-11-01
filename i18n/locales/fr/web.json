@@ -45,7 +45,9 @@
       "online": "En ligne",
       "remove": "Retirer {{name}}",
       "source": "Sous-titres d’OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Passer l’intro",
+    "introSkipped": "Intro passée"
   },
   "somethingWentWrong": "Un problème est survenu",
   "oneMoment": "Un instant…",
@@ -411,6 +413,7 @@
     "intro": "Matinee lit lentement chaque fichier pour connaître sa qualité, son son et ses langues, puis de nouveau dès qu’un fichier change.",
     "state": {
       "lookingAt": "Examen de {{file}}",
+      "intros": "Recherche des intros dans {{season}}",
       "working": "En cours",
       "waiting": "En attente de la fin de la lecture",
       "slowDisk": "Les fichiers sont lents à lire ; pause de quelques minutes",
@@ -436,6 +439,11 @@
         "label": "Désactivée",
         "hint": "En pause jusqu’à ce que vous la réactiviez."
       }
+    },
+    "intros": {
+      "label": "Trouver les intros des séries",
+      "hint": "Une fois tous les fichiers analysés, Matinee écoute le début des épisodes de chaque saison pour trouver l’intro qu’ils partagent, afin que les lecteurs proposent Passer l’intro.",
+      "progress": "{{done}} épisodes sur {{total}} vérifiés, {{found}} avec une intro"
     }
   },
   "profileSettings": {
@@ -690,7 +698,9 @@
       "autoPlay": "Lire l’épisode suivant",
       "autoPlayHint": "Quand le générique commence, l’épisode suivant démarre après un compte à rebours de 10 secondes que vous pouvez annuler.",
       "binge": "Passer le compte à rebours",
-      "bingeHint": "Enchaîner directement sur l’épisode suivant au début du générique. Après trois épisodes d’affilée sans rien toucher, on vous demande si vous regardez toujours."
+      "bingeHint": "Enchaîner directement sur l’épisode suivant au début du générique. Après trois épisodes d’affilée sans rien toucher, on vous demande si vous regardez toujours.",
+      "skipIntros": "Passer les intros",
+      "skipIntrosHint": "Passe automatiquement l’intro d’une série, au lieu de proposer un bouton Passer l’intro."
     },
     "trailers": {
       "title": "Bandes-annonces",
@@ -939,5 +949,50 @@
     "rate": "Noter",
     "yours": "Votre note : {{stars}} sur 5",
     "stars": "{{stars}} sur 5"
+  },
+  "invite": {
+    "notWorking": "Cette invitation ne fonctionne pas",
+    "title": "Rejoindre {{server}}",
+    "invitedBy": "{{name}} vous invite à regarder sur son Matinee.",
+    "invited": "Vous êtes invité à regarder sur ce Matinee.",
+    "shared": "Partagé avec vous",
+    "username": "Choisissez un nom d'utilisateur",
+    "join": "Créer mon compte",
+    "welcome": "Bienvenue sur {{server}}",
+    "welcomeHint": "Vous pouvez regarder ici dans votre navigateur, ou sur votre téléphone et votre TV.",
+    "apps": "Regarder sur votre téléphone ou votre TV",
+    "appsHint": "Installez l'app Matinee, choisissez Ajouter un serveur et saisissez cette adresse. Connectez-vous ensuite avec votre nouveau nom d'utilisateur et mot de passe.",
+    "copy": "Copier",
+    "getApps": "Où trouver les apps",
+    "start": "Commencer à regarder"
+  },
+  "friends": {
+    "title": "Amis",
+    "hint": "Invitez des personnes extérieures à votre foyer. Chaque lien d'invitation crée un compte qui ne voit que les bibliothèques que vous choisissez.",
+    "homeOnly": "Votre serveur n'est pas encore accessible depuis l'extérieur, donc les liens d'invitation ne fonctionnent que sur votre réseau domestique.",
+    "setUpRemote": "Configurer l'accès à distance",
+    "forWho": "Pour qui",
+    "forWhoHint": "Facultatif, par exemple Sam",
+    "lasts": "Le lien fonctionne pendant",
+    "days_one": "{{count}} jour",
+    "days_many": "{{count}} jours",
+    "days_other": "{{count}} jours",
+    "libraries": "Bibliothèques",
+    "makeLink": "Créer un lien d'invitation",
+    "made": "Envoyez ce lien à votre ami :",
+    "share": "Partager",
+    "shareTitle": "Rejoins-moi sur Matinee",
+    "shareText": "Voici ton invitation à mon Matinee.",
+    "onceOnly": "Il fonctionne une seule fois, jusqu'au {{date}}.",
+    "unnamed": "Invitation",
+    "inviteLine": "{{libraries}} · jusqu'au {{date}}",
+    "takeBack": "Retirer",
+    "past_one": "{{count}} invitation utilisée ou expirée",
+    "past_many": "{{count}} invitations utilisées ou expirées",
+    "past_other": "{{count}} invitations utilisées ou expirées",
+    "usedBy": "{{name}} a rejoint le {{date}}",
+    "expired": "{{name}} a expiré le {{date}}",
+    "badge": "Ami",
+    "seeEverything": "Tout lui montrer"
   }
 }

@@ -187,5 +187,21 @@
   "that_isnt_a_media_server_database_matinee_can_read": "itu bukan basis data server media yang bisa dibaca Matinee",
   "the_covers_address_must_start_with_http_or_https": "alamat sampul harus diawali http:// atau https://",
   "the_image_is_too_big_20_mb_at_most": "gambar terlalu besar (maksimal 20 MB)",
-  "couldnt_get_an_image_from_that_address": "tidak bisa mengambil gambar dari alamat itu"
+  "couldnt_get_an_image_from_that_address": "tidak bisa mengambil gambar dari alamat itu",
+  "admins_see_every_library_make_them_a_regular_account_first": "admin melihat semua perpustakaan; jadikan akun biasa dulu",
+  "bad_wait": "waktu tunggu tidak valid",
+  "invites_last_1_to_30_days": "undangan berlaku 1 sampai 30 hari",
+  "join_the_session_first": "bergabunglah dengan sesi dulu",
+  "no_such_invite": "undangan itu tidak ada",
+  "pick_at_least_one_library_to_share": "pilih setidaknya satu perpustakaan untuk dibagikan",
+  "that_isnt_in_a_library_shared_with_you": "itu tidak ada di perpustakaan yang dibagikan kepadamu",
+  "that_session_is_still_going_join_it": "sesi itu masih berjalan; bergabunglah",
+  "that_watch_together_code_doesnt_work_it_may_have_ended": "kode nonton bareng itu tidak berfungsi; mungkin sesinya sudah berakhir",
+  "this_invite_has_expired_ask_for_another": "undangan ini sudah kedaluwarsa; minta yang baru",
+  "this_invite_link_doesnt_work_ask_for_another": "tautan undangan ini tidak berfungsi; minta yang baru",
+  "this_invite_was_already_used": "undangan ini sudah dipakai",
+  "this_watch_together_session_is_full": "sesi nonton bareng ini sudah penuh",
+  "too_many_watch_together_sessions_right_now": "terlalu banyak sesi nonton bareng saat ini",
+  "unknown_action": "tindakan tidak dikenal",
+  "usernames_are_at_most_40_characters": "nama pengguna paling banyak 40 karakter"
 }

@@ -45,7 +45,9 @@
       "online": "Fra nettet",
       "remove": "Fjern {{name}}",
       "source": "Undertekster fra OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Hopp over intro",
+    "introSkipped": "Introen ble hoppet over"
   },
   "somethingWentWrong": "Noe gikk galt",
   "oneMoment": "Et øyeblikk…",
@@ -408,6 +410,7 @@
     "intro": "Matinee leser sakte hver fil for kvalitet, lyd og språk, og på nytt når en fil endres.",
     "state": {
       "lookingAt": "Ser på {{file}}",
+      "intros": "Ser etter introer i {{season}}",
       "working": "Arbeider",
       "waiting": "Venter på at avspillingen blir ferdig",
       "slowDisk": "Filene er trege å lese; hviler noen minutter",
@@ -432,6 +435,11 @@
         "label": "Av",
         "hint": "Satt på pause til du slår den på igjen."
       }
+    },
+    "intros": {
+      "label": "Finn introer i serier",
+      "hint": "Når alle filene er analysert, lytter Matinee til begynnelsen av episodene i hver sesong etter introen de har felles, slik at avspillerne kan tilby Hopp over intro.",
+      "progress": "{{done}} av {{total}} episoder sjekket, {{found}} med intro"
     }
   },
   "profileSettings": {
@@ -686,7 +694,9 @@
       "autoPlay": "Spill neste episode",
       "autoPlayHint": "Når rulleteksten starter, spilles neste episode etter en nedtelling på 10 sekunder som du kan avbryte.",
       "binge": "Hopp over nedtellingen",
-      "bingeHint": "Gå rett til neste episode når rulleteksten starter. Etter tre på rad uten at du har rørt noe, blir du spurt om du fortsatt ser på."
+      "bingeHint": "Gå rett til neste episode når rulleteksten starter. Etter tre på rad uten at du har rørt noe, blir du spurt om du fortsatt ser på.",
+      "skipIntros": "Hopp over introer",
+      "skipIntrosHint": "Hopper over introen i en serie av seg selv, i stedet for å vise knappen Hopp over intro."
     },
     "trailers": {
       "title": "Trailere",
@@ -935,5 +945,48 @@
     "rate": "Gi vurdering",
     "yours": "Din vurdering: {{stars}} av 5",
     "stars": "{{stars}} av 5"
+  },
+  "invite": {
+    "notWorking": "Invitasjonen fungerer ikke",
+    "title": "Bli med i {{server}}",
+    "invitedBy": "{{name}} har invitert deg til å se på Matinee.",
+    "invited": "Du er invitert til å se på denne Matinee.",
+    "shared": "Delt med deg",
+    "username": "Velg et brukernavn",
+    "join": "Opprett kontoen min",
+    "welcome": "Velkommen til {{server}}",
+    "welcomeHint": "Du kan se rett her i nettleseren, eller på telefonen og TV-en.",
+    "apps": "Se på telefonen eller TV-en",
+    "appsHint": "Skaff deg Matinee-appen, velg Legg til server og skriv inn denne adressen. Logg så inn med det nye brukernavnet og passordet.",
+    "copy": "Kopier",
+    "getApps": "Hvor du finner appene",
+    "start": "Begynn å se"
+  },
+  "friends": {
+    "title": "Venner",
+    "hint": "Inviter folk utenfor husstanden. Hver invitasjonslenke lager én konto som bare ser bibliotekene du velger.",
+    "homeOnly": "Serveren kan ikke nås utenfra ennå, så invitasjonslenker fungerer bare på hjemmenettverket.",
+    "setUpRemote": "Sett opp fjerntilgang",
+    "forWho": "Hvem den er til",
+    "forWhoHint": "Valgfritt, for eksempel Sam",
+    "lasts": "Lenken virker i",
+    "days_one": "{{count}} dag",
+    "days_other": "{{count}} dager",
+    "libraries": "Biblioteker",
+    "makeLink": "Lag invitasjonslenke",
+    "made": "Send denne lenken til vennen din:",
+    "share": "Del",
+    "shareTitle": "Se med meg på Matinee",
+    "shareText": "Her er invitasjonen din til min Matinee.",
+    "onceOnly": "Den virker én gang, til {{date}}.",
+    "unnamed": "Invitasjon",
+    "inviteLine": "{{libraries}} · til {{date}}",
+    "takeBack": "Trekk tilbake",
+    "past_one": "{{count}} brukt eller utløpt invitasjon",
+    "past_other": "{{count}} brukte eller utløpte invitasjoner",
+    "usedBy": "{{name}} ble med {{date}}",
+    "expired": "{{name}} utløp {{date}}",
+    "badge": "Venn",
+    "seeEverything": "La dem se alt"
   }
 }

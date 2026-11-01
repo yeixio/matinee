@@ -546,5 +546,41 @@
     "imported_one": "{{count}} műsor hozzáadva.",
     "newEpisodesCount_other": "{{count}} új epizód",
     "imported_other": "{{count}} műsor hozzáadva."
+  },
+  "together": {
+    "title": "Közös nézés",
+    "intro": "Nézd ezt barátokkal vagy a családdal más eszközökön. A lejátszás, a szünet és az ugrás mindenkinél együtt mozog.",
+    "start": "Közös nézés indítása",
+    "share": "Küldd el ezt a kódot vagy linket azoknak, akik csatlakoznak.",
+    "shareText": "Nézd velem a Matinee-n, kód: {{code}}",
+    "copyLink": "Link másolása",
+    "copied": "Másolva",
+    "watchingWith_one": "Közös nézés: {{count}} fő",
+    "watchingWith_other": "Közös nézés: {{count}} fő",
+    "host": "Ő indította",
+    "leave": "Kilépés",
+    "end": "Befejezés mindenkinek",
+    "joinIn": "Nyomd meg a lejátszást a csatlakozáshoz",
+    "did": {
+      "join": "{{name}} csatlakozott",
+      "leave": "{{name}} kilépett",
+      "play": "{{name}} elindította",
+      "pause": "{{name}} megállította",
+      "seek": "{{name}} ugrott"
+    },
+    "typeCode": "Írd be a kódot, amit kaptál.",
+    "code": "Kód",
+    "next": "Tovább",
+    "notFound": "Ez a kód nem működik",
+    "tryAnother": "Másik kód kipróbálása",
+    "notShared": "Ez nincs megosztva veled",
+    "notSharedHint": "Kérd meg a szerver üzemeltetőjét, hogy ossza meg veled azt a könyvtárat.",
+    "hostedBy_one": "{{name}} nézi. Csatlakozz.",
+    "hostedBy_other": "{{name}} és mások nézik (eddig {{count}} fő). Csatlakozz.",
+    "waiting": "Most senki sem néz semmit.",
+    "join": "Csatlakozás",
+    "shareLink": "Link megosztása",
+    "you": "(te)",
+    "settingsHint": "Csatlakozz barátokhoz egy kóddal"
   }
 }

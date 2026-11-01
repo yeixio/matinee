@@ -187,5 +187,21 @@
   "that_isnt_a_media_server_database_matinee_can_read": "det är ingen mediaserverdatabas som Matinee kan läsa",
   "the_covers_address_must_start_with_http_or_https": "omslagets adress måste börja med http:// eller https://",
   "the_image_is_too_big_20_mb_at_most": "bilden är för stor (högst 20 MB)",
-  "couldnt_get_an_image_from_that_address": "kunde inte hämta någon bild från den adressen"
+  "couldnt_get_an_image_from_that_address": "kunde inte hämta någon bild från den adressen",
+  "admins_see_every_library_make_them_a_regular_account_first": "administratörer ser alla bibliotek; gör det till ett vanligt konto först",
+  "bad_wait": "ogiltig väntetid",
+  "invites_last_1_to_30_days": "inbjudningar gäller 1 till 30 dagar",
+  "join_the_session_first": "gå med i sessionen först",
+  "no_such_invite": "inbjudan finns inte",
+  "pick_at_least_one_library_to_share": "välj minst ett bibliotek att dela",
+  "that_isnt_in_a_library_shared_with_you": "det finns inte i något bibliotek som delas med dig",
+  "that_session_is_still_going_join_it": "sessionen pågår fortfarande; gå med i den",
+  "that_watch_together_code_doesnt_work_it_may_have_ended": "koden för att titta tillsammans fungerar inte; den kan ha avslutats",
+  "this_invite_has_expired_ask_for_another": "inbjudan har gått ut; be om en ny",
+  "this_invite_link_doesnt_work_ask_for_another": "inbjudningslänken fungerar inte; be om en ny",
+  "this_invite_was_already_used": "inbjudan har redan använts",
+  "this_watch_together_session_is_full": "sessionen för att titta tillsammans är full",
+  "too_many_watch_together_sessions_right_now": "för många sessioner för att titta tillsammans just nu",
+  "unknown_action": "okänd åtgärd",
+  "usernames_are_at_most_40_characters": "användarnamn får vara högst 40 tecken"
 }

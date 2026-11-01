@@ -127,14 +127,23 @@
       "downloading": "Mengunduh",
       "starting": "Memulai…",
       "paused": "Dijeda"
-    }
+    },
+    "filter": {
+      "active": "Mengunduh ({{n}})",
+      "done": "Terunduh ({{n}})"
+    },
+    "noneActive": "Tidak ada yang sedang diunduh.",
+    "noneDone": "Belum ada unduhan yang selesai."
   },
   "settings": {
     "quality": {
       "auto": "Terbaik untuk ponsel ini",
       "autoHint": "File asli jika ponsel ini bisa memutarnya, jika tidak 1080p",
       "upTo": "Hingga {{size}} untuk film dua jam",
-      "title": "Kualitas unduhan (musik selalu asli)"
+      "title": "Kualitas unduhan (musik selalu asli)",
+      "ask": "Tanya setiap kali",
+      "askHint": "Pilih kualitas setiap kali mengunduh video",
+      "holdHint": "Tahan Unduh pada video untuk memilih kualitas khusus untuk video itu."
     },
     "serversHint": "Ganti atau tambah server",
     "atHome": "Menonton di rumah",
@@ -154,6 +163,8 @@
     "autoPlayHint": "Saat kredit dimulai, setelah hitung mundur 10 detik yang bisa Anda batalkan",
     "binge": "Lewati hitung mundur",
     "bingeHint": "Langsung lanjut ke episode berikutnya. Setelah tiga berturut-turut tanpa menyentuh apa pun, kami bertanya apakah Anda masih menonton",
+    "skipIntros": "Lewati intro otomatis",
+    "skipIntrosHint": "Melewati intro serial dengan sendirinya, alih-alih menampilkan tombol Lewati intro",
     "app": "Matinee {{version}}",
     "appBuild": "Matinee {{version}} (build {{build}})",
     "server": "Server {{version}}",
@@ -317,7 +328,9 @@
       "machine": "Terjemahan mesin",
       "online": "Online",
       "source": "Subtitle dari OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Lewati intro",
+    "introSkipped": "Intro dilewati"
   },
   "library": {
     "nothingUnwatched": "Tidak ada yang belum ditonton di sini",
@@ -363,7 +376,11 @@
     "album": "Unduh album",
     "season": "Unduh musim",
     "more_other": "Unduh {{count}} lagi",
-    "someFailed": "Tidak semua unduhan dapat dimulai"
+    "someFailed": "Tidak semua unduhan dapat dimulai",
+    "couldNotStart": "Tidak bisa memulai unduhan",
+    "qualityTitle": "Kualitas unduhan",
+    "about": "Sekitar {{size}}",
+    "autoShort": "Asli atau 1080p"
   },
   "kind": {
     "movie": "Film",

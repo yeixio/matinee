@@ -33,6 +33,7 @@ import (
 	"github.com/yeixio/matinee/internal/store"
 	"github.com/yeixio/matinee/internal/stream"
 	"github.com/yeixio/matinee/internal/subtitle"
+	"github.com/yeixio/matinee/internal/together"
 	"github.com/yeixio/matinee/internal/version"
 )
 
@@ -121,6 +122,10 @@ type Server struct {
 	Live     *live.Hub
 	liveOnce sync.Once
 
+	// Together holds Watch together sessions (see together.go); nil makes one.
+	Together     *together.Hub
+	togetherOnce sync.Once
+
 	// Podcasts follows podcast libraries' shows (see podcasts.go).
 	// PodcastIndexBase is Podcast Index's API; empty is the real one.
 	Podcasts         *podcast.Manager
@@ -206,6 +211,11 @@ func (s *Server) routes() []route {
 		{"PATCH /users/{id}", adminOnly, s.updateUser},
 		{"PUT /users/{id}/password", adminOnly, s.resetPassword},
 		{"DELETE /users/{id}", adminOnly, s.deleteUser},
+		{"GET /invites", adminOnly, s.listInvites},
+		{"POST /invites", adminOnly, s.createInvite},
+		{"DELETE /invites/{code}", adminOnly, s.deleteInvite},
+		{"GET /join/{code}", public, s.joinInfo},
+		{"POST /join/{code}", public, s.acceptInvite},
 
 		{"GET /libraries", reader, s.listLibraries},
 		{"POST /libraries", adminOnly, s.createLibrary},
@@ -353,6 +363,14 @@ func (s *Server) routes() []route {
 		{"GET /clients/{client}", signedIn, grownUps(s.getClient)},
 		{"POST /clients/{client}/commands", signedIn, grownUps(s.sendCommand)},
 		{"GET /events", adminOnly, s.events},
+
+		{"POST /together", reader, s.startTogether},
+		{"GET /together/{code}", reader, s.peekTogether},
+		{"POST /together/{code}/join", reader, s.joinTogether},
+		{"POST /together/{code}/actions", reader, s.actTogether},
+		{"GET /together/{code}/state", reader, s.togetherState},
+		{"DELETE /together/{code}/members/{client}", reader, s.leaveTogether},
+		{"POST /together/{code}/end", reader, s.endTogether},
 	}
 }
 
@@ -711,7 +729,20 @@ func (s *Server) listUsers(w http.ResponseWriter, r *http.Request) {
 		s.serverError(w, err)
 		return
 	}
-	writeJSON(w, http.StatusOK, users)
+	libs, err := s.Store.FriendLibraries(r.Context())
+	if err != nil {
+		s.serverError(w, err)
+		return
+	}
+	out := make([]friendView, 0, len(users))
+	for _, u := range users {
+		v := friendView{User: u}
+		if u.Friend {
+			v.Libraries = libs[u.ID]
+		}
+		out = append(out, v)
+	}
+	writeJSON(w, http.StatusOK, out)
 }
 
 func (s *Server) createUser(w http.ResponseWriter, r *http.Request) {
@@ -1074,6 +1105,9 @@ type itemView struct {
 	// while the file changed and is waiting to be analyzed again.
 	MediaInfo      *probe.MediaInfo `json:"mediaInfo,omitempty"`
 	MediaInfoStale bool             `json:"mediaInfoStale,omitempty"`
+	// Intro is where an episode's intro plays, from its chapters or found
+	// by matching the season's audio; absent when unknown.
+	Intro *introView `json:"intro,omitempty"`
 	// FilePath is where the file is on the server, for admins only.
 	FilePath string `json:"filePath,omitempty"`
 	FileSize int64  `json:"fileSize,omitempty"`
@@ -1096,6 +1130,7 @@ func (s *Server) getItem(w http.ResponseWriter, r *http.Request) {
 	if it.Playable {
 		v.MimeType = stream.MimeType(it.Path)
 		v.MediaInfo, v.MediaInfoStale = s.mediaInfo(r, it)
+		v.Intro = s.intro(r.Context(), it, v.MediaInfo)
 		v.FileSize = it.Size
 		if currentUser(r).IsAdmin {
 			v.FilePath = it.Path

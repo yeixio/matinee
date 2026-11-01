@@ -1,6 +1,6 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import type Hls from 'hls.js'
-import { ArrowLeft, Maximize, Minimize, Moon, Pause, Play, RotateCcw, RotateCw, Volume2, VolumeX } from 'lucide-react'
+import { ArrowLeft, ChevronsRight, Maximize, Minimize, Moon, Pause, Play, RotateCcw, RotateCw, Volume2, VolumeX } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
@@ -12,6 +12,7 @@ import { canDirectPlay } from '../player/direct'
 import { defaultTrack, savePreference, SubtitleMenu, SubtitleOverlay } from '../player/Subtitles'
 import { UpNextCard, type UpNextMode } from '../player/UpNext'
 import { COUNTDOWN_SECONDS, stillWatching, upNextAt } from '../player/autoplay'
+import { inIntro, introEnd } from '../player/intro'
 import { sleepTimer, sleepVolume, useSleep } from '../player/sleep'
 import { SleepMenu } from '../player/SleepMenu'
 import { QualityMenu } from '../player/QualityMenu'
@@ -22,6 +23,10 @@ import { useAudio } from '../player/AudioPlayer'
 import { playerFor, usePlayers } from '../plugins'
 import { remote, watchPath, type CommandType, type PlayerHooks } from '../remote'
 import { health, onRestarting, outcome, restarting, waitForServer, type Health, type Waiting } from '../player/reconnect'
+import { expectedSeconds, needsSeek, together } from '../player/together'
+import { TogetherMenu } from '../player/TogetherMenu'
+import { clientId } from '../remote'
+import type { TogetherState } from '../api'
 
 const displayTitle = (item: ItemDetail) => {
   const show = item.parents.find((p) => p.kind === 'show')
@@ -45,6 +50,8 @@ export default function Watch() {
   // Songs play in the music player, which keeps going while you browse.
   const song = item?.kind === 'track'
   const t = useSearchParams()[0].get('t')
+  // Watch together lasts while the watch pages are open (player/together.ts).
+  useEffect(() => together.attach(), [])
   useEffect(() => {
     if (!item) return
     if (song) {
@@ -165,6 +172,13 @@ function Player({ id }: { id: number }) {
   const qualityNow = useRef<Quality>('original')
   const [level, setLevel] = useState<string>()
   const rebuffers = useRef(new Rebuffers())
+  // Watch together: the session this browser is in, if any.
+  const [session, setSession] = useState<TogetherState | undefined>(together.state)
+  useEffect(() => together.subscribe(setSession), [])
+  const sessionNow = useRef(session)
+  sessionNow.current = session
+  // Set when the browser wouldn't start playback without a click.
+  const [blocked, setBlocked] = useState(false)
 
   const duration = item?.durationMs ? item.durationMs / 1000 : 0
   const position = useCallback(() => offset.current + (video.current?.currentTime ?? 0), [])
@@ -242,7 +256,15 @@ function Player({ id }: { id: number }) {
   useEffect(() => {
     const el = video.current
     if (!item || !el || mode || !streamingKnown) return
-    const resume = startAt !== null ? Number(startAt) || 0 : !item.played && item.positionMs ? item.positionMs / 1000 : 0
+    const s = sessionNow.current
+    const resume =
+      s?.itemId === item.id
+        ? expectedSeconds(s)
+        : startAt !== null
+          ? Number(startAt) || 0
+          : !item.played && item.positionMs
+            ? item.positionMs / 1000
+            : 0
     const pick = defaultTrack(item.subtitles ?? [])
     const q = startQuality(streaming)
     qualityNow.current = q
@@ -431,7 +453,13 @@ function Player({ id }: { id: number }) {
     }
   }, [item, qc])
 
+  // seek jumps there, and takes everyone watching together along.
   const seek = (to: number) => {
+    to = Math.max(0, Math.min(duration || to, to))
+    if (sessionNow.current) together.act('seek', Math.round(to * 1000))
+    seekHere(to)
+  }
+  const seekHere = (to: number) => {
     const el = video.current
     if (!el) return
     to = Math.max(0, Math.min(duration || to, to))
@@ -472,7 +500,15 @@ function Player({ id }: { id: number }) {
   const toggle = () => {
     const el = video.current
     if (!el) return
-    if (el.paused) el.play()
+    setPlaying(el.paused)
+  }
+  // setPlaying plays or pauses, for everyone watching together too.
+  const setPlaying = (play: boolean) => {
+    const el = video.current
+    if (!el) return
+    setBlocked(false)
+    if (sessionNow.current) together.act(play ? 'play' : 'pause', Math.round(position() * 1000))
+    if (play) el.play().catch(() => {})
     else el.pause()
   }
 
@@ -494,6 +530,7 @@ function Player({ id }: { id: number }) {
       if (auto) stillWatching.autoPlayed()
       sleepTimer.carryOver()
       api.setProgress(item.id, 0, true).catch(() => {})
+      if (sessionNow.current) together.act('item', 0, next.id)
       navigate(`/watch/${next.id}`, { replace: true })
     },
     [item, upNext, navigate],
@@ -631,10 +668,10 @@ function Player({ id }: { id: number }) {
       if (c.from) flash(tr('remote.controlledBy', { name: c.from }))
       switch (c.type) {
         case 'play':
-          el.play().catch(() => {})
+          setPlaying(true)
           break
         case 'pause':
-          el.pause()
+          setPlaying(false)
           break
         case 'stop':
           navigate(-1)
@@ -651,8 +688,11 @@ function Player({ id }: { id: number }) {
         case 'playItem':
           if (c.itemId === item.id) {
             if (c.positionMs !== undefined) seek(c.positionMs / 1000)
-            el.play().catch(() => {})
-          } else if (c.itemId) navigate(watchPath(c.itemId, c.positionMs), { replace: true })
+            setPlaying(true)
+          } else if (c.itemId) {
+            if (sessionNow.current) together.act('item', c.positionMs ?? 0, c.itemId)
+            navigate(watchPath(c.itemId, c.positionMs), { replace: true })
+          }
           break
         case 'volume':
           volume.current = Math.max(0, Math.min(1, c.volume ?? 1))
@@ -688,6 +728,74 @@ function Player({ id }: { id: number }) {
     const t = window.setInterval(remote.report, 10_000)
     return () => window.clearInterval(t)
   }, [paused])
+
+  // Watch together: follow the session. Another title means everyone moved
+  // on; otherwise play or pause as it does, and seek back in line when this
+  // player drifted (a slow connection, a transcode starting up).
+  useEffect(() => {
+    if (!session || !item) return
+    if (session.itemId !== item.id) {
+      navigate(`/watch/${session.itemId}`, { replace: true })
+      return
+    }
+    const follow = () => {
+      const s = sessionNow.current
+      const el = video.current
+      if (!s || !el || !mode || recovering.current || dragging.current || scrubAt.current !== undefined) return
+      if (s.paused && !el.paused) el.pause()
+      if (!s.paused && el.paused && !blockedNow.current) {
+        el.play().catch((e: Error) => {
+          // Browsers want a click before playing with sound.
+          if (e.name === 'NotAllowedError') setBlocked(true)
+        })
+      }
+      // Not while loading, and not again straight after: a transcode that
+      // starts over at each seek would never catch up.
+      if (!el.seeking && !waitingNow.current && Date.now() - lastDrift.current > 5000 && needsSeek(s, position())) {
+        lastDrift.current = Date.now()
+        seekHere(expectedSeconds(s))
+      }
+    }
+    follow()
+    const timer = window.setInterval(follow, 1000)
+    return () => window.clearInterval(timer)
+  }, [session, item, mode]) // eslint-disable-line react-hooks/exhaustive-deps
+  const blockedNow = useRef(blocked)
+  blockedNow.current = blocked
+  const waitingNow = useRef(waiting)
+  waitingNow.current = waiting
+  const lastDrift = useRef(0)
+
+  // Say what others did: "Sam paused".
+  const lastSeen = useRef(session?.last?.at)
+  useEffect(() => {
+    const last = session?.last
+    if (!last || last.at === lastSeen.current) return
+    lastSeen.current = last.at
+    if (last.clientId === clientId() || last.action === 'start' || last.action === 'item') return
+    flash(tr(`common:together.did.${last.action}`, { name: last.by }))
+  }, [session]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  const startTogether = () => {
+    if (!item) return Promise.resolve()
+    return together.start(item.id, Math.round(position() * 1000), !!video.current?.paused)
+  }
+
+  // Skip intro (see player/intro.ts): a button while the intro plays, or
+  // straight past it, once per episode, for people who chose that.
+  const intro = item?.intro
+  const showSkip = inIntro(time, intro) && !card && !error && !away
+  const skipIntro = (auto: boolean) => {
+    if (!intro) return
+    seek(introEnd(intro))
+    if (auto) flash(tr('player.introSkipped'))
+  }
+  const autoSkipped = useRef<number>(undefined) // the episode it last happened in
+  useEffect(() => {
+    if (!item || !showSkip || paused || waiting || !prefs?.skipIntros || autoSkipped.current === item.id) return
+    autoSkipped.current = item.id
+    skipIntro(true)
+  })
 
   const t = item ? displayTitle(item) : { title: '', sub: '' }
   const shown = scrub ?? time
@@ -755,12 +863,44 @@ function Player({ id }: { id: number }) {
         />
       )}
 
+      {showSkip && (
+        <button
+          onClick={(e) => {
+            e.stopPropagation()
+            stillWatching.input()
+            skipIntro(false)
+          }}
+          className={`absolute end-4 z-10 flex items-center gap-2 rounded-full bg-black/80 px-5 py-3 text-sm font-semibold text-white shadow-2xl ring-1 ring-white/25 backdrop-blur transition-[bottom] duration-300 hover:bg-black/90 hover:ring-white/50 focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none md:end-8 ${
+            chrome ? 'bottom-32' : 'bottom-8'
+          }`}
+        >
+          {tr('player.skipIntro')}
+          <ChevronsRight className="size-5 text-accent rtl:-scale-x-100" aria-hidden />
+        </button>
+      )}
+
       {slept && paused && !error && (
         <div className="pointer-events-none absolute inset-x-0 top-1/2 flex -translate-y-1/2 justify-center p-6">
           <div className="flex items-center gap-2 rounded-full bg-black/70 px-4 py-2 text-sm text-white/80 backdrop-blur">
             <Moon className="size-4 text-accent" />
             {tr('sleep.paused')}
           </div>
+        </div>
+      )}
+
+      {blocked && session && !error && !away && (
+        <div className="absolute inset-0 z-10 grid place-items-center bg-black/50 p-6 text-center">
+          <button
+            onClick={(e) => {
+              e.stopPropagation()
+              setBlocked(false)
+              video.current?.play().catch(() => {})
+            }}
+            className="flex items-center gap-2 rounded-full bg-accent px-5 py-3 font-semibold text-on-accent hover:bg-accent-strong"
+          >
+            <Play className="size-5 fill-current" />
+            {tr('common:together.joinIn')}
+          </button>
         </div>
       )}
 
@@ -872,6 +1012,16 @@ function Player({ id }: { id: number }) {
                   selected={quality}
                   playing={mode === 'direct' ? tr('common:quality.original') : level}
                   onSelect={selectQuality}
+                  onOpenChange={(open) => {
+                    menuOpen.current = open
+                    poke()
+                  }}
+                />
+              )}
+              {item && (
+                <TogetherMenu
+                  session={session}
+                  onStart={startTogether}
                   onOpenChange={(open) => {
                     menuOpen.current = open
                     poke()
