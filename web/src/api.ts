@@ -660,6 +660,8 @@ export type PodcastFeed = {
   unplayed: number
 }
 // A show in Podcast Index, with its id when a library has it already.
+/** A kind of show to browse in Podcast Index; the name is English, translated by id under podcasts.categories. */
+export type PodcastCategory = { id: string; name: string }
 export type DirectoryShow = {
   indexId: number
   title: string
@@ -895,8 +897,8 @@ export const api = {
   narrators: (library: number) => request<BookGroup[]>('GET', `/api/v1/libraries/${library}/narrators`),
   // Podcasts: finding shows in Podcast Index, adding them by their feed,
   // following them, and moving them between apps as OPML.
-  podcastDirectory: (q: { q?: string; lang?: string }) =>
-    request<{ connected: boolean; shows: DirectoryShow[] }>('GET', `/api/v1/podcasts/directory?${new URLSearchParams(q as Record<string, string>)}`),
+  podcastDirectory: (q: { q?: string; lang?: string; category?: string }) =>
+    request<{ connected: boolean; shows: DirectoryShow[]; categories?: PodcastCategory[] }>('GET', `/api/v1/podcasts/directory?${new URLSearchParams(q as Record<string, string>)}`),
   followedPodcasts: () => request<FollowedShow[]>('GET', '/api/v1/podcasts/following'),
   addPodcast: (libraryId: number, feedUrl: string) => request<Item>('POST', '/api/v1/podcasts', { libraryId, feedUrl }),
   deletePodcast: (id: number) => request<void>('DELETE', `/api/v1/podcasts/${id}`),

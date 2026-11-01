@@ -1273,13 +1273,17 @@ paths:
       summary: Find podcasts in Podcast Index
       description: |
         Searches Podcast Index (podcastindex.org) with `q`, or lists what's
-        trending in a language with `lang` (such as en). `connected` is false
-        when no admin entered a Podcast Index key, and then `shows` is empty:
-        shows can still be added by their feed's address. A show a library
-        has already carries its `itemId`. Not on kids profiles.
+        trending in a language with `lang` (such as en), in every category or
+        in one `category` (an `id` from `categories`, such as comedy).
+        `categories` lists the kinds of shows to browse, with English names
+        the apps translate by id (podcasts.categories.<id>). `connected` is
+        false when no admin entered a Podcast Index key, and then `shows` is
+        empty: shows can still be added by their feed's address. A show a
+        library has already carries its `itemId`. Not on kids profiles.
       parameters:
         - { name: q, in: query, schema: { type: string } }
         - { name: lang, in: query, schema: { type: string } }
+        - { name: category, in: query, schema: { type: string } }
       responses:
         "200":
           description: Shows.
@@ -1290,6 +1294,13 @@ paths:
                 properties:
                   connected: { type: boolean }
                   shows: { type: array, items: { $ref: "#/components/schemas/DirectoryShow" } }
+                  categories:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id: { type: string }
+                        name: { type: string }
         "502": { $ref: "#/components/responses/Error" }
   /podcasts/following:
     get:

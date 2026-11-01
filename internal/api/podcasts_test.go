@@ -267,8 +267,9 @@ func TestPodcasts(t *testing.T) {
 // a library has.
 func TestPodcastDirectory(t *testing.T) {
 	feed := newTestFeed(t, 1)
-	var auth atomic.Value
+	var auth, asked atomic.Value
 	index := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		asked.Store(r.URL.Path + "?" + r.URL.RawQuery)
 		auth.Store(r.Header.Get("X-Auth-Key") + " " + r.Header.Get("Authorization"))
 		if r.Header.Get("X-Auth-Key") != "GOODKEY123" {
 			w.WriteHeader(http.StatusUnauthorized)
@@ -285,8 +286,9 @@ func TestPodcastDirectory(t *testing.T) {
 	c.token = login.Token
 
 	var dir struct {
-		Connected bool
-		Shows     []directoryShow
+		Connected  bool
+		Shows      []directoryShow
+		Categories []struct{ ID, Name string }
 	}
 	c.do("GET", "/api/v1/podcasts/directory?q=night", nil, &dir)
 	if dir.Connected || len(dir.Shows) != 0 {
@@ -308,6 +310,15 @@ func TestPodcastDirectory(t *testing.T) {
 	if !dir.Connected || len(dir.Shows) != 1 || dir.Shows[0].ItemID != show.ID || dir.Shows[0].Description != "Stories" ||
 		strings.Join(dir.Shows[0].Categories, ",") != "Fiction,Drama" {
 		t.Fatalf("search: %+v", dir)
+	}
+	c.do("GET", "/api/v1/podcasts/directory?lang=de-AT&category=trueCrime", nil, &dir)
+	if a, _ := asked.Load().(string); a != "/podcasts/trending?cat=103&lang=de&max=40" || len(dir.Shows) != 1 ||
+		len(dir.Categories) < 10 || dir.Categories[0].ID != "arts" || dir.Categories[0].Name != "Arts" {
+		t.Fatalf("trending in a category: %s %+v", a, dir)
+	}
+	c.do("GET", "/api/v1/podcasts/directory?lang=de&category=nope", nil, &dir)
+	if a, _ := asked.Load().(string); a != "/podcasts/trending?lang=de&max=40" {
+		t.Fatalf("unknown category: %s", a)
 	}
 	if a, _ := auth.Load().(string); !strings.HasPrefix(a, "GOODKEY123 ") || len(a) != len("GOODKEY123 ")+40 {
 		t.Fatalf("auth headers: %q", a)

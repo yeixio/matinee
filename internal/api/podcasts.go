@@ -125,8 +125,9 @@ type directoryShow struct {
 }
 
 // podcastDirectory searches Podcast Index (?q=), or lists what's trending
-// in a language (?lang=). Connected is false when no admin entered a
-// Podcast Index key, so the apps offer pasting a feed's address instead.
+// in a language (?lang=), in all shows or in one category (?category=, an
+// id from Categories). Connected is false when no admin entered a Podcast
+// Index key, so the apps offer pasting a feed's address instead.
 func (s *Server) podcastDirectory(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	ix, err := s.podcastIndex(ctx)
@@ -135,9 +136,10 @@ func (s *Server) podcastDirectory(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	out := struct {
-		Connected bool            `json:"connected"`
-		Shows     []directoryShow `json:"shows"`
-	}{Connected: ix != nil, Shows: []directoryShow{}}
+		Connected  bool               `json:"connected"`
+		Shows      []directoryShow    `json:"shows"`
+		Categories []podcast.Category `json:"categories"`
+	}{Connected: ix != nil, Shows: []directoryShow{}, Categories: podcast.Categories}
 	if ix == nil {
 		writeJSON(w, http.StatusOK, out)
 		return
@@ -147,7 +149,11 @@ func (s *Server) podcastDirectory(w http.ResponseWriter, r *http.Request) {
 	if i := strings.IndexAny(lang, "-_"); i > 0 {
 		lang = lang[:i] // Podcast Index knows languages, not regions
 	}
-	key := "trending:" + lang
+	category := r.URL.Query().Get("category")
+	if _, ok := podcast.CategoryByID(category); !ok {
+		category = ""
+	}
+	key := "trending:" + lang + ":" + category
 	if q != "" {
 		key = "search:" + strings.ToLower(q)
 	}
@@ -155,7 +161,7 @@ func (s *Server) podcastDirectory(w http.ResponseWriter, r *http.Request) {
 		if q != "" {
 			return ix.Search(ctx, q, 40)
 		}
-		return ix.Trending(ctx, lang, 40)
+		return ix.Trending(ctx, lang, category, 40)
 	})
 	if err != nil {
 		if errors.Is(err, podcast.ErrBadKey) {
