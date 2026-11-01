@@ -834,6 +834,10 @@
       "add-ons": {
         "title": "アドオン",
         "hint": "Radarr、Sonarr、Overseerr、プラグイン"
+      },
+      "health": {
+        "title": "サーバーの状態",
+        "hint": "負荷、再生、ジョブ、問題、ログ"
       }
     }
   },
@@ -1002,5 +1006,154 @@
     "expired": "{{name}} は {{date}} に期限切れ",
     "badge": "友だち",
     "seeEverything": "すべて見られるようにする"
+  },
+  "health": {
+    "title": "サーバーの状態",
+    "intro": "うまく動かないときのための、いまのサーバーの様子です。ここに表示される情報はすべてこのサーバーから取得され、外部には送られません。",
+    "cantLoad": "サーバーの状態を読み込めませんでした: {{error}}",
+    "updates": "5秒ごとに更新",
+    "upFor": "稼働時間 {{time}}",
+    "seconds": "{{seconds}}秒",
+    "days": "{{days}}日{{hours}}時間",
+    "hourAgo": "1時間前",
+    "now": "現在",
+    "noHistory": "グラフは1分ほどで表示されます。",
+    "chartLabel": "過去1時間の{{name}}",
+    "status": {
+      "ok": "問題ありません",
+      "problems_other": "過去1時間に警告またはエラーが{{count}}件",
+      "restarting": "サーバーを再起動しています",
+      "database": "データベースが応答しません",
+      "disk": "読み込めないフォルダがあります"
+    },
+    "scope": {
+      "group": "Matinee と、Matinee が実行する FFmpeg プロセスの合計です。",
+      "process": "Matinee 本体のみ。FFmpeg プロセスは含みません。"
+    },
+    "tiles": {
+      "cpu": "CPU",
+      "machine": "マシン全体 {{value}}",
+      "load": "負荷 {{load}}",
+      "cpuLimit": "{{cores}}コアに制限されています。",
+      "memory": "メモリ",
+      "of": "/ {{total}}",
+      "ofLimit": "/ 上限 {{total}}",
+      "sending": "送信",
+      "sentTotal": "起動から {{total}}",
+      "playing": "再生中",
+      "transcodes_other": "トランスコード {{count}}件"
+    },
+    "level": {
+      "warn": "警告",
+      "error": "エラー"
+    },
+    "streams": {
+      "title": "再生中",
+      "none": "再生中のものはありません。",
+      "direct": "ダイレクト再生",
+      "transcoding": "トランスコード中",
+      "away": "外出先",
+      "paused": "一時停止中",
+      "buffering": "バッファ中"
+    },
+    "transcodes": {
+      "title": "トランスコード",
+      "none": "実行中のトランスコードはありません。",
+      "kind": {
+        "video": "映像を変換中",
+        "copy": "映像を再パッケージ中",
+        "audio": "音声を変換中"
+      },
+      "mode": {
+        "cpu": "CPU で処理",
+        "encode": "{{name}} でエンコード",
+        "full": "{{name}} でデコードとエンコード"
+      },
+      "burnSub": "字幕を焼き込み",
+      "started": "開始 {{time}}",
+      "stop": "停止",
+      "stopHint": "FFmpeg を停止します。プレーヤーが開いたままなら、新しいトランスコードを始めます。",
+      "cpuOnly": "トランスコードは CPU で行われます。"
+    },
+    "problems": {
+      "title": "警告とエラー",
+      "none": "サーバーの起動以来、警告もエラーもありません。",
+      "times_other": "{{count}}回",
+      "last": "最終 {{time}}",
+      "showInLog": "ログで表示",
+      "more_other": "さらに{{count}}件表示"
+    },
+    "jobs": {
+      "title": "バックグラウンドジョブ",
+      "scan": "{{library}}のスキャン",
+      "scanning": "スキャン中（{{time}}経過）",
+      "lastScan": "{{time}}、所要 {{took}}",
+      "scanCounts": "追加 {{added}}、更新 {{updated}}、削除 {{removed}}、再生不可 {{failed}}",
+      "scanFailed": "失敗: {{error}}",
+      "notScanned": "サーバーの起動以来スキャンしていません",
+      "downloads": "デバイス用ダウンロード",
+      "downloadCounts": "待機 {{waiting}}、変換中 {{converting}}、失敗 {{failed}}",
+      "nothing": "処理待ちなし",
+      "importing": "視聴履歴を読み込み中"
+    },
+    "disks": {
+      "title": "ディスク容量",
+      "free": "空き {{free}} / {{total}}",
+      "low": "空きが少なくなっています",
+      "unreachableTitle": "読み込めません",
+      "unreachable": "このフォルダが応答しませんでした。ネットワーク共有上にある場合は、共有が接続されたままか確認してください。",
+      "use": {
+        "data": "データ",
+        "transcode": "トランスコード",
+        "thumbnails": "シークバーのプレビュー",
+        "images": "ポスターとアートワーク",
+        "downloads": "ダウンロード",
+        "library": "{{library}}"
+      }
+    },
+    "details": {
+      "title": "サーバーの詳細",
+      "version": "バージョン",
+      "ffmpeg": "FFmpeg",
+      "ffmpegMissing": "{{path}} に見つかりません",
+      "system": "システム",
+      "cores_other": "{{count}}コア",
+      "started": "起動",
+      "database": "データベース",
+      "answers": "応答 {{ms}} ms",
+      "dbCounts": "アイテム {{items}}、アカウント {{users}}、ライブラリ {{libraries}}",
+      "connections": "接続 {{open}}、使用中 {{busy}}",
+      "dbError": "応答なし: {{error}}",
+      "requests": "リクエスト",
+      "requestCounts": "応答 {{requests}}、サーバーエラー {{errors}}",
+      "logged": "記録",
+      "loggedCounts": "警告 {{warnings}}、エラー {{errors}}",
+      "rescans": "定期スキャン",
+      "every": "{{time}}ごと",
+      "remote": "リモートアクセス",
+      "remoteState": {
+        "off": "オフ",
+        "working": "設定中",
+        "ready": "動作中",
+        "failed": "動作していません"
+      },
+      "runtime": "Go ランタイム",
+      "heap": "使用中 {{heap}}、goroutine {{goroutines}}"
+    },
+    "log": {
+      "title": "ログ",
+      "intro": "サーバーの起動以降の最新 {{count}} 行です。完全なログは、コンテナのログなど、サーバーの出力先にあります。",
+      "download": "ダウンロード",
+      "search": "ログを検索",
+      "level": "表示",
+      "levels": {
+        "all": "すべて",
+        "warn": "警告とエラー",
+        "error": "エラー"
+      },
+      "live": "新しい行を追う",
+      "older": "古い行を表示",
+      "empty": "一致する行はありません。"
+    }
   }
 }

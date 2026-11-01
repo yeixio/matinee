@@ -834,6 +834,10 @@
       "add-ons": {
         "title": "Tiện ích bổ sung",
         "hint": "Radarr, Sonarr, Overseerr và plugin"
+      },
+      "health": {
+        "title": "Tình trạng máy chủ",
+        "hint": "Tải, phát, tác vụ, sự cố và nhật ký"
       }
     }
   },
@@ -1002,5 +1006,154 @@
     "expired": "{{name}} đã hết hạn ngày {{date}}",
     "badge": "Bạn bè",
     "seeEverything": "Cho xem tất cả"
+  },
+  "health": {
+    "title": "Tình trạng máy chủ",
+    "intro": "Máy chủ đang hoạt động ra sao ngay lúc này, để dùng khi có gì đó không chạy. Mọi thứ ở đây đến từ máy chủ này và ở lại trên đó.",
+    "cantLoad": "Không tải được tình trạng máy chủ: {{error}}",
+    "updates": "Cập nhật mỗi 5 giây",
+    "upFor": "đã chạy {{time}}",
+    "seconds": "{{seconds}} giây",
+    "days": "{{days}} ngày {{hours}} giờ",
+    "hourAgo": "1 giờ trước",
+    "now": "Bây giờ",
+    "noHistory": "Biểu đồ sẽ đầy dần trong một phút tới.",
+    "chartLabel": "{{name}} trong giờ vừa qua",
+    "status": {
+      "ok": "Mọi thứ đều ổn",
+      "problems_other": "{{count}} cảnh báo hoặc lỗi trong giờ vừa qua",
+      "restarting": "Máy chủ đang khởi động lại",
+      "database": "Cơ sở dữ liệu không phản hồi",
+      "disk": "Không đọc được một thư mục"
+    },
+    "scope": {
+      "group": "Matinee và các tiến trình FFmpeg nó chạy.",
+      "process": "Chỉ riêng Matinee; không tính các tiến trình FFmpeg."
+    },
+    "tiles": {
+      "cpu": "CPU",
+      "machine": "toàn máy {{value}}",
+      "load": "tải {{load}}",
+      "cpuLimit": "Giới hạn {{cores}} nhân.",
+      "memory": "Bộ nhớ",
+      "of": "trên {{total}}",
+      "ofLimit": "trên {{total}} được phép",
+      "sending": "Đang gửi",
+      "sentTotal": "{{total}} từ khi khởi động",
+      "playing": "Đang phát",
+      "transcodes_other": "{{count}} lượt chuyển mã"
+    },
+    "level": {
+      "warn": "Cảnh báo",
+      "error": "Lỗi"
+    },
+    "streams": {
+      "title": "Đang phát",
+      "none": "Không có gì đang phát.",
+      "direct": "Phát trực tiếp",
+      "transcoding": "Đang chuyển mã",
+      "away": "Ngoài nhà",
+      "paused": "Tạm dừng",
+      "buffering": "Đang tải"
+    },
+    "transcodes": {
+      "title": "Chuyển mã",
+      "none": "Không có lượt chuyển mã nào đang chạy.",
+      "kind": {
+        "video": "Đang chuyển đổi video",
+        "copy": "Đang đóng gói lại video",
+        "audio": "Đang chuyển đổi âm thanh"
+      },
+      "mode": {
+        "cpu": "trên CPU",
+        "encode": "{{name}} mã hóa",
+        "full": "{{name}} giải mã và mã hóa"
+      },
+      "burnSub": "phụ đề ghi vào hình",
+      "started": "Bắt đầu {{time}}",
+      "stop": "Dừng",
+      "stopHint": "Dừng FFmpeg. Nếu trình phát vẫn mở, nó sẽ bắt đầu một lượt chuyển mã mới.",
+      "cpuOnly": "Chuyển mã chạy trên CPU."
+    },
+    "problems": {
+      "title": "Cảnh báo và lỗi",
+      "none": "Không có cảnh báo hay lỗi nào từ khi máy chủ khởi động.",
+      "times_other": "{{count}} lần",
+      "last": "gần nhất {{time}}",
+      "showInLog": "Xem trong nhật ký",
+      "more_other": "Hiện thêm {{count}}"
+    },
+    "jobs": {
+      "title": "Tác vụ nền",
+      "scan": "Quét {{library}}",
+      "scanning": "Đang quét được {{time}}",
+      "lastScan": "{{time}}, mất {{took}}",
+      "scanCounts": "thêm {{added}}, cập nhật {{updated}}, gỡ {{removed}}, không phát được {{failed}}",
+      "scanFailed": "Thất bại: {{error}}",
+      "notScanned": "Chưa quét từ khi máy chủ khởi động",
+      "downloads": "Tải xuống cho thiết bị",
+      "downloadCounts": "{{waiting}} đang chờ, {{converting}} đang chuyển đổi, {{failed}} thất bại",
+      "nothing": "Không có việc gì",
+      "importing": "Đang nhập lịch sử xem"
+    },
+    "disks": {
+      "title": "Dung lượng đĩa",
+      "free": "Còn trống {{free}} trên {{total}}",
+      "low": "Sắp hết chỗ",
+      "unreachableTitle": "Không đọc được",
+      "unreachable": "Thư mục này không phản hồi. Nếu nó nằm trên ổ chia sẻ mạng, hãy kiểm tra ổ chia sẻ còn kết nối không.",
+      "use": {
+        "data": "Dữ liệu",
+        "transcode": "Chuyển mã",
+        "thumbnails": "Ảnh xem trước trên thanh tua",
+        "images": "Áp phích và ảnh",
+        "downloads": "Tải xuống",
+        "library": "{{library}}"
+      }
+    },
+    "details": {
+      "title": "Chi tiết máy chủ",
+      "version": "Phiên bản",
+      "ffmpeg": "FFmpeg",
+      "ffmpegMissing": "Không tìm thấy tại {{path}}",
+      "system": "Hệ thống",
+      "cores_other": "{{count}} nhân",
+      "started": "Khởi động",
+      "database": "Cơ sở dữ liệu",
+      "answers": "phản hồi trong {{ms}} ms",
+      "dbCounts": "{{items}} mục, {{users}} tài khoản, {{libraries}} thư viện",
+      "connections": "{{open}} kết nối, {{busy}} đang bận",
+      "dbError": "Không phản hồi: {{error}}",
+      "requests": "Yêu cầu",
+      "requestCounts": "đã trả lời {{requests}}, lỗi trên máy chủ {{errors}}",
+      "logged": "Đã ghi",
+      "loggedCounts": "{{warnings}} cảnh báo, {{errors}} lỗi",
+      "rescans": "Quét theo lịch",
+      "every": "Mỗi {{time}}",
+      "remote": "Truy cập từ xa",
+      "remoteState": {
+        "off": "Tắt",
+        "working": "Đang thiết lập",
+        "ready": "Hoạt động",
+        "failed": "Không hoạt động"
+      },
+      "runtime": "Môi trường Go",
+      "heap": "đang dùng {{heap}}, {{goroutines}} goroutine"
+    },
+    "log": {
+      "title": "Nhật ký",
+      "intro": "{{count}} dòng gần nhất từ khi máy chủ khởi động. Nhật ký đầy đủ nằm ở nơi đầu ra của máy chủ được gửi tới, chẳng hạn nhật ký của container.",
+      "download": "Tải xuống",
+      "search": "Tìm trong nhật ký",
+      "level": "Hiện",
+      "levels": {
+        "all": "Tất cả",
+        "warn": "Cảnh báo và lỗi",
+        "error": "Lỗi"
+      },
+      "live": "Theo dõi dòng mới",
+      "older": "Hiện các dòng cũ hơn",
+      "empty": "Không có dòng nào khớp."
+    }
   }
 }

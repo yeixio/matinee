@@ -5,6 +5,12 @@ sidebar:
   order: 1
 ---
 
+<!-- since: v0.1.11 -->
+## Start with Server health
+
+Admins can open **Settings → Server health** to see what the server is doing and what went wrong lately: warnings and errors, folders that can't be read, a database that doesn't answer, stuck transcodes, and the log. See [Server health](/docs/server/server-health/).
+<!-- /since -->
+
 ## Posters and descriptions are missing
 
 - Check that the server has a TMDB key (`MATINEE_TMDB_KEY`). See [Posters and details](/docs/getting-started/posters-and-details/).
@@ -31,6 +37,9 @@ See [Home network](/docs/server/home-network/).
 
 - Look at the title's [File details](/docs/watching/title-pages/#file-details). A 4K HEVC or HDR file usually has to be converted for a browser, which is heavy work without a GPU.
 - **Settings → Streaming → Transcoding** shows whether a GPU is in use. See [Hardware transcoding](/docs/server/transcoding/).
+<!-- since: v0.1.11 -->
+- **Settings → Server health** shows how busy the server is while it plays, and whether each transcode uses the GPU. See [Server health](/docs/server/server-health/).
+<!-- /since -->
 - Away from home, your home connection's upload speed is the limit. For a trip, [download](/docs/apps/downloads/) in the apps before you go.
 
 ## Remote access doesn't work

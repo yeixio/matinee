@@ -842,6 +842,10 @@
       "add-ons": {
         "title": "Suplimente",
         "hint": "Radarr, Sonarr, Overseerr și pluginuri"
+      },
+      "health": {
+        "title": "Starea serverului",
+        "hint": "Încărcare, redare, sarcini, probleme și jurnalul"
       }
     }
   },
@@ -1014,5 +1018,164 @@
     "expired": "{{name}} a expirat pe {{date}}",
     "badge": "Prieten",
     "seeEverything": "Lasă-l să vadă tot"
+  },
+  "health": {
+    "title": "Starea serverului",
+    "intro": "Cum se descurcă serverul chiar acum, pentru când ceva nu merge. Tot ce vezi aici vine de pe acest server și rămâne pe el.",
+    "cantLoad": "Nu s-a putut încărca starea serverului: {{error}}",
+    "updates": "Se actualizează la fiecare 5 secunde",
+    "upFor": "pornit de {{time}}",
+    "seconds": "{{seconds}} s",
+    "days": "{{days}} z {{hours}} h",
+    "hourAgo": "acum 1 oră",
+    "now": "Acum",
+    "noHistory": "Graficul se completează în minutul următor.",
+    "chartLabel": "{{name}} în ultima oră",
+    "status": {
+      "ok": "Totul arată bine",
+      "problems_few": "{{count}} avertismente sau erori în ultima oră",
+      "problems_one": "{{count}} avertisment sau eroare în ultima oră",
+      "problems_other": "{{count}} de avertismente sau erori în ultima oră",
+      "restarting": "Serverul repornește",
+      "database": "Baza de date nu răspunde",
+      "disk": "Un dosar nu poate fi citit"
+    },
+    "scope": {
+      "group": "Matinee și procesele FFmpeg pe care le pornește.",
+      "process": "Doar Matinee; procesele FFmpeg nu sunt numărate."
+    },
+    "tiles": {
+      "cpu": "Procesor",
+      "machine": "tot calculatorul {{value}}",
+      "load": "încărcare {{load}}",
+      "cpuLimit": "Limitat la {{cores}} nuclee.",
+      "memory": "Memorie",
+      "of": "din {{total}}",
+      "ofLimit": "din {{total}} permiși",
+      "sending": "Trimite",
+      "sentTotal": "{{total}} de la pornire",
+      "playing": "Se redă acum",
+      "transcodes_few": "{{count}} transcodări",
+      "transcodes_one": "{{count}} transcodare",
+      "transcodes_other": "{{count}} de transcodări"
+    },
+    "level": {
+      "warn": "Avertisment",
+      "error": "Eroare"
+    },
+    "streams": {
+      "title": "Se redă acum",
+      "none": "Nu se redă nimic.",
+      "direct": "Redare directă",
+      "transcoding": "Transcodare",
+      "away": "În afara casei",
+      "paused": "Pe pauză",
+      "buffering": "Se încarcă"
+    },
+    "transcodes": {
+      "title": "Transcodări",
+      "none": "Nu rulează nicio transcodare.",
+      "kind": {
+        "video": "Conversie video",
+        "copy": "Reîmpachetare video",
+        "audio": "Conversie audio"
+      },
+      "mode": {
+        "cpu": "pe procesor",
+        "encode": "{{name}} codifică",
+        "full": "{{name}} decodifică și codifică"
+      },
+      "burnSub": "subtitrări încorporate",
+      "started": "Pornită {{time}}",
+      "stop": "Oprește",
+      "stopHint": "Oprește FFmpeg. Dacă playerul e încă deschis, pornește o nouă transcodare.",
+      "cpuOnly": "Transcodările rulează pe procesor."
+    },
+    "problems": {
+      "title": "Avertismente și erori",
+      "none": "Niciun avertisment sau eroare de la pornirea serverului.",
+      "times_few": "de {{count}} ori",
+      "times_one": "{{count}} dată",
+      "times_other": "de {{count}} de ori",
+      "last": "ultima dată {{time}}",
+      "showInLog": "Arată în jurnal",
+      "more_few": "Arată încă {{count}}",
+      "more_one": "Arată încă {{count}}",
+      "more_other": "Arată încă {{count}}"
+    },
+    "jobs": {
+      "title": "Sarcini în fundal",
+      "scan": "Scanare {{library}}",
+      "scanning": "Se scanează de {{time}}",
+      "lastScan": "{{time}}, a durat {{took}}",
+      "scanCounts": "adăugate: {{added}}, actualizate: {{updated}}, eliminate: {{removed}}, imposibil de redat: {{failed}}",
+      "scanFailed": "Eșuată: {{error}}",
+      "notScanned": "Nescanată de la pornirea serverului",
+      "downloads": "Descărcări pentru dispozitive",
+      "downloadCounts": "în așteptare: {{waiting}}, în conversie: {{converting}}, eșuate: {{failed}}",
+      "nothing": "Nimic de făcut",
+      "importing": "Se importă istoricul vizionărilor"
+    },
+    "disks": {
+      "title": "Spațiu pe disc",
+      "free": "{{free}} liberi din {{total}}",
+      "low": "Spațiu puțin",
+      "unreachableTitle": "Nu poate fi citit",
+      "unreachable": "Acest dosar nu a răspuns. Dacă e pe o partajare de rețea, verifică dacă partajarea mai e conectată.",
+      "use": {
+        "data": "Date",
+        "transcode": "Transcodare",
+        "thumbnails": "Previzualizări pe bara de derulare",
+        "images": "Postere și imagini",
+        "downloads": "Descărcări",
+        "library": "{{library}}"
+      }
+    },
+    "details": {
+      "title": "Detalii server",
+      "version": "Versiune",
+      "ffmpeg": "FFmpeg",
+      "ffmpegMissing": "Nu a fost găsit la {{path}}",
+      "system": "Sistem",
+      "cores_few": "{{count}} nuclee",
+      "cores_one": "{{count}} nucleu",
+      "cores_other": "{{count}} de nuclee",
+      "started": "Pornit",
+      "database": "Bază de date",
+      "answers": "răspunde în {{ms}} ms",
+      "dbCounts": "elemente: {{items}}, conturi: {{users}}, biblioteci: {{libraries}}",
+      "connections": "conexiuni: {{open}}, ocupate: {{busy}}",
+      "dbError": "Nu a răspuns: {{error}}",
+      "requests": "Cereri",
+      "requestCounts": "servite: {{requests}}, eșuate pe server: {{errors}}",
+      "logged": "Înregistrate",
+      "loggedCounts": "avertismente: {{warnings}}, erori: {{errors}}",
+      "rescans": "Scanări programate",
+      "every": "La fiecare {{time}}",
+      "remote": "Acces la distanță",
+      "remoteState": {
+        "off": "Oprit",
+        "working": "Se configurează",
+        "ready": "Funcționează",
+        "failed": "Nu funcționează"
+      },
+      "runtime": "Mediul Go",
+      "heap": "{{heap}} în uz, goroutine: {{goroutines}}"
+    },
+    "log": {
+      "title": "Jurnal",
+      "intro": "Ultimele {{count}} rânduri de la pornirea serverului. Jurnalul complet e acolo unde ajunge ieșirea serverului, de exemplu în jurnalul containerului.",
+      "download": "Descarcă",
+      "search": "Caută în jurnal",
+      "level": "Arată",
+      "levels": {
+        "all": "Tot",
+        "warn": "Avertismente și erori",
+        "error": "Erori"
+      },
+      "live": "Urmărește rândurile noi",
+      "older": "Arată rânduri mai vechi",
+      "empty": "Niciun rând nu se potrivește."
+    }
   }
 }

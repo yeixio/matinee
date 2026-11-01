@@ -838,6 +838,10 @@
       "add-ons": {
         "title": "Eklentiler",
         "hint": "Radarr, Sonarr, Overseerr ve eklentiler"
+      },
+      "health": {
+        "title": "Sunucu durumu",
+        "hint": "Yük, oynatma, işler, sorunlar ve günlük"
       }
     }
   },
@@ -1008,5 +1012,159 @@
     "expired": "{{name}}: süresi {{date}} tarihinde doldu",
     "badge": "Arkadaş",
     "seeEverything": "Her şeyi görebilsin"
+  },
+  "health": {
+    "title": "Sunucu durumu",
+    "intro": "Bir şeyler yolunda gitmediğinde sunucunun şu anki durumu. Buradaki her şey bu sunucudan gelir ve burada kalır.",
+    "cantLoad": "Sunucu durumu yüklenemedi: {{error}}",
+    "updates": "5 saniyede bir güncellenir",
+    "upFor": "{{time}} süredir çalışıyor",
+    "seconds": "{{seconds}} sn",
+    "days": "{{days}} g {{hours}} sa",
+    "hourAgo": "1 saat önce",
+    "now": "Şimdi",
+    "noHistory": "Grafik önümüzdeki bir dakikada dolacak.",
+    "chartLabel": "Son bir saatte {{name}}",
+    "status": {
+      "ok": "Her şey yolunda",
+      "problems_one": "Son bir saatte {{count}} uyarı veya hata",
+      "problems_other": "Son bir saatte {{count}} uyarı veya hata",
+      "restarting": "Sunucu yeniden başlıyor",
+      "database": "Veritabanı yanıt vermiyor",
+      "disk": "Bir klasör okunamıyor"
+    },
+    "scope": {
+      "group": "Matinee ve çalıştırdığı FFmpeg işlemleri.",
+      "process": "Yalnızca Matinee; FFmpeg işlemleri sayılmaz."
+    },
+    "tiles": {
+      "cpu": "İşlemci",
+      "machine": "tüm makine {{value}}",
+      "load": "yük {{load}}",
+      "cpuLimit": "{{cores}} çekirdekle sınırlı.",
+      "memory": "Bellek",
+      "of": "/ {{total}}",
+      "ofLimit": "/ izin verilen {{total}}",
+      "sending": "Gönderiliyor",
+      "sentTotal": "Başlangıçtan beri {{total}}",
+      "playing": "Şimdi oynatılan",
+      "transcodes_one": "{{count}} dönüştürme",
+      "transcodes_other": "{{count}} dönüştürme"
+    },
+    "level": {
+      "warn": "Uyarı",
+      "error": "Hata"
+    },
+    "streams": {
+      "title": "Şimdi oynatılan",
+      "none": "Hiçbir şey oynatılmıyor.",
+      "direct": "Doğrudan oynatma",
+      "transcoding": "Dönüştürülüyor",
+      "away": "Ev dışında",
+      "paused": "Duraklatıldı",
+      "buffering": "Arabelleğe alınıyor"
+    },
+    "transcodes": {
+      "title": "Dönüştürmeler",
+      "none": "Çalışan dönüştürme yok.",
+      "kind": {
+        "video": "Video dönüştürülüyor",
+        "copy": "Video yeniden paketleniyor",
+        "audio": "Ses dönüştürülüyor"
+      },
+      "mode": {
+        "cpu": "işlemcide",
+        "encode": "{{name}} kodluyor",
+        "full": "{{name}} çözüyor ve kodluyor"
+      },
+      "burnSub": "altyazılar gömülü",
+      "started": "Başladı: {{time}}",
+      "stop": "Durdur",
+      "stopHint": "FFmpeg’i durdurur. Oynatıcı hâlâ açıksa yeni bir dönüştürme başlatır.",
+      "cpuOnly": "Dönüştürmeler işlemcide çalışır."
+    },
+    "problems": {
+      "title": "Uyarılar ve hatalar",
+      "none": "Sunucu başladığından beri uyarı veya hata yok.",
+      "times_one": "{{count}} kez",
+      "times_other": "{{count}} kez",
+      "last": "son: {{time}}",
+      "showInLog": "Günlükte göster",
+      "more_one": "{{count}} tane daha göster",
+      "more_other": "{{count}} tane daha göster"
+    },
+    "jobs": {
+      "title": "Arka plan işleri",
+      "scan": "{{library}} taraması",
+      "scanning": "{{time}} süredir taranıyor",
+      "lastScan": "{{time}}, {{took}} sürdü",
+      "scanCounts": "{{added}} eklendi, {{updated}} güncellendi, {{removed}} kaldırıldı, {{failed}} oynatılamıyor",
+      "scanFailed": "Başarısız: {{error}}",
+      "notScanned": "Sunucu başladığından beri taranmadı",
+      "downloads": "Cihazlar için indirmeler",
+      "downloadCounts": "{{waiting}} bekliyor, {{converting}} dönüştürülüyor, {{failed}} başarısız",
+      "nothing": "Yapılacak iş yok",
+      "importing": "İzleme geçmişi içe aktarılıyor"
+    },
+    "disks": {
+      "title": "Disk alanı",
+      "free": "{{total}} alanın {{free}} kadarı boş",
+      "low": "Alan az",
+      "unreachableTitle": "Okunamıyor",
+      "unreachable": "Bu klasör yanıt vermedi. Bir ağ paylaşımındaysa paylaşımın hâlâ bağlı olduğunu kontrol et.",
+      "use": {
+        "data": "Veriler",
+        "transcode": "Dönüştürme",
+        "thumbnails": "Arama çubuğu önizlemeleri",
+        "images": "Afişler ve görseller",
+        "downloads": "İndirmeler",
+        "library": "{{library}}"
+      }
+    },
+    "details": {
+      "title": "Sunucu ayrıntıları",
+      "version": "Sürüm",
+      "ffmpeg": "FFmpeg",
+      "ffmpegMissing": "{{path}} konumunda bulunamadı",
+      "system": "Sistem",
+      "cores_one": "{{count}} çekirdek",
+      "cores_other": "{{count}} çekirdek",
+      "started": "Başlatıldı",
+      "database": "Veritabanı",
+      "answers": "{{ms}} ms’de yanıt veriyor",
+      "dbCounts": "{{items}} öğe, {{users}} hesap, {{libraries}} kitaplık",
+      "connections": "{{open}} bağlantı, {{busy}} meşgul",
+      "dbError": "Yanıt vermedi: {{error}}",
+      "requests": "İstekler",
+      "requestCounts": "{{requests}} yanıtlandı, {{errors}} sunucuda başarısız oldu",
+      "logged": "Günlüğe yazılan",
+      "loggedCounts": "{{warnings}} uyarı, {{errors}} hata",
+      "rescans": "Zamanlanmış taramalar",
+      "every": "Her {{time}}",
+      "remote": "Uzaktan erişim",
+      "remoteState": {
+        "off": "Kapalı",
+        "working": "Ayarlanıyor",
+        "ready": "Çalışıyor",
+        "failed": "Çalışmıyor"
+      },
+      "runtime": "Go çalışma ortamı",
+      "heap": "{{heap}} kullanımda, {{goroutines}} goroutine"
+    },
+    "log": {
+      "title": "Günlük",
+      "intro": "Sunucu başladığından beri son {{count}} satır. Tam günlük, sunucunun çıktısının gittiği yerdedir; örneğin konteynerin günlüğü.",
+      "download": "İndir",
+      "search": "Günlükte ara",
+      "level": "Göster",
+      "levels": {
+        "all": "Tümü",
+        "warn": "Uyarılar ve hatalar",
+        "error": "Hatalar"
+      },
+      "live": "Yeni satırları takip et",
+      "older": "Daha eski satırları göster",
+      "empty": "Eşleşen satır yok."
+    }
   }
 }

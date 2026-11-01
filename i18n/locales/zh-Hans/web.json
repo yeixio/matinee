@@ -834,6 +834,10 @@
       "add-ons": {
         "title": "附加功能",
         "hint": "Radarr、Sonarr、Overseerr 和插件"
+      },
+      "health": {
+        "title": "服务器状态",
+        "hint": "负载、播放、任务、问题和日志"
       }
     }
   },
@@ -1002,5 +1006,154 @@
     "expired": "{{name}} 于 {{date}} 过期",
     "badge": "朋友",
     "seeEverything": "允许查看全部"
+  },
+  "health": {
+    "title": "服务器状态",
+    "intro": "服务器此刻的运行情况，供出问题时排查。这里的所有信息都来自这台服务器，也只留在这台服务器上。",
+    "cantLoad": "无法加载服务器状态：{{error}}",
+    "updates": "每 5 秒更新",
+    "upFor": "已运行 {{time}}",
+    "seconds": "{{seconds}} 秒",
+    "days": "{{days}} 天 {{hours}} 小时",
+    "hourAgo": "1 小时前",
+    "now": "现在",
+    "noHistory": "图表将在一分钟内填满。",
+    "chartLabel": "过去一小时的{{name}}",
+    "status": {
+      "ok": "一切正常",
+      "problems_other": "过去一小时有 {{count}} 条警告或错误",
+      "restarting": "服务器正在重启",
+      "database": "数据库没有响应",
+      "disk": "有文件夹无法读取"
+    },
+    "scope": {
+      "group": "Matinee 及其运行的 FFmpeg 进程。",
+      "process": "仅 Matinee 本身，不含 FFmpeg 进程。"
+    },
+    "tiles": {
+      "cpu": "CPU",
+      "machine": "整机 {{value}}",
+      "load": "负载 {{load}}",
+      "cpuLimit": "限制为 {{cores}} 个核心。",
+      "memory": "内存",
+      "of": "/ {{total}}",
+      "ofLimit": "/ 允许 {{total}}",
+      "sending": "发送",
+      "sentTotal": "启动以来 {{total}}",
+      "playing": "正在播放",
+      "transcodes_other": "{{count}} 个转码"
+    },
+    "level": {
+      "warn": "警告",
+      "error": "错误"
+    },
+    "streams": {
+      "title": "正在播放",
+      "none": "没有正在播放的内容。",
+      "direct": "直接播放",
+      "transcoding": "转码中",
+      "away": "不在家",
+      "paused": "已暂停",
+      "buffering": "缓冲中"
+    },
+    "transcodes": {
+      "title": "转码",
+      "none": "没有正在运行的转码。",
+      "kind": {
+        "video": "正在转换视频",
+        "copy": "正在重新封装视频",
+        "audio": "正在转换音频"
+      },
+      "mode": {
+        "cpu": "使用 CPU",
+        "encode": "{{name}} 编码",
+        "full": "{{name}} 解码并编码"
+      },
+      "burnSub": "字幕已烧录",
+      "started": "开始于{{time}}",
+      "stop": "停止",
+      "stopHint": "停止 FFmpeg。如果播放器仍然打开，它会开始新的转码。",
+      "cpuOnly": "转码在 CPU 上进行。"
+    },
+    "problems": {
+      "title": "警告和错误",
+      "none": "服务器启动以来没有警告或错误。",
+      "times_other": "{{count}} 次",
+      "last": "最近 {{time}}",
+      "showInLog": "在日志中查看",
+      "more_other": "再显示 {{count}} 条"
+    },
+    "jobs": {
+      "title": "后台任务",
+      "scan": "扫描{{library}}",
+      "scanning": "已扫描 {{time}}",
+      "lastScan": "{{time}}，用时 {{took}}",
+      "scanCounts": "新增 {{added}}，更新 {{updated}}，移除 {{removed}}，无法播放 {{failed}}",
+      "scanFailed": "失败：{{error}}",
+      "notScanned": "服务器启动以来未扫描",
+      "downloads": "设备下载",
+      "downloadCounts": "等待 {{waiting}}，转换中 {{converting}}，失败 {{failed}}",
+      "nothing": "无待办事项",
+      "importing": "正在导入观看记录"
+    },
+    "disks": {
+      "title": "磁盘空间",
+      "free": "可用 {{free}}，共 {{total}}",
+      "low": "空间不足",
+      "unreachableTitle": "无法读取",
+      "unreachable": "该文件夹没有响应。如果它位于网络共享上，请检查共享是否仍然连接。",
+      "use": {
+        "data": "数据",
+        "transcode": "转码",
+        "thumbnails": "进度条预览",
+        "images": "海报和图片",
+        "downloads": "下载",
+        "library": "{{library}}"
+      }
+    },
+    "details": {
+      "title": "服务器详情",
+      "version": "版本",
+      "ffmpeg": "FFmpeg",
+      "ffmpegMissing": "在 {{path}} 未找到",
+      "system": "系统",
+      "cores_other": "{{count}} 个核心",
+      "started": "启动时间",
+      "database": "数据库",
+      "answers": "{{ms}} 毫秒响应",
+      "dbCounts": "{{items}} 个条目，{{users}} 个账户，{{libraries}} 个媒体库",
+      "connections": "{{open}} 个连接，{{busy}} 个忙碌",
+      "dbError": "没有响应：{{error}}",
+      "requests": "请求",
+      "requestCounts": "已处理 {{requests}}，服务器错误 {{errors}}",
+      "logged": "已记录",
+      "loggedCounts": "{{warnings}} 条警告，{{errors}} 条错误",
+      "rescans": "定时扫描",
+      "every": "每 {{time}}",
+      "remote": "远程访问",
+      "remoteState": {
+        "off": "关闭",
+        "working": "设置中",
+        "ready": "正常",
+        "failed": "不可用"
+      },
+      "runtime": "Go 运行时",
+      "heap": "已用 {{heap}}，{{goroutines}} 个 goroutine"
+    },
+    "log": {
+      "title": "日志",
+      "intro": "服务器启动以来的最新 {{count}} 行。完整日志在服务器输出所去的地方，例如容器日志。",
+      "download": "下载",
+      "search": "搜索日志",
+      "level": "显示",
+      "levels": {
+        "all": "全部",
+        "warn": "警告和错误",
+        "error": "错误"
+      },
+      "live": "跟随新行",
+      "older": "显示更早的行",
+      "empty": "没有匹配的行。"
+    }
   }
 }

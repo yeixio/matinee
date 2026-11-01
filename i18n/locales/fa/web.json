@@ -838,6 +838,10 @@
       "add-ons": {
         "title": "افزونه‌ها",
         "hint": "Radarr، Sonarr، Overseerr و افزونه‌ها"
+      },
+      "health": {
+        "title": "وضعیت سرور",
+        "hint": "بار، پخش، کارها، مشکلات و گزارش"
       }
     }
   },
@@ -1008,5 +1012,159 @@
     "expired": "{{name}} در {{date}} منقضی شد",
     "badge": "دوست",
     "seeEverything": "اجازه دیدن همه چیز"
+  },
+  "health": {
+    "title": "وضعیت سرور",
+    "intro": "وضعیت فعلی سرور، برای وقتی که چیزی کار نمی‌کند. همه چیز اینجا از همین سرور می‌آید و روی آن می‌ماند.",
+    "cantLoad": "بارگیری وضعیت سرور ممکن نشد: {{error}}",
+    "updates": "هر ۵ ثانیه به‌روز می‌شود",
+    "upFor": "{{time}} است که کار می‌کند",
+    "seconds": "{{seconds}} ث",
+    "days": "{{days}} روز {{hours}} ساعت",
+    "hourAgo": "۱ ساعت پیش",
+    "now": "اکنون",
+    "noHistory": "نمودار تا یک دقیقهٔ دیگر پر می‌شود.",
+    "chartLabel": "{{name}} در یک ساعت گذشته",
+    "status": {
+      "ok": "همه چیز خوب است",
+      "problems_one": "{{count}} هشدار یا خطا در یک ساعت گذشته",
+      "problems_other": "{{count}} هشدار یا خطا در یک ساعت گذشته",
+      "restarting": "سرور در حال راه‌اندازی دوباره است",
+      "database": "پایگاه داده پاسخ نمی‌دهد",
+      "disk": "یک پوشه خوانده نمی‌شود"
+    },
+    "scope": {
+      "group": "Matinee و فرایندهای FFmpeg که اجرا می‌کند.",
+      "process": "فقط خود Matinee؛ فرایندهای FFmpeg حساب نمی‌شوند."
+    },
+    "tiles": {
+      "cpu": "پردازنده",
+      "machine": "کل دستگاه {{value}}",
+      "load": "بار {{load}}",
+      "cpuLimit": "محدود به {{cores}} هسته.",
+      "memory": "حافظه",
+      "of": "از {{total}}",
+      "ofLimit": "از {{total}} مجاز",
+      "sending": "ارسال",
+      "sentTotal": "{{total}} از زمان شروع",
+      "playing": "در حال پخش",
+      "transcodes_one": "{{count}} تبدیل",
+      "transcodes_other": "{{count}} تبدیل"
+    },
+    "level": {
+      "warn": "هشدار",
+      "error": "خطا"
+    },
+    "streams": {
+      "title": "در حال پخش",
+      "none": "چیزی پخش نمی‌شود.",
+      "direct": "پخش مستقیم",
+      "transcoding": "در حال تبدیل",
+      "away": "بیرون از خانه",
+      "paused": "مکث‌شده",
+      "buffering": "در حال بافر"
+    },
+    "transcodes": {
+      "title": "تبدیل‌ها",
+      "none": "هیچ تبدیلی در حال اجرا نیست.",
+      "kind": {
+        "video": "تبدیل ویدیو",
+        "copy": "بسته‌بندی دوبارهٔ ویدیو",
+        "audio": "تبدیل صدا"
+      },
+      "mode": {
+        "cpu": "روی پردازنده",
+        "encode": "{{name}} رمزگذاری می‌کند",
+        "full": "{{name}} رمزگشایی و رمزگذاری می‌کند"
+      },
+      "burnSub": "زیرنویس روی تصویر",
+      "started": "شروع {{time}}",
+      "stop": "توقف",
+      "stopHint": "FFmpeg را متوقف می‌کند. اگر پخش‌کننده هنوز باز باشد، تبدیل تازه‌ای شروع می‌کند.",
+      "cpuOnly": "تبدیل‌ها روی پردازنده اجرا می‌شوند."
+    },
+    "problems": {
+      "title": "هشدارها و خطاها",
+      "none": "از زمان شروع سرور هشدار یا خطایی نبوده است.",
+      "times_one": "{{count}} بار",
+      "times_other": "{{count}} بار",
+      "last": "آخرین بار {{time}}",
+      "showInLog": "نمایش در گزارش",
+      "more_one": "نمایش {{count}} مورد دیگر",
+      "more_other": "نمایش {{count}} مورد دیگر"
+    },
+    "jobs": {
+      "title": "کارهای پس‌زمینه",
+      "scan": "پویش {{library}}",
+      "scanning": "{{time}} است که پویش می‌کند",
+      "lastScan": "{{time}}، {{took}} طول کشید",
+      "scanCounts": "{{added}} افزوده، {{updated}} به‌روز، {{removed}} حذف، {{failed}} غیرقابل پخش",
+      "scanFailed": "ناموفق: {{error}}",
+      "notScanned": "از زمان شروع سرور پویش نشده",
+      "downloads": "بارگیری برای دستگاه‌ها",
+      "downloadCounts": "{{waiting}} در انتظار، {{converting}} در حال تبدیل، {{failed}} ناموفق",
+      "nothing": "کاری نیست",
+      "importing": "در حال وارد کردن سابقهٔ تماشا"
+    },
+    "disks": {
+      "title": "فضای دیسک",
+      "free": "{{free}} آزاد از {{total}}",
+      "low": "فضا کم است",
+      "unreachableTitle": "خوانده نمی‌شود",
+      "unreachable": "این پوشه پاسخ نداد. اگر روی یک اشتراک شبکه است، بررسی کن که هنوز وصل باشد.",
+      "use": {
+        "data": "داده‌ها",
+        "transcode": "تبدیل",
+        "thumbnails": "پیش‌نمایش نوار پیشروی",
+        "images": "پوسترها و تصاویر",
+        "downloads": "بارگیری‌ها",
+        "library": "{{library}}"
+      }
+    },
+    "details": {
+      "title": "جزئیات سرور",
+      "version": "نسخه",
+      "ffmpeg": "FFmpeg",
+      "ffmpegMissing": "در {{path}} پیدا نشد",
+      "system": "سیستم",
+      "cores_one": "{{count}} هسته",
+      "cores_other": "{{count}} هسته",
+      "started": "شروع",
+      "database": "پایگاه داده",
+      "answers": "در {{ms}} میلی‌ثانیه پاسخ می‌دهد",
+      "dbCounts": "{{items}} مورد، {{users}} حساب، {{libraries}} کتابخانه",
+      "connections": "{{open}} اتصال، {{busy}} مشغول",
+      "dbError": "پاسخ نداد: {{error}}",
+      "requests": "درخواست‌ها",
+      "requestCounts": "{{requests}} پاسخ داده شد، {{errors}} روی سرور ناموفق",
+      "logged": "ثبت‌شده",
+      "loggedCounts": "{{warnings}} هشدار، {{errors}} خطا",
+      "rescans": "پویش‌های زمان‌بندی‌شده",
+      "every": "هر {{time}}",
+      "remote": "دسترسی از راه دور",
+      "remoteState": {
+        "off": "خاموش",
+        "working": "در حال راه‌اندازی",
+        "ready": "کار می‌کند",
+        "failed": "کار نمی‌کند"
+      },
+      "runtime": "محیط اجرای Go",
+      "heap": "{{heap}} در استفاده، {{goroutines}} گوروتین"
+    },
+    "log": {
+      "title": "گزارش",
+      "intro": "آخرین {{count}} خط از زمان شروع سرور. گزارش کامل جایی است که خروجی سرور می‌رود، مثلاً گزارش کانتینر.",
+      "download": "بارگیری",
+      "search": "جستجو در گزارش",
+      "level": "نمایش",
+      "levels": {
+        "all": "همه",
+        "warn": "هشدارها و خطاها",
+        "error": "خطاها"
+      },
+      "live": "دنبال کردن خطوط تازه",
+      "older": "نمایش خطوط قدیمی‌تر",
+      "empty": "خطی پیدا نشد."
+    }
   }
 }

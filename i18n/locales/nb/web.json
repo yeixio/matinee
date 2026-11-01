@@ -838,6 +838,10 @@
       "add-ons": {
         "title": "Tillegg",
         "hint": "Radarr, Sonarr, Overseerr og programtillegg"
+      },
+      "health": {
+        "title": "Serverhelse",
+        "hint": "Belastning, avspilling, jobber, problemer og loggen"
       }
     }
   },
@@ -1008,5 +1012,159 @@
     "expired": "{{name}} utløp {{date}}",
     "badge": "Venn",
     "seeEverything": "La dem se alt"
+  },
+  "health": {
+    "title": "Serverhelse",
+    "intro": "Hvordan serveren har det akkurat nå, til når noe ikke virker. Alt her kommer fra denne serveren og blir der.",
+    "cantLoad": "Kunne ikke laste serverhelsen: {{error}}",
+    "updates": "Oppdateres hvert 5. sekund",
+    "upFor": "kjørt i {{time}}",
+    "seconds": "{{seconds}} s",
+    "days": "{{days}} d {{hours}} t",
+    "hourAgo": "for 1 time siden",
+    "now": "Nå",
+    "noHistory": "Diagrammet fylles ut i løpet av neste minutt.",
+    "chartLabel": "{{name}} den siste timen",
+    "status": {
+      "ok": "Alt ser bra ut",
+      "problems_one": "{{count}} advarsel eller feil den siste timen",
+      "problems_other": "{{count}} advarsler eller feil den siste timen",
+      "restarting": "Serveren starter på nytt",
+      "database": "Databasen svarer ikke",
+      "disk": "En mappe kan ikke leses"
+    },
+    "scope": {
+      "group": "Matinee og FFmpeg-prosessene det kjører.",
+      "process": "Bare Matinee selv; FFmpeg-prosesser telles ikke med."
+    },
+    "tiles": {
+      "cpu": "CPU",
+      "machine": "hele maskinen {{value}}",
+      "load": "belastning {{load}}",
+      "cpuLimit": "Begrenset til {{cores}} kjerner.",
+      "memory": "Minne",
+      "of": "av {{total}}",
+      "ofLimit": "av {{total}} tillatt",
+      "sending": "Sender",
+      "sentTotal": "{{total}} siden start",
+      "playing": "Spilles nå",
+      "transcodes_one": "{{count}} omkoding",
+      "transcodes_other": "{{count}} omkodinger"
+    },
+    "level": {
+      "warn": "Advarsel",
+      "error": "Feil"
+    },
+    "streams": {
+      "title": "Spilles nå",
+      "none": "Ingenting spilles.",
+      "direct": "Direkte avspilling",
+      "transcoding": "Omkoder",
+      "away": "Borte",
+      "paused": "Satt på pause",
+      "buffering": "Bufrer"
+    },
+    "transcodes": {
+      "title": "Omkodinger",
+      "none": "Ingen omkodinger kjører.",
+      "kind": {
+        "video": "Konverterer video",
+        "copy": "Pakker om video",
+        "audio": "Konverterer lyd"
+      },
+      "mode": {
+        "cpu": "på CPU-en",
+        "encode": "{{name}} koder",
+        "full": "{{name}} dekoder og koder"
+      },
+      "burnSub": "undertekster brent inn",
+      "started": "Startet {{time}}",
+      "stop": "Stopp",
+      "stopHint": "Stopper FFmpeg. Er spilleren fortsatt åpen, starter den en ny omkoding.",
+      "cpuOnly": "Omkodinger kjører på CPU-en."
+    },
+    "problems": {
+      "title": "Advarsler og feil",
+      "none": "Ingen advarsler eller feil siden serveren startet.",
+      "times_one": "{{count}} gang",
+      "times_other": "{{count}} ganger",
+      "last": "sist {{time}}",
+      "showInLog": "Vis i loggen",
+      "more_one": "Vis {{count}} til",
+      "more_other": "Vis {{count}} til"
+    },
+    "jobs": {
+      "title": "Bakgrunnsjobber",
+      "scan": "Skann {{library}}",
+      "scanning": "Skanner i {{time}}",
+      "lastScan": "{{time}}, tok {{took}}",
+      "scanCounts": "{{added}} lagt til, {{updated}} oppdatert, {{removed}} fjernet, {{failed}} kan ikke spilles",
+      "scanFailed": "Mislyktes: {{error}}",
+      "notScanned": "Ikke skannet siden serveren startet",
+      "downloads": "Nedlastinger til enheter",
+      "downloadCounts": "{{waiting}} venter, {{converting}} konverteres, {{failed}} mislyktes",
+      "nothing": "Ingenting å gjøre",
+      "importing": "Importerer seerhistorikk"
+    },
+    "disks": {
+      "title": "Diskplass",
+      "free": "{{free}} ledig av {{total}}",
+      "low": "Lite plass",
+      "unreachableTitle": "Kan ikke leses",
+      "unreachable": "Denne mappen svarte ikke. Ligger den på en nettverksressurs, sjekk at ressursen fortsatt er tilkoblet.",
+      "use": {
+        "data": "Data",
+        "transcode": "Omkoding",
+        "thumbnails": "Forhåndsvisninger på tidslinjen",
+        "images": "Plakater og bilder",
+        "downloads": "Nedlastinger",
+        "library": "{{library}}"
+      }
+    },
+    "details": {
+      "title": "Serverdetaljer",
+      "version": "Versjon",
+      "ffmpeg": "FFmpeg",
+      "ffmpegMissing": "Ikke funnet i {{path}}",
+      "system": "System",
+      "cores_one": "{{count}} kjerne",
+      "cores_other": "{{count}} kjerner",
+      "started": "Startet",
+      "database": "Database",
+      "answers": "svarer på {{ms}} ms",
+      "dbCounts": "{{items}} elementer, {{users}} kontoer, {{libraries}} biblioteker",
+      "connections": "{{open}} tilkoblinger, {{busy}} opptatt",
+      "dbError": "Svarte ikke: {{error}}",
+      "requests": "Forespørsler",
+      "requestCounts": "{{requests}} besvart, {{errors}} feilet på serveren",
+      "logged": "Logget",
+      "loggedCounts": "{{warnings}} advarsler, {{errors}} feil",
+      "rescans": "Planlagte skanninger",
+      "every": "Hver {{time}}",
+      "remote": "Fjerntilgang",
+      "remoteState": {
+        "off": "Av",
+        "working": "Settes opp",
+        "ready": "Virker",
+        "failed": "Virker ikke"
+      },
+      "runtime": "Go-kjøremiljø",
+      "heap": "{{heap}} i bruk, {{goroutines}} goroutiner"
+    },
+    "log": {
+      "title": "Logg",
+      "intro": "De siste {{count}} linjene siden serveren startet. Hele loggen ligger der serverens utdata havner, for eksempel containerens logg.",
+      "download": "Last ned",
+      "search": "Søk i loggen",
+      "level": "Vis",
+      "levels": {
+        "all": "Alt",
+        "warn": "Advarsler og feil",
+        "error": "Feil"
+      },
+      "live": "Følg nye linjer",
+      "older": "Vis eldre linjer",
+      "empty": "Ingen linjer passer."
+    }
   }
 }

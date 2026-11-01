@@ -838,6 +838,10 @@
       "add-ons": {
         "title": "Tillägg",
         "hint": "Radarr, Sonarr, Overseerr och plugins"
+      },
+      "health": {
+        "title": "Serverhälsa",
+        "hint": "Belastning, uppspelning, jobb, problem och loggen"
       }
     }
   },
@@ -1008,5 +1012,159 @@
     "expired": "{{name}} gick ut {{date}}",
     "badge": "Vän",
     "seeEverything": "Låt dem se allt"
+  },
+  "health": {
+    "title": "Serverhälsa",
+    "intro": "Hur servern mår just nu, för när något inte fungerar. Allt här kommer från den här servern och stannar där.",
+    "cantLoad": "Kunde inte läsa in serverhälsan: {{error}}",
+    "updates": "Uppdateras var 5:e sekund",
+    "upFor": "igång i {{time}}",
+    "seconds": "{{seconds}} s",
+    "days": "{{days}} d {{hours}} h",
+    "hourAgo": "för 1 timme sedan",
+    "now": "Nu",
+    "noHistory": "Diagrammet fylls i under nästa minut.",
+    "chartLabel": "{{name}} den senaste timmen",
+    "status": {
+      "ok": "Allt ser bra ut",
+      "problems_one": "{{count}} varning eller fel den senaste timmen",
+      "problems_other": "{{count}} varningar eller fel den senaste timmen",
+      "restarting": "Servern startar om",
+      "database": "Databasen svarar inte",
+      "disk": "En mapp kan inte läsas"
+    },
+    "scope": {
+      "group": "Matinee och FFmpeg-processerna det kör.",
+      "process": "Bara Matinee; FFmpeg-processer räknas inte."
+    },
+    "tiles": {
+      "cpu": "CPU",
+      "machine": "hela datorn {{value}}",
+      "load": "belastning {{load}}",
+      "cpuLimit": "Begränsad till {{cores}} kärnor.",
+      "memory": "Minne",
+      "of": "av {{total}}",
+      "ofLimit": "av {{total}} tillåtet",
+      "sending": "Skickar",
+      "sentTotal": "{{total}} sedan start",
+      "playing": "Spelas nu",
+      "transcodes_one": "{{count}} omkodning",
+      "transcodes_other": "{{count}} omkodningar"
+    },
+    "level": {
+      "warn": "Varning",
+      "error": "Fel"
+    },
+    "streams": {
+      "title": "Spelas nu",
+      "none": "Inget spelas.",
+      "direct": "Direktuppspelning",
+      "transcoding": "Omkodas",
+      "away": "Hemifrån",
+      "paused": "Pausad",
+      "buffering": "Buffrar"
+    },
+    "transcodes": {
+      "title": "Omkodningar",
+      "none": "Inga omkodningar pågår.",
+      "kind": {
+        "video": "Konverterar video",
+        "copy": "Packar om video",
+        "audio": "Konverterar ljud"
+      },
+      "mode": {
+        "cpu": "på processorn",
+        "encode": "{{name}} kodar",
+        "full": "{{name}} avkodar och kodar"
+      },
+      "burnSub": "undertexter inbrända",
+      "started": "Startade {{time}}",
+      "stop": "Stoppa",
+      "stopHint": "Stoppar FFmpeg. Om spelaren fortfarande är öppen startar den en ny omkodning.",
+      "cpuOnly": "Omkodningar körs på processorn."
+    },
+    "problems": {
+      "title": "Varningar och fel",
+      "none": "Inga varningar eller fel sedan servern startade.",
+      "times_one": "{{count}} gång",
+      "times_other": "{{count}} gånger",
+      "last": "senast {{time}}",
+      "showInLog": "Visa i loggen",
+      "more_one": "Visa {{count}} till",
+      "more_other": "Visa {{count}} till"
+    },
+    "jobs": {
+      "title": "Bakgrundsjobb",
+      "scan": "Skanna {{library}}",
+      "scanning": "Skannar sedan {{time}}",
+      "lastScan": "{{time}}, tog {{took}}",
+      "scanCounts": "{{added}} tillagda, {{updated}} uppdaterade, {{removed}} borttagna, {{failed}} ospelbara",
+      "scanFailed": "Misslyckades: {{error}}",
+      "notScanned": "Inte skannad sedan servern startade",
+      "downloads": "Nedladdningar för enheter",
+      "downloadCounts": "{{waiting}} väntar, {{converting}} konverteras, {{failed}} misslyckades",
+      "nothing": "Inget att göra",
+      "importing": "Importerar tittarhistorik"
+    },
+    "disks": {
+      "title": "Diskutrymme",
+      "free": "{{free}} ledigt av {{total}}",
+      "low": "Ont om utrymme",
+      "unreachableTitle": "Kan inte läsas",
+      "unreachable": "Den här mappen svarade inte. Om den ligger på en nätverksresurs, kontrollera att resursen fortfarande är ansluten.",
+      "use": {
+        "data": "Data",
+        "transcode": "Omkodning",
+        "thumbnails": "Förhandsvisningar i tidslinjen",
+        "images": "Affischer och bilder",
+        "downloads": "Nedladdningar",
+        "library": "{{library}}"
+      }
+    },
+    "details": {
+      "title": "Serverinformation",
+      "version": "Version",
+      "ffmpeg": "FFmpeg",
+      "ffmpegMissing": "Hittades inte på {{path}}",
+      "system": "System",
+      "cores_one": "{{count}} kärna",
+      "cores_other": "{{count}} kärnor",
+      "started": "Startad",
+      "database": "Databas",
+      "answers": "svarar på {{ms}} ms",
+      "dbCounts": "{{items}} objekt, {{users}} konton, {{libraries}} bibliotek",
+      "connections": "{{open}} anslutningar, {{busy}} upptagna",
+      "dbError": "Svarade inte: {{error}}",
+      "requests": "Förfrågningar",
+      "requestCounts": "{{requests}} besvarade, {{errors}} misslyckades på servern",
+      "logged": "Loggat",
+      "loggedCounts": "{{warnings}} varningar, {{errors}} fel",
+      "rescans": "Schemalagda skanningar",
+      "every": "Var {{time}}",
+      "remote": "Fjärråtkomst",
+      "remoteState": {
+        "off": "Av",
+        "working": "Ställs in",
+        "ready": "Fungerar",
+        "failed": "Fungerar inte"
+      },
+      "runtime": "Go-körmiljö",
+      "heap": "{{heap}} används, {{goroutines}} goroutiner"
+    },
+    "log": {
+      "title": "Logg",
+      "intro": "De senaste {{count}} raderna sedan servern startade. Hela loggen finns där serverns utdata hamnar, till exempel containerns logg.",
+      "download": "Ladda ned",
+      "search": "Sök i loggen",
+      "level": "Visa",
+      "levels": {
+        "all": "Allt",
+        "warn": "Varningar och fel",
+        "error": "Fel"
+      },
+      "live": "Följ nya rader",
+      "older": "Visa äldre rader",
+      "empty": "Inga rader matchar."
+    }
   }
 }

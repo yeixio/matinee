@@ -834,6 +834,10 @@
       "add-ons": {
         "title": "附加功能",
         "hint": "Radarr、Sonarr、Overseerr 和外掛程式"
+      },
+      "health": {
+        "title": "伺服器狀態",
+        "hint": "負載、播放、工作、問題和記錄"
       }
     }
   },
@@ -1002,5 +1006,154 @@
     "expired": "{{name}} 於 {{date}} 過期",
     "badge": "朋友",
     "seeEverything": "允許查看全部"
+  },
+  "health": {
+    "title": "伺服器狀態",
+    "intro": "伺服器此刻的運作情況，供出問題時排查。這裡的所有資訊都來自這台伺服器，也只留在這台伺服器上。",
+    "cantLoad": "無法載入伺服器狀態：{{error}}",
+    "updates": "每 5 秒更新",
+    "upFor": "已運作 {{time}}",
+    "seconds": "{{seconds}} 秒",
+    "days": "{{days}} 天 {{hours}} 小時",
+    "hourAgo": "1 小時前",
+    "now": "現在",
+    "noHistory": "圖表會在一分鐘內填滿。",
+    "chartLabel": "過去一小時的{{name}}",
+    "status": {
+      "ok": "一切正常",
+      "problems_other": "過去一小時有 {{count}} 則警告或錯誤",
+      "restarting": "伺服器正在重新啟動",
+      "database": "資料庫沒有回應",
+      "disk": "有資料夾無法讀取"
+    },
+    "scope": {
+      "group": "Matinee 及其執行的 FFmpeg 程序。",
+      "process": "僅 Matinee 本身，不含 FFmpeg 程序。"
+    },
+    "tiles": {
+      "cpu": "CPU",
+      "machine": "整台電腦 {{value}}",
+      "load": "負載 {{load}}",
+      "cpuLimit": "限制為 {{cores}} 個核心。",
+      "memory": "記憶體",
+      "of": "/ {{total}}",
+      "ofLimit": "/ 允許 {{total}}",
+      "sending": "傳送",
+      "sentTotal": "啟動以來 {{total}}",
+      "playing": "正在播放",
+      "transcodes_other": "{{count}} 個轉碼"
+    },
+    "level": {
+      "warn": "警告",
+      "error": "錯誤"
+    },
+    "streams": {
+      "title": "正在播放",
+      "none": "沒有正在播放的內容。",
+      "direct": "直接播放",
+      "transcoding": "轉碼中",
+      "away": "不在家",
+      "paused": "已暫停",
+      "buffering": "緩衝中"
+    },
+    "transcodes": {
+      "title": "轉碼",
+      "none": "沒有正在執行的轉碼。",
+      "kind": {
+        "video": "正在轉換影片",
+        "copy": "正在重新封裝影片",
+        "audio": "正在轉換音訊"
+      },
+      "mode": {
+        "cpu": "使用 CPU",
+        "encode": "{{name}} 編碼",
+        "full": "{{name}} 解碼並編碼"
+      },
+      "burnSub": "字幕已燒錄",
+      "started": "開始於{{time}}",
+      "stop": "停止",
+      "stopHint": "停止 FFmpeg。如果播放器仍開著，它會開始新的轉碼。",
+      "cpuOnly": "轉碼在 CPU 上進行。"
+    },
+    "problems": {
+      "title": "警告和錯誤",
+      "none": "伺服器啟動以來沒有警告或錯誤。",
+      "times_other": "{{count}} 次",
+      "last": "最近 {{time}}",
+      "showInLog": "在記錄中查看",
+      "more_other": "再顯示 {{count}} 則"
+    },
+    "jobs": {
+      "title": "背景工作",
+      "scan": "掃描{{library}}",
+      "scanning": "已掃描 {{time}}",
+      "lastScan": "{{time}}，耗時 {{took}}",
+      "scanCounts": "新增 {{added}}，更新 {{updated}}，移除 {{removed}}，無法播放 {{failed}}",
+      "scanFailed": "失敗：{{error}}",
+      "notScanned": "伺服器啟動以來未掃描",
+      "downloads": "裝置下載",
+      "downloadCounts": "等待 {{waiting}}，轉換中 {{converting}}，失敗 {{failed}}",
+      "nothing": "沒有待辦事項",
+      "importing": "正在匯入觀看紀錄"
+    },
+    "disks": {
+      "title": "磁碟空間",
+      "free": "可用 {{free}}，共 {{total}}",
+      "low": "空間不足",
+      "unreachableTitle": "無法讀取",
+      "unreachable": "這個資料夾沒有回應。如果它位於網路共用上，請檢查共用是否仍然連線。",
+      "use": {
+        "data": "資料",
+        "transcode": "轉碼",
+        "thumbnails": "進度列預覽",
+        "images": "海報和圖片",
+        "downloads": "下載",
+        "library": "{{library}}"
+      }
+    },
+    "details": {
+      "title": "伺服器詳細資料",
+      "version": "版本",
+      "ffmpeg": "FFmpeg",
+      "ffmpegMissing": "在 {{path}} 找不到",
+      "system": "系統",
+      "cores_other": "{{count}} 個核心",
+      "started": "啟動時間",
+      "database": "資料庫",
+      "answers": "{{ms}} 毫秒回應",
+      "dbCounts": "{{items}} 個項目，{{users}} 個帳號，{{libraries}} 個媒體庫",
+      "connections": "{{open}} 個連線，{{busy}} 個忙碌",
+      "dbError": "沒有回應：{{error}}",
+      "requests": "要求",
+      "requestCounts": "已處理 {{requests}}，伺服器錯誤 {{errors}}",
+      "logged": "已記錄",
+      "loggedCounts": "{{warnings}} 則警告，{{errors}} 則錯誤",
+      "rescans": "排程掃描",
+      "every": "每 {{time}}",
+      "remote": "遠端存取",
+      "remoteState": {
+        "off": "關閉",
+        "working": "設定中",
+        "ready": "正常",
+        "failed": "無法使用"
+      },
+      "runtime": "Go 執行環境",
+      "heap": "已用 {{heap}}，{{goroutines}} 個 goroutine"
+    },
+    "log": {
+      "title": "記錄",
+      "intro": "伺服器啟動以來的最新 {{count}} 行。完整記錄在伺服器輸出的去處，例如容器記錄。",
+      "download": "下載",
+      "search": "搜尋記錄",
+      "level": "顯示",
+      "levels": {
+        "all": "全部",
+        "warn": "警告和錯誤",
+        "error": "錯誤"
+      },
+      "live": "跟隨新行",
+      "older": "顯示較早的行",
+      "empty": "沒有符合的行。"
+    }
   }
 }

@@ -846,6 +846,10 @@
       "add-ons": {
         "title": "Dodatki",
         "hint": "Radarr, Sonarr, Overseerr i wtyczki"
+      },
+      "health": {
+        "title": "Stan serwera",
+        "hint": "Obciążenie, odtwarzanie, zadania, problemy i dziennik"
       }
     }
   },
@@ -1020,5 +1024,169 @@
     "expired": "{{name}}: wygasło {{date}}",
     "badge": "Znajomy",
     "seeEverything": "Pokaż wszystko"
+  },
+  "health": {
+    "title": "Stan serwera",
+    "intro": "Jak serwer radzi sobie w tej chwili, na wypadek gdy coś nie działa. Wszystko tutaj pochodzi z tego serwera i na nim zostaje.",
+    "cantLoad": "Nie udało się wczytać stanu serwera: {{error}}",
+    "updates": "Odświeża się co 5 sekund",
+    "upFor": "działa od {{time}}",
+    "seconds": "{{seconds}} s",
+    "days": "{{days}} d {{hours}} godz.",
+    "hourAgo": "1 godzinę temu",
+    "now": "Teraz",
+    "noHistory": "Wykres wypełni się w ciągu najbliższej minuty.",
+    "chartLabel": "{{name}} w ostatniej godzinie",
+    "status": {
+      "ok": "Wszystko w porządku",
+      "problems_few": "{{count}} ostrzeżenia lub błędy w ostatniej godzinie",
+      "problems_many": "{{count}} ostrzeżeń lub błędów w ostatniej godzinie",
+      "problems_one": "{{count}} ostrzeżenie lub błąd w ostatniej godzinie",
+      "problems_other": "{{count}} ostrzeżenia lub błędu w ostatniej godzinie",
+      "restarting": "Serwer uruchamia się ponownie",
+      "database": "Baza danych nie odpowiada",
+      "disk": "Nie można odczytać folderu"
+    },
+    "scope": {
+      "group": "Matinee i uruchamiane przez nie procesy FFmpeg.",
+      "process": "Tylko Matinee; procesy FFmpeg nie są liczone."
+    },
+    "tiles": {
+      "cpu": "Procesor",
+      "machine": "cały komputer {{value}}",
+      "load": "obciążenie {{load}}",
+      "cpuLimit": "Ograniczone do {{cores}} rdzeni.",
+      "memory": "Pamięć",
+      "of": "z {{total}}",
+      "ofLimit": "z dozwolonych {{total}}",
+      "sending": "Wysyła",
+      "sentTotal": "{{total}} od uruchomienia",
+      "playing": "Teraz odtwarzane",
+      "transcodes_few": "{{count}} transkodowania",
+      "transcodes_many": "{{count}} transkodowań",
+      "transcodes_one": "{{count}} transkodowanie",
+      "transcodes_other": "{{count}} transkodowania"
+    },
+    "level": {
+      "warn": "Ostrzeżenie",
+      "error": "Błąd"
+    },
+    "streams": {
+      "title": "Teraz odtwarzane",
+      "none": "Nic nie jest odtwarzane.",
+      "direct": "Odtwarzanie bezpośrednie",
+      "transcoding": "Transkodowanie",
+      "away": "Poza domem",
+      "paused": "Wstrzymane",
+      "buffering": "Buforowanie"
+    },
+    "transcodes": {
+      "title": "Transkodowania",
+      "none": "Nie trwa żadne transkodowanie.",
+      "kind": {
+        "video": "Konwersja wideo",
+        "copy": "Przepakowywanie wideo",
+        "audio": "Konwersja dźwięku"
+      },
+      "mode": {
+        "cpu": "na procesorze",
+        "encode": "{{name}} koduje",
+        "full": "{{name}} dekoduje i koduje"
+      },
+      "burnSub": "wypalone napisy",
+      "started": "Rozpoczęte {{time}}",
+      "stop": "Zatrzymaj",
+      "stopHint": "Zatrzymuje FFmpeg. Jeśli odtwarzacz jest nadal otwarty, rozpocznie nowe transkodowanie.",
+      "cpuOnly": "Transkodowania działają na procesorze."
+    },
+    "problems": {
+      "title": "Ostrzeżenia i błędy",
+      "none": "Brak ostrzeżeń i błędów od uruchomienia serwera.",
+      "times_few": "{{count}} razy",
+      "times_many": "{{count}} razy",
+      "times_one": "{{count}} raz",
+      "times_other": "{{count}} razy",
+      "last": "ostatnio {{time}}",
+      "showInLog": "Pokaż w dzienniku",
+      "more_few": "Pokaż jeszcze {{count}}",
+      "more_many": "Pokaż jeszcze {{count}}",
+      "more_one": "Pokaż jeszcze {{count}}",
+      "more_other": "Pokaż jeszcze {{count}}"
+    },
+    "jobs": {
+      "title": "Zadania w tle",
+      "scan": "Skanowanie: {{library}}",
+      "scanning": "Skanowanie od {{time}}",
+      "lastScan": "{{time}}, trwało {{took}}",
+      "scanCounts": "dodane: {{added}}, zaktualizowane: {{updated}}, usunięte: {{removed}}, nieodtwarzalne: {{failed}}",
+      "scanFailed": "Niepowodzenie: {{error}}",
+      "notScanned": "Nie skanowano od uruchomienia serwera",
+      "downloads": "Pobrania na urządzenia",
+      "downloadCounts": "oczekujące: {{waiting}}, konwertowane: {{converting}}, nieudane: {{failed}}",
+      "nothing": "Nic do zrobienia",
+      "importing": "Importowanie historii oglądania"
+    },
+    "disks": {
+      "title": "Miejsce na dysku",
+      "free": "Wolne {{free}} z {{total}}",
+      "low": "Mało miejsca",
+      "unreachableTitle": "Nie można odczytać",
+      "unreachable": "Ten folder nie odpowiedział. Jeśli jest na udziale sieciowym, sprawdź, czy udział jest nadal podłączony.",
+      "use": {
+        "data": "Dane",
+        "transcode": "Transkodowanie",
+        "thumbnails": "Podglądy na pasku przewijania",
+        "images": "Plakaty i grafiki",
+        "downloads": "Pobrania",
+        "library": "{{library}}"
+      }
+    },
+    "details": {
+      "title": "Szczegóły serwera",
+      "version": "Wersja",
+      "ffmpeg": "FFmpeg",
+      "ffmpegMissing": "Nie znaleziono w {{path}}",
+      "system": "System",
+      "cores_few": "{{count}} rdzenie",
+      "cores_many": "{{count}} rdzeni",
+      "cores_one": "{{count}} rdzeń",
+      "cores_other": "{{count}} rdzenia",
+      "started": "Uruchomiono",
+      "database": "Baza danych",
+      "answers": "odpowiada w {{ms}} ms",
+      "dbCounts": "pozycje: {{items}}, konta: {{users}}, biblioteki: {{libraries}}",
+      "connections": "połączenia: {{open}}, zajęte: {{busy}}",
+      "dbError": "Brak odpowiedzi: {{error}}",
+      "requests": "Żądania",
+      "requestCounts": "obsłużone: {{requests}}, błędy serwera: {{errors}}",
+      "logged": "Zapisane w dzienniku",
+      "loggedCounts": "ostrzeżenia: {{warnings}}, błędy: {{errors}}",
+      "rescans": "Zaplanowane skanowania",
+      "every": "Co {{time}}",
+      "remote": "Dostęp zdalny",
+      "remoteState": {
+        "off": "Wyłączony",
+        "working": "Konfigurowanie",
+        "ready": "Działa",
+        "failed": "Nie działa"
+      },
+      "runtime": "Środowisko Go",
+      "heap": "w użyciu {{heap}}, gorutyny: {{goroutines}}"
+    },
+    "log": {
+      "title": "Dziennik",
+      "intro": "Ostatnie {{count}} wierszy od uruchomienia serwera. Pełny dziennik jest tam, gdzie trafia wyjście serwera, na przykład w logu kontenera.",
+      "download": "Pobierz",
+      "search": "Szukaj w dzienniku",
+      "level": "Pokaż",
+      "levels": {
+        "all": "Wszystko",
+        "warn": "Ostrzeżenia i błędy",
+        "error": "Błędy"
+      },
+      "live": "Śledź nowe wiersze",
+      "older": "Pokaż starsze wiersze",
+      "empty": "Brak pasujących wierszy."
+    }
   }
 }

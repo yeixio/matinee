@@ -842,6 +842,10 @@
       "add-ons": {
         "title": "Extensions",
         "hint": "Radarr, Sonarr, Overseerr et plugins"
+      },
+      "health": {
+        "title": "État du serveur",
+        "hint": "Charge, lecture, tâches, problèmes et journal"
       }
     }
   },
@@ -1014,5 +1018,164 @@
     "expired": "{{name}} a expiré le {{date}}",
     "badge": "Ami",
     "seeEverything": "Tout lui montrer"
+  },
+  "health": {
+    "title": "État du serveur",
+    "intro": "L’état du serveur en ce moment, pour quand quelque chose ne marche pas. Tout ici vient de ce serveur et y reste.",
+    "cantLoad": "Impossible de charger l’état du serveur : {{error}}",
+    "updates": "Mis à jour toutes les 5 secondes",
+    "upFor": "en marche depuis {{time}}",
+    "seconds": "{{seconds}} s",
+    "days": "{{days}} j {{hours}} h",
+    "hourAgo": "il y a 1 heure",
+    "now": "Maintenant",
+    "noHistory": "Le graphique se remplit dans la minute qui vient.",
+    "chartLabel": "{{name}} sur la dernière heure",
+    "status": {
+      "ok": "Tout va bien",
+      "problems_many": "{{count}} avertissements ou erreurs dans la dernière heure",
+      "problems_one": "{{count}} avertissement ou erreur dans la dernière heure",
+      "problems_other": "{{count}} avertissements ou erreurs dans la dernière heure",
+      "restarting": "Le serveur redémarre",
+      "database": "La base de données ne répond pas",
+      "disk": "Un dossier est illisible"
+    },
+    "scope": {
+      "group": "Matinee et les processus FFmpeg qu’il lance.",
+      "process": "Matinee seul ; les processus FFmpeg ne sont pas comptés."
+    },
+    "tiles": {
+      "cpu": "Processeur",
+      "machine": "machine entière {{value}}",
+      "load": "charge {{load}}",
+      "cpuLimit": "Limité à {{cores}} cœurs.",
+      "memory": "Mémoire",
+      "of": "sur {{total}}",
+      "ofLimit": "sur {{total}} autorisés",
+      "sending": "Envoi",
+      "sentTotal": "{{total}} depuis le démarrage",
+      "playing": "En lecture",
+      "transcodes_many": "{{count}} transcodages",
+      "transcodes_one": "{{count}} transcodage",
+      "transcodes_other": "{{count}} transcodages"
+    },
+    "level": {
+      "warn": "Avertissement",
+      "error": "Erreur"
+    },
+    "streams": {
+      "title": "En lecture",
+      "none": "Rien n’est en lecture.",
+      "direct": "Lecture directe",
+      "transcoding": "Transcodage",
+      "away": "Hors du domicile",
+      "paused": "En pause",
+      "buffering": "Mise en mémoire tampon"
+    },
+    "transcodes": {
+      "title": "Transcodages",
+      "none": "Aucun transcodage en cours.",
+      "kind": {
+        "video": "Conversion de la vidéo",
+        "copy": "Réempaquetage de la vidéo",
+        "audio": "Conversion du son"
+      },
+      "mode": {
+        "cpu": "sur le processeur",
+        "encode": "{{name}} encode",
+        "full": "{{name}} décode et encode"
+      },
+      "burnSub": "sous-titres incrustés",
+      "started": "Démarré {{time}}",
+      "stop": "Arrêter",
+      "stopHint": "Arrête FFmpeg. Si le lecteur est encore ouvert, il lance un nouveau transcodage.",
+      "cpuOnly": "Les transcodages tournent sur le processeur."
+    },
+    "problems": {
+      "title": "Avertissements et erreurs",
+      "none": "Aucun avertissement ni erreur depuis le démarrage du serveur.",
+      "times_many": "{{count}} fois",
+      "times_one": "{{count}} fois",
+      "times_other": "{{count}} fois",
+      "last": "dernière fois {{time}}",
+      "showInLog": "Voir dans le journal",
+      "more_many": "Afficher {{count}} de plus",
+      "more_one": "Afficher {{count}} de plus",
+      "more_other": "Afficher {{count}} de plus"
+    },
+    "jobs": {
+      "title": "Tâches en arrière-plan",
+      "scan": "Analyse de {{library}}",
+      "scanning": "Analyse en cours depuis {{time}}",
+      "lastScan": "{{time}}, a pris {{took}}",
+      "scanCounts": "{{added}} ajoutés, {{updated}} mis à jour, {{removed}} retirés, {{failed}} illisibles",
+      "scanFailed": "Échec : {{error}}",
+      "notScanned": "Pas analysée depuis le démarrage du serveur",
+      "downloads": "Téléchargements pour les appareils",
+      "downloadCounts": "{{waiting}} en attente, {{converting}} en conversion, {{failed}} en échec",
+      "nothing": "Rien à faire",
+      "importing": "Import de l’historique de visionnage"
+    },
+    "disks": {
+      "title": "Espace disque",
+      "free": "{{free}} libres sur {{total}}",
+      "low": "Peu d’espace",
+      "unreachableTitle": "Illisible",
+      "unreachable": "Ce dossier n’a pas répondu. S’il est sur un partage réseau, vérifie que le partage est toujours connecté.",
+      "use": {
+        "data": "Données",
+        "transcode": "Transcodage",
+        "thumbnails": "Aperçus de la barre de lecture",
+        "images": "Affiches et illustrations",
+        "downloads": "Téléchargements",
+        "library": "{{library}}"
+      }
+    },
+    "details": {
+      "title": "Détails du serveur",
+      "version": "Version",
+      "ffmpeg": "FFmpeg",
+      "ffmpegMissing": "Introuvable à {{path}}",
+      "system": "Système",
+      "cores_many": "{{count}} cœurs",
+      "cores_one": "{{count}} cœur",
+      "cores_other": "{{count}} cœurs",
+      "started": "Démarré",
+      "database": "Base de données",
+      "answers": "répond en {{ms}} ms",
+      "dbCounts": "{{items}} éléments, {{users}} comptes, {{libraries}} bibliothèques",
+      "connections": "{{open}} connexions, {{busy}} occupées",
+      "dbError": "Pas de réponse : {{error}}",
+      "requests": "Requêtes",
+      "requestCounts": "{{requests}} traitées, {{errors}} en échec sur le serveur",
+      "logged": "Journalisé",
+      "loggedCounts": "{{warnings}} avertissements, {{errors}} erreurs",
+      "rescans": "Analyses planifiées",
+      "every": "Toutes les {{time}}",
+      "remote": "Accès à distance",
+      "remoteState": {
+        "off": "Désactivé",
+        "working": "Configuration",
+        "ready": "Fonctionne",
+        "failed": "Ne fonctionne pas"
+      },
+      "runtime": "Environnement Go",
+      "heap": "{{heap}} utilisés, {{goroutines}} goroutines"
+    },
+    "log": {
+      "title": "Journal",
+      "intro": "Les {{count}} dernières lignes depuis le démarrage du serveur. Le journal complet se trouve là où va la sortie du serveur, par exemple le journal du conteneur.",
+      "download": "Télécharger",
+      "search": "Chercher dans le journal",
+      "level": "Afficher",
+      "levels": {
+        "all": "Tout",
+        "warn": "Avertissements et erreurs",
+        "error": "Erreurs"
+      },
+      "live": "Suivre les nouvelles lignes",
+      "older": "Afficher les lignes plus anciennes",
+      "empty": "Aucune ligne ne correspond."
+    }
   }
 }
