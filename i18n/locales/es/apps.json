@@ -522,5 +522,13 @@
     "use": "Usar",
     "reset": "Usar la portada automática",
     "chosenNote": "Esta portada se eligió a mano, así que los escaneos la conservan."
+  },
+  "rating": {
+    "rate": "Valorar",
+    "yours": "Tu valoración: {{stars}} de 5",
+    "stars": "{{stars}} de 5",
+    "halfHint": "Pulsa otra vez para media estrella",
+    "clearHint": "Pulsa otra vez para quitarla",
+    "failed": "No se pudo guardar tu valoración"
   }
 }

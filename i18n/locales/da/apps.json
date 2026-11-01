@@ -515,5 +515,13 @@
     "use": "Brug",
     "reset": "Brug det automatiske cover",
     "chosenNote": "Dette cover er valgt i hånden, så scanninger beholder det."
+  },
+  "rating": {
+    "rate": "Bedøm",
+    "yours": "Din bedømmelse: {{stars}} af 5",
+    "stars": "{{stars}} af 5",
+    "halfHint": "Tryk igen for en halv stjerne",
+    "clearHint": "Tryk igen for at fjerne din bedømmelse",
+    "failed": "Din bedømmelse kunne ikke gemmes"
   }
 }

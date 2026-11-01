@@ -522,5 +522,13 @@
     "use": "Folosește",
     "reset": "Folosește coperta automată",
     "chosenNote": "Această copertă a fost aleasă manual, așa că scanările o păstrează."
+  },
+  "rating": {
+    "rate": "Evaluează",
+    "yours": "Evaluarea ta: {{stars}} din 5",
+    "stars": "{{stars}} din 5",
+    "halfHint": "Apasă din nou pentru o jumătate de stea",
+    "clearHint": "Apasă din nou pentru a o șterge",
+    "failed": "Nu am putut salva evaluarea ta"
   }
 }

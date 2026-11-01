@@ -529,5 +529,13 @@
     "use": "Użyj",
     "reset": "Użyj automatycznej okładki",
     "chosenNote": "Ta okładka została wybrana ręcznie, więc skanowanie jej nie zmienia."
+  },
+  "rating": {
+    "rate": "Oceń",
+    "yours": "Twoja ocena: {{stars}} na 5",
+    "stars": "{{stars}} na 5",
+    "halfHint": "Naciśnij ponownie, aby dać pół gwiazdki",
+    "clearHint": "Naciśnij ponownie, aby usunąć ocenę",
+    "failed": "Nie udało się zapisać oceny"
   }
 }

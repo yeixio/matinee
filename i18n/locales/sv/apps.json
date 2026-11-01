@@ -515,5 +515,13 @@
     "use": "Använd",
     "reset": "Använd det automatiska omslaget",
     "chosenNote": "Det här omslaget valdes för hand, så genomsökningar behåller det."
+  },
+  "rating": {
+    "rate": "Betygsätt",
+    "yours": "Ditt betyg: {{stars}} av 5",
+    "stars": "{{stars}} av 5",
+    "halfHint": "Tryck igen för en halv stjärna",
+    "clearHint": "Tryck igen för att ta bort betyget",
+    "failed": "Det gick inte att spara ditt betyg"
   }
 }

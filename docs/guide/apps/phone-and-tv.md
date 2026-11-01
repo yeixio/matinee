@@ -69,6 +69,9 @@ On a TV, sign-in starts with a code instead of a password: see [Signing in a dev
 - **Podcasts** on phones and TVs: follow shows, add new ones, and listen in the audiobook player with show notes. See [Podcasts](/docs/watching/podcasts/#in-the-apps).
 - **Siri and Google Assistant**: "play … on Matinee" for music, audiobooks and playlists, with the app closed. See [Siri and Google Assistant](/docs/apps/voice/).
 <!-- /since -->
+<!-- since: v0.1.9 -->
+- **Your star ratings** on phones and TVs, from app version 1.0.21: rate titles, albums, artists, audiobooks and podcasts, and sort a library by **My rating**. See [Your ratings](/docs/watching/title-pages/#your-ratings).
+<!-- /since -->
 - **Coming soon**, with [Radarr or Sonarr](/docs/server/radarr-and-sonarr/#coming-soon) connected: a row at the end of Home, and the next two months day by day. On a phone, the calendar along the top jumps to a day; on a TV, each day is a row.
 
 ## On a TV

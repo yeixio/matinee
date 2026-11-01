@@ -508,5 +508,13 @@
     "use": "使用",
     "reset": "使用自動封面",
     "chosenNote": "這個封面是手動選擇的,掃描時會保留。"
+  },
+  "rating": {
+    "rate": "評分",
+    "yours": "你的評分：{{stars}} / 5",
+    "stars": "{{stars}} / 5",
+    "halfHint": "再按一次可評半顆星",
+    "clearHint": "再按一次可取消評分",
+    "failed": "無法儲存你的評分"
   }
 }

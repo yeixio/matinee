@@ -515,5 +515,13 @@
     "use": "Käytä",
     "reset": "Käytä automaattista kansikuvaa",
     "chosenNote": "Tämä kansikuva on valittu käsin, joten tarkistukset säilyttävät sen."
+  },
+  "rating": {
+    "rate": "Arvioi",
+    "yours": "Arviosi: {{stars}} / 5",
+    "stars": "{{stars}} / 5",
+    "halfHint": "Paina uudelleen saadaksesi puoli tähteä",
+    "clearHint": "Paina uudelleen poistaaksesi arvion",
+    "failed": "Arviota ei voitu tallentaa"
   }
 }
