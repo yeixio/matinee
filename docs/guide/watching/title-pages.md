@@ -38,6 +38,12 @@ The stars after the buttons are your own rating, from half a star to five. Tap t
 ![A movie's buttons, with a rating of four stars](../images/rating.webp)
 
 Sort a library by **My rating** to see your favourites first. If you moved from another media server, your ratings can [come with you](/docs/getting-started/switching/).
+
+From app version 1.0.21, the [phone and TV apps](/docs/apps/phone-and-tv/) have the stars too, under the buttons on a title's page and on album, artist, audiobook and podcast pages. On a phone, tap the left half of a star for a half star, as in the browser. On a TV, go down to the stars and press select on one; press it again for half a star, and once more to take the rating back.
+
+![Rating a movie in the TV app: four and a half stars](../images/app-tv-rating.webp)
+
+![A movie's page in the phone app, rated four and a half stars](../images/app-phone-rating.webp)
 <!-- /since -->
 
 ## Cast, box sets and more like this

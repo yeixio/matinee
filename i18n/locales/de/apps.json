@@ -515,5 +515,13 @@
     "use": "Verwenden",
     "reset": "Automatisches Cover verwenden",
     "chosenNote": "Dieses Cover wurde von Hand gewählt, deshalb behalten Scans es bei."
+  },
+  "rating": {
+    "rate": "Bewerten",
+    "yours": "Deine Bewertung: {{stars}} von 5",
+    "stars": "{{stars}} von 5",
+    "halfHint": "Nochmal drücken für einen halben Stern",
+    "clearHint": "Nochmal drücken, um die Bewertung zu entfernen",
+    "failed": "Deine Bewertung konnte nicht gespeichert werden"
   }
 }

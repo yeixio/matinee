@@ -515,5 +515,13 @@
     "use": "Használat",
     "reset": "Automatikus borító használata",
     "chosenNote": "Ezt a borítót kézzel választották, ezért a vizsgálatok megtartják."
+  },
+  "rating": {
+    "rate": "Értékelés",
+    "yours": "Az értékelésed: {{stars}} / 5",
+    "stars": "{{stars}} / 5",
+    "halfHint": "Nyomd meg újra egy fél csillaghoz",
+    "clearHint": "Nyomd meg újra az értékelés törléséhez",
+    "failed": "Nem sikerült menteni az értékelést"
   }
 }

@@ -522,5 +522,13 @@
     "use": "Usar",
     "reset": "Usar a capa automática",
     "chosenNote": "Esta capa foi escolhida manualmente, então as verificações a mantêm."
+  },
+  "rating": {
+    "rate": "Avaliar",
+    "yours": "Sua avaliação: {{stars}} de 5",
+    "stars": "{{stars}} de 5",
+    "halfHint": "Pressione de novo para meia estrela",
+    "clearHint": "Pressione de novo para removê-la",
+    "failed": "Não foi possível salvar sua avaliação"
   }
 }
