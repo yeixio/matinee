@@ -45,7 +45,9 @@
       "online": "Dalam talian",
       "remove": "Buang {{name}}",
       "source": "Sari kata daripada OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Langkau intro",
+    "introSkipped": "Intro dilangkau"
   },
   "somethingWentWrong": "Sesuatu tidak kena",
   "oneMoment": "Sekejap…",
@@ -405,6 +407,7 @@
     "intro": "Matinee membaca setiap fail perlahan-lahan untuk kualiti, bunyi dan bahasanya, dan sekali lagi apabila fail berubah.",
     "state": {
       "lookingAt": "Meneliti {{file}}",
+      "intros": "Mencari intro dalam {{season}}",
       "working": "Sedang bekerja",
       "waiting": "Menunggu main balik selesai",
       "slowDisk": "Fail lambat dibaca; berehat beberapa minit",
@@ -428,6 +431,11 @@
         "label": "Mati",
         "hint": "Dijeda sehingga anda menghidupkannya semula."
       }
+    },
+    "intros": {
+      "label": "Cari intro rancangan TV",
+      "hint": "Selepas semua fail dianalisis, Matinee mendengar permulaan episod setiap musim untuk mencari intro yang dikongsi, supaya pemain boleh menawarkan Langkau intro.",
+      "progress": "{{done}} daripada {{total}} episod disemak, {{found}} ada intro"
     }
   },
   "profileSettings": {
@@ -682,7 +690,9 @@
       "autoPlay": "Main episod seterusnya",
       "autoPlayHint": "Apabila kredit bermula, episod seterusnya dimainkan selepas kira detik 10 saat yang boleh anda batalkan.",
       "binge": "Langkau kira detik",
-      "bingeHint": "Terus ke episod seterusnya apabila kredit bermula. Selepas tiga berturut-turut tanpa menyentuh apa-apa, anda akan ditanya sama ada masih menonton."
+      "bingeHint": "Terus ke episod seterusnya apabila kredit bermula. Selepas tiga berturut-turut tanpa menyentuh apa-apa, anda akan ditanya sama ada masih menonton.",
+      "skipIntros": "Langkau intro secara automatik",
+      "skipIntrosHint": "Melangkau intro rancangan dengan sendirinya, dan bukannya menunjukkan butang Langkau intro."
     },
     "trailers": {
       "title": "Treler",

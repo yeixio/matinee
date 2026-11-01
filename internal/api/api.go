@@ -1074,6 +1074,9 @@ type itemView struct {
 	// while the file changed and is waiting to be analyzed again.
 	MediaInfo      *probe.MediaInfo `json:"mediaInfo,omitempty"`
 	MediaInfoStale bool             `json:"mediaInfoStale,omitempty"`
+	// Intro is where an episode's intro plays, from its chapters or found
+	// by matching the season's audio; absent when unknown.
+	Intro *introView `json:"intro,omitempty"`
 	// FilePath is where the file is on the server, for admins only.
 	FilePath string `json:"filePath,omitempty"`
 	FileSize int64  `json:"fileSize,omitempty"`
@@ -1096,6 +1099,7 @@ func (s *Server) getItem(w http.ResponseWriter, r *http.Request) {
 	if it.Playable {
 		v.MimeType = stream.MimeType(it.Path)
 		v.MediaInfo, v.MediaInfoStale = s.mediaInfo(r, it)
+		v.Intro = s.intro(r.Context(), it, v.MediaInfo)
 		v.FileSize = it.Size
 		if currentUser(r).IsAdmin {
 			v.FilePath = it.Path

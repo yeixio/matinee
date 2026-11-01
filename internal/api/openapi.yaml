@@ -368,7 +368,7 @@ paths:
       summary: The current user's auto-play choices
       responses:
         "200":
-          description: Their choices; auto-play is on and binge off until they change them.
+          description: Their choices; auto-play is on, and binge and skipping intros off, until they change them.
           content:
             application/json:
               schema: { $ref: "#/components/schemas/PlaybackPrefs" }
@@ -376,7 +376,8 @@ paths:
       summary: Change the current user's auto-play choices, on every device
       description: |
         On the home network without signing in, these are the shared Home
-        account's (or the picked profile's) choices.
+        account's (or the picked profile's) choices. Choices left out of the
+        body keep their saved value.
       requestBody:
         required: true
         content:
@@ -1025,7 +1026,8 @@ paths:
         The server slowly reads every file once more in the background, at the
         lowest priority, to record resolution, HDR, codecs, bitrates, audio
         channels and languages, and subtitles. A file is read again only when
-        it changes.
+        it changes. Once every file is analyzed, it looks for each TV episode's
+        intro by matching the audio of a season's episodes.
       responses:
         "200":
           description: Progress.
@@ -1040,9 +1042,10 @@ paths:
           application/json:
             schema:
               type: object
-              required: [mode]
+              description: Send mode, intros or both.
               properties:
                 mode: { $ref: "#/components/schemas/AnalysisMode" }
+                intros: { type: boolean, description: Look for TV episodes' intros. On by default. }
       responses:
         "200":
           description: Progress, with the new mode.
@@ -3474,6 +3477,7 @@ components:
       properties:
         autoPlay: { type: boolean, description: Offer the next episode with a countdown. }
         binge: { type: boolean, description: Skip the countdown and start the next episode right away. }
+        skipIntros: { type: boolean, description: Jump past an episode's intro by itself instead of offering a Skip intro button. }
     MyLanguage:
       type: object
       required: [language]
@@ -3918,6 +3922,16 @@ components:
             parents: { type: array, items: { $ref: "#/components/schemas/Item" }, description: Root first, such as show then season. }
             mediaInfo: { $ref: "#/components/schemas/MediaInfo" }
             mediaInfoStale: { type: boolean, description: The file changed since it was analyzed; a new analysis is on its way. }
+            intro:
+              type: object
+              description: >
+                Episodes only: where the intro plays, for a Skip intro button. From a chapter titled so, else
+                found by matching the audio of the season's episodes. Left out when unknown.
+              required: [startMs, endMs, source]
+              properties:
+                startMs: { type: integer }
+                endMs: { type: integer }
+                source: { type: string, enum: [chapters, audio] }
             filePath: { type: string, description: Where the file is on the server. Admins only. }
             fileSize: { type: integer, description: Bytes. }
             details: { $ref: "#/components/schemas/Details" }
@@ -3948,6 +3962,8 @@ components:
         bitrate: { type: integer, description: Bits per second, all streams. }
         chapters: { type: integer }
         creditsMs: { type: integer, description: Where the closing credits start, when a chapter is titled so. }
+        introStartMs: { type: integer, description: Where the intro starts, when a chapter is titled so (Intro, Opening, OP…). }
+        introEndMs: { type: integer, description: Where that chapter ends. }
         error: { type: string, description: Set when the file couldn't be read. }
         analyzedAt: { type: integer, description: Unix seconds. }
         video:
@@ -4020,11 +4036,19 @@ components:
       type: object
       properties:
         mode: { $ref: "#/components/schemas/AnalysisMode" }
-        state: { type: string, enum: [analyzing, waiting, slowDisk, idle, off], description: "waiting: for playback to end. slowDisk: files kept timing out, so it's resting." }
+        state: { type: string, enum: [analyzing, intros, waiting, slowDisk, idle, off], description: "intros: looking for the intros of the season in current. waiting: for playback to end. slowDisk: files kept timing out, so it's resting." }
         total: { type: integer, description: Files in all libraries. }
         done: { type: integer, description: Files analyzed as they are now. }
         unreadable: { type: integer, description: Files among those done that couldn't be read. }
-        current: { type: string, description: Title of the file being analyzed. }
+        current: { type: string, description: Title of the file being analyzed, or the show and season whose intros are being looked for. }
+        intros:
+          type: object
+          description: Looking for TV episodes' intros. Left out when this server doesn't.
+          properties:
+            "on": { type: boolean, description: The admin setting; on by default. }
+            total: { type: integer, description: TV episodes with video. }
+            done: { type: integer, description: Episodes looked at as they are now. }
+            found: { type: integer, description: Episodes among those done with an intro found. }
     Details:
       type: object
       description: |

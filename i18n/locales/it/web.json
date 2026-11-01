@@ -45,7 +45,9 @@
       "online": "Online",
       "remove": "Rimuovi {{name}}",
       "source": "Sottotitoli da OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Salta intro",
+    "introSkipped": "Intro saltata"
   },
   "somethingWentWrong": "Qualcosa è andato storto",
   "oneMoment": "Un momento…",
@@ -411,6 +413,7 @@
     "intro": "Matinee legge lentamente ogni file per conoscerne qualità, audio e lingue, e di nuovo ogni volta che un file cambia.",
     "state": {
       "lookingAt": "Esame di {{file}}",
+      "intros": "Ricerca delle intro in {{season}}",
       "working": "Al lavoro",
       "waiting": "In attesa della fine della riproduzione",
       "slowDisk": "I file sono lenti da leggere; pausa di qualche minuto",
@@ -436,6 +439,11 @@
         "label": "Disattivata",
         "hint": "In pausa finché non la riattivi."
       }
+    },
+    "intros": {
+      "label": "Trova le intro delle serie",
+      "hint": "Quando tutti i file sono analizzati, Matinee ascolta l’inizio degli episodi di ogni stagione per trovare l’intro che hanno in comune, così i lettori possono offrire Salta intro.",
+      "progress": "{{done}} episodi su {{total}} controllati, {{found}} con un’intro"
     }
   },
   "profileSettings": {
@@ -690,7 +698,9 @@
       "autoPlay": "Riproduci l’episodio successivo",
       "autoPlayHint": "Quando iniziano i titoli di coda, l’episodio successivo parte dopo un conto alla rovescia di 10 secondi che puoi annullare.",
       "binge": "Salta il conto alla rovescia",
-      "bingeHint": "Passa subito all’episodio successivo quando iniziano i titoli di coda. Dopo tre di fila senza toccare nulla, ti viene chiesto se stai ancora guardando."
+      "bingeHint": "Passa subito all’episodio successivo quando iniziano i titoli di coda. Dopo tre di fila senza toccare nulla, ti viene chiesto se stai ancora guardando.",
+      "skipIntros": "Salta le intro",
+      "skipIntrosHint": "Salta da solo l’intro di una serie, invece di mostrare il pulsante Salta intro."
     },
     "trailers": {
       "title": "Trailer",

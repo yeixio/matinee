@@ -154,6 +154,8 @@
     "autoPlayHint": "エンドクレジットが始まったら、キャンセルできる 10 秒のカウントダウンの後に",
     "binge": "カウントダウンをスキップ",
     "bingeHint": "次のエピソードへそのまま進みます。何も操作せずに 3 話続けて観ると、まだ観ているか確認します",
+    "skipIntros": "イントロを自動でスキップ",
+    "skipIntrosHint": "「イントロをスキップ」ボタンを表示する代わりに、番組のイントロを自動で飛ばします",
     "app": "Matinee {{version}}",
     "appBuild": "Matinee {{version}}（ビルド {{build}}）",
     "server": "サーバー {{version}}",
@@ -317,7 +319,9 @@
       "machine": "機械翻訳",
       "online": "オンライン",
       "source": "字幕提供: OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "イントロをスキップ",
+    "introSkipped": "イントロをスキップしました"
   },
   "library": {
     "nothingUnwatched": "未視聴のものはありません",

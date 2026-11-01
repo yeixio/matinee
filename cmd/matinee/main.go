@@ -30,6 +30,7 @@ import (
 	"github.com/yeixio/matinee/internal/discovery"
 	"github.com/yeixio/matinee/internal/download"
 	"github.com/yeixio/matinee/internal/hwaccel"
+	"github.com/yeixio/matinee/internal/intro"
 	"github.com/yeixio/matinee/internal/kube"
 	"github.com/yeixio/matinee/internal/live"
 	"github.com/yeixio/matinee/internal/metadata"
@@ -154,6 +155,9 @@ func run() error {
 		Store: db, Log: log,
 		Prober: probe.Prober{Path: cfg.FFprobePath, Timeout: 2 * time.Minute, LowPriority: true},
 		Busy:   func() bool { return transcoder.Active() > 0 },
+		// Then it finds each TV episode's intro by matching the audio of a
+		// season's episodes (see internal/intro).
+		Intros: &intro.Detector{Store: db, FFmpeg: cfg.FFmpegPath, Log: log, LowPriority: probe.LowerPriority},
 	}
 	// Plugins add library kinds, details and event handlers (internal/plugin).
 	var plugins *plugin.Manager

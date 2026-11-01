@@ -154,6 +154,8 @@
     "autoPlayHint": "Gdy zaczynają się napisy końcowe, po 10-sekundowym odliczaniu, które możesz anulować",
     "binge": "Pomiń odliczanie",
     "bingeHint": "Od razu przechodzi do następnego odcinka. Po trzech z rzędu bez dotykania niczego zapytamy, czy nadal oglądasz",
+    "skipIntros": "Pomijaj czołówki",
+    "skipIntrosHint": "Automatycznie przeskakuje czołówkę serialu zamiast pokazywać przycisk Pomiń czołówkę",
     "app": "Matinee {{version}}",
     "appBuild": "Matinee {{version}} (kompilacja {{build}})",
     "server": "Serwer {{version}}",
@@ -332,7 +334,9 @@
       "machine": "Tłumaczenie maszynowe",
       "online": "Z internetu",
       "source": "Napisy z OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Pomiń czołówkę",
+    "introSkipped": "Pominięto czołówkę"
   },
   "library": {
     "nothingUnwatched": "Nie ma tu nic nieobejrzanego",

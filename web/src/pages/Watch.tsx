@@ -1,6 +1,6 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import type Hls from 'hls.js'
-import { ArrowLeft, Maximize, Minimize, Moon, Pause, Play, RotateCcw, RotateCw, Volume2, VolumeX } from 'lucide-react'
+import { ArrowLeft, ChevronsRight, Maximize, Minimize, Moon, Pause, Play, RotateCcw, RotateCw, Volume2, VolumeX } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
@@ -12,6 +12,7 @@ import { canDirectPlay } from '../player/direct'
 import { defaultTrack, savePreference, SubtitleMenu, SubtitleOverlay } from '../player/Subtitles'
 import { UpNextCard, type UpNextMode } from '../player/UpNext'
 import { COUNTDOWN_SECONDS, stillWatching, upNextAt } from '../player/autoplay'
+import { inIntro, introEnd } from '../player/intro'
 import { sleepTimer, sleepVolume, useSleep } from '../player/sleep'
 import { SleepMenu } from '../player/SleepMenu'
 import { QualityMenu } from '../player/QualityMenu'
@@ -689,6 +690,22 @@ function Player({ id }: { id: number }) {
     return () => window.clearInterval(t)
   }, [paused])
 
+  // Skip intro (see player/intro.ts): a button while the intro plays, or
+  // straight past it, once per episode, for people who chose that.
+  const intro = item?.intro
+  const showSkip = inIntro(time, intro) && !card && !error && !away
+  const skipIntro = (auto: boolean) => {
+    if (!intro) return
+    seek(introEnd(intro))
+    if (auto) flash(tr('player.introSkipped'))
+  }
+  const autoSkipped = useRef<number>(undefined) // the episode it last happened in
+  useEffect(() => {
+    if (!item || !showSkip || paused || waiting || !prefs?.skipIntros || autoSkipped.current === item.id) return
+    autoSkipped.current = item.id
+    skipIntro(true)
+  })
+
   const t = item ? displayTitle(item) : { title: '', sub: '' }
   const shown = scrub ?? time
   const frac = duration ? Math.min(1, shown / duration) : 0
@@ -753,6 +770,22 @@ function Player({ id }: { id: number }) {
             } else toDetails()
           }}
         />
+      )}
+
+      {showSkip && (
+        <button
+          onClick={(e) => {
+            e.stopPropagation()
+            stillWatching.input()
+            skipIntro(false)
+          }}
+          className={`absolute end-4 z-10 flex items-center gap-2 rounded-full bg-black/80 px-5 py-3 text-sm font-semibold text-white shadow-2xl ring-1 ring-white/25 backdrop-blur transition-[bottom] duration-300 hover:bg-black/90 hover:ring-white/50 focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none md:end-8 ${
+            chrome ? 'bottom-32' : 'bottom-8'
+          }`}
+        >
+          {tr('player.skipIntro')}
+          <ChevronsRight className="size-5 text-accent rtl:-scale-x-100" aria-hidden />
+        </button>
       )}
 
       {slept && paused && !error && (

@@ -154,6 +154,8 @@
     "autoPlayHint": "Saat kredit dimulai, setelah hitung mundur 10 detik yang bisa Anda batalkan",
     "binge": "Lewati hitung mundur",
     "bingeHint": "Langsung lanjut ke episode berikutnya. Setelah tiga berturut-turut tanpa menyentuh apa pun, kami bertanya apakah Anda masih menonton",
+    "skipIntros": "Lewati intro otomatis",
+    "skipIntrosHint": "Melewati intro serial dengan sendirinya, alih-alih menampilkan tombol Lewati intro",
     "app": "Matinee {{version}}",
     "appBuild": "Matinee {{version}} (build {{build}})",
     "server": "Server {{version}}",
@@ -317,7 +319,9 @@
       "machine": "Terjemahan mesin",
       "online": "Online",
       "source": "Subtitle dari OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Lewati intro",
+    "introSkipped": "Intro dilewati"
   },
   "library": {
     "nothingUnwatched": "Tidak ada yang belum ditonton di sini",

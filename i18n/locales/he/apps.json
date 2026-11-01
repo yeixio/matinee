@@ -154,6 +154,8 @@
     "autoPlayHint": "כשהכתוביות מתחילות, אחרי ספירה לאחור של 10 שניות שאפשר לבטל",
     "binge": "דילוג על הספירה לאחור",
     "bingeHint": "מעבר ישיר לפרק הבא. אחרי שלושה ברצף בלי לגעת בכלום, נשאל אם עדיין צופים",
+    "skipIntros": "דילוג על פתיחים",
+    "skipIntrosHint": "מדלג על הפתיח של סדרה מעצמו, במקום להציג כפתור דילוג על הפתיח",
     "app": "Matinee {{version}}",
     "appBuild": "Matinee {{version}} (גרסת בנייה {{build}})",
     "server": "שרת {{version}}",
@@ -327,7 +329,9 @@
       "machine": "תרגום מכונה",
       "online": "מהרשת",
       "source": "כתוביות מ-OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "דילוג על הפתיח",
+    "introSkipped": "דילגנו על הפתיח"
   },
   "library": {
     "nothingUnwatched": "אין כאן שום דבר שלא נצפה",

@@ -154,6 +154,8 @@
     "autoPlayHint": "Wenn der Abspann beginnt, nach einem 10-Sekunden-Countdown, den du abbrechen kannst",
     "binge": "Countdown überspringen",
     "bingeHint": "Direkt in die nächste Folge. Nach drei Folgen ohne Eingabe wirst du gefragt, ob du noch schaust",
+    "skipIntros": "Intros überspringen",
+    "skipIntrosHint": "Springt automatisch über das Intro einer Serie, statt eine Schaltfläche „Intro überspringen“ anzubieten",
     "app": "Matinee {{version}}",
     "appBuild": "Matinee {{version}} (Build {{build}})",
     "server": "Server {{version}}",
@@ -322,7 +324,9 @@
       "machine": "Maschinell übersetzt",
       "online": "Online",
       "source": "Untertitel von OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Intro überspringen",
+    "introSkipped": "Intro übersprungen"
   },
   "library": {
     "nothingUnwatched": "Hier ist nichts ungesehen",

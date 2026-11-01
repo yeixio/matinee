@@ -154,6 +154,8 @@
     "autoPlayHint": "片尾字幕开始时，在可取消的 10 秒倒计时后",
     "binge": "跳过倒计时",
     "bingeHint": "直接进入下一集。连续三集都没有任何操作时，会询问你是否还在看",
+    "skipIntros": "自动跳过片头",
+    "skipIntrosHint": "自动跳过剧集片头，而不是显示“跳过片头”按钮",
     "app": "Matinee {{version}}",
     "appBuild": "Matinee {{version}}（版本号 {{build}}）",
     "server": "服务器 {{version}}",
@@ -317,7 +319,9 @@
       "machine": "机器翻译",
       "online": "网上",
       "source": "字幕来自 OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "跳过片头",
+    "introSkipped": "已跳过片头"
   },
   "library": {
     "nothingUnwatched": "这里没有未看的内容",

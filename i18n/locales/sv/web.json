@@ -45,7 +45,9 @@
       "online": "Från nätet",
       "remove": "Ta bort {{name}}",
       "source": "Undertexter från OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Hoppa över intro",
+    "introSkipped": "Introt hoppades över"
   },
   "somethingWentWrong": "Något gick fel",
   "oneMoment": "Ett ögonblick…",
@@ -408,6 +410,7 @@
     "intro": "Matinee läser långsamt varje fil för att ta reda på kvalitet, ljud och språk, och igen när en fil ändras.",
     "state": {
       "lookingAt": "Tittar på {{file}}",
+      "intros": "Letar efter intron i {{season}}",
       "working": "Arbetar",
       "waiting": "Väntar på att uppspelningen ska bli klar",
       "slowDisk": "Filerna är långsamma att läsa; vilar några minuter",
@@ -432,6 +435,11 @@
         "label": "Av",
         "hint": "Pausad tills du slår på den igen."
       }
+    },
+    "intros": {
+      "label": "Hitta intron i serier",
+      "hint": "När alla filer är analyserade lyssnar Matinee på början av varje säsongs avsnitt efter introt de delar, så att spelarna kan erbjuda Hoppa över intro.",
+      "progress": "{{done}} av {{total}} avsnitt kontrollerade, {{found}} med intro"
     }
   },
   "profileSettings": {
@@ -686,7 +694,9 @@
       "autoPlay": "Spela nästa avsnitt",
       "autoPlayHint": "När eftertexterna börjar spelas nästa avsnitt efter en nedräkning på 10 sekunder som du kan avbryta.",
       "binge": "Hoppa över nedräkningen",
-      "bingeHint": "Gå direkt till nästa avsnitt när eftertexterna börjar. Efter tre i rad utan att du rört något får du frågan om du fortfarande tittar."
+      "bingeHint": "Gå direkt till nästa avsnitt när eftertexterna börjar. Efter tre i rad utan att du rört något får du frågan om du fortfarande tittar.",
+      "skipIntros": "Hoppa över intron",
+      "skipIntrosHint": "Hoppar över en series intro av sig själv, i stället för att visa knappen Hoppa över intro."
     },
     "trailers": {
       "title": "Trailers",

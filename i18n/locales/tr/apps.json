@@ -154,6 +154,8 @@
     "autoPlayHint": "Jenerik başladığında, iptal edebileceğiniz 10 saniyelik bir geri sayımdan sonra",
     "binge": "Geri sayımı atla",
     "bingeHint": "Doğrudan sonraki bölüme geçer. Hiçbir şeye dokunmadan üst üste üç bölümden sonra hâlâ izleyip izlemediğiniz sorulur",
+    "skipIntros": "Girişleri atla",
+    "skipIntrosHint": "Bir dizinin girişini, Girişi atla düğmesi göstermek yerine kendiliğinden atlar",
     "app": "Matinee {{version}}",
     "appBuild": "Matinee {{version}} (derleme {{build}})",
     "server": "Sunucu {{version}}",
@@ -322,7 +324,9 @@
       "machine": "Makine çevirisi",
       "online": "İnternetten",
       "source": "Altyazılar OpenSubtitles.com'dan"
-    }
+    },
+    "skipIntro": "Girişi atla",
+    "introSkipped": "Giriş atlandı"
   },
   "library": {
     "nothingUnwatched": "Burada izlenmemiş bir şey yok",

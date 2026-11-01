@@ -154,6 +154,8 @@
     "autoPlayHint": "Apabila kredit bermula, selepas kiraan detik 10 saat yang boleh anda batalkan",
     "binge": "Langkau kira detik",
     "bingeHint": "Terus ke episod seterusnya. Selepas tiga berturut-turut tanpa menyentuh apa-apa, kami bertanya sama ada anda masih menonton",
+    "skipIntros": "Langkau intro secara automatik",
+    "skipIntrosHint": "Melangkau intro rancangan dengan sendirinya, dan bukannya menunjukkan butang Langkau intro",
     "app": "Matinee {{version}}",
     "appBuild": "Matinee {{version}} (binaan {{build}})",
     "server": "Pelayan {{version}}",
@@ -317,7 +319,9 @@
       "machine": "Terjemahan mesin",
       "online": "Dalam talian",
       "source": "Sari kata daripada OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Langkau intro",
+    "introSkipped": "Intro dilangkau"
   },
   "library": {
     "nothingUnwatched": "Tiada yang belum ditonton di sini",

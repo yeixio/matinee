@@ -154,6 +154,8 @@
     "autoPlayHint": "Når rulleteksten begynner, etter en nedtelling på 10 sekunder som du kan avbryte",
     "binge": "Hopp over nedtellingen",
     "bingeHint": "Gå rett videre til neste episode. Etter tre på rad uten at du har rørt noe, spør vi om du fortsatt ser på",
+    "skipIntros": "Hopp over introer",
+    "skipIntrosHint": "Hopper over introen i en serie av seg selv, i stedet for å vise knappen Hopp over intro",
     "app": "Matinee {{version}}",
     "appBuild": "Matinee {{version}} (bygg {{build}})",
     "server": "Server {{version}}",
@@ -322,7 +324,9 @@
       "machine": "Maskinoversatt",
       "online": "Fra nettet",
       "source": "Undertekster fra OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Hopp over intro",
+    "introSkipped": "Introen ble hoppet over"
   },
   "library": {
     "nothingUnwatched": "Ingenting usett her",

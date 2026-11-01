@@ -45,7 +45,9 @@
       "online": "Verkosta",
       "remove": "Poista {{name}}",
       "source": "Tekstitykset: OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Ohita alkutunnari",
+    "introSkipped": "Alkutunnari ohitettiin"
   },
   "somethingWentWrong": "Jokin meni pieleen",
   "oneMoment": "Hetkinen…",
@@ -408,6 +410,7 @@
     "intro": "Matinee lukee hitaasti jokaisen tiedoston selvittääkseen laadun, äänen ja kielet, ja uudelleen aina tiedoston muuttuessa.",
     "state": {
       "lookingAt": "Tutkitaan: {{file}}",
+      "intros": "Etsitään alkutunnareita: {{season}}",
       "working": "Työskennellään",
       "waiting": "Odotetaan toiston päättymistä",
       "slowDisk": "Tiedostot ovat hitaita lukea; levätään muutama minuutti",
@@ -432,6 +435,11 @@
         "label": "Pois",
         "hint": "Tauolla, kunnes kytket sen takaisin päälle."
       }
+    },
+    "intros": {
+      "label": "Etsi sarjojen alkutunnarit",
+      "hint": "Kun kaikki tiedostot on analysoitu, Matinee kuuntelee kunkin kauden jaksojen alkua ja etsii niille yhteisen alkutunnarin, jotta soittimet voivat tarjota Ohita alkutunnari -toimintoa.",
+      "progress": "{{done}}/{{total}} jaksoa tarkistettu, {{found}} sisältää alkutunnarin"
     }
   },
   "profileSettings": {
@@ -686,7 +694,9 @@
       "autoPlay": "Toista seuraava jakso",
       "autoPlayHint": "Kun lopputekstit alkavat, seuraava jakso alkaa 10 sekunnin lähtölaskennan jälkeen, jonka voit perua.",
       "binge": "Ohita lähtölaskenta",
-      "bingeHint": "Siirry suoraan seuraavaan jaksoon, kun lopputekstit alkavat. Kun kolme jaksoa on mennyt peräkkäin koskematta mihinkään, sinulta kysytään, katsotko vielä."
+      "bingeHint": "Siirry suoraan seuraavaan jaksoon, kun lopputekstit alkavat. Kun kolme jaksoa on mennyt peräkkäin koskematta mihinkään, sinulta kysytään, katsotko vielä.",
+      "skipIntros": "Ohita alkutunnarit",
+      "skipIntrosHint": "Hyppää sarjan alkutunnarin yli itsestään sen sijaan, että näyttäisi Ohita alkutunnari -painikkeen."
     },
     "trailers": {
       "title": "Trailerit",

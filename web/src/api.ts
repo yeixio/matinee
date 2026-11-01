@@ -598,6 +598,8 @@ export type MediaInfo = {
   subtitles: EmbeddedSubtitle[]
   chapters?: number
   creditsMs?: number // where the closing credits start, when a chapter says so
+  introStartMs?: number // where a chapter titled Intro or Opening starts
+  introEndMs?: number
   error?: string
   analyzedAt: number
 }
@@ -656,6 +658,7 @@ export type NextUp = { next?: Item; similar?: Item }
 export type PlaybackPrefs = {
   autoPlay: boolean // offer the next episode with a countdown
   binge: boolean // skip the countdown
+  skipIntros?: boolean // jump past intros without pressing Skip intro
 }
 
 export type ItemDetail = Item & {
@@ -667,6 +670,9 @@ export type ItemDetail = Item & {
   // Left out until the file is analyzed; stale while it changed and waits to be analyzed again.
   mediaInfo?: MediaInfo
   mediaInfoStale?: boolean
+  // Episodes: where the intro plays, from a chapter or found by matching the
+  // season's audio. Left out when unknown.
+  intro?: { startMs: number; endMs: number; source: 'chapters' | 'audio' }
   filePath?: string // admins only
   fileSize?: number
   details?: Details
@@ -707,11 +713,13 @@ export type OpmlImport = { added: number; problems: { title: string; feedUrl: st
 export type AnalysisMode = 'gentle' | 'normal' | 'off'
 export type AnalysisStatus = {
   mode: AnalysisMode
-  state: 'analyzing' | 'waiting' | 'slowDisk' | 'idle' | 'off'
+  state: 'analyzing' | 'intros' | 'waiting' | 'slowDisk' | 'idle' | 'off'
   total: number
   done: number
   unreadable: number
-  current?: string
+  current?: string // the file, or while looking for intros the show and season
+  // Looking for TV episodes' intros; left out by servers that don't.
+  intros?: { on: boolean; total: number; done: number; found: number }
 }
 
 // CoverOption is a cover found online that an admin can pick for an album or book.
@@ -839,6 +847,7 @@ export const api = {
 
   analysis: () => request<AnalysisStatus>('GET', '/api/v1/analysis'),
   setAnalysisMode: (mode: AnalysisMode) => request<AnalysisStatus>('PUT', '/api/v1/analysis', { mode }),
+  setIntroDetection: (intros: boolean) => request<AnalysisStatus>('PUT', '/api/v1/analysis', { intros }),
   reanalyze: (id: number) => request<void>('POST', `/api/v1/items/${id}/analyze`),
   settings: () => request<Settings>('GET', '/api/v1/settings'),
   // tmdbKey replaces the server's TMDB key; "" goes back to the one it started with.

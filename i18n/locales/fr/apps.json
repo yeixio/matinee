@@ -154,6 +154,8 @@
     "autoPlayHint": "Au début du générique, après un compte à rebours de 10 secondes que vous pouvez annuler",
     "binge": "Passer le compte à rebours",
     "bingeHint": "Enchaîner directement sur l’épisode suivant. Après trois épisodes d’affilée sans rien toucher, on vous demande si vous regardez toujours",
+    "skipIntros": "Passer les intros",
+    "skipIntrosHint": "Passe automatiquement l’intro d’une série, au lieu de proposer un bouton Passer l’intro",
     "app": "Matinee {{version}}",
     "appBuild": "Matinee {{version}} (build {{build}})",
     "server": "Serveur {{version}}",
@@ -327,7 +329,9 @@
       "machine": "Traduction automatique",
       "online": "En ligne",
       "source": "Sous-titres d’OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Passer l’intro",
+    "introSkipped": "Intro passée"
   },
   "library": {
     "nothingUnwatched": "Rien de non vu ici",

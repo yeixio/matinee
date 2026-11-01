@@ -45,7 +45,9 @@
       "online": "On-line",
       "remove": "Remover {{name}}",
       "source": "Legendas do OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Pular abertura",
+    "introSkipped": "Abertura pulada"
   },
   "somethingWentWrong": "Algo deu errado",
   "oneMoment": "Só um momento…",
@@ -411,6 +413,7 @@
     "intro": "O Matinee lê cada arquivo devagar para saber sua qualidade, som e idiomas, e de novo sempre que um arquivo muda.",
     "state": {
       "lookingAt": "Analisando {{file}}",
+      "intros": "Procurando aberturas em {{season}}",
       "working": "Trabalhando",
       "waiting": "Esperando a reprodução terminar",
       "slowDisk": "Os arquivos estão lentos para ler; pausa de alguns minutos",
@@ -436,6 +439,11 @@
         "label": "Desativada",
         "hint": "Pausada até você ativar de novo."
       }
+    },
+    "intros": {
+      "label": "Encontrar aberturas de séries",
+      "hint": "Depois que todos os arquivos forem analisados, o Matinee escuta o início dos episódios de cada temporada para achar a abertura que eles têm em comum, para que os players ofereçam Pular abertura.",
+      "progress": "{{done}} de {{total}} episódios verificados, {{found}} com abertura"
     }
   },
   "profileSettings": {
@@ -690,7 +698,9 @@
       "autoPlay": "Reproduzir o próximo episódio",
       "autoPlayHint": "Quando os créditos começam, o próximo episódio começa depois de uma contagem de 10 segundos que você pode cancelar.",
       "binge": "Pular a contagem",
-      "bingeHint": "Ir direto para o próximo episódio quando os créditos começam. Depois de três seguidos sem tocar em nada, você vai ser perguntado se ainda está assistindo."
+      "bingeHint": "Ir direto para o próximo episódio quando os créditos começam. Depois de três seguidos sem tocar em nada, você vai ser perguntado se ainda está assistindo.",
+      "skipIntros": "Pular aberturas",
+      "skipIntrosHint": "Pula a abertura de uma série sozinho, em vez de mostrar o botão Pular abertura."
     },
     "trailers": {
       "title": "Trailers",

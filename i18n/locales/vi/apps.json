@@ -154,6 +154,8 @@
     "autoPlayHint": "Khi phần giới thiệu cuối phim bắt đầu, sau 10 giây đếm ngược mà bạn có thể hủy",
     "binge": "Bỏ qua đếm ngược",
     "bingeHint": "Chuyển thẳng sang tập tiếp theo. Sau ba tập liên tiếp không chạm vào gì, chúng tôi sẽ hỏi bạn có còn đang xem không",
+    "skipIntros": "Tự bỏ qua đoạn mở đầu",
+    "skipIntrosHint": "Tự động nhảy qua đoạn mở đầu của phim bộ thay vì hiện nút Bỏ qua đoạn mở đầu",
     "app": "Matinee {{version}}",
     "appBuild": "Matinee {{version}} (bản dựng {{build}})",
     "server": "Máy chủ {{version}}",
@@ -317,7 +319,9 @@
       "machine": "Dịch máy",
       "online": "Trên mạng",
       "source": "Phụ đề từ OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Bỏ qua đoạn mở đầu",
+    "introSkipped": "Đã bỏ qua đoạn mở đầu"
   },
   "library": {
     "nothingUnwatched": "Không còn gì chưa xem ở đây",

@@ -154,6 +154,8 @@
     "autoPlayHint": "Cuando empiezan los créditos, tras una cuenta atrás de 10 segundos que puedes cancelar",
     "binge": "Saltar la cuenta atrás",
     "bingeHint": "Pasa directamente al siguiente episodio. Tras tres seguidos sin tocar nada, te preguntamos si sigues viendo",
+    "skipIntros": "Saltar intros",
+    "skipIntrosHint": "Salta la intro de una serie automáticamente, en lugar de mostrar el botón Saltar intro",
     "app": "Matinee {{version}}",
     "appBuild": "Matinee {{version}} (compilación {{build}})",
     "server": "Servidor {{version}}",
@@ -327,7 +329,9 @@
       "machine": "Traducción automática",
       "online": "En línea",
       "source": "Subtítulos de OpenSubtitles.com"
-    }
+    },
+    "skipIntro": "Saltar intro",
+    "introSkipped": "Intro saltada"
   },
   "library": {
     "nothingUnwatched": "No queda nada sin ver",
