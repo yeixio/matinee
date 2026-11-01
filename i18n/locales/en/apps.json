@@ -438,6 +438,28 @@
     "signIn": "Open Matinee on your phone and sign in to listen in the car.",
     "loading": "Loading…"
   },
+  "automotive": {
+    "signInNeeded": "Sign in to your Matinee server to listen in this car.",
+    "signIn": "Sign in",
+    "title": "Sign in to Matinee",
+    "nearby": "Servers on this network",
+    "looking": "Looking for servers… If the car isn't on your home Wi-Fi, type your server's address.",
+    "address": "Your server's address",
+    "addressHint": "matinee.example.com",
+    "next": "Next",
+    "notMatinee": "Can't reach a Matinee server there. Check the address, and that the server can be reached away from home.",
+    "goTo": "On your phone or computer, go to {{link}} and enter this code:",
+    "scan": "Or scan this with your phone's camera.",
+    "waiting": "Waiting for you to approve this car…",
+    "expired": "This code expired.",
+    "declined": "Sign-in was declined.",
+    "newCode": "Get a new code",
+    "back": "Back",
+    "signedIn": "Signed in to {{server}} as {{name}}.",
+    "listenHint": "Pick Matinee in the car's media apps to listen. You can sign out here when the car is parked.",
+    "signOut": "Sign out",
+    "done": "Done"
+  },
   "watch": {
     "tileName": "Now playing",
     "complicationName": "Matinee",

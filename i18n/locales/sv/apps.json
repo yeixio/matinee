@@ -438,6 +438,28 @@
     "signIn": "Öppna Matinee i telefonen och logga in för att lyssna i bilen.",
     "loading": "Läser in…"
   },
+  "automotive": {
+    "signInNeeded": "Logga in på din Matinee-server för att lyssna i den här bilen.",
+    "signIn": "Logga in",
+    "title": "Logga in på Matinee",
+    "nearby": "Servrar på det här nätverket",
+    "looking": "Letar efter servrar… Om bilen inte är på ditt wifi hemma, skriv in din servers adress.",
+    "address": "Din servers adress",
+    "addressHint": "matinee.example.com",
+    "next": "Nästa",
+    "notMatinee": "Det går inte att nå en Matinee-server där. Kontrollera adressen och att servern kan nås hemifrån.",
+    "goTo": "Gå till {{link}} på din telefon eller dator och ange den här koden:",
+    "scan": "Eller skanna den med telefonens kamera.",
+    "waiting": "Väntar på att du godkänner den här bilen…",
+    "expired": "Koden har gått ut.",
+    "declined": "Inloggningen nekades.",
+    "newCode": "Hämta en ny kod",
+    "back": "Tillbaka",
+    "signedIn": "Inloggad på {{server}} som {{name}}.",
+    "listenHint": "Välj Matinee bland bilens medieappar för att lyssna. Du kan logga ut här när bilen står parkerad.",
+    "signOut": "Logga ut",
+    "done": "Klar"
+  },
   "watch": {
     "tileName": "Spelas nu",
     "complicationName": "Matinee",

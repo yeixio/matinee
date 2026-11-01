@@ -445,6 +445,28 @@
     "signIn": "Abra o Matinee no celular e entre para ouvir no carro.",
     "loading": "Carregando…"
   },
+  "automotive": {
+    "signInNeeded": "Entre no seu servidor Matinee para ouvir neste carro.",
+    "signIn": "Entrar",
+    "title": "Entrar no Matinee",
+    "nearby": "Servidores nesta rede",
+    "looking": "Procurando servidores… Se o carro não estiver no Wi-Fi da sua casa, digite o endereço do seu servidor.",
+    "address": "Endereço do seu servidor",
+    "addressHint": "matinee.example.com",
+    "next": "Próximo",
+    "notMatinee": "Não foi possível acessar um servidor Matinee aí. Confira o endereço e se o servidor pode ser acessado fora de casa.",
+    "goTo": "No celular ou computador, acesse {{link}} e digite este código:",
+    "scan": "Ou escaneie com a câmera do celular.",
+    "waiting": "Aguardando você aprovar este carro…",
+    "expired": "Este código expirou.",
+    "declined": "O acesso foi recusado.",
+    "newCode": "Gerar um novo código",
+    "back": "Voltar",
+    "signedIn": "Conectado a {{server}} como {{name}}.",
+    "listenHint": "Escolha o Matinee nos apps de mídia do carro para ouvir. Você pode sair aqui com o carro estacionado.",
+    "signOut": "Sair",
+    "done": "Concluído"
+  },
   "watch": {
     "tileName": "Tocando agora",
     "complicationName": "Matinee",

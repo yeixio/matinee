@@ -438,6 +438,28 @@
     "signIn": "Nyisd meg a Matinee-t a telefonodon, és jelentkezz be, hogy az autóban is hallgathasd.",
     "loading": "Betöltés…"
   },
+  "automotive": {
+    "signInNeeded": "Jelentkezz be a Matinee-szerveredre, hogy ebben az autóban hallgathass.",
+    "signIn": "Bejelentkezés",
+    "title": "Bejelentkezés a Matinee-be",
+    "nearby": "Szerverek ezen a hálózaton",
+    "looking": "Szerverek keresése… Ha az autó nincs az otthoni Wi-Fi-n, írd be a szervered címét.",
+    "address": "A szervered címe",
+    "addressHint": "matinee.example.com",
+    "next": "Tovább",
+    "notMatinee": "Ott nem érhető el Matinee-szerver. Ellenőrizd a címet, és hogy a szerver otthonon kívülről is elérhető-e.",
+    "goTo": "A telefonodon vagy számítógépeden nyisd meg ezt: {{link}}, és írd be ezt a kódot:",
+    "scan": "Vagy olvasd be a telefonod kamerájával.",
+    "waiting": "Várakozás, hogy jóváhagyd ezt az autót…",
+    "expired": "A kód lejárt.",
+    "declined": "A bejelentkezést elutasították.",
+    "newCode": "Új kód kérése",
+    "back": "Vissza",
+    "signedIn": "Bejelentkezve ide: {{server}}, mint {{name}}.",
+    "listenHint": "A hallgatáshoz válaszd a Matinee-t az autó médiaalkalmazásai között. Kijelentkezni itt tudsz, amikor az autó parkol.",
+    "signOut": "Kijelentkezés",
+    "done": "Kész"
+  },
   "watch": {
     "tileName": "Most szól",
     "complicationName": "Matinee",

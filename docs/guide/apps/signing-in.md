@@ -5,7 +5,7 @@ sidebar:
   order: 2
 ---
 
-Typing a password with a TV remote is no fun, so the apps can sign in with a code instead.
+Typing a password with a TV remote is no fun, so the apps can sign in with a code instead. <!-- since: v0.1.9 -->So does Matinee on [cars with Android built in](/docs/apps/android-automotive/), which also shows a QR code you can scan with your phone's camera to open the page with the code filled in.<!-- /since -->
 
 1. In the app, choose to sign in with a code. It shows a code such as `ABCD-EFGH`.
 2. On a phone or computer that's already signed in to Matinee, go to `<your server>/link`, or **Settings → You → Your devices → Sign in a device**.
