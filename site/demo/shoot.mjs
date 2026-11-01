@@ -238,7 +238,7 @@ try {
 
     // Podcasts: three shows from the stand-in host, two followed, one
     // episode part-way through and one played (see docs/guide/watching/podcasts.md).
-    if (['podcasts', 'podcast', 'podcast-player', 'podcasts-add', 'podcast-search'].some(wanted)) {
+    if (['podcasts', 'podcast', 'podcast-player', 'podcasts-add', 'podcast-browse', 'podcast-search'].some(wanted)) {
       // A fresh page, so the book above isn't in the player.
       await page.context().close()
       page = await open(desktop, token)
@@ -268,6 +268,9 @@ try {
       await page.goto(`${origin}/library/${lib.id}?view=add`)
       await sleep(1000)
       await shot(page, 'podcasts-add')
+      await page.getByRole('button', { name: 'TV & film' }).click()
+      await sleep(1200)
+      await shot(page, 'podcast-browse')
       await page.getByRole('searchbox').or(page.getByPlaceholder('Search podcasts')).first().fill('film')
       await page.keyboard.press('Enter')
       await sleep(1200)

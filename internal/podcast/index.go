@@ -66,13 +66,59 @@ func (ix *Index) Search(ctx context.Context, q string, max int) ([]Show, error) 
 }
 
 // Trending lists shows getting popular now, in a language (like en or de)
-// when one is given.
-func (ix *Index) Trending(ctx context.Context, lang string, max int) ([]Show, error) {
+// when one is given, and in a category (see Categories) when one is given.
+func (ix *Index) Trending(ctx context.Context, lang, category string, max int) ([]Show, error) {
 	v := url.Values{"max": {strconv.Itoa(max)}}
 	if lang != "" {
 		v.Set("lang", lang)
 	}
+	if c, ok := CategoryByID(category); ok {
+		v.Set("cat", c.ids)
+	}
 	return ix.shows(ctx, "/podcasts/trending", v)
+}
+
+// Category is a kind of show to browse, like Comedy or News. ID is
+// Matinee's own name for it, which the apps translate; Name is English.
+type Category struct {
+	ID   string `json:"id"`
+	Name string `json:"name"`
+	ids  string // Podcast Index's category numbers
+}
+
+// Categories are the kinds of shows people can browse, the main ones in
+// Podcast Index's list (github.com/Podcastindex-org/podcast-namespace,
+// categories.json), some with their close neighbors.
+var Categories = []Category{
+	{"arts", "Arts", "1"},
+	{"business", "Business", "9"},
+	{"comedy", "Comedy", "16"},
+	{"education", "Education", "20"},
+	{"fiction", "Fiction", "26"},
+	{"government", "Government", "58"},
+	{"health", "Health & fitness", "29,30"},
+	{"history", "History", "28"},
+	{"kids", "Kids & family", "36,37"},
+	{"leisure", "Leisure", "42"},
+	{"music", "Music", "53"},
+	{"news", "News", "55"},
+	{"religion", "Religion & spirituality", "65,66"},
+	{"science", "Science", "67"},
+	{"society", "Society & culture", "77,78"},
+	{"sports", "Sports", "86"},
+	{"technology", "Technology", "102"},
+	{"trueCrime", "True crime", "103"},
+	{"tv", "TV & film", "104,105"},
+}
+
+// CategoryByID finds a category by its ID.
+func CategoryByID(id string) (Category, bool) {
+	for _, c := range Categories {
+		if c.ID == id {
+			return c, true
+		}
+	}
+	return Category{}, false
 }
 
 // Check asks Podcast Index whether it accepts the key.

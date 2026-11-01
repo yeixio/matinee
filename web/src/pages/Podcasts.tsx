@@ -130,15 +130,23 @@ function AddShows({ lib, me }: { lib: Library; me: User }) {
   const { t, i18n } = useTranslation()
   const [q, setQ] = useState('')
   const [term, setTerm] = useState('')
+  const [category, setCategory] = useState('')
   const dir = useQuery({
-    queryKey: ['podcasts', 'directory', term, i18n.language],
-    queryFn: () => api.podcastDirectory(term ? { q: term } : { lang: i18n.language }),
+    queryKey: ['podcasts', 'directory', term, category, i18n.language],
+    queryFn: () => api.podcastDirectory(term ? { q: term } : category ? { lang: i18n.language, category } : { lang: i18n.language }),
     staleTime: 10 * 60_000,
     placeholderData: keepPreviousData,
   })
+  const categories = dir.data?.categories ?? []
+  const categoryName = (id: string) => t(`common:podcasts.categories.${id}`, { defaultValue: categories.find((c) => c.id === id)?.name ?? id })
   const search = (e: FormEvent) => {
     e.preventDefault()
     setTerm(q.trim())
+  }
+  const browse = (id: string) => {
+    setCategory(id)
+    setTerm('')
+    setQ('')
   }
   return (
     <div className="space-y-10">
@@ -166,7 +174,27 @@ function AddShows({ lib, me }: { lib: Library; me: User }) {
             </label>
             <Button variant="primary">{t('common:podcasts.search')}</Button>
           </form>
-          <h2 className="text-lg font-semibold">{term ? t('common:podcasts.resultsFor', { term }) : t('common:podcasts.trending')}</h2>
+          {categories.length > 0 && (
+            <div role="group" aria-label={t('common:podcasts.categoriesLabel')} className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1 md:flex-wrap md:overflow-visible">
+              {[{ id: '', name: '' }, ...categories].map((c) => {
+                const on = !term && category === c.id
+                return (
+                  <button
+                    key={c.id || 'all'}
+                    type="button"
+                    aria-pressed={on}
+                    onClick={() => browse(c.id)}
+                    className={`h-8 shrink-0 rounded-full px-3.5 text-sm transition-colors ${on ? 'bg-text font-medium text-ink' : 'bg-text/5 text-muted hover:bg-text/10 hover:text-text'}`}
+                  >
+                    {c.id ? categoryName(c.id) : t('common:podcasts.all')}
+                  </button>
+                )
+              })}
+            </div>
+          )}
+          <h2 className="text-lg font-semibold">
+            {term ? t('common:podcasts.resultsFor', { term }) : category ? t('common:podcasts.trendingIn', { category: categoryName(category) }) : t('common:podcasts.trending')}
+          </h2>
           {dir.isPending ? (
             <GridSkeleton />
           ) : dir.error ? (

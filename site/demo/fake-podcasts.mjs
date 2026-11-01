@@ -81,7 +81,13 @@ export function startFakePodcasts(port, images, episode) {
       const found = podcasts.map((s, i) => [s, i]).filter(([s]) => `${s.title} ${s.author} ${s.categories.join(' ')} ${s.description}`.toLowerCase().includes(q))
       return json({ status: 'true', feeds: found.map(([s, i]) => directoryEntry(base, s, i)) })
     }
-    if (p === '/api/1.0/podcasts/trending') return json({ status: 'true', feeds: podcasts.map((s, i) => directoryEntry(base, s, i)) })
+    if (p === '/api/1.0/podcasts/trending') {
+      // cat is Podcast Index's category numbers; these are the ones the made-up shows use.
+      const names = { 1: 'Arts', 16: 'Comedy', 26: 'Fiction', 28: 'History', 42: 'Leisure', 53: 'Music', 67: 'Science', 77: 'Society & Culture', 104: 'TV & Film', 105: 'TV & Film' }
+      const want = (url.searchParams.get('cat') ?? '').split(',').filter(Boolean).map((n) => names[n] ?? '?')
+      const found = podcasts.map((s, i) => [s, i]).filter(([s]) => !want.length || s.categories.some((c) => want.includes(c)))
+      return json({ status: 'true', feeds: found.map(([s, i]) => directoryEntry(base, s, i)) })
+    }
     res.writeHead(404)
     res.end()
   })

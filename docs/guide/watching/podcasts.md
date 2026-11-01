@@ -24,6 +24,14 @@ Open the library and pick **Add shows**. There are three ways in:
 
 ![Searching for a show](../images/podcast-search.webp)
 
+<!-- since: v0.1.9 -->
+### Browsing by category
+
+Under the search box sits a row of categories: Arts, Business, Comedy, Education, Fiction, Government, Health & fitness, History, Kids & family, Leisure, Music, News, Religion & spirituality, Science, Society & culture, Sports, Technology, True crime and TV & film. Pick one to see what's trending in it, in your language, and **All** to go back to everything that's trending. Searching shows every match whatever the category, and picking a category again clears the search. Browsing needs the same Podcast Index key as searching.
+
+![Browsing the TV & film category](../images/podcast-browse.webp)
+<!-- /since -->
+
 Adding a show follows it for you. Kids profiles can listen to shows that are already in the library, but can't add new ones. Only an admin can remove a show, which removes it for everyone.
 
 ## Following and new episodes
@@ -56,7 +64,7 @@ Matinee saves your place while you listen. Episodes you're part-way through show
 
 The [phone and TV apps](/docs/apps/phone-and-tv/) have podcasts too.
 
-- **On a phone or tablet**, a podcast library opens on **Shows**, **Latest** and **Add shows**, like the browser. A show's page has Play latest, Follow, Mark all played, Check for new episodes and its episodes, with **Unplayed** to hide the ones you've heard. An episode's page can mark it played or [download it](/docs/apps/downloads/) to listen offline.
+- **On a phone or tablet**, a podcast library opens on **Shows**, **Latest** and **Add shows**, like the browser. <!-- since: v0.1.9 -->From app version 1.0.21, **Add shows** has the same categories to browse.<!-- /since --> A show's page has Play latest, Follow, Mark all played, Check for new episodes and its episodes, with **Unplayed** to hide the ones you've heard. An episode's page can mark it played or [download it](/docs/apps/downloads/) to listen offline.
 - **On a TV**, a show's page has Play latest and Follow, and its episodes in a list below. Select one to play it.
 
 Episodes play in the apps' audiobook player, with the same skips, speed and sleep timer, and the show notes where a book shows its chapters. Your place carries over between the apps and the browser.
