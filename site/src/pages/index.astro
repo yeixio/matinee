@@ -325,6 +325,21 @@ const installs = [
           <a class="button" href={guide('getting-started/posters-and-details/')}>Get your own TMDB key</a>
         </div>
       </section>
+
+      <section class="news" id="news">
+        <h2>Get Matinee news</h2>
+        <p>Release notes and news by email, a few times a month at most.</p>
+        <form class="signup" id="newsletter" novalidate>
+          <label for="newsletter-email" class="sr-only">Email address</label>
+          <input id="newsletter-email" name="email" type="email" autocomplete="email" required placeholder="you@example.com" />
+          <!-- Left empty by people; bots fill it in. -->
+          <input class="trap" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <button class="button primary" type="submit">Sign up</button>
+        </form>
+        <p class="note" id="newsletter-status" role="status">
+          We'll email you a link to confirm. Your address is kept at Mailjet, used only for Matinee news, and every email can unsubscribe you.
+        </p>
+      </section>
     </main>
 
     <footer>
@@ -336,6 +351,41 @@ const installs = [
       <span class="tmdb">Movie and TV details come from TMDB. This product uses the TMDB API but is not endorsed or certified by TMDB.</span>
     </footer>
     <script>
+      // The newsletter signup: yeix.io keeps the lists for every Yeix project.
+      // It emails a link to confirm, and only then adds the address to Matinee's list.
+      const signup = document.getElementById('newsletter') as HTMLFormElement | null
+      const status = document.getElementById('newsletter-status')
+      signup?.addEventListener('submit', async (event) => {
+        event.preventDefault()
+        if (!status) return
+        const email = signup.elements.namedItem('email') as HTMLInputElement
+        const website = signup.elements.namedItem('website') as HTMLInputElement
+        const button = signup.querySelector('button') as HTMLButtonElement
+        if (!email.checkValidity()) {
+          status.textContent = 'Enter a valid email address.'
+          email.focus()
+          return
+        }
+        button.disabled = true
+        button.textContent = 'Sending…'
+        try {
+          const res = await fetch('https://yeix.io/api/newsletter', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: email.value, list: 'matinee', website: website.value }),
+          })
+          const data = (await res.json().catch(() => ({}))) as { message?: string; error?: string }
+          if (!res.ok) throw new Error(data.error || 'Something went wrong. Please try again.')
+          signup.hidden = true
+          status.textContent = data.message ?? 'Check your email for a link to confirm.'
+        } catch (error) {
+          const message = error instanceof Error ? error.message : ''
+          status.textContent = message && message !== 'Failed to fetch' ? message : 'Something went wrong. Please try again.'
+          button.disabled = false
+          button.textContent = 'Sign up'
+        }
+      })
+
       // Arm PCs get the Arm installer. Only Chromium browsers (Edge, Chrome) can tell.
       const link = document.getElementById('windows-download') as HTMLAnchorElement | null
       const uaData = (navigator as Navigator & { userAgentData?: { getHighEntropyValues(h: string[]): Promise<{ platform?: string; architecture?: string }> } }).userAgentData
@@ -695,6 +745,62 @@ const installs = [
   }
   .support strong {
     color: var(--text);
+  }
+  .news {
+    max-width: 640px !important;
+    padding: 0 24px 100px !important;
+    text-align: center;
+  }
+  .signup {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 24px auto 12px;
+    max-width: 480px;
+  }
+  .signup[hidden] {
+    display: none;
+  }
+  .signup input {
+    flex: 1;
+    min-width: 0;
+    padding: 12px 18px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--bg-2);
+    color: var(--text);
+    font: inherit;
+  }
+  .signup input:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+  .signup .trap {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+  }
+  .signup button {
+    cursor: pointer;
+    font: inherit;
+    font-weight: 600;
+  }
+  .signup button:disabled {
+    opacity: 0.6;
+  }
+  .news .note {
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
   }
   @media (max-width: 480px) {
     .nav nav a.github {
