@@ -1173,6 +1173,75 @@ paths:
             application/json:
               schema: { $ref: "#/components/schemas/AnalysisStatus" }
         "400": { $ref: "#/components/responses/Error" }
+  /admin/health:
+    get:
+      summary: The server's health, for the admin dashboard (admins only)
+      description: >
+        How busy the machine and the server are (CPU, memory, load, data sent,
+        with the last hour's readings every 5 seconds), the database, free
+        space on the disks of the server's folders and every library folder,
+        hardware transcoding, what's playing, running transcodes, background
+        jobs (scans, analysis, downloads being converted, imports), and
+        recent warnings and errors grouped by message. Everything comes from
+        this server; nothing is sent anywhere.
+      responses:
+        "200":
+          description: The server's health.
+          content:
+            application/json:
+              schema: { type: object, additionalProperties: true }
+  /admin/logs:
+    get:
+      summary: The latest log lines, newest first (admins only)
+      description: >
+        The server keeps its latest 5,000 log lines in memory, from when it
+        started. Page back with before.
+      parameters:
+        - { name: level, in: query, schema: { type: string, enum: [debug, info, warn, error] }, description: The least serious level to show. }
+        - { name: q, in: query, schema: { type: string }, description: Text the line has, in any case. }
+        - { name: before, in: query, schema: { type: integer }, description: Only lines older than this one (its seq). }
+        - { name: limit, in: query, schema: { type: integer, maximum: 1000 }, description: At most this many; 200 by default. }
+      responses:
+        "200":
+          description: Matching lines, and whether older ones match too.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  lines:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        seq: { type: integer }
+                        time: { type: integer, description: Milliseconds. }
+                        level: { type: string, enum: [debug, info, warn, error] }
+                        message: { type: string }
+                        attrs:
+                          type: array
+                          items: { type: object, properties: { key: { type: string }, value: { type: string } } }
+                  more: { type: boolean }
+  /admin/logs/download:
+    get:
+      summary: The latest log lines as a text file, oldest first (admins only)
+      parameters:
+        - { name: level, in: query, schema: { type: string, enum: [debug, info, warn, error] } }
+        - { name: q, in: query, schema: { type: string } }
+      responses:
+        "200":
+          description: The log, to attach to a bug report.
+          content:
+            text/plain:
+              schema: { type: string }
+  /admin/transcodes/{session}:
+    delete:
+      summary: Stop a running transcode (admins only)
+      parameters:
+        - { name: session, in: path, required: true, schema: { type: string } }
+      responses:
+        "204": { description: Stopped. The player that was using it starts a new one if it keeps playing. }
+        "404": { $ref: "#/components/responses/Error" }
   /items/{id}/analyze:
     post:
       summary: Analyze one file again soon (admins only)

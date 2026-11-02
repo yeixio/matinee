@@ -843,6 +843,10 @@
       "add-ons": {
         "title": "Complementos",
         "hint": "Radarr, Sonarr, Overseerr y plugins"
+      },
+      "health": {
+        "title": "Estado del servidor",
+        "hint": "Carga, reproducción, tareas, problemas y el registro"
       }
     }
   },
@@ -1015,5 +1019,164 @@
     "expired": "{{name}} caducó el {{date}}",
     "badge": "Amigo",
     "seeEverything": "Dejar que lo vea todo"
+  },
+  "health": {
+    "title": "Estado del servidor",
+    "intro": "Cómo está el servidor ahora mismo, para cuando algo no funciona. Todo lo que ves aquí viene de este servidor y se queda en él.",
+    "cantLoad": "No se pudo cargar el estado del servidor: {{error}}",
+    "updates": "Se actualiza cada 5 segundos",
+    "upFor": "en marcha desde hace {{time}}",
+    "seconds": "{{seconds}} s",
+    "days": "{{days}} d {{hours}} h",
+    "hourAgo": "hace 1 hora",
+    "now": "Ahora",
+    "noHistory": "El gráfico se llenará en el próximo minuto.",
+    "chartLabel": "{{name}} en la última hora",
+    "status": {
+      "ok": "Todo está bien",
+      "problems_many": "{{count}} avisos o errores en la última hora",
+      "problems_one": "{{count}} aviso o error en la última hora",
+      "problems_other": "{{count}} avisos o errores en la última hora",
+      "restarting": "El servidor se está reiniciando",
+      "database": "La base de datos no responde",
+      "disk": "No se puede leer una carpeta"
+    },
+    "scope": {
+      "group": "Matinee y los procesos de FFmpeg que ejecuta.",
+      "process": "Solo Matinee; no cuenta los procesos de FFmpeg."
+    },
+    "tiles": {
+      "cpu": "CPU",
+      "machine": "todo el equipo {{value}}",
+      "load": "carga {{load}}",
+      "cpuLimit": "Limitado a {{cores}} núcleos.",
+      "memory": "Memoria",
+      "of": "de {{total}}",
+      "ofLimit": "de {{total}} permitidos",
+      "sending": "Enviando",
+      "sentTotal": "{{total}} desde que arrancó",
+      "playing": "Reproduciendo ahora",
+      "transcodes_many": "{{count}} transcodificaciones",
+      "transcodes_one": "{{count}} transcodificación",
+      "transcodes_other": "{{count}} transcodificaciones"
+    },
+    "level": {
+      "warn": "Aviso",
+      "error": "Error"
+    },
+    "streams": {
+      "title": "Reproduciendo ahora",
+      "none": "No se está reproduciendo nada.",
+      "direct": "Reproducción directa",
+      "transcoding": "Transcodificando",
+      "away": "Fuera de casa",
+      "paused": "En pausa",
+      "buffering": "Cargando"
+    },
+    "transcodes": {
+      "title": "Transcodificaciones",
+      "none": "No hay transcodificaciones en curso.",
+      "kind": {
+        "video": "Convirtiendo vídeo",
+        "copy": "Reempaquetando vídeo",
+        "audio": "Convirtiendo audio"
+      },
+      "mode": {
+        "cpu": "en la CPU",
+        "encode": "{{name}} codifica",
+        "full": "{{name}} decodifica y codifica"
+      },
+      "burnSub": "subtítulos incrustados",
+      "started": "Empezó {{time}}",
+      "stop": "Detener",
+      "stopHint": "Detiene FFmpeg. Si el reproductor sigue abierto, empieza una nueva transcodificación.",
+      "cpuOnly": "Las transcodificaciones se hacen en la CPU."
+    },
+    "problems": {
+      "title": "Avisos y errores",
+      "none": "Ningún aviso ni error desde que arrancó el servidor.",
+      "times_many": "{{count}} veces",
+      "times_one": "{{count}} vez",
+      "times_other": "{{count}} veces",
+      "last": "última {{time}}",
+      "showInLog": "Ver en el registro",
+      "more_many": "Mostrar {{count}} más",
+      "more_one": "Mostrar {{count}} más",
+      "more_other": "Mostrar {{count}} más"
+    },
+    "jobs": {
+      "title": "Tareas en segundo plano",
+      "scan": "Escanear {{library}}",
+      "scanning": "Escaneando desde hace {{time}}",
+      "lastScan": "{{time}}, tardó {{took}}",
+      "scanCounts": "{{added}} añadidos, {{updated}} actualizados, {{removed}} quitados, {{failed}} no reproducibles",
+      "scanFailed": "Falló: {{error}}",
+      "notScanned": "Sin escanear desde que arrancó el servidor",
+      "downloads": "Descargas para dispositivos",
+      "downloadCounts": "{{waiting}} en espera, {{converting}} convirtiéndose, {{failed}} fallidas",
+      "nothing": "Nada pendiente",
+      "importing": "Importando el historial"
+    },
+    "disks": {
+      "title": "Espacio en disco",
+      "free": "{{free}} libres de {{total}}",
+      "low": "Poco espacio",
+      "unreachableTitle": "No se puede leer",
+      "unreachable": "Esta carpeta no respondió. Si está en una carpeta compartida de red, comprueba que sigue conectada.",
+      "use": {
+        "data": "Datos",
+        "transcode": "Transcodificación",
+        "thumbnails": "Vistas previas de la barra",
+        "images": "Pósteres e ilustraciones",
+        "downloads": "Descargas",
+        "library": "{{library}}"
+      }
+    },
+    "details": {
+      "title": "Detalles del servidor",
+      "version": "Versión",
+      "ffmpeg": "FFmpeg",
+      "ffmpegMissing": "No se encontró en {{path}}",
+      "system": "Sistema",
+      "cores_many": "{{count}} núcleos",
+      "cores_one": "{{count}} núcleo",
+      "cores_other": "{{count}} núcleos",
+      "started": "Arrancó",
+      "database": "Base de datos",
+      "answers": "responde en {{ms}} ms",
+      "dbCounts": "{{items}} elementos, {{users}} cuentas, {{libraries}} bibliotecas",
+      "connections": "{{open}} conexiones, {{busy}} ocupadas",
+      "dbError": "No respondió: {{error}}",
+      "requests": "Peticiones",
+      "requestCounts": "{{requests}} atendidas, {{errors}} fallaron en el servidor",
+      "logged": "Registrado",
+      "loggedCounts": "{{warnings}} avisos, {{errors}} errores",
+      "rescans": "Escaneos programados",
+      "every": "Cada {{time}}",
+      "remote": "Acceso remoto",
+      "remoteState": {
+        "off": "Desactivado",
+        "working": "Configurándose",
+        "ready": "Funciona",
+        "failed": "No funciona"
+      },
+      "runtime": "Entorno de Go",
+      "heap": "{{heap}} en uso, {{goroutines}} goroutines"
+    },
+    "log": {
+      "title": "Registro",
+      "intro": "Las últimas {{count}} líneas desde que arrancó el servidor. El registro completo está donde vaya la salida del servidor, como el registro del contenedor.",
+      "download": "Descargar",
+      "search": "Buscar en el registro",
+      "level": "Mostrar",
+      "levels": {
+        "all": "Todo",
+        "warn": "Avisos y errores",
+        "error": "Errores"
+      },
+      "live": "Seguir las líneas nuevas",
+      "older": "Mostrar líneas anteriores",
+      "empty": "Ninguna línea coincide."
+    }
   }
 }

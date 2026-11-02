@@ -839,6 +839,10 @@
       "add-ons": {
         "title": "ایڈ آنز",
         "hint": "Radarr، Sonarr، Overseerr اور پلگ انز"
+      },
+      "health": {
+        "title": "سرور کی حالت",
+        "hint": "لوڈ، پلے بیک، کام، مسائل اور لاگ"
       }
     }
   },
@@ -1009,5 +1013,159 @@
     "expired": "{{name}} کی مدت {{date}} کو ختم ہوئی",
     "badge": "دوست",
     "seeEverything": "سب کچھ دکھائیں"
+  },
+  "health": {
+    "title": "سرور کی حالت",
+    "intro": "سرور اس وقت کیسا چل رہا ہے، اس وقت کے لیے جب کچھ کام نہ کرے۔ یہاں سب کچھ اسی سرور سے آتا ہے اور اسی پر رہتا ہے۔",
+    "cantLoad": "سرور کی حالت لوڈ نہیں ہو سکی: {{error}}",
+    "updates": "ہر 5 سیکنڈ میں تازہ ہوتا ہے",
+    "upFor": "{{time}} سے چل رہا ہے",
+    "seconds": "{{seconds}} سیکنڈ",
+    "days": "{{days}} دن {{hours}} گھنٹے",
+    "hourAgo": "1 گھنٹہ پہلے",
+    "now": "ابھی",
+    "noHistory": "چارٹ اگلے ایک منٹ میں بھر جائے گا۔",
+    "chartLabel": "پچھلے ایک گھنٹے میں {{name}}",
+    "status": {
+      "ok": "سب ٹھیک ہے",
+      "problems_one": "پچھلے ایک گھنٹے میں {{count}} انتباہ یا خرابی",
+      "problems_other": "پچھلے ایک گھنٹے میں {{count}} انتباہات یا خرابیاں",
+      "restarting": "سرور دوبارہ شروع ہو رہا ہے",
+      "database": "ڈیٹابیس جواب نہیں دے رہا",
+      "disk": "ایک فولڈر پڑھا نہیں جا سکتا"
+    },
+    "scope": {
+      "group": "Matinee اور اس کے چلائے ہوئے FFmpeg پروسیس۔",
+      "process": "صرف Matinee؛ FFmpeg پروسیس شامل نہیں۔"
+    },
+    "tiles": {
+      "cpu": "CPU",
+      "machine": "پوری مشین {{value}}",
+      "load": "لوڈ {{load}}",
+      "cpuLimit": "{{cores}} کورز تک محدود۔",
+      "memory": "میموری",
+      "of": "{{total}} میں سے",
+      "ofLimit": "اجازت شدہ {{total}} میں سے",
+      "sending": "بھیج رہا ہے",
+      "sentTotal": "شروع سے اب تک {{total}}",
+      "playing": "ابھی چل رہا ہے",
+      "transcodes_one": "{{count}} ٹرانس کوڈ",
+      "transcodes_other": "{{count}} ٹرانس کوڈ"
+    },
+    "level": {
+      "warn": "انتباہ",
+      "error": "خرابی"
+    },
+    "streams": {
+      "title": "ابھی چل رہا ہے",
+      "none": "کچھ نہیں چل رہا۔",
+      "direct": "براہ راست پلے",
+      "transcoding": "ٹرانس کوڈنگ",
+      "away": "گھر سے باہر",
+      "paused": "رکا ہوا",
+      "buffering": "بفرنگ"
+    },
+    "transcodes": {
+      "title": "ٹرانس کوڈ",
+      "none": "کوئی ٹرانس کوڈ نہیں چل رہا۔",
+      "kind": {
+        "video": "ویڈیو تبدیل ہو رہی ہے",
+        "copy": "ویڈیو دوبارہ پیک ہو رہی ہے",
+        "audio": "آڈیو تبدیل ہو رہی ہے"
+      },
+      "mode": {
+        "cpu": "CPU پر",
+        "encode": "{{name}} انکوڈ کرتا ہے",
+        "full": "{{name}} ڈی کوڈ اور انکوڈ کرتا ہے"
+      },
+      "burnSub": "سب ٹائٹل تصویر میں شامل",
+      "started": "شروع ہوا {{time}}",
+      "stop": "روکیں",
+      "stopHint": "FFmpeg کو روکتا ہے۔ اگر پلیئر ابھی کھلا ہے تو وہ نیا ٹرانس کوڈ شروع کرے گا۔",
+      "cpuOnly": "ٹرانس کوڈ CPU پر چلتے ہیں۔"
+    },
+    "problems": {
+      "title": "انتباہات اور خرابیاں",
+      "none": "سرور شروع ہونے کے بعد سے کوئی انتباہ یا خرابی نہیں۔",
+      "times_one": "{{count}} بار",
+      "times_other": "{{count}} بار",
+      "last": "آخری بار {{time}}",
+      "showInLog": "لاگ میں دکھائیں",
+      "more_one": "مزید {{count}} دکھائیں",
+      "more_other": "مزید {{count}} دکھائیں"
+    },
+    "jobs": {
+      "title": "پس منظر کے کام",
+      "scan": "{{library}} اسکین",
+      "scanning": "{{time}} سے اسکین ہو رہا ہے",
+      "lastScan": "{{time}}، {{took}} لگا",
+      "scanCounts": "{{added}} شامل، {{updated}} تازہ، {{removed}} ہٹائے، {{failed}} چلنے کے قابل نہیں",
+      "scanFailed": "ناکام: {{error}}",
+      "notScanned": "سرور شروع ہونے کے بعد سے اسکین نہیں ہوا",
+      "downloads": "آلات کے لیے ڈاؤن لوڈ",
+      "downloadCounts": "{{waiting}} منتظر، {{converting}} تبدیل ہو رہے، {{failed}} ناکام",
+      "nothing": "کوئی کام نہیں",
+      "importing": "دیکھنے کی تاریخ درآمد ہو رہی ہے"
+    },
+    "disks": {
+      "title": "ڈسک کی جگہ",
+      "free": "{{total}} میں سے {{free}} خالی",
+      "low": "جگہ کم ہے",
+      "unreachableTitle": "پڑھا نہیں جا سکتا",
+      "unreachable": "اس فولڈر نے جواب نہیں دیا۔ اگر یہ نیٹ ورک شیئر پر ہے تو دیکھیں کہ شیئر ابھی جڑا ہوا ہے۔",
+      "use": {
+        "data": "ڈیٹا",
+        "transcode": "ٹرانس کوڈنگ",
+        "thumbnails": "سیک بار پیش نظارے",
+        "images": "پوسٹر اور تصاویر",
+        "downloads": "ڈاؤن لوڈ",
+        "library": "{{library}}"
+      }
+    },
+    "details": {
+      "title": "سرور کی تفصیلات",
+      "version": "ورژن",
+      "ffmpeg": "FFmpeg",
+      "ffmpegMissing": "{{path}} پر نہیں ملا",
+      "system": "سسٹم",
+      "cores_one": "{{count}} کور",
+      "cores_other": "{{count}} کورز",
+      "started": "شروع ہوا",
+      "database": "ڈیٹابیس",
+      "answers": "{{ms}} ms میں جواب",
+      "dbCounts": "{{items}} آئٹمز، {{users}} اکاؤنٹس، {{libraries}} لائبریریاں",
+      "connections": "{{open}} کنکشن، {{busy}} مصروف",
+      "dbError": "جواب نہیں دیا: {{error}}",
+      "requests": "درخواستیں",
+      "requestCounts": "{{requests}} کا جواب دیا، {{errors}} سرور پر ناکام",
+      "logged": "لاگ شدہ",
+      "loggedCounts": "{{warnings}} انتباہات، {{errors}} خرابیاں",
+      "rescans": "طے شدہ اسکین",
+      "every": "ہر {{time}}",
+      "remote": "ریموٹ رسائی",
+      "remoteState": {
+        "off": "بند",
+        "working": "سیٹ اپ ہو رہی ہے",
+        "ready": "کام کر رہی ہے",
+        "failed": "کام نہیں کر رہی"
+      },
+      "runtime": "Go رن ٹائم",
+      "heap": "{{heap}} استعمال میں، {{goroutines}} گوروٹینز"
+    },
+    "log": {
+      "title": "لاگ",
+      "intro": "سرور شروع ہونے کے بعد کی آخری {{count}} سطریں۔ مکمل لاگ وہاں ہے جہاں سرور کا آؤٹ پٹ جاتا ہے، جیسے کنٹینر کا لاگ۔",
+      "download": "ڈاؤن لوڈ",
+      "search": "لاگ میں تلاش کریں",
+      "level": "دکھائیں",
+      "levels": {
+        "all": "سب",
+        "warn": "انتباہات اور خرابیاں",
+        "error": "خرابیاں"
+      },
+      "live": "نئی سطروں کے ساتھ چلیں",
+      "older": "پرانی سطریں دکھائیں",
+      "empty": "کوئی سطر نہیں ملی۔"
+    }
   }
 }

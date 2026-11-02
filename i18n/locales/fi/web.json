@@ -839,6 +839,10 @@
       "add-ons": {
         "title": "Lisäosat",
         "hint": "Radarr, Sonarr, Overseerr ja laajennukset"
+      },
+      "health": {
+        "title": "Palvelimen tila",
+        "hint": "Kuorma, toisto, tehtävät, ongelmat ja loki"
       }
     }
   },
@@ -1009,5 +1013,159 @@
     "expired": "{{name}} vanheni {{date}}",
     "badge": "Ystävä",
     "seeEverything": "Näytä kaikki"
+  },
+  "health": {
+    "title": "Palvelimen tila",
+    "intro": "Miten palvelin voi juuri nyt, kun jokin ei toimi. Kaikki tämä tulee tältä palvelimelta ja pysyy siellä.",
+    "cantLoad": "Palvelimen tilaa ei voitu ladata: {{error}}",
+    "updates": "Päivittyy 5 sekunnin välein",
+    "upFor": "käynnissä {{time}}",
+    "seconds": "{{seconds}} s",
+    "days": "{{days}} pv {{hours}} t",
+    "hourAgo": "1 tunti sitten",
+    "now": "Nyt",
+    "noHistory": "Kaavio täyttyy seuraavan minuutin aikana.",
+    "chartLabel": "{{name}} viimeisen tunnin ajalta",
+    "status": {
+      "ok": "Kaikki näyttää hyvältä",
+      "problems_one": "{{count}} varoitus tai virhe viimeisen tunnin aikana",
+      "problems_other": "{{count}} varoitusta tai virhettä viimeisen tunnin aikana",
+      "restarting": "Palvelin käynnistyy uudelleen",
+      "database": "Tietokanta ei vastaa",
+      "disk": "Kansiota ei voi lukea"
+    },
+    "scope": {
+      "group": "Matinee ja sen käynnistämät FFmpeg-prosessit.",
+      "process": "Vain Matinee; FFmpeg-prosesseja ei lasketa."
+    },
+    "tiles": {
+      "cpu": "Suoritin",
+      "machine": "koko kone {{value}}",
+      "load": "kuorma {{load}}",
+      "cpuLimit": "Rajattu {{cores}} ytimeen.",
+      "memory": "Muisti",
+      "of": "/ {{total}}",
+      "ofLimit": "/ {{total}} sallittu",
+      "sending": "Lähettää",
+      "sentTotal": "{{total}} käynnistyksestä lähtien",
+      "playing": "Toistossa nyt",
+      "transcodes_one": "{{count}} muunnos",
+      "transcodes_other": "{{count}} muunnosta"
+    },
+    "level": {
+      "warn": "Varoitus",
+      "error": "Virhe"
+    },
+    "streams": {
+      "title": "Toistossa nyt",
+      "none": "Mitään ei toisteta.",
+      "direct": "Suora toisto",
+      "transcoding": "Muunnetaan",
+      "away": "Kodin ulkopuolella",
+      "paused": "Tauolla",
+      "buffering": "Puskuroi"
+    },
+    "transcodes": {
+      "title": "Muunnokset",
+      "none": "Muunnoksia ei ole käynnissä.",
+      "kind": {
+        "video": "Muuntaa videota",
+        "copy": "Paketoi videota uudelleen",
+        "audio": "Muuntaa ääntä"
+      },
+      "mode": {
+        "cpu": "suorittimella",
+        "encode": "{{name}} koodaa",
+        "full": "{{name}} purkaa ja koodaa"
+      },
+      "burnSub": "tekstitys poltettu kuvaan",
+      "started": "Alkoi {{time}}",
+      "stop": "Pysäytä",
+      "stopHint": "Pysäyttää FFmpegin. Jos soitin on yhä auki, se aloittaa uuden muunnoksen.",
+      "cpuOnly": "Muunnokset tehdään suorittimella."
+    },
+    "problems": {
+      "title": "Varoitukset ja virheet",
+      "none": "Ei varoituksia eikä virheitä palvelimen käynnistyksen jälkeen.",
+      "times_one": "{{count}} kerta",
+      "times_other": "{{count}} kertaa",
+      "last": "viimeksi {{time}}",
+      "showInLog": "Näytä lokissa",
+      "more_one": "Näytä {{count}} lisää",
+      "more_other": "Näytä {{count}} lisää"
+    },
+    "jobs": {
+      "title": "Taustatehtävät",
+      "scan": "Kirjaston {{library}} haku",
+      "scanning": "Haku käynnissä {{time}}",
+      "lastScan": "{{time}}, kesti {{took}}",
+      "scanCounts": "{{added}} lisätty, {{updated}} päivitetty, {{removed}} poistettu, {{failed}} ei toistettavissa",
+      "scanFailed": "Epäonnistui: {{error}}",
+      "notScanned": "Ei haettu palvelimen käynnistyksen jälkeen",
+      "downloads": "Lataukset laitteille",
+      "downloadCounts": "{{waiting}} odottaa, {{converting}} muunnetaan, {{failed}} epäonnistui",
+      "nothing": "Ei tehtävää",
+      "importing": "Tuodaan katseluhistoriaa"
+    },
+    "disks": {
+      "title": "Levytila",
+      "free": "{{free}} vapaana / {{total}}",
+      "low": "Tila vähissä",
+      "unreachableTitle": "Ei voi lukea",
+      "unreachable": "Tämä kansio ei vastannut. Jos se on verkkojaossa, tarkista, että jako on yhä yhdistetty.",
+      "use": {
+        "data": "Tiedot",
+        "transcode": "Muunnokset",
+        "thumbnails": "Aikajanan esikatselut",
+        "images": "Julisteet ja kuvat",
+        "downloads": "Lataukset",
+        "library": "{{library}}"
+      }
+    },
+    "details": {
+      "title": "Palvelimen tiedot",
+      "version": "Versio",
+      "ffmpeg": "FFmpeg",
+      "ffmpegMissing": "Ei löytynyt polusta {{path}}",
+      "system": "Järjestelmä",
+      "cores_one": "{{count}} ydin",
+      "cores_other": "{{count}} ydintä",
+      "started": "Käynnistetty",
+      "database": "Tietokanta",
+      "answers": "vastaa {{ms}} ms:ssa",
+      "dbCounts": "{{items}} kohdetta, {{users}} tiliä, {{libraries}} kirjastoa",
+      "connections": "{{open}} yhteyttä, {{busy}} varattuna",
+      "dbError": "Ei vastannut: {{error}}",
+      "requests": "Pyynnöt",
+      "requestCounts": "{{requests}} vastattu, {{errors}} epäonnistui palvelimella",
+      "logged": "Kirjattu",
+      "loggedCounts": "{{warnings}} varoitusta, {{errors}} virhettä",
+      "rescans": "Ajastetut haut",
+      "every": "{{time}} välein",
+      "remote": "Etäkäyttö",
+      "remoteState": {
+        "off": "Pois",
+        "working": "Asetetaan",
+        "ready": "Toimii",
+        "failed": "Ei toimi"
+      },
+      "runtime": "Go-ajoympäristö",
+      "heap": "{{heap}} käytössä, {{goroutines}} gorutiinia"
+    },
+    "log": {
+      "title": "Loki",
+      "intro": "Viimeiset {{count}} riviä palvelimen käynnistyksen jälkeen. Koko loki on siellä, minne palvelimen tuloste menee, esimerkiksi säiliön lokissa.",
+      "download": "Lataa",
+      "search": "Hae lokista",
+      "level": "Näytä",
+      "levels": {
+        "all": "Kaikki",
+        "warn": "Varoitukset ja virheet",
+        "error": "Virheet"
+      },
+      "live": "Seuraa uusia rivejä",
+      "older": "Näytä vanhemmat rivit",
+      "empty": "Mikään rivi ei täsmää."
+    }
   }
 }

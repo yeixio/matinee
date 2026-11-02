@@ -407,6 +407,33 @@ try {
     await page.context().close()
   }
 
+  // --- Server health (docs/guide/server/server-health.md) ---
+  if (['server-health', 'server-health-playing', 'server-health-jobs', 'server-health-log'].some(wanted)) {
+    // Someone watching, with a transcode, while the dashboard collects a
+    // minute of readings.
+    const viewer = await open(desktop, token)
+    const harbor = await find('Harbor Lights')
+    await viewer.goto(`${origin}/watch/${harbor.id}`)
+    await sleep(3000)
+    await viewer.evaluate(() => document.querySelector('video')?.play())
+    await api(token, 'POST', `/items/${harbor.id}/hls?start=600`).catch(() => {})
+    await sleep(60_000)
+    const page = await open(desktop, token)
+    await settings(page, 'health')
+    await page.getByRole('heading', { name: 'Playing now', level: 3 }).waitFor()
+    await sleep(1500)
+    const part = (n) => page.locator(`#server-health > section > div:nth-child(${n})`)
+    await shot(page, 'server-health', { target: part(1) })
+    await shot(page, 'server-health-playing', { target: part(2) })
+    await shot(page, 'server-health-jobs', { target: part(3) })
+    await page.getByRole('heading', { name: 'Log', level: 3 }).scrollIntoViewIfNeeded()
+    await page.getByPlaceholder('Search the log').fill('transcode')
+    await sleep(1200)
+    await shot(page, 'server-health-log', { target: part(5) })
+    await page.context().close()
+    await viewer.context().close()
+  }
+
   // --- People, profiles, themes ---
   {
     const page = await open(desktop, token)

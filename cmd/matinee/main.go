@@ -29,6 +29,7 @@ import (
 	"github.com/yeixio/matinee/internal/connect"
 	"github.com/yeixio/matinee/internal/discovery"
 	"github.com/yeixio/matinee/internal/download"
+	"github.com/yeixio/matinee/internal/health"
 	"github.com/yeixio/matinee/internal/hwaccel"
 	"github.com/yeixio/matinee/internal/intro"
 	"github.com/yeixio/matinee/internal/kube"
@@ -76,7 +77,10 @@ func run() error {
 	if os.Getenv("MATINEE_DEBUG") != "" {
 		level = slog.LevelDebug
 	}
-	log := slog.New(slog.NewTextHandler(os.Stderr, &slog.HandlerOptions{Level: level}))
+	// The admin dashboard shows the latest log lines too (internal/health).
+	logs := health.NewLogs(health.DefaultLines)
+	log := slog.New(logs.Handler(slog.NewTextHandler(os.Stderr, &slog.HandlerOptions{Level: level})))
+	monitor := health.NewMonitor(logs)
 
 	for _, bin := range []string{cfg.FFmpegPath, cfg.FFprobePath} {
 		if _, err := exec.LookPath(bin); err != nil {
@@ -227,7 +231,14 @@ func run() error {
 		PublicURL: cfg.PublicURL,
 		Plugins:   plugins, PluginCatalog: cfg.PluginCatalog,
 		Live: hub, Together: sessions, UUID: uuid,
+		Health: monitor,
+		Storage: []api.StoragePath{
+			{Use: "data", Path: cfg.DataDir}, {Use: "transcode", Path: cfg.TranscodeDir()}, {Use: "thumbnails", Path: cfg.ThumbnailDir()},
+			{Use: "images", Path: cfg.ImageDir()}, {Use: "downloads", Path: cfg.DownloadDir()},
+		},
 	}
+	monitor.Streams = apiServer.StreamCounts
+	go monitor.Run(ctx)
 	if _, problems := theme.Load(cfg.ThemeDir()); len(problems) > 0 {
 		for _, p := range problems {
 			log.Warn("skipping a theme file", "dir", cfg.ThemeDir(), "err", p)

@@ -839,6 +839,10 @@
       "add-ons": {
         "title": "Erweiterungen",
         "hint": "Radarr, Sonarr, Overseerr und Plugins"
+      },
+      "health": {
+        "title": "Serverzustand",
+        "hint": "Auslastung, Wiedergabe, Aufgaben, Probleme und das Protokoll"
       }
     }
   },
@@ -1009,5 +1013,159 @@
     "expired": "{{name}} ist am {{date}} abgelaufen",
     "badge": "Freund",
     "seeEverything": "Alles sehen lassen"
+  },
+  "health": {
+    "title": "Serverzustand",
+    "intro": "Wie es dem Server gerade geht, für den Fall, dass etwas nicht funktioniert. Alles hier stammt von diesem Server und bleibt auch dort.",
+    "cantLoad": "Der Serverzustand konnte nicht geladen werden: {{error}}",
+    "updates": "Aktualisiert sich alle 5 Sekunden",
+    "upFor": "läuft seit {{time}}",
+    "seconds": "{{seconds}} s",
+    "days": "{{days}} T {{hours}} h",
+    "hourAgo": "vor 1 Stunde",
+    "now": "Jetzt",
+    "noHistory": "Das Diagramm füllt sich in der nächsten Minute.",
+    "chartLabel": "{{name}} in der letzten Stunde",
+    "status": {
+      "ok": "Alles sieht gut aus",
+      "problems_one": "{{count}} Warnung oder Fehler in der letzten Stunde",
+      "problems_other": "{{count}} Warnungen oder Fehler in der letzten Stunde",
+      "restarting": "Der Server startet neu",
+      "database": "Die Datenbank antwortet nicht",
+      "disk": "Ein Ordner kann nicht gelesen werden"
+    },
+    "scope": {
+      "group": "Matinee und die FFmpeg-Prozesse, die es startet.",
+      "process": "Nur Matinee selbst; FFmpeg-Prozesse werden nicht mitgezählt."
+    },
+    "tiles": {
+      "cpu": "CPU",
+      "machine": "ganzer Rechner {{value}}",
+      "load": "Last {{load}}",
+      "cpuLimit": "Begrenzt auf {{cores}} Kerne.",
+      "memory": "Arbeitsspeicher",
+      "of": "von {{total}}",
+      "ofLimit": "von {{total}} erlaubt",
+      "sending": "Sendet",
+      "sentTotal": "{{total}} seit dem Start",
+      "playing": "Läuft gerade",
+      "transcodes_one": "{{count}} Transkodierung",
+      "transcodes_other": "{{count}} Transkodierungen"
+    },
+    "level": {
+      "warn": "Warnung",
+      "error": "Fehler"
+    },
+    "streams": {
+      "title": "Läuft gerade",
+      "none": "Gerade läuft nichts.",
+      "direct": "Direkte Wiedergabe",
+      "transcoding": "Transkodierung",
+      "away": "Unterwegs",
+      "paused": "Pausiert",
+      "buffering": "Puffert"
+    },
+    "transcodes": {
+      "title": "Transkodierungen",
+      "none": "Keine Transkodierung läuft.",
+      "kind": {
+        "video": "Video wird umgewandelt",
+        "copy": "Video wird neu verpackt",
+        "audio": "Ton wird umgewandelt"
+      },
+      "mode": {
+        "cpu": "auf der CPU",
+        "encode": "{{name}} kodiert",
+        "full": "{{name}} dekodiert und kodiert"
+      },
+      "burnSub": "Untertitel eingebrannt",
+      "started": "Gestartet {{time}}",
+      "stop": "Stoppen",
+      "stopHint": "Beendet FFmpeg. Ist der Player noch offen, startet er eine neue Transkodierung.",
+      "cpuOnly": "Transkodierungen laufen auf der CPU."
+    },
+    "problems": {
+      "title": "Warnungen und Fehler",
+      "none": "Keine Warnungen oder Fehler seit dem Serverstart.",
+      "times_one": "{{count}}-mal",
+      "times_other": "{{count}}-mal",
+      "last": "zuletzt {{time}}",
+      "showInLog": "Im Protokoll zeigen",
+      "more_one": "{{count}} weitere zeigen",
+      "more_other": "{{count}} weitere zeigen"
+    },
+    "jobs": {
+      "title": "Hintergrundaufgaben",
+      "scan": "{{library}} durchsuchen",
+      "scanning": "Wird seit {{time}} durchsucht",
+      "lastScan": "{{time}}, dauerte {{took}}",
+      "scanCounts": "{{added}} hinzugefügt, {{updated}} aktualisiert, {{removed}} entfernt, {{failed}} nicht abspielbar",
+      "scanFailed": "Fehlgeschlagen: {{error}}",
+      "notScanned": "Seit dem Serverstart nicht durchsucht",
+      "downloads": "Downloads für Geräte",
+      "downloadCounts": "{{waiting}} wartend, {{converting}} in Umwandlung, {{failed}} fehlgeschlagen",
+      "nothing": "Nichts zu tun",
+      "importing": "Wiedergabeverlauf wird importiert"
+    },
+    "disks": {
+      "title": "Speicherplatz",
+      "free": "{{free}} frei von {{total}}",
+      "low": "Wenig Platz",
+      "unreachableTitle": "Nicht lesbar",
+      "unreachable": "Dieser Ordner hat nicht geantwortet. Liegt er auf einer Netzwerkfreigabe, prüfe, ob die Freigabe noch verbunden ist.",
+      "use": {
+        "data": "Daten",
+        "transcode": "Transkodierung",
+        "thumbnails": "Vorschaubilder der Zeitleiste",
+        "images": "Poster und Artwork",
+        "downloads": "Downloads",
+        "library": "{{library}}"
+      }
+    },
+    "details": {
+      "title": "Serverdetails",
+      "version": "Version",
+      "ffmpeg": "FFmpeg",
+      "ffmpegMissing": "Nicht gefunden unter {{path}}",
+      "system": "System",
+      "cores_one": "{{count}} Kern",
+      "cores_other": "{{count}} Kerne",
+      "started": "Gestartet",
+      "database": "Datenbank",
+      "answers": "antwortet in {{ms}} ms",
+      "dbCounts": "{{items}} Einträge, {{users}} Konten, {{libraries}} Mediatheken",
+      "connections": "{{open}} Verbindungen, {{busy}} belegt",
+      "dbError": "Keine Antwort: {{error}}",
+      "requests": "Anfragen",
+      "requestCounts": "{{requests}} beantwortet, {{errors}} auf dem Server fehlgeschlagen",
+      "logged": "Protokolliert",
+      "loggedCounts": "{{warnings}} Warnungen, {{errors}} Fehler",
+      "rescans": "Geplante Durchsuchungen",
+      "every": "Alle {{time}}",
+      "remote": "Fernzugriff",
+      "remoteState": {
+        "off": "Aus",
+        "working": "Wird eingerichtet",
+        "ready": "Funktioniert",
+        "failed": "Funktioniert nicht"
+      },
+      "runtime": "Go-Laufzeit",
+      "heap": "{{heap}} belegt, {{goroutines}} Goroutinen"
+    },
+    "log": {
+      "title": "Protokoll",
+      "intro": "Die letzten {{count}} Zeilen seit dem Serverstart. Das vollständige Protokoll landet dort, wo die Ausgabe des Servers hingeht, etwa im Container-Log.",
+      "download": "Herunterladen",
+      "search": "Protokoll durchsuchen",
+      "level": "Zeigen",
+      "levels": {
+        "all": "Alles",
+        "warn": "Warnungen und Fehler",
+        "error": "Fehler"
+      },
+      "live": "Neuen Zeilen folgen",
+      "older": "Ältere Zeilen zeigen",
+      "empty": "Keine passenden Zeilen."
+    }
   }
 }

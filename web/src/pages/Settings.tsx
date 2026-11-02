@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { ChevronLeft, ChevronRight, Folder, FolderOpen, Gauge, Globe, Image as ImageIcon, KeyRound, LibraryBig, Monitor, Plus, Puzzle, RefreshCw, Trash2, UserPlus, UserRound, UsersRound, X, type LucideIcon } from 'lucide-react'
+import { Activity, ChevronLeft, ChevronRight, Folder, FolderOpen, Gauge, Globe, Image as ImageIcon, KeyRound, LibraryBig, Monitor, Plus, Puzzle, RefreshCw, Trash2, UserPlus, UserRound, UsersRound, X, type LucideIcon } from 'lucide-react'
 import { useEffect, useState, type FormEvent, type ReactNode } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import { Link, Navigate, useLocation, useNavigate, useParams } from 'react-router-dom'
@@ -7,6 +7,7 @@ import { api, type ConnectStatus, type LibraryKind, type PlaybackPrefs, type Rem
 import { LanguagePicker } from '../components/LanguagePicker'
 import { NewFiles, watchSummary } from '../components/LibraryWatch'
 import { MediaAnalysis } from '../components/MediaAnalysis'
+import { ServerHealth } from '../components/ServerHealth'
 import { Plugins } from '../components/PluginSettings'
 import { Profiles } from '../components/ProfileSettings'
 import { FriendLibraries, Friends } from '../components/FriendSettings'
@@ -21,7 +22,8 @@ import { DeviceIcon } from './Link'
 // Settings, in groups: everyone's own settings first, then the server's,
 // one group per page. Desktop lists the groups down the side; a phone opens
 // on the list and each group is its own page, as in the phone app.
-type SettingsGroup = { id: string; icon: LucideIcon; sections: [string, ReactNode][] }
+// wide groups, such as Server health, use the whole width beside the list.
+type SettingsGroup = { id: string; icon: LucideIcon; sections: [string, ReactNode][]; wide?: boolean }
 
 /** Which group each section lives in, so /settings#<section> links still land. */
 export const settingsSections: Record<string, string> = {
@@ -32,6 +34,7 @@ export const settingsSections: Record<string, string> = {
   transcoding: 'streaming',
   'home-network': 'network', 'remote-access': 'network',
   arr: 'add-ons', overseerr: 'add-ons', plugins: 'add-ons',
+  'server-health': 'health',
 }
 
 export default function Settings() {
@@ -57,6 +60,7 @@ export default function Settings() {
     },
     ...(admin
       ? [
+          { id: 'health', icon: Activity, sections: [['server-health', <ServerHealth />]], wide: true },
           { id: 'libraries', icon: LibraryBig, sections: [['libraries', <Libraries />], ['import', <ImportSettings />], ['new-files', <NewFiles />], ['media-analysis', <MediaAnalysis />]] },
           { id: 'people', icon: UsersRound, sections: [['people', <Users me={me} />], ['friends', <Friends />], ['profiles', <Profiles />]] },
           { id: 'content', icon: ImageIcon, sections: [['posters', <TMDBKey />], ['podcast-index', <PodcastIndexKey />], ['subtitles', <OpenSubtitlesKey />], ['trailers', <Trailers />], ['home-rows', <HolidayRows />]] },
@@ -91,7 +95,7 @@ export default function Settings() {
     </div>
   )
   return (
-    <div className="max-w-5xl">
+    <div className={group?.wide ? 'max-w-7xl' : 'max-w-5xl'}>
       <h1 className={`text-2xl font-bold tracking-tight ${groupId ? 'hidden md:block' : ''}`}>{t('nav.settings')}</h1>
       {groupId && (
         <div className="md:hidden">
@@ -126,7 +130,7 @@ export default function Settings() {
             </ul>
           </nav>
         )}
-        <div className={`max-w-3xl space-y-12 ${index ? 'hidden md:block' : ''}`}>
+        <div className={`${group.wide ? '' : 'max-w-3xl'} min-w-0 space-y-12 ${index ? 'hidden md:block' : ''}`}>
           {group.sections
             .filter(([, el]) => el)
             .map(([id, el]) => (

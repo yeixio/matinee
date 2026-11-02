@@ -843,6 +843,10 @@
       "add-ons": {
         "title": "תוספים",
         "hint": "Radarr, Sonarr, Overseerr ותוספים"
+      },
+      "health": {
+        "title": "מצב השרת",
+        "hint": "עומס, ניגון, משימות, בעיות ויומן"
       }
     }
   },
@@ -1015,5 +1019,164 @@
     "expired": "{{name}} פגה ב-{{date}}",
     "badge": "חבר/ה",
     "seeEverything": "לאפשר לראות הכול"
+  },
+  "health": {
+    "title": "מצב השרת",
+    "intro": "מה מצב השרת כרגע, למקרה שמשהו לא עובד. כל מה שמופיע כאן מגיע מהשרת הזה ונשאר בו.",
+    "cantLoad": "לא ניתן לטעון את מצב השרת: {{error}}",
+    "updates": "מתעדכן כל 5 שניות",
+    "upFor": "פועל כבר {{time}}",
+    "seconds": "{{seconds}} שנ׳",
+    "days": "{{days}} ימ׳ {{hours}} שע׳",
+    "hourAgo": "לפני שעה",
+    "now": "עכשיו",
+    "noHistory": "התרשים יתמלא בדקה הקרובה.",
+    "chartLabel": "{{name}} בשעה האחרונה",
+    "status": {
+      "ok": "הכול נראה תקין",
+      "problems_one": "אזהרה או שגיאה אחת בשעה האחרונה ({{count}})",
+      "problems_two": "{{count}} אזהרות או שגיאות בשעה האחרונה",
+      "problems_other": "{{count}} אזהרות או שגיאות בשעה האחרונה",
+      "restarting": "השרת מופעל מחדש",
+      "database": "מסד הנתונים לא עונה",
+      "disk": "לא ניתן לקרוא תיקייה"
+    },
+    "scope": {
+      "group": "Matinee ותהליכי FFmpeg שהוא מריץ.",
+      "process": "Matinee בלבד; תהליכי FFmpeg לא נספרים."
+    },
+    "tiles": {
+      "cpu": "מעבד",
+      "machine": "כל המחשב {{value}}",
+      "load": "עומס {{load}}",
+      "cpuLimit": "מוגבל ל־{{cores}} ליבות.",
+      "memory": "זיכרון",
+      "of": "מתוך {{total}}",
+      "ofLimit": "מתוך {{total}} מותרים",
+      "sending": "שליחה",
+      "sentTotal": "{{total}} מאז ההפעלה",
+      "playing": "מתנגן עכשיו",
+      "transcodes_one": "המרה אחת ({{count}})",
+      "transcodes_two": "{{count}} המרות",
+      "transcodes_other": "{{count}} המרות"
+    },
+    "level": {
+      "warn": "אזהרה",
+      "error": "שגיאה"
+    },
+    "streams": {
+      "title": "מתנגן עכשיו",
+      "none": "שום דבר לא מתנגן.",
+      "direct": "ניגון ישיר",
+      "transcoding": "המרה",
+      "away": "מחוץ לבית",
+      "paused": "מושהה",
+      "buffering": "טוען"
+    },
+    "transcodes": {
+      "title": "המרות",
+      "none": "אין המרות פעילות.",
+      "kind": {
+        "video": "המרת וידאו",
+        "copy": "אריזה מחדש של וידאו",
+        "audio": "המרת שמע"
+      },
+      "mode": {
+        "cpu": "במעבד",
+        "encode": "{{name}} מקודד",
+        "full": "{{name}} מפענח ומקודד"
+      },
+      "burnSub": "כתוביות צרובות",
+      "started": "התחילה {{time}}",
+      "stop": "עצירה",
+      "stopHint": "עוצר את FFmpeg. אם הנגן עדיין פתוח, הוא יתחיל המרה חדשה.",
+      "cpuOnly": "ההמרות רצות במעבד."
+    },
+    "problems": {
+      "title": "אזהרות ושגיאות",
+      "none": "אין אזהרות או שגיאות מאז שהשרת הופעל.",
+      "times_one": "פעם אחת ({{count}})",
+      "times_two": "פעמיים ({{count}})",
+      "times_other": "{{count}} פעמים",
+      "last": "לאחרונה {{time}}",
+      "showInLog": "הצגה ביומן",
+      "more_one": "הצגת {{count}} נוספת",
+      "more_two": "הצגת {{count}} נוספות",
+      "more_other": "הצגת {{count}} נוספות"
+    },
+    "jobs": {
+      "title": "משימות ברקע",
+      "scan": "סריקת {{library}}",
+      "scanning": "סורק כבר {{time}}",
+      "lastScan": "{{time}}, נמשכה {{took}}",
+      "scanCounts": "נוספו {{added}}, עודכנו {{updated}}, הוסרו {{removed}}, לא ניתנים לניגון {{failed}}",
+      "scanFailed": "נכשלה: {{error}}",
+      "notScanned": "לא נסרקה מאז שהשרת הופעל",
+      "downloads": "הורדות למכשירים",
+      "downloadCounts": "{{waiting}} ממתינות, {{converting}} בהמרה, {{failed}} נכשלו",
+      "nothing": "אין מה לעשות",
+      "importing": "מייבא היסטוריית צפייה"
+    },
+    "disks": {
+      "title": "שטח בדיסק",
+      "free": "{{free}} פנויים מתוך {{total}}",
+      "low": "מעט שטח",
+      "unreachableTitle": "לא ניתן לקריאה",
+      "unreachable": "התיקייה הזו לא ענתה. אם היא בשיתוף רשת, כדאי לבדוק שהשיתוף עדיין מחובר.",
+      "use": {
+        "data": "נתונים",
+        "transcode": "המרה",
+        "thumbnails": "תצוגות מקדימות בסרגל",
+        "images": "פוסטרים ותמונות",
+        "downloads": "הורדות",
+        "library": "{{library}}"
+      }
+    },
+    "details": {
+      "title": "פרטי השרת",
+      "version": "גרסה",
+      "ffmpeg": "FFmpeg",
+      "ffmpegMissing": "לא נמצא ב־{{path}}",
+      "system": "מערכת",
+      "cores_one": "ליבה אחת ({{count}})",
+      "cores_two": "{{count}} ליבות",
+      "cores_other": "{{count}} ליבות",
+      "started": "הופעל",
+      "database": "מסד נתונים",
+      "answers": "עונה תוך {{ms}} מ״ש",
+      "dbCounts": "{{items}} פריטים, {{users}} חשבונות, {{libraries}} ספריות",
+      "connections": "{{open}} חיבורים, {{busy}} תפוסים",
+      "dbError": "לא ענה: {{error}}",
+      "requests": "בקשות",
+      "requestCounts": "{{requests}} נענו, {{errors}} נכשלו בשרת",
+      "logged": "נרשמו",
+      "loggedCounts": "{{warnings}} אזהרות, {{errors}} שגיאות",
+      "rescans": "סריקות מתוזמנות",
+      "every": "כל {{time}}",
+      "remote": "גישה מרחוק",
+      "remoteState": {
+        "off": "כבויה",
+        "working": "בהגדרה",
+        "ready": "עובדת",
+        "failed": "לא עובדת"
+      },
+      "runtime": "סביבת Go",
+      "heap": "{{heap}} בשימוש, {{goroutines}} גורוטינות"
+    },
+    "log": {
+      "title": "יומן",
+      "intro": "{{count}} השורות האחרונות מאז שהשרת הופעל. היומן המלא נמצא היכן שהפלט של השרת נשמר, למשל ביומן הקונטיינר.",
+      "download": "הורדה",
+      "search": "חיפוש ביומן",
+      "level": "הצגה",
+      "levels": {
+        "all": "הכול",
+        "warn": "אזהרות ושגיאות",
+        "error": "שגיאות"
+      },
+      "live": "מעקב אחר שורות חדשות",
+      "older": "הצגת שורות ישנות יותר",
+      "empty": "אין שורות תואמות."
+    }
   }
 }

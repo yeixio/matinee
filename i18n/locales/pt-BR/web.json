@@ -843,6 +843,10 @@
       "add-ons": {
         "title": "Complementos",
         "hint": "Radarr, Sonarr, Overseerr e plugins"
+      },
+      "health": {
+        "title": "Saúde do servidor",
+        "hint": "Carga, reprodução, tarefas, problemas e o log"
       }
     }
   },
@@ -1015,5 +1019,164 @@
     "expired": "{{name}} expirou em {{date}}",
     "badge": "Amigo",
     "seeEverything": "Deixar ver tudo"
+  },
+  "health": {
+    "title": "Saúde do servidor",
+    "intro": "Como o servidor está agora, para quando algo não estiver funcionando. Tudo aqui vem deste servidor e fica nele.",
+    "cantLoad": "Não foi possível carregar a saúde do servidor: {{error}}",
+    "updates": "Atualiza a cada 5 segundos",
+    "upFor": "no ar há {{time}}",
+    "seconds": "{{seconds}} s",
+    "days": "{{days}} d {{hours}} h",
+    "hourAgo": "1 hora atrás",
+    "now": "Agora",
+    "noHistory": "O gráfico vai se preencher no próximo minuto.",
+    "chartLabel": "{{name}} na última hora",
+    "status": {
+      "ok": "Tudo certo",
+      "problems_many": "{{count}} avisos ou erros na última hora",
+      "problems_one": "{{count}} aviso ou erro na última hora",
+      "problems_other": "{{count}} avisos ou erros na última hora",
+      "restarting": "O servidor está reiniciando",
+      "database": "O banco de dados não está respondendo",
+      "disk": "Uma pasta não pode ser lida"
+    },
+    "scope": {
+      "group": "O Matinee e os processos do FFmpeg que ele executa.",
+      "process": "Só o Matinee; os processos do FFmpeg não entram na conta."
+    },
+    "tiles": {
+      "cpu": "CPU",
+      "machine": "máquina inteira {{value}}",
+      "load": "carga {{load}}",
+      "cpuLimit": "Limitado a {{cores}} núcleos.",
+      "memory": "Memória",
+      "of": "de {{total}}",
+      "ofLimit": "de {{total}} permitidos",
+      "sending": "Enviando",
+      "sentTotal": "{{total}} desde que iniciou",
+      "playing": "Tocando agora",
+      "transcodes_many": "{{count}} transcodificações",
+      "transcodes_one": "{{count}} transcodificação",
+      "transcodes_other": "{{count}} transcodificações"
+    },
+    "level": {
+      "warn": "Aviso",
+      "error": "Erro"
+    },
+    "streams": {
+      "title": "Tocando agora",
+      "none": "Nada está tocando.",
+      "direct": "Reprodução direta",
+      "transcoding": "Transcodificando",
+      "away": "Fora de casa",
+      "paused": "Pausado",
+      "buffering": "Carregando"
+    },
+    "transcodes": {
+      "title": "Transcodificações",
+      "none": "Nenhuma transcodificação em andamento.",
+      "kind": {
+        "video": "Convertendo vídeo",
+        "copy": "Reempacotando vídeo",
+        "audio": "Convertendo áudio"
+      },
+      "mode": {
+        "cpu": "na CPU",
+        "encode": "{{name}} codifica",
+        "full": "{{name}} decodifica e codifica"
+      },
+      "burnSub": "legendas embutidas",
+      "started": "Começou {{time}}",
+      "stop": "Parar",
+      "stopHint": "Para o FFmpeg. Se o player ainda estiver aberto, ele inicia uma nova transcodificação.",
+      "cpuOnly": "As transcodificações rodam na CPU."
+    },
+    "problems": {
+      "title": "Avisos e erros",
+      "none": "Nenhum aviso ou erro desde que o servidor iniciou.",
+      "times_many": "{{count}} vezes",
+      "times_one": "{{count}} vez",
+      "times_other": "{{count}} vezes",
+      "last": "última {{time}}",
+      "showInLog": "Mostrar no log",
+      "more_many": "Mostrar mais {{count}}",
+      "more_one": "Mostrar mais {{count}}",
+      "more_other": "Mostrar mais {{count}}"
+    },
+    "jobs": {
+      "title": "Tarefas em segundo plano",
+      "scan": "Escanear {{library}}",
+      "scanning": "Escaneando há {{time}}",
+      "lastScan": "{{time}}, levou {{took}}",
+      "scanCounts": "{{added}} adicionados, {{updated}} atualizados, {{removed}} removidos, {{failed}} não reproduzíveis",
+      "scanFailed": "Falhou: {{error}}",
+      "notScanned": "Não escaneada desde que o servidor iniciou",
+      "downloads": "Downloads para dispositivos",
+      "downloadCounts": "{{waiting}} aguardando, {{converting}} convertendo, {{failed}} com falha",
+      "nothing": "Nada a fazer",
+      "importing": "Importando o histórico"
+    },
+    "disks": {
+      "title": "Espaço em disco",
+      "free": "{{free}} livres de {{total}}",
+      "low": "Pouco espaço",
+      "unreachableTitle": "Não pode ser lida",
+      "unreachable": "Esta pasta não respondeu. Se ela está num compartilhamento de rede, confira se ele ainda está conectado.",
+      "use": {
+        "data": "Dados",
+        "transcode": "Transcodificação",
+        "thumbnails": "Prévias da barra de busca",
+        "images": "Pôsteres e artes",
+        "downloads": "Downloads",
+        "library": "{{library}}"
+      }
+    },
+    "details": {
+      "title": "Detalhes do servidor",
+      "version": "Versão",
+      "ffmpeg": "FFmpeg",
+      "ffmpegMissing": "Não encontrado em {{path}}",
+      "system": "Sistema",
+      "cores_many": "{{count}} núcleos",
+      "cores_one": "{{count}} núcleo",
+      "cores_other": "{{count}} núcleos",
+      "started": "Iniciado",
+      "database": "Banco de dados",
+      "answers": "responde em {{ms}} ms",
+      "dbCounts": "{{items}} itens, {{users}} contas, {{libraries}} bibliotecas",
+      "connections": "{{open}} conexões, {{busy}} ocupadas",
+      "dbError": "Não respondeu: {{error}}",
+      "requests": "Requisições",
+      "requestCounts": "{{requests}} atendidas, {{errors}} falharam no servidor",
+      "logged": "Registrados",
+      "loggedCounts": "{{warnings}} avisos, {{errors}} erros",
+      "rescans": "Escaneamentos agendados",
+      "every": "A cada {{time}}",
+      "remote": "Acesso remoto",
+      "remoteState": {
+        "off": "Desligado",
+        "working": "Configurando",
+        "ready": "Funcionando",
+        "failed": "Não funciona"
+      },
+      "runtime": "Runtime do Go",
+      "heap": "{{heap}} em uso, {{goroutines}} goroutines"
+    },
+    "log": {
+      "title": "Log",
+      "intro": "As últimas {{count}} linhas desde que o servidor iniciou. O log completo fica onde a saída do servidor vai parar, como o log do contêiner.",
+      "download": "Baixar",
+      "search": "Pesquisar no log",
+      "level": "Mostrar",
+      "levels": {
+        "all": "Tudo",
+        "warn": "Avisos e erros",
+        "error": "Erros"
+      },
+      "live": "Acompanhar novas linhas",
+      "older": "Mostrar linhas anteriores",
+      "empty": "Nenhuma linha corresponde."
+    }
   }
 }

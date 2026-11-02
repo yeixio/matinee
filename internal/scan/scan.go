@@ -33,6 +33,34 @@ type Scanner struct {
 
 	mu      sync.Mutex
 	running map[int64]bool
+	since   map[int64]time.Time  // when each running scan started
+	last    map[int64]ScanReport // each library's last full scan
+}
+
+// ScanReport is how a library's last full scan went, for the admin dashboard.
+type ScanReport struct {
+	Started    int64  `json:"started"` // milliseconds
+	TookMs     int64  `json:"tookMs"`
+	Added      int    `json:"added"`
+	Updated    int    `json:"updated"`
+	Removed    int    `json:"removed"`
+	Failed     int    `json:"failed"`
+	Unplayable int    `json:"unplayable"`
+	Error      string `json:"error,omitempty"`
+}
+
+// Report says since when a library is being scanned (zero when it isn't),
+// and how its last full scan went, if there was one since the server started.
+func (s *Scanner) Report(libraryID int64) (since time.Time, last *ScanReport) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	if s.running[libraryID] {
+		since = s.since[libraryID]
+	}
+	if r, ok := s.last[libraryID]; ok {
+		last = &r
+	}
+	return since, last
 }
 
 type Stats struct {
@@ -72,7 +100,22 @@ func (s *Scanner) ScanAll(ctx context.Context) {
 // Scan brings one library in line with its folders. Unchanged files (same
 // size and mtime) are skipped, so rescans are cheap.
 func (s *Scanner) Scan(ctx context.Context, lib store.Library) (Stats, error) {
-	return s.scan(ctx, lib, nil)
+	start := time.Now()
+	st, err := s.scan(ctx, lib, nil)
+	if !errors.Is(err, ErrAlreadyRunning) {
+		r := ScanReport{Started: start.UnixMilli(), TookMs: time.Since(start).Milliseconds(), Added: st.Added, Updated: st.Updated,
+			Removed: st.Removed, Failed: st.Failed, Unplayable: st.Unplayable}
+		if err != nil {
+			r.Error = err.Error()
+		}
+		s.mu.Lock()
+		if s.last == nil {
+			s.last = map[int64]ScanReport{}
+		}
+		s.last[lib.ID] = r
+		s.mu.Unlock()
+	}
+	return st, err
 }
 
 // ScanPaths brings just these files and folders of a library in line with
@@ -99,6 +142,10 @@ func (s *Scanner) scan(ctx context.Context, lib store.Library, paths []string) (
 		return Stats{}, ErrAlreadyRunning
 	}
 	s.running[lib.ID] = true
+	if s.since == nil {
+		s.since = map[int64]time.Time{}
+	}
+	s.since[lib.ID] = time.Now()
 	s.mu.Unlock()
 	defer func() {
 		s.mu.Lock()

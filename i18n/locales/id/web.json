@@ -835,6 +835,10 @@
       "add-ons": {
         "title": "Pengaya",
         "hint": "Radarr, Sonarr, Overseerr, dan plugin"
+      },
+      "health": {
+        "title": "Kesehatan server",
+        "hint": "Beban, pemutaran, tugas, masalah, dan log"
       }
     }
   },
@@ -1003,5 +1007,154 @@
     "expired": "{{name}} kedaluwarsa pada {{date}}",
     "badge": "Teman",
     "seeEverything": "Izinkan melihat semuanya"
+  },
+  "health": {
+    "title": "Kesehatan server",
+    "intro": "Kondisi server saat ini, untuk saat ada yang tidak berjalan. Semua yang ada di sini berasal dari server ini dan tetap di sana.",
+    "cantLoad": "Tidak dapat memuat kesehatan server: {{error}}",
+    "updates": "Diperbarui setiap 5 detik",
+    "upFor": "berjalan selama {{time}}",
+    "seconds": "{{seconds}} dtk",
+    "days": "{{days}} h {{hours}} j",
+    "hourAgo": "1 jam lalu",
+    "now": "Sekarang",
+    "noHistory": "Grafik akan terisi dalam semenit ke depan.",
+    "chartLabel": "{{name}} selama satu jam terakhir",
+    "status": {
+      "ok": "Semua terlihat baik",
+      "problems_other": "{{count}} peringatan atau galat dalam satu jam terakhir",
+      "restarting": "Server sedang dimulai ulang",
+      "database": "Database tidak merespons",
+      "disk": "Ada folder yang tidak bisa dibaca"
+    },
+    "scope": {
+      "group": "Matinee dan proses FFmpeg yang dijalankannya.",
+      "process": "Hanya Matinee; proses FFmpeg tidak dihitung."
+    },
+    "tiles": {
+      "cpu": "CPU",
+      "machine": "seluruh mesin {{value}}",
+      "load": "beban {{load}}",
+      "cpuLimit": "Dibatasi {{cores}} inti.",
+      "memory": "Memori",
+      "of": "dari {{total}}",
+      "ofLimit": "dari {{total}} yang diizinkan",
+      "sending": "Mengirim",
+      "sentTotal": "{{total}} sejak dimulai",
+      "playing": "Sedang diputar",
+      "transcodes_other": "{{count}} transcode"
+    },
+    "level": {
+      "warn": "Peringatan",
+      "error": "Galat"
+    },
+    "streams": {
+      "title": "Sedang diputar",
+      "none": "Tidak ada yang diputar.",
+      "direct": "Putar langsung",
+      "transcoding": "Transcoding",
+      "away": "Di luar rumah",
+      "paused": "Dijeda",
+      "buffering": "Buffering"
+    },
+    "transcodes": {
+      "title": "Transcode",
+      "none": "Tidak ada transcode yang berjalan.",
+      "kind": {
+        "video": "Mengonversi video",
+        "copy": "Mengemas ulang video",
+        "audio": "Mengonversi audio"
+      },
+      "mode": {
+        "cpu": "di CPU",
+        "encode": "{{name}} mengodekan",
+        "full": "{{name}} mendekode dan mengodekan"
+      },
+      "burnSub": "subtitel ditanam",
+      "started": "Dimulai {{time}}",
+      "stop": "Hentikan",
+      "stopHint": "Menghentikan FFmpeg. Jika pemutar masih terbuka, pemutar akan memulai transcode baru.",
+      "cpuOnly": "Transcode berjalan di CPU."
+    },
+    "problems": {
+      "title": "Peringatan dan galat",
+      "none": "Tidak ada peringatan atau galat sejak server dimulai.",
+      "times_other": "{{count}} kali",
+      "last": "terakhir {{time}}",
+      "showInLog": "Tampilkan di log",
+      "more_other": "Tampilkan {{count}} lagi"
+    },
+    "jobs": {
+      "title": "Tugas latar belakang",
+      "scan": "Pindai {{library}}",
+      "scanning": "Memindai selama {{time}}",
+      "lastScan": "{{time}}, butuh {{took}}",
+      "scanCounts": "{{added}} ditambahkan, {{updated}} diperbarui, {{removed}} dihapus, {{failed}} tidak bisa diputar",
+      "scanFailed": "Gagal: {{error}}",
+      "notScanned": "Belum dipindai sejak server dimulai",
+      "downloads": "Unduhan untuk perangkat",
+      "downloadCounts": "{{waiting}} menunggu, {{converting}} dikonversi, {{failed}} gagal",
+      "nothing": "Tidak ada yang dikerjakan",
+      "importing": "Mengimpor riwayat tontonan"
+    },
+    "disks": {
+      "title": "Ruang disk",
+      "free": "{{free}} kosong dari {{total}}",
+      "low": "Ruang hampir habis",
+      "unreachableTitle": "Tidak bisa dibaca",
+      "unreachable": "Folder ini tidak merespons. Jika ada di berbagi jaringan, periksa apakah berbagi itu masih terhubung.",
+      "use": {
+        "data": "Data",
+        "transcode": "Transcoding",
+        "thumbnails": "Pratinjau bilah geser",
+        "images": "Poster dan karya seni",
+        "downloads": "Unduhan",
+        "library": "{{library}}"
+      }
+    },
+    "details": {
+      "title": "Detail server",
+      "version": "Versi",
+      "ffmpeg": "FFmpeg",
+      "ffmpegMissing": "Tidak ditemukan di {{path}}",
+      "system": "Sistem",
+      "cores_other": "{{count}} inti",
+      "started": "Dimulai",
+      "database": "Database",
+      "answers": "merespons dalam {{ms}} md",
+      "dbCounts": "{{items}} item, {{users}} akun, {{libraries}} pustaka",
+      "connections": "{{open}} koneksi, {{busy}} sibuk",
+      "dbError": "Tidak merespons: {{error}}",
+      "requests": "Permintaan",
+      "requestCounts": "{{requests}} dijawab, {{errors}} gagal di server",
+      "logged": "Tercatat",
+      "loggedCounts": "{{warnings}} peringatan, {{errors}} galat",
+      "rescans": "Pemindaian terjadwal",
+      "every": "Setiap {{time}}",
+      "remote": "Akses jarak jauh",
+      "remoteState": {
+        "off": "Mati",
+        "working": "Sedang disiapkan",
+        "ready": "Berjalan",
+        "failed": "Tidak berjalan"
+      },
+      "runtime": "Runtime Go",
+      "heap": "{{heap}} terpakai, {{goroutines}} goroutine"
+    },
+    "log": {
+      "title": "Log",
+      "intro": "{{count}} baris terakhir sejak server dimulai. Log lengkap ada di tempat keluaran server dikirim, misalnya log kontainer.",
+      "download": "Unduh",
+      "search": "Cari di log",
+      "level": "Tampilkan",
+      "levels": {
+        "all": "Semua",
+        "warn": "Peringatan dan galat",
+        "error": "Galat"
+      },
+      "live": "Ikuti baris baru",
+      "older": "Tampilkan baris lebih lama",
+      "empty": "Tidak ada baris yang cocok."
+    }
   }
 }
