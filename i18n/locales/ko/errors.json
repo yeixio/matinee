@@ -190,6 +190,7 @@
   "that_isnt_a_podcast_feed": "팟캐스트 피드가 아닙니다",
   "that_isnt_an_opml_file": "OPML 파일이 아닙니다",
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "피드를 읽지 못했습니다. 주소를 확인하고 다시 시도하세요.",
+  "the_feed_couldnt_be_read_reason": "피드를 읽지 못했습니다: {{reason}}",
   "the_feed_couldnt_be_read_right_now": "지금은 피드를 읽을 수 없습니다",
   "the_file_is_too_big": "파일이 너무 큽니다",
   "this_library_already_has_a_show_with_that_name": "이 보관함에 같은 이름의 프로그램이 이미 있습니다",

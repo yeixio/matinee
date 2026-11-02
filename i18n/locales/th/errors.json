@@ -190,6 +190,7 @@
   "that_isnt_a_podcast_feed": "นั่นไม่ใช่ฟีดพอดแคสต์",
   "that_isnt_an_opml_file": "นั่นไม่ใช่ไฟล์ OPML",
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "อ่านฟีดไม่ได้ ตรวจสอบที่อยู่แล้วลองอีกครั้ง",
+  "the_feed_couldnt_be_read_reason": "อ่านฟีดไม่ได้: {{reason}}",
   "the_feed_couldnt_be_read_right_now": "ขณะนี้อ่านฟีดไม่ได้",
   "the_file_is_too_big": "ไฟล์ใหญ่เกินไป",
   "this_library_already_has_a_show_with_that_name": "คลังนี้มีรายการชื่อนี้อยู่แล้ว",

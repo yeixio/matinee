@@ -190,6 +190,7 @@
   "that_isnt_a_podcast_feed": "dat is geen podcastfeed",
   "that_isnt_an_opml_file": "dat is geen OPML-bestand",
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "de feed kon niet worden gelezen. Controleer het adres en probeer het opnieuw.",
+  "the_feed_couldnt_be_read_reason": "de feed kon niet worden gelezen: {{reason}}",
   "the_feed_couldnt_be_read_right_now": "de feed kan nu niet worden gelezen",
   "the_file_is_too_big": "het bestand is te groot",
   "this_library_already_has_a_show_with_that_name": "deze bibliotheek heeft al een programma met die naam",

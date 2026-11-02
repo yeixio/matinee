@@ -190,6 +190,7 @@
   "that_isnt_a_podcast_feed": "itu bukan suapan podcast",
   "that_isnt_an_opml_file": "itu bukan fail OPML",
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "suapan tidak dapat dibaca. Semak alamat dan cuba lagi.",
+  "the_feed_couldnt_be_read_reason": "suapan tidak dapat dibaca: {{reason}}",
   "the_feed_couldnt_be_read_right_now": "suapan tidak dapat dibaca sekarang",
   "the_file_is_too_big": "fail terlalu besar",
   "this_library_already_has_a_show_with_that_name": "pustaka ini sudah ada rancangan dengan nama itu",

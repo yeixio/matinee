@@ -190,6 +190,7 @@
   "that_isnt_a_podcast_feed": "αυτό δεν είναι ροή podcast",
   "that_isnt_an_opml_file": "αυτό δεν είναι αρχείο OPML",
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "η ροή δεν διαβάστηκε. Ελέγξτε τη διεύθυνση και δοκιμάστε ξανά.",
+  "the_feed_couldnt_be_read_reason": "η ροή δεν διαβάστηκε: {{reason}}",
   "the_feed_couldnt_be_read_right_now": "η ροή δεν μπορεί να διαβαστεί αυτή τη στιγμή",
   "the_file_is_too_big": "το αρχείο είναι πολύ μεγάλο",
   "this_library_already_has_a_show_with_that_name": "αυτή η βιβλιοθήκη έχει ήδη εκπομπή με αυτό το όνομα",

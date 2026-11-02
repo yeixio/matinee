@@ -190,6 +190,7 @@
   "that_isnt_a_podcast_feed": "det er ikke et podcastfeed",
   "that_isnt_an_opml_file": "det er ikke en OPML-fil",
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "feedet kunne ikke læses. Tjek adressen, og prøv igen.",
+  "the_feed_couldnt_be_read_reason": "feedet kunne ikke læses: {{reason}}",
   "the_feed_couldnt_be_read_right_now": "feedet kan ikke læses lige nu",
   "the_file_is_too_big": "filen er for stor",
   "this_library_already_has_a_show_with_that_name": "dette bibliotek har allerede et program med det navn",

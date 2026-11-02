@@ -190,6 +190,7 @@
   "that_isnt_a_podcast_feed": "tämä ei ole podcast-syöte",
   "that_isnt_an_opml_file": "tämä ei ole OPML-tiedosto",
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "syötettä ei voitu lukea. Tarkista osoite ja yritä uudelleen.",
+  "the_feed_couldnt_be_read_reason": "syötettä ei voitu lukea: {{reason}}",
   "the_feed_couldnt_be_read_right_now": "syötettä ei voi lukea juuri nyt",
   "the_file_is_too_big": "tiedosto on liian suuri",
   "this_library_already_has_a_show_with_that_name": "tässä kirjastossa on jo samanniminen ohjelma",

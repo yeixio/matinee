@@ -176,6 +176,7 @@
   "thats_too_many_webhooks": "that's too many webhooks",
   "the_covers_address_must_start_with_http_or_https": "the cover's address must start with http:// or https://",
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "the feed couldn't be read. Check the address and try again.",
+  "the_feed_couldnt_be_read_reason": "the feed couldn't be read: {{reason}}",
   "the_feed_couldnt_be_read_right_now": "the feed couldn't be read right now",
   "the_file_is_too_big": "the file is too big",
   "the_image_is_too_big_20_mb_at_most": "the image is too big (20 MB at most)",

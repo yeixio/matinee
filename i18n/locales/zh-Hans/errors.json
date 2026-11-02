@@ -190,6 +190,7 @@
   "that_isnt_a_podcast_feed": "这不是播客订阅源",
   "that_isnt_an_opml_file": "这不是 OPML 文件",
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "无法读取订阅源。请检查地址后重试。",
+  "the_feed_couldnt_be_read_reason": "无法读取订阅源：{{reason}}",
   "the_feed_couldnt_be_read_right_now": "现在无法读取订阅源",
   "the_file_is_too_big": "文件太大",
   "this_library_already_has_a_show_with_that_name": "此媒体库已有同名节目",
