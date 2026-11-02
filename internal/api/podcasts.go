@@ -237,7 +237,9 @@ func (s *Server) addPodcast(w http.ResponseWriter, r *http.Request) {
 	if !ok {
 		return
 	}
-	ctx, cancel := context.WithTimeout(r.Context(), 45*time.Second)
+	// A big feed can take a while to fetch and file. Finish adding it even
+	// if the app stops waiting, so trying again finds the show added.
+	ctx, cancel := context.WithTimeout(context.WithoutCancel(r.Context()), 45*time.Second)
 	defer cancel()
 	id, err := s.Podcasts.Subscribe(ctx, lib, req.FeedURL)
 	if err != nil {
