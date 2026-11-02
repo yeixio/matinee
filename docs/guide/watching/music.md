@@ -66,7 +66,7 @@ Click the cover in the player (or the queue button beside the volume) for the fu
 
 On a phone, the button at the top right switches between the cover and the queue.
 
-<!-- since: v0.1.13 -->
+<!-- since: v0.1.14 -->
 ## Lyrics
 
 The **Lyrics** button at the top of the full player shows the song's words instead of the queue (on a phone, instead of the cover). When the words are timed, they follow the song: the line being sung lights up and stays near the middle, and three dots fill in during a break. Click a line to play from there. Scroll to read ahead; after a few seconds the words catch up with the song again. Words without times just scroll.
@@ -98,7 +98,7 @@ The **⋯** button on any song, album or artist has:
 
 Shuffle mixes what's left in the queue and keeps the song that's playing; turning it off puts the queue back in order.
 
-<!-- since: v0.1.13 -->
+<!-- since: v0.1.14 -->
 ## Albums without gaps
 
 Some albums are made to play straight through, with no gap between songs: DJ mixes, live albums, and albums where one song runs into the next. Matinee plays the songs of these albums as one continuous stream, so the music never stops between them. The song names, the time and the queue still move along song by song, and next, back and the seek bar work as usual.
@@ -152,7 +152,7 @@ The [phone apps](/docs/apps/phone-and-tv/) have the same library, album and arti
 From version 1.0.19 the phone apps have playlists too: the **Playlists** tab, **Add to playlist** in the menu of any song, album or artist (tap **⋯** or hold a song), and **Save as playlist** above the queue. On a playlist's page, **⋯** renames or deletes it, and each song's menu moves it up or down or removes it.
 <!-- /since -->
 
-<!-- since: v0.1.13 -->
+<!-- since: v0.1.14 -->
 From version 1.0.24 the phone apps show lyrics too: tap the microphone at the top of the full player, and the words take the cover's place. Tap a line to play from there; tap the microphone again for the cover.
 <!-- /since -->
 
@@ -189,7 +189,7 @@ From version 1.0.19 you can scrub through the song with the remote. Press up fro
 ![Scrubbing through a song on a TV](../images/app-tv-music-scrub.webp)
 <!-- /since -->
 
-<!-- since: v0.1.13 -->
+<!-- since: v0.1.14 -->
 From version 1.0.24, **Lyrics** in the player shows the song's words across the screen beside its cover, the line being sung lit up. Play/pause or select pauses, left and right go back or ahead 10 seconds, and back returns to the player.
 
 ![A song's words on a TV](../images/app-tv-lyrics.webp)

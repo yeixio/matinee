@@ -15,7 +15,7 @@ Typing a password with a TV remote is no fun, so the apps can sign in with a cod
 
 The app signs in by itself a moment later, as you.
 
-<!-- since: v0.1.13 -->
+<!-- since: v0.1.14 -->
 ## Scan the TV's QR code
 
 The Apple TV, Android TV and Google TV apps, and Matinee on Samsung and LG TVs, show a QR code next to the code. Point your phone's camera at it: it opens `<your server>/link` on your phone with the code filled in. Sign in there if your phone's browser isn't already, then approve the TV.

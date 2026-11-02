@@ -1,7 +1,7 @@
 ---
 title: Skipping credits
 description: Up next shows as soon as an episode's end credits start, and Skip credits jumps past a movie's. Matinee finds where the credits start by itself.
-since: v0.1.13
+since: v0.1.14
 sidebar:
   order: 5
 ---
