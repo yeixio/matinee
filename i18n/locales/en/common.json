@@ -374,6 +374,8 @@
     "recentlyPlayed": "Recently played",
     "recentlyAdded": "Recently added",
     "moreBy": "More by {{artist}}",
+    "labels": "Labels",
+    "label": "Label",
     "more": "More options",
     "volume": "Volume",
     "openPlayer": "Open the player",

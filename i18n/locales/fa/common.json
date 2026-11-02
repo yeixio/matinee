@@ -374,6 +374,8 @@
     "recentlyPlayed": "اخیراً پخش‌شده",
     "recentlyAdded": "اخیراً افزوده‌شده",
     "moreBy": "بیشتر از {{artist}}",
+    "labels": "ناشران موسیقی",
+    "label": "ناشر موسیقی",
     "more": "گزینه‌های بیشتر",
     "volume": "صدا",
     "openPlayer": "باز کردن پخش‌کننده",

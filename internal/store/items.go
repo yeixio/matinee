@@ -55,6 +55,8 @@ type Item struct {
 	Artist   string `json:"artist,omitempty"`
 	ArtistID *int64 `json:"artistId,omitempty"`
 	Album    string `json:"album,omitempty"`
+	// RecordLabel is the label an album, or a song's album, came out on.
+	RecordLabel string `json:"recordLabel,omitempty"`
 	// For books and their parts: who wrote it, and for a part the book's
 	// title (the book's id is ParentID). Books also name their narrators
 	// and their place in a series, such as 2 or 2.5.
@@ -151,7 +153,9 @@ const itemCols = `
 	CASE WHEN i.kind = 'album' THEN COALESCE(i.gapless, i.gapless_found, 0)
 		WHEN i.kind = 'track' THEN (SELECT COALESCE(al.gapless, al.gapless_found, 0) FROM items al WHERE al.id = i.parent_id) ELSE 0 END,
 	CASE WHEN i.kind = 'album' THEN i.gapless END,
-	CASE WHEN i.kind = 'album' THEN COALESCE(i.gapless_found, 0) ELSE 0 END`
+	CASE WHEN i.kind = 'album' THEN COALESCE(i.gapless_found, 0) ELSE 0 END,
+	CASE WHEN i.kind = 'album' THEN COALESCE(i.label, '')
+		WHEN i.kind = 'track' THEN (SELECT COALESCE(al.label, '') FROM items al WHERE al.id = i.parent_id) ELSE '' END`
 
 const itemFrom = ` FROM (SELECT CAST(? AS BIGINT) AS id) me CROSS JOIN items i LEFT JOIN progress p ON p.item_id = i.id AND p.user_id = me.id`
 
@@ -179,7 +183,7 @@ func scanItem(r scanner) (Item, error) {
 		&it.Overview, &rating, &it.Poster, &it.Backdrop, &tmdb, &it.MetaAt,
 		&showTitle, &seasonIdx, &it.OnWatchList, &tags, &genres, &showID, &facts, &data,
 		&artist, &artistID, &album, &narrators, &it.Series, &seriesIdx, &it.Released, &mine,
-		&it.Gapless, &gaplessChoice, &it.GaplessFound)
+		&it.Gapless, &gaplessChoice, &it.GaplessFound, &it.RecordLabel)
 	if err != nil {
 		return it, err
 	}

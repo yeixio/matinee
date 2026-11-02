@@ -41,6 +41,7 @@ export type ItemFilter = {
   watchList?: boolean
   series?: string[]
   narrator?: string[]
+  label?: string[]
   sort?: SortField
   order?: 'asc' | 'desc'
   limit?: number
@@ -79,6 +80,7 @@ const fields: Record<keyof ItemFilter, FieldType> = {
   watchList: 'bool',
   series: 'strings',
   narrator: 'strings',
+  label: 'strings',
   sort: 'string',
   order: 'string',
   limit: 'number',

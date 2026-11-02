@@ -486,6 +486,8 @@
     "recentlyPlayed": "شُغّل مؤخرًا",
     "recentlyAdded": "أُضيف مؤخرًا",
     "moreBy": "المزيد من {{artist}}",
+    "labels": "شركات التسجيل",
+    "label": "شركة التسجيل",
     "more": "خيارات أخرى",
     "volume": "مستوى الصوت",
     "openPlayer": "فتح المشغل",

@@ -346,6 +346,8 @@
     "recentlyPlayed": "เล่นล่าสุด",
     "recentlyAdded": "เพิ่มล่าสุด",
     "moreBy": "เพิ่มเติมจาก {{artist}}",
+    "labels": "ค่ายเพลง",
+    "label": "ค่ายเพลง",
     "more": "ตัวเลือกเพิ่มเติม",
     "volume": "ระดับเสียง",
     "openPlayer": "เปิดเครื่องเล่น",

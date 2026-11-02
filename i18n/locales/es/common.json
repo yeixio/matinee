@@ -402,6 +402,8 @@
     "recentlyPlayed": "Escuchado recientemente",
     "recentlyAdded": "Añadido recientemente",
     "moreBy": "Más de {{artist}}",
+    "labels": "Sellos",
+    "label": "Sello",
     "more": "Más opciones",
     "volume": "Volumen",
     "openPlayer": "Abrir el reproductor",

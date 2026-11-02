@@ -430,6 +430,8 @@
     "recentlyPlayed": "Ostatnio odtwarzane",
     "recentlyAdded": "Ostatnio dodane",
     "moreBy": "Więcej od {{artist}}",
+    "labels": "Wytwórnie",
+    "label": "Wytwórnia",
     "more": "Więcej opcji",
     "volume": "Głośność",
     "openPlayer": "Otwórz odtwarzacz",

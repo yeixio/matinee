@@ -291,6 +291,9 @@ func (s *Scanner) scan(ctx context.Context, lib store.Library, paths []string) (
 		if err := s.readAlbumTags(ctx, lib); err != nil {
 			return st, err
 		}
+		if err := s.readAlbumLabels(ctx, lib); err != nil {
+			return st, err
+		}
 	}
 	st.Took = time.Since(start)
 	changed := st.Added+st.Updated+st.Removed > 0

@@ -374,6 +374,8 @@
     "recentlyPlayed": "Senest afspillet",
     "recentlyAdded": "Senest tilføjet",
     "moreBy": "Mere fra {{artist}}",
+    "labels": "Pladeselskaber",
+    "label": "Pladeselskab",
     "more": "Flere muligheder",
     "volume": "Lydstyrke",
     "openPlayer": "Åbn afspilleren",

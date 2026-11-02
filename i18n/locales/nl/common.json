@@ -374,6 +374,8 @@
     "recentlyPlayed": "Onlangs afgespeeld",
     "recentlyAdded": "Onlangs toegevoegd",
     "moreBy": "Meer van {{artist}}",
+    "labels": "Labels",
+    "label": "Label",
     "more": "Meer opties",
     "volume": "Volume",
     "openPlayer": "Speler openen",

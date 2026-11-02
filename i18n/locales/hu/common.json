@@ -374,6 +374,8 @@
     "recentlyPlayed": "Nemrég lejátszott",
     "recentlyAdded": "Nemrég hozzáadott",
     "moreBy": "Még több tőle: {{artist}}",
+    "labels": "Kiadók",
+    "label": "Kiadó",
     "more": "További lehetőségek",
     "volume": "Hangerő",
     "openPlayer": "Lejátszó megnyitása",

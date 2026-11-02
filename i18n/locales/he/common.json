@@ -402,6 +402,8 @@
     "recentlyPlayed": "הושמעו לאחרונה",
     "recentlyAdded": "נוספו לאחרונה",
     "moreBy": "עוד מאת {{artist}}",
+    "labels": "חברות תקליטים",
+    "label": "חברת תקליטים",
     "more": "אפשרויות נוספות",
     "volume": "עוצמת קול",
     "openPlayer": "פתיחת הנגן",

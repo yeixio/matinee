@@ -71,6 +71,8 @@ type ItemFilter struct {
 	Series   []string `json:"series,omitempty"`   // books in these series
 	Narrator []string `json:"narrator,omitempty"` // books any of these people narrate
 
+	Label []string `json:"label,omitempty"` // record labels: albums on them, and artists with albums on them
+
 	Sort  string `json:"sort,omitempty"`  // see SortFields; title by default
 	Order string `json:"order,omitempty"` // asc or desc; each sort has its own default
 	Limit int    `json:"limit,omitempty"`
@@ -152,6 +154,7 @@ func ParseItemFilter(q url.Values) (ItemFilter, error) {
 	f.Collection = ints("collection")
 	f.WatchList = q.Get("watchList") == "true" || q.Get("watchList") == "1"
 	f.Series, f.Narrator = strs("series"), strs("narrator")
+	f.Label = strs("label")
 	f.Sort, f.Order, f.Limit = q.Get("sort"), q.Get("order"), num("limit")
 	if err != nil {
 		return f, err
@@ -243,6 +246,7 @@ func (f ItemFilter) Values() url.Values {
 	}
 	strs("series", f.Series)
 	strs("narrator", f.Narrator)
+	strs("label", f.Label)
 	str("sort", f.Sort)
 	str("order", f.Order)
 	num("limit", f.Limit)
@@ -463,6 +467,14 @@ func (f ItemFilter) sql(today time.Time) (where, order string, args []any) {
 	}
 	if len(f.Series) > 0 {
 		add("i.series IN ("+placeholders(len(f.Series))+")", anyArgs(f.Series)...)
+	}
+	if len(f.Label) > 0 {
+		// An album has its own label; an artist has the labels of its
+		// albums, and a song its album's.
+		in := placeholders(len(f.Label))
+		add("(i.label IN ("+in+") OR EXISTS (SELECT 1 FROM items f WHERE f.parent_id = i.id AND f.label IN ("+in+"))"+
+			" OR EXISTS (SELECT 1 FROM items f WHERE f.id = i.parent_id AND f.label IN ("+in+")))",
+			repeat(3, anyArgs(f.Label)...)...)
 	}
 	if len(f.Narrator) > 0 {
 		var or []string

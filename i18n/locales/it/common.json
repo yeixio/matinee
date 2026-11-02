@@ -402,6 +402,8 @@
     "recentlyPlayed": "Ascoltati di recente",
     "recentlyAdded": "Aggiunti di recente",
     "moreBy": "Altro di {{artist}}",
+    "labels": "Etichette",
+    "label": "Etichetta",
     "more": "Altre opzioni",
     "volume": "Volume",
     "openPlayer": "Apri il lettore",
