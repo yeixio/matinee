@@ -1156,5 +1156,84 @@
       "older": "Tunjukkan baris lebih lama",
       "empty": "Tiada baris sepadan."
     }
+  },
+  "alerts": {
+    "title": "Amaran",
+    "intro": "Terima e-mel atau mesej apabila sesuatu memerlukan perhatian anda. Amaran dihantar terus dari pelayan ini ke pelayan e-mel atau webhook anda sendiri, dan tidak ke tempat lain.",
+    "firing": "Sedang berlaku",
+    "rules": {
+      "title": "Bila hendak memberi amaran",
+      "disk": "Cakera hampir penuh",
+      "percent": "Peratus penuh",
+      "folder": "Folder pustaka tidak dapat dibaca",
+      "folderHint": "Selepas 2 minit, supaya perkongsian rangkaian yang terputus seketika tidak dikira.",
+      "errors": "Ralat semakin banyak",
+      "transcodes": "Transkod terus gagal",
+      "count": "Berapa banyak",
+      "minutes": "Dalam minit",
+      "restart": "Pelayan bermula atau dimulakan semula",
+      "restartHint": "Memberitahu sama ada ia dikemas kini, atau berhenti tanpa ditutup dengan betul."
+    },
+    "email": {
+      "title": "E-mel",
+      "on": "Hantar amaran melalui e-mel",
+      "host": "Pelayan e-mel",
+      "port": "Port",
+      "security": "Sambungan",
+      "none": "Tidak disulitkan",
+      "username": "Nama pengguna",
+      "password": "Kata laluan",
+      "from": "Daripada",
+      "to": "Kepada",
+      "toHint": "Pisahkan beberapa alamat dengan koma. Biarkan kata laluan kosong untuk mengekalkan yang disimpan."
+    },
+    "webhooks": {
+      "title": "Webhook",
+      "intro": "Hantar amaran ke Discord, ntfy, Home Assistant atau apa-apa sahaja yang menerima JSON.",
+      "kind": "Jenis",
+      "kinds": {
+        "discord": "Discord",
+        "ntfy": "ntfy",
+        "homeassistant": "Home Assistant",
+        "json": "Lain (JSON)"
+      },
+      "name": "Nama",
+      "url": "Alamat",
+      "saved": "Alamat yang disimpan dikekalkan melainkan anda memasukkan yang baharu.",
+      "token": "Token akses (pilihan)",
+      "add": "Tambah webhook",
+      "remove": "Alih keluar",
+      "help": {
+        "discord": "Dalam Discord, buka tetapan saluran, kemudian Integrasi → Webhook → Webhook Baharu, dan salin URLnya.",
+        "ntfy": "Alamat topik anda, seperti https://ntfy.sh/topik-rahsia-yang-panjang, atau di pelayan ntfy anda sendiri.",
+        "homeassistant": "Buat automasi dengan pencetus Webhook, dan tampal alamat pencetus di sini.",
+        "json": "Matinee menghantar setiap amaran sebagai JSON dengan tajuk, mesej, tahap, peraturan, masa dan pelayan."
+      }
+    },
+    "noChannels": "Sediakan e-mel atau webhook untuk menerima amaran.",
+    "save": "Simpan",
+    "saved": "Disimpan",
+    "test": "Hantar amaran ujian",
+    "testSent": "Amaran ujian dihantar kepada {{sent}} daripada {{total}}.",
+    "history": {
+      "title": "Amaran terkini",
+      "none": "Belum ada amaran.",
+      "delivered": "dihantar kepada {{sent}} daripada {{total}}",
+      "notSent": "tiada destinasi",
+      "resolved": "Selesai"
+    },
+    "metrics": {
+      "title": "Metrik Prometheus",
+      "intro": "Untuk Prometheus, Grafana dan pemantauan lain di rangkaian anda: bacaan dari halaman ini, di alamat yang memerlukan token.",
+      "off": "Dimatikan.",
+      "turnOn": "Hidupkan",
+      "turnOff": "Matikan",
+      "newToken": "Token baharu",
+      "address": "Alamat",
+      "token": "Token",
+      "copy": "Salin",
+      "copied": "Disalin",
+      "example": "Untuk prometheus.yml"
+    }
   }
 }

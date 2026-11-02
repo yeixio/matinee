@@ -1189,5 +1189,84 @@
       "older": "Pokaż starsze wiersze",
       "empty": "Brak pasujących wierszy."
     }
+  },
+  "alerts": {
+    "title": "Alerty",
+    "intro": "Dostań e-mail lub wiadomość, gdy coś wymaga twojej uwagi. Alerty trafiają prosto z tego serwera do twojego serwera poczty lub webhooków i nigdzie indziej.",
+    "firing": "Trwa teraz",
+    "rules": {
+      "title": "Kiedy powiadamiać",
+      "disk": "Dysk jest prawie pełny",
+      "percent": "Procent zajęcia",
+      "folder": "Nie można odczytać folderu biblioteki",
+      "folderHint": "Po 2 minutach, żeby udział sieciowy, który zniknie na chwilę, się nie liczył.",
+      "errors": "Narasta liczba błędów",
+      "transcodes": "Transkodowanie wciąż się nie udaje",
+      "count": "Ile",
+      "minutes": "W ciągu minut",
+      "restart": "Serwer uruchamia się lub restartuje",
+      "restartHint": "Mówi, czy został zaktualizowany, czy zatrzymał się bez poprawnego zamknięcia."
+    },
+    "email": {
+      "title": "E-mail",
+      "on": "Wysyłaj alerty e-mailem",
+      "host": "Serwer poczty",
+      "port": "Port",
+      "security": "Połączenie",
+      "none": "Bez szyfrowania",
+      "username": "Nazwa użytkownika",
+      "password": "Hasło",
+      "from": "Od",
+      "to": "Do",
+      "toHint": "Oddziel kilka adresów przecinkami. Zostaw hasło puste, aby zachować zapisane."
+    },
+    "webhooks": {
+      "title": "Webhooki",
+      "intro": "Wysyłaj alerty do Discorda, ntfy, Home Assistanta lub czegokolwiek, co przyjmuje JSON.",
+      "kind": "Rodzaj",
+      "kinds": {
+        "discord": "Discord",
+        "ntfy": "ntfy",
+        "homeassistant": "Home Assistant",
+        "json": "Inny (JSON)"
+      },
+      "name": "Nazwa",
+      "url": "Adres",
+      "saved": "Zapisany adres zostaje, dopóki nie wpiszesz nowego.",
+      "token": "Token dostępu (opcjonalnie)",
+      "add": "Dodaj webhook",
+      "remove": "Usuń",
+      "help": {
+        "discord": "W Discordzie otwórz ustawienia kanału, potem Integracje → Webhooki → Nowy webhook i skopiuj jego URL.",
+        "ntfy": "Adres twojego tematu, np. https://ntfy.sh/dlugi-tajny-temat, albo na twoim własnym serwerze ntfy.",
+        "homeassistant": "Utwórz automatyzację z wyzwalaczem Webhook i wklej tu adres wyzwalacza.",
+        "json": "Matinee wysyła każdy alert jako JSON z tytułem, treścią, poziomem, regułą, czasem i serwerem."
+      }
+    },
+    "noChannels": "Skonfiguruj e-mail lub webhook, aby dostawać alerty.",
+    "save": "Zapisz",
+    "saved": "Zapisano",
+    "test": "Wyślij alert testowy",
+    "testSent": "Alert testowy dostarczony do {{sent}} z {{total}}.",
+    "history": {
+      "title": "Ostatnie alerty",
+      "none": "Nie ma jeszcze alertów.",
+      "delivered": "dostarczono do {{sent}} z {{total}}",
+      "notSent": "brak miejsca docelowego",
+      "resolved": "Rozwiązany"
+    },
+    "metrics": {
+      "title": "Metryki Prometheusa",
+      "intro": "Dla Prometheusa, Grafany i innego monitoringu w twojej sieci: odczyty z tej strony pod adresem wymagającym tokenu.",
+      "off": "Wyłączone.",
+      "turnOn": "Włącz",
+      "turnOff": "Wyłącz",
+      "newToken": "Nowy token",
+      "address": "Adres",
+      "token": "Token",
+      "copy": "Kopiuj",
+      "copied": "Skopiowano",
+      "example": "Do prometheus.yml"
+    }
   }
 }

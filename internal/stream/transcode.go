@@ -19,6 +19,7 @@ import (
 	"strconv"
 	"strings"
 	"sync"
+	"sync/atomic"
 	"time"
 
 	"github.com/yeixio/matinee/internal/hwaccel"
@@ -53,6 +54,17 @@ type Transcoder struct {
 	// next ones go straight to a mode that works.
 	failed map[int64]failure
 	stop   chan struct{}
+
+	// For admin alerts and metrics: transcodes started since the server
+	// started, and those that failed to start or broke off partway.
+	started, failures atomic.Int64
+}
+
+// Counts is how many transcodes have started since the server started, and
+// how many of them failed: those that never got going (after any retries
+// on the CPU) and those whose FFmpeg broke off partway through.
+func (t *Transcoder) Counts() (started, failed int64) {
+	return t.started.Load(), t.failures.Load()
 }
 
 // Accelerator says which hardware accelerator new transcodes use (see
@@ -78,6 +90,8 @@ type session struct {
 	superseded bool
 	// killed is set (under Transcoder.mu) when Matinee stops FFmpeg itself.
 	killed bool
+	// ready is set (under Transcoder.mu) once the player has its first segment.
+	ready bool
 	// For the admin dashboard (see Sessions).
 	started   time.Time
 	startSec  float64
@@ -132,6 +146,13 @@ func (t *Transcoder) Start(ctx context.Context, userID int64, it store.Item, sta
 	for i, mode := range modes {
 		id, err := t.start(ctx, userID, it, startSec, accel, mode, video, audio, copyVideo, steps)
 		if err == nil || i == len(modes)-1 || errors.Is(err, ErrSuperseded) || ctx.Err() != nil {
+			switch {
+			case err == nil:
+				t.started.Add(1)
+			case !errors.Is(err, ErrSuperseded) && ctx.Err() == nil:
+				t.started.Add(1)
+				t.failures.Add(1)
+			}
 			return id, err
 		}
 		t.Log.Warn("transcode failed on the GPU; trying again with less on it",
@@ -267,8 +288,11 @@ func (t *Transcoder) start(ctx context.Context, userID int64, it store.Item, sta
 	go func() {
 		err := cmd.Wait()
 		t.mu.Lock()
-		killed := s.killed
+		killed, ready := s.killed, s.ready
 		t.mu.Unlock()
+		if err != nil && !killed && ready {
+			t.failures.Add(1)
+		}
 		// A GPU that fails partway through (rather than at the start) leaves
 		// the player stuck; when it starts again, this item skips that mode.
 		if err != nil && !killed && kind != "" {
@@ -308,6 +332,9 @@ func (t *Transcoder) start(ctx context.Context, userID int64, it store.Item, sta
 			return "", err
 		}
 	}
+	t.mu.Lock()
+	s.ready = true
+	t.mu.Unlock()
 	return id, nil
 }
 

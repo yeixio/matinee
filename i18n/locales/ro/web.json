@@ -1178,5 +1178,84 @@
       "older": "Arată rânduri mai vechi",
       "empty": "Niciun rând nu se potrivește."
     }
+  },
+  "alerts": {
+    "title": "Alerte",
+    "intro": "Primește un e-mail sau un mesaj când ceva are nevoie de tine. Alertele merg direct de la acest server la propriul tău server de e-mail sau la webhookurile tale, și nicăieri altundeva.",
+    "firing": "În desfășurare",
+    "rules": {
+      "title": "Când să alerteze",
+      "disk": "Un disc este aproape plin",
+      "percent": "Procent ocupat",
+      "folder": "Un folder al bibliotecii nu poate fi citit",
+      "folderHint": "După 2 minute, ca să nu conteze o partajare de rețea care dispare o clipă.",
+      "errors": "Se adună erori",
+      "transcodes": "Transcodările eșuează în continuare",
+      "count": "Câte",
+      "minutes": "În câte minute",
+      "restart": "Serverul pornește sau repornește",
+      "restartHint": "Spune dacă a fost actualizat sau s-a oprit fără să se închidă corect."
+    },
+    "email": {
+      "title": "E-mail",
+      "on": "Trimite alerte prin e-mail",
+      "host": "Server de e-mail",
+      "port": "Port",
+      "security": "Conexiune",
+      "none": "Necriptată",
+      "username": "Nume de utilizator",
+      "password": "Parolă",
+      "from": "De la",
+      "to": "Către",
+      "toHint": "Separă mai multe adrese cu virgule. Lasă parola goală ca să o păstrezi pe cea salvată."
+    },
+    "webhooks": {
+      "title": "Webhookuri",
+      "intro": "Trimite alerte către Discord, ntfy, Home Assistant sau orice altceva care acceptă JSON.",
+      "kind": "Tip",
+      "kinds": {
+        "discord": "Discord",
+        "ntfy": "ntfy",
+        "homeassistant": "Home Assistant",
+        "json": "Altul (JSON)"
+      },
+      "name": "Nume",
+      "url": "Adresă",
+      "saved": "Adresa salvată rămâne, dacă nu introduci una nouă.",
+      "token": "Token de acces (opțional)",
+      "add": "Adaugă un webhook",
+      "remove": "Elimină",
+      "help": {
+        "discord": "În Discord, deschide setările canalului, apoi Integrări → Webhookuri → Webhook nou, și copiază URL-ul.",
+        "ntfy": "Adresa subiectului tău, de exemplu https://ntfy.sh/un-subiect-lung-si-secret, sau una pe propriul tău server ntfy.",
+        "homeassistant": "Creează o automatizare cu un declanșator Webhook și lipește aici adresa declanșatorului.",
+        "json": "Matinee trimite fiecare alertă ca JSON cu titlu, mesaj, nivel, regulă, oră și server."
+      }
+    },
+    "noChannels": "Configurează e-mailul sau un webhook ca să primești alerte.",
+    "save": "Salvează",
+    "saved": "Salvat",
+    "test": "Trimite o alertă de test",
+    "testSent": "Alertă de test livrată la {{sent}} din {{total}}.",
+    "history": {
+      "title": "Alerte recente",
+      "none": "Încă nu există alerte.",
+      "delivered": "livrată la {{sent}} din {{total}}",
+      "notSent": "nicio destinație configurată",
+      "resolved": "Rezolvată"
+    },
+    "metrics": {
+      "title": "Metrici Prometheus",
+      "intro": "Pentru Prometheus, Grafana și alte instrumente de monitorizare din rețeaua ta: valorile din această pagină, la o adresă care cere un token.",
+      "off": "Dezactivate.",
+      "turnOn": "Activează",
+      "turnOff": "Dezactivează",
+      "newToken": "Token nou",
+      "address": "Adresă",
+      "token": "Token",
+      "copy": "Copiază",
+      "copied": "Copiat",
+      "example": "Pentru prometheus.yml"
+    }
   }
 }

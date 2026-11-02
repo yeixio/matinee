@@ -22,6 +22,7 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/yeixio/matinee/internal/alerts"
 	"github.com/yeixio/matinee/internal/analyze"
 	"github.com/yeixio/matinee/internal/api"
 	"github.com/yeixio/matinee/internal/artwork"
@@ -81,6 +82,7 @@ func run() error {
 	logs := health.NewLogs(health.DefaultLines)
 	log := slog.New(logs.Handler(slog.NewTextHandler(os.Stderr, &slog.HandlerOptions{Level: level})))
 	monitor := health.NewMonitor(logs)
+	useWritableCacheDir(cfg.DataDir, log)
 
 	for _, bin := range []string{cfg.FFmpegPath, cfg.FFprobePath} {
 		if _, err := exec.LookPath(bin); err != nil {
@@ -239,6 +241,10 @@ func run() error {
 	}
 	monitor.Streams = apiServer.StreamCounts
 	go monitor.Run(ctx)
+	// Admin alerts (Settings → Server health → Alerts) go straight to the
+	// admins' own mail server and webhooks.
+	alerter := &alerts.Manager{Store: db, Log: log, Server: cfg.ServerName, URL: cfg.PublicURL, Version: version.Version, Read: apiServer.AlertReadings}
+	apiServer.Alerts = alerter
 	if _, problems := theme.Load(cfg.ThemeDir()); len(problems) > 0 {
 		for _, p := range problems {
 			log.Warn("skipping a theme file", "dir", cfg.ThemeDir(), "err", p)
@@ -345,6 +351,7 @@ func run() error {
 	if cfg.DatabaseURL != "" {
 		dbKind = "postgres"
 	}
+	go alerter.Run(ctx)
 	log.Info("matinee started", "version", version.Version, "addr", cfg.Addr, "home_addr", cfg.HomeAddr, "remote_addr", cfg.RemoteAddr, "data", cfg.DataDir, "database", dbKind)
 
 	select {
@@ -368,6 +375,10 @@ func run() error {
 		}
 		wg.Wait()
 		stopServing()
+		// A clean stop, so the next start isn't taken for a crash.
+		stoppedCtx, cancelStopped := context.WithTimeout(context.Background(), 5*time.Second)
+		defer cancelStopped()
+		alerter.Stopped(stoppedCtx)
 	}
 	return nil
 }

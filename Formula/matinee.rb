@@ -3,30 +3,30 @@
 class Matinee < Formula
   desc "Self-hosted media server for movies, TV and music"
   homepage "https://matinee.yeix.io"
-  version "0.1.10"
+  version "0.1.11"
   license "AGPL-3.0-or-later"
 
   depends_on "ffmpeg"
 
   on_macos do
     on_arm do
-      url "https://github.com/yeixio/matinee/releases/download/v0.1.10/matinee_0.1.10_darwin_arm64.tar.gz"
-      sha256 "93838d87a28ba42eb52c7e0822f2f40834f4832fe0067eaa27e83bb7e50350a1"
+      url "https://github.com/yeixio/matinee/releases/download/v0.1.11/matinee_0.1.11_darwin_arm64.tar.gz"
+      sha256 "26b518e2daf958bb44998f4e158604e63db4a99e99c57d28fb7773dbf4f63394"
     end
     on_intel do
-      url "https://github.com/yeixio/matinee/releases/download/v0.1.10/matinee_0.1.10_darwin_amd64.tar.gz"
-      sha256 "93c0d5d0509b14fb70705f8f9ba790f703e3624dd299812b9596834cc09849bf"
+      url "https://github.com/yeixio/matinee/releases/download/v0.1.11/matinee_0.1.11_darwin_amd64.tar.gz"
+      sha256 "c78df2c46fa69fc774053912d23b545b59c82e19ea2609712df75071c670a8fa"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/yeixio/matinee/releases/download/v0.1.10/matinee_0.1.10_linux_arm64.tar.gz"
-      sha256 "800291638afa184025a20f3306a566dd1a41c43ff86a1d2f38b711bb5365a652"
+      url "https://github.com/yeixio/matinee/releases/download/v0.1.11/matinee_0.1.11_linux_arm64.tar.gz"
+      sha256 "2bc86ce72694b00cf97c402ba7986e25d7cec1871a7d536505a6e402f90233c9"
     end
     on_intel do
-      url "https://github.com/yeixio/matinee/releases/download/v0.1.10/matinee_0.1.10_linux_amd64.tar.gz"
-      sha256 "8f006ec2bed30f56b83fed04164377dfc7f7b48f7f89f5c7a460bfda496c80f7"
+      url "https://github.com/yeixio/matinee/releases/download/v0.1.11/matinee_0.1.11_linux_amd64.tar.gz"
+      sha256 "7aaf2832b47e7d4c28638c4b00df8be9c4c692951e8597ae14e3a32b8e42b14d"
     end
   end
 

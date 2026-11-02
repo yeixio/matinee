@@ -10,6 +10,10 @@ When something isn't working, **Settings → Server health** is the place to sta
 
 Everything on it comes from your own server. Nothing is sent anywhere.
 
+<!-- since: v0.1.12 -->
+To be told when something goes wrong instead of checking, set up [alerts](/docs/server/alerts/) further down the same page.
+<!-- /since -->
+
 ![Server health: how the server is doing, and CPU, memory, data sent and what's playing over the last hour](../images/server-health.webp)
 
 ## At the top
