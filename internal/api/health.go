@@ -239,7 +239,13 @@ func (s *Server) getHealth(w http.ResponseWriter, r *http.Request) {
 	out.Jobs.Importing = s.imports.running
 	s.imports.mu.Unlock()
 
-	// Disk space, for the server's own folders and every library folder.
+	out.Disks = s.disks(s.storageUses(libs))
+	writeJSON(w, http.StatusOK, out)
+}
+
+// storageUses lists the server's own folders and every library folder, for
+// their disk space.
+func (s *Server) storageUses(libs []store.Library) []healthUse {
 	var uses []healthUse
 	for _, p := range s.Storage {
 		uses = append(uses, healthUse{Use: p.Use, Path: p.Path})
@@ -249,8 +255,7 @@ func (s *Server) getHealth(w http.ResponseWriter, r *http.Request) {
 			uses = append(uses, healthUse{Use: "library", Library: l.Name, Path: p})
 		}
 	}
-	out.Disks = s.disks(uses)
-	writeJSON(w, http.StatusOK, out)
+	return uses
 }
 
 // disks looks up the space on each folder's disk and puts folders on the

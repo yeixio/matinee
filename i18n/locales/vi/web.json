@@ -1156,5 +1156,84 @@
       "older": "Hiện các dòng cũ hơn",
       "empty": "Không có dòng nào khớp."
     }
+  },
+  "alerts": {
+    "title": "Cảnh báo",
+    "intro": "Nhận email hoặc tin nhắn khi có việc cần bạn xử lý. Cảnh báo đi thẳng từ máy chủ này đến máy chủ email hoặc webhook của riêng bạn, không đi đâu khác.",
+    "firing": "Đang xảy ra",
+    "rules": {
+      "title": "Cảnh báo khi nào",
+      "disk": "Một ổ đĩa sắp đầy",
+      "percent": "Phần trăm đã dùng",
+      "folder": "Không đọc được một thư mục thư viện",
+      "folderHint": "Sau 2 phút, để một thư mục chia sẻ mạng mất kết nối chốc lát không bị tính.",
+      "errors": "Lỗi dồn lại",
+      "transcodes": "Chuyển mã liên tục thất bại",
+      "count": "Bao nhiêu",
+      "minutes": "Trong số phút",
+      "restart": "Máy chủ khởi động hoặc khởi động lại",
+      "restartHint": "Cho biết máy chủ đã được cập nhật, hay đã dừng mà không tắt đúng cách."
+    },
+    "email": {
+      "title": "Email",
+      "on": "Gửi cảnh báo qua email",
+      "host": "Máy chủ email",
+      "port": "Cổng",
+      "security": "Kết nối",
+      "none": "Không mã hóa",
+      "username": "Tên người dùng",
+      "password": "Mật khẩu",
+      "from": "Từ",
+      "to": "Đến",
+      "toHint": "Phân tách nhiều địa chỉ bằng dấu phẩy. Để trống mật khẩu để giữ mật khẩu đã lưu."
+    },
+    "webhooks": {
+      "title": "Webhook",
+      "intro": "Gửi cảnh báo đến Discord, ntfy, Home Assistant hoặc bất cứ thứ gì nhận JSON.",
+      "kind": "Loại",
+      "kinds": {
+        "discord": "Discord",
+        "ntfy": "ntfy",
+        "homeassistant": "Home Assistant",
+        "json": "Khác (JSON)"
+      },
+      "name": "Tên",
+      "url": "Địa chỉ",
+      "saved": "Địa chỉ đã lưu được giữ nguyên trừ khi bạn nhập địa chỉ mới.",
+      "token": "Mã truy cập (không bắt buộc)",
+      "add": "Thêm webhook",
+      "remove": "Xóa",
+      "help": {
+        "discord": "Trong Discord, mở cài đặt kênh, rồi Tích hợp → Webhook → Webhook mới, và sao chép URL của nó.",
+        "ntfy": "Địa chỉ chủ đề của bạn, như https://ntfy.sh/mot-chu-de-bi-mat-dai, hoặc trên máy chủ ntfy của riêng bạn.",
+        "homeassistant": "Tạo một tự động hóa với trình kích hoạt Webhook, rồi dán địa chỉ của trình kích hoạt vào đây.",
+        "json": "Matinee gửi mỗi cảnh báo dưới dạng JSON với tiêu đề, nội dung, mức độ, quy tắc, thời gian và máy chủ."
+      }
+    },
+    "noChannels": "Thiết lập email hoặc webhook để nhận cảnh báo.",
+    "save": "Lưu",
+    "saved": "Đã lưu",
+    "test": "Gửi cảnh báo thử",
+    "testSent": "Đã gửi cảnh báo thử đến {{sent}}/{{total}}.",
+    "history": {
+      "title": "Cảnh báo gần đây",
+      "none": "Chưa có cảnh báo nào.",
+      "delivered": "đã gửi đến {{sent}}/{{total}}",
+      "notSent": "không có nơi để gửi",
+      "resolved": "Đã khắc phục"
+    },
+    "metrics": {
+      "title": "Số liệu Prometheus",
+      "intro": "Cho Prometheus, Grafana và công cụ giám sát khác trong mạng của bạn: số liệu trên trang này, tại một địa chỉ cần mã truy cập.",
+      "off": "Đang tắt.",
+      "turnOn": "Bật",
+      "turnOff": "Tắt",
+      "newToken": "Mã mới",
+      "address": "Địa chỉ",
+      "token": "Mã",
+      "copy": "Sao chép",
+      "copied": "Đã sao chép",
+      "example": "Cho prometheus.yml"
+    }
   }
 }

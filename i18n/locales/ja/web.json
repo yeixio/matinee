@@ -1156,5 +1156,84 @@
       "older": "古い行を表示",
       "empty": "一致する行はありません。"
     }
+  },
+  "alerts": {
+    "title": "アラート",
+    "intro": "対応が必要なことが起きたら、メールやメッセージで知らせます。アラートはこのサーバーからあなた自身のメールサーバーや Webhook に直接送られ、ほかには送られません。",
+    "firing": "発生中",
+    "rules": {
+      "title": "アラートを出す条件",
+      "disk": "ディスクがいっぱいに近い",
+      "percent": "使用率(%)",
+      "folder": "ライブラリのフォルダーを読めない",
+      "folderHint": "2 分続いた場合のみ。ネットワーク共有が一瞬切れただけでは知らせません。",
+      "errors": "エラーが続いている",
+      "transcodes": "トランスコードの失敗が続いている",
+      "count": "件数",
+      "minutes": "何分以内",
+      "restart": "サーバーの起動・再起動",
+      "restartHint": "アップデートされたかどうか、正しく終了せずに止まったかどうかを伝えます。"
+    },
+    "email": {
+      "title": "メール",
+      "on": "アラートをメールで送る",
+      "host": "メールサーバー",
+      "port": "ポート",
+      "security": "接続方法",
+      "none": "暗号化なし",
+      "username": "ユーザー名",
+      "password": "パスワード",
+      "from": "差出人",
+      "to": "宛先",
+      "toHint": "複数のアドレスはカンマで区切ります。保存済みのパスワードを使う場合は空欄のままにします。"
+    },
+    "webhooks": {
+      "title": "Webhook",
+      "intro": "Discord、ntfy、Home Assistant など、JSON を受け取れるところにアラートを送ります。",
+      "kind": "種類",
+      "kinds": {
+        "discord": "Discord",
+        "ntfy": "ntfy",
+        "homeassistant": "Home Assistant",
+        "json": "その他 (JSON)"
+      },
+      "name": "名前",
+      "url": "アドレス",
+      "saved": "新しいアドレスを入力しない限り、保存済みのアドレスが使われます。",
+      "token": "アクセストークン (任意)",
+      "add": "Webhook を追加",
+      "remove": "削除",
+      "help": {
+        "discord": "Discord でチャンネルの設定を開き、[連携サービス] → [ウェブフック] → [新しいウェブフック] と進んで URL をコピーします。",
+        "ntfy": "トピックのアドレスです。例: https://ntfy.sh/a-long-secret-topic 、または自分の ntfy サーバー上のアドレス。",
+        "homeassistant": "Webhook トリガーを使うオートメーションを作り、そのトリガーのアドレスをここに貼り付けます。",
+        "json": "Matinee は各アラートを JSON で送ります。タイトル、メッセージ、レベル、ルール、時刻、サーバーが含まれます。"
+      }
+    },
+    "noChannels": "アラートを受け取るには、メールか Webhook を設定してください。",
+    "save": "保存",
+    "saved": "保存済み",
+    "test": "テストアラートを送る",
+    "testSent": "テストアラートを {{total}} 件中 {{sent}} 件に届けました。",
+    "history": {
+      "title": "最近のアラート",
+      "none": "まだアラートはありません。",
+      "delivered": "{{total}} 件中 {{sent}} 件に送信",
+      "notSent": "送信先がありません",
+      "resolved": "解決済み"
+    },
+    "metrics": {
+      "title": "Prometheus メトリクス",
+      "intro": "ネットワーク内の Prometheus や Grafana などの監視向けに、このページの数値をトークンが必要なアドレスで公開します。",
+      "off": "オフです。",
+      "turnOn": "オンにする",
+      "turnOff": "オフにする",
+      "newToken": "新しいトークン",
+      "address": "アドレス",
+      "token": "トークン",
+      "copy": "コピー",
+      "copied": "コピーしました",
+      "example": "prometheus.yml 用"
+    }
   }
 }

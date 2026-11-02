@@ -1167,5 +1167,84 @@
       "older": "Régebbi sorok",
       "empty": "Nincs egyező sor."
     }
+  },
+  "alerts": {
+    "title": "Riasztások",
+    "intro": "Kapj e-mailt vagy üzenetet, ha valami a figyelmedet igényli. A riasztások közvetlenül erről a szerverről mennek a saját levelezőszerveredre vagy webhookjaidra, és sehová máshová.",
+    "firing": "Most zajlik",
+    "rules": {
+      "title": "Miről riasszon",
+      "disk": "Egy lemez majdnem megtelt",
+      "percent": "Telítettség százalékban",
+      "folder": "Egy könyvtármappa nem olvasható",
+      "folderHint": "2 perc után, hogy egy pillanatra kieső hálózati megosztás ne számítson.",
+      "errors": "Halmozódnak a hibák",
+      "transcodes": "Az átkódolások ismételten sikertelenek",
+      "count": "Hány",
+      "minutes": "Ennyi percen belül",
+      "restart": "A szerver elindul vagy újraindul",
+      "restartHint": "Megmondja, frissült-e, vagy rendes leállás nélkül állt le."
+    },
+    "email": {
+      "title": "E-mail",
+      "on": "Riasztások küldése e-mailben",
+      "host": "Levelezőszerver",
+      "port": "Port",
+      "security": "Kapcsolat",
+      "none": "Titkosítatlan",
+      "username": "Felhasználónév",
+      "password": "Jelszó",
+      "from": "Feladó",
+      "to": "Címzett",
+      "toHint": "Több címet vesszővel válassz el. Hagyd üresen a jelszót, ha a mentettet szeretnéd megtartani."
+    },
+    "webhooks": {
+      "title": "Webhookok",
+      "intro": "Küldj riasztásokat a Discordra, ntfy-ra, Home Assistantba vagy bármire, ami JSON-t fogad.",
+      "kind": "Típus",
+      "kinds": {
+        "discord": "Discord",
+        "ntfy": "ntfy",
+        "homeassistant": "Home Assistant",
+        "json": "Egyéb (JSON)"
+      },
+      "name": "Név",
+      "url": "Cím",
+      "saved": "A mentett cím megmarad, hacsak nem adsz meg újat.",
+      "token": "Hozzáférési token (nem kötelező)",
+      "add": "Webhook hozzáadása",
+      "remove": "Eltávolítás",
+      "help": {
+        "discord": "A Discordban nyisd meg a csatorna beállításait, majd Integrációk → Webhookok → Új webhook, és másold ki az URL-jét.",
+        "ntfy": "A témád címe, például https://ntfy.sh/egy-hosszu-titkos-tema, vagy egy a saját ntfy-szervereden.",
+        "homeassistant": "Hozz létre egy automatizálást Webhook indítóval, és illeszd be ide az indító címét.",
+        "json": "A Matinee minden riasztást JSON-ként küld címmel, üzenettel, szinttel, szabállyal, idővel és szerverrel."
+      }
+    },
+    "noChannels": "Állíts be e-mailt vagy webhookot a riasztásokhoz.",
+    "save": "Mentés",
+    "saved": "Mentve",
+    "test": "Tesztriasztás küldése",
+    "testSent": "Tesztriasztás kézbesítve: {{sent}} / {{total}}.",
+    "history": {
+      "title": "Legutóbbi riasztások",
+      "none": "Még nincsenek riasztások.",
+      "delivered": "kézbesítve: {{sent}} / {{total}}",
+      "notSent": "nincs hová küldeni",
+      "resolved": "Megoldva"
+    },
+    "metrics": {
+      "title": "Prometheus-metrikák",
+      "intro": "Prometheushoz, Grafanához és más felügyelethez a hálózatodon: ennek az oldalnak az adatai egy tokent igénylő címen.",
+      "off": "Kikapcsolva.",
+      "turnOn": "Bekapcsolás",
+      "turnOff": "Kikapcsolás",
+      "newToken": "Új token",
+      "address": "Cím",
+      "token": "Token",
+      "copy": "Másolás",
+      "copied": "Másolva",
+      "example": "A prometheus.yml fájlba"
+    }
   }
 }

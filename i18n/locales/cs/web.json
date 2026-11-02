@@ -1189,5 +1189,84 @@
       "older": "Zobrazit starší řádky",
       "empty": "Žádné odpovídající řádky."
     }
+  },
+  "alerts": {
+    "title": "Upozornění",
+    "intro": "Dostaňte e-mail nebo zprávu, když něco potřebuje vaši pozornost. Upozornění jdou přímo z tohoto serveru na váš vlastní poštovní server nebo webhooky a nikam jinam.",
+    "firing": "Právě probíhá",
+    "rules": {
+      "title": "Na co upozorňovat",
+      "disk": "Disk je téměř plný",
+      "percent": "Procent zaplnění",
+      "folder": "Složku knihovny nelze přečíst",
+      "folderHint": "Až po 2 minutách, aby se nepočítaly krátké výpadky síťového sdílení.",
+      "errors": "Hromadí se chyby",
+      "transcodes": "Překódování opakovaně selhává",
+      "count": "Kolik",
+      "minutes": "Během minut",
+      "restart": "Server se spouští nebo restartuje",
+      "restartHint": "Řekne, zda byl aktualizován, nebo se zastavil bez řádného vypnutí."
+    },
+    "email": {
+      "title": "E-mail",
+      "on": "Posílat upozornění e-mailem",
+      "host": "Poštovní server",
+      "port": "Port",
+      "security": "Připojení",
+      "none": "Nešifrované",
+      "username": "Uživatelské jméno",
+      "password": "Heslo",
+      "from": "Od",
+      "to": "Komu",
+      "toHint": "Více adres oddělte čárkami. Ponechte heslo prázdné, chcete-li zachovat uložené."
+    },
+    "webhooks": {
+      "title": "Webhooky",
+      "intro": "Posílejte upozornění do Discordu, ntfy, Home Assistantu nebo čehokoli, co přijímá JSON.",
+      "kind": "Druh",
+      "kinds": {
+        "discord": "Discord",
+        "ntfy": "ntfy",
+        "homeassistant": "Home Assistant",
+        "json": "Jiný (JSON)"
+      },
+      "name": "Název",
+      "url": "Adresa",
+      "saved": "Uložená adresa zůstane, dokud nezadáte novou.",
+      "token": "Přístupový token (volitelné)",
+      "add": "Přidat webhook",
+      "remove": "Odebrat",
+      "help": {
+        "discord": "V Discordu otevřete nastavení kanálu, pak Integrace → Webhooky → Nový webhook a zkopírujte jeho URL.",
+        "ntfy": "Adresa vašeho tématu, například https://ntfy.sh/dlouhe-tajne-tema, nebo na vašem vlastním serveru ntfy.",
+        "homeassistant": "Vytvořte automatizaci se spouštěčem Webhook a vložte sem adresu spouštěče.",
+        "json": "Matinee posílá každé upozornění jako JSON s názvem, zprávou, úrovní, pravidlem, časem a serverem."
+      }
+    },
+    "noChannels": "Nastavte e-mail nebo webhook, abyste dostávali upozornění.",
+    "save": "Uložit",
+    "saved": "Uloženo",
+    "test": "Poslat zkušební upozornění",
+    "testSent": "Zkušební upozornění doručeno {{sent}} z {{total}}.",
+    "history": {
+      "title": "Nedávná upozornění",
+      "none": "Zatím žádná upozornění.",
+      "delivered": "doručeno {{sent}} z {{total}}",
+      "notSent": "není kam poslat",
+      "resolved": "Vyřešeno"
+    },
+    "metrics": {
+      "title": "Metriky pro Prometheus",
+      "intro": "Pro Prometheus, Grafanu a další monitorování ve vaší síti: hodnoty z této stránky na adrese, která vyžaduje token.",
+      "off": "Vypnuto.",
+      "turnOn": "Zapnout",
+      "turnOff": "Vypnout",
+      "newToken": "Nový token",
+      "address": "Adresa",
+      "token": "Token",
+      "copy": "Kopírovat",
+      "copied": "Zkopírováno",
+      "example": "Do prometheus.yml"
+    }
   }
 }

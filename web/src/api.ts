@@ -963,6 +963,51 @@ export type ImportResult = {
 }
 export type ImportStatus = { running: boolean; done: number; total: number; result?: ImportResult; error?: string }
 
+// Admin alerts (Settings → Server health → Alerts), from GET /admin/alerts.
+export type AlertRule = 'disk' | 'folder' | 'errors' | 'transcodes' | 'restart' | 'test'
+export type Alert = {
+  id: string
+  rule: AlertRule
+  key: string
+  level: 'info' | 'warning' | 'critical'
+  title: string
+  message: string
+  time: number
+  resolved?: boolean
+  sent: number
+  failed?: string[]
+}
+export type RateRule = { on: boolean; count: number; minutes: number }
+export type AlertRules = {
+  disk: { on: boolean; percent: number }
+  folder: { on: boolean }
+  errors: RateRule
+  transcodes: RateRule
+  restart: { on: boolean }
+}
+export type AlertEmail = {
+  on: boolean
+  host: string
+  port: number
+  security: 'starttls' | 'tls' | 'none'
+  username: string
+  password?: string
+  from: string
+  to: string
+}
+export type WebhookKind = 'discord' | 'ntfy' | 'homeassistant' | 'json'
+export type AlertWebhook = { id?: string; kind: WebhookKind; name?: string; url?: string; token?: string }
+export type AlertConfig = { email: AlertEmail; webhooks: AlertWebhook[]; rules: AlertRules }
+export type AlertSettings = {
+  email: AlertEmail & { hasPassword: boolean }
+  webhooks: { id: string; kind: WebhookKind; name?: string; hint: string; hasToken?: boolean }[]
+  rules: AlertRules
+  firing: Alert[]
+  history: Alert[]
+  links: boolean
+}
+export type MetricsSettings = { on: boolean; token?: string; path: string }
+
 export class ApiError extends Error {
   status: number
   code?: string
@@ -1053,6 +1098,12 @@ export const api = {
   health: () => request<Health>('GET', '/api/v1/admin/health'),
   logs: (q: LogQuery) => request<{ lines: LogLine[]; more: boolean }>('GET', `/api/v1/admin/logs?${logParams(q)}`),
   logsDownloadURL: (q: LogQuery) => `/api/v1/admin/logs/download?${logParams(q)}`,
+  alerts: () => request<AlertSettings>('GET', '/api/v1/admin/alerts'),
+  saveAlerts: (c: AlertConfig) => request<AlertSettings>('PUT', '/api/v1/admin/alerts', c),
+  testAlerts: (c: AlertConfig) => request<Alert>('POST', '/api/v1/admin/alerts/test', c),
+  metricsSettings: () => request<MetricsSettings>('GET', '/api/v1/admin/metrics'),
+  newMetricsToken: () => request<MetricsSettings>('POST', '/api/v1/admin/metrics/token'),
+  metricsOff: () => request<void>('DELETE', '/api/v1/admin/metrics/token'),
   stopTranscode: (id: string) => request<void>('DELETE', `/api/v1/admin/transcodes/${encodeURIComponent(id)}`),
   setAnalysisMode: (mode: AnalysisMode) => request<AnalysisStatus>('PUT', '/api/v1/analysis', { mode }),
   setIntroDetection: (intros: boolean) => request<AnalysisStatus>('PUT', '/api/v1/analysis', { intros }),

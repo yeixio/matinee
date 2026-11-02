@@ -1167,5 +1167,84 @@
       "older": "Vis ældre linjer",
       "empty": "Ingen linjer passer."
     }
+  },
+  "alerts": {
+    "title": "Advarsler",
+    "intro": "Få en e-mail eller besked, når noget kræver din opmærksomhed. Advarsler går direkte fra denne server til din egen mailserver eller dine webhooks og ingen andre steder.",
+    "firing": "Sker nu",
+    "rules": {
+      "title": "Hvad der skal advares om",
+      "disk": "En disk er næsten fuld",
+      "percent": "Procent fuld",
+      "folder": "En biblioteksmappe kan ikke læses",
+      "folderHint": "Efter 2 minutter, så en netværksdeling, der falder ud et øjeblik, ikke tæller.",
+      "errors": "Fejl hober sig op",
+      "transcodes": "Omkodninger bliver ved med at mislykkes",
+      "count": "Hvor mange",
+      "minutes": "Inden for minutter",
+      "restart": "Serveren starter eller genstarter",
+      "restartHint": "Fortæller, om den blev opdateret eller stoppede uden at lukke ordentligt ned."
+    },
+    "email": {
+      "title": "E-mail",
+      "on": "Send advarsler via e-mail",
+      "host": "Mailserver",
+      "port": "Port",
+      "security": "Forbindelse",
+      "none": "Ukrypteret",
+      "username": "Brugernavn",
+      "password": "Adgangskode",
+      "from": "Fra",
+      "to": "Til",
+      "toHint": "Adskil flere adresser med kommaer. Lad adgangskoden stå tom for at beholde den gemte."
+    },
+    "webhooks": {
+      "title": "Webhooks",
+      "intro": "Send advarsler til Discord, ntfy, Home Assistant eller noget andet, der tager imod JSON.",
+      "kind": "Type",
+      "kinds": {
+        "discord": "Discord",
+        "ntfy": "ntfy",
+        "homeassistant": "Home Assistant",
+        "json": "Anden (JSON)"
+      },
+      "name": "Navn",
+      "url": "Adresse",
+      "saved": "Den gemte adresse beholdes, medmindre du skriver en ny.",
+      "token": "Adgangstoken (valgfrit)",
+      "add": "Tilføj en webhook",
+      "remove": "Fjern",
+      "help": {
+        "discord": "Åbn kanalens indstillinger i Discord, derefter Integrationer → Webhooks → Ny webhook, og kopiér dens URL.",
+        "ntfy": "Adressen på dit emne, f.eks. https://ntfy.sh/et-langt-hemmeligt-emne, eller en på din egen ntfy-server.",
+        "homeassistant": "Lav en automatisering med en Webhook-udløser, og indsæt udløserens adresse her.",
+        "json": "Matinee sender hver advarsel som JSON med titel, besked, niveau, regel, tidspunkt og server."
+      }
+    },
+    "noChannels": "Opsæt e-mail eller en webhook for at få advarsler.",
+    "save": "Gem",
+    "saved": "Gemt",
+    "test": "Send en testadvarsel",
+    "testSent": "Testadvarsel leveret til {{sent}} af {{total}}.",
+    "history": {
+      "title": "Seneste advarsler",
+      "none": "Ingen advarsler endnu.",
+      "delivered": "leveret til {{sent}} af {{total}}",
+      "notSent": "ingen steder at sende den",
+      "resolved": "Løst"
+    },
+    "metrics": {
+      "title": "Prometheus-målinger",
+      "intro": "Til Prometheus, Grafana og anden overvågning på dit netværk: målingerne på denne side, på en adresse, der kræver et token.",
+      "off": "Slået fra.",
+      "turnOn": "Slå til",
+      "turnOff": "Slå fra",
+      "newToken": "Nyt token",
+      "address": "Adresse",
+      "token": "Token",
+      "copy": "Kopiér",
+      "copied": "Kopieret",
+      "example": "Til prometheus.yml"
+    }
   }
 }

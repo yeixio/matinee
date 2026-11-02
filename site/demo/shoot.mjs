@@ -8,6 +8,7 @@
 // Needs Go, FFmpeg and Playwright's Chromium. The first run makes the demo
 // library in demo/.cache, which takes a few minutes.
 
+import http from 'node:http'
 import { chromium } from 'playwright'
 import { cover } from './art.mjs'
 import { capture, desktop, phone, sleep } from './capture.mjs'
@@ -432,6 +433,35 @@ try {
     await shot(page, 'server-health-log', { target: part(5) })
     await page.context().close()
     await viewer.context().close()
+  }
+
+  // --- Alerts (docs/guide/server/alerts.md) ---
+  if (['alerts', 'alerts-sent', 'alerts-metrics'].some(wanted)) {
+    // A webhook that takes alerts here, standing in for Home Assistant.
+    const received = http.createServer((req, res) => req.resume().on('end', () => res.end()))
+    await new Promise((resolve) => received.listen(0, '127.0.0.1', resolve))
+    const hook = `http://127.0.0.1:${received.address().port}/api/webhook/matinee-alerts`
+    await api(token, 'PUT', '/admin/alerts', {
+      email: { on: true, host: 'smtp.example.com', port: 587, security: 'starttls', username: 'matinee@example.com', from: 'matinee@example.com', to: 'me@example.com' },
+      webhooks: [{ kind: 'homeassistant', name: 'Home Assistant', url: hook }],
+      rules: { disk: { on: true, percent: 90 }, folder: { on: true }, errors: { on: true, count: 10, minutes: 15 }, transcodes: { on: true, count: 3, minutes: 15 }, restart: { on: true } },
+    })
+    await api(token, 'POST', '/admin/alerts/test', {
+      email: { on: false }, webhooks: [{ kind: 'homeassistant', name: 'Home Assistant', url: hook }],
+      rules: { disk: { on: true, percent: 90 }, folder: { on: true }, errors: { on: true, count: 10, minutes: 15 }, transcodes: { on: true, count: 3, minutes: 15 }, restart: { on: true } },
+    })
+    await api(token, 'POST', '/admin/metrics/token')
+    const page = await open(desktop, token)
+    await page.goto(`${origin}/settings/health#alerts`)
+    await page.getByRole('heading', { name: 'What to alert on', level: 3 }).waitFor()
+    await sleep(1500)
+    const alerts = page.locator('#alerts > section')
+    await shot(page, 'alerts', { target: alerts.locator('form') })
+    await shot(page, 'alerts-sent', { target: alerts.locator(':scope > div').filter({ has: page.getByRole('heading', { name: 'Recent alerts' }) }) })
+    await shot(page, 'alerts-metrics', { target: alerts.locator(':scope > div').filter({ has: page.getByRole('heading', { name: 'Prometheus metrics' }) }) })
+    await page.context().close()
+    await api(token, 'DELETE', '/admin/metrics/token')
+    received.close()
   }
 
   // --- People, profiles, themes ---

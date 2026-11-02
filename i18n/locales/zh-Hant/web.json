@@ -1156,5 +1156,84 @@
       "older": "顯示較早的行",
       "empty": "沒有符合的行。"
     }
+  },
+  "alerts": {
+    "title": "警示",
+    "intro": "有需要你處理的狀況時，透過電子郵件或訊息通知你。警示會直接從這台伺服器傳送到你自己的郵件伺服器或 Webhook，不會經過其他任何地方。",
+    "firing": "正在發生",
+    "rules": {
+      "title": "何時發出警示",
+      "disk": "磁碟快滿了",
+      "percent": "已用百分比",
+      "folder": "無法讀取某個媒體庫資料夾",
+      "folderHint": "持續 2 分鐘後才警示，網路共用短暫中斷不算。",
+      "errors": "錯誤不斷出現",
+      "transcodes": "轉碼接連失敗",
+      "count": "次數",
+      "minutes": "分鐘內",
+      "restart": "伺服器啟動或重新啟動",
+      "restartHint": "說明它是否已更新，或是否未正常關閉就停止了。"
+    },
+    "email": {
+      "title": "電子郵件",
+      "on": "透過電子郵件傳送警示",
+      "host": "郵件伺服器",
+      "port": "連接埠",
+      "security": "連線方式",
+      "none": "不加密",
+      "username": "使用者名稱",
+      "password": "密碼",
+      "from": "寄件者",
+      "to": "收件者",
+      "toHint": "多個地址請以逗號分隔。密碼留空即保留已儲存的密碼。"
+    },
+    "webhooks": {
+      "title": "Webhook",
+      "intro": "將警示傳送到 Discord、ntfy、Home Assistant 或任何接收 JSON 的地方。",
+      "kind": "類型",
+      "kinds": {
+        "discord": "Discord",
+        "ntfy": "ntfy",
+        "homeassistant": "Home Assistant",
+        "json": "其他 (JSON)"
+      },
+      "name": "名稱",
+      "url": "位址",
+      "saved": "除非輸入新位址，否則會繼續使用已儲存的位址。",
+      "token": "存取權杖（選用）",
+      "add": "新增 Webhook",
+      "remove": "移除",
+      "help": {
+        "discord": "在 Discord 中開啟頻道設定，接著前往「整合」→「Webhook」→「新 Webhook」，並複製其 URL。",
+        "ntfy": "你的主題位址，例如 https://ntfy.sh/a-long-secret-topic，或你自己 ntfy 伺服器上的位址。",
+        "homeassistant": "建立一個使用 Webhook 觸發條件的自動化，然後將觸發條件的位址貼到這裡。",
+        "json": "Matinee 會將每則警示以 JSON 傳送，包含標題、訊息、等級、規則、時間和伺服器。"
+      }
+    },
+    "noChannels": "設定電子郵件或 Webhook 才能收到警示。",
+    "save": "儲存",
+    "saved": "已儲存",
+    "test": "傳送測試警示",
+    "testSent": "測試警示已送達 {{total}} 處中的 {{sent}} 處。",
+    "history": {
+      "title": "最近的警示",
+      "none": "還沒有警示。",
+      "delivered": "已送達 {{total}} 處中的 {{sent}} 處",
+      "notSent": "沒有傳送目標",
+      "resolved": "已解決"
+    },
+    "metrics": {
+      "title": "Prometheus 指標",
+      "intro": "供你網路中的 Prometheus、Grafana 等監控使用：在需要權杖的位址上提供此頁面的各項數據。",
+      "off": "已關閉。",
+      "turnOn": "開啟",
+      "turnOff": "關閉",
+      "newToken": "新權杖",
+      "address": "位址",
+      "token": "權杖",
+      "copy": "複製",
+      "copied": "已複製",
+      "example": "用於 prometheus.yml"
+    }
   }
 }

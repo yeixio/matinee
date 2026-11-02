@@ -1167,5 +1167,84 @@
       "older": "Näytä vanhemmat rivit",
       "empty": "Mikään rivi ei täsmää."
     }
+  },
+  "alerts": {
+    "title": "Hälytykset",
+    "intro": "Saat sähköpostin tai viestin, kun jokin vaatii huomiotasi. Hälytykset kulkevat suoraan tältä palvelimelta omalle sähköpostipalvelimellesi tai webhookeihisi, eivätkä minnekään muualle.",
+    "firing": "Käynnissä nyt",
+    "rules": {
+      "title": "Mistä hälytetään",
+      "disk": "Levy on melkein täynnä",
+      "percent": "Prosenttia täynnä",
+      "folder": "Kirjaston kansiota ei voi lukea",
+      "folderHint": "2 minuutin jälkeen, jottei hetkeksi katkeava verkkojako laske.",
+      "errors": "Virheitä kertyy",
+      "transcodes": "Muunnokset epäonnistuvat yhä uudelleen",
+      "count": "Montako",
+      "minutes": "Minuutin sisällä",
+      "restart": "Palvelin käynnistyy tai käynnistyy uudelleen",
+      "restartHint": "Kertoo, päivitettiinkö se tai pysähtyikö se sammumatta siististi."
+    },
+    "email": {
+      "title": "Sähköposti",
+      "on": "Lähetä hälytykset sähköpostilla",
+      "host": "Sähköpostipalvelin",
+      "port": "Portti",
+      "security": "Yhteys",
+      "none": "Salaamaton",
+      "username": "Käyttäjätunnus",
+      "password": "Salasana",
+      "from": "Lähettäjä",
+      "to": "Vastaanottaja",
+      "toHint": "Erota useat osoitteet pilkuilla. Jätä salasana tyhjäksi, niin tallennettu säilyy."
+    },
+    "webhooks": {
+      "title": "Webhookit",
+      "intro": "Lähetä hälytykset Discordiin, ntfy:hin, Home Assistantiin tai mihin tahansa, joka ottaa vastaan JSONia.",
+      "kind": "Tyyppi",
+      "kinds": {
+        "discord": "Discord",
+        "ntfy": "ntfy",
+        "homeassistant": "Home Assistant",
+        "json": "Muu (JSON)"
+      },
+      "name": "Nimi",
+      "url": "Osoite",
+      "saved": "Tallennettu osoite säilyy, ellet anna uutta.",
+      "token": "Käyttöoikeustunnus (valinnainen)",
+      "add": "Lisää webhook",
+      "remove": "Poista",
+      "help": {
+        "discord": "Avaa Discordissa kanavan asetukset, sitten Integraatiot → Webhookit → Uusi webhook, ja kopioi sen URL.",
+        "ntfy": "Aiheesi osoite, kuten https://ntfy.sh/pitka-salainen-aihe, tai omalla ntfy-palvelimellasi oleva.",
+        "homeassistant": "Luo automaatio, jossa on Webhook-laukaisin, ja liitä laukaisimen osoite tähän.",
+        "json": "Matinee lähettää jokaisen hälytyksen JSONina: otsikko, viesti, taso, sääntö, aika ja palvelin."
+      }
+    },
+    "noChannels": "Määritä sähköposti tai webhook, niin saat hälytyksiä.",
+    "save": "Tallenna",
+    "saved": "Tallennettu",
+    "test": "Lähetä testihälytys",
+    "testSent": "Testihälytys toimitettiin {{sent}}/{{total}} kohteeseen.",
+    "history": {
+      "title": "Viimeisimmät hälytykset",
+      "none": "Ei vielä hälytyksiä.",
+      "delivered": "toimitettu {{sent}}/{{total}} kohteeseen",
+      "notSent": "ei minne lähettää",
+      "resolved": "Ratkaistu"
+    },
+    "metrics": {
+      "title": "Prometheus-mittarit",
+      "intro": "Prometheukselle, Grafanalle ja muulle valvonnalle verkossasi: tämän sivun lukemat osoitteessa, joka vaatii tunnuksen.",
+      "off": "Pois päältä.",
+      "turnOn": "Ota käyttöön",
+      "turnOff": "Poista käytöstä",
+      "newToken": "Uusi tunnus",
+      "address": "Osoite",
+      "token": "Tunnus",
+      "copy": "Kopioi",
+      "copied": "Kopioitu",
+      "example": "Tiedostoon prometheus.yml"
+    }
   }
 }
