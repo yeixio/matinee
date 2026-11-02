@@ -173,3 +173,50 @@ func TestPasswordLoginNamesDevice(t *testing.T) {
 		t.Fatalf("devices: %+v", devices)
 	}
 }
+
+// A TV set up from a phone: the TV asks for a code with the secret from its
+// QR code, and the phone finds that code by the secret and approves it.
+func TestPairedDeviceCode(t *testing.T) {
+	admin, _ := newTestServer(t)
+	admin.do("POST", "/api/v1/setup", credentials{"admin", "correct horse"}, nil)
+	var login struct{ Token string }
+	admin.do("POST", "/api/v1/auth/login", credentials{"admin", "correct horse"}, &login)
+	admin.token = login.Token
+
+	tv := &client{t: t, base: admin.base}
+	const pair = "q7RkG1d0xV3mZ8pL2wYc9A"
+	if code := tv.do("POST", "/api/v1/auth/device", map[string]string{"deviceName": "Living room", "platform": "tvos", "pairId": "short"}, nil); code != http.StatusBadRequest {
+		t.Fatalf("a guessable pairing secret: %d", code)
+	}
+	// Before the TV asks, the phone hears nothing yet.
+	if code := admin.do("GET", "/api/v1/auth/device/pair/"+pair, nil, nil); code != http.StatusNotFound {
+		t.Fatalf("before the TV asks: %d", code)
+	}
+	var start struct{ DeviceCode, UserCode string }
+	if code := tv.do("POST", "/api/v1/auth/device", map[string]string{"deviceName": "Living room", "platform": "tvos", "pairId": pair}, &start); code != 200 {
+		t.Fatalf("start: %d", code)
+	}
+	// Finding it needs a signed-in person, like typing the code does.
+	if code := tv.do("GET", "/api/v1/auth/device/pair/"+pair, nil, nil); code != http.StatusUnauthorized {
+		t.Fatalf("without signing in: %d", code)
+	}
+	if code := admin.do("GET", "/api/v1/auth/device/pair/"+pair+"x", nil, nil); code != http.StatusNotFound {
+		t.Fatalf("another secret: %d", code)
+	}
+	var found struct{ UserCode, DeviceName, Platform string }
+	if code := admin.do("GET", "/api/v1/auth/device/pair/"+pair, nil, &found); code != 200 ||
+		found.UserCode != start.UserCode || found.DeviceName != "Living room" || found.Platform != "tvos" {
+		t.Fatalf("find by secret: %d %+v", code, found)
+	}
+	if code := admin.do("POST", "/api/v1/auth/device/"+found.UserCode+"/approve", nil, nil); code != http.StatusNoContent {
+		t.Fatalf("approve: %d", code)
+	}
+	// Approved, it's no longer waiting.
+	if code := admin.do("GET", "/api/v1/auth/device/pair/"+pair, nil, nil); code != http.StatusNotFound {
+		t.Fatalf("after approval: %d", code)
+	}
+	var res struct{ Status, Token string }
+	if code := tv.do("POST", "/api/v1/auth/device/token", map[string]string{"deviceCode": start.DeviceCode}, &res); code != 200 || res.Token == "" {
+		t.Fatalf("TV signed in: %d %+v", code, res)
+	}
+}

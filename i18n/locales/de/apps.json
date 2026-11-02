@@ -53,7 +53,11 @@
     "noneFound": "In diesem Netzwerk wurde kein Server gefunden. Gib die Adresse ein, unter der du Matinee im Browser öffnest.",
     "connect": "Verbinden",
     "stillLooking": "Suche noch. Sobald dein Server auftaucht, erscheint er hier.",
-    "connectTo": "Mit {{name}} verbinden"
+    "connectTo": "Mit {{name}} verbinden",
+    "phoneTitle": "Mit dem Handy einrichten",
+    "phoneHint": "Scanne ihn mit der Kamera deines Handys. Auf dem Handy muss die Matinee-App angemeldet sein, im selben WLAN wie dieser Fernseher.",
+    "phoneFound": "Wird mit {{name}} eingerichtet…",
+    "phoneQrLabel": "QR-Code, um diesen Fernseher mit dem Handy einzurichten"
   },
   "signIn": {
     "title": "Anmelden",
@@ -67,7 +71,32 @@
     "gettingCode": "Code wird abgerufen",
     "howTo": "Öffne auf einem angemeldeten Computer oder Handy\n<url>{{url}}</url>\nund gib diesen Code ein.",
     "newCode": "Neuen Code holen",
-    "waiting": "Warte auf Bestätigung…"
+    "waiting": "Warte auf Bestätigung…",
+    "qrHint": "Oder scanne ihn mit der Kamera deines Handys, um die Seite mit eingetragenem Code zu öffnen.",
+    "qrLabel": "QR-Code der Anmeldeseite mit diesem Code",
+    "finishOnPhone": "Dein Handy meldet diesen Fernseher an…"
+  },
+  "setUpTv": {
+    "title": "Fernseher einrichten",
+    "settingsHint": "Matinee auf einem Fernseher anmelden, ohne mit der Fernbedienung zu tippen.",
+    "thisTv": "Dieser Fernseher",
+    "confirm": "Diesen Fernseher mit <b>{{server}}</b> einrichten? Er wird als <b>{{name}}</b> angemeldet.",
+    "setUp": "Fernseher einrichten",
+    "working": "Der Fernseher erfährt, wo dein Server ist…",
+    "sameWifi": "Lass dieses Handy im selben WLAN wie den Fernseher, bis es fertig ist.",
+    "timeout": "Der Fernseher hat nicht geantwortet. Prüfe, ob dieses Handy im selben WLAN wie der Fernseher ist und der Fernseher noch seinen QR-Code zeigt, und versuche es dann erneut.",
+    "done": "{{tv}} ist angemeldet",
+    "doneHint": "Er ist bereit zum Schauen.",
+    "declined": "{{tv}} wurde nicht angemeldet",
+    "intro": "Öffne Matinee auf dem Fernseher und scanne den angezeigten QR-Code mit der Kamera dieses Handys. Oder gib hier den Code ein, den der Fernseher zeigt.",
+    "introCode": "Gib den Code ein, den der Fernseher zeigt.",
+    "code": "Code auf dem Fernseher",
+    "next": "Weiter",
+    "wantsToSignIn": "möchte sich als <b>{{name}}</b> anmelden",
+    "approve": "Anmelden",
+    "decline": "Nicht anmelden",
+    "signInFirst": "Melde dich zuerst auf diesem Handy an. Der Fernseher wird als du angemeldet.",
+    "onPhone": "Richte einen Fernseher in der Matinee-App auf deinem Handy ein: Einstellungen, dann Fernseher einrichten."
   },
   "home": {
     "watchDownloads": "Deine Downloads ansehen",

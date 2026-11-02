@@ -53,7 +53,11 @@
     "noneFound": "Vi hittade ingen server i det här nätverket. Skriv in adressen du öppnar Matinee på i en webbläsare.",
     "connect": "Anslut",
     "stillLooking": "Letar fortfarande. Om din server dyker upp visas den här.",
-    "connectTo": "Anslut till {{name}}"
+    "connectTo": "Anslut till {{name}}",
+    "phoneTitle": "Konfigurera med mobilen",
+    "phoneHint": "Skanna den med mobilens kamera. Mobilen behöver Matinee-appen, inloggad, på samma wifi som den här tv:n.",
+    "phoneFound": "Konfigurerar med {{name}}…",
+    "phoneQrLabel": "QR-kod för att konfigurera den här tv:n med mobilen"
   },
   "signIn": {
     "title": "Logga in",
@@ -67,7 +71,32 @@
     "gettingCode": "Hämtar en kod",
     "howTo": "Öppna på en dator eller telefon som är inloggad\n<url>{{url}}</url>\noch ange den här koden.",
     "newCode": "Hämta en ny kod",
-    "waiting": "Väntar på godkännande…"
+    "waiting": "Väntar på godkännande…",
+    "qrHint": "Eller skanna den med mobilens kamera för att öppna sidan med koden ifylld.",
+    "qrLabel": "QR-kod till inloggningssidan med den här koden",
+    "finishOnPhone": "Din mobil loggar in den här tv:n…"
+  },
+  "setUpTv": {
+    "title": "Konfigurera en tv",
+    "settingsHint": "Logga in Matinee på en tv utan att skriva med fjärrkontrollen.",
+    "thisTv": "Den här tv:n",
+    "confirm": "Konfigurera den här tv:n med <b>{{server}}</b>? Den loggas in som <b>{{name}}</b>.",
+    "setUp": "Konfigurera tv",
+    "working": "Berättar för tv:n var din server finns…",
+    "sameWifi": "Håll mobilen på samma wifi som tv:n tills det är klart.",
+    "timeout": "Tv:n svarade inte. Kontrollera att mobilen är på samma wifi som tv:n och att tv:n fortfarande visar sin QR-kod, och försök igen.",
+    "done": "{{tv}} är inloggad",
+    "doneHint": "Den är redo att titta.",
+    "declined": "{{tv}} loggades inte in",
+    "intro": "Öppna Matinee på tv:n och skanna QR-koden den visar med mobilens kamera. Eller skriv koden som tv:n visar här.",
+    "introCode": "Skriv koden som tv:n visar.",
+    "code": "Kod på tv:n",
+    "next": "Nästa",
+    "wantsToSignIn": "vill logga in som <b>{{name}}</b>",
+    "approve": "Logga in",
+    "decline": "Logga inte in",
+    "signInFirst": "Logga in på den här mobilen först. Tv:n loggas in som du.",
+    "onPhone": "Konfigurera en tv från Matinee-appen i mobilen: Inställningar, sedan Konfigurera en tv."
   },
   "home": {
     "watchDownloads": "Titta på dina nedladdningar",

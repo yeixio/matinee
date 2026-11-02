@@ -1,6 +1,6 @@
 ---
 title: Signing in a device
-description: Sign in a TV or phone by typing a short code into a browser, and see or sign out every device you use.
+description: Sign in a TV by scanning a QR code with your phone or typing a short code, set up a new TV from your phone, and see or sign out every device you use.
 sidebar:
   order: 2
 ---
@@ -14,6 +14,37 @@ Typing a password with a TV remote is no fun, so the apps can sign in with a cod
 ![The Sign in a device page, waiting for a code](../images/link.webp)
 
 The app signs in by itself a moment later, as you.
+
+<!-- since: v0.1.13 -->
+## Scan the TV's QR code
+
+The Apple TV, Android TV and Google TV apps, and Matinee on Samsung and LG TVs, show a QR code next to the code. Point your phone's camera at it: it opens `<your server>/link` on your phone with the code filled in. Sign in there if your phone's browser isn't already, then approve the TV.
+
+![The TV sign-in screen, with a QR code next to the code](../images/app-tv-sign-in.webp)
+
+## Approve from the phone app
+
+You don't need a browser if Matinee is on your phone. In the phone app, go to **Settings → Set up a TV**, type the code the TV shows and tap **Next**, then **Sign in**. The TV is signed in as whoever is signed in on the phone.
+
+![Approving a TV's code in the phone app](../images/app-phone-tv-code.webp)
+
+## Set up a new TV with your phone
+
+A TV that has never connected to your server, such as a friend's TV at their home, would otherwise need the server's address typed with the remote. Instead, when the Apple TV or Android TV app doesn't find a server on its network, it shows **Set up with your phone** with a QR code.
+
+1. On the phone, sign in to the Matinee app with the account the TV should use. A friend signs in with the account from [their invite](/docs/household/friends/).
+2. Put the phone on the same Wi-Fi as the TV.
+3. Scan the TV's QR code with the phone's camera. It opens the Matinee app on **Set up a TV**.
+4. Tap **Set up TV**.
+
+The phone tells the TV your server's address over the home network, the TV connects to your server, and the phone approves its sign-in. Nothing goes through Yeix or any other server: the phone and TV talk only to each other and to your server. The QR code holds a one-time secret, and only a phone that scanned it can approve the TV.
+
+![Set up with your phone on a TV that hasn't found a server](../images/app-tv-set-up.webp)
+
+![The phone app setting up a TV from its QR code](../images/app-phone-set-up-tv.webp)
+
+If the phone says the TV didn't answer, check that both are on the same Wi-Fi (not a guest network that keeps devices apart) and that the TV still shows its QR code, then tap **Try again**. Setting up with your phone needs the TV to reach your server at the address the phone uses, so for a TV away from your home that needs [remote access](/docs/server/remote-access/) on.
+<!-- /since -->
 
 ## Your devices
 

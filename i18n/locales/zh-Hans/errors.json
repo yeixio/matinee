@@ -207,6 +207,7 @@
   "pick_at_least_one_library_to_share": "至少选择一个要共享的媒体库",
   "that_isnt_in_a_library_shared_with_you": "它不在共享给你的媒体库中",
   "that_session_is_still_going_join_it": "该会话仍在进行；请加入",
+  "that_tv_hasnt_asked_to_sign_in_yet": "那台电视还没有请求登录",
   "that_watch_together_code_doesnt_work_it_may_have_ended": "这个一起看代码无效；会话可能已结束",
   "this_invite_has_expired_ask_for_another": "这个邀请已过期；请再要一个",
   "this_invite_link_doesnt_work_ask_for_another": "这个邀请链接无效；请再要一个",

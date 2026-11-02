@@ -53,7 +53,11 @@
     "noneFound": "Nie znaleźliśmy serwera w tej sieci. Wpisz adres, pod którym otwierasz Matinee w przeglądarce.",
     "connect": "Połącz",
     "stillLooking": "Nadal szukamy. Jeśli Twój serwer się pojawi, zobaczysz go tutaj.",
-    "connectTo": "Połącz z {{name}}"
+    "connectTo": "Połącz z {{name}}",
+    "phoneTitle": "Skonfiguruj telefonem",
+    "phoneHint": "Zeskanuj go aparatem telefonu. Telefon musi mieć zalogowaną aplikację Matinee i być w tej samej sieci Wi-Fi co ten telewizor.",
+    "phoneFound": "Konfigurowanie z {{name}}…",
+    "phoneQrLabel": "Kod QR do skonfigurowania tego telewizora telefonem"
   },
   "signIn": {
     "title": "Zaloguj się",
@@ -67,7 +71,32 @@
     "gettingCode": "Pobieranie kodu",
     "howTo": "Na zalogowanym komputerze lub telefonie otwórz\n<url>{{url}}</url>\ni wpisz ten kod.",
     "newCode": "Pobierz nowy kod",
-    "waiting": "Czekanie na zatwierdzenie…"
+    "waiting": "Czekanie na zatwierdzenie…",
+    "qrHint": "Albo zeskanuj go aparatem telefonu, aby otworzyć tę stronę z wpisanym kodem.",
+    "qrLabel": "Kod QR strony logowania z tym kodem",
+    "finishOnPhone": "Twój telefon loguje ten telewizor…"
+  },
+  "setUpTv": {
+    "title": "Skonfiguruj telewizor",
+    "settingsHint": "Zaloguj Matinee na telewizorze bez pisania pilotem.",
+    "thisTv": "Ten telewizor",
+    "confirm": "Skonfigurować ten telewizor z <b>{{server}}</b>? Zostanie zalogowany jako <b>{{name}}</b>.",
+    "setUp": "Skonfiguruj telewizor",
+    "working": "Przekazywanie telewizorowi, gdzie jest twój serwer…",
+    "sameWifi": "Trzymaj ten telefon w tej samej sieci Wi-Fi co telewizor, aż skończy.",
+    "timeout": "Telewizor nie odpowiedział. Sprawdź, czy ten telefon jest w tej samej sieci Wi-Fi co telewizor i czy telewizor nadal pokazuje kod QR, a potem spróbuj ponownie.",
+    "done": "{{tv}} jest zalogowany",
+    "doneHint": "Można oglądać.",
+    "declined": "{{tv}} nie został zalogowany",
+    "intro": "Otwórz Matinee na telewizorze i zeskanuj pokazany kod QR aparatem tego telefonu. Albo wpisz tutaj kod, który pokazuje telewizor.",
+    "introCode": "Wpisz kod, który pokazuje telewizor.",
+    "code": "Kod na telewizorze",
+    "next": "Dalej",
+    "wantsToSignIn": "chce zalogować się jako <b>{{name}}</b>",
+    "approve": "Zaloguj",
+    "decline": "Nie loguj",
+    "signInFirst": "Najpierw zaloguj się na tym telefonie. Telewizor zostanie zalogowany jako ty.",
+    "onPhone": "Skonfiguruj telewizor w aplikacji Matinee na telefonie: Ustawienia, potem Skonfiguruj telewizor."
   },
   "home": {
     "watchDownloads": "Oglądaj pobrane",
