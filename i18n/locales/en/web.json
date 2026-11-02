@@ -1167,5 +1167,84 @@
       "older": "Show older lines",
       "empty": "No lines match."
     }
+  },
+  "alerts": {
+    "title": "Alerts",
+    "intro": "Get an email or a message when something needs you. Alerts go straight from this server to your own mail server or webhooks, and nowhere else.",
+    "firing": "Happening now",
+    "rules": {
+      "title": "What to alert on",
+      "disk": "A disk is almost full",
+      "percent": "Percent full",
+      "folder": "A library folder can't be read",
+      "folderHint": "After 2 minutes, so a network share that drops for a moment doesn't count.",
+      "errors": "Errors pile up",
+      "transcodes": "Transcodes keep failing",
+      "count": "How many",
+      "minutes": "Within minutes",
+      "restart": "The server starts or restarts",
+      "restartHint": "Says whether it was updated, or stopped without shutting down cleanly."
+    },
+    "email": {
+      "title": "Email",
+      "on": "Send alerts by email",
+      "host": "Mail server",
+      "port": "Port",
+      "security": "Connection",
+      "none": "Not encrypted",
+      "username": "Username",
+      "password": "Password",
+      "from": "From",
+      "to": "To",
+      "toHint": "Separate several addresses with commas. Leave the password empty to keep the saved one."
+    },
+    "webhooks": {
+      "title": "Webhooks",
+      "intro": "Post alerts to Discord, ntfy, Home Assistant, or anything else that takes JSON.",
+      "kind": "Kind",
+      "kinds": {
+        "discord": "Discord",
+        "ntfy": "ntfy",
+        "homeassistant": "Home Assistant",
+        "json": "Other (JSON)"
+      },
+      "name": "Name",
+      "url": "Address",
+      "saved": "The saved address is kept unless you enter a new one.",
+      "token": "Access token (optional)",
+      "add": "Add a webhook",
+      "remove": "Remove",
+      "help": {
+        "discord": "In Discord, open the channel's settings, then Integrations → Webhooks → New Webhook, and copy its URL.",
+        "ntfy": "Your topic's address, such as https://ntfy.sh/a-long-secret-topic, or one on your own ntfy server.",
+        "homeassistant": "Make an automation with a Webhook trigger, and paste the trigger's address here.",
+        "json": "Matinee posts each alert as JSON with its title, message, level, rule, time and server."
+      }
+    },
+    "noChannels": "Set up email or a webhook to get alerts.",
+    "save": "Save",
+    "saved": "Saved",
+    "test": "Send a test alert",
+    "testSent": "Test alert delivered to {{sent}} of {{total}}.",
+    "history": {
+      "title": "Recent alerts",
+      "none": "No alerts yet.",
+      "delivered": "delivered to {{sent}} of {{total}}",
+      "notSent": "nowhere to send it",
+      "resolved": "Resolved"
+    },
+    "metrics": {
+      "title": "Prometheus metrics",
+      "intro": "For Prometheus, Grafana and other monitoring on your network: the readings on this page, at an address that needs a token.",
+      "off": "Off.",
+      "turnOn": "Turn on",
+      "turnOff": "Turn off",
+      "newToken": "New token",
+      "address": "Address",
+      "token": "Token",
+      "copy": "Copy",
+      "copied": "Copied",
+      "example": "For prometheus.yml"
+    }
   }
 }

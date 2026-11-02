@@ -1156,5 +1156,84 @@
       "older": "이전 줄 보기",
       "empty": "일치하는 줄이 없습니다."
     }
+  },
+  "alerts": {
+    "title": "알림",
+    "intro": "신경 써야 할 일이 생기면 이메일이나 메시지로 알려 드립니다. 알림은 이 서버에서 내 메일 서버나 웹훅으로 바로 가며, 다른 곳을 거치지 않습니다.",
+    "firing": "지금 발생 중",
+    "rules": {
+      "title": "알림 조건",
+      "disk": "디스크가 거의 가득 참",
+      "percent": "사용률(%)",
+      "folder": "라이브러리 폴더를 읽을 수 없음",
+      "folderHint": "2분이 지난 뒤에 알립니다. 네트워크 공유가 잠깐 끊긴 것은 세지 않습니다.",
+      "errors": "오류가 쌓임",
+      "transcodes": "트랜스코딩이 계속 실패함",
+      "count": "횟수",
+      "minutes": "몇 분 안에",
+      "restart": "서버가 시작되거나 다시 시작됨",
+      "restartHint": "업데이트되었는지, 제대로 종료되지 않고 멈췄는지 알려 줍니다."
+    },
+    "email": {
+      "title": "이메일",
+      "on": "이메일로 알림 보내기",
+      "host": "메일 서버",
+      "port": "포트",
+      "security": "연결 방식",
+      "none": "암호화 안 함",
+      "username": "사용자 이름",
+      "password": "비밀번호",
+      "from": "보내는 사람",
+      "to": "받는 사람",
+      "toHint": "여러 주소는 쉼표로 구분하세요. 저장된 비밀번호를 그대로 쓰려면 비워 두세요."
+    },
+    "webhooks": {
+      "title": "웹훅",
+      "intro": "Discord, ntfy, Home Assistant 등 JSON을 받는 곳이라면 어디든 알림을 보냅니다.",
+      "kind": "종류",
+      "kinds": {
+        "discord": "Discord",
+        "ntfy": "ntfy",
+        "homeassistant": "Home Assistant",
+        "json": "기타(JSON)"
+      },
+      "name": "이름",
+      "url": "주소",
+      "saved": "새 주소를 입력하지 않으면 저장된 주소를 계속 사용합니다.",
+      "token": "액세스 토큰(선택)",
+      "add": "웹훅 추가",
+      "remove": "삭제",
+      "help": {
+        "discord": "Discord에서 채널 설정을 열고 연동 → 웹후크 → 새 웹후크로 가서 URL을 복사하세요.",
+        "ntfy": "토픽 주소입니다. 예: https://ntfy.sh/a-long-secret-topic 또는 직접 운영하는 ntfy 서버의 주소.",
+        "homeassistant": "Webhook 트리거가 있는 자동화를 만들고, 트리거 주소를 여기에 붙여 넣으세요.",
+        "json": "Matinee는 각 알림을 제목, 메시지, 수준, 규칙, 시간, 서버가 담긴 JSON으로 보냅니다."
+      }
+    },
+    "noChannels": "알림을 받으려면 이메일이나 웹훅을 설정하세요.",
+    "save": "저장",
+    "saved": "저장됨",
+    "test": "테스트 알림 보내기",
+    "testSent": "테스트 알림이 {{total}}곳 중 {{sent}}곳에 전달되었습니다.",
+    "history": {
+      "title": "최근 알림",
+      "none": "아직 알림이 없습니다.",
+      "delivered": "{{total}}곳 중 {{sent}}곳에 전달",
+      "notSent": "보낼 곳 없음",
+      "resolved": "해결됨"
+    },
+    "metrics": {
+      "title": "Prometheus 메트릭",
+      "intro": "네트워크의 Prometheus, Grafana 등 모니터링 도구용: 이 페이지의 수치를 토큰이 필요한 주소에서 제공합니다.",
+      "off": "꺼져 있습니다.",
+      "turnOn": "켜기",
+      "turnOff": "끄기",
+      "newToken": "새 토큰",
+      "address": "주소",
+      "token": "토큰",
+      "copy": "복사",
+      "copied": "복사됨",
+      "example": "prometheus.yml용"
+    }
   }
 }

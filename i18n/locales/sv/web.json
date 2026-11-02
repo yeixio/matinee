@@ -1167,5 +1167,84 @@
       "older": "Visa äldre rader",
       "empty": "Inga rader matchar."
     }
+  },
+  "alerts": {
+    "title": "Aviseringar",
+    "intro": "Få ett mejl eller meddelande när något behöver dig. Aviseringar går direkt från den här servern till din egen e-postserver eller dina webhooks, och ingen annanstans.",
+    "firing": "Pågår nu",
+    "rules": {
+      "title": "Vad som ska aviseras",
+      "disk": "En disk är nästan full",
+      "percent": "Procent full",
+      "folder": "En biblioteksmapp kan inte läsas",
+      "folderHint": "Efter 2 minuter, så att en nätverksdelning som försvinner en stund inte räknas.",
+      "errors": "Fel hopar sig",
+      "transcodes": "Omkodningar misslyckas gång på gång",
+      "count": "Hur många",
+      "minutes": "Inom minuter",
+      "restart": "Servern startar eller startar om",
+      "restartHint": "Säger om den uppdaterades, eller stannade utan att stängas av ordentligt."
+    },
+    "email": {
+      "title": "E-post",
+      "on": "Skicka aviseringar via e-post",
+      "host": "E-postserver",
+      "port": "Port",
+      "security": "Anslutning",
+      "none": "Okrypterad",
+      "username": "Användarnamn",
+      "password": "Lösenord",
+      "from": "Från",
+      "to": "Till",
+      "toHint": "Skilj flera adresser åt med kommatecken. Lämna lösenordet tomt för att behålla det sparade."
+    },
+    "webhooks": {
+      "title": "Webhooks",
+      "intro": "Skicka aviseringar till Discord, ntfy, Home Assistant eller något annat som tar emot JSON.",
+      "kind": "Typ",
+      "kinds": {
+        "discord": "Discord",
+        "ntfy": "ntfy",
+        "homeassistant": "Home Assistant",
+        "json": "Annan (JSON)"
+      },
+      "name": "Namn",
+      "url": "Adress",
+      "saved": "Den sparade adressen behålls om du inte anger en ny.",
+      "token": "Åtkomsttoken (valfritt)",
+      "add": "Lägg till en webhook",
+      "remove": "Ta bort",
+      "help": {
+        "discord": "Öppna kanalens inställningar i Discord, sedan Integrationer → Webhooks → Ny webhook, och kopiera dess URL.",
+        "ntfy": "Adressen till ditt ämne, till exempel https://ntfy.sh/ett-langt-hemligt-amne, eller en på din egen ntfy-server.",
+        "homeassistant": "Skapa en automatisering med en Webhook-utlösare och klistra in utlösarens adress här.",
+        "json": "Matinee skickar varje avisering som JSON med rubrik, meddelande, nivå, regel, tid och server."
+      }
+    },
+    "noChannels": "Ställ in e-post eller en webhook för att få aviseringar.",
+    "save": "Spara",
+    "saved": "Sparat",
+    "test": "Skicka en testavisering",
+    "testSent": "Testavisering levererad till {{sent}} av {{total}}.",
+    "history": {
+      "title": "Senaste aviseringar",
+      "none": "Inga aviseringar än.",
+      "delivered": "levererad till {{sent}} av {{total}}",
+      "notSent": "ingenstans att skicka den",
+      "resolved": "Löst"
+    },
+    "metrics": {
+      "title": "Prometheus-mätvärden",
+      "intro": "För Prometheus, Grafana och annan övervakning i ditt nätverk: värdena på den här sidan, på en adress som kräver en token.",
+      "off": "Av.",
+      "turnOn": "Slå på",
+      "turnOff": "Stäng av",
+      "newToken": "Ny token",
+      "address": "Adress",
+      "token": "Token",
+      "copy": "Kopiera",
+      "copied": "Kopierat",
+      "example": "För prometheus.yml"
+    }
   }
 }

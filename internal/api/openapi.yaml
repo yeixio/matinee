@@ -1234,6 +1234,71 @@ paths:
           content:
             text/plain:
               schema: { type: string }
+  /admin/alerts:
+    get:
+      summary: Alert settings, the alerts that are true now, and the latest sent (admins only)
+      description: Passwords, ntfy tokens and webhook addresses never leave the server; webhooks show a hint of their address instead.
+      responses:
+        "200":
+          description: The settings.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/AlertSettings" }
+    put:
+      summary: Change the alert settings (admins only)
+      description: >-
+        A webhook sent with its id keeps its address and token when they're left out, and the email keeps its
+        password while the mail server and username stay the same.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/AlertConfig" }
+      responses:
+        "200":
+          description: The settings as saved.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/AlertSettings" }
+        "400": { $ref: "#/components/responses/Error" }
+  /admin/alerts/test:
+    post:
+      summary: Send a test alert everywhere alerts go (admins only)
+      description: Sends to the settings in the body, if any, so they can be tried before saving; otherwise to the saved ones.
+      requestBody:
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/AlertConfig" }
+      responses:
+        "200":
+          description: How it went.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Alert" }
+        "400": { $ref: "#/components/responses/Error" }
+        "409": { $ref: "#/components/responses/Error" }
+  /admin/metrics:
+    get:
+      summary: Whether Prometheus metrics are on, and their token (admins only)
+      responses:
+        "200":
+          description: The metrics settings.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/MetricsSettings" }
+  /admin/metrics/token:
+    post:
+      summary: Turn Prometheus metrics on with a new token, or change the token (admins only)
+      responses:
+        "200":
+          description: The metrics settings.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/MetricsSettings" }
+    delete:
+      summary: Turn Prometheus metrics off (admins only)
+      responses:
+        "204": { description: Off. }
   /admin/transcodes/{session}:
     delete:
       summary: Stop a running transcode (admins only)
@@ -3477,6 +3542,80 @@ components:
             type: array
             items: { $ref: "#/components/schemas/Item" }
   schemas:
+    Alert:
+      type: object
+      properties:
+        id: { type: string }
+        rule: { type: string, enum: [disk, folder, errors, transcodes, restart, test] }
+        key: { type: string }
+        level: { type: string, enum: [info, warning, critical] }
+        title: { type: string }
+        message: { type: string }
+        time: { type: integer, description: Milliseconds since 1970. }
+        resolved: { type: boolean }
+        sent: { type: integer, description: How many channels got it. }
+        failed: { type: array, items: { type: string }, description: The channels that didn't, and why. }
+    AlertRules:
+      type: object
+      properties:
+        disk: { type: object, properties: { on: { type: boolean }, percent: { type: integer, minimum: 50, maximum: 99 } } }
+        folder: { type: object, properties: { on: { type: boolean } } }
+        errors: { type: object, properties: { on: { type: boolean }, count: { type: integer }, minutes: { type: integer } } }
+        transcodes: { type: object, properties: { on: { type: boolean }, count: { type: integer }, minutes: { type: integer } } }
+        restart: { type: object, properties: { on: { type: boolean } } }
+    AlertEmail:
+      type: object
+      properties:
+        "on": { type: boolean }
+        host: { type: string }
+        port: { type: integer }
+        security: { type: string, enum: [starttls, tls, none] }
+        username: { type: string }
+        password: { type: string, description: Only sent to the server. }
+        from: { type: string }
+        to: { type: string, description: One or more addresses, separated by commas. }
+    AlertConfig:
+      type: object
+      properties:
+        email: { $ref: "#/components/schemas/AlertEmail" }
+        webhooks:
+          type: array
+          items:
+            type: object
+            properties:
+              id: { type: string }
+              kind: { type: string, enum: [discord, ntfy, homeassistant, json] }
+              name: { type: string }
+              url: { type: string }
+              token: { type: string, description: An ntfy access token. }
+        rules: { $ref: "#/components/schemas/AlertRules" }
+    AlertSettings:
+      type: object
+      properties:
+        email:
+          allOf:
+            - { $ref: "#/components/schemas/AlertEmail" }
+            - { type: object, properties: { hasPassword: { type: boolean } } }
+        webhooks:
+          type: array
+          items:
+            type: object
+            properties:
+              id: { type: string }
+              kind: { type: string }
+              name: { type: string }
+              hint: { type: string }
+              hasToken: { type: boolean }
+        rules: { $ref: "#/components/schemas/AlertRules" }
+        firing: { type: array, items: { $ref: "#/components/schemas/Alert" } }
+        history: { type: array, items: { $ref: "#/components/schemas/Alert" }, description: The latest 50, newest first. }
+        links: { type: boolean, description: Alerts link to Server health (MATINEE_PUBLIC_URL is set). }
+    MetricsSettings:
+      type: object
+      properties:
+        "on": { type: boolean }
+        token: { type: string, description: Prometheus sends it as a bearer token. }
+        path: { type: string, example: /metrics }
     PathChange:
       type: object
       description: Turns the start of the other server's paths into Matinee's.

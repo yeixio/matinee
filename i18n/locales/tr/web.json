@@ -1167,5 +1167,84 @@
       "older": "Daha eski satırları göster",
       "empty": "Eşleşen satır yok."
     }
+  },
+  "alerts": {
+    "title": "Uyarılar",
+    "intro": "Bir şey ilgini gerektirdiğinde e-posta veya mesaj al. Uyarılar doğrudan bu sunucudan kendi e-posta sunucuna veya webhook'larına gider, başka hiçbir yere gitmez.",
+    "firing": "Şu anda oluyor",
+    "rules": {
+      "title": "Ne zaman uyarılsın",
+      "disk": "Bir disk neredeyse dolu",
+      "percent": "Doluluk yüzdesi",
+      "folder": "Bir kitaplık klasörü okunamıyor",
+      "folderHint": "2 dakika sonra, böylece bir anlığına kopan ağ paylaşımı sayılmaz.",
+      "errors": "Hatalar birikiyor",
+      "transcodes": "Dönüştürmeler başarısız olmaya devam ediyor",
+      "count": "Kaç tane",
+      "minutes": "Kaç dakika içinde",
+      "restart": "Sunucu başlıyor veya yeniden başlıyor",
+      "restartHint": "Güncellenip güncellenmediğini veya düzgün kapanmadan durup durmadığını söyler."
+    },
+    "email": {
+      "title": "E-posta",
+      "on": "Uyarıları e-postayla gönder",
+      "host": "E-posta sunucusu",
+      "port": "Bağlantı noktası",
+      "security": "Bağlantı",
+      "none": "Şifrelenmemiş",
+      "username": "Kullanıcı adı",
+      "password": "Parola",
+      "from": "Kimden",
+      "to": "Kime",
+      "toHint": "Birden çok adresi virgülle ayır. Kayıtlı parolayı korumak için parolayı boş bırak."
+    },
+    "webhooks": {
+      "title": "Webhook'lar",
+      "intro": "Uyarıları Discord'a, ntfy'ye, Home Assistant'a veya JSON kabul eden başka bir şeye gönder.",
+      "kind": "Tür",
+      "kinds": {
+        "discord": "Discord",
+        "ntfy": "ntfy",
+        "homeassistant": "Home Assistant",
+        "json": "Diğer (JSON)"
+      },
+      "name": "Ad",
+      "url": "Adres",
+      "saved": "Yeni bir adres girmedikçe kayıtlı adres korunur.",
+      "token": "Erişim belirteci (isteğe bağlı)",
+      "add": "Webhook ekle",
+      "remove": "Kaldır",
+      "help": {
+        "discord": "Discord'da kanalın ayarlarını aç, sonra Entegrasyonlar → Webhook'lar → Yeni Webhook'a git ve URL'sini kopyala.",
+        "ntfy": "Konunun adresi, örneğin https://ntfy.sh/uzun-gizli-bir-konu ya da kendi ntfy sunucundaki bir adres.",
+        "homeassistant": "Webhook tetikleyicili bir otomasyon oluştur ve tetikleyicinin adresini buraya yapıştır.",
+        "json": "Matinee her uyarıyı başlık, mesaj, düzey, kural, zaman ve sunucu bilgisiyle JSON olarak gönderir."
+      }
+    },
+    "noChannels": "Uyarı almak için e-posta veya bir webhook ayarla.",
+    "save": "Kaydet",
+    "saved": "Kaydedildi",
+    "test": "Test uyarısı gönder",
+    "testSent": "Test uyarısı {{total}} hedefin {{sent}} tanesine ulaştı.",
+    "history": {
+      "title": "Son uyarılar",
+      "none": "Henüz uyarı yok.",
+      "delivered": "{{total}} hedefin {{sent}} tanesine ulaştı",
+      "notSent": "gönderilecek yer yok",
+      "resolved": "Çözüldü"
+    },
+    "metrics": {
+      "title": "Prometheus ölçümleri",
+      "intro": "Ağındaki Prometheus, Grafana ve diğer izleme araçları için: bu sayfadaki değerler, belirteç gerektiren bir adreste.",
+      "off": "Kapalı.",
+      "turnOn": "Aç",
+      "turnOff": "Kapat",
+      "newToken": "Yeni belirteç",
+      "address": "Adres",
+      "token": "Belirteç",
+      "copy": "Kopyala",
+      "copied": "Kopyalandı",
+      "example": "prometheus.yml için"
+    }
   }
 }

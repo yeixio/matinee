@@ -1156,5 +1156,84 @@
       "older": "显示更早的行",
       "empty": "没有匹配的行。"
     }
+  },
+  "alerts": {
+    "title": "提醒",
+    "intro": "出现需要你处理的情况时，通过邮件或消息通知你。提醒直接从这台服务器发送到你自己的邮件服务器或 Webhook，不经过其他任何地方。",
+    "firing": "正在发生",
+    "rules": {
+      "title": "何时提醒",
+      "disk": "磁盘快满了",
+      "percent": "已用百分比",
+      "folder": "无法读取某个媒体库文件夹",
+      "folderHint": "持续 2 分钟后才提醒，网络共享短暂断开不算。",
+      "errors": "错误不断出现",
+      "transcodes": "转码接连失败",
+      "count": "次数",
+      "minutes": "分钟内",
+      "restart": "服务器启动或重启",
+      "restartHint": "说明它是否更新过，或是否未正常关闭就停止了。"
+    },
+    "email": {
+      "title": "邮件",
+      "on": "通过邮件发送提醒",
+      "host": "邮件服务器",
+      "port": "端口",
+      "security": "连接方式",
+      "none": "不加密",
+      "username": "用户名",
+      "password": "密码",
+      "from": "发件人",
+      "to": "收件人",
+      "toHint": "多个地址请用逗号分隔。密码留空则保留已保存的密码。"
+    },
+    "webhooks": {
+      "title": "Webhook",
+      "intro": "把提醒发送到 Discord、ntfy、Home Assistant 或任何接收 JSON 的地方。",
+      "kind": "类型",
+      "kinds": {
+        "discord": "Discord",
+        "ntfy": "ntfy",
+        "homeassistant": "Home Assistant",
+        "json": "其他 (JSON)"
+      },
+      "name": "名称",
+      "url": "地址",
+      "saved": "除非输入新地址，否则继续使用已保存的地址。",
+      "token": "访问令牌（可选）",
+      "add": "添加 Webhook",
+      "remove": "移除",
+      "help": {
+        "discord": "在 Discord 中打开频道设置，然后依次进入“整合” → “Webhook” → “新 Webhook”，复制它的 URL。",
+        "ntfy": "你的主题地址，例如 https://ntfy.sh/a-long-secret-topic，或你自己 ntfy 服务器上的地址。",
+        "homeassistant": "创建一个使用 Webhook 触发器的自动化，然后把触发器的地址粘贴到这里。",
+        "json": "Matinee 会把每条提醒以 JSON 发送，包含标题、消息、级别、规则、时间和服务器。"
+      }
+    },
+    "noChannels": "设置邮件或 Webhook 才能收到提醒。",
+    "save": "保存",
+    "saved": "已保存",
+    "test": "发送测试提醒",
+    "testSent": "测试提醒已送达 {{total}} 处中的 {{sent}} 处。",
+    "history": {
+      "title": "最近的提醒",
+      "none": "还没有提醒。",
+      "delivered": "已送达 {{total}} 处中的 {{sent}} 处",
+      "notSent": "没有发送目标",
+      "resolved": "已解决"
+    },
+    "metrics": {
+      "title": "Prometheus 指标",
+      "intro": "供你网络中的 Prometheus、Grafana 等监控使用：在需要令牌的地址上提供此页面的各项数据。",
+      "off": "已关闭。",
+      "turnOn": "开启",
+      "turnOff": "关闭",
+      "newToken": "新令牌",
+      "address": "地址",
+      "token": "令牌",
+      "copy": "复制",
+      "copied": "已复制",
+      "example": "用于 prometheus.yml"
+    }
   }
 }

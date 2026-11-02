@@ -11,6 +11,10 @@ sidebar:
 Admins can open **Settings → Server health** to see what the server is doing and what went wrong lately: warnings and errors, folders that can't be read, a database that doesn't answer, stuck transcodes, and the log. See [Server health](/docs/server/server-health/).
 <!-- /since -->
 
+<!-- since: v0.1.12 -->
+To hear about problems without looking, turn on [alerts](/docs/server/alerts/): an email or a message when a disk fills up, a network share drops, errors pile up or transcodes fail.
+<!-- /since -->
+
 ## Posters and descriptions are missing
 
 - Check that the server has a TMDB key (`MATINEE_TMDB_KEY`). See [Posters and details](/docs/getting-started/posters-and-details/).

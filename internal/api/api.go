@@ -19,6 +19,7 @@ import (
 	"sync/atomic"
 	"time"
 
+	"github.com/yeixio/matinee/internal/alerts"
 	"github.com/yeixio/matinee/internal/analyze"
 	"github.com/yeixio/matinee/internal/artwork"
 	"github.com/yeixio/matinee/internal/auth"
@@ -153,6 +154,11 @@ type Server struct {
 	diskBusy   map[string]bool
 	ffmpegOnce sync.Once
 	ffmpegVer  string
+
+	// Alerts emails and posts to webhooks when something needs an admin
+	// (see alerts.go); nil makes one that only sends while the API runs.
+	Alerts     *alerts.Manager
+	alertsOnce sync.Once
 }
 
 // APIVersion is the version of the documented API served under /api/v1
@@ -256,6 +262,12 @@ func (s *Server) routes() []route {
 		{"GET /admin/health", adminOnly, s.getHealth},
 		{"GET /admin/logs", adminOnly, s.getLogs},
 		{"GET /admin/logs/download", adminOnly, s.downloadLogs},
+		{"GET /admin/alerts", adminOnly, s.getAlerts},
+		{"PUT /admin/alerts", adminOnly, s.putAlerts},
+		{"POST /admin/alerts/test", adminOnly, s.testAlerts},
+		{"GET /admin/metrics", adminOnly, s.getMetricsSettings},
+		{"POST /admin/metrics/token", adminOnly, s.newMetricsToken},
+		{"DELETE /admin/metrics/token", adminOnly, s.deleteMetricsToken},
 		{"DELETE /admin/transcodes/{session}", adminOnly, s.stopTranscode},
 
 		{"GET /home", reader, s.home},
@@ -430,6 +442,9 @@ func (s *Server) Handler() http.Handler {
 		// players that were open during an upgrade. New clients use /api/v1.
 		mux.Handle(method+" /api"+path, h)
 	}
+
+	// Prometheus, with the token from Settings (see metrics.go).
+	mux.HandleFunc("GET /metrics", s.metrics)
 
 	mux.HandleFunc("/api/", func(w http.ResponseWriter, r *http.Request) {
 		writeError(w, http.StatusNotFound, "no such endpoint")

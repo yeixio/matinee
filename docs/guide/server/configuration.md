@@ -26,6 +26,10 @@ The server's version is at the bottom of every group.
 Admins also have **Server health**, a dashboard of the server's load, what's playing, background jobs, disk space, warnings and errors, and its log. See [Server health](/docs/server/server-health/).
 <!-- /since -->
 
+<!-- since: v0.1.12 -->
+**Server health** also has **Alerts**, which email you or post to Discord, ntfy or Home Assistant when something needs you, and turns on Prometheus metrics. See [Alerts and metrics](/docs/server/alerts/).
+<!-- /since -->
+
 ![Settings on a computer, with the groups down the left side and Libraries open](../images/settings-groups.webp)
 
 ![Settings on a phone, listing the groups (phone)](../images/phone-settings.webp)

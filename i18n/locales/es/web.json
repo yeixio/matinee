@@ -1178,5 +1178,84 @@
       "older": "Mostrar líneas anteriores",
       "empty": "Ninguna línea coincide."
     }
+  },
+  "alerts": {
+    "title": "Alertas",
+    "intro": "Recibe un correo o un mensaje cuando algo necesite tu atención. Las alertas van directamente de este servidor a tu propio servidor de correo o webhooks, y a ningún otro sitio.",
+    "firing": "Ocurriendo ahora",
+    "rules": {
+      "title": "Cuándo avisar",
+      "disk": "Un disco está casi lleno",
+      "percent": "Porcentaje lleno",
+      "folder": "No se puede leer una carpeta de la biblioteca",
+      "folderHint": "Tras 2 minutos, para que no cuente una carpeta de red que se cae un momento.",
+      "errors": "Se acumulan errores",
+      "transcodes": "Las transcodificaciones siguen fallando",
+      "count": "Cuántos",
+      "minutes": "En minutos",
+      "restart": "El servidor se inicia o se reinicia",
+      "restartHint": "Indica si se actualizó o si se detuvo sin apagarse correctamente."
+    },
+    "email": {
+      "title": "Correo",
+      "on": "Enviar alertas por correo",
+      "host": "Servidor de correo",
+      "port": "Puerto",
+      "security": "Conexión",
+      "none": "Sin cifrar",
+      "username": "Usuario",
+      "password": "Contraseña",
+      "from": "De",
+      "to": "Para",
+      "toHint": "Separa varias direcciones con comas. Deja la contraseña vacía para mantener la guardada."
+    },
+    "webhooks": {
+      "title": "Webhooks",
+      "intro": "Envía alertas a Discord, ntfy, Home Assistant o cualquier otro servicio que acepte JSON.",
+      "kind": "Tipo",
+      "kinds": {
+        "discord": "Discord",
+        "ntfy": "ntfy",
+        "homeassistant": "Home Assistant",
+        "json": "Otro (JSON)"
+      },
+      "name": "Nombre",
+      "url": "Dirección",
+      "saved": "Se mantiene la dirección guardada a menos que escribas una nueva.",
+      "token": "Token de acceso (opcional)",
+      "add": "Añadir un webhook",
+      "remove": "Quitar",
+      "help": {
+        "discord": "En Discord, abre los ajustes del canal, luego Integraciones → Webhooks → Nuevo webhook, y copia su URL.",
+        "ntfy": "La dirección de tu tema, como https://ntfy.sh/un-tema-largo-y-secreto, o una en tu propio servidor ntfy.",
+        "homeassistant": "Crea una automatización con un desencadenante Webhook y pega aquí la dirección del desencadenante.",
+        "json": "Matinee envía cada alerta como JSON con su título, mensaje, nivel, regla, hora y servidor."
+      }
+    },
+    "noChannels": "Configura el correo o un webhook para recibir alertas.",
+    "save": "Guardar",
+    "saved": "Guardado",
+    "test": "Enviar una alerta de prueba",
+    "testSent": "Alerta de prueba entregada a {{sent}} de {{total}}.",
+    "history": {
+      "title": "Alertas recientes",
+      "none": "Aún no hay alertas.",
+      "delivered": "entregada a {{sent}} de {{total}}",
+      "notSent": "sin destino configurado",
+      "resolved": "Resuelta"
+    },
+    "metrics": {
+      "title": "Métricas de Prometheus",
+      "intro": "Para Prometheus, Grafana y otra monitorización en tu red: los datos de esta página, en una dirección que necesita un token.",
+      "off": "Desactivadas.",
+      "turnOn": "Activar",
+      "turnOff": "Desactivar",
+      "newToken": "Nuevo token",
+      "address": "Dirección",
+      "token": "Token",
+      "copy": "Copiar",
+      "copied": "Copiado",
+      "example": "Para prometheus.yml"
+    }
   }
 }

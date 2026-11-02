@@ -1167,5 +1167,84 @@
       "older": "Oudere regels tonen",
       "empty": "Geen regels gevonden."
     }
+  },
+  "alerts": {
+    "title": "Meldingen",
+    "intro": "Krijg een e-mail of bericht als er iets is dat je aandacht nodig heeft. Meldingen gaan rechtstreeks van deze server naar je eigen mailserver of webhooks, en nergens anders heen.",
+    "firing": "Nu actief",
+    "rules": {
+      "title": "Waarvoor melden",
+      "disk": "Een schijf is bijna vol",
+      "percent": "Procent vol",
+      "folder": "Een bibliotheekmap kan niet worden gelezen",
+      "folderHint": "Na 2 minuten, zodat een netwerkshare die even wegvalt niet meetelt.",
+      "errors": "Fouten stapelen zich op",
+      "transcodes": "Transcoderingen blijven mislukken",
+      "count": "Hoeveel",
+      "minutes": "Binnen minuten",
+      "restart": "De server start of herstart",
+      "restartHint": "Zegt of hij is bijgewerkt, of gestopt is zonder netjes af te sluiten."
+    },
+    "email": {
+      "title": "E-mail",
+      "on": "Meldingen per e-mail sturen",
+      "host": "Mailserver",
+      "port": "Poort",
+      "security": "Verbinding",
+      "none": "Niet versleuteld",
+      "username": "Gebruikersnaam",
+      "password": "Wachtwoord",
+      "from": "Van",
+      "to": "Aan",
+      "toHint": "Scheid meerdere adressen met komma's. Laat het wachtwoord leeg om het opgeslagen wachtwoord te houden."
+    },
+    "webhooks": {
+      "title": "Webhooks",
+      "intro": "Stuur meldingen naar Discord, ntfy, Home Assistant of iets anders dat JSON aanneemt.",
+      "kind": "Soort",
+      "kinds": {
+        "discord": "Discord",
+        "ntfy": "ntfy",
+        "homeassistant": "Home Assistant",
+        "json": "Anders (JSON)"
+      },
+      "name": "Naam",
+      "url": "Adres",
+      "saved": "Het opgeslagen adres blijft behouden tenzij je een nieuw adres invult.",
+      "token": "Toegangstoken (optioneel)",
+      "add": "Webhook toevoegen",
+      "remove": "Verwijderen",
+      "help": {
+        "discord": "Open in Discord de instellingen van het kanaal, dan Integraties → Webhooks → Nieuwe webhook, en kopieer de URL.",
+        "ntfy": "Het adres van je onderwerp, zoals https://ntfy.sh/een-lang-geheim-onderwerp, of een op je eigen ntfy-server.",
+        "homeassistant": "Maak een automatisering met een Webhook-trigger en plak hier het adres van de trigger.",
+        "json": "Matinee stuurt elke melding als JSON met titel, bericht, niveau, regel, tijd en server."
+      }
+    },
+    "noChannels": "Stel e-mail of een webhook in om meldingen te krijgen.",
+    "save": "Opslaan",
+    "saved": "Opgeslagen",
+    "test": "Testmelding sturen",
+    "testSent": "Testmelding afgeleverd bij {{sent}} van {{total}}.",
+    "history": {
+      "title": "Recente meldingen",
+      "none": "Nog geen meldingen.",
+      "delivered": "afgeleverd bij {{sent}} van {{total}}",
+      "notSent": "geen bestemming ingesteld",
+      "resolved": "Opgelost"
+    },
+    "metrics": {
+      "title": "Prometheus-statistieken",
+      "intro": "Voor Prometheus, Grafana en andere monitoring op je netwerk: de waarden van deze pagina, op een adres waarvoor een token nodig is.",
+      "off": "Uit.",
+      "turnOn": "Aanzetten",
+      "turnOff": "Uitzetten",
+      "newToken": "Nieuw token",
+      "address": "Adres",
+      "token": "Token",
+      "copy": "Kopiëren",
+      "copied": "Gekopieerd",
+      "example": "Voor prometheus.yml"
+    }
   }
 }
