@@ -260,22 +260,31 @@ func (s *Server) disks(uses []healthUse) []healthDisk {
 		d  health.Disk
 		ok bool
 	}
-	results := make([]result, len(uses))
-	var wg sync.WaitGroup
+	// Folders not made yet fall back to the same existing parent, so each
+	// distinct path is read once.
+	paths := make([]string, len(uses))
+	byPath := map[string]*result{}
 	for i, u := range uses {
+		paths[i] = u.Path
+		if u.Use != "library" {
+			// The server makes its folders when it first needs them.
+			paths[i] = existingParent(u.Path)
+		}
+		byPath[paths[i]] = &result{}
+	}
+	var wg sync.WaitGroup
+	for path, r := range byPath {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
-			path := u.Path
-			if u.Use != "library" {
-				// The server makes its folders when it first needs them.
-				path = existingParent(path)
-			}
-			d, ok := s.diskSpace(path)
-			results[i] = result{d, ok}
+			r.d, r.ok = s.diskSpace(path)
 		}()
 	}
 	wg.Wait()
+	results := make([]result, len(uses))
+	for i := range uses {
+		results[i] = *byPath[paths[i]]
+	}
 	out := []healthDisk{}
 	index := map[health.Disk]int{}
 	for i, u := range uses {
