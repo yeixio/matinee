@@ -758,6 +758,12 @@
         "v4l2m2m": "V4L2 (Raspberry Pi)"
       }
     },
+    "lyrics": {
+      "title": "Şarkı sözleri",
+      "intro": "Şarkının yanında aynı adlı bir .lrc dosyası ya da etiketlerinde sözler olduğunda, şarkılar sözlerini müzikle eş zamanlı gösterir.",
+      "online": "Şarkı sözlerini internette ara",
+      "onlineDetail": "Zamanlanmış sözleri olmayan şarkılar için sunucu, özgür ve açık bir söz veritabanı olan <site>LRCLIB</site>’e sorar. Her şarkının yalnızca sanatçısını, adını, albümünü ve süresini, doğrudan bu sunucudan gönderir."
+    },
     "homeRows": {
       "title": "Ana sayfa",
       "holidays": "Bayram satırları",
@@ -826,7 +832,7 @@
       },
       "content": {
         "title": "İçerik",
-        "hint": "Afişler, podcast ve altyazı arama, fragmanlar ve Ana Sayfa satırları"
+        "hint": "Afişler, podcast ve altyazı arama, şarkı sözleri, fragmanlar ve Ana Sayfa satırları"
       },
       "streaming": {
         "title": "Akış",

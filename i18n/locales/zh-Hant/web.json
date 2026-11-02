@@ -754,6 +754,12 @@
         "v4l2m2m": "V4L2（Raspberry Pi）"
       }
     },
+    "lyrics": {
+      "title": "歌詞",
+      "intro": "如果歌曲旁邊有同名的 .lrc 檔案，或歌曲標籤裡有歌詞，歌詞就會隨音樂同步顯示。",
+      "online": "在線上尋找歌詞",
+      "onlineDetail": "對於沒有同步歌詞的歌曲，伺服器會查詢 <site>LRCLIB</site>，一個免費開放的歌詞資料庫。它只傳送每首歌的演出者、標題、專輯和長度，直接從這台伺服器發出。"
+    },
     "homeRows": {
       "title": "首頁",
       "holidays": "節日列",
@@ -822,7 +828,7 @@
       },
       "content": {
         "title": "內容",
-        "hint": "海報、Podcast 與字幕搜尋、預告片和首頁列"
+        "hint": "海報、Podcast 與字幕搜尋、歌詞、預告片和首頁列"
       },
       "streaming": {
         "title": "串流",

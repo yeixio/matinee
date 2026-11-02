@@ -409,7 +409,11 @@
     "playlistGone": "Tätä soittolistaa ei enää ole",
     "create": "Luo",
     "save": "Tallenna",
-    "delete": "Poista"
+    "delete": "Poista",
+    "lyrics": "Sanat",
+    "noLyrics": "Tälle kappaleelle ei ole sanoja",
+    "instrumental": "Instrumentaali",
+    "lyricsFromLrclib": "Sanat: LRCLIB"
   },
   "books": {
     "overview": "Yleiskatsaus",

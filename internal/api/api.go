@@ -27,6 +27,7 @@ import (
 	"github.com/yeixio/matinee/internal/health"
 	"github.com/yeixio/matinee/internal/hwaccel"
 	"github.com/yeixio/matinee/internal/live"
+	"github.com/yeixio/matinee/internal/lyrics"
 	"github.com/yeixio/matinee/internal/plugin"
 	"github.com/yeixio/matinee/internal/podcast"
 	"github.com/yeixio/matinee/internal/probe"
@@ -59,7 +60,9 @@ type Server struct {
 	Subtitles *subtitle.Converter
 	// Levels works out songs' sound levels for the music visualizer; nil
 	// means the visualizer has nothing to draw from.
-	Levels    *spectrum.Analyzer
+	Levels *spectrum.Analyzer
+	// Lyrics finds songs' words; nil offers none.
+	Lyrics    *lyrics.Finder
 	Web       fs.FS // built web player; nil serves a placeholder
 	Log       *slog.Logger
 	MediaRoot string // where the folder picker starts; empty means /
@@ -279,6 +282,7 @@ func (s *Server) routes() []route {
 		{"GET /items/{id}/children", reader, s.itemChildren},
 		{"GET /items/{id}/tracks", reader, s.itemTracks},
 		{"GET /items/{id}/levels", reader, s.itemLevels},
+		{"GET /items/{id}/lyrics", reader, s.itemLyrics},
 		{"GET /items/{id}/thumbnails", reader, s.itemThumbnails},
 		{"GET /items/{id}/thumbnails/{sheet}", reader, s.thumbnailSheet},
 		{"GET /items/{id}/book", reader, s.getBook},

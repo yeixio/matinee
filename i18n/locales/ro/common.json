@@ -437,7 +437,11 @@
     "playlistGone": "Acest playlist nu mai există",
     "create": "Creează",
     "save": "Salvează",
-    "delete": "Șterge"
+    "delete": "Șterge",
+    "lyrics": "Versuri",
+    "noLyrics": "Nu există versuri pentru această melodie",
+    "instrumental": "Instrumental",
+    "lyricsFromLrclib": "Versuri de la LRCLIB"
   },
   "books": {
     "overview": "Prezentare",

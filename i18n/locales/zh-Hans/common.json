@@ -381,7 +381,11 @@
     "playlistGone": "这个播放列表已不存在",
     "create": "创建",
     "save": "保存",
-    "delete": "删除"
+    "delete": "删除",
+    "lyrics": "歌词",
+    "noLyrics": "这首歌没有歌词",
+    "instrumental": "纯音乐",
+    "lyricsFromLrclib": "歌词来自 LRCLIB"
   },
   "books": {
     "overview": "概览",

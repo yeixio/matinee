@@ -409,7 +409,11 @@
     "playlistGone": "Deze afspeellijst bestaat niet meer",
     "create": "Maken",
     "save": "Opslaan",
-    "delete": "Verwijderen"
+    "delete": "Verwijderen",
+    "lyrics": "Songtekst",
+    "noLyrics": "Geen songtekst voor dit nummer",
+    "instrumental": "Instrumentaal",
+    "lyricsFromLrclib": "Songtekst van LRCLIB"
   },
   "books": {
     "overview": "Overzicht",

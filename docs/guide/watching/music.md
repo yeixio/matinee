@@ -1,6 +1,6 @@
 ---
 title: Music
-description: Browse artists, albums and songs, make playlists, line up a queue, and keep music playing while you browse.
+description: Browse artists, albums and songs, make playlists, line up a queue, read along with lyrics, and keep music playing while you browse.
 sidebar:
   order: 7
 ---
@@ -35,6 +35,28 @@ Click the cover in the player (or the queue button beside the volume) for the fu
 ![The full player, with the queue beside the cover](../images/now-playing.webp)
 
 On a phone, the button at the top right switches between the cover and the queue.
+
+<!-- since: v0.1.13 -->
+## Lyrics
+
+The **Lyrics** button at the top of the full player shows the song's words instead of the queue (on a phone, instead of the cover). When the words are timed, they follow the song: the line being sung lights up and stays near the middle, and three dots fill in during a break. Click a line to play from there. Scroll to read ahead; after a few seconds the words catch up with the song again. Words without times just scroll.
+
+![The full player showing a song's words, the line being sung lit up](../images/lyrics.webp)
+
+Matinee looks for a song's words in these places, and uses the first timed ones it finds:
+
+1. A `.lrc` file next to the song with the same name, such as `01 Opening Credits.lrc` beside `01 Opening Credits.flac`. A `.txt` file with the same name works too, for words without times.
+2. The song's own tags. Most taggers can save lyrics into the file, timed or not.
+3. Online, if an admin turned it on (see below).
+
+If there are only untimed words, those show. A `.lrc` added later shows up within a few minutes, with no scan needed.
+
+### Looking up lyrics online
+
+An admin can turn on **Look up lyrics online** in **Settings → Content → Lyrics**. It's off until then. For songs without timed words of their own, the server then asks [LRCLIB](https://lrclib.net), a free, open lyrics database that needs no account. Your server asks it directly, and sends only each song's artist, title, album and length. What it finds is kept on the server, so each song is looked up once; a song it doesn't have is tried again after a week. Words from LRCLIB say so under them.
+
+![Settings → Content → Lyrics](../images/settings-lyrics.webp)
+<!-- /since -->
 
 ## Play next and Add to queue
 
@@ -79,6 +101,10 @@ The [phone apps](/docs/apps/phone-and-tv/) have the same library, album and arti
 From version 1.0.19 the phone apps have playlists too: the **Playlists** tab, **Add to playlist** in the menu of any song, album or artist (tap **⋯** or hold a song), and **Save as playlist** above the queue. On a playlist's page, **⋯** renames or deletes it, and each song's menu moves it up or down or removes it.
 <!-- /since -->
 
+<!-- since: v0.1.13 -->
+From version 1.0.24 the phone apps show lyrics too: tap the microphone at the top of the full player, and the words take the cover's place. Tap a line to play from there; tap the microphone again for the cover.
+<!-- /since -->
+
 <!-- since: v0.1.3 -->
 ## The visualizer
 
@@ -110,6 +136,12 @@ The music keeps playing while you browse. What's playing shows at the top of the
 From version 1.0.19 you can scrub through the song with the remote. Press up from the player's buttons to reach the bar under the song's name; a dot shows on it. Then left and right go back or ahead 10 seconds (hold to go faster), and a swipe on the Siri Remote does the same. Presses in a row add up: the time under the bar shows where you'll land, and the song moves there once you stop pressing. Select on the bar plays or pauses, and down goes back to the buttons. The rewind and fast forward buttons on remotes that have them skip 10 seconds from anywhere in the player. This works on Apple TV, Android TV, and Samsung and LG TVs.
 
 ![Scrubbing through a song on a TV](../images/app-tv-music-scrub.webp)
+<!-- /since -->
+
+<!-- since: v0.1.13 -->
+From version 1.0.24, **Lyrics** in the player shows the song's words across the screen beside its cover, the line being sung lit up. Play/pause or select pauses, left and right go back or ahead 10 seconds, and back returns to the player.
+
+![A song's words on a TV](../images/app-tv-lyrics.webp)
 <!-- /since -->
 
 **Visualizer** in the player opens the visualizer; left and right on the remote change its look, and play/pause or select pauses.

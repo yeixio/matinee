@@ -409,7 +409,11 @@
     "playlistGone": "Bu çalma listesi artık yok",
     "create": "Oluştur",
     "save": "Kaydet",
-    "delete": "Sil"
+    "delete": "Sil",
+    "lyrics": "Şarkı sözleri",
+    "noLyrics": "Bu şarkının sözleri yok",
+    "instrumental": "Enstrümantal",
+    "lyricsFromLrclib": "Sözler LRCLIB’den"
   },
   "books": {
     "overview": "Genel bakış",

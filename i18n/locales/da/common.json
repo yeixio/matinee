@@ -409,7 +409,11 @@
     "playlistGone": "Denne playliste findes ikke længere",
     "create": "Opret",
     "save": "Gem",
-    "delete": "Slet"
+    "delete": "Slet",
+    "lyrics": "Sangtekst",
+    "noLyrics": "Ingen sangtekst til denne sang",
+    "instrumental": "Instrumental",
+    "lyricsFromLrclib": "Sangtekst fra LRCLIB"
   },
   "books": {
     "overview": "Oversigt",

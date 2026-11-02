@@ -409,7 +409,11 @@
     "playlistGone": "Diese Playlist gibt es nicht mehr",
     "create": "Erstellen",
     "save": "Speichern",
-    "delete": "Löschen"
+    "delete": "Löschen",
+    "lyrics": "Songtext",
+    "noLyrics": "Kein Songtext für diesen Song",
+    "instrumental": "Instrumental",
+    "lyricsFromLrclib": "Songtext von LRCLIB"
   },
   "books": {
     "overview": "Übersicht",

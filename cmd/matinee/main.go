@@ -35,6 +35,7 @@ import (
 	"github.com/yeixio/matinee/internal/intro"
 	"github.com/yeixio/matinee/internal/kube"
 	"github.com/yeixio/matinee/internal/live"
+	"github.com/yeixio/matinee/internal/lyrics"
 	"github.com/yeixio/matinee/internal/metadata"
 	"github.com/yeixio/matinee/internal/plugin"
 	"github.com/yeixio/matinee/internal/podcast"
@@ -227,7 +228,12 @@ func run() error {
 		Covers:    metadata.NewCovers(version.Version, mb, ol),
 		Subtitles: subtitle.NewConverter(cfg.FFmpegPath, cfg.SubtitleDir()),
 		Levels:    spectrum.New(cfg.FFmpegPath, cfg.LevelsDir()),
-		Web:       web.FS(), Log: log, BackgroundCtx: ctx,
+		Lyrics: &lyrics.Finder{
+			Prober: probe.Prober{Path: cfg.FFprobePath},
+			// Only asked when an admin turns on online lyrics in Settings.
+			Online: &lyrics.LRCLIB{UserAgent: "Matinee/" + strings.TrimPrefix(version.Version, "v") + " (+https://matinee.yeix.io)", Dir: cfg.LyricsDir(), Client: &http.Client{Timeout: 15 * time.Second}},
+		},
+		Web: web.FS(), Log: log, BackgroundCtx: ctx,
 		MediaRoot: cfg.MediaRoot, Name: cfg.ServerName,
 		HomeListener: cfg.HomeAddr != "", ThemeDir: cfg.ThemeDir(),
 		PublicURL: cfg.PublicURL,

@@ -465,7 +465,11 @@
     "playlistGone": "Этого плейлиста больше нет",
     "create": "Создать",
     "save": "Сохранить",
-    "delete": "Удалить"
+    "delete": "Удалить",
+    "lyrics": "Текст песни",
+    "noLyrics": "Для этой песни нет текста",
+    "instrumental": "Инструментал",
+    "lyricsFromLrclib": "Текст из LRCLIB"
   },
   "books": {
     "overview": "Обзор",

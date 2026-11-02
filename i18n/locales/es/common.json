@@ -437,7 +437,11 @@
     "playlistGone": "Esta lista ya no existe",
     "create": "Crear",
     "save": "Guardar",
-    "delete": "Eliminar"
+    "delete": "Eliminar",
+    "lyrics": "Letra",
+    "noLyrics": "No hay letra para esta canción",
+    "instrumental": "Instrumental",
+    "lyricsFromLrclib": "Letra de LRCLIB"
   },
   "books": {
     "overview": "Resumen",

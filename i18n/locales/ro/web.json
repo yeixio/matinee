@@ -762,6 +762,12 @@
         "v4l2m2m": "V4L2 (Raspberry Pi)"
       }
     },
+    "lyrics": {
+      "title": "Versuri",
+      "intro": "Melodiile își arată versurile în ritmul muzicii când lângă melodie există un fișier .lrc cu același nume sau versurile sunt în etichetele ei.",
+      "online": "Caută versuri online",
+      "onlineDetail": "Pentru melodiile fără versuri sincronizate, serverul întreabă <site>LRCLIB</site>, o bază de date de versuri liberă și deschisă. Trimite doar artistul, titlul, albumul și durata fiecărei melodii, direct de pe acest server."
+    },
     "homeRows": {
       "title": "Acasă",
       "holidays": "Rânduri de sărbători",
@@ -830,7 +836,7 @@
       },
       "content": {
         "title": "Conținut",
-        "hint": "Postere, căutare de podcasturi și subtitrări, trailere și rândurile din Acasă"
+        "hint": "Postere, căutare de podcasturi și subtitrări, versuri, trailere și rândurile din Acasă"
       },
       "streaming": {
         "title": "Streaming",

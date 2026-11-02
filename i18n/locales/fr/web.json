@@ -762,6 +762,12 @@
         "v4l2m2m": "V4L2 (Raspberry Pi)"
       }
     },
+    "lyrics": {
+      "title": "Paroles",
+      "intro": "Les morceaux affichent leurs paroles en rythme avec la musique quand un fichier .lrc du même nom se trouve à côté du morceau, ou que les paroles sont dans ses tags.",
+      "online": "Chercher les paroles en ligne",
+      "onlineDetail": "Pour les morceaux sans paroles synchronisées, le serveur interroge <site>LRCLIB</site>, une base de paroles libre et ouverte. Il n’envoie que l’artiste, le titre, l’album et la durée de chaque morceau, directement depuis ce serveur."
+    },
     "homeRows": {
       "title": "Accueil",
       "holidays": "Rangées des fêtes",
@@ -830,7 +836,7 @@
       },
       "content": {
         "title": "Contenu",
-        "hint": "Affiches, recherche de podcasts et de sous-titres, bandes-annonces et rangées de l’accueil"
+        "hint": "Affiches, recherche de podcasts et de sous-titres, paroles, bandes-annonces et rangées de l’accueil"
       },
       "streaming": {
         "title": "Streaming",

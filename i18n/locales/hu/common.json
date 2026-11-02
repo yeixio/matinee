@@ -409,7 +409,11 @@
     "playlistGone": "Ez a lejátszási lista már nem létezik",
     "create": "Létrehozás",
     "save": "Mentés",
-    "delete": "Törlés"
+    "delete": "Törlés",
+    "lyrics": "Dalszöveg",
+    "noLyrics": "Ehhez a dalhoz nincs dalszöveg",
+    "instrumental": "Instrumentális",
+    "lyricsFromLrclib": "Dalszöveg: LRCLIB"
   },
   "books": {
     "overview": "Áttekintés",

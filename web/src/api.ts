@@ -5,6 +5,7 @@
 import { type ItemFilter, toSearchParams } from './filter'
 import i18n from './i18n'
 import type { LevelsJSON } from './player/levels'
+import type { Lyrics } from './player/lyrics'
 import type { Thumbnails } from './player/thumbnails'
 import { heardRestarting, RESTARTING_HEADER } from './player/reconnect'
 
@@ -106,6 +107,8 @@ export type Settings = {
   remoteTrailers: boolean
   // A row of titles for a holiday on Home in the weeks before it.
   holidayRows: boolean
+  // Look up songs' words on LRCLIB when there are none next to the song or in its tags.
+  onlineLyrics: boolean
   // Transcodes become adaptive streams of qualitySteps, and people can pick
   // a quality in the player (see GET /streaming).
   adaptiveQuality: boolean
@@ -1211,6 +1214,8 @@ export const api = {
   tracks: (id: number) => request<Item[]>('GET', `/api/v1/items/${id}/tracks`),
   // A song's sound levels, for the visualizer (player/levels.ts).
   levels: (id: number) => request<LevelsJSON>('GET', `/api/v1/items/${id}/levels`),
+  // A song's words, timed when they can be (player/lyrics.ts).
+  lyrics: (id: number) => request<Lyrics>('GET', `/api/v1/items/${id}/lyrics`),
   // A video's seek bar pictures (player/thumbnails.ts); asking has them made.
   thumbnails: (id: number) => request<Thumbnails>('GET', `/api/v1/items/${id}/thumbnails`),
   book: (id: number) => request<Book>('GET', `/api/v1/items/${id}/book`),
