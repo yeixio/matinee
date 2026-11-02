@@ -416,6 +416,7 @@
       "lookingAt": "Se analizează {{file}}",
       "intros": "Se caută introuri în {{season}}",
       "thumbnails": "Se creează previzualizări pentru {{title}}",
+      "gapless": "Ascultă pauzele dintre melodii pe {{album}}",
       "working": "Lucrează",
       "waiting": "Așteaptă terminarea redării",
       "slowDisk": "Fișierele se citesc greu; pauză câteva minute",

@@ -76,6 +76,15 @@ type Item struct {
 	// hdr, dolby-vision, atmos or 5.1 (see probe.MediaInfo.Tags). Shows get
 	// every tag any of their episodes has. Empty until analyzed.
 	MediaTags []string `json:"mediaTags,omitempty"`
+	// Gapless says an album's songs play straight into each other, with no
+	// gap between them, as on a DJ mix or a live album; tracks say it of
+	// their album. Players then play the album's songs as one continuous
+	// stream (see Server.startGapless). GaplessChoice is the household's
+	// own choice for an album, nil when Matinee decides; GaplessFound says
+	// Matinee found the songs run into each other (see internal/gapless).
+	Gapless       bool  `json:"gapless,omitempty"`
+	GaplessChoice *bool `json:"gaplessChoice,omitempty"`
+	GaplessFound  bool  `json:"gaplessFound,omitempty"`
 
 	Poster   string `json:"-"`
 	Backdrop string `json:"-"`
@@ -138,7 +147,11 @@ const itemCols = `
 	CASE WHEN i.kind IN ('track', 'part', 'podcastEpisode') THEN (SELECT al.title FROM items al WHERE al.id = i.parent_id) END,
 	COALESCE(i.narrators, ''), COALESCE(i.series, ''), i.series_index,
 	CASE WHEN i.kind = 'podcastEpisode' THEN COALESCE(i.released, '') ELSE '' END,
-	(SELECT r.rating FROM ratings r WHERE r.user_id = me.id AND r.item_id = i.id)`
+	(SELECT r.rating FROM ratings r WHERE r.user_id = me.id AND r.item_id = i.id),
+	CASE WHEN i.kind = 'album' THEN COALESCE(i.gapless, i.gapless_found, 0)
+		WHEN i.kind = 'track' THEN (SELECT COALESCE(al.gapless, al.gapless_found, 0) FROM items al WHERE al.id = i.parent_id) ELSE 0 END,
+	CASE WHEN i.kind = 'album' THEN i.gapless END,
+	CASE WHEN i.kind = 'album' THEN COALESCE(i.gapless_found, 0) ELSE 0 END`
 
 const itemFrom = ` FROM (SELECT CAST(? AS BIGINT) AS id) me CROSS JOIN items i LEFT JOIN progress p ON p.item_id = i.id AND p.user_id = me.id`
 
@@ -159,12 +172,14 @@ func scanItem(r scanner) (Item, error) {
 	var narrators string
 	var seriesIdx sql.NullFloat64
 	var mine sql.NullInt64
+	var gaplessChoice sql.NullInt64
 	err := r.Scan(&it.ID, &it.LibraryID, &parent, &it.Kind, &it.Title, &year, &idx, &disc,
 		&dur, &it.Container, &it.VideoCodec, &it.AudioCodec, &w, &h, &it.AddedAt, &it.Path, &it.Size, &it.Mtime,
 		&it.ChildCount, &it.PositionMs, &it.Played,
 		&it.Overview, &rating, &it.Poster, &it.Backdrop, &tmdb, &it.MetaAt,
 		&showTitle, &seasonIdx, &it.OnWatchList, &tags, &genres, &showID, &facts, &data,
-		&artist, &artistID, &album, &narrators, &it.Series, &seriesIdx, &it.Released, &mine)
+		&artist, &artistID, &album, &narrators, &it.Series, &seriesIdx, &it.Released, &mine,
+		&it.Gapless, &gaplessChoice, &it.GaplessFound)
 	if err != nil {
 		return it, err
 	}
@@ -180,6 +195,10 @@ func scanItem(r scanner) (Item, error) {
 		it.Rating = &rating.Float64
 	}
 	it.MyRating = intPtr(mine)
+	if gaplessChoice.Valid {
+		on := gaplessChoice.Int64 != 0
+		it.GaplessChoice = &on
+	}
 	if tmdb.Valid {
 		it.TMDBID = &tmdb.Int64
 	}

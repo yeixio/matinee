@@ -30,6 +30,7 @@ import (
 	"github.com/yeixio/matinee/internal/connect"
 	"github.com/yeixio/matinee/internal/discovery"
 	"github.com/yeixio/matinee/internal/download"
+	"github.com/yeixio/matinee/internal/gapless"
 	"github.com/yeixio/matinee/internal/health"
 	"github.com/yeixio/matinee/internal/hwaccel"
 	"github.com/yeixio/matinee/internal/intro"
@@ -174,6 +175,10 @@ func run() error {
 		// Then it finds each TV episode's intro by matching the audio of a
 		// season's episodes (see internal/intro).
 		Intros: &intro.Detector{Store: db, FFmpeg: cfg.FFmpegPath, Log: log, LowPriority: probe.LowerPriority},
+		// And listens for albums whose songs run into each other, so they
+		// play without gaps (see internal/gapless).
+		Gapless: &gapless.Detector{Store: db, FFmpeg: cfg.FFmpegPath, Log: log, LowPriority: probe.LowerPriority,
+			Prober: probe.Prober{Path: cfg.FFprobePath, Timeout: time.Minute, LowPriority: true}},
 		// And the seek bar's pictures of every video (see internal/thumbs).
 		Thumbs: thumbnails,
 	}

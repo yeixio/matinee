@@ -216,5 +216,9 @@
   "thumbnails_must_be_all_onplay_or_off": "esikatselukuvien on oltava all, onPlay tai off",
   "too_many_watch_together_sessions_right_now": "liian monta yhteiskatselua juuri nyt",
   "unknown_action": "tuntematon toiminto",
-  "usernames_are_at_most_40_characters": "käyttäjänimissä on enintään 40 merkkiä"
+  "usernames_are_at_most_40_characters": "käyttäjänimissä on enintään 40 merkkiä",
+  "couldnt_start_playback_for_this_album": "albumin toistoa ei voitu aloittaa",
+  "not_an_album": "ei albumi",
+  "only_the_household_can_change_this": "vain kotitalous voi muuttaa tätä",
+  "tracks_must_be_songs_on_one_album": "kappaleiden on oltava samalta albumilta"
 }

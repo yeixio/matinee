@@ -216,5 +216,9 @@
   "thumbnails_must_be_all_onplay_or_off": "küçük resimler all, onPlay veya off olmalı",
   "too_many_watch_together_sessions_right_now": "şu anda çok fazla Birlikte izle oturumu var",
   "unknown_action": "bilinmeyen işlem",
-  "usernames_are_at_most_40_characters": "kullanıcı adları en fazla 40 karakter olabilir"
+  "usernames_are_at_most_40_characters": "kullanıcı adları en fazla 40 karakter olabilir",
+  "couldnt_start_playback_for_this_album": "bu albümün oynatılması başlatılamadı",
+  "not_an_album": "albüm değil",
+  "only_the_household_can_change_this": "bunu yalnızca hane değiştirebilir",
+  "tracks_must_be_songs_on_one_album": "parçalar aynı albümden şarkılar olmalı"
 }

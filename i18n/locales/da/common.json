@@ -413,7 +413,11 @@
     "lyrics": "Sangtekst",
     "noLyrics": "Ingen sangtekst til denne sang",
     "instrumental": "Instrumental",
-    "lyricsFromLrclib": "Sangtekst fra LRCLIB"
+    "lyricsFromLrclib": "Sangtekst fra LRCLIB",
+    "gapless": "Afspil uden pauser",
+    "gaplessHeard": "Matinee hørte, at disse sange glider over i hinanden, så de afspilles uden pauser.",
+    "gaplessOn": "Afspilles uden pauser",
+    "gaplessOff": "Afspilles med pauser mellem sangene"
   },
   "books": {
     "overview": "Oversigt",

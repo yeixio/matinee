@@ -469,7 +469,11 @@
     "lyrics": "Text",
     "noLyrics": "K této skladbě není text",
     "instrumental": "Instrumentální",
-    "lyricsFromLrclib": "Text z LRCLIB"
+    "lyricsFromLrclib": "Text z LRCLIB",
+    "gapless": "Přehrávat bez mezer",
+    "gaplessHeard": "Matinee slyšel, že tyto skladby na sebe navazují, takže hrají bez mezer.",
+    "gaplessOn": "Hraje bez mezer",
+    "gaplessOff": "Hraje s mezerami mezi skladbami"
   },
   "books": {
     "overview": "Přehled",

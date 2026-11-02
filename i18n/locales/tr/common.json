@@ -413,7 +413,11 @@
     "lyrics": "Şarkı sözleri",
     "noLyrics": "Bu şarkının sözleri yok",
     "instrumental": "Enstrümantal",
-    "lyricsFromLrclib": "Sözler LRCLIB’den"
+    "lyricsFromLrclib": "Sözler LRCLIB’den",
+    "gapless": "Boşluksuz çal",
+    "gaplessHeard": "Matinee bu şarkıların birbirine bağlandığını duydu, bu yüzden boşluksuz çalınıyorlar.",
+    "gaplessOn": "Boşluksuz çalıyor",
+    "gaplessOff": "Şarkılar arasında boşlukla çalıyor"
   },
   "books": {
     "overview": "Genel bakış",

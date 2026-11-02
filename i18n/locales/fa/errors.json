@@ -216,5 +216,9 @@
   "thumbnails_must_be_all_onplay_or_off": "تصاویر کوچک باید all، onPlay یا off باشند",
   "too_many_watch_together_sessions_right_now": "اکنون جلسه‌های تماشای باهم بیش از حد زیاد است",
   "unknown_action": "کنش ناشناخته",
-  "usernames_are_at_most_40_characters": "نام کاربری حداکثر ۴۰ نویسه است"
+  "usernames_are_at_most_40_characters": "نام کاربری حداکثر ۴۰ نویسه است",
+  "couldnt_start_playback_for_this_album": "پخش این آلبوم شروع نشد",
+  "not_an_album": "آلبوم نیست",
+  "only_the_household_can_change_this": "فقط اهل خانه می‌توانند این را تغییر دهند",
+  "tracks_must_be_songs_on_one_album": "قطعه‌ها باید آهنگ‌های یک آلبوم باشند"
 }

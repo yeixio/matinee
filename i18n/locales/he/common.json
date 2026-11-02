@@ -441,7 +441,11 @@
     "lyrics": "מילים",
     "noLyrics": "אין מילים לשיר הזה",
     "instrumental": "אינסטרומנטלי",
-    "lyricsFromLrclib": "המילים מ-LRCLIB"
+    "lyricsFromLrclib": "המילים מ-LRCLIB",
+    "gapless": "ניגון ללא הפסקות",
+    "gaplessHeard": "Matinee שמע שהשירים האלה מתחברים זה לזה, ולכן הם מתנגנים ללא הפסקות.",
+    "gaplessOn": "מתנגן ללא הפסקות",
+    "gaplessOff": "מתנגן עם הפסקות בין השירים"
   },
   "books": {
     "overview": "סקירה",

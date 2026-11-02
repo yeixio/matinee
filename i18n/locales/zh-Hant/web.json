@@ -410,6 +410,7 @@
       "lookingAt": "正在查看 {{file}}",
       "intros": "正在尋找 {{season}} 的片頭",
       "thumbnails": "正在為 {{title}} 製作預覽圖",
+      "gapless": "正在檢查 {{album}} 的歌曲間隙",
       "working": "工作中",
       "waiting": "正在等待播放結束",
       "slowDisk": "檔案讀取較慢，休息幾分鐘",

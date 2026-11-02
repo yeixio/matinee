@@ -216,5 +216,9 @@
   "thumbnails_must_be_all_onplay_or_off": "يجب أن تكون الصور المصغرة all أو onPlay أو off",
   "too_many_watch_together_sessions_right_now": "هناك جلسات مشاهدة معًا كثيرة جدًا الآن",
   "unknown_action": "إجراء غير معروف",
-  "usernames_are_at_most_40_characters": "اسم المستخدم 40 حرفًا على الأكثر"
+  "usernames_are_at_most_40_characters": "اسم المستخدم 40 حرفًا على الأكثر",
+  "couldnt_start_playback_for_this_album": "تعذّر بدء تشغيل هذا الألبوم",
+  "not_an_album": "ليس ألبومًا",
+  "only_the_household_can_change_this": "يمكن لأهل المنزل فقط تغيير هذا",
+  "tracks_must_be_songs_on_one_album": "يجب أن تكون المقاطع أغاني من ألبوم واحد"
 }

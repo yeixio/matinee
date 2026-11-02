@@ -216,5 +216,9 @@
   "thumbnails_must_be_all_onplay_or_off": "थंबनेल all, onPlay या off होने चाहिए",
   "too_many_watch_together_sessions_right_now": "अभी साथ देखने के बहुत सारे सत्र चल रहे हैं",
   "unknown_action": "अज्ञात कार्रवाई",
-  "usernames_are_at_most_40_characters": "यूज़रनेम ज़्यादा से ज़्यादा 40 अक्षर का हो सकता है"
+  "usernames_are_at_most_40_characters": "यूज़रनेम ज़्यादा से ज़्यादा 40 अक्षर का हो सकता है",
+  "couldnt_start_playback_for_this_album": "इस एल्बम का प्लेबैक शुरू नहीं हो सका",
+  "not_an_album": "यह एल्बम नहीं है",
+  "only_the_household_can_change_this": "इसे केवल घर के सदस्य बदल सकते हैं",
+  "tracks_must_be_songs_on_one_album": "ट्रैक एक ही एल्बम के गाने होने चाहिए"
 }

@@ -216,5 +216,9 @@
   "thumbnails_must_be_all_onplay_or_off": "miniaturile trebuie să fie all, onPlay sau off",
   "too_many_watch_together_sessions_right_now": "prea multe sesiuni de vizionare împreună acum",
   "unknown_action": "acțiune necunoscută",
-  "usernames_are_at_most_40_characters": "numele de utilizator au cel mult 40 de caractere"
+  "usernames_are_at_most_40_characters": "numele de utilizator au cel mult 40 de caractere",
+  "couldnt_start_playback_for_this_album": "nu s-a putut porni redarea acestui album",
+  "not_an_album": "nu este un album",
+  "only_the_household_can_change_this": "doar gospodăria poate schimba asta",
+  "tracks_must_be_songs_on_one_album": "piesele trebuie să fie de pe același album"
 }

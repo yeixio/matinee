@@ -18,6 +18,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/yeixio/matinee/internal/gapless"
 	"github.com/yeixio/matinee/internal/intro"
 	"github.com/yeixio/matinee/internal/probe"
 	"github.com/yeixio/matinee/internal/store"
@@ -49,6 +50,7 @@ const (
 	StateSlowDisk  = "slowDisk"   // files kept timing out; resting before trying again
 	StateIntros    = "intros"     // looking for the intros of a season's episodes
 	StateThumbs    = "thumbnails" // making a video's seek bar pictures
+	StateGapless   = "gapless"    // listening for albums whose songs run into each other
 	StateIdle      = "idle"       // everything is analyzed
 	StateOff       = "off"
 )
@@ -77,6 +79,9 @@ type Analyzer struct {
 	// Thumbs, when set, makes the seek bar's pictures of every video after
 	// that, when the admin has them made for all videos (see thumbs.Mode).
 	Thumbs *thumbs.Generator
+	// Gapless, when set, listens for albums whose songs run into each
+	// other (see internal/gapless), after the intros.
+	Gapless *gapless.Detector
 
 	mu         sync.Mutex
 	mode       Mode
@@ -296,7 +301,7 @@ func (a *Analyzer) Run(ctx context.Context) {
 			a.Log.Warn("media analysis", "err", err)
 			a.sleep(ctx, time.Minute)
 		case n == 0:
-			if a.findIntros(ctx) > 0 || a.makeThumbs(ctx) > 0 {
+			if a.findIntros(ctx) > 0 || a.findGapless(ctx) > 0 || a.makeThumbs(ctx) > 0 {
 				continue // files may have changed meanwhile
 			}
 			a.setState(StateIdle, "")
@@ -422,6 +427,49 @@ func (a *Analyzer) findIntros(ctx context.Context) int {
 	}
 	if n > 0 {
 		a.Log.Info("intro detection pass done", "episodes", n)
+	}
+	return n
+}
+
+// findGapless has the gapless detector listen to every album that needs
+// it, one at a time, pausing like the analysis does. It returns how many
+// albums it listened to.
+func (a *Analyzer) findGapless(ctx context.Context) int {
+	if a.Gapless == nil {
+		return 0
+	}
+	first := true
+	n, err := a.Gapless.Pass(ctx, func(al store.GaplessAlbum) bool {
+		mode, _ := a.Mode(ctx)
+		if mode == Off {
+			return false
+		}
+		if !first && mode == Gentle {
+			a.sleep(ctx, gentlePause)
+		}
+		first = false
+		for mode == Gentle && a.Busy != nil && a.Busy() {
+			a.setState(StateWaiting, "")
+			a.sleep(ctx, busyCheck)
+			if ctx.Err() != nil {
+				return false
+			}
+			if mode, _ = a.Mode(ctx); mode == Off {
+				return false
+			}
+		}
+		name := al.Title
+		if al.Artist != "" {
+			name = al.Artist + " · " + al.Title
+		}
+		a.setState(StateGapless, name)
+		return ctx.Err() == nil
+	})
+	if err != nil && ctx.Err() == nil {
+		a.Log.Warn("gapless detection", "err", err)
+	}
+	if n > 0 {
+		a.Log.Info("gapless detection pass done", "albums", n)
 	}
 	return n
 }

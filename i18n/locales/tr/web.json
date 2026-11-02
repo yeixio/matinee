@@ -413,6 +413,7 @@
       "lookingAt": "İnceleniyor: {{file}}",
       "intros": "{{season}} içinde girişler aranıyor",
       "thumbnails": "{{title}} için önizlemeler hazırlanıyor",
+      "gapless": "{{album}} albümünde şarkı arası boşluklar dinleniyor",
       "working": "Çalışıyor",
       "waiting": "Oynatmanın bitmesi bekleniyor",
       "slowDisk": "Dosyalar yavaş okunuyor; birkaç dakika dinleniyor",

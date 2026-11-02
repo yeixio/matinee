@@ -216,5 +216,9 @@
   "thumbnails_must_be_all_onplay_or_off": "миниатюры должны быть all, onPlay или off",
   "too_many_watch_together_sessions_right_now": "сейчас слишком много сеансов совместного просмотра",
   "unknown_action": "неизвестное действие",
-  "usernames_are_at_most_40_characters": "имя пользователя не длиннее 40 символов"
+  "usernames_are_at_most_40_characters": "имя пользователя не длиннее 40 символов",
+  "couldnt_start_playback_for_this_album": "не удалось начать воспроизведение альбома",
+  "not_an_album": "это не альбом",
+  "only_the_household_can_change_this": "это может изменить только семья",
+  "tracks_must_be_songs_on_one_album": "треки должны быть с одного альбома"
 }

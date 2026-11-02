@@ -413,6 +413,7 @@
       "lookingAt": "Ser på {{file}}",
       "intros": "Ser etter introer i {{season}}",
       "thumbnails": "Lager forhåndsbilder for {{title}}",
+      "gapless": "Lytter etter pauser mellom sangene på {{album}}",
       "working": "Arbeider",
       "waiting": "Venter på at avspillingen blir ferdig",
       "slowDisk": "Filene er trege å lese; hviler noen minutter",

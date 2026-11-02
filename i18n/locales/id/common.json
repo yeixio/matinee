@@ -385,7 +385,11 @@
     "lyrics": "Lirik",
     "noLyrics": "Tidak ada lirik untuk lagu ini",
     "instrumental": "Instrumental",
-    "lyricsFromLrclib": "Lirik dari LRCLIB"
+    "lyricsFromLrclib": "Lirik dari LRCLIB",
+    "gapless": "Putar tanpa jeda",
+    "gaplessHeard": "Matinee mendengar lagu-lagu ini menyambung satu sama lain, jadi diputar tanpa jeda.",
+    "gaplessOn": "Diputar tanpa jeda",
+    "gaplessOff": "Diputar dengan jeda antar lagu"
   },
   "books": {
     "overview": "Ringkasan",

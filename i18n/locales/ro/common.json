@@ -441,7 +441,11 @@
     "lyrics": "Versuri",
     "noLyrics": "Nu există versuri pentru această melodie",
     "instrumental": "Instrumental",
-    "lyricsFromLrclib": "Versuri de la LRCLIB"
+    "lyricsFromLrclib": "Versuri de la LRCLIB",
+    "gapless": "Redă fără pauze",
+    "gaplessHeard": "Matinee a auzit că aceste melodii se leagă una de alta, așa că sunt redate fără pauze.",
+    "gaplessOn": "Se redă fără pauze",
+    "gaplessOff": "Se redă cu pauze între melodii"
   },
   "books": {
     "overview": "Prezentare",

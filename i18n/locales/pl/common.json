@@ -469,7 +469,11 @@
     "lyrics": "Tekst",
     "noLyrics": "Brak tekstu tego utworu",
     "instrumental": "Instrumentalny",
-    "lyricsFromLrclib": "Tekst z LRCLIB"
+    "lyricsFromLrclib": "Tekst z LRCLIB",
+    "gapless": "Odtwarzaj bez przerw",
+    "gaplessHeard": "Matinee usłyszał, że te utwory przechodzą jeden w drugi, więc grają bez przerw.",
+    "gaplessOn": "Bez przerw",
+    "gaplessOff": "Z przerwami między utworami"
   },
   "books": {
     "overview": "Przegląd",

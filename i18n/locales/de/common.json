@@ -413,7 +413,11 @@
     "lyrics": "Songtext",
     "noLyrics": "Kein Songtext für diesen Song",
     "instrumental": "Instrumental",
-    "lyricsFromLrclib": "Songtext von LRCLIB"
+    "lyricsFromLrclib": "Songtext von LRCLIB",
+    "gapless": "Ohne Pausen abspielen",
+    "gaplessHeard": "Matinee hat gehört, dass diese Songs ineinander übergehen, daher laufen sie ohne Pausen.",
+    "gaplessOn": "Läuft ohne Pausen",
+    "gaplessOff": "Läuft mit Pausen zwischen den Songs"
   },
   "books": {
     "overview": "Übersicht",

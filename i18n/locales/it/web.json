@@ -416,6 +416,7 @@
       "lookingAt": "Esame di {{file}}",
       "intros": "Ricerca delle intro in {{season}}",
       "thumbnails": "Creazione delle anteprime della barra per {{title}}",
+      "gapless": "Ascolta se ci sono pause tra i brani di {{album}}",
       "working": "Al lavoro",
       "waiting": "In attesa della fine della riproduzione",
       "slowDisk": "I file sono lenti da leggere; pausa di qualche minuto",
