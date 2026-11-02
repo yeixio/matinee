@@ -190,6 +190,7 @@
   "that_isnt_a_podcast_feed": "ce n’est pas un flux de podcast",
   "that_isnt_an_opml_file": "ce n’est pas un fichier OPML",
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "le flux n’a pas pu être lu. Vérifiez l’adresse et réessayez.",
+  "the_feed_couldnt_be_read_reason": "le flux n’a pas pu être lu : {{reason}}",
   "the_feed_couldnt_be_read_right_now": "le flux ne peut pas être lu pour le moment",
   "the_file_is_too_big": "le fichier est trop volumineux",
   "this_library_already_has_a_show_with_that_name": "cette bibliothèque a déjà une émission de ce nom",

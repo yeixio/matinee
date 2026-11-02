@@ -190,6 +190,7 @@
   "that_isnt_a_podcast_feed": "यह पॉडकास्ट फ़ीड नहीं है",
   "that_isnt_an_opml_file": "यह OPML फ़ाइल नहीं है",
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "फ़ीड पढ़ा नहीं जा सका। पता जाँचें और फिर कोशिश करें।",
+  "the_feed_couldnt_be_read_reason": "फ़ीड पढ़ा नहीं जा सका: {{reason}}",
   "the_feed_couldnt_be_read_right_now": "फ़ीड अभी पढ़ा नहीं जा सकता",
   "the_file_is_too_big": "फ़ाइल बहुत बड़ी है",
   "this_library_already_has_a_show_with_that_name": "इस लाइब्रेरी में उस नाम का शो पहले से है",

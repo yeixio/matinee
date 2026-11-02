@@ -190,6 +190,7 @@
   "that_isnt_a_podcast_feed": "acesta nu este un flux de podcast",
   "that_isnt_an_opml_file": "acesta nu este un fișier OPML",
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "fluxul nu a putut fi citit. Verifică adresa și încearcă din nou.",
+  "the_feed_couldnt_be_read_reason": "fluxul nu a putut fi citit: {{reason}}",
   "the_feed_couldnt_be_read_right_now": "fluxul nu poate fi citit acum",
   "the_file_is_too_big": "fișierul este prea mare",
   "this_library_already_has_a_show_with_that_name": "această bibliotecă are deja o emisiune cu acest nume",

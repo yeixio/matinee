@@ -190,6 +190,7 @@
   "that_isnt_a_podcast_feed": "đó không phải nguồn cấp podcast",
   "that_isnt_an_opml_file": "đó không phải tệp OPML",
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "không đọc được nguồn cấp. Hãy kiểm tra địa chỉ rồi thử lại.",
+  "the_feed_couldnt_be_read_reason": "không đọc được nguồn cấp: {{reason}}",
   "the_feed_couldnt_be_read_right_now": "hiện không đọc được nguồn cấp",
   "the_file_is_too_big": "tệp quá lớn",
   "this_library_already_has_a_show_with_that_name": "thư viện này đã có chương trình cùng tên",

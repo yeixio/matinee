@@ -190,6 +190,7 @@
   "that_isnt_a_podcast_feed": "bu bir podcast akışı değil",
   "that_isnt_an_opml_file": "bu bir OPML dosyası değil",
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "akış okunamadı. Adresi kontrol edip yeniden deneyin.",
+  "the_feed_couldnt_be_read_reason": "akış okunamadı: {{reason}}",
   "the_feed_couldnt_be_read_right_now": "akış şu anda okunamıyor",
   "the_file_is_too_big": "dosya çok büyük",
   "this_library_already_has_a_show_with_that_name": "bu kitaplıkta bu adda bir program zaten var",

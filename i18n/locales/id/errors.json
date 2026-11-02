@@ -190,6 +190,7 @@
   "that_isnt_a_podcast_feed": "itu bukan feed podcast",
   "that_isnt_an_opml_file": "itu bukan file OPML",
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "feed tidak bisa dibaca. Periksa alamatnya lalu coba lagi.",
+  "the_feed_couldnt_be_read_reason": "feed tidak bisa dibaca: {{reason}}",
   "the_feed_couldnt_be_read_right_now": "feed tidak bisa dibaca saat ini",
   "the_file_is_too_big": "file terlalu besar",
   "this_library_already_has_a_show_with_that_name": "pustaka ini sudah punya acara dengan nama itu",

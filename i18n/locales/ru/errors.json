@@ -190,6 +190,7 @@
   "that_isnt_a_podcast_feed": "это не лента подкаста",
   "that_isnt_an_opml_file": "это не файл OPML",
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "не удалось прочитать ленту. Проверьте адрес и попробуйте снова.",
+  "the_feed_couldnt_be_read_reason": "не удалось прочитать ленту: {{reason}}",
   "the_feed_couldnt_be_read_right_now": "ленту сейчас не удаётся прочитать",
   "the_file_is_too_big": "файл слишком большой",
   "this_library_already_has_a_show_with_that_name": "в этой медиатеке уже есть шоу с таким названием",

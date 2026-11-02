@@ -190,6 +190,7 @@
   "that_isnt_a_podcast_feed": "questo non è un feed di podcast",
   "that_isnt_an_opml_file": "questo non è un file OPML",
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "impossibile leggere il feed. Controlla l’indirizzo e riprova.",
+  "the_feed_couldnt_be_read_reason": "impossibile leggere il feed: {{reason}}",
   "the_feed_couldnt_be_read_right_now": "al momento il feed non si può leggere",
   "the_file_is_too_big": "il file è troppo grande",
   "this_library_already_has_a_show_with_that_name": "questa libreria ha già un programma con quel nome",
