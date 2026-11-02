@@ -476,6 +476,20 @@ var migrations = []string{
 		used_at    BIGINT
 	)`,
 	"CREATE INDEX invites_created ON invites(created_at)",
+	// 76: the seek bar's preview pictures of each video (see thumbnails.go
+	// and internal/thumbs). The pictures are files in the data folder; this
+	// says how they're laid out.
+	`CREATE TABLE thumbnails (
+		item_id     BIGINT PRIMARY KEY REFERENCES items(id) ON DELETE CASCADE,
+		file_key    TEXT NOT NULL, -- the file and generator version they show, see MediaKey
+		interval_ms BIGINT NOT NULL DEFAULT 0, -- one picture every this often
+		width       INTEGER NOT NULL DEFAULT 0, -- of one picture
+		height      INTEGER NOT NULL DEFAULT 0,
+		across      INTEGER NOT NULL DEFAULT 0, -- pictures across one sheet
+		down        INTEGER NOT NULL DEFAULT 0,
+		count       INTEGER NOT NULL DEFAULT 0, -- 0 when the file couldn't be read
+		made_at     BIGINT NOT NULL
+	)`,
 }
 
 func now() int64 { return time.Now().Unix() }

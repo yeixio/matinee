@@ -268,6 +268,7 @@
     "rules": "Pravidla",
     "rulesHint": "Tituly odpovídající těmto filtrům se přidají samy, jak se knihovna mění.",
     "shuffleDaily": "Zamíchat každý den",
+    "includeTV": "Zahrnout seriály",
     "order": "Pořadí",
     "orderAdded": "Pořadí, v jakém byly tituly přidány",
     "direction": "Směr",
@@ -417,6 +418,7 @@
     "state": {
       "lookingAt": "Zkoumá {{file}}",
       "intros": "Hledání úvodů v: {{season}}",
+      "thumbnails": "Vytvářím náhledy pro {{title}}",
       "working": "Pracuje",
       "waiting": "Čeká na konec přehrávání",
       "slowDisk": "Soubory se čtou pomalu; pár minut odpočívá",
@@ -448,6 +450,25 @@
       "label": "Hledat úvody seriálů",
       "hint": "Jakmile jsou všechny soubory analyzované, Matinee poslouchá začátky epizod každé řady a hledá úvod, který mají společný, aby přehrávače mohly nabídnout Přeskočit úvod.",
       "progress": "Zkontrolováno {{done}} z {{total}} epizod, {{found}} s úvodem"
+    },
+    "thumbnails": {
+      "label": "Náhledy na časové ose",
+      "hint": "Malé obrázky z každého videa, které se při posouvání zobrazují nad časovou osou. Zabírají asi 4 MB na film.",
+      "progress": "Hotovo {{done}} z {{total}} videí",
+      "mode": {
+        "all": {
+          "label": "Všechna videa",
+          "hint": "Vytvářejí se na pozadí pro každé video, po analýze a jejím tempem."
+        },
+        "onPlay": {
+          "label": "Při přehrání",
+          "hint": "Vytvoří se, když někdo video poprvé přehraje. Šetří čas i místo u velkých knihoven."
+        },
+        "off": {
+          "label": "Vypnuto",
+          "hint": "Žádné se nevytvářejí a časová osa ukazuje jen čas."
+        }
+      }
     }
   },
   "profileSettings": {
@@ -826,6 +847,10 @@
       "add-ons": {
         "title": "Doplňky",
         "hint": "Radarr, Sonarr, Overseerr a pluginy"
+      },
+      "health": {
+        "title": "Stav serveru",
+        "hint": "Zátěž, přehrávání, úlohy, problémy a protokol"
       }
     }
   },
@@ -1000,5 +1025,169 @@
     "expired": "{{name}}: platnost skončila {{date}}",
     "badge": "Přítel",
     "seeEverything": "Ukázat vše"
+  },
+  "health": {
+    "title": "Stav serveru",
+    "intro": "Jak se serveru právě daří, pro chvíle, kdy něco nefunguje. Vše zde pochází z tohoto serveru a zůstává na něm.",
+    "cantLoad": "Stav serveru se nepodařilo načíst: {{error}}",
+    "updates": "Aktualizuje se každých 5 sekund",
+    "upFor": "běží {{time}}",
+    "seconds": "{{seconds}} s",
+    "days": "{{days}} d {{hours}} h",
+    "hourAgo": "před 1 hodinou",
+    "now": "Teď",
+    "noHistory": "Graf se zaplní během příští minuty.",
+    "chartLabel": "{{name}} za poslední hodinu",
+    "status": {
+      "ok": "Vše vypadá v pořádku",
+      "problems_few": "{{count}} varování nebo chyby za poslední hodinu",
+      "problems_many": "{{count}} varování nebo chyby za poslední hodinu",
+      "problems_one": "{{count}} varování nebo chyba za poslední hodinu",
+      "problems_other": "{{count}} varování nebo chyb za poslední hodinu",
+      "restarting": "Server se restartuje",
+      "database": "Databáze neodpovídá",
+      "disk": "Složku nelze přečíst"
+    },
+    "scope": {
+      "group": "Matinee a procesy FFmpeg, které spouští.",
+      "process": "Jen samotné Matinee; procesy FFmpeg se nepočítají."
+    },
+    "tiles": {
+      "cpu": "Procesor",
+      "machine": "celý počítač {{value}}",
+      "load": "zátěž {{load}}",
+      "cpuLimit": "Omezeno na {{cores}} jader.",
+      "memory": "Paměť",
+      "of": "z {{total}}",
+      "ofLimit": "z povolených {{total}}",
+      "sending": "Odesílá",
+      "sentTotal": "{{total}} od spuštění",
+      "playing": "Právě hraje",
+      "transcodes_few": "{{count}} převody",
+      "transcodes_many": "{{count}} převodu",
+      "transcodes_one": "{{count}} převod",
+      "transcodes_other": "{{count}} převodů"
+    },
+    "level": {
+      "warn": "Varování",
+      "error": "Chyba"
+    },
+    "streams": {
+      "title": "Právě hraje",
+      "none": "Nic se nepřehrává.",
+      "direct": "Přímé přehrávání",
+      "transcoding": "Převádí se",
+      "away": "Mimo domov",
+      "paused": "Pozastaveno",
+      "buffering": "Načítá se"
+    },
+    "transcodes": {
+      "title": "Převody",
+      "none": "Neprobíhá žádný převod.",
+      "kind": {
+        "video": "Převod videa",
+        "copy": "Přebalení videa",
+        "audio": "Převod zvuku"
+      },
+      "mode": {
+        "cpu": "na procesoru",
+        "encode": "{{name}} kóduje",
+        "full": "{{name}} dekóduje a kóduje"
+      },
+      "burnSub": "vypálené titulky",
+      "started": "Začal {{time}}",
+      "stop": "Zastavit",
+      "stopHint": "Zastaví FFmpeg. Pokud je přehrávač stále otevřený, spustí nový převod.",
+      "cpuOnly": "Převody běží na procesoru."
+    },
+    "problems": {
+      "title": "Varování a chyby",
+      "none": "Od spuštění serveru žádná varování ani chyby.",
+      "times_few": "{{count}}×",
+      "times_many": "{{count}}×",
+      "times_one": "{{count}}×",
+      "times_other": "{{count}}×",
+      "last": "naposledy {{time}}",
+      "showInLog": "Zobrazit v protokolu",
+      "more_few": "Zobrazit další {{count}}",
+      "more_many": "Zobrazit dalších {{count}}",
+      "more_one": "Zobrazit další {{count}}",
+      "more_other": "Zobrazit dalších {{count}}"
+    },
+    "jobs": {
+      "title": "Úlohy na pozadí",
+      "scan": "Prohledání: {{library}}",
+      "scanning": "Prohledává se {{time}}",
+      "lastScan": "{{time}}, trvalo {{took}}",
+      "scanCounts": "přidáno {{added}}, aktualizováno {{updated}}, odebráno {{removed}}, nepřehratelné {{failed}}",
+      "scanFailed": "Selhalo: {{error}}",
+      "notScanned": "Od spuštění serveru neprohledáno",
+      "downloads": "Stahování do zařízení",
+      "downloadCounts": "čeká {{waiting}}, převádí se {{converting}}, selhalo {{failed}}",
+      "nothing": "Nic na práci",
+      "importing": "Importuje se historie sledování"
+    },
+    "disks": {
+      "title": "Místo na disku",
+      "free": "Volno {{free}} z {{total}}",
+      "low": "Málo místa",
+      "unreachableTitle": "Nelze přečíst",
+      "unreachable": "Tato složka neodpověděla. Pokud je na síťovém úložišti, zkontrolujte, zda je stále připojené.",
+      "use": {
+        "data": "Data",
+        "transcode": "Převody",
+        "thumbnails": "Náhledy na časové ose",
+        "images": "Plakáty a obrázky",
+        "downloads": "Stahování",
+        "library": "{{library}}"
+      }
+    },
+    "details": {
+      "title": "Podrobnosti o serveru",
+      "version": "Verze",
+      "ffmpeg": "FFmpeg",
+      "ffmpegMissing": "Nenalezeno v {{path}}",
+      "system": "Systém",
+      "cores_few": "{{count}} jádra",
+      "cores_many": "{{count}} jádra",
+      "cores_one": "{{count}} jádro",
+      "cores_other": "{{count}} jader",
+      "started": "Spuštěno",
+      "database": "Databáze",
+      "answers": "odpovídá za {{ms}} ms",
+      "dbCounts": "položky {{items}}, účty {{users}}, knihovny {{libraries}}",
+      "connections": "spojení {{open}}, obsazená {{busy}}",
+      "dbError": "Neodpověděla: {{error}}",
+      "requests": "Požadavky",
+      "requestCounts": "vyřízeno {{requests}}, chyb serveru {{errors}}",
+      "logged": "Zaznamenáno",
+      "loggedCounts": "varování {{warnings}}, chyb {{errors}}",
+      "rescans": "Plánovaná prohledání",
+      "every": "Každých {{time}}",
+      "remote": "Vzdálený přístup",
+      "remoteState": {
+        "off": "Vypnuto",
+        "working": "Nastavuje se",
+        "ready": "Funguje",
+        "failed": "Nefunguje"
+      },
+      "runtime": "Prostředí Go",
+      "heap": "využito {{heap}}, gorutiny {{goroutines}}"
+    },
+    "log": {
+      "title": "Protokol",
+      "intro": "Posledních {{count}} řádků od spuštění serveru. Úplný protokol je tam, kam jde výstup serveru, například v logu kontejneru.",
+      "download": "Stáhnout",
+      "search": "Hledat v protokolu",
+      "level": "Zobrazit",
+      "levels": {
+        "all": "Vše",
+        "warn": "Varování a chyby",
+        "error": "Chyby"
+      },
+      "live": "Sledovat nové řádky",
+      "older": "Zobrazit starší řádky",
+      "empty": "Žádné odpovídající řádky."
+    }
   }
 }

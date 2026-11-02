@@ -1,8 +1,9 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
-import { api, type AnalysisMode } from '../api'
+import { api, type AnalysisMode, type ThumbnailMode } from '../api'
 
 const modes: AnalysisMode[] = ['gentle', 'normal', 'off']
+const thumbModes: ThumbnailMode[] = ['all', 'onPlay', 'off']
 
 // The background media analysis, for admins: how far it is and how hard it works.
 export function MediaAnalysis() {
@@ -11,7 +12,7 @@ export function MediaAnalysis() {
   const { data: st } = useQuery({
     queryKey: ['analysis'],
     queryFn: api.analysis,
-    refetchInterval: (q) => (['analyzing', 'intros', 'waiting'].includes(q.state.data?.state ?? '') ? 3000 : 30_000),
+    refetchInterval: (q) => (['analyzing', 'intros', 'thumbnails', 'waiting'].includes(q.state.data?.state ?? '') ? 3000 : 30_000),
   })
   const setMode = useMutation({
     mutationFn: api.setAnalysisMode,
@@ -21,11 +22,16 @@ export function MediaAnalysis() {
     mutationFn: api.setIntroDetection,
     onSuccess: (s) => qc.setQueryData(['analysis'], s),
   })
+  const setThumbs = useMutation({
+    mutationFn: api.setThumbnailMode,
+    onSuccess: (s) => qc.setQueryData(['analysis'], s),
+  })
   if (!st) return null
   const pct = st.total ? Math.floor((st.done / st.total) * 100) : 100
   const state = {
     analyzing: st.current ? t('analysis.state.lookingAt', { file: st.current }) : t('analysis.state.working'),
     intros: t('analysis.state.intros', { season: st.current ?? '' }),
+    thumbnails: t('analysis.state.thumbnails', { title: st.current ?? '' }),
     waiting: t('analysis.state.waiting'),
     slowDisk: t('analysis.state.slowDisk'),
     idle: st.done >= st.total ? t('analysis.state.allDone') : t('analysis.state.upToDate'),
@@ -96,6 +102,37 @@ export function MediaAnalysis() {
             onChange={() => setIntros.mutate(!st.intros!.on)}
           />
         </label>
+      )}
+      {st.thumbnails && (
+        <div className="space-y-3 rounded-xl border border-line/60 bg-surface/50 p-5">
+          <div>
+            <span className="block font-medium">{t('analysis.thumbnails.label')}</span>
+            <span className="mt-1 block text-sm text-muted">{t('analysis.thumbnails.hint')}</span>
+            {st.thumbnails.mode === 'all' && st.thumbnails.total > 0 && (
+              <span className="mt-2 block text-xs text-muted tabular-nums">
+                {t('analysis.thumbnails.progress', { done: st.thumbnails.done, total: st.thumbnails.total })}
+              </span>
+            )}
+          </div>
+          <div className="flex flex-wrap gap-2" role="radiogroup" aria-label={t('analysis.thumbnails.label')}>
+            {thumbModes.map((m) => (
+              <button
+                key={m}
+                role="radio"
+                aria-checked={st.thumbnails!.mode === m}
+                disabled={setThumbs.isPending}
+                onClick={() => setThumbs.mutate(m)}
+                className={`rounded-full border px-3 py-1.5 text-sm transition-colors ${
+                  st.thumbnails!.mode === m ? 'border-accent bg-accent/10 text-text' : 'border-line text-muted hover:border-faint'
+                }`}
+              >
+                {t(`analysis.thumbnails.mode.${m}.label`)}
+              </button>
+            ))}
+          </div>
+          <p className="text-xs text-muted">{thumbModes.includes(st.thumbnails.mode) && t(`analysis.thumbnails.mode.${st.thumbnails.mode}.hint`)}</p>
+          {setThumbs.error && <p className="text-sm text-danger">{setThumbs.error.message}</p>}
+        </div>
       )}
     </section>
   )

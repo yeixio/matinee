@@ -58,6 +58,7 @@
   "no_such_subtitle_track": "nincs ilyen feliratsáv",
   "no_such_theme": "nincs ilyen téma",
   "no_such_trailer": "nincs ilyen előzetes",
+  "no_such_transcode": "nincs ilyen átkódolás",
   "no_such_user": "nincs ilyen felhasználó",
   "not_a_file": "nem fájl",
   "not_a_playable_item": "nem lejátszható elem",
@@ -127,6 +128,7 @@
   "tmdbid_is_required": "a tmdbId megadása kötelező",
   "todays_subtitle_downloads_are_used_up_try_again_tomorrow": "a mai feliratletöltések elfogytak. Próbáld újra holnap.",
   "no_such_row": "nincs ilyen sor",
+  "no_such_sheet": "nincs ilyen lap",
   "tmdb_didnt_accept_that_key": "A TMDB nem fogadta el ezt a kulcsot",
   "tmdb_couldnt_be_reached_to_check_the_key": "A TMDB nem érhető el a kulcs ellenőrzéséhez",
   "this_server_cant_change_its_tmdb_key": "ez a szerver nem tudja módosítani a TMDB-kulcsát",
@@ -201,6 +203,7 @@
   "this_invite_link_doesnt_work_ask_for_another": "ez a meghívólink nem működik; kérj másikat",
   "this_invite_was_already_used": "ezt a meghívót már felhasználták",
   "this_watch_together_session_is_full": "ez a közös nézés megtelt",
+  "thumbnails_must_be_all_onplay_or_off": "a bélyegképek értéke all, onPlay vagy off lehet",
   "too_many_watch_together_sessions_right_now": "most túl sok közös nézés fut",
   "unknown_action": "ismeretlen művelet",
   "usernames_are_at_most_40_characters": "a felhasználónév legfeljebb 40 karakter"

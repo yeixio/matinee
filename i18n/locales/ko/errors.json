@@ -58,6 +58,7 @@
   "no_such_subtitle_track": "그런 자막 트랙이 없습니다",
   "no_such_theme": "그런 테마가 없습니다",
   "no_such_trailer": "그런 예고편이 없습니다",
+  "no_such_transcode": "해당 트랜스코딩이 없습니다",
   "no_such_user": "그런 사용자가 없습니다",
   "not_a_file": "파일이 아닙니다",
   "not_a_playable_item": "재생할 수 있는 항목이 아닙니다",
@@ -127,6 +128,7 @@
   "tmdbid_is_required": "tmdbId가 필요합니다",
   "todays_subtitle_downloads_are_used_up_try_again_tomorrow": "오늘의 자막 다운로드 횟수를 모두 썼습니다. 내일 다시 시도하세요.",
   "no_such_row": "해당 줄이 없습니다",
+  "no_such_sheet": "해당 시트가 없습니다",
   "tmdb_didnt_accept_that_key": "TMDB가 그 키를 받아들이지 않았습니다",
   "tmdb_couldnt_be_reached_to_check_the_key": "키를 확인하려고 했지만 TMDB에 연결할 수 없습니다",
   "this_server_cant_change_its_tmdb_key": "이 서버는 TMDB 키를 바꿀 수 없습니다",
@@ -201,6 +203,7 @@
   "this_invite_link_doesnt_work_ask_for_another": "이 초대 링크는 사용할 수 없어요. 새 링크를 요청하세요",
   "this_invite_was_already_used": "이미 사용된 초대예요",
   "this_watch_together_session_is_full": "이 함께 보기 세션은 가득 찼어요",
+  "thumbnails_must_be_all_onplay_or_off": "미리보기 이미지는 all, onPlay, off 중 하나여야 합니다",
   "too_many_watch_together_sessions_right_now": "지금은 함께 보기 세션이 너무 많아요",
   "unknown_action": "알 수 없는 동작",
   "usernames_are_at_most_40_characters": "사용자 이름은 최대 40자예요"

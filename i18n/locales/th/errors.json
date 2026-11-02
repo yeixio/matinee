@@ -58,6 +58,7 @@
   "no_such_subtitle_track": "ไม่มีแทร็กคำบรรยายนี้",
   "no_such_theme": "ไม่มีธีมนี้",
   "no_such_trailer": "ไม่มีตัวอย่างนี้",
+  "no_such_transcode": "ไม่มีการทรานส์โค้ดนี้",
   "no_such_user": "ไม่มีผู้ใช้นี้",
   "not_a_file": "ไม่ใช่ไฟล์",
   "not_a_playable_item": "ไม่ใช่รายการที่เล่นได้",
@@ -127,6 +128,7 @@
   "tmdbid_is_required": "ต้องระบุ tmdbId",
   "todays_subtitle_downloads_are_used_up_try_again_tomorrow": "สิทธิ์ดาวน์โหลดคำบรรยายของวันนี้หมดแล้ว ลองใหม่พรุ่งนี้",
   "no_such_row": "ไม่มีแถวนี้",
+  "no_such_sheet": "ไม่มีแผ่นภาพนี้",
   "tmdb_didnt_accept_that_key": "TMDB ไม่ยอมรับคีย์นี้",
   "tmdb_couldnt_be_reached_to_check_the_key": "ไม่สามารถติดต่อ TMDB เพื่อตรวจสอบคีย์ได้",
   "this_server_cant_change_its_tmdb_key": "เซิร์ฟเวอร์นี้เปลี่ยนคีย์ TMDB ของตัวเองไม่ได้",
@@ -201,6 +203,7 @@
   "this_invite_link_doesnt_work_ask_for_another": "ลิงก์เชิญนี้ใช้ไม่ได้ ขอลิงก์ใหม่",
   "this_invite_was_already_used": "คำเชิญนี้ถูกใช้ไปแล้ว",
   "this_watch_together_session_is_full": "เซสชันดูด้วยกันนี้เต็มแล้ว",
+  "thumbnails_must_be_all_onplay_or_off": "ภาพตัวอย่างต้องเป็น all, onPlay หรือ off",
   "too_many_watch_together_sessions_right_now": "ตอนนี้มีเซสชันดูด้วยกันมากเกินไป",
   "unknown_action": "การกระทำที่ไม่รู้จัก",
   "usernames_are_at_most_40_characters": "ชื่อผู้ใช้ยาวได้ไม่เกิน 40 อักขระ"

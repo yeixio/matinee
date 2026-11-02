@@ -266,6 +266,7 @@
     "rules": "Rules",
     "rulesHint": "Titles that match these filters join by themselves as the library changes.",
     "shuffleDaily": "Shuffle every day",
+    "includeTV": "Include TV shows",
     "order": "Order",
     "orderAdded": "The order titles were added",
     "direction": "Direction",
@@ -411,6 +412,7 @@
     "state": {
       "lookingAt": "Looking at {{file}}",
       "intros": "Looking for intros in {{season}}",
+      "thumbnails": "Making seek bar previews for {{title}}",
       "working": "Working",
       "waiting": "Waiting for playback to finish",
       "slowDisk": "Files are slow to read; resting for a few minutes",
@@ -440,6 +442,25 @@
       "label": "Find TV intros",
       "hint": "Once every file is analyzed, Matinee listens to the start of each season’s episodes for the intro they share, so players can offer Skip intro.",
       "progress": "{{done}} of {{total}} episodes checked, {{found}} with an intro"
+    },
+    "thumbnails": {
+      "label": "Seek bar previews",
+      "hint": "Small pictures of each video that show above the seek bar while you scrub. They take about 4 MB per movie.",
+      "progress": "{{done}} of {{total}} videos ready",
+      "mode": {
+        "all": {
+          "label": "All videos",
+          "hint": "Made for every video in the background, after the analysis and at its speed."
+        },
+        "onPlay": {
+          "label": "When played",
+          "hint": "Made the first time someone plays a video. Saves time and space on big libraries."
+        },
+        "off": {
+          "label": "Off",
+          "hint": "None are made, and the seek bar shows only the time."
+        }
+      }
     }
   },
   "profileSettings": {
@@ -818,6 +839,10 @@
       "add-ons": {
         "title": "Add-ons",
         "hint": "Radarr, Sonarr, Overseerr and plugins"
+      },
+      "health": {
+        "title": "Server health",
+        "hint": "Load, playback, jobs, problems and the log"
       }
     }
   },
@@ -988,5 +1013,159 @@
     "expired": "{{name}} expired on {{date}}",
     "badge": "Friend",
     "seeEverything": "Let them see everything"
+  },
+  "health": {
+    "title": "Server health",
+    "intro": "How the server is doing right now, for when something isn't working. Everything here comes from this server and stays on it.",
+    "cantLoad": "Couldn't load the server's health: {{error}}",
+    "updates": "Updates every 5 seconds",
+    "upFor": "up for {{time}}",
+    "seconds": "{{seconds}}s",
+    "days": "{{days}}d {{hours}}h",
+    "hourAgo": "1 hour ago",
+    "now": "Now",
+    "noHistory": "The chart fills in over the next minute.",
+    "chartLabel": "{{name}} over the last hour",
+    "status": {
+      "ok": "Everything looks fine",
+      "problems_one": "{{count}} warning or error in the last hour",
+      "problems_other": "{{count}} warnings or errors in the last hour",
+      "restarting": "The server is restarting",
+      "database": "The database isn't answering",
+      "disk": "A folder can't be read"
+    },
+    "scope": {
+      "group": "Matinee and the FFmpeg processes it runs.",
+      "process": "Matinee itself; FFmpeg processes aren't counted."
+    },
+    "tiles": {
+      "cpu": "CPU",
+      "machine": "whole machine {{value}}",
+      "load": "load {{load}}",
+      "cpuLimit": "Limited to {{cores}} cores.",
+      "memory": "Memory",
+      "of": "of {{total}}",
+      "ofLimit": "of {{total}} allowed",
+      "sending": "Sending",
+      "sentTotal": "{{total}} since it started",
+      "playing": "Playing now",
+      "transcodes_one": "{{count}} transcode",
+      "transcodes_other": "{{count}} transcodes"
+    },
+    "level": {
+      "warn": "Warning",
+      "error": "Error"
+    },
+    "streams": {
+      "title": "Playing now",
+      "none": "Nothing is playing.",
+      "direct": "Direct play",
+      "transcoding": "Transcoding",
+      "away": "Away from home",
+      "paused": "Paused",
+      "buffering": "Buffering"
+    },
+    "transcodes": {
+      "title": "Transcodes",
+      "none": "No transcodes are running.",
+      "kind": {
+        "video": "Converting video",
+        "copy": "Repackaging video",
+        "audio": "Converting audio"
+      },
+      "mode": {
+        "cpu": "on the CPU",
+        "encode": "{{name}} encodes",
+        "full": "{{name}} decodes and encodes"
+      },
+      "burnSub": "subtitles drawn in",
+      "started": "Started {{time}}",
+      "stop": "Stop",
+      "stopHint": "Stops FFmpeg. If the player is still open, it starts a new transcode.",
+      "cpuOnly": "Transcodes run on the CPU."
+    },
+    "problems": {
+      "title": "Warnings and errors",
+      "none": "No warnings or errors since the server started.",
+      "times_one": "{{count}} time",
+      "times_other": "{{count}} times",
+      "last": "last {{time}}",
+      "showInLog": "Show in log",
+      "more_one": "Show {{count}} more",
+      "more_other": "Show {{count}} more"
+    },
+    "jobs": {
+      "title": "Background jobs",
+      "scan": "Scan {{library}}",
+      "scanning": "Scanning for {{time}}",
+      "lastScan": "{{time}}, took {{took}}",
+      "scanCounts": "{{added}} added, {{updated}} updated, {{removed}} removed, {{failed}} not playable",
+      "scanFailed": "Failed: {{error}}",
+      "notScanned": "Not scanned since the server started",
+      "downloads": "Downloads for devices",
+      "downloadCounts": "{{waiting}} waiting, {{converting}} converting, {{failed}} failed",
+      "nothing": "Nothing to do",
+      "importing": "Importing watch history"
+    },
+    "disks": {
+      "title": "Disk space",
+      "free": "{{free}} free of {{total}}",
+      "low": "Low on space",
+      "unreachableTitle": "Can't be read",
+      "unreachable": "This folder didn't answer. If it's on a network share, check the share is still connected.",
+      "use": {
+        "data": "Data",
+        "transcode": "Transcoding",
+        "thumbnails": "Seek bar previews",
+        "images": "Posters and artwork",
+        "downloads": "Downloads",
+        "library": "{{library}}"
+      }
+    },
+    "details": {
+      "title": "Server details",
+      "version": "Version",
+      "ffmpeg": "FFmpeg",
+      "ffmpegMissing": "Not found at {{path}}",
+      "system": "System",
+      "cores_one": "{{count}} core",
+      "cores_other": "{{count}} cores",
+      "started": "Started",
+      "database": "Database",
+      "answers": "answers in {{ms}} ms",
+      "dbCounts": "{{items}} items, {{users}} accounts, {{libraries}} libraries",
+      "connections": "{{open}} connections, {{busy}} busy",
+      "dbError": "Didn't answer: {{error}}",
+      "requests": "Requests",
+      "requestCounts": "{{requests}} answered, {{errors}} failed on the server",
+      "logged": "Logged",
+      "loggedCounts": "{{warnings}} warnings, {{errors}} errors",
+      "rescans": "Scheduled rescans",
+      "every": "Every {{time}}",
+      "remote": "Remote access",
+      "remoteState": {
+        "off": "Off",
+        "working": "Setting up",
+        "ready": "Working",
+        "failed": "Not working"
+      },
+      "runtime": "Go runtime",
+      "heap": "{{heap}} in use, {{goroutines}} goroutines"
+    },
+    "log": {
+      "title": "Log",
+      "intro": "The latest {{count}} lines since the server started. The full log is wherever the server's output goes, such as the container's log.",
+      "download": "Download",
+      "search": "Search the log",
+      "level": "Show",
+      "levels": {
+        "all": "Everything",
+        "warn": "Warnings and errors",
+        "error": "Errors"
+      },
+      "live": "Follow new lines",
+      "older": "Show older lines",
+      "empty": "No lines match."
+    }
   }
 }

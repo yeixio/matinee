@@ -71,6 +71,12 @@ func TestHomeRows(t *testing.T) {
 	}
 	add("Paper Hearts", 2026, 7, "Romance")
 	add("Last Dance", 2025, 6, "Romance", "Drama")
+	// Shows stay out of the genre rows, and don't count toward one.
+	tv, _ := db.CreateLibrary(ctx, "TV", "tv", []string{"/tv"})
+	for i, title := range []string{"Love Island Nights", "Second Chances", "Deep Space Drift"} {
+		show, _ := db.EnsureContainer(ctx, tv.ID, nil, "show", title, nil, nil)
+		db.ApplyMetadata(ctx, show, &store.Metadata{TMDBID: int64(100 + i), Rating: 9, Genres: []string{"Romance", "Science Fiction"}})
+	}
 
 	var home struct {
 		NewReleases []store.Item
@@ -94,6 +100,9 @@ func TestHomeRows(t *testing.T) {
 			t.Fatalf("sci-fi row: %+v", r.Items)
 		}
 		for _, it := range r.Items {
+			if it.Kind != "movie" {
+				t.Fatalf("%s (a %s) in the %s row", it.Title, it.Kind, r.Genre)
+			}
 			if !slices.Contains(it.Genres, r.Genre) {
 				t.Fatalf("%s in the %s row has genres %v", it.Title, r.Genre, it.Genres)
 			}

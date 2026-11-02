@@ -58,6 +58,7 @@
   "no_such_subtitle_track": "nie ma takiej ścieżki napisów",
   "no_such_theme": "nie ma takiego motywu",
   "no_such_trailer": "nie ma takiego zwiastuna",
+  "no_such_transcode": "nie ma takiego transkodowania",
   "no_such_user": "nie ma takiego użytkownika",
   "not_a_file": "to nie jest plik",
   "not_a_playable_item": "tej pozycji nie da się odtworzyć",
@@ -127,6 +128,7 @@
   "tmdbid_is_required": "tmdbId jest wymagane",
   "todays_subtitle_downloads_are_used_up_try_again_tomorrow": "dzisiejszy limit pobrań napisów się wyczerpał. Spróbuj jutro.",
   "no_such_row": "nie ma takiego rzędu",
+  "no_such_sheet": "nie ma takiego arkusza",
   "tmdb_didnt_accept_that_key": "TMDB nie przyjął tego klucza",
   "tmdb_couldnt_be_reached_to_check_the_key": "Nie udało się połączyć z TMDB, aby sprawdzić klucz",
   "this_server_cant_change_its_tmdb_key": "ten serwer nie może zmienić swojego klucza TMDB",
@@ -201,6 +203,7 @@
   "this_invite_link_doesnt_work_ask_for_another": "ten link z zaproszeniem nie działa; poproś o nowy",
   "this_invite_was_already_used": "to zaproszenie zostało już wykorzystane",
   "this_watch_together_session_is_full": "ta sesja Oglądaj razem jest pełna",
+  "thumbnails_must_be_all_onplay_or_off": "miniatury muszą mieć wartość all, onPlay lub off",
   "too_many_watch_together_sessions_right_now": "teraz jest za dużo sesji Oglądaj razem",
   "unknown_action": "nieznana czynność",
   "usernames_are_at_most_40_characters": "nazwy użytkownika mają najwyżej 40 znaków"

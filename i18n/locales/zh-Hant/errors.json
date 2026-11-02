@@ -58,6 +58,7 @@
   "no_such_subtitle_track": "沒有這個字幕軌",
   "no_such_theme": "沒有這個主題",
   "no_such_trailer": "沒有這個預告片",
+  "no_such_transcode": "沒有這個轉碼",
   "no_such_user": "沒有這個使用者",
   "not_a_file": "不是檔案",
   "not_a_playable_item": "不是可播放的項目",
@@ -127,6 +128,7 @@
   "tmdbid_is_required": "需要 tmdbId",
   "todays_subtitle_downloads_are_used_up_try_again_tomorrow": "今天的字幕下載次數已用完。請明天再試。",
   "no_such_row": "沒有這一列",
+  "no_such_sheet": "沒有這張拼圖",
   "tmdb_didnt_accept_that_key": "TMDB 不接受此金鑰",
   "tmdb_couldnt_be_reached_to_check_the_key": "無法連線到 TMDB 以檢查金鑰",
   "this_server_cant_change_its_tmdb_key": "此伺服器無法變更其 TMDB 金鑰",
@@ -201,6 +203,7 @@
   "this_invite_link_doesnt_work_ask_for_another": "這個邀請連結無效；請再要一個",
   "this_invite_was_already_used": "這個邀請已被使用",
   "this_watch_together_session_is_full": "這個一起看工作階段已滿",
+  "thumbnails_must_be_all_onplay_or_off": "縮圖必須是 all、onPlay 或 off",
   "too_many_watch_together_sessions_right_now": "目前一起看的工作階段太多",
   "unknown_action": "未知操作",
   "usernames_are_at_most_40_characters": "使用者名稱最多 40 個字元"

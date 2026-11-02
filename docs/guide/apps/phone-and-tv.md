@@ -94,7 +94,7 @@ The remote works the way it does in your TV's own player:
 | Press | While something plays |
 | --- | --- |
 | Select, or Play/Pause | Pause, and play again |
-| Left or right | Back or forward 10 seconds (hold for a minute); rewind and fast forward on remotes that have them do the same |
+| Left or right | Back or forward 10 seconds (hold for a minute); rewind and fast forward on remotes that have them do the same. <!-- since: v0.1.11 -->From app version 1.0.23, a picture of where you'll land shows above the bar ([seek bar previews](/docs/watching/seek-previews/)).<!-- /since --> |
 | Up | Show the bar: where you are, the time left and when it ends |
 | Down | Show the bar and go to the buttons under it: **Audio**, **Subtitles** and **Sleep timer** |
 | Up or Back, on the buttons | Back to the bar |

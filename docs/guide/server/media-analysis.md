@@ -13,6 +13,10 @@ That's where the badges on titles come from, along with the **Quality** [filters
 Once every file is analyzed, Matinee goes on to listen to the start of each season's episodes for the intro they share, for [Skip intro](/docs/watching/skipping-intros/). **Find TV intros** on the same card turns that off, and shows how far it is.
 <!-- /since -->
 
+<!-- since: v0.1.11 -->
+After that, it makes the small pictures players show above the seek bar while you scrub, at the same pace. The **Seek bar previews** card shows how far it is, and can make them only when a video is played, or not at all. See [Seek bar previews](/docs/watching/seek-previews/).
+<!-- /since -->
+
 ![Media analysis: every file analyzed, with the Gentle, Normal and Off speeds](../images/media-analysis.webp)
 
 ## Gentle on your server

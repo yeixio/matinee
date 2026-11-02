@@ -58,6 +58,7 @@
   "no_such_subtitle_track": "ऐसा कोई सबटाइटल ट्रैक नहीं",
   "no_such_theme": "ऐसी कोई थीम नहीं",
   "no_such_trailer": "ऐसा कोई ट्रेलर नहीं",
+  "no_such_transcode": "ऐसा कोई ट्रांसकोड नहीं",
   "no_such_user": "ऐसा कोई उपयोगकर्ता नहीं",
   "not_a_file": "फ़ाइल नहीं है",
   "not_a_playable_item": "चलाने योग्य आइटम नहीं है",
@@ -127,6 +128,7 @@
   "tmdbid_is_required": "tmdbId ज़रूरी है",
   "todays_subtitle_downloads_are_used_up_try_again_tomorrow": "आज के सबटाइटल डाउनलोड खत्म हो गए। कल फिर कोशिश करें।",
   "no_such_row": "ऐसी कोई पंक्ति नहीं",
+  "no_such_sheet": "ऐसी कोई शीट नहीं है",
   "tmdb_didnt_accept_that_key": "TMDB ने वह कुंजी स्वीकार नहीं की",
   "tmdb_couldnt_be_reached_to_check_the_key": "कुंजी जाँचने के लिए TMDB तक नहीं पहुँचा जा सका",
   "this_server_cant_change_its_tmdb_key": "यह सर्वर अपनी TMDB कुंजी नहीं बदल सकता",
@@ -201,6 +203,7 @@
   "this_invite_link_doesnt_work_ask_for_another": "यह न्योता लिंक काम नहीं करता; नया माँगें",
   "this_invite_was_already_used": "यह न्योता पहले ही इस्तेमाल हो चुका है",
   "this_watch_together_session_is_full": "यह साथ देखने का सत्र भर गया है",
+  "thumbnails_must_be_all_onplay_or_off": "थंबनेल all, onPlay या off होने चाहिए",
   "too_many_watch_together_sessions_right_now": "अभी साथ देखने के बहुत सारे सत्र चल रहे हैं",
   "unknown_action": "अज्ञात कार्रवाई",
   "usernames_are_at_most_40_characters": "यूज़रनेम ज़्यादा से ज़्यादा 40 अक्षर का हो सकता है"

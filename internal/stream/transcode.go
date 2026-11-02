@@ -78,6 +78,15 @@ type session struct {
 	superseded bool
 	// killed is set (under Transcoder.mu) when Matinee stops FFmpeg itself.
 	killed bool
+	// For the admin dashboard (see Sessions).
+	started   time.Time
+	startSec  float64
+	accel     *hwaccel.Accel // nil on the CPU
+	mode      hwaccel.Mode
+	quality   []string
+	copyVideo bool
+	audioOnly bool
+	burnSub   bool
 }
 
 func NewTranscoder(ffmpeg, dir string, hw Accelerator, log *slog.Logger) *Transcoder {
@@ -248,10 +257,12 @@ func (t *Transcoder) start(ctx context.Context, userID int64, it store.Item, sta
 		os.RemoveAll(dir)
 		return "", fmt.Errorf("start ffmpeg: %w", err)
 	}
-	s := &session{id: id, userID: userID, itemID: it.ID, dir: dir, cmd: cmd, done: make(chan struct{}), lastSeen: time.Now()}
+	s := &session{id: id, userID: userID, itemID: it.ID, dir: dir, cmd: cmd, done: make(chan struct{}), lastSeen: time.Now(),
+		started: time.Now(), startSec: startSec, mode: mode, copyVideo: copyVideo, audioOnly: it.VideoCodec == "", burnSub: video.BurnSub >= 0}
 	var kind hwaccel.Kind
 	if mode != hwaccel.CPU {
 		kind = accel.Kind
+		s.accel = accel
 	}
 	go func() {
 		err := cmd.Wait()
@@ -273,6 +284,9 @@ func (t *Transcoder) start(ctx context.Context, userID int64, it store.Item, sta
 	for _, s := range steps {
 		quality = append(quality, s.ID)
 	}
+	t.mu.Lock()
+	s.quality = quality
+	t.mu.Unlock()
 	t.Log.Info("transcode started", "session", id, "item", it.ID, "start", startSec,
 		"videoCopy", copyVideo, "burnSub", video.BurnSub, "audio", audio, "accel", kind, "mode", mode, "quality", quality)
 

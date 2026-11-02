@@ -58,6 +58,7 @@
   "no_such_subtitle_track": "taková stopa titulků neexistuje",
   "no_such_theme": "takový motiv neexistuje",
   "no_such_trailer": "taková upoutávka neexistuje",
+  "no_such_transcode": "takový převod neexistuje",
   "no_such_user": "takový uživatel neexistuje",
   "not_a_file": "není soubor",
   "not_a_playable_item": "není přehratelná položka",
@@ -127,6 +128,7 @@
   "tmdbid_is_required": "tmdbId je povinné",
   "todays_subtitle_downloads_are_used_up_try_again_tomorrow": "dnešní stahování titulků je vyčerpané. Zkuste to zítra.",
   "no_such_row": "taková řada neexistuje",
+  "no_such_sheet": "žádný takový arch",
   "tmdb_didnt_accept_that_key": "TMDB tento klíč nepřijalo",
   "tmdb_couldnt_be_reached_to_check_the_key": "TMDB se nepodařilo kontaktovat kvůli ověření klíče",
   "this_server_cant_change_its_tmdb_key": "tento server nemůže změnit svůj klíč TMDB",
@@ -201,6 +203,7 @@
   "this_invite_link_doesnt_work_ask_for_another": "tento odkaz s pozvánkou nefunguje; požádejte o nový",
   "this_invite_was_already_used": "tato pozvánka už byla použita",
   "this_watch_together_session_is_full": "tato relace společného sledování je plná",
+  "thumbnails_must_be_all_onplay_or_off": "náhledy musí být all, onPlay nebo off",
   "too_many_watch_together_sessions_right_now": "právě teď běží příliš mnoho relací společného sledování",
   "unknown_action": "neznámá akce",
   "usernames_are_at_most_40_characters": "uživatelská jména mají nejvýše 40 znaků"

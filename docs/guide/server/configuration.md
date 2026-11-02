@@ -22,6 +22,10 @@ sidebar:
 
 The server's version is at the bottom of every group.
 
+<!-- since: v0.1.11 -->
+Admins also have **Server health**, a dashboard of the server's load, what's playing, background jobs, disk space, warnings and errors, and its log. See [Server health](/docs/server/server-health/).
+<!-- /since -->
+
 ![Settings on a computer, with the groups down the left side and Libraries open](../images/settings-groups.webp)
 
 ![Settings on a phone, listing the groups (phone)](../images/phone-settings.webp)

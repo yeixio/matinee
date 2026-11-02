@@ -62,6 +62,9 @@ func (c Config) ImageDir() string     { return filepath.Join(c.DataDir, "images"
 func (c Config) SubtitleDir() string  { return filepath.Join(c.DataDir, "subtitles") }
 func (c Config) LevelsDir() string    { return filepath.Join(c.DataDir, "levels") }
 func (c Config) DownloadDir() string  { return filepath.Join(c.DataDir, "downloads") }
+
+// ThumbnailDir holds the seek bar's pictures of each video (internal/thumbs).
+func (c Config) ThumbnailDir() string { return filepath.Join(c.DataDir, "thumbnails") }
 func (c Config) RemoteDir() string    { return filepath.Join(c.DataDir, "remote") }
 
 // PluginDir holds installed plugins and what they keep (internal/plugin).

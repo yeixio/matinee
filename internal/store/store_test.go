@@ -66,6 +66,7 @@ func TestMigrateFromVersion1(t *testing.T) {
 		"ALTER TABLE items DROP COLUMN mb_release",
 		"ALTER TABLE items DROP COLUMN mb_group",
 		"ALTER TABLE items DROP COLUMN tags_read",
+		"DROP TABLE thumbnails",
 		"DROP TABLE intros",
 		"DROP INDEX invites_created",
 		"DROP TABLE invites",

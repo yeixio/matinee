@@ -267,6 +267,7 @@
     "rules": "Regole",
     "rulesHint": "I titoli che corrispondono a questi filtri entrano da soli quando la libreria cambia.",
     "shuffleDaily": "Mescola ogni giorno",
+    "includeTV": "Includi serie TV",
     "order": "Ordine",
     "orderAdded": "L’ordine in cui i titoli sono stati aggiunti",
     "direction": "Direzione",
@@ -414,6 +415,7 @@
     "state": {
       "lookingAt": "Esame di {{file}}",
       "intros": "Ricerca delle intro in {{season}}",
+      "thumbnails": "Creazione delle anteprime della barra per {{title}}",
       "working": "Al lavoro",
       "waiting": "In attesa della fine della riproduzione",
       "slowDisk": "I file sono lenti da leggere; pausa di qualche minuto",
@@ -444,6 +446,25 @@
       "label": "Trova le intro delle serie",
       "hint": "Quando tutti i file sono analizzati, Matinee ascolta l’inizio degli episodi di ogni stagione per trovare l’intro che hanno in comune, così i lettori possono offrire Salta intro.",
       "progress": "{{done}} episodi su {{total}} controllati, {{found}} con un’intro"
+    },
+    "thumbnails": {
+      "label": "Anteprime nella barra di avanzamento",
+      "hint": "Piccole immagini di ogni video che compaiono sopra la barra mentre la scorri. Occupano circa 4 MB per film.",
+      "progress": "{{done}} video pronti su {{total}}",
+      "mode": {
+        "all": {
+          "label": "Tutti i video",
+          "hint": "Create in background per ogni video, dopo l'analisi e al suo ritmo."
+        },
+        "onPlay": {
+          "label": "Alla riproduzione",
+          "hint": "Create la prima volta che qualcuno riproduce un video. Risparmia tempo e spazio con librerie grandi."
+        },
+        "off": {
+          "label": "Disattivate",
+          "hint": "Non ne viene creata nessuna e la barra mostra solo il tempo."
+        }
+      }
     }
   },
   "profileSettings": {
@@ -822,6 +843,10 @@
       "add-ons": {
         "title": "Componenti aggiuntivi",
         "hint": "Radarr, Sonarr, Overseerr e plugin"
+      },
+      "health": {
+        "title": "Stato del server",
+        "hint": "Carico, riproduzione, attività, problemi e registro"
       }
     }
   },
@@ -994,5 +1019,164 @@
     "expired": "{{name}} è scaduto il {{date}}",
     "badge": "Amico",
     "seeEverything": "Fagli vedere tutto"
+  },
+  "health": {
+    "title": "Stato del server",
+    "intro": "Come sta il server in questo momento, per quando qualcosa non va. Tutto quello che vedi qui viene da questo server e ci resta.",
+    "cantLoad": "Impossibile caricare lo stato del server: {{error}}",
+    "updates": "Si aggiorna ogni 5 secondi",
+    "upFor": "attivo da {{time}}",
+    "seconds": "{{seconds}} s",
+    "days": "{{days}} g {{hours}} h",
+    "hourAgo": "1 ora fa",
+    "now": "Ora",
+    "noHistory": "Il grafico si riempie nel prossimo minuto.",
+    "chartLabel": "{{name}} nell’ultima ora",
+    "status": {
+      "ok": "Tutto a posto",
+      "problems_many": "{{count}} avvisi o errori nell’ultima ora",
+      "problems_one": "{{count}} avviso o errore nell’ultima ora",
+      "problems_other": "{{count}} avvisi o errori nell’ultima ora",
+      "restarting": "Il server si sta riavviando",
+      "database": "Il database non risponde",
+      "disk": "Una cartella non si può leggere"
+    },
+    "scope": {
+      "group": "Matinee e i processi FFmpeg che avvia.",
+      "process": "Solo Matinee; i processi FFmpeg non sono contati."
+    },
+    "tiles": {
+      "cpu": "CPU",
+      "machine": "intera macchina {{value}}",
+      "load": "carico {{load}}",
+      "cpuLimit": "Limitato a {{cores}} core.",
+      "memory": "Memoria",
+      "of": "di {{total}}",
+      "ofLimit": "di {{total}} consentiti",
+      "sending": "Invio",
+      "sentTotal": "{{total}} dall’avvio",
+      "playing": "In riproduzione",
+      "transcodes_many": "{{count}} transcodifiche",
+      "transcodes_one": "{{count}} transcodifica",
+      "transcodes_other": "{{count}} transcodifiche"
+    },
+    "level": {
+      "warn": "Avviso",
+      "error": "Errore"
+    },
+    "streams": {
+      "title": "In riproduzione",
+      "none": "Non c’è niente in riproduzione.",
+      "direct": "Riproduzione diretta",
+      "transcoding": "Transcodifica",
+      "away": "Fuori casa",
+      "paused": "In pausa",
+      "buffering": "Caricamento"
+    },
+    "transcodes": {
+      "title": "Transcodifiche",
+      "none": "Nessuna transcodifica in corso.",
+      "kind": {
+        "video": "Conversione del video",
+        "copy": "Riconfezionamento del video",
+        "audio": "Conversione dell’audio"
+      },
+      "mode": {
+        "cpu": "sulla CPU",
+        "encode": "{{name}} codifica",
+        "full": "{{name}} decodifica e codifica"
+      },
+      "burnSub": "sottotitoli impressi",
+      "started": "Avviata {{time}}",
+      "stop": "Ferma",
+      "stopHint": "Ferma FFmpeg. Se il player è ancora aperto, avvia una nuova transcodifica.",
+      "cpuOnly": "Le transcodifiche usano la CPU."
+    },
+    "problems": {
+      "title": "Avvisi ed errori",
+      "none": "Nessun avviso o errore dall’avvio del server.",
+      "times_many": "{{count}} volte",
+      "times_one": "{{count}} volta",
+      "times_other": "{{count}} volte",
+      "last": "ultima {{time}}",
+      "showInLog": "Mostra nel registro",
+      "more_many": "Mostra altri {{count}}",
+      "more_one": "Mostra altri {{count}}",
+      "more_other": "Mostra altri {{count}}"
+    },
+    "jobs": {
+      "title": "Attività in background",
+      "scan": "Scansione di {{library}}",
+      "scanning": "Scansione in corso da {{time}}",
+      "lastScan": "{{time}}, durata {{took}}",
+      "scanCounts": "{{added}} aggiunti, {{updated}} aggiornati, {{removed}} rimossi, {{failed}} non riproducibili",
+      "scanFailed": "Non riuscita: {{error}}",
+      "notScanned": "Non scansionata dall’avvio del server",
+      "downloads": "Download per i dispositivi",
+      "downloadCounts": "{{waiting}} in attesa, {{converting}} in conversione, {{failed}} non riusciti",
+      "nothing": "Niente da fare",
+      "importing": "Importazione della cronologia"
+    },
+    "disks": {
+      "title": "Spazio su disco",
+      "free": "{{free}} liberi su {{total}}",
+      "low": "Poco spazio",
+      "unreachableTitle": "Non leggibile",
+      "unreachable": "Questa cartella non ha risposto. Se è su una condivisione di rete, controlla che sia ancora collegata.",
+      "use": {
+        "data": "Dati",
+        "transcode": "Transcodifica",
+        "thumbnails": "Anteprime della barra",
+        "images": "Locandine e grafica",
+        "downloads": "Download",
+        "library": "{{library}}"
+      }
+    },
+    "details": {
+      "title": "Dettagli del server",
+      "version": "Versione",
+      "ffmpeg": "FFmpeg",
+      "ffmpegMissing": "Non trovato in {{path}}",
+      "system": "Sistema",
+      "cores_many": "{{count}} core",
+      "cores_one": "{{count}} core",
+      "cores_other": "{{count}} core",
+      "started": "Avviato",
+      "database": "Database",
+      "answers": "risponde in {{ms}} ms",
+      "dbCounts": "{{items}} elementi, {{users}} account, {{libraries}} librerie",
+      "connections": "{{open}} connessioni, {{busy}} occupate",
+      "dbError": "Nessuna risposta: {{error}}",
+      "requests": "Richieste",
+      "requestCounts": "{{requests}} gestite, {{errors}} non riuscite sul server",
+      "logged": "Registrati",
+      "loggedCounts": "{{warnings}} avvisi, {{errors}} errori",
+      "rescans": "Scansioni pianificate",
+      "every": "Ogni {{time}}",
+      "remote": "Accesso remoto",
+      "remoteState": {
+        "off": "Disattivato",
+        "working": "Configurazione",
+        "ready": "Funziona",
+        "failed": "Non funziona"
+      },
+      "runtime": "Runtime Go",
+      "heap": "{{heap}} in uso, {{goroutines}} goroutine"
+    },
+    "log": {
+      "title": "Registro",
+      "intro": "Le ultime {{count}} righe dall’avvio del server. Il registro completo si trova dove finisce l’output del server, ad esempio nel log del container.",
+      "download": "Scarica",
+      "search": "Cerca nel registro",
+      "level": "Mostra",
+      "levels": {
+        "all": "Tutto",
+        "warn": "Avvisi ed errori",
+        "error": "Errori"
+      },
+      "live": "Segui le nuove righe",
+      "older": "Mostra righe precedenti",
+      "empty": "Nessuna riga corrisponde."
+    }
   }
 }

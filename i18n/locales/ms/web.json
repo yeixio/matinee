@@ -265,6 +265,7 @@
     "rules": "Peraturan",
     "rulesHint": "Tajuk yang sepadan dengan penapis ini masuk dengan sendirinya apabila pustaka berubah.",
     "shuffleDaily": "Rawakkan setiap hari",
+    "includeTV": "Sertakan rancangan TV",
     "order": "Susunan",
     "orderAdded": "Susunan tajuk ditambah",
     "direction": "Arah",
@@ -408,6 +409,7 @@
     "state": {
       "lookingAt": "Meneliti {{file}}",
       "intros": "Mencari intro dalam {{season}}",
+      "thumbnails": "Membuat pratonton bar untuk {{title}}",
       "working": "Sedang bekerja",
       "waiting": "Menunggu main balik selesai",
       "slowDisk": "Fail lambat dibaca; berehat beberapa minit",
@@ -436,6 +438,25 @@
       "label": "Cari intro rancangan TV",
       "hint": "Selepas semua fail dianalisis, Matinee mendengar permulaan episod setiap musim untuk mencari intro yang dikongsi, supaya pemain boleh menawarkan Langkau intro.",
       "progress": "{{done}} daripada {{total}} episod disemak, {{found}} ada intro"
+    },
+    "thumbnails": {
+      "label": "Pratonton pada bar main",
+      "hint": "Gambar kecil daripada setiap video yang muncul di atas bar semasa anda menyorot. Kira-kira 4 MB setiap filem.",
+      "progress": "{{done}} daripada {{total}} video sedia",
+      "mode": {
+        "all": {
+          "label": "Semua video",
+          "hint": "Dibuat di latar belakang untuk setiap video, selepas analisis dan pada kelajuannya."
+        },
+        "onPlay": {
+          "label": "Semasa dimainkan",
+          "hint": "Dibuat kali pertama seseorang memainkan video. Menjimatkan masa dan ruang untuk pustaka besar."
+        },
+        "off": {
+          "label": "Mati",
+          "hint": "Tiada yang dibuat, dan bar hanya menunjukkan masa."
+        }
+      }
     }
   },
   "profileSettings": {
@@ -814,6 +835,10 @@
       "add-ons": {
         "title": "Tambahan",
         "hint": "Radarr, Sonarr, Overseerr dan pemalam"
+      },
+      "health": {
+        "title": "Kesihatan pelayan",
+        "hint": "Beban, main balik, tugas, masalah dan log"
       }
     }
   },
@@ -982,5 +1007,154 @@
     "expired": "{{name}} tamat tempoh pada {{date}}",
     "badge": "Rakan",
     "seeEverything": "Benarkan lihat semua"
+  },
+  "health": {
+    "title": "Kesihatan pelayan",
+    "intro": "Keadaan pelayan sekarang, untuk apabila sesuatu tidak berfungsi. Semua di sini datang dari pelayan ini dan kekal di situ.",
+    "cantLoad": "Tidak dapat memuatkan kesihatan pelayan: {{error}}",
+    "updates": "Dikemas kini setiap 5 saat",
+    "upFor": "berjalan selama {{time}}",
+    "seconds": "{{seconds}} s",
+    "days": "{{days}} h {{hours}} j",
+    "hourAgo": "1 jam lalu",
+    "now": "Sekarang",
+    "noHistory": "Carta akan terisi dalam seminit lagi.",
+    "chartLabel": "{{name}} sepanjang sejam lalu",
+    "status": {
+      "ok": "Semuanya kelihatan baik",
+      "problems_other": "{{count}} amaran atau ralat dalam sejam lalu",
+      "restarting": "Pelayan sedang dimulakan semula",
+      "database": "Pangkalan data tidak menjawab",
+      "disk": "Satu folder tidak boleh dibaca"
+    },
+    "scope": {
+      "group": "Matinee dan proses FFmpeg yang dijalankannya.",
+      "process": "Hanya Matinee; proses FFmpeg tidak dikira."
+    },
+    "tiles": {
+      "cpu": "CPU",
+      "machine": "seluruh mesin {{value}}",
+      "load": "beban {{load}}",
+      "cpuLimit": "Dihadkan kepada {{cores}} teras.",
+      "memory": "Memori",
+      "of": "daripada {{total}}",
+      "ofLimit": "daripada {{total}} yang dibenarkan",
+      "sending": "Menghantar",
+      "sentTotal": "{{total}} sejak dimulakan",
+      "playing": "Sedang dimainkan",
+      "transcodes_other": "{{count}} transkod"
+    },
+    "level": {
+      "warn": "Amaran",
+      "error": "Ralat"
+    },
+    "streams": {
+      "title": "Sedang dimainkan",
+      "none": "Tiada apa yang dimainkan.",
+      "direct": "Main terus",
+      "transcoding": "Transkod",
+      "away": "Di luar rumah",
+      "paused": "Dijeda",
+      "buffering": "Menimbal"
+    },
+    "transcodes": {
+      "title": "Transkod",
+      "none": "Tiada transkod berjalan.",
+      "kind": {
+        "video": "Menukar video",
+        "copy": "Membungkus semula video",
+        "audio": "Menukar audio"
+      },
+      "mode": {
+        "cpu": "pada CPU",
+        "encode": "{{name}} mengekod",
+        "full": "{{name}} menyahkod dan mengekod"
+      },
+      "burnSub": "sari kata dibenamkan",
+      "started": "Bermula {{time}}",
+      "stop": "Hentikan",
+      "stopHint": "Menghentikan FFmpeg. Jika pemain masih terbuka, ia memulakan transkod baharu.",
+      "cpuOnly": "Transkod berjalan pada CPU."
+    },
+    "problems": {
+      "title": "Amaran dan ralat",
+      "none": "Tiada amaran atau ralat sejak pelayan dimulakan.",
+      "times_other": "{{count}} kali",
+      "last": "terakhir {{time}}",
+      "showInLog": "Tunjukkan dalam log",
+      "more_other": "Tunjukkan {{count}} lagi"
+    },
+    "jobs": {
+      "title": "Tugas latar belakang",
+      "scan": "Imbas {{library}}",
+      "scanning": "Mengimbas selama {{time}}",
+      "lastScan": "{{time}}, mengambil {{took}}",
+      "scanCounts": "{{added}} ditambah, {{updated}} dikemas kini, {{removed}} dibuang, {{failed}} tidak boleh dimainkan",
+      "scanFailed": "Gagal: {{error}}",
+      "notScanned": "Tidak diimbas sejak pelayan dimulakan",
+      "downloads": "Muat turun untuk peranti",
+      "downloadCounts": "{{waiting}} menunggu, {{converting}} ditukar, {{failed}} gagal",
+      "nothing": "Tiada kerja",
+      "importing": "Mengimport sejarah tontonan"
+    },
+    "disks": {
+      "title": "Ruang cakera",
+      "free": "{{free}} kosong daripada {{total}}",
+      "low": "Ruang hampir penuh",
+      "unreachableTitle": "Tidak boleh dibaca",
+      "unreachable": "Folder ini tidak menjawab. Jika ia pada perkongsian rangkaian, semak sama ada perkongsian itu masih bersambung.",
+      "use": {
+        "data": "Data",
+        "transcode": "Transkod",
+        "thumbnails": "Pratonton bar carian",
+        "images": "Poster dan karya seni",
+        "downloads": "Muat turun",
+        "library": "{{library}}"
+      }
+    },
+    "details": {
+      "title": "Butiran pelayan",
+      "version": "Versi",
+      "ffmpeg": "FFmpeg",
+      "ffmpegMissing": "Tidak ditemui di {{path}}",
+      "system": "Sistem",
+      "cores_other": "{{count}} teras",
+      "started": "Dimulakan",
+      "database": "Pangkalan data",
+      "answers": "menjawab dalam {{ms}} ms",
+      "dbCounts": "{{items}} item, {{users}} akaun, {{libraries}} pustaka",
+      "connections": "{{open}} sambungan, {{busy}} sibuk",
+      "dbError": "Tidak menjawab: {{error}}",
+      "requests": "Permintaan",
+      "requestCounts": "{{requests}} dijawab, {{errors}} gagal pada pelayan",
+      "logged": "Dilog",
+      "loggedCounts": "{{warnings}} amaran, {{errors}} ralat",
+      "rescans": "Imbasan berjadual",
+      "every": "Setiap {{time}}",
+      "remote": "Akses jauh",
+      "remoteState": {
+        "off": "Mati",
+        "working": "Sedang disediakan",
+        "ready": "Berfungsi",
+        "failed": "Tidak berfungsi"
+      },
+      "runtime": "Masa jalan Go",
+      "heap": "{{heap}} digunakan, {{goroutines}} goroutine"
+    },
+    "log": {
+      "title": "Log",
+      "intro": "{{count}} baris terkini sejak pelayan dimulakan. Log penuh berada di tempat output pelayan dihantar, seperti log bekas.",
+      "download": "Muat turun",
+      "search": "Cari dalam log",
+      "level": "Tunjukkan",
+      "levels": {
+        "all": "Semua",
+        "warn": "Amaran dan ralat",
+        "error": "Ralat"
+      },
+      "live": "Ikuti baris baharu",
+      "older": "Tunjukkan baris lebih lama",
+      "empty": "Tiada baris sepadan."
+    }
   }
 }

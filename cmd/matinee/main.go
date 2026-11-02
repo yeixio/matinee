@@ -29,6 +29,7 @@ import (
 	"github.com/yeixio/matinee/internal/connect"
 	"github.com/yeixio/matinee/internal/discovery"
 	"github.com/yeixio/matinee/internal/download"
+	"github.com/yeixio/matinee/internal/health"
 	"github.com/yeixio/matinee/internal/hwaccel"
 	"github.com/yeixio/matinee/internal/intro"
 	"github.com/yeixio/matinee/internal/kube"
@@ -45,6 +46,7 @@ import (
 	"github.com/yeixio/matinee/internal/stream"
 	"github.com/yeixio/matinee/internal/subtitle"
 	"github.com/yeixio/matinee/internal/theme"
+	"github.com/yeixio/matinee/internal/thumbs"
 	"github.com/yeixio/matinee/internal/together"
 	"github.com/yeixio/matinee/internal/version"
 	"github.com/yeixio/matinee/web"
@@ -75,7 +77,10 @@ func run() error {
 	if os.Getenv("MATINEE_DEBUG") != "" {
 		level = slog.LevelDebug
 	}
-	log := slog.New(slog.NewTextHandler(os.Stderr, &slog.HandlerOptions{Level: level}))
+	// The admin dashboard shows the latest log lines too (internal/health).
+	logs := health.NewLogs(health.DefaultLines)
+	log := slog.New(logs.Handler(slog.NewTextHandler(os.Stderr, &slog.HandlerOptions{Level: level})))
+	monitor := health.NewMonitor(logs)
 
 	for _, bin := range []string{cfg.FFmpegPath, cfg.FFprobePath} {
 		if _, err := exec.LookPath(bin); err != nil {
@@ -150,6 +155,13 @@ func run() error {
 	transcoder := stream.NewTranscoder(cfg.FFmpegPath, cfg.TranscodeDir(), hw, log)
 	defer transcoder.Close()
 
+	thumbnails := &thumbs.Generator{Store: db, FFmpeg: cfg.FFmpegPath, Dir: cfg.ThumbnailDir(), Log: log, LowPriority: probe.LowerPriority}
+	if err := os.MkdirAll(cfg.ThumbnailDir(), 0o755); err != nil {
+		return err
+	}
+	// Videos someone plays get their pictures right away.
+	go thumbnails.Serve(ctx)
+
 	// Media analysis reads every file once more, slowly and at the lowest
 	// priority, for the details the scan doesn't need (see internal/analyze).
 	analyzer := &analyze.Analyzer{
@@ -159,6 +171,8 @@ func run() error {
 		// Then it finds each TV episode's intro by matching the audio of a
 		// season's episodes (see internal/intro).
 		Intros: &intro.Detector{Store: db, FFmpeg: cfg.FFmpegPath, Log: log, LowPriority: probe.LowerPriority},
+		// And the seek bar's pictures of every video (see internal/thumbs).
+		Thumbs: thumbnails,
 	}
 	// Plugins add library kinds, details and event handlers (internal/plugin).
 	var plugins *plugin.Manager
@@ -206,7 +220,7 @@ func run() error {
 		return err
 	}
 	apiServer := &api.Server{
-		Store: db, Scanner: scanner, Watcher: watcher, ScanInterval: cfg.ScanInterval, Transcoder: transcoder, HW: hw, Downloads: downloads, Analyzer: analyzer,
+		Store: db, Scanner: scanner, Watcher: watcher, ScanInterval: cfg.ScanInterval, Transcoder: transcoder, HW: hw, Downloads: downloads, Analyzer: analyzer, Thumbs: thumbnails,
 		Art:       artwork.NewCache(cfg.ImageDir(), cfg.FFmpegPath),
 		Covers:    metadata.NewCovers(version.Version, mb, ol),
 		Subtitles: subtitle.NewConverter(cfg.FFmpegPath, cfg.SubtitleDir()),
@@ -217,7 +231,14 @@ func run() error {
 		PublicURL: cfg.PublicURL,
 		Plugins:   plugins, PluginCatalog: cfg.PluginCatalog,
 		Live: hub, Together: sessions, UUID: uuid,
+		Health: monitor,
+		Storage: []api.StoragePath{
+			{Use: "data", Path: cfg.DataDir}, {Use: "transcode", Path: cfg.TranscodeDir()}, {Use: "thumbnails", Path: cfg.ThumbnailDir()},
+			{Use: "images", Path: cfg.ImageDir()}, {Use: "downloads", Path: cfg.DownloadDir()},
+		},
 	}
+	monitor.Streams = apiServer.StreamCounts
+	go monitor.Run(ctx)
 	if _, problems := theme.Load(cfg.ThemeDir()); len(problems) > 0 {
 		for _, p := range problems {
 			log.Warn("skipping a theme file", "dir", cfg.ThemeDir(), "err", p)

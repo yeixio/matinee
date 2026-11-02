@@ -5,6 +5,7 @@
 import { type ItemFilter, toSearchParams } from './filter'
 import i18n from './i18n'
 import type { LevelsJSON } from './player/levels'
+import type { Thumbnails } from './player/thumbnails'
 import { heardRestarting, RESTARTING_HEADER } from './player/reconnect'
 
 // guest is the shared account of a device at home that hasn't signed in, or
@@ -765,16 +766,156 @@ export type FollowedShow = Item & { unplayed: number }
 export type OpmlImport = { added: number; problems: { title: string; feedUrl: string; error: string }[] }
 
 export type AnalysisMode = 'gentle' | 'normal' | 'off'
+// The admin dashboard (Settings → Server health), from GET /admin/health.
+export type HealthPoint = {
+  t: number
+  cpu: number
+  hostCpu?: number
+  mem: number
+  out: number
+  req: number
+  serverErrors: number
+  problems: number
+  streams: number
+  transcodes: number
+}
+export type HealthProblem = {
+  level: 'warn' | 'error'
+  message: string
+  detail?: string
+  count: number
+  first: number
+  last: number
+  attrs?: LogAttr[]
+}
+export type LogAttr = { key: string; value: string }
+export type LogLine = { seq: number; time: number; level: 'debug' | 'info' | 'warn' | 'error'; message: string; attrs?: LogAttr[] }
+export type LogLevel = LogLine['level']
+export type ScanReport = { started: number; tookMs: number; added: number; updated: number; removed: number; failed: number; unplayable: number; error?: string }
+export type Health = {
+  server: {
+    name: string
+    version: string
+    apiVersion: number
+    state: string
+    ffmpeg?: string
+    ffmpegVersion?: string
+    publicUrl?: string
+    remote?: RemoteStatus
+    scanIntervalMs: number
+    watching?: string
+  }
+  system: {
+    os: string
+    arch: string
+    goVersion: string
+    hostname?: string
+    pid: number
+    started: number
+    scope: 'group' | 'process'
+    cores: number
+    cpuLimit?: number
+    cpu: number
+    hostCpu?: number
+    load?: number[]
+    memTotal?: number
+    memAvailable?: number
+    memory: number
+    memLimit?: number
+    goHeap: number
+    goroutines: number
+    bytesOut: number
+    requests: number
+    serverErrors: number
+    warnings: number
+    errors: number
+    history: HealthPoint[]
+  }
+  database?: {
+    kind: 'sqlite' | 'postgres'
+    version?: string
+    size: number
+    schema: number
+    pingMs: number
+    openConns: number
+    inUse: number
+    waitCount: number
+    waitMs: number
+    items: number
+    users: number
+    libraries: number
+  }
+  databaseError?: string
+  disks: {
+    total: number
+    free: number
+    reachable: boolean
+    uses: { use: 'data' | 'transcode' | 'thumbnails' | 'images' | 'downloads' | 'library'; library?: string; path: string }[]
+  }[]
+  hw?: { active: Accelerator | null; available: Accelerator[]; detecting: boolean; problem?: string }
+  streams: {
+    id: string
+    name: string
+    platform: string
+    app?: string
+    version?: string
+    user: { id: number; name: string; guest?: boolean }
+    remote?: boolean
+    playing: {
+      item: { id: number; kind: string; title: string; year?: number; showTitle?: string; season?: number; episode?: number }
+      positionMs: number
+      durationMs?: number
+      paused: boolean
+      buffering?: boolean
+      transcoding?: boolean
+      updatedAt: number
+    }
+  }[]
+  transcodes: {
+    id: string
+    userId: number
+    itemId: number
+    started: number
+    startSec: number
+    lastSeen: number
+    kind: 'video' | 'copy' | 'audio'
+    accel?: string
+    accelId?: string
+    mode: 'cpu' | 'encode' | 'full'
+    quality?: string[]
+    burnSub?: boolean
+    adaptive?: boolean
+    pid?: number
+    user?: string
+    title?: string
+    showTitle?: string
+  }[]
+  jobs: {
+    scans: { libraryId: number; name: string; kind: string; scanning: boolean; since?: number; last?: ScanReport }[]
+    analysis?: AnalysisStatus
+    downloads: Record<string, number>
+    importing?: boolean
+  }
+  problems: HealthProblem[]
+  logLines: number
+  logsSince?: number
+}
+export type LogQuery = { level?: LogLevel; q?: string; before?: number; limit?: number }
+
 export type AnalysisStatus = {
   mode: AnalysisMode
-  state: 'analyzing' | 'intros' | 'waiting' | 'slowDisk' | 'idle' | 'off'
+  state: 'analyzing' | 'intros' | 'thumbnails' | 'waiting' | 'slowDisk' | 'idle' | 'off'
   total: number
   done: number
   unreadable: number
-  current?: string // the file, or while looking for intros the show and season
+  current?: string // the file; while looking for intros the show and season; while making thumbnails the video
   // Looking for TV episodes' intros; left out by servers that don't.
   intros?: { on: boolean; total: number; done: number; found: number }
+  // Making the seek bar's pictures; left out by servers that don't.
+  thumbnails?: { mode: ThumbnailMode; total: number; done: number }
 }
+
+export type ThumbnailMode = 'all' | 'onPlay' | 'off'
 
 // CoverOption is a cover found online that an admin can pick for an album or book.
 export interface CoverOption {
@@ -863,6 +1004,15 @@ export async function response<T>(res: Response): Promise<T> {
   return res.json() as Promise<T>
 }
 
+function logParams(q: LogQuery): string {
+  const p = new URLSearchParams()
+  if (q.level) p.set('level', q.level)
+  if (q.q) p.set('q', q.q)
+  if (q.before) p.set('before', String(q.before))
+  if (q.limit) p.set('limit', String(q.limit))
+  return p.toString()
+}
+
 export const api = {
   server: () => request<{ version: string; apiVersion: number; name?: string; remoteURL?: string }>('GET', '/api/v1/server'),
   setup: () => request<{ needsSetup: boolean }>('GET', '/api/v1/setup'),
@@ -900,8 +1050,13 @@ export const api = {
     ),
 
   analysis: () => request<AnalysisStatus>('GET', '/api/v1/analysis'),
+  health: () => request<Health>('GET', '/api/v1/admin/health'),
+  logs: (q: LogQuery) => request<{ lines: LogLine[]; more: boolean }>('GET', `/api/v1/admin/logs?${logParams(q)}`),
+  logsDownloadURL: (q: LogQuery) => `/api/v1/admin/logs/download?${logParams(q)}`,
+  stopTranscode: (id: string) => request<void>('DELETE', `/api/v1/admin/transcodes/${encodeURIComponent(id)}`),
   setAnalysisMode: (mode: AnalysisMode) => request<AnalysisStatus>('PUT', '/api/v1/analysis', { mode }),
   setIntroDetection: (intros: boolean) => request<AnalysisStatus>('PUT', '/api/v1/analysis', { intros }),
+  setThumbnailMode: (thumbnails: ThumbnailMode) => request<AnalysisStatus>('PUT', '/api/v1/analysis', { thumbnails }),
   reanalyze: (id: number) => request<void>('POST', `/api/v1/items/${id}/analyze`),
   settings: () => request<Settings>('GET', '/api/v1/settings'),
   // tmdbKey replaces the server's TMDB key; "" goes back to the one it started with.
@@ -1005,6 +1160,8 @@ export const api = {
   tracks: (id: number) => request<Item[]>('GET', `/api/v1/items/${id}/tracks`),
   // A song's sound levels, for the visualizer (player/levels.ts).
   levels: (id: number) => request<LevelsJSON>('GET', `/api/v1/items/${id}/levels`),
+  // A video's seek bar pictures (player/thumbnails.ts); asking has them made.
+  thumbnails: (id: number) => request<Thumbnails>('GET', `/api/v1/items/${id}/thumbnails`),
   book: (id: number) => request<Book>('GET', `/api/v1/items/${id}/book`),
   series: (library: number) => request<BookGroup[]>('GET', `/api/v1/libraries/${library}/series`),
   narrators: (library: number) => request<BookGroup[]>('GET', `/api/v1/libraries/${library}/narrators`),

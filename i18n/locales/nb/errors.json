@@ -58,6 +58,7 @@
   "no_such_subtitle_track": "undertekstsporet finnes ikke",
   "no_such_theme": "temaet finnes ikke",
   "no_such_trailer": "traileren finnes ikke",
+  "no_such_transcode": "ingen slik omkoding",
   "no_such_user": "brukeren finnes ikke",
   "not_a_file": "ikke en fil",
   "not_a_playable_item": "ikke en tittel som kan spilles av",
@@ -127,6 +128,7 @@
   "tmdbid_is_required": "tmdbId er påkrevd",
   "todays_subtitle_downloads_are_used_up_try_again_tomorrow": "dagens nedlastinger av undertekster er brukt opp. Prøv igjen i morgen.",
   "no_such_row": "raden finnes ikke",
+  "no_such_sheet": "det finnes ikke noe slikt ark",
   "tmdb_didnt_accept_that_key": "TMDB godtok ikke den nøkkelen",
   "tmdb_couldnt_be_reached_to_check_the_key": "Fikk ikke kontakt med TMDB for å sjekke nøkkelen",
   "this_server_cant_change_its_tmdb_key": "denne serveren kan ikke endre TMDB-nøkkelen sin",
@@ -201,6 +203,7 @@
   "this_invite_link_doesnt_work_ask_for_another": "invitasjonslenken fungerer ikke; be om en ny",
   "this_invite_was_already_used": "invitasjonen er allerede brukt",
   "this_watch_together_session_is_full": "økten for Se sammen er full",
+  "thumbnails_must_be_all_onplay_or_off": "miniatyrbilder må være all, onPlay eller off",
   "too_many_watch_together_sessions_right_now": "for mange økter for Se sammen akkurat nå",
   "unknown_action": "ukjent handling",
   "usernames_are_at_most_40_characters": "brukernavn kan ha høyst 40 tegn"

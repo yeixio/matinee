@@ -6,6 +6,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"io"
 	"io/fs"
 	"log/slog"
 	"net/http"
@@ -22,6 +23,7 @@ import (
 	"github.com/yeixio/matinee/internal/artwork"
 	"github.com/yeixio/matinee/internal/auth"
 	"github.com/yeixio/matinee/internal/download"
+	"github.com/yeixio/matinee/internal/health"
 	"github.com/yeixio/matinee/internal/hwaccel"
 	"github.com/yeixio/matinee/internal/live"
 	"github.com/yeixio/matinee/internal/plugin"
@@ -33,6 +35,7 @@ import (
 	"github.com/yeixio/matinee/internal/store"
 	"github.com/yeixio/matinee/internal/stream"
 	"github.com/yeixio/matinee/internal/subtitle"
+	"github.com/yeixio/matinee/internal/thumbs"
 	"github.com/yeixio/matinee/internal/together"
 	"github.com/yeixio/matinee/internal/version"
 )
@@ -47,7 +50,9 @@ type Server struct {
 	HW           *hwaccel.Manager // hardware transcoding; nil means the CPU only
 	Downloads    *download.Manager
 	Analyzer     *analyze.Analyzer // nil when media analysis is off for this server
-	Art          *artwork.Cache
+	// Thumbs makes and keeps the seek bar's pictures; nil offers none.
+	Thumbs *thumbs.Generator
+	Art    *artwork.Cache
 	// Covers finds covers for admins to pick from; nil offers none online.
 	Covers    CoverFinder
 	Subtitles *subtitle.Converter
@@ -137,6 +142,17 @@ type Server struct {
 
 	// BackgroundCtx scopes scans started by API calls; it outlives any one request.
 	BackgroundCtx context.Context
+
+	// Health keeps the admin dashboard's readings and log lines (see
+	// health.go); nil makes one that has no log lines. Storage lists the
+	// server's own folders, for its disk space.
+	Health     *health.Monitor
+	Storage    []StoragePath
+	healthOnce sync.Once
+	diskMu     sync.Mutex
+	diskBusy   map[string]bool
+	ffmpegOnce sync.Once
+	ffmpegVer  string
 }
 
 // APIVersion is the version of the documented API served under /api/v1
@@ -237,6 +253,10 @@ func (s *Server) routes() []route {
 		{"GET /analysis", adminOnly, s.getAnalysis},
 		{"PUT /analysis", adminOnly, s.putAnalysis},
 		{"POST /items/{id}/analyze", adminOnly, s.analyzeItem},
+		{"GET /admin/health", adminOnly, s.getHealth},
+		{"GET /admin/logs", adminOnly, s.getLogs},
+		{"GET /admin/logs/download", adminOnly, s.downloadLogs},
+		{"DELETE /admin/transcodes/{session}", adminOnly, s.stopTranscode},
 
 		{"GET /home", reader, s.home},
 		{"GET /rows/{id}", reader, s.rowPage},
@@ -246,6 +266,8 @@ func (s *Server) routes() []route {
 		{"GET /items/{id}/children", reader, s.itemChildren},
 		{"GET /items/{id}/tracks", reader, s.itemTracks},
 		{"GET /items/{id}/levels", reader, s.itemLevels},
+		{"GET /items/{id}/thumbnails", reader, s.itemThumbnails},
+		{"GET /items/{id}/thumbnails/{sheet}", reader, s.thumbnailSheet},
 		{"GET /items/{id}/book", reader, s.getBook},
 		{"GET /podcasts/directory", reader, grownUps(s.podcastDirectory)},
 		{"GET /podcasts/following", reader, s.followedPodcasts},
@@ -478,6 +500,13 @@ func errorCode(msg string) string {
 }
 
 func (s *Server) serverError(w http.ResponseWriter, err error) {
+	if errors.Is(err, context.Canceled) {
+		// The player went away (or asked for something else) first; nothing
+		// went wrong on the server, so it's no error on the dashboard.
+		s.Log.Debug("request canceled", "err", err)
+		writeError(w, http.StatusInternalServerError, "something went wrong")
+		return
+	}
 	s.Log.Error("request failed", "err", err)
 	writeError(w, http.StatusInternalServerError, "something went wrong")
 }
@@ -553,10 +582,31 @@ func (s *Server) requireUser(h http.HandlerFunc, level access) http.Handler {
 
 type statusRecorder struct {
 	http.ResponseWriter
-	status int
+	status  int
+	traffic *health.Traffic // counts bytes sent, for the dashboard
 }
 
 func (s *statusRecorder) WriteHeader(code int) { s.status = code; s.ResponseWriter.WriteHeader(code) }
+
+func (s *statusRecorder) Write(b []byte) (int, error) {
+	n, err := s.ResponseWriter.Write(b)
+	s.traffic.Sent(n)
+	return n, err
+}
+
+// ReadFrom keeps the connection's own ReadFrom (sendfile, for video
+// files) while counting what it sends.
+func (s *statusRecorder) ReadFrom(r io.Reader) (int64, error) {
+	var n int64
+	var err error
+	if rf, ok := s.ResponseWriter.(io.ReaderFrom); ok {
+		n, err = rf.ReadFrom(r)
+	} else {
+		n, err = io.Copy(struct{ io.Writer }{s.ResponseWriter}, r)
+	}
+	s.traffic.Sent(int(n))
+	return n, err
+}
 
 // Unwrap lets http.ResponseController reach the connection, for streams.
 func (s *statusRecorder) Unwrap() http.ResponseWriter { return s.ResponseWriter }
@@ -564,8 +614,10 @@ func (s *statusRecorder) Unwrap() http.ResponseWriter { return s.ResponseWriter 
 func (s *Server) logRequests(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		start := time.Now()
-		rec := &statusRecorder{ResponseWriter: w, status: 200}
+		traffic := &s.health().Traffic
+		rec := &statusRecorder{ResponseWriter: w, status: 200, traffic: traffic}
 		next.ServeHTTP(rec, r)
+		traffic.Answered(rec.status)
 		if strings.HasPrefix(r.URL.Path, "/api/") && !strings.HasPrefix(r.URL.Path, "/api/hls/") && !strings.HasPrefix(r.URL.Path, "/api/v1/hls/") {
 			// Rejected requests are logged by default, so "it failed" shows up in the pod logs.
 			level := slog.LevelDebug

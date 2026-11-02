@@ -58,6 +58,7 @@
   "no_such_subtitle_track": "böyle bir altyazı parçası yok",
   "no_such_theme": "böyle bir tema yok",
   "no_such_trailer": "böyle bir fragman yok",
+  "no_such_transcode": "böyle bir dönüştürme yok",
   "no_such_user": "böyle bir kullanıcı yok",
   "not_a_file": "bir dosya değil",
   "not_a_playable_item": "oynatılabilir bir öğe değil",
@@ -127,6 +128,7 @@
   "tmdbid_is_required": "tmdbId gerekli",
   "todays_subtitle_downloads_are_used_up_try_again_tomorrow": "bugünkü altyazı indirme hakkı doldu. Yarın tekrar deneyin.",
   "no_such_row": "böyle bir sıra yok",
+  "no_such_sheet": "böyle bir sayfa yok",
   "tmdb_didnt_accept_that_key": "TMDB bu anahtarı kabul etmedi",
   "tmdb_couldnt_be_reached_to_check_the_key": "Anahtarı doğrulamak için TMDB'ye ulaşılamadı",
   "this_server_cant_change_its_tmdb_key": "bu sunucu TMDB anahtarını değiştiremez",
@@ -201,6 +203,7 @@
   "this_invite_link_doesnt_work_ask_for_another": "bu davet bağlantısı çalışmıyor; yenisini iste",
   "this_invite_was_already_used": "bu davet zaten kullanıldı",
   "this_watch_together_session_is_full": "bu Birlikte izle oturumu dolu",
+  "thumbnails_must_be_all_onplay_or_off": "küçük resimler all, onPlay veya off olmalı",
   "too_many_watch_together_sessions_right_now": "şu anda çok fazla Birlikte izle oturumu var",
   "unknown_action": "bilinmeyen işlem",
   "usernames_are_at_most_40_characters": "kullanıcı adları en fazla 40 karakter olabilir"

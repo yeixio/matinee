@@ -101,7 +101,7 @@ func TestHolidayRows(t *testing.T) {
 	}
 	add("Cellar", "Something lives downstairs.", "Horror")
 	add("Mistletoe Lane", "Snowed in at Christmas.", "Romance")
-	// A show with a Halloween episode.
+	// A show with a Halloween episode stays out: holiday rows are movies.
 	tv, _ := db.CreateLibrary(ctx, "Shows", "shows", []string{"/s"})
 	show, _ := db.EnsureContainer(ctx, tv.ID, nil, "show", "Office Hours", nil, nil)
 	one := 1
@@ -135,9 +135,9 @@ func TestHolidayRows(t *testing.T) {
 		t.Fatalf("rows: %+v", rows)
 	}
 	got := titles(rows[0])
-	about, fill := got[:min(4, len(got))], got[min(4, len(got)):]
+	about, fill := got[:min(3, len(got))], got[min(3, len(got)):]
 	slices.Sort(about)
-	if !slices.Equal(about, []string{"Broom Closet", "Candy Run", "Halloween Night", "Office Hours"}) || !slices.Equal(fill, []string{"Cellar"}) {
+	if !slices.Equal(about, []string{"Broom Closet", "Candy Run", "Halloween Night"}) || !slices.Equal(fill, []string{"Cellar"}) {
 		t.Fatalf("Halloween row: %v", got)
 	}
 	// Thanksgiving is coming too, but nothing's about it.

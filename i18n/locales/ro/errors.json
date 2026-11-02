@@ -58,6 +58,7 @@
   "no_such_subtitle_track": "nu există o astfel de pistă de subtitrare",
   "no_such_theme": "nu există o astfel de temă",
   "no_such_trailer": "nu există un astfel de trailer",
+  "no_such_transcode": "nu există această transcodare",
   "no_such_user": "nu există un astfel de utilizator",
   "not_a_file": "nu este un fișier",
   "not_a_playable_item": "nu este un element redabil",
@@ -127,6 +128,7 @@
   "tmdbid_is_required": "tmdbId este obligatoriu",
   "todays_subtitle_downloads_are_used_up_try_again_tomorrow": "descărcările de subtitrări de azi s-au epuizat. Încearcă din nou mâine.",
   "no_such_row": "rândul nu există",
+  "no_such_sheet": "nu există o astfel de foaie",
   "tmdb_didnt_accept_that_key": "TMDB nu a acceptat această cheie",
   "tmdb_couldnt_be_reached_to_check_the_key": "TMDB nu a putut fi contactat pentru verificarea cheii",
   "this_server_cant_change_its_tmdb_key": "acest server nu își poate schimba cheia TMDB",
@@ -201,6 +203,7 @@
   "this_invite_link_doesnt_work_ask_for_another": "linkul de invitație nu funcționează; cere altul",
   "this_invite_was_already_used": "invitația a fost deja folosită",
   "this_watch_together_session_is_full": "sesiunea de vizionare împreună este plină",
+  "thumbnails_must_be_all_onplay_or_off": "miniaturile trebuie să fie all, onPlay sau off",
   "too_many_watch_together_sessions_right_now": "prea multe sesiuni de vizionare împreună acum",
   "unknown_action": "acțiune necunoscută",
   "usernames_are_at_most_40_characters": "numele de utilizator au cel mult 40 de caractere"

@@ -266,6 +266,7 @@
     "rules": "Regels",
     "rulesHint": "Titels die aan deze filters voldoen, komen er vanzelf bij als de bibliotheek verandert.",
     "shuffleDaily": "Elke dag schudden",
+    "includeTV": "Tv-series meenemen",
     "order": "Volgorde",
     "orderAdded": "De volgorde waarin titels zijn toegevoegd",
     "direction": "Richting",
@@ -411,6 +412,7 @@
     "state": {
       "lookingAt": "Bekijkt {{file}}",
       "intros": "Intro’s zoeken in {{season}}",
+      "thumbnails": "Voorbeelden voor de tijdbalk maken voor {{title}}",
       "working": "Bezig",
       "waiting": "Wacht tot het afspelen klaar is",
       "slowDisk": "Bestanden lezen traag; een paar minuten pauze",
@@ -440,6 +442,25 @@
       "label": "Intro’s van series vinden",
       "hint": "Zodra alle bestanden zijn geanalyseerd, luistert Matinee naar het begin van de afleveringen van elk seizoen om de intro te vinden die ze delen, zodat spelers Intro overslaan kunnen aanbieden.",
       "progress": "{{done}} van {{total}} afleveringen gecontroleerd, {{found}} met een intro"
+    },
+    "thumbnails": {
+      "label": "Voorbeelden in de tijdbalk",
+      "hint": "Kleine beelden van elke video die boven de tijdbalk verschijnen terwijl je spoelt. Ongeveer 4 MB per film.",
+      "progress": "{{done}} van {{total}} video's klaar",
+      "mode": {
+        "all": {
+          "label": "Alle video's",
+          "hint": "Worden op de achtergrond voor elke video gemaakt, na de analyse en in hetzelfde tempo."
+        },
+        "onPlay": {
+          "label": "Bij afspelen",
+          "hint": "Worden gemaakt als iemand een video voor het eerst afspeelt. Scheelt tijd en ruimte bij grote bibliotheken."
+        },
+        "off": {
+          "label": "Uit",
+          "hint": "Er worden er geen gemaakt en de tijdbalk toont alleen de tijd."
+        }
+      }
     }
   },
   "profileSettings": {
@@ -818,6 +839,10 @@
       "add-ons": {
         "title": "Uitbreidingen",
         "hint": "Radarr, Sonarr, Overseerr en plug-ins"
+      },
+      "health": {
+        "title": "Servergezondheid",
+        "hint": "Belasting, afspelen, taken, problemen en het logboek"
       }
     }
   },
@@ -988,5 +1013,159 @@
     "expired": "{{name}} verliep op {{date}}",
     "badge": "Vriend",
     "seeEverything": "Alles laten zien"
+  },
+  "health": {
+    "title": "Servergezondheid",
+    "intro": "Hoe het nu met de server gaat, voor als er iets niet werkt. Alles hier komt van deze server en blijft daar ook.",
+    "cantLoad": "Kon de servergezondheid niet laden: {{error}}",
+    "updates": "Wordt elke 5 seconden bijgewerkt",
+    "upFor": "draait al {{time}}",
+    "seconds": "{{seconds}} s",
+    "days": "{{days}} d {{hours}} u",
+    "hourAgo": "1 uur geleden",
+    "now": "Nu",
+    "noHistory": "De grafiek vult zich in de komende minuut.",
+    "chartLabel": "{{name}} in het afgelopen uur",
+    "status": {
+      "ok": "Alles ziet er goed uit",
+      "problems_one": "{{count}} waarschuwing of fout in het afgelopen uur",
+      "problems_other": "{{count}} waarschuwingen of fouten in het afgelopen uur",
+      "restarting": "De server start opnieuw op",
+      "database": "De database reageert niet",
+      "disk": "Een map kan niet worden gelezen"
+    },
+    "scope": {
+      "group": "Matinee en de FFmpeg-processen die het start.",
+      "process": "Alleen Matinee zelf; FFmpeg-processen tellen niet mee."
+    },
+    "tiles": {
+      "cpu": "CPU",
+      "machine": "hele machine {{value}}",
+      "load": "belasting {{load}}",
+      "cpuLimit": "Beperkt tot {{cores}} kernen.",
+      "memory": "Geheugen",
+      "of": "van {{total}}",
+      "ofLimit": "van {{total}} toegestaan",
+      "sending": "Verstuurt",
+      "sentTotal": "{{total}} sinds de start",
+      "playing": "Speelt nu",
+      "transcodes_one": "{{count}} transcodering",
+      "transcodes_other": "{{count}} transcoderingen"
+    },
+    "level": {
+      "warn": "Waarschuwing",
+      "error": "Fout"
+    },
+    "streams": {
+      "title": "Speelt nu",
+      "none": "Er speelt niets.",
+      "direct": "Direct afspelen",
+      "transcoding": "Transcoderen",
+      "away": "Buitenshuis",
+      "paused": "Gepauzeerd",
+      "buffering": "Bufferen"
+    },
+    "transcodes": {
+      "title": "Transcoderingen",
+      "none": "Er lopen geen transcoderingen.",
+      "kind": {
+        "video": "Video wordt omgezet",
+        "copy": "Video wordt opnieuw verpakt",
+        "audio": "Geluid wordt omgezet"
+      },
+      "mode": {
+        "cpu": "op de CPU",
+        "encode": "{{name}} codeert",
+        "full": "{{name}} decodeert en codeert"
+      },
+      "burnSub": "ondertiteling ingebrand",
+      "started": "Gestart {{time}}",
+      "stop": "Stoppen",
+      "stopHint": "Stopt FFmpeg. Staat de speler nog open, dan start die een nieuwe transcodering.",
+      "cpuOnly": "Transcoderingen draaien op de CPU."
+    },
+    "problems": {
+      "title": "Waarschuwingen en fouten",
+      "none": "Geen waarschuwingen of fouten sinds de server is gestart.",
+      "times_one": "{{count}} keer",
+      "times_other": "{{count}} keer",
+      "last": "laatst {{time}}",
+      "showInLog": "Tonen in logboek",
+      "more_one": "Nog {{count}} tonen",
+      "more_other": "Nog {{count}} tonen"
+    },
+    "jobs": {
+      "title": "Achtergrondtaken",
+      "scan": "{{library}} scannen",
+      "scanning": "Al {{time}} aan het scannen",
+      "lastScan": "{{time}}, duurde {{took}}",
+      "scanCounts": "{{added}} toegevoegd, {{updated}} bijgewerkt, {{removed}} verwijderd, {{failed}} niet afspeelbaar",
+      "scanFailed": "Mislukt: {{error}}",
+      "notScanned": "Niet gescand sinds de server is gestart",
+      "downloads": "Downloads voor apparaten",
+      "downloadCounts": "{{waiting}} wachtend, {{converting}} bezig met omzetten, {{failed}} mislukt",
+      "nothing": "Niets te doen",
+      "importing": "Kijkgeschiedenis importeren"
+    },
+    "disks": {
+      "title": "Schijfruimte",
+      "free": "{{free}} vrij van {{total}}",
+      "low": "Weinig ruimte",
+      "unreachableTitle": "Niet leesbaar",
+      "unreachable": "Deze map reageerde niet. Staat hij op een netwerkshare, controleer dan of die nog verbonden is.",
+      "use": {
+        "data": "Gegevens",
+        "transcode": "Transcoderen",
+        "thumbnails": "Voorbeelden op de tijdbalk",
+        "images": "Posters en artwork",
+        "downloads": "Downloads",
+        "library": "{{library}}"
+      }
+    },
+    "details": {
+      "title": "Servergegevens",
+      "version": "Versie",
+      "ffmpeg": "FFmpeg",
+      "ffmpegMissing": "Niet gevonden op {{path}}",
+      "system": "Systeem",
+      "cores_one": "{{count}} kern",
+      "cores_other": "{{count}} kernen",
+      "started": "Gestart",
+      "database": "Database",
+      "answers": "antwoordt in {{ms}} ms",
+      "dbCounts": "{{items}} items, {{users}} accounts, {{libraries}} bibliotheken",
+      "connections": "{{open}} verbindingen, {{busy}} bezet",
+      "dbError": "Geen antwoord: {{error}}",
+      "requests": "Verzoeken",
+      "requestCounts": "{{requests}} beantwoord, {{errors}} mislukt op de server",
+      "logged": "Gelogd",
+      "loggedCounts": "{{warnings}} waarschuwingen, {{errors}} fouten",
+      "rescans": "Geplande scans",
+      "every": "Elke {{time}}",
+      "remote": "Toegang op afstand",
+      "remoteState": {
+        "off": "Uit",
+        "working": "Wordt ingesteld",
+        "ready": "Werkt",
+        "failed": "Werkt niet"
+      },
+      "runtime": "Go-runtime",
+      "heap": "{{heap}} in gebruik, {{goroutines}} goroutines"
+    },
+    "log": {
+      "title": "Logboek",
+      "intro": "De laatste {{count}} regels sinds de server is gestart. Het volledige logboek staat waar de uitvoer van de server heen gaat, zoals het log van de container.",
+      "download": "Downloaden",
+      "search": "Zoeken in het logboek",
+      "level": "Tonen",
+      "levels": {
+        "all": "Alles",
+        "warn": "Waarschuwingen en fouten",
+        "error": "Fouten"
+      },
+      "live": "Nieuwe regels volgen",
+      "older": "Oudere regels tonen",
+      "empty": "Geen regels gevonden."
+    }
   }
 }

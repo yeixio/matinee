@@ -266,6 +266,7 @@
     "rules": "Szabályok",
     "rulesHint": "Az ezeknek a szűrőknek megfelelő címek maguktól bekerülnek, ahogy a könyvtár változik.",
     "shuffleDaily": "Keverés minden nap",
+    "includeTV": "Tévésorozatokkal együtt",
     "order": "Sorrend",
     "orderAdded": "A címek hozzáadásának sorrendje",
     "direction": "Irány",
@@ -411,6 +412,7 @@
     "state": {
       "lookingAt": "Vizsgálja: {{file}}",
       "intros": "Bevezetők keresése: {{season}}",
+      "thumbnails": "Előnézetek készítése: {{title}}",
       "working": "Dolgozik",
       "waiting": "Vár, amíg a lejátszás véget ér",
       "slowDisk": "A fájlok lassan olvashatók; néhány perc pihenő",
@@ -440,6 +442,25 @@
       "label": "Sorozatbevezetők keresése",
       "hint": "Ha minden fájl elemzése kész, a Matinee meghallgatja az évadok epizódjainak elejét, és megkeresi a közös bevezetőt, hogy a lejátszók felajánlhassák a Bevezető átugrása lehetőséget.",
       "progress": "{{done}}/{{total}} epizód ellenőrizve, {{found}} bevezetővel"
+    },
+    "thumbnails": {
+      "label": "Előnézetek az idősávon",
+      "hint": "Kis képek minden videóból, amelyek tekeréskor az idősáv fölött jelennek meg. Filmenként kb. 4 MB-ot foglalnak.",
+      "progress": "{{done}}/{{total}} videó kész",
+      "mode": {
+        "all": {
+          "label": "Minden videó",
+          "hint": "A háttérben készülnek minden videóhoz, az elemzés után és annak tempójában."
+        },
+        "onPlay": {
+          "label": "Lejátszáskor",
+          "hint": "Akkor készülnek, amikor valaki először lejátssza a videót. Nagy könyvtáraknál időt és helyet takarít meg."
+        },
+        "off": {
+          "label": "Ki",
+          "hint": "Nem készülnek, és az idősáv csak az időt mutatja."
+        }
+      }
     }
   },
   "profileSettings": {
@@ -818,6 +839,10 @@
       "add-ons": {
         "title": "Bővítmények",
         "hint": "Radarr, Sonarr, Overseerr és pluginok"
+      },
+      "health": {
+        "title": "Szerverállapot",
+        "hint": "Terhelés, lejátszás, feladatok, hibák és a napló"
       }
     }
   },
@@ -988,5 +1013,159 @@
     "expired": "{{name}} lejárt: {{date}}",
     "badge": "Barát",
     "seeEverything": "Minden látható legyen"
+  },
+  "health": {
+    "title": "Szerverállapot",
+    "intro": "Hogy áll most a szerver, arra az esetre, ha valami nem működik. Minden itt látható adat erről a szerverről származik, és itt is marad.",
+    "cantLoad": "Nem sikerült betölteni a szerver állapotát: {{error}}",
+    "updates": "5 másodpercenként frissül",
+    "upFor": "{{time}} óta fut",
+    "seconds": "{{seconds}} mp",
+    "days": "{{days}} n {{hours}} ó",
+    "hourAgo": "1 órája",
+    "now": "Most",
+    "noHistory": "A grafikon a következő percben feltöltődik.",
+    "chartLabel": "{{name}} az elmúlt órában",
+    "status": {
+      "ok": "Minden rendben",
+      "problems_one": "{{count}} figyelmeztetés vagy hiba az elmúlt órában",
+      "problems_other": "{{count}} figyelmeztetés vagy hiba az elmúlt órában",
+      "restarting": "A szerver újraindul",
+      "database": "Az adatbázis nem válaszol",
+      "disk": "Egy mappa nem olvasható"
+    },
+    "scope": {
+      "group": "A Matinee és az általa futtatott FFmpeg-folyamatok.",
+      "process": "Csak maga a Matinee; az FFmpeg-folyamatok nem számítanak bele."
+    },
+    "tiles": {
+      "cpu": "Processzor",
+      "machine": "teljes gép {{value}}",
+      "load": "terhelés {{load}}",
+      "cpuLimit": "{{cores}} magra korlátozva.",
+      "memory": "Memória",
+      "of": "/ {{total}}",
+      "ofLimit": "/ {{total}} engedélyezett",
+      "sending": "Küldés",
+      "sentTotal": "{{total}} indulás óta",
+      "playing": "Most megy",
+      "transcodes_one": "{{count}} átkódolás",
+      "transcodes_other": "{{count}} átkódolás"
+    },
+    "level": {
+      "warn": "Figyelmeztetés",
+      "error": "Hiba"
+    },
+    "streams": {
+      "title": "Most megy",
+      "none": "Semmi nem megy.",
+      "direct": "Közvetlen lejátszás",
+      "transcoding": "Átkódolás",
+      "away": "Otthonon kívül",
+      "paused": "Szüneteltetve",
+      "buffering": "Pufferelés"
+    },
+    "transcodes": {
+      "title": "Átkódolások",
+      "none": "Nem fut átkódolás.",
+      "kind": {
+        "video": "Videó átalakítása",
+        "copy": "Videó újracsomagolása",
+        "audio": "Hang átalakítása"
+      },
+      "mode": {
+        "cpu": "a processzoron",
+        "encode": "{{name}} kódol",
+        "full": "{{name}} dekódol és kódol"
+      },
+      "burnSub": "beégetett felirat",
+      "started": "Indult {{time}}",
+      "stop": "Leállítás",
+      "stopHint": "Leállítja az FFmpeget. Ha a lejátszó még nyitva van, új átkódolást indít.",
+      "cpuOnly": "Az átkódolás a processzoron fut."
+    },
+    "problems": {
+      "title": "Figyelmeztetések és hibák",
+      "none": "A szerver indulása óta nem volt figyelmeztetés vagy hiba.",
+      "times_one": "{{count}} alkalommal",
+      "times_other": "{{count}} alkalommal",
+      "last": "utoljára {{time}}",
+      "showInLog": "Megjelenítés a naplóban",
+      "more_one": "Még {{count}} megjelenítése",
+      "more_other": "Még {{count}} megjelenítése"
+    },
+    "jobs": {
+      "title": "Háttérfeladatok",
+      "scan": "{{library}} átvizsgálása",
+      "scanning": "{{time}} óta vizsgál",
+      "lastScan": "{{time}}, {{took}} volt",
+      "scanCounts": "{{added}} új, {{updated}} frissítve, {{removed}} eltávolítva, {{failed}} nem lejátszható",
+      "scanFailed": "Sikertelen: {{error}}",
+      "notScanned": "A szerver indulása óta nem volt átvizsgálva",
+      "downloads": "Letöltések eszközökre",
+      "downloadCounts": "{{waiting}} vár, {{converting}} átalakítás alatt, {{failed}} sikertelen",
+      "nothing": "Nincs teendő",
+      "importing": "Megtekintési előzmények importálása"
+    },
+    "disks": {
+      "title": "Lemezterület",
+      "free": "{{free}} szabad / {{total}}",
+      "low": "Kevés hely",
+      "unreachableTitle": "Nem olvasható",
+      "unreachable": "Ez a mappa nem válaszolt. Ha hálózati megosztáson van, ellenőrizd, hogy a megosztás még csatlakoztatva van-e.",
+      "use": {
+        "data": "Adatok",
+        "transcode": "Átkódolás",
+        "thumbnails": "Előnézetek az idősávon",
+        "images": "Plakátok és képek",
+        "downloads": "Letöltések",
+        "library": "{{library}}"
+      }
+    },
+    "details": {
+      "title": "Szerver részletei",
+      "version": "Verzió",
+      "ffmpeg": "FFmpeg",
+      "ffmpegMissing": "Nem található itt: {{path}}",
+      "system": "Rendszer",
+      "cores_one": "{{count}} mag",
+      "cores_other": "{{count}} mag",
+      "started": "Indult",
+      "database": "Adatbázis",
+      "answers": "{{ms}} ms alatt válaszol",
+      "dbCounts": "{{items}} elem, {{users}} fiók, {{libraries}} könyvtár",
+      "connections": "{{open}} kapcsolat, {{busy}} foglalt",
+      "dbError": "Nem válaszolt: {{error}}",
+      "requests": "Kérések",
+      "requestCounts": "{{requests}} megválaszolva, {{errors}} hibás a szerveren",
+      "logged": "Naplózva",
+      "loggedCounts": "{{warnings}} figyelmeztetés, {{errors}} hiba",
+      "rescans": "Ütemezett átvizsgálás",
+      "every": "{{time}} időközönként",
+      "remote": "Távoli hozzáférés",
+      "remoteState": {
+        "off": "Ki",
+        "working": "Beállítás alatt",
+        "ready": "Működik",
+        "failed": "Nem működik"
+      },
+      "runtime": "Go futtatókörnyezet",
+      "heap": "{{heap}} használatban, {{goroutines}} goroutine"
+    },
+    "log": {
+      "title": "Napló",
+      "intro": "Az utolsó {{count}} sor a szerver indulása óta. A teljes napló ott van, ahová a szerver kimenete kerül, például a konténer naplójában.",
+      "download": "Letöltés",
+      "search": "Keresés a naplóban",
+      "level": "Mutat",
+      "levels": {
+        "all": "Minden",
+        "warn": "Figyelmeztetések és hibák",
+        "error": "Hibák"
+      },
+      "live": "Új sorok követése",
+      "older": "Régebbi sorok",
+      "empty": "Nincs egyező sor."
+    }
   }
 }

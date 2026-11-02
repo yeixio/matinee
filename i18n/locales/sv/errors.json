@@ -58,6 +58,7 @@
   "no_such_subtitle_track": "undertextspåret finns inte",
   "no_such_theme": "temat finns inte",
   "no_such_trailer": "trailern finns inte",
+  "no_such_transcode": "ingen sådan omkodning",
   "no_such_user": "användaren finns inte",
   "not_a_file": "inte en fil",
   "not_a_playable_item": "inte en spelbar titel",
@@ -127,6 +128,7 @@
   "tmdbid_is_required": "tmdbId krävs",
   "todays_subtitle_downloads_are_used_up_try_again_tomorrow": "dagens nedladdningar av undertexter är slut. Försök igen i morgon.",
   "no_such_row": "raden finns inte",
+  "no_such_sheet": "det finns inget sådant ark",
   "tmdb_didnt_accept_that_key": "TMDB godtog inte den nyckeln",
   "tmdb_couldnt_be_reached_to_check_the_key": "TMDB gick inte att nå för att kontrollera nyckeln",
   "this_server_cant_change_its_tmdb_key": "den här servern kan inte byta sin TMDB-nyckel",
@@ -201,6 +203,7 @@
   "this_invite_link_doesnt_work_ask_for_another": "inbjudningslänken fungerar inte; be om en ny",
   "this_invite_was_already_used": "inbjudan har redan använts",
   "this_watch_together_session_is_full": "sessionen för att titta tillsammans är full",
+  "thumbnails_must_be_all_onplay_or_off": "miniatyrer måste vara all, onPlay eller off",
   "too_many_watch_together_sessions_right_now": "för många sessioner för att titta tillsammans just nu",
   "unknown_action": "okänd åtgärd",
   "usernames_are_at_most_40_characters": "användarnamn får vara högst 40 tecken"

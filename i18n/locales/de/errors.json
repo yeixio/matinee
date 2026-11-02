@@ -58,6 +58,7 @@
   "no_such_subtitle_track": "keine solche Untertitelspur",
   "no_such_theme": "kein solches Design",
   "no_such_trailer": "kein solcher Trailer",
+  "no_such_transcode": "keine solche Transkodierung",
   "no_such_user": "keine solche Person",
   "not_a_file": "keine Datei",
   "not_a_playable_item": "kein abspielbarer Eintrag",
@@ -127,6 +128,7 @@
   "tmdbid_is_required": "tmdbId ist erforderlich",
   "todays_subtitle_downloads_are_used_up_try_again_tomorrow": "die Untertitel-Downloads für heute sind aufgebraucht. Versuch es morgen wieder.",
   "no_such_row": "diese Reihe gibt es nicht",
+  "no_such_sheet": "kein solches Bildblatt",
   "tmdb_didnt_accept_that_key": "TMDB hat diesen Schlüssel nicht akzeptiert",
   "tmdb_couldnt_be_reached_to_check_the_key": "TMDB war nicht erreichbar, um den Schlüssel zu prüfen",
   "this_server_cant_change_its_tmdb_key": "dieser Server kann seinen TMDB-Schlüssel nicht ändern",
@@ -201,6 +203,7 @@
   "this_invite_link_doesnt_work_ask_for_another": "dieser Einladungslink funktioniert nicht; bitte um einen neuen",
   "this_invite_was_already_used": "diese Einladung wurde schon benutzt",
   "this_watch_together_session_is_full": "diese Sitzung zum gemeinsamen Schauen ist voll",
+  "thumbnails_must_be_all_onplay_or_off": "Vorschaubilder müssen all, onPlay oder off sein",
   "too_many_watch_together_sessions_right_now": "gerade laufen zu viele Sitzungen zum gemeinsamen Schauen",
   "unknown_action": "unbekannte Aktion",
   "usernames_are_at_most_40_characters": "Benutzernamen haben höchstens 40 Zeichen"

@@ -18,6 +18,8 @@ import { SleepMenu } from '../player/SleepMenu'
 import { QualityMenu } from '../player/QualityMenu'
 import { LONG_STALL_MS, levelName, overCap, Rebuffers, startQuality, type Quality } from '../player/quality'
 import { parseVTT, type Cue } from '../player/vtt'
+import { preloadSheets, SeekPreview } from '../player/SeekPreview'
+import { askAgain } from '../player/thumbnails'
 import { PluginPlayer } from '../player/PluginPlayer'
 import { useAudio } from '../player/AudioPlayer'
 import { playerFor, usePlayers } from '../plugins'
@@ -139,6 +141,25 @@ function Player({ id }: { id: number }) {
   const scrubAt = useRef<number>(undefined)
   const dragging = useRef(false)
   const scrubTimer = useRef<number>(undefined)
+  // The seek bar's preview pictures (player/thumbnails.ts), and where the
+  // pointer is over the bar, for the picture to show before a click.
+  const thumbAsks = useRef(0)
+  const { data: thumbs } = useQuery({
+    queryKey: ['thumbnails', id],
+    queryFn: () => (thumbAsks.current++, api.thumbnails(id)),
+    enabled: item?.kind === 'movie' || item?.kind === 'episode',
+    retry: false,
+    staleTime: Infinity,
+    refetchInterval: (q) => askAgain(q.state.data, thumbAsks.current),
+  })
+  const [hoverAt, setHoverAt] = useState<number>()
+  const bar = useRef<HTMLDivElement>(null)
+  const preloaded = useRef(false)
+  const preload = () => {
+    if (preloaded.current || thumbs?.state !== 'ready') return
+    preloaded.current = true
+    preloadSheets(id, thumbs)
+  }
   // Auto-play: the card that offers what's next, and its countdown.
   const { data: prefs } = useQuery({ queryKey: ['playback'], queryFn: api.playback, staleTime: 60_000, retry: false })
   const { data: upNext } = useQuery({
@@ -799,6 +820,8 @@ function Player({ id }: { id: number }) {
 
   const t = item ? displayTitle(item) : { title: '', sub: '' }
   const shown = scrub ?? time
+  // The preview shows where the pointer is, or where a drag or the arrow keys are taking the bar.
+  const previewAt = hoverAt ?? scrub
   const frac = duration ? Math.min(1, shown / duration) : 0
 
   return (
@@ -964,7 +987,20 @@ function Player({ id }: { id: number }) {
 
         <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent px-4 pt-16 pb-[max(1rem,env(safe-area-inset-bottom))] md:px-8 md:pb-6">
           {/* Time runs left to right in every language, as on a clock. */}
-          <div dir="ltr" className="group relative mb-3 flex h-4 items-center">
+          <div
+            ref={bar}
+            dir="ltr"
+            className="group relative mb-3 flex h-6 items-center md:h-4"
+            onPointerEnter={preload}
+            onPointerMove={(e) => {
+              if (e.pointerType !== 'mouse' && !dragging.current) return
+              const r = bar.current?.getBoundingClientRect()
+              if (!r?.width || !duration) return
+              setHoverAt(Math.min(1, Math.max(0, (e.clientX - r.left) / r.width)) * duration)
+            }}
+            onPointerLeave={() => !dragging.current && setHoverAt(undefined)}
+          >
+            {previewAt !== undefined && <SeekPreview id={id} thumbs={thumbs} at={previewAt} duration={duration} />}
             <div className="h-1 w-full rounded-full bg-white/25 transition-all group-hover:h-1.5">
               <div className="h-full rounded-full bg-accent" style={{ width: `${frac * 100}%` }} />
             </div>
@@ -974,9 +1010,11 @@ function Player({ id }: { id: number }) {
               max={duration || 1}
               step={1}
               value={shown}
-              onPointerDown={() => (dragging.current = true)}
-              onPointerUp={commitScrub}
-              onPointerCancel={() => commitScrub()}
+              onPointerDown={() => (preload(), (dragging.current = true))}
+              onPointerUp={(e) => (e.pointerType !== 'mouse' && setHoverAt(undefined), commitScrub())}
+              onPointerCancel={() => (setHoverAt(undefined), commitScrub())}
+              onFocus={preload}
+              onBlur={() => setHoverAt(undefined)}
               onChange={(e) => scrubTo(Number(e.target.value))}
               aria-label={tr('player.seek')}
               className="absolute inset-0 w-full cursor-pointer opacity-0"

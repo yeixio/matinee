@@ -270,6 +270,7 @@
     "rules": "القواعد",
     "rulesHint": "العناوين التي تطابق عوامل التصفية هذه تنضم تلقائيًا مع تغيّر المكتبة.",
     "shuffleDaily": "الخلط كل يوم",
+    "includeTV": "تضمين المسلسلات التلفزيونية",
     "order": "الترتيب",
     "orderAdded": "ترتيب إضافة العناوين",
     "direction": "الاتجاه",
@@ -423,6 +424,7 @@
     "state": {
       "lookingAt": "يفحص {{file}}",
       "intros": "جارٍ البحث عن المقدمات في {{season}}",
+      "thumbnails": "جارٍ إنشاء معاينات شريط التقدم لـ {{title}}",
       "working": "يعمل",
       "waiting": "بانتظار انتهاء التشغيل",
       "slowDisk": "قراءة الملفات بطيئة؛ استراحة لبضع دقائق",
@@ -456,6 +458,25 @@
       "label": "العثور على مقدمات المسلسلات",
       "hint": "بعد تحليل كل الملفات، يستمع Matinee إلى بداية حلقات كل موسم ليجد المقدمة المشتركة بينها، حتى تعرض المشغلات زر تخطي المقدمة.",
       "progress": "تم فحص {{done}} من {{total}} حلقة، {{found}} منها بمقدمة"
+    },
+    "thumbnails": {
+      "label": "معاينات شريط التقدم",
+      "hint": "صور صغيرة من كل فيديو تظهر فوق شريط التقدم أثناء التمرير. تشغل نحو 4 ميغابايت لكل فيلم.",
+      "progress": "{{done}} من {{total}} فيديو جاهزة",
+      "mode": {
+        "all": {
+          "label": "كل الفيديوهات",
+          "hint": "تُنشأ في الخلفية لكل فيديو، بعد التحليل وبنفس سرعته."
+        },
+        "onPlay": {
+          "label": "عند التشغيل",
+          "hint": "تُنشأ أول مرة يشغّل فيها أحد الفيديو. توفر الوقت والمساحة في المكتبات الكبيرة."
+        },
+        "off": {
+          "label": "إيقاف",
+          "hint": "لا تُنشأ أي معاينات، ويعرض الشريط الوقت فقط."
+        }
+      }
     }
   },
   "profileSettings": {
@@ -834,6 +855,10 @@
       "add-ons": {
         "title": "الإضافات",
         "hint": "Radarr وSonarr وOverseerr والإضافات"
+      },
+      "health": {
+        "title": "حالة الخادم",
+        "hint": "الحمل والتشغيل والمهام والمشكلات والسجل"
       }
     }
   },
@@ -1012,5 +1037,179 @@
     "expired": "انتهت صلاحية {{name}} في {{date}}",
     "badge": "صديق",
     "seeEverything": "السماح برؤية كل شيء"
+  },
+  "health": {
+    "title": "حالة الخادم",
+    "intro": "حال الخادم الآن، لتعرف السبب حين لا يعمل شيء ما. كل ما هنا يأتي من هذا الخادم ويبقى عليه.",
+    "cantLoad": "تعذّر تحميل حالة الخادم: {{error}}",
+    "updates": "يتحدّث كل 5 ثوانٍ",
+    "upFor": "يعمل منذ {{time}}",
+    "seconds": "{{seconds}} ث",
+    "days": "{{days}} ي {{hours}} س",
+    "hourAgo": "قبل ساعة",
+    "now": "الآن",
+    "noHistory": "سيمتلئ الرسم البياني خلال الدقيقة القادمة.",
+    "chartLabel": "{{name}} خلال الساعة الماضية",
+    "status": {
+      "ok": "كل شيء على ما يرام",
+      "problems_few": "{{count}} تحذيرات أو أخطاء في الساعة الماضية",
+      "problems_many": "{{count}} تحذيرًا أو خطأً في الساعة الماضية",
+      "problems_one": "تحذير أو خطأ واحد في الساعة الماضية ({{count}})",
+      "problems_two": "تحذيران أو خطآن في الساعة الماضية ({{count}})",
+      "problems_zero": "لا تحذيرات أو أخطاء في الساعة الماضية ({{count}})",
+      "problems_other": "{{count}} تحذير أو خطأ في الساعة الماضية",
+      "restarting": "يُعاد تشغيل الخادم",
+      "database": "قاعدة البيانات لا تستجيب",
+      "disk": "تعذّرت قراءة مجلد"
+    },
+    "scope": {
+      "group": "Matinee وعمليات FFmpeg التي يشغّلها.",
+      "process": "Matinee وحده؛ لا تُحسب عمليات FFmpeg."
+    },
+    "tiles": {
+      "cpu": "المعالج",
+      "machine": "الجهاز كله {{value}}",
+      "load": "الحمل {{load}}",
+      "cpuLimit": "محدود بـ {{cores}} أنوية.",
+      "memory": "الذاكرة",
+      "of": "من {{total}}",
+      "ofLimit": "من {{total}} المسموح بها",
+      "sending": "الإرسال",
+      "sentTotal": "{{total}} منذ التشغيل",
+      "playing": "يُشغَّل الآن",
+      "transcodes_few": "{{count}} تحويلات",
+      "transcodes_many": "{{count}} تحويلًا",
+      "transcodes_one": "تحويل واحد ({{count}})",
+      "transcodes_two": "تحويلان ({{count}})",
+      "transcodes_zero": "{{count}} تحويل",
+      "transcodes_other": "{{count}} تحويل"
+    },
+    "level": {
+      "warn": "تحذير",
+      "error": "خطأ"
+    },
+    "streams": {
+      "title": "يُشغَّل الآن",
+      "none": "لا يُشغَّل شيء.",
+      "direct": "تشغيل مباشر",
+      "transcoding": "تحويل",
+      "away": "خارج المنزل",
+      "paused": "متوقف مؤقتًا",
+      "buffering": "تخزين مؤقت"
+    },
+    "transcodes": {
+      "title": "التحويلات",
+      "none": "لا تحويلات قيد التشغيل.",
+      "kind": {
+        "video": "تحويل الفيديو",
+        "copy": "إعادة تغليف الفيديو",
+        "audio": "تحويل الصوت"
+      },
+      "mode": {
+        "cpu": "على المعالج",
+        "encode": "{{name}} يرمّز",
+        "full": "{{name}} يفك الترميز ويرمّز"
+      },
+      "burnSub": "الترجمة مدمجة في الصورة",
+      "started": "بدأ {{time}}",
+      "stop": "إيقاف",
+      "stopHint": "يوقف FFmpeg. إن كان المشغّل لا يزال مفتوحًا فسيبدأ تحويلًا جديدًا.",
+      "cpuOnly": "تعمل التحويلات على المعالج."
+    },
+    "problems": {
+      "title": "التحذيرات والأخطاء",
+      "none": "لا تحذيرات أو أخطاء منذ تشغيل الخادم.",
+      "times_few": "{{count}} مرات",
+      "times_many": "{{count}} مرة",
+      "times_one": "مرة واحدة ({{count}})",
+      "times_two": "مرتان ({{count}})",
+      "times_zero": "{{count}} مرة",
+      "times_other": "{{count}} مرة",
+      "last": "آخرها {{time}}",
+      "showInLog": "عرض في السجل",
+      "more_few": "عرض {{count}} أخرى",
+      "more_many": "عرض {{count}} أخرى",
+      "more_one": "عرض {{count}} أخرى",
+      "more_two": "عرض {{count}} أخرى",
+      "more_zero": "عرض {{count}} أخرى",
+      "more_other": "عرض {{count}} أخرى"
+    },
+    "jobs": {
+      "title": "مهام في الخلفية",
+      "scan": "فحص {{library}}",
+      "scanning": "يُفحص منذ {{time}}",
+      "lastScan": "{{time}}، استغرق {{took}}",
+      "scanCounts": "أُضيف {{added}}، حُدّث {{updated}}، أُزيل {{removed}}، لا يعمل {{failed}}",
+      "scanFailed": "فشل: {{error}}",
+      "notScanned": "لم يُفحص منذ تشغيل الخادم",
+      "downloads": "تنزيلات للأجهزة",
+      "downloadCounts": "{{waiting}} في الانتظار، {{converting}} قيد التحويل، {{failed}} فشلت",
+      "nothing": "لا شيء للقيام به",
+      "importing": "استيراد سجل المشاهدة"
+    },
+    "disks": {
+      "title": "مساحة القرص",
+      "free": "{{free}} متاحة من {{total}}",
+      "low": "المساحة منخفضة",
+      "unreachableTitle": "تتعذّر القراءة",
+      "unreachable": "لم يستجب هذا المجلد. إن كان على مشاركة شبكية، فتأكد من أن المشاركة لا تزال متصلة.",
+      "use": {
+        "data": "البيانات",
+        "transcode": "التحويل",
+        "thumbnails": "معاينات شريط التقديم",
+        "images": "الملصقات والصور",
+        "downloads": "التنزيلات",
+        "library": "{{library}}"
+      }
+    },
+    "details": {
+      "title": "تفاصيل الخادم",
+      "version": "الإصدار",
+      "ffmpeg": "FFmpeg",
+      "ffmpegMissing": "غير موجود في {{path}}",
+      "system": "النظام",
+      "cores_few": "{{count}} أنوية",
+      "cores_many": "{{count}} نواة",
+      "cores_one": "نواة واحدة ({{count}})",
+      "cores_two": "نواتان ({{count}})",
+      "cores_zero": "{{count}} نواة",
+      "cores_other": "{{count}} نواة",
+      "started": "بدأ التشغيل",
+      "database": "قاعدة البيانات",
+      "answers": "تستجيب خلال {{ms}} مللي ثانية",
+      "dbCounts": "العناصر {{items}}، الحسابات {{users}}، المكتبات {{libraries}}",
+      "connections": "الاتصالات {{open}}، المشغولة {{busy}}",
+      "dbError": "لم تستجب: {{error}}",
+      "requests": "الطلبات",
+      "requestCounts": "أُجيب {{requests}}، فشل على الخادم {{errors}}",
+      "logged": "المسجَّل",
+      "loggedCounts": "التحذيرات {{warnings}}، الأخطاء {{errors}}",
+      "rescans": "الفحص المجدول",
+      "every": "كل {{time}}",
+      "remote": "الوصول عن بُعد",
+      "remoteState": {
+        "off": "متوقف",
+        "working": "قيد الإعداد",
+        "ready": "يعمل",
+        "failed": "لا يعمل"
+      },
+      "runtime": "بيئة Go",
+      "heap": "{{heap}} مستخدمة، {{goroutines}} goroutine"
+    },
+    "log": {
+      "title": "السجل",
+      "intro": "آخر {{count}} سطر منذ تشغيل الخادم. السجل الكامل في المكان الذي تذهب إليه مخرجات الخادم، مثل سجل الحاوية.",
+      "download": "تنزيل",
+      "search": "البحث في السجل",
+      "level": "عرض",
+      "levels": {
+        "all": "الكل",
+        "warn": "التحذيرات والأخطاء",
+        "error": "الأخطاء"
+      },
+      "live": "متابعة الأسطر الجديدة",
+      "older": "عرض الأسطر الأقدم",
+      "empty": "لا أسطر مطابقة."
+    }
   }
 }

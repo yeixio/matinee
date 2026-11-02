@@ -58,6 +58,7 @@
   "no_such_subtitle_track": "その字幕トラックはありません",
   "no_such_theme": "そのテーマはありません",
   "no_such_trailer": "その予告編はありません",
+  "no_such_transcode": "そのトランスコードはありません",
   "no_such_user": "そのユーザーはいません",
   "not_a_file": "ファイルではありません",
   "not_a_playable_item": "再生できる項目ではありません",
@@ -127,6 +128,7 @@
   "tmdbid_is_required": "tmdbIdは必須です",
   "todays_subtitle_downloads_are_used_up_try_again_tomorrow": "今日の字幕ダウンロードの上限に達しました。明日もう一度お試しください。",
   "no_such_row": "その列はありません",
+  "no_such_sheet": "そのシートはありません",
   "tmdb_didnt_accept_that_key": "TMDB がそのキーを受け付けませんでした",
   "tmdb_couldnt_be_reached_to_check_the_key": "キーを確認するために TMDB に接続できませんでした",
   "this_server_cant_change_its_tmdb_key": "このサーバーは TMDB キーを変更できません",
@@ -201,6 +203,7 @@
   "this_invite_link_doesnt_work_ask_for_another": "この招待リンクは使えません。新しいリンクを頼んでください",
   "this_invite_was_already_used": "この招待はもう使われています",
   "this_watch_together_session_is_full": "このセッションは満員です",
+  "thumbnails_must_be_all_onplay_or_off": "サムネイルは all、onPlay、off のいずれかにしてください",
   "too_many_watch_together_sessions_right_now": "いまはいっしょに見るセッションが多すぎます",
   "unknown_action": "不明な操作です",
   "usernames_are_at_most_40_characters": "ユーザー名は40文字までです"

@@ -58,6 +58,7 @@
   "no_such_subtitle_track": "δεν υπάρχει τέτοιο κομμάτι υποτίτλων",
   "no_such_theme": "δεν υπάρχει τέτοιο θέμα",
   "no_such_trailer": "δεν υπάρχει τέτοιο τρέιλερ",
+  "no_such_transcode": "δεν υπάρχει τέτοια μετατροπή",
   "no_such_user": "δεν υπάρχει τέτοιος χρήστης",
   "not_a_file": "δεν είναι αρχείο",
   "not_a_playable_item": "δεν είναι στοιχείο προς αναπαραγωγή",
@@ -127,6 +128,7 @@
   "tmdbid_is_required": "το tmdbId είναι υποχρεωτικό",
   "todays_subtitle_downloads_are_used_up_try_again_tomorrow": "οι σημερινές λήψεις υποτίτλων εξαντλήθηκαν. Δοκιμάστε ξανά αύριο.",
   "no_such_row": "δεν υπάρχει τέτοια σειρά",
+  "no_such_sheet": "δεν υπάρχει τέτοιο φύλλο",
   "tmdb_didnt_accept_that_key": "Το TMDB δεν δέχτηκε αυτό το κλειδί",
   "tmdb_couldnt_be_reached_to_check_the_key": "Δεν ήταν δυνατή η σύνδεση με το TMDB για έλεγχο του κλειδιού",
   "this_server_cant_change_its_tmdb_key": "αυτός ο διακομιστής δεν μπορεί να αλλάξει το κλειδί TMDB του",
@@ -201,6 +203,7 @@
   "this_invite_link_doesnt_work_ask_for_another": "αυτός ο σύνδεσμος πρόσκλησης δεν λειτουργεί· ζητήστε άλλον",
   "this_invite_was_already_used": "αυτή η πρόσκληση έχει ήδη χρησιμοποιηθεί",
   "this_watch_together_session_is_full": "αυτή η συνεδρία παρακολούθησης μαζί είναι γεμάτη",
+  "thumbnails_must_be_all_onplay_or_off": "οι μικρογραφίες πρέπει να είναι all, onPlay ή off",
   "too_many_watch_together_sessions_right_now": "πάρα πολλές συνεδρίες παρακολούθησης μαζί αυτή τη στιγμή",
   "unknown_action": "άγνωστη ενέργεια",
   "usernames_are_at_most_40_characters": "τα ονόματα χρήστη έχουν έως 40 χαρακτήρες"

@@ -58,6 +58,7 @@
   "no_such_subtitle_track": "немає такої доріжки субтитрів",
   "no_such_theme": "немає такої теми",
   "no_such_trailer": "немає такого трейлера",
+  "no_such_transcode": "немає такого перекодування",
   "no_such_user": "немає такого користувача",
   "not_a_file": "це не файл",
   "not_a_playable_item": "це не можна відтворити",
@@ -127,6 +128,7 @@
   "tmdbid_is_required": "потрібен tmdbId",
   "todays_subtitle_downloads_are_used_up_try_again_tomorrow": "ліміт завантажень субтитрів на сьогодні вичерпано. Спробуйте завтра.",
   "no_such_row": "такого ряду немає",
+  "no_such_sheet": "такого аркуша немає",
   "tmdb_didnt_accept_that_key": "TMDB не прийняв цей ключ",
   "tmdb_couldnt_be_reached_to_check_the_key": "Не вдалося зв’язатися з TMDB, щоб перевірити ключ",
   "this_server_cant_change_its_tmdb_key": "цей сервер не може змінити свій ключ TMDB",
@@ -201,6 +203,7 @@
   "this_invite_link_doesnt_work_ask_for_another": "це посилання-запрошення не працює; попросіть нове",
   "this_invite_was_already_used": "це запрошення вже використано",
   "this_watch_together_session_is_full": "у цьому сеансі спільного перегляду немає місць",
+  "thumbnails_must_be_all_onplay_or_off": "мініатюри мають бути all, onPlay або off",
   "too_many_watch_together_sessions_right_now": "зараз забагато сеансів спільного перегляду",
   "unknown_action": "невідома дія",
   "usernames_are_at_most_40_characters": "ім’я користувача не довше 40 символів"

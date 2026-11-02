@@ -58,6 +58,7 @@
   "no_such_subtitle_track": "אין רצועת כתוביות כזו",
   "no_such_theme": "אין ערכת נושא כזו",
   "no_such_trailer": "אין טריילר כזה",
+  "no_such_transcode": "אין המרה כזו",
   "no_such_user": "אין משתמש כזה",
   "not_a_file": "זה לא קובץ",
   "not_a_playable_item": "זה לא פריט שאפשר לנגן",
@@ -127,6 +128,7 @@
   "tmdbid_is_required": "נדרש tmdbId",
   "todays_subtitle_downloads_are_used_up_try_again_tomorrow": "הורדות הכתוביות של היום נוצלו. אפשר לנסות שוב מחר.",
   "no_such_row": "אין שורה כזו",
+  "no_such_sheet": "אין גיליון כזה",
   "tmdb_didnt_accept_that_key": "TMDB לא קיבל את המפתח הזה",
   "tmdb_couldnt_be_reached_to_check_the_key": "לא ניתן היה להתחבר ל-TMDB כדי לבדוק את המפתח",
   "this_server_cant_change_its_tmdb_key": "השרת הזה לא יכול לשנות את מפתח ה-TMDB שלו",
@@ -201,6 +203,7 @@
   "this_invite_link_doesnt_work_ask_for_another": "קישור ההזמנה לא עובד; בקשו קישור חדש",
   "this_invite_was_already_used": "ההזמנה כבר נוצלה",
   "this_watch_together_session_is_full": "סשן הצפייה המשותפת מלא",
+  "thumbnails_must_be_all_onplay_or_off": "התמונות הממוזערות חייבות להיות all,‏ onPlay או off",
   "too_many_watch_together_sessions_right_now": "יש כרגע יותר מדי סשנים של צפייה משותפת",
   "unknown_action": "פעולה לא מוכרת",
   "usernames_are_at_most_40_characters": "שם משתמש יכול להכיל עד 40 תווים"
