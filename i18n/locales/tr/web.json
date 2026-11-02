@@ -47,7 +47,8 @@
       "source": "Altyazılar OpenSubtitles.com'dan"
     },
     "skipIntro": "Girişi atla",
-    "introSkipped": "Giriş atlandı"
+    "introSkipped": "Giriş atlandı",
+    "skipCredits": "Jeneriği atla"
   },
   "somethingWentWrong": "Bir şeyler ters gitti",
   "oneMoment": "Bir saniye…",
@@ -412,6 +413,7 @@
     "state": {
       "lookingAt": "İnceleniyor: {{file}}",
       "intros": "{{season}} içinde girişler aranıyor",
+      "credits": "{{title}} içinde jenerik aranıyor",
       "thumbnails": "{{title}} için önizlemeler hazırlanıyor",
       "gapless": "{{album}} albümünde şarkı arası boşluklar dinleniyor",
       "working": "Çalışıyor",
@@ -443,6 +445,11 @@
       "label": "Dizi girişlerini bul",
       "hint": "Tüm dosyalar analiz edildikten sonra Matinee, her sezonun bölümlerinin başını dinleyerek ortak girişi bulur; böylece oynatıcılar Girişi atla seçeneği sunabilir.",
       "progress": "{{total}} bölümden {{done}} tanesi kontrol edildi, {{found}} tanesinde giriş var"
+    },
+    "credits": {
+      "label": "Jenerikleri bul",
+      "hint": "Tüm dosyalar analiz edildikten sonra Matinee, bölümlerin ve filmlerin jeneriğinin nerede başladığını bulur; böylece oynatıcılar orada Sıradaki veya Jeneriği atla seçeneğini gösterebilir.",
+      "progress": "{{total}} bölüm ve filmden {{done}} tanesi kontrol edildi, {{found}} tanesinde jenerik var"
     },
     "thumbnails": {
       "label": "İlerleme çubuğunda önizlemeler",

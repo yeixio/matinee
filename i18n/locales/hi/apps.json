@@ -364,7 +364,8 @@
       "source": "सबटाइटल OpenSubtitles.com से"
     },
     "skipIntro": "इंट्रो छोड़ें",
-    "introSkipped": "इंट्रो छोड़ दिया"
+    "introSkipped": "इंट्रो छोड़ दिया",
+    "skipCredits": "क्रेडिट छोड़ें"
   },
   "library": {
     "nothingUnwatched": "यहाँ बिना देखा कुछ नहीं",

@@ -47,7 +47,8 @@
       "source": "Subtitle dari OpenSubtitles.com"
     },
     "skipIntro": "Lewati intro",
-    "introSkipped": "Intro dilewati"
+    "introSkipped": "Intro dilewati",
+    "skipCredits": "Lewati kredit"
   },
   "somethingWentWrong": "Terjadi kesalahan",
   "oneMoment": "Sebentar…",
@@ -409,6 +410,7 @@
     "state": {
       "lookingAt": "Memeriksa {{file}}",
       "intros": "Mencari intro di {{season}}",
+      "credits": "Mencari kredit akhir di {{title}}",
       "thumbnails": "Membuat pratinjau bilah untuk {{title}}",
       "gapless": "Mendengarkan jeda antar lagu di {{album}}",
       "working": "Bekerja",
@@ -439,6 +441,11 @@
       "label": "Temukan intro serial",
       "hint": "Setelah semua file dianalisis, Matinee mendengarkan awal episode tiap musim untuk menemukan intro yang sama, sehingga pemutar dapat menawarkan Lewati intro.",
       "progress": "{{done}} dari {{total}} episode diperiksa, {{found}} dengan intro"
+    },
+    "credits": {
+      "label": "Temukan kredit akhir",
+      "hint": "Setelah semua file dianalisis, Matinee menemukan di mana kredit akhir episode dan film dimulai, sehingga pemutar dapat menampilkan Berikutnya atau Lewati kredit di sana.",
+      "progress": "{{done}} dari {{total}} episode dan film diperiksa, {{found}} dengan kredit akhir"
     },
     "thumbnails": {
       "label": "Pratinjau di bilah putar",

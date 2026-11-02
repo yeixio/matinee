@@ -44,8 +44,13 @@ func frames(d time.Duration) int { return int(float64(d.Milliseconds()) / FrameM
 // It tries every way of lining the two up. That is a couple of hundred
 // million cheap comparisons for ten minutes of each, under a second.
 func Match(a, b Print) (inA, inB Segment, ok bool) {
+	return MatchWithin(a, b, MinIntro, MaxIntro)
+}
+
+// MatchWithin is Match for passages between shortest and longest long.
+func MatchWithin(a, b Print, shortest, longest time.Duration) (inA, inB Segment, ok bool) {
 	na, nb := a.Len(), b.Len()
-	minLen, maxLen, w := frames(MinIntro), frames(MaxIntro), frames(window)
+	minLen, maxLen, w := frames(shortest), frames(longest), frames(window)
 	limit := sameBits * w // a window's total at most this is a hit
 	best, bestD := Segment{}, 0
 	dist := make([]int, 0, min(na, nb))

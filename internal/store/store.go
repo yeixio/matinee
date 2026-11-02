@@ -505,6 +505,17 @@ var migrations = []string{
 	"ALTER TABLE items ADD COLUMN gapless INTEGER",
 	"ALTER TABLE items ADD COLUMN gapless_found INTEGER",
 	"ALTER TABLE items ADD COLUMN gapless_key TEXT",
+	// 83: where the end credits of each episode and movie start, found by
+	// matching the audio of a season's episodes or by the picture going
+	// dark (see endcredits.go and internal/credits).
+	`CREATE TABLE end_credits (
+		item_id   BIGINT PRIMARY KEY REFERENCES items(id) ON DELETE CASCADE,
+		start_ms  BIGINT NOT NULL DEFAULT 0, -- 0 when none were found
+		end_ms    BIGINT NOT NULL DEFAULT 0, -- 0 when they run to the end
+		source    TEXT NOT NULL DEFAULT '', -- chapters, audio or video
+		file_key  TEXT NOT NULL, -- the file and detector version looked at, see MediaKey
+		looked_at BIGINT NOT NULL
+	)`,
 }
 
 func now() int64 { return time.Now().Unix() }

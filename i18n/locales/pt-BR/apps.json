@@ -369,7 +369,8 @@
       "source": "Legendas do OpenSubtitles.com"
     },
     "skipIntro": "Pular abertura",
-    "introSkipped": "Abertura pulada"
+    "introSkipped": "Abertura pulada",
+    "skipCredits": "Pular créditos"
   },
   "library": {
     "nothingUnwatched": "Nada para assistir aqui",

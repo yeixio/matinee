@@ -8,6 +8,8 @@
 // for releases before v0.3.0, and so is a part of a page between
 // <!-- since: v0.3.0 --> and <!-- /since -->, so the guide for an older
 // release written after the fact only describes what that release had.
+// A part between <!-- until: v0.3.0 --> and <!-- /until --> is the other
+// way round: only the guides for releases before v0.3.0 keep it.
 import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { compare, semver } from './prepare-lib.mjs'
@@ -40,6 +42,7 @@ for (const file of walk(out).filter((f) => /\.mdx?$/.test(f))) {
     continue
   }
   text = text.replace(/<!-- since: (\S+) -->\n?([\s\S]*?)<!-- \/since -->\n?/g, (_, v, part) => (released && compare(v, version) > 0 ? '' : part))
+  text = text.replace(/<!-- until: (\S+) -->\n?([\s\S]*?)<!-- \/until -->\n?/g, (_, v, part) => (released && compare(v, version) > 0 ? part : ''))
   // Links between pages are written from the site's root (/docs/...); keep
   // them inside this version's copy of the guide.
   text = text.replace(/\]\(\/docs\//g, `](${base}docs/`)

@@ -9,7 +9,9 @@ on `main` becomes the next release's guide.
   `sidebar.order`. `sidebar.json` lists the sections.
 - A page about a feature that isn't in a release yet gets `since: vX.Y.Z`
   (the first release that will have it), so the guides for older releases
-  leave it out.
+  leave it out. Part of a page works the same between `<!-- since: vX.Y.Z -->`
+  and `<!-- /since -->`; text that a feature makes out of date goes between
+  `<!-- until: vX.Y.Z -->` and `<!-- /until -->`, which only older guides keep.
 - Screenshots live in `images/`; don't take them by hand. `pnpm shots` in
   `site/` makes all of them from a real server running a made-up library.
   `pnpm shots:library <address>` then retakes the browsing and watching ones

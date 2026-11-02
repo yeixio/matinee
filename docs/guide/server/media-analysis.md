@@ -14,7 +14,9 @@ Once every file is analyzed, Matinee goes on to listen to the start of each seas
 <!-- /since -->
 
 <!-- since: v0.1.13 -->
-Then it listens to where the songs of each album meet, to find the albums that should play without a gap between songs, such as DJ mixes and live albums. See [Albums without gaps](/docs/watching/music/#albums-without-gaps).
+Then it finds where the end credits of episodes and movies start, by listening for the music a season's episodes share at their end and by looking for the picture going dark, for [Up next and Skip credits](/docs/watching/skipping-credits/). **Find end credits** turns that off, and shows how far it is.
+
+It also listens to where the songs of each album meet, to find the albums that should play without a gap between songs, such as DJ mixes and live albums. See [Albums without gaps](/docs/watching/music/#albums-without-gaps).
 <!-- /since -->
 
 <!-- since: v0.1.11 -->

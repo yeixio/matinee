@@ -28,6 +28,7 @@ import (
 	"github.com/yeixio/matinee/internal/artwork"
 	"github.com/yeixio/matinee/internal/config"
 	"github.com/yeixio/matinee/internal/connect"
+	"github.com/yeixio/matinee/internal/credits"
 	"github.com/yeixio/matinee/internal/discovery"
 	"github.com/yeixio/matinee/internal/download"
 	"github.com/yeixio/matinee/internal/gapless"
@@ -175,6 +176,10 @@ func run() error {
 		// Then it finds each TV episode's intro by matching the audio of a
 		// season's episodes (see internal/intro).
 		Intros: &intro.Detector{Store: db, FFmpeg: cfg.FFmpegPath, Log: log, LowPriority: probe.LowerPriority},
+		// Then where each episode's and movie's end credits start, from the
+		// music a season's episodes share at their end or the picture
+		// going dark (see internal/credits).
+		Credits: &credits.Detector{Store: db, FFmpeg: cfg.FFmpegPath, Log: log, LowPriority: probe.LowerPriority},
 		// And listens for albums whose songs run into each other, so they
 		// play without gaps (see internal/gapless).
 		Gapless: &gapless.Detector{Store: db, FFmpeg: cfg.FFmpegPath, Log: log, LowPriority: probe.LowerPriority,

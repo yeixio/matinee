@@ -47,7 +47,8 @@
       "source": "字幕來自 OpenSubtitles.com"
     },
     "skipIntro": "略過片頭",
-    "introSkipped": "已略過片頭"
+    "introSkipped": "已略過片頭",
+    "skipCredits": "跳過片尾"
   },
   "somethingWentWrong": "出了點問題",
   "oneMoment": "請稍候…",
@@ -409,6 +410,7 @@
     "state": {
       "lookingAt": "正在查看 {{file}}",
       "intros": "正在尋找 {{season}} 的片頭",
+      "credits": "正在尋找 {{title}} 的片尾",
       "thumbnails": "正在為 {{title}} 製作預覽圖",
       "gapless": "正在檢查 {{album}} 的歌曲間隙",
       "working": "工作中",
@@ -439,6 +441,11 @@
       "label": "尋找影集片頭",
       "hint": "所有檔案分析完成後，Matinee 會比對每季各集開頭的音訊，找出共同的片頭，讓播放器可以提供「略過片頭」。",
       "progress": "已檢查 {{total}} 集中的 {{done}} 集，{{found}} 集有片頭"
+    },
+    "credits": {
+      "label": "尋找片尾",
+      "hint": "所有檔案分析完成後，Matinee 會找出影集與電影片尾開始的位置，讓播放器在那裡顯示「接下來」或「跳過片尾」。",
+      "progress": "已檢查 {{done}}/{{total}} 個影集與電影，{{found}} 個找到片尾"
     },
     "thumbnails": {
       "label": "進度列預覽圖",

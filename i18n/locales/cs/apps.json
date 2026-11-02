@@ -374,7 +374,8 @@
       "source": "Titulky z OpenSubtitles.com"
     },
     "skipIntro": "Přeskočit úvod",
-    "introSkipped": "Úvod přeskočen"
+    "introSkipped": "Úvod přeskočen",
+    "skipCredits": "Přeskočit titulky"
   },
   "library": {
     "nothingUnwatched": "Nic nezhlédnutého",

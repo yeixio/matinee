@@ -364,7 +364,8 @@
       "source": "Tekstitykset: OpenSubtitles.com"
     },
     "skipIntro": "Ohita alkutunnari",
-    "introSkipped": "Alkutunnari ohitettiin"
+    "introSkipped": "Alkutunnari ohitettiin",
+    "skipCredits": "Ohita lopputekstit"
   },
   "library": {
     "nothingUnwatched": "Ei katsomatonta täällä",

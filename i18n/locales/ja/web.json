@@ -47,7 +47,8 @@
       "source": "字幕提供: OpenSubtitles.com"
     },
     "skipIntro": "イントロをスキップ",
-    "introSkipped": "イントロをスキップしました"
+    "introSkipped": "イントロをスキップしました",
+    "skipCredits": "エンドクレジットをスキップ"
   },
   "somethingWentWrong": "問題が発生しました",
   "oneMoment": "少々お待ちください…",
@@ -409,6 +410,7 @@
     "state": {
       "lookingAt": "{{file}} を確認中",
       "intros": "{{season}} のイントロを探しています",
+      "credits": "{{title}} のエンドクレジットを検索中",
       "thumbnails": "{{title}} のプレビューを作成中",
       "gapless": "{{album}} の曲間を確認しています",
       "working": "作業中",
@@ -439,6 +441,11 @@
       "label": "番組のイントロを見つける",
       "hint": "すべてのファイルの分析が終わると、Matinee は各シーズンのエピソードの冒頭を聴き比べて共通のイントロを見つけ、プレーヤーで「イントロをスキップ」を表示できるようにします。",
       "progress": "{{total}} 話中 {{done}} 話を確認、イントロあり {{found}} 話"
+    },
+    "credits": {
+      "label": "エンドクレジットを検出",
+      "hint": "すべてのファイルの分析が終わると、Matinee はエピソードと映画のエンドクレジットの開始位置を見つけ、プレーヤーがそこで「次はこちら」や「エンドクレジットをスキップ」を表示できるようにします。",
+      "progress": "{{total}} 件中 {{done}} 件のエピソードと映画を確認、{{found}} 件でエンドクレジットを検出"
     },
     "thumbnails": {
       "label": "シークバーのプレビュー",

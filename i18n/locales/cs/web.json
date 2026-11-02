@@ -47,7 +47,8 @@
       "source": "Titulky z OpenSubtitles.com"
     },
     "skipIntro": "Přeskočit úvod",
-    "introSkipped": "Úvod přeskočen"
+    "introSkipped": "Úvod přeskočen",
+    "skipCredits": "Přeskočit titulky"
   },
   "somethingWentWrong": "Něco se pokazilo",
   "oneMoment": "Moment…",
@@ -418,6 +419,7 @@
     "state": {
       "lookingAt": "Zkoumá {{file}}",
       "intros": "Hledání úvodů v: {{season}}",
+      "credits": "Hledají se závěrečné titulky v {{title}}",
       "thumbnails": "Vytvářím náhledy pro {{title}}",
       "gapless": "Poslouchá mezery mezi skladbami na {{album}}",
       "working": "Pracuje",
@@ -451,6 +453,11 @@
       "label": "Hledat úvody seriálů",
       "hint": "Jakmile jsou všechny soubory analyzované, Matinee poslouchá začátky epizod každé řady a hledá úvod, který mají společný, aby přehrávače mohly nabídnout Přeskočit úvod.",
       "progress": "Zkontrolováno {{done}} z {{total}} epizod, {{found}} s úvodem"
+    },
+    "credits": {
+      "label": "Najít závěrečné titulky",
+      "hint": "Po analýze všech souborů Matinee zjistí, kde začínají závěrečné titulky epizod a filmů, aby přehrávače mohly právě tam nabídnout Další nebo Přeskočit titulky.",
+      "progress": "Zkontrolováno {{done}} z {{total}} epizod a filmů, {{found}} se závěrečnými titulky"
     },
     "thumbnails": {
       "label": "Náhledy na časové ose",

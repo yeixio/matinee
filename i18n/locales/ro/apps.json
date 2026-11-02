@@ -369,7 +369,8 @@
       "source": "Subtitrări de pe OpenSubtitles.com"
     },
     "skipIntro": "Sari peste intro",
-    "introSkipped": "Intro sărit"
+    "introSkipped": "Intro sărit",
+    "skipCredits": "Sari peste generic"
   },
   "library": {
     "nothingUnwatched": "Nimic nevăzut aici",

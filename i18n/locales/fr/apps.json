@@ -369,7 +369,8 @@
       "source": "Sous-titres d’OpenSubtitles.com"
     },
     "skipIntro": "Passer l’intro",
-    "introSkipped": "Intro passée"
+    "introSkipped": "Intro passée",
+    "skipCredits": "Passer le générique"
   },
   "library": {
     "nothingUnwatched": "Rien de non vu ici",

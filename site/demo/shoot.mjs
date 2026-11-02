@@ -409,6 +409,22 @@ try {
       await sleep(3500) // the controls fade away; the button stays
       await shot(page, 'skip-intro')
     }
+
+    // Skip credits: a film a little way into its end credits, which a
+    // chapter marks in the demo library (see docs/guide/watching/skipping-credits.md).
+    if (wanted('skip-credits')) {
+      const film = await api(token, 'GET', `/items/${(await find('Harbor Lights')).id}`)
+      await page.goto(`${origin}/watch/${film.id}`)
+      await sleep(2500)
+      const bar = page.getByRole('slider', { name: 'Seek' })
+      const box = await bar.boundingBox()
+      const total = film.durationMs / 1000
+      await page.mouse.click(box.x + box.width * ((film.endCredits.startMs / 1000 + 20) / total), box.y + box.height / 2)
+      await page.getByRole('button', { name: 'Skip credits' }).waitFor({ timeout: 20000 })
+      await page.mouse.move(700, 300) // off the seek bar, so its preview goes
+      await sleep(3500) // the controls fade away; the button stays
+      await shot(page, 'skip-credits')
+    }
     await page.context().close()
   }
 

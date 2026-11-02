@@ -359,7 +359,8 @@
       "source": "Phụ đề từ OpenSubtitles.com"
     },
     "skipIntro": "Bỏ qua đoạn mở đầu",
-    "introSkipped": "Đã bỏ qua đoạn mở đầu"
+    "introSkipped": "Đã bỏ qua đoạn mở đầu",
+    "skipCredits": "Bỏ qua phần danh đề"
   },
   "library": {
     "nothingUnwatched": "Không còn gì chưa xem ở đây",

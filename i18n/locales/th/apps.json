@@ -359,7 +359,8 @@
       "source": "คำบรรยายจาก OpenSubtitles.com"
     },
     "skipIntro": "ข้ามช่วงเปิดเรื่อง",
-    "introSkipped": "ข้ามช่วงเปิดเรื่องแล้ว"
+    "introSkipped": "ข้ามช่วงเปิดเรื่องแล้ว",
+    "skipCredits": "ข้ามเครดิต"
   },
   "library": {
     "nothingUnwatched": "ไม่มีเรื่องที่ยังไม่ได้ดูที่นี่",

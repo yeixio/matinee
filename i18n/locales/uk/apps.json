@@ -374,7 +374,8 @@
       "source": "Субтитри з OpenSubtitles.com"
     },
     "skipIntro": "Пропустити заставку",
-    "introSkipped": "Заставку пропущено"
+    "introSkipped": "Заставку пропущено",
+    "skipCredits": "Пропустити титри"
   },
   "library": {
     "nothingUnwatched": "Тут немає непереглянутого",

@@ -47,7 +47,8 @@
       "source": "Subtitrări de pe OpenSubtitles.com"
     },
     "skipIntro": "Sari peste intro",
-    "introSkipped": "Intro sărit"
+    "introSkipped": "Intro sărit",
+    "skipCredits": "Sari peste generic"
   },
   "somethingWentWrong": "Ceva n-a mers bine",
   "oneMoment": "O clipă…",
@@ -415,6 +416,7 @@
     "state": {
       "lookingAt": "Se analizează {{file}}",
       "intros": "Se caută introuri în {{season}}",
+      "credits": "Se caută genericul de final în {{title}}",
       "thumbnails": "Se creează previzualizări pentru {{title}}",
       "gapless": "Ascultă pauzele dintre melodii pe {{album}}",
       "working": "Lucrează",
@@ -447,6 +449,11 @@
       "label": "Găsește introurile serialelor",
       "hint": "După ce toate fișierele sunt analizate, Matinee ascultă începutul episoadelor din fiecare sezon pentru a găsi introul comun, ca playerele să poată oferi Sari peste intro.",
       "progress": "{{done}} din {{total}} episoade verificate, {{found}} cu intro"
+    },
+    "credits": {
+      "label": "Găsește genericul de final",
+      "hint": "După ce toate fișierele sunt analizate, Matinee găsește unde începe genericul de final al episoadelor și filmelor, ca playerele să arate acolo Urmează sau Sari peste generic.",
+      "progress": "{{done}} din {{total}} episoade și filme verificate, {{found}} cu generic de final"
     },
     "thumbnails": {
       "label": "Previzualizări pe bara de redare",

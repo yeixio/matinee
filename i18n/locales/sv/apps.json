@@ -364,7 +364,8 @@
       "source": "Undertexter från OpenSubtitles.com"
     },
     "skipIntro": "Hoppa över intro",
-    "introSkipped": "Introt hoppades över"
+    "introSkipped": "Introt hoppades över",
+    "skipCredits": "Hoppa över eftertexter"
   },
   "library": {
     "nothingUnwatched": "Inget osett här",

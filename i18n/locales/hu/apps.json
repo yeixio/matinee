@@ -364,7 +364,8 @@
       "source": "Feliratok: OpenSubtitles.com"
     },
     "skipIntro": "Bevezető átugrása",
-    "introSkipped": "Bevezető átugorva"
+    "introSkipped": "Bevezető átugorva",
+    "skipCredits": "Stáblista átugrása"
   },
   "library": {
     "nothingUnwatched": "Itt nincs semmi, amit ne láttál volna",

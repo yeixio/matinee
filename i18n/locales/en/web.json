@@ -47,7 +47,8 @@
       "source": "Subtitles from OpenSubtitles.com"
     },
     "skipIntro": "Skip intro",
-    "introSkipped": "Skipped the intro"
+    "introSkipped": "Skipped the intro",
+    "skipCredits": "Skip credits"
   },
   "somethingWentWrong": "Something went wrong",
   "oneMoment": "One moment…",
@@ -412,6 +413,7 @@
     "state": {
       "lookingAt": "Looking at {{file}}",
       "intros": "Looking for intros in {{season}}",
+      "credits": "Looking for end credits in {{title}}",
       "thumbnails": "Making seek bar previews for {{title}}",
       "gapless": "Listening for gaps between songs on {{album}}",
       "working": "Working",
@@ -443,6 +445,11 @@
       "label": "Find TV intros",
       "hint": "Once every file is analyzed, Matinee listens to the start of each season’s episodes for the intro they share, so players can offer Skip intro.",
       "progress": "{{done}} of {{total}} episodes checked, {{found}} with an intro"
+    },
+    "credits": {
+      "label": "Find end credits",
+      "hint": "Once every file is analyzed, Matinee finds where the end credits of episodes and movies start, so players can show Up next or Skip credits there.",
+      "progress": "{{done}} of {{total}} episodes and movies checked, {{found}} with end credits"
     },
     "thumbnails": {
       "label": "Seek bar previews",

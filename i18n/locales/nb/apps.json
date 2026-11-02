@@ -364,7 +364,8 @@
       "source": "Undertekster fra OpenSubtitles.com"
     },
     "skipIntro": "Hopp over intro",
-    "introSkipped": "Introen ble hoppet over"
+    "introSkipped": "Introen ble hoppet over",
+    "skipCredits": "Hopp over rulletekster"
   },
   "library": {
     "nothingUnwatched": "Ingenting usett her",

@@ -116,7 +116,9 @@ export async function makeLibrary(root) {
   for (const m of movies) {
     const name = `${m.title} (${m.year})`
     const dir = path.join(media, 'Movies', name)
-    video(path.join(dir, `${name}.${m.uhd ? 'mkv' : 'mp4'}`), path.join(images, `backdrop-${m.id}.jpg`), m.minutes * 60, m.uhd ? { uhd: true, audio: '5.1', extraAudio: true } : {})
+    // The last four minutes are the end credits, which players offer to skip.
+    const chapters = [['Film', 0, (m.minutes - 4) * 60], ['End credits', (m.minutes - 4) * 60, m.minutes * 60]]
+    video(path.join(dir, `${name}.${m.uhd ? 'mkv' : 'mp4'}`), path.join(images, `backdrop-${m.id}.jpg`), m.minutes * 60, m.uhd ? { uhd: true, audio: '5.1', extraAudio: true, chapters } : { chapters })
     subtitles(path.join(dir, `${name}.en.srt`), ['The lights go down.', '<i>Somewhere, a projector hums.</i>', 'Popcorn, anyone?'])
     if (m.id === 101 || m.id === 107) {
       subtitles(path.join(dir, `${name}.es.srt`), ['Se apagan las luces.', '<i>En algún lugar, zumba un proyector.</i>', '¿Palomitas?'])

@@ -47,7 +47,8 @@
       "source": "Ondertitels van OpenSubtitles.com"
     },
     "skipIntro": "Intro overslaan",
-    "introSkipped": "Intro overgeslagen"
+    "introSkipped": "Intro overgeslagen",
+    "skipCredits": "Aftiteling overslaan"
   },
   "somethingWentWrong": "Er ging iets mis",
   "oneMoment": "Een moment…",
@@ -412,6 +413,7 @@
     "state": {
       "lookingAt": "Bekijkt {{file}}",
       "intros": "Intro’s zoeken in {{season}}",
+      "credits": "Zoeken naar de aftiteling in {{title}}",
       "thumbnails": "Voorbeelden voor de tijdbalk maken voor {{title}}",
       "gapless": "Luistert naar pauzes tussen nummers op {{album}}",
       "working": "Bezig",
@@ -443,6 +445,11 @@
       "label": "Intro’s van series vinden",
       "hint": "Zodra alle bestanden zijn geanalyseerd, luistert Matinee naar het begin van de afleveringen van elk seizoen om de intro te vinden die ze delen, zodat spelers Intro overslaan kunnen aanbieden.",
       "progress": "{{done}} van {{total}} afleveringen gecontroleerd, {{found}} met een intro"
+    },
+    "credits": {
+      "label": "Aftiteling vinden",
+      "hint": "Zodra alle bestanden zijn geanalyseerd, vindt Matinee waar de aftiteling van afleveringen en films begint, zodat spelers daar Hierna of Aftiteling overslaan tonen.",
+      "progress": "{{done}} van {{total}} afleveringen en films gecontroleerd, {{found}} met aftiteling"
     },
     "thumbnails": {
       "label": "Voorbeelden in de tijdbalk",

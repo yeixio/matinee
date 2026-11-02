@@ -6,11 +6,13 @@ it. This page is the shared behaviour for the web player and the apps.
 
 ## When the card shows
 
-1. Where the closing credits start, from `mediaInfo.creditsMs` on the item.
-   The background analysis reads it from the file's chapters: the first
-   chapter in the second half of the file titled like *Credits*,
-   *End Credits*, *Outro*, *End Titles*, or *ED*/*Ending* (anime).
-   Files analyzed before this existed are analyzed again by themselves.
+1. Where the closing credits start, from `endCredits.startMs` on the item
+   (see [credits.md](credits.md)): a chapter, the music a season's episodes
+   share at their end, or the picture going dark. Credits with something
+   after them (`endCredits.endMs` set) leave the card for the end, so that
+   plays. Servers before `endCredits` only had `mediaInfo.creditsMs`, from
+   chapters; the server still fills that in from what it found, for older
+   apps, when the credits run to the end.
 2. Otherwise 30 seconds before the end.
 3. Videos under two minutes only get it at the end.
 
@@ -39,8 +41,12 @@ Seeking back to before that point takes the card away again.
   The video keeps going to the end and then waits.
 - **You might like:** the `similar` title with **Have a look** and **Close**.
 
-Moving on marks the episode watched. Reaching `creditsMs` also counts as
+Moving on marks the episode watched. Reaching the credits also counts as
 watched on the server, like passing 92% does.
+
+When no card shows at the credits (a movie, a show's last episode with
+nothing similar, auto-play off, or a closed card), players offer **Skip
+credits** instead; see [credits.md](credits.md).
 
 ## Settings
 

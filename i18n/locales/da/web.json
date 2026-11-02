@@ -47,7 +47,8 @@
       "source": "Undertekster fra OpenSubtitles.com"
     },
     "skipIntro": "Spring intro over",
-    "introSkipped": "Introen blev sprunget over"
+    "introSkipped": "Introen blev sprunget over",
+    "skipCredits": "Spring rulletekster over"
   },
   "somethingWentWrong": "Noget gik galt",
   "oneMoment": "Et øjeblik…",
@@ -412,6 +413,7 @@
     "state": {
       "lookingAt": "Kigger på {{file}}",
       "intros": "Leder efter introer i {{season}}",
+      "credits": "Leder efter rulletekster i {{title}}",
       "thumbnails": "Laver forhåndsbilleder til {{title}}",
       "gapless": "Lytter efter pauser mellem sangene på {{album}}",
       "working": "Arbejder",
@@ -443,6 +445,11 @@
       "label": "Find introer i serier",
       "hint": "Når alle filer er analyseret, lytter Matinee til starten af hver sæsons afsnit efter den intro, de har til fælles, så afspillerne kan tilbyde Spring intro over.",
       "progress": "{{done}} af {{total}} afsnit tjekket, {{found}} med intro"
+    },
+    "credits": {
+      "label": "Find rulletekster",
+      "hint": "Når alle filer er analyseret, finder Matinee, hvor rulleteksterne i afsnit og film starter, så afspillere kan vise Næste eller Spring rulletekster over der.",
+      "progress": "{{done}} af {{total}} afsnit og film tjekket, {{found}} med rulletekster"
     },
     "thumbnails": {
       "label": "Forhåndsbilleder i tidslinjen",

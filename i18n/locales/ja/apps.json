@@ -359,7 +359,8 @@
       "source": "字幕提供: OpenSubtitles.com"
     },
     "skipIntro": "イントロをスキップ",
-    "introSkipped": "イントロをスキップしました"
+    "introSkipped": "イントロをスキップしました",
+    "skipCredits": "エンドクレジットをスキップ"
   },
   "library": {
     "nothingUnwatched": "未視聴のものはありません",

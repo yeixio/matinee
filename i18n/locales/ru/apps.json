@@ -374,7 +374,8 @@
       "source": "Субтитры с OpenSubtitles.com"
     },
     "skipIntro": "Пропустить заставку",
-    "introSkipped": "Заставка пропущена"
+    "introSkipped": "Заставка пропущена",
+    "skipCredits": "Пропустить титры"
   },
   "library": {
     "nothingUnwatched": "Здесь нет непросмотренного",

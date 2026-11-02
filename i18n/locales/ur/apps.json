@@ -364,7 +364,8 @@
       "source": "سب ٹائٹل OpenSubtitles.com سے"
     },
     "skipIntro": "تعارف چھوڑیں",
-    "introSkipped": "تعارف چھوڑ دیا"
+    "introSkipped": "تعارف چھوڑ دیا",
+    "skipCredits": "کریڈٹس چھوڑیں"
   },
   "library": {
     "nothingUnwatched": "یہاں کچھ بھی ان دیکھا نہیں",

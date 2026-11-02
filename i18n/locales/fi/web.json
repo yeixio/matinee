@@ -47,7 +47,8 @@
       "source": "Tekstitykset: OpenSubtitles.com"
     },
     "skipIntro": "Ohita alkutunnari",
-    "introSkipped": "Alkutunnari ohitettiin"
+    "introSkipped": "Alkutunnari ohitettiin",
+    "skipCredits": "Ohita lopputekstit"
   },
   "somethingWentWrong": "Jokin meni pieleen",
   "oneMoment": "Hetkinen…",
@@ -412,6 +413,7 @@
     "state": {
       "lookingAt": "Tutkitaan: {{file}}",
       "intros": "Etsitään alkutunnareita: {{season}}",
+      "credits": "Etsitään lopputekstejä: {{title}}",
       "thumbnails": "Luodaan esikatselukuvia: {{title}}",
       "gapless": "Kuuntelee taukoja kappaleiden välillä: {{album}}",
       "working": "Työskennellään",
@@ -443,6 +445,11 @@
       "label": "Etsi sarjojen alkutunnarit",
       "hint": "Kun kaikki tiedostot on analysoitu, Matinee kuuntelee kunkin kauden jaksojen alkua ja etsii niille yhteisen alkutunnarin, jotta soittimet voivat tarjota Ohita alkutunnari -toimintoa.",
       "progress": "{{done}}/{{total}} jaksoa tarkistettu, {{found}} sisältää alkutunnarin"
+    },
+    "credits": {
+      "label": "Etsi lopputekstit",
+      "hint": "Kun kaikki tiedostot on analysoitu, Matinee etsii, mistä jaksojen ja elokuvien lopputekstit alkavat, jotta soittimet voivat näyttää siinä kohdassa Seuraavaksi tai Ohita lopputekstit.",
+      "progress": "{{done}}/{{total}} jaksoa ja elokuvaa tarkistettu, {{found}} lopputeksteillä"
     },
     "thumbnails": {
       "label": "Esikatselukuvat aikajanalla",
