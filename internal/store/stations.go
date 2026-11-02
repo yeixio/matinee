@@ -1,0 +1,83 @@
+package store
+
+import (
+	"context"
+	"database/sql"
+	"errors"
+	"strings"
+)
+
+// Radio stations are items of kind station at the top of a music library.
+// They have no file: they play from their stream (stream_url), which the
+// server relays (see internal/radio). Scans leave them be, and lists of a
+// library's titles leave them out unless asked for them by kind.
+
+// Station is what's needed to add a radio station.
+type Station struct {
+	Name     string
+	URL      string // the stream
+	Homepage string
+	Image    string // a logo on the internet, or ""
+	Genres   []string
+}
+
+// ErrStationTaken means the library has that stream already.
+var ErrStationTaken = errors.New("that station is already in the library")
+
+// AddStation adds a radio station to a music library.
+func (s *Store) AddStation(ctx context.Context, libraryID int64, st Station) (int64, error) {
+	var taken int
+	if err := s.db.QueryRowContext(ctx, "SELECT COUNT(*) FROM items WHERE library_id = ? AND kind = 'station' AND stream_url = ?",
+		libraryID, st.URL).Scan(&taken); err != nil {
+		return 0, err
+	}
+	if taken > 0 {
+		return 0, ErrStationTaken
+	}
+	name := strings.TrimSpace(st.Name)
+	var id int64
+	err := s.db.QueryRowContext(ctx, `INSERT INTO items (library_id, kind, title, sort_title, overview, poster, genres, stream_url, meta_at, added_at)
+		VALUES (?, 'station', ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id`,
+		libraryID, name, SortTitle(name), nullStr(st.Homepage), nullStr(st.Image), encodeGenres(st.Genres), st.URL, now(), now()).Scan(&id)
+	return id, err
+}
+
+// StationURL is a station's stream, or ErrNotFound for anything else.
+func (s *Store) StationURL(ctx context.Context, id int64) (string, error) {
+	var u sql.NullString
+	err := s.db.QueryRowContext(ctx, "SELECT stream_url FROM items WHERE id = ? AND kind = 'station'", id).Scan(&u)
+	if errors.Is(err, sql.ErrNoRows) || err == nil && !u.Valid {
+		return "", ErrNotFound
+	}
+	return u.String, err
+}
+
+// RenameStation changes a station's name.
+func (s *Store) RenameStation(ctx context.Context, id int64, name string) error {
+	name = strings.TrimSpace(name)
+	res, err := s.db.ExecContext(ctx, "UPDATE items SET title = ?, sort_title = ? WHERE id = ? AND kind = 'station'", name, SortTitle(name), id)
+	if err != nil {
+		return err
+	}
+	if n, _ := res.RowsAffected(); n == 0 {
+		return ErrNotFound
+	}
+	return nil
+}
+
+// DeleteStation removes a station, and what people played of it.
+func (s *Store) DeleteStation(ctx context.Context, id int64) error {
+	res, err := s.db.ExecContext(ctx, "DELETE FROM items WHERE id = ? AND kind = 'station'", id)
+	if err != nil {
+		return err
+	}
+	if n, _ := res.RowsAffected(); n == 0 {
+		return ErrNotFound
+	}
+	return nil
+}
+
+// Stations lists a music library's radio stations by name.
+func (s *Store) Stations(ctx context.Context, userID, libraryID int64) ([]Item, error) {
+	return s.queryItems(ctx, "i.library_id = ? AND i.kind = 'station'", "i.sort_title, i.id", userID, libraryID)
+}

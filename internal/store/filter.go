@@ -170,7 +170,7 @@ func (f ItemFilter) Validate() error {
 		}
 	}
 	for _, k := range f.Kind {
-		if !slices.Contains([]string{"movie", "show", "season", "episode", "artist", "album", "track", "author", "book", "part", "podcast", "podcastEpisode"}, k) {
+		if !slices.Contains([]string{"movie", "show", "season", "episode", "artist", "album", "track", "author", "book", "part", "podcast", "podcastEpisode", "station"}, k) {
 			return fmt.Errorf("kind: unknown kind %q", k)
 		}
 	}
@@ -366,7 +366,8 @@ func (f ItemFilter) sql(today time.Time) (where, order string, args []any) {
 	if len(f.Kind) > 0 {
 		add("i.kind IN ("+placeholders(len(f.Kind))+")", anyArgs(f.Kind)...)
 	} else {
-		add("i.parent_id IS NULL")
+		// Radio stations are asked for by kind; see stations.go.
+		add("i.parent_id IS NULL AND i.kind <> 'station'")
 	}
 	for _, w := range strings.Fields(strings.ToLower(f.Q)) {
 		add(`LOWER(i.title) LIKE ? ESCAPE '\'`, "%"+likeEscape(w)+"%")

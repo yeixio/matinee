@@ -226,7 +226,8 @@ func scanItem(r scanner) (Item, error) {
 		it.SeriesIndex = &seriesIdx.Float64
 	}
 	it.Genres = decodeGenres(genres)
-	it.Playable = it.Path != ""
+	// A radio station plays from its stream, not a file (see stations.go).
+	it.Playable = it.Path != "" || it.Kind == "station"
 	it.MediaTags = splitTags(tags)
 	it.HasPoster, it.HasBackdrop = it.Poster != "", it.Backdrop != ""
 	it.PosterTag = chosenTag(it.Poster)
@@ -304,7 +305,7 @@ func (s *Store) markPending(it *Item) {
 
 // TopLevel lists a library's root items: movies, shows or artists.
 func (s *Store) TopLevel(ctx context.Context, userID, libraryID int64) ([]Item, error) {
-	items, err := s.queryItems(ctx, "i.library_id = ? AND i.parent_id IS NULL", "i.sort_title", userID, libraryID)
+	items, err := s.queryItems(ctx, "i.library_id = ? AND i.parent_id IS NULL AND i.kind <> 'station'", "i.sort_title", userID, libraryID)
 	if err != nil {
 		return nil, err
 	}
@@ -637,7 +638,7 @@ func (s *Store) RemoveMissing(ctx context.Context, libraryID int64, seen func(pa
 	// Empty seasons make empty shows, so repeat until nothing changes.
 	for {
 		res, err := s.db.ExecContext(ctx, `
-			DELETE FROM items WHERE library_id = ? AND path IS NULL
+			DELETE FROM items WHERE library_id = ? AND path IS NULL AND kind <> 'station'
 			AND NOT EXISTS (SELECT 1 FROM items c WHERE c.parent_id = items.id)`, libraryID)
 		if err != nil {
 			return 0, err
