@@ -35,8 +35,12 @@ func TestLabels(t *testing.T) {
 	if err != nil || len(toRead) != 4 {
 		t.Fatalf("albums to read: %+v %v", toRead, err)
 	}
-	for id, label := range map[int64]string{deep: "Anjunadeep", deep2: " ANJUNADEEP ", beats: "Anjunabeats", none: ""} {
-		if err := db.SetAlbumLabel(ctx, id, label); err != nil {
+	// In this order: the first spelling of a label is the one it keeps.
+	for _, a := range []struct {
+		id    int64
+		label string
+	}{{deep, "Anjunadeep"}, {deep2, " ANJUNADEEP "}, {beats, "Anjunabeats"}, {none, ""}} {
+		if err := db.SetAlbumLabel(ctx, a.id, a.label); err != nil {
 			t.Fatal(err)
 		}
 	}
