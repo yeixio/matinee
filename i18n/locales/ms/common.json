@@ -381,7 +381,11 @@
     "playlistGone": "Senarai main ini sudah tiada",
     "create": "Cipta",
     "save": "Simpan",
-    "delete": "Padam"
+    "delete": "Padam",
+    "lyrics": "Lirik",
+    "noLyrics": "Tiada lirik untuk lagu ini",
+    "instrumental": "Instrumental",
+    "lyricsFromLrclib": "Lirik daripada LRCLIB"
   },
   "books": {
     "overview": "Gambaran keseluruhan",

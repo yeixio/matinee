@@ -465,7 +465,11 @@
     "playlistGone": "Tej playlisty już nie ma",
     "create": "Utwórz",
     "save": "Zapisz",
-    "delete": "Usuń"
+    "delete": "Usuń",
+    "lyrics": "Tekst",
+    "noLyrics": "Brak tekstu tego utworu",
+    "instrumental": "Instrumentalny",
+    "lyricsFromLrclib": "Tekst z LRCLIB"
   },
   "books": {
     "overview": "Przegląd",

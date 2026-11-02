@@ -409,7 +409,11 @@
     "playlistGone": "یہ پلے لسٹ اب موجود نہیں",
     "create": "بنائیں",
     "save": "محفوظ کریں",
-    "delete": "حذف کریں"
+    "delete": "حذف کریں",
+    "lyrics": "بول",
+    "noLyrics": "اس گانے کے بول نہیں ہیں",
+    "instrumental": "سازینہ",
+    "lyricsFromLrclib": "بول LRCLIB سے"
   },
   "books": {
     "overview": "جائزہ",

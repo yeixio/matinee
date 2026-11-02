@@ -409,7 +409,11 @@
     "playlistGone": "Den här spellistan finns inte längre",
     "create": "Skapa",
     "save": "Spara",
-    "delete": "Radera"
+    "delete": "Radera",
+    "lyrics": "Låttext",
+    "noLyrics": "Ingen låttext för den här låten",
+    "instrumental": "Instrumental",
+    "lyricsFromLrclib": "Låttext från LRCLIB"
   },
   "books": {
     "overview": "Översikt",

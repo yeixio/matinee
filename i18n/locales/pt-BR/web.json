@@ -762,6 +762,12 @@
         "v4l2m2m": "V4L2 (Raspberry Pi)"
       }
     },
+    "lyrics": {
+      "title": "Letras",
+      "intro": "As músicas mostram a letra no ritmo da música quando há um arquivo .lrc com o mesmo nome ao lado da música, ou a letra está nas tags dela.",
+      "online": "Buscar letras na internet",
+      "onlineDetail": "Para músicas sem letra sincronizada, o servidor consulta o <site>LRCLIB</site>, um banco de letras livre e aberto. Ele envia só o artista, o título, o álbum e a duração de cada música, direto deste servidor."
+    },
     "homeRows": {
       "title": "Início",
       "holidays": "Fileiras de datas comemorativas",
@@ -830,7 +836,7 @@
       },
       "content": {
         "title": "Conteúdo",
-        "hint": "Pôsteres, busca de podcasts e legendas, trailers e fileiras do Início"
+        "hint": "Pôsteres, busca de podcasts e legendas, letras, trailers e fileiras do Início"
       },
       "streaming": {
         "title": "Streaming",

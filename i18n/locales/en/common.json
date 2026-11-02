@@ -409,7 +409,11 @@
     "playlistGone": "This playlist isn't here anymore",
     "create": "Create",
     "save": "Save",
-    "delete": "Delete"
+    "delete": "Delete",
+    "lyrics": "Lyrics",
+    "noLyrics": "No lyrics for this song",
+    "instrumental": "Instrumental",
+    "lyricsFromLrclib": "Lyrics from LRCLIB"
   },
   "books": {
     "overview": "Overview",

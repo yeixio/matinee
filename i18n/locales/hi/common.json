@@ -409,7 +409,11 @@
     "playlistGone": "यह प्लेलिस्ट अब मौजूद नहीं है",
     "create": "बनाएँ",
     "save": "सहेजें",
-    "delete": "हटाएँ"
+    "delete": "हटाएँ",
+    "lyrics": "बोल",
+    "noLyrics": "इस गाने के बोल नहीं हैं",
+    "instrumental": "वाद्य",
+    "lyricsFromLrclib": "बोल LRCLIB से"
   },
   "books": {
     "overview": "अवलोकन",

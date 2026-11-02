@@ -409,7 +409,11 @@
     "playlistGone": "این فهرست پخش دیگر وجود ندارد",
     "create": "ساختن",
     "save": "ذخیره",
-    "delete": "حذف"
+    "delete": "حذف",
+    "lyrics": "متن ترانه",
+    "noLyrics": "این آهنگ متن ندارد",
+    "instrumental": "بی‌کلام",
+    "lyricsFromLrclib": "متن از LRCLIB"
   },
   "books": {
     "overview": "نمای کلی",

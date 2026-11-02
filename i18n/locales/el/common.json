@@ -409,7 +409,11 @@
     "playlistGone": "Αυτή η λίστα δεν υπάρχει πια",
     "create": "Δημιουργία",
     "save": "Αποθήκευση",
-    "delete": "Διαγραφή"
+    "delete": "Διαγραφή",
+    "lyrics": "Στίχοι",
+    "noLyrics": "Δεν υπάρχουν στίχοι για αυτό το τραγούδι",
+    "instrumental": "Ορχηστρικό",
+    "lyricsFromLrclib": "Στίχοι από το LRCLIB"
   },
   "books": {
     "overview": "Επισκόπηση",

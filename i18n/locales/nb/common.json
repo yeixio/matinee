@@ -409,7 +409,11 @@
     "playlistGone": "Denne spillelisten finnes ikke lenger",
     "create": "Opprett",
     "save": "Lagre",
-    "delete": "Slett"
+    "delete": "Slett",
+    "lyrics": "Sangtekst",
+    "noLyrics": "Ingen sangtekst for denne sangen",
+    "instrumental": "Instrumental",
+    "lyricsFromLrclib": "Sangtekst fra LRCLIB"
   },
   "books": {
     "overview": "Oversikt",

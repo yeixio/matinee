@@ -381,7 +381,11 @@
     "playlistGone": "Danh sách phát này không còn nữa",
     "create": "Tạo",
     "save": "Lưu",
-    "delete": "Xóa"
+    "delete": "Xóa",
+    "lyrics": "Lời bài hát",
+    "noLyrics": "Bài hát này không có lời",
+    "instrumental": "Không lời",
+    "lyricsFromLrclib": "Lời từ LRCLIB"
   },
   "books": {
     "overview": "Tổng quan",

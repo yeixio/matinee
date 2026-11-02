@@ -381,7 +381,11 @@
     "playlistGone": "이 플레이리스트는 더 이상 없습니다",
     "create": "만들기",
     "save": "저장",
-    "delete": "삭제"
+    "delete": "삭제",
+    "lyrics": "가사",
+    "noLyrics": "이 곡의 가사가 없습니다",
+    "instrumental": "연주곡",
+    "lyricsFromLrclib": "가사 제공: LRCLIB"
   },
   "books": {
     "overview": "개요",

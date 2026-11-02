@@ -758,6 +758,12 @@
         "v4l2m2m": "V4L2 (Raspberry Pi)"
       }
     },
+    "lyrics": {
+      "title": "Laulujen sanat",
+      "intro": "Kappaleet näyttävät sanansa musiikin tahdissa, kun kappaleen vieressä on samanniminen .lrc-tiedosto tai sanat ovat sen tageissa.",
+      "online": "Hae sanat verkosta",
+      "onlineDetail": "Kappaleille, joilla ei ole ajastettuja sanoja, palvelin kysyy <site>LRCLIB</site>-palvelusta, joka on vapaa ja avoin sanatietokanta. Se lähettää vain kunkin kappaleen esittäjän, nimen, albumin ja keston suoraan tältä palvelimelta."
+    },
     "homeRows": {
       "title": "Koti",
       "holidays": "Juhlapyhärivit",
@@ -826,7 +832,7 @@
       },
       "content": {
         "title": "Sisältö",
-        "hint": "Julisteet, podcastien ja tekstitysten haku, trailerit ja Kotinäkymän rivit"
+        "hint": "Julisteet, podcastien ja tekstitysten haku, laulujen sanat, trailerit ja Kotinäkymän rivit"
       },
       "streaming": {
         "title": "Suoratoisto",

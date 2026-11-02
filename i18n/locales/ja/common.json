@@ -381,7 +381,11 @@
     "playlistGone": "このプレイリストはもうありません",
     "create": "作成",
     "save": "保存",
-    "delete": "削除"
+    "delete": "削除",
+    "lyrics": "歌詞",
+    "noLyrics": "この曲の歌詞はありません",
+    "instrumental": "インストゥルメンタル",
+    "lyricsFromLrclib": "歌詞の提供: LRCLIB"
   },
   "books": {
     "overview": "概要",

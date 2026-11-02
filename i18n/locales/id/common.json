@@ -381,7 +381,11 @@
     "playlistGone": "Playlist ini sudah tidak ada",
     "create": "Buat",
     "save": "Simpan",
-    "delete": "Hapus"
+    "delete": "Hapus",
+    "lyrics": "Lirik",
+    "noLyrics": "Tidak ada lirik untuk lagu ini",
+    "instrumental": "Instrumental",
+    "lyricsFromLrclib": "Lirik dari LRCLIB"
   },
   "books": {
     "overview": "Ringkasan",

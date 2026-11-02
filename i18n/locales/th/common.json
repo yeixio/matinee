@@ -381,7 +381,11 @@
     "playlistGone": "เพลย์ลิสต์นี้ไม่มีแล้ว",
     "create": "สร้าง",
     "save": "บันทึก",
-    "delete": "ลบ"
+    "delete": "ลบ",
+    "lyrics": "เนื้อเพลง",
+    "noLyrics": "ไม่มีเนื้อเพลงสำหรับเพลงนี้",
+    "instrumental": "บรรเลง",
+    "lyricsFromLrclib": "เนื้อเพลงจาก LRCLIB"
   },
   "books": {
     "overview": "ภาพรวม",

@@ -465,7 +465,11 @@
     "playlistGone": "Tento playlist už tu není",
     "create": "Vytvořit",
     "save": "Uložit",
-    "delete": "Smazat"
+    "delete": "Smazat",
+    "lyrics": "Text",
+    "noLyrics": "K této skladbě není text",
+    "instrumental": "Instrumentální",
+    "lyricsFromLrclib": "Text z LRCLIB"
   },
   "books": {
     "overview": "Přehled",

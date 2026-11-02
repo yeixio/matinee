@@ -758,6 +758,12 @@
         "v4l2m2m": "V4L2 (Raspberry Pi)"
       }
     },
+    "lyrics": {
+      "title": "Songtexte",
+      "intro": "Songs zeigen ihren Text im Takt der Musik, wenn neben dem Song eine .lrc-Datei mit demselben Namen liegt oder der Text in seinen Tags steht.",
+      "online": "Songtexte online suchen",
+      "onlineDetail": "Für Songs ohne zeitlich abgestimmten Text fragt der Server <site>LRCLIB</site>, eine freie, offene Songtext-Datenbank. Er sendet nur Interpret, Titel, Album und Länge jedes Songs, direkt von diesem Server."
+    },
     "homeRows": {
       "title": "Startseite",
       "holidays": "Feiertagsreihen",
@@ -826,7 +832,7 @@
       },
       "content": {
         "title": "Inhalte",
-        "hint": "Poster, Podcast- und Untertitelsuche, Trailer und Reihen auf der Startseite"
+        "hint": "Poster, Podcast- und Untertitelsuche, Songtexte, Trailer und Reihen auf der Startseite"
       },
       "streaming": {
         "title": "Streaming",

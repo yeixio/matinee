@@ -1,4 +1,4 @@
-import { AudioWaveform, ChevronDown, GripVertical, ListMusic, ListPlus, X } from 'lucide-react'
+import { AudioWaveform, ChevronDown, GripVertical, ListMusic, ListPlus, MicVocal, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
@@ -7,19 +7,24 @@ import { NewPlaylistDialog } from '../components/Playlists'
 import { Equalizer } from '../components/Tracks'
 import { clock } from '../format'
 import { useAudio, useAudioTime } from './AudioPlayer'
+import { LyricsView } from './Lyrics'
 import { Controls, Seek, VolumeControl } from './MusicBar'
 import { upNext } from './queue'
 import { Visualizer } from './Visualizer'
 
 // The full player: the cover large, the controls, and what's coming up,
-// which can be reordered by dragging, or played or removed.
+// which can be reordered by dragging, or played or removed; or the song's
+// words, in time with it.
 export function NowPlaying() {
   const { t } = useTranslation()
   const s = useAudio()
   const { time, dur } = useAudioTime()
   const item = s.current!
-  // Phones show the cover or the queue; wider screens show both.
-  const [showQueue, setShowQueue] = useState(false)
+  // Phones show the cover, the queue or the words; wider screens show the
+  // cover with the queue or the words.
+  const [panel, setPanel] = useState<'queue' | 'lyrics'>()
+  const showQueue = panel === 'queue'
+  const toggle = (p: 'queue' | 'lyrics') => setPanel(panel === p ? undefined : p)
   const [visual, setVisual] = useState(false)
   const close = () => s.setExpanded(false)
 
@@ -53,8 +58,8 @@ export function NowPlaying() {
         <button onClick={close} className="rounded-full p-2 text-muted hover:bg-text/10 hover:text-text" aria-label={t('common:music.minimize')} title={t('common:music.minimize')}>
           <ChevronDown className="size-6" />
         </button>
-        {/* As wide as the visualizer button, so the title stays in the middle. */}
-        <div className="w-10" />
+        {/* As wide as the buttons on the other side, so the title stays in the middle. */}
+        <div className="w-20 lg:w-10" />
         <div className="flex-1 text-center text-xs font-semibold tracking-widest text-muted uppercase">{t('common:music.nowPlaying')}</div>
         <button
           onClick={() => setVisual(true)}
@@ -65,9 +70,19 @@ export function NowPlaying() {
           <AudioWaveform className="size-6" />
         </button>
         <button
-          onClick={() => setShowQueue(!showQueue)}
+          onClick={() => toggle('lyrics')}
+          aria-pressed={panel === 'lyrics'}
+          className={`rounded-full p-2 hover:bg-text/10 ${panel === 'lyrics' ? 'text-accent' : 'text-muted'}`}
+          aria-label={t('common:music.lyrics')}
+          title={t('common:music.lyrics')}
+        >
+          <MicVocal className="size-6" />
+        </button>
+        {/* Wide screens show the queue whenever the words aren't. */}
+        <button
+          onClick={() => toggle('queue')}
           aria-pressed={showQueue}
-          className={`rounded-full p-2 hover:bg-text/10 lg:invisible ${showQueue ? 'text-accent' : 'text-muted'}`}
+          className={`rounded-full p-2 hover:bg-text/10 lg:hidden ${showQueue ? 'text-accent' : 'text-muted'}`}
           aria-label={t('common:music.queue')}
           title={t('common:music.queue')}
         >
@@ -76,7 +91,7 @@ export function NowPlaying() {
       </header>
 
       <div className="relative flex min-h-0 flex-1 justify-center gap-16 px-6 pb-[max(env(safe-area-inset-bottom),1.5rem)] md:px-12 lg:px-16">
-        <section className={`mx-auto min-h-0 w-full max-w-md flex-col justify-center gap-6 lg:mx-0 lg:flex lg:max-w-lg lg:flex-1 ${showQueue ? 'hidden' : 'flex'}`}>
+        <section className={`mx-auto min-h-0 w-full max-w-md flex-col justify-center gap-6 lg:mx-0 lg:flex lg:max-w-lg lg:flex-1 ${panel ? 'hidden' : 'flex'}`}>
           <Artwork item={item} type="poster" className="aspect-square w-full shrink rounded-2xl shadow-2xl shadow-black/60 ring-1 ring-text/10" />
           <div className="min-w-0 space-y-1">
             <h2 className="truncate text-2xl font-semibold md:text-3xl">{item.title}</h2>
@@ -101,8 +116,8 @@ export function NowPlaying() {
           </div>
         </section>
 
-        <section className={`min-h-0 w-full max-w-md flex-col lg:flex lg:max-w-xl lg:flex-1 lg:pt-4 ${showQueue ? 'mx-auto flex' : 'hidden'}`}>
-          <Queue />
+        <section className={`min-h-0 w-full max-w-md flex-col lg:flex lg:max-w-xl lg:flex-1 lg:pt-4 ${panel ? 'mx-auto flex' : 'hidden'}`}>
+          {panel === 'lyrics' ? <LyricsView /> : <Queue />}
         </section>
       </div>
       {visual && <Visualizer onClose={() => setVisual(false)} />}

@@ -437,7 +437,11 @@
     "playlistGone": "הפלייליסט הזה כבר לא קיים",
     "create": "יצירה",
     "save": "שמירה",
-    "delete": "מחיקה"
+    "delete": "מחיקה",
+    "lyrics": "מילים",
+    "noLyrics": "אין מילים לשיר הזה",
+    "instrumental": "אינסטרומנטלי",
+    "lyricsFromLrclib": "המילים מ-LRCLIB"
   },
   "books": {
     "overview": "סקירה",

@@ -61,7 +61,10 @@ func (c Config) TranscodeDir() string { return filepath.Join(c.DataDir, "transco
 func (c Config) ImageDir() string     { return filepath.Join(c.DataDir, "images") }
 func (c Config) SubtitleDir() string  { return filepath.Join(c.DataDir, "subtitles") }
 func (c Config) LevelsDir() string    { return filepath.Join(c.DataDir, "levels") }
-func (c Config) DownloadDir() string  { return filepath.Join(c.DataDir, "downloads") }
+
+// LyricsDir keeps what LRCLIB said about songs (internal/lyrics).
+func (c Config) LyricsDir() string   { return filepath.Join(c.DataDir, "lyrics") }
+func (c Config) DownloadDir() string { return filepath.Join(c.DataDir, "downloads") }
 
 // ThumbnailDir holds the seek bar's pictures of each video (internal/thumbs).
 func (c Config) ThumbnailDir() string { return filepath.Join(c.DataDir, "thumbnails") }

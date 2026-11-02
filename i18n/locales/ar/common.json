@@ -521,7 +521,11 @@
     "playlistGone": "لم تعد قائمة التشغيل هذه موجودة",
     "create": "إنشاء",
     "save": "حفظ",
-    "delete": "حذف"
+    "delete": "حذف",
+    "lyrics": "الكلمات",
+    "noLyrics": "لا توجد كلمات لهذه الأغنية",
+    "instrumental": "موسيقى فقط",
+    "lyricsFromLrclib": "الكلمات من LRCLIB"
   },
   "books": {
     "overview": "نظرة عامة",
