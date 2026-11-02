@@ -20,7 +20,7 @@ Open the library and pick **Add shows**.<!-- since: v0.1.13 --> From Matinee 0.1
 - **By feed address.** Every podcast has an RSS feed, and most shows list its address on their website. Paste it under **Add by feed address**. This always works, with or without a key.
 - **From another app.** Most podcast apps can export your shows as an OPML file. Pick **Import OPML** and Matinee adds and follows every show in it. **Export OPML** does the opposite, so you can take your shows with you.
 
-![Adding shows: search, trending shows, a feed address and OPML](../images/podcasts-add.webp)
+![The Search tab a podcast library opens on: search, categories and trending shows](../images/podcasts-add.webp)
 
 ![Searching for a show](../images/podcast-search.webp)
 
