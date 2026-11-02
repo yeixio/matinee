@@ -47,7 +47,7 @@ func TestHealthDashboard(t *testing.T) {
 	if code := admin.do("GET", "/api/v1/admin/health", nil, &h); code != http.StatusOK {
 		t.Fatalf("health: %d", code)
 	}
-	if h.Database == nil || h.Database.Kind != "sqlite" || h.Database.Users != 2 || h.Database.Libraries != 1 || h.Database.Schema == 0 {
+	if h.Database == nil || (h.Database.Kind != "sqlite" && h.Database.Kind != "postgres") || h.Database.Users != 2 || h.Database.Libraries != 1 || h.Database.Schema == 0 {
 		t.Fatalf("database: %+v %s", h.Database, h.DatabaseError)
 	}
 	if h.System.Requests == 0 || h.System.BytesOut == 0 {
