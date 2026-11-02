@@ -252,6 +252,9 @@ func (music) Index(ctx context.Context, st *store.Store, f File) (store.Item, er
 	if err := st.SetAlbumTags(ctx, albumID, release, group); err != nil {
 		return store.Item{}, err
 	}
+	if err := st.SetAlbumLabel(ctx, albumID, albumLabel(f.Probe.Tags)); err != nil {
+		return store.Item{}, err
+	}
 	it := store.Item{
 		Kind: "track", ParentID: &albumID, Title: tr.Title,
 		IndexNumber: nonZero(tr.Track), DiscNumber: nonZero(tr.Disc), Year: nonZero(tr.Year),

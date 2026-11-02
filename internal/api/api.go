@@ -253,6 +253,7 @@ func (s *Server) routes() []route {
 		{"GET /libraries/{id}/people", reader, s.libraryPeople},
 		{"GET /libraries/{id}/series", reader, s.librarySeries},
 		{"GET /libraries/{id}/narrators", reader, s.libraryNarrators},
+		{"GET /libraries/{id}/labels", reader, s.libraryLabels},
 		{"GET /items", reader, s.filterItems},
 		{"GET /fs", adminOnly, s.browseFS},
 		{"GET /import", adminOnly, s.importStatus},

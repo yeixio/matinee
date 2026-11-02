@@ -516,6 +516,12 @@ var migrations = []string{
 		file_key  TEXT NOT NULL, -- the file and detector version looked at, see MediaKey
 		looked_at BIGINT NOT NULL
 	)`,
+	// 84–86: an album's record label, from its files' tags, and whether its
+	// files were read for one (albums scanned before Matinee kept labels are
+	// read once; see labels.go).
+	"ALTER TABLE items ADD COLUMN label TEXT",
+	"ALTER TABLE items ADD COLUMN label_read INTEGER NOT NULL DEFAULT 0",
+	"CREATE INDEX items_label ON items(library_id, label)",
 }
 
 func now() int64 { return time.Now().Unix() }

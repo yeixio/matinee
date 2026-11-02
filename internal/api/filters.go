@@ -97,6 +97,24 @@ func (s *Server) libraryPeople(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, http.StatusOK, people)
 }
 
+// libraryLabels lists the record labels of a music library's albums.
+func (s *Server) libraryLabels(w http.ResponseWriter, r *http.Request) {
+	id, ok := pathID(r)
+	if !ok {
+		writeError(w, http.StatusBadRequest, "bad id")
+		return
+	}
+	if s.libraryHidden(w, r, id) {
+		return
+	}
+	labels, err := s.Store.Labels(r.Context(), currentUser(r).ID, id)
+	if err != nil {
+		s.serverError(w, err)
+		return
+	}
+	writeJSON(w, http.StatusOK, labels)
+}
+
 // libraryHidden answers 404 for a library a kids profile can't see, so its
 // filter options don't list what's in it.
 func (s *Server) libraryHidden(w http.ResponseWriter, r *http.Request, id int64) bool {
