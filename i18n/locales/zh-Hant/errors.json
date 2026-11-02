@@ -216,5 +216,9 @@
   "thumbnails_must_be_all_onplay_or_off": "縮圖必須是 all、onPlay 或 off",
   "too_many_watch_together_sessions_right_now": "目前一起看的工作階段太多",
   "unknown_action": "未知操作",
-  "usernames_are_at_most_40_characters": "使用者名稱最多 40 個字元"
+  "usernames_are_at_most_40_characters": "使用者名稱最多 40 個字元",
+  "couldnt_start_playback_for_this_album": "無法開始播放此專輯",
+  "not_an_album": "不是專輯",
+  "only_the_household_can_change_this": "只有家庭成員可以變更",
+  "tracks_must_be_songs_on_one_album": "曲目必須來自同一張專輯"
 }

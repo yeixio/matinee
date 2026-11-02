@@ -413,7 +413,11 @@
     "lyrics": "متن ترانه",
     "noLyrics": "این آهنگ متن ندارد",
     "instrumental": "بی‌کلام",
-    "lyricsFromLrclib": "متن از LRCLIB"
+    "lyricsFromLrclib": "متن از LRCLIB",
+    "gapless": "پخش بدون فاصله",
+    "gaplessHeard": "Matinee تشخیص داد این آهنگ‌ها به هم پیوسته‌اند، پس بدون فاصله پخش می‌شوند.",
+    "gaplessOn": "بدون فاصله پخش می‌شود",
+    "gaplessOff": "با فاصله بین آهنگ‌ها پخش می‌شود"
   },
   "books": {
     "overview": "نمای کلی",

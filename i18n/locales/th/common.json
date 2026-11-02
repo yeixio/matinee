@@ -385,7 +385,11 @@
     "lyrics": "เนื้อเพลง",
     "noLyrics": "ไม่มีเนื้อเพลงสำหรับเพลงนี้",
     "instrumental": "บรรเลง",
-    "lyricsFromLrclib": "เนื้อเพลงจาก LRCLIB"
+    "lyricsFromLrclib": "เนื้อเพลงจาก LRCLIB",
+    "gapless": "เล่นแบบไม่มีช่วงเงียบ",
+    "gaplessHeard": "Matinee ได้ยินว่าเพลงเหล่านี้ต่อเนื่องกัน จึงเล่นแบบไม่มีช่วงเงียบ",
+    "gaplessOn": "เล่นแบบไม่มีช่วงเงียบ",
+    "gaplessOff": "เล่นโดยมีช่วงเงียบระหว่างเพลง"
   },
   "books": {
     "overview": "ภาพรวม",

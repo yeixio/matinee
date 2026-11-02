@@ -419,6 +419,7 @@
       "lookingAt": "Zkoumá {{file}}",
       "intros": "Hledání úvodů v: {{season}}",
       "thumbnails": "Vytvářím náhledy pro {{title}}",
+      "gapless": "Poslouchá mezery mezi skladbami na {{album}}",
       "working": "Pracuje",
       "waiting": "Čeká na konec přehrávání",
       "slowDisk": "Soubory se čtou pomalu; pár minut odpočívá",

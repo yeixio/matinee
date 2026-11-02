@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { api } from '../api'
 import { Artwork } from '../components/Artwork'
-import { useAudio } from './AudioPlayer'
+import { songTime, useAudio } from './AudioPlayer'
 import * as L from './levels'
 
 const styleKey = 'matinee.visualizer'
@@ -107,7 +107,8 @@ export function Visualizer({ onClose }: { onClose: () => void }) {
       const dt = last ? Math.min(0.1, (now - last) / 1000) : 1
       last = now
       const { levels, playing, look } = live.current
-      if (levels) L.levelsAt(levels, s.audio.current?.currentTime ?? 0, target)
+      const a = s.audio.current
+      if (levels) L.levelsAt(levels, a ? songTime(a, s.clock.current).time : 0, target)
       else if (playing) L.idle(now / 1000, target)
       else target.fill(0.04)
       L.settle(shown, target, dt)

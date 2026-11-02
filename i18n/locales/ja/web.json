@@ -410,6 +410,7 @@
       "lookingAt": "{{file}} を確認中",
       "intros": "{{season}} のイントロを探しています",
       "thumbnails": "{{title}} のプレビューを作成中",
+      "gapless": "{{album}} の曲間を確認しています",
       "working": "作業中",
       "waiting": "再生の終了を待っています",
       "slowDisk": "ファイルの読み込みが遅いため、数分休憩しています",

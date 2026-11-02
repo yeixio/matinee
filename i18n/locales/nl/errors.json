@@ -216,5 +216,9 @@
   "thumbnails_must_be_all_onplay_or_off": "miniaturen moeten all, onPlay of off zijn",
   "too_many_watch_together_sessions_right_now": "er zijn nu te veel sessies voor samen kijken",
   "unknown_action": "onbekende actie",
-  "usernames_are_at_most_40_characters": "gebruikersnamen zijn hooguit 40 tekens"
+  "usernames_are_at_most_40_characters": "gebruikersnamen zijn hooguit 40 tekens",
+  "couldnt_start_playback_for_this_album": "kon het afspelen van dit album niet starten",
+  "not_an_album": "geen album",
+  "only_the_household_can_change_this": "alleen het huishouden kan dit wijzigen",
+  "tracks_must_be_songs_on_one_album": "nummers moeten van één album zijn"
 }

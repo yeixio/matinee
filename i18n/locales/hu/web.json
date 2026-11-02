@@ -413,6 +413,7 @@
       "lookingAt": "Vizsgálja: {{file}}",
       "intros": "Bevezetők keresése: {{season}}",
       "thumbnails": "Előnézetek készítése: {{title}}",
+      "gapless": "Szüneteket keres a dalok között: {{album}}",
       "working": "Dolgozik",
       "waiting": "Vár, amíg a lejátszás véget ér",
       "slowDisk": "A fájlok lassan olvashatók; néhány perc pihenő",

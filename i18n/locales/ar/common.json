@@ -525,7 +525,11 @@
     "lyrics": "الكلمات",
     "noLyrics": "لا توجد كلمات لهذه الأغنية",
     "instrumental": "موسيقى فقط",
-    "lyricsFromLrclib": "الكلمات من LRCLIB"
+    "lyricsFromLrclib": "الكلمات من LRCLIB",
+    "gapless": "تشغيل بلا فواصل",
+    "gaplessHeard": "لاحظ Matinee أن هذه الأغاني متصلة ببعضها، لذا تُشغَّل بلا فواصل.",
+    "gaplessOn": "يُشغَّل بلا فواصل",
+    "gaplessOff": "يُشغَّل مع فواصل بين الأغاني"
   },
   "books": {
     "overview": "نظرة عامة",

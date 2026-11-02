@@ -162,6 +162,17 @@ try {
       await page.evaluate(() => window.scrollTo(0, 0))
       await sleep(1500)
       await shot(page, 'album')
+      if (wanted('album-gapless')) {
+        // Play without gaps, turned on: the row of buttons under the title.
+        await api(token, 'PUT', `/items/${album.id}/gapless`, { gapless: true })
+        const page = await open(desktop, token)
+        await page.goto(`${origin}/item/${album.id}`)
+        const toggle = page.getByRole('switch', { name: 'Play without gaps' })
+        await toggle.waitFor()
+        await shot(page, 'album-gapless', { target: toggle.locator('..') })
+        await page.context().close()
+        await api(token, 'PUT', `/items/${album.id}/gapless`, { gapless: null })
+      }
       if (wanted('cover-picker')) {
         // Covers found online, as the picker lists them; the demo server is offline.
         const svg = (hue, name) => 'data:image/svg+xml,' + encodeURIComponent(cover(202, 'Signal Fires', name, hue))

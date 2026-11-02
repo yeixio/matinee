@@ -441,7 +441,11 @@
     "lyrics": "Letra",
     "noLyrics": "No hay letra para esta canción",
     "instrumental": "Instrumental",
-    "lyricsFromLrclib": "Letra de LRCLIB"
+    "lyricsFromLrclib": "Letra de LRCLIB",
+    "gapless": "Reproducir sin pausas",
+    "gaplessHeard": "Matinee notó que estas canciones se enlazan, así que suenan sin pausas.",
+    "gaplessOn": "Sin pausas",
+    "gaplessOff": "Con pausas entre canciones"
   },
   "books": {
     "overview": "Resumen",

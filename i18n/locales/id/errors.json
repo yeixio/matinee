@@ -216,5 +216,9 @@
   "thumbnails_must_be_all_onplay_or_off": "thumbnail harus all, onPlay, atau off",
   "too_many_watch_together_sessions_right_now": "terlalu banyak sesi nonton bareng saat ini",
   "unknown_action": "tindakan tidak dikenal",
-  "usernames_are_at_most_40_characters": "nama pengguna paling banyak 40 karakter"
+  "usernames_are_at_most_40_characters": "nama pengguna paling banyak 40 karakter",
+  "couldnt_start_playback_for_this_album": "tidak dapat memulai pemutaran album ini",
+  "not_an_album": "bukan album",
+  "only_the_household_can_change_this": "hanya anggota rumah yang dapat mengubah ini",
+  "tracks_must_be_songs_on_one_album": "trek harus berupa lagu dari satu album"
 }

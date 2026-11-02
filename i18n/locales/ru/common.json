@@ -469,7 +469,11 @@
     "lyrics": "Текст песни",
     "noLyrics": "Для этой песни нет текста",
     "instrumental": "Инструментал",
-    "lyricsFromLrclib": "Текст из LRCLIB"
+    "lyricsFromLrclib": "Текст из LRCLIB",
+    "gapless": "Играть без пауз",
+    "gaplessHeard": "Matinee услышал, что эти треки переходят друг в друга, поэтому они играют без пауз.",
+    "gaplessOn": "Играет без пауз",
+    "gaplessOff": "Играет с паузами между треками"
   },
   "books": {
     "overview": "Обзор",

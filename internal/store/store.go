@@ -498,6 +498,13 @@ var migrations = []string{
 	// themselves, and how many of the newest to keep.
 	"ALTER TABLE podcast_follows ADD COLUMN auto_download INTEGER NOT NULL DEFAULT 0",
 	"ALTER TABLE podcast_follows ADD COLUMN keep_episodes INTEGER NOT NULL DEFAULT 3",
+	// 80–82: albums that play without gaps between songs (see gapless.go):
+	// the household's choice (NULL leaves it to Matinee, 1 on, 0 off), what
+	// Matinee found by listening (NULL until it has), and which files it
+	// listened to.
+	"ALTER TABLE items ADD COLUMN gapless INTEGER",
+	"ALTER TABLE items ADD COLUMN gapless_found INTEGER",
+	"ALTER TABLE items ADD COLUMN gapless_key TEXT",
 }
 
 func now() int64 { return time.Now().Unix() }

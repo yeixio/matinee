@@ -2128,6 +2128,56 @@ paths:
                   quality: { type: string, description: "The quality made: auto, original or a step's id. Servers from before quality choice leave it out." }
         "400": { description: No such subtitle or audio track, or quality step. }
         "409": { description: A newer start for the same item replaced this one. }
+  /gapless:
+    post:
+      summary: Play an album's songs as one stream, without gaps between them
+      description: |
+        For albums meant to play without a gap between songs (items with
+        `gapless`), such as DJ mixes and live albums. The server joins the
+        songs sample to sample, leaving out the silence encoders pad files
+        with, into one HLS stream. Players show the last song whose
+        `startSec` they have passed, and start a new stream to seek or skip.
+        A person has one such stream per album at a time.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [tracks]
+              properties:
+                tracks: { type: array, items: { type: integer }, maxItems: 100, description: "Songs on one album, in playing order." }
+                start: { type: number, description: Seconds into the first song. }
+      responses:
+        "200":
+          description: An HLS playlist to play.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  url: { type: string, example: /api/v1/hls/abc123/index.m3u8 }
+                  startSec: { type: number }
+                  tracks:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id: { type: integer }
+                        startSec: { type: number, description: "Where the song starts on the stream's clock: 0 for the first, or less when the stream starts partway into it." }
+        "400": { description: The ids aren't songs on one album. }
+        "409": { description: A newer start for the same album replaced this one. }
+  /items/{id}/gapless:
+    put:
+      summary: Say whether an album plays without gaps between its songs
+      description: For the whole household. `null` leaves it to the server, which listens for albums whose songs run into each other. Friends from other servers can't change it.
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      requestBody:
+        content:
+          application/json: { schema: { type: object, properties: { gapless: { type: boolean, nullable: true } } } }
+      responses:
+        "200": { description: The album., content: { application/json: { schema: { $ref: "#/components/schemas/Item" } } } }
+        "400": { description: Not an album. }
+        "403": { description: A kids profile or a friend. }
   /items/{id}/trailers:
     get:
       summary: A movie's, show's or season's trailers
@@ -4521,6 +4571,9 @@ components:
         overview: { type: string }
         rating: { type: number }
         myRating: { type: integer, minimum: 1, maximum: 10, description: "The person's own rating: 1 to 10, half stars out of five. Missing when they haven't rated it." }
+        gapless: { type: boolean, description: "An album whose songs play without gaps between them, or a song on one. See POST /gapless." }
+        gaplessChoice: { type: boolean, description: "An album's own setting, chosen by the household; missing when the server decides." }
+        gaplessFound: { type: boolean, description: "The server found the album's songs run into each other." }
         hasPoster: { type: boolean }
         posterTag: { type: string, description: "Set when an admin picked the cover; add it to the image URL as ?v= so a cached old cover isn't shown." }
         hasBackdrop: { type: boolean }
@@ -4721,7 +4774,7 @@ components:
       type: object
       properties:
         mode: { $ref: "#/components/schemas/AnalysisMode" }
-        state: { type: string, enum: [analyzing, intros, thumbnails, waiting, slowDisk, idle, off], description: "intros: looking for the intros of the season in current. thumbnails: making the seek bar pictures of the video in current. waiting: for playback to end. slowDisk: files kept timing out, so it's resting." }
+        state: { type: string, enum: [analyzing, intros, gapless, thumbnails, waiting, slowDisk, idle, off], description: "intros: looking for the intros of the season in current. gapless: listening for gaps between the songs of the album in current. thumbnails: making the seek bar pictures of the video in current. waiting: for playback to end. slowDisk: files kept timing out, so it's resting." }
         total: { type: integer, description: Files in all libraries. }
         done: { type: integer, description: Files analyzed as they are now. }
         unreadable: { type: integer, description: Files among those done that couldn't be read. }

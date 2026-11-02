@@ -216,5 +216,9 @@
   "thumbnails_must_be_all_onplay_or_off": "サムネイルは all、onPlay、off のいずれかにしてください",
   "too_many_watch_together_sessions_right_now": "いまはいっしょに見るセッションが多すぎます",
   "unknown_action": "不明な操作です",
-  "usernames_are_at_most_40_characters": "ユーザー名は40文字までです"
+  "usernames_are_at_most_40_characters": "ユーザー名は40文字までです",
+  "couldnt_start_playback_for_this_album": "このアルバムを再生できませんでした",
+  "not_an_album": "アルバムではありません",
+  "only_the_household_can_change_this": "変更できるのは世帯のメンバーだけです",
+  "tracks_must_be_songs_on_one_album": "トラックは同じアルバムの曲である必要があります"
 }

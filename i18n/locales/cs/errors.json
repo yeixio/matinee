@@ -216,5 +216,9 @@
   "thumbnails_must_be_all_onplay_or_off": "náhledy musí být all, onPlay nebo off",
   "too_many_watch_together_sessions_right_now": "právě teď běží příliš mnoho relací společného sledování",
   "unknown_action": "neznámá akce",
-  "usernames_are_at_most_40_characters": "uživatelská jména mají nejvýše 40 znaků"
+  "usernames_are_at_most_40_characters": "uživatelská jména mají nejvýše 40 znaků",
+  "couldnt_start_playback_for_this_album": "nepodařilo se spustit přehrávání alba",
+  "not_an_album": "není album",
+  "only_the_household_can_change_this": "toto může změnit jen domácnost",
+  "tracks_must_be_songs_on_one_album": "skladby musí být z jednoho alba"
 }

@@ -216,5 +216,9 @@
   "thumbnails_must_be_all_onplay_or_off": "a bélyegképek értéke all, onPlay vagy off lehet",
   "too_many_watch_together_sessions_right_now": "most túl sok közös nézés fut",
   "unknown_action": "ismeretlen művelet",
-  "usernames_are_at_most_40_characters": "a felhasználónév legfeljebb 40 karakter"
+  "usernames_are_at_most_40_characters": "a felhasználónév legfeljebb 40 karakter",
+  "couldnt_start_playback_for_this_album": "nem sikerült elindítani az album lejátszását",
+  "not_an_album": "nem album",
+  "only_the_household_can_change_this": "ezt csak a háztartás módosíthatja",
+  "tracks_must_be_songs_on_one_album": "a számoknak egy albumról kell lenniük"
 }

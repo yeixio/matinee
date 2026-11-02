@@ -413,7 +413,11 @@
     "lyrics": "Songtekst",
     "noLyrics": "Geen songtekst voor dit nummer",
     "instrumental": "Instrumentaal",
-    "lyricsFromLrclib": "Songtekst van LRCLIB"
+    "lyricsFromLrclib": "Songtekst van LRCLIB",
+    "gapless": "Zonder pauzes afspelen",
+    "gaplessHeard": "Matinee hoorde dat deze nummers in elkaar overlopen, dus ze spelen zonder pauzes.",
+    "gaplessOn": "Speelt zonder pauzes",
+    "gaplessOff": "Speelt met pauzes tussen nummers"
   },
   "books": {
     "overview": "Overzicht",

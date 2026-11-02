@@ -413,7 +413,11 @@
     "lyrics": "Låttext",
     "noLyrics": "Ingen låttext för den här låten",
     "instrumental": "Instrumental",
-    "lyricsFromLrclib": "Låttext från LRCLIB"
+    "lyricsFromLrclib": "Låttext från LRCLIB",
+    "gapless": "Spela utan pauser",
+    "gaplessHeard": "Matinee hörde att låtarna går ihop, så de spelas utan pauser.",
+    "gaplessOn": "Spelas utan pauser",
+    "gaplessOff": "Spelas med pauser mellan låtarna"
   },
   "books": {
     "overview": "Översikt",

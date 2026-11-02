@@ -216,5 +216,9 @@
   "thumbnails_must_be_all_onplay_or_off": "miniaturer skal være all, onPlay eller off",
   "too_many_watch_together_sessions_right_now": "for mange sessioner til Se sammen lige nu",
   "unknown_action": "ukendt handling",
-  "usernames_are_at_most_40_characters": "brugernavne må højst være 40 tegn"
+  "usernames_are_at_most_40_characters": "brugernavne må højst være 40 tegn",
+  "couldnt_start_playback_for_this_album": "kunne ikke starte afspilningen af albummet",
+  "not_an_album": "ikke et album",
+  "only_the_household_can_change_this": "kun husstanden kan ændre dette",
+  "tracks_must_be_songs_on_one_album": "numrene skal være sange fra ét album"
 }

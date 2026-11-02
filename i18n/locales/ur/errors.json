@@ -216,5 +216,9 @@
   "thumbnails_must_be_all_onplay_or_off": "تھمب نیل all، onPlay یا off ہونے چاہئیں",
   "too_many_watch_together_sessions_right_now": "ابھی ساتھ دیکھنے کے بہت زیادہ سیشن چل رہے ہیں",
   "unknown_action": "نامعلوم عمل",
-  "usernames_are_at_most_40_characters": "یوزر نیم زیادہ سے زیادہ 40 حروف کا ہو سکتا ہے"
+  "usernames_are_at_most_40_characters": "یوزر نیم زیادہ سے زیادہ 40 حروف کا ہو سکتا ہے",
+  "couldnt_start_playback_for_this_album": "اس البم کا پلے بیک شروع نہیں ہو سکا",
+  "not_an_album": "یہ البم نہیں ہے",
+  "only_the_household_can_change_this": "صرف گھر والے اسے بدل سکتے ہیں",
+  "tracks_must_be_songs_on_one_album": "ٹریکس ایک ہی البم کے گانے ہونے چاہئیں"
 }

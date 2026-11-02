@@ -413,6 +413,7 @@
       "lookingAt": "Kigger på {{file}}",
       "intros": "Leder efter introer i {{season}}",
       "thumbnails": "Laver forhåndsbilleder til {{title}}",
+      "gapless": "Lytter efter pauser mellem sangene på {{album}}",
       "working": "Arbejder",
       "waiting": "Venter på, at afspilningen slutter",
       "slowDisk": "Filerne er langsomme at læse; holder pause et par minutter",

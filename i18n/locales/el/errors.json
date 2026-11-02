@@ -216,5 +216,9 @@
   "thumbnails_must_be_all_onplay_or_off": "οι μικρογραφίες πρέπει να είναι all, onPlay ή off",
   "too_many_watch_together_sessions_right_now": "πάρα πολλές συνεδρίες παρακολούθησης μαζί αυτή τη στιγμή",
   "unknown_action": "άγνωστη ενέργεια",
-  "usernames_are_at_most_40_characters": "τα ονόματα χρήστη έχουν έως 40 χαρακτήρες"
+  "usernames_are_at_most_40_characters": "τα ονόματα χρήστη έχουν έως 40 χαρακτήρες",
+  "couldnt_start_playback_for_this_album": "δεν ήταν δυνατή η αναπαραγωγή αυτού του άλμπουμ",
+  "not_an_album": "δεν είναι άλμπουμ",
+  "only_the_household_can_change_this": "μόνο το νοικοκυριό μπορεί να το αλλάξει",
+  "tracks_must_be_songs_on_one_album": "τα κομμάτια πρέπει να είναι από ένα άλμπουμ"
 }
