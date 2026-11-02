@@ -81,6 +81,7 @@ func run() error {
 	logs := health.NewLogs(health.DefaultLines)
 	log := slog.New(logs.Handler(slog.NewTextHandler(os.Stderr, &slog.HandlerOptions{Level: level})))
 	monitor := health.NewMonitor(logs)
+	useWritableCacheDir(cfg.DataDir, log)
 
 	for _, bin := range []string{cfg.FFmpegPath, cfg.FFprobePath} {
 		if _, err := exec.LookPath(bin); err != nil {
