@@ -81,3 +81,23 @@ func (s *Store) DeleteStation(ctx context.Context, id int64) error {
 func (s *Store) Stations(ctx context.Context, userID, libraryID int64) ([]Item, error) {
 	return s.queryItems(ctx, "i.library_id = ? AND i.kind = 'station'", "i.sort_title, i.id", userID, libraryID)
 }
+
+// StationStreams maps each stream in a music library to its station, to
+// mark what's added already in directory results.
+func (s *Store) StationStreams(ctx context.Context, libraryID int64) (map[string]int64, error) {
+	rows, err := s.db.QueryContext(ctx, "SELECT stream_url, id FROM items WHERE library_id = ? AND kind = 'station'", libraryID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	m := map[string]int64{}
+	for rows.Next() {
+		var u string
+		var id int64
+		if err := rows.Scan(&u, &id); err != nil {
+			return nil, err
+		}
+		m[u] = id
+	}
+	return m, rows.Err()
+}

@@ -605,5 +605,42 @@
     "shareLink": "Link teilen",
     "you": "(du)",
     "settingsHint": "Mit einem Code bei Freunden mitschauen"
+  },
+  "radio": {
+    "radio": "Radio",
+    "live": "Live",
+    "noStations": "Noch keine Radiosender",
+    "noStationsHint": "Finde unten Sender oder füge einen über die Adresse seines Streams hinzu.",
+    "find": "Sender finden",
+    "findHint": "Suche nach Namen oder wähle ein Genre.",
+    "search": "Suchen",
+    "searchPlaceholder": "Sendername",
+    "genres": "Genres",
+    "nothingFound": "Keine Sender gefunden.",
+    "poweredBy": "Senderverzeichnis von Radio Browser, einem kostenlosen Community-Projekt.",
+    "add": "Hinzufügen",
+    "added": "Hinzugefügt",
+    "play": "{{name}} abspielen",
+    "rename": "Umbenennen",
+    "renamePrompt": "Sendername",
+    "remove": "Entfernen",
+    "removeConfirm": "{{name}} aus dieser Mediathek entfernen?",
+    "byAddress": "Über Stream-Adresse hinzufügen",
+    "byAddressHint": "Füge die Adresse eines Icecast- oder SHOUTcast-Streams ein, oder einer .pls- oder .m3u-Playlist von der Website des Senders.",
+    "streamAddress": "Stream-Adresse",
+    "nameOptional": "Name (optional)",
+    "offAir": "{{name}} antwortet nicht. Versuche es gleich noch einmal.",
+    "genre": {
+      "electronic": "Elektronisch",
+      "trance": "Trance",
+      "house": "House",
+      "chillout": "Chillout",
+      "pop": "Pop",
+      "rock": "Rock",
+      "jazz": "Jazz",
+      "classical": "Klassik",
+      "hiphop": "Hip-Hop",
+      "news": "Nachrichten"
+    }
   }
 }

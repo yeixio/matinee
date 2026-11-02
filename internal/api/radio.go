@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"net/http"
+	"strconv"
 	"strings"
 	"time"
 
@@ -56,7 +57,8 @@ func (s *Server) libraryStations(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, http.StatusOK, items)
 }
 
-// stationDirectory finds stations in Radio Browser, by name (?q=) or genre (?tag=).
+// stationDirectory finds stations in Radio Browser, by name (?q=) or genre
+// (?tag=). With ?library=, stations that library has are marked.
 func (s *Server) stationDirectory(w http.ResponseWriter, r *http.Request) {
 	q, tag := strings.TrimSpace(r.URL.Query().Get("q")), strings.TrimSpace(r.URL.Query().Get("tag"))
 	if q == "" && tag == "" {
@@ -70,6 +72,13 @@ func (s *Server) stationDirectory(w http.ResponseWriter, r *http.Request) {
 		s.Log.Info("searching for radio stations", "err", err)
 		writeError(w, http.StatusBadGateway, "the station directory isn't answering right now")
 		return
+	}
+	if lib, err := strconv.ParseInt(r.URL.Query().Get("library"), 10, 64); err == nil {
+		if have, err := s.Store.StationStreams(r.Context(), lib); err == nil {
+			for i := range found {
+				found[i].ItemID = have[found[i].URL]
+			}
+		}
 	}
 	writeJSON(w, http.StatusOK, found)
 }

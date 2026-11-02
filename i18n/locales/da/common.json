@@ -605,5 +605,42 @@
     "shareLink": "Del link",
     "you": "(dig)",
     "settingsHint": "Se med venner med en kode"
+  },
+  "radio": {
+    "radio": "Radio",
+    "live": "Live",
+    "noStations": "Ingen radiostationer endnu",
+    "noStationsHint": "Find stationer nedenfor, eller tilføj en via adressen på dens stream.",
+    "find": "Find stationer",
+    "findHint": "Søg efter navn, eller vælg en genre.",
+    "search": "Søg",
+    "searchPlaceholder": "Stationens navn",
+    "genres": "Genrer",
+    "nothingFound": "Ingen stationer fundet.",
+    "poweredBy": "Stationskatalog fra Radio Browser, et gratis fællesskabsprojekt.",
+    "add": "Tilføj",
+    "added": "Tilføjet",
+    "play": "Afspil {{name}}",
+    "rename": "Omdøb",
+    "renamePrompt": "Stationens navn",
+    "remove": "Fjern",
+    "removeConfirm": "Fjern {{name}} fra dette bibliotek?",
+    "byAddress": "Tilføj via streamadresse",
+    "byAddressHint": "Indsæt adressen på en Icecast- eller SHOUTcast-stream eller på en .pls- eller .m3u-playliste fra stationens websted.",
+    "streamAddress": "Streamadresse",
+    "nameOptional": "Navn (valgfrit)",
+    "offAir": "{{name}} svarer ikke. Prøv igen om lidt.",
+    "genre": {
+      "electronic": "Elektronisk",
+      "trance": "Trance",
+      "house": "House",
+      "chillout": "Chillout",
+      "pop": "Pop",
+      "rock": "Rock",
+      "jazz": "Jazz",
+      "classical": "Klassisk",
+      "hiphop": "Hiphop",
+      "news": "Nyheder"
+    }
   }
 }

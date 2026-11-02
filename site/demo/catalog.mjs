@@ -296,3 +296,20 @@ export const recommendations = {
   201: [308, 317, 309, 302, 305, 306],
   default: [301, 304, 305, 309],
 }
+
+// Made-up radio stations for the Radio tab: the stand-in station directory
+// (fake-podcasts.mjs) finds them, and each plays the same quiet stream,
+// saying a song now and then.
+export const stations = [
+  { name: 'Harbor Lights FM', tags: ['electronic', 'chillout'], country: 'GB', hue: 200, added: true },
+  { name: 'Night Shift Radio', tags: ['trance', 'electronic'], country: 'NL', hue: 265, added: true },
+  { name: 'Copperline Jazz', tags: ['jazz'], country: 'US', hue: 28, added: true },
+  { name: 'Low Tide Lounge', tags: ['chillout', 'house'], country: 'AU', hue: 170, added: true },
+  { name: 'Northern Pulse', tags: ['trance', 'house'], country: 'SE', hue: 320 },
+  { name: 'Afterglow Sessions', tags: ['trance', 'chillout'], country: 'DE', hue: 12 },
+  { name: 'Skyline Uplift', tags: ['trance'], country: 'CA', hue: 225 },
+  { name: 'Deep Water Radio', tags: ['house', 'electronic'], country: 'IE', hue: 185 },
+]
+
+// What the stations say they're playing, in turn.
+export const onAir = ['Aurora Static - Signal Fires', 'The Paper Boats - Low Light', 'Mira Vale - Coastline', 'Glass Arcade - Neon Rain', 'Aurora Static - Northern Line']

@@ -100,7 +100,7 @@ func (ir *icyReader) Read(p []byte) (int, error) {
 }
 
 // StreamTitle reads the title out of a block such as
-// StreamTitle='Above & Beyond - Sun & Moon';StreamUrl='';
+// StreamTitle='Above & Beyond - Sun & Moon';StreamUrl=”;
 func StreamTitle(meta string) (string, bool) {
 	meta = strings.TrimRight(meta, "\x00")
 	const key = "StreamTitle='"

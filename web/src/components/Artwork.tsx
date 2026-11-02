@@ -4,7 +4,8 @@ import { imageUrl, type Item } from '../api'
 import { hue } from '../format'
 
 // Artwork fades in when loaded and falls back to a tinted title card, so a
-// library without posters still looks deliberate.
+// library without posters still looks deliberate. A radio station's logo
+// sits whole on the card, as logos come in every shape.
 export function Artwork({
   item,
   type,
@@ -46,7 +47,7 @@ export function Artwork({
           decoding="async"
           onLoad={() => setLoaded(true)}
           onError={() => setFailed(true)}
-          className={`absolute inset-0 size-full object-cover transition-opacity duration-300 ${loaded ? 'opacity-100' : 'opacity-0'}`}
+          className={`absolute inset-0 size-full transition-opacity duration-300 ${item.kind === 'station' ? 'object-contain p-[14%]' : 'object-cover'} ${loaded ? 'opacity-100' : 'opacity-0'}`}
         />
       )}
     </div>

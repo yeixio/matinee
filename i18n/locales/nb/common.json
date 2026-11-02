@@ -605,5 +605,42 @@
     "shareLink": "Del lenke",
     "you": "(deg)",
     "settingsHint": "Se med venner med en kode"
+  },
+  "radio": {
+    "radio": "Radio",
+    "live": "Direkte",
+    "noStations": "Ingen radiostasjoner ennå",
+    "noStationsHint": "Finn stasjoner nedenfor, eller legg til en med adressen til strømmen.",
+    "find": "Finn stasjoner",
+    "findHint": "Søk etter navn, eller velg en sjanger.",
+    "search": "Søk",
+    "searchPlaceholder": "Stasjonsnavn",
+    "genres": "Sjangere",
+    "nothingFound": "Fant ingen stasjoner.",
+    "poweredBy": "Stasjonskatalog fra Radio Browser, et gratis fellesskapsprosjekt.",
+    "add": "Legg til",
+    "added": "Lagt til",
+    "play": "Spill av {{name}}",
+    "rename": "Gi nytt navn",
+    "renamePrompt": "Stasjonsnavn",
+    "remove": "Fjern",
+    "removeConfirm": "Fjerne {{name}} fra dette biblioteket?",
+    "byAddress": "Legg til med strømadresse",
+    "byAddressHint": "Lim inn adressen til en Icecast- eller SHOUTcast-strøm, eller til en .pls- eller .m3u-spilleliste fra stasjonens nettsted.",
+    "streamAddress": "Strømadresse",
+    "nameOptional": "Navn (valgfritt)",
+    "offAir": "{{name}} svarer ikke. Prøv igjen om litt.",
+    "genre": {
+      "electronic": "Elektronisk",
+      "trance": "Trance",
+      "house": "House",
+      "chillout": "Chillout",
+      "pop": "Pop",
+      "rock": "Rock",
+      "jazz": "Jazz",
+      "classical": "Klassisk",
+      "hiphop": "Hiphop",
+      "news": "Nyheter"
+    }
   }
 }

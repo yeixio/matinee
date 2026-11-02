@@ -605,5 +605,42 @@
     "shareLink": "Link megosztása",
     "you": "(te)",
     "settingsHint": "Csatlakozz barátokhoz egy kóddal"
+  },
+  "radio": {
+    "radio": "Rádió",
+    "live": "Élő",
+    "noStations": "Még nincs rádióállomás",
+    "noStationsHint": "Keress állomásokat lent, vagy adj hozzá egyet a streamje címével.",
+    "find": "Állomások keresése",
+    "findHint": "Keress név szerint, vagy válassz műfajt.",
+    "search": "Keresés",
+    "searchPlaceholder": "Állomás neve",
+    "genres": "Műfajok",
+    "nothingFound": "Nem található állomás.",
+    "poweredBy": "Az állomáskönyvtár a Radio Browser ingyenes közösségi projektjéből származik.",
+    "add": "Hozzáadás",
+    "added": "Hozzáadva",
+    "play": "{{name}} lejátszása",
+    "rename": "Átnevezés",
+    "renamePrompt": "Állomás neve",
+    "remove": "Eltávolítás",
+    "removeConfirm": "Eltávolítod a(z) {{name}} állomást ebből a könyvtárból?",
+    "byAddress": "Hozzáadás stream címmel",
+    "byAddressHint": "Illeszd be egy Icecast vagy SHOUTcast stream címét, vagy az állomás weboldaláról egy .pls vagy .m3u lejátszási lista címét.",
+    "streamAddress": "Stream címe",
+    "nameOptional": "Név (nem kötelező)",
+    "offAir": "A(z) {{name}} nem válaszol. Próbáld újra kicsit később.",
+    "genre": {
+      "electronic": "Elektronikus",
+      "trance": "Trance",
+      "house": "House",
+      "chillout": "Chillout",
+      "pop": "Pop",
+      "rock": "Rock",
+      "jazz": "Jazz",
+      "classical": "Klasszikus",
+      "hiphop": "Hiphop",
+      "news": "Hírek"
+    }
   }
 }

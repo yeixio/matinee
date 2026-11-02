@@ -1833,6 +1833,7 @@ paths:
       parameters:
         - { name: q, in: query, schema: { type: string } }
         - { name: tag, in: query, schema: { type: string }, examples: { trance: { value: trance } } }
+        - { name: library, in: query, description: A music library; its stations are marked with itemId., schema: { type: integer } }
       responses:
         "200":
           description: Stations found.
@@ -1851,6 +1852,7 @@ paths:
                     country: { type: string, description: Two letters, such as GB. }
                     codec: { type: string }
                     bitrate: { type: integer, description: kbit/s }
+                    itemId: { type: integer, description: "The station in the library asked about, when it's added already." }
         "400": { $ref: "#/components/responses/Error" }
         "502": { $ref: "#/components/responses/Error" }
   /stations:

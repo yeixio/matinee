@@ -605,5 +605,42 @@
     "shareLink": "Dela länk",
     "you": "(du)",
     "settingsHint": "Titta med vänner med en kod"
+  },
+  "radio": {
+    "radio": "Radio",
+    "live": "Direkt",
+    "noStations": "Inga radiostationer än",
+    "noStationsHint": "Hitta stationer nedan, eller lägg till en med adressen till dess ström.",
+    "find": "Hitta stationer",
+    "findHint": "Sök på namn, eller välj en genre.",
+    "search": "Sök",
+    "searchPlaceholder": "Stationens namn",
+    "genres": "Genrer",
+    "nothingFound": "Inga stationer hittades.",
+    "poweredBy": "Stationskatalog från Radio Browser, ett gratis gemenskapsprojekt.",
+    "add": "Lägg till",
+    "added": "Tillagd",
+    "play": "Spela {{name}}",
+    "rename": "Byt namn",
+    "renamePrompt": "Stationens namn",
+    "remove": "Ta bort",
+    "removeConfirm": "Ta bort {{name}} från det här biblioteket?",
+    "byAddress": "Lägg till med strömadress",
+    "byAddressHint": "Klistra in adressen till en Icecast- eller SHOUTcast-ström, eller till en .pls- eller .m3u-spellista från stationens webbplats.",
+    "streamAddress": "Strömadress",
+    "nameOptional": "Namn (valfritt)",
+    "offAir": "{{name}} svarar inte. Försök igen om en stund.",
+    "genre": {
+      "electronic": "Elektroniskt",
+      "trance": "Trance",
+      "house": "House",
+      "chillout": "Chillout",
+      "pop": "Pop",
+      "rock": "Rock",
+      "jazz": "Jazz",
+      "classical": "Klassiskt",
+      "hiphop": "Hiphop",
+      "news": "Nyheter"
+    }
   }
 }

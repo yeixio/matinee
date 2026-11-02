@@ -89,8 +89,8 @@ func TestRelay(t *testing.T) {
 func TestStreamTitle(t *testing.T) {
 	for in, want := range map[string]string{
 		"StreamTitle='Above & Beyond - Sun & Moon';StreamUrl='';\x00\x00": "Above & Beyond - Sun & Moon",
-		"StreamTitle='It's Late';":                                   "It's Late",
-		"StreamTitle='';":                                            "",
+		"StreamTitle='It's Late';":                                        "It's Late",
+		"StreamTitle='';":                                                 "",
 	} {
 		if got, ok := StreamTitle(in); !ok || got != want {
 			t.Errorf("%q: %q %v", in, got, ok)

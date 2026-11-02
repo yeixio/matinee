@@ -12,7 +12,8 @@ import http from 'node:http'
 import { chromium } from 'playwright'
 import { cover } from './art.mjs'
 import { capture, desktop, phone, sleep } from './capture.mjs'
-import { feedURL } from './fake-podcasts.mjs'
+import { onAir, stations } from './catalog.mjs'
+import { feedURL, stationFound } from './fake-podcasts.mjs'
 import { addLibraries, admin, api, origin, overseerrURL, podcastsPort, setUp, startServer } from './server.mjs'
 
 const { media, stop } = await startServer()
@@ -225,6 +226,30 @@ try {
       await page.goto(`${origin}/library/${libs.music.id}?${new URLSearchParams({ view: 'labels', label: 'Lantern Records' })}`)
       await sleep(1000)
       await shot(page, 'label')
+    }
+
+    // Radio: a few stations added, the directory's trance stations, then
+    // one playing, saying its song. Its own page, so the album above keeps
+    // playing for the shots after.
+    if (wanted('radio') || wanted('radio-playing')) {
+      for (const [i, st] of stations.entries()) {
+        if (!st.added) continue
+        const f = stationFound(podcastsPort, i)
+        await api(token, 'POST', '/stations', { libraryId: libs.music.id, url: f.url, name: f.name, image: f.favicon, homepage: f.homepage, tags: st.tags })
+      }
+      const radio = await open(desktop, token)
+      await radio.goto(`${origin}/library/${libs.music.id}?view=radio`)
+      await radio.getByRole('button', { name: 'Trance', exact: true }).click()
+      await radio.getByText('Northern Pulse').waitFor()
+      await sleep(1000)
+      await shot(radio, 'radio')
+      await radio.getByRole('button', { name: 'Play Harbor Lights FM' }).click()
+      // The first song title comes a few seconds into the stream.
+      await radio.getByText(new RegExp(onAir.join('|'))).first().waitFor({ timeout: 20_000 })
+      await radio.getByRole('button', { name: 'Open the player' }).click()
+      await sleep(1200)
+      await shot(radio, 'radio-playing')
+      await radio.context().close()
     }
 
     // Playlists: two made from songs across albums, then adding to one.

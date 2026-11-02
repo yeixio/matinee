@@ -573,5 +573,42 @@
     "shareLink": "分享連結",
     "you": "（你）",
     "settingsHint": "用代碼和朋友一起看"
+  },
+  "radio": {
+    "radio": "電台",
+    "live": "直播",
+    "noStations": "還沒有電台",
+    "noStationsHint": "在下方尋找電台，或透過電台的串流網址加入。",
+    "find": "尋找電台",
+    "findHint": "依名稱搜尋，或選擇一種曲風。",
+    "search": "搜尋",
+    "searchPlaceholder": "電台名稱",
+    "genres": "曲風",
+    "nothingFound": "找不到電台。",
+    "poweredBy": "電台目錄來自免費社群專案 Radio Browser。",
+    "add": "加入",
+    "added": "已加入",
+    "play": "播放 {{name}}",
+    "rename": "重新命名",
+    "renamePrompt": "電台名稱",
+    "remove": "移除",
+    "removeConfirm": "要從這個資料庫移除 {{name}} 嗎？",
+    "byAddress": "透過串流網址加入",
+    "byAddressHint": "貼上 Icecast 或 SHOUTcast 串流的網址，或電台網站上 .pls 或 .m3u 播放清單的網址。",
+    "streamAddress": "串流網址",
+    "nameOptional": "名稱（選填）",
+    "offAir": "{{name}} 沒有回應。請稍後再試。",
+    "genre": {
+      "electronic": "電子",
+      "trance": "迷幻舞曲",
+      "house": "浩室",
+      "chillout": "Chillout",
+      "pop": "流行",
+      "rock": "搖滾",
+      "jazz": "爵士",
+      "classical": "古典",
+      "hiphop": "嘻哈",
+      "news": "新聞"
+    }
   }
 }

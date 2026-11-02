@@ -573,5 +573,42 @@
     "shareLink": "Kongsi pautan",
     "you": "(anda)",
     "settingsHint": "Sertai rakan menonton dengan kod"
+  },
+  "radio": {
+    "radio": "Radio",
+    "live": "Langsung",
+    "noStations": "Belum ada stesen radio",
+    "noStationsHint": "Cari stesen di bawah, atau tambah satu melalui alamat strimnya.",
+    "find": "Cari stesen",
+    "findHint": "Cari mengikut nama, atau pilih genre.",
+    "search": "Cari",
+    "searchPlaceholder": "Nama stesen",
+    "genres": "Genre",
+    "nothingFound": "Tiada stesen ditemui.",
+    "poweredBy": "Direktori stesen oleh Radio Browser, projek komuniti percuma.",
+    "add": "Tambah",
+    "added": "Ditambah",
+    "play": "Main {{name}}",
+    "rename": "Namakan semula",
+    "renamePrompt": "Nama stesen",
+    "remove": "Buang",
+    "removeConfirm": "Buang {{name}} daripada pustaka ini?",
+    "byAddress": "Tambah melalui alamat strim",
+    "byAddressHint": "Tampal alamat strim Icecast atau SHOUTcast, atau senarai main .pls atau .m3u dari laman web stesen.",
+    "streamAddress": "Alamat strim",
+    "nameOptional": "Nama (pilihan)",
+    "offAir": "{{name}} tidak menjawab. Cuba lagi sebentar lagi.",
+    "genre": {
+      "electronic": "Elektronik",
+      "trance": "Trance",
+      "house": "House",
+      "chillout": "Chillout",
+      "pop": "Pop",
+      "rock": "Rock",
+      "jazz": "Jazz",
+      "classical": "Klasik",
+      "hiphop": "Hip hop",
+      "news": "Berita"
+    }
   }
 }

@@ -733,5 +733,42 @@
     "shareLink": "مشاركة الرابط",
     "you": "(أنت)",
     "settingsHint": "شاهد مع أصدقائك باستخدام رمز"
+  },
+  "radio": {
+    "radio": "الراديو",
+    "live": "مباشر",
+    "noStations": "لا توجد محطات راديو بعد",
+    "noStationsHint": "ابحث عن محطات أدناه، أو أضف محطة بعنوان بثها.",
+    "find": "البحث عن محطات",
+    "findHint": "ابحث بالاسم، أو اختر نوعًا موسيقيًا.",
+    "search": "بحث",
+    "searchPlaceholder": "اسم المحطة",
+    "genres": "الأنواع",
+    "nothingFound": "لم يتم العثور على محطات.",
+    "poweredBy": "دليل المحطات من Radio Browser، مشروع مجتمعي مجاني.",
+    "add": "إضافة",
+    "added": "تمت الإضافة",
+    "play": "تشغيل {{name}}",
+    "rename": "إعادة التسمية",
+    "renamePrompt": "اسم المحطة",
+    "remove": "إزالة",
+    "removeConfirm": "هل تريد إزالة {{name}} من هذه المكتبة؟",
+    "byAddress": "إضافة بعنوان البث",
+    "byAddressHint": "الصق عنوان بث Icecast أو SHOUTcast، أو قائمة تشغيل ‎.pls أو ‎.m3u من موقع المحطة.",
+    "streamAddress": "عنوان البث",
+    "nameOptional": "الاسم (اختياري)",
+    "offAir": "{{name}} لا تستجيب. حاول مرة أخرى بعد قليل.",
+    "genre": {
+      "electronic": "إلكترونية",
+      "trance": "ترانس",
+      "house": "هاوس",
+      "chillout": "تشيل آوت",
+      "pop": "بوب",
+      "rock": "روك",
+      "jazz": "جاز",
+      "classical": "كلاسيكية",
+      "hiphop": "هيب هوب",
+      "news": "أخبار"
+    }
   }
 }

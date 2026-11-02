@@ -605,5 +605,42 @@
     "shareLink": "Share link",
     "you": "(you)",
     "settingsHint": "Join friends with a code"
+  },
+  "radio": {
+    "radio": "Radio",
+    "live": "Live",
+    "noStations": "No radio stations yet",
+    "noStationsHint": "Find stations below, or add one by its stream's address.",
+    "find": "Find stations",
+    "findHint": "Search by name, or pick a genre.",
+    "search": "Search",
+    "searchPlaceholder": "Station name",
+    "genres": "Genres",
+    "nothingFound": "No stations found.",
+    "poweredBy": "Station directory by Radio Browser, a free community project.",
+    "add": "Add",
+    "added": "Added",
+    "play": "Play {{name}}",
+    "rename": "Rename",
+    "renamePrompt": "Station name",
+    "remove": "Remove",
+    "removeConfirm": "Remove {{name}} from this library?",
+    "byAddress": "Add by stream address",
+    "byAddressHint": "Paste the address of an Icecast or SHOUTcast stream, or of a .pls or .m3u playlist from the station's website.",
+    "streamAddress": "Stream address",
+    "nameOptional": "Name (optional)",
+    "offAir": "{{name}} isn't answering. Try again in a little while.",
+    "genre": {
+      "electronic": "Electronic",
+      "trance": "Trance",
+      "house": "House",
+      "chillout": "Chillout",
+      "pop": "Pop",
+      "rock": "Rock",
+      "jazz": "Jazz",
+      "classical": "Classical",
+      "hiphop": "Hip hop",
+      "news": "News"
+    }
   }
 }

@@ -29,6 +29,8 @@ type Found struct {
 	Country  string   `json:"country,omitempty"` // two letters, such as GB
 	Codec    string   `json:"codec,omitempty"`   // such as MP3 or AAC
 	Bitrate  int      `json:"bitrate,omitempty"` // kbit/s
+	// The station in the library asked about, when it's added already.
+	ItemID int64 `json:"itemId,omitempty"`
 }
 
 // Search finds stations by name, or by tag (genre) when byTag, the most

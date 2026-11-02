@@ -47,10 +47,10 @@ export async function api(token, method, p, body) {
 }
 
 export async function startServer() {
-  const { media, images, episode } = await makeLibrary(cache)
+  const { media, images, episode, radio } = await makeLibrary(cache)
   const fake = await startFakeTMDB(tmdbPort, images)
   const overseerr = await startFakeOverseerr(Number(new URL(overseerrURL).port))
-  const podcasts = await startFakePodcasts(podcastsPort, images, episode)
+  const podcasts = await startFakePodcasts(podcastsPort, images, episode, radio)
   const openSubtitles = await startFakeOpenSubtitles(openSubtitlesPort)
 
   const bin = path.join(cache, 'matinee')
@@ -58,7 +58,7 @@ export async function startServer() {
   // The server embeds the web player, so build it from this checkout first.
   execFileSync('pnpm', ['install', '--frozen-lockfile'], { cwd: path.join(repo, 'web'), stdio: 'inherit' })
   execFileSync('pnpm', ['build'], { cwd: path.join(repo, 'web'), stdio: 'inherit' })
-  execFileSync('go', ['build', '-o', bin, '-ldflags', `-X github.com/yeixio/matinee/internal/version.Version=${version()} -X ${pkg}.TMDBBaseURL=http://127.0.0.1:${tmdbPort}/3 -X ${pkg}.TMDBImageURL=http://127.0.0.1:${tmdbPort}/t/p/ -X github.com/yeixio/matinee/internal/overseerr.imageBase=http://127.0.0.1:${tmdbPort}/t/p/ -X github.com/yeixio/matinee/internal/podcast.IndexBase=http://127.0.0.1:${podcastsPort}/api/1.0 -X github.com/yeixio/matinee/internal/subtitle.OpenSubtitlesBase=http://127.0.0.1:${openSubtitlesPort}/api/v1`, './cmd/matinee'], { cwd: repo, stdio: 'inherit' })
+  execFileSync('go', ['build', '-o', bin, '-ldflags', `-X github.com/yeixio/matinee/internal/version.Version=${version()} -X ${pkg}.TMDBBaseURL=http://127.0.0.1:${tmdbPort}/3 -X ${pkg}.TMDBImageURL=http://127.0.0.1:${tmdbPort}/t/p/ -X github.com/yeixio/matinee/internal/overseerr.imageBase=http://127.0.0.1:${tmdbPort}/t/p/ -X github.com/yeixio/matinee/internal/podcast.IndexBase=http://127.0.0.1:${podcastsPort}/api/1.0 -X github.com/yeixio/matinee/internal/radio.DirectoryBase=http://127.0.0.1:${podcastsPort} -X github.com/yeixio/matinee/internal/subtitle.OpenSubtitlesBase=http://127.0.0.1:${openSubtitlesPort}/api/v1`, './cmd/matinee'], { cwd: repo, stdio: 'inherit' })
 
   const data = path.join(cache, 'data')
   rmSync(data, { recursive: true, force: true })
