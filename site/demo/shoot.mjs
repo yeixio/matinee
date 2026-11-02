@@ -403,6 +403,7 @@ try {
       const total = film.durationMs / 1000
       await page.mouse.click(box.x + box.width * ((film.endCredits.startMs / 1000 + 20) / total), box.y + box.height / 2)
       await page.getByRole('button', { name: 'Skip credits' }).waitFor({ timeout: 20000 })
+      await page.mouse.move(700, 300) // off the seek bar, so its preview goes
       await sleep(3500) // the controls fade away; the button stays
       await shot(page, 'skip-credits')
     }

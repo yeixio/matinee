@@ -12,7 +12,7 @@ When an episode's end credits start, the [Up next](/docs/watching/playing/#up-ne
 
 When nothing comes up next, such as at the end of a movie, the player shows **Skip credits** in the bottom corner once the credits start. Press it to finish the video and go back to where you were. The button stays while the credits roll, so you can just as well watch them.
 
-![Skip credits over the end credits of a movie](../images/skip-credits.webp)
+![Skip credits in the bottom corner near the end of a movie](../images/skip-credits.webp)
 
 Some films and shows have a scene after the credits. When Matinee sees one, **Skip credits** jumps to that scene instead, and Up next waits until it's over.
 
