@@ -9,6 +9,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/yeixio/matinee/internal/rating"
 	"github.com/yeixio/matinee/internal/store"
 	"github.com/yeixio/matinee/internal/stream"
 )
@@ -90,6 +91,27 @@ func TestRadioStations(t *testing.T) {
 		t.Fatalf("library titles: %+v", top)
 	}
 
+	// A kids profile listens, but doesn't change the stations.
+	var me store.User
+	c.do("GET", "/api/v1/me", nil, &me)
+	var kid store.Profile
+	c.do("POST", "/api/v1/profiles", map[string]any{"accountId": me.ID, "name": "Sam", "kidsLevel": rating.Kids, "libraries": map[string]string{itoa(lib.ID): "all"}}, &kid)
+	// Picking a profile switches this session to it.
+	if code := c.do("POST", "/api/v1/profiles/select", map[string]any{"id": kid.ID}, nil); code != http.StatusOK {
+		t.Fatalf("picking the kids profile: %d", code)
+	}
+	if code := c.do("GET", "/api/v1/libraries/"+itoa(lib.ID)+"/stations", nil, &list); code != http.StatusOK || len(list) != 1 {
+		t.Fatalf("kids profile's stations: %d %+v", code, list)
+	}
+	for _, try := range []struct{ method, path string }{{"POST", "/api/v1/stations"}, {"PUT", "/api/v1/stations/" + itoa(st.ID)}, {"DELETE", "/api/v1/stations/" + itoa(st.ID)}} {
+		if code := c.do(try.method, try.path, map[string]any{"libraryId": lib.ID, "url": station.URL + "/other", "name": "x"}, nil); code != http.StatusForbidden {
+			t.Fatalf("kids profile %s %s: %d", try.method, try.path, code)
+		}
+	}
+	if code := c.do("POST", "/api/v1/profiles/select", map[string]any{"id": me.ID}, nil); code != http.StatusOK {
+		t.Fatalf("back to the admin: %d", code)
+	}
+
 	var renamed store.Item
 	if code := c.do("PUT", "/api/v1/stations/"+itoa(st.ID), map[string]any{"name": "Deep"}, &renamed); code != http.StatusOK || renamed.Title != "Deep" {
 		t.Fatalf("rename: %d %+v", code, renamed)
@@ -109,18 +131,35 @@ func TestStationDirectory(t *testing.T) {
 			io.WriteString(w, "[]")
 			return
 		}
-		io.WriteString(w, `[{"name":"Trance FM","url_resolved":"https://t.example/live","tags":"trance","hls":0}]`)
+		io.WriteString(w, `[{"name":"Trance FM","url_resolved":"https://t.example/live","tags":"trance","hls":0},{"name":"Other FM","url_resolved":"https://o.example/live","hls":0}]`)
 	}))
 	defer dir.Close()
 	stream.AllowHomeNetwork.Store(true)
 	t.Cleanup(func() { stream.AllowHomeNetwork.Store(false) })
-	c, _ := newTestServer(t, func(s *Server) { s.RadioBase = dir.URL })
+	c, tmp := newTestServer(t, func(s *Server) { s.RadioBase = dir.URL })
 	var login struct{ Token string }
 	c.do("POST", "/api/setup", credentials{"admin", "correct horse"}, &login)
 	c.token = login.Token
-	var found []struct{ Name, URL string }
-	if code := c.do("GET", "/api/v1/stations/directory?tag=trance", nil, &found); code != http.StatusOK || len(found) != 1 || found[0].Name != "Trance FM" {
+	var found []struct {
+		Name, URL string
+		ItemID    int64
+	}
+	if code := c.do("GET", "/api/v1/stations/directory?tag=trance", nil, &found); code != http.StatusOK || len(found) != 2 || found[0].Name != "Trance FM" || found[0].ItemID != 0 {
 		t.Fatalf("directory: %d %+v", code, found)
+	}
+
+	// Asked for a library, the stations it has are marked.
+	os.MkdirAll(filepath.Join(tmp, "music"), 0o755)
+	var lib libraryView
+	c.do("POST", "/api/v1/libraries", map[string]any{"name": "Music", "kind": "music", "paths": []string{filepath.Join(tmp, "music")}}, &lib)
+	waitForScan(t, c)
+	id, err := c.srv.Store.AddStation(t.Context(), lib.ID, store.Station{Name: "Trance FM", URL: "https://t.example/live"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	c.do("GET", "/api/v1/stations/directory?tag=trance&library="+itoa(lib.ID), nil, &found)
+	if found[0].ItemID != id || found[1].ItemID != 0 {
+		t.Fatalf("marked: %+v", found)
 	}
 	if code := c.do("GET", "/api/v1/stations/directory", nil, nil); code != http.StatusBadRequest {
 		t.Fatalf("no query: %d", code)
