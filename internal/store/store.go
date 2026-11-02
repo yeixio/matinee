@@ -490,6 +490,9 @@ var migrations = []string{
 		count       INTEGER NOT NULL DEFAULT 0, -- 0 when the file couldn't be read
 		made_at     BIGINT NOT NULL
 	)`,
+	// 77: a TV set up from a phone (see PairedDeviceCode) names its code by
+	// the hash of a secret it showed in a QR code, so the phone can find it.
+	"ALTER TABLE device_codes ADD COLUMN pair_hash TEXT",
 }
 
 func now() int64 { return time.Now().Unix() }

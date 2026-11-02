@@ -53,7 +53,11 @@
     "noneFound": "Ezen a hálózaton nem találtunk szervert. Írd be a címet, amelyen a Matinee-t böngészőben megnyitod.",
     "connect": "Csatlakoztatás",
     "stillLooking": "Még keresünk. Ha a szervered előkerül, itt jelenik meg.",
-    "connectTo": "Csatlakozás: {{name}}"
+    "connectTo": "Csatlakozás: {{name}}",
+    "phoneTitle": "Beállítás telefonnal",
+    "phoneHint": "Olvasd be a telefon kamerájával. A telefonon kell a bejelentkezett Matinee alkalmazás, ugyanazon a wifin, mint ez a tévé.",
+    "phoneFound": "Beállítás ezzel: {{name}}…",
+    "phoneQrLabel": "QR-kód a tévé telefonos beállításához"
   },
   "signIn": {
     "title": "Bejelentkezés",
@@ -67,7 +71,32 @@
     "gettingCode": "Kód lekérése",
     "howTo": "Egy bejelentkezett számítógépen vagy telefonon nyisd meg ezt:\n<url>{{url}}</url>\nés írd be ezt a kódot.",
     "newCode": "Új kód kérése",
-    "waiting": "Jóváhagyásra vár…"
+    "waiting": "Jóváhagyásra vár…",
+    "qrHint": "Vagy olvasd be a telefon kamerájával, és megnyílik az oldal a kóddal kitöltve.",
+    "qrLabel": "A bejelentkezési oldal QR-kódja ezzel a kóddal",
+    "finishOnPhone": "A telefonod bejelentkezteti ezt a tévét…"
+  },
+  "setUpTv": {
+    "title": "Tévé beállítása",
+    "settingsHint": "Jelentkezz be a Matinee-be a tévén anélkül, hogy a távirányítóval gépelnél.",
+    "thisTv": "Ez a tévé",
+    "confirm": "Beállítod ezt a tévét ezzel: <b>{{server}}</b>? <b>{{name}}</b> néven jelentkezik be.",
+    "setUp": "Tévé beállítása",
+    "working": "A tévé megtudja, hol a szervered…",
+    "sameWifi": "Tartsd ezt a telefont ugyanazon a wifin, mint a tévét, amíg el nem készül.",
+    "timeout": "A tévé nem válaszolt. Ellenőrizd, hogy a telefon ugyanazon a wifin van-e, mint a tévé, és a tévé még mutatja-e a QR-kódját, majd próbáld újra.",
+    "done": "{{tv}} bejelentkezett",
+    "doneHint": "Kész a nézésre.",
+    "declined": "{{tv}} nem jelentkezett be",
+    "intro": "Nyisd meg a Matinee-t a tévén, és olvasd be a megjelenő QR-kódot ennek a telefonnak a kamerájával. Vagy írd be ide a tévén látható kódot.",
+    "introCode": "Írd be a tévén látható kódot.",
+    "code": "Kód a tévén",
+    "next": "Tovább",
+    "wantsToSignIn": "<b>{{name}}</b> néven szeretne bejelentkezni",
+    "approve": "Bejelentkeztetés",
+    "decline": "Ne jelentkezzen be",
+    "signInFirst": "Előbb jelentkezz be ezen a telefonon. A tévé a te nevedben jelentkezik be.",
+    "onPhone": "Tévét a telefonod Matinee alkalmazásában állíthatsz be: Beállítások, majd Tévé beállítása."
   },
   "home": {
     "watchDownloads": "Letöltéseid megnézése",

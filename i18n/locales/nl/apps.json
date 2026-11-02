@@ -53,7 +53,11 @@
     "noneFound": "We konden geen server vinden op dit netwerk. Typ het adres waarmee je Matinee in een browser opent.",
     "connect": "Koppelen",
     "stillLooking": "Nog aan het zoeken. Als je server opduikt, verschijnt hij hier.",
-    "connectTo": "Verbinden met {{name}}"
+    "connectTo": "Verbinden met {{name}}",
+    "phoneTitle": "Instellen met je telefoon",
+    "phoneHint": "Scan hem met de camera van je telefoon. De telefoon heeft de Matinee-app nodig, aangemeld, op hetzelfde wifi als deze tv.",
+    "phoneFound": "Instellen met {{name}}…",
+    "phoneQrLabel": "QR-code om deze tv met je telefoon in te stellen"
   },
   "signIn": {
     "title": "Inloggen",
@@ -67,7 +71,32 @@
     "gettingCode": "Code ophalen",
     "howTo": "Open op een computer of telefoon waarop je bent aangemeld\n<url>{{url}}</url>\nen voer deze code in.",
     "newCode": "Nieuwe code ophalen",
-    "waiting": "Wachten op goedkeuring…"
+    "waiting": "Wachten op goedkeuring…",
+    "qrHint": "Of scan hem met de camera van je telefoon om die pagina te openen met de code al ingevuld.",
+    "qrLabel": "QR-code van de aanmeldpagina met deze code",
+    "finishOnPhone": "Je telefoon meldt deze tv aan…"
+  },
+  "setUpTv": {
+    "title": "Een tv instellen",
+    "settingsHint": "Meld Matinee aan op een tv zonder te typen met de afstandsbediening.",
+    "thisTv": "Deze tv",
+    "confirm": "Deze tv instellen met <b>{{server}}</b>? Hij wordt aangemeld als <b>{{name}}</b>.",
+    "setUp": "Tv instellen",
+    "working": "De tv vertellen waar je server is…",
+    "sameWifi": "Houd deze telefoon op hetzelfde wifi als de tv tot het klaar is.",
+    "timeout": "De tv antwoordde niet. Controleer of deze telefoon op hetzelfde wifi zit als de tv en of de tv zijn QR-code nog toont, en probeer het opnieuw.",
+    "done": "{{tv}} is aangemeld",
+    "doneHint": "Hij is klaar om te kijken.",
+    "declined": "{{tv}} is niet aangemeld",
+    "intro": "Open Matinee op de tv en scan de QR-code die hij toont met de camera van deze telefoon. Of typ hier de code die de tv toont.",
+    "introCode": "Typ de code die de tv toont.",
+    "code": "Code op de tv",
+    "next": "Volgende",
+    "wantsToSignIn": "wil zich aanmelden als <b>{{name}}</b>",
+    "approve": "Aanmelden",
+    "decline": "Niet aanmelden",
+    "signInFirst": "Meld je eerst aan op deze telefoon. De tv wordt als jou aangemeld.",
+    "onPhone": "Stel een tv in vanuit de Matinee-app op je telefoon: Instellingen, dan Een tv instellen."
   },
   "home": {
     "watchDownloads": "Je downloads bekijken",

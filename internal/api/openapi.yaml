@@ -194,6 +194,16 @@ paths:
               allOf:
                 - $ref: "#/components/schemas/DeviceInfo"
                 - required: [deviceName]
+                - type: object
+                  properties:
+                    pairId:
+                      type: string
+                      pattern: "^[A-Za-z0-9_-]{22,64}$"
+                      description: |
+                        Only for a TV set up from a phone: the random secret the TV
+                        showed in a QR code before it knew this server. The phone that
+                        scanned it finds this code with `GET /auth/device/pair/{pair}`
+                        and approves it, so nobody types the code.
       responses:
         "200":
           description: A code to show.
@@ -252,6 +262,30 @@ paths:
       responses:
         "200":
           description: A code waiting for approval.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  userCode: { type: string }
+                  deviceName: { type: string }
+                  platform: { type: string }
+                  expiresAt: { type: integer, description: Unix seconds. }
+        "404": { $ref: "#/components/responses/Error" }
+  /auth/device/pair/{pair}:
+    parameters:
+      - { name: pair, in: path, required: true, schema: { type: string }, description: "The `pairId` from the TV's QR code." }
+    get:
+      summary: Find the code a TV asked for with a pairing secret
+      description: |
+        Setting up a TV from a phone: the TV shows a QR code with a random
+        `pairId`, the phone tells the TV this server's address over the home
+        network, and the TV asks for a code with `pairId`. The phone polls this
+        until that code shows up (404 until then), then approves it with
+        `POST /auth/device/{code}/approve`.
+      responses:
+        "200":
+          description: The TV's code, waiting for approval.
           content:
             application/json:
               schema:

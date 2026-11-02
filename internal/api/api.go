@@ -201,6 +201,7 @@ func (s *Server) routes() []route {
 		{"POST /auth/device", public, s.startDeviceCode},
 		{"POST /auth/device/token", public, s.pollDeviceCode},
 		{"GET /auth/device/{code}", signedIn, grownUps(s.getDeviceCode)},
+		{"GET /auth/device/pair/{pair}", signedIn, grownUps(s.getPairedDeviceCode)},
 		{"POST /auth/device/{code}/approve", signedIn, grownUps(s.approveDeviceCode)},
 		{"POST /auth/device/{code}/deny", signedIn, grownUps(s.denyDeviceCode)},
 
