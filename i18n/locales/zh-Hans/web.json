@@ -412,6 +412,7 @@
       "intros": "正在查找 {{season}} 的片头",
       "credits": "正在查找 {{title}} 的片尾",
       "thumbnails": "正在为 {{title}} 生成预览图",
+      "gapless": "正在检查 {{album}} 的歌曲间隙",
       "working": "工作中",
       "waiting": "正在等待播放结束",
       "slowDisk": "文件读取较慢，休息几分钟",

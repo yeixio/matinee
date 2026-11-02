@@ -385,7 +385,11 @@
     "lyrics": "歌词",
     "noLyrics": "这首歌没有歌词",
     "instrumental": "纯音乐",
-    "lyricsFromLrclib": "歌词来自 LRCLIB"
+    "lyricsFromLrclib": "歌词来自 LRCLIB",
+    "gapless": "无间隙播放",
+    "gaplessHeard": "Matinee 听出这些歌曲首尾相连，因此会无间隙播放。",
+    "gaplessOn": "无间隙播放",
+    "gaplessOff": "歌曲之间有间隙"
   },
   "books": {
     "overview": "概览",

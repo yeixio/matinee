@@ -418,6 +418,7 @@
       "intros": "Buscando intros en {{season}}",
       "credits": "Buscando los créditos finales en {{title}}",
       "thumbnails": "Creando vistas previas de la barra para {{title}}",
+      "gapless": "Escuchando si hay pausas entre canciones en {{album}}",
       "working": "Trabajando",
       "waiting": "Esperando a que termine la reproducción",
       "slowDisk": "Los archivos tardan en leerse; descansando unos minutos",

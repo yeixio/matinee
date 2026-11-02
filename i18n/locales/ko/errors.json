@@ -216,5 +216,9 @@
   "thumbnails_must_be_all_onplay_or_off": "미리보기 이미지는 all, onPlay, off 중 하나여야 합니다",
   "too_many_watch_together_sessions_right_now": "지금은 함께 보기 세션이 너무 많아요",
   "unknown_action": "알 수 없는 동작",
-  "usernames_are_at_most_40_characters": "사용자 이름은 최대 40자예요"
+  "usernames_are_at_most_40_characters": "사용자 이름은 최대 40자예요",
+  "couldnt_start_playback_for_this_album": "이 앨범을 재생할 수 없습니다",
+  "not_an_album": "앨범이 아닙니다",
+  "only_the_household_can_change_this": "가족 구성원만 변경할 수 있습니다",
+  "tracks_must_be_songs_on_one_album": "트랙은 한 앨범의 곡이어야 합니다"
 }

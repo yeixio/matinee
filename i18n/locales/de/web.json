@@ -415,6 +415,7 @@
       "intros": "Suche Intros in {{season}}",
       "credits": "Suche nach dem Abspann in {{title}}",
       "thumbnails": "Erstelle Vorschaubilder für {{title}}",
+      "gapless": "Prüft {{album}} auf Pausen zwischen den Songs",
       "working": "Arbeitet",
       "waiting": "Wartet, bis die Wiedergabe endet",
       "slowDisk": "Dateien lesen sich langsam; Pause für ein paar Minuten",

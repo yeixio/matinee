@@ -441,7 +441,11 @@
     "lyrics": "Letra",
     "noLyrics": "Nenhuma letra para esta música",
     "instrumental": "Instrumental",
-    "lyricsFromLrclib": "Letra do LRCLIB"
+    "lyricsFromLrclib": "Letra do LRCLIB",
+    "gapless": "Tocar sem intervalos",
+    "gaplessHeard": "O Matinee percebeu que estas músicas emendam umas nas outras, então elas tocam sem intervalos.",
+    "gaplessOn": "Toca sem intervalos",
+    "gaplessOff": "Toca com intervalos entre as músicas"
   },
   "books": {
     "overview": "Visão geral",

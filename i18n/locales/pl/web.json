@@ -421,6 +421,7 @@
       "intros": "Szukanie czołówek w: {{season}}",
       "credits": "Szukanie napisów końcowych w {{title}}",
       "thumbnails": "Tworzenie podglądów paska dla {{title}}",
+      "gapless": "Sprawdza przerwy między utworami na {{album}}",
       "working": "Pracuje",
       "waiting": "Czeka na koniec odtwarzania",
       "slowDisk": "Pliki czytają się wolno; przerwa na kilka minut",

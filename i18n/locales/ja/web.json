@@ -412,6 +412,7 @@
       "intros": "{{season}} のイントロを探しています",
       "credits": "{{title}} のエンドクレジットを検索中",
       "thumbnails": "{{title}} のプレビューを作成中",
+      "gapless": "{{album}} の曲間を確認しています",
       "working": "作業中",
       "waiting": "再生の終了を待っています",
       "slowDisk": "ファイルの読み込みが遅いため、数分休憩しています",

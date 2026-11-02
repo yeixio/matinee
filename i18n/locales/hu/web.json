@@ -415,6 +415,7 @@
       "intros": "Bevezetők keresése: {{season}}",
       "credits": "Stáblista keresése: {{title}}",
       "thumbnails": "Előnézetek készítése: {{title}}",
+      "gapless": "Szüneteket keres a dalok között: {{album}}",
       "working": "Dolgozik",
       "waiting": "Vár, amíg a lejátszás véget ér",
       "slowDisk": "A fájlok lassan olvashatók; néhány perc pihenő",

@@ -216,5 +216,9 @@
   "thumbnails_must_be_all_onplay_or_off": "miniatyrer måste vara all, onPlay eller off",
   "too_many_watch_together_sessions_right_now": "för många sessioner för att titta tillsammans just nu",
   "unknown_action": "okänd åtgärd",
-  "usernames_are_at_most_40_characters": "användarnamn får vara högst 40 tecken"
+  "usernames_are_at_most_40_characters": "användarnamn får vara högst 40 tecken",
+  "couldnt_start_playback_for_this_album": "kunde inte starta uppspelningen av albumet",
+  "not_an_album": "inte ett album",
+  "only_the_household_can_change_this": "bara hushållet kan ändra detta",
+  "tracks_must_be_songs_on_one_album": "spåren måste vara låtar från ett album"
 }

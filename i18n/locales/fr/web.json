@@ -418,6 +418,7 @@
       "intros": "Recherche des intros dans {{season}}",
       "credits": "Recherche du générique de fin dans {{title}}",
       "thumbnails": "Création des aperçus de la barre pour {{title}}",
+      "gapless": "Recherche de blancs entre les morceaux de {{album}}",
       "working": "En cours",
       "waiting": "En attente de la fin de la lecture",
       "slowDisk": "Les fichiers sont lents à lire ; pause de quelques minutes",

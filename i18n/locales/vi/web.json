@@ -412,6 +412,7 @@
       "intros": "Đang tìm đoạn mở đầu trong {{season}}",
       "credits": "Đang tìm phần danh đề cuối trong {{title}}",
       "thumbnails": "Đang tạo ảnh xem trước cho {{title}}",
+      "gapless": "Đang nghe khoảng lặng giữa các bài trong {{album}}",
       "working": "Đang làm việc",
       "waiting": "Đang chờ phát xong",
       "slowDisk": "Tệp đọc chậm; nghỉ vài phút",

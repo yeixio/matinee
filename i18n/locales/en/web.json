@@ -415,6 +415,7 @@
       "intros": "Looking for intros in {{season}}",
       "credits": "Looking for end credits in {{title}}",
       "thumbnails": "Making seek bar previews for {{title}}",
+      "gapless": "Listening for gaps between songs on {{album}}",
       "working": "Working",
       "waiting": "Waiting for playback to finish",
       "slowDisk": "Files are slow to read; resting for a few minutes",

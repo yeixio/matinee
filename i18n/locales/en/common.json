@@ -413,7 +413,11 @@
     "lyrics": "Lyrics",
     "noLyrics": "No lyrics for this song",
     "instrumental": "Instrumental",
-    "lyricsFromLrclib": "Lyrics from LRCLIB"
+    "lyricsFromLrclib": "Lyrics from LRCLIB",
+    "gapless": "Play without gaps",
+    "gaplessHeard": "Matinee heard these songs run into each other, so they play without gaps.",
+    "gaplessOn": "Plays without gaps",
+    "gaplessOff": "Plays with gaps between songs"
   },
   "books": {
     "overview": "Overview",

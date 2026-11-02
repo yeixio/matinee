@@ -68,6 +68,27 @@ The **⋯** button on any song, album or artist has:
 
 Shuffle mixes what's left in the queue and keeps the song that's playing; turning it off puts the queue back in order.
 
+<!-- since: v0.1.13 -->
+## Albums without gaps
+
+Some albums are made to play straight through, with no gap between songs: DJ mixes, live albums, and albums where one song runs into the next. Matinee plays the songs of these albums as one continuous stream, so the music never stops between them. The song names, the time and the queue still move along song by song, and next, back and the seek bar work as usual.
+
+Matinee finds these albums by itself. It reads the tags first (a gapless flag from iTunes, a release type of DJ mix or live, or a title or genre like **DJ Mix** or **Mixed by**), and otherwise listens to where songs meet: on a continuous album, one song is still playing when the next one starts. It does this in the background after a scan, an album at a time, alongside the [media analysis](/docs/server/media-analysis/).
+
+To decide for yourself, use the **Play without gaps** button on the album's page. It's lit when the album plays without gaps; hover over it to see when Matinee turned it on for you. Turn it on or off, and Matinee remembers it for that album, for everyone in your household, on every device. Setting it back to what Matinee heard leaves the decision to Matinee again.
+
+![An album page with Play without gaps turned on](../images/album-gapless.webp)
+
+A few things to know:
+
+- Shuffle and repeat one play songs one at a time, as usual.
+- The stream is made on the server and sent as high quality AAC, so these albums use a little of the server's processor while they play, like any song your browser can't play by itself.
+- Albums you've downloaded to a phone play from the downloads, one song at a time.
+- Songs that already end in silence keep it, so turning this on for an ordinary album does no harm.
+
+The phone and TV apps play these albums without gaps too, from app version 1.0.24. On a phone the switch is in an album's **⋯** menu; on a TV it's the **Play without gaps** button on the album's page.
+<!-- /since -->
+
 <!-- since: v0.1.7 -->
 ## Playlists
 

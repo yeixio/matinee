@@ -412,6 +412,7 @@
       "intros": "{{season}}에서 인트로를 찾는 중",
       "credits": "{{title}}에서 엔딩 크레딧을 찾는 중",
       "thumbnails": "{{title}} 미리보기를 만드는 중",
+      "gapless": "{{album}}의 곡 사이 공백을 확인하는 중",
       "working": "작업 중",
       "waiting": "재생이 끝나기를 기다리는 중",
       "slowDisk": "파일 읽기가 느려 몇 분 쉬는 중",

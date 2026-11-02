@@ -415,6 +415,7 @@
       "intros": "Leder efter introer i {{season}}",
       "credits": "Leder efter rulletekster i {{title}}",
       "thumbnails": "Laver forhåndsbilleder til {{title}}",
+      "gapless": "Lytter efter pauser mellem sangene på {{album}}",
       "working": "Arbejder",
       "waiting": "Venter på, at afspilningen slutter",
       "slowDisk": "Filerne er langsomme at læse; holder pause et par minutter",

@@ -12,7 +12,7 @@ export function MediaAnalysis() {
   const { data: st } = useQuery({
     queryKey: ['analysis'],
     queryFn: api.analysis,
-    refetchInterval: (q) => (['analyzing', 'intros', 'credits', 'thumbnails', 'waiting'].includes(q.state.data?.state ?? '') ? 3000 : 30_000),
+    refetchInterval: (q) => (['analyzing', 'intros', 'credits', 'gapless', 'thumbnails', 'waiting'].includes(q.state.data?.state ?? '') ? 3000 : 30_000),
   })
   const setMode = useMutation({
     mutationFn: api.setAnalysisMode,
@@ -36,6 +36,7 @@ export function MediaAnalysis() {
     analyzing: st.current ? t('analysis.state.lookingAt', { file: st.current }) : t('analysis.state.working'),
     intros: t('analysis.state.intros', { season: st.current ?? '' }),
     credits: t('analysis.state.credits', { title: st.current ?? '' }),
+    gapless: t('analysis.state.gapless', { album: st.current ?? '' }),
     thumbnails: t('analysis.state.thumbnails', { title: st.current ?? '' }),
     waiting: t('analysis.state.waiting'),
     slowDisk: t('analysis.state.slowDisk'),

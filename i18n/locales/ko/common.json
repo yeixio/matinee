@@ -385,7 +385,11 @@
     "lyrics": "가사",
     "noLyrics": "이 곡의 가사가 없습니다",
     "instrumental": "연주곡",
-    "lyricsFromLrclib": "가사 제공: LRCLIB"
+    "lyricsFromLrclib": "가사 제공: LRCLIB",
+    "gapless": "곡 사이 공백 없이 재생",
+    "gaplessHeard": "Matinee가 이 곡들이 서로 이어진다는 것을 감지해 공백 없이 재생합니다.",
+    "gaplessOn": "공백 없이 재생",
+    "gaplessOff": "곡 사이에 공백을 두고 재생"
   },
   "books": {
     "overview": "개요",

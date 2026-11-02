@@ -413,7 +413,11 @@
     "lyrics": "بول",
     "noLyrics": "اس گانے کے بول نہیں ہیں",
     "instrumental": "سازینہ",
-    "lyricsFromLrclib": "بول LRCLIB سے"
+    "lyricsFromLrclib": "بول LRCLIB سے",
+    "gapless": "بغیر وقفے کے چلائیں",
+    "gaplessHeard": "Matinee نے سنا کہ یہ گانے ایک دوسرے میں ملتے ہیں، اس لیے یہ بغیر وقفے کے چلتے ہیں۔",
+    "gaplessOn": "بغیر وقفے کے چلتا ہے",
+    "gaplessOff": "گانوں کے درمیان وقفے کے ساتھ چلتا ہے"
   },
   "books": {
     "overview": "جائزہ",

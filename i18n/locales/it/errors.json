@@ -216,5 +216,9 @@
   "thumbnails_must_be_all_onplay_or_off": "le miniature devono essere all, onPlay o off",
   "too_many_watch_together_sessions_right_now": "troppe sessioni di Guarda insieme in questo momento",
   "unknown_action": "azione sconosciuta",
-  "usernames_are_at_most_40_characters": "i nomi utente hanno al massimo 40 caratteri"
+  "usernames_are_at_most_40_characters": "i nomi utente hanno al massimo 40 caratteri",
+  "couldnt_start_playback_for_this_album": "impossibile avviare la riproduzione di questo album",
+  "not_an_album": "non è un album",
+  "only_the_household_can_change_this": "solo la famiglia può modificarlo",
+  "tracks_must_be_songs_on_one_album": "le tracce devono essere brani dello stesso album"
 }

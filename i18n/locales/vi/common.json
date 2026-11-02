@@ -385,7 +385,11 @@
     "lyrics": "Lời bài hát",
     "noLyrics": "Bài hát này không có lời",
     "instrumental": "Không lời",
-    "lyricsFromLrclib": "Lời từ LRCLIB"
+    "lyricsFromLrclib": "Lời từ LRCLIB",
+    "gapless": "Phát liền mạch",
+    "gaplessHeard": "Matinee nghe thấy các bài này nối liền nhau nên chúng được phát liền mạch.",
+    "gaplessOn": "Phát liền mạch",
+    "gaplessOff": "Phát có khoảng lặng giữa các bài"
   },
   "books": {
     "overview": "Tổng quan",

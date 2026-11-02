@@ -413,7 +413,11 @@
     "lyrics": "Sanat",
     "noLyrics": "Tälle kappaleelle ei ole sanoja",
     "instrumental": "Instrumentaali",
-    "lyricsFromLrclib": "Sanat: LRCLIB"
+    "lyricsFromLrclib": "Sanat: LRCLIB",
+    "gapless": "Toista ilman taukoja",
+    "gaplessHeard": "Matinee kuuli, että kappaleet jatkuvat toisiinsa, joten ne soivat ilman taukoja.",
+    "gaplessOn": "Soi ilman taukoja",
+    "gaplessOff": "Soi taukojen kanssa kappaleiden välillä"
   },
   "books": {
     "overview": "Yleiskatsaus",

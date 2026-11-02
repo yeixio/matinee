@@ -363,6 +363,8 @@ export type Library = {
   watch: FolderWatch[]
 }
 
+export type GaplessStream = { url: string; startSec: number; tracks: { id: number; startSec: number }[] }
+
 export type Item = {
   id: number
   libraryId: number
@@ -387,6 +389,13 @@ export type Item = {
   rating?: number
   // The person's own rating, 1 to 10: half stars out of five.
   myRating?: number
+  // An album whose songs play without a gap between them (a DJ mix, a live
+  // album), or a song on one: the player joins them into one stream. An
+  // album also says whether the household chose (gaplessChoice, missing
+  // when Matinee decides) and what Matinee heard (gaplessFound).
+  gapless?: boolean
+  gaplessChoice?: boolean
+  gaplessFound?: boolean
   hasPoster: boolean
   // Set when an admin picked the cover; it goes on the image URL so a cached old one isn't shown.
   posterTag?: string
@@ -914,7 +923,7 @@ export type LogQuery = { level?: LogLevel; q?: string; before?: number; limit?: 
 
 export type AnalysisStatus = {
   mode: AnalysisMode
-  state: 'analyzing' | 'intros' | 'credits' | 'thumbnails' | 'waiting' | 'slowDisk' | 'idle' | 'off'
+  state: 'analyzing' | 'intros' | 'credits' | 'gapless' | 'thumbnails' | 'waiting' | 'slowDisk' | 'idle' | 'off'
   total: number
   done: number
   unreadable: number
@@ -1332,6 +1341,12 @@ export const api = {
       'POST',
       `/api/v1/items/${id}/hls?start=${startSec}${burnSubtitle ? `&subtitle=${encodeURIComponent(burnSubtitle)}` : ''}${quality ? `&quality=${encodeURIComponent(quality)}` : ''}`,
     ),
+  // One stream of an album's songs, joined without gaps, from start
+  // seconds into the first; each song's startSec is on the stream's clock.
+  startGapless: (tracks: number[], start = 0) =>
+    request<GaplessStream>('POST', '/api/v1/gapless', { tracks, start }),
+  // on, off, or null to leave it to Matinee.
+  setGapless: (id: number, gapless: boolean | null) => request<Item>('PUT', `/api/v1/items/${id}/gapless`, { gapless }),
   streaming: () => request<Streaming>('GET', '/api/v1/streaming'),
   trailers: (id: number) => request<Trailer[]>('GET', `/api/v1/items/${id}/trailers`),
   startTrailerHls: (id: number, trailer: string) =>

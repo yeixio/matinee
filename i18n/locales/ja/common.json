@@ -385,7 +385,11 @@
     "lyrics": "歌詞",
     "noLyrics": "この曲の歌詞はありません",
     "instrumental": "インストゥルメンタル",
-    "lyricsFromLrclib": "歌詞の提供: LRCLIB"
+    "lyricsFromLrclib": "歌詞の提供: LRCLIB",
+    "gapless": "曲間なしで再生",
+    "gaplessHeard": "Matinee はこれらの曲がつながっていると判断したため、曲間なしで再生します。",
+    "gaplessOn": "曲間なしで再生",
+    "gaplessOff": "曲間ありで再生"
   },
   "books": {
     "overview": "概要",

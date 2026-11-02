@@ -421,6 +421,7 @@
       "intros": "Hledání úvodů v: {{season}}",
       "credits": "Hledají se závěrečné titulky v {{title}}",
       "thumbnails": "Vytvářím náhledy pro {{title}}",
+      "gapless": "Poslouchá mezery mezi skladbami na {{album}}",
       "working": "Pracuje",
       "waiting": "Čeká na konec přehrávání",
       "slowDisk": "Soubory se čtou pomalu; pár minut odpočívá",

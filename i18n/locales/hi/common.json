@@ -413,7 +413,11 @@
     "lyrics": "बोल",
     "noLyrics": "इस गाने के बोल नहीं हैं",
     "instrumental": "वाद्य",
-    "lyricsFromLrclib": "बोल LRCLIB से"
+    "lyricsFromLrclib": "बोल LRCLIB से",
+    "gapless": "बिना अंतराल के चलाएँ",
+    "gaplessHeard": "Matinee ने सुना कि ये गाने एक-दूसरे में मिल जाते हैं, इसलिए ये बिना अंतराल के चलते हैं।",
+    "gaplessOn": "बिना अंतराल के चलता है",
+    "gaplessOff": "गानों के बीच अंतराल के साथ चलता है"
   },
   "books": {
     "overview": "अवलोकन",

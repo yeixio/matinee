@@ -216,5 +216,9 @@
   "thumbnails_must_be_all_onplay_or_off": "Vorschaubilder müssen all, onPlay oder off sein",
   "too_many_watch_together_sessions_right_now": "gerade laufen zu viele Sitzungen zum gemeinsamen Schauen",
   "unknown_action": "unbekannte Aktion",
-  "usernames_are_at_most_40_characters": "Benutzernamen haben höchstens 40 Zeichen"
+  "usernames_are_at_most_40_characters": "Benutzernamen haben höchstens 40 Zeichen",
+  "couldnt_start_playback_for_this_album": "die Wiedergabe dieses Albums konnte nicht gestartet werden",
+  "not_an_album": "kein Album",
+  "only_the_household_can_change_this": "das kann nur der Haushalt ändern",
+  "tracks_must_be_songs_on_one_album": "die Titel müssen Songs eines Albums sein"
 }

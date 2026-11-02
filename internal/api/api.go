@@ -317,6 +317,8 @@ func (s *Server) routes() []route {
 		{"GET /items/{id}/trailers/{trailer}/file", reader, s.trailerFile},
 		{"POST /items/{id}/trailers/{trailer}/hls", reader, s.trailerHLS},
 		{"POST /items/{id}/hls", reader, s.startHLS},
+		{"POST /gapless", reader, s.startGapless},
+		{"PUT /items/{id}/gapless", signedIn, grownUps(s.setGapless)},
 		{"GET /hls/{session}/{file}", reader, s.hlsFile},
 
 		{"GET /collections", reader, s.listCollections},

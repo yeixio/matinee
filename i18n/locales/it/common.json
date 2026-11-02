@@ -441,7 +441,11 @@
     "lyrics": "Testo",
     "noLyrics": "Nessun testo per questo brano",
     "instrumental": "Strumentale",
-    "lyricsFromLrclib": "Testo da LRCLIB"
+    "lyricsFromLrclib": "Testo da LRCLIB",
+    "gapless": "Riproduci senza pause",
+    "gaplessHeard": "Matinee ha sentito che questi brani sono legati tra loro, quindi suonano senza pause.",
+    "gaplessOn": "Senza pause",
+    "gaplessOff": "Con pause tra i brani"
   },
   "books": {
     "overview": "Panoramica",

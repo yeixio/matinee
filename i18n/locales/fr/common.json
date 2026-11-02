@@ -441,7 +441,11 @@
     "lyrics": "Paroles",
     "noLyrics": "Pas de paroles pour ce morceau",
     "instrumental": "Instrumental",
-    "lyricsFromLrclib": "Paroles de LRCLIB"
+    "lyricsFromLrclib": "Paroles de LRCLIB",
+    "gapless": "Lire sans blancs",
+    "gaplessHeard": "Matinee a entendu que ces morceaux s’enchaînent, ils sont donc lus sans blancs.",
+    "gaplessOn": "Lecture sans blancs",
+    "gaplessOff": "Lecture avec blancs entre les morceaux"
   },
   "books": {
     "overview": "Vue d'ensemble",

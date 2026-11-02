@@ -418,6 +418,7 @@
       "intros": "Se caută introuri în {{season}}",
       "credits": "Se caută genericul de final în {{title}}",
       "thumbnails": "Se creează previzualizări pentru {{title}}",
+      "gapless": "Ascultă pauzele dintre melodii pe {{album}}",
       "working": "Lucrează",
       "waiting": "Așteaptă terminarea redării",
       "slowDisk": "Fișierele se citesc greu; pauză câteva minute",

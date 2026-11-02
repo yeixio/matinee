@@ -415,6 +415,7 @@
       "intros": "Intro’s zoeken in {{season}}",
       "credits": "Zoeken naar de aftiteling in {{title}}",
       "thumbnails": "Voorbeelden voor de tijdbalk maken voor {{title}}",
+      "gapless": "Luistert naar pauzes tussen nummers op {{album}}",
       "working": "Bezig",
       "waiting": "Wacht tot het afspelen klaar is",
       "slowDisk": "Bestanden lezen traag; een paar minuten pauze",

@@ -412,6 +412,7 @@
       "intros": "Mencari intro di {{season}}",
       "credits": "Mencari kredit akhir di {{title}}",
       "thumbnails": "Membuat pratinjau bilah untuk {{title}}",
+      "gapless": "Mendengarkan jeda antar lagu di {{album}}",
       "working": "Bekerja",
       "waiting": "Menunggu pemutaran selesai",
       "slowDisk": "File lambat dibaca; istirahat beberapa menit",

@@ -415,6 +415,7 @@
       "intros": "Etsitään alkutunnareita: {{season}}",
       "credits": "Etsitään lopputekstejä: {{title}}",
       "thumbnails": "Luodaan esikatselukuvia: {{title}}",
+      "gapless": "Kuuntelee taukoja kappaleiden välillä: {{album}}",
       "working": "Työskennellään",
       "waiting": "Odotetaan toiston päättymistä",
       "slowDisk": "Tiedostot ovat hitaita lukea; levätään muutama minuutti",

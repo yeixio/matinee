@@ -413,7 +413,11 @@
     "lyrics": "Dalszöveg",
     "noLyrics": "Ehhez a dalhoz nincs dalszöveg",
     "instrumental": "Instrumentális",
-    "lyricsFromLrclib": "Dalszöveg: LRCLIB"
+    "lyricsFromLrclib": "Dalszöveg: LRCLIB",
+    "gapless": "Lejátszás szünetek nélkül",
+    "gaplessHeard": "A Matinee hallotta, hogy ezek a dalok egymásba folynak, ezért szünetek nélkül szólnak.",
+    "gaplessOn": "Szünetek nélkül szól",
+    "gaplessOff": "Szünetekkel szól a dalok között"
   },
   "books": {
     "overview": "Áttekintés",

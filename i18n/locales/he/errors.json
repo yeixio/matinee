@@ -216,5 +216,9 @@
   "thumbnails_must_be_all_onplay_or_off": "התמונות הממוזערות חייבות להיות all,‏ onPlay או off",
   "too_many_watch_together_sessions_right_now": "יש כרגע יותר מדי סשנים של צפייה משותפת",
   "unknown_action": "פעולה לא מוכרת",
-  "usernames_are_at_most_40_characters": "שם משתמש יכול להכיל עד 40 תווים"
+  "usernames_are_at_most_40_characters": "שם משתמש יכול להכיל עד 40 תווים",
+  "couldnt_start_playback_for_this_album": "לא ניתן להתחיל לנגן את האלבום",
+  "not_an_album": "זה לא אלבום",
+  "only_the_household_can_change_this": "רק בני הבית יכולים לשנות את זה",
+  "tracks_must_be_songs_on_one_album": "הרצועות חייבות להיות שירים מאלבום אחד"
 }

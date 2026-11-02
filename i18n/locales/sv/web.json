@@ -415,6 +415,7 @@
       "intros": "Letar efter intron i {{season}}",
       "credits": "Letar efter eftertexter i {{title}}",
       "thumbnails": "Skapar förhandsbilder för {{title}}",
+      "gapless": "Lyssnar efter pauser mellan låtarna på {{album}}",
       "working": "Arbetar",
       "waiting": "Väntar på att uppspelningen ska bli klar",
       "slowDisk": "Filerna är långsamma att läsa; vilar några minuter",
