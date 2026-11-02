@@ -69,6 +69,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      # The Mac app builds on a case-insensitive disk, where lyrics.ts and
+      # Lyrics.tsx clash. Catch names that differ only in case here.
+      - name: No file names that differ only in case
+        run: |
+          clash="$(git ls-files | sort -f | uniq -Di)"
+          clash="$clash$(git ls-files | sed -E 's/\.(tsx|ts|jsx|js|mjs)$//' | sort -u | sort -f | uniq -Di)"
+          if [ -n "$clash" ]; then echo "::error title=File names differ only in case::$(echo "$clash" | tr '\n' ' ')"; exit 1; fi
       - uses: pnpm/action-setup@v4
         with:
           package_json_file: web/package.json
