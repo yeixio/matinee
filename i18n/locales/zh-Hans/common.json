@@ -515,7 +515,20 @@
     "export": "导出 OPML",
     "importing": "正在添加你的节目…",
     "newEpisodesCount_other": "{{count}} 个新单集",
-    "imported_other": "已添加 {{count}} 个节目。"
+    "imported_other": "已添加 {{count}} 个节目。",
+    "episodes": "单集",
+    "order": "单集顺序",
+    "newestFirst": "最新的在前",
+    "oldestFirst": "最早的在前",
+    "playOldest": "按顺序播放",
+    "playOn": "继续播放播客",
+    "playOnHint": "一集结束后，播放该节目中你还没听过的下一集；如果没有，就播放你关注的其他节目的最新一集。",
+    "playingNext": "接下来：{{title}}",
+    "autoDownload": "下载新单集",
+    "autoDownloadHint": "你的手机会自动下载该节目的最新单集，并在你听完后删除。",
+    "keepCount": "保留的单集数",
+    "removePlayed": "删除已播放的单集",
+    "removePlayedHint": "已下载的播客单集在你听完后会从这部手机上删除。"
   },
   "together": {
     "title": "一起看",

@@ -545,7 +545,20 @@
     "export": "Export OPML",
     "importing": "Adding your shows…",
     "imported_one": "Added {{count}} show.",
-    "imported_other": "Added {{count}} shows."
+    "imported_other": "Added {{count}} shows.",
+    "episodes": "Episodes",
+    "order": "Episode order",
+    "newestFirst": "Newest first",
+    "oldestFirst": "Oldest first",
+    "playOldest": "Play in order",
+    "playOn": "Keep playing podcasts",
+    "playOnHint": "When an episode ends, play the next one of the show that you haven't heard, or else the newest episode of another show you follow.",
+    "playingNext": "Up next: {{title}}",
+    "autoDownload": "Download new episodes",
+    "autoDownloadHint": "Your phones download this show's newest episodes by themselves and remove them once you've played them.",
+    "keepCount": "Episodes to keep",
+    "removePlayed": "Remove played episodes",
+    "removePlayedHint": "Downloaded podcast episodes leave this phone once you've played them."
   },
   "together": {
     "title": "Watch together",

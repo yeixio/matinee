@@ -605,7 +605,20 @@
     "newEpisodesCount_many": "{{count}} nového dílu",
     "imported_many": "Přidáno {{count}} pořadu.",
     "newEpisodesCount_other": "{{count}} nových dílů",
-    "imported_other": "Přidáno {{count}} pořadů."
+    "imported_other": "Přidáno {{count}} pořadů.",
+    "episodes": "Epizody",
+    "order": "Pořadí epizod",
+    "newestFirst": "Nejnovější první",
+    "oldestFirst": "Nejstarší první",
+    "playOldest": "Přehrát popořadě",
+    "playOn": "Pokračovat v přehrávání podcastů",
+    "playOnHint": "Když epizoda skončí, přehraje se další neposlechnutá epizoda pořadu, jinak nejnovější epizoda jiného sledovaného pořadu.",
+    "playingNext": "Další: {{title}}",
+    "autoDownload": "Stahovat nové epizody",
+    "autoDownloadHint": "Vaše telefony samy stahují nejnovější epizody tohoto pořadu a odstraní je, jakmile je poslechnete.",
+    "keepCount": "Ponechat epizod",
+    "removePlayed": "Odstraňovat poslechnuté epizody",
+    "removePlayedHint": "Stažené epizody podcastů zmizí z tohoto telefonu, jakmile je poslechnete."
   },
   "together": {
     "title": "Sledovat společně",

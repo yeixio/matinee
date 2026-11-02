@@ -515,7 +515,20 @@
     "export": "Eksport OPML",
     "importing": "Menambah rancangan anda…",
     "newEpisodesCount_other": "{{count}} episod baharu",
-    "imported_other": "{{count}} rancangan ditambah."
+    "imported_other": "{{count}} rancangan ditambah.",
+    "episodes": "Episod",
+    "order": "Susunan episod",
+    "newestFirst": "Terbaharu dahulu",
+    "oldestFirst": "Terlama dahulu",
+    "playOldest": "Main mengikut urutan",
+    "playOn": "Terus mainkan podcast",
+    "playOnHint": "Apabila episod tamat, mainkan episod seterusnya daripada rancangan itu yang belum anda dengar, atau episod terbaharu rancangan lain yang anda ikuti.",
+    "playingNext": "Seterusnya: {{title}}",
+    "autoDownload": "Muat turun episod baharu",
+    "autoDownloadHint": "Telefon anda memuat turun episod terbaharu rancangan ini dengan sendiri dan membuangnya selepas anda mendengarnya.",
+    "keepCount": "Episod untuk disimpan",
+    "removePlayed": "Buang episod yang telah dimainkan",
+    "removePlayedHint": "Episod podcast yang dimuat turun dibuang daripada telefon ini selepas anda mendengarnya."
   },
   "together": {
     "title": "Tonton bersama",

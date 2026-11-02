@@ -1663,6 +1663,26 @@ paths:
                     - type: object
                       properties:
                         unplayed: { type: integer }
+                        autoDownload: { type: boolean }
+                        keep: { type: integer }
+  /podcasts/auto-downloads:
+    get:
+      summary: The episodes the person's phones should have downloaded
+      description: |
+        From each show the person downloads by themselves (PUT
+        /podcasts/{id}/downloads): of its `keep` newest episodes, trailers
+        aside, the ones they haven't played, plus any older one they're
+        part-way through. Newest first. Phones download the ones they lack,
+        and remove episodes they downloaded this way that are no longer
+        listed.
+      responses:
+        "200":
+          description: Episodes.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Item" }
   /podcasts:
     post:
       summary: Add a podcast to a podcast library
@@ -1734,6 +1754,23 @@ paths:
             schema: { type: object, properties: { played: { type: boolean } } }
       responses:
         "204": { description: Marked. }
+  /podcasts/{id}/downloads:
+    put:
+      summary: Whether the person's phones download a podcast's new episodes by themselves
+      description: Turning it on or off also follows the show.
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/PodcastDownloads" }
+      responses:
+        "200":
+          description: Saved.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/PodcastDownloads" }
+        "400": { $ref: "#/components/responses/Error" }
   /libraries/{id}/opml:
     get:
       summary: A podcast library's shows as an OPML file
@@ -1810,7 +1847,10 @@ paths:
         to open rather than play. Both are absent for anything else, or when
         there's nothing to offer. Players show the offer from the episode's
         `mediaInfo.creditsMs`, else 30 seconds before the end; see
-        docs/autoplay.md.
+        docs/autoplay.md. For a podcast episode, the next one of the show the
+        person hasn't played, in the order they came out, else the newest
+        unstarted episode of another show they follow from the last two
+        weeks; players play it when the episode ends if `podcastsPlayOn`.
       parameters: [{ $ref: "#/components/parameters/ID" }]
       responses:
         "200":
@@ -4015,6 +4055,13 @@ components:
         autoPlay: { type: boolean, description: Offer the next episode with a countdown. }
         binge: { type: boolean, description: Skip the countdown and start the next episode right away. }
         skipIntros: { type: boolean, description: Jump past an episode's intro by itself instead of offering a Skip intro button. }
+        podcastsPlayOn: { type: boolean, description: When a podcast episode ends, play the one GET /items/{id}/next gives. On by default. }
+    PodcastDownloads:
+      type: object
+      description: What the person's phones keep of a show they follow.
+      properties:
+        autoDownload: { type: boolean, description: Phones download the show's newest episodes by themselves. }
+        keep: { type: integer, enum: [1, 2, 3, 5, 10], description: How many of the newest episodes to keep. 3 until changed. }
     MyLanguage:
       type: object
       required: [language]
@@ -4546,6 +4593,7 @@ components:
                 error: { type: string, description: Why the last check failed. Admins only. }
                 following: { type: boolean }
                 unplayed: { type: integer, description: Episodes the person hasn't played. }
+                downloads: { $ref: "#/components/schemas/PodcastDownloads" }
             episode:
               type: object
               description: Podcast episodes only.

@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { Bell, BellOff, Check, ExternalLink, MoreHorizontal, Pause, Play, RefreshCw, RotateCcw, Trash2 } from 'lucide-react'
+import { ArrowDownUp, Bell, BellOff, Check, ExternalLink, MoreHorizontal, Pause, Play, RefreshCw, RotateCcw, Trash2 } from 'lucide-react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link, useNavigate } from 'react-router-dom'
@@ -13,6 +13,31 @@ import { Hero, Overview } from './MusicItem'
 
 const PAGE = 50
 
+type Order = 'newest' | 'oldest'
+const orderKey = (show: number) => `matinee.podcasts.order.${show}`
+
+// Which way round a show's episodes are listed, kept per show on this
+// browser: oldest first suits a show told in order.
+function useOrder(show: number): [Order, (o: Order) => void] {
+  const [order, setOrder] = useState<Order>(() => {
+    try {
+      return localStorage.getItem(orderKey(show)) === 'oldest' ? 'oldest' : 'newest'
+    } catch {
+      return 'newest'
+    }
+  })
+  const pick = (o: Order) => {
+    setOrder(o)
+    try {
+      if (o === 'oldest') localStorage.setItem(orderKey(show), o)
+      else localStorage.removeItem(orderKey(show))
+    } catch {
+      // no storage: it lasts until the page closes
+    }
+  }
+  return [order, pick]
+}
+
 // A podcast: who makes it, following it, and its episodes newest first.
 export function PodcastPage({ item, episodes }: { item: ItemDetail; episodes?: Item[] }) {
   const { t } = useTranslation()
@@ -23,6 +48,7 @@ export function PodcastPage({ item, episodes }: { item: ItemDetail; episodes?: I
   const [filter, setFilter] = useState<'all' | 'unplayed'>('all')
   const [shown, setShown] = useState(PAGE)
   const [menu, setMenu] = useState(false)
+  const [order, setOrder] = useOrder(item.id)
   const refreshAll = () => {
     qc.invalidateQueries({ queryKey: ['item', item.id] })
     qc.invalidateQueries({ queryKey: ['children', item.id] })
@@ -38,9 +64,12 @@ export function PodcastPage({ item, episodes }: { item: ItemDetail; episodes?: I
       navigate(`/library/${item.libraryId}`, { replace: true })
     },
   })
-  const list = (episodes ?? []).filter((e) => filter === 'all' || !e.played)
-  // Play picks up an episode the person started, else the newest they haven't heard.
-  const next = episodes?.find((e) => !e.played && (e.positionMs ?? 0) > 0) ?? episodes?.find((e) => !e.played)
+  const filtered = (episodes ?? []).filter((e) => filter === 'all' || !e.played)
+  const list = order === 'oldest' ? [...filtered].reverse() : filtered
+  // Play picks up an episode the person started, else the newest they
+  // haven't heard (the oldest, listed oldest first).
+  const unplayed = order === 'oldest' ? [...(episodes ?? [])].reverse() : episodes
+  const next = episodes?.find((e) => !e.played && (e.positionMs ?? 0) > 0) ?? unplayed?.find((e) => !e.played)
   const playingThis = !!audio.book && audio.book.parentId === item.id && B.isEpisode(audio.book)
   const following = item.feed?.following
   const kids = !!me.data?.kidsLevel
@@ -65,7 +94,13 @@ export function PodcastPage({ item, episodes }: { item: ItemDetail; episodes?: I
           className="flex h-14 items-center gap-2 rounded-full bg-accent ps-5 pe-6 font-semibold text-on-accent shadow-lg transition hover:scale-105 hover:bg-accent-strong disabled:opacity-50"
         >
           {playingThis && audio.playing ? <Pause className="size-6 fill-current" /> : <Play className="size-6 fill-current" />}
-          {playingThis && audio.playing ? t('player.pause') : (next?.positionMs ?? 0) > 0 ? t('common:books.resume') : t('common:podcasts.playLatest')}
+          {playingThis && audio.playing
+            ? t('player.pause')
+            : (next?.positionMs ?? 0) > 0
+              ? t('common:books.resume')
+              : order === 'oldest'
+                ? t('common:podcasts.playOldest')
+                : t('common:podcasts.playLatest')}
         </button>
         <Button
           className="h-11 rounded-full"
@@ -113,8 +148,16 @@ export function PodcastPage({ item, episodes }: { item: ItemDetail; episodes?: I
 
       <section className="relative space-y-2">
         <div className="flex items-center gap-2">
-          <h2 className="text-lg font-semibold">{t('common:podcasts.episodesTitle')}</h2>
-          <div className="ms-auto flex gap-1" role="tablist">
+          <h2 className="text-lg font-semibold">{order === 'oldest' ? t('common:podcasts.episodes') : t('common:podcasts.episodesTitle')}</h2>
+          <button
+            onClick={() => setOrder(order === 'newest' ? 'oldest' : 'newest')}
+            className="ms-auto inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-sm text-muted hover:bg-text/5 hover:text-text"
+            title={t('common:podcasts.order')}
+          >
+            <ArrowDownUp className="size-4" />
+            {order === 'newest' ? t('common:podcasts.newestFirst') : t('common:podcasts.oldestFirst')}
+          </button>
+          <div className="flex gap-1" role="tablist">
             {(['all', 'unplayed'] as const).map((f) => (
               <button
                 key={f}

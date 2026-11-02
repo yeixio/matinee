@@ -333,6 +333,7 @@ func (s *Server) setFollow(w http.ResponseWriter, r *http.Request, follow bool) 
 type followedShow struct {
 	store.Item
 	Unplayed int `json:"unplayed"`
+	store.PodcastDownloads
 }
 
 // followedPodcasts lists the shows the person follows, the one with the
@@ -353,11 +354,49 @@ func (s *Server) followedPodcasts(w http.ResponseWriter, r *http.Request) {
 		s.serverError(w, err)
 		return
 	}
+	downloads, err := s.Store.FollowedDownloads(ctx, uid)
+	if err != nil {
+		s.serverError(w, err)
+		return
+	}
 	out := []followedShow{}
 	for _, sh := range shows {
-		out = append(out, followedShow{Item: sh, Unplayed: unplayed[sh.ID]})
+		out = append(out, followedShow{Item: sh, Unplayed: unplayed[sh.ID], PodcastDownloads: downloads[sh.ID]})
 	}
 	writeJSON(w, http.StatusOK, out)
+}
+
+// setPodcastDownloads changes whether the person's phones download a show's
+// new episodes by themselves, and how many of the newest they keep. It
+// follows the show too.
+func (s *Server) setPodcastDownloads(w http.ResponseWriter, r *http.Request) {
+	it, ok := s.loadPodcast(w, r)
+	if !ok {
+		return
+	}
+	var req store.PodcastDownloads
+	if err := readJSON(r, &req); err != nil || !store.ValidKeep(req.Keep) {
+		writeError(w, http.StatusBadRequest, "invalid request")
+		return
+	}
+	if err := s.Store.SetPodcastDownloads(r.Context(), currentUser(r).ID, it.ID, req); err != nil {
+		s.serverError(w, err)
+		return
+	}
+	writeJSON(w, http.StatusOK, req)
+}
+
+// autoDownloadEpisodes lists the episodes the person's phones should have
+// downloaded, from the shows they download by themselves (see
+// store.AutoDownloadEpisodes). Phones fetch the ones they lack, and let go
+// of episodes they fetched this way that are no longer listed.
+func (s *Server) autoDownloadEpisodes(w http.ResponseWriter, r *http.Request) {
+	eps, err := s.Store.AutoDownloadEpisodes(r.Context(), currentUser(r).ID)
+	if err != nil {
+		s.serverError(w, err)
+		return
+	}
+	writeJSON(w, http.StatusOK, eps)
 }
 
 // markPodcastPlayed marks every episode of a show played, or unplayed.
@@ -389,6 +428,8 @@ type podcastView struct {
 	Error       string `json:"error,omitempty"`
 	Following   bool   `json:"following"`
 	Unplayed    int    `json:"unplayed"`
+	// Downloads is what the person's phones keep of the show.
+	Downloads store.PodcastDownloads `json:"downloads"`
 }
 
 // addPodcastDetails fills in a show's or an episode's extras on its page.
@@ -411,6 +452,9 @@ func (s *Server) addPodcastDetails(ctx context.Context, u store.User, v *itemVie
 			return err
 		}
 		pv.Unplayed = unplayed[v.ID]
+		if pv.Downloads, err = s.Store.PodcastDownloadsOf(ctx, u.ID, v.ID); err != nil {
+			return err
+		}
 		v.Podcast = pv
 	case "podcastEpisode":
 		e, err := s.Store.EpisodeInfoOf(ctx, v.ID)

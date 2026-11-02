@@ -29,7 +29,13 @@ func (s *Server) itemNext(w http.ResponseWriter, r *http.Request) {
 	}
 	ctx, user := r.Context(), currentUser(r)
 	v := nextView{}
-	next, err := s.Store.NextEpisode(ctx, user.ID, it)
+	var next store.Item
+	var err error
+	if it.Kind == "podcastEpisode" {
+		next, err = s.Store.NextPodcastEpisode(ctx, user.ID, it, today().AddDate(0, 0, -newEpisodeDays).Unix())
+	} else {
+		next, err = s.Store.NextEpisode(ctx, user.ID, it)
+	}
 	switch {
 	case err == nil:
 		v.Next = &next
@@ -76,9 +82,12 @@ type playbackPrefs struct {
 	// SkipIntros jumps past an episode's intro by itself, instead of
 	// offering a Skip intro button. Off by default.
 	SkipIntros bool `json:"skipIntros"`
+	// PodcastsPlayOn plays the next podcast episode when one ends (see
+	// store.NextPodcastEpisode). On by default.
+	PodcastsPlayOn bool `json:"podcastsPlayOn"`
 }
 
-var defaultPlayback = playbackPrefs{AutoPlay: true}
+var defaultPlayback = playbackPrefs{AutoPlay: true, PodcastsPlayOn: true}
 
 func userPlaybackKey(userID int64) string { return "playback:user:" + strconv.FormatInt(userID, 10) }
 

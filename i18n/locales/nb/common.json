@@ -545,7 +545,20 @@
     "newEpisodesCount_one": "{{count}} ny episode",
     "imported_one": "{{count}} program lagt til.",
     "newEpisodesCount_other": "{{count}} nye episoder",
-    "imported_other": "{{count}} programmer lagt til."
+    "imported_other": "{{count}} programmer lagt til.",
+    "episodes": "Episoder",
+    "order": "Episoderekkefølge",
+    "newestFirst": "Nyeste først",
+    "oldestFirst": "Eldste først",
+    "playOldest": "Spill i rekkefølge",
+    "playOn": "Fortsett å spille podkaster",
+    "playOnHint": "Når en episode slutter, spilles neste episode av programmet som du ikke har hørt, ellers den nyeste episoden av et annet program du følger.",
+    "playingNext": "Neste: {{title}}",
+    "autoDownload": "Last ned nye episoder",
+    "autoDownloadHint": "Telefonene dine laster ned de nyeste episodene av dette programmet av seg selv og fjerner dem når du har hørt dem.",
+    "keepCount": "Episoder å beholde",
+    "removePlayed": "Fjern spilte episoder",
+    "removePlayedHint": "Nedlastede podkastepisoder fjernes fra denne telefonen når du har hørt dem."
   },
   "together": {
     "title": "Se sammen",

@@ -575,7 +575,20 @@
     "newEpisodesCount_many": "{{count}} de episodios nuevos",
     "imported_many": "Se añadieron {{count}} de programas.",
     "newEpisodesCount_other": "{{count}} episodios nuevos",
-    "imported_other": "Se añadieron {{count}} programas."
+    "imported_other": "Se añadieron {{count}} programas.",
+    "episodes": "Episodios",
+    "order": "Orden de los episodios",
+    "newestFirst": "Más recientes primero",
+    "oldestFirst": "Más antiguos primero",
+    "playOldest": "Reproducir en orden",
+    "playOn": "Seguir reproduciendo pódcasts",
+    "playOnHint": "Cuando termine un episodio, reproduce el siguiente del programa que no hayas escuchado o, si no hay, el episodio más reciente de otro programa que sigas.",
+    "playingNext": "A continuación: {{title}}",
+    "autoDownload": "Descargar episodios nuevos",
+    "autoDownloadHint": "Tus teléfonos descargan solos los episodios más recientes de este programa y los quitan cuando los hayas escuchado.",
+    "keepCount": "Episodios que conservar",
+    "removePlayed": "Quitar episodios escuchados",
+    "removePlayedHint": "Los episodios descargados se quitan de este teléfono cuando los hayas escuchado."
   },
   "together": {
     "title": "Ver juntos",

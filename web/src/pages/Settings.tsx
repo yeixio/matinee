@@ -904,6 +904,12 @@ function Playback() {
         !!prefs.skipIntros,
         { skipIntros: !prefs.skipIntros },
       )}
+      {toggle(
+        t('common:podcasts.playOn'),
+        t('common:podcasts.playOnHint'),
+        prefs.podcastsPlayOn !== false,
+        { podcastsPlayOn: prefs.podcastsPlayOn === false },
+      )}
     </section>
   )
 }
