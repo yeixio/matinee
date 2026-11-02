@@ -573,5 +573,42 @@
     "shareLink": "แชร์ลิงก์",
     "you": "(คุณ)",
     "settingsHint": "ดูกับเพื่อนด้วยรหัส"
+  },
+  "radio": {
+    "radio": "วิทยุ",
+    "live": "สด",
+    "noStations": "ยังไม่มีสถานีวิทยุ",
+    "noStationsHint": "ค้นหาสถานีด้านล่าง หรือเพิ่มสถานีด้วยที่อยู่สตรีม",
+    "find": "ค้นหาสถานี",
+    "findHint": "ค้นหาตามชื่อ หรือเลือกแนวเพลง",
+    "search": "ค้นหา",
+    "searchPlaceholder": "ชื่อสถานี",
+    "genres": "แนวเพลง",
+    "nothingFound": "ไม่พบสถานี",
+    "poweredBy": "ไดเรกทอรีสถานีจาก Radio Browser โครงการชุมชนที่ใช้งานฟรี",
+    "add": "เพิ่ม",
+    "added": "เพิ่มแล้ว",
+    "play": "เล่น {{name}}",
+    "rename": "เปลี่ยนชื่อ",
+    "renamePrompt": "ชื่อสถานี",
+    "remove": "นำออก",
+    "removeConfirm": "นำ {{name}} ออกจากคลังนี้ไหม",
+    "byAddress": "เพิ่มด้วยที่อยู่สตรีม",
+    "byAddressHint": "วางที่อยู่ของสตรีม Icecast หรือ SHOUTcast หรือเพลย์ลิสต์ .pls หรือ .m3u จากเว็บไซต์ของสถานี",
+    "streamAddress": "ที่อยู่สตรีม",
+    "nameOptional": "ชื่อ (ไม่บังคับ)",
+    "offAir": "{{name}} ไม่ตอบสนอง ลองอีกครั้งในอีกสักครู่",
+    "genre": {
+      "electronic": "อิเล็กทรอนิกส์",
+      "trance": "ทรานซ์",
+      "house": "เฮาส์",
+      "chillout": "ชิลเอาต์",
+      "pop": "ป๊อป",
+      "rock": "ร็อก",
+      "jazz": "แจ๊ส",
+      "classical": "คลาสสิก",
+      "hiphop": "ฮิปฮอป",
+      "news": "ข่าว"
+    }
   }
 }

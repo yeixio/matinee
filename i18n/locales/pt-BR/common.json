@@ -637,5 +637,42 @@
     "shareLink": "Compartilhar link",
     "you": "(você)",
     "settingsHint": "Assista com amigos usando um código"
+  },
+  "radio": {
+    "radio": "Rádio",
+    "live": "Ao vivo",
+    "noStations": "Ainda não há estações de rádio",
+    "noStationsHint": "Encontre estações abaixo ou adicione uma pelo endereço do stream.",
+    "find": "Encontrar estações",
+    "findHint": "Pesquise pelo nome ou escolha um gênero.",
+    "search": "Pesquisar",
+    "searchPlaceholder": "Nome da estação",
+    "genres": "Gêneros",
+    "nothingFound": "Nenhuma estação encontrada.",
+    "poweredBy": "Diretório de estações do Radio Browser, um projeto comunitário gratuito.",
+    "add": "Adicionar",
+    "added": "Adicionada",
+    "play": "Tocar {{name}}",
+    "rename": "Renomear",
+    "renamePrompt": "Nome da estação",
+    "remove": "Remover",
+    "removeConfirm": "Remover {{name}} desta biblioteca?",
+    "byAddress": "Adicionar pelo endereço do stream",
+    "byAddressHint": "Cole o endereço de um stream Icecast ou SHOUTcast, ou de uma playlist .pls ou .m3u do site da estação.",
+    "streamAddress": "Endereço do stream",
+    "nameOptional": "Nome (opcional)",
+    "offAir": "{{name}} não está respondendo. Tente de novo daqui a pouco.",
+    "genre": {
+      "electronic": "Eletrônica",
+      "trance": "Trance",
+      "house": "House",
+      "chillout": "Chillout",
+      "pop": "Pop",
+      "rock": "Rock",
+      "jazz": "Jazz",
+      "classical": "Clássica",
+      "hiphop": "Hip-hop",
+      "news": "Notícias"
+    }
   }
 }

@@ -573,5 +573,42 @@
     "shareLink": "分享链接",
     "you": "（你）",
     "settingsHint": "用代码和朋友一起看"
+  },
+  "radio": {
+    "radio": "电台",
+    "live": "直播",
+    "noStations": "还没有电台",
+    "noStationsHint": "在下方查找电台，或通过电台的串流地址添加。",
+    "find": "查找电台",
+    "findHint": "按名称搜索，或选择一种风格。",
+    "search": "搜索",
+    "searchPlaceholder": "电台名称",
+    "genres": "风格",
+    "nothingFound": "没有找到电台。",
+    "poweredBy": "电台目录来自免费社区项目 Radio Browser。",
+    "add": "添加",
+    "added": "已添加",
+    "play": "播放 {{name}}",
+    "rename": "重命名",
+    "renamePrompt": "电台名称",
+    "remove": "移除",
+    "removeConfirm": "要从此资料库移除 {{name}} 吗？",
+    "byAddress": "通过串流地址添加",
+    "byAddressHint": "粘贴 Icecast 或 SHOUTcast 串流的地址，或电台网站上 .pls 或 .m3u 播放列表的地址。",
+    "streamAddress": "串流地址",
+    "nameOptional": "名称（可选）",
+    "offAir": "{{name}} 没有响应。请稍后再试。",
+    "genre": {
+      "electronic": "电子",
+      "trance": "迷幻舞曲",
+      "house": "浩室",
+      "chillout": "Chillout",
+      "pop": "流行",
+      "rock": "摇滚",
+      "jazz": "爵士",
+      "classical": "古典",
+      "hiphop": "嘻哈",
+      "news": "新闻"
+    }
   }
 }

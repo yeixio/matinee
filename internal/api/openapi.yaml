@@ -1817,6 +1817,108 @@ paths:
             application/json:
               schema: { $ref: "#/components/schemas/PodcastDownloads" }
         "400": { $ref: "#/components/responses/Error" }
+  /libraries/{id}/stations:
+    get:
+      summary: A music library's radio stations
+      description: Stations are items of kind station. Play one with /items/{id}/file, a live stream with the song titles taken out, and ask /items/{id}/now what's on.
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      responses:
+        "200": { $ref: "#/components/responses/Items" }
+        "400": { $ref: "#/components/responses/Error" }
+        "404": { $ref: "#/components/responses/Error" }
+  /stations/directory:
+    get:
+      summary: Find radio stations in Radio Browser (not on kids profiles)
+      description: By name (`q`) or genre (`tag`), the most listened first. Stations that only stream as HLS are left out.
+      parameters:
+        - { name: q, in: query, schema: { type: string } }
+        - { name: tag, in: query, schema: { type: string }, examples: { trance: { value: trance } } }
+        - { name: library, in: query, description: A music library; its stations are marked with itemId., schema: { type: integer } }
+      responses:
+        "200":
+          description: Stations found.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name: { type: string }
+                    url: { type: string, description: The stream, to add with POST /stations. }
+                    homepage: { type: string }
+                    image: { type: string }
+                    tags: { type: array, items: { type: string } }
+                    country: { type: string, description: Two letters, such as GB. }
+                    codec: { type: string }
+                    bitrate: { type: integer, description: kbit/s }
+                    itemId: { type: integer, description: "The station in the library asked about, when it's added already." }
+        "400": { $ref: "#/components/responses/Error" }
+        "502": { $ref: "#/components/responses/Error" }
+  /stations:
+    post:
+      summary: Add a radio station to a music library (the household, not on kids profiles)
+      description: The stream is opened first to check it plays; a .pls or .m3u playlist is followed to its stream. The name defaults to what the station calls itself.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [libraryId, url]
+              properties:
+                libraryId: { type: integer }
+                url: { type: string }
+                name: { type: string }
+                image: { type: string, description: A logo's web address. }
+                homepage: { type: string }
+                tags: { type: array, items: { type: string } }
+      responses:
+        "201":
+          description: The station, an item of kind station.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Item" }
+        "400": { $ref: "#/components/responses/Error" }
+        "403": { $ref: "#/components/responses/Error" }
+        "409": { $ref: "#/components/responses/Error" }
+        "502": { $ref: "#/components/responses/Error" }
+  /stations/{id}:
+    put:
+      summary: Rename a radio station
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { type: object, required: [name], properties: { name: { type: string } } }
+      responses:
+        "200":
+          description: The renamed station.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Item" }
+        "400": { $ref: "#/components/responses/Error" }
+        "403": { $ref: "#/components/responses/Error" }
+    delete:
+      summary: Remove a radio station
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      responses:
+        "204": { description: Removed. }
+        "403": { $ref: "#/components/responses/Error" }
+        "404": { $ref: "#/components/responses/Error" }
+  /items/{id}/now:
+    get:
+      summary: What a radio station is playing
+      description: From the song titles the station sends while someone listens. Empty when it hasn't said in the last hour.
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      responses:
+        "200":
+          description: The song, as the station names it.
+          content:
+            application/json:
+              schema: { type: object, properties: { title: { type: string, examples: ["Above & Beyond - Sun & Moon"] }, at: { type: string, format: date-time } } }
+        "400": { $ref: "#/components/responses/Error" }
   /libraries/{id}/opml:
     get:
       summary: A podcast library's shows as an OPML file
@@ -3823,7 +3925,7 @@ components:
       type: object
       properties:
         library: { type: array, items: { type: integer }, description: Library ids; none means every library. }
-        kind: { type: array, items: { type: string, enum: [movie, show, season, episode, artist, album, track, author, book, part, podcast, podcastEpisode] }, description: Without it, libraries' top level is listed. }
+        kind: { type: array, items: { type: string, enum: [movie, show, season, episode, artist, album, track, author, book, part, podcast, podcastEpisode, station] }, description: "Without it, libraries' top level is listed (radio stations only by kind)." }
         q: { type: string, description: Words in the title. }
         genre: { type: array, items: { type: string } }
         notGenre: { type: array, items: { type: string } }
@@ -4573,7 +4675,7 @@ components:
         id: { type: integer }
         libraryId: { type: integer }
         parentId: { type: integer }
-        kind: { type: string, examples: [movie, show, season, episode, artist, album, track, author, book, part, podcast, podcastEpisode] }
+        kind: { type: string, examples: [movie, show, season, episode, artist, album, track, author, book, part, podcast, podcastEpisode, station] }
         title: { type: string }
         year: { type: integer }
         index: { type: integer, description: Season, episode or track number. }

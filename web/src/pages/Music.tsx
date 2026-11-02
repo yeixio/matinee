@@ -2,7 +2,7 @@ import { keepPreviousData, useQuery } from '@tanstack/react-query'
 import { ChevronLeft, Play, Shuffle } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { Link, useSearchParams } from 'react-router-dom'
-import { api, pendingRefetch, type Item, type Library, type RecordLabel } from '../api'
+import { api, pendingRefetch, type Item, type Library, type RecordLabel, type User } from '../api'
 import { Artwork } from '../components/Artwork'
 import { GridSkeleton } from '../components/Card'
 import { PlaylistCard, usePlaylists } from '../components/Playlists'
@@ -14,12 +14,13 @@ import { TrackMenu, Tracks } from '../components/Tracks'
 import { Button, EmptyState, Spinner } from '../components/ui'
 import type { ItemFilter, SortField } from '../filter'
 import { useAudio } from '../player/AudioPlayer'
+import { Radio, StationCard, useStations } from './Radio'
 
-type View = 'overview' | 'artists' | 'albums' | 'labels' | 'songs' | 'playlists'
-const views: View[] = ['overview', 'playlists', 'artists', 'albums', 'labels', 'songs']
+type View = 'overview' | 'artists' | 'albums' | 'labels' | 'songs' | 'playlists' | 'radio'
+const views: View[] = ['overview', 'playlists', 'artists', 'albums', 'labels', 'songs', 'radio']
 
 // How each view sorts, and the orders it offers.
-const sorts: Record<Exclude<View, 'overview' | 'playlists' | 'labels'>, SortField[]> = {
+const sorts: Record<Exclude<View, 'overview' | 'playlists' | 'labels' | 'radio'>, SortField[]> = {
   artists: ['title', 'added', 'lastPlayed'],
   albums: ['added', 'title', 'year', 'lastPlayed', 'myRating'],
   songs: ['title', 'added', 'lastPlayed', 'myRating'],
@@ -34,7 +35,13 @@ export default function Music({ lib }: { lib: Library }) {
   const view = (views.includes(params.get('view') as View) ? params.get('view') : 'overview') as View
   const audio = useAudio()
   const labels = useLabels(lib)
-  const shown = views.filter((v) => v !== 'labels' || !!labels.data?.length || view === 'labels')
+  const stations = useStations(lib)
+  const me = useQuery<User>({ queryKey: ['me'], queryFn: api.me, staleTime: Infinity })
+  // Radio shows once there are stations, or for the grown-ups who add them.
+  const canAddStations = !!me.data && !me.data.kidsLevel && !me.data.friend
+  const shown = views.filter(
+    (v) => (v !== 'labels' || !!labels.data?.length || view === 'labels') && (v !== 'radio' || !!stations.data?.length || canAddStations || view === 'radio'),
+  )
   const shuffleAll = async () => audio.play(await api.libraryItems(lib.id, { kind: ['track'] }), -1, { shuffle: true })
   const pick = (v: View) => setParams(v === 'overview' ? {} : { view: v }, { replace: true })
 
@@ -48,13 +55,15 @@ export default function Music({ lib }: { lib: Library }) {
           {t('common:music.shuffleAll')}
         </Button>
       </div>
-      <ViewTabs views={shown} view={view} label={(v) => t(`common:music.${v}`)} onPick={pick} />
+      <ViewTabs views={shown} view={view} label={(v) => (v === 'radio' ? t('common:radio.radio') : t(`common:music.${v}`))} onPick={pick} />
       {view === 'overview' ? (
         <Overview lib={lib} onMore={pick} />
       ) : view === 'playlists' ? (
         <PlaylistGrid />
       ) : view === 'labels' ? (
         <Labels lib={lib} />
+      ) : view === 'radio' ? (
+        <Radio lib={lib} />
       ) : (
         <All lib={lib} view={view} />
       )}
@@ -91,6 +100,7 @@ function Overview({ lib, onMore }: { lib: Library; onMore: (v: View) => void }) 
   const added = useMusic(lib, { kind: ['album'], sort: 'added', limit: 12 }, 'added')
   const artists = useMusic(lib, { kind: ['artist'], sort: 'lastPlayed', limit: 12 }, 'artists')
   const labels = useLabels(lib)
+  const stations = useStations(lib)
   const playlists = usePlaylists()
   if (added.isPending) return <GridSkeleton />
   if (!added.data?.length) {
@@ -141,6 +151,20 @@ function Overview({ lib, onMore }: { lib: Library; onMore: (v: View) => void }) 
             {artists.data.map((a) => (
               <div key={a.id} className="w-28 shrink-0 md:w-36">
                 <ArtistCard artist={a} />
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+      {!!stations.data?.length && (
+        <section>
+          <button onClick={() => onMore('radio')} className="mb-3 text-lg font-semibold tracking-tight hover:text-accent-strong">
+            {t('common:radio.radio')}
+          </button>
+          <div className="scrollbar-none -mx-4 flex gap-4 overflow-x-auto px-4 pb-2 md:-mx-8 md:px-8">
+            {stations.data.slice(0, 12).map((s) => (
+              <div key={s.id} className="w-32 shrink-0 md:w-40">
+                <StationCard station={s} />
               </div>
             ))}
           </div>
@@ -270,7 +294,7 @@ function LabelPage({ lib, name }: { lib: Library; name: string }) {
   )
 }
 
-function All({ lib, view }: { lib: Library; view: Exclude<View, 'overview' | 'playlists' | 'labels'> }) {
+function All({ lib, view }: { lib: Library; view: Exclude<View, 'overview' | 'playlists' | 'labels' | 'radio'> }) {
   const { t } = useTranslation()
   const [params, setParams] = useSearchParams()
   const sort = (sorts[view].includes(params.get('sort') as SortField) ? params.get('sort') : sorts[view][0]) as SortField

@@ -221,5 +221,12 @@
   "couldnt_start_playback_for_this_album": "kunne ikke starte avspillingen av albumet",
   "not_an_album": "ikke et album",
   "only_the_household_can_change_this": "bare husstanden kan endre dette",
-  "tracks_must_be_songs_on_one_album": "sporene må være sanger fra ett album"
+  "tracks_must_be_songs_on_one_album": "sporene må være sanger fra ett album",
+  "name_give_one_of_up_to_120_characters": "navn: oppgi et på opptil 120 tegn",
+  "not_a_music_library": "ikke et musikkbibliotek",
+  "not_a_radio_station": "ikke en radiostasjon",
+  "q_or_tag_is_required": "q eller tag må oppgis",
+  "the_station_couldnt_be_reached_check_the_address_and_try_again": "stasjonen kunne ikke nås. Sjekk adressen og prøv igjen.",
+  "the_station_couldnt_be_reached_reason": "stasjonen kunne ikke nås: {{reason}}",
+  "the_station_directory_isnt_answering_right_now": "stasjonskatalogen svarer ikke akkurat nå"
 }

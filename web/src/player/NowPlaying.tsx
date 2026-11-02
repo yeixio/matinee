@@ -8,7 +8,9 @@ import { Equalizer } from '../components/Tracks'
 import { clock } from '../format'
 import { useAudio, useAudioTime } from './AudioPlayer'
 import { LyricsView } from './Lyrics'
+import { LivePill } from './Live'
 import { Controls, Seek, VolumeControl } from './MusicBar'
+import { isStation, useStationNow } from './station'
 import { upNext } from './queue'
 import { Visualizer } from './Visualizer'
 
@@ -20,6 +22,8 @@ export function NowPlaying() {
   const s = useAudio()
   const { time, dur } = useAudioTime()
   const item = s.current!
+  const live = isStation(item)
+  const onAir = useStationNow(item, s.playing)
   // Phones show the cover, the queue or the words; wider screens show the
   // cover with the queue or the words.
   const [panel, setPanel] = useState<'queue' | 'lyrics'>()
@@ -71,6 +75,7 @@ export function NowPlaying() {
         </button>
         <button
           onClick={() => toggle('lyrics')}
+          hidden={live}
           aria-pressed={panel === 'lyrics'}
           className={`rounded-full p-2 hover:bg-text/10 ${panel === 'lyrics' ? 'text-accent' : 'text-muted'}`}
           aria-label={t('common:music.lyrics')}
@@ -81,6 +86,7 @@ export function NowPlaying() {
         {/* Wide screens show the queue whenever the words aren't. */}
         <button
           onClick={() => toggle('queue')}
+          hidden={live}
           aria-pressed={showQueue}
           className={`rounded-full p-2 hover:bg-text/10 lg:hidden ${showQueue ? 'text-accent' : 'text-muted'}`}
           aria-label={t('common:music.queue')}
@@ -95,19 +101,29 @@ export function NowPlaying() {
           <Artwork item={item} type="poster" className="aspect-square w-full shrink rounded-2xl shadow-2xl shadow-black/60 ring-1 ring-text/10" />
           <div className="min-w-0 space-y-1">
             <h2 className="truncate text-2xl font-semibold md:text-3xl">{item.title}</h2>
-            <p className="truncate text-muted">
-              {link(`/item/${item.artistId}`, item.artistId ? item.artist : undefined)}
-              {item.artist && item.album && ' · '}
-              {link(`/item/${item.parentId}`, item.parentId ? item.album : undefined)}
-            </p>
+            {live ? (
+              <p className="truncate text-muted">{onAir ?? (item.genres ?? []).join(' · ')}</p>
+            ) : (
+              <p className="truncate text-muted">
+                {link(`/item/${item.artistId}`, item.artistId ? item.artist : undefined)}
+                {item.artist && item.album && ' · '}
+                {link(`/item/${item.parentId}`, item.parentId ? item.album : undefined)}
+              </p>
+            )}
           </div>
-          <div className="space-y-1">
-            <Seek s={s} time={time} dur={dur} />
-            <div className="flex justify-between text-xs text-muted tabular-nums">
-              <span>{clock(time)}</span>
-              <span>-{clock(Math.max(0, dur - time))}</span>
+          {live ? (
+            <div className="flex justify-center">
+              <LivePill className="px-3 py-1 text-xs" />
             </div>
-          </div>
+          ) : (
+            <div className="space-y-1">
+              <Seek s={s} time={time} dur={dur} />
+              <div className="flex justify-between text-xs text-muted tabular-nums">
+                <span>{clock(time)}</span>
+                <span>-{clock(Math.max(0, dur - time))}</span>
+              </div>
+            </div>
+          )}
           <div className="flex justify-center">
             <Controls s={s} large />
           </div>
@@ -116,7 +132,7 @@ export function NowPlaying() {
           </div>
         </section>
 
-        <section className={`min-h-0 w-full max-w-md flex-col lg:flex lg:max-w-xl lg:flex-1 lg:pt-4 ${panel ? 'mx-auto flex' : 'hidden'}`}>
+        <section hidden={live} className={`min-h-0 w-full max-w-md flex-col lg:flex lg:max-w-xl lg:flex-1 lg:pt-4 ${panel ? 'mx-auto flex' : 'hidden'}`}>
           {panel === 'lyrics' ? <LyricsView /> : <Queue />}
         </section>
       </div>

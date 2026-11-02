@@ -573,5 +573,42 @@
     "shareLink": "Chia sẻ liên kết",
     "you": "(bạn)",
     "settingsHint": "Xem cùng bạn bè bằng mã"
+  },
+  "radio": {
+    "radio": "Radio",
+    "live": "Trực tiếp",
+    "noStations": "Chưa có đài phát thanh nào",
+    "noStationsHint": "Tìm đài bên dưới, hoặc thêm đài bằng địa chỉ luồng phát của đài.",
+    "find": "Tìm đài",
+    "findHint": "Tìm theo tên, hoặc chọn một thể loại.",
+    "search": "Tìm",
+    "searchPlaceholder": "Tên đài",
+    "genres": "Thể loại",
+    "nothingFound": "Không tìm thấy đài nào.",
+    "poweredBy": "Danh bạ đài từ Radio Browser, một dự án cộng đồng miễn phí.",
+    "add": "Thêm",
+    "added": "Đã thêm",
+    "play": "Phát {{name}}",
+    "rename": "Đổi tên",
+    "renamePrompt": "Tên đài",
+    "remove": "Xóa",
+    "removeConfirm": "Xóa {{name}} khỏi thư viện này?",
+    "byAddress": "Thêm bằng địa chỉ luồng phát",
+    "byAddressHint": "Dán địa chỉ của luồng Icecast hoặc SHOUTcast, hoặc danh sách phát .pls hay .m3u từ trang web của đài.",
+    "streamAddress": "Địa chỉ luồng phát",
+    "nameOptional": "Tên (không bắt buộc)",
+    "offAir": "{{name}} không phản hồi. Hãy thử lại sau ít phút.",
+    "genre": {
+      "electronic": "Điện tử",
+      "trance": "Trance",
+      "house": "House",
+      "chillout": "Chillout",
+      "pop": "Pop",
+      "rock": "Rock",
+      "jazz": "Jazz",
+      "classical": "Cổ điển",
+      "hiphop": "Hip hop",
+      "news": "Tin tức"
+    }
   }
 }

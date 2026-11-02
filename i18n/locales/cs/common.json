@@ -669,5 +669,42 @@
     "shareLink": "Sdílet odkaz",
     "you": "(vy)",
     "settingsHint": "Připojte se k přátelům pomocí kódu"
+  },
+  "radio": {
+    "radio": "Rádio",
+    "live": "Živě",
+    "noStations": "Zatím žádné rozhlasové stanice",
+    "noStationsHint": "Najděte stanice níže, nebo přidejte stanici podle adresy jejího streamu.",
+    "find": "Najít stanice",
+    "findHint": "Hledejte podle názvu, nebo vyberte žánr.",
+    "search": "Hledat",
+    "searchPlaceholder": "Název stanice",
+    "genres": "Žánry",
+    "nothingFound": "Žádné stanice nenalezeny.",
+    "poweredBy": "Adresář stanic od Radio Browser, bezplatného komunitního projektu.",
+    "add": "Přidat",
+    "added": "Přidáno",
+    "play": "Přehrát {{name}}",
+    "rename": "Přejmenovat",
+    "renamePrompt": "Název stanice",
+    "remove": "Odebrat",
+    "removeConfirm": "Odebrat {{name}} z této knihovny?",
+    "byAddress": "Přidat podle adresy streamu",
+    "byAddressHint": "Vložte adresu streamu Icecast nebo SHOUTcast, nebo playlistu .pls či .m3u z webu stanice.",
+    "streamAddress": "Adresa streamu",
+    "nameOptional": "Název (nepovinné)",
+    "offAir": "{{name}} neodpovídá. Zkuste to za chvíli znovu.",
+    "genre": {
+      "electronic": "Elektronická",
+      "trance": "Trance",
+      "house": "House",
+      "chillout": "Chillout",
+      "pop": "Pop",
+      "rock": "Rock",
+      "jazz": "Jazz",
+      "classical": "Klasická",
+      "hiphop": "Hip hop",
+      "news": "Zprávy"
+    }
   }
 }

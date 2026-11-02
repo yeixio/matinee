@@ -221,5 +221,12 @@
   "couldnt_start_playback_for_this_album": "bu albümün oynatılması başlatılamadı",
   "not_an_album": "albüm değil",
   "only_the_household_can_change_this": "bunu yalnızca hane değiştirebilir",
-  "tracks_must_be_songs_on_one_album": "parçalar aynı albümden şarkılar olmalı"
+  "tracks_must_be_songs_on_one_album": "parçalar aynı albümden şarkılar olmalı",
+  "name_give_one_of_up_to_120_characters": "ad: en fazla 120 karakter girin",
+  "not_a_music_library": "müzik kitaplığı değil",
+  "not_a_radio_station": "radyo istasyonu değil",
+  "q_or_tag_is_required": "q veya tag gerekli",
+  "the_station_couldnt_be_reached_check_the_address_and_try_again": "istasyona ulaşılamadı. Adresi kontrol edip yeniden deneyin.",
+  "the_station_couldnt_be_reached_reason": "istasyona ulaşılamadı: {{reason}}",
+  "the_station_directory_isnt_answering_right_now": "istasyon dizini şu anda yanıt vermiyor"
 }

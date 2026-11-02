@@ -84,6 +84,7 @@ func TestMigrateFromVersion1(t *testing.T) {
 		"DROP INDEX podcast_episodes_published",
 		"DROP TABLE podcast_episodes",
 		"DROP TABLE podcasts",
+		"ALTER TABLE items DROP COLUMN stream_url",
 		"DROP INDEX items_label",
 		"ALTER TABLE items DROP COLUMN label",
 		"ALTER TABLE items DROP COLUMN label_read",

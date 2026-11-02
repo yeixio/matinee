@@ -573,5 +573,42 @@
     "shareLink": "Bagikan tautan",
     "you": "(kamu)",
     "settingsHint": "Ikut menonton bersama teman dengan kode"
+  },
+  "radio": {
+    "radio": "Radio",
+    "live": "Langsung",
+    "noStations": "Belum ada stasiun radio",
+    "noStationsHint": "Cari stasiun di bawah, atau tambahkan lewat alamat streaming-nya.",
+    "find": "Cari stasiun",
+    "findHint": "Cari berdasarkan nama, atau pilih genre.",
+    "search": "Cari",
+    "searchPlaceholder": "Nama stasiun",
+    "genres": "Genre",
+    "nothingFound": "Tidak ada stasiun ditemukan.",
+    "poweredBy": "Direktori stasiun dari Radio Browser, proyek komunitas gratis.",
+    "add": "Tambah",
+    "added": "Ditambahkan",
+    "play": "Putar {{name}}",
+    "rename": "Ganti nama",
+    "renamePrompt": "Nama stasiun",
+    "remove": "Hapus",
+    "removeConfirm": "Hapus {{name}} dari perpustakaan ini?",
+    "byAddress": "Tambah lewat alamat streaming",
+    "byAddressHint": "Tempel alamat streaming Icecast atau SHOUTcast, atau playlist .pls atau .m3u dari situs web stasiun.",
+    "streamAddress": "Alamat streaming",
+    "nameOptional": "Nama (opsional)",
+    "offAir": "{{name}} tidak merespons. Coba lagi sebentar lagi.",
+    "genre": {
+      "electronic": "Elektronik",
+      "trance": "Trance",
+      "house": "House",
+      "chillout": "Chillout",
+      "pop": "Pop",
+      "rock": "Rock",
+      "jazz": "Jazz",
+      "classical": "Klasik",
+      "hiphop": "Hip hop",
+      "news": "Berita"
+    }
   }
 }

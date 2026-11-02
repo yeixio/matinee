@@ -15,6 +15,7 @@ import { NowPlaying } from './NowPlaying'
 import { health, onRestarting, outcome, restarting, waitForServer, type Health, type Waiting } from './reconnect'
 import { Away, Toast } from './Away'
 import { sleepTimer, sleepVolume, useSleep } from './sleep'
+import { isStation, useStationNow } from './station'
 
 export type AudioState = {
   queue: Q.Queue
@@ -60,6 +61,8 @@ export type AudioState = {
   move: (from: number, to: number) => void
   clearUpNext: () => void
   toggle: () => void
+  // Plays after a pause; a radio station starts again from what's on now.
+  resume: () => void
   pause: () => void
   next: () => void
   prev: () => void
@@ -213,6 +216,8 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
   // The last place the song got to, on its own clock.
   const lastTime = useRef(0)
   const recoverRef = useRef<(cause: Cause) => void>(undefined)
+  // Tries in a row at getting a radio station back.
+  const stationTries = useRef(0)
   // An album playing as one stream without gaps (see gapless.ts), the
   // song playing on its clock, and the song the stream just moved on to by
   // itself, which needs no loading.
@@ -237,8 +242,18 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
     // The song and the ones after it from an album without gaps: one stream.
     const joined = bookRef.current ? [] : G.runFrom(queueRef.current)
     const gapless = joined.length > 1 && joined[0].item.id === item.id
-    viaHlsNow.current = viaHls || gapless
-    if (!viaHls && !gapless) {
+    const live = isStation(item)
+    viaHlsNow.current = !live && (viaHls || gapless)
+    if (live) {
+      // Each start is a fresh connection, from what's on now. A station
+      // waiting paused (after a reload) connects only once it plays.
+      if (!autoplay) {
+        el.removeAttribute('src')
+        el.load()
+        return
+      }
+      el.src = `${fileUrl(item.id)}?start=${Date.now()}`
+    } else if (!viaHls && !gapless) {
       el.src = fileUrl(item.id)
     } else {
       let url: string
@@ -282,7 +297,7 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
     const rate = bookRef.current ? speedRef.current : 1
     el.defaultPlaybackRate = rate
     el.playbackRate = rate
-    if (at && !viaHlsNow.current) el.currentTime = at
+    if (at && !viaHlsNow.current && !live) el.currentTime = at
     if (autoplay) el.play().catch(() => setPlaying(false))
   }, [])
 
@@ -345,7 +360,8 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
       // A track that failed to load keeps the place it was to start from.
       const wanted = resumeAt.current
       const at = wanted?.time ?? (el.currentTime ? songTime(el, clock.current).time : lastTime.current)
-      const play = cause === 'retry' || (wanted?.play ?? (!el.paused || playingRef.current))
+      // A station that ended by itself was playing (an ended element is paused).
+      const play = cause === 'retry' || (wanted?.play ?? (!el.paused || playingRef.current || (isStation(item) && cause === 'stall')))
       const resume = (viaHls = viaHlsNow.current) => {
         resumeAt.current = { time: at, play }
         load(item, viaHls)
@@ -360,6 +376,20 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
         if (ctl.signal.aborted) return
         if (now && now.state !== 'restarting' && outcome(server.current, now) === 'same') {
           server.current = now
+          if (isStation(item)) {
+            // The station dropped or isn't answering: try it a few times,
+            // a little longer apart, then say so.
+            const tries = ++stationTries.current
+            if (tries > 3) {
+              stationTries.current = 0
+              el.pause()
+              note(t('common:radio.offAir', { name: item.title }), 6000)
+              return
+            }
+            await new Promise((ok) => window.setTimeout(ok, 1500 * tries))
+            if (!ctl.signal.aborted && Q.current(queueRef.current)?.id === item.id) resume()
+            return
+          }
           if (cause === 'error' && !viaHlsNow.current) resume(true)
           else if (cause !== 'error') resume()
           return
@@ -401,8 +431,13 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
       if (!audio.current?.paused) recover('stall')
     }, 10_000)
   }
-  const onPlaying = () => window.clearTimeout(stallTimer.current)
+  const onPlaying = () => {
+    window.clearTimeout(stallTimer.current)
+    stationTries.current = 0
+  }
   useEffect(() => () => window.clearTimeout(stallTimer.current), [])
+  const letGo = useRef<number>(undefined)
+  useEffect(() => () => window.clearTimeout(letGo.current), [])
 
   // Heads-up as soon as the server says it's restarting; what's buffered
   // often carries the song through.
@@ -420,7 +455,7 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
     const el = audio.current
     const e = queueRef.current.entries[queueRef.current.pos]
     // A book's parts aren't counted one by one: the book keeps its place (see below).
-    if (!el || !e || reported.current.has(e.key) || bookRef.current) return
+    if (!el || !e || reported.current.has(e.key) || bookRef.current || isStation(e.item)) return
     const { time, dur } = songTime(el, clock.current)
     if (ended || el.ended || (dur > 0 && time > dur / 2)) {
       reported.current.add(e.key)
@@ -630,6 +665,16 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
         await playBook(ep.id, positionMs !== undefined ? positionMs / 1000 : undefined, ep)
         return
       }
+      if (isStation(item)) {
+        leaveBook()
+        markPlayed()
+        resumeAt.current = undefined
+        stationTries.current = 0
+        // The same station again starts it over, from what's on now.
+        if (Q.current(queueRef.current)?.id === item.id) load(item)
+        else setQueue((q) => ({ ...Q.start(q, [item], 0, false), repeat: 'off' }))
+        return
+      }
       if (!musicKinds.includes(item.kind)) {
         navigate(watchPath(item.id, positionMs))
         return
@@ -640,7 +685,7 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
       resumeAt.current = positionMs ? { time: positionMs / 1000, play: true } : undefined
       setQueue((q) => Q.start(q, tracks, at, false))
     },
-    [navigate, playBook, leaveBook],
+    [navigate, playBook, leaveBook, markPlayed, load],
   )
   playItemRef.current = playItem
 
@@ -733,7 +778,7 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
     // mean starting the stream again from there.
     const seek = (sec: number) => {
       const a = el()
-      if (!a) return
+      if (!a || isStation(current)) return
       const r = run.current
       if (!r) {
         a.currentTime = sec
@@ -751,6 +796,16 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
     const now = () => {
       const a = el()
       return a ? songTime(a, clock.current).time : 0
+    }
+    // A station that was paused would play what it kept from before:
+    // start it again instead.
+    const resume = () => {
+      const a = el()
+      if (!a || !current) return
+      if (isStation(current)) {
+        stationTries.current = 0
+        load(current)
+      } else a.play().catch(() => {})
     }
     return {
       queue,
@@ -809,9 +864,10 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
       toggle: () => {
         const a = el()
         if (!a || !current) return
-        if (a.paused) a.play().catch(() => {})
+        if (a.paused) resume()
         else a.pause()
       },
+      resume,
       pause: () => el()?.pause(),
       next: () => {
         if (!book) return advance(false)
@@ -856,8 +912,21 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
       <audio
         ref={audio}
         onPlay={() => setPlaying(true)}
-        onPause={() => setPlaying(false)}
-        onEnded={() => advance(true)}
+        onPause={() => {
+          setPlaying(false)
+          // A paused station lets go of its stream after a while; playing
+          // again connects afresh (see resume).
+          window.clearTimeout(letGo.current)
+          if (isStation(Q.current(queueRef.current)))
+            letGo.current = window.setTimeout(() => {
+              const el = audio.current
+              if (el?.paused && isStation(Q.current(queueRef.current))) {
+                el.removeAttribute('src')
+                el.load()
+              }
+            }, 30_000)
+        }}
+        onEnded={() => (isStation(Q.current(queueRef.current)) ? recover('stall') : advance(true))}
         onDurationChange={(e) => {
           // Feeds often leave an episode's length out, or get it wrong.
           const b = bookRef.current
@@ -892,11 +961,12 @@ function useMediaSession(s: AudioState) {
   ref.current = s
   const ms = typeof navigator !== 'undefined' && 'mediaSession' in navigator ? navigator.mediaSession : undefined
   const item = s.current
+  const onAir = useStationNow(item, s.playing)
 
   useEffect(() => {
     if (!ms) return
     const handlers: [MediaSessionAction, MediaSessionActionHandler][] = [
-      ['play', () => ref.current.audio.current?.play().catch(() => {})],
+      ['play', () => ref.current.resume()],
       ['pause', () => ref.current.pause()],
       ['previoustrack', () => ref.current.prev()],
       ['nexttrack', () => ref.current.next()],
@@ -932,8 +1002,10 @@ function useMediaSession(s: AudioState) {
     const b = s.book
     ms.metadata = b
       ? new MediaMetadata({ title: b.title, artist: b.author ?? '', album: b.podcast ?? b.series ?? '', artwork: [{ src: art }] })
-      : new MediaMetadata({ title: item.title, artist: item.artist ?? '', album: item.album ?? '', artwork: [{ src: art }] })
-  }, [ms, item, s.book])
+      : isStation(item)
+        ? new MediaMetadata({ title: onAir ?? item.title, artist: onAir ? item.title : '', artwork: [{ src: art }] })
+        : new MediaMetadata({ title: item.title, artist: item.artist ?? '', album: item.album ?? '', artwork: [{ src: art }] })
+  }, [ms, item, s.book, onAir])
 
   useEffect(() => {
     if (!ms) return
@@ -1006,7 +1078,7 @@ function useRemote(s: AudioState) {
             if (c.itemId) api.item(c.itemId).then((it) => st.playItem(it, c.positionMs)).catch(() => {})
             break
           case 'play':
-            el?.play().catch(() => {})
+            if (el?.paused) st.resume()
             break
           case 'pause':
             st.pause()

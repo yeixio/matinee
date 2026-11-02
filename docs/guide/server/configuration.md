@@ -60,7 +60,7 @@ Most of Matinee is set up in the web player under **Settings**. A few things abo
 | `MATINEE_OPENLIBRARY` | `true` | Look up audiobook covers and author photos on Open Library. Set `false` to use only local artwork |
 <!-- /since -->
 <!-- since: v0.1.7 -->
-| `MATINEE_PODCASTS_HOME_NETWORK` | `false` | Let [podcast](/docs/watching/podcasts/) feeds and episodes come from addresses on the home network too, for shows you host yourself |
+| `MATINEE_PODCASTS_HOME_NETWORK` | `false` | Let [podcast](/docs/watching/podcasts/) feeds and episodes, and [radio stations](/docs/watching/music/#radio-stations), come from addresses on the home network too, for shows and streams you host yourself |
 <!-- /since -->
 | `MATINEE_WIKIDATA` | `true` | Look up awards on Wikidata. Set `false` to skip awards |
 | `MATINEE_SCAN_INTERVAL` | `15m` | How often libraries are rescanned in full; `0` turns it off ([more](/docs/server/new-files/)) |

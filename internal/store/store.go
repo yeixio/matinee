@@ -522,6 +522,9 @@ var migrations = []string{
 	"ALTER TABLE items ADD COLUMN label TEXT",
 	"ALTER TABLE items ADD COLUMN label_read INTEGER NOT NULL DEFAULT 0",
 	"CREATE INDEX items_label ON items(library_id, label)",
+	// 87: a radio station's stream; stations are items of kind station at
+	// the top of a music library, with no file (see stations.go).
+	"ALTER TABLE items ADD COLUMN stream_url TEXT",
 }
 
 func now() int64 { return time.Now().Unix() }

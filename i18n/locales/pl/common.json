@@ -669,5 +669,42 @@
     "shareLink": "Udostępnij link",
     "you": "(Ty)",
     "settingsHint": "Dołącz do znajomych za pomocą kodu"
+  },
+  "radio": {
+    "radio": "Radio",
+    "live": "Na żywo",
+    "noStations": "Nie ma jeszcze stacji radiowych",
+    "noStationsHint": "Znajdź stacje poniżej albo dodaj stację po adresie jej strumienia.",
+    "find": "Znajdź stacje",
+    "findHint": "Szukaj po nazwie albo wybierz gatunek.",
+    "search": "Szukaj",
+    "searchPlaceholder": "Nazwa stacji",
+    "genres": "Gatunki",
+    "nothingFound": "Nie znaleziono stacji.",
+    "poweredBy": "Katalog stacji z Radio Browser, darmowego projektu społeczności.",
+    "add": "Dodaj",
+    "added": "Dodano",
+    "play": "Odtwórz {{name}}",
+    "rename": "Zmień nazwę",
+    "renamePrompt": "Nazwa stacji",
+    "remove": "Usuń",
+    "removeConfirm": "Usunąć {{name}} z tej biblioteki?",
+    "byAddress": "Dodaj po adresie strumienia",
+    "byAddressHint": "Wklej adres strumienia Icecast lub SHOUTcast albo playlisty .pls lub .m3u ze strony stacji.",
+    "streamAddress": "Adres strumienia",
+    "nameOptional": "Nazwa (opcjonalnie)",
+    "offAir": "{{name}} nie odpowiada. Spróbuj ponownie za chwilę.",
+    "genre": {
+      "electronic": "Elektroniczna",
+      "trance": "Trance",
+      "house": "House",
+      "chillout": "Chillout",
+      "pop": "Pop",
+      "rock": "Rock",
+      "jazz": "Jazz",
+      "classical": "Klasyczna",
+      "hiphop": "Hip-hop",
+      "news": "Wiadomości"
+    }
   }
 }
