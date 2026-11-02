@@ -221,5 +221,12 @@
   "couldnt_start_playback_for_this_album": "اس البم کا پلے بیک شروع نہیں ہو سکا",
   "not_an_album": "یہ البم نہیں ہے",
   "only_the_household_can_change_this": "صرف گھر والے اسے بدل سکتے ہیں",
-  "tracks_must_be_songs_on_one_album": "ٹریکس ایک ہی البم کے گانے ہونے چاہئیں"
+  "tracks_must_be_songs_on_one_album": "ٹریکس ایک ہی البم کے گانے ہونے چاہئیں",
+  "name_give_one_of_up_to_120_characters": "نام: زیادہ سے زیادہ 120 حروف درج کریں",
+  "not_a_music_library": "یہ موسیقی کی لائبریری نہیں ہے",
+  "not_a_radio_station": "یہ ریڈیو اسٹیشن نہیں ہے",
+  "q_or_tag_is_required": "q یا tag ضروری ہے",
+  "the_station_couldnt_be_reached_check_the_address_and_try_again": "اسٹیشن تک رسائی نہیں ہو سکی۔ پتہ چیک کریں اور دوبارہ کوشش کریں۔",
+  "the_station_couldnt_be_reached_reason": "اسٹیشن تک رسائی نہیں ہو سکی: {{reason}}",
+  "the_station_directory_isnt_answering_right_now": "اسٹیشن ڈائریکٹری ابھی جواب نہیں دے رہی"
 }

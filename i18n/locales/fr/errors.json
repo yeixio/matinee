@@ -221,5 +221,12 @@
   "couldnt_start_playback_for_this_album": "impossible de lancer la lecture de cet album",
   "not_an_album": "ce n’est pas un album",
   "only_the_household_can_change_this": "seul le foyer peut modifier ceci",
-  "tracks_must_be_songs_on_one_album": "les pistes doivent être des morceaux d’un même album"
+  "tracks_must_be_songs_on_one_album": "les pistes doivent être des morceaux d’un même album",
+  "name_give_one_of_up_to_120_characters": "nom : indiquez-en un de 120 caractères maximum",
+  "not_a_music_library": "ce n’est pas une bibliothèque musicale",
+  "not_a_radio_station": "ce n’est pas une station de radio",
+  "q_or_tag_is_required": "q ou tag est requis",
+  "the_station_couldnt_be_reached_check_the_address_and_try_again": "impossible de joindre la station. Vérifiez l’adresse et réessayez.",
+  "the_station_couldnt_be_reached_reason": "impossible de joindre la station : {{reason}}",
+  "the_station_directory_isnt_answering_right_now": "l’annuaire des stations ne répond pas pour le moment"
 }

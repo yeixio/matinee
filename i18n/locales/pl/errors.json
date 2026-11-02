@@ -221,5 +221,12 @@
   "couldnt_start_playback_for_this_album": "nie udało się rozpocząć odtwarzania tego albumu",
   "not_an_album": "to nie jest album",
   "only_the_household_can_change_this": "tylko domownicy mogą to zmienić",
-  "tracks_must_be_songs_on_one_album": "utwory muszą pochodzić z jednego albumu"
+  "tracks_must_be_songs_on_one_album": "utwory muszą pochodzić z jednego albumu",
+  "name_give_one_of_up_to_120_characters": "nazwa: podaj maksymalnie 120 znaków",
+  "not_a_music_library": "to nie jest biblioteka muzyczna",
+  "not_a_radio_station": "to nie jest stacja radiowa",
+  "q_or_tag_is_required": "wymagane jest q lub tag",
+  "the_station_couldnt_be_reached_check_the_address_and_try_again": "nie udało się połączyć ze stacją. Sprawdź adres i spróbuj ponownie.",
+  "the_station_couldnt_be_reached_reason": "nie udało się połączyć ze stacją: {{reason}}",
+  "the_station_directory_isnt_answering_right_now": "katalog stacji teraz nie odpowiada"
 }

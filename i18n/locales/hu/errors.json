@@ -221,5 +221,12 @@
   "couldnt_start_playback_for_this_album": "nem sikerült elindítani az album lejátszását",
   "not_an_album": "nem album",
   "only_the_household_can_change_this": "ezt csak a háztartás módosíthatja",
-  "tracks_must_be_songs_on_one_album": "a számoknak egy albumról kell lenniük"
+  "tracks_must_be_songs_on_one_album": "a számoknak egy albumról kell lenniük",
+  "name_give_one_of_up_to_120_characters": "név: legfeljebb 120 karaktert adj meg",
+  "not_a_music_library": "nem zenei könyvtár",
+  "not_a_radio_station": "nem rádióállomás",
+  "q_or_tag_is_required": "q vagy tag megadása kötelező",
+  "the_station_couldnt_be_reached_check_the_address_and_try_again": "az állomás nem érhető el. Ellenőrizd a címet, és próbáld újra.",
+  "the_station_couldnt_be_reached_reason": "az állomás nem érhető el: {{reason}}",
+  "the_station_directory_isnt_answering_right_now": "az állomáskönyvtár most nem válaszol"
 }

@@ -221,5 +221,12 @@
   "couldnt_start_playback_for_this_album": "tidak dapat memulai pemutaran album ini",
   "not_an_album": "bukan album",
   "only_the_household_can_change_this": "hanya anggota rumah yang dapat mengubah ini",
-  "tracks_must_be_songs_on_one_album": "trek harus berupa lagu dari satu album"
+  "tracks_must_be_songs_on_one_album": "trek harus berupa lagu dari satu album",
+  "name_give_one_of_up_to_120_characters": "nama: isi maksimal 120 karakter",
+  "not_a_music_library": "bukan perpustakaan musik",
+  "not_a_radio_station": "bukan stasiun radio",
+  "q_or_tag_is_required": "q atau tag wajib diisi",
+  "the_station_couldnt_be_reached_check_the_address_and_try_again": "stasiun tidak dapat dijangkau. Periksa alamatnya lalu coba lagi.",
+  "the_station_couldnt_be_reached_reason": "stasiun tidak dapat dijangkau: {{reason}}",
+  "the_station_directory_isnt_answering_right_now": "direktori stasiun sedang tidak merespons"
 }

@@ -221,5 +221,12 @@
   "couldnt_start_playback_for_this_album": "이 앨범을 재생할 수 없습니다",
   "not_an_album": "앨범이 아닙니다",
   "only_the_household_can_change_this": "가족 구성원만 변경할 수 있습니다",
-  "tracks_must_be_songs_on_one_album": "트랙은 한 앨범의 곡이어야 합니다"
+  "tracks_must_be_songs_on_one_album": "트랙은 한 앨범의 곡이어야 합니다",
+  "name_give_one_of_up_to_120_characters": "이름: 120자 이내로 입력하세요",
+  "not_a_music_library": "음악 보관함이 아닙니다",
+  "not_a_radio_station": "라디오 방송국이 아닙니다",
+  "q_or_tag_is_required": "q 또는 tag가 필요합니다",
+  "the_station_couldnt_be_reached_check_the_address_and_try_again": "방송국에 연결할 수 없습니다. 주소를 확인하고 다시 시도하세요.",
+  "the_station_couldnt_be_reached_reason": "방송국에 연결할 수 없습니다: {{reason}}",
+  "the_station_directory_isnt_answering_right_now": "방송국 디렉터리가 지금 응답하지 않습니다"
 }

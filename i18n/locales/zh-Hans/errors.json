@@ -221,5 +221,12 @@
   "couldnt_start_playback_for_this_album": "无法开始播放此专辑",
   "not_an_album": "不是专辑",
   "only_the_household_can_change_this": "只有家庭成员可以更改",
-  "tracks_must_be_songs_on_one_album": "曲目必须来自同一张专辑"
+  "tracks_must_be_songs_on_one_album": "曲目必须来自同一张专辑",
+  "name_give_one_of_up_to_120_characters": "名称：最多 120 个字符",
+  "not_a_music_library": "不是音乐资料库",
+  "not_a_radio_station": "不是电台",
+  "q_or_tag_is_required": "需要 q 或 tag",
+  "the_station_couldnt_be_reached_check_the_address_and_try_again": "无法连接到电台。请检查地址后重试。",
+  "the_station_couldnt_be_reached_reason": "无法连接到电台：{{reason}}",
+  "the_station_directory_isnt_answering_right_now": "电台目录暂时没有响应"
 }

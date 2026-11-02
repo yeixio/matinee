@@ -221,5 +221,12 @@
   "couldnt_start_playback_for_this_album": "इस एल्बम का प्लेबैक शुरू नहीं हो सका",
   "not_an_album": "यह एल्बम नहीं है",
   "only_the_household_can_change_this": "इसे केवल घर के सदस्य बदल सकते हैं",
-  "tracks_must_be_songs_on_one_album": "ट्रैक एक ही एल्बम के गाने होने चाहिए"
+  "tracks_must_be_songs_on_one_album": "ट्रैक एक ही एल्बम के गाने होने चाहिए",
+  "name_give_one_of_up_to_120_characters": "नाम: अधिकतम 120 अक्षरों का नाम दें",
+  "not_a_music_library": "यह संगीत लाइब्रेरी नहीं है",
+  "not_a_radio_station": "यह रेडियो स्टेशन नहीं है",
+  "q_or_tag_is_required": "q या tag ज़रूरी है",
+  "the_station_couldnt_be_reached_check_the_address_and_try_again": "स्टेशन तक नहीं पहुँचा जा सका। पता जाँचें और फिर से कोशिश करें।",
+  "the_station_couldnt_be_reached_reason": "स्टेशन तक नहीं पहुँचा जा सका: {{reason}}",
+  "the_station_directory_isnt_answering_right_now": "स्टेशन निर्देशिका अभी जवाब नहीं दे रही है"
 }

@@ -221,5 +221,12 @@
   "couldnt_start_playback_for_this_album": "die Wiedergabe dieses Albums konnte nicht gestartet werden",
   "not_an_album": "kein Album",
   "only_the_household_can_change_this": "das kann nur der Haushalt ändern",
-  "tracks_must_be_songs_on_one_album": "die Titel müssen Songs eines Albums sein"
+  "tracks_must_be_songs_on_one_album": "die Titel müssen Songs eines Albums sein",
+  "name_give_one_of_up_to_120_characters": "Name: höchstens 120 Zeichen angeben",
+  "not_a_music_library": "keine Musikbibliothek",
+  "not_a_radio_station": "kein Radiosender",
+  "q_or_tag_is_required": "q oder tag ist erforderlich",
+  "the_station_couldnt_be_reached_check_the_address_and_try_again": "der Sender ist nicht erreichbar. Prüfe die Adresse und versuche es erneut.",
+  "the_station_couldnt_be_reached_reason": "der Sender ist nicht erreichbar: {{reason}}",
+  "the_station_directory_isnt_answering_right_now": "das Senderverzeichnis antwortet gerade nicht"
 }

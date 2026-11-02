@@ -221,5 +221,12 @@
   "couldnt_start_playback_for_this_album": "kunde inte starta uppspelningen av albumet",
   "not_an_album": "inte ett album",
   "only_the_household_can_change_this": "bara hushållet kan ändra detta",
-  "tracks_must_be_songs_on_one_album": "spåren måste vara låtar från ett album"
+  "tracks_must_be_songs_on_one_album": "spåren måste vara låtar från ett album",
+  "name_give_one_of_up_to_120_characters": "namn: ange ett på högst 120 tecken",
+  "not_a_music_library": "inte ett musikbibliotek",
+  "not_a_radio_station": "inte en radiostation",
+  "q_or_tag_is_required": "q eller tag krävs",
+  "the_station_couldnt_be_reached_check_the_address_and_try_again": "det gick inte att nå stationen. Kontrollera adressen och försök igen.",
+  "the_station_couldnt_be_reached_reason": "det gick inte att nå stationen: {{reason}}",
+  "the_station_directory_isnt_answering_right_now": "stationskatalogen svarar inte just nu"
 }

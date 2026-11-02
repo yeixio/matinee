@@ -221,5 +221,12 @@
   "couldnt_start_playback_for_this_album": "không thể bắt đầu phát album này",
   "not_an_album": "không phải album",
   "only_the_household_can_change_this": "chỉ gia đình mới có thể thay đổi",
-  "tracks_must_be_songs_on_one_album": "các bản nhạc phải thuộc cùng một album"
+  "tracks_must_be_songs_on_one_album": "các bản nhạc phải thuộc cùng một album",
+  "name_give_one_of_up_to_120_characters": "tên: nhập tối đa 120 ký tự",
+  "not_a_music_library": "không phải thư viện nhạc",
+  "not_a_radio_station": "không phải đài phát thanh",
+  "q_or_tag_is_required": "cần q hoặc tag",
+  "the_station_couldnt_be_reached_check_the_address_and_try_again": "không kết nối được với đài. Hãy kiểm tra địa chỉ và thử lại.",
+  "the_station_couldnt_be_reached_reason": "không kết nối được với đài: {{reason}}",
+  "the_station_directory_isnt_answering_right_now": "danh bạ đài hiện không phản hồi"
 }
