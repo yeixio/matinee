@@ -94,8 +94,6 @@ The phone then keeps the show's newest episodes that you haven't played, up to t
 
 The choice is saved on your server, so every phone and tablet you're signed in on downloads the same shows, each on its own. Turning it on follows the show if you didn't already. Downloads still wait for Wi-Fi unless **Settings → Downloads** allows mobile data, and they show on the **Downloads** tab like any other.
 
-![A show's download choices in the phone app](../images/app-phone-podcast-downloads.webp)
-
 ### Removing played episodes
 
 **Settings → Downloads → Remove played episodes** clears a downloaded podcast episode off the phone once you've played it, whether you downloaded it yourself or it came by itself. It's on to begin with; turn it off to keep played episodes until you remove them. Movies, music and audiobooks are never removed this way.
