@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { api } from '../api'
 import { useAudio } from './AudioPlayer'
-import { lineAt, lineProgress } from './lyrics'
+import { lineAt, lineProgress } from './lyricLines'
 
 // How long after someone scrolls the words by hand before they follow the
 // song again.

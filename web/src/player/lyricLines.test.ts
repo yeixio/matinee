@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { lineAt, lineProgress } from './lyrics'
+import { lineAt, lineProgress } from './lyricLines'
 
 const lines = [
   { ms: 1000, text: 'one' },
