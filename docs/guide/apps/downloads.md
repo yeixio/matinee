@@ -44,6 +44,14 @@ Music and audiobooks always download as the original file.
 
 <!-- /since -->
 
+<!-- since: v0.1.13 -->
+
+## Podcasts
+
+From app version 1.0.24, a show you follow can download its newest episodes by itself and keep just the few you pick, and played episodes can clear themselves off the phone. See [Downloading new episodes by themselves](/docs/watching/podcasts/#downloading-new-episodes-by-themselves). Podcast episodes always download as the original file.
+
+<!-- /since -->
+
 ## Watching offline
 
 Downloaded titles are on the **Downloads** tab. The app remembers where you stopped, and tells the server when the phone is back online: your progress joins what you watched elsewhere, and the most recent change wins.

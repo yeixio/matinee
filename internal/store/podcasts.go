@@ -6,6 +6,7 @@ import (
 	"database/sql"
 	"encoding/hex"
 	"errors"
+	"sort"
 	"strconv"
 	"strings"
 	"time"
@@ -321,6 +322,160 @@ func (s *Store) Follows(ctx context.Context, userID, podcastID int64) (bool, err
 	var n int
 	err := s.db.QueryRowContext(ctx, "SELECT COUNT(*) FROM podcast_follows WHERE user_id = ? AND item_id = ?", userID, podcastID).Scan(&n)
 	return n > 0, err
+}
+
+// PodcastDownloads is what a person's phones keep of a show they follow:
+// with Auto on, each phone downloads the show's newest episodes by itself,
+// the Keep newest of them, and lets go of ones that fall out of that or
+// get played.
+type PodcastDownloads struct {
+	Auto bool `json:"autoDownload"`
+	Keep int  `json:"keep"`
+}
+
+// KeepChoices are how many of a show's newest episodes phones may keep.
+var KeepChoices = []int{1, 2, 3, 5, 10}
+
+// DefaultKeep is how many newest episodes a show keeps until the person picks.
+const DefaultKeep = 3
+
+// ValidKeep says whether n is one of KeepChoices.
+func ValidKeep(n int) bool {
+	for _, k := range KeepChoices {
+		if k == n {
+			return true
+		}
+	}
+	return false
+}
+
+// PodcastDownloadsOf returns a person's downloads for a show; the defaults
+// (off, keep 3) when they don't follow it.
+func (s *Store) PodcastDownloadsOf(ctx context.Context, userID, podcastID int64) (PodcastDownloads, error) {
+	d := PodcastDownloads{Keep: DefaultKeep}
+	err := s.db.QueryRowContext(ctx, "SELECT auto_download, keep_episodes FROM podcast_follows WHERE user_id = ? AND item_id = ?", userID, podcastID).Scan(&d.Auto, &d.Keep)
+	if errors.Is(err, sql.ErrNoRows) {
+		return d, nil
+	}
+	return d, err
+}
+
+// SetPodcastDownloads changes a person's downloads for a show. Downloading a
+// show's episodes follows it, so it's in their list and on Home too.
+func (s *Store) SetPodcastDownloads(ctx context.Context, userID, podcastID int64, d PodcastDownloads) error {
+	if !ValidKeep(d.Keep) {
+		d.Keep = DefaultKeep
+	}
+	if err := s.Follow(ctx, userID, podcastID); err != nil {
+		return err
+	}
+	_, err := s.db.ExecContext(ctx, "UPDATE podcast_follows SET auto_download = ?, keep_episodes = ? WHERE user_id = ? AND item_id = ?", b2i(d.Auto), d.Keep, userID, podcastID)
+	return err
+}
+
+// FollowedDownloads returns a person's downloads for every show they
+// follow, by show.
+func (s *Store) FollowedDownloads(ctx context.Context, userID int64) (map[int64]PodcastDownloads, error) {
+	rows, err := s.db.QueryContext(ctx, "SELECT item_id, auto_download, keep_episodes FROM podcast_follows WHERE user_id = ?", userID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	out := map[int64]PodcastDownloads{}
+	for rows.Next() {
+		var id int64
+		var d PodcastDownloads
+		if err := rows.Scan(&id, &d.Auto, &d.Keep); err != nil {
+			return nil, err
+		}
+		out[id] = d
+	}
+	return out, rows.Err()
+}
+
+// AutoDownloadEpisodes lists the episodes a person's phones should have of
+// the shows they download by themselves: of each show's Keep newest
+// episodes (trailers aside), the ones they haven't played, and any episode
+// they're part-way through even if it's older, so it isn't taken away
+// mid-listen. Newest first.
+func (s *Store) AutoDownloadEpisodes(ctx context.Context, userID int64) ([]Item, error) {
+	prefs, err := s.FollowedDownloads(ctx, userID)
+	if err != nil {
+		return nil, err
+	}
+	out := []Item{}
+	for id, d := range prefs {
+		if !d.Auto {
+			continue
+		}
+		newest, err := s.queryItems(ctx, `i.kind = 'podcastEpisode' AND i.parent_id = ?
+			AND i.id IN (SELECT pe.item_id FROM podcast_episodes pe WHERE pe.podcast_id = ? AND pe.episode_type <> 'trailer')`,
+			"(SELECT pe.published FROM podcast_episodes pe WHERE pe.item_id = i.id) DESC, i.id DESC LIMIT ?", userID, id, id, d.Keep)
+		if err != nil {
+			return nil, err
+		}
+		started, err := s.queryItems(ctx, `i.kind = 'podcastEpisode' AND i.parent_id = ? AND COALESCE(p.played, 0) = 0 AND COALESCE(p.position_ms, 0) > 0`,
+			"i.id DESC", userID, id)
+		if err != nil {
+			return nil, err
+		}
+		seen := map[int64]bool{}
+		for _, e := range append(newest, started...) {
+			if !e.Played && !seen[e.ID] {
+				seen[e.ID] = true
+				out = append(out, e)
+			}
+		}
+	}
+	sortNewestFirst(out)
+	return out, nil
+}
+
+// sortNewestFirst orders episodes by the day they came out, newest first.
+func sortNewestFirst(eps []Item) {
+	sort.SliceStable(eps, func(i, j int) bool {
+		if eps[i].Released != eps[j].Released {
+			return eps[i].Released > eps[j].Released
+		}
+		return eps[i].ID > eps[j].ID
+	})
+}
+
+// NextPodcastEpisode is what plays after an episode ends: the next episode
+// of the same show the person hasn't played, in the order they came out,
+// else the newest unstarted episode of another show they follow that came
+// out since the given time (Unix seconds). Trailers never play on by
+// themselves. It returns ErrNotFound when there's nothing.
+func (s *Store) NextPodcastEpisode(ctx context.Context, userID int64, ep Item, since int64) (Item, error) {
+	if ep.Kind != "podcastEpisode" || ep.ParentID == nil {
+		return Item{}, ErrNotFound
+	}
+	var published int64
+	err := s.db.QueryRowContext(ctx, "SELECT published FROM podcast_episodes WHERE item_id = ?", ep.ID).Scan(&published)
+	if err != nil && !errors.Is(err, sql.ErrNoRows) {
+		return Item{}, err
+	}
+	after, err := s.queryItems(ctx, `i.kind = 'podcastEpisode' AND i.parent_id = ? AND i.id <> ? AND COALESCE(p.played, 0) = 0
+		AND i.id IN (SELECT pe.item_id FROM podcast_episodes pe WHERE pe.episode_type <> 'trailer'
+			AND (pe.published > ? OR (pe.published = ? AND pe.item_id > ?)))`,
+		"(SELECT pe.published FROM podcast_episodes pe WHERE pe.item_id = i.id), i.id LIMIT 1",
+		userID, *ep.ParentID, ep.ID, published, published, ep.ID)
+	if err != nil {
+		return Item{}, err
+	}
+	if len(after) > 0 {
+		return after[0], nil
+	}
+	fresh, err := s.NewEpisodes(ctx, userID, since, 50)
+	if err != nil {
+		return Item{}, err
+	}
+	for _, n := range fresh {
+		if n.ID != ep.ID && (n.ParentID == nil || *n.ParentID != *ep.ParentID) {
+			return n, nil
+		}
+	}
+	return Item{}, ErrNotFound
 }
 
 // FollowedPodcasts lists the shows a person follows, the one with the

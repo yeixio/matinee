@@ -329,3 +329,93 @@ func TestPodcastDirectory(t *testing.T) {
 		t.Fatal("still connected")
 	}
 }
+
+// Phones download a show's newest episodes by themselves when the person
+// asks: the Keep newest, less the ones they've played, plus any they're
+// part-way through. When an episode ends, the next one of the show plays.
+func TestPodcastAutoDownloadsAndPlayOn(t *testing.T) {
+	c, _ := newTestServer(t)
+	var login struct{ Token string }
+	c.do("POST", "/api/setup", credentials{"admin", "correct horse"}, &login)
+	c.token = login.Token
+	var lib libraryView
+	c.do("POST", "/api/v1/libraries", map[string]any{"name": "Podcasts", "kind": "podcasts"}, &lib)
+	waitForScan(t, c)
+	feed := newTestFeed(t, 5)
+	var show store.Item
+	if code := c.do("POST", "/api/v1/podcasts", map[string]any{"libraryId": lib.ID, "feedUrl": feed.url()}, &show); code != http.StatusCreated {
+		t.Fatalf("add podcast: %d", code)
+	}
+	var eps []store.Item // Episode 5 down to Episode 1
+	c.do("GET", "/api/v1/items/"+itoa(show.ID)+"/children", nil, &eps)
+
+	titles := func() []string {
+		var got []store.Item
+		if code := c.do("GET", "/api/v1/podcasts/auto-downloads", nil, &got); code != 200 {
+			t.Fatalf("auto-downloads: %d", code)
+		}
+		out := []string{}
+		for _, e := range got {
+			out = append(out, e.Title)
+		}
+		return out
+	}
+	if got := titles(); len(got) != 0 {
+		t.Fatalf("nothing is downloaded by itself until asked: %v", got)
+	}
+
+	var page itemView
+	c.do("GET", "/api/v1/items/"+itoa(show.ID), nil, &page)
+	if page.Podcast.Downloads.Auto || page.Podcast.Downloads.Keep != 3 {
+		t.Fatalf("default downloads: %+v", page.Podcast.Downloads)
+	}
+	if code := c.do("PUT", "/api/v1/podcasts/"+itoa(show.ID)+"/downloads", map[string]any{"autoDownload": true, "keep": 4}, nil); code != http.StatusBadRequest {
+		t.Fatalf("a keep that isn't offered: %d", code)
+	}
+	// Turning it on follows the show again.
+	c.do("DELETE", "/api/v1/podcasts/"+itoa(show.ID)+"/follow", nil, nil)
+	if code := c.do("PUT", "/api/v1/podcasts/"+itoa(show.ID)+"/downloads", map[string]any{"autoDownload": true, "keep": 3}, nil); code != 200 {
+		t.Fatalf("set downloads: %d", code)
+	}
+	var following []followedShow
+	c.do("GET", "/api/v1/podcasts/following", nil, &following)
+	if len(following) != 1 || !following[0].Auto || following[0].Keep != 3 {
+		t.Fatalf("following: %+v", following)
+	}
+	if got := strings.Join(titles(), ","); got != "Episode 5,Episode 4,Episode 3" {
+		t.Fatalf("newest three: %s", got)
+	}
+	// Played ones go; older ones don't take their place. One part-way
+	// through stays even once it's older than the newest three.
+	c.do("PUT", "/api/v1/items/"+itoa(eps[0].ID)+"/progress", map[string]any{"positionMs": 0, "played": true}, nil)
+	c.do("PUT", "/api/v1/items/"+itoa(eps[4].ID)+"/progress", map[string]any{"positionMs": 60_000}, nil)
+	if got := strings.Join(titles(), ","); got != "Episode 4,Episode 3,Episode 1" {
+		t.Fatalf("after playing one and starting an old one: %s", got)
+	}
+	c.do("PUT", "/api/v1/podcasts/"+itoa(show.ID)+"/downloads", map[string]any{"autoDownload": false, "keep": 3}, nil)
+	if got := titles(); len(got) != 0 {
+		t.Fatalf("turned off: %v", got)
+	}
+
+	// Playing on: the next episode of the show the person hasn't played,
+	// in the order they came out, skipping played ones.
+	next := func(id int64) string {
+		var v nextView
+		c.do("GET", "/api/v1/items/"+itoa(id)+"/next", nil, &v)
+		if v.Next == nil {
+			return ""
+		}
+		return v.Next.Title
+	}
+	if got := next(eps[4].ID); got != "Episode 2" {
+		t.Fatalf("after Episode 1: %q", got)
+	}
+	if got := next(eps[1].ID); got != "" {
+		t.Fatalf("after Episode 4, Episode 5 is played: %q", got)
+	}
+	var prefs playbackPrefs
+	c.do("GET", "/api/v1/me/playback", nil, &prefs)
+	if !prefs.PodcastsPlayOn {
+		t.Fatalf("podcasts play on by default: %+v", prefs)
+	}
+}

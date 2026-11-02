@@ -267,7 +267,7 @@ try {
       await api(token, 'PUT', `/items/${booth[1].id}/progress`, { positionMs: 18 * 60000 })
       await api(token, 'PUT', `/items/${booth[2].id}/progress`, { positionMs: 0, played: true })
 
-      await page.goto(`${origin}/library/${lib.id}`)
+      await page.goto(`${origin}/library/${lib.id}?view=shows`)
       await sleep(1000)
       await shot(page, 'podcasts')
       await page.goto(`${origin}/item/${shows[0].id}`)
@@ -281,7 +281,8 @@ try {
       await shot(page, 'podcast-player')
       await page.keyboard.press('Escape')
       await page.getByRole('button', { name: 'Close player' }).first().click()
-      await page.goto(`${origin}/library/${lib.id}?view=add`)
+      // The library opens on Search.
+      await page.goto(`${origin}/library/${lib.id}`)
       await sleep(1000)
       await shot(page, 'podcasts-add')
       await page.getByRole('button', { name: 'TV & film' }).click()

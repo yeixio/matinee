@@ -579,7 +579,20 @@
     "newEpisodesCount_many": "{{count}} de nouveaux épisodes",
     "imported_many": "{{count}} d’émissions ajoutées.",
     "newEpisodesCount_other": "{{count}} nouveaux épisodes",
-    "imported_other": "{{count}} émissions ajoutées."
+    "imported_other": "{{count}} émissions ajoutées.",
+    "episodes": "Épisodes",
+    "order": "Ordre des épisodes",
+    "newestFirst": "Plus récents d'abord",
+    "oldestFirst": "Plus anciens d'abord",
+    "playOldest": "Lire dans l'ordre",
+    "playOn": "Continuer les podcasts",
+    "playOnHint": "À la fin d'un épisode, lire le suivant de l'émission que vous n'avez pas écouté, sinon le dernier épisode d'une autre émission que vous suivez.",
+    "playingNext": "À suivre : {{title}}",
+    "autoDownload": "Télécharger les nouveaux épisodes",
+    "autoDownloadHint": "Vos téléphones téléchargent d'eux-mêmes les derniers épisodes de cette émission et les suppriment une fois écoutés.",
+    "keepCount": "Épisodes à garder",
+    "removePlayed": "Supprimer les épisodes écoutés",
+    "removePlayedHint": "Les épisodes téléchargés quittent ce téléphone une fois que vous les avez écoutés."
   },
   "together": {
     "title": "Regarder ensemble",

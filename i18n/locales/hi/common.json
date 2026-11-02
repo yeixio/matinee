@@ -549,7 +549,20 @@
     "newEpisodesCount_one": "{{count}} नया एपिसोड",
     "imported_one": "{{count}} शो जोड़ा गया।",
     "newEpisodesCount_other": "{{count}} नए एपिसोड",
-    "imported_other": "{{count}} शो जोड़े गए।"
+    "imported_other": "{{count}} शो जोड़े गए।",
+    "episodes": "एपिसोड",
+    "order": "एपिसोड का क्रम",
+    "newestFirst": "सबसे नए पहले",
+    "oldestFirst": "सबसे पुराने पहले",
+    "playOldest": "क्रम से चलाएँ",
+    "playOn": "पॉडकास्ट चलाते रहें",
+    "playOnHint": "जब कोई एपिसोड खत्म हो, तो शो का अगला एपिसोड चलाएँ जो आपने नहीं सुना, वरना आपके फ़ॉलो किए किसी दूसरे शो का सबसे नया एपिसोड।",
+    "playingNext": "आगे: {{title}}",
+    "autoDownload": "नए एपिसोड डाउनलोड करें",
+    "autoDownloadHint": "आपके फ़ोन इस शो के सबसे नए एपिसोड अपने-आप डाउनलोड करते हैं और सुनने के बाद हटा देते हैं।",
+    "keepCount": "रखने के लिए एपिसोड",
+    "removePlayed": "सुने हुए एपिसोड हटाएँ",
+    "removePlayedHint": "डाउनलोड किए गए पॉडकास्ट एपिसोड सुनने के बाद इस फ़ोन से हट जाते हैं।"
   },
   "together": {
     "title": "साथ में देखें",

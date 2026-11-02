@@ -519,7 +519,20 @@
     "export": "Xuất OPML",
     "importing": "Đang thêm chương trình của bạn…",
     "newEpisodesCount_other": "{{count}} tập mới",
-    "imported_other": "Đã thêm {{count}} chương trình."
+    "imported_other": "Đã thêm {{count}} chương trình.",
+    "episodes": "Tập",
+    "order": "Thứ tự các tập",
+    "newestFirst": "Mới nhất trước",
+    "oldestFirst": "Cũ nhất trước",
+    "playOldest": "Phát theo thứ tự",
+    "playOn": "Tiếp tục phát podcast",
+    "playOnHint": "Khi một tập kết thúc, phát tập tiếp theo của chương trình mà bạn chưa nghe, nếu không thì phát tập mới nhất của chương trình khác bạn theo dõi.",
+    "playingNext": "Tiếp theo: {{title}}",
+    "autoDownload": "Tải xuống tập mới",
+    "autoDownloadHint": "Điện thoại của bạn tự tải xuống các tập mới nhất của chương trình này và xóa chúng khi bạn đã nghe.",
+    "keepCount": "Số tập giữ lại",
+    "removePlayed": "Xóa các tập đã nghe",
+    "removePlayedHint": "Các tập podcast đã tải xuống sẽ bị xóa khỏi điện thoại này khi bạn đã nghe."
   },
   "together": {
     "title": "Xem cùng nhau",

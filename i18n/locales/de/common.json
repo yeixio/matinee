@@ -549,7 +549,20 @@
     "newEpisodesCount_one": "{{count}} neue Folge",
     "imported_one": "{{count}} Sendung hinzugefügt.",
     "newEpisodesCount_other": "{{count}} neue Folgen",
-    "imported_other": "{{count}} Sendungen hinzugefügt."
+    "imported_other": "{{count}} Sendungen hinzugefügt.",
+    "episodes": "Folgen",
+    "order": "Reihenfolge der Folgen",
+    "newestFirst": "Neueste zuerst",
+    "oldestFirst": "Älteste zuerst",
+    "playOldest": "Der Reihe nach abspielen",
+    "playOn": "Podcasts weiterspielen",
+    "playOnHint": "Wenn eine Folge endet, spiele die nächste ungehörte Folge der Sendung, sonst die neueste Folge einer anderen Sendung, der du folgst.",
+    "playingNext": "Als Nächstes: {{title}}",
+    "autoDownload": "Neue Folgen laden",
+    "autoDownloadHint": "Deine Handys laden die neuesten Folgen dieser Sendung von selbst und entfernen sie, sobald du sie gehört hast.",
+    "keepCount": "Folgen behalten",
+    "removePlayed": "Gehörte Folgen entfernen",
+    "removePlayedHint": "Geladene Podcastfolgen werden von diesem Handy entfernt, sobald du sie gehört hast."
   },
   "together": {
     "title": "Gemeinsam schauen",

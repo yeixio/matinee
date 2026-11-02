@@ -519,7 +519,20 @@
     "export": "匯出 OPML",
     "importing": "正在加入你的節目…",
     "newEpisodesCount_other": "{{count}} 個新單集",
-    "imported_other": "已加入 {{count}} 個節目。"
+    "imported_other": "已加入 {{count}} 個節目。",
+    "episodes": "單集",
+    "order": "單集順序",
+    "newestFirst": "最新的在前",
+    "oldestFirst": "最舊的在前",
+    "playOldest": "依序播放",
+    "playOn": "繼續播放 Podcast",
+    "playOnHint": "一集結束後，播放該節目中你還沒聽過的下一集；如果沒有，就播放你追蹤的其他節目的最新一集。",
+    "playingNext": "接下來：{{title}}",
+    "autoDownload": "下載新單集",
+    "autoDownloadHint": "你的手機會自動下載這個節目的最新單集，並在你聽完後刪除。",
+    "keepCount": "保留的單集數",
+    "removePlayed": "刪除已播放的單集",
+    "removePlayedHint": "已下載的 Podcast 單集在你聽完後會從這支手機上刪除。"
   },
   "together": {
     "title": "一起看",

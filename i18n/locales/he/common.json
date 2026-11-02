@@ -579,7 +579,20 @@
     "newEpisodesCount_two": "שני פרקים חדשים",
     "imported_two": "נוספו שתי תוכניות.",
     "newEpisodesCount_other": "{{count}} פרקים חדשים",
-    "imported_other": "נוספו {{count}} תוכניות."
+    "imported_other": "נוספו {{count}} תוכניות.",
+    "episodes": "פרקים",
+    "order": "סדר הפרקים",
+    "newestFirst": "החדשים קודם",
+    "oldestFirst": "הישנים קודם",
+    "playOldest": "ניגון לפי הסדר",
+    "playOn": "להמשיך לנגן פודקאסטים",
+    "playOnHint": "כשפרק נגמר, מתנגן הפרק הבא של התוכנית שעוד לא שמעת, ואם אין — הפרק החדש ביותר של תוכנית אחרת שבמעקב שלך.",
+    "playingNext": "הבא בתור: {{title}}",
+    "autoDownload": "הורדת פרקים חדשים",
+    "autoDownloadHint": "הטלפונים שלך מורידים בעצמם את הפרקים החדשים ביותר של התוכנית ומסירים אותם אחרי ששמעת אותם.",
+    "keepCount": "פרקים לשמירה",
+    "removePlayed": "הסרת פרקים שהושמעו",
+    "removePlayedHint": "פרקי פודקאסט שהורדו יוסרו מהטלפון הזה אחרי ששמעת אותם."
   },
   "together": {
     "title": "צפייה משותפת",

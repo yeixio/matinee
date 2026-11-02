@@ -549,7 +549,20 @@
     "newEpisodesCount_one": "{{count}} nieuwe aflevering",
     "imported_one": "{{count}} programma toegevoegd.",
     "newEpisodesCount_other": "{{count}} nieuwe afleveringen",
-    "imported_other": "{{count}} programma’s toegevoegd."
+    "imported_other": "{{count}} programma’s toegevoegd.",
+    "episodes": "Afleveringen",
+    "order": "Volgorde van afleveringen",
+    "newestFirst": "Nieuwste eerst",
+    "oldestFirst": "Oudste eerst",
+    "playOldest": "Op volgorde afspelen",
+    "playOn": "Podcasts blijven afspelen",
+    "playOnHint": "Als een aflevering afloopt, speel dan de volgende aflevering van het programma die je nog niet hebt gehoord, of anders de nieuwste aflevering van een ander programma dat je volgt.",
+    "playingNext": "Hierna: {{title}}",
+    "autoDownload": "Nieuwe afleveringen downloaden",
+    "autoDownloadHint": "Je telefoons downloaden de nieuwste afleveringen van dit programma vanzelf en verwijderen ze zodra je ze hebt beluisterd.",
+    "keepCount": "Afleveringen bewaren",
+    "removePlayed": "Beluisterde afleveringen verwijderen",
+    "removePlayedHint": "Gedownloade podcastafleveringen verdwijnen van deze telefoon zodra je ze hebt beluisterd."
   },
   "together": {
     "title": "Samen kijken",

@@ -717,6 +717,7 @@ export type PlaybackPrefs = {
   autoPlay: boolean // offer the next episode with a countdown
   binge: boolean // skip the countdown
   skipIntros?: boolean // jump past intros without pressing Skip intro
+  podcastsPlayOn?: boolean // when a podcast episode ends, play the next one
 }
 
 export type ItemDetail = Item & {
