@@ -769,6 +769,12 @@
         "v4l2m2m": "V4L2 (Raspberry Pi)"
       }
     },
+    "lyrics": {
+      "title": "Testi",
+      "intro": "I brani mostrano il testo a tempo con la musica quando accanto al brano c’è un file .lrc con lo stesso nome, o il testo è nei suoi tag.",
+      "online": "Cerca i testi online",
+      "onlineDetail": "Per i brani senza testo sincronizzato, il server chiede a <site>LRCLIB</site>, un database di testi libero e aperto. Invia solo artista, titolo, album e durata di ogni brano, direttamente da questo server."
+    },
     "homeRows": {
       "title": "Home",
       "holidays": "Righe delle feste",
@@ -837,7 +843,7 @@
       },
       "content": {
         "title": "Contenuti",
-        "hint": "Poster, ricerca di podcast e sottotitoli, trailer e righe della Home"
+        "hint": "Poster, ricerca di podcast e sottotitoli, testi, trailer e righe della Home"
       },
       "streaming": {
         "title": "Streaming",

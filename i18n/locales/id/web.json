@@ -761,6 +761,12 @@
         "v4l2m2m": "V4L2 (Raspberry Pi)"
       }
     },
+    "lyrics": {
+      "title": "Lirik",
+      "intro": "Lagu menampilkan liriknya selaras dengan musik jika ada file .lrc bernama sama di samping lagu, atau lirik di tag-nya.",
+      "online": "Cari lirik secara online",
+      "onlineDetail": "Untuk lagu tanpa lirik bertimer, server bertanya ke <site>LRCLIB</site>, basis data lirik yang bebas dan terbuka. Server hanya mengirim artis, judul, album, dan durasi setiap lagu, langsung dari server ini."
+    },
     "homeRows": {
       "title": "Beranda",
       "holidays": "Baris hari raya",
@@ -829,7 +835,7 @@
       },
       "content": {
         "title": "Konten",
-        "hint": "Poster, pencarian podcast dan subtitle, trailer, dan baris Beranda"
+        "hint": "Poster, pencarian podcast dan subtitle, lirik, trailer, dan baris Beranda"
       },
       "streaming": {
         "title": "Streaming",

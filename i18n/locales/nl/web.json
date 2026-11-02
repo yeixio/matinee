@@ -765,6 +765,12 @@
         "v4l2m2m": "V4L2 (Raspberry Pi)"
       }
     },
+    "lyrics": {
+      "title": "Songteksten",
+      "intro": "Nummers tonen hun tekst op de maat van de muziek als er naast het nummer een .lrc-bestand met dezelfde naam staat, of de tekst in de tags staat.",
+      "online": "Songteksten online opzoeken",
+      "onlineDetail": "Voor nummers zonder getimede tekst vraagt de server het aan <site>LRCLIB</site>, een vrije, open database met songteksten. Hij stuurt alleen de artiest, titel, het album en de lengte van elk nummer, rechtstreeks vanaf deze server."
+    },
     "homeRows": {
       "title": "Start",
       "holidays": "Feestdagrijen",
@@ -833,7 +839,7 @@
       },
       "content": {
         "title": "Inhoud",
-        "hint": "Posters, podcasts en ondertitels zoeken, trailers en rijen op Home"
+        "hint": "Posters, podcasts en ondertitels zoeken, songteksten, trailers en rijen op Home"
       },
       "streaming": {
         "title": "Streamen",

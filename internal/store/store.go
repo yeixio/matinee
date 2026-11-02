@@ -493,7 +493,12 @@ var migrations = []string{
 	// 77: a TV set up from a phone (see PairedDeviceCode) names its code by
 	// the hash of a secret it showed in a QR code, so the phone can find it.
 	"ALTER TABLE device_codes ADD COLUMN pair_hash TEXT",
-	// 78: where the end credits of each episode and movie start, found by
+	// 78, 79: each person's downloads for a show they follow (see
+	// PodcastDownloads): whether their phones fetch new episodes by
+	// themselves, and how many of the newest to keep.
+	"ALTER TABLE podcast_follows ADD COLUMN auto_download INTEGER NOT NULL DEFAULT 0",
+	"ALTER TABLE podcast_follows ADD COLUMN keep_episodes INTEGER NOT NULL DEFAULT 3",
+	// 80: where the end credits of each episode and movie start, found by
 	// matching the audio of a season's episodes or by the picture going
 	// dark (see endcredits.go and internal/credits).
 	`CREATE TABLE end_credits (

@@ -437,7 +437,11 @@
     "playlistGone": "Questa playlist non c'è più",
     "create": "Crea",
     "save": "Salva",
-    "delete": "Elimina"
+    "delete": "Elimina",
+    "lyrics": "Testo",
+    "noLyrics": "Nessun testo per questo brano",
+    "instrumental": "Strumentale",
+    "lyricsFromLrclib": "Testo da LRCLIB"
   },
   "books": {
     "overview": "Panoramica",
@@ -575,7 +579,20 @@
     "newEpisodesCount_many": "{{count}} di nuovi episodi",
     "imported_many": "{{count}} di programmi aggiunti.",
     "newEpisodesCount_other": "{{count}} nuovi episodi",
-    "imported_other": "{{count}} programmi aggiunti."
+    "imported_other": "{{count}} programmi aggiunti.",
+    "episodes": "Episodi",
+    "order": "Ordine degli episodi",
+    "newestFirst": "Prima i più recenti",
+    "oldestFirst": "Prima i più vecchi",
+    "playOldest": "Riproduci in ordine",
+    "playOn": "Continua a riprodurre i podcast",
+    "playOnHint": "Quando un episodio finisce, riproduci il successivo del programma che non hai ascoltato, altrimenti l'episodio più recente di un altro programma che segui.",
+    "playingNext": "Prossimo: {{title}}",
+    "autoDownload": "Scarica i nuovi episodi",
+    "autoDownloadHint": "I tuoi telefoni scaricano da soli gli episodi più recenti di questo programma e li rimuovono quando li hai ascoltati.",
+    "keepCount": "Episodi da tenere",
+    "removePlayed": "Rimuovi gli episodi ascoltati",
+    "removePlayedHint": "Gli episodi scaricati lasciano questo telefono quando li hai ascoltati."
   },
   "together": {
     "title": "Guarda insieme",

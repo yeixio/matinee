@@ -465,7 +465,11 @@
     "playlistGone": "Tej playlisty już nie ma",
     "create": "Utwórz",
     "save": "Zapisz",
-    "delete": "Usuń"
+    "delete": "Usuń",
+    "lyrics": "Tekst",
+    "noLyrics": "Brak tekstu tego utworu",
+    "instrumental": "Instrumentalny",
+    "lyricsFromLrclib": "Tekst z LRCLIB"
   },
   "books": {
     "overview": "Przegląd",
@@ -605,7 +609,20 @@
     "newEpisodesCount_many": "{{count}} nowych odcinków",
     "imported_many": "Dodano {{count}} audycji.",
     "newEpisodesCount_other": "{{count}} nowego odcinka",
-    "imported_other": "Dodano {{count}} audycji."
+    "imported_other": "Dodano {{count}} audycji.",
+    "episodes": "Odcinki",
+    "order": "Kolejność odcinków",
+    "newestFirst": "Najnowsze najpierw",
+    "oldestFirst": "Najstarsze najpierw",
+    "playOldest": "Odtwarzaj po kolei",
+    "playOn": "Odtwarzaj podcasty dalej",
+    "playOnHint": "Gdy odcinek się skończy, odtwórz następny niesłuchany odcinek audycji, a jeśli go nie ma, najnowszy odcinek innej obserwowanej audycji.",
+    "playingNext": "Następnie: {{title}}",
+    "autoDownload": "Pobieraj nowe odcinki",
+    "autoDownloadHint": "Twoje telefony same pobierają najnowsze odcinki tej audycji i usuwają je, gdy je przesłuchasz.",
+    "keepCount": "Odcinki do zachowania",
+    "removePlayed": "Usuwaj przesłuchane odcinki",
+    "removePlayedHint": "Pobrane odcinki podcastów znikają z tego telefonu, gdy je przesłuchasz."
   },
   "together": {
     "title": "Oglądaj razem",

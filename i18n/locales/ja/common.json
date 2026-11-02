@@ -381,7 +381,11 @@
     "playlistGone": "このプレイリストはもうありません",
     "create": "作成",
     "save": "保存",
-    "delete": "削除"
+    "delete": "削除",
+    "lyrics": "歌詞",
+    "noLyrics": "この曲の歌詞はありません",
+    "instrumental": "インストゥルメンタル",
+    "lyricsFromLrclib": "歌詞の提供: LRCLIB"
   },
   "books": {
     "overview": "概要",
@@ -515,7 +519,20 @@
     "export": "OPML を書き出す",
     "importing": "番組を追加しています…",
     "newEpisodesCount_other": "新しいエピソード {{count}} 件",
-    "imported_other": "{{count}} 件の番組を追加しました。"
+    "imported_other": "{{count}} 件の番組を追加しました。",
+    "episodes": "エピソード",
+    "order": "エピソードの順番",
+    "newestFirst": "新しい順",
+    "oldestFirst": "古い順",
+    "playOldest": "順番に再生",
+    "playOn": "ポッドキャストを続けて再生",
+    "playOnHint": "エピソードが終わったら、その番組のまだ聴いていない次のエピソードを、なければフォロー中の別の番組の最新エピソードを再生します。",
+    "playingNext": "次に再生: {{title}}",
+    "autoDownload": "新しいエピソードをダウンロード",
+    "autoDownloadHint": "この番組の最新エピソードをスマートフォンが自動でダウンロードし、聴き終わったら削除します。",
+    "keepCount": "残すエピソード数",
+    "removePlayed": "再生済みのエピソードを削除",
+    "removePlayedHint": "ダウンロードしたポッドキャストのエピソードは、聴き終わるとこのスマートフォンから削除されます。"
   },
   "together": {
     "title": "いっしょに見る",

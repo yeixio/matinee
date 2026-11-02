@@ -765,6 +765,12 @@
         "v4l2m2m": "V4L2 (Raspberry Pi)"
       }
     },
+    "lyrics": {
+      "title": "Dalszövegek",
+      "intro": "A dalok a zenével együtt mutatják a szövegüket, ha a dal mellett van egy azonos nevű .lrc fájl, vagy a szöveg a címkéiben van.",
+      "online": "Dalszövegek keresése az interneten",
+      "onlineDetail": "Az időzített szöveg nélküli dalokhoz a szerver a <site>LRCLIB</site>-et kérdezi, egy szabad, nyílt dalszöveg-adatbázist. Csak az egyes dalok előadóját, címét, albumát és hosszát küldi el, közvetlenül erről a szerverről."
+    },
     "homeRows": {
       "title": "Kezdőlap",
       "holidays": "Ünnepi sorok",
@@ -833,7 +839,7 @@
       },
       "content": {
         "title": "Tartalom",
-        "hint": "Poszterek, podcast- és feliratkeresés, előzetesek és a Kezdőlap sorai"
+        "hint": "Poszterek, podcast- és feliratkeresés, dalszövegek, előzetesek és a Kezdőlap sorai"
       },
       "streaming": {
         "title": "Streamelés",

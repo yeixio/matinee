@@ -765,6 +765,12 @@
         "v4l2m2m": "V4L2 (Raspberry Pi)"
       }
     },
+    "lyrics": {
+      "title": "Sangtekster",
+      "intro": "Sanger viser teksten i takt med musikken når det ligger en .lrc-fil med samme navn ved siden av sangen, eller teksten står i taggene.",
+      "online": "Søk etter sangtekster på nett",
+      "onlineDetail": "For sanger uten tidsatt tekst spør serveren <site>LRCLIB</site>, en fri, åpen database med sangtekster. Den sender bare artist, tittel, album og lengde for hver sang, rett fra denne serveren."
+    },
     "homeRows": {
       "title": "Hjem",
       "holidays": "Høytidsrader",
@@ -833,7 +839,7 @@
       },
       "content": {
         "title": "Innhold",
-        "hint": "Plakater, søk etter podkaster og undertekster, trailere og rader på Hjem"
+        "hint": "Plakater, søk etter podkaster og undertekster, sangtekster, trailere og rader på Hjem"
       },
       "streaming": {
         "title": "Strømming",

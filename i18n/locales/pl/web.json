@@ -773,6 +773,12 @@
         "v4l2m2m": "V4L2 (Raspberry Pi)"
       }
     },
+    "lyrics": {
+      "title": "Teksty piosenek",
+      "intro": "Utwory pokazują tekst w rytm muzyki, gdy obok utworu jest plik .lrc o tej samej nazwie albo tekst jest w jego tagach.",
+      "online": "Szukaj tekstów w internecie",
+      "onlineDetail": "Dla utworów bez zsynchronizowanego tekstu serwer pyta <site>LRCLIB</site>, wolną, otwartą bazę tekstów. Wysyła tylko wykonawcę, tytuł, album i długość każdego utworu, prosto z tego serwera."
+    },
     "homeRows": {
       "title": "Start",
       "holidays": "Rzędy świąteczne",
@@ -841,7 +847,7 @@
       },
       "content": {
         "title": "Treści",
-        "hint": "Plakaty, wyszukiwanie podcastów i napisów, zwiastuny i rzędy na stronie głównej"
+        "hint": "Plakaty, wyszukiwanie podcastów i napisów, teksty piosenek, zwiastuny i rzędy na stronie głównej"
       },
       "streaming": {
         "title": "Strumieniowanie",

@@ -769,6 +769,12 @@
         "v4l2m2m": "V4L2 (Raspberry Pi)"
       }
     },
+    "lyrics": {
+      "title": "Letras",
+      "intro": "Las canciones muestran su letra al ritmo de la música cuando hay un archivo .lrc con el mismo nombre junto a la canción, o la letra está en sus etiquetas.",
+      "online": "Buscar letras en internet",
+      "onlineDetail": "Para las canciones sin letra sincronizada, el servidor consulta <site>LRCLIB</site>, una base de datos de letras libre y abierta. Solo envía el artista, el título, el álbum y la duración de cada canción, directamente desde este servidor."
+    },
     "homeRows": {
       "title": "Inicio",
       "holidays": "Filas de fiestas",
@@ -837,7 +843,7 @@
       },
       "content": {
         "title": "Contenido",
-        "hint": "Pósteres, búsqueda de pódcasts y subtítulos, tráileres y filas de Inicio"
+        "hint": "Pósteres, búsqueda de pódcasts y subtítulos, letras, tráileres y filas de Inicio"
       },
       "streaming": {
         "title": "Streaming",

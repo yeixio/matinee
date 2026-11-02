@@ -359,6 +359,22 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
     }
   }, [])
 
+  // After an episode ends: the next one of the show, else a new episode of
+  // another show the person follows (see GET /items/{id}/next).
+  const playItemRef = useRef<(item: Item) => Promise<void>>(undefined)
+  const playOn = useCallback(
+    async (ended: Book) => {
+      const prefs = await qc.fetchQuery({ queryKey: ['playback'], queryFn: api.playback, staleTime: 60_000 }).catch(() => undefined)
+      if (prefs?.podcastsPlayOn === false) return
+      const up = await api.next(ended.id).catch(() => undefined)
+      // Someone who picked something else meanwhile keeps it.
+      if (!up?.next || bookRef.current?.id !== ended.id) return
+      note(t('common:podcasts.playingNext', { title: up.next.title }), 6000)
+      await playItemRef.current?.(up.next)
+    },
+    [qc, note, t],
+  )
+
   const advance = useCallback(
     (auto: boolean) => {
       markPlayed()
@@ -382,11 +398,16 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
         const b = bookRef.current
         if (b && auto) {
           // The end of the book: it's finished, and starts over next time.
+          // An episode's end plays the next one, unless the sleep timer
+          // stopped here or the person turned that off.
           api
             .setProgress(b.id, 0, true)
             .then(() => {
               qc.invalidateQueries({ queryKey: ['item', b.id] })
-              if (B.isEpisode(b)) qc.invalidateQueries({ queryKey: ['children', b.parentId] })
+              if (B.isEpisode(b)) {
+                qc.invalidateQueries({ queryKey: ['children', b.parentId] })
+                if (!sleepNow) playOn(b)
+              }
             })
             .catch(() => {})
           resumeAt.current = { time: 0, play: false }
@@ -404,7 +425,7 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
       }
       setQueue(n)
     },
-    [markPlayed, qc, note, t],
+    [markPlayed, qc, note, t, playOn],
   )
 
   // Remembered between reloads.
@@ -549,6 +570,7 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
     },
     [navigate, playBook, leaveBook],
   )
+  playItemRef.current = playItem
 
   // The sleep timer: the sound fades over its last half minute, then it
   // pauses. Set for the end, a book stops at the end of the chapter.

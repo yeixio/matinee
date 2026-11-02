@@ -409,7 +409,11 @@
     "playlistGone": "یہ پلے لسٹ اب موجود نہیں",
     "create": "بنائیں",
     "save": "محفوظ کریں",
-    "delete": "حذف کریں"
+    "delete": "حذف کریں",
+    "lyrics": "بول",
+    "noLyrics": "اس گانے کے بول نہیں ہیں",
+    "instrumental": "سازینہ",
+    "lyricsFromLrclib": "بول LRCLIB سے"
   },
   "books": {
     "overview": "جائزہ",
@@ -545,7 +549,20 @@
     "newEpisodesCount_one": "{{count}} نئی قسط",
     "imported_one": "{{count}} شو شامل کیا گیا۔",
     "newEpisodesCount_other": "{{count}} نئی اقساط",
-    "imported_other": "{{count}} شوز شامل کیے گئے۔"
+    "imported_other": "{{count}} شوز شامل کیے گئے۔",
+    "episodes": "اقساط",
+    "order": "اقساط کی ترتیب",
+    "newestFirst": "نئی پہلے",
+    "oldestFirst": "پرانی پہلے",
+    "playOldest": "ترتیب سے چلائیں",
+    "playOn": "پوڈکاسٹ چلاتے رہیں",
+    "playOnHint": "جب کوئی قسط ختم ہو تو شو کی اگلی قسط چلائیں جو آپ نے نہیں سنی، ورنہ آپ کے فالو کیے کسی دوسرے شو کی سب سے نئی قسط۔",
+    "playingNext": "اگلا: {{title}}",
+    "autoDownload": "نئی اقساط ڈاؤن لوڈ کریں",
+    "autoDownloadHint": "آپ کے فون اس شو کی سب سے نئی اقساط خود ڈاؤن لوڈ کرتے ہیں اور سننے کے بعد ہٹا دیتے ہیں۔",
+    "keepCount": "رکھنے کے لیے اقساط",
+    "removePlayed": "سنی ہوئی اقساط ہٹائیں",
+    "removePlayedHint": "ڈاؤن لوڈ کی گئی پوڈکاسٹ اقساط سننے کے بعد اس فون سے ہٹ جاتی ہیں۔"
   },
   "together": {
     "title": "ساتھ دیکھیں",

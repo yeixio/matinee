@@ -437,7 +437,11 @@
     "playlistGone": "Acest playlist nu mai există",
     "create": "Creează",
     "save": "Salvează",
-    "delete": "Șterge"
+    "delete": "Șterge",
+    "lyrics": "Versuri",
+    "noLyrics": "Nu există versuri pentru această melodie",
+    "instrumental": "Instrumental",
+    "lyricsFromLrclib": "Versuri de la LRCLIB"
   },
   "books": {
     "overview": "Prezentare",
@@ -575,7 +579,20 @@
     "newEpisodesCount_few": "{{count}} episoade noi",
     "imported_few": "S-au adăugat {{count}} emisiuni.",
     "newEpisodesCount_other": "{{count}} de episoade noi",
-    "imported_other": "S-au adăugat {{count}} de emisiuni."
+    "imported_other": "S-au adăugat {{count}} de emisiuni.",
+    "episodes": "Episoade",
+    "order": "Ordinea episoadelor",
+    "newestFirst": "Cele mai noi primele",
+    "oldestFirst": "Cele mai vechi primele",
+    "playOldest": "Redă în ordine",
+    "playOn": "Continuă redarea podcasturilor",
+    "playOnHint": "Când se termină un episod, redă următorul episod al emisiunii pe care nu l-ai ascultat, altfel cel mai nou episod al altei emisiuni pe care o urmărești.",
+    "playingNext": "Urmează: {{title}}",
+    "autoDownload": "Descarcă episoadele noi",
+    "autoDownloadHint": "Telefoanele tale descarcă singure cele mai noi episoade ale acestei emisiuni și le elimină după ce le-ai ascultat.",
+    "keepCount": "Episoade de păstrat",
+    "removePlayed": "Elimină episoadele ascultate",
+    "removePlayedHint": "Episoadele descărcate sunt eliminate de pe acest telefon după ce le-ai ascultat."
   },
   "together": {
     "title": "Vizionare împreună",

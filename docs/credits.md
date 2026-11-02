@@ -46,7 +46,7 @@ three ways, the first that knows winning:
 Credits that stop within 20 seconds (video) or 3 seconds (audio) of the
 end run to it.
 
-Results go in the `end_credits` table (migration 78), one row per video,
+Results go in the `end_credits` table (migration 80), one row per video,
 start 0 when none were found, keyed by the file's size and mtime and
 `credits.Version`. Detection runs after the intro detector, a season or a
 movie at a time, at the analysis' pace and the lowest priority, and gives
