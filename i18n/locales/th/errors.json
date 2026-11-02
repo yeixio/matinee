@@ -190,6 +190,7 @@
   "that_isnt_a_podcast_feed": "นั่นไม่ใช่ฟีดพอดแคสต์",
   "that_isnt_an_opml_file": "นั่นไม่ใช่ไฟล์ OPML",
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "อ่านฟีดไม่ได้ ตรวจสอบที่อยู่แล้วลองอีกครั้ง",
+  "the_feed_couldnt_be_read_reason": "อ่านฟีดไม่ได้: {{reason}}",
   "the_feed_couldnt_be_read_right_now": "ขณะนี้อ่านฟีดไม่ได้",
   "the_file_is_too_big": "ไฟล์ใหญ่เกินไป",
   "this_library_already_has_a_show_with_that_name": "คลังนี้มีรายการชื่อนี้อยู่แล้ว",
@@ -220,5 +221,12 @@
   "couldnt_start_playback_for_this_album": "ไม่สามารถเริ่มเล่นอัลบั้มนี้ได้",
   "not_an_album": "ไม่ใช่อัลบั้ม",
   "only_the_household_can_change_this": "เฉพาะคนในบ้านเท่านั้นที่เปลี่ยนได้",
-  "tracks_must_be_songs_on_one_album": "แทร็กต้องเป็นเพลงจากอัลบั้มเดียวกัน"
+  "tracks_must_be_songs_on_one_album": "แทร็กต้องเป็นเพลงจากอัลบั้มเดียวกัน",
+  "name_give_one_of_up_to_120_characters": "ชื่อ: ใส่ได้ไม่เกิน 120 ตัวอักษร",
+  "not_a_music_library": "ไม่ใช่คลังเพลง",
+  "not_a_radio_station": "ไม่ใช่สถานีวิทยุ",
+  "q_or_tag_is_required": "ต้องระบุ q หรือ tag",
+  "the_station_couldnt_be_reached_check_the_address_and_try_again": "เชื่อมต่อสถานีไม่ได้ ตรวจสอบที่อยู่แล้วลองอีกครั้ง",
+  "the_station_couldnt_be_reached_reason": "เชื่อมต่อสถานีไม่ได้: {{reason}}",
+  "the_station_directory_isnt_answering_right_now": "ไดเรกทอรีสถานีไม่ตอบสนองในขณะนี้"
 }

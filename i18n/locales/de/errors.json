@@ -190,6 +190,7 @@
   "that_isnt_a_podcast_feed": "das ist kein Podcast-Feed",
   "that_isnt_an_opml_file": "das ist keine OPML-Datei",
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "der Feed konnte nicht gelesen werden. Prüfe die Adresse und versuche es noch einmal.",
+  "the_feed_couldnt_be_read_reason": "der Feed konnte nicht gelesen werden: {{reason}}",
   "the_feed_couldnt_be_read_right_now": "der Feed kann gerade nicht gelesen werden",
   "the_file_is_too_big": "die Datei ist zu groß",
   "this_library_already_has_a_show_with_that_name": "diese Mediathek hat schon eine Sendung mit diesem Namen",
@@ -220,5 +221,12 @@
   "couldnt_start_playback_for_this_album": "die Wiedergabe dieses Albums konnte nicht gestartet werden",
   "not_an_album": "kein Album",
   "only_the_household_can_change_this": "das kann nur der Haushalt ändern",
-  "tracks_must_be_songs_on_one_album": "die Titel müssen Songs eines Albums sein"
+  "tracks_must_be_songs_on_one_album": "die Titel müssen Songs eines Albums sein",
+  "name_give_one_of_up_to_120_characters": "Name: höchstens 120 Zeichen angeben",
+  "not_a_music_library": "keine Musikbibliothek",
+  "not_a_radio_station": "kein Radiosender",
+  "q_or_tag_is_required": "q oder tag ist erforderlich",
+  "the_station_couldnt_be_reached_check_the_address_and_try_again": "der Sender ist nicht erreichbar. Prüfe die Adresse und versuche es erneut.",
+  "the_station_couldnt_be_reached_reason": "der Sender ist nicht erreichbar: {{reason}}",
+  "the_station_directory_isnt_answering_right_now": "das Senderverzeichnis antwortet gerade nicht"
 }

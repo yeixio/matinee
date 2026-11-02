@@ -190,6 +190,7 @@
   "that_isnt_a_podcast_feed": "questo non è un feed di podcast",
   "that_isnt_an_opml_file": "questo non è un file OPML",
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "impossibile leggere il feed. Controlla l’indirizzo e riprova.",
+  "the_feed_couldnt_be_read_reason": "impossibile leggere il feed: {{reason}}",
   "the_feed_couldnt_be_read_right_now": "al momento il feed non si può leggere",
   "the_file_is_too_big": "il file è troppo grande",
   "this_library_already_has_a_show_with_that_name": "questa libreria ha già un programma con quel nome",
@@ -220,5 +221,12 @@
   "couldnt_start_playback_for_this_album": "impossibile avviare la riproduzione di questo album",
   "not_an_album": "non è un album",
   "only_the_household_can_change_this": "solo la famiglia può modificarlo",
-  "tracks_must_be_songs_on_one_album": "le tracce devono essere brani dello stesso album"
+  "tracks_must_be_songs_on_one_album": "le tracce devono essere brani dello stesso album",
+  "name_give_one_of_up_to_120_characters": "nome: indicane uno di massimo 120 caratteri",
+  "not_a_music_library": "non è una libreria musicale",
+  "not_a_radio_station": "non è una stazione radio",
+  "q_or_tag_is_required": "serve q o tag",
+  "the_station_couldnt_be_reached_check_the_address_and_try_again": "impossibile raggiungere la stazione. Controlla l’indirizzo e riprova.",
+  "the_station_couldnt_be_reached_reason": "impossibile raggiungere la stazione: {{reason}}",
+  "the_station_directory_isnt_answering_right_now": "l’elenco delle stazioni non risponde al momento"
 }

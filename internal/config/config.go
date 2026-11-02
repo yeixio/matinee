@@ -99,7 +99,7 @@ func Load(args []string) (Config, error) {
 	fs.StringVar(&c.ConnectURL, "connect-url", env("MATINEE_CONNECT_URL", connect.DefaultURL), "service that tells the apps this server's current address while remote access is on (it never carries media); off for none")
 	fs.StringVar(&c.BillingURL, "billing-url", env("MATINEE_BILLING_URL", ""), "where the connect service's subscription is bought; defaults to yeix.io for the Matinee project's service, off for none")
 	fs.BoolVar(&c.Plugins, "plugins", env("MATINEE_PLUGINS", "true") != "false", "let admins install plugins in Settings")
-	fs.BoolVar(&c.PodcastsHomeNetwork, "podcasts-home-network", env("MATINEE_PODCASTS_HOME_NETWORK", "false") == "true", "let podcast feeds come from addresses on the home network too (off: only from the internet)")
+	fs.BoolVar(&c.PodcastsHomeNetwork, "podcasts-home-network", env("MATINEE_PODCASTS_HOME_NETWORK", "false") == "true", "let podcast feeds and radio stations come from addresses on the home network too (off: only from the internet)")
 	fs.StringVar(&c.PluginCatalog, "plugin-catalog", env("MATINEE_PLUGIN_CATALOG", "https://matinee.yeix.io/plugins.json"), "list of official plugins Settings offers; off for none")
 	interval := fs.String("scan-interval", env("MATINEE_SCAN_INTERVAL", "15m"), "periodic rescan interval, 0 to disable")
 	drainDelay := fs.String("drain-delay", env("MATINEE_DRAIN_DELAY", "0s"), "on shutdown, how long to keep serving after telling players the server is restarting (the Helm chart uses 5s)")

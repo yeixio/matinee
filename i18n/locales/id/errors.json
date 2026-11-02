@@ -190,6 +190,7 @@
   "that_isnt_a_podcast_feed": "itu bukan feed podcast",
   "that_isnt_an_opml_file": "itu bukan file OPML",
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "feed tidak bisa dibaca. Periksa alamatnya lalu coba lagi.",
+  "the_feed_couldnt_be_read_reason": "feed tidak bisa dibaca: {{reason}}",
   "the_feed_couldnt_be_read_right_now": "feed tidak bisa dibaca saat ini",
   "the_file_is_too_big": "file terlalu besar",
   "this_library_already_has_a_show_with_that_name": "pustaka ini sudah punya acara dengan nama itu",
@@ -220,5 +221,12 @@
   "couldnt_start_playback_for_this_album": "tidak dapat memulai pemutaran album ini",
   "not_an_album": "bukan album",
   "only_the_household_can_change_this": "hanya anggota rumah yang dapat mengubah ini",
-  "tracks_must_be_songs_on_one_album": "trek harus berupa lagu dari satu album"
+  "tracks_must_be_songs_on_one_album": "trek harus berupa lagu dari satu album",
+  "name_give_one_of_up_to_120_characters": "nama: isi maksimal 120 karakter",
+  "not_a_music_library": "bukan perpustakaan musik",
+  "not_a_radio_station": "bukan stasiun radio",
+  "q_or_tag_is_required": "q atau tag wajib diisi",
+  "the_station_couldnt_be_reached_check_the_address_and_try_again": "stasiun tidak dapat dijangkau. Periksa alamatnya lalu coba lagi.",
+  "the_station_couldnt_be_reached_reason": "stasiun tidak dapat dijangkau: {{reason}}",
+  "the_station_directory_isnt_answering_right_now": "direktori stasiun sedang tidak merespons"
 }

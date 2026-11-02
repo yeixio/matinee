@@ -190,6 +190,7 @@
   "that_isnt_a_podcast_feed": "tämä ei ole podcast-syöte",
   "that_isnt_an_opml_file": "tämä ei ole OPML-tiedosto",
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "syötettä ei voitu lukea. Tarkista osoite ja yritä uudelleen.",
+  "the_feed_couldnt_be_read_reason": "syötettä ei voitu lukea: {{reason}}",
   "the_feed_couldnt_be_read_right_now": "syötettä ei voi lukea juuri nyt",
   "the_file_is_too_big": "tiedosto on liian suuri",
   "this_library_already_has_a_show_with_that_name": "tässä kirjastossa on jo samanniminen ohjelma",
@@ -220,5 +221,12 @@
   "couldnt_start_playback_for_this_album": "albumin toistoa ei voitu aloittaa",
   "not_an_album": "ei albumi",
   "only_the_household_can_change_this": "vain kotitalous voi muuttaa tätä",
-  "tracks_must_be_songs_on_one_album": "kappaleiden on oltava samalta albumilta"
+  "tracks_must_be_songs_on_one_album": "kappaleiden on oltava samalta albumilta",
+  "name_give_one_of_up_to_120_characters": "nimi: anna enintään 120 merkkiä",
+  "not_a_music_library": "ei ole musiikkikirjasto",
+  "not_a_radio_station": "ei ole radioasema",
+  "q_or_tag_is_required": "q tai tag vaaditaan",
+  "the_station_couldnt_be_reached_check_the_address_and_try_again": "asemaan ei saatu yhteyttä. Tarkista osoite ja yritä uudelleen.",
+  "the_station_couldnt_be_reached_reason": "asemaan ei saatu yhteyttä: {{reason}}",
+  "the_station_directory_isnt_answering_right_now": "asemahakemisto ei vastaa juuri nyt"
 }

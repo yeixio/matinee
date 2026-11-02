@@ -190,6 +190,7 @@
   "that_isnt_a_podcast_feed": "αυτό δεν είναι ροή podcast",
   "that_isnt_an_opml_file": "αυτό δεν είναι αρχείο OPML",
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "η ροή δεν διαβάστηκε. Ελέγξτε τη διεύθυνση και δοκιμάστε ξανά.",
+  "the_feed_couldnt_be_read_reason": "η ροή δεν διαβάστηκε: {{reason}}",
   "the_feed_couldnt_be_read_right_now": "η ροή δεν μπορεί να διαβαστεί αυτή τη στιγμή",
   "the_file_is_too_big": "το αρχείο είναι πολύ μεγάλο",
   "this_library_already_has_a_show_with_that_name": "αυτή η βιβλιοθήκη έχει ήδη εκπομπή με αυτό το όνομα",
@@ -220,5 +221,12 @@
   "couldnt_start_playback_for_this_album": "δεν ήταν δυνατή η αναπαραγωγή αυτού του άλμπουμ",
   "not_an_album": "δεν είναι άλμπουμ",
   "only_the_household_can_change_this": "μόνο το νοικοκυριό μπορεί να το αλλάξει",
-  "tracks_must_be_songs_on_one_album": "τα κομμάτια πρέπει να είναι από ένα άλμπουμ"
+  "tracks_must_be_songs_on_one_album": "τα κομμάτια πρέπει να είναι από ένα άλμπουμ",
+  "name_give_one_of_up_to_120_characters": "όνομα: δώστε έως 120 χαρακτήρες",
+  "not_a_music_library": "δεν είναι βιβλιοθήκη μουσικής",
+  "not_a_radio_station": "δεν είναι ραδιοφωνικός σταθμός",
+  "q_or_tag_is_required": "απαιτείται q ή tag",
+  "the_station_couldnt_be_reached_check_the_address_and_try_again": "δεν ήταν δυνατή η σύνδεση με τον σταθμό. Ελέγξτε τη διεύθυνση και δοκιμάστε ξανά.",
+  "the_station_couldnt_be_reached_reason": "δεν ήταν δυνατή η σύνδεση με τον σταθμό: {{reason}}",
+  "the_station_directory_isnt_answering_right_now": "ο κατάλογος σταθμών δεν απαντά αυτή τη στιγμή"
 }

@@ -266,3 +266,18 @@ export function portrait(id) {
 <path d="M200 240 Q210 100 316 105 Q430 100 432 250 Q410 160 316 165 Q230 165 200 240 Z" fill="hsl(${(h + 180) % 360},20%,${12 + (id % 3) * 12}%)"/>
 </svg>`
 }
+
+/** A made-up radio station's logo: its name under a few broadcast rings. */
+export function stationLogo(name, hue = 0) {
+  const s = 400
+  const c = (l, sat = 70) => `hsl(${hue} ${sat}% ${l}%)`
+  const rings = [70, 105, 140].map((r, i) => `<path d="M${s / 2 - r} ${170} A${r} ${r} 0 0 1 ${s / 2 + r} ${170}" fill="none" stroke="#fff" stroke-width="14" stroke-linecap="round" opacity="${(0.95 - i * 0.25).toFixed(2)}"/>`).join('')
+  const words = name.split(' ')
+  const lines = words.length > 2 ? [words.slice(0, 2).join(' '), words.slice(2).join(' ')] : [name]
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${s}" height="${s}" viewBox="0 0 ${s} ${s}">${fonts}
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${c(55)}"/><stop offset="1" stop-color="${c(28, 60)}"/></linearGradient></defs>
+<rect width="${s}" height="${s}" fill="url(#g)"/>
+${rings}<circle cx="${s / 2}" cy="170" r="22" fill="#fff"/>
+${lines.map((l, i) => `<text x="${s / 2}" y="${262 + i * 46}" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-weight="700" font-size="${lines.length > 1 ? 40 : 44}" fill="#fff">${escape(l)}</text>`).join('')}
+</svg>`
+}

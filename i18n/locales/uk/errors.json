@@ -190,6 +190,7 @@
   "that_isnt_a_podcast_feed": "це не стрічка подкасту",
   "that_isnt_an_opml_file": "це не файл OPML",
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "не вдалося прочитати стрічку. Перевірте адресу й спробуйте ще раз.",
+  "the_feed_couldnt_be_read_reason": "не вдалося прочитати стрічку: {{reason}}",
   "the_feed_couldnt_be_read_right_now": "стрічку зараз не вдається прочитати",
   "the_file_is_too_big": "файл завеликий",
   "this_library_already_has_a_show_with_that_name": "у цій бібліотеці вже є шоу з такою назвою",
@@ -220,5 +221,12 @@
   "couldnt_start_playback_for_this_album": "не вдалося почати відтворення альбому",
   "not_an_album": "це не альбом",
   "only_the_household_can_change_this": "це може змінити лише родина",
-  "tracks_must_be_songs_on_one_album": "треки мають бути з одного альбому"
+  "tracks_must_be_songs_on_one_album": "треки мають бути з одного альбому",
+  "name_give_one_of_up_to_120_characters": "назва: не довша за 120 символів",
+  "not_a_music_library": "це не музична бібліотека",
+  "not_a_radio_station": "це не радіостанція",
+  "q_or_tag_is_required": "потрібен q або tag",
+  "the_station_couldnt_be_reached_check_the_address_and_try_again": "не вдалося підключитися до станції. Перевірте адресу й спробуйте ще раз.",
+  "the_station_couldnt_be_reached_reason": "не вдалося підключитися до станції: {{reason}}",
+  "the_station_directory_isnt_answering_right_now": "каталог станцій зараз не відповідає"
 }

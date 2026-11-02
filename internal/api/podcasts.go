@@ -211,13 +211,19 @@ func (s *Server) podcastLibrary(w http.ResponseWriter, r *http.Request, id int64
 }
 
 // subscribeError answers for a show that couldn't be added.
-func (s *Server) subscribeError(w http.ResponseWriter, err error) {
+func (s *Server) subscribeError(w http.ResponseWriter, r *http.Request, err error) {
 	switch {
 	case errors.Is(err, podcast.ErrBadURL), errors.Is(err, podcast.ErrNotFeed), errors.Is(err, podcast.ErrNoEpisodes),
 		errors.Is(err, store.ErrPodcastTitleTaken):
 		writeError(w, http.StatusBadRequest, err.Error())
 	default:
 		s.Log.Info("adding a podcast", "err", err)
+		if currentUser(r).IsAdmin {
+			// Admins can act on the reason, such as a feed that moved or
+			// a host that turns the server away.
+			writeErrorWith(w, http.StatusBadGateway, "the feed couldn't be read: {{reason}}", map[string]string{"reason": err.Error()})
+			return
+		}
 		writeError(w, http.StatusBadGateway, "the feed couldn't be read. Check the address and try again.")
 	}
 }
@@ -237,11 +243,13 @@ func (s *Server) addPodcast(w http.ResponseWriter, r *http.Request) {
 	if !ok {
 		return
 	}
-	ctx, cancel := context.WithTimeout(r.Context(), 45*time.Second)
+	// A big feed can take a while to fetch and file. Finish adding it even
+	// if the app stops waiting, so trying again finds the show added.
+	ctx, cancel := context.WithTimeout(context.WithoutCancel(r.Context()), 45*time.Second)
 	defer cancel()
 	id, err := s.Podcasts.Subscribe(ctx, lib, req.FeedURL)
 	if err != nil {
-		s.subscribeError(w, err)
+		s.subscribeError(w, r, err)
 		return
 	}
 	if err := s.Store.Follow(r.Context(), currentUser(r).ID, id); err != nil {

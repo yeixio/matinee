@@ -190,6 +190,7 @@
   "that_isnt_a_podcast_feed": "هذه ليست خلاصة بودكاست",
   "that_isnt_an_opml_file": "هذا ليس ملف OPML",
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "تعذّرت قراءة الخلاصة. تحقّق من العنوان وحاول مجددًا.",
+  "the_feed_couldnt_be_read_reason": "تعذّرت قراءة الخلاصة: {{reason}}",
   "the_feed_couldnt_be_read_right_now": "تتعذّر قراءة الخلاصة الآن",
   "the_file_is_too_big": "الملف كبير جدًا",
   "this_library_already_has_a_show_with_that_name": "في هذه المكتبة برنامج بهذا الاسم بالفعل",
@@ -220,5 +221,12 @@
   "couldnt_start_playback_for_this_album": "تعذّر بدء تشغيل هذا الألبوم",
   "not_an_album": "ليس ألبومًا",
   "only_the_household_can_change_this": "يمكن لأهل المنزل فقط تغيير هذا",
-  "tracks_must_be_songs_on_one_album": "يجب أن تكون المقاطع أغاني من ألبوم واحد"
+  "tracks_must_be_songs_on_one_album": "يجب أن تكون المقاطع أغاني من ألبوم واحد",
+  "name_give_one_of_up_to_120_characters": "الاسم: أدخل اسمًا لا يتجاوز 120 حرفًا",
+  "not_a_music_library": "ليست مكتبة موسيقى",
+  "not_a_radio_station": "ليست محطة راديو",
+  "q_or_tag_is_required": "مطلوب q أو tag",
+  "the_station_couldnt_be_reached_check_the_address_and_try_again": "تعذّر الوصول إلى المحطة. تحقق من العنوان وحاول مرة أخرى.",
+  "the_station_couldnt_be_reached_reason": "تعذّر الوصول إلى المحطة: {{reason}}",
+  "the_station_directory_isnt_answering_right_now": "دليل المحطات لا يستجيب الآن"
 }

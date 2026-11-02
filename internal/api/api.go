@@ -31,6 +31,7 @@ import (
 	"github.com/yeixio/matinee/internal/plugin"
 	"github.com/yeixio/matinee/internal/podcast"
 	"github.com/yeixio/matinee/internal/probe"
+	"github.com/yeixio/matinee/internal/radio"
 	"github.com/yeixio/matinee/internal/remote"
 	"github.com/yeixio/matinee/internal/scan"
 	"github.com/yeixio/matinee/internal/spectrum"
@@ -139,6 +140,10 @@ type Server struct {
 	// PodcastIndexBase is Podcast Index's API; empty is the real one.
 	Podcasts         *podcast.Manager
 	PodcastIndexBase string
+	// RadioBase is Radio Browser's API, for finding stations; empty is the
+	// real one. stationTitles has the song each station played last.
+	RadioBase     string
+	stationTitles radio.Titles
 	// OpenSubtitlesBase is the OpenSubtitles API; empty is the real one.
 	OpenSubtitlesBase string
 	openSubs          openSubsState
@@ -253,6 +258,7 @@ func (s *Server) routes() []route {
 		{"GET /libraries/{id}/people", reader, s.libraryPeople},
 		{"GET /libraries/{id}/series", reader, s.librarySeries},
 		{"GET /libraries/{id}/narrators", reader, s.libraryNarrators},
+		{"GET /libraries/{id}/labels", reader, s.libraryLabels},
 		{"GET /items", reader, s.filterItems},
 		{"GET /fs", adminOnly, s.browseFS},
 		{"GET /import", adminOnly, s.importStatus},
@@ -296,6 +302,12 @@ func (s *Server) routes() []route {
 		{"DELETE /podcasts/{id}/follow", reader, s.unfollowPodcast},
 		{"PUT /podcasts/{id}/played", reader, s.markPodcastPlayed},
 		{"PUT /podcasts/{id}/downloads", reader, s.setPodcastDownloads},
+		{"GET /libraries/{id}/stations", reader, s.libraryStations},
+		{"GET /stations/directory", reader, grownUps(s.stationDirectory)},
+		{"POST /stations", signedIn, grownUps(s.addStation)},
+		{"PUT /stations/{id}", signedIn, grownUps(s.renameStation)},
+		{"DELETE /stations/{id}", signedIn, grownUps(s.deleteStation)},
+		{"GET /items/{id}/now", reader, s.stationNow},
 		{"GET /libraries/{id}/opml", reader, s.exportPodcasts},
 		{"POST /libraries/{id}/opml", signedIn, grownUps(s.importPodcasts)},
 		{"GET /items/{id}/related", reader, s.itemRelated},
@@ -1438,6 +1450,10 @@ func (s *Server) directFile(w http.ResponseWriter, r *http.Request) {
 	}
 	if !it.Playable {
 		writeError(w, http.StatusBadRequest, "not a playable item")
+		return
+	}
+	if it.Kind == "station" {
+		s.playStation(w, r, it)
 		return
 	}
 	stream.ServeDirect(w, r, it)

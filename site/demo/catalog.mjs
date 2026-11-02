@@ -183,14 +183,15 @@ export const shows = [
   },
 ]
 
+// Made-up albums; label is the record label their tags name.
 export const albums = [
-  { artist: 'Aurora Static', album: 'Signal Fires', year: 2021, scene: 202, tracks: ['Opening Credits', 'Velvet Seats', 'Intermission', 'Projector Hum', 'Snowline', 'Encore'] },
-  { artist: 'The Midnight Reels', album: 'Late Show', year: 2019, scene: 105, tracks: ['Neon Marquee', 'Back Row', 'Usher\'s Waltz', 'Double Feature', 'Closing Time'] },
-  { artist: 'Harbor Choir', album: 'Lights on the Water', year: 2023, scene: 102, tracks: ['Quay', 'Night Ferry', 'Lanterns', 'Tide Tables'] },
-  { artist: 'Aurora Static', album: 'Night Signals', year: 2018, scene: 104, tracks: ['Dial Tone', 'Static Bloom', 'Last Broadcast', 'Antenna Song', 'Test Pattern'] },
-  { artist: 'Paper Lanterns', album: 'Small Hours', year: 2022, scene: 106, hue: 40, tracks: ['Kettle', 'Porch Light', 'Small Hours', 'Fog Lamp'] },
-  { artist: 'Cobalt Avenue', album: 'Drive-In', year: 2020, scene: 108, hue: 300, tracks: ['Headlights', 'Speaker Post', 'Second Feature', 'Tail Lights', 'Gravel'] },
-  { artist: 'The Midnight Reels', album: 'Matinee Idols', year: 2024, scene: 103, hue: 200, tracks: ['Front Row', 'Cartoon Short', 'Popcorn Line', 'House Lights'] },
+  { artist: 'Aurora Static', album: 'Signal Fires', label: 'Lantern Records', year: 2021, scene: 202, tracks: ['Opening Credits', 'Velvet Seats', 'Intermission', 'Projector Hum', 'Snowline', 'Encore'] },
+  { artist: 'The Midnight Reels', album: 'Late Show', label: 'Marquee Sound', year: 2019, scene: 105, tracks: ['Neon Marquee', 'Back Row', 'Usher\'s Waltz', 'Double Feature', 'Closing Time'] },
+  { artist: 'Harbor Choir', album: 'Lights on the Water', label: 'Lantern Records', year: 2023, scene: 102, tracks: ['Quay', 'Night Ferry', 'Lanterns', 'Tide Tables'] },
+  { artist: 'Aurora Static', album: 'Night Signals', label: 'Lantern Records', year: 2018, scene: 104, tracks: ['Dial Tone', 'Static Bloom', 'Last Broadcast', 'Antenna Song', 'Test Pattern'] },
+  { artist: 'Paper Lanterns', album: 'Small Hours', label: 'Lantern Records', year: 2022, scene: 106, hue: 40, tracks: ['Kettle', 'Porch Light', 'Small Hours', 'Fog Lamp'] },
+  { artist: 'Cobalt Avenue', album: 'Drive-In', label: 'Marquee Sound', year: 2020, scene: 108, hue: 300, tracks: ['Headlights', 'Speaker Post', 'Second Feature', 'Tail Lights', 'Gravel'] },
+  { artist: 'The Midnight Reels', album: 'Matinee Idols', label: 'Marquee Sound', year: 2024, scene: 103, hue: 200, tracks: ['Front Row', 'Cartoon Short', 'Popcorn Line', 'House Lights'] },
 ]
 
 // Made-up audiobooks: a series in two books (one file with chapters inside,
@@ -295,3 +296,20 @@ export const recommendations = {
   201: [308, 317, 309, 302, 305, 306],
   default: [301, 304, 305, 309],
 }
+
+// Made-up radio stations for the Radio tab: the stand-in station directory
+// (fake-podcasts.mjs) finds them, and each plays the same quiet stream,
+// saying a song now and then.
+export const stations = [
+  { name: 'Harbor Lights FM', tags: ['electronic', 'chillout'], country: 'GB', hue: 200, added: true },
+  { name: 'Night Shift Radio', tags: ['trance', 'electronic'], country: 'NL', hue: 265, added: true },
+  { name: 'Copperline Jazz', tags: ['jazz'], country: 'US', hue: 28, added: true },
+  { name: 'Low Tide Lounge', tags: ['chillout', 'house'], country: 'AU', hue: 170, added: true },
+  { name: 'Northern Pulse', tags: ['trance', 'house'], country: 'SE', hue: 320 },
+  { name: 'Afterglow Sessions', tags: ['trance', 'chillout'], country: 'DE', hue: 12 },
+  { name: 'Skyline Uplift', tags: ['trance'], country: 'CA', hue: 225 },
+  { name: 'Deep Water Radio', tags: ['house', 'electronic'], country: 'IE', hue: 185 },
+]
+
+// What the stations say they're playing, in turn.
+export const onAir = ['Aurora Static - Signal Fires', 'The Paper Boats - Low Light', 'Mira Vale - Coastline', 'Glass Arcade - Neon Rain', 'Aurora Static - Northern Line']

@@ -406,6 +406,8 @@ export type Item = {
   artist?: string
   artistId?: number
   album?: string
+  // Albums and tracks: the record label the album came out on.
+  recordLabel?: string
   // Books and their parts: the author; parts: the book too (its id is
   // parentId). Books name their narrators and place in a series.
   author?: string
@@ -439,6 +441,23 @@ export type BookChapter = { title: string; startMs: number; endMs: number; partI
 export type Book = Item & { parts: BookPart[]; chapters: BookChapter[] }
 // A series or a narrator, with a few of its books for artwork.
 export type BookGroup = { name: string; books: number; itemIds: number[] }
+
+// A record label in a music library, with a few of its albums for its tile.
+export type RecordLabel = { name: string; albums: number; artists: number; covers: Item[] }
+
+// A radio station found in the station directory (Radio Browser); itemId
+// is set when the library asked about has it already.
+export type FoundStation = {
+  name: string
+  url: string
+  homepage?: string
+  image?: string
+  tags?: string[]
+  country?: string
+  codec?: string
+  bitrate?: number
+  itemId?: number
+}
 
 // A plugin as Settings shows it (internal/plugin, docs/guide/plugins).
 export type Plugin = {
@@ -1240,6 +1259,17 @@ export const api = {
   book: (id: number) => request<Book>('GET', `/api/v1/items/${id}/book`),
   series: (library: number) => request<BookGroup[]>('GET', `/api/v1/libraries/${library}/series`),
   narrators: (library: number) => request<BookGroup[]>('GET', `/api/v1/libraries/${library}/narrators`),
+  // The record labels of a music library's albums (servers from before labels answer 404).
+  labels: (library: number) => request<RecordLabel[]>('GET', `/api/v1/libraries/${library}/labels`),
+  // Radio stations in a music library (servers from before radio answer 404).
+  stations: (library: number) => request<Item[]>('GET', `/api/v1/libraries/${library}/stations`),
+  stationDirectory: (q: { q?: string; tag?: string; library?: number }) =>
+    request<FoundStation[]>('GET', `/api/v1/stations/directory?${new URLSearchParams(Object.entries(q).filter(([, v]) => v !== undefined && v !== '').map(([k, v]) => [k, String(v)]))}`),
+  addStation: (s: { libraryId: number; url: string; name?: string; image?: string; homepage?: string; tags?: string[] }) => request<Item>('POST', '/api/v1/stations', s),
+  renameStation: (id: number, name: string) => request<Item>('PUT', `/api/v1/stations/${id}`, { name }),
+  deleteStation: (id: number) => request<void>('DELETE', `/api/v1/stations/${id}`),
+  // What a station is playing, from the titles it sends while someone listens.
+  stationNow: (id: number) => request<{ title?: string }>('GET', `/api/v1/items/${id}/now`),
   // Podcasts: finding shows in Podcast Index, adding them by their feed,
   // following them, and moving them between apps as OPML.
   podcastDirectory: (q: { q?: string; lang?: string; category?: string }) =>

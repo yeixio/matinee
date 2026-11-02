@@ -190,6 +190,7 @@
   "that_isnt_a_podcast_feed": "זה לא פיד של פודקאסט",
   "that_isnt_an_opml_file": "זה לא קובץ OPML",
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "לא ניתן היה לקרוא את הפיד. בדקו את הכתובת ונסו שוב.",
+  "the_feed_couldnt_be_read_reason": "לא ניתן היה לקרוא את הפיד: {{reason}}",
   "the_feed_couldnt_be_read_right_now": "לא ניתן לקרוא את הפיד כרגע",
   "the_file_is_too_big": "הקובץ גדול מדי",
   "this_library_already_has_a_show_with_that_name": "בספרייה הזו כבר יש תוכנית בשם הזה",
@@ -220,5 +221,12 @@
   "couldnt_start_playback_for_this_album": "לא ניתן להתחיל לנגן את האלבום",
   "not_an_album": "זה לא אלבום",
   "only_the_household_can_change_this": "רק בני הבית יכולים לשנות את זה",
-  "tracks_must_be_songs_on_one_album": "הרצועות חייבות להיות שירים מאלבום אחד"
+  "tracks_must_be_songs_on_one_album": "הרצועות חייבות להיות שירים מאלבום אחד",
+  "name_give_one_of_up_to_120_characters": "שם: יש להזין עד 120 תווים",
+  "not_a_music_library": "זו לא ספריית מוזיקה",
+  "not_a_radio_station": "זו לא תחנת רדיו",
+  "q_or_tag_is_required": "נדרש q או tag",
+  "the_station_couldnt_be_reached_check_the_address_and_try_again": "לא ניתן להתחבר לתחנה. בדקו את הכתובת ונסו שוב.",
+  "the_station_couldnt_be_reached_reason": "לא ניתן להתחבר לתחנה: {{reason}}",
+  "the_station_directory_isnt_answering_right_now": "מדריך התחנות לא עונה כרגע"
 }

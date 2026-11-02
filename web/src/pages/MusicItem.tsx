@@ -13,7 +13,7 @@ import { TrackMenu, Tracks } from '../components/Tracks'
 import { Button } from '../components/ui'
 import { duration } from '../format'
 import { useAudio } from '../player/AudioPlayer'
-import { AlbumCard } from './Music'
+import { AlbumCard, labelPath } from './Music'
 
 // An album: its cover, the songs, and more by the same artist.
 export function AlbumPage({ item, tracks }: { item: ItemDetail; tracks?: Item[] }) {
@@ -34,6 +34,11 @@ export function AlbumPage({ item, tracks }: { item: ItemDetail; tracks?: Item[] 
           </Link>
         )}
         {item.year && <span>{item.year}</span>}
+        {item.recordLabel && (
+          <Link to={labelPath(item.libraryId, item.recordLabel)} className="hover:text-text hover:underline">
+            {item.recordLabel}
+          </Link>
+        )}
         {tracks && <span>{t('common:count.tracks', { count: tracks.length })}</span>}
         {!!total && <span>{duration(total)}</span>}
       </Hero>

@@ -190,6 +190,7 @@
   "that_isnt_a_podcast_feed": "det er ikke et podcastfeed",
   "that_isnt_an_opml_file": "det er ikke en OPML-fil",
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "feedet kunne ikke læses. Tjek adressen, og prøv igen.",
+  "the_feed_couldnt_be_read_reason": "feedet kunne ikke læses: {{reason}}",
   "the_feed_couldnt_be_read_right_now": "feedet kan ikke læses lige nu",
   "the_file_is_too_big": "filen er for stor",
   "this_library_already_has_a_show_with_that_name": "dette bibliotek har allerede et program med det navn",
@@ -220,5 +221,12 @@
   "couldnt_start_playback_for_this_album": "kunne ikke starte afspilningen af albummet",
   "not_an_album": "ikke et album",
   "only_the_household_can_change_this": "kun husstanden kan ændre dette",
-  "tracks_must_be_songs_on_one_album": "numrene skal være sange fra ét album"
+  "tracks_must_be_songs_on_one_album": "numrene skal være sange fra ét album",
+  "name_give_one_of_up_to_120_characters": "navn: angiv et på højst 120 tegn",
+  "not_a_music_library": "ikke et musikbibliotek",
+  "not_a_radio_station": "ikke en radiostation",
+  "q_or_tag_is_required": "q eller tag er påkrævet",
+  "the_station_couldnt_be_reached_check_the_address_and_try_again": "stationen kunne ikke nås. Tjek adressen, og prøv igen.",
+  "the_station_couldnt_be_reached_reason": "stationen kunne ikke nås: {{reason}}",
+  "the_station_directory_isnt_answering_right_now": "stationskataloget svarer ikke lige nu"
 }

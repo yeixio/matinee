@@ -190,6 +190,7 @@
   "that_isnt_a_podcast_feed": "to není podcastový kanál",
   "that_isnt_an_opml_file": "to není soubor OPML",
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "kanál se nepodařilo načíst. Zkontrolujte adresu a zkuste to znovu.",
+  "the_feed_couldnt_be_read_reason": "kanál se nepodařilo načíst: {{reason}}",
   "the_feed_couldnt_be_read_right_now": "kanál teď nelze načíst",
   "the_file_is_too_big": "soubor je příliš velký",
   "this_library_already_has_a_show_with_that_name": "tato knihovna už má pořad s tímto názvem",
@@ -220,5 +221,12 @@
   "couldnt_start_playback_for_this_album": "nepodařilo se spustit přehrávání alba",
   "not_an_album": "není album",
   "only_the_household_can_change_this": "toto může změnit jen domácnost",
-  "tracks_must_be_songs_on_one_album": "skladby musí být z jednoho alba"
+  "tracks_must_be_songs_on_one_album": "skladby musí být z jednoho alba",
+  "name_give_one_of_up_to_120_characters": "název: zadejte nejvýše 120 znaků",
+  "not_a_music_library": "nejde o hudební knihovnu",
+  "not_a_radio_station": "nejde o rozhlasovou stanici",
+  "q_or_tag_is_required": "je potřeba q nebo tag",
+  "the_station_couldnt_be_reached_check_the_address_and_try_again": "stanici se nepodařilo zastihnout. Zkontrolujte adresu a zkuste to znovu.",
+  "the_station_couldnt_be_reached_reason": "stanici se nepodařilo zastihnout: {{reason}}",
+  "the_station_directory_isnt_answering_right_now": "adresář stanic teď neodpovídá"
 }

@@ -190,6 +190,7 @@
   "that_isnt_a_podcast_feed": "dat is geen podcastfeed",
   "that_isnt_an_opml_file": "dat is geen OPML-bestand",
   "the_feed_couldnt_be_read_check_the_address_and_try_again": "de feed kon niet worden gelezen. Controleer het adres en probeer het opnieuw.",
+  "the_feed_couldnt_be_read_reason": "de feed kon niet worden gelezen: {{reason}}",
   "the_feed_couldnt_be_read_right_now": "de feed kan nu niet worden gelezen",
   "the_file_is_too_big": "het bestand is te groot",
   "this_library_already_has_a_show_with_that_name": "deze bibliotheek heeft al een programma met die naam",
@@ -220,5 +221,12 @@
   "couldnt_start_playback_for_this_album": "kon het afspelen van dit album niet starten",
   "not_an_album": "geen album",
   "only_the_household_can_change_this": "alleen het huishouden kan dit wijzigen",
-  "tracks_must_be_songs_on_one_album": "nummers moeten van één album zijn"
+  "tracks_must_be_songs_on_one_album": "nummers moeten van één album zijn",
+  "name_give_one_of_up_to_120_characters": "naam: geef er een van maximaal 120 tekens",
+  "not_a_music_library": "geen muziekbibliotheek",
+  "not_a_radio_station": "geen radiozender",
+  "q_or_tag_is_required": "q of tag is verplicht",
+  "the_station_couldnt_be_reached_check_the_address_and_try_again": "de zender is niet bereikbaar. Controleer het adres en probeer het opnieuw.",
+  "the_station_couldnt_be_reached_reason": "de zender is niet bereikbaar: {{reason}}",
+  "the_station_directory_isnt_answering_right_now": "de zendergids reageert op dit moment niet"
 }

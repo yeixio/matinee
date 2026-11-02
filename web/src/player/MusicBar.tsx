@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom'
 import { Artwork } from '../components/Artwork'
 import { clock } from '../format'
 import { useAudio, useAudioTime, type AudioState } from './AudioPlayer'
+import { LivePill } from './Live'
+import { isStation, useStationNow } from './station'
 
 // The music player along the bottom of every page: what's playing, the
 // buttons, and the way into the full player and the queue.
@@ -13,11 +15,15 @@ export function MusicBar() {
   const s = useAudio()
   const { time, dur } = useAudioTime()
   const item = s.current!
+  const live = isStation(item)
+  const onAir = useStationNow(item, s.playing)
   const open = () => s.setExpanded(true)
+  // A station's page is the library's Radio tab.
+  const home = live ? `/library/${item.libraryId}?view=radio` : item.parentId ? `/item/${item.parentId}` : '#'
   return (
     <div className="fixed inset-x-0 bottom-[calc(57px+env(safe-area-inset-bottom))] z-30 border-t border-line/60 bg-surface/95 backdrop-blur md:bottom-0">
       {/* Phones: a thin line shows how far along it is. */}
-      <div className="absolute inset-x-0 top-0 h-0.5 bg-text/10 md:hidden">
+      <div className={`absolute inset-x-0 top-0 h-0.5 bg-text/10 md:hidden ${live ? 'hidden' : ''}`}>
         <div className="h-full bg-accent" style={{ width: `${dur ? (time / dur) * 100 : 0}%` }} />
       </div>
       {s.notice && (
@@ -38,10 +44,12 @@ export function MusicBar() {
             <button onClick={open} className="block w-full truncate text-start text-sm font-medium md:hidden">
               {item.title}
             </button>
-            <Link to={item.parentId ? `/item/${item.parentId}` : '#'} className="hidden truncate text-sm font-medium hover:underline md:block">
+            <Link to={home} className="hidden truncate text-sm font-medium hover:underline md:block">
               {item.title}
             </Link>
-            {item.artistId ? (
+            {live ? (
+              <div className="truncate text-xs text-muted">{onAir ?? <LivePill className="md:hidden" />}</div>
+            ) : item.artistId ? (
               <Link to={`/item/${item.artistId}`} className="block truncate text-xs text-muted hover:text-text hover:underline">
                 {item.artist}
               </Link>
@@ -51,16 +59,23 @@ export function MusicBar() {
 
         <div className="flex shrink-0 flex-col items-center gap-1">
           <Controls s={s} compact />
-          <div className="hidden w-full items-center gap-2 text-[11px] text-muted tabular-nums md:flex">
-            <span className="w-10 text-end">{clock(time)}</span>
-            <Seek s={s} time={time} dur={dur} />
-            <span className="w-10">{clock(dur)}</span>
-          </div>
+          {live ? (
+            <div className="hidden h-3 items-center md:flex">
+              <LivePill />
+            </div>
+          ) : (
+            <div className="hidden w-full items-center gap-2 text-[11px] text-muted tabular-nums md:flex">
+              <span className="w-10 text-end">{clock(time)}</span>
+              <Seek s={s} time={time} dur={dur} />
+              <span className="w-10">{clock(dur)}</span>
+            </div>
+          )}
         </div>
 
         <div className="hidden items-center justify-end gap-1 md:flex">
           <button
             onClick={open}
+            hidden={live}
             className="rounded-full p-2 text-muted hover:bg-text/5 hover:text-text"
             aria-label={t('common:music.queue')}
             title={t('common:music.queue')}
@@ -86,6 +101,18 @@ export function Controls({ s, compact = false, large = false }: { s: AudioState;
   const side = `rounded-full p-2 transition-colors hover:text-text ${compact ? 'hidden md:block' : ''}`
   const repeatLabel = t(`common:music.repeat${queue.repeat === 'off' ? 'Off' : queue.repeat === 'all' ? 'All' : 'One'}`)
   const icon = large ? 'size-7' : 'size-5'
+  // A station has nothing to skip through or repeat.
+  if (isStation(s.current)) {
+    return (
+      <button
+        onClick={s.toggle}
+        className={`grid place-items-center rounded-full bg-text text-ink transition-transform hover:scale-105 ${large ? 'size-16' : 'size-10'}`}
+        aria-label={s.playing ? t('player.pause') : t('item.play')}
+      >
+        {s.playing ? <Pause className={`${icon} fill-current`} /> : <Play className={`${icon} translate-x-0.5 fill-current`} />}
+      </button>
+    )
+  }
   return (
     <div className={`flex items-center ${large ? 'gap-5' : 'gap-1 md:gap-2'}`}>
       <button

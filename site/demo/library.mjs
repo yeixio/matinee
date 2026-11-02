@@ -8,8 +8,8 @@ import { execFileSync } from 'node:child_process'
 import { existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { chromium } from 'playwright'
-import { backdrop, cover, portrait, poster } from './art.mjs'
-import { albums, audiobooks, discover, movies, people, podcasts, shows } from './catalog.mjs'
+import { backdrop, cover, portrait, poster, stationLogo } from './art.mjs'
+import { albums, audiobooks, discover, movies, people, podcasts, shows, stations } from './catalog.mjs'
 
 const ff = (...args) => execFileSync('ffmpeg', ['-v', 'error', '-y', ...args])
 
@@ -111,6 +111,7 @@ export async function makeLibrary(root) {
   })
   audiobooks.forEach((b, i) => art(`book-${i}.jpg`, cover(b.scene, b.title, b.author, b.hue ?? 0), 600, 600))
   podcasts.forEach((p, i) => art(`podcast-${i}.jpg`, cover(p.scene, p.title, p.author, p.hue ?? 0), 600, 600))
+  stations.forEach((st, i) => art(`station-${i}.jpg`, stationLogo(st.name, st.hue), 400, 400))
   await render(jobs)
 
   for (const m of movies) {
@@ -150,14 +151,17 @@ export async function makeLibrary(root) {
       // A little tune, so the visualizer has a beat, a bass line and some hiss to show.
       ff('-f', 'lavfi', '-i', `aevalsrc='${tune(110 + n * 20)}':s=22050:d=${150 + n * 23}`, '-af', 'volume=0.05', '-sample_fmt', 's16',
         '-metadata', `artist=${a.artist}`, '-metadata', `album_artist=${a.artist}`, '-metadata', `album=${a.album}`,
-        '-metadata', `title=${t}`, '-metadata', `track=${n + 1}`, '-metadata', `date=${a.year}`, file)
+        '-metadata', `title=${t}`, '-metadata', `track=${n + 1}`, '-metadata', `date=${a.year}`, '-metadata', `LABEL=${a.label}`, file)
     })
   })
   audiobooks.forEach((b, i) => book(path.join(media, 'Audiobooks'), b, path.join(images, `book-${i}.jpg`), path.join(root, 'silence')))
   // Every podcast episode plays the same hour of quiet; fake-podcasts.mjs serves it.
   const episode = path.join(root, 'silence', 'podcast-episode.m4a')
   if (!existsSync(episode)) ff('-stream_loop', '-1', '-i', silenceFile(path.join(root, 'silence')), '-t', '3600', '-map', '0:a', '-c:a', 'copy', episode)
-  return { media, images, episode }
+  // The radio stations all play ten quiet minutes of MP3, over and over.
+  const radio = path.join(root, 'silence', 'radio.mp3')
+  if (!existsSync(radio)) ff('-f', 'lavfi', '-i', 'anullsrc=r=44100:cl=stereo', '-t', '600', '-c:a', 'libmp3lame', '-b:a', '64k', radio)
+  return { media, images, episode, radio }
 }
 
 // The words of Aurora Static's Opening Credits, a line every couple of beats.

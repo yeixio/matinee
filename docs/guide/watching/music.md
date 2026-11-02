@@ -1,6 +1,6 @@
 ---
 title: Music
-description: Browse artists, albums and songs, make playlists, line up a queue, read along with lyrics, and keep music playing while you browse.
+description: Browse artists, albums, songs and record labels, listen to radio stations, make playlists, line up a queue, read along with lyrics, and keep music playing while you browse.
 sidebar:
   order: 7
 ---
@@ -18,6 +18,36 @@ An album's page lists its songs. Click the big **Play** button to play it from t
 An artist's page has their albums, newest first, and plays or shuffles every song they have.
 
 ![An artist page with their albums](../images/artist.webp)
+
+<!-- since: v0.1.15 -->
+## Record labels
+
+When your albums name the record label they came out on, the **Labels** tab lists every label in the library, each with a few of its covers. A label's page has the artists on it and its albums, newest first. **Play** plays them album by album, and **Shuffle** mixes every song on the label. An album's page names its label under the title; click it to open the label's page.
+
+![The Labels tab, with a tile of album covers for each label](../images/labels.webp)
+
+![A label's page, with its artists and albums](../images/label.webp)
+
+From version 1.0.25 the phone and TV apps have the **Labels** tab and label pages too, and an album's page leads to its label.
+
+The label comes from the songs' tags: `LABEL` or `ORGANIZATION` in FLAC, Ogg and Opus files, and the publisher (`TPUB`) in MP3s. Taggers that look up your albums online, such as MusicBrainz Picard, and most music stores fill it in for you. The same label spelled differently, such as `ANJUNADEEP` and `Anjunadeep`, lands on one page. Albums already in your library get their label on the next scan, and the tab shows up once any album has one.
+<!-- /since -->
+
+<!-- since: v0.1.15 -->
+## Radio stations
+
+Internet radio stations live in your music library too, on the **Radio** tab. Click a station's logo to play it. It plays live, so there's a **Live** badge where the seek bar would be, and when the station says what song is on, its name shows under the station's. Pause and play again to pick up from what's on now.
+
+![The Radio tab: your stations, then trance stations found in the station directory](../images/radio.webp)
+
+To add stations, search **Find stations** by name or pick a genre, then click **Add** next to one. The station directory is [Radio Browser](https://www.radio-browser.info/), a free list of stations kept by its community. A station that isn't listed can be added under **Add by stream address**: paste the address of its stream (Icecast or SHOUTcast), or of a `.pls` or `.m3u` playlist from the station's website, and give it a name if you like. Matinee checks the stream plays before adding it. Hover over a station to rename or remove it.
+
+![A station playing in the full player, with the song that's on](../images/radio-playing.webp)
+
+From version 1.0.25 the phone apps have the **Radio** tab too: tap a station to play it, find and add stations below yours, and hold a station to remove it. The station and its song show on the lock screen and in the car. On a TV, the **Radio** tab plays the stations you've added, with the song that's on in the player.
+
+Everyone who can see the library can listen; the household's grown-ups add, rename and remove stations. The server plays each station for you, so stations work from anywhere you reach Matinee, and the stream's address stays on the server. Stations that only stream as HLS (`.m3u8`) can't be added yet. A stream on your own network, rather than the internet, needs `MATINEE_PODCASTS_HOME_NETWORK=true` (see [Configuration](/docs/server/configuration/)).
+<!-- /since -->
 
 <!-- since: v0.1.1 -->
 ## Music keeps playing while you browse
