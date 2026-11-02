@@ -1,0 +1,20 @@
+Package: matinee
+Version: 0.1.11
+Architecture: armhf
+Maintainer: YEIXIO LLC <hello@yeix.io>
+Installed-Size: 25472
+Depends: ffmpeg
+Filename: pool/main/matinee_0.1.11_armhf.deb
+Size: 9924910
+MD5sum: e425e5a0f2f45d576bd03baef28c9d07
+SHA1: ebf17966537a3a71892d19d9eed170b76ee96a80
+SHA256: 6b08b2b5d8358d84b0f6c5afc0adcf37f3a1e4cd2ab949f4d117427696f8c689
+Section: video
+Priority: optional
+Homepage: https://matinee.yeix.io
+Description: Self-hosted media server for movies, TV and music
+ A fast, free and open source, self-hosted media server for your movies, TV
+ and music. Runs as matinee.service on port 7171, with its data in
+ /var/lib/matinee.
+License: AGPL-3.0-or-later
+
