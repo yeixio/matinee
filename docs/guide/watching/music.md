@@ -44,6 +44,8 @@ To add stations, search **Find stations** by name or pick a genre, then click **
 
 ![A station playing in the full player, with the song that's on](../images/radio-playing.webp)
 
+From version 1.0.25 the phone apps have the **Radio** tab too: tap a station to play it, find and add stations below yours, and hold a station to remove it. The station and its song show on the lock screen and in the car. On a TV, the **Radio** tab plays the stations you've added, with the song that's on in the player.
+
 Everyone who can see the library can listen; the household's grown-ups add, rename and remove stations. The server plays each station for you, so stations work from anywhere you reach Matinee, and the stream's address stays on the server. Stations that only stream as HLS (`.m3u8`) can't be added yet. A stream on your own network, rather than the internet, needs `MATINEE_PODCASTS_HOME_NETWORK=true` (see [Configuration](/docs/server/configuration/)).
 <!-- /since -->
 
