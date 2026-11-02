@@ -100,21 +100,44 @@ func (s *Scanner) ScanAll(ctx context.Context) {
 // Scan brings one library in line with its folders. Unchanged files (same
 // size and mtime) are skipped, so rescans are cheap.
 func (s *Scanner) Scan(ctx context.Context, lib store.Library) (Stats, error) {
-	start := time.Now()
-	st, err := s.scan(ctx, lib, nil)
-	if !errors.Is(err, ErrAlreadyRunning) {
-		r := ScanReport{Started: start.UnixMilli(), TookMs: time.Since(start).Milliseconds(), Added: st.Added, Updated: st.Updated,
-			Removed: st.Removed, Failed: st.Failed, Unplayable: st.Unplayable}
-		if err != nil {
-			r.Error = err.Error()
-		}
-		s.mu.Lock()
-		if s.last == nil {
-			s.last = map[int64]ScanReport{}
-		}
-		s.last[lib.ID] = r
-		s.mu.Unlock()
+	if !s.claim(lib.ID) {
+		return Stats{}, ErrAlreadyRunning
 	}
+	defer s.release(lib.ID)
+	return s.scanAndReport(ctx, lib)
+}
+
+// Start scans a library in the background. The library counts as being
+// scanned (Running) before Start returns, so whoever asked for the scan,
+// and anyone polling for it to finish, never sees it idle before it has
+// begun. It reports false when a scan of the library is already running.
+func (s *Scanner) Start(ctx context.Context, lib store.Library) bool {
+	if !s.claim(lib.ID) {
+		return false
+	}
+	go func() {
+		defer s.release(lib.ID)
+		if _, err := s.scanAndReport(ctx, lib); err != nil {
+			s.Log.Error("scan failed", "library", lib.Name, "err", err)
+		}
+	}()
+	return true
+}
+
+func (s *Scanner) scanAndReport(ctx context.Context, lib store.Library) (Stats, error) {
+	start := time.Now()
+	st, err := s.run(ctx, lib, nil)
+	r := ScanReport{Started: start.UnixMilli(), TookMs: time.Since(start).Milliseconds(), Added: st.Added, Updated: st.Updated,
+		Removed: st.Removed, Failed: st.Failed, Unplayable: st.Unplayable}
+	if err != nil {
+		r.Error = err.Error()
+	}
+	s.mu.Lock()
+	if s.last == nil {
+		s.last = map[int64]ScanReport{}
+	}
+	s.last[lib.ID] = r
+	s.mu.Unlock()
 	return st, err
 }
 
@@ -126,33 +149,42 @@ func (s *Scanner) ScanPaths(ctx context.Context, lib store.Library, paths []stri
 	if len(paths) == 0 {
 		return Stats{}, nil
 	}
-	return s.scan(ctx, lib, paths)
+	if !s.claim(lib.ID) {
+		return Stats{}, ErrAlreadyRunning
+	}
+	defer s.release(lib.ID)
+	return s.run(ctx, lib, paths)
 }
 
 // target is where a scan walks from, inside one of the library's folders.
 type target struct{ root, start string }
 
-func (s *Scanner) scan(ctx context.Context, lib store.Library, paths []string) (Stats, error) {
+// claim marks a library as being scanned, unless it already is.
+func (s *Scanner) claim(libraryID int64) bool {
 	s.mu.Lock()
+	defer s.mu.Unlock()
 	if s.running == nil {
 		s.running = map[int64]bool{}
 	}
-	if s.running[lib.ID] {
-		s.mu.Unlock()
-		return Stats{}, ErrAlreadyRunning
+	if s.running[libraryID] {
+		return false
 	}
-	s.running[lib.ID] = true
+	s.running[libraryID] = true
 	if s.since == nil {
 		s.since = map[int64]time.Time{}
 	}
-	s.since[lib.ID] = time.Now()
-	s.mu.Unlock()
-	defer func() {
-		s.mu.Lock()
-		delete(s.running, lib.ID)
-		s.mu.Unlock()
-	}()
+	s.since[libraryID] = time.Now()
+	return true
+}
 
+func (s *Scanner) release(libraryID int64) {
+	s.mu.Lock()
+	delete(s.running, libraryID)
+	s.mu.Unlock()
+}
+
+// run scans a library the caller has claimed.
+func (s *Scanner) run(ctx context.Context, lib store.Library, paths []string) (Stats, error) {
 	kind, ok := KindByName(lib.Kind)
 	if !ok {
 		return Stats{}, fmt.Errorf("unknown library kind %q", lib.Kind)

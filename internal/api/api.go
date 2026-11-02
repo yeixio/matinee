@@ -959,7 +959,7 @@ func (s *Server) createLibrary(w http.ResponseWriter, r *http.Request) {
 		s.serverError(w, err)
 		return
 	}
-	go s.Scanner.Scan(s.BackgroundCtx, lib)
+	s.Scanner.Start(s.BackgroundCtx, lib)
 	if s.Watcher != nil {
 		s.Watcher.Reload()
 	}
@@ -1003,7 +1003,7 @@ func (s *Server) scanLibrary(w http.ResponseWriter, r *http.Request) {
 		// Every show's feed, now, however recently it was checked.
 		go s.Podcasts.RefreshLibrary(s.BackgroundCtx, lib)
 	} else {
-		go s.Scanner.Scan(s.BackgroundCtx, lib)
+		s.Scanner.Start(s.BackgroundCtx, lib)
 	}
 	w.WriteHeader(http.StatusAccepted)
 }
@@ -1035,7 +1035,7 @@ func (s *Server) refreshLibraryArtwork(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// A full scan checks the folders, then looks up what's still missing.
-	go s.Scanner.Scan(s.BackgroundCtx, lib)
+	s.Scanner.Start(s.BackgroundCtx, lib)
 	writeJSON(w, http.StatusAccepted, map[string]int64{"lookingUp": n})
 }
 

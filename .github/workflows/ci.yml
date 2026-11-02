@@ -39,7 +39,18 @@ jobs:
       - name: Test
         env:
           MATINEE_TEST_DATABASE_URL: ${{ matrix.database == 'postgres' && 'postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable' || '' }}
-        run: go test -count=1 -race ./...
+        # On a failure, the failing tests go in an annotation, which can be
+        # read where the job log can't.
+        run: |
+          set -o pipefail
+          if ! go test -count=1 -race ./... 2>&1 | tee "$RUNNER_TEMP/test.log"; then
+            summary="$(grep -E -B2 -A12 '^\s*--- FAIL|^panic:|^FAIL|^WARNING: DATA RACE' "$RUNNER_TEMP/test.log" | head -n 60)"
+            summary="${summary//'%'/'%25'}"
+            summary="${summary//$'\r'/}"
+            summary="${summary//$'\n'/'%0A'}"
+            echo "::error title=Tests failed (${{ matrix.database }})::$summary"
+            exit 1
+          fi
 
   plugin-sdk:
     name: Plugin SDK

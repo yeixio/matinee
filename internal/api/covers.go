@@ -148,7 +148,7 @@ func (s *Server) resetCover(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if lib, err := s.Store.Library(r.Context(), it.LibraryID); err == nil && s.Scanner != nil {
-		go s.Scanner.Scan(s.BackgroundCtx, lib)
+		s.Scanner.Start(s.BackgroundCtx, lib)
 	}
 	w.WriteHeader(http.StatusNoContent)
 }
