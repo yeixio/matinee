@@ -346,6 +346,8 @@
     "recentlyPlayed": "최근 재생",
     "recentlyAdded": "최근 추가",
     "moreBy": "{{artist}}의 다른 앨범",
+    "labels": "레이블",
+    "label": "레이블",
     "more": "옵션 더 보기",
     "volume": "볼륨",
     "openPlayer": "플레이어 열기",

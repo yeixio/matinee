@@ -19,6 +19,20 @@ An artist's page has their albums, newest first, and plays or shuffles every son
 
 ![An artist page with their albums](../images/artist.webp)
 
+<!-- since: v0.1.14 -->
+## Record labels
+
+When your albums name the record label they came out on, the **Labels** tab lists every label in the library, each with a few of its covers. A label's page has the artists on it and its albums, newest first. **Play** plays them album by album, and **Shuffle** mixes every song on the label. An album's page names its label under the title; click it to open the label's page.
+
+![The Labels tab, with a tile of album covers for each label](../images/labels.webp)
+
+![A label's page, with its artists and albums](../images/label.webp)
+
+From version 1.0.25 the phone and TV apps have the **Labels** tab and label pages too, and an album's page leads to its label.
+
+The label comes from the songs' tags: `LABEL` or `ORGANIZATION` in FLAC, Ogg and Opus files, and the publisher (`TPUB`) in MP3s. Taggers that look up your albums online, such as MusicBrainz Picard, and most music stores fill it in for you. The same label spelled differently, such as `ANJUNADEEP` and `Anjunadeep`, lands on one page. Albums already in your library get their label on the next scan, and the tab shows up once any album has one.
+<!-- /since -->
+
 <!-- since: v0.1.1 -->
 ## Music keeps playing while you browse
 

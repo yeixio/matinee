@@ -78,6 +78,9 @@ func TestLabels(t *testing.T) {
 	if got := titles("album"); len(got) != 2 || got[0] != "Hyperfall" || got[1] != "Little by Little" {
 		t.Fatalf("label's albums: %v", got)
 	}
+	if got := titles("track"); len(got) != 2 {
+		t.Fatalf("label's songs: %v", got)
+	}
 	if got := titles("artist"); len(got) != 2 || got[0] != "Lane 8" || got[1] != "Yotto" {
 		t.Fatalf("label's artists: %v", got)
 	}

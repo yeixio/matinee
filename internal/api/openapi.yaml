@@ -1040,6 +1040,18 @@ paths:
             application/json:
               schema: { type: array, items: { $ref: "#/components/schemas/BookGroup" } }
         "404": { $ref: "#/components/responses/Error" }
+  /libraries/{id}/labels:
+    get:
+      summary: The record labels of a music library's albums
+      description: Read from the songs' tags (LABEL, ORGANIZATION or ID3 publisher). List a label's albums, artists or songs with /libraries/{id}/items?kind=album&label=….
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      responses:
+        "200":
+          description: Labels by name.
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: "#/components/schemas/RecordLabel" } }
+        "404": { $ref: "#/components/responses/Error" }
   /items:
     get:
       summary: Titles across libraries, filtered and sorted
@@ -3843,6 +3855,7 @@ components:
         watchList: { type: boolean, description: Only titles on the signed-in person's watch list. }
         series: { type: array, items: { type: string }, description: Books in these series. }
         narrator: { type: array, items: { type: string }, description: Books any of these people narrate. }
+        label: { type: array, items: { type: string }, description: "Record labels: albums on them, artists with albums on them, and their songs." }
         sort: { type: string, enum: [title, added, released, year, rating, myRating, runtime, lastPlayed, series], default: title, description: "series is a book's place in its series; myRating is the person's own rating." }
         order: { type: string, enum: [asc, desc], description: Title and runtime run low to high by default, the others high to low. Titles missing the field go last. }
         limit: { type: integer }
@@ -4480,6 +4493,14 @@ components:
         name: { type: string }
         books: { type: integer, description: How many books. }
         itemIds: { type: array, items: { type: integer }, description: Up to four of its books, first in reading order, for artwork. }
+    RecordLabel:
+      type: object
+      description: A record label albums in a music library came out on.
+      properties:
+        name: { type: string, examples: [Anjunadeep] }
+        albums: { type: integer, description: How many albums. }
+        artists: { type: integer, description: How many artists have albums on it. }
+        covers: { type: array, items: { $ref: "#/components/schemas/Item" }, description: Up to four of its albums with covers, newest first, for artwork. }
     Playlist:
       type: object
       properties:
@@ -4582,6 +4603,7 @@ components:
         artist: { type: string, description: "Albums and tracks: the artist's name." }
         artistId: { type: integer, description: "Albums and tracks: the artist's id." }
         album: { type: string, description: "Tracks: the album's title (its id is parentId)." }
+        recordLabel: { type: string, description: "Albums and tracks: the record label the album came out on, from its tags." }
         author: { type: string, description: "Books and their parts: the author's name. Podcasts and their episodes: who makes the show." }
         authorId: { type: integer, description: "Books and their parts: the author's id." }
         book: { type: string, description: "Book parts: the book's title (its id is parentId)." }

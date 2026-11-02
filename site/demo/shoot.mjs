@@ -217,6 +217,16 @@ try {
       await shot(page, 'artist')
     }
 
+    // Record labels, from the songs' tags: every label, then one label's page.
+    if (wanted('labels') || wanted('label')) {
+      await page.goto(`${origin}/library/${libs.music.id}?view=labels`)
+      await sleep(1000)
+      await shot(page, 'labels')
+      await page.goto(`${origin}/library/${libs.music.id}?${new URLSearchParams({ view: 'labels', label: 'Lantern Records' })}`)
+      await sleep(1000)
+      await shot(page, 'label')
+    }
+
     // Playlists: two made from songs across albums, then adding to one.
     {
       const songs = await api(token, 'GET', `/libraries/${libs.music.id}/items?kind=track&sort=title`)

@@ -150,7 +150,7 @@ export async function makeLibrary(root) {
       // A little tune, so the visualizer has a beat, a bass line and some hiss to show.
       ff('-f', 'lavfi', '-i', `aevalsrc='${tune(110 + n * 20)}':s=22050:d=${150 + n * 23}`, '-af', 'volume=0.05', '-sample_fmt', 's16',
         '-metadata', `artist=${a.artist}`, '-metadata', `album_artist=${a.artist}`, '-metadata', `album=${a.album}`,
-        '-metadata', `title=${t}`, '-metadata', `track=${n + 1}`, '-metadata', `date=${a.year}`, file)
+        '-metadata', `title=${t}`, '-metadata', `track=${n + 1}`, '-metadata', `date=${a.year}`, '-metadata', `LABEL=${a.label}`, file)
     })
   })
   audiobooks.forEach((b, i) => book(path.join(media, 'Audiobooks'), b, path.join(images, `book-${i}.jpg`), path.join(root, 'silence')))

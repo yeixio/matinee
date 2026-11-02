@@ -406,6 +406,8 @@ export type Item = {
   artist?: string
   artistId?: number
   album?: string
+  // Albums and tracks: the record label the album came out on.
+  recordLabel?: string
   // Books and their parts: the author; parts: the book too (its id is
   // parentId). Books name their narrators and place in a series.
   author?: string
@@ -439,6 +441,9 @@ export type BookChapter = { title: string; startMs: number; endMs: number; partI
 export type Book = Item & { parts: BookPart[]; chapters: BookChapter[] }
 // A series or a narrator, with a few of its books for artwork.
 export type BookGroup = { name: string; books: number; itemIds: number[] }
+
+// A record label in a music library, with a few of its albums for its tile.
+export type RecordLabel = { name: string; albums: number; artists: number; covers: Item[] }
 
 // A plugin as Settings shows it (internal/plugin, docs/guide/plugins).
 export type Plugin = {
@@ -1240,6 +1245,8 @@ export const api = {
   book: (id: number) => request<Book>('GET', `/api/v1/items/${id}/book`),
   series: (library: number) => request<BookGroup[]>('GET', `/api/v1/libraries/${library}/series`),
   narrators: (library: number) => request<BookGroup[]>('GET', `/api/v1/libraries/${library}/narrators`),
+  // The record labels of a music library's albums (servers from before labels answer 404).
+  labels: (library: number) => request<RecordLabel[]>('GET', `/api/v1/libraries/${library}/labels`),
   // Podcasts: finding shows in Podcast Index, adding them by their feed,
   // following them, and moving them between apps as OPML.
   podcastDirectory: (q: { q?: string; lang?: string; category?: string }) =>

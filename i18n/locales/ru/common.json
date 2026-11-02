@@ -430,6 +430,8 @@
     "recentlyPlayed": "Недавно прослушанные",
     "recentlyAdded": "Недавно добавленные",
     "moreBy": "Ещё от {{artist}}",
+    "labels": "Лейблы",
+    "label": "Лейбл",
     "more": "Другие действия",
     "volume": "Громкость",
     "openPlayer": "Открыть плеер",

@@ -374,6 +374,8 @@
     "recentlyPlayed": "Viimeksi soitetut",
     "recentlyAdded": "Viimeksi lisätyt",
     "moreBy": "Lisää artistilta {{artist}}",
+    "labels": "Levy-yhtiöt",
+    "label": "Levy-yhtiö",
     "more": "Lisää vaihtoehtoja",
     "volume": "Äänenvoimakkuus",
     "openPlayer": "Avaa soitin",

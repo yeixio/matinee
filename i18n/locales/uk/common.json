@@ -430,6 +430,8 @@
     "recentlyPlayed": "Нещодавно відтворені",
     "recentlyAdded": "Нещодавно додані",
     "moreBy": "Більше від {{artist}}",
+    "labels": "Лейбли",
+    "label": "Лейбл",
     "more": "Інші дії",
     "volume": "Гучність",
     "openPlayer": "Відкрити плеєр",

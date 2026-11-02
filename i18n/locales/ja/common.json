@@ -346,6 +346,8 @@
     "recentlyPlayed": "最近再生した項目",
     "recentlyAdded": "最近追加した項目",
     "moreBy": "{{artist}}のその他の作品",
+    "labels": "レーベル",
+    "label": "レーベル",
     "more": "その他のオプション",
     "volume": "音量",
     "openPlayer": "プレーヤーを開く",

@@ -374,6 +374,8 @@
     "recentlyPlayed": "Zuletzt gespielt",
     "recentlyAdded": "Neu hinzugefügt",
     "moreBy": "Mehr von {{artist}}",
+    "labels": "Labels",
+    "label": "Label",
     "more": "Weitere Optionen",
     "volume": "Lautstärke",
     "openPlayer": "Player öffnen",

@@ -469,10 +469,12 @@ func (f ItemFilter) sql(today time.Time) (where, order string, args []any) {
 		add("i.series IN ("+placeholders(len(f.Series))+")", anyArgs(f.Series)...)
 	}
 	if len(f.Label) > 0 {
-		// An album has its own label; an artist has the labels of its albums.
+		// An album has its own label; an artist has the labels of its
+		// albums, and a song its album's.
 		in := placeholders(len(f.Label))
-		add("(i.label IN ("+in+") OR EXISTS (SELECT 1 FROM items f WHERE f.parent_id = i.id AND f.label IN ("+in+")))",
-			repeat(2, anyArgs(f.Label)...)...)
+		add("(i.label IN ("+in+") OR EXISTS (SELECT 1 FROM items f WHERE f.parent_id = i.id AND f.label IN ("+in+"))"+
+			" OR EXISTS (SELECT 1 FROM items f WHERE f.id = i.parent_id AND f.label IN ("+in+")))",
+			repeat(3, anyArgs(f.Label)...)...)
 	}
 	if len(f.Narrator) > 0 {
 		var or []string
