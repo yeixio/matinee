@@ -207,6 +207,7 @@
   "pick_at_least_one_library_to_share": "válassz legalább egy megosztandó könyvtárat",
   "that_isnt_in_a_library_shared_with_you": "ez nincs a veled megosztott könyvtárakban",
   "that_session_is_still_going_join_it": "ez a munkamenet még tart; csatlakozz hozzá",
+  "that_tv_hasnt_asked_to_sign_in_yet": "az a tévé még nem kért bejelentkezést",
   "that_watch_together_code_doesnt_work_it_may_have_ended": "ez a közös nézési kód nem működik; lehet, hogy véget ért",
   "this_invite_has_expired_ask_for_another": "ez a meghívó lejárt; kérj másikat",
   "this_invite_link_doesnt_work_ask_for_another": "ez a meghívólink nem működik; kérj másikat",
@@ -215,5 +216,9 @@
   "thumbnails_must_be_all_onplay_or_off": "a bélyegképek értéke all, onPlay vagy off lehet",
   "too_many_watch_together_sessions_right_now": "most túl sok közös nézés fut",
   "unknown_action": "ismeretlen művelet",
-  "usernames_are_at_most_40_characters": "a felhasználónév legfeljebb 40 karakter"
+  "usernames_are_at_most_40_characters": "a felhasználónév legfeljebb 40 karakter",
+  "couldnt_start_playback_for_this_album": "nem sikerült elindítani az album lejátszását",
+  "not_an_album": "nem album",
+  "only_the_household_can_change_this": "ezt csak a háztartás módosíthatja",
+  "tracks_must_be_songs_on_one_album": "a számoknak egy albumról kell lenniük"
 }

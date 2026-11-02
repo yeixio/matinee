@@ -521,7 +521,15 @@
     "playlistGone": "لم تعد قائمة التشغيل هذه موجودة",
     "create": "إنشاء",
     "save": "حفظ",
-    "delete": "حذف"
+    "delete": "حذف",
+    "lyrics": "الكلمات",
+    "noLyrics": "لا توجد كلمات لهذه الأغنية",
+    "instrumental": "موسيقى فقط",
+    "lyricsFromLrclib": "الكلمات من LRCLIB",
+    "gapless": "تشغيل بلا فواصل",
+    "gaplessHeard": "لاحظ Matinee أن هذه الأغاني متصلة ببعضها، لذا تُشغَّل بلا فواصل.",
+    "gaplessOn": "يُشغَّل بلا فواصل",
+    "gaplessOff": "يُشغَّل مع فواصل بين الأغاني"
   },
   "books": {
     "overview": "نظرة عامة",
@@ -665,7 +673,20 @@
     "newEpisodesCount_many": "{{count}} حلقة جديدة",
     "imported_many": "أُضيف {{count}} برنامجًا.",
     "newEpisodesCount_other": "{{count}} حلقة جديدة",
-    "imported_other": "أُضيف {{count}} برنامج."
+    "imported_other": "أُضيف {{count}} برنامج.",
+    "episodes": "الحلقات",
+    "order": "ترتيب الحلقات",
+    "newestFirst": "الأحدث أولاً",
+    "oldestFirst": "الأقدم أولاً",
+    "playOldest": "التشغيل بالترتيب",
+    "playOn": "مواصلة تشغيل البودكاست",
+    "playOnHint": "عند انتهاء حلقة، شغّل الحلقة التالية من البرنامج التي لم تستمع إليها، وإلا فأحدث حلقة من برنامج آخر تتابعه.",
+    "playingNext": "التالي: {{title}}",
+    "autoDownload": "تنزيل الحلقات الجديدة",
+    "autoDownloadHint": "تنزّل هواتفك أحدث حلقات هذا البرنامج من تلقاء نفسها وتزيلها بعد أن تستمع إليها.",
+    "keepCount": "عدد الحلقات المحفوظة",
+    "removePlayed": "إزالة الحلقات المسموعة",
+    "removePlayedHint": "تُزال حلقات البودكاست المنزّلة من هذا الهاتف بعد أن تستمع إليها."
   },
   "together": {
     "title": "المشاهدة معًا",

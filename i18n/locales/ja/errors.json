@@ -207,6 +207,7 @@
   "pick_at_least_one_library_to_share": "共有するライブラリを1つ以上選んでください",
   "that_isnt_in_a_library_shared_with_you": "それはあなたに共有されたライブラリにありません",
   "that_session_is_still_going_join_it": "そのセッションはまだ続いています。参加してください",
+  "that_tv_hasnt_asked_to_sign_in_yet": "そのテレビはまだサインインを求めていません",
   "that_watch_together_code_doesnt_work_it_may_have_ended": "そのコードは使えません。セッションが終わったのかもしれません",
   "this_invite_has_expired_ask_for_another": "この招待は期限切れです。新しい招待を頼んでください",
   "this_invite_link_doesnt_work_ask_for_another": "この招待リンクは使えません。新しいリンクを頼んでください",
@@ -215,5 +216,9 @@
   "thumbnails_must_be_all_onplay_or_off": "サムネイルは all、onPlay、off のいずれかにしてください",
   "too_many_watch_together_sessions_right_now": "いまはいっしょに見るセッションが多すぎます",
   "unknown_action": "不明な操作です",
-  "usernames_are_at_most_40_characters": "ユーザー名は40文字までです"
+  "usernames_are_at_most_40_characters": "ユーザー名は40文字までです",
+  "couldnt_start_playback_for_this_album": "このアルバムを再生できませんでした",
+  "not_an_album": "アルバムではありません",
+  "only_the_household_can_change_this": "変更できるのは世帯のメンバーだけです",
+  "tracks_must_be_songs_on_one_album": "トラックは同じアルバムの曲である必要があります"
 }

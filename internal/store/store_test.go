@@ -15,6 +15,7 @@ func TestMigrateFromVersion1(t *testing.T) {
 	}
 	ctx := context.Background()
 	for _, q := range []string{
+		"DROP TABLE end_credits",
 		"ALTER TABLE items DROP COLUMN subtitle_streams",
 		"ALTER TABLE items DROP COLUMN mbid",
 		"ALTER TABLE sessions DROP COLUMN device_name",
@@ -66,6 +67,9 @@ func TestMigrateFromVersion1(t *testing.T) {
 		"ALTER TABLE items DROP COLUMN mb_release",
 		"ALTER TABLE items DROP COLUMN mb_group",
 		"ALTER TABLE items DROP COLUMN tags_read",
+		"ALTER TABLE items DROP COLUMN gapless",
+		"ALTER TABLE items DROP COLUMN gapless_found",
+		"ALTER TABLE items DROP COLUMN gapless_key",
 		"DROP TABLE thumbnails",
 		"DROP TABLE intros",
 		"DROP INDEX invites_created",

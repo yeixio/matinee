@@ -490,6 +490,32 @@ var migrations = []string{
 		count       INTEGER NOT NULL DEFAULT 0, -- 0 when the file couldn't be read
 		made_at     BIGINT NOT NULL
 	)`,
+	// 77: a TV set up from a phone (see PairedDeviceCode) names its code by
+	// the hash of a secret it showed in a QR code, so the phone can find it.
+	"ALTER TABLE device_codes ADD COLUMN pair_hash TEXT",
+	// 78, 79: each person's downloads for a show they follow (see
+	// PodcastDownloads): whether their phones fetch new episodes by
+	// themselves, and how many of the newest to keep.
+	"ALTER TABLE podcast_follows ADD COLUMN auto_download INTEGER NOT NULL DEFAULT 0",
+	"ALTER TABLE podcast_follows ADD COLUMN keep_episodes INTEGER NOT NULL DEFAULT 3",
+	// 80–82: albums that play without gaps between songs (see gapless.go):
+	// the household's choice (NULL leaves it to Matinee, 1 on, 0 off), what
+	// Matinee found by listening (NULL until it has), and which files it
+	// listened to.
+	"ALTER TABLE items ADD COLUMN gapless INTEGER",
+	"ALTER TABLE items ADD COLUMN gapless_found INTEGER",
+	"ALTER TABLE items ADD COLUMN gapless_key TEXT",
+	// 83: where the end credits of each episode and movie start, found by
+	// matching the audio of a season's episodes or by the picture going
+	// dark (see endcredits.go and internal/credits).
+	`CREATE TABLE end_credits (
+		item_id   BIGINT PRIMARY KEY REFERENCES items(id) ON DELETE CASCADE,
+		start_ms  BIGINT NOT NULL DEFAULT 0, -- 0 when none were found
+		end_ms    BIGINT NOT NULL DEFAULT 0, -- 0 when they run to the end
+		source    TEXT NOT NULL DEFAULT '', -- chapters, audio or video
+		file_key  TEXT NOT NULL, -- the file and detector version looked at, see MediaKey
+		looked_at BIGINT NOT NULL
+	)`,
 }
 
 func now() int64 { return time.Now().Unix() }

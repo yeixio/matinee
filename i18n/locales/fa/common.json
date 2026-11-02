@@ -409,7 +409,15 @@
     "playlistGone": "این فهرست پخش دیگر وجود ندارد",
     "create": "ساختن",
     "save": "ذخیره",
-    "delete": "حذف"
+    "delete": "حذف",
+    "lyrics": "متن ترانه",
+    "noLyrics": "این آهنگ متن ندارد",
+    "instrumental": "بی‌کلام",
+    "lyricsFromLrclib": "متن از LRCLIB",
+    "gapless": "پخش بدون فاصله",
+    "gaplessHeard": "Matinee تشخیص داد این آهنگ‌ها به هم پیوسته‌اند، پس بدون فاصله پخش می‌شوند.",
+    "gaplessOn": "بدون فاصله پخش می‌شود",
+    "gaplessOff": "با فاصله بین آهنگ‌ها پخش می‌شود"
   },
   "books": {
     "overview": "نمای کلی",
@@ -545,7 +553,20 @@
     "newEpisodesCount_one": "{{count}} قسمت تازه",
     "imported_one": "{{count}} برنامه اضافه شد.",
     "newEpisodesCount_other": "{{count}} قسمت تازه",
-    "imported_other": "{{count}} برنامه اضافه شد."
+    "imported_other": "{{count}} برنامه اضافه شد.",
+    "episodes": "قسمت‌ها",
+    "order": "ترتیب قسمت‌ها",
+    "newestFirst": "جدیدترین اول",
+    "oldestFirst": "قدیمی‌ترین اول",
+    "playOldest": "پخش به ترتیب",
+    "playOn": "ادامهٔ پخش پادکست‌ها",
+    "playOnHint": "وقتی قسمتی تمام شد، قسمت بعدی برنامه را که نشنیده‌اید پخش کن، وگرنه جدیدترین قسمت برنامهٔ دیگری که دنبال می‌کنید.",
+    "playingNext": "بعدی: {{title}}",
+    "autoDownload": "بارگیری قسمت‌های جدید",
+    "autoDownloadHint": "تلفن‌هایتان جدیدترین قسمت‌های این برنامه را خودشان بارگیری می‌کنند و پس از شنیدن حذف می‌کنند.",
+    "keepCount": "تعداد قسمت‌های نگه‌داشته",
+    "removePlayed": "حذف قسمت‌های پخش‌شده",
+    "removePlayedHint": "قسمت‌های بارگیری‌شدهٔ پادکست پس از شنیدن از این تلفن حذف می‌شوند."
   },
   "together": {
     "title": "تماشای باهم",

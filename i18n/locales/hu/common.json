@@ -409,7 +409,15 @@
     "playlistGone": "Ez a lejátszási lista már nem létezik",
     "create": "Létrehozás",
     "save": "Mentés",
-    "delete": "Törlés"
+    "delete": "Törlés",
+    "lyrics": "Dalszöveg",
+    "noLyrics": "Ehhez a dalhoz nincs dalszöveg",
+    "instrumental": "Instrumentális",
+    "lyricsFromLrclib": "Dalszöveg: LRCLIB",
+    "gapless": "Lejátszás szünetek nélkül",
+    "gaplessHeard": "A Matinee hallotta, hogy ezek a dalok egymásba folynak, ezért szünetek nélkül szólnak.",
+    "gaplessOn": "Szünetek nélkül szól",
+    "gaplessOff": "Szünetekkel szól a dalok között"
   },
   "books": {
     "overview": "Áttekintés",
@@ -545,7 +553,20 @@
     "newEpisodesCount_one": "{{count}} új epizód",
     "imported_one": "{{count}} műsor hozzáadva.",
     "newEpisodesCount_other": "{{count}} új epizód",
-    "imported_other": "{{count}} műsor hozzáadva."
+    "imported_other": "{{count}} műsor hozzáadva.",
+    "episodes": "Epizódok",
+    "order": "Epizódok sorrendje",
+    "newestFirst": "Legújabb elöl",
+    "oldestFirst": "Legrégebbi elöl",
+    "playOldest": "Lejátszás sorrendben",
+    "playOn": "Podcastok folyamatos lejátszása",
+    "playOnHint": "Ha egy epizód véget ér, a műsor következő meg nem hallgatott epizódja szól, különben egy másik követett műsor legújabb epizódja.",
+    "playingNext": "Következik: {{title}}",
+    "autoDownload": "Új epizódok letöltése",
+    "autoDownloadHint": "A telefonjaid maguktól letöltik a műsor legújabb epizódjait, és törlik őket, miután meghallgattad.",
+    "keepCount": "Megtartott epizódok",
+    "removePlayed": "Meghallgatott epizódok törlése",
+    "removePlayedHint": "A letöltött podcastepizódok lekerülnek erről a telefonról, miután meghallgattad őket."
   },
   "together": {
     "title": "Közös nézés",

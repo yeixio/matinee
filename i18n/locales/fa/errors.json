@@ -207,6 +207,7 @@
   "pick_at_least_one_library_to_share": "دست‌کم یک کتابخانه برای هم‌رسانی انتخاب کنید",
   "that_isnt_in_a_library_shared_with_you": "این در کتابخانه‌ای که با شما هم‌رسانی شده نیست",
   "that_session_is_still_going_join_it": "آن جلسه هنوز ادامه دارد؛ به آن بپیوندید",
+  "that_tv_hasnt_asked_to_sign_in_yet": "آن تلویزیون هنوز درخواست ورود نکرده است",
   "that_watch_together_code_doesnt_work_it_may_have_ended": "این کد تماشای باهم کار نمی‌کند؛ شاید جلسه تمام شده باشد",
   "this_invite_has_expired_ask_for_another": "این دعوت منقضی شده است؛ دعوت دیگری بخواهید",
   "this_invite_link_doesnt_work_ask_for_another": "این پیوند دعوت کار نمی‌کند؛ پیوند دیگری بخواهید",
@@ -215,5 +216,9 @@
   "thumbnails_must_be_all_onplay_or_off": "تصاویر کوچک باید all، onPlay یا off باشند",
   "too_many_watch_together_sessions_right_now": "اکنون جلسه‌های تماشای باهم بیش از حد زیاد است",
   "unknown_action": "کنش ناشناخته",
-  "usernames_are_at_most_40_characters": "نام کاربری حداکثر ۴۰ نویسه است"
+  "usernames_are_at_most_40_characters": "نام کاربری حداکثر ۴۰ نویسه است",
+  "couldnt_start_playback_for_this_album": "پخش این آلبوم شروع نشد",
+  "not_an_album": "آلبوم نیست",
+  "only_the_household_can_change_this": "فقط اهل خانه می‌توانند این را تغییر دهند",
+  "tracks_must_be_songs_on_one_album": "قطعه‌ها باید آهنگ‌های یک آلبوم باشند"
 }

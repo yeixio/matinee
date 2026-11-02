@@ -53,7 +53,11 @@
     "noneFound": "Bu ağda sunucu bulamadık. Matinee’yi tarayıcıda açtığınız adresi yazın.",
     "connect": "Bağla",
     "stillLooking": "Hâlâ aranıyor. Sunucunuz bulunursa burada görünür.",
-    "connectTo": "{{name}} sunucusuna bağlan"
+    "connectTo": "{{name}} sunucusuna bağlan",
+    "phoneTitle": "Telefonla kur",
+    "phoneHint": "Telefonunun kamerasıyla tara. Telefonda oturum açılmış Matinee uygulaması olmalı ve bu televizyonla aynı Wi-Fi'da bulunmalı.",
+    "phoneFound": "{{name}} ile kuruluyor…",
+    "phoneQrLabel": "Bu televizyonu telefonla kurmak için QR kodu"
   },
   "signIn": {
     "title": "Giriş yap",
@@ -67,7 +71,32 @@
     "gettingCode": "Kod alınıyor",
     "howTo": "Oturum açık bir bilgisayarda veya telefonda şunu açın:\n<url>{{url}}</url>\nve bu kodu girin.",
     "newCode": "Yeni kod al",
-    "waiting": "Onay bekleniyor…"
+    "waiting": "Onay bekleniyor…",
+    "qrHint": "Ya da telefonunun kamerasıyla tara; sayfa kod doldurulmuş olarak açılır.",
+    "qrLabel": "Bu kodla giriş sayfasının QR kodu",
+    "finishOnPhone": "Telefonun bu televizyonda oturum açıyor…"
+  },
+  "setUpTv": {
+    "title": "Televizyon kur",
+    "settingsHint": "Kumandayla yazmadan bir televizyonda Matinee'de oturum aç.",
+    "thisTv": "Bu televizyon",
+    "confirm": "Bu televizyon <b>{{server}}</b> ile kurulsun mu? <b>{{name}}</b> olarak oturum açacak.",
+    "setUp": "Televizyonu kur",
+    "working": "Televizyona sunucunun nerede olduğu bildiriliyor…",
+    "sameWifi": "Bitene kadar bu telefonu televizyonla aynı Wi-Fi'da tut.",
+    "timeout": "Televizyon yanıt vermedi. Telefonun televizyonla aynı Wi-Fi'da olduğunu ve televizyonun hâlâ QR kodunu gösterdiğini kontrol et, sonra yeniden dene.",
+    "done": "{{tv}} oturum açtı",
+    "doneHint": "İzlemeye hazır.",
+    "declined": "{{tv}} oturum açmadı",
+    "intro": "Televizyonda Matinee'yi aç ve gösterdiği QR kodunu bu telefonun kamerasıyla tara. Ya da televizyonun gösterdiği kodu buraya yaz.",
+    "introCode": "Televizyonun gösterdiği kodu yaz.",
+    "code": "Televizyondaki kod",
+    "next": "İleri",
+    "wantsToSignIn": "<b>{{name}}</b> olarak oturum açmak istiyor",
+    "approve": "Oturum aç",
+    "decline": "Oturum açma",
+    "signInFirst": "Önce bu telefonda oturum aç. Televizyon senin adınla oturum açar.",
+    "onPhone": "Telefonundaki Matinee uygulamasından televizyon kur: Ayarlar, sonra Televizyon kur."
   },
   "home": {
     "watchDownloads": "İndirdiklerinizi izleyin",
@@ -335,7 +364,8 @@
       "source": "Altyazılar OpenSubtitles.com'dan"
     },
     "skipIntro": "Girişi atla",
-    "introSkipped": "Giriş atlandı"
+    "introSkipped": "Giriş atlandı",
+    "skipCredits": "Jeneriği atla"
   },
   "library": {
     "nothingUnwatched": "Burada izlenmemiş bir şey yok",

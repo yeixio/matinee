@@ -53,7 +53,11 @@
     "noneFound": "We couldn't find a server on this network. Type the address you open Matinee at in a browser.",
     "connect": "Connect",
     "stillLooking": "Still looking. If your server turns up, it'll appear here.",
-    "connectTo": "Connect to {{name}}"
+    "connectTo": "Connect to {{name}}",
+    "phoneTitle": "Set up with your phone",
+    "phoneHint": "Scan this with your phone's camera. The phone needs the Matinee app, signed in, on the same Wi-Fi as this TV.",
+    "phoneFound": "Setting up with {{name}}…",
+    "phoneQrLabel": "QR code to set up this TV with your phone"
   },
   "signIn": {
     "title": "Sign in",
@@ -67,7 +71,32 @@
     "gettingCode": "Getting a code",
     "howTo": "On a computer or phone that's signed in, open\n<url>{{url}}</url>\nand enter this code.",
     "newCode": "Get a new code",
-    "waiting": "Waiting for approval…"
+    "waiting": "Waiting for approval…",
+    "qrHint": "Or scan this with your phone's camera to open that page with the code filled in.",
+    "qrLabel": "QR code of the sign-in page with this code",
+    "finishOnPhone": "Your phone is signing this TV in…"
+  },
+  "setUpTv": {
+    "title": "Set up a TV",
+    "settingsHint": "Sign in Matinee on a TV without typing on the remote.",
+    "thisTv": "This TV",
+    "confirm": "Set up this TV with <b>{{server}}</b>? It will be signed in as <b>{{name}}</b>.",
+    "setUp": "Set up TV",
+    "working": "Telling the TV where your server is…",
+    "sameWifi": "Keep this phone on the same Wi-Fi as the TV until it's done.",
+    "timeout": "The TV didn't answer. Check that this phone is on the same Wi-Fi as the TV and the TV still shows its QR code, then try again.",
+    "done": "{{tv}} is signed in",
+    "doneHint": "It's ready to watch.",
+    "declined": "{{tv}} wasn't signed in",
+    "intro": "Open Matinee on the TV and scan the QR code it shows with this phone's camera. Or type the code the TV shows here.",
+    "introCode": "Type the code the TV shows.",
+    "code": "Code on the TV",
+    "next": "Next",
+    "wantsToSignIn": "wants to sign in as <b>{{name}}</b>",
+    "approve": "Sign in",
+    "decline": "Don't sign in",
+    "signInFirst": "Sign in on this phone first. The TV will be signed in as you.",
+    "onPhone": "Set up a TV from the Matinee app on your phone: Settings, then Set up a TV."
   },
   "home": {
     "watchDownloads": "Watch your downloads",
@@ -335,7 +364,8 @@
       "source": "Subtitles from OpenSubtitles.com"
     },
     "skipIntro": "Skip intro",
-    "introSkipped": "Skipped the intro"
+    "introSkipped": "Skipped the intro",
+    "skipCredits": "Skip credits"
   },
   "library": {
     "nothingUnwatched": "Nothing unwatched here",

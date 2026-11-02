@@ -12,6 +12,7 @@ import { canDirectPlay } from '../player/direct'
 import { defaultTrack, savePreference, SubtitleMenu, SubtitleOverlay } from '../player/Subtitles'
 import { UpNextCard, type UpNextMode } from '../player/UpNext'
 import { COUNTDOWN_SECONDS, stillWatching, upNextAt } from '../player/autoplay'
+import { creditsEnd, creditsOf, inCredits } from '../player/credits'
 import { inIntro, introEnd } from '../player/intro'
 import { sleepTimer, sleepVolume, useSleep } from '../player/sleep'
 import { SleepMenu } from '../player/SleepMenu'
@@ -540,7 +541,8 @@ function Player({ id }: { id: number }) {
   }
 
   const autoPlay = (prefs?.autoPlay ?? true) && sleep !== 'end'
-  const at = upNextAt(duration, item?.mediaInfo?.creditsMs)
+  const credits = creditsOf(item)
+  const at = upNextAt(duration, credits)
 
   // Done with this episode: mark it watched and play the next.
   const playNext = useCallback(
@@ -818,6 +820,16 @@ function Player({ id }: { id: number }) {
     skipIntro(true)
   })
 
+  // Skip credits (see player/credits.ts): when no Up next card shows at the
+  // credits, a button jumps past them, to a scene after them or the end.
+  const showSkipCredits = !showSkip && inCredits(time, duration, credits) && !card && !error && !away
+  const skipCredits = () => {
+    if (!credits) return
+    const to = creditsEnd(credits, duration)
+    if (to < duration) seek(to)
+    else ended()
+  }
+
   const t = item ? displayTitle(item) : { title: '', sub: '' }
   const shown = scrub ?? time
   // The preview shows where the pointer is, or where a drag or the arrow keys are taking the bar.
@@ -898,6 +910,22 @@ function Player({ id }: { id: number }) {
           }`}
         >
           {tr('player.skipIntro')}
+          <ChevronsRight className="size-5 text-accent rtl:-scale-x-100" aria-hidden />
+        </button>
+      )}
+
+      {showSkipCredits && (
+        <button
+          onClick={(e) => {
+            e.stopPropagation()
+            stillWatching.input()
+            skipCredits()
+          }}
+          className={`absolute end-4 z-10 flex items-center gap-2 rounded-full bg-black/80 px-5 py-3 text-sm font-semibold text-white shadow-2xl ring-1 ring-white/25 backdrop-blur transition-[bottom] duration-300 hover:bg-black/90 hover:ring-white/50 focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none md:end-8 ${
+            chrome ? 'bottom-32' : 'bottom-8'
+          }`}
+        >
+          {tr('player.skipCredits')}
           <ChevronsRight className="size-5 text-accent rtl:-scale-x-100" aria-hidden />
         </button>
       )}

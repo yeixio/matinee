@@ -207,6 +207,7 @@
   "pick_at_least_one_library_to_share": "scegli almeno una libreria da condividere",
   "that_isnt_in_a_library_shared_with_you": "non è in una libreria condivisa con te",
   "that_session_is_still_going_join_it": "quella sessione è ancora in corso; unisciti",
+  "that_tv_hasnt_asked_to_sign_in_yet": "quella TV non ha ancora chiesto di accedere",
   "that_watch_together_code_doesnt_work_it_may_have_ended": "quel codice di Guarda insieme non funziona; forse è terminata",
   "this_invite_has_expired_ask_for_another": "questo invito è scaduto; chiedine un altro",
   "this_invite_link_doesnt_work_ask_for_another": "questo link di invito non funziona; chiedine un altro",
@@ -215,5 +216,9 @@
   "thumbnails_must_be_all_onplay_or_off": "le miniature devono essere all, onPlay o off",
   "too_many_watch_together_sessions_right_now": "troppe sessioni di Guarda insieme in questo momento",
   "unknown_action": "azione sconosciuta",
-  "usernames_are_at_most_40_characters": "i nomi utente hanno al massimo 40 caratteri"
+  "usernames_are_at_most_40_characters": "i nomi utente hanno al massimo 40 caratteri",
+  "couldnt_start_playback_for_this_album": "impossibile avviare la riproduzione di questo album",
+  "not_an_album": "non è un album",
+  "only_the_household_can_change_this": "solo la famiglia può modificarlo",
+  "tracks_must_be_songs_on_one_album": "le tracce devono essere brani dello stesso album"
 }

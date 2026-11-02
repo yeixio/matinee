@@ -409,7 +409,15 @@
     "playlistGone": "Bu çalma listesi artık yok",
     "create": "Oluştur",
     "save": "Kaydet",
-    "delete": "Sil"
+    "delete": "Sil",
+    "lyrics": "Şarkı sözleri",
+    "noLyrics": "Bu şarkının sözleri yok",
+    "instrumental": "Enstrümantal",
+    "lyricsFromLrclib": "Sözler LRCLIB’den",
+    "gapless": "Boşluksuz çal",
+    "gaplessHeard": "Matinee bu şarkıların birbirine bağlandığını duydu, bu yüzden boşluksuz çalınıyorlar.",
+    "gaplessOn": "Boşluksuz çalıyor",
+    "gaplessOff": "Şarkılar arasında boşlukla çalıyor"
   },
   "books": {
     "overview": "Genel bakış",
@@ -545,7 +553,20 @@
     "newEpisodesCount_one": "{{count}} yeni bölüm",
     "imported_one": "{{count}} program eklendi.",
     "newEpisodesCount_other": "{{count}} yeni bölüm",
-    "imported_other": "{{count}} program eklendi."
+    "imported_other": "{{count}} program eklendi.",
+    "episodes": "Bölümler",
+    "order": "Bölüm sırası",
+    "newestFirst": "Önce en yeni",
+    "oldestFirst": "Önce en eski",
+    "playOldest": "Sırayla oynat",
+    "playOn": "Podcast'leri oynatmaya devam et",
+    "playOnHint": "Bir bölüm bittiğinde programın dinlemediğin sonraki bölümünü, yoksa takip ettiğin başka bir programın en yeni bölümünü oynat.",
+    "playingNext": "Sıradaki: {{title}}",
+    "autoDownload": "Yeni bölümleri indir",
+    "autoDownloadHint": "Telefonların bu programın en yeni bölümlerini kendiliğinden indirir ve dinledikten sonra kaldırır.",
+    "keepCount": "Saklanacak bölüm",
+    "removePlayed": "Dinlenen bölümleri kaldır",
+    "removePlayedHint": "İndirilen podcast bölümleri, dinledikten sonra bu telefondan kaldırılır."
   },
   "together": {
     "title": "Birlikte izle",

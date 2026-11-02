@@ -207,6 +207,7 @@
   "pick_at_least_one_library_to_share": "공유할 라이브러리를 하나 이상 고르세요",
   "that_isnt_in_a_library_shared_with_you": "나에게 공유된 라이브러리에 없는 항목이에요",
   "that_session_is_still_going_join_it": "그 세션은 아직 진행 중이에요. 참여하세요",
+  "that_tv_hasnt_asked_to_sign_in_yet": "그 TV는 아직 로그인을 요청하지 않았어요",
   "that_watch_together_code_doesnt_work_it_may_have_ended": "그 함께 보기 코드는 사용할 수 없어요. 세션이 끝났을 수 있어요",
   "this_invite_has_expired_ask_for_another": "이 초대는 만료됐어요. 새 초대를 요청하세요",
   "this_invite_link_doesnt_work_ask_for_another": "이 초대 링크는 사용할 수 없어요. 새 링크를 요청하세요",
@@ -215,5 +216,9 @@
   "thumbnails_must_be_all_onplay_or_off": "미리보기 이미지는 all, onPlay, off 중 하나여야 합니다",
   "too_many_watch_together_sessions_right_now": "지금은 함께 보기 세션이 너무 많아요",
   "unknown_action": "알 수 없는 동작",
-  "usernames_are_at_most_40_characters": "사용자 이름은 최대 40자예요"
+  "usernames_are_at_most_40_characters": "사용자 이름은 최대 40자예요",
+  "couldnt_start_playback_for_this_album": "이 앨범을 재생할 수 없습니다",
+  "not_an_album": "앨범이 아닙니다",
+  "only_the_household_can_change_this": "가족 구성원만 변경할 수 있습니다",
+  "tracks_must_be_songs_on_one_album": "트랙은 한 앨범의 곡이어야 합니다"
 }

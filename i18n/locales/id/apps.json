@@ -53,7 +53,11 @@
     "noneFound": "Kami tidak menemukan server di jaringan ini. Ketik alamat yang Anda pakai untuk membuka Matinee di browser.",
     "connect": "Hubungkan",
     "stillLooking": "Masih mencari. Jika server Anda muncul, akan tampil di sini.",
-    "connectTo": "Hubungkan ke {{name}}"
+    "connectTo": "Hubungkan ke {{name}}",
+    "phoneTitle": "Siapkan dengan ponsel",
+    "phoneHint": "Pindai dengan kamera ponsel. Ponsel perlu aplikasi Matinee yang sudah masuk, di Wi-Fi yang sama dengan TV ini.",
+    "phoneFound": "Menyiapkan dengan {{name}}…",
+    "phoneQrLabel": "Kode QR untuk menyiapkan TV ini dengan ponsel"
   },
   "signIn": {
     "title": "Masuk",
@@ -67,7 +71,32 @@
     "gettingCode": "Mengambil kode",
     "howTo": "Di komputer atau ponsel yang sudah masuk, buka\n<url>{{url}}</url>\nlalu masukkan kode ini.",
     "newCode": "Minta kode baru",
-    "waiting": "Menunggu persetujuan…"
+    "waiting": "Menunggu persetujuan…",
+    "qrHint": "Atau pindai dengan kamera ponsel untuk membuka halaman itu dengan kode sudah terisi.",
+    "qrLabel": "Kode QR halaman masuk dengan kode ini",
+    "finishOnPhone": "Ponselmu sedang memasukkan TV ini…"
+  },
+  "setUpTv": {
+    "title": "Siapkan TV",
+    "settingsHint": "Masuk ke Matinee di TV tanpa mengetik dengan remote.",
+    "thisTv": "TV ini",
+    "confirm": "Siapkan TV ini dengan <b>{{server}}</b>? TV akan masuk sebagai <b>{{name}}</b>.",
+    "setUp": "Siapkan TV",
+    "working": "Memberi tahu TV di mana servermu…",
+    "sameWifi": "Biarkan ponsel ini di Wi-Fi yang sama dengan TV sampai selesai.",
+    "timeout": "TV tidak menjawab. Pastikan ponsel ini di Wi-Fi yang sama dengan TV dan TV masih menampilkan kode QR-nya, lalu coba lagi.",
+    "done": "{{tv}} sudah masuk",
+    "doneHint": "Siap ditonton.",
+    "declined": "{{tv}} tidak masuk",
+    "intro": "Buka Matinee di TV dan pindai kode QR yang ditampilkan dengan kamera ponsel ini. Atau ketik kode yang ditampilkan TV di sini.",
+    "introCode": "Ketik kode yang ditampilkan TV.",
+    "code": "Kode di TV",
+    "next": "Berikutnya",
+    "wantsToSignIn": "ingin masuk sebagai <b>{{name}}</b>",
+    "approve": "Masukkan",
+    "decline": "Jangan masukkan",
+    "signInFirst": "Masuk dulu di ponsel ini. TV akan masuk sebagai kamu.",
+    "onPhone": "Siapkan TV dari aplikasi Matinee di ponselmu: Pengaturan, lalu Siapkan TV."
   },
   "home": {
     "watchDownloads": "Tonton unduhan Anda",
@@ -330,7 +359,8 @@
       "source": "Subtitle dari OpenSubtitles.com"
     },
     "skipIntro": "Lewati intro",
-    "introSkipped": "Intro dilewati"
+    "introSkipped": "Intro dilewati",
+    "skipCredits": "Lewati kredit"
   },
   "library": {
     "nothingUnwatched": "Tidak ada yang belum ditonton di sini",

@@ -47,7 +47,8 @@
       "source": "Undertexter från OpenSubtitles.com"
     },
     "skipIntro": "Hoppa över intro",
-    "introSkipped": "Introt hoppades över"
+    "introSkipped": "Introt hoppades över",
+    "skipCredits": "Hoppa över eftertexter"
   },
   "somethingWentWrong": "Något gick fel",
   "oneMoment": "Ett ögonblick…",
@@ -412,7 +413,9 @@
     "state": {
       "lookingAt": "Tittar på {{file}}",
       "intros": "Letar efter intron i {{season}}",
+      "credits": "Letar efter eftertexter i {{title}}",
       "thumbnails": "Skapar förhandsbilder för {{title}}",
+      "gapless": "Lyssnar efter pauser mellan låtarna på {{album}}",
       "working": "Arbetar",
       "waiting": "Väntar på att uppspelningen ska bli klar",
       "slowDisk": "Filerna är långsamma att läsa; vilar några minuter",
@@ -442,6 +445,11 @@
       "label": "Hitta intron i serier",
       "hint": "När alla filer är analyserade lyssnar Matinee på början av varje säsongs avsnitt efter introt de delar, så att spelarna kan erbjuda Hoppa över intro.",
       "progress": "{{done}} av {{total}} avsnitt kontrollerade, {{found}} med intro"
+    },
+    "credits": {
+      "label": "Hitta eftertexter",
+      "hint": "När alla filer är analyserade hittar Matinee var eftertexterna i avsnitt och filmer börjar, så att spelare kan visa Nästa eller Hoppa över eftertexter där.",
+      "progress": "{{done}} av {{total}} avsnitt och filmer kontrollerade, {{found}} med eftertexter"
     },
     "thumbnails": {
       "label": "Förhandsbilder i tidslinjen",
@@ -758,6 +766,12 @@
         "v4l2m2m": "V4L2 (Raspberry Pi)"
       }
     },
+    "lyrics": {
+      "title": "Låttexter",
+      "intro": "Låtar visar sin text i takt med musiken när det finns en .lrc-fil med samma namn bredvid låten, eller texten finns i dess taggar.",
+      "online": "Sök låttexter på nätet",
+      "onlineDetail": "För låtar utan tidsatt text frågar servern <site>LRCLIB</site>, en fri, öppen databas med låttexter. Den skickar bara artist, titel, album och längd för varje låt, direkt från den här servern."
+    },
     "homeRows": {
       "title": "Hem",
       "holidays": "Högtidsrader",
@@ -826,7 +840,7 @@
       },
       "content": {
         "title": "Innehåll",
-        "hint": "Affischer, sökning efter poddar och undertexter, trailrar och rader på Hem"
+        "hint": "Affischer, sökning efter poddar och undertexter, låttexter, trailrar och rader på Hem"
       },
       "streaming": {
         "title": "Strömning",

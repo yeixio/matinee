@@ -207,6 +207,7 @@
   "pick_at_least_one_library_to_share": "выберите хотя бы одну медиатеку",
   "that_isnt_in_a_library_shared_with_you": "этого нет в медиатеках, открытых для вас",
   "that_session_is_still_going_join_it": "этот сеанс ещё идёт; присоединяйтесь к нему",
+  "that_tv_hasnt_asked_to_sign_in_yet": "этот телевизор ещё не запрашивал вход",
   "that_watch_together_code_doesnt_work_it_may_have_ended": "этот код совместного просмотра не работает; возможно, сеанс закончился",
   "this_invite_has_expired_ask_for_another": "срок приглашения истёк; попросите новое",
   "this_invite_link_doesnt_work_ask_for_another": "эта ссылка-приглашение не работает; попросите новую",
@@ -215,5 +216,9 @@
   "thumbnails_must_be_all_onplay_or_off": "миниатюры должны быть all, onPlay или off",
   "too_many_watch_together_sessions_right_now": "сейчас слишком много сеансов совместного просмотра",
   "unknown_action": "неизвестное действие",
-  "usernames_are_at_most_40_characters": "имя пользователя не длиннее 40 символов"
+  "usernames_are_at_most_40_characters": "имя пользователя не длиннее 40 символов",
+  "couldnt_start_playback_for_this_album": "не удалось начать воспроизведение альбома",
+  "not_an_album": "это не альбом",
+  "only_the_household_can_change_this": "это может изменить только семья",
+  "tracks_must_be_songs_on_one_album": "треки должны быть с одного альбома"
 }

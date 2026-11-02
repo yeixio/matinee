@@ -409,7 +409,15 @@
     "playlistGone": "Denne playliste findes ikke længere",
     "create": "Opret",
     "save": "Gem",
-    "delete": "Slet"
+    "delete": "Slet",
+    "lyrics": "Sangtekst",
+    "noLyrics": "Ingen sangtekst til denne sang",
+    "instrumental": "Instrumental",
+    "lyricsFromLrclib": "Sangtekst fra LRCLIB",
+    "gapless": "Afspil uden pauser",
+    "gaplessHeard": "Matinee hørte, at disse sange glider over i hinanden, så de afspilles uden pauser.",
+    "gaplessOn": "Afspilles uden pauser",
+    "gaplessOff": "Afspilles med pauser mellem sangene"
   },
   "books": {
     "overview": "Oversigt",
@@ -545,7 +553,20 @@
     "newEpisodesCount_one": "{{count}} nyt afsnit",
     "imported_one": "{{count}} program tilføjet.",
     "newEpisodesCount_other": "{{count}} nye afsnit",
-    "imported_other": "{{count}} programmer tilføjet."
+    "imported_other": "{{count}} programmer tilføjet.",
+    "episodes": "Afsnit",
+    "order": "Rækkefølge for afsnit",
+    "newestFirst": "Nyeste først",
+    "oldestFirst": "Ældste først",
+    "playOldest": "Afspil i rækkefølge",
+    "playOn": "Bliv ved med at afspille podcasts",
+    "playOnHint": "Når et afsnit slutter, afspilles næste afsnit af programmet, som du ikke har hørt, ellers det nyeste afsnit af et andet program, du følger.",
+    "playingNext": "Næste: {{title}}",
+    "autoDownload": "Download nye afsnit",
+    "autoDownloadHint": "Dine telefoner downloader selv de nyeste afsnit af dette program og fjerner dem, når du har hørt dem.",
+    "keepCount": "Afsnit at beholde",
+    "removePlayed": "Fjern afspillede afsnit",
+    "removePlayedHint": "Downloadede podcastafsnit fjernes fra denne telefon, når du har hørt dem."
   },
   "together": {
     "title": "Se sammen",

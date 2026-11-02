@@ -53,7 +53,11 @@
     "noneFound": "V této síti jsme nenašli žádný server. Zadejte adresu, na které otevíráte Matinee v prohlížeči.",
     "connect": "Připojit",
     "stillLooking": "Stále hledáme. Pokud se váš server objeví, uvidíte ho tady.",
-    "connectTo": "Připojit k {{name}}"
+    "connectTo": "Připojit k {{name}}",
+    "phoneTitle": "Nastavit telefonem",
+    "phoneHint": "Naskenujte ho fotoaparátem telefonu. Telefon potřebuje přihlášenou aplikaci Matinee a stejnou Wi-Fi jako tato televize.",
+    "phoneFound": "Nastavuje se s {{name}}…",
+    "phoneQrLabel": "QR kód pro nastavení této televize telefonem"
   },
   "signIn": {
     "title": "Přihlásit se",
@@ -67,7 +71,32 @@
     "gettingCode": "Získávání kódu",
     "howTo": "Na přihlášeném počítači nebo telefonu otevřete\n<url>{{url}}</url>\na zadejte tento kód.",
     "newCode": "Získat nový kód",
-    "waiting": "Čeká se na schválení…"
+    "waiting": "Čeká se na schválení…",
+    "qrHint": "Nebo ho naskenujte fotoaparátem telefonu a otevře se ta stránka s vyplněným kódem.",
+    "qrLabel": "QR kód přihlašovací stránky s tímto kódem",
+    "finishOnPhone": "Váš telefon přihlašuje tuto televizi…"
+  },
+  "setUpTv": {
+    "title": "Nastavit televizi",
+    "settingsHint": "Přihlaste Matinee na televizi bez psaní ovladačem.",
+    "thisTv": "Tato televize",
+    "confirm": "Nastavit tuto televizi se serverem <b>{{server}}</b>? Přihlásí se jako <b>{{name}}</b>.",
+    "setUp": "Nastavit televizi",
+    "working": "Televize se dozvídá, kde je váš server…",
+    "sameWifi": "Nechte tento telefon na stejné Wi-Fi jako televizi, dokud to nebude hotové.",
+    "timeout": "Televize neodpověděla. Zkontrolujte, že je telefon na stejné Wi-Fi jako televize a televize stále ukazuje svůj QR kód, a zkuste to znovu.",
+    "done": "{{tv}} je přihlášená",
+    "doneHint": "Můžete se dívat.",
+    "declined": "{{tv}} se nepřihlásila",
+    "intro": "Otevřete Matinee na televizi a naskenujte QR kód, který ukazuje, fotoaparátem tohoto telefonu. Nebo sem napište kód, který televize ukazuje.",
+    "introCode": "Napište kód, který televize ukazuje.",
+    "code": "Kód na televizi",
+    "next": "Další",
+    "wantsToSignIn": "se chce přihlásit jako <b>{{name}}</b>",
+    "approve": "Přihlásit",
+    "decline": "Nepřihlašovat",
+    "signInFirst": "Nejdřív se přihlaste na tomto telefonu. Televize se přihlásí jako vy.",
+    "onPhone": "Televizi nastavíte v aplikaci Matinee v telefonu: Nastavení, pak Nastavit televizi."
   },
   "home": {
     "watchDownloads": "Sledovat stažené",
@@ -345,7 +374,8 @@
       "source": "Titulky z OpenSubtitles.com"
     },
     "skipIntro": "Přeskočit úvod",
-    "introSkipped": "Úvod přeskočen"
+    "introSkipped": "Úvod přeskočen",
+    "skipCredits": "Přeskočit titulky"
   },
   "library": {
     "nothingUnwatched": "Nic nezhlédnutého",

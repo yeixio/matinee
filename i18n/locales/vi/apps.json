@@ -53,7 +53,11 @@
     "noneFound": "Không tìm thấy máy chủ nào trong mạng này. Hãy nhập địa chỉ bạn dùng để mở Matinee trong trình duyệt.",
     "connect": "Kết nối",
     "stillLooking": "Vẫn đang tìm. Nếu máy chủ của bạn xuất hiện, nó sẽ hiện ở đây.",
-    "connectTo": "Kết nối với {{name}}"
+    "connectTo": "Kết nối với {{name}}",
+    "phoneTitle": "Thiết lập bằng điện thoại",
+    "phoneHint": "Quét bằng camera điện thoại. Điện thoại cần có ứng dụng Matinee đã đăng nhập, cùng mạng Wi-Fi với TV này.",
+    "phoneFound": "Đang thiết lập với {{name}}…",
+    "phoneQrLabel": "Mã QR để thiết lập TV này bằng điện thoại"
   },
   "signIn": {
     "title": "Đăng nhập",
@@ -67,7 +71,32 @@
     "gettingCode": "Đang lấy mã",
     "howTo": "Trên máy tính hoặc điện thoại đã đăng nhập, hãy mở\n<url>{{url}}</url>\nrồi nhập mã này.",
     "newCode": "Lấy mã mới",
-    "waiting": "Đang chờ phê duyệt…"
+    "waiting": "Đang chờ phê duyệt…",
+    "qrHint": "Hoặc quét bằng camera điện thoại để mở trang đó với mã đã điền sẵn.",
+    "qrLabel": "Mã QR của trang đăng nhập với mã này",
+    "finishOnPhone": "Điện thoại của bạn đang đăng nhập TV này…"
+  },
+  "setUpTv": {
+    "title": "Thiết lập TV",
+    "settingsHint": "Đăng nhập Matinee trên TV mà không phải gõ bằng điều khiển.",
+    "thisTv": "TV này",
+    "confirm": "Thiết lập TV này với <b>{{server}}</b>? TV sẽ đăng nhập là <b>{{name}}</b>.",
+    "setUp": "Thiết lập TV",
+    "working": "Đang cho TV biết máy chủ của bạn ở đâu…",
+    "sameWifi": "Giữ điện thoại này cùng mạng Wi-Fi với TV cho đến khi xong.",
+    "timeout": "TV không phản hồi. Hãy kiểm tra điện thoại này cùng mạng Wi-Fi với TV và TV vẫn đang hiện mã QR, rồi thử lại.",
+    "done": "{{tv}} đã đăng nhập",
+    "doneHint": "Sẵn sàng để xem.",
+    "declined": "{{tv}} chưa được đăng nhập",
+    "intro": "Mở Matinee trên TV và quét mã QR hiện trên đó bằng camera của điện thoại này. Hoặc nhập mã TV hiển thị vào đây.",
+    "introCode": "Nhập mã TV hiển thị.",
+    "code": "Mã trên TV",
+    "next": "Tiếp",
+    "wantsToSignIn": "muốn đăng nhập là <b>{{name}}</b>",
+    "approve": "Đăng nhập",
+    "decline": "Không đăng nhập",
+    "signInFirst": "Hãy đăng nhập trên điện thoại này trước. TV sẽ đăng nhập bằng tài khoản của bạn.",
+    "onPhone": "Thiết lập TV từ ứng dụng Matinee trên điện thoại: Cài đặt, rồi Thiết lập TV."
   },
   "home": {
     "watchDownloads": "Xem các bản tải xuống",
@@ -330,7 +359,8 @@
       "source": "Phụ đề từ OpenSubtitles.com"
     },
     "skipIntro": "Bỏ qua đoạn mở đầu",
-    "introSkipped": "Đã bỏ qua đoạn mở đầu"
+    "introSkipped": "Đã bỏ qua đoạn mở đầu",
+    "skipCredits": "Bỏ qua phần danh đề"
   },
   "library": {
     "nothingUnwatched": "Không còn gì chưa xem ở đây",

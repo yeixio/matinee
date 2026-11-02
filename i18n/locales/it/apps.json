@@ -53,7 +53,11 @@
     "noneFound": "Non abbiamo trovato server su questa rete. Digita l’indirizzo con cui apri Matinee in un browser.",
     "connect": "Collega",
     "stillLooking": "Sto ancora cercando. Se il tuo server compare, apparirà qui.",
-    "connectTo": "Connetti a {{name}}"
+    "connectTo": "Connetti a {{name}}",
+    "phoneTitle": "Configura con il telefono",
+    "phoneHint": "Inquadralo con la fotocamera del telefono. Sul telefono serve l'app Matinee con l'accesso fatto, sulla stessa Wi-Fi di questa TV.",
+    "phoneFound": "Configurazione con {{name}}…",
+    "phoneQrLabel": "Codice QR per configurare questa TV con il telefono"
   },
   "signIn": {
     "title": "Accedi",
@@ -67,7 +71,32 @@
     "gettingCode": "Recupero del codice",
     "howTo": "Su un computer o telefono con l’accesso eseguito, apri\n<url>{{url}}</url>\ne inserisci questo codice.",
     "newCode": "Ottieni un nuovo codice",
-    "waiting": "In attesa di approvazione…"
+    "waiting": "In attesa di approvazione…",
+    "qrHint": "Oppure inquadralo con la fotocamera del telefono per aprire quella pagina con il codice già inserito.",
+    "qrLabel": "Codice QR della pagina di accesso con questo codice",
+    "finishOnPhone": "Il telefono sta facendo accedere questa TV…"
+  },
+  "setUpTv": {
+    "title": "Configura una TV",
+    "settingsHint": "Accedi a Matinee su una TV senza scrivere con il telecomando.",
+    "thisTv": "Questa TV",
+    "confirm": "Configurare questa TV con <b>{{server}}</b>? Accederà come <b>{{name}}</b>.",
+    "setUp": "Configura TV",
+    "working": "Sto dicendo alla TV dov'è il tuo server…",
+    "sameWifi": "Tieni questo telefono sulla stessa Wi-Fi della TV finché non ha finito.",
+    "timeout": "La TV non ha risposto. Controlla che questo telefono sia sulla stessa Wi-Fi della TV e che la TV mostri ancora il codice QR, poi riprova.",
+    "done": "{{tv}} ha effettuato l'accesso",
+    "doneHint": "È pronta per guardare.",
+    "declined": "{{tv}} non ha effettuato l'accesso",
+    "intro": "Apri Matinee sulla TV e inquadra il codice QR che mostra con la fotocamera di questo telefono. Oppure scrivi qui il codice che mostra la TV.",
+    "introCode": "Scrivi il codice che mostra la TV.",
+    "code": "Codice sulla TV",
+    "next": "Avanti",
+    "wantsToSignIn": "vuole accedere come <b>{{name}}</b>",
+    "approve": "Fai accedere",
+    "decline": "Non far accedere",
+    "signInFirst": "Prima accedi su questo telefono. La TV accederà come te.",
+    "onPhone": "Configura una TV dall'app Matinee sul telefono: Impostazioni, poi Configura una TV."
   },
   "home": {
     "watchDownloads": "Guarda i tuoi download",
@@ -340,7 +369,8 @@
       "source": "Sottotitoli da OpenSubtitles.com"
     },
     "skipIntro": "Salta intro",
-    "introSkipped": "Intro saltata"
+    "introSkipped": "Intro saltata",
+    "skipCredits": "Salta i titoli di coda"
   },
   "library": {
     "nothingUnwatched": "Niente da vedere qui",

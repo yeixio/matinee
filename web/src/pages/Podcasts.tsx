@@ -12,8 +12,10 @@ import { ViewTabs } from '../components/ViewTabs'
 import { Button, EmptyState, Spinner } from '../components/ui'
 import { BookGrid } from './Books'
 
-type View = 'shows' | 'latest' | 'add'
-const views: View[] = ['shows', 'latest', 'add']
+// Search comes first and is where the library opens, for grown-ups; kids
+// profiles can't add shows, so they open on the shows.
+type View = 'search' | 'shows' | 'latest'
+const views: View[] = ['search', 'shows', 'latest']
 
 const inputClass = 'h-10 w-full rounded-lg border border-line bg-surface px-3 text-sm focus:border-accent focus:outline-none'
 
@@ -22,12 +24,16 @@ const inputClass = 'h-10 w-full rounded-lg border border-line bg-surface px-3 te
 export default function Podcasts({ lib }: { lib: Library }) {
   const { t } = useTranslation()
   const [params, setParams] = useSearchParams()
-  const view = (views.includes(params.get('view') as View) ? params.get('view') : 'shows') as View
-  const pick = (v: View) => setParams(v === 'shows' ? {} : { view: v }, { replace: true })
   const me = useQuery<User>({ queryKey: ['me'], queryFn: api.me, staleTime: Infinity })
   // Kids profiles listen; grown-ups add shows.
   const canAdd = !!me.data && !me.data.kidsLevel
-  const shown = canAdd ? views : views.filter((v) => v !== 'add')
+  const shown = canAdd ? views : views.filter((v) => v !== 'search')
+  const first = shown[0]
+  // ?view=add is what the Search tab was called before.
+  const asked = params.get('view') === 'add' ? 'search' : params.get('view')
+  const view = (shown.includes(asked as View) ? asked : first) as View
+  const pick = (v: View) => setParams(v === first ? {} : { view: v }, { replace: true })
+  if (me.isPending) return <Spinner />
 
   return (
     <div className="space-y-6">
@@ -37,7 +43,7 @@ export default function Podcasts({ lib }: { lib: Library }) {
         {lib.scanning && <span className="animate-pulse text-sm text-accent">{t('common:podcasts.checking')}</span>}
       </div>
       <ViewTabs views={shown} view={view} label={(v) => t(`common:podcasts.${v}`)} onPick={pick} />
-      {view === 'latest' ? <Latest lib={lib} /> : view === 'add' && canAdd ? <AddShows lib={lib} me={me.data!} /> : <Shows lib={lib} onAdd={canAdd ? () => pick('add') : undefined} />}
+      {view === 'latest' ? <Latest lib={lib} /> : view === 'search' && canAdd ? <AddShows lib={lib} me={me.data!} /> : <Shows lib={lib} onAdd={canAdd ? () => pick('search') : undefined} />}
     </div>
   )
 }

@@ -47,7 +47,8 @@
       "source": "Undertekster fra OpenSubtitles.com"
     },
     "skipIntro": "Spring intro over",
-    "introSkipped": "Introen blev sprunget over"
+    "introSkipped": "Introen blev sprunget over",
+    "skipCredits": "Spring rulletekster over"
   },
   "somethingWentWrong": "Noget gik galt",
   "oneMoment": "Et øjeblik…",
@@ -412,7 +413,9 @@
     "state": {
       "lookingAt": "Kigger på {{file}}",
       "intros": "Leder efter introer i {{season}}",
+      "credits": "Leder efter rulletekster i {{title}}",
       "thumbnails": "Laver forhåndsbilleder til {{title}}",
+      "gapless": "Lytter efter pauser mellem sangene på {{album}}",
       "working": "Arbejder",
       "waiting": "Venter på, at afspilningen slutter",
       "slowDisk": "Filerne er langsomme at læse; holder pause et par minutter",
@@ -442,6 +445,11 @@
       "label": "Find introer i serier",
       "hint": "Når alle filer er analyseret, lytter Matinee til starten af hver sæsons afsnit efter den intro, de har til fælles, så afspillerne kan tilbyde Spring intro over.",
       "progress": "{{done}} af {{total}} afsnit tjekket, {{found}} med intro"
+    },
+    "credits": {
+      "label": "Find rulletekster",
+      "hint": "Når alle filer er analyseret, finder Matinee, hvor rulleteksterne i afsnit og film starter, så afspillere kan vise Næste eller Spring rulletekster over der.",
+      "progress": "{{done}} af {{total}} afsnit og film tjekket, {{found}} med rulletekster"
     },
     "thumbnails": {
       "label": "Forhåndsbilleder i tidslinjen",
@@ -758,6 +766,12 @@
         "v4l2m2m": "V4L2 (Raspberry Pi)"
       }
     },
+    "lyrics": {
+      "title": "Sangtekster",
+      "intro": "Sange viser deres tekst i takt med musikken, når der ligger en .lrc-fil med samme navn ved siden af sangen, eller teksten står i dens tags.",
+      "online": "Søg efter sangtekster online",
+      "onlineDetail": "Til sange uden tidsindstillet tekst spørger serveren <site>LRCLIB</site>, en fri, åben database med sangtekster. Den sender kun kunstner, titel, album og længde for hver sang, direkte fra denne server."
+    },
     "homeRows": {
       "title": "Hjem",
       "holidays": "Højtidsrækker",
@@ -826,7 +840,7 @@
       },
       "content": {
         "title": "Indhold",
-        "hint": "Plakater, søgning efter podcasts og undertekster, trailere og rækker på Hjem"
+        "hint": "Plakater, søgning efter podcasts og undertekster, sangtekster, trailere og rækker på Hjem"
       },
       "streaming": {
         "title": "Streaming",

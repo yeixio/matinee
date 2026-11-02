@@ -53,7 +53,11 @@
     "noneFound": "Vi fant ingen server på dette nettverket. Skriv inn adressen du åpner Matinee på i en nettleser.",
     "connect": "Koble til",
     "stillLooking": "Leter fortsatt. Hvis serveren din dukker opp, vises den her.",
-    "connectTo": "Koble til {{name}}"
+    "connectTo": "Koble til {{name}}",
+    "phoneTitle": "Sett opp med mobilen",
+    "phoneHint": "Skann den med mobilkameraen. Mobilen trenger Matinee-appen, innlogget, på samme Wi-Fi som denne TV-en.",
+    "phoneFound": "Setter opp med {{name}}…",
+    "phoneQrLabel": "QR-kode for å sette opp denne TV-en med mobilen"
   },
   "signIn": {
     "title": "Logg inn",
@@ -67,7 +71,32 @@
     "gettingCode": "Henter en kode",
     "howTo": "På en datamaskin eller telefon som er logget inn, åpne\n<url>{{url}}</url>\nog skriv inn denne koden.",
     "newCode": "Hent en ny kode",
-    "waiting": "Venter på godkjenning…"
+    "waiting": "Venter på godkjenning…",
+    "qrHint": "Eller skann den med mobilkameraen for å åpne siden med koden fylt inn.",
+    "qrLabel": "QR-kode til innloggingssiden med denne koden",
+    "finishOnPhone": "Mobilen din logger inn denne TV-en…"
+  },
+  "setUpTv": {
+    "title": "Sett opp en TV",
+    "settingsHint": "Logg inn Matinee på en TV uten å skrive med fjernkontrollen.",
+    "thisTv": "Denne TV-en",
+    "confirm": "Sette opp denne TV-en med <b>{{server}}</b>? Den logges inn som <b>{{name}}</b>.",
+    "setUp": "Sett opp TV",
+    "working": "Forteller TV-en hvor serveren din er…",
+    "sameWifi": "Hold denne mobilen på samme Wi-Fi som TV-en til det er ferdig.",
+    "timeout": "TV-en svarte ikke. Sjekk at mobilen er på samme Wi-Fi som TV-en og at TV-en fortsatt viser QR-koden, og prøv igjen.",
+    "done": "{{tv}} er logget inn",
+    "doneHint": "Den er klar til å se.",
+    "declined": "{{tv}} ble ikke logget inn",
+    "intro": "Åpne Matinee på TV-en og skann QR-koden den viser med kameraet på denne mobilen. Eller skriv inn koden TV-en viser her.",
+    "introCode": "Skriv inn koden TV-en viser.",
+    "code": "Kode på TV-en",
+    "next": "Neste",
+    "wantsToSignIn": "vil logge inn som <b>{{name}}</b>",
+    "approve": "Logg inn",
+    "decline": "Ikke logg inn",
+    "signInFirst": "Logg inn på denne mobilen først. TV-en logges inn som deg.",
+    "onPhone": "Sett opp en TV fra Matinee-appen på mobilen: Innstillinger, så Sett opp en TV."
   },
   "home": {
     "watchDownloads": "Se nedlastingene dine",
@@ -335,7 +364,8 @@
       "source": "Undertekster fra OpenSubtitles.com"
     },
     "skipIntro": "Hopp over intro",
-    "introSkipped": "Introen ble hoppet over"
+    "introSkipped": "Introen ble hoppet over",
+    "skipCredits": "Hopp over rulletekster"
   },
   "library": {
     "nothingUnwatched": "Ingenting usett her",

@@ -47,7 +47,8 @@
       "source": "Titulky z OpenSubtitles.com"
     },
     "skipIntro": "Přeskočit úvod",
-    "introSkipped": "Úvod přeskočen"
+    "introSkipped": "Úvod přeskočen",
+    "skipCredits": "Přeskočit titulky"
   },
   "somethingWentWrong": "Něco se pokazilo",
   "oneMoment": "Moment…",
@@ -418,7 +419,9 @@
     "state": {
       "lookingAt": "Zkoumá {{file}}",
       "intros": "Hledání úvodů v: {{season}}",
+      "credits": "Hledají se závěrečné titulky v {{title}}",
       "thumbnails": "Vytvářím náhledy pro {{title}}",
+      "gapless": "Poslouchá mezery mezi skladbami na {{album}}",
       "working": "Pracuje",
       "waiting": "Čeká na konec přehrávání",
       "slowDisk": "Soubory se čtou pomalu; pár minut odpočívá",
@@ -450,6 +453,11 @@
       "label": "Hledat úvody seriálů",
       "hint": "Jakmile jsou všechny soubory analyzované, Matinee poslouchá začátky epizod každé řady a hledá úvod, který mají společný, aby přehrávače mohly nabídnout Přeskočit úvod.",
       "progress": "Zkontrolováno {{done}} z {{total}} epizod, {{found}} s úvodem"
+    },
+    "credits": {
+      "label": "Najít závěrečné titulky",
+      "hint": "Po analýze všech souborů Matinee zjistí, kde začínají závěrečné titulky epizod a filmů, aby přehrávače mohly právě tam nabídnout Další nebo Přeskočit titulky.",
+      "progress": "Zkontrolováno {{done}} z {{total}} epizod a filmů, {{found}} se závěrečnými titulky"
     },
     "thumbnails": {
       "label": "Náhledy na časové ose",
@@ -766,6 +774,12 @@
         "v4l2m2m": "V4L2 (Raspberry Pi)"
       }
     },
+    "lyrics": {
+      "title": "Texty písní",
+      "intro": "Skladby ukazují text v rytmu hudby, když je vedle skladby soubor .lrc se stejným názvem nebo je text v jejích tazích.",
+      "online": "Hledat texty online",
+      "onlineDetail": "U skladeb bez časovaného textu se server zeptá <site>LRCLIB</site>, svobodné a otevřené databáze textů. Posílá jen interpreta, název, album a délku každé skladby, přímo z tohoto serveru."
+    },
     "homeRows": {
       "title": "Domů",
       "holidays": "Sváteční řady",
@@ -834,7 +848,7 @@
       },
       "content": {
         "title": "Obsah",
-        "hint": "Plakáty, hledání podcastů a titulků, upoutávky a řady na Domů"
+        "hint": "Plakáty, hledání podcastů a titulků, texty písní, upoutávky a řady na Domů"
       },
       "streaming": {
         "title": "Streamování",

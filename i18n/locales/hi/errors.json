@@ -207,6 +207,7 @@
   "pick_at_least_one_library_to_share": "शेयर करने के लिए कम से कम एक लाइब्रेरी चुनें",
   "that_isnt_in_a_library_shared_with_you": "यह आपके साथ शेयर की गई किसी लाइब्रेरी में नहीं है",
   "that_session_is_still_going_join_it": "वह सत्र अभी चल रहा है; उससे जुड़ें",
+  "that_tv_hasnt_asked_to_sign_in_yet": "उस टीवी ने अभी साइन इन के लिए नहीं कहा है",
   "that_watch_together_code_doesnt_work_it_may_have_ended": "यह साथ देखने का कोड काम नहीं करता; शायद सत्र ख़त्म हो गया",
   "this_invite_has_expired_ask_for_another": "इस न्योते की अवधि ख़त्म हो गई; नया माँगें",
   "this_invite_link_doesnt_work_ask_for_another": "यह न्योता लिंक काम नहीं करता; नया माँगें",
@@ -215,5 +216,9 @@
   "thumbnails_must_be_all_onplay_or_off": "थंबनेल all, onPlay या off होने चाहिए",
   "too_many_watch_together_sessions_right_now": "अभी साथ देखने के बहुत सारे सत्र चल रहे हैं",
   "unknown_action": "अज्ञात कार्रवाई",
-  "usernames_are_at_most_40_characters": "यूज़रनेम ज़्यादा से ज़्यादा 40 अक्षर का हो सकता है"
+  "usernames_are_at_most_40_characters": "यूज़रनेम ज़्यादा से ज़्यादा 40 अक्षर का हो सकता है",
+  "couldnt_start_playback_for_this_album": "इस एल्बम का प्लेबैक शुरू नहीं हो सका",
+  "not_an_album": "यह एल्बम नहीं है",
+  "only_the_household_can_change_this": "इसे केवल घर के सदस्य बदल सकते हैं",
+  "tracks_must_be_songs_on_one_album": "ट्रैक एक ही एल्बम के गाने होने चाहिए"
 }

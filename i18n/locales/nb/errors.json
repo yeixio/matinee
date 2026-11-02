@@ -207,6 +207,7 @@
   "pick_at_least_one_library_to_share": "velg minst ett bibliotek å dele",
   "that_isnt_in_a_library_shared_with_you": "det er ikke i et bibliotek som er delt med deg",
   "that_session_is_still_going_join_it": "økten pågår fortsatt; bli med i den",
+  "that_tv_hasnt_asked_to_sign_in_yet": "den TV-en har ikke bedt om å logge inn ennå",
   "that_watch_together_code_doesnt_work_it_may_have_ended": "koden for Se sammen fungerer ikke; økten kan være avsluttet",
   "this_invite_has_expired_ask_for_another": "invitasjonen har utløpt; be om en ny",
   "this_invite_link_doesnt_work_ask_for_another": "invitasjonslenken fungerer ikke; be om en ny",
@@ -215,5 +216,9 @@
   "thumbnails_must_be_all_onplay_or_off": "miniatyrbilder må være all, onPlay eller off",
   "too_many_watch_together_sessions_right_now": "for mange økter for Se sammen akkurat nå",
   "unknown_action": "ukjent handling",
-  "usernames_are_at_most_40_characters": "brukernavn kan ha høyst 40 tegn"
+  "usernames_are_at_most_40_characters": "brukernavn kan ha høyst 40 tegn",
+  "couldnt_start_playback_for_this_album": "kunne ikke starte avspillingen av albumet",
+  "not_an_album": "ikke et album",
+  "only_the_household_can_change_this": "bare husstanden kan endre dette",
+  "tracks_must_be_songs_on_one_album": "sporene må være sanger fra ett album"
 }

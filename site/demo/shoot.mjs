@@ -162,6 +162,17 @@ try {
       await page.evaluate(() => window.scrollTo(0, 0))
       await sleep(1500)
       await shot(page, 'album')
+      if (wanted('album-gapless')) {
+        // Play without gaps, turned on: the row of buttons under the title.
+        await api(token, 'PUT', `/items/${album.id}/gapless`, { gapless: true })
+        const page = await open(desktop, token)
+        await page.goto(`${origin}/item/${album.id}`)
+        const toggle = page.getByRole('switch', { name: 'Play without gaps' })
+        await toggle.waitFor()
+        await shot(page, 'album-gapless', { target: toggle.locator('..') })
+        await page.context().close()
+        await api(token, 'PUT', `/items/${album.id}/gapless`, { gapless: null })
+      }
       if (wanted('cover-picker')) {
         // Covers found online, as the picker lists them; the demo server is offline.
         const svg = (hue, name) => 'data:image/svg+xml,' + encodeURIComponent(cover(202, 'Signal Fires', name, hue))
@@ -194,6 +205,12 @@ try {
       await shot(page, 'visualizer-halo')
       await page.keyboard.press('ArrowLeft')
       await page.keyboard.press('Escape')
+      // The song's words, from the .lrc next to it, a few lines in.
+      await page.getByRole('button', { name: 'Lyrics' }).click()
+      await page.locator('[aria-current="true"]').waitFor()
+      await sleep(1500)
+      await shot(page, 'lyrics')
+      await page.getByRole('button', { name: 'Lyrics' }).click()
       await page.keyboard.press('Escape')
       await page.goto(`${origin}/item/${album.artistId}`)
       await sleep(1000)
@@ -261,7 +278,7 @@ try {
       await api(token, 'PUT', `/items/${booth[1].id}/progress`, { positionMs: 18 * 60000 })
       await api(token, 'PUT', `/items/${booth[2].id}/progress`, { positionMs: 0, played: true })
 
-      await page.goto(`${origin}/library/${lib.id}`)
+      await page.goto(`${origin}/library/${lib.id}?view=shows`)
       await sleep(1000)
       await shot(page, 'podcasts')
       await page.goto(`${origin}/item/${shows[0].id}`)
@@ -275,7 +292,8 @@ try {
       await shot(page, 'podcast-player')
       await page.keyboard.press('Escape')
       await page.getByRole('button', { name: 'Close player' }).first().click()
-      await page.goto(`${origin}/library/${lib.id}?view=add`)
+      // The library opens on Search.
+      await page.goto(`${origin}/library/${lib.id}`)
       await sleep(1000)
       await shot(page, 'podcasts-add')
       await page.getByRole('button', { name: 'TV & film' }).click()
@@ -390,6 +408,22 @@ try {
       await page.getByRole('button', { name: 'Skip intro' }).waitFor({ timeout: 20000 })
       await sleep(3500) // the controls fade away; the button stays
       await shot(page, 'skip-intro')
+    }
+
+    // Skip credits: a film a little way into its end credits, which a
+    // chapter marks in the demo library (see docs/guide/watching/skipping-credits.md).
+    if (wanted('skip-credits')) {
+      const film = await api(token, 'GET', `/items/${(await find('Harbor Lights')).id}`)
+      await page.goto(`${origin}/watch/${film.id}`)
+      await sleep(2500)
+      const bar = page.getByRole('slider', { name: 'Seek' })
+      const box = await bar.boundingBox()
+      const total = film.durationMs / 1000
+      await page.mouse.click(box.x + box.width * ((film.endCredits.startMs / 1000 + 20) / total), box.y + box.height / 2)
+      await page.getByRole('button', { name: 'Skip credits' }).waitFor({ timeout: 20000 })
+      await page.mouse.move(700, 300) // off the seek bar, so its preview goes
+      await sleep(3500) // the controls fade away; the button stays
+      await shot(page, 'skip-credits')
     }
     await page.context().close()
   }
@@ -582,6 +616,7 @@ try {
     await shot(page, 'media-analysis', { target: section(page, 'Media analysis') })
     await settings(page, 'content')
     await shot(page, 'tmdb-key', { target: section(page, 'Posters and details') })
+    await shot(page, 'settings-lyrics', { target: section(page, 'Lyrics') })
     await shot(page, 'trailers', { target: section(page, 'Trailers') })
     await shot(page, 'holiday-rows', { target: section(page, 'Home') })
     await settings(page, 'network')

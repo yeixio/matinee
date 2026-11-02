@@ -1,5 +1,5 @@
-import { useQuery } from '@tanstack/react-query'
-import { Image as ImageIcon, Pause, Play, Shuffle } from 'lucide-react'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { Image as ImageIcon, Infinity as Joined, Pause, Play, Shuffle } from 'lucide-react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
@@ -166,8 +166,47 @@ function Actions({ item, tracks }: { item: ItemDetail; tracks?: Item[] }) {
       </Button>
       <AddToCollectionButton item={item} />
       <StarRating item={item} />
+      <GaplessToggle item={item} />
       <TrackMenu item={item} items={async () => tracks ?? api.tracks(item.id)} />
     </div>
+  )
+}
+
+// Play without gaps: an album whose songs run into each other (a DJ mix,
+// a live album) plays as one stream. Matinee listens for them; anyone in
+// the household can turn it on or off for an album, and the server
+// remembers. Turning it back to what Matinee heard leaves it to Matinee
+// again.
+function GaplessToggle({ item }: { item: ItemDetail }) {
+  const { t } = useTranslation()
+  const qc = useQueryClient()
+  const audio = useAudio()
+  const { data: me } = useQuery<User>({ queryKey: ['me'], queryFn: api.me, staleTime: Infinity })
+  const set = useMutation({
+    mutationFn: (on: boolean) => api.setGapless(item.id, on === !!item.gaplessFound ? null : on),
+    onSuccess: (album) => {
+      audio.say(album.gapless ? t('common:music.gaplessOn') : t('common:music.gaplessOff'))
+      audio.setGapless(item.id, !!album.gapless)
+      qc.invalidateQueries({ queryKey: ['item', item.id] })
+      qc.invalidateQueries({ queryKey: ['children', item.id] })
+    },
+  })
+  if (!me || me.guest || me.kidsLevel || me.friend) return null
+  const on = set.isPending ? !!set.variables : !!item.gapless
+  return (
+    <button
+      role="switch"
+      aria-checked={on}
+      disabled={set.isPending}
+      onClick={() => set.mutate(!on)}
+      title={on && item.gaplessChoice === undefined ? t('common:music.gaplessHeard') : undefined}
+      className={`flex h-11 items-center gap-2 rounded-full px-4 text-sm font-medium transition ${
+        on ? 'bg-accent/15 text-accent hover:bg-accent/25' : 'bg-text/10 text-text hover:bg-text/15'
+      }`}
+    >
+      <Joined className="size-4" />
+      {t('common:music.gapless')}
+    </button>
   )
 }
 

@@ -47,7 +47,8 @@
       "source": "Subtitles from OpenSubtitles.com"
     },
     "skipIntro": "Skip intro",
-    "introSkipped": "Skipped the intro"
+    "introSkipped": "Skipped the intro",
+    "skipCredits": "Skip credits"
   },
   "somethingWentWrong": "Something went wrong",
   "oneMoment": "One moment…",
@@ -412,7 +413,9 @@
     "state": {
       "lookingAt": "Looking at {{file}}",
       "intros": "Looking for intros in {{season}}",
+      "credits": "Looking for end credits in {{title}}",
       "thumbnails": "Making seek bar previews for {{title}}",
+      "gapless": "Listening for gaps between songs on {{album}}",
       "working": "Working",
       "waiting": "Waiting for playback to finish",
       "slowDisk": "Files are slow to read; resting for a few minutes",
@@ -442,6 +445,11 @@
       "label": "Find TV intros",
       "hint": "Once every file is analyzed, Matinee listens to the start of each season’s episodes for the intro they share, so players can offer Skip intro.",
       "progress": "{{done}} of {{total}} episodes checked, {{found}} with an intro"
+    },
+    "credits": {
+      "label": "Find end credits",
+      "hint": "Once every file is analyzed, Matinee finds where the end credits of episodes and movies start, so players can show Up next or Skip credits there.",
+      "progress": "{{done}} of {{total}} episodes and movies checked, {{found}} with end credits"
     },
     "thumbnails": {
       "label": "Seek bar previews",
@@ -692,6 +700,12 @@
       "required": "Everyone signs in, at home and away.",
       "open": "Phones, TVs and browsers on your home network can watch without signing in. They share one Home account and can't change anything. Away from home, everyone signs in."
     },
+    "lyrics": {
+      "title": "Lyrics",
+      "intro": "Songs show their lyrics in time with the music when there’s a .lrc file with the same name next to the song, or lyrics in its tags.",
+      "online": "Look up lyrics online",
+      "onlineDetail": "For songs without timed lyrics, the server asks <site>LRCLIB</site>, a free, open lyrics database. It sends only each song’s artist, title, album and length, straight from this server."
+    },
     "homeRows": {
       "title": "Home",
       "holidays": "Holiday rows",
@@ -826,7 +840,7 @@
       },
       "content": {
         "title": "Content",
-        "hint": "Posters, podcast and subtitle search, trailers and Home rows"
+        "hint": "Posters, podcast and subtitle search, lyrics, trailers and Home rows"
       },
       "streaming": {
         "title": "Streaming",

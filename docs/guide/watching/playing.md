@@ -60,9 +60,15 @@ When an episode's closing credits start, a card offers the next episode with a 1
 
 After three episodes in a row with nobody touching anything, Matinee asks **Still watching?** instead of counting down. At the end of a show's last episode, it suggests a related show you haven't finished.
 
+<!-- until: v0.1.13 -->
 Matinee finds where the credits start from the file's chapters (a chapter called *Credits*, *End Credits* or *Outro* in the second half of the file). Without one, the card shows 30 seconds before the end.
+<!-- /until -->
 
-You choose how this works for you under **Settings → You → Playback**: turn off **Play the next episode**, or turn on **Skip the countdown** to go straight on when the credits start. Your choice follows you to the apps.
+<!-- since: v0.1.13 -->
+Matinee finds where the credits start by itself: from the file's chapters, by listening for the music a season's episodes share at their end, or by looking for the picture going dark. When it can't tell, the card shows 30 seconds before the end. At the end of a movie, or when nothing comes next, **Skip credits** jumps past them instead. See [Skipping credits](/docs/watching/skipping-credits/).
+<!-- /since -->
+
+You choose how this works for you under **Settings → You → Playback**: turn off **Play the next episode**, or turn on **Skip the countdown** to go straight on when the credits start. Your choice follows you to the apps.<!-- since: v0.1.13 --> Podcasts have their own choice there, **Keep playing podcasts**: see [Playing on to the next episode](/docs/watching/podcasts/#playing-on-to-the-next-episode).<!-- /since -->
 
 ![The Playback settings](../images/playback.webp)
 

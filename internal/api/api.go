@@ -27,6 +27,7 @@ import (
 	"github.com/yeixio/matinee/internal/health"
 	"github.com/yeixio/matinee/internal/hwaccel"
 	"github.com/yeixio/matinee/internal/live"
+	"github.com/yeixio/matinee/internal/lyrics"
 	"github.com/yeixio/matinee/internal/plugin"
 	"github.com/yeixio/matinee/internal/podcast"
 	"github.com/yeixio/matinee/internal/probe"
@@ -59,7 +60,9 @@ type Server struct {
 	Subtitles *subtitle.Converter
 	// Levels works out songs' sound levels for the music visualizer; nil
 	// means the visualizer has nothing to draw from.
-	Levels    *spectrum.Analyzer
+	Levels *spectrum.Analyzer
+	// Lyrics finds songs' words; nil offers none.
+	Lyrics    *lyrics.Finder
 	Web       fs.FS // built web player; nil serves a placeholder
 	Log       *slog.Logger
 	MediaRoot string // where the folder picker starts; empty means /
@@ -201,6 +204,7 @@ func (s *Server) routes() []route {
 		{"POST /auth/device", public, s.startDeviceCode},
 		{"POST /auth/device/token", public, s.pollDeviceCode},
 		{"GET /auth/device/{code}", signedIn, grownUps(s.getDeviceCode)},
+		{"GET /auth/device/pair/{pair}", signedIn, grownUps(s.getPairedDeviceCode)},
 		{"POST /auth/device/{code}/approve", signedIn, grownUps(s.approveDeviceCode)},
 		{"POST /auth/device/{code}/deny", signedIn, grownUps(s.denyDeviceCode)},
 
@@ -278,17 +282,20 @@ func (s *Server) routes() []route {
 		{"GET /items/{id}/children", reader, s.itemChildren},
 		{"GET /items/{id}/tracks", reader, s.itemTracks},
 		{"GET /items/{id}/levels", reader, s.itemLevels},
+		{"GET /items/{id}/lyrics", reader, s.itemLyrics},
 		{"GET /items/{id}/thumbnails", reader, s.itemThumbnails},
 		{"GET /items/{id}/thumbnails/{sheet}", reader, s.thumbnailSheet},
 		{"GET /items/{id}/book", reader, s.getBook},
 		{"GET /podcasts/directory", reader, grownUps(s.podcastDirectory)},
 		{"GET /podcasts/following", reader, s.followedPodcasts},
+		{"GET /podcasts/auto-downloads", reader, s.autoDownloadEpisodes},
 		{"POST /podcasts", signedIn, grownUps(s.addPodcast)},
 		{"DELETE /podcasts/{id}", adminOnly, s.deletePodcast},
 		{"POST /podcasts/{id}/refresh", signedIn, grownUps(s.refreshPodcast)},
 		{"PUT /podcasts/{id}/follow", reader, s.followPodcast},
 		{"DELETE /podcasts/{id}/follow", reader, s.unfollowPodcast},
 		{"PUT /podcasts/{id}/played", reader, s.markPodcastPlayed},
+		{"PUT /podcasts/{id}/downloads", reader, s.setPodcastDownloads},
 		{"GET /libraries/{id}/opml", reader, s.exportPodcasts},
 		{"POST /libraries/{id}/opml", signedIn, grownUps(s.importPodcasts)},
 		{"GET /items/{id}/related", reader, s.itemRelated},
@@ -310,6 +317,8 @@ func (s *Server) routes() []route {
 		{"GET /items/{id}/trailers/{trailer}/file", reader, s.trailerFile},
 		{"POST /items/{id}/trailers/{trailer}/hls", reader, s.trailerHLS},
 		{"POST /items/{id}/hls", reader, s.startHLS},
+		{"POST /gapless", reader, s.startGapless},
+		{"PUT /items/{id}/gapless", signedIn, grownUps(s.setGapless)},
 		{"GET /hls/{session}/{file}", reader, s.hlsFile},
 
 		{"GET /collections", reader, s.listCollections},
@@ -1175,6 +1184,10 @@ type itemView struct {
 	// Intro is where an episode's intro plays, from its chapters or found
 	// by matching the season's audio; absent when unknown.
 	Intro *introView `json:"intro,omitempty"`
+	// EndCredits is where an episode's or movie's closing credits are, from
+	// its chapters, the season's audio or the picture going dark; absent
+	// when unknown. (Credits is the cast and crew.)
+	EndCredits *endCreditsView `json:"endCredits,omitempty"`
 	// FilePath is where the file is on the server, for admins only.
 	FilePath string `json:"filePath,omitempty"`
 	FileSize int64  `json:"fileSize,omitempty"`
@@ -1198,6 +1211,15 @@ func (s *Server) getItem(w http.ResponseWriter, r *http.Request) {
 		v.MimeType = stream.MimeType(it.Path)
 		v.MediaInfo, v.MediaInfoStale = s.mediaInfo(r, it)
 		v.Intro = s.intro(r.Context(), it, v.MediaInfo)
+		v.EndCredits = s.endCredits(r.Context(), it, v.MediaInfo)
+		// Apps from before endCredits start Up next at mediaInfo.creditsMs.
+		// Credits with something after them leave it at the end, so that
+		// plays too.
+		if c := v.EndCredits; c != nil && c.EndMs == 0 && v.MediaInfo != nil && v.MediaInfo.CreditsMs == 0 {
+			mi := *v.MediaInfo
+			mi.CreditsMs = c.StartMs
+			v.MediaInfo = &mi
+		}
 		v.FileSize = it.Size
 		if currentUser(r).IsAdmin {
 			v.FilePath = it.Path
@@ -1327,11 +1349,15 @@ func (s *Server) setProgress(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// Past 92% counts as watched, the way credits usually start.
-	// So does reaching the closing credits, when a chapter says where they are.
+	// So does reaching the closing credits, when chapters or the credits
+	// detector say where they are.
 	if it.DurationMs != nil && *it.DurationMs > 0 && req.PositionMs > *it.DurationMs*92/100 {
 		req.Played, req.PositionMs = true, 0
-	} else if mi, _ := s.mediaInfo(r, it); mi != nil && mi.CreditsMs > 0 && req.PositionMs >= mi.CreditsMs {
-		req.Played, req.PositionMs = true, 0
+	} else if req.PositionMs > 0 {
+		mi, _ := s.mediaInfo(r, it)
+		if c := s.endCredits(r.Context(), it, mi); c != nil && req.PositionMs >= c.StartMs {
+			req.Played, req.PositionMs = true, 0
+		}
 	}
 	if err := s.Store.SetProgress(r.Context(), currentUser(r).ID, it.ID, req.PositionMs, req.Played); err != nil {
 		s.serverError(w, err)

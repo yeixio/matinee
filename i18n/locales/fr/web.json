@@ -47,7 +47,8 @@
       "source": "Sous-titres d’OpenSubtitles.com"
     },
     "skipIntro": "Passer l’intro",
-    "introSkipped": "Intro passée"
+    "introSkipped": "Intro passée",
+    "skipCredits": "Passer le générique"
   },
   "somethingWentWrong": "Un problème est survenu",
   "oneMoment": "Un instant…",
@@ -415,7 +416,9 @@
     "state": {
       "lookingAt": "Examen de {{file}}",
       "intros": "Recherche des intros dans {{season}}",
+      "credits": "Recherche du générique de fin dans {{title}}",
       "thumbnails": "Création des aperçus de la barre pour {{title}}",
+      "gapless": "Recherche de blancs entre les morceaux de {{album}}",
       "working": "En cours",
       "waiting": "En attente de la fin de la lecture",
       "slowDisk": "Les fichiers sont lents à lire ; pause de quelques minutes",
@@ -446,6 +449,11 @@
       "label": "Trouver les intros des séries",
       "hint": "Une fois tous les fichiers analysés, Matinee écoute le début des épisodes de chaque saison pour trouver l’intro qu’ils partagent, afin que les lecteurs proposent Passer l’intro.",
       "progress": "{{done}} épisodes sur {{total}} vérifiés, {{found}} avec une intro"
+    },
+    "credits": {
+      "label": "Trouver les génériques de fin",
+      "hint": "Une fois tous les fichiers analysés, Matinee repère où commence le générique de fin des épisodes et des films, pour que les lecteurs proposent À suivre ou Passer le générique à ce moment-là.",
+      "progress": "{{done}} sur {{total}} épisodes et films vérifiés, {{found}} avec un générique de fin"
     },
     "thumbnails": {
       "label": "Aperçus dans la barre de lecture",
@@ -762,6 +770,12 @@
         "v4l2m2m": "V4L2 (Raspberry Pi)"
       }
     },
+    "lyrics": {
+      "title": "Paroles",
+      "intro": "Les morceaux affichent leurs paroles en rythme avec la musique quand un fichier .lrc du même nom se trouve à côté du morceau, ou que les paroles sont dans ses tags.",
+      "online": "Chercher les paroles en ligne",
+      "onlineDetail": "Pour les morceaux sans paroles synchronisées, le serveur interroge <site>LRCLIB</site>, une base de paroles libre et ouverte. Il n’envoie que l’artiste, le titre, l’album et la durée de chaque morceau, directement depuis ce serveur."
+    },
     "homeRows": {
       "title": "Accueil",
       "holidays": "Rangées des fêtes",
@@ -830,7 +844,7 @@
       },
       "content": {
         "title": "Contenu",
-        "hint": "Affiches, recherche de podcasts et de sous-titres, bandes-annonces et rangées de l’accueil"
+        "hint": "Affiches, recherche de podcasts et de sous-titres, paroles, bandes-annonces et rangées de l’accueil"
       },
       "streaming": {
         "title": "Streaming",

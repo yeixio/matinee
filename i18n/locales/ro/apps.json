@@ -53,7 +53,11 @@
     "noneFound": "Nu am găsit niciun server în această rețea. Scrie adresa la care deschizi Matinee într-un browser.",
     "connect": "Conectează",
     "stillLooking": "Încă se caută. Dacă serverul tău apare, îl vei vedea aici.",
-    "connectTo": "Conectează-te la {{name}}"
+    "connectTo": "Conectează-te la {{name}}",
+    "phoneTitle": "Configurează cu telefonul",
+    "phoneHint": "Scanează-l cu camera telefonului. Telefonul are nevoie de aplicația Matinee, conectată, pe aceeași rețea Wi-Fi ca acest televizor.",
+    "phoneFound": "Se configurează cu {{name}}…",
+    "phoneQrLabel": "Cod QR pentru a configura acest televizor cu telefonul"
   },
   "signIn": {
     "title": "Conectează-te",
@@ -67,7 +71,32 @@
     "gettingCode": "Se obține un cod",
     "howTo": "Pe un computer sau telefon conectat, deschide\n<url>{{url}}</url>\nși introdu acest cod.",
     "newCode": "Obține un cod nou",
-    "waiting": "Se așteaptă aprobarea…"
+    "waiting": "Se așteaptă aprobarea…",
+    "qrHint": "Sau scanează-l cu camera telefonului ca să deschizi pagina cu codul deja completat.",
+    "qrLabel": "Cod QR al paginii de conectare cu acest cod",
+    "finishOnPhone": "Telefonul tău conectează acest televizor…"
+  },
+  "setUpTv": {
+    "title": "Configurează un televizor",
+    "settingsHint": "Conectează Matinee pe un televizor fără să tastezi cu telecomanda.",
+    "thisTv": "Acest televizor",
+    "confirm": "Configurezi acest televizor cu <b>{{server}}</b>? Va fi conectat ca <b>{{name}}</b>.",
+    "setUp": "Configurează televizorul",
+    "working": "Îi spunem televizorului unde e serverul tău…",
+    "sameWifi": "Ține acest telefon pe aceeași rețea Wi-Fi ca televizorul până se termină.",
+    "timeout": "Televizorul nu a răspuns. Verifică dacă telefonul e pe aceeași rețea Wi-Fi ca televizorul și dacă televizorul încă arată codul QR, apoi încearcă din nou.",
+    "done": "{{tv}} este conectat",
+    "doneHint": "E gata de vizionare.",
+    "declined": "{{tv}} nu a fost conectat",
+    "intro": "Deschide Matinee pe televizor și scanează codul QR afișat cu camera acestui telefon. Sau scrie aici codul afișat de televizor.",
+    "introCode": "Scrie codul afișat de televizor.",
+    "code": "Codul de pe televizor",
+    "next": "Înainte",
+    "wantsToSignIn": "vrea să se conecteze ca <b>{{name}}</b>",
+    "approve": "Conectează",
+    "decline": "Nu conecta",
+    "signInFirst": "Conectează-te mai întâi pe acest telefon. Televizorul va fi conectat ca tine.",
+    "onPhone": "Configurează un televizor din aplicația Matinee de pe telefon: Setări, apoi Configurează un televizor."
   },
   "home": {
     "watchDownloads": "Vezi descărcările",
@@ -340,7 +369,8 @@
       "source": "Subtitrări de pe OpenSubtitles.com"
     },
     "skipIntro": "Sari peste intro",
-    "introSkipped": "Intro sărit"
+    "introSkipped": "Intro sărit",
+    "skipCredits": "Sari peste generic"
   },
   "library": {
     "nothingUnwatched": "Nimic nevăzut aici",

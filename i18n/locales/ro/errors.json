@@ -207,6 +207,7 @@
   "pick_at_least_one_library_to_share": "alege cel puțin o bibliotecă de partajat",
   "that_isnt_in_a_library_shared_with_you": "acesta nu este într-o bibliotecă partajată cu tine",
   "that_session_is_still_going_join_it": "sesiunea e încă în desfășurare; alătură-te ei",
+  "that_tv_hasnt_asked_to_sign_in_yet": "acel televizor nu a cerut încă să se conecteze",
   "that_watch_together_code_doesnt_work_it_may_have_ended": "codul de vizionare împreună nu funcționează; poate s-a încheiat",
   "this_invite_has_expired_ask_for_another": "invitația a expirat; cere alta",
   "this_invite_link_doesnt_work_ask_for_another": "linkul de invitație nu funcționează; cere altul",
@@ -215,5 +216,9 @@
   "thumbnails_must_be_all_onplay_or_off": "miniaturile trebuie să fie all, onPlay sau off",
   "too_many_watch_together_sessions_right_now": "prea multe sesiuni de vizionare împreună acum",
   "unknown_action": "acțiune necunoscută",
-  "usernames_are_at_most_40_characters": "numele de utilizator au cel mult 40 de caractere"
+  "usernames_are_at_most_40_characters": "numele de utilizator au cel mult 40 de caractere",
+  "couldnt_start_playback_for_this_album": "nu s-a putut porni redarea acestui album",
+  "not_an_album": "nu este un album",
+  "only_the_household_can_change_this": "doar gospodăria poate schimba asta",
+  "tracks_must_be_songs_on_one_album": "piesele trebuie să fie de pe același album"
 }

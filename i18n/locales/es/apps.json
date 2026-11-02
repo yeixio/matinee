@@ -53,7 +53,11 @@
     "noneFound": "No encontramos ningún servidor en esta red. Escribe la dirección con la que abres Matinee en un navegador.",
     "connect": "Conectar",
     "stillLooking": "Seguimos buscando. Si aparece tu servidor, se mostrará aquí.",
-    "connectTo": "Conectar con {{name}}"
+    "connectTo": "Conectar con {{name}}",
+    "phoneTitle": "Configurar con el móvil",
+    "phoneHint": "Escanéalo con la cámara del móvil. El móvil necesita la app de Matinee con la sesión iniciada y estar en la misma wifi que esta tele.",
+    "phoneFound": "Configurando con {{name}}…",
+    "phoneQrLabel": "Código QR para configurar esta tele con el móvil"
   },
   "signIn": {
     "title": "Iniciar sesión",
@@ -67,7 +71,32 @@
     "gettingCode": "Obteniendo un código",
     "howTo": "En un ordenador o móvil con la sesión iniciada, abre\n<url>{{url}}</url>\ne introduce este código.",
     "newCode": "Obtener un código nuevo",
-    "waiting": "Esperando aprobación…"
+    "waiting": "Esperando aprobación…",
+    "qrHint": "O escanéalo con la cámara del móvil para abrir esa página con el código ya escrito.",
+    "qrLabel": "Código QR de la página de inicio de sesión con este código",
+    "finishOnPhone": "Tu móvil está iniciando sesión en esta tele…"
+  },
+  "setUpTv": {
+    "title": "Configurar una tele",
+    "settingsHint": "Inicia sesión en Matinee en una tele sin escribir con el mando.",
+    "thisTv": "Esta tele",
+    "confirm": "¿Configurar esta tele con <b>{{server}}</b>? Iniciará sesión como <b>{{name}}</b>.",
+    "setUp": "Configurar tele",
+    "working": "Indicando a la tele dónde está tu servidor…",
+    "sameWifi": "Mantén este móvil en la misma wifi que la tele hasta que termine.",
+    "timeout": "La tele no respondió. Comprueba que este móvil esté en la misma wifi que la tele y que la tele siga mostrando su código QR, y vuelve a intentarlo.",
+    "done": "{{tv}} ha iniciado sesión",
+    "doneHint": "Ya está lista para ver.",
+    "declined": "{{tv}} no ha iniciado sesión",
+    "intro": "Abre Matinee en la tele y escanea el código QR que muestra con la cámara de este móvil. O escribe aquí el código que muestra la tele.",
+    "introCode": "Escribe el código que muestra la tele.",
+    "code": "Código de la tele",
+    "next": "Siguiente",
+    "wantsToSignIn": "quiere iniciar sesión como <b>{{name}}</b>",
+    "approve": "Iniciar sesión",
+    "decline": "No iniciar sesión",
+    "signInFirst": "Primero inicia sesión en este móvil. La tele iniciará sesión como tú.",
+    "onPhone": "Configura una tele desde la app de Matinee en tu móvil: Ajustes y luego Configurar una tele."
   },
   "home": {
     "watchDownloads": "Ver tus descargas",
@@ -340,7 +369,8 @@
       "source": "Subtítulos de OpenSubtitles.com"
     },
     "skipIntro": "Saltar intro",
-    "introSkipped": "Intro saltada"
+    "introSkipped": "Intro saltada",
+    "skipCredits": "Saltar créditos"
   },
   "library": {
     "nothingUnwatched": "No queda nada sin ver",

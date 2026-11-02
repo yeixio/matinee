@@ -53,7 +53,11 @@
     "noneFound": "Vi kunne ikke finde en server på dette netværk. Skriv adressen, du åbner Matinee på i en browser.",
     "connect": "Forbind",
     "stillLooking": "Leder stadig. Hvis din server dukker op, vises den her.",
-    "connectTo": "Forbind til {{name}}"
+    "connectTo": "Forbind til {{name}}",
+    "phoneTitle": "Opsæt med telefonen",
+    "phoneHint": "Scan den med telefonens kamera. Telefonen skal have Matinee-appen, logget ind, på samme wi-fi som dette tv.",
+    "phoneFound": "Opsætter med {{name}}…",
+    "phoneQrLabel": "QR-kode til at opsætte dette tv med telefonen"
   },
   "signIn": {
     "title": "Log ind",
@@ -67,7 +71,32 @@
     "gettingCode": "Henter en kode",
     "howTo": "På en computer eller telefon, der er logget ind, åbn\n<url>{{url}}</url>\nog indtast denne kode.",
     "newCode": "Hent en ny kode",
-    "waiting": "Venter på godkendelse…"
+    "waiting": "Venter på godkendelse…",
+    "qrHint": "Eller scan den med telefonens kamera for at åbne siden med koden udfyldt.",
+    "qrLabel": "QR-kode til login-siden med denne kode",
+    "finishOnPhone": "Din telefon logger dette tv ind…"
+  },
+  "setUpTv": {
+    "title": "Opsæt et tv",
+    "settingsHint": "Log Matinee ind på et tv uden at skrive med fjernbetjeningen.",
+    "thisTv": "Dette tv",
+    "confirm": "Opsæt dette tv med <b>{{server}}</b>? Det logges ind som <b>{{name}}</b>.",
+    "setUp": "Opsæt tv",
+    "working": "Fortæller tv'et, hvor din server er…",
+    "sameWifi": "Hold telefonen på samme wi-fi som tv'et, til det er færdigt.",
+    "timeout": "Tv'et svarede ikke. Tjek, at telefonen er på samme wi-fi som tv'et, og at tv'et stadig viser sin QR-kode, og prøv igen.",
+    "done": "{{tv}} er logget ind",
+    "doneHint": "Det er klar til at se.",
+    "declined": "{{tv}} blev ikke logget ind",
+    "intro": "Åbn Matinee på tv'et, og scan den QR-kode, det viser, med denne telefons kamera. Eller skriv den kode, tv'et viser, her.",
+    "introCode": "Skriv den kode, tv'et viser.",
+    "code": "Kode på tv'et",
+    "next": "Næste",
+    "wantsToSignIn": "vil logge ind som <b>{{name}}</b>",
+    "approve": "Log ind",
+    "decline": "Log ikke ind",
+    "signInFirst": "Log først ind på denne telefon. Tv'et logges ind som dig.",
+    "onPhone": "Opsæt et tv fra Matinee-appen på din telefon: Indstillinger, derefter Opsæt et tv."
   },
   "home": {
     "watchDownloads": "Se dine downloads",
@@ -335,7 +364,8 @@
       "source": "Undertekster fra OpenSubtitles.com"
     },
     "skipIntro": "Spring intro over",
-    "introSkipped": "Introen blev sprunget over"
+    "introSkipped": "Introen blev sprunget over",
+    "skipCredits": "Spring rulletekster over"
   },
   "library": {
     "nothingUnwatched": "Intet uset her",

@@ -207,6 +207,7 @@
   "pick_at_least_one_library_to_share": "شیئر کرنے کے لیے کم از کم ایک لائبریری چنیں",
   "that_isnt_in_a_library_shared_with_you": "یہ آپ کے ساتھ شیئر کی گئی کسی لائبریری میں نہیں ہے",
   "that_session_is_still_going_join_it": "وہ سیشن ابھی جاری ہے؛ اس میں شامل ہوں",
+  "that_tv_hasnt_asked_to_sign_in_yet": "اس ٹی وی نے ابھی سائن اِن کی درخواست نہیں کی",
   "that_watch_together_code_doesnt_work_it_may_have_ended": "یہ ساتھ دیکھنے کا کوڈ کام نہیں کرتا؛ شاید سیشن ختم ہو گیا",
   "this_invite_has_expired_ask_for_another": "اس دعوت کی مدت ختم ہو گئی؛ نئی مانگیں",
   "this_invite_link_doesnt_work_ask_for_another": "یہ دعوتی لنک کام نہیں کرتا؛ نیا مانگیں",
@@ -215,5 +216,9 @@
   "thumbnails_must_be_all_onplay_or_off": "تھمب نیل all، onPlay یا off ہونے چاہئیں",
   "too_many_watch_together_sessions_right_now": "ابھی ساتھ دیکھنے کے بہت زیادہ سیشن چل رہے ہیں",
   "unknown_action": "نامعلوم عمل",
-  "usernames_are_at_most_40_characters": "یوزر نیم زیادہ سے زیادہ 40 حروف کا ہو سکتا ہے"
+  "usernames_are_at_most_40_characters": "یوزر نیم زیادہ سے زیادہ 40 حروف کا ہو سکتا ہے",
+  "couldnt_start_playback_for_this_album": "اس البم کا پلے بیک شروع نہیں ہو سکا",
+  "not_an_album": "یہ البم نہیں ہے",
+  "only_the_household_can_change_this": "صرف گھر والے اسے بدل سکتے ہیں",
+  "tracks_must_be_songs_on_one_album": "ٹریکس ایک ہی البم کے گانے ہونے چاہئیں"
 }

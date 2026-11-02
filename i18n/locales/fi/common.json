@@ -409,7 +409,15 @@
     "playlistGone": "Tätä soittolistaa ei enää ole",
     "create": "Luo",
     "save": "Tallenna",
-    "delete": "Poista"
+    "delete": "Poista",
+    "lyrics": "Sanat",
+    "noLyrics": "Tälle kappaleelle ei ole sanoja",
+    "instrumental": "Instrumentaali",
+    "lyricsFromLrclib": "Sanat: LRCLIB",
+    "gapless": "Toista ilman taukoja",
+    "gaplessHeard": "Matinee kuuli, että kappaleet jatkuvat toisiinsa, joten ne soivat ilman taukoja.",
+    "gaplessOn": "Soi ilman taukoja",
+    "gaplessOff": "Soi taukojen kanssa kappaleiden välillä"
   },
   "books": {
     "overview": "Yleiskatsaus",
@@ -545,7 +553,20 @@
     "newEpisodesCount_one": "{{count}} uusi jakso",
     "imported_one": "{{count}} ohjelma lisätty.",
     "newEpisodesCount_other": "{{count}} uutta jaksoa",
-    "imported_other": "{{count}} ohjelmaa lisätty."
+    "imported_other": "{{count}} ohjelmaa lisätty.",
+    "episodes": "Jaksot",
+    "order": "Jaksojen järjestys",
+    "newestFirst": "Uusimmat ensin",
+    "oldestFirst": "Vanhimmat ensin",
+    "playOldest": "Toista järjestyksessä",
+    "playOn": "Jatka podcastien toistoa",
+    "playOnHint": "Kun jakso päättyy, toista ohjelman seuraava kuuntelematon jakso tai muuten uusin jakso toisesta seuraamastasi ohjelmasta.",
+    "playingNext": "Seuraavaksi: {{title}}",
+    "autoDownload": "Lataa uudet jaksot",
+    "autoDownloadHint": "Puhelimesi lataavat ohjelman uusimmat jaksot itsestään ja poistavat ne, kun olet kuunnellut ne.",
+    "keepCount": "Säilytettävät jaksot",
+    "removePlayed": "Poista kuunnellut jaksot",
+    "removePlayedHint": "Ladatut podcast-jaksot poistetaan tästä puhelimesta, kun olet kuunnellut ne."
   },
   "together": {
     "title": "Katsokaa yhdessä",

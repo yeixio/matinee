@@ -79,9 +79,11 @@ type failure struct {
 }
 
 type session struct {
-	id       string
-	userID   int64
-	itemID   int64
+	id     string
+	userID int64
+	itemID int64
+	// group is set for gapless streams (see StartGapless): the album.
+	group    string
 	dir      string
 	cmd      *exec.Cmd
 	done     chan struct{}
@@ -129,7 +131,7 @@ func NewTranscoder(ffmpeg, dir string, hw Accelerator, log *slog.Logger) *Transc
 func (t *Transcoder) Start(ctx context.Context, userID int64, it store.Item, startSec float64, burnSub, audio int, steps ...Step) (string, error) {
 	t.mu.Lock()
 	for id, s := range t.sessions {
-		if s.userID == userID && s.itemID == it.ID {
+		if s.userID == userID && s.itemID == it.ID && s.group == "" {
 			s.superseded = true
 			t.killLocked(id)
 		}

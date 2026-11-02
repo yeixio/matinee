@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { api, fileUrl, imageUrl, type Book, type Item } from '../api'
 import { remote, watchPath, type CommandType, type PlayerHooks } from '../remote'
 import * as B from './book'
+import * as G from './gapless'
 import { BookBar } from './BookBar'
 import { BookPlayer } from './BookPlayer'
 import * as Q from './queue'
@@ -33,6 +34,10 @@ export type AudioState = {
   skip: (seconds: number) => void
   playing: boolean
   audio: React.RefObject<HTMLAudioElement | null>
+  // Where the song playing starts on the audio's clock, and how long it
+  // is: an album that plays without gaps is one stream of its songs (see
+  // gapless.ts), so the song's own time is the audio's minus start.
+  clock: React.RefObject<Clock>
   // A moment's note, such as "Added to the queue", and a way to show one.
   notice?: string
   say: (text: string) => void
@@ -62,6 +67,17 @@ export type AudioState = {
   setShuffle: (on: boolean) => void
   cycleRepeat: () => void
   stop: () => void
+  // An album turned to play without gaps, or not: its songs in the queue
+  // follow from the next one that loads.
+  setGapless: (albumId: number, on: boolean) => void
+}
+
+export type Clock = { start: number; length?: number }
+
+// The playing song's own time and length, in seconds.
+export function songTime(el: HTMLAudioElement, clock: Clock) {
+  const length = clock.length ?? (Number.isFinite(el.duration) ? el.duration : 0)
+  return { time: Math.max(0, el.currentTime - clock.start), dur: length }
 }
 
 const AudioContext = createContext<AudioState | null>(null)
@@ -74,21 +90,22 @@ export function useAudio() {
 
 // The playing track's time and length, in seconds, as they change.
 export function useAudioTime() {
-  const { audio } = useAudio()
+  const { audio, clock, current } = useAudio()
   const [time, setTime] = useState(0)
   const [dur, setDur] = useState(0)
   useEffect(() => {
     const el = audio.current
     if (!el) return
     const tick = () => {
-      setTime(el.currentTime)
-      setDur(Number.isFinite(el.duration) ? el.duration : 0)
+      const now = songTime(el, clock.current)
+      setTime(now.time)
+      setDur(now.dur)
     }
     tick()
     const events = ['timeupdate', 'durationchange', 'seeked', 'emptied'] as const
     events.forEach((e) => el.addEventListener(e, tick))
     return () => events.forEach((e) => el.removeEventListener(e, tick))
-  }, [audio])
+  }, [audio, clock, current])
   return { time, dur }
 }
 
@@ -193,36 +210,66 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
   // can't play), and the last place it got to, to pick up from if the
   // server goes away.
   const viaHlsNow = useRef(false)
+  // The last place the song got to, on its own clock.
   const lastTime = useRef(0)
   const recoverRef = useRef<(cause: Cause) => void>(undefined)
+  // An album playing as one stream without gaps (see gapless.ts), the
+  // song playing on its clock, and the song the stream just moved on to by
+  // itself, which needs no loading.
+  const run = useRef<G.Run>(undefined)
+  const clock = useRef<Clock>({ start: 0 })
+  const crossing = useRef<string>(undefined)
+  // Each load gets a number; a slow one that's been overtaken gives up.
+  const loads = useRef(0)
 
   const load = useCallback(async (item: Item, viaHls = false) => {
     const el = audio.current
     if (!el) return
+    const gen = ++loads.current
     hls.current?.destroy()
     hls.current = null
     const at = resumeAt.current?.time
     const autoplay = resumeAt.current?.play ?? true
     resumeAt.current = undefined
-    viaHlsNow.current = viaHls
     lastTime.current = at ?? 0
-    if (!viaHls) {
+    run.current = undefined
+    clock.current = { start: 0 }
+    // The song and the ones after it from an album without gaps: one stream.
+    const joined = bookRef.current ? [] : G.runFrom(queueRef.current)
+    const gapless = joined.length > 1 && joined[0].item.id === item.id
+    viaHlsNow.current = viaHls || gapless
+    if (!viaHls && !gapless) {
       el.src = fileUrl(item.id)
     } else {
       let url: string
       try {
-        url = (await api.startHls(item.id, at ?? 0)).url
+        if (gapless) {
+          const stream = await api.startGapless(
+            joined.map((e) => e.item.id),
+            at ?? 0,
+          )
+          if (gen !== loads.current) return
+          const r = G.toRun(joined, stream)
+          run.current = r
+          clock.current = { start: r.starts[0], length: r.lengths[0] }
+          url = stream.url
+        } else url = (await api.startHls(item.id, at ?? 0)).url
       } catch {
+        if (gen !== loads.current) return
         // The server may be away: find out, and come back here once it's back.
         resumeAt.current = { time: at ?? 0, play: autoplay }
         recoverRef.current?.('error')
         return
       }
+      if (gen !== loads.current) return
       const { default: Hls } = await import('hls.js')
       if (el.canPlayType('application/vnd.apple.mpegurl')) {
         el.src = url
       } else if (Hls.isSupported()) {
-        const h = new Hls()
+        // The server's stream grows faster than it plays, until it's whole:
+        // it plays from the top, never skipping ahead to the newest part
+        // as live TV would.
+        const h = new Hls({ startPosition: 0, liveMaxLatencyDurationCount: Infinity })
         hls.current = h
         h.on(Hls.Events.ERROR, (_, d) => {
           if (d.fatal && hls.current === h) recoverRef.current?.('error')
@@ -235,7 +282,7 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
     const rate = bookRef.current ? speedRef.current : 1
     el.defaultPlaybackRate = rate
     el.playbackRate = rate
-    if (at && !viaHls) el.currentTime = at
+    if (at && !viaHlsNow.current) el.currentTime = at
     if (autoplay) el.play().catch(() => setPlaying(false))
   }, [])
 
@@ -244,6 +291,27 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
     recovering.current?.abort()
     recovering.current = undefined
     setAway(undefined)
+    const r = run.current
+    const el = audio.current
+    const j = r && entry ? r.keys.indexOf(entry.key) : -1
+    if (r && el && entry && j >= 0) {
+      // The stream moved on to this song by itself.
+      if (crossing.current === entry.key) {
+        crossing.current = undefined
+        return
+      }
+      // Another song of the stream: go there, when it's come in already.
+      const want = resumeAt.current
+      const to = r.starts[j] + (want?.time ?? 0)
+      if (to >= 0 && seekable(el, to)) {
+        resumeAt.current = undefined
+        clock.current = { start: r.starts[j], length: r.lengths[j] }
+        el.currentTime = to
+        if (want?.play ?? true) el.play().catch(() => setPlaying(false))
+        return
+      }
+    }
+    crossing.current = undefined
     if (current) load(current)
     else {
       audio.current?.pause()
@@ -276,7 +344,7 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
       recovering.current = ctl
       // A track that failed to load keeps the place it was to start from.
       const wanted = resumeAt.current
-      const at = wanted?.time ?? (el.currentTime || lastTime.current)
+      const at = wanted?.time ?? (el.currentTime ? songTime(el, clock.current).time : lastTime.current)
       const play = cause === 'retry' || (wanted?.play ?? (!el.paused || playingRef.current))
       const resume = (viaHls = viaHlsNow.current) => {
         resumeAt.current = { time: at, play }
@@ -348,16 +416,33 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
 
   // A track counts as played at its end, or when skipped past halfway, so
   // albums show up under Recently played.
-  const markPlayed = useCallback(() => {
+  const markPlayed = useCallback((ended = false) => {
     const el = audio.current
     const e = queueRef.current.entries[queueRef.current.pos]
     // A book's parts aren't counted one by one: the book keeps its place (see below).
     if (!el || !e || reported.current.has(e.key) || bookRef.current) return
-    if (el.ended || (el.duration > 0 && el.currentTime > el.duration / 2)) {
+    const { time, dur } = songTime(el, clock.current)
+    if (ended || el.ended || (dur > 0 && time > dur / 2)) {
       reported.current.add(e.key)
       api.setProgress(e.item.id, 0, true).catch(() => {})
     }
   }, [])
+
+  // After an episode ends: the next one of the show, else a new episode of
+  // another show the person follows (see GET /items/{id}/next).
+  const playItemRef = useRef<(item: Item) => Promise<void>>(undefined)
+  const playOn = useCallback(
+    async (ended: Book) => {
+      const prefs = await qc.fetchQuery({ queryKey: ['playback'], queryFn: api.playback, staleTime: 60_000 }).catch(() => undefined)
+      if (prefs?.podcastsPlayOn === false) return
+      const up = await api.next(ended.id).catch(() => undefined)
+      // Someone who picked something else meanwhile keeps it.
+      if (!up?.next || bookRef.current?.id !== ended.id) return
+      note(t('common:podcasts.playingNext', { title: up.next.title }), 6000)
+      await playItemRef.current?.(up.next)
+    },
+    [qc, note, t],
+  )
 
   const advance = useCallback(
     (auto: boolean) => {
@@ -382,11 +467,16 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
         const b = bookRef.current
         if (b && auto) {
           // The end of the book: it's finished, and starts over next time.
+          // An episode's end plays the next one, unless the sleep timer
+          // stopped here or the person turned that off.
           api
             .setProgress(b.id, 0, true)
             .then(() => {
               qc.invalidateQueries({ queryKey: ['item', b.id] })
-              if (B.isEpisode(b)) qc.invalidateQueries({ queryKey: ['children', b.parentId] })
+              if (B.isEpisode(b)) {
+                qc.invalidateQueries({ queryKey: ['children', b.parentId] })
+                if (!sleepNow) playOn(b)
+              }
             })
             .catch(() => {})
           resumeAt.current = { time: 0, play: false }
@@ -404,7 +494,7 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
       }
       setQueue(n)
     },
-    [markPlayed, qc, note, t],
+    [markPlayed, qc, note, t, playOn],
   )
 
   // Remembered between reloads.
@@ -431,11 +521,14 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
   }, [])
 
   useEffect(() => {
-    save(user, queue, audio.current?.currentTime ?? 0, book)
+    save(user, queue, audio.current ? songTime(audio.current, clock.current).time : 0, book)
   }, [user, queue, book])
   useEffect(() => {
     if (!playing) return
-    const t = window.setInterval(() => save(user, queueRef.current, audio.current?.currentTime ?? 0, bookRef.current), 5000)
+    const t = window.setInterval(
+      () => save(user, queueRef.current, audio.current ? songTime(audio.current, clock.current).time : 0, bookRef.current),
+      5000,
+    )
     return () => window.clearInterval(t)
   }, [user, playing])
 
@@ -549,6 +642,7 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
     },
     [navigate, playBook, leaveBook],
   )
+  playItemRef.current = playItem
 
   // The sleep timer: the sound fades over its last half minute, then it
   // pauses. Set for the end, a book stops at the end of the chapter.
@@ -580,7 +674,41 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
     const i = B.chapterAt(b.chapters, bookNow())
     chapterEnd.current = i >= 0 ? b.chapters[i].endMs / 1000 : undefined
   }, [sleep, book, bookNow])
+  // An album playing without gaps: the stream moving into the next song
+  // moves the queue along, without loading anything. When the queue no
+  // longer has the stream's next song next (it was moved or removed,
+  // shuffle or repeat one came on, or the sleep timer waits for the end of
+  // this song), the song ends there, as on its own.
+  const crossRun = () => {
+    const r = run.current
+    const el = audio.current
+    const q = queueRef.current
+    const e = q.entries[q.pos]
+    if (!r || !el || !e || crossing.current) return
+    const i = r.keys.indexOf(e.key)
+    if (i < 0 || G.at(r, el.currentTime) <= i) return
+    const next = q.entries[q.pos + 1]
+    if (next?.key === r.keys[i + 1] && q.repeat !== 'one' && !q.shuffle && sleepTimer.get() !== 'end') {
+      markPlayed(true)
+      crossing.current = next.key
+      clock.current = { start: r.starts[i + 1], length: r.lengths[i + 1] }
+      setQueue({ ...q, pos: q.pos + 1 })
+      return
+    }
+    markPlayed(true)
+    run.current = undefined
+    el.pause()
+    const n = Q.next(q, true)
+    if (n && n.pos !== q.pos) {
+      advance(true)
+      return
+    }
+    // Repeat one plays it again; the end of the queue waits at its start.
+    resumeAt.current = { time: 0, play: !!n }
+    load(e.item)
+  }
   const onTime = () => {
+    crossRun()
     const end = chapterEnd.current
     if (end === undefined || !bookRef.current || bookNow() < end - 0.3) return
     // Chapters that end with the file stop there, in advance above.
@@ -601,6 +729,29 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
       setQueue((q) => Q.start(q, items, at, opts?.shuffle ?? (at < 0 ? true : q.shuffle)))
     }
     const chapters = book?.chapters ?? []
+    // Moves within the song playing, which in an album without gaps may
+    // mean starting the stream again from there.
+    const seek = (sec: number) => {
+      const a = el()
+      if (!a) return
+      const r = run.current
+      if (!r) {
+        a.currentTime = sec
+        return
+      }
+      const to = clock.current.start + sec
+      if (to >= 0 && seekable(a, to)) a.currentTime = to
+      else {
+        const item = Q.current(queueRef.current)
+        if (!item) return
+        resumeAt.current = { time: Math.max(0, sec), play: !a.paused }
+        load(item)
+      }
+    }
+    const now = () => {
+      const a = el()
+      return a ? songTime(a, clock.current).time : 0
+    }
     return {
       queue,
       current,
@@ -621,10 +772,11 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
         const a = el()
         if (!a) return
         if (bookRef.current) seekBook(bookNow() + sec)
-        else a.currentTime = Math.max(0, a.currentTime + sec)
+        else seek(Math.max(0, now() + sec))
       },
       playing,
       audio,
+      clock,
       notice,
       say: note,
       away,
@@ -669,15 +821,13 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
       prev: () => {
         const a = el()
         if (book) seekBook(B.previousChapterStart(chapters, bookNow()))
-        else if (a && a.currentTime > 3) a.currentTime = 0
+        else if (a && now() > 3) seek(0)
         else setQueue((q) => Q.previous(q))
       },
-      seek: (sec) => {
-        const a = el()
-        if (a) a.currentTime = sec
-      },
+      seek,
       setShuffle: (on) => setQueue((q) => Q.setShuffle(q, on)),
       cycleRepeat: () => setQueue((q) => Q.cycleRepeat(q)),
+      setGapless: (albumId, on) => setQueue((q) => G.setGapless(q, albumId, on)),
       stop: () => {
         recovering.current?.abort()
         recovering.current = undefined
@@ -686,6 +836,8 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
         el()?.pause()
         hls.current?.destroy()
         hls.current = null
+        run.current = undefined
+        clock.current = { start: 0 }
         setExpanded(false)
         bookRef.current = undefined
         setBook(undefined)
@@ -693,7 +845,7 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
         setQueue(Q.emptyQueue)
       },
     }
-  }, [queue, current, book, speed, user, playing, notice, away, recover, expanded, advance, markPlayed, playItem, playBook, seekBook, bookNow, reportBook, leaveBook, note, t])
+  }, [queue, current, book, speed, user, playing, notice, away, recover, expanded, advance, markPlayed, playItem, playBook, seekBook, bookNow, reportBook, leaveBook, load, note, t])
 
   useMediaSession(value)
   useRemote(value)
@@ -718,7 +870,7 @@ export function AudioProvider({ user, children }: { user?: number; children: Rea
           }
         }}
         onTimeUpdate={(e) => {
-          if (e.currentTarget.currentTime > 0) lastTime.current = e.currentTarget.currentTime
+          if (e.currentTarget.currentTime > 0) lastTime.current = songTime(e.currentTarget, clock.current).time
           onTime()
         }}
         onWaiting={onWaiting}
@@ -789,9 +941,10 @@ function useMediaSession(s: AudioState) {
     const el = s.audio.current
     if (!el || !item) return
     const update = () => {
-      if (el.duration > 0 && Number.isFinite(el.duration)) {
+      const { time, dur } = songTime(el, s.clock.current)
+      if (dur > 0) {
         try {
-          ms.setPositionState({ duration: el.duration, position: Math.min(el.currentTime, el.duration), playbackRate: el.playbackRate })
+          ms.setPositionState({ duration: dur, position: Math.min(time, dur), playbackRate: el.playbackRate })
         } catch {
           // a stale position; the next update fixes it
         }
@@ -835,10 +988,11 @@ function useRemote(s: AudioState) {
             muted: el.muted,
           }
         }
+        const { time, dur } = songTime(el, ref.current.clock.current)
         return {
           itemId: current.id,
-          positionMs: Math.round(el.currentTime * 1000),
-          durationMs: current.durationMs ?? (el.duration > 0 ? Math.round(el.duration * 1000) : undefined),
+          positionMs: Math.round(time * 1000),
+          durationMs: current.durationMs ?? (dur > 0 ? Math.round(dur * 1000) : undefined),
           paused: el.paused,
           volume: el.volume,
           muted: el.muted,
@@ -893,4 +1047,13 @@ function useRemote(s: AudioState) {
     const t = window.setInterval(remote.report, 10_000)
     return () => window.clearInterval(t)
   }, [s.playing])
+}
+
+// seekable says whether the audio has a time in hand already, so going
+// there needs no new stream.
+function seekable(el: HTMLAudioElement, time: number) {
+  for (let i = 0; i < el.seekable.length; i++) {
+    if (time >= el.seekable.start(i) && time < el.seekable.end(i) - 0.5) return true
+  }
+  return false
 }

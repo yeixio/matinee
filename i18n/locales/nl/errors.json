@@ -207,6 +207,7 @@
   "pick_at_least_one_library_to_share": "kies minstens één bibliotheek om te delen",
   "that_isnt_in_a_library_shared_with_you": "dat staat niet in een bibliotheek die met je gedeeld is",
   "that_session_is_still_going_join_it": "die sessie loopt nog; doe mee",
+  "that_tv_hasnt_asked_to_sign_in_yet": "die tv heeft nog niet gevraagd om aan te melden",
   "that_watch_together_code_doesnt_work_it_may_have_ended": "die code voor samen kijken werkt niet; misschien is het afgelopen",
   "this_invite_has_expired_ask_for_another": "deze uitnodiging is verlopen; vraag een nieuwe",
   "this_invite_link_doesnt_work_ask_for_another": "deze uitnodigingslink werkt niet; vraag een nieuwe",
@@ -215,5 +216,9 @@
   "thumbnails_must_be_all_onplay_or_off": "miniaturen moeten all, onPlay of off zijn",
   "too_many_watch_together_sessions_right_now": "er zijn nu te veel sessies voor samen kijken",
   "unknown_action": "onbekende actie",
-  "usernames_are_at_most_40_characters": "gebruikersnamen zijn hooguit 40 tekens"
+  "usernames_are_at_most_40_characters": "gebruikersnamen zijn hooguit 40 tekens",
+  "couldnt_start_playback_for_this_album": "kon het afspelen van dit album niet starten",
+  "not_an_album": "geen album",
+  "only_the_household_can_change_this": "alleen het huishouden kan dit wijzigen",
+  "tracks_must_be_songs_on_one_album": "nummers moeten van één album zijn"
 }

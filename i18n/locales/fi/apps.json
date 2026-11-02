@@ -53,7 +53,11 @@
     "noneFound": "Tästä verkosta ei löytynyt palvelinta. Kirjoita osoite, jolla avaat Matineen selaimessa.",
     "connect": "Yhdistä",
     "stillLooking": "Etsitään yhä. Jos palvelimesi löytyy, se näkyy tässä.",
-    "connectTo": "Yhdistä: {{name}}"
+    "connectTo": "Yhdistä: {{name}}",
+    "phoneTitle": "Ota käyttöön puhelimella",
+    "phoneHint": "Skannaa se puhelimen kameralla. Puhelimessa pitää olla Matinee-sovellus kirjautuneena, samassa Wi-Fi-verkossa kuin tämä televisio.",
+    "phoneFound": "Otetaan käyttöön palvelimella {{name}}…",
+    "phoneQrLabel": "QR-koodi tämän television käyttöönottoon puhelimella"
   },
   "signIn": {
     "title": "Kirjaudu sisään",
@@ -67,7 +71,32 @@
     "gettingCode": "Haetaan koodia",
     "howTo": "Avaa kirjautuneella tietokoneella tai puhelimella\n<url>{{url}}</url>\nja syötä tämä koodi.",
     "newCode": "Hae uusi koodi",
-    "waiting": "Odotetaan hyväksyntää…"
+    "waiting": "Odotetaan hyväksyntää…",
+    "qrHint": "Tai skannaa se puhelimen kameralla, niin sivu avautuu koodi valmiiksi täytettynä.",
+    "qrLabel": "Kirjautumissivun QR-koodi tällä koodilla",
+    "finishOnPhone": "Puhelimesi kirjaa tämän television sisään…"
+  },
+  "setUpTv": {
+    "title": "Ota televisio käyttöön",
+    "settingsHint": "Kirjaudu Matineeen televisiolla kirjoittamatta kaukosäätimellä.",
+    "thisTv": "Tämä televisio",
+    "confirm": "Otetaanko tämä televisio käyttöön palvelimella <b>{{server}}</b>? Se kirjautuu käyttäjänä <b>{{name}}</b>.",
+    "setUp": "Ota televisio käyttöön",
+    "working": "Kerrotaan televisiolle, missä palvelimesi on…",
+    "sameWifi": "Pidä tämä puhelin samassa Wi-Fi-verkossa kuin televisio, kunnes valmista.",
+    "timeout": "Televisio ei vastannut. Tarkista, että puhelin on samassa Wi-Fi-verkossa kuin televisio ja että televisio näyttää yhä QR-koodinsa, ja yritä uudelleen.",
+    "done": "{{tv}} on kirjautunut sisään",
+    "doneHint": "Se on valmis katseluun.",
+    "declined": "{{tv}} ei kirjautunut sisään",
+    "intro": "Avaa Matinee televisiossa ja skannaa sen näyttämä QR-koodi tämän puhelimen kameralla. Tai kirjoita tähän koodi, jonka televisio näyttää.",
+    "introCode": "Kirjoita koodi, jonka televisio näyttää.",
+    "code": "Television koodi",
+    "next": "Seuraava",
+    "wantsToSignIn": "haluaa kirjautua käyttäjänä <b>{{name}}</b>",
+    "approve": "Kirjaa sisään",
+    "decline": "Älä kirjaa sisään",
+    "signInFirst": "Kirjaudu ensin tällä puhelimella. Televisio kirjautuu sinuna.",
+    "onPhone": "Ota televisio käyttöön puhelimesi Matinee-sovelluksessa: Asetukset ja sitten Ota televisio käyttöön."
   },
   "home": {
     "watchDownloads": "Katso latauksiasi",
@@ -335,7 +364,8 @@
       "source": "Tekstitykset: OpenSubtitles.com"
     },
     "skipIntro": "Ohita alkutunnari",
-    "introSkipped": "Alkutunnari ohitettiin"
+    "introSkipped": "Alkutunnari ohitettiin",
+    "skipCredits": "Ohita lopputekstit"
   },
   "library": {
     "nothingUnwatched": "Ei katsomatonta täällä",

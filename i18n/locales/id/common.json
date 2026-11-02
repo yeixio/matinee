@@ -381,7 +381,15 @@
     "playlistGone": "Playlist ini sudah tidak ada",
     "create": "Buat",
     "save": "Simpan",
-    "delete": "Hapus"
+    "delete": "Hapus",
+    "lyrics": "Lirik",
+    "noLyrics": "Tidak ada lirik untuk lagu ini",
+    "instrumental": "Instrumental",
+    "lyricsFromLrclib": "Lirik dari LRCLIB",
+    "gapless": "Putar tanpa jeda",
+    "gaplessHeard": "Matinee mendengar lagu-lagu ini menyambung satu sama lain, jadi diputar tanpa jeda.",
+    "gaplessOn": "Diputar tanpa jeda",
+    "gaplessOff": "Diputar dengan jeda antar lagu"
   },
   "books": {
     "overview": "Ringkasan",
@@ -515,7 +523,20 @@
     "export": "Ekspor OPML",
     "importing": "Menambahkan acaramu…",
     "newEpisodesCount_other": "{{count}} episode baru",
-    "imported_other": "{{count}} acara ditambahkan."
+    "imported_other": "{{count}} acara ditambahkan.",
+    "episodes": "Episode",
+    "order": "Urutan episode",
+    "newestFirst": "Terbaru dulu",
+    "oldestFirst": "Terlama dulu",
+    "playOldest": "Putar berurutan",
+    "playOn": "Terus putar podcast",
+    "playOnHint": "Saat episode selesai, putar episode berikutnya dari acara itu yang belum kamu dengar, atau episode terbaru dari acara lain yang kamu ikuti.",
+    "playingNext": "Berikutnya: {{title}}",
+    "autoDownload": "Unduh episode baru",
+    "autoDownloadHint": "Ponselmu mengunduh episode terbaru acara ini dengan sendirinya dan menghapusnya setelah kamu mendengarkannya.",
+    "keepCount": "Episode yang disimpan",
+    "removePlayed": "Hapus episode yang sudah diputar",
+    "removePlayedHint": "Episode podcast yang diunduh dihapus dari ponsel ini setelah kamu mendengarkannya."
   },
   "together": {
     "title": "Nonton bareng",

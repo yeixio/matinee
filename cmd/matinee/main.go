@@ -28,13 +28,16 @@ import (
 	"github.com/yeixio/matinee/internal/artwork"
 	"github.com/yeixio/matinee/internal/config"
 	"github.com/yeixio/matinee/internal/connect"
+	"github.com/yeixio/matinee/internal/credits"
 	"github.com/yeixio/matinee/internal/discovery"
 	"github.com/yeixio/matinee/internal/download"
+	"github.com/yeixio/matinee/internal/gapless"
 	"github.com/yeixio/matinee/internal/health"
 	"github.com/yeixio/matinee/internal/hwaccel"
 	"github.com/yeixio/matinee/internal/intro"
 	"github.com/yeixio/matinee/internal/kube"
 	"github.com/yeixio/matinee/internal/live"
+	"github.com/yeixio/matinee/internal/lyrics"
 	"github.com/yeixio/matinee/internal/metadata"
 	"github.com/yeixio/matinee/internal/plugin"
 	"github.com/yeixio/matinee/internal/podcast"
@@ -173,6 +176,14 @@ func run() error {
 		// Then it finds each TV episode's intro by matching the audio of a
 		// season's episodes (see internal/intro).
 		Intros: &intro.Detector{Store: db, FFmpeg: cfg.FFmpegPath, Log: log, LowPriority: probe.LowerPriority},
+		// Then where each episode's and movie's end credits start, from the
+		// music a season's episodes share at their end or the picture
+		// going dark (see internal/credits).
+		Credits: &credits.Detector{Store: db, FFmpeg: cfg.FFmpegPath, Log: log, LowPriority: probe.LowerPriority},
+		// And listens for albums whose songs run into each other, so they
+		// play without gaps (see internal/gapless).
+		Gapless: &gapless.Detector{Store: db, FFmpeg: cfg.FFmpegPath, Log: log, LowPriority: probe.LowerPriority,
+			Prober: probe.Prober{Path: cfg.FFprobePath, Timeout: time.Minute, LowPriority: true}},
 		// And the seek bar's pictures of every video (see internal/thumbs).
 		Thumbs: thumbnails,
 	}
@@ -227,7 +238,12 @@ func run() error {
 		Covers:    metadata.NewCovers(version.Version, mb, ol),
 		Subtitles: subtitle.NewConverter(cfg.FFmpegPath, cfg.SubtitleDir()),
 		Levels:    spectrum.New(cfg.FFmpegPath, cfg.LevelsDir()),
-		Web:       web.FS(), Log: log, BackgroundCtx: ctx,
+		Lyrics: &lyrics.Finder{
+			Prober: probe.Prober{Path: cfg.FFprobePath},
+			// Only asked when an admin turns on online lyrics in Settings.
+			Online: &lyrics.LRCLIB{UserAgent: "Matinee/" + strings.TrimPrefix(version.Version, "v") + " (+https://matinee.yeix.io)", Dir: cfg.LyricsDir(), Client: &http.Client{Timeout: 15 * time.Second}},
+		},
+		Web: web.FS(), Log: log, BackgroundCtx: ctx,
 		MediaRoot: cfg.MediaRoot, Name: cfg.ServerName,
 		HomeListener: cfg.HomeAddr != "", ThemeDir: cfg.ThemeDir(),
 		PublicURL: cfg.PublicURL,

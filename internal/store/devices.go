@@ -138,8 +138,17 @@ func randomUserCode() (string, error) {
 	return string(b), nil
 }
 
-// StartDeviceCode makes a code for a device to show.
-func (s *Store) StartDeviceCode(ctx context.Context, dev Device, ttl time.Duration) (DeviceCode, error) {
+// PairHash is how a pairing secret is kept: only the device and the phone
+// that scanned its QR code know the secret itself.
+func PairHash(pair string) string {
+	sum := sha256.Sum256([]byte(pair))
+	return hex.EncodeToString(sum[:])
+}
+
+// StartDeviceCode makes a code for a device to show. pair is the secret a TV
+// showed in a QR code for a phone to set it up with, or "" (see
+// PairedDeviceCode).
+func (s *Store) StartDeviceCode(ctx context.Context, dev Device, ttl time.Duration, pair string) (DeviceCode, error) {
 	// Old codes are dropped here rather than by a background job.
 	if _, err := s.db.ExecContext(ctx, "DELETE FROM device_codes WHERE expires_at <= ?", now()); err != nil {
 		return DeviceCode{}, err
@@ -154,8 +163,12 @@ func (s *Store) StartDeviceCode(ctx context.Context, dev Device, ttl time.Durati
 		if err != nil {
 			return dc, err
 		}
-		_, err = s.db.ExecContext(ctx, `INSERT INTO device_codes (device_code, user_code, device_name, platform, expires_at)
-			VALUES (?, ?, ?, ?, ?)`, dc.DeviceCode, code, dev.Name, dev.Platform, dc.ExpiresAt.Unix())
+		var hash any
+		if pair != "" {
+			hash = PairHash(pair)
+		}
+		_, err = s.db.ExecContext(ctx, `INSERT INTO device_codes (device_code, user_code, device_name, platform, expires_at, pair_hash)
+			VALUES (?, ?, ?, ?, ?, ?)`, dc.DeviceCode, code, dev.Name, dev.Platform, dc.ExpiresAt.Unix(), hash)
 		if err == nil {
 			dc.UserCode = code
 			return dc, nil
@@ -174,6 +187,26 @@ func (s *Store) PendingDeviceCode(ctx context.Context, userCode string) (DeviceC
 	err := s.db.QueryRowContext(ctx, `SELECT device_name, platform, expires_at FROM device_codes
 		WHERE user_code = ? AND expires_at > ? AND user_id IS NULL AND denied = 0`, dc.UserCode, now()).
 		Scan(&dc.Device.Name, &dc.Device.Platform, &expires)
+	if errors.Is(err, sql.ErrNoRows) {
+		return dc, ErrNotFound
+	}
+	dc.ExpiresAt = time.Unix(expires, 0)
+	return dc, err
+}
+
+// PairedDeviceCode finds the code a TV asked for with a pairing secret. The
+// TV showed the secret in a QR code; the phone that scanned it told the TV
+// which server to use (over the home network, never through anyone else's
+// server) and now looks for the TV's code here, to approve it without anyone
+// typing it. Codes asked for again with the same secret replace older ones,
+// so the newest wins.
+func (s *Store) PairedDeviceCode(ctx context.Context, pair string) (DeviceCode, error) {
+	var dc DeviceCode
+	var expires int64
+	err := s.db.QueryRowContext(ctx, `SELECT user_code, device_name, platform, expires_at FROM device_codes
+		WHERE pair_hash = ? AND expires_at > ? AND user_id IS NULL AND denied = 0
+		ORDER BY expires_at DESC LIMIT 1`, PairHash(pair), now()).
+		Scan(&dc.UserCode, &dc.Device.Name, &dc.Device.Platform, &expires)
 	if errors.Is(err, sql.ErrNoRows) {
 		return dc, ErrNotFound
 	}

@@ -207,6 +207,7 @@
   "pick_at_least_one_library_to_share": "vyberte alespoň jednu knihovnu ke sdílení",
   "that_isnt_in_a_library_shared_with_you": "to není v žádné knihovně sdílené s vámi",
   "that_session_is_still_going_join_it": "ta relace stále běží; připojte se k ní",
+  "that_tv_hasnt_asked_to_sign_in_yet": "ta televize ještě nepožádala o přihlášení",
   "that_watch_together_code_doesnt_work_it_may_have_ended": "tento kód společného sledování nefunguje; relace možná skončila",
   "this_invite_has_expired_ask_for_another": "platnost pozvánky skončila; požádejte o novou",
   "this_invite_link_doesnt_work_ask_for_another": "tento odkaz s pozvánkou nefunguje; požádejte o nový",
@@ -215,5 +216,9 @@
   "thumbnails_must_be_all_onplay_or_off": "náhledy musí být all, onPlay nebo off",
   "too_many_watch_together_sessions_right_now": "právě teď běží příliš mnoho relací společného sledování",
   "unknown_action": "neznámá akce",
-  "usernames_are_at_most_40_characters": "uživatelská jména mají nejvýše 40 znaků"
+  "usernames_are_at_most_40_characters": "uživatelská jména mají nejvýše 40 znaků",
+  "couldnt_start_playback_for_this_album": "nepodařilo se spustit přehrávání alba",
+  "not_an_album": "není album",
+  "only_the_household_can_change_this": "toto může změnit jen domácnost",
+  "tracks_must_be_songs_on_one_album": "skladby musí být z jednoho alba"
 }

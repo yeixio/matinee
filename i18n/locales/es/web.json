@@ -47,7 +47,8 @@
       "source": "Subtítulos de OpenSubtitles.com"
     },
     "skipIntro": "Saltar intro",
-    "introSkipped": "Intro saltada"
+    "introSkipped": "Intro saltada",
+    "skipCredits": "Saltar créditos"
   },
   "somethingWentWrong": "Algo ha salido mal",
   "oneMoment": "Un momento…",
@@ -415,7 +416,9 @@
     "state": {
       "lookingAt": "Examinando {{file}}",
       "intros": "Buscando intros en {{season}}",
+      "credits": "Buscando los créditos finales en {{title}}",
       "thumbnails": "Creando vistas previas de la barra para {{title}}",
+      "gapless": "Escuchando si hay pausas entre canciones en {{album}}",
       "working": "Trabajando",
       "waiting": "Esperando a que termine la reproducción",
       "slowDisk": "Los archivos tardan en leerse; descansando unos minutos",
@@ -446,6 +449,11 @@
       "label": "Encontrar intros de series",
       "hint": "Cuando todos los archivos estén analizados, Matinee escucha el comienzo de los episodios de cada temporada para encontrar la intro que comparten, y así los reproductores pueden ofrecer Saltar intro.",
       "progress": "{{done}} de {{total}} episodios revisados, {{found}} con intro"
+    },
+    "credits": {
+      "label": "Buscar créditos finales",
+      "hint": "Cuando todos los archivos están analizados, Matinee encuentra dónde empiezan los créditos finales de episodios y películas, para que los reproductores muestren ahí A continuación o Saltar créditos.",
+      "progress": "{{done}} de {{total}} episodios y películas revisados, {{found}} con créditos finales"
     },
     "thumbnails": {
       "label": "Vistas previas en la barra de reproducción",
@@ -762,6 +770,12 @@
         "v4l2m2m": "V4L2 (Raspberry Pi)"
       }
     },
+    "lyrics": {
+      "title": "Letras",
+      "intro": "Las canciones muestran su letra al ritmo de la música cuando hay un archivo .lrc con el mismo nombre junto a la canción, o la letra está en sus etiquetas.",
+      "online": "Buscar letras en internet",
+      "onlineDetail": "Para las canciones sin letra sincronizada, el servidor consulta <site>LRCLIB</site>, una base de datos de letras libre y abierta. Solo envía el artista, el título, el álbum y la duración de cada canción, directamente desde este servidor."
+    },
     "homeRows": {
       "title": "Inicio",
       "holidays": "Filas de fiestas",
@@ -830,7 +844,7 @@
       },
       "content": {
         "title": "Contenido",
-        "hint": "Pósteres, búsqueda de pódcasts y subtítulos, tráileres y filas de Inicio"
+        "hint": "Pósteres, búsqueda de pódcasts y subtítulos, letras, tráileres y filas de Inicio"
       },
       "streaming": {
         "title": "Streaming",

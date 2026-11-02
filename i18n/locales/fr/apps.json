@@ -53,7 +53,11 @@
     "noneFound": "Aucun serveur trouvé sur ce réseau. Saisissez l’adresse à laquelle vous ouvrez Matinee dans un navigateur.",
     "connect": "Connecter",
     "stillLooking": "Recherche en cours. Si votre serveur apparaît, il s’affichera ici.",
-    "connectTo": "Se connecter à {{name}}"
+    "connectTo": "Se connecter à {{name}}",
+    "phoneTitle": "Configurer avec votre téléphone",
+    "phoneHint": "Scannez-le avec l'appareil photo de votre téléphone. Le téléphone doit avoir l'app Matinee connectée, sur le même Wi-Fi que cette TV.",
+    "phoneFound": "Configuration avec {{name}}…",
+    "phoneQrLabel": "QR code pour configurer cette TV avec votre téléphone"
   },
   "signIn": {
     "title": "Se connecter",
@@ -67,7 +71,32 @@
     "gettingCode": "Obtention d’un code",
     "howTo": "Sur un ordinateur ou un téléphone connecté, ouvrez\n<url>{{url}}</url>\net saisissez ce code.",
     "newCode": "Obtenir un nouveau code",
-    "waiting": "En attente d’approbation…"
+    "waiting": "En attente d’approbation…",
+    "qrHint": "Ou scannez-le avec l'appareil photo de votre téléphone pour ouvrir cette page avec le code déjà saisi.",
+    "qrLabel": "QR code de la page de connexion avec ce code",
+    "finishOnPhone": "Votre téléphone connecte cette TV…"
+  },
+  "setUpTv": {
+    "title": "Configurer une TV",
+    "settingsHint": "Connectez Matinee sur une TV sans taper avec la télécommande.",
+    "thisTv": "Cette TV",
+    "confirm": "Configurer cette TV avec <b>{{server}}</b> ? Elle sera connectée en tant que <b>{{name}}</b>.",
+    "setUp": "Configurer la TV",
+    "working": "Indication de votre serveur à la TV…",
+    "sameWifi": "Gardez ce téléphone sur le même Wi-Fi que la TV jusqu'à la fin.",
+    "timeout": "La TV n'a pas répondu. Vérifiez que ce téléphone est sur le même Wi-Fi que la TV et que la TV affiche toujours son QR code, puis réessayez.",
+    "done": "{{tv}} est connectée",
+    "doneHint": "Elle est prête.",
+    "declined": "{{tv}} n'a pas été connectée",
+    "intro": "Ouvrez Matinee sur la TV et scannez le QR code affiché avec l'appareil photo de ce téléphone. Ou saisissez ici le code affiché par la TV.",
+    "introCode": "Saisissez le code affiché par la TV.",
+    "code": "Code affiché sur la TV",
+    "next": "Suivant",
+    "wantsToSignIn": "veut se connecter en tant que <b>{{name}}</b>",
+    "approve": "Connecter",
+    "decline": "Ne pas connecter",
+    "signInFirst": "Connectez-vous d'abord sur ce téléphone. La TV sera connectée avec votre compte.",
+    "onPhone": "Configurez une TV depuis l'app Matinee sur votre téléphone : Réglages, puis Configurer une TV."
   },
   "home": {
     "watchDownloads": "Regarder vos téléchargements",
@@ -340,7 +369,8 @@
       "source": "Sous-titres d’OpenSubtitles.com"
     },
     "skipIntro": "Passer l’intro",
-    "introSkipped": "Intro passée"
+    "introSkipped": "Intro passée",
+    "skipCredits": "Passer le générique"
   },
   "library": {
     "nothingUnwatched": "Rien de non vu ici",

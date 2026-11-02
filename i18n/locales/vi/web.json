@@ -47,7 +47,8 @@
       "source": "Phụ đề từ OpenSubtitles.com"
     },
     "skipIntro": "Bỏ qua đoạn mở đầu",
-    "introSkipped": "Đã bỏ qua đoạn mở đầu"
+    "introSkipped": "Đã bỏ qua đoạn mở đầu",
+    "skipCredits": "Bỏ qua phần danh đề"
   },
   "somethingWentWrong": "Đã xảy ra lỗi",
   "oneMoment": "Chờ một chút…",
@@ -409,7 +410,9 @@
     "state": {
       "lookingAt": "Đang xem {{file}}",
       "intros": "Đang tìm đoạn mở đầu trong {{season}}",
+      "credits": "Đang tìm phần danh đề cuối trong {{title}}",
       "thumbnails": "Đang tạo ảnh xem trước cho {{title}}",
+      "gapless": "Đang nghe khoảng lặng giữa các bài trong {{album}}",
       "working": "Đang làm việc",
       "waiting": "Đang chờ phát xong",
       "slowDisk": "Tệp đọc chậm; nghỉ vài phút",
@@ -438,6 +441,11 @@
       "label": "Tìm đoạn mở đầu phim bộ",
       "hint": "Khi mọi tệp đã được phân tích, Matinee nghe phần đầu các tập của từng mùa để tìm đoạn mở đầu chung, nhờ đó trình phát có thể hiện Bỏ qua đoạn mở đầu.",
       "progress": "Đã kiểm tra {{done}}/{{total}} tập, {{found}} tập có đoạn mở đầu"
+    },
+    "credits": {
+      "label": "Tìm phần danh đề cuối",
+      "hint": "Khi mọi tệp đã được phân tích, Matinee tìm nơi phần danh đề cuối của các tập và phim bắt đầu, để trình phát hiện Tiếp theo hoặc Bỏ qua phần danh đề tại đó.",
+      "progress": "Đã kiểm tra {{done}}/{{total}} tập và phim, {{found}} có phần danh đề cuối"
     },
     "thumbnails": {
       "label": "Ảnh xem trước trên thanh tua",
@@ -754,6 +762,12 @@
         "v4l2m2m": "V4L2 (Raspberry Pi)"
       }
     },
+    "lyrics": {
+      "title": "Lời bài hát",
+      "intro": "Bài hát hiện lời theo nhịp nhạc khi có tệp .lrc cùng tên đặt cạnh bài hát, hoặc lời nằm trong thẻ của nó.",
+      "online": "Tìm lời bài hát trên mạng",
+      "onlineDetail": "Với bài hát không có lời theo thời gian, máy chủ hỏi <site>LRCLIB</site>, một cơ sở dữ liệu lời bài hát tự do và mở. Máy chủ chỉ gửi nghệ sĩ, tên, album và thời lượng của mỗi bài, trực tiếp từ máy chủ này."
+    },
     "homeRows": {
       "title": "Trang chủ",
       "holidays": "Hàng ngày lễ",
@@ -822,7 +836,7 @@
       },
       "content": {
         "title": "Nội dung",
-        "hint": "Áp phích, tìm podcast và phụ đề, trailer và các hàng ở Trang chủ"
+        "hint": "Áp phích, tìm podcast và phụ đề, lời bài hát, trailer và các hàng ở Trang chủ"
       },
       "streaming": {
         "title": "Phát trực tuyến",

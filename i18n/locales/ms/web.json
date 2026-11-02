@@ -47,7 +47,8 @@
       "source": "Sari kata daripada OpenSubtitles.com"
     },
     "skipIntro": "Langkau intro",
-    "introSkipped": "Intro dilangkau"
+    "introSkipped": "Intro dilangkau",
+    "skipCredits": "Langkau kredit"
   },
   "somethingWentWrong": "Sesuatu tidak kena",
   "oneMoment": "Sekejap…",
@@ -409,7 +410,9 @@
     "state": {
       "lookingAt": "Meneliti {{file}}",
       "intros": "Mencari intro dalam {{season}}",
+      "credits": "Mencari kredit penutup dalam {{title}}",
       "thumbnails": "Membuat pratonton bar untuk {{title}}",
+      "gapless": "Mendengar jeda antara lagu dalam {{album}}",
       "working": "Sedang bekerja",
       "waiting": "Menunggu main balik selesai",
       "slowDisk": "Fail lambat dibaca; berehat beberapa minit",
@@ -438,6 +441,11 @@
       "label": "Cari intro rancangan TV",
       "hint": "Selepas semua fail dianalisis, Matinee mendengar permulaan episod setiap musim untuk mencari intro yang dikongsi, supaya pemain boleh menawarkan Langkau intro.",
       "progress": "{{done}} daripada {{total}} episod disemak, {{found}} ada intro"
+    },
+    "credits": {
+      "label": "Cari kredit penutup",
+      "hint": "Selepas semua fail dianalisis, Matinee mencari di mana kredit penutup episod dan filem bermula, supaya pemain boleh menunjukkan Seterusnya atau Langkau kredit di situ.",
+      "progress": "{{done}} daripada {{total}} episod dan filem disemak, {{found}} dengan kredit penutup"
     },
     "thumbnails": {
       "label": "Pratonton pada bar main",
@@ -754,6 +762,12 @@
         "v4l2m2m": "V4L2 (Raspberry Pi)"
       }
     },
+    "lyrics": {
+      "title": "Lirik",
+      "intro": "Lagu menunjukkan liriknya seiring dengan muzik apabila ada fail .lrc dengan nama yang sama di sebelah lagu, atau lirik dalam tagnya.",
+      "online": "Cari lirik dalam talian",
+      "onlineDetail": "Untuk lagu tanpa lirik bermasa, pelayan bertanya kepada <site>LRCLIB</site>, pangkalan data lirik yang bebas dan terbuka. Ia hanya menghantar artis, tajuk, album dan tempoh setiap lagu, terus daripada pelayan ini."
+    },
     "homeRows": {
       "title": "Laman utama",
       "holidays": "Baris perayaan",
@@ -822,7 +836,7 @@
       },
       "content": {
         "title": "Kandungan",
-        "hint": "Poster, carian podcast dan sari kata, treler dan baris Laman Utama"
+        "hint": "Poster, carian podcast dan sari kata, lirik, treler dan baris Laman Utama"
       },
       "streaming": {
         "title": "Penstriman",

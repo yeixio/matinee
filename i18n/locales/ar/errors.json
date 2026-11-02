@@ -207,6 +207,7 @@
   "pick_at_least_one_library_to_share": "اختر مكتبة واحدة على الأقل لمشاركتها",
   "that_isnt_in_a_library_shared_with_you": "هذا ليس في مكتبة مشارَكة معك",
   "that_session_is_still_going_join_it": "تلك الجلسة ما زالت جارية؛ انضم إليها",
+  "that_tv_hasnt_asked_to_sign_in_yet": "لم يطلب ذلك التلفاز تسجيل الدخول بعد",
   "that_watch_together_code_doesnt_work_it_may_have_ended": "رمز المشاهدة معًا هذا لا يعمل؛ ربما انتهت الجلسة",
   "this_invite_has_expired_ask_for_another": "انتهت صلاحية هذه الدعوة؛ اطلب دعوة جديدة",
   "this_invite_link_doesnt_work_ask_for_another": "رابط الدعوة هذا لا يعمل؛ اطلب رابطًا جديدًا",
@@ -215,5 +216,9 @@
   "thumbnails_must_be_all_onplay_or_off": "يجب أن تكون الصور المصغرة all أو onPlay أو off",
   "too_many_watch_together_sessions_right_now": "هناك جلسات مشاهدة معًا كثيرة جدًا الآن",
   "unknown_action": "إجراء غير معروف",
-  "usernames_are_at_most_40_characters": "اسم المستخدم 40 حرفًا على الأكثر"
+  "usernames_are_at_most_40_characters": "اسم المستخدم 40 حرفًا على الأكثر",
+  "couldnt_start_playback_for_this_album": "تعذّر بدء تشغيل هذا الألبوم",
+  "not_an_album": "ليس ألبومًا",
+  "only_the_household_can_change_this": "يمكن لأهل المنزل فقط تغيير هذا",
+  "tracks_must_be_songs_on_one_album": "يجب أن تكون المقاطع أغاني من ألبوم واحد"
 }

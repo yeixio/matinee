@@ -5,6 +5,7 @@
 import { type ItemFilter, toSearchParams } from './filter'
 import i18n from './i18n'
 import type { LevelsJSON } from './player/levels'
+import type { Lyrics } from './player/lyrics'
 import type { Thumbnails } from './player/thumbnails'
 import { heardRestarting, RESTARTING_HEADER } from './player/reconnect'
 
@@ -106,6 +107,8 @@ export type Settings = {
   remoteTrailers: boolean
   // A row of titles for a holiday on Home in the weeks before it.
   holidayRows: boolean
+  // Look up songs' words on LRCLIB when there are none next to the song or in its tags.
+  onlineLyrics: boolean
   // Transcodes become adaptive streams of qualitySteps, and people can pick
   // a quality in the player (see GET /streaming).
   adaptiveQuality: boolean
@@ -360,6 +363,8 @@ export type Library = {
   watch: FolderWatch[]
 }
 
+export type GaplessStream = { url: string; startSec: number; tracks: { id: number; startSec: number }[] }
+
 export type Item = {
   id: number
   libraryId: number
@@ -384,6 +389,13 @@ export type Item = {
   rating?: number
   // The person's own rating, 1 to 10: half stars out of five.
   myRating?: number
+  // An album whose songs play without a gap between them (a DJ mix, a live
+  // album), or a song on one: the player joins them into one stream. An
+  // album also says whether the household chose (gaplessChoice, missing
+  // when Matinee decides) and what Matinee heard (gaplessFound).
+  gapless?: boolean
+  gaplessChoice?: boolean
+  gaplessFound?: boolean
   hasPoster: boolean
   // Set when an admin picked the cover; it goes on the image URL so a cached old one isn't shown.
   posterTag?: string
@@ -643,6 +655,8 @@ export type QualityStep = { id: string; label: string; width: number; height: nu
 // home), or null.
 export type Streaming = { adaptive: boolean; steps: QualityStep[]; cap: QualityStep | null }
 
+export type EndCredits = { startMs: number; endMs?: number; source: 'chapters' | 'audio' | 'video' }
+
 export type MediaInfo = {
   container: string
   size: number
@@ -714,6 +728,7 @@ export type PlaybackPrefs = {
   autoPlay: boolean // offer the next episode with a countdown
   binge: boolean // skip the countdown
   skipIntros?: boolean // jump past intros without pressing Skip intro
+  podcastsPlayOn?: boolean // when a podcast episode ends, play the next one
 }
 
 export type ItemDetail = Item & {
@@ -728,6 +743,10 @@ export type ItemDetail = Item & {
   // Episodes: where the intro plays, from a chapter or found by matching the
   // season's audio. Left out when unknown.
   intro?: { startMs: number; endMs: number; source: 'chapters' | 'audio' }
+  // Episodes and movies: where the closing credits play, from a chapter, the
+  // music a season's episodes share, or the picture going dark. endMs is set
+  // when something plays after them. Left out when unknown.
+  endCredits?: EndCredits
   filePath?: string // admins only
   fileSize?: number
   details?: Details
@@ -904,13 +923,15 @@ export type LogQuery = { level?: LogLevel; q?: string; before?: number; limit?: 
 
 export type AnalysisStatus = {
   mode: AnalysisMode
-  state: 'analyzing' | 'intros' | 'thumbnails' | 'waiting' | 'slowDisk' | 'idle' | 'off'
+  state: 'analyzing' | 'intros' | 'credits' | 'gapless' | 'thumbnails' | 'waiting' | 'slowDisk' | 'idle' | 'off'
   total: number
   done: number
   unreadable: number
-  current?: string // the file; while looking for intros the show and season; while making thumbnails the video
+  current?: string // the file; while looking for intros or credits the show and season (or movie); while making thumbnails the video
   // Looking for TV episodes' intros; left out by servers that don't.
   intros?: { on: boolean; total: number; done: number; found: number }
+  // Looking for episodes' and movies' end credits; left out by servers that don't.
+  credits?: { on: boolean; total: number; done: number; found: number }
   // Making the seek bar's pictures; left out by servers that don't.
   thumbnails?: { mode: ThumbnailMode; total: number; done: number }
 }
@@ -1107,6 +1128,7 @@ export const api = {
   stopTranscode: (id: string) => request<void>('DELETE', `/api/v1/admin/transcodes/${encodeURIComponent(id)}`),
   setAnalysisMode: (mode: AnalysisMode) => request<AnalysisStatus>('PUT', '/api/v1/analysis', { mode }),
   setIntroDetection: (intros: boolean) => request<AnalysisStatus>('PUT', '/api/v1/analysis', { intros }),
+  setCreditsDetection: (credits: boolean) => request<AnalysisStatus>('PUT', '/api/v1/analysis', { credits }),
   setThumbnailMode: (thumbnails: ThumbnailMode) => request<AnalysisStatus>('PUT', '/api/v1/analysis', { thumbnails }),
   reanalyze: (id: number) => request<void>('POST', `/api/v1/items/${id}/analyze`),
   settings: () => request<Settings>('GET', '/api/v1/settings'),
@@ -1211,6 +1233,8 @@ export const api = {
   tracks: (id: number) => request<Item[]>('GET', `/api/v1/items/${id}/tracks`),
   // A song's sound levels, for the visualizer (player/levels.ts).
   levels: (id: number) => request<LevelsJSON>('GET', `/api/v1/items/${id}/levels`),
+  // A song's words, timed when they can be (player/lyrics.ts).
+  lyrics: (id: number) => request<Lyrics>('GET', `/api/v1/items/${id}/lyrics`),
   // A video's seek bar pictures (player/thumbnails.ts); asking has them made.
   thumbnails: (id: number) => request<Thumbnails>('GET', `/api/v1/items/${id}/thumbnails`),
   book: (id: number) => request<Book>('GET', `/api/v1/items/${id}/book`),
@@ -1317,6 +1341,12 @@ export const api = {
       'POST',
       `/api/v1/items/${id}/hls?start=${startSec}${burnSubtitle ? `&subtitle=${encodeURIComponent(burnSubtitle)}` : ''}${quality ? `&quality=${encodeURIComponent(quality)}` : ''}`,
     ),
+  // One stream of an album's songs, joined without gaps, from start
+  // seconds into the first; each song's startSec is on the stream's clock.
+  startGapless: (tracks: number[], start = 0) =>
+    request<GaplessStream>('POST', '/api/v1/gapless', { tracks, start }),
+  // on, off, or null to leave it to Matinee.
+  setGapless: (id: number, gapless: boolean | null) => request<Item>('PUT', `/api/v1/items/${id}/gapless`, { gapless }),
   streaming: () => request<Streaming>('GET', '/api/v1/streaming'),
   trailers: (id: number) => request<Trailer[]>('GET', `/api/v1/items/${id}/trailers`),
   startTrailerHls: (id: number, trailer: string) =>

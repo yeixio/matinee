@@ -3,11 +3,15 @@ import { STILL_WATCHING_AFTER, stillWatching, upNextAt } from './autoplay'
 
 describe('upNextAt', () => {
   it('shows the card where the credits start', () => {
-    expect(upNextAt(1800, 1_620_500)).toBe(1620.5)
+    expect(upNextAt(1800, { startMs: 1_620_500 })).toBe(1620.5)
+    expect(upNextAt(1800, { startMs: 1_620_500, endMs: 1_798_000 })).toBe(1620.5)
+  })
+  it('waits for the end when a scene plays after the credits', () => {
+    expect(upNextAt(1800, { startMs: 1_620_500, endMs: 1_700_000 })).toBe(1800)
   })
   it('falls back to 30 seconds before the end', () => {
     expect(upNextAt(1800)).toBe(1770)
-    expect(upNextAt(1800, 1_900_000)).toBe(1770) // a chapter past the end doesn't count
+    expect(upNextAt(1800, { startMs: 1_900_000 })).toBe(1770) // a chapter past the end doesn't count
   })
   it('waits for the end of very short videos', () => {
     expect(upNextAt(90)).toBe(90)

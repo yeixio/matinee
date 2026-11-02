@@ -116,7 +116,9 @@ export async function makeLibrary(root) {
   for (const m of movies) {
     const name = `${m.title} (${m.year})`
     const dir = path.join(media, 'Movies', name)
-    video(path.join(dir, `${name}.${m.uhd ? 'mkv' : 'mp4'}`), path.join(images, `backdrop-${m.id}.jpg`), m.minutes * 60, m.uhd ? { uhd: true, audio: '5.1', extraAudio: true } : {})
+    // The last four minutes are the end credits, which players offer to skip.
+    const chapters = [['Film', 0, (m.minutes - 4) * 60], ['End credits', (m.minutes - 4) * 60, m.minutes * 60]]
+    video(path.join(dir, `${name}.${m.uhd ? 'mkv' : 'mp4'}`), path.join(images, `backdrop-${m.id}.jpg`), m.minutes * 60, m.uhd ? { uhd: true, audio: '5.1', extraAudio: true, chapters } : { chapters })
     subtitles(path.join(dir, `${name}.en.srt`), ['The lights go down.', '<i>Somewhere, a projector hums.</i>', 'Popcorn, anyone?'])
     if (m.id === 101 || m.id === 107) {
       subtitles(path.join(dir, `${name}.es.srt`), ['Se apagan las luces.', '<i>En algún lugar, zumba un proyector.</i>', '¿Palomitas?'])
@@ -142,6 +144,8 @@ export async function makeLibrary(root) {
     execFileSync('cp', [path.join(images, `artist-${i}.jpg`), path.join(media, 'Music', a.artist, 'artist.jpg')])
     a.tracks.forEach((t, n) => {
       const file = path.join(dir, `${String(n + 1).padStart(2, '0')} ${t}.flac`)
+      // Made-up words for the first album's first song, timed, so the player shows lyrics.
+      if (i === 0 && n === 0) writeFileSync(file.replace(/\.flac$/, '.lrc'), openingCredits)
       if (existsSync(file)) return
       // A little tune, so the visualizer has a beat, a bass line and some hiss to show.
       ff('-f', 'lavfi', '-i', `aevalsrc='${tune(110 + n * 20)}':s=22050:d=${150 + n * 23}`, '-af', 'volume=0.05', '-sample_fmt', 's16',
@@ -155,6 +159,26 @@ export async function makeLibrary(root) {
   if (!existsSync(episode)) ff('-stream_loop', '-1', '-i', silenceFile(path.join(root, 'silence')), '-t', '3600', '-map', '0:a', '-c:a', 'copy', episode)
   return { media, images, episode }
 }
+
+// The words of Aurora Static's Opening Credits, a line every couple of beats.
+const openingCredits = [
+  '[ar:Aurora Static]',
+  '[ti:Opening Credits]',
+  '[00:00.50]The lights go down, the curtain sighs',
+  '[00:03.00]A thousand stars in borrowed skies',
+  '[00:05.50]We found our seats in the second row',
+  '[00:08.00]And waited for the opening show',
+  '[00:10.50]',
+  '[00:12.00]Roll the names across the screen',
+  '[00:14.50]Every face we’ve never seen',
+  '[00:17.00]Hold my hand, the reel begins',
+  '[00:19.50]This is where the night begins',
+  '[00:22.00]',
+  '[00:24.00]Popcorn rain and silver light',
+  '[00:26.50]Shadows dancing left and right',
+  '[00:29.00]Stay until the credits fall',
+  '[00:31.50]Stay until the end of it all',
+].join('\n') + '\n'
 
 /** A kick on every beat, a bass note that swells, a chord over it and a hi-hat between beats, at f Hz. */
 function tune(f) {

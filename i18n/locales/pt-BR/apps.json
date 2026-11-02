@@ -53,7 +53,11 @@
     "noneFound": "Não encontramos nenhum servidor nesta rede. Digite o endereço que você usa para abrir o Matinee no navegador.",
     "connect": "Conectar",
     "stillLooking": "Ainda procurando. Se o seu servidor aparecer, ele será mostrado aqui.",
-    "connectTo": "Conectar a {{name}}"
+    "connectTo": "Conectar a {{name}}",
+    "phoneTitle": "Configurar com o celular",
+    "phoneHint": "Escaneie com a câmera do celular. O celular precisa do app Matinee conectado, no mesmo Wi-Fi desta TV.",
+    "phoneFound": "Configurando com {{name}}…",
+    "phoneQrLabel": "Código QR para configurar esta TV com o celular"
   },
   "signIn": {
     "title": "Entrar",
@@ -67,7 +71,32 @@
     "gettingCode": "Obtendo um código",
     "howTo": "Em um computador ou celular conectado, abra\n<url>{{url}}</url>\ne digite este código.",
     "newCode": "Obter um novo código",
-    "waiting": "Aguardando aprovação…"
+    "waiting": "Aguardando aprovação…",
+    "qrHint": "Ou escaneie com a câmera do celular para abrir essa página com o código já preenchido.",
+    "qrLabel": "Código QR da página de login com este código",
+    "finishOnPhone": "Seu celular está conectando esta TV…"
+  },
+  "setUpTv": {
+    "title": "Configurar uma TV",
+    "settingsHint": "Entre no Matinee em uma TV sem digitar no controle remoto.",
+    "thisTv": "Esta TV",
+    "confirm": "Configurar esta TV com <b>{{server}}</b>? Ela vai entrar como <b>{{name}}</b>.",
+    "setUp": "Configurar TV",
+    "working": "Informando à TV onde está seu servidor…",
+    "sameWifi": "Mantenha este celular no mesmo Wi-Fi da TV até terminar.",
+    "timeout": "A TV não respondeu. Confira se este celular está no mesmo Wi-Fi da TV e se a TV ainda mostra o código QR, e tente de novo.",
+    "done": "{{tv}} entrou",
+    "doneHint": "Ela está pronta para assistir.",
+    "declined": "{{tv}} não entrou",
+    "intro": "Abra o Matinee na TV e escaneie o código QR que ela mostra com a câmera deste celular. Ou digite aqui o código que a TV mostra.",
+    "introCode": "Digite o código que a TV mostra.",
+    "code": "Código na TV",
+    "next": "Avançar",
+    "wantsToSignIn": "quer entrar como <b>{{name}}</b>",
+    "approve": "Deixar entrar",
+    "decline": "Não deixar entrar",
+    "signInFirst": "Entre primeiro neste celular. A TV vai entrar como você.",
+    "onPhone": "Configure uma TV pelo app Matinee no celular: Ajustes e depois Configurar uma TV."
   },
   "home": {
     "watchDownloads": "Assistir aos seus downloads",
@@ -340,7 +369,8 @@
       "source": "Legendas do OpenSubtitles.com"
     },
     "skipIntro": "Pular abertura",
-    "introSkipped": "Abertura pulada"
+    "introSkipped": "Abertura pulada",
+    "skipCredits": "Pular créditos"
   },
   "library": {
     "nothingUnwatched": "Nada para assistir aqui",

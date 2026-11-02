@@ -207,6 +207,7 @@
   "pick_at_least_one_library_to_share": "wähle mindestens eine Mediathek zum Freigeben",
   "that_isnt_in_a_library_shared_with_you": "das ist in keiner Mediathek, die für dich freigegeben ist",
   "that_session_is_still_going_join_it": "diese Sitzung läuft noch; tritt ihr bei",
+  "that_tv_hasnt_asked_to_sign_in_yet": "dieser Fernseher hat noch nicht um Anmeldung gebeten",
   "that_watch_together_code_doesnt_work_it_may_have_ended": "dieser Code zum gemeinsamen Schauen funktioniert nicht; vielleicht ist die Sitzung vorbei",
   "this_invite_has_expired_ask_for_another": "diese Einladung ist abgelaufen; bitte um eine neue",
   "this_invite_link_doesnt_work_ask_for_another": "dieser Einladungslink funktioniert nicht; bitte um einen neuen",
@@ -215,5 +216,9 @@
   "thumbnails_must_be_all_onplay_or_off": "Vorschaubilder müssen all, onPlay oder off sein",
   "too_many_watch_together_sessions_right_now": "gerade laufen zu viele Sitzungen zum gemeinsamen Schauen",
   "unknown_action": "unbekannte Aktion",
-  "usernames_are_at_most_40_characters": "Benutzernamen haben höchstens 40 Zeichen"
+  "usernames_are_at_most_40_characters": "Benutzernamen haben höchstens 40 Zeichen",
+  "couldnt_start_playback_for_this_album": "die Wiedergabe dieses Albums konnte nicht gestartet werden",
+  "not_an_album": "kein Album",
+  "only_the_household_can_change_this": "das kann nur der Haushalt ändern",
+  "tracks_must_be_songs_on_one_album": "die Titel müssen Songs eines Albums sein"
 }

@@ -207,6 +207,7 @@
   "pick_at_least_one_library_to_share": "επιλέξτε τουλάχιστον μία βιβλιοθήκη για κοινή χρήση",
   "that_isnt_in_a_library_shared_with_you": "αυτό δεν είναι σε βιβλιοθήκη κοινόχρηστη με εσάς",
   "that_session_is_still_going_join_it": "αυτή η συνεδρία συνεχίζεται· μπείτε σε αυτήν",
+  "that_tv_hasnt_asked_to_sign_in_yet": "αυτή η τηλεόραση δεν έχει ζητήσει ακόμη σύνδεση",
   "that_watch_together_code_doesnt_work_it_may_have_ended": "αυτός ο κωδικός παρακολούθησης μαζί δεν λειτουργεί· ίσως έχει τελειώσει",
   "this_invite_has_expired_ask_for_another": "αυτή η πρόσκληση έληξε· ζητήστε άλλη",
   "this_invite_link_doesnt_work_ask_for_another": "αυτός ο σύνδεσμος πρόσκλησης δεν λειτουργεί· ζητήστε άλλον",
@@ -215,5 +216,9 @@
   "thumbnails_must_be_all_onplay_or_off": "οι μικρογραφίες πρέπει να είναι all, onPlay ή off",
   "too_many_watch_together_sessions_right_now": "πάρα πολλές συνεδρίες παρακολούθησης μαζί αυτή τη στιγμή",
   "unknown_action": "άγνωστη ενέργεια",
-  "usernames_are_at_most_40_characters": "τα ονόματα χρήστη έχουν έως 40 χαρακτήρες"
+  "usernames_are_at_most_40_characters": "τα ονόματα χρήστη έχουν έως 40 χαρακτήρες",
+  "couldnt_start_playback_for_this_album": "δεν ήταν δυνατή η αναπαραγωγή αυτού του άλμπουμ",
+  "not_an_album": "δεν είναι άλμπουμ",
+  "only_the_household_can_change_this": "μόνο το νοικοκυριό μπορεί να το αλλάξει",
+  "tracks_must_be_songs_on_one_album": "τα κομμάτια πρέπει να είναι από ένα άλμπουμ"
 }

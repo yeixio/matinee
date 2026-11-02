@@ -18,6 +18,8 @@ import (
 	"sync"
 	"time"
 
+	"github.com/yeixio/matinee/internal/credits"
+	"github.com/yeixio/matinee/internal/gapless"
 	"github.com/yeixio/matinee/internal/intro"
 	"github.com/yeixio/matinee/internal/probe"
 	"github.com/yeixio/matinee/internal/store"
@@ -38,8 +40,9 @@ const (
 )
 
 const (
-	settingMode   = "mediaAnalysis"
-	settingIntros = "introDetection" // "off" turns it off
+	settingMode    = "mediaAnalysis"
+	settingIntros  = "introDetection"   // "off" turns it off
+	settingCredits = "creditsDetection" // "off" turns it off
 )
 
 // State says what the analysis is doing right now.
@@ -48,7 +51,9 @@ const (
 	StateWaiting   = "waiting"    // for playback to finish
 	StateSlowDisk  = "slowDisk"   // files kept timing out; resting before trying again
 	StateIntros    = "intros"     // looking for the intros of a season's episodes
+	StateCredits   = "credits"    // looking for the end credits of a season's episodes or a movie
 	StateThumbs    = "thumbnails" // making a video's seek bar pictures
+	StateGapless   = "gapless"    // listening for albums whose songs run into each other
 	StateIdle      = "idle"       // everything is analyzed
 	StateOff       = "off"
 )
@@ -74,15 +79,23 @@ type Analyzer struct {
 	// Intros, when set, looks for TV episodes' intros once every file is
 	// analyzed, at the same pace and priority.
 	Intros *intro.Detector
+	// Credits, when set, looks for where episodes' and movies' end credits
+	// start after that, at the same pace and priority.
+	Credits *credits.Detector
 	// Thumbs, when set, makes the seek bar's pictures of every video after
 	// that, when the admin has them made for all videos (see thumbs.Mode).
 	Thumbs *thumbs.Generator
+	// Gapless, when set, listens for albums whose songs run into each
+	// other (see internal/gapless), after the intros.
+	Gapless *gapless.Detector
 
 	mu         sync.Mutex
 	mode       Mode
 	loaded     bool
 	intros     bool
 	introsSet  bool
+	credits    bool
+	creditsSet bool
 	state      string
 	current    string // title of the file being analyzed
 	retryAfter map[int64]time.Time
@@ -103,6 +116,9 @@ type Status struct {
 	// Intros is how far looking for TV episodes' intros is; absent when
 	// this server doesn't.
 	Intros *IntroStatus `json:"intros,omitempty"`
+	// Credits is how far looking for episodes' and movies' end credits is;
+	// absent when this server doesn't. It counts episodes and movies.
+	Credits *IntroStatus `json:"credits,omitempty"`
 	// Thumbnails is how far making the seek bar's pictures is; absent when
 	// this server doesn't.
 	Thumbnails *ThumbStatus `json:"thumbnails,omitempty"`
@@ -204,6 +220,36 @@ func (a *Analyzer) SetIntrosOn(ctx context.Context, on bool) error {
 	return nil
 }
 
+// CreditsOn says whether to look for end credits, an admin setting, on by
+// default.
+func (a *Analyzer) CreditsOn(ctx context.Context) (bool, error) {
+	a.mu.Lock()
+	defer a.mu.Unlock()
+	if !a.creditsSet {
+		v, err := a.Store.Setting(ctx, settingCredits)
+		if err != nil {
+			return true, err
+		}
+		a.credits, a.creditsSet = v != "off", true
+	}
+	return a.credits, nil
+}
+
+func (a *Analyzer) SetCreditsOn(ctx context.Context, on bool) error {
+	v := "on"
+	if !on {
+		v = "off"
+	}
+	if err := a.Store.SetSetting(ctx, settingCredits, v); err != nil {
+		return err
+	}
+	a.mu.Lock()
+	a.credits, a.creditsSet = on, true
+	a.mu.Unlock()
+	a.Wake()
+	return nil
+}
+
 func (a *Analyzer) Status(ctx context.Context) (Status, error) {
 	mode, err := a.Mode(ctx)
 	if err != nil {
@@ -224,6 +270,17 @@ func (a *Analyzer) Status(ctx context.Context) (Status, error) {
 			return Status{}, err
 		}
 	}
+	var cs *IntroStatus
+	if a.Credits != nil {
+		on, err := a.CreditsOn(ctx)
+		if err != nil {
+			return Status{}, err
+		}
+		cs = &IntroStatus{On: on}
+		if cs.Total, cs.Done, cs.Found, err = a.Store.EndCreditsCounts(ctx, credits.Version); err != nil {
+			return Status{}, err
+		}
+	}
 	var ts *ThumbStatus
 	if a.Thumbs != nil {
 		m, err := a.Thumbs.Mode(ctx)
@@ -237,7 +294,7 @@ func (a *Analyzer) Status(ctx context.Context) (Status, error) {
 	}
 	a.mu.Lock()
 	defer a.mu.Unlock()
-	st := Status{Mode: mode, State: a.state, Total: total, Done: done, Unreadable: unreadable, Current: a.current, Intros: is, Thumbnails: ts}
+	st := Status{Mode: mode, State: a.state, Total: total, Done: done, Unreadable: unreadable, Current: a.current, Intros: is, Credits: cs, Thumbnails: ts}
 	if st.State == "" {
 		st.State = StateIdle
 	}
@@ -248,12 +305,16 @@ func (a *Analyzer) Status(ctx context.Context) (Status, error) {
 }
 
 // Reanalyze has one file looked at again soon, whatever its state, its
-// intro looked for again and its seek bar pictures made again.
+// intro and end credits looked for again and its seek bar pictures made
+// again.
 func (a *Analyzer) Reanalyze(ctx context.Context, id int64) error {
 	if err := a.Store.ClearMediaKey(ctx, id); err != nil {
 		return err
 	}
 	if err := a.Store.ClearIntro(ctx, id); err != nil {
+		return err
+	}
+	if err := a.Store.ClearEndCredits(ctx, id); err != nil {
 		return err
 	}
 	if err := a.Store.ClearThumbnails(ctx, id); err != nil {
@@ -296,7 +357,7 @@ func (a *Analyzer) Run(ctx context.Context) {
 			a.Log.Warn("media analysis", "err", err)
 			a.sleep(ctx, time.Minute)
 		case n == 0:
-			if a.findIntros(ctx) > 0 || a.makeThumbs(ctx) > 0 {
+			if a.findIntros(ctx) > 0 || a.findCredits(ctx) > 0 || a.findGapless(ctx) > 0 || a.makeThumbs(ctx) > 0 {
 				continue // files may have changed meanwhile
 			}
 			a.setState(StateIdle, "")
@@ -422,6 +483,99 @@ func (a *Analyzer) findIntros(ctx context.Context) int {
 	}
 	if n > 0 {
 		a.Log.Info("intro detection pass done", "episodes", n)
+	}
+	return n
+}
+
+// findCredits has the credits detector look at every season and movie that
+// needs it, one at a time, pausing like the analysis does. It returns how
+// many videos it looked at.
+func (a *Analyzer) findCredits(ctx context.Context) int {
+	if a.Credits == nil {
+		return 0
+	}
+	if on, _ := a.CreditsOn(ctx); !on {
+		return 0
+	}
+	first := true
+	n, err := a.Credits.Pass(ctx, func(v store.CreditsVideo) bool {
+		mode, _ := a.Mode(ctx)
+		if on, _ := a.CreditsOn(ctx); !on || mode == Off {
+			return false
+		}
+		// New files are analyzed first, and the pass picks up after.
+		if len(a.wake) > 0 {
+			return false
+		}
+		if !first && mode == Gentle {
+			a.sleep(ctx, gentlePause)
+		}
+		first = false
+		for mode == Gentle && a.Busy != nil && a.Busy() {
+			a.setState(StateWaiting, "")
+			a.sleep(ctx, busyCheck)
+			if ctx.Err() != nil {
+				return false
+			}
+			if mode, _ = a.Mode(ctx); mode == Off {
+				return false
+			}
+		}
+		name := v.Title
+		if v.Kind == "episode" {
+			name = a.seasonName(ctx, store.IntroEpisode{SeasonID: v.Group, Title: v.Title})
+		}
+		a.setState(StateCredits, name)
+		return ctx.Err() == nil
+	})
+	if err != nil && ctx.Err() == nil {
+		a.Log.Warn("credits detection", "err", err)
+	}
+	if n > 0 {
+		a.Log.Info("credits detection pass done", "videos", n)
+	}
+	return n
+}
+
+// findGapless has the gapless detector listen to every album that needs
+// it, one at a time, pausing like the analysis does. It returns how many
+// albums it listened to.
+func (a *Analyzer) findGapless(ctx context.Context) int {
+	if a.Gapless == nil {
+		return 0
+	}
+	first := true
+	n, err := a.Gapless.Pass(ctx, func(al store.GaplessAlbum) bool {
+		mode, _ := a.Mode(ctx)
+		if mode == Off {
+			return false
+		}
+		if !first && mode == Gentle {
+			a.sleep(ctx, gentlePause)
+		}
+		first = false
+		for mode == Gentle && a.Busy != nil && a.Busy() {
+			a.setState(StateWaiting, "")
+			a.sleep(ctx, busyCheck)
+			if ctx.Err() != nil {
+				return false
+			}
+			if mode, _ = a.Mode(ctx); mode == Off {
+				return false
+			}
+		}
+		name := al.Title
+		if al.Artist != "" {
+			name = al.Artist + " · " + al.Title
+		}
+		a.setState(StateGapless, name)
+		return ctx.Err() == nil
+	})
+	if err != nil && ctx.Err() == nil {
+		a.Log.Warn("gapless detection", "err", err)
+	}
+	if n > 0 {
+		a.Log.Info("gapless detection pass done", "albums", n)
 	}
 	return n
 }

@@ -47,7 +47,8 @@
       "source": "Sottotitoli da OpenSubtitles.com"
     },
     "skipIntro": "Salta intro",
-    "introSkipped": "Intro saltata"
+    "introSkipped": "Intro saltata",
+    "skipCredits": "Salta i titoli di coda"
   },
   "somethingWentWrong": "Qualcosa è andato storto",
   "oneMoment": "Un momento…",
@@ -415,7 +416,9 @@
     "state": {
       "lookingAt": "Esame di {{file}}",
       "intros": "Ricerca delle intro in {{season}}",
+      "credits": "Ricerca dei titoli di coda in {{title}}",
       "thumbnails": "Creazione delle anteprime della barra per {{title}}",
+      "gapless": "Ascolta se ci sono pause tra i brani di {{album}}",
       "working": "Al lavoro",
       "waiting": "In attesa della fine della riproduzione",
       "slowDisk": "I file sono lenti da leggere; pausa di qualche minuto",
@@ -446,6 +449,11 @@
       "label": "Trova le intro delle serie",
       "hint": "Quando tutti i file sono analizzati, Matinee ascolta l’inizio degli episodi di ogni stagione per trovare l’intro che hanno in comune, così i lettori possono offrire Salta intro.",
       "progress": "{{done}} episodi su {{total}} controllati, {{found}} con un’intro"
+    },
+    "credits": {
+      "label": "Trova i titoli di coda",
+      "hint": "Quando tutti i file sono analizzati, Matinee trova dove iniziano i titoli di coda di episodi e film, così i lettori possono mostrare lì Prossimo o Salta i titoli di coda.",
+      "progress": "{{done}} di {{total}} episodi e film controllati, {{found}} con titoli di coda"
     },
     "thumbnails": {
       "label": "Anteprime nella barra di avanzamento",
@@ -762,6 +770,12 @@
         "v4l2m2m": "V4L2 (Raspberry Pi)"
       }
     },
+    "lyrics": {
+      "title": "Testi",
+      "intro": "I brani mostrano il testo a tempo con la musica quando accanto al brano c’è un file .lrc con lo stesso nome, o il testo è nei suoi tag.",
+      "online": "Cerca i testi online",
+      "onlineDetail": "Per i brani senza testo sincronizzato, il server chiede a <site>LRCLIB</site>, un database di testi libero e aperto. Invia solo artista, titolo, album e durata di ogni brano, direttamente da questo server."
+    },
     "homeRows": {
       "title": "Home",
       "holidays": "Righe delle feste",
@@ -830,7 +844,7 @@
       },
       "content": {
         "title": "Contenuti",
-        "hint": "Poster, ricerca di podcast e sottotitoli, trailer e righe della Home"
+        "hint": "Poster, ricerca di podcast e sottotitoli, testi, trailer e righe della Home"
       },
       "streaming": {
         "title": "Streaming",

@@ -53,7 +53,11 @@
     "noneFound": "在此網路中找不到伺服器。請輸入你在瀏覽器中開啟 Matinee 時使用的位址。",
     "connect": "連線",
     "stillLooking": "仍在尋找。如果找到你的伺服器，會顯示在這裡。",
-    "connectTo": "連線至 {{name}}"
+    "connectTo": "連線至 {{name}}",
+    "phoneTitle": "用手機設定",
+    "phoneHint": "用手機相機掃描。手機需要已登入的 Matinee App，並與這台電視連上同一個 Wi-Fi。",
+    "phoneFound": "正在用 {{name}} 設定…",
+    "phoneQrLabel": "用手機設定這台電視的 QR 碼"
   },
   "signIn": {
     "title": "登入",
@@ -67,7 +71,32 @@
     "gettingCode": "正在取得代碼",
     "howTo": "在已登入的電腦或手機上開啟\n<url>{{url}}</url>\n並輸入此代碼。",
     "newCode": "取得新代碼",
-    "waiting": "正在等待核准…"
+    "waiting": "正在等待核准…",
+    "qrHint": "或用手機相機掃描，開啟已填好代碼的頁面。",
+    "qrLabel": "含此代碼的登入頁面 QR 碼",
+    "finishOnPhone": "你的手機正在為這台電視登入…"
+  },
+  "setUpTv": {
+    "title": "設定電視",
+    "settingsHint": "不必用遙控器打字，就能在電視上登入 Matinee。",
+    "thisTv": "這台電視",
+    "confirm": "用 <b>{{server}}</b> 設定這台電視？它會以 <b>{{name}}</b> 的身分登入。",
+    "setUp": "設定電視",
+    "working": "正在告訴電視你的伺服器在哪裡…",
+    "sameWifi": "完成前，請讓這支手機與電視保持在同一個 Wi-Fi。",
+    "timeout": "電視沒有回應。請確認這支手機與電視在同一個 Wi-Fi，且電視仍顯示 QR 碼，然後再試一次。",
+    "done": "{{tv}} 已登入",
+    "doneHint": "可以開始觀看了。",
+    "declined": "{{tv}} 未登入",
+    "intro": "在電視上開啟 Matinee，用這支手機的相機掃描電視顯示的 QR 碼。也可以在這裡輸入電視顯示的代碼。",
+    "introCode": "輸入電視顯示的代碼。",
+    "code": "電視上的代碼",
+    "next": "下一步",
+    "wantsToSignIn": "想以 <b>{{name}}</b> 的身分登入",
+    "approve": "登入",
+    "decline": "不要登入",
+    "signInFirst": "請先在這支手機上登入。電視會以你的身分登入。",
+    "onPhone": "在手機上的 Matinee App 設定電視：設定，然後選擇設定電視。"
   },
   "home": {
     "watchDownloads": "觀看下載內容",
@@ -330,7 +359,8 @@
       "source": "字幕來自 OpenSubtitles.com"
     },
     "skipIntro": "略過片頭",
-    "introSkipped": "已略過片頭"
+    "introSkipped": "已略過片頭",
+    "skipCredits": "跳過片尾"
   },
   "library": {
     "nothingUnwatched": "這裡沒有未看的內容",

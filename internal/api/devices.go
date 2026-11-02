@@ -84,6 +84,8 @@ func (s *Server) startDeviceCode(w http.ResponseWriter, r *http.Request) {
 	var req struct {
 		DeviceName string `json:"deviceName"`
 		Platform   string `json:"platform"`
+		// The secret a TV showed in a QR code, when a phone set it up (see store.PairedDeviceCode).
+		PairID string `json:"pairId"`
 	}
 	if err := readJSON(r, &req); err != nil {
 		writeError(w, http.StatusBadRequest, "invalid request")
@@ -93,7 +95,11 @@ func (s *Server) startDeviceCode(w http.ResponseWriter, r *http.Request) {
 		writeError(w, http.StatusBadRequest, "deviceName is required")
 		return
 	}
-	dc, err := s.Store.StartDeviceCode(r.Context(), requestDevice(r, req.DeviceName, req.Platform), deviceCodeTTL)
+	if req.PairID != "" && !validPairID(req.PairID) {
+		writeError(w, http.StatusBadRequest, "invalid request")
+		return
+	}
+	dc, err := s.Store.StartDeviceCode(r.Context(), requestDevice(r, req.DeviceName, req.Platform), deviceCodeTTL, req.PairID)
 	if err != nil {
 		s.serverError(w, err)
 		return
@@ -149,6 +155,46 @@ func (s *Server) getDeviceCode(w http.ResponseWriter, r *http.Request) {
 	dc, err := s.Store.PendingDeviceCode(r.Context(), r.PathValue("code"))
 	if errors.Is(err, store.ErrNotFound) {
 		writeError(w, http.StatusNotFound, "that code isn't valid or has expired")
+		return
+	}
+	if err != nil {
+		s.serverError(w, err)
+		return
+	}
+	writeJSON(w, http.StatusOK, map[string]any{
+		"userCode":   store.FormatUserCode(dc.UserCode),
+		"deviceName": dc.Device.Name,
+		"platform":   dc.Device.Platform,
+		"expiresAt":  dc.ExpiresAt.Unix(),
+	})
+}
+
+// validPairID accepts the secrets apps make: 22 to 64 letters, digits, - and
+// _ (at least 128 random bits in base64url), so nobody can guess one.
+func validPairID(id string) bool {
+	if len(id) < 22 || len(id) > 64 {
+		return false
+	}
+	for _, c := range id {
+		if !(c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z' || c >= '0' && c <= '9' || c == '-' || c == '_') {
+			return false
+		}
+	}
+	return true
+}
+
+// getPairedDeviceCode is the phone's side of setting up a TV from its QR
+// code: it waits here until the TV, now pointed at this server, asks for a
+// code with the secret from the QR code, then approves that code.
+func (s *Server) getPairedDeviceCode(w http.ResponseWriter, r *http.Request) {
+	pair := r.PathValue("pair")
+	if !validPairID(pair) {
+		writeError(w, http.StatusNotFound, "that TV hasn't asked to sign in yet")
+		return
+	}
+	dc, err := s.Store.PairedDeviceCode(r.Context(), pair)
+	if errors.Is(err, store.ErrNotFound) {
+		writeError(w, http.StatusNotFound, "that TV hasn't asked to sign in yet")
 		return
 	}
 	if err != nil {

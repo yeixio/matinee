@@ -47,7 +47,8 @@
       "source": "Napisy z OpenSubtitles.com"
     },
     "skipIntro": "Pomiń czołówkę",
-    "introSkipped": "Pominięto czołówkę"
+    "introSkipped": "Pominięto czołówkę",
+    "skipCredits": "Pomiń napisy końcowe"
   },
   "somethingWentWrong": "Coś poszło nie tak",
   "oneMoment": "Chwileczkę…",
@@ -418,7 +419,9 @@
     "state": {
       "lookingAt": "Sprawdzanie {{file}}",
       "intros": "Szukanie czołówek w: {{season}}",
+      "credits": "Szukanie napisów końcowych w {{title}}",
       "thumbnails": "Tworzenie podglądów paska dla {{title}}",
+      "gapless": "Sprawdza przerwy między utworami na {{album}}",
       "working": "Pracuje",
       "waiting": "Czeka na koniec odtwarzania",
       "slowDisk": "Pliki czytają się wolno; przerwa na kilka minut",
@@ -450,6 +453,11 @@
       "label": "Wyszukuj czołówki seriali",
       "hint": "Gdy wszystkie pliki zostaną przeanalizowane, Matinee słucha początku odcinków każdego sezonu, by znaleźć wspólną czołówkę, dzięki czemu odtwarzacze mogą zaproponować Pomiń czołówkę.",
       "progress": "Sprawdzono {{done}} z {{total}} odcinków, {{found}} z czołówką"
+    },
+    "credits": {
+      "label": "Znajdź napisy końcowe",
+      "hint": "Po przeanalizowaniu wszystkich plików Matinee znajduje miejsce, w którym zaczynają się napisy końcowe odcinków i filmów, by odtwarzacze mogły tam pokazać Następny lub Pomiń napisy końcowe.",
+      "progress": "Sprawdzono {{done}} z {{total}} odcinków i filmów, {{found}} z napisami końcowymi"
     },
     "thumbnails": {
       "label": "Podglądy na pasku odtwarzania",
@@ -766,6 +774,12 @@
         "v4l2m2m": "V4L2 (Raspberry Pi)"
       }
     },
+    "lyrics": {
+      "title": "Teksty piosenek",
+      "intro": "Utwory pokazują tekst w rytm muzyki, gdy obok utworu jest plik .lrc o tej samej nazwie albo tekst jest w jego tagach.",
+      "online": "Szukaj tekstów w internecie",
+      "onlineDetail": "Dla utworów bez zsynchronizowanego tekstu serwer pyta <site>LRCLIB</site>, wolną, otwartą bazę tekstów. Wysyła tylko wykonawcę, tytuł, album i długość każdego utworu, prosto z tego serwera."
+    },
     "homeRows": {
       "title": "Start",
       "holidays": "Rzędy świąteczne",
@@ -834,7 +848,7 @@
       },
       "content": {
         "title": "Treści",
-        "hint": "Plakaty, wyszukiwanie podcastów i napisów, zwiastuny i rzędy na stronie głównej"
+        "hint": "Plakaty, wyszukiwanie podcastów i napisów, teksty piosenek, zwiastuny i rzędy na stronie głównej"
       },
       "streaming": {
         "title": "Strumieniowanie",

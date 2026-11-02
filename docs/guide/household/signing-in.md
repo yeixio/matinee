@@ -48,7 +48,7 @@ Before an app uses an address it got from Connect, the server there has to prove
 
 ## Signing in a TV or other device with a code
 
-Typing a password with a remote is no fun, so TVs and other devices can show a short code instead. Someone already signed in opens `<your server>/link` on a phone or computer, types the code and approves it, and the device is signed in as them. [Signing in a device](/docs/apps/signing-in/) shows the steps.
+Typing a password with a remote is no fun, so TVs and other devices can show a short code instead. Someone already signed in opens `<your server>/link` on a phone or computer, types the code and approves it, and the device is signed in as them. [Signing in a device](/docs/apps/signing-in/) shows the steps.<!-- since: v0.1.13 --> TVs also show a QR code that opens that page with the code filled in, and the phone app can approve a TV too, or set up a TV that has never seen your server.<!-- /since -->
 
 - A code only works for 10 minutes.
 - Only a signed-in account can approve one. The Home account and kids' profiles can't, so a device at home can't approve itself.

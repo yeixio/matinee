@@ -53,7 +53,11 @@
     "noneFound": "Kami tidak menemui pelayan dalam rangkaian ini. Taip alamat yang anda gunakan untuk membuka Matinee dalam pelayar.",
     "connect": "Sambung",
     "stillLooking": "Masih mencari. Jika pelayan anda muncul, ia akan dipaparkan di sini.",
-    "connectTo": "Sambung ke {{name}}"
+    "connectTo": "Sambung ke {{name}}",
+    "phoneTitle": "Sediakan dengan telefon",
+    "phoneHint": "Imbas dengan kamera telefon. Telefon perlukan aplikasi Matinee yang sudah log masuk, pada Wi-Fi yang sama dengan TV ini.",
+    "phoneFound": "Menyediakan dengan {{name}}…",
+    "phoneQrLabel": "Kod QR untuk menyediakan TV ini dengan telefon"
   },
   "signIn": {
     "title": "Log masuk",
@@ -67,7 +71,32 @@
     "gettingCode": "Mendapatkan kod",
     "howTo": "Pada komputer atau telefon yang sudah log masuk, buka\n<url>{{url}}</url>\ndan masukkan kod ini.",
     "newCode": "Dapatkan kod baharu",
-    "waiting": "Menunggu kelulusan…"
+    "waiting": "Menunggu kelulusan…",
+    "qrHint": "Atau imbas dengan kamera telefon untuk membuka halaman itu dengan kod sudah diisi.",
+    "qrLabel": "Kod QR halaman log masuk dengan kod ini",
+    "finishOnPhone": "Telefon anda sedang mendaftar masuk TV ini…"
+  },
+  "setUpTv": {
+    "title": "Sediakan TV",
+    "settingsHint": "Log masuk Matinee pada TV tanpa menaip dengan alat kawalan jauh.",
+    "thisTv": "TV ini",
+    "confirm": "Sediakan TV ini dengan <b>{{server}}</b>? TV akan log masuk sebagai <b>{{name}}</b>.",
+    "setUp": "Sediakan TV",
+    "working": "Memberitahu TV di mana pelayan anda…",
+    "sameWifi": "Kekalkan telefon ini pada Wi-Fi yang sama dengan TV sehingga selesai.",
+    "timeout": "TV tidak menjawab. Pastikan telefon ini pada Wi-Fi yang sama dengan TV dan TV masih menunjukkan kod QR-nya, kemudian cuba lagi.",
+    "done": "{{tv}} sudah log masuk",
+    "doneHint": "Sedia untuk ditonton.",
+    "declined": "{{tv}} tidak log masuk",
+    "intro": "Buka Matinee pada TV dan imbas kod QR yang ditunjukkan dengan kamera telefon ini. Atau taip kod yang ditunjukkan TV di sini.",
+    "introCode": "Taip kod yang ditunjukkan TV.",
+    "code": "Kod pada TV",
+    "next": "Seterusnya",
+    "wantsToSignIn": "mahu log masuk sebagai <b>{{name}}</b>",
+    "approve": "Log masuk",
+    "decline": "Jangan log masuk",
+    "signInFirst": "Log masuk pada telefon ini dahulu. TV akan log masuk sebagai anda.",
+    "onPhone": "Sediakan TV daripada aplikasi Matinee pada telefon anda: Tetapan, kemudian Sediakan TV."
   },
   "home": {
     "watchDownloads": "Tonton muat turun anda",
@@ -330,7 +359,8 @@
       "source": "Sari kata daripada OpenSubtitles.com"
     },
     "skipIntro": "Langkau intro",
-    "introSkipped": "Intro dilangkau"
+    "introSkipped": "Intro dilangkau",
+    "skipCredits": "Langkau kredit"
   },
   "library": {
     "nothingUnwatched": "Tiada yang belum ditonton di sini",

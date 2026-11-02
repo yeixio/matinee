@@ -409,7 +409,15 @@
     "playlistGone": "Den här spellistan finns inte längre",
     "create": "Skapa",
     "save": "Spara",
-    "delete": "Radera"
+    "delete": "Radera",
+    "lyrics": "Låttext",
+    "noLyrics": "Ingen låttext för den här låten",
+    "instrumental": "Instrumental",
+    "lyricsFromLrclib": "Låttext från LRCLIB",
+    "gapless": "Spela utan pauser",
+    "gaplessHeard": "Matinee hörde att låtarna går ihop, så de spelas utan pauser.",
+    "gaplessOn": "Spelas utan pauser",
+    "gaplessOff": "Spelas med pauser mellan låtarna"
   },
   "books": {
     "overview": "Översikt",
@@ -545,7 +553,20 @@
     "newEpisodesCount_one": "{{count}} nytt avsnitt",
     "imported_one": "{{count}} program tillagt.",
     "newEpisodesCount_other": "{{count}} nya avsnitt",
-    "imported_other": "{{count}} program tillagda."
+    "imported_other": "{{count}} program tillagda.",
+    "episodes": "Avsnitt",
+    "order": "Avsnittsordning",
+    "newestFirst": "Nyaste först",
+    "oldestFirst": "Äldsta först",
+    "playOldest": "Spela i ordning",
+    "playOn": "Fortsätt spela poddar",
+    "playOnHint": "När ett avsnitt tar slut spelas nästa avsnitt av programmet som du inte har hört, annars det nyaste avsnittet av ett annat program du följer.",
+    "playingNext": "Härnäst: {{title}}",
+    "autoDownload": "Ladda ner nya avsnitt",
+    "autoDownloadHint": "Dina telefoner laddar ner programmets nyaste avsnitt av sig själva och tar bort dem när du har lyssnat på dem.",
+    "keepCount": "Avsnitt att behålla",
+    "removePlayed": "Ta bort spelade avsnitt",
+    "removePlayedHint": "Nedladdade poddavsnitt tas bort från den här telefonen när du har lyssnat på dem."
   },
   "together": {
     "title": "Titta tillsammans",

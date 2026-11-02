@@ -381,7 +381,15 @@
     "playlistGone": "이 플레이리스트는 더 이상 없습니다",
     "create": "만들기",
     "save": "저장",
-    "delete": "삭제"
+    "delete": "삭제",
+    "lyrics": "가사",
+    "noLyrics": "이 곡의 가사가 없습니다",
+    "instrumental": "연주곡",
+    "lyricsFromLrclib": "가사 제공: LRCLIB",
+    "gapless": "곡 사이 공백 없이 재생",
+    "gaplessHeard": "Matinee가 이 곡들이 서로 이어진다는 것을 감지해 공백 없이 재생합니다.",
+    "gaplessOn": "공백 없이 재생",
+    "gaplessOff": "곡 사이에 공백을 두고 재생"
   },
   "books": {
     "overview": "개요",
@@ -515,7 +523,20 @@
     "export": "OPML 내보내기",
     "importing": "프로그램 추가 중…",
     "newEpisodesCount_other": "새 에피소드 {{count}}개",
-    "imported_other": "프로그램 {{count}}개를 추가했습니다."
+    "imported_other": "프로그램 {{count}}개를 추가했습니다.",
+    "episodes": "에피소드",
+    "order": "에피소드 순서",
+    "newestFirst": "최신순",
+    "oldestFirst": "오래된순",
+    "playOldest": "순서대로 재생",
+    "playOn": "팟캐스트 계속 재생",
+    "playOnHint": "에피소드가 끝나면 그 프로그램에서 아직 듣지 않은 다음 에피소드를, 없으면 팔로우하는 다른 프로그램의 최신 에피소드를 재생합니다.",
+    "playingNext": "다음: {{title}}",
+    "autoDownload": "새 에피소드 다운로드",
+    "autoDownloadHint": "휴대폰이 이 프로그램의 최신 에피소드를 알아서 다운로드하고 다 들으면 삭제합니다.",
+    "keepCount": "보관할 에피소드 수",
+    "removePlayed": "재생한 에피소드 삭제",
+    "removePlayedHint": "다운로드한 팟캐스트 에피소드는 다 들으면 이 휴대폰에서 삭제됩니다."
   },
   "together": {
     "title": "함께 보기",
