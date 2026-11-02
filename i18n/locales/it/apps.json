@@ -369,7 +369,8 @@
       "source": "Sottotitoli da OpenSubtitles.com"
     },
     "skipIntro": "Salta intro",
-    "introSkipped": "Intro saltata"
+    "introSkipped": "Intro saltata",
+    "skipCredits": "Salta i titoli di coda"
   },
   "library": {
     "nothingUnwatched": "Niente da vedere qui",

@@ -364,7 +364,8 @@
       "source": "زیرنویس‌ها از OpenSubtitles.com"
     },
     "skipIntro": "رد کردن تیتراژ",
-    "introSkipped": "تیتراژ رد شد"
+    "introSkipped": "تیتراژ رد شد",
+    "skipCredits": "رد کردن تیتراژ"
   },
   "library": {
     "nothingUnwatched": "اینجا چیز دیده‌نشده‌ای نیست",

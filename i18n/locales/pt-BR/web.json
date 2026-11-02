@@ -47,7 +47,8 @@
       "source": "Legendas do OpenSubtitles.com"
     },
     "skipIntro": "Pular abertura",
-    "introSkipped": "Abertura pulada"
+    "introSkipped": "Abertura pulada",
+    "skipCredits": "Pular créditos"
   },
   "somethingWentWrong": "Algo deu errado",
   "oneMoment": "Só um momento…",
@@ -415,6 +416,7 @@
     "state": {
       "lookingAt": "Analisando {{file}}",
       "intros": "Procurando aberturas em {{season}}",
+      "credits": "Procurando os créditos finais em {{title}}",
       "thumbnails": "Criando prévias da barra para {{title}}",
       "working": "Trabalhando",
       "waiting": "Esperando a reprodução terminar",
@@ -446,6 +448,11 @@
       "label": "Encontrar aberturas de séries",
       "hint": "Depois que todos os arquivos forem analisados, o Matinee escuta o início dos episódios de cada temporada para achar a abertura que eles têm em comum, para que os players ofereçam Pular abertura.",
       "progress": "{{done}} de {{total}} episódios verificados, {{found}} com abertura"
+    },
+    "credits": {
+      "label": "Encontrar créditos finais",
+      "hint": "Depois que todos os arquivos são analisados, o Matinee encontra onde começam os créditos finais de episódios e filmes, para que os players mostrem ali A seguir ou Pular créditos.",
+      "progress": "{{done}} de {{total}} episódios e filmes verificados, {{found}} com créditos finais"
     },
     "thumbnails": {
       "label": "Prévias na barra de reprodução",

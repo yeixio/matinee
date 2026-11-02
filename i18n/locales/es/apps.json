@@ -369,7 +369,8 @@
       "source": "Subtítulos de OpenSubtitles.com"
     },
     "skipIntro": "Saltar intro",
-    "introSkipped": "Intro saltada"
+    "introSkipped": "Intro saltada",
+    "skipCredits": "Saltar créditos"
   },
   "library": {
     "nothingUnwatched": "No queda nada sin ver",

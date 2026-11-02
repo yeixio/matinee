@@ -47,7 +47,8 @@
       "source": "Untertitel von OpenSubtitles.com"
     },
     "skipIntro": "Intro überspringen",
-    "introSkipped": "Intro übersprungen"
+    "introSkipped": "Intro übersprungen",
+    "skipCredits": "Abspann überspringen"
   },
   "somethingWentWrong": "Etwas ist schiefgelaufen",
   "oneMoment": "Einen Moment …",
@@ -412,6 +413,7 @@
     "state": {
       "lookingAt": "Untersucht {{file}}",
       "intros": "Suche Intros in {{season}}",
+      "credits": "Suche nach dem Abspann in {{title}}",
       "thumbnails": "Erstelle Vorschaubilder für {{title}}",
       "working": "Arbeitet",
       "waiting": "Wartet, bis die Wiedergabe endet",
@@ -442,6 +444,11 @@
       "label": "TV-Intros finden",
       "hint": "Sobald alle Dateien analysiert sind, hört Matinee sich den Anfang der Folgen jeder Staffel an und sucht das gemeinsame Intro, damit Player „Intro überspringen“ anbieten können.",
       "progress": "{{done}} von {{total}} Folgen geprüft, {{found}} mit Intro"
+    },
+    "credits": {
+      "label": "Abspann finden",
+      "hint": "Sobald alle Dateien analysiert sind, findet Matinee, wo der Abspann von Folgen und Filmen beginnt, damit Player dort „Als Nächstes“ oder „Abspann überspringen“ anzeigen.",
+      "progress": "{{done}} von {{total}} Folgen und Filmen geprüft, {{found}} mit Abspann"
     },
     "thumbnails": {
       "label": "Vorschaubilder in der Zeitleiste",

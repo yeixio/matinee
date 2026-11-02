@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	"github.com/yeixio/matinee/internal/analyze"
+	"github.com/yeixio/matinee/internal/credits"
 	"github.com/yeixio/matinee/internal/intro"
 	"github.com/yeixio/matinee/internal/probe"
 	"github.com/yeixio/matinee/internal/store"
@@ -34,8 +35,9 @@ func (s *Server) putAnalysis(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	var in struct {
-		Mode   analyze.Mode `json:"mode"`
-		Intros *bool        `json:"intros"` // look for TV episodes' intros
+		Mode    analyze.Mode `json:"mode"`
+		Intros  *bool        `json:"intros"`  // look for TV episodes' intros
+		Credits *bool        `json:"credits"` // look for episodes' and movies' end credits
 		// When to make the seek bar's pictures: all, onPlay or off.
 		Thumbnails thumbs.Mode `json:"thumbnails"`
 	}
@@ -43,7 +45,7 @@ func (s *Server) putAnalysis(w http.ResponseWriter, r *http.Request) {
 		writeError(w, http.StatusBadRequest, "bad request")
 		return
 	}
-	if (in.Mode != "" || (in.Intros == nil && in.Thumbnails == "")) && in.Mode != analyze.Gentle && in.Mode != analyze.Normal && in.Mode != analyze.Off {
+	if (in.Mode != "" || (in.Intros == nil && in.Credits == nil && in.Thumbnails == "")) && in.Mode != analyze.Gentle && in.Mode != analyze.Normal && in.Mode != analyze.Off {
 		writeError(w, http.StatusBadRequest, "mode must be gentle, normal or off")
 		return
 	}
@@ -59,6 +61,12 @@ func (s *Server) putAnalysis(w http.ResponseWriter, r *http.Request) {
 	}
 	if in.Intros != nil {
 		if err := s.Analyzer.SetIntrosOn(r.Context(), *in.Intros); err != nil {
+			s.serverError(w, err)
+			return
+		}
+	}
+	if in.Credits != nil {
+		if err := s.Analyzer.SetCreditsOn(r.Context(), *in.Credits); err != nil {
 			s.serverError(w, err)
 			return
 		}
@@ -141,4 +149,36 @@ func (s *Server) intro(ctx context.Context, it store.Item, mi *probe.MediaInfo) 
 		return nil
 	}
 	return &introView{StartMs: start, EndMs: end, Source: "audio"}
+}
+
+// endCreditsView is where a video's closing credits play.
+type endCreditsView struct {
+	StartMs int64 `json:"startMs"`
+	// EndMs is where they stop when something plays after them, such as a
+	// scene; absent when they run to the end.
+	EndMs int64 `json:"endMs,omitempty"`
+	// Source is chapters when the file's chapters say so, audio when found
+	// by matching the season's episodes, video when found by the picture
+	// going dark.
+	Source string `json:"source"`
+}
+
+// endCredits says where an episode's or movie's end credits are: its
+// chapters win, then what the credits detector found. nil when neither
+// knows.
+func (s *Server) endCredits(ctx context.Context, it store.Item, mi *probe.MediaInfo) *endCreditsView {
+	if it.Kind != "episode" && it.Kind != "movie" {
+		return nil
+	}
+	if mi != nil && mi.CreditsMs > 0 {
+		return &endCreditsView{StartMs: mi.CreditsMs, Source: credits.FromChapters}
+	}
+	start, end, source, ok, err := s.Store.EndCredits(ctx, it.ID, credits.Version)
+	if err != nil {
+		s.Log.Warn("end credits", "item", it.ID, "err", err)
+	}
+	if !ok {
+		return nil
+	}
+	return &endCreditsView{StartMs: start, EndMs: end, Source: source}
 }

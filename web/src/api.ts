@@ -643,6 +643,8 @@ export type QualityStep = { id: string; label: string; width: number; height: nu
 // home), or null.
 export type Streaming = { adaptive: boolean; steps: QualityStep[]; cap: QualityStep | null }
 
+export type EndCredits = { startMs: number; endMs?: number; source: 'chapters' | 'audio' | 'video' }
+
 export type MediaInfo = {
   container: string
   size: number
@@ -728,6 +730,10 @@ export type ItemDetail = Item & {
   // Episodes: where the intro plays, from a chapter or found by matching the
   // season's audio. Left out when unknown.
   intro?: { startMs: number; endMs: number; source: 'chapters' | 'audio' }
+  // Episodes and movies: where the closing credits play, from a chapter, the
+  // music a season's episodes share, or the picture going dark. endMs is set
+  // when something plays after them. Left out when unknown.
+  endCredits?: EndCredits
   filePath?: string // admins only
   fileSize?: number
   details?: Details
@@ -904,13 +910,15 @@ export type LogQuery = { level?: LogLevel; q?: string; before?: number; limit?: 
 
 export type AnalysisStatus = {
   mode: AnalysisMode
-  state: 'analyzing' | 'intros' | 'thumbnails' | 'waiting' | 'slowDisk' | 'idle' | 'off'
+  state: 'analyzing' | 'intros' | 'credits' | 'thumbnails' | 'waiting' | 'slowDisk' | 'idle' | 'off'
   total: number
   done: number
   unreadable: number
-  current?: string // the file; while looking for intros the show and season; while making thumbnails the video
+  current?: string // the file; while looking for intros or credits the show and season (or movie); while making thumbnails the video
   // Looking for TV episodes' intros; left out by servers that don't.
   intros?: { on: boolean; total: number; done: number; found: number }
+  // Looking for episodes' and movies' end credits; left out by servers that don't.
+  credits?: { on: boolean; total: number; done: number; found: number }
   // Making the seek bar's pictures; left out by servers that don't.
   thumbnails?: { mode: ThumbnailMode; total: number; done: number }
 }
@@ -1107,6 +1115,7 @@ export const api = {
   stopTranscode: (id: string) => request<void>('DELETE', `/api/v1/admin/transcodes/${encodeURIComponent(id)}`),
   setAnalysisMode: (mode: AnalysisMode) => request<AnalysisStatus>('PUT', '/api/v1/analysis', { mode }),
   setIntroDetection: (intros: boolean) => request<AnalysisStatus>('PUT', '/api/v1/analysis', { intros }),
+  setCreditsDetection: (credits: boolean) => request<AnalysisStatus>('PUT', '/api/v1/analysis', { credits }),
   setThumbnailMode: (thumbnails: ThumbnailMode) => request<AnalysisStatus>('PUT', '/api/v1/analysis', { thumbnails }),
   reanalyze: (id: number) => request<void>('POST', `/api/v1/items/${id}/analyze`),
   settings: () => request<Settings>('GET', '/api/v1/settings'),

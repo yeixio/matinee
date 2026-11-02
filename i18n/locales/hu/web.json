@@ -47,7 +47,8 @@
       "source": "Feliratok: OpenSubtitles.com"
     },
     "skipIntro": "Bevezető átugrása",
-    "introSkipped": "Bevezető átugorva"
+    "introSkipped": "Bevezető átugorva",
+    "skipCredits": "Stáblista átugrása"
   },
   "somethingWentWrong": "Valami hiba történt",
   "oneMoment": "Egy pillanat…",
@@ -412,6 +413,7 @@
     "state": {
       "lookingAt": "Vizsgálja: {{file}}",
       "intros": "Bevezetők keresése: {{season}}",
+      "credits": "Stáblista keresése: {{title}}",
       "thumbnails": "Előnézetek készítése: {{title}}",
       "working": "Dolgozik",
       "waiting": "Vár, amíg a lejátszás véget ér",
@@ -442,6 +444,11 @@
       "label": "Sorozatbevezetők keresése",
       "hint": "Ha minden fájl elemzése kész, a Matinee meghallgatja az évadok epizódjainak elejét, és megkeresi a közös bevezetőt, hogy a lejátszók felajánlhassák a Bevezető átugrása lehetőséget.",
       "progress": "{{done}}/{{total}} epizód ellenőrizve, {{found}} bevezetővel"
+    },
+    "credits": {
+      "label": "Stáblisták keresése",
+      "hint": "Ha minden fájl elemezve van, a Matinee megkeresi, hol kezdődik az epizódok és filmek stáblistája, hogy a lejátszók ott kínálják a Következőt vagy a Stáblista átugrását.",
+      "progress": "{{total}} epizódból és filmből {{done}} ellenőrizve, {{found}} stáblistával"
     },
     "thumbnails": {
       "label": "Előnézetek az idősávon",

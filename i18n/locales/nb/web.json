@@ -47,7 +47,8 @@
       "source": "Undertekster fra OpenSubtitles.com"
     },
     "skipIntro": "Hopp over intro",
-    "introSkipped": "Introen ble hoppet over"
+    "introSkipped": "Introen ble hoppet over",
+    "skipCredits": "Hopp over rulletekster"
   },
   "somethingWentWrong": "Noe gikk galt",
   "oneMoment": "Et øyeblikk…",
@@ -412,6 +413,7 @@
     "state": {
       "lookingAt": "Ser på {{file}}",
       "intros": "Ser etter introer i {{season}}",
+      "credits": "Ser etter rulletekster i {{title}}",
       "thumbnails": "Lager forhåndsbilder for {{title}}",
       "working": "Arbeider",
       "waiting": "Venter på at avspillingen blir ferdig",
@@ -442,6 +444,11 @@
       "label": "Finn introer i serier",
       "hint": "Når alle filene er analysert, lytter Matinee til begynnelsen av episodene i hver sesong etter introen de har felles, slik at avspillerne kan tilby Hopp over intro.",
       "progress": "{{done}} av {{total}} episoder sjekket, {{found}} med intro"
+    },
+    "credits": {
+      "label": "Finn rulletekster",
+      "hint": "Når alle filene er analysert, finner Matinee hvor rulletekstene i episoder og filmer starter, slik at avspillere kan vise Neste eller Hopp over rulletekster der.",
+      "progress": "{{done}} av {{total}} episoder og filmer sjekket, {{found}} med rulletekster"
     },
     "thumbnails": {
       "label": "Forhåndsbilder i tidslinjen",

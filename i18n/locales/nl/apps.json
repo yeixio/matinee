@@ -364,7 +364,8 @@
       "source": "Ondertitels van OpenSubtitles.com"
     },
     "skipIntro": "Intro overslaan",
-    "introSkipped": "Intro overgeslagen"
+    "introSkipped": "Intro overgeslagen",
+    "skipCredits": "Aftiteling overslaan"
   },
   "library": {
     "nothingUnwatched": "Niets ongezien hier",

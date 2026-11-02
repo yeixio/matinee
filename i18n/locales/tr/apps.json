@@ -364,7 +364,8 @@
       "source": "Altyazılar OpenSubtitles.com'dan"
     },
     "skipIntro": "Girişi atla",
-    "introSkipped": "Giriş atlandı"
+    "introSkipped": "Giriş atlandı",
+    "skipCredits": "Jeneriği atla"
   },
   "library": {
     "nothingUnwatched": "Burada izlenmemiş bir şey yok",

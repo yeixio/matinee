@@ -364,7 +364,8 @@
       "source": "Υπότιτλοι από το OpenSubtitles.com"
     },
     "skipIntro": "Παράλειψη εισαγωγής",
-    "introSkipped": "Η εισαγωγή παραλείφθηκε"
+    "introSkipped": "Η εισαγωγή παραλείφθηκε",
+    "skipCredits": "Παράλειψη τίτλων τέλους"
   },
   "library": {
     "nothingUnwatched": "Τίποτα που δεν έχεις δει εδώ",

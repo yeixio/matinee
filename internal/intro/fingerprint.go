@@ -46,8 +46,18 @@ const FrameMs = float64(hop) * 1000 / sampleRate
 // FFmpeg and fingerprints it. lowPriority, when set, is called with the
 // FFmpeg process id as soon as it starts.
 func Fingerprint(ctx context.Context, ffmpeg, file string, limit time.Duration, lowPriority func(pid int)) (Print, error) {
-	args := []string{"-nostdin", "-v", "error", "-i", file, "-map", "0:a:0", "-t", strconv.FormatFloat(limit.Seconds(), 'f', 3, 64),
-		"-vn", "-sn", "-dn", "-ac", "1", "-ar", strconv.Itoa(sampleRate), "-f", "s16le", "-acodec", "pcm_s16le", "-"}
+	return FingerprintFrom(ctx, ffmpeg, file, 0, limit, lowPriority)
+}
+
+// FingerprintFrom is Fingerprint of up to limit of audio from start on.
+// The print's first frame is at start.
+func FingerprintFrom(ctx context.Context, ffmpeg, file string, start, limit time.Duration, lowPriority func(pid int)) (Print, error) {
+	args := []string{"-nostdin", "-v", "error"}
+	if start > 0 {
+		args = append(args, "-ss", strconv.FormatFloat(start.Seconds(), 'f', 3, 64))
+	}
+	args = append(args, "-i", file, "-map", "0:a:0", "-t", strconv.FormatFloat(limit.Seconds(), 'f', 3, 64),
+		"-vn", "-sn", "-dn", "-ac", "1", "-ar", strconv.Itoa(sampleRate), "-f", "s16le", "-acodec", "pcm_s16le", "-")
 	cmd := exec.CommandContext(ctx, ffmpeg, args...)
 	var stderr bytes.Buffer
 	cmd.Stderr = &stderr

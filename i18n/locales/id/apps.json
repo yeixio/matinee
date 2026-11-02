@@ -359,7 +359,8 @@
       "source": "Subtitle dari OpenSubtitles.com"
     },
     "skipIntro": "Lewati intro",
-    "introSkipped": "Intro dilewati"
+    "introSkipped": "Intro dilewati",
+    "skipCredits": "Lewati kredit"
   },
   "library": {
     "nothingUnwatched": "Tidak ada yang belum ditonton di sini",

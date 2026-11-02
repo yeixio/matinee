@@ -364,7 +364,8 @@
       "source": "Untertitel von OpenSubtitles.com"
     },
     "skipIntro": "Intro überspringen",
-    "introSkipped": "Intro übersprungen"
+    "introSkipped": "Intro übersprungen",
+    "skipCredits": "Abspann überspringen"
   },
   "library": {
     "nothingUnwatched": "Hier ist nichts ungesehen",

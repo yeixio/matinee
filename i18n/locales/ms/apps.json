@@ -359,7 +359,8 @@
       "source": "Sari kata daripada OpenSubtitles.com"
     },
     "skipIntro": "Langkau intro",
-    "introSkipped": "Intro dilangkau"
+    "introSkipped": "Intro dilangkau",
+    "skipCredits": "Langkau kredit"
   },
   "library": {
     "nothingUnwatched": "Tiada yang belum ditonton di sini",

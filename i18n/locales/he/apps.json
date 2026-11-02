@@ -369,7 +369,8 @@
       "source": "כתוביות מ-OpenSubtitles.com"
     },
     "skipIntro": "דילוג על הפתיח",
-    "introSkipped": "דילגנו על הפתיח"
+    "introSkipped": "דילגנו על הפתיח",
+    "skipCredits": "דילוג על כתוביות הסיום"
   },
   "library": {
     "nothingUnwatched": "אין כאן שום דבר שלא נצפה",

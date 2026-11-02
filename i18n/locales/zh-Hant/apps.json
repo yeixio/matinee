@@ -359,7 +359,8 @@
       "source": "字幕來自 OpenSubtitles.com"
     },
     "skipIntro": "略過片頭",
-    "introSkipped": "已略過片頭"
+    "introSkipped": "已略過片頭",
+    "skipCredits": "跳過片尾"
   },
   "library": {
     "nothingUnwatched": "這裡沒有未看的內容",

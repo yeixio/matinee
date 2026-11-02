@@ -2,21 +2,26 @@
 // docs/autoplay.md): when an episode's credits start, or near its end, an
 // "Up next" card counts down and plays the next episode.
 
+import { runsToEnd, type Credits } from './credits'
+
 // How long the card counts down before the next episode starts.
 export const COUNTDOWN_SECONDS = 10
-// Without a credits chapter, the card shows this long before the end.
+// Without known credits, the card shows this long before the end.
 export const BEFORE_END_SECONDS = 30
 // After this many episodes in a row with nobody touching anything, ask
 // "Still watching?" instead of playing on.
 export const STILL_WATCHING_AFTER = 3
 
 // upNextAt says when, in seconds into the episode, the card shows: where
-// the credits start, else 30 seconds before the end. Very short videos
+// the credits start, else 30 seconds before the end. Credits with a scene
+// after them leave it for the end, so the scene plays. Very short videos
 // only get it at the end.
-export function upNextAt(durationSeconds: number, creditsMs?: number): number | undefined {
+export function upNextAt(durationSeconds: number, credits?: Credits): number | undefined {
   if (!durationSeconds) return undefined
-  const credits = creditsMs ? creditsMs / 1000 : 0
-  if (credits > 0 && credits < durationSeconds) return credits
+  const start = credits ? credits.startMs / 1000 : 0
+  if (credits && start > 0 && start < durationSeconds) {
+    return runsToEnd(credits, durationSeconds) ? start : durationSeconds
+  }
   if (durationSeconds < 4 * BEFORE_END_SECONDS) return durationSeconds
   return durationSeconds - BEFORE_END_SECONDS
 }

@@ -12,7 +12,7 @@ export function MediaAnalysis() {
   const { data: st } = useQuery({
     queryKey: ['analysis'],
     queryFn: api.analysis,
-    refetchInterval: (q) => (['analyzing', 'intros', 'thumbnails', 'waiting'].includes(q.state.data?.state ?? '') ? 3000 : 30_000),
+    refetchInterval: (q) => (['analyzing', 'intros', 'credits', 'thumbnails', 'waiting'].includes(q.state.data?.state ?? '') ? 3000 : 30_000),
   })
   const setMode = useMutation({
     mutationFn: api.setAnalysisMode,
@@ -20,6 +20,10 @@ export function MediaAnalysis() {
   })
   const setIntros = useMutation({
     mutationFn: api.setIntroDetection,
+    onSuccess: (s) => qc.setQueryData(['analysis'], s),
+  })
+  const setCredits = useMutation({
+    mutationFn: api.setCreditsDetection,
     onSuccess: (s) => qc.setQueryData(['analysis'], s),
   })
   const setThumbs = useMutation({
@@ -31,6 +35,7 @@ export function MediaAnalysis() {
   const state = {
     analyzing: st.current ? t('analysis.state.lookingAt', { file: st.current }) : t('analysis.state.working'),
     intros: t('analysis.state.intros', { season: st.current ?? '' }),
+    credits: t('analysis.state.credits', { title: st.current ?? '' }),
     thumbnails: t('analysis.state.thumbnails', { title: st.current ?? '' }),
     waiting: t('analysis.state.waiting'),
     slowDisk: t('analysis.state.slowDisk'),
@@ -100,6 +105,26 @@ export function MediaAnalysis() {
             checked={st.intros.on}
             disabled={setIntros.isPending}
             onChange={() => setIntros.mutate(!st.intros!.on)}
+          />
+        </label>
+      )}
+      {st.credits && (
+        <label className="flex cursor-pointer items-start gap-4 rounded-xl border border-line/60 bg-surface/50 p-5">
+          <span className="min-w-0 flex-1">
+            <span className="block font-medium">{t('analysis.credits.label')}</span>
+            <span className="mt-1 block text-sm text-muted">{t('analysis.credits.hint')}</span>
+            {st.credits.on && st.credits.total > 0 && (
+              <span className="mt-2 block text-xs text-muted tabular-nums">
+                {t('analysis.credits.progress', { done: st.credits.done, total: st.credits.total, found: st.credits.found })}
+              </span>
+            )}
+          </span>
+          <input
+            type="checkbox"
+            className="mt-1 size-5 accent-[var(--color-accent)]"
+            checked={st.credits.on}
+            disabled={setCredits.isPending}
+            onChange={() => setCredits.mutate(!st.credits!.on)}
           />
         </label>
       )}

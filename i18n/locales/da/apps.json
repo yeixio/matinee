@@ -364,7 +364,8 @@
       "source": "Undertekster fra OpenSubtitles.com"
     },
     "skipIntro": "Spring intro over",
-    "introSkipped": "Introen blev sprunget over"
+    "introSkipped": "Introen blev sprunget over",
+    "skipCredits": "Spring rulletekster over"
   },
   "library": {
     "nothingUnwatched": "Intet uset her",

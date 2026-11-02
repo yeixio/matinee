@@ -47,7 +47,8 @@
       "source": "Sottotitoli da OpenSubtitles.com"
     },
     "skipIntro": "Salta intro",
-    "introSkipped": "Intro saltata"
+    "introSkipped": "Intro saltata",
+    "skipCredits": "Salta i titoli di coda"
   },
   "somethingWentWrong": "Qualcosa è andato storto",
   "oneMoment": "Un momento…",
@@ -415,6 +416,7 @@
     "state": {
       "lookingAt": "Esame di {{file}}",
       "intros": "Ricerca delle intro in {{season}}",
+      "credits": "Ricerca dei titoli di coda in {{title}}",
       "thumbnails": "Creazione delle anteprime della barra per {{title}}",
       "working": "Al lavoro",
       "waiting": "In attesa della fine della riproduzione",
@@ -446,6 +448,11 @@
       "label": "Trova le intro delle serie",
       "hint": "Quando tutti i file sono analizzati, Matinee ascolta l’inizio degli episodi di ogni stagione per trovare l’intro che hanno in comune, così i lettori possono offrire Salta intro.",
       "progress": "{{done}} episodi su {{total}} controllati, {{found}} con un’intro"
+    },
+    "credits": {
+      "label": "Trova i titoli di coda",
+      "hint": "Quando tutti i file sono analizzati, Matinee trova dove iniziano i titoli di coda di episodi e film, così i lettori possono mostrare lì Prossimo o Salta i titoli di coda.",
+      "progress": "{{done}} di {{total}} episodi e film controllati, {{found}} con titoli di coda"
     },
     "thumbnails": {
       "label": "Anteprime nella barra di avanzamento",

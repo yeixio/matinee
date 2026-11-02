@@ -47,7 +47,8 @@
       "source": "Sous-titres d’OpenSubtitles.com"
     },
     "skipIntro": "Passer l’intro",
-    "introSkipped": "Intro passée"
+    "introSkipped": "Intro passée",
+    "skipCredits": "Passer le générique"
   },
   "somethingWentWrong": "Un problème est survenu",
   "oneMoment": "Un instant…",
@@ -415,6 +416,7 @@
     "state": {
       "lookingAt": "Examen de {{file}}",
       "intros": "Recherche des intros dans {{season}}",
+      "credits": "Recherche du générique de fin dans {{title}}",
       "thumbnails": "Création des aperçus de la barre pour {{title}}",
       "working": "En cours",
       "waiting": "En attente de la fin de la lecture",
@@ -446,6 +448,11 @@
       "label": "Trouver les intros des séries",
       "hint": "Une fois tous les fichiers analysés, Matinee écoute le début des épisodes de chaque saison pour trouver l’intro qu’ils partagent, afin que les lecteurs proposent Passer l’intro.",
       "progress": "{{done}} épisodes sur {{total}} vérifiés, {{found}} avec une intro"
+    },
+    "credits": {
+      "label": "Trouver les génériques de fin",
+      "hint": "Une fois tous les fichiers analysés, Matinee repère où commence le générique de fin des épisodes et des films, pour que les lecteurs proposent À suivre ou Passer le générique à ce moment-là.",
+      "progress": "{{done}} sur {{total}} épisodes et films vérifiés, {{found}} avec un générique de fin"
     },
     "thumbnails": {
       "label": "Aperçus dans la barre de lecture",

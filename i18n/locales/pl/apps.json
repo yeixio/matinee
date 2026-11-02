@@ -374,7 +374,8 @@
       "source": "Napisy z OpenSubtitles.com"
     },
     "skipIntro": "Pomiń czołówkę",
-    "introSkipped": "Pominięto czołówkę"
+    "introSkipped": "Pominięto czołówkę",
+    "skipCredits": "Pomiń napisy końcowe"
   },
   "library": {
     "nothingUnwatched": "Nie ma tu nic nieobejrzanego",

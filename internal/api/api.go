@@ -1176,6 +1176,10 @@ type itemView struct {
 	// Intro is where an episode's intro plays, from its chapters or found
 	// by matching the season's audio; absent when unknown.
 	Intro *introView `json:"intro,omitempty"`
+	// EndCredits is where an episode's or movie's closing credits are, from
+	// its chapters, the season's audio or the picture going dark; absent
+	// when unknown. (Credits is the cast and crew.)
+	EndCredits *endCreditsView `json:"endCredits,omitempty"`
 	// FilePath is where the file is on the server, for admins only.
 	FilePath string `json:"filePath,omitempty"`
 	FileSize int64  `json:"fileSize,omitempty"`
@@ -1199,6 +1203,15 @@ func (s *Server) getItem(w http.ResponseWriter, r *http.Request) {
 		v.MimeType = stream.MimeType(it.Path)
 		v.MediaInfo, v.MediaInfoStale = s.mediaInfo(r, it)
 		v.Intro = s.intro(r.Context(), it, v.MediaInfo)
+		v.EndCredits = s.endCredits(r.Context(), it, v.MediaInfo)
+		// Apps from before endCredits start Up next at mediaInfo.creditsMs.
+		// Credits with something after them leave it at the end, so that
+		// plays too.
+		if c := v.EndCredits; c != nil && c.EndMs == 0 && v.MediaInfo != nil && v.MediaInfo.CreditsMs == 0 {
+			mi := *v.MediaInfo
+			mi.CreditsMs = c.StartMs
+			v.MediaInfo = &mi
+		}
 		v.FileSize = it.Size
 		if currentUser(r).IsAdmin {
 			v.FilePath = it.Path
@@ -1328,11 +1341,15 @@ func (s *Server) setProgress(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// Past 92% counts as watched, the way credits usually start.
-	// So does reaching the closing credits, when a chapter says where they are.
+	// So does reaching the closing credits, when chapters or the credits
+	// detector say where they are.
 	if it.DurationMs != nil && *it.DurationMs > 0 && req.PositionMs > *it.DurationMs*92/100 {
 		req.Played, req.PositionMs = true, 0
-	} else if mi, _ := s.mediaInfo(r, it); mi != nil && mi.CreditsMs > 0 && req.PositionMs >= mi.CreditsMs {
-		req.Played, req.PositionMs = true, 0
+	} else if req.PositionMs > 0 {
+		mi, _ := s.mediaInfo(r, it)
+		if c := s.endCredits(r.Context(), it, mi); c != nil && req.PositionMs >= c.StartMs {
+			req.Played, req.PositionMs = true, 0
+		}
 	}
 	if err := s.Store.SetProgress(r.Context(), currentUser(r).ID, it.ID, req.PositionMs, req.Played); err != nil {
 		s.serverError(w, err)

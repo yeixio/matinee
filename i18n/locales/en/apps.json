@@ -364,7 +364,8 @@
       "source": "Subtitles from OpenSubtitles.com"
     },
     "skipIntro": "Skip intro",
-    "introSkipped": "Skipped the intro"
+    "introSkipped": "Skipped the intro",
+    "skipCredits": "Skip credits"
   },
   "library": {
     "nothingUnwatched": "Nothing unwatched here",

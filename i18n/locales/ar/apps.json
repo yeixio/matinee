@@ -384,7 +384,8 @@
       "source": "الترجمات من OpenSubtitles.com"
     },
     "skipIntro": "تخطي المقدمة",
-    "introSkipped": "تم تخطي المقدمة"
+    "introSkipped": "تم تخطي المقدمة",
+    "skipCredits": "تخطي شارة النهاية"
   },
   "library": {
     "nothingUnwatched": "لا شيء لم تشاهده هنا",

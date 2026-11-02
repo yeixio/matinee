@@ -359,7 +359,8 @@
       "source": "자막 제공: OpenSubtitles.com"
     },
     "skipIntro": "인트로 건너뛰기",
-    "introSkipped": "인트로를 건너뛰었어요"
+    "introSkipped": "인트로를 건너뛰었어요",
+    "skipCredits": "엔딩 크레딧 건너뛰기"
   },
   "library": {
     "nothingUnwatched": "여기에는 안 본 작품이 없습니다",
