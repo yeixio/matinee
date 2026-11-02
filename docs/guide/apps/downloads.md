@@ -44,7 +44,7 @@ Music and audiobooks always download as the original file.
 
 <!-- /since -->
 
-<!-- since: v0.1.13 -->
+<!-- since: v0.1.14 -->
 
 ## Podcasts
 

@@ -25,7 +25,7 @@ The link opens a page that says whose server it is and what you've shared. Your 
 
 ![The invite page a friend sees](../images/invite.webp)
 
-The page after that has the address to type into the [phone and TV apps](/docs/apps/phone-and-tv/) under **Add server**, and they sign in there with the same username and password.<!-- since: v0.1.13 --> Once their phone app is signed in, they can set up their TV without typing the address on the remote: the TV app shows a QR code they scan with that phone. See [Set up a new TV with your phone](/docs/apps/signing-in/#set-up-a-new-tv-with-your-phone).<!-- /since -->
+The page after that has the address to type into the [phone and TV apps](/docs/apps/phone-and-tv/) under **Add server**, and they sign in there with the same username and password.<!-- since: v0.1.14 --> Once their phone app is signed in, they can set up their TV without typing the address on the remote: the TV app shows a QR code they scan with that phone. See [Set up a new TV with your phone](/docs/apps/signing-in/#set-up-a-new-tv-with-your-phone).<!-- /since -->
 
 Friends need to reach your server from outside your home, so turn on [remote access](/docs/server/remote-access/) first, or use your own domain. Until the server can be reached from outside, the Friends settings say so, and links only work on your home network.
 

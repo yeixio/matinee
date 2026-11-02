@@ -104,7 +104,7 @@ The remote works the way it does in your TV's own player:
 While an episode's intro plays, **Skip intro** shows in the bottom corner, ready for the remote: press select to skip it, or carry on with any other button. See [Skipping intros](/docs/watching/skipping-intros/).
 <!-- /since -->
 
-<!-- since: v0.1.13 -->
+<!-- since: v0.1.14 -->
 **Skip credits** works the same way at the end of a movie: press select to finish it. See [Skipping credits](/docs/watching/skipping-credits/).
 <!-- /since -->
 
