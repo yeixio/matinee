@@ -19,7 +19,7 @@ An artist's page has their albums, newest first, and plays or shuffles every son
 
 ![An artist page with their albums](../images/artist.webp)
 
-<!-- since: v0.1.15 -->
+<!-- since: v0.1.16 -->
 ## Record labels
 
 When your albums name the record label they came out on, the **Labels** tab lists every label in the library, each with a few of its covers. A label's page has the artists on it and its albums, newest first. **Play** plays them album by album, and **Shuffle** mixes every song on the label. An album's page names its label under the title; click it to open the label's page.
@@ -33,7 +33,7 @@ From version 1.0.25 the phone and TV apps have the **Labels** tab and label page
 The label comes from the songs' tags: `LABEL` or `ORGANIZATION` in FLAC, Ogg and Opus files, and the publisher (`TPUB`) in MP3s. Taggers that look up your albums online, such as MusicBrainz Picard, and most music stores fill it in for you. The same label spelled differently, such as `ANJUNADEEP` and `Anjunadeep`, lands on one page. Albums already in your library get their label on the next scan, and the tab shows up once any album has one.
 <!-- /since -->
 
-<!-- since: v0.1.15 -->
+<!-- since: v0.1.16 -->
 ## Radio stations
 
 Internet radio stations live in your music library too, on the **Radio** tab. Click a station's logo to play it. It plays live, so there's a **Live** badge where the seek bar would be, and when the station says what song is on, its name shows under the station's. Pause and play again to pick up from what's on now.
