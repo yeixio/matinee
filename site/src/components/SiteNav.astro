@@ -1,0 +1,28 @@
+---
+// The top bar on the landing page and the Roadmap page. `current` marks the
+// tab for the page you're on.
+interface Props {
+  current?: 'roadmap'
+}
+const { current } = Astro.props
+const base = import.meta.env.BASE_URL
+const github = 'https://github.com/yeixio/matinee'
+const donate = 'https://yeix.io/matinee/donate'
+// On the landing page the section links stay on the page.
+const home = current ? base : ''
+---
+
+<header class="nav">
+  <a class="brand" href={base}>
+    <img src={`${base}favicon.svg`} alt="" width="30" height="30" />
+    Matinee
+  </a>
+  <nav>
+    <a href={`${base}docs/`}>Guide</a>
+    <a class="nav-apps" href={`${home}#apps`}>Apps</a>
+    <a class="nav-install" href={`${home}#install`}>Install</a>
+    <a href={`${base}roadmap/`} aria-current={current === 'roadmap' ? 'page' : undefined}>Roadmap</a>
+    <a class="github" href={github}>GitHub</a>
+    <a class="donate" href={donate}>Donate</a>
+  </nav>
+</header>

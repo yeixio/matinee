@@ -110,3 +110,31 @@
 - name: wontfix
   color: ffffff
   description: This will not be worked on
+
+# Priority: how much it matters to people using Matinee
+- name: priority/P1
+  color: b60205
+  description: Top priority, next in line
+- name: priority/P2
+  color: d93f0b
+  description: Important, planned for an upcoming release
+- name: priority/P3
+  color: fbca04
+  description: Wanted, not scheduled yet
+
+# Release targets: which section of the roadmap (matinee.yeix.io/roadmap/) an issue is in
+- name: target/v0.2
+  color: 0e8a16
+  description: 'Roadmap: v0.2, dependable at home'
+- name: target/v0.3
+  color: 2ea44f
+  description: 'Roadmap: v0.3, plays everything well'
+- name: target/v0.4
+  color: 7bc96f
+  description: 'Roadmap: v0.4, your library, your way'
+- name: target/stores
+  color: 5319e7
+  description: 'Roadmap: getting the apps into more stores'
+- name: target/later
+  color: c5def5
+  description: 'Roadmap: wanted, not scheduled yet'
