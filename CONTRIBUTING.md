@@ -6,6 +6,7 @@ Thanks for wanting to help. Matinee is young, so a small fix lands quickly and y
 
 - [**good first issue**](https://github.com/yeixio/matinee/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22): small and well-scoped, with acceptance criteria and a pointer to the file to start in.
 - [**help wanted**](https://github.com/yeixio/matinee/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22): open for anyone. Check the `difficulty/easy`, `difficulty/medium` and `difficulty/hard` labels.
+- The [roadmap](https://matinee.yeix.io/roadmap/) lists what's planned for each release. `priority/P1` to `priority/P3` say how much an issue matters, and `target/*` which release it's planned for (`target/later` means not scheduled yet).
 - `area/*` labels say which part of the code an issue touches: `area/scanning`, `area/metadata`, `area/streaming`, `area/server`, `area/web`, `area/music`, `area/plugins`, `area/deploy`, `area/ci`.
 - `needs design` means the issue wants a short written plan, agreed in the comments, before code. Writing that plan is a great contribution in itself.
 - `hardware` means it needs someone with a particular GPU, NAS or TV to build or test it.
@@ -97,6 +98,8 @@ Security problems go through [SECURITY.md](SECURITY.md), not a public issue. Cod
 ## Labels
 
 Labels are defined in `.github/labels.yml`. Maintainers sync them with `scripts/sync-github-labels.sh`, which needs the GitHub CLI and permission to manage labels.
+
+The roadmap page on the website is built from `site/src/roadmap.json`. After changing `target/*` or `priority/*` labels, run `pnpm roadmap` in `site/` (it needs the GitHub CLI, signed in with access to yeixio/matinee-apps too) and commit the result. Release names and summaries are written by hand in that file.
 
 ## Growing into a role
 
