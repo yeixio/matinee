@@ -1,10 +1,14 @@
 # Matinee
 
-Matinee is a fast, free and open source, self-hosted media server for your movies, TV and music. Point it at your folders and it does the rest: tidy libraries, artwork and details, and smooth playback on any screen. No ads, and no account on someone else's server.
+Matinee is a fast, free and open source, self-hosted media server for your movies, TV, music, audiobooks and podcasts. Point it at your folders and it does the rest: tidy libraries, artwork and details, and smooth playback on any screen. No ads, and no account on someone else's server.
+
+Coming from Plex? Matinee [brings your watch history over](https://matinee.yeix.io/docs/getting-started/switching/): watched marks, places to resume from, ratings, collections and the posters you uploaded, matched to the same files.
 
 **[matinee.yeix.io](https://matinee.yeix.io)** has the user guide, with screenshots of every feature.
 
-[![Donate to Matinee](https://img.shields.io/badge/Donate-Support_Matinee-ff6a55?style=for-the-badge&logo=stripe&logoColor=white)](https://yeix.io/matinee/donate)
+[![Latest release](https://img.shields.io/github/v/release/yeixio/matinee?sort=semver)](https://github.com/yeixio/matinee/releases/latest)
+[![License: AGPL-3.0](https://img.shields.io/github/license/yeixio/matinee)](LICENSE)
+[![Donate to Matinee](https://img.shields.io/badge/Donate-Support_Matinee-ff6a55?logo=stripe&logoColor=white)](https://yeix.io/matinee/donate)
 
 ![Home in the web player](docs/guide/images/home.webp)
 
@@ -23,12 +27,28 @@ Matinee is a fast, free and open source, self-hosted media server for your movie
 
 **Status:** early. The server and web player work end to end, and the [phone and TV apps](https://matinee.yeix.io/docs/apps/phone-and-tv/) are on the way to the App Store and Google Play.
 
+## Try it in one line
+
+```sh
+docker run -d --name matinee -p 7171:7171 -v ./data:/data -v /path/to/media:/media:ro ghcr.io/yeixio/matinee:latest
+```
+
+Open http://localhost:7171, create the admin account and add your folders. There's also a [Mac app](#mac-app), a [Windows installer](#windows), [apt and dnf packages](#debian-and-ubuntu), [Homebrew](#homebrew-macos-and-linux), a [Helm chart](#kubernetes), and [steps for Unraid, TrueNAS SCALE and ZimaOS](https://matinee.yeix.io/docs/getting-started/nas/).
+
+## Works with
+
+- **Your screens:** any modern browser, plus the [phone and TV apps](https://matinee.yeix.io/docs/apps/phone-and-tv/) for iPhone, iPad, Android, Apple TV, Android TV and Google TV, with [AirPlay and Chromecast](https://matinee.yeix.io/docs/apps/casting/), [CarPlay](https://matinee.yeix.io/docs/apps/carplay/), [Android Auto](https://matinee.yeix.io/docs/apps/android-auto/), [Siri and Google Assistant](https://matinee.yeix.io/docs/apps/voice/), [Apple Watch](https://matinee.yeix.io/docs/apps/apple-watch/) and [Wear OS](https://matinee.yeix.io/docs/apps/wear-os/) (the apps are on their way to the stores).
+- **Your other tools:** [Radarr and Sonarr](#radarr-and-sonarr), [Overseerr and Jellyseerr](#overseerr), [Home Assistant](https://matinee.yeix.io/docs/server/home-assistant/), and [Plex, to move your history over](https://matinee.yeix.io/docs/getting-started/switching/).
+- **Your hardware:** Linux, macOS and Windows on amd64 and arm64, Docker, Kubernetes, NAS boxes, and [GPU transcoding](#hardware-transcoding) on NVIDIA, AMD, Intel, Apple and Raspberry Pi (only AMD has been tried on real hardware so far).
+
 ## What it does
 
 - **Libraries** for movies, TV and music. Point it at folders; it names things from the file and folder names (`Movie (2021)`, `Show/Season 1/Show - S01E02.mkv`, `Artist/Album/01 Track.flac`), reads music tags, and picks up `poster.jpg`, `fanart.jpg` and `cover.jpg` next to your files.
 - **New files show up in seconds.** Matinee watches library folders and adds what you copy in, rename or delete a few seconds after the copy finishes, scanning just that file or folder. Folders on this machine's own disks announce changes as they happen; network shares (SMB, NFS) don't, so Matinee checks those every 30 seconds by looking at each folder's modification time, which is cheap even on a big library. A full rescan every 15 minutes catches the rest. Settings → New files shows how each library is watched.
 - **Plays anywhere.** Files the browser can play stream as-is, with instant seeking. Anything else is converted on the fly with FFmpeg to HLS. H.264 video is repackaged, not re-encoded, so it costs almost no CPU.
 - **Subtitles** from the file itself or from files next to it (`Movie.en.srt`, `Movie.en.forced.srt`, `.vtt`, `.ass`). Text subtitles are drawn by the player; Blu-ray and DVD picture subtitles are burned into the video while converting. The player remembers your language from one episode to the next.
+- **Skips intros and credits,** and offers the next episode as the credits start. Guides: [intros](https://matinee.yeix.io/docs/watching/skipping-intros/), [credits](https://matinee.yeix.io/docs/watching/skipping-credits/).
+- **Watch together:** friends and family on other devices follow one shared session, so everyone sees the same moment. [Guide](https://matinee.yeix.io/docs/watching/watch-together/).
 - **Picks up where you left off.** Resume points, watched marks, Continue Watching and Recently Added, per person.
 - **Collections.** Smart collections fill themselves from rules, using the same filters as the library pages ("unwatched 80s action", "kids movies under 90 minutes"), and follow each person's own watched state. Keep collections by hand too, find box sets like a trilogy filled in from TMDB, and pin any collection to Home or a library page as a row, sorted by any field or shuffled daily. New servers start with Recently added, Unwatched and Short enough for tonight.
 - **Music** with a player that keeps going while you browse.
