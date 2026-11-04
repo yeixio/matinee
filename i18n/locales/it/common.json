@@ -719,5 +719,10 @@
     "result": "{{mbps}} Mbps verso il server, {{ms}} ms di andata e ritorno",
     "testFailed": "Impossibile provare la connessione",
     "testHint": "Quanto velocemente questo dispositivo riceve video dal tuo server e quanto dura l'andata e ritorno."
+  },
+  "versions": {
+    "title": "Versione",
+    "choose": "Scegli una versione",
+    "numbered": "Versione {{n}}"
   }
 }

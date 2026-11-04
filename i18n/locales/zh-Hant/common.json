@@ -655,5 +655,10 @@
     "result": "到伺服器 {{mbps}} Mbps,往返 {{ms}} 毫秒",
     "testFailed": "無法測試連線",
     "testHint": "此裝置從你的伺服器取得影片的速度,以及往返所需的時間。"
+  },
+  "versions": {
+    "title": "版本",
+    "choose": "選擇版本",
+    "numbered": "版本 {{n}}"
   }
 }

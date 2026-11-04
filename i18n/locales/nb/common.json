@@ -687,5 +687,10 @@
     "result": "{{mbps}} Mbps til serveren, {{ms}} ms tur-retur",
     "testFailed": "Kunne ikke teste tilkoblingen",
     "testHint": "Hvor raskt enheten får video fra serveren din, og hvor lang tid en tur-retur tar."
+  },
+  "versions": {
+    "title": "Versjon",
+    "choose": "Velg en versjon",
+    "numbered": "Versjon {{n}}"
   }
 }

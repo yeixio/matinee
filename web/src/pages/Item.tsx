@@ -15,6 +15,7 @@ import { StarRating } from '../components/StarRating'
 import { TrailerButton } from '../components/Trailer'
 import { Button, Spinner } from '../components/ui'
 import { WatchListButton } from '../components/WatchListButton'
+import { useVersion, VersionPicker } from '../components/Versions'
 import { clock, duration, progressFraction, ratingLabel, seasonTitle } from '../format'
 import { genreName } from '../people'
 import { AlbumPage, ArtistPage } from './MusicItem'
@@ -88,6 +89,8 @@ function Header({ item, kids }: { item: ItemDetail; kids?: Item[] }) {
   const { t } = useTranslation()
   const { data: me } = useQuery<User>({ queryKey: ['me'], queryFn: api.me, staleTime: Infinity })
   const resume = !!item.positionMs && !item.played
+  // A title with several files plays the one picked, or the one that suits this screen.
+  const [version, pickVersion] = useVersion(item)
   // ?fix=match opens the match picker, as from a "wrong title" problem report.
   const [params, setParams] = useSearchParams()
   const fixing = params.get('fix') === 'match'
@@ -167,7 +170,7 @@ function Header({ item, kids }: { item: ItemDetail; kids?: Item[] }) {
 
           <div className="flex flex-wrap gap-3">
             {item.playable && (
-              <Link to={`/watch/${item.id}`}>
+              <Link to={version ? `/watch/${version.id}?v=1` : `/watch/${item.id}`}>
                 <Button variant="primary" icon={<Play className="size-4 fill-current" />}>
                   {resume ? t('item.resumeFrom', { time: clock(item.positionMs! / 1000) }) : t('item.play')}
                 </Button>
@@ -187,6 +190,7 @@ function Header({ item, kids }: { item: ItemDetail; kids?: Item[] }) {
                 </Button>
               </Link>
             )}
+            <VersionPicker item={item} value={version} onChange={pickVersion} />
             <TrailerButton item={item} />
             <WatchListButton item={item} />
             <MarkWatchedButton item={item} />

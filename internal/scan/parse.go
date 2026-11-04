@@ -62,6 +62,7 @@ func ParseMovie(path string) MovieInfo {
 }
 
 func parseMovieName(name string) MovieInfo {
+	name, _ = splitEdition(name)
 	cut := len(name)
 	if loc := junkRe.FindStringIndex(name); loc != nil {
 		cut = loc[0]

@@ -687,5 +687,10 @@
     "result": "{{mbps}} Mbit/s palvelimelle, {{ms}} ms edestakaisin",
     "testFailed": "Yhteyttä ei voitu testata",
     "testHint": "Kuinka nopeasti tämä laite saa videota palvelimeltasi ja kauanko edestakainen matka kestää."
+  },
+  "versions": {
+    "title": "Versio",
+    "choose": "Valitse versio",
+    "numbered": "Versio {{n}}"
   }
 }

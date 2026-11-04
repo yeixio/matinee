@@ -90,3 +90,30 @@ func TestTrackFromTagsCompilation(t *testing.T) {
 		t.Errorf("no tags: %+v", got)
 	}
 }
+
+func TestEdition(t *testing.T) {
+	cases := []struct {
+		path, title, edition string
+		year                 int
+	}{
+		{"/m/Blade Runner (1982)/Blade Runner (1982) {edition-The Final Cut}.mkv", "Blade Runner", "The Final Cut", 1982},
+		{"/m/Heat (1995)/Heat (1995) - Director's Cut.mkv", "Heat", "Director's Cut", 1995},
+		{"/m/Aliens (1986) [Special Edition].mkv", "Aliens", "Special Edition", 1986},
+		{"/m/Apocalypse.Now.1979.Redux.1080p.BluRay.mkv", "Apocalypse Now", "Redux", 1979},
+		{"/m/The.Lord.of.the.Rings.2001.EXTENDED.2160p.mkv", "The Lord of the Rings", "Extended Edition", 2001},
+		{"/m/Amadeus - Director's Cut.mkv", "Amadeus", "Director's Cut", 0},
+		{"/m/Uncut Gems (2019).mkv", "Uncut Gems", "", 2019},
+		{"/m/Spider-Man (2002).mkv", "Spider-Man", "", 2002},
+		{"/m/Heat (1995) {tmdb-949}.mkv", "Heat", "", 1995},
+		{"/m/Dune (2021) {edition-IMAX}/movie.mkv", "Dune", "IMAX", 2021},
+	}
+	for _, c := range cases {
+		got := ParseMovie(c.path)
+		if got.Title != c.title || got.Year != c.year {
+			t.Errorf("ParseMovie(%q) = %q (%d), want %q (%d)", c.path, got.Title, got.Year, c.title, c.year)
+		}
+		if e := Edition(c.path); e != c.edition {
+			t.Errorf("Edition(%q) = %q, want %q", c.path, e, c.edition)
+		}
+	}
+}

@@ -56,7 +56,11 @@ type Fetcher struct {
 	Plugins func() []Provider
 	// Awards looks up titles' awards, if set.
 	Awards AwardSource
-	Log    *slog.Logger
+	// Edition reads a video file's edition from its path, for grouping
+	// files matched to the same movie as versions of it (see
+	// store.GroupVersions); nil leaves versions to the scan.
+	Edition func(path string) string
+	Log     *slog.Logger
 
 	translating      sync.Mutex  // one TranslateAll at a time
 	translatePending atomic.Bool // TranslateAll was asked to run (again)
@@ -131,6 +135,12 @@ func (f *Fetcher) FetchLibrary(ctx context.Context, lib store.Library) {
 		}
 		if err := f.Store.ApplyMetadata(ctx, it.ID, m); err != nil {
 			f.Log.Error("save metadata", "err", err)
+		}
+	}
+	if matched > 0 && f.Edition != nil {
+		// Files matched to the same movie are versions of one title.
+		if _, err := f.Store.GroupVersions(ctx, lib.ID, f.Edition); err != nil {
+			f.Log.Error("group versions", "err", err)
 		}
 	}
 	if len(items) > 0 {

@@ -333,6 +333,11 @@ func (s *Scanner) run(ctx context.Context, lib store.Library, paths []string) (S
 			return st, err
 		}
 	}
+	if lib.Kind != "music" && (!partial || st.Added+st.Updated+st.Removed > 0) {
+		if _, err := s.Store.GroupVersions(ctx, lib.ID, Edition); err != nil {
+			return st, err
+		}
+	}
 	if lib.Kind == "music" && (!partial || st.Added+st.Updated+st.Removed > 0) {
 		if err := s.readAlbumTags(ctx, lib); err != nil {
 			return st, err

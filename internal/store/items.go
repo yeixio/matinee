@@ -57,6 +57,14 @@ type Item struct {
 	Album    string `json:"album,omitempty"`
 	// RecordLabel is the label an album, or a song's album, came out on.
 	RecordLabel string `json:"recordLabel,omitempty"`
+	// VersionOf is the item a file is another version of: the same movie
+	// or episode in another file, such as a 4K copy or an extended cut.
+	// Lists show only that item, and watched marks, places to resume from,
+	// ratings and watch lists are kept on it for every version. See
+	// GroupVersions.
+	VersionOf *int64 `json:"versionOf,omitempty"`
+	// Edition is the cut a version's file name names, such as "Director's Cut".
+	Edition string `json:"edition,omitempty"`
 	// For books and their parts: who wrote it, and for a part the book's
 	// title (the book's id is ParentID). Books also name their narrators
 	// and their place in a series, such as 2 or 2.5.
@@ -127,12 +135,12 @@ const itemCols = `
 	i.id, i.library_id, i.parent_id, i.kind, i.title, i.year, i.index_number, i.disc_number,
 	i.duration_ms, COALESCE(i.container, ''), COALESCE(i.video_codec, ''), COALESCE(i.audio_codec, ''),
 	i.width, i.height, i.added_at, COALESCE(i.path, ''), COALESCE(i.size, 0), COALESCE(i.mtime, 0),
-	(SELECT COUNT(*) FROM items c WHERE c.parent_id = i.id),
+	(SELECT COUNT(*) FROM items c WHERE c.parent_id = i.id AND c.version_of IS NULL),
 	COALESCE(p.position_ms, 0), COALESCE(p.played, 0),
 	COALESCE(i.overview, ''), i.rating, COALESCE(i.poster, ''), COALESCE(i.backdrop, ''), i.tmdb_id, COALESCE(i.meta_at, 0),
 	CASE WHEN i.kind = 'episode' THEN (SELECT COALESCE(sh.title, '') FROM items se JOIN items sh ON sh.id = se.parent_id WHERE se.id = i.parent_id) ELSE '' END,
 	CASE WHEN i.kind = 'episode' THEN (SELECT se.index_number FROM items se WHERE se.id = i.parent_id) END,
-	EXISTS (SELECT 1 FROM watchlist wl WHERE wl.user_id = me.id AND wl.item_id = i.id),
+	EXISTS (SELECT 1 FROM watchlist wl WHERE wl.user_id = me.id AND wl.item_id = COALESCE(i.version_of, i.id)),
 	COALESCE(i.media_tags, ''),
 	COALESCE(i.genres, ''),
 	CASE WHEN i.kind = 'episode' THEN (SELECT se.parent_id FROM items se WHERE se.id = i.parent_id) END,
@@ -149,15 +157,16 @@ const itemCols = `
 	CASE WHEN i.kind IN ('track', 'part', 'podcastEpisode') THEN (SELECT al.title FROM items al WHERE al.id = i.parent_id) END,
 	COALESCE(i.narrators, ''), COALESCE(i.series, ''), i.series_index,
 	CASE WHEN i.kind = 'podcastEpisode' THEN COALESCE(i.released, '') ELSE '' END,
-	(SELECT r.rating FROM ratings r WHERE r.user_id = me.id AND r.item_id = i.id),
+	(SELECT r.rating FROM ratings r WHERE r.user_id = me.id AND r.item_id = COALESCE(i.version_of, i.id)),
 	CASE WHEN i.kind = 'album' THEN COALESCE(i.gapless, i.gapless_found, 0)
 		WHEN i.kind = 'track' THEN (SELECT COALESCE(al.gapless, al.gapless_found, 0) FROM items al WHERE al.id = i.parent_id) ELSE 0 END,
 	CASE WHEN i.kind = 'album' THEN i.gapless END,
 	CASE WHEN i.kind = 'album' THEN COALESCE(i.gapless_found, 0) ELSE 0 END,
 	CASE WHEN i.kind = 'album' THEN COALESCE(i.label, '')
-		WHEN i.kind = 'track' THEN (SELECT COALESCE(al.label, '') FROM items al WHERE al.id = i.parent_id) ELSE '' END`
+		WHEN i.kind = 'track' THEN (SELECT COALESCE(al.label, '') FROM items al WHERE al.id = i.parent_id) ELSE '' END,
+	i.version_of, COALESCE(i.edition, '')`
 
-const itemFrom = ` FROM (SELECT CAST(? AS BIGINT) AS id) me CROSS JOIN items i LEFT JOIN progress p ON p.item_id = i.id AND p.user_id = me.id`
+const itemFrom = ` FROM (SELECT CAST(? AS BIGINT) AS id) me CROSS JOIN items i LEFT JOIN progress p ON p.item_id = COALESCE(i.version_of, i.id) AND p.user_id = me.id`
 
 type scanner interface{ Scan(...any) error }
 
@@ -177,13 +186,14 @@ func scanItem(r scanner) (Item, error) {
 	var seriesIdx sql.NullFloat64
 	var mine sql.NullInt64
 	var gaplessChoice sql.NullInt64
+	var versionOf sql.NullInt64
 	err := r.Scan(&it.ID, &it.LibraryID, &parent, &it.Kind, &it.Title, &year, &idx, &disc,
 		&dur, &it.Container, &it.VideoCodec, &it.AudioCodec, &w, &h, &it.AddedAt, &it.Path, &it.Size, &it.Mtime,
 		&it.ChildCount, &it.PositionMs, &it.Played,
 		&it.Overview, &rating, &it.Poster, &it.Backdrop, &tmdb, &it.MetaAt,
 		&showTitle, &seasonIdx, &it.OnWatchList, &tags, &genres, &showID, &facts, &data,
 		&artist, &artistID, &album, &narrators, &it.Series, &seriesIdx, &it.Released, &mine,
-		&it.Gapless, &gaplessChoice, &it.GaplessFound, &it.RecordLabel)
+		&it.Gapless, &gaplessChoice, &it.GaplessFound, &it.RecordLabel, &versionOf, &it.Edition)
 	if err != nil {
 		return it, err
 	}
@@ -205,6 +215,9 @@ func scanItem(r scanner) (Item, error) {
 	}
 	if tmdb.Valid {
 		it.TMDBID = &tmdb.Int64
+	}
+	if versionOf.Valid {
+		it.VersionOf = &versionOf.Int64
 	}
 	it.ShowTitle, it.SeasonIndex, it.showID = showTitle.String, intPtr(seasonIdx), showID.Int64
 	switch it.Kind {
@@ -249,7 +262,7 @@ func intPtr(n sql.NullInt64) *int {
 }
 
 func (s *Store) queryItems(ctx context.Context, where, order string, args ...any) ([]Item, error) {
-	rows, err := s.db.QueryContext(ctx, "SELECT "+itemCols+itemFrom+" WHERE ("+where+")"+visibleToMe+" ORDER BY "+order, args...)
+	rows, err := s.db.QueryContext(ctx, "SELECT "+itemCols+itemFrom+" WHERE ("+where+") AND i.version_of IS NULL"+visibleToMe+" ORDER BY "+order, args...)
 	if err != nil {
 		return nil, err
 	}
@@ -389,7 +402,11 @@ func (s *Store) ContinueWatching(ctx context.Context, userID int64, limit int) (
 // row. Its place is kept, so its page still offers to resume, and playing it
 // again brings it back.
 func (s *Store) HideFromContinueWatching(ctx context.Context, userID, itemID int64) error {
-	_, err := s.db.ExecContext(ctx, "UPDATE progress SET hidden = 1, updated_at = ? WHERE user_id = ? AND item_id = ?",
+	itemID, err := s.primaryID(ctx, itemID)
+	if err != nil {
+		return err
+	}
+	_, err = s.db.ExecContext(ctx, "UPDATE progress SET hidden = 1, updated_at = ? WHERE user_id = ? AND item_id = ?",
 		now(), userID, itemID)
 	return err
 }
@@ -397,7 +414,11 @@ func (s *Store) HideFromContinueWatching(ctx context.Context, userID, itemID int
 // SetProgress saves where the user is in an item. Any progress brings an
 // item back to Continue Watching.
 func (s *Store) SetProgress(ctx context.Context, userID, itemID, positionMs int64, played bool) error {
-	_, err := s.db.ExecContext(ctx, `
+	itemID, err := s.primaryID(ctx, itemID)
+	if err != nil {
+		return err
+	}
+	_, err = s.db.ExecContext(ctx, `
 		INSERT INTO progress (user_id, item_id, position_ms, played, updated_at) VALUES (?, ?, ?, ?, ?)
 		ON CONFLICT (user_id, item_id) DO UPDATE SET
 			position_ms = excluded.position_ms, played = excluded.played, updated_at = excluded.updated_at, hidden = 0`,

@@ -31,6 +31,10 @@ func (s *Store) MergeRating(ctx context.Context, userID, itemID int64, rating in
 	if rating < 1 || rating > 10 {
 		return false, ErrBadRating
 	}
+	itemID, err := s.primaryID(ctx, itemID)
+	if err != nil {
+		return false, err
+	}
 	res, err := s.db.ExecContext(ctx, `
 		INSERT INTO ratings (user_id, item_id, rating, rated_at) VALUES (?, ?, ?, ?)
 		ON CONFLICT (user_id, item_id) DO UPDATE SET rating = excluded.rating, rated_at = excluded.rated_at
@@ -45,6 +49,10 @@ func (s *Store) MergeRating(ctx context.Context, userID, itemID int64, rating in
 
 // ClearRating forgets someone's rating of an item.
 func (s *Store) ClearRating(ctx context.Context, userID, itemID int64) error {
-	_, err := s.db.ExecContext(ctx, "DELETE FROM ratings WHERE user_id = ? AND item_id = ?", userID, itemID)
+	itemID, err := s.primaryID(ctx, itemID)
+	if err != nil {
+		return err
+	}
+	_, err = s.db.ExecContext(ctx, "DELETE FROM ratings WHERE user_id = ? AND item_id = ?", userID, itemID)
 	return err
 }

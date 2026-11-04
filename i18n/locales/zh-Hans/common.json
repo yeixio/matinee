@@ -655,5 +655,10 @@
     "result": "到服务器 {{mbps}} Mbps,往返 {{ms}} 毫秒",
     "testFailed": "无法测试连接",
     "testHint": "此设备从你的服务器获取视频的速度,以及往返所需的时间。"
+  },
+  "versions": {
+    "title": "版本",
+    "choose": "选择版本",
+    "numbered": "版本 {{n}}"
   }
 }

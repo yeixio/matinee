@@ -24,6 +24,26 @@ Movies/
 
 The year matters: it tells two films with the same title apart.
 
+<!-- since: v0.3.0 -->
+### Several versions of a movie
+
+Keep as many copies of a movie as you like in its folder, such as a 4K copy for the TV and a 1080p one for phones, or the theatrical cut next to the extended one. Matinee shows them as one movie with a version for each file. Name the cut in the file name, after the year, and Matinee shows it on the version:
+
+```
+Movies/
+└── Harbor Lights (2019)/
+    ├── Harbor Lights (2019) 2160p.mkv
+    ├── Harbor Lights (2019) 1080p.mp4
+    └── Harbor Lights (2019) {edition-Director's Cut}.mkv
+```
+
+`{edition-…}` takes any name. Matinee also knows the usual ones written plainly, such as `Harbor Lights (2019) - Extended Edition.mkv`, `Harbor Lights (2019) [Theatrical].mkv` or `Harbor.Lights.2019.Directors.Cut.1080p.mkv`.
+
+Two copies of an episode in its season folder, such as `Crumb Street - S01E01 720p.mkv` and `Crumb Street - S01E01 1080p.mkv`, are versions of that episode in the same way.
+
+Watched marks, places to resume from, ratings, watch lists and collections belong to the movie or episode, whichever version you play. Deleting one copy keeps all of that with the copies left, and copies matched to the same movie online count as one even when their names differ. When a fixed match tells two files apart, they become two movies again. See [Versions](/docs/watching/title-pages/#versions) for picking one.
+<!-- /since -->
+
 ## TV shows
 
 One folder per show, a `Season N` folder per season, and the season and episode number in each file name:

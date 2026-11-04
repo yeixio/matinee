@@ -5260,6 +5260,8 @@ components:
         artistId: { type: integer, description: "Albums and tracks: the artist's id." }
         album: { type: string, description: "Tracks: the album's title (its id is parentId)." }
         recordLabel: { type: string, description: "Albums and tracks: the record label the album came out on, from its tags." }
+        versionOf: { type: integer, description: "Movies and episodes: the title this file is another version of. Lists show only the title; progress, watched marks, ratings and watch lists are the title's." }
+        edition: { type: string, description: "Movies and episodes: the cut the file name names, such as Director's Cut." }
         author: { type: string, description: "Books and their parts: the author's name. Podcasts and their episodes: who makes the show." }
         authorId: { type: integer, description: "Books and their parts: the author's id." }
         book: { type: string, description: "Book parts: the book's title (its id is parentId)." }
@@ -5333,6 +5335,26 @@ components:
           properties:
             mimeType: { type: string }
             subtitles: { type: array, items: { $ref: "#/components/schemas/SubtitleTrack" } }
+            versions:
+              type: array
+              description: >
+                Movies and episodes with several files: each version, the title's own first. Play a version by its id.
+                Left out when there's only one.
+              items:
+                type: object
+                required: [id]
+                properties:
+                  id: { type: integer }
+                  edition: { type: string }
+                  width: { type: integer }
+                  height: { type: integer }
+                  videoCodec: { type: string }
+                  audioCodec: { type: string }
+                  container: { type: string }
+                  mimeType: { type: string }
+                  mediaTags: { type: array, items: { type: string } }
+                  durationMs: { type: integer }
+                  size: { type: integer, description: Bytes. }
             subtitleSearch: { type: boolean, description: "The person can look for more subtitles online (GET /items/{id}/subtitles/search)." }
             parents: { type: array, items: { $ref: "#/components/schemas/Item" }, description: Root first, such as show then season. }
             mediaInfo: { $ref: "#/components/schemas/MediaInfo" }
