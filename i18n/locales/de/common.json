@@ -792,5 +792,10 @@
     "failed": "Diese Untertitel ließen sich nicht synchronisieren",
     "off": "Wie in der Datei",
     "done": "Untertitel mit dem Ton synchronisiert"
+  },
+  "subtitleMenu": {
+    "on": "Ein",
+    "more": "Weitere Untertitel",
+    "back": "Zurück"
   }
 }

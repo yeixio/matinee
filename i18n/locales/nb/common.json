@@ -792,5 +792,10 @@
     "failed": "Kunne ikke synkronisere disse undertekstene",
     "off": "Slik de står i filen",
     "done": "Undertekstene er synkronisert med lyden"
+  },
+  "subtitleMenu": {
+    "on": "På",
+    "more": "Flere undertekster",
+    "back": "Tilbake"
   }
 }

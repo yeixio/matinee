@@ -13,7 +13,7 @@ An admin turns this on once with a free key; see [Setting up subtitle search](#s
 ## Finding subtitles in the player
 
 1. Open the subtitles menu in the player.
-2. Pick **Find subtitles…** at the bottom of the list.
+2. Pick **More subtitles**, then **Find subtitles…** at the bottom of the list.
 3. Matinee looks right away, in the language you last watched subtitles in (or the language Matinee is in). Pick another language at the top to look in that one.
 4. Pick a result. Matinee fetches it, adds it to the video and turns it on.
 
@@ -33,11 +33,11 @@ Kids profiles don't see **Find subtitles…**.
 
 ### On phones and TVs
 
-In the [phone and TV apps](/docs/apps/phone-and-tv/#watching-on-a-tv), **Find subtitles…** is at the bottom of the subtitles list too. On a TV, press down on the remote while something plays, go to **Subtitles** and pick **Find subtitles…**. The first line says which language Matinee is looking in; select it to pick another. Select a result to add it and turn it on.
+In the [phone and TV apps](/docs/apps/phone-and-tv/#watching-on-a-tv), **Find subtitles…** is at the bottom of **More subtitles** too. On a TV, press down on the remote while something plays, go to **Subtitles**, then **More subtitles**, and pick **Find subtitles…**. The first line says which language Matinee is looking in; select it to pick another. Select a result to add it and turn it on.
 
 ### Removing subtitles you added
 
-If subtitles turn out to be wrong, remove them: in the browser, open the subtitles menu and click the **×** next to them. Admins can remove any subtitles found online; everyone else can remove the ones they added. Subtitles inside the file or next to it can't be removed this way.
+If subtitles turn out to be wrong, remove them: in the browser, open the subtitles menu, then **More subtitles**, and click the **×** next to them. Admins can remove any subtitles found online; everyone else can remove the ones they added. Subtitles inside the file or next to it can't be removed this way.
 
 ## Setting up subtitle search
 

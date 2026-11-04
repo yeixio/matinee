@@ -760,5 +760,10 @@
     "failed": "Subtitel ini tidak bisa diselaraskan",
     "off": "Sesuai file",
     "done": "Subtitel diselaraskan dengan audio"
+  },
+  "subtitleMenu": {
+    "on": "Aktif",
+    "more": "Subtitle lainnya",
+    "back": "Kembali"
   }
 }

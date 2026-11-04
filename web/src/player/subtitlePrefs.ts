@@ -80,6 +80,29 @@ export function pickSubtitles(
 }
 
 /**
+ * autoSubtitles is the track On chooses: a full track in the person's first
+ * language that has one, else the file's own pick, else forced lines.
+ */
+export function autoSubtitles(
+  tracks: SubtitleTrack[],
+  p: SubtitlePrefs,
+  o: { appLanguage: string; audioLanguage?: string },
+): SubtitleTrack | undefined {
+  const full = tracks.filter((t) => !t.forced)
+  return (
+    fullTrack(tracks, wantedLanguages(p, o.appLanguage)) ??
+    full.find((t) => t.default) ??
+    [...full].sort(better)[0] ??
+    forcedTrack(tracks, o.audioLanguage)
+  )
+}
+
+/** afterAuto is what turning subtitles On says about next time: on, in the same languages. */
+export function afterAuto(p: SubtitlePrefs): SubtitlePrefs {
+  return { ...p, mode: p.mode === 'foreign' ? 'foreign' : 'always' }
+}
+
+/**
  * afterPick is what a pick in the player says about what the person wants
  * next time: Off turns subtitles off, a full track turns them on in its
  * language first, and a forced track goes back to forced lines only.

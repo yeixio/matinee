@@ -792,5 +792,10 @@
     "failed": "Bu altyazılar eşitlenemedi",
     "off": "Dosyadaki gibi",
     "done": "Altyazılar sesle eşitlendi"
+  },
+  "subtitleMenu": {
+    "on": "Açık",
+    "more": "Diğer altyazılar",
+    "back": "Geri"
   }
 }

@@ -824,5 +824,10 @@
     "failed": "Não foi possível sincronizar estas legendas",
     "off": "Como no arquivo",
     "done": "Legendas sincronizadas com o áudio"
+  },
+  "subtitleMenu": {
+    "on": "Ativadas",
+    "more": "Mais legendas",
+    "back": "Voltar"
   }
 }

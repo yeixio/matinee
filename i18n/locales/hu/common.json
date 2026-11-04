@@ -792,5 +792,10 @@
     "failed": "Ezt a feliratot nem sikerült szinkronizálni",
     "off": "Ahogy a fájlban van",
     "done": "A felirat szinkronban a hanggal"
+  },
+  "subtitleMenu": {
+    "on": "Be",
+    "more": "További feliratok",
+    "back": "Vissza"
   }
 }

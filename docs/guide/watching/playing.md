@@ -28,9 +28,11 @@ Hover over the bar, or drag it, to see a picture of that moment above it before 
 
 ## Subtitles
 
-The subtitles button lists every subtitle track: the ones inside the file and the [files next to it](/docs/getting-started/organizing-media/#subtitles). Pick one, or **Off**.
+<!-- since: v0.3.0 -->
+The subtitles button opens with **Off** and **On**. **On** picks the best track for you and shows which one: a full track in the first of [your languages](#when-subtitles-come-on) that the file has, plain over SDH, and text over pictures. **More subtitles** lists every track, the ones inside the file and the [files next to it](/docs/getting-started/organizing-media/#subtitles), for when you want a particular one.
+<!-- /since -->
 
-![The subtitles menu: Off and English](../images/player-subtitles.webp)
+![The subtitles menu: Off, On with English, and More subtitles](../images/player-subtitles.webp)
 
 Matinee remembers the language you pick and uses it again for the next episode and the next film. Text subtitles (SRT, WebVTT, ASS) are drawn by the player, so they stay sharp at any size. Picture subtitles from Blu-rays and DVDs can't be drawn that way, so Matinee burns them into the picture while it converts the video.
 
@@ -39,7 +41,7 @@ In the [phone and TV apps](/docs/apps/phone-and-tv/#watching-on-a-tv), subtitles
 <!-- /since -->
 
 <!-- since: v0.1.10 -->
-No subtitles in your language? Once an admin sets up subtitle search, **Find subtitles…** at the bottom of the menu looks for them online. See [Finding subtitles](/docs/watching/finding-subtitles/).
+No subtitles in your language? Once an admin sets up subtitle search, **Find subtitles…** under **More subtitles** looks for them online. See [Finding subtitles](/docs/watching/finding-subtitles/).
 <!-- /since -->
 
 <!-- since: v0.3.0 -->
@@ -47,7 +49,7 @@ No subtitles in your language? Once an admin sets up subtitle search, **Find sub
 
 Anime and fan-subtitled releases often come with ASS or SSA subtitles: signs placed over the picture, colors, karaoke, and fonts carried inside the MKV. The web player draws these the way they were made, with the file's own fonts, while the video still plays as it is. Your size and color choices below don't change them, since their look is part of the release. A browser that can't draw them shows the words as plain subtitles instead.
 
-In the [phone and TV apps](/docs/apps/phone-and-tv/), the subtitles menu lists a styled copy of these tracks, marked **Converts video**: the server draws the styling into the picture as it streams.
+In the [phone and TV apps](/docs/apps/phone-and-tv/), **More subtitles** lists a styled copy of these tracks, marked **Converts video**: the server draws the styling into the picture as it streams.
 <!-- /since -->
 
 <!-- since: v0.3.0 -->

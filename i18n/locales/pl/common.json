@@ -856,5 +856,10 @@
     "failed": "Nie udało się zsynchronizować tych napisów",
     "off": "Tak jak w pliku",
     "done": "Napisy zsynchronizowane z dźwiękiem"
+  },
+  "subtitleMenu": {
+    "on": "Włączone",
+    "more": "Więcej napisów",
+    "back": "Wstecz"
   }
 }

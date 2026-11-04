@@ -760,5 +760,10 @@
     "failed": "Không thể đồng bộ phụ đề này",
     "off": "Như trong tệp",
     "done": "Đã đồng bộ phụ đề với âm thanh"
+  },
+  "subtitleMenu": {
+    "on": "Bật",
+    "more": "Phụ đề khác",
+    "back": "Quay lại"
   }
 }

@@ -12,7 +12,7 @@ import { canDirectPlay } from '../player/direct'
 import { currentPlays, playsQuery, repackages } from '../player/plays'
 import { savedPreference, savePreference, SubtitleMenu, SubtitleOverlay, syncStatus } from '../player/Subtitles'
 import { useStyledSubtitles } from '../player/StyledSubtitles'
-import { afterPick, audioLanguageOf, fromOldChoice, pickSubtitles, saveSubtitleTiming, subtitleTiming, type SubtitlePrefs } from '../player/subtitlePrefs'
+import { afterAuto, afterPick, audioLanguageOf, autoSubtitles, fromOldChoice, pickSubtitles, saveSubtitleTiming, subtitleTiming, type SubtitlePrefs } from '../player/subtitlePrefs'
 import { UpNextCard, type UpNextMode } from '../player/UpNext'
 import { COUNTDOWN_SECONDS, stillWatching, upNextAt } from '../player/autoplay'
 import { creditsEnd, creditsOf, inCredits } from '../player/credits'
@@ -548,6 +548,14 @@ function Player({ id }: { id: number }) {
     api.setPlayback({ subtitles: next }).catch(() => {})
   }
 
+  // Turning subtitles On keeps the person's languages as they are.
+  const autoSub = item ? autoSubtitles(item.subtitles ?? [], subPrefs, { appLanguage: i18n.language, audioLanguage: audioLanguageOf(item) }) : undefined
+  const rememberAuto = () => {
+    const next = afterAuto(subPrefs)
+    qc.setQueryData<typeof prefs>(['playback'], (p) => (p ? { ...p, subtitles: next } : p))
+    api.setPlayback({ subtitles: next }).catch(() => {})
+  }
+
   // Picture subtitles are part of the video, so switching to or from one
   // restarts playback at the same spot.
   const selectSub = (t: SubtitleTrack | undefined, remember = true) => {
@@ -837,7 +845,12 @@ function Player({ id }: { id: number }) {
           if (video.current) video.current.muted = !video.current.muted
           break
         case 'c':
-          if (item?.subtitles?.length) selectSub(sub ? undefined : (lastSub.current ?? item.subtitles.find((t) => !t.burnIn) ?? item.subtitles[0]))
+          if (sub) selectSub(undefined)
+          else if (lastSub.current) selectSub(lastSub.current)
+          else if (autoSub) {
+            selectSub(autoSub, false)
+            rememberAuto()
+          }
           break
         case '[':
         case ']':
@@ -1393,6 +1406,11 @@ function Player({ id }: { id: number }) {
                   tracks={item.subtitles ?? []}
                   selected={sub?.id}
                   onSelect={selectSub}
+                  auto={autoSub}
+                  onAuto={() => {
+                    selectSub(autoSub, false)
+                    rememberAuto()
+                  }}
                   timing={sub && !sub.burnIn ? { seconds: subTiming, onChange: changeTiming } : undefined}
                   sync={sub && !sub.burnIn ? { state: sub.sync, onSync: syncSub, onUndo: unsyncSub } : undefined}
                   onOpenChange={(open) => {

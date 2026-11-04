@@ -110,10 +110,10 @@ While an episode's intro plays, **Skip intro** shows in the bottom corner, ready
 
 ![The player on a TV, with subtitles on and the buttons under the bar](../images/app-tv-player.webp)
 
-On the buttons, left and right move between them and select opens one. **Audio** lists every sound track in the file, by language, with commentaries and audio description marked and the format of each (such as Dolby TrueHD · Atmos · 7.1). **Subtitles** lists the subtitles in the file and the [files next to it](/docs/getting-started/organizing-media/#subtitles), and **Off**. The one in use has a check, and the button says what's on.
+On the buttons, left and right move between them and select opens one. **Audio** lists every sound track in the file, by language, with commentaries and audio description marked and the format of each (such as Dolby TrueHD · Atmos · 7.1). **Subtitles** has **Off** and **On**, which picks the best track in your languages and says which (from version 1.0.27). **More subtitles** lists every subtitle track in the file and the [files next to it](/docs/getting-started/organizing-media/#subtitles). The one in use has a check, and the button says what's on.
 
 <!-- since: v0.1.10 -->
-At the bottom of **Subtitles**, **Find subtitles…** looks for subtitles online when the server has [subtitle search](/docs/watching/finding-subtitles/) set up. Select a result to add it to the video and turn it on.
+At the bottom of **More subtitles**, **Find subtitles…** looks for subtitles online when the server has [subtitle search](/docs/watching/finding-subtitles/) set up. Select a result to add it to the video and turn it on.
 <!-- /since -->
 
 ![Picking the audio track on a TV](../images/app-tv-audio.webp)
