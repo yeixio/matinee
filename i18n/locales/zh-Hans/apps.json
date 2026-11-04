@@ -203,7 +203,14 @@
     "cellular": "使用移动数据下载",
     "cellularHint": "否则下载会等待 Wi-Fi",
     "used_other": "{{count}} 个下载占用 {{size}}。",
-    "nothingDownloaded": "还没有下载内容。"
+    "nothingDownloaded": "还没有下载内容。",
+    "topBar": {
+      "title": "顶部栏",
+      "hint": "把最常看的媒体库放到顶部栏，在哪里都只需按一下。仅限这台电视上的此个人资料。",
+      "pinLabel": "{{name}} 在顶部栏",
+      "openOn": "打开时显示",
+      "openOnHint": "应用启动的位置"
+    }
   },
   "language": {
     "automatic": "自动（{{language}}）",

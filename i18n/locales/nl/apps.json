@@ -205,7 +205,14 @@
     "cellularHint": "Anders wachten downloads op wifi",
     "used_one": "{{size}} gebruikt door {{count}} download.",
     "used_other": "{{size}} gebruikt door {{count}} downloads.",
-    "nothingDownloaded": "Nog niets gedownload."
+    "nothingDownloaded": "Nog niets gedownload.",
+    "topBar": {
+      "title": "Bovenbalk",
+      "hint": "Zet de bibliotheken die je het meest kijkt in de bovenbalk, overal één druk op de knop. Alleen voor dit profiel op deze tv.",
+      "pinLabel": "{{name}} in de bovenbalk",
+      "openOn": "Openen op",
+      "openOnHint": "Waar de app begint"
+    }
   },
   "language": {
     "automatic": "Automatisch ({{language}})",

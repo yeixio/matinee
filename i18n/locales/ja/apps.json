@@ -203,7 +203,14 @@
     "cellular": "モバイルデータ通信でダウンロード",
     "cellularHint": "オフの場合、ダウンロードは Wi-Fi を待ちます",
     "used_other": "{{count}} 件のダウンロードで {{size}} 使用中。",
-    "nothingDownloaded": "まだ何もダウンロードしていません。"
+    "nothingDownloaded": "まだ何もダウンロードしていません。",
+    "topBar": {
+      "title": "上部バー",
+      "hint": "よく見るライブラリを上部バーに置いて、どこからでもワンクリックで。このテレビのこのプロフィールだけの設定です。",
+      "pinLabel": "上部バーに{{name}}",
+      "openOn": "起動時に開く",
+      "openOnHint": "アプリを開いたときの画面"
+    }
   },
   "language": {
     "automatic": "自動（{{language}}）",

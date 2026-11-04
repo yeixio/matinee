@@ -203,7 +203,14 @@
     "cellular": "Unduh lewat data seluler",
     "cellularHint": "Jika tidak, unduhan menunggu Wi-Fi",
     "used_other": "{{size}} dipakai oleh {{count}} unduhan.",
-    "nothingDownloaded": "Belum ada yang diunduh."
+    "nothingDownloaded": "Belum ada yang diunduh.",
+    "topBar": {
+      "title": "Bilah atas",
+      "hint": "Taruh perpustakaan yang paling sering kamu tonton di bilah atas, sekali tekan dari mana saja. Hanya untuk profil ini di TV ini.",
+      "pinLabel": "{{name}} di bilah atas",
+      "openOn": "Buka di",
+      "openOnHint": "Tempat aplikasi dimulai"
+    }
   },
   "language": {
     "automatic": "Otomatis ({{language}})",

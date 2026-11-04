@@ -205,7 +205,14 @@
     "cellularHint": "Aksi hâlde indirmeler Wi-Fi’yi bekler",
     "used_one": "{{count}} indirme {{size}} kullanıyor.",
     "used_other": "{{count}} indirme {{size}} kullanıyor.",
-    "nothingDownloaded": "Henüz bir şey indirilmedi."
+    "nothingDownloaded": "Henüz bir şey indirilmedi.",
+    "topBar": {
+      "title": "Üst çubuk",
+      "hint": "En çok izlediğin kitaplıkları üst çubuğa koy, her yerden tek tuş uzakta. Yalnızca bu TV'deki bu profil için.",
+      "pinLabel": "Üst çubukta {{name}}",
+      "openOn": "Açılış",
+      "openOnHint": "Uygulamanın başladığı yer"
+    }
   },
   "language": {
     "automatic": "Otomatik ({{language}})",

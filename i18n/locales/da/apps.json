@@ -205,7 +205,14 @@
     "cellularHint": "Ellers venter downloads på wi-fi",
     "used_one": "{{size}} brugt af {{count}} download.",
     "used_other": "{{size}} brugt af {{count}} downloads.",
-    "nothingDownloaded": "Intet downloadet endnu."
+    "nothingDownloaded": "Intet downloadet endnu.",
+    "topBar": {
+      "title": "Øverste bjælke",
+      "hint": "Sæt de biblioteker, du ser mest, i den øverste bjælke, ét tryk fra alle steder. Kun for denne profil på dette tv.",
+      "pinLabel": "{{name}} i den øverste bjælke",
+      "openOn": "Åbn på",
+      "openOnHint": "Hvor appen starter"
+    }
   },
   "language": {
     "automatic": "Automatisk ({{language}})",

@@ -207,7 +207,14 @@
     "used_many": "{{size}} utilisés par {{count}} téléchargements.",
     "used_one": "{{size}} utilisés par {{count}} téléchargement.",
     "used_other": "{{size}} utilisés par {{count}} téléchargements.",
-    "nothingDownloaded": "Aucun téléchargement pour l’instant."
+    "nothingDownloaded": "Aucun téléchargement pour l’instant.",
+    "topBar": {
+      "title": "Barre du haut",
+      "hint": "Mettez les bibliothèques que vous regardez le plus dans la barre du haut, à un clic de partout. Pour ce profil sur cette télé seulement.",
+      "pinLabel": "{{name}} dans la barre du haut",
+      "openOn": "Ouvrir sur",
+      "openOnHint": "Où l’app démarre"
+    }
   },
   "language": {
     "automatic": "Automatique ({{language}})",

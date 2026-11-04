@@ -205,7 +205,14 @@
     "cellularHint": "Otherwise downloads wait for Wi-Fi",
     "used_one": "{{size}} used by {{count}} download.",
     "used_other": "{{size}} used by {{count}} downloads.",
-    "nothingDownloaded": "Nothing downloaded yet."
+    "nothingDownloaded": "Nothing downloaded yet.",
+    "topBar": {
+      "title": "Top bar",
+      "hint": "Put the libraries you watch most in the top bar, one press from anywhere. Just for this profile on this TV.",
+      "pinLabel": "{{name}} in the top bar",
+      "openOn": "Open on",
+      "openOnHint": "Where the app starts"
+    }
   },
   "language": {
     "automatic": "Automatic ({{language}})",

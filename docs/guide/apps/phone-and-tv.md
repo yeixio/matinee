@@ -86,6 +86,17 @@ On Apple TV, the **top shelf** (the banner above Matinee's icon on the home scre
 
 Android TV and Google TV install the same app as Android phones, from Google Play.
 
+<!-- since: v0.3.0 -->
+### Your libraries in the top bar
+
+From version 1.0.28, **Settings → Top bar** on the TV puts the libraries you watch most in the top bar as tabs of their own, right after Home, so Movies or Shows is one press away from anywhere. **Libraries** stays for the rest. **Open on** picks where the app starts: Home, or one of your libraries. Both are kept for each profile on that TV, and nothing is in the top bar until you add it, so it looks the same after every update.
+
+![Settings → Top bar on a TV, with Movies in the top bar](../images/app-tv-top-bar.webp)
+
+Back always goes one step back: from a screen to the one before, from any tab to Home, and on Home first up to the top bar. Only Back from the top bar on Home leaves the app.
+
+<!-- /since -->
+
 <!-- since: v0.1.4 -->
 ## Watching on a TV
 

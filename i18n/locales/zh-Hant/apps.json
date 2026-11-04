@@ -203,7 +203,14 @@
     "cellular": "使用行動數據下載",
     "cellularHint": "否則下載會等待 Wi-Fi",
     "used_other": "{{count}} 個下載占用 {{size}}。",
-    "nothingDownloaded": "還沒有下載內容。"
+    "nothingDownloaded": "還沒有下載內容。",
+    "topBar": {
+      "title": "頂部列",
+      "hint": "把最常看的媒體庫放到頂部列，在哪裡都只需按一下。僅限這台電視上的此個人檔案。",
+      "pinLabel": "{{name}} 在頂部列",
+      "openOn": "開啟時顯示",
+      "openOnHint": "App 啟動的位置"
+    }
   },
   "language": {
     "automatic": "自動（{{language}}）",

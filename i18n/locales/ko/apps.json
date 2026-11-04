@@ -203,7 +203,14 @@
     "cellular": "모바일 데이터로 다운로드",
     "cellularHint": "끄면 다운로드가 Wi-Fi를 기다립니다",
     "used_other": "다운로드 {{count}}개가 {{size}} 사용 중입니다.",
-    "nothingDownloaded": "아직 다운로드한 항목이 없습니다."
+    "nothingDownloaded": "아직 다운로드한 항목이 없습니다.",
+    "topBar": {
+      "title": "상단 바",
+      "hint": "가장 많이 보는 라이브러리를 상단 바에 두면 어디서든 한 번에 갈 수 있어요. 이 TV의 이 프로필에만 적용돼요.",
+      "pinLabel": "상단 바에 {{name}}",
+      "openOn": "시작 화면",
+      "openOnHint": "앱이 시작되는 곳"
+    }
   },
   "language": {
     "automatic": "자동 ({{language}})",

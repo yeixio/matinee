@@ -205,7 +205,14 @@
     "cellularHint": "Ellers venter nedlastinger på Wi-Fi",
     "used_one": "{{size}} brukt av {{count}} nedlasting.",
     "used_other": "{{size}} brukt av {{count}} nedlastinger.",
-    "nothingDownloaded": "Ingenting lastet ned ennå."
+    "nothingDownloaded": "Ingenting lastet ned ennå.",
+    "topBar": {
+      "title": "Øverste linje",
+      "hint": "Legg bibliotekene du ser mest i den øverste linjen, ett trykk unna fra hvor som helst. Bare for denne profilen på denne TV-en.",
+      "pinLabel": "{{name}} i øverste linje",
+      "openOn": "Åpne på",
+      "openOnHint": "Hvor appen starter"
+    }
   },
   "language": {
     "automatic": "Automatisk ({{language}})",

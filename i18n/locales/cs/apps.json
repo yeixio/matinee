@@ -209,7 +209,14 @@
     "used_many": "{{size}} zabírá {{count}} staženého souboru.",
     "used_one": "{{size}} zabírá {{count}} stažený soubor.",
     "used_other": "{{size}} zabírá {{count}} stažených souborů.",
-    "nothingDownloaded": "Zatím nic staženo."
+    "nothingDownloaded": "Zatím nic staženo.",
+    "topBar": {
+      "title": "Horní lišta",
+      "hint": "Dejte knihovny, které sledujete nejvíc, do horní lišty, jedno stisknutí odkudkoli. Jen pro tento profil na této televizi.",
+      "pinLabel": "{{name}} v horní liště",
+      "openOn": "Otevřít na",
+      "openOnHint": "Kde aplikace začne"
+    }
   },
   "language": {
     "automatic": "Automaticky ({{language}})",

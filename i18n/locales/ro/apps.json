@@ -207,7 +207,14 @@
     "used_few": "{{size}} folosiți de {{count}} descărcări.",
     "used_one": "{{size}} folosiți de {{count}} descărcare.",
     "used_other": "{{size}} folosiți de {{count}} de descărcări.",
-    "nothingDownloaded": "Nimic descărcat încă."
+    "nothingDownloaded": "Nimic descărcat încă.",
+    "topBar": {
+      "title": "Bara de sus",
+      "hint": "Pune bibliotecile pe care le urmărești cel mai des în bara de sus, la o apăsare de oriunde. Doar pentru acest profil pe acest televizor.",
+      "pinLabel": "{{name}} în bara de sus",
+      "openOn": "Deschide pe",
+      "openOnHint": "Unde pornește aplicația"
+    }
   },
   "language": {
     "automatic": "Automat ({{language}})",

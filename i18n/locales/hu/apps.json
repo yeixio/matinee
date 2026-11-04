@@ -205,7 +205,14 @@
     "cellularHint": "Egyébként a letöltések Wi-Fire várnak",
     "used_one": "{{size}} foglalt, {{count}} letöltés.",
     "used_other": "{{size}} foglalt, {{count}} letöltés.",
-    "nothingDownloaded": "Még nincs letöltés."
+    "nothingDownloaded": "Még nincs letöltés.",
+    "topBar": {
+      "title": "Felső sáv",
+      "hint": "Tedd a legtöbbet nézett könyvtárakat a felső sávba, bárhonnan egy gombnyomásra. Csak ennek a profilnak ezen a tévén.",
+      "pinLabel": "{{name}} a felső sávban",
+      "openOn": "Megnyitás itt",
+      "openOnHint": "Hol indul az alkalmazás"
+    }
   },
   "language": {
     "automatic": "Automatikus ({{language}})",

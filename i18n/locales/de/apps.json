@@ -205,7 +205,14 @@
     "cellularHint": "Sonst warten Downloads auf WLAN",
     "used_one": "{{size}} belegt von {{count}} Download.",
     "used_other": "{{size}} belegt von {{count}} Downloads.",
-    "nothingDownloaded": "Noch nichts heruntergeladen."
+    "nothingDownloaded": "Noch nichts heruntergeladen.",
+    "topBar": {
+      "title": "Obere Leiste",
+      "hint": "Leg die Mediatheken, die du am meisten schaust, in die obere Leiste, von überall einen Klick entfernt. Nur für dieses Profil auf diesem Fernseher.",
+      "pinLabel": "{{name}} in der oberen Leiste",
+      "openOn": "Öffnen mit",
+      "openOnHint": "Wo die App startet"
+    }
   },
   "language": {
     "automatic": "Automatisch ({{language}})",

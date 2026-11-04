@@ -207,7 +207,14 @@
     "used_many": "{{size}} usados por {{count}} downloads.",
     "used_one": "{{size}} usados por {{count}} download.",
     "used_other": "{{size}} usados por {{count}} downloads.",
-    "nothingDownloaded": "Nada baixado ainda."
+    "nothingDownloaded": "Nada baixado ainda.",
+    "topBar": {
+      "title": "Barra superior",
+      "hint": "Coloque as bibliotecas que você mais assiste na barra superior, a um clique de qualquer lugar. Só para este perfil nesta TV.",
+      "pinLabel": "{{name}} na barra superior",
+      "openOn": "Abrir em",
+      "openOnHint": "Onde o app começa"
+    }
   },
   "language": {
     "automatic": "Automático ({{language}})",
