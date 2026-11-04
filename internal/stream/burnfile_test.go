@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"context"
 	"encoding/binary"
-	"encoding/json"
 	"log/slog"
 	"os"
 	"os/exec"
@@ -65,8 +64,7 @@ func TestStartBurnsSubtitleFile(t *testing.T) {
 	sup := filepath.Join(dir, "Movie.en.sup")
 	os.WriteFile(sup, pgsSquare(), 0o644)
 
-	var logs bytes.Buffer
-	tr := NewTranscoder(ffmpeg, filepath.Join(dir, "cache"), nil, slog.New(slog.NewJSONHandler(&logs, &slog.HandlerOptions{Level: slog.LevelDebug})))
+	tr := NewTranscoder(ffmpeg, filepath.Join(dir, "cache"), nil, slog.New(slog.DiscardHandler))
 	defer tr.Close()
 	it := store.Item{ID: 1, Path: src, VideoCodec: "h264", Width: intp(320)}
 	// middle is the brightness of the picture's centre in a stream's first frame.
@@ -74,45 +72,21 @@ func TestStartBurnsSubtitleFile(t *testing.T) {
 		t.Helper()
 		id, err := tr.StartFor(context.Background(), user, it, start, Request{BurnSub: -1, BurnFile: sup})
 		if err != nil {
-			// DIAG: what FFmpeg says when it runs the same command.
-			var args []string
-			for _, line := range bytes.Split(logs.Bytes(), []byte("\n")) {
-				var e struct {
-					Msg  string   `json:"msg"`
-					Args []string `json:"args"`
-				}
-				if json.Unmarshal(line, &e) == nil && e.Msg == "ffmpeg command" {
-					args = e.Args
-				}
-			}
-			for i := range args {
-				if args[i] == "error" && i > 0 && args[i-1] == "-loglevel" {
-					args[i] = "verbose"
-				}
-			}
-			os.RemoveAll(filepath.Join(dir, "cache", "diag"))
-			os.MkdirAll(filepath.Join(dir, "cache", "diag"), 0o755)
-			for i := range args {
-				args[i] = strings.ReplaceAll(args[i], filepath.Join(dir, "cache", id), filepath.Join(dir, "cache", "diag"))
-			}
-			ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
-			defer cancel()
-			out, _ := exec.CommandContext(ctx, ffmpeg, args...).CombinedOutput()
-			if len(out) > 8000 {
-				out = append(out[:3000:3000], out[len(out)-5000:]...)
-			}
-			files, _ := os.ReadDir(filepath.Join(dir, "cache", "diag"))
-			var names []string
-			for _, f := range files {
-				names = append(names, f.Name())
-			}
-			t.Logf("args %q\nmade %v", args, names)
-			t.Fatalf("%v (start %v)\n%s", err, start, out)
+			t.Fatalf("%v (start %v)", err, start)
 		}
 		px, err := exec.Command(ffmpeg, "-v", "error", "-i", filepath.Join(dir, "cache", id, "seg00000.ts"),
 			"-vf", "crop=2:2:159:89,format=gray", "-frames:v", "1", "-f", "rawvideo", "-").Output()
 		if err != nil || len(px) == 0 {
 			t.Fatalf("frame: %v", err)
+		}
+		// And it runs through to the video's end, past the last line.
+		for wait := time.Now().Add(20 * time.Second); ; time.Sleep(100 * time.Millisecond) {
+			if b, _ := os.ReadFile(filepath.Join(dir, "cache", id, "index.m3u8")); bytes.Contains(b, []byte("#EXT-X-ENDLIST")) {
+				break
+			}
+			if time.Now().After(wait) {
+				t.Fatalf("start %v: the stream never ended", start)
+			}
 		}
 		return px[0]
 	}
@@ -135,5 +109,40 @@ func TestSubtitleFileStart(t *testing.T) {
 		if got := subtitleFileStart(path); got != want {
 			t.Errorf("%s: got %v, want %v", filepath.Base(path), got, want)
 		}
+	}
+}
+
+// A subtitle file gets one more, empty line hours in, so FFmpeg never waits
+// on its end; the copy still plays through to the video's end.
+func TestPaddedSubtitles(t *testing.T) {
+	dir := t.TempDir()
+	tr := &Transcoder{Dir: filepath.Join(dir, "cache"), Log: slog.New(slog.DiscardHandler)}
+	sup := filepath.Join(dir, "a.sup")
+	os.WriteFile(sup, pgsSquare(), 0o644)
+	padded := tr.paddedSubtitles(sup)
+	if padded == sup {
+		t.Fatal("not padded")
+	}
+	b, _ := os.ReadFile(padded)
+	if !bytes.HasPrefix(b, pgsSquare()) || len(b) == len(pgsSquare()) {
+		t.Fatalf("padded copy is %d bytes", len(b))
+	}
+	if again := tr.paddedSubtitles(sup); again != padded {
+		t.Errorf("not kept: %s, then %s", padded, again)
+	}
+
+	idx := filepath.Join(dir, "b.idx")
+	os.WriteFile(idx, []byte("# VobSub index file, v7\nsize: 720x480\nid: en, index: 0\ntimestamp: 00:00:01:000, filepos: 000000000\ntimestamp: 00:00:04:000, filepos: 000000800\n"), 0o644)
+	os.WriteFile(filepath.Join(dir, "b.sub"), []byte("pictures"), 0o644)
+	padded = tr.paddedSubtitles(idx)
+	b, _ = os.ReadFile(padded)
+	if !strings.HasSuffix(string(b), "timestamp: 12:00:00:000, filepos: 000000800\n") {
+		t.Errorf("idx copy ends:\n%s", b)
+	}
+	if b, _ := os.ReadFile(strings.TrimSuffix(padded, ".idx") + ".sub"); string(b) != "pictures" {
+		t.Errorf(".sub beside the copy: %q", b)
+	}
+	if got := tr.paddedSubtitles(filepath.Join(dir, "missing.sup")); got != filepath.Join(dir, "missing.sup") {
+		t.Errorf("missing file: %s", got)
 	}
 }

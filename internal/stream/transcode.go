@@ -337,7 +337,7 @@ func (t *Transcoder) start(ctx context.Context, userID int64, it store.Item, sta
 		if off := subtitleFileStart(burnFile) - startSec; off != 0 {
 			args = append(args, "-itsoffset", strconv.FormatFloat(off, 'f', 3, 64))
 		}
-		args = append(args, "-i", burnFile)
+		args = append(args, "-i", t.paddedSubtitles(burnFile))
 	}
 	args = append(args, output...)
 	args = append(args, "-f", "hls", "-hls_time", strconv.Itoa(segmentSeconds), "-hls_list_size", "0", "-hls_playlist_type", "event")
