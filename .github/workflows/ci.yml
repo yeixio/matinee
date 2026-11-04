@@ -102,6 +102,26 @@ jobs:
       - run: pnpm build
         working-directory: web
 
+  # Box Office's web UI (boxoffice/web).
+  boxoffice-web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          package_json_file: boxoffice/web/package.json
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: boxoffice/web/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+        working-directory: boxoffice/web
+      - run: pnpm test
+        working-directory: boxoffice/web
+      - run: pnpm build
+        working-directory: boxoffice/web
+
   helm:
     runs-on: ubuntu-latest
     steps:
@@ -116,6 +136,14 @@ jobs:
       # Recreate needs no drain delay; RollingUpdate waits 5s for the Service.
       - run: "helm template t deploy/helm/matinee | grep -q 'terminationGracePeriodSeconds: 20'"
       - run: "helm template t deploy/helm/matinee --set strategy.type=RollingUpdate | grep -q 'terminationGracePeriodSeconds: 25'"
+      - run: helm lint deploy/helm/boxoffice
+      - run: helm template t deploy/helm/boxoffice > /dev/null
+      # SQLite by default; any PostgreSQL setting switches to it.
+      - run: "! helm template t deploy/helm/boxoffice | grep -q BOXOFFICE_DATABASE_URL"
+      - run: "helm template t deploy/helm/boxoffice --set postgresql.enabled=true | grep -q 'kind: StatefulSet'"
+      - run: "helm template t deploy/helm/boxoffice --set database.url=postgres://u:p@db/boxoffice | grep -q BOXOFFICE_DATABASE_URL"
+      - run: "helm template t deploy/helm/boxoffice --set apiKey.value=k --set tmdb.apiKey=t | grep -q BOXOFFICE_API_KEY"
+      - run: helm template t deploy/helm/boxoffice --set 'media[0].name=movies' --set 'media[0].mountPath=/media/movies' --set 'media[0].volume.emptyDir.medium=' > /dev/null
 
   docker:
     runs-on: ubuntu-latest
@@ -191,6 +219,42 @@ jobs:
           build-args: VERSION=main-${{ github.sha }}
           cache-from: type=gha,scope=connect
           cache-to: type=gha,mode=max,scope=connect
+
+  # Box Office (cmd/boxoffice). Pushes from main publish
+  # ghcr.io/yeixio/boxoffice:main and :sha-<short>.
+  boxoffice-image:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-qemu-action@v3
+      - uses: docker/setup-buildx-action@v3
+      - if: github.event_name == 'push'
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository_owner }}/boxoffice
+          tags: |
+            type=ref,event=branch
+            type=sha
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: cmd/boxoffice/Dockerfile
+          platforms: linux/amd64,linux/arm64
+          push: ${{ github.event_name == 'push' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          build-args: VERSION=main-${{ github.sha }}
+          cache-from: type=gha,scope=boxoffice
+          cache-to: type=gha,mode=max,scope=boxoffice
 
   # Moves the edge branch to each main commit that passed every check and
   # has its image published, so clusters that follow edge only roll out
