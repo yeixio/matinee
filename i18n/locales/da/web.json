@@ -49,7 +49,30 @@
     },
     "skipIntro": "Spring intro over",
     "introSkipped": "Introen blev sprunget over",
-    "skipCredits": "Spring rulletekster over"
+    "skipCredits": "Spring rulletekster over",
+    "why": {
+      "title": "Hvorfor den bufferede",
+      "slowDisk": "Serveren læser filen langsomt: et stykke tog {{seconds}} sekunder, som fra et travlt netværksdrev.",
+      "slowConvert": "Serveren konverterer videoen med {{speed}}× hastighed, langsommere end den afspilles.",
+      "slowConnection": "Forbindelsen får {{have}} Mbit/s, og videoen kræver {{need}} Mbit/s.",
+      "unknown": "Serveren og forbindelsen så fine ud. Netværket kan have været væk et øjeblik.",
+      "converted": {
+        "codec": "Den konverteres, fordi enheden ikke afspiller videoformatet.",
+        "hdr": "Den konverteres, fordi skærmen ikke viser dens HDR.",
+        "subtitle": "Den konverteres for at tegne underteksterne ind.",
+        "quality": "Den konverteres til lavere kvalitet."
+      },
+      "tip": {
+        "gpu": "Tip til administratorer: en GPU til transkodning konverterer meget hurtigere. Se Indstillinger → Streaming.",
+        "lowerQuality": "Tip til administratorer: GPU'en kan ikke følge med. Færre streams ad gangen eller lavere kvalitet hjælper.",
+        "adaptive": "Tip til administratorer: slå adaptiv kvalitet til i Indstillinger → Streaming, så afspillere kan gå ned.",
+        "disk": "Tip til administratorer: tjek disken eller netværksdrevet for biblioteket i Serverstatus."
+      },
+      "test": "Test forbindelsen",
+      "testing": "Tester…",
+      "result": "{{mbps}} Mbit/s til serveren, {{ms}} ms tur-retur",
+      "testFailed": "Kunne ikke teste forbindelsen"
+    }
   },
   "somethingWentWrong": "Noget gik galt",
   "oneMoment": "Et øjeblik…",
@@ -1108,7 +1131,8 @@
       "transcoding": "Omkoder",
       "away": "Ude",
       "paused": "På pause",
-      "buffering": "Indlæser"
+      "buffering": "Indlæser",
+      "stalled": "Bufferede: {{why}}"
     },
     "transcodes": {
       "title": "Omkodninger",

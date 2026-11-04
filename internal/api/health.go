@@ -14,6 +14,7 @@ import (
 	"time"
 
 	"github.com/yeixio/matinee/internal/analyze"
+	"github.com/yeixio/matinee/internal/diagnose"
 	"github.com/yeixio/matinee/internal/health"
 	"github.com/yeixio/matinee/internal/hwaccel"
 	"github.com/yeixio/matinee/internal/live"
@@ -102,6 +103,9 @@ type healthStream struct {
 	User     live.User     `json:"user"`
 	Remote   bool          `json:"remote,omitempty"`
 	Playing  *live.Playing `json:"playing"`
+	// Stalled is why this stream last stopped to buffer, in the last few
+	// minutes (see diagnose.go).
+	Stalled *diagnose.Cause `json:"stalled,omitempty"`
 }
 
 type healthTranscode struct {
@@ -201,8 +205,12 @@ func (s *Server) getHealth(w http.ResponseWriter, r *http.Request) {
 		if !c.Online || c.Playing == nil {
 			continue
 		}
-		out.Streams = append(out.Streams, healthStream{ID: c.ID, Name: c.Name, Platform: c.Platform, App: c.App, Version: c.Version,
-			User: c.User, Remote: c.Remote, Playing: c.Playing})
+		st := healthStream{ID: c.ID, Name: c.Name, Platform: c.Platform, App: c.App, Version: c.Version,
+			User: c.User, Remote: c.Remote, Playing: c.Playing}
+		if cause, ok := s.causes().Latest(c.User.ID, c.Playing.Item.ID, causeShownFor); ok {
+			st.Stalled = &cause
+		}
+		out.Streams = append(out.Streams, st)
 	}
 	if s.Transcoder != nil {
 		names := map[int64]string{}

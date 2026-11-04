@@ -248,5 +248,7 @@
   "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "أرسل معرّف TMDB أو عنوان TMDB أو معرّف IMDb",
   "tmdb_has_no_such_title": "لا يوجد عنوان كهذا على TMDB",
   "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "لا يوجد اتصال بالإنترنت الآن. خادمك يعمل جيدًا؛ هذا يحتاج إلى الإنترنت وسيعمل مجددًا عند عودته.",
-  "tonemapping_must_be_hable_mobius_reinhard_or_off": "يجب أن تكون قيمة toneMapping هي hable أو mobius أو reinhard أو off"
+  "tonemapping_must_be_hable_mobius_reinhard_or_off": "يجب أن تكون قيمة toneMapping هي hable أو mobius أو reinhard أو off",
+  "kind_must_be_stall_or_error": "يجب أن تكون قيمة kind هي stall أو error",
+  "bytes_must_be_between_0_and_104857600": "يجب أن تكون قيمة bytes بين 0 و104857600"
 }

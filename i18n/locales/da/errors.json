@@ -248,5 +248,7 @@
   "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "send TMDB-id, TMDB-adresse eller IMDb-id at matche med",
   "tmdb_has_no_such_title": "TMDB har ingen sådan titel",
   "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "ingen internetforbindelse lige nu. Din server er i orden; det her kræver internet og virker igen, når det er tilbage.",
-  "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMapping skal være hable, mobius, reinhard eller off"
+  "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMapping skal være hable, mobius, reinhard eller off",
+  "kind_must_be_stall_or_error": "kind skal være stall eller error",
+  "bytes_must_be_between_0_and_104857600": "bytes skal være mellem 0 og 104857600"
 }

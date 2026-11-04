@@ -1,6 +1,13 @@
 package stream
 
-import "sort"
+import (
+	"os"
+	"regexp"
+	"sort"
+	"time"
+)
+
+var firstStreamSegment = regexp.MustCompile(`^seg(_0_)?\d{5}\.(ts|m4s)$`)
 
 // Active is how many transcodes are running, so background work can wait
 // until nobody is watching.
@@ -40,6 +47,44 @@ type SessionInfo struct {
 	BurnSub   bool     `json:"burnSub,omitempty"`
 	Adaptive  bool     `json:"adaptive,omitempty"`
 	FFmpegPID int      `json:"pid,omitempty"`
+	// Speed is how fast FFmpeg makes the stream, as a multiple of real
+	// time: below 1 it can't keep up. 0 once it has finished, or before
+	// it has made anything.
+	Speed float64 `json:"speed,omitempty"`
+}
+
+// speed is how many seconds of video s has made for each second it's been
+// running, from its pieces; 0 when it's done or has made none. t.mu is held.
+func (s *session) speed(now time.Time) float64 {
+	if s.dir == "" || isDone(s) {
+		return 0
+	}
+	elapsed := now.Sub(s.started).Seconds()
+	entries, err := os.ReadDir(s.dir)
+	if err != nil || elapsed <= 0 {
+		return 0
+	}
+	n := 0
+	for _, e := range entries {
+		// One stream's pieces: the only one, or an adaptive stream's first.
+		if firstStreamSegment.MatchString(e.Name()) {
+			n++
+		}
+	}
+	if n == 0 {
+		return 0
+	}
+	return float64(n*segmentSeconds) / elapsed
+}
+
+// SessionFor is the running transcode of item for user, if there is one.
+func (t *Transcoder) SessionFor(user, item int64) (SessionInfo, bool) {
+	for _, s := range t.Sessions() {
+		if s.UserID == user && s.ItemID == item {
+			return s, true
+		}
+	}
+	return SessionInfo{}, false
 }
 
 // Sessions lists the running transcodes, oldest first.
@@ -63,6 +108,9 @@ func (t *Transcoder) Sessions() []SessionInfo {
 		}
 		if s.cmd != nil && s.cmd.Process != nil {
 			info.FFmpegPID = s.cmd.Process.Pid
+		}
+		if !s.audioOnly && !s.live {
+			info.Speed = s.speed(time.Now())
 		}
 		out = append(out, info)
 	}

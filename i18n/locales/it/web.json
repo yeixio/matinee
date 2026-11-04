@@ -49,7 +49,30 @@
     },
     "skipIntro": "Salta intro",
     "introSkipped": "Intro saltata",
-    "skipCredits": "Salta i titoli di coda"
+    "skipCredits": "Salta i titoli di coda",
+    "why": {
+      "title": "Perché si è fermato a caricare",
+      "slowDisk": "Il server legge questo file lentamente: un pezzo ha richiesto {{seconds}} secondi, come da un'unità di rete occupata.",
+      "slowConvert": "Il server converte questo video a {{speed}}× di velocità, più lentamente di quanto si riproduce.",
+      "slowConnection": "La connessione arriva a {{have}} Mbps e questo video ne richiede {{need}}.",
+      "unknown": "Server e connessione sembravano a posto. Forse la rete è caduta per un momento.",
+      "converted": {
+        "codec": "Viene convertito perché questo dispositivo non riproduce il suo formato video.",
+        "hdr": "Viene convertito perché questo schermo non mostra il suo HDR.",
+        "subtitle": "Viene convertito per disegnare i sottotitoli.",
+        "quality": "Viene convertito in una qualità più bassa."
+      },
+      "tip": {
+        "gpu": "Consiglio per gli admin: una GPU per la transcodifica converte molto più in fretta. Vedi Impostazioni → Streaming.",
+        "lowerQuality": "Consiglio per gli admin: la GPU non tiene il passo. Aiutano meno stream insieme o una qualità più bassa.",
+        "adaptive": "Consiglio per gli admin: attiva la qualità adattiva in Impostazioni → Streaming, così i player possono scendere di qualità.",
+        "disk": "Consiglio per gli admin: controlla in Stato del server il disco o la condivisione di rete di questa libreria."
+      },
+      "test": "Prova la connessione",
+      "testing": "Prova in corso…",
+      "result": "{{mbps}} Mbps verso il server, {{ms}} ms di andata e ritorno",
+      "testFailed": "Impossibile provare la connessione"
+    }
   },
   "somethingWentWrong": "Qualcosa è andato storto",
   "oneMoment": "Un momento…",
@@ -1116,7 +1139,8 @@
       "transcoding": "Transcodifica",
       "away": "Fuori casa",
       "paused": "In pausa",
-      "buffering": "Caricamento"
+      "buffering": "Caricamento",
+      "stalled": "Caricamento: {{why}}"
     },
     "transcodes": {
       "title": "Transcodifiche",

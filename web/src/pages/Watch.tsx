@@ -4,7 +4,7 @@ import { ArrowLeft, ChevronsRight, Maximize, Minimize, Moon, Pause, Play, Rotate
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
-import { api, fileUrl, type ItemDetail, type SubtitleTrack } from '../api'
+import { api, fileUrl, type ItemDetail, type PlaybackCause, type SubtitleTrack } from '../api'
 import { Spinner } from '../components/ui'
 import { clock, episodeCode } from '../format'
 import i18n from '../i18n'
@@ -29,6 +29,8 @@ import { remote, watchPath, type CommandType, type PlayerHooks } from '../remote
 import { health, onRestarting, outcome, restarting, waitForServer, type Health, type Waiting } from '../player/reconnect'
 import { expectedSeconds, needsSeek, together } from '../player/together'
 import { TogetherMenu } from '../player/TogetherMenu'
+import { WhyMenu } from '../player/WhyMenu'
+import { Arrivals, bufferedAheadMs, causeText, ReportGate, STALL_MS, worthSaying } from '../player/why'
 import { clientId } from '../remote'
 import type { TogetherState } from '../api'
 
@@ -209,12 +211,18 @@ function Player({ id }: { id: number }) {
 
   const duration = item?.durationMs ? item.durationMs / 1000 : 0
   const position = useCallback(() => offset.current + (video.current?.currentTime ?? 0), [])
+  // Why playback buffered (see player/why.ts): pieces' arrival speed, and
+  // when it last jumped (a start or a seek waits for good reason).
+  const arrivals = useRef(new Arrivals())
+  const jumped = useRef(0)
 
   const startHls = useCallback(
     async (at: number, burn = burned.current) => {
       const el = video.current
       if (!el || !item) return
       const seq = ++hlsSeq.current
+      jumped.current = Date.now()
+      arrivals.current = new Arrivals()
       setWaiting(true)
       setError('')
       setLevel(undefined)
@@ -240,6 +248,11 @@ function Player({ id }: { id: number }) {
           h.on(Hls.Events.ERROR, (_, d) => {
             if (d.fatal && seq === hlsSeq.current) recoverRef.current?.(position(), 'transcode')
           })
+          // How fast pieces arrive, for saying why it buffered.
+          h.on(Hls.Events.FRAG_LOADED, (_, d) => {
+            const st = d.frag.stats
+            if (seq === hlsSeq.current && st.loaded > 0) arrivals.current.add(st.loaded, st.loading.end - st.loading.start)
+          })
           // An adaptive stream says which step it's on.
           h.on(Hls.Events.LEVEL_SWITCHED, (_, d) => {
             if (seq === hlsSeq.current && h.levels.length > 1) setLevel(levelName(h.levels[d.level]))
@@ -263,6 +276,7 @@ function Player({ id }: { id: number }) {
       const el = video.current
       if (!el || !item) return
       hlsSeq.current++
+      jumped.current = Date.now()
       hls.current?.destroy()
       hls.current = null
       burned.current = undefined
@@ -673,6 +687,49 @@ function Player({ id }: { id: number }) {
     window.clearTimeout(noticeTimer.current)
     noticeTimer.current = window.setTimeout(() => setNotice(undefined), ms)
   }
+  // When it stops to buffer, ask the server why, and say so when it's clear.
+  const [cause, setCause] = useState<PlaybackCause>()
+  const reportGate = useRef(new ReportGate())
+  const report = (kind: 'stall' | 'error', message?: string) => {
+    const el = video.current
+    if (!item || !el || (kind === 'stall' && !reportGate.current.take())) return
+    const h = hls.current
+    const level = h && h.currentLevel >= 0 ? h.levels[h.currentLevel] : undefined
+    api
+      .reportPlayback(item.id, {
+        kind,
+        positionMs: Math.round(position() * 1000),
+        downloadBps: arrivals.current.bps(),
+        bufferMs: bufferedAheadMs(el),
+        neededBps: level?.bitrate ?? 0,
+        message,
+      })
+      .then(({ cause }) => {
+        setCause(cause)
+        if (kind === 'stall' && worthSaying(cause)) flash(causeText(tr, cause), 7000)
+      })
+      .catch(() => {})
+  }
+  const reportRef = useRef(report)
+  reportRef.current = report
+  useEffect(() => {
+    if (!waiting || paused || error || away || !item) return
+    const t = window.setTimeout(() => {
+      if (!video.current?.seeking && Date.now() - jumped.current > STALL_MS * 2) reportRef.current('stall')
+    }, STALL_MS)
+    return () => window.clearTimeout(t)
+  }, [waiting, paused, error, away, item])
+  useEffect(() => {
+    if (error) reportRef.current('error', error)
+  }, [error])
+  // A cause from just before (say, before a reload) is still worth seeing.
+  useEffect(() => {
+    api
+      .playbackWhy(id)
+      .then(({ cause }) => cause && setCause((c) => c ?? cause))
+      .catch(() => {})
+  }, [id])
+
   const hooks = useRef<PlayerHooks>(undefined)
   hooks.current = {
     commands: () => {
@@ -884,6 +941,7 @@ function Player({ id }: { id: number }) {
         }}
         onPlaying={() => setWaiting(false)}
         onCanPlay={() => setWaiting(false)}
+        onSeeking={() => (jumped.current = Date.now())}
         onVolumeChange={() => setMuted(!!video.current?.muted)}
         onSeeked={() => remote.report()}
         onEnded={ended}
@@ -1091,6 +1149,15 @@ function Player({ id }: { id: number }) {
                   selected={quality}
                   playing={mode === 'direct' ? tr('common:quality.original') : level}
                   onSelect={selectQuality}
+                  onOpenChange={(open) => {
+                    menuOpen.current = open
+                    poke()
+                  }}
+                />
+              )}
+              {cause && (
+                <WhyMenu
+                  cause={cause}
                   onOpenChange={(open) => {
                     menuOpen.current = open
                     poke()

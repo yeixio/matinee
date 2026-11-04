@@ -1226,7 +1226,7 @@ paths:
         How busy the machine and the server are (CPU, memory, load, data sent,
         with the last hour's readings every 5 seconds), the database, free
         space on the disks of the server's folders and every library folder,
-        hardware transcoding, what's playing, running transcodes, background
+        hardware transcoding, what's playing (with why a stream last stalled, as `stalled`, a PlaybackCause), running transcodes and their speed, background
         jobs (scans, analysis, downloads being converted, imports), and
         recent warnings and errors grouped by message. Everything comes from
         this server; nothing is sent anywhere.
@@ -2368,6 +2368,66 @@ paths:
       responses:
         "204": { description: Reset. }
         "400": { $ref: "#/components/responses/Error" }
+  /items/{id}/playback-report:
+    post:
+      summary: Say playback stalled, and hear why
+      description: |
+        A player that stopped to buffer (or gave up) says so, with what it
+        measured. The server adds what it knows (how fast it converts this
+        stream, how fast the file reads just now) and answers with the
+        likeliest cause, which it also shows in Server health for a few
+        minutes. Reports go only to this server.
+      parameters:
+        - $ref: "#/components/parameters/ID"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [kind]
+              properties:
+                kind: { type: string, enum: [stall, error] }
+                positionMs: { type: integer }
+                downloadBps: { type: integer, description: How fast pieces were arriving, as the player measured it. }
+                bufferMs: { type: integer, description: How much was buffered when it stopped. }
+                neededBps: { type: integer, description: "The bitrate of what it plays, when it knows (an adaptive stream's step)." }
+                code: { type: string, description: "The player's own error code, for the log." }
+                message: { type: string }
+      responses:
+        "200":
+          description: The cause.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cause: { $ref: "#/components/schemas/PlaybackCause" }
+        "400": { description: kind isn't stall or error. }
+  /items/{id}/playback-why:
+    get:
+      summary: Why this person's playback of the item last stalled
+      description: The cause from the last report in the past five minutes, or null.
+      parameters:
+        - $ref: "#/components/parameters/ID"
+      responses:
+        "200":
+          description: The cause, or null.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cause:
+                    oneOf: [{ $ref: "#/components/schemas/PlaybackCause" }, { type: "null" }]
+  /speedtest:
+    get:
+      summary: Download noise to time the connection to the server
+      description: Sends `bytes` of random data that can't be compressed, not cached. `bytes=0` answers at once, for timing the round trip.
+      parameters:
+        - { name: bytes, in: query, schema: { type: integer, minimum: 0, maximum: 104857600, default: 10485760 } }
+      responses:
+        "200": { description: The bytes., content: { application/octet-stream: { schema: { type: string, format: binary } } } }
+        "400": { description: bytes is out of range. }
   /items/{id}/file:
     get:
       summary: The original file, for direct play and downloads
@@ -4587,6 +4647,25 @@ components:
           properties:
             zscale: { type: boolean, description: "zscale and tonemap (FFmpeg built with zimg): HDR10, HDR10+, HLG." }
             placebo: { type: boolean, description: "libplacebo on a Vulkan device: Dolby Vision profile 5 too." }
+    PlaybackCause:
+      type: object
+      description: Why playback stalled (internal/diagnose).
+      properties:
+        code:
+          type: string
+          enum: [slowDisk, slowConvert, slowConnection, unknown]
+          description: |
+            `slowDisk`: the server reads the file too slowly (a busy network share);
+            `slowConvert`: it can't convert as fast as the video plays;
+            `slowConnection`: the connection between the player and the server is slower than the stream;
+            `unknown`: nothing found, such as Wi-Fi dropping for a moment.
+        values:
+          type: object
+          additionalProperties: { type: string }
+          description: "For the wording: `have` and `need` in Mbps for slowConnection, `speed` (× real time) for slowConvert, `seconds` for slowDisk."
+        tip: { type: string, enum: [gpu, lowerQuality, adaptive, disk], description: What an admin could change. Only admins get it. }
+        converted: { type: string, enum: [codec, hdr, subtitle, quality], description: Why the server converts this video at all. }
+        at: { type: integer, description: When, in milliseconds. }
     PlaybackPrefs:
       type: object
       properties:

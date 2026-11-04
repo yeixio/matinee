@@ -2,6 +2,7 @@ import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tansta
 import { AlertTriangle, CircleCheck, CircleX, Download, HardDrive, Pause, Radio, Search, Square, Wifi, WifiOff } from 'lucide-react'
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
+import { causeText } from '../player/why'
 import { api, type Health, type HealthPoint, type HealthProblem, type LogLevel, type LogLine } from '../api'
 import i18n, { formatLocale } from '../i18n'
 import { Button, inputClass } from './ui'
@@ -348,6 +349,12 @@ function Streams({ h }: { h: Health }) {
                     <Badge strong={p.transcoding}>{p.transcoding ? t('health.streams.transcoding') : t('health.streams.direct')}</Badge>
                   </div>
                 </div>
+                {s.stalled && (
+                  <p className="text-sm text-muted">
+                    {t('health.streams.stalled', { why: causeText(t, s.stalled) })}
+                    {s.stalled.tip && ` ${t(`player.why.tip.${s.stalled.tip}`)}`}
+                  </p>
+                )}
                 {p.durationMs ? (
                   <div className="h-1 overflow-hidden rounded-full bg-text/10">
                     <div className="h-full bg-accent" style={{ width: `${pct}%` }} />
