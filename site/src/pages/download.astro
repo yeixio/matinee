@@ -1,0 +1,412 @@
+---
+// The Download page: every way to get the Matinee server, with links that
+// follow the newest release. The Mac and Windows installers have no version
+// in their names, so they use GitHub's releases/latest/download links. The
+// Linux packages and archives do, so they're built from DOCS_LATEST, the
+// newest release's tag; every release tag rebuilds the site.
+import '@fontsource-variable/inter'
+import '@fontsource-variable/fraunces'
+import '../styles/site.css'
+import SiteNav from '../components/SiteNav.astro'
+
+const base = import.meta.env.BASE_URL
+const guide = (path = '') => `${base}docs/${path}`
+const github = 'https://github.com/yeixio/matinee'
+const latestDownload = (file: string) => `${github}/releases/latest/download/${file}`
+
+const latest = import.meta.env.DOCS_LATEST ?? ''
+const version = latest.replace(/^v/, '')
+// A dev build doesn't know the newest release, so its version-named links
+// open the release page instead.
+const versioned = (file: string) => (latest ? `${github}/releases/download/${latest}/${file.replaceAll('{v}', version)}` : `${github}/releases/latest`)
+
+const debs = [
+  { label: 'amd64', note: 'most PCs and servers', file: 'matinee_{v}_amd64.deb' },
+  { label: 'arm64', note: 'Raspberry Pi 4 and 5, Arm servers', file: 'matinee_{v}_arm64.deb' },
+  { label: 'armhf', note: 'older Raspberry Pis and NAS boxes', file: 'matinee_{v}_armhf.deb' },
+]
+const rpms = [
+  { label: 'x86_64', note: 'most PCs and servers', file: 'matinee-{v}-1.x86_64.rpm' },
+  { label: 'aarch64', note: 'Arm servers', file: 'matinee-{v}-1.aarch64.rpm' },
+]
+const archives = [
+  { label: 'Linux amd64', file: 'matinee_{v}_linux_amd64.tar.gz' },
+  { label: 'Linux arm64', file: 'matinee_{v}_linux_arm64.tar.gz' },
+  { label: 'Linux armv7', file: 'matinee_{v}_linux_armv7.tar.gz' },
+  { label: 'macOS Apple silicon', file: 'matinee_{v}_darwin_arm64.tar.gz' },
+  { label: 'macOS Intel', file: 'matinee_{v}_darwin_amd64.tar.gz' },
+  { label: 'Windows x64', file: 'matinee_{v}_windows_amd64.zip' },
+  { label: 'Windows Arm', file: 'matinee_{v}_windows_arm64.zip' },
+]
+
+const apt = `sudo install -d -m 0755 /etc/apt/keyrings
+curl -fsSL https://raw.githubusercontent.com/yeixio/matinee/packages/matinee.asc | sudo tee /etc/apt/keyrings/matinee.asc > /dev/null
+echo "deb [signed-by=/etc/apt/keyrings/matinee.asc] https://raw.githubusercontent.com/yeixio/matinee/packages/apt stable main" | sudo tee /etc/apt/sources.list.d/matinee.list
+sudo apt-get update && sudo apt-get install matinee`
+const dnf = `sudo curl -fsSL https://raw.githubusercontent.com/yeixio/matinee/packages/matinee.repo -o /etc/yum.repos.d/matinee.repo
+sudo dnf install matinee`
+const docker = `docker run -d --name matinee -p 7171:7171 \\
+  -v ./data:/data \\
+  -v /path/to/movies:/media/movies:ro \\
+  ghcr.io/yeixio/matinee:latest`
+const brew = `brew tap yeixio/matinee https://github.com/yeixio/matinee
+brew install yeixio/matinee/matinee
+brew services start matinee`
+const helm = `helm install matinee oci://ghcr.io/yeixio/charts/matinee \\
+  -f my-values.yaml`
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Download | Matinee media server</title>
+    <meta name="description" content="Download Matinee, the free, open source, self-hosted media server: the Mac app, the Windows installer, Debian, Ubuntu and Fedora packages, Docker, Homebrew and Helm." />
+    <link rel="canonical" href={new URL(`${base}download/`, Astro.site).href} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Matinee" />
+    <meta property="og:title" content="Download Matinee" />
+    <meta property="og:description" content="The free, open source, self-hosted media server for Mac, Windows and Linux." />
+    <meta name="theme-color" content="#100d12" />
+    <link rel="icon" href={`${base}favicon.svg`} type="image/svg+xml" />
+  </head>
+  <body>
+    <SiteNav current="download" />
+
+    <main>
+      <section class="download-hero">
+        <p class="eyebrow">Download</p>
+        <h1>Get the Matinee server</h1>
+        <p class="lede">
+          Free and open source, for Mac, Windows and Linux. Install it on the computer that has your movies, shows and
+          music, then open <code>http://your-server:7171</code> and follow the setup.
+        </p>
+        {
+          latest && (
+            <p class="release">
+              Latest release <strong>{latest}</strong> · <a href={guide(`releases/${latest}/`)}>What's new</a> ·{' '}
+              <a href={`${github}/releases`}>All releases</a>
+            </p>
+          )
+        }
+      </section>
+
+      <section class="platforms" id="platforms">
+        <article class="platform" id="mac" data-os="mac">
+          <div class="copy">
+            <span class="for-you">For this computer</span>
+            <h2>Mac</h2>
+            <p>
+              Matinee Server runs from the menu bar with FFmpeg included, and updates itself. macOS 13 or later, Apple
+              silicon and Intel.
+            </p>
+          </div>
+          <div class="get">
+            <a class="button primary" href={latestDownload('Matinee-Server.dmg')}>Download for Mac</a>
+            <span class="small">Matinee-Server.dmg · <a href={guide('getting-started/mac/')}>Guide</a></span>
+          </div>
+        </article>
+
+        <article class="platform" id="windows" data-os="windows">
+          <div class="copy">
+            <span class="for-you">For this computer</span>
+            <h2>Windows 10 and 11</h2>
+            <p>An installer with FFmpeg included. Matinee runs from an icon next to the clock and starts when you sign in.</p>
+          </div>
+          <div class="get">
+            <a class="button primary" id="windows-download" href={latestDownload('Matinee-Setup-x64.exe')} data-arm={latestDownload('Matinee-Setup-arm64.exe')}>
+              Download for Windows
+            </a>
+            <span class="small">
+              <a href={latestDownload('Matinee-Setup-x64.exe')}>x64</a> (Intel and AMD) ·{' '}
+              <a href={latestDownload('Matinee-Setup-arm64.exe')}>Arm</a> · <a href={guide('getting-started/windows/')}>Guide</a>
+            </span>
+          </div>
+        </article>
+
+        <article class="platform linux" id="linux" data-os="linux">
+          <div class="copy">
+            <span class="for-you">For this computer</span>
+            <h2>Linux</h2>
+            <p>
+              Add the Matinee repository and the server updates along with the rest of the system. The package installs a{' '}
+              <code>matinee</code> service that starts right away and on every boot.
+            </p>
+          </div>
+          <div class="linux-grid">
+            <div class="code">
+              <h3>Debian and Ubuntu</h3>
+              <pre><code>{apt}</code></pre>
+              <p class="files">
+                Or download the package:{' '}
+                {debs.map((d, i) => (
+                  <>
+                    {i > 0 && ' · '}
+                    <a href={versioned(d.file)} title={d.note}>{d.label}</a>
+                  </>
+                ))}
+              </p>
+            </div>
+            <div class="code">
+              <h3>Fedora, RHEL and friends</h3>
+              <pre><code>{dnf}</code></pre>
+              <p class="files">
+                Or download the package:{' '}
+                {rpms.map((r, i) => (
+                  <>
+                    {i > 0 && ' · '}
+                    <a href={versioned(r.file)} title={r.note}>{r.label}</a>
+                  </>
+                ))}
+              </p>
+            </div>
+          </div>
+          <p class="small">
+            Not sure which one? <code>dpkg --print-architecture</code> or <code>uname -m</code> tells you.{' '}
+            <a href={guide('getting-started/install/#debian-and-ubuntu')}>Guide</a>
+          </p>
+        </article>
+      </section>
+
+      <section class="more-ways">
+        <h2>More ways to run it</h2>
+        <div class="install-grid">
+          <div class="code">
+            <h3>Docker</h3>
+            <pre><code>{docker}</code></pre>
+          </div>
+          <div class="code">
+            <h3>Homebrew, macOS and Linux</h3>
+            <pre><code>{brew}</code></pre>
+          </div>
+          <div class="code">
+            <h3>Kubernetes</h3>
+            <pre><code>{helm}</code></pre>
+          </div>
+        </div>
+        <p class="also">
+          On Unraid, TrueNAS SCALE or ZimaOS, see <a href={guide('getting-started/nas/')}>Install on a NAS</a>.{' '}
+          <a href={guide('getting-started/install/')}>All the ways to install →</a>
+        </p>
+      </section>
+
+      <section class="other-files">
+        <h2>Other files</h2>
+        <p>
+          The server on its own, without an installer, for running it your own way. You'll need FFmpeg installed.
+        </p>
+        <ul>
+          {archives.map((a) => (
+            <li>
+              <a href={versioned(a.file)}>{a.label}</a>
+            </li>
+          ))}
+        </ul>
+        <p class="small">
+          <a href={latest ? versioned('SHA256SUMS.txt') : `${github}/releases/latest`}>SHA256 checksums</a> · Packages are signed
+          with the key "Matinee packages &lt;hello@yeix.io&gt;",{' '}
+          <code>4EE3 3F8C EE07 6BB0 C9A7 C559 21F5 BE9F 726A 2895</code> ·{' '}
+          <a href={guide('getting-started/install/#from-source')}>Build from source</a>
+        </p>
+      </section>
+
+      <section class="apps-note">
+        <p>
+          Looking for the phone and TV apps? They're in the App Store and Google Play, and find your server on their own.{' '}
+          <a href={guide('apps/phone-and-tv/')}>Get the apps →</a>
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <span>Matinee is free software under the AGPL 3.0 or later.</span>
+      <span>
+        <a href={`${base}docs/`}>Guide</a> · <a href={`${base}roadmap/`}>Roadmap</a> · <a href={`${github}/releases`}>Releases</a> ·{' '}
+        <a href={`${github}/issues`}>Issues</a>
+      </span>
+    </footer>
+
+    <script>
+      // Point out the download for the visitor's computer and put it first.
+      // Phones and tablets get no pick: the server runs on a computer.
+      const nav = navigator as Navigator & { userAgentData?: { platform?: string; mobile?: boolean; getHighEntropyValues(h: string[]): Promise<{ platform?: string; architecture?: string }> } }
+      const ua = navigator.userAgent
+      const mobile = nav.userAgentData?.mobile ?? /Android|iPhone|iPad|Mobile/.test(ua)
+      const platform = nav.userAgentData?.platform || navigator.platform || ''
+      const os = mobile ? '' : /Mac/i.test(platform) ? 'mac' : /Win/i.test(platform) ? 'windows' : /Linux|X11|CrOS/i.test(platform + ua) ? 'linux' : ''
+      if (os) document.querySelector(`.platform[data-os="${os}"]`)?.classList.add('yours')
+
+      // Arm PCs get the Arm installer. Only Chromium browsers (Edge, Chrome) can tell.
+      const link = document.getElementById('windows-download') as HTMLAnchorElement | null
+      if (link && nav.userAgentData) {
+        nav.userAgentData
+          .getHighEntropyValues(['architecture'])
+          .then((v) => {
+            if (v.platform === 'Windows' && v.architecture === 'arm') link.href = link.dataset.arm ?? link.href
+          })
+          .catch(() => {})
+      }
+    </script>
+  </body>
+</html>
+
+<style>
+  .download-hero {
+    text-align: center;
+    padding-top: 72px !important;
+    padding-bottom: 32px !important;
+  }
+  .download-hero h1 {
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
+  }
+  .download-hero .lede {
+    margin-bottom: 1em;
+  }
+  .release {
+    font-size: 0.95rem;
+  }
+  .release strong {
+    color: var(--text);
+  }
+
+  .platforms {
+    max-width: 960px !important;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-bottom: 72px !important;
+  }
+  .platform {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px 32px;
+    padding: 24px 26px;
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    scroll-margin-top: 80px;
+  }
+  .platform .copy {
+    flex: 1 1 360px;
+  }
+  .platform h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+  }
+  .platform p {
+    margin: 0;
+  }
+  .platform.yours {
+    order: -1;
+    border-color: var(--accent);
+  }
+  .for-you {
+    display: none;
+    margin-bottom: 10px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: var(--accent);
+    color: #1a0e0c;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .platform.yours .for-you {
+    display: inline-block;
+  }
+  .get {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+  .small {
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  .linux-grid {
+    flex: 1 1 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .linux .code {
+    background: var(--bg);
+  }
+  .linux .code pre {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    font-size: 0.8em;
+  }
+  .files {
+    margin: 14px 0 0 !important;
+    font-size: 0.88rem;
+  }
+  .linux > .small {
+    flex: 1 1 100%;
+    margin: 0;
+  }
+
+  .more-ways,
+  .other-files {
+    max-width: 960px !important;
+    padding-bottom: 72px !important;
+  }
+  .more-ways h2,
+  .other-files h2,
+  .more-ways .also {
+    text-align: center;
+  }
+  .more-ways .also {
+    margin-top: 24px;
+  }
+  .other-files > p:first-of-type {
+    text-align: center;
+  }
+  .other-files ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+  }
+  .other-files li a {
+    display: block;
+    padding: 10px 14px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--bg-2);
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.92rem;
+  }
+  .other-files li a:hover {
+    border-color: var(--accent);
+  }
+  .other-files .small {
+    text-align: center;
+    overflow-wrap: anywhere;
+  }
+  .apps-note {
+    max-width: 760px !important;
+    padding-bottom: 80px !important;
+    text-align: center;
+  }
+
+  @media (max-width: 760px) {
+    .linux-grid {
+      grid-template-columns: 1fr;
+    }
+    .platform {
+      padding: 20px;
+    }
+    .get {
+      flex: 1 1 100%;
+    }
+  }
+</style>
