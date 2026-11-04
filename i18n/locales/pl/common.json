@@ -749,6 +749,7 @@
     "test": "Testuj połączenie",
     "testing": "Testowanie…",
     "result": "{{mbps}} Mb/s do serwera, {{ms}} ms w obie strony",
-    "testFailed": "Nie udało się przetestować połączenia"
+    "testFailed": "Nie udało się przetestować połączenia",
+    "testHint": "Jak szybko to urządzenie dostaje wideo z serwera i ile trwa droga w obie strony."
   }
 }

@@ -653,6 +653,7 @@
     "test": "Kiểm tra kết nối",
     "testing": "Đang kiểm tra…",
     "result": "{{mbps}} Mbps tới máy chủ, {{ms}} ms khứ hồi",
-    "testFailed": "Không kiểm tra được kết nối"
+    "testFailed": "Không kiểm tra được kết nối",
+    "testHint": "Thiết bị này nhận video từ máy chủ nhanh đến đâu và một lượt khứ hồi mất bao lâu."
   }
 }

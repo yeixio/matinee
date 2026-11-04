@@ -685,6 +685,7 @@
     "test": "Test forbindelsen",
     "testing": "Tester…",
     "result": "{{mbps}} Mbit/s til serveren, {{ms}} ms tur-retur",
-    "testFailed": "Kunne ikke teste forbindelsen"
+    "testFailed": "Kunne ikke teste forbindelsen",
+    "testHint": "Hvor hurtigt enheden får video fra din server, og hvor lang tid en tur-retur tager."
   }
 }

@@ -653,6 +653,7 @@
     "test": "연결 테스트",
     "testing": "테스트 중…",
     "result": "서버까지 {{mbps}}Mbps, 왕복 {{ms}}ms",
-    "testFailed": "연결을 테스트하지 못했어요"
+    "testFailed": "연결을 테스트하지 못했어요",
+    "testHint": "이 기기가 서버에서 동영상을 받는 속도와 왕복 시간이에요."
   }
 }

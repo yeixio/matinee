@@ -749,6 +749,7 @@
     "test": "Otestovat připojení",
     "testing": "Testuje se…",
     "result": "{{mbps}} Mb/s k serveru, {{ms}} ms tam a zpět",
-    "testFailed": "Připojení se nepodařilo otestovat"
+    "testFailed": "Připojení se nepodařilo otestovat",
+    "testHint": "Jak rychle toto zařízení dostává video z vašeho serveru a jak dlouho trvá cesta tam a zpět."
   }
 }

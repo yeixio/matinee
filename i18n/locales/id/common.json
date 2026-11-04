@@ -653,6 +653,7 @@
     "test": "Uji koneksi",
     "testing": "Menguji…",
     "result": "{{mbps}} Mbps ke server, {{ms}} ms pulang-pergi",
-    "testFailed": "Tidak bisa menguji koneksi"
+    "testFailed": "Tidak bisa menguji koneksi",
+    "testHint": "Seberapa cepat perangkat ini menerima video dari server Anda, dan berapa lama pulang-perginya."
   }
 }

@@ -653,6 +653,7 @@
     "test": "測試連線",
     "testing": "正在測試…",
     "result": "到伺服器 {{mbps}} Mbps,往返 {{ms}} 毫秒",
-    "testFailed": "無法測試連線"
+    "testFailed": "無法測試連線",
+    "testHint": "此裝置從你的伺服器取得影片的速度,以及往返所需的時間。"
   }
 }

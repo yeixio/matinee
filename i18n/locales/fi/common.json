@@ -685,6 +685,7 @@
     "test": "Testaa yhteys",
     "testing": "Testataan…",
     "result": "{{mbps}} Mbit/s palvelimelle, {{ms}} ms edestakaisin",
-    "testFailed": "Yhteyttä ei voitu testata"
+    "testFailed": "Yhteyttä ei voitu testata",
+    "testHint": "Kuinka nopeasti tämä laite saa videota palvelimeltasi ja kauanko edestakainen matka kestää."
   }
 }

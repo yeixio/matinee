@@ -685,6 +685,7 @@
     "test": "Verbinding testen",
     "testing": "Bezig met testen…",
     "result": "{{mbps}} Mbps naar de server, {{ms}} ms heen en terug",
-    "testFailed": "Kon de verbinding niet testen"
+    "testFailed": "Kon de verbinding niet testen",
+    "testHint": "Hoe snel dit apparaat video van je server krijgt, en hoe lang heen en terug duurt."
   }
 }

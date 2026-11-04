@@ -685,6 +685,7 @@
     "test": "Testa anslutningen",
     "testing": "Testar…",
     "result": "{{mbps}} Mbit/s till servern, {{ms}} ms tur och retur",
-    "testFailed": "Kunde inte testa anslutningen"
+    "testFailed": "Kunde inte testa anslutningen",
+    "testHint": "Hur snabbt enheten får video från din server och hur lång tid en tur och retur tar."
   }
 }

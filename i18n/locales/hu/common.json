@@ -685,6 +685,7 @@
     "test": "Kapcsolat tesztelése",
     "testing": "Tesztelés…",
     "result": "{{mbps}} Mbps a szerverig, {{ms}} ms oda-vissza",
-    "testFailed": "Nem sikerült tesztelni a kapcsolatot"
+    "testFailed": "Nem sikerült tesztelni a kapcsolatot",
+    "testHint": "Milyen gyorsan kap ez az eszköz videót a szerveredtől, és mennyi egy oda-vissza út."
   }
 }

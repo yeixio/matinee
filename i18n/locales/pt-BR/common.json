@@ -717,6 +717,7 @@
     "test": "Testar conexão",
     "testing": "Testando…",
     "result": "{{mbps}} Mbps até o servidor, {{ms}} ms de ida e volta",
-    "testFailed": "Não foi possível testar a conexão"
+    "testFailed": "Não foi possível testar a conexão",
+    "testHint": "A velocidade com que este aparelho recebe vídeo do seu servidor e quanto dura a ida e volta."
   }
 }

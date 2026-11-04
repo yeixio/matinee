@@ -685,6 +685,7 @@
     "test": "Verbindung testen",
     "testing": "Wird getestet…",
     "result": "{{mbps}} Mbit/s zum Server, {{ms}} ms Antwortzeit",
-    "testFailed": "Verbindung konnte nicht getestet werden"
+    "testFailed": "Verbindung konnte nicht getestet werden",
+    "testHint": "Wie schnell dieses Gerät Video von deinem Server bekommt und wie lange eine Antwort dauert."
   }
 }

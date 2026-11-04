@@ -685,6 +685,7 @@
     "test": "Bağlantıyı test et",
     "testing": "Test ediliyor…",
     "result": "Sunucuya {{mbps}} Mbps, {{ms}} ms gidiş-dönüş",
-    "testFailed": "Bağlantı test edilemedi"
+    "testFailed": "Bağlantı test edilemedi",
+    "testHint": "Bu cihazın sunucunuzdan ne kadar hızlı video aldığı ve gidiş-dönüşün ne kadar sürdüğü."
   }
 }

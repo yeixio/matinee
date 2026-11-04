@@ -653,6 +653,7 @@
     "test": "Uji sambungan",
     "testing": "Menguji…",
     "result": "{{mbps}} Mbps ke pelayan, {{ms}} ms pergi balik",
-    "testFailed": "Tidak dapat menguji sambungan"
+    "testFailed": "Tidak dapat menguji sambungan",
+    "testHint": "Seberapa pantas peranti ini menerima video daripada pelayan anda, dan berapa lama pergi baliknya."
   }
 }
