@@ -209,9 +209,6 @@ func (t *Transcoder) StartFor(ctx context.Context, userID int64, it store.Item, 
 	video := hwaccel.Video{Codec: it.VideoCodec, BurnSub: burnSub, MaxWidth: maxWidth, KeyframeSeconds: segmentSeconds}
 	if req.BurnFile != "" && it.VideoCodec != "" {
 		video.BurnSub, video.BurnInput, burnSub = 0, 1, 0
-		if it.Width != nil {
-			video.SourceWidth = *it.Width
-		}
 	}
 	drawn := burnSub
 	if req.Styled != nil && it.VideoCodec != "" {

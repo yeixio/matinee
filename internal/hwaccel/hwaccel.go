@@ -118,9 +118,6 @@ type Video struct {
 	// BurnInput is the input BurnSub is in: 0 for the video itself, 1 for
 	// a picture subtitle file next to it, given as a second input.
 	BurnInput int
-	// SourceWidth is the video's width, when known. A subtitle file is
-	// scaled to it, keeping its own shape.
-	SourceWidth int
 	// Styled, when set, is a libass filter that draws ASS/SSA subtitles
 	// with their styling into the picture (see stream.StyledFilter). Like
 	// BurnSub it needs the frames in memory.
@@ -335,14 +332,6 @@ func videoFilter(v Video, chains []string) []string {
 		// Picture subtitles are drawn at the video's size (their canvas can
 		// differ, e.g. 1080p subtitles on a cropped 800-line video).
 		graph = "[" + strconv.Itoa(v.BurnInput) + ":s:" + strconv.Itoa(v.BurnSub) + "][0:v:0]scale2ref[sub][vid];[vid][sub]overlay=eof_action=pass"
-		if v.BurnInput > 0 && v.SourceWidth > 0 {
-			// A file's subtitles end before the video does, and scale2ref
-			// with an ended input can stall newer FFmpeg. So they're scaled
-			// to the video's width instead and set on its bottom edge: a
-			// picture cropped from the disc's still shows lines placed low,
-			// where nearly all of them are.
-			graph = "[" + strconv.Itoa(v.BurnInput) + ":s:" + strconv.Itoa(v.BurnSub) + "]scale=" + strconv.Itoa(v.SourceWidth) + ":-2[sub];[0:v:0][sub]overlay=x=(W-w)/2:y=H-h:eof_action=pass"
-		}
 		if len(chains) == 1 {
 			return []string{"-filter_complex", graph + "," + chains[0] + "[v]", "-map", "[v]"}
 		}
