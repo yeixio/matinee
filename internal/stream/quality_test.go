@@ -77,10 +77,6 @@ func TestFits(t *testing.T) {
 	if fits(it, Steps[2]) {
 		t.Error("720p shouldn't fit 480p")
 	}
-	it.VideoCodec = "hevc"
-	if fits(it, Steps[1]) {
-		t.Error("HEVC can't be copied")
-	}
 }
 
 // An adaptive transcode makes a master playlist and a playlist with

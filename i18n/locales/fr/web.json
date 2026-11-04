@@ -1125,6 +1125,11 @@
         "full": "{{name}} décode et encode"
       },
       "burnSub": "sous-titres incrustés",
+      "why": {
+        "codec": "l'appareil ne lit pas ce format vidéo",
+        "hdr": "l'écran n'affiche pas ce HDR",
+        "quality": "une qualité inférieure a été choisie"
+      },
       "started": "Démarré {{time}}",
       "stop": "Arrêter",
       "stopHint": "Arrête FFmpeg. Si le lecteur est encore ouvert, il lance un nouveau transcodage.",

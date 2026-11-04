@@ -1109,6 +1109,11 @@
         "full": "{{name}} menyahkod dan mengekod"
       },
       "burnSub": "sari kata dibenamkan",
+      "why": {
+        "codec": "peranti tidak dapat memainkan format video ini",
+        "hdr": "skrin tidak dapat memaparkan HDR ini",
+        "quality": "kualiti yang lebih rendah dipilih"
+      },
       "started": "Bermula {{time}}",
       "stop": "Hentikan",
       "stopHint": "Menghentikan FFmpeg. Jika pemain masih terbuka, ia memulakan transkod baharu.",

@@ -28,6 +28,23 @@ The same section turns on [adaptive quality](/docs/server/streaming-quality/), w
 <!-- /since -->
 If the GPU can't handle a file (an old codec, a profile it doesn't decode), that playback starts again on the CPU, and the file keeps using the CPU from then on, so nobody sees an error.
 
+<!-- since: v0.2.0 -->
+## Repackaging instead of converting
+
+Often a device plays the picture fine and only the rest of the file is the problem: an MKV on an iPhone, or a film whose sound is TrueHD or DTS. Then Matinee doesn't convert the picture at all. It repackages it as it is and converts only the sound, which takes almost no work and keeps the picture exactly as good as the file.
+
+The apps and the web player tell the server which video they decode (H.264, HEVC, AV1) and whether the screen shows HDR. A picture they decode is copied, in 4K and HDR if that's what the file has, as long as:
+
+- the screen shows the file's HDR (a screen without HDR gets it converted; HDR10+ plays as HDR10, and Dolby Vision as the HDR10 or HLG under it when the file has one),
+- no picture subtitle is drawn into the video, and
+- the quality is **Auto** or **Original** and within any cap for watching away from home.
+
+Until [media analysis](/docs/server/media-analysis/) has looked at a new HEVC or AV1 file, Matinee doesn't know whether it's HDR, so it only repackages it for an HDR screen. With **Auto**, playback moves to the adaptive stream if the connection can't keep up with the original.
+
+**Settings → Server health** shows each stream as **Repackaging video** or **Converting video**, and for a conversion, why: the device can't play the video format, the screen can't show the HDR, or a lower quality was picked.
+
+<!-- /since -->
+
 ## Giving Matinee a GPU
 
 **Docker:** pass `/dev/dri` in for AMD and Intel, and add the group that owns it on the host:

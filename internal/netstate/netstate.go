@@ -60,9 +60,9 @@ type Tracker struct {
 	// after being down, so work that waited can catch up.
 	Back func()
 	// FirstWait is how long a site that stopped answering is left alone
-	// before it's tried again; the wait doubles each time, up to five
-	// minutes. Zero is 30 seconds.
-	FirstWait time.Duration
+	// before it's tried again; the wait doubles each time, up to MaxWait.
+	// Zero is 30 seconds, and five minutes.
+	FirstWait, MaxWait time.Duration
 
 	mu       sync.Mutex
 	hosts    map[string]*host
@@ -155,7 +155,20 @@ func (t *Tracker) answered(name string) {
 	if !isPrivate(name) {
 		t.lastOK = t.now()
 	}
-	back := wasOffline && !t.offline() && t.Back != nil
+	back := wasOffline && !t.offline()
+	if back {
+		// The internet is back, so the other sites on it most likely are
+		// too: they may be tried again right away rather than after their
+		// wait, so what Back catches up on isn't turned away. One that's
+		// really down is found so again on its first try.
+		now := t.now()
+		for _, h := range t.hosts {
+			if !h.private && now.Before(h.until) {
+				h.until = now
+			}
+		}
+	}
+	back = back && t.Back != nil
 	t.mu.Unlock()
 	if back {
 		go t.Back()
@@ -171,7 +184,8 @@ func (t *Tracker) failed(name string, err error) {
 		h = &host{since: now, wait: cmp.Or(t.FirstWait, firstWait), private: isPrivate(name)}
 		t.hosts[name] = h
 	} else {
-		h.wait = min(h.wait*2, max(maxWait, h.wait))
+		limit := cmp.Or(t.MaxWait, maxWait)
+		h.wait = min(h.wait*2, max(limit, h.wait))
 	}
 	h.until, h.err, h.trying = now.Add(h.wait), err.Error(), false
 	if !h.private {

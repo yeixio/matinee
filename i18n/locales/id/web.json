@@ -1109,6 +1109,11 @@
         "full": "{{name}} mendekode dan mengodekan"
       },
       "burnSub": "subtitel ditanam",
+      "why": {
+        "codec": "perangkat tidak dapat memutar format video ini",
+        "hdr": "layar tidak dapat menampilkan HDR ini",
+        "quality": "kualitas yang lebih rendah dipilih"
+      },
       "started": "Dimulai {{time}}",
       "stop": "Hentikan",
       "stopHint": "Menghentikan FFmpeg. Jika pemutar masih terbuka, pemutar akan memulai transcode baru.",

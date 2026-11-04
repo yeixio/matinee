@@ -1125,6 +1125,11 @@
         "full": "{{name}} decodifica e codifica"
       },
       "burnSub": "legendas embutidas",
+      "why": {
+        "codec": "o aparelho não reproduz este formato de vídeo",
+        "hdr": "a tela não mostra este HDR",
+        "quality": "foi escolhida uma qualidade menor"
+      },
       "started": "Começou {{time}}",
       "stop": "Parar",
       "stopHint": "Para o FFmpeg. Se o player ainda estiver aberto, ele inicia uma nova transcodificação.",

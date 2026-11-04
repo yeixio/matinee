@@ -1117,6 +1117,11 @@
         "full": "{{name}} decodes and encodes"
       },
       "burnSub": "subtitles drawn in",
+      "why": {
+        "codec": "the device can't play this video format",
+        "hdr": "the screen can't show this HDR",
+        "quality": "a lower quality was picked"
+      },
       "started": "Started {{time}}",
       "stop": "Stop",
       "stopHint": "Stops FFmpeg. If the player is still open, it starts a new transcode.",

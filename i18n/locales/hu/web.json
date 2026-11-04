@@ -1117,6 +1117,11 @@
         "full": "{{name}} dekódol és kódol"
       },
       "burnSub": "beégetett felirat",
+      "why": {
+        "codec": "az eszköz nem játssza le ezt a videóformátumot",
+        "hdr": "a képernyő nem jeleníti meg ezt a HDR-t",
+        "quality": "alacsonyabb minőséget választottak"
+      },
       "started": "Indult {{time}}",
       "stop": "Leállítás",
       "stopHint": "Leállítja az FFmpeget. Ha a lejátszó még nyitva van, új átkódolást indít.",

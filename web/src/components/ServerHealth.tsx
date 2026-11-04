@@ -370,6 +370,7 @@ function Streams({ h }: { h: Health }) {
                   {[
                     x.user,
                     t(`health.transcodes.kind.${x.kind}`),
+                    x.why && x.why !== 'subtitle' && t(`health.transcodes.why.${x.why}`),
                     x.kind === 'video' && (x.accel ? t(`health.transcodes.mode.${x.mode}`, { name: x.accel }) : t('health.transcodes.mode.cpu')),
                     x.quality?.length && x.quality.join(', '),
                     x.burnSub && t('health.transcodes.burnSub'),

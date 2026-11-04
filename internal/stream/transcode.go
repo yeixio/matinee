@@ -38,7 +38,7 @@ const (
 // one before it was ready, as happens while dragging the seek bar.
 var ErrSuperseded = errors.New("replaced by a newer transcode")
 
-var hlsFileRe = regexp.MustCompile(`^(index\.m3u8|seg\d{5}\.ts|master\.m3u8|index_\d\.m3u8|seg_\d_\d{5}\.ts)$`)
+var hlsFileRe = regexp.MustCompile(`^(index\.m3u8|seg\d{5}\.(ts|m4s)|init\.mp4|master\.m3u8|index_\d\.m3u8|seg_\d_\d{5}\.ts)$`)
 
 // Transcoder runs one FFmpeg process per playback session and serves its HLS output.
 type Transcoder struct {
@@ -101,6 +101,8 @@ type session struct {
 	mode      hwaccel.Mode
 	quality   []string
 	copyVideo bool
+	// why says why the picture is converted rather than copied (see videoPlan).
+	why       string
 	audioOnly bool
 	burnSub   bool
 	// live is a live TV channel (see StartLive): players start near its
@@ -132,6 +134,27 @@ func NewTranscoder(ffmpeg, dir string, hw Accelerator, log *slog.Logger) *Transc
 // With a hardware accelerator, a transcode that fails to start on the GPU
 // starts again with less of it on the GPU, and finally on the CPU alone.
 func (t *Transcoder) Start(ctx context.Context, userID int64, it store.Item, startSec float64, burnSub, audio int, steps ...Step) (string, error) {
+	return t.StartFor(ctx, userID, it, startSec, Request{BurnSub: burnSub, Audio: audio}, steps...)
+}
+
+// Request is what a player asks of a transcode besides where to start and
+// the quality.
+type Request struct {
+	// BurnSub is an embedded subtitle stream to draw into the video, or -1
+	// for none, and Audio which audio stream to play (see Start).
+	BurnSub, Audio int
+	// Plays is what the player takes as it is: video it decodes is copied
+	// rather than converted (see videoPlan). Picture is what's known about
+	// the file's HDR.
+	Plays   Plays
+	Picture Picture
+}
+
+// StartFor is Start for a player that says what it plays: a picture it
+// decodes (HEVC or AV1 at 4K in HDR, say) is repackaged as it is, and
+// only what it can't take, usually the sound, is converted.
+func (t *Transcoder) StartFor(ctx context.Context, userID int64, it store.Item, startSec float64, req Request, steps ...Step) (string, error) {
+	burnSub, audio := req.BurnSub, req.Audio
 	t.mu.Lock()
 	for id, s := range t.sessions {
 		if s.userID == userID && s.itemID == it.ID && s.group == "" {
@@ -146,10 +169,10 @@ func (t *Transcoder) Start(ctx context.Context, userID int64, it store.Item, sta
 		accel = t.HW.Active()
 	}
 	video := hwaccel.Video{Codec: it.VideoCodec, BurnSub: burnSub, MaxWidth: maxWidth, KeyframeSeconds: segmentSeconds}
-	copyVideo := it.VideoCodec == "h264" && burnSub < 0 && (len(steps) == 0 || len(steps) == 1 && fits(it, steps[0]))
+	copyVideo, why := videoPlan(it, req.Picture, burnSub, steps, req.Plays)
 	modes := t.plan(accel, it.ID, video, copyVideo)
 	for i, mode := range modes {
-		id, err := t.start(ctx, userID, it, startSec, accel, mode, video, audio, copyVideo, steps)
+		id, err := t.start(ctx, userID, it, startSec, accel, mode, video, audio, copyVideo, why, steps)
 		if err == nil || i == len(modes)-1 || errors.Is(err, ErrSuperseded) || ctx.Err() != nil {
 			switch {
 			case err == nil:
@@ -193,7 +216,7 @@ func (t *Transcoder) hwFailed(itemID int64, kind hwaccel.Kind, mode hwaccel.Mode
 	}
 }
 
-func (t *Transcoder) start(ctx context.Context, userID int64, it store.Item, startSec float64, accel *hwaccel.Accel, mode hwaccel.Mode, video hwaccel.Video, audio int, copyVideo bool, steps []Step) (string, error) {
+func (t *Transcoder) start(ctx context.Context, userID int64, it store.Item, startSec float64, accel *hwaccel.Accel, mode hwaccel.Mode, video hwaccel.Video, audio int, copyVideo bool, why string, steps []Step) (string, error) {
 	b := make([]byte, 12)
 	rand.Read(b)
 	id := hex.EncodeToString(b)
@@ -227,8 +250,14 @@ func (t *Transcoder) start(ctx context.Context, userID int64, it store.Item, sta
 	case it.VideoCodec == "":
 		output = []string{"-vn", "-map", audioMap, "-c:a", "aac", "-b:a", "256k"}
 	case copyVideo:
-		// Already browser-friendly video: repackage instead of re-encoding. Far cheaper.
+		// Video the player decodes: repackage instead of re-encoding. Far
+		// cheaper, and 4K and HDR stay as they are.
 		output = []string{"-map", "0:v:0", "-c:v", "copy"}
+		if it.VideoCodec == "hevc" {
+			// Apple's players only take HEVC tagged hvc1 (parameter sets in
+			// the sample description, not hev1's in the stream).
+			output = append(output, "-tag:v", "hvc1")
+		}
 	default:
 		var input []string
 		input, output = hwaccel.Args(accel, mode, video)
@@ -252,7 +281,13 @@ func (t *Transcoder) start(ctx context.Context, userID int64, it store.Item, sta
 	args = append(args, Input(it)...)
 	args = append(args, output...)
 	args = append(args, "-f", "hls", "-hls_time", strconv.Itoa(segmentSeconds), "-hls_list_size", "0", "-hls_playlist_type", "event")
-	firstSegments := []string{filepath.Join(dir, "seg00000.ts")}
+	// HEVC and AV1 go in fMP4 pieces, which is how HLS carries them.
+	ext := ".ts"
+	if fragmented(it.VideoCodec, copyVideo) {
+		ext = ".m4s"
+		args = append(args, "-hls_segment_type", "fmp4", "-hls_fmp4_init_filename", "init.mp4")
+	}
+	firstSegments := []string{filepath.Join(dir, "seg00000"+ext)}
 	if adaptive {
 		// One playlist and set of segments per step. The master playlist
 		// naming them is written here rather than by FFmpeg, which can
@@ -274,7 +309,7 @@ func (t *Transcoder) start(ctx context.Context, userID int64, it store.Item, sta
 		args = append(args, "-var_stream_map", strings.Join(streams, " "),
 			"-hls_segment_filename", filepath.Join(dir, "seg_%v_%05d.ts"), filepath.Join(dir, "index_%v.m3u8"))
 	} else {
-		args = append(args, "-hls_segment_filename", filepath.Join(dir, "seg%05d.ts"), filepath.Join(dir, "index.m3u8"))
+		args = append(args, "-hls_segment_filename", filepath.Join(dir, "seg%05d"+ext), filepath.Join(dir, "index.m3u8"))
 	}
 
 	cmd := exec.Command(t.FFmpeg, args...)
@@ -284,7 +319,7 @@ func (t *Transcoder) start(ctx context.Context, userID int64, it store.Item, sta
 		return "", fmt.Errorf("start ffmpeg: %w", err)
 	}
 	s := &session{id: id, userID: userID, itemID: it.ID, dir: dir, cmd: cmd, done: make(chan struct{}), lastSeen: time.Now(),
-		started: time.Now(), startSec: startSec, mode: mode, copyVideo: copyVideo, audioOnly: it.VideoCodec == "", burnSub: video.BurnSub >= 0}
+		started: time.Now(), startSec: startSec, mode: mode, copyVideo: copyVideo, why: why, audioOnly: it.VideoCodec == "", burnSub: video.BurnSub >= 0}
 	var kind hwaccel.Kind
 	if mode != hwaccel.CPU {
 		kind = accel.Kind
@@ -317,7 +352,7 @@ func (t *Transcoder) start(ctx context.Context, userID int64, it store.Item, sta
 	s.quality = quality
 	t.mu.Unlock()
 	t.Log.Info("transcode started", "session", id, "item", it.ID, "start", startSec,
-		"videoCopy", copyVideo, "burnSub", video.BurnSub, "audio", audio, "accel", kind, "mode", mode, "quality", quality)
+		"videoCopy", copyVideo, "convertWhy", why, "burnSub", video.BurnSub, "audio", audio, "accel", kind, "mode", mode, "quality", quality)
 
 	// Wait for the first segment so the player can start right away. A GPU
 	// that hasn't made one in a while is stuck, and the CPU gets a turn.
@@ -367,7 +402,14 @@ func (t *Transcoder) ServeFile(w http.ResponseWriter, r *http.Request, userID in
 			http.Error(w, "segment not ready", http.StatusServiceUnavailable)
 			return
 		}
-		w.Header().Set("Content-Type", "video/mp2t")
+		switch filepath.Ext(name) {
+		case ".m4s":
+			w.Header().Set("Content-Type", "video/iso.segment")
+		case ".mp4":
+			w.Header().Set("Content-Type", "video/mp4")
+		default:
+			w.Header().Set("Content-Type", "video/mp2t")
+		}
 		w.Header().Set("Cache-Control", "private, max-age=3600")
 	} else {
 		b, err := os.ReadFile(path)
@@ -402,12 +444,17 @@ func startAtBeginning(playlist []byte) []byte {
 	return append([]byte(head+"#EXT-X-START:TIME-OFFSET=0,PRECISE=YES\n"), playlist[len(head):]...)
 }
 
-// signPlaylist adds ?token= to each segment in an HLS playlist.
+// signPlaylist adds ?token= to each segment in an HLS playlist, and to the
+// fMP4 init piece its #EXT-X-MAP names.
 func signPlaylist(playlist []byte, token string) []byte {
 	lines := strings.Split(string(playlist), "\n")
+	q := "?token=" + url.QueryEscape(token)
 	for i, l := range lines {
-		if l != "" && !strings.HasPrefix(l, "#") {
-			lines[i] = l + "?token=" + url.QueryEscape(token)
+		switch {
+		case l != "" && !strings.HasPrefix(l, "#"):
+			lines[i] = l + q
+		case strings.HasPrefix(l, "#EXT-X-MAP:"):
+			lines[i] = mapURIRe.ReplaceAllString(l, `URI="${1}`+strings.ReplaceAll(q, "$", "$$")+`"`)
 		}
 	}
 	return []byte(strings.Join(lines, "\n"))
@@ -437,7 +484,10 @@ func waitFor(ctx context.Context, s *session, file string, limit time.Duration) 
 	}
 }
 
-var segmentRe = regexp.MustCompile(`^(seg(?:_\d_)?)(\d{5})\.ts$`)
+var (
+	segmentRe = regexp.MustCompile(`^(seg(?:_\d_)?)(\d{5})(\.ts|\.m4s)$`)
+	mapURIRe  = regexp.MustCompile(`URI="([^"?]*)[^"]*"`)
+)
 
 func nextSegment(file string) string {
 	m := segmentRe.FindStringSubmatch(filepath.Base(file))
@@ -445,7 +495,7 @@ func nextSegment(file string) string {
 		return ""
 	}
 	n, _ := strconv.Atoi(m[2])
-	return filepath.Join(filepath.Dir(file), fmt.Sprintf("%s%05d.ts", m[1], n+1))
+	return filepath.Join(filepath.Dir(file), fmt.Sprintf("%s%05d%s", m[1], n+1, m[3]))
 }
 
 func fileExists(p string) bool { _, err := os.Stat(p); return err == nil }

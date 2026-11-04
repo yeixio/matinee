@@ -1523,7 +1523,13 @@ func (s *Server) startHLS(w http.ResponseWriter, r *http.Request) {
 		s.serverError(w, err)
 		return
 	}
-	id, err := s.Transcoder.Start(r.Context(), currentUser(r).ID, it, start, burn, audio, steps...)
+	// video and hdr say what the player decodes and its screen shows, so
+	// a picture it can take (HEVC or AV1, 4K, HDR) is repackaged as it is.
+	req := stream.Request{BurnSub: burn, Audio: audio, Plays: stream.ParsePlays(r.URL.Query().Get("video"), r.URL.Query().Get("hdr"))}
+	if mi, _ := s.mediaInfo(r, it); mi != nil && len(mi.Video) > 0 {
+		req.Picture = stream.Picture{Known: true, HDR: mi.Video[0].HDR, HDRBase: mi.Video[0].HDRBase}
+	}
+	id, err := s.Transcoder.StartFor(r.Context(), currentUser(r).ID, it, start, req, steps...)
 	if errors.Is(err, stream.ErrSuperseded) {
 		// The player already asked for a newer position; it ignores this answer.
 		writeError(w, http.StatusConflict, "replaced by a newer seek")

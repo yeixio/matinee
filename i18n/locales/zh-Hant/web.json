@@ -1109,6 +1109,11 @@
         "full": "{{name}} 解碼並編碼"
       },
       "burnSub": "字幕已燒錄",
+      "why": {
+        "codec": "裝置無法播放這種影片格式",
+        "hdr": "螢幕無法顯示這種 HDR",
+        "quality": "選擇了較低的畫質"
+      },
       "started": "開始於{{time}}",
       "stop": "停止",
       "stopHint": "停止 FFmpeg。如果播放器仍開著，它會開始新的轉碼。",

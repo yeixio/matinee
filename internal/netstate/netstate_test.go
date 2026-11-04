@@ -118,6 +118,32 @@ func TestOfflineAndBack(t *testing.T) {
 	}
 }
 
+// When the internet comes back, the other sites that were down may be
+// tried again at once, so what Back catches up on isn't turned away
+// while their waits run out.
+func TestBackLetsOtherSitesTryAgain(t *testing.T) {
+	n := &fakeNet{}
+	tr := New()
+	clock := time.Unix(1000, 0)
+	tr.now = func() time.Time { return clock }
+	c := &http.Client{Transport: tr.Wrap(n)}
+
+	n.down.Store(true)
+	get(t, c, "https://image.tmdb.org/")
+	clock = clock.Add(10 * time.Second)
+	get(t, c, "https://api.themoviedb.org/")
+	n.down.Store(false)
+	// image.tmdb.org's wait is over first and it answers; api.themoviedb.org
+	// still has 20 seconds to wait.
+	clock = clock.Add(firstWait - 10*time.Second)
+	if err := get(t, c, "https://image.tmdb.org/"); err != nil {
+		t.Fatal(err)
+	}
+	if err := get(t, c, "https://api.themoviedb.org/3/search"); err != nil {
+		t.Fatalf("turned away after the internet came back: %v", err)
+	}
+}
+
 // A call its caller gave up on doesn't mark the site down.
 func TestCanceledCallDoesNotCount(t *testing.T) {
 	tr := New()

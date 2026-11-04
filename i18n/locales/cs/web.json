@@ -1133,6 +1133,11 @@
         "full": "{{name}} dekóduje a kóduje"
       },
       "burnSub": "vypálené titulky",
+      "why": {
+        "codec": "zařízení tento formát videa nepřehraje",
+        "hdr": "obrazovka toto HDR nezobrazí",
+        "quality": "byla zvolena nižší kvalita"
+      },
       "started": "Začal {{time}}",
       "stop": "Zastavit",
       "stopHint": "Zastaví FFmpeg. Pokud je přehrávač stále otevřený, spustí nový převod.",

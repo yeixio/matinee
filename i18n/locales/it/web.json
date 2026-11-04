@@ -1125,6 +1125,11 @@
         "full": "{{name}} decodifica e codifica"
       },
       "burnSub": "sottotitoli impressi",
+      "why": {
+        "codec": "il dispositivo non riproduce questo formato video",
+        "hdr": "lo schermo non mostra questo HDR",
+        "quality": "è stata scelta una qualità inferiore"
+      },
       "started": "Avviata {{time}}",
       "stop": "Ferma",
       "stopHint": "Ferma FFmpeg. Se il player è ancora aperto, avvia una nuova transcodifica.",
