@@ -27,6 +27,7 @@ import (
 	"github.com/yeixio/matinee/internal/health"
 	"github.com/yeixio/matinee/internal/hwaccel"
 	"github.com/yeixio/matinee/internal/live"
+	"github.com/yeixio/matinee/internal/livetv"
 	"github.com/yeixio/matinee/internal/lyrics"
 	"github.com/yeixio/matinee/internal/plugin"
 	"github.com/yeixio/matinee/internal/podcast"
@@ -148,6 +149,13 @@ type Server struct {
 	OpenSubtitlesBase string
 	openSubs          openSubsState
 	podcastCache      ttlCache // Podcast Index's answers
+
+	// LiveTV keeps live TV sources up to date (see livetv.go); nil makes
+	// one that only refreshes when asked.
+	LiveTV     *livetv.Manager
+	liveTVOnce sync.Once
+	liveSigner livetv.Signer
+	iptvOrg    *livetv.Catalog
 
 	// BackgroundCtx scopes scans started by API calls; it outlives any one request.
 	BackgroundCtx context.Context
@@ -452,7 +460,7 @@ func (s *Server) Handler() http.Handler {
 		w.Write([]byte("ok"))
 	})
 
-	for _, rt := range s.routes() {
+	for _, rt := range append(s.routes(), s.liveRoutes()...) {
 		var h http.Handler = rt.handler
 		if rt.access != public {
 			h = s.requireUser(rt.handler, rt.access)
