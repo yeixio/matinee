@@ -61,7 +61,7 @@ Converted video is always SDR, so when Matinee converts an HDR film (HDR10, HDR1
 
 <!-- /since -->
 
-<!-- since: v0.3.0 -->
+<!-- since: v0.2.2 -->
 ## Dolby Vision
 
 Dolby Vision files come in a few kinds (profiles), and each plays the best way the screen allows. The apps on iPhone, iPad, Apple TV and Android, and browsers that decode it (such as Safari on a Mac with a Dolby Vision screen), tell the server when the screen shows Dolby Vision.
