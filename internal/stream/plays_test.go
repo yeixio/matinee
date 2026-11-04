@@ -86,7 +86,7 @@ func TestStartCopiesHEVC(t *testing.T) {
 	gen := exec.Command(ffmpeg, "-hide_banner", "-loglevel", "error",
 		"-f", "lavfi", "-i", "testsrc2=size=3840x2160:rate=12:duration=3",
 		"-f", "lavfi", "-i", "sine=frequency=440:duration=3",
-		"-c:v", "libx265", "-preset", "ultrafast", "-pix_fmt", "yuv420p10le", "-x265-params", "log-level=none:keyint=12",
+		"-c:v", "libx265", "-preset", "ultrafast", "-pix_fmt", "yuv420p10le", "-x265-params", "log-level=none:keyint=12:colorprim=bt2020:transfer=smpte2084:colormatrix=bt2020nc",
 		"-color_primaries", "bt2020", "-color_trc", "smpte2084", "-colorspace", "bt2020nc",
 		"-c:a", "ac3", src)
 	if out, err := gen.CombinedOutput(); err != nil {
@@ -112,6 +112,7 @@ func TestStartCopiesHEVC(t *testing.T) {
 			t.Errorf("%s: %v", f, err)
 		}
 	}
+	// HDR10 is in the HEVC stream itself (as in real files), which a copy keeps.
 	// What a player gets once the init piece and the first segment are put together.
 	init, _ := os.ReadFile(filepath.Join(sdir, "init.mp4"))
 	seg, _ := os.ReadFile(filepath.Join(sdir, "seg00000.m4s"))
