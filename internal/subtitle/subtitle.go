@@ -57,7 +57,7 @@ var imageCodecs = map[string]bool{
 }
 
 // Sidecar extensions, mapped to the codec name FFmpeg gives them.
-var sidecarExts = map[string]string{".srt": "subrip", ".vtt": "webvtt", ".ass": "ass", ".ssa": "ssa"}
+var sidecarExts = map[string]string{".srt": "subrip", ".vtt": "webvtt", ".ass": "ass", ".ssa": "ssa", ".sup": "hdmv_pgs_subtitle", ".idx": "dvd_subtitle"}
 
 // List returns a video's tracks: embedded streams in file order, then
 // sidecar files. Codecs Matinee can't show at all are left out.
@@ -88,10 +88,58 @@ func List(videoPath string, embedded []probe.Subtitle) []Track {
 }
 
 // Sidecars finds subtitle files named after a video, like "Movie.srt",
-// "Movie.en.srt", "Movie.en.forced.srt" or "Movie.English.SDH.srt".
+// "Movie.en.srt", "Movie.en.forced.srt" or "Movie.English.SDH.srt", and in a
+// Subs or Subtitles folder beside it: "Subs/Movie.en.srt", "Subs/<video
+// name>/2_English.srt" (how many TV releases come), or "Subs/2_English.srt"
+// when the folder holds just the one video. Picture subtitles come as
+// Blu-ray .sup files and VobSub .idx/.sub pairs; they're drawn in.
 func Sidecars(videoPath string) []Track {
 	dir, base := filepath.Split(videoPath)
 	stem := strings.TrimSuffix(base, filepath.Ext(base))
+	out := sidecarsIn(dir, "", stem)
+	entries, _ := os.ReadDir(dir)
+	for _, e := range entries {
+		if !e.IsDir() || !subFolders[strings.ToLower(e.Name())] {
+			continue
+		}
+		out = append(out, sidecarsIn(dir, e.Name(), stem)...)
+		if sub, err := os.ReadDir(filepath.Join(dir, e.Name())); err == nil {
+			for _, d := range sub {
+				if d.IsDir() && strings.EqualFold(d.Name(), stem) {
+					out = append(out, sidecarsIn(dir, filepath.Join(e.Name(), d.Name()), "")...)
+				}
+			}
+		}
+		if onlyVideo(entries) {
+			out = append(out, sidecarsIn(dir, e.Name(), "")...)
+		}
+	}
+	slices.SortFunc(out, func(a, b Track) int { return strings.Compare(a.Path, b.Path) })
+	return slices.CompactFunc(out, func(a, b Track) bool { return a.Path == b.Path })
+}
+
+var subFolders = map[string]bool{"subs": true, "subtitles": true, "sub": true}
+
+var videoExts = map[string]bool{".mkv": true, ".mp4": true, ".m4v": true, ".avi": true, ".mov": true, ".wmv": true,
+	".ts": true, ".m2ts": true, ".webm": true, ".mpg": true, ".mpeg": true, ".flv": true}
+
+// onlyVideo says whether a folder holds one video at most, so a Subs folder
+// in it can only be that video's.
+func onlyVideo(entries []os.DirEntry) bool {
+	n := 0
+	for _, e := range entries {
+		if !e.IsDir() && videoExts[strings.ToLower(filepath.Ext(e.Name()))] {
+			n++
+		}
+	}
+	return n <= 1
+}
+
+// sidecarsIn finds the subtitle files in videoDir/rel whose names start with
+// stem (all of them for ""). A track's id comes from its path from the
+// video's folder, which for files right beside the video is its name.
+func sidecarsIn(videoDir, rel, stem string) []Track {
+	dir := filepath.Join(videoDir, rel)
 	entries, err := os.ReadDir(dir)
 	if err != nil {
 		return nil
@@ -104,14 +152,17 @@ func Sidecars(videoPath string) []Track {
 		if !ok || e.IsDir() || len(name) < len(stem) || !strings.EqualFold(name[:len(stem)], stem) {
 			continue
 		}
+		if ext == ".idx" && !hasPair(dir, name) {
+			continue // VobSub needs its .sub beside the .idx
+		}
 		// What's between the video's name and the extension: "", ".en", ".en.forced"…
 		middle := name[len(stem) : len(name)-len(ext)]
-		if middle != "" && middle[0] != '.' {
+		if stem != "" && middle != "" && middle[0] != '.' {
 			continue // "Movie 2.srt" belongs to "Movie 2.mkv", not "Movie.mkv"
 		}
 		middle = strings.TrimPrefix(middle, ".")
-		t := Track{Codec: codec, External: true, Path: filepath.Join(dir, name), Styled: codec == "ass" || codec == "ssa"}
-		sum := sha1.Sum([]byte(name))
+		t := Track{Codec: codec, External: true, Path: filepath.Join(dir, name), Styled: codec == "ass" || codec == "ssa", BurnIn: imageCodecs[codec]}
+		sum := sha1.Sum([]byte(filepath.ToSlash(filepath.Join(rel, name))))
 		t.ID = "x" + hex.EncodeToString(sum[:6])
 		var langName string
 		var extra []string
@@ -132,6 +183,8 @@ func Sidecars(videoPath string) []Track {
 					t.SDH = true // "hi" is Hindi, unless it follows a language: "Movie.en.hi.srt"
 				case lw == "default":
 					t.Default = true
+				case strings.Trim(lw, "0123456789") == "":
+					// "2_English.srt": how a release numbers its files.
 				default:
 					if code, n := lookupLanguage(w); n != "" && langName == "" {
 						t.Language, langName = code, n
@@ -148,8 +201,18 @@ func Sidecars(videoPath string) []Track {
 		}
 		out = append(out, t)
 	}
-	slices.SortFunc(out, func(a, b Track) int { return strings.Compare(a.Path, b.Path) })
 	return out
+}
+
+// hasPair says whether a VobSub .idx has its .sub.
+func hasPair(dir, idx string) bool {
+	stem := strings.TrimSuffix(idx, filepath.Ext(idx))
+	for _, ext := range []string{".sub", ".SUB"} {
+		if fileExists(filepath.Join(dir, stem+ext)) {
+			return true
+		}
+	}
+	return false
 }
 
 // label reads like "English", "English (Forced)" or "English (SDH, Commentary)".

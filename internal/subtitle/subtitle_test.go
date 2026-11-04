@@ -89,3 +89,55 @@ func TestListEmbedded(t *testing.T) {
 		}
 	}
 }
+
+func TestSidecarsInSubsFoldersAndPictures(t *testing.T) {
+	root := t.TempDir()
+	touch := func(rel string) {
+		p := filepath.Join(root, rel)
+		os.MkdirAll(filepath.Dir(p), 0o755)
+		os.WriteFile(p, nil, 0o644)
+	}
+	for _, f := range []string{
+		"Movie/Movie.mkv", "Movie/Movie.en.sup", "Movie/Movie.fr.idx", "Movie/Movie.fr.sub", "Movie/Movie.de.idx",
+		"Movie/Subs/2_English.srt", "Movie/Subs/3_Spanish.srt", "Movie/Subtitles/Movie.it.srt",
+		"Show/E01.mkv", "Show/E02.mkv", "Show/Subs/E01/2_English.srt", "Show/Subs/E02/2_English.srt", "Show/Subs/everyone.srt",
+	} {
+		touch(f)
+	}
+	got := func(video string) map[string]Track {
+		m := map[string]Track{}
+		for _, tr := range Sidecars(filepath.Join(root, video)) {
+			rel, _ := filepath.Rel(root, tr.Path)
+			m[filepath.ToSlash(rel)] = tr
+		}
+		return m
+	}
+	movie := got("Movie/Movie.mkv")
+	want := map[string]struct {
+		lang   string
+		burnIn bool
+	}{
+		"Movie/Movie.en.sup": {"en", true}, "Movie/Movie.fr.idx": {"fr", true},
+		"Movie/Subs/2_English.srt": {"en", false}, "Movie/Subs/3_Spanish.srt": {"es", false}, "Movie/Subtitles/Movie.it.srt": {"it", false},
+	}
+	if len(movie) != len(want) {
+		t.Errorf("movie: got %d tracks, want %d: %v", len(movie), len(want), movie)
+	}
+	for p, w := range want {
+		tr, ok := movie[p]
+		if !ok || tr.Language != w.lang || tr.BurnIn != w.burnIn {
+			t.Errorf("%s: %+v, want language %s burnIn %v", p, tr, w.lang, w.burnIn)
+		}
+	}
+	if tr := movie["Movie/Subs/2_English.srt"]; tr.Label != "English" {
+		t.Errorf("numbered file label %q", tr.Label)
+	}
+	if movie["Movie/Subs/2_English.srt"].ID == got("Show/E01.mkv")["Show/Subs/E01/2_English.srt"].ID {
+		t.Error("ids should differ by folder")
+	}
+	// Each episode gets its own folder; a flat file can't say whose it is.
+	e1 := got("Show/E01.mkv")
+	if _, ok := e1["Show/Subs/E01/2_English.srt"]; !ok || len(e1) != 1 {
+		t.Errorf("episode: %v", e1)
+	}
+}

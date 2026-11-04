@@ -40,7 +40,8 @@ func (s *Server) downloadQualities(w http.ResponseWriter, r *http.Request) {
 // download converter.
 func (s *Server) BurnStream(ctx context.Context, it store.Item, track string) (int, bool) {
 	t, ok := subtitle.Find(s.subtitleTracks(ctx, it), track)
-	if !ok || !t.BurnIn {
+	// Picture subtitle files next to the video are only drawn into streams so far.
+	if !ok || !t.BurnIn || t.External {
 		return 0, false
 	}
 	return t.Stream, true

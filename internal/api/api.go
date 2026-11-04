@@ -1520,6 +1520,7 @@ func (s *Server) startHLS(w http.ResponseWriter, r *http.Request) {
 	start, _ := strconv.ParseFloat(r.URL.Query().Get("start"), 64)
 	burn := -1
 	var styled *stream.StyledSub
+	burnFile := ""
 	if sub := r.URL.Query().Get("subtitle"); sub != "" {
 		t, ok := subtitle.Find(s.subtitleTracks(r.Context(), it), sub)
 		if !ok {
@@ -1530,6 +1531,8 @@ func (s *Server) startHLS(w http.ResponseWriter, r *http.Request) {
 		// in, and ASS/SSA when the player asks for their styling drawn in
 		// (styled=1) because it can't draw it itself.
 		switch {
+		case t.BurnIn && t.External:
+			burnFile = t.Path
 		case t.BurnIn:
 			burn = t.Stream
 		case t.Styled && r.URL.Query().Get("styled") == "1":
@@ -1568,7 +1571,7 @@ func (s *Server) startHLS(w http.ResponseWriter, r *http.Request) {
 	}
 	// video and hdr say what the player decodes and its screen shows, so
 	// a picture it can take (HEVC or AV1, 4K, HDR) is repackaged as it is.
-	req := stream.Request{BurnSub: burn, Styled: styled, Audio: audio, Plays: stream.ParsePlays(r.URL.Query().Get("video"), r.URL.Query().Get("hdr"))}
+	req := stream.Request{BurnSub: burn, BurnFile: burnFile, Styled: styled, Audio: audio, Plays: stream.ParsePlays(r.URL.Query().Get("video"), r.URL.Query().Get("hdr"))}
 	// audioDelay moves the sound against the picture, in milliseconds, for lip sync.
 	if d := r.URL.Query().Get("audioDelay"); d != "" {
 		ms, err := strconv.Atoi(d)
