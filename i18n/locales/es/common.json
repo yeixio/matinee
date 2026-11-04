@@ -732,5 +732,59 @@
     "hint": "¿El sonido va detrás de la imagen? Adelántalo. Mientras haya un retraso, el servidor envía el sonido desplazado.",
     "forTitle": "Solo para este título",
     "reset": "Sin retraso"
+  },
+  "subtitlePrefs": {
+    "title": "Subtítulos",
+    "intro": "Cuándo aparecen los subtítulos y cómo se ven. Tus opciones te siguen a todas las apps. Elegir subtítulos en el reproductor también las cambia.",
+    "when": "Mostrar subtítulos",
+    "mode": {
+      "off": "Nunca",
+      "forced": "Solo líneas forzadas",
+      "foreign": "Cuando el audio no está en mi idioma",
+      "always": "Siempre"
+    },
+    "modeHint": {
+      "off": "Los subtítulos quedan desactivados, incluso las líneas forzadas que pida un archivo.",
+      "forced": "Solo las líneas pensadas para todos, como carteles o diálogos en otro idioma.",
+      "foreign": "Subtítulos completos en tu idioma cuando una película está en otro; si no, solo líneas forzadas.",
+      "always": "Subtítulos completos en el primero de tus idiomas que tenga el archivo."
+    },
+    "languages": "Idiomas, en orden",
+    "appLanguage": "Idioma de la app ({{language}})",
+    "addLanguage": "Añadir un idioma",
+    "removeLanguage": "Quitar {{language}}",
+    "size": "Tamaño",
+    "sizes": {
+      "small": "Pequeño",
+      "medium": "Mediano",
+      "large": "Grande",
+      "huge": "Muy grande"
+    },
+    "color": "Color",
+    "colors": {
+      "white": "Blanco",
+      "yellow": "Amarillo",
+      "cyan": "Cian",
+      "green": "Verde"
+    },
+    "edge": "Bordes",
+    "edges": {
+      "shadow": "Sombra",
+      "outline": "Contorno",
+      "none": "Ninguno"
+    },
+    "position": "Posición",
+    "positions": {
+      "bottom": "Abajo",
+      "raised": "Más arriba"
+    },
+    "background": "Recuadro detrás del texto",
+    "sample": "Así se verán los subtítulos."
+  },
+  "subtitleTiming": {
+    "title": "Sincronización",
+    "earlier": "Mostrar subtítulos antes",
+    "later": "Mostrar subtítulos después",
+    "reset": "Volver a la sincronización del archivo"
   }
 }

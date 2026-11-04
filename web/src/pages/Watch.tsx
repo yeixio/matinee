@@ -10,7 +10,8 @@ import { clock, episodeCode } from '../format'
 import i18n from '../i18n'
 import { canDirectPlay } from '../player/direct'
 import { currentPlays, playsQuery, repackages } from '../player/plays'
-import { defaultTrack, savePreference, SubtitleMenu, SubtitleOverlay } from '../player/Subtitles'
+import { savedPreference, savePreference, SubtitleMenu, SubtitleOverlay } from '../player/Subtitles'
+import { afterPick, audioLanguageOf, fromOldChoice, pickSubtitles, saveSubtitleTiming, subtitleTiming, type SubtitlePrefs } from '../player/subtitlePrefs'
 import { UpNextCard, type UpNextMode } from '../player/UpNext'
 import { COUNTDOWN_SECONDS, stillWatching, upNextAt } from '../player/autoplay'
 import { creditsEnd, creditsOf, inCredits } from '../player/credits'
@@ -179,7 +180,14 @@ function Player({ id }: { id: number }) {
     preloadSheets(id, thumbs)
   }
   // Auto-play: the card that offers what's next, and its countdown.
-  const { data: prefs } = useQuery({ queryKey: ['playback'], queryFn: api.playback, staleTime: 60_000, retry: false })
+  const { data: prefs, isFetched: prefsKnown } = useQuery({ queryKey: ['playback'], queryFn: api.playback, staleTime: 60_000, retry: false })
+  // Subtitle choices live on the server; a browser that remembered one
+  // before keeps it until the person picks again.
+  const subPrefs: SubtitlePrefs = prefs?.subtitles ?? fromOldChoice(savedPreference())
+  const titleId = item ? (item.versionOf ?? item.id) : id
+  const [subTiming, setSubTiming] = useState(() => subtitleTiming(titleId))
+  useEffect(() => setSubTiming(subtitleTiming(titleId)), [titleId])
+  const changeTiming = (seconds: number) => setSubTiming(saveSubtitleTiming(titleId, seconds))
   const { data: upNext } = useQuery({
     queryKey: ['next', id],
     queryFn: () => api.next(id),
@@ -320,7 +328,7 @@ function Player({ id }: { id: number }) {
   // Pick direct play or a transcode, and resume where the viewer left off.
   useEffect(() => {
     const el = video.current
-    if (!item || !el || mode || !streamingKnown) return
+    if (!item || !el || mode || !streamingKnown || !prefsKnown) return
     const s = sessionNow.current
     const resume =
       s?.itemId === item.id
@@ -330,7 +338,7 @@ function Player({ id }: { id: number }) {
           : !item.played && item.positionMs
             ? item.positionMs / 1000
             : 0
-    const pick = defaultTrack(item.subtitles ?? [])
+    const pick = pickSubtitles(item.subtitles ?? [], subPrefs, { appLanguage: i18n.language, audioLanguage: audioLanguageOf(item) })
     const d = item.videoCodec ? loadDelay(item.versionOf ?? item.id) : { ms: 0, forTitle: false }
     delayNow.current = d.ms
     setDelay(d)
@@ -341,7 +349,7 @@ function Player({ id }: { id: number }) {
     if (pick?.burnIn) startHls(resume, pick.id)
     else if (direct(q)) playDirect(resume)
     else startHls(resume)
-  }, [item, mode, startHls, playDirect, startAt, streamingKnown]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [item, mode, startHls, playDirect, startAt, streamingKnown, prefsKnown]) // eslint-disable-line react-hooks/exhaustive-deps
 
   // Picking a quality starts playback again at the same spot.
   const selectQuality = (q: Quality) => {
@@ -410,19 +418,27 @@ function Player({ id }: { id: number }) {
     api
       .removeSubtitle(item.id, t.id)
       .then(() => {
-        if (sub?.id === t.id) selectSub(undefined)
+        if (sub?.id === t.id) selectSub(undefined, false)
         qc.setQueryData<ItemDetail>(['item', id], (it) => (it ? { ...it, subtitles: it.subtitles?.filter((s) => s.id !== t.id) } : it))
         qc.invalidateQueries({ queryKey: ['subtitleSearch', item.id] })
       })
       .catch((e: Error) => flash(e.message, 5000))
   }
 
+  // A pick in the player is what the person wants next time too, on every device.
+  const rememberSub = (t: SubtitleTrack | undefined) => {
+    savePreference(t)
+    const next = afterPick(subPrefs, t, i18n.language)
+    qc.setQueryData<typeof prefs>(['playback'], (p) => (p ? { ...p, subtitles: next } : p))
+    api.setPlayback({ subtitles: next }).catch(() => {})
+  }
+
   // Picture subtitles are part of the video, so switching to or from one
   // restarts playback at the same spot.
-  const selectSub = (t: SubtitleTrack | undefined) => {
+  const selectSub = (t: SubtitleTrack | undefined, remember = true) => {
     const el = video.current
     if (!item || !el) return
-    savePreference(t)
+    if (remember) rememberSub(t)
     setSub(t)
     if (t) lastSub.current = t
     const burn = t?.burnIn ? t.id : undefined
@@ -999,7 +1015,7 @@ function Player({ id }: { id: number }) {
         onError={() => recoverRef.current?.(position(), mode === 'direct' ? 'direct' : 'transcode')}
       />
 
-      {sub && !sub.burnIn && !error && <SubtitleOverlay cues={cues} position={position} lifted={chrome} />}
+      {sub && !sub.burnIn && !error && <SubtitleOverlay cues={cues} position={position} lifted={chrome} prefs={subPrefs} timing={subTiming} />}
 
       {card && !error && (upNext?.next ?? upNext?.similar) && (
         <UpNextCard
@@ -1251,6 +1267,7 @@ function Player({ id }: { id: number }) {
                   tracks={item.subtitles ?? []}
                   selected={sub?.id}
                   onSelect={selectSub}
+                  timing={sub && !sub.burnIn ? { seconds: subTiming, onChange: changeTiming } : undefined}
                   onOpenChange={(open) => {
                     menuOpen.current = open
                     poke()

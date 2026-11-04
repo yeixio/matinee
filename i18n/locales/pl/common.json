@@ -764,5 +764,59 @@
     "hint": "Dźwięk spóźnia się względem obrazu? Przesuń go wcześniej. Gdy ustawione jest opóźnienie, serwer wysyła przesunięty dźwięk.",
     "forTitle": "Tylko dla tego tytułu",
     "reset": "Bez opóźnienia"
+  },
+  "subtitlePrefs": {
+    "title": "Napisy",
+    "intro": "Kiedy pojawiają się napisy i jak wyglądają. Twoje wybory obowiązują w każdej aplikacji. Wybranie napisów w odtwarzaczu też je zmienia.",
+    "when": "Pokazuj napisy",
+    "mode": {
+      "off": "Nigdy",
+      "forced": "Tylko wymuszone linie",
+      "foreign": "Gdy dźwięk nie jest w moim języku",
+      "always": "Zawsze"
+    },
+    "modeHint": {
+      "off": "Napisy pozostają wyłączone, nawet wymuszone linie, które plik chce pokazać.",
+      "forced": "Tylko linie dla wszystkich, np. napisy na szyldach lub dialogi w innym języku.",
+      "foreign": "Pełne napisy w Twoim języku, gdy film jest w innym; w przeciwnym razie tylko wymuszone linie.",
+      "always": "Pełne napisy w pierwszym z Twoich języków, który ma plik."
+    },
+    "languages": "Języki, w kolejności",
+    "appLanguage": "Język aplikacji ({{language}})",
+    "addLanguage": "Dodaj język",
+    "removeLanguage": "Usuń {{language}}",
+    "size": "Rozmiar",
+    "sizes": {
+      "small": "Mały",
+      "medium": "Średni",
+      "large": "Duży",
+      "huge": "Bardzo duży"
+    },
+    "color": "Kolor",
+    "colors": {
+      "white": "Biały",
+      "yellow": "Żółty",
+      "cyan": "Cyjan",
+      "green": "Zielony"
+    },
+    "edge": "Krawędzie",
+    "edges": {
+      "shadow": "Cień",
+      "outline": "Obrys",
+      "none": "Brak"
+    },
+    "position": "Położenie",
+    "positions": {
+      "bottom": "Na dole",
+      "raised": "Wyżej"
+    },
+    "background": "Tło za tekstem",
+    "sample": "Tak będą wyglądać napisy."
+  },
+  "subtitleTiming": {
+    "title": "Synchronizacja",
+    "earlier": "Pokazuj napisy wcześniej",
+    "later": "Pokazuj napisy później",
+    "reset": "Wróć do synchronizacji pliku"
   }
 }

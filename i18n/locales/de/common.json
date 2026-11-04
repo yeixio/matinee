@@ -700,5 +700,59 @@
     "hint": "Ton hinter dem Bild? Mach ihn früher. Solange eine Verzögerung eingestellt ist, verschiebt der Server den Ton.",
     "forTitle": "Nur für diesen Titel",
     "reset": "Keine Verzögerung"
+  },
+  "subtitlePrefs": {
+    "title": "Untertitel",
+    "intro": "Wann Untertitel erscheinen und wie sie aussehen. Deine Einstellungen gelten in jeder App. Wenn du im Player Untertitel wählst, ändert das sie ebenfalls.",
+    "when": "Untertitel zeigen",
+    "mode": {
+      "off": "Nie",
+      "forced": "Nur erzwungene Zeilen",
+      "foreign": "Wenn der Ton nicht in meiner Sprache ist",
+      "always": "Immer"
+    },
+    "modeHint": {
+      "off": "Untertitel bleiben aus, auch erzwungene Zeilen, die eine Datei zeigen möchte.",
+      "forced": "Nur Zeilen für alle, etwa Schilder oder Dialoge in einer anderen Sprache.",
+      "foreign": "Vollständige Untertitel in deiner Sprache, wenn ein Film in einer anderen läuft, sonst nur erzwungene Zeilen.",
+      "always": "Vollständige Untertitel in der ersten deiner Sprachen, die eine Datei hat."
+    },
+    "languages": "Sprachen, in Reihenfolge",
+    "appLanguage": "Sprache der App ({{language}})",
+    "addLanguage": "Sprache hinzufügen",
+    "removeLanguage": "{{language}} entfernen",
+    "size": "Größe",
+    "sizes": {
+      "small": "Klein",
+      "medium": "Mittel",
+      "large": "Groß",
+      "huge": "Sehr groß"
+    },
+    "color": "Farbe",
+    "colors": {
+      "white": "Weiß",
+      "yellow": "Gelb",
+      "cyan": "Cyan",
+      "green": "Grün"
+    },
+    "edge": "Ränder",
+    "edges": {
+      "shadow": "Schatten",
+      "outline": "Kontur",
+      "none": "Keine"
+    },
+    "position": "Position",
+    "positions": {
+      "bottom": "Unten",
+      "raised": "Weiter oben"
+    },
+    "background": "Kasten hinter dem Text",
+    "sample": "So sehen Untertitel aus."
+  },
+  "subtitleTiming": {
+    "title": "Timing",
+    "earlier": "Untertitel früher zeigen",
+    "later": "Untertitel später zeigen",
+    "reset": "Zurück zum Timing der Datei"
   }
 }

@@ -700,5 +700,59 @@
     "hint": "Onko ääni kuvaa jäljessä? Siirrä sitä aiemmaksi. Kun viive on käytössä, palvelin lähettää äänen siirrettynä.",
     "forTitle": "Vain tälle nimikkeelle",
     "reset": "Ei viivettä"
+  },
+  "subtitlePrefs": {
+    "title": "Tekstitykset",
+    "intro": "Milloin tekstitykset näkyvät ja miltä ne näyttävät. Valintasi seuraavat sinua kaikkiin sovelluksiin. Tekstityksen valitseminen soittimessa muuttaa niitä myös.",
+    "when": "Näytä tekstitykset",
+    "mode": {
+      "off": "Ei koskaan",
+      "forced": "Vain pakotetut rivit",
+      "foreign": "Kun ääni ei ole omalla kielelläni",
+      "always": "Aina"
+    },
+    "modeHint": {
+      "off": "Tekstitykset pysyvät pois, myös pakotetut rivit, jotka tiedosto haluaa näyttää.",
+      "forced": "Vain kaikille tarkoitetut rivit, kuten kyltit tai muunkielinen puhe.",
+      "foreign": "Täydet tekstitykset omalla kielelläsi, kun elokuva on toisella kielellä, muuten vain pakotetut rivit.",
+      "always": "Täydet tekstitykset ensimmäisellä kielistäsi, joka tiedostossa on."
+    },
+    "languages": "Kielet järjestyksessä",
+    "appLanguage": "Sovelluksen kieli ({{language}})",
+    "addLanguage": "Lisää kieli",
+    "removeLanguage": "Poista {{language}}",
+    "size": "Koko",
+    "sizes": {
+      "small": "Pieni",
+      "medium": "Keskikokoinen",
+      "large": "Suuri",
+      "huge": "Hyvin suuri"
+    },
+    "color": "Väri",
+    "colors": {
+      "white": "Valkoinen",
+      "yellow": "Keltainen",
+      "cyan": "Syaani",
+      "green": "Vihreä"
+    },
+    "edge": "Reunat",
+    "edges": {
+      "shadow": "Varjo",
+      "outline": "Ääriviiva",
+      "none": "Ei mitään"
+    },
+    "position": "Sijainti",
+    "positions": {
+      "bottom": "Alhaalla",
+      "raised": "Ylempänä"
+    },
+    "background": "Laatikko tekstin takana",
+    "sample": "Tältä tekstitykset näyttävät."
+  },
+  "subtitleTiming": {
+    "title": "Ajoitus",
+    "earlier": "Näytä tekstitykset aiemmin",
+    "later": "Näytä tekstitykset myöhemmin",
+    "reset": "Takaisin tiedoston ajoitukseen"
   }
 }

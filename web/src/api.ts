@@ -7,6 +7,7 @@ import i18n from './i18n'
 import type { LevelsJSON } from './player/levels'
 import type { Lyrics } from './player/lyricLines'
 import type { Thumbnails } from './player/thumbnails'
+import type { SubtitlePrefs } from './player/subtitlePrefs'
 import { heardRestarting, RESTARTING_HEADER } from './player/reconnect'
 
 // guest is the shared account of a device at home that hasn't signed in, or
@@ -763,6 +764,7 @@ export type PlaybackPrefs = {
   binge: boolean // skip the countdown
   skipIntros?: boolean // jump past intros without pressing Skip intro
   podcastsPlayOn?: boolean // when a podcast episode ends, play the next one
+  subtitles?: SubtitlePrefs // when subtitles come on and how they look
 }
 
 // One file of a movie or episode with several; its id plays it.
@@ -1287,7 +1289,7 @@ export const api = {
   myLanguage: () => request<{ language: string }>('GET', '/api/v1/me/language'),
   setMyLanguage: (language: string) => request<{ language: string }>('PUT', '/api/v1/me/language', { language }),
   playback: () => request<PlaybackPrefs>('GET', '/api/v1/me/playback'),
-  setPlayback: (p: PlaybackPrefs) => request<PlaybackPrefs>('PUT', '/api/v1/me/playback', p),
+  setPlayback: (p: Partial<PlaybackPrefs>) => request<PlaybackPrefs>('PUT', '/api/v1/me/playback', p),
   users: () => request<Account[]>('GET', '/api/v1/users'),
   // friend: false lets the account see every library again.
   setFriend: (id: number, friend: boolean, libraries?: number[]) =>

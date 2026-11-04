@@ -700,5 +700,59 @@
     "hint": "Ligger ljudet efter bilden? Gör det tidigare. Så länge en fördröjning är inställd skickar servern ljudet förskjutet.",
     "forTitle": "Bara för den här titeln",
     "reset": "Ingen fördröjning"
+  },
+  "subtitlePrefs": {
+    "title": "Undertexter",
+    "intro": "När undertexter visas och hur de ser ut. Dina val följer med till alla appar. Att välja undertexter i spelaren ändrar dem också.",
+    "when": "Visa undertexter",
+    "mode": {
+      "off": "Aldrig",
+      "forced": "Bara tvingade rader",
+      "foreign": "När ljudet inte är på mitt språk",
+      "always": "Alltid"
+    },
+    "modeHint": {
+      "off": "Undertexter är av, även tvingade rader som en fil vill visa.",
+      "forced": "Bara rader som är till för alla, som skyltar eller dialog på ett annat språk.",
+      "foreign": "Hela undertexter på ditt språk när en film går på ett annat, annars bara tvingade rader.",
+      "always": "Hela undertexter på det första av dina språk som filen har."
+    },
+    "languages": "Språk, i ordning",
+    "appLanguage": "Appens språk ({{language}})",
+    "addLanguage": "Lägg till ett språk",
+    "removeLanguage": "Ta bort {{language}}",
+    "size": "Storlek",
+    "sizes": {
+      "small": "Liten",
+      "medium": "Mellan",
+      "large": "Stor",
+      "huge": "Mycket stor"
+    },
+    "color": "Färg",
+    "colors": {
+      "white": "Vit",
+      "yellow": "Gul",
+      "cyan": "Cyan",
+      "green": "Grön"
+    },
+    "edge": "Kanter",
+    "edges": {
+      "shadow": "Skugga",
+      "outline": "Kontur",
+      "none": "Inga"
+    },
+    "position": "Placering",
+    "positions": {
+      "bottom": "Längst ner",
+      "raised": "Högre upp"
+    },
+    "background": "Ruta bakom texten",
+    "sample": "Så här ser undertexterna ut."
+  },
+  "subtitleTiming": {
+    "title": "Timing",
+    "earlier": "Visa undertexter tidigare",
+    "later": "Visa undertexter senare",
+    "reset": "Tillbaka till filens timing"
   }
 }

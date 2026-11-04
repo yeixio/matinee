@@ -700,5 +700,59 @@
     "hint": "Késik a hang a képhez képest? Hozd előrébb. Amíg van késleltetés, a szerver eltolva küldi a hangot.",
     "forTitle": "Csak ehhez a címhez",
     "reset": "Nincs késleltetés"
+  },
+  "subtitlePrefs": {
+    "title": "Feliratok",
+    "intro": "Mikor jelenjenek meg a feliratok, és hogyan nézzenek ki. A beállításaid minden alkalmazásban érvényesek. A lejátszóban választott felirat is módosítja őket.",
+    "when": "Feliratok megjelenítése",
+    "mode": {
+      "off": "Soha",
+      "forced": "Csak kényszerített sorok",
+      "foreign": "Ha a hang nem az én nyelvemen szól",
+      "always": "Mindig"
+    },
+    "modeHint": {
+      "off": "A feliratok kikapcsolva maradnak, még a fájl által kért kényszerített sorok is.",
+      "forced": "Csak a mindenkinek szóló sorok, például feliratok táblákon vagy idegen nyelvű párbeszéd.",
+      "foreign": "Teljes felirat a nyelveden, ha a film más nyelvű; egyébként csak kényszerített sorok.",
+      "always": "Teljes felirat az első olyan nyelveden, amely a fájlban megvan."
+    },
+    "languages": "Nyelvek sorrendben",
+    "appLanguage": "Az alkalmazás nyelve ({{language}})",
+    "addLanguage": "Nyelv hozzáadása",
+    "removeLanguage": "{{language}} eltávolítása",
+    "size": "Méret",
+    "sizes": {
+      "small": "Kicsi",
+      "medium": "Közepes",
+      "large": "Nagy",
+      "huge": "Nagyon nagy"
+    },
+    "color": "Szín",
+    "colors": {
+      "white": "Fehér",
+      "yellow": "Sárga",
+      "cyan": "Cián",
+      "green": "Zöld"
+    },
+    "edge": "Szélek",
+    "edges": {
+      "shadow": "Árnyék",
+      "outline": "Körvonal",
+      "none": "Nincs"
+    },
+    "position": "Elhelyezés",
+    "positions": {
+      "bottom": "Lent",
+      "raised": "Feljebb"
+    },
+    "background": "Doboz a szöveg mögött",
+    "sample": "Így fognak kinézni a feliratok."
+  },
+  "subtitleTiming": {
+    "title": "Időzítés",
+    "earlier": "Feliratok korábban",
+    "later": "Feliratok később",
+    "reset": "Vissza a fájl időzítéséhez"
   }
 }

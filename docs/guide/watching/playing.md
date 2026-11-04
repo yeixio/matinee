@@ -43,6 +43,27 @@ No subtitles in your language? Once an admin sets up subtitle search, **Find sub
 <!-- /since -->
 
 <!-- since: v0.3.0 -->
+### When subtitles come on
+
+Under **Settings → You → Subtitles** you choose when subtitles show, and Matinee keeps the choice on your server, so it follows you to every browser and app:
+
+- **Never**: subtitles stay off, even forced lines a file asks to show.
+- **Only forced lines** (the starting choice): just the lines meant for everyone, such as signs or a scene in another language.
+- **When the sound isn't in my language**: full subtitles when a film plays in a language that isn't one of yours, and only forced lines when it is. Good for watching foreign films without switching subtitles on every time.
+- **Always**: full subtitles whenever a file has them in one of your languages.
+
+List your languages in the order you want them: Matinee uses the first one a file has. With none listed, it uses the language the app is in. Picking subtitles in the player changes your choice too: **Off** turns them off for next time, and picking a language puts it first.
+
+### How subtitles look
+
+The same page sets the **size**, **color**, **edges** (a shadow or an outline that keeps light lines readable on bright scenes), how solid the **box behind the words** is, and whether they sit at the bottom or **higher up**, clear of a TV's edge. A sample shows how they'll look. This works for text subtitles; picture subtitles keep the look they came with.
+
+### Subtitles out of step
+
+When a file's subtitles come too early or too late, open the subtitles menu while they show and use **Timing** to move them earlier or later in steps of a tenth of a second. The setting is kept for that title in this browser, and **Back to the file's timing** clears it.
+<!-- /since -->
+
+<!-- since: v0.3.0 -->
 ## Audio delay
 
 A soundbar, an AV receiver or Bluetooth headphones can put the sound a little behind the picture, and now and then a file is out of sync itself. The audio delay button (the sound waves next to the moon) moves the sound against the picture in steps of 25 milliseconds, up to two seconds either way. **Sound earlier** fixes sound that comes after the lips move; **Sound later** fixes sound that comes first. On a keyboard, <kbd>[</kbd> makes it earlier and <kbd>]</kbd> later.

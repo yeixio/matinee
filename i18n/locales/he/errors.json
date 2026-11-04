@@ -254,5 +254,6 @@
   "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "רק סרטים, פרקים, עונות וסדרות אפשר לסמן כנצפו",
   "no_such_backup": "אין גיבוי כזה",
   "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "מסד הנתונים של השרת הזה הוא PostgreSQL; גבו אותו עם pg_dump",
-  "audiodelay_is_milliseconds_between_2000_and_2000": "השהיית השמע היא באלפיות שנייה, בין ‎-2000 ל-2000."
+  "audiodelay_is_milliseconds_between_2000_and_2000": "השהיית השמע היא באלפיות שנייה, בין ‎-2000 ל-2000.",
+  "subtitle_choices_arent_ones_the_apps_know": "האפליקציות אינן מכירות את בחירות הכתוביות האלה"
 }

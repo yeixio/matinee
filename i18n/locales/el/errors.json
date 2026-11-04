@@ -254,5 +254,6 @@
   "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "Μόνο ταινίες, επεισόδια, σεζόν και σειρές μπορούν να σημειωθούν ως προβεβλημένα",
   "no_such_backup": "Δεν υπάρχει τέτοιο αντίγραφο",
   "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "Η βάση δεδομένων αυτού του διακομιστή είναι PostgreSQL· πάρτε αντίγραφο με το pg_dump",
-  "audiodelay_is_milliseconds_between_2000_and_2000": "Η καθυστέρηση ήχου δίνεται σε χιλιοστά του δευτερολέπτου, από -2000 έως 2000."
+  "audiodelay_is_milliseconds_between_2000_and_2000": "Η καθυστέρηση ήχου δίνεται σε χιλιοστά του δευτερολέπτου, από -2000 έως 2000.",
+  "subtitle_choices_arent_ones_the_apps_know": "Αυτές οι επιλογές υποτίτλων δεν είναι γνωστές στις εφαρμογές"
 }

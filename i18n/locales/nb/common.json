@@ -700,5 +700,59 @@
     "hint": "Ligger lyden etter bildet? Gjør den tidligere. Så lenge en forsinkelse er stilt inn, sender serveren lyden forskjøvet.",
     "forTitle": "Bare for denne tittelen",
     "reset": "Ingen forsinkelse"
+  },
+  "subtitlePrefs": {
+    "title": "Undertekster",
+    "intro": "Når undertekster vises og hvordan de ser ut. Valgene dine følger deg til alle apper. Å velge undertekster i spilleren endrer dem også.",
+    "when": "Vis undertekster",
+    "mode": {
+      "off": "Aldri",
+      "forced": "Bare tvungne linjer",
+      "foreign": "Når lyden ikke er på mitt språk",
+      "always": "Alltid"
+    },
+    "modeHint": {
+      "off": "Undertekster er av, også tvungne linjer som en fil vil vise.",
+      "forced": "Bare linjer ment for alle, som skilt eller dialog på et annet språk.",
+      "foreign": "Fulle undertekster på ditt språk når en film går på et annet, ellers bare tvungne linjer.",
+      "always": "Fulle undertekster på det første av språkene dine som filen har."
+    },
+    "languages": "Språk, i rekkefølge",
+    "appLanguage": "Appens språk ({{language}})",
+    "addLanguage": "Legg til et språk",
+    "removeLanguage": "Fjern {{language}}",
+    "size": "Størrelse",
+    "sizes": {
+      "small": "Liten",
+      "medium": "Middels",
+      "large": "Stor",
+      "huge": "Svært stor"
+    },
+    "color": "Farge",
+    "colors": {
+      "white": "Hvit",
+      "yellow": "Gul",
+      "cyan": "Cyan",
+      "green": "Grønn"
+    },
+    "edge": "Kanter",
+    "edges": {
+      "shadow": "Skygge",
+      "outline": "Omriss",
+      "none": "Ingen"
+    },
+    "position": "Plassering",
+    "positions": {
+      "bottom": "Nederst",
+      "raised": "Høyere opp"
+    },
+    "background": "Boks bak teksten",
+    "sample": "Slik vil undertekstene se ut."
+  },
+  "subtitleTiming": {
+    "title": "Timing",
+    "earlier": "Vis undertekster tidligere",
+    "later": "Vis undertekster senere",
+    "reset": "Tilbake til filens timing"
   }
 }

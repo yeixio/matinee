@@ -732,5 +732,59 @@
     "hint": "O som está atrás da imagem? Adiante-o. Enquanto houver um atraso, o servidor envia o som deslocado.",
     "forTitle": "Só para este título",
     "reset": "Sem atraso"
+  },
+  "subtitlePrefs": {
+    "title": "Legendas",
+    "intro": "Quando as legendas aparecem e como elas ficam. Suas escolhas valem em todos os apps. Escolher legendas no player também as muda.",
+    "when": "Mostrar legendas",
+    "mode": {
+      "off": "Nunca",
+      "forced": "Só linhas forçadas",
+      "foreign": "Quando o áudio não está no meu idioma",
+      "always": "Sempre"
+    },
+    "modeHint": {
+      "off": "As legendas ficam desligadas, até as linhas forçadas que um arquivo pede para mostrar.",
+      "forced": "Só as linhas feitas para todos, como placas ou falas em outro idioma.",
+      "foreign": "Legendas completas no seu idioma quando um filme está em outro; caso contrário, só linhas forçadas.",
+      "always": "Legendas completas no primeiro dos seus idiomas que o arquivo tiver."
+    },
+    "languages": "Idiomas, em ordem",
+    "appLanguage": "Idioma do app ({{language}})",
+    "addLanguage": "Adicionar um idioma",
+    "removeLanguage": "Remover {{language}}",
+    "size": "Tamanho",
+    "sizes": {
+      "small": "Pequeno",
+      "medium": "Médio",
+      "large": "Grande",
+      "huge": "Muito grande"
+    },
+    "color": "Cor",
+    "colors": {
+      "white": "Branco",
+      "yellow": "Amarelo",
+      "cyan": "Ciano",
+      "green": "Verde"
+    },
+    "edge": "Bordas",
+    "edges": {
+      "shadow": "Sombra",
+      "outline": "Contorno",
+      "none": "Nenhuma"
+    },
+    "position": "Posição",
+    "positions": {
+      "bottom": "Embaixo",
+      "raised": "Mais acima"
+    },
+    "background": "Caixa atrás do texto",
+    "sample": "É assim que as legendas vão ficar."
+  },
+  "subtitleTiming": {
+    "title": "Sincronia",
+    "earlier": "Mostrar legendas antes",
+    "later": "Mostrar legendas depois",
+    "reset": "Voltar à sincronia do arquivo"
   }
 }

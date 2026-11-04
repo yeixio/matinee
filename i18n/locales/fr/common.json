@@ -732,5 +732,59 @@
     "hint": "Le son est en retard sur l'image ? Avancez-le. Tant qu'un décalage est réglé, le serveur envoie le son décalé.",
     "forTitle": "Pour ce titre seulement",
     "reset": "Aucun décalage"
+  },
+  "subtitlePrefs": {
+    "title": "Sous-titres",
+    "intro": "Quand les sous-titres s'affichent et à quoi ils ressemblent. Vos choix vous suivent dans toutes les applis. Choisir des sous-titres dans le lecteur les modifie aussi.",
+    "when": "Afficher les sous-titres",
+    "mode": {
+      "off": "Jamais",
+      "forced": "Seulement les lignes forcées",
+      "foreign": "Quand le son n'est pas dans ma langue",
+      "always": "Toujours"
+    },
+    "modeHint": {
+      "off": "Les sous-titres restent désactivés, même les lignes forcées qu'un fichier demande d'afficher.",
+      "forced": "Seulement les lignes destinées à tous, comme les panneaux ou les dialogues dans une autre langue.",
+      "foreign": "Sous-titres complets dans votre langue quand un film est dans une autre ; sinon, seulement les lignes forcées.",
+      "always": "Sous-titres complets dans la première de vos langues que propose le fichier."
+    },
+    "languages": "Langues, par ordre",
+    "appLanguage": "Langue de l'appli ({{language}})",
+    "addLanguage": "Ajouter une langue",
+    "removeLanguage": "Retirer {{language}}",
+    "size": "Taille",
+    "sizes": {
+      "small": "Petite",
+      "medium": "Moyenne",
+      "large": "Grande",
+      "huge": "Très grande"
+    },
+    "color": "Couleur",
+    "colors": {
+      "white": "Blanc",
+      "yellow": "Jaune",
+      "cyan": "Cyan",
+      "green": "Vert"
+    },
+    "edge": "Contours",
+    "edges": {
+      "shadow": "Ombre",
+      "outline": "Contour",
+      "none": "Aucun"
+    },
+    "position": "Position",
+    "positions": {
+      "bottom": "En bas",
+      "raised": "Plus haut"
+    },
+    "background": "Fond derrière le texte",
+    "sample": "Voici à quoi ressembleront les sous-titres."
+  },
+  "subtitleTiming": {
+    "title": "Synchronisation",
+    "earlier": "Afficher les sous-titres plus tôt",
+    "later": "Afficher les sous-titres plus tard",
+    "reset": "Revenir à la synchronisation du fichier"
   }
 }

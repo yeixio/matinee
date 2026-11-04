@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"errors"
 	"net/http"
+	"regexp"
+	"slices"
 	"strconv"
 
 	"github.com/yeixio/matinee/internal/store"
@@ -85,6 +87,54 @@ type playbackPrefs struct {
 	// PodcastsPlayOn plays the next podcast episode when one ends (see
 	// store.NextPodcastEpisode). On by default.
 	PodcastsPlayOn bool `json:"podcastsPlayOn"`
+	// Subtitles are when subtitles come on and how they look. Missing means
+	// the app's defaults (forced lines only, in the app's language).
+	Subtitles *subtitlePrefs `json:"subtitles,omitempty"`
+}
+
+// subtitlePrefs are a person's subtitle choices, the same on every app.
+type subtitlePrefs struct {
+	// Mode is off, forced (only forced lines), always, or foreign (when the
+	// sound isn't in one of Languages).
+	Mode string `json:"mode"`
+	// Languages are wanted in this order; empty means the app's language.
+	Languages  []string `json:"languages,omitempty"`
+	Size       string   `json:"size,omitempty"`       // small, medium, large, huge
+	Color      string   `json:"color,omitempty"`      // white, yellow, cyan, green
+	Edge       string   `json:"edge,omitempty"`       // shadow, outline, none
+	Background *int     `json:"background,omitempty"` // how solid the box is, 0-100
+	Position   string   `json:"position,omitempty"`   // bottom, raised
+}
+
+var subtitleChoices = map[string][]string{
+	"mode":     {"off", "forced", "always", "foreign"},
+	"size":     {"", "small", "medium", "large", "huge"},
+	"color":    {"", "white", "yellow", "cyan", "green"},
+	"edge":     {"", "shadow", "outline", "none"},
+	"position": {"", "bottom", "raised"},
+}
+
+var languageTagRe = regexp.MustCompile(`^[a-zA-Z]{2,3}([-_][a-zA-Z0-9]{2,8})?$`)
+
+// valid says whether every choice is one the apps know.
+func (p *subtitlePrefs) valid() bool {
+	for k, v := range map[string]string{"mode": p.Mode, "size": p.Size, "color": p.Color, "edge": p.Edge, "position": p.Position} {
+		if !slices.Contains(subtitleChoices[k], v) {
+			return false
+		}
+	}
+	if p.Background != nil && (*p.Background < 0 || *p.Background > 100) {
+		return false
+	}
+	if len(p.Languages) > 10 {
+		return false
+	}
+	for _, l := range p.Languages {
+		if !languageTagRe.MatchString(l) {
+			return false
+		}
+	}
+	return true
 }
 
 var defaultPlayback = playbackPrefs{AutoPlay: true, PodcastsPlayOn: true}
@@ -122,6 +172,10 @@ func (s *Server) putMyPlayback(w http.ResponseWriter, r *http.Request) {
 	}
 	if err := readJSON(r, &p); err != nil {
 		writeError(w, http.StatusBadRequest, "bad request")
+		return
+	}
+	if p.Subtitles != nil && !p.Subtitles.valid() {
+		writeError(w, http.StatusBadRequest, "subtitle choices aren't ones the apps know")
 		return
 	}
 	raw, _ := json.Marshal(p)

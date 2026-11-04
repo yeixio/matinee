@@ -668,5 +668,59 @@
     "hint": "Bunyi ketinggalan gambar? Jadikan lebih awal. Selagi ada lengah, pelayan menghantar bunyi yang dianjakkan.",
     "forTitle": "Untuk tajuk ini sahaja",
     "reset": "Tiada lengah"
+  },
+  "subtitlePrefs": {
+    "title": "Sari kata",
+    "intro": "Bila sari kata muncul dan bagaimana rupanya. Pilihan anda digunakan dalam setiap aplikasi. Memilih sari kata dalam pemain juga mengubahnya.",
+    "when": "Tunjukkan sari kata",
+    "mode": {
+      "off": "Tidak pernah",
+      "forced": "Hanya baris paksa",
+      "foreign": "Apabila bunyi bukan dalam bahasa saya",
+      "always": "Sentiasa"
+    },
+    "modeHint": {
+      "off": "Sari kata kekal mati, termasuk baris paksa yang diminta fail.",
+      "forced": "Hanya baris untuk semua orang, seperti papan tanda atau dialog dalam bahasa lain.",
+      "foreign": "Sari kata penuh dalam bahasa anda apabila filem dalam bahasa lain; jika tidak, hanya baris paksa.",
+      "always": "Sari kata penuh dalam bahasa pertama anda yang ada pada fail."
+    },
+    "languages": "Bahasa, mengikut urutan",
+    "appLanguage": "Bahasa aplikasi ({{language}})",
+    "addLanguage": "Tambah bahasa",
+    "removeLanguage": "Buang {{language}}",
+    "size": "Saiz",
+    "sizes": {
+      "small": "Kecil",
+      "medium": "Sederhana",
+      "large": "Besar",
+      "huge": "Sangat besar"
+    },
+    "color": "Warna",
+    "colors": {
+      "white": "Putih",
+      "yellow": "Kuning",
+      "cyan": "Sian",
+      "green": "Hijau"
+    },
+    "edge": "Tepi",
+    "edges": {
+      "shadow": "Bayang",
+      "outline": "Garis luar",
+      "none": "Tiada"
+    },
+    "position": "Kedudukan",
+    "positions": {
+      "bottom": "Bawah",
+      "raised": "Lebih tinggi"
+    },
+    "background": "Kotak di belakang teks",
+    "sample": "Beginilah rupa sari kata."
+  },
+  "subtitleTiming": {
+    "title": "Pemasaan",
+    "earlier": "Tunjuk sari kata lebih awal",
+    "later": "Tunjuk sari kata lebih lewat",
+    "reset": "Kembali ke pemasaan fail"
   }
 }

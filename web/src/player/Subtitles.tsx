@@ -1,9 +1,10 @@
-import { Captions, Check, Search, X } from 'lucide-react'
+import { Captions, Check, Minus, Plus, Search, X } from 'lucide-react'
 import { Fragment, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import type { SubtitleTrack } from '../api'
 import { subtitleLabel } from '../media'
 import { FindSubtitles } from './FindSubtitles'
+import { defaultSubtitles, subtitleLook, TIMING_STEP, type SubtitlePrefs } from './subtitlePrefs'
 import { activeCues, spans, type Cue } from './vtt'
 
 const prefKey = 'matinee.subtitles'
@@ -25,51 +26,47 @@ export function savePreference(track: SubtitleTrack | undefined) {
   }
 }
 
-// defaultTrack picks what to show when playback starts: the language the
-// viewer chose last time (so a series keeps its subtitles from episode to
-// episode), otherwise a forced track, which exists to be shown.
-export function defaultTrack(tracks: SubtitleTrack[]): SubtitleTrack | undefined {
-  const pref = savedPreference()
-  if (pref !== null && pref !== 'off') {
-    const same = tracks.filter((t) => (t.language ?? '') === pref && !t.forced)
-    // Text over pictures (no re-encode), plain over SDH.
-    same.sort((a, b) => Number(!!a.burnIn) - Number(!!b.burnIn) || Number(!!a.sdh) - Number(!!b.sdh))
-    if (same[0]) return same[0]
-  }
-  if (pref === 'off') return undefined
-  return tracks.find((t) => t.forced && t.default) ?? tracks.find((t) => t.forced)
+type OverlayProps = {
+  cues: Cue[]
+  position: () => number
+  lifted: boolean
+  /** How the person wants lines drawn. */
+  prefs?: SubtitlePrefs
+  /** Seconds later than written that lines show. */
+  timing?: number
 }
 
 // SubtitleOverlay draws the cues showing at the current position. It reads
 // the clock every frame, so lines appear on time rather than at the next
 // timeupdate event.
-export function SubtitleOverlay({ cues, position, lifted }: { cues: Cue[]; position: () => number; lifted: boolean }) {
+export function SubtitleOverlay({ cues, position, lifted, prefs = defaultSubtitles, timing = 0 }: OverlayProps) {
   const [shown, setShown] = useState<Cue[]>([])
+  const look = subtitleLook(prefs)
   useEffect(() => {
     let frame = 0
     const tick = () => {
-      const now = activeCues(cues, position())
+      const now = activeCues(cues, position() - timing)
       setShown((prev) => (prev.length === now.length && prev.every((c, i) => c === now[i]) ? prev : now))
       frame = requestAnimationFrame(tick)
     }
     tick()
     return () => cancelAnimationFrame(frame)
-  }, [cues, position])
+  }, [cues, position, timing])
 
   if (!shown.length) return null
   return (
     <div
       aria-live="off"
       className={`pointer-events-none absolute inset-x-0 flex flex-col items-center gap-1 px-[6%] text-center transition-[bottom] duration-300 ${
-        lifted ? 'bottom-36 md:bottom-40' : 'bottom-[7%]'
+        lifted ? 'bottom-36 md:bottom-40' : look.raised ? 'bottom-[18%]' : 'bottom-[7%]'
       }`}
     >
       {shown.map((cue, i) => (
         <div
           key={`${cue.start}-${i}`}
           dir="auto"
-          className="rounded bg-black/55 px-[0.4em] py-[0.1em] leading-snug font-medium whitespace-pre-line text-white [text-shadow:0_1px_3px_rgb(0_0_0/0.9)]"
-          style={{ fontSize: 'clamp(1rem, 2.4vw + 0.35rem, 2.75rem)' }}
+          className="rounded px-[0.4em] py-[0.1em] leading-snug font-medium whitespace-pre-line"
+          style={{ fontSize: look.fontSize, color: look.color, textShadow: look.textShadow, backgroundColor: look.backgroundColor }}
         >
           {spans(cue.text).map((s, j) => (
             <Fragment key={j}>
@@ -99,11 +96,13 @@ type MenuProps = {
     /** A found file was removed. */
     onRemove: (track: SubtitleTrack) => void
   }
+  /** Set while text subtitles show: move them earlier or later. */
+  timing?: { seconds: number; onChange: (seconds: number) => void }
 }
 
 // SubtitleMenu is the captions button and its list of tracks, ending in
 // Find subtitles when the server can look for more online.
-export function SubtitleMenu({ tracks, selected, onSelect, onOpenChange, find }: MenuProps) {
+export function SubtitleMenu({ tracks, selected, onSelect, onOpenChange, find, timing }: MenuProps) {
   const { t: tr } = useTranslation()
   const [open, setOpen] = useState(false)
   const [finding, setFinding] = useState(false)
@@ -183,6 +182,35 @@ export function SubtitleMenu({ tracks, selected, onSelect, onOpenChange, find }:
                 {item('off', tr('player.off'), !selected, undefined)}
                 {tracks.map((t) => item(t.id, subtitleLabel(t), t.id === selected, t, note(t)))}
               </ul>
+              {timing && (
+                <div className="mt-1 border-t border-white/10 px-3 pt-2 pb-1.5">
+                  <div className="flex items-center gap-2 text-sm">
+                    <span className="min-w-0 flex-1 truncate">{tr('common:subtitleTiming.title')}</span>
+                    <button
+                      onClick={() => timing.onChange(timing.seconds - TIMING_STEP)}
+                      className="rounded-full p-1.5 hover:bg-white/10"
+                      aria-label={tr('common:subtitleTiming.earlier')}
+                      title={tr('common:subtitleTiming.earlier')}
+                    >
+                      <Minus className="size-4" />
+                    </button>
+                    <span className="w-14 text-center text-xs tabular-nums">{timingLabel(timing.seconds)}</span>
+                    <button
+                      onClick={() => timing.onChange(timing.seconds + TIMING_STEP)}
+                      className="rounded-full p-1.5 hover:bg-white/10"
+                      aria-label={tr('common:subtitleTiming.later')}
+                      title={tr('common:subtitleTiming.later')}
+                    >
+                      <Plus className="size-4" />
+                    </button>
+                  </div>
+                  {timing.seconds !== 0 && (
+                    <button onClick={() => timing.onChange(0)} className="mt-1 text-xs text-white/60 hover:text-white">
+                      {tr('common:subtitleTiming.reset')}
+                    </button>
+                  )}
+                </div>
+              )}
               {find && (
                 <button
                   role="menuitem"
@@ -199,4 +227,10 @@ export function SubtitleMenu({ tracks, selected, onSelect, onOpenChange, find }:
       )}
     </div>
   )
+}
+
+/** timingLabel shows a subtitle offset like "+0.3 s". */
+export function timingLabel(seconds: number): string {
+  if (!seconds) return '0 s'
+  return `${seconds > 0 ? '+' : '−'}${Math.abs(seconds).toFixed(1)} s`
 }

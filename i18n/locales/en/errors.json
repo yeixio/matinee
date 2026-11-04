@@ -172,6 +172,7 @@
   "someone_already_asked_for_title": "someone already asked for {{title}}",
   "something_went_wrong": "something went wrong",
   "source_not_found": "source not found",
+  "subtitle_choices_arent_ones_the_apps_know": "subtitle choices aren't ones the apps know",
   "subtitle_search_isnt_set_up_on_this_server": "subtitle search isn't set up on this server",
   "that_address_isnt_a_channel_playlist_m3u": "that address isn't a channel playlist (M3U)",
   "that_client_cant_do_that": "that client can't do that",
