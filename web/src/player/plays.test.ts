@@ -11,6 +11,11 @@ describe('browserPlays', () => {
     const p = browserPlays({ native: (t) => (t.includes('av01') ? '' : 'probably') })
     expect(p).toEqual({ video: ['h264', 'hevc'], hdr: [] })
   })
+  it('asks for Dolby Vision on an HDR screen', () => {
+    const p = browserPlays({ mse: (t) => t.includes('hvc1') || t.includes('dvh1'), hdrScreen: true })
+    expect(p.hdr).toEqual(['hdr10', 'hlg', 'dolby-vision'])
+    expect(browserPlays({ mse: (t) => t.includes('hvc1') || t.includes('dvh1') }).hdr).toEqual([])
+  })
   it('takes only H.264 when nothing can be asked', () => {
     expect(browserPlays({})).toEqual({ video: ['h264'], hdr: [] })
   })
@@ -27,6 +32,11 @@ describe('repackages', () => {
     expect(repackages({ videoCodec: 'hevc', mediaInfo: { video: [{ hdr: 'hdr10+' }] } }, hdr)).toBe(true)
     expect(repackages({ videoCodec: 'hevc', mediaInfo: { video: [{ hdr: 'dolby-vision', hdrBase: 'hdr10' }] } }, hdr)).toBe(true)
     expect(repackages({ videoCodec: 'hevc', mediaInfo: { video: [{ hdr: 'dolby-vision' }] } }, hdr)).toBe(false)
+  })
+  it('plays Dolby Vision profile 7 as its HDR10 base', () => {
+    const p7 = { videoCodec: 'hevc', mediaInfo: { video: [{ hdr: 'dolby-vision' as const, hdrBase: 'hdr10' as const, dvProfile: 7 }] } }
+    expect(repackages(p7, { video: ['hevc'], hdr: ['dolby-vision'] })).toBe(false)
+    expect(repackages(p7, hdr)).toBe(true)
   })
   it('takes a file not looked at yet only on an HDR screen', () => {
     expect(repackages({ videoCodec: 'hevc' }, sdr)).toBe(false)

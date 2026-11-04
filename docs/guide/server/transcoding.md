@@ -60,6 +60,24 @@ Converted video is always SDR, so when Matinee converts an HDR film (HDR10, HDR1
 **Settings → Server health** marks a stream **HDR made SDR** while it's tone mapped.
 
 <!-- /since -->
+
+<!-- since: v0.3.0 -->
+## Dolby Vision
+
+Dolby Vision files come in a few kinds (profiles), and each plays the best way the screen allows. The apps on iPhone, iPad, Apple TV and Android, and browsers that decode it (such as Safari on a Mac with a Dolby Vision screen), tell the server when the screen shows Dolby Vision.
+
+| The file | Dolby Vision screen | HDR10 screen | Screen without HDR |
+| --- | --- | --- | --- |
+| Profile 8.1 (most streaming rips) | Dolby Vision, repackaged | Its HDR10 picture | Tone mapped |
+| Profile 8.4 (HLG under it) | Dolby Vision, repackaged | Its HLG picture, if the screen shows HLG | Tone mapped |
+| Profile 7 (from Blu-ray discs) | Its HDR10 picture | Its HDR10 picture | Tone mapped |
+| Profile 5 (nothing under it) | Dolby Vision, repackaged | Converted and tone mapped | Tone mapped |
+
+- Profile 5 is never sent as it is to a screen without Dolby Vision, where its colours would come out purple and green. From version 1.0.28 the apps don't play such a file straight from the server either, and Android counts a screen as Dolby Vision only when the device also has a Dolby Vision decoder.
+- Profile 7 has a second layer almost no player decodes, so it always plays as the HDR10 picture it carries.
+- When a screen gets the HDR10 or HLG picture, the server takes the Dolby Vision data out so no player mistakes it for Dolby Vision it can't show. That needs FFmpeg 7.1 or later, which the Docker image has; with an older FFmpeg the data stays in, and players that don't show Dolby Vision ignore it.
+
+<!-- /since -->
 ## Giving Matinee a GPU
 
 **Docker:** pass `/dev/dri` in for AMD and Intel, and add the group that owns it on the host:

@@ -1594,7 +1594,7 @@ func (s *Server) startHLS(w http.ResponseWriter, r *http.Request) {
 		req.AudioDelayMs = ms
 	}
 	if mi, _ := s.mediaInfo(r, it); mi != nil && len(mi.Video) > 0 {
-		req.Picture = stream.Picture{Known: true, HDR: mi.Video[0].HDR, HDRBase: mi.Video[0].HDRBase}
+		req.Picture = stream.Picture{Known: true, HDR: mi.Video[0].HDR, HDRBase: mi.Video[0].HDRBase, DVProfile: mi.Video[0].DVProfile}
 		if req.Picture.HDR != "" {
 			if req.ToneMap, err = s.toneMapping(r.Context()); err != nil {
 				s.serverError(w, err)

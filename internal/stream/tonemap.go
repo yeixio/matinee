@@ -3,6 +3,7 @@ package stream
 import (
 	"context"
 	"os/exec"
+	"slices"
 	"strings"
 	"sync"
 	"time"
@@ -36,7 +37,21 @@ type ToneTools struct {
 var (
 	toneOnce  sync.Once
 	toneFound ToneTools
+	dvOnce    sync.Once
+	dvStrip   bool
 )
+
+// canStripDV says whether the transcoder's FFmpeg can take Dolby Vision
+// metadata out of a picture it copies (dovi_rpu, FFmpeg 7.1 and later).
+func (t *Transcoder) canStripDV() bool {
+	dvOnce.Do(func() {
+		ctx, cancel := context.WithTimeout(context.Background(), 20*time.Second)
+		defer cancel()
+		out, err := exec.CommandContext(ctx, t.FFmpeg, "-hide_banner", "-bsfs").Output()
+		dvStrip = err == nil && slices.Contains(strings.Fields(string(out)), "dovi_rpu")
+	})
+	return dvStrip
+}
 
 // ToneTools finds what the transcoder's FFmpeg can tone map with, once.
 func (t *Transcoder) ToneTools() ToneTools {

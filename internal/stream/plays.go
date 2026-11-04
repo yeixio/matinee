@@ -58,6 +58,55 @@ func (p Plays) shows(hdr, base string) bool {
 type Picture struct {
 	Known        bool
 	HDR, HDRBase string
+	// DVProfile is the Dolby Vision profile (5, 7, 8 or 10), 0 when it isn't.
+	DVProfile int
+}
+
+// shownAs is the HDR a screen has to show for the picture to look right.
+// Profile 7 (two layers, from discs) plays as its HDR10 base even on a Dolby
+// Vision screen: almost no player decodes its second layer.
+func (p Picture) shownAs() (hdr, base string) {
+	if p.HDR == "dolby-vision" && p.DVProfile == 7 {
+		return p.HDRBase, ""
+	}
+	return p.HDR, p.HDRBase
+}
+
+// keepsDolbyVision says whether a copied picture goes to the player with
+// its Dolby Vision: the file has it, the screen shows it, and it isn't
+// profile 7, which plays as its base.
+func keepsDolbyVision(pic Picture, can Plays) bool {
+	return pic.HDR == "dolby-vision" && pic.DVProfile != 7 && slices.Contains(can.HDR, "dolby-vision")
+}
+
+// copyArgs are FFmpeg's output options for a picture copied as it is.
+// stripDV says FFmpeg can take the Dolby Vision metadata out (its dovi_rpu
+// filter, FFmpeg 7.1 and later).
+func copyArgs(codec string, pic Picture, can Plays, stripDV bool) []string {
+	out := []string{"-map", "0:v:0", "-c:v", "copy"}
+	keep := keepsDolbyVision(pic, can)
+	if codec == "hevc" {
+		// Apple's players only take HEVC tagged hvc1 (parameter sets in
+		// the sample description, not hev1's in the stream), or dvh1 for
+		// Dolby Vision with nothing under it (profile 5), which only a
+		// Dolby Vision player shows.
+		tag := "hvc1"
+		if keep && pic.HDRBase == "" {
+			tag = "dvh1"
+		}
+		out = append(out, "-tag:v", tag)
+	}
+	switch {
+	case keep:
+		// FFmpeg 7 and later only write the Dolby Vision configuration
+		// (dvcC) players look for when told to.
+		out = append(out, "-strict", "unofficial")
+	case pic.HDR == "dolby-vision" && stripDV:
+		// A screen showing the HDR10 or HLG under it gets just that, so
+		// no player mistakes it for Dolby Vision it can't show.
+		out = append(out, "-bsf:v", "dovi_rpu=strip=1")
+	}
+	return out
 }
 
 // Why a transcode converts the picture rather than copying it.
@@ -83,7 +132,9 @@ func videoPlan(it store.Item, pic Picture, burnSub int, steps []Step, can Plays)
 		// Not looked at yet: only a screen that shows HDR10 and HLG is
 		// sure to show it right. Analysis usually follows a scan closely.
 		return false, ConvertHDR
-	case it.VideoCodec != "h264" && !can.shows(pic.HDR, pic.HDRBase):
+	case it.VideoCodec != "h264" && !can.shows(pic.shownAs()):
+		// Profile 5 has nothing under its Dolby Vision, so a screen
+		// without it always gets it converted.
 		return false, ConvertHDR
 	case burnSub >= 0:
 		return false, ConvertSubtitle
