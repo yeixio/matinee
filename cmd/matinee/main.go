@@ -26,6 +26,7 @@ import (
 	"github.com/yeixio/matinee/internal/analyze"
 	"github.com/yeixio/matinee/internal/api"
 	"github.com/yeixio/matinee/internal/artwork"
+	"github.com/yeixio/matinee/internal/backup"
 	"github.com/yeixio/matinee/internal/config"
 	"github.com/yeixio/matinee/internal/connect"
 	"github.com/yeixio/matinee/internal/credits"
@@ -102,11 +103,26 @@ func run() error {
 		}
 	}
 
-	db, err := store.Open(cfg.Database())
+	// A SQLite database is backed up before an upgrade changes it, every
+	// day, and when an admin asks (internal/backup); a restore an admin
+	// asked for takes its place now, before it's opened.
+	var backups *backup.Manager
+	var opts store.Options
+	if cfg.DatabaseURL == "" {
+		backups = &backup.Manager{Dir: cfg.BackupDir(), DBPath: cfg.Database(), Log: log}
+		if _, err := backup.ApplyRestore(context.Background(), cfg.Database(), cfg.BackupDir(), log); err != nil {
+			return fmt.Errorf("restore the database: %w", err)
+		}
+		opts.BeforeMigrate = backups.BeforeMigrate
+	}
+	db, err := store.OpenWith(cfg.Database(), opts)
 	if err != nil {
 		return fmt.Errorf("open database: %w", err)
 	}
 	defer db.Close()
+	if backups != nil {
+		backups.Store = db
+	}
 
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
 	defer stop()
@@ -272,6 +288,11 @@ func run() error {
 	// admins' own mail server and webhooks.
 	alerter := &alerts.Manager{Store: db, Log: log, Server: cfg.ServerName, URL: cfg.PublicURL, Version: version.Version, Read: apiServer.AlertReadings}
 	apiServer.Alerts = alerter
+	if backups != nil {
+		backups.Failed = alerter.BackupFailed
+		apiServer.Backups = backups
+		go backups.Run(ctx)
+	}
 	if _, problems := theme.Load(cfg.ThemeDir()); len(problems) > 0 {
 		for _, p := range problems {
 			log.Warn("skipping a theme file", "dir", cfg.ThemeDir(), "err", p)

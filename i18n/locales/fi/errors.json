@@ -251,5 +251,7 @@
   "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMappingin on oltava hable, mobius, reinhard tai off",
   "kind_must_be_stall_or_error": "kindin on oltava stall tai error",
   "bytes_must_be_between_0_and_104857600": "bytesin on oltava välillä 0–104857600",
-  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "Vain elokuvat, jaksot, kaudet ja sarjat voi merkitä katsotuiksi"
+  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "Vain elokuvat, jaksot, kaudet ja sarjat voi merkitä katsotuiksi",
+  "no_such_backup": "Varmuuskopiota ei ole",
+  "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "Tämän palvelimen tietokanta on PostgreSQL; varmuuskopioi se pg_dumpilla"
 }

@@ -869,6 +869,35 @@
         "title": "TV Langsung",
         "hint": "Daftar saluran dan panduan acara"
       }
+    },
+    "backups": {
+      "title": "Cadangan",
+      "intro": "Matinee menyalin basis datanya sebelum pembaruan mengubahnya, sesuai jadwal, dan saat Anda minta. Cadangan disimpan di {{dir}}.",
+      "postgres": "Basis data server ini adalah PostgreSQL, yang tidak disalin Matinee sendiri. Cadangkan dengan pg_dump, seperti yang ditunjukkan halaman Cadangan di panduan.",
+      "pending": "Cadangan dari {{time}} menggantikan basis data saat Matinee mulai lagi. Mulai ulang Matinee untuk menyelesaikan.",
+      "cancelRestore": "Batalkan pemulihan",
+      "failed": "Pencadangan terakhir gagal: {{error}}",
+      "every": "Cadangkan",
+      "never": "Hanya sebelum pembaruan",
+      "every6": "Setiap 6 jam",
+      "every12": "Setiap 12 jam",
+      "daily": "Setiap hari",
+      "weekly": "Setiap minggu",
+      "keep": "Simpan per jenis",
+      "makeNow": "Cadangkan sekarang",
+      "making": "Mencadangkan…",
+      "none": "Belum ada cadangan.",
+      "download": "Unduh",
+      "restore": "Pulihkan",
+      "restoreConfirm": "Pulihkan cadangan dari {{time}}? Cadangan ini menggantikan basis data saat Matinee mulai lagi, dan yang berubah sejak itu akan hilang. Basis data seperti saat itu disimpan sebagai cadangan.",
+      "delete": "Hapus",
+      "deleteConfirm": "Hapus cadangan dari {{time}}?",
+      "reason": {
+        "scheduled": "Terjadwal",
+        "manual": "Dibuat manual",
+        "upgrade": "Sebelum pembaruan",
+        "before-restore": "Sebelum pemulihan"
+      }
     }
   },
   "language": {
@@ -1231,7 +1260,9 @@
       "count": "Berapa banyak",
       "minutes": "Dalam menit",
       "restart": "Server mulai atau dimulai ulang",
-      "restartHint": "Memberi tahu apakah server diperbarui, atau berhenti tanpa dimatikan dengan benar."
+      "restartHint": "Memberi tahu apakah server diperbarui, atau berhenti tanpa dimatikan dengan benar.",
+      "backup": "Pencadangan gagal",
+      "backupHint": "Saat basis data tidak bisa dicadangkan."
     },
     "email": {
       "title": "Email",

@@ -873,6 +873,35 @@
         "title": "Direkte-TV",
         "hint": "Kanallister og programoversikter"
       }
+    },
+    "backups": {
+      "title": "Sikkerhetskopier",
+      "intro": "Matinee kopierer databasen før en oppdatering endrer den, etter en tidsplan og når du ber om det. Kopiene ligger i {{dir}}.",
+      "postgres": "Databasen til denne serveren er PostgreSQL, som Matinee ikke kopierer selv. Ta sikkerhetskopi med pg_dump, slik siden Sikkerhetskopier i veiledningen viser.",
+      "pending": "Kopien fra {{time}} erstatter databasen neste gang Matinee starter. Start Matinee på nytt for å fullføre.",
+      "cancelRestore": "Avbryt gjenopprettingen",
+      "failed": "Den siste kopien mislyktes: {{error}}",
+      "every": "Ta kopi",
+      "never": "Bare før oppdateringer",
+      "every6": "Hver 6. time",
+      "every12": "Hver 12. time",
+      "daily": "Hver dag",
+      "weekly": "Hver uke",
+      "keep": "Behold av hver type",
+      "makeNow": "Ta kopi nå",
+      "making": "Tar kopi…",
+      "none": "Ingen kopier ennå.",
+      "download": "Last ned",
+      "restore": "Gjenopprett",
+      "restoreConfirm": "Gjenopprette kopien fra {{time}}? Den erstatter databasen neste gang Matinee starter, og det som er endret siden, går tapt. Databasen slik den er da, beholdes som en kopi.",
+      "delete": "Slett",
+      "deleteConfirm": "Slette kopien fra {{time}}?",
+      "reason": {
+        "scheduled": "Planlagt",
+        "manual": "Laget for hånd",
+        "upgrade": "Før en oppdatering",
+        "before-restore": "Før en gjenoppretting"
+      }
     }
   },
   "language": {
@@ -1242,7 +1271,9 @@
       "count": "Hvor mange",
       "minutes": "Innen minutter",
       "restart": "Serveren starter eller starter på nytt",
-      "restartHint": "Sier om den ble oppdatert, eller stoppet uten å slå seg av ordentlig."
+      "restartHint": "Sier om den ble oppdatert, eller stoppet uten å slå seg av ordentlig.",
+      "backup": "En sikkerhetskopi mislykkes",
+      "backupHint": "Når databasen ikke kan sikkerhetskopieres."
     },
     "email": {
       "title": "E-post",

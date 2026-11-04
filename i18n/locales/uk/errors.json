@@ -251,5 +251,7 @@
   "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMapping має бути hable, mobius, reinhard або off",
   "kind_must_be_stall_or_error": "kind має бути stall або error",
   "bytes_must_be_between_0_and_104857600": "bytes має бути від 0 до 104857600",
-  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "Позначити переглянутими можна лише фільми, епізоди, сезони й серіали"
+  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "Позначити переглянутими можна лише фільми, епізоди, сезони й серіали",
+  "no_such_backup": "Такої копії немає",
+  "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "База даних цього сервера — PostgreSQL; створіть копію за допомогою pg_dump"
 }

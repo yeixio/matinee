@@ -23,6 +23,7 @@ import (
 	"github.com/yeixio/matinee/internal/analyze"
 	"github.com/yeixio/matinee/internal/artwork"
 	"github.com/yeixio/matinee/internal/auth"
+	"github.com/yeixio/matinee/internal/backup"
 	"github.com/yeixio/matinee/internal/diagnose"
 	"github.com/yeixio/matinee/internal/download"
 	"github.com/yeixio/matinee/internal/health"
@@ -186,7 +187,9 @@ type Server struct {
 
 	// Alerts emails and posts to webhooks when something needs an admin
 	// (see alerts.go); nil makes one that only sends while the API runs.
-	Alerts     *alerts.Manager
+	Alerts *alerts.Manager
+	// Backups makes and restores copies of a SQLite database; nil makes none.
+	Backups    *backup.Manager
 	alertsOnce sync.Once
 }
 
@@ -293,6 +296,13 @@ func (s *Server) routes() []route {
 		{"GET /admin/health", adminOnly, s.getHealth},
 		{"GET /admin/logs", adminOnly, s.getLogs},
 		{"GET /admin/logs/download", adminOnly, s.downloadLogs},
+		{"GET /admin/backups", adminOnly, s.getBackups},
+		{"POST /admin/backups", adminOnly, s.makeBackup},
+		{"PUT /admin/backups/settings", adminOnly, s.setBackupSettings},
+		{"DELETE /admin/backups/restore", adminOnly, s.cancelRestore},
+		{"GET /admin/backups/{name}", adminOnly, s.downloadBackup},
+		{"DELETE /admin/backups/{name}", adminOnly, s.deleteBackup},
+		{"POST /admin/backups/{name}/restore", adminOnly, s.restoreBackup},
 		{"GET /admin/alerts", adminOnly, s.getAlerts},
 		{"PUT /admin/alerts", adminOnly, s.putAlerts},
 		{"POST /admin/alerts/test", adminOnly, s.testAlerts},

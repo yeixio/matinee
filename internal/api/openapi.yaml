@@ -1280,6 +1280,83 @@ paths:
           content:
             text/plain:
               schema: { type: string }
+  /admin/backups:
+    get:
+      summary: Database backups and their settings (admins only)
+      description: |
+        A SQLite database is backed up before an upgrade changes it, on a
+        schedule (daily by default), and on request. A PostgreSQL database
+        is backed up with pg_dump instead: supported is false.
+      responses:
+        "200":
+          description: The backups, newest first.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Backups" }
+    post:
+      summary: Back up the database now (admins only)
+      responses:
+        "200":
+          description: Made.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Backups" }
+        "409": { description: The database is PostgreSQL. }
+  /admin/backups/settings:
+    put:
+      summary: How often to back up and how many to keep (admins only)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/BackupSettings" }
+      responses:
+        "200":
+          description: Saved.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Backups" }
+  /admin/backups/restore:
+    delete:
+      summary: Cancel a restore that waits for the next start (admins only)
+      responses:
+        "200":
+          description: The database stays as it is.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Backups" }
+  /admin/backups/{name}:
+    parameters:
+      - { name: name, in: path, required: true, schema: { type: string } }
+    get:
+      summary: Download a backup (admins only)
+      responses:
+        "200": { description: The SQLite database file., content: { application/vnd.sqlite3: {} } }
+        "404": { description: No such backup. }
+    delete:
+      summary: Delete a backup (admins only)
+      responses:
+        "200":
+          description: Deleted.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Backups" }
+  /admin/backups/{name}/restore:
+    parameters:
+      - { name: name, in: path, required: true, schema: { type: string } }
+    post:
+      summary: Restore a backup at the next start (admins only)
+      description: |
+        The backup replaces the database the next time Matinee starts. The
+        database as it was then is kept as a backup first.
+      responses:
+        "200":
+          description: Waiting for a restart.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Backups" }
+        "400": { description: The file isn't a Matinee database. }
+        "404": { description: No such backup. }
   /admin/alerts:
     get:
       summary: Alert settings, the alerts that are true now, and the latest sent (admins only)
@@ -4162,6 +4239,29 @@ components:
             type: array
             items: { $ref: "#/components/schemas/Item" }
   schemas:
+    BackupSettings:
+      type: object
+      properties:
+        everyHours: { type: integer, description: Hours between scheduled backups; 0 turns them off. Default 24. }
+        keep: { type: integer, description: How many of each kind to keep. Default 7. }
+    Backups:
+      type: object
+      properties:
+        supported: { type: boolean }
+        database: { type: string, enum: [sqlite, postgres] }
+        dir: { type: string }
+        settings: { $ref: "#/components/schemas/BackupSettings" }
+        backups:
+          type: array
+          items:
+            type: object
+            properties:
+              name: { type: string }
+              size: { type: integer }
+              time: { type: integer, description: Milliseconds. }
+              reason: { type: string, enum: [scheduled, manual, upgrade, before-restore] }
+        restore: { type: string, description: The backup that replaces the database at the next start. }
+        lastError: { type: string }
     WatchedCount:
       type: object
       properties:

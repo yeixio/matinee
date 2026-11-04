@@ -873,6 +873,35 @@
         "title": "Canlı TV",
         "hint": "Kanal listeleri ve yayın akışları"
       }
+    },
+    "backups": {
+      "title": "Yedekler",
+      "intro": "Matinee veritabanını bir güncelleme değiştirmeden önce, bir zamanlamayla ve istediğinizde kopyalar. Yedekler {{dir}} içinde tutulur.",
+      "postgres": "Bu sunucunun veritabanı PostgreSQL ve Matinee onu kendisi kopyalamaz. Kılavuzun Yedekler sayfasında gösterildiği gibi pg_dump ile yedekleyin.",
+      "pending": "{{time}} yedeği, Matinee bir sonraki başlatıldığında veritabanının yerini alır. Bitirmek için Matinee'yi yeniden başlatın.",
+      "cancelRestore": "Geri yüklemeyi iptal et",
+      "failed": "Son yedekleme başarısız oldu: {{error}}",
+      "every": "Yedekle",
+      "never": "Yalnızca güncellemelerden önce",
+      "every6": "6 saatte bir",
+      "every12": "12 saatte bir",
+      "daily": "Her gün",
+      "weekly": "Her hafta",
+      "keep": "Her türden saklanacak",
+      "makeNow": "Şimdi yedekle",
+      "making": "Yedekleniyor…",
+      "none": "Henüz yedek yok.",
+      "download": "İndir",
+      "restore": "Geri yükle",
+      "restoreConfirm": "{{time}} yedeği geri yüklensin mi? Matinee bir sonraki başlatıldığında veritabanının yerini alır ve o zamandan beri değişenler kaybolur. Veritabanının o anki hâli yedek olarak saklanır.",
+      "delete": "Sil",
+      "deleteConfirm": "{{time}} yedeği silinsin mi?",
+      "reason": {
+        "scheduled": "Zamanlanmış",
+        "manual": "Elle alınmış",
+        "upgrade": "Bir güncellemeden önce",
+        "before-restore": "Bir geri yüklemeden önce"
+      }
     }
   },
   "language": {
@@ -1242,7 +1271,9 @@
       "count": "Kaç tane",
       "minutes": "Kaç dakika içinde",
       "restart": "Sunucu başlıyor veya yeniden başlıyor",
-      "restartHint": "Güncellenip güncellenmediğini veya düzgün kapanmadan durup durmadığını söyler."
+      "restartHint": "Güncellenip güncellenmediğini veya düzgün kapanmadan durup durmadığını söyler.",
+      "backup": "Bir yedekleme başarısız olur",
+      "backupHint": "Veritabanı yedeklenemediğinde."
     },
     "email": {
       "title": "E-posta",

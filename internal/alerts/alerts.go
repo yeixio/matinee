@@ -35,6 +35,7 @@ const (
 	RuleErrors     = "errors"
 	RuleTranscodes = "transcodes"
 	RuleRestart    = "restart"
+	RuleBackup     = "backup"
 	RuleTest       = "test"
 )
 
@@ -92,6 +93,7 @@ type Rules struct {
 	Errors     RateRule `json:"errors"`
 	Transcodes RateRule `json:"transcodes"`
 	Restart    Toggle   `json:"restart"`
+	Backup     Toggle   `json:"backup"`
 }
 
 // Toggle is a rule that's on or off.
@@ -120,6 +122,7 @@ func DefaultRules() Rules {
 		Errors:     RateRule{On: true, Count: 10, Minutes: 15},
 		Transcodes: RateRule{On: true, Count: 3, Minutes: 15},
 		Restart:    Toggle{On: true},
+		Backup:     Toggle{On: true},
 	}
 }
 
@@ -349,6 +352,16 @@ func (m *Manager) Started(ctx context.Context) {
 	}
 	a.Message = strings.Join(lines, " ")
 	m.deliver(ctx, c, a)
+}
+
+// BackupFailed tells the admins a database backup failed.
+func (m *Manager) BackupFailed(ctx context.Context, err error) {
+	c, cerr := m.Config(ctx)
+	if cerr != nil || !c.Rules.Backup.On || c.Channels() == 0 {
+		return
+	}
+	m.deliver(ctx, c, Alert{Rule: RuleBackup, Key: RuleBackup, Level: LevelWarning, Title: "Database backup failed",
+		Message: "Matinee couldn't back up its database: " + err.Error() + ". Backups are under Settings → Server health → Backups."})
 }
 
 // Stopped notes a clean shutdown, so the next start isn't taken for a crash.

@@ -873,6 +873,35 @@
         "title": "Live-tv",
         "hint": "Kanallistor och tablåer"
       }
+    },
+    "backups": {
+      "title": "Säkerhetskopior",
+      "intro": "Matinee kopierar sin databas innan en uppdatering ändrar den, enligt schema och när du ber om det. Kopiorna finns i {{dir}}.",
+      "postgres": "Serverns databas är PostgreSQL, som Matinee inte kopierar själv. Säkerhetskopiera den med pg_dump, som sidan Säkerhetskopior i guiden visar.",
+      "pending": "Kopian från {{time}} ersätter databasen nästa gång Matinee startar. Starta om Matinee för att slutföra.",
+      "cancelRestore": "Avbryt återställningen",
+      "failed": "Den senaste kopian misslyckades: {{error}}",
+      "every": "Säkerhetskopiera",
+      "never": "Bara före uppdateringar",
+      "every6": "Var 6:e timme",
+      "every12": "Var 12:e timme",
+      "daily": "Varje dag",
+      "weekly": "Varje vecka",
+      "keep": "Behåll av varje sort",
+      "makeNow": "Säkerhetskopiera nu",
+      "making": "Kopierar…",
+      "none": "Inga kopior än.",
+      "download": "Ladda ner",
+      "restore": "Återställ",
+      "restoreConfirm": "Återställa kopian från {{time}}? Den ersätter databasen nästa gång Matinee startar, och det som ändrats sedan dess går förlorat. Databasen som den är då sparas som en kopia.",
+      "delete": "Ta bort",
+      "deleteConfirm": "Ta bort kopian från {{time}}?",
+      "reason": {
+        "scheduled": "Schemalagd",
+        "manual": "Gjord för hand",
+        "upgrade": "Före en uppdatering",
+        "before-restore": "Före en återställning"
+      }
     }
   },
   "language": {
@@ -1242,7 +1271,9 @@
       "count": "Hur många",
       "minutes": "Inom minuter",
       "restart": "Servern startar eller startar om",
-      "restartHint": "Säger om den uppdaterades, eller stannade utan att stängas av ordentligt."
+      "restartHint": "Säger om den uppdaterades, eller stannade utan att stängas av ordentligt.",
+      "backup": "En säkerhetskopia misslyckas",
+      "backupHint": "När databasen inte kan säkerhetskopieras."
     },
     "email": {
       "title": "E-post",

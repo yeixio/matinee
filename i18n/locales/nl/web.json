@@ -873,6 +873,35 @@
         "title": "Live-tv",
         "hint": "Zenderlijsten en gidsen"
       }
+    },
+    "backups": {
+      "title": "Back-ups",
+      "intro": "Matinee kopieert zijn database voordat een update hem wijzigt, volgens een schema en wanneer je erom vraagt. Back-ups staan in {{dir}}.",
+      "postgres": "De database van deze server is PostgreSQL, die Matinee niet zelf kopieert. Maak er een back-up van met pg_dump, zoals de pagina Back-ups in de handleiding laat zien.",
+      "pending": "De back-up van {{time}} vervangt de database de volgende keer dat Matinee start. Herstart Matinee om af te ronden.",
+      "cancelRestore": "Herstellen annuleren",
+      "failed": "De laatste back-up is mislukt: {{error}}",
+      "every": "Back-up maken",
+      "never": "Alleen vóór updates",
+      "every6": "Elke 6 uur",
+      "every12": "Elke 12 uur",
+      "daily": "Elke dag",
+      "weekly": "Elke week",
+      "keep": "Bewaren per soort",
+      "makeNow": "Nu back-up maken",
+      "making": "Back-up maken…",
+      "none": "Nog geen back-ups.",
+      "download": "Downloaden",
+      "restore": "Herstellen",
+      "restoreConfirm": "De back-up van {{time}} herstellen? Hij vervangt de database de volgende keer dat Matinee start, en wat sindsdien veranderd is gaat verloren. De database zoals hij dan is wordt als back-up bewaard.",
+      "delete": "Verwijderen",
+      "deleteConfirm": "De back-up van {{time}} verwijderen?",
+      "reason": {
+        "scheduled": "Gepland",
+        "manual": "Met de hand",
+        "upgrade": "Vóór een update",
+        "before-restore": "Vóór een herstel"
+      }
     }
   },
   "language": {
@@ -1242,7 +1271,9 @@
       "count": "Hoeveel",
       "minutes": "Binnen minuten",
       "restart": "De server start of herstart",
-      "restartHint": "Zegt of hij is bijgewerkt, of gestopt is zonder netjes af te sluiten."
+      "restartHint": "Zegt of hij is bijgewerkt, of gestopt is zonder netjes af te sluiten.",
+      "backup": "Een back-up mislukt",
+      "backupHint": "Als er geen back-up van de database gemaakt kan worden."
     },
     "email": {
       "title": "E-mail",

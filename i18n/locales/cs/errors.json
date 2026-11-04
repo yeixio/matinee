@@ -251,5 +251,7 @@
   "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMapping musí být hable, mobius, reinhard nebo off",
   "kind_must_be_stall_or_error": "kind musí být stall nebo error",
   "bytes_must_be_between_0_and_104857600": "bytes musí být mezi 0 a 104857600",
-  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "Jako zhlédnuté lze označit jen filmy, díly, řady a seriály"
+  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "Jako zhlédnuté lze označit jen filmy, díly, řady a seriály",
+  "no_such_backup": "Taková záloha neexistuje",
+  "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "Databáze tohoto serveru je PostgreSQL; zálohujte ji pomocí pg_dump"
 }

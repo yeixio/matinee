@@ -873,6 +873,35 @@
         "title": "Élő TV",
         "hint": "Csatornalisták és műsorújságok"
       }
+    },
+    "backups": {
+      "title": "Biztonsági mentések",
+      "intro": "A Matinee lemásolja az adatbázisát, mielőtt egy frissítés megváltoztatná, ütemezve és kérésre. A mentések helye: {{dir}}.",
+      "postgres": "A szerver adatbázisa PostgreSQL, amelyet a Matinee nem másol le magától. Mentsd pg_dumppal, ahogy az útmutató Biztonsági mentések oldala mutatja.",
+      "pending": "A(z) {{time}} mentés a Matinee következő indulásakor váltja fel az adatbázist. Indítsd újra a Matinee-t a befejezéshez.",
+      "cancelRestore": "Visszaállítás megszakítása",
+      "failed": "Az utolsó mentés sikertelen: {{error}}",
+      "every": "Mentés",
+      "never": "Csak frissítések előtt",
+      "every6": "6 óránként",
+      "every12": "12 óránként",
+      "daily": "Naponta",
+      "weekly": "Hetente",
+      "keep": "Megtartott típusonként",
+      "makeNow": "Mentés most",
+      "making": "Mentés…",
+      "none": "Még nincs mentés.",
+      "download": "Letöltés",
+      "restore": "Visszaállítás",
+      "restoreConfirm": "Visszaállítod a(z) {{time}} mentést? A Matinee következő indulásakor váltja fel az adatbázist, és az azóta történt változások elvesznek. Az adatbázis akkori állapota mentésként megmarad.",
+      "delete": "Törlés",
+      "deleteConfirm": "Törlöd a(z) {{time}} mentést?",
+      "reason": {
+        "scheduled": "Ütemezett",
+        "manual": "Kézi",
+        "upgrade": "Frissítés előtt",
+        "before-restore": "Visszaállítás előtt"
+      }
     }
   },
   "language": {
@@ -1242,7 +1271,9 @@
       "count": "Hány",
       "minutes": "Ennyi percen belül",
       "restart": "A szerver elindul vagy újraindul",
-      "restartHint": "Megmondja, frissült-e, vagy rendes leállás nélkül állt le."
+      "restartHint": "Megmondja, frissült-e, vagy rendes leállás nélkül állt le.",
+      "backup": "Egy mentés sikertelen",
+      "backupHint": "Amikor az adatbázist nem lehet menteni."
     },
     "email": {
       "title": "E-mail",

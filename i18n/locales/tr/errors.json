@@ -251,5 +251,7 @@
   "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMapping hable, mobius, reinhard veya off olmalı",
   "kind_must_be_stall_or_error": "kind stall veya error olmalı",
   "bytes_must_be_between_0_and_104857600": "bytes 0 ile 104857600 arasında olmalı",
-  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "Yalnızca filmler, bölümler, sezonlar ve diziler izlendi olarak işaretlenebilir"
+  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "Yalnızca filmler, bölümler, sezonlar ve diziler izlendi olarak işaretlenebilir",
+  "no_such_backup": "Böyle bir yedek yok",
+  "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "Bu sunucunun veritabanı PostgreSQL; pg_dump ile yedekleyin"
 }

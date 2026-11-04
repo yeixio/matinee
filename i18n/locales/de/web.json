@@ -873,6 +873,35 @@
         "title": "Live-TV",
         "hint": "Senderlisten und Programmführer"
       }
+    },
+    "backups": {
+      "title": "Sicherungen",
+      "intro": "Matinee kopiert seine Datenbank, bevor ein Update sie ändert, nach Zeitplan und auf Wunsch. Sicherungen liegen in {{dir}}.",
+      "postgres": "Die Datenbank dieses Servers ist PostgreSQL, die Matinee nicht selbst kopiert. Sichere sie mit pg_dump, wie die Seite Sicherungen in der Anleitung zeigt.",
+      "pending": "Die Sicherung vom {{time}} ersetzt die Datenbank beim nächsten Start von Matinee. Starte Matinee neu, um fertig zu werden.",
+      "cancelRestore": "Wiederherstellen abbrechen",
+      "failed": "Die letzte Sicherung ist fehlgeschlagen: {{error}}",
+      "every": "Sichern",
+      "never": "Nur vor Updates",
+      "every6": "Alle 6 Stunden",
+      "every12": "Alle 12 Stunden",
+      "daily": "Jeden Tag",
+      "weekly": "Jede Woche",
+      "keep": "Je Art behalten",
+      "makeNow": "Jetzt sichern",
+      "making": "Wird gesichert…",
+      "none": "Noch keine Sicherungen.",
+      "download": "Herunterladen",
+      "restore": "Wiederherstellen",
+      "restoreConfirm": "Die Sicherung vom {{time}} wiederherstellen? Sie ersetzt die Datenbank beim nächsten Start von Matinee, alles seitdem Geänderte geht verloren. Die Datenbank, wie sie dann ist, wird als Sicherung behalten.",
+      "delete": "Löschen",
+      "deleteConfirm": "Die Sicherung vom {{time}} löschen?",
+      "reason": {
+        "scheduled": "Geplant",
+        "manual": "Von Hand",
+        "upgrade": "Vor einem Update",
+        "before-restore": "Vor einer Wiederherstellung"
+      }
     }
   },
   "language": {
@@ -1242,7 +1271,9 @@
       "count": "Wie viele",
       "minutes": "Innerhalb von Minuten",
       "restart": "Der Server startet oder startet neu",
-      "restartHint": "Sagt, ob er aktualisiert wurde oder ohne sauberes Herunterfahren beendet wurde."
+      "restartHint": "Sagt, ob er aktualisiert wurde oder ohne sauberes Herunterfahren beendet wurde.",
+      "backup": "Eine Sicherung schlägt fehl",
+      "backupHint": "Wenn die Datenbank nicht gesichert werden kann."
     },
     "email": {
       "title": "E-Mail",

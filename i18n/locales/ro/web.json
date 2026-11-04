@@ -877,6 +877,35 @@
         "title": "TV în direct",
         "hint": "Liste de canale și ghiduri"
       }
+    },
+    "backups": {
+      "title": "Copii de rezervă",
+      "intro": "Matinee își copiază baza de date înainte ca o actualizare s-o schimbe, după program și când ceri. Copiile sunt în {{dir}}.",
+      "postgres": "Baza de date a acestui server este PostgreSQL, pe care Matinee n-o copiază singur. Fă copia cu pg_dump, cum arată pagina Copii de rezervă din ghid.",
+      "pending": "Copia din {{time}} înlocuiește baza de date la următoarea pornire a Matinee. Repornește Matinee ca să termini.",
+      "cancelRestore": "Anulează restaurarea",
+      "failed": "Ultima copie a eșuat: {{error}}",
+      "every": "Copiază",
+      "never": "Doar înainte de actualizări",
+      "every6": "La fiecare 6 ore",
+      "every12": "La fiecare 12 ore",
+      "daily": "În fiecare zi",
+      "weekly": "În fiecare săptămână",
+      "keep": "Păstrează din fiecare fel",
+      "makeNow": "Copiază acum",
+      "making": "Se copiază…",
+      "none": "Nicio copie încă.",
+      "download": "Descarcă",
+      "restore": "Restaurează",
+      "restoreConfirm": "Restaurezi copia din {{time}}? Înlocuiește baza de date la următoarea pornire a Matinee, iar ce s-a schimbat de atunci se pierde. Baza de date așa cum e atunci se păstrează ca o copie.",
+      "delete": "Șterge",
+      "deleteConfirm": "Ștergi copia din {{time}}?",
+      "reason": {
+        "scheduled": "Programată",
+        "manual": "Făcută manual",
+        "upgrade": "Înainte de o actualizare",
+        "before-restore": "Înainte de o restaurare"
+      }
     }
   },
   "language": {
@@ -1253,7 +1282,9 @@
       "count": "Câte",
       "minutes": "În câte minute",
       "restart": "Serverul pornește sau repornește",
-      "restartHint": "Spune dacă a fost actualizat sau s-a oprit fără să se închidă corect."
+      "restartHint": "Spune dacă a fost actualizat sau s-a oprit fără să se închidă corect.",
+      "backup": "O copie de rezervă eșuează",
+      "backupHint": "Când baza de date nu poate fi copiată."
     },
     "email": {
       "title": "E-mail",

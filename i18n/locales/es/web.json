@@ -877,6 +877,35 @@
         "title": "TV en directo",
         "hint": "Listas de canales y guías"
       }
+    },
+    "backups": {
+      "title": "Copias de seguridad",
+      "intro": "Matinee copia su base de datos antes de que una actualización la cambie, de forma programada y cuando lo pides. Las copias se guardan en {{dir}}.",
+      "postgres": "La base de datos de este servidor es PostgreSQL, que Matinee no copia por sí mismo. Haz la copia con pg_dump, como muestra la página Copias de seguridad de la guía.",
+      "pending": "La copia del {{time}} sustituye a la base de datos la próxima vez que Matinee se inicie. Reinicia Matinee para terminar.",
+      "cancelRestore": "Cancelar la restauración",
+      "failed": "La última copia falló: {{error}}",
+      "every": "Copiar",
+      "never": "Solo antes de actualizar",
+      "every6": "Cada 6 horas",
+      "every12": "Cada 12 horas",
+      "daily": "Cada día",
+      "weekly": "Cada semana",
+      "keep": "Conservar de cada tipo",
+      "makeNow": "Copiar ahora",
+      "making": "Copiando…",
+      "none": "Aún no hay copias.",
+      "download": "Descargar",
+      "restore": "Restaurar",
+      "restoreConfirm": "¿Restaurar la copia del {{time}}? Sustituye a la base de datos la próxima vez que Matinee se inicie, y se pierde lo cambiado desde entonces. La base de datos tal como esté entonces se guarda como copia.",
+      "delete": "Eliminar",
+      "deleteConfirm": "¿Eliminar la copia del {{time}}?",
+      "reason": {
+        "scheduled": "Programada",
+        "manual": "Hecha a mano",
+        "upgrade": "Antes de una actualización",
+        "before-restore": "Antes de una restauración"
+      }
     }
   },
   "language": {
@@ -1253,7 +1282,9 @@
       "count": "Cuántos",
       "minutes": "En minutos",
       "restart": "El servidor se inicia o se reinicia",
-      "restartHint": "Indica si se actualizó o si se detuvo sin apagarse correctamente."
+      "restartHint": "Indica si se actualizó o si se detuvo sin apagarse correctamente.",
+      "backup": "Falla una copia de seguridad",
+      "backupHint": "Cuando no se puede copiar la base de datos."
     },
     "email": {
       "title": "Correo",

@@ -251,5 +251,7 @@
   "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMapping må være hable, mobius, reinhard eller off",
   "kind_must_be_stall_or_error": "kind må være stall eller error",
   "bytes_must_be_between_0_and_104857600": "bytes må være mellom 0 og 104857600",
-  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "Bare filmer, episoder, sesonger og serier kan merkes som sett"
+  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "Bare filmer, episoder, sesonger og serier kan merkes som sett",
+  "no_such_backup": "Ingen slik kopi",
+  "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "Databasen til denne serveren er PostgreSQL; ta sikkerhetskopi med pg_dump"
 }

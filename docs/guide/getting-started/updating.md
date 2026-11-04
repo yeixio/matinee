@@ -26,6 +26,10 @@ On Windows, Matinee updates itself from its icon next to the clock. See [Windows
 
 Updates move your database forward by themselves on the first start. Going back to an older version after that isn't supported, so take a backup first if you might want to.
 
+<!-- since: v0.2.0 -->
+With SQLite (the default), Matinee backs up the database by itself before an update changes it, so you can go back. See [Backups](/docs/server/backups/).
+<!-- /since -->
+
 Docker images are tagged by version (`0.1.0`, `0.1`) as well as `latest`, so you can pin a version and move up on your own schedule.
 
 <!-- since: v0.1.4 -->
@@ -49,6 +53,10 @@ Everything Matinee knows lives in its data folder (`MATINEE_DATA_DIR`):
 | apt, dnf | `/var/lib/matinee` |
 | Homebrew | `$(brew --prefix)/var/matinee` |
 | Helm | the bundled PostgreSQL database, plus the downloads volume |
+
+<!-- since: v0.2.0 -->
+Matinee backs up its SQLite database by itself every day and before each update, and an admin can download or restore a backup from **Settings → Server health → Backups**. See [Backups](/docs/server/backups/). To keep copies off the server too, copy the `backups` folder in the data folder somewhere else.
+<!-- /since -->
 
 What matters is the database: accounts, watch history, watch lists, collections and settings. With SQLite (the default) that's `matinee.db` in the data folder; stop Matinee before copying it, or copy it with `sqlite3 matinee.db ".backup backup.db"`. With PostgreSQL, use `pg_dump`.
 

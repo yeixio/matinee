@@ -35,7 +35,10 @@ type Store struct {
 // Open connects to the database. A postgres:// URL uses PostgreSQL, which
 // suits Kubernetes and network storage; anything else is a SQLite file path
 // (":memory:" in tests).
-func Open(dsn string) (*Store, error) {
+func Open(dsn string) (*Store, error) { return OpenWith(dsn, Options{}) }
+
+// OpenWith is Open with options.
+func OpenWith(dsn string, o Options) (*Store, error) {
 	var d *db
 	if strings.HasPrefix(dsn, "postgres://") || strings.HasPrefix(dsn, "postgresql://") {
 		conn, err := sql.Open("pgx", withoutJIT(dsn))
@@ -56,6 +59,14 @@ func Open(dsn string) (*Store, error) {
 		d = &db{DB: conn, dialect: sqlite}
 	}
 	s := &Store{db: d}
+	if o.BeforeMigrate != nil {
+		if from := s.schemaVersion(context.Background()); from >= 1 && from < SchemaTarget() {
+			if err := o.BeforeMigrate(s, from, SchemaTarget()); err != nil {
+				d.Close()
+				return nil, fmt.Errorf("before migrating: %w", err)
+			}
+		}
+	}
 	if err := s.migrate(); err != nil {
 		d.Close()
 		return nil, fmt.Errorf("migrate: %w", err)

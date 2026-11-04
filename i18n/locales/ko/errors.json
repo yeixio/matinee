@@ -251,5 +251,7 @@
   "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMapping은 hable, mobius, reinhard 또는 off여야 합니다",
   "kind_must_be_stall_or_error": "kind는 stall 또는 error여야 합니다",
   "bytes_must_be_between_0_and_104857600": "bytes는 0에서 104857600 사이여야 합니다",
-  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "영화, 에피소드, 시즌, 프로그램만 시청함으로 표시할 수 있어요"
+  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "영화, 에피소드, 시즌, 프로그램만 시청함으로 표시할 수 있어요",
+  "no_such_backup": "그런 백업이 없어요",
+  "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "이 서버의 데이터베이스는 PostgreSQL이에요. pg_dump로 백업하세요"
 }

@@ -1021,7 +1021,7 @@ export type ImportResult = {
 export type ImportStatus = { running: boolean; done: number; total: number; result?: ImportResult; error?: string }
 
 // Admin alerts (Settings → Server health → Alerts), from GET /admin/alerts.
-export type AlertRule = 'disk' | 'folder' | 'errors' | 'transcodes' | 'restart' | 'test'
+export type AlertRule = 'disk' | 'folder' | 'errors' | 'transcodes' | 'restart' | 'backup' | 'test'
 export type Alert = {
   id: string
   rule: AlertRule
@@ -1041,6 +1041,7 @@ export type AlertRules = {
   errors: RateRule
   transcodes: RateRule
   restart: { on: boolean }
+  backup?: { on: boolean }
 }
 export type AlertEmail = {
   on: boolean
@@ -1120,6 +1121,21 @@ export type LiveChoice = { code: string; name: string; flag?: string }
 export type IPTVOrgChoices = { countries: LiveChoice[]; categories: LiveChoice[]; languages: LiveChoice[] }
 
 export type WatchedCount = { total: number; played: number }
+
+export type BackupSettings = { everyHours: number; keep: number }
+export type Backup = { name: string; size: number; time: number; reason: 'scheduled' | 'manual' | 'upgrade' | 'before-restore' }
+/** Copies of the server's database (Settings → Server health → Backups). */
+export type Backups = {
+  /** False for PostgreSQL, which is backed up with pg_dump. */
+  supported: boolean
+  database: 'sqlite' | 'postgres'
+  dir?: string
+  settings: BackupSettings
+  backups: Backup[]
+  /** The backup that replaces the database at the next start. */
+  restore?: string
+  lastError?: string
+}
 
 export interface PlaybackReport {
   kind: 'stall' | 'error'
@@ -1465,6 +1481,13 @@ export const api = {
   // rating: 1 to 10 (half stars), or null to take it back.
   rate: (id: number, rating: number | null) =>
     rating ? request<void>('PUT', `/api/v1/items/${id}/rating`, { rating }) : request<void>('DELETE', `/api/v1/items/${id}/rating`),
+  backups: () => request<Backups>('GET', '/api/v1/admin/backups'),
+  makeBackup: () => request<Backups>('POST', '/api/v1/admin/backups'),
+  saveBackupSettings: (s: BackupSettings) => request<Backups>('PUT', '/api/v1/admin/backups/settings', s),
+  restoreBackup: (name: string) => request<Backups>('POST', `/api/v1/admin/backups/${encodeURIComponent(name)}/restore`),
+  cancelRestore: () => request<Backups>('DELETE', '/api/v1/admin/backups/restore'),
+  deleteBackup: (name: string) => request<Backups>('DELETE', `/api/v1/admin/backups/${encodeURIComponent(name)}`),
+  backupUrl: (name: string) => `/api/v1/admin/backups/${encodeURIComponent(name)}`,
   // How much of a movie, episode, season or show is watched, and marking it all.
   watched: (id: number) => request<WatchedCount>('GET', `/api/v1/items/${id}/watched`),
   setWatched: (id: number, played: boolean) => request<WatchedCount>('PUT', `/api/v1/items/${id}/watched`, { played }),

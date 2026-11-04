@@ -131,6 +131,12 @@ export function AlertSettings() {
               on={form.rules.restart.on}
               onToggle={(on) => change((f) => (f.rules.restart.on = on))}
             />
+            <RuleRow
+              title={t('alerts.rules.backup')}
+              hint={t('alerts.rules.backupHint')}
+              on={form.rules.backup?.on ?? true}
+              onToggle={(on) => change((f) => (f.rules.backup = { on }))}
+            />
           </div>
         </div>
 

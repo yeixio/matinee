@@ -877,6 +877,35 @@
         "title": "TV en direct",
         "hint": "Listes de chaînes et guides"
       }
+    },
+    "backups": {
+      "title": "Sauvegardes",
+      "intro": "Matinee copie sa base de données avant qu'une mise à jour la modifie, selon un calendrier et quand vous le demandez. Les sauvegardes sont dans {{dir}}.",
+      "postgres": "La base de données de ce serveur est PostgreSQL, que Matinee ne copie pas lui-même. Sauvegardez-la avec pg_dump, comme le montre la page Sauvegardes du guide.",
+      "pending": "La sauvegarde du {{time}} remplace la base de données au prochain démarrage de Matinee. Redémarrez Matinee pour terminer.",
+      "cancelRestore": "Annuler la restauration",
+      "failed": "La dernière sauvegarde a échoué : {{error}}",
+      "every": "Sauvegarder",
+      "never": "Seulement avant les mises à jour",
+      "every6": "Toutes les 6 heures",
+      "every12": "Toutes les 12 heures",
+      "daily": "Chaque jour",
+      "weekly": "Chaque semaine",
+      "keep": "À garder par type",
+      "makeNow": "Sauvegarder maintenant",
+      "making": "Sauvegarde…",
+      "none": "Aucune sauvegarde pour l'instant.",
+      "download": "Télécharger",
+      "restore": "Restaurer",
+      "restoreConfirm": "Restaurer la sauvegarde du {{time}} ? Elle remplace la base de données au prochain démarrage de Matinee, et tout ce qui a changé depuis est perdu. La base de données telle qu'elle est alors est gardée en sauvegarde.",
+      "delete": "Supprimer",
+      "deleteConfirm": "Supprimer la sauvegarde du {{time}} ?",
+      "reason": {
+        "scheduled": "Planifiée",
+        "manual": "Faite à la main",
+        "upgrade": "Avant une mise à jour",
+        "before-restore": "Avant une restauration"
+      }
     }
   },
   "language": {
@@ -1253,7 +1282,9 @@
       "count": "Combien",
       "minutes": "En minutes",
       "restart": "Le serveur démarre ou redémarre",
-      "restartHint": "Indique s'il a été mis à jour, ou s'il s'est arrêté sans s'éteindre proprement."
+      "restartHint": "Indique s'il a été mis à jour, ou s'il s'est arrêté sans s'éteindre proprement.",
+      "backup": "Une sauvegarde échoue",
+      "backupHint": "Quand la base de données ne peut pas être sauvegardée."
     },
     "email": {
       "title": "E-mail",

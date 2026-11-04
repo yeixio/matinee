@@ -873,6 +873,35 @@
         "title": "Suora TV",
         "hint": "Kanavalistat ja ohjelmaoppaat"
       }
+    },
+    "backups": {
+      "title": "Varmuuskopiot",
+      "intro": "Matinee kopioi tietokantansa ennen kuin päivitys muuttaa sitä, aikataulun mukaan ja pyynnöstä. Varmuuskopiot ovat kansiossa {{dir}}.",
+      "postgres": "Tämän palvelimen tietokanta on PostgreSQL, jota Matinee ei kopioi itse. Varmuuskopioi se pg_dumpilla, kuten ohjeen Varmuuskopiot-sivu näyttää.",
+      "pending": "Varmuuskopio ajalta {{time}} korvaa tietokannan, kun Matinee käynnistyy seuraavan kerran. Käynnistä Matinee uudelleen viimeistelläksesi.",
+      "cancelRestore": "Peru palautus",
+      "failed": "Viimeisin varmuuskopio epäonnistui: {{error}}",
+      "every": "Varmuuskopioi",
+      "never": "Vain ennen päivityksiä",
+      "every6": "6 tunnin välein",
+      "every12": "12 tunnin välein",
+      "daily": "Joka päivä",
+      "weekly": "Joka viikko",
+      "keep": "Säilytä kutakin lajia",
+      "makeNow": "Varmuuskopioi nyt",
+      "making": "Varmuuskopioidaan…",
+      "none": "Ei vielä varmuuskopioita.",
+      "download": "Lataa",
+      "restore": "Palauta",
+      "restoreConfirm": "Palautetaanko varmuuskopio ajalta {{time}}? Se korvaa tietokannan, kun Matinee käynnistyy seuraavan kerran, ja sen jälkeen muutettu katoaa. Tietokanta sellaisena kuin se silloin on, säilytetään varmuuskopiona.",
+      "delete": "Poista",
+      "deleteConfirm": "Poistetaanko varmuuskopio ajalta {{time}}?",
+      "reason": {
+        "scheduled": "Ajastettu",
+        "manual": "Käsin tehty",
+        "upgrade": "Ennen päivitystä",
+        "before-restore": "Ennen palautusta"
+      }
     }
   },
   "language": {
@@ -1242,7 +1271,9 @@
       "count": "Montako",
       "minutes": "Minuutin sisällä",
       "restart": "Palvelin käynnistyy tai käynnistyy uudelleen",
-      "restartHint": "Kertoo, päivitettiinkö se tai pysähtyikö se sammumatta siististi."
+      "restartHint": "Kertoo, päivitettiinkö se tai pysähtyikö se sammumatta siististi.",
+      "backup": "Varmuuskopio epäonnistuu",
+      "backupHint": "Kun tietokantaa ei voi varmuuskopioida."
     },
     "email": {
       "title": "Sähköposti",

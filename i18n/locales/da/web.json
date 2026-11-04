@@ -873,6 +873,35 @@
         "title": "Live-tv",
         "hint": "Kanallister og programoversigter"
       }
+    },
+    "backups": {
+      "title": "Sikkerhedskopier",
+      "intro": "Matinee kopierer sin database, før en opdatering ændrer den, efter en tidsplan og når du beder om det. Kopierne ligger i {{dir}}.",
+      "postgres": "Serverens database er PostgreSQL, som Matinee ikke selv kopierer. Tag en sikkerhedskopi med pg_dump, som siden Sikkerhedskopier i vejledningen viser.",
+      "pending": "Kopien fra {{time}} erstatter databasen, næste gang Matinee starter. Genstart Matinee for at gøre det færdigt.",
+      "cancelRestore": "Annuller gendannelsen",
+      "failed": "Den seneste kopi mislykkedes: {{error}}",
+      "every": "Tag kopi",
+      "never": "Kun før opdateringer",
+      "every6": "Hver 6. time",
+      "every12": "Hver 12. time",
+      "daily": "Hver dag",
+      "weekly": "Hver uge",
+      "keep": "Behold af hver slags",
+      "makeNow": "Tag kopi nu",
+      "making": "Tager kopi…",
+      "none": "Ingen kopier endnu.",
+      "download": "Download",
+      "restore": "Gendan",
+      "restoreConfirm": "Gendan kopien fra {{time}}? Den erstatter databasen, næste gang Matinee starter, og det, der er ændret siden, går tabt. Databasen, som den er til den tid, gemmes som en kopi.",
+      "delete": "Slet",
+      "deleteConfirm": "Slet kopien fra {{time}}?",
+      "reason": {
+        "scheduled": "Planlagt",
+        "manual": "Lavet i hånden",
+        "upgrade": "Før en opdatering",
+        "before-restore": "Før en gendannelse"
+      }
     }
   },
   "language": {
@@ -1242,7 +1271,9 @@
       "count": "Hvor mange",
       "minutes": "Inden for minutter",
       "restart": "Serveren starter eller genstarter",
-      "restartHint": "Fortæller, om den blev opdateret eller stoppede uden at lukke ordentligt ned."
+      "restartHint": "Fortæller, om den blev opdateret eller stoppede uden at lukke ordentligt ned.",
+      "backup": "En sikkerhedskopi mislykkes",
+      "backupHint": "Når databasen ikke kan sikkerhedskopieres."
     },
     "email": {
       "title": "E-mail",

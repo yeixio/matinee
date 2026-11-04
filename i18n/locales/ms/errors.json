@@ -251,5 +251,7 @@
   "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMapping mesti hable, mobius, reinhard atau off",
   "kind_must_be_stall_or_error": "kind mesti stall atau error",
   "bytes_must_be_between_0_and_104857600": "bytes mesti antara 0 dan 104857600",
-  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "Hanya filem, episod, musim dan rancangan boleh ditanda sudah ditonton"
+  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "Hanya filem, episod, musim dan rancangan boleh ditanda sudah ditonton",
+  "no_such_backup": "Tiada sandaran sedemikian",
+  "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "Pangkalan data pelayan ini ialah PostgreSQL; sandarkan dengan pg_dump"
 }

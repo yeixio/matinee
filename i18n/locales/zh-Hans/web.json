@@ -869,6 +869,35 @@
         "title": "直播电视",
         "hint": "频道列表和节目单"
       }
+    },
+    "backups": {
+      "title": "备份",
+      "intro": "Matinee 会在升级更改数据库之前、按计划以及在你要求时复制数据库。备份保存在 {{dir}}。",
+      "postgres": "此服务器的数据库是 PostgreSQL,Matinee 不会自行复制。请按指南“备份”页面所示用 pg_dump 备份。",
+      "pending": "{{time}} 的备份将在 Matinee 下次启动时替换数据库。重启 Matinee 以完成。",
+      "cancelRestore": "取消恢复",
+      "failed": "上次备份失败:{{error}}",
+      "every": "备份",
+      "never": "仅在升级前",
+      "every6": "每 6 小时",
+      "every12": "每 12 小时",
+      "daily": "每天",
+      "weekly": "每周",
+      "keep": "每种保留",
+      "makeNow": "立即备份",
+      "making": "正在备份…",
+      "none": "还没有备份。",
+      "download": "下载",
+      "restore": "恢复",
+      "restoreConfirm": "恢复 {{time}} 的备份?它会在 Matinee 下次启动时替换数据库,之后的更改将丢失。届时的数据库会保留为备份。",
+      "delete": "删除",
+      "deleteConfirm": "删除 {{time}} 的备份?",
+      "reason": {
+        "scheduled": "定时",
+        "manual": "手动",
+        "upgrade": "升级前",
+        "before-restore": "恢复前"
+      }
     }
   },
   "language": {
@@ -1231,7 +1260,9 @@
       "count": "次数",
       "minutes": "分钟内",
       "restart": "服务器启动或重启",
-      "restartHint": "说明它是否更新过，或是否未正常关闭就停止了。"
+      "restartHint": "说明它是否更新过，或是否未正常关闭就停止了。",
+      "backup": "备份失败",
+      "backupHint": "无法备份数据库时。"
     },
     "email": {
       "title": "邮件",
