@@ -668,5 +668,61 @@
     "hint": "소리가 화면보다 늦나요? 빠르게 하세요. 지연이 설정된 동안 서버가 소리를 옮겨 보냅니다.",
     "forTitle": "이 작품만",
     "reset": "지연 없음"
+  },
+  "subtitlePrefs": {
+    "title": "자막",
+    "intro": "자막이 언제 켜지고 어떻게 보이는지 정합니다. 설정은 모든 앱에 적용됩니다. 플레이어에서 자막을 고르면 이 설정도 바뀝니다.",
+    "when": "자막 표시",
+    "mode": {
+      "off": "표시 안 함",
+      "forced": "강제 자막만",
+      "foreign": "소리가 내 언어가 아닐 때",
+      "always": "항상"
+    },
+    "modeHint": {
+      "off": "파일이 보여 달라는 강제 자막까지 포함해 자막이 꺼진 상태로 유지됩니다.",
+      "forced": "표지판이나 다른 언어 대사처럼 모두를 위한 줄만 표시합니다.",
+      "foreign": "영화가 다른 언어일 때 내 언어로 전체 자막을, 아니면 강제 자막만 표시합니다.",
+      "always": "파일에 있는 내 첫 번째 언어로 전체 자막을 표시합니다."
+    },
+    "languages": "언어(순서대로)",
+    "appLanguage": "앱 언어({{language}})",
+    "addLanguage": "언어 추가",
+    "removeLanguage": "{{language}} 삭제",
+    "size": "크기",
+    "sizes": {
+      "small": "작게",
+      "medium": "보통",
+      "large": "크게",
+      "huge": "아주 크게"
+    },
+    "color": "색상",
+    "colors": {
+      "white": "흰색",
+      "yellow": "노란색",
+      "cyan": "청록색",
+      "green": "초록색"
+    },
+    "edge": "테두리",
+    "edges": {
+      "shadow": "그림자",
+      "outline": "외곽선",
+      "none": "없음"
+    },
+    "position": "위치",
+    "positions": {
+      "bottom": "아래",
+      "raised": "조금 위"
+    },
+    "background": "글자 뒤 배경",
+    "sample": "자막은 이렇게 보입니다.",
+    "look": "자막 스타일",
+    "lookHint": "줄을 눌러 바꾸세요. 설정은 모든 앱에 적용됩니다."
+  },
+  "subtitleTiming": {
+    "title": "싱크",
+    "earlier": "자막 더 일찍",
+    "later": "자막 더 늦게",
+    "reset": "파일 싱크로 되돌리기"
   }
 }

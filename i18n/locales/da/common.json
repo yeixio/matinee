@@ -700,5 +700,61 @@
     "hint": "Er lyden bagud i forhold til billedet? Gør den tidligere. Så længe der er en forsinkelse, sender serveren lyden forskudt.",
     "forTitle": "Kun for denne titel",
     "reset": "Ingen forsinkelse"
+  },
+  "subtitlePrefs": {
+    "title": "Undertekster",
+    "intro": "Hvornår undertekster vises, og hvordan de ser ud. Dine valg følger dig til alle apps. Når du vælger undertekster i afspilleren, ændrer det dem også.",
+    "when": "Vis undertekster",
+    "mode": {
+      "off": "Aldrig",
+      "forced": "Kun tvungne linjer",
+      "foreign": "Når lyden ikke er på mit sprog",
+      "always": "Altid"
+    },
+    "modeHint": {
+      "off": "Undertekster forbliver slået fra, også tvungne linjer, som en fil vil vise.",
+      "forced": "Kun linjer til alle, som skilte eller dialog på et andet sprog.",
+      "foreign": "Fulde undertekster på dit sprog, når en film er på et andet, ellers kun tvungne linjer.",
+      "always": "Fulde undertekster på det første af dine sprog, som filen har."
+    },
+    "languages": "Sprog, i rækkefølge",
+    "appLanguage": "Appens sprog ({{language}})",
+    "addLanguage": "Tilføj et sprog",
+    "removeLanguage": "Fjern {{language}}",
+    "size": "Størrelse",
+    "sizes": {
+      "small": "Lille",
+      "medium": "Mellem",
+      "large": "Stor",
+      "huge": "Meget stor"
+    },
+    "color": "Farve",
+    "colors": {
+      "white": "Hvid",
+      "yellow": "Gul",
+      "cyan": "Cyan",
+      "green": "Grøn"
+    },
+    "edge": "Kanter",
+    "edges": {
+      "shadow": "Skygge",
+      "outline": "Omrids",
+      "none": "Ingen"
+    },
+    "position": "Placering",
+    "positions": {
+      "bottom": "Nederst",
+      "raised": "Højere oppe"
+    },
+    "background": "Boks bag teksten",
+    "sample": "Sådan kommer underteksterne til at se ud.",
+    "look": "Undertekststil",
+    "lookHint": "Tryk på en linje for at ændre den. Dine valg følger dig til alle apps."
+  },
+  "subtitleTiming": {
+    "title": "Timing",
+    "earlier": "Vis undertekster tidligere",
+    "later": "Vis undertekster senere",
+    "reset": "Tilbage til filens timing"
   }
 }

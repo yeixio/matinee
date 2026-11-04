@@ -732,5 +732,61 @@
     "hint": "Sunetul vine după imagine? Fă-l mai devreme. Cât timp există o întârziere, serverul trimite sunetul decalat.",
     "forTitle": "Doar pentru acest titlu",
     "reset": "Fără întârziere"
+  },
+  "subtitlePrefs": {
+    "title": "Subtitrări",
+    "intro": "Când apar subtitrările și cum arată. Alegerile tale te urmează în fiecare aplicație. Alegerea subtitrărilor în player le schimbă și pe ele.",
+    "when": "Afișează subtitrări",
+    "mode": {
+      "off": "Niciodată",
+      "forced": "Doar rânduri forțate",
+      "foreign": "Când sunetul nu e în limba mea",
+      "always": "Mereu"
+    },
+    "modeHint": {
+      "off": "Subtitrările rămân oprite, chiar și rândurile forțate pe care un fișier vrea să le arate.",
+      "forced": "Doar rândurile pentru toți, cum ar fi indicatoare sau dialog în altă limbă.",
+      "foreign": "Subtitrări complete în limba ta când un film e în alta; altfel doar rânduri forțate.",
+      "always": "Subtitrări complete în prima dintre limbile tale pe care o are fișierul."
+    },
+    "languages": "Limbi, în ordine",
+    "appLanguage": "Limba aplicației ({{language}})",
+    "addLanguage": "Adaugă o limbă",
+    "removeLanguage": "Elimină {{language}}",
+    "size": "Mărime",
+    "sizes": {
+      "small": "Mică",
+      "medium": "Medie",
+      "large": "Mare",
+      "huge": "Foarte mare"
+    },
+    "color": "Culoare",
+    "colors": {
+      "white": "Alb",
+      "yellow": "Galben",
+      "cyan": "Cyan",
+      "green": "Verde"
+    },
+    "edge": "Margini",
+    "edges": {
+      "shadow": "Umbră",
+      "outline": "Contur",
+      "none": "Fără"
+    },
+    "position": "Poziție",
+    "positions": {
+      "bottom": "Jos",
+      "raised": "Mai sus"
+    },
+    "background": "Fundal în spatele textului",
+    "sample": "Așa vor arăta subtitrările.",
+    "look": "Stilul subtitrărilor",
+    "lookHint": "Apasă un rând ca să-l schimbi. Alegerile tale te urmează în fiecare aplicație."
+  },
+  "subtitleTiming": {
+    "title": "Sincronizare",
+    "earlier": "Arată subtitrările mai devreme",
+    "later": "Arată subtitrările mai târziu",
+    "reset": "Înapoi la sincronizarea fișierului"
   }
 }

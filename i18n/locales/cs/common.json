@@ -764,5 +764,61 @@
     "hint": "Zvuk je za obrazem? Posuňte ho dříve. Dokud je nastavené zpoždění, server posílá posunutý zvuk.",
     "forTitle": "Jen pro tento titul",
     "reset": "Bez zpoždění"
+  },
+  "subtitlePrefs": {
+    "title": "Titulky",
+    "intro": "Kdy se titulky zobrazí a jak vypadají. Vaše volby platí ve všech aplikacích. Výběr titulků v přehrávači je také změní.",
+    "when": "Zobrazovat titulky",
+    "mode": {
+      "off": "Nikdy",
+      "forced": "Jen vynucené řádky",
+      "foreign": "Když zvuk není v mém jazyce",
+      "always": "Vždy"
+    },
+    "modeHint": {
+      "off": "Titulky zůstanou vypnuté, i vynucené řádky, které chce soubor zobrazit.",
+      "forced": "Jen řádky pro všechny, třeba nápisy nebo dialogy v jiném jazyce.",
+      "foreign": "Celé titulky ve vašem jazyce, když je film v jiném; jinak jen vynucené řádky.",
+      "always": "Celé titulky v prvním z vašich jazyků, který soubor má."
+    },
+    "languages": "Jazyky v pořadí",
+    "appLanguage": "Jazyk aplikace ({{language}})",
+    "addLanguage": "Přidat jazyk",
+    "removeLanguage": "Odebrat {{language}}",
+    "size": "Velikost",
+    "sizes": {
+      "small": "Malé",
+      "medium": "Střední",
+      "large": "Velké",
+      "huge": "Velmi velké"
+    },
+    "color": "Barva",
+    "colors": {
+      "white": "Bílá",
+      "yellow": "Žlutá",
+      "cyan": "Azurová",
+      "green": "Zelená"
+    },
+    "edge": "Okraje",
+    "edges": {
+      "shadow": "Stín",
+      "outline": "Obrys",
+      "none": "Žádné"
+    },
+    "position": "Umístění",
+    "positions": {
+      "bottom": "Dole",
+      "raised": "Výš"
+    },
+    "background": "Pozadí za textem",
+    "sample": "Takto budou titulky vypadat.",
+    "look": "Styl titulků",
+    "lookHint": "Stisknutím řádku ho změníte. Vaše volby platí ve všech aplikacích."
+  },
+  "subtitleTiming": {
+    "title": "Načasování",
+    "earlier": "Zobrazit titulky dříve",
+    "later": "Zobrazit titulky později",
+    "reset": "Zpět na načasování souboru"
   }
 }

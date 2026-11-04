@@ -17,6 +17,7 @@ import { FriendLibraries, Friends } from '../components/FriendSettings'
 import { Appearance } from '../components/ThemePicker'
 import { LibraryIcon, useLibraries } from '../components/Shell'
 import { Button, Field, inputClass } from '../components/ui'
+import { SubtitleSettings } from '../components/SubtitleSettings'
 import { Integrations } from './Integrations'
 import { ImportSettings } from '../components/ImportSettings'
 import i18n, { formatLocale } from '../i18n'
@@ -30,7 +31,7 @@ type SettingsGroup = { id: string; icon: LucideIcon; sections: [string, ReactNod
 
 /** Which group each section lives in, so /settings#<section> links still land. */
 export const settingsSections: Record<string, string> = {
-  language: 'you', appearance: 'you', playback: 'you', account: 'you', devices: 'you',
+  language: 'you', appearance: 'you', playback: 'you', 'subtitle-choices': 'you', account: 'you', devices: 'you',
   libraries: 'libraries', import: 'libraries', 'new-files': 'libraries', 'media-analysis': 'libraries',
   people: 'people', friends: 'people', profiles: 'people',
   posters: 'content', 'podcast-index': 'content', subtitles: 'content', lyrics: 'content', trailers: 'content', 'home-rows': 'content',
@@ -58,6 +59,7 @@ export default function Settings() {
         ['language', <LanguagePicker me={me} />],
         ['appearance', <Appearance me={me} />],
         ['playback', <Playback />],
+        ['subtitle-choices', <SubtitleSettings />],
         ['account', !me.guest && <Account />],
         ['devices', <Devices />],
       ],

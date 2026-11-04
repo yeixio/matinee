@@ -254,5 +254,6 @@
   "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "Vain elokuvat, jaksot, kaudet ja sarjat voi merkitä katsotuiksi",
   "no_such_backup": "Varmuuskopiota ei ole",
   "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "Tämän palvelimen tietokanta on PostgreSQL; varmuuskopioi se pg_dumpilla",
-  "audiodelay_is_milliseconds_between_2000_and_2000": "Äänen viive annetaan millisekunteina, välillä -2000–2000."
+  "audiodelay_is_milliseconds_between_2000_and_2000": "Äänen viive annetaan millisekunteina, välillä -2000–2000.",
+  "subtitle_choices_arent_ones_the_apps_know": "Sovellukset eivät tunne näitä tekstitysvalintoja"
 }

@@ -700,5 +700,61 @@
     "hint": "Loopt het geluid achter op het beeld? Zet het eerder. Zolang er een vertraging is, stuurt de server het geluid verschoven.",
     "forTitle": "Alleen voor deze titel",
     "reset": "Geen vertraging"
+  },
+  "subtitlePrefs": {
+    "title": "Ondertitels",
+    "intro": "Wanneer ondertitels verschijnen en hoe ze eruitzien. Je keuzes gelden in elke app. Ondertitels kiezen in de speler verandert ze ook.",
+    "when": "Ondertitels tonen",
+    "mode": {
+      "off": "Nooit",
+      "forced": "Alleen geforceerde regels",
+      "foreign": "Als het geluid niet in mijn taal is",
+      "always": "Altijd"
+    },
+    "modeHint": {
+      "off": "Ondertitels blijven uit, ook geforceerde regels die een bestand wil tonen.",
+      "forced": "Alleen regels voor iedereen, zoals borden of dialoog in een andere taal.",
+      "foreign": "Volledige ondertitels in jouw taal als een film in een andere taal is, anders alleen geforceerde regels.",
+      "always": "Volledige ondertitels in de eerste van je talen die een bestand heeft."
+    },
+    "languages": "Talen, op volgorde",
+    "appLanguage": "Taal van de app ({{language}})",
+    "addLanguage": "Taal toevoegen",
+    "removeLanguage": "{{language}} verwijderen",
+    "size": "Grootte",
+    "sizes": {
+      "small": "Klein",
+      "medium": "Middel",
+      "large": "Groot",
+      "huge": "Heel groot"
+    },
+    "color": "Kleur",
+    "colors": {
+      "white": "Wit",
+      "yellow": "Geel",
+      "cyan": "Cyaan",
+      "green": "Groen"
+    },
+    "edge": "Randen",
+    "edges": {
+      "shadow": "Schaduw",
+      "outline": "Omlijning",
+      "none": "Geen"
+    },
+    "position": "Positie",
+    "positions": {
+      "bottom": "Onderaan",
+      "raised": "Hoger"
+    },
+    "background": "Vlak achter de tekst",
+    "sample": "Zo zien ondertitels eruit.",
+    "look": "Stijl van ondertitels",
+    "lookHint": "Druk op een regel om die te wijzigen. Je keuzes gelden in elke app."
+  },
+  "subtitleTiming": {
+    "title": "Timing",
+    "earlier": "Ondertitels eerder tonen",
+    "later": "Ondertitels later tonen",
+    "reset": "Terug naar de timing van het bestand"
   }
 }

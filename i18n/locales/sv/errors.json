@@ -254,5 +254,6 @@
   "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "Bara filmer, avsnitt, säsonger och serier kan markeras som sedda",
   "no_such_backup": "Ingen sådan kopia",
   "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "Serverns databas är PostgreSQL; säkerhetskopiera den med pg_dump",
-  "audiodelay_is_milliseconds_between_2000_and_2000": "Ljudfördröjningen anges i millisekunder, mellan -2000 och 2000."
+  "audiodelay_is_milliseconds_between_2000_and_2000": "Ljudfördröjningen anges i millisekunder, mellan -2000 och 2000.",
+  "subtitle_choices_arent_ones_the_apps_know": "Apparna känner inte till de här undertextvalen"
 }

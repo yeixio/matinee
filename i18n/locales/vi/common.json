@@ -668,5 +668,61 @@
     "hint": "Âm thanh chậm hơn hình? Hãy cho sớm hơn. Khi có độ trễ, máy chủ gửi âm thanh đã dịch.",
     "forTitle": "Chỉ cho nội dung này",
     "reset": "Không trễ"
+  },
+  "subtitlePrefs": {
+    "title": "Phụ đề",
+    "intro": "Khi nào phụ đề hiện và trông thế nào. Lựa chọn của bạn áp dụng trên mọi ứng dụng. Chọn phụ đề trong trình phát cũng thay đổi chúng.",
+    "when": "Hiện phụ đề",
+    "mode": {
+      "off": "Không bao giờ",
+      "forced": "Chỉ các dòng bắt buộc",
+      "foreign": "Khi âm thanh không phải ngôn ngữ của tôi",
+      "always": "Luôn luôn"
+    },
+    "modeHint": {
+      "off": "Phụ đề luôn tắt, kể cả các dòng bắt buộc mà tệp muốn hiện.",
+      "forced": "Chỉ các dòng dành cho mọi người, như biển hiệu hoặc lời thoại bằng ngôn ngữ khác.",
+      "foreign": "Phụ đề đầy đủ bằng ngôn ngữ của bạn khi phim bằng ngôn ngữ khác; nếu không thì chỉ các dòng bắt buộc.",
+      "always": "Phụ đề đầy đủ bằng ngôn ngữ đầu tiên của bạn mà tệp có."
+    },
+    "languages": "Ngôn ngữ, theo thứ tự",
+    "appLanguage": "Ngôn ngữ của ứng dụng ({{language}})",
+    "addLanguage": "Thêm ngôn ngữ",
+    "removeLanguage": "Bỏ {{language}}",
+    "size": "Cỡ chữ",
+    "sizes": {
+      "small": "Nhỏ",
+      "medium": "Vừa",
+      "large": "Lớn",
+      "huge": "Rất lớn"
+    },
+    "color": "Màu",
+    "colors": {
+      "white": "Trắng",
+      "yellow": "Vàng",
+      "cyan": "Lục lam",
+      "green": "Xanh lá"
+    },
+    "edge": "Viền",
+    "edges": {
+      "shadow": "Bóng đổ",
+      "outline": "Viền chữ",
+      "none": "Không"
+    },
+    "position": "Vị trí",
+    "positions": {
+      "bottom": "Dưới cùng",
+      "raised": "Cao hơn"
+    },
+    "background": "Nền sau chữ",
+    "sample": "Phụ đề sẽ trông như thế này.",
+    "look": "Kiểu phụ đề",
+    "lookHint": "Nhấn vào một dòng để thay đổi. Lựa chọn của bạn áp dụng trên mọi ứng dụng."
+  },
+  "subtitleTiming": {
+    "title": "Thời gian",
+    "earlier": "Hiện phụ đề sớm hơn",
+    "later": "Hiện phụ đề muộn hơn",
+    "reset": "Trở về thời gian của tệp"
   }
 }
