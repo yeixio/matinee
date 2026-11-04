@@ -1552,6 +1552,15 @@ func (s *Server) startHLS(w http.ResponseWriter, r *http.Request) {
 	// video and hdr say what the player decodes and its screen shows, so
 	// a picture it can take (HEVC or AV1, 4K, HDR) is repackaged as it is.
 	req := stream.Request{BurnSub: burn, Audio: audio, Plays: stream.ParsePlays(r.URL.Query().Get("video"), r.URL.Query().Get("hdr"))}
+	// audioDelay moves the sound against the picture, in milliseconds, for lip sync.
+	if d := r.URL.Query().Get("audioDelay"); d != "" {
+		ms, err := strconv.Atoi(d)
+		if err != nil || ms < -stream.MaxAudioDelayMs || ms > stream.MaxAudioDelayMs {
+			writeError(w, http.StatusBadRequest, "audioDelay is milliseconds between -2000 and 2000")
+			return
+		}
+		req.AudioDelayMs = ms
+	}
 	if mi, _ := s.mediaInfo(r, it); mi != nil && len(mi.Video) > 0 {
 		req.Picture = stream.Picture{Known: true, HDR: mi.Video[0].HDR, HDRBase: mi.Video[0].HDRBase}
 		if req.Picture.HDR != "" {

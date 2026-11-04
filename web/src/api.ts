@@ -1518,10 +1518,11 @@ export const api = {
   // quality: auto (adaptive), original, or a step's id. The answer says
   // which the server made.
   // plays is the query saying what the browser takes as it is (see player/plays.ts).
-  startHls: (id: number, startSec = 0, burnSubtitle?: string, quality?: string, plays = '') =>
+  // audioDelay moves the sound against the picture, in milliseconds.
+  startHls: (id: number, startSec = 0, burnSubtitle?: string, quality?: string, plays = '', audioDelay = 0) =>
     request<{ url: string; startSec: number; quality?: string }>(
       'POST',
-      `/api/v1/items/${id}/hls?start=${startSec}${burnSubtitle ? `&subtitle=${encodeURIComponent(burnSubtitle)}` : ''}${quality ? `&quality=${encodeURIComponent(quality)}` : ''}${plays}`,
+      `/api/v1/items/${id}/hls?start=${startSec}${burnSubtitle ? `&subtitle=${encodeURIComponent(burnSubtitle)}` : ''}${quality ? `&quality=${encodeURIComponent(quality)}` : ''}${plays}${audioDelay ? `&audioDelay=${audioDelay}` : ''}`,
     ),
   // One stream of an album's songs, joined without gaps, from start
   // seconds into the first; each song's startSec is on the stream's clock.

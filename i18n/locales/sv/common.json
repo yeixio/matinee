@@ -692,5 +692,13 @@
     "title": "Version",
     "choose": "Välj en version",
     "numbered": "Version {{n}}"
+  },
+  "audioDelay": {
+    "title": "Ljudfördröjning",
+    "earlier": "Ljud tidigare",
+    "later": "Ljud senare",
+    "hint": "Ligger ljudet efter bilden? Gör det tidigare. Så länge en fördröjning är inställd skickar servern ljudet förskjutet.",
+    "forTitle": "Bara för den här titeln",
+    "reset": "Ingen fördröjning"
   }
 }

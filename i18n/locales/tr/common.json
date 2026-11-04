@@ -692,5 +692,13 @@
     "title": "Sürüm",
     "choose": "Bir sürüm seçin",
     "numbered": "Sürüm {{n}}"
+  },
+  "audioDelay": {
+    "title": "Ses gecikmesi",
+    "earlier": "Ses daha erken",
+    "later": "Ses daha geç",
+    "hint": "Ses görüntünün gerisinde mi? Daha erkene al. Gecikme ayarlıyken sunucu sesi kaydırarak gönderir.",
+    "forTitle": "Yalnızca bu yapım için",
+    "reset": "Gecikme yok"
   }
 }

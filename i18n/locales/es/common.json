@@ -724,5 +724,13 @@
     "title": "Versión",
     "choose": "Elige una versión",
     "numbered": "Versión {{n}}"
+  },
+  "audioDelay": {
+    "title": "Retraso de audio",
+    "earlier": "Sonido antes",
+    "later": "Sonido después",
+    "hint": "¿El sonido va detrás de la imagen? Adelántalo. Mientras haya un retraso, el servidor envía el sonido desplazado.",
+    "forTitle": "Solo para este título",
+    "reset": "Sin retraso"
   }
 }

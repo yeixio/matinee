@@ -692,5 +692,13 @@
     "title": "Versie",
     "choose": "Kies een versie",
     "numbered": "Versie {{n}}"
+  },
+  "audioDelay": {
+    "title": "Audiovertraging",
+    "earlier": "Geluid eerder",
+    "later": "Geluid later",
+    "hint": "Loopt het geluid achter op het beeld? Zet het eerder. Zolang er een vertraging is, stuurt de server het geluid verschoven.",
+    "forTitle": "Alleen voor deze titel",
+    "reset": "Geen vertraging"
   }
 }

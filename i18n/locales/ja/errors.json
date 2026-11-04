@@ -253,5 +253,6 @@
   "bytes_must_be_between_0_and_104857600": "bytes は 0 から 104857600 の間にしてください",
   "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "視聴済みにできるのは映画、エピソード、シーズン、番組だけです",
   "no_such_backup": "そのバックアップはありません",
-  "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "このサーバーのデータベースは PostgreSQL です。pg_dump でバックアップしてください"
+  "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "このサーバーのデータベースは PostgreSQL です。pg_dump でバックアップしてください",
+  "audiodelay_is_milliseconds_between_2000_and_2000": "音声の遅延はミリ秒で、-2000〜2000 の範囲です。"
 }

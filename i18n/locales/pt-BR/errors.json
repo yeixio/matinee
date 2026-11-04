@@ -253,5 +253,6 @@
   "bytes_must_be_between_0_and_104857600": "bytes deve estar entre 0 e 104857600",
   "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "Só filmes, episódios, temporadas e séries podem ser marcados como assistidos",
   "no_such_backup": "Backup não encontrado",
-  "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "O banco de dados deste servidor é PostgreSQL; faça backup com pg_dump"
+  "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "O banco de dados deste servidor é PostgreSQL; faça backup com pg_dump",
+  "audiodelay_is_milliseconds_between_2000_and_2000": "O atraso do áudio é em milissegundos, entre -2000 e 2000."
 }

@@ -660,5 +660,13 @@
     "title": "Phiên bản",
     "choose": "Chọn phiên bản",
     "numbered": "Phiên bản {{n}}"
+  },
+  "audioDelay": {
+    "title": "Độ trễ âm thanh",
+    "earlier": "Âm thanh sớm hơn",
+    "later": "Âm thanh muộn hơn",
+    "hint": "Âm thanh chậm hơn hình? Hãy cho sớm hơn. Khi có độ trễ, máy chủ gửi âm thanh đã dịch.",
+    "forTitle": "Chỉ cho nội dung này",
+    "reset": "Không trễ"
   }
 }

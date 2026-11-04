@@ -660,5 +660,13 @@
     "title": "Versi",
     "choose": "Pilih versi",
     "numbered": "Versi {{n}}"
+  },
+  "audioDelay": {
+    "title": "Lengah audio",
+    "earlier": "Bunyi lebih awal",
+    "later": "Bunyi lebih lewat",
+    "hint": "Bunyi ketinggalan gambar? Jadikan lebih awal. Selagi ada lengah, pelayan menghantar bunyi yang dianjakkan.",
+    "forTitle": "Untuk tajuk ini sahaja",
+    "reset": "Tiada lengah"
   }
 }

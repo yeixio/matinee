@@ -253,5 +253,6 @@
   "bytes_must_be_between_0_and_104857600": "bytes moet tussen 0 en 104857600 liggen",
   "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "Alleen films, afleveringen, seizoenen en series kunnen als bekeken worden gemarkeerd",
   "no_such_backup": "Die back-up bestaat niet",
-  "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "De database van deze server is PostgreSQL; maak een back-up met pg_dump"
+  "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "De database van deze server is PostgreSQL; maak een back-up met pg_dump",
+  "audiodelay_is_milliseconds_between_2000_and_2000": "De audiovertraging is in milliseconden, tussen -2000 en 2000."
 }

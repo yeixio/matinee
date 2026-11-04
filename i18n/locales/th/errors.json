@@ -253,5 +253,6 @@
   "bytes_must_be_between_0_and_104857600": "bytes ต้องอยู่ระหว่าง 0 ถึง 104857600",
   "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "ทำเครื่องหมายว่าดูแล้วได้เฉพาะภาพยนตร์ ตอน ซีซัน และซีรีส์",
   "no_such_backup": "ไม่มีข้อมูลสำรองนี้",
-  "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "ฐานข้อมูลของเซิร์ฟเวอร์นี้เป็น PostgreSQL ให้สำรองด้วย pg_dump"
+  "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "ฐานข้อมูลของเซิร์ฟเวอร์นี้เป็น PostgreSQL ให้สำรองด้วย pg_dump",
+  "audiodelay_is_milliseconds_between_2000_and_2000": "การหน่วงเสียงเป็นมิลลิวินาที ระหว่าง -2000 ถึง 2000"
 }

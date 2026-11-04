@@ -724,5 +724,13 @@
     "title": "Version",
     "choose": "Choisir une version",
     "numbered": "Version {{n}}"
+  },
+  "audioDelay": {
+    "title": "Décalage audio",
+    "earlier": "Son plus tôt",
+    "later": "Son plus tard",
+    "hint": "Le son est en retard sur l'image ? Avancez-le. Tant qu'un décalage est réglé, le serveur envoie le son décalé.",
+    "forTitle": "Pour ce titre seulement",
+    "reset": "Aucun décalage"
   }
 }

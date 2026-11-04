@@ -692,5 +692,13 @@
     "title": "Version",
     "choose": "Version wählen",
     "numbered": "Version {{n}}"
+  },
+  "audioDelay": {
+    "title": "Tonverzögerung",
+    "earlier": "Ton früher",
+    "later": "Ton später",
+    "hint": "Ton hinter dem Bild? Mach ihn früher. Solange eine Verzögerung eingestellt ist, verschiebt der Server den Ton.",
+    "forTitle": "Nur für diesen Titel",
+    "reset": "Keine Verzögerung"
   }
 }
