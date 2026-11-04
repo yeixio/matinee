@@ -31,3 +31,9 @@ Admins also see what they could change: a GPU for transcoding, a lower quality, 
 
 The latest cause for each stream also shows under **Playing now** in Server health.
 
+
+## In the phone and TV apps
+
+The apps ask the same way and show the same note. Once playback has buffered, a pulse button shows above the video on a phone, and among the player's buttons on a TV, with the cause and **Test connection**. To test the connection any time, open **Settings → Test connection**.
+
+On a phone or TV, the app measures the connection with a short download from your server when it stalls. Reports and tests only go to your own server.
