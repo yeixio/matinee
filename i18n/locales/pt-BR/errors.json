@@ -246,5 +246,6 @@
   "couldnt_reach_tmdb_try_again_in_a_moment": "não foi possível acessar o TMDB; tente de novo em instantes",
   "tmdb_no_longer_has_this_title_fix_the_match_instead": "o TMDB não tem mais este título; corrija a correspondência",
   "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "envie o id do TMDB, o endereço do TMDB ou o id do IMDb",
-  "tmdb_has_no_such_title": "o TMDB não tem esse título"
+  "tmdb_has_no_such_title": "o TMDB não tem esse título",
+  "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "sem conexão com a internet agora. Seu servidor está bem; isto precisa da internet e volta a funcionar quando ela voltar."
 }

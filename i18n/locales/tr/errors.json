@@ -246,5 +246,6 @@
   "couldnt_reach_tmdb_try_again_in_a_moment": "TMDB'ye ulaşılamadı; birazdan yeniden deneyin",
   "tmdb_no_longer_has_this_title_fix_the_match_instead": "TMDB'de artık bu başlık yok; eşleşmeyi düzeltin",
   "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "eşleştirmek için TMDB kimliğini, TMDB adresini veya IMDb kimliğini gönderin",
-  "tmdb_has_no_such_title": "TMDB'de böyle bir başlık yok"
+  "tmdb_has_no_such_title": "TMDB'de böyle bir başlık yok",
+  "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "şu anda internet bağlantısı yok. Sunucunuz iyi durumda; bu işlem internet gerektirir ve bağlantı gelince yeniden çalışır."
 }

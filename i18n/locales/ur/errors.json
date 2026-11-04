@@ -246,5 +246,6 @@
   "couldnt_reach_tmdb_try_again_in_a_moment": "TMDB تک رسائی نہ ہو سکی؛ تھوڑی دیر بعد دوبارہ کوشش کریں",
   "tmdb_no_longer_has_this_title_fix_the_match_instead": "TMDB پر اب یہ عنوان نہیں ہے؛ میچ درست کریں",
   "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "TMDB id، TMDB پتہ یا IMDb id بھیجیں",
-  "tmdb_has_no_such_title": "TMDB پر ایسا کوئی عنوان نہیں"
+  "tmdb_has_no_such_title": "TMDB پر ایسا کوئی عنوان نہیں",
+  "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "اس وقت انٹرنیٹ کنکشن نہیں ہے۔ آپ کا سرور ٹھیک ہے؛ اس کے لیے انٹرنیٹ چاہیے، اور انٹرنیٹ واپس آنے پر یہ پھر چلے گا۔"
 }

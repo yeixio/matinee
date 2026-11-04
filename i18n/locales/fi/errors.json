@@ -246,5 +246,6 @@
   "couldnt_reach_tmdb_try_again_in_a_moment": "TMDB:hen ei saatu yhteyttä; yritä hetken päästä uudelleen",
   "tmdb_no_longer_has_this_title_fix_the_match_instead": "TMDB:ssä ei enää ole tätä nimikettä; korjaa tunnistus",
   "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "lähetä TMDB-tunnus, TMDB-osoite tai IMDb-tunnus",
-  "tmdb_has_no_such_title": "TMDB:ssä ei ole tällaista nimikettä"
+  "tmdb_has_no_such_title": "TMDB:ssä ei ole tällaista nimikettä",
+  "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "ei internetyhteyttä juuri nyt. Palvelimesi toimii; tämä tarvitsee internetin ja toimii taas, kun yhteys palaa."
 }

@@ -2,6 +2,7 @@ package api
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"net/http"
 	"os"
@@ -453,4 +454,16 @@ func existingParent(path string) string {
 		}
 		p = up
 	}
+}
+
+// noInternet answers for something that needs the internet and couldn't
+// have it: the call was skipped because its site is down (see
+// internal/netstate), or the server knows the internet is down. It says
+// false, having written nothing, for any other failure.
+func (s *Server) noInternet(w http.ResponseWriter, err error) bool {
+	if !errors.Is(err, netstate.ErrDown) && (s.Connections == nil || !s.Connections.Status().Offline) {
+		return false
+	}
+	writeError(w, http.StatusServiceUnavailable, "no internet connection right now. Your server is fine; this needs the internet, and works again once it's back.")
+	return true
 }

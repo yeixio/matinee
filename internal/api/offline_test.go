@@ -167,6 +167,12 @@ func TestWorksWithNoInternet(t *testing.T) {
 		}
 	}
 
+	// What needs the internet says so, calmly.
+	var failed struct{ Code string }
+	if code := c.do("GET", "/api/v1/items/"+itoa(heat.ID)+"/match", nil, &failed); code != http.StatusServiceUnavailable || !strings.HasPrefix(failed.Code, "no_internet_connection") {
+		t.Fatalf("fix match with no internet: %d %+v", code, failed)
+	}
+
 	// Back online: details are filled in without a rescan.
 	net.down.Store(false)
 	for deadline := time.Now().Add(10 * time.Second); ; time.Sleep(50 * time.Millisecond) {

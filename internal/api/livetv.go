@@ -539,6 +539,9 @@ func (s *Server) iptvOrgChoices(w http.ResponseWriter, r *http.Request) {
 	defer cancel()
 	c, err := s.iptvOrg.Choices(ctx)
 	if err != nil {
+		if s.noInternet(w, err) {
+			return
+		}
 		s.Log.Info("reading iptv-org's lists", "err", err)
 		writeError(w, http.StatusBadGateway, "iptv-org isn't answering right now")
 		return

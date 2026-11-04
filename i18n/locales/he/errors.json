@@ -246,5 +246,6 @@
   "couldnt_reach_tmdb_try_again_in_a_moment": "אין חיבור ל-TMDB; נסו שוב בעוד רגע",
   "tmdb_no_longer_has_this_title_fix_the_match_instead": "הכותר הזה כבר לא ב-TMDB; תקנו את ההתאמה",
   "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "שלחו מזהה TMDB, כתובת TMDB או מזהה IMDb",
-  "tmdb_has_no_such_title": "אין כותר כזה ב-TMDB"
+  "tmdb_has_no_such_title": "אין כותר כזה ב-TMDB",
+  "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "אין כרגע חיבור לאינטרנט. השרת שלך תקין; זה צריך אינטרנט ויעבוד שוב כשהחיבור יחזור."
 }

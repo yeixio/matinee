@@ -246,5 +246,6 @@
   "couldnt_reach_tmdb_try_again_in_a_moment": "nie można połączyć się z TMDB; spróbuj za chwilę",
   "tmdb_no_longer_has_this_title_fix_the_match_instead": "TMDB nie ma już tego tytułu; popraw dopasowanie",
   "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "podaj id TMDB, adres TMDB lub id IMDb",
-  "tmdb_has_no_such_title": "TMDB nie ma takiego tytułu"
+  "tmdb_has_no_such_title": "TMDB nie ma takiego tytułu",
+  "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "w tej chwili brak połączenia z internetem. Serwer działa; to wymaga internetu i zadziała znowu, gdy wróci."
 }
