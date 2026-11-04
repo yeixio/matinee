@@ -228,5 +228,16 @@
   "q_or_tag_is_required": "q または tag が必要です",
   "the_station_couldnt_be_reached_check_the_address_and_try_again": "局に接続できませんでした。アドレスを確認して、もう一度お試しください。",
   "the_station_couldnt_be_reached_reason": "局に接続できませんでした: {{reason}}",
-  "the_station_directory_isnt_answering_right_now": "局のディレクトリが現在応答していません"
+  "the_station_directory_isnt_answering_right_now": "局のディレクトリが現在応答していません",
+  "add_the_playlists_web_address": "リストのWebアドレスを入力してください",
+  "channel_not_found": "チャンネルが見つかりません",
+  "iptv_org_isnt_answering_right_now": "iptv-orgが今応答していません",
+  "source_not_found": "ソースが見つかりません",
+  "that_address_isnt_a_channel_playlist_m3u": "そのアドレスはチャンネルリスト (M3U) ではありません",
+  "that_link_has_expired": "そのリンクは期限切れです",
+  "that_playlist_has_no_channels_matinee_can_play": "そのリストにはMatineeで再生できるチャンネルがありません",
+  "that_source_is_being_refreshed_already": "そのソースはすでに更新中です",
+  "the_channel_isnt_answering_right_now": "チャンネルが今応答していません",
+  "the_guides_address_isnt_a_web_address": "番組表のアドレスがWebアドレスではありません",
+  "the_playlist_couldnt_be_read_reason": "リストを読み込めませんでした: {{reason}}"
 }

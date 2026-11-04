@@ -13,7 +13,8 @@
     "settings": "Instellingen",
     "switchProfile": "Profiel wisselen",
     "signOut": "Uitloggen",
-    "discover": "Ontdekken"
+    "discover": "Ontdekken",
+    "liveTV": "Live-tv"
   },
   "cantReachServer": "Kan de server niet bereiken. Opnieuw proberen…",
   "player": {
@@ -857,6 +858,10 @@
       "health": {
         "title": "Servergezondheid",
         "hint": "Belasting, afspelen, taken, problemen en het logboek"
+      },
+      "live-tv": {
+        "title": "Live-tv",
+        "hint": "Zenderlijsten en gidsen"
       }
     }
   },
@@ -1259,6 +1264,65 @@
       "copy": "Kopiëren",
       "copied": "Gekopieerd",
       "example": "Voor prometheus.yml"
+    }
+  },
+  "live": {
+    "title": "Live-tv",
+    "channels": "Zenders",
+    "guide": "Gids",
+    "all": "Alle",
+    "find": "Zender zoeken",
+    "noMatch": "Geen zenders gevonden",
+    "none": "Nog geen live-tv-zenders",
+    "addSource": "Voeg zenders toe in Instellingen",
+    "askAdmin": "Een beheerder kan zenders toevoegen in Instellingen.",
+    "cantLoad": "Live-tv kon niet worden geladen",
+    "live": "Live",
+    "now": "Nu",
+    "earlier": "Eerder",
+    "later": "Later",
+    "next": "Hierna om {{time}}: {{title}}",
+    "noGuide": "Geen gids voor deze zender",
+    "wontPlay": "Deze zender speelt nu niet",
+    "wontPlayHint": "De stream reageerde niet. Zenders die steeds falen worden verborgen.",
+    "tryAgain": "Opnieuw proberen",
+    "settings": {
+      "intro": "Voeg lijsten met tv-zenders (M3U) toe, met een gids (XMLTV) als je die hebt. Zenders die niet meer reageren worden verborgen. Kinderprofielen en vrienden zien geen live-tv.",
+      "add": "Zenders toevoegen",
+      "suggested": "Openbare zenders (iptv-org)",
+      "ownPlaylist": "Je eigen lijst",
+      "iptvOrgIntro": "<site>iptv-org</site> verzamelt tv-zenders die openbaar op internet worden gestreamd. Kies landen, categorieën of talen.",
+      "yourCall": "Sommige streams die iptv-org verzamelt komen mogelijk niet van de zender zelf of zijn niet bedoeld voor jouw land. Kijk alleen wat je mag.",
+      "countries": "Landen",
+      "categories": "Categorieën",
+      "languages": "Talen",
+      "anyPick": "Typ om te zoeken",
+      "unpick": "{{name}} verwijderen",
+      "pickHint": "Zenders moeten bij één keuze van elke soort passen.",
+      "pickNothing": "Zonder keuze worden alle zenders toegevoegd: duizenden.",
+      "playlist": "Adres van de lijst (M3U)",
+      "guide": "Adres van de gids (XMLTV, optioneel)",
+      "guideHint": "Een .xml- of .xml.gz-bestand. Laat leeg als de lijst een eigen gids noemt.",
+      "name": "Naam (optioneel)",
+      "addThis": "Toevoegen",
+      "reading": "Zenders lezen…",
+      "counts": "Zenders: {{count}} · spelen: {{playing}} · reageren niet: {{broken}} · verborgen: {{hidden}}",
+      "guideShows": "Programma's in de gids: {{count}}",
+      "guideFailed": "De gids kon niet worden gelezen: {{reason}}",
+      "noGuide": "Geen gids",
+      "guideLoading": "Gids lezen…",
+      "refreshFailed": "De laatste vernieuwing mislukte: {{reason}}",
+      "refresh": "Nu vernieuwen",
+      "remove": "Verwijderen",
+      "removeConfirm": "{{name}} en zijn zenders verwijderen?",
+      "broken": "Reageert niet",
+      "works": "Speelt",
+      "notChecked": "Nog niet gecontroleerd",
+      "hidden": "Verborgen",
+      "hide": "Verbergen",
+      "show": "Tonen",
+      "more": "De eerste 300 worden getoond. Zoek een zender om andere te zien.",
+      "everything": "alles"
     }
   }
 }

@@ -13,7 +13,8 @@
     "settings": "Impostazioni",
     "switchProfile": "Cambia profilo",
     "signOut": "Esci",
-    "discover": "Scopri"
+    "discover": "Scopri",
+    "liveTV": "TV in diretta"
   },
   "cantReachServer": "Impossibile raggiungere il server. Nuovo tentativo…",
   "player": {
@@ -861,6 +862,10 @@
       "health": {
         "title": "Stato del server",
         "hint": "Carico, riproduzione, attività, problemi e registro"
+      },
+      "live-tv": {
+        "title": "TV in diretta",
+        "hint": "Elenchi di canali e guide"
       }
     }
   },
@@ -1270,6 +1275,65 @@
       "copy": "Copia",
       "copied": "Copiato",
       "example": "Per prometheus.yml"
+    }
+  },
+  "live": {
+    "title": "TV in diretta",
+    "channels": "Canali",
+    "guide": "Guida",
+    "all": "Tutti",
+    "find": "Cerca un canale",
+    "noMatch": "Nessun canale corrisponde",
+    "none": "Ancora nessun canale TV in diretta",
+    "addSource": "Aggiungi canali nelle Impostazioni",
+    "askAdmin": "Un amministratore può aggiungere canali nelle Impostazioni.",
+    "cantLoad": "Impossibile caricare la TV in diretta",
+    "live": "In diretta",
+    "now": "Ora",
+    "earlier": "Prima",
+    "later": "Dopo",
+    "next": "Alle {{time}}: {{title}}",
+    "noGuide": "Nessuna guida per questo canale",
+    "wontPlay": "Questo canale non trasmette in questo momento",
+    "wontPlayHint": "Il suo flusso non ha risposto. I canali che continuano a fallire vengono nascosti.",
+    "tryAgain": "Riprova",
+    "settings": {
+      "intro": "Aggiungi elenchi di canali TV (M3U), con una guida (XMLTV) se ce l’hai. I canali che smettono di rispondere vengono nascosti. I profili per bambini e gli amici non vedono la TV in diretta.",
+      "add": "Aggiungi canali",
+      "suggested": "Canali pubblici (iptv-org)",
+      "ownPlaylist": "Il tuo elenco",
+      "iptvOrgIntro": "<site>iptv-org</site> elenca canali TV trasmessi pubblicamente su internet. Scegli paesi, categorie o lingue.",
+      "yourCall": "Alcuni flussi elencati da iptv-org potrebbero non provenire dal canale stesso o non essere destinati al tuo paese. Guarda solo ciò che ti è permesso.",
+      "countries": "Paesi",
+      "categories": "Categorie",
+      "languages": "Lingue",
+      "anyPick": "Scrivi per cercare",
+      "unpick": "Rimuovi {{name}}",
+      "pickHint": "I canali devono corrispondere a una scelta per ogni tipo.",
+      "pickNothing": "Senza scelte, vengono aggiunti tutti i canali: migliaia.",
+      "playlist": "Indirizzo dell’elenco (M3U)",
+      "guide": "Indirizzo della guida (XMLTV, facoltativo)",
+      "guideHint": "Un file .xml o .xml.gz. Lascia vuoto se l’elenco indica la sua.",
+      "name": "Nome (facoltativo)",
+      "addThis": "Aggiungi",
+      "reading": "Lettura dei canali…",
+      "counts": "Canali: {{count}} · trasmettono: {{playing}} · non rispondono: {{broken}} · nascosti: {{hidden}}",
+      "guideShows": "Programmi nella guida: {{count}}",
+      "guideFailed": "Impossibile leggere la guida: {{reason}}",
+      "noGuide": "Nessuna guida",
+      "guideLoading": "Lettura della guida…",
+      "refreshFailed": "L’ultimo aggiornamento non è riuscito: {{reason}}",
+      "refresh": "Aggiorna ora",
+      "remove": "Rimuovi",
+      "removeConfirm": "Rimuovere {{name}} e i suoi canali?",
+      "broken": "Non risponde",
+      "works": "Trasmette",
+      "notChecked": "Non ancora controllato",
+      "hidden": "Nascosto",
+      "hide": "Nascondi",
+      "show": "Mostra",
+      "more": "Sono mostrati i primi 300. Cerca un canale per vederne altri.",
+      "everything": "tutto"
     }
   }
 }

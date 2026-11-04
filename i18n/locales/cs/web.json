@@ -13,7 +13,8 @@
     "settings": "Nastavení",
     "switchProfile": "Přepnout profil",
     "signOut": "Odhlásit se",
-    "discover": "Objevovat"
+    "discover": "Objevovat",
+    "liveTV": "Živé vysílání"
   },
   "cantReachServer": "Server není dostupný. Zkouším znovu…",
   "player": {
@@ -865,6 +866,10 @@
       "health": {
         "title": "Stav serveru",
         "hint": "Zátěž, přehrávání, úlohy, problémy a protokol"
+      },
+      "live-tv": {
+        "title": "Živé vysílání",
+        "hint": "Seznamy kanálů a programy"
       }
     }
   },
@@ -1281,6 +1286,65 @@
       "copy": "Kopírovat",
       "copied": "Zkopírováno",
       "example": "Do prometheus.yml"
+    }
+  },
+  "live": {
+    "title": "Živé vysílání",
+    "channels": "Kanály",
+    "guide": "Program",
+    "all": "Vše",
+    "find": "Najít kanál",
+    "noMatch": "Žádný kanál neodpovídá",
+    "none": "Zatím žádné kanály živého vysílání",
+    "addSource": "Přidejte kanály v Nastavení",
+    "askAdmin": "Správce může přidat kanály v Nastavení.",
+    "cantLoad": "Živé vysílání se nepodařilo načíst",
+    "live": "Živě",
+    "now": "Teď",
+    "earlier": "Dříve",
+    "later": "Později",
+    "next": "Dále v {{time}}: {{title}}",
+    "noGuide": "Pro tento kanál není program",
+    "wontPlay": "Tento kanál teď nevysílá",
+    "wontPlayHint": "Jeho stream neodpověděl. Kanály, které stále selhávají, se skryjí.",
+    "tryAgain": "Zkusit znovu",
+    "settings": {
+      "intro": "Přidejte seznamy TV kanálů (M3U) a program (XMLTV), pokud ho máte. Kanály, které přestanou odpovídat, se skryjí. Dětské profily a přátelé živé vysílání nevidí.",
+      "add": "Přidat kanály",
+      "suggested": "Veřejné kanály (iptv-org)",
+      "ownPlaylist": "Vlastní seznam",
+      "iptvOrgIntro": "<site>iptv-org</site> shromažďuje TV kanály vysílané veřejně na internetu. Vyberte země, kategorie nebo jazyky.",
+      "yourCall": "Některé streamy z iptv-org nemusí pocházet od samotného kanálu nebo nemusí být určené pro vaši zemi. Sledujte jen to, co smíte.",
+      "countries": "Země",
+      "categories": "Kategorie",
+      "languages": "Jazyky",
+      "anyPick": "Pište pro hledání",
+      "unpick": "Odebrat {{name}}",
+      "pickHint": "Kanály musí odpovídat jedné volbě každého druhu.",
+      "pickNothing": "Bez výběru se přidají všechny kanály: tisíce.",
+      "playlist": "Adresa seznamu (M3U)",
+      "guide": "Adresa programu (XMLTV, volitelné)",
+      "guideHint": "Soubor .xml nebo .xml.gz. Nechte prázdné, pokud seznam uvádí vlastní.",
+      "name": "Název (volitelné)",
+      "addThis": "Přidat",
+      "reading": "Načítání kanálů…",
+      "counts": "Kanály: {{count}} · vysílají: {{playing}} · neodpovídají: {{broken}} · skryté: {{hidden}}",
+      "guideShows": "Pořady v programu: {{count}}",
+      "guideFailed": "Program se nepodařilo přečíst: {{reason}}",
+      "noGuide": "Bez programu",
+      "guideLoading": "Načítání programu…",
+      "refreshFailed": "Poslední obnovení selhalo: {{reason}}",
+      "refresh": "Obnovit teď",
+      "remove": "Odebrat",
+      "removeConfirm": "Odebrat {{name}} a jeho kanály?",
+      "broken": "Neodpovídá",
+      "works": "Vysílá",
+      "notChecked": "Zatím nezkontrolováno",
+      "hidden": "Skrytý",
+      "hide": "Skrýt",
+      "show": "Zobrazit",
+      "more": "Zobrazeno prvních 300. Najděte kanál, abyste viděli další.",
+      "everything": "vše"
     }
   }
 }

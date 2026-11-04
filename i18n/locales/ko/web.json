@@ -13,7 +13,8 @@
     "settings": "설정",
     "switchProfile": "프로필 전환",
     "signOut": "로그아웃",
-    "discover": "둘러보기"
+    "discover": "둘러보기",
+    "liveTV": "실시간 TV"
   },
   "cantReachServer": "서버에 연결할 수 없습니다. 다시 시도하는 중…",
   "player": {
@@ -853,6 +854,10 @@
       "health": {
         "title": "서버 상태",
         "hint": "부하, 재생, 작업, 문제, 로그"
+      },
+      "live-tv": {
+        "title": "실시간 TV",
+        "hint": "채널 목록과 편성표"
       }
     }
   },
@@ -1248,6 +1253,65 @@
       "copy": "복사",
       "copied": "복사됨",
       "example": "prometheus.yml용"
+    }
+  },
+  "live": {
+    "title": "실시간 TV",
+    "channels": "채널",
+    "guide": "편성표",
+    "all": "전체",
+    "find": "채널 찾기",
+    "noMatch": "일치하는 채널이 없습니다",
+    "none": "아직 실시간 TV 채널이 없습니다",
+    "addSource": "설정에서 채널 추가",
+    "askAdmin": "관리자가 설정에서 채널을 추가할 수 있습니다.",
+    "cantLoad": "실시간 TV를 불러오지 못했습니다",
+    "live": "실시간",
+    "now": "지금",
+    "earlier": "이전",
+    "later": "이후",
+    "next": "다음 {{time}}: {{title}}",
+    "noGuide": "이 채널의 편성표가 없습니다",
+    "wontPlay": "이 채널은 지금 방송하지 않습니다",
+    "wontPlayHint": "스트림이 응답하지 않았습니다. 계속 실패하는 채널은 숨겨집니다.",
+    "tryAgain": "다시 시도",
+    "settings": {
+      "intro": "TV 채널 목록(M3U)을 추가하고, 있다면 편성표(XMLTV)도 추가하세요. 응답하지 않는 채널은 숨겨집니다. 어린이 프로필과 친구에게는 실시간 TV가 보이지 않습니다.",
+      "add": "채널 추가",
+      "suggested": "공개 채널 (iptv-org)",
+      "ownPlaylist": "내 목록",
+      "iptvOrgIntro": "<site>iptv-org</site>는 인터넷에서 공개적으로 스트리밍되는 TV 채널을 모아 둡니다. 국가, 카테고리 또는 언어를 고르세요.",
+      "yourCall": "iptv-org의 일부 스트림은 채널 자체에서 나온 것이 아니거나 내 나라를 위한 것이 아닐 수 있습니다. 허용된 것만 시청하세요.",
+      "countries": "국가",
+      "categories": "카테고리",
+      "languages": "언어",
+      "anyPick": "입력해서 찾기",
+      "unpick": "{{name}} 빼기",
+      "pickHint": "채널은 각 종류마다 하나의 선택과 일치해야 합니다.",
+      "pickNothing": "아무것도 고르지 않으면 모든 채널이 추가됩니다: 수천 개.",
+      "playlist": "목록 주소 (M3U)",
+      "guide": "편성표 주소 (XMLTV, 선택)",
+      "guideHint": ".xml 또는 .xml.gz 파일. 목록에 편성표가 지정되어 있으면 비워 두세요.",
+      "name": "이름 (선택)",
+      "addThis": "추가",
+      "reading": "채널 읽는 중…",
+      "counts": "채널: {{count}} · 방송 중: {{playing}} · 응답 없음: {{broken}} · 숨김: {{hidden}}",
+      "guideShows": "편성표의 프로그램: {{count}}",
+      "guideFailed": "편성표를 읽지 못했습니다: {{reason}}",
+      "noGuide": "편성표 없음",
+      "guideLoading": "편성표 읽는 중…",
+      "refreshFailed": "마지막 새로고침 실패: {{reason}}",
+      "refresh": "지금 새로고침",
+      "remove": "제거",
+      "removeConfirm": "{{name}}과(와) 그 채널을 제거할까요?",
+      "broken": "응답 없음",
+      "works": "방송 중",
+      "notChecked": "아직 확인 안 됨",
+      "hidden": "숨김",
+      "hide": "숨기기",
+      "show": "보이기",
+      "more": "처음 300개를 보여 줍니다. 다른 채널은 검색해 보세요.",
+      "everything": "전체"
     }
   }
 }

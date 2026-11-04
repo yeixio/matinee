@@ -13,7 +13,8 @@
     "settings": "Indstillinger",
     "switchProfile": "Skift profil",
     "signOut": "Log ud",
-    "discover": "Udforsk"
+    "discover": "Udforsk",
+    "liveTV": "Live-tv"
   },
   "cantReachServer": "Kan ikke nå serveren. Prøver igen…",
   "player": {
@@ -857,6 +858,10 @@
       "health": {
         "title": "Serverens helbred",
         "hint": "Belastning, afspilning, job, problemer og loggen"
+      },
+      "live-tv": {
+        "title": "Live-tv",
+        "hint": "Kanallister og programoversigter"
       }
     }
   },
@@ -1259,6 +1264,65 @@
       "copy": "Kopiér",
       "copied": "Kopieret",
       "example": "Til prometheus.yml"
+    }
+  },
+  "live": {
+    "title": "Live-tv",
+    "channels": "Kanaler",
+    "guide": "Programoversigt",
+    "all": "Alle",
+    "find": "Find en kanal",
+    "noMatch": "Ingen kanaler passer",
+    "none": "Ingen live-tv-kanaler endnu",
+    "addSource": "Tilføj kanaler i Indstillinger",
+    "askAdmin": "En administrator kan tilføje kanaler i Indstillinger.",
+    "cantLoad": "Live-tv kunne ikke indlæses",
+    "live": "Live",
+    "now": "Nu",
+    "earlier": "Tidligere",
+    "later": "Senere",
+    "next": "Derefter kl. {{time}}: {{title}}",
+    "noGuide": "Ingen programoversigt for denne kanal",
+    "wontPlay": "Denne kanal sender ikke lige nu",
+    "wontPlayHint": "Streamen svarede ikke. Kanaler, der bliver ved med at fejle, skjules.",
+    "tryAgain": "Prøv igen",
+    "settings": {
+      "intro": "Tilføj lister med tv-kanaler (M3U), med programoversigt (XMLTV), hvis du har en. Kanaler, der holder op med at svare, skjules. Børneprofiler og venner ser ikke live-tv.",
+      "add": "Tilføj kanaler",
+      "suggested": "Offentlige kanaler (iptv-org)",
+      "ownPlaylist": "Din egen liste",
+      "iptvOrgIntro": "<site>iptv-org</site> lister tv-kanaler, der streames offentligt på internettet. Vælg lande, kategorier eller sprog.",
+      "yourCall": "Nogle streams, iptv-org lister, kommer måske ikke fra kanalen selv eller er ikke beregnet til dit land. Se kun det, du må.",
+      "countries": "Lande",
+      "categories": "Kategorier",
+      "languages": "Sprog",
+      "anyPick": "Skriv for at søge",
+      "unpick": "Fjern {{name}}",
+      "pickHint": "Kanaler skal passe til ét valg af hver slags.",
+      "pickNothing": "Uden valg tilføjes alle kanaler: tusindvis.",
+      "playlist": "Listens adresse (M3U)",
+      "guide": "Programoversigtens adresse (XMLTV, valgfri)",
+      "guideHint": "En .xml- eller .xml.gz-fil. Lad den være tom, hvis listen angiver sin egen.",
+      "name": "Navn (valgfrit)",
+      "addThis": "Tilføj",
+      "reading": "Læser kanaler…",
+      "counts": "Kanaler: {{count}} · sender: {{playing}} · svarer ikke: {{broken}} · skjult: {{hidden}}",
+      "guideShows": "Udsendelser i oversigten: {{count}}",
+      "guideFailed": "Programoversigten kunne ikke læses: {{reason}}",
+      "noGuide": "Ingen programoversigt",
+      "guideLoading": "Læser programoversigten…",
+      "refreshFailed": "Seneste opdatering mislykkedes: {{reason}}",
+      "refresh": "Opdater nu",
+      "remove": "Fjern",
+      "removeConfirm": "Fjern {{name}} og dens kanaler?",
+      "broken": "Svarer ikke",
+      "works": "Sender",
+      "notChecked": "Ikke tjekket endnu",
+      "hidden": "Skjult",
+      "hide": "Skjul",
+      "show": "Vis",
+      "more": "De første 300 vises. Find en kanal for at se andre.",
+      "everything": "alt"
     }
   }
 }

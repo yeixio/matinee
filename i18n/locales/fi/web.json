@@ -13,7 +13,8 @@
     "settings": "Asetukset",
     "switchProfile": "Vaihda profiilia",
     "signOut": "Kirjaudu ulos",
-    "discover": "Löydä"
+    "discover": "Löydä",
+    "liveTV": "Suora TV"
   },
   "cantReachServer": "Palvelimeen ei saada yhteyttä. Yritetään uudelleen…",
   "player": {
@@ -857,6 +858,10 @@
       "health": {
         "title": "Palvelimen tila",
         "hint": "Kuorma, toisto, tehtävät, ongelmat ja loki"
+      },
+      "live-tv": {
+        "title": "Suora TV",
+        "hint": "Kanavalistat ja ohjelmaoppaat"
       }
     }
   },
@@ -1259,6 +1264,65 @@
       "copy": "Kopioi",
       "copied": "Kopioitu",
       "example": "Tiedostoon prometheus.yml"
+    }
+  },
+  "live": {
+    "title": "Suora TV",
+    "channels": "Kanavat",
+    "guide": "Opas",
+    "all": "Kaikki",
+    "find": "Etsi kanava",
+    "noMatch": "Ei sopivia kanavia",
+    "none": "Ei vielä suoria TV-kanavia",
+    "addSource": "Lisää kanavia asetuksissa",
+    "askAdmin": "Ylläpitäjä voi lisätä kanavia asetuksissa.",
+    "cantLoad": "Suoraa TV:tä ei voitu ladata",
+    "live": "Suora",
+    "now": "Nyt",
+    "earlier": "Aiemmin",
+    "later": "Myöhemmin",
+    "next": "Seuraavaksi klo {{time}}: {{title}}",
+    "noGuide": "Kanavalla ei ole opasta",
+    "wontPlay": "Kanava ei lähetä juuri nyt",
+    "wontPlayHint": "Sen lähetys ei vastannut. Toistuvasti epäonnistuvat kanavat piilotetaan.",
+    "tryAgain": "Yritä uudelleen",
+    "settings": {
+      "intro": "Lisää TV-kanavien listoja (M3U) ja ohjelmaopas (XMLTV), jos sinulla on. Kanavat, jotka lakkaavat vastaamasta, piilotetaan. Lasten profiilit ja ystävät eivät näe suoraa TV:tä.",
+      "add": "Lisää kanavia",
+      "suggested": "Julkiset kanavat (iptv-org)",
+      "ownPlaylist": "Oma lista",
+      "iptvOrgIntro": "<site>iptv-org</site> listaa TV-kanavia, joita lähetetään julkisesti internetissä. Valitse maita, luokkia tai kieliä.",
+      "yourCall": "Osa iptv-orgin listaamista lähetyksistä ei ehkä tule itse kanavalta tai ole tarkoitettu maahasi. Katso vain sitä, mitä saat.",
+      "countries": "Maat",
+      "categories": "Luokat",
+      "languages": "Kielet",
+      "anyPick": "Kirjoita etsiäksesi",
+      "unpick": "Poista {{name}}",
+      "pickHint": "Kanavan on vastattava yhtä valintaa kustakin lajista.",
+      "pickNothing": "Ilman valintoja lisätään kaikki kanavat: tuhansia.",
+      "playlist": "Listan osoite (M3U)",
+      "guide": "Oppaan osoite (XMLTV, valinnainen)",
+      "guideHint": "Tiedosto .xml tai .xml.gz. Jätä tyhjäksi, jos lista kertoo omansa.",
+      "name": "Nimi (valinnainen)",
+      "addThis": "Lisää",
+      "reading": "Luetaan kanavia…",
+      "counts": "Kanavia: {{count}} · lähettää: {{playing}} · ei vastaa: {{broken}} · piilotettu: {{hidden}}",
+      "guideShows": "Ohjelmia oppaassa: {{count}}",
+      "guideFailed": "Opasta ei voitu lukea: {{reason}}",
+      "noGuide": "Ei opasta",
+      "guideLoading": "Luetaan opasta…",
+      "refreshFailed": "Viimeisin päivitys epäonnistui: {{reason}}",
+      "refresh": "Päivitä nyt",
+      "remove": "Poista",
+      "removeConfirm": "Poistetaanko {{name}} kanavineen?",
+      "broken": "Ei vastaa",
+      "works": "Lähettää",
+      "notChecked": "Ei vielä tarkistettu",
+      "hidden": "Piilotettu",
+      "hide": "Piilota",
+      "show": "Näytä",
+      "more": "Näytetään ensimmäiset 300. Etsi kanava nähdäksesi muita.",
+      "everything": "kaikki"
     }
   }
 }

@@ -228,5 +228,16 @@
   "q_or_tag_is_required": "je potřeba q nebo tag",
   "the_station_couldnt_be_reached_check_the_address_and_try_again": "stanici se nepodařilo zastihnout. Zkontrolujte adresu a zkuste to znovu.",
   "the_station_couldnt_be_reached_reason": "stanici se nepodařilo zastihnout: {{reason}}",
-  "the_station_directory_isnt_answering_right_now": "adresář stanic teď neodpovídá"
+  "the_station_directory_isnt_answering_right_now": "adresář stanic teď neodpovídá",
+  "add_the_playlists_web_address": "zadejte webovou adresu seznamu",
+  "channel_not_found": "kanál nenalezen",
+  "iptv_org_isnt_answering_right_now": "iptv-org teď neodpovídá",
+  "source_not_found": "zdroj nenalezen",
+  "that_address_isnt_a_channel_playlist_m3u": "ta adresa není seznam kanálů (M3U)",
+  "that_link_has_expired": "platnost odkazu vypršela",
+  "that_playlist_has_no_channels_matinee_can_play": "ten seznam nemá žádné kanály, které Matinee umí přehrát",
+  "that_source_is_being_refreshed_already": "ten zdroj se už obnovuje",
+  "the_channel_isnt_answering_right_now": "kanál teď neodpovídá",
+  "the_guides_address_isnt_a_web_address": "adresa programu není webová adresa",
+  "the_playlist_couldnt_be_read_reason": "seznam se nepodařilo přečíst: {{reason}}"
 }

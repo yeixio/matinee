@@ -13,7 +13,8 @@
     "settings": "Einstellungen",
     "switchProfile": "Profil wechseln",
     "signOut": "Abmelden",
-    "discover": "Entdecken"
+    "discover": "Entdecken",
+    "liveTV": "Live-TV"
   },
   "cantReachServer": "Server nicht erreichbar. Neuer Versuch …",
   "player": {
@@ -857,6 +858,10 @@
       "health": {
         "title": "Serverzustand",
         "hint": "Auslastung, Wiedergabe, Aufgaben, Probleme und das Protokoll"
+      },
+      "live-tv": {
+        "title": "Live-TV",
+        "hint": "Senderlisten und Programmführer"
       }
     }
   },
@@ -1259,6 +1264,65 @@
       "copy": "Kopieren",
       "copied": "Kopiert",
       "example": "Für prometheus.yml"
+    }
+  },
+  "live": {
+    "title": "Live-TV",
+    "channels": "Sender",
+    "guide": "Programm",
+    "all": "Alle",
+    "find": "Sender suchen",
+    "noMatch": "Keine passenden Sender",
+    "none": "Noch keine Live-TV-Sender",
+    "addSource": "Sender in den Einstellungen hinzufügen",
+    "askAdmin": "Ein Admin kann in den Einstellungen Sender hinzufügen.",
+    "cantLoad": "Live-TV konnte nicht geladen werden",
+    "live": "Live",
+    "now": "Jetzt",
+    "earlier": "Früher",
+    "later": "Später",
+    "next": "Danach um {{time}}: {{title}}",
+    "noGuide": "Kein Programm für diesen Sender",
+    "wontPlay": "Dieser Sender läuft gerade nicht",
+    "wontPlayHint": "Sein Stream hat nicht geantwortet. Sender, die immer wieder ausfallen, werden ausgeblendet.",
+    "tryAgain": "Erneut versuchen",
+    "settings": {
+      "intro": "Füge Senderlisten (M3U) hinzu, mit Programmführer (XMLTV), falls vorhanden. Sender, die nicht mehr antworten, werden ausgeblendet. Kinderprofile und Freunde sehen kein Live-TV.",
+      "add": "Sender hinzufügen",
+      "suggested": "Öffentliche Sender (iptv-org)",
+      "ownPlaylist": "Eigene Senderliste",
+      "iptvOrgIntro": "<site>iptv-org</site> listet TV-Sender, die öffentlich im Internet gestreamt werden. Wähle Länder, Kategorien oder Sprachen.",
+      "yourCall": "Manche Streams bei iptv-org stammen eventuell nicht vom Sender selbst oder sind nicht für dein Land gedacht. Schau nur, was du darfst.",
+      "countries": "Länder",
+      "categories": "Kategorien",
+      "languages": "Sprachen",
+      "anyPick": "Tippen zum Suchen",
+      "unpick": "{{name}} entfernen",
+      "pickHint": "Sender müssen zu je einer Auswahl jeder Art passen.",
+      "pickNothing": "Ohne Auswahl wird jeder Sender hinzugefügt: Tausende.",
+      "playlist": "Adresse der Senderliste (M3U)",
+      "guide": "Adresse des Programmführers (XMLTV, optional)",
+      "guideHint": "Eine .xml- oder .xml.gz-Datei. Leer lassen, wenn die Senderliste ihren eigenen nennt.",
+      "name": "Name (optional)",
+      "addThis": "Hinzufügen",
+      "reading": "Sender werden gelesen…",
+      "counts": "Sender: {{count}} · laufen: {{playing}} · antworten nicht: {{broken}} · ausgeblendet: {{hidden}}",
+      "guideShows": "Sendungen im Programmführer: {{count}}",
+      "guideFailed": "Der Programmführer konnte nicht gelesen werden: {{reason}}",
+      "noGuide": "Kein Programmführer",
+      "guideLoading": "Programmführer wird gelesen…",
+      "refreshFailed": "Die letzte Aktualisierung ist fehlgeschlagen: {{reason}}",
+      "refresh": "Jetzt aktualisieren",
+      "remove": "Entfernen",
+      "removeConfirm": "{{name}} und seine Sender entfernen?",
+      "broken": "Antwortet nicht",
+      "works": "Läuft",
+      "notChecked": "Noch nicht geprüft",
+      "hidden": "Ausgeblendet",
+      "hide": "Ausblenden",
+      "show": "Einblenden",
+      "more": "Die ersten 300 werden gezeigt. Suche einen Sender, um andere zu sehen.",
+      "everything": "alles"
     }
   }
 }

@@ -1,10 +1,11 @@
 import { useQuery } from '@tanstack/react-query'
-import { Bookmark, CalendarClock, ChevronRight, Inbox, Layers, LogOut } from 'lucide-react'
+import { Bookmark, CalendarClock, ChevronRight, Inbox, Layers, LogOut, Tv } from 'lucide-react'
 import type { ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { api, type User } from '../api'
 import { useRequestOptions } from '../components/Arr'
+import { useHasLiveTV } from '../components/ChannelLogo'
 import { LibraryIcon, useLibraries, useSignOut } from '../components/Shell'
 import { EmptyState, Spinner } from '../components/ui'
 import { isKids } from '../profiles'
@@ -20,6 +21,7 @@ export default function Libraries() {
   const arr = !kids && !!opts && (opts.movies || opts.shows)
   const waiting = kids ? 0 : (opts?.pendingRequests ?? 0) + (opts?.openIssues ?? 0)
   const signOut = useSignOut()
+  const liveTV = useHasLiveTV(me)
 
   if (isPending) {
     return (
@@ -50,6 +52,11 @@ export default function Libraries() {
         <Place to="/collections" icon={<Layers className="size-5" />}>
           {t('nav.collections')}
         </Place>
+        {liveTV && (
+          <Place to="/live" icon={<Tv className="size-5" />}>
+            {t('nav.liveTV')}
+          </Place>
+        )}
         {arr && (
           <Place to="/upcoming" icon={<CalendarClock className="size-5" />}>
             {t('nav.comingSoon')}

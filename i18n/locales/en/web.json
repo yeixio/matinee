@@ -13,7 +13,8 @@
     "settings": "Settings",
     "switchProfile": "Switch profile",
     "signOut": "Sign out",
-    "discover": "Discover"
+    "discover": "Discover",
+    "liveTV": "Live TV"
   },
   "cantReachServer": "Can't reach the server. Retrying…",
   "player": {
@@ -857,6 +858,10 @@
       "health": {
         "title": "Server health",
         "hint": "Load, playback, jobs, problems and the log"
+      },
+      "live-tv": {
+        "title": "Live TV",
+        "hint": "Channel playlists and guides"
       }
     }
   },
@@ -1259,6 +1264,65 @@
       "copy": "Copy",
       "copied": "Copied",
       "example": "For prometheus.yml"
+    }
+  },
+  "live": {
+    "title": "Live TV",
+    "channels": "Channels",
+    "guide": "Guide",
+    "all": "All",
+    "find": "Find a channel",
+    "noMatch": "No channels match",
+    "none": "No live TV channels yet",
+    "addSource": "Add channels in Settings",
+    "askAdmin": "An admin can add channels in Settings.",
+    "cantLoad": "Live TV couldn't be loaded",
+    "live": "Live",
+    "now": "Now",
+    "earlier": "Earlier",
+    "later": "Later",
+    "next": "Next at {{time}}: {{title}}",
+    "noGuide": "No guide for this channel",
+    "wontPlay": "This channel isn't playing right now",
+    "wontPlayHint": "Its stream didn't answer. Channels that keep failing are hidden.",
+    "tryAgain": "Try again",
+    "settings": {
+      "intro": "Add playlists of TV channels (M3U), with a guide (XMLTV) if you have one. Channels that stop answering are hidden. Kids profiles and friends don't see live TV.",
+      "add": "Add channels",
+      "suggested": "Public channels (iptv-org)",
+      "ownPlaylist": "Your own playlist",
+      "iptvOrgIntro": "<site>iptv-org</site> lists TV channels streamed publicly on the internet. Pick countries, categories or languages.",
+      "yourCall": "Some streams iptv-org lists may not come from the channel itself or be meant for your country. Only watch what you're allowed to.",
+      "countries": "Countries",
+      "categories": "Categories",
+      "languages": "Languages",
+      "anyPick": "Type to find one",
+      "unpick": "Remove {{name}}",
+      "pickHint": "Channels must match one pick of each kind.",
+      "pickNothing": "With nothing picked, every channel is added: thousands.",
+      "playlist": "Playlist address (M3U)",
+      "guide": "Guide address (XMLTV, optional)",
+      "guideHint": "A .xml or .xml.gz file. Leave it empty if the playlist names its own.",
+      "name": "Name (optional)",
+      "addThis": "Add",
+      "reading": "Reading channels…",
+      "counts": "Channels: {{count}} · playing: {{playing}} · not answering: {{broken}} · hidden: {{hidden}}",
+      "guideShows": "Shows in the guide: {{count}}",
+      "guideFailed": "The guide couldn't be read: {{reason}}",
+      "noGuide": "No guide",
+      "guideLoading": "Reading the guide…",
+      "refreshFailed": "The last refresh failed: {{reason}}",
+      "refresh": "Refresh now",
+      "remove": "Remove",
+      "removeConfirm": "Remove {{name}} and its channels?",
+      "broken": "Not answering",
+      "works": "Playing",
+      "notChecked": "Not checked yet",
+      "hidden": "Hidden",
+      "hide": "Hide",
+      "show": "Show",
+      "more": "Showing the first 300. Find a channel to see others.",
+      "everything": "everything"
     }
   }
 }

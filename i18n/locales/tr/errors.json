@@ -228,5 +228,16 @@
   "q_or_tag_is_required": "q veya tag gerekli",
   "the_station_couldnt_be_reached_check_the_address_and_try_again": "istasyona ulaşılamadı. Adresi kontrol edip yeniden deneyin.",
   "the_station_couldnt_be_reached_reason": "istasyona ulaşılamadı: {{reason}}",
-  "the_station_directory_isnt_answering_right_now": "istasyon dizini şu anda yanıt vermiyor"
+  "the_station_directory_isnt_answering_right_now": "istasyon dizini şu anda yanıt vermiyor",
+  "add_the_playlists_web_address": "listenin web adresini ekleyin",
+  "channel_not_found": "kanal bulunamadı",
+  "iptv_org_isnt_answering_right_now": "iptv-org şu an yanıt vermiyor",
+  "source_not_found": "kaynak bulunamadı",
+  "that_address_isnt_a_channel_playlist_m3u": "bu adres bir kanal listesi (M3U) değil",
+  "that_link_has_expired": "bu bağlantının süresi doldu",
+  "that_playlist_has_no_channels_matinee_can_play": "bu listede Matinee'nin oynatabileceği kanal yok",
+  "that_source_is_being_refreshed_already": "bu kaynak zaten yenileniyor",
+  "the_channel_isnt_answering_right_now": "kanal şu an yanıt vermiyor",
+  "the_guides_address_isnt_a_web_address": "yayın akışının adresi bir web adresi değil",
+  "the_playlist_couldnt_be_read_reason": "liste okunamadı: {{reason}}"
 }

@@ -228,5 +228,16 @@
   "q_or_tag_is_required": "q of tag is verplicht",
   "the_station_couldnt_be_reached_check_the_address_and_try_again": "de zender is niet bereikbaar. Controleer het adres en probeer het opnieuw.",
   "the_station_couldnt_be_reached_reason": "de zender is niet bereikbaar: {{reason}}",
-  "the_station_directory_isnt_answering_right_now": "de zendergids reageert op dit moment niet"
+  "the_station_directory_isnt_answering_right_now": "de zendergids reageert op dit moment niet",
+  "add_the_playlists_web_address": "voeg het webadres van de lijst toe",
+  "channel_not_found": "zender niet gevonden",
+  "iptv_org_isnt_answering_right_now": "iptv-org reageert nu niet",
+  "source_not_found": "bron niet gevonden",
+  "that_address_isnt_a_channel_playlist_m3u": "dat adres is geen zenderlijst (M3U)",
+  "that_link_has_expired": "die link is verlopen",
+  "that_playlist_has_no_channels_matinee_can_play": "die lijst heeft geen zenders die Matinee kan afspelen",
+  "that_source_is_being_refreshed_already": "die bron wordt al vernieuwd",
+  "the_channel_isnt_answering_right_now": "de zender reageert nu niet",
+  "the_guides_address_isnt_a_web_address": "het adres van de gids is geen webadres",
+  "the_playlist_couldnt_be_read_reason": "de lijst kon niet worden gelezen: {{reason}}"
 }

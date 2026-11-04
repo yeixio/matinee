@@ -228,5 +228,16 @@
   "q_or_tag_is_required": "q eller tag må oppgis",
   "the_station_couldnt_be_reached_check_the_address_and_try_again": "stasjonen kunne ikke nås. Sjekk adressen og prøv igjen.",
   "the_station_couldnt_be_reached_reason": "stasjonen kunne ikke nås: {{reason}}",
-  "the_station_directory_isnt_answering_right_now": "stasjonskatalogen svarer ikke akkurat nå"
+  "the_station_directory_isnt_answering_right_now": "stasjonskatalogen svarer ikke akkurat nå",
+  "add_the_playlists_web_address": "legg til nettadressen til listen",
+  "channel_not_found": "fant ikke kanalen",
+  "iptv_org_isnt_answering_right_now": "iptv-org svarer ikke nå",
+  "source_not_found": "fant ikke kilden",
+  "that_address_isnt_a_channel_playlist_m3u": "den adressen er ikke en kanalliste (M3U)",
+  "that_link_has_expired": "lenken er utløpt",
+  "that_playlist_has_no_channels_matinee_can_play": "listen har ingen kanaler Matinee kan spille",
+  "that_source_is_being_refreshed_already": "kilden oppdateres allerede",
+  "the_channel_isnt_answering_right_now": "kanalen svarer ikke nå",
+  "the_guides_address_isnt_a_web_address": "programoversiktens adresse er ikke en nettadresse",
+  "the_playlist_couldnt_be_read_reason": "listen kunne ikke leses: {{reason}}"
 }

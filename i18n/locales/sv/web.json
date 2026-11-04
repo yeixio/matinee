@@ -13,7 +13,8 @@
     "settings": "Inställningar",
     "switchProfile": "Byt profil",
     "signOut": "Logga ut",
-    "discover": "Upptäck"
+    "discover": "Upptäck",
+    "liveTV": "Live-tv"
   },
   "cantReachServer": "Når inte servern. Försöker igen…",
   "player": {
@@ -857,6 +858,10 @@
       "health": {
         "title": "Serverhälsa",
         "hint": "Belastning, uppspelning, jobb, problem och loggen"
+      },
+      "live-tv": {
+        "title": "Live-tv",
+        "hint": "Kanallistor och tablåer"
       }
     }
   },
@@ -1259,6 +1264,65 @@
       "copy": "Kopiera",
       "copied": "Kopierat",
       "example": "För prometheus.yml"
+    }
+  },
+  "live": {
+    "title": "Live-tv",
+    "channels": "Kanaler",
+    "guide": "Tablå",
+    "all": "Alla",
+    "find": "Hitta en kanal",
+    "noMatch": "Inga kanaler matchar",
+    "none": "Inga live-tv-kanaler än",
+    "addSource": "Lägg till kanaler i Inställningar",
+    "askAdmin": "En admin kan lägga till kanaler i Inställningar.",
+    "cantLoad": "Live-tv kunde inte laddas",
+    "live": "Live",
+    "now": "Nu",
+    "earlier": "Tidigare",
+    "later": "Senare",
+    "next": "Sedan kl. {{time}}: {{title}}",
+    "noGuide": "Ingen tablå för den här kanalen",
+    "wontPlay": "Den här kanalen sänder inte just nu",
+    "wontPlayHint": "Strömmen svarade inte. Kanaler som fortsätter att fallera döljs.",
+    "tryAgain": "Försök igen",
+    "settings": {
+      "intro": "Lägg till listor med tv-kanaler (M3U), med en tablå (XMLTV) om du har en. Kanaler som slutar svara döljs. Barnprofiler och vänner ser inte live-tv.",
+      "add": "Lägg till kanaler",
+      "suggested": "Offentliga kanaler (iptv-org)",
+      "ownPlaylist": "Din egen lista",
+      "iptvOrgIntro": "<site>iptv-org</site> listar tv-kanaler som strömmas offentligt på internet. Välj länder, kategorier eller språk.",
+      "yourCall": "Vissa strömmar iptv-org listar kommer kanske inte från kanalen själv eller är inte avsedda för ditt land. Titta bara på det du får.",
+      "countries": "Länder",
+      "categories": "Kategorier",
+      "languages": "Språk",
+      "anyPick": "Skriv för att söka",
+      "unpick": "Ta bort {{name}}",
+      "pickHint": "Kanaler måste matcha ett val av varje slag.",
+      "pickNothing": "Utan val läggs alla kanaler till: tusentals.",
+      "playlist": "Listans adress (M3U)",
+      "guide": "Tablåns adress (XMLTV, valfritt)",
+      "guideHint": "En .xml- eller .xml.gz-fil. Lämna tomt om listan anger sin egen.",
+      "name": "Namn (valfritt)",
+      "addThis": "Lägg till",
+      "reading": "Läser kanaler…",
+      "counts": "Kanaler: {{count}} · sänder: {{playing}} · svarar inte: {{broken}} · dolda: {{hidden}}",
+      "guideShows": "Program i tablån: {{count}}",
+      "guideFailed": "Tablån kunde inte läsas: {{reason}}",
+      "noGuide": "Ingen tablå",
+      "guideLoading": "Läser tablån…",
+      "refreshFailed": "Senaste uppdateringen misslyckades: {{reason}}",
+      "refresh": "Uppdatera nu",
+      "remove": "Ta bort",
+      "removeConfirm": "Ta bort {{name}} och dess kanaler?",
+      "broken": "Svarar inte",
+      "works": "Sänder",
+      "notChecked": "Inte kontrollerad än",
+      "hidden": "Dold",
+      "hide": "Dölj",
+      "show": "Visa",
+      "more": "De första 300 visas. Sök efter en kanal för att se andra.",
+      "everything": "allt"
     }
   }
 }

@@ -228,5 +228,16 @@
   "q_or_tag_is_required": "este necesar q sau tag",
   "the_station_couldnt_be_reached_check_the_address_and_try_again": "postul nu a putut fi accesat. Verificați adresa și încercați din nou.",
   "the_station_couldnt_be_reached_reason": "postul nu a putut fi accesat: {{reason}}",
-  "the_station_directory_isnt_answering_right_now": "directorul de posturi nu răspunde acum"
+  "the_station_directory_isnt_answering_right_now": "directorul de posturi nu răspunde acum",
+  "add_the_playlists_web_address": "adaugă adresa web a listei",
+  "channel_not_found": "canalul nu a fost găsit",
+  "iptv_org_isnt_answering_right_now": "iptv-org nu răspunde acum",
+  "source_not_found": "sursa nu a fost găsită",
+  "that_address_isnt_a_channel_playlist_m3u": "adresa nu este o listă de canale (M3U)",
+  "that_link_has_expired": "linkul a expirat",
+  "that_playlist_has_no_channels_matinee_can_play": "lista nu are canale pe care Matinee le poate reda",
+  "that_source_is_being_refreshed_already": "sursa se reîmprospătează deja",
+  "the_channel_isnt_answering_right_now": "canalul nu răspunde acum",
+  "the_guides_address_isnt_a_web_address": "adresa ghidului nu este o adresă web",
+  "the_playlist_couldnt_be_read_reason": "lista nu a putut fi citită: {{reason}}"
 }

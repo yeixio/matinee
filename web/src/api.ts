@@ -1058,6 +1058,50 @@ export class ApiError extends Error {
   }
 }
 
+// Live TV (see the server's api/livetv.go).
+export type LiveProgram = {
+  channelId: string
+  start: number // Unix seconds
+  stop: number
+  title: string
+  subtitle?: string
+  description?: string
+  category?: string
+  image?: string
+}
+export type LiveChannel = {
+  id: string
+  sourceId: string
+  name: string
+  number?: string
+  logo?: string
+  categories?: string[]
+  hidden?: boolean
+  broken?: boolean
+  checkedAt?: number
+}
+export type LiveListing = LiveChannel & { now?: LiveProgram; next?: LiveProgram }
+export type LiveFilter = { countries?: string[]; categories?: string[]; languages?: string[] }
+export type LiveSource = {
+  id: string
+  name: string
+  playlistUrl?: string
+  iptvOrg?: LiveFilter
+  guideUrl?: string
+  createdAt: number
+  refreshedAt?: number
+  error?: string
+  guideAt?: number
+  guideError?: string
+  channels: number
+  broken: number
+  hidden: number
+  programs: number
+}
+export type LiveSourceInput = { name?: string; playlistUrl?: string; iptvOrg?: LiveFilter; guideUrl?: string }
+export type LiveChoice = { code: string; name: string; flag?: string }
+export type IPTVOrgChoices = { countries: LiveChoice[]; categories: LiveChoice[]; languages: LiveChoice[] }
+
 async function request<T>(method: string, path: string, body?: unknown): Promise<T> {
   const res = await fetch(path, {
     method,
@@ -1323,6 +1367,19 @@ export const api = {
     request<SubtitleSearch>('GET', `/api/v1/items/${id}/subtitles/search${language ? `?languages=${encodeURIComponent(language)}` : ''}`),
   addSubtitle: (id: number, found: FoundSubtitle) => request<SubtitleTrack>('POST', `/api/v1/items/${id}/subtitles`, found),
   removeSubtitle: (id: number, track: string) => request<void>('DELETE', `/api/v1/items/${id}/subtitles/${encodeURIComponent(track)}`),
+  liveChannels: () => request<{ channels: LiveListing[]; categories: string[] }>('GET', '/api/v1/live/channels'),
+  liveGuide: (from: number, hours = 4) =>
+    request<{ from: number; to: number; channels: LiveChannel[]; programs: LiveProgram[] }>('GET', `/api/v1/live/guide?from=${from}&hours=${hours}`),
+  liveChannel: (id: string) => request<{ channel: LiveChannel; programs: LiveProgram[] }>('GET', `/api/v1/live/channels/${encodeURIComponent(id)}`),
+  playLiveChannel: (id: string) => request<{ url: string }>('POST', `/api/v1/live/channels/${encodeURIComponent(id)}/play`),
+  hideLiveChannel: (id: string, hidden: boolean) => request<LiveChannel>('PUT', `/api/v1/live/channels/${encodeURIComponent(id)}`, { hidden }),
+  liveSources: () => request<LiveSource[]>('GET', '/api/v1/live/sources'),
+  addLiveSource: (src: LiveSourceInput) => request<LiveSource>('POST', '/api/v1/live/sources', src),
+  updateLiveSource: (id: string, src: LiveSourceInput) => request<LiveSource>('PUT', `/api/v1/live/sources/${encodeURIComponent(id)}`, src),
+  deleteLiveSource: (id: string) => request<void>('DELETE', `/api/v1/live/sources/${encodeURIComponent(id)}`),
+  refreshLiveSource: (id: string) => request<LiveSource>('POST', `/api/v1/live/sources/${encodeURIComponent(id)}/refresh`),
+  liveSourceChannels: (id: string) => request<LiveChannel[]>('GET', `/api/v1/live/sources/${encodeURIComponent(id)}/channels`),
+  iptvOrgChoices: () => request<IPTVOrgChoices>('GET', '/api/v1/live/iptv-org'),
   podcastIndex: () => request<{ connected: boolean; hint?: string }>('GET', '/api/v1/integrations/podcastindex'),
   savePodcastIndex: (key: string, secret: string) =>
     request<{ connected: boolean; hint?: string }>('PUT', '/api/v1/integrations/podcastindex', { key, secret }),

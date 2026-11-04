@@ -228,5 +228,16 @@
   "q_or_tag_is_required": "q 또는 tag가 필요합니다",
   "the_station_couldnt_be_reached_check_the_address_and_try_again": "방송국에 연결할 수 없습니다. 주소를 확인하고 다시 시도하세요.",
   "the_station_couldnt_be_reached_reason": "방송국에 연결할 수 없습니다: {{reason}}",
-  "the_station_directory_isnt_answering_right_now": "방송국 디렉터리가 지금 응답하지 않습니다"
+  "the_station_directory_isnt_answering_right_now": "방송국 디렉터리가 지금 응답하지 않습니다",
+  "add_the_playlists_web_address": "목록의 웹 주소를 입력하세요",
+  "channel_not_found": "채널을 찾을 수 없습니다",
+  "iptv_org_isnt_answering_right_now": "iptv-org가 지금 응답하지 않습니다",
+  "source_not_found": "소스를 찾을 수 없습니다",
+  "that_address_isnt_a_channel_playlist_m3u": "그 주소는 채널 목록(M3U)이 아닙니다",
+  "that_link_has_expired": "그 링크는 만료되었습니다",
+  "that_playlist_has_no_channels_matinee_can_play": "그 목록에는 Matinee가 재생할 수 있는 채널이 없습니다",
+  "that_source_is_being_refreshed_already": "그 소스는 이미 새로고침 중입니다",
+  "the_channel_isnt_answering_right_now": "채널이 지금 응답하지 않습니다",
+  "the_guides_address_isnt_a_web_address": "편성표 주소가 웹 주소가 아닙니다",
+  "the_playlist_couldnt_be_read_reason": "목록을 읽지 못했습니다: {{reason}}"
 }

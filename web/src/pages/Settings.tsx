@@ -1,10 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { Activity, ChevronLeft, ChevronRight, Folder, FolderOpen, Gauge, Globe, Image as ImageIcon, KeyRound, LibraryBig, Monitor, Plus, Puzzle, RefreshCw, Trash2, UserPlus, UserRound, UsersRound, X, type LucideIcon } from 'lucide-react'
+import { Activity, ChevronLeft, ChevronRight, Folder, FolderOpen, Gauge, Globe, Image as ImageIcon, KeyRound, LibraryBig, Monitor, Plus, Puzzle, RefreshCw, Trash2, Tv, UserPlus, UserRound, UsersRound, X, type LucideIcon } from 'lucide-react'
 import { useEffect, useState, type FormEvent, type ReactNode } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import { Link, Navigate, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { api, type ConnectStatus, type LibraryKind, type PlaybackPrefs, type RemoteStatus, type User, type Account as AccountInfo } from '../api'
 import { LanguagePicker } from '../components/LanguagePicker'
+import { LiveTVSettings } from '../components/LiveTVSettings'
 import { NewFiles, watchSummary } from '../components/LibraryWatch'
 import { MediaAnalysis } from '../components/MediaAnalysis'
 import { ServerHealth } from '../components/ServerHealth'
@@ -36,6 +37,7 @@ export const settingsSections: Record<string, string> = {
   'home-network': 'network', 'remote-access': 'network',
   arr: 'add-ons', overseerr: 'add-ons', plugins: 'add-ons',
   'server-health': 'health', alerts: 'health',
+  'live-tv': 'live-tv',
 }
 
 export default function Settings() {
@@ -67,6 +69,7 @@ export default function Settings() {
           { id: 'content', icon: ImageIcon, sections: [['posters', <TMDBKey />], ['podcast-index', <PodcastIndexKey />], ['subtitles', <OpenSubtitlesKey />], ['lyrics', <OnlineLyrics />], ['trailers', <Trailers />], ['home-rows', <HolidayRows />]] },
           { id: 'streaming', icon: Gauge, sections: [['transcoding', <Transcoding />]] },
           { id: 'network', icon: Globe, sections: [['home-network', <HomeNetwork />], ['remote-access', <RemoteAccess />]] },
+          { id: 'live-tv', icon: Tv, sections: [['live-tv', <LiveTVSettings />]] },
           { id: 'add-ons', icon: Puzzle, sections: [['arr', <Integrations />], ['plugins', <Plugins />]] },
         ] satisfies SettingsGroup[]
       : []),

@@ -13,7 +13,8 @@
     "settings": "Setări",
     "switchProfile": "Schimbă profilul",
     "signOut": "Deconectează-te",
-    "discover": "Descoperă"
+    "discover": "Descoperă",
+    "liveTV": "TV în direct"
   },
   "cantReachServer": "Serverul nu poate fi accesat. Se reîncearcă…",
   "player": {
@@ -861,6 +862,10 @@
       "health": {
         "title": "Starea serverului",
         "hint": "Încărcare, redare, sarcini, probleme și jurnalul"
+      },
+      "live-tv": {
+        "title": "TV în direct",
+        "hint": "Liste de canale și ghiduri"
       }
     }
   },
@@ -1270,6 +1275,65 @@
       "copy": "Copiază",
       "copied": "Copiat",
       "example": "Pentru prometheus.yml"
+    }
+  },
+  "live": {
+    "title": "TV în direct",
+    "channels": "Canale",
+    "guide": "Ghid",
+    "all": "Toate",
+    "find": "Caută un canal",
+    "noMatch": "Niciun canal nu se potrivește",
+    "none": "Încă nu există canale TV în direct",
+    "addSource": "Adaugă canale în Setări",
+    "askAdmin": "Un administrator poate adăuga canale în Setări.",
+    "cantLoad": "TV în direct nu a putut fi încărcat",
+    "live": "În direct",
+    "now": "Acum",
+    "earlier": "Mai devreme",
+    "later": "Mai târziu",
+    "next": "Urmează la {{time}}: {{title}}",
+    "noGuide": "Niciun ghid pentru acest canal",
+    "wontPlay": "Acest canal nu emite acum",
+    "wontPlayHint": "Fluxul nu a răspuns. Canalele care eșuează mereu sunt ascunse.",
+    "tryAgain": "Încearcă din nou",
+    "settings": {
+      "intro": "Adaugă liste de canale TV (M3U), cu un ghid (XMLTV) dacă ai. Canalele care nu mai răspund sunt ascunse. Profilurile pentru copii și prietenii nu văd TV în direct.",
+      "add": "Adaugă canale",
+      "suggested": "Canale publice (iptv-org)",
+      "ownPlaylist": "Lista ta",
+      "iptvOrgIntro": "<site>iptv-org</site> adună canale TV transmise public pe internet. Alege țări, categorii sau limbi.",
+      "yourCall": "Unele fluxuri adunate de iptv-org pot să nu vină de la canalul însuși sau să nu fie pentru țara ta. Urmărește doar ce ai voie.",
+      "countries": "Țări",
+      "categories": "Categorii",
+      "languages": "Limbi",
+      "anyPick": "Scrie pentru a căuta",
+      "unpick": "Elimină {{name}}",
+      "pickHint": "Canalele trebuie să se potrivească cu o alegere din fiecare tip.",
+      "pickNothing": "Fără alegeri, se adaugă toate canalele: mii.",
+      "playlist": "Adresa listei (M3U)",
+      "guide": "Adresa ghidului (XMLTV, opțional)",
+      "guideHint": "Un fișier .xml sau .xml.gz. Lasă gol dacă lista își indică propriul ghid.",
+      "name": "Nume (opțional)",
+      "addThis": "Adaugă",
+      "reading": "Se citesc canalele…",
+      "counts": "Canale: {{count}} · emit: {{playing}} · nu răspund: {{broken}} · ascunse: {{hidden}}",
+      "guideShows": "Emisiuni în ghid: {{count}}",
+      "guideFailed": "Ghidul nu a putut fi citit: {{reason}}",
+      "noGuide": "Fără ghid",
+      "guideLoading": "Se citește ghidul…",
+      "refreshFailed": "Ultima reîmprospătare a eșuat: {{reason}}",
+      "refresh": "Reîmprospătează acum",
+      "remove": "Elimină",
+      "removeConfirm": "Elimini {{name}} și canalele sale?",
+      "broken": "Nu răspunde",
+      "works": "Emite",
+      "notChecked": "Neverificat încă",
+      "hidden": "Ascuns",
+      "hide": "Ascunde",
+      "show": "Arată",
+      "more": "Se arată primele 300. Caută un canal pentru a vedea altele.",
+      "everything": "tot"
     }
   }
 }

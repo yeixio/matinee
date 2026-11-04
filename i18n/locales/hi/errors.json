@@ -228,5 +228,16 @@
   "q_or_tag_is_required": "q या tag ज़रूरी है",
   "the_station_couldnt_be_reached_check_the_address_and_try_again": "स्टेशन तक नहीं पहुँचा जा सका। पता जाँचें और फिर से कोशिश करें।",
   "the_station_couldnt_be_reached_reason": "स्टेशन तक नहीं पहुँचा जा सका: {{reason}}",
-  "the_station_directory_isnt_answering_right_now": "स्टेशन निर्देशिका अभी जवाब नहीं दे रही है"
+  "the_station_directory_isnt_answering_right_now": "स्टेशन निर्देशिका अभी जवाब नहीं दे रही है",
+  "add_the_playlists_web_address": "सूची का वेब पता जोड़ें",
+  "channel_not_found": "चैनल नहीं मिला",
+  "iptv_org_isnt_answering_right_now": "iptv-org अभी जवाब नहीं दे रहा",
+  "source_not_found": "स्रोत नहीं मिला",
+  "that_address_isnt_a_channel_playlist_m3u": "वह पता चैनल सूची (M3U) नहीं है",
+  "that_link_has_expired": "वह लिंक समाप्त हो गया है",
+  "that_playlist_has_no_channels_matinee_can_play": "उस सूची में कोई चैनल नहीं जिसे Matinee चला सके",
+  "that_source_is_being_refreshed_already": "वह स्रोत पहले से रीफ़्रेश हो रहा है",
+  "the_channel_isnt_answering_right_now": "चैनल अभी जवाब नहीं दे रहा",
+  "the_guides_address_isnt_a_web_address": "गाइड का पता वेब पता नहीं है",
+  "the_playlist_couldnt_be_read_reason": "सूची पढ़ी नहीं जा सकी: {{reason}}"
 }

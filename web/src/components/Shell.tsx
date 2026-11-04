@@ -6,6 +6,7 @@ import { api, type Library, type User } from '../api'
 import { Avatar } from '../pages/Profiles'
 import { useAudio } from '../player/AudioPlayer'
 import { forgetAsked, isKids } from '../profiles'
+import { useHasLiveTV } from './ChannelLogo'
 import { useRequestOptions } from './Arr'
 
 export function LibraryIcon({ kind, className = 'size-5' }: { kind: string; className?: string }) {
@@ -56,7 +57,7 @@ export function useLibraries() {
 }
 
 // The pages the phone tab bar's Libraries tab leads to.
-const libraryPages = ['/libraries', '/library/:id', '/watchlist', '/collections', '/collection/:id', '/box-set/:id', '/upcoming', '/requests']
+const libraryPages = ['/libraries', '/library/:id', '/watchlist', '/collections', '/collection/:id', '/box-set/:id', '/upcoming', '/requests', '/live']
 
 export function useSignOut() {
   const qc = useQueryClient()
@@ -86,6 +87,7 @@ export default function Shell({ user }: { user: User }) {
   const logout = useSignOut()
   const { pathname } = useLocation()
   const inLibraries = libraryPages.some((p) => matchPath(p, pathname))
+  const liveTV = useHasLiveTV(user)
 
   return (
     <div className="min-h-dvh">
@@ -108,6 +110,11 @@ export default function Shell({ user }: { user: User }) {
             {discover && (
               <NavLink to="/discover" className={topLink}>
                 {t('nav.discover')}
+              </NavLink>
+            )}
+            {liveTV && (
+              <NavLink to="/live" className={topLink}>
+                {t('nav.liveTV')}
               </NavLink>
             )}
             {libraries.map((l) => (

@@ -228,5 +228,16 @@
   "q_or_tag_is_required": "q tai tag vaaditaan",
   "the_station_couldnt_be_reached_check_the_address_and_try_again": "asemaan ei saatu yhteyttä. Tarkista osoite ja yritä uudelleen.",
   "the_station_couldnt_be_reached_reason": "asemaan ei saatu yhteyttä: {{reason}}",
-  "the_station_directory_isnt_answering_right_now": "asemahakemisto ei vastaa juuri nyt"
+  "the_station_directory_isnt_answering_right_now": "asemahakemisto ei vastaa juuri nyt",
+  "add_the_playlists_web_address": "lisää listan verkko-osoite",
+  "channel_not_found": "kanavaa ei löytynyt",
+  "iptv_org_isnt_answering_right_now": "iptv-org ei vastaa juuri nyt",
+  "source_not_found": "lähdettä ei löytynyt",
+  "that_address_isnt_a_channel_playlist_m3u": "osoite ei ole kanavalista (M3U)",
+  "that_link_has_expired": "linkki on vanhentunut",
+  "that_playlist_has_no_channels_matinee_can_play": "listalla ei ole kanavia, joita Matinee voi toistaa",
+  "that_source_is_being_refreshed_already": "lähdettä päivitetään jo",
+  "the_channel_isnt_answering_right_now": "kanava ei vastaa juuri nyt",
+  "the_guides_address_isnt_a_web_address": "oppaan osoite ei ole verkko-osoite",
+  "the_playlist_couldnt_be_read_reason": "listaa ei voitu lukea: {{reason}}"
 }

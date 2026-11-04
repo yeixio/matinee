@@ -228,5 +228,16 @@
   "q_or_tag_is_required": "q vagy tag megadása kötelező",
   "the_station_couldnt_be_reached_check_the_address_and_try_again": "az állomás nem érhető el. Ellenőrizd a címet, és próbáld újra.",
   "the_station_couldnt_be_reached_reason": "az állomás nem érhető el: {{reason}}",
-  "the_station_directory_isnt_answering_right_now": "az állomáskönyvtár most nem válaszol"
+  "the_station_directory_isnt_answering_right_now": "az állomáskönyvtár most nem válaszol",
+  "add_the_playlists_web_address": "add meg a lista webcímét",
+  "channel_not_found": "a csatorna nem található",
+  "iptv_org_isnt_answering_right_now": "az iptv-org most nem válaszol",
+  "source_not_found": "a forrás nem található",
+  "that_address_isnt_a_channel_playlist_m3u": "ez a cím nem csatornalista (M3U)",
+  "that_link_has_expired": "a hivatkozás lejárt",
+  "that_playlist_has_no_channels_matinee_can_play": "a listában nincs olyan csatorna, amelyet a Matinee le tud játszani",
+  "that_source_is_being_refreshed_already": "ez a forrás már frissül",
+  "the_channel_isnt_answering_right_now": "a csatorna most nem válaszol",
+  "the_guides_address_isnt_a_web_address": "a műsorújság címe nem webcím",
+  "the_playlist_couldnt_be_read_reason": "a lista nem olvasható: {{reason}}"
 }

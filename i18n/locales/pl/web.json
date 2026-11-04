@@ -13,7 +13,8 @@
     "settings": "Ustawienia",
     "switchProfile": "Zmień profil",
     "signOut": "Wyloguj się",
-    "discover": "Odkrywaj"
+    "discover": "Odkrywaj",
+    "liveTV": "Telewizja na żywo"
   },
   "cantReachServer": "Nie można połączyć się z serwerem. Ponawianie…",
   "player": {
@@ -865,6 +866,10 @@
       "health": {
         "title": "Stan serwera",
         "hint": "Obciążenie, odtwarzanie, zadania, problemy i dziennik"
+      },
+      "live-tv": {
+        "title": "Telewizja na żywo",
+        "hint": "Listy kanałów i przewodniki"
       }
     }
   },
@@ -1281,6 +1286,65 @@
       "copy": "Kopiuj",
       "copied": "Skopiowano",
       "example": "Do prometheus.yml"
+    }
+  },
+  "live": {
+    "title": "Telewizja na żywo",
+    "channels": "Kanały",
+    "guide": "Przewodnik",
+    "all": "Wszystkie",
+    "find": "Znajdź kanał",
+    "noMatch": "Brak pasujących kanałów",
+    "none": "Nie ma jeszcze kanałów na żywo",
+    "addSource": "Dodaj kanały w Ustawieniach",
+    "askAdmin": "Administrator może dodać kanały w Ustawieniach.",
+    "cantLoad": "Nie udało się wczytać telewizji na żywo",
+    "live": "Na żywo",
+    "now": "Teraz",
+    "earlier": "Wcześniej",
+    "later": "Później",
+    "next": "Następnie o {{time}}: {{title}}",
+    "noGuide": "Brak przewodnika dla tego kanału",
+    "wontPlay": "Ten kanał teraz nie nadaje",
+    "wontPlayHint": "Jego strumień nie odpowiedział. Kanały, które wciąż zawodzą, są ukrywane.",
+    "tryAgain": "Spróbuj ponownie",
+    "settings": {
+      "intro": "Dodaj listy kanałów TV (M3U), z przewodnikiem (XMLTV), jeśli go masz. Kanały, które przestają odpowiadać, są ukrywane. Profile dziecięce i znajomi nie widzą telewizji na żywo.",
+      "add": "Dodaj kanały",
+      "suggested": "Kanały publiczne (iptv-org)",
+      "ownPlaylist": "Własna lista",
+      "iptvOrgIntro": "<site>iptv-org</site> zbiera kanały TV nadawane publicznie w internecie. Wybierz kraje, kategorie lub języki.",
+      "yourCall": "Niektóre strumienie z iptv-org mogą nie pochodzić od samego kanału lub nie być przeznaczone dla twojego kraju. Oglądaj tylko to, co wolno.",
+      "countries": "Kraje",
+      "categories": "Kategorie",
+      "languages": "Języki",
+      "anyPick": "Pisz, aby wyszukać",
+      "unpick": "Usuń {{name}}",
+      "pickHint": "Kanały muszą pasować do jednego wyboru każdego rodzaju.",
+      "pickNothing": "Bez wyboru dodawane są wszystkie kanały: tysiące.",
+      "playlist": "Adres listy (M3U)",
+      "guide": "Adres przewodnika (XMLTV, opcjonalnie)",
+      "guideHint": "Plik .xml lub .xml.gz. Zostaw puste, jeśli lista podaje własny.",
+      "name": "Nazwa (opcjonalnie)",
+      "addThis": "Dodaj",
+      "reading": "Wczytywanie kanałów…",
+      "counts": "Kanały: {{count}} · nadają: {{playing}} · nie odpowiadają: {{broken}} · ukryte: {{hidden}}",
+      "guideShows": "Programy w przewodniku: {{count}}",
+      "guideFailed": "Nie udało się odczytać przewodnika: {{reason}}",
+      "noGuide": "Brak przewodnika",
+      "guideLoading": "Wczytywanie przewodnika…",
+      "refreshFailed": "Ostatnie odświeżenie nie powiodło się: {{reason}}",
+      "refresh": "Odśwież teraz",
+      "remove": "Usuń",
+      "removeConfirm": "Usunąć {{name}} i jego kanały?",
+      "broken": "Nie odpowiada",
+      "works": "Nadaje",
+      "notChecked": "Jeszcze nie sprawdzony",
+      "hidden": "Ukryty",
+      "hide": "Ukryj",
+      "show": "Pokaż",
+      "more": "Widać pierwsze 300. Znajdź kanał, aby zobaczyć inne.",
+      "everything": "wszystko"
     }
   }
 }

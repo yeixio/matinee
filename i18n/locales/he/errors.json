@@ -228,5 +228,16 @@
   "q_or_tag_is_required": "נדרש q או tag",
   "the_station_couldnt_be_reached_check_the_address_and_try_again": "לא ניתן להתחבר לתחנה. בדקו את הכתובת ונסו שוב.",
   "the_station_couldnt_be_reached_reason": "לא ניתן להתחבר לתחנה: {{reason}}",
-  "the_station_directory_isnt_answering_right_now": "מדריך התחנות לא עונה כרגע"
+  "the_station_directory_isnt_answering_right_now": "מדריך התחנות לא עונה כרגע",
+  "add_the_playlists_web_address": "הוסיפו את כתובת האינטרנט של הרשימה",
+  "channel_not_found": "הערוץ לא נמצא",
+  "iptv_org_isnt_answering_right_now": "iptv-org לא עונה כרגע",
+  "source_not_found": "המקור לא נמצא",
+  "that_address_isnt_a_channel_playlist_m3u": "הכתובת הזו אינה רשימת ערוצים (M3U)",
+  "that_link_has_expired": "תוקף הקישור פג",
+  "that_playlist_has_no_channels_matinee_can_play": "ברשימה הזו אין ערוצים ש-Matinee יכול לנגן",
+  "that_source_is_being_refreshed_already": "המקור הזה כבר מתרענן",
+  "the_channel_isnt_answering_right_now": "הערוץ לא עונה כרגע",
+  "the_guides_address_isnt_a_web_address": "כתובת לוח השידורים אינה כתובת אינטרנט",
+  "the_playlist_couldnt_be_read_reason": "לא ניתן לקרוא את הרשימה: {{reason}}"
 }

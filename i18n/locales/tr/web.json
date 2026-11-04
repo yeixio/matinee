@@ -13,7 +13,8 @@
     "settings": "Ayarlar",
     "switchProfile": "Profil değiştir",
     "signOut": "Çıkış yap",
-    "discover": "Keşfet"
+    "discover": "Keşfet",
+    "liveTV": "Canlı TV"
   },
   "cantReachServer": "Sunucuya ulaşılamıyor. Yeniden deneniyor…",
   "player": {
@@ -857,6 +858,10 @@
       "health": {
         "title": "Sunucu durumu",
         "hint": "Yük, oynatma, işler, sorunlar ve günlük"
+      },
+      "live-tv": {
+        "title": "Canlı TV",
+        "hint": "Kanal listeleri ve yayın akışları"
       }
     }
   },
@@ -1259,6 +1264,65 @@
       "copy": "Kopyala",
       "copied": "Kopyalandı",
       "example": "prometheus.yml için"
+    }
+  },
+  "live": {
+    "title": "Canlı TV",
+    "channels": "Kanallar",
+    "guide": "Yayın akışı",
+    "all": "Tümü",
+    "find": "Kanal bul",
+    "noMatch": "Eşleşen kanal yok",
+    "none": "Henüz canlı TV kanalı yok",
+    "addSource": "Ayarlar'dan kanal ekleyin",
+    "askAdmin": "Bir yönetici Ayarlar'dan kanal ekleyebilir.",
+    "cantLoad": "Canlı TV yüklenemedi",
+    "live": "Canlı",
+    "now": "Şimdi",
+    "earlier": "Önce",
+    "later": "Sonra",
+    "next": "Sırada {{time}}: {{title}}",
+    "noGuide": "Bu kanalın yayın akışı yok",
+    "wontPlay": "Bu kanal şu an yayında değil",
+    "wontPlayHint": "Yayını yanıt vermedi. Sürekli başarısız olan kanallar gizlenir.",
+    "tryAgain": "Tekrar dene",
+    "settings": {
+      "intro": "TV kanalı listeleri (M3U) ekleyin, varsa yayın akışıyla (XMLTV). Yanıt vermeyi bırakan kanallar gizlenir. Çocuk profilleri ve arkadaşlar canlı TV'yi görmez.",
+      "add": "Kanal ekle",
+      "suggested": "Herkese açık kanallar (iptv-org)",
+      "ownPlaylist": "Kendi listeniz",
+      "iptvOrgIntro": "<site>iptv-org</site>, internette herkese açık yayınlanan TV kanallarını listeler. Ülke, kategori veya dil seçin.",
+      "yourCall": "iptv-org'un listelediği bazı yayınlar kanalın kendisinden gelmeyebilir veya ülkeniz için olmayabilir. Yalnızca izin verilenleri izleyin.",
+      "countries": "Ülkeler",
+      "categories": "Kategoriler",
+      "languages": "Diller",
+      "anyPick": "Aramak için yazın",
+      "unpick": "{{name}} kaldır",
+      "pickHint": "Kanallar her türden bir seçimle eşleşmelidir.",
+      "pickNothing": "Hiçbir şey seçilmezse tüm kanallar eklenir: binlerce.",
+      "playlist": "Liste adresi (M3U)",
+      "guide": "Yayın akışı adresi (XMLTV, isteğe bağlı)",
+      "guideHint": "Bir .xml veya .xml.gz dosyası. Liste kendi akışını belirtiyorsa boş bırakın.",
+      "name": "Ad (isteğe bağlı)",
+      "addThis": "Ekle",
+      "reading": "Kanallar okunuyor…",
+      "counts": "Kanallar: {{count}} · yayında: {{playing}} · yanıt vermiyor: {{broken}} · gizli: {{hidden}}",
+      "guideShows": "Yayın akışındaki programlar: {{count}}",
+      "guideFailed": "Yayın akışı okunamadı: {{reason}}",
+      "noGuide": "Yayın akışı yok",
+      "guideLoading": "Yayın akışı okunuyor…",
+      "refreshFailed": "Son yenileme başarısız oldu: {{reason}}",
+      "refresh": "Şimdi yenile",
+      "remove": "Kaldır",
+      "removeConfirm": "{{name}} ve kanalları kaldırılsın mı?",
+      "broken": "Yanıt vermiyor",
+      "works": "Yayında",
+      "notChecked": "Henüz denetlenmedi",
+      "hidden": "Gizli",
+      "hide": "Gizle",
+      "show": "Göster",
+      "more": "İlk 300 gösteriliyor. Diğerlerini görmek için bir kanal arayın.",
+      "everything": "her şey"
     }
   }
 }

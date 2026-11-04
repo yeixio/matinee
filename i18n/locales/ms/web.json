@@ -13,7 +13,8 @@
     "settings": "Tetapan",
     "switchProfile": "Tukar profil",
     "signOut": "Log keluar",
-    "discover": "Teroka"
+    "discover": "Teroka",
+    "liveTV": "TV Langsung"
   },
   "cantReachServer": "Tidak dapat menghubungi pelayan. Mencuba lagi…",
   "player": {
@@ -853,6 +854,10 @@
       "health": {
         "title": "Kesihatan pelayan",
         "hint": "Beban, main balik, tugas, masalah dan log"
+      },
+      "live-tv": {
+        "title": "TV Langsung",
+        "hint": "Senarai saluran dan panduan rancangan"
       }
     }
   },
@@ -1248,6 +1253,65 @@
       "copy": "Salin",
       "copied": "Disalin",
       "example": "Untuk prometheus.yml"
+    }
+  },
+  "live": {
+    "title": "TV Langsung",
+    "channels": "Saluran",
+    "guide": "Panduan",
+    "all": "Semua",
+    "find": "Cari saluran",
+    "noMatch": "Tiada saluran yang sepadan",
+    "none": "Belum ada saluran TV langsung",
+    "addSource": "Tambah saluran dalam Tetapan",
+    "askAdmin": "Pentadbir boleh menambah saluran dalam Tetapan.",
+    "cantLoad": "TV langsung tidak dapat dimuatkan",
+    "live": "Langsung",
+    "now": "Sekarang",
+    "earlier": "Lebih awal",
+    "later": "Kemudian",
+    "next": "Seterusnya pada {{time}}: {{title}}",
+    "noGuide": "Tiada panduan untuk saluran ini",
+    "wontPlay": "Saluran ini tidak bersiaran sekarang",
+    "wontPlayHint": "Strimnya tidak menjawab. Saluran yang terus gagal akan disembunyikan.",
+    "tryAgain": "Cuba lagi",
+    "settings": {
+      "intro": "Tambah senarai saluran TV (M3U), dengan panduan (XMLTV) jika ada. Saluran yang berhenti menjawab akan disembunyikan. Profil kanak-kanak dan rakan tidak melihat TV langsung.",
+      "add": "Tambah saluran",
+      "suggested": "Saluran awam (iptv-org)",
+      "ownPlaylist": "Senarai anda sendiri",
+      "iptvOrgIntro": "<site>iptv-org</site> menyenaraikan saluran TV yang distrim secara awam di internet. Pilih negara, kategori atau bahasa.",
+      "yourCall": "Sesetengah strim yang disenaraikan iptv-org mungkin bukan daripada saluran itu sendiri atau bukan untuk negara anda. Tonton hanya yang dibenarkan.",
+      "countries": "Negara",
+      "categories": "Kategori",
+      "languages": "Bahasa",
+      "anyPick": "Taip untuk mencari",
+      "unpick": "Buang {{name}}",
+      "pickHint": "Saluran mesti sepadan dengan satu pilihan bagi setiap jenis.",
+      "pickNothing": "Tanpa pilihan, semua saluran ditambah: beribu-ribu.",
+      "playlist": "Alamat senarai (M3U)",
+      "guide": "Alamat panduan (XMLTV, pilihan)",
+      "guideHint": "Fail .xml atau .xml.gz. Biarkan kosong jika senarai menyebut panduannya sendiri.",
+      "name": "Nama (pilihan)",
+      "addThis": "Tambah",
+      "reading": "Membaca saluran…",
+      "counts": "Saluran: {{count}} · bersiaran: {{playing}} · tidak menjawab: {{broken}} · disembunyikan: {{hidden}}",
+      "guideShows": "Rancangan dalam panduan: {{count}}",
+      "guideFailed": "Panduan tidak dapat dibaca: {{reason}}",
+      "noGuide": "Tiada panduan",
+      "guideLoading": "Membaca panduan…",
+      "refreshFailed": "Penyegaran terakhir gagal: {{reason}}",
+      "refresh": "Segar semula sekarang",
+      "remove": "Buang",
+      "removeConfirm": "Buang {{name}} dan salurannya?",
+      "broken": "Tidak menjawab",
+      "works": "Bersiaran",
+      "notChecked": "Belum disemak",
+      "hidden": "Disembunyikan",
+      "hide": "Sembunyikan",
+      "show": "Tunjukkan",
+      "more": "Menunjukkan 300 yang pertama. Cari saluran untuk melihat yang lain.",
+      "everything": "semua"
     }
   }
 }

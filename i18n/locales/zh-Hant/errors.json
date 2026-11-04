@@ -228,5 +228,16 @@
   "q_or_tag_is_required": "需要 q 或 tag",
   "the_station_couldnt_be_reached_check_the_address_and_try_again": "無法連線到電台。請檢查網址後再試一次。",
   "the_station_couldnt_be_reached_reason": "無法連線到電台：{{reason}}",
-  "the_station_directory_isnt_answering_right_now": "電台目錄暫時沒有回應"
+  "the_station_directory_isnt_answering_right_now": "電台目錄暫時沒有回應",
+  "add_the_playlists_web_address": "請加入清單的網址",
+  "channel_not_found": "找不到頻道",
+  "iptv_org_isnt_answering_right_now": "iptv-org 目前沒有回應",
+  "source_not_found": "找不到來源",
+  "that_address_isnt_a_channel_playlist_m3u": "該位址不是頻道清單（M3U）",
+  "that_link_has_expired": "該連結已過期",
+  "that_playlist_has_no_channels_matinee_can_play": "該清單中沒有 Matinee 能播放的頻道",
+  "that_source_is_being_refreshed_already": "該來源正在重新整理",
+  "the_channel_isnt_answering_right_now": "頻道目前沒有回應",
+  "the_guides_address_isnt_a_web_address": "節目表位址不是網址",
+  "the_playlist_couldnt_be_read_reason": "無法讀取清單：{{reason}}"
 }
