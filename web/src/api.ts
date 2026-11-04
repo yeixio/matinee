@@ -443,6 +443,8 @@ export type Book = Item & { parts: BookPart[]; chapters: BookChapter[] }
 export type BookGroup = { name: string; books: number; itemIds: number[] }
 
 // A record label in a music library, with a few of its albums for its tile.
+export type MatchCandidate = { id: number; title: string; year?: number; overview?: string; poster?: string }
+export type ItemMatch = { tmdbId: number; locked: boolean; ready: boolean; results: MatchCandidate[] }
 export type RecordLabel = { name: string; albums: number; artists: number; covers: Item[] }
 
 // A radio station found in the station directory (Radio Browser); itemId
@@ -1336,6 +1338,12 @@ export const api = {
     return response<Item>(res)
   },
   resetCover: (id: number) => request<void>('DELETE', `/api/v1/items/${id}/cover`),
+  // Fixing a movie's or show's online match (admins).
+  match: (id: number, q = '', year?: number) =>
+    request<ItemMatch>('GET', `/api/v1/items/${id}/match?${new URLSearchParams({ q, ...(year ? { year: String(year) } : {}) })}`),
+  setMatch: (id: number, ref: string) => request<Item>('PUT', `/api/v1/items/${id}/match`, { ref }),
+  clearMatch: (id: number) => request<Item>('DELETE', `/api/v1/items/${id}/match`),
+  refreshItem: (id: number) => request<Item>('POST', `/api/v1/items/${id}/refresh`),
   // Bringing history over from another media server (Settings → Import).
   findImports: () => request<{ found: string[]; uploaded: boolean }>('GET', '/api/v1/import/find'),
   uploadImport: async (file: Blob) => {

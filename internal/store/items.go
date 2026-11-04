@@ -557,7 +557,11 @@ func (s *Store) ApplyMetadata(ctx context.Context, id int64, m *Metadata) error 
 		_, err := s.db.ExecContext(ctx, "UPDATE items SET meta_at = ? WHERE id = ?", now(), id)
 		return err
 	}
-	_, err := s.db.ExecContext(ctx, `
+	return applyMetadata(ctx, s.db, id, m)
+}
+
+func applyMetadata(ctx context.Context, e execer, id int64, m *Metadata) error {
+	_, err := e.ExecContext(ctx, `
 		UPDATE items SET
 			tmdb_id = ?, mbid = ?, overview = COALESCE(?, overview), rating = ?,
 			year = COALESCE(year, ?),

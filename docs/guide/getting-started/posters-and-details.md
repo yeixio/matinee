@@ -37,6 +37,25 @@ Or set it on the server, where it goes depends on how you installed Matinee:
 
 After changing it on the server, restart Matinee. The next scan fills in what's missing; you can start one from **Settings → Libraries → Scan**.
 
+<!-- since: v0.2.0 -->
+## Fix a wrong match
+
+Now and then a title is matched with the wrong one: a remake, two shows with the same name, or a film known by another title. Admins can fix it on the title's page:
+
+1. Open the movie or show and click **Fix match**.
+2. Matinee searches TMDB for the title and year from your file. Change the title or year and click **Search** to look again, or paste the title's TMDB or IMDb link (or its IMDb id, such as `tt0113277`).
+3. Click the right poster. The description, artwork, genres, cast and crew and translations are fetched again, and for a show every season and episode is looked up again under the new match.
+
+A match you pick stays: scans and refreshes leave it alone. Artwork files next to your media and a cover you picked by hand are kept.
+
+In the same window:
+
+- **Refresh details** fetches the title's details, artwork and cast again, for when TMDB has changed since. It's also how to give an unmatched title another try.
+- **Unmatch** clears the match, so the title goes by its file name without a description, cast or online artwork, and isn't matched again until you pick one.
+
+When someone reports a title as **Wrong title** with **Report a problem**, the report has a **Fix match** button that opens this window. For an episode or season, Fix match opens on its show.
+<!-- /since -->
+
 ## Why isn't a key built in?
 
 TMDB's free keys are for personal use, and a key shipped inside Matinee would be shared by every server in the world. Once donations and app sales reach $150 a month, Matinee will license a commercial TMDB key and build it into the official images and packages, so new servers get artwork with no setup. Until then, each server brings its own.

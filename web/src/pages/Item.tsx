@@ -1,13 +1,14 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Check, ChevronRight, ImageOff, LoaderCircle, Play } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
-import { Link, Navigate, useParams } from 'react-router-dom'
+import { Link, Navigate, useParams, useSearchParams } from 'react-router-dom'
 import { api, pendingRefetch, type Item, type ItemDetail, type User } from '../api'
 import { ItemQuality, ReportProblem } from '../components/Arr'
 import { Artwork } from '../components/Artwork'
 import { FileDetailsButton, Languages, QualityBadges } from '../components/MediaInfo'
 import { PosterGrid } from '../components/Card'
 import { AddToCollectionButton } from '../components/Collections'
+import { FixMatchButton } from '../components/MatchPicker'
 import { CastRows, KeyPeople, MoreDetailsButton } from '../components/Credits'
 import { RelatedRows } from '../components/Related'
 import { StarRating } from '../components/StarRating'
@@ -87,6 +88,20 @@ function Header({ item, kids }: { item: ItemDetail; kids?: Item[] }) {
   const { t } = useTranslation()
   const { data: me } = useQuery<User>({ queryKey: ['me'], queryFn: api.me, staleTime: Infinity })
   const resume = !!item.positionMs && !item.played
+  // ?fix=match opens the match picker, as from a "wrong title" problem report.
+  const [params, setParams] = useSearchParams()
+  const fixing = params.get('fix') === 'match'
+  const setFixing = (on: boolean) =>
+    setParams(
+      (p) => {
+        if (on) p.set('fix', 'match')
+        else p.delete('fix')
+        return p
+      },
+      { replace: true },
+    )
+  // An episode's or season's match is its show's.
+  const show = item.kind === 'episode' || item.kind === 'season' ? item.parents.find((p) => p.kind === 'show') : undefined
   // Next up in a season: the episode in progress, else the first unwatched one.
   const firstUnwatched =
     kids?.find((c) => c.playable && !c.played && !!c.positionMs) ?? kids?.find((c) => c.playable && !c.played)
@@ -181,6 +196,10 @@ function Header({ item, kids }: { item: ItemDetail; kids?: Item[] }) {
             <FileDetailsButton item={item} user={me} />
             <StarRating item={item} />
             {me?.isAdmin && item.posterTag && <ResetPosterButton item={item} />}
+            {me?.isAdmin && (item.kind === 'movie' || item.kind === 'show') && (
+              <FixMatchButton item={item} open={fixing} onOpenChange={setFixing} />
+            )}
+            {me?.isAdmin && fixing && show && <Navigate to={`/item/${show.id}?fix=match`} replace />}
           </div>
         </div>
       </div>

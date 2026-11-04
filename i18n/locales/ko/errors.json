@@ -239,5 +239,12 @@
   "that_source_is_being_refreshed_already": "그 소스는 이미 새로고침 중입니다",
   "the_channel_isnt_answering_right_now": "채널이 지금 응답하지 않습니다",
   "the_guides_address_isnt_a_web_address": "편성표 주소가 웹 주소가 아닙니다",
-  "the_playlist_couldnt_be_read_reason": "목록을 읽지 못했습니다: {{reason}}"
+  "the_playlist_couldnt_be_read_reason": "목록을 읽지 못했습니다: {{reason}}",
+  "only_movies_and_shows_have_a_match_to_fix": "영화와 프로그램만 일치를 수정할 수 있습니다",
+  "add_a_tmdb_key_in_settings_posters_and_details_to_look_titles_up": "제목을 찾으려면 설정 → 포스터 및 세부 정보에서 TMDB 키를 추가하세요",
+  "tmdb_didnt_accept_the_key_in_settings_posters_and_details": "TMDB가 설정 → 포스터 및 세부 정보의 키를 받아들이지 않았습니다",
+  "couldnt_reach_tmdb_try_again_in_a_moment": "TMDB에 연결할 수 없습니다. 잠시 후 다시 시도하세요",
+  "tmdb_no_longer_has_this_title_fix_the_match_instead": "TMDB에 더 이상 이 제목이 없습니다. 일치를 수정하세요",
+  "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "TMDB ID, TMDB 주소 또는 IMDb ID를 보내세요",
+  "tmdb_has_no_such_title": "TMDB에 그런 제목이 없습니다"
 }

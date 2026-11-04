@@ -239,5 +239,12 @@
   "that_source_is_being_refreshed_already": "این منبع در حال تازه‌سازی است",
   "the_channel_isnt_answering_right_now": "شبکه الان پاسخ نمی‌دهد",
   "the_guides_address_isnt_a_web_address": "نشانی جدول پخش نشانی وب نیست",
-  "the_playlist_couldnt_be_read_reason": "فهرست خوانده نشد: {{reason}}"
+  "the_playlist_couldnt_be_read_reason": "فهرست خوانده نشد: {{reason}}",
+  "only_movies_and_shows_have_a_match_to_fix": "فقط فیلم‌ها و سریال‌ها تطبیق قابل اصلاح دارند",
+  "add_a_tmdb_key_in_settings_posters_and_details_to_look_titles_up": "برای جستجوی عنوان‌ها، در تنظیمات ← پوسترها و جزئیات یک کلید TMDB اضافه کنید",
+  "tmdb_didnt_accept_the_key_in_settings_posters_and_details": "TMDB کلید تنظیمات ← پوسترها و جزئیات را نپذیرفت",
+  "couldnt_reach_tmdb_try_again_in_a_moment": "دسترسی به TMDB ممکن نشد؛ کمی بعد دوباره امتحان کنید",
+  "tmdb_no_longer_has_this_title_fix_the_match_instead": "این عنوان دیگر در TMDB نیست؛ تطبیق را اصلاح کنید",
+  "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "شناسه TMDB، نشانی TMDB یا شناسه IMDb را بفرستید",
+  "tmdb_has_no_such_title": "چنین عنوانی در TMDB نیست"
 }

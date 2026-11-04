@@ -627,7 +627,8 @@
     "closed": "Ditutup",
     "confirmReplace": "Padam fail {{title}} ini dan muat turun salinan lain? Yang baharu muncul selepas dimuat turun dan pustaka diimbas.",
     "replaceFile": "Ganti fail",
-    "close": "Tutup"
+    "close": "Tutup",
+    "fixMatch": "Betulkan padanan"
   },
   "settings": {
     "tmdbNotice": "Poster dan penerangan datang daripada <site>TMDB</site>. Produk ini menggunakan API TMDB tetapi tidak disokong atau diperakui oleh TMDB.",
@@ -938,6 +939,23 @@
     "reset": "Guna kulit automatik",
     "chosenNote": "Kulit ini dipilih secara manual, jadi imbasan mengekalkannya.",
     "saving": "Menyimpan kulit…"
+  },
+  "match": {
+    "button": "Betulkan padanan",
+    "title": "Betulkan padanan untuk {{title}}",
+    "search": "Cari",
+    "searchPlaceholder": "Tajuk, atau pautan TMDB atau IMDb",
+    "year": "Tahun",
+    "looking": "Mencari di TMDB…",
+    "none": "Tiada hasil. Cuba tajuk atau tahun lain, atau tampal pautan TMDB atau IMDb tajuk itu.",
+    "current": "Dipadankan sekarang",
+    "pick": "Padankan dengan {{title}}",
+    "refresh": "Segarkan butiran",
+    "unmatch": "Buang padanan",
+    "confirmUnmatch": "Buang padanan {{title}}? Ia akan memakai nama failnya, tanpa penerangan, pelakon atau gambar dari internet.",
+    "locked": "Dipilih secara manual, jadi imbasan tidak mengubahnya.",
+    "noKey": "Tambah kunci TMDB dalam Tetapan → Poster dan butiran untuk mencari tajuk.",
+    "saving": "Menyimpan…"
   },
   "import": {
     "title": "Import daripada pelayan media lain",

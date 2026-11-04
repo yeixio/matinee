@@ -635,7 +635,8 @@
     "closed": "Cerrado",
     "confirmReplace": "¿Borrar este archivo de {{title}} y descargar otra copia? La nueva aparece cuando termina de descargarse y se escanea la biblioteca.",
     "replaceFile": "Sustituir archivo",
-    "close": "Cerrar"
+    "close": "Cerrar",
+    "fixMatch": "Corregir coincidencia"
   },
   "settings": {
     "tmdbNotice": "Los pósteres y las descripciones proceden de <site>TMDB</site>. Este producto usa la API de TMDB, pero TMDB no lo respalda ni lo certifica.",
@@ -946,6 +947,23 @@
     "reset": "Usar la portada automática",
     "chosenNote": "Esta portada se eligió a mano, así que los escaneos la conservan.",
     "saving": "Guardando la portada…"
+  },
+  "match": {
+    "button": "Corregir coincidencia",
+    "title": "Corregir coincidencia de {{title}}",
+    "search": "Buscar",
+    "searchPlaceholder": "Título, o un enlace de TMDB o IMDb",
+    "year": "Año",
+    "looking": "Buscando en TMDB…",
+    "none": "No se encontró nada. Prueba otro título o año, o pega el enlace de TMDB o IMDb del título.",
+    "current": "Coincidencia actual",
+    "pick": "Hacer coincidir con {{title}}",
+    "refresh": "Actualizar detalles",
+    "unmatch": "Quitar coincidencia",
+    "confirmUnmatch": "¿Quitar la coincidencia de {{title}}? Se mostrará por su nombre de archivo, sin descripción, reparto ni imágenes de internet.",
+    "locked": "Elegida a mano, así que los escaneos no la cambian.",
+    "noKey": "Añade una clave de TMDB en Ajustes → Pósteres y detalles para buscar títulos.",
+    "saving": "Guardando…"
   },
   "import": {
     "title": "Importar desde otro servidor multimedia",

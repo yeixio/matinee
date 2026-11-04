@@ -2263,6 +2263,81 @@ paths:
                   chosen: { type: boolean }
                   chosenSource: { type: string, description: "Where the picked cover came from: its URL, or upload." }
         "400": { $ref: "#/components/responses/Error" }
+  /items/{id}/match:
+    get:
+      summary: A movie's or show's online match, and titles to pick from (admins)
+      description: |
+        Searches TMDB for `q` (and `year`), or for the item's own title and
+        year when `q` is empty. A `q` that is a TMDB id (`tmdb:949`, or a
+        number of five digits or more), a themoviedb.org address or an IMDb
+        id (`tt0113277`, or an imdb.com address) lists just that title.
+        `ready` is false, with no results, while the server has no TMDB key.
+      parameters:
+        - { $ref: "#/components/parameters/ID" }
+        - { name: q, in: query, schema: { type: string } }
+        - { name: year, in: query, schema: { type: integer } }
+      responses:
+        "200":
+          description: The match and the titles found.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tmdbId: { type: integer, description: 0 when unmatched. }
+                  locked: { type: boolean, description: An admin picked or cleared the match by hand; lookups leave it alone. }
+                  ready: { type: boolean }
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id: { type: integer, description: The TMDB id. }
+                        title: { type: string }
+                        year: { type: integer }
+                        overview: { type: string }
+                        poster: { type: string, description: A small poster's URL. }
+        "400": { $ref: "#/components/responses/Error" }
+        "502": { $ref: "#/components/responses/Error" }
+    put:
+      summary: Match a movie or show with the right title (admins)
+      description: |
+        Send `{"ref": …}`: a TMDB id, a themoviedb.org address or an IMDb id.
+        What the old match brought (description, rating, genres, online
+        artwork, cast and crew, translations) is replaced; local artwork and
+        picked covers stay. A show's seasons and episodes are looked up again
+        in the background. The match is locked.
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      requestBody:
+        content:
+          application/json: { schema: { type: object, properties: { ref: { type: string } } } }
+      responses:
+        "200": { description: The item., content: { application/json: { schema: { $ref: "#/components/schemas/Item" } } } }
+        "400": { $ref: "#/components/responses/Error" }
+        "404": { $ref: "#/components/responses/Error" }
+        "502": { $ref: "#/components/responses/Error" }
+        "503": { $ref: "#/components/responses/Error" }
+    delete:
+      summary: Unmatch a movie or show (admins)
+      description: >
+        Clears everything the match brought, so the title goes by its file
+        name, and locks it so lookups don't match it again. Pick a match to
+        undo this.
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      responses:
+        "200": { description: The item., content: { application/json: { schema: { $ref: "#/components/schemas/Item" } } } }
+  /items/{id}/refresh:
+    post:
+      summary: Refresh a movie's or show's details (admins)
+      description: >
+        Fetches its description, artwork, cast and crew and translations
+        again, and its seasons' and episodes'. An unmatched title that
+        wasn't unmatched by hand is looked up again from the start.
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      responses:
+        "200": { description: The item., content: { application/json: { schema: { $ref: "#/components/schemas/Item" } } } }
+        "404": { $ref: "#/components/responses/Error" }
+        "502": { $ref: "#/components/responses/Error" }
   /items/{id}/cover:
     put:
       summary: Pick an album's or book's cover (admins)

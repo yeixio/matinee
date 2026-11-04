@@ -239,5 +239,12 @@
   "that_source_is_being_refreshed_already": "quell’origine è già in aggiornamento",
   "the_channel_isnt_answering_right_now": "il canale non risponde in questo momento",
   "the_guides_address_isnt_a_web_address": "l’indirizzo della guida non è un indirizzo web",
-  "the_playlist_couldnt_be_read_reason": "impossibile leggere l’elenco: {{reason}}"
+  "the_playlist_couldnt_be_read_reason": "impossibile leggere l’elenco: {{reason}}",
+  "only_movies_and_shows_have_a_match_to_fix": "solo film e serie hanno un abbinamento da correggere",
+  "add_a_tmdb_key_in_settings_posters_and_details_to_look_titles_up": "aggiungi una chiave TMDB in Impostazioni → Locandine e dettagli per cercare i titoli",
+  "tmdb_didnt_accept_the_key_in_settings_posters_and_details": "TMDB non ha accettato la chiave in Impostazioni → Locandine e dettagli",
+  "couldnt_reach_tmdb_try_again_in_a_moment": "impossibile raggiungere TMDB; riprova tra poco",
+  "tmdb_no_longer_has_this_title_fix_the_match_instead": "TMDB non ha più questo titolo; correggi l'abbinamento",
+  "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "invia l'id TMDB, l'indirizzo TMDB o l'id IMDb da abbinare",
+  "tmdb_has_no_such_title": "TMDB non ha questo titolo"
 }

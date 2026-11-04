@@ -239,5 +239,12 @@
   "that_source_is_being_refreshed_already": "diese Quelle wird bereits aktualisiert",
   "the_channel_isnt_answering_right_now": "der Sender antwortet gerade nicht",
   "the_guides_address_isnt_a_web_address": "die Adresse des Programmführers ist keine Webadresse",
-  "the_playlist_couldnt_be_read_reason": "die Senderliste konnte nicht gelesen werden: {{reason}}"
+  "the_playlist_couldnt_be_read_reason": "die Senderliste konnte nicht gelesen werden: {{reason}}",
+  "only_movies_and_shows_have_a_match_to_fix": "nur Filme und Serien haben eine Zuordnung zum Korrigieren",
+  "add_a_tmdb_key_in_settings_posters_and_details_to_look_titles_up": "füge in Einstellungen → Poster und Details einen TMDB-Schlüssel hinzu, um Titel nachzuschlagen",
+  "tmdb_didnt_accept_the_key_in_settings_posters_and_details": "TMDB hat den Schlüssel in Einstellungen → Poster und Details nicht akzeptiert",
+  "couldnt_reach_tmdb_try_again_in_a_moment": "TMDB nicht erreichbar; versuche es gleich noch einmal",
+  "tmdb_no_longer_has_this_title_fix_the_match_instead": "TMDB hat diesen Titel nicht mehr; korrigiere stattdessen die Zuordnung",
+  "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "sende die TMDB-ID, TMDB-Adresse oder IMDb-ID für die Zuordnung",
+  "tmdb_has_no_such_title": "TMDB kennt diesen Titel nicht"
 }

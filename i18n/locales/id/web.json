@@ -627,7 +627,8 @@
     "closed": "Ditutup",
     "confirmReplace": "Hapus file {{title}} ini dan unduh salinan lain? Yang baru muncul setelah selesai diunduh dan perpustakaan dipindai.",
     "replaceFile": "Ganti file",
-    "close": "Tutup"
+    "close": "Tutup",
+    "fixMatch": "Perbaiki kecocokan"
   },
   "settings": {
     "tmdbNotice": "Poster dan deskripsi berasal dari <site>TMDB</site>. Produk ini menggunakan API TMDB tetapi tidak didukung atau disertifikasi oleh TMDB.",
@@ -938,6 +939,23 @@
     "reset": "Gunakan sampul otomatis",
     "chosenNote": "Sampul ini dipilih secara manual, jadi pemindaian tetap mempertahankannya.",
     "saving": "Menyimpan sampul…"
+  },
+  "match": {
+    "button": "Perbaiki kecocokan",
+    "title": "Perbaiki kecocokan untuk {{title}}",
+    "search": "Cari",
+    "searchPlaceholder": "Judul, atau tautan TMDB atau IMDb",
+    "year": "Tahun",
+    "looking": "Mencari di TMDB…",
+    "none": "Tidak ada hasil. Coba judul atau tahun lain, atau tempel tautan TMDB atau IMDb judul itu.",
+    "current": "Cocok sekarang",
+    "pick": "Cocokkan dengan {{title}}",
+    "refresh": "Segarkan detail",
+    "unmatch": "Hapus kecocokan",
+    "confirmUnmatch": "Hapus kecocokan {{title}}? Judul akan memakai nama berkasnya, tanpa deskripsi, pemeran, atau gambar dari internet.",
+    "locked": "Dipilih manual, jadi pemindaian tidak mengubahnya.",
+    "noKey": "Tambahkan kunci TMDB di Pengaturan → Poster dan detail untuk mencari judul.",
+    "saving": "Menyimpan…"
   },
   "import": {
     "title": "Impor dari server media lain",

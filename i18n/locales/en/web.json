@@ -631,7 +631,8 @@
     "closed": "Closed",
     "confirmReplace": "Delete this file of {{title}} and download another copy? The new one shows up after it downloads and the library is scanned.",
     "replaceFile": "Replace file",
-    "close": "Close"
+    "close": "Close",
+    "fixMatch": "Fix match"
   },
   "settings": {
     "tmdbNotice": "Posters and descriptions come from <site>TMDB</site>. This product uses the TMDB API but is not endorsed or certified by TMDB.",
@@ -942,6 +943,23 @@
     "reset": "Use the automatic cover",
     "chosenNote": "This cover was picked by hand, so scans keep it.",
     "saving": "Saving the cover…"
+  },
+  "match": {
+    "button": "Fix match",
+    "title": "Fix match for {{title}}",
+    "search": "Search",
+    "searchPlaceholder": "Title, or a TMDB or IMDb link",
+    "year": "Year",
+    "looking": "Looking on TMDB…",
+    "none": "Nothing found. Try another title or year, or paste the title's TMDB or IMDb link.",
+    "current": "Matched now",
+    "pick": "Match with {{title}}",
+    "refresh": "Refresh details",
+    "unmatch": "Unmatch",
+    "confirmUnmatch": "Unmatch {{title}}? It will go by its file name, without a description, cast or artwork from online.",
+    "locked": "Picked by hand, so scans leave it as it is.",
+    "noKey": "Add a TMDB key in Settings → Posters and details to look titles up.",
+    "saving": "Saving…"
   },
   "import": {
     "title": "Import from another media server",

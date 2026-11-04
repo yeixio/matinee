@@ -639,7 +639,8 @@
     "closed": "Zamknięte",
     "confirmReplace": "Usunąć ten plik {{title}} i pobrać inną kopię? Nowa pojawi się po pobraniu i przeskanowaniu biblioteki.",
     "replaceFile": "Zastąp plik",
-    "close": "Zamknij"
+    "close": "Zamknij",
+    "fixMatch": "Popraw dopasowanie"
   },
   "settings": {
     "tmdbNotice": "Plakaty i opisy pochodzą z <site>TMDB</site>. Ten produkt korzysta z API TMDB, ale nie jest przez TMDB popierany ani certyfikowany.",
@@ -950,6 +951,23 @@
     "reset": "Użyj automatycznej okładki",
     "chosenNote": "Ta okładka została wybrana ręcznie, więc skanowanie jej nie zmienia.",
     "saving": "Zapisywanie okładki…"
+  },
+  "match": {
+    "button": "Popraw dopasowanie",
+    "title": "Popraw dopasowanie: {{title}}",
+    "search": "Szukaj",
+    "searchPlaceholder": "Tytuł albo link do TMDB lub IMDb",
+    "year": "Rok",
+    "looking": "Szukam w TMDB…",
+    "none": "Nic nie znaleziono. Spróbuj innego tytułu lub roku albo wklej link TMDB lub IMDb.",
+    "current": "Obecne dopasowanie",
+    "pick": "Dopasuj do: {{title}}",
+    "refresh": "Odśwież szczegóły",
+    "unmatch": "Usuń dopasowanie",
+    "confirmUnmatch": "Usunąć dopasowanie {{title}}? Pozycja będzie opisana nazwą pliku, bez opisu, obsady i grafik z internetu.",
+    "locked": "Wybrane ręcznie, więc skanowanie go nie zmieni.",
+    "noKey": "Dodaj klucz TMDB w Ustawienia → Plakaty i szczegóły, aby wyszukiwać tytuły.",
+    "saving": "Zapisywanie…"
   },
   "import": {
     "title": "Importuj z innego serwera multimediów",

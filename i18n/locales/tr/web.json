@@ -631,7 +631,8 @@
     "closed": "Kapatıldı",
     "confirmReplace": "{{title}} yapımının bu dosyası silinip başka bir kopya indirilsin mi? Yenisi indirilip kütüphane tarandıktan sonra görünür.",
     "replaceFile": "Dosyayı değiştir",
-    "close": "Kapat"
+    "close": "Kapat",
+    "fixMatch": "Eşleşmeyi düzelt"
   },
   "settings": {
     "tmdbNotice": "Afişler ve açıklamalar <site>TMDB</site>'den gelir. Bu ürün TMDB API'sini kullanır ancak TMDB tarafından onaylanmış veya sertifikalandırılmış değildir.",
@@ -942,6 +943,23 @@
     "reset": "Otomatik kapağı kullan",
     "chosenNote": "Bu kapak elle seçildi, bu yüzden taramalar onu korur.",
     "saving": "Kapak kaydediliyor…"
+  },
+  "match": {
+    "button": "Eşleşmeyi düzelt",
+    "title": "{{title}} için eşleşmeyi düzelt",
+    "search": "Ara",
+    "searchPlaceholder": "Başlık veya bir TMDB ya da IMDb bağlantısı",
+    "year": "Yıl",
+    "looking": "TMDB'de aranıyor…",
+    "none": "Hiçbir şey bulunamadı. Başka bir başlık ya da yıl deneyin veya başlığın TMDB ya da IMDb bağlantısını yapıştırın.",
+    "current": "Şu anki eşleşme",
+    "pick": "{{title}} ile eşleştir",
+    "refresh": "Ayrıntıları yenile",
+    "unmatch": "Eşleşmeyi kaldır",
+    "confirmUnmatch": "{{title}} eşleşmesi kaldırılsın mı? Dosya adıyla, açıklama, oyuncular ve çevrimiçi görseller olmadan gösterilecek.",
+    "locked": "Elle seçildi, taramalar değiştirmez.",
+    "noKey": "Başlık aramak için Ayarlar → Afişler ve ayrıntılar bölümüne bir TMDB anahtarı ekleyin.",
+    "saving": "Kaydediliyor…"
   },
   "import": {
     "title": "Başka bir medya sunucusundan içe aktar",

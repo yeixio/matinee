@@ -270,6 +270,7 @@ func run() error {
 		}
 	}
 	apiServer.TrailerSource = tmdb
+	apiServer.Matcher, apiServer.Refetch = tmdb, fetcher.FetchLibrary
 	apiServer.People = tmdb
 	apiServer.Translate = fetcher.TranslateAll
 	apiServer.Keywords = tmdb

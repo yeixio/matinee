@@ -239,5 +239,12 @@
   "that_source_is_being_refreshed_already": "kilden oppdateres allerede",
   "the_channel_isnt_answering_right_now": "kanalen svarer ikke nå",
   "the_guides_address_isnt_a_web_address": "programoversiktens adresse er ikke en nettadresse",
-  "the_playlist_couldnt_be_read_reason": "listen kunne ikke leses: {{reason}}"
+  "the_playlist_couldnt_be_read_reason": "listen kunne ikke leses: {{reason}}",
+  "only_movies_and_shows_have_a_match_to_fix": "bare filmer og serier har et treff å rette",
+  "add_a_tmdb_key_in_settings_posters_and_details_to_look_titles_up": "legg til en TMDB-nøkkel i Innstillinger → Plakater og detaljer for å slå opp titler",
+  "tmdb_didnt_accept_the_key_in_settings_posters_and_details": "TMDB godtok ikke nøkkelen i Innstillinger → Plakater og detaljer",
+  "couldnt_reach_tmdb_try_again_in_a_moment": "fikk ikke kontakt med TMDB; prøv igjen om litt",
+  "tmdb_no_longer_has_this_title_fix_the_match_instead": "TMDB har ikke denne tittelen lenger; rett treffet i stedet",
+  "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "send TMDB-id, TMDB-adresse eller IMDb-id",
+  "tmdb_has_no_such_title": "TMDB har ingen slik tittel"
 }

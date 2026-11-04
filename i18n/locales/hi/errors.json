@@ -239,5 +239,12 @@
   "that_source_is_being_refreshed_already": "वह स्रोत पहले से रीफ़्रेश हो रहा है",
   "the_channel_isnt_answering_right_now": "चैनल अभी जवाब नहीं दे रहा",
   "the_guides_address_isnt_a_web_address": "गाइड का पता वेब पता नहीं है",
-  "the_playlist_couldnt_be_read_reason": "सूची पढ़ी नहीं जा सकी: {{reason}}"
+  "the_playlist_couldnt_be_read_reason": "सूची पढ़ी नहीं जा सकी: {{reason}}",
+  "only_movies_and_shows_have_a_match_to_fix": "केवल फ़िल्मों और शो का मिलान ठीक किया जा सकता है",
+  "add_a_tmdb_key_in_settings_posters_and_details_to_look_titles_up": "शीर्षक खोजने के लिए सेटिंग्स → पोस्टर और विवरण में TMDB कुंजी जोड़ें",
+  "tmdb_didnt_accept_the_key_in_settings_posters_and_details": "TMDB ने सेटिंग्स → पोस्टर और विवरण वाली कुंजी स्वीकार नहीं की",
+  "couldnt_reach_tmdb_try_again_in_a_moment": "TMDB तक नहीं पहुँच सके; थोड़ी देर में फिर कोशिश करें",
+  "tmdb_no_longer_has_this_title_fix_the_match_instead": "TMDB पर अब यह शीर्षक नहीं है; मिलान ठीक करें",
+  "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "TMDB id, TMDB पता या IMDb id भेजें",
+  "tmdb_has_no_such_title": "TMDB पर ऐसा कोई शीर्षक नहीं है"
 }

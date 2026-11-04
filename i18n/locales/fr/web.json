@@ -635,7 +635,8 @@
     "closed": "Fermé",
     "confirmReplace": "Supprimer ce fichier de {{title}} et télécharger une autre copie ? La nouvelle apparaît une fois téléchargée et la bibliothèque analysée.",
     "replaceFile": "Remplacer le fichier",
-    "close": "Fermer"
+    "close": "Fermer",
+    "fixMatch": "Corriger l'identification"
   },
   "settings": {
     "tmdbNotice": "Les affiches et descriptions proviennent de <site>TMDB</site>. Ce produit utilise l’API TMDB mais n’est ni approuvé ni certifié par TMDB.",
@@ -946,6 +947,23 @@
     "reset": "Utiliser la pochette automatique",
     "chosenNote": "Cette pochette a été choisie à la main, les analyses la conservent donc.",
     "saving": "Enregistrement de la pochette…"
+  },
+  "match": {
+    "button": "Corriger l'identification",
+    "title": "Corriger l'identification de {{title}}",
+    "search": "Rechercher",
+    "searchPlaceholder": "Titre, ou un lien TMDB ou IMDb",
+    "year": "Année",
+    "looking": "Recherche sur TMDB…",
+    "none": "Rien trouvé. Essayez un autre titre ou une autre année, ou collez le lien TMDB ou IMDb du titre.",
+    "current": "Identification actuelle",
+    "pick": "Identifier comme {{title}}",
+    "refresh": "Actualiser les détails",
+    "unmatch": "Retirer l'identification",
+    "confirmUnmatch": "Retirer l'identification de {{title}} ? Il sera affiché d'après son nom de fichier, sans description, distribution ni images en ligne.",
+    "locked": "Choisie à la main, les analyses n'y touchent pas.",
+    "noKey": "Ajoutez une clé TMDB dans Réglages → Affiches et détails pour rechercher des titres.",
+    "saving": "Enregistrement…"
   },
   "import": {
     "title": "Importer depuis un autre serveur multimédia",

@@ -239,5 +239,12 @@
   "that_source_is_being_refreshed_already": "ez a forrás már frissül",
   "the_channel_isnt_answering_right_now": "a csatorna most nem válaszol",
   "the_guides_address_isnt_a_web_address": "a műsorújság címe nem webcím",
-  "the_playlist_couldnt_be_read_reason": "a lista nem olvasható: {{reason}}"
+  "the_playlist_couldnt_be_read_reason": "a lista nem olvasható: {{reason}}",
+  "only_movies_and_shows_have_a_match_to_fix": "csak filmeknek és sorozatoknak van javítható egyezése",
+  "add_a_tmdb_key_in_settings_posters_and_details_to_look_titles_up": "a címek kereséséhez adj meg TMDB-kulcsot a Beállítások → Plakátok és részletek alatt",
+  "tmdb_didnt_accept_the_key_in_settings_posters_and_details": "a TMDB nem fogadta el a kulcsot (Beállítások → Plakátok és részletek)",
+  "couldnt_reach_tmdb_try_again_in_a_moment": "a TMDB nem érhető el; próbáld újra kicsit később",
+  "tmdb_no_longer_has_this_title_fix_the_match_instead": "a TMDB-n már nincs meg ez a cím; javítsd az egyezést",
+  "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "küldd el a TMDB-azonosítót, TMDB-címet vagy IMDb-azonosítót",
+  "tmdb_has_no_such_title": "a TMDB-n nincs ilyen cím"
 }

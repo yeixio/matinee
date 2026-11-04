@@ -239,5 +239,12 @@
   "that_source_is_being_refreshed_already": "sursa se reîmprospătează deja",
   "the_channel_isnt_answering_right_now": "canalul nu răspunde acum",
   "the_guides_address_isnt_a_web_address": "adresa ghidului nu este o adresă web",
-  "the_playlist_couldnt_be_read_reason": "lista nu a putut fi citită: {{reason}}"
+  "the_playlist_couldnt_be_read_reason": "lista nu a putut fi citită: {{reason}}",
+  "only_movies_and_shows_have_a_match_to_fix": "doar filmele și serialele au o potrivire de corectat",
+  "add_a_tmdb_key_in_settings_posters_and_details_to_look_titles_up": "adaugă o cheie TMDB în Setări → Afișe și detalii pentru a căuta titluri",
+  "tmdb_didnt_accept_the_key_in_settings_posters_and_details": "TMDB nu a acceptat cheia din Setări → Afișe și detalii",
+  "couldnt_reach_tmdb_try_again_in_a_moment": "TMDB nu poate fi accesat; încearcă din nou peste puțin timp",
+  "tmdb_no_longer_has_this_title_fix_the_match_instead": "TMDB nu mai are acest titlu; corectează potrivirea",
+  "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "trimite id-ul TMDB, adresa TMDB sau id-ul IMDb",
+  "tmdb_has_no_such_title": "TMDB nu are acest titlu"
 }

@@ -627,7 +627,8 @@
     "closed": "종료됨",
     "confirmReplace": "{{title}}의 이 파일을 삭제하고 다른 사본을 받을까요? 새 파일은 다운로드와 라이브러리 스캔이 끝나면 나타납니다.",
     "replaceFile": "파일 교체",
-    "close": "종료"
+    "close": "종료",
+    "fixMatch": "일치 수정"
   },
   "settings": {
     "tmdbNotice": "포스터와 설명은 <site>TMDB</site>에서 가져옵니다. 이 제품은 TMDB API를 사용하지만 TMDB의 보증이나 인증을 받지 않았습니다.",
@@ -938,6 +939,23 @@
     "reset": "자동 커버 사용",
     "chosenNote": "이 커버는 직접 고른 것이라 스캔해도 유지됩니다.",
     "saving": "커버 저장 중…"
+  },
+  "match": {
+    "button": "일치 수정",
+    "title": "{{title}} 일치 수정",
+    "search": "검색",
+    "searchPlaceholder": "제목 또는 TMDB나 IMDb 링크",
+    "year": "연도",
+    "looking": "TMDB에서 찾는 중…",
+    "none": "찾지 못했습니다. 다른 제목이나 연도를 시도하거나 작품의 TMDB 또는 IMDb 링크를 붙여 넣으세요.",
+    "current": "현재 일치",
+    "pick": "{{title}}(으)로 일치",
+    "refresh": "세부 정보 새로 고침",
+    "unmatch": "일치 해제",
+    "confirmUnmatch": "{{title}}의 일치를 해제할까요? 파일 이름으로 표시되며 설명, 출연진, 온라인 이미지가 없어집니다.",
+    "locked": "직접 선택했으므로 스캔해도 바뀌지 않습니다.",
+    "noKey": "제목을 찾으려면 설정 → 포스터 및 세부 정보에서 TMDB 키를 추가하세요.",
+    "saving": "저장 중…"
   },
   "import": {
     "title": "다른 미디어 서버에서 가져오기",

@@ -635,7 +635,8 @@
     "closed": "Închis",
     "confirmReplace": "Ștergi acest fișier al {{title}} și descarci altă copie? Cea nouă apare după ce se descarcă și biblioteca este scanată.",
     "replaceFile": "Înlocuiește fișierul",
-    "close": "Închide"
+    "close": "Închide",
+    "fixMatch": "Corectează potrivirea"
   },
   "settings": {
     "tmdbNotice": "Afișele și descrierile provin de la <site>TMDB</site>. Acest produs folosește API-ul TMDB, dar nu este aprobat sau certificat de TMDB.",
@@ -946,6 +947,23 @@
     "reset": "Folosește coperta automată",
     "chosenNote": "Această copertă a fost aleasă manual, așa că scanările o păstrează.",
     "saving": "Se salvează coperta…"
+  },
+  "match": {
+    "button": "Corectează potrivirea",
+    "title": "Corectează potrivirea pentru {{title}}",
+    "search": "Caută",
+    "searchPlaceholder": "Titlu sau un link TMDB ori IMDb",
+    "year": "An",
+    "looking": "Caut pe TMDB…",
+    "none": "Nimic găsit. Încearcă alt titlu sau an, ori lipește linkul TMDB sau IMDb al titlului.",
+    "current": "Potrivit acum",
+    "pick": "Potrivește cu {{title}}",
+    "refresh": "Reîmprospătează detaliile",
+    "unmatch": "Anulează potrivirea",
+    "confirmUnmatch": "Anulezi potrivirea pentru {{title}}? Va fi afișat după numele fișierului, fără descriere, distribuție sau imagini de pe internet.",
+    "locked": "Ales manual, scanările nu îl schimbă.",
+    "noKey": "Adaugă o cheie TMDB în Setări → Afișe și detalii pentru a căuta titluri.",
+    "saving": "Se salvează…"
   },
   "import": {
     "title": "Importă de pe alt server media",

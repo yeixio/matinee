@@ -239,5 +239,12 @@
   "that_source_is_being_refreshed_already": "essa fonte já está sendo atualizada",
   "the_channel_isnt_answering_right_now": "o canal não está respondendo agora",
   "the_guides_address_isnt_a_web_address": "o endereço do guia não é um endereço web",
-  "the_playlist_couldnt_be_read_reason": "não foi possível ler a lista: {{reason}}"
+  "the_playlist_couldnt_be_read_reason": "não foi possível ler a lista: {{reason}}",
+  "only_movies_and_shows_have_a_match_to_fix": "só filmes e séries têm correspondência para corrigir",
+  "add_a_tmdb_key_in_settings_posters_and_details_to_look_titles_up": "adicione uma chave do TMDB em Configurações → Pôsteres e detalhes para buscar títulos",
+  "tmdb_didnt_accept_the_key_in_settings_posters_and_details": "o TMDB não aceitou a chave em Configurações → Pôsteres e detalhes",
+  "couldnt_reach_tmdb_try_again_in_a_moment": "não foi possível acessar o TMDB; tente de novo em instantes",
+  "tmdb_no_longer_has_this_title_fix_the_match_instead": "o TMDB não tem mais este título; corrija a correspondência",
+  "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "envie o id do TMDB, o endereço do TMDB ou o id do IMDb",
+  "tmdb_has_no_such_title": "o TMDB não tem esse título"
 }

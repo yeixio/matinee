@@ -239,5 +239,12 @@
   "that_source_is_being_refreshed_already": "bu kaynak zaten yenileniyor",
   "the_channel_isnt_answering_right_now": "kanal şu an yanıt vermiyor",
   "the_guides_address_isnt_a_web_address": "yayın akışının adresi bir web adresi değil",
-  "the_playlist_couldnt_be_read_reason": "liste okunamadı: {{reason}}"
+  "the_playlist_couldnt_be_read_reason": "liste okunamadı: {{reason}}",
+  "only_movies_and_shows_have_a_match_to_fix": "yalnızca filmlerin ve dizilerin düzeltilecek eşleşmesi olur",
+  "add_a_tmdb_key_in_settings_posters_and_details_to_look_titles_up": "başlık aramak için Ayarlar → Afişler ve ayrıntılar bölümüne bir TMDB anahtarı ekleyin",
+  "tmdb_didnt_accept_the_key_in_settings_posters_and_details": "TMDB, Ayarlar → Afişler ve ayrıntılar'daki anahtarı kabul etmedi",
+  "couldnt_reach_tmdb_try_again_in_a_moment": "TMDB'ye ulaşılamadı; birazdan yeniden deneyin",
+  "tmdb_no_longer_has_this_title_fix_the_match_instead": "TMDB'de artık bu başlık yok; eşleşmeyi düzeltin",
+  "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "eşleştirmek için TMDB kimliğini, TMDB adresini veya IMDb kimliğini gönderin",
+  "tmdb_has_no_such_title": "TMDB'de böyle bir başlık yok"
 }
