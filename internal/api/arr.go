@@ -43,7 +43,7 @@ type badRequest string
 
 func (b badRequest) Error() string { return string(b) }
 
-func settingKey(app arr.App) string { return "arr_" + string(app) }
+func settingKey(app arr.App) string { return arr.SettingKey(app) }
 
 // appFor is the app that handles a kind of title.
 func appFor(kind string) (arr.App, bool) {
@@ -331,6 +331,9 @@ func (s *Server) putIntegration(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	s.arrCache.clear()
+	if s.OnArr != nil {
+		go s.OnArr()
+	}
 	writeJSON(w, http.StatusOK, viewIntegration(c))
 }
 
@@ -344,6 +347,9 @@ func (s *Server) deleteIntegration(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	s.arrCache.clear()
+	if s.OnArr != nil {
+		go s.OnArr()
+	}
 	w.WriteHeader(http.StatusNoContent)
 }
 

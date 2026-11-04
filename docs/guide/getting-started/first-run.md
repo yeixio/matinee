@@ -38,7 +38,7 @@ To jump to a folder, type its path into the box under the picker and press **Go*
 As soon as a library is added, Matinee:
 
 - **Scans the folders** and names each movie, show, season, episode, artist and album from the folder and file names. [Organizing your media](/docs/getting-started/organizing-media/) explains what it expects.
-- **Looks up artwork and details** (posters, backdrops, descriptions, cast, crew, age ratings) on TMDB, if the server has a [TMDB key](/docs/getting-started/posters-and-details/). Artwork files next to your media always win.
+- **Looks up artwork and details** (posters, backdrops, descriptions, cast, crew, age ratings) on TMDB, if the server has a [TMDB key](/docs/getting-started/posters-and-details/), or through Radarr and Sonarr once they're connected. Artwork files next to your media always win.
 - **Starts watching the folders**, so files you add later show up by themselves within seconds. See [New files](/docs/server/new-files/).
 - **Analyzes each file** slowly in the background for its resolution, HDR, audio and subtitles. See [Media analysis](/docs/server/media-analysis/).
 

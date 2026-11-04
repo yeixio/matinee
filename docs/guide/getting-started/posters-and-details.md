@@ -9,6 +9,14 @@ Matinee looks up posters, backdrops, descriptions, genres, cast and crew, age ra
 
 ![A movie's page with its poster, description, cast and crew from TMDB](../images/movie.webp)
 
+<!-- since: v0.2.2 -->
+## Without a key: through Radarr and Sonarr
+
+If you've connected Radarr or Sonarr (or Box Office, which stands in for both) in **Settings → Add-ons → Radarr and Sonarr** ([how](/docs/server/radarr-and-sonarr/)), Matinee gets posters, backdrops, descriptions, ratings and genres for movies and shows from them, with no TMDB key. They already have them for every title they manage, and they look up the rest the way their own **Add New** page does. Matinee fills these in as soon as you connect one.
+
+A TMDB key adds the rest: season and episode details, cast and crew, age ratings, trailers and translations. When you add one, titles matched through Radarr or Sonarr keep their match and get the rest of their details from TMDB.
+<!-- /since -->
+
 ## Get a key
 
 1. Sign up at [themoviedb.org](https://www.themoviedb.org/signup) and confirm your email.
