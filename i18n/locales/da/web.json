@@ -1117,6 +1117,11 @@
         "full": "{{name}} afkoder og koder"
       },
       "burnSub": "undertekster brændt ind",
+      "why": {
+        "codec": "enheden kan ikke afspille dette videoformat",
+        "hdr": "skærmen kan ikke vise denne HDR-type",
+        "quality": "en lavere kvalitet blev valgt"
+      },
       "started": "Startet {{time}}",
       "stop": "Stop",
       "stopHint": "Stopper FFmpeg. Hvis afspilleren stadig er åben, starter den en ny omkodning.",

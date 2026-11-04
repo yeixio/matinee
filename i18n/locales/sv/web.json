@@ -1117,6 +1117,11 @@
         "full": "{{name}} avkodar och kodar"
       },
       "burnSub": "undertexter inbrända",
+      "why": {
+        "codec": "enheten kan inte spela upp det här videoformatet",
+        "hdr": "skärmen kan inte visa den här HDR-typen",
+        "quality": "en lägre kvalitet valdes"
+      },
       "started": "Startade {{time}}",
       "stop": "Stoppa",
       "stopHint": "Stoppar FFmpeg. Om spelaren fortfarande är öppen startar den en ny omkodning.",

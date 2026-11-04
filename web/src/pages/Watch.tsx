@@ -9,6 +9,7 @@ import { Spinner } from '../components/ui'
 import { clock, episodeCode } from '../format'
 import i18n from '../i18n'
 import { canDirectPlay } from '../player/direct'
+import { currentPlays, playsQuery, repackages } from '../player/plays'
 import { defaultTrack, savePreference, SubtitleMenu, SubtitleOverlay } from '../player/Subtitles'
 import { UpNextCard, type UpNextMode } from '../player/UpNext'
 import { COUNTDOWN_SECONDS, stillWatching, upNextAt } from '../player/autoplay'
@@ -194,6 +195,10 @@ function Player({ id }: { id: number }) {
   const qualityNow = useRef<Quality>('original')
   const [level, setLevel] = useState<string>()
   const rebuffers = useRef(new Rebuffers())
+  // Auto is playing the original picture repackaged (see startHls), and
+  // whether it already gave that up for an adaptive stream.
+  const repacked = useRef(false)
+  const repackFellBack = useRef(false)
   // Watch together: the session this browser is in, if any.
   const [session, setSession] = useState<TogetherState | undefined>(together.state)
   useEffect(() => together.subscribe(setSession), [])
@@ -217,7 +222,12 @@ function Player({ id }: { id: number }) {
       hls.current = null
       burned.current = burn
       try {
-        const { url } = await api.startHls(item.id, Math.floor(at), burn, qualityNow.current)
+        // Auto takes the picture as it is, repackaged, when this browser
+        // decodes it, until the connection can't keep up with it.
+        const plays = currentPlays(el)
+        const repack = qualityNow.current === 'auto' && !burn && !repackFellBack.current && repackages(item, plays) && !overCap(item, streaming?.cap)
+        repacked.current = repack
+        const { url } = await api.startHls(item.id, Math.floor(at), burn, repack ? 'original' : qualityNow.current, playsQuery(plays))
         if (seq !== hlsSeq.current) return
         offset.current = Math.floor(at)
         // hls.js is only downloaded when a file needs converting.
@@ -246,7 +256,7 @@ function Player({ id }: { id: number }) {
         setError(e instanceof Error ? e.message : i18n.t('player.failed'))
       }
     },
-    [item, position],
+    [item, position, streaming],
   )
   const playDirect = useCallback(
     (at: number) => {
@@ -300,6 +310,7 @@ function Player({ id }: { id: number }) {
   // Picking a quality starts playback again at the same spot.
   const selectQuality = (q: Quality) => {
     qualityNow.current = q
+    repackFellBack.current = false
     setQuality(q)
     if (!burned.current && direct(q)) playDirect(position())
     else startHls(position())
@@ -308,7 +319,9 @@ function Player({ id }: { id: number }) {
   // Auto playing a file as it is moves to an adaptive stream when the
   // connection can't keep up with it.
   const fallBack = () => {
-    if (modeNow.current !== 'direct' || qualityNow.current !== 'auto' || !streaming?.adaptive) return false
+    const asIs = modeNow.current === 'direct' || (modeNow.current === 'hls' && repacked.current)
+    if (!asIs || qualityNow.current !== 'auto' || !streaming?.adaptive) return false
+    repackFellBack.current = true
     flash(tr('common:quality.fellBack'), 6000)
     startHls(position())
     return true
@@ -432,7 +445,7 @@ function Player({ id }: { id: number }) {
   // without an error (a file playing directly just stops arriving).
   // Auto gives a file playing as it is less time before moving to an
   // adaptive stream.
-  const canFallBack = mode === 'direct' && quality === 'auto' && !!streaming?.adaptive
+  const canFallBack = (mode === 'direct' || (mode === 'hls' && repacked.current)) && quality === 'auto' && !!streaming?.adaptive
   useEffect(() => {
     if (!waiting || paused || error || away) return
     const t = window.setTimeout(() => recoverRef.current?.(position(), 'stall'), canFallBack ? LONG_STALL_MS : 10_000)

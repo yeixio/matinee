@@ -1133,6 +1133,11 @@
         "full": "{{name}} dekoduje i koduje"
       },
       "burnSub": "wypalone napisy",
+      "why": {
+        "codec": "urządzenie nie odtwarza tego formatu wideo",
+        "hdr": "ekran nie wyświetla tego HDR",
+        "quality": "wybrano niższą jakość"
+      },
       "started": "Rozpoczęte {{time}}",
       "stop": "Zatrzymaj",
       "stopHint": "Zatrzymuje FFmpeg. Jeśli odtwarzacz jest nadal otwarty, rozpocznie nowe transkodowanie.",

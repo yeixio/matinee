@@ -1125,6 +1125,11 @@
         "full": "{{name}} decodifica y codifica"
       },
       "burnSub": "subtítulos incrustados",
+      "why": {
+        "codec": "el dispositivo no reproduce este formato de vídeo",
+        "hdr": "la pantalla no muestra este HDR",
+        "quality": "se eligió una calidad menor"
+      },
       "started": "Empezó {{time}}",
       "stop": "Detener",
       "stopHint": "Detiene FFmpeg. Si el reproductor sigue abierto, empieza una nueva transcodificación.",

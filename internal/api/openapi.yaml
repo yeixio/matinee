@@ -2464,6 +2464,24 @@ paths:
             `original` (the default) for the file's own picture where it can.
             With adaptive quality off every request gets `original`; away from
             home a cap brings anything better down to it. See `GET /streaming`.
+        - name: video
+          in: query
+          schema: { type: string, example: "h264,hevc,av1" }
+          description: |
+            The video codecs the player decodes, comma separated: h264, hevc,
+            av1. A picture it decodes is copied (repackaged) rather than
+            converted, keeping 4K and HDR, when the screen shows its HDR, no
+            picture subtitle is burned in and the quality asked for is the
+            original. HEVC and AV1 come in fMP4 pieces (init.mp4 and .m4s).
+            Left out, only H.264 is copied.
+        - name: hdr
+          in: query
+          schema: { type: string, example: "hdr10,hlg" }
+          description: |
+            The HDR the screen shows, comma separated: hdr10, hdr10+, hlg,
+            dolby-vision. HDR10+ falls back to HDR10, and Dolby Vision to the
+            HDR10 or HLG under it when the file has one. Left out, the screen
+            is taken to be SDR.
       responses:
         "200":
           description: An HLS playlist to play.

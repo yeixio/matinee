@@ -1117,6 +1117,11 @@
         "full": "{{name}} dekodiert und kodiert"
       },
       "burnSub": "Untertitel eingebrannt",
+      "why": {
+        "codec": "das Gerät kann dieses Videoformat nicht abspielen",
+        "hdr": "der Bildschirm kann dieses HDR nicht zeigen",
+        "quality": "eine niedrigere Qualität wurde gewählt"
+      },
       "started": "Gestartet {{time}}",
       "stop": "Stoppen",
       "stopHint": "Beendet FFmpeg. Ist der Player noch offen, startet er eine neue Transkodierung.",

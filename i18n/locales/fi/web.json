@@ -1117,6 +1117,11 @@
         "full": "{{name}} purkaa ja koodaa"
       },
       "burnSub": "tekstitys poltettu kuvaan",
+      "why": {
+        "codec": "laite ei toista tätä videomuotoa",
+        "hdr": "näyttö ei näytä tätä HDR:ää",
+        "quality": "valittiin heikompi laatu"
+      },
       "started": "Alkoi {{time}}",
       "stop": "Pysäytä",
       "stopHint": "Pysäyttää FFmpegin. Jos soitin on yhä auki, se aloittaa uuden muunnoksen.",

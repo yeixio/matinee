@@ -24,6 +24,11 @@ type SessionInfo struct {
 	// repackages it (the sound may still be converted), "audio" converts
 	// sound alone.
 	Kind string `json:"kind"`
+	// Why says why the picture is converted: codec (the player doesn't
+	// decode it), hdr (its screen doesn't show the file's HDR), subtitle
+	// (one is drawn in) or quality (a lower one was asked for). Empty
+	// when the picture is copied, or for sound.
+	Why string `json:"why,omitempty"`
 	// Accel names the hardware doing the work, such as "VAAPI"; empty for
 	// the CPU. Mode is how much of it is on the GPU: cpu, encode or full.
 	Accel     string   `json:"accel,omitempty"`
@@ -49,7 +54,7 @@ func (t *Transcoder) Sessions() []SessionInfo {
 		case s.copyVideo:
 			info.Kind = "copy"
 		default:
-			info.Kind = "video"
+			info.Kind, info.Why = "video", s.why
 		}
 		if s.accel != nil {
 			info.Accel, info.AccelID = s.accel.Name, string(s.accel.Kind)

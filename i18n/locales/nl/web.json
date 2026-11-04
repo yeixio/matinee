@@ -1117,6 +1117,11 @@
         "full": "{{name}} decodeert en codeert"
       },
       "burnSub": "ondertiteling ingebrand",
+      "why": {
+        "codec": "het apparaat speelt dit videoformaat niet af",
+        "hdr": "het scherm kan deze HDR niet tonen",
+        "quality": "er is een lagere kwaliteit gekozen"
+      },
       "started": "Gestart {{time}}",
       "stop": "Stoppen",
       "stopHint": "Stopt FFmpeg. Staat de speler nog open, dan start die een nieuwe transcodering.",

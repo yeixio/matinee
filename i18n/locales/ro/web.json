@@ -1125,6 +1125,11 @@
         "full": "{{name}} decodifică și codifică"
       },
       "burnSub": "subtitrări încorporate",
+      "why": {
+        "codec": "dispozitivul nu redă acest format video",
+        "hdr": "ecranul nu afișează acest HDR",
+        "quality": "s-a ales o calitate mai mică"
+      },
       "started": "Pornită {{time}}",
       "stop": "Oprește",
       "stopHint": "Oprește FFmpeg. Dacă playerul e încă deschis, pornește o nouă transcodare.",

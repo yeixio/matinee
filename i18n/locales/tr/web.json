@@ -1117,6 +1117,11 @@
         "full": "{{name}} çözüyor ve kodluyor"
       },
       "burnSub": "altyazılar gömülü",
+      "why": {
+        "codec": "cihaz bu video biçimini oynatamıyor",
+        "hdr": "ekran bu HDR'yi gösteremiyor",
+        "quality": "daha düşük bir kalite seçildi"
+      },
       "started": "Başladı: {{time}}",
       "stop": "Durdur",
       "stopHint": "FFmpeg’i durdurur. Oynatıcı hâlâ açıksa yeni bir dönüştürme başlatır.",

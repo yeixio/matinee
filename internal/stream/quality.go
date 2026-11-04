@@ -86,11 +86,11 @@ func renditions(steps []Step) []hwaccel.Rendition {
 	return out
 }
 
-// fits says whether the original H.264 picture can be sent as it is at
-// step, judging its bitrate from the file's size (an overestimate, since
+// fits says whether the original picture can be sent as it is at step,
+// judging its bitrate from the file's size (an overestimate, since
 // the size includes the audio).
 func fits(it store.Item, step Step) bool {
-	if it.VideoCodec != "h264" || it.Width == nil || *it.Width > step.Width || it.DurationMs == nil || *it.DurationMs <= 0 {
+	if it.Width == nil || *it.Width > step.Width || it.DurationMs == nil || *it.DurationMs <= 0 {
 		return false
 	}
 	bps := it.Size * 8 * 1000 / *it.DurationMs

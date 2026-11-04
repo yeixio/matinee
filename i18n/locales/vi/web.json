@@ -1109,6 +1109,11 @@
         "full": "{{name}} giải mã và mã hóa"
       },
       "burnSub": "phụ đề ghi vào hình",
+      "why": {
+        "codec": "thiết bị không phát được định dạng video này",
+        "hdr": "màn hình không hiển thị được HDR này",
+        "quality": "đã chọn chất lượng thấp hơn"
+      },
       "started": "Bắt đầu {{time}}",
       "stop": "Dừng",
       "stopHint": "Dừng FFmpeg. Nếu trình phát vẫn mở, nó sẽ bắt đầu một lượt chuyển mã mới.",
