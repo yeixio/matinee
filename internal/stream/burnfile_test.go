@@ -4,12 +4,12 @@ import (
 	"bytes"
 	"context"
 	"encoding/binary"
-	"io"
+	"encoding/json"
 	"log/slog"
 	"os"
 	"os/exec"
 	"path/filepath"
-	"strconv"
+	"strings"
 	"testing"
 	"time"
 
@@ -65,7 +65,8 @@ func TestStartBurnsSubtitleFile(t *testing.T) {
 	sup := filepath.Join(dir, "Movie.en.sup")
 	os.WriteFile(sup, pgsSquare(), 0o644)
 
-	tr := NewTranscoder(ffmpeg, filepath.Join(dir, "cache"), nil, slog.New(slog.NewTextHandler(io.Discard, nil)))
+	var logs bytes.Buffer
+	tr := NewTranscoder(ffmpeg, filepath.Join(dir, "cache"), nil, slog.New(slog.NewJSONHandler(&logs, &slog.HandlerOptions{Level: slog.LevelDebug})))
 	defer tr.Close()
 	it := store.Item{ID: 1, Path: src, VideoCodec: "h264", Width: intp(320)}
 	// middle is the brightness of the picture's centre in a stream's first frame.
@@ -73,15 +74,39 @@ func TestStartBurnsSubtitleFile(t *testing.T) {
 		t.Helper()
 		id, err := tr.StartFor(context.Background(), user, it, start, Request{BurnSub: -1, BurnFile: sup})
 		if err != nil {
-			// DIAG: what FFmpeg says when it runs the same graph.
-			off := strconv.FormatFloat(subtitleFileStart(sup)-start, 'f', 3, 64)
+			// DIAG: what FFmpeg says when it runs the same command.
+			var args []string
+			for _, line := range bytes.Split(logs.Bytes(), []byte("\n")) {
+				var e struct {
+					Msg  string   `json:"msg"`
+					Args []string `json:"args"`
+				}
+				if json.Unmarshal(line, &e) == nil && e.Msg == "ffmpeg command" {
+					args = e.Args
+				}
+			}
+			for i := range args {
+				if args[i] == "error" && i > 0 && args[i-1] == "-loglevel" {
+					args[i] = "verbose"
+				}
+			}
+			os.RemoveAll(filepath.Join(dir, "cache", "diag"))
+			os.MkdirAll(filepath.Join(dir, "cache", "diag"), 0o755)
+			for i := range args {
+				args[i] = strings.ReplaceAll(args[i], filepath.Join(dir, "cache", id), filepath.Join(dir, "cache", "diag"))
+			}
 			ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 			defer cancel()
-			out, _ := exec.CommandContext(ctx, ffmpeg, "-hide_banner", "-loglevel", "debug", "-ss", strconv.FormatFloat(start, 'f', 3, 64), "-i", src, "-itsoffset", off, "-i", sup,
-				"-filter_complex", "[1:s:0][0:v:0]scale2ref[sub][vid];[vid][sub]overlay=eof_action=pass", "-frames:v", "5", "-f", "null", "-").CombinedOutput()
-			if len(out) > 6000 {
-				out = append(out[:2000:2000], out[len(out)-4000:]...)
+			out, _ := exec.CommandContext(ctx, ffmpeg, args...).CombinedOutput()
+			if len(out) > 8000 {
+				out = append(out[:3000:3000], out[len(out)-5000:]...)
 			}
+			files, _ := os.ReadDir(filepath.Join(dir, "cache", "diag"))
+			var names []string
+			for _, f := range files {
+				names = append(names, f.Name())
+			}
+			t.Logf("args %q\nmade %v", args, names)
 			t.Fatalf("%v (start %v)\n%s", err, start, out)
 		}
 		px, err := exec.Command(ffmpeg, "-v", "error", "-i", filepath.Join(dir, "cache", id, "seg00000.ts"),

@@ -372,6 +372,7 @@ func (t *Transcoder) start(ctx context.Context, userID int64, it store.Item, sta
 		args = append(args, "-hls_segment_filename", filepath.Join(dir, "seg%05d"+ext), filepath.Join(dir, "index.m3u8"))
 	}
 
+	t.Log.Debug("ffmpeg command", "session", id, "args", args)
 	cmd := exec.Command(t.FFmpeg, args...)
 	cmd.Stderr = &logWriter{log: t.Log, session: id}
 	if err := cmd.Start(); err != nil {
