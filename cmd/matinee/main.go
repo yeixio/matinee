@@ -37,6 +37,7 @@ import (
 	"github.com/yeixio/matinee/internal/intro"
 	"github.com/yeixio/matinee/internal/kube"
 	"github.com/yeixio/matinee/internal/live"
+	"github.com/yeixio/matinee/internal/livetv"
 	"github.com/yeixio/matinee/internal/lyrics"
 	"github.com/yeixio/matinee/internal/metadata"
 	"github.com/yeixio/matinee/internal/plugin"
@@ -319,6 +320,10 @@ func run() error {
 	scanner.Refresh = podcasts.RefreshStale
 	stream.AllowHomeNetwork.Store(cfg.PodcastsHomeNetwork)
 	go podcasts.Run(ctx)
+	// Live TV sources' channels and guides, and checks of their streams.
+	liveTV := &livetv.Manager{Store: db, Log: log}
+	apiServer.LiveTV = liveTV
+	go liveTV.Run(ctx)
 
 	srv := &http.Server{
 		Addr:              cfg.Addr,

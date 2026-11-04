@@ -13,7 +13,8 @@
     "settings": "設定",
     "switchProfile": "切換個人資料",
     "signOut": "登出",
-    "discover": "探索"
+    "discover": "探索",
+    "liveTV": "直播電視"
   },
   "cantReachServer": "無法連線伺服器。正在重試…",
   "player": {
@@ -853,6 +854,10 @@
       "health": {
         "title": "伺服器狀態",
         "hint": "負載、播放、工作、問題和記錄"
+      },
+      "live-tv": {
+        "title": "直播電視",
+        "hint": "頻道清單與節目表"
       }
     }
   },
@@ -1248,6 +1253,46 @@
       "copy": "複製",
       "copied": "已複製",
       "example": "用於 prometheus.yml"
+    }
+  },
+  "live": {
+    "settings": {
+      "intro": "加入電視頻道清單（M3U），若有節目表（XMLTV）也一併加入。不再回應的頻道會被隱藏。兒童設定檔和朋友看不到直播電視。",
+      "add": "加入頻道",
+      "suggested": "公開頻道（iptv-org）",
+      "ownPlaylist": "你自己的清單",
+      "iptvOrgIntro": "<site>iptv-org</site> 收錄在網路上公開播放的電視頻道。選擇國家、類別或語言。",
+      "yourCall": "iptv-org 收錄的部分串流可能不是來自頻道本身，或不是給你所在國家的。請只觀看你被允許觀看的內容。",
+      "countries": "國家",
+      "categories": "類別",
+      "languages": "語言",
+      "anyPick": "輸入以尋找",
+      "unpick": "移除 {{name}}",
+      "pickHint": "頻道需要符合每種類型中的一個選擇。",
+      "pickNothing": "什麼都不選會加入所有頻道：成千上萬個。",
+      "playlist": "清單位址（M3U）",
+      "guide": "節目表位址（XMLTV，選填）",
+      "guideHint": ".xml 或 .xml.gz 檔案。如果清單自帶節目表，請留空。",
+      "name": "名稱（選填）",
+      "addThis": "加入",
+      "reading": "正在讀取頻道…",
+      "counts": "頻道：{{count}} · 播出中：{{playing}} · 無回應：{{broken}} · 已隱藏：{{hidden}}",
+      "guideShows": "節目表中的節目：{{count}}",
+      "guideFailed": "無法讀取節目表：{{reason}}",
+      "noGuide": "無節目表",
+      "guideLoading": "正在讀取節目表…",
+      "refreshFailed": "上次重新整理失敗：{{reason}}",
+      "refresh": "立即重新整理",
+      "remove": "移除",
+      "removeConfirm": "移除 {{name}} 及其頻道？",
+      "broken": "無回應",
+      "works": "播出中",
+      "notChecked": "尚未檢查",
+      "hidden": "已隱藏",
+      "hide": "隱藏",
+      "show": "顯示",
+      "more": "顯示前 300 個。尋找頻道以查看其他頻道。",
+      "everything": "全部"
     }
   }
 }

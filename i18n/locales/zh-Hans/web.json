@@ -13,7 +13,8 @@
     "settings": "设置",
     "switchProfile": "切换个人资料",
     "signOut": "退出登录",
-    "discover": "发现"
+    "discover": "发现",
+    "liveTV": "直播电视"
   },
   "cantReachServer": "无法连接服务器。正在重试…",
   "player": {
@@ -853,6 +854,10 @@
       "health": {
         "title": "服务器状态",
         "hint": "负载、播放、任务、问题和日志"
+      },
+      "live-tv": {
+        "title": "直播电视",
+        "hint": "频道列表和节目单"
       }
     }
   },
@@ -1248,6 +1253,46 @@
       "copy": "复制",
       "copied": "已复制",
       "example": "用于 prometheus.yml"
+    }
+  },
+  "live": {
+    "settings": {
+      "intro": "添加电视频道列表（M3U），如有节目单（XMLTV）也一并添加。不再响应的频道会被隐藏。儿童资料和好友看不到直播电视。",
+      "add": "添加频道",
+      "suggested": "公开频道（iptv-org）",
+      "ownPlaylist": "你自己的列表",
+      "iptvOrgIntro": "<site>iptv-org</site> 收录在互联网上公开播放的电视频道。选择国家、类别或语言。",
+      "yourCall": "iptv-org 收录的部分流可能并非来自频道本身，或并非面向你所在的国家。请只观看你被允许观看的内容。",
+      "countries": "国家",
+      "categories": "类别",
+      "languages": "语言",
+      "anyPick": "输入以查找",
+      "unpick": "移除 {{name}}",
+      "pickHint": "频道需要符合每种类型中的一个选择。",
+      "pickNothing": "什么都不选会添加所有频道：成千上万个。",
+      "playlist": "列表地址（M3U）",
+      "guide": "节目单地址（XMLTV，可选）",
+      "guideHint": ".xml 或 .xml.gz 文件。如果列表自带节目单，请留空。",
+      "name": "名称（可选）",
+      "addThis": "添加",
+      "reading": "正在读取频道…",
+      "counts": "频道：{{count}} · 播出中：{{playing}} · 无响应：{{broken}} · 已隐藏：{{hidden}}",
+      "guideShows": "节目单中的节目：{{count}}",
+      "guideFailed": "无法读取节目单：{{reason}}",
+      "noGuide": "无节目单",
+      "guideLoading": "正在读取节目单…",
+      "refreshFailed": "上次刷新失败：{{reason}}",
+      "refresh": "立即刷新",
+      "remove": "移除",
+      "removeConfirm": "移除 {{name}} 及其频道？",
+      "broken": "无响应",
+      "works": "播出中",
+      "notChecked": "尚未检查",
+      "hidden": "已隐藏",
+      "hide": "隐藏",
+      "show": "显示",
+      "more": "显示前 300 个。查找频道以查看其他频道。",
+      "everything": "全部"
     }
   }
 }

@@ -1907,6 +1907,167 @@ paths:
         "204": { description: Removed. }
         "403": { $ref: "#/components/responses/Error" }
         "404": { $ref: "#/components/responses/Error" }
+  /live/channels:
+    get:
+      summary: Live TV channels that play (the household, not on kids profiles)
+      description: Channels from every live TV source in the sources' order, leaving out ones an admin hid and ones whose streams stopped answering. Each has what's on now and next from its source's guide, when it has one.
+      responses:
+        "200":
+          description: The channels, and the categories they're in.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  channels: { type: array, items: { $ref: "#/components/schemas/LiveListing" } }
+                  categories: { type: array, items: { type: string } }
+        "403": { $ref: "#/components/responses/Error" }
+  /live/guide:
+    get:
+      summary: What's on every live TV channel over some hours
+      parameters:
+        - { name: from, in: query, description: Unix seconds; now when left out., schema: { type: integer } }
+        - { name: hours, in: query, description: 1 to 24; 4 when left out., schema: { type: integer } }
+      responses:
+        "200":
+          description: The channels and their shows between from and to.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  from: { type: integer }
+                  to: { type: integer }
+                  channels: { type: array, items: { $ref: "#/components/schemas/LiveChannel" } }
+                  programs: { type: array, items: { $ref: "#/components/schemas/LiveProgram" } }
+        "403": { $ref: "#/components/responses/Error" }
+  /live/channels/{id}:
+    get:
+      summary: A live TV channel, with what's on it over the next day
+      parameters: [{ name: id, in: path, required: true, schema: { type: string } }]
+      responses:
+        "200":
+          description: The channel and its shows.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  channel: { $ref: "#/components/schemas/LiveChannel" }
+                  programs: { type: array, items: { $ref: "#/components/schemas/LiveProgram" } }
+        "404": { $ref: "#/components/responses/Error" }
+    put:
+      summary: Hide a live TV channel from everyone, or show it again (admins)
+      parameters: [{ name: id, in: path, required: true, schema: { type: string } }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { type: object, properties: { hidden: { type: boolean } } }
+      responses:
+        "200":
+          description: The channel.
+          content: { application/json: { schema: { $ref: "#/components/schemas/LiveChannel" } } }
+        "404": { $ref: "#/components/responses/Error" }
+  /live/channels/{id}/play:
+    post:
+      summary: Where to play a live TV channel
+      description: An HLS playlist on this server. A channel that streams as HLS comes through the server's relay; one that sends another kind of stream, such as MPEG-TS, is repackaged as HLS. Players that can't send headers add `?token=`, as for other streams, and every link in the playlists carries it on.
+      parameters: [{ name: id, in: path, required: true, schema: { type: string } }]
+      responses:
+        "200":
+          description: The playlist.
+          content:
+            application/json:
+              schema: { type: object, properties: { url: { type: string }, live: { type: boolean } } }
+        "404": { $ref: "#/components/responses/Error" }
+        "502": { $ref: "#/components/responses/Error" }
+  /live/channels/{id}/hls:
+    get:
+      summary: The relay for a live TV channel's HLS stream
+      description: Links come only from /live/channels/{id}/play and the playlists this returns; each is signed, and they stop working when the server restarts.
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+        - { name: u, in: query, required: true, schema: { type: string } }
+        - { name: s, in: query, required: true, schema: { type: string } }
+      responses:
+        "200": { description: A playlist (rewritten to link back here) or a piece of the stream. }
+        "403": { $ref: "#/components/responses/Error" }
+        "502": { $ref: "#/components/responses/Error" }
+  /live/sources:
+    get:
+      summary: Live TV sources (admins)
+      responses:
+        "200":
+          description: The sources, oldest first.
+          content: { application/json: { schema: { type: array, items: { $ref: "#/components/schemas/LiveSource" } } } }
+    post:
+      summary: Add a live TV source (admins)
+      description: An M3U playlist (`playlistUrl`), or channels picked from iptv-org's lists (`iptvOrg`), with an optional XMLTV guide (`guideUrl`; a playlist that names its own guide in its header uses that one). Its channels are read right away; the guide and the checks of each channel's stream follow in the background.
+      requestBody:
+        required: true
+        content: { application/json: { schema: { $ref: "#/components/schemas/LiveSourceRequest" } } }
+      responses:
+        "201":
+          description: The source.
+          content: { application/json: { schema: { $ref: "#/components/schemas/LiveSource" } } }
+        "400": { $ref: "#/components/responses/Error" }
+        "502": { $ref: "#/components/responses/Error" }
+  /live/sources/{id}:
+    put:
+      summary: Change a live TV source and read it again (admins)
+      parameters: [{ name: id, in: path, required: true, schema: { type: string } }]
+      requestBody:
+        required: true
+        content: { application/json: { schema: { $ref: "#/components/schemas/LiveSourceRequest" } } }
+      responses:
+        "200":
+          description: The source.
+          content: { application/json: { schema: { $ref: "#/components/schemas/LiveSource" } } }
+        "400": { $ref: "#/components/responses/Error" }
+        "404": { $ref: "#/components/responses/Error" }
+        "502": { $ref: "#/components/responses/Error" }
+    delete:
+      summary: Remove a live TV source with its channels (admins)
+      parameters: [{ name: id, in: path, required: true, schema: { type: string } }]
+      responses:
+        "204": { description: Removed. }
+        "404": { $ref: "#/components/responses/Error" }
+  /live/sources/{id}/refresh:
+    post:
+      summary: Read a live TV source's channels again now (admins)
+      description: Sources are read again every 12 hours by themselves, and each channel's stream is checked every 6 hours.
+      parameters: [{ name: id, in: path, required: true, schema: { type: string } }]
+      responses:
+        "200":
+          description: The source.
+          content: { application/json: { schema: { $ref: "#/components/schemas/LiveSource" } } }
+        "404": { $ref: "#/components/responses/Error" }
+        "409": { $ref: "#/components/responses/Error" }
+        "502": { $ref: "#/components/responses/Error" }
+  /live/sources/{id}/channels:
+    get:
+      summary: All of a live TV source's channels, broken and hidden ones too (admins)
+      parameters: [{ name: id, in: path, required: true, schema: { type: string } }]
+      responses:
+        "200":
+          description: The channels.
+          content: { application/json: { schema: { type: array, items: { $ref: "#/components/schemas/LiveChannel" } } } }
+  /live/iptv-org:
+    get:
+      summary: The countries, categories and languages to pick from iptv-org (admins)
+      responses:
+        "200":
+          description: What can be picked.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  countries: { type: array, items: { $ref: "#/components/schemas/LiveChoice" } }
+                  categories: { type: array, items: { $ref: "#/components/schemas/LiveChoice" } }
+                  languages: { type: array, items: { $ref: "#/components/schemas/LiveChoice" } }
+        "502": { $ref: "#/components/responses/Error" }
   /items/{id}/now:
     get:
       summary: What a radio station is playing
@@ -3814,6 +3975,72 @@ components:
             type: array
             items: { $ref: "#/components/schemas/Item" }
   schemas:
+    LiveChannel:
+      type: object
+      properties:
+        id: { type: string }
+        sourceId: { type: string }
+        name: { type: string }
+        number: { type: string }
+        logo: { type: string }
+        categories: { type: array, items: { type: string } }
+        hidden: { type: boolean, description: An admin hid it. }
+        broken: { type: boolean, description: Its stream failed its last checks. }
+        checkedAt: { type: integer }
+    LiveListing:
+      allOf:
+        - { $ref: "#/components/schemas/LiveChannel" }
+        - type: object
+          properties:
+            now: { $ref: "#/components/schemas/LiveProgram" }
+            next: { $ref: "#/components/schemas/LiveProgram" }
+    LiveProgram:
+      type: object
+      properties:
+        channelId: { type: string }
+        start: { type: integer, description: Unix seconds. }
+        stop: { type: integer }
+        title: { type: string }
+        subtitle: { type: string }
+        description: { type: string }
+        category: { type: string }
+        image: { type: string }
+    LiveFilter:
+      type: object
+      properties:
+        countries: { type: array, items: { type: string }, description: Two letters, such as US. }
+        categories: { type: array, items: { type: string }, description: Such as news. }
+        languages: { type: array, items: { type: string }, description: Three letters, such as eng. }
+    LiveSourceRequest:
+      type: object
+      properties:
+        name: { type: string }
+        playlistUrl: { type: string }
+        iptvOrg: { $ref: "#/components/schemas/LiveFilter" }
+        guideUrl: { type: string }
+    LiveSource:
+      type: object
+      properties:
+        id: { type: string }
+        name: { type: string }
+        playlistUrl: { type: string }
+        iptvOrg: { $ref: "#/components/schemas/LiveFilter" }
+        guideUrl: { type: string }
+        createdAt: { type: integer }
+        refreshedAt: { type: integer }
+        error: { type: string, description: Why the last refresh failed. }
+        guideAt: { type: integer }
+        guideError: { type: string }
+        channels: { type: integer }
+        broken: { type: integer }
+        hidden: { type: integer }
+        programs: { type: integer }
+    LiveChoice:
+      type: object
+      properties:
+        code: { type: string }
+        name: { type: string }
+        flag: { type: string }
     Alert:
       type: object
       properties:

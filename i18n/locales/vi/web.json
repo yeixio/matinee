@@ -13,7 +13,8 @@
     "settings": "Cài đặt",
     "switchProfile": "Đổi hồ sơ",
     "signOut": "Đăng xuất",
-    "discover": "Khám phá"
+    "discover": "Khám phá",
+    "liveTV": "Truyền hình trực tiếp"
   },
   "cantReachServer": "Không kết nối được máy chủ. Đang thử lại…",
   "player": {
@@ -853,6 +854,10 @@
       "health": {
         "title": "Tình trạng máy chủ",
         "hint": "Tải, phát, tác vụ, sự cố và nhật ký"
+      },
+      "live-tv": {
+        "title": "Truyền hình trực tiếp",
+        "hint": "Danh sách kênh và lịch phát sóng"
       }
     }
   },
@@ -1248,6 +1253,46 @@
       "copy": "Sao chép",
       "copied": "Đã sao chép",
       "example": "Cho prometheus.yml"
+    }
+  },
+  "live": {
+    "settings": {
+      "intro": "Thêm danh sách kênh truyền hình (M3U), kèm lịch phát sóng (XMLTV) nếu có. Kênh ngừng phản hồi sẽ bị ẩn. Hồ sơ trẻ em và bạn bè không thấy truyền hình trực tiếp.",
+      "add": "Thêm kênh",
+      "suggested": "Kênh công khai (iptv-org)",
+      "ownPlaylist": "Danh sách của bạn",
+      "iptvOrgIntro": "<site>iptv-org</site> liệt kê các kênh truyền hình phát công khai trên internet. Chọn quốc gia, thể loại hoặc ngôn ngữ.",
+      "yourCall": "Một số luồng iptv-org liệt kê có thể không đến từ chính kênh đó hoặc không dành cho quốc gia của bạn. Chỉ xem những gì bạn được phép.",
+      "countries": "Quốc gia",
+      "categories": "Thể loại",
+      "languages": "Ngôn ngữ",
+      "anyPick": "Gõ để tìm",
+      "unpick": "Bỏ {{name}}",
+      "pickHint": "Kênh phải khớp một lựa chọn của mỗi loại.",
+      "pickNothing": "Không chọn gì thì mọi kênh đều được thêm: hàng nghìn.",
+      "playlist": "Địa chỉ danh sách (M3U)",
+      "guide": "Địa chỉ lịch phát sóng (XMLTV, không bắt buộc)",
+      "guideHint": "Tệp .xml hoặc .xml.gz. Để trống nếu danh sách tự ghi lịch của nó.",
+      "name": "Tên (không bắt buộc)",
+      "addThis": "Thêm",
+      "reading": "Đang đọc kênh…",
+      "counts": "Kênh: {{count}} · đang phát: {{playing}} · không phản hồi: {{broken}} · đã ẩn: {{hidden}}",
+      "guideShows": "Chương trình trong lịch: {{count}}",
+      "guideFailed": "Không đọc được lịch phát sóng: {{reason}}",
+      "noGuide": "Không có lịch",
+      "guideLoading": "Đang đọc lịch phát sóng…",
+      "refreshFailed": "Lần làm mới gần nhất thất bại: {{reason}}",
+      "refresh": "Làm mới ngay",
+      "remove": "Bỏ",
+      "removeConfirm": "Bỏ {{name}} và các kênh của nó?",
+      "broken": "Không phản hồi",
+      "works": "Đang phát",
+      "notChecked": "Chưa kiểm tra",
+      "hidden": "Đã ẩn",
+      "hide": "Ẩn",
+      "show": "Hiện",
+      "more": "Đang hiện 300 kênh đầu. Tìm một kênh để xem kênh khác.",
+      "everything": "tất cả"
     }
   }
 }

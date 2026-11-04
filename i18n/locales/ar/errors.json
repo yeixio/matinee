@@ -228,5 +228,16 @@
   "q_or_tag_is_required": "مطلوب q أو tag",
   "the_station_couldnt_be_reached_check_the_address_and_try_again": "تعذّر الوصول إلى المحطة. تحقق من العنوان وحاول مرة أخرى.",
   "the_station_couldnt_be_reached_reason": "تعذّر الوصول إلى المحطة: {{reason}}",
-  "the_station_directory_isnt_answering_right_now": "دليل المحطات لا يستجيب الآن"
+  "the_station_directory_isnt_answering_right_now": "دليل المحطات لا يستجيب الآن",
+  "add_the_playlists_web_address": "أضف عنوان القائمة على الويب",
+  "channel_not_found": "لم يُعثر على القناة",
+  "iptv_org_isnt_answering_right_now": "iptv-org لا يستجيب الآن",
+  "source_not_found": "لم يُعثر على المصدر",
+  "that_address_isnt_a_channel_playlist_m3u": "هذا العنوان ليس قائمة قنوات (M3U)",
+  "that_link_has_expired": "انتهت صلاحية هذا الرابط",
+  "that_playlist_has_no_channels_matinee_can_play": "لا تحتوي هذه القائمة على قنوات يمكن لـ Matinee تشغيلها",
+  "that_source_is_being_refreshed_already": "يجري تحديث هذا المصدر بالفعل",
+  "the_channel_isnt_answering_right_now": "القناة لا تستجيب الآن",
+  "the_guides_address_isnt_a_web_address": "عنوان الدليل ليس عنوان ويب",
+  "the_playlist_couldnt_be_read_reason": "تعذّرت قراءة القائمة: {{reason}}"
 }

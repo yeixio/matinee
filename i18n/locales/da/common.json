@@ -642,5 +642,26 @@
       "hiphop": "Hiphop",
       "news": "Nyheder"
     }
+  },
+  "live": {
+    "title": "Live-tv",
+    "channels": "Kanaler",
+    "guide": "Programoversigt",
+    "all": "Alle",
+    "find": "Find en kanal",
+    "noMatch": "Ingen kanaler passer",
+    "none": "Ingen live-tv-kanaler endnu",
+    "addSource": "Tilføj kanaler i Indstillinger",
+    "askAdmin": "En administrator kan tilføje kanaler i Indstillinger.",
+    "cantLoad": "Live-tv kunne ikke indlæses",
+    "live": "Live",
+    "now": "Nu",
+    "earlier": "Tidligere",
+    "later": "Senere",
+    "next": "Derefter kl. {{time}}: {{title}}",
+    "noGuide": "Ingen programoversigt for denne kanal",
+    "wontPlay": "Denne kanal sender ikke lige nu",
+    "wontPlayHint": "Streamen svarede ikke. Kanaler, der bliver ved med at fejle, skjules.",
+    "tryAgain": "Prøv igen"
   }
 }

@@ -228,5 +228,16 @@
   "q_or_tag_is_required": "cần q hoặc tag",
   "the_station_couldnt_be_reached_check_the_address_and_try_again": "không kết nối được với đài. Hãy kiểm tra địa chỉ và thử lại.",
   "the_station_couldnt_be_reached_reason": "không kết nối được với đài: {{reason}}",
-  "the_station_directory_isnt_answering_right_now": "danh bạ đài hiện không phản hồi"
+  "the_station_directory_isnt_answering_right_now": "danh bạ đài hiện không phản hồi",
+  "add_the_playlists_web_address": "hãy thêm địa chỉ web của danh sách",
+  "channel_not_found": "không tìm thấy kênh",
+  "iptv_org_isnt_answering_right_now": "iptv-org hiện không phản hồi",
+  "source_not_found": "không tìm thấy nguồn",
+  "that_address_isnt_a_channel_playlist_m3u": "địa chỉ đó không phải danh sách kênh (M3U)",
+  "that_link_has_expired": "liên kết đó đã hết hạn",
+  "that_playlist_has_no_channels_matinee_can_play": "danh sách đó không có kênh nào Matinee phát được",
+  "that_source_is_being_refreshed_already": "nguồn đó đang được làm mới",
+  "the_channel_isnt_answering_right_now": "kênh hiện không phản hồi",
+  "the_guides_address_isnt_a_web_address": "địa chỉ lịch phát sóng không phải địa chỉ web",
+  "the_playlist_couldnt_be_read_reason": "không đọc được danh sách: {{reason}}"
 }

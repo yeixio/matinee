@@ -525,6 +525,50 @@ var migrations = []string{
 	// 87: a radio station's stream; stations are items of kind station at
 	// the top of a music library, with no file (see stations.go).
 	"ALTER TABLE items ADD COLUMN stream_url TEXT",
+	// 88–92: live TV (see livetv.go): playlists of channels an admin added,
+	// their channels, and what's on them from each playlist's guide.
+	`CREATE TABLE live_sources (
+		id           TEXT PRIMARY KEY,
+		name         TEXT NOT NULL,
+		playlist_url TEXT NOT NULL DEFAULT '', -- empty for iptv-org's lists
+		iptv_org     TEXT, -- the countries, categories and languages picked from iptv-org, as JSON; NULL for a playlist
+		guide_url    TEXT NOT NULL DEFAULT '',
+		created_at   BIGINT NOT NULL,
+		refreshed_at BIGINT NOT NULL DEFAULT 0,
+		error        TEXT NOT NULL DEFAULT '', -- why the last refresh failed
+		guide_at     BIGINT NOT NULL DEFAULT 0,
+		guide_error  TEXT NOT NULL DEFAULT ''
+	)`,
+	`CREATE TABLE live_channels (
+		id         TEXT PRIMARY KEY, -- from the source and stream, so it outlives refreshes
+		source_id  TEXT NOT NULL REFERENCES live_sources(id) ON DELETE CASCADE,
+		position   INTEGER NOT NULL, -- its place in the playlist
+		name       TEXT NOT NULL,
+		number     TEXT NOT NULL DEFAULT '',
+		guide_id   TEXT NOT NULL DEFAULT '',
+		logo       TEXT NOT NULL DEFAULT '',
+		categories TEXT NOT NULL DEFAULT '', -- the playlist's groups, separated by ;
+		stream_url TEXT NOT NULL,
+		user_agent TEXT NOT NULL DEFAULT '',
+		referrer   TEXT NOT NULL DEFAULT '',
+		hidden     INTEGER NOT NULL DEFAULT 0, -- an admin hid it
+		fails      INTEGER NOT NULL DEFAULT 0, -- checks failed in a row
+		broken     INTEGER NOT NULL DEFAULT 0, -- failed enough checks to be hidden
+		checked_at BIGINT NOT NULL DEFAULT 0
+	)`,
+	"CREATE INDEX live_channels_source ON live_channels(source_id, position)",
+	`CREATE TABLE live_programs (
+		channel_id  TEXT NOT NULL REFERENCES live_channels(id) ON DELETE CASCADE,
+		start_at    BIGINT NOT NULL, -- Unix seconds
+		stop_at     BIGINT NOT NULL,
+		title       TEXT NOT NULL,
+		subtitle    TEXT NOT NULL DEFAULT '',
+		description TEXT NOT NULL DEFAULT '',
+		category    TEXT NOT NULL DEFAULT '',
+		image       TEXT NOT NULL DEFAULT '',
+		PRIMARY KEY (channel_id, start_at)
+	)`,
+	"CREATE INDEX live_programs_stop ON live_programs(stop_at)",
 }
 
 func now() int64 { return time.Now().Unix() }

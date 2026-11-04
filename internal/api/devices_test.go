@@ -15,7 +15,7 @@ import (
 // openapi.yaml documents exactly the routes the server has.
 func TestOpenAPIMatchesRoutes(t *testing.T) {
 	var served []string
-	for _, rt := range (&Server{}).routes() {
+	for _, rt := range append((&Server{}).routes(), (&Server{}).liveRoutes()...) {
 		// A wildcard that takes the rest of the path, {path...}, is {path} in OpenAPI.
 		served = append(served, strings.ReplaceAll(rt.pattern, "...}", "}"))
 	}

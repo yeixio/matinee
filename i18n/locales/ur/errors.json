@@ -228,5 +228,16 @@
   "q_or_tag_is_required": "q یا tag ضروری ہے",
   "the_station_couldnt_be_reached_check_the_address_and_try_again": "اسٹیشن تک رسائی نہیں ہو سکی۔ پتہ چیک کریں اور دوبارہ کوشش کریں۔",
   "the_station_couldnt_be_reached_reason": "اسٹیشن تک رسائی نہیں ہو سکی: {{reason}}",
-  "the_station_directory_isnt_answering_right_now": "اسٹیشن ڈائریکٹری ابھی جواب نہیں دے رہی"
+  "the_station_directory_isnt_answering_right_now": "اسٹیشن ڈائریکٹری ابھی جواب نہیں دے رہی",
+  "add_the_playlists_web_address": "فہرست کا ویب پتا شامل کریں",
+  "channel_not_found": "چینل نہیں ملا",
+  "iptv_org_isnt_answering_right_now": "iptv-org ابھی جواب نہیں دے رہا",
+  "source_not_found": "ماخذ نہیں ملا",
+  "that_address_isnt_a_channel_playlist_m3u": "یہ پتا چینل فہرست (M3U) نہیں ہے",
+  "that_link_has_expired": "اس لنک کی میعاد ختم ہو گئی",
+  "that_playlist_has_no_channels_matinee_can_play": "اس فہرست میں کوئی چینل نہیں جو Matinee چلا سکے",
+  "that_source_is_being_refreshed_already": "یہ ماخذ پہلے ہی ریفریش ہو رہا ہے",
+  "the_channel_isnt_answering_right_now": "چینل ابھی جواب نہیں دے رہا",
+  "the_guides_address_isnt_a_web_address": "گائیڈ کا پتا ویب پتا نہیں ہے",
+  "the_playlist_couldnt_be_read_reason": "فہرست پڑھی نہیں جا سکی: {{reason}}"
 }

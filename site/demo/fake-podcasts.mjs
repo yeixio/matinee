@@ -3,12 +3,13 @@
 // their covers, one quiet hour of audio for every episode, and answers
 // Podcast Index's search and trending requests with the same shows. It's
 // also the radio stations' host and directory (Radio Browser's search),
-// with live streams that say what's playing.
+// with live streams that say what's playing, and live TV's: iptv-org's
+// lists of made-up channels, their guide, and one clip played live.
 
 import { createReadStream, readFileSync, statSync } from 'node:fs'
 import http from 'node:http'
 import path from 'node:path'
-import { onAir, podcasts, stations } from './catalog.mjs'
+import { channels, onAir, podcasts, stations } from './catalog.mjs'
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
 const slug = (i) => `show-${i}`
@@ -107,8 +108,46 @@ function radioStream(req, res, file, st, i) {
   res.on('error', done)
 }
 
+
+// Live TV. iptv-org's lists, by country, category and language.
+const channelEntry = (base, c, i) => `#EXTINF:-1 tvg-id="ch${i}.demo" tvg-logo="${base}/art/channel-${i}.jpg" group-title="${c.categories.map((x) => x[0].toUpperCase() + x.slice(1)).join(';')}",${c.name}\n${base}/tv/channel-${i}/index.m3u8\n`
+const iptvList = (base, keep) => '#EXTM3U\n' + channels.map((c, i) => (keep(c) ? channelEntry(base, c, i) : '')).join('')
+
+// The guide: each channel's shows back to back from the start of the
+// hour before now, an hour or half an hour each, for a day.
+function guide() {
+  const fmt = (ms) => new Date(ms).toISOString().replace(/[-:T]/g, '').slice(0, 14) + ' +0000'
+  const start = Math.floor(Date.now() / 3600000) * 3600000 - 3600000
+  const out = ['<?xml version="1.0" encoding="UTF-8"?>', '<tv>']
+  channels.forEach((c, i) => out.push(`<channel id="ch${i}.demo"><display-name>${esc(c.name)}</display-name></channel>`))
+  channels.forEach((c, i) => {
+    let at = start - (i % 3) * 900000
+    for (let n = 0; at < start + 86400000; n++) {
+      const len = (n + i) % 3 === 0 ? 1800000 : 3600000
+      const title = c.shows[n % c.shows.length]
+      out.push(`<programme start="${fmt(at)}" stop="${fmt(at + len)}" channel="ch${i}.demo"><title>${esc(title)}</title><desc>${esc(`${title}, live on ${c.name}.`)}</desc></programme>`)
+      at += len
+    }
+  })
+  out.push('</tv>')
+  return out.join('\n')
+}
+
+// A live stream: a window of four pieces that moves along every four
+// seconds, round and round the clip's six.
+function liveStream(res, base) {
+  const n = Math.floor(Date.now() / 4000)
+  const lines = ['#EXTM3U', '#EXT-X-VERSION:3', '#EXT-X-TARGETDURATION:4', `#EXT-X-MEDIA-SEQUENCE:${n}`, `#EXT-X-DISCONTINUITY-SEQUENCE:${Math.floor(n / 6)}`]
+  for (let k = n; k < n + 4; k++) {
+    if (k > n && k % 6 === 0) lines.push('#EXT-X-DISCONTINUITY')
+    lines.push('#EXTINF:4.000,', `${base}/seg${k % 6}.ts`)
+  }
+  res.writeHead(200, { 'Content-Type': 'application/vnd.apple.mpegurl', 'Cache-Control': 'no-cache' })
+  res.end(lines.join('\n') + '\n')
+}
+
 /** Starts the stand-in; episode is the audio file every episode plays, radio the one every station plays. */
-export function startFakePodcasts(port, images, episode, radio) {
+export function startFakePodcasts(port, images, episode, radio, live) {
   const base = `http://127.0.0.1:${port}`
   const server = http.createServer((req, res) => {
     const url = new URL(req.url, base)
@@ -133,6 +172,29 @@ export function startFakePodcasts(port, images, episode, radio) {
       const found = stations.map((st, i) => [st, i]).filter(([st]) => (name && st.name.toLowerCase().includes(name)) || (tag && st.tags.includes(tag)))
       return json(found.map(([st, i]) => stationEntry(base, st, i)))
     }
+    // Live TV: iptv-org's choices and lists, the guide, logos and streams.
+    if (p === '/iptv-org/api/countries.json')
+      return json([['US', 'United States', '🇺🇸'], ['GB', 'United Kingdom', '🇬🇧'], ['CA', 'Canada', '🇨🇦'], ['MX', 'Mexico', '🇲🇽']].map(([code, name, flag]) => ({ code, name, flag })))
+    if (p === '/iptv-org/api/languages.json') return json([{ code: 'eng', name: 'English' }, { code: 'spa', name: 'Spanish' }])
+    if (p === '/iptv-org/api/categories.json')
+      return json(['classic', 'cooking', 'documentary', 'kids', 'movies', 'news', 'sports', 'travel', 'weather'].map((id) => ({ id, name: id[0].toUpperCase() + id.slice(1) })))
+    if ((m = /^\/iptv-org\/iptv\/(countries|categories|languages)\/([a-z]+)\.m3u$/.exec(p))) {
+      const [, kind, code] = m
+      const keep = (c) => (kind === 'countries' ? c.country.toLowerCase() === code : kind === 'languages' ? c.language === code : c.categories.includes(code))
+      res.writeHead(200, { 'Content-Type': 'audio/x-mpegurl' })
+      return res.end(iptvList(base, keep))
+    }
+    if (p === '/iptv-org/iptv/index.m3u') {
+      res.writeHead(200, { 'Content-Type': 'audio/x-mpegurl' })
+      return res.end(iptvList(base, () => true))
+    }
+    if (p === '/tv/guide.xml') {
+      res.writeHead(200, { 'Content-Type': 'application/xml' })
+      return res.end(guide())
+    }
+    if ((m = /^\/art\/channel-(\d+)\.jpg$/.exec(p)) && channels[m[1]]) return sendFile(req, res, path.join(images, `channel-${m[1]}.jpg`), 'image/jpeg')
+    if ((m = /^\/tv\/channel-(\d+)\/index\.m3u8$/.exec(p)) && channels[m[1]]) return liveStream(res, `${base}/tv/channel-${m[1]}`)
+    if ((m = /^\/tv\/channel-\d+\/seg(\d)\.ts$/.exec(p))) return sendFile(req, res, path.join(live, `seg${m[1]}.ts`), 'video/mp2t')
     if (p === '/api/1.0/search/byterm') {
       const q = (url.searchParams.get('q') ?? '').toLowerCase()
       const found = podcasts.map((s, i) => [s, i]).filter(([s]) => `${s.title} ${s.author} ${s.categories.join(' ')} ${s.description}`.toLowerCase().includes(q))
@@ -154,3 +216,4 @@ export function startFakePodcasts(port, images, episode, radio) {
 export const feedURL = (port, i) => `http://127.0.0.1:${port}/feeds/${slug(i)}.xml`
 /** A made-up station as the directory lists it, to add it as someone would. */
 export const stationFound = (port, i) => stationEntry(`http://127.0.0.1:${port}`, stations[i], i)
+export const guideURL = (port) => `http://127.0.0.1:${port}/tv/guide.xml`

@@ -642,5 +642,26 @@
       "hiphop": "Hip hop",
       "news": "News"
     }
+  },
+  "live": {
+    "title": "Live TV",
+    "channels": "Channels",
+    "guide": "Guide",
+    "all": "All",
+    "find": "Find a channel",
+    "noMatch": "No channels match",
+    "none": "No live TV channels yet",
+    "addSource": "Add channels in Settings",
+    "askAdmin": "An admin can add channels in Settings.",
+    "cantLoad": "Live TV couldn't be loaded",
+    "live": "Live",
+    "now": "Now",
+    "earlier": "Earlier",
+    "later": "Later",
+    "next": "Next at {{time}}: {{title}}",
+    "noGuide": "No guide for this channel",
+    "wontPlay": "This channel isn't playing right now",
+    "wontPlayHint": "Its stream didn't answer. Channels that keep failing are hidden.",
+    "tryAgain": "Try again"
   }
 }

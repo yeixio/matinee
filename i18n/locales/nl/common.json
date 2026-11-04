@@ -642,5 +642,26 @@
       "hiphop": "Hiphop",
       "news": "Nieuws"
     }
+  },
+  "live": {
+    "title": "Live-tv",
+    "channels": "Zenders",
+    "guide": "Gids",
+    "all": "Alle",
+    "find": "Zender zoeken",
+    "noMatch": "Geen zenders gevonden",
+    "none": "Nog geen live-tv-zenders",
+    "addSource": "Voeg zenders toe in Instellingen",
+    "askAdmin": "Een beheerder kan zenders toevoegen in Instellingen.",
+    "cantLoad": "Live-tv kon niet worden geladen",
+    "live": "Live",
+    "now": "Nu",
+    "earlier": "Eerder",
+    "later": "Later",
+    "next": "Hierna om {{time}}: {{title}}",
+    "noGuide": "Geen gids voor deze zender",
+    "wontPlay": "Deze zender speelt nu niet",
+    "wontPlayHint": "De stream reageerde niet. Zenders die steeds falen worden verborgen.",
+    "tryAgain": "Opnieuw proberen"
   }
 }

@@ -674,5 +674,26 @@
       "hiphop": "Hip-hop",
       "news": "Știri"
     }
+  },
+  "live": {
+    "title": "TV în direct",
+    "channels": "Canale",
+    "guide": "Ghid",
+    "all": "Toate",
+    "find": "Caută un canal",
+    "noMatch": "Niciun canal nu se potrivește",
+    "none": "Încă nu există canale TV în direct",
+    "addSource": "Adaugă canale în Setări",
+    "askAdmin": "Un administrator poate adăuga canale în Setări.",
+    "cantLoad": "TV în direct nu a putut fi încărcat",
+    "live": "În direct",
+    "now": "Acum",
+    "earlier": "Mai devreme",
+    "later": "Mai târziu",
+    "next": "Urmează la {{time}}: {{title}}",
+    "noGuide": "Niciun ghid pentru acest canal",
+    "wontPlay": "Acest canal nu emite acum",
+    "wontPlayHint": "Fluxul nu a răspuns. Canalele care eșuează mereu sunt ascunse.",
+    "tryAgain": "Încearcă din nou"
   }
 }

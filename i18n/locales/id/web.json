@@ -13,7 +13,8 @@
     "settings": "Pengaturan",
     "switchProfile": "Ganti profil",
     "signOut": "Keluar",
-    "discover": "Jelajahi"
+    "discover": "Jelajahi",
+    "liveTV": "TV Langsung"
   },
   "cantReachServer": "Server tidak dapat dijangkau. Mencoba lagi…",
   "player": {
@@ -853,6 +854,10 @@
       "health": {
         "title": "Kesehatan server",
         "hint": "Beban, pemutaran, tugas, masalah, dan log"
+      },
+      "live-tv": {
+        "title": "TV Langsung",
+        "hint": "Daftar saluran dan panduan acara"
       }
     }
   },
@@ -1248,6 +1253,46 @@
       "copy": "Salin",
       "copied": "Disalin",
       "example": "Untuk prometheus.yml"
+    }
+  },
+  "live": {
+    "settings": {
+      "intro": "Tambahkan daftar saluran TV (M3U), dengan panduan acara (XMLTV) jika ada. Saluran yang berhenti merespons akan disembunyikan. Profil anak dan teman tidak melihat TV langsung.",
+      "add": "Tambah saluran",
+      "suggested": "Saluran publik (iptv-org)",
+      "ownPlaylist": "Daftar Anda sendiri",
+      "iptvOrgIntro": "<site>iptv-org</site> mendaftar saluran TV yang disiarkan secara publik di internet. Pilih negara, kategori, atau bahasa.",
+      "yourCall": "Beberapa siaran yang didaftar iptv-org mungkin bukan dari salurannya sendiri atau tidak ditujukan untuk negara Anda. Tonton hanya yang diizinkan.",
+      "countries": "Negara",
+      "categories": "Kategori",
+      "languages": "Bahasa",
+      "anyPick": "Ketik untuk mencari",
+      "unpick": "Hapus {{name}}",
+      "pickHint": "Saluran harus cocok dengan satu pilihan dari tiap jenis.",
+      "pickNothing": "Tanpa pilihan, semua saluran ditambahkan: ribuan.",
+      "playlist": "Alamat daftar (M3U)",
+      "guide": "Alamat panduan (XMLTV, opsional)",
+      "guideHint": "File .xml atau .xml.gz. Biarkan kosong jika daftar menyebut panduannya sendiri.",
+      "name": "Nama (opsional)",
+      "addThis": "Tambah",
+      "reading": "Membaca saluran…",
+      "counts": "Saluran: {{count}} · tayang: {{playing}} · tidak merespons: {{broken}} · tersembunyi: {{hidden}}",
+      "guideShows": "Acara di panduan: {{count}}",
+      "guideFailed": "Panduan tidak dapat dibaca: {{reason}}",
+      "noGuide": "Tanpa panduan",
+      "guideLoading": "Membaca panduan…",
+      "refreshFailed": "Penyegaran terakhir gagal: {{reason}}",
+      "refresh": "Segarkan sekarang",
+      "remove": "Hapus",
+      "removeConfirm": "Hapus {{name}} beserta salurannya?",
+      "broken": "Tidak merespons",
+      "works": "Tayang",
+      "notChecked": "Belum diperiksa",
+      "hidden": "Tersembunyi",
+      "hide": "Sembunyikan",
+      "show": "Tampilkan",
+      "more": "Menampilkan 300 pertama. Cari saluran untuk melihat yang lain.",
+      "everything": "semua"
     }
   }
 }

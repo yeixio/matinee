@@ -103,6 +103,9 @@ type session struct {
 	copyVideo bool
 	audioOnly bool
 	burnSub   bool
+	// live is a live TV channel (see StartLive): players start near its
+	// newest piece, and old pieces are gone.
+	live bool
 }
 
 func NewTranscoder(ffmpeg, dir string, hw Accelerator, log *slog.Logger) *Transcoder {
@@ -372,7 +375,9 @@ func (t *Transcoder) ServeFile(w http.ResponseWriter, r *http.Request, userID in
 			http.NotFound(w, r)
 			return
 		}
-		b = startAtBeginning(b)
+		if !s.live {
+			b = startAtBeginning(b)
+		}
 		// A player given the playlist with ?token= (an app's native player, or
 		// a cast device) fetches segments without its headers or cookies, so
 		// the segment links carry the token too.

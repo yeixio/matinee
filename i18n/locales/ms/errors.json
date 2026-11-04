@@ -228,5 +228,16 @@
   "q_or_tag_is_required": "q atau tag diperlukan",
   "the_station_couldnt_be_reached_check_the_address_and_try_again": "stesen tidak dapat dicapai. Semak alamat dan cuba lagi.",
   "the_station_couldnt_be_reached_reason": "stesen tidak dapat dicapai: {{reason}}",
-  "the_station_directory_isnt_answering_right_now": "direktori stesen tidak menjawab sekarang"
+  "the_station_directory_isnt_answering_right_now": "direktori stesen tidak menjawab sekarang",
+  "add_the_playlists_web_address": "tambah alamat web senarai",
+  "channel_not_found": "saluran tidak ditemui",
+  "iptv_org_isnt_answering_right_now": "iptv-org tidak menjawab sekarang",
+  "source_not_found": "sumber tidak ditemui",
+  "that_address_isnt_a_channel_playlist_m3u": "alamat itu bukan senarai saluran (M3U)",
+  "that_link_has_expired": "pautan itu telah tamat tempoh",
+  "that_playlist_has_no_channels_matinee_can_play": "senarai itu tiada saluran yang boleh dimainkan Matinee",
+  "that_source_is_being_refreshed_already": "sumber itu sedang disegar semula",
+  "the_channel_isnt_answering_right_now": "saluran tidak menjawab sekarang",
+  "the_guides_address_isnt_a_web_address": "alamat panduan bukan alamat web",
+  "the_playlist_couldnt_be_read_reason": "senarai tidak dapat dibaca: {{reason}}"
 }

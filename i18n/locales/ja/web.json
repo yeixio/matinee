@@ -13,7 +13,8 @@
     "settings": "設定",
     "switchProfile": "プロフィールを切り替え",
     "signOut": "サインアウト",
-    "discover": "見つける"
+    "discover": "見つける",
+    "liveTV": "ライブTV"
   },
   "cantReachServer": "サーバーに接続できません。再試行しています…",
   "player": {
@@ -853,6 +854,10 @@
       "health": {
         "title": "サーバーの状態",
         "hint": "負荷、再生、ジョブ、問題、ログ"
+      },
+      "live-tv": {
+        "title": "ライブTV",
+        "hint": "チャンネルリストと番組表"
       }
     }
   },
@@ -1248,6 +1253,46 @@
       "copy": "コピー",
       "copied": "コピーしました",
       "example": "prometheus.yml 用"
+    }
+  },
+  "live": {
+    "settings": {
+      "intro": "TVチャンネルのリスト(M3U)を、あれば番組表(XMLTV)と一緒に追加します。応答しなくなったチャンネルは非表示になります。キッズプロフィールと友達にはライブTVは表示されません。",
+      "add": "チャンネルを追加",
+      "suggested": "公開チャンネル (iptv-org)",
+      "ownPlaylist": "自分のリスト",
+      "iptvOrgIntro": "<site>iptv-org</site>はインターネットで公開配信されているTVチャンネルをまとめています。国、カテゴリ、言語を選んでください。",
+      "yourCall": "iptv-orgのストリームには、チャンネル自身の配信でないものや、あなたの国向けでないものがあるかもしれません。視聴が許されているものだけを見てください。",
+      "countries": "国",
+      "categories": "カテゴリ",
+      "languages": "言語",
+      "anyPick": "入力して検索",
+      "unpick": "{{name}}を外す",
+      "pickHint": "チャンネルは各種類の選択のどれかに一致する必要があります。",
+      "pickNothing": "何も選ばないと全チャンネルが追加されます(数千)。",
+      "playlist": "リストのアドレス (M3U)",
+      "guide": "番組表のアドレス (XMLTV、任意)",
+      "guideHint": ".xml または .xml.gz ファイル。リストが番組表を指定している場合は空欄のままにします。",
+      "name": "名前 (任意)",
+      "addThis": "追加",
+      "reading": "チャンネルを読み込み中…",
+      "counts": "チャンネル: {{count}} · 放送中: {{playing}} · 応答なし: {{broken}} · 非表示: {{hidden}}",
+      "guideShows": "番組表の番組: {{count}}",
+      "guideFailed": "番組表を読み込めませんでした: {{reason}}",
+      "noGuide": "番組表なし",
+      "guideLoading": "番組表を読み込み中…",
+      "refreshFailed": "前回の更新に失敗しました: {{reason}}",
+      "refresh": "今すぐ更新",
+      "remove": "削除",
+      "removeConfirm": "{{name}}とそのチャンネルを削除しますか?",
+      "broken": "応答なし",
+      "works": "放送中",
+      "notChecked": "未確認",
+      "hidden": "非表示",
+      "hide": "非表示にする",
+      "show": "表示する",
+      "more": "最初の300件を表示しています。ほかを見るにはチャンネルを検索してください。",
+      "everything": "すべて"
     }
   }
 }

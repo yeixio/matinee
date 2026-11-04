@@ -13,7 +13,8 @@
     "settings": "Configurações",
     "switchProfile": "Trocar de perfil",
     "signOut": "Sair",
-    "discover": "Descobrir"
+    "discover": "Descobrir",
+    "liveTV": "TV ao vivo"
   },
   "cantReachServer": "Não foi possível acessar o servidor. Tentando de novo…",
   "player": {
@@ -861,6 +862,10 @@
       "health": {
         "title": "Saúde do servidor",
         "hint": "Carga, reprodução, tarefas, problemas e o log"
+      },
+      "live-tv": {
+        "title": "TV ao vivo",
+        "hint": "Listas de canais e guias"
       }
     }
   },
@@ -1270,6 +1275,46 @@
       "copy": "Copiar",
       "copied": "Copiado",
       "example": "Para o prometheus.yml"
+    }
+  },
+  "live": {
+    "settings": {
+      "intro": "Adicione listas de canais de TV (M3U), com um guia (XMLTV) se tiver. Canais que param de responder são ocultados. Perfis infantis e amigos não veem TV ao vivo.",
+      "add": "Adicionar canais",
+      "suggested": "Canais públicos (iptv-org)",
+      "ownPlaylist": "Sua própria lista",
+      "iptvOrgIntro": "<site>iptv-org</site> lista canais de TV transmitidos publicamente na internet. Escolha países, categorias ou idiomas.",
+      "yourCall": "Alguns streams listados pelo iptv-org podem não vir do próprio canal ou não ser destinados ao seu país. Assista só ao que você pode.",
+      "countries": "Países",
+      "categories": "Categorias",
+      "languages": "Idiomas",
+      "anyPick": "Digite para procurar",
+      "unpick": "Remover {{name}}",
+      "pickHint": "Os canais devem corresponder a uma escolha de cada tipo.",
+      "pickNothing": "Sem nada escolhido, todos os canais são adicionados: milhares.",
+      "playlist": "Endereço da lista (M3U)",
+      "guide": "Endereço do guia (XMLTV, opcional)",
+      "guideHint": "Um arquivo .xml ou .xml.gz. Deixe vazio se a lista indicar o seu.",
+      "name": "Nome (opcional)",
+      "addThis": "Adicionar",
+      "reading": "Lendo canais…",
+      "counts": "Canais: {{count}} · transmitindo: {{playing}} · sem resposta: {{broken}} · ocultos: {{hidden}}",
+      "guideShows": "Programas no guia: {{count}}",
+      "guideFailed": "Não foi possível ler o guia: {{reason}}",
+      "noGuide": "Sem guia",
+      "guideLoading": "Lendo o guia…",
+      "refreshFailed": "A última atualização falhou: {{reason}}",
+      "refresh": "Atualizar agora",
+      "remove": "Remover",
+      "removeConfirm": "Remover {{name}} e seus canais?",
+      "broken": "Sem resposta",
+      "works": "Transmitindo",
+      "notChecked": "Ainda não verificado",
+      "hidden": "Oculto",
+      "hide": "Ocultar",
+      "show": "Mostrar",
+      "more": "Mostrando os 300 primeiros. Procure um canal para ver outros.",
+      "everything": "tudo"
     }
   }
 }

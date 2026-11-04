@@ -228,5 +228,16 @@
   "q_or_tag_is_required": "απαιτείται q ή tag",
   "the_station_couldnt_be_reached_check_the_address_and_try_again": "δεν ήταν δυνατή η σύνδεση με τον σταθμό. Ελέγξτε τη διεύθυνση και δοκιμάστε ξανά.",
   "the_station_couldnt_be_reached_reason": "δεν ήταν δυνατή η σύνδεση με τον σταθμό: {{reason}}",
-  "the_station_directory_isnt_answering_right_now": "ο κατάλογος σταθμών δεν απαντά αυτή τη στιγμή"
+  "the_station_directory_isnt_answering_right_now": "ο κατάλογος σταθμών δεν απαντά αυτή τη στιγμή",
+  "add_the_playlists_web_address": "προσθέστε τη διεύθυνση της λίστας",
+  "channel_not_found": "το κανάλι δεν βρέθηκε",
+  "iptv_org_isnt_answering_right_now": "το iptv-org δεν απαντά αυτή τη στιγμή",
+  "source_not_found": "η πηγή δεν βρέθηκε",
+  "that_address_isnt_a_channel_playlist_m3u": "αυτή η διεύθυνση δεν είναι λίστα καναλιών (M3U)",
+  "that_link_has_expired": "ο σύνδεσμος έληξε",
+  "that_playlist_has_no_channels_matinee_can_play": "η λίστα δεν έχει κανάλια που μπορεί να παίξει το Matinee",
+  "that_source_is_being_refreshed_already": "η πηγή ανανεώνεται ήδη",
+  "the_channel_isnt_answering_right_now": "το κανάλι δεν απαντά αυτή τη στιγμή",
+  "the_guides_address_isnt_a_web_address": "η διεύθυνση του οδηγού δεν είναι διαδικτυακή διεύθυνση",
+  "the_playlist_couldnt_be_read_reason": "δεν ήταν δυνατή η ανάγνωση της λίστας: {{reason}}"
 }

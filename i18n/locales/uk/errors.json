@@ -228,5 +228,16 @@
   "q_or_tag_is_required": "потрібен q або tag",
   "the_station_couldnt_be_reached_check_the_address_and_try_again": "не вдалося підключитися до станції. Перевірте адресу й спробуйте ще раз.",
   "the_station_couldnt_be_reached_reason": "не вдалося підключитися до станції: {{reason}}",
-  "the_station_directory_isnt_answering_right_now": "каталог станцій зараз не відповідає"
+  "the_station_directory_isnt_answering_right_now": "каталог станцій зараз не відповідає",
+  "add_the_playlists_web_address": "вкажіть вебадресу списку",
+  "channel_not_found": "канал не знайдено",
+  "iptv_org_isnt_answering_right_now": "iptv-org зараз не відповідає",
+  "source_not_found": "джерело не знайдено",
+  "that_address_isnt_a_channel_playlist_m3u": "ця адреса не є списком каналів (M3U)",
+  "that_link_has_expired": "термін дії посилання минув",
+  "that_playlist_has_no_channels_matinee_can_play": "у цьому списку немає каналів, які може відтворити Matinee",
+  "that_source_is_being_refreshed_already": "це джерело вже оновлюється",
+  "the_channel_isnt_answering_right_now": "канал зараз не відповідає",
+  "the_guides_address_isnt_a_web_address": "адреса телепрограми не є вебадресою",
+  "the_playlist_couldnt_be_read_reason": "не вдалося прочитати список: {{reason}}"
 }

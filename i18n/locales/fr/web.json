@@ -13,7 +13,8 @@
     "settings": "Réglages",
     "switchProfile": "Changer de profil",
     "signOut": "Se déconnecter",
-    "discover": "Découvrir"
+    "discover": "Découvrir",
+    "liveTV": "TV en direct"
   },
   "cantReachServer": "Impossible de joindre le serveur. Nouvelle tentative…",
   "player": {
@@ -861,6 +862,10 @@
       "health": {
         "title": "État du serveur",
         "hint": "Charge, lecture, tâches, problèmes et journal"
+      },
+      "live-tv": {
+        "title": "TV en direct",
+        "hint": "Listes de chaînes et guides"
       }
     }
   },
@@ -1270,6 +1275,46 @@
       "copy": "Copier",
       "copied": "Copié",
       "example": "Pour prometheus.yml"
+    }
+  },
+  "live": {
+    "settings": {
+      "intro": "Ajoutez des listes de chaînes TV (M3U), avec un guide (XMLTV) si vous en avez un. Les chaînes qui ne répondent plus sont masquées. Les profils enfants et les amis ne voient pas la TV en direct.",
+      "add": "Ajouter des chaînes",
+      "suggested": "Chaînes publiques (iptv-org)",
+      "ownPlaylist": "Votre propre liste",
+      "iptvOrgIntro": "<site>iptv-org</site> répertorie des chaînes TV diffusées publiquement sur internet. Choisissez des pays, catégories ou langues.",
+      "yourCall": "Certains flux répertoriés par iptv-org peuvent ne pas venir de la chaîne elle-même ou ne pas être destinés à votre pays. Ne regardez que ce qui vous est permis.",
+      "countries": "Pays",
+      "categories": "Catégories",
+      "languages": "Langues",
+      "anyPick": "Tapez pour chercher",
+      "unpick": "Retirer {{name}}",
+      "pickHint": "Les chaînes doivent correspondre à un choix de chaque type.",
+      "pickNothing": "Sans choix, toutes les chaînes sont ajoutées : des milliers.",
+      "playlist": "Adresse de la liste (M3U)",
+      "guide": "Adresse du guide (XMLTV, facultatif)",
+      "guideHint": "Un fichier .xml ou .xml.gz. Laissez vide si la liste indique le sien.",
+      "name": "Nom (facultatif)",
+      "addThis": "Ajouter",
+      "reading": "Lecture des chaînes…",
+      "counts": "Chaînes : {{count}} · diffusent : {{playing}} · ne répondent pas : {{broken}} · masquées : {{hidden}}",
+      "guideShows": "Programmes dans le guide : {{count}}",
+      "guideFailed": "Le guide n’a pas pu être lu : {{reason}}",
+      "noGuide": "Pas de guide",
+      "guideLoading": "Lecture du guide…",
+      "refreshFailed": "La dernière actualisation a échoué : {{reason}}",
+      "refresh": "Actualiser maintenant",
+      "remove": "Retirer",
+      "removeConfirm": "Retirer {{name}} et ses chaînes ?",
+      "broken": "Ne répond pas",
+      "works": "Diffuse",
+      "notChecked": "Pas encore vérifiée",
+      "hidden": "Masquée",
+      "hide": "Masquer",
+      "show": "Afficher",
+      "more": "Les 300 premières sont affichées. Cherchez une chaîne pour voir les autres.",
+      "everything": "tout"
     }
   }
 }

@@ -228,5 +228,16 @@
   "q_or_tag_is_required": "wymagane jest q lub tag",
   "the_station_couldnt_be_reached_check_the_address_and_try_again": "nie udało się połączyć ze stacją. Sprawdź adres i spróbuj ponownie.",
   "the_station_couldnt_be_reached_reason": "nie udało się połączyć ze stacją: {{reason}}",
-  "the_station_directory_isnt_answering_right_now": "katalog stacji teraz nie odpowiada"
+  "the_station_directory_isnt_answering_right_now": "katalog stacji teraz nie odpowiada",
+  "add_the_playlists_web_address": "dodaj adres internetowy listy",
+  "channel_not_found": "nie znaleziono kanału",
+  "iptv_org_isnt_answering_right_now": "iptv-org teraz nie odpowiada",
+  "source_not_found": "nie znaleziono źródła",
+  "that_address_isnt_a_channel_playlist_m3u": "ten adres nie jest listą kanałów (M3U)",
+  "that_link_has_expired": "ten link wygasł",
+  "that_playlist_has_no_channels_matinee_can_play": "ta lista nie ma kanałów, które Matinee może odtworzyć",
+  "that_source_is_being_refreshed_already": "to źródło jest już odświeżane",
+  "the_channel_isnt_answering_right_now": "kanał teraz nie odpowiada",
+  "the_guides_address_isnt_a_web_address": "adres przewodnika nie jest adresem internetowym",
+  "the_playlist_couldnt_be_read_reason": "nie udało się odczytać listy: {{reason}}"
 }

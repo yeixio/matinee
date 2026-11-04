@@ -228,5 +228,16 @@
   "q_or_tag_is_required": "q oder tag ist erforderlich",
   "the_station_couldnt_be_reached_check_the_address_and_try_again": "der Sender ist nicht erreichbar. Prüfe die Adresse und versuche es erneut.",
   "the_station_couldnt_be_reached_reason": "der Sender ist nicht erreichbar: {{reason}}",
-  "the_station_directory_isnt_answering_right_now": "das Senderverzeichnis antwortet gerade nicht"
+  "the_station_directory_isnt_answering_right_now": "das Senderverzeichnis antwortet gerade nicht",
+  "add_the_playlists_web_address": "gib die Webadresse der Senderliste an",
+  "channel_not_found": "Sender nicht gefunden",
+  "iptv_org_isnt_answering_right_now": "iptv-org antwortet gerade nicht",
+  "source_not_found": "Quelle nicht gefunden",
+  "that_address_isnt_a_channel_playlist_m3u": "diese Adresse ist keine Senderliste (M3U)",
+  "that_link_has_expired": "dieser Link ist abgelaufen",
+  "that_playlist_has_no_channels_matinee_can_play": "diese Senderliste hat keine Sender, die Matinee abspielen kann",
+  "that_source_is_being_refreshed_already": "diese Quelle wird bereits aktualisiert",
+  "the_channel_isnt_answering_right_now": "der Sender antwortet gerade nicht",
+  "the_guides_address_isnt_a_web_address": "die Adresse des Programmführers ist keine Webadresse",
+  "the_playlist_couldnt_be_read_reason": "die Senderliste konnte nicht gelesen werden: {{reason}}"
 }

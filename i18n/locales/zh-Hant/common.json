@@ -610,5 +610,26 @@
       "hiphop": "嘻哈",
       "news": "新聞"
     }
+  },
+  "live": {
+    "title": "直播電視",
+    "channels": "頻道",
+    "guide": "節目表",
+    "all": "全部",
+    "find": "尋找頻道",
+    "noMatch": "沒有符合的頻道",
+    "none": "還沒有直播頻道",
+    "addSource": "在設定中加入頻道",
+    "askAdmin": "管理員可以在設定中加入頻道。",
+    "cantLoad": "無法載入直播電視",
+    "live": "直播",
+    "now": "現在",
+    "earlier": "較早",
+    "later": "稍後",
+    "next": "接下來 {{time}}：{{title}}",
+    "noGuide": "此頻道沒有節目表",
+    "wontPlay": "此頻道目前沒有播出",
+    "wontPlayHint": "它的串流沒有回應。持續失敗的頻道會被隱藏。",
+    "tryAgain": "重試"
   }
 }

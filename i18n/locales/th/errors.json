@@ -228,5 +228,16 @@
   "q_or_tag_is_required": "ต้องระบุ q หรือ tag",
   "the_station_couldnt_be_reached_check_the_address_and_try_again": "เชื่อมต่อสถานีไม่ได้ ตรวจสอบที่อยู่แล้วลองอีกครั้ง",
   "the_station_couldnt_be_reached_reason": "เชื่อมต่อสถานีไม่ได้: {{reason}}",
-  "the_station_directory_isnt_answering_right_now": "ไดเรกทอรีสถานีไม่ตอบสนองในขณะนี้"
+  "the_station_directory_isnt_answering_right_now": "ไดเรกทอรีสถานีไม่ตอบสนองในขณะนี้",
+  "add_the_playlists_web_address": "ใส่ที่อยู่เว็บของรายการ",
+  "channel_not_found": "ไม่พบช่อง",
+  "iptv_org_isnt_answering_right_now": "iptv-org ไม่ตอบสนองในตอนนี้",
+  "source_not_found": "ไม่พบแหล่ง",
+  "that_address_isnt_a_channel_playlist_m3u": "ที่อยู่นั้นไม่ใช่รายการช่อง (M3U)",
+  "that_link_has_expired": "ลิงก์นั้นหมดอายุแล้ว",
+  "that_playlist_has_no_channels_matinee_can_play": "รายการนั้นไม่มีช่องที่ Matinee เล่นได้",
+  "that_source_is_being_refreshed_already": "แหล่งนั้นกำลังรีเฟรชอยู่แล้ว",
+  "the_channel_isnt_answering_right_now": "ช่องไม่ตอบสนองในตอนนี้",
+  "the_guides_address_isnt_a_web_address": "ที่อยู่ผังรายการไม่ใช่ที่อยู่เว็บ",
+  "the_playlist_couldnt_be_read_reason": "อ่านรายการไม่ได้: {{reason}}"
 }

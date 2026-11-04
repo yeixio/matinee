@@ -228,5 +228,16 @@
   "q_or_tag_is_required": "q یا tag لازم است",
   "the_station_couldnt_be_reached_check_the_address_and_try_again": "دسترسی به ایستگاه ممکن نشد. نشانی را بررسی کنید و دوباره امتحان کنید.",
   "the_station_couldnt_be_reached_reason": "دسترسی به ایستگاه ممکن نشد: {{reason}}",
-  "the_station_directory_isnt_answering_right_now": "فهرست ایستگاه‌ها اکنون پاسخ نمی‌دهد"
+  "the_station_directory_isnt_answering_right_now": "فهرست ایستگاه‌ها اکنون پاسخ نمی‌دهد",
+  "add_the_playlists_web_address": "نشانی وب فهرست را اضافه کنید",
+  "channel_not_found": "شبکه پیدا نشد",
+  "iptv_org_isnt_answering_right_now": "iptv-org الان پاسخ نمی‌دهد",
+  "source_not_found": "منبع پیدا نشد",
+  "that_address_isnt_a_channel_playlist_m3u": "این نشانی فهرست شبکه (M3U) نیست",
+  "that_link_has_expired": "این پیوند منقضی شده است",
+  "that_playlist_has_no_channels_matinee_can_play": "این فهرست شبکه‌ای ندارد که Matinee بتواند پخش کند",
+  "that_source_is_being_refreshed_already": "این منبع در حال تازه‌سازی است",
+  "the_channel_isnt_answering_right_now": "شبکه الان پاسخ نمی‌دهد",
+  "the_guides_address_isnt_a_web_address": "نشانی جدول پخش نشانی وب نیست",
+  "the_playlist_couldnt_be_read_reason": "فهرست خوانده نشد: {{reason}}"
 }

@@ -9,7 +9,7 @@ import { existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { chromium } from 'playwright'
 import { backdrop, cover, portrait, poster, stationLogo } from './art.mjs'
-import { albums, audiobooks, discover, movies, people, podcasts, shows, stations } from './catalog.mjs'
+import { albums, audiobooks, discover, movies, people, podcasts, shows, stations, channels } from './catalog.mjs'
 
 const ff = (...args) => execFileSync('ffmpeg', ['-v', 'error', '-y', ...args])
 
@@ -112,6 +112,7 @@ export async function makeLibrary(root) {
   audiobooks.forEach((b, i) => art(`book-${i}.jpg`, cover(b.scene, b.title, b.author, b.hue ?? 0), 600, 600))
   podcasts.forEach((p, i) => art(`podcast-${i}.jpg`, cover(p.scene, p.title, p.author, p.hue ?? 0), 600, 600))
   stations.forEach((st, i) => art(`station-${i}.jpg`, stationLogo(st.name, st.hue), 400, 400))
+  channels.forEach((c, i) => art(`channel-${i}.jpg`, stationLogo(c.name, c.hue), 400, 400))
   await render(jobs)
 
   for (const m of movies) {
@@ -161,7 +162,16 @@ export async function makeLibrary(root) {
   // The radio stations all play ten quiet minutes of MP3, over and over.
   const radio = path.join(root, 'silence', 'radio.mp3')
   if (!existsSync(radio)) ff('-f', 'lavfi', '-i', 'anullsrc=r=44100:cl=stereo', '-t', '600', '-c:a', 'libmp3lame', '-b:a', '64k', radio)
-  return { media, images, episode, radio }
+  // Every live TV channel plays the same 24 seconds of a backdrop, cut in
+  // 4-second pieces that fake-podcasts.mjs serves as a live stream.
+  const live = path.join(root, 'live')
+  if (!existsSync(path.join(live, 'index.m3u8'))) {
+    mkdirSync(live, { recursive: true })
+    ff('-loop', '1', '-i', path.join(images, `backdrop-${movies[0].id}.jpg`), '-f', 'lavfi', '-i', 'anullsrc=r=48000:cl=stereo', '-t', '24',
+      '-vf', "scale=1280:720,zoompan=z='min(zoom+0.0006,1.15)':d=1:s=1280x720:fps=25", '-c:v', 'libx264', '-preset', 'veryfast', '-g', '100', '-keyint_min', '100',
+      '-c:a', 'aac', '-shortest', '-f', 'hls', '-hls_time', '4', '-hls_list_size', '0', '-hls_segment_filename', path.join(live, 'seg%d.ts'), path.join(live, 'index.m3u8'))
+  }
+  return { media, images, episode, radio, live }
 }
 
 // The words of Aurora Static's Opening Credits, a line every couple of beats.

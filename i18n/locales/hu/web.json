@@ -13,7 +13,8 @@
     "settings": "Beállítások",
     "switchProfile": "Profilváltás",
     "signOut": "Kijelentkezés",
-    "discover": "Felfedezés"
+    "discover": "Felfedezés",
+    "liveTV": "Élő TV"
   },
   "cantReachServer": "A szerver nem érhető el. Újrapróbálás…",
   "player": {
@@ -857,6 +858,10 @@
       "health": {
         "title": "Szerverállapot",
         "hint": "Terhelés, lejátszás, feladatok, hibák és a napló"
+      },
+      "live-tv": {
+        "title": "Élő TV",
+        "hint": "Csatornalisták és műsorújságok"
       }
     }
   },
@@ -1259,6 +1264,46 @@
       "copy": "Másolás",
       "copied": "Másolva",
       "example": "A prometheus.yml fájlba"
+    }
+  },
+  "live": {
+    "settings": {
+      "intro": "Adj hozzá TV-csatornalistákat (M3U), műsorújsággal (XMLTV), ha van. A válaszolni nem tudó csatornák el lesznek rejtve. A gyerekprofilok és a barátok nem látják az élő TV-t.",
+      "add": "Csatornák hozzáadása",
+      "suggested": "Nyilvános csatornák (iptv-org)",
+      "ownPlaylist": "Saját lista",
+      "iptvOrgIntro": "Az <site>iptv-org</site> az interneten nyilvánosan sugárzott TV-csatornákat gyűjti. Válassz országokat, kategóriákat vagy nyelveket.",
+      "yourCall": "Az iptv-org egyes adásai talán nem magától a csatornától származnak, vagy nem a te országodnak szólnak. Csak azt nézd, amit szabad.",
+      "countries": "Országok",
+      "categories": "Kategóriák",
+      "languages": "Nyelvek",
+      "anyPick": "Gépelj a kereséshez",
+      "unpick": "{{name}} eltávolítása",
+      "pickHint": "A csatornáknak minden fajtából egy választásnak meg kell felelniük.",
+      "pickNothing": "Választás nélkül minden csatorna bekerül: több ezer.",
+      "playlist": "A lista címe (M3U)",
+      "guide": "A műsorújság címe (XMLTV, nem kötelező)",
+      "guideHint": "Egy .xml vagy .xml.gz fájl. Hagyd üresen, ha a lista megadja a sajátját.",
+      "name": "Név (nem kötelező)",
+      "addThis": "Hozzáadás",
+      "reading": "Csatornák beolvasása…",
+      "counts": "Csatornák: {{count}} · sugároz: {{playing}} · nem válaszol: {{broken}} · rejtett: {{hidden}}",
+      "guideShows": "Műsorok a műsorújságban: {{count}}",
+      "guideFailed": "A műsorújság nem olvasható: {{reason}}",
+      "noGuide": "Nincs műsorújság",
+      "guideLoading": "Műsorújság beolvasása…",
+      "refreshFailed": "A legutóbbi frissítés nem sikerült: {{reason}}",
+      "refresh": "Frissítés most",
+      "remove": "Eltávolítás",
+      "removeConfirm": "Eltávolítod a(z) {{name}} forrást a csatornáival együtt?",
+      "broken": "Nem válaszol",
+      "works": "Sugároz",
+      "notChecked": "Még nincs ellenőrizve",
+      "hidden": "Rejtett",
+      "hide": "Elrejtés",
+      "show": "Megjelenítés",
+      "more": "Az első 300 látható. Keress rá egy csatornára a többiért.",
+      "everything": "minden"
     }
   }
 }

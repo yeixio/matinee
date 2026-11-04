@@ -313,3 +313,18 @@ export const stations = [
 
 // What the stations say they're playing, in turn.
 export const onAir = ['Aurora Static - Signal Fires', 'The Paper Boats - Low Light', 'Mira Vale - Coastline', 'Glass Arcade - Neon Rain', 'Aurora Static - Northern Line']
+
+// Live TV: made-up channels on a made-up public list (iptv-org's stand-in
+// in fake-podcasts.mjs), each with shows in its guide. Hours are from the
+// start of today's guide, in order; every channel plays the same clip.
+export const channels = [
+  { name: 'Harbor News 24', country: 'US', categories: ['news'], language: 'eng', hue: 210, shows: ['Morning Desk', 'Harbor Today', 'The Midday Report', 'World Tonight', 'Late Edition'] },
+  { name: 'Copper Valley Weather', country: 'US', categories: ['weather'], language: 'eng', hue: 190, shows: ['Forecast First', 'Storm Watch', 'The Weekend Ahead'] },
+  { name: 'Lantern Sports', country: 'US', categories: ['sports'], language: 'eng', hue: 12, shows: ['Match Day Live', 'Extra Time', 'The Final Whistle'] },
+  { name: 'Northwind Docs', country: 'GB', categories: ['documentary'], language: 'eng', hue: 150, shows: ['Coastlines', 'The Clockmakers', 'Deep Forest', 'Night Trains'] },
+  { name: 'Marquee Classics', country: 'US', categories: ['movies', 'classic'], language: 'eng', hue: 40, shows: ['Saturday Matinee', 'The Silver Screen Hour', 'Midnight Double Bill'] },
+  { name: 'Kestrel Kids', country: 'GB', categories: ['kids'], language: 'eng', hue: 95, shows: ['Puddle Jumpers', 'The Paper Planes', 'Moon Bakery', 'Story Time'] },
+  { name: 'Juniper Kitchen', country: 'CA', categories: ['cooking'], language: 'eng', hue: 330, shows: ['Supper in Twenty', 'The Bread Hour', 'Market to Table'] },
+  { name: 'Atlas Travel', country: 'CA', categories: ['travel'], language: 'eng', hue: 255, shows: ['Slow Roads', 'Islands', 'Night Markets'] },
+  { name: 'Canal Noticias', country: 'MX', categories: ['news'], language: 'spa', hue: 0, shows: ['Primera Hora', 'Noticias al Día'] },
+]

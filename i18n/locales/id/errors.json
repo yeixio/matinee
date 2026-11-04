@@ -228,5 +228,16 @@
   "q_or_tag_is_required": "q atau tag wajib diisi",
   "the_station_couldnt_be_reached_check_the_address_and_try_again": "stasiun tidak dapat dijangkau. Periksa alamatnya lalu coba lagi.",
   "the_station_couldnt_be_reached_reason": "stasiun tidak dapat dijangkau: {{reason}}",
-  "the_station_directory_isnt_answering_right_now": "direktori stasiun sedang tidak merespons"
+  "the_station_directory_isnt_answering_right_now": "direktori stasiun sedang tidak merespons",
+  "add_the_playlists_web_address": "tambahkan alamat web daftar",
+  "channel_not_found": "saluran tidak ditemukan",
+  "iptv_org_isnt_answering_right_now": "iptv-org sedang tidak merespons",
+  "source_not_found": "sumber tidak ditemukan",
+  "that_address_isnt_a_channel_playlist_m3u": "alamat itu bukan daftar saluran (M3U)",
+  "that_link_has_expired": "tautan itu sudah kedaluwarsa",
+  "that_playlist_has_no_channels_matinee_can_play": "daftar itu tidak memiliki saluran yang dapat diputar Matinee",
+  "that_source_is_being_refreshed_already": "sumber itu sedang disegarkan",
+  "the_channel_isnt_answering_right_now": "saluran sedang tidak merespons",
+  "the_guides_address_isnt_a_web_address": "alamat panduan bukan alamat web",
+  "the_playlist_couldnt_be_read_reason": "daftar tidak dapat dibaca: {{reason}}"
 }
