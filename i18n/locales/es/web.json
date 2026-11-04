@@ -1116,7 +1116,8 @@
       "transcoding": "Transcodificando",
       "away": "Fuera de casa",
       "paused": "En pausa",
-      "buffering": "Cargando"
+      "buffering": "Cargando",
+      "stalled": "Búfer: {{why}}"
     },
     "transcodes": {
       "title": "Transcodificaciones",

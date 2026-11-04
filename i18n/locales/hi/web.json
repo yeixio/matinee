@@ -1108,7 +1108,8 @@
       "transcoding": "ट्रांसकोडिंग",
       "away": "घर से बाहर",
       "paused": "रुका हुआ",
-      "buffering": "बफ़र हो रहा है"
+      "buffering": "बफ़र हो रहा है",
+      "stalled": "बफ़रिंग: {{why}}"
     },
     "transcodes": {
       "title": "ट्रांसकोड",

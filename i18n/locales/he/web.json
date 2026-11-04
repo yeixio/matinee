@@ -1116,7 +1116,8 @@
       "transcoding": "המרה",
       "away": "מחוץ לבית",
       "paused": "מושהה",
-      "buffering": "טוען"
+      "buffering": "טוען",
+      "stalled": "טעינה: {{why}}"
     },
     "transcodes": {
       "title": "המרות",

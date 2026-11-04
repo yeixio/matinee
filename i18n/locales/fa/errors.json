@@ -248,5 +248,7 @@
   "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "شناسه TMDB، نشانی TMDB یا شناسه IMDb را بفرستید",
   "tmdb_has_no_such_title": "چنین عنوانی در TMDB نیست",
   "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "الان اتصال اینترنت برقرار نیست. سرور شما سالم است؛ این کار به اینترنت نیاز دارد و با برگشتن آن دوباره کار می‌کند.",
-  "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMapping باید hable، mobius، reinhard یا off باشد"
+  "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMapping باید hable، mobius، reinhard یا off باشد",
+  "kind_must_be_stall_or_error": "kind باید stall یا error باشد",
+  "bytes_must_be_between_0_and_104857600": "bytes باید بین 0 تا 104857600 باشد"
 }

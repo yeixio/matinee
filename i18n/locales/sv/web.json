@@ -1108,7 +1108,8 @@
       "transcoding": "Omkodas",
       "away": "Hemifrån",
       "paused": "Pausad",
-      "buffering": "Buffrar"
+      "buffering": "Buffrar",
+      "stalled": "Buffrade: {{why}}"
     },
     "transcodes": {
       "title": "Omkodningar",

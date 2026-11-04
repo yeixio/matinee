@@ -1124,7 +1124,8 @@
       "transcoding": "Převádí se",
       "away": "Mimo domov",
       "paused": "Pozastaveno",
-      "buffering": "Načítá se"
+      "buffering": "Načítá se",
+      "stalled": "Načítání: {{why}}"
     },
     "transcodes": {
       "title": "Převody",

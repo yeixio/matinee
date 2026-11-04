@@ -1108,7 +1108,8 @@
       "transcoding": "Transkodierung",
       "away": "Unterwegs",
       "paused": "Pausiert",
-      "buffering": "Puffert"
+      "buffering": "Puffert",
+      "stalled": "Gepuffert: {{why}}"
     },
     "transcodes": {
       "title": "Transkodierungen",

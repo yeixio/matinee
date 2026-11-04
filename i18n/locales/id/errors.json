@@ -248,5 +248,7 @@
   "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "kirim id TMDB, alamat TMDB, atau id IMDb",
   "tmdb_has_no_such_title": "TMDB tidak punya judul itu",
   "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "tidak ada koneksi internet saat ini. Server Anda baik-baik saja; ini butuh internet dan akan berfungsi lagi saat internet kembali.",
-  "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMapping harus hable, mobius, reinhard, atau off"
+  "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMapping harus hable, mobius, reinhard, atau off",
+  "kind_must_be_stall_or_error": "kind harus stall atau error",
+  "bytes_must_be_between_0_and_104857600": "bytes harus antara 0 dan 104857600"
 }

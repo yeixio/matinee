@@ -151,11 +151,14 @@ func (t *Tracker) release(name string) {
 func (t *Tracker) answered(name string) {
 	t.mu.Lock()
 	wasOffline := t.offline()
+	_, wasDown := t.hosts[name]
 	delete(t.hosts, name)
 	if !isPrivate(name) {
 		t.lastOK = t.now()
 	}
-	back := wasOffline && !t.offline()
+	// It's back when a site that was down answers. Another site answering
+	// while one is down only shows that one site is down.
+	back := wasOffline && wasDown && !t.offline()
 	if back {
 		// The internet is back, so the other sites on it most likely are
 		// too: they may be tried again right away rather than after their

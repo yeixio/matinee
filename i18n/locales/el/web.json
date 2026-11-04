@@ -1108,7 +1108,8 @@
       "transcoding": "Μετατροπή",
       "away": "Εκτός σπιτιού",
       "paused": "Σε παύση",
-      "buffering": "Φόρτωση"
+      "buffering": "Φόρτωση",
+      "stalled": "Φόρτωση: {{why}}"
     },
     "transcodes": {
       "title": "Μετατροπές",

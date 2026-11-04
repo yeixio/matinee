@@ -695,5 +695,29 @@
     "wontPlay": "Este canal no se está emitiendo ahora",
     "wontPlayHint": "Su emisión no respondió. Los canales que fallan una y otra vez se ocultan.",
     "tryAgain": "Reintentar"
+  },
+  "why": {
+    "title": "Por qué se almacenó en búfer",
+    "slowDisk": "El servidor lee este archivo despacio: un fragmento tardó {{seconds}} segundos, como desde una unidad de red ocupada.",
+    "slowConvert": "El servidor convierte este vídeo a {{speed}}× de velocidad, más lento de lo que se reproduce.",
+    "slowConnection": "La conexión llega a {{have}} Mbps y este vídeo necesita {{need}} Mbps.",
+    "unknown": "El servidor y la conexión parecían bien. Puede que la red se cortara un momento.",
+    "converted": {
+      "codec": "Se convierte porque este dispositivo no reproduce su formato de vídeo.",
+      "hdr": "Se convierte porque esta pantalla no muestra su HDR.",
+      "subtitle": "Se convierte para dibujar los subtítulos.",
+      "quality": "Se convierte a una calidad más baja."
+    },
+    "tip": {
+      "gpu": "Consejo para administradores: una GPU para transcodificar convierte mucho más rápido. Ve a Ajustes → Streaming.",
+      "lowerQuality": "Consejo para administradores: la GPU no da abasto. Ayudan menos transmisiones a la vez o una calidad más baja.",
+      "adaptive": "Consejo para administradores: activa la calidad adaptable en Ajustes → Streaming para que los reproductores puedan bajar de calidad.",
+      "disk": "Consejo para administradores: revisa en Estado del servidor el disco o la carpeta de red de esta biblioteca."
+    },
+    "test": "Probar la conexión",
+    "testing": "Probando…",
+    "result": "{{mbps}} Mbps hasta el servidor, {{ms}} ms de ida y vuelta",
+    "testFailed": "No se pudo probar la conexión",
+    "testHint": "Lo rápido que este dispositivo recibe vídeo de tu servidor y cuánto tarda la ida y vuelta."
   }
 }

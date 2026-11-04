@@ -1108,7 +1108,8 @@
       "transcoding": "Transcoding",
       "away": "Away from home",
       "paused": "Paused",
-      "buffering": "Buffering"
+      "buffering": "Buffering",
+      "stalled": "Buffered: {{why}}"
     },
     "transcodes": {
       "title": "Transcodes",

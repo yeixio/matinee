@@ -1100,7 +1100,8 @@
       "transcoding": "Đang chuyển mã",
       "away": "Ngoài nhà",
       "paused": "Tạm dừng",
-      "buffering": "Đang tải"
+      "buffering": "Đang tải",
+      "stalled": "Tải chậm: {{why}}"
     },
     "transcodes": {
       "title": "Chuyển mã",

@@ -1116,7 +1116,8 @@
       "transcoding": "Transcodare",
       "away": "În afara casei",
       "paused": "Pe pauză",
-      "buffering": "Se încarcă"
+      "buffering": "Se încarcă",
+      "stalled": "Încărcare: {{why}}"
     },
     "transcodes": {
       "title": "Transcodări",

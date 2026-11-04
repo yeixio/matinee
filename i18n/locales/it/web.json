@@ -1116,7 +1116,8 @@
       "transcoding": "Transcodifica",
       "away": "Fuori casa",
       "paused": "In pausa",
-      "buffering": "Caricamento"
+      "buffering": "Caricamento",
+      "stalled": "Caricamento: {{why}}"
     },
     "transcodes": {
       "title": "Transcodifiche",

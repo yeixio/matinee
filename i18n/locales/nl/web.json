@@ -1108,7 +1108,8 @@
       "transcoding": "Transcoderen",
       "away": "Buitenshuis",
       "paused": "Gepauzeerd",
-      "buffering": "Bufferen"
+      "buffering": "Bufferen",
+      "stalled": "Gebufferd: {{why}}"
     },
     "transcodes": {
       "title": "Transcoderingen",

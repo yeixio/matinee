@@ -1100,7 +1100,8 @@
       "transcoding": "转码中",
       "away": "不在家",
       "paused": "已暂停",
-      "buffering": "缓冲中"
+      "buffering": "缓冲中",
+      "stalled": "缓冲:{{why}}"
     },
     "transcodes": {
       "title": "转码",

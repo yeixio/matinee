@@ -1100,7 +1100,8 @@
       "transcoding": "Transkod",
       "away": "Di luar rumah",
       "paused": "Dijeda",
-      "buffering": "Menimbal"
+      "buffering": "Menimbal",
+      "stalled": "Menimbal: {{why}}"
     },
     "transcodes": {
       "title": "Transkod",

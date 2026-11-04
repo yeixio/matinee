@@ -695,5 +695,29 @@
     "wontPlay": "Acest canal nu emite acum",
     "wontPlayHint": "Fluxul nu a răspuns. Canalele care eșuează mereu sunt ascunse.",
     "tryAgain": "Încearcă din nou"
+  },
+  "why": {
+    "title": "De ce s-a încărcat",
+    "slowDisk": "Serverul citește încet acest fișier: o bucată a durat {{seconds}} secunde, ca de pe o unitate de rețea ocupată.",
+    "slowConvert": "Serverul convertește acest videoclip la viteză {{speed}}×, mai încet decât rulează.",
+    "slowConnection": "Conexiunea are {{have}} Mbps, iar acest videoclip are nevoie de {{need}} Mbps.",
+    "unknown": "Serverul și conexiunea păreau în regulă. Poate rețeaua a căzut o clipă.",
+    "converted": {
+      "codec": "Este convertit pentru că acest dispozitiv nu redă formatul video.",
+      "hdr": "Este convertit pentru că acest ecran nu afișează HDR-ul lui.",
+      "subtitle": "Este convertit pentru a desena subtitrările.",
+      "quality": "Este convertit la o calitate mai mică."
+    },
+    "tip": {
+      "gpu": "Sfat pentru admini: un GPU pentru transcodare convertește mult mai repede. Vezi Setări → Streaming.",
+      "lowerQuality": "Sfat pentru admini: GPU-ul nu ține pasul. Ajută mai puține fluxuri deodată sau o calitate mai mică.",
+      "adaptive": "Sfat pentru admini: activează calitatea adaptivă în Setări → Streaming, ca playerele să poată coborî.",
+      "disk": "Sfat pentru admini: verifică în Starea serverului discul sau partajarea de rețea a acestei biblioteci."
+    },
+    "test": "Testează conexiunea",
+    "testing": "Se testează…",
+    "result": "{{mbps}} Mbps până la server, {{ms}} ms dus-întors",
+    "testFailed": "Conexiunea nu a putut fi testată",
+    "testHint": "Cât de repede primește acest dispozitiv video de la server și cât durează dus-întorsul."
   }
 }

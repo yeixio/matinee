@@ -23,6 +23,7 @@ import (
 	"github.com/yeixio/matinee/internal/analyze"
 	"github.com/yeixio/matinee/internal/artwork"
 	"github.com/yeixio/matinee/internal/auth"
+	"github.com/yeixio/matinee/internal/diagnose"
 	"github.com/yeixio/matinee/internal/download"
 	"github.com/yeixio/matinee/internal/health"
 	"github.com/yeixio/matinee/internal/hwaccel"
@@ -141,6 +142,9 @@ type Server struct {
 	// live.go); nil makes one.
 	Live     *live.Hub
 	liveOnce sync.Once
+	// Why playback stalled, per person and item (see diagnose.go).
+	causesOnce sync.Once
+	causeLog   *diagnose.Log
 
 	// Together holds Watch together sessions (see together.go); nil makes one.
 	Together     *together.Hub
@@ -342,6 +346,9 @@ func (s *Server) routes() []route {
 		{"POST /items/{id}/refresh", adminOnly, s.refreshItem},
 		{"DELETE /items/{id}/cover", adminOnly, s.resetCover},
 		{"GET /items/{id}/file", reader, s.directFile},
+		{"POST /items/{id}/playback-report", reader, s.reportPlayback},
+		{"GET /items/{id}/playback-why", reader, s.playbackWhy},
+		{"GET /speedtest", reader, s.speedTest},
 		{"GET /items/{id}/subtitles/{track}", reader, s.subtitleFile},
 		{"GET /items/{id}/subtitles/search", reader, grownUps(s.searchSubtitles)},
 		{"POST /items/{id}/subtitles", reader, grownUps(s.addFoundSubtitle)},

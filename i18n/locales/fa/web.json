@@ -1108,7 +1108,8 @@
       "transcoding": "در حال تبدیل",
       "away": "بیرون از خانه",
       "paused": "مکث‌شده",
-      "buffering": "در حال بافر"
+      "buffering": "در حال بافر",
+      "stalled": "بافر: {{why}}"
     },
     "transcodes": {
       "title": "تبدیل‌ها",

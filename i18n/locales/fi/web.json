@@ -1108,7 +1108,8 @@
       "transcoding": "Muunnetaan",
       "away": "Kodin ulkopuolella",
       "paused": "Tauolla",
-      "buffering": "Puskuroi"
+      "buffering": "Puskuroi",
+      "stalled": "Puskuroi: {{why}}"
     },
     "transcodes": {
       "title": "Muunnokset",

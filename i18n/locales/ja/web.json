@@ -1100,7 +1100,8 @@
       "transcoding": "トランスコード中",
       "away": "外出先",
       "paused": "一時停止中",
-      "buffering": "バッファ中"
+      "buffering": "バッファ中",
+      "stalled": "読み込み停止:{{why}}"
     },
     "transcodes": {
       "title": "トランスコード",

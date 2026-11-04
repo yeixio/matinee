@@ -248,5 +248,7 @@
   "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "שלחו מזהה TMDB, כתובת TMDB או מזהה IMDb",
   "tmdb_has_no_such_title": "אין כותר כזה ב-TMDB",
   "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "אין כרגע חיבור לאינטרנט. השרת שלך תקין; זה צריך אינטרנט ויעבוד שוב כשהחיבור יחזור.",
-  "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMapping חייב להיות hable,‏ mobius,‏ reinhard או off"
+  "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMapping חייב להיות hable,‏ mobius,‏ reinhard או off",
+  "kind_must_be_stall_or_error": "kind חייב להיות stall או error",
+  "bytes_must_be_between_0_and_104857600": "bytes חייב להיות בין 0 ל-104857600"
 }

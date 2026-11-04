@@ -727,5 +727,29 @@
     "wontPlay": "Ten kanał teraz nie nadaje",
     "wontPlayHint": "Jego strumień nie odpowiedział. Kanały, które wciąż zawodzą, są ukrywane.",
     "tryAgain": "Spróbuj ponownie"
+  },
+  "why": {
+    "title": "Dlaczego było buforowanie",
+    "slowDisk": "Serwer wolno czyta ten plik: fragment trwał {{seconds}} s, jak z zajętego dysku sieciowego.",
+    "slowConvert": "Serwer konwertuje to wideo z szybkością {{speed}}×, wolniej niż się odtwarza.",
+    "slowConnection": "Połączenie daje {{have}} Mb/s, a to wideo potrzebuje {{need}} Mb/s.",
+    "unknown": "Serwer i połączenie wyglądały dobrze. Sieć mogła na chwilę zniknąć.",
+    "converted": {
+      "codec": "Jest konwertowane, bo to urządzenie nie odtwarza tego formatu wideo.",
+      "hdr": "Jest konwertowane, bo ten ekran nie pokazuje tego HDR.",
+      "subtitle": "Jest konwertowane, by wrysować napisy.",
+      "quality": "Jest konwertowane do niższej jakości."
+    },
+    "tip": {
+      "gpu": "Wskazówka dla administratorów: GPU do transkodowania konwertuje dużo szybciej. Zobacz Ustawienia → Streaming.",
+      "lowerQuality": "Wskazówka dla administratorów: GPU nie nadąża. Pomoże mniej strumieni naraz lub niższa jakość.",
+      "adaptive": "Wskazówka dla administratorów: włącz jakość adaptacyjną w Ustawienia → Streaming, by odtwarzacze mogły obniżyć jakość.",
+      "disk": "Wskazówka dla administratorów: sprawdź w Stanie serwera dysk lub udział sieciowy tej biblioteki."
+    },
+    "test": "Testuj połączenie",
+    "testing": "Testowanie…",
+    "result": "{{mbps}} Mb/s do serwera, {{ms}} ms w obie strony",
+    "testFailed": "Nie udało się przetestować połączenia",
+    "testHint": "Jak szybko to urządzenie dostaje wideo z serwera i ile trwa droga w obie strony."
   }
 }

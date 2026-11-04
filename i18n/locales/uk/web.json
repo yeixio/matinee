@@ -1124,7 +1124,8 @@
       "transcoding": "Перекодування",
       "away": "Поза домом",
       "paused": "На паузі",
-      "buffering": "Буферизація"
+      "buffering": "Буферизація",
+      "stalled": "Буферизація: {{why}}"
     },
     "transcodes": {
       "title": "Перекодування",

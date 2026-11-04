@@ -39,6 +39,9 @@ See [Home network](/docs/server/home-network/).
 
 ## Playback stutters or keeps buffering
 
+<!-- since: v0.2.0 -->
+- Open the gauge button in the player's controls. It says why it buffered and can test your connection. See [Why it buffered](/docs/watching/why-it-buffered/).
+<!-- /since -->
 - Look at the title's [File details](/docs/watching/title-pages/#file-details). A 4K HEVC or HDR file usually has to be converted for a browser, which is heavy work without a GPU.
 - **Settings → Streaming → Transcoding** shows whether a GPU is in use. See [Hardware transcoding](/docs/server/transcoding/).
 <!-- since: v0.1.11 -->

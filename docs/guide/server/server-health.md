@@ -39,6 +39,10 @@ On Linux, including Docker and Kubernetes, CPU and memory include the FFmpeg pro
 
 **Playing now** lists every player that has something open: who, on which device and app, how far along, and whether it plays the file directly or the server is converting it. Players away from home are marked.
 
+<!-- since: v0.2.0 -->
+When a stream stopped to buffer in the last few minutes, it says why under the title: the server read the file slowly, converted slower than real time, or the connection was slower than the video. See [Why it buffered](/docs/watching/why-it-buffered/).
+<!-- /since -->
+
 **Transcodes** lists what FFmpeg is working on: the title and who it's for, whether it converts the picture or only repackages it, whether the GPU does the work (and how much of it), the quality, and whether subtitles are drawn into the picture. Below the list is the GPU new transcodes use, as in **Settings → Streaming → Transcoding**.
 
 ![Playing now and Transcodes, with a movie playing directly and two transcodes on the CPU](../images/server-health-playing.webp)

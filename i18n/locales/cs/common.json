@@ -727,5 +727,29 @@
     "wontPlay": "Tento kanál teď nevysílá",
     "wontPlayHint": "Jeho stream neodpověděl. Kanály, které stále selhávají, se skryjí.",
     "tryAgain": "Zkusit znovu"
+  },
+  "why": {
+    "title": "Proč se načítalo",
+    "slowDisk": "Server čte tento soubor pomalu: kus trval {{seconds}} s, jako z vytíženého síťového disku.",
+    "slowConvert": "Server převádí toto video rychlostí {{speed}}×, pomaleji, než se přehrává.",
+    "slowConnection": "Připojení zvládá {{have}} Mb/s a toto video potřebuje {{need}} Mb/s.",
+    "unknown": "Server i připojení vypadaly dobře. Síť možná na chvíli vypadla.",
+    "converted": {
+      "codec": "Převádí se, protože toto zařízení nepřehraje jeho formát videa.",
+      "hdr": "Převádí se, protože tato obrazovka neukáže jeho HDR.",
+      "subtitle": "Převádí se kvůli vkreslení titulků.",
+      "quality": "Převádí se do nižší kvality."
+    },
+    "tip": {
+      "gpu": "Tip pro správce: GPU pro překódování převádí mnohem rychleji. Viz Nastavení → Streamování.",
+      "lowerQuality": "Tip pro správce: GPU nestíhá. Pomůže méně streamů naráz nebo nižší kvalita.",
+      "adaptive": "Tip pro správce: zapněte adaptivní kvalitu v Nastavení → Streamování, aby přehrávače mohly kvalitu snížit.",
+      "disk": "Tip pro správce: zkontrolujte ve Stavu serveru disk nebo síťové sdílení této knihovny."
+    },
+    "test": "Otestovat připojení",
+    "testing": "Testuje se…",
+    "result": "{{mbps}} Mb/s k serveru, {{ms}} ms tam a zpět",
+    "testFailed": "Připojení se nepodařilo otestovat",
+    "testHint": "Jak rychle toto zařízení dostává video z vašeho serveru a jak dlouho trvá cesta tam a zpět."
   }
 }

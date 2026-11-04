@@ -1108,7 +1108,8 @@
       "transcoding": "Átkódolás",
       "away": "Otthonon kívül",
       "paused": "Szüneteltetve",
-      "buffering": "Pufferelés"
+      "buffering": "Pufferelés",
+      "stalled": "Töltött: {{why}}"
     },
     "transcodes": {
       "title": "Átkódolások",

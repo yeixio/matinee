@@ -248,5 +248,7 @@
   "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "stuur de TMDB-id, het TMDB-adres of de IMDb-id om mee te koppelen",
   "tmdb_has_no_such_title": "TMDB kent deze titel niet",
   "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "op dit moment geen internetverbinding. Je server is in orde; dit heeft internet nodig en werkt weer zodra het terug is.",
-  "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMapping moet hable, mobius, reinhard of off zijn"
+  "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMapping moet hable, mobius, reinhard of off zijn",
+  "kind_must_be_stall_or_error": "kind moet stall of error zijn",
+  "bytes_must_be_between_0_and_104857600": "bytes moet tussen 0 en 104857600 liggen"
 }

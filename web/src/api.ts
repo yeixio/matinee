@@ -911,6 +911,8 @@ export type Health = {
     version?: string
     user: { id: number; name: string; guest?: boolean }
     remote?: boolean
+    /** Why it last stopped to buffer, in the last few minutes. */
+    stalled?: PlaybackCause
     playing: {
       item: { id: number; kind: string; title: string; year?: number; showTitle?: string; season?: number; episode?: number }
       positionMs: number
@@ -1116,6 +1118,28 @@ export type LiveSource = {
 export type LiveSourceInput = { name?: string; playlistUrl?: string; iptvOrg?: LiveFilter; guideUrl?: string }
 export type LiveChoice = { code: string; name: string; flag?: string }
 export type IPTVOrgChoices = { countries: LiveChoice[]; categories: LiveChoice[]; languages: LiveChoice[] }
+
+export interface PlaybackReport {
+  kind: 'stall' | 'error'
+  positionMs: number
+  /** How fast the player got the stream, in bits a second; 0 when it doesn't know. */
+  downloadBps: number
+  bufferMs: number
+  neededBps?: number
+  code?: string
+  message?: string
+}
+
+/** Why playback stalled, as the server worked it out. */
+export interface PlaybackCause {
+  code: 'slowDisk' | 'slowConvert' | 'slowConnection' | 'unknown'
+  values?: Record<string, string>
+  /** What an admin could change; only admins get one. */
+  tip?: 'gpu' | 'lowerQuality' | 'adaptive' | 'disk'
+  /** Why the server converts this video at all. */
+  converted?: 'codec' | 'hdr' | 'subtitle' | 'quality'
+  at: number
+}
 
 async function request<T>(method: string, path: string, body?: unknown): Promise<T> {
   const res = await fetch(path, {
@@ -1457,6 +1481,10 @@ export const api = {
   // on, off, or null to leave it to Matinee.
   setGapless: (id: number, gapless: boolean | null) => request<Item>('PUT', `/api/v1/items/${id}/gapless`, { gapless }),
   streaming: () => request<Streaming>('GET', '/api/v1/streaming'),
+  // Tell the server playback stalled (or failed) and hear why (see player/why.ts).
+  reportPlayback: (id: number, report: PlaybackReport) =>
+    request<{ cause: PlaybackCause }>('POST', `/api/v1/items/${id}/playback-report`, report),
+  playbackWhy: (id: number) => request<{ cause: PlaybackCause | null }>('GET', `/api/v1/items/${id}/playback-why`),
   trailers: (id: number) => request<Trailer[]>('GET', `/api/v1/items/${id}/trailers`),
   startTrailerHls: (id: number, trailer: string) =>
     request<{ url: string; startSec: number }>('POST', `/api/v1/items/${id}/trailers/${encodeURIComponent(trailer)}/hls`),

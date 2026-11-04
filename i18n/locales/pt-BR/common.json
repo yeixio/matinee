@@ -695,5 +695,29 @@
     "wontPlay": "Este canal não está transmitindo agora",
     "wontPlayHint": "O stream não respondeu. Canais que falham repetidamente são ocultados.",
     "tryAgain": "Tentar de novo"
+  },
+  "why": {
+    "title": "Por que travou para carregar",
+    "slowDisk": "O servidor está lendo este arquivo devagar: um trecho levou {{seconds}} segundos, como de uma unidade de rede ocupada.",
+    "slowConvert": "O servidor converte este vídeo a {{speed}}× de velocidade, mais devagar do que ele toca.",
+    "slowConnection": "A conexão chega a {{have}} Mbps e este vídeo precisa de {{need}} Mbps.",
+    "unknown": "O servidor e a conexão pareciam bem. A rede pode ter caído por um instante.",
+    "converted": {
+      "codec": "Ele é convertido porque este aparelho não reproduz o formato de vídeo.",
+      "hdr": "Ele é convertido porque esta tela não mostra o HDR dele.",
+      "subtitle": "Ele é convertido para desenhar as legendas.",
+      "quality": "Ele é convertido para uma qualidade menor."
+    },
+    "tip": {
+      "gpu": "Dica para admins: uma GPU para transcodificar converte muito mais rápido. Veja Configurações → Streaming.",
+      "lowerQuality": "Dica para admins: a GPU não está dando conta. Menos streams ao mesmo tempo ou uma qualidade menor ajudam.",
+      "adaptive": "Dica para admins: ative a qualidade adaptável em Configurações → Streaming, para que os players possam baixar a qualidade.",
+      "disk": "Dica para admins: confira em Saúde do servidor o disco ou o compartilhamento de rede desta biblioteca."
+    },
+    "test": "Testar conexão",
+    "testing": "Testando…",
+    "result": "{{mbps}} Mbps até o servidor, {{ms}} ms de ida e volta",
+    "testFailed": "Não foi possível testar a conexão",
+    "testHint": "A velocidade com que este aparelho recebe vídeo do seu servidor e quanto dura a ida e volta."
   }
 }

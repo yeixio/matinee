@@ -1108,7 +1108,8 @@
       "transcoding": "Dönüştürülüyor",
       "away": "Ev dışında",
       "paused": "Duraklatıldı",
-      "buffering": "Arabelleğe alınıyor"
+      "buffering": "Arabelleğe alınıyor",
+      "stalled": "Arabelleğe aldı: {{why}}"
     },
     "transcodes": {
       "title": "Dönüştürmeler",

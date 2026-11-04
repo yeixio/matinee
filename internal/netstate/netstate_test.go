@@ -71,10 +71,11 @@ func TestDownSiteFailsFastThenIsTriedAgain(t *testing.T) {
 	if st := tr.Status(); len(st.Down) != 0 {
 		t.Fatalf("still down: %+v", st)
 	}
+	// Back runs in its own goroutine, so give it a moment.
 	select {
 	case <-backs:
 		t.Fatal("the internet wasn't down, only one site")
-	default:
+	case <-time.After(100 * time.Millisecond):
 	}
 }
 

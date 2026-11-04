@@ -1108,7 +1108,8 @@
       "transcoding": "ٹرانس کوڈنگ",
       "away": "گھر سے باہر",
       "paused": "رکا ہوا",
-      "buffering": "بفرنگ"
+      "buffering": "بفرنگ",
+      "stalled": "بفرنگ: {{why}}"
     },
     "transcodes": {
       "title": "ٹرانس کوڈ",

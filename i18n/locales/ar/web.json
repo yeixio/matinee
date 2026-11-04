@@ -1140,7 +1140,8 @@
       "transcoding": "تحويل",
       "away": "خارج المنزل",
       "paused": "متوقف مؤقتًا",
-      "buffering": "تخزين مؤقت"
+      "buffering": "تخزين مؤقت",
+      "stalled": "توقف للتحميل: {{why}}"
     },
     "transcodes": {
       "title": "التحويلات",

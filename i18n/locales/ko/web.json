@@ -1100,7 +1100,8 @@
       "transcoding": "트랜스코딩",
       "away": "외부",
       "paused": "일시 정지",
-      "buffering": "버퍼링"
+      "buffering": "버퍼링",
+      "stalled": "버퍼링: {{why}}"
     },
     "transcodes": {
       "title": "트랜스코딩",

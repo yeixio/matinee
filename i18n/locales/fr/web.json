@@ -1116,7 +1116,8 @@
       "transcoding": "Transcodage",
       "away": "Hors du domicile",
       "paused": "En pause",
-      "buffering": "Mise en mémoire tampon"
+      "buffering": "Mise en mémoire tampon",
+      "stalled": "Mise en mémoire tampon : {{why}}"
     },
     "transcodes": {
       "title": "Transcodages",

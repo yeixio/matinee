@@ -1108,7 +1108,8 @@
       "transcoding": "Omkoder",
       "away": "Borte",
       "paused": "Satt på pause",
-      "buffering": "Bufrer"
+      "buffering": "Bufrer",
+      "stalled": "Bufret: {{why}}"
     },
     "transcodes": {
       "title": "Omkodinger",

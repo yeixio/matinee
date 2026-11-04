@@ -1124,7 +1124,8 @@
       "transcoding": "Transkodowanie",
       "away": "Poza domem",
       "paused": "Wstrzymane",
-      "buffering": "Buforowanie"
+      "buffering": "Buforowanie",
+      "stalled": "Buforowanie: {{why}}"
     },
     "transcodes": {
       "title": "Transkodowania",
