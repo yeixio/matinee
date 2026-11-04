@@ -247,5 +247,6 @@
   "tmdb_no_longer_has_this_title_fix_the_match_instead": "a TMDB-n már nincs meg ez a cím; javítsd az egyezést",
   "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "küldd el a TMDB-azonosítót, TMDB-címet vagy IMDb-azonosítót",
   "tmdb_has_no_such_title": "a TMDB-n nincs ilyen cím",
-  "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "jelenleg nincs internetkapcsolat. A szervered rendben van; ehhez internet kell, és újra működik, amint visszajön."
+  "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "jelenleg nincs internetkapcsolat. A szervered rendben van; ehhez internet kell, és újra működik, amint visszajön.",
+  "tonemapping_must_be_hable_mobius_reinhard_or_off": "A toneMapping értéke hable, mobius, reinhard vagy off lehet"
 }

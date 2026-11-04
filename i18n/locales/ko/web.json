@@ -748,6 +748,13 @@
       "auto": "자동: 작동하는 것 중 최선",
       "off": "끄기: 항상 CPU 사용",
       "notFound": "{{name}} (이 서버에 없음)",
+      "toneMap": "HDR 톤 매핑",
+      "toneMapDetail": "HDR 영화를 변환할 때 SDR로 바꿔 밋밋하고 회색빛으로 보이지 않게 합니다.",
+      "hable": "Hable (권장)",
+      "mobius": "Mobius: 밝기를 더 유지",
+      "reinhard": "Reinhard: 하이라이트가 부드러움",
+      "toneMapOff": "끔",
+      "toneMapMissing": "이 서버의 FFmpeg는 톤 매핑을 할 수 없어 변환된 HDR이 바래 보입니다. Docker 이미지와 패키지처럼 zimg로 빌드한 FFmpeg를 사용하세요.",
       "adaptive": "적응형 화질",
       "adaptiveDetail": "플레이어에서 자동과 고정 화질을 고를 수 있어요. 자동은 연결이 느리면 화질을 낮추고 회복되면 다시 높여요. 변환하는 영상은 여러 화질로 동시에 만들어져 서버에 부담이 더 커져요.",
       "steps": "화질 단계",
@@ -1109,6 +1116,7 @@
         "full": "{{name}} 디코딩 및 인코딩"
       },
       "burnSub": "자막 입힘",
+      "toneMapped": "HDR을 SDR로",
       "why": {
         "codec": "기기가 이 동영상 형식을 재생할 수 없음",
         "hdr": "화면이 이 HDR을 표시할 수 없음",

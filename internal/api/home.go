@@ -1,12 +1,14 @@
 package api
 
 import (
+	"cmp"
 	"context"
 	"encoding/json"
 	"errors"
 	"net"
 	"net/http"
 	"net/netip"
+	"slices"
 	"strconv"
 	"strings"
 	"sync"
@@ -44,6 +46,15 @@ const settingHomeSignIn = "home_sign_in_required"
 // SettingHardwareAcceleration holds serverSettings.HardwareAcceleration. The
 // server reads it at startup to set up the transcoder.
 const SettingHardwareAcceleration = "hardware_acceleration"
+
+// settingToneMapping holds serverSettings.ToneMapping.
+const settingToneMapping = "tone_mapping"
+
+// toneMapping is how converted HDR is made SDR: an algorithm, or off.
+func (s *Server) toneMapping(ctx context.Context) (string, error) {
+	v, err := s.Store.Setting(ctx, settingToneMapping)
+	return cmp.Or(v, stream.ToneMapHable), err
+}
 
 type homeKey struct{}
 
@@ -139,6 +150,12 @@ type serverSettings struct {
 	// Hardware says which accelerator is in use and which ones work here.
 	// It can't be changed.
 	Hardware *hwaccel.Status `json:"hardware,omitempty"`
+	// ToneMapping is how an HDR picture that's converted is made SDR, so
+	// it isn't flat and grey: hable (the default), mobius, reinhard, or
+	// off. ToneMapTools says what this server's FFmpeg can do it with;
+	// it can't be changed.
+	ToneMapping  string            `json:"toneMapping"`
+	ToneMapTools *stream.ToneTools `json:"toneMapTools,omitempty"`
 	// RemoteTrailers offers trailers from TMDB (played from YouTube) along
 	// with trailer files next to the media. On unless an admin turns it off.
 	RemoteTrailers bool `json:"remoteTrailers"`
@@ -232,11 +249,19 @@ func (s *Server) settings(ctx context.Context) (serverSettings, error) {
 	if err != nil {
 		return serverSettings{}, err
 	}
+	toneMap, err := s.toneMapping(ctx)
+	if err != nil {
+		return serverSettings{}, err
+	}
 	themes, problems := s.themes()
 	def, err := s.defaultTheme(ctx, themes)
 	set := serverSettings{AdaptiveQuality: quality.Adaptive, QualitySteps: stepIDs(quality.Steps), RemoteQualityCap: quality.Cap, RequireSignInAtHome: required, Requests: mode, RemoteTrailers: trailers, HolidayRows: holidaysOn, OnlineLyrics: lyricsOn, Theme: def,
 		RemoteAccess: remoteOn, RemoteForwardedPort: forwarded, Remote: s.remoteStatus(), PublicURL: s.PublicURL, PublicURLHomeOnly: s.PublicURL != "" && !s.publicURLIsPublic(ctx), TMDB: tmdb,
-		ThemeProblems: []string{}, HardwareAcceleration: hwaccel.Auto, Hardware: &hwaccel.Status{Available: []hwaccel.Accel{}}}
+		ThemeProblems: []string{}, HardwareAcceleration: hwaccel.Auto, Hardware: &hwaccel.Status{Available: []hwaccel.Accel{}}, ToneMapping: toneMap}
+	if s.Transcoder != nil {
+		tools := s.Transcoder.ToneTools()
+		set.ToneMapTools = &tools
+	}
 	for _, p := range problems {
 		set.ThemeProblems = append(set.ThemeProblems, p.Error())
 	}
@@ -267,6 +292,7 @@ func (s *Server) putSettings(w http.ResponseWriter, r *http.Request) {
 		RequireSignInAtHome  *bool     `json:"requireSignInAtHome"`
 		Requests             *string   `json:"requests"`
 		HardwareAcceleration *string   `json:"hardwareAcceleration"`
+		ToneMapping          *string   `json:"toneMapping"`
 		RemoteTrailers       *bool     `json:"remoteTrailers"`
 		HolidayRows          *bool     `json:"holidayRows"`
 		OnlineLyrics         *bool     `json:"onlineLyrics"`
@@ -281,6 +307,7 @@ func (s *Server) putSettings(w http.ResponseWriter, r *http.Request) {
 		TMDBKey *string `json:"tmdbKey"`
 		// Read-only; accepted so a client can send back what it got.
 		Hardware            json.RawMessage `json:"hardware"`
+		ToneMapTools        json.RawMessage `json:"toneMapTools"`
 		ThemeProblems       json.RawMessage `json:"themeProblems"`
 		Remote              json.RawMessage `json:"remote"`
 		PublicURL           json.RawMessage `json:"publicURL"`
@@ -331,6 +358,16 @@ func (s *Server) putSettings(w http.ResponseWriter, r *http.Request) {
 		}
 		if hw := s.HW; hw != nil {
 			hw.SetPreference(*p)
+		}
+	}
+	if m := in.ToneMapping; m != nil && *m != "" {
+		if *m != stream.ToneMapOff && !slices.Contains(stream.ToneMapAlgorithms, *m) {
+			writeError(w, http.StatusBadRequest, "toneMapping must be hable, mobius, reinhard or off")
+			return
+		}
+		if err := s.Store.SetSetting(ctx, settingToneMapping, *m); err != nil {
+			s.serverError(w, err)
+			return
 		}
 	}
 	if t := in.Theme; t != nil && *t != "" {

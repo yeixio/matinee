@@ -756,6 +756,13 @@
       "auto": "Automatica: la migliore che funziona",
       "off": "Disattivata: usa sempre la CPU",
       "notFound": "{{name}} (non trovato su questo server)",
+      "toneMap": "Tone mapping HDR",
+      "toneMapDetail": "Quando un film HDR viene convertito, diventa SDR per non apparire piatto e grigio.",
+      "hable": "Hable (consigliato)",
+      "mobius": "Mobius: mantiene più luminosità",
+      "reinhard": "Reinhard: luci più morbide",
+      "toneMapOff": "Disattivato",
+      "toneMapMissing": "L’FFmpeg di questo server non sa fare il tone mapping, quindi l’HDR convertito appare slavato. Usa un FFmpeg compilato con zimg, come quello dell’immagine Docker e dei pacchetti.",
       "adaptive": "Qualità adattiva",
       "adaptiveDetail": "I player offrono Auto e qualità fisse. Auto abbassa l’immagine quando la connessione è lenta e la rialza quando si riprende. Il video convertito viene creato in più qualità insieme, il che impegna di più il server.",
       "steps": "Livelli di qualità",
@@ -1125,6 +1132,7 @@
         "full": "{{name}} decodifica e codifica"
       },
       "burnSub": "sottotitoli impressi",
+      "toneMapped": "Da HDR a SDR",
       "why": {
         "codec": "il dispositivo non riproduce questo formato video",
         "hdr": "lo schermo non mostra questo HDR",

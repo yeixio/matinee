@@ -1294,6 +1294,23 @@ function Transcoding() {
             ))}
           </select>
         </Field>
+        <Field label={t('settings.transcoding.toneMap')}>
+          <select
+            className={inputClass}
+            value={data?.toneMapping ?? 'hable'}
+            disabled={!data || save.isPending}
+            onChange={(e) => save.mutate({ toneMapping: e.target.value as 'hable' | 'mobius' | 'reinhard' | 'off' })}
+          >
+            <option value="hable">{t('settings.transcoding.hable')}</option>
+            <option value="mobius">{t('settings.transcoding.mobius')}</option>
+            <option value="reinhard">{t('settings.transcoding.reinhard')}</option>
+            <option value="off">{t('settings.transcoding.toneMapOff')}</option>
+          </select>
+          <span className="block text-sm text-muted normal-case">{t('settings.transcoding.toneMapDetail')}</span>
+        </Field>
+        {data?.toneMapTools && !data.toneMapTools.zscale && data.toneMapping !== 'off' && (
+          <p className="text-sm text-danger">{t('settings.transcoding.toneMapMissing')}</p>
+        )}
       </div>
       <StreamingQuality />
     </section>

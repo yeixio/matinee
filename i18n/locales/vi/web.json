@@ -748,6 +748,13 @@
       "auto": "Tự động: loại tốt nhất hoạt động được",
       "off": "Tắt: luôn dùng CPU",
       "notFound": "{{name}} (không tìm thấy trên máy chủ này)",
+      "toneMap": "Ánh xạ tông màu HDR",
+      "toneMapDetail": "Khi phim HDR được chuyển đổi, nó được đổi sang SDR để không trông phẳng và xám.",
+      "hable": "Hable (khuyên dùng)",
+      "mobius": "Mobius: giữ độ sáng nhiều hơn",
+      "reinhard": "Reinhard: vùng sáng dịu hơn",
+      "toneMapOff": "Tắt",
+      "toneMapMissing": "FFmpeg của máy chủ này không ánh xạ tông màu được, nên HDR khi chuyển đổi trông bạc màu. Hãy dùng FFmpeg có zimg, như bản trong ảnh Docker và các gói.",
       "adaptive": "Chất lượng thích ứng",
       "adaptiveDetail": "Trình phát có Tự động và các mức chất lượng cố định. Tự động giảm hình khi kết nối chậm và tăng lại khi phục hồi. Video được chuyển đổi sẽ được tạo ở nhiều mức chất lượng cùng lúc, khiến máy chủ phải làm việc nhiều hơn.",
       "steps": "Các mức chất lượng",
@@ -1109,6 +1116,7 @@
         "full": "{{name}} giải mã và mã hóa"
       },
       "burnSub": "phụ đề ghi vào hình",
+      "toneMapped": "HDR sang SDR",
       "why": {
         "codec": "thiết bị không phát được định dạng video này",
         "hdr": "màn hình không hiển thị được HDR này",

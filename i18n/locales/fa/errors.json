@@ -247,5 +247,6 @@
   "tmdb_no_longer_has_this_title_fix_the_match_instead": "این عنوان دیگر در TMDB نیست؛ تطبیق را اصلاح کنید",
   "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "شناسه TMDB، نشانی TMDB یا شناسه IMDb را بفرستید",
   "tmdb_has_no_such_title": "چنین عنوانی در TMDB نیست",
-  "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "الان اتصال اینترنت برقرار نیست. سرور شما سالم است؛ این کار به اینترنت نیاز دارد و با برگشتن آن دوباره کار می‌کند."
+  "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "الان اتصال اینترنت برقرار نیست. سرور شما سالم است؛ این کار به اینترنت نیاز دارد و با برگشتن آن دوباره کار می‌کند.",
+  "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMapping باید hable، mobius، reinhard یا off باشد"
 }

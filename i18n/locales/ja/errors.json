@@ -247,5 +247,6 @@
   "tmdb_no_longer_has_this_title_fix_the_match_instead": "TMDB にこのタイトルはもうありません。一致を修正してください",
   "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "一致させる TMDB ID、TMDB のアドレス、または IMDb ID を送ってください",
   "tmdb_has_no_such_title": "TMDB にそのタイトルはありません",
-  "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "現在インターネットに接続されていません。サーバーは正常です。この機能にはインターネットが必要で、接続が戻れば再び使えます。"
+  "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "現在インターネットに接続されていません。サーバーは正常です。この機能にはインターネットが必要で、接続が戻れば再び使えます。",
+  "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMapping は hable、mobius、reinhard、または off にしてください"
 }

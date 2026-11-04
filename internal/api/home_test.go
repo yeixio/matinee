@@ -155,6 +155,29 @@ func TestHardwareAccelerationSetting(t *testing.T) {
 	}
 }
 
+// HDR tone mapping is on (hable) unless an admin picks another way or off.
+func TestToneMappingSetting(t *testing.T) {
+	c, _ := newTestServer(t)
+	var login struct{ Token string }
+	c.do("POST", "/api/v1/setup", credentials{"admin", "correct horse"}, &login)
+	c.token = login.Token
+	var set serverSettings
+	c.do("GET", "/api/v1/settings", nil, &set)
+	if set.ToneMapping != "hable" || set.ToneMapTools == nil {
+		t.Fatalf("defaults: %+v", set)
+	}
+	if code := c.do("PUT", "/api/v1/settings", map[string]any{"toneMapping": "off"}, &set); code != 200 || set.ToneMapping != "off" {
+		t.Fatalf("off: %d %+v", code, set)
+	}
+	if code := c.do("PUT", "/api/v1/settings", map[string]any{"toneMapping": "bright"}, nil); code != http.StatusBadRequest {
+		t.Fatalf("bad choice: %d", code)
+	}
+	set.ToneMapping = "mobius"
+	if code := c.do("PUT", "/api/v1/settings", set, &set); code != 200 || set.ToneMapping != "mobius" {
+		t.Fatalf("round trip: %d %+v", code, set)
+	}
+}
+
 func TestLibraryWatchSetting(t *testing.T) {
 	c, tmp := newTestServer(t, func(s *Server) {
 		s.Watcher = scan.NewWatcher(s.Scanner, s.Log)

@@ -103,6 +103,9 @@ export type Settings = {
   hardwareAcceleration: string
   // problem: why a GPU the server can see couldn't be used, when none works.
   hardware: { active: Accelerator | null; available: Accelerator[]; detecting: boolean; problem?: string }
+  // How converted HDR is made SDR, and what this server's FFmpeg can do it with.
+  toneMapping: 'hable' | 'mobius' | 'reinhard' | 'off'
+  toneMapTools?: { zscale: boolean; placebo: boolean }
   // Offer TMDB's YouTube trailers next to trailer files.
   remoteTrailers: boolean
   // A row of titles for a holiday on Home in the weeks before it.
@@ -928,6 +931,7 @@ export type Health = {
     kind: 'video' | 'copy' | 'audio'
     /** Why the picture is converted rather than copied. */
     why?: 'codec' | 'hdr' | 'subtitle' | 'quality'
+    toneMapped?: boolean
     accel?: string
     accelId?: string
     mode: 'cpu' | 'encode' | 'full'

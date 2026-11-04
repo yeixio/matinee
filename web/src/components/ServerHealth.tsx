@@ -374,6 +374,7 @@ function Streams({ h }: { h: Health }) {
                     x.kind === 'video' && (x.accel ? t(`health.transcodes.mode.${x.mode}`, { name: x.accel }) : t('health.transcodes.mode.cpu')),
                     x.quality?.length && x.quality.join(', '),
                     x.burnSub && t('health.transcodes.burnSub'),
+                    x.toneMapped && t('health.transcodes.toneMapped'),
                   ]
                     .filter(Boolean)
                     .join(' · ')}

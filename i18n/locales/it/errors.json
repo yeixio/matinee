@@ -247,5 +247,6 @@
   "tmdb_no_longer_has_this_title_fix_the_match_instead": "TMDB non ha più questo titolo; correggi l'abbinamento",
   "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "invia l'id TMDB, l'indirizzo TMDB o l'id IMDb da abbinare",
   "tmdb_has_no_such_title": "TMDB non ha questo titolo",
-  "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "nessuna connessione a internet al momento. Il tuo server sta bene; questo richiede internet e tornerà a funzionare quando torna."
+  "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "nessuna connessione a internet al momento. Il tuo server sta bene; questo richiede internet e tornerà a funzionare quando torna.",
+  "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMapping deve essere hable, mobius, reinhard o off"
 }

@@ -102,9 +102,11 @@ type session struct {
 	quality   []string
 	copyVideo bool
 	// why says why the picture is converted rather than copied (see videoPlan).
-	why       string
-	audioOnly bool
-	burnSub   bool
+	why string
+	// toneMapped: an HDR picture is converted to SDR (see ToneMap).
+	toneMapped bool
+	audioOnly  bool
+	burnSub    bool
 	// live is a live TV channel (see StartLive): players start near its
 	// newest piece, and old pieces are gone.
 	live bool
@@ -148,6 +150,9 @@ type Request struct {
 	// the file's HDR.
 	Plays   Plays
 	Picture Picture
+	// ToneMap is how an HDR picture that's converted is made SDR: one of
+	// ToneMapAlgorithms, or ToneMapOff.
+	ToneMap string
 }
 
 // StartFor is Start for a player that says what it plays: a picture it
@@ -170,6 +175,9 @@ func (t *Transcoder) StartFor(ctx context.Context, userID int64, it store.Item, 
 	}
 	video := hwaccel.Video{Codec: it.VideoCodec, BurnSub: burnSub, MaxWidth: maxWidth, KeyframeSeconds: segmentSeconds}
 	copyVideo, why := videoPlan(it, req.Picture, burnSub, steps, req.Plays)
+	if !copyVideo && it.VideoCodec != "" && req.Picture.HDR != "" {
+		video.ToneMap, video.ToneMapInput = ToneMap(req.Picture, req.ToneMap, t.ToneTools())
+	}
 	modes := t.plan(accel, it.ID, video, copyVideo)
 	for i, mode := range modes {
 		id, err := t.start(ctx, userID, it, startSec, accel, mode, video, audio, copyVideo, why, steps)
@@ -319,7 +327,7 @@ func (t *Transcoder) start(ctx context.Context, userID int64, it store.Item, sta
 		return "", fmt.Errorf("start ffmpeg: %w", err)
 	}
 	s := &session{id: id, userID: userID, itemID: it.ID, dir: dir, cmd: cmd, done: make(chan struct{}), lastSeen: time.Now(),
-		started: time.Now(), startSec: startSec, mode: mode, copyVideo: copyVideo, why: why, audioOnly: it.VideoCodec == "", burnSub: video.BurnSub >= 0}
+		started: time.Now(), startSec: startSec, mode: mode, copyVideo: copyVideo, why: why, toneMapped: video.ToneMap != "", audioOnly: it.VideoCodec == "", burnSub: video.BurnSub >= 0}
 	var kind hwaccel.Kind
 	if mode != hwaccel.CPU {
 		kind = accel.Kind

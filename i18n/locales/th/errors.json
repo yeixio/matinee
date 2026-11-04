@@ -247,5 +247,6 @@
   "tmdb_no_longer_has_this_title_fix_the_match_instead": "TMDB ไม่มีเรื่องนี้แล้ว โปรดแก้การจับคู่",
   "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "ส่ง id TMDB ที่อยู่ TMDB หรือ id IMDb",
   "tmdb_has_no_such_title": "TMDB ไม่มีเรื่องนี้",
-  "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "ขณะนี้ไม่มีการเชื่อมต่ออินเทอร์เน็ต เซิร์ฟเวอร์ของคุณปกติดี ส่วนนี้ต้องใช้อินเทอร์เน็ต และจะใช้ได้อีกเมื่ออินเทอร์เน็ตกลับมา"
+  "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "ขณะนี้ไม่มีการเชื่อมต่ออินเทอร์เน็ต เซิร์ฟเวอร์ของคุณปกติดี ส่วนนี้ต้องใช้อินเทอร์เน็ต และจะใช้ได้อีกเมื่ออินเทอร์เน็ตกลับมา",
+  "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMapping ต้องเป็น hable, mobius, reinhard หรือ off"
 }
