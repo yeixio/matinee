@@ -36,6 +36,8 @@ Click any poster to open its page. Everything Matinee knows about the title is h
 A movie or episode with more than one file, such as a 4K copy and a 1080p one, or the theatrical and the extended cut, has a **Version** menu next to the buttons. Each version shows its picture size, HDR, the cut its file name gives, the file size and the format. **Play** plays the one picked, and the browser remembers it for that title next time.
 
 When you haven't picked one, Matinee plays the biggest picture that fits your screen, so a laptop gets the 1080p copy and a 4K TV the 4K one, and fewer streams need converting. Starting from Continue Watching or the home page picks the same way. Where you stopped, what you've watched and your rating are the same whichever version you play. See [Several versions of a movie](/docs/getting-started/organizing-media/#several-versions-of-a-movie) for naming them.
+
+From version 1.0.27 the phone and TV apps pick the same way, and away from home they also leave out a version bigger than your connection takes. To play another version, use the **Version** button in the player, which carries on from the same place.
 <!-- /since -->
 
 <!-- since: v0.2.0 -->
