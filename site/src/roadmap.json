@@ -31,69 +31,13 @@
       "summary": "Not scheduled yet. If one of these matters to you, say so on its issue, or pick it up: help is welcome."
     }
   ],
-  "updated": "2026-11-03",
+  "updated": "2026-11-04",
   "items": [
-    {
-      "repo": "matinee",
-      "number": 219,
-      "title": "Keep watch history, ratings and lists when a file is replaced or renamed",
-      "target": "v0.2",
-      "priority": 1
-    },
-    {
-      "repo": "matinee",
-      "number": 220,
-      "title": "Send HEVC and AV1 video as-is to devices that play it, instead of converting to H.264",
-      "target": "v0.2",
-      "priority": 1
-    },
-    {
-      "repo": "matinee",
-      "number": 221,
-      "title": "Tone map HDR to SDR when converting video, so colors don't look washed out",
-      "target": "v0.2",
-      "priority": 1
-    },
-    {
-      "repo": "matinee",
-      "number": 222,
-      "title": "Fix a wrong match: search for the right title, pick it, and refresh details",
-      "target": "v0.2",
-      "priority": 1
-    },
     {
       "repo": "matinee",
       "number": 223,
       "title": "Show several versions of a movie or episode as one title, with a version picker",
       "target": "v0.3",
-      "priority": 1
-    },
-    {
-      "repo": "matinee",
-      "number": 251,
-      "title": "Keep working with no internet: sign-in, browsing and playback at home",
-      "target": "v0.2",
-      "priority": 1
-    },
-    {
-      "repo": "matinee",
-      "number": 252,
-      "title": "Explain why playback buffered or failed, and what to do about it",
-      "target": "v0.2",
-      "priority": 1
-    },
-    {
-      "repo": "matinee-apps",
-      "number": 134,
-      "title": "Keep working at home when the internet is down",
-      "target": "v0.2",
-      "priority": 1
-    },
-    {
-      "repo": "matinee-apps",
-      "number": 135,
-      "title": "Ask each device what it can play instead of using a fixed list",
-      "target": "v0.2",
       "priority": 1
     },
     {
@@ -129,13 +73,6 @@
       "number": 42,
       "title": "Recognize date-based episodes for daily shows",
       "target": "v0.4",
-      "priority": 2
-    },
-    {
-      "repo": "matinee",
-      "number": 45,
-      "title": "Mark as watched / unwatched from the item page",
-      "target": "v0.2",
       "priority": 2
     },
     {
@@ -245,13 +182,6 @@
     },
     {
       "repo": "matinee",
-      "number": 228,
-      "title": "Back up the database automatically and restore it from Settings",
-      "target": "v0.2",
-      "priority": 2
-    },
-    {
-      "repo": "matinee",
       "number": 229,
       "title": "Playback history for admins, and why each stream is being converted",
       "target": "v0.4",
@@ -346,13 +276,6 @@
       "number": 128,
       "title": "Subtitle look and timing in the phone and TV apps",
       "target": "v0.3",
-      "priority": 2
-    },
-    {
-      "repo": "matinee-apps",
-      "number": 136,
-      "title": "Report playback problems to the server and show why something buffers",
-      "target": "v0.2",
       "priority": 2
     },
     {
@@ -569,6 +492,20 @@
       "repo": "matinee",
       "number": 256,
       "title": "Website: a plain page of promises (what's free, what's paid, what we'll never do)",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee",
+      "number": 259,
+      "title": "Record live TV (DVR)",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee",
+      "number": 260,
+      "title": "Live TV from HDHomeRun and other network tuners",
       "target": "later",
       "priority": 3
     },
