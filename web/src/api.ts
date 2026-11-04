@@ -443,6 +443,12 @@ export type Book = Item & { parts: BookPart[]; chapters: BookChapter[] }
 export type BookGroup = { name: string; books: number; itemIds: number[] }
 
 // A record label in a music library, with a few of its albums for its tile.
+// Sites outside the server that aren't answering (see internal/netstate).
+export type InternetStatus = {
+  offline: boolean
+  since?: number
+  down: { host: string; since: number; retry: number; error?: string; home?: boolean }[]
+}
 export type MatchCandidate = { id: number; title: string; year?: number; overview?: string; poster?: string }
 export type ItemMatch = { tmdbId: number; locked: boolean; ready: boolean; results: MatchCandidate[] }
 export type RecordLabel = { name: string; albums: number; artists: number; covers: Item[] }
@@ -844,6 +850,7 @@ export type Health = {
     remote?: RemoteStatus
     scanIntervalMs: number
     watching?: string
+    internet?: InternetStatus
   }
   system: {
     os: string

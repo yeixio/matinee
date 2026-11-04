@@ -1069,7 +1069,8 @@
       "problems_other": "{{count}} warnings or errors in the last hour",
       "restarting": "The server is restarting",
       "database": "The database isn't answering",
-      "disk": "A folder can't be read"
+      "disk": "A folder can't be read",
+      "offline": "No internet connection"
     },
     "scope": {
       "group": "Matinee and the FFmpeg processes it runs.",
@@ -1203,6 +1204,11 @@
       "live": "Follow new lines",
       "older": "Show older lines",
       "empty": "No lines match."
+    },
+    "internet": {
+      "offline": "No internet connection for {{time}}",
+      "offlineNote": "Everything on your server keeps working. Posters and details for new titles, subtitle search, podcasts, trailers and remote access wait, and catch up once it's back.",
+      "down": "Not answering: {{sites}}"
     }
   },
   "alerts": {

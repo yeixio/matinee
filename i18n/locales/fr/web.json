@@ -1076,7 +1076,8 @@
       "problems_other": "{{count}} avertissements ou erreurs dans la dernière heure",
       "restarting": "Le serveur redémarre",
       "database": "La base de données ne répond pas",
-      "disk": "Un dossier est illisible"
+      "disk": "Un dossier est illisible",
+      "offline": "Pas de connexion internet"
     },
     "scope": {
       "group": "Matinee et les processus FFmpeg qu’il lance.",
@@ -1214,6 +1215,11 @@
       "live": "Suivre les nouvelles lignes",
       "older": "Afficher les lignes plus anciennes",
       "empty": "Aucune ligne ne correspond."
+    },
+    "internet": {
+      "offline": "Pas de connexion internet depuis {{time}}",
+      "offlineNote": "Tout continue de fonctionner sur votre serveur. Les affiches et détails des nouveaux titres, la recherche de sous-titres, les podcasts, les bandes-annonces et l'accès à distance attendent et se mettent à jour à son retour.",
+      "down": "Ne répond pas : {{sites}}"
     }
   },
   "alerts": {

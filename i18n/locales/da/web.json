@@ -1069,7 +1069,8 @@
       "problems_other": "{{count}} advarsler eller fejl den seneste time",
       "restarting": "Serveren genstarter",
       "database": "Databasen svarer ikke",
-      "disk": "En mappe kan ikke læses"
+      "disk": "En mappe kan ikke læses",
+      "offline": "Ingen internetforbindelse"
     },
     "scope": {
       "group": "Matinee og de FFmpeg-processer, det kører.",
@@ -1203,6 +1204,11 @@
       "live": "Følg nye linjer",
       "older": "Vis ældre linjer",
       "empty": "Ingen linjer passer."
+    },
+    "internet": {
+      "offline": "Ingen internetforbindelse i {{time}}",
+      "offlineNote": "Alt på din server bliver ved med at virke. Plakater og detaljer for nye titler, undertekstsøgning, podcasts, trailere og fjernadgang venter og indhenter det, når den er tilbage.",
+      "down": "Svarer ikke: {{sites}}"
     }
   },
   "alerts": {

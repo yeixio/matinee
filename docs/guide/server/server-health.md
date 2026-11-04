@@ -20,6 +20,10 @@ To be told when something goes wrong instead of checking, set up [alerts](/docs/
 
 A line says whether all looks well, or how many warnings and errors there were in the last hour, along with how long the server has been up and its version. It also calls out the bigger problems first: a database that doesn't answer, a folder that can't be read, or a server that's restarting.
 
+<!-- since: v0.2.0 -->
+When the server can't reach the internet, a line under the status says **No internet connection** and for how long, and which sites aren't answering. Lookups that wait for it aren't listed as problems. See [When the internet is down](/docs/server/no-internet/).
+<!-- /since -->
+
 Below it are four readings, each with a chart of the last hour. Point at a chart to see the value at that moment.
 
 | Reading | What it shows |

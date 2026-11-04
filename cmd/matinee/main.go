@@ -40,6 +40,7 @@ import (
 	"github.com/yeixio/matinee/internal/livetv"
 	"github.com/yeixio/matinee/internal/lyrics"
 	"github.com/yeixio/matinee/internal/metadata"
+	"github.com/yeixio/matinee/internal/netstate"
 	"github.com/yeixio/matinee/internal/plugin"
 	"github.com/yeixio/matinee/internal/podcast"
 	"github.com/yeixio/matinee/internal/probe"
@@ -86,6 +87,13 @@ func run() error {
 	logs := health.NewLogs(health.DefaultLines)
 	log := slog.New(logs.Handler(slog.NewTextHandler(os.Stderr, &slog.HandlerOptions{Level: level})))
 	monitor := health.NewMonitor(logs)
+	// Calls to sites on the internet fail at once while they're known to be
+	// down, so an outage never holds up a page, a scan or playback.
+	connections := netstate.New()
+	direct := http.DefaultTransport
+	http.DefaultTransport = connections.Wrap(direct)
+	stream.Remote.Transport = connections.Wrap(stream.Remote.Transport)
+	livetv.Client.Transport = connections.Wrap(livetv.Client.Transport)
 	useWritableCacheDir(cfg.DataDir, log)
 
 	for _, bin := range []string{cfg.FFmpegPath, cfg.FFprobePath} {
@@ -271,6 +279,20 @@ func run() error {
 	}
 	apiServer.TrailerSource = tmdb
 	apiServer.Matcher, apiServer.Refetch = tmdb, fetcher.FetchLibrary
+	apiServer.Connections = connections
+	go connections.Run(ctx, direct)
+	// Titles added while the internet was down get their details as soon
+	// as it's back, without waiting for the next scan.
+	connections.Back = func() {
+		log.Info("the internet is back; looking up what waited for it")
+		libs, err := db.Libraries(ctx)
+		if err != nil {
+			return
+		}
+		for _, lib := range libs {
+			fetcher.FetchLibrary(ctx, lib)
+		}
+	}
 	apiServer.People = tmdb
 	apiServer.Translate = fetcher.TranslateAll
 	apiServer.Keywords = tmdb

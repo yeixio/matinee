@@ -1069,7 +1069,8 @@
       "problems_other": "{{count}} Warnungen oder Fehler in der letzten Stunde",
       "restarting": "Der Server startet neu",
       "database": "Die Datenbank antwortet nicht",
-      "disk": "Ein Ordner kann nicht gelesen werden"
+      "disk": "Ein Ordner kann nicht gelesen werden",
+      "offline": "Keine Internetverbindung"
     },
     "scope": {
       "group": "Matinee und die FFmpeg-Prozesse, die es startet.",
@@ -1203,6 +1204,11 @@
       "live": "Neuen Zeilen folgen",
       "older": "Ältere Zeilen zeigen",
       "empty": "Keine passenden Zeilen."
+    },
+    "internet": {
+      "offline": "Seit {{time}} keine Internetverbindung",
+      "offlineNote": "Alles auf deinem Server funktioniert weiter. Poster und Details für neue Titel, Untertitelsuche, Podcasts, Trailer und Fernzugriff warten und holen alles nach, sobald es wieder da ist.",
+      "down": "Antwortet nicht: {{sites}}"
     }
   },
   "alerts": {

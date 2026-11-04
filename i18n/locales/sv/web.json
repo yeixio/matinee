@@ -1069,7 +1069,8 @@
       "problems_other": "{{count}} varningar eller fel den senaste timmen",
       "restarting": "Servern startar om",
       "database": "Databasen svarar inte",
-      "disk": "En mapp kan inte läsas"
+      "disk": "En mapp kan inte läsas",
+      "offline": "Ingen internetanslutning"
     },
     "scope": {
       "group": "Matinee och FFmpeg-processerna det kör.",
@@ -1203,6 +1204,11 @@
       "live": "Följ nya rader",
       "older": "Visa äldre rader",
       "empty": "Inga rader matchar."
+    },
+    "internet": {
+      "offline": "Ingen internetanslutning sedan {{time}}",
+      "offlineNote": "Allt på din server fortsätter att fungera. Affischer och detaljer för nya titlar, undertextsökning, poddar, trailers och fjärråtkomst väntar och kommer ikapp när den är tillbaka.",
+      "down": "Svarar inte: {{sites}}"
     }
   },
   "alerts": {

@@ -1,5 +1,5 @@
 import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { AlertTriangle, CircleCheck, CircleX, Download, HardDrive, Pause, Radio, Search, Square, Wifi } from 'lucide-react'
+import { AlertTriangle, CircleCheck, CircleX, Download, HardDrive, Pause, Radio, Search, Square, Wifi, WifiOff } from 'lucide-react'
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
 import { api, type Health, type HealthPoint, type HealthProblem, type LogLevel, type LogLine } from '../api'
@@ -37,6 +37,7 @@ export function ServerHealth() {
       <div className="space-y-4">
         <Header />
         <StatusLine h={h} />
+        <Internet h={h} />
         <Tiles h={h} />
       </div>
       <Streams h={h} />
@@ -138,7 +139,9 @@ function StatusLine({ h }: { h: Health }) {
             ? t('health.status.database')
             : h.disks.some((d) => !d.reachable)
               ? t('health.status.disk')
-              : recent
+              : h.server.internet?.offline
+                ? t('health.status.offline')
+                : recent
                 ? t('health.status.problems', { count: recent })
                 : t('health.status.ok')}
       </span>
@@ -146,6 +149,28 @@ function StatusLine({ h }: { h: Health }) {
         {h.server.name} · {t('health.upFor', { time: span(Date.now() - h.system.started) })}{` · Matinee ${shortVersion(h.server.version)}`}
       </span>
       <span className="ms-auto text-xs text-faint">{t('health.updates')}</span>
+    </div>
+  )
+}
+
+// Internet says when the server can't reach the internet, or sites such
+// as Radarr at home, and that the rest keeps working meanwhile.
+function Internet({ h }: { h: Health }) {
+  const { t } = useTranslation()
+  const net = h.server.internet
+  if (!net?.down.length) return null
+  return (
+    <div className={`space-y-1 ${card} px-4 py-3 text-sm`}>
+      {net.offline && (
+        <>
+          <p className="flex items-center gap-2 font-medium">
+            <WifiOff className="size-4 text-danger" aria-hidden />
+            {t('health.internet.offline', { time: span(Date.now() - (net.since ?? Date.now())) })}
+          </p>
+          <p className="text-muted">{t('health.internet.offlineNote')}</p>
+        </>
+      )}
+      <p className="text-xs text-faint">{t('health.internet.down', { sites: net.down.map((d) => d.host).join(', ') })}</p>
     </div>
   )
 }

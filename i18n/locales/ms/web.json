@@ -1062,7 +1062,8 @@
       "problems_other": "{{count}} amaran atau ralat dalam sejam lalu",
       "restarting": "Pelayan sedang dimulakan semula",
       "database": "Pangkalan data tidak menjawab",
-      "disk": "Satu folder tidak boleh dibaca"
+      "disk": "Satu folder tidak boleh dibaca",
+      "offline": "Tiada sambungan internet"
     },
     "scope": {
       "group": "Matinee dan proses FFmpeg yang dijalankannya.",
@@ -1192,6 +1193,11 @@
       "live": "Ikuti baris baharu",
       "older": "Tunjukkan baris lebih lama",
       "empty": "Tiada baris sepadan."
+    },
+    "internet": {
+      "offline": "Tiada sambungan internet selama {{time}}",
+      "offlineNote": "Semua di pelayan anda terus berfungsi. Poster dan butiran tajuk baharu, carian sari kata, podcast, treler dan akses jauh akan menunggu dan dikemas kini apabila ia kembali.",
+      "down": "Tidak menjawab: {{sites}}"
     }
   },
   "alerts": {

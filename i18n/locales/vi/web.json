@@ -1062,7 +1062,8 @@
       "problems_other": "{{count}} cảnh báo hoặc lỗi trong giờ vừa qua",
       "restarting": "Máy chủ đang khởi động lại",
       "database": "Cơ sở dữ liệu không phản hồi",
-      "disk": "Không đọc được một thư mục"
+      "disk": "Không đọc được một thư mục",
+      "offline": "Không có kết nối internet"
     },
     "scope": {
       "group": "Matinee và các tiến trình FFmpeg nó chạy.",
@@ -1192,6 +1193,11 @@
       "live": "Theo dõi dòng mới",
       "older": "Hiện các dòng cũ hơn",
       "empty": "Không có dòng nào khớp."
+    },
+    "internet": {
+      "offline": "Không có kết nối internet trong {{time}}",
+      "offlineNote": "Mọi thứ trên máy chủ của bạn vẫn hoạt động. Áp phích và chi tiết phim mới, tìm phụ đề, podcast, trailer và truy cập từ xa sẽ chờ và cập nhật khi có mạng lại.",
+      "down": "Không phản hồi: {{sites}}"
     }
   },
   "alerts": {

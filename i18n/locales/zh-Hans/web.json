@@ -1062,7 +1062,8 @@
       "problems_other": "过去一小时有 {{count}} 条警告或错误",
       "restarting": "服务器正在重启",
       "database": "数据库没有响应",
-      "disk": "有文件夹无法读取"
+      "disk": "有文件夹无法读取",
+      "offline": "没有互联网连接"
     },
     "scope": {
       "group": "Matinee 及其运行的 FFmpeg 进程。",
@@ -1192,6 +1193,11 @@
       "live": "跟随新行",
       "older": "显示更早的行",
       "empty": "没有匹配的行。"
+    },
+    "internet": {
+      "offline": "已 {{time}} 没有互联网连接",
+      "offlineNote": "服务器上的一切照常运行。新作品的海报和详情、字幕搜索、播客、预告片和远程访问会等待，网络恢复后自动补上。",
+      "down": "无响应：{{sites}}"
     }
   },
   "alerts": {

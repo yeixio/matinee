@@ -1076,7 +1076,8 @@
       "problems_other": "{{count}} de avertismente sau erori în ultima oră",
       "restarting": "Serverul repornește",
       "database": "Baza de date nu răspunde",
-      "disk": "Un dosar nu poate fi citit"
+      "disk": "Un dosar nu poate fi citit",
+      "offline": "Fără conexiune la internet"
     },
     "scope": {
       "group": "Matinee și procesele FFmpeg pe care le pornește.",
@@ -1214,6 +1215,11 @@
       "live": "Urmărește rândurile noi",
       "older": "Arată rânduri mai vechi",
       "empty": "Niciun rând nu se potrivește."
+    },
+    "internet": {
+      "offline": "Fără conexiune la internet de {{time}}",
+      "offlineNote": "Totul pe serverul tău funcționează în continuare. Afișele și detaliile titlurilor noi, căutarea subtitrărilor, podcasturile, trailerele și accesul de la distanță așteaptă și recuperează când revine.",
+      "down": "Nu răspunde: {{sites}}"
     }
   },
   "alerts": {

@@ -1069,7 +1069,8 @@
       "problems_other": "{{count}} figyelmeztetés vagy hiba az elmúlt órában",
       "restarting": "A szerver újraindul",
       "database": "Az adatbázis nem válaszol",
-      "disk": "Egy mappa nem olvasható"
+      "disk": "Egy mappa nem olvasható",
+      "offline": "Nincs internetkapcsolat"
     },
     "scope": {
       "group": "A Matinee és az általa futtatott FFmpeg-folyamatok.",
@@ -1203,6 +1204,11 @@
       "live": "Új sorok követése",
       "older": "Régebbi sorok",
       "empty": "Nincs egyező sor."
+    },
+    "internet": {
+      "offline": "{{time}} óta nincs internetkapcsolat",
+      "offlineNote": "A szervereden minden működik tovább. Az új címek plakátjai és részletei, a feliratkeresés, a podcastok, az előzetesek és a távoli elérés megvárják, és pótolnak, amint visszajön.",
+      "down": "Nem válaszol: {{sites}}"
     }
   },
   "alerts": {

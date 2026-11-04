@@ -1069,7 +1069,8 @@
       "problems_other": "{{count}} waarschuwingen of fouten in het afgelopen uur",
       "restarting": "De server start opnieuw op",
       "database": "De database reageert niet",
-      "disk": "Een map kan niet worden gelezen"
+      "disk": "Een map kan niet worden gelezen",
+      "offline": "Geen internetverbinding"
     },
     "scope": {
       "group": "Matinee en de FFmpeg-processen die het start.",
@@ -1203,6 +1204,11 @@
       "live": "Nieuwe regels volgen",
       "older": "Oudere regels tonen",
       "empty": "Geen regels gevonden."
+    },
+    "internet": {
+      "offline": "Al {{time}} geen internetverbinding",
+      "offlineNote": "Alles op je server blijft werken. Posters en details van nieuwe titels, ondertitels zoeken, podcasts, trailers en toegang op afstand wachten en halen het in zodra het terug is.",
+      "down": "Reageert niet: {{sites}}"
     }
   },
   "alerts": {
