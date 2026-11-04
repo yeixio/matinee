@@ -1,7 +1,7 @@
 ---
 title: Live TV
 description: Watch TV channels live with a guide of what's on. An admin adds playlists of channels, such as iptv-org's lists of publicly streamed channels, and Matinee hides channels that stop working.
-since: v0.1.17
+since: v0.2.0
 sidebar:
   order: 20
 ---
