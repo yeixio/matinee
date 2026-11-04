@@ -692,5 +692,13 @@
     "title": "Version",
     "choose": "Vælg en version",
     "numbered": "Version {{n}}"
+  },
+  "audioDelay": {
+    "title": "Lydforsinkelse",
+    "earlier": "Lyd tidligere",
+    "later": "Lyd senere",
+    "hint": "Er lyden bagud i forhold til billedet? Gør den tidligere. Så længe der er en forsinkelse, sender serveren lyden forskudt.",
+    "forTitle": "Kun for denne titel",
+    "reset": "Ingen forsinkelse"
   }
 }

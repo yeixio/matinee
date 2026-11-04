@@ -756,5 +756,13 @@
     "title": "Verze",
     "choose": "Vyberte verzi",
     "numbered": "Verze {{n}}"
+  },
+  "audioDelay": {
+    "title": "Zpoždění zvuku",
+    "earlier": "Zvuk dříve",
+    "later": "Zvuk později",
+    "hint": "Zvuk je za obrazem? Posuňte ho dříve. Dokud je nastavené zpoždění, server posílá posunutý zvuk.",
+    "forTitle": "Jen pro tento titul",
+    "reset": "Bez zpoždění"
   }
 }

@@ -692,5 +692,13 @@
     "title": "Változat",
     "choose": "Válassz változatot",
     "numbered": "{{n}}. változat"
+  },
+  "audioDelay": {
+    "title": "Hangkésleltetés",
+    "earlier": "Hang korábban",
+    "later": "Hang később",
+    "hint": "Késik a hang a képhez képest? Hozd előrébb. Amíg van késleltetés, a szerver eltolva küldi a hangot.",
+    "forTitle": "Csak ehhez a címhez",
+    "reset": "Nincs késleltetés"
   }
 }

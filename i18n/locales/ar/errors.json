@@ -253,5 +253,6 @@
   "bytes_must_be_between_0_and_104857600": "يجب أن تكون قيمة bytes بين 0 و104857600",
   "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "يمكن وضع علامة مُشاهَد على الأفلام والحلقات والمواسم والمسلسلات فقط",
   "no_such_backup": "لا توجد هذه النسخة",
-  "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "قاعدة بيانات هذا الخادم هي PostgreSQL؛ انسخها احتياطيًا باستخدام pg_dump"
+  "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "قاعدة بيانات هذا الخادم هي PostgreSQL؛ انسخها احتياطيًا باستخدام pg_dump",
+  "audiodelay_is_milliseconds_between_2000_and_2000": "تأخير الصوت بالمللي ثانية، بين -2000 و2000."
 }

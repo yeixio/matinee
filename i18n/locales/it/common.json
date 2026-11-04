@@ -724,5 +724,13 @@
     "title": "Versione",
     "choose": "Scegli una versione",
     "numbered": "Versione {{n}}"
+  },
+  "audioDelay": {
+    "title": "Ritardo audio",
+    "earlier": "Audio prima",
+    "later": "Audio dopo",
+    "hint": "L'audio è in ritardo rispetto all'immagine? Anticipalo. Finché c'è un ritardo, il server invia l'audio spostato.",
+    "forTitle": "Solo per questo titolo",
+    "reset": "Nessun ritardo"
   }
 }

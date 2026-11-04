@@ -153,6 +153,26 @@ type Request struct {
 	// ToneMap is how an HDR picture that's converted is made SDR: one of
 	// ToneMapAlgorithms, or ToneMapOff.
 	ToneMap string
+	// AudioDelayMs moves the sound against the picture, for lip sync: later
+	// when positive, earlier when negative (see AudioDelayFilter).
+	AudioDelayMs int
+}
+
+// MaxAudioDelayMs is how far the sound can be moved either way.
+const MaxAudioDelayMs = 2000
+
+// AudioDelayFilter is the audio filter that moves the sound by ms against
+// the picture, or "" for none. Later pads the start with silence; earlier
+// drops that much of the start, so the rest arrives sooner.
+func AudioDelayFilter(ms int) string {
+	ms = max(-MaxAudioDelayMs, min(MaxAudioDelayMs, ms))
+	switch {
+	case ms > 0:
+		return "adelay=delays=" + strconv.Itoa(ms) + ":all=1"
+	case ms < 0:
+		return "atrim=start=" + strconv.FormatFloat(float64(-ms)/1000, 'f', 3, 64) + ",asetpts=PTS-STARTPTS"
+	}
+	return ""
 }
 
 // StartFor is Start for a player that says what it plays: a picture it
@@ -180,7 +200,7 @@ func (t *Transcoder) StartFor(ctx context.Context, userID int64, it store.Item, 
 	}
 	modes := t.plan(accel, it.ID, video, copyVideo)
 	for i, mode := range modes {
-		id, err := t.start(ctx, userID, it, startSec, accel, mode, video, audio, copyVideo, why, steps)
+		id, err := t.start(ctx, userID, it, startSec, accel, mode, video, audio, req.AudioDelayMs, copyVideo, why, steps)
 		if err == nil || i == len(modes)-1 || errors.Is(err, ErrSuperseded) || ctx.Err() != nil {
 			switch {
 			case err == nil:
@@ -224,7 +244,7 @@ func (t *Transcoder) hwFailed(itemID int64, kind hwaccel.Kind, mode hwaccel.Mode
 	}
 }
 
-func (t *Transcoder) start(ctx context.Context, userID int64, it store.Item, startSec float64, accel *hwaccel.Accel, mode hwaccel.Mode, video hwaccel.Video, audio int, copyVideo bool, why string, steps []Step) (string, error) {
+func (t *Transcoder) start(ctx context.Context, userID int64, it store.Item, startSec float64, accel *hwaccel.Accel, mode hwaccel.Mode, video hwaccel.Video, audio, audioDelayMs int, copyVideo bool, why string, steps []Step) (string, error) {
 	b := make([]byte, 12)
 	rand.Read(b)
 	id := hex.EncodeToString(b)
@@ -282,6 +302,9 @@ func (t *Transcoder) start(ctx context.Context, userID int64, it store.Item, sta
 		output = append(output, "-sn", "-c:a", "aac", "-ac", "2")
 	case it.VideoCodec != "":
 		output = append(output, "-map", audioMap+"?", "-sn", "-c:a", "aac", "-ac", "2", "-b:a", audioRate(0))
+	}
+	if f := AudioDelayFilter(audioDelayMs); f != "" && withAudio && it.VideoCodec != "" {
+		output = append(output, "-af", f)
 	}
 	if startSec > 0 {
 		args = append(args, "-ss", strconv.FormatFloat(startSec, 'f', 3, 64))

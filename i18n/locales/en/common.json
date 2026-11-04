@@ -692,5 +692,13 @@
     "title": "Version",
     "choose": "Choose a version",
     "numbered": "Version {{n}}"
+  },
+  "audioDelay": {
+    "title": "Audio delay",
+    "earlier": "Sound earlier",
+    "later": "Sound later",
+    "hint": "Sound behind the picture? Make it earlier. While there's a delay, the server sends the sound moved.",
+    "forTitle": "Just for this title",
+    "reset": "No delay"
   }
 }

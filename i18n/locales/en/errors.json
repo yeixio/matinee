@@ -21,6 +21,7 @@
   "app_has_no_such_quality_profile": "{{app}} has no such quality profile",
   "app_isnt_answering_right_now_try_again_later": "{{app}} isn't answering right now. Try again later.",
   "app_isnt_connected": "{{app}} isn't connected",
+  "audiodelay_is_milliseconds_between_2000_and_2000": "audioDelay is milliseconds between -2000 and 2000",
   "bad_client_id": "bad client id",
   "bad_id": "bad id",
   "bad_item": "bad item",

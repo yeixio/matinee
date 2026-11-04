@@ -17,6 +17,8 @@ import { creditsEnd, creditsOf, inCredits } from '../player/credits'
 import { inIntro, introEnd } from '../player/intro'
 import { sleepTimer, sleepVolume, useSleep } from '../player/sleep'
 import { SleepMenu } from '../player/SleepMenu'
+import { AudioDelayMenu } from '../player/AudioDelayMenu'
+import { clampDelay, DELAY_STEP_MS, delayLabel, loadDelay, saveDelay, type Delay } from '../player/audioDelay'
 import { QualityMenu } from '../player/QualityMenu'
 import { LONG_STALL_MS, levelName, overCap, Rebuffers, startQuality, type Quality } from '../player/quality'
 import { parseVTT, type Cue } from '../player/vtt'
@@ -218,6 +220,11 @@ function Player({ id }: { id: number }) {
   useEffect(() => together.subscribe(setSession), [])
   const sessionNow = useRef(session)
   sessionNow.current = session
+  // Audio delay for lip sync (player/audioDelay.ts). Any delay plays through
+  // the server, which moves the sound against the picture.
+  const [delay, setDelay] = useState<Delay>({ ms: 0, forTitle: false })
+  const delayNow = useRef(0)
+  const delayTimer = useRef<number>(undefined)
   // Set when the browser wouldn't start playback without a click.
   const [blocked, setBlocked] = useState(false)
 
@@ -247,7 +254,7 @@ function Player({ id }: { id: number }) {
         const plays = currentPlays(el)
         const repack = qualityNow.current === 'auto' && !burn && !repackFellBack.current && repackages(item, plays) && !overCap(item, streaming?.cap)
         repacked.current = repack
-        const { url } = await api.startHls(item.id, Math.floor(at), burn, repack ? 'original' : qualityNow.current, playsQuery(plays))
+        const { url } = await api.startHls(item.id, Math.floor(at), burn, repack ? 'original' : qualityNow.current, playsQuery(plays), delayNow.current)
         if (seq !== hlsSeq.current) return
         offset.current = Math.floor(at)
         // hls.js is only downloaded when a file needs converting.
@@ -307,7 +314,7 @@ function Player({ id }: { id: number }) {
   // it, the viewer picked Auto or Original, and it's within any cap.
   const direct = (q: Quality) => {
     const el = video.current
-    return !!item && !!el && (q === 'auto' || q === 'original') && canDirectPlay(item, el) && !overCap(item, streaming?.cap)
+    return !!item && !!el && (q === 'auto' || q === 'original') && delayNow.current === 0 && canDirectPlay(item, el) && !overCap(item, streaming?.cap)
   }
 
   // Pick direct play or a transcode, and resume where the viewer left off.
@@ -324,6 +331,9 @@ function Player({ id }: { id: number }) {
             ? item.positionMs / 1000
             : 0
     const pick = defaultTrack(item.subtitles ?? [])
+    const d = item.videoCodec ? loadDelay(item.versionOf ?? item.id) : { ms: 0, forTitle: false }
+    delayNow.current = d.ms
+    setDelay(d)
     const q = startQuality(streaming)
     qualityNow.current = q
     setQuality(q)
@@ -341,6 +351,27 @@ function Player({ id }: { id: number }) {
     if (!burned.current && direct(q)) playDirect(position())
     else startHls(position())
   }
+
+  // A new audio delay plays again from the same spot, once the viewer
+  // stops pressing.
+  const changeDelay = (d: Delay) => {
+    if (!item) return
+    d = { ...d, ms: clampDelay(d.ms) }
+    setDelay(d)
+    saveDelay(item.versionOf ?? item.id, d)
+    if (d.ms === delayNow.current) return
+    delayNow.current = d.ms
+    window.clearTimeout(delayTimer.current)
+    delayTimer.current = window.setTimeout(() => {
+      if (!burned.current && direct(qualityNow.current)) playDirect(position())
+      else startHls(position())
+    }, 700)
+  }
+  const changeDelayRef = useRef(changeDelay)
+  changeDelayRef.current = changeDelay
+  const delayRef = useRef(delay)
+  delayRef.current = delay
+  useEffect(() => () => window.clearTimeout(delayTimer.current), [])
 
   // Auto playing a file as it is moves to an adaptive stream when the
   // connection can't keep up with it.
@@ -676,6 +707,14 @@ function Player({ id }: { id: number }) {
           break
         case 'c':
           if (item?.subtitles?.length) selectSub(sub ? undefined : (lastSub.current ?? item.subtitles.find((t) => !t.burnIn) ?? item.subtitles[0]))
+          break
+        case '[':
+        case ']':
+          if (item?.videoCodec) {
+            const ms = clampDelay(delayRef.current.ms + (e.key === ']' ? DELAY_STEP_MS : -DELAY_STEP_MS))
+            changeDelayRef.current({ ...delayRef.current, ms })
+            flash(`${tr('common:audioDelay.title')}: ${delayLabel(ms, i18n.language)}`, 1500)
+          }
           break
         case 'Escape':
           if (!document.fullscreenElement) navigate(-1)
@@ -1180,6 +1219,16 @@ function Player({ id }: { id: number }) {
                 <TogetherMenu
                   session={session}
                   onStart={startTogether}
+                  onOpenChange={(open) => {
+                    menuOpen.current = open
+                    poke()
+                  }}
+                />
+              )}
+              {item?.videoCodec && (
+                <AudioDelayMenu
+                  delay={delay}
+                  onChange={changeDelay}
                   onOpenChange={(open) => {
                     menuOpen.current = open
                     poke()

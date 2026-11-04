@@ -42,6 +42,18 @@ In the [phone and TV apps](/docs/apps/phone-and-tv/#watching-on-a-tv), subtitles
 No subtitles in your language? Once an admin sets up subtitle search, **Find subtitles…** at the bottom of the menu looks for them online. See [Finding subtitles](/docs/watching/finding-subtitles/).
 <!-- /since -->
 
+<!-- since: v0.3.0 -->
+## Audio delay
+
+A soundbar, an AV receiver or Bluetooth headphones can put the sound a little behind the picture, and now and then a file is out of sync itself. The audio delay button (the sound waves next to the moon) moves the sound against the picture in steps of 25 milliseconds, up to two seconds either way. **Sound earlier** fixes sound that comes after the lips move; **Sound later** fixes sound that comes first. On a keyboard, <kbd>[</kbd> makes it earlier and <kbd>]</kbd> later.
+
+The delay belongs to the browser you set it in, since it's usually about that computer's speakers, so every title plays with it. When one file is off instead, tick **Just for this title** to keep the delay for that title only. **No delay** sets it back to none.
+
+While there's a delay, the server sends the sound moved (only the sound is converted; a picture your browser plays as it is stays as it is), so playback starts again from the same spot a moment after you stop pressing.
+
+From version 1.0.27 the phone and TV apps have **Audio delay** with the audio choices in the player too. It's kept for each phone or TV and for what the sound comes out of, so the soundbar's delay doesn't follow you to headphones. On a TV remote, press left and right while it's open.
+<!-- /since -->
+
 ## Picking up where you left off
 
 Matinee saves your place as you watch, for you alone (or your [profile](/docs/household/profiles/)). Stop on the TV and carry on in the browser, or the other way round. A title counts as watched once you're past the credits, or past 92% if Matinee can't tell where the credits start.

@@ -756,5 +756,13 @@
     "title": "Wersja",
     "choose": "Wybierz wersję",
     "numbered": "Wersja {{n}}"
+  },
+  "audioDelay": {
+    "title": "Opóźnienie dźwięku",
+    "earlier": "Dźwięk wcześniej",
+    "later": "Dźwięk później",
+    "hint": "Dźwięk spóźnia się względem obrazu? Przesuń go wcześniej. Gdy ustawione jest opóźnienie, serwer wysyła przesunięty dźwięk.",
+    "forTitle": "Tylko dla tego tytułu",
+    "reset": "Bez opóźnienia"
   }
 }

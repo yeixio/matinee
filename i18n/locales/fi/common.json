@@ -692,5 +692,13 @@
     "title": "Versio",
     "choose": "Valitse versio",
     "numbered": "Versio {{n}}"
+  },
+  "audioDelay": {
+    "title": "Äänen viive",
+    "earlier": "Ääni aiemmin",
+    "later": "Ääni myöhemmin",
+    "hint": "Onko ääni kuvaa jäljessä? Siirrä sitä aiemmaksi. Kun viive on käytössä, palvelin lähettää äänen siirrettynä.",
+    "forTitle": "Vain tälle nimikkeelle",
+    "reset": "Ei viivettä"
   }
 }

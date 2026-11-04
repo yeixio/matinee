@@ -660,5 +660,13 @@
     "title": "Versi",
     "choose": "Pilih versi",
     "numbered": "Versi {{n}}"
+  },
+  "audioDelay": {
+    "title": "Jeda audio",
+    "earlier": "Suara lebih awal",
+    "later": "Suara lebih lambat",
+    "hint": "Suara tertinggal dari gambar? Jadikan lebih awal. Selama ada jeda, server mengirim suara yang digeser.",
+    "forTitle": "Hanya untuk judul ini",
+    "reset": "Tanpa jeda"
   }
 }

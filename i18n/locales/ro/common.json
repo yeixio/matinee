@@ -724,5 +724,13 @@
     "title": "Versiune",
     "choose": "Alege o versiune",
     "numbered": "Versiunea {{n}}"
+  },
+  "audioDelay": {
+    "title": "Întârziere audio",
+    "earlier": "Sunet mai devreme",
+    "later": "Sunet mai târziu",
+    "hint": "Sunetul vine după imagine? Fă-l mai devreme. Cât timp există o întârziere, serverul trimite sunetul decalat.",
+    "forTitle": "Doar pentru acest titlu",
+    "reset": "Fără întârziere"
   }
 }
