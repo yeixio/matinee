@@ -9,7 +9,9 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"strconv"
 	"testing"
+	"time"
 
 	"github.com/yeixio/matinee/internal/store"
 )
@@ -71,7 +73,16 @@ func TestStartBurnsSubtitleFile(t *testing.T) {
 		t.Helper()
 		id, err := tr.StartFor(context.Background(), user, it, start, Request{BurnSub: -1, BurnFile: sup})
 		if err != nil {
-			t.Fatal(err)
+			// DIAG: what FFmpeg says when it runs the same graph.
+			off := strconv.FormatFloat(subtitleFileStart(sup)-start, 'f', 3, 64)
+			ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
+			defer cancel()
+			out, _ := exec.CommandContext(ctx, ffmpeg, "-hide_banner", "-loglevel", "debug", "-ss", strconv.FormatFloat(start, 'f', 3, 64), "-i", src, "-itsoffset", off, "-i", sup,
+				"-filter_complex", "[1:s:0][0:v:0]scale2ref[sub][vid];[vid][sub]overlay=eof_action=pass", "-frames:v", "5", "-f", "null", "-").CombinedOutput()
+			if len(out) > 6000 {
+				out = append(out[:2000:2000], out[len(out)-4000:]...)
+			}
+			t.Fatalf("%v (start %v)\n%s", err, start, out)
 		}
 		px, err := exec.Command(ffmpeg, "-v", "error", "-i", filepath.Join(dir, "cache", id, "seg00000.ts"),
 			"-vf", "crop=2:2:159:89,format=gray", "-frames:v", "1", "-f", "rawvideo", "-").Output()
