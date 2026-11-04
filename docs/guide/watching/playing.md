@@ -51,7 +51,7 @@ The delay belongs to the browser you set it in, since it's usually about that co
 
 While there's a delay, the server sends the sound moved (only the sound is converted; a picture your browser plays as it is stays as it is), so playback starts again from the same spot a moment after you stop pressing.
 
-From version 1.0.27 the phone and TV apps have **Audio delay** with the audio choices in the player too. It's kept for each phone or TV and for what the sound comes out of, so the soundbar's delay doesn't follow you to headphones. On a TV remote, press left and right while it's open.
+From version 1.0.27 the phone and TV apps have **Audio delay** in the player too (the timer button on a phone, in the player's menu on a TV). Press **Sound earlier** or **Sound later** until the sound matches; each phone or TV keeps its own, and **Just for this title** works the same way.
 <!-- /since -->
 
 ## Picking up where you left off
