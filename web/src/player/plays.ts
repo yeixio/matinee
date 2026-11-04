@@ -8,6 +8,8 @@ export type Plays = { video: string[]; hdr: HDR[] }
 
 // Main 10 at 4K, the most a file usually asks of a decoder.
 const probes: Record<string, string> = { hevc: 'hvc1.2.4.L153.B0', av1: 'av01.0.12M.10' }
+// Dolby Vision profile 5 at 4K, which only a Dolby Vision decoder shows.
+const dvProbe = 'dvh1.05.06'
 
 type Env = {
   /** MediaSource.isTypeSupported, where hls.js plays the stream. */
@@ -25,8 +27,13 @@ export function browserPlays(env: Env): Plays {
     const type = `video/mp4; codecs="${probe}"`
     if (env.mse?.(type) || (env.native && env.native(type) !== '')) video.push(codec)
   }
-  // Browsers on an HDR screen show HDR10 and HLG; Dolby Vision is left to the apps.
-  return { video, hdr: env.hdrScreen ? ['hdr10', 'hlg'] : [] }
+  if (!env.hdrScreen) return { video, hdr: [] }
+  // Browsers on an HDR screen show HDR10 and HLG, and Dolby Vision where
+  // they say they decode it (Safari on a Dolby Vision screen, some Edge).
+  const hdr: HDR[] = ['hdr10', 'hlg']
+  const dv = `video/mp4; codecs="${dvProbe}"`
+  if (video.includes('hevc') && (env.mse?.(dv) || (env.native && env.native(dv) !== ''))) hdr.push('dolby-vision')
+  return { video, hdr }
 }
 
 /** This browser's Plays. */
@@ -39,7 +46,7 @@ export function currentPlays(el: HTMLVideoElement): Plays {
   })
 }
 
-type Picture = { videoCodec?: string; mediaInfo?: { video?: { hdr?: HDR; hdrBase?: HDR }[] } }
+type Picture = { videoCodec?: string; mediaInfo?: { video?: { hdr?: HDR; hdrBase?: HDR; dvProfile?: number }[] } }
 
 /**
  * Whether the server copies this file's picture for a player with plays,
@@ -53,6 +60,8 @@ export function repackages(item: Picture, plays: Plays): boolean {
   if (codec === 'h264') return true
   const v = item.mediaInfo?.video?.[0]
   if (!v) return plays.hdr.includes('hdr10') && plays.hdr.includes('hlg')
+  // Profile 7 (two layers, from discs) plays as its HDR10 base everywhere.
+  if (v.hdr === 'dolby-vision' && v.dvProfile === 7) return shows(plays.hdr, v.hdrBase)
   return shows(plays.hdr, v.hdr, v.hdrBase)
 }
 

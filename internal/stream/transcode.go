@@ -219,9 +219,13 @@ func (t *Transcoder) StartFor(ctx context.Context, userID int64, it store.Item, 
 	if !copyVideo && it.VideoCodec != "" && req.Picture.HDR != "" {
 		video.ToneMap, video.ToneMapInput = ToneMap(req.Picture, req.ToneMap, t.ToneTools())
 	}
+	var copyOutput []string
+	if copyVideo {
+		copyOutput = copyArgs(it.VideoCodec, req.Picture, req.Plays, req.Picture.HDR == "dolby-vision" && t.canStripDV())
+	}
 	modes := t.plan(accel, it.ID, video, copyVideo)
 	for i, mode := range modes {
-		id, err := t.start(ctx, userID, it, startSec, accel, mode, video, audio, req.AudioDelayMs, req.BurnFile, copyVideo, why, steps)
+		id, err := t.start(ctx, userID, it, startSec, accel, mode, video, audio, req.AudioDelayMs, req.BurnFile, copyVideo, why, steps, copyOutput)
 		if err == nil || i == len(modes)-1 || errors.Is(err, ErrSuperseded) || ctx.Err() != nil {
 			switch {
 			case err == nil:
@@ -265,7 +269,7 @@ func (t *Transcoder) hwFailed(itemID int64, kind hwaccel.Kind, mode hwaccel.Mode
 	}
 }
 
-func (t *Transcoder) start(ctx context.Context, userID int64, it store.Item, startSec float64, accel *hwaccel.Accel, mode hwaccel.Mode, video hwaccel.Video, audio, audioDelayMs int, burnFile string, copyVideo bool, why string, steps []Step) (string, error) {
+func (t *Transcoder) start(ctx context.Context, userID int64, it store.Item, startSec float64, accel *hwaccel.Accel, mode hwaccel.Mode, video hwaccel.Video, audio, audioDelayMs int, burnFile string, copyVideo bool, why string, steps []Step, copyOutput []string) (string, error) {
 	b := make([]byte, 12)
 	rand.Read(b)
 	id := hex.EncodeToString(b)
@@ -301,12 +305,7 @@ func (t *Transcoder) start(ctx context.Context, userID int64, it store.Item, sta
 	case copyVideo:
 		// Video the player decodes: repackage instead of re-encoding. Far
 		// cheaper, and 4K and HDR stay as they are.
-		output = []string{"-map", "0:v:0", "-c:v", "copy"}
-		if it.VideoCodec == "hevc" {
-			// Apple's players only take HEVC tagged hvc1 (parameter sets in
-			// the sample description, not hev1's in the stream).
-			output = append(output, "-tag:v", "hvc1")
-		}
+		output = copyOutput
 	default:
 		var input []string
 		input, output = hwaccel.Args(accel, mode, video)
