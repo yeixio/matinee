@@ -207,7 +207,14 @@
     "used_many": "{{size}} usados por {{count}} descargas.",
     "used_one": "{{size}} usados por {{count}} descarga.",
     "used_other": "{{size}} usados por {{count}} descargas.",
-    "nothingDownloaded": "Aún no hay descargas."
+    "nothingDownloaded": "Aún no hay descargas.",
+    "topBar": {
+      "title": "Barra superior",
+      "hint": "Pon las bibliotecas que más ves en la barra superior, a un clic desde cualquier sitio. Solo para este perfil en esta tele.",
+      "pinLabel": "{{name}} en la barra superior",
+      "openOn": "Abrir en",
+      "openOnHint": "Dónde empieza la app"
+    }
   },
   "language": {
     "automatic": "Automático ({{language}})",

@@ -205,7 +205,14 @@
     "cellularHint": "Annars väntar nedladdningar på wifi",
     "used_one": "{{size}} används av {{count}} nedladdning.",
     "used_other": "{{size}} används av {{count}} nedladdningar.",
-    "nothingDownloaded": "Inget nedladdat än."
+    "nothingDownloaded": "Inget nedladdat än.",
+    "topBar": {
+      "title": "Övre fältet",
+      "hint": "Lägg biblioteken du tittar mest på i det övre fältet, ett tryck bort var du än är. Bara för den här profilen på den här tv:n.",
+      "pinLabel": "{{name}} i övre fältet",
+      "openOn": "Öppna på",
+      "openOnHint": "Där appen börjar"
+    }
   },
   "language": {
     "automatic": "Automatiskt ({{language}})",

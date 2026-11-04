@@ -203,7 +203,14 @@
     "cellular": "Tải xuống bằng dữ liệu di động",
     "cellularHint": "Nếu không, tải xuống sẽ chờ Wi-Fi",
     "used_other": "{{size}} được dùng bởi {{count}} bản tải xuống.",
-    "nothingDownloaded": "Chưa tải xuống gì."
+    "nothingDownloaded": "Chưa tải xuống gì.",
+    "topBar": {
+      "title": "Thanh trên cùng",
+      "hint": "Đặt các thư viện bạn xem nhiều nhất lên thanh trên cùng, một lần bấm từ bất cứ đâu. Chỉ cho hồ sơ này trên TV này.",
+      "pinLabel": "{{name}} trên thanh trên cùng",
+      "openOn": "Mở ở",
+      "openOnHint": "Nơi ứng dụng bắt đầu"
+    }
   },
   "language": {
     "automatic": "Tự động ({{language}})",

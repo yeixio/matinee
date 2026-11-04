@@ -205,7 +205,14 @@
     "cellularHint": "Muuten lataukset odottavat Wi-Fiä",
     "used_one": "{{size}} käytössä, {{count}} lataus.",
     "used_other": "{{size}} käytössä, {{count}} latausta.",
-    "nothingDownloaded": "Ei vielä latauksia."
+    "nothingDownloaded": "Ei vielä latauksia.",
+    "topBar": {
+      "title": "Yläpalkki",
+      "hint": "Laita eniten katsomasi kirjastot yläpalkkiin, yhden painalluksen päähän mistä tahansa. Vain tälle profiilille tässä televisiossa.",
+      "pinLabel": "{{name}} yläpalkissa",
+      "openOn": "Avaa",
+      "openOnHint": "Mistä sovellus alkaa"
+    }
   },
   "language": {
     "automatic": "Automaattinen ({{language}})",

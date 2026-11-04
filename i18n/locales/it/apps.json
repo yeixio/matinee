@@ -207,7 +207,14 @@
     "used_many": "{{size}} usati da {{count}} download.",
     "used_one": "{{size}} usati da {{count}} download.",
     "used_other": "{{size}} usati da {{count}} download.",
-    "nothingDownloaded": "Ancora nessun download."
+    "nothingDownloaded": "Ancora nessun download.",
+    "topBar": {
+      "title": "Barra in alto",
+      "hint": "Metti le librerie che guardi di più nella barra in alto, a un tasto da ovunque. Solo per questo profilo su questa TV.",
+      "pinLabel": "{{name}} nella barra in alto",
+      "openOn": "Apri su",
+      "openOnHint": "Dove parte l’app"
+    }
   },
   "language": {
     "automatic": "Automatica ({{language}})",

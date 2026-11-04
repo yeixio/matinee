@@ -209,7 +209,14 @@
     "used_many": "{{size}} zajmuje {{count}} pobranych plików.",
     "used_one": "{{size}} zajmuje {{count}} pobrany plik.",
     "used_other": "{{size}} zajmuje {{count}} pobranego pliku.",
-    "nothingDownloaded": "Nic jeszcze nie pobrano."
+    "nothingDownloaded": "Nic jeszcze nie pobrano.",
+    "topBar": {
+      "title": "Górny pasek",
+      "hint": "Umieść najczęściej oglądane biblioteki na górnym pasku, jedno kliknięcie z każdego miejsca. Tylko dla tego profilu na tym telewizorze.",
+      "pinLabel": "{{name}} na górnym pasku",
+      "openOn": "Otwieraj na",
+      "openOnHint": "Gdzie aplikacja się zaczyna"
+    }
   },
   "language": {
     "automatic": "Automatycznie ({{language}})",

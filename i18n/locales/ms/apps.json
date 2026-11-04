@@ -203,7 +203,14 @@
     "cellular": "Muat turun melalui data selular",
     "cellularHint": "Jika tidak, muat turun menunggu Wi-Fi",
     "used_other": "{{size}} digunakan oleh {{count}} muat turun.",
-    "nothingDownloaded": "Belum ada yang dimuat turun."
+    "nothingDownloaded": "Belum ada yang dimuat turun.",
+    "topBar": {
+      "title": "Bar atas",
+      "hint": "Letakkan pustaka yang paling kerap anda tonton di bar atas, satu tekan dari mana-mana. Hanya untuk profil ini pada TV ini.",
+      "pinLabel": "{{name}} di bar atas",
+      "openOn": "Buka pada",
+      "openOnHint": "Tempat apl bermula"
+    }
   },
   "language": {
     "automatic": "Automatik ({{language}})",
