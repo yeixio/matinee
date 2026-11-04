@@ -34,9 +34,9 @@ const structuredData = {
   alternateName: 'Matinee media server',
   description: 'A free, open source, self-hosted media server for movies, TV and music.',
   applicationCategory: 'MultimediaApplication',
-  operatingSystem: 'Linux, macOS',
+  operatingSystem: 'Linux, macOS, Windows',
   url: new URL(base, Astro.site).href,
-  downloadUrl: `${github}/releases`,
+  downloadUrl: new URL(`${base}download/`, Astro.site).href,
   license: 'https://www.gnu.org/licenses/agpl-3.0.html',
   offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
 }
@@ -162,7 +162,7 @@ const installs = [
           pick up where they left off. No ads, and no account on someone else's server.
         </p>
         <div class="ctas">
-          <a class="button primary" href="#install">Install Matinee</a>
+          <a class="button primary" href={`${base}download/`}>Download Matinee</a>
           <a class="button" href={guide()}>Read the guide</a>
         </div>
         <div class="shot hero-shot">
@@ -277,7 +277,7 @@ const installs = [
         <p class="also">
           Also packaged for <a href={guide('getting-started/install/#debian-and-ubuntu')}>Debian and Ubuntu</a>{' '}
           and <a href={guide('getting-started/install/#fedora-rhel-and-friends')}>Fedora</a>.{' '}
-          <a href={guide('getting-started/install/')}>All the ways to install →</a>
+          <a href={`${base}download/`}>All downloads →</a>
         </p>
       </section>
 
@@ -335,7 +335,7 @@ const installs = [
     <footer>
       <span>Matinee is free software under the AGPL 3.0 or later.</span>
       <span>
-        <a href={guide()}>Guide</a> · <a href={`${base}roadmap/`}>Roadmap</a> · <a href={`${github}/releases`}>Releases</a> · <a href={`${github}/issues`}>Issues</a>{' '}
+        <a href={guide()}>Guide</a> · <a href={`${base}download/`}>Download</a> · <a href={`${base}roadmap/`}>Roadmap</a> · <a href={`${github}/releases`}>Releases</a> · <a href={`${github}/issues`}>Issues</a>{' '}
         · <a href={guide('help/troubleshooting/')}>Help</a> · <a href={donate}>Donate</a>
       </span>
       <span class="tmdb">Movie and TV details come from TMDB. This product uses the TMDB API but is not endorsed or certified by TMDB.</span>
