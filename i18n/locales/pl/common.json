@@ -821,5 +821,21 @@
     "earlier": "Pokazuj napisy wcześniej",
     "later": "Pokazuj napisy później",
     "reset": "Wróć do synchronizacji pliku"
+  },
+  "subtitleSync": {
+    "title": "Synchronizuj z dźwiękiem",
+    "again": "Synchronizuj ponownie",
+    "undo": "Cofnij",
+    "syncing": "Słucham dźwięku…",
+    "earlier": "Przesunięte o {{seconds}} s wcześniej",
+    "later": "Przesunięte o {{seconds}} s później",
+    "speed": "Poprawiono tempo",
+    "earlierSpeed": "Poprawiono tempo, o {{seconds}} s wcześniej",
+    "laterSpeed": "Poprawiono tempo, o {{seconds}} s później",
+    "inSync": "Już są zsynchronizowane",
+    "unsure": "Nie da się ustalić, o ile się rozjeżdżają. Spróbuj opcji Czas.",
+    "failed": "Nie udało się zsynchronizować tych napisów",
+    "off": "Tak jak w pliku",
+    "done": "Napisy zsynchronizowane z dźwiękiem"
   }
 }

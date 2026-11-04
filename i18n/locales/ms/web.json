@@ -820,6 +820,12 @@
       "save": "Simpan",
       "remove": "Alih keluar kunci"
     },
+    "subtitleSync": {
+      "title": "Penyegerakan sari kata",
+      "intro": "Sari kata yang muncul terlalu awal atau terlalu lewat, atau makin tersasar sepanjang video, boleh diselaraskan dengan audio. Matinee mendengar di mana orang bercakap dan menganjakkan sari kata supaya sepadan. Semuanya berlaku pada pelayan ini.",
+      "auto": "Segerakkan fail sari kata sendiri",
+      "autoDetail": "Fail sari kata di sebelah video dan sari kata yang ditemui dalam talian disegerakkan kali pertama seseorang memainkan video dengannya. Sari kata di dalam video dibiarkan seperti asal. Sesiapa pun masih boleh menyegerakkan sari kata dari pemain, atau membuat asal penyegerakan."
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Membolehkan apl terus menemui pelayan ini apabila alamat internet rumah anda berubah. Perkhidmatan ini hanya tahu alamatnya: video sentiasa terus dari pelayan ini ke apl.",

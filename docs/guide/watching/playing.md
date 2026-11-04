@@ -70,6 +70,8 @@ The same page sets the **size**, **color**, **edges** (a shadow or an outline th
 
 When a file's subtitles come too early or too late, open the subtitles menu while they show and use **Timing** to move them earlier or later in steps of a tenth of a second. The setting is kept for that title in this browser, and **Back to the file's timing** clears it.
 
+Most of the time you won't need to: Matinee lines subtitle files up with the audio on its own, and **Sync to audio** below **Timing** does it for any subtitles in one press. See [Syncing subtitles to the audio](/docs/watching/syncing-subtitles/).
+
 In the [phone and TV apps](/docs/apps/phone-and-tv/) (from version 1.0.27), **Show subtitles** is under Settings, and the player's subtitles menu has **Subtitle style** (each press of a row moves on to the next size, color and so on) and **Timing**. They use the same choices as the web, and timing is kept per title on each device.
 <!-- /since -->
 

@@ -789,5 +789,21 @@
     "earlier": "Arată subtitrările mai devreme",
     "later": "Arată subtitrările mai târziu",
     "reset": "Înapoi la sincronizarea fișierului"
+  },
+  "subtitleSync": {
+    "title": "Sincronizează cu sunetul",
+    "again": "Sincronizează din nou",
+    "undo": "Anulează",
+    "syncing": "Ascultă sunetul…",
+    "earlier": "Mutate cu {{seconds}} s mai devreme",
+    "later": "Mutate cu {{seconds}} s mai târziu",
+    "speed": "Viteză corectată",
+    "earlierSpeed": "Viteză corectată, cu {{seconds}} s mai devreme",
+    "laterSpeed": "Viteză corectată, cu {{seconds}} s mai târziu",
+    "inSync": "Sunt deja sincronizate",
+    "unsure": "Nu s-a putut afla cât sunt decalate. Încearcă Sincronizarea manuală.",
+    "failed": "Aceste subtitrări nu au putut fi sincronizate",
+    "off": "Ca în fișier",
+    "done": "Subtitrări sincronizate cu sunetul"
   }
 }

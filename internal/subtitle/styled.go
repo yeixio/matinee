@@ -5,6 +5,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"net/http"
 	"os"
 	"os/exec"
@@ -13,6 +14,8 @@ import (
 	"strings"
 	"time"
 	"unicode/utf8"
+
+	"github.com/yeixio/matinee/internal/subsync"
 )
 
 // ASS/SSA subtitles carry more than words: where each line goes, fonts
@@ -31,9 +34,36 @@ func (c *Converter) ServeASS(w http.ResponseWriter, r *http.Request, videoPath s
 		http.Error(w, "subtitles unavailable", http.StatusNotFound)
 		return
 	}
-	w.Header().Set("Content-Type", "text/x-ssa; charset=utf-8")
-	w.Header().Set("Cache-Control", "private, max-age=3600")
-	http.ServeFile(w, r, path)
+	serveShifted(w, r, path, "text/x-ssa; charset=utf-8", t.Shift, subsync.ShiftASS)
+}
+
+// StyledSource is where a transcode reads a styled track to draw it in:
+// its file (the video for an embedded track) and its subtitle stream there,
+// or, for a track whose times are moved, a moved copy of it (stream -1).
+func (c *Converter) StyledSource(videoPath string, t Track) (string, int, error) {
+	path, stream := videoPath, t.Stream
+	if t.External {
+		path, stream = t.Path, -1
+	}
+	if t.Shift.IsZero() {
+		return path, stream, nil
+	}
+	src, err := c.ass(videoPath, t)
+	if err != nil {
+		return "", 0, err
+	}
+	info, err := os.Stat(src)
+	if err != nil {
+		return "", 0, err
+	}
+	dst := strings.TrimSuffix(c.cachePath(fmt.Sprintf("%s#%d#%g", src, t.Shift.OffsetMs, t.Shift.Rate), info), ".vtt") + ".ass"
+	return dst, -1, c.once(dst, func() error {
+		data, err := os.ReadFile(src)
+		if err != nil {
+			return err
+		}
+		return writeAtomic(dst, subsync.ShiftASS(data, t.Shift))
+	})
 }
 
 func (c *Converter) ass(videoPath string, t Track) (string, error) {

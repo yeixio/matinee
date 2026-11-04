@@ -832,6 +832,12 @@
       "save": "Uložit",
       "remove": "Odebrat klíč"
     },
+    "subtitleSync": {
+      "title": "Synchronizace titulků",
+      "intro": "Titulky, které se zobrazují příliš brzy nebo pozdě, nebo se během videa stále víc rozcházejí, lze srovnat se zvukem. Matinee poslouchá, kde lidé mluví, a posune titulky, aby seděly. Vše probíhá na tomto serveru.",
+      "auto": "Synchronizovat soubory titulků samo",
+      "autoDetail": "Soubory titulků vedle videa a titulky nalezené online se synchronizují, když někdo poprvé přehraje video s nimi. Titulky uvnitř videa zůstávají beze změny. Kdokoli může titulky v přehrávači dál synchronizovat nebo synchronizaci vrátit."
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Aplikace díky tomu najdou tento server, i když se změní internetová adresa tvé domácnosti. Služba zná jen adresu: video jde vždy přímo z tohoto serveru do aplikací.",

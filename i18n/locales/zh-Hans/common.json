@@ -725,5 +725,21 @@
     "earlier": "字幕提前",
     "later": "字幕延后",
     "reset": "恢复文件的时间"
+  },
+  "subtitleSync": {
+    "title": "与音频同步",
+    "again": "重新同步",
+    "undo": "撤销",
+    "syncing": "正在聆听音频…",
+    "earlier": "已提前 {{seconds}} 秒",
+    "later": "已延后 {{seconds}} 秒",
+    "speed": "已修正速度",
+    "earlierSpeed": "已修正速度，提前 {{seconds}} 秒",
+    "laterSpeed": "已修正速度，延后 {{seconds}} 秒",
+    "inSync": "已经同步",
+    "unsure": "无法判断偏差多少。请试试“时间”。",
+    "failed": "无法同步这些字幕",
+    "off": "按文件原样",
+    "done": "字幕已与音频同步"
   }
 }

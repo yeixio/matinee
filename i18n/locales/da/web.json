@@ -824,6 +824,12 @@
       "save": "Gem",
       "remove": "Fjern nøgle"
     },
+    "subtitleSync": {
+      "title": "Synkronisering af undertekster",
+      "intro": "Undertekster, der kommer for tidligt eller for sent eller glider længere og længere væk i løbet af videoen, kan rettes ind efter lyden. Matinee lytter efter, hvor der bliver talt, og flytter underteksterne, så de passer. Det hele sker på denne server.",
+      "auto": "Synkroniser undertekstfiler automatisk",
+      "autoDetail": "Undertekstfiler ved siden af en video og undertekster fundet online synkroniseres første gang, nogen afspiller videoen med dem. Undertekster inde i videoen bliver, som de er. Alle kan stadig synkronisere undertekster i afspilleren eller fortryde en synkronisering."
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Gør at apps kan finde denne server, også når dit hjems internetadresse ændrer sig. Tjenesten kender kun adressen: video går altid direkte fra serveren til apps.",

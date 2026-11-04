@@ -34,7 +34,7 @@ export const settingsSections: Record<string, string> = {
   language: 'you', appearance: 'you', playback: 'you', 'subtitle-choices': 'you', account: 'you', devices: 'you',
   libraries: 'libraries', import: 'libraries', 'new-files': 'libraries', 'media-analysis': 'libraries',
   people: 'people', friends: 'people', profiles: 'people',
-  posters: 'content', 'podcast-index': 'content', subtitles: 'content', lyrics: 'content', trailers: 'content', 'home-rows': 'content',
+  posters: 'content', 'podcast-index': 'content', subtitles: 'content', 'subtitle-sync': 'content', lyrics: 'content', trailers: 'content', 'home-rows': 'content',
   transcoding: 'streaming',
   'home-network': 'network', 'remote-access': 'network',
   arr: 'add-ons', overseerr: 'add-ons', plugins: 'add-ons',
@@ -69,7 +69,7 @@ export default function Settings() {
           { id: 'health', icon: Activity, sections: [['server-health', <ServerHealth />], ['alerts', <AlertSettings />], ['backups', <BackupSettings />]], wide: true },
           { id: 'libraries', icon: LibraryBig, sections: [['libraries', <Libraries />], ['import', <ImportSettings />], ['new-files', <NewFiles />], ['media-analysis', <MediaAnalysis />]] },
           { id: 'people', icon: UsersRound, sections: [['people', <Users me={me} />], ['friends', <Friends />], ['profiles', <Profiles />]] },
-          { id: 'content', icon: ImageIcon, sections: [['posters', <TMDBKey />], ['podcast-index', <PodcastIndexKey />], ['subtitles', <OpenSubtitlesKey />], ['lyrics', <OnlineLyrics />], ['trailers', <Trailers />], ['home-rows', <HolidayRows />]] },
+          { id: 'content', icon: ImageIcon, sections: [['posters', <TMDBKey />], ['podcast-index', <PodcastIndexKey />], ['subtitles', <OpenSubtitlesKey />], ['subtitle-sync', <SubtitleSyncSetting />], ['lyrics', <OnlineLyrics />], ['trailers', <Trailers />], ['home-rows', <HolidayRows />]] },
           { id: 'streaming', icon: Gauge, sections: [['transcoding', <Transcoding />]] },
           { id: 'network', icon: Globe, sections: [['home-network', <HomeNetwork />], ['remote-access', <RemoteAccess />]] },
           { id: 'live-tv', icon: Tv, sections: [['live-tv', <LiveTVSettings />]] },
@@ -1172,6 +1172,34 @@ function Trailers() {
           onChange={(e) => {
             save.mutate({ remoteTrailers: e.target.checked }, { onSuccess: () => qc.invalidateQueries({ queryKey: ['trailers'] }) })
           }}
+        />
+      </label>
+    </section>
+  )
+}
+
+// Subtitle files (next to a video, or found online) are lined up with the
+// audio the first time a video plays with them, unless an admin turns it off.
+function SubtitleSyncSetting() {
+  const { t } = useTranslation()
+  const qc = useQueryClient()
+  const { data } = useQuery({ queryKey: ['settings'], queryFn: api.settings })
+  const save = useMutation({ mutationFn: api.saveSettings, onSuccess: (s) => qc.setQueryData(['settings'], s) })
+  return (
+    <section className="space-y-4">
+      <h2 className="text-lg font-semibold">{t('settings.subtitleSync.title')}</h2>
+      <p className="text-sm text-muted">{t('settings.subtitleSync.intro')}</p>
+      <label className="flex cursor-pointer items-start gap-4 rounded-xl border border-line/60 bg-surface/50 p-4">
+        <span className="min-w-0 flex-1">
+          <span className="block font-medium">{t('settings.subtitleSync.auto')}</span>
+          <span className="mt-1 block text-sm text-muted">{t('settings.subtitleSync.autoDetail')}</span>
+        </span>
+        <input
+          type="checkbox"
+          className="mt-1 size-5 accent-[var(--color-accent)]"
+          checked={data?.subtitleSync ?? true}
+          disabled={!data || save.isPending}
+          onChange={(e) => save.mutate({ subtitleSync: e.target.checked })}
         />
       </label>
     </section>

@@ -824,6 +824,12 @@
       "save": "Save",
       "remove": "Remove key"
     },
+    "subtitleSync": {
+      "title": "Subtitle sync",
+      "intro": "Subtitles that show too early or too late, or drift further off as the video goes on, can be lined up with the audio. Matinee listens for where people are talking and moves the subtitles to match. It all happens on this server.",
+      "auto": "Sync subtitle files on their own",
+      "autoDetail": "Subtitle files next to a video, and subtitles found online, are synced the first time someone plays the video with them. Subtitles inside a video are left as they are. Anyone can still sync any subtitles from the player, or undo a sync."
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Keeps the apps able to find this server when your home’s internet address changes. It only ever learns the address: video always goes straight from this server to the apps.",

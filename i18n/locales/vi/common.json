@@ -725,5 +725,21 @@
     "earlier": "Hiện phụ đề sớm hơn",
     "later": "Hiện phụ đề muộn hơn",
     "reset": "Trở về thời gian của tệp"
+  },
+  "subtitleSync": {
+    "title": "Đồng bộ với âm thanh",
+    "again": "Đồng bộ lại",
+    "undo": "Hoàn tác",
+    "syncing": "Đang nghe âm thanh…",
+    "earlier": "Đã dời sớm {{seconds}} giây",
+    "later": "Đã dời muộn {{seconds}} giây",
+    "speed": "Đã sửa tốc độ",
+    "earlierSpeed": "Đã sửa tốc độ, dời sớm {{seconds}} giây",
+    "laterSpeed": "Đã sửa tốc độ, dời muộn {{seconds}} giây",
+    "inSync": "Đã khớp sẵn",
+    "unsure": "Không xác định được lệch bao nhiêu. Hãy thử Căn thời gian.",
+    "failed": "Không thể đồng bộ phụ đề này",
+    "off": "Như trong tệp",
+    "done": "Đã đồng bộ phụ đề với âm thanh"
   }
 }

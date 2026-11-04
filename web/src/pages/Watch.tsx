@@ -4,13 +4,13 @@ import { ArrowLeft, ChevronsRight, Maximize, Minimize, Moon, Pause, Play, Rotate
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
-import { api, fileUrl, type ItemDetail, type PlaybackCause, type SubtitleTrack } from '../api'
+import { api, fileUrl, syncVersion, type ItemDetail, type PlaybackCause, type SubtitleSync, type SubtitleTrack } from '../api'
 import { Spinner } from '../components/ui'
 import { clock, episodeCode } from '../format'
 import i18n from '../i18n'
 import { canDirectPlay } from '../player/direct'
 import { currentPlays, playsQuery, repackages } from '../player/plays'
-import { savedPreference, savePreference, SubtitleMenu, SubtitleOverlay } from '../player/Subtitles'
+import { savedPreference, savePreference, SubtitleMenu, SubtitleOverlay, syncStatus } from '../player/Subtitles'
 import { useStyledSubtitles } from '../player/StyledSubtitles'
 import { afterPick, audioLanguageOf, fromOldChoice, pickSubtitles, saveSubtitleTiming, subtitleTiming, type SubtitlePrefs } from '../player/subtitlePrefs'
 import { UpNextCard, type UpNextMode } from '../player/UpNext'
@@ -397,23 +397,91 @@ function Player({ id }: { id: number }) {
     return true
   }
 
-  // Text subtitles are drawn by the player; fetch the cues when the choice changes.
+  // Text subtitles are drawn by the player; fetch the cues when the choice
+  // changes, or when the track's times do (a sync to the audio finished).
+  const subVersion = sub ? syncVersion(sub) : ''
+  const subNeedsSyncCheck = !!sub?.external && !sub.sync
   useEffect(() => {
     setCues([])
     if (!item || !sub || sub.burnIn) return
     let current = true
     api
-      .subtitles(item.id, sub.id)
-      .then((text) => current && setCues(parseVTT(text)))
+      .subtitles(item.id, sub.id, subVersion)
+      .then((text) => {
+        if (!current) return
+        setCues(parseVTT(text))
+        // Playing with a subtitle file has the server line it up with the
+        // audio, the first time: follow along so the new times show.
+        if (subNeedsSyncCheck)
+          api
+            .subtitleSync(item.id, sub.id)
+            .then((s) => current && s.state === 'syncing' && setTrackSync(sub.id, s))
+            .catch(() => {})
+      })
       .catch(() => {})
     return () => {
       current = false
     }
-  }, [item, sub])
+    // A new sub object with the same times needs no new fetch.
+  }, [item?.id, sub?.id, sub?.burnIn, subVersion])
+
+  // Lining subtitles up with the audio runs on the server; ask how it's
+  // going until it's done.
+  const askedSync = useRef<string>(undefined)
+  const setTrackSync = (trackId: string, sync: SubtitleSync) => {
+    qc.setQueryData<ItemDetail>(['item', id], (it) => (it ? { ...it, subtitles: it.subtitles?.map((s) => (s.id === trackId ? { ...s, sync } : s)) } : it))
+    setSub((cur) => (cur?.id === trackId ? { ...cur, sync } : cur))
+  }
+  const subSyncing = sub?.sync?.state === 'syncing'
+  useEffect(() => {
+    if (!item || !sub || !subSyncing) return
+    let gone = false
+    let timer: ReturnType<typeof setTimeout>
+    const check = () =>
+      api
+        .subtitleSync(item.id, sub.id)
+        .then((s) => {
+          if (gone) return
+          if (s.state === 'syncing') {
+            timer = setTimeout(check, 3000)
+            return
+          }
+          const asked = askedSync.current === sub.id
+          askedSync.current = undefined
+          setTrackSync(sub.id, s)
+          // The new times replace any nudging done by hand.
+          if (s.state === 'synced' && subTiming !== 0) changeTiming(0)
+          if (s.state === 'synced' || asked) flash(s.state === 'synced' ? tr('common:subtitleSync.done') : (syncStatus(tr, s) ?? ''), 4000)
+        })
+        .catch(() => {
+          if (!gone) timer = setTimeout(check, 10_000)
+        })
+    timer = setTimeout(check, 2000)
+    return () => {
+      gone = true
+      clearTimeout(timer)
+    }
+    // Only a new track or a new sync starts asking.
+  }, [item?.id, sub?.id, subSyncing])
+  const syncSub = () => {
+    if (!item || !sub) return
+    askedSync.current = sub.id
+    api
+      .syncSubtitle(item.id, sub.id)
+      .then((s) => setTrackSync(sub.id, s))
+      .catch((e: Error) => flash(e.message, 5000))
+  }
+  const unsyncSub = () => {
+    if (!item || !sub) return
+    api
+      .unsyncSubtitle(item.id, sub.id)
+      .then((s) => setTrackSync(sub.id, s))
+      .catch((e: Error) => flash(e.message, 5000))
+  }
 
   // ASS/SSA is drawn with its styling when the browser can; otherwise the
   // words show plainly, like any other text subtitles.
-  const styledOn = item && sub?.styled && !sub.burnIn && !error ? { itemId: item.id, trackId: sub.id } : undefined
+  const styledOn = item && sub?.styled && !sub.burnIn && !error ? { itemId: item.id, trackId: sub.id, version: subVersion } : undefined
   const styled = useStyledSubtitles(video.current, styledOn, clockOffset - subTiming)
 
   // Subtitles found online are added to the video: show them right away.
@@ -1278,6 +1346,7 @@ function Player({ id }: { id: number }) {
                   selected={sub?.id}
                   onSelect={selectSub}
                   timing={sub && !sub.burnIn ? { seconds: subTiming, onChange: changeTiming } : undefined}
+                  sync={sub && !sub.burnIn ? { state: sub.sync, onSync: syncSub, onUndo: unsyncSub } : undefined}
                   onOpenChange={(open) => {
                     menuOpen.current = open
                     poke()

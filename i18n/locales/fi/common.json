@@ -757,5 +757,21 @@
     "earlier": "Näytä tekstitykset aiemmin",
     "later": "Näytä tekstitykset myöhemmin",
     "reset": "Takaisin tiedoston ajoitukseen"
+  },
+  "subtitleSync": {
+    "title": "Tahdista ääneen",
+    "again": "Tahdista uudelleen",
+    "undo": "Kumoa",
+    "syncing": "Kuunnellaan ääntä…",
+    "earlier": "Siirretty {{seconds}} s aiemmaksi",
+    "later": "Siirretty {{seconds}} s myöhemmäksi",
+    "speed": "Nopeus korjattu",
+    "earlierSpeed": "Nopeus korjattu, {{seconds}} s aiemmaksi",
+    "laterSpeed": "Nopeus korjattu, {{seconds}} s myöhemmäksi",
+    "inSync": "Jo tahdissa",
+    "unsure": "Ei selvinnyt, paljonko ne ovat pielessä. Kokeile Ajoitusta.",
+    "failed": "Näitä tekstityksiä ei voitu tahdistaa",
+    "off": "Kuten tiedostossa",
+    "done": "Tekstitys tahdistettu ääneen"
   }
 }

@@ -2573,6 +2573,43 @@ paths:
         "400": { $ref: "#/components/responses/Error" }
         "403": { $ref: "#/components/responses/Error" }
         "404": { $ref: "#/components/responses/Error" }
+  /items/{id}/subtitles/{track}/sync:
+    get:
+      summary: Whether a subtitle track is lined up with the audio
+      description: Players ask every few seconds while `state` is `syncing`, then fetch the track again for its new times.
+      parameters:
+        - $ref: "#/components/parameters/ID"
+        - { name: track, in: path, required: true, schema: { type: string } }
+      responses:
+        "200": { description: The sync., content: { application/json: { schema: { $ref: "#/components/schemas/SubtitleSync" } } } }
+        "404": { $ref: "#/components/responses/Error" }
+        "422": { $ref: "#/components/responses/Error" }
+    post:
+      summary: Line a subtitle track up with the audio
+      description: |
+        Listens to the video for where people talk (or reads another
+        subtitle track inside it, whose times are right) and finds how far
+        the track is off, and whether it drifts because it was timed for
+        another frame rate. It runs in the background, ahead of automatic
+        syncs; ask GET until it's done. From then on the track is served
+        with its times moved, to every app. Not on kids profiles.
+      parameters:
+        - $ref: "#/components/parameters/ID"
+        - { name: track, in: path, required: true, schema: { type: string } }
+      responses:
+        "202": { description: Syncing., content: { application/json: { schema: { $ref: "#/components/schemas/SubtitleSync" } } } }
+        "404": { $ref: "#/components/responses/Error" }
+        "422": { description: A picture subtitle track, which has no times to move. }
+        "503": { $ref: "#/components/responses/Error" }
+    delete:
+      summary: Undo a subtitle track's sync
+      description: The track is shown as written again, and isn't synced on its own until its file changes.
+      parameters:
+        - $ref: "#/components/parameters/ID"
+        - { name: track, in: path, required: true, schema: { type: string } }
+      responses:
+        "200": { description: Undone., content: { application/json: { schema: { $ref: "#/components/schemas/SubtitleSync" } } } }
+        "404": { $ref: "#/components/responses/Error" }
   /items/{id}/fonts:
     get:
       summary: The fonts attached to a video
@@ -4684,6 +4721,9 @@ components:
         onlineLyrics:
           type: boolean
           description: Look up songs' words on LRCLIB (lrclib.net) when there are no timed ones next to the song or in its tags. Off by default.
+        subtitleSync:
+          type: boolean
+          description: Line subtitle files (next to a video, or found online) up with the audio the first time a video plays with them. On by default.
         adaptiveQuality:
           type: boolean
           description: Transcodes become adaptive streams of qualitySteps, and people can pick a quality in the player. Off by default.
@@ -5643,6 +5683,22 @@ components:
         styled: { type: boolean, description: "ASS/SSA: positions, fonts and effects a player can draw from GET …/subtitles/{id}.ass, or have burned in with styled=1. Its WebVTT keeps only the words." }
         found: { type: boolean, description: Found online by someone watching (see /items/{id}/subtitles/search). }
         removable: { type: boolean, description: The person asking may remove these found subtitles. }
+        sync: { $ref: "#/components/schemas/SubtitleSync", description: "Whether the track's times were lined up with the audio. Absent when nobody synced it." }
+    SubtitleSync:
+      type: object
+      properties:
+        state:
+          type: string
+          enum: [syncing, synced, inSync, unsure, failed, "off", ""]
+          description: |
+            `syncing` is under way; `synced` moved the times; `inSync` found
+            them right already; `unsure` found no fit that stood out and left
+            them; `failed` couldn't read the track or the audio; `off` means
+            someone undid it. Empty for a track never synced.
+        offsetMs: { type: integer, description: "Synced: how far the times moved, after Rate. Negative is earlier." }
+        rate: { type: number, description: "Synced: each time t now shows at t×rate + offsetMs, for subtitles timed for another frame rate. Absent for 1." }
+        auto: { type: boolean, description: Done without anyone asking. }
+        reference: { type: string, enum: [audio, subtitles], description: "What it was lined up with: the speech in the audio, or subtitles inside the video." }
     Download:
       type: object
       properties:

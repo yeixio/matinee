@@ -789,5 +789,21 @@
     "earlier": "Mostrar legendas antes",
     "later": "Mostrar legendas depois",
     "reset": "Voltar à sincronia do arquivo"
+  },
+  "subtitleSync": {
+    "title": "Sincronizar com o áudio",
+    "again": "Sincronizar de novo",
+    "undo": "Desfazer",
+    "syncing": "Ouvindo o áudio…",
+    "earlier": "Adiantadas {{seconds}} s",
+    "later": "Atrasadas {{seconds}} s",
+    "speed": "Velocidade corrigida",
+    "earlierSpeed": "Velocidade corrigida, adiantadas {{seconds}} s",
+    "laterSpeed": "Velocidade corrigida, atrasadas {{seconds}} s",
+    "inSync": "Já estão sincronizadas",
+    "unsure": "Não deu para saber quanto estão fora. Tente o Ajuste de tempo.",
+    "failed": "Não foi possível sincronizar estas legendas",
+    "off": "Como no arquivo",
+    "done": "Legendas sincronizadas com o áudio"
   }
 }

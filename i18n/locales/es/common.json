@@ -789,5 +789,21 @@
     "earlier": "Mostrar subtítulos antes",
     "later": "Mostrar subtítulos después",
     "reset": "Volver a la sincronización del archivo"
+  },
+  "subtitleSync": {
+    "title": "Sincronizar con el audio",
+    "again": "Sincronizar de nuevo",
+    "undo": "Deshacer",
+    "syncing": "Escuchando el audio…",
+    "earlier": "Adelantados {{seconds}} s",
+    "later": "Retrasados {{seconds}} s",
+    "speed": "Velocidad corregida",
+    "earlierSpeed": "Velocidad corregida, adelantados {{seconds}} s",
+    "laterSpeed": "Velocidad corregida, retrasados {{seconds}} s",
+    "inSync": "Ya están sincronizados",
+    "unsure": "No se pudo saber cuánto se desfasan. Prueba con Sincronización.",
+    "failed": "No se pudieron sincronizar estos subtítulos",
+    "off": "Como en el archivo",
+    "done": "Subtítulos sincronizados con el audio"
   }
 }

@@ -828,6 +828,12 @@
       "save": "Salva",
       "remove": "Rimuovi chiave"
     },
+    "subtitleSync": {
+      "title": "Sincronizzazione sottotitoli",
+      "intro": "I sottotitoli che compaiono troppo presto, troppo tardi o che si sfasano sempre di più durante il video possono essere allineati all’audio. Matinee ascolta dove si parla e sposta i sottotitoli di conseguenza. Tutto avviene su questo server.",
+      "auto": "Sincronizza da solo i file dei sottotitoli",
+      "autoDetail": "I file dei sottotitoli accanto a un video e i sottotitoli trovati online vengono sincronizzati la prima volta che qualcuno riproduce il video con essi. I sottotitoli dentro il video restano come sono. Chiunque può comunque sincronizzare i sottotitoli dal player o annullare una sincronizzazione."
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Permette alle app di trovare questo server anche quando cambia l’indirizzo internet di casa. Conosce solo l’indirizzo: i video vanno sempre direttamente da questo server alle app.",

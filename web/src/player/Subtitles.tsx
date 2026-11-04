@@ -1,7 +1,7 @@
-import { Captions, Check, Minus, Plus, Search, X } from 'lucide-react'
+import { AudioLines, Captions, Check, LoaderCircle, Minus, Plus, Search, Undo2, X } from 'lucide-react'
 import { Fragment, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import type { SubtitleTrack } from '../api'
+import type { SubtitleSync, SubtitleTrack } from '../api'
 import { subtitleLabel } from '../media'
 import { FindSubtitles } from './FindSubtitles'
 import { defaultSubtitles, subtitleLook, TIMING_STEP, type SubtitlePrefs } from './subtitlePrefs'
@@ -98,11 +98,13 @@ type MenuProps = {
   }
   /** Set while text subtitles show: move them earlier or later. */
   timing?: { seconds: number; onChange: (seconds: number) => void }
+  /** Set while text subtitles show: line them up with the audio, or undo that. */
+  sync?: { state?: SubtitleSync; onSync: () => void; onUndo: () => void }
 }
 
 // SubtitleMenu is the captions button and its list of tracks, ending in
 // Find subtitles when the server can look for more online.
-export function SubtitleMenu({ tracks, selected, onSelect, onOpenChange, find, timing }: MenuProps) {
+export function SubtitleMenu({ tracks, selected, onSelect, onOpenChange, find, timing, sync }: MenuProps) {
   const { t: tr } = useTranslation()
   const [open, setOpen] = useState(false)
   const [finding, setFinding] = useState(false)
@@ -209,6 +211,7 @@ export function SubtitleMenu({ tracks, selected, onSelect, onOpenChange, find, t
                       {tr('common:subtitleTiming.reset')}
                     </button>
                   )}
+                  {sync && <SyncRow {...sync} />}
                 </div>
               )}
               {find && (
@@ -227,6 +230,64 @@ export function SubtitleMenu({ tracks, selected, onSelect, onOpenChange, find, t
       )}
     </div>
   )
+}
+
+// SyncRow lines the subtitles up with the audio, and says what that did.
+function SyncRow({ state, onSync, onUndo }: NonNullable<MenuProps['sync']>) {
+  const { t: tr } = useTranslation()
+  const syncing = state?.state === 'syncing'
+  const synced = state?.state === 'synced'
+  const status = syncStatus(tr, state)
+  return (
+    <div className="mt-2 border-t border-white/10 pt-2">
+      <div className="flex items-center gap-2">
+        <button
+          onClick={onSync}
+          disabled={syncing}
+          className="flex min-w-0 flex-1 items-center gap-2 rounded-md py-1 text-start text-sm hover:text-accent disabled:opacity-60 disabled:hover:text-current"
+        >
+          {syncing ? <LoaderCircle className="size-4 shrink-0 animate-spin" /> : <AudioLines className="size-4 shrink-0" />}
+          <span className="min-w-0 flex-1 truncate">{tr(synced ? 'common:subtitleSync.again' : 'common:subtitleSync.title')}</span>
+        </button>
+        {synced && (
+          <button
+            onClick={onUndo}
+            className="flex items-center gap-1 rounded-full px-2 py-1 text-xs text-white/60 hover:bg-white/10 hover:text-white"
+          >
+            <Undo2 className="size-3.5" />
+            {tr('common:subtitleSync.undo')}
+          </button>
+        )}
+      </div>
+      {status && (
+        <p className="mt-0.5 text-xs text-white/60" role="status">
+          {status}
+        </p>
+      )}
+    </div>
+  )
+}
+
+/** syncStatus says what syncing a track to the audio did, or undefined when nobody did. */
+export function syncStatus(tr: (key: string, opts?: Record<string, unknown>) => string, s: SubtitleSync | undefined): string | undefined {
+  switch (s?.state) {
+    case 'syncing':
+      return tr('common:subtitleSync.syncing')
+    case 'synced': {
+      const ms = s.offsetMs ?? 0
+      const speed = !!s.rate && s.rate !== 1
+      if (Math.abs(ms) < 100) return speed ? tr('common:subtitleSync.speed') : tr('common:subtitleSync.inSync')
+      const seconds = (Math.abs(ms) / 1000).toLocaleString(undefined, { maximumFractionDigits: 1, minimumFractionDigits: 1 })
+      const key = (ms < 0 ? 'earlier' : 'later') + (speed ? 'Speed' : '')
+      return tr(`common:subtitleSync.${key}`, { seconds })
+    }
+    case 'inSync':
+    case 'unsure':
+    case 'failed':
+    case 'off':
+      return tr(`common:subtitleSync.${s.state}`)
+  }
+  return undefined
 }
 
 /** timingLabel shows a subtitle offset like "+0.3 s". */

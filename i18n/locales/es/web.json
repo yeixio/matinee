@@ -828,6 +828,12 @@
       "save": "Guardar",
       "remove": "Quitar clave"
     },
+    "subtitleSync": {
+      "title": "Sincronizar subtítulos",
+      "intro": "Los subtítulos que salen antes o después de tiempo, o que se desfasan cada vez más a lo largo del vídeo, se pueden ajustar al audio. Matinee escucha dónde habla la gente y mueve los subtítulos para que coincidan. Todo ocurre en este servidor.",
+      "auto": "Sincronizar archivos de subtítulos automáticamente",
+      "autoDetail": "Los archivos de subtítulos junto a un vídeo y los subtítulos encontrados en internet se sincronizan la primera vez que alguien reproduce el vídeo con ellos. Los subtítulos incluidos en el vídeo se dejan como están. Cualquiera puede seguir sincronizando subtítulos desde el reproductor o deshacer una sincronización."
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Permite que las apps sigan encontrando este servidor cuando cambia la dirección de internet de tu casa. Solo conoce la dirección: el vídeo siempre va directo de este servidor a las apps.",

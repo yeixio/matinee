@@ -15,7 +15,7 @@ type Instance = { timeOffset: number; destroy(): Promise<void>; ready: Promise<v
  */
 export function useStyledSubtitles(
   video: HTMLVideoElement | null,
-  on: { itemId: number; trackId: string } | undefined,
+  on: { itemId: number; trackId: string; version?: string } | undefined,
   clock: number,
 ): { failed: boolean } {
   const [failed, setFailed] = useState(false)
@@ -23,7 +23,7 @@ export function useStyledSubtitles(
   const clockNow = useRef(clock)
   clockNow.current = clock
 
-  const key = on && video ? `${on.itemId}/${on.trackId}` : ''
+  const key = on && video ? `${on.itemId}/${on.trackId}/${on.version ?? ''}` : ''
   useEffect(() => {
     setFailed(false)
     if (!key || !on || !video) return
@@ -32,7 +32,7 @@ export function useStyledSubtitles(
       try {
         const [{ default: JASSUB }, subContent, fonts] = await Promise.all([
           import('jassub'),
-          api.styledSubtitles(on.itemId, on.trackId),
+          api.styledSubtitles(on.itemId, on.trackId, on.version),
           api.fonts(on.itemId).catch(() => []),
         ])
         if (gone) return

@@ -128,6 +128,7 @@ type Server struct {
 	holidayKeywords holidayKeywords // TMDB's ids for holiday keywords (see holidays.go)
 	langs           languages       // profiles' languages (see languages.go)
 	imports         importState     // bringing history over from another server (see imports.go)
+	syncs           subSyncs        // subtitles being lined up with the audio (see subsync.go)
 
 	// Translate looks up translations for every library, when people start
 	// using a language; nil without an online provider that has them.
@@ -367,6 +368,9 @@ func (s *Server) routes() []route {
 		{"GET /items/{id}/subtitles/search", reader, grownUps(s.searchSubtitles)},
 		{"POST /items/{id}/subtitles", reader, grownUps(s.addFoundSubtitle)},
 		{"DELETE /items/{id}/subtitles/{track}", reader, grownUps(s.removeFoundSubtitle)},
+		{"GET /items/{id}/subtitles/{track}/sync", reader, s.getSubtitleSync},
+		{"POST /items/{id}/subtitles/{track}/sync", reader, grownUps(s.syncSubtitle)},
+		{"DELETE /items/{id}/subtitles/{track}/sync", reader, grownUps(s.unsyncSubtitle)},
 		{"GET /items/{id}/trailers", reader, s.listTrailers},
 		{"GET /items/{id}/trailers/{trailer}/file", reader, s.trailerFile},
 		{"POST /items/{id}/trailers/{trailer}/hls", reader, s.trailerHLS},
@@ -1521,7 +1525,9 @@ func (s *Server) startHLS(w http.ResponseWriter, r *http.Request) {
 	burn := -1
 	var styled *stream.StyledSub
 	if sub := r.URL.Query().Get("subtitle"); sub != "" {
-		t, ok := subtitle.Find(s.subtitleTracks(r.Context(), it), sub)
+		tracks := s.subtitleTracks(r.Context(), it)
+		s.autoSync(r.Context(), currentUser(r).ID, it, tracks, sub)
+		t, ok := subtitle.Find(tracks, sub)
 		if !ok {
 			writeError(w, http.StatusBadRequest, "no such subtitle track")
 			return
@@ -1539,10 +1545,12 @@ func (s *Server) startHLS(w http.ResponseWriter, r *http.Request) {
 					return
 				}
 			}
-			styled = &stream.StyledSub{Path: it.Path, Stream: t.Stream}
-			if t.External {
-				styled = &stream.StyledSub{Path: t.Path, Stream: -1}
+			path, n, err := s.Subtitles.StyledSource(it.Path, t)
+			if err != nil {
+				s.serverError(w, err)
+				return
 			}
+			styled = &stream.StyledSub{Path: path, Stream: n}
 		}
 	}
 	// audio picks one of the file's audio streams (its index among them, as
@@ -1622,7 +1630,9 @@ func (s *Server) subtitleTracks(ctx context.Context, it store.Item) []subtitle.T
 	}
 	tracks := subtitle.List(it.Path, embedded)
 	u, _ := auth.UserFrom(ctx)
-	return append(tracks, s.foundTracks(ctx, u, it)...)
+	tracks = append(tracks, s.foundTracks(ctx, u, it)...)
+	s.applySyncs(ctx, it, tracks)
+	return tracks
 }
 
 func (s *Server) subtitleFile(w http.ResponseWriter, r *http.Request) {
@@ -1647,6 +1657,9 @@ func (s *Server) subtitleFile(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	}
+	// Someone is watching with these subtitles: line them up for next time
+	// (the player picks up the new times once they're in).
+	s.autoSync(r.Context(), currentUser(r).ID, it, tracks, t.ID)
 	if styled {
 		// The original ASS/SSA, for players that draw its styling themselves.
 		s.Subtitles.ServeASS(w, r, it.Path, t)

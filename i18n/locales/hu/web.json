@@ -824,6 +824,12 @@
       "save": "Mentés",
       "remove": "Kulcs eltávolítása"
     },
+    "subtitleSync": {
+      "title": "Feliratszinkron",
+      "intro": "A túl korán vagy túl későn megjelenő, illetve a videó során egyre jobban elcsúszó feliratok a hanghoz igazíthatók. A Matinee figyeli, hol beszélnek, és ehhez igazítja a feliratokat. Minden ezen a szerveren történik.",
+      "auto": "Feliratfájlok automatikus szinkronizálása",
+      "autoDetail": "A videó mellett lévő feliratfájlok és az online talált feliratok akkor szinkronizálódnak, amikor valaki először lejátssza velük a videót. A videóba ágyazott feliratok változatlanok maradnak. A lejátszóban bárki szinkronizálhat feliratot, vagy visszavonhatja a szinkronizálást."
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Így az alkalmazások akkor is megtalálják ezt a szervert, ha megváltozik az otthoni internetcímed. A szolgáltatás csak a címet ismeri: a videó mindig közvetlenül ettől a szervertől megy az alkalmazásokhoz.",

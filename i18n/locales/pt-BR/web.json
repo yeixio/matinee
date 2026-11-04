@@ -828,6 +828,12 @@
       "save": "Salvar",
       "remove": "Remover chave"
     },
+    "subtitleSync": {
+      "title": "Sincronizar legendas",
+      "intro": "Legendas que aparecem cedo ou tarde demais, ou que vão se atrasando ao longo do vídeo, podem ser alinhadas ao áudio. O Matinee escuta onde as pessoas falam e move as legendas para combinar. Tudo acontece neste servidor.",
+      "auto": "Sincronizar arquivos de legenda sozinho",
+      "autoDetail": "Arquivos de legenda ao lado de um vídeo e legendas encontradas na internet são sincronizados na primeira vez que alguém assiste ao vídeo com elas. Legendas dentro do vídeo ficam como estão. Qualquer pessoa ainda pode sincronizar legendas pelo player ou desfazer uma sincronização."
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Mantém os apps encontrando este servidor quando o endereço de internet da sua casa muda. O serviço só conhece o endereço: o vídeo sempre vai direto deste servidor para os apps.",

@@ -828,6 +828,12 @@
       "save": "Enregistrer",
       "remove": "Retirer la clé"
     },
+    "subtitleSync": {
+      "title": "Synchronisation des sous-titres",
+      "intro": "Les sous-titres qui s’affichent trop tôt, trop tard ou qui se décalent de plus en plus au fil de la vidéo peuvent être calés sur l’audio. Matinee repère les moments où l’on parle et déplace les sous-titres en conséquence. Tout se passe sur ce serveur.",
+      "auto": "Synchroniser automatiquement les fichiers de sous-titres",
+      "autoDetail": "Les fichiers de sous-titres placés à côté d’une vidéo et les sous-titres trouvés en ligne sont synchronisés la première fois que quelqu’un lit la vidéo avec eux. Les sous-titres intégrés à la vidéo restent tels quels. Chacun peut toujours synchroniser des sous-titres depuis le lecteur, ou annuler une synchronisation."
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Permet aux apps de retrouver ce serveur quand l’adresse internet de votre domicile change. Le service ne connaît que l’adresse : la vidéo va toujours directement de ce serveur aux apps.",

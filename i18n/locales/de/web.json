@@ -824,6 +824,12 @@
       "save": "Speichern",
       "remove": "Schlüssel entfernen"
     },
+    "subtitleSync": {
+      "title": "Untertitel-Synchronisierung",
+      "intro": "Untertitel, die zu früh oder zu spät kommen oder im Lauf des Videos immer weiter abweichen, lassen sich am Ton ausrichten. Matinee hört, wo gesprochen wird, und verschiebt die Untertitel passend dazu. Das geschieht alles auf diesem Server.",
+      "auto": "Untertiteldateien selbst synchronisieren",
+      "autoDetail": "Untertiteldateien neben einem Video und online gefundene Untertitel werden synchronisiert, wenn jemand das Video zum ersten Mal damit abspielt. Untertitel im Video bleiben, wie sie sind. Im Player lassen sich alle Untertitel trotzdem synchronisieren oder zurücksetzen."
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Damit die Apps diesen Server weiter finden, wenn sich die Internetadresse deines Zuhauses ändert. Der Dienst erfährt nur die Adresse: Videos gehen immer direkt von diesem Server zu den Apps.",
