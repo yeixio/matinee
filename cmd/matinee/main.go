@@ -120,7 +120,9 @@ func run() error {
 		log.Info("filled in rating levels", "titles", n)
 	}
 
-	scanner := &scan.Scanner{Store: db, Prober: probe.Prober{Path: cfg.FFprobePath}, Log: log}
+	// A file the watcher sees deleted waits a while for the copy that
+	// replaces it, so its watch history moves over to the new file.
+	scanner := &scan.Scanner{Store: db, Prober: probe.Prober{Path: cfg.FFprobePath}, Log: log, MissingGrace: 10 * time.Minute}
 	fetcher := &metadata.Fetcher{Store: db, Log: log}
 	// An admin can change the TMDB key in Settings (see internal/api/tmdbkey.go);
 	// without one, TMDB looks nothing up until they do.
