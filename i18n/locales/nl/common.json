@@ -749,7 +749,8 @@
     "background": "Vlak achter de tekst",
     "sample": "Zo zien ondertitels eruit.",
     "look": "Stijl van ondertitels",
-    "lookHint": "Druk op een regel om die te wijzigen. Je keuzes gelden in elke app."
+    "lookHint": "Druk op een regel om die te wijzigen. Je keuzes gelden in elke app.",
+    "styled": "{{name}}, met opmaak"
   },
   "subtitleTiming": {
     "title": "Timing",

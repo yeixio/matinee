@@ -781,7 +781,8 @@
     "background": "Fond derrière le texte",
     "sample": "Voici à quoi ressembleront les sous-titres.",
     "look": "Style des sous-titres",
-    "lookHint": "Appuyez sur une ligne pour la modifier. Vos choix vous suivent dans toutes les applis."
+    "lookHint": "Appuyez sur une ligne pour la modifier. Vos choix vous suivent dans toutes les applis.",
+    "styled": "{{name}}, avec style"
   },
   "subtitleTiming": {
     "title": "Synchronisation",

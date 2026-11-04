@@ -781,7 +781,8 @@
     "background": "Fundal în spatele textului",
     "sample": "Așa vor arăta subtitrările.",
     "look": "Stilul subtitrărilor",
-    "lookHint": "Apasă un rând ca să-l schimbi. Alegerile tale te urmează în fiecare aplicație."
+    "lookHint": "Apasă un rând ca să-l schimbi. Alegerile tale te urmează în fiecare aplicație.",
+    "styled": "{{name}}, cu stil"
   },
   "subtitleTiming": {
     "title": "Sincronizare",

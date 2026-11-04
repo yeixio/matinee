@@ -781,7 +781,8 @@
     "background": "Recuadro detrás del texto",
     "sample": "Así se verán los subtítulos.",
     "look": "Estilo de subtítulos",
-    "lookHint": "Pulsa una fila para cambiarla. Tus opciones te siguen a todas las apps."
+    "lookHint": "Pulsa una fila para cambiarla. Tus opciones te siguen a todas las apps.",
+    "styled": "{{name}}, con estilo"
   },
   "subtitleTiming": {
     "title": "Sincronización",

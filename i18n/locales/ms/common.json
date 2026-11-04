@@ -717,7 +717,8 @@
     "background": "Kotak di belakang teks",
     "sample": "Beginilah rupa sari kata.",
     "look": "Gaya sari kata",
-    "lookHint": "Tekan baris untuk mengubahnya. Pilihan anda digunakan dalam setiap aplikasi."
+    "lookHint": "Tekan baris untuk mengubahnya. Pilihan anda digunakan dalam setiap aplikasi.",
+    "styled": "{{name}}, bergaya"
   },
   "subtitleTiming": {
     "title": "Pemasaan",

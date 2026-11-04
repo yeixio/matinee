@@ -813,7 +813,8 @@
     "background": "Tło za tekstem",
     "sample": "Tak będą wyglądać napisy.",
     "look": "Styl napisów",
-    "lookHint": "Naciśnij wiersz, aby go zmienić. Twoje wybory obowiązują w każdej aplikacji."
+    "lookHint": "Naciśnij wiersz, aby go zmienić. Twoje wybory obowiązują w każdej aplikacji.",
+    "styled": "{{name}}, ze stylem"
   },
   "subtitleTiming": {
     "title": "Synchronizacja",

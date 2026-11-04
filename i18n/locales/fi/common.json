@@ -749,7 +749,8 @@
     "background": "Laatikko tekstin takana",
     "sample": "Tältä tekstitykset näyttävät.",
     "look": "Tekstitysten tyyli",
-    "lookHint": "Muuta riviä painamalla sitä. Valintasi seuraavat sinua kaikkiin sovelluksiin."
+    "lookHint": "Muuta riviä painamalla sitä. Valintasi seuraavat sinua kaikkiin sovelluksiin.",
+    "styled": "{{name}}, tyyleillä"
   },
   "subtitleTiming": {
     "title": "Ajoitus",

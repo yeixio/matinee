@@ -717,7 +717,8 @@
     "background": "Kotak di balik teks",
     "sample": "Seperti inilah tampilan subtitel.",
     "look": "Gaya subtitel",
-    "lookHint": "Tekan baris untuk mengubahnya. Pilihanmu berlaku di setiap aplikasi."
+    "lookHint": "Tekan baris untuk mengubahnya. Pilihanmu berlaku di setiap aplikasi.",
+    "styled": "{{name}}, bergaya"
   },
   "subtitleTiming": {
     "title": "Waktu",

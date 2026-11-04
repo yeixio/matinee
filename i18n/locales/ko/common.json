@@ -717,7 +717,8 @@
     "background": "글자 뒤 배경",
     "sample": "자막은 이렇게 보입니다.",
     "look": "자막 스타일",
-    "lookHint": "줄을 눌러 바꾸세요. 설정은 모든 앱에 적용됩니다."
+    "lookHint": "줄을 눌러 바꾸세요. 설정은 모든 앱에 적용됩니다.",
+    "styled": "{{name}}, 스타일 적용"
   },
   "subtitleTiming": {
     "title": "싱크",

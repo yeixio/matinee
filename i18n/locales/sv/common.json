@@ -749,7 +749,8 @@
     "background": "Ruta bakom texten",
     "sample": "Så här ser undertexterna ut.",
     "look": "Undertextstil",
-    "lookHint": "Tryck på en rad för att ändra den. Dina val följer med till alla appar."
+    "lookHint": "Tryck på en rad för att ändra den. Dina val följer med till alla appar.",
+    "styled": "{{name}}, med stil"
   },
   "subtitleTiming": {
     "title": "Timing",

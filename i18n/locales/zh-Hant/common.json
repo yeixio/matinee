@@ -717,7 +717,8 @@
     "background": "文字背景",
     "sample": "字幕會顯示成這樣。",
     "look": "字幕樣式",
-    "lookHint": "按一列即可變更。你的選擇會同步到所有應用程式。"
+    "lookHint": "按一列即可變更。你的選擇會同步到所有應用程式。",
+    "styled": "{{name}}（含樣式）"
   },
   "subtitleTiming": {
     "title": "時間",
