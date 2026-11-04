@@ -49,30 +49,7 @@
     },
     "skipIntro": "Girişi atla",
     "introSkipped": "Giriş atlandı",
-    "skipCredits": "Jeneriği atla",
-    "why": {
-      "title": "Neden arabelleğe aldı",
-      "slowDisk": "Sunucu bu dosyayı yavaş okuyor: bir parça {{seconds}} saniye sürdü, yoğun bir ağ sürücüsünden okur gibi.",
-      "slowConvert": "Sunucu bu videoyu {{speed}}× hızda dönüştürüyor, oynatıldığından yavaş.",
-      "slowConnection": "Bağlantı {{have}} Mbps alıyor, bu video {{need}} Mbps istiyor.",
-      "unknown": "Sunucu ve bağlantı iyi görünüyordu. Ağ bir an kopmuş olabilir.",
-      "converted": {
-        "codec": "Bu cihaz video biçimini oynatamadığı için dönüştürülüyor.",
-        "hdr": "Bu ekran HDR'ını gösteremediği için dönüştürülüyor.",
-        "subtitle": "Altyazıları çizmek için dönüştürülüyor.",
-        "quality": "Daha düşük kaliteye dönüştürülüyor."
-      },
-      "tip": {
-        "gpu": "Yönetici ipucu: dönüştürme için bir GPU çok daha hızlıdır. Ayarlar → Akış'a bakın.",
-        "lowerQuality": "Yönetici ipucu: GPU yetişemiyor. Aynı anda daha az akış veya daha düşük kalite yardımcı olur.",
-        "adaptive": "Yönetici ipucu: oynatıcılar kaliteyi düşürebilsin diye Ayarlar → Akış'ta uyarlanabilir kaliteyi açın.",
-        "disk": "Yönetici ipucu: Sunucu durumu'nda bu kitaplığın diskini veya ağ paylaşımını kontrol edin."
-      },
-      "test": "Bağlantıyı test et",
-      "testing": "Test ediliyor…",
-      "result": "Sunucuya {{mbps}} Mbps, {{ms}} ms gidiş-dönüş",
-      "testFailed": "Bağlantı test edilemedi"
-    }
+    "skipCredits": "Jeneriği atla"
   },
   "somethingWentWrong": "Bir şeyler ters gitti",
   "oneMoment": "Bir saniye…",

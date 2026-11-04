@@ -663,5 +663,28 @@
     "wontPlay": "Deze zender speelt nu niet",
     "wontPlayHint": "De stream reageerde niet. Zenders die steeds falen worden verborgen.",
     "tryAgain": "Opnieuw proberen"
+  },
+  "why": {
+    "title": "Waarom het bufferde",
+    "slowDisk": "De server leest dit bestand traag: een stuk duurde {{seconds}} seconden, zoals van een drukke netwerkschijf.",
+    "slowConvert": "De server zet deze video om op {{speed}}× snelheid, trager dan hij afspeelt.",
+    "slowConnection": "De verbinding haalt {{have}} Mbps en deze video heeft {{need}} Mbps nodig.",
+    "unknown": "De server en de verbinding zagen er goed uit. Misschien viel het netwerk even weg.",
+    "converted": {
+      "codec": "Hij wordt omgezet omdat dit apparaat het videoformaat niet afspeelt.",
+      "hdr": "Hij wordt omgezet omdat dit scherm zijn HDR niet toont.",
+      "subtitle": "Hij wordt omgezet om de ondertitels in te tekenen.",
+      "quality": "Hij wordt omgezet naar een lagere kwaliteit."
+    },
+    "tip": {
+      "gpu": "Tip voor beheerders: een GPU voor transcoderen zet veel sneller om. Zie Instellingen → Streaming.",
+      "lowerQuality": "Tip voor beheerders: de GPU houdt het niet bij. Minder streams tegelijk of een lagere kwaliteit helpt.",
+      "adaptive": "Tip voor beheerders: zet adaptieve kwaliteit aan in Instellingen → Streaming, zodat spelers lager kunnen gaan.",
+      "disk": "Tip voor beheerders: controleer in Serverstatus de schijf of netwerkshare van deze bibliotheek."
+    },
+    "test": "Verbinding testen",
+    "testing": "Bezig met testen…",
+    "result": "{{mbps}} Mbps naar de server, {{ms}} ms heen en terug",
+    "testFailed": "Kon de verbinding niet testen"
   }
 }

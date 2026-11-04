@@ -631,5 +631,28 @@
     "wontPlay": "Saluran ini sedang tidak tayang",
     "wontPlayHint": "Siarannya tidak merespons. Saluran yang terus gagal akan disembunyikan.",
     "tryAgain": "Coba lagi"
+  },
+  "why": {
+    "title": "Mengapa terjadi buffering",
+    "slowDisk": "Server membaca file ini dengan lambat: satu bagian butuh {{seconds}} detik, seperti dari drive jaringan yang sibuk.",
+    "slowConvert": "Server mengonversi video ini dengan kecepatan {{speed}}×, lebih lambat daripada pemutarannya.",
+    "slowConnection": "Koneksi mendapat {{have}} Mbps, dan video ini butuh {{need}} Mbps.",
+    "unknown": "Server dan koneksi tampak baik. Jaringan mungkin terputus sesaat.",
+    "converted": {
+      "codec": "Video dikonversi karena perangkat ini tidak bisa memutar format videonya.",
+      "hdr": "Video dikonversi karena layar ini tidak bisa menampilkan HDR-nya.",
+      "subtitle": "Video dikonversi untuk menggambar subtitel.",
+      "quality": "Video dikonversi ke kualitas lebih rendah."
+    },
+    "tip": {
+      "gpu": "Tips admin: GPU untuk transcoding mengonversi jauh lebih cepat. Lihat Pengaturan → Streaming.",
+      "lowerQuality": "Tips admin: GPU tidak sanggup mengejar. Lebih sedikit stream sekaligus atau kualitas lebih rendah akan membantu.",
+      "adaptive": "Tips admin: aktifkan kualitas adaptif di Pengaturan → Streaming agar pemutar bisa menurunkan kualitas.",
+      "disk": "Tips admin: periksa disk atau folder jaringan pustaka ini di Kesehatan server."
+    },
+    "test": "Uji koneksi",
+    "testing": "Menguji…",
+    "result": "{{mbps}} Mbps ke server, {{ms}} ms pulang-pergi",
+    "testFailed": "Tidak bisa menguji koneksi"
   }
 }

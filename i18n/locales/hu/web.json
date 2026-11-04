@@ -49,30 +49,7 @@
     },
     "skipIntro": "Bevezető átugrása",
     "introSkipped": "Bevezető átugorva",
-    "skipCredits": "Stáblista átugrása",
-    "why": {
-      "title": "Miért töltött",
-      "slowDisk": "A szerver lassan olvassa ezt a fájlt: egy darab {{seconds}} másodpercig tartott, mint egy leterhelt hálózati meghajtóról.",
-      "slowConvert": "A szerver {{speed}}× sebességgel alakítja át a videót, lassabban, mint ahogy lejátszódik.",
-      "slowConnection": "A kapcsolat {{have}} Mbps-t ér el, a videónak {{need}} Mbps kell.",
-      "unknown": "A szerver és a kapcsolat rendben volt. Lehet, hogy a hálózat egy pillanatra kiesett.",
-      "converted": {
-        "codec": "Át van alakítva, mert ez az eszköz nem játssza le a videóformátumát.",
-        "hdr": "Át van alakítva, mert ez a képernyő nem mutatja a HDR-jét.",
-        "subtitle": "Át van alakítva a feliratok belerajzolásához.",
-        "quality": "Alacsonyabb minőségre van alakítva."
-      },
-      "tip": {
-        "gpu": "Tipp adminoknak: egy GPU az átkódoláshoz sokkal gyorsabb. Lásd: Beállítások → Streamelés.",
-        "lowerQuality": "Tipp adminoknak: a GPU nem bírja. Kevesebb egyidejű stream vagy alacsonyabb minőség segít.",
-        "adaptive": "Tipp adminoknak: kapcsold be az adaptív minőséget a Beállítások → Streamelés alatt, hogy a lejátszók lejjebb válthassanak.",
-        "disk": "Tipp adminoknak: nézd meg a Szerver állapota oldalon a könyvtár lemezét vagy hálózati megosztását."
-      },
-      "test": "Kapcsolat tesztelése",
-      "testing": "Tesztelés…",
-      "result": "{{mbps}} Mbps a szerverig, {{ms}} ms oda-vissza",
-      "testFailed": "Nem sikerült tesztelni a kapcsolatot"
-    }
+    "skipCredits": "Stáblista átugrása"
   },
   "somethingWentWrong": "Valami hiba történt",
   "oneMoment": "Egy pillanat…",

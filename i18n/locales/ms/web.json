@@ -49,30 +49,7 @@
     },
     "skipIntro": "Langkau intro",
     "introSkipped": "Intro dilangkau",
-    "skipCredits": "Langkau kredit",
-    "why": {
-      "title": "Mengapa ia menimbal",
-      "slowDisk": "Pelayan membaca fail ini dengan perlahan: satu bahagian mengambil {{seconds}} saat, seperti dari pemacu rangkaian yang sibuk.",
-      "slowConvert": "Pelayan menukar video ini pada kelajuan {{speed}}×, lebih perlahan daripada ia dimainkan.",
-      "slowConnection": "Sambungan mendapat {{have}} Mbps, dan video ini memerlukan {{need}} Mbps.",
-      "unknown": "Pelayan dan sambungan kelihatan baik. Rangkaian mungkin terputus seketika.",
-      "converted": {
-        "codec": "Ia ditukar kerana peranti ini tidak dapat memainkan format videonya.",
-        "hdr": "Ia ditukar kerana skrin ini tidak dapat menunjukkan HDR-nya.",
-        "subtitle": "Ia ditukar untuk melukis sari kata.",
-        "quality": "Ia ditukar kepada kualiti lebih rendah."
-      },
-      "tip": {
-        "gpu": "Petua pentadbir: GPU untuk transkod menukar jauh lebih pantas. Lihat Tetapan → Penstriman.",
-        "lowerQuality": "Petua pentadbir: GPU tidak dapat mengejar. Kurang strim serentak atau kualiti lebih rendah membantu.",
-        "adaptive": "Petua pentadbir: hidupkan kualiti adaptif dalam Tetapan → Penstriman supaya pemain boleh turun kualiti.",
-        "disk": "Petua pentadbir: semak cakera atau perkongsian rangkaian pustaka ini dalam Kesihatan pelayan."
-      },
-      "test": "Uji sambungan",
-      "testing": "Menguji…",
-      "result": "{{mbps}} Mbps ke pelayan, {{ms}} ms pergi balik",
-      "testFailed": "Tidak dapat menguji sambungan"
-    }
+    "skipCredits": "Langkau kredit"
   },
   "somethingWentWrong": "Sesuatu tidak kena",
   "oneMoment": "Sekejap…",

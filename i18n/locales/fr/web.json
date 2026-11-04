@@ -49,30 +49,7 @@
     },
     "skipIntro": "Passer l’intro",
     "introSkipped": "Intro passée",
-    "skipCredits": "Passer le générique",
-    "why": {
-      "title": "Pourquoi la lecture a chargé",
-      "slowDisk": "Le serveur lit ce fichier lentement : un morceau a pris {{seconds}} secondes, comme depuis un lecteur réseau chargé.",
-      "slowConvert": "Le serveur convertit cette vidéo à {{speed}}× la vitesse, plus lentement qu'elle ne se lit.",
-      "slowConnection": "La connexion atteint {{have}} Mb/s, et cette vidéo demande {{need}} Mb/s.",
-      "unknown": "Le serveur et la connexion semblaient bons. Le réseau a peut-être coupé un instant.",
-      "converted": {
-        "codec": "Elle est convertie car cet appareil ne lit pas son format vidéo.",
-        "hdr": "Elle est convertie car cet écran n'affiche pas son HDR.",
-        "subtitle": "Elle est convertie pour incruster les sous-titres.",
-        "quality": "Elle est convertie dans une qualité plus basse."
-      },
-      "tip": {
-        "gpu": "Conseil admin : un GPU pour le transcodage convertit bien plus vite. Voir Réglages → Streaming.",
-        "lowerQuality": "Conseil admin : le GPU ne suit pas. Moins de flux à la fois ou une qualité plus basse aident.",
-        "adaptive": "Conseil admin : activez la qualité adaptative dans Réglages → Streaming, pour que les lecteurs puissent baisser la qualité.",
-        "disk": "Conseil admin : vérifiez dans État du serveur le disque ou le partage réseau de cette bibliothèque."
-      },
-      "test": "Tester la connexion",
-      "testing": "Test en cours…",
-      "result": "{{mbps}} Mb/s vers le serveur, {{ms}} ms aller-retour",
-      "testFailed": "Impossible de tester la connexion"
-    }
+    "skipCredits": "Passer le générique"
   },
   "somethingWentWrong": "Un problème est survenu",
   "oneMoment": "Un instant…",

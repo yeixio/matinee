@@ -631,5 +631,28 @@
     "wontPlay": "Kênh này hiện không phát",
     "wontPlayHint": "Luồng của kênh không phản hồi. Các kênh liên tục lỗi sẽ bị ẩn.",
     "tryAgain": "Thử lại"
+  },
+  "why": {
+    "title": "Vì sao bị tải chậm",
+    "slowDisk": "Máy chủ đọc tệp này chậm: một đoạn mất {{seconds}} giây, như từ ổ mạng đang bận.",
+    "slowConvert": "Máy chủ chuyển đổi video này ở tốc độ {{speed}}×, chậm hơn tốc độ phát.",
+    "slowConnection": "Kết nối đạt {{have}} Mbps, còn video này cần {{need}} Mbps.",
+    "unknown": "Máy chủ và kết nối đều ổn. Có thể mạng bị rớt trong chốc lát.",
+    "converted": {
+      "codec": "Video được chuyển đổi vì thiết bị này không phát được định dạng video.",
+      "hdr": "Video được chuyển đổi vì màn hình này không hiển thị được HDR.",
+      "subtitle": "Video được chuyển đổi để vẽ phụ đề vào.",
+      "quality": "Video được chuyển đổi sang chất lượng thấp hơn."
+    },
+    "tip": {
+      "gpu": "Mẹo cho quản trị viên: GPU để chuyển mã nhanh hơn nhiều. Xem Cài đặt → Phát trực tuyến.",
+      "lowerQuality": "Mẹo cho quản trị viên: GPU không theo kịp. Bớt luồng cùng lúc hoặc chất lượng thấp hơn sẽ giúp.",
+      "adaptive": "Mẹo cho quản trị viên: bật chất lượng thích ứng trong Cài đặt → Phát trực tuyến để trình phát có thể hạ chất lượng.",
+      "disk": "Mẹo cho quản trị viên: kiểm tra ổ đĩa hoặc thư mục mạng của thư viện này trong Tình trạng máy chủ."
+    },
+    "test": "Kiểm tra kết nối",
+    "testing": "Đang kiểm tra…",
+    "result": "{{mbps}} Mbps tới máy chủ, {{ms}} ms khứ hồi",
+    "testFailed": "Không kiểm tra được kết nối"
   }
 }

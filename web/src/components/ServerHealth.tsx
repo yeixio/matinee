@@ -352,7 +352,7 @@ function Streams({ h }: { h: Health }) {
                 {s.stalled && (
                   <p className="text-sm text-muted">
                     {t('health.streams.stalled', { why: causeText(t, s.stalled) })}
-                    {s.stalled.tip && ` ${t(`player.why.tip.${s.stalled.tip}`)}`}
+                    {s.stalled.tip && ` ${t(`common:why.tip.${s.stalled.tip}`)}`}
                   </p>
                 )}
                 {p.durationMs ? (

@@ -32,7 +32,7 @@ export function bufferedAheadMs(el: HTMLMediaElement) {
 
 /** The cause in plain words, as one sentence. */
 export function causeText(t: TFunction, c: PlaybackCause) {
-  return t(`player.why.${c.code}`, c.values ?? {})
+  return t(`common:why.${c.code}`, c.values ?? {})
 }
 
 /** Whether a cause is clear enough to say without being asked. */

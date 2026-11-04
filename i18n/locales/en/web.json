@@ -49,30 +49,7 @@
     },
     "skipIntro": "Skip intro",
     "introSkipped": "Skipped the intro",
-    "skipCredits": "Skip credits",
-    "why": {
-      "title": "Why it buffered",
-      "slowDisk": "The server is slow to read this file: a piece took {{seconds}} seconds, as from a busy network drive.",
-      "slowConvert": "The server converts this video at {{speed}}× speed, slower than it plays.",
-      "slowConnection": "The connection gets {{have}} Mbps, and this video needs {{need}} Mbps.",
-      "unknown": "The server and the connection looked fine. The network may have dropped for a moment.",
-      "converted": {
-        "codec": "It's converted because this device can't play its video format.",
-        "hdr": "It's converted because this screen can't show its HDR.",
-        "subtitle": "It's converted to draw in the subtitles.",
-        "quality": "It's converted to a lower quality."
-      },
-      "tip": {
-        "gpu": "Admin tip: a GPU for transcoding converts much faster. See Settings → Streaming.",
-        "lowerQuality": "Admin tip: the GPU can't keep up. Fewer streams at once or a lower quality helps.",
-        "adaptive": "Admin tip: turn on adaptive quality in Settings → Streaming, so players can step down.",
-        "disk": "Admin tip: check the disk or network share this library is on in Server health."
-      },
-      "test": "Test connection",
-      "testing": "Testing…",
-      "result": "{{mbps}} Mbps to the server, {{ms}} ms round trip",
-      "testFailed": "Couldn't test the connection"
-    }
+    "skipCredits": "Skip credits"
   },
   "somethingWentWrong": "Something went wrong",
   "oneMoment": "One moment…",

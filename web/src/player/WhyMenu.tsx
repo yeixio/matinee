@@ -45,8 +45,8 @@ export function WhyMenu({ cause, onOpenChange }: { cause: PlaybackCause; onOpenC
       <button
         onClick={() => toggle(!open)}
         className="rounded-full p-2 hover:bg-white/10"
-        aria-label={tr('player.why.title')}
-        title={tr('player.why.title')}
+        aria-label={tr('common:why.title')}
+        title={tr('common:why.title')}
         aria-expanded={open}
       >
         <Gauge className="size-6" />
@@ -54,25 +54,25 @@ export function WhyMenu({ cause, onOpenChange }: { cause: PlaybackCause; onOpenC
       {open && (
         <div
           role="dialog"
-          aria-label={tr('player.why.title')}
+          aria-label={tr('common:why.title')}
           className="absolute end-0 bottom-full mb-2 w-80 max-w-[calc(100vw-2rem)] space-y-3 rounded-xl border border-white/10 bg-black/90 p-4 text-sm shadow-2xl backdrop-blur"
         >
-          <div className="text-xs font-medium tracking-wide text-white/50 uppercase">{tr('player.why.title')}</div>
+          <div className="text-xs font-medium tracking-wide text-white/50 uppercase">{tr('common:why.title')}</div>
           <p>{causeText(tr, cause)}</p>
-          {cause.converted && <p className="text-white/70">{tr(`player.why.converted.${cause.converted}`)}</p>}
-          {cause.tip && <p className="rounded-md bg-white/10 p-2 text-white/80">{tr(`player.why.tip.${cause.tip}`)}</p>}
+          {cause.converted && <p className="text-white/70">{tr(`common:why.converted.${cause.converted}`)}</p>}
+          {cause.tip && <p className="rounded-md bg-white/10 p-2 text-white/80">{tr(`common:why.tip.${cause.tip}`)}</p>}
           <div className="flex items-center gap-3">
             <button
               onClick={run}
               disabled={test === 'testing'}
               className="rounded-full bg-white/15 px-3 py-1.5 font-medium hover:bg-white/25 disabled:opacity-60"
             >
-              {test === 'testing' ? tr('player.why.testing') : tr('player.why.test')}
+              {test === 'testing' ? tr('common:why.testing') : tr('common:why.test')}
             </button>
-            {test === 'failed' && <span className="text-white/70">{tr('player.why.testFailed')}</span>}
+            {test === 'failed' && <span className="text-white/70">{tr('common:why.testFailed')}</span>}
             {typeof test === 'object' && (
               <span dir="auto" className="text-white/70 tabular-nums">
-                {tr('player.why.result', { mbps: test.mbps, ms: test.pingMs })}
+                {tr('common:why.result', { mbps: test.mbps, ms: test.pingMs })}
               </span>
             )}
           </div>
