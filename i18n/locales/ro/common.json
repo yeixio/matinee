@@ -719,5 +719,10 @@
     "result": "{{mbps}} Mbps până la server, {{ms}} ms dus-întors",
     "testFailed": "Conexiunea nu a putut fi testată",
     "testHint": "Cât de repede primește acest dispozitiv video de la server și cât durează dus-întorsul."
+  },
+  "versions": {
+    "title": "Versiune",
+    "choose": "Alege o versiune",
+    "numbered": "Versiunea {{n}}"
   }
 }

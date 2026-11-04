@@ -655,5 +655,10 @@
     "result": "{{mbps}} Mbps ke server, {{ms}} ms pulang-pergi",
     "testFailed": "Tidak bisa menguji koneksi",
     "testHint": "Seberapa cepat perangkat ini menerima video dari server Anda, dan berapa lama pulang-perginya."
+  },
+  "versions": {
+    "title": "Versi",
+    "choose": "Pilih versi",
+    "numbered": "Versi {{n}}"
   }
 }

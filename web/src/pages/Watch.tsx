@@ -32,6 +32,7 @@ import { TogetherMenu } from '../player/TogetherMenu'
 import { WhyMenu } from '../player/WhyMenu'
 import { Arrivals, bufferedAheadMs, causeText, ReportGate, STALL_MS, worthSaying } from '../player/why'
 import { clientId } from '../remote'
+import { defaultVersion } from '../components/Versions'
 import type { TogetherState } from '../api'
 
 const displayTitle = (item: ItemDetail) => {
@@ -55,7 +56,18 @@ export default function Watch() {
   const audio = useAudio()
   // Songs play in the music player, which keeps going while you browse.
   const song = item?.kind === 'track'
-  const t = useSearchParams()[0].get('t')
+  const [params] = useSearchParams()
+  const t = params.get('t')
+  // A title with several files plays the one that suits this screen, unless
+  // one was picked (?v=1) or a version was opened.
+  const pick = item?.versions && !item.versionOf && !params.get('v') ? defaultVersion(item) : undefined
+  const otherVersion = pick && pick.id !== item?.id ? pick.id : undefined
+  useEffect(() => {
+    if (!otherVersion) return
+    const next = new URLSearchParams(params)
+    next.set('v', '1')
+    navigate(`/watch/${otherVersion}?${next}`, { replace: true })
+  }, [otherVersion]) // eslint-disable-line react-hooks/exhaustive-deps
   // Watch together lasts while the watch pages are open (player/together.ts).
   useEffect(() => together.attach(), [])
   useEffect(() => {
@@ -65,7 +77,7 @@ export default function Watch() {
       navigate(item.parentId ? `/item/${item.parentId}` : '/', { replace: true })
     } else audio.pause()
   }, [item?.id]) // eslint-disable-line react-hooks/exhaustive-deps
-  if (song) return null
+  if (song || otherVersion) return null
   if (item && plugin) return <PluginPlayer item={item} player={plugin} onExit={exit} />
   if (!item || (isPending && !builtInKinds.includes(item.kind))) {
     return (

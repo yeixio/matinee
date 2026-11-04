@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/yeixio/matinee/internal/metadata"
+	"github.com/yeixio/matinee/internal/scan"
 	"github.com/yeixio/matinee/internal/store"
 )
 
@@ -184,9 +185,11 @@ func (s *Server) refreshItem(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if cur.TMDBID == 0 {
-		if err := s.Store.LookUpAgain(r.Context(), it.ID); err != nil {
-			s.serverError(w, err)
-			return
+		for _, id := range s.versionIDs(r, it) {
+			if err := s.Store.LookUpAgain(r.Context(), id); err != nil {
+				s.serverError(w, err)
+				return
+			}
 		}
 		s.refetch(it)
 		s.writeItem(w, r, it.ID)
@@ -209,13 +212,38 @@ func (s *Server) refreshItem(w http.ResponseWriter, r *http.Request) {
 	s.rematch(w, r, it, m, cur.Locked)
 }
 
+// rematch matches every version of the title alike, so they stay one.
 func (s *Server) rematch(w http.ResponseWriter, r *http.Request, it store.Item, m *store.Metadata, locked bool) {
-	if err := s.Store.SetMatch(r.Context(), it.ID, m, locked); err != nil {
+	for _, id := range s.versionIDs(r, it) {
+		if err := s.Store.SetMatch(r.Context(), id, m, locked); err != nil {
+			s.serverError(w, err)
+			return
+		}
+	}
+	if _, err := s.Store.GroupVersions(r.Context(), it.LibraryID, scan.Edition); err != nil {
 		s.serverError(w, err)
 		return
 	}
 	s.refetch(it)
 	s.writeItem(w, r, it.ID)
+}
+
+// versionIDs lists the item and the other versions of its title.
+func (s *Server) versionIDs(r *http.Request, it store.Item) []int64 {
+	ids := []int64{it.ID}
+	if it.Kind != "movie" && it.Kind != "episode" {
+		return ids
+	}
+	vs, err := s.Store.Versions(r.Context(), 0, it.ID)
+	if err != nil {
+		return ids
+	}
+	for _, v := range vs {
+		if v.ID != it.ID {
+			ids = append(ids, v.ID)
+		}
+	}
+	return ids
 }
 
 // refetch looks up the rest (cast, seasons and episodes, translations) in

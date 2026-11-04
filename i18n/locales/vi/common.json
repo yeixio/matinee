@@ -655,5 +655,10 @@
     "result": "{{mbps}} Mbps tới máy chủ, {{ms}} ms khứ hồi",
     "testFailed": "Không kiểm tra được kết nối",
     "testHint": "Thiết bị này nhận video từ máy chủ nhanh đến đâu và một lượt khứ hồi mất bao lâu."
+  },
+  "versions": {
+    "title": "Phiên bản",
+    "choose": "Chọn phiên bản",
+    "numbered": "Phiên bản {{n}}"
   }
 }

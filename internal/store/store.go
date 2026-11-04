@@ -583,6 +583,11 @@ var migrations = []string{
 	// 93: an admin picked (or cleared) a movie's or show's online match by
 	// hand, so lookups leave it alone (see match.go).
 	"ALTER TABLE items ADD COLUMN match_locked INTEGER NOT NULL DEFAULT 0",
+	// 94-96: several files of one movie or episode are versions of one
+	// item (see versions.go).
+	"ALTER TABLE items ADD COLUMN version_of BIGINT REFERENCES items(id) ON DELETE SET NULL",
+	"ALTER TABLE items ADD COLUMN edition TEXT",
+	"CREATE INDEX items_version_of ON items(version_of)",
 }
 
 func now() int64 { return time.Now().Unix() }
@@ -934,7 +939,7 @@ func (s *Store) LibraryCounts(ctx context.Context) (map[int64]LibraryCount, erro
 	rows, err := s.db.QueryContext(ctx, `SELECT library_id,
 		SUM(CASE WHEN parent_id IS NULL THEN 1 ELSE 0 END),
 		SUM(CASE WHEN path IS NOT NULL AND path <> '' THEN 1 ELSE 0 END)
-		FROM items GROUP BY library_id`)
+		FROM items WHERE version_of IS NULL GROUP BY library_id`)
 	if err != nil {
 		return nil, err
 	}

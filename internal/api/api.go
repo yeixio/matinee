@@ -1251,6 +1251,9 @@ type itemView struct {
 	// is a podcast episode's link and type.
 	Podcast *podcastView       `json:"feed,omitempty"`
 	Episode *store.EpisodeInfo `json:"episode,omitempty"`
+	// Versions are the files of a movie or episode with more than one,
+	// the title's own first; absent when it has only one.
+	Versions []versionView `json:"versions,omitempty"`
 }
 
 func (s *Server) getItem(w http.ResponseWriter, r *http.Request) {
@@ -1294,6 +1297,10 @@ func (s *Server) getItem(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if err := s.addPodcastDetails(r.Context(), currentUser(r), &v); err != nil {
+		s.serverError(w, err)
+		return
+	}
+	if err := s.addVersions(r, &v); err != nil {
 		s.serverError(w, err)
 		return
 	}

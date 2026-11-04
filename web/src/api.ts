@@ -411,6 +411,10 @@ export type Item = {
   album?: string
   // Albums and tracks: the record label the album came out on.
   recordLabel?: string
+  // Movies and episodes: the title this file is another version of, and the
+  // cut its file name names.
+  versionOf?: number
+  edition?: string
   // Books and their parts: the author; parts: the book too (its id is
   // parentId). Books name their narrators and place in a series.
   author?: string
@@ -761,8 +765,25 @@ export type PlaybackPrefs = {
   podcastsPlayOn?: boolean // when a podcast episode ends, play the next one
 }
 
+// One file of a movie or episode with several; its id plays it.
+export type Version = {
+  id: number
+  edition?: string
+  width?: number
+  height?: number
+  videoCodec?: string
+  audioCodec?: string
+  container?: string
+  mimeType?: string
+  mediaTags?: string[]
+  durationMs?: number
+  size?: number
+}
+
 export type ItemDetail = Item & {
   mimeType?: string
+  // The files of a movie or episode with more than one, the title's own first.
+  versions?: Version[]
   subtitles?: SubtitleTrack[]
   // The person can look for more subtitles online.
   subtitleSearch?: boolean

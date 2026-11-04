@@ -18,19 +18,27 @@ func (s *Store) WatchList(ctx context.Context, userID int64, limit int) ([]Item,
 // AddToWatchList saves an item to a user's watch list. Adding it again keeps
 // its place.
 func (s *Store) AddToWatchList(ctx context.Context, userID, itemID int64) error {
+	itemID, err := s.primaryID(ctx, itemID)
+	if err != nil {
+		return err
+	}
 	// added_at is in milliseconds and always after the list's last one, so
 	// the order holds even for several adds in the same instant.
 	var last int64
 	if err := s.db.QueryRowContext(ctx, "SELECT COALESCE(MAX(added_at), 0) FROM watchlist WHERE user_id = ?", userID).Scan(&last); err != nil {
 		return err
 	}
-	_, err := s.db.ExecContext(ctx,
+	_, err = s.db.ExecContext(ctx,
 		"INSERT INTO watchlist (user_id, item_id, added_at) VALUES (?, ?, ?) ON CONFLICT DO NOTHING",
 		userID, itemID, max(time.Now().UnixMilli(), last+1))
 	return err
 }
 
 func (s *Store) RemoveFromWatchList(ctx context.Context, userID, itemID int64) error {
-	_, err := s.db.ExecContext(ctx, "DELETE FROM watchlist WHERE user_id = ? AND item_id = ?", userID, itemID)
+	itemID, err := s.primaryID(ctx, itemID)
+	if err != nil {
+		return err
+	}
+	_, err = s.db.ExecContext(ctx, "DELETE FROM watchlist WHERE user_id = ? AND item_id = ?", userID, itemID)
 	return err
 }

@@ -687,5 +687,10 @@
     "result": "{{mbps}} Mbps to the server, {{ms}} ms round trip",
     "testFailed": "Couldn't test the connection",
     "testHint": "How fast this device gets video from your server, and how long a round trip takes."
+  },
+  "versions": {
+    "title": "Version",
+    "choose": "Choose a version",
+    "numbered": "Version {{n}}"
   }
 }

@@ -1,9 +1,11 @@
 package store
 
 import (
+	"cmp"
 	"context"
 	"database/sql"
 	"errors"
+	"slices"
 	"strconv"
 	"strings"
 	"unicode"
@@ -25,13 +27,17 @@ type LibraryFile struct {
 	// Key is what the file is (see fileKey); "" when it can't be matched.
 	Key    string
 	tmdbID int64
+	// VersionOf is the item this file is another version of, or 0.
+	VersionOf int64
+	edition   string
 }
 
 // LibraryFiles lists a library's files with their match keys.
 func (s *Store) LibraryFiles(ctx context.Context, libraryID int64) ([]LibraryFile, error) {
 	rows, err := s.db.QueryContext(ctx, `
 		SELECT i.id, i.path, i.kind, i.title, COALESCE(i.year, 0), i.index_number, COALESCE(i.disc_number, 0),
-			COALESCE(i.parent_id, 0), COALESCE(i.tmdb_id, 0), COALESCE(se.parent_id, 0), se.index_number
+			COALESCE(i.parent_id, 0), COALESCE(i.tmdb_id, 0), COALESCE(se.parent_id, 0), se.index_number,
+			COALESCE(i.version_of, 0), COALESCE(i.edition, '')
 		FROM items i LEFT JOIN items se ON i.kind = 'episode' AND se.id = i.parent_id
 		WHERE i.library_id = ? AND i.path IS NOT NULL`, libraryID)
 	if err != nil {
@@ -45,7 +51,7 @@ func (s *Store) LibraryFiles(ctx context.Context, libraryID int64) ([]LibraryFil
 		var year, disc int
 		var parent, showID int64
 		var index, season sql.NullInt64
-		if err := rows.Scan(&f.ID, &f.Path, &f.Kind, &title, &year, &index, &disc, &parent, &f.tmdbID, &showID, &season); err != nil {
+		if err := rows.Scan(&f.ID, &f.Path, &f.Kind, &title, &year, &index, &disc, &parent, &f.tmdbID, &showID, &season, &f.VersionOf, &f.edition); err != nil {
 			return nil, err
 		}
 		f.Key = fileKey(f.Kind, title, year, index, disc, parent, showID, season)
@@ -95,11 +101,17 @@ func matchTitle(s string) string {
 	return b.String()
 }
 
-// Replacements pairs each missing file with the one file that took its
-// place: another file of the library with the same key that isn't missing
-// itself. A file with more than one possible match, or that shares its
-// match with another missing file, is left unpaired. The map goes from the
-// missing file's id to its replacement's.
+// Replacements pairs each missing file with the file that took its place:
+// another file of the library with the same key that isn't missing itself.
+// The map goes from the missing file's id to its replacement's.
+//
+// Files with the same key can also be versions of one item (see
+// GroupVersions). A missing version is simply removed, since what people
+// did with it is kept on its item. A missing item takes one of the files
+// still there, preferring one that isn't a version of anything yet (most
+// likely the new copy), so its id and everyone's history stay even when
+// it had versions. When more items than files went missing for one key,
+// none are paired, since it can't be told which took which.
 func Replacements(files []LibraryFile, missing map[int64]bool) map[int64]int64 {
 	byKey := map[string][]LibraryFile{}
 	for _, f := range files {
@@ -111,22 +123,50 @@ func Replacements(files []LibraryFile, missing map[int64]bool) map[int64]int64 {
 	for _, group := range byKey {
 		var gone, here []LibraryFile
 		for _, f := range group {
-			if missing[f.ID] {
-				gone = append(gone, f)
-			} else {
+			switch {
+			case !missing[f.ID]:
 				here = append(here, f)
+			case f.VersionOf == 0 || missing[f.VersionOf] || !inGroup(group, f.VersionOf):
+				gone = append(gone, f)
 			}
 		}
-		if len(gone) != 1 || len(here) != 1 {
+		if len(gone) == 0 || len(here) == 0 {
 			continue
 		}
-		old, nu := gone[0], here[0]
-		if old.tmdbID != 0 && nu.tmdbID != 0 && old.tmdbID != nu.tmdbID {
-			continue // two films of the same name and year, told apart online
+		// Not versions first, then the newest file.
+		slices.SortFunc(here, func(a, b LibraryFile) int {
+			if (a.VersionOf == 0) != (b.VersionOf == 0) {
+				if a.VersionOf == 0 {
+					return -1
+				}
+				return 1
+			}
+			return cmp.Compare(b.ID, a.ID)
+		})
+		if len(gone) > 1 && len(gone) > len(here) {
+			continue
 		}
-		out[old.ID] = nu.ID
+		slices.SortFunc(gone, func(a, b LibraryFile) int { return cmp.Compare(a.ID, b.ID) })
+		used := map[int64]bool{}
+		for _, old := range gone {
+			for _, nu := range here {
+				if used[nu.ID] || nu.VersionOf != 0 && nu.VersionOf != old.ID {
+					continue
+				}
+				if old.tmdbID != 0 && nu.tmdbID != 0 && old.tmdbID != nu.tmdbID {
+					continue // two films of the same name and year, told apart online
+				}
+				out[old.ID] = nu.ID
+				used[nu.ID] = true
+				break
+			}
+		}
 	}
 	return out
+}
+
+func inGroup(group []LibraryFile, id int64) bool {
+	return slices.ContainsFunc(group, func(f LibraryFile) bool { return f.ID == id })
 }
 
 // userTables are the tables that hold what people did with an item, and
@@ -165,19 +205,45 @@ func (s *Store) MoveFile(ctx context.Context, keep, from int64) error {
 		container, vcodec, acodec            sql.NullString
 		width, height                        sql.NullInt64
 		subs, chapters, info, tags, mediaKey sql.NullString
+		edition                              sql.NullString
 	)
 	err = t.QueryRowContext(ctx, `
 		SELECT library_id, parent_id, path, size, mtime, duration_ms, container, video_codec, audio_codec, width, height,
-			subtitle_streams, chapters, media_info, media_tags, media_key
+			subtitle_streams, chapters, media_info, media_tags, media_key, edition
 		FROM items WHERE id = ? AND path IS NOT NULL`, from).Scan(
 		&libraryID, &parent, &path, &size, &mtime, &duration, &container, &vcodec, &acodec, &width, &height,
-		&subs, &chapters, &info, &tags, &mediaKey)
+		&subs, &chapters, &info, &tags, &mediaKey, &edition)
 	if errors.Is(err, sql.ErrNoRows) {
 		return ErrNotFound
 	}
 	if err != nil {
 		return err
 	}
+	if err := carryUserData(ctx, t, keep, from, userTables); err != nil {
+		return err
+	}
+	if _, err := t.ExecContext(ctx, "DELETE FROM items WHERE id = ?", from); err != nil {
+		return err
+	}
+	if _, err := t.ExecContext(ctx, `
+		UPDATE items SET parent_id = ?, path = ?, size = ?, mtime = ?, duration_ms = ?, container = ?,
+			video_codec = ?, audio_codec = ?, width = ?, height = ?, subtitle_streams = ?, chapters = ?,
+			media_info = ?, media_tags = ?, media_key = ?, edition = ?
+		WHERE id = ?`,
+		parent, path, size, mtime, duration, container, vcodec, acodec, width, height,
+		subs, chapters, info, tags, mediaKey, edition, keep); err != nil {
+		return err
+	}
+	if err := pruneEmpty(ctx, t, libraryID); err != nil {
+		return err
+	}
+	return t.Commit()
+}
+
+// carryUserData moves what people did with item from to item keep: the
+// newer place to resume from, and the rows of tables, unless keep has its
+// own.
+func carryUserData(ctx context.Context, t execer, keep, from int64, tables []struct{ table, key string }) error {
 	// Progress: whichever was updated last.
 	if _, err := t.ExecContext(ctx, `
 		DELETE FROM progress WHERE item_id = ? AND user_id IN (
@@ -189,7 +255,7 @@ func (s *Store) MoveFile(ctx context.Context, keep, from int64) error {
 		AND NOT EXISTS (SELECT 1 FROM progress o WHERE o.item_id = ? AND o.user_id = progress.user_id)`, keep, from, keep); err != nil {
 		return err
 	}
-	for _, u := range userTables {
+	for _, u := range tables {
 		q := "UPDATE " + u.table + " SET item_id = ? WHERE item_id = ?"
 		args := []any{keep, from}
 		if u.key != "" {
@@ -200,22 +266,7 @@ func (s *Store) MoveFile(ctx context.Context, keep, from int64) error {
 			return err
 		}
 	}
-	if _, err := t.ExecContext(ctx, "DELETE FROM items WHERE id = ?", from); err != nil {
-		return err
-	}
-	if _, err := t.ExecContext(ctx, `
-		UPDATE items SET parent_id = ?, path = ?, size = ?, mtime = ?, duration_ms = ?, container = ?,
-			video_codec = ?, audio_codec = ?, width = ?, height = ?, subtitle_streams = ?, chapters = ?,
-			media_info = ?, media_tags = ?, media_key = ?
-		WHERE id = ?`,
-		parent, path, size, mtime, duration, container, vcodec, acodec, width, height,
-		subs, chapters, info, tags, mediaKey, keep); err != nil {
-		return err
-	}
-	if err := pruneEmpty(ctx, t, libraryID); err != nil {
-		return err
-	}
-	return t.Commit()
+	return nil
 }
 
 // RemoveFiles deletes these files, then any containers of the library left empty.
