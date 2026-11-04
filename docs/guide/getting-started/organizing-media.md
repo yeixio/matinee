@@ -124,7 +124,23 @@ Put subtitle files next to the video, named like the video plus a language code:
 
 - `Movie (2024).en.srt`: English
 - `Movie (2024).en.forced.srt`: forced English, for foreign-language parts only
-- `.srt`, `.vtt` and `.ass` all work
+- `.srt`, `.vtt`, `.ass` and `.ssa` all work
+
+<!-- since: v0.3.0 -->
+Picture subtitles ripped from discs work as files too: a Blu-ray `.sup` file, or a DVD `.idx` with its `.sub` beside it. Name them the same way (`Movie (2024).en.sup`). Like picture subtitles inside a video, they're drawn into the video while it plays.
+
+<!-- since: v0.3.0 -->
+Subtitles can also live in a `Subs` (or `Subtitles`) folder next to the video, the way many releases come:
+
+```
+Movie (2024)/
+├── Movie (2024).mkv
+└── Subs/
+    ├── Movie (2024).en.srt
+    └── 2_English.srt
+```
+
+For a TV season, give each episode its own folder inside `Subs`, named like the episode file (`Subs/Show S01E01/2_English.srt`). Files loose in `Subs` are only matched when the folder above holds a single video, so one episode never gets another's subtitles. A name like `2_English.srt` is read as English.
 
 Subtitles inside the video file work too. Text subtitles are drawn by the player; picture subtitles from Blu-rays and DVDs are burned into the video while it plays. See [Playing](/docs/watching/playing/).
 

@@ -156,6 +156,9 @@ type Request struct {
 	// AudioDelayMs moves the sound against the picture, for lip sync: later
 	// when positive, earlier when negative (see AudioDelayFilter).
 	AudioDelayMs int
+	// BurnFile, when set, is a picture subtitle file next to the video
+	// (VobSub .idx, Blu-ray .sup) to draw in, instead of an embedded stream.
+	BurnFile string
 	// Styled draws ASS/SSA subtitles with their styling into the video,
 	// for players that can't draw them: the track's file (the video itself
 	// for an embedded one) and its subtitle stream there.
@@ -204,6 +207,9 @@ func (t *Transcoder) StartFor(ctx context.Context, userID int64, it store.Item, 
 		accel = t.HW.Active()
 	}
 	video := hwaccel.Video{Codec: it.VideoCodec, BurnSub: burnSub, MaxWidth: maxWidth, KeyframeSeconds: segmentSeconds}
+	if req.BurnFile != "" && it.VideoCodec != "" {
+		video.BurnSub, video.BurnInput, burnSub = 0, 1, 0
+	}
 	drawn := burnSub
 	if req.Styled != nil && it.VideoCodec != "" {
 		video.BurnSub, drawn = -1, max(burnSub, 0)
@@ -215,7 +221,7 @@ func (t *Transcoder) StartFor(ctx context.Context, userID int64, it store.Item, 
 	}
 	modes := t.plan(accel, it.ID, video, copyVideo)
 	for i, mode := range modes {
-		id, err := t.start(ctx, userID, it, startSec, accel, mode, video, audio, req.AudioDelayMs, copyVideo, why, steps)
+		id, err := t.start(ctx, userID, it, startSec, accel, mode, video, audio, req.AudioDelayMs, req.BurnFile, copyVideo, why, steps)
 		if err == nil || i == len(modes)-1 || errors.Is(err, ErrSuperseded) || ctx.Err() != nil {
 			switch {
 			case err == nil:
@@ -259,7 +265,7 @@ func (t *Transcoder) hwFailed(itemID int64, kind hwaccel.Kind, mode hwaccel.Mode
 	}
 }
 
-func (t *Transcoder) start(ctx context.Context, userID int64, it store.Item, startSec float64, accel *hwaccel.Accel, mode hwaccel.Mode, video hwaccel.Video, audio, audioDelayMs int, copyVideo bool, why string, steps []Step) (string, error) {
+func (t *Transcoder) start(ctx context.Context, userID int64, it store.Item, startSec float64, accel *hwaccel.Accel, mode hwaccel.Mode, video hwaccel.Video, audio, audioDelayMs int, burnFile string, copyVideo bool, why string, steps []Step) (string, error) {
 	b := make([]byte, 12)
 	rand.Read(b)
 	id := hex.EncodeToString(b)
@@ -325,6 +331,14 @@ func (t *Transcoder) start(ctx context.Context, userID int64, it store.Item, sta
 		args = append(args, "-ss", strconv.FormatFloat(startSec, 'f', 3, 64))
 	}
 	args = append(args, Input(it)...)
+	if burnFile != "" && video.BurnInput == 1 {
+		// The subtitle file is read from its start and moved to the video's
+		// moment, so a line already showing then still shows.
+		if off := subtitleFileStart(burnFile) - startSec; off != 0 {
+			args = append(args, "-itsoffset", strconv.FormatFloat(off, 'f', 3, 64))
+		}
+		args = append(args, "-i", t.paddedSubtitles(burnFile))
+	}
 	args = append(args, output...)
 	args = append(args, "-f", "hls", "-hls_time", strconv.Itoa(segmentSeconds), "-hls_list_size", "0", "-hls_playlist_type", "event")
 	// HEVC and AV1 go in fMP4 pieces, which is how HLS carries them.
@@ -358,6 +372,7 @@ func (t *Transcoder) start(ctx context.Context, userID int64, it store.Item, sta
 		args = append(args, "-hls_segment_filename", filepath.Join(dir, "seg%05d"+ext), filepath.Join(dir, "index.m3u8"))
 	}
 
+	t.Log.Debug("ffmpeg command", "session", id, "args", args)
 	cmd := exec.Command(t.FFmpeg, args...)
 	cmd.Stderr = &logWriter{log: t.Log, session: id}
 	if err := cmd.Start(); err != nil {

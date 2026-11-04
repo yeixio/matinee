@@ -115,6 +115,9 @@ type Video struct {
 	// BurnSub is an embedded picture subtitle stream to draw into the
 	// video, or -1 for none.
 	BurnSub int
+	// BurnInput is the input BurnSub is in: 0 for the video itself, 1 for
+	// a picture subtitle file next to it, given as a second input.
+	BurnInput int
 	// Styled, when set, is a libass filter that draws ASS/SSA subtitles
 	// with their styling into the picture (see stream.StyledFilter). Like
 	// BurnSub it needs the frames in memory.
@@ -328,7 +331,7 @@ func videoFilter(v Video, chains []string) []string {
 	if v.BurnSub >= 0 {
 		// Picture subtitles are drawn at the video's size (their canvas can
 		// differ, e.g. 1080p subtitles on a cropped 800-line video).
-		graph = "[0:s:" + strconv.Itoa(v.BurnSub) + "][0:v:0]scale2ref[sub][vid];[vid][sub]overlay=eof_action=pass"
+		graph = "[" + strconv.Itoa(v.BurnInput) + ":s:" + strconv.Itoa(v.BurnSub) + "][0:v:0]scale2ref[sub][vid];[vid][sub]overlay=eof_action=pass"
 		if len(chains) == 1 {
 			return []string{"-filter_complex", graph + "," + chains[0] + "[v]", "-map", "[v]"}
 		}
