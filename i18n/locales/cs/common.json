@@ -765,6 +765,11 @@
     "forTitle": "Jen pro tento titul",
     "reset": "Bez zpoždění"
   },
+  "clearVoice": {
+    "menu": "Zvuk",
+    "title": "Čistý hlas",
+    "hint": "Hlasitější dialogy a tišší výbuchy, pro reproduktory televize a pozdní noci."
+  },
   "subtitlePrefs": {
     "title": "Titulky",
     "intro": "Kdy se titulky zobrazí a jak vypadají. Vaše volby platí ve všech aplikacích. Výběr titulků v přehrávači je také změní.",

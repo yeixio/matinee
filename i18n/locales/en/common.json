@@ -701,6 +701,11 @@
     "forTitle": "Just for this title",
     "reset": "No delay"
   },
+  "clearVoice": {
+    "menu": "Sound",
+    "title": "Clear voice",
+    "hint": "Louder dialogue and softer explosions, for TV speakers and late nights."
+  },
   "subtitlePrefs": {
     "title": "Subtitles",
     "intro": "When subtitles come on and how they look. Your choices follow you to every app. Picking subtitles in the player changes them too.",

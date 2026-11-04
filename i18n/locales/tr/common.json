@@ -701,6 +701,11 @@
     "forTitle": "Yalnızca bu yapım için",
     "reset": "Gecikme yok"
   },
+  "clearVoice": {
+    "menu": "Ses",
+    "title": "Net ses",
+    "hint": "Daha yüksek diyalog ve daha yumuşak patlamalar; TV hoparlörleri ve gece geç saatler için."
+  },
   "subtitlePrefs": {
     "title": "Altyazılar",
     "intro": "Altyazıların ne zaman açılacağı ve nasıl görüneceği. Seçimlerin her uygulamada geçerli. Oynatıcıda altyazı seçmek de bunları değiştirir.",

@@ -733,6 +733,11 @@
     "forTitle": "Doar pentru acest titlu",
     "reset": "Fără întârziere"
   },
+  "clearVoice": {
+    "menu": "Sunet",
+    "title": "Voce clară",
+    "hint": "Dialog mai tare și explozii mai blânde, pentru boxele televizorului și serile târzii."
+  },
   "subtitlePrefs": {
     "title": "Subtitrări",
     "intro": "Când apar subtitrările și cum arată. Alegerile tale te urmează în fiecare aplicație. Alegerea subtitrărilor în player le schimbă și pe ele.",

@@ -701,6 +701,11 @@
     "forTitle": "Kun for denne titel",
     "reset": "Ingen forsinkelse"
   },
+  "clearVoice": {
+    "menu": "Lyd",
+    "title": "Tydelig tale",
+    "hint": "Højere dialog og blødere eksplosioner, til tv-højttalere og sene aftener."
+  },
   "subtitlePrefs": {
     "title": "Undertekster",
     "intro": "Hvornår undertekster vises, og hvordan de ser ud. Dine valg følger dig til alle apps. Når du vælger undertekster i afspilleren, ændrer det dem også.",

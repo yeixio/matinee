@@ -669,6 +669,11 @@
     "forTitle": "Hanya untuk judul ini",
     "reset": "Tanpa jeda"
   },
+  "clearVoice": {
+    "menu": "Suara",
+    "title": "Suara jelas",
+    "hint": "Dialog lebih keras dan ledakan lebih lembut, untuk speaker TV dan larut malam."
+  },
   "subtitlePrefs": {
     "title": "Subtitel",
     "intro": "Kapan subtitel muncul dan seperti apa tampilannya. Pilihanmu berlaku di setiap aplikasi. Memilih subtitel di pemutar juga mengubahnya.",

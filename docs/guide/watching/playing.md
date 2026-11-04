@@ -89,6 +89,15 @@ While there's a delay, the server sends the sound moved (only the sound is conve
 From version 1.0.27 the phone and TV apps have **Audio delay** in the player too (the timer button on a phone, in the player's menu on a TV). Press **Sound earlier** or **Sound later** until the sound matches; each phone or TV keeps its own, and **Just for this title** works the same way.
 <!-- /since -->
 
+<!-- since: v0.3.0 -->
+## Clear voice
+
+When the dialogue is too quiet and the explosions too loud, turn on **Clear voice** in the same menu as the audio delay (the sound waves button). The server then mixes the sound down to stereo with the centre channel, where films put the dialogue, brought forward and the rumble channel left out, and evens out loud and quiet moments. It helps most with 5.1 and 7.1 films on TV speakers, phones and laptops, and late at night.
+
+Clear voice belongs to the browser, phone or TV you turn it on in, so every film and show there plays with it until you turn it off. While it's on, the sound comes through the server (the picture stays as it is when your device plays it), so playback starts again from the same spot when you switch it. The phone and TV apps have it from version 1.0.28, at the top of the audio delay menu.
+
+<!-- /since -->
+
 <!-- since: v0.2.1 -->
 ## Audio tracks
 

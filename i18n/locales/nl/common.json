@@ -701,6 +701,11 @@
     "forTitle": "Alleen voor deze titel",
     "reset": "Geen vertraging"
   },
+  "clearVoice": {
+    "menu": "Geluid",
+    "title": "Heldere stem",
+    "hint": "Luidere dialogen en zachtere explosies, voor tv-luidsprekers en late avonden."
+  },
   "subtitlePrefs": {
     "title": "Ondertitels",
     "intro": "Wanneer ondertitels verschijnen en hoe ze eruitzien. Je keuzes gelden in elke app. Ondertitels kiezen in de speler verandert ze ook.",

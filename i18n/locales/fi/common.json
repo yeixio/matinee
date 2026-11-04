@@ -701,6 +701,11 @@
     "forTitle": "Vain tälle nimikkeelle",
     "reset": "Ei viivettä"
   },
+  "clearVoice": {
+    "menu": "Ääni",
+    "title": "Selkeä puhe",
+    "hint": "Kovempi puhe ja hiljaisemmat räjähdykset, television kaiuttimille ja myöhäisiin iltoihin."
+  },
   "subtitlePrefs": {
     "title": "Tekstitykset",
     "intro": "Milloin tekstitykset näkyvät ja miltä ne näyttävät. Valintasi seuraavat sinua kaikkiin sovelluksiin. Tekstityksen valitseminen soittimessa muuttaa niitä myös.",

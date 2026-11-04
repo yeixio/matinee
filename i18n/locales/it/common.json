@@ -733,6 +733,11 @@
     "forTitle": "Solo per questo titolo",
     "reset": "Nessun ritardo"
   },
+  "clearVoice": {
+    "menu": "Audio",
+    "title": "Voce chiara",
+    "hint": "Dialoghi più forti ed esplosioni più morbide, per gli altoparlanti della TV e la sera tardi."
+  },
   "subtitlePrefs": {
     "title": "Sottotitoli",
     "intro": "Quando compaiono i sottotitoli e come appaiono. Le tue scelte ti seguono in ogni app. Anche scegliere i sottotitoli nel player le cambia.",

@@ -1595,6 +1595,8 @@ func (s *Server) startHLS(w http.ResponseWriter, r *http.Request) {
 		}
 		req.AudioDelayMs = ms
 	}
+	// voice=1 is Clear voice: dialogue brought forward, loud moments evened out.
+	req.ClearVoice = r.URL.Query().Get("voice") == "1"
 	if mi, _ := s.mediaInfo(r, it); mi != nil && len(mi.Video) > 0 {
 		req.Picture = stream.Picture{Known: true, HDR: mi.Video[0].HDR, HDRBase: mi.Video[0].HDRBase, DVProfile: mi.Video[0].DVProfile}
 		if req.Picture.HDR != "" {

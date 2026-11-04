@@ -701,6 +701,11 @@
     "forTitle": "Csak ehhez a címhez",
     "reset": "Nincs késleltetés"
   },
+  "clearVoice": {
+    "menu": "Hang",
+    "title": "Tiszta hang",
+    "hint": "Hangosabb párbeszéd és halkabb robbanások, tévéhangszórókhoz és késő estékre."
+  },
   "subtitlePrefs": {
     "title": "Feliratok",
     "intro": "Mikor jelenjenek meg a feliratok, és hogyan nézzenek ki. A beállításaid minden alkalmazásban érvényesek. A lejátszóban választott felirat is módosítja őket.",

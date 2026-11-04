@@ -701,6 +701,11 @@
     "forTitle": "Nur für diesen Titel",
     "reset": "Keine Verzögerung"
   },
+  "clearVoice": {
+    "menu": "Ton",
+    "title": "Klare Stimme",
+    "hint": "Lautere Dialoge und leisere Explosionen, für TV-Lautsprecher und späte Abende."
+  },
   "subtitlePrefs": {
     "title": "Untertitel",
     "intro": "Wann Untertitel erscheinen und wie sie aussehen. Deine Einstellungen gelten in jeder App. Wenn du im Player Untertitel wählst, ändert das sie ebenfalls.",

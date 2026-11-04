@@ -21,7 +21,7 @@ import { sleepTimer, sleepVolume, useSleep } from '../player/sleep'
 import { SleepMenu } from '../player/SleepMenu'
 import { AudioDelayMenu } from '../player/AudioDelayMenu'
 import { AudioMenu } from '../player/AudioMenu'
-import { clampDelay, DELAY_STEP_MS, delayLabel, loadDelay, saveDelay, type Delay } from '../player/audioDelay'
+import { clampDelay, DELAY_STEP_MS, delayLabel, loadClearVoice, loadDelay, saveClearVoice, saveDelay, type Delay } from '../player/audioDelay'
 import { QualityMenu } from '../player/QualityMenu'
 import { LONG_STALL_MS, levelName, overCap, Rebuffers, startQuality, type Quality } from '../player/quality'
 import { parseVTT, type Cue } from '../player/vtt'
@@ -242,6 +242,9 @@ function Player({ id }: { id: number }) {
   const [delay, setDelay] = useState<Delay>({ ms: 0, forTitle: false })
   const delayNow = useRef(0)
   const delayTimer = useRef<number>(undefined)
+  // Clear voice plays through the server too, which mixes the sound.
+  const [clearVoice, setClearVoice] = useState(loadClearVoice)
+  const voiceNow = useRef(clearVoice)
   // Set when the browser wouldn't start playback without a click.
   const [blocked, setBlocked] = useState(false)
 
@@ -279,6 +282,7 @@ function Player({ id }: { id: number }) {
           playsQuery(plays),
           delayNow.current,
           audioNow.current ?? (fileAudio(item) || undefined),
+          voiceNow.current && !!item.videoCodec,
         )
         if (seq !== hlsSeq.current) return
         offset.current = Math.floor(at)
@@ -346,6 +350,7 @@ function Player({ id }: { id: number }) {
       !!el &&
       (q === 'auto' || q === 'original') &&
       delayNow.current === 0 &&
+      !(voiceNow.current && item.videoCodec) &&
       audioNow.current === undefined &&
       canDirectPlay(item, el) &&
       !overCap(item, streaming?.cap)
@@ -416,6 +421,14 @@ function Player({ id }: { id: number }) {
       if (!burned.current && direct(qualityNow.current)) playDirect(position())
       else startHls(position())
     }, 700)
+  }
+  const changeClearVoice = (on: boolean) => {
+    setClearVoice(on)
+    saveClearVoice(on)
+    voiceNow.current = on
+    if (!item || !mode) return
+    if (!burned.current && direct(qualityNow.current)) playDirect(position())
+    else startHls(position())
   }
   const changeDelayRef = useRef(changeDelay)
   changeDelayRef.current = changeDelay
@@ -1384,6 +1397,8 @@ function Player({ id }: { id: number }) {
                 <AudioDelayMenu
                   delay={delay}
                   onChange={changeDelay}
+                  clearVoice={clearVoice}
+                  onClearVoice={changeClearVoice}
                   onOpenChange={(open) => {
                     menuOpen.current = open
                     poke()
