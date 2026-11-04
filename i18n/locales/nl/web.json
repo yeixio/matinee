@@ -631,7 +631,8 @@
     "closed": "Gesloten",
     "confirmReplace": "Dit bestand van {{title}} verwijderen en een andere kopie downloaden? De nieuwe verschijnt zodra hij gedownload is en de bibliotheek gescand is.",
     "replaceFile": "Bestand vervangen",
-    "close": "Sluiten"
+    "close": "Sluiten",
+    "fixMatch": "Koppeling corrigeren"
   },
   "settings": {
     "tmdbNotice": "Posters en beschrijvingen komen van <site>TMDB</site>. Dit product gebruikt de TMDB-API maar wordt niet door TMDB onderschreven of gecertificeerd.",
@@ -942,6 +943,23 @@
     "reset": "Automatische hoes gebruiken",
     "chosenNote": "Deze hoes is met de hand gekozen, dus scans laten hem staan.",
     "saving": "Hoes opslaan…"
+  },
+  "match": {
+    "button": "Koppeling corrigeren",
+    "title": "Koppeling van {{title}} corrigeren",
+    "search": "Zoeken",
+    "searchPlaceholder": "Titel, of een TMDB- of IMDb-link",
+    "year": "Jaar",
+    "looking": "Zoeken op TMDB…",
+    "none": "Niets gevonden. Probeer een andere titel of een ander jaar, of plak de TMDB- of IMDb-link van de titel.",
+    "current": "Nu gekoppeld",
+    "pick": "Koppelen aan {{title}}",
+    "refresh": "Details vernieuwen",
+    "unmatch": "Ontkoppelen",
+    "confirmUnmatch": "{{title}} ontkoppelen? Het gaat dan uit van de bestandsnaam, zonder beschrijving, cast of afbeeldingen van internet.",
+    "locked": "Met de hand gekozen, scans laten het zo.",
+    "noKey": "Voeg een TMDB-sleutel toe in Instellingen → Posters en details om titels op te zoeken.",
+    "saving": "Opslaan…"
   },
   "import": {
     "title": "Importeren uit een andere mediaserver",

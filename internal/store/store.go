@@ -569,6 +569,9 @@ var migrations = []string{
 		PRIMARY KEY (channel_id, start_at)
 	)`,
 	"CREATE INDEX live_programs_stop ON live_programs(stop_at)",
+	// 93: an admin picked (or cleared) a movie's or show's online match by
+	// hand, so lookups leave it alone (see match.go).
+	"ALTER TABLE items ADD COLUMN match_locked INTEGER NOT NULL DEFAULT 0",
 }
 
 func now() int64 { return time.Now().Unix() }

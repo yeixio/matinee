@@ -239,5 +239,12 @@
   "that_source_is_being_refreshed_already": "lähdettä päivitetään jo",
   "the_channel_isnt_answering_right_now": "kanava ei vastaa juuri nyt",
   "the_guides_address_isnt_a_web_address": "oppaan osoite ei ole verkko-osoite",
-  "the_playlist_couldnt_be_read_reason": "listaa ei voitu lukea: {{reason}}"
+  "the_playlist_couldnt_be_read_reason": "listaa ei voitu lukea: {{reason}}",
+  "only_movies_and_shows_have_a_match_to_fix": "vain elokuvilla ja sarjoilla on korjattava tunnistus",
+  "add_a_tmdb_key_in_settings_posters_and_details_to_look_titles_up": "lisää TMDB-avain kohdassa Asetukset → Julisteet ja tiedot, jotta nimikkeitä voi hakea",
+  "tmdb_didnt_accept_the_key_in_settings_posters_and_details": "TMDB ei hyväksynyt avainta kohdassa Asetukset → Julisteet ja tiedot",
+  "couldnt_reach_tmdb_try_again_in_a_moment": "TMDB:hen ei saatu yhteyttä; yritä hetken päästä uudelleen",
+  "tmdb_no_longer_has_this_title_fix_the_match_instead": "TMDB:ssä ei enää ole tätä nimikettä; korjaa tunnistus",
+  "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "lähetä TMDB-tunnus, TMDB-osoite tai IMDb-tunnus",
+  "tmdb_has_no_such_title": "TMDB:ssä ei ole tällaista nimikettä"
 }

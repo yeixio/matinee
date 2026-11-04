@@ -91,6 +91,7 @@ func TestMigrateFromVersion1(t *testing.T) {
 		"DROP TABLE live_programs",
 		"DROP TABLE live_channels",
 		"DROP TABLE live_sources",
+		"ALTER TABLE items DROP COLUMN match_locked",
 		"UPDATE schema_version SET version = 1",
 	} {
 		if _, err := s.db.ExecContext(ctx, q); err != nil {

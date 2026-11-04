@@ -631,7 +631,8 @@
     "closed": "Erledigt",
     "confirmReplace": "Diese Datei von {{title}} löschen und eine andere Kopie herunterladen? Die neue erscheint, sobald sie heruntergeladen und die Mediathek gescannt ist.",
     "replaceFile": "Datei ersetzen",
-    "close": "Schließen"
+    "close": "Schließen",
+    "fixMatch": "Zuordnung korrigieren"
   },
   "settings": {
     "tmdbNotice": "Poster und Beschreibungen stammen von <site>TMDB</site>. Dieses Produkt nutzt die TMDB-API, ist aber nicht von TMDB unterstützt oder zertifiziert.",
@@ -942,6 +943,23 @@
     "reset": "Automatisches Cover verwenden",
     "chosenNote": "Dieses Cover wurde von Hand gewählt, deshalb behalten Scans es bei.",
     "saving": "Cover wird gespeichert …"
+  },
+  "match": {
+    "button": "Zuordnung korrigieren",
+    "title": "Zuordnung für {{title}} korrigieren",
+    "search": "Suchen",
+    "searchPlaceholder": "Titel oder ein TMDB- oder IMDb-Link",
+    "year": "Jahr",
+    "looking": "Suche auf TMDB…",
+    "none": "Nichts gefunden. Versuche einen anderen Titel oder ein anderes Jahr, oder füge den TMDB- oder IMDb-Link des Titels ein.",
+    "current": "Aktuell zugeordnet",
+    "pick": "Mit {{title}} zuordnen",
+    "refresh": "Details aktualisieren",
+    "unmatch": "Zuordnung aufheben",
+    "confirmUnmatch": "Zuordnung von {{title}} aufheben? Der Titel richtet sich dann nach dem Dateinamen, ohne Beschreibung, Besetzung oder Bilder aus dem Internet.",
+    "locked": "Von Hand gewählt, Scans lassen sie unverändert.",
+    "noKey": "Füge in Einstellungen → Poster und Details einen TMDB-Schlüssel hinzu, um Titel nachzuschlagen.",
+    "saving": "Wird gespeichert…"
   },
   "import": {
     "title": "Aus einem anderen Medienserver importieren",

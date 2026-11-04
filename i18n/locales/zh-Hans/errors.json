@@ -239,5 +239,12 @@
   "that_source_is_being_refreshed_already": "该来源正在刷新",
   "the_channel_isnt_answering_right_now": "频道现在没有响应",
   "the_guides_address_isnt_a_web_address": "节目单地址不是网址",
-  "the_playlist_couldnt_be_read_reason": "无法读取列表：{{reason}}"
+  "the_playlist_couldnt_be_read_reason": "无法读取列表：{{reason}}",
+  "only_movies_and_shows_have_a_match_to_fix": "只有电影和剧集可以修正匹配",
+  "add_a_tmdb_key_in_settings_posters_and_details_to_look_titles_up": "请在 设置 → 海报和详情 中添加 TMDB 密钥以查找片名",
+  "tmdb_didnt_accept_the_key_in_settings_posters_and_details": "TMDB 不接受 设置 → 海报和详情 中的密钥",
+  "couldnt_reach_tmdb_try_again_in_a_moment": "无法连接 TMDB，请稍后重试",
+  "tmdb_no_longer_has_this_title_fix_the_match_instead": "TMDB 上已没有此片，请修正匹配",
+  "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "请发送要匹配的 TMDB ID、TMDB 地址或 IMDb ID",
+  "tmdb_has_no_such_title": "TMDB 上没有这部作品"
 }

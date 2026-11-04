@@ -105,6 +105,8 @@ func (t *TMDB) Lookup(ctx context.Context, q Query) (*store.Metadata, error) {
 
 type searchResult struct {
 	ID           int64   `json:"id"`
+	Title        string  `json:"title"`
+	Name         string  `json:"name"`
 	Overview     string  `json:"overview"`
 	VoteAverage  float64 `json:"vote_average"`
 	PosterPath   string  `json:"poster_path"`
@@ -136,17 +138,150 @@ func (t *TMDB) search(ctx context.Context, kind, title string, year int) (*store
 		}
 		return nil, nil
 	}
-	r := res.Results[0]
+	return t.metadata(res.Results[0]), nil
+}
+
+func (r searchResult) year() int {
 	date := r.ReleaseDate
 	if date == "" {
 		date = r.FirstAirDate
 	}
 	y, _ := strconv.Atoi(strings.SplitN(date, "-", 2)[0])
+	return y
+}
+
+func (t *TMDB) metadata(r searchResult) *store.Metadata {
 	return &store.Metadata{
-		TMDBID: r.ID, Overview: r.Overview, Year: y, Rating: r.VoteAverage,
+		TMDBID: r.ID, Overview: r.Overview, Year: r.year(), Rating: r.VoteAverage,
 		Poster: t.image("w500", r.PosterPath), Backdrop: t.image("w1280", r.BackdropPath),
 		Genres: genreNames(r.GenreIDs),
-	}, nil
+	}
+}
+
+// Candidate is a title a search found, for an admin fixing a match to pick.
+type Candidate struct {
+	ID       int64  `json:"id"`
+	Title    string `json:"title"`
+	Year     int    `json:"year,omitempty"`
+	Overview string `json:"overview,omitempty"`
+	Poster   string `json:"poster,omitempty"` // a small one, for the list
+}
+
+// Search lists the movies or shows (kind movie or show) TMDB finds for a
+// title, best first.
+func (t *TMDB) Search(ctx context.Context, kind, title string, year int) ([]Candidate, error) {
+	path := "/search/movie"
+	params := url.Values{"query": {title}, "include_adult": {"false"}}
+	if kind == "show" {
+		path = "/search/tv"
+	}
+	if year > 0 {
+		if kind == "show" {
+			params.Set("first_air_date_year", strconv.Itoa(year))
+		} else {
+			params.Set("year", strconv.Itoa(year))
+		}
+	}
+	var res struct {
+		Results []searchResult `json:"results"`
+	}
+	if err := t.get(ctx, path, params, &res); err != nil {
+		return nil, err
+	}
+	out := []Candidate{}
+	for i, r := range res.Results {
+		if i == 20 {
+			break
+		}
+		out = append(out, t.candidate(r))
+	}
+	return out, nil
+}
+
+func (t *TMDB) candidate(r searchResult) Candidate {
+	name := r.Title
+	if name == "" {
+		name = r.Name
+	}
+	return Candidate{ID: r.ID, Title: name, Year: r.year(), Overview: r.Overview, Poster: t.image("w185", r.PosterPath)}
+}
+
+// tmdbURL finds the kind and id in a themoviedb.org address, such as
+// https://www.themoviedb.org/movie/949-heat.
+var tmdbURL = regexp.MustCompile(`themoviedb\.org/(movie|tv)/(\d+)`)
+
+// imdbID finds an IMDb id, alone or in an imdb.com address.
+var imdbID = regexp.MustCompile(`\btt\d{5,}\b`)
+
+// ErrUnknownRef means Find didn't understand what it was given.
+var ErrUnknownRef = errors.New("not a TMDB id, TMDB address or IMDb id")
+
+// Find looks up one movie or show (kind movie or show) by a TMDB id (949
+// or tmdb:949), a
+// themoviedb.org address or an IMDb id (tt0113277, or an imdb.com
+// address). It returns nil, nil when there's no such title.
+func (t *TMDB) Find(ctx context.Context, kind, ref string) (*store.Metadata, *Candidate, error) {
+	ref = strings.TrimSpace(ref)
+	if l := strings.ToLower(ref); strings.HasPrefix(l, "tmdb:") {
+		ref = strings.TrimSpace(ref[len("tmdb:"):])
+	}
+	var r searchResult
+	switch {
+	case imdbID.MatchString(ref):
+		var res struct {
+			Movies []searchResult `json:"movie_results"`
+			Shows  []searchResult `json:"tv_results"`
+		}
+		err := t.get(ctx, "/find/"+imdbID.FindString(ref), url.Values{"external_source": {"imdb_id"}}, &res)
+		if err == errNotFound {
+			return nil, nil, nil
+		}
+		if err != nil {
+			return nil, nil, err
+		}
+		found := res.Movies
+		if kind == "show" {
+			found = res.Shows
+		}
+		if len(found) == 0 {
+			return nil, nil, nil
+		}
+		r = found[0]
+	default:
+		path := "/movie/"
+		if kind == "show" {
+			path = "/tv/"
+		}
+		id := ref
+		if m := tmdbURL.FindStringSubmatch(ref); m != nil {
+			if (m[1] == "tv") != (kind == "show") {
+				return nil, nil, nil
+			}
+			id = m[2]
+		}
+		if _, err := strconv.ParseInt(id, 10, 64); err != nil {
+			return nil, nil, ErrUnknownRef
+		}
+		var res struct {
+			searchResult
+			Genres []struct {
+				ID int `json:"id"`
+			} `json:"genres"`
+		}
+		err := t.get(ctx, path+id, nil, &res)
+		if err == errNotFound {
+			return nil, nil, nil
+		}
+		if err != nil {
+			return nil, nil, err
+		}
+		r = res.searchResult
+		for _, g := range res.Genres {
+			r.GenreIDs = append(r.GenreIDs, g.ID)
+		}
+	}
+	c := t.candidate(r)
+	return t.metadata(r), &c, nil
 }
 
 // Genres looks up the genres of a movie or show matched before Matinee kept them.

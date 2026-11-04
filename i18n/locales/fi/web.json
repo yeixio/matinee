@@ -631,7 +631,8 @@
     "closed": "Suljettu",
     "confirmReplace": "Poistetaanko tämä nimikkeen {{title}} tiedosto ja ladataanko toinen kopio? Uusi näkyy, kun se on ladattu ja kirjasto skannattu.",
     "replaceFile": "Korvaa tiedosto",
-    "close": "Sulje"
+    "close": "Sulje",
+    "fixMatch": "Korjaa tunnistus"
   },
   "settings": {
     "tmdbNotice": "Julisteet ja kuvaukset tulevat <site>TMDB</site>:stä. Tämä tuote käyttää TMDB:n rajapintaa, mutta TMDB ei ole hyväksynyt tai sertifioinut sitä.",
@@ -942,6 +943,23 @@
     "reset": "Käytä automaattista kansikuvaa",
     "chosenNote": "Tämä kansikuva on valittu käsin, joten tarkistukset säilyttävät sen.",
     "saving": "Tallennetaan kansikuvaa…"
+  },
+  "match": {
+    "button": "Korjaa tunnistus",
+    "title": "Korjaa tunnistus: {{title}}",
+    "search": "Hae",
+    "searchPlaceholder": "Nimi tai TMDB- tai IMDb-linkki",
+    "year": "Vuosi",
+    "looking": "Haetaan TMDB:stä…",
+    "none": "Mitään ei löytynyt. Kokeile toista nimeä tai vuotta, tai liitä nimikkeen TMDB- tai IMDb-linkki.",
+    "current": "Nykyinen tunnistus",
+    "pick": "Tunnista nimellä {{title}}",
+    "refresh": "Päivitä tiedot",
+    "unmatch": "Poista tunnistus",
+    "confirmUnmatch": "Poistetaanko nimikkeen {{title}} tunnistus? Se näytetään tiedostonimen mukaan ilman kuvausta, näyttelijöitä tai verkon kuvia.",
+    "locked": "Valittu käsin, joten skannaukset eivät muuta sitä.",
+    "noKey": "Lisää TMDB-avain kohdassa Asetukset → Julisteet ja tiedot, jotta nimikkeitä voi hakea.",
+    "saving": "Tallennetaan…"
   },
   "import": {
     "title": "Tuo toisesta mediapalvelimesta",

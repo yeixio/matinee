@@ -239,5 +239,12 @@
   "that_source_is_being_refreshed_already": "המקור הזה כבר מתרענן",
   "the_channel_isnt_answering_right_now": "הערוץ לא עונה כרגע",
   "the_guides_address_isnt_a_web_address": "כתובת לוח השידורים אינה כתובת אינטרנט",
-  "the_playlist_couldnt_be_read_reason": "לא ניתן לקרוא את הרשימה: {{reason}}"
+  "the_playlist_couldnt_be_read_reason": "לא ניתן לקרוא את הרשימה: {{reason}}",
+  "only_movies_and_shows_have_a_match_to_fix": "רק לסרטים ולסדרות יש התאמה לתיקון",
+  "add_a_tmdb_key_in_settings_posters_and_details_to_look_titles_up": "הוסיפו מפתח TMDB בהגדרות ← פוסטרים ופרטים כדי לחפש כותרים",
+  "tmdb_didnt_accept_the_key_in_settings_posters_and_details": "TMDB לא קיבל את המפתח בהגדרות ← פוסטרים ופרטים",
+  "couldnt_reach_tmdb_try_again_in_a_moment": "אין חיבור ל-TMDB; נסו שוב בעוד רגע",
+  "tmdb_no_longer_has_this_title_fix_the_match_instead": "הכותר הזה כבר לא ב-TMDB; תקנו את ההתאמה",
+  "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "שלחו מזהה TMDB, כתובת TMDB או מזהה IMDb",
+  "tmdb_has_no_such_title": "אין כותר כזה ב-TMDB"
 }

@@ -631,7 +631,8 @@
     "closed": "Lezárva",
     "confirmReplace": "Törlöd a(z) {{title}} fájlját, és letöltesz egy másik példányt? Az új akkor jelenik meg, ha letöltődött és a könyvtár átvizsgálása megtörtént.",
     "replaceFile": "Fájl cseréje",
-    "close": "Lezárás"
+    "close": "Lezárás",
+    "fixMatch": "Egyezés javítása"
   },
   "settings": {
     "tmdbNotice": "A plakátok és leírások a <site>TMDB</site>-től származnak. Ez a termék a TMDB API-t használja, de a TMDB nem hagyta jóvá és nem tanúsította.",
@@ -942,6 +943,23 @@
     "reset": "Automatikus borító használata",
     "chosenNote": "Ezt a borítót kézzel választották, ezért a vizsgálatok megtartják.",
     "saving": "Borító mentése…"
+  },
+  "match": {
+    "button": "Egyezés javítása",
+    "title": "Egyezés javítása: {{title}}",
+    "search": "Keresés",
+    "searchPlaceholder": "Cím, vagy TMDB- vagy IMDb-hivatkozás",
+    "year": "Év",
+    "looking": "Keresés a TMDB-n…",
+    "none": "Nincs találat. Próbálj másik címet vagy évet, vagy illeszd be a TMDB- vagy IMDb-hivatkozást.",
+    "current": "Jelenlegi egyezés",
+    "pick": "Egyeztetés ezzel: {{title}}",
+    "refresh": "Részletek frissítése",
+    "unmatch": "Egyezés törlése",
+    "confirmUnmatch": "Törlöd a(z) {{title}} egyezését? A fájlnév alapján jelenik meg, leírás, szereplők és online képek nélkül.",
+    "locked": "Kézzel választva, a keresések nem módosítják.",
+    "noKey": "A címek kereséséhez adj meg TMDB-kulcsot a Beállítások → Plakátok és részletek alatt.",
+    "saving": "Mentés…"
   },
   "import": {
     "title": "Importálás másik médiaszerverről",

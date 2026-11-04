@@ -87,6 +87,11 @@ type Server struct {
 	TMDB               TMDBKeyHolder
 	TMDBFallback       string
 	TMDBFallbackSource string
+	// Matcher looks titles up for admins fixing a match (see match.go); nil
+	// offers none. Refetch looks up what a library's titles still need
+	// online, after a match changed; nil leaves it to the next scan.
+	Matcher Matcher
+	Refetch func(ctx context.Context, lib store.Library)
 	// OnTMDBKey runs after an admin changes the TMDB key.
 	OnTMDBKey func()
 	// ThemeDir holds the admin's own theme files (see themes.go); empty means
@@ -327,6 +332,10 @@ func (s *Server) routes() []route {
 		{"GET /items/{id}/image/{type}", reader, s.itemImage},
 		{"GET /items/{id}/covers", adminOnly, s.coverOptions},
 		{"PUT /items/{id}/cover", adminOnly, s.setCover},
+		{"GET /items/{id}/match", adminOnly, s.itemMatch},
+		{"PUT /items/{id}/match", adminOnly, s.setItemMatch},
+		{"DELETE /items/{id}/match", adminOnly, s.clearItemMatch},
+		{"POST /items/{id}/refresh", adminOnly, s.refreshItem},
 		{"DELETE /items/{id}/cover", adminOnly, s.resetCover},
 		{"GET /items/{id}/file", reader, s.directFile},
 		{"GET /items/{id}/subtitles/{track}", reader, s.subtitleFile},

@@ -627,7 +627,8 @@
     "closed": "已关闭",
     "confirmReplace": "要删除《{{title}}》的这个文件并下载另一个版本吗？新版本会在下载完成、媒体库扫描后出现。",
     "replaceFile": "替换文件",
-    "close": "关闭"
+    "close": "关闭",
+    "fixMatch": "修正匹配"
   },
   "settings": {
     "tmdbNotice": "海报和简介来自 <site>TMDB</site>。本产品使用 TMDB API，但未获得 TMDB 的认可或认证。",
@@ -938,6 +939,23 @@
     "reset": "使用自动封面",
     "chosenNote": "这个封面是手动选择的,扫描时会保留。",
     "saving": "正在保存封面…"
+  },
+  "match": {
+    "button": "修正匹配",
+    "title": "修正 {{title}} 的匹配",
+    "search": "搜索",
+    "searchPlaceholder": "片名，或 TMDB、IMDb 链接",
+    "year": "年份",
+    "looking": "正在 TMDB 上查找…",
+    "none": "未找到结果。请换个片名或年份，或粘贴该片的 TMDB 或 IMDb 链接。",
+    "current": "当前匹配",
+    "pick": "匹配为 {{title}}",
+    "refresh": "刷新详情",
+    "unmatch": "取消匹配",
+    "confirmUnmatch": "要取消 {{title}} 的匹配吗？它将按文件名显示，没有简介、演职员和在线图片。",
+    "locked": "手动选择，扫描不会更改。",
+    "noKey": "请在 设置 → 海报和详情 中添加 TMDB 密钥以查找片名。",
+    "saving": "正在保存…"
   },
   "import": {
     "title": "从其他媒体服务器导入",

@@ -239,5 +239,12 @@
   "that_source_is_being_refreshed_already": "يجري تحديث هذا المصدر بالفعل",
   "the_channel_isnt_answering_right_now": "القناة لا تستجيب الآن",
   "the_guides_address_isnt_a_web_address": "عنوان الدليل ليس عنوان ويب",
-  "the_playlist_couldnt_be_read_reason": "تعذّرت قراءة القائمة: {{reason}}"
+  "the_playlist_couldnt_be_read_reason": "تعذّرت قراءة القائمة: {{reason}}",
+  "only_movies_and_shows_have_a_match_to_fix": "الأفلام والمسلسلات فقط لها مطابقة يمكن تصحيحها",
+  "add_a_tmdb_key_in_settings_posters_and_details_to_look_titles_up": "أضف مفتاح TMDB في الإعدادات ← الملصقات والتفاصيل للبحث عن العناوين",
+  "tmdb_didnt_accept_the_key_in_settings_posters_and_details": "لم يقبل TMDB المفتاح في الإعدادات ← الملصقات والتفاصيل",
+  "couldnt_reach_tmdb_try_again_in_a_moment": "تعذّر الوصول إلى TMDB؛ حاول مجددًا بعد قليل",
+  "tmdb_no_longer_has_this_title_fix_the_match_instead": "لم يعد هذا العنوان على TMDB؛ صحّح المطابقة بدلًا من ذلك",
+  "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "أرسل معرّف TMDB أو عنوان TMDB أو معرّف IMDb",
+  "tmdb_has_no_such_title": "لا يوجد عنوان كهذا على TMDB"
 }

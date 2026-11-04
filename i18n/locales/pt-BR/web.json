@@ -635,7 +635,8 @@
     "closed": "Fechado",
     "confirmReplace": "Excluir este arquivo de {{title}} e baixar outra cópia? A nova aparece depois do download e da verificação da biblioteca.",
     "replaceFile": "Substituir arquivo",
-    "close": "Fechar"
+    "close": "Fechar",
+    "fixMatch": "Corrigir correspondência"
   },
   "settings": {
     "tmdbNotice": "Pôsteres e descrições vêm do <site>TMDB</site>. Este produto usa a API do TMDB, mas não é endossado nem certificado pelo TMDB.",
@@ -946,6 +947,23 @@
     "reset": "Usar a capa automática",
     "chosenNote": "Esta capa foi escolhida manualmente, então as verificações a mantêm.",
     "saving": "Salvando a capa…"
+  },
+  "match": {
+    "button": "Corrigir correspondência",
+    "title": "Corrigir correspondência de {{title}}",
+    "search": "Buscar",
+    "searchPlaceholder": "Título, ou um link do TMDB ou IMDb",
+    "year": "Ano",
+    "looking": "Procurando no TMDB…",
+    "none": "Nada encontrado. Tente outro título ou ano, ou cole o link do TMDB ou IMDb do título.",
+    "current": "Correspondência atual",
+    "pick": "Corresponder a {{title}}",
+    "refresh": "Atualizar detalhes",
+    "unmatch": "Remover correspondência",
+    "confirmUnmatch": "Remover a correspondência de {{title}}? Ele passará a usar o nome do arquivo, sem descrição, elenco ou imagens da internet.",
+    "locked": "Escolhida à mão, então as varreduras não mudam.",
+    "noKey": "Adicione uma chave do TMDB em Configurações → Pôsteres e detalhes para buscar títulos.",
+    "saving": "Salvando…"
   },
   "import": {
     "title": "Importar de outro servidor de mídia",

@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { Check, Clock, RefreshCw, Search as SearchIcon, Trash2, X } from 'lucide-react'
+import { Check, Clock, RefreshCw, Search as SearchIcon, Trash2, Wand2, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link, useSearchParams } from 'react-router-dom'
@@ -371,6 +371,11 @@ function Problems({ admin }: { admin: boolean }) {
                 >
                   {t('requests.replaceFile')}
                 </Button>
+              )}
+              {x.kind === 'wrong' && x.item && (
+                <Link to={`/item/${x.item.id}?fix=match`}>
+                  <Button icon={<Wand2 className="size-4" />}>{t('requests.fixMatch')}</Button>
+                </Link>
               )}
               <Button variant="ghost" disabled={busy} onClick={() => resolve.mutate(x.id)}>
                 {t('requests.close')}

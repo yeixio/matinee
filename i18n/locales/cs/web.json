@@ -639,7 +639,8 @@
     "closed": "Uzavřeno",
     "confirmReplace": "Smazat tento soubor titulu {{title}} a stáhnout jinou kopii? Nová se objeví, až se stáhne a knihovna se prohledá.",
     "replaceFile": "Nahradit soubor",
-    "close": "Uzavřít"
+    "close": "Uzavřít",
+    "fixMatch": "Opravit shodu"
   },
   "settings": {
     "tmdbNotice": "Plakáty a popisy pocházejí z <site>TMDB</site>. Tento produkt používá API TMDB, ale TMDB jej neschválila ani necertifikovala.",
@@ -950,6 +951,23 @@
     "reset": "Použít automatický obal",
     "chosenNote": "Tento obal byl vybrán ručně, takže ho prohledávání zachová.",
     "saving": "Ukládání obalu…"
+  },
+  "match": {
+    "button": "Opravit shodu",
+    "title": "Opravit shodu: {{title}}",
+    "search": "Hledat",
+    "searchPlaceholder": "Název nebo odkaz na TMDB či IMDb",
+    "year": "Rok",
+    "looking": "Hledám na TMDB…",
+    "none": "Nic nenalezeno. Zkuste jiný název nebo rok, nebo vložte odkaz TMDB či IMDb.",
+    "current": "Aktuální shoda",
+    "pick": "Spárovat s: {{title}}",
+    "refresh": "Obnovit podrobnosti",
+    "unmatch": "Zrušit shodu",
+    "confirmUnmatch": "Zrušit shodu pro {{title}}? Zobrazí se podle názvu souboru, bez popisu, obsazení a obrázků z internetu.",
+    "locked": "Vybráno ručně, prohledávání to nezmění.",
+    "noKey": "Pro vyhledávání titulů přidejte klíč TMDB v Nastavení → Plakáty a podrobnosti.",
+    "saving": "Ukládání…"
   },
   "import": {
     "title": "Importovat z jiného mediálního serveru",

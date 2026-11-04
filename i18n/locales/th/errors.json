@@ -239,5 +239,12 @@
   "that_source_is_being_refreshed_already": "แหล่งนั้นกำลังรีเฟรชอยู่แล้ว",
   "the_channel_isnt_answering_right_now": "ช่องไม่ตอบสนองในตอนนี้",
   "the_guides_address_isnt_a_web_address": "ที่อยู่ผังรายการไม่ใช่ที่อยู่เว็บ",
-  "the_playlist_couldnt_be_read_reason": "อ่านรายการไม่ได้: {{reason}}"
+  "the_playlist_couldnt_be_read_reason": "อ่านรายการไม่ได้: {{reason}}",
+  "only_movies_and_shows_have_a_match_to_fix": "แก้การจับคู่ได้เฉพาะภาพยนตร์และซีรีส์",
+  "add_a_tmdb_key_in_settings_posters_and_details_to_look_titles_up": "เพิ่มคีย์ TMDB ใน การตั้งค่า → โปสเตอร์และรายละเอียด เพื่อค้นหาเรื่อง",
+  "tmdb_didnt_accept_the_key_in_settings_posters_and_details": "TMDB ไม่ยอมรับคีย์ใน การตั้งค่า → โปสเตอร์และรายละเอียด",
+  "couldnt_reach_tmdb_try_again_in_a_moment": "เชื่อมต่อ TMDB ไม่ได้ ลองอีกครั้งในอีกสักครู่",
+  "tmdb_no_longer_has_this_title_fix_the_match_instead": "TMDB ไม่มีเรื่องนี้แล้ว โปรดแก้การจับคู่",
+  "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "ส่ง id TMDB ที่อยู่ TMDB หรือ id IMDb",
+  "tmdb_has_no_such_title": "TMDB ไม่มีเรื่องนี้"
 }

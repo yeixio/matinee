@@ -239,5 +239,12 @@
   "that_source_is_being_refreshed_already": "該來源正在重新整理",
   "the_channel_isnt_answering_right_now": "頻道目前沒有回應",
   "the_guides_address_isnt_a_web_address": "節目表位址不是網址",
-  "the_playlist_couldnt_be_read_reason": "無法讀取清單：{{reason}}"
+  "the_playlist_couldnt_be_read_reason": "無法讀取清單：{{reason}}",
+  "only_movies_and_shows_have_a_match_to_fix": "只有電影和節目可以修正比對",
+  "add_a_tmdb_key_in_settings_posters_and_details_to_look_titles_up": "請在 設定 → 海報與詳細資料 中加入 TMDB 金鑰以查詢片名",
+  "tmdb_didnt_accept_the_key_in_settings_posters_and_details": "TMDB 不接受 設定 → 海報與詳細資料 中的金鑰",
+  "couldnt_reach_tmdb_try_again_in_a_moment": "無法連線到 TMDB，請稍後再試",
+  "tmdb_no_longer_has_this_title_fix_the_match_instead": "TMDB 上已沒有此片，請修正比對",
+  "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "請傳送要比對的 TMDB ID、TMDB 網址或 IMDb ID",
+  "tmdb_has_no_such_title": "TMDB 上沒有這部作品"
 }

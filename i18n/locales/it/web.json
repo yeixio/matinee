@@ -635,7 +635,8 @@
     "closed": "Chiuso",
     "confirmReplace": "Eliminare questo file di {{title}} e scaricarne un’altra copia? La nuova compare dopo il download e la scansione della libreria.",
     "replaceFile": "Sostituisci file",
-    "close": "Chiudi"
+    "close": "Chiudi",
+    "fixMatch": "Correggi abbinamento"
   },
   "settings": {
     "tmdbNotice": "Locandine e descrizioni provengono da <site>TMDB</site>. Questo prodotto usa l’API di TMDB ma non è approvato né certificato da TMDB.",
@@ -946,6 +947,23 @@
     "reset": "Usa la copertina automatica",
     "chosenNote": "Questa copertina è stata scelta a mano, quindi le scansioni la mantengono.",
     "saving": "Salvataggio della copertina…"
+  },
+  "match": {
+    "button": "Correggi abbinamento",
+    "title": "Correggi abbinamento di {{title}}",
+    "search": "Cerca",
+    "searchPlaceholder": "Titolo, o un link TMDB o IMDb",
+    "year": "Anno",
+    "looking": "Ricerca su TMDB…",
+    "none": "Nessun risultato. Prova un altro titolo o anno, oppure incolla il link TMDB o IMDb del titolo.",
+    "current": "Abbinato ora",
+    "pick": "Abbina a {{title}}",
+    "refresh": "Aggiorna dettagli",
+    "unmatch": "Rimuovi abbinamento",
+    "confirmUnmatch": "Rimuovere l'abbinamento di {{title}}? Verrà mostrato col nome del file, senza descrizione, cast o immagini online.",
+    "locked": "Scelto a mano, le scansioni non lo cambiano.",
+    "noKey": "Aggiungi una chiave TMDB in Impostazioni → Locandine e dettagli per cercare i titoli.",
+    "saving": "Salvataggio…"
   },
   "import": {
     "title": "Importa da un altro server multimediale",

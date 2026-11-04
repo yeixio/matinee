@@ -631,7 +631,8 @@
     "closed": "Lukket",
     "confirmReplace": "Slet denne fil af {{title}} og download en anden kopi? Den nye vises, når den er downloadet, og biblioteket er scannet.",
     "replaceFile": "Erstat fil",
-    "close": "Luk"
+    "close": "Luk",
+    "fixMatch": "Ret match"
   },
   "settings": {
     "tmdbNotice": "Plakater og beskrivelser kommer fra <site>TMDB</site>. Dette produkt bruger TMDB's API, men er ikke godkendt eller certificeret af TMDB.",
@@ -942,6 +943,23 @@
     "reset": "Brug det automatiske cover",
     "chosenNote": "Dette cover er valgt i hånden, så scanninger beholder det.",
     "saving": "Gemmer coveret …"
+  },
+  "match": {
+    "button": "Ret match",
+    "title": "Ret match for {{title}}",
+    "search": "Søg",
+    "searchPlaceholder": "Titel, eller et TMDB- eller IMDb-link",
+    "year": "År",
+    "looking": "Søger på TMDB…",
+    "none": "Intet fundet. Prøv en anden titel eller et andet år, eller indsæt titlens TMDB- eller IMDb-link.",
+    "current": "Matchet nu",
+    "pick": "Match med {{title}}",
+    "refresh": "Opdater detaljer",
+    "unmatch": "Fjern match",
+    "confirmUnmatch": "Fjern match for {{title}}? Den vises så efter filnavnet, uden beskrivelse, medvirkende eller billeder fra nettet.",
+    "locked": "Valgt i hånden, så scanninger lader den være.",
+    "noKey": "Tilføj en TMDB-nøgle i Indstillinger → Plakater og detaljer for at slå titler op.",
+    "saving": "Gemmer…"
   },
   "import": {
     "title": "Importér fra en anden medieserver",

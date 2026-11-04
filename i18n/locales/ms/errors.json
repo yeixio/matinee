@@ -239,5 +239,12 @@
   "that_source_is_being_refreshed_already": "sumber itu sedang disegar semula",
   "the_channel_isnt_answering_right_now": "saluran tidak menjawab sekarang",
   "the_guides_address_isnt_a_web_address": "alamat panduan bukan alamat web",
-  "the_playlist_couldnt_be_read_reason": "senarai tidak dapat dibaca: {{reason}}"
+  "the_playlist_couldnt_be_read_reason": "senarai tidak dapat dibaca: {{reason}}",
+  "only_movies_and_shows_have_a_match_to_fix": "hanya filem dan siri mempunyai padanan untuk dibetulkan",
+  "add_a_tmdb_key_in_settings_posters_and_details_to_look_titles_up": "tambah kunci TMDB dalam Tetapan → Poster dan butiran untuk mencari tajuk",
+  "tmdb_didnt_accept_the_key_in_settings_posters_and_details": "TMDB tidak menerima kunci dalam Tetapan → Poster dan butiran",
+  "couldnt_reach_tmdb_try_again_in_a_moment": "tidak dapat menghubungi TMDB; cuba lagi sebentar lagi",
+  "tmdb_no_longer_has_this_title_fix_the_match_instead": "TMDB tidak lagi mempunyai tajuk ini; betulkan padanan",
+  "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "hantar id TMDB, alamat TMDB atau id IMDb",
+  "tmdb_has_no_such_title": "TMDB tiada tajuk itu"
 }

@@ -627,7 +627,8 @@
     "closed": "已關閉",
     "confirmReplace": "要刪除《{{title}}》的這個檔案並下載另一個版本嗎？新版本會在下載完成、媒體庫掃描後出現。",
     "replaceFile": "替換檔案",
-    "close": "關閉"
+    "close": "關閉",
+    "fixMatch": "修正比對"
   },
   "settings": {
     "tmdbNotice": "海報和簡介來自 <site>TMDB</site>。本產品使用 TMDB API，但未獲得 TMDB 的認可或認證。",
@@ -938,6 +939,23 @@
     "reset": "使用自動封面",
     "chosenNote": "這個封面是手動選擇的,掃描時會保留。",
     "saving": "正在儲存封面…"
+  },
+  "match": {
+    "button": "修正比對",
+    "title": "修正 {{title}} 的比對",
+    "search": "搜尋",
+    "searchPlaceholder": "片名，或 TMDB、IMDb 連結",
+    "year": "年份",
+    "looking": "正在 TMDB 上尋找…",
+    "none": "找不到結果。請換個片名或年份，或貼上該片的 TMDB 或 IMDb 連結。",
+    "current": "目前比對",
+    "pick": "比對為 {{title}}",
+    "refresh": "重新整理詳細資料",
+    "unmatch": "取消比對",
+    "confirmUnmatch": "要取消 {{title}} 的比對嗎？它將以檔案名稱顯示，沒有簡介、演職員和線上圖片。",
+    "locked": "手動選擇，掃描不會變更。",
+    "noKey": "請在 設定 → 海報與詳細資料 中加入 TMDB 金鑰以查詢片名。",
+    "saving": "正在儲存…"
   },
   "import": {
     "title": "從其他媒體伺服器匯入",

@@ -631,7 +631,8 @@
     "closed": "Lukket",
     "confirmReplace": "Slette denne filen av {{title}} og laste ned en annen kopi? Den nye vises når den er lastet ned og biblioteket er skannet.",
     "replaceFile": "Erstatt fil",
-    "close": "Lukk"
+    "close": "Lukk",
+    "fixMatch": "Rett treff"
   },
   "settings": {
     "tmdbNotice": "Plakater og beskrivelser kommer fra <site>TMDB</site>. Dette produktet bruker TMDB-API-et, men er ikke godkjent eller sertifisert av TMDB.",
@@ -942,6 +943,23 @@
     "reset": "Bruk det automatiske omslaget",
     "chosenNote": "Dette omslaget ble valgt for hånd, så skanninger beholder det.",
     "saving": "Lagrer omslaget …"
+  },
+  "match": {
+    "button": "Rett treff",
+    "title": "Rett treffet for {{title}}",
+    "search": "Søk",
+    "searchPlaceholder": "Tittel, eller en TMDB- eller IMDb-lenke",
+    "year": "År",
+    "looking": "Søker på TMDB…",
+    "none": "Fant ingenting. Prøv en annen tittel eller et annet år, eller lim inn TMDB- eller IMDb-lenken.",
+    "current": "Treff nå",
+    "pick": "Koble til {{title}}",
+    "refresh": "Oppdater detaljer",
+    "unmatch": "Fjern treff",
+    "confirmUnmatch": "Fjerne treffet for {{title}}? Den vises da etter filnavnet, uten beskrivelse, rolleliste eller bilder fra nettet.",
+    "locked": "Valgt for hånd, så skanninger lar det være.",
+    "noKey": "Legg til en TMDB-nøkkel i Innstillinger → Plakater og detaljer for å slå opp titler.",
+    "saving": "Lagrer…"
   },
   "import": {
     "title": "Importer fra en annen medieserver",

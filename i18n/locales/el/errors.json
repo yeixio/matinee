@@ -239,5 +239,12 @@
   "that_source_is_being_refreshed_already": "η πηγή ανανεώνεται ήδη",
   "the_channel_isnt_answering_right_now": "το κανάλι δεν απαντά αυτή τη στιγμή",
   "the_guides_address_isnt_a_web_address": "η διεύθυνση του οδηγού δεν είναι διαδικτυακή διεύθυνση",
-  "the_playlist_couldnt_be_read_reason": "δεν ήταν δυνατή η ανάγνωση της λίστας: {{reason}}"
+  "the_playlist_couldnt_be_read_reason": "δεν ήταν δυνατή η ανάγνωση της λίστας: {{reason}}",
+  "only_movies_and_shows_have_a_match_to_fix": "μόνο ταινίες και σειρές έχουν αντιστοίχιση για διόρθωση",
+  "add_a_tmdb_key_in_settings_posters_and_details_to_look_titles_up": "προσθέστε κλειδί TMDB στις Ρυθμίσεις → Αφίσες και λεπτομέρειες για αναζήτηση τίτλων",
+  "tmdb_didnt_accept_the_key_in_settings_posters_and_details": "το TMDB δεν δέχτηκε το κλειδί στις Ρυθμίσεις → Αφίσες και λεπτομέρειες",
+  "couldnt_reach_tmdb_try_again_in_a_moment": "δεν ήταν δυνατή η σύνδεση με το TMDB· δοκιμάστε ξανά σε λίγο",
+  "tmdb_no_longer_has_this_title_fix_the_match_instead": "το TMDB δεν έχει πια αυτόν τον τίτλο· διορθώστε την αντιστοίχιση",
+  "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "στείλτε το id TMDB, τη διεύθυνση TMDB ή το id IMDb",
+  "tmdb_has_no_such_title": "το TMDB δεν έχει τέτοιον τίτλο"
 }

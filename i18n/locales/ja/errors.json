@@ -239,5 +239,12 @@
   "that_source_is_being_refreshed_already": "そのソースはすでに更新中です",
   "the_channel_isnt_answering_right_now": "チャンネルが今応答していません",
   "the_guides_address_isnt_a_web_address": "番組表のアドレスがWebアドレスではありません",
-  "the_playlist_couldnt_be_read_reason": "リストを読み込めませんでした: {{reason}}"
+  "the_playlist_couldnt_be_read_reason": "リストを読み込めませんでした: {{reason}}",
+  "only_movies_and_shows_have_a_match_to_fix": "一致を修正できるのは映画と番組だけです",
+  "add_a_tmdb_key_in_settings_posters_and_details_to_look_titles_up": "タイトルを調べるには、設定 → ポスターと詳細 で TMDB キーを追加してください",
+  "tmdb_didnt_accept_the_key_in_settings_posters_and_details": "設定 → ポスターと詳細 のキーが TMDB に受け付けられませんでした",
+  "couldnt_reach_tmdb_try_again_in_a_moment": "TMDB に接続できません。少し待ってからもう一度お試しください",
+  "tmdb_no_longer_has_this_title_fix_the_match_instead": "TMDB にこのタイトルはもうありません。一致を修正してください",
+  "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "一致させる TMDB ID、TMDB のアドレス、または IMDb ID を送ってください",
+  "tmdb_has_no_such_title": "TMDB にそのタイトルはありません"
 }

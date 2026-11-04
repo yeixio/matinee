@@ -627,7 +627,8 @@
     "closed": "Đã đóng",
     "confirmReplace": "Xóa tệp này của {{title}} và tải bản khác? Bản mới sẽ hiện ra sau khi tải xong và thư viện được quét.",
     "replaceFile": "Thay tệp",
-    "close": "Đóng"
+    "close": "Đóng",
+    "fixMatch": "Sửa nhận diện"
   },
   "settings": {
     "tmdbNotice": "Áp phích và mô tả lấy từ <site>TMDB</site>. Sản phẩm này dùng API của TMDB nhưng không được TMDB xác nhận hay chứng nhận.",
@@ -938,6 +939,23 @@
     "reset": "Dùng ảnh bìa tự động",
     "chosenNote": "Ảnh bìa này được chọn thủ công nên các lần quét sẽ giữ nguyên.",
     "saving": "Đang lưu ảnh bìa…"
+  },
+  "match": {
+    "button": "Sửa nhận diện",
+    "title": "Sửa nhận diện cho {{title}}",
+    "search": "Tìm",
+    "searchPlaceholder": "Tên phim, hoặc liên kết TMDB hay IMDb",
+    "year": "Năm",
+    "looking": "Đang tìm trên TMDB…",
+    "none": "Không tìm thấy gì. Hãy thử tên hoặc năm khác, hoặc dán liên kết TMDB hay IMDb của phim.",
+    "current": "Đang nhận diện",
+    "pick": "Nhận diện là {{title}}",
+    "refresh": "Làm mới thông tin",
+    "unmatch": "Bỏ nhận diện",
+    "confirmUnmatch": "Bỏ nhận diện {{title}}? Mục này sẽ dùng tên tệp, không có mô tả, diễn viên hay hình ảnh trực tuyến.",
+    "locked": "Đã chọn thủ công nên các lần quét không thay đổi.",
+    "noKey": "Thêm khóa TMDB trong Cài đặt → Áp phích và chi tiết để tra cứu phim.",
+    "saving": "Đang lưu…"
   },
   "import": {
     "title": "Nhập từ máy chủ media khác",

@@ -631,7 +631,8 @@
     "closed": "Stängd",
     "confirmReplace": "Radera den här filen för {{title}} och ladda ner en annan kopia? Den nya visas när den har laddats ner och biblioteket har skannats.",
     "replaceFile": "Ersätt fil",
-    "close": "Stäng"
+    "close": "Stäng",
+    "fixMatch": "Rätta matchning"
   },
   "settings": {
     "tmdbNotice": "Affischer och beskrivningar kommer från <site>TMDB</site>. Den här produkten använder TMDB:s API men är inte godkänd eller certifierad av TMDB.",
@@ -942,6 +943,23 @@
     "reset": "Använd det automatiska omslaget",
     "chosenNote": "Det här omslaget valdes för hand, så genomsökningar behåller det.",
     "saving": "Sparar omslaget …"
+  },
+  "match": {
+    "button": "Rätta matchning",
+    "title": "Rätta matchningen för {{title}}",
+    "search": "Sök",
+    "searchPlaceholder": "Titel, eller en TMDB- eller IMDb-länk",
+    "year": "År",
+    "looking": "Söker på TMDB…",
+    "none": "Inget hittades. Prova en annan titel eller ett annat år, eller klistra in titelns TMDB- eller IMDb-länk.",
+    "current": "Matchad nu",
+    "pick": "Matcha med {{title}}",
+    "refresh": "Uppdatera detaljer",
+    "unmatch": "Ta bort matchning",
+    "confirmUnmatch": "Ta bort matchningen för {{title}}? Den visas då efter filnamnet, utan beskrivning, rollista eller bilder från nätet.",
+    "locked": "Vald för hand, så genomsökningar lämnar den i fred.",
+    "noKey": "Lägg till en TMDB-nyckel i Inställningar → Affischer och detaljer för att slå upp titlar.",
+    "saving": "Sparar…"
   },
   "import": {
     "title": "Importera från en annan mediaserver",
