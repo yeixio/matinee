@@ -824,6 +824,12 @@
       "save": "Opslaan",
       "remove": "Sleutel verwijderen"
     },
+    "subtitleSync": {
+      "title": "Ondertitels synchroniseren",
+      "intro": "Ondertitels die te vroeg of te laat komen, of in de loop van de video steeds verder verschuiven, kunnen op de audio worden uitgelijnd. Matinee luistert waar mensen praten en verschuift de ondertitels zodat ze kloppen. Dat gebeurt allemaal op deze server.",
+      "auto": "Ondertitelbestanden zelf synchroniseren",
+      "autoDetail": "Ondertitelbestanden naast een video en online gevonden ondertitels worden gesynchroniseerd de eerste keer dat iemand de video ermee afspeelt. Ondertitels in de video blijven zoals ze zijn. Iedereen kan ondertitels nog steeds in de speler synchroniseren of een synchronisatie ongedaan maken."
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Zorgt dat de apps deze server blijven vinden als het internetadres van je huis verandert. De dienst kent alleen het adres: video gaat altijd rechtstreeks van deze server naar de apps.",

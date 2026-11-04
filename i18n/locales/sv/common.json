@@ -776,5 +776,21 @@
   },
   "audioTrack": {
     "title": "Ljud"
+  },
+  "subtitleSync": {
+    "title": "Synka med ljudet",
+    "again": "Synka igen",
+    "undo": "Ångra",
+    "syncing": "Lyssnar på ljudet…",
+    "earlier": "Flyttade {{seconds}} s tidigare",
+    "later": "Flyttade {{seconds}} s senare",
+    "speed": "Hastigheten rättad",
+    "earlierSpeed": "Hastigheten rättad, {{seconds}} s tidigare",
+    "laterSpeed": "Hastigheten rättad, {{seconds}} s senare",
+    "inSync": "Redan i synk",
+    "unsure": "Gick inte att avgöra hur mycket de är ur synk. Prova Timing.",
+    "failed": "Kunde inte synka de här undertexterna",
+    "off": "Som i filen",
+    "done": "Undertexterna synkade med ljudet"
   }
 }

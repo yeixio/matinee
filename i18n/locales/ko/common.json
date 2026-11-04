@@ -744,5 +744,21 @@
   },
   "audioTrack": {
     "title": "오디오"
+  },
+  "subtitleSync": {
+    "title": "오디오에 맞추기",
+    "again": "다시 맞추기",
+    "undo": "되돌리기",
+    "syncing": "오디오를 듣는 중…",
+    "earlier": "{{seconds}}초 앞당김",
+    "later": "{{seconds}}초 늦춤",
+    "speed": "속도 보정됨",
+    "earlierSpeed": "속도 보정, {{seconds}}초 앞당김",
+    "laterSpeed": "속도 보정, {{seconds}}초 늦춤",
+    "inSync": "이미 맞음",
+    "unsure": "얼마나 어긋났는지 알 수 없어요. 타이밍으로 조정해 보세요.",
+    "failed": "이 자막을 맞추지 못했어요",
+    "off": "파일 그대로",
+    "done": "자막을 오디오에 맞췄어요"
   }
 }

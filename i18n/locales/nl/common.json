@@ -776,5 +776,21 @@
   },
   "audioTrack": {
     "title": "Audio"
+  },
+  "subtitleSync": {
+    "title": "Synchroniseren met audio",
+    "again": "Opnieuw synchroniseren",
+    "undo": "Ongedaan maken",
+    "syncing": "Luistert naar de audio…",
+    "earlier": "{{seconds}} s eerder gezet",
+    "later": "{{seconds}} s later gezet",
+    "speed": "Snelheid gecorrigeerd",
+    "earlierSpeed": "Snelheid gecorrigeerd, {{seconds}} s eerder",
+    "laterSpeed": "Snelheid gecorrigeerd, {{seconds}} s later",
+    "inSync": "Al synchroon",
+    "unsure": "Onduidelijk hoever ze ernaast zitten. Probeer Timing.",
+    "failed": "Deze ondertitels konden niet worden gesynchroniseerd",
+    "off": "Zoals in het bestand",
+    "done": "Ondertitels gesynchroniseerd met de audio"
   }
 }

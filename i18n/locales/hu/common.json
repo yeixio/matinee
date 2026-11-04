@@ -776,5 +776,21 @@
   },
   "audioTrack": {
     "title": "Hang"
+  },
+  "subtitleSync": {
+    "title": "Szinkronizálás a hanghoz",
+    "again": "Újraszinkronizálás",
+    "undo": "Visszavonás",
+    "syncing": "Hallgatja a hangot…",
+    "earlier": "{{seconds}} mp-cel korábbra tolva",
+    "later": "{{seconds}} mp-cel későbbre tolva",
+    "speed": "Sebesség javítva",
+    "earlierSpeed": "Sebesség javítva, {{seconds}} mp-cel korábbra",
+    "laterSpeed": "Sebesség javítva, {{seconds}} mp-cel későbbre",
+    "inSync": "Már szinkronban van",
+    "unsure": "Nem derült ki, mennyivel csúsznak el. Próbáld az Időzítést.",
+    "failed": "Ezt a feliratot nem sikerült szinkronizálni",
+    "off": "Ahogy a fájlban van",
+    "done": "A felirat szinkronban a hanggal"
   }
 }

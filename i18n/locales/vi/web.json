@@ -820,6 +820,12 @@
       "save": "Lưu",
       "remove": "Xóa khóa"
     },
+    "subtitleSync": {
+      "title": "Đồng bộ phụ đề",
+      "intro": "Phụ đề hiện quá sớm hoặc quá muộn, hay càng lúc càng lệch khi video chạy, có thể được căn theo âm thanh. Matinee nghe xem chỗ nào có người nói và dời phụ đề cho khớp. Mọi thứ diễn ra trên máy chủ này.",
+      "auto": "Tự đồng bộ tệp phụ đề",
+      "autoDetail": "Tệp phụ đề đặt cạnh video và phụ đề tìm được trên mạng sẽ được đồng bộ lần đầu có người phát video cùng chúng. Phụ đề nằm trong video được giữ nguyên. Ai cũng vẫn có thể đồng bộ phụ đề từ trình phát hoặc hoàn tác việc đồng bộ."
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Giúp các ứng dụng vẫn tìm thấy máy chủ này khi địa chỉ internet của nhà bạn thay đổi. Dịch vụ chỉ biết địa chỉ: video luôn đi thẳng từ máy chủ này tới các ứng dụng.",

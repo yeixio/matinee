@@ -808,5 +808,21 @@
   },
   "audioTrack": {
     "title": "Audio"
+  },
+  "subtitleSync": {
+    "title": "Synchroniser avec l’audio",
+    "again": "Resynchroniser",
+    "undo": "Annuler",
+    "syncing": "Écoute de l’audio…",
+    "earlier": "Avancés de {{seconds}} s",
+    "later": "Retardés de {{seconds}} s",
+    "speed": "Vitesse corrigée",
+    "earlierSpeed": "Vitesse corrigée, avancés de {{seconds}} s",
+    "laterSpeed": "Vitesse corrigée, retardés de {{seconds}} s",
+    "inSync": "Déjà synchronisés",
+    "unsure": "Impossible de dire de combien ils sont décalés. Essayez Synchronisation.",
+    "failed": "Impossible de synchroniser ces sous-titres",
+    "off": "Tels que dans le fichier",
+    "done": "Sous-titres synchronisés avec l’audio"
   }
 }

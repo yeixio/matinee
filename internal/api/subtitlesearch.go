@@ -348,6 +348,8 @@ func (s *Server) addFoundSubtitle(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	t := s.foundTrack(currentUser(r), f)
+	// Subtitles found online were often timed for another release.
+	s.autoSync(r.Context(), currentUser(r).ID, it, []subtitle.Track{t}, "")
 	writeJSON(w, http.StatusCreated, t)
 }
 

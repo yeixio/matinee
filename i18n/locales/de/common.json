@@ -776,5 +776,21 @@
   },
   "audioTrack": {
     "title": "Audio"
+  },
+  "subtitleSync": {
+    "title": "Mit Ton synchronisieren",
+    "again": "Erneut synchronisieren",
+    "undo": "Rückgängig",
+    "syncing": "Hört sich den Ton an…",
+    "earlier": "{{seconds}} s früher gesetzt",
+    "later": "{{seconds}} s später gesetzt",
+    "speed": "Tempo korrigiert",
+    "earlierSpeed": "Tempo korrigiert, {{seconds}} s früher",
+    "laterSpeed": "Tempo korrigiert, {{seconds}} s später",
+    "inSync": "Schon synchron",
+    "unsure": "Unklar, wie weit sie daneben liegen. Versuch es mit Timing.",
+    "failed": "Diese Untertitel ließen sich nicht synchronisieren",
+    "off": "Wie in der Datei",
+    "done": "Untertitel mit dem Ton synchronisiert"
   }
 }

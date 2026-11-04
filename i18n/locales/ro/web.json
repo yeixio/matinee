@@ -828,6 +828,12 @@
       "save": "Salvează",
       "remove": "Elimină cheia"
     },
+    "subtitleSync": {
+      "title": "Sincronizarea subtitrărilor",
+      "intro": "Subtitrările care apar prea devreme sau prea târziu, ori care se decalează tot mai mult pe parcursul videoclipului, pot fi aliniate cu sunetul. Matinee ascultă unde vorbesc oamenii și mută subtitrările ca să se potrivească. Totul se întâmplă pe acest server.",
+      "auto": "Sincronizează singur fișierele de subtitrare",
+      "autoDetail": "Fișierele de subtitrare de lângă un videoclip și subtitrările găsite online sunt sincronizate prima dată când cineva redă videoclipul cu ele. Subtitrările din videoclip rămân cum sunt. Oricine poate în continuare să sincronizeze subtitrări din player sau să anuleze o sincronizare."
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Ajută aplicațiile să găsească acest server când se schimbă adresa de internet a casei. Serviciul află doar adresa: video-ul merge mereu direct de la acest server la aplicații.",

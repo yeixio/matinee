@@ -166,6 +166,9 @@ type serverSettings struct {
 	// next to the song or in its tags (see lyrics.go). Off unless an admin
 	// turns it on.
 	OnlineLyrics bool `json:"onlineLyrics"`
+	// SubtitleSync lines subtitle files up with the audio the first time a
+	// video plays with them (see subsync.go). On unless an admin turns it off.
+	SubtitleSync bool `json:"subtitleSync"`
 	// AdaptiveQuality makes transcodes adaptive streams of the quality steps
 	// in QualitySteps, and lets people pick a step (see quality.go). Off
 	// unless an admin turns it on.
@@ -255,7 +258,7 @@ func (s *Server) settings(ctx context.Context) (serverSettings, error) {
 	}
 	themes, problems := s.themes()
 	def, err := s.defaultTheme(ctx, themes)
-	set := serverSettings{AdaptiveQuality: quality.Adaptive, QualitySteps: stepIDs(quality.Steps), RemoteQualityCap: quality.Cap, RequireSignInAtHome: required, Requests: mode, RemoteTrailers: trailers, HolidayRows: holidaysOn, OnlineLyrics: lyricsOn, Theme: def,
+	set := serverSettings{AdaptiveQuality: quality.Adaptive, QualitySteps: stepIDs(quality.Steps), RemoteQualityCap: quality.Cap, RequireSignInAtHome: required, Requests: mode, RemoteTrailers: trailers, HolidayRows: holidaysOn, OnlineLyrics: lyricsOn, SubtitleSync: s.autoSyncs(ctx), Theme: def,
 		RemoteAccess: remoteOn, RemoteForwardedPort: forwarded, Remote: s.remoteStatus(), PublicURL: s.PublicURL, PublicURLHomeOnly: s.PublicURL != "" && !s.publicURLIsPublic(ctx), TMDB: tmdb,
 		ThemeProblems: []string{}, HardwareAcceleration: hwaccel.Auto, Hardware: &hwaccel.Status{Available: []hwaccel.Accel{}}, ToneMapping: toneMap}
 	if s.Transcoder != nil {
@@ -296,6 +299,7 @@ func (s *Server) putSettings(w http.ResponseWriter, r *http.Request) {
 		RemoteTrailers       *bool     `json:"remoteTrailers"`
 		HolidayRows          *bool     `json:"holidayRows"`
 		OnlineLyrics         *bool     `json:"onlineLyrics"`
+		SubtitleSync         *bool     `json:"subtitleSync"`
 		AdaptiveQuality      *bool     `json:"adaptiveQuality"`
 		QualitySteps         *[]string `json:"qualitySteps"`
 		RemoteQualityCap     *string   `json:"remoteQualityCap"`
@@ -443,6 +447,16 @@ func (s *Server) putSettings(w http.ResponseWriter, r *http.Request) {
 	}
 	if in.OnlineLyrics != nil {
 		if err := s.setOnlineLyrics(ctx, *in.OnlineLyrics); err != nil {
+			s.serverError(w, err)
+			return
+		}
+	}
+	if in.SubtitleSync != nil {
+		v := ""
+		if !*in.SubtitleSync {
+			v = "off"
+		}
+		if err := s.Store.SetSetting(ctx, settingSubtitleSync, v); err != nil {
 			s.serverError(w, err)
 			return
 		}

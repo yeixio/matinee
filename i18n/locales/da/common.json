@@ -776,5 +776,21 @@
   },
   "audioTrack": {
     "title": "Lyd"
+  },
+  "subtitleSync": {
+    "title": "Synkroniser med lyden",
+    "again": "Synkroniser igen",
+    "undo": "Fortryd",
+    "syncing": "Lytter til lyden…",
+    "earlier": "Flyttet {{seconds}} s tidligere",
+    "later": "Flyttet {{seconds}} s senere",
+    "speed": "Hastigheden rettet",
+    "earlierSpeed": "Hastigheden rettet, {{seconds}} s tidligere",
+    "laterSpeed": "Hastigheden rettet, {{seconds}} s senere",
+    "inSync": "Allerede synkroniseret",
+    "unsure": "Kunne ikke afgøre, hvor meget de er forskudt. Prøv Timing.",
+    "failed": "Kunne ikke synkronisere disse undertekster",
+    "off": "Som i filen",
+    "done": "Underteksterne er synkroniseret med lyden"
   }
 }

@@ -588,6 +588,20 @@ var migrations = []string{
 	"ALTER TABLE items ADD COLUMN version_of BIGINT REFERENCES items(id) ON DELETE SET NULL",
 	"ALTER TABLE items ADD COLUMN edition TEXT",
 	"CREATE INDEX items_version_of ON items(version_of)",
+	// 97: subtitles lined up with the audio (see subsyncs.go).
+	`CREATE TABLE subtitle_syncs (
+		item_id    BIGINT NOT NULL REFERENCES items(id) ON DELETE CASCADE,
+		track      TEXT NOT NULL,
+		file_key   TEXT NOT NULL, -- the subtitle file and the video as they were synced
+		state      TEXT NOT NULL, -- synced, inSync, unsure, failed or off
+		offset_ms  BIGINT NOT NULL DEFAULT 0,
+		rate       DOUBLE PRECISION NOT NULL DEFAULT 1,
+		score      DOUBLE PRECISION NOT NULL DEFAULT 0,
+		reference  TEXT NOT NULL DEFAULT '', -- audio, or subtitles inside the video
+		auto       INTEGER NOT NULL DEFAULT 1, -- done without anyone asking
+		updated_at BIGINT NOT NULL,
+		PRIMARY KEY (item_id, track)
+	)`,
 }
 
 func now() int64 { return time.Now().Unix() }

@@ -832,6 +832,12 @@
       "save": "Zapisz",
       "remove": "Usuń klucz"
     },
+    "subtitleSync": {
+      "title": "Synchronizacja napisów",
+      "intro": "Napisy, które pojawiają się za wcześnie lub za późno albo coraz bardziej rozjeżdżają się w trakcie filmu, można dopasować do dźwięku. Matinee słucha, gdzie ktoś mówi, i przesuwa napisy, żeby pasowały. Wszystko dzieje się na tym serwerze.",
+      "auto": "Synchronizuj pliki napisów samodzielnie",
+      "autoDetail": "Pliki napisów obok filmu i napisy znalezione w internecie są synchronizowane, gdy ktoś pierwszy raz odtworzy z nimi film. Napisy wewnątrz filmu zostają bez zmian. Każdy nadal może zsynchronizować napisy w odtwarzaczu albo cofnąć synchronizację."
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Pozwala aplikacjom znaleźć ten serwer, gdy zmieni się adres internetowy Twojego domu. Usługa zna tylko adres: wideo zawsze płynie prosto z tego serwera do aplikacji.",

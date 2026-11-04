@@ -5,6 +5,7 @@ import (
 	"context"
 	"crypto/sha1"
 	"encoding/hex"
+	"errors"
 	"fmt"
 	"net/http"
 	"os"
@@ -14,6 +15,8 @@ import (
 	"sync"
 	"time"
 	"unicode/utf8"
+
+	"github.com/yeixio/matinee/internal/subsync"
 )
 
 // Reading embedded subtitles means reading the whole video, which can be
@@ -56,9 +59,36 @@ func (c *Converter) Serve(w http.ResponseWriter, r *http.Request, videoPath stri
 		http.Error(w, "subtitles unavailable", http.StatusNotFound)
 		return
 	}
-	w.Header().Set("Content-Type", "text/vtt; charset=utf-8")
-	w.Header().Set("Cache-Control", "private, max-age=3600")
-	http.ServeFile(w, r, path)
+	serveShifted(w, r, path, "text/vtt; charset=utf-8", t.Shift, subsync.ShiftVTT)
+}
+
+// VTT returns track t as WebVTT, as it is in its file (unshifted).
+func (c *Converter) VTT(videoPath string, t Track, all []Track) ([]byte, error) {
+	if t.BurnIn {
+		return nil, errors.New("picture-based subtitles have no text")
+	}
+	path, err := c.vtt(videoPath, t, all)
+	if err != nil {
+		return nil, err
+	}
+	return os.ReadFile(path)
+}
+
+// serveShifted writes a subtitle file with its times moved by shift.
+// Players check back each time (no-cache), so a track synced meanwhile
+// shows its new times.
+func serveShifted(w http.ResponseWriter, r *http.Request, path, contentType string, shift subsync.Shift, apply func([]byte, subsync.Shift) []byte) {
+	w.Header().Set("Content-Type", contentType)
+	w.Header().Set("Cache-Control", "private, no-cache")
+	data, err := os.ReadFile(path)
+	if err != nil {
+		http.Error(w, "subtitles unavailable", http.StatusNotFound)
+		return
+	}
+	data = apply(data, shift)
+	sum := sha1.Sum(data)
+	w.Header().Set("ETag", `"`+hex.EncodeToString(sum[:10])+`"`)
+	http.ServeContent(w, r, "", time.Time{}, bytes.NewReader(data))
 }
 
 func (c *Converter) vtt(videoPath string, t Track, all []Track) (string, error) {
@@ -203,3 +233,14 @@ func writeAtomic(dst string, data []byte) error {
 }
 
 func fileExists(p string) bool { _, err := os.Stat(p); return err == nil }
+
+// HasVTT says whether track t is already converted, so reading it costs
+// nothing (an embedded track otherwise takes a read of the whole video).
+func (c *Converter) HasVTT(videoPath string, t Track) bool {
+	src, key := videoPath, videoPath+"#"+strconv.Itoa(t.Stream)
+	if t.External {
+		src, key = t.Path, t.Path
+	}
+	info, err := os.Stat(src)
+	return err == nil && fileExists(c.cachePath(key, info))
+}

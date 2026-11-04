@@ -840,5 +840,21 @@
   },
   "audioTrack": {
     "title": "Zvuk"
+  },
+  "subtitleSync": {
+    "title": "Synchronizovat se zvukem",
+    "again": "Synchronizovat znovu",
+    "undo": "Zpět",
+    "syncing": "Poslouchám zvuk…",
+    "earlier": "Posunuto o {{seconds}} s dříve",
+    "later": "Posunuto o {{seconds}} s později",
+    "speed": "Rychlost opravena",
+    "earlierSpeed": "Rychlost opravena, o {{seconds}} s dříve",
+    "laterSpeed": "Rychlost opravena, o {{seconds}} s později",
+    "inSync": "Už jsou synchronní",
+    "unsure": "Nepodařilo se zjistit, o kolik se rozcházejí. Zkuste Časování.",
+    "failed": "Tyto titulky se nepodařilo synchronizovat",
+    "off": "Jak jsou v souboru",
+    "done": "Titulky synchronizovány se zvukem"
   }
 }

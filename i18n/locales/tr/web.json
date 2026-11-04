@@ -824,6 +824,12 @@
       "save": "Kaydet",
       "remove": "Anahtarı kaldır"
     },
+    "subtitleSync": {
+      "title": "Altyazı eşitleme",
+      "intro": "Çok erken ya da çok geç görünen veya video ilerledikçe giderek kayan altyazılar sese göre hizalanabilir. Matinee insanların nerede konuştuğunu dinler ve altyazıları buna göre kaydırır. Her şey bu sunucuda olur.",
+      "auto": "Altyazı dosyalarını kendiliğinden eşitle",
+      "autoDetail": "Bir videonun yanındaki altyazı dosyaları ve internette bulunan altyazılar, biri videoyu onlarla ilk kez oynattığında eşitlenir. Videonun içindeki altyazılar olduğu gibi kalır. Herkes yine de oynatıcıdan altyazıları eşitleyebilir veya bir eşitlemeyi geri alabilir."
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Evinin internet adresi değiştiğinde uygulamaların bu sunucuyu bulmaya devam etmesini sağlar. Hizmet yalnızca adresi bilir: video her zaman doğrudan bu sunucudan uygulamalara gider.",

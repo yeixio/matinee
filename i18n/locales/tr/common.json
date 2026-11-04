@@ -776,5 +776,21 @@
   },
   "audioTrack": {
     "title": "Ses"
+  },
+  "subtitleSync": {
+    "title": "Sesle eşitle",
+    "again": "Yeniden eşitle",
+    "undo": "Geri al",
+    "syncing": "Ses dinleniyor…",
+    "earlier": "{{seconds}} sn öne alındı",
+    "later": "{{seconds}} sn geriye alındı",
+    "speed": "Hız düzeltildi",
+    "earlierSpeed": "Hız düzeltildi, {{seconds}} sn öne alındı",
+    "laterSpeed": "Hız düzeltildi, {{seconds}} sn geriye alındı",
+    "inSync": "Zaten eşit",
+    "unsure": "Ne kadar kaydığı anlaşılamadı. Zamanlama’yı dene.",
+    "failed": "Bu altyazılar eşitlenemedi",
+    "off": "Dosyadaki gibi",
+    "done": "Altyazılar sesle eşitlendi"
   }
 }

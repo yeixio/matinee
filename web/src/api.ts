@@ -113,6 +113,8 @@ export type Settings = {
   holidayRows: boolean
   // Look up songs' words on LRCLIB when there are none next to the song or in its tags.
   onlineLyrics: boolean
+  // Line subtitle files up with the audio the first time a video plays with them.
+  subtitleSync?: boolean
   // Transcodes become adaptive streams of qualitySteps, and people can pick
   // a quality in the player (see GET /streaming).
   adaptiveQuality: boolean
@@ -550,7 +552,22 @@ export type SubtitleTrack = {
   // Found online by someone watching; removable by the person asking.
   found?: boolean
   removable?: boolean
+  // Whether its times were lined up with the audio; absent when nobody synced it.
+  sync?: SubtitleSync
 }
+
+/** What lining a subtitle track up with the audio did (GET …/subtitles/{track}/sync). */
+export type SubtitleSync = {
+  state: 'syncing' | 'synced' | 'inSync' | 'unsure' | 'failed' | 'off' | ''
+  // Synced: each time t shows at t×rate + offsetMs. rate is absent for 1.
+  offsetMs?: number
+  rate?: number
+  auto?: boolean
+  reference?: 'audio' | 'subtitles'
+}
+
+/** syncVersion changes whenever a track's served times do, to fetch it again. */
+export const syncVersion = (t: SubtitleTrack) => (t.sync?.state === 'synced' ? `${t.sync.offsetMs ?? 0}x${t.sync.rate ?? 1}` : '')
 
 /** A font attached to a video, which its ASS subtitles use. */
 export type AttachedFont = { index: number; name: string; mimeType?: string }
@@ -1474,6 +1491,9 @@ export const api = {
     request<SubtitleSearch>('GET', `/api/v1/items/${id}/subtitles/search${language ? `?languages=${encodeURIComponent(language)}` : ''}`),
   addSubtitle: (id: number, found: FoundSubtitle) => request<SubtitleTrack>('POST', `/api/v1/items/${id}/subtitles`, found),
   removeSubtitle: (id: number, track: string) => request<void>('DELETE', `/api/v1/items/${id}/subtitles/${encodeURIComponent(track)}`),
+  subtitleSync: (id: number, track: string) => request<SubtitleSync>('GET', `/api/v1/items/${id}/subtitles/${encodeURIComponent(track)}/sync`),
+  syncSubtitle: (id: number, track: string) => request<SubtitleSync>('POST', `/api/v1/items/${id}/subtitles/${encodeURIComponent(track)}/sync`),
+  unsyncSubtitle: (id: number, track: string) => request<SubtitleSync>('DELETE', `/api/v1/items/${id}/subtitles/${encodeURIComponent(track)}/sync`),
   liveChannels: () => request<{ channels: LiveListing[]; categories: string[] }>('GET', '/api/v1/live/channels'),
   liveGuide: (from: number, hours = 4) =>
     request<{ from: number; to: number; channels: LiveChannel[]; programs: LiveProgram[] }>('GET', `/api/v1/live/guide?from=${from}&hours=${hours}`),
@@ -1582,14 +1602,14 @@ export const api = {
     request<Plugin>('PUT', `/api/v1/plugins/${encodeURIComponent(id)}`, changes),
   removePlugin: (id: string) => request<void>('DELETE', `/api/v1/plugins/${encodeURIComponent(id)}`),
   players: () => request<PluginPlayer[]>('GET', '/api/v1/players'),
-  styledSubtitles: async (id: number, track: string) => {
-    const res = await fetch(`/api/v1/items/${id}/subtitles/${encodeURIComponent(track)}.ass`, { credentials: 'same-origin' })
+  styledSubtitles: async (id: number, track: string, version = '') => {
+    const res = await fetch(`/api/v1/items/${id}/subtitles/${encodeURIComponent(track)}.ass${version ? `?v=${version}` : ''}`, { credentials: 'same-origin' })
     if (!res.ok) throw new ApiError(res.status, i18n.t('web:player.subtitlesFailed'))
     return res.text()
   },
   fonts: (id: number) => request<AttachedFont[]>('GET', `/api/v1/items/${id}/fonts`),
-  subtitles: async (id: number, track: string) => {
-    const res = await fetch(`/api/v1/items/${id}/subtitles/${encodeURIComponent(track)}.vtt`, { credentials: 'same-origin' })
+  subtitles: async (id: number, track: string, version = '') => {
+    const res = await fetch(`/api/v1/items/${id}/subtitles/${encodeURIComponent(track)}.vtt${version ? `?v=${version}` : ''}`, { credentials: 'same-origin' })
     if (!res.ok) throw new ApiError(res.status, i18n.t('web:player.subtitlesFailed'))
     return res.text()
   },

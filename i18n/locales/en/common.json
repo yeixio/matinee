@@ -776,5 +776,21 @@
   },
   "audioTrack": {
     "title": "Audio"
+  },
+  "subtitleSync": {
+    "title": "Sync to audio",
+    "again": "Sync again",
+    "undo": "Undo",
+    "syncing": "Listening to the audio…",
+    "earlier": "Moved {{seconds}} s earlier",
+    "later": "Moved {{seconds}} s later",
+    "speed": "Speed fixed",
+    "earlierSpeed": "Speed fixed, moved {{seconds}} s earlier",
+    "laterSpeed": "Speed fixed, moved {{seconds}} s later",
+    "inSync": "Already in sync",
+    "unsure": "Couldn’t tell how far off these are. Try Timing.",
+    "failed": "Couldn’t sync these subtitles",
+    "off": "Shown as written",
+    "done": "Subtitles synced to the audio"
   }
 }

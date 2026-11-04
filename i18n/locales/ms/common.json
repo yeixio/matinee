@@ -744,5 +744,21 @@
   },
   "audioTrack": {
     "title": "Audio"
+  },
+  "subtitleSync": {
+    "title": "Segerakkan dengan audio",
+    "again": "Segerakkan semula",
+    "undo": "Buat asal",
+    "syncing": "Mendengar audio…",
+    "earlier": "Dianjakkan {{seconds}} saat lebih awal",
+    "later": "Dianjakkan {{seconds}} saat lebih lewat",
+    "speed": "Kelajuan dibetulkan",
+    "earlierSpeed": "Kelajuan dibetulkan, {{seconds}} saat lebih awal",
+    "laterSpeed": "Kelajuan dibetulkan, {{seconds}} saat lebih lewat",
+    "inSync": "Sudah segerak",
+    "unsure": "Tidak dapat dipastikan sejauh mana ia tersasar. Cuba Masa.",
+    "failed": "Sari kata ini tidak dapat disegerakkan",
+    "off": "Seperti dalam fail",
+    "done": "Sari kata disegerakkan dengan audio"
   }
 }

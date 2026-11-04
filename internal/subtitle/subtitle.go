@@ -12,6 +12,7 @@ import (
 	"strings"
 
 	"github.com/yeixio/matinee/internal/probe"
+	"github.com/yeixio/matinee/internal/subsync"
 )
 
 // Track is one subtitle track a player can offer.
@@ -39,9 +40,31 @@ type Track struct {
 	// OpenSubtitles); Removable says the person asking may remove them.
 	Found     bool `json:"found,omitempty"`
 	Removable bool `json:"removable,omitempty"`
+	// Sync says whether the track's times were lined up with the audio,
+	// and how (see subsync). Absent for tracks nobody synced.
+	Sync *Sync `json:"sync,omitempty"`
+	// Shift is how the track's times are moved when it's served.
+	Shift subsync.Shift `json:"-"`
 
 	Stream int    `json:"-"` // embedded: index among the file's subtitle streams
 	Path   string `json:"-"` // external: the sidecar file
+}
+
+// Sync is what lining a track up with the audio did.
+type Sync struct {
+	// State is syncing (under way), synced (moved), inSync (already
+	// right), unsure (no fit stood out, left as it was), failed (couldn't
+	// be read or listened to) or off (someone undid it).
+	State string `json:"state"`
+	// OffsetMs and Rate are how a synced track was moved: each time t is
+	// shown at t×Rate + OffsetMs. Rate is absent when it's 1.
+	OffsetMs int64   `json:"offsetMs,omitempty"`
+	Rate     float64 `json:"rate,omitempty"`
+	// Auto says Matinee did it on its own, without anyone asking.
+	Auto bool `json:"auto,omitempty"`
+	// Reference is what it was lined up with: audio, or subtitles (another
+	// track inside the video, whose times are right).
+	Reference string `json:"reference,omitempty"`
 }
 
 // Text codecs FFmpeg can turn into WebVTT.

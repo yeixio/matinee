@@ -60,3 +60,10 @@ func lookupLanguage(s string) (code, name string) {
 	}
 	return "", ""
 }
+
+// LanguageCode turns a language tag ("eng", "en", "pt-BR") into the short
+// code tracks use, or "" when unknown.
+func LanguageCode(s string) string {
+	code, _ := lookupLanguage(s)
+	return code
+}

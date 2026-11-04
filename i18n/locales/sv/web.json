@@ -824,6 +824,12 @@
       "save": "Spara",
       "remove": "Ta bort nyckel"
     },
+    "subtitleSync": {
+      "title": "Synka undertexter",
+      "intro": "Undertexter som visas för tidigt eller för sent, eller glider allt längre bort under videon, kan riktas in efter ljudet. Matinee lyssnar efter var folk pratar och flyttar undertexterna så att de stämmer. Allt sker på den här servern.",
+      "auto": "Synka undertextfiler automatiskt",
+      "autoDetail": "Undertextfiler bredvid en video och undertexter som hittats på nätet synkas första gången någon spelar videon med dem. Undertexter inuti videon lämnas som de är. Alla kan ändå synka undertexter i spelaren eller ångra en synkning."
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Gör att apparna hittar den här servern även när hemmets internetadress ändras. Tjänsten känner bara till adressen: video går alltid direkt från servern till apparna.",

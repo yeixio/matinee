@@ -820,6 +820,12 @@
       "save": "Simpan",
       "remove": "Hapus kunci"
     },
+    "subtitleSync": {
+      "title": "Penyelarasan subtitel",
+      "intro": "Subtitel yang muncul terlalu cepat atau terlambat, atau makin bergeser seiring video berjalan, bisa diselaraskan dengan audio. Matinee mendengarkan bagian orang berbicara dan menggeser subtitel agar pas. Semuanya terjadi di server ini.",
+      "auto": "Selaraskan file subtitel secara otomatis",
+      "autoDetail": "File subtitel di samping video dan subtitel yang ditemukan online diselaraskan saat seseorang pertama kali memutar video dengannya. Subtitel di dalam video dibiarkan apa adanya. Siapa pun tetap bisa menyelaraskan subtitel dari pemutar, atau mengurungkannya."
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Membuat aplikasi tetap bisa menemukan server ini saat alamat internet rumahmu berubah. Layanan ini hanya tahu alamatnya: video selalu langsung dari server ini ke aplikasi.",

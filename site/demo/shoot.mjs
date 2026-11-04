@@ -433,6 +433,39 @@ try {
       await sleep(2000)
     }
 
+    // Sync to audio in the subtitles menu (see docs/guide/watching/syncing-subtitles.md).
+    // The demo films are silent, so the menu is shown as it is after a sync
+    // that moved the subtitles 2.4 s earlier.
+    if (['player-subtitle-sync', 'settings-subtitle-sync'].some(wanted)) {
+      const synced = { state: 'synced', offsetMs: -2400, auto: true, reference: 'audio' }
+      await page.route(`**/api/v1/items/${harbor.id}`, async (route) => {
+        const res = await route.fetch()
+        const item = await res.json()
+        item.subtitles = item.subtitles?.map((t) => (t.language === 'en' ? { ...t, sync: synced } : t))
+        await route.fulfill({ response: res, json: item })
+      })
+      await page.reload()
+      await sleep(2500)
+      await page.mouse.move(700, 500)
+      await page.getByRole('button', { name: 'Subtitles' }).click()
+      await page.getByRole('menuitemradio', { name: /^English/ }).first().click()
+      await sleep(500)
+      await page.mouse.move(720, 520)
+      await page.getByRole('button', { name: 'Subtitles' }).click()
+      await page.getByText('Moved 2.4 s earlier').waitFor()
+      await shot(page, 'player-subtitle-sync')
+      await page.mouse.click(700, 300) // closes the menu, and pauses
+      await page.unroute(`**/api/v1/items/${harbor.id}`)
+      if (wanted('settings-subtitle-sync')) {
+        const settingsPage = await open(desktop, token)
+        await settings(settingsPage, 'content')
+        await shot(settingsPage, 'settings-subtitle-sync', { target: section(settingsPage, 'Subtitle sync') })
+        await settingsPage.context().close()
+      }
+      await page.reload()
+      await sleep(2000)
+    }
+
     // Home Assistant pauses the film (see docs/guide/server/home-assistant.md).
     if (wanted('player-remote')) {
       const ha = await homeAssistant()

@@ -744,5 +744,21 @@
   },
   "audioTrack": {
     "title": "Audio"
+  },
+  "subtitleSync": {
+    "title": "Selaraskan dengan audio",
+    "again": "Selaraskan lagi",
+    "undo": "Urungkan",
+    "syncing": "Mendengarkan audio…",
+    "earlier": "Dimajukan {{seconds}} dtk",
+    "later": "Dimundurkan {{seconds}} dtk",
+    "speed": "Kecepatan diperbaiki",
+    "earlierSpeed": "Kecepatan diperbaiki, dimajukan {{seconds}} dtk",
+    "laterSpeed": "Kecepatan diperbaiki, dimundurkan {{seconds}} dtk",
+    "inSync": "Sudah selaras",
+    "unsure": "Tidak bisa dipastikan seberapa jauh melesetnya. Coba Waktu.",
+    "failed": "Subtitel ini tidak bisa diselaraskan",
+    "off": "Sesuai file",
+    "done": "Subtitel diselaraskan dengan audio"
   }
 }

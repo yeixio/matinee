@@ -824,6 +824,12 @@
       "save": "Tallenna",
       "remove": "Poista avain"
     },
+    "subtitleSync": {
+      "title": "Tekstitysten tahdistus",
+      "intro": "Liian aikaisin tai myöhään näkyvät tai videon edetessä yhä enemmän jätättävät tekstitykset voi kohdistaa ääneen. Matinee kuuntelee, missä puhutaan, ja siirtää tekstitykset kohdalleen. Kaikki tapahtuu tällä palvelimella.",
+      "auto": "Tahdista tekstitystiedostot itsestään",
+      "autoDetail": "Videon vieressä olevat tekstitystiedostot ja verkosta löydetyt tekstitykset tahdistetaan, kun joku toistaa videon niiden kanssa ensimmäisen kerran. Videon sisäiset tekstitykset jätetään ennalleen. Kuka tahansa voi silti tahdistaa tekstityksiä soittimessa tai kumota tahdistuksen."
+    },
     "connect": {
       "title": "Matinee Connect",
       "about": "Pitää sovellukset löytämässä tämän palvelimen, kun kotisi internetosoite vaihtuu. Palvelu tietää vain osoitteen: video kulkee aina suoraan tältä palvelimelta sovelluksiin.",
