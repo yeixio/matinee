@@ -36,3 +36,4 @@ cmd/matinee-tray/rsrc_windows_*.syso
 # Mac app
 /macos/.build/
 /macos/.swiftpm/
+boxoffice/web/tsconfig.tsbuildinfo
