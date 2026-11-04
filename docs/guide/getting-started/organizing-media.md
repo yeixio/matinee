@@ -24,7 +24,7 @@ Movies/
 
 The year matters: it tells two films with the same title apart.
 
-<!-- since: v0.3.0 -->
+<!-- since: v0.2.1 -->
 ### Several versions of a movie
 
 Keep as many copies of a movie as you like in its folder, such as a 4K copy for the TV and a 1080p one for phones, or the theatrical cut next to the extended one. Matinee shows them as one movie with a version for each file. Name the cut in the file name, after the year, and Matinee shows it on the version:
@@ -126,10 +126,10 @@ Put subtitle files next to the video, named like the video plus a language code:
 - `Movie (2024).en.forced.srt`: forced English, for foreign-language parts only
 - `.srt`, `.vtt`, `.ass` and `.ssa` all work
 
-<!-- since: v0.3.0 -->
+<!-- since: v0.2.1 -->
 Picture subtitles ripped from discs work as files too: a Blu-ray `.sup` file, or a DVD `.idx` with its `.sub` beside it. Name them the same way (`Movie (2024).en.sup`). Like picture subtitles inside a video, they're drawn into the video while it plays.
 
-<!-- since: v0.3.0 -->
+<!-- since: v0.2.1 -->
 Subtitles can also live in a `Subs` (or `Subtitles`) folder next to the video, the way many releases come:
 
 ```
@@ -148,7 +148,7 @@ Subtitles inside the video file work too. Text subtitles are drawn by the player
 
 A trailer next to a movie or show shows up as a **Trailer** button on its page. Name it like the video with `-trailer` on the end (`Movie (2024)-trailer.mp4`), call it `trailer.mp4`, or put trailers in a `Trailers` folder. Trailer files are never listed as movies of their own.
 
-<!-- since: v0.3.0 -->
+<!-- since: v0.2.1 -->
 ## Extras
 
 Behind-the-scenes videos, deleted scenes, featurettes, interviews and other special features show in the **Extras** row on a movie's or show's page (see [Extras and commentaries](/docs/watching/extras/)). Put them in a folder for their kind inside the movie's or show's folder:

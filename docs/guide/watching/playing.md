@@ -28,7 +28,7 @@ Hover over the bar, or drag it, to see a picture of that moment above it before 
 
 ## Subtitles
 
-<!-- since: v0.3.0 -->
+<!-- since: v0.2.1 -->
 The subtitles button opens with **Off** and **On**. **On** picks the best track for you and shows which one: a full track in the first of [your languages](#when-subtitles-come-on) that the file has, plain over SDH, and text over pictures. **More subtitles** lists every track, the ones inside the file and the [files next to it](/docs/getting-started/organizing-media/#subtitles), for when you want a particular one.
 <!-- /since -->
 
@@ -44,7 +44,7 @@ In the [phone and TV apps](/docs/apps/phone-and-tv/#watching-on-a-tv), subtitles
 No subtitles in your language? Once an admin sets up subtitle search, **Find subtitles…** under **More subtitles** looks for them online. See [Finding subtitles](/docs/watching/finding-subtitles/).
 <!-- /since -->
 
-<!-- since: v0.3.0 -->
+<!-- since: v0.2.1 -->
 ### Styled subtitles (ASS/SSA)
 
 Anime and fan-subtitled releases often come with ASS or SSA subtitles: signs placed over the picture, colors, karaoke, and fonts carried inside the MKV. The web player draws these the way they were made, with the file's own fonts, while the video still plays as it is. Your size and color choices below don't change them, since their look is part of the release. A browser that can't draw them shows the words as plain subtitles instead.
@@ -52,7 +52,7 @@ Anime and fan-subtitled releases often come with ASS or SSA subtitles: signs pla
 In the [phone and TV apps](/docs/apps/phone-and-tv/), **More subtitles** lists a styled copy of these tracks, marked **Converts video**: the server draws the styling into the picture as it streams.
 <!-- /since -->
 
-<!-- since: v0.3.0 -->
+<!-- since: v0.2.1 -->
 ### When subtitles come on
 
 Under **Settings → You → Subtitles** you choose when subtitles show, and Matinee keeps the choice on your server, so it follows you to every browser and app:
@@ -77,7 +77,7 @@ Most of the time you won't need to: Matinee lines subtitle files up with the aud
 In the [phone and TV apps](/docs/apps/phone-and-tv/) (from version 1.0.27), **Show subtitles** is under Settings, and the player's subtitles menu has **Subtitle style** (each press of a row moves on to the next size, color and so on) and **Timing**. They use the same choices as the web, and timing is kept per title on each device.
 <!-- /since -->
 
-<!-- since: v0.3.0 -->
+<!-- since: v0.2.1 -->
 ## Audio delay
 
 A soundbar, an AV receiver or Bluetooth headphones can put the sound a little behind the picture, and now and then a file is out of sync itself. The audio delay button (the sound waves next to the moon) moves the sound against the picture in steps of 25 milliseconds, up to two seconds either way. **Sound earlier** fixes sound that comes after the lips move; **Sound later** fixes sound that comes first. On a keyboard, <kbd>[</kbd> makes it earlier and <kbd>]</kbd> later.
@@ -89,7 +89,7 @@ While there's a delay, the server sends the sound moved (only the sound is conve
 From version 1.0.27 the phone and TV apps have **Audio delay** in the player too (the timer button on a phone, in the player's menu on a TV). Press **Sound earlier** or **Sound later** until the sound matches; each phone or TV keeps its own, and **Just for this title** works the same way.
 <!-- /since -->
 
-<!-- since: v0.3.0 -->
+<!-- since: v0.2.1 -->
 ## Audio tracks
 
 When a file has more than one audio track, such as another language or a director's commentary, the **Audio** button in the player lists them all. Picking another track plays it through the server from the same spot. A title page's [Extras](/docs/watching/extras/#commentaries) row starts a movie with its commentary straight away.
