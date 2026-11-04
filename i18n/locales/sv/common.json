@@ -701,6 +701,11 @@
     "forTitle": "Bara för den här titeln",
     "reset": "Ingen fördröjning"
   },
+  "clearVoice": {
+    "menu": "Ljud",
+    "title": "Tydligt tal",
+    "hint": "Högre dialog och mjukare explosioner, för tv-högtalare och sena kvällar."
+  },
   "subtitlePrefs": {
     "title": "Undertexter",
     "intro": "När undertexter visas och hur de ser ut. Dina val följer med till alla appar. Att välja undertexter i spelaren ändrar dem också.",

@@ -765,6 +765,11 @@
     "forTitle": "Tylko dla tego tytułu",
     "reset": "Bez opóźnienia"
   },
+  "clearVoice": {
+    "menu": "Dźwięk",
+    "title": "Wyraźny głos",
+    "hint": "Głośniejsze dialogi i cichsze wybuchy, na głośniki telewizora i późne wieczory."
+  },
   "subtitlePrefs": {
     "title": "Napisy",
     "intro": "Kiedy pojawiają się napisy i jak wyglądają. Twoje wybory obowiązują w każdej aplikacji. Wybranie napisów w odtwarzaczu też je zmienia.",

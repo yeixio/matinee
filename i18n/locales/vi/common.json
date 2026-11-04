@@ -669,6 +669,11 @@
     "forTitle": "Chỉ cho nội dung này",
     "reset": "Không trễ"
   },
+  "clearVoice": {
+    "menu": "Âm thanh",
+    "title": "Giọng rõ",
+    "hint": "Lời thoại to hơn và tiếng nổ nhẹ hơn, cho loa TV và đêm khuya."
+  },
   "subtitlePrefs": {
     "title": "Phụ đề",
     "intro": "Khi nào phụ đề hiện và trông thế nào. Lựa chọn của bạn áp dụng trên mọi ứng dụng. Chọn phụ đề trong trình phát cũng thay đổi chúng.",

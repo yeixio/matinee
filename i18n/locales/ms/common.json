@@ -669,6 +669,11 @@
     "forTitle": "Untuk tajuk ini sahaja",
     "reset": "Tiada lengah"
   },
+  "clearVoice": {
+    "menu": "Bunyi",
+    "title": "Suara jelas",
+    "hint": "Dialog lebih kuat dan letupan lebih lembut, untuk pembesar suara TV dan lewat malam."
+  },
   "subtitlePrefs": {
     "title": "Sari kata",
     "intro": "Bila sari kata muncul dan bagaimana rupanya. Pilihan anda digunakan dalam setiap aplikasi. Memilih sari kata dalam pemain juga mengubahnya.",

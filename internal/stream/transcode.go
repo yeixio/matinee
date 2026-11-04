@@ -156,6 +156,8 @@ type Request struct {
 	// AudioDelayMs moves the sound against the picture, for lip sync: later
 	// when positive, earlier when negative (see AudioDelayFilter).
 	AudioDelayMs int
+	// ClearVoice makes dialogue easier to hear (see ClearVoiceFilter).
+	ClearVoice bool
 	// BurnFile, when set, is a picture subtitle file next to the video
 	// (VobSub .idx, Blu-ray .sup) to draw in, instead of an embedded stream.
 	BurnFile string
@@ -186,6 +188,26 @@ func AudioDelayFilter(ms int) string {
 		return "atrim=start=" + strconv.FormatFloat(float64(-ms)/1000, 'f', 3, 64) + ",asetpts=PTS-STARTPTS"
 	}
 	return ""
+}
+
+// ClearVoiceFilter mixes the sound down to stereo with the centre channel,
+// where films put the dialogue, brought forward and the low-frequency
+// channel left out, then evens out loud and quiet moments so explosions
+// don't drown out what's said. Any layout is made 5.1 first, so mono and
+// stereo work too (mono lands in the centre).
+const ClearVoiceFilter = "aformat=channel_layouts=5.1,pan=stereo|FL=0.6*FL+FC+0.4*BL|FR=0.6*FR+FC+0.4*BR," +
+	"acompressor=threshold=0.063:ratio=4:attack=5:release=150:makeup=4,alimiter=limit=0.95:level=disabled"
+
+// audioFilters is the -af chain for a delay and Clear voice, "" for none.
+func audioFilters(delayMs int, clearVoice bool) string {
+	var f []string
+	if d := AudioDelayFilter(delayMs); d != "" {
+		f = append(f, d)
+	}
+	if clearVoice {
+		f = append(f, ClearVoiceFilter)
+	}
+	return strings.Join(f, ",")
 }
 
 // StartFor is Start for a player that says what it plays: a picture it
@@ -225,7 +247,7 @@ func (t *Transcoder) StartFor(ctx context.Context, userID int64, it store.Item, 
 	}
 	modes := t.plan(accel, it.ID, video, copyVideo)
 	for i, mode := range modes {
-		id, err := t.start(ctx, userID, it, startSec, accel, mode, video, audio, req.AudioDelayMs, req.BurnFile, copyVideo, why, steps, copyOutput)
+		id, err := t.start(ctx, userID, it, startSec, accel, mode, video, audio, audioFilters(req.AudioDelayMs, req.ClearVoice), req.BurnFile, copyVideo, why, steps, copyOutput)
 		if err == nil || i == len(modes)-1 || errors.Is(err, ErrSuperseded) || ctx.Err() != nil {
 			switch {
 			case err == nil:
@@ -269,7 +291,7 @@ func (t *Transcoder) hwFailed(itemID int64, kind hwaccel.Kind, mode hwaccel.Mode
 	}
 }
 
-func (t *Transcoder) start(ctx context.Context, userID int64, it store.Item, startSec float64, accel *hwaccel.Accel, mode hwaccel.Mode, video hwaccel.Video, audio, audioDelayMs int, burnFile string, copyVideo bool, why string, steps []Step, copyOutput []string) (string, error) {
+func (t *Transcoder) start(ctx context.Context, userID int64, it store.Item, startSec float64, accel *hwaccel.Accel, mode hwaccel.Mode, video hwaccel.Video, audio int, audioFilter string, burnFile string, copyVideo bool, why string, steps []Step, copyOutput []string) (string, error) {
 	b := make([]byte, 12)
 	rand.Read(b)
 	id := hex.EncodeToString(b)
@@ -323,8 +345,8 @@ func (t *Transcoder) start(ctx context.Context, userID int64, it store.Item, sta
 	case it.VideoCodec != "":
 		output = append(output, "-map", audioMap+"?", "-sn", "-c:a", "aac", "-ac", "2", "-b:a", audioRate(0))
 	}
-	if f := AudioDelayFilter(audioDelayMs); f != "" && withAudio && it.VideoCodec != "" {
-		output = append(output, "-af", f)
+	if audioFilter != "" && withAudio && it.VideoCodec != "" {
+		output = append(output, "-af", audioFilter)
 	}
 	if startSec > 0 {
 		args = append(args, "-ss", strconv.FormatFloat(startSec, 'f', 3, 64))

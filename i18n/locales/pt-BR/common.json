@@ -733,6 +733,11 @@
     "forTitle": "Só para este título",
     "reset": "Sem atraso"
   },
+  "clearVoice": {
+    "menu": "Som",
+    "title": "Voz clara",
+    "hint": "Diálogos mais altos e explosões mais suaves, para alto-falantes de TV e madrugadas."
+  },
   "subtitlePrefs": {
     "title": "Legendas",
     "intro": "Quando as legendas aparecem e como elas ficam. Suas escolhas valem em todos os apps. Escolher legendas no player também as muda.",

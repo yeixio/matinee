@@ -1562,11 +1562,12 @@ export const api = {
   // which the server made.
   // plays is the query saying what the browser takes as it is (see player/plays.ts).
   // audioDelay moves the sound against the picture, in milliseconds, and
-  // audio picks one of the file's audio tracks (its index in mediaInfo).
-  startHls: (id: number, startSec = 0, burnSubtitle?: string, quality?: string, plays = '', audioDelay = 0, audio?: number) =>
+  // audio picks one of the file's audio tracks (its index in mediaInfo), and
+  // voice turns on Clear voice (dialogue forward, loud moments evened out).
+  startHls: (id: number, startSec = 0, burnSubtitle?: string, quality?: string, plays = '', audioDelay = 0, audio?: number, voice = false) =>
     request<{ url: string; startSec: number; quality?: string }>(
       'POST',
-      `/api/v1/items/${id}/hls?start=${startSec}${burnSubtitle ? `&subtitle=${encodeURIComponent(burnSubtitle)}` : ''}${quality ? `&quality=${encodeURIComponent(quality)}` : ''}${plays}${audioDelay ? `&audioDelay=${audioDelay}` : ''}${audio !== undefined ? `&audio=${audio}` : ''}`,
+      `/api/v1/items/${id}/hls?start=${startSec}${burnSubtitle ? `&subtitle=${encodeURIComponent(burnSubtitle)}` : ''}${quality ? `&quality=${encodeURIComponent(quality)}` : ''}${plays}${audioDelay ? `&audioDelay=${audioDelay}` : ''}${audio !== undefined ? `&audio=${audio}` : ''}${voice ? '&voice=1' : ''}`,
     ),
   // One stream of an album's songs, joined without gaps, from start
   // seconds into the first; each song's startSec is on the stream's clock.

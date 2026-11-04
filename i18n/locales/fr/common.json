@@ -733,6 +733,11 @@
     "forTitle": "Pour ce titre seulement",
     "reset": "Aucun décalage"
   },
+  "clearVoice": {
+    "menu": "Son",
+    "title": "Voix claire",
+    "hint": "Dialogues plus forts et explosions plus douces, pour les haut-parleurs de TV et les soirées tardives."
+  },
   "subtitlePrefs": {
     "title": "Sous-titres",
     "intro": "Quand les sous-titres s'affichent et à quoi ils ressemblent. Vos choix vous suivent dans toutes les applis. Choisir des sous-titres dans le lecteur les modifie aussi.",

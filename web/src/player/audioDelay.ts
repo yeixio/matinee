@@ -49,3 +49,24 @@ export function delayLabel(ms: number, locale?: string): string {
   const n = new Intl.NumberFormat(locale).format(Math.abs(ms))
   return ms > 0 ? `+${n} ms` : ms < 0 ? `−${n} ms` : `${n} ms`
 }
+
+// Clear voice: dialogue brought forward and loud moments evened out, by the
+// server. Kept for this browser, like the delay.
+const voiceKey = 'matinee.clearVoice'
+
+export function loadClearVoice(): boolean {
+  try {
+    return localStorage.getItem(voiceKey) === '1'
+  } catch {
+    return false
+  }
+}
+
+export function saveClearVoice(on: boolean) {
+  try {
+    if (on) localStorage.setItem(voiceKey, '1')
+    else localStorage.removeItem(voiceKey)
+  } catch {
+    // Private windows can refuse; it then lasts while the page is open.
+  }
+}
