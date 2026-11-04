@@ -255,5 +255,6 @@
   "no_such_backup": "沒有這個備份",
   "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "此伺服器的資料庫是 PostgreSQL;請用 pg_dump 備份",
   "audiodelay_is_milliseconds_between_2000_and_2000": "音訊延遲以毫秒為單位，範圍為 -2000 到 2000。",
-  "subtitle_choices_arent_ones_the_apps_know": "應用程式無法識別這些字幕選項"
+  "subtitle_choices_arent_ones_the_apps_know": "應用程式無法識別這些字幕選項",
+  "no_such_font": "沒有這個字型"
 }

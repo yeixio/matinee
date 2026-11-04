@@ -749,7 +749,8 @@
     "background": "Boks bag teksten",
     "sample": "Sådan kommer underteksterne til at se ud.",
     "look": "Undertekststil",
-    "lookHint": "Tryk på en linje for at ændre den. Dine valg følger dig til alle apps."
+    "lookHint": "Tryk på en linje for at ændre den. Dine valg følger dig til alle apps.",
+    "styled": "{{name}}, med stil"
   },
   "subtitleTiming": {
     "title": "Timing",

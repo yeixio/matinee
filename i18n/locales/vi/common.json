@@ -717,7 +717,8 @@
     "background": "Nền sau chữ",
     "sample": "Phụ đề sẽ trông như thế này.",
     "look": "Kiểu phụ đề",
-    "lookHint": "Nhấn vào một dòng để thay đổi. Lựa chọn của bạn áp dụng trên mọi ứng dụng."
+    "lookHint": "Nhấn vào một dòng để thay đổi. Lựa chọn của bạn áp dụng trên mọi ứng dụng.",
+    "styled": "{{name}}, có định dạng"
   },
   "subtitleTiming": {
     "title": "Thời gian",

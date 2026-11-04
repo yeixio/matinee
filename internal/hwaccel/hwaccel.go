@@ -115,6 +115,10 @@ type Video struct {
 	// BurnSub is an embedded picture subtitle stream to draw into the
 	// video, or -1 for none.
 	BurnSub int
+	// Styled, when set, is a libass filter that draws ASS/SSA subtitles
+	// with their styling into the picture (see stream.StyledFilter). Like
+	// BurnSub it needs the frames in memory.
+	Styled string
 	// MaxWidth caps the width; narrower video keeps its size.
 	MaxWidth int
 	// KeyframeSeconds forces a keyframe this often, so HLS segments start
@@ -156,7 +160,7 @@ func Plan(a *Accel, v Video) []Mode {
 	if a == nil {
 		return []Mode{CPU}
 	}
-	if a.Decode && v.BurnSub < 0 && slices.Contains(decodes[a.Kind], v.Codec) {
+	if a.Decode && v.BurnSub < 0 && v.Styled == "" && slices.Contains(decodes[a.Kind], v.Codec) {
 		return []Mode{Full, Encode, CPU}
 	}
 	return []Mode{Encode, CPU}
@@ -329,6 +333,11 @@ func videoFilter(v Video, chains []string) []string {
 			return []string{"-filter_complex", graph + "," + chains[0] + "[v]", "-map", "[v]"}
 		}
 		src, graph = "", graph+","
+	} else if v.Styled != "" {
+		if len(chains) == 1 {
+			return []string{"-map", "0:v:0", "-vf", v.Styled + "," + chains[0]}
+		}
+		src = "[0:v:0]" + v.Styled + ","
 	} else if len(chains) == 1 {
 		return []string{"-map", "0:v:0", "-vf", chains[0]}
 	}

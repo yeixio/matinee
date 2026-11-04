@@ -781,7 +781,8 @@
     "background": "Caixa atrás do texto",
     "sample": "É assim que as legendas vão ficar.",
     "look": "Estilo das legendas",
-    "lookHint": "Toque em uma linha para mudá-la. Suas escolhas valem em todos os apps."
+    "lookHint": "Toque em uma linha para mudá-la. Suas escolhas valem em todos os apps.",
+    "styled": "{{name}}, com estilo"
   },
   "subtitleTiming": {
     "title": "Sincronia",

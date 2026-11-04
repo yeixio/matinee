@@ -781,7 +781,8 @@
     "background": "Riquadro dietro il testo",
     "sample": "Ecco come appariranno i sottotitoli.",
     "look": "Stile dei sottotitoli",
-    "lookHint": "Premi una riga per cambiarla. Le tue scelte ti seguono in ogni app."
+    "lookHint": "Premi una riga per cambiarla. Le tue scelte ti seguono in ogni app.",
+    "styled": "{{name}}, con stile"
   },
   "subtitleTiming": {
     "title": "Sincronia",

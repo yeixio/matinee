@@ -263,7 +263,7 @@ func run() error {
 		Store: db, Scanner: scanner, Watcher: watcher, ScanInterval: cfg.ScanInterval, Transcoder: transcoder, HW: hw, Downloads: downloads, Analyzer: analyzer, Thumbs: thumbnails,
 		Art:       artwork.NewCache(cfg.ImageDir(), cfg.FFmpegPath),
 		Covers:    metadata.NewCovers(version.Version, mb, ol),
-		Subtitles: subtitle.NewConverter(cfg.FFmpegPath, cfg.SubtitleDir()),
+		Subtitles: subtitle.NewConverter(cfg.FFmpegPath, cfg.SubtitleDir()).WithFFprobe(cfg.FFprobePath),
 		Levels:    spectrum.New(cfg.FFmpegPath, cfg.LevelsDir()),
 		Lyrics: &lyrics.Finder{
 			Prober: probe.Prober{Path: cfg.FFprobePath},

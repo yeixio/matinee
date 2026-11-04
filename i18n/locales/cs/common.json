@@ -813,7 +813,8 @@
     "background": "Pozadí za textem",
     "sample": "Takto budou titulky vypadat.",
     "look": "Styl titulků",
-    "lookHint": "Stisknutím řádku ho změníte. Vaše volby platí ve všech aplikacích."
+    "lookHint": "Stisknutím řádku ho změníte. Vaše volby platí ve všech aplikacích.",
+    "styled": "{{name}}, se stylem"
   },
   "subtitleTiming": {
     "title": "Načasování",

@@ -529,10 +529,16 @@ export type SubtitleTrack = {
   external?: boolean
   // Picture-based subtitles the server draws into a transcode.
   burnIn?: boolean
+  // ASS/SSA: the player can draw its positions, fonts and effects from the
+  // original (api.styledSubtitles, with api.fonts).
+  styled?: boolean
   // Found online by someone watching; removable by the person asking.
   found?: boolean
   removable?: boolean
 }
+
+/** A font attached to a video, which its ASS subtitles use. */
+export type AttachedFont = { index: number; name: string; mimeType?: string }
 
 /** A subtitle file found online (GET /items/{id}/subtitles/search). */
 export type FoundSubtitle = {
@@ -1557,6 +1563,12 @@ export const api = {
     request<Plugin>('PUT', `/api/v1/plugins/${encodeURIComponent(id)}`, changes),
   removePlugin: (id: string) => request<void>('DELETE', `/api/v1/plugins/${encodeURIComponent(id)}`),
   players: () => request<PluginPlayer[]>('GET', '/api/v1/players'),
+  styledSubtitles: async (id: number, track: string) => {
+    const res = await fetch(`/api/v1/items/${id}/subtitles/${encodeURIComponent(track)}.ass`, { credentials: 'same-origin' })
+    if (!res.ok) throw new ApiError(res.status, i18n.t('web:player.subtitlesFailed'))
+    return res.text()
+  },
+  fonts: (id: number) => request<AttachedFont[]>('GET', `/api/v1/items/${id}/fonts`),
   subtitles: async (id: number, track: string) => {
     const res = await fetch(`/api/v1/items/${id}/subtitles/${encodeURIComponent(track)}.vtt`, { credentials: 'same-origin' })
     if (!res.ok) throw new ApiError(res.status, i18n.t('web:player.subtitlesFailed'))
@@ -1568,6 +1580,7 @@ export const imageUrl = (id: number, type: 'poster' | 'backdrop', tag?: string) 
   `/api/v1/items/${id}/image/${type}${tag ? `?v=${encodeURIComponent(tag)}` : ''}`
 export const personImageUrl = (id: number) => `/api/v1/people/${id}/image`
 export const fileUrl = (id: number) => `/api/v1/items/${id}/file`
+export const fontUrl = (id: number, index: number) => `/api/v1/items/${id}/fonts/${index}`
 export const opmlUrl = (library: number) => `/api/v1/libraries/${library}/opml`
 export const pluginFileUrl = (plugin: string, path: string) =>
   `/api/v1/plugins/${encodeURIComponent(plugin)}/files/${path.split('/').map(encodeURIComponent).join('/')}`

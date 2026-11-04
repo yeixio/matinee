@@ -12,5 +12,7 @@ export default defineConfig({
     fs: { allow: ['..'] },
   },
   build: { outDir: 'dist', emptyOutDir: false },
+  // JASSUB finds its worker and WASM next to itself, which pre-bundling would break.
+  optimizeDeps: { exclude: ['jassub'] },
   test: { environment: 'jsdom' },
 })

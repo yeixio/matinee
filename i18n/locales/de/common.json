@@ -749,7 +749,8 @@
     "background": "Kasten hinter dem Text",
     "sample": "So sehen Untertitel aus.",
     "look": "Untertitel-Stil",
-    "lookHint": "Drücke eine Zeile, um sie zu ändern. Deine Einstellungen gelten in jeder App."
+    "lookHint": "Drücke eine Zeile, um sie zu ändern. Deine Einstellungen gelten in jeder App.",
+    "styled": "{{name}}, mit Stil"
   },
   "subtitleTiming": {
     "title": "Timing",

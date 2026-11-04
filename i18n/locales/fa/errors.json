@@ -255,5 +255,6 @@
   "no_such_backup": "چنین پشتیبانی نیست",
   "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "پایگاه دادهٔ این سرور PostgreSQL است؛ با pg_dump پشتیبان بگیرید",
   "audiodelay_is_milliseconds_between_2000_and_2000": "تأخیر صدا به میلی‌ثانیه و بین ‎-2000 تا 2000 است.",
-  "subtitle_choices_arent_ones_the_apps_know": "برنامه‌ها این گزینه‌های زیرنویس را نمی‌شناسند"
+  "subtitle_choices_arent_ones_the_apps_know": "برنامه‌ها این گزینه‌های زیرنویس را نمی‌شناسند",
+  "no_such_font": "چنین فونتی وجود ندارد"
 }
