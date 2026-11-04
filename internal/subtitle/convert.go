@@ -24,7 +24,9 @@ const extractTimeout = 10 * time.Minute
 // each track is converted once per version of its file.
 type Converter struct {
 	FFmpeg string
-	Dir    string
+	// FFprobe lists a video's attached fonts (see Fonts).
+	FFprobe string
+	Dir     string
 
 	mu       sync.Mutex
 	inflight map[string]*sync.Mutex
@@ -33,6 +35,12 @@ type Converter struct {
 func NewConverter(ffmpeg, dir string) *Converter {
 	os.MkdirAll(dir, 0o755)
 	return &Converter{FFmpeg: ffmpeg, Dir: dir, inflight: map[string]*sync.Mutex{}}
+}
+
+// WithFFprobe sets the ffprobe that lists a video's fonts.
+func (c *Converter) WithFFprobe(path string) *Converter {
+	c.FFprobe = path
+	return c
 }
 
 // Serve writes track t of the video at videoPath as WebVTT. all lists the

@@ -255,5 +255,6 @@
   "no_such_backup": "Die back-up bestaat niet",
   "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "De database van deze server is PostgreSQL; maak een back-up met pg_dump",
   "audiodelay_is_milliseconds_between_2000_and_2000": "De audiovertraging is in milliseconden, tussen -2000 en 2000.",
-  "subtitle_choices_arent_ones_the_apps_know": "De apps kennen deze ondertitelkeuzes niet"
+  "subtitle_choices_arent_ones_the_apps_know": "De apps kennen deze ondertitelkeuzes niet",
+  "no_such_font": "Dat lettertype bestaat niet"
 }

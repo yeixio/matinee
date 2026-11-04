@@ -43,6 +43,14 @@ No subtitles in your language? Once an admin sets up subtitle search, **Find sub
 <!-- /since -->
 
 <!-- since: v0.3.0 -->
+### Styled subtitles (ASS/SSA)
+
+Anime and fan-subtitled releases often come with ASS or SSA subtitles: signs placed over the picture, colors, karaoke, and fonts carried inside the MKV. The web player draws these the way they were made, with the file's own fonts, while the video still plays as it is. Your size and color choices below don't change them, since their look is part of the release. A browser that can't draw them shows the words as plain subtitles instead.
+
+In the [phone and TV apps](/docs/apps/phone-and-tv/), the subtitles menu lists a styled copy of these tracks, marked **Converts video**: the server draws the styling into the picture as it streams.
+<!-- /since -->
+
+<!-- since: v0.3.0 -->
 ### When subtitles come on
 
 Under **Settings → You → Subtitles** you choose when subtitles show, and Matinee keeps the choice on your server, so it follows you to every browser and app:

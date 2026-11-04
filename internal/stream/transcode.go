@@ -156,6 +156,16 @@ type Request struct {
 	// AudioDelayMs moves the sound against the picture, for lip sync: later
 	// when positive, earlier when negative (see AudioDelayFilter).
 	AudioDelayMs int
+	// Styled draws ASS/SSA subtitles with their styling into the video,
+	// for players that can't draw them: the track's file (the video itself
+	// for an embedded one) and its subtitle stream there.
+	Styled *StyledSub
+}
+
+// StyledSub is an ASS/SSA track to draw with libass.
+type StyledSub struct {
+	Path   string
+	Stream int
 }
 
 // MaxAudioDelayMs is how far the sound can be moved either way.
@@ -194,7 +204,12 @@ func (t *Transcoder) StartFor(ctx context.Context, userID int64, it store.Item, 
 		accel = t.HW.Active()
 	}
 	video := hwaccel.Video{Codec: it.VideoCodec, BurnSub: burnSub, MaxWidth: maxWidth, KeyframeSeconds: segmentSeconds}
-	copyVideo, why := videoPlan(it, req.Picture, burnSub, steps, req.Plays)
+	drawn := burnSub
+	if req.Styled != nil && it.VideoCodec != "" {
+		video.BurnSub, drawn = -1, max(burnSub, 0)
+		video.Styled = StyledFilter(req.Styled.Path, req.Styled.Stream, startSec)
+	}
+	copyVideo, why := videoPlan(it, req.Picture, drawn, steps, req.Plays)
 	if !copyVideo && it.VideoCodec != "" && req.Picture.HDR != "" {
 		video.ToneMap, video.ToneMapInput = ToneMap(req.Picture, req.ToneMap, t.ToneTools())
 	}
@@ -350,7 +365,7 @@ func (t *Transcoder) start(ctx context.Context, userID int64, it store.Item, sta
 		return "", fmt.Errorf("start ffmpeg: %w", err)
 	}
 	s := &session{id: id, userID: userID, itemID: it.ID, dir: dir, cmd: cmd, done: make(chan struct{}), lastSeen: time.Now(),
-		started: time.Now(), startSec: startSec, mode: mode, copyVideo: copyVideo, why: why, toneMapped: video.ToneMap != "", audioOnly: it.VideoCodec == "", burnSub: video.BurnSub >= 0}
+		started: time.Now(), startSec: startSec, mode: mode, copyVideo: copyVideo, why: why, toneMapped: video.ToneMap != "", audioOnly: it.VideoCodec == "", burnSub: video.BurnSub >= 0 || video.Styled != ""}
 	var kind hwaccel.Kind
 	if mode != hwaccel.CPU {
 		kind = accel.Kind

@@ -362,6 +362,8 @@ func (s *Server) routes() []route {
 		{"GET /items/{id}/playback-why", reader, s.playbackWhy},
 		{"GET /speedtest", reader, s.speedTest},
 		{"GET /items/{id}/subtitles/{track}", reader, s.subtitleFile},
+		{"GET /items/{id}/fonts", reader, s.itemFonts},
+		{"GET /items/{id}/fonts/{font}", reader, s.itemFont},
 		{"GET /items/{id}/subtitles/search", reader, grownUps(s.searchSubtitles)},
 		{"POST /items/{id}/subtitles", reader, grownUps(s.addFoundSubtitle)},
 		{"DELETE /items/{id}/subtitles/{track}", reader, grownUps(s.removeFoundSubtitle)},
@@ -1517,15 +1519,30 @@ func (s *Server) startHLS(w http.ResponseWriter, r *http.Request) {
 	}
 	start, _ := strconv.ParseFloat(r.URL.Query().Get("start"), 64)
 	burn := -1
+	var styled *stream.StyledSub
 	if sub := r.URL.Query().Get("subtitle"); sub != "" {
 		t, ok := subtitle.Find(s.subtitleTracks(r.Context(), it), sub)
 		if !ok {
 			writeError(w, http.StatusBadRequest, "no such subtitle track")
 			return
 		}
-		// Text subtitles are drawn by the player; only pictures need burning in.
-		if t.BurnIn {
+		// Text subtitles are drawn by the player; only pictures need burning
+		// in, and ASS/SSA when the player asks for their styling drawn in
+		// (styled=1) because it can't draw it itself.
+		switch {
+		case t.BurnIn:
 			burn = t.Stream
+		case t.Styled && r.URL.Query().Get("styled") == "1":
+			if t.Found {
+				if err := s.ensureFoundFile(r.Context(), it, t); err != nil {
+					s.serverError(w, err)
+					return
+				}
+			}
+			styled = &stream.StyledSub{Path: it.Path, Stream: t.Stream}
+			if t.External {
+				styled = &stream.StyledSub{Path: t.Path, Stream: -1}
+			}
 		}
 	}
 	// audio picks one of the file's audio streams (its index among them, as
@@ -1551,7 +1568,7 @@ func (s *Server) startHLS(w http.ResponseWriter, r *http.Request) {
 	}
 	// video and hdr say what the player decodes and its screen shows, so
 	// a picture it can take (HEVC or AV1, 4K, HDR) is repackaged as it is.
-	req := stream.Request{BurnSub: burn, Audio: audio, Plays: stream.ParsePlays(r.URL.Query().Get("video"), r.URL.Query().Get("hdr"))}
+	req := stream.Request{BurnSub: burn, Styled: styled, Audio: audio, Plays: stream.ParsePlays(r.URL.Query().Get("video"), r.URL.Query().Get("hdr"))}
 	// audioDelay moves the sound against the picture, in milliseconds, for lip sync.
 	if d := r.URL.Query().Get("audioDelay"); d != "" {
 		ms, err := strconv.Atoi(d)
@@ -1618,7 +1635,8 @@ func (s *Server) subtitleFile(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	tracks := s.subtitleTracks(r.Context(), it)
-	t, ok := subtitle.Find(tracks, strings.TrimSuffix(r.PathValue("track"), ".vtt"))
+	id, styled := strings.CutSuffix(r.PathValue("track"), ".ass")
+	t, ok := subtitle.Find(tracks, strings.TrimSuffix(id, ".vtt"))
 	if !ok {
 		writeError(w, http.StatusNotFound, "no such subtitle track")
 		return
@@ -1629,7 +1647,48 @@ func (s *Server) subtitleFile(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	}
+	if styled {
+		// The original ASS/SSA, for players that draw its styling themselves.
+		s.Subtitles.ServeASS(w, r, it.Path, t)
+		return
+	}
 	s.Subtitles.Serve(w, r, it.Path, t, tracks)
+}
+
+// itemFonts lists the fonts attached to a video, which its ASS subtitles use.
+func (s *Server) itemFonts(w http.ResponseWriter, r *http.Request) {
+	it, ok := s.loadItem(w, r)
+	if !ok {
+		return
+	}
+	if !it.Playable || it.VideoCodec == "" {
+		writeError(w, http.StatusBadRequest, "not a video")
+		return
+	}
+	fonts, err := s.Subtitles.Fonts(r.Context(), it.Path)
+	if err != nil {
+		s.Log.Warn("list fonts", "item", it.ID, "err", err)
+		fonts = []subtitle.Font{}
+	}
+	writeJSON(w, http.StatusOK, fonts)
+}
+
+func (s *Server) itemFont(w http.ResponseWriter, r *http.Request) {
+	it, ok := s.loadItem(w, r)
+	if !ok {
+		return
+	}
+	n, err := strconv.Atoi(r.PathValue("font"))
+	if !it.Playable || it.VideoCodec == "" || err != nil {
+		writeError(w, http.StatusNotFound, "no such font")
+		return
+	}
+	fonts, err := s.Subtitles.Fonts(r.Context(), it.Path)
+	if err != nil || n < 0 || n >= len(fonts) {
+		writeError(w, http.StatusNotFound, "no such font")
+		return
+	}
+	s.Subtitles.ServeFont(w, r, it.Path, fonts[n])
 }
 
 func (s *Server) hlsFile(w http.ResponseWriter, r *http.Request) {

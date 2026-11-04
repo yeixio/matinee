@@ -31,6 +31,10 @@ type Track struct {
 	// BurnIn marks picture-based subtitles (PGS, VobSub, DVB), which browsers
 	// can't render: the server draws them into the video during a transcode.
 	BurnIn bool `json:"burnIn,omitempty"`
+	// Styled marks ASS/SSA tracks, whose positions, fonts and effects a
+	// player can draw from the original (GET …/subtitles/{id}.ass, with the
+	// file's fonts) or the server can draw into a transcode.
+	Styled bool `json:"styled,omitempty"`
 	// Found marks subtitles someone found online for the video (see
 	// OpenSubtitles); Removable says the person asking may remove them.
 	Found     bool `json:"found,omitempty"`
@@ -66,6 +70,7 @@ func List(videoPath string, embedded []probe.Subtitle) []Track {
 		}
 		switch {
 		case textCodecs[s.Codec]:
+			t.Styled = s.Codec == "ass" || s.Codec == "ssa"
 		case imageCodecs[s.Codec]:
 			t.BurnIn = true
 		default:
@@ -105,7 +110,7 @@ func Sidecars(videoPath string) []Track {
 			continue // "Movie 2.srt" belongs to "Movie 2.mkv", not "Movie.mkv"
 		}
 		middle = strings.TrimPrefix(middle, ".")
-		t := Track{Codec: codec, External: true, Path: filepath.Join(dir, name)}
+		t := Track{Codec: codec, External: true, Path: filepath.Join(dir, name), Styled: codec == "ass" || codec == "ssa"}
 		sum := sha1.Sum([]byte(name))
 		t.ID = "x" + hex.EncodeToString(sum[:6])
 		var langName string

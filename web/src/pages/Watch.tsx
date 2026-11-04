@@ -11,6 +11,7 @@ import i18n from '../i18n'
 import { canDirectPlay } from '../player/direct'
 import { currentPlays, playsQuery, repackages } from '../player/plays'
 import { savedPreference, savePreference, SubtitleMenu, SubtitleOverlay } from '../player/Subtitles'
+import { useStyledSubtitles } from '../player/StyledSubtitles'
 import { afterPick, audioLanguageOf, fromOldChoice, pickSubtitles, saveSubtitleTiming, subtitleTiming, type SubtitlePrefs } from '../player/subtitlePrefs'
 import { UpNextCard, type UpNextMode } from '../player/UpNext'
 import { COUNTDOWN_SECONDS, stillWatching, upNextAt } from '../player/autoplay'
@@ -126,6 +127,8 @@ function Player({ id }: { id: number }) {
   const wrap = useRef<HTMLDivElement>(null)
   // HLS sessions start at an offset, so the video's clock is relative to it.
   const offset = useRef(0)
+  // The same, for what draws on the video's clock (styled subtitles).
+  const [clockOffset, setClockOffset] = useState(0)
   const [mode, setMode] = useState<'direct' | 'hls'>()
   const [time, setTime] = useState(0)
   const [paused, setPaused] = useState(true)
@@ -265,6 +268,7 @@ function Player({ id }: { id: number }) {
         const { url } = await api.startHls(item.id, Math.floor(at), burn, repack ? 'original' : qualityNow.current, playsQuery(plays), delayNow.current)
         if (seq !== hlsSeq.current) return
         offset.current = Math.floor(at)
+        setClockOffset(Math.floor(at))
         // hls.js is only downloaded when a file needs converting.
         const { default: Hls } = await import('hls.js')
         if (seq !== hlsSeq.current) return
@@ -311,6 +315,7 @@ function Player({ id }: { id: number }) {
       rebuffers.current.reset()
       setMode('direct')
       offset.current = 0
+      setClockOffset(0)
       el.src = fileUrl(item.id)
       el.currentTime = at
       el.play().catch(() => setPaused(true))
@@ -405,6 +410,11 @@ function Player({ id }: { id: number }) {
       current = false
     }
   }, [item, sub])
+
+  // ASS/SSA is drawn with its styling when the browser can; otherwise the
+  // words show plainly, like any other text subtitles.
+  const styledOn = item && sub?.styled && !sub.burnIn && !error ? { itemId: item.id, trackId: sub.id } : undefined
+  const styled = useStyledSubtitles(video.current, styledOn, clockOffset - subTiming)
 
   // Subtitles found online are added to the video: show them right away.
   const foundSub = (t: SubtitleTrack) => {
@@ -1015,7 +1025,7 @@ function Player({ id }: { id: number }) {
         onError={() => recoverRef.current?.(position(), mode === 'direct' ? 'direct' : 'transcode')}
       />
 
-      {sub && !sub.burnIn && !error && <SubtitleOverlay cues={cues} position={position} lifted={chrome} prefs={subPrefs} timing={subTiming} />}
+      {sub && !sub.burnIn && !error && (!sub.styled || styled.failed) && <SubtitleOverlay cues={cues} position={position} lifted={chrome} prefs={subPrefs} timing={subTiming} />}
 
       {card && !error && (upNext?.next ?? upNext?.similar) && (
         <UpNextCard

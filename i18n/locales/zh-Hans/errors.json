@@ -255,5 +255,6 @@
   "no_such_backup": "没有这个备份",
   "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "此服务器的数据库是 PostgreSQL;请用 pg_dump 备份",
   "audiodelay_is_milliseconds_between_2000_and_2000": "音频延迟以毫秒为单位，范围为 -2000 到 2000。",
-  "subtitle_choices_arent_ones_the_apps_know": "应用无法识别这些字幕选项"
+  "subtitle_choices_arent_ones_the_apps_know": "应用无法识别这些字幕选项",
+  "no_such_font": "没有这个字体"
 }
