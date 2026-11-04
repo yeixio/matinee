@@ -100,6 +100,8 @@ type Server struct {
 	Connections *netstate.Tracker
 	// OnTMDBKey runs after an admin changes the TMDB key.
 	OnTMDBKey func()
+	// OnArr runs after an admin connects or disconnects Radarr or Sonarr.
+	OnArr func()
 	// ThemeDir holds the admin's own theme files (see themes.go); empty means
 	// only the built-in themes.
 	ThemeDir string

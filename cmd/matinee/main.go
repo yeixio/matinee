@@ -156,9 +156,12 @@ func run() error {
 	}
 	tmdb := metadata.NewTMDB(tmdbKey)
 	tmdb.Region = country
-	fetcher.Providers = append(fetcher.Providers, tmdb)
+	// Without a TMDB key, movies and shows get their artwork through Radarr
+	// and Sonarr (or Box Office), if they're connected.
+	arrMeta := &metadata.Arr{Store: db, TMDB: tmdb}
+	fetcher.Providers = append(fetcher.Providers, tmdb, arrMeta)
 	if tmdbKey == "" {
-		log.Info("no TMDB key set; movies and TV use local artwork only (add one in Settings or set MATINEE_TMDB_KEY for posters and descriptions)")
+		log.Info("no TMDB key set; movies and TV use local artwork, or Radarr's and Sonarr's once connected (add a key in Settings or set MATINEE_TMDB_KEY for full details)")
 	}
 	if cfg.Wikidata {
 		fetcher.Awards = metadata.NewWikidata(version.Version)
@@ -323,6 +326,19 @@ func run() error {
 	}
 	// A new key fills in what the old one couldn't: titles never looked up
 	// count as waiting again, and a scan of every library looks them up.
+	// A new Radarr or Sonarr connection can look up what TMDB couldn't,
+	// without a key.
+	apiServer.OnArr = func() {
+		arrMeta.Forget()
+		db.SetMetadataKinds(fetcher.Kinds()...)
+		libs, err := db.Libraries(ctx)
+		if err != nil {
+			return
+		}
+		for _, lib := range libs {
+			fetcher.FetchLibrary(ctx, lib)
+		}
+	}
 	apiServer.OnTMDBKey = func() {
 		db.SetMetadataKinds(fetcher.Kinds()...)
 		scanner.ScanAll(ctx)

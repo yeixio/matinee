@@ -51,6 +51,9 @@ func (a App) Name() string {
 	return "Sonarr"
 }
 
+// SettingKey is the setting that holds an app's Config, as JSON.
+func SettingKey(app App) string { return "arr_" + string(app) }
+
 // Config is how Matinee reaches one app, set by an admin. The API key stays
 // on the server.
 type Config struct {
@@ -273,16 +276,20 @@ func (c *Client) RootFolders(ctx context.Context) ([]RootFolder, error) {
 
 // Title is a movie (Radarr) or show (Sonarr).
 type Title struct {
-	ID               int    `json:"-"` // the app's own id; 0 when it hasn't added the title
-	TMDBID           int    `json:"tmdbId,omitempty"`
-	TVDBID           int    `json:"tvdbId,omitempty"`
-	Title            string `json:"title"`
-	Year             int    `json:"year,omitempty"`
-	Overview         string `json:"overview,omitempty"`
-	Poster           string `json:"poster,omitempty"`
-	QualityProfileID int    `json:"-"`
-	HasFile          bool   `json:"-"` // a movie's file is there
-	FileID           int    `json:"-"`
+	ID       int    `json:"-"` // the app's own id; 0 when it hasn't added the title
+	TMDBID   int    `json:"tmdbId,omitempty"`
+	TVDBID   int    `json:"tvdbId,omitempty"`
+	Title    string `json:"title"`
+	Year     int    `json:"year,omitempty"`
+	Overview string `json:"overview,omitempty"`
+	Poster   string `json:"poster,omitempty"`
+	Backdrop string `json:"backdrop,omitempty"`
+	// Rating is out of 10; Genres are in English.
+	Rating           float64  `json:"-"`
+	Genres           []string `json:"-"`
+	QualityProfileID int      `json:"-"`
+	HasFile          bool     `json:"-"` // a movie's file is there
+	FileID           int      `json:"-"`
 }
 
 type image struct {
@@ -292,15 +299,17 @@ type image struct {
 }
 
 type apiTitle struct {
-	ID               int     `json:"id"`
-	TMDBID           int     `json:"tmdbId"`
-	TVDBID           int     `json:"tvdbId"`
-	Title            string  `json:"title"`
-	Year             int     `json:"year"`
-	Overview         string  `json:"overview"`
-	Images           []image `json:"images"`
-	QualityProfileID int     `json:"qualityProfileId"`
-	HasFile          bool    `json:"hasFile"`
+	ID               int      `json:"id"`
+	TMDBID           int      `json:"tmdbId"`
+	TVDBID           int      `json:"tvdbId"`
+	Title            string   `json:"title"`
+	Year             int      `json:"year"`
+	Overview         string   `json:"overview"`
+	Images           []image  `json:"images"`
+	Genres           []string `json:"genres"`
+	Ratings          ratings  `json:"ratings"`
+	QualityProfileID int      `json:"qualityProfileId"`
+	HasFile          bool     `json:"hasFile"`
 	MovieFile        *struct {
 		ID int `json:"id"`
 	} `json:"movieFile"`
@@ -309,7 +318,8 @@ type apiTitle struct {
 func (t apiTitle) title() Title {
 	out := Title{
 		ID: t.ID, TMDBID: t.TMDBID, TVDBID: t.TVDBID, Title: t.Title, Year: t.Year, Overview: t.Overview,
-		Poster: poster(t.Images), QualityProfileID: t.QualityProfileID, HasFile: t.HasFile,
+		Poster: picture(t.Images, "poster"), Backdrop: picture(t.Images, "fanart"), Rating: t.Ratings.value(),
+		Genres: t.Genres, QualityProfileID: t.QualityProfileID, HasFile: t.HasFile,
 	}
 	if t.MovieFile != nil {
 		out.FileID = t.MovieFile.ID
@@ -317,11 +327,39 @@ func (t apiTitle) title() Title {
 	return out
 }
 
-// poster is a title's poster on the internet. The app's own copy would need
-// the API key to fetch.
-func poster(images []image) string {
+// ratings are a title's ratings: one score in Sonarr and older Radarr,
+// one per site in current Radarr.
+type ratings struct {
+	Value float64 `json:"value"`
+	TMDB  struct {
+		Value float64 `json:"value"`
+	} `json:"tmdb"`
+	IMDb struct {
+		Value float64 `json:"value"`
+	} `json:"imdb"`
+}
+
+func (r ratings) value() float64 {
+	switch {
+	case r.TMDB.Value > 0:
+		return r.TMDB.Value
+	case r.Value > 0:
+		return r.Value
+	}
+	return r.IMDb.Value
+}
+
+// picture is a title's poster ("poster") or backdrop ("fanart") on the
+// internet, over https. The app's own copy would need the API key to fetch.
+func picture(images []image, kind string) string {
 	for _, im := range images {
-		if im.CoverType == "poster" && strings.HasPrefix(im.RemoteURL, "https://") {
+		if im.CoverType != kind {
+			continue
+		}
+		if rest, ok := strings.CutPrefix(im.RemoteURL, "http://"); ok {
+			return "https://" + rest
+		}
+		if strings.HasPrefix(im.RemoteURL, "https://") {
 			return im.RemoteURL
 		}
 	}
@@ -452,18 +490,42 @@ func (c *Client) Find(ctx context.Context, tmdbID int, title string, year int) (
 	if err := c.do(ctx, "GET", c.kindPath(), q, nil, &list); err != nil {
 		return Title{}, err
 	}
+	titles := make([]Title, 0, len(list))
 	for _, t := range list {
 		if tmdbID > 0 && t.TMDBID == tmdbID {
 			return t.title(), nil
 		}
+		titles = append(titles, t.title())
 	}
+	if t, ok := Match(titles, title, year); ok {
+		return t, nil
+	}
+	return Title{}, ErrNotFound
+}
+
+// Library lists every title the app has.
+func (c *Client) Library(ctx context.Context) ([]Title, error) {
+	var list []apiTitle
+	if err := c.do(ctx, "GET", c.kindPath(), nil, nil, &list); err != nil {
+		return nil, err
+	}
+	out := make([]Title, 0, len(list))
+	for _, t := range list {
+		out = append(out, t.title())
+	}
+	return out, nil
+}
+
+// Match finds the title in list with this title, ignoring case and
+// punctuation, and a year at most one off (when both have one).
+func Match(list []Title, title string, year int) (Title, bool) {
 	key := matchKey(title)
 	for _, t := range list {
 		if matchKey(t.Title) == key && (year == 0 || t.Year == 0 || abs(t.Year-year) <= 1) {
-			return t.title(), nil
+			return t, true
 		}
 	}
-	return Title{}, ErrNotFound
+	return Title{}, false
 }
 
 func matchKey(s string) string {
