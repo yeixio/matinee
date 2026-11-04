@@ -747,7 +747,9 @@
       "raised": "Daha yukarıda"
     },
     "background": "Yazının arkasındaki kutu",
-    "sample": "Altyazılar böyle görünecek."
+    "sample": "Altyazılar böyle görünecek.",
+    "look": "Altyazı stili",
+    "lookHint": "Değiştirmek için bir satıra basın. Seçimlerin her uygulamada geçerli."
   },
   "subtitleTiming": {
     "title": "Zamanlama",

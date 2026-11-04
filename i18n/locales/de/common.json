@@ -747,7 +747,9 @@
       "raised": "Weiter oben"
     },
     "background": "Kasten hinter dem Text",
-    "sample": "So sehen Untertitel aus."
+    "sample": "So sehen Untertitel aus.",
+    "look": "Untertitel-Stil",
+    "lookHint": "Drücke eine Zeile, um sie zu ändern. Deine Einstellungen gelten in jeder App."
   },
   "subtitleTiming": {
     "title": "Timing",

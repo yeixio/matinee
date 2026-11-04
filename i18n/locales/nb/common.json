@@ -747,7 +747,9 @@
       "raised": "Høyere opp"
     },
     "background": "Boks bak teksten",
-    "sample": "Slik vil undertekstene se ut."
+    "sample": "Slik vil undertekstene se ut.",
+    "look": "Undertekststil",
+    "lookHint": "Trykk på en linje for å endre den. Valgene dine følger deg til alle apper."
   },
   "subtitleTiming": {
     "title": "Timing",

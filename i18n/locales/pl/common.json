@@ -811,7 +811,9 @@
       "raised": "Wyżej"
     },
     "background": "Tło za tekstem",
-    "sample": "Tak będą wyglądać napisy."
+    "sample": "Tak będą wyglądać napisy.",
+    "look": "Styl napisów",
+    "lookHint": "Naciśnij wiersz, aby go zmienić. Twoje wybory obowiązują w każdej aplikacji."
   },
   "subtitleTiming": {
     "title": "Synchronizacja",

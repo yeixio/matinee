@@ -779,7 +779,9 @@
       "raised": "Mais acima"
     },
     "background": "Caixa atrás do texto",
-    "sample": "É assim que as legendas vão ficar."
+    "sample": "É assim que as legendas vão ficar.",
+    "look": "Estilo das legendas",
+    "lookHint": "Toque em uma linha para mudá-la. Suas escolhas valem em todos os apps."
   },
   "subtitleTiming": {
     "title": "Sincronia",

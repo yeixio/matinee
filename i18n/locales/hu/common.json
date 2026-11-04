@@ -747,7 +747,9 @@
       "raised": "Feljebb"
     },
     "background": "Doboz a szöveg mögött",
-    "sample": "Így fognak kinézni a feliratok."
+    "sample": "Így fognak kinézni a feliratok.",
+    "look": "Feliratstílus",
+    "lookHint": "Nyomj meg egy sort a módosításához. A beállításaid minden alkalmazásban érvényesek."
   },
   "subtitleTiming": {
     "title": "Időzítés",

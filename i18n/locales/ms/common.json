@@ -715,7 +715,9 @@
       "raised": "Lebih tinggi"
     },
     "background": "Kotak di belakang teks",
-    "sample": "Beginilah rupa sari kata."
+    "sample": "Beginilah rupa sari kata.",
+    "look": "Gaya sari kata",
+    "lookHint": "Tekan baris untuk mengubahnya. Pilihan anda digunakan dalam setiap aplikasi."
   },
   "subtitleTiming": {
     "title": "Pemasaan",

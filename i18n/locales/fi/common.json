@@ -747,7 +747,9 @@
       "raised": "Ylempänä"
     },
     "background": "Laatikko tekstin takana",
-    "sample": "Tältä tekstitykset näyttävät."
+    "sample": "Tältä tekstitykset näyttävät.",
+    "look": "Tekstitysten tyyli",
+    "lookHint": "Muuta riviä painamalla sitä. Valintasi seuraavat sinua kaikkiin sovelluksiin."
   },
   "subtitleTiming": {
     "title": "Ajoitus",

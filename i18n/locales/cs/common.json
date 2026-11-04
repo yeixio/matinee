@@ -811,7 +811,9 @@
       "raised": "Výš"
     },
     "background": "Pozadí za textem",
-    "sample": "Takto budou titulky vypadat."
+    "sample": "Takto budou titulky vypadat.",
+    "look": "Styl titulků",
+    "lookHint": "Stisknutím řádku ho změníte. Vaše volby platí ve všech aplikacích."
   },
   "subtitleTiming": {
     "title": "Načasování",

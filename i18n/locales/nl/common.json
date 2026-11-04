@@ -747,7 +747,9 @@
       "raised": "Hoger"
     },
     "background": "Vlak achter de tekst",
-    "sample": "Zo zien ondertitels eruit."
+    "sample": "Zo zien ondertitels eruit.",
+    "look": "Stijl van ondertitels",
+    "lookHint": "Druk op een regel om die te wijzigen. Je keuzes gelden in elke app."
   },
   "subtitleTiming": {
     "title": "Timing",

@@ -715,7 +715,9 @@
       "raised": "偏上"
     },
     "background": "文字背景",
-    "sample": "字幕将显示成这样。"
+    "sample": "字幕将显示成这样。",
+    "look": "字幕样式",
+    "lookHint": "按一行即可更改。你的选择会同步到所有应用。"
   },
   "subtitleTiming": {
     "title": "时间",

@@ -779,7 +779,9 @@
       "raised": "Plus haut"
     },
     "background": "Fond derrière le texte",
-    "sample": "Voici à quoi ressembleront les sous-titres."
+    "sample": "Voici à quoi ressembleront les sous-titres.",
+    "look": "Style des sous-titres",
+    "lookHint": "Appuyez sur une ligne pour la modifier. Vos choix vous suivent dans toutes les applis."
   },
   "subtitleTiming": {
     "title": "Synchronisation",

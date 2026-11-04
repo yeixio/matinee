@@ -747,7 +747,9 @@
       "raised": "Högre upp"
     },
     "background": "Ruta bakom texten",
-    "sample": "Så här ser undertexterna ut."
+    "sample": "Så här ser undertexterna ut.",
+    "look": "Undertextstil",
+    "lookHint": "Tryck på en rad för att ändra den. Dina val följer med till alla appar."
   },
   "subtitleTiming": {
     "title": "Timing",

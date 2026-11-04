@@ -747,7 +747,9 @@
       "raised": "Higher up"
     },
     "background": "Box behind the words",
-    "sample": "This is how subtitles will look."
+    "sample": "This is how subtitles will look.",
+    "look": "Subtitle style",
+    "lookHint": "Press a row to change it. Your choices follow you to every app."
   },
   "subtitleTiming": {
     "title": "Timing",

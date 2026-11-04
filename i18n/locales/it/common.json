@@ -779,7 +779,9 @@
       "raised": "Più in alto"
     },
     "background": "Riquadro dietro il testo",
-    "sample": "Ecco come appariranno i sottotitoli."
+    "sample": "Ecco come appariranno i sottotitoli.",
+    "look": "Stile dei sottotitoli",
+    "lookHint": "Premi una riga per cambiarla. Le tue scelte ti seguono in ogni app."
   },
   "subtitleTiming": {
     "title": "Sincronia",
