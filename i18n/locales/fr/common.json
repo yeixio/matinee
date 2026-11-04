@@ -789,5 +789,24 @@
     "earlier": "Afficher les sous-titres plus tôt",
     "later": "Afficher les sous-titres plus tard",
     "reset": "Revenir à la synchronisation du fichier"
+  },
+  "extras": {
+    "title": "Bonus",
+    "commentary": "Commentaire",
+    "playWith": "Lire {{title}} avec {{track}}",
+    "wontPlay": "Ce bonus ne peut pas être lu.",
+    "kinds": {
+      "trailer": "Bande-annonce",
+      "behindTheScenes": "Coulisses",
+      "deleted": "Scène coupée",
+      "featurette": "Featurette",
+      "interview": "Interview",
+      "scene": "Scène",
+      "short": "Court métrage",
+      "other": "Bonus"
+    }
+  },
+  "audioTrack": {
+    "title": "Audio"
   }
 }

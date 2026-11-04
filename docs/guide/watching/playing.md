@@ -85,6 +85,12 @@ While there's a delay, the server sends the sound moved (only the sound is conve
 From version 1.0.27 the phone and TV apps have **Audio delay** in the player too (the timer button on a phone, in the player's menu on a TV). Press **Sound earlier** or **Sound later** until the sound matches; each phone or TV keeps its own, and **Just for this title** works the same way.
 <!-- /since -->
 
+<!-- since: v0.3.0 -->
+## Audio tracks
+
+When a file has more than one audio track, such as another language or a director's commentary, the **Audio** button in the player lists them all. Picking another track plays it through the server from the same spot. A title page's [Extras](/docs/watching/extras/#commentaries) row starts a movie with its commentary straight away.
+<!-- /since -->
+
 ## Picking up where you left off
 
 Matinee saves your place as you watch, for you alone (or your [profile](/docs/household/profiles/)). Stop on the TV and carry on in the browser, or the other way round. A title counts as watched once you're past the credits, or past 92% if Matinee can't tell where the credits start.

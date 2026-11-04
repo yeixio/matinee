@@ -757,5 +757,24 @@
     "earlier": "Vis undertekster tidligere",
     "later": "Vis undertekster senere",
     "reset": "Tilbage til filens timing"
+  },
+  "extras": {
+    "title": "Ekstramateriale",
+    "commentary": "Kommentar",
+    "playWith": "Afspil {{title}} med {{track}}",
+    "wontPlay": "Dette ekstramateriale kan ikke afspilles.",
+    "kinds": {
+      "trailer": "Trailer",
+      "behindTheScenes": "Bag kulisserne",
+      "deleted": "Slettet scene",
+      "featurette": "Featurette",
+      "interview": "Interview",
+      "scene": "Scene",
+      "short": "Kortfilm",
+      "other": "Ekstra"
+    }
+  },
+  "audioTrack": {
+    "title": "Lyd"
   }
 }

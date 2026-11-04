@@ -757,5 +757,24 @@
     "earlier": "Ondertitels eerder tonen",
     "later": "Ondertitels later tonen",
     "reset": "Terug naar de timing van het bestand"
+  },
+  "extras": {
+    "title": "Extra's",
+    "commentary": "Commentaar",
+    "playWith": "{{title}} afspelen met {{track}}",
+    "wontPlay": "Deze extra kan niet worden afgespeeld.",
+    "kinds": {
+      "trailer": "Trailer",
+      "behindTheScenes": "Achter de schermen",
+      "deleted": "Verwijderde scène",
+      "featurette": "Featurette",
+      "interview": "Interview",
+      "scene": "Scène",
+      "short": "Korte film",
+      "other": "Extra"
+    }
+  },
+  "audioTrack": {
+    "title": "Audio"
   }
 }

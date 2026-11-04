@@ -88,28 +88,10 @@ func (s *Server) listTrailers(w http.ResponseWriter, r *http.Request) {
 // localTrailers finds a movie's, show's or season's trailer files. A season
 // without its own borrows its show's.
 func (s *Server) localTrailers(ctx context.Context, it store.Item) []localTrailer {
-	var paths []string
-	switch it.Kind {
-	case "movie":
-		if root := s.libraryRoot(ctx, it.LibraryID, it.Path); root != "" {
-			paths = scan.MovieTrailers(root, it.Path)
-		}
-	case "show", "season":
-		file, err := s.Store.FileUnder(ctx, it.ID)
-		if err != nil {
-			s.Log.Warn("find show folder", "item", it.ID, "err", err)
-		}
-		root := s.libraryRoot(ctx, it.LibraryID, file)
-		if file == "" || root == "" {
-			break
-		}
-		show, season := scan.ShowFolders(root, file)
-		if it.Kind == "season" && season != "" {
-			paths = scan.FolderTrailers(season)
-		}
-		if len(paths) == 0 && show != "" {
-			paths = scan.FolderTrailers(show)
-		}
+	own, show := s.findExtras(ctx, it)
+	paths := scan.Trailers(own)
+	if len(paths) == 0 && it.Kind == "season" {
+		paths = scan.Trailers(show)
 	}
 	out := []localTrailer{}
 	for _, p := range paths {
@@ -139,7 +121,7 @@ func (s *Server) libraryRoot(ctx context.Context, libraryID int64, path string) 
 	return ""
 }
 
-// probeTrailer reads a trailer file, remembering the answer until the file changes.
+// probeTrailer reads a trailer or other extra's file, remembering the answer until the file changes.
 func (s *Server) probeTrailer(ctx context.Context, path string) (probe.Result, error) {
 	info, err := os.Stat(path)
 	if err != nil {

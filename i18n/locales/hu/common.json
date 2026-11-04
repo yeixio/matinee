@@ -757,5 +757,24 @@
     "earlier": "Feliratok korábban",
     "later": "Feliratok később",
     "reset": "Vissza a fájl időzítéséhez"
+  },
+  "extras": {
+    "title": "Extrák",
+    "commentary": "Kommentár",
+    "playWith": "{{title}} lejátszása ezzel: {{track}}",
+    "wontPlay": "Ez az extra nem játszható le.",
+    "kinds": {
+      "trailer": "Előzetes",
+      "behindTheScenes": "A kulisszák mögött",
+      "deleted": "Kivágott jelenet",
+      "featurette": "Featurette",
+      "interview": "Interjú",
+      "scene": "Jelenet",
+      "short": "Rövidfilm",
+      "other": "Extra"
+    }
+  },
+  "audioTrack": {
+    "title": "Hang"
   }
 }

@@ -210,6 +210,21 @@ export type Trailer = {
   url?: string
 }
 
+// A special feature from a file next to the title: behind the scenes, a
+// deleted scene, a featurette and so on. It plays like a trailer file. name
+// is empty when the file has no name of its own, so it's called by its kind.
+export type ExtraKind = 'trailer' | 'behindTheScenes' | 'deleted' | 'featurette' | 'interview' | 'scene' | 'short' | 'other'
+export type Extra = {
+  id: string
+  kind: ExtraKind
+  name: string
+  mimeType?: string
+  container?: string
+  videoCodec?: string
+  audioCodec?: string
+  durationMs?: number
+}
+
 export type ArrApp = 'radarr' | 'sonarr'
 // A Radarr or Sonarr connection. The API key stays on the server.
 export type Integration = { connected: boolean; url: string; hasApiKey: boolean; qualityProfileId: number; rootFolder: string }
@@ -1526,11 +1541,12 @@ export const api = {
   // quality: auto (adaptive), original, or a step's id. The answer says
   // which the server made.
   // plays is the query saying what the browser takes as it is (see player/plays.ts).
-  // audioDelay moves the sound against the picture, in milliseconds.
-  startHls: (id: number, startSec = 0, burnSubtitle?: string, quality?: string, plays = '', audioDelay = 0) =>
+  // audioDelay moves the sound against the picture, in milliseconds, and
+  // audio picks one of the file's audio tracks (its index in mediaInfo).
+  startHls: (id: number, startSec = 0, burnSubtitle?: string, quality?: string, plays = '', audioDelay = 0, audio?: number) =>
     request<{ url: string; startSec: number; quality?: string }>(
       'POST',
-      `/api/v1/items/${id}/hls?start=${startSec}${burnSubtitle ? `&subtitle=${encodeURIComponent(burnSubtitle)}` : ''}${quality ? `&quality=${encodeURIComponent(quality)}` : ''}${plays}${audioDelay ? `&audioDelay=${audioDelay}` : ''}`,
+      `/api/v1/items/${id}/hls?start=${startSec}${burnSubtitle ? `&subtitle=${encodeURIComponent(burnSubtitle)}` : ''}${quality ? `&quality=${encodeURIComponent(quality)}` : ''}${plays}${audioDelay ? `&audioDelay=${audioDelay}` : ''}${audio !== undefined ? `&audio=${audio}` : ''}`,
     ),
   // One stream of an album's songs, joined without gaps, from start
   // seconds into the first; each song's startSec is on the stream's clock.
@@ -1546,6 +1562,9 @@ export const api = {
   trailers: (id: number) => request<Trailer[]>('GET', `/api/v1/items/${id}/trailers`),
   startTrailerHls: (id: number, trailer: string) =>
     request<{ url: string; startSec: number }>('POST', `/api/v1/items/${id}/trailers/${encodeURIComponent(trailer)}/hls`),
+  extras: (id: number) => request<Extra[]>('GET', `/api/v1/items/${id}/extras`),
+  startExtraHls: (id: number, extra: string) =>
+    request<{ url: string; startSec: number }>('POST', `/api/v1/items/${id}/extras/${encodeURIComponent(extra)}/hls`),
   libraryKinds: () => request<LibraryKind[]>('GET', '/api/v1/library-kinds'),
   plugins: () => request<Plugin[]>('GET', '/api/v1/plugins'),
   pluginCatalog: () => request<CatalogPlugin[]>('GET', '/api/v1/plugins/catalog'),
@@ -1584,4 +1603,6 @@ export const fontUrl = (id: number, index: number) => `/api/v1/items/${id}/fonts
 export const opmlUrl = (library: number) => `/api/v1/libraries/${library}/opml`
 export const pluginFileUrl = (plugin: string, path: string) =>
   `/api/v1/plugins/${encodeURIComponent(plugin)}/files/${path.split('/').map(encodeURIComponent).join('/')}`
+export const extraFileUrl = (id: number, extra: string) => `/api/v1/items/${id}/extras/${encodeURIComponent(extra)}/file`
+export const extraImageUrl = (id: number, extra: string) => `/api/v1/items/${id}/extras/${encodeURIComponent(extra)}/image`
 export const trailerFileUrl = (id: number, trailer: string) => `/api/v1/items/${id}/trailers/${encodeURIComponent(trailer)}/file`

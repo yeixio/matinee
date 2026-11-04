@@ -757,5 +757,24 @@
     "earlier": "Show subtitles earlier",
     "later": "Show subtitles later",
     "reset": "Back to the file's timing"
+  },
+  "extras": {
+    "title": "Extras",
+    "commentary": "Commentary",
+    "playWith": "Play {{title}} with {{track}}",
+    "wontPlay": "This extra won't play.",
+    "kinds": {
+      "trailer": "Trailer",
+      "behindTheScenes": "Behind the scenes",
+      "deleted": "Deleted scene",
+      "featurette": "Featurette",
+      "interview": "Interview",
+      "scene": "Scene",
+      "short": "Short",
+      "other": "Extra"
+    }
+  },
+  "audioTrack": {
+    "title": "Audio"
   }
 }

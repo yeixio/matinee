@@ -757,5 +757,24 @@
     "earlier": "سب ٹائٹل پہلے دکھائیں",
     "later": "سب ٹائٹل بعد میں دکھائیں",
     "reset": "فائل کے وقت پر واپس جائیں"
+  },
+  "extras": {
+    "title": "اضافی مواد",
+    "commentary": "کمنٹری",
+    "playWith": "{{title}} کو {{track}} کے ساتھ چلائیں",
+    "wontPlay": "یہ اضافی مواد نہیں چل سکتا۔",
+    "kinds": {
+      "trailer": "ٹریلر",
+      "behindTheScenes": "پردے کے پیچھے",
+      "deleted": "حذف شدہ منظر",
+      "featurette": "فیچرٹ",
+      "interview": "انٹرویو",
+      "scene": "منظر",
+      "short": "مختصر فلم",
+      "other": "اضافی"
+    }
+  },
+  "audioTrack": {
+    "title": "آڈیو"
   }
 }

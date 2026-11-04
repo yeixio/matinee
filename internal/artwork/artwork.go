@@ -80,6 +80,14 @@ func (c *Cache) resolve(ctx context.Context, src string) (string, error) {
 			}
 			return os.WriteFile(dst, data, 0o644)
 		})
+	case strings.HasPrefix(src, "frame:"):
+		// frame:<seconds>:<changed>:<video> is a still from a video, such as
+		// an extra; <changed> makes a new one when the file changes.
+		parts := strings.SplitN(strings.TrimPrefix(src, "frame:"), ":", 3)
+		if len(parts) != 3 {
+			return "", fmt.Errorf("bad frame source %q", src)
+		}
+		return c.cached(src, ".jpg", func(dst string) error { return c.frame(ctx, parts[2], parts[0], dst) })
 	case strings.HasPrefix(src, "embedded:"):
 		audio := strings.TrimPrefix(src, "embedded:")
 		return c.cached(src, ".jpg", func(dst string) error { return c.extract(ctx, audio, dst) })
@@ -146,6 +154,21 @@ func (c *Cache) download(ctx context.Context, url, dst string) error {
 	defer f.Close()
 	_, err = io.Copy(f, io.LimitReader(res.Body, 20<<20))
 	return err
+}
+
+// frame takes one picture from a video, at sec seconds in, 640 wide.
+func (c *Cache) frame(ctx context.Context, video, sec, dst string) error {
+	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	out, err := exec.CommandContext(ctx, c.FFmpeg, "-v", "error", "-y", "-ss", sec, "-i", video,
+		"-an", "-sn", "-map", "0:v:0", "-frames:v", "1", "-vf", "scale=640:-2", "-q:v", "3", "-f", "image2", dst).CombinedOutput()
+	if err != nil {
+		return fmt.Errorf("video still: %w: %s", err, out)
+	}
+	if info, err := os.Stat(dst); err != nil || info.Size() == 0 {
+		return fmt.Errorf("video still: no picture at %ss", sec)
+	}
+	return nil
 }
 
 func (c *Cache) extract(ctx context.Context, audio, dst string) error {
