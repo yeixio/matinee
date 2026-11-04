@@ -59,6 +59,9 @@ func TestWorksWithNoInternet(t *testing.T) {
 	net.down.Store(true)
 	tracker := netstate.New()
 	tracker.FirstWait = 300 * time.Millisecond
+	// Under the race detector the outage lasts long enough for the wait to
+	// double past the time the test gives the details to come back.
+	tracker.MaxWait = time.Second
 	client := &http.Client{Transport: tracker.Wrap(net), Timeout: 2 * time.Second}
 	tm := metadata.NewTMDB("key")
 	tm.BaseURL, tm.ImageURL, tm.Client = "https://api.themoviedb.org/3", "https://image.tmdb.org/t/p/", client
