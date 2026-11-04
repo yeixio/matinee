@@ -13,7 +13,7 @@ import { chromium } from 'playwright'
 import { cover } from './art.mjs'
 import { capture, desktop, phone, sleep } from './capture.mjs'
 import { onAir, stations } from './catalog.mjs'
-import { feedURL, stationFound } from './fake-podcasts.mjs'
+import { feedURL, guideURL, stationFound } from './fake-podcasts.mjs'
 import { addLibraries, admin, api, origin, overseerrURL, podcastsPort, setUp, startServer } from './server.mjs'
 
 const { media, stop } = await startServer()
@@ -250,6 +250,37 @@ try {
       await sleep(1200)
       await shot(radio, 'radio-playing')
       await radio.context().close()
+    }
+
+    // Live TV: the made-up public channels from three countries with a
+    // guide, one playing, the guide, and adding channels in Settings.
+    if (wanted('live-tv') || wanted('live-guide') || wanted('live-settings')) {
+      const src = await api(token, 'POST', '/live/sources', { name: 'Public channels', iptvOrg: { countries: ['US', 'GB', 'CA'] }, guideUrl: guideURL(podcastsPort) })
+      for (let i = 0; i < 100; i++) {
+        const [s] = (await api(token, 'GET', '/live/sources')).filter((x) => x.id === src.id)
+        if (s.programs > 0) break
+        await sleep(200)
+      }
+      const { channels: list } = await api(token, 'GET', '/live/channels')
+      const page = await open(desktop, token)
+      await page.goto(`${origin}/live?channel=${list[0].id}`)
+      await page.locator('video').waitFor()
+      await page.waitForFunction(() => (document.querySelector('video')?.currentTime ?? 0) > 1, null, { timeout: 30_000 })
+      await sleep(800)
+      await shot(page, 'live-tv')
+      await page.goto(`${origin}/live?view=guide`)
+      await page.getByText('Morning Desk').first().waitFor().catch(() => {})
+      await sleep(1000)
+      await shot(page, 'live-guide')
+      await settings(page, 'live-tv')
+      await page.getByRole('button', { name: 'Add channels' }).click()
+      for (const [label, q, pick] of [['Countries', 'united', 'United Kingdom'], ['Countries', 'can', 'Canada'], ['Categories', 'new', 'News']]) {
+        await page.getByLabel(label, { exact: true }).fill(q)
+        await page.getByRole('button', { name: pick }).click()
+      }
+      await sleep(400)
+      await shot(page, 'live-settings', { target: section(page, 'Live TV') })
+      await page.context().close()
     }
 
     // Playlists: two made from songs across albums, then adding to one.

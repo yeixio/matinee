@@ -642,5 +642,26 @@
       "hiphop": "Hiphop",
       "news": "Nyheter"
     }
+  },
+  "live": {
+    "title": "Direkte-TV",
+    "channels": "Kanaler",
+    "guide": "Programoversikt",
+    "all": "Alle",
+    "find": "Finn en kanal",
+    "noMatch": "Ingen kanaler passer",
+    "none": "Ingen direkte-TV-kanaler ennå",
+    "addSource": "Legg til kanaler i Innstillinger",
+    "askAdmin": "En administrator kan legge til kanaler i Innstillinger.",
+    "cantLoad": "Direkte-TV kunne ikke lastes",
+    "live": "Direkte",
+    "now": "Nå",
+    "earlier": "Tidligere",
+    "later": "Senere",
+    "next": "Deretter kl. {{time}}: {{title}}",
+    "noGuide": "Ingen programoversikt for denne kanalen",
+    "wontPlay": "Denne kanalen sender ikke nå",
+    "wontPlayHint": "Strømmen svarte ikke. Kanaler som stadig feiler, skjules.",
+    "tryAgain": "Prøv igjen"
   }
 }

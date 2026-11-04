@@ -674,5 +674,26 @@
       "hiphop": "Hip-hop",
       "news": "Notícias"
     }
+  },
+  "live": {
+    "title": "TV ao vivo",
+    "channels": "Canais",
+    "guide": "Guia",
+    "all": "Todos",
+    "find": "Procurar um canal",
+    "noMatch": "Nenhum canal corresponde",
+    "none": "Ainda não há canais de TV ao vivo",
+    "addSource": "Adicione canais em Configurações",
+    "askAdmin": "Um administrador pode adicionar canais em Configurações.",
+    "cantLoad": "Não foi possível carregar a TV ao vivo",
+    "live": "Ao vivo",
+    "now": "Agora",
+    "earlier": "Antes",
+    "later": "Depois",
+    "next": "Às {{time}}: {{title}}",
+    "noGuide": "Sem guia para este canal",
+    "wontPlay": "Este canal não está transmitindo agora",
+    "wontPlayHint": "O stream não respondeu. Canais que falham repetidamente são ocultados.",
+    "tryAgain": "Tentar de novo"
   }
 }

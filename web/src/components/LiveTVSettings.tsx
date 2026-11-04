@@ -21,7 +21,7 @@ export function LiveTVSettings() {
   const [adding, setAdding] = useState(false)
   return (
     <section className="space-y-4">
-      <h2 className="text-lg font-semibold">{t('live.title')}</h2>
+      <h2 className="text-lg font-semibold">{t('common:live.title')}</h2>
       <p className="text-sm text-muted">{t('live.settings.intro')}</p>
       {sources.isPending ? (
         <Spinner />
@@ -92,7 +92,7 @@ function SourceRow({ source }: { source: LiveSource }) {
       </div>
       <button onClick={() => setOpen(!open)} className="mt-3 flex items-center gap-1 text-sm text-accent" aria-expanded={open}>
         <ChevronDown className={`size-4 transition-transform ${open ? 'rotate-180' : ''}`} />
-        {t('live.channels')}
+        {t('common:live.channels')}
       </button>
       {open && <SourceChannels id={source.id} />}
     </li>
@@ -114,7 +114,7 @@ function SourceChannels({ id }: { id: string }) {
   if (!data) return <Spinner className="mt-3" />
   return (
     <div className="mt-3 space-y-2">
-      <input value={q} onChange={(e) => setQ(e.target.value)} placeholder={t('live.find')} className={inputClass} />
+      <input value={q} onChange={(e) => setQ(e.target.value)} placeholder={t('common:live.find')} className={inputClass} />
       <ul className="max-h-96 divide-y divide-line/40 overflow-y-auto rounded-lg border border-line/60">
         {shown.slice(0, 300).map((c) => (
           <li key={c.id} className={`flex items-center gap-3 px-3 py-2 ${c.hidden || c.broken ? 'opacity-60' : ''}`}>

@@ -642,5 +642,26 @@
       "hiphop": "Hip hop",
       "news": "Haberler"
     }
+  },
+  "live": {
+    "title": "Canlı TV",
+    "channels": "Kanallar",
+    "guide": "Yayın akışı",
+    "all": "Tümü",
+    "find": "Kanal bul",
+    "noMatch": "Eşleşen kanal yok",
+    "none": "Henüz canlı TV kanalı yok",
+    "addSource": "Ayarlar'dan kanal ekleyin",
+    "askAdmin": "Bir yönetici Ayarlar'dan kanal ekleyebilir.",
+    "cantLoad": "Canlı TV yüklenemedi",
+    "live": "Canlı",
+    "now": "Şimdi",
+    "earlier": "Önce",
+    "later": "Sonra",
+    "next": "Sırada {{time}}: {{title}}",
+    "noGuide": "Bu kanalın yayın akışı yok",
+    "wontPlay": "Bu kanal şu an yayında değil",
+    "wontPlayHint": "Yayını yanıt vermedi. Sürekli başarısız olan kanallar gizlenir.",
+    "tryAgain": "Tekrar dene"
   }
 }

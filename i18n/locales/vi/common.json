@@ -610,5 +610,26 @@
       "hiphop": "Hip hop",
       "news": "Tin tức"
     }
+  },
+  "live": {
+    "title": "Truyền hình trực tiếp",
+    "channels": "Kênh",
+    "guide": "Lịch phát sóng",
+    "all": "Tất cả",
+    "find": "Tìm kênh",
+    "noMatch": "Không có kênh phù hợp",
+    "none": "Chưa có kênh truyền hình trực tiếp",
+    "addSource": "Thêm kênh trong Cài đặt",
+    "askAdmin": "Quản trị viên có thể thêm kênh trong Cài đặt.",
+    "cantLoad": "Không tải được truyền hình trực tiếp",
+    "live": "Trực tiếp",
+    "now": "Bây giờ",
+    "earlier": "Sớm hơn",
+    "later": "Muộn hơn",
+    "next": "Tiếp theo lúc {{time}}: {{title}}",
+    "noGuide": "Kênh này không có lịch phát sóng",
+    "wontPlay": "Kênh này hiện không phát",
+    "wontPlayHint": "Luồng của kênh không phản hồi. Các kênh liên tục lỗi sẽ bị ẩn.",
+    "tryAgain": "Thử lại"
   }
 }

@@ -610,5 +610,26 @@
       "hiphop": "嘻哈",
       "news": "新闻"
     }
+  },
+  "live": {
+    "title": "直播电视",
+    "channels": "频道",
+    "guide": "节目单",
+    "all": "全部",
+    "find": "查找频道",
+    "noMatch": "没有匹配的频道",
+    "none": "还没有直播频道",
+    "addSource": "在设置中添加频道",
+    "askAdmin": "管理员可以在设置中添加频道。",
+    "cantLoad": "无法加载直播电视",
+    "live": "直播",
+    "now": "现在",
+    "earlier": "更早",
+    "later": "稍后",
+    "next": "接下来 {{time}}：{{title}}",
+    "noGuide": "此频道没有节目单",
+    "wontPlay": "此频道现在未在播出",
+    "wontPlayHint": "它的流没有响应。持续失败的频道会被隐藏。",
+    "tryAgain": "重试"
   }
 }

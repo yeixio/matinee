@@ -706,5 +706,26 @@
       "hiphop": "Hip hop",
       "news": "Zprávy"
     }
+  },
+  "live": {
+    "title": "Živé vysílání",
+    "channels": "Kanály",
+    "guide": "Program",
+    "all": "Vše",
+    "find": "Najít kanál",
+    "noMatch": "Žádný kanál neodpovídá",
+    "none": "Zatím žádné kanály živého vysílání",
+    "addSource": "Přidejte kanály v Nastavení",
+    "askAdmin": "Správce může přidat kanály v Nastavení.",
+    "cantLoad": "Živé vysílání se nepodařilo načíst",
+    "live": "Živě",
+    "now": "Teď",
+    "earlier": "Dříve",
+    "later": "Později",
+    "next": "Dále v {{time}}: {{title}}",
+    "noGuide": "Pro tento kanál není program",
+    "wontPlay": "Tento kanál teď nevysílá",
+    "wontPlayHint": "Jeho stream neodpověděl. Kanály, které stále selhávají, se skryjí.",
+    "tryAgain": "Zkusit znovu"
   }
 }

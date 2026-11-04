@@ -53,16 +53,16 @@ export default function LiveTV() {
       </div>
     )
   }
-  if (error) return <EmptyState title={t('live.cantLoad')} />
+  if (error) return <EmptyState title={t('common:live.cantLoad')} />
   if (!data.channels.length) {
     return (
-      <EmptyState title={t('live.none')}>
+      <EmptyState title={t('common:live.none')}>
         {me?.isAdmin ? (
           <Link to="/settings/live-tv" className="text-accent underline">
-            {t('live.addSource')}
+            {t('common:live.addSource')}
           </Link>
         ) : (
-          t('live.askAdmin')
+          t('common:live.askAdmin')
         )}
       </EmptyState>
     )
@@ -70,7 +70,7 @@ export default function LiveTV() {
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-center gap-3">
-        <h1 className="me-auto text-2xl font-bold tracking-tight">{t('live.title')}</h1>
+        <h1 className="me-auto text-2xl font-bold tracking-tight">{t('common:live.title')}</h1>
         <div className="flex rounded-lg bg-text/5 p-1" role="tablist">
           {(['channels', 'guide'] as const).map((v) => (
             <button
@@ -81,7 +81,7 @@ export default function LiveTV() {
               className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm ${view === v ? 'bg-surface text-text shadow' : 'text-muted hover:text-text'}`}
             >
               {v === 'guide' ? <Rows3 className="size-4" /> : <LayoutGrid className="size-4" />}
-              {t(`live.${v}`)}
+              {t(`common:live.${v}`)}
             </button>
           ))}
         </div>
@@ -93,8 +93,8 @@ export default function LiveTV() {
           <input
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            placeholder={t('live.find')}
-            aria-label={t('live.find')}
+            placeholder={t('common:live.find')}
+            aria-label={t('common:live.find')}
             className="h-9 w-56 rounded-full border border-line bg-surface ps-9 pe-3 text-sm focus:border-accent focus:outline-none"
           />
         </label>
@@ -105,13 +105,13 @@ export default function LiveTV() {
               onClick={() => setCategory(c)}
               className={`shrink-0 rounded-full px-3 py-1.5 text-sm ${category === c ? 'bg-accent text-on-accent' : 'bg-text/5 text-muted hover:text-text'}`}
             >
-              {c || t('live.all')}
+              {c || t('common:live.all')}
             </button>
           ))}
         </div>
       </div>
       {!channels.length ? (
-        <EmptyState title={t('live.noMatch')} />
+        <EmptyState title={t('common:live.noMatch')} />
       ) : view === 'guide' ? (
         <Guide channels={channels} playing={playing} onPlay={(id) => set('channel', id)} />
       ) : (
@@ -145,10 +145,10 @@ function ChannelCard({ channel, on, onPlay }: { channel: LiveListing; on: boolea
             <div className="mt-1.5 h-1 overflow-hidden rounded-full bg-text/10">
               <div className="h-full bg-accent" style={{ width: `${progress(channel.now, now) * 100}%` }} />
             </div>
-            {channel.next && <p className="mt-1 truncate text-xs text-faint">{t('live.next', { time: time(channel.next.start), title: channel.next.title })}</p>}
+            {channel.next && <p className="mt-1 truncate text-xs text-faint">{t('common:live.next', { time: time(channel.next.start), title: channel.next.title })}</p>}
           </>
         ) : (
-          <p className="truncate text-sm text-faint">{channel.categories?.join(', ') || t('live.noGuide')}</p>
+          <p className="truncate text-sm text-faint">{channel.categories?.join(', ') || t('common:live.noGuide')}</p>
         )}
       </div>
     </button>
@@ -213,10 +213,10 @@ function LivePlayer({ id, listing, onClose }: { id: string; listing?: LiveListin
         {state === 'failed' && (
           <div className="absolute inset-0 grid place-items-center bg-black/80 p-6 text-center text-white">
             <div>
-              <p className="font-medium">{t('live.wontPlay')}</p>
-              <p className="mt-1 text-sm text-white/70">{t('live.wontPlayHint')}</p>
+              <p className="font-medium">{t('common:live.wontPlay')}</p>
+              <p className="mt-1 text-sm text-white/70">{t('common:live.wontPlayHint')}</p>
               <Button className="mt-4" onClick={() => qc.invalidateQueries({ queryKey: ['live'] })}>
-                {t('live.tryAgain')}
+                {t('common:live.tryAgain')}
               </Button>
             </div>
           </div>
@@ -226,7 +226,7 @@ function LivePlayer({ id, listing, onClose }: { id: string; listing?: LiveListin
         <div className="flex items-start gap-3">
           {channel && <ChannelLogo channel={channel} className="size-10" />}
           <div className="min-w-0 flex-1">
-            <p className="text-xs font-semibold tracking-wide text-accent uppercase">{t('live.live')}</p>
+            <p className="text-xs font-semibold tracking-wide text-accent uppercase">{t('common:live.live')}</p>
             <p className="truncate font-semibold">{channel?.name}</p>
           </div>
           <button onClick={onClose} className="rounded-full p-1.5 text-muted hover:bg-text/5 hover:text-text" aria-label={t('close')}>
@@ -243,9 +243,9 @@ function LivePlayer({ id, listing, onClose }: { id: string; listing?: LiveListin
             {onNow.description && <p className="mt-2 line-clamp-6 text-sm text-muted">{onNow.description}</p>}
           </div>
         ) : (
-          <p className="text-sm text-muted">{t('live.noGuide')}</p>
+          <p className="text-sm text-muted">{t('common:live.noGuide')}</p>
         )}
-        {listing?.next && <p className="text-sm text-faint">{t('live.next', { time: time(listing.next.start), title: listing.next.title })}</p>}
+        {listing?.next && <p className="text-sm text-faint">{t('common:live.next', { time: time(listing.next.start), title: listing.next.title })}</p>}
       </div>
     </section>
   )
@@ -274,13 +274,13 @@ function Guide({ channels, playing, onPlay }: { channels: LiveListing[]; playing
   return (
     <div className="overflow-hidden rounded-xl border border-line/60">
       <div className="flex items-center gap-2 border-b border-line/60 bg-surface/60 px-3 py-2">
-        <Button variant="ghost" className="h-8 px-2" onClick={() => setOffset((o) => o - 4)} aria-label={t('live.earlier')} disabled={offset <= -4}>
+        <Button variant="ghost" className="h-8 px-2" onClick={() => setOffset((o) => o - 4)} aria-label={t('common:live.earlier')} disabled={offset <= -4}>
           <ChevronLeft className="size-4 rtl:-scale-x-100" />
         </Button>
         <Button variant="ghost" className="h-8 px-2" onClick={() => setOffset(0)} disabled={offset === 0}>
-          {t('live.now')}
+          {t('common:live.now')}
         </Button>
-        <Button variant="ghost" className="h-8 px-2" onClick={() => setOffset((o) => o + 4)} aria-label={t('live.later')} disabled={offset >= 88}>
+        <Button variant="ghost" className="h-8 px-2" onClick={() => setOffset((o) => o + 4)} aria-label={t('common:live.later')} disabled={offset >= 88}>
           <ChevronRight className="size-4 rtl:-scale-x-100" />
         </Button>
         <span className="text-sm text-muted">{new Date(from * 1000).toLocaleDateString(formatLocale(), { weekday: 'long', day: 'numeric', month: 'short' })}</span>
@@ -322,7 +322,7 @@ function Guide({ channels, playing, onPlay }: { channels: LiveListing[]; playing
                     </button>
                   )
                 })}
-                {!byChannel.get(c.id)?.length && <span className="absolute inset-y-0 start-3 flex items-center text-xs text-faint">{t('live.noGuide')}</span>}
+                {!byChannel.get(c.id)?.length && <span className="absolute inset-y-0 start-3 flex items-center text-xs text-faint">{t('common:live.noGuide')}</span>}
                 {nowAt && offset <= 0 && <div className="pointer-events-none absolute inset-y-0 w-0.5 bg-accent" style={{ insetInlineStart: `${nowAt.width * 100}%` }} />}
               </div>
             </div>

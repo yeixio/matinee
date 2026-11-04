@@ -642,5 +642,26 @@
       "hiphop": "Hiphop",
       "news": "Hírek"
     }
+  },
+  "live": {
+    "title": "Élő TV",
+    "channels": "Csatornák",
+    "guide": "Műsor",
+    "all": "Mind",
+    "find": "Csatorna keresése",
+    "noMatch": "Nincs egyező csatorna",
+    "none": "Még nincsenek élő TV-csatornák",
+    "addSource": "Csatornák hozzáadása a Beállításokban",
+    "askAdmin": "Egy rendszergazda adhat hozzá csatornákat a Beállításokban.",
+    "cantLoad": "Az élő TV nem tölthető be",
+    "live": "Élő",
+    "now": "Most",
+    "earlier": "Korábban",
+    "later": "Később",
+    "next": "Utána {{time}}-kor: {{title}}",
+    "noGuide": "Ehhez a csatornához nincs műsor",
+    "wontPlay": "Ez a csatorna most nem sugároz",
+    "wontPlayHint": "Az adása nem válaszolt. A többször hibázó csatornák el lesznek rejtve.",
+    "tryAgain": "Újra"
   }
 }

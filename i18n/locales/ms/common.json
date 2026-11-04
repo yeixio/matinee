@@ -610,5 +610,26 @@
       "hiphop": "Hip hop",
       "news": "Berita"
     }
+  },
+  "live": {
+    "title": "TV Langsung",
+    "channels": "Saluran",
+    "guide": "Panduan",
+    "all": "Semua",
+    "find": "Cari saluran",
+    "noMatch": "Tiada saluran yang sepadan",
+    "none": "Belum ada saluran TV langsung",
+    "addSource": "Tambah saluran dalam Tetapan",
+    "askAdmin": "Pentadbir boleh menambah saluran dalam Tetapan.",
+    "cantLoad": "TV langsung tidak dapat dimuatkan",
+    "live": "Langsung",
+    "now": "Sekarang",
+    "earlier": "Lebih awal",
+    "later": "Kemudian",
+    "next": "Seterusnya pada {{time}}: {{title}}",
+    "noGuide": "Tiada panduan untuk saluran ini",
+    "wontPlay": "Saluran ini tidak bersiaran sekarang",
+    "wontPlayHint": "Strimnya tidak menjawab. Saluran yang terus gagal akan disembunyikan.",
+    "tryAgain": "Cuba lagi"
   }
 }
