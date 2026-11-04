@@ -254,5 +254,6 @@
   "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "Yalnızca filmler, bölümler, sezonlar ve diziler izlendi olarak işaretlenebilir",
   "no_such_backup": "Böyle bir yedek yok",
   "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "Bu sunucunun veritabanı PostgreSQL; pg_dump ile yedekleyin",
-  "audiodelay_is_milliseconds_between_2000_and_2000": "Ses gecikmesi milisaniye cinsinden, -2000 ile 2000 arasında olmalı."
+  "audiodelay_is_milliseconds_between_2000_and_2000": "Ses gecikmesi milisaniye cinsinden, -2000 ile 2000 arasında olmalı.",
+  "subtitle_choices_arent_ones_the_apps_know": "Uygulamalar bu altyazı seçeneklerini tanımıyor"
 }

@@ -254,5 +254,6 @@
   "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "Tylko filmy, odcinki, sezony i seriale można oznaczyć jako obejrzane",
   "no_such_backup": "Nie ma takiej kopii",
   "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "Baza danych tego serwera to PostgreSQL; zrób kopię za pomocą pg_dump",
-  "audiodelay_is_milliseconds_between_2000_and_2000": "Opóźnienie dźwięku podaje się w milisekundach, od -2000 do 2000."
+  "audiodelay_is_milliseconds_between_2000_and_2000": "Opóźnienie dźwięku podaje się w milisekundach, od -2000 do 2000.",
+  "subtitle_choices_arent_ones_the_apps_know": "Aplikacje nie znają tych ustawień napisów"
 }

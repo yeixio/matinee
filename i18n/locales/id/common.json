@@ -668,5 +668,61 @@
     "hint": "Suara tertinggal dari gambar? Jadikan lebih awal. Selama ada jeda, server mengirim suara yang digeser.",
     "forTitle": "Hanya untuk judul ini",
     "reset": "Tanpa jeda"
+  },
+  "subtitlePrefs": {
+    "title": "Subtitel",
+    "intro": "Kapan subtitel muncul dan seperti apa tampilannya. Pilihanmu berlaku di setiap aplikasi. Memilih subtitel di pemutar juga mengubahnya.",
+    "when": "Tampilkan subtitel",
+    "mode": {
+      "off": "Tidak pernah",
+      "forced": "Hanya baris paksa",
+      "foreign": "Saat suaranya bukan dalam bahasaku",
+      "always": "Selalu"
+    },
+    "modeHint": {
+      "off": "Subtitel tetap mati, termasuk baris paksa yang diminta file.",
+      "forced": "Hanya baris untuk semua orang, seperti papan tanda atau dialog dalam bahasa lain.",
+      "foreign": "Subtitel lengkap dalam bahasamu saat film dalam bahasa lain; selain itu hanya baris paksa.",
+      "always": "Subtitel lengkap dalam bahasa pertamamu yang ada di file."
+    },
+    "languages": "Bahasa, berurutan",
+    "appLanguage": "Bahasa aplikasi ({{language}})",
+    "addLanguage": "Tambah bahasa",
+    "removeLanguage": "Hapus {{language}}",
+    "size": "Ukuran",
+    "sizes": {
+      "small": "Kecil",
+      "medium": "Sedang",
+      "large": "Besar",
+      "huge": "Sangat besar"
+    },
+    "color": "Warna",
+    "colors": {
+      "white": "Putih",
+      "yellow": "Kuning",
+      "cyan": "Sian",
+      "green": "Hijau"
+    },
+    "edge": "Tepi",
+    "edges": {
+      "shadow": "Bayangan",
+      "outline": "Garis tepi",
+      "none": "Tidak ada"
+    },
+    "position": "Posisi",
+    "positions": {
+      "bottom": "Bawah",
+      "raised": "Lebih tinggi"
+    },
+    "background": "Kotak di balik teks",
+    "sample": "Seperti inilah tampilan subtitel.",
+    "look": "Gaya subtitel",
+    "lookHint": "Tekan baris untuk mengubahnya. Pilihanmu berlaku di setiap aplikasi."
+  },
+  "subtitleTiming": {
+    "title": "Waktu",
+    "earlier": "Tampilkan subtitel lebih awal",
+    "later": "Tampilkan subtitel lebih lambat",
+    "reset": "Kembali ke waktu file"
   }
 }

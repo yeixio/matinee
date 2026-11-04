@@ -700,5 +700,61 @@
     "hint": "Ses görüntünün gerisinde mi? Daha erkene al. Gecikme ayarlıyken sunucu sesi kaydırarak gönderir.",
     "forTitle": "Yalnızca bu yapım için",
     "reset": "Gecikme yok"
+  },
+  "subtitlePrefs": {
+    "title": "Altyazılar",
+    "intro": "Altyazıların ne zaman açılacağı ve nasıl görüneceği. Seçimlerin her uygulamada geçerli. Oynatıcıda altyazı seçmek de bunları değiştirir.",
+    "when": "Altyazıları göster",
+    "mode": {
+      "off": "Asla",
+      "forced": "Yalnızca zorunlu satırlar",
+      "foreign": "Ses benim dilimde değilken",
+      "always": "Her zaman"
+    },
+    "modeHint": {
+      "off": "Altyazılar kapalı kalır, dosyanın göstermek istediği zorunlu satırlar bile.",
+      "forced": "Yalnızca herkes için olan satırlar, örneğin tabelalar veya başka dildeki konuşmalar.",
+      "foreign": "Film başka bir dildeyken kendi dilinde tam altyazı; aksi halde yalnızca zorunlu satırlar.",
+      "always": "Dosyada bulunan ilk dilinde tam altyazı."
+    },
+    "languages": "Diller, sırayla",
+    "appLanguage": "Uygulamanın dili ({{language}})",
+    "addLanguage": "Dil ekle",
+    "removeLanguage": "{{language}} dilini kaldır",
+    "size": "Boyut",
+    "sizes": {
+      "small": "Küçük",
+      "medium": "Orta",
+      "large": "Büyük",
+      "huge": "Çok büyük"
+    },
+    "color": "Renk",
+    "colors": {
+      "white": "Beyaz",
+      "yellow": "Sarı",
+      "cyan": "Camgöbeği",
+      "green": "Yeşil"
+    },
+    "edge": "Kenarlar",
+    "edges": {
+      "shadow": "Gölge",
+      "outline": "Dış çizgi",
+      "none": "Yok"
+    },
+    "position": "Konum",
+    "positions": {
+      "bottom": "Altta",
+      "raised": "Daha yukarıda"
+    },
+    "background": "Yazının arkasındaki kutu",
+    "sample": "Altyazılar böyle görünecek.",
+    "look": "Altyazı stili",
+    "lookHint": "Değiştirmek için bir satıra basın. Seçimlerin her uygulamada geçerli."
+  },
+  "subtitleTiming": {
+    "title": "Zamanlama",
+    "earlier": "Altyazıları daha erken göster",
+    "later": "Altyazıları daha geç göster",
+    "reset": "Dosyanın zamanlamasına dön"
   }
 }

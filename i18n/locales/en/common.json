@@ -700,5 +700,61 @@
     "hint": "Sound behind the picture? Make it earlier. While there's a delay, the server sends the sound moved.",
     "forTitle": "Just for this title",
     "reset": "No delay"
+  },
+  "subtitlePrefs": {
+    "title": "Subtitles",
+    "intro": "When subtitles come on and how they look. Your choices follow you to every app. Picking subtitles in the player changes them too.",
+    "when": "Show subtitles",
+    "mode": {
+      "off": "Never",
+      "forced": "Only forced lines",
+      "foreign": "When the sound isn't in my language",
+      "always": "Always"
+    },
+    "modeHint": {
+      "off": "Subtitles stay off, even forced lines a file asks to show.",
+      "forced": "Only lines meant for everyone, such as signs or dialogue in another language.",
+      "foreign": "Full subtitles in your language when a film plays in another one; otherwise only forced lines.",
+      "always": "Full subtitles in your first language that a file has."
+    },
+    "languages": "Languages, in order",
+    "appLanguage": "The app's language ({{language}})",
+    "addLanguage": "Add a language",
+    "removeLanguage": "Remove {{language}}",
+    "size": "Size",
+    "sizes": {
+      "small": "Small",
+      "medium": "Medium",
+      "large": "Large",
+      "huge": "Very large"
+    },
+    "color": "Color",
+    "colors": {
+      "white": "White",
+      "yellow": "Yellow",
+      "cyan": "Cyan",
+      "green": "Green"
+    },
+    "edge": "Edges",
+    "edges": {
+      "shadow": "Shadow",
+      "outline": "Outline",
+      "none": "None"
+    },
+    "position": "Position",
+    "positions": {
+      "bottom": "Bottom",
+      "raised": "Higher up"
+    },
+    "background": "Box behind the words",
+    "sample": "This is how subtitles will look.",
+    "look": "Subtitle style",
+    "lookHint": "Press a row to change it. Your choices follow you to every app."
+  },
+  "subtitleTiming": {
+    "title": "Timing",
+    "earlier": "Show subtitles earlier",
+    "later": "Show subtitles later",
+    "reset": "Back to the file's timing"
   }
 }

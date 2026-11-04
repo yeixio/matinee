@@ -668,5 +668,61 @@
     "hint": "声音落后于画面？把它提前。设置延迟时，服务器会发送调整后的声音。",
     "forTitle": "仅限此作品",
     "reset": "无延迟"
+  },
+  "subtitlePrefs": {
+    "title": "字幕",
+    "intro": "字幕何时显示以及外观。你的选择会同步到所有应用。在播放器中选择字幕也会更改这些设置。",
+    "when": "显示字幕",
+    "mode": {
+      "off": "从不",
+      "forced": "仅强制字幕",
+      "foreign": "当声音不是我的语言时",
+      "always": "始终"
+    },
+    "modeHint": {
+      "off": "字幕保持关闭，即使文件要求显示强制字幕。",
+      "forced": "只显示面向所有人的字幕，例如标牌或其他语言的对白。",
+      "foreign": "影片使用其他语言时显示你的语言的完整字幕，否则仅显示强制字幕。",
+      "always": "显示文件中你的第一种语言的完整字幕。"
+    },
+    "languages": "语言（按顺序）",
+    "appLanguage": "应用语言（{{language}}）",
+    "addLanguage": "添加语言",
+    "removeLanguage": "移除{{language}}",
+    "size": "大小",
+    "sizes": {
+      "small": "小",
+      "medium": "中",
+      "large": "大",
+      "huge": "特大"
+    },
+    "color": "颜色",
+    "colors": {
+      "white": "白色",
+      "yellow": "黄色",
+      "cyan": "青色",
+      "green": "绿色"
+    },
+    "edge": "边缘",
+    "edges": {
+      "shadow": "阴影",
+      "outline": "描边",
+      "none": "无"
+    },
+    "position": "位置",
+    "positions": {
+      "bottom": "底部",
+      "raised": "偏上"
+    },
+    "background": "文字背景",
+    "sample": "字幕将显示成这样。",
+    "look": "字幕样式",
+    "lookHint": "按一行即可更改。你的选择会同步到所有应用。"
+  },
+  "subtitleTiming": {
+    "title": "时间",
+    "earlier": "字幕提前",
+    "later": "字幕延后",
+    "reset": "恢复文件的时间"
   }
 }

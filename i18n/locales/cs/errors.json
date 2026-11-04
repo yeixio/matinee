@@ -254,5 +254,6 @@
   "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "Jako zhlédnuté lze označit jen filmy, díly, řady a seriály",
   "no_such_backup": "Taková záloha neexistuje",
   "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "Databáze tohoto serveru je PostgreSQL; zálohujte ji pomocí pg_dump",
-  "audiodelay_is_milliseconds_between_2000_and_2000": "Zpoždění zvuku se zadává v milisekundách, od -2000 do 2000."
+  "audiodelay_is_milliseconds_between_2000_and_2000": "Zpoždění zvuku se zadává v milisekundách, od -2000 do 2000.",
+  "subtitle_choices_arent_ones_the_apps_know": "Tyto volby titulků aplikace neznají"
 }

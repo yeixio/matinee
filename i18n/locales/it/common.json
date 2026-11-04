@@ -732,5 +732,61 @@
     "hint": "L'audio è in ritardo rispetto all'immagine? Anticipalo. Finché c'è un ritardo, il server invia l'audio spostato.",
     "forTitle": "Solo per questo titolo",
     "reset": "Nessun ritardo"
+  },
+  "subtitlePrefs": {
+    "title": "Sottotitoli",
+    "intro": "Quando compaiono i sottotitoli e come appaiono. Le tue scelte ti seguono in ogni app. Anche scegliere i sottotitoli nel player le cambia.",
+    "when": "Mostra sottotitoli",
+    "mode": {
+      "off": "Mai",
+      "forced": "Solo righe forzate",
+      "foreign": "Quando l'audio non è nella mia lingua",
+      "always": "Sempre"
+    },
+    "modeHint": {
+      "off": "I sottotitoli restano spenti, anche le righe forzate che un file chiede di mostrare.",
+      "forced": "Solo le righe pensate per tutti, come cartelli o dialoghi in un'altra lingua.",
+      "foreign": "Sottotitoli completi nella tua lingua quando un film è in un'altra; altrimenti solo righe forzate.",
+      "always": "Sottotitoli completi nella prima delle tue lingue presente nel file."
+    },
+    "languages": "Lingue, in ordine",
+    "appLanguage": "Lingua dell'app ({{language}})",
+    "addLanguage": "Aggiungi una lingua",
+    "removeLanguage": "Rimuovi {{language}}",
+    "size": "Dimensione",
+    "sizes": {
+      "small": "Piccola",
+      "medium": "Media",
+      "large": "Grande",
+      "huge": "Molto grande"
+    },
+    "color": "Colore",
+    "colors": {
+      "white": "Bianco",
+      "yellow": "Giallo",
+      "cyan": "Ciano",
+      "green": "Verde"
+    },
+    "edge": "Bordi",
+    "edges": {
+      "shadow": "Ombra",
+      "outline": "Contorno",
+      "none": "Nessuno"
+    },
+    "position": "Posizione",
+    "positions": {
+      "bottom": "In basso",
+      "raised": "Più in alto"
+    },
+    "background": "Riquadro dietro il testo",
+    "sample": "Ecco come appariranno i sottotitoli.",
+    "look": "Stile dei sottotitoli",
+    "lookHint": "Premi una riga per cambiarla. Le tue scelte ti seguono in ogni app."
+  },
+  "subtitleTiming": {
+    "title": "Sincronia",
+    "earlier": "Mostra i sottotitoli prima",
+    "later": "Mostra i sottotitoli dopo",
+    "reset": "Torna alla sincronia del file"
   }
 }

@@ -109,3 +109,28 @@ func TestNextEpisodeAndPlaybackPrefs(t *testing.T) {
 		t.Errorf("unknown field: %d", code)
 	}
 }
+
+func TestSubtitlePrefs(t *testing.T) {
+	c, _, _ := newTestServerStore(t)
+	var login struct{ Token string }
+	c.do("POST", "/api/v1/setup", credentials{"admin", "correct horse"}, &login)
+	c.token = login.Token
+	bg := 80
+	in := playbackPrefs{AutoPlay: true, Subtitles: &subtitlePrefs{Mode: "foreign", Languages: []string{"es", "en-GB"}, Size: "large", Color: "yellow", Edge: "outline", Background: &bg, Position: "raised"}}
+	var p playbackPrefs
+	if code := c.do("PUT", "/api/v1/me/playback", in, &p); code != 200 || p.Subtitles == nil || p.Subtitles.Mode != "foreign" || *p.Subtitles.Background != 80 {
+		t.Fatalf("put: %d %+v", code, p.Subtitles)
+	}
+	// Other choices sent alone keep the subtitles.
+	if code := c.do("PUT", "/api/v1/me/playback", map[string]any{"binge": true}, &p); code != 200 || p.Subtitles == nil || p.Subtitles.Languages[0] != "es" {
+		t.Fatalf("kept: %d %+v", code, p.Subtitles)
+	}
+	for _, bad := range []subtitlePrefs{{Mode: "sometimes"}, {Mode: "off", Size: "giant"}, {Mode: "off", Languages: []string{"not a language"}}, {Mode: "off", Background: new(int)}} {
+		if bad.Background != nil {
+			*bad.Background = 101
+		}
+		if code := c.do("PUT", "/api/v1/me/playback", playbackPrefs{Subtitles: &bad}, nil); code != 400 {
+			t.Errorf("%+v: got %d, want 400", bad, code)
+		}
+	}
+}

@@ -254,5 +254,6 @@
   "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "केवल फ़िल्में, एपिसोड, सीज़न और शो देखे गए के रूप में चिह्नित हो सकते हैं",
   "no_such_backup": "ऐसा कोई बैकअप नहीं",
   "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "इस सर्वर का डेटाबेस PostgreSQL है; pg_dump से बैकअप लें",
-  "audiodelay_is_milliseconds_between_2000_and_2000": "ऑडियो देरी मिलीसेकंड में, -2000 से 2000 के बीच होती है।"
+  "audiodelay_is_milliseconds_between_2000_and_2000": "ऑडियो देरी मिलीसेकंड में, -2000 से 2000 के बीच होती है।",
+  "subtitle_choices_arent_ones_the_apps_know": "ऐप्स इन सबटाइटल विकल्पों को नहीं पहचानते"
 }

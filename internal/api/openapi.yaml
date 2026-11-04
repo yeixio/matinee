@@ -4813,6 +4813,18 @@ components:
         binge: { type: boolean, description: Skip the countdown and start the next episode right away. }
         skipIntros: { type: boolean, description: Jump past an episode's intro by itself instead of offering a Skip intro button. }
         podcastsPlayOn: { type: boolean, description: When a podcast episode ends, play the one GET /items/{id}/next gives. On by default. }
+        subtitles:
+          type: object
+          description: When subtitles come on and how they look, the same on every app. Missing means forced lines only, in the app's language.
+          required: [mode]
+          properties:
+            mode: { type: string, enum: ["off", forced, always, foreign], description: "off: never, whatever a file's flags say; forced: only forced lines; always; foreign: when the sound isn't in one of `languages`." }
+            languages: { type: array, maxItems: 10, items: { type: string }, description: Language codes in the order wanted. Empty means the app's language. }
+            size: { type: string, enum: [small, medium, large, huge] }
+            color: { type: string, enum: [white, yellow, cyan, green] }
+            edge: { type: string, enum: [shadow, outline, none] }
+            background: { type: integer, minimum: 0, maximum: 100, description: How solid the box behind the words is. }
+            position: { type: string, enum: [bottom, raised] }
     PodcastDownloads:
       type: object
       description: What the person's phones keep of a show they follow.
