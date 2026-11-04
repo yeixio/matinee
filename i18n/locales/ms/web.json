@@ -869,6 +869,35 @@
         "title": "TV Langsung",
         "hint": "Senarai saluran dan panduan rancangan"
       }
+    },
+    "backups": {
+      "title": "Sandaran",
+      "intro": "Matinee menyalin pangkalan datanya sebelum kemas kini mengubahnya, mengikut jadual dan apabila anda minta. Sandaran disimpan dalam {{dir}}.",
+      "postgres": "Pangkalan data pelayan ini ialah PostgreSQL, yang Matinee tidak salin sendiri. Sandarkan dengan pg_dump, seperti yang ditunjukkan halaman Sandaran dalam panduan.",
+      "pending": "Sandaran dari {{time}} menggantikan pangkalan data apabila Matinee bermula semula. Mulakan semula Matinee untuk selesai.",
+      "cancelRestore": "Batalkan pemulihan",
+      "failed": "Sandaran terakhir gagal: {{error}}",
+      "every": "Sandarkan",
+      "never": "Hanya sebelum kemas kini",
+      "every6": "Setiap 6 jam",
+      "every12": "Setiap 12 jam",
+      "daily": "Setiap hari",
+      "weekly": "Setiap minggu",
+      "keep": "Simpan bagi setiap jenis",
+      "makeNow": "Sandarkan sekarang",
+      "making": "Menyandarkan…",
+      "none": "Belum ada sandaran.",
+      "download": "Muat turun",
+      "restore": "Pulihkan",
+      "restoreConfirm": "Pulihkan sandaran dari {{time}}? Ia menggantikan pangkalan data apabila Matinee bermula semula, dan perubahan sejak itu hilang. Pangkalan data seperti ketika itu disimpan sebagai sandaran.",
+      "delete": "Padam",
+      "deleteConfirm": "Padam sandaran dari {{time}}?",
+      "reason": {
+        "scheduled": "Berjadual",
+        "manual": "Dibuat sendiri",
+        "upgrade": "Sebelum kemas kini",
+        "before-restore": "Sebelum pemulihan"
+      }
     }
   },
   "language": {
@@ -1231,7 +1260,9 @@
       "count": "Berapa banyak",
       "minutes": "Dalam minit",
       "restart": "Pelayan bermula atau dimulakan semula",
-      "restartHint": "Memberitahu sama ada ia dikemas kini, atau berhenti tanpa ditutup dengan betul."
+      "restartHint": "Memberitahu sama ada ia dikemas kini, atau berhenti tanpa ditutup dengan betul.",
+      "backup": "Sandaran gagal",
+      "backupHint": "Apabila pangkalan data tidak dapat disandarkan."
     },
     "email": {
       "title": "E-mel",

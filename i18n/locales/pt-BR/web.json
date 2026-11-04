@@ -877,6 +877,35 @@
         "title": "TV ao vivo",
         "hint": "Listas de canais e guias"
       }
+    },
+    "backups": {
+      "title": "Backups",
+      "intro": "O Matinee copia o banco de dados antes que uma atualização o altere, em horários programados e quando você pede. Os backups ficam em {{dir}}.",
+      "postgres": "O banco de dados deste servidor é PostgreSQL, que o Matinee não copia sozinho. Faça backup com pg_dump, como mostra a página Backups do guia.",
+      "pending": "O backup de {{time}} substitui o banco de dados na próxima vez que o Matinee iniciar. Reinicie o Matinee para concluir.",
+      "cancelRestore": "Cancelar restauração",
+      "failed": "O último backup falhou: {{error}}",
+      "every": "Fazer backup",
+      "never": "Só antes de atualizações",
+      "every6": "A cada 6 horas",
+      "every12": "A cada 12 horas",
+      "daily": "Todo dia",
+      "weekly": "Toda semana",
+      "keep": "Manter de cada tipo",
+      "makeNow": "Fazer backup agora",
+      "making": "Fazendo backup…",
+      "none": "Nenhum backup ainda.",
+      "download": "Baixar",
+      "restore": "Restaurar",
+      "restoreConfirm": "Restaurar o backup de {{time}}? Ele substitui o banco de dados na próxima vez que o Matinee iniciar, e o que mudou desde então se perde. O banco de dados como estiver nesse momento fica guardado como backup.",
+      "delete": "Excluir",
+      "deleteConfirm": "Excluir o backup de {{time}}?",
+      "reason": {
+        "scheduled": "Programado",
+        "manual": "Feito à mão",
+        "upgrade": "Antes de uma atualização",
+        "before-restore": "Antes de uma restauração"
+      }
     }
   },
   "language": {
@@ -1253,7 +1282,9 @@
       "count": "Quantos",
       "minutes": "Em minutos",
       "restart": "O servidor inicia ou reinicia",
-      "restartHint": "Diz se ele foi atualizado ou se parou sem desligar corretamente."
+      "restartHint": "Diz se ele foi atualizado ou se parou sem desligar corretamente.",
+      "backup": "Um backup falha",
+      "backupHint": "Quando não é possível fazer backup do banco de dados."
     },
     "email": {
       "title": "E-mail",

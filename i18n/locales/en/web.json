@@ -873,6 +873,35 @@
         "title": "Live TV",
         "hint": "Channel playlists and guides"
       }
+    },
+    "backups": {
+      "title": "Backups",
+      "intro": "Matinee copies its database before an upgrade changes it, on a schedule, and when you ask. Backups are kept in {{dir}}.",
+      "postgres": "This server's database is PostgreSQL, which Matinee doesn't copy itself. Back it up with pg_dump, as the guide's Backups page shows.",
+      "pending": "The backup from {{time}} replaces the database the next time Matinee starts. Restart Matinee to finish.",
+      "cancelRestore": "Cancel restore",
+      "failed": "The last backup failed: {{error}}",
+      "every": "Back up",
+      "never": "Only before upgrades",
+      "every6": "Every 6 hours",
+      "every12": "Every 12 hours",
+      "daily": "Every day",
+      "weekly": "Every week",
+      "keep": "Keep of each kind",
+      "makeNow": "Back up now",
+      "making": "Backing up…",
+      "none": "No backups yet.",
+      "download": "Download",
+      "restore": "Restore",
+      "restoreConfirm": "Restore the backup from {{time}}? It replaces the database the next time Matinee starts, and anything changed since then is lost. The database as it is then is kept as a backup.",
+      "delete": "Delete",
+      "deleteConfirm": "Delete the backup from {{time}}?",
+      "reason": {
+        "scheduled": "Scheduled",
+        "manual": "Made by hand",
+        "upgrade": "Before an upgrade",
+        "before-restore": "Before a restore"
+      }
     }
   },
   "language": {
@@ -1242,7 +1271,9 @@
       "count": "How many",
       "minutes": "Within minutes",
       "restart": "The server starts or restarts",
-      "restartHint": "Says whether it was updated, or stopped without shutting down cleanly."
+      "restartHint": "Says whether it was updated, or stopped without shutting down cleanly.",
+      "backup": "A backup fails",
+      "backupHint": "When the database can't be backed up."
     },
     "email": {
       "title": "Email",

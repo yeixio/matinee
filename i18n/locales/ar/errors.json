@@ -251,5 +251,7 @@
   "tonemapping_must_be_hable_mobius_reinhard_or_off": "يجب أن تكون قيمة toneMapping هي hable أو mobius أو reinhard أو off",
   "kind_must_be_stall_or_error": "يجب أن تكون قيمة kind هي stall أو error",
   "bytes_must_be_between_0_and_104857600": "يجب أن تكون قيمة bytes بين 0 و104857600",
-  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "يمكن وضع علامة مُشاهَد على الأفلام والحلقات والمواسم والمسلسلات فقط"
+  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "يمكن وضع علامة مُشاهَد على الأفلام والحلقات والمواسم والمسلسلات فقط",
+  "no_such_backup": "لا توجد هذه النسخة",
+  "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "قاعدة بيانات هذا الخادم هي PostgreSQL؛ انسخها احتياطيًا باستخدام pg_dump"
 }

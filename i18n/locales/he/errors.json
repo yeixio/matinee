@@ -251,5 +251,7 @@
   "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMapping חייב להיות hable,‏ mobius,‏ reinhard או off",
   "kind_must_be_stall_or_error": "kind חייב להיות stall או error",
   "bytes_must_be_between_0_and_104857600": "bytes חייב להיות בין 0 ל-104857600",
-  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "רק סרטים, פרקים, עונות וסדרות אפשר לסמן כנצפו"
+  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "רק סרטים, פרקים, עונות וסדרות אפשר לסמן כנצפו",
+  "no_such_backup": "אין גיבוי כזה",
+  "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "מסד הנתונים של השרת הזה הוא PostgreSQL; גבו אותו עם pg_dump"
 }

@@ -881,6 +881,35 @@
         "title": "Telewizja na żywo",
         "hint": "Listy kanałów i przewodniki"
       }
+    },
+    "backups": {
+      "title": "Kopie zapasowe",
+      "intro": "Matinee kopiuje swoją bazę danych, zanim aktualizacja ją zmieni, według harmonogramu i na żądanie. Kopie są w {{dir}}.",
+      "postgres": "Baza danych tego serwera to PostgreSQL, której Matinee sam nie kopiuje. Zrób kopię za pomocą pg_dump, jak pokazuje strona Kopie zapasowe w przewodniku.",
+      "pending": "Kopia z {{time}} zastąpi bazę danych przy następnym uruchomieniu Matinee. Uruchom Matinee ponownie, aby dokończyć.",
+      "cancelRestore": "Anuluj przywracanie",
+      "failed": "Ostatnia kopia się nie udała: {{error}}",
+      "every": "Kopia",
+      "never": "Tylko przed aktualizacjami",
+      "every6": "Co 6 godzin",
+      "every12": "Co 12 godzin",
+      "daily": "Codziennie",
+      "weekly": "Co tydzień",
+      "keep": "Zachowaj każdego rodzaju",
+      "makeNow": "Zrób kopię teraz",
+      "making": "Tworzenie kopii…",
+      "none": "Nie ma jeszcze kopii.",
+      "download": "Pobierz",
+      "restore": "Przywróć",
+      "restoreConfirm": "Przywrócić kopię z {{time}}? Zastąpi bazę danych przy następnym uruchomieniu Matinee, a zmiany od tamtej pory przepadną. Baza danych w obecnym stanie zostanie zachowana jako kopia.",
+      "delete": "Usuń",
+      "deleteConfirm": "Usunąć kopię z {{time}}?",
+      "reason": {
+        "scheduled": "Zaplanowana",
+        "manual": "Ręczna",
+        "upgrade": "Przed aktualizacją",
+        "before-restore": "Przed przywróceniem"
+      }
     }
   },
   "language": {
@@ -1264,7 +1293,9 @@
       "count": "Ile",
       "minutes": "W ciągu minut",
       "restart": "Serwer uruchamia się lub restartuje",
-      "restartHint": "Mówi, czy został zaktualizowany, czy zatrzymał się bez poprawnego zamknięcia."
+      "restartHint": "Mówi, czy został zaktualizowany, czy zatrzymał się bez poprawnego zamknięcia.",
+      "backup": "Kopia się nie udaje",
+      "backupHint": "Gdy nie da się zrobić kopii bazy danych."
     },
     "email": {
       "title": "E-mail",

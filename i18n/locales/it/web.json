@@ -877,6 +877,35 @@
         "title": "TV in diretta",
         "hint": "Elenchi di canali e guide"
       }
+    },
+    "backups": {
+      "title": "Backup",
+      "intro": "Matinee copia il suo database prima che un aggiornamento lo cambi, a orari stabiliti e quando lo chiedi. I backup sono in {{dir}}.",
+      "postgres": "Il database di questo server è PostgreSQL, che Matinee non copia da sé. Fanne il backup con pg_dump, come mostra la pagina Backup della guida.",
+      "pending": "Il backup del {{time}} sostituisce il database al prossimo avvio di Matinee. Riavvia Matinee per finire.",
+      "cancelRestore": "Annulla il ripristino",
+      "failed": "L'ultimo backup non è riuscito: {{error}}",
+      "every": "Backup",
+      "never": "Solo prima degli aggiornamenti",
+      "every6": "Ogni 6 ore",
+      "every12": "Ogni 12 ore",
+      "daily": "Ogni giorno",
+      "weekly": "Ogni settimana",
+      "keep": "Da tenere per tipo",
+      "makeNow": "Fai il backup ora",
+      "making": "Backup in corso…",
+      "none": "Ancora nessun backup.",
+      "download": "Scarica",
+      "restore": "Ripristina",
+      "restoreConfirm": "Ripristinare il backup del {{time}}? Sostituisce il database al prossimo avvio di Matinee, e si perde ciò che è cambiato da allora. Il database com'è in quel momento viene tenuto come backup.",
+      "delete": "Elimina",
+      "deleteConfirm": "Eliminare il backup del {{time}}?",
+      "reason": {
+        "scheduled": "Programmato",
+        "manual": "Fatto a mano",
+        "upgrade": "Prima di un aggiornamento",
+        "before-restore": "Prima di un ripristino"
+      }
     }
   },
   "language": {
@@ -1253,7 +1282,9 @@
       "count": "Quanti",
       "minutes": "Entro minuti",
       "restart": "Il server si avvia o si riavvia",
-      "restartHint": "Dice se è stato aggiornato o se si è fermato senza spegnersi correttamente."
+      "restartHint": "Dice se è stato aggiornato o se si è fermato senza spegnersi correttamente.",
+      "backup": "Un backup non riesce",
+      "backupHint": "Quando non si riesce a fare il backup del database."
     },
     "email": {
       "title": "Email",

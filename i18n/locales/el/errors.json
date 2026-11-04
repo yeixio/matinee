@@ -251,5 +251,7 @@
   "tonemapping_must_be_hable_mobius_reinhard_or_off": "Το toneMapping πρέπει να είναι hable, mobius, reinhard ή off",
   "kind_must_be_stall_or_error": "Το kind πρέπει να είναι stall ή error",
   "bytes_must_be_between_0_and_104857600": "Το bytes πρέπει να είναι από 0 έως 104857600",
-  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "Μόνο ταινίες, επεισόδια, σεζόν και σειρές μπορούν να σημειωθούν ως προβεβλημένα"
+  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "Μόνο ταινίες, επεισόδια, σεζόν και σειρές μπορούν να σημειωθούν ως προβεβλημένα",
+  "no_such_backup": "Δεν υπάρχει τέτοιο αντίγραφο",
+  "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "Η βάση δεδομένων αυτού του διακομιστή είναι PostgreSQL· πάρτε αντίγραφο με το pg_dump"
 }

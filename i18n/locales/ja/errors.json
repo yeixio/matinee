@@ -251,5 +251,7 @@
   "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMapping は hable、mobius、reinhard、または off にしてください",
   "kind_must_be_stall_or_error": "kind は stall か error にしてください",
   "bytes_must_be_between_0_and_104857600": "bytes は 0 から 104857600 の間にしてください",
-  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "視聴済みにできるのは映画、エピソード、シーズン、番組だけです"
+  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "視聴済みにできるのは映画、エピソード、シーズン、番組だけです",
+  "no_such_backup": "そのバックアップはありません",
+  "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "このサーバーのデータベースは PostgreSQL です。pg_dump でバックアップしてください"
 }

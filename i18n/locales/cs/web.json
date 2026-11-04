@@ -881,6 +881,35 @@
         "title": "Živé vysílání",
         "hint": "Seznamy kanálů a programy"
       }
+    },
+    "backups": {
+      "title": "Zálohy",
+      "intro": "Matinee kopíruje svou databázi předtím, než ji aktualizace změní, podle plánu a na požádání. Zálohy jsou v {{dir}}.",
+      "postgres": "Databáze tohoto serveru je PostgreSQL, kterou Matinee sám nekopíruje. Zálohujte ji pomocí pg_dump, jak ukazuje stránka Zálohy v průvodci.",
+      "pending": "Záloha z {{time}} nahradí databázi při příštím spuštění Matinee. Pro dokončení Matinee restartujte.",
+      "cancelRestore": "Zrušit obnovení",
+      "failed": "Poslední záloha selhala: {{error}}",
+      "every": "Zálohovat",
+      "never": "Jen před aktualizacemi",
+      "every6": "Každých 6 hodin",
+      "every12": "Každých 12 hodin",
+      "daily": "Každý den",
+      "weekly": "Každý týden",
+      "keep": "Ponechat od každého druhu",
+      "makeNow": "Zálohovat teď",
+      "making": "Zálohuje se…",
+      "none": "Zatím žádné zálohy.",
+      "download": "Stáhnout",
+      "restore": "Obnovit",
+      "restoreConfirm": "Obnovit zálohu z {{time}}? Nahradí databázi při příštím spuštění Matinee a vše změněné od té doby se ztratí. Databáze v tehdejším stavu se ponechá jako záloha.",
+      "delete": "Smazat",
+      "deleteConfirm": "Smazat zálohu z {{time}}?",
+      "reason": {
+        "scheduled": "Plánovaná",
+        "manual": "Ruční",
+        "upgrade": "Před aktualizací",
+        "before-restore": "Před obnovením"
+      }
     }
   },
   "language": {
@@ -1264,7 +1293,9 @@
       "count": "Kolik",
       "minutes": "Během minut",
       "restart": "Server se spouští nebo restartuje",
-      "restartHint": "Řekne, zda byl aktualizován, nebo se zastavil bez řádného vypnutí."
+      "restartHint": "Řekne, zda byl aktualizován, nebo se zastavil bez řádného vypnutí.",
+      "backup": "Záloha selže",
+      "backupHint": "Když databázi nejde zálohovat."
     },
     "email": {
       "title": "E-mail",

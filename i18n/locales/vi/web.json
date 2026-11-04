@@ -869,6 +869,35 @@
         "title": "Truyền hình trực tiếp",
         "hint": "Danh sách kênh và lịch phát sóng"
       }
+    },
+    "backups": {
+      "title": "Bản sao lưu",
+      "intro": "Matinee sao chép cơ sở dữ liệu trước khi bản cập nhật thay đổi nó, theo lịch và khi bạn yêu cầu. Bản sao lưu nằm trong {{dir}}.",
+      "postgres": "Cơ sở dữ liệu của máy chủ này là PostgreSQL, Matinee không tự sao chép. Hãy sao lưu bằng pg_dump như trang Sao lưu trong hướng dẫn.",
+      "pending": "Bản sao lưu lúc {{time}} sẽ thay cơ sở dữ liệu vào lần khởi động tới của Matinee. Khởi động lại Matinee để hoàn tất.",
+      "cancelRestore": "Hủy khôi phục",
+      "failed": "Lần sao lưu gần nhất thất bại: {{error}}",
+      "every": "Sao lưu",
+      "never": "Chỉ trước khi cập nhật",
+      "every6": "Mỗi 6 giờ",
+      "every12": "Mỗi 12 giờ",
+      "daily": "Mỗi ngày",
+      "weekly": "Mỗi tuần",
+      "keep": "Giữ cho mỗi loại",
+      "makeNow": "Sao lưu ngay",
+      "making": "Đang sao lưu…",
+      "none": "Chưa có bản sao lưu.",
+      "download": "Tải xuống",
+      "restore": "Khôi phục",
+      "restoreConfirm": "Khôi phục bản sao lưu lúc {{time}}? Nó sẽ thay cơ sở dữ liệu vào lần khởi động tới của Matinee, và những gì thay đổi từ đó sẽ mất. Cơ sở dữ liệu lúc đó được giữ làm bản sao lưu.",
+      "delete": "Xóa",
+      "deleteConfirm": "Xóa bản sao lưu lúc {{time}}?",
+      "reason": {
+        "scheduled": "Theo lịch",
+        "manual": "Làm thủ công",
+        "upgrade": "Trước khi cập nhật",
+        "before-restore": "Trước khi khôi phục"
+      }
     }
   },
   "language": {
@@ -1231,7 +1260,9 @@
       "count": "Bao nhiêu",
       "minutes": "Trong số phút",
       "restart": "Máy chủ khởi động hoặc khởi động lại",
-      "restartHint": "Cho biết máy chủ đã được cập nhật, hay đã dừng mà không tắt đúng cách."
+      "restartHint": "Cho biết máy chủ đã được cập nhật, hay đã dừng mà không tắt đúng cách.",
+      "backup": "Sao lưu thất bại",
+      "backupHint": "Khi không thể sao lưu cơ sở dữ liệu."
     },
     "email": {
       "title": "Email",

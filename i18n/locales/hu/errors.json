@@ -251,5 +251,7 @@
   "tonemapping_must_be_hable_mobius_reinhard_or_off": "A toneMapping értéke hable, mobius, reinhard vagy off lehet",
   "kind_must_be_stall_or_error": "A kind értéke stall vagy error lehet",
   "bytes_must_be_between_0_and_104857600": "A bytes értéke 0 és 104857600 között lehet",
-  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "Csak filmek, epizódok, évadok és sorozatok jelölhetők megnézettnek"
+  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "Csak filmek, epizódok, évadok és sorozatok jelölhetők megnézettnek",
+  "no_such_backup": "Nincs ilyen mentés",
+  "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "A szerver adatbázisa PostgreSQL; mentsd pg_dumppal"
 }

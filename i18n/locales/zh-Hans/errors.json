@@ -251,5 +251,7 @@
   "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMapping 必须是 hable、mobius、reinhard 或 off",
   "kind_must_be_stall_or_error": "kind 必须是 stall 或 error",
   "bytes_must_be_between_0_and_104857600": "bytes 必须在 0 到 104857600 之间",
-  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "只有电影、剧集、季和节目可以标记为已看"
+  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "只有电影、剧集、季和节目可以标记为已看",
+  "no_such_backup": "没有这个备份",
+  "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "此服务器的数据库是 PostgreSQL;请用 pg_dump 备份"
 }

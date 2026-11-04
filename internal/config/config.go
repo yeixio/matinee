@@ -62,6 +62,9 @@ func (c Config) ImageDir() string     { return filepath.Join(c.DataDir, "images"
 func (c Config) SubtitleDir() string  { return filepath.Join(c.DataDir, "subtitles") }
 func (c Config) LevelsDir() string    { return filepath.Join(c.DataDir, "levels") }
 
+// BackupDir holds copies of a SQLite database (internal/backup).
+func (c Config) BackupDir() string { return filepath.Join(c.DataDir, "backups") }
+
 // LyricsDir keeps what LRCLIB said about songs (internal/lyrics).
 func (c Config) LyricsDir() string   { return filepath.Join(c.DataDir, "lyrics") }
 func (c Config) DownloadDir() string { return filepath.Join(c.DataDir, "downloads") }

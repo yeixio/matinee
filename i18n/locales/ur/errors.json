@@ -251,5 +251,7 @@
   "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMapping کو hable، mobius، reinhard یا off ہونا چاہیے",
   "kind_must_be_stall_or_error": "kind کو stall یا error ہونا چاہیے",
   "bytes_must_be_between_0_and_104857600": "bytes کو 0 اور 104857600 کے درمیان ہونا چاہیے",
-  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "صرف فلمیں، اقساط، سیزن اور شوز دیکھے گئے کے طور پر نشان زد ہو سکتے ہیں"
+  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "صرف فلمیں، اقساط، سیزن اور شوز دیکھے گئے کے طور پر نشان زد ہو سکتے ہیں",
+  "no_such_backup": "ایسا کوئی بیک اپ نہیں",
+  "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "اس سرور کا ڈیٹا بیس PostgreSQL ہے؛ pg_dump سے بیک اپ لیں"
 }

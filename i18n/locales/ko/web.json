@@ -869,6 +869,35 @@
         "title": "실시간 TV",
         "hint": "채널 목록과 편성표"
       }
+    },
+    "backups": {
+      "title": "백업",
+      "intro": "Matinee는 업데이트가 데이터베이스를 바꾸기 전, 일정에 따라, 그리고 요청할 때 데이터베이스를 복사해요. 백업은 {{dir}}에 보관돼요.",
+      "postgres": "이 서버의 데이터베이스는 PostgreSQL이라 Matinee가 직접 복사하지 않아요. 가이드의 백업 페이지처럼 pg_dump로 백업하세요.",
+      "pending": "{{time}} 백업이 Matinee가 다음에 시작될 때 데이터베이스를 대신해요. 마치려면 Matinee를 다시 시작하세요.",
+      "cancelRestore": "복원 취소",
+      "failed": "마지막 백업이 실패했어요: {{error}}",
+      "every": "백업",
+      "never": "업데이트 전에만",
+      "every6": "6시간마다",
+      "every12": "12시간마다",
+      "daily": "매일",
+      "weekly": "매주",
+      "keep": "종류별 보관 개수",
+      "makeNow": "지금 백업",
+      "making": "백업 중…",
+      "none": "아직 백업이 없어요.",
+      "download": "다운로드",
+      "restore": "복원",
+      "restoreConfirm": "{{time}} 백업을 복원할까요? Matinee가 다음에 시작될 때 데이터베이스를 대신하고, 그 뒤에 바뀐 내용은 사라져요. 그때의 데이터베이스는 백업으로 남아요.",
+      "delete": "삭제",
+      "deleteConfirm": "{{time}} 백업을 삭제할까요?",
+      "reason": {
+        "scheduled": "예약",
+        "manual": "직접 만듦",
+        "upgrade": "업데이트 전",
+        "before-restore": "복원 전"
+      }
     }
   },
   "language": {
@@ -1231,7 +1260,9 @@
       "count": "횟수",
       "minutes": "몇 분 안에",
       "restart": "서버가 시작되거나 다시 시작됨",
-      "restartHint": "업데이트되었는지, 제대로 종료되지 않고 멈췄는지 알려 줍니다."
+      "restartHint": "업데이트되었는지, 제대로 종료되지 않고 멈췄는지 알려 줍니다.",
+      "backup": "백업 실패",
+      "backupHint": "데이터베이스를 백업하지 못했을 때."
     },
     "email": {
       "title": "이메일",

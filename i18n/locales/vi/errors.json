@@ -251,5 +251,7 @@
   "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMapping phải là hable, mobius, reinhard hoặc off",
   "kind_must_be_stall_or_error": "kind phải là stall hoặc error",
   "bytes_must_be_between_0_and_104857600": "bytes phải từ 0 đến 104857600",
-  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "Chỉ phim, tập, mùa và chương trình mới có thể đánh dấu đã xem"
+  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "Chỉ phim, tập, mùa và chương trình mới có thể đánh dấu đã xem",
+  "no_such_backup": "Không có bản sao lưu này",
+  "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "Cơ sở dữ liệu của máy chủ này là PostgreSQL; hãy sao lưu bằng pg_dump"
 }
