@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import type { SubtitleTrack } from '../api'
-import { afterPick, defaultSubtitles, fromOldChoice, pickSubtitles, subtitleLook } from './subtitlePrefs'
+import { afterAuto, afterPick, autoSubtitles, defaultSubtitles, fromOldChoice, pickSubtitles, subtitleLook } from './subtitlePrefs'
 
 const t = (id: string, language: string, extra: Partial<SubtitleTrack> = {}): SubtitleTrack => ({ id, label: id, language, codec: 'subrip', ...extra })
 const en = t('en', 'en')
@@ -31,6 +31,17 @@ describe('subtitle choices', () => {
     expect(afterPick(defaultSubtitles, undefined, 'en').mode).toBe('off')
     expect(afterPick({ mode: 'off', languages: ['en'] }, fr, 'en')).toMatchObject({ mode: 'always', languages: ['fr', 'en'] })
     expect(afterPick({ mode: 'always', languages: ['fr'] }, forcedEn, 'en').mode).toBe('forced')
+  })
+  it('On picks the best full track, whatever the mode', () => {
+    expect(autoSubtitles(tracks, { mode: 'off', languages: ['de', 'fr'] }, { appLanguage: 'en' })?.id).toBe('fr')
+    expect(autoSubtitles(tracks, { mode: 'forced' }, { appLanguage: 'en' })?.id).toBe('en')
+    const ja = t('ja', 'ja', { burnIn: true })
+    const de = t('de', 'de', { default: true })
+    expect(autoSubtitles([ja, t('es', 'es')], { mode: 'off' }, { appLanguage: 'en' })?.id).toBe('es')
+    expect(autoSubtitles([ja, de], { mode: 'off' }, { appLanguage: 'en' })?.id).toBe('de')
+    expect(autoSubtitles([forcedEn], { mode: 'off' }, { appLanguage: 'fr' })?.id).toBe('forced-en')
+    expect(afterAuto({ mode: 'off', languages: ['fr', 'en'] })).toEqual({ mode: 'always', languages: ['fr', 'en'] })
+    expect(afterAuto({ mode: 'foreign' }).mode).toBe('foreign')
   })
   it('reads the old browser choice', () => {
     expect(fromOldChoice('off').mode).toBe('off')

@@ -856,5 +856,10 @@
     "failed": "Tyto titulky se nepodařilo synchronizovat",
     "off": "Jak jsou v souboru",
     "done": "Titulky synchronizovány se zvukem"
+  },
+  "subtitleMenu": {
+    "on": "Zapnuto",
+    "more": "Další titulky",
+    "back": "Zpět"
   }
 }

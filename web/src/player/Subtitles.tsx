@@ -1,4 +1,4 @@
-import { AudioLines, Captions, Check, LoaderCircle, Minus, Plus, Search, Undo2, X } from 'lucide-react'
+import { AudioLines, Captions, Check, ChevronLeft, ChevronRight, LoaderCircle, Minus, Plus, Search, Undo2, X } from 'lucide-react'
 import { Fragment, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import type { SubtitleSync, SubtitleTrack } from '../api'
@@ -87,6 +87,9 @@ type MenuProps = {
   tracks: SubtitleTrack[]
   selected?: string
   onSelect: (track: SubtitleTrack | undefined) => void
+  /** The track On picks for the viewer, and turning it on. */
+  auto?: SubtitleTrack
+  onAuto: () => void
   onOpenChange: (open: boolean) => void
   /** Set when the viewer can look for more subtitles online. */
   find?: {
@@ -102,16 +105,17 @@ type MenuProps = {
   sync?: { state?: SubtitleSync; onSync: () => void; onUndo: () => void }
 }
 
-// SubtitleMenu is the captions button and its list of tracks, ending in
-// Find subtitles when the server can look for more online.
-export function SubtitleMenu({ tracks, selected, onSelect, onOpenChange, find, timing, sync }: MenuProps) {
+// SubtitleMenu is the captions button: Off, or On with the best track for
+// the viewer, then timing and syncing. Every track, and Find subtitles when
+// the server can look for more online, are under More subtitles.
+export function SubtitleMenu({ tracks, selected, onSelect, auto, onAuto, onOpenChange, find, timing, sync }: MenuProps) {
   const { t: tr } = useTranslation()
   const [open, setOpen] = useState(false)
-  const [finding, setFinding] = useState(false)
+  const [view, setView] = useState<'main' | 'more' | 'find'>('main')
   const ref = useRef<HTMLDivElement>(null)
   const toggle = (v: boolean) => {
     setOpen(v)
-    if (!v) setFinding(false)
+    if (!v) setView('main')
     onOpenChange(v)
   }
 
@@ -126,12 +130,12 @@ export function SubtitleMenu({ tracks, selected, onSelect, onOpenChange, find, t
     onSelect(t)
     toggle(false)
   }
-  const item = (key: string, label: string, active: boolean, t: SubtitleTrack | undefined, note?: string) => (
+  const item = (key: string, label: string, active: boolean, t: SubtitleTrack | undefined, note?: string, onClick = () => choose(t)) => (
     <li key={key} className="flex items-center">
       <button
         role="menuitemradio"
         aria-checked={active}
-        onClick={() => choose(t)}
+        onClick={onClick}
         className="flex min-w-0 flex-1 items-center gap-3 rounded-md px-3 py-2 text-start text-sm hover:bg-white/10"
       >
         <Check className={`size-4 shrink-0 ${active ? 'text-accent' : 'invisible'}`} />
@@ -152,6 +156,8 @@ export function SubtitleMenu({ tracks, selected, onSelect, onOpenChange, find, t
   )
   const note = (t: SubtitleTrack) =>
     t.burnIn ? tr('player.convertsVideo') : t.found ? tr('player.findSubtitles.online') : t.external ? tr('player.file') : undefined
+  const current = tracks.find((t) => t.id === selected)
+  const row = 'flex w-full items-center gap-3 rounded-md px-3 py-2 text-start text-sm hover:bg-white/10'
 
   return (
     <div ref={ref} className="relative">
@@ -166,23 +172,49 @@ export function SubtitleMenu({ tracks, selected, onSelect, onOpenChange, find, t
       </button>
       {open && (
         <div
-          className={`absolute end-0 bottom-full mb-2 rounded-xl border border-white/10 bg-black/90 p-1.5 shadow-2xl backdrop-blur ${finding ? '' : 'w-64'}`}
+          className={`absolute end-0 bottom-full mb-2 rounded-xl border border-white/10 bg-black/90 p-1.5 shadow-2xl backdrop-blur ${view === 'find' ? '' : 'w-64'}`}
         >
-          {finding && find ? (
+          {view === 'find' && find ? (
             <FindSubtitles
               itemId={find.itemId}
-              onBack={() => setFinding(false)}
+              onBack={() => setView('more')}
               onAdded={(t) => {
                 find.onAdded(t)
                 toggle(false)
               }}
             />
-          ) : (
+          ) : view === 'more' ? (
             <>
-              <div className="px-3 pt-1.5 pb-1 text-xs font-medium tracking-wide text-white/50 uppercase">{tr('file.subtitles')}</div>
+              <button
+                onClick={() => setView('main')}
+                className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-start text-xs font-medium tracking-wide text-white/60 uppercase hover:bg-white/10"
+                title={tr('common:subtitleMenu.back')}
+              >
+                <ChevronLeft className="size-4 rtl:rotate-180" />
+                {tr('common:subtitleMenu.more')}
+              </button>
               <ul role="menu" className="max-h-72 overflow-y-auto">
                 {item('off', tr('player.off'), !selected, undefined)}
                 {tracks.map((t) => item(t.id, subtitleLabel(t), t.id === selected, t, note(t)))}
+              </ul>
+              {find && (
+                <button role="menuitem" onClick={() => setView('find')} className={`mt-1 border-t border-white/10 ${row}`}>
+                  <Search className="size-4 shrink-0" />
+                  <span className="min-w-0 flex-1 truncate">{tr('player.findSubtitles.open')}</span>
+                </button>
+              )}
+            </>
+          ) : (
+            <>
+              <div className="px-3 pt-1.5 pb-1 text-xs font-medium tracking-wide text-white/50 uppercase">{tr('file.subtitles')}</div>
+              <ul role="menu">
+                {item('off', tr('player.off'), !selected, undefined)}
+                {auto &&
+                  item('on', tr('common:subtitleMenu.on'), selected === auto.id, undefined, subtitleLabel(auto), () => {
+                    onAuto()
+                    toggle(false)
+                  })}
+                {current && current.id !== auto?.id && item(current.id, subtitleLabel(current), true, current, note(current))}
               </ul>
               {timing && (
                 <div className="mt-1 border-t border-white/10 px-3 pt-2 pb-1.5">
@@ -214,16 +246,10 @@ export function SubtitleMenu({ tracks, selected, onSelect, onOpenChange, find, t
                   {sync && <SyncRow {...sync} />}
                 </div>
               )}
-              {find && (
-                <button
-                  role="menuitem"
-                  onClick={() => setFinding(true)}
-                  className="mt-1 flex w-full items-center gap-3 rounded-md border-t border-white/10 px-3 py-2 text-start text-sm hover:bg-white/10"
-                >
-                  <Search className="size-4 shrink-0" />
-                  <span className="min-w-0 flex-1 truncate">{tr('player.findSubtitles.open')}</span>
-                </button>
-              )}
+              <button role="menuitem" aria-haspopup="menu" onClick={() => setView('more')} className={`mt-1 border-t border-white/10 ${row}`}>
+                <span className="min-w-0 flex-1 truncate">{tr('common:subtitleMenu.more')}</span>
+                <ChevronRight className="size-4 shrink-0 text-white/50 rtl:rotate-180" />
+              </button>
             </>
           )}
         </div>

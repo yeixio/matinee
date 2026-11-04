@@ -824,5 +824,10 @@
     "failed": "Aceste subtitrări nu au putut fi sincronizate",
     "off": "Ca în fișier",
     "done": "Subtitrări sincronizate cu sunetul"
+  },
+  "subtitleMenu": {
+    "on": "Activate",
+    "more": "Mai multe subtitrări",
+    "back": "Înapoi"
   }
 }

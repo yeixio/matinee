@@ -760,5 +760,10 @@
     "failed": "Sari kata ini tidak dapat disegerakkan",
     "off": "Seperti dalam fail",
     "done": "Sari kata disegerakkan dengan audio"
+  },
+  "subtitleMenu": {
+    "on": "Hidup",
+    "more": "Lagi sari kata",
+    "back": "Kembali"
   }
 }

@@ -792,5 +792,10 @@
     "failed": "Kunde inte synka de här undertexterna",
     "off": "Som i filen",
     "done": "Undertexterna synkade med ljudet"
+  },
+  "subtitleMenu": {
+    "on": "På",
+    "more": "Fler undertexter",
+    "back": "Tillbaka"
   }
 }

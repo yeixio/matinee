@@ -792,5 +792,10 @@
     "failed": "Näitä tekstityksiä ei voitu tahdistaa",
     "off": "Kuten tiedostossa",
     "done": "Tekstitys tahdistettu ääneen"
+  },
+  "subtitleMenu": {
+    "on": "Päällä",
+    "more": "Lisää tekstityksiä",
+    "back": "Takaisin"
   }
 }

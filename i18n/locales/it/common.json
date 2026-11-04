@@ -824,5 +824,10 @@
     "failed": "Impossibile sincronizzare questi sottotitoli",
     "off": "Come nel file",
     "done": "Sottotitoli sincronizzati con l’audio"
+  },
+  "subtitleMenu": {
+    "on": "Attivi",
+    "more": "Altri sottotitoli",
+    "back": "Indietro"
   }
 }

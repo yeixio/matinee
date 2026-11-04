@@ -792,5 +792,10 @@
     "failed": "Deze ondertitels konden niet worden gesynchroniseerd",
     "off": "Zoals in het bestand",
     "done": "Ondertitels gesynchroniseerd met de audio"
+  },
+  "subtitleMenu": {
+    "on": "Aan",
+    "more": "Meer ondertitels",
+    "back": "Terug"
   }
 }

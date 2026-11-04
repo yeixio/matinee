@@ -792,5 +792,10 @@
     "failed": "Couldn’t sync these subtitles",
     "off": "Shown as written",
     "done": "Subtitles synced to the audio"
+  },
+  "subtitleMenu": {
+    "on": "On",
+    "more": "More subtitles",
+    "back": "Back"
   }
 }
