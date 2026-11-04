@@ -90,7 +90,9 @@
     "seasons": "季",
     "albums": "专辑",
     "episodes": "剧集",
-    "resetPoster": "使用自动海报"
+    "resetPoster": "使用自动海报",
+    "markWatched": "标记为已看",
+    "markUnwatched": "标记为未看"
   },
   "row": {
     "back": "向前滚动",

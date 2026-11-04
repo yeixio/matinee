@@ -250,5 +250,6 @@
   "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "ขณะนี้ไม่มีการเชื่อมต่ออินเทอร์เน็ต เซิร์ฟเวอร์ของคุณปกติดี ส่วนนี้ต้องใช้อินเทอร์เน็ต และจะใช้ได้อีกเมื่ออินเทอร์เน็ตกลับมา",
   "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMapping ต้องเป็น hable, mobius, reinhard หรือ off",
   "kind_must_be_stall_or_error": "kind ต้องเป็น stall หรือ error",
-  "bytes_must_be_between_0_and_104857600": "bytes ต้องอยู่ระหว่าง 0 ถึง 104857600"
+  "bytes_must_be_between_0_and_104857600": "bytes ต้องอยู่ระหว่าง 0 ถึง 104857600",
+  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "ทำเครื่องหมายว่าดูแล้วได้เฉพาะภาพยนตร์ ตอน ซีซัน และซีรีส์"
 }

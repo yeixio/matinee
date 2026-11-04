@@ -1119,6 +1119,8 @@ export type LiveSourceInput = { name?: string; playlistUrl?: string; iptvOrg?: L
 export type LiveChoice = { code: string; name: string; flag?: string }
 export type IPTVOrgChoices = { countries: LiveChoice[]; categories: LiveChoice[]; languages: LiveChoice[] }
 
+export type WatchedCount = { total: number; played: number }
+
 export interface PlaybackReport {
   kind: 'stall' | 'error'
   positionMs: number
@@ -1463,6 +1465,9 @@ export const api = {
   // rating: 1 to 10 (half stars), or null to take it back.
   rate: (id: number, rating: number | null) =>
     rating ? request<void>('PUT', `/api/v1/items/${id}/rating`, { rating }) : request<void>('DELETE', `/api/v1/items/${id}/rating`),
+  // How much of a movie, episode, season or show is watched, and marking it all.
+  watched: (id: number) => request<WatchedCount>('GET', `/api/v1/items/${id}/watched`),
+  setWatched: (id: number, played: boolean) => request<WatchedCount>('PUT', `/api/v1/items/${id}/watched`, { played }),
   hideFromContinueWatching: (id: number) => request<void>('DELETE', `/api/v1/continue-watching/${id}`),
   setProgress: (id: number, positionMs: number, played = false) =>
     request<void>('PUT', `/api/v1/items/${id}/progress`, { positionMs, played }),

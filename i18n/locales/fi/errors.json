@@ -250,5 +250,6 @@
   "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "ei internetyhteyttä juuri nyt. Palvelimesi toimii; tämä tarvitsee internetin ja toimii taas, kun yhteys palaa.",
   "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMappingin on oltava hable, mobius, reinhard tai off",
   "kind_must_be_stall_or_error": "kindin on oltava stall tai error",
-  "bytes_must_be_between_0_and_104857600": "bytesin on oltava välillä 0–104857600"
+  "bytes_must_be_between_0_and_104857600": "bytesin on oltava välillä 0–104857600",
+  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "Vain elokuvat, jaksot, kaudet ja sarjat voi merkitä katsotuiksi"
 }

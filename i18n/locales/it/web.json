@@ -90,7 +90,9 @@
     "seasons": "Stagioni",
     "albums": "Album",
     "episodes": "Episodi",
-    "resetPoster": "Usa la locandina automatica"
+    "resetPoster": "Usa la locandina automatica",
+    "markWatched": "Segna come visto",
+    "markUnwatched": "Segna come non visto"
   },
   "row": {
     "back": "Scorri indietro",

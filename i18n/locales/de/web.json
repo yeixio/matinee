@@ -90,7 +90,9 @@
     "seasons": "Staffeln",
     "albums": "Alben",
     "episodes": "Folgen",
-    "resetPoster": "Automatisches Poster verwenden"
+    "resetPoster": "Automatisches Poster verwenden",
+    "markWatched": "Als gesehen markieren",
+    "markUnwatched": "Als ungesehen markieren"
   },
   "row": {
     "back": "Zurückblättern",

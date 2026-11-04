@@ -250,5 +250,6 @@
   "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "op dit moment geen internetverbinding. Je server is in orde; dit heeft internet nodig en werkt weer zodra het terug is.",
   "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMapping moet hable, mobius, reinhard of off zijn",
   "kind_must_be_stall_or_error": "kind moet stall of error zijn",
-  "bytes_must_be_between_0_and_104857600": "bytes moet tussen 0 en 104857600 liggen"
+  "bytes_must_be_between_0_and_104857600": "bytes moet tussen 0 en 104857600 liggen",
+  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "Alleen films, afleveringen, seizoenen en series kunnen als bekeken worden gemarkeerd"
 }

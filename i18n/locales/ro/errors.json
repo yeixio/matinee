@@ -250,5 +250,6 @@
   "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "nu există conexiune la internet acum. Serverul tău e în regulă; asta are nevoie de internet și va merge din nou când revine.",
   "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMapping trebuie să fie hable, mobius, reinhard sau off",
   "kind_must_be_stall_or_error": "kind trebuie să fie stall sau error",
-  "bytes_must_be_between_0_and_104857600": "bytes trebuie să fie între 0 și 104857600"
+  "bytes_must_be_between_0_and_104857600": "bytes trebuie să fie între 0 și 104857600",
+  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "Doar filmele, episoadele, sezoanele și serialele pot fi marcate ca vizionate"
 }

@@ -90,7 +90,9 @@
     "seasons": "Kaudet",
     "albums": "Albumit",
     "episodes": "Jaksot",
-    "resetPoster": "Käytä automaattista julistetta"
+    "resetPoster": "Käytä automaattista julistetta",
+    "markWatched": "Merkitse katsotuksi",
+    "markUnwatched": "Merkitse katsomattomaksi"
   },
   "row": {
     "back": "Vieritä taaksepäin",

@@ -250,5 +250,6 @@
   "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "hiện không có kết nối internet. Máy chủ của bạn vẫn ổn; tính năng này cần internet và sẽ hoạt động lại khi có mạng.",
   "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMapping phải là hable, mobius, reinhard hoặc off",
   "kind_must_be_stall_or_error": "kind phải là stall hoặc error",
-  "bytes_must_be_between_0_and_104857600": "bytes phải từ 0 đến 104857600"
+  "bytes_must_be_between_0_and_104857600": "bytes phải từ 0 đến 104857600",
+  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "Chỉ phim, tập, mùa và chương trình mới có thể đánh dấu đã xem"
 }

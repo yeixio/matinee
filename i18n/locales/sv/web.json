@@ -90,7 +90,9 @@
     "seasons": "Säsonger",
     "albums": "Album",
     "episodes": "Avsnitt",
-    "resetPoster": "Använd den automatiska affischen"
+    "resetPoster": "Använd den automatiska affischen",
+    "markWatched": "Markera som sedd",
+    "markUnwatched": "Markera som osedd"
   },
   "row": {
     "back": "Bläddra bakåt",

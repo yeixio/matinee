@@ -90,7 +90,9 @@
     "seasons": "Các phần",
     "albums": "Album",
     "episodes": "Các tập",
-    "resetPoster": "Dùng áp phích tự động"
+    "resetPoster": "Dùng áp phích tự động",
+    "markWatched": "Đánh dấu đã xem",
+    "markUnwatched": "Đánh dấu chưa xem"
   },
   "row": {
     "back": "Cuộn lùi",

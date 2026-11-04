@@ -90,7 +90,9 @@
     "seasons": "Sæsoner",
     "albums": "Album",
     "episodes": "Afsnit",
-    "resetPoster": "Brug den automatiske plakat"
+    "resetPoster": "Brug den automatiske plakat",
+    "markWatched": "Markér som set",
+    "markUnwatched": "Markér som uset"
   },
   "row": {
     "back": "Rul tilbage",

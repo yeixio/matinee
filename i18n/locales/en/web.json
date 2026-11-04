@@ -90,7 +90,9 @@
     "seasons": "Seasons",
     "albums": "Albums",
     "episodes": "Episodes",
-    "resetPoster": "Use the automatic poster"
+    "resetPoster": "Use the automatic poster",
+    "markWatched": "Mark as watched",
+    "markUnwatched": "Mark as unwatched"
   },
   "row": {
     "back": "Scroll back",

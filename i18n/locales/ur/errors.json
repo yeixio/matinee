@@ -250,5 +250,6 @@
   "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "اس وقت انٹرنیٹ کنکشن نہیں ہے۔ آپ کا سرور ٹھیک ہے؛ اس کے لیے انٹرنیٹ چاہیے، اور انٹرنیٹ واپس آنے پر یہ پھر چلے گا۔",
   "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMapping کو hable، mobius، reinhard یا off ہونا چاہیے",
   "kind_must_be_stall_or_error": "kind کو stall یا error ہونا چاہیے",
-  "bytes_must_be_between_0_and_104857600": "bytes کو 0 اور 104857600 کے درمیان ہونا چاہیے"
+  "bytes_must_be_between_0_and_104857600": "bytes کو 0 اور 104857600 کے درمیان ہونا چاہیے",
+  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "صرف فلمیں، اقساط، سیزن اور شوز دیکھے گئے کے طور پر نشان زد ہو سکتے ہیں"
 }

@@ -90,7 +90,9 @@
     "seasons": "Sezony",
     "albums": "Albumy",
     "episodes": "Odcinki",
-    "resetPoster": "Użyj automatycznego plakatu"
+    "resetPoster": "Użyj automatycznego plakatu",
+    "markWatched": "Oznacz jako obejrzane",
+    "markUnwatched": "Oznacz jako nieobejrzane"
   },
   "row": {
     "back": "Przewiń wstecz",

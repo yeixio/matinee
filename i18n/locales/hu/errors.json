@@ -250,5 +250,6 @@
   "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "jelenleg nincs internetkapcsolat. A szervered rendben van; ehhez internet kell, és újra működik, amint visszajön.",
   "tonemapping_must_be_hable_mobius_reinhard_or_off": "A toneMapping értéke hable, mobius, reinhard vagy off lehet",
   "kind_must_be_stall_or_error": "A kind értéke stall vagy error lehet",
-  "bytes_must_be_between_0_and_104857600": "A bytes értéke 0 és 104857600 között lehet"
+  "bytes_must_be_between_0_and_104857600": "A bytes értéke 0 és 104857600 között lehet",
+  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "Csak filmek, epizódok, évadok és sorozatok jelölhetők megnézettnek"
 }

@@ -90,7 +90,9 @@
     "seasons": "Řady",
     "albums": "Alba",
     "episodes": "Díly",
-    "resetPoster": "Použít automatický plakát"
+    "resetPoster": "Použít automatický plakát",
+    "markWatched": "Označit jako zhlédnuté",
+    "markUnwatched": "Označit jako nezhlédnuté"
   },
   "row": {
     "back": "Posunout zpět",
