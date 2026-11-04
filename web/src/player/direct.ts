@@ -1,5 +1,5 @@
 // What a file needs to say for the browser to decide whether it plays as-is.
-type Playable = { mimeType?: string; videoCodec?: string; audioCodec?: string }
+export type Playable = { mimeType?: string; videoCodec?: string; audioCodec?: string }
 
 const videoCodecs: Record<string, string> = {
   h264: 'avc1.640028',

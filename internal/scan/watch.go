@@ -297,9 +297,9 @@ func wanted(kind Kind, video bool, p string) bool {
 		return true // removed or renamed away
 	}
 	if info.IsDir() {
-		return !(video && IsTrailerDir(name))
+		return !(video && IsExtraDir(name, false))
 	}
-	return kind.Wants(p) && !(video && IsTrailerFile(name))
+	return kind.Wants(p) && !(video && IsExtraFile(name))
 }
 
 // signature sums up a path's size and times, to tell when a copy into it

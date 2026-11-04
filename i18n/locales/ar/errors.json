@@ -256,5 +256,7 @@
   "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "قاعدة بيانات هذا الخادم هي PostgreSQL؛ انسخها احتياطيًا باستخدام pg_dump",
   "audiodelay_is_milliseconds_between_2000_and_2000": "تأخير الصوت بالمللي ثانية، بين -2000 و2000.",
   "subtitle_choices_arent_ones_the_apps_know": "خيارات الترجمة هذه غير معروفة للتطبيقات",
-  "no_such_font": "لا يوجد هذا الخط"
+  "no_such_font": "لا يوجد هذا الخط",
+  "couldnt_start_playback_for_this_extra": "تعذر تشغيل هذا المحتوى الإضافي",
+  "no_such_extra": "لا يوجد محتوى إضافي كهذا"
 }

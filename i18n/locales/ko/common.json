@@ -725,5 +725,24 @@
     "earlier": "자막 더 일찍",
     "later": "자막 더 늦게",
     "reset": "파일 싱크로 되돌리기"
+  },
+  "extras": {
+    "title": "부가 영상",
+    "commentary": "코멘터리",
+    "playWith": "{{track}}(으)로 {{title}} 재생",
+    "wontPlay": "이 부가 영상을 재생할 수 없습니다.",
+    "kinds": {
+      "trailer": "예고편",
+      "behindTheScenes": "비하인드",
+      "deleted": "삭제된 장면",
+      "featurette": "피처렛",
+      "interview": "인터뷰",
+      "scene": "장면",
+      "short": "단편",
+      "other": "부가 영상"
+    }
+  },
+  "audioTrack": {
+    "title": "오디오"
   }
 }

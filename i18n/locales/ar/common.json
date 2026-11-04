@@ -885,5 +885,24 @@
     "earlier": "إظهار الترجمة أبكر",
     "later": "إظهار الترجمة لاحقًا",
     "reset": "العودة إلى توقيت الملف"
+  },
+  "extras": {
+    "title": "محتوى إضافي",
+    "commentary": "تعليق",
+    "playWith": "تشغيل {{title}} مع {{track}}",
+    "wontPlay": "يتعذر تشغيل هذا المحتوى الإضافي.",
+    "kinds": {
+      "trailer": "إعلان تشويقي",
+      "behindTheScenes": "وراء الكواليس",
+      "deleted": "مشهد محذوف",
+      "featurette": "فيلم قصير عن العمل",
+      "interview": "مقابلة",
+      "scene": "مشهد",
+      "short": "فيلم قصير",
+      "other": "إضافي"
+    }
+  },
+  "audioTrack": {
+    "title": "الصوت"
   }
 }

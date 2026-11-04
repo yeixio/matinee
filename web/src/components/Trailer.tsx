@@ -5,8 +5,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { api, trailerFileUrl, type Item, type Trailer } from '../api'
 import { clock } from '../format'
-import i18n from '../i18n'
-import { canDirectPlay } from '../player/direct'
+import { canDirectPlay, type Playable } from '../player/direct'
 import { Button, Spinner } from './ui'
 
 // TrailerButton shows on movies, shows and seasons that have a trailer, from
@@ -64,7 +63,14 @@ function TrailerDialog({ item, trailers, onClose }: { item: Item; trailers: Trai
         onClick={(e) => e.stopPropagation()}
       >
         {current.source === 'local' ? (
-          <LocalTrailer key={current.id} item={item} trailer={current} onEnded={onClose} />
+          <LocalClip
+            key={current.id}
+            clip={current}
+            fileUrl={trailerFileUrl(item.id, current.id)}
+            startHls={() => api.startTrailerHls(item.id, current.id)}
+            wontPlay={tr('trailer.wontPlay')}
+            onEnded={onClose}
+          />
         ) : (
           <iframe
             key={current.id}
@@ -97,44 +103,60 @@ function TrailerDialog({ item, trailers, onClose }: { item: Item; trailers: Trai
   )
 }
 
-// LocalTrailer plays a trailer file straight from the server when the
-// browser can, and converted otherwise, the way the main player does.
-function LocalTrailer({ item, trailer, onEnded }: { item: Item; trailer: Trailer; onEnded: () => void }) {
+// LocalClip plays a trailer or another extra's file straight from the server
+// when the browser can, and converted otherwise, the way the main player does.
+export function LocalClip({
+  clip,
+  fileUrl,
+  startHls,
+  wontPlay,
+  onEnded,
+}: {
+  clip: Playable
+  fileUrl: string
+  startHls: () => Promise<{ url: string }>
+  wontPlay: string
+  onEnded: () => void
+}) {
   const video = useRef<HTMLVideoElement>(null)
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(true)
+  // The newest of these, without starting playback again when they change.
+  const latest = useRef({ startHls, wontPlay })
+  latest.current = { startHls, wontPlay }
 
   useEffect(() => {
     const el = video.current
     if (!el) return
     let hls: Hls | undefined
     let cancelled = false
+    const fail = () => !cancelled && setError(latest.current.wontPlay)
     const start = async () => {
-      if (canDirectPlay(trailer, el)) {
-        el.src = trailerFileUrl(item.id, trailer.id)
+      if (canDirectPlay(clip, el)) {
+        el.src = fileUrl
       } else {
-        const { url } = await api.startTrailerHls(item.id, trailer.id)
+        const { url } = await latest.current.startHls()
         const { default: Hls } = await import('hls.js')
         if (cancelled) return
         if (Hls.isSupported()) {
           hls = new Hls()
           hls.loadSource(url)
           hls.attachMedia(el)
-          hls.on(Hls.Events.ERROR, (_, d) => d.fatal && setError(i18n.t('trailer.wontPlay')))
+          hls.on(Hls.Events.ERROR, (_, d) => d.fatal && fail())
         } else {
           el.src = url // Safari plays HLS natively
         }
       }
       el.play().catch(() => {})
     }
-    start().catch(() => !cancelled && setError(i18n.t('trailer.wontPlay')))
+    start().catch(fail)
     return () => {
       cancelled = true
       hls?.destroy()
       el.removeAttribute('src')
       el.load()
     }
-  }, [item.id, trailer])
+  }, [clip, fileUrl])
 
   return (
     <div className="relative size-full">
@@ -145,7 +167,7 @@ function LocalTrailer({ item, trailer, onEnded }: { item: Item; trailer: Trailer
         playsInline
         onPlaying={() => setLoading(false)}
         onEnded={onEnded}
-        onError={() => setError(i18n.t('trailer.wontPlay'))}
+        onError={() => setError(wontPlay)}
       />
       {loading && !error && (
         <div className="pointer-events-none absolute inset-0 grid place-items-center">

@@ -757,5 +757,24 @@
     "earlier": "Näytä tekstitykset aiemmin",
     "later": "Näytä tekstitykset myöhemmin",
     "reset": "Takaisin tiedoston ajoitukseen"
+  },
+  "extras": {
+    "title": "Lisämateriaali",
+    "commentary": "Kommentaari",
+    "playWith": "Toista {{title}} raidalla {{track}}",
+    "wontPlay": "Tätä lisämateriaalia ei voi toistaa.",
+    "kinds": {
+      "trailer": "Traileri",
+      "behindTheScenes": "Kulissien takana",
+      "deleted": "Poistettu kohtaus",
+      "featurette": "Featurette",
+      "interview": "Haastattelu",
+      "scene": "Kohtaus",
+      "short": "Lyhytelokuva",
+      "other": "Lisämateriaali"
+    }
+  },
+  "audioTrack": {
+    "title": "Ääni"
   }
 }

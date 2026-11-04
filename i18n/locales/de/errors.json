@@ -256,5 +256,7 @@
   "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "Die Datenbank dieses Servers ist PostgreSQL; sichere sie mit pg_dump",
   "audiodelay_is_milliseconds_between_2000_and_2000": "Die Tonverzögerung ist in Millisekunden zwischen -2000 und 2000 anzugeben.",
   "subtitle_choices_arent_ones_the_apps_know": "Diese Untertitel-Einstellungen kennen die Apps nicht",
-  "no_such_font": "Diese Schrift gibt es nicht"
+  "no_such_font": "Diese Schrift gibt es nicht",
+  "couldnt_start_playback_for_this_extra": "Dieses Extra konnte nicht abgespielt werden",
+  "no_such_extra": "Kein solches Extra"
 }

@@ -256,3 +256,21 @@ export function awardSummary(awards: { name: string; won: boolean }[]): string {
         : i18n.t('common:awards.nominations', { count: noms })
   return [...parts, total].join(' · ')
 }
+
+// What an audio track is called in the player's Audio menu: "French",
+// "English (Director's Commentary)", or its own title when it has no language.
+export function audioLabel(a: AudioStream): string {
+  const lang = languageName(a.language)
+  const notes: string[] = []
+  // A commentary's own title usually says whose it is.
+  if (a.commentary) notes.push(a.title && /comment/i.test(a.title) ? a.title : i18n.t('web:file.commentary'))
+  if (a.descriptive) notes.push(i18n.t('web:file.audioDescription'))
+  if (!lang) return notes.length ? notes.join(', ') : a.title || i18n.t('web:file.trackN', { n: a.index + 1 })
+  if (!notes.length && a.title && !a.title.toLowerCase().includes(lang.toLowerCase())) notes.push(a.title)
+  return notes.length ? `${lang} (${notes.join(', ')})` : lang
+}
+
+// The file's commentary tracks, which the title page lists with its extras.
+export function commentaries(mi?: MediaInfo): AudioStream[] {
+  return mi?.audio.filter((a) => a.commentary) ?? []
+}

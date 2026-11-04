@@ -725,5 +725,24 @@
     "earlier": "Hiện phụ đề sớm hơn",
     "later": "Hiện phụ đề muộn hơn",
     "reset": "Trở về thời gian của tệp"
+  },
+  "extras": {
+    "title": "Nội dung bổ sung",
+    "commentary": "Bình luận",
+    "playWith": "Phát {{title}} với {{track}}",
+    "wontPlay": "Không phát được nội dung bổ sung này.",
+    "kinds": {
+      "trailer": "Trailer",
+      "behindTheScenes": "Hậu trường",
+      "deleted": "Cảnh bị cắt",
+      "featurette": "Featurette",
+      "interview": "Phỏng vấn",
+      "scene": "Cảnh",
+      "short": "Phim ngắn",
+      "other": "Bổ sung"
+    }
+  },
+  "audioTrack": {
+    "title": "Âm thanh"
   }
 }

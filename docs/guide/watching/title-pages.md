@@ -31,6 +31,10 @@ Click any poster to open its page. Everything Matinee knows about the title is h
 ![More details: release date, genres, studio, collection, budget and the crew](../images/more-details.webp)
 
 <!-- since: v0.3.0 -->
+Under the buttons, an **Extras** row lists the title's commentaries, behind-the-scenes videos, deleted scenes, featurettes and other special features from your files. See [Extras and commentaries](/docs/watching/extras/).
+<!-- /since -->
+
+<!-- since: v0.3.0 -->
 ### Versions
 
 A movie or episode with more than one file, such as a 4K copy and a 1080p one, or the theatrical and the extended cut, has a **Version** menu next to the buttons. Each version shows its picture size, HDR, the cut its file name gives, the file size and the format. **Play** plays the one picked, and the browser remembers it for that title next time.

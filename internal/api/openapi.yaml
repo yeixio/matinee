@@ -2802,6 +2802,71 @@ paths:
                   url: { type: string, example: /api/v1/hls/abc123/index.m3u8 }
                   startSec: { type: number }
         "404": { $ref: "#/components/responses/Error" }
+  /items/{id}/extras:
+    get:
+      summary: A title's extras
+      description: >-
+        Special features from files next to a movie, show or season: behind the scenes, deleted scenes,
+        featurettes, interviews, scenes, shorts, trailers and others, found by folder (`Deleted Scenes/`)
+        or suffix (`-featurette`). Commentary tracks are in the title's `mediaInfo.audio`, marked `commentary`.
+      parameters:
+        - $ref: "#/components/parameters/ID"
+      responses:
+        "200":
+          description: The extras, by kind.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id: { type: string }
+                    kind: { type: string, enum: [trailer, behindTheScenes, deleted, featurette, interview, scene, short, other] }
+                    name: { type: string, description: The extra's own name; empty when it has none. }
+                    mimeType: { type: string }
+                    container: { type: string }
+                    videoCodec: { type: string }
+                    audioCodec: { type: string }
+                    durationMs: { type: integer }
+        "404": { $ref: "#/components/responses/Error" }
+  /items/{id}/extras/{extra}/file:
+    get:
+      summary: An extra's file, for direct play
+      parameters:
+        - $ref: "#/components/parameters/ID"
+        - { name: extra, in: path, required: true, schema: { type: string } }
+      responses:
+        "200": { description: The file. Range requests are supported. }
+        "404": { $ref: "#/components/responses/Error" }
+  /items/{id}/extras/{extra}/hls:
+    post:
+      summary: Start a transcode of an extra
+      description: Like `/items/{id}/hls`. It replaces the viewer's transcode of the title itself.
+      parameters:
+        - $ref: "#/components/parameters/ID"
+        - { name: extra, in: path, required: true, schema: { type: string } }
+        - { name: start, in: query, schema: { type: number }, description: Seconds into the extra. }
+      responses:
+        "200":
+          description: An HLS playlist to play.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  url: { type: string, example: /api/v1/hls/abc123/index.m3u8 }
+                  startSec: { type: number }
+        "404": { $ref: "#/components/responses/Error" }
+  /items/{id}/extras/{extra}/image:
+    get:
+      summary: A still from an extra
+      parameters:
+        - $ref: "#/components/parameters/ID"
+        - { name: extra, in: path, required: true, schema: { type: string } }
+      responses:
+        "200": { description: A JPEG, 640 wide. }
+        "404": { $ref: "#/components/responses/Error" }
   /hls/{session}/{file}:
     get:
       summary: A transcode's playlist and segments

@@ -725,5 +725,24 @@
     "earlier": "字幕提前",
     "later": "字幕延后",
     "reset": "恢复文件的时间"
+  },
+  "extras": {
+    "title": "花絮",
+    "commentary": "评论音轨",
+    "playWith": "用{{track}}播放{{title}}",
+    "wontPlay": "无法播放此花絮。",
+    "kinds": {
+      "trailer": "预告片",
+      "behindTheScenes": "幕后",
+      "deleted": "删减片段",
+      "featurette": "特辑",
+      "interview": "访谈",
+      "scene": "片段",
+      "short": "短片",
+      "other": "花絮"
+    }
+  },
+  "audioTrack": {
+    "title": "音频"
   }
 }

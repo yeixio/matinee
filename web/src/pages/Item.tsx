@@ -8,6 +8,7 @@ import { Artwork } from '../components/Artwork'
 import { FileDetailsButton, Languages, QualityBadges } from '../components/MediaInfo'
 import { PosterGrid } from '../components/Card'
 import { AddToCollectionButton } from '../components/Collections'
+import { ExtrasRow } from '../components/Extras'
 import { FixMatchButton } from '../components/MatchPicker'
 import { CastRows, KeyPeople, MoreDetailsButton } from '../components/Credits'
 import { RelatedRows } from '../components/Related'
@@ -62,6 +63,7 @@ export default function ItemPage() {
         </div>
       )}
       <div className="relative space-y-10">
+        <ExtrasRow item={item} />
         <CastRows item={item} />
         <RelatedRows item={item} />
       </div>
