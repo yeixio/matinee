@@ -30,6 +30,10 @@ These wait quietly and catch up once the connection is back. You don't need to d
 
 Ask for one of these meanwhile, such as searching for subtitles, and Matinee says there's no internet connection right now and that your server is fine, rather than showing an error.
 
+## The apps at home
+
+The Matinee apps keep finding your server at home with the internet down. If your server's usual address is a name that can't be looked up without the internet, the apps use the home address they saw on an earlier visit, once they've checked it's the same server. Unlocks you've paid for on a TV keep working from the last check.
+
 ## How Matinee stays quick
 
 When a site such as TMDB stops answering, Matinee remembers it and stops asking for a while instead of making every page or scan wait for an answer that won't come. It tries again after 30 seconds, then waits longer each time, up to five minutes. As soon as one site answers, Matinee knows the internet is back and looks up what waited.
