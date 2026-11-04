@@ -758,6 +758,25 @@
     "later": "Visa undertexter senare",
     "reset": "Tillbaka till filens timing"
   },
+  "extras": {
+    "title": "Extramaterial",
+    "commentary": "Kommentar",
+    "playWith": "Spela {{title}} med {{track}}",
+    "wontPlay": "Det här extramaterialet går inte att spela.",
+    "kinds": {
+      "trailer": "Trailer",
+      "behindTheScenes": "Bakom kulisserna",
+      "deleted": "Bortklippt scen",
+      "featurette": "Featurette",
+      "interview": "Intervju",
+      "scene": "Scen",
+      "short": "Kortfilm",
+      "other": "Extra"
+    }
+  },
+  "audioTrack": {
+    "title": "Ljud"
+  },
   "subtitleSync": {
     "title": "Synka med ljudet",
     "again": "Synka igen",

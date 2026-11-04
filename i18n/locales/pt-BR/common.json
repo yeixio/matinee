@@ -790,6 +790,25 @@
     "later": "Mostrar legendas depois",
     "reset": "Voltar à sincronia do arquivo"
   },
+  "extras": {
+    "title": "Extras",
+    "commentary": "Comentário",
+    "playWith": "Reproduzir {{title}} com {{track}}",
+    "wontPlay": "Este extra não pode ser reproduzido.",
+    "kinds": {
+      "trailer": "Trailer",
+      "behindTheScenes": "Bastidores",
+      "deleted": "Cena excluída",
+      "featurette": "Featurette",
+      "interview": "Entrevista",
+      "scene": "Cena",
+      "short": "Curta",
+      "other": "Extra"
+    }
+  },
+  "audioTrack": {
+    "title": "Áudio"
+  },
   "subtitleSync": {
     "title": "Sincronizar com o áudio",
     "again": "Sincronizar de novo",

@@ -758,6 +758,25 @@
     "later": "सबटाइटल बाद में दिखाएँ",
     "reset": "फ़ाइल के समय पर लौटें"
   },
+  "extras": {
+    "title": "अतिरिक्त सामग्री",
+    "commentary": "कमेंट्री",
+    "playWith": "{{title}} को {{track}} के साथ चलाएँ",
+    "wontPlay": "यह अतिरिक्त सामग्री नहीं चल सकती।",
+    "kinds": {
+      "trailer": "ट्रेलर",
+      "behindTheScenes": "पर्दे के पीछे",
+      "deleted": "हटाया गया दृश्य",
+      "featurette": "फ़ीचरेट",
+      "interview": "इंटरव्यू",
+      "scene": "दृश्य",
+      "short": "लघु फ़िल्म",
+      "other": "अतिरिक्त"
+    }
+  },
+  "audioTrack": {
+    "title": "ऑडियो"
+  },
   "subtitleSync": {
     "title": "ऑडियो से मिलाएँ",
     "again": "फिर से मिलाएँ",

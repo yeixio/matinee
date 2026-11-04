@@ -1,6 +1,6 @@
 ---
 title: Organizing your media
-description: How to name movie, TV, music and audiobook folders and files so Matinee recognizes them, plus artwork, subtitles and trailer files.
+description: How to name movie, TV, music and audiobook folders and files so Matinee recognizes them, plus artwork, subtitles, trailers and extras.
 sidebar:
   order: 3
 ---
@@ -131,6 +131,42 @@ Subtitles inside the video file work too. Text subtitles are drawn by the player
 ## Trailers
 
 A trailer next to a movie or show shows up as a **Trailer** button on its page. Name it like the video with `-trailer` on the end (`Movie (2024)-trailer.mp4`), call it `trailer.mp4`, or put trailers in a `Trailers` folder. Trailer files are never listed as movies of their own.
+
+<!-- since: v0.3.0 -->
+## Extras
+
+Behind-the-scenes videos, deleted scenes, featurettes, interviews and other special features show in the **Extras** row on a movie's or show's page (see [Extras and commentaries](/docs/watching/extras/)). Put them in a folder for their kind inside the movie's or show's folder:
+
+```
+Movies/
+└── Harbor Lights (2019)/
+    ├── Harbor Lights (2019).mkv
+    ├── Harbor Lights (2019)-featurette.mkv
+    ├── Behind The Scenes/
+    │   └── Building the lighthouse.mkv
+    ├── Deleted Scenes/
+    │   └── The storm.mkv
+    └── Interviews/
+        └── The director.mkv
+```
+
+| Folder | Or end the file name with | Shows as |
+| --- | --- | --- |
+| `Behind The Scenes` | `-behindthescenes` | Behind the scenes |
+| `Deleted Scenes` | `-deleted` | Deleted scene |
+| `Featurettes` | `-featurette` | Featurette |
+| `Interviews` | `-interview` | Interview |
+| `Scenes` | `-scene` | Scene |
+| `Shorts` | `-short` | Short |
+| `Trailers` | `-trailer` | Trailer |
+| `Extras`, `Other` or `Special Features` | `-other` or `-extra` | Extra |
+
+Folder names can be written with spaces, dots or underscores (`Deleted.Scenes`, `deleted_scenes`). A folder can sit inside `Extras` too, such as `Extras/Interviews/`. The file name, without the ending, is the extra's name on screen.
+
+A movie sharing a folder with other movies only gets the files named after it, such as `Harbor Lights (2019)-featurette.mkv`. A show's extras go in the show's folder, and a season's in its season folder. These folders count only inside a movie's or show's folder: a `Shorts` folder right in your library folder is still a group of short films. Extras are never listed as titles of their own, or as versions of a movie.
+
+Commentary tracks belong inside the movie's file. Mark the track as a commentary, or put "Commentary" in its name, when you make the file (MKVToolNix and most ripping tools do this), and it shows with the extras.
+<!-- /since -->
 
 ## Extras that confuse the scan
 

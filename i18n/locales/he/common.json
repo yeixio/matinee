@@ -790,6 +790,25 @@
     "later": "להציג כתוביות מאוחר יותר",
     "reset": "חזרה לתזמון של הקובץ"
   },
+  "extras": {
+    "title": "תוספות",
+    "commentary": "פרשנות",
+    "playWith": "הפעלת {{title}} עם {{track}}",
+    "wontPlay": "לא ניתן להפעיל את התוספת הזו.",
+    "kinds": {
+      "trailer": "טריילר",
+      "behindTheScenes": "מאחורי הקלעים",
+      "deleted": "סצנה שנמחקה",
+      "featurette": "פיצ׳רט",
+      "interview": "ראיון",
+      "scene": "סצנה",
+      "short": "סרט קצר",
+      "other": "תוספת"
+    }
+  },
+  "audioTrack": {
+    "title": "שמע"
+  },
   "subtitleSync": {
     "title": "סנכרון לשמע",
     "again": "סנכרון מחדש",

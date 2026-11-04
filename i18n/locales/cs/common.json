@@ -822,6 +822,25 @@
     "later": "Zobrazit titulky později",
     "reset": "Zpět na načasování souboru"
   },
+  "extras": {
+    "title": "Bonusy",
+    "commentary": "Komentář",
+    "playWith": "Přehrát {{title}} s: {{track}}",
+    "wontPlay": "Tento bonus nelze přehrát.",
+    "kinds": {
+      "trailer": "Upoutávka",
+      "behindTheScenes": "Ze zákulisí",
+      "deleted": "Vystřižená scéna",
+      "featurette": "Featurette",
+      "interview": "Rozhovor",
+      "scene": "Scéna",
+      "short": "Krátký film",
+      "other": "Bonus"
+    }
+  },
+  "audioTrack": {
+    "title": "Zvuk"
+  },
   "subtitleSync": {
     "title": "Synchronizovat se zvukem",
     "again": "Synchronizovat znovu",

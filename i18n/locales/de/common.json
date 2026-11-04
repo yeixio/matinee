@@ -758,6 +758,25 @@
     "later": "Untertitel später zeigen",
     "reset": "Zurück zum Timing der Datei"
   },
+  "extras": {
+    "title": "Extras",
+    "commentary": "Kommentar",
+    "playWith": "{{title}} mit {{track}} abspielen",
+    "wontPlay": "Dieses Extra lässt sich nicht abspielen.",
+    "kinds": {
+      "trailer": "Trailer",
+      "behindTheScenes": "Hinter den Kulissen",
+      "deleted": "Entfallene Szene",
+      "featurette": "Featurette",
+      "interview": "Interview",
+      "scene": "Szene",
+      "short": "Kurzfilm",
+      "other": "Extra"
+    }
+  },
+  "audioTrack": {
+    "title": "Audio"
+  },
   "subtitleSync": {
     "title": "Mit Ton synchronisieren",
     "again": "Erneut synchronisieren",

@@ -726,6 +726,25 @@
     "later": "Tunjuk sari kata lebih lewat",
     "reset": "Kembali ke pemasaan fail"
   },
+  "extras": {
+    "title": "Tambahan",
+    "commentary": "Ulasan",
+    "playWith": "Main {{title}} dengan {{track}}",
+    "wontPlay": "Tambahan ini tidak boleh dimainkan.",
+    "kinds": {
+      "trailer": "Treler",
+      "behindTheScenes": "Di sebalik tabir",
+      "deleted": "Babak yang dipotong",
+      "featurette": "Featurette",
+      "interview": "Temu bual",
+      "scene": "Babak",
+      "short": "Filem pendek",
+      "other": "Tambahan"
+    }
+  },
+  "audioTrack": {
+    "title": "Audio"
+  },
   "subtitleSync": {
     "title": "Segerakkan dengan audio",
     "again": "Segerakkan semula",

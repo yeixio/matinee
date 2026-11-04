@@ -758,6 +758,25 @@
     "later": "Altyazıları daha geç göster",
     "reset": "Dosyanın zamanlamasına dön"
   },
+  "extras": {
+    "title": "Ekstralar",
+    "commentary": "Yorum",
+    "playWith": "{{title}} filmini {{track}} ile oynat",
+    "wontPlay": "Bu ekstra oynatılamıyor.",
+    "kinds": {
+      "trailer": "Fragman",
+      "behindTheScenes": "Kamera arkası",
+      "deleted": "Silinmiş sahne",
+      "featurette": "Featurette",
+      "interview": "Röportaj",
+      "scene": "Sahne",
+      "short": "Kısa film",
+      "other": "Ekstra"
+    }
+  },
+  "audioTrack": {
+    "title": "Ses"
+  },
   "subtitleSync": {
     "title": "Sesle eşitle",
     "again": "Yeniden eşitle",

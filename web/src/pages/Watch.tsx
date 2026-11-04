@@ -20,6 +20,7 @@ import { inIntro, introEnd } from '../player/intro'
 import { sleepTimer, sleepVolume, useSleep } from '../player/sleep'
 import { SleepMenu } from '../player/SleepMenu'
 import { AudioDelayMenu } from '../player/AudioDelayMenu'
+import { AudioMenu } from '../player/AudioMenu'
 import { clampDelay, DELAY_STEP_MS, delayLabel, loadDelay, saveDelay, type Delay } from '../player/audioDelay'
 import { QualityMenu } from '../player/QualityMenu'
 import { LONG_STALL_MS, levelName, overCap, Rebuffers, startQuality, type Quality } from '../player/quality'
@@ -210,6 +211,11 @@ function Player({ id }: { id: number }) {
   // Where to start, when Home Assistant or another device said (?t=seconds).
   const [params] = useSearchParams()
   const startAt = params.get('t')
+  // The audio track picked (?audio=N, as from a commentary on the title
+  // page, or the Audio menu); undefined plays the file's own default.
+  const audioParam = params.get('audio')
+  const [audioPick, setAudioPick] = useState<number>()
+  const audioNow = useRef<number>(undefined)
   // Streaming quality (see player/quality.ts): what the viewer picked, and
   // which step of an adaptive stream is playing.
   const { data: streaming, isFetched: streamingKnown } = useQuery({
@@ -265,7 +271,15 @@ function Player({ id }: { id: number }) {
         const plays = currentPlays(el)
         const repack = qualityNow.current === 'auto' && !burn && !repackFellBack.current && repackages(item, plays) && !overCap(item, streaming?.cap)
         repacked.current = repack
-        const { url } = await api.startHls(item.id, Math.floor(at), burn, repack ? 'original' : qualityNow.current, playsQuery(plays), delayNow.current)
+        const { url } = await api.startHls(
+          item.id,
+          Math.floor(at),
+          burn,
+          repack ? 'original' : qualityNow.current,
+          playsQuery(plays),
+          delayNow.current,
+          audioNow.current ?? (fileAudio(item) || undefined),
+        )
         if (seq !== hlsSeq.current) return
         offset.current = Math.floor(at)
         setClockOffset(Math.floor(at))
@@ -327,7 +341,15 @@ function Player({ id }: { id: number }) {
   // it, the viewer picked Auto or Original, and it's within any cap.
   const direct = (q: Quality) => {
     const el = video.current
-    return !!item && !!el && (q === 'auto' || q === 'original') && delayNow.current === 0 && canDirectPlay(item, el) && !overCap(item, streaming?.cap)
+    return (
+      !!item &&
+      !!el &&
+      (q === 'auto' || q === 'original') &&
+      delayNow.current === 0 &&
+      audioNow.current === undefined &&
+      canDirectPlay(item, el) &&
+      !overCap(item, streaming?.cap)
+    )
   }
 
   // Pick direct play or a transcode, and resume where the viewer left off.
@@ -347,6 +369,10 @@ function Player({ id }: { id: number }) {
     const d = item.videoCodec ? loadDelay(item.versionOf ?? item.id) : { ms: 0, forTitle: false }
     delayNow.current = d.ms
     setDelay(d)
+    // Only a track the file has; its own default plays as it is.
+    const a = audioParam !== null ? Number(audioParam) : NaN
+    audioNow.current = item.mediaInfo?.audio.some((t) => t.index === a) && a !== fileAudio(item) ? a : undefined
+    setAudioPick(audioNow.current)
     const q = startQuality(streaming)
     qualityNow.current = q
     setQuality(q)
@@ -362,6 +388,17 @@ function Player({ id }: { id: number }) {
     repackFellBack.current = false
     setQuality(q)
     if (!burned.current && direct(q)) playDirect(position())
+    else startHls(position())
+  }
+
+  // Another audio track plays again from the same spot, through the
+  // server, which sends just that track. The file's default plays as it is
+  // again when it can.
+  const selectAudio = (index: number) => {
+    if (!item) return
+    audioNow.current = index === fileAudio(item) ? undefined : index
+    setAudioPick(audioNow.current)
+    if (!burned.current && direct(qualityNow.current)) playDirect(position())
     else startHls(position())
   }
 
@@ -1319,6 +1356,17 @@ function Player({ id }: { id: number }) {
                   }}
                 />
               )}
+              {item?.videoCodec && (item.mediaInfo?.audio.length ?? 0) > 1 && (
+                <AudioMenu
+                  tracks={item.mediaInfo!.audio}
+                  selected={audioPick ?? fileAudio(item)}
+                  onSelect={selectAudio}
+                  onOpenChange={(open) => {
+                    menuOpen.current = open
+                    poke()
+                  }}
+                />
+              )}
               {item?.videoCodec && (
                 <AudioDelayMenu
                   delay={delay}
@@ -1363,4 +1411,9 @@ function Player({ id }: { id: number }) {
       </div>
     </div>
   )
+}
+
+// The audio track a file plays when nobody picks one: its default, else the first.
+function fileAudio(item: { mediaInfo?: { audio: { index: number; default?: boolean }[] } }): number {
+  return item.mediaInfo?.audio.find((a) => a.default)?.index ?? 0
 }

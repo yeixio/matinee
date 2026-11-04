@@ -38,6 +38,23 @@ for m in "Big Buck Bunny (2008)" "Sintel (2010)" "Tears of Steel (2012)" "Elepha
   art "$d/poster.jpg" 500x750 $i; art "$d/fanart.jpg" 1280x720 $((i + 1)); i=$((i + 1))
 done
 
+# Sintel's special features: a commentary track inside the movie, and extras
+# next to it in folders and with suffixes.
+extra() { # extra <file> <lavfi source> <seconds>
+  mkdir -p "$(dirname "$1")"
+  [ -f "$1" ] || ff -f lavfi -i "$2" -f lavfi -i "sine=f=440:d=$3" -t "$3" -c:v libx264 -preset ultrafast -pix_fmt yuv420p -c:a aac -shortest "$1"
+}
+d="$root/movies/Sintel (2010)"
+if ! ffprobe -v error -select_streams a -show_entries stream=index -of csv=p=0 "$d/Sintel (2010).mp4" | grep -q 2; then
+  ff -i "$d/Sintel (2010).mp4" -f lavfi -i "sine=f=220:d=30" -map 0:v -map 0:a -map 1:a -c:v copy -c:a aac -shortest \
+    -metadata:s:a:0 language=eng -metadata:s:a:1 language=eng -metadata:s:a:1 title="Director's Commentary" \
+    -disposition:a:0 default -disposition:a:1 comment "$d/tmp.mp4" && mv "$d/tmp.mp4" "$d/Sintel (2010).mp4"
+fi
+extra "$d/Behind The Scenes/Making the dragon.mp4" "mandelbrot=s=1280x720:r=24" 12
+extra "$d/Deleted Scenes/The market.mp4" "smptehdbars=s=1280x720:r=24" 8
+extra "$d/Interviews/The director.mp4" "gradients=s=1280x720:r=24:speed=0.05" 10
+extra "$d/Sintel (2010)-featurette.mp4" "cellauto=s=1280x720:r=24:rule=110" 15
+
 for s in "Night Kitchen" "Coastline"; do
   mkdir -p "$root/tv/$s"; art "$root/tv/$s/poster.jpg" 500x750 $i; art "$root/tv/$s/fanart.jpg" 1280x720 $((i + 2)); i=$((i + 1))
   for season in 1 2; do

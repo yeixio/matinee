@@ -213,7 +213,7 @@ func (s *Scanner) run(ctx context.Context, lib store.Library, paths []string) (S
 	if sk, ok := kind.(Session); ok {
 		defer sk.BeginScan(ctx, lib)()
 	}
-	// Trailers are found when someone opens a title (see trailers.go), not listed as titles.
+	// Extras are found when someone opens a title (see extras.go), not listed as titles.
 	video := kind.Name() == "movies" || kind.Name() == "tv"
 	partial := paths != nil
 	var targets []target
@@ -259,12 +259,12 @@ func (s *Scanner) run(ctx context.Context, lib store.Library, paths []string) (S
 				return ctx.Err()
 			}
 			if d.IsDir() {
-				if path != root && (strings.HasPrefix(d.Name(), ".") || video && IsTrailerDir(d.Name())) {
+				if path != root && (strings.HasPrefix(d.Name(), ".") || video && IsExtraDir(d.Name(), filepath.Dir(path) != root)) {
 					return filepath.SkipDir
 				}
 				return nil
 			}
-			if strings.HasPrefix(d.Name(), ".") || !kind.Wants(path) || video && IsTrailerFile(d.Name()) {
+			if strings.HasPrefix(d.Name(), ".") || !kind.Wants(path) || video && IsExtraFile(d.Name()) {
 				return nil
 			}
 			seen[path] = true
@@ -452,7 +452,7 @@ func (s *Scanner) recheck(lib store.Library, paths []string) {
 }
 
 // targetsIn places each path in the library folder it belongs to. Paths
-// outside every folder, inside hidden or trailer folders, or under another
+// outside every folder, inside hidden or extras folders, or under another
 // path in the list are dropped.
 func targetsIn(roots, paths []string, video bool) []target {
 	var out []target
@@ -488,14 +488,14 @@ func targetsIn(roots, paths []string, video bool) []target {
 }
 
 // ignoredBetween reports whether a folder between root and path is one a
-// scan skips: hidden, or a trailers folder in a video library.
+// scan skips: hidden, or a folder of extras in a video library.
 func ignoredBetween(root, path string, video bool) bool {
 	rel, err := filepath.Rel(root, filepath.Dir(path))
 	if err != nil || rel == "." {
 		return false
 	}
-	for _, part := range strings.Split(rel, string(filepath.Separator)) {
-		if strings.HasPrefix(part, ".") || video && IsTrailerDir(part) {
+	for i, part := range strings.Split(rel, string(filepath.Separator)) {
+		if strings.HasPrefix(part, ".") || video && IsExtraDir(part, i > 0) {
 			return true
 		}
 	}

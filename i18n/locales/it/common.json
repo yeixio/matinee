@@ -790,6 +790,25 @@
     "later": "Mostra i sottotitoli dopo",
     "reset": "Torna alla sincronia del file"
   },
+  "extras": {
+    "title": "Extra",
+    "commentary": "Commento",
+    "playWith": "Riproduci {{title}} con {{track}}",
+    "wontPlay": "Questo extra non si può riprodurre.",
+    "kinds": {
+      "trailer": "Trailer",
+      "behindTheScenes": "Dietro le quinte",
+      "deleted": "Scena eliminata",
+      "featurette": "Featurette",
+      "interview": "Intervista",
+      "scene": "Scena",
+      "short": "Cortometraggio",
+      "other": "Extra"
+    }
+  },
+  "audioTrack": {
+    "title": "Audio"
+  },
   "subtitleSync": {
     "title": "Sincronizza con l’audio",
     "again": "Sincronizza di nuovo",

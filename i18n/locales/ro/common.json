@@ -790,6 +790,25 @@
     "later": "Arată subtitrările mai târziu",
     "reset": "Înapoi la sincronizarea fișierului"
   },
+  "extras": {
+    "title": "Materiale bonus",
+    "commentary": "Comentariu",
+    "playWith": "Redă {{title}} cu {{track}}",
+    "wontPlay": "Acest material bonus nu poate fi redat.",
+    "kinds": {
+      "trailer": "Trailer",
+      "behindTheScenes": "În culise",
+      "deleted": "Scenă eliminată",
+      "featurette": "Featurette",
+      "interview": "Interviu",
+      "scene": "Scenă",
+      "short": "Scurtmetraj",
+      "other": "Bonus"
+    }
+  },
+  "audioTrack": {
+    "title": "Audio"
+  },
   "subtitleSync": {
     "title": "Sincronizează cu sunetul",
     "again": "Sincronizează din nou",

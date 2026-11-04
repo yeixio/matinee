@@ -822,6 +822,25 @@
     "later": "Pokazuj napisy później",
     "reset": "Wróć do synchronizacji pliku"
   },
+  "extras": {
+    "title": "Dodatki",
+    "commentary": "Komentarz",
+    "playWith": "Odtwórz {{title}} z: {{track}}",
+    "wontPlay": "Nie można odtworzyć tego dodatku.",
+    "kinds": {
+      "trailer": "Zwiastun",
+      "behindTheScenes": "Za kulisami",
+      "deleted": "Usunięta scena",
+      "featurette": "Featurette",
+      "interview": "Wywiad",
+      "scene": "Scena",
+      "short": "Krótki metraż",
+      "other": "Dodatek"
+    }
+  },
+  "audioTrack": {
+    "title": "Dźwięk"
+  },
   "subtitleSync": {
     "title": "Synchronizuj z dźwiękiem",
     "again": "Synchronizuj ponownie",

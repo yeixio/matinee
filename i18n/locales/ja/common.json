@@ -726,6 +726,25 @@
     "later": "字幕を遅らせる",
     "reset": "ファイルのタイミングに戻す"
   },
+  "extras": {
+    "title": "特典映像",
+    "commentary": "コメンタリー",
+    "playWith": "{{track}}で{{title}}を再生",
+    "wontPlay": "この特典映像は再生できません。",
+    "kinds": {
+      "trailer": "予告編",
+      "behindTheScenes": "メイキング",
+      "deleted": "未公開シーン",
+      "featurette": "特集映像",
+      "interview": "インタビュー",
+      "scene": "シーン",
+      "short": "短編",
+      "other": "特典"
+    }
+  },
+  "audioTrack": {
+    "title": "音声"
+  },
   "subtitleSync": {
     "title": "音声に合わせる",
     "again": "もう一度合わせる",

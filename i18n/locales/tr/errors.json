@@ -258,5 +258,7 @@
   "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "Bu sunucunun veritabanı PostgreSQL; pg_dump ile yedekleyin",
   "audiodelay_is_milliseconds_between_2000_and_2000": "Ses gecikmesi milisaniye cinsinden, -2000 ile 2000 arasında olmalı.",
   "subtitle_choices_arent_ones_the_apps_know": "Uygulamalar bu altyazı seçeneklerini tanımıyor",
-  "no_such_font": "Böyle bir yazı tipi yok"
+  "no_such_font": "Böyle bir yazı tipi yok",
+  "couldnt_start_playback_for_this_extra": "bu ekstra oynatılamadı",
+  "no_such_extra": "böyle bir ekstra yok"
 }

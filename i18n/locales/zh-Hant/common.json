@@ -726,6 +726,25 @@
     "later": "字幕延後",
     "reset": "恢復檔案的時間"
   },
+  "extras": {
+    "title": "花絮",
+    "commentary": "評論音軌",
+    "playWith": "用{{track}}播放{{title}}",
+    "wontPlay": "無法播放此花絮。",
+    "kinds": {
+      "trailer": "預告片",
+      "behindTheScenes": "幕後",
+      "deleted": "刪減片段",
+      "featurette": "特輯",
+      "interview": "訪談",
+      "scene": "片段",
+      "short": "短片",
+      "other": "花絮"
+    }
+  },
+  "audioTrack": {
+    "title": "音訊"
+  },
   "subtitleSync": {
     "title": "與音訊同步",
     "again": "重新同步",

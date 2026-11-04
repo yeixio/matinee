@@ -726,6 +726,25 @@
     "later": "Tampilkan subtitel lebih lambat",
     "reset": "Kembali ke waktu file"
   },
+  "extras": {
+    "title": "Ekstra",
+    "commentary": "Komentar",
+    "playWith": "Putar {{title}} dengan {{track}}",
+    "wontPlay": "Ekstra ini tidak bisa diputar.",
+    "kinds": {
+      "trailer": "Trailer",
+      "behindTheScenes": "Di balik layar",
+      "deleted": "Adegan yang dihapus",
+      "featurette": "Featurette",
+      "interview": "Wawancara",
+      "scene": "Adegan",
+      "short": "Film pendek",
+      "other": "Ekstra"
+    }
+  },
+  "audioTrack": {
+    "title": "Audio"
+  },
   "subtitleSync": {
     "title": "Selaraskan dengan audio",
     "again": "Selaraskan lagi",

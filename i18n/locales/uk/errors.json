@@ -258,5 +258,7 @@
   "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "База даних цього сервера — PostgreSQL; створіть копію за допомогою pg_dump",
   "audiodelay_is_milliseconds_between_2000_and_2000": "Затримка звуку задається в мілісекундах, від -2000 до 2000.",
   "subtitle_choices_arent_ones_the_apps_know": "Застосунки не знають таких налаштувань субтитрів",
-  "no_such_font": "Такого шрифту немає"
+  "no_such_font": "Такого шрифту немає",
+  "couldnt_start_playback_for_this_extra": "не вдалося відтворити цей матеріал",
+  "no_such_extra": "такого матеріалу немає"
 }

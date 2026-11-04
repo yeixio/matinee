@@ -758,6 +758,25 @@
     "later": "نمایش دیرتر زیرنویس",
     "reset": "بازگشت به زمان‌بندی فایل"
   },
+  "extras": {
+    "title": "محتوای اضافی",
+    "commentary": "تفسیر",
+    "playWith": "پخش {{title}} با {{track}}",
+    "wontPlay": "این محتوای اضافی پخش نمی‌شود.",
+    "kinds": {
+      "trailer": "تریلر",
+      "behindTheScenes": "پشت صحنه",
+      "deleted": "صحنهٔ حذف‌شده",
+      "featurette": "فیچرت",
+      "interview": "مصاحبه",
+      "scene": "صحنه",
+      "short": "فیلم کوتاه",
+      "other": "اضافی"
+    }
+  },
+  "audioTrack": {
+    "title": "صدا"
+  },
   "subtitleSync": {
     "title": "همگام‌سازی با صدا",
     "again": "همگام‌سازی دوباره",

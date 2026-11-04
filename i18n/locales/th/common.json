@@ -726,6 +726,25 @@
     "later": "แสดงคำบรรยายช้าลง",
     "reset": "กลับไปใช้เวลาของไฟล์"
   },
+  "extras": {
+    "title": "เนื้อหาพิเศษ",
+    "commentary": "คำบรรยาย",
+    "playWith": "เล่น {{title}} พร้อม {{track}}",
+    "wontPlay": "เล่นเนื้อหาพิเศษนี้ไม่ได้",
+    "kinds": {
+      "trailer": "ตัวอย่าง",
+      "behindTheScenes": "เบื้องหลัง",
+      "deleted": "ฉากที่ถูกตัด",
+      "featurette": "ฟีเจอร์เรต",
+      "interview": "บทสัมภาษณ์",
+      "scene": "ฉาก",
+      "short": "หนังสั้น",
+      "other": "เนื้อหาพิเศษ"
+    }
+  },
+  "audioTrack": {
+    "title": "เสียง"
+  },
   "subtitleSync": {
     "title": "ซิงค์กับเสียง",
     "again": "ซิงค์อีกครั้ง",
