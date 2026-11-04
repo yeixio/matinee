@@ -238,6 +238,16 @@ func TestProfilesAndKidsMode(t *testing.T) {
 	if code := tvc.do("GET", "/api/v1/settings", nil, nil); code != 200 {
 		t.Fatalf("admin settings after switching back: %d", code)
 	}
+	// A TV checks the PIN of the profile already watching when it asks again.
+	if code := tvc.do("POST", "/api/v1/profiles/select", map[string]any{"id": users[0].ID, "pin": "1111"}, nil); code != http.StatusForbidden {
+		t.Errorf("the account again with a wrong PIN: %d, want 403", code)
+	}
+	if code := tvc.do("POST", "/api/v1/profiles/select", map[string]any{"id": users[0].ID, "pin": "9876"}, nil); code != 200 {
+		t.Errorf("the account again with its PIN: %d", code)
+	}
+	if code := tvc.do("POST", "/api/v1/profiles/select", map[string]any{"id": users[0].ID}, nil); code != 200 {
+		t.Errorf("the account again without a PIN: %d", code)
+	}
 
 	// Removing a profile takes its progress, and devices fall back to the account.
 	tvc.do("POST", "/api/v1/profiles/select", map[string]any{"id": kid.ID}, nil)

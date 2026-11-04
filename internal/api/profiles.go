@@ -131,7 +131,10 @@ func (s *Server) selectProfile(w http.ResponseWriter, r *http.Request) {
 		s.serverError(w, err)
 		return
 	}
-	if target.HasPIN && target.ID != u.ID {
+	// Picking the profile that's already watching needs no PIN, unless the
+	// app sends one: a TV asks "Who's watching?" each time it opens, as
+	// whoever watched last, and checks the PIN of a locked profile then too.
+	if target.HasPIN && (target.ID != u.ID || req.PIN != "") {
 		if wait := s.pins.locked(target.ID); wait > 0 {
 			w.Header().Set("Retry-After", strconv.Itoa(int(wait.Seconds())+1))
 			writeError(w, http.StatusTooManyRequests, "too many wrong PINs; try again in a minute")
