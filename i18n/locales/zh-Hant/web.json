@@ -748,6 +748,13 @@
       "auto": "自動：可用的最佳選項",
       "off": "關：始終使用 CPU",
       "notFound": "{{name}}（此伺服器上未找到）",
+      "toneMap": "HDR 色調對應",
+      "toneMapDetail": "轉換 HDR 影片時，會把它轉成 SDR，免得畫面灰暗平淡。",
+      "hable": "Hable（推薦）",
+      "mobius": "Mobius：保留更多亮度",
+      "reinhard": "Reinhard：高光更柔和",
+      "toneMapOff": "關閉",
+      "toneMapMissing": "這台伺服器的 FFmpeg 無法做色調對應，所以轉換後的 HDR 看起來褪色。請使用帶 zimg 的 FFmpeg，例如 Docker 映像檔與套件裡的那個。",
       "adaptive": "自適應畫質",
       "adaptiveDetail": "播放器會提供自動和固定畫質。網路慢時自動會降低畫質，恢復後再調高。需要轉檔的影片會同時產生多種畫質，伺服器負擔會更重。",
       "steps": "畫質等級",
@@ -1109,6 +1116,7 @@
         "full": "{{name}} 解碼並編碼"
       },
       "burnSub": "字幕已燒錄",
+      "toneMapped": "HDR 轉 SDR",
       "why": {
         "codec": "裝置無法播放這種影片格式",
         "hdr": "螢幕無法顯示這種 HDR",

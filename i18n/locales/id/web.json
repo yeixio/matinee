@@ -748,6 +748,13 @@
       "auto": "Otomatis: yang terbaik yang berfungsi",
       "off": "Mati: selalu gunakan CPU",
       "notFound": "{{name}} (tidak ditemukan di server ini)",
+      "toneMap": "Pemetaan nada HDR",
+      "toneMapDetail": "Saat film HDR dikonversi, film diubah ke SDR supaya tidak terlihat datar dan abu-abu.",
+      "hable": "Hable (disarankan)",
+      "mobius": "Mobius: mempertahankan lebih banyak kecerahan",
+      "reinhard": "Reinhard: sorotan lebih lembut",
+      "toneMapOff": "Mati",
+      "toneMapMissing": "FFmpeg di server ini tidak bisa memetakan nada, jadi HDR yang dikonversi terlihat pudar. Gunakan FFmpeg yang dibuat dengan zimg, seperti di image Docker dan paket.",
       "adaptive": "Kualitas adaptif",
       "adaptiveDetail": "Pemutar menawarkan Otomatis dan kualitas tetap. Otomatis menurunkan gambar saat koneksi lambat dan menaikkannya saat pulih. Video yang dikonversi dibuat dalam beberapa kualitas sekaligus, yang lebih membebani server.",
       "steps": "Tingkat kualitas",
@@ -1109,6 +1116,7 @@
         "full": "{{name}} mendekode dan mengodekan"
       },
       "burnSub": "subtitel ditanam",
+      "toneMapped": "HDR ke SDR",
       "why": {
         "codec": "perangkat tidak dapat memutar format video ini",
         "hdr": "layar tidak dapat menampilkan HDR ini",

@@ -760,6 +760,13 @@
       "auto": "Automatycznie: najlepsza, która działa",
       "off": "Wyłączona: zawsze używaj CPU",
       "notFound": "{{name}} (nie znaleziono na tym serwerze)",
+      "toneMap": "Mapowanie tonów HDR",
+      "toneMapDetail": "Gdy film HDR jest konwertowany, zamienia się go na SDR, żeby nie wyglądał płasko i szaro.",
+      "hable": "Hable (zalecane)",
+      "mobius": "Mobius: zachowuje więcej jasności",
+      "reinhard": "Reinhard: łagodniejsze światła",
+      "toneMapOff": "Wyłączone",
+      "toneMapMissing": "FFmpeg na tym serwerze nie mapuje tonów, więc przekonwertowane HDR wygląda blado. Użyj FFmpeg zbudowanego z zimg, jak ten w obrazie Dockera i pakietach.",
       "adaptive": "Jakość adaptacyjna",
       "adaptiveDetail": "Odtwarzacze oferują Auto i stałe jakości. Auto obniża obraz przy wolnym połączeniu i podnosi go, gdy się poprawi. Konwertowane wideo powstaje w kilku jakościach naraz, co bardziej obciąża serwer.",
       "steps": "Poziomy jakości",
@@ -1133,6 +1140,7 @@
         "full": "{{name}} dekoduje i koduje"
       },
       "burnSub": "wypalone napisy",
+      "toneMapped": "HDR na SDR",
       "why": {
         "codec": "urządzenie nie odtwarza tego formatu wideo",
         "hdr": "ekran nie wyświetla tego HDR",

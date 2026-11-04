@@ -29,6 +29,8 @@ type SessionInfo struct {
 	// (one is drawn in) or quality (a lower one was asked for). Empty
 	// when the picture is copied, or for sound.
 	Why string `json:"why,omitempty"`
+	// ToneMapped says an HDR picture is converted to SDR.
+	ToneMapped bool `json:"toneMapped,omitempty"`
 	// Accel names the hardware doing the work, such as "VAAPI"; empty for
 	// the CPU. Mode is how much of it is on the GPU: cpu, encode or full.
 	Accel     string   `json:"accel,omitempty"`
@@ -54,7 +56,7 @@ func (t *Transcoder) Sessions() []SessionInfo {
 		case s.copyVideo:
 			info.Kind = "copy"
 		default:
-			info.Kind, info.Why = "video", s.why
+			info.Kind, info.Why, info.ToneMapped = "video", s.why, s.toneMapped
 		}
 		if s.accel != nil {
 			info.Accel, info.AccelID = s.accel.Name, string(s.accel.Kind)

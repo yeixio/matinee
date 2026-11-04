@@ -752,6 +752,13 @@
       "auto": "Automatiskt: den bästa som fungerar",
       "off": "Av: använd alltid CPU:n",
       "notFound": "{{name}} (finns inte på den här servern)",
+      "toneMap": "HDR-tonmappning",
+      "toneMapDetail": "När en HDR-film konverteras görs den om till SDR så att den inte ser platt och grå ut.",
+      "hable": "Hable (rekommenderas)",
+      "mobius": "Mobius: behåller mer ljusstyrka",
+      "reinhard": "Reinhard: mjukare högdagrar",
+      "toneMapOff": "Av",
+      "toneMapMissing": "Den här serverns FFmpeg kan inte tonmappa, så konverterad HDR ser blek ut. Använd en FFmpeg byggd med zimg, som den i Docker-avbildningen och paketen.",
       "adaptive": "Adaptiv kvalitet",
       "adaptiveDetail": "Spelarna erbjuder Auto och fasta kvaliteter. Auto sänker bilden när anslutningen är långsam och höjer den när den återhämtar sig. Konverterad video görs i flera kvaliteter samtidigt, vilket belastar servern mer.",
       "steps": "Kvalitetssteg",
@@ -1117,6 +1124,7 @@
         "full": "{{name}} avkodar och kodar"
       },
       "burnSub": "undertexter inbrända",
+      "toneMapped": "HDR till SDR",
       "why": {
         "codec": "enheten kan inte spela upp det här videoformatet",
         "hdr": "skärmen kan inte visa den här HDR-typen",

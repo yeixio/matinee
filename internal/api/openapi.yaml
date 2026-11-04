@@ -4571,6 +4571,22 @@ components:
               items: { $ref: '#/components/schemas/Accelerator' }
             detecting: { type: boolean, description: The startup tests are still running. }
             problem: { type: string, description: "When no accelerator works: why a GPU the server can see couldn't be used, such as a missing permission." }
+        toneMapping:
+          type: string
+          enum: [hable, mobius, reinhard, "off"]
+          description: |
+            How an HDR picture that's converted (always to SDR H.264) is
+            tone mapped so it isn't flat and grey: `hable` (the default),
+            `mobius`, `reinhard`, or `off`. HDR10, HDR10+, HLG and Dolby
+            Vision with an HDR10 or HLG layer need `toneMapTools.zscale`;
+            Dolby Vision profile 5 needs `toneMapTools.placebo`.
+        toneMapTools:
+          type: object
+          readOnly: true
+          description: What this server's FFmpeg can tone map with. Ignored in a `PUT`.
+          properties:
+            zscale: { type: boolean, description: "zscale and tonemap (FFmpeg built with zimg): HDR10, HDR10+, HLG." }
+            placebo: { type: boolean, description: "libplacebo on a Vulkan device: Dolby Vision profile 5 too." }
     PlaybackPrefs:
       type: object
       properties:

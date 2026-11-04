@@ -752,6 +752,13 @@
       "auto": "Automatisch: de beste die werkt",
       "off": "Uit: altijd de CPU gebruiken",
       "notFound": "{{name}} (niet gevonden op deze server)",
+      "toneMap": "HDR-tonemapping",
+      "toneMapDetail": "Als een HDR-film wordt omgezet, wordt hij SDR zodat hij niet vlak en grijs oogt.",
+      "hable": "Hable (aanbevolen)",
+      "mobius": "Mobius: houdt meer helderheid",
+      "reinhard": "Reinhard: zachtere hoge lichten",
+      "toneMapOff": "Uit",
+      "toneMapMissing": "De FFmpeg van deze server kan geen tonemapping, dus omgezette HDR ziet er flets uit. Gebruik een FFmpeg met zimg, zoals die in de Docker-image en de pakketten.",
       "adaptive": "Adaptieve kwaliteit",
       "adaptiveDetail": "Spelers bieden Auto en vaste kwaliteiten. Auto verlaagt het beeld bij een trage verbinding en verhoogt het weer als die herstelt. Omgezette video wordt in meerdere kwaliteiten tegelijk gemaakt, wat de server zwaarder belast.",
       "steps": "Kwaliteitsstappen",
@@ -1117,6 +1124,7 @@
         "full": "{{name}} decodeert en codeert"
       },
       "burnSub": "ondertiteling ingebrand",
+      "toneMapped": "HDR naar SDR",
       "why": {
         "codec": "het apparaat speelt dit videoformaat niet af",
         "hdr": "het scherm kan deze HDR niet tonen",

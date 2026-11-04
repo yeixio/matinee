@@ -45,6 +45,21 @@ Until [media analysis](/docs/server/media-analysis/) has looked at a new HEVC or
 
 <!-- /since -->
 
+<!-- since: v0.2.0 -->
+## HDR on screens without it
+
+Converted video is always SDR, so when Matinee converts an HDR film (HDR10, HDR10+, HLG or Dolby Vision) it tone maps it: the bright HDR picture is brought down to what an SDR screen shows, instead of coming out flat and grey. A screen that shows HDR gets the HDR picture as it is whenever it can, [repackaged](#repackaging-instead-of-converting) rather than converted.
+
+**Settings → Streaming → Transcoding → HDR tone mapping** picks how: **Hable** (the default) keeps highlights natural, **Mobius** keeps more of the brightness, and **Reinhard** gives softer highlights. **Off** turns it off.
+
+- Dolby Vision profiles 7 and 8 are tone mapped from the HDR10 or HLG picture they carry.
+- Dolby Vision profile 5 has no such picture, and needs FFmpeg's libplacebo with a Vulkan device (a GPU, or Mesa's software one). Without it, those files convert without tone mapping.
+- Tone mapping needs an FFmpeg built with zimg. The Docker image and the packages have one; the setting says so when the server's FFmpeg can't.
+- With a GPU, the picture is still decoded and resized on the GPU, and tone mapped on the CPU at the smaller size, which is light work.
+
+**Settings → Server health** marks a stream **HDR made SDR** while it's tone mapped.
+
+<!-- /since -->
 ## Giving Matinee a GPU
 
 **Docker:** pass `/dev/dri` in for AMD and Intel, and add the group that owns it on the host:

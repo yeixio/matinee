@@ -247,5 +247,6 @@
   "tmdb_no_longer_has_this_title_fix_the_match_instead": "TMDB에 더 이상 이 제목이 없습니다. 일치를 수정하세요",
   "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "TMDB ID, TMDB 주소 또는 IMDb ID를 보내세요",
   "tmdb_has_no_such_title": "TMDB에 그런 제목이 없습니다",
-  "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "지금은 인터넷에 연결되어 있지 않습니다. 서버는 정상입니다. 이 기능은 인터넷이 필요하며 연결이 돌아오면 다시 작동합니다."
+  "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "지금은 인터넷에 연결되어 있지 않습니다. 서버는 정상입니다. 이 기능은 인터넷이 필요하며 연결이 돌아오면 다시 작동합니다.",
+  "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMapping은 hable, mobius, reinhard 또는 off여야 합니다"
 }

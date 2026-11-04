@@ -247,5 +247,6 @@
   "tmdb_no_longer_has_this_title_fix_the_match_instead": "TMDB heeft deze titel niet meer; corrigeer de koppeling",
   "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "stuur de TMDB-id, het TMDB-adres of de IMDb-id om mee te koppelen",
   "tmdb_has_no_such_title": "TMDB kent deze titel niet",
-  "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "op dit moment geen internetverbinding. Je server is in orde; dit heeft internet nodig en werkt weer zodra het terug is."
+  "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "op dit moment geen internetverbinding. Je server is in orde; dit heeft internet nodig en werkt weer zodra het terug is.",
+  "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMapping moet hable, mobius, reinhard of off zijn"
 }

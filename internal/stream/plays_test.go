@@ -133,15 +133,64 @@ func TestStartCopiesHEVC(t *testing.T) {
 		t.Errorf("playlist: %s", playlist)
 	}
 
-	// The same file for a screen without HDR is converted, and says why.
+	// The same file for a screen without HDR is converted, tone mapped to
+	// SDR, and says why.
 	id2, err := tr.StartFor(context.Background(), 8, it, 0, Request{BurnSub: -1,
-		Plays: Plays{Video: []string{"hevc"}}, Picture: Picture{Known: true, HDR: "hdr10"}})
+		Plays: Plays{Video: []string{"hevc"}}, Picture: Picture{Known: true, HDR: "hdr10"}, ToneMap: ToneMapHable})
 	if err != nil {
 		t.Fatal(err)
 	}
+	tools := tr.ToneTools()
 	for _, s := range tr.Sessions() {
-		if s.ID == id2 && (s.Kind != "video" || s.Why != ConvertHDR) {
+		if s.ID == id2 && (s.Kind != "video" || s.Why != ConvertHDR || s.ToneMapped != tools.Zscale) {
 			t.Errorf("sdr session: %+v", s)
+		}
+	}
+	if !tools.Zscale {
+		t.Log("this FFmpeg can't tone map")
+		return
+	}
+	out, err = exec.Command(ffprobe, "-v", "error", "-select_streams", "v:0", "-show_entries",
+		"stream=codec_name,pix_fmt,color_transfer,color_primaries", "-of", "default=nw=1", filepath.Join(dir, "cache", id2, "seg00000.ts")).Output()
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, want := range []string{"codec_name=h264", "pix_fmt=yuv420p", "color_transfer=bt709", "color_primaries=bt709"} {
+		if !strings.Contains(string(out), want) {
+			t.Errorf("tone mapped picture: want %s in\n%s", want, out)
+		}
+	}
+}
+
+func TestToneMap(t *testing.T) {
+	all := ToneTools{Zscale: true, Placebo: true}
+	if c, _ := ToneMap(Picture{Known: true, HDR: "hdr10"}, ToneMapHable, all); !strings.Contains(c, "tin=smpte2084") || !strings.Contains(c, "tonemap=tonemap=hable") {
+		t.Errorf("hdr10: %s", c)
+	}
+	if c, _ := ToneMap(Picture{Known: true, HDR: "hlg"}, ToneMapMobius, all); !strings.Contains(c, "tin=arib-std-b67") || !strings.Contains(c, "tonemap=mobius") {
+		t.Errorf("hlg: %s", c)
+	}
+	if c, _ := ToneMap(Picture{Known: true, HDR: "dolby-vision", HDRBase: "hdr10"}, ToneMapHable, all); !strings.Contains(c, "tin=smpte2084") {
+		t.Errorf("dolby vision 8.1 uses its hdr10 layer: %s", c)
+	}
+	if c, in := ToneMap(Picture{Known: true, HDR: "dolby-vision"}, ToneMapHable, all); !strings.HasPrefix(c, "libplacebo=") || len(in) == 0 {
+		t.Errorf("dolby vision 5: %s %v", c, in)
+	}
+	if c, _ := ToneMap(Picture{Known: true, HDR: "dolby-vision"}, ToneMapHable, ToneTools{Zscale: true}); c != "" {
+		t.Errorf("dolby vision 5 without libplacebo: %s", c)
+	}
+	for _, c := range []struct {
+		pic   Picture
+		algo  string
+		tools ToneTools
+	}{
+		{Picture{Known: true}, ToneMapHable, all},
+		{Picture{Known: true, HDR: "hdr10"}, ToneMapOff, all},
+		{Picture{Known: true, HDR: "hdr10"}, ToneMapHable, ToneTools{}},
+		{Picture{HDR: "hdr10"}, ToneMapHable, all},
+	} {
+		if got, _ := ToneMap(c.pic, c.algo, c.tools); got != "" {
+			t.Errorf("%+v %s %+v: %s", c.pic, c.algo, c.tools, got)
 		}
 	}
 }

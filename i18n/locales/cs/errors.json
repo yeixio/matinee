@@ -247,5 +247,6 @@
   "tmdb_no_longer_has_this_title_fix_the_match_instead": "TMDB už tento titul nemá; opravte shodu",
   "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "pošlete id TMDB, adresu TMDB nebo id IMDb",
   "tmdb_has_no_such_title": "TMDB takový titul nemá",
-  "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "momentálně bez připojení k internetu. Váš server je v pořádku; tohle potřebuje internet a bude fungovat, až se vrátí."
+  "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "momentálně bez připojení k internetu. Váš server je v pořádku; tohle potřebuje internet a bude fungovat, až se vrátí.",
+  "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMapping musí být hable, mobius, reinhard nebo off"
 }

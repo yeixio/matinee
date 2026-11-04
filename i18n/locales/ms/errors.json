@@ -247,5 +247,6 @@
   "tmdb_no_longer_has_this_title_fix_the_match_instead": "TMDB tidak lagi mempunyai tajuk ini; betulkan padanan",
   "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "hantar id TMDB, alamat TMDB atau id IMDb",
   "tmdb_has_no_such_title": "TMDB tiada tajuk itu",
-  "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "tiada sambungan internet buat masa ini. Pelayan anda baik; ini memerlukan internet dan akan berfungsi semula apabila ia kembali."
+  "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "tiada sambungan internet buat masa ini. Pelayan anda baik; ini memerlukan internet dan akan berfungsi semula apabila ia kembali.",
+  "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMapping mesti hable, mobius, reinhard atau off"
 }

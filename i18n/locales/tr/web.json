@@ -752,6 +752,13 @@
       "auto": "Otomatik: çalışan en iyisi",
       "off": "Kapalı: her zaman CPU kullan",
       "notFound": "{{name}} (bu sunucuda bulunamadı)",
+      "toneMap": "HDR ton eşleme",
+      "toneMapDetail": "Bir HDR film dönüştürülürken düz ve gri görünmemesi için SDR'ye çevrilir.",
+      "hable": "Hable (önerilen)",
+      "mobius": "Mobius: parlaklığı daha çok korur",
+      "reinhard": "Reinhard: daha yumuşak parlak alanlar",
+      "toneMapOff": "Kapalı",
+      "toneMapMissing": "Bu sunucunun FFmpeg'i ton eşleme yapamıyor, bu yüzden dönüştürülen HDR soluk görünür. Docker imajındaki ve paketlerdeki gibi zimg ile derlenmiş bir FFmpeg kullanın.",
       "adaptive": "Uyarlanabilir kalite",
       "adaptiveDetail": "Oynatıcılar Otomatik ve sabit kaliteler sunar. Otomatik, bağlantı yavaşken görüntüyü düşürür, toparlandığında yükseltir. Dönüştürülen video aynı anda birkaç kalitede hazırlanır, bu da sunucuyu daha çok yorar.",
       "steps": "Kalite seviyeleri",
@@ -1117,6 +1124,7 @@
         "full": "{{name}} çözüyor ve kodluyor"
       },
       "burnSub": "altyazılar gömülü",
+      "toneMapped": "HDR'den SDR'ye",
       "why": {
         "codec": "cihaz bu video biçimini oynatamıyor",
         "hdr": "ekran bu HDR'yi gösteremiyor",

@@ -752,6 +752,13 @@
       "auto": "Automatikus: a legjobb működő",
       "off": "Ki: mindig a CPU",
       "notFound": "{{name}} (nem található ezen a szerveren)",
+      "toneMap": "HDR-tónusleképezés",
+      "toneMapDetail": "Ha egy HDR-filmet átalakít a szerver, SDR lesz belőle, hogy ne legyen fakó és szürke.",
+      "hable": "Hable (ajánlott)",
+      "mobius": "Mobius: több fényerőt megtart",
+      "reinhard": "Reinhard: lágyabb csúcsfények",
+      "toneMapOff": "Ki",
+      "toneMapMissing": "A szerver FFmpeg-je nem tud tónusleképezést, ezért az átalakított HDR fakó. Használjon zimg-gel fordított FFmpeg-et, mint a Docker-képben és a csomagokban.",
       "adaptive": "Adaptív minőség",
       "adaptiveDetail": "A lejátszók Autót és rögzített minőségeket kínálnak. Az Auto lassú kapcsolatnál csökkenti a képet, és visszaemeli, ha a kapcsolat helyreáll. Az átalakított videó egyszerre több minőségben készül, ami jobban terheli a szervert.",
       "steps": "Minőségi fokozatok",
@@ -1117,6 +1124,7 @@
         "full": "{{name}} dekódol és kódol"
       },
       "burnSub": "beégetett felirat",
+      "toneMapped": "HDR-ből SDR",
       "why": {
         "codec": "az eszköz nem játssza le ezt a videóformátumot",
         "hdr": "a képernyő nem jeleníti meg ezt a HDR-t",

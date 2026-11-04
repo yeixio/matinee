@@ -756,6 +756,13 @@
       "auto": "Automat: cel mai bun care funcționează",
       "off": "Dezactivat: folosește mereu CPU-ul",
       "notFound": "{{name}} (negăsit pe acest server)",
+      "toneMap": "Maparea tonurilor HDR",
+      "toneMapDetail": "Când un film HDR e convertit, devine SDR ca să nu arate plat și gri.",
+      "hable": "Hable (recomandat)",
+      "mobius": "Mobius: păstrează mai multă luminozitate",
+      "reinhard": "Reinhard: lumini mai blânde",
+      "toneMapOff": "Dezactivat",
+      "toneMapMissing": "FFmpeg-ul acestui server nu poate mapa tonurile, așa că HDR-ul convertit arată spălăcit. Folosește un FFmpeg compilat cu zimg, ca cel din imaginea Docker și din pachete.",
       "adaptive": "Calitate adaptivă",
       "adaptiveDetail": "Playerele oferă Auto și calități fixe. Auto scade imaginea când conexiunea e lentă și o crește când își revine. Videoclipul convertit se face în mai multe calități deodată, ceea ce solicită mai mult serverul.",
       "steps": "Trepte de calitate",
@@ -1125,6 +1132,7 @@
         "full": "{{name}} decodifică și codifică"
       },
       "burnSub": "subtitrări încorporate",
+      "toneMapped": "HDR în SDR",
       "why": {
         "codec": "dispozitivul nu redă acest format video",
         "hdr": "ecranul nu afișează acest HDR",

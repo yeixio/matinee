@@ -752,6 +752,13 @@
       "auto": "Automaattinen: paras toimiva",
       "off": "Pois: käytä aina suoritinta",
       "notFound": "{{name}} (ei löydy tältä palvelimelta)",
+      "toneMap": "HDR-sävykartoitus",
+      "toneMapDetail": "Kun HDR-elokuva muunnetaan, siitä tehdään SDR, jotta se ei näytä latteana ja harmaana.",
+      "hable": "Hable (suositus)",
+      "mobius": "Mobius: säilyttää enemmän kirkkautta",
+      "reinhard": "Reinhard: pehmeämmät kohokohdat",
+      "toneMapOff": "Pois",
+      "toneMapMissing": "Tämän palvelimen FFmpeg ei osaa sävykartoittaa, joten muunnettu HDR näyttää haalealta. Käytä FFmpegiä, jossa on zimg, kuten Docker-levykuvassa ja paketeissa.",
       "adaptive": "Mukautuva laatu",
       "adaptiveDetail": "Soittimet tarjoavat Auton ja kiinteät laadut. Auto laskee kuvaa hitaalla yhteydellä ja nostaa sen, kun yhteys paranee. Muunnettu video tehdään useassa laadussa kerralla, mikä kuormittaa palvelinta enemmän.",
       "steps": "Laatutasot",
@@ -1117,6 +1124,7 @@
         "full": "{{name}} purkaa ja koodaa"
       },
       "burnSub": "tekstitys poltettu kuvaan",
+      "toneMapped": "HDR:stä SDR:ksi",
       "why": {
         "codec": "laite ei toista tätä videomuotoa",
         "hdr": "näyttö ei näytä tätä HDR:ää",

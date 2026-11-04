@@ -247,5 +247,6 @@
   "tmdb_no_longer_has_this_title_fix_the_match_instead": "το TMDB δεν έχει πια αυτόν τον τίτλο· διορθώστε την αντιστοίχιση",
   "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "στείλτε το id TMDB, τη διεύθυνση TMDB ή το id IMDb",
   "tmdb_has_no_such_title": "το TMDB δεν έχει τέτοιον τίτλο",
-  "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "δεν υπάρχει σύνδεση στο διαδίκτυο αυτή τη στιγμή. Ο διακομιστής σας είναι εντάξει· αυτό χρειάζεται διαδίκτυο και θα λειτουργήσει ξανά όταν επανέλθει."
+  "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "δεν υπάρχει σύνδεση στο διαδίκτυο αυτή τη στιγμή. Ο διακομιστής σας είναι εντάξει· αυτό χρειάζεται διαδίκτυο και θα λειτουργήσει ξανά όταν επανέλθει.",
+  "tonemapping_must_be_hable_mobius_reinhard_or_off": "Το toneMapping πρέπει να είναι hable, mobius, reinhard ή off"
 }

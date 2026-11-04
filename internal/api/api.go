@@ -1528,6 +1528,12 @@ func (s *Server) startHLS(w http.ResponseWriter, r *http.Request) {
 	req := stream.Request{BurnSub: burn, Audio: audio, Plays: stream.ParsePlays(r.URL.Query().Get("video"), r.URL.Query().Get("hdr"))}
 	if mi, _ := s.mediaInfo(r, it); mi != nil && len(mi.Video) > 0 {
 		req.Picture = stream.Picture{Known: true, HDR: mi.Video[0].HDR, HDRBase: mi.Video[0].HDRBase}
+		if req.Picture.HDR != "" {
+			if req.ToneMap, err = s.toneMapping(r.Context()); err != nil {
+				s.serverError(w, err)
+				return
+			}
+		}
 	}
 	id, err := s.Transcoder.StartFor(r.Context(), currentUser(r).ID, it, start, req, steps...)
 	if errors.Is(err, stream.ErrSuperseded) {

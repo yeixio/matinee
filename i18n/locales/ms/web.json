@@ -748,6 +748,13 @@
       "auto": "Automatik: yang terbaik yang berfungsi",
       "off": "Mati: sentiasa gunakan CPU",
       "notFound": "{{name}} (tidak ditemui pada pelayan ini)",
+      "toneMap": "Pemetaan ton HDR",
+      "toneMapDetail": "Apabila filem HDR ditukar, ia dijadikan SDR supaya tidak nampak mendatar dan kelabu.",
+      "hable": "Hable (disyorkan)",
+      "mobius": "Mobius: kekalkan lebih banyak kecerahan",
+      "reinhard": "Reinhard: sorotan lebih lembut",
+      "toneMapOff": "Mati",
+      "toneMapMissing": "FFmpeg pelayan ini tidak dapat memetakan ton, jadi HDR yang ditukar nampak pudar. Gunakan FFmpeg yang dibina dengan zimg, seperti dalam imej Docker dan pakej.",
       "adaptive": "Kualiti adaptif",
       "adaptiveDetail": "Pemain menawarkan Auto dan kualiti tetap. Auto menurunkan gambar apabila sambungan perlahan dan menaikkannya apabila pulih. Video yang ditukar dibuat dalam beberapa kualiti serentak, yang lebih membebankan pelayan.",
       "steps": "Tahap kualiti",
@@ -1109,6 +1116,7 @@
         "full": "{{name}} menyahkod dan mengekod"
       },
       "burnSub": "sari kata dibenamkan",
+      "toneMapped": "HDR ke SDR",
       "why": {
         "codec": "peranti tidak dapat memainkan format video ini",
         "hdr": "skrin tidak dapat memaparkan HDR ini",

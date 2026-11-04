@@ -760,6 +760,13 @@
       "auto": "Automaticky: nejlepší funkční",
       "off": "Vypnuto: vždy používat CPU",
       "notFound": "{{name}} (na tomto serveru nenalezeno)",
+      "toneMap": "Mapování tónů HDR",
+      "toneMapDetail": "Když se film v HDR převádí, změní se na SDR, aby nevypadal plochý a šedý.",
+      "hable": "Hable (doporučeno)",
+      "mobius": "Mobius: zachová víc jasu",
+      "reinhard": "Reinhard: jemnější světla",
+      "toneMapOff": "Vypnuto",
+      "toneMapMissing": "FFmpeg na tomto serveru neumí mapovat tóny, takže převedené HDR vypadá vybledle. Použijte FFmpeg sestavený se zimg, jako ten v obrazu Dockeru a v balíčcích.",
       "adaptive": "Adaptivní kvalita",
       "adaptiveDetail": "Přehrávače nabízejí Auto a pevné kvality. Auto při pomalém připojení sníží obraz a po zlepšení ho zase zvýší. Převáděné video vzniká v několika kvalitách najednou, což server víc zatěžuje.",
       "steps": "Stupně kvality",
@@ -1133,6 +1140,7 @@
         "full": "{{name}} dekóduje a kóduje"
       },
       "burnSub": "vypálené titulky",
+      "toneMapped": "HDR na SDR",
       "why": {
         "codec": "zařízení tento formát videa nepřehraje",
         "hdr": "obrazovka toto HDR nezobrazí",

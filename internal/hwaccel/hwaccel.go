@@ -125,6 +125,13 @@ type Video struct {
 	// the video is decoded once and split, each copy resized and encoded
 	// on its own, as video streams 0, 1 and so on.
 	Renditions []Rendition
+	// ToneMap, when set, is the filter chain that turns an HDR picture into
+	// SDR, on frames in memory (see stream.ToneMap). It runs after the
+	// resize, on the smaller picture; frames decoded on a GPU come back to
+	// memory for it and go up again for the encoder.
+	ToneMap string
+	// ToneMapInput is what ToneMap needs before -i, such as a Vulkan device.
+	ToneMapInput []string
 }
 
 // Rendition is one picture size and bitrate a transcode makes.
@@ -170,7 +177,8 @@ func Args(a *Accel, m Mode, v Video) (input, output []string) {
 	if v.KeyframeSeconds > 0 {
 		keyframes = []string{"-force_key_frames", fmt.Sprintf("expr:gte(t,n_forced*%d)", v.KeyframeSeconds)}
 	}
-	input, chain := filters(a, m, v.Codec)
+	input, chain := filters(a, m, v.Codec, v.ToneMap)
+	input = append(input, v.ToneMapInput...)
 	chains := make([]string, len(renditions))
 	var enc []string
 	for i, r := range renditions {
@@ -186,8 +194,14 @@ func Args(a *Accel, m Mode, v Video) (input, output []string) {
 
 // filters returns the input arguments for mode m on a, and the filter chain
 // that resizes a frame to fit a width and hands it to the encoder.
-func filters(a *Accel, m Mode, codec string) (input []string, chain func(width int) string) {
-	scale := func(w int) string { return fmt.Sprintf("scale='min(%d,iw)':-2", w) }
+func filters(a *Accel, m Mode, codec, toneMap string) (input []string, chain func(width int) string) {
+	scale := func(w int) string {
+		f := fmt.Sprintf("scale='min(%d,iw)':-2", w)
+		if toneMap != "" {
+			f += "," + toneMap
+		}
+		return f
+	}
 	if m == CPU {
 		return nil, scale
 	}
@@ -206,20 +220,39 @@ func filters(a *Accel, m Mode, codec string) (input []string, chain func(width i
 	if m != Full {
 		return input, chain
 	}
+	// Tone mapping runs in memory: the GPU resizes, keeping 10 bits, and
+	// the smaller frames come down for it.
+	down := func(gpuScale, format, up string) func(int) string {
+		return func(w int) string {
+			if toneMap == "" {
+				return fmt.Sprintf(gpuScale, w, format)
+			}
+			f := fmt.Sprintf(gpuScale, w, "p010") + ",hwdownload,format=p010le," + toneMap
+			if up != "" {
+				f += "," + up
+			}
+			return f
+		}
+	}
 	switch k {
 	case VAAPI:
 		input = []string{"-hwaccel", "vaapi", "-hwaccel_device", a.Device, "-hwaccel_output_format", "vaapi"}
-		chain = func(w int) string { return fmt.Sprintf("scale_vaapi=w='min(%d,iw)':h=-2:format=nv12", w) }
+		chain = down("scale_vaapi=w='min(%d,iw)':h=-2:format=%s", "nv12", "format=nv12,hwupload")
+		if toneMap != "" {
+			// The tone-mapped frames go back up to the same device.
+			input = []string{"-init_hw_device", "vaapi=va:" + a.Device, "-hwaccel", "vaapi", "-hwaccel_device", "va",
+				"-hwaccel_output_format", "vaapi", "-filter_hw_device", "va"}
+		}
 	case NVENC:
 		input = []string{"-hwaccel", "cuda", "-hwaccel_output_format", "cuda"}
-		chain = func(w int) string { return fmt.Sprintf("scale_cuda=w='min(%d,iw)':h=-2:format=yuv420p", w) }
+		chain = down("scale_cuda=w='min(%d,iw)':h=-2:format=%s", "yuv420p", "")
 	case QSV:
 		input = []string{"-hwaccel", "qsv"}
 		if a.Device != "" {
 			input = append(input, "-qsv_device", a.Device)
 		}
 		input = append(input, "-hwaccel_output_format", "qsv", "-c:v", qsvDecoder[codec])
-		chain = func(w int) string { return fmt.Sprintf("scale_qsv=w='min(%d,iw)':h=-2:format=nv12", w) }
+		chain = down("scale_qsv=w='min(%d,iw)':h=-2:format=%s", "nv12", "format=nv12")
 	case VideoToolbox:
 		// Decoded frames come back to memory for the software resize,
 		// which is cheap next to decoding.

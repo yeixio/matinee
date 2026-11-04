@@ -247,5 +247,6 @@
   "tmdb_no_longer_has_this_title_fix_the_match_instead": "TMDB har ikke længere denne titel; ret matchet i stedet",
   "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "send TMDB-id, TMDB-adresse eller IMDb-id at matche med",
   "tmdb_has_no_such_title": "TMDB har ingen sådan titel",
-  "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "ingen internetforbindelse lige nu. Din server er i orden; det her kræver internet og virker igen, når det er tilbage."
+  "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "ingen internetforbindelse lige nu. Din server er i orden; det her kræver internet og virker igen, når det er tilbage.",
+  "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMapping skal være hable, mobius, reinhard eller off"
 }

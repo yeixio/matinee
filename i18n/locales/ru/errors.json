@@ -247,5 +247,6 @@
   "tmdb_no_longer_has_this_title_fix_the_match_instead": "на TMDB больше нет этого названия; исправьте сопоставление",
   "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "отправьте id TMDB, адрес TMDB или id IMDb",
   "tmdb_has_no_such_title": "на TMDB нет такого названия",
-  "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "сейчас нет подключения к интернету. Ваш сервер в порядке; для этого нужен интернет, и всё заработает, когда он вернётся."
+  "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "сейчас нет подключения к интернету. Ваш сервер в порядке; для этого нужен интернет, и всё заработает, когда он вернётся.",
+  "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMapping должен быть hable, mobius, reinhard или off"
 }

@@ -8,7 +8,11 @@ import (
 	"testing"
 )
 
-var hevc = Video{Codec: "hevc", BurnSub: -1, MaxWidth: 1920, KeyframeSeconds: 4}
+var (
+	hevc = Video{Codec: "hevc", BurnSub: -1, MaxWidth: 1920, KeyframeSeconds: 4}
+	// TM stands for the tone-mapping chain (see stream.ToneMap).
+	hdr = Video{Codec: "hevc", BurnSub: -1, MaxWidth: 1920, KeyframeSeconds: 4, ToneMap: "TM"}
+)
 
 // The exact command lines for each backend. Most of these can't run in CI,
 // so they're spelled out here for review; people with the hardware confirm
@@ -108,6 +112,29 @@ func TestArgs(t *testing.T) {
 				"[s0]scale='min(1920,iw)':-2,format=yuv420p[v0];[s1]scale='min(1280,iw)':-2,format=yuv420p[v1] -map [v0] -map [v1] " +
 				"-c:v:0 h264_nvenc -preset:v:0 p4 -tune:v:0 hq -rc:v:0 vbr -cq:v:0 23 -b:v:0 6400000 -maxrate:v:0 8000000 -bufsize:v:0 16000000 -profile:v:0 high -forced-idr:v:0 1 " +
 				"-c:v:1 h264_nvenc -preset:v:1 p4 -tune:v:1 hq -rc:v:1 vbr -cq:v:1 23 -b:v:1 3200000 -maxrate:v:1 4000000 -bufsize:v:1 8000000 -profile:v:1 high -forced-idr:v:1 1",
+		},
+		{
+			name: "tone mapped on the cpu", accel: nil, mode: CPU, video: hdr,
+			output: "-map 0:v:0 -vf scale='min(1920,iw)':-2,TM -c:v libx264 -preset veryfast -crf 22 -maxrate 10M -bufsize 20M -pix_fmt yuv420p" + keyframes,
+		},
+		{
+			name: "tone mapped for a gpu encoder", accel: &Accel{Kind: NVENC}, mode: Encode, video: hdr,
+			output: "-map 0:v:0 -vf scale='min(1920,iw)':-2,TM,format=yuv420p -c:v h264_nvenc -preset p4 -tune hq -rc vbr -cq 23 -b:v 8M -maxrate 10M -bufsize 20M -profile:v high -forced-idr 1" + keyframes,
+		},
+		{
+			name: "tone mapped between vaapi decode and encode", accel: &Accel{Kind: VAAPI, Device: "/dev/dri/renderD128"}, mode: Full, video: hdr,
+			input:  "-init_hw_device vaapi=va:/dev/dri/renderD128 -hwaccel vaapi -hwaccel_device va -hwaccel_output_format vaapi -filter_hw_device va",
+			output: "-map 0:v:0 -vf scale_vaapi=w='min(1920,iw)':h=-2:format=p010,hwdownload,format=p010le,TM,format=nv12,hwupload -c:v h264_vaapi -rc_mode VBR -b:v 8M -maxrate 10M -bufsize 20M -profile:v high" + keyframes,
+		},
+		{
+			name: "tone mapped between cuda decode and nvenc", accel: &Accel{Kind: NVENC}, mode: Full, video: Video{Codec: "hevc", BurnSub: -1, MaxWidth: 1920, ToneMap: "TM", ToneMapInput: []string{"-init_hw_device", "vulkan"}},
+			input:  "-hwaccel cuda -hwaccel_output_format cuda -init_hw_device vulkan",
+			output: "-map 0:v:0 -vf scale_cuda=w='min(1920,iw)':h=-2:format=p010,hwdownload,format=p010le,TM -c:v h264_nvenc -preset p4 -tune hq -rc vbr -cq 23 -b:v 8M -maxrate 10M -bufsize 20M -profile:v high -forced-idr 1",
+		},
+		{
+			name: "tone mapped between qsv decode and encode", accel: &Accel{Kind: QSV}, mode: Full, video: hdr,
+			input:  "-hwaccel qsv -hwaccel_output_format qsv -c:v hevc_qsv",
+			output: "-map 0:v:0 -vf scale_qsv=w='min(1920,iw)':h=-2:format=p010,hwdownload,format=p010le,TM,format=nv12 -c:v h264_qsv -preset veryfast -b:v 8M -maxrate 10M -bufsize 20M -profile:v high -forced_idr 1" + keyframes,
 		},
 	}
 	for _, tt := range tests {
