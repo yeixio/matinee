@@ -1,7 +1,7 @@
 ---
 title: Syncing subtitles to the audio
 description: Matinee lines subtitles up with what's being said, on its own for subtitle files and with one press of Sync to audio in the player, fixing subtitles that come too early, too late or drift further off as the film goes on.
-since: v0.3.0
+since: v0.2.1
 sidebar:
   order: 5
 ---
