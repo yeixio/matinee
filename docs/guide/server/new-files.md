@@ -19,6 +19,22 @@ Copy a film into a library folder and it shows up in Matinee a few seconds after
 
 Each library under **Settings → Libraries** says how it's watched.
 
+<!-- since: v0.2.0 -->
+## Upgraded and renamed files
+
+When a file is swapped for a better copy (say a download tool replaces a 1080p film with a 4K one), renamed, or moved into its own folder, Matinee sees it's the same title and moves the new file onto the existing one. Everyone keeps their watched marks, resume points, ratings, watch lists, collections, playlists, downloads and found subtitles.
+
+Matinee knows it's the same title when it's:
+
+- a movie with the same title and year,
+- an episode with the same show, season and episode number,
+- a song or audiobook part with the same album or book, number and title.
+
+Download tools often delete the old copy first and move the new one in a few minutes later. So when a watched folder loses a file, Matinee keeps it listed for 10 minutes, waiting for the file that replaces it, before it removes it. A full rescan or the **Scan** button removes missing files straight away, after looking for what replaced them.
+
+Intro and credits markers and seek bar pictures are made again in the background when the new file is different.
+<!-- /since -->
+
 ## Full rescans
 
 As well, Matinee rescans every library in full every 15 minutes to catch anything else. Change that with `MATINEE_SCAN_INTERVAL` (such as `1h`), or `0` to turn it off.

@@ -610,46 +610,6 @@ func nullStr(s string) any {
 	return s
 }
 
-// RemoveMissing deletes a library's files that the last scan didn't see, then
-// any containers left empty.
-func (s *Store) RemoveMissing(ctx context.Context, libraryID int64, seen func(path string) bool) (int, error) {
-	rows, err := s.db.QueryContext(ctx, "SELECT id, path FROM items WHERE library_id = ? AND path IS NOT NULL", libraryID)
-	if err != nil {
-		return 0, err
-	}
-	var gone []int64
-	for rows.Next() {
-		var id int64
-		var p string
-		if err := rows.Scan(&id, &p); err != nil {
-			rows.Close()
-			return 0, err
-		}
-		if !seen(p) {
-			gone = append(gone, id)
-		}
-	}
-	rows.Close()
-	for _, id := range gone {
-		if _, err := s.db.ExecContext(ctx, "DELETE FROM items WHERE id = ?", id); err != nil {
-			return 0, err
-		}
-	}
-	// Empty seasons make empty shows, so repeat until nothing changes.
-	for {
-		res, err := s.db.ExecContext(ctx, `
-			DELETE FROM items WHERE library_id = ? AND path IS NULL AND kind <> 'station'
-			AND NOT EXISTS (SELECT 1 FROM items c WHERE c.parent_id = items.id)`, libraryID)
-		if err != nil {
-			return 0, err
-		}
-		if n, _ := res.RowsAffected(); n == 0 {
-			break
-		}
-	}
-	return len(gone), nil
-}
-
 // Watched is a movie or show someone played lately, for recommendations.
 type Watched struct {
 	ItemID int64

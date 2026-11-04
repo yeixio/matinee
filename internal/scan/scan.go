@@ -30,8 +30,16 @@ type Scanner struct {
 	// Refresh brings a library of a Remote kind, such as podcasts, up to
 	// date; nil leaves them as they are.
 	Refresh func(ctx context.Context, lib store.Library) (added, failed int, err error)
+	// MissingGrace is how long a file that a scan of just some paths (the
+	// watcher's) finds missing stays listed, waiting for the file that
+	// takes its place. Download tools often delete the old copy first and
+	// move the new one in later, and the watcher sees the two apart. Zero
+	// removes missing files right away. A full scan always does, once it has
+	// matched them with what replaced them (see store.Replacements).
+	MissingGrace time.Duration
 
 	mu      sync.Mutex
+	missing map[int64]map[string]time.Time // per library, files held by MissingGrace and since when
 	running map[int64]bool
 	since   map[int64]time.Time  // when each running scan started
 	last    map[int64]ScanReport // each library's last full scan
@@ -44,6 +52,7 @@ type ScanReport struct {
 	Added      int    `json:"added"`
 	Updated    int    `json:"updated"`
 	Removed    int    `json:"removed"`
+	Replaced   int    `json:"replaced"`
 	Failed     int    `json:"failed"`
 	Unplayable int    `json:"unplayable"`
 	Error      string `json:"error,omitempty"`
@@ -65,8 +74,12 @@ func (s *Scanner) Report(libraryID int64) (since time.Time, last *ScanReport) {
 
 type Stats struct {
 	Added, Updated, Unchanged, Removed, Failed int
-	Unplayable                                 int // files with no playable stream, left out
-	Took                                       time.Duration
+	// Replaced counts files that took the place of a missing one (a better
+	// copy, or the same file renamed or moved); the old item took the new
+	// file and kept everyone's watch history.
+	Replaced   int
+	Unplayable int // files with no playable stream, left out
+	Took       time.Duration
 }
 
 var ErrAlreadyRunning = errors.New("scan already running")
@@ -128,7 +141,7 @@ func (s *Scanner) scanAndReport(ctx context.Context, lib store.Library) (Stats, 
 	start := time.Now()
 	st, err := s.run(ctx, lib, nil)
 	r := ScanReport{Started: start.UnixMilli(), TookMs: time.Since(start).Milliseconds(), Added: st.Added, Updated: st.Updated,
-		Removed: st.Removed, Failed: st.Failed, Unplayable: st.Unplayable}
+		Removed: st.Removed, Replaced: st.Replaced, Failed: st.Failed, Unplayable: st.Unplayable}
 	if err != nil {
 		r.Error = err.Error()
 	}
@@ -306,14 +319,15 @@ func (s *Scanner) run(ctx context.Context, lib store.Library, paths []string) (S
 	for _, t := range targets {
 		scanned = append(scanned, t.start)
 	}
-	removed, err := s.Store.RemoveMissing(ctx, lib.ID, func(p string) bool {
+	removed, replaced, err := s.removeMissing(ctx, lib, partial, func(p string) bool {
 		// A partial scan only answers for what it looked at.
 		return seen[p] || under(p, unreadable) || partial && !under(p, scanned)
 	})
 	if err != nil {
 		return st, err
 	}
-	st.Removed = removed
+	st.Removed, st.Replaced = removed, replaced
+	st.Updated += replaced
 	if fk, ok := kind.(Finisher); ok && (!partial || st.Added+st.Updated+st.Removed > 0) {
 		if err := fk.FinishScan(ctx, s.Store, lib); err != nil {
 			return st, err
@@ -334,9 +348,102 @@ func (s *Scanner) run(ctx context.Context, lib store.Library, paths []string) (S
 	}
 	if !partial || changed || st.Failed > 0 {
 		s.Log.Info("scan done", "library", lib.Name, "paths", len(paths), "added", st.Added, "updated", st.Updated,
-			"unchanged", st.Unchanged, "removed", st.Removed, "unplayable", st.Unplayable, "failed", st.Failed, "took", st.Took.Round(time.Millisecond))
+			"unchanged", st.Unchanged, "removed", st.Removed, "replaced", st.Replaced, "unplayable", st.Unplayable, "failed", st.Failed, "took", st.Took.Round(time.Millisecond))
 	}
 	return st, nil
+}
+
+// removeMissing takes out a library's files that the scan didn't see. A
+// missing file that another file took the place of keeps its item, which
+// takes the new file (see store.MoveFile), so nobody loses their watch
+// history to an upgrade or a rename. During a partial scan, a missing file
+// with no replacement yet waits MissingGrace for one, and every partial
+// scan of the library meanwhile looks for it again.
+func (s *Scanner) removeMissing(ctx context.Context, lib store.Library, partial bool, seen func(path string) bool) (removed, replaced int, err error) {
+	held := s.heldMissing(lib.ID)
+	files, err := s.Store.LibraryFiles(ctx, lib.ID)
+	if err != nil {
+		return 0, 0, err
+	}
+	missing := map[int64]bool{}
+	for _, f := range files {
+		if _, ok := held[f.Path]; ok || !seen(f.Path) {
+			missing[f.ID] = true
+		}
+	}
+	if len(missing) == 0 {
+		return 0, 0, nil
+	}
+	for old, nu := range store.Replacements(files, missing) {
+		if err := s.Store.MoveFile(ctx, old, nu); err != nil {
+			return 0, replaced, err
+		}
+		delete(missing, old)
+		replaced++
+	}
+	var gone []int64
+	var wait []string
+	now := time.Now()
+	keep := map[string]time.Time{}
+	for _, f := range files {
+		if !missing[f.ID] {
+			continue
+		}
+		since, ok := held[f.Path]
+		if !ok {
+			since = now
+		}
+		if partial && s.MissingGrace > 0 && now.Sub(since) < s.MissingGrace {
+			keep[f.Path] = since
+			if !ok {
+				wait = append(wait, f.Path)
+			}
+			continue
+		}
+		gone = append(gone, f.ID)
+	}
+	s.mu.Lock()
+	if s.missing == nil {
+		s.missing = map[int64]map[string]time.Time{}
+	}
+	s.missing[lib.ID] = keep
+	s.mu.Unlock()
+	if err := s.Store.RemoveFiles(ctx, lib.ID, gone); err != nil {
+		return 0, replaced, err
+	}
+	if len(wait) > 0 {
+		s.Log.Info("files missing; waiting for what replaces them", "library", lib.Name, "files", len(wait), "for", s.MissingGrace)
+		time.AfterFunc(s.MissingGrace, func() { s.recheck(lib, wait) })
+	}
+	return len(gone), replaced, nil
+}
+
+// heldMissing lists a library's files that MissingGrace is holding and
+// that are still missing, with since when.
+func (s *Scanner) heldMissing(libraryID int64) map[string]time.Time {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	out := map[string]time.Time{}
+	for p, since := range s.missing[libraryID] {
+		if _, err := os.Lstat(p); err != nil {
+			out[p] = since
+		}
+	}
+	return out
+}
+
+// recheck scans files held by MissingGrace again, once their wait is over.
+func (s *Scanner) recheck(lib store.Library, paths []string) {
+	for {
+		_, err := s.ScanPaths(context.Background(), lib, paths)
+		if !errors.Is(err, ErrAlreadyRunning) {
+			if err != nil {
+				s.Log.Warn("scan missing files", "library", lib.Name, "err", err)
+			}
+			return
+		}
+		time.Sleep(5 * time.Second)
+	}
 }
 
 // targetsIn places each path in the library folder it belongs to. Paths
