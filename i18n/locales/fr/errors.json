@@ -250,5 +250,6 @@
   "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "pas de connexion internet pour le moment. Votre serveur va bien ; ceci a besoin d'internet et refonctionnera à son retour.",
   "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMapping doit valoir hable, mobius, reinhard ou off",
   "kind_must_be_stall_or_error": "kind doit valoir stall ou error",
-  "bytes_must_be_between_0_and_104857600": "bytes doit être compris entre 0 et 104857600"
+  "bytes_must_be_between_0_and_104857600": "bytes doit être compris entre 0 et 104857600",
+  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "Seuls les films, épisodes, saisons et séries peuvent être marqués comme vus"
 }

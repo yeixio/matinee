@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { Check, ChevronRight, ImageOff, LoaderCircle, Play } from 'lucide-react'
+import { Check, CheckCheck, ChevronRight, ImageOff, LoaderCircle, Play } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { Link, Navigate, useParams, useSearchParams } from 'react-router-dom'
 import { api, pendingRefetch, type Item, type ItemDetail, type User } from '../api'
@@ -189,6 +189,7 @@ function Header({ item, kids }: { item: ItemDetail; kids?: Item[] }) {
             )}
             <TrailerButton item={item} />
             <WatchListButton item={item} />
+            <MarkWatchedButton item={item} />
             <AddToCollectionButton item={item} />
             <ItemQuality item={item} user={me} />
             <ReportProblem item={item} />
@@ -204,6 +205,37 @@ function Header({ item, kids }: { item: ItemDetail; kids?: Item[] }) {
         </div>
       </div>
     </section>
+  )
+}
+
+// Mark as watched (or not) without playing to the end: a movie, an episode,
+// or every episode of a season or show.
+function MarkWatchedButton({ item }: { item: ItemDetail }) {
+  const { t } = useTranslation()
+  const qc = useQueryClient()
+  const container = item.kind === 'season' || item.kind === 'show'
+  const { data: count } = useQuery({ queryKey: ['watched', item.id], queryFn: () => api.watched(item.id), enabled: container })
+  const mark = useMutation({
+    mutationFn: (played: boolean) => api.setWatched(item.id, played),
+    onSuccess: (c) => {
+      qc.setQueryData(['watched', item.id], c)
+      for (const key of ['home', 'item', 'children', 'watched', 'items']) qc.invalidateQueries({ queryKey: [key] })
+    },
+  })
+  if (item.kind !== 'movie' && item.kind !== 'episode' && !container) return null
+  if (container && !count?.total) return null
+  const watched = container ? count!.played === count!.total : !!item.played
+  const shown = mark.isPending && mark.variables !== undefined ? mark.variables : watched
+  return (
+    <Button
+      variant="ghost"
+      icon={shown ? <CheckCheck className="size-4 text-accent" /> : <Check className="size-4" />}
+      aria-pressed={shown}
+      disabled={mark.isPending}
+      onClick={() => mark.mutate(!watched)}
+    >
+      {shown ? t('item.markUnwatched') : t('item.markWatched')}
+    </Button>
   )
 }
 

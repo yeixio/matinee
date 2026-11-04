@@ -90,7 +90,9 @@
     "seasons": "فصل‌ها",
     "albums": "آلبوم‌ها",
     "episodes": "قسمت‌ها",
-    "resetPoster": "استفاده از پوستر خودکار"
+    "resetPoster": "استفاده از پوستر خودکار",
+    "markWatched": "علامت دیده‌شده",
+    "markUnwatched": "علامت دیده‌نشده"
   },
   "row": {
     "back": "پیمایش به عقب",

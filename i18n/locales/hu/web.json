@@ -90,7 +90,9 @@
     "seasons": "Évadok",
     "albums": "Albumok",
     "episodes": "Részek",
-    "resetPoster": "Automatikus plakát használata"
+    "resetPoster": "Automatikus plakát használata",
+    "markWatched": "Megjelölés megnézettként",
+    "markUnwatched": "Megjelölés nem megnézettként"
   },
   "row": {
     "back": "Vissza",

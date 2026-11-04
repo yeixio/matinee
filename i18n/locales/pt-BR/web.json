@@ -90,7 +90,9 @@
     "seasons": "Temporadas",
     "albums": "Álbuns",
     "episodes": "Episódios",
-    "resetPoster": "Usar o pôster automático"
+    "resetPoster": "Usar o pôster automático",
+    "markWatched": "Marcar como assistido",
+    "markUnwatched": "Marcar como não assistido"
   },
   "row": {
     "back": "Rolar para trás",

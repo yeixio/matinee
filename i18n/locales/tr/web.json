@@ -90,7 +90,9 @@
     "seasons": "Sezonlar",
     "albums": "Albümler",
     "episodes": "Bölümler",
-    "resetPoster": "Otomatik posteri kullan"
+    "resetPoster": "Otomatik posteri kullan",
+    "markWatched": "İzlendi olarak işaretle",
+    "markUnwatched": "İzlenmedi olarak işaretle"
   },
   "row": {
     "back": "Geri kaydır",

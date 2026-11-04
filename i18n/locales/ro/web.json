@@ -90,7 +90,9 @@
     "seasons": "Sezoane",
     "albums": "Albume",
     "episodes": "Episoade",
-    "resetPoster": "Folosește afișul automat"
+    "resetPoster": "Folosește afișul automat",
+    "markWatched": "Marchează ca vizionat",
+    "markUnwatched": "Marchează ca nevizionat"
   },
   "row": {
     "back": "Derulează înapoi",

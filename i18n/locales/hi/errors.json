@@ -250,5 +250,6 @@
   "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "अभी इंटरनेट कनेक्शन नहीं है। आपका सर्वर ठीक है; इसके लिए इंटरनेट चाहिए, और इंटरनेट लौटने पर यह फिर चलेगा।",
   "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMapping hable, mobius, reinhard या off होना चाहिए",
   "kind_must_be_stall_or_error": "kind stall या error होना चाहिए",
-  "bytes_must_be_between_0_and_104857600": "bytes 0 से 104857600 के बीच होना चाहिए"
+  "bytes_must_be_between_0_and_104857600": "bytes 0 से 104857600 के बीच होना चाहिए",
+  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "केवल फ़िल्में, एपिसोड, सीज़न और शो देखे गए के रूप में चिह्नित हो सकते हैं"
 }

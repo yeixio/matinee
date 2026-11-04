@@ -90,7 +90,9 @@
     "seasons": "시즌",
     "albums": "앨범",
     "episodes": "에피소드",
-    "resetPoster": "자동 포스터 사용"
+    "resetPoster": "자동 포스터 사용",
+    "markWatched": "시청함으로 표시",
+    "markUnwatched": "시청 안 함으로 표시"
   },
   "row": {
     "back": "뒤로 스크롤",

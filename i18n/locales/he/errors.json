@@ -250,5 +250,6 @@
   "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "אין כרגע חיבור לאינטרנט. השרת שלך תקין; זה צריך אינטרנט ויעבוד שוב כשהחיבור יחזור.",
   "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMapping חייב להיות hable,‏ mobius,‏ reinhard או off",
   "kind_must_be_stall_or_error": "kind חייב להיות stall או error",
-  "bytes_must_be_between_0_and_104857600": "bytes חייב להיות בין 0 ל-104857600"
+  "bytes_must_be_between_0_and_104857600": "bytes חייב להיות בין 0 ל-104857600",
+  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "רק סרטים, פרקים, עונות וסדרות אפשר לסמן כנצפו"
 }

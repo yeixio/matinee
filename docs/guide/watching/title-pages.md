@@ -30,6 +30,12 @@ Click any poster to open its page. Everything Matinee knows about the title is h
 
 ![More details: release date, genres, studio, collection, budget and the crew](../images/more-details.webp)
 
+<!-- since: v0.2.0 -->
+### Mark as watched
+
+**Mark as watched** ticks off a movie or episode you've seen elsewhere without playing it to the end, and takes it off Continue Watching. On a season or a show it marks every episode in it, so you can catch up on a show in one click. Once everything is watched, the button says **Mark as unwatched**, which clears the ticks and starts it again from the beginning.
+<!-- /since -->
+
 <!-- since: v0.1.9 -->
 ## Your ratings
 

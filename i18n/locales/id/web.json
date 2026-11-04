@@ -90,7 +90,9 @@
     "seasons": "Musim",
     "albums": "Album",
     "episodes": "Episode",
-    "resetPoster": "Gunakan poster otomatis"
+    "resetPoster": "Gunakan poster otomatis",
+    "markWatched": "Tandai sudah ditonton",
+    "markUnwatched": "Tandai belum ditonton"
   },
   "row": {
     "back": "Gulir mundur",

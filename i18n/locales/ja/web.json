@@ -90,7 +90,9 @@
     "seasons": "シーズン",
     "albums": "アルバム",
     "episodes": "エピソード",
-    "resetPoster": "自動のポスターを使う"
+    "resetPoster": "自動のポスターを使う",
+    "markWatched": "視聴済みにする",
+    "markUnwatched": "未視聴にする"
   },
   "row": {
     "back": "前へスクロール",

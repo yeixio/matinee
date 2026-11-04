@@ -2213,6 +2213,40 @@ paths:
                 played: { type: boolean }
       responses:
         "204": { description: Saved. }
+  /items/{id}/watched:
+    get:
+      summary: How much of an item is watched
+      description: For a movie or episode, itself; for a season or show, its episodes.
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      responses:
+        "200":
+          description: The count.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/WatchedCount" }
+    put:
+      summary: Mark watched or unwatched
+      description: |
+        Marks a movie or episode, or every episode of a season or show,
+        watched or not, as if it had been played to the end (or never
+        started). Either way it starts again from the beginning.
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [played]
+              properties:
+                played: { type: boolean }
+      responses:
+        "200":
+          description: Marked.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/WatchedCount" }
+        "400": { description: Not a movie, episode, season or show. }
   /continue-watching/{id}:
     delete:
       summary: Take an item off Continue Watching
@@ -4128,6 +4162,11 @@ components:
             type: array
             items: { $ref: "#/components/schemas/Item" }
   schemas:
+    WatchedCount:
+      type: object
+      properties:
+        total: { type: integer, description: How many there are to watch. }
+        played: { type: integer, description: How many are watched. }
     LiveChannel:
       type: object
       properties:

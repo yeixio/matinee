@@ -250,5 +250,6 @@
   "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "δεν υπάρχει σύνδεση στο διαδίκτυο αυτή τη στιγμή. Ο διακομιστής σας είναι εντάξει· αυτό χρειάζεται διαδίκτυο και θα λειτουργήσει ξανά όταν επανέλθει.",
   "tonemapping_must_be_hable_mobius_reinhard_or_off": "Το toneMapping πρέπει να είναι hable, mobius, reinhard ή off",
   "kind_must_be_stall_or_error": "Το kind πρέπει να είναι stall ή error",
-  "bytes_must_be_between_0_and_104857600": "Το bytes πρέπει να είναι από 0 έως 104857600"
+  "bytes_must_be_between_0_and_104857600": "Το bytes πρέπει να είναι από 0 έως 104857600",
+  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "Μόνο ταινίες, επεισόδια, σεζόν και σειρές μπορούν να σημειωθούν ως προβεβλημένα"
 }

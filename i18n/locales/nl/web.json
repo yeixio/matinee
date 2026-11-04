@@ -90,7 +90,9 @@
     "seasons": "Seizoenen",
     "albums": "Albums",
     "episodes": "Afleveringen",
-    "resetPoster": "Automatische poster gebruiken"
+    "resetPoster": "Automatische poster gebruiken",
+    "markWatched": "Markeren als bekeken",
+    "markUnwatched": "Markeren als niet bekeken"
   },
   "row": {
     "back": "Terug scrollen",

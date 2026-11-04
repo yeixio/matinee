@@ -90,7 +90,9 @@
     "seasons": "עונות",
     "albums": "אלבומים",
     "episodes": "פרקים",
-    "resetPoster": "שימוש בפוסטר האוטומטי"
+    "resetPoster": "שימוש בפוסטר האוטומטי",
+    "markWatched": "סימון כנצפה",
+    "markUnwatched": "סימון כלא נצפה"
   },
   "row": {
     "back": "גלילה אחורה",

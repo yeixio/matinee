@@ -250,5 +250,6 @@
   "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "지금은 인터넷에 연결되어 있지 않습니다. 서버는 정상입니다. 이 기능은 인터넷이 필요하며 연결이 돌아오면 다시 작동합니다.",
   "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMapping은 hable, mobius, reinhard 또는 off여야 합니다",
   "kind_must_be_stall_or_error": "kind는 stall 또는 error여야 합니다",
-  "bytes_must_be_between_0_and_104857600": "bytes는 0에서 104857600 사이여야 합니다"
+  "bytes_must_be_between_0_and_104857600": "bytes는 0에서 104857600 사이여야 합니다",
+  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "영화, 에피소드, 시즌, 프로그램만 시청함으로 표시할 수 있어요"
 }

@@ -250,5 +250,6 @@
   "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "ingen internetanslutning just nu. Din server mår bra; det här behöver internet och fungerar igen när det är tillbaka.",
   "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMapping måste vara hable, mobius, reinhard eller off",
   "kind_must_be_stall_or_error": "kind måste vara stall eller error",
-  "bytes_must_be_between_0_and_104857600": "bytes måste vara mellan 0 och 104857600"
+  "bytes_must_be_between_0_and_104857600": "bytes måste vara mellan 0 och 104857600",
+  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "Bara filmer, avsnitt, säsonger och serier kan markeras som sedda"
 }

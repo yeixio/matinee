@@ -90,7 +90,9 @@
     "seasons": "Sesonger",
     "albums": "Album",
     "episodes": "Episoder",
-    "resetPoster": "Bruk den automatiske plakaten"
+    "resetPoster": "Bruk den automatiske plakaten",
+    "markWatched": "Merk som sett",
+    "markUnwatched": "Merk som usett"
   },
   "row": {
     "back": "Bla tilbake",

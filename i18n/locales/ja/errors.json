@@ -250,5 +250,6 @@
   "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "現在インターネットに接続されていません。サーバーは正常です。この機能にはインターネットが必要で、接続が戻れば再び使えます。",
   "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMapping は hable、mobius、reinhard、または off にしてください",
   "kind_must_be_stall_or_error": "kind は stall か error にしてください",
-  "bytes_must_be_between_0_and_104857600": "bytes は 0 から 104857600 の間にしてください"
+  "bytes_must_be_between_0_and_104857600": "bytes は 0 から 104857600 の間にしてください",
+  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "視聴済みにできるのは映画、エピソード、シーズン、番組だけです"
 }

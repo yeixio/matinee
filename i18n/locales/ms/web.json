@@ -90,7 +90,9 @@
     "seasons": "Musim",
     "albums": "Album",
     "episodes": "Episod",
-    "resetPoster": "Guna poster automatik"
+    "resetPoster": "Guna poster automatik",
+    "markWatched": "Tanda sudah ditonton",
+    "markUnwatched": "Tanda belum ditonton"
   },
   "row": {
     "back": "Tatal ke belakang",

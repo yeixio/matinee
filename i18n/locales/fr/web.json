@@ -90,7 +90,9 @@
     "seasons": "Saisons",
     "albums": "Albums",
     "episodes": "Épisodes",
-    "resetPoster": "Utiliser l'affiche automatique"
+    "resetPoster": "Utiliser l'affiche automatique",
+    "markWatched": "Marquer comme vu",
+    "markUnwatched": "Marquer comme non vu"
   },
   "row": {
     "back": "Faire défiler vers l’arrière",

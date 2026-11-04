@@ -250,5 +250,6 @@
   "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "зараз немає з'єднання з інтернетом. Ваш сервер у порядку; для цього потрібен інтернет, і все запрацює, щойно він повернеться.",
   "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMapping має бути hable, mobius, reinhard або off",
   "kind_must_be_stall_or_error": "kind має бути stall або error",
-  "bytes_must_be_between_0_and_104857600": "bytes має бути від 0 до 104857600"
+  "bytes_must_be_between_0_and_104857600": "bytes має бути від 0 до 104857600",
+  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "Позначити переглянутими можна лише фільми, епізоди, сезони й серіали"
 }

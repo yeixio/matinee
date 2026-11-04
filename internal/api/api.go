@@ -336,6 +336,8 @@ func (s *Server) routes() []route {
 		{"GET /people/{id}", reader, s.getPerson},
 		{"GET /people/{id}/image", reader, s.personImage},
 		{"PUT /items/{id}/progress", reader, s.setProgress},
+		{"GET /items/{id}/watched", reader, s.getWatched},
+		{"PUT /items/{id}/watched", reader, s.setWatched},
 		{"DELETE /continue-watching/{id}", reader, s.hideFromContinueWatching},
 		{"GET /items/{id}/image/{type}", reader, s.itemImage},
 		{"GET /items/{id}/covers", adminOnly, s.coverOptions},

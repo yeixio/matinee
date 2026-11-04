@@ -250,5 +250,6 @@
   "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "الان اتصال اینترنت برقرار نیست. سرور شما سالم است؛ این کار به اینترنت نیاز دارد و با برگشتن آن دوباره کار می‌کند.",
   "tonemapping_must_be_hable_mobius_reinhard_or_off": "toneMapping باید hable، mobius، reinhard یا off باشد",
   "kind_must_be_stall_or_error": "kind باید stall یا error باشد",
-  "bytes_must_be_between_0_and_104857600": "bytes باید بین 0 تا 104857600 باشد"
+  "bytes_must_be_between_0_and_104857600": "bytes باید بین 0 تا 104857600 باشد",
+  "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "فقط فیلم‌ها، قسمت‌ها، فصل‌ها و سریال‌ها را می‌توان دیده‌شده علامت زد"
 }
