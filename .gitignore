@@ -15,6 +15,9 @@ web/node_modules/
 web/coverage/
 web/dist/*
 !web/dist/.gitkeep
+boxoffice/web/dist/*
+!boxoffice/web/dist/.gitkeep
+boxoffice/web/node_modules/
 
 # Editors
 .DS_Store

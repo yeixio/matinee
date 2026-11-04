@@ -4,6 +4,7 @@ package kube
 
 import (
 	"bytes"
+	"cmp"
 	"context"
 	"crypto/rand"
 	"crypto/tls"
@@ -59,6 +60,7 @@ type DatabaseSecret struct {
 	Namespace, Name string
 	User, Database  string
 	Host            string // PostgreSQL service name
+	App             string // the app.kubernetes.io/name label; matinee when empty
 }
 
 // EnsureDatabaseSecret creates the Secret with a random password unless it exists.
@@ -94,7 +96,7 @@ func (c *Client) EnsureDatabaseSecret(ctx context.Context, s DatabaseSecret) (bo
 		"kind":       "Secret",
 		"metadata": map[string]any{
 			"name":   s.Name,
-			"labels": map[string]string{"app.kubernetes.io/name": "matinee"},
+			"labels": map[string]string{"app.kubernetes.io/name": cmp.Or(s.App, "matinee")},
 		},
 		"type":       "Opaque",
 		"stringData": map[string]string{"postgres-password": password, "database-url": dbURL},
