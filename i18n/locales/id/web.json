@@ -1062,7 +1062,8 @@
       "problems_other": "{{count}} peringatan atau galat dalam satu jam terakhir",
       "restarting": "Server sedang dimulai ulang",
       "database": "Database tidak merespons",
-      "disk": "Ada folder yang tidak bisa dibaca"
+      "disk": "Ada folder yang tidak bisa dibaca",
+      "offline": "Tidak ada koneksi internet"
     },
     "scope": {
       "group": "Matinee dan proses FFmpeg yang dijalankannya.",
@@ -1192,6 +1193,11 @@
       "live": "Ikuti baris baru",
       "older": "Tampilkan baris lebih lama",
       "empty": "Tidak ada baris yang cocok."
+    },
+    "internet": {
+      "offline": "Tidak ada koneksi internet selama {{time}}",
+      "offlineNote": "Semua di server Anda tetap berjalan. Poster dan detail judul baru, pencarian subtitle, podcast, trailer, dan akses jarak jauh menunggu dan menyusul saat internet kembali.",
+      "down": "Tidak menjawab: {{sites}}"
     }
   },
   "alerts": {

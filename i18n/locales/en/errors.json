@@ -78,6 +78,7 @@
   "muted_is_required": "muted is required",
   "name_give_one_of_up_to_120_characters": "name: give one of up to 120 characters",
   "name_is_required": "name is required",
+  "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "no internet connection right now. Your server is fine; this needs the internet, and works again once it's back.",
   "no_levels_on_this_server": "no levels on this server",
   "no_media_server_data_found_there": "no media server data found there",
   "no_such_account": "no such account",

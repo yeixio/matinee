@@ -168,6 +168,9 @@ func (s *Server) podcastDirectory(w http.ResponseWriter, r *http.Request) {
 			writeError(w, http.StatusBadGateway, "Podcast Index didn't accept the server's key")
 			return
 		}
+		if s.noInternet(w, err) {
+			return
+		}
 		s.Log.Warn("podcast index", "err", err)
 		writeError(w, http.StatusBadGateway, "Podcast Index isn't answering right now. Try again later.")
 		return
@@ -301,6 +304,9 @@ func (s *Server) refreshPodcast(w http.ResponseWriter, r *http.Request) {
 	defer cancel()
 	added, err := s.Podcasts.Refresh(ctx, f)
 	if err != nil {
+		if s.noInternet(w, err) {
+			return
+		}
 		s.Log.Info("refreshing a podcast", "show", it.Title, "err", err)
 		writeError(w, http.StatusBadGateway, "the feed couldn't be read right now")
 		return

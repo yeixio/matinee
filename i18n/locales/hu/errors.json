@@ -246,5 +246,6 @@
   "couldnt_reach_tmdb_try_again_in_a_moment": "a TMDB nem érhető el; próbáld újra kicsit később",
   "tmdb_no_longer_has_this_title_fix_the_match_instead": "a TMDB-n már nincs meg ez a cím; javítsd az egyezést",
   "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "küldd el a TMDB-azonosítót, TMDB-címet vagy IMDb-azonosítót",
-  "tmdb_has_no_such_title": "a TMDB-n nincs ilyen cím"
+  "tmdb_has_no_such_title": "a TMDB-n nincs ilyen cím",
+  "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "jelenleg nincs internetkapcsolat. A szervered rendben van; ehhez internet kell, és újra működik, amint visszajön."
 }

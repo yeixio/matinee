@@ -1062,7 +1062,8 @@
       "problems_other": "過去一小時有 {{count}} 則警告或錯誤",
       "restarting": "伺服器正在重新啟動",
       "database": "資料庫沒有回應",
-      "disk": "有資料夾無法讀取"
+      "disk": "有資料夾無法讀取",
+      "offline": "沒有網際網路連線"
     },
     "scope": {
       "group": "Matinee 及其執行的 FFmpeg 程序。",
@@ -1192,6 +1193,11 @@
       "live": "跟隨新行",
       "older": "顯示較早的行",
       "empty": "沒有符合的行。"
+    },
+    "internet": {
+      "offline": "已 {{time}} 沒有網際網路連線",
+      "offlineNote": "伺服器上的一切照常運作。新作品的海報與詳細資料、字幕搜尋、Podcast、預告片和遠端存取會等待，網路恢復後自動補上。",
+      "down": "沒有回應：{{sites}}"
     }
   },
   "alerts": {

@@ -52,6 +52,7 @@ func (s *Server) matchError(w http.ResponseWriter, err error) {
 		writeError(w, http.StatusBadRequest, err.Error())
 	case errors.Is(err, metadata.ErrBadKey), errors.Is(err, metadata.ErrNoKey):
 		writeError(w, http.StatusServiceUnavailable, "TMDB didn't accept the key in Settings → Posters and details")
+	case s.noInternet(w, err):
 	default:
 		s.Log.Warn("match lookup", "err", err)
 		writeError(w, http.StatusBadGateway, "couldn't reach TMDB; try again in a moment")

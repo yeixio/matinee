@@ -1083,7 +1083,8 @@
       "problems_other": "{{count}} varování nebo chyb za poslední hodinu",
       "restarting": "Server se restartuje",
       "database": "Databáze neodpovídá",
-      "disk": "Složku nelze přečíst"
+      "disk": "Složku nelze přečíst",
+      "offline": "Bez připojení k internetu"
     },
     "scope": {
       "group": "Matinee a procesy FFmpeg, které spouští.",
@@ -1225,6 +1226,11 @@
       "live": "Sledovat nové řádky",
       "older": "Zobrazit starší řádky",
       "empty": "Žádné odpovídající řádky."
+    },
+    "internet": {
+      "offline": "Bez připojení k internetu {{time}}",
+      "offlineNote": "Vše na vašem serveru funguje dál. Plakáty a podrobnosti nových titulů, hledání titulků, podcasty, upoutávky a vzdálený přístup počkají a doženou to, až se připojení vrátí.",
+      "down": "Neodpovídá: {{sites}}"
     }
   },
   "alerts": {

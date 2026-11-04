@@ -1069,7 +1069,8 @@
       "problems_other": "Son bir saatte {{count}} uyarı veya hata",
       "restarting": "Sunucu yeniden başlıyor",
       "database": "Veritabanı yanıt vermiyor",
-      "disk": "Bir klasör okunamıyor"
+      "disk": "Bir klasör okunamıyor",
+      "offline": "İnternet bağlantısı yok"
     },
     "scope": {
       "group": "Matinee ve çalıştırdığı FFmpeg işlemleri.",
@@ -1203,6 +1204,11 @@
       "live": "Yeni satırları takip et",
       "older": "Daha eski satırları göster",
       "empty": "Eşleşen satır yok."
+    },
+    "internet": {
+      "offline": "{{time}} süredir internet bağlantısı yok",
+      "offlineNote": "Sunucunuzdaki her şey çalışmaya devam ediyor. Yeni başlıkların afiş ve ayrıntıları, altyazı arama, podcast'ler, fragmanlar ve uzaktan erişim bekler ve bağlantı geri gelince güncellenir.",
+      "down": "Yanıt vermiyor: {{sites}}"
     }
   },
   "alerts": {

@@ -1076,7 +1076,8 @@
       "problems_other": "{{count}} avisos ou erros na última hora",
       "restarting": "O servidor está reiniciando",
       "database": "O banco de dados não está respondendo",
-      "disk": "Uma pasta não pode ser lida"
+      "disk": "Uma pasta não pode ser lida",
+      "offline": "Sem conexão com a internet"
     },
     "scope": {
       "group": "O Matinee e os processos do FFmpeg que ele executa.",
@@ -1214,6 +1215,11 @@
       "live": "Acompanhar novas linhas",
       "older": "Mostrar linhas anteriores",
       "empty": "Nenhuma linha corresponde."
+    },
+    "internet": {
+      "offline": "Sem conexão com a internet há {{time}}",
+      "offlineNote": "Tudo no seu servidor continua funcionando. Pôsteres e detalhes de títulos novos, busca de legendas, podcasts, trailers e acesso remoto esperam e se atualizam quando ela voltar.",
+      "down": "Não responde: {{sites}}"
     }
   },
   "alerts": {

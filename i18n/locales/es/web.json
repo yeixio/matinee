@@ -1076,7 +1076,8 @@
       "problems_other": "{{count}} avisos o errores en la última hora",
       "restarting": "El servidor se está reiniciando",
       "database": "La base de datos no responde",
-      "disk": "No se puede leer una carpeta"
+      "disk": "No se puede leer una carpeta",
+      "offline": "Sin conexión a internet"
     },
     "scope": {
       "group": "Matinee y los procesos de FFmpeg que ejecuta.",
@@ -1214,6 +1215,11 @@
       "live": "Seguir las líneas nuevas",
       "older": "Mostrar líneas anteriores",
       "empty": "Ninguna línea coincide."
+    },
+    "internet": {
+      "offline": "Sin conexión a internet desde hace {{time}}",
+      "offlineNote": "Todo en tu servidor sigue funcionando. Los pósteres y detalles de títulos nuevos, la búsqueda de subtítulos, los pódcasts, los tráileres y el acceso remoto esperan y se ponen al día cuando vuelva.",
+      "down": "No responde: {{sites}}"
     }
   },
   "alerts": {

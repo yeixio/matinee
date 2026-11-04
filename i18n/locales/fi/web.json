@@ -1069,7 +1069,8 @@
       "problems_other": "{{count}} varoitusta tai virhettä viimeisen tunnin aikana",
       "restarting": "Palvelin käynnistyy uudelleen",
       "database": "Tietokanta ei vastaa",
-      "disk": "Kansiota ei voi lukea"
+      "disk": "Kansiota ei voi lukea",
+      "offline": "Ei internetyhteyttä"
     },
     "scope": {
       "group": "Matinee ja sen käynnistämät FFmpeg-prosessit.",
@@ -1203,6 +1204,11 @@
       "live": "Seuraa uusia rivejä",
       "older": "Näytä vanhemmat rivit",
       "empty": "Mikään rivi ei täsmää."
+    },
+    "internet": {
+      "offline": "Ei internetyhteyttä {{time}}",
+      "offlineNote": "Kaikki palvelimellasi toimii edelleen. Uusien nimikkeiden julisteet ja tiedot, tekstityshaku, podcastit, trailerit ja etäkäyttö odottavat ja päivittyvät, kun yhteys palaa.",
+      "down": "Ei vastaa: {{sites}}"
     }
   },
   "alerts": {

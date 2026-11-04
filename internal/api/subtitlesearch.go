@@ -285,6 +285,7 @@ func (s *Server) subtitleSearchFailed(w http.ResponseWriter, err error) bool {
 		writeError(w, http.StatusBadGateway, "OpenSubtitles turned down the server's key. An admin can check it in Settings.")
 	case errors.Is(err, subtitle.ErrQuota):
 		writeError(w, http.StatusTooManyRequests, "today's subtitle downloads are used up. Try again tomorrow.")
+	case s.noInternet(w, err):
 	default:
 		s.Log.Warn("opensubtitles", "err", err)
 		writeError(w, http.StatusBadGateway, "OpenSubtitles couldn't be reached right now")

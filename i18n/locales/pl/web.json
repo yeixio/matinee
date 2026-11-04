@@ -1083,7 +1083,8 @@
       "problems_other": "{{count}} ostrzeżenia lub błędu w ostatniej godzinie",
       "restarting": "Serwer uruchamia się ponownie",
       "database": "Baza danych nie odpowiada",
-      "disk": "Nie można odczytać folderu"
+      "disk": "Nie można odczytać folderu",
+      "offline": "Brak połączenia z internetem"
     },
     "scope": {
       "group": "Matinee i uruchamiane przez nie procesy FFmpeg.",
@@ -1225,6 +1226,11 @@
       "live": "Śledź nowe wiersze",
       "older": "Pokaż starsze wiersze",
       "empty": "Brak pasujących wierszy."
+    },
+    "internet": {
+      "offline": "Brak połączenia z internetem od {{time}}",
+      "offlineNote": "Wszystko na serwerze działa dalej. Plakaty i szczegóły nowych tytułów, wyszukiwanie napisów, podcasty, zwiastuny i dostęp zdalny poczekają i nadrobią, gdy internet wróci.",
+      "down": "Nie odpowiada: {{sites}}"
     }
   },
   "alerts": {

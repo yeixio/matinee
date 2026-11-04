@@ -69,6 +69,9 @@ func (s *Server) stationDirectory(w http.ResponseWriter, r *http.Request) {
 	defer cancel()
 	found, err := radio.Search(ctx, stream.Remote, s.RadioBase, q+tag, q == "")
 	if err != nil {
+		if s.noInternet(w, err) {
+			return
+		}
 		s.Log.Info("searching for radio stations", "err", err)
 		writeError(w, http.StatusBadGateway, "the station directory isn't answering right now")
 		return

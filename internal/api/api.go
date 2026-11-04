@@ -29,6 +29,7 @@ import (
 	"github.com/yeixio/matinee/internal/live"
 	"github.com/yeixio/matinee/internal/livetv"
 	"github.com/yeixio/matinee/internal/lyrics"
+	"github.com/yeixio/matinee/internal/netstate"
 	"github.com/yeixio/matinee/internal/plugin"
 	"github.com/yeixio/matinee/internal/podcast"
 	"github.com/yeixio/matinee/internal/probe"
@@ -92,6 +93,9 @@ type Server struct {
 	// online, after a match changed; nil leaves it to the next scan.
 	Matcher Matcher
 	Refetch func(ctx context.Context, lib store.Library)
+	// Connections knows which sites outside aren't answering (see
+	// internal/netstate); nil reports none.
+	Connections *netstate.Tracker
 	// OnTMDBKey runs after an admin changes the TMDB key.
 	OnTMDBKey func()
 	// ThemeDir holds the admin's own theme files (see themes.go); empty means

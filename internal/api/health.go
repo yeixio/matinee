@@ -2,6 +2,7 @@ package api
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"net/http"
 	"os"
@@ -16,6 +17,7 @@ import (
 	"github.com/yeixio/matinee/internal/health"
 	"github.com/yeixio/matinee/internal/hwaccel"
 	"github.com/yeixio/matinee/internal/live"
+	"github.com/yeixio/matinee/internal/netstate"
 	"github.com/yeixio/matinee/internal/remote"
 	"github.com/yeixio/matinee/internal/scan"
 	"github.com/yeixio/matinee/internal/store"
@@ -72,6 +74,9 @@ type healthServer struct {
 	Remote       *remote.Status `json:"remote,omitempty"`
 	ScanInterval int64          `json:"scanIntervalMs"`
 	Watching     scan.WatchMode `json:"watching,omitempty"`
+	// Internet says which sites outside the server aren't answering, and
+	// whether the internet as a whole looks down.
+	Internet *netstate.Status `json:"internet,omitempty"`
 }
 
 type healthDisk struct {
@@ -164,8 +169,18 @@ func (s *Server) getHealth(w http.ResponseWriter, r *http.Request) {
 			out.Server.Watching = mode
 		}
 	}
+	if s.Connections != nil {
+		st := s.Connections.Status()
+		out.Server.Internet = &st
+	}
 	if m.Logs != nil {
-		out.Problems = m.Logs.Problems(50)
+		// Calls skipped while a site is down are told by Internet, not
+		// listed one by one.
+		for _, p := range m.Logs.Problems(50) {
+			if !strings.Contains(p.Detail, netstate.Marker) {
+				out.Problems = append(out.Problems, p)
+			}
+		}
 		out.LogLines, out.LogsSince = m.Logs.Kept()
 	}
 
@@ -439,4 +454,16 @@ func existingParent(path string) string {
 		}
 		p = up
 	}
+}
+
+// noInternet answers for something that needs the internet and couldn't
+// have it: the call was skipped because its site is down (see
+// internal/netstate), or the server knows the internet is down. It says
+// false, having written nothing, for any other failure.
+func (s *Server) noInternet(w http.ResponseWriter, err error) bool {
+	if !errors.Is(err, netstate.ErrDown) && (s.Connections == nil || !s.Connections.Status().Offline) {
+		return false
+	}
+	writeError(w, http.StatusServiceUnavailable, "no internet connection right now. Your server is fine; this needs the internet, and works again once it's back.")
+	return true
 }

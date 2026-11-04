@@ -1076,7 +1076,8 @@
       "problems_other": "{{count}} avvisi o errori nell’ultima ora",
       "restarting": "Il server si sta riavviando",
       "database": "Il database non risponde",
-      "disk": "Una cartella non si può leggere"
+      "disk": "Una cartella non si può leggere",
+      "offline": "Nessuna connessione a internet"
     },
     "scope": {
       "group": "Matinee e i processi FFmpeg che avvia.",
@@ -1214,6 +1215,11 @@
       "live": "Segui le nuove righe",
       "older": "Mostra righe precedenti",
       "empty": "Nessuna riga corrisponde."
+    },
+    "internet": {
+      "offline": "Nessuna connessione a internet da {{time}}",
+      "offlineNote": "Tutto sul tuo server continua a funzionare. Locandine e dettagli dei nuovi titoli, ricerca sottotitoli, podcast, trailer e accesso remoto aspettano e si aggiornano quando torna.",
+      "down": "Non risponde: {{sites}}"
     }
   },
   "alerts": {

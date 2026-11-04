@@ -246,5 +246,6 @@
   "couldnt_reach_tmdb_try_again_in_a_moment": "تعذّر الوصول إلى TMDB؛ حاول مجددًا بعد قليل",
   "tmdb_no_longer_has_this_title_fix_the_match_instead": "لم يعد هذا العنوان على TMDB؛ صحّح المطابقة بدلًا من ذلك",
   "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "أرسل معرّف TMDB أو عنوان TMDB أو معرّف IMDb",
-  "tmdb_has_no_such_title": "لا يوجد عنوان كهذا على TMDB"
+  "tmdb_has_no_such_title": "لا يوجد عنوان كهذا على TMDB",
+  "no_internet_connection_right_now_your_server_is_fine_this_needs_the_internet_and_works_again_once_its_back": "لا يوجد اتصال بالإنترنت الآن. خادمك يعمل جيدًا؛ هذا يحتاج إلى الإنترنت وسيعمل مجددًا عند عودته."
 }
