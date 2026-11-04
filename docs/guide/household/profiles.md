@@ -41,6 +41,10 @@ Ratings come from TMDB for your country. Set `MATINEE_RATING_COUNTRY` to use you
 
 A PIN on a profile stops others from picking it. To stop a child switching back to the grown-up profile, put a PIN on the account itself too, with **Add PIN** next to the account. After five wrong tries, the profile locks for a minute.
 
+<!-- since: v0.2.2 -->
+A TV asks **Who's watching?** each time Matinee opens, so it asks for a locked profile's PIN every time too, even when that profile was the last one watching. Only right after you sign in with the account's password does the TV let the account skip its own PIN.
+<!-- /since -->
+
 ![The profiles of every account, with Riley as a kids profile](../images/profiles.webp)
 
 ## Profiles at home
