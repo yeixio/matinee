@@ -367,6 +367,7 @@ func (s *Server) routes() []route {
 		{"POST /items/{id}/refresh", adminOnly, s.refreshItem},
 		{"DELETE /items/{id}/cover", adminOnly, s.resetCover},
 		{"GET /items/{id}/file", reader, s.directFile},
+		{"GET /items/{id}/audio", reader, s.itemAudio},
 		{"POST /items/{id}/playback-report", reader, s.reportPlayback},
 		{"GET /items/{id}/playback-why", reader, s.playbackWhy},
 		{"GET /speedtest", reader, s.speedTest},

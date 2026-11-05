@@ -632,6 +632,9 @@ var migrations = []string{
 	"ALTER TABLE notifications ADD COLUMN repeats INTEGER NOT NULL DEFAULT 1",
 	"ALTER TABLE notifications ADD COLUMN first_at BIGINT NOT NULL DEFAULT 0",
 	"CREATE INDEX notifications_grouping ON notifications(user_id, group_key)",
+	// 104: a radio station an admin added from the home network, such as an
+	// Air-Mixer output; the server may reach it there (see stations.go).
+	"ALTER TABLE items ADD COLUMN stream_home INTEGER NOT NULL DEFAULT 0",
 }
 
 func now() int64 { return time.Now().Unix() }

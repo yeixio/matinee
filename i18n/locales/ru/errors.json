@@ -265,5 +265,7 @@
   "subtitle_choices_arent_ones_the_apps_know": "Приложения не знают таких настроек субтитров",
   "no_such_font": "Такого шрифта нет",
   "couldnt_start_playback_for_this_extra": "не удалось воспроизвести этот материал",
-  "no_such_extra": "такого материала нет"
+  "no_such_extra": "такого материала нет",
+  "only_an_admin_can_add_a_station_on_the_home_network": "добавить станцию из домашней сети может только администратор",
+  "startms_give_a_number_of_milliseconds": "startMs: укажите число миллисекунд"
 }

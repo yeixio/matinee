@@ -2024,6 +2024,13 @@ paths:
                 image: { type: string, description: A logo's web address. }
                 homepage: { type: string }
                 tags: { type: array, items: { type: string } }
+                home:
+                  type: boolean
+                  description: |
+                    Admins only (403 otherwise): the stream is on the home network, such as an
+                    Air-Mixer output, so the server may reach it there. Other stations must be on
+                    the internet unless the server allows the home network for podcasts. A
+                    station that streams WAV plays to players as AAC.
       responses:
         "201":
           description: The station, an item of kind station.
@@ -2621,6 +2628,24 @@ paths:
       responses:
         "200": { description: The file. }
         "206": { description: Part of the file. }
+  /items/{id}/audio:
+    get:
+      summary: An item's audio as PCM, for speakers
+      description: |
+        The item's first audio stream decoded to an endless WAV of 16-bit
+        little-endian stereo at 44.1 kHz, from `startMs` on, for speakers
+        that play what they're sent without decoding it, such as Air-Mixer.
+        The WAV's sizes are 0xFFFFFFFF; read until the response ends. A
+        radio station plays live, ignoring `startMs`. `X-Duration-Ms` is the
+        item's length when known, and `X-Start-Ms` where this starts.
+      parameters:
+        - { $ref: "#/components/parameters/ID" }
+        - { name: startMs, in: query, schema: { type: integer, minimum: 0 } }
+      responses:
+        "200": { description: The audio., content: { audio/wav: { schema: { type: string, format: binary } } } }
+        "400": { $ref: "#/components/responses/Error" }
+        "404": { $ref: "#/components/responses/Error" }
+        "502": { description: A podcast episode or station couldn't be reached. }
   /items/{id}/subtitles/{track}:
     get:
       summary: A text subtitle track as WebVTT, or a styled one as ASS

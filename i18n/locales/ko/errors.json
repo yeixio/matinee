@@ -265,5 +265,7 @@
   "subtitle_choices_arent_ones_the_apps_know": "앱에서 알 수 없는 자막 설정입니다",
   "no_such_font": "해당 글꼴이 없습니다",
   "couldnt_start_playback_for_this_extra": "이 부가 영상을 재생할 수 없습니다",
-  "no_such_extra": "해당 부가 영상이 없습니다"
+  "no_such_extra": "해당 부가 영상이 없습니다",
+  "only_an_admin_can_add_a_station_on_the_home_network": "홈 네트워크의 방송국은 관리자만 추가할 수 있습니다",
+  "startms_give_a_number_of_milliseconds": "startMs: 밀리초 단위 숫자를 입력하세요"
 }
