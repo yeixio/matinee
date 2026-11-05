@@ -354,7 +354,7 @@ Matinee is one of a family of free, self-hosted apps for the home. Each works on
 |---------|--------------|
 | **Matinee** (this repository) | A fast, open-source media server for your movies, TV, music, audiobooks and podcasts, with web, phone and TV apps. |
 | [**Box Office**](https://github.com/yeixio/boxoffice) | Manages your movie and TV library in place of Radarr, Sonarr and NZBGet, and plugs straight into Matinee. |
-| [**Air-Mixer**](https://github.com/yeixio/air-mixer) | One home for every speaker you own: receives, routes and mixes audio across speakers from different ecosystems, starting with AirPlay in both directions. |
+| [**Air-Mixer**](https://github.com/yeixio/air-mixer) | One home for every speaker you own: receives, routes and mixes audio across speakers from different ecosystems, starting with AirPlay in both directions. It plays Matinee on your speakers and uses Matinee players as speakers ([how](https://matinee.yeix.io/docs/server/air-mixer/)). |
 
 ## Support Matinee
 
