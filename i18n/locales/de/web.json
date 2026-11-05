@@ -599,6 +599,7 @@
     },
     "boxoffice": {
       "notConnected": "Nicht verbunden · findet und lädt Filme und Serien",
+      "foundNearby": "Im Netzwerk gefunden unter {{url}} · noch nicht verbunden",
       "moviesOnly": "Filme gehen an Box Office, Serien noch nicht · {{url}}",
       "showsOnly": "Serien gehen an Box Office, Filme noch nicht · {{url}}",
       "intro": "Box Office findet und lädt Filme und Serien. Wenn du es hier verbindest, zeigen Radarr und Sonarr darauf, sodass Wünsche, Demnächst und Benachrichtigungen darüber laufen.",

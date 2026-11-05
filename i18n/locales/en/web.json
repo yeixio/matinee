@@ -599,6 +599,7 @@
     },
     "boxoffice": {
       "notConnected": "Not connected · finds and downloads movies and shows",
+      "foundNearby": "Found on your network at {{url}} · not connected yet",
       "moviesOnly": "Movies go to Box Office, shows don't yet · {{url}}",
       "showsOnly": "Shows go to Box Office, movies don't yet · {{url}}",
       "intro": "Box Office finds and downloads movies and shows. Connecting it here points Radarr and Sonarr at it, so requests, coming soon and notifications all go through it.",

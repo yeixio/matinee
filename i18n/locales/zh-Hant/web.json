@@ -595,6 +595,7 @@
     },
     "boxoffice": {
       "notConnected": "未連線 · 尋找並下載電影和影集",
+      "foundNearby": "在你的網路中找到：{{url}} · 尚未連線",
       "moviesOnly": "電影走 Box Office，影集還沒有 · {{url}}",
       "showsOnly": "影集走 Box Office，電影還沒有 · {{url}}",
       "intro": "Box Office 會尋找並下載電影和影集。在這裡連線後，Radarr 和 Sonarr 都會指向它，請求、即將推出和通知都經由它。",

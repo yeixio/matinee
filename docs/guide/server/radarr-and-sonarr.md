@@ -17,15 +17,29 @@ If you use [Radarr](https://radarr.video/) for movies or [Sonarr](https://sonarr
 
 The address and key stay on the server; nobody's browser or app ever sees them.
 
+<!-- since: v0.2.3 -->
 ## Box Office
 
 [Box Office](https://github.com/yeixio/boxoffice) finds and downloads movies and shows, and answers Matinee the way Radarr and Sonarr do. It has its own entry, first in the list, so one connection does both jobs:
 
-1. Open **Settings → Add-ons** and click **Connect** next to **Box Office**. Matinee looks for it on its own: at `boxoffice:7272` (its name in Kubernetes or Docker Compose), on the same machine, at `boxoffice.` beside Matinee's own domain, and wherever Radarr or Sonarr already go. Click the one it found, or type the address.
+1. Open **Settings → Add-ons**. Matinee looks for Box Office as soon as the page opens, and when it finds one, **Box Office** says *Found on your network* with its address. Click **Connect**: the address is already filled in. Change it if you'd rather use another, or click another one Matinee found.
 2. Paste Box Office's API key. In Box Office, sign in as an admin, open **Settings → Connect Matinee**, and use the copy button next to **API key**.
 3. Click **Test**, then **Save**.
 
 Saving points Radarr at `<address>/radarr` and Sonarr at `<address>/sonarr` with that key, keeping the quality profile and root folder they had when Box Office has them, else Box Office's first. Change those under Radarr and Sonarr below. If Box Office has no TV (or movie) root folder yet, only the other kind connects until you add one and save again. Disconnecting Box Office disconnects both.
+
+### How Matinee finds Box Office
+
+Matinee asks each of these places whether it's Box Office, and nothing goes through Yeix or any other service. It tries, in this order:
+
+- wherever Radarr or Sonarr already go;
+- `boxoffice:7272`, its name in Kubernetes or Docker Compose, and port 7272 on the same machine;
+- `boxoffice.` beside Matinee's own domain, such as `https://boxoffice.example.com` for `https://matinee.example.com`;
+- Box Office announcing itself on the home network (it does this on its own, as `_boxoffice._tcp`, unless it's started with `BOXOFFICE_ANNOUNCE=false`);
+- port 7272 on the other computers on Matinee's own home network (the 256 addresses around its own).
+
+Only an address that answers as Box Office is listed. If Box Office listens on another port or Matinee runs somewhere it can't see the home network, such as inside Kubernetes without Box Office beside it, type the address.
+<!-- /since -->
 
 ## Who can add titles
 
