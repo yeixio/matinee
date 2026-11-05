@@ -247,6 +247,8 @@ type BoxOffice struct {
 	URL            string
 	Key            string
 	Radarr, Sonarr *Fake
+	// Close stops it answering, like a Box Office that's down.
+	Close func()
 }
 
 func NewBoxOffice(t *testing.T) *BoxOffice {
@@ -268,7 +270,7 @@ func NewBoxOffice(t *testing.T) *BoxOffice {
 		}
 	}))
 	t.Cleanup(ts.Close)
-	b.URL = ts.URL
+	b.URL, b.Close = ts.URL, ts.Close
 	b.Radarr.URL, b.Sonarr.URL = ts.URL+"/radarr", ts.URL+"/sonarr"
 	return b
 }

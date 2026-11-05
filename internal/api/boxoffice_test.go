@@ -83,3 +83,66 @@ func TestBoxOfficeConnection(t *testing.T) {
 		t.Fatalf("after: %+v %+v", view, ints)
 	}
 }
+
+// Radarr and Sonarr behind a proxy at /radarr and /sonarr aren't Box Office,
+// even once they're shut down, and they can still be disconnected.
+func TestRealArrBehindProxyIsntBoxOffice(t *testing.T) {
+	var srv *Server
+	admin, _, db := newTestServerStore(t, func(s *Server) { srv = s })
+	var login struct{ Token string }
+	admin.do("POST", "/api/v1/setup", credentials{"admin", "correct horse"}, &login)
+	admin.token = login.Token
+
+	// Nothing answers at these addresses, like apps that were turned off.
+	ctx := t.Context()
+	for app, c := range map[arr.App]string{
+		arr.Radarr: `{"url":"http://127.0.0.1:1/radarr","apiKey":"radarr-key","qualityProfileId":1,"rootFolder":"/movies"}`,
+		arr.Sonarr: `{"url":"http://127.0.0.1:2/sonarr","apiKey":"sonarr-key","qualityProfileId":1,"rootFolder":"/tv"}`,
+	} {
+		if err := db.SetSetting(ctx, arr.SettingKey(app), c); err != nil {
+			t.Fatal(err)
+		}
+	}
+	var view boxOfficeView
+	admin.do("GET", "/api/v1/integrations/boxoffice", nil, &view)
+	if view.Movies || view.Shows {
+		t.Fatalf("before a check: %+v", view)
+	}
+	srv.ReadBoxOffice(ctx)
+	admin.do("GET", "/api/v1/integrations/boxoffice", nil, &view)
+	if view.Movies || view.Shows {
+		t.Fatalf("after a failed check: %+v", view)
+	}
+
+	for _, app := range []string{"radarr", "sonarr"} {
+		if code := admin.do("DELETE", "/api/v1/integrations/"+app, nil, nil); code != 204 {
+			t.Fatalf("disconnect %s: %d", app, code)
+		}
+	}
+	srv.ReadBoxOffice(ctx)
+	var ints map[arr.App]integrationView
+	admin.do("GET", "/api/v1/integrations", nil, &ints)
+	if ints[arr.Radarr].Connected || ints[arr.Sonarr].Connected {
+		t.Fatalf("after disconnecting: %+v", ints)
+	}
+}
+
+// A Box Office that stops answering is still Box Office.
+func TestBoxOfficeDownStaysBoxOffice(t *testing.T) {
+	bo := arrtest.NewBoxOffice(t)
+	var srv *Server
+	admin, _ := newTestServer(t, func(s *Server) { srv = s })
+	var login struct{ Token string }
+	admin.do("POST", "/api/v1/setup", credentials{"admin", "correct horse"}, &login)
+	admin.token = login.Token
+	var view boxOfficeView
+	if code := admin.do("PUT", "/api/v1/integrations/boxoffice", boxOfficeConfig{URL: bo.URL, APIKey: bo.Key}, &view); code != 200 || !view.Connected {
+		t.Fatalf("connect: %d %+v", code, view)
+	}
+	bo.Close()
+	srv.ReadBoxOffice(t.Context())
+	admin.do("GET", "/api/v1/integrations/boxoffice", nil, &view)
+	if !view.Connected || view.Error == "" {
+		t.Fatalf("down: %+v", view)
+	}
+}

@@ -330,10 +330,8 @@ func (s *Server) putIntegration(w http.ResponseWriter, r *http.Request) {
 		s.serverError(w, err)
 		return
 	}
-	s.arrCache.clear()
-	if s.OnArr != nil {
-		go s.OnArr()
-	}
+	s.boxOffices.forget(app)
+	s.arrChanged()
 	writeJSON(w, http.StatusOK, viewIntegration(c))
 }
 
@@ -346,10 +344,8 @@ func (s *Server) deleteIntegration(w http.ResponseWriter, r *http.Request) {
 		s.serverError(w, err)
 		return
 	}
-	s.arrCache.clear()
-	if s.OnArr != nil {
-		go s.OnArr()
-	}
+	s.boxOffices.forget(app)
+	s.arrChanged()
 	w.WriteHeader(http.StatusNoContent)
 }
 

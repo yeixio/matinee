@@ -17,6 +17,10 @@ If you use [Radarr](https://radarr.video/) for movies or [Sonarr](https://sonarr
 
 The address and key stay on the server; nobody's browser or app ever sees them.
 
+## Disconnecting
+
+To stop using Radarr or Sonarr (for example after you turn it off, or move to Box Office), click **Disconnect** next to it under **Settings → Add-ons** and confirm. On a phone it's the unplug button. It works even when the app isn't answering any more. Titles already in Radarr or Sonarr stay there, and asking for titles and **Coming soon** turn off until something is connected again.
+
 ## Box Office
 
 [Box Office](https://github.com/yeixio/boxoffice) finds and downloads movies and shows, and answers Matinee the way Radarr and Sonarr do. It has its own entry, first in the list, so one connection does both jobs:

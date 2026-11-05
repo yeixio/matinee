@@ -68,6 +68,20 @@ func (b *boxOffices) set(app arr.App, st boxOfficeState) {
 	b.ids[app] = st
 }
 
+// forget drops what Matinee heard from an app, when its connection changes.
+func (b *boxOffices) forget(app arr.App) {
+	b.mu.Lock()
+	defer b.mu.Unlock()
+	delete(b.ids, app)
+}
+
+// id is the Box Office an app was last heard to be, if any.
+func (b *boxOffices) id(app arr.App) string {
+	b.mu.Lock()
+	defer b.mu.Unlock()
+	return b.ids[app].ID
+}
+
 func (b *boxOffices) list() []boxOfficeState {
 	b.mu.Lock()
 	defer b.mu.Unlock()
@@ -102,16 +116,15 @@ func (s *Server) ReadBoxOffice(ctx context.Context) {
 	for _, app := range arr.Apps {
 		cl, _, err := s.arrClient(ctx, app)
 		if err != nil {
-			s.boxOffices.mu.Lock()
-			delete(s.boxOffices.ids, app)
-			s.boxOffices.mu.Unlock()
+			s.boxOffices.forget(app)
 			continue
 		}
 		callCtx, cancel := context.WithTimeout(ctx, 20*time.Second)
 		st, err := cl.Status(callCtx)
 		cancel()
 		if err != nil {
-			s.boxOffices.set(app, boxOfficeState{Error: err.Error()})
+			// A Box Office that's down is still Box Office.
+			s.boxOffices.set(app, boxOfficeState{ID: s.boxOffices.id(app), Error: err.Error()})
 			continue
 		}
 		if !st.BoxOffice("notifications") {

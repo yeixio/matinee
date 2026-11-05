@@ -70,16 +70,25 @@ func (s *Server) boxOfficeView(ctx context.Context) (boxOfficeView, map[arr.App]
 	for _, st := range s.boxOffices.list() {
 		checked[st.App] = st
 	}
-	key := ""
 	for _, app := range boxOfficeApps {
 		c, err := s.arrConfig(ctx, app)
 		if err != nil {
 			return v, nil, err
 		}
 		saved[app] = c
+	}
+	// Until Matinee has heard from it, an app counts as Box Office only when
+	// Radarr and Sonarr both go to the same address with the same key, as
+	// they do when Box Office is connected. A real Radarr behind a proxy at
+	// /radarr has a key of its own, and stays Radarr even while it's down.
+	movieBase, movieOK := boxOfficeBase(arr.Radarr, saved[arr.Radarr])
+	showBase, showOK := boxOfficeBase(arr.Sonarr, saved[arr.Sonarr])
+	shared := movieOK && showOK && movieBase == showBase && saved[arr.Radarr].APIKey == saved[arr.Sonarr].APIKey
+	key := ""
+	for _, app := range boxOfficeApps {
+		c := saved[app]
 		base, ok := boxOfficeBase(app, c)
-		// Real Radarr behind a proxy at /radarr isn't Box Office.
-		if st, seen := checked[app]; seen && st.ID == "" && st.Error == "" {
+		if st, seen := checked[app]; st.ID == "" && (!shared || (seen && st.Error == "")) {
 			ok = false
 		}
 		if !ok || (v.URL != "" && (base != v.URL || c.APIKey != key)) {
@@ -357,9 +366,7 @@ func (s *Server) deleteBoxOffice(w http.ResponseWriter, r *http.Request) {
 			s.serverError(w, err)
 			return
 		}
-		s.boxOffices.mu.Lock()
-		delete(s.boxOffices.ids, app)
-		s.boxOffices.mu.Unlock()
+		s.boxOffices.forget(app)
 	}
 	s.arrChanged()
 	w.WriteHeader(http.StatusNoContent)

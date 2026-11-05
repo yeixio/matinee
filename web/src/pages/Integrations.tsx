@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { Check, Clapperboard, Compass, PackageSearch, PlugZap, Search, Tv } from 'lucide-react'
+import { Check, Clapperboard, Compass, PackageSearch, PlugZap, Search, Tv, Unplug } from 'lucide-react'
 import { useEffect, useState, type FormEvent } from 'react'
 import { useTranslation } from 'react-i18next'
 import { api, type ArrApp, type BoxOfficeCheck, type BoxOfficeConnection, type ConnectionCheck, type Integration, type NotifyAdmins, type OverseerrCheck, type OverseerrConnection, type RequestMode } from '../api'
@@ -91,6 +91,7 @@ function BoxOfficeCard({ saved }: { saved: BoxOfficeConnection }) {
     onSuccess: () => {
       setUrl('')
       setChecked(undefined)
+      setOpen(false)
       refresh()
     },
   })
@@ -286,10 +287,15 @@ function Connection({ app, name, port, icon: Icon, saved }: (typeof apps)[number
     mutationFn: () => api.deleteIntegration(app),
     onSuccess: () => {
       setUrl('')
+      setApiKey('')
       setChecked(undefined)
+      setOpen(false)
       refresh()
     },
   })
+  const askDisconnect = () => {
+    if (confirm(t('integrations.confirmDisconnect', { app: name }))) disconnect.mutate()
+  }
 
   // Opening a saved connection lists its profiles and folders to choose from.
   const { mutate: runTest } = test
@@ -314,15 +320,31 @@ function Connection({ app, name, port, icon: Icon, saved }: (typeof apps)[number
           <div className="truncate text-xs text-muted">{saved.connected ? t('integrations.connected', { url: saved.url }) : t(`integrations.notConnected.${app}`)}</div>
         </div>
         {!open && (
-          <Button
-            variant={saved.connected ? 'ghost' : 'secondary'}
-            icon={saved.connected ? undefined : <PlugZap className="size-4" />}
-            onClick={() => setOpen(true)}
-          >
-            {saved.connected ? t('integrations.change') : t('integrations.connect')}
-          </Button>
+          <div className="flex shrink-0 flex-wrap justify-end gap-1">
+            {saved.connected && (
+              <Button
+                variant="ghost"
+                className="px-3 text-danger! hover:bg-danger/10!"
+                icon={<Unplug className="size-4" />}
+                aria-label={t('integrations.disconnect')}
+                title={t('integrations.disconnect')}
+                disabled={disconnect.isPending}
+                onClick={askDisconnect}
+              >
+                <span className="hidden sm:inline">{t('integrations.disconnect')}</span>
+              </Button>
+            )}
+            <Button
+              variant={saved.connected ? 'ghost' : 'secondary'}
+              icon={saved.connected ? undefined : <PlugZap className="size-4" />}
+              onClick={() => setOpen(true)}
+            >
+              {saved.connected ? t('integrations.change') : t('integrations.connect')}
+            </Button>
+          </div>
         )}
       </div>
+      {!open && disconnect.error && <p className="px-4 pb-4 text-sm text-danger">{disconnect.error.message}</p>}
       {open && (
         <form onSubmit={submit} className="space-y-4 border-t border-line/60 p-4">
           <div className="grid gap-3 sm:grid-cols-2">
@@ -391,7 +413,7 @@ function Connection({ app, name, port, icon: Icon, saved }: (typeof apps)[number
                 variant="danger"
                 className="me-auto"
                 disabled={disconnect.isPending}
-                onClick={() => confirm(t('integrations.confirmDisconnect', { app: name })) && disconnect.mutate()}
+                onClick={askDisconnect}
               >
                 {t('integrations.disconnect')}
               </Button>
@@ -451,6 +473,7 @@ function OverseerrConnectionCard({ saved }: { saved: OverseerrConnection }) {
     onSuccess: () => {
       setUrl('')
       setChecked(undefined)
+      setOpen(false)
       refresh()
     },
   })
