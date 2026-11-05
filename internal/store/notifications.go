@@ -66,7 +66,7 @@ func groupKey(n Notification) string {
 	if n.TMDBID == 0 && n.TVDBID == 0 {
 		body = numbers.ReplaceAllString(body, "#")
 	}
-	return fmt.Sprintf("%s\x00%s\x00%s\x00%s:%d:%d", n.Event, n.Title, body, n.Kind, n.TMDBID, n.TVDBID)
+	return fmt.Sprintf("%s\n%s\n%s\n%s:%d:%d", n.Event, n.Title, body, n.Kind, n.TMDBID, n.TVDBID)
 }
 
 // levelRank orders levels, least serious first.
