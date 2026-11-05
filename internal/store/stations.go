@@ -19,6 +19,9 @@ type Station struct {
 	Homepage string
 	Image    string // a logo on the internet, or ""
 	Genres   []string
+	// Home lets the server reach the stream on the home network, which it
+	// otherwise refuses (see stream.Remote). Only for stations an admin adds.
+	Home bool
 }
 
 // ErrStationTaken means the library has that stream already.
@@ -36,20 +39,32 @@ func (s *Store) AddStation(ctx context.Context, libraryID int64, st Station) (in
 	}
 	name := strings.TrimSpace(st.Name)
 	var id int64
-	err := s.db.QueryRowContext(ctx, `INSERT INTO items (library_id, kind, title, sort_title, overview, poster, genres, stream_url, meta_at, added_at)
-		VALUES (?, 'station', ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id`,
-		libraryID, name, SortTitle(name), nullStr(st.Homepage), nullStr(st.Image), encodeGenres(st.Genres), st.URL, now(), now()).Scan(&id)
+	home := 0
+	if st.Home {
+		home = 1
+	}
+	err := s.db.QueryRowContext(ctx, `INSERT INTO items (library_id, kind, title, sort_title, overview, poster, genres, stream_url, stream_home, meta_at, added_at)
+		VALUES (?, 'station', ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id`,
+		libraryID, name, SortTitle(name), nullStr(st.Homepage), nullStr(st.Image), encodeGenres(st.Genres), st.URL, home, now(), now()).Scan(&id)
 	return id, err
 }
 
 // StationURL is a station's stream, or ErrNotFound for anything else.
 func (s *Store) StationURL(ctx context.Context, id int64) (string, error) {
+	u, _, err := s.StationStream(ctx, id)
+	return u, err
+}
+
+// StationStream is a station's stream and whether it's on the home
+// network (Station.Home), or ErrNotFound for anything else.
+func (s *Store) StationStream(ctx context.Context, id int64) (string, bool, error) {
 	var u sql.NullString
-	err := s.db.QueryRowContext(ctx, "SELECT stream_url FROM items WHERE id = ? AND kind = 'station'", id).Scan(&u)
+	var home int
+	err := s.db.QueryRowContext(ctx, "SELECT stream_url, stream_home FROM items WHERE id = ? AND kind = 'station'", id).Scan(&u, &home)
 	if errors.Is(err, sql.ErrNoRows) || err == nil && !u.Valid {
-		return "", ErrNotFound
+		return "", false, ErrNotFound
 	}
-	return u.String, err
+	return u.String, home == 1, err
 }
 
 // RenameStation changes a station's name.

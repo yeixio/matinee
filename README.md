@@ -39,7 +39,7 @@ Open http://localhost:7171, create the admin account and add your folders. There
 ## Works with
 
 - **Your screens:** any modern browser, plus the [phone and TV apps](https://matinee.yeix.io/docs/apps/phone-and-tv/) for iPhone, iPad, Android, Apple TV, Android TV and Google TV, with [AirPlay and Chromecast](https://matinee.yeix.io/docs/apps/casting/), [CarPlay](https://matinee.yeix.io/docs/apps/carplay/), [Android Auto](https://matinee.yeix.io/docs/apps/android-auto/), [Siri and Google Assistant](https://matinee.yeix.io/docs/apps/voice/), [Apple Watch](https://matinee.yeix.io/docs/apps/apple-watch/) and [Wear OS](https://matinee.yeix.io/docs/apps/wear-os/) (the apps are on their way to the stores).
-- **Your other tools:** [Box Office](#box-office) to manage your movie and TV library, [Radarr and Sonarr](#radarr-and-sonarr), [Overseerr and Jellyseerr](#overseerr), [Home Assistant](https://matinee.yeix.io/docs/server/home-assistant/), and [Plex, to move your history over](https://matinee.yeix.io/docs/getting-started/switching/).
+- **Your other tools:** [Box Office](#box-office) to manage your movie and TV library, [Radarr and Sonarr](#radarr-and-sonarr), [Overseerr and Jellyseerr](#overseerr), [Home Assistant](https://matinee.yeix.io/docs/server/home-assistant/), [Air-Mixer](https://matinee.yeix.io/docs/server/air-mixer/) to play your music on every speaker in the house and use your TV as one of them, and [Plex, to move your history over](https://matinee.yeix.io/docs/getting-started/switching/).
 - **Your hardware:** Linux, macOS and Windows on amd64 and arm64, Docker, Kubernetes, NAS boxes, and [GPU transcoding](#hardware-transcoding) on NVIDIA, AMD, Intel, Apple and Raspberry Pi (only AMD has been tried on real hardware so far).
 
 ## What it does
