@@ -616,6 +616,13 @@
   "notifications": {
     "title": "Bildirimler",
     "empty": "Yeni bir şey yok. İstediğin bir şey yola çıktığında veya izlemeye hazır olduğunda burada haber alırsın.",
-    "clear": "Tümünü temizle"
+    "clear": "Tümünü temizle",
+    "channel": "İstekler ve indirmeler",
+    "phone": "Bu cihazda bildir",
+    "phoneHint": "İstediğin bir şey bulunduğunda ya da izlemeye hazır olduğunda, Matinee kapalıyken bile haberin olsun.",
+    "phoneBlocked": "Matinee bildirimleri bu cihazın ayarlarında kapalı.",
+    "openSettings": "Ayarları aç",
+    "offer": "Bunları, Matinee kapalıyken bile bu cihazda bildirim olarak al.",
+    "turnOn": "Aç"
   }
 }

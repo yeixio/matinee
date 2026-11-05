@@ -616,6 +616,13 @@
   "notifications": {
     "title": "Notifikationer",
     "empty": "Intet nyt. Her hører du, når noget, du har bedt om, er på vej eller klar til at se.",
-    "clear": "Ryd alle"
+    "clear": "Ryd alle",
+    "channel": "Ønsker og downloads",
+    "phone": "Giv mig besked på denne enhed",
+    "phoneHint": "Få besked, når noget, du har bedt om, er fundet eller klar til at se, også når Matinee er lukket.",
+    "phoneBlocked": "Notifikationer for Matinee er slået fra i enhedens indstillinger.",
+    "openSettings": "Åbn indstillinger",
+    "offer": "Få disse som notifikationer på denne enhed, også når Matinee er lukket.",
+    "turnOn": "Slå til"
   }
 }

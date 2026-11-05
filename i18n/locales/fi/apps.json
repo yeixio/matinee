@@ -616,6 +616,13 @@
   "notifications": {
     "title": "Ilmoitukset",
     "empty": "Ei mitään uutta. Täällä kuulet, kun pyytämäsi on tulossa tai valmis katsottavaksi.",
-    "clear": "Tyhjennä kaikki"
+    "clear": "Tyhjennä kaikki",
+    "channel": "Pyynnöt ja lataukset",
+    "phone": "Ilmoita tällä laitteella",
+    "phoneHint": "Kuule, kun pyytämäsi sisältö löytyy tai on valmis katsottavaksi, myös kun Matinee on suljettu.",
+    "phoneBlocked": "Matineen ilmoitukset on poistettu käytöstä tämän laitteen asetuksista.",
+    "openSettings": "Avaa asetukset",
+    "offer": "Saat nämä ilmoituksina tälle laitteelle, myös kun Matinee on suljettu.",
+    "turnOn": "Ota käyttöön"
   }
 }

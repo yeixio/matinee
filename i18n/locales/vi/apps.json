@@ -609,6 +609,13 @@
   "notifications": {
     "title": "Thông báo",
     "empty": "Chưa có gì mới. Bạn sẽ nhận tin ở đây khi thứ bạn yêu cầu đang về hoặc đã sẵn sàng để xem.",
-    "clear": "Xóa tất cả"
+    "clear": "Xóa tất cả",
+    "channel": "Yêu cầu và tải xuống",
+    "phone": "Thông báo trên thiết bị này",
+    "phoneHint": "Biết ngay khi thứ bạn yêu cầu được tìm thấy hoặc sẵn sàng để xem, kể cả khi Matinee đã đóng.",
+    "phoneBlocked": "Thông báo của Matinee đang tắt trong cài đặt của thiết bị này.",
+    "openSettings": "Mở cài đặt",
+    "offer": "Nhận những thông báo này trên thiết bị, kể cả khi Matinee đã đóng.",
+    "turnOn": "Bật"
   }
 }

@@ -609,6 +609,13 @@
   "notifications": {
     "title": "通知",
     "empty": "沒有新消息。你要求的內容在路上或可以觀看時，會在這裡告訴你。",
-    "clear": "全部清除"
+    "clear": "全部清除",
+    "channel": "請求與下載",
+    "phone": "在此裝置上通知我",
+    "phoneHint": "當你請求的內容找到或可以觀看時通知你，即使 Matinee 已關閉。",
+    "phoneBlocked": "此裝置的設定中已關閉 Matinee 的通知。",
+    "openSettings": "開啟設定",
+    "offer": "即使 Matinee 已關閉，也能在此裝置上以通知形式收到。",
+    "turnOn": "開啟"
   }
 }

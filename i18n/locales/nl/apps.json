@@ -616,6 +616,13 @@
   "notifications": {
     "title": "Meldingen",
     "empty": "Niets nieuws. Hier hoor je wanneer iets dat je hebt aangevraagd onderweg is of klaarstaat.",
-    "clear": "Alles wissen"
+    "clear": "Alles wissen",
+    "channel": "Verzoeken en downloads",
+    "phone": "Melden op dit apparaat",
+    "phoneHint": "Hoor het wanneer iets waar je om vroeg is gevonden of klaar is om te kijken, ook als Matinee gesloten is.",
+    "phoneBlocked": "Meldingen voor Matinee staan uit in de instellingen van dit apparaat.",
+    "openSettings": "Instellingen openen",
+    "offer": "Krijg deze als meldingen op dit apparaat, ook als Matinee gesloten is.",
+    "turnOn": "Aanzetten"
   }
 }

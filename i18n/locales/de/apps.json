@@ -616,6 +616,13 @@
   "notifications": {
     "title": "Benachrichtigungen",
     "empty": "Nichts Neues. Hier erfährst du, wenn etwas, das du dir gewünscht hast, unterwegs oder bereit zum Ansehen ist.",
-    "clear": "Alle löschen"
+    "clear": "Alle löschen",
+    "channel": "Wünsche und Downloads",
+    "phone": "Auf diesem Gerät benachrichtigen",
+    "phoneHint": "Erfahre, wenn etwas, das du dir gewünscht hast, gefunden wurde oder bereit zum Ansehen ist, auch wenn Matinee geschlossen ist.",
+    "phoneBlocked": "Benachrichtigungen für Matinee sind in den Einstellungen dieses Geräts ausgeschaltet.",
+    "openSettings": "Einstellungen öffnen",
+    "offer": "Erhalte diese als Benachrichtigungen auf diesem Gerät, auch wenn Matinee geschlossen ist.",
+    "turnOn": "Einschalten"
   }
 }

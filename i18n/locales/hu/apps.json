@@ -616,6 +616,13 @@
   "notifications": {
     "title": "Értesítések",
     "empty": "Nincs újdonság. Itt értesülsz, amikor amit kértél, úton van vagy nézhető.",
-    "clear": "Összes törlése"
+    "clear": "Összes törlése",
+    "channel": "Kérések és letöltések",
+    "phone": "Értesítés ezen az eszközön",
+    "phoneHint": "Értesülj, ha valami, amit kértél, megvan vagy megnézhető, akkor is, ha a Matinee be van zárva.",
+    "phoneBlocked": "A Matinee értesítései ki vannak kapcsolva az eszköz beállításaiban.",
+    "openSettings": "Beállítások megnyitása",
+    "offer": "Kapd meg ezeket értesítésként ezen az eszközön, akkor is, ha a Matinee be van zárva.",
+    "turnOn": "Bekapcsolás"
   }
 }
