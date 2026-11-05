@@ -43,6 +43,10 @@ Click the cover for the full player: the cover large, the chapter's progress, ho
 
 The media keys on your keyboard and headphones work too, and on a phone's lock screen, back and ahead skip within the book.
 
+<!-- since: v0.2.3 -->
+To stop listening and put the player away, click **×** at the right end of the player (next to play on a phone), or at the top left of the full player. Your place in the book is saved first.
+<!-- /since -->
+
 ## Picking up where you left off
 
 Matinee saves your place in a book while it plays, when you pause, and when you close the page, so you can start in the browser and carry on from the apps. Books you're listening to show in **Continue listening** at the top of Home and of the library. Each profile has its own place in each book.
