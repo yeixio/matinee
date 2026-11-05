@@ -553,6 +553,10 @@
       "radarr": "Chưa kết nối · cho phim",
       "sonarr": "Chưa kết nối · cho chương trình"
     },
+    "throughBoxOffice": {
+      "radarr": "Phim đi qua Box Office · {{url}}",
+      "sonarr": "Chương trình đi qua Box Office · {{url}}"
+    },
     "change": "Thay đổi",
     "connect": "Kết nối",
     "address": "Địa chỉ",

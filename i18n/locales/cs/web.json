@@ -565,6 +565,10 @@
       "radarr": "Nepřipojeno · pro filmy",
       "sonarr": "Nepřipojeno · pro seriály"
     },
+    "throughBoxOffice": {
+      "radarr": "Filmy jdou přes Box Office · {{url}}",
+      "sonarr": "Seriály jdou přes Box Office · {{url}}"
+    },
     "change": "Změnit",
     "connect": "Připojit",
     "address": "Adresa",

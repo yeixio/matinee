@@ -557,6 +557,10 @@
       "radarr": "Inte ansluten · för filmer",
       "sonarr": "Inte ansluten · för serier"
     },
+    "throughBoxOffice": {
+      "radarr": "Filmer går via Box Office · {{url}}",
+      "sonarr": "Serier går via Box Office · {{url}}"
+    },
     "change": "Ändra",
     "connect": "Anslut",
     "address": "Adress",

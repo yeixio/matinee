@@ -557,6 +557,10 @@
       "radarr": "جڑا نہیں · فلموں کے لیے",
       "sonarr": "جڑا نہیں · شوز کے لیے"
     },
+    "throughBoxOffice": {
+      "radarr": "فلمیں Box Office کے ذریعے جاتی ہیں · {{url}}",
+      "sonarr": "شوز Box Office کے ذریعے جاتے ہیں · {{url}}"
+    },
     "change": "بدلیں",
     "connect": "جوڑیں",
     "address": "پتہ",

@@ -557,6 +557,10 @@
       "radarr": "متصل نیست · برای فیلم‌ها",
       "sonarr": "متصل نیست · برای سریال‌ها"
     },
+    "throughBoxOffice": {
+      "radarr": "فیلم‌ها از طریق Box Office می‌روند · {{url}}",
+      "sonarr": "سریال‌ها از طریق Box Office می‌روند · {{url}}"
+    },
     "change": "تغییر",
     "connect": "اتصال",
     "address": "نشانی",

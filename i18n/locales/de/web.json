@@ -557,6 +557,10 @@
       "radarr": "Nicht verbunden · für Filme",
       "sonarr": "Nicht verbunden · für Serien"
     },
+    "throughBoxOffice": {
+      "radarr": "Filme laufen über Box Office · {{url}}",
+      "sonarr": "Serien laufen über Box Office · {{url}}"
+    },
     "change": "Ändern",
     "connect": "Verbinden",
     "address": "Adresse",

@@ -553,6 +553,10 @@
       "radarr": "未连接 · 用于电影",
       "sonarr": "未连接 · 用于剧集"
     },
+    "throughBoxOffice": {
+      "radarr": "电影经由 Box Office · {{url}}",
+      "sonarr": "剧集经由 Box Office · {{url}}"
+    },
     "change": "更改",
     "connect": "连接",
     "address": "地址",

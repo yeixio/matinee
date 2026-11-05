@@ -557,6 +557,10 @@
       "radarr": "Not connected · for movies",
       "sonarr": "Not connected · for shows"
     },
+    "throughBoxOffice": {
+      "radarr": "Movies go through Box Office · {{url}}",
+      "sonarr": "Shows go through Box Office · {{url}}"
+    },
     "change": "Change",
     "connect": "Connect",
     "address": "Address",

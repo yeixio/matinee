@@ -553,6 +553,10 @@
       "radarr": "연결 안 됨 · 영화용",
       "sonarr": "연결 안 됨 · 프로그램용"
     },
+    "throughBoxOffice": {
+      "radarr": "영화는 Box Office를 거칩니다 · {{url}}",
+      "sonarr": "TV 프로그램은 Box Office를 거칩니다 · {{url}}"
+    },
     "change": "변경",
     "connect": "연결",
     "address": "주소",

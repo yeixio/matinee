@@ -557,6 +557,10 @@
       "radarr": "कनेक्ट नहीं · फ़िल्मों के लिए",
       "sonarr": "कनेक्ट नहीं · शो के लिए"
     },
+    "throughBoxOffice": {
+      "radarr": "फ़िल्में Box Office से होकर जाती हैं · {{url}}",
+      "sonarr": "शो Box Office से होकर जाते हैं · {{url}}"
+    },
     "change": "बदलें",
     "connect": "कनेक्ट करें",
     "address": "पता",

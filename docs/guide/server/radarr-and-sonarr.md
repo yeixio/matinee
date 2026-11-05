@@ -19,7 +19,7 @@ The address and key stay on the server; nobody's browser or app ever sees them.
 
 ## Disconnecting
 
-To stop using Radarr or Sonarr (for example after you turn it off, or move to Box Office), click **Disconnect** next to it under **Settings → Add-ons** and confirm. On a phone it's the unplug button. It works even when the app isn't answering any more. Titles already in Radarr or Sonarr stay there, and asking for titles and **Coming soon** turn off until something is connected again.
+To stop using Radarr or Sonarr (for example after you turn it off, or move to Box Office), click **Disconnect** next to it under **Settings → Add-ons** and confirm. On a phone it's the unplug button. It works even when the app isn't answering any more. When Box Office is connected, the Radarr and Sonarr entries say **Movies go through Box Office** and **Shows go through Box Office**. That's Box Office's own connection, not the Radarr or Sonarr apps, so they have no Disconnect of their own: disconnect Box Office instead. Titles already in Radarr or Sonarr stay there, and asking for titles and **Coming soon** turn off until something is connected again.
 
 <!-- since: v0.2.3 -->
 ## Box Office

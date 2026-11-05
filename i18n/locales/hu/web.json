@@ -557,6 +557,10 @@
       "radarr": "Nincs csatlakoztatva · filmekhez",
       "sonarr": "Nincs csatlakoztatva · sorozatokhoz"
     },
+    "throughBoxOffice": {
+      "radarr": "A filmek a Box Office-on keresztül mennek · {{url}}",
+      "sonarr": "A sorozatok a Box Office-on keresztül mennek · {{url}}"
+    },
     "change": "Módosítás",
     "connect": "Csatlakoztatás",
     "address": "Cím",

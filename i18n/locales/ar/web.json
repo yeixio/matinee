@@ -573,6 +573,10 @@
       "radarr": "غير مرتبط · للأفلام",
       "sonarr": "غير مرتبط · للمسلسلات"
     },
+    "throughBoxOffice": {
+      "radarr": "الأفلام تمر عبر Box Office · {{url}}",
+      "sonarr": "المسلسلات تمر عبر Box Office · {{url}}"
+    },
     "change": "تغيير",
     "connect": "ربط",
     "address": "العنوان",
