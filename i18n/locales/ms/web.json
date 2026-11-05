@@ -553,6 +553,10 @@
       "radarr": "Tidak disambungkan · untuk filem",
       "sonarr": "Tidak disambungkan · untuk rancangan"
     },
+    "throughBoxOffice": {
+      "radarr": "Filem melalui Box Office · {{url}}",
+      "sonarr": "Rancangan melalui Box Office · {{url}}"
+    },
     "change": "Tukar",
     "connect": "Sambung",
     "address": "Alamat",

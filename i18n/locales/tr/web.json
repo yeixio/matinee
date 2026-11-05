@@ -557,6 +557,10 @@
       "radarr": "Bağlı değil · filmler için",
       "sonarr": "Bağlı değil · diziler için"
     },
+    "throughBoxOffice": {
+      "radarr": "Filmler Box Office üzerinden gider · {{url}}",
+      "sonarr": "Diziler Box Office üzerinden gider · {{url}}"
+    },
     "change": "Değiştir",
     "connect": "Bağla",
     "address": "Adres",

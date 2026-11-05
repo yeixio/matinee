@@ -561,6 +561,10 @@
       "radarr": "Neconectat · pentru filme",
       "sonarr": "Neconectat · pentru seriale"
     },
+    "throughBoxOffice": {
+      "radarr": "Filmele trec prin Box Office · {{url}}",
+      "sonarr": "Serialele trec prin Box Office · {{url}}"
+    },
     "change": "Schimbă",
     "connect": "Conectează",
     "address": "Adresă",

@@ -557,6 +557,10 @@
       "radarr": "Ikke forbundet · til film",
       "sonarr": "Ikke forbundet · til serier"
     },
+    "throughBoxOffice": {
+      "radarr": "Film går gennem Box Office · {{url}}",
+      "sonarr": "Serier går gennem Box Office · {{url}}"
+    },
     "change": "Skift",
     "connect": "Forbind",
     "address": "Adresse",

@@ -35,7 +35,9 @@ export function Integrations() {
       </div>
       <div className="space-y-3">
         {boxOffice && <BoxOfficeCard saved={boxOffice} />}
-        {apps.map((a) => (data ? <Connection key={a.app} {...a} saved={data[a.app]} /> : null))}
+        {apps.map((a) =>
+          data ? <Connection key={a.app} {...a} saved={data[a.app]} throughBoxOffice={a.app === 'radarr' ? !!boxOffice?.movies : !!boxOffice?.shows} /> : null,
+        )}
       </div>
       {data && (data.radarr.connected || data.sonarr.connected) && <BoxOfficeNotifications />}
       <div id="overseerr" className="scroll-mt-24 pt-4">
@@ -244,7 +246,10 @@ function BoxOfficeCard({ saved }: { saved: BoxOfficeConnection }) {
   )
 }
 
-function Connection({ app, name, port, icon: Icon, saved }: (typeof apps)[number] & { saved: Integration }) {
+// throughBoxOffice says this app's connection is Box Office's: it's shown as
+// such, and disconnected with Box Office, so movies or shows don't drop out
+// of Box Office by accident.
+function Connection({ app, name, port, icon: Icon, saved, throughBoxOffice }: (typeof apps)[number] & { saved: Integration; throughBoxOffice: boolean }) {
   const { t } = useTranslation()
   const qc = useQueryClient()
   const [open, setOpen] = useState(false)
@@ -320,11 +325,15 @@ function Connection({ app, name, port, icon: Icon, saved }: (typeof apps)[number
         </span>
         <div className="min-w-0 flex-1">
           <div className="font-medium">{name}</div>
-          <div className="truncate text-xs text-muted">{saved.connected ? t('integrations.connected', { url: saved.url }) : t(`integrations.notConnected.${app}`)}</div>
+          <div className="truncate text-xs text-muted">{throughBoxOffice
+              ? t(`integrations.throughBoxOffice.${app}`, { url: saved.url })
+              : saved.connected
+                ? t('integrations.connected', { url: saved.url })
+                : t(`integrations.notConnected.${app}`)}</div>
         </div>
         {!open && (
           <div className="flex shrink-0 flex-wrap justify-end gap-1">
-            {saved.connected && (
+            {saved.connected && !throughBoxOffice && (
               <Button
                 variant="ghost"
                 className="px-3 text-danger! hover:bg-danger/10!"
@@ -410,7 +419,7 @@ function Connection({ app, name, port, icon: Icon, saved }: (typeof apps)[number
           )}
           {error && <p className="text-sm text-danger">{error.message}</p>}
           <div className="flex flex-wrap justify-end gap-2">
-            {saved.connected && (
+            {saved.connected && !throughBoxOffice && (
               <Button
                 type="button"
                 variant="danger"

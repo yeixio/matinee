@@ -557,6 +557,10 @@
       "radarr": "Ei yhdistetty · elokuville",
       "sonarr": "Ei yhdistetty · sarjoille"
     },
+    "throughBoxOffice": {
+      "radarr": "Elokuvat kulkevat Box Officen kautta · {{url}}",
+      "sonarr": "Sarjat kulkevat Box Officen kautta · {{url}}"
+    },
     "change": "Muuta",
     "connect": "Yhdistä",
     "address": "Osoite",

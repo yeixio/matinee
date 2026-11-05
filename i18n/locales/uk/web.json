@@ -565,6 +565,10 @@
       "radarr": "Не підключено · для фільмів",
       "sonarr": "Не підключено · для серіалів"
     },
+    "throughBoxOffice": {
+      "radarr": "Фільми йдуть через Box Office · {{url}}",
+      "sonarr": "Серіали йдуть через Box Office · {{url}}"
+    },
     "change": "Змінити",
     "connect": "Підключити",
     "address": "Адреса",
