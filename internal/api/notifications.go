@@ -254,7 +254,9 @@ func (s *Server) deliverBoxOffice(ctx context.Context, boxOffice string, n arr.B
 		if err != nil {
 			return err
 		}
-		if added {
+		// The same again only moves up the list: it pops up again only
+		// when it's got more serious.
+		if added == store.AddedNew || added == store.Escalated {
 			s.pushNotification(ctx, uid, s.notificationView(ctx, saved))
 		}
 	}

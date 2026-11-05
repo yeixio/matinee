@@ -17,6 +17,8 @@ On an iPhone, iPad, or Android phone or tablet, they can also arrive as the devi
 
 The bell's list also offers **Turn on** at the top until you do. Each phone or tablet has its own switch, so turning it on here doesn't change your other devices.
 
+The same notification again, such as a disk that's still nearly full, doesn't arrive a second time: the bell's list counts it on the one already there. Once you clear it from the list, the next one notifies you again.
+
 Tap a notification to open the title, once it's in your library, or the list otherwise. Opening the list clears the ones you've seen from the lock screen.
 
 If you said no when the device asked, the switch says notifications are off in the device's settings. Tap **Open settings**, turn on notifications for Matinee there, and come back.

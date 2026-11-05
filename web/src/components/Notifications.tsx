@@ -10,7 +10,9 @@ import { ago } from './ServerHealth'
 // Notifications (see internal/api/notifications.go): Box Office telling
 // people that what they asked for is on its way or ready to watch, and
 // admins about downloads that failed. The bell lists them; one that
-// arrives while the page is open also pops up for a few seconds.
+// arrives while the page is open also pops up for a few seconds. The same
+// one again (a disk that's still nearly full) is counted on the one in the
+// list, and pops up again only when it's got more serious.
 
 const key = ['notifications']
 
@@ -89,8 +91,13 @@ export function NotificationBell() {
                   <div className="min-w-0 flex-1">
                     <div className="text-sm font-medium">{n.title}</div>
                     {n.body && <div className="mt-0.5 text-xs text-muted">{n.body}</div>}
-                    <div className="mt-1 flex items-center gap-3 text-xs text-muted">
+                    <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted">
                       <span>{ago(n.createdAt * 1000)}</span>
+                      {(n.repeats ?? 0) > 1 && (
+                        <span className="rounded-full bg-text/10 px-1.5 py-px font-medium tabular-nums">
+                          {t('common:notifications.repeated', { times: n.repeats ?? 0, first: ago((n.firstAt ?? n.createdAt) * 1000) })}
+                        </span>
+                      )}
                       {n.itemId && (
                         <button
                           className="font-medium text-accent hover:underline"

@@ -842,5 +842,8 @@
     "on": "Activate",
     "more": "Mai multe subtitrări",
     "back": "Înapoi"
+  },
+  "notifications": {
+    "repeated": "{{times}}×, prima dată {{first}}"
   }
 }

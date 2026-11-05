@@ -243,7 +243,9 @@ export type AppNotification = {
   tvdbId?: number
   poster?: string
   itemId?: number // the title in the library, once it's there
-  createdAt: number // seconds
+  createdAt: number // seconds, when it last came
+  firstAt?: number // seconds, when it first came, for one that came more than once
+  repeats?: number // how many times it came, when more than once
   read: boolean
 }
 export type NotifyAdmins = 'all' | 'problems' | 'off'

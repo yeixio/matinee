@@ -874,5 +874,8 @@
     "on": "Вкл.",
     "more": "Другие субтитры",
     "back": "Назад"
+  },
+  "notifications": {
+    "repeated": "{{times}}×, впервые {{first}}"
   }
 }

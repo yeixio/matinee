@@ -73,6 +73,10 @@ Admins also hear about downloads that fail or look unsafe. Under **Settings → 
 On phones and tablets, people can also get these as the device's own notifications with the app closed: see [Notifications on your phone](/docs/apps/notifications/).
 <!-- /since -->
 
+<!-- since: v0.2.3 -->
+The same notification again, such as Box Office saying a disk is still nearly full, doesn't stack up in the bell. It goes back to the top of the list as unread, with the newest wording and how many times it's come, like **12×, first 3 days ago**. It only pops up again if it gets more serious, from a warning to critical. Clear it, and the next one starts a new count. On phones, a repeat doesn't buzz again either.
+<!-- /since -->
+
 ## Coming soon
 
 **Coming soon** (the calendar icon) lists new episodes and movie releases due in the next two months that aren't in your library yet. The same titles appear in a row on [Home](/docs/watching/home/), and in the [phone and TV apps](/docs/apps/phone-and-tv/).

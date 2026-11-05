@@ -2,7 +2,9 @@ package api
 
 import (
 	"context"
+	"fmt"
 	"net/http"
+	"strings"
 	"testing"
 	"time"
 
@@ -147,4 +149,103 @@ func TestNotificationsIgnoreRadarr(t *testing.T) {
 	if len(settings.BoxOffice) != 1 || settings.BoxOffice[0].ID != "" || settings.BoxOffice[0].Error != "" {
 		t.Fatalf("settings: %+v", settings)
 	}
+}
+
+// The same notification again, such as a disk that stays nearly full,
+// counts on the one already there in place of stacking up.
+func TestRepeatedNotifications(t *testing.T) {
+	var srv *Server
+	admin, _, _ := newTestServerStore(t, func(s *Server) { srv = s })
+	ctx := context.Background()
+	var login struct{ Token string }
+	admin.do("POST", "/api/v1/setup", credentials{"admin", "correct horse"}, &login)
+	admin.token = login.Token
+	radarr := arrtest.New(t, arr.Radarr)
+	radarr.BoxOfficeID = "bo-1"
+	if code := admin.do("PUT", "/api/v1/integrations/radarr", arr.Config{URL: radarr.URL, APIKey: radarr.Key}, nil); code != 200 {
+		t.Fatalf("connect: %d", code)
+	}
+	srv.ReadBoxOffice(ctx) // starts from now
+	hello := map[string]any{"name": "Browser", "platform": "web", "commands": []string{"playItem"}, "notifications": true}
+	if code := admin.do("PUT", "/api/v1/clients/web-1234567", hello, nil); code != 200 {
+		t.Fatalf("hello: %d", code)
+	}
+	disk := func(pct int, level string) {
+		radarr.Notify(arr.BoxOfficeNotification{Event: "system.disk", Level: level, Audience: "admins", Title: "Disk space is low",
+			Body: fmt.Sprintf("/downloads is %d%% full: %d GB free.", pct, 100-pct), At: time.Now()})
+	}
+	for i := range 10 {
+		disk(90+i%3, "warning")
+		srv.ReadBoxOffice(ctx)
+	}
+	// Another disk is another notification.
+	radarr.Notify(arr.BoxOfficeNotification{Event: "system.disk", Level: "warning", Audience: "admins", Title: "Disk space is low",
+		Body: "/movies is 95% full: 5 GB free.", At: time.Now()})
+	srv.ReadBoxOffice(ctx)
+
+	var list struct {
+		Notifications []store.Notification
+		Unread        int
+	}
+	list.Notifications = nil
+	admin.do("GET", "/api/v1/notifications", nil, &list)
+	if len(list.Notifications) != 2 || list.Unread != 2 {
+		t.Fatalf("listed: %+v", list)
+	}
+	movies, downloads := list.Notifications[0], list.Notifications[1]
+	if strings.HasPrefix(movies.Body, "/downloads") {
+		movies, downloads = downloads, movies
+	}
+	if movies.Repeats != 0 || downloads.Repeats != 10 || downloads.Body != "/downloads is 90% full: 10 GB free." || downloads.FirstAt == 0 {
+		t.Fatalf("repeats: %+v", list.Notifications)
+	}
+	var got struct{ Commands []live.Command }
+	if admin.do("GET", "/api/v1/clients/web-1234567/commands?wait=1", nil, &got); len(got.Commands) != 2 {
+		t.Fatalf("popped up %d times, want once each", len(got.Commands))
+	}
+
+	// Read, it comes again: it's unread again, at the top, and doesn't pop up...
+	admin.do("POST", "/api/v1/notifications/read", notificationIDs{}, nil)
+	disk(92, "warning")
+	srv.ReadBoxOffice(ctx)
+	list.Notifications = nil
+	admin.do("GET", "/api/v1/notifications", nil, &list)
+	if n := find(list.Notifications, downloads.ID); list.Unread != 1 || n.Repeats != 11 || n.Read {
+		t.Fatalf("again: %+v", list)
+	}
+	if admin.do("GET", "/api/v1/clients/web-1234567/commands?wait=1", nil, &got); len(got.Commands) != 0 {
+		t.Fatalf("a repeat popped up: %+v", got)
+	}
+	// ...unless it's got more serious.
+	disk(98, "critical")
+	srv.ReadBoxOffice(ctx)
+	list.Notifications = nil
+	admin.do("GET", "/api/v1/notifications", nil, &list)
+	if n := find(list.Notifications, downloads.ID); n.Level != "critical" || n.Repeats != 12 {
+		t.Fatalf("critical: %+v", list)
+	}
+	if admin.do("GET", "/api/v1/clients/web-1234567/commands?wait=1", nil, &got); len(got.Commands) != 1 {
+		t.Fatalf("critical didn't pop up: %+v", got)
+	}
+
+	// Cleared, the next one starts over.
+	if code := admin.do("POST", "/api/v1/notifications/clear", notificationIDs{IDs: []string{downloads.ID}}, nil); code != http.StatusNoContent {
+		t.Fatalf("clear: %d", code)
+	}
+	disk(93, "warning")
+	srv.ReadBoxOffice(ctx)
+	list.Notifications = nil
+	admin.do("GET", "/api/v1/notifications", nil, &list)
+	if n := find(list.Notifications, downloads.ID); n.ID != "" || len(list.Notifications) != 2 || list.Notifications[0].Repeats+list.Notifications[1].Repeats != 0 {
+		t.Fatalf("after clearing: %+v", list)
+	}
+}
+
+func find(list []store.Notification, id string) store.Notification {
+	for _, n := range list {
+		if n.ID == id {
+			return n
+		}
+	}
+	return store.Notification{}
 }

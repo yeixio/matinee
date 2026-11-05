@@ -874,5 +874,8 @@
     "on": "Włączone",
     "more": "Więcej napisów",
     "back": "Wstecz"
+  },
+  "notifications": {
+    "repeated": "{{times}}×, pierwszy raz {{first}}"
   }
 }

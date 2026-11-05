@@ -810,5 +810,8 @@
     "on": "آن",
     "more": "مزید سب ٹائٹلز",
     "back": "واپس"
+  },
+  "notifications": {
+    "repeated": "{{times}} بار، پہلی بار {{first}}"
   }
 }

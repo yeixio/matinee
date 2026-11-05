@@ -778,5 +778,8 @@
     "on": "オン",
     "more": "その他の字幕",
     "back": "戻る"
+  },
+  "notifications": {
+    "repeated": "{{times}}回、最初は{{first}}"
   }
 }

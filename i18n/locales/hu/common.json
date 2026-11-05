@@ -810,5 +810,8 @@
     "on": "Be",
     "more": "További feliratok",
     "back": "Vissza"
+  },
+  "notifications": {
+    "repeated": "{{times}}×, először {{first}}"
   }
 }

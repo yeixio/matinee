@@ -96,6 +96,7 @@ func TestMigrateFromVersion1(t *testing.T) {
 		"ALTER TABLE items DROP COLUMN version_of",
 		"ALTER TABLE items DROP COLUMN edition",
 		"DROP TABLE subtitle_syncs",
+		"DROP INDEX notifications_grouping",
 		"DROP INDEX notifications_user",
 		"DROP TABLE notifications",
 		"UPDATE schema_version SET version = 1",

@@ -75,6 +75,10 @@ func OpenWith(dsn string, o Options) (*Store, error) {
 		d.Close()
 		return nil, fmt.Errorf("backfill filters: %w", err)
 	}
+	if err := s.groupNotifications(context.Background()); err != nil {
+		d.Close()
+		return nil, fmt.Errorf("group notifications: %w", err)
+	}
 	if err := s.AddStarterCollections(context.Background()); err != nil {
 		d.Close()
 		return nil, fmt.Errorf("starter collections: %w", err)
@@ -621,6 +625,13 @@ var migrations = []string{
 		UNIQUE (user_id, source)
 	)`,
 	"CREATE INDEX notifications_user ON notifications(user_id, created_at)",
+	// 100-103: the same notification again (such as a disk that's still
+	// nearly full) adds to the one already there, counted in repeats, in
+	// place of another (see notifications.go).
+	"ALTER TABLE notifications ADD COLUMN group_key TEXT NOT NULL DEFAULT ''",
+	"ALTER TABLE notifications ADD COLUMN repeats INTEGER NOT NULL DEFAULT 1",
+	"ALTER TABLE notifications ADD COLUMN first_at BIGINT NOT NULL DEFAULT 0",
+	"CREATE INDEX notifications_grouping ON notifications(user_id, group_key)",
 }
 
 func now() int64 { return time.Now().Unix() }

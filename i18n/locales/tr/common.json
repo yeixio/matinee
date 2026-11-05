@@ -810,5 +810,8 @@
     "on": "Açık",
     "more": "Diğer altyazılar",
     "back": "Geri"
+  },
+  "notifications": {
+    "repeated": "{{times}}×, ilk kez {{first}}"
   }
 }
