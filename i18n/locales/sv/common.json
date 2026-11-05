@@ -343,7 +343,14 @@
     "moreLike": "Mer som {{title}}",
     "empty": "Här finns inget just nu",
     "unavailable": "Raden är inte tillgänglig",
-    "loadMore": "Läs in fler"
+    "loadMore": "Läs in fler",
+    "recentlyAdded": {
+      "movie": "Nyligen tillagda filmer",
+      "show": "Nyligen tillagda serier",
+      "album": "Nyligen tillagd musik",
+      "book": "Nyligen tillagda ljudböcker",
+      "podcast": "Nyligen tillagda poddar"
+    }
   },
   "music": {
     "overview": "Översikt",

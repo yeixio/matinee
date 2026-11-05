@@ -315,7 +315,14 @@
     "moreLike": "Lainnya seperti {{title}}",
     "empty": "Belum ada apa-apa di sini",
     "unavailable": "Baris ini tidak tersedia",
-    "loadMore": "Muat lainnya"
+    "loadMore": "Muat lainnya",
+    "recentlyAdded": {
+      "movie": "Film yang baru ditambahkan",
+      "show": "Serial TV yang baru ditambahkan",
+      "album": "Musik yang baru ditambahkan",
+      "book": "Buku audio yang baru ditambahkan",
+      "podcast": "Podcast yang baru ditambahkan"
+    }
   },
   "music": {
     "overview": "Ringkasan",

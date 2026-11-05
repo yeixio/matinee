@@ -291,8 +291,22 @@ func TestEndToEnd(t *testing.T) {
 
 	// Progress shows up in continue watching, and finishing marks it played.
 	c.do("PUT", "/api/items/"+itoa(movie.ID)+"/progress", map[string]any{"positionMs": 3000}, nil)
-	var home struct{ ContinueWatching, RecentlyAdded []store.Item }
+	var home struct {
+		ContinueWatching, RecentlyAdded []store.Item
+		RecentlyAddedRows               []HomeRow
+	}
 	c.do("GET", "/api/home", nil, &home)
+	// Split by kind: a row each for the movie, the show and the album.
+	var split []string
+	for _, r := range home.RecentlyAddedRows {
+		if len(r.Items) != 1 || r.Items[0].Kind != r.Kind {
+			t.Fatalf("recently added %s: %+v", r.Kind, r.Items)
+		}
+		split = append(split, r.ID)
+	}
+	if strings.Join(split, " ") != "recentlyAdded:movie recentlyAdded:show recentlyAdded:album" {
+		t.Fatalf("recently added rows: %v", split)
+	}
 	if len(home.ContinueWatching) != 1 || home.ContinueWatching[0].PositionMs != 3000 {
 		t.Fatalf("continue watching: %+v", home.ContinueWatching)
 	}

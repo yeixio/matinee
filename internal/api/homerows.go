@@ -58,8 +58,11 @@ type HomeRow struct {
 	Holiday string `json:"holiday,omitempty"`
 	// RelatedTo is the title a related:{id} row is like, so apps can word
 	// "More like …" in their own language.
-	RelatedTo string       `json:"relatedTo,omitempty"`
-	Items     []store.Item `json:"items"`
+	RelatedTo string `json:"relatedTo,omitempty"`
+	// Kind is set on the rows of Recently added split by kind
+	// (recentlyAdded:{kind}), e.g. "movie", so apps can name them.
+	Kind  string       `json:"kind,omitempty"`
+	Items []store.Item `json:"items"`
 	// More says the row has more titles than it shows: GET /rows/{id} has
 	// them all (see rows.go).
 	More bool `json:"more,omitempty"`

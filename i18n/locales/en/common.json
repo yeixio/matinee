@@ -343,7 +343,14 @@
     "moreLike": "More like {{title}}",
     "empty": "Nothing here right now",
     "unavailable": "This row isn't available",
-    "loadMore": "Load more"
+    "loadMore": "Load more",
+    "recentlyAdded": {
+      "movie": "Recently added movies",
+      "show": "Recently added TV",
+      "album": "Recently added music",
+      "book": "Recently added audiobooks",
+      "podcast": "Recently added podcasts"
+    }
   },
   "music": {
     "overview": "Overview",

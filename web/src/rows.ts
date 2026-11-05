@@ -14,8 +14,9 @@ const ownRows: Record<string, string> = {
 }
 
 // A row's name in the page's language.
-export function rowTitle(row: Pick<HomeRow, 'id' | 'title' | 'genre' | 'holiday' | 'starter' | 'relatedTo'>): string {
+export function rowTitle(row: Pick<HomeRow, 'id' | 'title' | 'genre' | 'holiday' | 'starter' | 'relatedTo' | 'kind'>): string {
   if (ownRows[row.id]) return i18n.t(ownRows[row.id])
+  if (row.kind) return i18n.t(`common:rows.recentlyAdded.${row.kind}`, { defaultValue: row.title })
   if (row.holiday) return i18n.t(`common:holidays.${row.holiday}`, { defaultValue: row.title })
   if (row.genre) return genreRowTitle(row.genre)
   if (row.relatedTo) return i18n.t('common:rows.moreLike', { title: row.relatedTo })

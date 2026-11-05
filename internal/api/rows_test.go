@@ -54,16 +54,22 @@ func TestRowPages(t *testing.T) {
 	}
 
 	var home struct {
-		RecentlyAdded []store.Item
-		WatchList     []store.Item
-		Rows          []HomeRow
-		More          map[string]bool
+		RecentlyAdded     []store.Item
+		RecentlyAddedRows []HomeRow
+		WatchList         []store.Item
+		Rows              []HomeRow
+		More              map[string]bool
 	}
 	if code := c.do("GET", "/api/v1/home", nil, &home); code != 200 {
 		t.Fatalf("home: %d", code)
 	}
 	if len(home.RecentlyAdded) != homeRowItems || !home.More[rowRecent] || home.More[rowWatchList] {
 		t.Fatalf("recently added: %d titles, more %v", len(home.RecentlyAdded), home.More)
+	}
+	// Only movies here, so Recently added splits into just their row.
+	if r := home.RecentlyAddedRows; len(r) != 1 || r[0].ID != "recentlyAdded:movie" || r[0].Kind != "movie" ||
+		len(r[0].Items) != homeRowItems || !r[0].More {
+		t.Fatalf("recently added rows: %+v", r)
 	}
 	rows := map[string]HomeRow{}
 	for _, r := range home.Rows {
@@ -84,6 +90,12 @@ func TestRowPages(t *testing.T) {
 	if r, code := page(rowRecent); code != 200 || len(r.Items) != 40 || r.More {
 		t.Fatalf("recently added page: %d %d titles", code, len(r.Items))
 	}
+	if r, code := page("recentlyAdded:movie"); code != 200 || len(r.Items) != 40 || r.Title != "Recently added movies" {
+		t.Fatalf("recently added movies page: %d %d titles %q", code, len(r.Items), r.Title)
+	}
+	if r, code := page("recentlyAdded:book"); code != 200 || len(r.Items) != 0 {
+		t.Fatalf("recently added audiobooks page: %d %d titles", code, len(r.Items))
+	}
 	if r, _ := page("genre:Science Fiction"); len(r.Items) != 35 || r.Genre != "Science Fiction" || r.Title != "Sci-fi favorites" {
 		t.Fatalf("science fiction page: %d titles %+v", len(r.Items), r.Title)
 	}
@@ -101,7 +113,7 @@ func TestRowPages(t *testing.T) {
 	if len(related.Items) != relatedItems || !related.More {
 		t.Fatalf("related: %d titles, more %v", len(related.Items), related.More)
 	}
-	for _, id := range []string{"nope", "holiday:arbor-day", "genre:", "related:x", "collection:nope"} {
+	for _, id := range []string{"nope", "holiday:arbor-day", "genre:", "related:x", "collection:nope", "recentlyAdded:track"} {
 		if _, code := page(id); code != http.StatusNotFound {
 			t.Fatalf("%s: %d", id, code)
 		}

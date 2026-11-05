@@ -22,7 +22,12 @@ Scroll down for rows of posters. Each row scrolls sideways, and a row with a **â
 | Row | What's in it |
 | --- | --- |
 | **Continue watching** | Movies you've started and the next episode of shows you're watching, most recent first. Finishing an episode puts the next one here. |
+<!-- until: v0.2.3 -->
 | **Recently added** | The newest titles in your libraries. A new episode brings its show to the front. |
+<!-- /until -->
+<!-- since: v0.2.3 -->
+| **Recently added** | A row for each kind of title, newest first: **Recently added movies**, **TV**, **music**, **audiobooks** and **podcasts**. Only the kinds you have show up. A new episode brings its show to the front of the TV row. |
+<!-- /since -->
 | **New releases** | Titles in your libraries that came out recently. |
 | **Watch list** | What you've saved to [watch later](/docs/watching/watch-list/). |
 | **Pinned collections** | Any [collection](/docs/watching/collections/) pinned to Home, such as "Short enough for tonight". |

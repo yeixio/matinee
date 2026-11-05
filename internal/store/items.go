@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"encoding/json"
 	"errors"
+	"slices"
 	"strings"
 	"time"
 	"unicode"
@@ -389,6 +390,24 @@ func (s *Store) RecentlyAdded(ctx context.Context, userID int64, limit int) ([]I
 		CASE WHEN i.kind = 'show' THEN (
 			SELECT MAX(e.added_at) FROM items se JOIN items e ON e.parent_id = se.id WHERE se.parent_id = i.id
 		) ELSE i.added_at END DESC, i.id DESC LIMIT ?`, userID, limit)
+}
+
+// RecentlyAddedKinds are the kinds Home splits Recently added into, in the
+// order its rows come: movies, TV shows, albums, audiobooks and podcasts.
+var RecentlyAddedKinds = []string{"movie", "show", "album", "book", "podcast"}
+
+// RecentlyAddedOf lists the newest titles of one kind (see
+// RecentlyAddedKinds). Shows count as new when an episode is, as in
+// RecentlyAdded.
+func (s *Store) RecentlyAddedOf(ctx context.Context, userID int64, kind string, limit int) ([]Item, error) {
+	if !slices.Contains(RecentlyAddedKinds, kind) {
+		return nil, ErrNotFound
+	}
+	order := "i.added_at DESC, i.id DESC LIMIT ?"
+	if kind == "show" {
+		order = `(SELECT MAX(e.added_at) FROM items se JOIN items e ON e.parent_id = se.id WHERE se.parent_id = i.id) DESC, i.id DESC LIMIT ?`
+	}
+	return s.queryItems(ctx, "i.kind = ?", order, userID, kind, limit)
 }
 
 // ContinueWatching lists videos the user started but didn't finish, leaving

@@ -399,7 +399,14 @@
     "moreLike": "Podobné jako {{title}}",
     "empty": "Teď tu nic není",
     "unavailable": "Tato řada není dostupná",
-    "loadMore": "Načíst další"
+    "loadMore": "Načíst další",
+    "recentlyAdded": {
+      "movie": "Nedávno přidané filmy",
+      "show": "Nedávno přidané seriály",
+      "album": "Nedávno přidaná hudba",
+      "book": "Nedávno přidané audioknihy",
+      "podcast": "Nedávno přidané podcasty"
+    }
   },
   "music": {
     "overview": "Přehled",

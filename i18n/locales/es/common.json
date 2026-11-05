@@ -371,7 +371,14 @@
     "moreLike": "Más como {{title}}",
     "empty": "No hay nada aquí ahora mismo",
     "unavailable": "Esta fila no está disponible",
-    "loadMore": "Cargar más"
+    "loadMore": "Cargar más",
+    "recentlyAdded": {
+      "movie": "Películas añadidas recientemente",
+      "show": "Series añadidas recientemente",
+      "album": "Música añadida recientemente",
+      "book": "Audiolibros añadidos recientemente",
+      "podcast": "Pódcasts añadidos recientemente"
+    }
   },
   "music": {
     "overview": "Resumen",
