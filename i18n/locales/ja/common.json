@@ -296,7 +296,8 @@
       "popular-movies": "人気の映画",
       "popular-shows": "人気の番組",
       "upcoming-movies": "近日劇場公開",
-      "upcoming-shows": "もうすぐ始まる新番組"
+      "upcoming-shows": "もうすぐ始まる新番組",
+      "for-you": "あなたへのおすすめ"
     },
     "because": "{{title}}を観たあなたに",
     "status": {

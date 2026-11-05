@@ -35,7 +35,11 @@ type Fake struct {
 	// feed of Notifications.
 	BoxOfficeID   string
 	Notifications []arr.BoxOfficeNotification
-	nextID        int
+	// Discover, when set, makes it a Box Office with Discover: answers by
+	// what follows /boxoffice/discover ("" for the home, "/rows/trending",
+	// "/search").
+	Discover map[string]any
+	nextID   int
 }
 
 // Notify adds to Box Office's feed, numbering it.
@@ -135,7 +139,18 @@ func (f *Fake) serve(w http.ResponseWriter, r *http.Request) {
 	parts := strings.Split(strings.Trim(path, "/"), "/")
 	switch {
 	case path == "/system/status" && f.BoxOfficeID != "":
-		write(w, map[string]any{"appName": f.App.Name(), "version": "5.0.0", "boxOfficeId": f.BoxOfficeID, "boxOfficeFeatures": []string{"notifications"}})
+		features := []string{"notifications"}
+		if f.Discover != nil {
+			features = append(features, "discover")
+		}
+		write(w, map[string]any{"appName": f.App.Name(), "version": "5.0.0", "boxOfficeId": f.BoxOfficeID, "boxOfficeFeatures": features})
+	case strings.HasPrefix(path, "/boxoffice/discover") && f.Discover != nil:
+		v, ok := f.Discover[strings.TrimPrefix(path, "/boxoffice/discover")]
+		if !ok {
+			http.NotFound(w, r)
+			return
+		}
+		write(w, v)
 	case path == "/system/status":
 		write(w, map[string]any{"appName": f.App.Name(), "version": "5.0.0"})
 	case path == "/boxoffice/notifications" && f.BoxOfficeID != "":
@@ -164,6 +179,7 @@ func (f *Fake) serve(w http.ResponseWriter, r *http.Request) {
 		term, out := strings.ToLower(q.Get("term")), []map[string]any{}
 		for _, m := range f.Catalog {
 			if id, ok := strings.CutPrefix(term, "tvdb:"); ok && strconv.Itoa(num(m["tvdbId"])) == id ||
+				strings.HasPrefix(term, "tmdb:") && strconv.Itoa(num(m["tmdbId"])) == strings.TrimPrefix(term, "tmdb:") ||
 				strings.Contains(strings.ToLower(m["title"].(string)), term) {
 				out = append(out, f.withID(m))
 			}

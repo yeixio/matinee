@@ -18,7 +18,8 @@ import (
 
 // Overseerr, connected by an admin, fills the Discover tab: what's trending
 // and popular, titles like the ones someone watched lately, and a way to
-// ask for any of them. Without it there's no Discover tab.
+// ask for any of them. Without it, a connected Box Office fills it instead
+// (see discover_boxoffice.go); without either there's no Discover tab.
 //
 // Requests go to Overseerr as the Overseerr user with the same name as the
 // person asking (or their account, for a profile), so Overseerr's own
@@ -298,6 +299,10 @@ const becauseRows = 2
 func (s *Server) discover(w http.ResponseWriter, r *http.Request) {
 	ctx, u := r.Context(), currentUser(r)
 	cl, _, err := s.overseerrClient(ctx)
+	if bo, ok := s.boxOfficeDiscovery(ctx); ok && errors.Is(err, errNotConnected) {
+		s.discoverFromBoxOffice(w, r, bo)
+		return
+	}
 	if err != nil {
 		s.overseerrError(w, r, err)
 		return
@@ -393,6 +398,10 @@ func (s *Server) discoverRowPage(w http.ResponseWriter, r *http.Request) {
 	page, _ := strconv.Atoi(r.URL.Query().Get("page"))
 	page = max(page, 1)
 	cl, _, err := s.overseerrClient(ctx)
+	if bo, ok := s.boxOfficeDiscovery(ctx); ok && errors.Is(err, errNotConnected) {
+		s.discoverRowFromBoxOffice(w, r, bo, min(page, discoverRowPages))
+		return
+	}
 	if err != nil {
 		s.overseerrError(w, r, err)
 		return
@@ -455,6 +464,10 @@ func (s *Server) discoverSearch(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	cl, _, err := s.overseerrClient(ctx)
+	if bo, ok := s.boxOfficeDiscovery(ctx); ok && errors.Is(err, errNotConnected) {
+		s.discoverSearchBoxOffice(w, r, bo, clip(q, 200))
+		return
+	}
 	if err != nil {
 		s.overseerrError(w, r, err)
 		return
@@ -508,7 +521,8 @@ func (s *Server) requestUser(ctx context.Context, cl *overseerr.Client, c overse
 }
 
 func (s *Server) discoverRequest(w http.ResponseWriter, r *http.Request) {
-	if _, ok := s.requireRequester(w, r); !ok {
+	auto, ok := s.requireRequester(w, r)
+	if !ok {
 		return
 	}
 	var in struct {
@@ -529,6 +543,10 @@ func (s *Server) discoverRequest(w http.ResponseWriter, r *http.Request) {
 	}
 	ctx := r.Context()
 	cl, c, err := s.overseerrClient(ctx)
+	if _, ok := s.boxOfficeDiscovery(ctx); ok && errors.Is(err, errNotConnected) {
+		s.discoverRequestBoxOffice(w, r, auto, in.Kind, in.TMDBID)
+		return
+	}
 	if err != nil {
 		s.overseerrError(w, r, err)
 		return

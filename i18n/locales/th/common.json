@@ -296,7 +296,8 @@
       "popular-movies": "หนังยอดนิยม",
       "popular-shows": "ซีรีส์ยอดนิยม",
       "upcoming-movies": "เร็วๆ นี้ในโรงภาพยนตร์",
-      "upcoming-shows": "ซีรีส์ใหม่ที่กำลังจะมา"
+      "upcoming-shows": "ซีรีส์ใหม่ที่กำลังจะมา",
+      "for-you": "แนะนำสำหรับคุณ"
     },
     "because": "เพราะคุณดู {{title}}",
     "status": {

@@ -352,7 +352,8 @@
       "popular-movies": "Filme populare",
       "popular-shows": "Seriale populare",
       "upcoming-movies": "În curând la cinema",
-      "upcoming-shows": "Seriale noi pe drum"
+      "upcoming-shows": "Seriale noi pe drum",
+      "for-you": "Recomandate pentru tine"
     },
     "because": "Pentru că ai văzut {{title}}",
     "status": {

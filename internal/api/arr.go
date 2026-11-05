@@ -354,7 +354,8 @@ func (s *Server) deleteIntegration(w http.ResponseWriter, r *http.Request) {
 type requestOptions struct {
 	Movies bool `json:"movies"` // Radarr is connected
 	Shows  bool `json:"shows"`  // Sonarr is connected
-	// Discover says Overseerr is connected, for the Discover tab (see discover.go).
+	// Discover says Overseerr or Box Office is connected, for the Discover
+	// tab (see discover.go).
 	Discover bool `json:"discover"`
 	// CanRequest says this account may ask for titles, and AutoApprove that
 	// what it asks for is added without waiting for an admin.
@@ -395,7 +396,8 @@ func (s *Server) getRequestOptions(w http.ResponseWriter, r *http.Request) {
 		s.serverError(w, err)
 		return
 	}
-	out.Discover = oc.URL != ""
+	_, bo := s.boxOfficeDiscovery(ctx)
+	out.Discover = oc.URL != "" || bo
 	can, auto, err := s.canRequest(ctx, u)
 	if err != nil {
 		s.serverError(w, err)
@@ -592,46 +594,9 @@ func (s *Server) createRequest(w http.ResponseWriter, r *http.Request) {
 		s.arrError(w, r, app, err)
 		return
 	}
-	st, err := s.titleStatus(ctx, in.Kind, t)
-	if err != nil {
-		s.serverError(w, err)
+	req, ok := s.requestTitle(w, r, auto, in.Kind, cl, t, in.QualityProfileID)
+	if !ok {
 		return
-	}
-	switch st.Status {
-	case titleAvailable:
-		writeErrorWith(w, http.StatusConflict, "{{title}} is already in your library", map[string]string{"title": t.Title})
-		return
-	case titleAdded:
-		writeErrorWith(w, http.StatusConflict, "{{title}} is already on its way", map[string]string{"title": t.Title})
-		return
-	case titleRequested:
-		writeErrorWith(w, http.StatusConflict, "someone already asked for {{title}}", map[string]string{"title": t.Title})
-		return
-	}
-	if in.QualityProfileID != 0 {
-		profiles, err := s.qualityProfiles(ctx, cl)
-		if err != nil {
-			s.arrError(w, r, app, err)
-			return
-		}
-		if !slices.ContainsFunc(profiles, func(p arr.QualityProfile) bool { return p.ID == in.QualityProfileID }) {
-			writeError(w, http.StatusBadRequest, "no such quality profile")
-			return
-		}
-	}
-	req, err := s.Store.CreateRequest(ctx, store.Request{
-		Kind: in.Kind, TMDBID: t.TMDBID, TVDBID: t.TVDBID, Title: t.Title, Year: t.Year, Poster: t.Poster,
-		QualityProfileID: in.QualityProfileID, UserID: currentUser(r).ID,
-	})
-	if err != nil {
-		s.serverError(w, err)
-		return
-	}
-	if auto {
-		if req, err = s.approve(ctx, req, 0); err != nil {
-			s.serverError(w, err)
-			return
-		}
 	}
 	v, err := s.viewRequest(ctx, req)
 	if err != nil {
@@ -1058,4 +1023,54 @@ func (s *Server) replaceIssue(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.WriteHeader(http.StatusNoContent)
+}
+
+// requestTitle asks for a title the app looked up, unless it's in a
+// library, on its way or asked for already, and approves it straight away
+// when auto. A failure is answered on w.
+func (s *Server) requestTitle(w http.ResponseWriter, r *http.Request, auto bool, kind string, cl *arr.Client, t arr.Title, profileID int) (store.Request, bool) {
+	ctx := r.Context()
+	app, _ := appFor(kind)
+	st, err := s.titleStatus(ctx, kind, t)
+	if err != nil {
+		s.serverError(w, err)
+		return store.Request{}, false
+	}
+	switch st.Status {
+	case titleAvailable:
+		writeErrorWith(w, http.StatusConflict, "{{title}} is already in your library", map[string]string{"title": t.Title})
+		return store.Request{}, false
+	case titleAdded:
+		writeErrorWith(w, http.StatusConflict, "{{title}} is already on its way", map[string]string{"title": t.Title})
+		return store.Request{}, false
+	case titleRequested:
+		writeErrorWith(w, http.StatusConflict, "someone already asked for {{title}}", map[string]string{"title": t.Title})
+		return store.Request{}, false
+	}
+	if profileID != 0 {
+		profiles, err := s.qualityProfiles(ctx, cl)
+		if err != nil {
+			s.arrError(w, r, app, err)
+			return store.Request{}, false
+		}
+		if !slices.ContainsFunc(profiles, func(p arr.QualityProfile) bool { return p.ID == profileID }) {
+			writeError(w, http.StatusBadRequest, "no such quality profile")
+			return store.Request{}, false
+		}
+	}
+	req, err := s.Store.CreateRequest(ctx, store.Request{
+		Kind: kind, TMDBID: t.TMDBID, TVDBID: t.TVDBID, Title: t.Title, Year: t.Year, Poster: t.Poster,
+		QualityProfileID: profileID, UserID: currentUser(r).ID,
+	})
+	if err != nil {
+		s.serverError(w, err)
+		return store.Request{}, false
+	}
+	if auto {
+		if req, err = s.approve(ctx, req, 0); err != nil {
+			s.serverError(w, err)
+			return store.Request{}, false
+		}
+	}
+	return req, true
 }

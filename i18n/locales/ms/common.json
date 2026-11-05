@@ -296,7 +296,8 @@
       "popular-movies": "Filem popular",
       "popular-shows": "Siri popular",
       "upcoming-movies": "Akan datang di pawagam",
-      "upcoming-shows": "Siri baharu akan datang"
+      "upcoming-shows": "Siri baharu akan datang",
+      "for-you": "Disyorkan untuk anda"
     },
     "because": "Kerana anda menonton {{title}}",
     "status": {

@@ -296,7 +296,8 @@
       "popular-movies": "熱門電影",
       "popular-shows": "熱門影集",
       "upcoming-movies": "即將上映",
-      "upcoming-shows": "即將開播的新影集"
+      "upcoming-shows": "即將開播的新影集",
+      "for-you": "為你推薦"
     },
     "because": "因為你看過《{{title}}》",
     "status": {

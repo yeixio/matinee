@@ -24,6 +24,7 @@
   "bad_user": "utilizator nevalid",
   "billing_couldnt_be_reached_try_again_in_a_minute": "facturarea nu poate fi accesată; încearcă din nou peste un minut",
   "book_not_found": "cartea nu a fost găsită",
+  "box_office_isnt_answering_right_now_try_again_later": "Box Office nu răspunde acum. Încearcă mai târziu.",
   "box_set_not_found": "colecția de filme nu a fost găsită",
   "cant_read_that_folder": "dosarul nu poate fi citit",
   "collection_not_found": "colecția nu a fost găsită",

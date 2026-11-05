@@ -296,7 +296,8 @@
       "popular-movies": "인기 영화",
       "popular-shows": "인기 시리즈",
       "upcoming-movies": "곧 극장 개봉",
-      "upcoming-shows": "곧 나올 새 시리즈"
+      "upcoming-shows": "곧 나올 새 시리즈",
+      "for-you": "추천 콘텐츠"
     },
     "because": "{{title}}을(를) 보셨기에",
     "status": {

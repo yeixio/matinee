@@ -436,7 +436,8 @@
       "popular-movies": "أفلام شائعة",
       "popular-shows": "مسلسلات شائعة",
       "upcoming-movies": "قريبًا في السينما",
-      "upcoming-shows": "مسلسلات جديدة قادمة"
+      "upcoming-shows": "مسلسلات جديدة قادمة",
+      "for-you": "مقترح لك"
     },
     "because": "لأنك شاهدت {{title}}",
     "status": {
