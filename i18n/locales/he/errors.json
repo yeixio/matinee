@@ -272,5 +272,7 @@
   "subtitle_choices_arent_ones_the_apps_know": "האפליקציות אינן מכירות את בחירות הכתוביות האלה",
   "no_such_font": "אין גופן כזה",
   "couldnt_start_playback_for_this_extra": "לא ניתן היה להפעיל את התוספת הזו",
-  "no_such_extra": "אין תוספת כזו"
+  "no_such_extra": "אין תוספת כזו",
+  "only_an_admin_can_add_a_station_on_the_home_network": "רק מנהל יכול להוסיף תחנה ברשת הביתית",
+  "startms_give_a_number_of_milliseconds": "startMs: יש לציין מספר אלפיות שנייה"
 }

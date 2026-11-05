@@ -3,6 +3,7 @@ package api
 import (
 	"context"
 	"errors"
+	"io"
 	"net/http"
 	"strconv"
 	"strings"
@@ -101,6 +102,9 @@ func (s *Server) addStation(w http.ResponseWriter, r *http.Request) {
 		Image     string   `json:"image"`
 		Homepage  string   `json:"homepage"`
 		Tags      []string `json:"tags"`
+		// Home lets an admin add a stream on the home network, such as an
+		// Air-Mixer output's.
+		Home bool `json:"home"`
 	}
 	if err := readJSON(r, &req); err != nil {
 		writeError(w, http.StatusBadRequest, "invalid request")
@@ -113,7 +117,15 @@ func (s *Server) addStation(w http.ResponseWriter, r *http.Request) {
 	// Finish even if the app stops waiting, as for podcasts.
 	ctx, cancel := context.WithTimeout(context.WithoutCancel(r.Context()), 20*time.Second)
 	defer cancel()
-	info, err := radio.Probe(ctx, stream.Remote, req.URL)
+	if req.Home && !currentUser(r).IsAdmin {
+		writeError(w, http.StatusForbidden, "only an admin can add a station on the home network")
+		return
+	}
+	client := stream.Remote
+	if req.Home {
+		client = stream.Home
+	}
+	info, err := radio.Probe(ctx, client, req.URL)
 	switch {
 	case errors.Is(err, radio.ErrBadURL), errors.Is(err, radio.ErrNotAudio), errors.Is(err, radio.ErrHLS):
 		writeError(w, http.StatusBadRequest, err.Error())
@@ -140,7 +152,7 @@ func (s *Server) addStation(w http.ResponseWriter, r *http.Request) {
 		tags = []string{info.Genre}
 	}
 	id, err := s.Store.AddStation(r.Context(), lib.ID, store.Station{
-		Name: name, URL: info.URL, Homepage: firstNonEmpty(req.Homepage, info.Homepage), Image: image, Genres: tags,
+		Name: name, URL: info.URL, Homepage: firstNonEmpty(req.Homepage, info.Homepage), Image: image, Genres: tags, Home: req.Home,
 	})
 	if errors.Is(err, store.ErrStationTaken) {
 		writeError(w, http.StatusConflict, err.Error())
@@ -213,12 +225,58 @@ func (s *Server) deleteStation(w http.ResponseWriter, r *http.Request) {
 // playStation relays a station's stream to a player (GET /items/{id}/file),
 // keeping the song titles it sends for /items/{id}/now.
 func (s *Server) playStation(w http.ResponseWriter, r *http.Request, it store.Item) {
-	addr, err := s.Store.StationURL(r.Context(), it.ID)
+	addr, home, err := s.Store.StationStream(r.Context(), it.ID)
 	if err != nil {
 		writeError(w, http.StatusNotFound, "item not found")
 		return
 	}
-	radio.Relay(w, r, stream.Remote, addr, func(title string) { s.stationTitles.Set(it.ID, title) })
+	client := stream.Remote
+	if home {
+		client = stream.Home
+	}
+	radio.RelayConverting(w, r, client, addr, func(title string) { s.stationTitles.Set(it.ID, title) },
+		func(w http.ResponseWriter, r *http.Request, _ string, body io.Reader) {
+			stream.ServeAAC(w, r, s.Transcoder.FFmpeg, body)
+		})
+}
+
+// itemAudio sends an item's audio as an endless 16-bit 44.1 kHz stereo WAV
+// from ?startMs=, for speakers that play what they're sent without
+// decoding it, such as Air-Mixer (GET /items/{id}/audio).
+func (s *Server) itemAudio(w http.ResponseWriter, r *http.Request) {
+	it, ok := s.loadItem(w, r)
+	if !ok {
+		return
+	}
+	if !it.Playable {
+		writeError(w, http.StatusBadRequest, "not a playable item")
+		return
+	}
+	var start time.Duration
+	if v := r.URL.Query().Get("startMs"); v != "" {
+		ms, err := strconv.ParseInt(v, 10, 64)
+		if err != nil || ms < 0 {
+			writeError(w, http.StatusBadRequest, "startMs: give a number of milliseconds")
+			return
+		}
+		start = time.Duration(ms) * time.Millisecond
+	}
+	src, client := it.Path, stream.Remote
+	if store.IsRemote(src) {
+		src = store.EpisodeURL(src)
+	}
+	if it.Kind == "station" {
+		addr, home, err := s.Store.StationStream(r.Context(), it.ID)
+		if err != nil {
+			writeError(w, http.StatusNotFound, "item not found")
+			return
+		}
+		src, start = addr, 0 // a live stream has no start
+		if home {
+			client = stream.Home
+		}
+	}
+	stream.ServePCM(w, r, s.Transcoder.FFmpeg, it, src, client, start)
 }
 
 // stationNow says what a station is playing, from the titles it sends

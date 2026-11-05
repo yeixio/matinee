@@ -18,6 +18,28 @@ import (
 // Relay plays a station to a player: it passes the stream through, takes
 // the song titles out of it for onTitle, and ends when the player leaves.
 func Relay(w http.ResponseWriter, r *http.Request, client *http.Client, addr string, onTitle func(string)) {
+	RelayConverting(w, r, client, addr, onTitle, nil)
+}
+
+// Converter turns a stream players can't play into one they can, writing
+// the response itself (headers included). Relay uses one for uncompressed
+// (PCM) streams, such as an Air-Mixer output's: few players can play an
+// endless WAV.
+type Converter func(w http.ResponseWriter, r *http.Request, contentType string, body io.Reader)
+
+// IsPCM says whether a stream's content type is uncompressed audio in a
+// WAV container.
+func IsPCM(ct string) bool {
+	switch ct {
+	case "audio/wav", "audio/x-wav", "audio/wave", "audio/vnd.wave":
+		return true
+	}
+	return false
+}
+
+// RelayConverting is Relay, with PCM streams going through pcm when it
+// isn't nil.
+func RelayConverting(w http.ResponseWriter, r *http.Request, client *http.Client, addr string, onTitle func(string), pcm Converter) {
 	resp, err := open(r.Context(), client, addr, true)
 	if err != nil {
 		if r.Context().Err() == nil {
@@ -28,6 +50,10 @@ func Relay(w http.ResponseWriter, r *http.Request, client *http.Client, addr str
 	defer resp.Body.Close()
 	h := w.Header()
 	ct := resp.Header.Get("Content-Type")
+	if base := strings.ToLower(strings.TrimSpace(strings.Split(ct, ";")[0])); pcm != nil && IsPCM(base) {
+		pcm(w, r, base, resp.Body)
+		return
+	}
 	if !isAudio(strings.ToLower(strings.TrimSpace(strings.Split(ct, ";")[0]))) {
 		ct = "audio/mpeg"
 	}

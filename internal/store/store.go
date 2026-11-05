@@ -632,7 +632,10 @@ var migrations = []string{
 	"ALTER TABLE notifications ADD COLUMN repeats INTEGER NOT NULL DEFAULT 1",
 	"ALTER TABLE notifications ADD COLUMN first_at BIGINT NOT NULL DEFAULT 0",
 	"CREATE INDEX notifications_grouping ON notifications(user_id, group_key)",
-	// 104-110: with Box Office, a request can be for another edition of a
+	// 104: a radio station an admin added from the home network, such as an
+	// Air-Mixer output; the server may reach it there (see stations.go).
+	"ALTER TABLE items ADD COLUMN stream_home INTEGER NOT NULL DEFAULT 0",
+	// 105-111: with Box Office, a request can be for another edition of a
 	// movie, or a better or replacement copy of a title in a library, not
 	// only a title to add (see requests.go); and anyone can ask to be told
 	// when a title on its way arrives (notify_me).

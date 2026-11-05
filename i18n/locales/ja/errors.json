@@ -272,5 +272,7 @@
   "subtitle_choices_arent_ones_the_apps_know": "アプリが認識できない字幕の設定です",
   "no_such_font": "そのフォントはありません",
   "couldnt_start_playback_for_this_extra": "この特典映像を再生できませんでした",
-  "no_such_extra": "その特典映像はありません"
+  "no_such_extra": "その特典映像はありません",
+  "only_an_admin_can_add_a_station_on_the_home_network": "ホームネットワーク上の局を追加できるのは管理者だけです",
+  "startms_give_a_number_of_milliseconds": "startMs: ミリ秒の数値を指定してください"
 }

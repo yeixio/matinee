@@ -82,6 +82,17 @@ var Remote = &http.Client{Transport: &http.Transport{
 	MaxIdleConnsPerHost:   4,
 }}
 
+// Home is Remote without the home network check, for streams an admin
+// chose to add from the home network, such as an Air-Mixer output played
+// as a radio station.
+var Home = &http.Client{Transport: &http.Transport{
+	Proxy:                 http.ProxyFromEnvironment,
+	DialContext:           (&net.Dialer{Timeout: 15 * time.Second}).DialContext,
+	ResponseHeaderTimeout: 20 * time.Second,
+	IdleConnTimeout:       90 * time.Second,
+	MaxIdleConnsPerHost:   4,
+}}
+
 // AllowHomeNetwork lets Remote reach addresses on the home network and the
 // server itself. Off, anyone who can add a podcast can't use a feed to
 // make the server fetch from other devices at home, like a router's page.
