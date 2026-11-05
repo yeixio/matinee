@@ -315,7 +315,14 @@
     "moreLike": "與{{title}}類似",
     "empty": "這裡暫時沒有內容",
     "unavailable": "此列無法使用",
-    "loadMore": "載入更多"
+    "loadMore": "載入更多",
+    "recentlyAdded": {
+      "movie": "最近新增的電影",
+      "show": "最近新增的電視節目",
+      "album": "最近新增的音樂",
+      "book": "最近新增的有聲書",
+      "podcast": "最近新增的Podcast"
+    }
   },
   "music": {
     "overview": "總覽",

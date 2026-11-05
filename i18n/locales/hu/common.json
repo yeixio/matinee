@@ -343,7 +343,14 @@
     "moreLike": "Hasonlók ehhez: {{title}}",
     "empty": "Most nincs itt semmi",
     "unavailable": "Ez a sor nem érhető el",
-    "loadMore": "Továbbiak betöltése"
+    "loadMore": "Továbbiak betöltése",
+    "recentlyAdded": {
+      "movie": "Nemrég hozzáadott filmek",
+      "show": "Nemrég hozzáadott sorozatok",
+      "album": "Nemrég hozzáadott zene",
+      "book": "Nemrég hozzáadott hangoskönyvek",
+      "podcast": "Nemrég hozzáadott podcastok"
+    }
   },
   "music": {
     "overview": "Áttekintés",

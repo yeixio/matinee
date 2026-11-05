@@ -343,7 +343,14 @@
     "moreLike": "{{title}} gibi diğerleri",
     "empty": "Şu anda burada bir şey yok",
     "unavailable": "Bu sıra kullanılamıyor",
-    "loadMore": "Daha fazla yükle"
+    "loadMore": "Daha fazla yükle",
+    "recentlyAdded": {
+      "movie": "Son eklenen filmler",
+      "show": "Son eklenen diziler",
+      "album": "Son eklenen müzikler",
+      "book": "Son eklenen sesli kitaplar",
+      "podcast": "Son eklenen podcast'ler"
+    }
   },
   "music": {
     "overview": "Genel bakış",

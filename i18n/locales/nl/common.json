@@ -343,7 +343,14 @@
     "moreLike": "Meer zoals {{title}}",
     "empty": "Hier is nu niets",
     "unavailable": "Deze rij is niet beschikbaar",
-    "loadMore": "Meer laden"
+    "loadMore": "Meer laden",
+    "recentlyAdded": {
+      "movie": "Onlangs toegevoegde films",
+      "show": "Onlangs toegevoegde series",
+      "album": "Onlangs toegevoegde muziek",
+      "book": "Onlangs toegevoegde luisterboeken",
+      "podcast": "Onlangs toegevoegde podcasts"
+    }
   },
   "music": {
     "overview": "Overzicht",

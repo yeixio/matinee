@@ -371,7 +371,14 @@
     "moreLike": "Dans le même esprit que {{title}}",
     "empty": "Rien ici pour le moment",
     "unavailable": "Cette rangée n'est pas disponible",
-    "loadMore": "Charger plus"
+    "loadMore": "Charger plus",
+    "recentlyAdded": {
+      "movie": "Films ajoutés récemment",
+      "show": "Séries ajoutées récemment",
+      "album": "Musique ajoutée récemment",
+      "book": "Livres audio ajoutés récemment",
+      "podcast": "Podcasts ajoutés récemment"
+    }
   },
   "music": {
     "overview": "Vue d'ensemble",

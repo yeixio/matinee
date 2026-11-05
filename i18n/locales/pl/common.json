@@ -399,7 +399,14 @@
     "moreLike": "Podobne do {{title}}",
     "empty": "Na razie nic tu nie ma",
     "unavailable": "Ten rząd jest niedostępny",
-    "loadMore": "Wczytaj więcej"
+    "loadMore": "Wczytaj więcej",
+    "recentlyAdded": {
+      "movie": "Ostatnio dodane filmy",
+      "show": "Ostatnio dodane seriale",
+      "album": "Ostatnio dodana muzyka",
+      "book": "Ostatnio dodane audiobooki",
+      "podcast": "Ostatnio dodane podcasty"
+    }
   },
   "music": {
     "overview": "Przegląd",
