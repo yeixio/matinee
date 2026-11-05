@@ -777,5 +777,8 @@
     "on": "开启",
     "more": "更多字幕",
     "back": "返回"
+  },
+  "notifications": {
+    "repeated": "{{times}} 次，首次 {{first}}"
   }
 }

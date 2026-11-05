@@ -777,5 +777,8 @@
     "on": "Hidup",
     "more": "Lagi sari kata",
     "back": "Kembali"
+  },
+  "notifications": {
+    "repeated": "{{times}}×, kali pertama {{first}}"
   }
 }

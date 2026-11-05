@@ -873,5 +873,8 @@
     "on": "Zapnuto",
     "more": "Další titulky",
     "back": "Zpět"
+  },
+  "notifications": {
+    "repeated": "{{times}}×, poprvé {{first}}"
   }
 }

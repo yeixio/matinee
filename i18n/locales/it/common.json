@@ -841,5 +841,8 @@
     "on": "Attivi",
     "more": "Altri sottotitoli",
     "back": "Indietro"
+  },
+  "notifications": {
+    "repeated": "{{times}}×, la prima {{first}}"
   }
 }

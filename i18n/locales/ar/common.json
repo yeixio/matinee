@@ -937,5 +937,8 @@
     "on": "تشغيل",
     "more": "ترجمات أخرى",
     "back": "رجوع"
+  },
+  "notifications": {
+    "repeated": "{{times}} مرة، أولها {{first}}"
   }
 }

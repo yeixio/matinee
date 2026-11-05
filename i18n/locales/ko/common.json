@@ -777,5 +777,8 @@
     "on": "켜기",
     "more": "다른 자막",
     "back": "뒤로"
+  },
+  "notifications": {
+    "repeated": "{{times}}회, 처음 {{first}}"
   }
 }

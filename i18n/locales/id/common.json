@@ -777,5 +777,8 @@
     "on": "Aktif",
     "more": "Subtitle lainnya",
     "back": "Kembali"
+  },
+  "notifications": {
+    "repeated": "{{times}}×, pertama {{first}}"
   }
 }

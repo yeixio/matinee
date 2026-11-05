@@ -841,5 +841,8 @@
     "on": "Ativadas",
     "more": "Mais legendas",
     "back": "Voltar"
+  },
+  "notifications": {
+    "repeated": "{{times}}×, a primeira {{first}}"
   }
 }

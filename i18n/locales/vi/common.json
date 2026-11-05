@@ -777,5 +777,8 @@
     "on": "Bật",
     "more": "Phụ đề khác",
     "back": "Quay lại"
+  },
+  "notifications": {
+    "repeated": "{{times}} lần, lần đầu {{first}}"
   }
 }

@@ -841,5 +841,8 @@
     "on": "Activés",
     "more": "Plus de sous-titres",
     "back": "Retour"
+  },
+  "notifications": {
+    "repeated": "{{times}}×, la première {{first}}"
   }
 }

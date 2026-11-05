@@ -809,5 +809,8 @@
     "on": "På",
     "more": "Fler undertexter",
     "back": "Tillbaka"
+  },
+  "notifications": {
+    "repeated": "{{times}}×, första gången {{first}}"
   }
 }

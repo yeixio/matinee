@@ -841,5 +841,8 @@
     "on": "מופעל",
     "more": "כתוביות נוספות",
     "back": "חזרה"
+  },
+  "notifications": {
+    "repeated": "{{times}} פעמים, לראשונה {{first}}"
   }
 }
