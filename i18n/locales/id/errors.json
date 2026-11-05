@@ -265,5 +265,7 @@
   "subtitle_choices_arent_ones_the_apps_know": "Aplikasi tidak mengenali pilihan subtitel ini",
   "no_such_font": "Font tidak ada",
   "couldnt_start_playback_for_this_extra": "tidak bisa memutar ekstra ini",
-  "no_such_extra": "ekstra tidak ditemukan"
+  "no_such_extra": "ekstra tidak ditemukan",
+  "only_an_admin_can_add_a_station_on_the_home_network": "hanya admin yang dapat menambahkan stasiun di jaringan rumah",
+  "startms_give_a_number_of_milliseconds": "startMs: berikan jumlah milidetik"
 }
