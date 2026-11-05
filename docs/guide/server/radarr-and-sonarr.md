@@ -63,6 +63,12 @@ Under **Who can add movies and shows**, pick one:
 - **Requests:** admins see everyone's requests here and **Approve** or **Decline** them. Everyone else sees **Your requests** and where each one is up to.
 - **Problems:** reports from **Report a problem** on a title's page. An admin can **Close** one once it's sorted, or click **Replace file**, which deletes the file in Radarr or Sonarr and has it download another copy. Everyone else sees **Your reports**.
 
+## Discover from Box Office
+
+<!-- since: v0.2.3 -->
+When Box Office is connected, everyone gets the [Discover](/docs/watching/discover/) tab on the web and in the phone and TV apps, with nothing else to set up: trending, popular and upcoming titles, recommendations for what they watched and for what's in your libraries, and a search for any movie or show. Asking for a title there is an ordinary request through Box Office, so **Who can add movies and shows** applies. Kids profiles don't see Discover. If [Overseerr](/docs/server/overseerr/) is also connected, Discover comes from Overseerr instead. Disconnecting Box Office takes the tab away.
+<!-- /since -->
+
 ## Notifications from Box Office
 
 When Radarr or Sonarr is [Box Office](https://github.com/yeixio/boxoffice), Matinee tells people in the web player and the phone and TV apps when something they asked for is found and downloading, and when it's ready to watch. The bell in the top bar lists them. There's nothing else to set up: Matinee checks Box Office every half a minute with the address and key you already gave it.
