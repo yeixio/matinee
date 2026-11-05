@@ -296,7 +296,8 @@
       "popular-movies": "Film populer",
       "popular-shows": "Serial populer",
       "upcoming-movies": "Segera di bioskop",
-      "upcoming-shows": "Serial baru yang akan datang"
+      "upcoming-shows": "Serial baru yang akan datang",
+      "for-you": "Rekomendasi untukmu"
     },
     "because": "Karena kamu menonton {{title}}",
     "status": {

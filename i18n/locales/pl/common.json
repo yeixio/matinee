@@ -380,7 +380,8 @@
       "popular-movies": "Popularne filmy",
       "popular-shows": "Popularne seriale",
       "upcoming-movies": "Wkrótce w kinach",
-      "upcoming-shows": "Nadchodzące nowe seriale"
+      "upcoming-shows": "Nadchodzące nowe seriale",
+      "for-you": "Polecane dla Ciebie"
     },
     "because": "Bo oglądałeś {{title}}",
     "status": {

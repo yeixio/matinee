@@ -296,7 +296,8 @@
       "popular-movies": "热门电影",
       "popular-shows": "热门剧集",
       "upcoming-movies": "即将上映",
-      "upcoming-shows": "即将开播的新剧"
+      "upcoming-shows": "即将开播的新剧",
+      "for-you": "为你推荐"
     },
     "because": "因为你看过《{{title}}》",
     "status": {

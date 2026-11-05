@@ -380,7 +380,8 @@
       "popular-movies": "Популярные фильмы",
       "popular-shows": "Популярные сериалы",
       "upcoming-movies": "Скоро в кино",
-      "upcoming-shows": "Новые сериалы на подходе"
+      "upcoming-shows": "Новые сериалы на подходе",
+      "for-you": "Рекомендуем вам"
     },
     "because": "Потому что вы смотрели {{title}}",
     "status": {

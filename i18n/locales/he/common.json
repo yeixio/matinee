@@ -352,7 +352,8 @@
       "popular-movies": "סרטים פופולריים",
       "popular-shows": "סדרות פופולריות",
       "upcoming-movies": "בקרוב בקולנוע",
-      "upcoming-shows": "סדרות חדשות בדרך"
+      "upcoming-shows": "סדרות חדשות בדרך",
+      "for-you": "מומלץ בשבילך"
     },
     "because": "כי צפית ב{{title}}",
     "status": {

@@ -296,7 +296,8 @@
       "popular-movies": "Phim lẻ nổi bật",
       "popular-shows": "Phim bộ nổi bật",
       "upcoming-movies": "Sắp ra rạp",
-      "upcoming-shows": "Phim bộ mới sắp ra"
+      "upcoming-shows": "Phim bộ mới sắp ra",
+      "for-you": "Đề xuất cho bạn"
     },
     "because": "Vì bạn đã xem {{title}}",
     "status": {

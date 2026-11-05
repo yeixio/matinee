@@ -56,6 +56,8 @@ type boxOfficeState struct {
 	ID        string  `json:"id,omitempty"` // empty: it isn't Box Office (or doesn't send notifications)
 	CheckedAt int64   `json:"checkedAt"`    // milliseconds
 	Error     string  `json:"error,omitempty"`
+	// Features are what it said it has, nil until Matinee has asked.
+	Features []string `json:"-"`
 }
 
 func (b *boxOffices) set(app arr.App, st boxOfficeState) {
@@ -80,6 +82,22 @@ func (b *boxOffices) id(app arr.App) string {
 	b.mu.Lock()
 	defer b.mu.Unlock()
 	return b.ids[app].ID
+}
+
+// features is what the Box Office an app goes to said it has.
+func (b *boxOffices) features(app arr.App) []string {
+	b.mu.Lock()
+	defer b.mu.Unlock()
+	return b.ids[app].Features
+}
+
+// has says an app goes to a Box Office with a feature. One just connected,
+// not asked yet, is taken to have it until it says.
+func (b *boxOffices) has(app arr.App, feature string) bool {
+	b.mu.Lock()
+	defer b.mu.Unlock()
+	st := b.ids[app]
+	return st.ID != "" && (st.Features == nil || slices.Contains(st.Features, feature))
 }
 
 func (b *boxOffices) list() []boxOfficeState {
@@ -124,20 +142,21 @@ func (s *Server) ReadBoxOffice(ctx context.Context) {
 		cancel()
 		if err != nil {
 			// A Box Office that's down is still Box Office.
-			s.boxOffices.set(app, boxOfficeState{ID: s.boxOffices.id(app), Error: err.Error()})
+			s.boxOffices.set(app, boxOfficeState{ID: s.boxOffices.id(app), Error: err.Error(), Features: s.boxOffices.features(app)})
 			continue
 		}
 		if !st.BoxOffice("notifications") {
 			s.boxOffices.set(app, boxOfficeState{})
 			continue
 		}
+		features := slices.Clone(st.BoxOfficeFeatures)
 		if done[st.BoxOfficeID] {
-			s.boxOffices.set(app, boxOfficeState{ID: st.BoxOfficeID})
+			s.boxOffices.set(app, boxOfficeState{ID: st.BoxOfficeID, Features: features})
 			continue
 		}
 		done[st.BoxOfficeID] = true
 		err = s.readFeed(ctx, cl, st.BoxOfficeID)
-		state := boxOfficeState{ID: st.BoxOfficeID}
+		state := boxOfficeState{ID: st.BoxOfficeID, Features: features}
 		if err != nil {
 			state.Error = err.Error()
 			s.Log.Warn("couldn't read Box Office's notifications", "app", app, "err", err)

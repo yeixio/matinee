@@ -380,7 +380,8 @@
       "popular-movies": "Oblíbené filmy",
       "popular-shows": "Oblíbené seriály",
       "upcoming-movies": "Brzy v kinech",
-      "upcoming-shows": "Nové seriály na cestě"
+      "upcoming-shows": "Nové seriály na cestě",
+      "for-you": "Doporučeno pro vás"
     },
     "because": "Protože jste sledovali {{title}}",
     "status": {

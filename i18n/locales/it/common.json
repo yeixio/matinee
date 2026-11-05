@@ -352,7 +352,8 @@
       "popular-movies": "Film popolari",
       "popular-shows": "Serie popolari",
       "upcoming-movies": "Presto al cinema",
-      "upcoming-shows": "Nuove serie in arrivo"
+      "upcoming-shows": "Nuove serie in arrivo",
+      "for-you": "Consigliati per te"
     },
     "because": "Perché hai guardato {{title}}",
     "status": {

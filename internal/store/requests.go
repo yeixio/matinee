@@ -89,6 +89,12 @@ func (s *Store) OpenRequest(ctx context.Context, kind string, id int) (Request, 
 		" WHERE r.kind = ? AND "+col+" = ? AND r.state IN ('pending', 'approved') ORDER BY r.created_at DESC LIMIT 1", kind, id))
 }
 
+// OpenRequestTMDB is like OpenRequest, by TMDB id for shows too.
+func (s *Store) OpenRequestTMDB(ctx context.Context, kind string, tmdbID int) (Request, error) {
+	return scanRequest(s.db.QueryRowContext(ctx, "SELECT "+requestCols+requestFrom+
+		" WHERE r.kind = ? AND r.tmdb_id = ? AND r.tmdb_id != 0 AND r.state IN ('pending', 'approved') ORDER BY r.created_at DESC LIMIT 1", kind, tmdbID))
+}
+
 // Requests lists requests, pending ones first, then the newest. userID 0 lists everyone's.
 func (s *Store) Requests(ctx context.Context, userID int64, limit int) ([]Request, error) {
 	where, args := "1 = 1", []any{}
