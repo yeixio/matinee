@@ -1,0 +1,796 @@
+{
+  "$comment": "Which Matinee app has which feature. The guide's Features on each app page is made from this file (site/scripts/features.mjs), and the site build fails if it's incomplete. For each app: true when it has the feature, \"repo#123\" for the issue that adds it, or {\"na\": \"why\"} when it doesn't need it. since is the server version that brought the feature.",
+  "tables": [
+    {
+      "id": "watch",
+      "title": "Watching",
+      "apps": [
+        {
+          "id": "web",
+          "name": "Web player"
+        },
+        {
+          "id": "ios",
+          "name": "iPhone and iPad"
+        },
+        {
+          "id": "android",
+          "name": "Android phones and tablets"
+        },
+        {
+          "id": "appletv",
+          "name": "Apple TV"
+        },
+        {
+          "id": "androidtv",
+          "name": "Android TV and Fire TV"
+        },
+        {
+          "id": "tvweb",
+          "name": "Samsung and LG TVs"
+        }
+      ],
+      "groups": [
+        {
+          "title": "Finding something to watch",
+          "features": [
+            {
+              "name": "Home rows and Continue watching",
+              "doc": "/docs/watching/home/",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
+              "name": "Search",
+              "doc": "/docs/watching/browsing/",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
+              "name": "Filter and sort a library",
+              "doc": "/docs/watching/browsing/",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
+              "name": "Collections",
+              "doc": "/docs/watching/collections/",
+              "apps": {
+                "web": true,
+                "ios": "matinee-apps#171",
+                "android": "matinee-apps#171",
+                "appletv": "matinee-apps#171",
+                "androidtv": "matinee-apps#171",
+                "tvweb": "matinee-apps#171"
+              }
+            },
+            {
+              "name": "Watch list",
+              "doc": "/docs/watching/watch-list/",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
+              "name": "Cast and crew pages",
+              "doc": "/docs/watching/title-pages/",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
+              "name": "Star ratings",
+              "doc": "/docs/watching/title-pages/#your-ratings",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
+              "name": "Mark as watched",
+              "doc": "/docs/watching/title-pages/",
+              "since": "v0.2.0",
+              "apps": {
+                "web": true,
+                "ios": "matinee-apps#172",
+                "android": "matinee-apps#172",
+                "appletv": "matinee-apps#172",
+                "androidtv": "matinee-apps#172",
+                "tvweb": "matinee-apps#172"
+              }
+            },
+            {
+              "name": "Trailers",
+              "doc": "/docs/watching/title-pages/",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
+              "name": "Extras and commentaries",
+              "doc": "/docs/watching/extras/",
+              "since": "v0.2.1",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
+              "name": "Several versions of a film",
+              "doc": "/docs/watching/title-pages/",
+              "since": "v0.2.1",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
+              "name": "Coming soon (Radarr and Sonarr)",
+              "doc": "/docs/server/radarr-and-sonarr/",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
+              "name": "Discover and request (Overseerr)",
+              "doc": "/docs/watching/discover/",
+              "since": "v0.1.1",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
+              "name": "Your requests and Report a problem",
+              "doc": "/docs/watching/discover/",
+              "apps": {
+                "web": true,
+                "ios": "matinee-apps#13",
+                "android": "matinee-apps#13",
+                "appletv": "matinee-apps#13",
+                "androidtv": "matinee-apps#13",
+                "tvweb": "matinee-apps#13"
+              }
+            },
+            {
+              "name": "Live TV",
+              "doc": "/docs/watching/live-tv/",
+              "since": "v0.2.0",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            }
+          ]
+        },
+        {
+          "title": "Playing",
+          "features": [
+            {
+              "name": "Subtitles, with your languages and style",
+              "doc": "/docs/watching/playing/#subtitles",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
+              "name": "Find subtitles online",
+              "doc": "/docs/watching/finding-subtitles/",
+              "since": "v0.1.10",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
+              "name": "Sync subtitles to the audio",
+              "doc": "/docs/watching/syncing-subtitles/",
+              "since": "v0.2.1",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
+              "name": "Audio tracks",
+              "doc": "/docs/watching/playing/#audio-tracks",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
+              "name": "Audio delay",
+              "doc": "/docs/watching/playing/#audio-delay",
+              "since": "v0.2.1",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
+              "name": "Clear voice",
+              "doc": "/docs/watching/playing/#clear-voice",
+              "since": "v0.2.2",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
+              "name": "Skip intro",
+              "doc": "/docs/watching/skipping-intros/",
+              "since": "v0.1.10",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
+              "name": "Skip credits and Up next",
+              "doc": "/docs/watching/skipping-credits/",
+              "since": "v0.1.14",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
+              "name": "Seek bar previews",
+              "doc": "/docs/watching/seek-previews/",
+              "since": "v0.1.11",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
+              "name": "Sleep timer",
+              "doc": "/docs/watching/playing/#sleep-timer",
+              "since": "v0.1.1",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
+              "name": "Why it buffered",
+              "doc": "/docs/watching/why-it-buffered/",
+              "since": "v0.2.0",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
+              "name": "Watch together",
+              "doc": "/docs/watching/watch-together/",
+              "since": "v0.1.10",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
+              "name": "Playback speed for films and shows",
+              "doc": "/docs/watching/playing/",
+              "apps": {
+                "web": "matinee#43",
+                "ios": "matinee-apps#129",
+                "android": "matinee-apps#129",
+                "appletv": "matinee-apps#129",
+                "androidtv": "matinee-apps#129",
+                "tvweb": "matinee-apps#129"
+              }
+            },
+            {
+              "name": "Picture in picture",
+              "doc": "/docs/apps/phone-and-tv/",
+              "apps": {
+                "web": "matinee#238",
+                "ios": true,
+                "android": true,
+                "appletv": {
+                  "na": "A TV shows one thing at a time."
+                },
+                "androidtv": {
+                  "na": "A TV shows one thing at a time."
+                },
+                "tvweb": {
+                  "na": "A TV shows one thing at a time."
+                }
+              }
+            },
+            {
+              "name": "Cast to a TV (Chromecast and AirPlay)",
+              "doc": "/docs/apps/casting/",
+              "apps": {
+                "web": "matinee#15",
+                "ios": true,
+                "android": true,
+                "appletv": {
+                  "na": "The TV is already the screen."
+                },
+                "androidtv": {
+                  "na": "The TV is already the screen."
+                },
+                "tvweb": {
+                  "na": "The TV is already the screen."
+                }
+              }
+            },
+            {
+              "name": "Downloads to watch offline",
+              "doc": "/docs/apps/downloads/",
+              "apps": {
+                "web": {
+                  "na": "A browser streams from the server."
+                },
+                "ios": true,
+                "android": true,
+                "appletv": {
+                  "na": "TVs stream from the server instead."
+                },
+                "androidtv": {
+                  "na": "TVs stream from the server instead."
+                },
+                "tvweb": {
+                  "na": "TVs stream from the server instead."
+                }
+              }
+            }
+          ]
+        },
+        {
+          "title": "Music, books and podcasts",
+          "features": [
+            {
+              "name": "Music: albums, artists and songs",
+              "doc": "/docs/watching/music/",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
+              "name": "Playlists",
+              "doc": "/docs/watching/music/#playlists",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
+              "name": "Lyrics",
+              "doc": "/docs/watching/music/#lyrics",
+              "since": "v0.1.14",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
+              "name": "The visualizer",
+              "doc": "/docs/watching/music/#the-visualizer",
+              "since": "v0.1.3",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
+              "name": "Albums without gaps",
+              "doc": "/docs/watching/music/#albums-without-gaps",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
+              "name": "Record labels",
+              "doc": "/docs/watching/music/#record-labels",
+              "since": "v0.1.16",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
+              "name": "Radio stations",
+              "doc": "/docs/watching/music/#radio-stations",
+              "since": "v0.1.16",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
+              "name": "Audiobooks",
+              "doc": "/docs/watching/audiobooks/",
+              "since": "v0.1.2",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
+              "name": "Podcasts",
+              "doc": "/docs/watching/podcasts/",
+              "since": "v0.1.7",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
+              "name": "Ask Siri or Google Assistant",
+              "doc": "/docs/apps/voice/",
+              "since": "v0.1.7",
+              "apps": {
+                "web": {
+                  "na": "Browsers have no voice assistant to ask."
+                },
+                "ios": true,
+                "android": true,
+                "appletv": "matinee#169",
+                "androidtv": "matinee#169",
+                "tvweb": "matinee#169"
+              }
+            }
+          ]
+        },
+        {
+          "title": "Your household",
+          "features": [
+            {
+              "name": "Profiles, kids profiles and PINs",
+              "doc": "/docs/household/profiles/",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
+              "name": "Themes",
+              "doc": "/docs/household/themes/",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
+              "name": "Your language",
+              "doc": "/docs/apps/phone-and-tv/",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
+              "name": "Sign in on a TV with a code",
+              "doc": "/docs/apps/signing-in/",
+              "apps": {
+                "web": {
+                  "na": "You approve the code here, on your server's /link page."
+                },
+                "ios": {
+                  "na": "You approve the code here."
+                },
+                "android": {
+                  "na": "You approve the code here."
+                },
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
+              "name": "Set up a TV from your phone",
+              "doc": "/docs/apps/signing-in/#set-up-a-new-tv-with-your-phone",
+              "apps": {
+                "web": {
+                  "na": "Set up from the phone app."
+                },
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": {
+                  "na": "TV browsers can't be found on the home network, so these TVs sign in with a code."
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "listen",
+      "title": "Cars and watches",
+      "apps": [
+        {
+          "id": "carplay",
+          "name": "CarPlay"
+        },
+        {
+          "id": "androidauto",
+          "name": "Android Auto"
+        },
+        {
+          "id": "automotive",
+          "name": "Cars with Android built in"
+        },
+        {
+          "id": "applewatch",
+          "name": "Apple Watch"
+        },
+        {
+          "id": "wearos",
+          "name": "Wear OS"
+        }
+      ],
+      "groups": [
+        {
+          "title": "Listening on the go",
+          "features": [
+            {
+              "name": "Music",
+              "doc": "/docs/watching/music/",
+              "apps": {
+                "carplay": true,
+                "androidauto": true,
+                "automotive": true,
+                "applewatch": true,
+                "wearos": true
+              }
+            },
+            {
+              "name": "Playlists",
+              "doc": "/docs/watching/music/#playlists",
+              "apps": {
+                "carplay": true,
+                "androidauto": true,
+                "automotive": true,
+                "applewatch": true,
+                "wearos": true
+              }
+            },
+            {
+              "name": "Audiobooks",
+              "doc": "/docs/watching/audiobooks/",
+              "apps": {
+                "carplay": true,
+                "androidauto": true,
+                "automotive": true,
+                "applewatch": true,
+                "wearos": true
+              }
+            },
+            {
+              "name": "Podcasts",
+              "doc": "/docs/watching/podcasts/",
+              "apps": {
+                "carplay": true,
+                "androidauto": true,
+                "automotive": true,
+                "applewatch": true,
+                "wearos": true
+              }
+            },
+            {
+              "name": "Radio stations",
+              "doc": "/docs/watching/music/#radio-stations",
+              "apps": {
+                "carplay": "matinee-apps#173",
+                "androidauto": "matinee-apps#173",
+                "automotive": "matinee-apps#173",
+                "applewatch": "matinee-apps#173",
+                "wearos": "matinee-apps#173"
+              }
+            },
+            {
+              "name": "Downloads to listen offline",
+              "doc": "/docs/apps/downloads/",
+              "apps": {
+                "carplay": true,
+                "androidauto": true,
+                "automotive": {
+                  "na": "The car plays from your server; downloads are a phone feature."
+                },
+                "applewatch": true,
+                "wearos": true
+              }
+            },
+            {
+              "name": "Control what's playing on another device",
+              "doc": "/docs/apps/apple-watch/",
+              "apps": {
+                "carplay": {
+                  "na": "The car plays from the phone."
+                },
+                "androidauto": {
+                  "na": "The car plays from the phone."
+                },
+                "automotive": {
+                  "na": "The car is its own player."
+                },
+                "applewatch": true,
+                "wearos": true
+              }
+            },
+            {
+              "name": "Ask by voice",
+              "doc": "/docs/apps/voice/",
+              "apps": {
+                "carplay": true,
+                "androidauto": true,
+                "automotive": true,
+                "applewatch": {
+                  "na": "Ask Siri on your iPhone."
+                },
+                "wearos": {
+                  "na": "Ask Google Assistant on your phone."
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

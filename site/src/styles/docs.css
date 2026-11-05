@@ -99,3 +99,20 @@ h1#_top {
   border: 1px solid var(--sl-color-gray-5);
   background: var(--sl-color-gray-6);
 }
+
+/* The feature table (docs/features.json): compact, with the feature names
+   kept on one or two lines. */
+.feature-table table {
+  font-size: var(--sl-text-sm);
+}
+.feature-table th,
+.feature-table td {
+  padding: 0.4rem 0.6rem;
+  line-height: 1.4;
+}
+.feature-table td:first-child {
+  min-width: 13rem;
+}
+.feature-table th:not(:first-child) {
+  vertical-align: bottom;
+}
