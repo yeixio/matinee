@@ -31,7 +31,19 @@ type Fake struct {
 	Calendar []map[string]any
 	Commands []map[string]any
 	Deleted  []string // paths of deleted files, like "/moviefile/3"
-	nextID   int
+	// BoxOfficeID makes it Box Office answering as the app, with its
+	// feed of Notifications.
+	BoxOfficeID   string
+	Notifications []arr.BoxOfficeNotification
+	nextID        int
+}
+
+// Notify adds to Box Office's feed, numbering it.
+func (f *Fake) Notify(n arr.BoxOfficeNotification) {
+	f.mu.Lock()
+	defer f.mu.Unlock()
+	n.ID = int64(len(f.Notifications) + 1)
+	f.Notifications = append(f.Notifications, n)
 }
 
 func New(t *testing.T, app arr.App) *Fake {
@@ -122,8 +134,20 @@ func (f *Fake) serve(w http.ResponseWriter, r *http.Request) {
 	k := "/" + f.kind()
 	parts := strings.Split(strings.Trim(path, "/"), "/")
 	switch {
+	case path == "/system/status" && f.BoxOfficeID != "":
+		write(w, map[string]any{"appName": f.App.Name(), "version": "5.0.0", "boxOfficeId": f.BoxOfficeID, "boxOfficeFeatures": []string{"notifications"}})
 	case path == "/system/status":
 		write(w, map[string]any{"appName": f.App.Name(), "version": "5.0.0"})
+	case path == "/boxoffice/notifications" && f.BoxOfficeID != "":
+		after, _ := strconv.ParseInt(q.Get("after"), 10, 64)
+		last := int64(len(f.Notifications))
+		out := []arr.BoxOfficeNotification{}
+		for _, n := range f.Notifications {
+			if after >= 0 && n.ID > after {
+				out = append(out, n)
+			}
+		}
+		write(w, map[string]any{"boxOfficeId": f.BoxOfficeID, "last": last, "notifications": out})
 	case path == "/qualityprofile":
 		write(w, []map[string]any{{"id": 1, "name": "HD-1080p"}, {"id": 4, "name": "Ultra-HD"}})
 	case path == "/rootfolder":

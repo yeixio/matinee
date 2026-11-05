@@ -50,6 +50,11 @@ const (
 	CommandSubtitles = "subtitles" // show subtitle Track, or none for ""
 )
 
+// CommandNotify tells the person using a player something (Notification),
+// such as a title they asked for being ready. Only the server sends it, to
+// players that say they take notifications (Hello.Notifications).
+const CommandNotify = "notify"
+
 // Commands are every command there is.
 var Commands = []string{CommandPlay, CommandPause, CommandStop, CommandSeek, CommandNext, CommandPrevious,
 	CommandPlayItem, CommandVolume, CommandMute, CommandSleep, CommandSubtitles}
@@ -106,6 +111,10 @@ type Hello struct {
 	App      string   `json:"app,omitempty"`
 	Version  string   `json:"version,omitempty"`
 	Commands []string `json:"commands"` // the commands it takes; none means it can't be controlled
+	// Notifications says it shows notifications (see Hub.Notify), which come
+	// as a "notify" command. They aren't in Commands, since nobody else
+	// can send one.
+	Notifications bool `json:"notifications,omitempty"`
 }
 
 // Playing is what a player has open. PositionMs was true at UpdatedAt and
@@ -160,6 +169,8 @@ type Command struct {
 	Track      *string  `json:"track,omitempty"`
 	// From names who sent it, such as "Home Assistant", so a player can say so.
 	From string `json:"from,omitempty"`
+	// Notification is what to show, for notify.
+	Notification any `json:"notification,omitempty"`
 }
 
 // Event is one entry in the feed.
@@ -391,6 +402,28 @@ func (h *Hub) Send(id string, allowed func(Client) bool, c Command) (Command, er
 	default:
 		return c, ErrBusy
 	}
+}
+
+// Notify sends a notification to every online player allowed picks that
+// shows notifications, and says how many it went to. A player that's slow
+// to ask misses it; it's in the person's list of notifications anyway.
+func (h *Hub) Notify(allowed func(Client) bool, notification any) int {
+	h.mu.Lock()
+	defer h.mu.Unlock()
+	n := 0
+	for _, p := range h.clients {
+		if !p.Online || !p.Notifications || !allowed(*p) {
+			continue
+		}
+		h.seq++
+		c := Command{ID: h.now().Format("20060102150405") + "-" + strconv.Itoa(h.seq), Type: CommandNotify, Notification: notification}
+		select {
+		case p.queue <- c:
+			n++
+		default:
+		}
+	}
+	return n
 }
 
 // Client returns one player, if allowed may see it.

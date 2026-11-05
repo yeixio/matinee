@@ -18,6 +18,7 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"slices"
 	"strconv"
 	"strings"
 	"time"
@@ -226,6 +227,18 @@ func (c *Client) URL() string { return c.base.String() }
 type Status struct {
 	AppName string `json:"appName"`
 	Version string `json:"version"`
+	// BoxOfficeID is set when the app is Box Office (github.com/yeixio/boxoffice)
+	// answering as Radarr or Sonarr: the same id on both, so Matinee knows
+	// they're one server.
+	BoxOfficeID string `json:"boxOfficeId,omitempty"`
+	// BoxOfficeFeatures lists what that Box Office adds to the API, such as
+	// "notifications".
+	BoxOfficeFeatures []string `json:"boxOfficeFeatures,omitempty"`
+}
+
+// BoxOffice says whether the app is Box Office with a feature.
+func (s Status) BoxOffice(feature string) bool {
+	return s.BoxOfficeID != "" && slices.Contains(s.BoxOfficeFeatures, feature)
 }
 
 // Status checks the address and key reach the app this client is for.

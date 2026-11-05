@@ -1357,6 +1357,80 @@ paths:
               schema: { $ref: "#/components/schemas/Backups" }
         "400": { description: The file isn't a Matinee database. }
         "404": { description: No such backup. }
+  /notifications:
+    get:
+      summary: Your notifications
+      description: |
+        Newest first, up to `limit` (50 by default, at most 200), with how
+        many are unread. When Radarr or Sonarr is really Box Office, it says
+        when a title someone asked for is found and downloading, and when
+        it's ready; admins also hear about downloads that failed (see
+        `/admin/notifications`). A profile sees its own and its account's.
+        Open players that say `notifications: true` get each new one at
+        once, as a `notify` command. Not for kids profiles.
+      parameters:
+        - { name: limit, in: query, schema: { type: integer, minimum: 1, maximum: 200 } }
+      responses:
+        "200":
+          description: Notifications.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  notifications: { type: array, items: { $ref: "#/components/schemas/Notification" } }
+                  unread: { type: integer }
+  /notifications/read:
+    post:
+      summary: Mark notifications read
+      requestBody:
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/NotificationIDs" }
+      responses:
+        "204": { description: Marked. }
+  /notifications/clear:
+    post:
+      summary: Clear notifications
+      requestBody:
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/NotificationIDs" }
+      responses:
+        "204": { description: Cleared. }
+  /admin/notifications:
+    get:
+      summary: What admins are told about (admins only)
+      description: |
+        `admins` is `problems` (downloads that fail or look unsafe; the
+        default), `all` (every download, whoever asked for it) or `off`
+        (only titles they asked for themselves). `boxOffice` says, for
+        Radarr and Sonarr as connected, whether each is Box Office (its
+        `id`), which is where notifications come from.
+      responses:
+        "200":
+          description: The settings.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/NotificationSettings" }
+    put:
+      summary: Change what admins are told about (admins only)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [admins]
+              properties:
+                admins: { type: string, enum: [all, problems, off] }
+      responses:
+        "200":
+          description: The settings.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/NotificationSettings" }
+        "400": { $ref: "#/components/responses/Error" }
   /admin/alerts:
     get:
       summary: Alert settings, the alerts that are true now, and the latest sent (admins only)
@@ -4145,7 +4219,10 @@ paths:
               schema:
                 type: object
                 properties:
-                  commands: { type: array, items: { $ref: "#/components/schemas/Command" } }
+                  commands:
+                    type: array
+                    items:
+                      anyOf: [{ $ref: "#/components/schemas/Command" }, { $ref: "#/components/schemas/NotifyCommand" }]
                   restarting: { type: boolean }
         "404": { $ref: "#/components/responses/Error" }
     post:
@@ -5809,6 +5886,7 @@ components:
         app: { type: string, examples: [Matinee] }
         version: { type: string }
         commands: { type: array, items: { $ref: "#/components/schemas/CommandType" }, description: The commands this player takes; empty for none. }
+        notifications: { type: boolean, description: "It shows notifications (GET /notifications), so the server pushes new ones to it as notify commands." }
         playing:
           type: [object, "null"]
           description: What's open in the player; null or absent for nothing.
@@ -5825,6 +5903,45 @@ components:
             transcoding: { type: boolean }
             sleepAt: { type: integer, description: When the sleep timer stops playback, in milliseconds; 0 for no timer. }
             sleepAtEnd: { type: boolean, description: The sleep timer stops at the end of this item. }
+    Notification:
+      type: object
+      properties:
+        id: { type: string }
+        event: { type: string, description: "Such as download.grabbed, download.imported, download.completed, download.failed or download.quarantined." }
+        level: { type: string, enum: [info, warning, critical] }
+        title: { type: string, examples: ["Dune: Part Two (2024) is ready"] }
+        body: { type: string }
+        kind: { type: string, enum: [movie, show] }
+        tmdbId: { type: integer }
+        tvdbId: { type: integer }
+        poster: { type: string }
+        itemId: { type: integer, description: The title in the library, once it's there. }
+        createdAt: { type: integer, description: Unix seconds. }
+        read: { type: boolean }
+    NotificationIDs:
+      type: object
+      properties:
+        ids: { type: array, items: { type: string }, description: The notifications to change; none means all of yours. }
+    NotificationSettings:
+      type: object
+      properties:
+        admins: { type: string, enum: [all, problems, off] }
+        boxOffice:
+          type: array
+          items:
+            type: object
+            properties:
+              app: { type: string, enum: [radarr, sonarr] }
+              id: { type: string, description: "Box Office's id; absent when the app isn't Box Office." }
+              checkedAt: { type: integer, description: Milliseconds. }
+              error: { type: string }
+    NotifyCommand:
+      type: object
+      description: A notification for the person using the player, pushed by the server to players that say `notifications`.
+      properties:
+        id: { type: string }
+        type: { type: string, const: notify }
+        notification: { $ref: "#/components/schemas/Notification" }
     CommandType:
       type: string
       enum: [play, pause, stop, seek, next, previous, playItem, volume, mute, sleep, subtitles]

@@ -45,6 +45,22 @@ behaviour for the web player (`web/src/remote.ts`) and the apps. The API is
   seconds, so nobody wonders why the film paused by itself.
 - After a command, report the new state right away.
 
+## Notifications
+
+- A player that shows notifications says `notifications: true` in its
+  hello (it isn't in `commands`, since nobody else can send one). The
+  server then pushes each new notification for the person using it as a
+  command of type `notify`, with the notification in `notification`
+  (see `Notification` in the API). Don't report a new state after one.
+- Show it for a few seconds where it doesn't get in the way, with
+  **Watch** when it has an `itemId`. The full list is
+  `GET /notifications`; `POST /notifications/read` and
+  `POST /notifications/clear` take `ids`, or none for all.
+- A notify that arrives while nobody's looking is still in the list, so
+  a player that was closed shows the count when it opens.
+- They come from Box Office, when Matinee's Radarr or Sonarr connection
+  goes to it (see `internal/api/notifications.go`).
+
 ## Who can do what
 
 The home guest (devices at home that didn't sign in) can report and take

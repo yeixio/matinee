@@ -1404,5 +1404,27 @@
       "more": "Widać pierwsze 300. Znajdź kanał, aby zobaczyć inne.",
       "everything": "wszystko"
     }
+  },
+  "notifications": {
+    "title": "Powiadomienia",
+    "empty": "Nic nowego. Tutaj dowiesz się, kiedy to, o co prosiłeś, jest w drodze lub gotowe do obejrzenia.",
+    "clear": "Wyczyść wszystko",
+    "open": "Oglądaj",
+    "admins": {
+      "legend": "Powiadomienia Box Office dla administratorów",
+      "intro": "Box Office informuje ludzi w aplikacjach Matinee, kiedy to, o co prosili, jest w drodze i kiedy jest gotowe. Wybierz, o czym dowiadują się też administratorzy.",
+      "problems": {
+        "label": "Problemy",
+        "detail": "Pobrania, które się nie udają lub wyglądają na niebezpieczne."
+      },
+      "all": {
+        "label": "Wszystko",
+        "detail": "Każde pobieranie, które się zaczyna, kończy lub nie udaje, niezależnie od tego, kto prosił."
+      },
+      "off": {
+        "label": "Tylko własne",
+        "detail": "Tylko tytuły, o które sami prosili, jak wszyscy inni."
+      }
+    }
   }
 }

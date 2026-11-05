@@ -1382,5 +1382,27 @@
       "more": "Az első 300 látható. Keress rá egy csatornára a többiért.",
       "everything": "minden"
     }
+  },
+  "notifications": {
+    "title": "Értesítések",
+    "empty": "Nincs újdonság. Itt értesülsz, amikor amit kértél, úton van vagy nézhető.",
+    "clear": "Összes törlése",
+    "open": "Megnézem",
+    "admins": {
+      "legend": "Box Office-értesítések rendszergazdáknak",
+      "intro": "A Box Office szól az embereknek a Matinee-alkalmazásokban, amikor amit kértek, úton van, és amikor elkészült. Válaszd ki, miről hallanak a rendszergazdák is.",
+      "problems": {
+        "label": "Problémák",
+        "detail": "Letöltések, amelyek nem sikerülnek vagy nem tűnnek biztonságosnak."
+      },
+      "all": {
+        "label": "Minden",
+        "detail": "Minden letöltés, amely elindul, elkészül vagy nem sikerül, bárki kérte is."
+      },
+      "off": {
+        "label": "Csak a sajátjuk",
+        "detail": "Csak az általuk kért címek, mint bárki másnál."
+      }
+    }
   }
 }

@@ -1382,5 +1382,27 @@
       "more": "Näytetään ensimmäiset 300. Etsi kanava nähdäksesi muita.",
       "everything": "kaikki"
     }
+  },
+  "notifications": {
+    "title": "Ilmoitukset",
+    "empty": "Ei mitään uutta. Täällä kuulet, kun pyytämäsi on tulossa tai valmis katsottavaksi.",
+    "clear": "Tyhjennä kaikki",
+    "open": "Katso",
+    "admins": {
+      "legend": "Box Office -ilmoitukset ylläpitäjille",
+      "intro": "Box Office kertoo ihmisille Matinee-sovelluksissa, kun heidän pyytämänsä on tulossa ja kun se on valmis. Valitse, mistä ylläpitäjät kuulevat lisäksi.",
+      "problems": {
+        "label": "Ongelmat",
+        "detail": "Lataukset, jotka epäonnistuvat tai näyttävät vaarallisilta."
+      },
+      "all": {
+        "label": "Kaikki",
+        "detail": "Jokainen lataus, joka alkaa, valmistuu tai epäonnistuu, pyysipä sen kuka tahansa."
+      },
+      "off": {
+        "label": "Vain omat",
+        "detail": "Vain nimikkeet, joita he ovat itse pyytäneet, kuten muutkin."
+      }
+    }
   }
 }

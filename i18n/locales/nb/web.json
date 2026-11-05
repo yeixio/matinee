@@ -1382,5 +1382,27 @@
       "more": "Viser de første 300. Finn en kanal for å se andre.",
       "everything": "alt"
     }
+  },
+  "notifications": {
+    "title": "Varsler",
+    "empty": "Ingenting nytt. Her får du vite når noe du har bedt om er på vei eller klart til å se.",
+    "clear": "Fjern alle",
+    "open": "Se",
+    "admins": {
+      "legend": "Box Office-varsler for administratorer",
+      "intro": "Box Office sier fra til folk i Matinee-appene når det de har bedt om er på vei, og når det er klart. Velg hva administratorer også får høre om.",
+      "problems": {
+        "label": "Problemer",
+        "detail": "Nedlastinger som mislykkes eller virker utrygge."
+      },
+      "all": {
+        "label": "Alt",
+        "detail": "Hver nedlasting som starter, blir ferdig eller mislykkes, uansett hvem som ba om den."
+      },
+      "off": {
+        "label": "Bare egne",
+        "detail": "Bare titler de selv har bedt om, som alle andre."
+      }
+    }
   }
 }

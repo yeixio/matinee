@@ -1393,5 +1393,27 @@
       "more": "Se arată primele 300. Caută un canal pentru a vedea altele.",
       "everything": "tot"
     }
+  },
+  "notifications": {
+    "title": "Notificări",
+    "empty": "Nimic nou. Aici vei afla când ce ai cerut e pe drum sau gata de vizionat.",
+    "clear": "Șterge tot",
+    "open": "Vizionează",
+    "admins": {
+      "legend": "Notificări Box Office pentru administratori",
+      "intro": "Box Office anunță oamenii în aplicațiile Matinee când ce au cerut e pe drum și când e gata. Alege despre ce află și administratorii.",
+      "problems": {
+        "label": "Probleme",
+        "detail": "Descărcări care eșuează sau par nesigure."
+      },
+      "all": {
+        "label": "Tot",
+        "detail": "Fiecare descărcare care începe, se termină sau eșuează, oricine ar fi cerut-o."
+      },
+      "off": {
+        "label": "Doar ale lor",
+        "detail": "Doar titlurile cerute de ei înșiși, ca toți ceilalți."
+      }
+    }
   }
 }

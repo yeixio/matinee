@@ -122,6 +122,7 @@ type Server struct {
 	setUp           atomic.Bool     // the first account exists
 	draining        atomic.Bool     // the server is shutting down (see drain.go)
 	arrCache        ttlCache        // answers from Radarr and Sonarr (see arr.go)
+	boxOffices      boxOffices      // the Box Offices notifications come from (see notifications.go)
 	discoverCache   ttlCache        // answers from Overseerr (see discover.go)
 	catalogCache    ttlCache        // the official plugins (see plugins.go)
 	trailerCache    ttlCache        // trailer files' probes and TMDB's trailer lists (see trailers.go)
@@ -306,6 +307,11 @@ func (s *Server) routes() []route {
 		{"GET /admin/backups/{name}", adminOnly, s.downloadBackup},
 		{"DELETE /admin/backups/{name}", adminOnly, s.deleteBackup},
 		{"POST /admin/backups/{name}/restore", adminOnly, s.restoreBackup},
+		{"GET /notifications", signedIn, grownUps(s.listNotifications)},
+		{"POST /notifications/read", signedIn, grownUps(s.readNotifications)},
+		{"POST /notifications/clear", signedIn, grownUps(s.clearNotifications)},
+		{"GET /admin/notifications", adminOnly, s.getNotificationSettings},
+		{"PUT /admin/notifications", adminOnly, s.putNotificationSettings},
 		{"GET /admin/alerts", adminOnly, s.getAlerts},
 		{"PUT /admin/alerts", adminOnly, s.putAlerts},
 		{"POST /admin/alerts/test", adminOnly, s.testAlerts},

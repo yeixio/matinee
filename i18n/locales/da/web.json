@@ -1382,5 +1382,27 @@
       "more": "De første 300 vises. Find en kanal for at se andre.",
       "everything": "alt"
     }
+  },
+  "notifications": {
+    "title": "Notifikationer",
+    "empty": "Intet nyt. Her hører du, når noget, du har bedt om, er på vej eller klar til at se.",
+    "clear": "Ryd alle",
+    "open": "Se",
+    "admins": {
+      "legend": "Box Office-notifikationer til administratorer",
+      "intro": "Box Office giver folk besked i Matinee-apperne, når det, de har bedt om, er på vej, og når det er klar. Vælg, hvad administratorer også hører om.",
+      "problems": {
+        "label": "Problemer",
+        "detail": "Downloads, der mislykkes eller ser usikre ud."
+      },
+      "all": {
+        "label": "Alt",
+        "detail": "Hver download, der starter, bliver færdig eller mislykkes, uanset hvem der bad om den."
+      },
+      "off": {
+        "label": "Kun egne",
+        "detail": "Kun titler, de selv har bedt om, ligesom alle andre."
+      }
+    }
   }
 }

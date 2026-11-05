@@ -8,6 +8,7 @@ import { useAudio } from '../player/AudioPlayer'
 import { forgetAsked, isKids } from '../profiles'
 import { useHasLiveTV } from './ChannelLogo'
 import { useRequestOptions } from './Arr'
+import { NotificationBell, NotificationToasts } from './Notifications'
 
 export function LibraryIcon({ kind, className = 'size-5' }: { kind: string; className?: string }) {
   if (kind === 'tv') return <Tv className={className} />
@@ -136,6 +137,7 @@ export default function Shell({ user }: { user: User }) {
                 <CalendarClock className="size-5" />
               </NavLink>
             )}
+            {!kids && !user.guest && <NotificationBell />}
             {(arr || waiting > 0) && !user.guest && (
               <NavLink to="/requests" className={(a) => `relative ${iconLink(a)}`} aria-label={t('nav.requests')} title={t('nav.requests')}>
                 <Inbox className="size-5" />
@@ -183,6 +185,7 @@ export default function Shell({ user }: { user: User }) {
       <main className={`px-4 pt-4 md:px-8 md:pt-8 ${audio.current ? 'pb-44 md:pb-28' : 'pb-24 md:pb-12'}`}>
         <Outlet />
       </main>
+      {!kids && !user.guest && <NotificationToasts />}
 
       {/* Phone tab bar, as in the phone app: libraries and the rest of the desktop bar live under Libraries. */}
       <nav

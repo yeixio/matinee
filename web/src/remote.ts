@@ -5,7 +5,7 @@
 // One browser is one client, whatever tabs it has open: the tab holding the
 // lock talks to the server, and another takes over when it closes.
 
-import { ApiError } from './api'
+import { ApiError, type AppNotification } from './api'
 import { heardRestarting, RESTARTING_HEADER } from './player/reconnect'
 
 export type CommandType =
@@ -34,6 +34,11 @@ export type Command = {
   track?: string
   from?: string
 }
+
+// A notification the server pushes (type "notify"); it isn't a player command.
+type Incoming = Command | { id: string; type: 'notify'; notification: AppNotification }
+
+const notifyListeners = new Set<(n: AppNotification) => void>()
 
 export type Playing = {
   itemId: number
@@ -109,6 +114,7 @@ function hello() {
     platform: 'web',
     app: 'Matinee web',
     commands: top()?.commands() ?? ['playItem'],
+    notifications: true,
     playing: top()?.state() ?? null,
   }
 }
@@ -149,7 +155,10 @@ async function loop(signal: AbortSignal) {
       failures = 0
       // The server is shutting down; players say so (player/reconnect.ts).
       if (res?.restarting) heardRestarting()
-      for (const c of (res?.commands ?? []) as Command[]) handle(c)
+      for (const c of (res?.commands ?? []) as Incoming[]) {
+        if (c.type === 'notify') notifyListeners.forEach((l) => l(c.notification))
+        else handle(c)
+      }
     } catch (e) {
       if (signal.aborted) return
       // The server forgot this client (it restarted): say hello again.
@@ -212,6 +221,14 @@ export const remote = {
       const i = players.indexOf(hooks)
       if (i >= 0) players.splice(i, 1)
       remote.report()
+    }
+  },
+  // Hear notifications as the server pushes them, until the returned
+  // function is called.
+  onNotify(listener: (n: AppNotification) => void) {
+    notifyListeners.add(listener)
+    return () => {
+      notifyListeners.delete(listener)
     }
   },
   // Something changed: tell the server soon. Changes close together go as one.

@@ -1382,5 +1382,27 @@
       "more": "İlk 300 gösteriliyor. Diğerlerini görmek için bir kanal arayın.",
       "everything": "her şey"
     }
+  },
+  "notifications": {
+    "title": "Bildirimler",
+    "empty": "Yeni bir şey yok. İstediğin bir şey yola çıktığında veya izlemeye hazır olduğunda burada haber alırsın.",
+    "clear": "Tümünü temizle",
+    "open": "İzle",
+    "admins": {
+      "legend": "Yöneticiler için Box Office bildirimleri",
+      "intro": "Box Office, Matinee uygulamalarında insanlara istedikleri şey yola çıktığında ve hazır olduğunda haber verir. Yöneticilerin ayrıca neleri duyacağını seç.",
+      "problems": {
+        "label": "Sorunlar",
+        "detail": "Başarısız olan veya güvensiz görünen indirmeler."
+      },
+      "all": {
+        "label": "Her şey",
+        "detail": "Kim istemiş olursa olsun başlayan, biten veya başarısız olan her indirme."
+      },
+      "off": {
+        "label": "Yalnızca kendilerininki",
+        "detail": "Herkes gibi yalnızca kendi istedikleri başlıklar."
+      }
+    }
   }
 }

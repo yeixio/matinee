@@ -1393,5 +1393,27 @@
       "more": "Se muestran los 300 primeros. Busca un canal para ver otros.",
       "everything": "todo"
     }
+  },
+  "notifications": {
+    "title": "Notificaciones",
+    "empty": "Nada nuevo. Aquí sabrás cuándo lo que pediste está en camino o listo para ver.",
+    "clear": "Borrar todo",
+    "open": "Ver",
+    "admins": {
+      "legend": "Notificaciones de Box Office para administradores",
+      "intro": "Box Office avisa a la gente en las apps de Matinee cuando lo que pidió está en camino y cuando está listo. Elige de qué se enteran también los administradores.",
+      "problems": {
+        "label": "Problemas",
+        "detail": "Descargas que fallan o parecen inseguras."
+      },
+      "all": {
+        "label": "Todo",
+        "detail": "Cada descarga que empieza, termina o falla, la pidiera quien la pidiera."
+      },
+      "off": {
+        "label": "Solo lo suyo",
+        "detail": "Solo los títulos que pidieron ellos mismos, como todos los demás."
+      }
+    }
   }
 }

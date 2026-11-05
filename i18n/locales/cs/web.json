@@ -1404,5 +1404,27 @@
       "more": "Zobrazeno prvních 300. Najděte kanál, abyste viděli další.",
       "everything": "vše"
     }
+  },
+  "notifications": {
+    "title": "Oznámení",
+    "empty": "Nic nového. Tady se dozvíte, až bude to, o co jste požádali, na cestě nebo připravené ke sledování.",
+    "clear": "Vymazat vše",
+    "open": "Přehrát",
+    "admins": {
+      "legend": "Oznámení Box Office pro správce",
+      "intro": "Box Office dává lidem v aplikacích Matinee vědět, když je to, o co požádali, na cestě a když je to připravené. Vyberte, o čem se dozvědí i správci.",
+      "problems": {
+        "label": "Problémy",
+        "detail": "Stahování, která selžou nebo vypadají nebezpečně."
+      },
+      "all": {
+        "label": "Vše",
+        "detail": "Každé stahování, které začne, skončí nebo selže, ať o něj požádal kdokoli."
+      },
+      "off": {
+        "label": "Jen vlastní",
+        "detail": "Jen tituly, o které sami požádali, jako všichni ostatní."
+      }
+    }
   }
 }
