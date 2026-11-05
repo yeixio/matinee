@@ -600,6 +600,24 @@
       "madeAs": "Făcute ca {{name}}",
       "sameName": "Cei cu un cont Overseerr cu același nume cer în numele lor. Overseerr decide ce cereri au nevoie de aprobare, după permisiunile fiecăruia de acolo.",
       "confirmDisconnect": "Deconectezi Overseerr? Fila Descoperă dispare."
+    },
+    "boxoffice": {
+      "notConnected": "Neconectat · găsește și descarcă filme și seriale",
+      "moviesOnly": "Filmele merg la Box Office, serialele încă nu · {{url}}",
+      "showsOnly": "Serialele merg la Box Office, filmele încă nu · {{url}}",
+      "intro": "Box Office găsește și descarcă filme și seriale. Dacă îl conectezi aici, Radarr și Sonarr vor indica spre el, deci cererile, ce urmează și notificările trec prin el.",
+      "looking": "Se caută Box Office…",
+      "found": "Box Office {{version}} la {{url}}",
+      "notFound": "Matinee nu a găsit singur Box Office. Introdu adresa, de exemplu http://boxoffice:7272.",
+      "keyWhere": "Box Office → Settings → Connect Matinee",
+      "keySteps": "Unde găsești cheia API",
+      "step1": "Deschide Box Office și conectează-te ca administrator.",
+      "step2": "Mergi la Settings → Connect Matinee.",
+      "step3": "Lângă API key, alege butonul de copiere, apoi lipește cheia aici.",
+      "replaces": "Salvarea face ca Radarr și Sonarr de mai jos să indice spre Box Office. Alege acolo calitatea și dosarul pentru titlurile noi.",
+      "noShowsFolder": "Box Office nu are încă un dosar rădăcină pentru seriale, deci se conectează doar filmele. Adaugă unul în Box Office → Settings, apoi salvează din nou.",
+      "noMoviesFolder": "Box Office nu are încă un dosar rădăcină pentru filme, deci se conectează doar serialele. Adaugă unul în Box Office → Settings, apoi salvează din nou.",
+      "confirmDisconnect": "Deconectezi Box Office? Se deconectează și Radarr și Sonarr. Titlurile deja în el rămân acolo."
     }
   },
   "requests": {
@@ -873,7 +891,7 @@
       },
       "add-ons": {
         "title": "Suplimente",
-        "hint": "Radarr, Sonarr, Overseerr și pluginuri"
+        "hint": "Box Office, Radarr, Sonarr, Overseerr și pluginuri"
       },
       "health": {
         "title": "Starea serverului",

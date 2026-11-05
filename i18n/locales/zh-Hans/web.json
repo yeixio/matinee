@@ -592,6 +592,24 @@
       "madeAs": "以 {{name}} 的身份发出",
       "sameName": "在 Overseerr 中有同名帐户的人会以自己的身份请求。哪些请求需要批准,由 Overseerr 根据每个用户在那里的权限决定。",
       "confirmDisconnect": "断开 Overseerr?“发现”标签将会消失。"
+    },
+    "boxoffice": {
+      "notConnected": "未连接 · 查找并下载电影和剧集",
+      "moviesOnly": "电影走 Box Office，剧集还没有 · {{url}}",
+      "showsOnly": "剧集走 Box Office，电影还没有 · {{url}}",
+      "intro": "Box Office 会查找并下载电影和剧集。在这里连接后，Radarr 和 Sonarr 都会指向它，请求、即将上映和通知都经由它。",
+      "looking": "正在查找 Box Office…",
+      "found": "{{url}} 上的 Box Office {{version}}",
+      "notFound": "Matinee 没能自己找到 Box Office。请输入它的地址，例如 http://boxoffice:7272。",
+      "keyWhere": "Box Office → Settings → Connect Matinee",
+      "keySteps": "在哪里找到 API 密钥",
+      "step1": "打开 Box Office，以管理员身份登录。",
+      "step2": "前往 Settings → Connect Matinee。",
+      "step3": "在 API key 旁选择复制按钮，然后粘贴到这里。",
+      "replaces": "保存后，下方的 Radarr 和 Sonarr 会指向 Box Office。新内容的画质和文件夹在那里选择。",
+      "noShowsFolder": "Box Office 还没有剧集根文件夹，所以只连接电影。请在 Box Office → Settings 中添加一个，然后再保存。",
+      "noMoviesFolder": "Box Office 还没有电影根文件夹，所以只连接剧集。请在 Box Office → Settings 中添加一个，然后再保存。",
+      "confirmDisconnect": "断开 Box Office？Radarr 和 Sonarr 也会断开。已经在里面的内容会保留。"
     }
   },
   "requests": {
@@ -865,7 +883,7 @@
       },
       "add-ons": {
         "title": "附加功能",
-        "hint": "Radarr、Sonarr、Overseerr 和插件"
+        "hint": "Box Office、Radarr、Sonarr、Overseerr 和插件"
       },
       "health": {
         "title": "服务器状态",

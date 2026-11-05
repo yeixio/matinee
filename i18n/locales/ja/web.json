@@ -592,6 +592,24 @@
       "madeAs": "{{name}}として送信",
       "sameName": "同じ名前のOverseerrアカウントを持つ人は本人としてリクエストします。どのリクエストに承認が必要かは、Overseerr側の各ユーザーの権限で決まります。",
       "confirmDisconnect": "Overseerrの接続を解除しますか?「見つける」タブはなくなります。"
+    },
+    "boxoffice": {
+      "notConnected": "未接続 · 映画と番組を探してダウンロードします",
+      "moviesOnly": "映画は Box Office へ、番組はまだです · {{url}}",
+      "showsOnly": "番組は Box Office へ、映画はまだです · {{url}}",
+      "intro": "Box Office は映画と番組を探してダウンロードします。ここで接続すると Radarr と Sonarr がそちらを向き、リクエスト、近日公開、通知がすべて Box Office を通ります。",
+      "looking": "Box Office を探しています…",
+      "found": "{{url}} の Box Office {{version}}",
+      "notFound": "Matinee は Box Office を自動で見つけられませんでした。http://boxoffice:7272 のようにアドレスを入力してください。",
+      "keyWhere": "Box Office → Settings → Connect Matinee",
+      "keySteps": "API キーの場所",
+      "step1": "Box Office を開き、管理者としてサインインします。",
+      "step2": "Settings → Connect Matinee に進みます。",
+      "step3": "API key の横のコピーボタンを選び、ここに貼り付けます。",
+      "replaces": "保存すると、下の Radarr と Sonarr が Box Office を向きます。新しいタイトルの画質とフォルダーはそちらで選びます。",
+      "noShowsFolder": "Box Office には番組のルートフォルダーがまだないため、映画だけが接続されます。Box Office → Settings で追加してから、もう一度保存してください。",
+      "noMoviesFolder": "Box Office には映画のルートフォルダーがまだないため、番組だけが接続されます。Box Office → Settings で追加してから、もう一度保存してください。",
+      "confirmDisconnect": "Box Office の接続を解除しますか？Radarr と Sonarr も解除されます。すでに入っているタイトルはそのまま残ります。"
     }
   },
   "requests": {
@@ -865,7 +883,7 @@
       },
       "add-ons": {
         "title": "アドオン",
-        "hint": "Radarr、Sonarr、Overseerr、プラグイン"
+        "hint": "Box Office、Radarr、Sonarr、Overseerr、プラグイン"
       },
       "health": {
         "title": "サーバーの状態",

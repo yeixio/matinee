@@ -596,6 +596,24 @@
       "madeAs": "Gjøres som {{name}}",
       "sameName": "De som har en Overseerr-konto med samme navn, spør som seg selv. Overseerr avgjør hvilke forespørsler som må godkjennes, ut fra hver brukers tillatelser der.",
       "confirmDisconnect": "Koble fra Overseerr? Fanen Utforsk forsvinner."
+    },
+    "boxoffice": {
+      "notConnected": "Ikke tilkoblet · finner og laster ned filmer og serier",
+      "moviesOnly": "Filmer går til Box Office, serier ikke ennå · {{url}}",
+      "showsOnly": "Serier går til Box Office, filmer ikke ennå · {{url}}",
+      "intro": "Box Office finner og laster ned filmer og serier. Kobler du det til her, peker Radarr og Sonarr på det, så ønsker, kommende og varsler går gjennom det.",
+      "looking": "Ser etter Box Office…",
+      "found": "Box Office {{version}} på {{url}}",
+      "notFound": "Matinee fant ikke Box Office selv. Skriv inn adressen, for eksempel http://boxoffice:7272.",
+      "keyWhere": "Box Office → Settings → Connect Matinee",
+      "keySteps": "Hvor du finner API-nøkkelen",
+      "step1": "Åpne Box Office og logg inn som administrator.",
+      "step2": "Gå til Settings → Connect Matinee.",
+      "step3": "Velg kopieringsknappen ved siden av API key, og lim den inn her.",
+      "replaces": "Når du lagrer, peker Radarr og Sonarr nedenfor på Box Office. Velg kvalitet og mappe for nye titler der.",
+      "noShowsFolder": "Box Office har ingen rotmappe for serier ennå, så bare filmer kobles til. Legg til en under Box Office → Settings og lagre igjen.",
+      "noMoviesFolder": "Box Office har ingen rotmappe for filmer ennå, så bare serier kobles til. Legg til en under Box Office → Settings og lagre igjen.",
+      "confirmDisconnect": "Koble fra Box Office? Radarr og Sonarr kobles også fra. Titler som allerede er der, blir værende."
     }
   },
   "requests": {
@@ -869,7 +887,7 @@
       },
       "add-ons": {
         "title": "Tillegg",
-        "hint": "Radarr, Sonarr, Overseerr og programtillegg"
+        "hint": "Box Office, Radarr, Sonarr, Overseerr og programtillegg"
       },
       "health": {
         "title": "Serverhelse",

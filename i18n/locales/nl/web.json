@@ -596,6 +596,24 @@
       "madeAs": "Gedaan als {{name}}",
       "sameName": "Wie een Overseerr-account met dezelfde naam heeft, vraagt aan als zichzelf. Overseerr bepaalt welke aanvragen goedkeuring nodig hebben, op basis van ieders rechten daar.",
       "confirmDisconnect": "Overseerr ontkoppelen? Het tabblad Ontdekken verdwijnt."
+    },
+    "boxoffice": {
+      "notConnected": "Niet verbonden · zoekt en downloadt films en series",
+      "moviesOnly": "Films gaan naar Box Office, series nog niet · {{url}}",
+      "showsOnly": "Series gaan naar Box Office, films nog niet · {{url}}",
+      "intro": "Box Office zoekt en downloadt films en series. Als je het hier verbindt, wijzen Radarr en Sonarr ernaar, zodat aanvragen, binnenkort en meldingen er allemaal via gaan.",
+      "looking": "Box Office zoeken…",
+      "found": "Box Office {{version}} op {{url}}",
+      "notFound": "Matinee kon Box Office niet zelf vinden. Vul het adres in, zoals http://boxoffice:7272.",
+      "keyWhere": "Box Office → Settings → Connect Matinee",
+      "keySteps": "Waar je de API-sleutel vindt",
+      "step1": "Open Box Office en log in als beheerder.",
+      "step2": "Ga naar Settings → Connect Matinee.",
+      "step3": "Kies naast API key de kopieerknop en plak hem hier.",
+      "replaces": "Bij opslaan wijzen Radarr en Sonarr hieronder naar Box Office. Kies daar de kwaliteit en map voor nieuwe titels.",
+      "noShowsFolder": "Box Office heeft nog geen hoofdmap voor series, dus alleen films worden verbonden. Voeg er een toe onder Box Office → Settings en sla opnieuw op.",
+      "noMoviesFolder": "Box Office heeft nog geen hoofdmap voor films, dus alleen series worden verbonden. Voeg er een toe onder Box Office → Settings en sla opnieuw op.",
+      "confirmDisconnect": "Box Office loskoppelen? Radarr en Sonarr worden ook losgekoppeld. Titels die er al in staan blijven daar."
     }
   },
   "requests": {
@@ -869,7 +887,7 @@
       },
       "add-ons": {
         "title": "Uitbreidingen",
-        "hint": "Radarr, Sonarr, Overseerr en plug-ins"
+        "hint": "Box Office, Radarr, Sonarr, Overseerr en plug-ins"
       },
       "health": {
         "title": "Servergezondheid",

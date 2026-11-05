@@ -596,6 +596,24 @@
       "madeAs": "{{name}} olarak yapılır",
       "sameName": "Aynı adla Overseerr hesabı olanlar kendi adlarına ister. Hangi isteklerin onay gerektirdiğine Overseerr, oradaki kullanıcı izinlerine göre karar verir.",
       "confirmDisconnect": "Overseerr bağlantısı kesilsin mi? Keşfet sekmesi kaybolur."
+    },
+    "boxoffice": {
+      "notConnected": "Bağlı değil · film ve dizi bulur ve indirir",
+      "moviesOnly": "Filmler Box Office'e gidiyor, diziler henüz değil · {{url}}",
+      "showsOnly": "Diziler Box Office'e gidiyor, filmler henüz değil · {{url}}",
+      "intro": "Box Office film ve dizi bulur ve indirir. Burada bağlarsanız Radarr ve Sonarr ona yönelir; istekler, yakında çıkacaklar ve bildirimler onun üzerinden gider.",
+      "looking": "Box Office aranıyor…",
+      "found": "{{url}} adresinde Box Office {{version}}",
+      "notFound": "Matinee Box Office'i kendisi bulamadı. Adresini girin, örneğin http://boxoffice:7272.",
+      "keyWhere": "Box Office → Settings → Connect Matinee",
+      "keySteps": "API anahtarı nerede",
+      "step1": "Box Office'i açın ve yönetici olarak oturum açın.",
+      "step2": "Settings → Connect Matinee bölümüne gidin.",
+      "step3": "API key yanındaki kopyala düğmesini seçin ve buraya yapıştırın.",
+      "replaces": "Kaydetmek aşağıdaki Radarr ve Sonarr'ı Box Office'e yönlendirir. Yeni başlıkların kalitesini ve klasörünü orada seçin.",
+      "noShowsFolder": "Box Office'te henüz dizi kök klasörü yok, bu yüzden yalnızca filmler bağlanır. Box Office → Settings altında bir tane ekleyip yeniden kaydedin.",
+      "noMoviesFolder": "Box Office'te henüz film kök klasörü yok, bu yüzden yalnızca diziler bağlanır. Box Office → Settings altında bir tane ekleyip yeniden kaydedin.",
+      "confirmDisconnect": "Box Office'in bağlantısı kesilsin mi? Radarr ve Sonarr'ın da bağlantısı kesilir. İçindeki başlıklar orada kalır."
     }
   },
   "requests": {
@@ -869,7 +887,7 @@
       },
       "add-ons": {
         "title": "Eklentiler",
-        "hint": "Radarr, Sonarr, Overseerr ve eklentiler"
+        "hint": "Box Office, Radarr, Sonarr, Overseerr ve eklentiler"
       },
       "health": {
         "title": "Sunucu durumu",

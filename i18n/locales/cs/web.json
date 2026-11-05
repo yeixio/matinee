@@ -604,6 +604,24 @@
       "madeAs": "Podávané jako {{name}}",
       "sameName": "Kdo má v Overseerr účet se stejným jménem, žádá sám za sebe. Overseerr podle oprávnění každého uživatele rozhoduje, které žádosti potřebují schválení.",
       "confirmDisconnect": "Odpojit Overseerr? Karta Objevovat zmizí."
+    },
+    "boxoffice": {
+      "notConnected": "Nepřipojeno · hledá a stahuje filmy a seriály",
+      "moviesOnly": "Filmy jdou do Box Office, seriály zatím ne · {{url}}",
+      "showsOnly": "Seriály jdou do Box Office, filmy zatím ne · {{url}}",
+      "intro": "Box Office hledá a stahuje filmy a seriály. Když ho tu připojíš, Radarr a Sonarr na něj ukážou, takže žádosti, připravované tituly i oznámení jdou přes něj.",
+      "looking": "Hledám Box Office…",
+      "found": "Box Office {{version}} na {{url}}",
+      "notFound": "Matinee Box Office sám nenašel. Zadej jeho adresu, třeba http://boxoffice:7272.",
+      "keyWhere": "Box Office → Settings → Connect Matinee",
+      "keySteps": "Kde najdeš klíč API",
+      "step1": "Otevři Box Office a přihlas se jako správce.",
+      "step2": "Jdi do Settings → Connect Matinee.",
+      "step3": "Vedle API key zvol tlačítko kopírování a vlož ho sem.",
+      "replaces": "Uložením Radarr a Sonarr níže ukážou na Box Office. Kvalitu a složku pro nové tituly vybereš tam.",
+      "noShowsFolder": "Box Office zatím nemá kořenovou složku pro seriály, takže se připojí jen filmy. Přidej ji v Box Office → Settings a ulož znovu.",
+      "noMoviesFolder": "Box Office zatím nemá kořenovou složku pro filmy, takže se připojí jen seriály. Přidej ji v Box Office → Settings a ulož znovu.",
+      "confirmDisconnect": "Odpojit Box Office? Odpojí se i Radarr a Sonarr. Tituly, které už v něm jsou, tam zůstanou."
     }
   },
   "requests": {
@@ -877,7 +895,7 @@
       },
       "add-ons": {
         "title": "Doplňky",
-        "hint": "Radarr, Sonarr, Overseerr a pluginy"
+        "hint": "Box Office, Radarr, Sonarr, Overseerr a doplňky"
       },
       "health": {
         "title": "Stav serveru",

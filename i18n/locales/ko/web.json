@@ -592,6 +592,24 @@
       "madeAs": "{{name}}(으)로 요청",
       "sameName": "같은 이름의 Overseerr 계정이 있으면 본인 이름으로 요청해요. 어떤 요청에 승인이 필요한지는 Overseerr가 각 사용자의 권한으로 정해요.",
       "confirmDisconnect": "Overseerr 연결을 해제할까요? 둘러보기 탭이 사라져요."
+    },
+    "boxoffice": {
+      "notConnected": "연결 안 됨 · 영화와 시리즈를 찾아 다운로드해요",
+      "moviesOnly": "영화는 Box Office로 가고, 시리즈는 아직이에요 · {{url}}",
+      "showsOnly": "시리즈는 Box Office로 가고, 영화는 아직이에요 · {{url}}",
+      "intro": "Box Office는 영화와 시리즈를 찾아 다운로드해요. 여기서 연결하면 Radarr와 Sonarr가 Box Office를 가리켜서 요청, 공개 예정, 알림이 모두 Box Office를 거쳐요.",
+      "looking": "Box Office를 찾는 중…",
+      "found": "{{url}}의 Box Office {{version}}",
+      "notFound": "Matinee가 Box Office를 스스로 찾지 못했어요. http://boxoffice:7272처럼 주소를 입력하세요.",
+      "keyWhere": "Box Office → Settings → Connect Matinee",
+      "keySteps": "API 키를 찾는 곳",
+      "step1": "Box Office를 열고 관리자로 로그인하세요.",
+      "step2": "Settings → Connect Matinee로 이동하세요.",
+      "step3": "API key 옆의 복사 버튼을 누른 뒤 여기에 붙여 넣으세요.",
+      "replaces": "저장하면 아래의 Radarr와 Sonarr가 Box Office를 가리켜요. 새 콘텐츠의 화질과 폴더는 거기서 고르세요.",
+      "noShowsFolder": "Box Office에 아직 시리즈 루트 폴더가 없어서 영화만 연결돼요. Box Office → Settings에서 추가한 뒤 다시 저장하세요.",
+      "noMoviesFolder": "Box Office에 아직 영화 루트 폴더가 없어서 시리즈만 연결돼요. Box Office → Settings에서 추가한 뒤 다시 저장하세요.",
+      "confirmDisconnect": "Box Office 연결을 끊을까요? Radarr와 Sonarr도 연결이 끊겨요. 이미 들어 있는 콘텐츠는 그대로 남아요."
     }
   },
   "requests": {
@@ -865,7 +883,7 @@
       },
       "add-ons": {
         "title": "부가 기능",
-        "hint": "Radarr, Sonarr, Overseerr 및 플러그인"
+        "hint": "Box Office, Radarr, Sonarr, Overseerr, 플러그인"
       },
       "health": {
         "title": "서버 상태",

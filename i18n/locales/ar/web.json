@@ -612,6 +612,24 @@
       "madeAs": "تُرسل باسم {{name}}",
       "sameName": "من لديه حساب Overseerr بالاسم نفسه يطلب باسمه. يقرر Overseerr أي الطلبات تحتاج إلى موافقة، حسب صلاحيات كل مستخدم هناك.",
       "confirmDisconnect": "فصل Overseerr؟ سيختفي تبويب استكشاف."
+    },
+    "boxoffice": {
+      "notConnected": "غير متصل · يعثر على الأفلام والمسلسلات وينزّلها",
+      "moviesOnly": "الأفلام تذهب إلى Box Office، والمسلسلات ليس بعد · {{url}}",
+      "showsOnly": "المسلسلات تذهب إلى Box Office، والأفلام ليس بعد · {{url}}",
+      "intro": "يعثر Box Office على الأفلام والمسلسلات وينزّلها. ربطه هنا يوجّه Radarr وSonarr إليه، فتمر الطلبات والقادم قريبًا والإشعارات كلها عبره.",
+      "looking": "جارٍ البحث عن Box Office…",
+      "found": "Box Office {{version}} على {{url}}",
+      "notFound": "لم يعثر Matinee على Box Office بنفسه. أدخل عنوانه، مثل http://boxoffice:7272.",
+      "keyWhere": "Box Office → Settings → Connect Matinee",
+      "keySteps": "أين تجد مفتاح API",
+      "step1": "افتح Box Office وسجّل الدخول كمشرف.",
+      "step2": "انتقل إلى Settings → Connect Matinee.",
+      "step3": "بجوار API key، اختر زر النسخ ثم الصقه هنا.",
+      "replaces": "الحفظ يوجّه Radarr وSonarr أدناه إلى Box Office. اختر هناك الجودة والمجلد للعناوين الجديدة.",
+      "noShowsFolder": "لا يوجد في Box Office مجلد جذري للمسلسلات بعد، لذا تُربط الأفلام فقط. أضف واحدًا في Box Office → Settings ثم احفظ مرة أخرى.",
+      "noMoviesFolder": "لا يوجد في Box Office مجلد جذري للأفلام بعد، لذا تُربط المسلسلات فقط. أضف واحدًا في Box Office → Settings ثم احفظ مرة أخرى.",
+      "confirmDisconnect": "فصل Box Office؟ سيُفصل Radarr وSonarr أيضًا. العناوين الموجودة فيه تبقى هناك."
     }
   },
   "requests": {
@@ -885,7 +903,7 @@
       },
       "add-ons": {
         "title": "الإضافات",
-        "hint": "Radarr وSonarr وOverseerr والإضافات"
+        "hint": "Box Office وRadarr وSonarr وOverseerr والإضافات"
       },
       "health": {
         "title": "حالة الخادم",

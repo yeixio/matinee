@@ -592,6 +592,24 @@
       "madeAs": "Dibuat sebagai {{name}}",
       "sameName": "Orang yang mempunyai akaun Overseerr dengan nama yang sama meminta atas nama sendiri. Overseerr menentukan permintaan mana yang perlu diluluskan, berdasarkan kebenaran setiap pengguna di sana.",
       "confirmDisconnect": "Putuskan Overseerr? Tab Teroka akan hilang."
+    },
+    "boxoffice": {
+      "notConnected": "Tidak disambung · mencari dan memuat turun filem dan rancangan",
+      "moviesOnly": "Filem pergi ke Box Office, rancangan belum lagi · {{url}}",
+      "showsOnly": "Rancangan pergi ke Box Office, filem belum lagi · {{url}}",
+      "intro": "Box Office mencari dan memuat turun filem dan rancangan. Menyambungkannya di sini menghalakan Radarr dan Sonarr kepadanya, jadi permintaan, akan datang dan pemberitahuan melaluinya.",
+      "looking": "Mencari Box Office…",
+      "found": "Box Office {{version}} di {{url}}",
+      "notFound": "Matinee tidak menjumpai Box Office sendiri. Masukkan alamatnya, contohnya http://boxoffice:7272.",
+      "keyWhere": "Box Office → Settings → Connect Matinee",
+      "keySteps": "Di mana kunci API",
+      "step1": "Buka Box Office dan log masuk sebagai pentadbir.",
+      "step2": "Pergi ke Settings → Connect Matinee.",
+      "step3": "Di sebelah API key, pilih butang salin, kemudian tampal di sini.",
+      "replaces": "Menyimpan menghalakan Radarr dan Sonarr di bawah ke Box Office. Pilih kualiti dan folder untuk tajuk baharu di sana.",
+      "noShowsFolder": "Box Office belum ada folder akar rancangan, jadi hanya filem disambungkan. Tambah satu di Box Office → Settings, kemudian simpan semula.",
+      "noMoviesFolder": "Box Office belum ada folder akar filem, jadi hanya rancangan disambungkan. Tambah satu di Box Office → Settings, kemudian simpan semula.",
+      "confirmDisconnect": "Putuskan Box Office? Radarr dan Sonarr juga diputuskan. Tajuk yang sudah ada kekal di sana."
     }
   },
   "requests": {
@@ -865,7 +883,7 @@
       },
       "add-ons": {
         "title": "Tambahan",
-        "hint": "Radarr, Sonarr, Overseerr dan pemalam"
+        "hint": "Box Office, Radarr, Sonarr, Overseerr dan pemalam"
       },
       "health": {
         "title": "Kesihatan pelayan",

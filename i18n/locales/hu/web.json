@@ -596,6 +596,24 @@
       "madeAs": "{{name}} nevében",
       "sameName": "Akinek ugyanilyen nevű Overseerr-fiókja van, a saját nevében kér. Az Overseerr dönti el az ottani jogosultságok alapján, mely kérésekhez kell jóváhagyás.",
       "confirmDisconnect": "Leválasztod az Overseerrt? A Felfedezés lap eltűnik."
+    },
+    "boxoffice": {
+      "notConnected": "Nincs csatlakoztatva · filmeket és sorozatokat keres és tölt le",
+      "moviesOnly": "A filmek a Box Office-hoz mennek, a sorozatok még nem · {{url}}",
+      "showsOnly": "A sorozatok a Box Office-hoz mennek, a filmek még nem · {{url}}",
+      "intro": "A Box Office filmeket és sorozatokat keres és tölt le. Ha itt csatlakoztatod, a Radarr és a Sonarr rá mutat, így a kérések, a hamarosan érkezők és az értesítések rajta mennek át.",
+      "looking": "A Box Office keresése…",
+      "found": "Box Office {{version}}: {{url}}",
+      "notFound": "A Matinee nem találta meg magától a Box Office-t. Add meg a címét, például http://boxoffice:7272.",
+      "keyWhere": "Box Office → Settings → Connect Matinee",
+      "keySteps": "Hol találod az API-kulcsot",
+      "step1": "Nyisd meg a Box Office-t, és jelentkezz be adminként.",
+      "step2": "Menj ide: Settings → Connect Matinee.",
+      "step3": "Az API key mellett válaszd a másolás gombot, majd illeszd be ide.",
+      "replaces": "Mentéskor a lenti Radarr és Sonarr a Box Office-ra mutat. Az új címek minőségét és mappáját ott választod.",
+      "noShowsFolder": "A Box Office-ban még nincs gyökérmappa sorozatokhoz, ezért csak a filmek csatlakoznak. Adj hozzá egyet itt: Box Office → Settings, majd ments újra.",
+      "noMoviesFolder": "A Box Office-ban még nincs gyökérmappa filmekhez, ezért csak a sorozatok csatlakoznak. Adj hozzá egyet itt: Box Office → Settings, majd ments újra.",
+      "confirmDisconnect": "Leválasztod a Box Office-t? A Radarr és a Sonarr is leválik. A benne lévő címek ott maradnak."
     }
   },
   "requests": {
@@ -869,7 +887,7 @@
       },
       "add-ons": {
         "title": "Bővítmények",
-        "hint": "Radarr, Sonarr, Overseerr és pluginok"
+        "hint": "Box Office, Radarr, Sonarr, Overseerr és bővítmények"
       },
       "health": {
         "title": "Szerverállapot",

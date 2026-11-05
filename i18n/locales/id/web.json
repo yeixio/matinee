@@ -592,6 +592,24 @@
       "madeAs": "Dibuat sebagai {{name}}",
       "sameName": "Orang yang punya akun Overseerr dengan nama yang sama meminta atas nama sendiri. Overseerr menentukan permintaan mana yang perlu disetujui, dari izin tiap pengguna di sana.",
       "confirmDisconnect": "Putuskan Overseerr? Tab Jelajahi akan hilang."
+    },
+    "boxoffice": {
+      "notConnected": "Tidak terhubung · mencari dan mengunduh film dan serial",
+      "moviesOnly": "Film masuk ke Box Office, serial belum · {{url}}",
+      "showsOnly": "Serial masuk ke Box Office, film belum · {{url}}",
+      "intro": "Box Office mencari dan mengunduh film dan serial. Menghubungkannya di sini mengarahkan Radarr dan Sonarr ke sana, jadi permintaan, segera hadir, dan notifikasi lewat sana.",
+      "looking": "Mencari Box Office…",
+      "found": "Box Office {{version}} di {{url}}",
+      "notFound": "Matinee tidak menemukan Box Office sendiri. Masukkan alamatnya, misalnya http://boxoffice:7272.",
+      "keyWhere": "Box Office → Settings → Connect Matinee",
+      "keySteps": "Tempat menemukan kunci API",
+      "step1": "Buka Box Office dan masuk sebagai admin.",
+      "step2": "Buka Settings → Connect Matinee.",
+      "step3": "Di samping API key, pilih tombol salin, lalu tempel di sini.",
+      "replaces": "Menyimpan mengarahkan Radarr dan Sonarr di bawah ke Box Office. Pilih kualitas dan folder untuk judul baru di sana.",
+      "noShowsFolder": "Box Office belum punya folder root serial, jadi hanya film yang terhubung. Tambahkan di Box Office → Settings, lalu simpan lagi.",
+      "noMoviesFolder": "Box Office belum punya folder root film, jadi hanya serial yang terhubung. Tambahkan di Box Office → Settings, lalu simpan lagi.",
+      "confirmDisconnect": "Putuskan Box Office? Radarr dan Sonarr juga diputus. Judul yang sudah ada tetap di sana."
     }
   },
   "requests": {
@@ -865,7 +883,7 @@
       },
       "add-ons": {
         "title": "Pengaya",
-        "hint": "Radarr, Sonarr, Overseerr, dan plugin"
+        "hint": "Box Office, Radarr, Sonarr, Overseerr, dan plugin"
       },
       "health": {
         "title": "Kesehatan server",

@@ -596,6 +596,24 @@
       "madeAs": "Γίνονται ως {{name}}",
       "sameName": "Όσοι έχουν λογαριασμό Overseerr με το ίδιο όνομα ζητούν ως οι ίδιοι. Το Overseerr αποφασίζει ποια αιτήματα χρειάζονται έγκριση, με βάση τα δικαιώματα του καθενός εκεί.",
       "confirmDisconnect": "Αποσύνδεση του Overseerr; Η καρτέλα Ανακάλυψη θα εξαφανιστεί."
+    },
+    "boxoffice": {
+      "notConnected": "Δεν συνδέθηκε · βρίσκει και κατεβάζει ταινίες και σειρές",
+      "moviesOnly": "Οι ταινίες πάνε στο Box Office, οι σειρές όχι ακόμη · {{url}}",
+      "showsOnly": "Οι σειρές πάνε στο Box Office, οι ταινίες όχι ακόμη · {{url}}",
+      "intro": "Το Box Office βρίσκει και κατεβάζει ταινίες και σειρές. Αν το συνδέσεις εδώ, το Radarr και το Sonarr δείχνουν σε αυτό, οπότε αιτήματα, προσεχώς και ειδοποιήσεις περνούν από αυτό.",
+      "looking": "Αναζήτηση Box Office…",
+      "found": "Box Office {{version}} στο {{url}}",
+      "notFound": "Το Matinee δεν βρήκε μόνο του το Box Office. Γράψε τη διεύθυνσή του, π.χ. http://boxoffice:7272.",
+      "keyWhere": "Box Office → Settings → Connect Matinee",
+      "keySteps": "Πού θα βρεις το κλειδί API",
+      "step1": "Άνοιξε το Box Office και συνδέσου ως διαχειριστής.",
+      "step2": "Πήγαινε στο Settings → Connect Matinee.",
+      "step3": "Δίπλα στο API key, πάτησε το κουμπί αντιγραφής και επικόλλησέ το εδώ.",
+      "replaces": "Με την αποθήκευση, το Radarr και το Sonarr παρακάτω δείχνουν στο Box Office. Διάλεξε εκεί ποιότητα και φάκελο για νέους τίτλους.",
+      "noShowsFolder": "Το Box Office δεν έχει ακόμη ριζικό φάκελο για σειρές, οπότε συνδέονται μόνο οι ταινίες. Πρόσθεσε έναν στο Box Office → Settings και αποθήκευσε ξανά.",
+      "noMoviesFolder": "Το Box Office δεν έχει ακόμη ριζικό φάκελο για ταινίες, οπότε συνδέονται μόνο οι σειρές. Πρόσθεσε έναν στο Box Office → Settings και αποθήκευσε ξανά.",
+      "confirmDisconnect": "Αποσύνδεση του Box Office; Αποσυνδέονται και το Radarr και το Sonarr. Οι τίτλοι που ήδη έχει μένουν εκεί."
     }
   },
   "requests": {
@@ -869,7 +887,7 @@
       },
       "add-ons": {
         "title": "Πρόσθετα",
-        "hint": "Radarr, Sonarr, Overseerr και πρόσθετα"
+        "hint": "Box Office, Radarr, Sonarr, Overseerr και πρόσθετα"
       },
       "health": {
         "title": "Κατάσταση διακομιστή",

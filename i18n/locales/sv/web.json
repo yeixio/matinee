@@ -596,6 +596,24 @@
       "madeAs": "Görs som {{name}}",
       "sameName": "Den som har ett Overseerr-konto med samma namn frågar som sig själv. Overseerr avgör vilka förfrågningar som behöver godkännas, utifrån varje användares behörigheter där.",
       "confirmDisconnect": "Koppla från Overseerr? Fliken Upptäck försvinner."
+    },
+    "boxoffice": {
+      "notConnected": "Inte ansluten · hittar och laddar ner filmer och serier",
+      "moviesOnly": "Filmer går till Box Office, serier inte än · {{url}}",
+      "showsOnly": "Serier går till Box Office, filmer inte än · {{url}}",
+      "intro": "Box Office hittar och laddar ner filmer och serier. Ansluter du det här pekar Radarr och Sonarr på det, så önskemål, kommande och aviseringar går genom det.",
+      "looking": "Letar efter Box Office…",
+      "found": "Box Office {{version}} på {{url}}",
+      "notFound": "Matinee hittade inte Box Office själv. Ange adressen, till exempel http://boxoffice:7272.",
+      "keyWhere": "Box Office → Settings → Connect Matinee",
+      "keySteps": "Var du hittar API-nyckeln",
+      "step1": "Öppna Box Office och logga in som administratör.",
+      "step2": "Gå till Settings → Connect Matinee.",
+      "step3": "Välj kopieringsknappen bredvid API key och klistra in den här.",
+      "replaces": "När du sparar pekar Radarr och Sonarr nedan på Box Office. Välj kvalitet och mapp för nya titlar där.",
+      "noShowsFolder": "Box Office har ingen rotmapp för serier än, så bara filmer ansluts. Lägg till en under Box Office → Settings och spara igen.",
+      "noMoviesFolder": "Box Office har ingen rotmapp för filmer än, så bara serier ansluts. Lägg till en under Box Office → Settings och spara igen.",
+      "confirmDisconnect": "Koppla från Box Office? Radarr och Sonarr kopplas också från. Titlar som redan finns där stannar kvar."
     }
   },
   "requests": {
@@ -869,7 +887,7 @@
       },
       "add-ons": {
         "title": "Tillägg",
-        "hint": "Radarr, Sonarr, Overseerr och plugins"
+        "hint": "Box Office, Radarr, Sonarr, Overseerr och tillägg"
       },
       "health": {
         "title": "Serverhälsa",
