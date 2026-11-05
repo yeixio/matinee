@@ -17,7 +17,7 @@ The top of Home features the first thing in your **Continue watching**, with how
 
 Scroll down for rows of posters. Each row scrolls sideways, and a row with a **›** next to its name opens as a full page.
 
-![Further down Home: Continue watching, Recently added and New releases](../images/home-rows.webp)
+![Further down Home: Continue watching, then Recently added movies and Recently added TV](../images/home-rows.webp)
 
 | Row | What's in it |
 | --- | --- |
