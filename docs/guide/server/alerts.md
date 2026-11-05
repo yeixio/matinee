@@ -128,3 +128,34 @@ The metrics are at `/metrics` on the server's address, and answer only with the 
 Counts that end in `_total` start again from zero when the server restarts, which Prometheus expects.
 
 On Kubernetes, point a ServiceMonitor or scrape job at the Matinee service's port with the token as a bearer token, the same as the config above.
+
+## Dashboards
+
+For a dashboard such as [Homepage](https://gethomepage.dev), `/stats` gives a short summary as JSON. It takes the same token as `/metrics`, so turn metrics on first.
+
+| Field | What it is |
+| --- | --- |
+| `playing`, `transcodes` | What's playing and transcoding now. |
+| `users`, `libraries` | Accounts (without guests and profiles) and libraries. |
+| `movies`, `shows`, `episodes` | Videos in the libraries. Extra versions of a title count once. |
+| `artists`, `albums`, `tracks`, `audiobooks`, `podcasts` | Music, books and podcasts. |
+| `requests`, `issues` | Requests waiting for an admin, and reported problems not yet resolved. |
+| `alerts` | Alerts that are true now. |
+
+In Homepage it fits the custom API widget:
+
+```yaml
+- Matinee:
+    href: https://matinee.example.com
+    icon: mdi-filmstrip
+    widget:
+      type: customapi
+      url: http://matinee:7171/stats
+      headers:
+        Authorization: Bearer your-metrics-token
+      mappings:
+        - {field: playing, label: Playing, format: number}
+        - {field: transcodes, label: Transcoding, format: number}
+        - {field: movies, label: Movies, format: number}
+        - {field: shows, label: Shows, format: number}
+```

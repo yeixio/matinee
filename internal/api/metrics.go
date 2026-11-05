@@ -57,21 +57,30 @@ func (s *Server) deleteMetricsToken(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNoContent)
 }
 
-// metrics answers Prometheus in its text format.
-func (s *Server) metrics(w http.ResponseWriter, r *http.Request) {
+// metricsAllowed checks the metrics token, which /metrics and /stats take
+// as a bearer token, and answers when it's missing or wrong.
+func (s *Server) metricsAllowed(w http.ResponseWriter, r *http.Request) bool {
 	tok, err := s.Store.Setting(r.Context(), settingMetricsToken)
 	if err != nil {
 		http.Error(w, "database unavailable", http.StatusServiceUnavailable)
-		return
+		return false
 	}
 	if tok == "" {
 		http.Error(w, "metrics are off; turn them on in Settings → Server health → Alerts", http.StatusNotFound)
-		return
+		return false
 	}
 	got, ok := strings.CutPrefix(r.Header.Get("Authorization"), "Bearer ")
 	if !ok || subtle.ConstantTimeCompare([]byte(strings.TrimSpace(got)), []byte(tok)) != 1 {
 		w.Header().Set("WWW-Authenticate", `Bearer realm="matinee"`)
 		http.Error(w, "send the metrics token as a bearer token", http.StatusUnauthorized)
+		return false
+	}
+	return true
+}
+
+// metrics answers Prometheus in its text format.
+func (s *Server) metrics(w http.ResponseWriter, r *http.Request) {
+	if !s.metricsAllowed(w, r) {
 		return
 	}
 

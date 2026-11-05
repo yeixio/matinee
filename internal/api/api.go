@@ -529,6 +529,8 @@ func (s *Server) Handler() http.Handler {
 
 	// Prometheus, with the token from Settings (see metrics.go).
 	mux.HandleFunc("GET /metrics", s.metrics)
+	// A short JSON summary for dashboards, with the same token (stats.go).
+	mux.HandleFunc("GET /stats", s.stats)
 
 	mux.HandleFunc("/api/", func(w http.ResponseWriter, r *http.Request) {
 		writeError(w, http.StatusNotFound, "no such endpoint")
