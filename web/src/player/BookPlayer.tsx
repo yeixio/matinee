@@ -1,4 +1,4 @@
-import { ChevronDown, FileText, ListOrdered } from 'lucide-react'
+import { ChevronDown, FileText, ListOrdered, X } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
@@ -58,6 +58,9 @@ export function BookPlayer() {
         <button onClick={close} className="rounded-full p-2 text-muted hover:bg-text/10 hover:text-text" aria-label={t('common:music.minimize')} title={t('common:music.minimize')}>
           <ChevronDown className="size-6" />
         </button>
+        <button onClick={s.stop} className="rounded-full p-2 text-muted hover:bg-text/10 hover:text-text" aria-label={t('player.closePlayer')} title={t('player.closePlayer')}>
+          <X className="size-6" />
+        </button>
         <div className="flex-1 text-center text-xs font-semibold tracking-widest text-muted uppercase">{t('common:books.nowListening')}</div>
         <button
           onClick={() => setShowChapters(!showChapters)}
@@ -68,6 +71,8 @@ export function BookPlayer() {
         >
           {episode ? <FileText className="size-6" /> : <ListOrdered className="size-6" />}
         </button>
+        {/* As wide as the stop button, so the title stays in the middle. */}
+        <div className="w-10" />
       </header>
 
       <div className="relative flex min-h-0 flex-1 justify-center gap-16 px-6 pb-[max(env(safe-area-inset-bottom),1.5rem)] md:px-12 lg:px-16">

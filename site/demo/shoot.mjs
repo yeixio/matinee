@@ -538,6 +538,15 @@ try {
     await shot(page, 'phone-libraries', { maxWidth: 1170 })
     await page.goto(`${origin}/settings`)
     await shot(page, 'phone-settings', { maxWidth: 1170 })
+    // The music player above the tabs, with play, next and close.
+    const album = await find('Signal Fires', ['album'])
+    if (album && wanted('phone-music-player')) {
+      await page.goto(`${origin}/item/${album.id}`)
+      await page.getByRole('button', { name: 'Play' }).first().click()
+      await sleep(1500)
+      await page.evaluate(() => window.scrollTo(0, 0))
+      await shot(page, 'phone-music-player', { maxWidth: 1170 })
+    }
     await page.context().close()
   }
 

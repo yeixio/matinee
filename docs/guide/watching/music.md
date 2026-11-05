@@ -56,6 +56,12 @@ The player sits along the bottom of every page, so you can look around Matinee, 
 
 On a phone, the player sits above the tabs with the song, play and next. Tap it for the full player.
 
+<!-- since: v0.2.3 -->
+To stop the music and put the player away, click **×** at the right end of the player, or at the top left of the full player. On a phone, the **×** sits next to play and next. The player comes back the next time you play something.
+
+![On a phone, the player above the tabs with play, next and ×](../images/phone-music-player.webp)
+<!-- /since -->
+
 The media keys on your keyboard, headphones and lock screen work too, and show the song and its cover. Matinee remembers what you were listening to: come back later and it's ready where you stopped.
 
 ## The full player and the queue

@@ -62,8 +62,11 @@ export function NowPlaying() {
         <button onClick={close} className="rounded-full p-2 text-muted hover:bg-text/10 hover:text-text" aria-label={t('common:music.minimize')} title={t('common:music.minimize')}>
           <ChevronDown className="size-6" />
         </button>
+        <button onClick={s.stop} className="rounded-full p-2 text-muted hover:bg-text/10 hover:text-text" aria-label={t('player.closePlayer')} title={t('player.closePlayer')}>
+          <X className="size-6" />
+        </button>
         {/* As wide as the buttons on the other side, so the title stays in the middle. */}
-        <div className="w-20 lg:w-10" />
+        <div className="w-10 lg:hidden" />
         <div className="flex-1 text-center text-xs font-semibold tracking-widest text-muted uppercase">{t('common:music.nowPlaying')}</div>
         <button
           onClick={() => setVisual(true)}

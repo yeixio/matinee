@@ -57,6 +57,11 @@ export function BookBar() {
           </div>
         </div>
 
+        {/* Phones have no room for the right-hand side, so stopping lives here. */}
+        <button onClick={s.stop} className="-ms-2 shrink-0 rounded-full p-2 text-faint hover:text-text md:hidden" aria-label={t('player.closePlayer')} title={t('player.closePlayer')}>
+          <X className="size-5" />
+        </button>
+
         <div className="hidden items-center justify-end gap-1 md:flex">
           <SpeedMenu s={s} />
           {!B.isEpisode(book) && (
