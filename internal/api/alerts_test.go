@@ -108,8 +108,8 @@ func TestMetrics(t *testing.T) {
 	admin, _ := newTestServer(t, func(s *Server) { s.Storage = []StoragePath{{Use: "data", Path: s.MediaRoot}} })
 	admin.do("POST", "/api/v1/setup", credentials{"admin", "correct horse"}, nil)
 	admin, _ = tryLogin(t, admin, "admin", "correct horse")
-	scrape := func(token string) (int, string) {
-		req, _ := http.NewRequest("GET", admin.base+"/metrics", nil)
+	get := func(path, token string) (int, string) {
+		req, _ := http.NewRequest("GET", admin.base+path, nil)
 		if token != "" {
 			req.Header.Set("Authorization", "Bearer "+token)
 		}
@@ -121,6 +121,7 @@ func TestMetrics(t *testing.T) {
 		b, _ := io.ReadAll(res.Body)
 		return res.StatusCode, string(b)
 	}
+	scrape := func(token string) (int, string) { return get("/metrics", token) }
 	if code, _ := scrape(""); code != http.StatusNotFound {
 		t.Fatalf("metrics while off: %d", code)
 	}
@@ -143,11 +144,25 @@ func TestMetrics(t *testing.T) {
 			t.Errorf("metrics lack %q:\n%s", want, body)
 		}
 	}
+
+	// The dashboard summary takes the same token.
+	if code, _ := get("/stats", "wrong"); code != http.StatusUnauthorized {
+		t.Fatalf("stats with a wrong token: %d", code)
+	}
+	code, body = get("/stats", m.Token)
+	var st stats
+	if code != http.StatusOK || json.Unmarshal([]byte(body), &st) != nil || st.Users != 1 || st.Playing != 0 || st.Movies != 0 {
+		t.Fatalf("stats: %d %s", code, body)
+	}
+
 	if code := admin.do("DELETE", "/api/v1/admin/metrics/token", nil, nil); code != http.StatusNoContent {
 		t.Fatalf("turn off: %d", code)
 	}
 	if code, _ := scrape(m.Token); code != http.StatusNotFound {
 		t.Fatalf("metrics after turning off: %d", code)
+	}
+	if code, _ := get("/stats", m.Token); code != http.StatusNotFound {
+		t.Fatalf("stats after turning off: %d", code)
 	}
 }
 
