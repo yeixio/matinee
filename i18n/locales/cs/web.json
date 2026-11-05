@@ -607,6 +607,7 @@
     },
     "boxoffice": {
       "notConnected": "Nepřipojeno · hledá a stahuje filmy a seriály",
+      "foundNearby": "Nalezeno ve vaší síti na {{url}} · zatím nepřipojeno",
       "moviesOnly": "Filmy jdou do Box Office, seriály zatím ne · {{url}}",
       "showsOnly": "Seriály jdou do Box Office, filmy zatím ne · {{url}}",
       "intro": "Box Office hledá a stahuje filmy a seriály. Když ho tu připojíš, Radarr a Sonarr na něj ukážou, takže žádosti, připravované tituly i oznámení jdou přes něj.",

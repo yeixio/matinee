@@ -599,6 +599,7 @@
     },
     "boxoffice": {
       "notConnected": "Nincs csatlakoztatva · filmeket és sorozatokat keres és tölt le",
+      "foundNearby": "Megtalálva a hálózatodon: {{url}} · még nincs csatlakoztatva",
       "moviesOnly": "A filmek a Box Office-hoz mennek, a sorozatok még nem · {{url}}",
       "showsOnly": "A sorozatok a Box Office-hoz mennek, a filmek még nem · {{url}}",
       "intro": "A Box Office filmeket és sorozatokat keres és tölt le. Ha itt csatlakoztatod, a Radarr és a Sonarr rá mutat, így a kérések, a hamarosan érkezők és az értesítések rajta mennek át.",

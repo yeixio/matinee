@@ -595,6 +595,7 @@
     },
     "boxoffice": {
       "notConnected": "未接続 · 映画と番組を探してダウンロードします",
+      "foundNearby": "ネットワーク上の {{url}} で見つかりました · まだ接続されていません",
       "moviesOnly": "映画は Box Office へ、番組はまだです · {{url}}",
       "showsOnly": "番組は Box Office へ、映画はまだです · {{url}}",
       "intro": "Box Office は映画と番組を探してダウンロードします。ここで接続すると Radarr と Sonarr がそちらを向き、リクエスト、近日公開、通知がすべて Box Office を通ります。",

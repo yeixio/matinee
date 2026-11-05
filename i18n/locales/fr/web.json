@@ -603,6 +603,7 @@
     },
     "boxoffice": {
       "notConnected": "Non connecté · trouve et télécharge films et séries",
+      "foundNearby": "Trouvé sur votre réseau à {{url}} · pas encore connecté",
       "moviesOnly": "Les films passent par Box Office, pas encore les séries · {{url}}",
       "showsOnly": "Les séries passent par Box Office, pas encore les films · {{url}}",
       "intro": "Box Office trouve et télécharge films et séries. Le connecter ici fait pointer Radarr et Sonarr vers lui : demandes, à venir et notifications passent toutes par lui.",

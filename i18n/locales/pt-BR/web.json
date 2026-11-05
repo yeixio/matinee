@@ -603,6 +603,7 @@
     },
     "boxoffice": {
       "notConnected": "Não conectado · encontra e baixa filmes e séries",
+      "foundNearby": "Encontrado na sua rede em {{url}} · ainda não conectado",
       "moviesOnly": "Filmes vão para o Box Office, séries ainda não · {{url}}",
       "showsOnly": "Séries vão para o Box Office, filmes ainda não · {{url}}",
       "intro": "O Box Office encontra e baixa filmes e séries. Conectá-lo aqui faz o Radarr e o Sonarr apontarem para ele, então pedidos, em breve e notificações passam por ele.",

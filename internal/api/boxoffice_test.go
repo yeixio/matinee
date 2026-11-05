@@ -1,6 +1,7 @@
 package api
 
 import (
+	"context"
 	"strings"
 	"testing"
 
@@ -15,7 +16,12 @@ func TestBoxOfficeConnection(t *testing.T) {
 	saved := boxOfficeGuesses
 	// It's found once, at the first address that reaches it.
 	boxOfficeGuesses = []string{"http://127.0.0.1:1", bo.URL, strings.Replace(bo.URL, "127.0.0.1", "localhost", 1)}
-	t.Cleanup(func() { boxOfficeGuesses = saved })
+	savedNearby := nearbyBoxOffices
+	// Found on the home network too: listed once, at the usual address.
+	nearbyBoxOffices = func(context.Context) []string {
+		return []string{"http://127.0.0.1:2", strings.Replace(bo.URL, "127.0.0.1", "localhost", 1)}
+	}
+	t.Cleanup(func() { boxOfficeGuesses, nearbyBoxOffices = saved, savedNearby })
 
 	admin, _ := newTestServer(t)
 	var login struct{ Token string }
@@ -81,5 +87,23 @@ func TestBoxOfficeConnection(t *testing.T) {
 	admin.do("GET", "/api/v1/integrations", nil, &ints)
 	if view.Movies || view.Shows || ints[arr.Radarr].Connected || ints[arr.Sonarr].Connected {
 		t.Fatalf("after: %+v %+v", view, ints)
+	}
+}
+
+// A Box Office that's only on the home network is found there.
+func TestBoxOfficeFoundNearby(t *testing.T) {
+	bo := arrtest.NewBoxOffice(t)
+	saved, savedNearby := boxOfficeGuesses, nearbyBoxOffices
+	boxOfficeGuesses = []string{"http://127.0.0.1:1"}
+	nearbyBoxOffices = func(context.Context) []string { return []string{"http://127.0.0.1:2", bo.URL} }
+	t.Cleanup(func() { boxOfficeGuesses, nearbyBoxOffices = saved, savedNearby })
+
+	admin, _ := newTestServer(t)
+	var login struct{ Token string }
+	admin.do("POST", "/api/v1/setup", credentials{"admin", "correct horse"}, &login)
+	admin.token = login.Token
+	var found struct{ Found []foundBoxOffice }
+	if code := admin.do("POST", "/api/v1/integrations/boxoffice/find", nil, &found); code != 200 || len(found.Found) != 1 || found.Found[0].URL != bo.URL {
+		t.Fatalf("find: %d %+v", code, found)
 	}
 }

@@ -595,6 +595,7 @@
     },
     "boxoffice": {
       "notConnected": "Chưa kết nối · tìm và tải phim lẻ và phim bộ",
+      "foundNearby": "Đã tìm thấy trên mạng của bạn tại {{url}} · chưa kết nối",
       "moviesOnly": "Phim lẻ đi qua Box Office, phim bộ thì chưa · {{url}}",
       "showsOnly": "Phim bộ đi qua Box Office, phim lẻ thì chưa · {{url}}",
       "intro": "Box Office tìm và tải phim lẻ và phim bộ. Kết nối ở đây sẽ trỏ Radarr và Sonarr tới nó, nên yêu cầu, sắp ra mắt và thông báo đều đi qua nó.",

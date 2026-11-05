@@ -599,6 +599,7 @@
     },
     "boxoffice": {
       "notConnected": "Ikke forbundet · finder og henter film og serier",
+      "foundNearby": "Fundet på dit netværk på {{url}} · ikke forbundet endnu",
       "moviesOnly": "Film går til Box Office, serier ikke endnu · {{url}}",
       "showsOnly": "Serier går til Box Office, film ikke endnu · {{url}}",
       "intro": "Box Office finder og henter film og serier. Forbinder du det her, peger Radarr og Sonarr på det, så ønsker, kommende og notifikationer går gennem det.",
