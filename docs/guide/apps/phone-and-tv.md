@@ -89,7 +89,7 @@ Android TV and Google TV install the same app as Android phones, from Google Pla
 <!-- since: v0.3.0 -->
 ### Your libraries in the top bar
 
-From version 1.0.29, **Settings → Top bar** on the TV puts the libraries you watch most in the top bar as tabs of their own, right after Home, so Movies or Shows is one press away from anywhere. **Libraries** stays for the rest. **Open on** picks where the app starts: Home, or one of your libraries. Both are kept for each profile on that TV, and nothing is in the top bar until you add it, so it looks the same after every update.
+From version 1.0.28, **Settings → Top bar** on the TV puts the libraries you watch most in the top bar as tabs of their own, right after Home, so Movies or Shows is one press away from anywhere. **Libraries** stays for the rest. **Open on** picks where the app starts: Home, or one of your libraries. Both are kept for each profile on that TV, and nothing is in the top bar until you add it, so it looks the same after every update.
 
 ![Settings → Top bar on a TV, with Movies in the top bar](../images/app-tv-top-bar.webp)
 
