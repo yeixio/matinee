@@ -599,6 +599,7 @@
     },
     "boxoffice": {
       "notConnected": "Ikke tilkoblet · finner og laster ned filmer og serier",
+      "foundNearby": "Funnet på nettverket ditt på {{url}} · ikke tilkoblet ennå",
       "moviesOnly": "Filmer går til Box Office, serier ikke ennå · {{url}}",
       "showsOnly": "Serier går til Box Office, filmer ikke ennå · {{url}}",
       "intro": "Box Office finner og laster ned filmer og serier. Kobler du det til her, peker Radarr og Sonarr på det, så ønsker, kommende og varsler går gjennom det.",

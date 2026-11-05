@@ -343,7 +343,14 @@
     "moreLike": "Mer som {{title}}",
     "empty": "Ingenting her akkurat nå",
     "unavailable": "Denne raden er ikke tilgjengelig",
-    "loadMore": "Last inn flere"
+    "loadMore": "Last inn flere",
+    "recentlyAdded": {
+      "movie": "Nylig lagt til filmer",
+      "show": "Nylig lagt til serier",
+      "album": "Nylig lagt til musikk",
+      "book": "Nylig lagt til lydbøker",
+      "podcast": "Nylig lagt til podkaster"
+    }
   },
   "music": {
     "overview": "Oversikt",

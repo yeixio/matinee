@@ -599,6 +599,7 @@
     },
     "boxoffice": {
       "notConnected": "Bağlı değil · film ve dizi bulur ve indirir",
+      "foundNearby": "Ağınızda bulundu: {{url}} · henüz bağlanmadı",
       "moviesOnly": "Filmler Box Office'e gidiyor, diziler henüz değil · {{url}}",
       "showsOnly": "Diziler Box Office'e gidiyor, filmler henüz değil · {{url}}",
       "intro": "Box Office film ve dizi bulur ve indirir. Burada bağlarsanız Radarr ve Sonarr ona yönelir; istekler, yakında çıkacaklar ve bildirimler onun üzerinden gider.",

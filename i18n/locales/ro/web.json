@@ -603,6 +603,7 @@
     },
     "boxoffice": {
       "notConnected": "Neconectat · găsește și descarcă filme și seriale",
+      "foundNearby": "Găsit în rețeaua ta la {{url}} · încă neconectat",
       "moviesOnly": "Filmele merg la Box Office, serialele încă nu · {{url}}",
       "showsOnly": "Serialele merg la Box Office, filmele încă nu · {{url}}",
       "intro": "Box Office găsește și descarcă filme și seriale. Dacă îl conectezi aici, Radarr și Sonarr vor indica spre el, deci cererile, ce urmează și notificările trec prin el.",

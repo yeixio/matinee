@@ -13,6 +13,7 @@ import (
 	"time"
 
 	"github.com/yeixio/matinee/internal/arr"
+	"github.com/yeixio/matinee/internal/discovery"
 )
 
 // Box Office (github.com/yeixio/boxoffice) finds and downloads movies and
@@ -21,8 +22,10 @@ import (
 // Radarr and Sonarr connections to it; everything else (requests, coming
 // soon, posters, notifications) then works as it does with those apps.
 //
-// Matinee looks for it on its own: Box Office says who it is, without
-// signing in, at GET /api/v1/status.
+// Matinee looks for it on its own: at the usual addresses, then on the
+// home network (Box Office announces itself as _boxoffice._tcp, and listens
+// on 7272). Box Office says who it is, without signing in, at
+// GET /api/v1/status.
 
 // boxOfficeGuesses are where Box Office usually is, as Matinee sees it: its
 // name in Kubernetes or Docker Compose, then the same machine.
@@ -125,21 +128,24 @@ type foundBoxOffice struct {
 }
 
 // findBoxOffice is POST /integrations/boxoffice/find: the Box Offices
-// Matinee can reach, the likeliest first.
+// Matinee can reach, the likeliest first. It tries the usual addresses
+// while it looks on the home network, then tries what it found there.
 func (s *Server) findBoxOffice(w http.ResponseWriter, r *http.Request) {
 	guesses := s.boxOfficeGuesses(r)
-	found := make([]*foundBoxOffice, len(guesses))
-	var wg sync.WaitGroup
-	for i, g := range guesses {
-		wg.Add(1)
-		go func() {
-			defer wg.Done()
-			ctx, cancel := context.WithTimeout(r.Context(), 4*time.Second)
-			defer cancel()
-			found[i] = probeBoxOffice(ctx, g)
-		}()
+	nearby := make(chan []string, 1)
+	go func() {
+		ctx, cancel := context.WithTimeout(r.Context(), 3*time.Second)
+		defer cancel()
+		nearby <- nearbyBoxOffices(ctx)
+	}()
+	found := probeBoxOffices(r.Context(), guesses)
+	var more []string
+	for _, u := range <-nearby {
+		if !slices.Contains(guesses, u) {
+			more = append(more, u)
+		}
 	}
-	wg.Wait()
+	found = append(found, probeBoxOffices(r.Context(), more)...)
 	out := []foundBoxOffice{}
 	for _, f := range found {
 		// One Box Office found at two addresses is listed at the likelier.
@@ -148,6 +154,42 @@ func (s *Server) findBoxOffice(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	writeJSON(w, http.StatusOK, map[string]any{"found": out})
+}
+
+// nearbyBoxOffices are the addresses on the home network that may be Box
+// Office: those it announces over multicast DNS, and the neighbours that
+// answer on its port. Nothing is asked beyond the local network.
+var nearbyBoxOffices = func(ctx context.Context) []string {
+	var mdns, swept []string
+	var wg sync.WaitGroup
+	wg.Go(func() { mdns = discovery.Browse(ctx, boxOfficeService) })
+	wg.Go(func() { swept = discovery.Sweep(ctx, boxOfficePort) })
+	wg.Wait()
+	return append(mdns, swept...)
+}
+
+// boxOfficeService and boxOfficePort are how Box Office is found on the
+// home network: what it announces, and where it listens unless told
+// otherwise.
+const (
+	boxOfficeService = "_boxoffice._tcp"
+	boxOfficePort    = 7272
+)
+
+// probeBoxOffices asks each address at once whether it's Box Office; nil
+// where it isn't.
+func probeBoxOffices(ctx context.Context, addrs []string) []*foundBoxOffice {
+	found := make([]*foundBoxOffice, len(addrs))
+	var wg sync.WaitGroup
+	for i, a := range addrs {
+		wg.Go(func() {
+			ctx, cancel := context.WithTimeout(ctx, 4*time.Second)
+			defer cancel()
+			found[i] = probeBoxOffice(ctx, a)
+		})
+	}
+	wg.Wait()
+	return found
 }
 
 // boxOfficeGuesses are the addresses to look for Box Office at: where

@@ -58,15 +58,26 @@ export default function Home() {
           ))}
         </Row>
       )}
-      {data.recentlyAdded.length > 0 && (
-        <Row title={t('home.recentlyAdded')} more={rowLink('recentlyAdded')} hasMore={data.more?.recentlyAdded}>
-          {data.recentlyAdded.map((it) => (
-            <RowItem key={it.id}>
-              <PosterCard item={it} />
-            </RowItem>
-          ))}
-        </Row>
-      )}
+      {/* Recently added, a row for each kind: movies, TV, music, audiobooks, podcasts. Older servers send one mixed row. */}
+      {data.recentlyAddedRows
+        ? data.recentlyAddedRows.map((row) => (
+            <Row key={row.id} title={rowTitle(row)} more={rowLink(row.id)} hasMore={row.more}>
+              {row.items.map((it) => (
+                <RowItem key={it.id}>
+                  <PosterCard item={it} />
+                </RowItem>
+              ))}
+            </Row>
+          ))
+        : data.recentlyAdded.length > 0 && (
+            <Row title={t('home.recentlyAdded')} more={rowLink('recentlyAdded')} hasMore={data.more?.recentlyAdded}>
+              {data.recentlyAdded.map((it) => (
+                <RowItem key={it.id}>
+                  <PosterCard item={it} />
+                </RowItem>
+              ))}
+            </Row>
+          )}
       {/* Continue watching, recently added and new releases stay at the top. */}
       {!!data.newReleases?.length && (
         <Row title={t('home.newReleases')} more={rowLink('newReleases')} hasMore={data.more?.newReleases}>

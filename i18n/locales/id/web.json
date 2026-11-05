@@ -595,6 +595,7 @@
     },
     "boxoffice": {
       "notConnected": "Tidak terhubung · mencari dan mengunduh film dan serial",
+      "foundNearby": "Ditemukan di jaringan Anda di {{url}} · belum terhubung",
       "moviesOnly": "Film masuk ke Box Office, serial belum · {{url}}",
       "showsOnly": "Serial masuk ke Box Office, film belum · {{url}}",
       "intro": "Box Office mencari dan mengunduh film dan serial. Menghubungkannya di sini mengarahkan Radarr dan Sonarr ke sana, jadi permintaan, segera hadir, dan notifikasi lewat sana.",

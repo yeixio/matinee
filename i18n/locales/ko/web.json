@@ -595,6 +595,7 @@
     },
     "boxoffice": {
       "notConnected": "연결 안 됨 · 영화와 시리즈를 찾아 다운로드해요",
+      "foundNearby": "네트워크의 {{url}}에서 찾음 · 아직 연결되지 않음",
       "moviesOnly": "영화는 Box Office로 가고, 시리즈는 아직이에요 · {{url}}",
       "showsOnly": "시리즈는 Box Office로 가고, 영화는 아직이에요 · {{url}}",
       "intro": "Box Office는 영화와 시리즈를 찾아 다운로드해요. 여기서 연결하면 Radarr와 Sonarr가 Box Office를 가리켜서 요청, 공개 예정, 알림이 모두 Box Office를 거쳐요.",

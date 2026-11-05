@@ -315,7 +315,14 @@
     "moreLike": "与{{title}}类似",
     "empty": "这里暂时没有内容",
     "unavailable": "此行不可用",
-    "loadMore": "加载更多"
+    "loadMore": "加载更多",
+    "recentlyAdded": {
+      "movie": "最近添加的电影",
+      "show": "最近添加的电视节目",
+      "album": "最近添加的音乐",
+      "book": "最近添加的有声书",
+      "podcast": "最近添加的播客"
+    }
   },
   "music": {
     "overview": "概览",

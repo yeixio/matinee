@@ -627,6 +627,8 @@ export type HomeRow = {
   starter?: string
   holiday?: string
   relatedTo?: string
+  // Set on the rows of Recently added split by kind (recentlyAdded:{kind}).
+  kind?: 'movie' | 'show' | 'album' | 'book' | 'podcast'
   items: Item[]
   more?: boolean
 }
@@ -1429,13 +1431,15 @@ export const api = {
   resolveIssue: (id: string) => request<void>('POST', `/api/v1/issues/${id}/resolve`),
   replaceIssueFile: (id: string) => request<void>('POST', `/api/v1/issues/${id}/replace`),
 
-  // newReleases and rows come from servers new enough to have them. more
-  // says which of the lists have more titles than they show.
+  // newReleases, rows and recentlyAddedRows (Recently added split by kind)
+  // come from servers new enough to have them. more says which of the lists
+  // have more titles than they show.
   home: () =>
     request<{
       continueWatching: Item[]
       watchList: Item[]
       recentlyAdded: Item[]
+      recentlyAddedRows?: HomeRow[]
       newReleases?: Item[]
       rows?: HomeRow[]
       more?: Partial<Record<'continueWatching' | 'recentlyAdded' | 'newReleases' | 'watchList', boolean>>

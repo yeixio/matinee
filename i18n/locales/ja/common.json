@@ -315,7 +315,14 @@
     "moreLike": "{{title}}に似た作品",
     "empty": "今は何もありません",
     "unavailable": "この列は利用できません",
-    "loadMore": "さらに読み込む"
+    "loadMore": "さらに読み込む",
+    "recentlyAdded": {
+      "movie": "最近追加された映画",
+      "show": "最近追加されたテレビ番組",
+      "album": "最近追加された音楽",
+      "book": "最近追加されたオーディオブック",
+      "podcast": "最近追加されたポッドキャスト"
+    }
   },
   "music": {
     "overview": "概要",

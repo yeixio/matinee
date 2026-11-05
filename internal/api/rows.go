@@ -16,6 +16,7 @@ import (
 // the row's own page. Rows are:
 //
 //	continueWatching, recentlyAdded, newReleases, watchList
+//	recentlyAdded:{kind}                           (Recently added, split by kind: movie, show, album, book, podcast)
 //	continueListening, newEpisodes, genre:{genre}, holiday:{id}, collection:{id}   (Home's other rows)
 //	related:{item id}                              (More like this)
 
@@ -30,6 +31,15 @@ const (
 	// (podcasts.go) is one too.
 	rowListening = "continueListening"
 )
+
+// recentRowTitles name the rows of Recently added split by kind, in English.
+var recentRowTitles = map[string]string{
+	"movie":   "Recently added movies",
+	"show":    "Recently added TV",
+	"album":   "Recently added music",
+	"book":    "Recently added audiobooks",
+	"podcast": "Recently added podcasts",
+}
 
 const (
 	continueItems = 20   // titles in Continue watching on Home
@@ -75,8 +85,13 @@ func (s *Server) fullRow(ctx context.Context, u store.User, id string) (HomeRow,
 		row.Title = "New episodes"
 		row.Items, err = s.Store.NewEpisodes(ctx, u.ID, today().AddDate(0, 0, -newEpisodeDays).Unix(), rowAllItems)
 	case rowRecent:
-		row.Title = "Recently added"
-		row.Items, err = s.Store.RecentlyAdded(ctx, u.ID, rowAllItems)
+		if arg == "" {
+			row.Title = "Recently added"
+			row.Items, err = s.Store.RecentlyAdded(ctx, u.ID, rowAllItems)
+			break
+		}
+		row.Title, row.Kind = recentRowTitles[arg], arg
+		row.Items, err = s.Store.RecentlyAddedOf(ctx, u.ID, arg, rowAllItems)
 	case rowReleases:
 		row.Title = "New releases"
 		row.Items, err = s.Store.NewReleases(ctx, u.ID, today().Year()-newReleaseYrs+1, rowAllItems)

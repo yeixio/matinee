@@ -607,6 +607,7 @@
     },
     "boxoffice": {
       "notConnected": "Niepołączone · wyszukuje i pobiera filmy i seriale",
+      "foundNearby": "Znaleziono w Twojej sieci pod {{url}} · jeszcze niepołączony",
       "moviesOnly": "Filmy idą do Box Office, seriale jeszcze nie · {{url}}",
       "showsOnly": "Seriale idą do Box Office, filmy jeszcze nie · {{url}}",
       "intro": "Box Office wyszukuje i pobiera filmy i seriale. Połączenie go tutaj kieruje do niego Radarr i Sonarr, więc prośby, nadchodzące tytuły i powiadomienia idą przez niego.",

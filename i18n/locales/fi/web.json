@@ -599,6 +599,7 @@
     },
     "boxoffice": {
       "notConnected": "Ei yhdistetty · etsii ja lataa elokuvia ja sarjoja",
+      "foundNearby": "Löytyi verkostasi osoitteesta {{url}} · ei vielä yhdistetty",
       "moviesOnly": "Elokuvat menevät Box Officeen, sarjat eivät vielä · {{url}}",
       "showsOnly": "Sarjat menevät Box Officeen, elokuvat eivät vielä · {{url}}",
       "intro": "Box Office etsii ja lataa elokuvia ja sarjoja. Kun yhdistät sen tässä, Radarr ja Sonarr osoittavat siihen, joten pyynnöt, tulossa olevat ja ilmoitukset kulkevat sen kautta.",

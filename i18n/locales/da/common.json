@@ -343,7 +343,14 @@
     "moreLike": "Mere som {{title}}",
     "empty": "Her er intet lige nu",
     "unavailable": "Rækken er ikke tilgængelig",
-    "loadMore": "Indlæs flere"
+    "loadMore": "Indlæs flere",
+    "recentlyAdded": {
+      "movie": "Nyligt tilføjede film",
+      "show": "Nyligt tilføjede serier",
+      "album": "Nyligt tilføjet musik",
+      "book": "Nyligt tilføjede lydbøger",
+      "podcast": "Nyligt tilføjede podcasts"
+    }
   },
   "music": {
     "overview": "Oversigt",

@@ -595,6 +595,7 @@
     },
     "boxoffice": {
       "notConnected": "Tidak disambung · mencari dan memuat turun filem dan rancangan",
+      "foundNearby": "Ditemui pada rangkaian anda di {{url}} · belum disambungkan",
       "moviesOnly": "Filem pergi ke Box Office, rancangan belum lagi · {{url}}",
       "showsOnly": "Rancangan pergi ke Box Office, filem belum lagi · {{url}}",
       "intro": "Box Office mencari dan memuat turun filem dan rancangan. Menyambungkannya di sini menghalakan Radarr dan Sonarr kepadanya, jadi permintaan, akan datang dan pemberitahuan melaluinya.",

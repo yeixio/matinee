@@ -50,7 +50,8 @@ export function Integrations() {
 
 // Box Office finds and downloads movies and shows, and answers as Radarr and
 // Sonarr, so connecting it points both of those at it. Matinee looks for it
-// on its own; only the API key has to be typed, and the steps say where it is.
+// on its own, also on the home network, and fills in its address; only the
+// API key has to be typed, and the steps say where it is.
 function BoxOfficeCard({ saved }: { saved: BoxOfficeConnection }) {
   const { t } = useTranslation()
   const qc = useQueryClient()
@@ -64,12 +65,14 @@ function BoxOfficeCard({ saved }: { saved: BoxOfficeConnection }) {
   const refresh = () => {
     for (const key of ['boxoffice', 'integrations', 'requestOptions', 'upcoming', 'notification-settings']) qc.invalidateQueries({ queryKey: [key] })
   }
-  const find = useMutation({
-    mutationFn: api.findBoxOffice,
-    onSuccess: (r) => {
-      if (r.found[0]) setUrl((u) => u || r.found[0].url)
-    },
-  })
+  // Until it's connected, Matinee looks for Box Office as soon as Settings
+  // opens, on the usual addresses and the home network, and fills in what
+  // it finds. The admin can still change it.
+  const find = useQuery({ queryKey: ['boxoffice-find'], queryFn: api.findBoxOffice, enabled: !linked, staleTime: 5 * 60_000, retry: false })
+  const nearby = find.data?.found[0]?.url
+  useEffect(() => {
+    if (nearby) setUrl((u) => u || nearby)
+  }, [nearby])
   const test = useMutation({
     mutationFn: () => api.testBoxOffice({ url, apiKey: apiKey || undefined }),
     onSuccess: (c) => {
@@ -96,14 +99,11 @@ function BoxOfficeCard({ saved }: { saved: BoxOfficeConnection }) {
     },
   })
 
-  // Opening it looks for Box Office, or checks the saved one.
+  // Opening it checks the saved one.
   const { mutate: runTest } = test
-  const { mutate: runFind } = find
   useEffect(() => {
-    if (!open) return
-    if (linked) runTest()
-    else runFind()
-  }, [open, linked, runTest, runFind])
+    if (open && linked) runTest()
+  }, [open, linked, runTest])
 
   const submit = (e: FormEvent) => {
     e.preventDefault()
@@ -116,7 +116,9 @@ function BoxOfficeCard({ saved }: { saved: BoxOfficeConnection }) {
       ? t('integrations.boxoffice.moviesOnly', { url: saved.url })
       : saved.shows
         ? t('integrations.boxoffice.showsOnly', { url: saved.url })
-        : t('integrations.boxoffice.notConnected')
+        : nearby
+          ? t('integrations.boxoffice.foundNearby', { url: nearby })
+          : t('integrations.boxoffice.notConnected')
 
   return (
     <div className="rounded-xl border border-line/60 bg-surface/50" id="boxoffice">
@@ -137,12 +139,13 @@ function BoxOfficeCard({ saved }: { saved: BoxOfficeConnection }) {
       {open && (
         <form onSubmit={submit} className="space-y-4 border-t border-line/60 p-4">
           <p className="text-sm text-muted">{t('integrations.boxoffice.intro')}</p>
-          {find.isPending && (
+          {find.isFetching && !find.data && (
             <p className="flex items-center gap-2 text-sm text-muted">
               <Search className="size-4 animate-pulse" /> {t('integrations.boxoffice.looking')}
             </p>
           )}
-          {find.data &&
+          {!linked &&
+            find.data &&
             (find.data.found.length > 0 ? (
               <div className="flex flex-wrap items-center gap-2 text-sm">
                 {find.data.found.map((f) => (

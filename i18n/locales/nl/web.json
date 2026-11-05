@@ -599,6 +599,7 @@
     },
     "boxoffice": {
       "notConnected": "Niet verbonden · zoekt en downloadt films en series",
+      "foundNearby": "Gevonden op je netwerk op {{url}} · nog niet verbonden",
       "moviesOnly": "Films gaan naar Box Office, series nog niet · {{url}}",
       "showsOnly": "Series gaan naar Box Office, films nog niet · {{url}}",
       "intro": "Box Office zoekt en downloadt films en series. Als je het hier verbindt, wijzen Radarr en Sonarr ernaar, zodat aanvragen, binnenkort en meldingen er allemaal via gaan.",

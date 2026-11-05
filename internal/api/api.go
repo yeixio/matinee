@@ -1175,6 +1175,23 @@ func (s *Server) home(w http.ResponseWriter, r *http.Request) {
 		s.serverError(w, err)
 		return
 	}
+	// Recently added, split by kind: a row each for movies, TV shows,
+	// music, audiobooks and podcasts that have any. Apps that know these
+	// show them instead of the mixed recentlyAdded list.
+	recentRows := []HomeRow{}
+	for _, kind := range store.RecentlyAddedKinds {
+		items, err := s.Store.RecentlyAddedOf(ctx, uid, kind, homeRowItems+1)
+		if err != nil {
+			s.serverError(w, err)
+			return
+		}
+		if len(items) == 0 {
+			continue
+		}
+		row := HomeRow{ID: rowRecent + ":" + kind, Title: recentRowTitles[kind], Kind: kind}
+		row.Items, row.More = cut(items, homeRowItems)
+		recentRows = append(recentRows, row)
+	}
 	more := map[string]bool{}
 	cont, more[rowContinue] = cut(cont, continueItems)
 	recent, more[rowRecent] = cut(recent, homeRowItems)
@@ -1211,7 +1228,7 @@ func (s *Server) home(w http.ResponseWriter, r *http.Request) {
 	}
 	writeJSON(w, http.StatusOK, map[string]any{
 		"continueWatching": cont, "watchList": watchList, "recentlyAdded": recent,
-		"newReleases": releases, "rows": rows,
+		"recentlyAddedRows": recentRows, "newReleases": releases, "rows": rows,
 		// Which of the lists above have more titles than they show (see rows.go).
 		"more": more,
 	})
