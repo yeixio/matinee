@@ -612,5 +612,10 @@
     "halfHint": "Yarım yıldız için tekrar basın",
     "clearHint": "Kaldırmak için tekrar basın",
     "failed": "Puanınız kaydedilemedi"
+  },
+  "notifications": {
+    "title": "Bildirimler",
+    "empty": "Yeni bir şey yok. İstediğin bir şey yola çıktığında veya izlemeye hazır olduğunda burada haber alırsın.",
+    "clear": "Tümünü temizle"
   }
 }

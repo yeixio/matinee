@@ -605,5 +605,10 @@
     "halfHint": "Tekan lagi untuk setengah bintang",
     "clearHint": "Tekan lagi untuk menghapus rating",
     "failed": "Tidak dapat menyimpan rating Anda"
+  },
+  "notifications": {
+    "title": "Notifikasi",
+    "empty": "Belum ada yang baru. Di sini kamu akan tahu saat yang kamu minta sedang dalam perjalanan atau siap ditonton.",
+    "clear": "Hapus semua"
   }
 }

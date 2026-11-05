@@ -612,5 +612,10 @@
     "halfHint": "Tryck igen för en halv stjärna",
     "clearHint": "Tryck igen för att ta bort betyget",
     "failed": "Det gick inte att spara ditt betyg"
+  },
+  "notifications": {
+    "title": "Aviseringar",
+    "empty": "Inget nytt. Här får du veta när något du bett om är på väg eller klart att titta på.",
+    "clear": "Rensa allt"
   }
 }

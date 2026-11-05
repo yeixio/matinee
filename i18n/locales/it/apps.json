@@ -619,5 +619,10 @@
     "halfHint": "Premi di nuovo per mezza stella",
     "clearHint": "Premi di nuovo per toglierlo",
     "failed": "Impossibile salvare il tuo voto"
+  },
+  "notifications": {
+    "title": "Notifiche",
+    "empty": "Niente di nuovo. Qui saprai quando ciò che hai chiesto è in arrivo o pronto da guardare.",
+    "clear": "Cancella tutto"
   }
 }

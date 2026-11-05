@@ -612,5 +612,10 @@
     "halfHint": "Press again for half a star",
     "clearHint": "Press again to take it back",
     "failed": "Couldn't save your rating"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "empty": "Nothing new. You'll hear here when something you asked for is on its way or ready to watch.",
+    "clear": "Clear all"
   }
 }

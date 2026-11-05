@@ -626,5 +626,10 @@
     "halfHint": "Naciśnij ponownie, aby dać pół gwiazdki",
     "clearHint": "Naciśnij ponownie, aby usunąć ocenę",
     "failed": "Nie udało się zapisać oceny"
+  },
+  "notifications": {
+    "title": "Powiadomienia",
+    "empty": "Nic nowego. Tutaj dowiesz się, kiedy to, o co prosiłeś, jest w drodze lub gotowe do obejrzenia.",
+    "clear": "Wyczyść wszystko"
   }
 }

@@ -605,5 +605,10 @@
     "halfHint": "Nhấn lần nữa để chọn nửa sao",
     "clearHint": "Nhấn lần nữa để bỏ đánh giá",
     "failed": "Không lưu được đánh giá của bạn"
+  },
+  "notifications": {
+    "title": "Thông báo",
+    "empty": "Chưa có gì mới. Bạn sẽ nhận tin ở đây khi thứ bạn yêu cầu đang về hoặc đã sẵn sàng để xem.",
+    "clear": "Xóa tất cả"
   }
 }
