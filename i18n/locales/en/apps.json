@@ -616,6 +616,13 @@
   "notifications": {
     "title": "Notifications",
     "empty": "Nothing new. You'll hear here when something you asked for is on its way or ready to watch.",
-    "clear": "Clear all"
+    "clear": "Clear all",
+    "channel": "Requests and downloads",
+    "phone": "Notify me on this device",
+    "phoneHint": "Hear when something you asked for is found or ready to watch, even with Matinee closed.",
+    "phoneBlocked": "Notifications for Matinee are off in this device's settings.",
+    "openSettings": "Open settings",
+    "offer": "Get these as notifications on this device, even with Matinee closed.",
+    "turnOn": "Turn on"
   }
 }

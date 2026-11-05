@@ -609,6 +609,13 @@
   "notifications": {
     "title": "Pemberitahuan",
     "empty": "Tiada yang baharu. Di sini anda akan tahu apabila apa yang anda minta sedang dalam perjalanan atau sedia untuk ditonton.",
-    "clear": "Kosongkan semua"
+    "clear": "Kosongkan semua",
+    "channel": "Permintaan dan muat turun",
+    "phone": "Beritahu saya pada peranti ini",
+    "phoneHint": "Dapatkan makluman apabila sesuatu yang anda minta ditemui atau sedia ditonton, walaupun Matinee ditutup.",
+    "phoneBlocked": "Pemberitahuan untuk Matinee dimatikan dalam tetapan peranti ini.",
+    "openSettings": "Buka tetapan",
+    "offer": "Terima ini sebagai pemberitahuan pada peranti ini, walaupun Matinee ditutup.",
+    "turnOn": "Hidupkan"
   }
 }

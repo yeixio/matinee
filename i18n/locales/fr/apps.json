@@ -623,6 +623,13 @@
   "notifications": {
     "title": "Notifications",
     "empty": "Rien de nouveau. Vous saurez ici quand ce que vous avez demandé arrive ou est prêt à regarder.",
-    "clear": "Tout effacer"
+    "clear": "Tout effacer",
+    "channel": "Demandes et téléchargements",
+    "phone": "M'avertir sur cet appareil",
+    "phoneHint": "Soyez prévenu quand un titre demandé est trouvé ou prêt à regarder, même quand Matinee est fermé.",
+    "phoneBlocked": "Les notifications de Matinee sont désactivées dans les réglages de cet appareil.",
+    "openSettings": "Ouvrir les réglages",
+    "offer": "Recevez-les en notifications sur cet appareil, même quand Matinee est fermé.",
+    "turnOn": "Activer"
   }
 }

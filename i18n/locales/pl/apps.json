@@ -630,6 +630,13 @@
   "notifications": {
     "title": "Powiadomienia",
     "empty": "Nic nowego. Tutaj dowiesz się, kiedy to, o co prosiłeś, jest w drodze lub gotowe do obejrzenia.",
-    "clear": "Wyczyść wszystko"
+    "clear": "Wyczyść wszystko",
+    "channel": "Prośby i pobrania",
+    "phone": "Powiadamiaj na tym urządzeniu",
+    "phoneHint": "Dowiedz się, gdy coś, o co prosiłeś, zostanie znalezione lub będzie gotowe do obejrzenia, nawet gdy Matinee jest zamknięte.",
+    "phoneBlocked": "Powiadomienia Matinee są wyłączone w ustawieniach tego urządzenia.",
+    "openSettings": "Otwórz ustawienia",
+    "offer": "Otrzymuj je jako powiadomienia na tym urządzeniu, nawet gdy Matinee jest zamknięte.",
+    "turnOn": "Włącz"
   }
 }

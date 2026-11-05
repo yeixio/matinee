@@ -51,6 +51,10 @@ When Radarr or Sonarr is [Box Office](https://github.com/yeixio/boxoffice), Mati
 
 Admins also hear about downloads that fail or look unsafe. Under **Settings → Add-ons → Radarr and Sonarr**, pick what admins hear about: **Problems** (the default), **Everything**, or **Only their own**.
 
+<!-- since: v0.2.3 -->
+On phones and tablets, people can also get these as the device's own notifications with the app closed: see [Notifications on your phone](/docs/apps/notifications/).
+<!-- /since -->
+
 ## Coming soon
 
 **Coming soon** (the calendar icon) lists new episodes and movie releases due in the next two months that aren't in your library yet. The same titles appear in a row on [Home](/docs/watching/home/), and in the [phone and TV apps](/docs/apps/phone-and-tv/).

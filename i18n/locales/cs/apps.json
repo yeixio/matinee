@@ -630,6 +630,13 @@
   "notifications": {
     "title": "Oznámení",
     "empty": "Nic nového. Tady se dozvíte, až bude to, o co jste požádali, na cestě nebo připravené ke sledování.",
-    "clear": "Vymazat vše"
+    "clear": "Vymazat vše",
+    "channel": "Žádosti a stahování",
+    "phone": "Upozorňovat na tomto zařízení",
+    "phoneHint": "Dozvíte se, když se najde nebo je připraveno ke sledování něco, o co jste požádali, i když je Matinee zavřené.",
+    "phoneBlocked": "Oznámení pro Matinee jsou vypnutá v nastavení tohoto zařízení.",
+    "openSettings": "Otevřít nastavení",
+    "offer": "Dostávejte je jako oznámení na tomto zařízení, i když je Matinee zavřené.",
+    "turnOn": "Zapnout"
   }
 }

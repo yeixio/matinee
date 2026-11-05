@@ -616,6 +616,13 @@
   "notifications": {
     "title": "Aviseringar",
     "empty": "Inget nytt. Här får du veta när något du bett om är på väg eller klart att titta på.",
-    "clear": "Rensa allt"
+    "clear": "Rensa allt",
+    "channel": "Önskemål och nedladdningar",
+    "phone": "Meddela mig på den här enheten",
+    "phoneHint": "Få veta när något du bett om har hittats eller är redo att titta på, även när Matinee är stängt.",
+    "phoneBlocked": "Aviseringar för Matinee är avstängda i enhetens inställningar.",
+    "openSettings": "Öppna inställningar",
+    "offer": "Få dessa som aviseringar på den här enheten, även när Matinee är stängt.",
+    "turnOn": "Slå på"
   }
 }

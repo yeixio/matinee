@@ -616,6 +616,13 @@
   "notifications": {
     "title": "Varsler",
     "empty": "Ingenting nytt. Her får du vite når noe du har bedt om er på vei eller klart til å se.",
-    "clear": "Fjern alle"
+    "clear": "Fjern alle",
+    "channel": "Ønsker og nedlastinger",
+    "phone": "Varsle meg på denne enheten",
+    "phoneHint": "Få vite når noe du har bedt om er funnet eller klart til å se, selv når Matinee er lukket.",
+    "phoneBlocked": "Varsler for Matinee er slått av i innstillingene på denne enheten.",
+    "openSettings": "Åpne innstillinger",
+    "offer": "Få disse som varsler på denne enheten, selv når Matinee er lukket.",
+    "turnOn": "Slå på"
   }
 }

@@ -623,6 +623,13 @@
   "notifications": {
     "title": "Notificări",
     "empty": "Nimic nou. Aici vei afla când ce ai cerut e pe drum sau gata de vizionat.",
-    "clear": "Șterge tot"
+    "clear": "Șterge tot",
+    "channel": "Cereri și descărcări",
+    "phone": "Anunță-mă pe acest dispozitiv",
+    "phoneHint": "Află când ceva ce ai cerut a fost găsit sau e gata de vizionat, chiar și cu Matinee închis.",
+    "phoneBlocked": "Notificările Matinee sunt dezactivate în setările acestui dispozitiv.",
+    "openSettings": "Deschide setările",
+    "offer": "Primește-le ca notificări pe acest dispozitiv, chiar și cu Matinee închis.",
+    "turnOn": "Activează"
   }
 }
