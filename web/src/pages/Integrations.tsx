@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Check, Clapperboard, Compass, PlugZap, Tv } from 'lucide-react'
 import { useEffect, useState, type FormEvent } from 'react'
 import { useTranslation } from 'react-i18next'
-import { api, type ArrApp, type ConnectionCheck, type Integration, type OverseerrCheck, type OverseerrConnection, type RequestMode } from '../api'
+import { api, type ArrApp, type ConnectionCheck, type Integration, type NotifyAdmins, type OverseerrCheck, type OverseerrConnection, type RequestMode } from '../api'
 import { Button, Field, inputClass } from '../components/ui'
 
 const apps: {
@@ -33,6 +33,7 @@ export function Integrations() {
         </p>
       </div>
       <div className="space-y-3">{apps.map((a) => (data ? <Connection key={a.app} {...a} saved={data[a.app]} /> : null))}</div>
+      {data && (data.radarr.connected || data.sonarr.connected) && <BoxOfficeNotifications />}
       <div id="overseerr" className="scroll-mt-24 pt-4">
         <h2 className="text-lg font-semibold">Overseerr</h2>
         <p className="mt-1 text-sm text-muted">{t('integrations.overseerr.intro')}</p>
@@ -396,6 +397,48 @@ function RequestModeSetting() {
           <span>
             <span className="block text-sm font-medium">{t(`integrations.mode.${m}.label`)}</span>
             <span className="block text-sm text-muted">{t(`integrations.mode.${m}.detail`)}</span>
+          </span>
+        </label>
+      ))}
+    </fieldset>
+  )
+}
+
+const adminModes: NotifyAdmins[] = ['problems', 'all', 'off']
+
+// When Radarr or Sonarr is really Box Office, it tells people about what
+// they asked for; admins pick what they hear about.
+function BoxOfficeNotifications() {
+  const { t } = useTranslation()
+  const qc = useQueryClient()
+  const { data } = useQuery({
+    queryKey: ['notification-settings'],
+    queryFn: api.notificationSettings,
+    // Matinee checks within half a minute of a connection changing.
+    refetchInterval: (q) => (q.state.data?.boxOffice.length ? false : 15_000),
+  })
+  const save = useMutation({
+    mutationFn: api.saveNotificationSettings,
+    onSuccess: (s) => qc.setQueryData(['notification-settings'], s),
+  })
+  if (!data?.boxOffice.some((b) => b.id)) return null
+  return (
+    <fieldset className="space-y-2 pt-2">
+      <legend className="mb-1 text-sm font-medium">{t('notifications.admins.legend')}</legend>
+      <p className="mb-2 text-sm text-muted">{t('notifications.admins.intro')}</p>
+      {adminModes.map((m) => (
+        <label key={m} className="flex cursor-pointer items-start gap-3 rounded-xl border border-line/60 bg-surface/50 p-3">
+          <input
+            type="radio"
+            name="notify-admins"
+            className="mt-1 accent-[var(--color-accent)]"
+            checked={data.admins === m}
+            disabled={save.isPending}
+            onChange={() => save.mutate(m)}
+          />
+          <span>
+            <span className="block text-sm font-medium">{t(`notifications.admins.${m}.label`)}</span>
+            <span className="block text-sm text-muted">{t(`notifications.admins.${m}.detail`)}</span>
           </span>
         </label>
       ))}

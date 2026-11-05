@@ -1382,5 +1382,27 @@
       "more": "De första 300 visas. Sök efter en kanal för att se andra.",
       "everything": "allt"
     }
+  },
+  "notifications": {
+    "title": "Aviseringar",
+    "empty": "Inget nytt. Här får du veta när något du bett om är på väg eller klart att titta på.",
+    "clear": "Rensa allt",
+    "open": "Titta",
+    "admins": {
+      "legend": "Box Office-aviseringar för administratörer",
+      "intro": "Box Office berättar för folk i Matinee-apparna när det de bett om är på väg och när det är klart. Välj vad administratörer också får höra om.",
+      "problems": {
+        "label": "Problem",
+        "detail": "Nedladdningar som misslyckas eller verkar osäkra."
+      },
+      "all": {
+        "label": "Allt",
+        "detail": "Varje nedladdning som startar, blir klar eller misslyckas, oavsett vem som bad om den."
+      },
+      "off": {
+        "label": "Bara egna",
+        "detail": "Bara titlar de själva bett om, som alla andra."
+      }
+    }
   }
 }

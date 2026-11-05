@@ -1382,5 +1382,27 @@
       "more": "Die ersten 300 werden gezeigt. Suche einen Sender, um andere zu sehen.",
       "everything": "alles"
     }
+  },
+  "notifications": {
+    "title": "Benachrichtigungen",
+    "empty": "Nichts Neues. Hier erfährst du, wenn etwas, das du dir gewünscht hast, unterwegs oder bereit zum Ansehen ist.",
+    "clear": "Alle löschen",
+    "open": "Ansehen",
+    "admins": {
+      "legend": "Box-Office-Benachrichtigungen für Admins",
+      "intro": "Box Office sagt Leuten in den Matinee-Apps, wenn ihr Wunsch unterwegs ist und wenn er bereit ist. Wähle, wovon Admins außerdem hören.",
+      "problems": {
+        "label": "Probleme",
+        "detail": "Downloads, die fehlschlagen oder unsicher wirken."
+      },
+      "all": {
+        "label": "Alles",
+        "detail": "Jeder Download, der startet, fertig wird oder fehlschlägt, egal wer ihn gewünscht hat."
+      },
+      "off": {
+        "label": "Nur eigene",
+        "detail": "Nur Titel, die sie sich selbst gewünscht haben, wie alle anderen."
+      }
+    }
   }
 }

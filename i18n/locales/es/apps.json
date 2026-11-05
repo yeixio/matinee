@@ -619,5 +619,10 @@
     "halfHint": "Pulsa otra vez para media estrella",
     "clearHint": "Pulsa otra vez para quitarla",
     "failed": "No se pudo guardar tu valoración"
+  },
+  "notifications": {
+    "title": "Notificaciones",
+    "empty": "Nada nuevo. Aquí sabrás cuándo lo que pediste está en camino o listo para ver.",
+    "clear": "Borrar todo"
   }
 }

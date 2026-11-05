@@ -1371,5 +1371,27 @@
       "more": "Menampilkan 300 pertama. Cari saluran untuk melihat yang lain.",
       "everything": "semua"
     }
+  },
+  "notifications": {
+    "title": "Notifikasi",
+    "empty": "Belum ada yang baru. Di sini kamu akan tahu saat yang kamu minta sedang dalam perjalanan atau siap ditonton.",
+    "clear": "Hapus semua",
+    "open": "Tonton",
+    "admins": {
+      "legend": "Notifikasi Box Office untuk admin",
+      "intro": "Box Office memberi tahu orang-orang di aplikasi Matinee saat yang mereka minta sedang dalam perjalanan dan saat sudah siap. Pilih juga apa yang didengar admin.",
+      "problems": {
+        "label": "Masalah",
+        "detail": "Unduhan yang gagal atau tampak tidak aman."
+      },
+      "all": {
+        "label": "Semuanya",
+        "detail": "Setiap unduhan yang dimulai, selesai, atau gagal, siapa pun yang memintanya."
+      },
+      "off": {
+        "label": "Hanya milik sendiri",
+        "detail": "Hanya judul yang mereka minta sendiri, seperti orang lain."
+      }
+    }
   }
 }

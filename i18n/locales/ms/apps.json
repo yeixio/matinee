@@ -605,5 +605,10 @@
     "halfHint": "Tekan lagi untuk separuh bintang",
     "clearHint": "Tekan lagi untuk membuang penilaian",
     "failed": "Tidak dapat menyimpan penilaian anda"
+  },
+  "notifications": {
+    "title": "Pemberitahuan",
+    "empty": "Tiada yang baharu. Di sini anda akan tahu apabila apa yang anda minta sedang dalam perjalanan atau sedia untuk ditonton.",
+    "clear": "Kosongkan semua"
   }
 }

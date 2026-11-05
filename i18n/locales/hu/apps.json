@@ -612,5 +612,10 @@
     "halfHint": "Nyomd meg újra egy fél csillaghoz",
     "clearHint": "Nyomd meg újra az értékelés törléséhez",
     "failed": "Nem sikerült menteni az értékelést"
+  },
+  "notifications": {
+    "title": "Értesítések",
+    "empty": "Nincs újdonság. Itt értesülsz, amikor amit kértél, úton van vagy nézhető.",
+    "clear": "Összes törlése"
   }
 }

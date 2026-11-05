@@ -7,6 +7,7 @@
   "a_smart_collection_fills_itself": "智能合集会自动填充",
   "a_smart_collection_needs_a_filter": "智能合集需要筛选条件",
   "add_at_least_one_folder": "请至少添加一个文件夹",
+  "admins_must_be_all_problems_or_off": "admins 必须是 all、problems 或 off",
   "admins_only": "仅限管理员",
   "already_approved": "已批准",
   "an_accounts_name_and_access_are_changed_under_users": "帐户的名称和权限请在“用户”中更改",

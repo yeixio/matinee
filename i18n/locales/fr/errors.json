@@ -7,6 +7,7 @@
   "a_smart_collection_fills_itself": "une collection intelligente se remplit toute seule",
   "a_smart_collection_needs_a_filter": "une collection intelligente a besoin d’un filtre",
   "add_at_least_one_folder": "ajoutez au moins un dossier",
+  "admins_must_be_all_problems_or_off": "admins doit valoir all, problems ou off",
   "admins_only": "réservé aux administrateurs",
   "already_approved": "déjà approuvée",
   "an_accounts_name_and_access_are_changed_under_users": "le nom et l’accès d’un compte se modifient dans Personnes",

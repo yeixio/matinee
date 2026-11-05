@@ -1393,5 +1393,27 @@
       "more": "Les 300 premières sont affichées. Cherchez une chaîne pour voir les autres.",
       "everything": "tout"
     }
+  },
+  "notifications": {
+    "title": "Notifications",
+    "empty": "Rien de nouveau. Vous saurez ici quand ce que vous avez demandé arrive ou est prêt à regarder.",
+    "clear": "Tout effacer",
+    "open": "Regarder",
+    "admins": {
+      "legend": "Notifications Box Office pour les administrateurs",
+      "intro": "Box Office prévient les gens dans les apps Matinee quand ce qu'ils ont demandé arrive et quand c'est prêt. Choisissez aussi ce dont les administrateurs sont informés.",
+      "problems": {
+        "label": "Problèmes",
+        "detail": "Les téléchargements qui échouent ou semblent dangereux."
+      },
+      "all": {
+        "label": "Tout",
+        "detail": "Chaque téléchargement qui commence, se termine ou échoue, quel que soit le demandeur."
+      },
+      "off": {
+        "label": "Seulement les leurs",
+        "detail": "Seulement les titres qu'ils ont demandés eux-mêmes, comme tout le monde."
+      }
+    }
   }
 }

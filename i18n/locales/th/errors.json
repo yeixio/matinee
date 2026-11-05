@@ -7,6 +7,7 @@
   "a_smart_collection_fills_itself": "คอลเลกชันอัจฉริยะเติมตัวเอง",
   "a_smart_collection_needs_a_filter": "คอลเลกชันอัจฉริยะต้องมีตัวกรอง",
   "add_at_least_one_folder": "เพิ่มอย่างน้อยหนึ่งโฟลเดอร์",
+  "admins_must_be_all_problems_or_off": "admins ต้องเป็น all, problems หรือ off",
   "admins_only": "สำหรับผู้ดูแลเท่านั้น",
   "already_approved": "อนุมัติแล้ว",
   "an_accounts_name_and_access_are_changed_under_users": "เปลี่ยนชื่อและสิทธิ์ของบัญชีได้ที่ผู้ใช้",

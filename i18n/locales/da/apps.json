@@ -612,5 +612,10 @@
     "halfHint": "Tryk igen for en halv stjerne",
     "clearHint": "Tryk igen for at fjerne din bedømmelse",
     "failed": "Din bedømmelse kunne ikke gemmes"
+  },
+  "notifications": {
+    "title": "Notifikationer",
+    "empty": "Intet nyt. Her hører du, når noget, du har bedt om, er på vej eller klar til at se.",
+    "clear": "Ryd alle"
   }
 }

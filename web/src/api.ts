@@ -229,6 +229,28 @@ export type Extra = {
 
 export type ArrApp = 'radarr' | 'sonarr'
 // A Radarr or Sonarr connection. The API key stays on the server.
+// Notifications (see internal/api/notifications.go): Box Office telling
+// people what they asked for is on its way or ready, and admins about
+// downloads that failed.
+export type AppNotification = {
+  id: string
+  event: string
+  level: 'info' | 'warning' | 'critical'
+  title: string
+  body?: string
+  kind?: 'movie' | 'show'
+  tmdbId?: number
+  tvdbId?: number
+  poster?: string
+  itemId?: number // the title in the library, once it's there
+  createdAt: number // seconds
+  read: boolean
+}
+export type NotifyAdmins = 'all' | 'problems' | 'off'
+export type NotificationSettings = {
+  admins: NotifyAdmins
+  boxOffice: { app: ArrApp; id?: string; checkedAt: number; error?: string }[]
+}
 export type Integration = { connected: boolean; url: string; hasApiKey: boolean; qualityProfileId: number; rootFolder: string }
 export type IntegrationConfig = { url: string; apiKey?: string; qualityProfileId?: number; rootFolder?: string }
 export type QualityProfile = { id: number; name: string }
@@ -1361,6 +1383,11 @@ export const api = {
     request<void>('PUT', '/api/v1/me/password', { current, new: next }),
 
   integrations: () => request<Record<ArrApp, Integration>>('GET', '/api/v1/integrations'),
+  notifications: () => request<{ notifications: AppNotification[]; unread: number }>('GET', '/api/v1/notifications'),
+  readNotifications: (ids: string[] = []) => request<void>('POST', '/api/v1/notifications/read', { ids }),
+  clearNotifications: (ids: string[] = []) => request<void>('POST', '/api/v1/notifications/clear', { ids }),
+  notificationSettings: () => request<NotificationSettings>('GET', '/api/v1/admin/notifications'),
+  saveNotificationSettings: (admins: NotifyAdmins) => request<NotificationSettings>('PUT', '/api/v1/admin/notifications', { admins }),
   testIntegration: (app: ArrApp, c: IntegrationConfig) => request<ConnectionCheck>('POST', `/api/v1/integrations/${app}/test`, c),
   saveIntegration: (app: ArrApp, c: IntegrationConfig) => request<Integration>('PUT', `/api/v1/integrations/${app}`, c),
   deleteIntegration: (app: ArrApp) => request<void>('DELETE', `/api/v1/integrations/${app}`),

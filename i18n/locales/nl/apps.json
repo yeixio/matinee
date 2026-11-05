@@ -612,5 +612,10 @@
     "halfHint": "Druk nog eens voor een halve ster",
     "clearHint": "Druk nog eens om je beoordeling te wissen",
     "failed": "Je beoordeling kon niet worden opgeslagen"
+  },
+  "notifications": {
+    "title": "Meldingen",
+    "empty": "Niets nieuws. Hier hoor je wanneer iets dat je hebt aangevraagd onderweg is of klaarstaat.",
+    "clear": "Alles wissen"
   }
 }

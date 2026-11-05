@@ -612,5 +612,10 @@
     "halfHint": "Nochmal drücken für einen halben Stern",
     "clearHint": "Nochmal drücken, um die Bewertung zu entfernen",
     "failed": "Deine Bewertung konnte nicht gespeichert werden"
+  },
+  "notifications": {
+    "title": "Benachrichtigungen",
+    "empty": "Nichts Neues. Hier erfährst du, wenn etwas, das du dir gewünscht hast, unterwegs oder bereit zum Ansehen ist.",
+    "clear": "Alle löschen"
   }
 }

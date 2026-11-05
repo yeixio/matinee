@@ -626,5 +626,10 @@
     "halfHint": "Stiskněte znovu pro polovinu hvězdičky",
     "clearHint": "Stiskněte znovu pro zrušení hodnocení",
     "failed": "Hodnocení se nepodařilo uložit"
+  },
+  "notifications": {
+    "title": "Oznámení",
+    "empty": "Nic nového. Tady se dozvíte, až bude to, o co jste požádali, na cestě nebo připravené ke sledování.",
+    "clear": "Vymazat vše"
   }
 }

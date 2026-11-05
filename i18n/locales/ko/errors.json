@@ -7,6 +7,7 @@
   "a_smart_collection_fills_itself": "스마트 컬렉션은 자동으로 채워집니다",
   "a_smart_collection_needs_a_filter": "스마트 컬렉션에는 필터가 필요합니다",
   "add_at_least_one_folder": "폴더를 하나 이상 추가하세요",
+  "admins_must_be_all_problems_or_off": "admins는 all, problems, off 중 하나여야 합니다",
   "admins_only": "관리자 전용입니다",
   "already_approved": "이미 승인되었습니다",
   "an_accounts_name_and_access_are_changed_under_users": "계정 이름과 권한은 사용자에서 바꿉니다",

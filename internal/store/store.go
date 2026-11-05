@@ -602,6 +602,25 @@ var migrations = []string{
 		updated_at BIGINT NOT NULL,
 		PRIMARY KEY (item_id, track)
 	)`,
+	// 98-99: what people are told about, such as Box Office starting or
+	// finishing what they asked for (see notifications.go).
+	`CREATE TABLE notifications (
+		id         TEXT PRIMARY KEY,
+		user_id    BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+		source     TEXT NOT NULL, -- where it came from, unique per person, such as boxoffice:<id>:<n>
+		event      TEXT NOT NULL,
+		level      TEXT NOT NULL DEFAULT 'info',
+		title      TEXT NOT NULL,
+		body       TEXT NOT NULL DEFAULT '',
+		kind       TEXT NOT NULL DEFAULT '', -- movie or show, when it's about a title
+		tmdb_id    BIGINT NOT NULL DEFAULT 0,
+		tvdb_id    BIGINT NOT NULL DEFAULT 0,
+		poster     TEXT NOT NULL DEFAULT '',
+		created_at BIGINT NOT NULL,
+		read_at    BIGINT NOT NULL DEFAULT 0,
+		UNIQUE (user_id, source)
+	)`,
+	"CREATE INDEX notifications_user ON notifications(user_id, created_at)",
 }
 
 func now() int64 { return time.Now().Unix() }

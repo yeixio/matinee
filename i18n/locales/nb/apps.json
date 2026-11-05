@@ -612,5 +612,10 @@
     "halfHint": "Trykk igjen for en halv stjerne",
     "clearHint": "Trykk igjen for å fjerne vurderingen",
     "failed": "Kunne ikke lagre vurderingen din"
+  },
+  "notifications": {
+    "title": "Varsler",
+    "empty": "Ingenting nytt. Her får du vite når noe du har bedt om er på vei eller klart til å se.",
+    "clear": "Fjern alle"
   }
 }

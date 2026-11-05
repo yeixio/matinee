@@ -1382,5 +1382,27 @@
       "more": "De eerste 300 worden getoond. Zoek een zender om andere te zien.",
       "everything": "alles"
     }
+  },
+  "notifications": {
+    "title": "Meldingen",
+    "empty": "Niets nieuws. Hier hoor je wanneer iets dat je hebt aangevraagd onderweg is of klaarstaat.",
+    "clear": "Alles wissen",
+    "open": "Kijken",
+    "admins": {
+      "legend": "Box Office-meldingen voor beheerders",
+      "intro": "Box Office laat mensen in de Matinee-apps weten wanneer hun aanvraag onderweg is en wanneer die klaar is. Kies waar beheerders ook over horen.",
+      "problems": {
+        "label": "Problemen",
+        "detail": "Downloads die mislukken of onveilig lijken."
+      },
+      "all": {
+        "label": "Alles",
+        "detail": "Elke download die start, klaar is of mislukt, wie hem ook aanvroeg."
+      },
+      "off": {
+        "label": "Alleen eigen",
+        "detail": "Alleen titels die ze zelf hebben aangevraagd, net als iedereen."
+      }
+    }
   }
 }

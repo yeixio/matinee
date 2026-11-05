@@ -7,6 +7,7 @@
   "a_smart_collection_fills_itself": "المجموعة الذكية تملأ نفسها",
   "a_smart_collection_needs_a_filter": "تحتاج المجموعة الذكية إلى عامل تصفية",
   "add_at_least_one_folder": "أضف مجلدًا واحدًا على الأقل",
+  "admins_must_be_all_problems_or_off": "يجب أن تكون قيمة admins هي all أو problems أو off",
   "admins_only": "للمسؤولين فقط",
   "already_approved": "تمت الموافقة مسبقًا",
   "an_accounts_name_and_access_are_changed_under_users": "يُغيَّر اسم الحساب وصلاحياته من المستخدمين",

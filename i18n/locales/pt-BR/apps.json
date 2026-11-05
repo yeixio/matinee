@@ -619,5 +619,10 @@
     "halfHint": "Pressione de novo para meia estrela",
     "clearHint": "Pressione de novo para removê-la",
     "failed": "Não foi possível salvar sua avaliação"
+  },
+  "notifications": {
+    "title": "Notificações",
+    "empty": "Nada de novo. Você vai saber aqui quando o que pediu estiver a caminho ou pronto para assistir.",
+    "clear": "Limpar tudo"
   }
 }

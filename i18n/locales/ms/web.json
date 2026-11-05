@@ -1371,5 +1371,27 @@
       "more": "Menunjukkan 300 yang pertama. Cari saluran untuk melihat yang lain.",
       "everything": "semua"
     }
+  },
+  "notifications": {
+    "title": "Pemberitahuan",
+    "empty": "Tiada yang baharu. Di sini anda akan tahu apabila apa yang anda minta sedang dalam perjalanan atau sedia untuk ditonton.",
+    "clear": "Kosongkan semua",
+    "open": "Tonton",
+    "admins": {
+      "legend": "Pemberitahuan Box Office untuk pentadbir",
+      "intro": "Box Office memberitahu orang dalam apl Matinee apabila apa yang mereka minta sedang dalam perjalanan dan apabila ia sedia. Pilih perkara yang turut didengar oleh pentadbir.",
+      "problems": {
+        "label": "Masalah",
+        "detail": "Muat turun yang gagal atau kelihatan tidak selamat."
+      },
+      "all": {
+        "label": "Semua",
+        "detail": "Setiap muat turun yang bermula, selesai atau gagal, tidak kira siapa yang memintanya."
+      },
+      "off": {
+        "label": "Hanya milik sendiri",
+        "detail": "Hanya tajuk yang mereka minta sendiri, seperti orang lain."
+      }
+    }
   }
 }

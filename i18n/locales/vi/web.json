@@ -1371,5 +1371,27 @@
       "more": "Đang hiện 300 kênh đầu. Tìm một kênh để xem kênh khác.",
       "everything": "tất cả"
     }
+  },
+  "notifications": {
+    "title": "Thông báo",
+    "empty": "Chưa có gì mới. Bạn sẽ nhận tin ở đây khi thứ bạn yêu cầu đang về hoặc đã sẵn sàng để xem.",
+    "clear": "Xóa tất cả",
+    "open": "Xem",
+    "admins": {
+      "legend": "Thông báo Box Office cho quản trị viên",
+      "intro": "Box Office báo cho mọi người trong ứng dụng Matinee khi thứ họ yêu cầu đang về và khi đã sẵn sàng. Chọn những gì quản trị viên cũng được báo.",
+      "problems": {
+        "label": "Sự cố",
+        "detail": "Các lượt tải thất bại hoặc có vẻ không an toàn."
+      },
+      "all": {
+        "label": "Tất cả",
+        "detail": "Mọi lượt tải bắt đầu, hoàn tất hoặc thất bại, dù ai yêu cầu."
+      },
+      "off": {
+        "label": "Chỉ của họ",
+        "detail": "Chỉ những tựa họ tự yêu cầu, như mọi người khác."
+      }
+    }
   }
 }

@@ -435,6 +435,8 @@ func run() error {
 		dbKind = "postgres"
 	}
 	go alerter.Run(ctx)
+	// Box Office's notifications go on to the people they're for.
+	go apiServer.RunNotifications(ctx)
 	log.Info("matinee started", "version", version.Version, "addr", cfg.Addr, "home_addr", cfg.HomeAddr, "remote_addr", cfg.RemoteAddr, "data", cfg.DataDir, "database", dbKind)
 
 	select {

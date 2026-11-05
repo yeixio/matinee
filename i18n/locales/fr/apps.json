@@ -619,5 +619,10 @@
     "halfHint": "Appuyez à nouveau pour une demi-étoile",
     "clearHint": "Appuyez à nouveau pour la retirer",
     "failed": "Impossible d'enregistrer votre note"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "empty": "Rien de nouveau. Vous saurez ici quand ce que vous avez demandé arrive ou est prêt à regarder.",
+    "clear": "Tout effacer"
   }
 }

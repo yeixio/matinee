@@ -619,5 +619,10 @@
     "halfHint": "Apasă din nou pentru o jumătate de stea",
     "clearHint": "Apasă din nou pentru a o șterge",
     "failed": "Nu am putut salva evaluarea ta"
+  },
+  "notifications": {
+    "title": "Notificări",
+    "empty": "Nimic nou. Aici vei afla când ce ai cerut e pe drum sau gata de vizionat.",
+    "clear": "Șterge tot"
   }
 }

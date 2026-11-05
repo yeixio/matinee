@@ -612,5 +612,10 @@
     "halfHint": "Paina uudelleen saadaksesi puoli tähteä",
     "clearHint": "Paina uudelleen poistaaksesi arvion",
     "failed": "Arviota ei voitu tallentaa"
+  },
+  "notifications": {
+    "title": "Ilmoitukset",
+    "empty": "Ei mitään uutta. Täällä kuulet, kun pyytämäsi on tulossa tai valmis katsottavaksi.",
+    "clear": "Tyhjennä kaikki"
   }
 }

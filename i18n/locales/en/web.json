@@ -1382,5 +1382,27 @@
       "more": "Showing the first 300. Find a channel to see others.",
       "everything": "everything"
     }
+  },
+  "notifications": {
+    "title": "Notifications",
+    "empty": "Nothing new. You'll hear here when something you asked for is on its way or ready to watch.",
+    "clear": "Clear all",
+    "open": "Watch",
+    "admins": {
+      "legend": "Box Office notifications for admins",
+      "intro": "Box Office tells people in the Matinee apps when what they asked for is on its way and when it's ready. Pick what admins hear about too.",
+      "problems": {
+        "label": "Problems",
+        "detail": "Downloads that fail or look unsafe."
+      },
+      "all": {
+        "label": "Everything",
+        "detail": "Every download starting, finishing or failing, whoever asked for it."
+      },
+      "off": {
+        "label": "Only their own",
+        "detail": "Only titles they asked for themselves, like everyone else."
+      }
+    }
   }
 }
