@@ -8,7 +8,7 @@ sidebar:
 
 When your server uses [Box Office](/docs/server/radarr-and-sonarr/#box-office), Matinee tells you when something you asked for is found and downloading, and when it's ready to watch. Admins also hear about downloads that fail or look unsafe. Inside the app, a banner shows these while Matinee is open, and the bell on Home lists them.
 
-On an iPhone, iPad, or Android phone or tablet, they can also arrive as the device's own notifications, on the lock screen, with Matinee closed. This needs app version 1.0.29 or later. There's nothing to set up on the server beyond connecting Box Office.
+On an iPhone, iPad, or Android phone or tablet, they can also arrive as the device's own notifications, on the lock screen, with Matinee closed. This needs app version 1.0.30 or later. There's nothing to set up on the server beyond connecting Box Office.
 
 ## Turning them on
 
