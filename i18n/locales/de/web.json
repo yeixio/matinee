@@ -1427,5 +1427,53 @@
         "detail": "Nur Titel, die sie sich selbst gewünscht haben, wie alle anderen."
       }
     }
+  },
+  "boxOffice": {
+    "onItsWay": "Unterwegs",
+    "stage": {
+      "searching": "Wird gesucht",
+      "queued": "Wartet auf den Download",
+      "downloading": "Wird heruntergeladen",
+      "paused": "Angehalten",
+      "waiting": "Heruntergeladen",
+      "checking": "Wird geprüft",
+      "repairing": "Wird repariert",
+      "unpacking": "Wird entpackt",
+      "importing": "Kommt in die Mediathek",
+      "waitingToMove": "Wartet auf einen Admin",
+      "imported": "Bald bereit",
+      "problem": "Wartet auf eine gute Kopie"
+    },
+    "eta": "Noch etwa {{time}}",
+    "notifyMe": "Benachrichtigen",
+    "notifying": "Wir sagen Bescheid",
+    "copies": {
+      "button": "Andere Kopien",
+      "editions": "Andere Fassungen",
+      "looking": "Fassungen werden gesucht…",
+      "none": "Gerade keine anderen Fassungen gefunden.",
+      "owned": "In der Mediathek",
+      "keepBoth": "Zusätzlich hinzufügen",
+      "replace": "Diese Kopie ersetzen",
+      "better": "Bessere Kopie anfragen",
+      "bad": "Diese Kopie ist fehlerhaft",
+      "reason": "Was stimmt damit nicht?",
+      "reasonExample": "Falsche Sprache, nicht synchron, schlechtes Bild…",
+      "send": "Senden",
+      "sent": "Angefragt. Ist unterwegs.",
+      "pending": "Angefragt. Ein Admin sieht es sich an.",
+      "needsApproval": "Ein Admin genehmigt das zuerst."
+    },
+    "ask": {
+      "alongside": "{{edition}}, zusätzlich zur vorhandenen Kopie",
+      "replaceEdition": "{{edition}}, anstelle der vorhandenen Kopie",
+      "better": "Eine bessere Kopie",
+      "bad": "Eine neue Kopie: {{reason}}",
+      "badNoReason": "Eine neue Kopie"
+    },
+    "settings": {
+      "approval": "Andere Fassungen und bessere Kopien brauchen immer die Zustimmung eines Admins",
+      "approvalDetail": "Auch wenn Anfragen sofort hinzugefügt werden. Nur mit Box Office."
+    }
   }
 }

@@ -162,6 +162,11 @@ type serverSettings struct {
 	// HolidayRows shows a row of titles for a holiday on Home in the weeks
 	// before it (see holidays.go). On unless an admin turns it off.
 	HolidayRows bool `json:"holidayRows"`
+	// BoxOfficeAsksNeedApproval makes other editions and better copies,
+	// asked for from Box Office, always wait for an admin, even when
+	// requests are added right away (see boxoffice_pairing.go). Off unless
+	// an admin turns it on.
+	BoxOfficeAsksNeedApproval bool `json:"boxOfficeAsksNeedApproval"`
 	// OnlineLyrics looks up songs' words on LRCLIB when there are none
 	// next to the song or in its tags (see lyrics.go). Off unless an admin
 	// turns it on.
@@ -256,11 +261,16 @@ func (s *Server) settings(ctx context.Context) (serverSettings, error) {
 	if err != nil {
 		return serverSettings{}, err
 	}
+	asksNeed, err := s.Store.Setting(ctx, settingAsksNeedApproval)
+	if err != nil {
+		return serverSettings{}, err
+	}
 	themes, problems := s.themes()
 	def, err := s.defaultTheme(ctx, themes)
 	set := serverSettings{AdaptiveQuality: quality.Adaptive, QualitySteps: stepIDs(quality.Steps), RemoteQualityCap: quality.Cap, RequireSignInAtHome: required, Requests: mode, RemoteTrailers: trailers, HolidayRows: holidaysOn, OnlineLyrics: lyricsOn, SubtitleSync: s.autoSyncs(ctx), Theme: def,
 		RemoteAccess: remoteOn, RemoteForwardedPort: forwarded, Remote: s.remoteStatus(), PublicURL: s.PublicURL, PublicURLHomeOnly: s.PublicURL != "" && !s.publicURLIsPublic(ctx), TMDB: tmdb,
-		ThemeProblems: []string{}, HardwareAcceleration: hwaccel.Auto, Hardware: &hwaccel.Status{Available: []hwaccel.Accel{}}, ToneMapping: toneMap}
+		ThemeProblems: []string{}, HardwareAcceleration: hwaccel.Auto, Hardware: &hwaccel.Status{Available: []hwaccel.Accel{}}, ToneMapping: toneMap,
+		BoxOfficeAsksNeedApproval: asksNeed == "true"}
 	if s.Transcoder != nil {
 		tools := s.Transcoder.ToneTools()
 		set.ToneMapTools = &tools
@@ -298,6 +308,7 @@ func (s *Server) putSettings(w http.ResponseWriter, r *http.Request) {
 		ToneMapping          *string   `json:"toneMapping"`
 		RemoteTrailers       *bool     `json:"remoteTrailers"`
 		HolidayRows          *bool     `json:"holidayRows"`
+		BoxOfficeAsksNeed    *bool     `json:"boxOfficeAsksNeedApproval"`
 		OnlineLyrics         *bool     `json:"onlineLyrics"`
 		SubtitleSync         *bool     `json:"subtitleSync"`
 		AdaptiveQuality      *bool     `json:"adaptiveQuality"`
@@ -435,6 +446,12 @@ func (s *Server) putSettings(w http.ResponseWriter, r *http.Request) {
 	}
 	if in.AdaptiveQuality != nil {
 		if err := s.Store.SetSetting(ctx, settingAdaptiveQuality, strconv.FormatBool(*in.AdaptiveQuality)); err != nil {
+			s.serverError(w, err)
+			return
+		}
+	}
+	if in.BoxOfficeAsksNeed != nil {
+		if err := s.Store.SetSetting(ctx, settingAsksNeedApproval, strconv.FormatBool(*in.BoxOfficeAsksNeed)); err != nil {
 			s.serverError(w, err)
 			return
 		}

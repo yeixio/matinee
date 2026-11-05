@@ -6,6 +6,7 @@ import (
 	"database/sql"
 	"encoding/hex"
 	"errors"
+	"strconv"
 	"strings"
 )
 
@@ -38,17 +39,36 @@ type Request struct {
 	Username         string `json:"username"`
 	CreatedAt        int64  `json:"createdAt"`
 	UpdatedAt        int64  `json:"updatedAt"`
+	// Ask is what a request with Box Office is for, beyond adding a title:
+	// AskEdition (another edition of a movie in a library, Edition, to
+	// replace its copy or go alongside it, Mode), AskBetter (a better
+	// copy) or AskReplace (another copy, the one there being bad: Reason
+	// says why). "" is a title to add. Season and Episode name the episode
+	// of a show that a better or replacement copy is for.
+	Ask     string `json:"ask,omitempty"`
+	Edition string `json:"edition,omitempty"`
+	Mode    string `json:"mode,omitempty"`
+	Reason  string `json:"reason,omitempty"`
+	Season  int    `json:"seasonNumber,omitempty"`
+	Episode int    `json:"episodeNumber,omitempty"`
 }
 
+// What a request asks Box Office for, beyond adding a title.
+const (
+	AskEdition = "edition"
+	AskBetter  = "better"
+	AskReplace = "replace"
+)
+
 const requestCols = `r.id, r.kind, r.tmdb_id, r.tvdb_id, r.title, r.year, r.poster, r.quality_profile_id, r.state, r.error,
-	r.user_id, COALESCE(u.username, ''), r.created_at, r.updated_at`
+	r.user_id, COALESCE(u.username, ''), r.created_at, r.updated_at, r.ask, r.edition, r.mode, r.reason, r.season, r.episode`
 
 const requestFrom = ` FROM requests r LEFT JOIN users u ON u.id = r.user_id`
 
 func scanRequest(row scanner) (Request, error) {
 	var r Request
 	err := row.Scan(&r.ID, &r.Kind, &r.TMDBID, &r.TVDBID, &r.Title, &r.Year, &r.Poster, &r.QualityProfileID, &r.State, &r.Error,
-		&r.UserID, &r.Username, &r.CreatedAt, &r.UpdatedAt)
+		&r.UserID, &r.Username, &r.CreatedAt, &r.UpdatedAt, &r.Ask, &r.Edition, &r.Mode, &r.Reason, &r.Season, &r.Episode)
 	if errors.Is(err, sql.ErrNoRows) {
 		return r, ErrNotFound
 	}
@@ -65,9 +85,10 @@ func newID() string {
 func (s *Store) CreateRequest(ctx context.Context, r Request) (Request, error) {
 	r.ID, r.State, r.CreatedAt, r.UpdatedAt = newID(), RequestPending, now(), now()
 	_, err := s.db.ExecContext(ctx, `INSERT INTO requests
-		(id, user_id, kind, tmdb_id, tvdb_id, title, year, poster, quality_profile_id, state, error, created_at, updated_at)
-		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, '', ?, ?)`,
-		r.ID, r.UserID, r.Kind, r.TMDBID, r.TVDBID, r.Title, r.Year, r.Poster, r.QualityProfileID, r.State, r.CreatedAt, r.UpdatedAt)
+		(id, user_id, kind, tmdb_id, tvdb_id, title, year, poster, quality_profile_id, state, error, created_at, updated_at, ask, edition, mode, reason, season, episode)
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, '', ?, ?, ?, ?, ?, ?, ?, ?)`,
+		r.ID, r.UserID, r.Kind, r.TMDBID, r.TVDBID, r.Title, r.Year, r.Poster, r.QualityProfileID, r.State, r.CreatedAt, r.UpdatedAt,
+		r.Ask, r.Edition, r.Mode, r.Reason, r.Season, r.Episode)
 	if err != nil {
 		return r, err
 	}
@@ -86,13 +107,13 @@ func (s *Store) OpenRequest(ctx context.Context, kind string, id int) (Request, 
 		col = "r.tvdb_id"
 	}
 	return scanRequest(s.db.QueryRowContext(ctx, "SELECT "+requestCols+requestFrom+
-		" WHERE r.kind = ? AND "+col+" = ? AND r.state IN ('pending', 'approved') ORDER BY r.created_at DESC LIMIT 1", kind, id))
+		" WHERE r.kind = ? AND "+col+" = ? AND r.ask = '' AND r.state IN ('pending', 'approved') ORDER BY r.created_at DESC LIMIT 1", kind, id))
 }
 
 // OpenRequestTMDB is like OpenRequest, by TMDB id for shows too.
 func (s *Store) OpenRequestTMDB(ctx context.Context, kind string, tmdbID int) (Request, error) {
 	return scanRequest(s.db.QueryRowContext(ctx, "SELECT "+requestCols+requestFrom+
-		" WHERE r.kind = ? AND r.tmdb_id = ? AND r.tmdb_id != 0 AND r.state IN ('pending', 'approved') ORDER BY r.created_at DESC LIMIT 1", kind, tmdbID))
+		" WHERE r.kind = ? AND r.tmdb_id = ? AND r.tmdb_id != 0 AND r.ask = '' AND r.state IN ('pending', 'approved') ORDER BY r.created_at DESC LIMIT 1", kind, tmdbID))
 }
 
 // Requests lists requests, pending ones first, then the newest. userID 0 lists everyone's.
@@ -236,4 +257,43 @@ func (s *Store) Waiting(ctx context.Context) (requests, issues int, err error) {
 		(SELECT COUNT(*) FROM requests WHERE state = 'pending'),
 		(SELECT COUNT(*) FROM issues WHERE resolved = 0)`).Scan(&requests, &issues)
 	return
+}
+
+// ---- told when a title arrives ----
+
+// NotifyMe asks for a person to be told when a title on its way arrives,
+// as the people who asked for it are. kind is movie or show.
+func (s *Store) NotifyMe(ctx context.Context, userID int64, kind string, tmdbID, tvdbID int, on bool) error {
+	if !on {
+		_, err := s.db.ExecContext(ctx, "DELETE FROM notify_me WHERE user_id = ? AND kind = ? AND tmdb_id = ? AND tvdb_id = ?", userID, kind, tmdbID, tvdbID)
+		return err
+	}
+	_, err := s.db.ExecContext(ctx, `INSERT INTO notify_me (user_id, kind, tmdb_id, tvdb_id, created_at) VALUES (?, ?, ?, ?, ?)
+		ON CONFLICT (user_id, kind, tmdb_id, tvdb_id) DO NOTHING`, userID, kind, tmdbID, tvdbID, now())
+	return err
+}
+
+// NotifyMeTitles are the titles a person asked to be told about, as
+// "kind:tmdb:tvdb" keys.
+func (s *Store) NotifyMeTitles(ctx context.Context, userID int64) (map[string]bool, error) {
+	rows, err := s.db.QueryContext(ctx, "SELECT kind, tmdb_id, tvdb_id FROM notify_me WHERE user_id = ?", userID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	out := map[string]bool{}
+	for rows.Next() {
+		var kind string
+		var tmdb, tvdb int
+		if err := rows.Scan(&kind, &tmdb, &tvdb); err != nil {
+			return nil, err
+		}
+		out[NotifyMeKey(kind, tmdb, tvdb)] = true
+	}
+	return out, rows.Err()
+}
+
+// NotifyMeKey names a title for NotifyMeTitles.
+func NotifyMeKey(kind string, tmdbID, tvdbID int) string {
+	return kind + ":" + strconv.Itoa(tmdbID) + ":" + strconv.Itoa(tvdbID)
 }

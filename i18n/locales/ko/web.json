@@ -1416,5 +1416,53 @@
         "detail": "다른 사람처럼 본인이 요청한 항목만."
       }
     }
+  },
+  "boxOffice": {
+    "onItsWay": "오는 중",
+    "stage": {
+      "searching": "찾는 중",
+      "queued": "다운로드 대기 중",
+      "downloading": "다운로드 중",
+      "paused": "일시 정지됨",
+      "waiting": "다운로드됨",
+      "checking": "확인 중",
+      "repairing": "복구 중",
+      "unpacking": "압축 해제 중",
+      "importing": "라이브러리로 옮기는 중",
+      "waitingToMove": "관리자 대기 중",
+      "imported": "곧 준비됨",
+      "problem": "좋은 사본 대기 중"
+    },
+    "eta": "약 {{time}} 남음",
+    "notifyMe": "알림 받기",
+    "notifying": "알려 드릴게요",
+    "copies": {
+      "button": "다른 사본",
+      "editions": "다른 에디션",
+      "looking": "에디션 찾는 중…",
+      "none": "지금은 다른 에디션이 없습니다.",
+      "owned": "라이브러리에 있음",
+      "keepBoth": "옆에 추가",
+      "replace": "이 사본 바꾸기",
+      "better": "더 좋은 사본 요청",
+      "bad": "이 사본에 문제가 있음",
+      "reason": "무엇이 문제인가요?",
+      "reasonExample": "언어가 틀림, 싱크 안 맞음, 화질 나쁨…",
+      "send": "보내기",
+      "sent": "요청했습니다. 오는 중이에요.",
+      "pending": "요청했습니다. 관리자가 확인합니다.",
+      "needsApproval": "관리자가 먼저 승인합니다."
+    },
+    "ask": {
+      "alongside": "{{edition}}, 지금 사본과 함께",
+      "replaceEdition": "{{edition}}, 지금 사본 대신",
+      "better": "더 좋은 사본",
+      "bad": "새 사본: {{reason}}",
+      "badNoReason": "새 사본"
+    },
+    "settings": {
+      "approval": "다른 에디션과 더 좋은 사본은 항상 관리자 승인이 필요",
+      "approvalDetail": "요청이 바로 추가될 때도요. Box Office에서만."
+    }
   }
 }

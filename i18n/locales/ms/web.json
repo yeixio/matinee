@@ -1416,5 +1416,53 @@
         "detail": "Hanya tajuk yang mereka minta sendiri, seperti orang lain."
       }
     }
+  },
+  "boxOffice": {
+    "onItsWay": "Dalam perjalanan",
+    "stage": {
+      "searching": "Sedang dicari",
+      "queued": "Menunggu dimuat turun",
+      "downloading": "Memuat turun",
+      "paused": "Dijeda",
+      "waiting": "Sudah dimuat turun",
+      "checking": "Menyemak",
+      "repairing": "Membaiki",
+      "unpacking": "Mengekstrak",
+      "importing": "Dipindahkan ke pustaka",
+      "waitingToMove": "Menunggu pentadbir",
+      "imported": "Siap tidak lama lagi",
+      "problem": "Menunggu salinan yang baik"
+    },
+    "eta": "Lebih kurang {{time}} lagi",
+    "notifyMe": "Maklumkan saya",
+    "notifying": "Kami akan maklumkan",
+    "copies": {
+      "button": "Salinan lain",
+      "editions": "Edisi lain",
+      "looking": "Mencari edisi…",
+      "none": "Tiada edisi lain buat masa ini.",
+      "owned": "Dalam pustaka",
+      "keepBoth": "Tambah di sebelahnya",
+      "replace": "Ganti salinan ini",
+      "better": "Minta salinan yang lebih baik",
+      "bad": "Salinan ini teruk",
+      "reason": "Apa masalahnya?",
+      "reasonExample": "Bahasa salah, tidak segerak, gambar teruk…",
+      "send": "Hantar",
+      "sent": "Diminta. Dalam perjalanan.",
+      "pending": "Diminta. Pentadbir akan menyemaknya.",
+      "needsApproval": "Pentadbir meluluskannya dahulu."
+    },
+    "ask": {
+      "alongside": "{{edition}}, di sebelah salinan yang ada",
+      "replaceEdition": "{{edition}}, menggantikan salinan yang ada",
+      "better": "Salinan yang lebih baik",
+      "bad": "Salinan baharu: {{reason}}",
+      "badNoReason": "Salinan baharu"
+    },
+    "settings": {
+      "approval": "Edisi lain dan salinan yang lebih baik sentiasa memerlukan kelulusan pentadbir",
+      "approvalDetail": "Walaupun permintaan ditambah serta-merta. Hanya dengan Box Office."
+    }
   }
 }

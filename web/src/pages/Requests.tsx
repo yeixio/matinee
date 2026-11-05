@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { Link, useSearchParams } from 'react-router-dom'
 import { api, type Issue, type Title, type TitleKind, type TitleRequest, type User } from '../api'
 import { issueKindLabel, RemotePoster, useRequestOptions } from '../components/Arr'
+import { askLabel } from '../components/BoxOffice'
 import { Button, EmptyState, Spinner } from '../components/ui'
 import { episodeCode } from '../format'
 import i18n, { formatLocale } from '../i18n'
@@ -255,9 +256,10 @@ function RequestList({ admin }: { admin: boolean }) {
               )}{' '}
               {r.year ? <span className="text-sm font-normal text-muted">{r.year}</span> : null}
             </div>
+            {r.ask && <div className="truncate text-xs">{askLabel(r)}</div>}
             <div className="truncate text-xs text-muted">
-              <span className={r.state === 'failed' ? 'text-danger' : r.itemId ? 'text-accent' : ''}>
-                {r.itemId ? t('requests.ready') : stateLabel(r.state)}
+              <span className={r.state === 'failed' ? 'text-danger' : r.itemId && !r.ask ? 'text-accent' : ''}>
+                {r.itemId && !r.ask ? t('requests.ready') : stateLabel(r.state)}
               </span>
               {admin && ` · ${r.username}`} · {ago(r.createdAt)}
             </div>

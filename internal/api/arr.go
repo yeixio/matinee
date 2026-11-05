@@ -367,6 +367,9 @@ type requestOptions struct {
 	// the one used when nobody picks.
 	QualityProfiles       map[string][]arr.QualityProfile `json:"qualityProfiles,omitempty"`
 	DefaultQualityProfile map[string]int                  `json:"defaultQualityProfile,omitempty"`
+	// BoxOffice is what Box Office offers here beyond Radarr and Sonarr
+	// (see boxoffice_pairing.go); nil without it.
+	BoxOffice *pairingView `json:"boxOffice,omitempty"`
 	// For admins: what's waiting for them.
 	PendingRequests int `json:"pendingRequests,omitempty"`
 	OpenIssues      int `json:"openIssues,omitempty"`
@@ -421,6 +424,12 @@ func (s *Server) getRequestOptions(w http.ResponseWriter, r *http.Request) {
 				s.Log.Warn("quality profiles", "app", app, "err", err)
 			}
 			out.DefaultQualityProfile[kind] = c.QualityProfileID
+		}
+	}
+	if !u.Guest {
+		if out.BoxOffice, err = s.pairing(ctx, u); err != nil {
+			s.serverError(w, err)
+			return
 		}
 	}
 	if u.IsAdmin {
@@ -611,11 +620,19 @@ func (s *Server) createRequest(w http.ResponseWriter, r *http.Request) {
 func (s *Server) approve(ctx context.Context, req store.Request, profile int) (store.Request, error) {
 	app, _ := appFor(req.Kind)
 	profile = cmp.Or(profile, req.QualityProfileID)
-	cl, c, err := s.arrClient(ctx, app)
-	if err == nil {
-		_, err = cl.Add(ctx, titleID(req.Kind, req.TMDBID, req.TVDBID), arr.AddOptions{
-			QualityProfileID: cmp.Or(profile, c.QualityProfileID), RootFolder: c.RootFolder,
-		})
+	var err error
+	if req.Ask != "" {
+		// Another edition, or a better or replacement copy, from Box Office.
+		err = s.sendAsk(ctx, req)
+	} else {
+		var cl *arr.Client
+		var c arr.Config
+		cl, c, err = s.arrClient(ctx, app)
+		if err == nil {
+			_, err = cl.Add(ctx, titleID(req.Kind, req.TMDBID, req.TVDBID), arr.AddOptions{
+				QualityProfileID: cmp.Or(profile, c.QualityProfileID), RootFolder: c.RootFolder,
+			})
+		}
 	}
 	state, msg := store.RequestApproved, ""
 	if err != nil {

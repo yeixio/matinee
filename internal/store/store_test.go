@@ -28,6 +28,7 @@ func TestMigrateFromVersion1(t *testing.T) {
 		"ALTER TABLE users DROP COLUMN guest",
 		"DROP TABLE watchlist",
 		"ALTER TABLE progress DROP COLUMN hidden",
+		"DROP TABLE notify_me",
 		"DROP TABLE requests",
 		"DROP TABLE issues",
 		"DROP INDEX items_tmdb",

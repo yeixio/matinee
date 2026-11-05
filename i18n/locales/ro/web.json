@@ -1438,5 +1438,53 @@
         "detail": "Doar titlurile cerute de ei înșiși, ca toți ceilalți."
       }
     }
+  },
+  "boxOffice": {
+    "onItsWay": "Pe drum",
+    "stage": {
+      "searching": "Se caută",
+      "queued": "Așteaptă descărcarea",
+      "downloading": "Se descarcă",
+      "paused": "În pauză",
+      "waiting": "Descărcat",
+      "checking": "Se verifică",
+      "repairing": "Se repară",
+      "unpacking": "Se dezarhivează",
+      "importing": "Se mută în bibliotecă",
+      "waitingToMove": "Așteaptă un administrator",
+      "imported": "Gata în curând",
+      "problem": "Așteaptă o copie bună"
+    },
+    "eta": "Au mai rămas circa {{time}}",
+    "notifyMe": "Anunță-mă",
+    "notifying": "Te anunțăm",
+    "copies": {
+      "button": "Alte copii",
+      "editions": "Alte ediții",
+      "looking": "Se caută ediții…",
+      "none": "Nu s-au găsit alte ediții acum.",
+      "owned": "În bibliotecă",
+      "keepBoth": "Adaugă alături",
+      "replace": "Înlocuiește această copie",
+      "better": "Cere o copie mai bună",
+      "bad": "Copia asta e proastă",
+      "reason": "Ce are?",
+      "reasonExample": "Limbă greșită, desincronizată, imagine slabă…",
+      "send": "Trimite",
+      "sent": "Cerut. E pe drum.",
+      "pending": "Cerut. Un administrator se va uita.",
+      "needsApproval": "Un administrator le aprobă întâi."
+    },
+    "ask": {
+      "alongside": "{{edition}}, alături de copia existentă",
+      "replaceEdition": "{{edition}}, în locul copiei existente",
+      "better": "O copie mai bună",
+      "bad": "O copie nouă: {{reason}}",
+      "badNoReason": "O copie nouă"
+    },
+    "settings": {
+      "approval": "Alte ediții și copii mai bune au mereu nevoie de aprobarea unui administrator",
+      "approvalDetail": "Chiar și când cererile sunt adăugate imediat. Doar cu Box Office."
+    }
   }
 }

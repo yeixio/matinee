@@ -635,6 +635,24 @@ var migrations = []string{
 	// 104: a radio station an admin added from the home network, such as an
 	// Air-Mixer output; the server may reach it there (see stations.go).
 	"ALTER TABLE items ADD COLUMN stream_home INTEGER NOT NULL DEFAULT 0",
+	// 105-111: with Box Office, a request can be for another edition of a
+	// movie, or a better or replacement copy of a title in a library, not
+	// only a title to add (see requests.go); and anyone can ask to be told
+	// when a title on its way arrives (notify_me).
+	"ALTER TABLE requests ADD COLUMN ask TEXT NOT NULL DEFAULT ''",
+	"ALTER TABLE requests ADD COLUMN edition TEXT NOT NULL DEFAULT ''",
+	"ALTER TABLE requests ADD COLUMN mode TEXT NOT NULL DEFAULT ''",
+	"ALTER TABLE requests ADD COLUMN reason TEXT NOT NULL DEFAULT ''",
+	"ALTER TABLE requests ADD COLUMN season INTEGER NOT NULL DEFAULT 0",
+	"ALTER TABLE requests ADD COLUMN episode INTEGER NOT NULL DEFAULT 0",
+	`CREATE TABLE notify_me (
+		user_id    BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+		kind       TEXT NOT NULL,
+		tmdb_id    BIGINT NOT NULL DEFAULT 0,
+		tvdb_id    BIGINT NOT NULL DEFAULT 0,
+		created_at BIGINT NOT NULL,
+		PRIMARY KEY (user_id, kind, tmdb_id, tvdb_id)
+	)`,
 }
 
 func now() int64 { return time.Now().Unix() }
