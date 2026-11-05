@@ -9,6 +9,7 @@ Coming from Plex? Matinee [brings your watch history over](https://matinee.yeix.
 [![Latest release](https://img.shields.io/github/v/release/yeixio/matinee?sort=semver)](https://github.com/yeixio/matinee/releases/latest)
 [![License: AGPL-3.0](https://img.shields.io/github/license/yeixio/matinee)](LICENSE)
 [![Donate to Matinee](https://img.shields.io/badge/Donate-Support_Matinee-ff6a55?logo=stripe&logoColor=white)](https://yeix.io/matinee/donate)
+[![Works with Box Office](https://img.shields.io/badge/Works_with-Box_Office-d7372b)](#box-office)
 
 ![Home in the web player](docs/guide/images/home.webp)
 
@@ -38,7 +39,7 @@ Open http://localhost:7171, create the admin account and add your folders. There
 ## Works with
 
 - **Your screens:** any modern browser, plus the [phone and TV apps](https://matinee.yeix.io/docs/apps/phone-and-tv/) for iPhone, iPad, Android, Apple TV, Android TV and Google TV, with [AirPlay and Chromecast](https://matinee.yeix.io/docs/apps/casting/), [CarPlay](https://matinee.yeix.io/docs/apps/carplay/), [Android Auto](https://matinee.yeix.io/docs/apps/android-auto/), [Siri and Google Assistant](https://matinee.yeix.io/docs/apps/voice/), [Apple Watch](https://matinee.yeix.io/docs/apps/apple-watch/) and [Wear OS](https://matinee.yeix.io/docs/apps/wear-os/) (the apps are on their way to the stores).
-- **Your other tools:** [Radarr and Sonarr](#radarr-and-sonarr), [Overseerr and Jellyseerr](#overseerr), [Home Assistant](https://matinee.yeix.io/docs/server/home-assistant/), and [Plex, to move your history over](https://matinee.yeix.io/docs/getting-started/switching/).
+- **Your other tools:** [Box Office](#box-office) to manage your movie and TV library, [Radarr and Sonarr](#radarr-and-sonarr), [Overseerr and Jellyseerr](#overseerr), [Home Assistant](https://matinee.yeix.io/docs/server/home-assistant/), and [Plex, to move your history over](https://matinee.yeix.io/docs/getting-started/switching/).
 - **Your hardware:** Linux, macOS and Windows on amd64 and arm64, Docker, Kubernetes, NAS boxes, and [GPU transcoding](#hardware-transcoding) on NVIDIA, AMD, Intel, Apple and Raspberry Pi (only AMD has been tried on real hardware so far).
 
 ## What it does
@@ -59,7 +60,7 @@ Open http://localhost:7171, create the admin account and add your folders. There
 - **People:** an admin plus as many accounts as you like, each with their own history.
 - **Profiles and kids mode:** one sign-in, or the Home account on your network, can have profiles that each keep their own progress, watch list and theme, with "Who's watching?" when the app opens and an optional 4-digit PIN. Kids profiles see only titles rated for them (Little kids, Kids or Teens, from TMDB's age ratings for your country) in the libraries you pick, and can't open settings or make requests. Admins set them up under Settings → Profiles.
 - **Downloads** for watching offline in the Matinee apps. A download is a job on the server, not a stream: it's prepared in the background (the original file, or a single MP4 at 1080p, 720p or 480p), checksummed, then fetched by the phone at its own pace, resuming where it broke off. Jobs survive restarts and retry on their own, and watch progress made offline is merged back when the phone reconnects, with the latest change winning.
-- **Radarr and Sonarr** (optional): people ask for movies and shows and an admin approves them, everyone sees what's coming soon, and anyone can report a problem with what they're watching. Admins can change a title's quality or have a bad file replaced. [Setting it up](#radarr-and-sonarr).
+- **Box Office, Radarr and Sonarr** (optional): people ask for movies and shows and an admin approves them, everyone sees what's coming soon, and anyone can report a problem with what they're watching. Admins can change a title's quality or have a bad file replaced. [Setting it up](#box-office).
 - **Discover with Overseerr** (optional): a Discover tab with what's trending, recommendations based on what each person watched, and a way to ask for any movie or show. [Setting it up](#overseerr).
 - **Themes:** seven built in (Matinee, Dark, Light, Clean, Sci-fi, Drive-in, High contrast), picked by each person under Settings → Appearance and followed by the web player and the phone and TV apps. Add your own with a small JSON file; see [docs/themes.md](docs/themes.md).
 - **In your language:** the web player and the apps come in 32 languages, right to left included, and titles, descriptions and trailers come from TMDB in each person's language where TMDB has them. Each profile picks its language under Settings → Language, or follows the device. The translations are by machine for now; [help improve them](i18n/README.md).
@@ -200,6 +201,18 @@ If you set it on the server, restart Matinee; the next library scan fills in the
 The [guide](https://matinee.yeix.io/docs/getting-started/posters-and-details/) has the same steps with a table for every kind of install.
 
 **Why isn't a key built in?** TMDB's free keys are for personal use, and a key shipped inside Matinee would be shared by every server. Once [donations](https://yeix.io/matinee/donate) and app sales reach $150 a month, Matinee will license a commercial TMDB key and build it into the official images and packages, so new servers get artwork with no setup. Until then, you use your own key.
+
+### Box Office
+
+[Box Office](https://github.com/yeixio/boxoffice) is Matinee's companion for managing your movie and TV library: one app in place of Radarr, Sonarr and NZBGet, with its own Usenet downloader, checks that keep malware and broken files out of your library, upgrades that keep the old copy in a recycle folder, and a step-by-step move-in from the apps you run today that never changes them. Like Matinee, it comes with no content and is meant for media you have the right to keep ([responsible use](https://github.com/yeixio/boxoffice#responsible-use)).
+
+![Connecting Box Office in Matinee's Settings](docs/guide/images/box-office-connect.webp)
+
+1. Run Box Office next to Matinee, with the same library folders mounted at the same paths. Its [`docker-compose.yml`](https://github.com/yeixio/boxoffice/blob/main/docker-compose.yml) runs the two together; its [README](https://github.com/yeixio/boxoffice#run-it) covers Docker and Helm.
+2. In Matinee, open **Settings → Add-ons** and click **Connect** next to **Box Office**. Matinee looks for it by itself (at `boxoffice:7272` in Docker Compose or Kubernetes, on the same machine, and beside Matinee's own domain).
+3. Paste Box Office's API key, from its **Settings → Connect Matinee**, then **Test** and **Save**.
+
+That one connection does what Radarr and Sonarr do below, such as requests and Coming soon. On top of that, people hear when what they asked for is found and when it's ready to watch, in the web player and the apps, and admins hear about failed and quarantined downloads. Moving in from Radarr and Sonarr in Box Office can switch Matinee over for you as its last step. The [guide](docs/guide/server/radarr-and-sonarr.md#box-office) has the details.
 
 ### Radarr and Sonarr
 
@@ -345,6 +358,7 @@ Matinee is young, and it's a good time to get involved: a small fix lands quickl
 
 - **Start small.** Issues labeled [good first issue](https://github.com/yeixio/matinee/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) have acceptance criteria and say which file to open first. [help wanted](https://github.com/yeixio/matinee/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22) has bigger ones, sorted by `area/*` and `difficulty/*`.
 - **No code needed.** Try Matinee on your NAS, GPU, TV browser or oddly named files and send a [compatibility report](https://github.com/yeixio/matinee/issues/new?template=compatibility_report.yml).
+- **Help with Box Office.** [Box Office](https://github.com/yeixio/boxoffice), Matinee's companion for managing your library, is younger still and has its own [good first issues](https://github.com/yeixio/boxoffice/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22).
 - **Join the core team.** We're looking for people to own areas like streaming, the web player, music, packaging and docs. [Say hello in #51](https://github.com/yeixio/matinee/issues/51).
 
 [CONTRIBUTING.md](CONTRIBUTING.md) gets you from clone to a running server with a demo library. Contributions are covered by a short [CLA](CLA.md), and everyone follows the [Code of Conduct](CODE_OF_CONDUCT.md).
