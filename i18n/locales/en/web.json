@@ -1427,5 +1427,53 @@
         "detail": "Only titles they asked for themselves, like everyone else."
       }
     }
+  },
+  "boxOffice": {
+    "onItsWay": "On its way",
+    "stage": {
+      "searching": "Looking for it",
+      "queued": "Waiting to download",
+      "downloading": "Downloading",
+      "paused": "Paused",
+      "waiting": "Downloaded",
+      "checking": "Checking",
+      "repairing": "Repairing",
+      "unpacking": "Unpacking",
+      "importing": "Moving into the library",
+      "waitingToMove": "Waiting for an admin",
+      "imported": "Ready soon",
+      "problem": "Waiting for a good copy"
+    },
+    "eta": "About {{time}} left",
+    "notifyMe": "Notify me",
+    "notifying": "We'll tell you",
+    "copies": {
+      "button": "Other copies",
+      "editions": "Other editions",
+      "looking": "Looking for editions…",
+      "none": "No other editions found right now.",
+      "owned": "In the library",
+      "keepBoth": "Add alongside",
+      "replace": "Replace this copy",
+      "better": "Ask for a better copy",
+      "bad": "This copy is bad",
+      "reason": "What's wrong with it?",
+      "reasonExample": "Wrong language, out of sync, poor picture…",
+      "send": "Send",
+      "sent": "Asked. It's on its way.",
+      "pending": "Asked. An admin will look at it.",
+      "needsApproval": "An admin approves these first."
+    },
+    "ask": {
+      "alongside": "{{edition}}, alongside the copy there",
+      "replaceEdition": "{{edition}}, in place of the copy there",
+      "better": "A better copy",
+      "bad": "A new copy: {{reason}}",
+      "badNoReason": "A new copy"
+    },
+    "settings": {
+      "approval": "Other editions and better copies always need an admin's approval",
+      "approvalDetail": "Even when what people ask for is added right away. Only with Box Office."
+    }
   }
 }

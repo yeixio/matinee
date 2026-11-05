@@ -1438,5 +1438,53 @@
         "detail": "Solo i titoli che hanno chiesto loro stessi, come tutti gli altri."
       }
     }
+  },
+  "boxOffice": {
+    "onItsWay": "In arrivo",
+    "stage": {
+      "searching": "Lo sto cercando",
+      "queued": "In attesa di download",
+      "downloading": "Download in corso",
+      "paused": "In pausa",
+      "waiting": "Scaricato",
+      "checking": "Verifica",
+      "repairing": "Riparazione",
+      "unpacking": "Estrazione",
+      "importing": "Spostamento nella libreria",
+      "waitingToMove": "In attesa di un amministratore",
+      "imported": "Pronto a breve",
+      "problem": "In attesa di una copia buona"
+    },
+    "eta": "Circa {{time}} rimasti",
+    "notifyMe": "Avvisami",
+    "notifying": "Ti avviseremo",
+    "copies": {
+      "button": "Altre copie",
+      "editions": "Altre edizioni",
+      "looking": "Ricerca delle edizioni…",
+      "none": "Nessun’altra edizione trovata per ora.",
+      "owned": "Nella libreria",
+      "keepBoth": "Aggiungi accanto",
+      "replace": "Sostituisci questa copia",
+      "better": "Chiedi una copia migliore",
+      "bad": "Questa copia è difettosa",
+      "reason": "Cosa c’è che non va?",
+      "reasonExample": "Lingua sbagliata, fuori sincrono, immagine scadente…",
+      "send": "Invia",
+      "sent": "Richiesto. È in arrivo.",
+      "pending": "Richiesto. Lo vedrà un amministratore.",
+      "needsApproval": "Prima li approva un amministratore."
+    },
+    "ask": {
+      "alongside": "{{edition}}, accanto alla copia presente",
+      "replaceEdition": "{{edition}}, al posto della copia presente",
+      "better": "Una copia migliore",
+      "bad": "Una nuova copia: {{reason}}",
+      "badNoReason": "Una nuova copia"
+    },
+    "settings": {
+      "approval": "Le altre edizioni e le copie migliori richiedono sempre l’approvazione di un amministratore",
+      "approvalDetail": "Anche quando le richieste vengono aggiunte subito. Solo con Box Office."
+    }
   }
 }

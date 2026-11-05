@@ -1416,5 +1416,53 @@
         "detail": "ほかの人と同じく、自分でリクエストした作品だけ。"
       }
     }
+  },
+  "boxOffice": {
+    "onItsWay": "準備中",
+    "stage": {
+      "searching": "探しています",
+      "queued": "ダウンロード待ち",
+      "downloading": "ダウンロード中",
+      "paused": "一時停止中",
+      "waiting": "ダウンロード済み",
+      "checking": "確認中",
+      "repairing": "修復中",
+      "unpacking": "展開中",
+      "importing": "ライブラリに移動中",
+      "waitingToMove": "管理者待ち",
+      "imported": "まもなく視聴可能",
+      "problem": "良いコピー待ち"
+    },
+    "eta": "残り約 {{time}}",
+    "notifyMe": "通知する",
+    "notifying": "お知らせします",
+    "copies": {
+      "button": "ほかのコピー",
+      "editions": "ほかのエディション",
+      "looking": "エディションを探しています…",
+      "none": "いまはほかのエディションが見つかりません。",
+      "owned": "ライブラリにあります",
+      "keepBoth": "並べて追加",
+      "replace": "このコピーを置き換える",
+      "better": "より良いコピーを頼む",
+      "bad": "このコピーは不良です",
+      "reason": "どこが問題ですか？",
+      "reasonExample": "言語が違う、音ずれ、画質が悪い…",
+      "send": "送信",
+      "sent": "依頼しました。準備中です。",
+      "pending": "依頼しました。管理者が確認します。",
+      "needsApproval": "これらは先に管理者が承認します。"
+    },
+    "ask": {
+      "alongside": "{{edition}}（今のコピーと並べて）",
+      "replaceEdition": "{{edition}}（今のコピーの代わりに）",
+      "better": "より良いコピー",
+      "bad": "新しいコピー：{{reason}}",
+      "badNoReason": "新しいコピー"
+    },
+    "settings": {
+      "approval": "ほかのエディションとより良いコピーは常に管理者の承認が必要",
+      "approvalDetail": "リクエストがすぐ追加される設定でも。Box Office 使用時のみ。"
+    }
   }
 }

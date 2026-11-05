@@ -1427,5 +1427,53 @@
         "detail": "Vain nimikkeet, joita he ovat itse pyytäneet, kuten muutkin."
       }
     }
+  },
+  "boxOffice": {
+    "onItsWay": "Tulossa",
+    "stage": {
+      "searching": "Etsitään",
+      "queued": "Odottaa latausta",
+      "downloading": "Ladataan",
+      "paused": "Keskeytetty",
+      "waiting": "Ladattu",
+      "checking": "Tarkistetaan",
+      "repairing": "Korjataan",
+      "unpacking": "Puretaan",
+      "importing": "Siirretään kirjastoon",
+      "waitingToMove": "Odottaa ylläpitäjää",
+      "imported": "Pian valmis",
+      "problem": "Odottaa hyvää kopiota"
+    },
+    "eta": "Noin {{time}} jäljellä",
+    "notifyMe": "Ilmoita minulle",
+    "notifying": "Ilmoitamme sinulle",
+    "copies": {
+      "button": "Muut kopiot",
+      "editions": "Muut versiot",
+      "looking": "Etsitään versioita…",
+      "none": "Muita versioita ei löytynyt juuri nyt.",
+      "owned": "Kirjastossa",
+      "keepBoth": "Lisää rinnalle",
+      "replace": "Korvaa tämä kopio",
+      "better": "Pyydä parempi kopio",
+      "bad": "Tämä kopio on huono",
+      "reason": "Mikä siinä on vialla?",
+      "reasonExample": "Väärä kieli, epätahdissa, huono kuva…",
+      "send": "Lähetä",
+      "sent": "Pyydetty. Se on tulossa.",
+      "pending": "Pyydetty. Ylläpitäjä katsoo sen.",
+      "needsApproval": "Ylläpitäjä hyväksyy nämä ensin."
+    },
+    "ask": {
+      "alongside": "{{edition}}, nykyisen kopion rinnalle",
+      "replaceEdition": "{{edition}}, nykyisen kopion tilalle",
+      "better": "Parempi kopio",
+      "bad": "Uusi kopio: {{reason}}",
+      "badNoReason": "Uusi kopio"
+    },
+    "settings": {
+      "approval": "Muut versiot ja paremmat kopiot vaativat aina ylläpitäjän hyväksynnän",
+      "approvalDetail": "Silloinkin, kun pyynnöt lisätään heti. Vain Box Officen kanssa."
+    }
   }
 }

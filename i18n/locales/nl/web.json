@@ -1427,5 +1427,53 @@
         "detail": "Alleen titels die ze zelf hebben aangevraagd, net als iedereen."
       }
     }
+  },
+  "boxOffice": {
+    "onItsWay": "Onderweg",
+    "stage": {
+      "searching": "Wordt gezocht",
+      "queued": "Wacht op downloaden",
+      "downloading": "Wordt gedownload",
+      "paused": "Gepauzeerd",
+      "waiting": "Gedownload",
+      "checking": "Wordt gecontroleerd",
+      "repairing": "Wordt gerepareerd",
+      "unpacking": "Wordt uitgepakt",
+      "importing": "Gaat naar de bibliotheek",
+      "waitingToMove": "Wacht op een beheerder",
+      "imported": "Binnenkort klaar",
+      "problem": "Wacht op een goede kopie"
+    },
+    "eta": "Nog ongeveer {{time}}",
+    "notifyMe": "Laat het me weten",
+    "notifying": "We laten het je weten",
+    "copies": {
+      "button": "Andere kopieën",
+      "editions": "Andere edities",
+      "looking": "Edities zoeken…",
+      "none": "Nu geen andere edities gevonden.",
+      "owned": "In de bibliotheek",
+      "keepBoth": "Ernaast toevoegen",
+      "replace": "Deze kopie vervangen",
+      "better": "Om een betere kopie vragen",
+      "bad": "Deze kopie is slecht",
+      "reason": "Wat is er mis mee?",
+      "reasonExample": "Verkeerde taal, niet synchroon, slecht beeld…",
+      "send": "Versturen",
+      "sent": "Gevraagd. Het is onderweg.",
+      "pending": "Gevraagd. Een beheerder kijkt ernaar.",
+      "needsApproval": "Een beheerder keurt deze eerst goed."
+    },
+    "ask": {
+      "alongside": "{{edition}}, naast de huidige kopie",
+      "replaceEdition": "{{edition}}, in plaats van de huidige kopie",
+      "better": "Een betere kopie",
+      "bad": "Een nieuwe kopie: {{reason}}",
+      "badNoReason": "Een nieuwe kopie"
+    },
+    "settings": {
+      "approval": "Andere edities en betere kopieën hebben altijd goedkeuring van een beheerder nodig",
+      "approvalDetail": "Ook als verzoeken meteen worden toegevoegd. Alleen met Box Office."
+    }
   }
 }

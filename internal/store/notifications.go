@@ -303,8 +303,9 @@ func userList(users []int64) (string, []any) {
 }
 
 // Requesters lists who asked for a title that's been approved (or is
-// waiting, in case an admin added it in Box Office themselves): by TMDB id
-// for movies, by TVDB or TMDB id for shows.
+// waiting, in case an admin added it in Box Office themselves), and who
+// asked to be told when it arrives: by TMDB id for movies, by TVDB or TMDB
+// id for shows.
 func (s *Store) Requesters(ctx context.Context, kind string, tmdbID, tvdbID int) ([]int64, error) {
 	if tmdbID == 0 && tvdbID == 0 {
 		return nil, nil
@@ -317,8 +318,10 @@ func (s *Store) Requesters(ctx context.Context, kind string, tmdbID, tvdbID int)
 	} else if tmdbID == 0 {
 		return nil, nil
 	}
+	// And those who asked to be told when it arrives (Notify me).
 	rows, err := s.db.QueryContext(ctx, "SELECT DISTINCT r.user_id FROM requests r WHERE r.kind = ? AND "+where+
-		" AND r.state IN ('pending', 'approved')", args...)
+		" AND r.state IN ('pending', 'approved') UNION SELECT r.user_id FROM notify_me r WHERE r.kind = ? AND "+where,
+		append(args, args...)...)
 	if err != nil {
 		return nil, err
 	}

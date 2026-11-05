@@ -1416,5 +1416,53 @@
         "detail": "和其他人一樣，只有他們自己要求的內容。"
       }
     }
+  },
+  "boxOffice": {
+    "onItsWay": "即將到來",
+    "stage": {
+      "searching": "正在尋找",
+      "queued": "等待下載",
+      "downloading": "正在下載",
+      "paused": "已暫停",
+      "waiting": "已下載",
+      "checking": "正在檢查",
+      "repairing": "正在修復",
+      "unpacking": "正在解壓縮",
+      "importing": "正在移入媒體庫",
+      "waitingToMove": "等待管理員",
+      "imported": "即將就緒",
+      "problem": "等待一份好的副本"
+    },
+    "eta": "大約還剩 {{time}}",
+    "notifyMe": "通知我",
+    "notifying": "到時通知你",
+    "copies": {
+      "button": "其他副本",
+      "editions": "其他版本",
+      "looking": "正在尋找版本…",
+      "none": "目前沒有找到其他版本。",
+      "owned": "已在媒體庫中",
+      "keepBoth": "並列新增",
+      "replace": "取代這份副本",
+      "better": "要求更好的副本",
+      "bad": "這份副本有問題",
+      "reason": "有什麼問題？",
+      "reasonExample": "語言不對、音畫不同步、畫質差…",
+      "send": "傳送",
+      "sent": "已要求，正在路上。",
+      "pending": "已要求，管理員會查看。",
+      "needsApproval": "這些需要管理員先核准。"
+    },
+    "ask": {
+      "alongside": "{{edition}}，與現有副本並列",
+      "replaceEdition": "{{edition}}，取代現有副本",
+      "better": "更好的副本",
+      "bad": "新副本：{{reason}}",
+      "badNoReason": "新副本"
+    },
+    "settings": {
+      "approval": "其他版本和更好的副本一律需要管理員核准",
+      "approvalDetail": "即使要求會立即加入也一樣。僅限 Box Office。"
+    }
   }
 }

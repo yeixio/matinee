@@ -1438,5 +1438,53 @@
         "detail": "Só os títulos que eles mesmos pediram, como todo mundo."
       }
     }
+  },
+  "boxOffice": {
+    "onItsWay": "A caminho",
+    "stage": {
+      "searching": "Procurando",
+      "queued": "Aguardando download",
+      "downloading": "Baixando",
+      "paused": "Pausado",
+      "waiting": "Baixado",
+      "checking": "Verificando",
+      "repairing": "Reparando",
+      "unpacking": "Descompactando",
+      "importing": "Indo para a biblioteca",
+      "waitingToMove": "Aguardando um admin",
+      "imported": "Pronto em breve",
+      "problem": "Aguardando uma boa cópia"
+    },
+    "eta": "Faltam cerca de {{time}}",
+    "notifyMe": "Avise-me",
+    "notifying": "Vamos avisar você",
+    "copies": {
+      "button": "Outras cópias",
+      "editions": "Outras edições",
+      "looking": "Procurando edições…",
+      "none": "Nenhuma outra edição encontrada agora.",
+      "owned": "Na biblioteca",
+      "keepBoth": "Adicionar junto",
+      "replace": "Substituir esta cópia",
+      "better": "Pedir uma cópia melhor",
+      "bad": "Esta cópia está ruim",
+      "reason": "Qual é o problema?",
+      "reasonExample": "Idioma errado, fora de sincronia, imagem ruim…",
+      "send": "Enviar",
+      "sent": "Pedido feito. Está a caminho.",
+      "pending": "Pedido feito. Um admin vai analisar.",
+      "needsApproval": "Um admin aprova antes."
+    },
+    "ask": {
+      "alongside": "{{edition}}, junto com a cópia atual",
+      "replaceEdition": "{{edition}}, no lugar da cópia atual",
+      "better": "Uma cópia melhor",
+      "bad": "Uma cópia nova: {{reason}}",
+      "badNoReason": "Uma cópia nova"
+    },
+    "settings": {
+      "approval": "Outras edições e cópias melhores sempre precisam da aprovação de um admin",
+      "approvalDetail": "Mesmo quando os pedidos são adicionados na hora. Só com o Box Office."
+    }
   }
 }

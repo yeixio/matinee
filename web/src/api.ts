@@ -111,6 +111,8 @@ export type Settings = {
   remoteTrailers: boolean
   // A row of titles for a holiday on Home in the weeks before it.
   holidayRows: boolean
+  // Other editions and better copies from Box Office always wait for an admin.
+  boxOfficeAsksNeedApproval?: boolean
   // Look up songs' words on LRCLIB when there are none next to the song or in its tags.
   onlineLyrics: boolean
   // Line subtitle files up with the audio the first time a video plays with them.
@@ -280,7 +282,67 @@ export type RequestOptions = {
   defaultQualityProfile?: Partial<Record<TitleKind, number>>
   pendingRequests?: number
   openIssues?: number
+  // What Box Office offers beyond Radarr and Sonarr; absent without it.
+  boxOffice?: BoxOfficePairing
 }
+
+// What a Box Office connected to Radarr or Sonarr offers: titles coming
+// soon with their progress, other editions of movies, and better or
+// replacement copies. asksNeedApproval: what this account asks it waits
+// for an admin.
+export type BoxOfficePairing = {
+  progress: boolean
+  editions: boolean
+  upgrades: boolean
+  upgradeMovies: boolean
+  upgradeShows: boolean
+  asksNeedApproval: boolean
+}
+
+// A title on its way from Box Office: searching (asked for, not found yet),
+// or where its download is.
+export type ComingSoonStage =
+  | 'searching'
+  | 'queued'
+  | 'downloading'
+  | 'paused'
+  | 'waiting'
+  | 'checking'
+  | 'repairing'
+  | 'unpacking'
+  | 'importing'
+  | 'waitingToMove'
+  | 'imported'
+  | 'failed'
+  | 'quarantined'
+export type ComingSoonTitle = {
+  kind: TitleKind
+  tmdbId?: number
+  tvdbId?: number
+  title: string
+  year?: number
+  poster?: string
+  stage: ComingSoonStage
+  percent: number
+  etaSeconds?: number
+  downloads?: number
+  seasonNumber?: number
+  episodeNumber?: number
+  edition?: string
+  mode?: 'replace' | 'alongside'
+  message?: string
+  itemId?: number
+  notifyMe?: boolean
+  requested?: boolean
+}
+
+export type BoxOfficeEditions = {
+  hasFile: boolean
+  current?: string
+  alongside?: string[]
+  editions: { edition: string; releases: number; quality?: string; size?: number; owned?: boolean }[]
+}
+export type AskResult = { state: 'approved' | 'pending' | 'failed'; request: TitleRequest }
 
 // A movie or show found to ask for. status: in a library (available), in
 // Radarr or Sonarr still to download (added), or waiting for an admin (requested).
@@ -337,6 +399,14 @@ export type TitleRequest = {
   createdAt: number
   updatedAt: number
   itemId?: number
+  // With Box Office: another edition (edition, replacing the copy or
+  // alongside it), a better copy, or another for a bad one (reason).
+  ask?: 'edition' | 'better' | 'replace'
+  edition?: string
+  mode?: 'replace' | 'alongside'
+  reason?: string
+  seasonNumber?: number
+  episodeNumber?: number
 }
 
 export type Upcoming = {
@@ -1423,6 +1493,13 @@ export const api = {
     request<TitleRequest>('POST', `/api/v1/requests/${id}/approve`, { qualityProfileId }),
   declineRequest: (id: string) => request<TitleRequest>('POST', `/api/v1/requests/${id}/decline`),
   deleteRequest: (id: string) => request<void>('DELETE', `/api/v1/requests/${id}`),
+  comingSoon: () => request<{ available: boolean; titles: ComingSoonTitle[] }>('GET', '/api/v1/boxoffice/coming-soon'),
+  notifyMe: (t: { kind: TitleKind; tmdbId?: number; tvdbId?: number }, on: boolean) =>
+    request<{ notifyMe: boolean }>('POST', '/api/v1/boxoffice/notify-me', { kind: t.kind, tmdbId: t.tmdbId, tvdbId: t.tvdbId, on }),
+  itemEditions: (id: number) => request<BoxOfficeEditions>('GET', `/api/v1/items/${id}/editions`),
+  askEdition: (id: number, edition: string, mode: 'replace' | 'alongside') =>
+    request<AskResult>('POST', `/api/v1/items/${id}/editions`, { edition, mode }),
+  askCopy: (id: number, want: 'better' | 'replace', reason = '') => request<AskResult>('POST', `/api/v1/items/${id}/copy`, { want, reason }),
   upcoming: (days = 30) => request<{ items: Upcoming[]; unavailable?: string[] }>('GET', `/api/v1/upcoming?days=${days}`),
   itemQuality: (id: number) =>
     request<{ app: ArrApp; qualityProfileId: number; qualityProfiles: QualityProfile[] }>('GET', `/api/v1/items/${id}/quality`),

@@ -3,6 +3,7 @@ import { Check, Clapperboard, Compass, PackageSearch, PlugZap, Search, Tv, Unplu
 import { useEffect, useState, type FormEvent } from 'react'
 import { useTranslation } from 'react-i18next'
 import { api, type ArrApp, type BoxOfficeCheck, type BoxOfficeConnection, type ConnectionCheck, type Integration, type NotifyAdmins, type OverseerrCheck, type OverseerrConnection, type RequestMode } from '../api'
+import { AsksApprovalSetting } from '../components/BoxOffice'
 import { Button, Field, inputClass } from '../components/ui'
 
 const apps: {
@@ -632,6 +633,7 @@ function RequestModeSetting() {
           </span>
         </label>
       ))}
+      <AsksApprovalSetting />
     </fieldset>
   )
 }

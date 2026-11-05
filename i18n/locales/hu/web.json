@@ -1427,5 +1427,53 @@
         "detail": "Csak az általuk kért címek, mint bárki másnál."
       }
     }
+  },
+  "boxOffice": {
+    "onItsWay": "Úton van",
+    "stage": {
+      "searching": "Keresés",
+      "queued": "Letöltésre vár",
+      "downloading": "Letöltés",
+      "paused": "Szüneteltetve",
+      "waiting": "Letöltve",
+      "checking": "Ellenőrzés",
+      "repairing": "Javítás",
+      "unpacking": "Kicsomagolás",
+      "importing": "Áthelyezés a könyvtárba",
+      "waitingToMove": "Adminra vár",
+      "imported": "Hamarosan kész",
+      "problem": "Jó másolatra vár"
+    },
+    "eta": "Kb. {{time}} van hátra",
+    "notifyMe": "Értesíts",
+    "notifying": "Szólunk",
+    "copies": {
+      "button": "Más másolatok",
+      "editions": "Más kiadások",
+      "looking": "Kiadások keresése…",
+      "none": "Most nincs más kiadás.",
+      "owned": "A könyvtárban",
+      "keepBoth": "Hozzáadás mellé",
+      "replace": "Ennek a másolatnak a cseréje",
+      "better": "Jobb másolat kérése",
+      "bad": "Ez a másolat rossz",
+      "reason": "Mi a baj vele?",
+      "reasonExample": "Rossz nyelv, csúszik, rossz kép…",
+      "send": "Küldés",
+      "sent": "Kérve. Úton van.",
+      "pending": "Kérve. Egy admin megnézi.",
+      "needsApproval": "Ezeket előbb egy admin hagyja jóvá."
+    },
+    "ask": {
+      "alongside": "{{edition}}, a meglévő másolat mellé",
+      "replaceEdition": "{{edition}}, a meglévő másolat helyett",
+      "better": "Jobb másolat",
+      "bad": "Új másolat: {{reason}}",
+      "badNoReason": "Új másolat"
+    },
+    "settings": {
+      "approval": "A más kiadásokhoz és jobb másolatokhoz mindig admin jóváhagyása kell",
+      "approvalDetail": "Akkor is, ha a kérések azonnal bekerülnek. Csak Box Office-szal."
+    }
   }
 }

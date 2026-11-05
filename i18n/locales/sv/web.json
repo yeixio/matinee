@@ -1427,5 +1427,53 @@
         "detail": "Bara titlar de själva bett om, som alla andra."
       }
     }
+  },
+  "boxOffice": {
+    "onItsWay": "På väg",
+    "stage": {
+      "searching": "Letar efter den",
+      "queued": "Väntar på nedladdning",
+      "downloading": "Laddar ner",
+      "paused": "Pausad",
+      "waiting": "Nedladdad",
+      "checking": "Kontrolleras",
+      "repairing": "Repareras",
+      "unpacking": "Packas upp",
+      "importing": "Flyttas till biblioteket",
+      "waitingToMove": "Väntar på en admin",
+      "imported": "Klar snart",
+      "problem": "Väntar på en bra kopia"
+    },
+    "eta": "Ungefär {{time}} kvar",
+    "notifyMe": "Meddela mig",
+    "notifying": "Vi säger till",
+    "copies": {
+      "button": "Andra kopior",
+      "editions": "Andra utgåvor",
+      "looking": "Letar efter utgåvor…",
+      "none": "Inga andra utgåvor hittades just nu.",
+      "owned": "I biblioteket",
+      "keepBoth": "Lägg till bredvid",
+      "replace": "Ersätt den här kopian",
+      "better": "Be om en bättre kopia",
+      "bad": "Den här kopian är dålig",
+      "reason": "Vad är fel med den?",
+      "reasonExample": "Fel språk, osynkad, dålig bild…",
+      "send": "Skicka",
+      "sent": "Begärt. Den är på väg.",
+      "pending": "Begärt. En admin tittar på det.",
+      "needsApproval": "En admin godkänner dessa först."
+    },
+    "ask": {
+      "alongside": "{{edition}}, bredvid kopian som finns",
+      "replaceEdition": "{{edition}}, i stället för kopian som finns",
+      "better": "En bättre kopia",
+      "bad": "En ny kopia: {{reason}}",
+      "badNoReason": "En ny kopia"
+    },
+    "settings": {
+      "approval": "Andra utgåvor och bättre kopior kräver alltid godkännande av en admin",
+      "approvalDetail": "Även när förfrågningar läggs till direkt. Bara med Box Office."
+    }
   }
 }

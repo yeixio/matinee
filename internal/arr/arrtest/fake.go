@@ -39,6 +39,14 @@ type Fake struct {
 	// what follows /boxoffice/discover ("" for the home, "/rows/trending",
 	// "/search").
 	Discover map[string]any
+	// Pairing makes it a Box Office with progress and upgrades (and, as
+	// Radarr, editions): Activity is what /boxoffice/activity answers,
+	// Editions /boxoffice/editions, and Asked records what was posted to
+	// /boxoffice/editions and /boxoffice/upgrade, with its "path".
+	Pairing  bool
+	Activity map[string]any
+	Editions map[string]any
+	Asked    []map[string]any
 	nextID   int
 }
 
@@ -143,6 +151,12 @@ func (f *Fake) serve(w http.ResponseWriter, r *http.Request) {
 		if f.Discover != nil {
 			features = append(features, "discover")
 		}
+		if f.Pairing {
+			features = append(features, "progress", "upgrades")
+			if f.App == arr.Radarr {
+				features = append(features, "editions")
+			}
+		}
 		write(w, map[string]any{"appName": f.App.Name(), "version": "5.0.0", "boxOfficeId": f.BoxOfficeID, "boxOfficeFeatures": features})
 	case strings.HasPrefix(path, "/boxoffice/discover") && f.Discover != nil:
 		v, ok := f.Discover[strings.TrimPrefix(path, "/boxoffice/discover")]
@@ -151,6 +165,15 @@ func (f *Fake) serve(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		write(w, v)
+	case path == "/boxoffice/activity" && f.Pairing:
+		write(w, f.Activity)
+	case path == "/boxoffice/editions" && f.Pairing && r.Method == http.MethodGet:
+		write(w, f.Editions)
+	case (path == "/boxoffice/editions" || path == "/boxoffice/upgrade") && f.Pairing && r.Method == http.MethodPost:
+		body["path"] = path
+		f.Asked = append(f.Asked, body)
+		w.WriteHeader(http.StatusAccepted)
+		write(w, map[string]any{"queued": true})
 	case path == "/system/status":
 		write(w, map[string]any{"appName": f.App.Name(), "version": "5.0.0"})
 	case path == "/boxoffice/notifications" && f.BoxOfficeID != "":

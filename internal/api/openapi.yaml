@@ -3811,6 +3811,16 @@ paths:
                   defaultQualityProfile:
                     type: object
                     additionalProperties: { type: integer }
+                  boxOffice:
+                    type: object
+                    description: What Box Office offers here beyond Radarr and Sonarr. Absent without a Box Office that has any of it.
+                    properties:
+                      progress: { type: boolean, description: Titles coming soon (see /boxoffice/coming-soon). }
+                      editions: { type: boolean, description: Other editions of movies (see /items/{id}/editions). }
+                      upgrades: { type: boolean, description: Better and replacement copies (see /items/{id}/copy). }
+                      upgradeMovies: { type: boolean }
+                      upgradeShows: { type: boolean }
+                      asksNeedApproval: { type: boolean, description: What this account asks Box Office for waits for an admin. }
                   pendingRequests: { type: integer, description: Admins only. }
                   openIssues: { type: integer, description: Admins only. }
   /requests/search:
@@ -3905,6 +3915,66 @@ paths:
       responses:
         "204": { description: Removed. }
 
+  /boxoffice/coming-soon:
+    get:
+      summary: Titles on their way from Box Office
+      description: |
+        What Box Office is downloading, with how far it's got and when it
+        should be done, and approved requests it's still looking for; one
+        entry a title, furthest along first. For everyone. `available` is
+        false without a Box Office that shows its progress.
+      responses:
+        "200":
+          description: The titles.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  available: { type: boolean }
+                  titles:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        kind: { type: string, enum: [movie, show] }
+                        tmdbId: { type: integer }
+                        tvdbId: { type: integer }
+                        title: { type: string }
+                        year: { type: integer }
+                        poster: { type: string }
+                        stage:
+                          type: string
+                          enum: [searching, queued, downloading, paused, waiting, checking, repairing, unpacking, importing, waitingToMove, imported, failed, quarantined]
+                        percent: { type: number }
+                        etaSeconds: { type: integer }
+                        downloads: { type: integer }
+                        seasonNumber: { type: integer }
+                        episodeNumber: { type: integer }
+                        edition: { type: string }
+                        mode: { type: string, enum: [replace, alongside] }
+                        message: { type: string, description: What went wrong. Admins only. }
+                        itemId: { type: integer, description: The title in a library, for another edition or a better copy on its way. }
+                        notifyMe: { type: boolean }
+                        requested: { type: boolean, description: This account asked for it. }
+  /boxoffice/notify-me:
+    post:
+      summary: Be told when a title on its way arrives
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [kind]
+              properties:
+                kind: { type: string, enum: [movie, show] }
+                tmdbId: { type: integer }
+                tvdbId: { type: integer }
+                "on": { type: boolean, default: true }
+      responses:
+        "200": { description: Done. }
+
   /upcoming:
     get:
       summary: Coming soon
@@ -3974,6 +4044,94 @@ paths:
           content:
             application/json:
               schema: { $ref: "#/components/schemas/Quality" }
+  /items/{id}/editions:
+    parameters: [{ $ref: "#/components/parameters/ID" }]
+    get:
+      summary: Other editions of a movie Box Office can get
+      description: |
+        With Box Office: the editions its indexers have (Director's Cut,
+        Extended…), the one the copy here is, and those kept next to it.
+        Takes a few seconds, as Box Office searches; kept for ten minutes.
+        404 without a Box Office that has editions.
+      responses:
+        "200":
+          description: The editions.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  hasFile: { type: boolean }
+                  current: { type: string, description: The edition the copy is, when its name says. }
+                  alongside: { type: array, items: { type: string } }
+                  editions:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        edition: { type: string }
+                        releases: { type: integer }
+                        quality: { type: string }
+                        size: { type: integer }
+                        owned: { type: boolean }
+        "404": { $ref: "#/components/responses/Error" }
+    post:
+      summary: Ask for another edition of a movie
+      description: |
+        To replace the copy there (`replace`), or to keep next to it
+        (`alongside`). Follows the request setting, and waits for an admin
+        when Settings says editions always do.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [edition]
+              properties:
+                edition: { type: string }
+                mode: { type: string, enum: [replace, alongside], default: alongside }
+      responses:
+        "201":
+          description: Asked. Sent to Box Office (state approved), or waiting for an admin (pending).
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  state: { type: string, enum: [approved, pending, failed] }
+                  request: { $ref: "#/components/schemas/Request" }
+        "502": { description: Box Office couldn't be asked; the request is kept, failed, for an admin to try again. }
+  /items/{id}/copy:
+    parameters: [{ $ref: "#/components/parameters/ID" }]
+    post:
+      summary: Ask for a better copy of a movie or episode, or another for a bad one
+      description: |
+        With Box Office: `better` looks past the quality profile's cutoff;
+        `replace` swaps a bad copy (wrong language, out of sync, broken)
+        for another, and Box Office won't take the bad one's release again.
+        Follows the request setting, like editions.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [want]
+              properties:
+                want: { type: string, enum: [better, replace] }
+                reason: { type: string }
+      responses:
+        "201":
+          description: Asked. Sent to Box Office (state approved), or waiting for an admin (pending).
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  state: { type: string, enum: [approved, pending, failed] }
+                  request: { $ref: "#/components/schemas/Request" }
+        "502": { description: Box Office couldn't be asked; the request is kept, failed, for an admin to try again. }
   /items/{id}/issues:
     parameters: [{ $ref: "#/components/parameters/ID" }]
     post:
@@ -4944,6 +5102,9 @@ components:
         remoteTrailers:
           type: boolean
           description: Offer TMDB's YouTube trailers along with trailer files. On by default.
+        boxOfficeAsksNeedApproval:
+          type: boolean
+          description: Other editions and better copies asked for from Box Office always wait for an admin, even when requests are added right away. Off by default.
         holidayRows:
           type: boolean
           description: Show a row of titles for a holiday on Home in the weeks before it. On by default.
@@ -5309,6 +5470,15 @@ components:
         createdAt: { type: integer }
         updatedAt: { type: integer }
         itemId: { type: integer, description: Set once an approved title is in a library. }
+        ask:
+          type: string
+          enum: [edition, better, replace]
+          description: With Box Office, what's asked for a title in a library besides adding it - another edition, a better copy, or another for a bad one. Absent for a title to add.
+        edition: { type: string, description: "The edition asked for, such as Director's Cut." }
+        mode: { type: string, enum: [replace, alongside], description: Whether the edition replaces the copy there or goes next to it. }
+        reason: { type: string, description: Why the copy there is bad. }
+        seasonNumber: { type: integer, description: The episode a better or replacement copy is for. }
+        episodeNumber: { type: integer }
     Issue:
       type: object
       properties:

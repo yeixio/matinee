@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { api, pendingRefetch, type Item } from '../api'
 import { ComingSoonRow } from '../components/Arr'
+import { OnItsWayRow } from '../components/BoxOffice'
 import { PosterCard } from '../components/Card'
 import { Hero } from '../components/Hero'
 import { Row, RowItem } from '../components/Row'
@@ -107,6 +108,7 @@ export default function Home() {
           ))}
         </Row>
       ))}
+      <OnItsWayRow />
       <ComingSoonRow />
       {data.recentlyAdded.length === 0 && (
         <EmptyState title={t('home.scanning')}>{t('home.scanningHint')}</EmptyState>

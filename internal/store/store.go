@@ -632,6 +632,24 @@ var migrations = []string{
 	"ALTER TABLE notifications ADD COLUMN repeats INTEGER NOT NULL DEFAULT 1",
 	"ALTER TABLE notifications ADD COLUMN first_at BIGINT NOT NULL DEFAULT 0",
 	"CREATE INDEX notifications_grouping ON notifications(user_id, group_key)",
+	// 104-110: with Box Office, a request can be for another edition of a
+	// movie, or a better or replacement copy of a title in a library, not
+	// only a title to add (see requests.go); and anyone can ask to be told
+	// when a title on its way arrives (notify_me).
+	"ALTER TABLE requests ADD COLUMN ask TEXT NOT NULL DEFAULT ''",
+	"ALTER TABLE requests ADD COLUMN edition TEXT NOT NULL DEFAULT ''",
+	"ALTER TABLE requests ADD COLUMN mode TEXT NOT NULL DEFAULT ''",
+	"ALTER TABLE requests ADD COLUMN reason TEXT NOT NULL DEFAULT ''",
+	"ALTER TABLE requests ADD COLUMN season INTEGER NOT NULL DEFAULT 0",
+	"ALTER TABLE requests ADD COLUMN episode INTEGER NOT NULL DEFAULT 0",
+	`CREATE TABLE notify_me (
+		user_id    BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+		kind       TEXT NOT NULL,
+		tmdb_id    BIGINT NOT NULL DEFAULT 0,
+		tvdb_id    BIGINT NOT NULL DEFAULT 0,
+		created_at BIGINT NOT NULL,
+		PRIMARY KEY (user_id, kind, tmdb_id, tvdb_id)
+	)`,
 }
 
 func now() int64 { return time.Now().Unix() }

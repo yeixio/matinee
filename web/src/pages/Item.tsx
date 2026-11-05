@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { Link, Navigate, useParams, useSearchParams } from 'react-router-dom'
 import { api, pendingRefetch, type Item, type ItemDetail, type User } from '../api'
 import { ItemQuality, ReportProblem } from '../components/Arr'
+import { OtherCopies } from '../components/BoxOffice'
 import { Artwork } from '../components/Artwork'
 import { FileDetailsButton, Languages, QualityBadges } from '../components/MediaInfo'
 import { PosterGrid } from '../components/Card'
@@ -199,6 +200,7 @@ function Header({ item, kids }: { item: ItemDetail; kids?: Item[] }) {
             <AddToCollectionButton item={item} />
             <ItemQuality item={item} user={me} />
             <ReportProblem item={item} />
+            <OtherCopies item={item} />
             <MoreDetailsButton item={item} />
             <FileDetailsButton item={item} user={me} />
             <StarRating item={item} />

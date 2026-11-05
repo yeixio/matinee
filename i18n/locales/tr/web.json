@@ -1427,5 +1427,53 @@
         "detail": "Herkes gibi yalnızca kendi istedikleri başlıklar."
       }
     }
+  },
+  "boxOffice": {
+    "onItsWay": "Yolda",
+    "stage": {
+      "searching": "Aranıyor",
+      "queued": "İndirilmeyi bekliyor",
+      "downloading": "İndiriliyor",
+      "paused": "Duraklatıldı",
+      "waiting": "İndirildi",
+      "checking": "Denetleniyor",
+      "repairing": "Onarılıyor",
+      "unpacking": "Açılıyor",
+      "importing": "Kitaplığa taşınıyor",
+      "waitingToMove": "Bir yöneticiyi bekliyor",
+      "imported": "Yakında hazır",
+      "problem": "İyi bir kopya bekleniyor"
+    },
+    "eta": "Yaklaşık {{time}} kaldı",
+    "notifyMe": "Bana haber ver",
+    "notifying": "Haber vereceğiz",
+    "copies": {
+      "button": "Diğer kopyalar",
+      "editions": "Diğer sürümler",
+      "looking": "Sürümler aranıyor…",
+      "none": "Şu an başka sürüm bulunamadı.",
+      "owned": "Kitaplıkta",
+      "keepBoth": "Yanına ekle",
+      "replace": "Bu kopyayı değiştir",
+      "better": "Daha iyi bir kopya iste",
+      "bad": "Bu kopya kötü",
+      "reason": "Sorunu ne?",
+      "reasonExample": "Yanlış dil, senkron dışı, kötü görüntü…",
+      "send": "Gönder",
+      "sent": "İstendi. Yolda.",
+      "pending": "İstendi. Bir yönetici bakacak.",
+      "needsApproval": "Bunları önce bir yönetici onaylar."
+    },
+    "ask": {
+      "alongside": "{{edition}}, mevcut kopyanın yanında",
+      "replaceEdition": "{{edition}}, mevcut kopyanın yerine",
+      "better": "Daha iyi bir kopya",
+      "bad": "Yeni bir kopya: {{reason}}",
+      "badNoReason": "Yeni bir kopya"
+    },
+    "settings": {
+      "approval": "Diğer sürümler ve daha iyi kopyalar her zaman yönetici onayı gerektirir",
+      "approvalDetail": "İstekler hemen eklense bile. Yalnızca Box Office ile."
+    }
   }
 }
