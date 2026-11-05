@@ -1,12 +1,16 @@
 ---
 title: Discover
-description: Find new movies and shows to watch, with recommendations based on what you watched, and ask for them.
+description: Find new movies and shows to watch, with recommendations based on what you watched, and ask for them, through Box Office or Overseerr.
 since: v0.1.1
 sidebar:
   order: 10
 ---
 
 When an admin has [connected Overseerr](/docs/server/overseerr/), a **Discover** tab appears next to your libraries, on the web and in the apps. It's for finding things you don't have yet.
+
+<!-- since: v0.2.3 -->
+[Box Office](/docs/server/radarr-and-sonarr/#box-office) brings the tab too: once it's connected under **Settings → Add-ons**, Discover appears with no other setup, filled from Box Office. If Overseerr is connected as well, Discover comes from Overseerr.
+<!-- /since -->
 
 ![Discover: rows of titles like the ones you watched lately, with a Requested badge on one](../images/discover.webp)
 
@@ -15,6 +19,9 @@ When an admin has [connected Overseerr](/docs/server/overseerr/), a **Discover**
 - **Because you watched …**: titles like the two you watched most recently. Each person (and each [profile](/docs/household/profiles/)) gets their own.
 - **Trending**, **Popular movies** and **Popular shows**: what people are watching right now.
 - **Coming to cinemas** and **New shows coming up**: what's on its way.
+<!-- since: v0.2.3 -->
+- **Recommended for you**: with Box Office, titles like the ones already in your libraries, right after the **Because you watched** rows.
+<!-- /since -->
 
 The **Because you watched** rows leave out titles you already have. Elsewhere, a badge on a poster says when a title is **In your library**, has been **Requested**, or is **On its way**.
 
@@ -24,7 +31,11 @@ Click a poster to read about it. If you can ask for titles on this server, **Req
 
 ![A show opened from Discover, with a Request the show button](../images/discover-title.webp)
 
-What happens next is up to Overseerr. If your Overseerr account can add titles straight away, it starts downloading; otherwise it waits for an admin to approve it there. Either way, it shows up in your library by itself once it's downloaded, and [Recently added](/docs/watching/home/) puts it at the front of Home.
+<!-- since: v0.2.3 -->
+With Box Office, asking from Discover is the same as any other [request](/docs/server/radarr-and-sonarr/#who-can-add-titles): it's added straight away, or waits in **Requests** for an admin, as the server's setting says. Box Office then finds and downloads it.
+<!-- /since -->
+
+With Overseerr, what happens next is up to Overseerr. If your Overseerr account can add titles straight away, it starts downloading; otherwise it waits for an admin to approve it there. Either way, it shows up in your library by itself once it's downloaded, and [Recently added](/docs/watching/home/) puts it at the front of Home.
 
 ## Searching
 
@@ -34,7 +45,7 @@ The search box at the top finds any movie or show, not only what's in your libra
 
 ## Who sees Discover
 
-- Everyone with an account, while Overseerr is connected.
+- Everyone with an account, while Overseerr or Box Office is connected.
 - Devices at home that haven't signed in can browse Discover but not ask for anything.
 - [Kids profiles](/docs/household/profiles/) don't see Discover at all.
 - Who can ask follows the same setting as [Radarr and Sonarr](/docs/server/radarr-and-sonarr/#who-can-add-titles): with **Only admins add titles**, everyone else can browse but not request.
