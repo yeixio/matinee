@@ -346,6 +346,16 @@ The workflow picks the next version after the last release, and stops without ta
 
 The release workflow tests, then publishes `ghcr.io/yeixio/matinee:0.2.0` (and `0.2`, `latest`) for amd64, arm64 and armv7, pushes the Helm chart to `oci://ghcr.io/yeixio/charts/matinee` with that version, and attaches single-binary archives for Linux, macOS and Windows, Windows installers, and `.deb` and `.rpm` packages, and the signed Mac app ([docs/mac-app.md](docs/mac-app.md)), to a GitHub release. It then installs the packages from freshly built apt and dnf repositories in Debian, Ubuntu and Fedora containers, publishes those repositories on the `packages` branch, and opens a pull request updating `Formula/matinee.rb` for Homebrew. A tag with a suffix (`v0.2.0-beta.1`) is a pre-release: it leaves `latest`, Homebrew, apt and dnf alone. Packaging details and the signing key setup are in [docs/packaging.md](docs/packaging.md).
 
+## Ecosystem
+
+Matinee is one of a family of free, self-hosted apps for the home. Each works on its own, and they're built to sit side by side:
+
+| Project | What it does |
+|---------|--------------|
+| **Matinee** (this repository) | A fast, open-source media server for your movies, TV, music, audiobooks and podcasts, with web, phone and TV apps. |
+| [**Box Office**](https://github.com/yeixio/boxoffice) | Manages your movie and TV library in place of Radarr, Sonarr and NZBGet, and plugs straight into Matinee. |
+| [**Air-Mixer**](https://github.com/yeixio/air-mixer) | One home for every speaker you own: receives, routes and mixes audio across speakers from different ecosystems, starting with AirPlay in both directions. |
+
 ## Support Matinee
 
 Matinee's server is free and always will be. [Donations](https://yeix.io/matinee/donate) (once or monthly, by card) and the paid phone and TV apps fund its development. The first goal: once they reach $150 a month, Matinee will license a commercial TMDB key so new servers get posters and descriptions with no setup. Until then, each server needs [its own free key](#posters-and-descriptions-tmdb-key).
