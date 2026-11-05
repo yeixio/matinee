@@ -596,6 +596,24 @@
       "madeAs": "Made as {{name}}",
       "sameName": "People with an Overseerr account of the same name ask as themselves. Overseerr decides which requests need approval, from each user's permissions there.",
       "confirmDisconnect": "Disconnect Overseerr? The Discover tab goes away."
+    },
+    "boxoffice": {
+      "notConnected": "Not connected · finds and downloads movies and shows",
+      "moviesOnly": "Movies go to Box Office, shows don't yet · {{url}}",
+      "showsOnly": "Shows go to Box Office, movies don't yet · {{url}}",
+      "intro": "Box Office finds and downloads movies and shows. Connecting it here points Radarr and Sonarr at it, so requests, coming soon and notifications all go through it.",
+      "looking": "Looking for Box Office…",
+      "found": "Box Office {{version}} at {{url}}",
+      "notFound": "Matinee couldn't find Box Office by itself. Enter its address, such as http://boxoffice:7272.",
+      "keyWhere": "Box Office → Settings → Connect Matinee",
+      "keySteps": "Where to find the API key",
+      "step1": "Open Box Office and sign in as an admin.",
+      "step2": "Go to Settings → Connect Matinee.",
+      "step3": "Next to API key, choose the copy button, then paste it here.",
+      "replaces": "Saving points Radarr and Sonarr below at Box Office. Pick the quality and folder for new titles there.",
+      "noShowsFolder": "Box Office has no TV root folder yet, so only movies connect. Add one under Box Office → Settings, then save again.",
+      "noMoviesFolder": "Box Office has no movie root folder yet, so only shows connect. Add one under Box Office → Settings, then save again.",
+      "confirmDisconnect": "Disconnect Box Office? Radarr and Sonarr are disconnected too. Titles already in it stay there."
     }
   },
   "requests": {
@@ -869,7 +887,7 @@
       },
       "add-ons": {
         "title": "Add-ons",
-        "hint": "Radarr, Sonarr, Overseerr and plugins"
+        "hint": "Box Office, Radarr, Sonarr, Overseerr and plugins"
       },
       "health": {
         "title": "Server health",

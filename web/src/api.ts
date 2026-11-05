@@ -251,6 +251,9 @@ export type NotificationSettings = {
   admins: NotifyAdmins
   boxOffice: { app: ArrApp; id?: string; checkedAt: number; error?: string }[]
 }
+export type BoxOfficeConnection = { connected: boolean; movies: boolean; shows: boolean; url: string; hasApiKey: boolean; id?: string; error?: string }
+export type BoxOfficeConfig = { url: string; apiKey?: string }
+export type BoxOfficeCheck = { url: string; id: string; version: string; movies: ConnectionCheck; shows: ConnectionCheck }
 export type Integration = { connected: boolean; url: string; hasApiKey: boolean; qualityProfileId: number; rootFolder: string }
 export type IntegrationConfig = { url: string; apiKey?: string; qualityProfileId?: number; rootFolder?: string }
 export type QualityProfile = { id: number; name: string }
@@ -1392,6 +1395,11 @@ export const api = {
   saveIntegration: (app: ArrApp, c: IntegrationConfig) => request<Integration>('PUT', `/api/v1/integrations/${app}`, c),
   deleteIntegration: (app: ArrApp) => request<void>('DELETE', `/api/v1/integrations/${app}`),
   requestOptions: () => request<RequestOptions>('GET', '/api/v1/requests/options'),
+  boxOffice: () => request<BoxOfficeConnection>('GET', '/api/v1/integrations/boxoffice'),
+  findBoxOffice: () => request<{ found: { url: string; version: string }[] }>('POST', '/api/v1/integrations/boxoffice/find'),
+  testBoxOffice: (c?: BoxOfficeConfig) => request<BoxOfficeCheck>('POST', '/api/v1/integrations/boxoffice/test', c),
+  saveBoxOffice: (c: BoxOfficeConfig) => request<BoxOfficeConnection>('PUT', '/api/v1/integrations/boxoffice', c),
+  deleteBoxOffice: () => request<void>('DELETE', '/api/v1/integrations/boxoffice'),
   overseerr: () => request<OverseerrConnection>('GET', '/api/v1/integrations/overseerr'),
   testOverseerr: (c: OverseerrConfig) => request<OverseerrCheck>('POST', '/api/v1/integrations/overseerr/test', c),
   saveOverseerr: (c: OverseerrConfig) => request<OverseerrConnection>('PUT', '/api/v1/integrations/overseerr', c),

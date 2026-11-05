@@ -604,6 +604,24 @@
       "madeAs": "Від імені {{name}}",
       "sameName": "Люди з обліковим записом Overseerr з тим самим ім'ям запитують від свого імені. Overseerr вирішує, які запити потребують схвалення, за правами кожного користувача.",
       "confirmDisconnect": "Відключити Overseerr? Вкладка «Огляд» зникне."
+    },
+    "boxoffice": {
+      "notConnected": "Не під'єднано · знаходить і завантажує фільми та серіали",
+      "moviesOnly": "Фільми йдуть у Box Office, серіали ще ні · {{url}}",
+      "showsOnly": "Серіали йдуть у Box Office, фільми ще ні · {{url}}",
+      "intro": "Box Office знаходить і завантажує фільми та серіали. Якщо під'єднати його тут, Radarr і Sonarr вказуватимуть на нього, тож запити, незабаром і сповіщення йтимуть через нього.",
+      "looking": "Шукаємо Box Office…",
+      "found": "Box Office {{version}} за адресою {{url}}",
+      "notFound": "Matinee не знайшов Box Office сам. Введіть адресу, наприклад http://boxoffice:7272.",
+      "keyWhere": "Box Office → Settings → Connect Matinee",
+      "keySteps": "Де знайти ключ API",
+      "step1": "Відкрийте Box Office і увійдіть як адміністратор.",
+      "step2": "Перейдіть у Settings → Connect Matinee.",
+      "step3": "Біля API key натисніть кнопку копіювання й вставте ключ сюди.",
+      "replaces": "Після збереження Radarr і Sonarr нижче вказуватимуть на Box Office. Якість і теку для нових назв обирайте там.",
+      "noShowsFolder": "У Box Office ще немає кореневої теки для серіалів, тож під'єднуються лише фільми. Додайте її в Box Office → Settings і збережіть знову.",
+      "noMoviesFolder": "У Box Office ще немає кореневої теки для фільмів, тож під'єднуються лише серіали. Додайте її в Box Office → Settings і збережіть знову.",
+      "confirmDisconnect": "Від'єднати Box Office? Radarr і Sonarr теж від'єднаються. Те, що вже в ньому, там і залишиться."
     }
   },
   "requests": {
@@ -877,7 +895,7 @@
       },
       "add-ons": {
         "title": "Доповнення",
-        "hint": "Radarr, Sonarr, Overseerr та плагіни"
+        "hint": "Box Office, Radarr, Sonarr, Overseerr і плагіни"
       },
       "health": {
         "title": "Стан сервера",

@@ -3544,6 +3544,92 @@ paths:
       summary: Forget the OpenSubtitles key (admins only)
       responses:
         "204": { description: Forgotten. }
+  /integrations/boxoffice:
+    get:
+      summary: The Box Office connection (admins only)
+      description: |
+        Box Office answers as Radarr at `/radarr` and as Sonarr at `/sonarr`,
+        so connecting it sets both of those connections. This says whether
+        they go to Box Office. The API key is never returned.
+      responses:
+        "200":
+          description: The connection.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/BoxOfficeConnection" }
+    put:
+      summary: Connect Box Office (admins only)
+      description: |
+        Checks the address and key, then points Radarr and Sonarr at Box
+        Office. Leave `apiKey` out to keep the saved one; it's only kept for
+        the saved address. Quality and root folder stay as they were when Box
+        Office still has them, else they're its first; they're changed under
+        Radarr and Sonarr. A kind Box Office has no root folder for yet isn't
+        connected.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/BoxOfficeConfig" }
+      responses:
+        "200":
+          description: Connected.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/BoxOfficeConnection" }
+        "400": { $ref: "#/components/responses/Error" }
+        "502": { $ref: "#/components/responses/Error" }
+    delete:
+      summary: Disconnect Box Office (admins only)
+      responses:
+        "204": { description: Radarr and Sonarr no longer go to Box Office. }
+  /integrations/boxoffice/test:
+    post:
+      summary: Check a Box Office connection without saving it (admins only)
+      description: Leave the body out to check the saved connection.
+      requestBody:
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/BoxOfficeConfig" }
+      responses:
+        "200":
+          description: It answers, as both Radarr and Sonarr.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  url: { type: string, description: Where it answers, which differs from the address entered after a redirect to https. }
+                  id: { type: string }
+                  version: { type: string }
+                  movies: { type: object, description: Its quality profiles and root folders for movies, as Radarr's test lists them. }
+                  shows: { type: object, description: The same for shows. }
+        "400": { $ref: "#/components/responses/Error" }
+        "502": { $ref: "#/components/responses/Error" }
+  /integrations/boxoffice/find:
+    post:
+      summary: Look for Box Office (admins only)
+      description: |
+        Asks the usual places whether Box Office is there, without a key: where
+        Radarr or Sonarr already go, `boxoffice:7272` (its name in Kubernetes
+        or Docker Compose), this machine, and `boxoffice.` beside Matinee's
+        own domain. Box Office says who it is at `GET /api/v1/status`.
+      responses:
+        "200":
+          description: What answered, the likeliest first.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  found:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        url: { type: string }
+                        id: { type: string, description: "Box Office's id: one found at two addresses is listed once." }
+                        version: { type: string }
   /integrations/overseerr:
     get:
       summary: The Overseerr connection (admins only)
@@ -5114,6 +5200,21 @@ components:
         device: { type: string, description: "The GPU's render node, such as /dev/dri/renderD128 (VAAPI, and Quick Sync on Linux)." }
         detail: { type: string, description: "The GPU, when its driver says, such as AMD Radeon RX 7900 XTX." }
         decode: { type: boolean, description: "The GPU decodes too, not only encodes." }
+    BoxOfficeConnection:
+      type: object
+      properties:
+        connected: { type: boolean, description: Radarr and Sonarr both go to Box Office. }
+        movies: { type: boolean, description: Radarr goes to Box Office. }
+        shows: { type: boolean, description: Sonarr goes to Box Office. }
+        url: { type: string }
+        hasApiKey: { type: boolean }
+        id: { type: string, description: Box Office's id, from Matinee's last check (every half a minute). }
+        error: { type: string, description: What went wrong at the last check. }
+    BoxOfficeConfig:
+      type: object
+      properties:
+        url: { type: string, description: "Box Office's address, such as http://boxoffice:7272." }
+        apiKey: { type: string, description: Under Box Office → Settings → Connect Matinee. }
     Integration:
       type: object
       properties:

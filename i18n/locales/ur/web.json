@@ -596,6 +596,24 @@
       "madeAs": "{{name}} کے نام سے",
       "sameName": "جن کا اسی نام سے Overseerr اکاؤنٹ ہے وہ اپنے نام سے مانگتے ہیں۔ کن درخواستوں کو منظوری چاہیے، یہ Overseerr وہاں ہر صارف کی اجازتوں سے طے کرتا ہے۔",
       "confirmDisconnect": "Overseerr منقطع کریں؟ دریافت ٹیب ہٹ جائے گا۔"
+    },
+    "boxoffice": {
+      "notConnected": "منسلک نہیں · فلمیں اور شوز ڈھونڈتا اور ڈاؤن لوڈ کرتا ہے",
+      "moviesOnly": "فلمیں Box Office کو جاتی ہیں، شوز ابھی نہیں · {{url}}",
+      "showsOnly": "شوز Box Office کو جاتے ہیں، فلمیں ابھی نہیں · {{url}}",
+      "intro": "Box Office فلمیں اور شوز ڈھونڈتا اور ڈاؤن لوڈ کرتا ہے۔ اسے یہاں منسلک کرنے سے Radarr اور Sonarr اس کی طرف ہو جاتے ہیں، اس لیے درخواستیں، جلد آنے والے اور اطلاعات سب اسی سے گزرتی ہیں۔",
+      "looking": "Box Office تلاش ہو رہا ہے…",
+      "found": "{{url}} پر Box Office {{version}}",
+      "notFound": "Matinee خود Box Office نہیں ڈھونڈ سکا۔ اس کا پتا درج کریں، جیسے http://boxoffice:7272۔",
+      "keyWhere": "Box Office → Settings → Connect Matinee",
+      "keySteps": "API کلید کہاں ملے گی",
+      "step1": "Box Office کھولیں اور ایڈمن کے طور پر سائن ان کریں۔",
+      "step2": "Settings → Connect Matinee پر جائیں۔",
+      "step3": "API key کے ساتھ کاپی بٹن چنیں، پھر اسے یہاں پیسٹ کریں۔",
+      "replaces": "محفوظ کرنے سے نیچے والے Radarr اور Sonarr، Box Office کی طرف ہو جاتے ہیں۔ نئے ٹائٹلز کا معیار اور فولڈر وہیں چنیں۔",
+      "noShowsFolder": "Box Office میں ابھی شوز کا روٹ فولڈر نہیں، اس لیے صرف فلمیں منسلک ہوتی ہیں۔ Box Office → Settings میں ایک شامل کریں، پھر دوبارہ محفوظ کریں۔",
+      "noMoviesFolder": "Box Office میں ابھی فلموں کا روٹ فولڈر نہیں، اس لیے صرف شوز منسلک ہوتے ہیں۔ Box Office → Settings میں ایک شامل کریں، پھر دوبارہ محفوظ کریں۔",
+      "confirmDisconnect": "Box Office منقطع کریں؟ Radarr اور Sonarr بھی منقطع ہو جائیں گے۔ جو ٹائٹلز اس میں ہیں وہیں رہیں گے۔"
     }
   },
   "requests": {
@@ -869,7 +887,7 @@
       },
       "add-ons": {
         "title": "ایڈ آنز",
-        "hint": "Radarr، Sonarr، Overseerr اور پلگ انز"
+        "hint": "Box Office، Radarr، Sonarr، Overseerr اور پلگ انز"
       },
       "health": {
         "title": "سرور کی حالت",

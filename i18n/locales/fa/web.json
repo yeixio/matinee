@@ -596,6 +596,24 @@
       "madeAs": "به نام {{name}}",
       "sameName": "کسانی که حساب Overseerr با همین نام دارند به نام خودشان درخواست می‌دهند. Overseerr بر اساس دسترسی‌های هر کاربر در آنجا تصمیم می‌گیرد کدام درخواست‌ها نیاز به تأیید دارند.",
       "confirmDisconnect": "اتصال Overseerr قطع شود؟ زبانه‌ی کاوش حذف می‌شود."
+    },
+    "boxoffice": {
+      "notConnected": "متصل نیست · فیلم و سریال پیدا و دانلود می‌کند",
+      "moviesOnly": "فیلم‌ها به Box Office می‌روند، سریال‌ها هنوز نه · {{url}}",
+      "showsOnly": "سریال‌ها به Box Office می‌روند، فیلم‌ها هنوز نه · {{url}}",
+      "intro": "Box Office فیلم و سریال پیدا و دانلود می‌کند. اتصالش در اینجا Radarr و Sonarr را به آن می‌برد، پس درخواست‌ها، به‌زودی‌ها و اعلان‌ها همه از آن می‌گذرند.",
+      "looking": "در حال جست‌وجوی Box Office…",
+      "found": "Box Office {{version}} در {{url}}",
+      "notFound": "Matinee خودش Box Office را پیدا نکرد. نشانی‌اش را وارد کن، مثلاً http://boxoffice:7272.",
+      "keyWhere": "Box Office → Settings → Connect Matinee",
+      "keySteps": "کلید API کجاست",
+      "step1": "Box Office را باز کن و به‌عنوان مدیر وارد شو.",
+      "step2": "به Settings → Connect Matinee برو.",
+      "step3": "کنار API key دکمهٔ کپی را بزن و اینجا بچسبان.",
+      "replaces": "ذخیره کردن، Radarr و Sonarr پایین را به Box Office می‌برد. کیفیت و پوشهٔ عنوان‌های تازه را آنجا انتخاب کن.",
+      "noShowsFolder": "Box Office هنوز پوشهٔ ریشه برای سریال ندارد، پس فقط فیلم‌ها وصل می‌شوند. یکی در Box Office → Settings اضافه کن و دوباره ذخیره کن.",
+      "noMoviesFolder": "Box Office هنوز پوشهٔ ریشه برای فیلم ندارد، پس فقط سریال‌ها وصل می‌شوند. یکی در Box Office → Settings اضافه کن و دوباره ذخیره کن.",
+      "confirmDisconnect": "اتصال Box Office قطع شود؟ اتصال Radarr و Sonarr هم قطع می‌شود. عنوان‌هایی که در آن هستند همان‌جا می‌مانند."
     }
   },
   "requests": {
@@ -869,7 +887,7 @@
       },
       "add-ons": {
         "title": "افزونه‌ها",
-        "hint": "Radarr، Sonarr، Overseerr و افزونه‌ها"
+        "hint": "Box Office، Radarr، Sonarr، Overseerr و افزونه‌ها"
       },
       "health": {
         "title": "وضعیت سرور",

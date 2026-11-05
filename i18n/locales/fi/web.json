@@ -596,6 +596,24 @@
       "madeAs": "Tehdään käyttäjänä {{name}}",
       "sameName": "Ne, joilla on samanniminen Overseerr-tili, pyytävät omissa nimissään. Overseerr päättää käyttäjien oikeuksien perusteella, mitkä pyynnöt tarvitsevat hyväksynnän.",
       "confirmDisconnect": "Katkaistaanko Overseerr-yhteys? Löydä-välilehti poistuu."
+    },
+    "boxoffice": {
+      "notConnected": "Ei yhdistetty · etsii ja lataa elokuvia ja sarjoja",
+      "moviesOnly": "Elokuvat menevät Box Officeen, sarjat eivät vielä · {{url}}",
+      "showsOnly": "Sarjat menevät Box Officeen, elokuvat eivät vielä · {{url}}",
+      "intro": "Box Office etsii ja lataa elokuvia ja sarjoja. Kun yhdistät sen tässä, Radarr ja Sonarr osoittavat siihen, joten pyynnöt, tulossa olevat ja ilmoitukset kulkevat sen kautta.",
+      "looking": "Etsitään Box Officea…",
+      "found": "Box Office {{version}} osoitteessa {{url}}",
+      "notFound": "Matinee ei löytänyt Box Officea itse. Kirjoita sen osoite, esimerkiksi http://boxoffice:7272.",
+      "keyWhere": "Box Office → Settings → Connect Matinee",
+      "keySteps": "Mistä API-avain löytyy",
+      "step1": "Avaa Box Office ja kirjaudu ylläpitäjänä.",
+      "step2": "Siirry kohtaan Settings → Connect Matinee.",
+      "step3": "Valitse API key -kohdan vierestä kopiointipainike ja liitä avain tähän.",
+      "replaces": "Tallennus ohjaa alla olevat Radarrin ja Sonarrin Box Officeen. Valitse uusien nimikkeiden laatu ja kansio niistä.",
+      "noShowsFolder": "Box Officessa ei ole vielä sarjojen juurikansiota, joten vain elokuvat yhdistetään. Lisää se kohdassa Box Office → Settings ja tallenna uudelleen.",
+      "noMoviesFolder": "Box Officessa ei ole vielä elokuvien juurikansiota, joten vain sarjat yhdistetään. Lisää se kohdassa Box Office → Settings ja tallenna uudelleen.",
+      "confirmDisconnect": "Katkaistaanko Box Office? Myös Radarr ja Sonarr katkaistaan. Siellä jo olevat nimikkeet jäävät sinne."
     }
   },
   "requests": {
@@ -869,7 +887,7 @@
       },
       "add-ons": {
         "title": "Lisäosat",
-        "hint": "Radarr, Sonarr, Overseerr ja laajennukset"
+        "hint": "Box Office, Radarr, Sonarr, Overseerr ja laajennukset"
       },
       "health": {
         "title": "Palvelimen tila",

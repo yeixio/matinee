@@ -600,6 +600,24 @@
       "madeAs": "Faites au nom de {{name}}",
       "sameName": "Les personnes ayant un compte Overseerr du même nom demandent en leur propre nom. Overseerr décide quelles demandes doivent être approuvées, selon les permissions de chacun là-bas.",
       "confirmDisconnect": "Déconnecter Overseerr ? L’onglet Découvrir disparaîtra."
+    },
+    "boxoffice": {
+      "notConnected": "Non connecté · trouve et télécharge films et séries",
+      "moviesOnly": "Les films passent par Box Office, pas encore les séries · {{url}}",
+      "showsOnly": "Les séries passent par Box Office, pas encore les films · {{url}}",
+      "intro": "Box Office trouve et télécharge films et séries. Le connecter ici fait pointer Radarr et Sonarr vers lui : demandes, à venir et notifications passent toutes par lui.",
+      "looking": "Recherche de Box Office…",
+      "found": "Box Office {{version}} à {{url}}",
+      "notFound": "Matinee n'a pas trouvé Box Office tout seul. Saisissez son adresse, par exemple http://boxoffice:7272.",
+      "keyWhere": "Box Office → Settings → Connect Matinee",
+      "keySteps": "Où trouver la clé d'API",
+      "step1": "Ouvrez Box Office et connectez-vous en tant qu'administrateur.",
+      "step2": "Allez dans Settings → Connect Matinee.",
+      "step3": "À côté de API key, choisissez le bouton de copie, puis collez-la ici.",
+      "replaces": "L'enregistrement fait pointer Radarr et Sonarr (ci-dessous) vers Box Office. Choisissez-y la qualité et le dossier des nouveaux titres.",
+      "noShowsFolder": "Box Office n'a pas encore de dossier racine pour les séries : seuls les films sont connectés. Ajoutez-en un dans Box Office → Settings, puis enregistrez à nouveau.",
+      "noMoviesFolder": "Box Office n'a pas encore de dossier racine pour les films : seules les séries sont connectées. Ajoutez-en un dans Box Office → Settings, puis enregistrez à nouveau.",
+      "confirmDisconnect": "Déconnecter Box Office ? Radarr et Sonarr sont aussi déconnectés. Les titres déjà dedans y restent."
     }
   },
   "requests": {
@@ -873,7 +891,7 @@
       },
       "add-ons": {
         "title": "Extensions",
-        "hint": "Radarr, Sonarr, Overseerr et plugins"
+        "hint": "Box Office, Radarr, Sonarr, Overseerr et extensions"
       },
       "health": {
         "title": "État du serveur",

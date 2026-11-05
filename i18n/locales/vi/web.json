@@ -592,6 +592,24 @@
       "madeAs": "Gửi dưới tên {{name}}",
       "sameName": "Người có tài khoản Overseerr cùng tên sẽ yêu cầu dưới tên chính họ. Overseerr quyết định yêu cầu nào cần duyệt, theo quyền của từng người dùng ở đó.",
       "confirmDisconnect": "Ngắt kết nối Overseerr? Thẻ Khám phá sẽ biến mất."
+    },
+    "boxoffice": {
+      "notConnected": "Chưa kết nối · tìm và tải phim lẻ và phim bộ",
+      "moviesOnly": "Phim lẻ đi qua Box Office, phim bộ thì chưa · {{url}}",
+      "showsOnly": "Phim bộ đi qua Box Office, phim lẻ thì chưa · {{url}}",
+      "intro": "Box Office tìm và tải phim lẻ và phim bộ. Kết nối ở đây sẽ trỏ Radarr và Sonarr tới nó, nên yêu cầu, sắp ra mắt và thông báo đều đi qua nó.",
+      "looking": "Đang tìm Box Office…",
+      "found": "Box Office {{version}} tại {{url}}",
+      "notFound": "Matinee không tự tìm thấy Box Office. Nhập địa chỉ, ví dụ http://boxoffice:7272.",
+      "keyWhere": "Box Office → Settings → Connect Matinee",
+      "keySteps": "Tìm khóa API ở đâu",
+      "step1": "Mở Box Office và đăng nhập bằng tài khoản quản trị.",
+      "step2": "Vào Settings → Connect Matinee.",
+      "step3": "Cạnh API key, chọn nút sao chép rồi dán vào đây.",
+      "replaces": "Lưu sẽ trỏ Radarr và Sonarr bên dưới tới Box Office. Chọn chất lượng và thư mục cho nội dung mới ở đó.",
+      "noShowsFolder": "Box Office chưa có thư mục gốc cho phim bộ, nên chỉ phim lẻ được kết nối. Thêm một thư mục trong Box Office → Settings rồi lưu lại.",
+      "noMoviesFolder": "Box Office chưa có thư mục gốc cho phim lẻ, nên chỉ phim bộ được kết nối. Thêm một thư mục trong Box Office → Settings rồi lưu lại.",
+      "confirmDisconnect": "Ngắt kết nối Box Office? Radarr và Sonarr cũng bị ngắt. Nội dung đã có trong đó vẫn ở lại."
     }
   },
   "requests": {
@@ -865,7 +883,7 @@
       },
       "add-ons": {
         "title": "Tiện ích bổ sung",
-        "hint": "Radarr, Sonarr, Overseerr và plugin"
+        "hint": "Box Office, Radarr, Sonarr, Overseerr và plugin"
       },
       "health": {
         "title": "Tình trạng máy chủ",

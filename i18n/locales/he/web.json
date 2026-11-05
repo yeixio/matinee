@@ -600,6 +600,24 @@
       "madeAs": "נשלחות בשם {{name}}",
       "sameName": "מי שיש לו חשבון Overseerr באותו שם מבקש בשם עצמו. Overseerr מחליט אילו בקשות דורשות אישור, לפי ההרשאות של כל משתמש שם.",
       "confirmDisconnect": "לנתק את Overseerr? הלשונית „גילוי” תיעלם."
+    },
+    "boxoffice": {
+      "notConnected": "לא מחובר · מוצא ומוריד סרטים וסדרות",
+      "moviesOnly": "סרטים הולכים ל-Box Office, סדרות עדיין לא · {{url}}",
+      "showsOnly": "סדרות הולכות ל-Box Office, סרטים עדיין לא · {{url}}",
+      "intro": "Box Office מוצא ומוריד סרטים וסדרות. חיבור כאן מפנה אליו את Radarr ואת Sonarr, כך שבקשות, בקרוב והתראות עוברים דרכו.",
+      "looking": "מחפש את Box Office…",
+      "found": "Box Office {{version}} בכתובת {{url}}",
+      "notFound": "Matinee לא מצא את Box Office בעצמו. הזן את הכתובת, למשל http://boxoffice:7272.",
+      "keyWhere": "Box Office → Settings → Connect Matinee",
+      "keySteps": "איפה למצוא את מפתח ה-API",
+      "step1": "פתח את Box Office והתחבר כמנהל.",
+      "step2": "עבור אל Settings → Connect Matinee.",
+      "step3": "ליד API key, בחר בכפתור ההעתקה והדבק אותו כאן.",
+      "replaces": "השמירה מפנה את Radarr ואת Sonarr שלמטה ל-Box Office. בחר שם איכות ותיקייה לכותרים חדשים.",
+      "noShowsFolder": "ל-Box Office אין עדיין תיקיית שורש לסדרות, לכן רק סרטים מתחברים. הוסף אחת ב-Box Office → Settings ושמור שוב.",
+      "noMoviesFolder": "ל-Box Office אין עדיין תיקיית שורש לסרטים, לכן רק סדרות מתחברות. הוסף אחת ב-Box Office → Settings ושמור שוב.",
+      "confirmDisconnect": "לנתק את Box Office? גם Radarr ו-Sonarr ינותקו. כותרים שכבר בו נשארים שם."
     }
   },
   "requests": {
@@ -873,7 +891,7 @@
       },
       "add-ons": {
         "title": "תוספים",
-        "hint": "Radarr, Sonarr, Overseerr ותוספים"
+        "hint": "Box Office,‏ Radarr,‏ Sonarr,‏ Overseerr ותוספים"
       },
       "health": {
         "title": "מצב השרת",

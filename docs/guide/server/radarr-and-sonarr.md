@@ -17,6 +17,16 @@ If you use [Radarr](https://radarr.video/) for movies or [Sonarr](https://sonarr
 
 The address and key stay on the server; nobody's browser or app ever sees them.
 
+## Box Office
+
+[Box Office](https://github.com/yeixio/boxoffice) finds and downloads movies and shows, and answers Matinee the way Radarr and Sonarr do. It has its own entry, first in the list, so one connection does both jobs:
+
+1. Open **Settings → Add-ons** and click **Connect** next to **Box Office**. Matinee looks for it on its own: at `boxoffice:7272` (its name in Kubernetes or Docker Compose), on the same machine, at `boxoffice.` beside Matinee's own domain, and wherever Radarr or Sonarr already go. Click the one it found, or type the address.
+2. Paste Box Office's API key. In Box Office, sign in as an admin, open **Settings → Connect Matinee**, and use the copy button next to **API key**.
+3. Click **Test**, then **Save**.
+
+Saving points Radarr at `<address>/radarr` and Sonarr at `<address>/sonarr` with that key, keeping the quality profile and root folder they had when Box Office has them, else Box Office's first. Change those under Radarr and Sonarr below. If Box Office has no TV (or movie) root folder yet, only the other kind connects until you add one and save again. Disconnecting Box Office disconnects both.
+
 ## Who can add titles
 
 Under **Who can add movies and shows**, pick one:

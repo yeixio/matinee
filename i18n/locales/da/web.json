@@ -596,6 +596,24 @@
       "madeAs": "Lavet som {{name}}",
       "sameName": "Folk med en Overseerr-konto med samme navn beder som sig selv. Overseerr afgør, hvilke anmodninger der skal godkendes, ud fra hver brugers tilladelser der.",
       "confirmDisconnect": "Afbryd Overseerr? Fanen Udforsk forsvinder."
+    },
+    "boxoffice": {
+      "notConnected": "Ikke forbundet · finder og henter film og serier",
+      "moviesOnly": "Film går til Box Office, serier ikke endnu · {{url}}",
+      "showsOnly": "Serier går til Box Office, film ikke endnu · {{url}}",
+      "intro": "Box Office finder og henter film og serier. Forbinder du det her, peger Radarr og Sonarr på det, så ønsker, kommende og notifikationer går gennem det.",
+      "looking": "Leder efter Box Office…",
+      "found": "Box Office {{version}} på {{url}}",
+      "notFound": "Matinee kunne ikke selv finde Box Office. Indtast adressen, fx http://boxoffice:7272.",
+      "keyWhere": "Box Office → Settings → Connect Matinee",
+      "keySteps": "Hvor du finder API-nøglen",
+      "step1": "Åbn Box Office, og log ind som administrator.",
+      "step2": "Gå til Settings → Connect Matinee.",
+      "step3": "Vælg kopiknappen ved siden af API key, og indsæt den her.",
+      "replaces": "Når du gemmer, peger Radarr og Sonarr nedenfor på Box Office. Vælg kvalitet og mappe til nye titler der.",
+      "noShowsFolder": "Box Office har endnu ingen rodmappe til serier, så kun film forbindes. Tilføj en under Box Office → Settings, og gem igen.",
+      "noMoviesFolder": "Box Office har endnu ingen rodmappe til film, så kun serier forbindes. Tilføj en under Box Office → Settings, og gem igen.",
+      "confirmDisconnect": "Afbryd Box Office? Radarr og Sonarr afbrydes også. Titler, der allerede er der, bliver der."
     }
   },
   "requests": {
@@ -869,7 +887,7 @@
       },
       "add-ons": {
         "title": "Tilføjelser",
-        "hint": "Radarr, Sonarr, Overseerr og plugins"
+        "hint": "Box Office, Radarr, Sonarr, Overseerr og plugins"
       },
       "health": {
         "title": "Serverens helbred",

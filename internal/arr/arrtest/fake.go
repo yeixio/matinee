@@ -240,3 +240,35 @@ func (f *Fake) CommandNames() []string {
 	}
 	return out
 }
+
+// BoxOffice is a pretend Box Office: Radarr at /radarr and Sonarr at
+// /sonarr with one API key, and its sign-in-free status at /api/v1/status.
+type BoxOffice struct {
+	URL            string
+	Key            string
+	Radarr, Sonarr *Fake
+}
+
+func NewBoxOffice(t *testing.T) *BoxOffice {
+	b := &BoxOffice{Key: "secret-boxoffice"}
+	mk := func(app arr.App) *Fake {
+		return &Fake{App: app, Key: b.Key, Base: "/" + string(app), BoxOfficeID: "bo-1", Library: map[int]map[string]any{}, nextID: 1}
+	}
+	b.Radarr, b.Sonarr = mk(arr.Radarr), mk(arr.Sonarr)
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		switch {
+		case r.URL.Path == "/api/v1/status":
+			write(w, map[string]any{"product": "boxoffice", "id": "bo-1", "setup": true, "version": "1.2.3"})
+		case strings.HasPrefix(r.URL.Path, "/radarr/"):
+			b.Radarr.serve(w, r)
+		case strings.HasPrefix(r.URL.Path, "/sonarr/"):
+			b.Sonarr.serve(w, r)
+		default:
+			http.NotFound(w, r)
+		}
+	}))
+	t.Cleanup(ts.Close)
+	b.URL = ts.URL
+	b.Radarr.URL, b.Sonarr.URL = ts.URL+"/radarr", ts.URL+"/sonarr"
+	return b
+}

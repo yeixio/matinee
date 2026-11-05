@@ -1,8 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { Check, Clapperboard, Compass, PlugZap, Tv } from 'lucide-react'
+import { Check, Clapperboard, Compass, PackageSearch, PlugZap, Search, Tv } from 'lucide-react'
 import { useEffect, useState, type FormEvent } from 'react'
 import { useTranslation } from 'react-i18next'
-import { api, type ArrApp, type ConnectionCheck, type Integration, type NotifyAdmins, type OverseerrCheck, type OverseerrConnection, type RequestMode } from '../api'
+import { api, type ArrApp, type BoxOfficeCheck, type BoxOfficeConnection, type ConnectionCheck, type Integration, type NotifyAdmins, type OverseerrCheck, type OverseerrConnection, type RequestMode } from '../api'
 import { Button, Field, inputClass } from '../components/ui'
 
 const apps: {
@@ -24,6 +24,7 @@ export function Integrations() {
     queryFn: api.integrations,
   })
   const { data: overseerr } = useQuery({ queryKey: ['overseerr'], queryFn: api.overseerr })
+  const { data: boxOffice } = useQuery({ queryKey: ['boxoffice'], queryFn: api.boxOffice })
   return (
     <section className="space-y-4">
       <div>
@@ -32,7 +33,10 @@ export function Integrations() {
           {t('integrations.intro')}
         </p>
       </div>
-      <div className="space-y-3">{apps.map((a) => (data ? <Connection key={a.app} {...a} saved={data[a.app]} /> : null))}</div>
+      <div className="space-y-3">
+        {boxOffice && <BoxOfficeCard saved={boxOffice} />}
+        {apps.map((a) => (data ? <Connection key={a.app} {...a} saved={data[a.app]} /> : null))}
+      </div>
       {data && (data.radarr.connected || data.sonarr.connected) && <BoxOfficeNotifications />}
       <div id="overseerr" className="scroll-mt-24 pt-4">
         <h2 className="text-lg font-semibold">Overseerr</h2>
@@ -41,6 +45,198 @@ export function Integrations() {
       {overseerr && <OverseerrConnectionCard saved={overseerr} />}
       {((data && (data.radarr.connected || data.sonarr.connected)) || overseerr?.connected) && <RequestModeSetting />}
     </section>
+  )
+}
+
+// Box Office finds and downloads movies and shows, and answers as Radarr and
+// Sonarr, so connecting it points both of those at it. Matinee looks for it
+// on its own; only the API key has to be typed, and the steps say where it is.
+function BoxOfficeCard({ saved }: { saved: BoxOfficeConnection }) {
+  const { t } = useTranslation()
+  const qc = useQueryClient()
+  const [open, setOpen] = useState(false)
+  const [url, setUrl] = useState(saved.url)
+  const [apiKey, setApiKey] = useState('')
+  const [checked, setChecked] = useState<BoxOfficeCheck>()
+  const linked = saved.movies || saved.shows
+  const keyNeeded = !saved.hasApiKey || url.trim().replace(/\/+$/, '') !== saved.url
+
+  const refresh = () => {
+    for (const key of ['boxoffice', 'integrations', 'requestOptions', 'upcoming', 'notification-settings']) qc.invalidateQueries({ queryKey: [key] })
+  }
+  const find = useMutation({
+    mutationFn: api.findBoxOffice,
+    onSuccess: (r) => {
+      if (r.found[0]) setUrl((u) => u || r.found[0].url)
+    },
+  })
+  const test = useMutation({
+    mutationFn: () => api.testBoxOffice({ url, apiKey: apiKey || undefined }),
+    onSuccess: (c) => {
+      setChecked(c)
+      setUrl(c.url)
+    },
+  })
+  const save = useMutation({
+    mutationFn: () => api.saveBoxOffice({ url, apiKey: apiKey || undefined }),
+    onSuccess: (s) => {
+      setApiKey('')
+      setUrl(s.url)
+      setOpen(false)
+      refresh()
+    },
+  })
+  const disconnect = useMutation({
+    mutationFn: api.deleteBoxOffice,
+    onSuccess: () => {
+      setUrl('')
+      setChecked(undefined)
+      refresh()
+    },
+  })
+
+  // Opening it looks for Box Office, or checks the saved one.
+  const { mutate: runTest } = test
+  const { mutate: runFind } = find
+  useEffect(() => {
+    if (!open) return
+    if (linked) runTest()
+    else runFind()
+  }, [open, linked, runTest, runFind])
+
+  const submit = (e: FormEvent) => {
+    e.preventDefault()
+    save.mutate()
+  }
+  const error = save.error ?? test.error ?? disconnect.error
+  const status = saved.connected
+    ? t('integrations.connected', { url: saved.url })
+    : saved.movies
+      ? t('integrations.boxoffice.moviesOnly', { url: saved.url })
+      : saved.shows
+        ? t('integrations.boxoffice.showsOnly', { url: saved.url })
+        : t('integrations.boxoffice.notConnected')
+
+  return (
+    <div className="rounded-xl border border-line/60 bg-surface/50" id="boxoffice">
+      <div className="flex items-center gap-4 p-4">
+        <span className="grid size-10 place-items-center rounded-lg bg-text/5 text-accent">
+          <PackageSearch className="size-5" />
+        </span>
+        <div className="min-w-0 flex-1">
+          <div className="font-medium">Box Office</div>
+          <div className="truncate text-xs text-muted">{status}</div>
+        </div>
+        {!open && (
+          <Button variant={saved.connected ? 'ghost' : 'secondary'} icon={saved.connected ? undefined : <PlugZap className="size-4" />} onClick={() => setOpen(true)}>
+            {saved.connected ? t('integrations.change') : t('integrations.connect')}
+          </Button>
+        )}
+      </div>
+      {open && (
+        <form onSubmit={submit} className="space-y-4 border-t border-line/60 p-4">
+          <p className="text-sm text-muted">{t('integrations.boxoffice.intro')}</p>
+          {find.isPending && (
+            <p className="flex items-center gap-2 text-sm text-muted">
+              <Search className="size-4 animate-pulse" /> {t('integrations.boxoffice.looking')}
+            </p>
+          )}
+          {find.data &&
+            (find.data.found.length > 0 ? (
+              <div className="flex flex-wrap items-center gap-2 text-sm">
+                {find.data.found.map((f) => (
+                  <button
+                    key={f.url}
+                    type="button"
+                    onClick={() => {
+                      setUrl(f.url)
+                      setChecked(undefined)
+                    }}
+                    className={`flex items-center gap-1.5 rounded-full border px-3 py-1 ${url === f.url ? 'border-accent text-accent' : 'border-line/60 text-muted hover:text-text'}`}
+                  >
+                    {url === f.url && <Check className="size-3.5" />}
+                    {t('integrations.boxoffice.found', { url: f.url, version: f.version })}
+                  </button>
+                ))}
+              </div>
+            ) : (
+              <p className="text-sm text-muted">{t('integrations.boxoffice.notFound')}</p>
+            ))}
+          <div className="grid gap-3 sm:grid-cols-2">
+            <Field label={t('integrations.address')}>
+              <input
+                className={inputClass}
+                value={url}
+                onChange={(e) => {
+                  setUrl(e.target.value)
+                  setChecked(undefined)
+                }}
+                placeholder="http://boxoffice:7272"
+                required
+              />
+            </Field>
+            <Field label={t('integrations.apiKey')}>
+              <input
+                className={inputClass}
+                type="password"
+                autoComplete="off"
+                value={apiKey}
+                onChange={(e) => {
+                  setApiKey(e.target.value)
+                  setChecked(undefined)
+                }}
+                placeholder={keyNeeded ? t('integrations.boxoffice.keyWhere') : t('integrations.saved')}
+                required={keyNeeded}
+              />
+            </Field>
+          </div>
+          {keyNeeded && !checked && (
+            <div className="rounded-lg bg-text/5 p-3 text-sm">
+              <div className="mb-1 font-medium">{t('integrations.boxoffice.keySteps')}</div>
+              <ol className="list-decimal space-y-0.5 ps-5 text-muted">
+                <li>{t('integrations.boxoffice.step1')}</li>
+                <li>{t('integrations.boxoffice.step2')}</li>
+                <li>{t('integrations.boxoffice.step3')}</li>
+              </ol>
+            </div>
+          )}
+          {checked && (
+            <>
+              <p className="flex items-start gap-2 text-sm text-accent">
+                <Check className="mt-0.5 size-4 shrink-0" />
+                <span className="min-w-0 break-all">{t('integrations.answers', { app: 'Box Office', version: checked.version, url: checked.url })}</span>
+              </p>
+              <p className="text-sm text-muted">{t('integrations.boxoffice.replaces')}</p>
+              {checked.movies.rootFolders.length > 0 && checked.shows.rootFolders.length === 0 && <p className="text-sm text-danger">{t('integrations.boxoffice.noShowsFolder')}</p>}
+              {checked.shows.rootFolders.length > 0 && checked.movies.rootFolders.length === 0 && <p className="text-sm text-danger">{t('integrations.boxoffice.noMoviesFolder')}</p>}
+            </>
+          )}
+          {error && <p className="text-sm text-danger">{error.message}</p>}
+          <div className="flex flex-wrap justify-end gap-2">
+            {linked && (
+              <Button
+                type="button"
+                variant="danger"
+                className="me-auto"
+                disabled={disconnect.isPending}
+                onClick={() => confirm(t('integrations.boxoffice.confirmDisconnect')) && disconnect.mutate()}
+              >
+                {t('integrations.disconnect')}
+              </Button>
+            )}
+            <Button type="button" variant="ghost" onClick={() => setOpen(false)}>
+              {t('cancel')}
+            </Button>
+            <Button type="button" disabled={!url || (keyNeeded && !apiKey) || test.isPending} onClick={() => test.mutate()}>
+              {test.isPending ? t('integrations.testing') : t('integrations.test')}
+            </Button>
+            <Button variant="primary" disabled={!checked || save.isPending}>
+              {t('save')}
+            </Button>
+          </div>
+        </form>
+      )}
+    </div>
   )
 }
 
@@ -58,6 +254,7 @@ function Connection({ app, name, port, icon: Icon, saved }: (typeof apps)[number
 
   const refresh = () => {
     qc.invalidateQueries({ queryKey: ['integrations'] })
+    qc.invalidateQueries({ queryKey: ['boxoffice'] })
     qc.invalidateQueries({ queryKey: ['requestOptions'] })
     qc.invalidateQueries({ queryKey: ['upcoming'] })
   }

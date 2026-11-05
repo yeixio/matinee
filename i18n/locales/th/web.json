@@ -592,6 +592,24 @@
       "madeAs": "ขอในนาม {{name}}",
       "sameName": "คนที่มีบัญชี Overseerr ชื่อเดียวกันจะขอในนามตัวเอง Overseerr เป็นผู้ตัดสินว่าคำขอใดต้องอนุมัติ ตามสิทธิ์ของผู้ใช้แต่ละคนที่นั่น",
       "confirmDisconnect": "ยกเลิกการเชื่อมต่อ Overseerr? แท็บสำรวจจะหายไป"
+    },
+    "boxoffice": {
+      "notConnected": "ยังไม่เชื่อมต่อ · ค้นหาและดาวน์โหลดหนังและซีรีส์",
+      "moviesOnly": "หนังไปที่ Box Office แล้ว ซีรีส์ยังไม่ · {{url}}",
+      "showsOnly": "ซีรีส์ไปที่ Box Office แล้ว หนังยังไม่ · {{url}}",
+      "intro": "Box Office ค้นหาและดาวน์โหลดหนังและซีรีส์ การเชื่อมต่อที่นี่จะให้ Radarr และ Sonarr ชี้ไปที่มัน คำขอ รายการที่กำลังจะมา และการแจ้งเตือนจึงผ่านมันทั้งหมด",
+      "looking": "กำลังค้นหา Box Office…",
+      "found": "Box Office {{version}} ที่ {{url}}",
+      "notFound": "Matinee หา Box Office เองไม่เจอ ป้อนที่อยู่ เช่น http://boxoffice:7272",
+      "keyWhere": "Box Office → Settings → Connect Matinee",
+      "keySteps": "หาคีย์ API ได้ที่ไหน",
+      "step1": "เปิด Box Office แล้วลงชื่อเข้าใช้ในฐานะผู้ดูแล",
+      "step2": "ไปที่ Settings → Connect Matinee",
+      "step3": "ข้าง API key เลือกปุ่มคัดลอก แล้ววางที่นี่",
+      "replaces": "การบันทึกจะให้ Radarr และ Sonarr ด้านล่างชี้ไปที่ Box Office เลือกคุณภาพและโฟลเดอร์สำหรับเรื่องใหม่ได้ที่นั่น",
+      "noShowsFolder": "Box Office ยังไม่มีโฟลเดอร์รากสำหรับซีรีส์ จึงเชื่อมต่อได้แค่หนัง เพิ่มได้ที่ Box Office → Settings แล้วบันทึกอีกครั้ง",
+      "noMoviesFolder": "Box Office ยังไม่มีโฟลเดอร์รากสำหรับหนัง จึงเชื่อมต่อได้แค่ซีรีส์ เพิ่มได้ที่ Box Office → Settings แล้วบันทึกอีกครั้ง",
+      "confirmDisconnect": "ยกเลิกการเชื่อมต่อ Box Office ไหม Radarr และ Sonarr จะถูกยกเลิกด้วย เรื่องที่อยู่ในนั้นแล้วยังอยู่ที่เดิม"
     }
   },
   "requests": {
@@ -865,7 +883,7 @@
       },
       "add-ons": {
         "title": "ส่วนเสริม",
-        "hint": "Radarr, Sonarr, Overseerr และปลั๊กอิน"
+        "hint": "Box Office, Radarr, Sonarr, Overseerr และปลั๊กอิน"
       },
       "health": {
         "title": "สถานะเซิร์ฟเวอร์",

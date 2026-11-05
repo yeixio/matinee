@@ -596,6 +596,24 @@
       "madeAs": "{{name}} के नाम से",
       "sameName": "जिनका इसी नाम से Overseerr खाता है, वे अपने नाम से माँगते हैं। कौन से अनुरोधों को मंज़ूरी चाहिए, यह Overseerr वहाँ हर उपयोगकर्ता की अनुमतियों से तय करता है।",
       "confirmDisconnect": "Overseerr डिस्कनेक्ट करें? खोजें टैब हट जाएगा।"
+    },
+    "boxoffice": {
+      "notConnected": "कनेक्ट नहीं · फ़िल्में और शो ढूँढता और डाउनलोड करता है",
+      "moviesOnly": "फ़िल्में Box Office में जाती हैं, शो अभी नहीं · {{url}}",
+      "showsOnly": "शो Box Office में जाते हैं, फ़िल्में अभी नहीं · {{url}}",
+      "intro": "Box Office फ़िल्में और शो ढूँढता और डाउनलोड करता है। इसे यहाँ कनेक्ट करने से Radarr और Sonarr इसकी ओर हो जाते हैं, इसलिए अनुरोध, जल्द आने वाले और सूचनाएँ सब इसी से होकर जाते हैं।",
+      "looking": "Box Office ढूँढ रहे हैं…",
+      "found": "{{url}} पर Box Office {{version}}",
+      "notFound": "Matinee खुद Box Office नहीं ढूँढ पाया। इसका पता डालें, जैसे http://boxoffice:7272।",
+      "keyWhere": "Box Office → Settings → Connect Matinee",
+      "keySteps": "API कुंजी कहाँ मिलेगी",
+      "step1": "Box Office खोलें और एडमिन के रूप में साइन इन करें।",
+      "step2": "Settings → Connect Matinee पर जाएँ।",
+      "step3": "API key के पास कॉपी बटन चुनें, फिर उसे यहाँ पेस्ट करें।",
+      "replaces": "सेव करने से नीचे के Radarr और Sonarr, Box Office की ओर हो जाते हैं। नए टाइटल की क्वालिटी और फ़ोल्डर वहीं चुनें।",
+      "noShowsFolder": "Box Office में अभी शो का रूट फ़ोल्डर नहीं है, इसलिए सिर्फ़ फ़िल्में कनेक्ट होती हैं। Box Office → Settings में एक जोड़ें, फिर दोबारा सेव करें।",
+      "noMoviesFolder": "Box Office में अभी फ़िल्मों का रूट फ़ोल्डर नहीं है, इसलिए सिर्फ़ शो कनेक्ट होते हैं। Box Office → Settings में एक जोड़ें, फिर दोबारा सेव करें।",
+      "confirmDisconnect": "Box Office डिस्कनेक्ट करें? Radarr और Sonarr भी डिस्कनेक्ट हो जाएँगे। उसमें मौजूद टाइटल वहीं रहेंगे।"
     }
   },
   "requests": {
@@ -869,7 +887,7 @@
       },
       "add-ons": {
         "title": "ऐड-ऑन",
-        "hint": "Radarr, Sonarr, Overseerr और प्लगइन"
+        "hint": "Box Office, Radarr, Sonarr, Overseerr और प्लगइन"
       },
       "health": {
         "title": "सर्वर की स्थिति",
