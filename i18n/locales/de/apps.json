@@ -624,5 +624,46 @@
     "openSettings": "Einstellungen öffnen",
     "offer": "Erhalte diese als Benachrichtigungen auf diesem Gerät, auch wenn Matinee geschlossen ist.",
     "turnOn": "Einschalten"
+  },
+  "boxOffice": {
+    "onItsWay": "Unterwegs",
+    "stage": {
+      "searching": "Wird gesucht",
+      "queued": "Wartet auf den Download",
+      "downloading": "Wird heruntergeladen",
+      "paused": "Angehalten",
+      "waiting": "Heruntergeladen",
+      "checking": "Wird geprüft",
+      "repairing": "Wird repariert",
+      "unpacking": "Wird entpackt",
+      "importing": "Kommt in die Mediathek",
+      "waitingToMove": "Wartet auf einen Admin",
+      "imported": "Bald bereit",
+      "problem": "Wartet auf eine gute Kopie"
+    },
+    "eta": "Noch etwa {{time}}",
+    "notifyMe": "Benachrichtigen",
+    "notifying": "Wir sagen Bescheid",
+    "copies": {
+      "button": "Andere Kopien",
+      "editions": "Andere Fassungen",
+      "looking": "Fassungen werden gesucht…",
+      "none": "Gerade keine anderen Fassungen gefunden.",
+      "owned": "In der Mediathek",
+      "keepBoth": "Zusätzlich hinzufügen",
+      "replace": "Diese Kopie ersetzen",
+      "better": "Bessere Kopie anfragen",
+      "bad": "Diese Kopie ist fehlerhaft",
+      "reason": "Was stimmt damit nicht?",
+      "sent": "Angefragt. Ist unterwegs.",
+      "pending": "Angefragt. Ein Admin sieht es sich an.",
+      "needsApproval": "Ein Admin genehmigt das zuerst.",
+      "reasons": {
+        "language": "Falsche Sprache",
+        "sync": "Nicht synchron",
+        "picture": "Schlechtes Bild",
+        "other": "Etwas anderes"
+      }
+    }
   }
 }

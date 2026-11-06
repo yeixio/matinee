@@ -624,5 +624,46 @@
     "openSettings": "Öppna inställningar",
     "offer": "Få dessa som aviseringar på den här enheten, även när Matinee är stängt.",
     "turnOn": "Slå på"
+  },
+  "boxOffice": {
+    "onItsWay": "På väg",
+    "stage": {
+      "searching": "Letar efter den",
+      "queued": "Väntar på nedladdning",
+      "downloading": "Laddar ner",
+      "paused": "Pausad",
+      "waiting": "Nedladdad",
+      "checking": "Kontrolleras",
+      "repairing": "Repareras",
+      "unpacking": "Packas upp",
+      "importing": "Flyttas till biblioteket",
+      "waitingToMove": "Väntar på en admin",
+      "imported": "Klar snart",
+      "problem": "Väntar på en bra kopia"
+    },
+    "eta": "Ungefär {{time}} kvar",
+    "notifyMe": "Meddela mig",
+    "notifying": "Vi säger till",
+    "copies": {
+      "button": "Andra kopior",
+      "editions": "Andra utgåvor",
+      "looking": "Letar efter utgåvor…",
+      "none": "Inga andra utgåvor hittades just nu.",
+      "owned": "I biblioteket",
+      "keepBoth": "Lägg till bredvid",
+      "replace": "Ersätt den här kopian",
+      "better": "Be om en bättre kopia",
+      "bad": "Den här kopian är dålig",
+      "reason": "Vad är fel med den?",
+      "sent": "Begärt. Den är på väg.",
+      "pending": "Begärt. En admin tittar på det.",
+      "needsApproval": "En admin godkänner dessa först.",
+      "reasons": {
+        "language": "Fel språk",
+        "sync": "Osynkat",
+        "picture": "Dålig bild",
+        "other": "Något annat"
+      }
+    }
   }
 }

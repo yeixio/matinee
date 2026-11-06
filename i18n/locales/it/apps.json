@@ -631,5 +631,46 @@
     "openSettings": "Apri impostazioni",
     "offer": "Ricevile come notifiche su questo dispositivo, anche con Matinee chiuso.",
     "turnOn": "Attiva"
+  },
+  "boxOffice": {
+    "onItsWay": "In arrivo",
+    "stage": {
+      "searching": "Lo sto cercando",
+      "queued": "In attesa di download",
+      "downloading": "Download in corso",
+      "paused": "In pausa",
+      "waiting": "Scaricato",
+      "checking": "Verifica",
+      "repairing": "Riparazione",
+      "unpacking": "Estrazione",
+      "importing": "Spostamento nella libreria",
+      "waitingToMove": "In attesa di un amministratore",
+      "imported": "Pronto a breve",
+      "problem": "In attesa di una copia buona"
+    },
+    "eta": "Circa {{time}} rimasti",
+    "notifyMe": "Avvisami",
+    "notifying": "Ti avviseremo",
+    "copies": {
+      "button": "Altre copie",
+      "editions": "Altre edizioni",
+      "looking": "Ricerca delle edizioni…",
+      "none": "Nessun’altra edizione trovata per ora.",
+      "owned": "Nella libreria",
+      "keepBoth": "Aggiungi accanto",
+      "replace": "Sostituisci questa copia",
+      "better": "Chiedi una copia migliore",
+      "bad": "Questa copia è difettosa",
+      "reason": "Cosa c’è che non va?",
+      "sent": "Richiesto. È in arrivo.",
+      "pending": "Richiesto. Lo vedrà un amministratore.",
+      "needsApproval": "Prima li approva un amministratore.",
+      "reasons": {
+        "language": "Lingua sbagliata",
+        "sync": "Non sincronizzato",
+        "picture": "Immagine scadente",
+        "other": "Altro"
+      }
+    }
   }
 }

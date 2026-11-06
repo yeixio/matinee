@@ -624,5 +624,46 @@
     "openSettings": "Åpne innstillinger",
     "offer": "Få disse som varsler på denne enheten, selv når Matinee er lukket.",
     "turnOn": "Slå på"
+  },
+  "boxOffice": {
+    "onItsWay": "På vei",
+    "stage": {
+      "searching": "Leter etter den",
+      "queued": "Venter på nedlasting",
+      "downloading": "Laster ned",
+      "paused": "Satt på pause",
+      "waiting": "Lastet ned",
+      "checking": "Sjekkes",
+      "repairing": "Repareres",
+      "unpacking": "Pakkes ut",
+      "importing": "Flyttes til biblioteket",
+      "waitingToMove": "Venter på en admin",
+      "imported": "Klar snart",
+      "problem": "Venter på en god kopi"
+    },
+    "eta": "Omtrent {{time}} igjen",
+    "notifyMe": "Gi meg beskjed",
+    "notifying": "Vi gir beskjed",
+    "copies": {
+      "button": "Andre kopier",
+      "editions": "Andre utgaver",
+      "looking": "Leter etter utgaver…",
+      "none": "Fant ingen andre utgaver akkurat nå.",
+      "owned": "I biblioteket",
+      "keepBoth": "Legg til ved siden av",
+      "replace": "Erstatt denne kopien",
+      "better": "Be om en bedre kopi",
+      "bad": "Denne kopien er dårlig",
+      "reason": "Hva er galt med den?",
+      "sent": "Bedt om. Den er på vei.",
+      "pending": "Bedt om. En admin ser på det.",
+      "needsApproval": "En admin godkjenner disse først.",
+      "reasons": {
+        "language": "Feil språk",
+        "sync": "Ute av synk",
+        "picture": "Dårlig bilde",
+        "other": "Noe annet"
+      }
+    }
   }
 }

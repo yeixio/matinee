@@ -617,5 +617,46 @@
     "openSettings": "開啟設定",
     "offer": "即使 Matinee 已關閉，也能在此裝置上以通知形式收到。",
     "turnOn": "開啟"
+  },
+  "boxOffice": {
+    "onItsWay": "即將到來",
+    "stage": {
+      "searching": "正在尋找",
+      "queued": "等待下載",
+      "downloading": "正在下載",
+      "paused": "已暫停",
+      "waiting": "已下載",
+      "checking": "正在檢查",
+      "repairing": "正在修復",
+      "unpacking": "正在解壓縮",
+      "importing": "正在移入媒體庫",
+      "waitingToMove": "等待管理員",
+      "imported": "即將就緒",
+      "problem": "等待一份好的副本"
+    },
+    "eta": "大約還剩 {{time}}",
+    "notifyMe": "通知我",
+    "notifying": "到時通知你",
+    "copies": {
+      "button": "其他副本",
+      "editions": "其他版本",
+      "looking": "正在尋找版本…",
+      "none": "目前沒有找到其他版本。",
+      "owned": "已在媒體庫中",
+      "keepBoth": "並列新增",
+      "replace": "取代這份副本",
+      "better": "要求更好的副本",
+      "bad": "這份副本有問題",
+      "reason": "有什麼問題？",
+      "sent": "已要求，正在路上。",
+      "pending": "已要求，管理員會查看。",
+      "needsApproval": "這些需要管理員先核准。",
+      "reasons": {
+        "language": "語言不對",
+        "sync": "音畫不同步",
+        "picture": "畫質差",
+        "other": "其他"
+      }
+    }
   }
 }

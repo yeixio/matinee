@@ -631,5 +631,46 @@
     "openSettings": "Deschide setările",
     "offer": "Primește-le ca notificări pe acest dispozitiv, chiar și cu Matinee închis.",
     "turnOn": "Activează"
+  },
+  "boxOffice": {
+    "onItsWay": "Pe drum",
+    "stage": {
+      "searching": "Se caută",
+      "queued": "Așteaptă descărcarea",
+      "downloading": "Se descarcă",
+      "paused": "În pauză",
+      "waiting": "Descărcat",
+      "checking": "Se verifică",
+      "repairing": "Se repară",
+      "unpacking": "Se dezarhivează",
+      "importing": "Se mută în bibliotecă",
+      "waitingToMove": "Așteaptă un administrator",
+      "imported": "Gata în curând",
+      "problem": "Așteaptă o copie bună"
+    },
+    "eta": "Au mai rămas circa {{time}}",
+    "notifyMe": "Anunță-mă",
+    "notifying": "Te anunțăm",
+    "copies": {
+      "button": "Alte copii",
+      "editions": "Alte ediții",
+      "looking": "Se caută ediții…",
+      "none": "Nu s-au găsit alte ediții acum.",
+      "owned": "În bibliotecă",
+      "keepBoth": "Adaugă alături",
+      "replace": "Înlocuiește această copie",
+      "better": "Cere o copie mai bună",
+      "bad": "Copia asta e proastă",
+      "reason": "Ce are?",
+      "sent": "Cerut. E pe drum.",
+      "pending": "Cerut. Un administrator se va uita.",
+      "needsApproval": "Un administrator le aprobă întâi.",
+      "reasons": {
+        "language": "Limbă greșită",
+        "sync": "Desincronizat",
+        "picture": "Imagine slabă",
+        "other": "Altceva"
+      }
+    }
   }
 }

@@ -617,5 +617,46 @@
     "openSettings": "Buka tetapan",
     "offer": "Terima ini sebagai pemberitahuan pada peranti ini, walaupun Matinee ditutup.",
     "turnOn": "Hidupkan"
+  },
+  "boxOffice": {
+    "onItsWay": "Dalam perjalanan",
+    "stage": {
+      "searching": "Sedang dicari",
+      "queued": "Menunggu dimuat turun",
+      "downloading": "Memuat turun",
+      "paused": "Dijeda",
+      "waiting": "Sudah dimuat turun",
+      "checking": "Menyemak",
+      "repairing": "Membaiki",
+      "unpacking": "Mengekstrak",
+      "importing": "Dipindahkan ke pustaka",
+      "waitingToMove": "Menunggu pentadbir",
+      "imported": "Siap tidak lama lagi",
+      "problem": "Menunggu salinan yang baik"
+    },
+    "eta": "Lebih kurang {{time}} lagi",
+    "notifyMe": "Maklumkan saya",
+    "notifying": "Kami akan maklumkan",
+    "copies": {
+      "button": "Salinan lain",
+      "editions": "Edisi lain",
+      "looking": "Mencari edisi…",
+      "none": "Tiada edisi lain buat masa ini.",
+      "owned": "Dalam pustaka",
+      "keepBoth": "Tambah di sebelahnya",
+      "replace": "Ganti salinan ini",
+      "better": "Minta salinan yang lebih baik",
+      "bad": "Salinan ini teruk",
+      "reason": "Apa masalahnya?",
+      "sent": "Diminta. Dalam perjalanan.",
+      "pending": "Diminta. Pentadbir akan menyemaknya.",
+      "needsApproval": "Pentadbir meluluskannya dahulu.",
+      "reasons": {
+        "language": "Bahasa salah",
+        "sync": "Tidak segerak",
+        "picture": "Gambar buruk",
+        "other": "Lain-lain"
+      }
+    }
   }
 }

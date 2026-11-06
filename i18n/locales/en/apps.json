@@ -624,5 +624,46 @@
     "openSettings": "Open settings",
     "offer": "Get these as notifications on this device, even with Matinee closed.",
     "turnOn": "Turn on"
+  },
+  "boxOffice": {
+    "onItsWay": "On its way",
+    "stage": {
+      "searching": "Looking for it",
+      "queued": "Waiting to download",
+      "downloading": "Downloading",
+      "paused": "Paused",
+      "waiting": "Downloaded",
+      "checking": "Checking",
+      "repairing": "Repairing",
+      "unpacking": "Unpacking",
+      "importing": "Moving into the library",
+      "waitingToMove": "Waiting for an admin",
+      "imported": "Ready soon",
+      "problem": "Waiting for a good copy"
+    },
+    "eta": "About {{time}} left",
+    "notifyMe": "Notify me",
+    "notifying": "We'll tell you",
+    "copies": {
+      "button": "Other copies",
+      "editions": "Other editions",
+      "looking": "Looking for editions…",
+      "none": "No other editions found right now.",
+      "owned": "In the library",
+      "keepBoth": "Add alongside",
+      "replace": "Replace this copy",
+      "better": "Ask for a better copy",
+      "bad": "This copy is bad",
+      "reason": "What's wrong with it?",
+      "sent": "Asked. It's on its way.",
+      "pending": "Asked. An admin will look at it.",
+      "needsApproval": "An admin approves these first.",
+      "reasons": {
+        "language": "Wrong language",
+        "sync": "Out of sync",
+        "picture": "Poor picture",
+        "other": "Something else"
+      }
+    }
   }
 }

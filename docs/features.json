@@ -182,6 +182,19 @@
               }
             },
             {
+              "name": "On its way and Other copies (Box Office)",
+              "doc": "/docs/server/radarr-and-sonarr/#on-its-way-and-other-copies",
+              "since": "v0.2.3",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
               "name": "Discover and request (Overseerr)",
               "doc": "/docs/watching/discover/",
               "since": "v0.1.1",

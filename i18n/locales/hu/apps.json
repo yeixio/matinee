@@ -624,5 +624,46 @@
     "openSettings": "Beállítások megnyitása",
     "offer": "Kapd meg ezeket értesítésként ezen az eszközön, akkor is, ha a Matinee be van zárva.",
     "turnOn": "Bekapcsolás"
+  },
+  "boxOffice": {
+    "onItsWay": "Úton van",
+    "stage": {
+      "searching": "Keresés",
+      "queued": "Letöltésre vár",
+      "downloading": "Letöltés",
+      "paused": "Szüneteltetve",
+      "waiting": "Letöltve",
+      "checking": "Ellenőrzés",
+      "repairing": "Javítás",
+      "unpacking": "Kicsomagolás",
+      "importing": "Áthelyezés a könyvtárba",
+      "waitingToMove": "Adminra vár",
+      "imported": "Hamarosan kész",
+      "problem": "Jó másolatra vár"
+    },
+    "eta": "Kb. {{time}} van hátra",
+    "notifyMe": "Értesíts",
+    "notifying": "Szólunk",
+    "copies": {
+      "button": "Más másolatok",
+      "editions": "Más kiadások",
+      "looking": "Kiadások keresése…",
+      "none": "Most nincs más kiadás.",
+      "owned": "A könyvtárban",
+      "keepBoth": "Hozzáadás mellé",
+      "replace": "Ennek a másolatnak a cseréje",
+      "better": "Jobb másolat kérése",
+      "bad": "Ez a másolat rossz",
+      "reason": "Mi a baj vele?",
+      "sent": "Kérve. Úton van.",
+      "pending": "Kérve. Egy admin megnézi.",
+      "needsApproval": "Ezeket előbb egy admin hagyja jóvá.",
+      "reasons": {
+        "language": "Rossz nyelv",
+        "sync": "Nincs szinkronban",
+        "picture": "Gyenge kép",
+        "other": "Valami más"
+      }
+    }
   }
 }

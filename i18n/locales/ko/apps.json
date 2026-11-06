@@ -617,5 +617,46 @@
     "openSettings": "설정 열기",
     "offer": "Matinee가 닫혀 있어도 이 기기에서 알림으로 받아 보세요.",
     "turnOn": "켜기"
+  },
+  "boxOffice": {
+    "onItsWay": "오는 중",
+    "stage": {
+      "searching": "찾는 중",
+      "queued": "다운로드 대기 중",
+      "downloading": "다운로드 중",
+      "paused": "일시 정지됨",
+      "waiting": "다운로드됨",
+      "checking": "확인 중",
+      "repairing": "복구 중",
+      "unpacking": "압축 해제 중",
+      "importing": "라이브러리로 옮기는 중",
+      "waitingToMove": "관리자 대기 중",
+      "imported": "곧 준비됨",
+      "problem": "좋은 사본 대기 중"
+    },
+    "eta": "약 {{time}} 남음",
+    "notifyMe": "알림 받기",
+    "notifying": "알려 드릴게요",
+    "copies": {
+      "button": "다른 사본",
+      "editions": "다른 에디션",
+      "looking": "에디션 찾는 중…",
+      "none": "지금은 다른 에디션이 없습니다.",
+      "owned": "라이브러리에 있음",
+      "keepBoth": "옆에 추가",
+      "replace": "이 사본 바꾸기",
+      "better": "더 좋은 사본 요청",
+      "bad": "이 사본에 문제가 있음",
+      "reason": "무엇이 문제인가요?",
+      "sent": "요청했습니다. 오는 중이에요.",
+      "pending": "요청했습니다. 관리자가 확인합니다.",
+      "needsApproval": "관리자가 먼저 승인합니다.",
+      "reasons": {
+        "language": "언어가 다름",
+        "sync": "싱크가 맞지 않음",
+        "picture": "화질이 나쁨",
+        "other": "기타"
+      }
+    }
   }
 }

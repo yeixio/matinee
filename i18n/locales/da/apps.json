@@ -624,5 +624,46 @@
     "openSettings": "Åbn indstillinger",
     "offer": "Få disse som notifikationer på denne enhed, også når Matinee er lukket.",
     "turnOn": "Slå til"
+  },
+  "boxOffice": {
+    "onItsWay": "På vej",
+    "stage": {
+      "searching": "Leder efter den",
+      "queued": "Venter på download",
+      "downloading": "Downloader",
+      "paused": "Sat på pause",
+      "waiting": "Downloadet",
+      "checking": "Kontrolleres",
+      "repairing": "Repareres",
+      "unpacking": "Pakkes ud",
+      "importing": "Flyttes til biblioteket",
+      "waitingToMove": "Venter på en admin",
+      "imported": "Klar snart",
+      "problem": "Venter på en god kopi"
+    },
+    "eta": "Cirka {{time}} tilbage",
+    "notifyMe": "Giv mig besked",
+    "notifying": "Vi giver besked",
+    "copies": {
+      "button": "Andre kopier",
+      "editions": "Andre udgaver",
+      "looking": "Leder efter udgaver…",
+      "none": "Ingen andre udgaver fundet lige nu.",
+      "owned": "I biblioteket",
+      "keepBoth": "Tilføj ved siden af",
+      "replace": "Erstat denne kopi",
+      "better": "Bed om en bedre kopi",
+      "bad": "Denne kopi er dårlig",
+      "reason": "Hvad er der galt?",
+      "sent": "Bedt om. Den er på vej.",
+      "pending": "Bedt om. En admin ser på det.",
+      "needsApproval": "En admin godkender dem først.",
+      "reasons": {
+        "language": "Forkert sprog",
+        "sync": "Ude af sync",
+        "picture": "Dårligt billede",
+        "other": "Noget andet"
+      }
+    }
   }
 }

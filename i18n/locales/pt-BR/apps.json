@@ -631,5 +631,46 @@
     "openSettings": "Abrir ajustes",
     "offer": "Receba-as como notificações neste dispositivo, mesmo com o Matinee fechado.",
     "turnOn": "Ativar"
+  },
+  "boxOffice": {
+    "onItsWay": "A caminho",
+    "stage": {
+      "searching": "Procurando",
+      "queued": "Aguardando download",
+      "downloading": "Baixando",
+      "paused": "Pausado",
+      "waiting": "Baixado",
+      "checking": "Verificando",
+      "repairing": "Reparando",
+      "unpacking": "Descompactando",
+      "importing": "Indo para a biblioteca",
+      "waitingToMove": "Aguardando um admin",
+      "imported": "Pronto em breve",
+      "problem": "Aguardando uma boa cópia"
+    },
+    "eta": "Faltam cerca de {{time}}",
+    "notifyMe": "Avise-me",
+    "notifying": "Vamos avisar você",
+    "copies": {
+      "button": "Outras cópias",
+      "editions": "Outras edições",
+      "looking": "Procurando edições…",
+      "none": "Nenhuma outra edição encontrada agora.",
+      "owned": "Na biblioteca",
+      "keepBoth": "Adicionar junto",
+      "replace": "Substituir esta cópia",
+      "better": "Pedir uma cópia melhor",
+      "bad": "Esta cópia está ruim",
+      "reason": "Qual é o problema?",
+      "sent": "Pedido feito. Está a caminho.",
+      "pending": "Pedido feito. Um admin vai analisar.",
+      "needsApproval": "Um admin aprova antes.",
+      "reasons": {
+        "language": "Idioma errado",
+        "sync": "Fora de sincronia",
+        "picture": "Imagem ruim",
+        "other": "Outra coisa"
+      }
+    }
   }
 }

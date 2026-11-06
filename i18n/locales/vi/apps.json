@@ -617,5 +617,46 @@
     "openSettings": "Mở cài đặt",
     "offer": "Nhận những thông báo này trên thiết bị, kể cả khi Matinee đã đóng.",
     "turnOn": "Bật"
+  },
+  "boxOffice": {
+    "onItsWay": "Đang đến",
+    "stage": {
+      "searching": "Đang tìm",
+      "queued": "Đang chờ tải xuống",
+      "downloading": "Đang tải xuống",
+      "paused": "Đã tạm dừng",
+      "waiting": "Đã tải xuống",
+      "checking": "Đang kiểm tra",
+      "repairing": "Đang sửa",
+      "unpacking": "Đang giải nén",
+      "importing": "Đang chuyển vào thư viện",
+      "waitingToMove": "Đang chờ quản trị viên",
+      "imported": "Sắp xong",
+      "problem": "Đang chờ một bản tốt"
+    },
+    "eta": "Còn khoảng {{time}}",
+    "notifyMe": "Báo cho tôi",
+    "notifying": "Chúng tôi sẽ báo bạn",
+    "copies": {
+      "button": "Bản khác",
+      "editions": "Phiên bản khác",
+      "looking": "Đang tìm phiên bản…",
+      "none": "Hiện chưa có phiên bản nào khác.",
+      "owned": "Có trong thư viện",
+      "keepBoth": "Thêm bên cạnh",
+      "replace": "Thay bản này",
+      "better": "Xin bản tốt hơn",
+      "bad": "Bản này bị lỗi",
+      "reason": "Bản này có vấn đề gì?",
+      "sent": "Đã yêu cầu. Đang đến.",
+      "pending": "Đã yêu cầu. Quản trị viên sẽ xem.",
+      "needsApproval": "Quản trị viên duyệt những yêu cầu này trước.",
+      "reasons": {
+        "language": "Sai ngôn ngữ",
+        "sync": "Lệch tiếng",
+        "picture": "Hình ảnh kém",
+        "other": "Lý do khác"
+      }
+    }
   }
 }

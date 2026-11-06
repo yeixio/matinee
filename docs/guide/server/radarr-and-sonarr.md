@@ -87,6 +87,20 @@ The same notification again, such as Box Office saying a disk is still nearly fu
 
 **Coming soon** (the calendar icon) lists new episodes and movie releases due in the next two months that aren't in your library yet. The same titles appear in a row on [Home](/docs/watching/home/), and in the [phone and TV apps](/docs/apps/phone-and-tv/).
 
+## On its way and Other copies
+
+<!-- since: v0.2.3 -->
+When Radarr or Sonarr is [Box Office](https://github.com/yeixio/boxoffice), Home has an **On its way** row on the web and in the phone and TV apps: what Box Office is looking for and downloading, greyed out with a progress bar, where each one is up to and about how long it has left. Everyone sees it, so **Notify me** under a title someone else asked for (on a TV, select it) tells you when it's ready too.
+
+A movie's or episode's page has **Other copies** for people who can ask for titles:
+
+- **Other editions** of a movie, such as a Director's Cut, added alongside the copy there or in its place.
+- **Ask for a better copy**, for when a better release is out.
+- **This copy is bad**, saying what's wrong. On the web you write it; the phone and TV apps offer **Wrong language**, **Out of sync**, **Poor picture** or **Something else**, so nobody types with a remote. On a TV, Other copies is on the stars' line, under the title's buttons.
+
+These are requests like any other, so **Who can add movies and shows** applies, and an admin can make them always wait for approval. Without Box Office, neither shows.
+<!-- /since -->
+
 ## Changing quality
 
 On a movie or show's page, admins can change the quality profile Radarr or Sonarr uses for it, for example to upgrade a favorite to 4K.

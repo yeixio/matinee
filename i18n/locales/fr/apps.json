@@ -631,5 +631,46 @@
     "openSettings": "Ouvrir les réglages",
     "offer": "Recevez-les en notifications sur cet appareil, même quand Matinee est fermé.",
     "turnOn": "Activer"
+  },
+  "boxOffice": {
+    "onItsWay": "En route",
+    "stage": {
+      "searching": "Recherche en cours",
+      "queued": "En attente de téléchargement",
+      "downloading": "Téléchargement",
+      "paused": "En pause",
+      "waiting": "Téléchargé",
+      "checking": "Vérification",
+      "repairing": "Réparation",
+      "unpacking": "Décompression",
+      "importing": "Ajout à la bibliothèque",
+      "waitingToMove": "En attente d’un admin",
+      "imported": "Bientôt prêt",
+      "problem": "En attente d’une bonne copie"
+    },
+    "eta": "Encore environ {{time}}",
+    "notifyMe": "Me prévenir",
+    "notifying": "On vous préviendra",
+    "copies": {
+      "button": "Autres copies",
+      "editions": "Autres éditions",
+      "looking": "Recherche des éditions…",
+      "none": "Aucune autre édition trouvée pour l’instant.",
+      "owned": "Dans la bibliothèque",
+      "keepBoth": "Ajouter en plus",
+      "replace": "Remplacer cette copie",
+      "better": "Demander une meilleure copie",
+      "bad": "Cette copie est mauvaise",
+      "reason": "Qu’est-ce qui ne va pas ?",
+      "sent": "Demandé. C’est en route.",
+      "pending": "Demandé. Un admin va regarder.",
+      "needsApproval": "Un admin les approuve d’abord.",
+      "reasons": {
+        "language": "Mauvaise langue",
+        "sync": "Désynchronisé",
+        "picture": "Mauvaise image",
+        "other": "Autre chose"
+      }
+    }
   }
 }
