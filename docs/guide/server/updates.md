@@ -1,7 +1,7 @@
 ---
 title: Updates
 description: Matinee looks for new versions by itself, from releases or from main as a beta, and installs them automatically or when you say, wherever it can.
-since: v0.3.0
+since: v0.2.3
 sidebar:
   order: 12
 ---

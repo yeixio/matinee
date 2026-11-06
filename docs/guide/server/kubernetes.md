@@ -99,7 +99,7 @@ source:
 
 **Settings** then shows the commit you run as `main-<commit>`. For releases instead, install from `oci://ghcr.io/yeixio/charts/matinee` with a version.
 
-<!-- since: v0.3.0 -->
+<!-- since: v0.2.3 -->
 ## Updating from Settings
 
 Set `updates.argoCD.application` to the Application's name and Matinee can move it to a newer version itself, from releases or from main, automatically or when you press **Update**. See [Updates](/docs/server/updates/#kubernetes-with-argo-cd) for the setup, including what an app of apps needs to leave alone.
