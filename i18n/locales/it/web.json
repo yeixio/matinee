@@ -1132,11 +1132,19 @@
     "join": "Crea il mio account",
     "welcome": "Benvenuto su {{server}}",
     "welcomeHint": "Puoi guardare qui nel browser, oppure sul telefono e sulla TV.",
-    "apps": "Guarda sul telefono o sulla TV",
-    "appsHint": "Scarica l'app Matinee, scegli Aggiungi server e digita questo indirizzo. Poi accedi con il nuovo nome utente e la nuova password.",
     "copy": "Copia",
     "getApps": "Dove trovare le app",
-    "start": "Inizia a guardare"
+    "start": "Inizia a guardare",
+    "phone": "Guarda sul telefono",
+    "phoneHint": "Apri l'app Matinee e aggiungerà questo server per te. Poi accedi con il tuo nuovo nome utente e password.",
+    "openApp": "Apri nell'app Matinee",
+    "qrLabel": "Codice QR che apre l'app Matinee sul telefono",
+    "scanHint": "Inquadralo con la fotocamera del telefono. L'app Matinee si apre con questo server aggiunto, pronta per l'accesso.",
+    "tv": "Guarda sulla TV",
+    "tvHint": "Quando l'app sul telefono ha effettuato l'accesso, apri Matinee sulla TV e scegli Configura con il telefono. Inquadra con il telefono il codice mostrato dalla TV ed è pronta. Niente da digitare col telecomando.",
+    "typeInstead": "Oppure inserisci questo indirizzo nell'app, in Aggiungi server:",
+    "openTitle": "Apri {{server}} nell'app",
+    "openHint": "L'app Matinee si apre con questo server. Se non succede nulla, installa prima l'app e poi torna su questa pagina."
   },
   "friends": {
     "title": "Amici",
@@ -1165,7 +1173,10 @@
     "usedBy": "{{name}} si è unito il {{date}}",
     "expired": "{{name}} è scaduto il {{date}}",
     "badge": "Amico",
-    "seeEverything": "Fagli vedere tutto"
+    "seeEverything": "Fagli vedere tutto",
+    "qr": "Codice QR",
+    "qrLabel": "Codice QR del link di invito",
+    "scan": "Siete insieme? Può anche inquadrarlo con la fotocamera del telefono."
   },
   "health": {
     "title": "Stato del server",

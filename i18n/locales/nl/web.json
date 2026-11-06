@@ -1128,11 +1128,19 @@
     "join": "Mijn account maken",
     "welcome": "Welkom bij {{server}}",
     "welcomeHint": "Je kunt hier in je browser kijken, of op je telefoon en tv.",
-    "apps": "Kijken op je telefoon of tv",
-    "appsHint": "Installeer de Matinee-app, kies Server toevoegen en typ dit adres. Log daarna in met je nieuwe gebruikersnaam en wachtwoord.",
     "copy": "Kopiëren",
     "getApps": "Waar je de apps vindt",
-    "start": "Beginnen met kijken"
+    "start": "Beginnen met kijken",
+    "phone": "Kijk op je telefoon",
+    "phoneHint": "Open de Matinee-app en die voegt deze server voor je toe. Log daarna in met je nieuwe gebruikersnaam en wachtwoord.",
+    "openApp": "Openen in de Matinee-app",
+    "qrLabel": "QR-code die de Matinee-app op je telefoon opent",
+    "scanHint": "Scan dit met de camera van je telefoon. De Matinee-app opent met deze server toegevoegd, klaar om in te loggen.",
+    "tv": "Kijk op je tv",
+    "tvHint": "Zodra de app op je telefoon is ingelogd, open je Matinee op de tv en kies je Instellen met je telefoon. Scan de code op de tv met je telefoon en de tv is klaar. Niets typen met de afstandsbediening.",
+    "typeInstead": "Of typ dit adres in de app bij Server toevoegen:",
+    "openTitle": "{{server}} openen in de app",
+    "openHint": "De Matinee-app opent met deze server. Gebeurt er niets, installeer dan eerst de app en kom terug naar deze pagina."
   },
   "friends": {
     "title": "Vrienden",
@@ -1159,7 +1167,10 @@
     "usedBy": "{{name}} deed mee op {{date}}",
     "expired": "{{name}} verliep op {{date}}",
     "badge": "Vriend",
-    "seeEverything": "Alles laten zien"
+    "seeEverything": "Alles laten zien",
+    "qr": "QR-code",
+    "qrLabel": "QR-code van de uitnodigingslink",
+    "scan": "Samen in één ruimte? Ze kunnen dit ook scannen met de camera van hun telefoon."
   },
   "health": {
     "title": "Servergezondheid",

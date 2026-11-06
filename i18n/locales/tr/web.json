@@ -1128,11 +1128,19 @@
     "join": "Hesabımı oluştur",
     "welcome": "{{server}} sunucusuna hoş geldin",
     "welcomeHint": "Burada tarayıcında ya da telefonunda ve TV'nde izleyebilirsin.",
-    "apps": "Telefonunda veya TV'nde izle",
-    "appsHint": "Matinee uygulamasını indir, Sunucu ekle'yi seç ve bu adresi yaz. Ardından yeni kullanıcı adın ve şifrenle giriş yap.",
     "copy": "Kopyala",
     "getApps": "Uygulamaları nereden alırsın",
-    "start": "İzlemeye başla"
+    "start": "İzlemeye başla",
+    "phone": "Telefonunda izle",
+    "phoneHint": "Matinee uygulamasını aç, bu sunucuyu senin için eklesin. Sonra yeni kullanıcı adın ve parolanla giriş yap.",
+    "openApp": "Matinee uygulamasında aç",
+    "qrLabel": "Telefonunda Matinee uygulamasını açan QR kodu",
+    "scanHint": "Telefonunun kamerasıyla tara. Matinee uygulaması bu sunucu eklenmiş olarak, girişe hazır açılır.",
+    "tv": "Televizyonunda izle",
+    "tvHint": "Telefondaki uygulama giriş yaptıktan sonra televizyonda Matinee'yi aç ve Telefonla kur'u seç. Televizyonun gösterdiği kodu telefonla tara, televizyon hazır. Kumandayla yazmak yok.",
+    "typeInstead": "Ya da bu adresi uygulamada Sunucu ekle bölümüne yaz:",
+    "openTitle": "{{server}} sunucusunu uygulamada aç",
+    "openHint": "Matinee uygulaması bu sunucuyla açılır. Hiçbir şey olmazsa önce uygulamayı yükle, sonra bu sayfaya geri dön."
   },
   "friends": {
     "title": "Arkadaşlar",
@@ -1159,7 +1167,10 @@
     "usedBy": "{{name}} {{date}} tarihinde katıldı",
     "expired": "{{name}}: süresi {{date}} tarihinde doldu",
     "badge": "Arkadaş",
-    "seeEverything": "Her şeyi görebilsin"
+    "seeEverything": "Her şeyi görebilsin",
+    "qr": "QR kodu",
+    "qrLabel": "Davet bağlantısının QR kodu",
+    "scan": "Yan yana mısınız? Bunu telefonunun kamerasıyla da tarayabilir."
   },
   "health": {
     "title": "Sunucu durumu",

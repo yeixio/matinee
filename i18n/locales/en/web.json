@@ -1128,11 +1128,19 @@
     "join": "Make my account",
     "welcome": "Welcome to {{server}}",
     "welcomeHint": "You can watch right here in your browser, or on your phone and TV.",
-    "apps": "Watch on your phone or TV",
-    "appsHint": "Get the Matinee app, choose Add server, and type this address. Then sign in with your new username and password.",
     "copy": "Copy",
     "getApps": "Where to get the apps",
-    "start": "Start watching"
+    "start": "Start watching",
+    "phone": "Watch on your phone",
+    "phoneHint": "Open the Matinee app and it adds this server for you. Then sign in with your new username and password.",
+    "openApp": "Open in the Matinee app",
+    "qrLabel": "QR code that opens the Matinee app on your phone",
+    "scanHint": "Scan this with your phone's camera. It opens the Matinee app with this server added, ready for you to sign in.",
+    "tv": "Watch on your TV",
+    "tvHint": "Once the app on your phone is signed in, open Matinee on your TV and pick Set up with your phone. Scan the code the TV shows with your phone, and the TV is ready. No typing on the remote.",
+    "typeInstead": "Or type this address into the app under Add server:",
+    "openTitle": "Open {{server}} in the app",
+    "openHint": "The Matinee app opens with this server filled in. If nothing happens, get the app first, then come back to this page."
   },
   "friends": {
     "title": "Friends",
@@ -1159,7 +1167,10 @@
     "usedBy": "{{name}} joined on {{date}}",
     "expired": "{{name}} expired on {{date}}",
     "badge": "Friend",
-    "seeEverything": "Let them see everything"
+    "seeEverything": "Let them see everything",
+    "qr": "QR code",
+    "qrLabel": "QR code of the invite link",
+    "scan": "Showing someone in person? They can scan this with their phone's camera instead."
   },
   "health": {
     "title": "Server health",

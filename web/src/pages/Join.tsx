@@ -1,9 +1,10 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { Check, Copy, Smartphone, Users } from 'lucide-react'
-import { useState, type FormEvent } from 'react'
+import { Check, Copy, Smartphone, Tv, Users } from 'lucide-react'
+import { useEffect, useState, type FormEvent } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { api, imageUrl } from '../api'
+import { QrCode } from '../components/QrCode'
 import { Button, EmptyState, Field, inputClass, Spinner } from '../components/ui'
 import { formatCode, together } from '../player/together'
 import { AuthCard } from './Auth'
@@ -96,11 +97,15 @@ export function InvitePage({ code }: { code: string }) {
 }
 
 // After joining (or opening an invite while signed in): you're in, and how
-// to watch on a phone or TV.
+// to watch on a phone or TV. A phone opens the app straight from here; a
+// computer shows a QR code for the phone to scan. Once the phone app is in,
+// it sets up the TV with the TV's own QR code (Set up a TV in the apps).
 export function JoinedPage() {
   const { t } = useTranslation()
   const { data: server } = useQuery({ queryKey: ['server'], queryFn: api.server })
+  const { data: me } = useQuery({ queryKey: ['me'], queryFn: api.me, staleTime: Infinity })
   const address = server?.remoteURL || location.origin
+  const phone = matchMedia('(pointer: coarse)').matches
   const [copied, setCopied] = useState(false)
   const copy = async () => {
     try {
@@ -117,11 +122,38 @@ export function JoinedPage() {
         <h1 className="font-display text-3xl font-semibold">{t('invite.welcome', { server: server?.name || 'Matinee' })}</h1>
         <p className="mt-2 text-muted">{t('invite.welcomeHint')}</p>
       </div>
-      <div className="space-y-3 rounded-xl border border-line/60 bg-surface/50 p-5">
+      <section className="space-y-3 rounded-xl border border-line/60 bg-surface/50 p-5">
         <h2 className="flex items-center gap-2 font-semibold">
-          <Smartphone className="size-5 text-accent" /> {t('invite.apps')}
+          <Smartphone className="size-5 text-accent" /> {t('invite.phone')}
         </h2>
-        <p className="text-sm text-muted">{t('invite.appsHint')}</p>
+        {phone ? (
+          <>
+            <p className="text-sm text-muted">{t('invite.phoneHint')}</p>
+            <a
+              href={appLink(address, me?.username)}
+              className="inline-flex h-10 items-center rounded-lg bg-accent px-4 text-sm font-semibold text-on-accent hover:bg-accent-strong"
+            >
+              {t('invite.openApp')}
+            </a>
+          </>
+        ) : (
+          <div className="flex items-center gap-4">
+            <QrCode value={appPage(address, me?.username)} size={144} label={t('invite.qrLabel')} />
+            <p className="text-sm text-muted">{t('invite.scanHint')}</p>
+          </div>
+        )}
+        <a href={APPS_PAGE} target="_blank" rel="noreferrer" className="inline-block text-sm text-accent hover:underline">
+          {t('invite.getApps')}
+        </a>
+      </section>
+      <section className="space-y-2 rounded-xl border border-line/60 bg-surface/50 p-5">
+        <h2 className="flex items-center gap-2 font-semibold">
+          <Tv className="size-5 text-accent" /> {t('invite.tv')}
+        </h2>
+        <p className="text-sm text-muted">{t('invite.tvHint')}</p>
+      </section>
+      <section className="space-y-2">
+        <p className="text-sm text-muted">{t('invite.typeInstead')}</p>
         <div className="flex items-center gap-2">
           <code dir="ltr" className="min-w-0 flex-1 truncate rounded-lg bg-text/10 px-3 py-2 text-sm">
             {address}
@@ -130,14 +162,58 @@ export function JoinedPage() {
             {copied ? t('common:together.copied') : t('invite.copy')}
           </Button>
         </div>
-        <a href="https://matinee.yeix.io/docs/apps/phone-and-tv/" target="_blank" rel="noreferrer" className="inline-block text-sm text-accent hover:underline">
-          {t('invite.getApps')}
-        </a>
-      </div>
+      </section>
       <Link to="/" className="inline-flex h-10 items-center rounded-lg bg-accent px-4 text-sm font-semibold text-on-accent hover:bg-accent-strong">
         {t('invite.start')}
       </Link>
     </div>
+  )
+}
+
+const APPS_PAGE = 'https://matinee.yeix.io/docs/apps/phone-and-tv/'
+
+// The phone app's link that adds this server (and fills in the username):
+// matinee://connect in the apps.
+export function appLink(address: string, username?: string): string {
+  const q = new URLSearchParams({ server: address })
+  if (username) q.set('user', username)
+  return `matinee://connect?${q}`
+}
+
+// This server's /app page, which any phone camera opens; it hands over to
+// the app with appLink.
+export function appPage(address: string, username?: string): string {
+  const q = new URLSearchParams(username ? { user: username } : {})
+  return `${address.replace(/\/+$/, '')}/app${username ? `?${q}` : ''}`
+}
+
+// /app: what a scanned QR code opens on a phone. It opens the Matinee app
+// with this server filled in, or says where to get the app. Works signed out.
+export function AppPage() {
+  const { t } = useTranslation()
+  const { data: server } = useQuery({ queryKey: ['server'], queryFn: api.server })
+  const address = server?.remoteURL || location.origin
+  const user = new URLSearchParams(location.search).get('user') ?? undefined
+  const link = appLink(address, user)
+  // Straight into the app when it's there; the button stays for when the
+  // browser asks first or the app isn't installed yet.
+  useEffect(() => {
+    if (server) location.href = link
+  }, [server, link])
+  return (
+    <AuthCard title={t('invite.openTitle', { server: server?.name || 'Matinee' })} subtitle={t('invite.openHint')}>
+      <div className="space-y-4">
+        <a
+          href={link}
+          className="flex h-11 w-full items-center justify-center rounded-lg bg-accent px-4 text-sm font-semibold text-on-accent hover:bg-accent-strong"
+        >
+          {t('invite.openApp')}
+        </a>
+        <a href={APPS_PAGE} className="block text-center text-sm text-accent hover:underline">
+          {t('invite.getApps')}
+        </a>
+      </div>
+    </AuthCard>
   )
 }
 

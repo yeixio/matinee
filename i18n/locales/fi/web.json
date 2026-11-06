@@ -1128,11 +1128,19 @@
     "join": "Luo tilini",
     "welcome": "Tervetuloa: {{server}}",
     "welcomeHint": "Voit katsoa suoraan tässä selaimessa tai puhelimella ja televisiolla.",
-    "apps": "Katso puhelimella tai televisiolla",
-    "appsHint": "Hanki Matinee-sovellus, valitse Lisää palvelin ja kirjoita tämä osoite. Kirjaudu sitten uudella käyttäjänimelläsi ja salasanallasi.",
     "copy": "Kopioi",
     "getApps": "Mistä sovellukset saa",
-    "start": "Aloita katselu"
+    "start": "Aloita katselu",
+    "phone": "Katso puhelimella",
+    "phoneHint": "Avaa Matinee-sovellus, niin se lisää tämän palvelimen puolestasi. Kirjaudu sitten uudella käyttäjänimelläsi ja salasanallasi.",
+    "openApp": "Avaa Matinee-sovelluksessa",
+    "qrLabel": "QR-koodi, joka avaa Matinee-sovelluksen puhelimessa",
+    "scanHint": "Skannaa se puhelimen kameralla. Matinee-sovellus avautuu tämä palvelin lisättynä, valmiina kirjautumiseen.",
+    "tv": "Katso televisiosta",
+    "tvHint": "Kun puhelimen sovellus on kirjautunut, avaa Matinee televisiossa ja valitse Ota käyttöön puhelimella. Skannaa television näyttämä koodi puhelimella, niin televisio on valmis. Ei kirjoittamista kaukosäätimellä.",
+    "typeInstead": "Tai kirjoita tämä osoite sovellukseen kohtaan Lisää palvelin:",
+    "openTitle": "Avaa {{server}} sovelluksessa",
+    "openHint": "Matinee-sovellus avautuu tällä palvelimella. Jos mitään ei tapahdu, hanki ensin sovellus ja palaa sitten tälle sivulle."
   },
   "friends": {
     "title": "Ystävät",
@@ -1159,7 +1167,10 @@
     "usedBy": "{{name}} liittyi {{date}}",
     "expired": "{{name}} vanheni {{date}}",
     "badge": "Ystävä",
-    "seeEverything": "Näytä kaikki"
+    "seeEverything": "Näytä kaikki",
+    "qr": "QR-koodi",
+    "qrLabel": "Kutsulinkin QR-koodi",
+    "scan": "Oletteko samassa paikassa? Hän voi myös skannata tämän puhelimen kameralla."
   },
   "health": {
     "title": "Palvelimen tila",

@@ -1136,11 +1136,19 @@
     "join": "Utwórz moje konto",
     "welcome": "Witaj w {{server}}",
     "welcomeHint": "Możesz oglądać tutaj w przeglądarce albo na telefonie i telewizorze.",
-    "apps": "Oglądaj na telefonie lub telewizorze",
-    "appsHint": "Pobierz aplikację Matinee, wybierz Dodaj serwer i wpisz ten adres. Potem zaloguj się nową nazwą użytkownika i hasłem.",
     "copy": "Kopiuj",
     "getApps": "Gdzie znaleźć aplikacje",
-    "start": "Zacznij oglądać"
+    "start": "Zacznij oglądać",
+    "phone": "Oglądaj na telefonie",
+    "phoneHint": "Otwórz aplikację Matinee, a doda ten serwer za Ciebie. Potem zaloguj się nową nazwą użytkownika i hasłem.",
+    "openApp": "Otwórz w aplikacji Matinee",
+    "qrLabel": "Kod QR otwierający aplikację Matinee na telefonie",
+    "scanHint": "Zeskanuj go aparatem telefonu. Aplikacja Matinee otworzy się z dodanym serwerem, gotowa do logowania.",
+    "tv": "Oglądaj na telewizorze",
+    "tvHint": "Gdy aplikacja na telefonie będzie zalogowana, otwórz Matinee na telewizorze i wybierz Skonfiguruj telefonem. Zeskanuj telefonem kod z telewizora i gotowe. Bez wpisywania pilotem.",
+    "typeInstead": "Albo wpisz ten adres w aplikacji w Dodaj serwer:",
+    "openTitle": "Otwórz {{server}} w aplikacji",
+    "openHint": "Aplikacja Matinee otworzy się z tym serwerem. Jeśli nic się nie dzieje, najpierw zainstaluj aplikację i wróć na tę stronę."
   },
   "friends": {
     "title": "Znajomi",
@@ -1171,7 +1179,10 @@
     "usedBy": "{{name}} dołącza {{date}}",
     "expired": "{{name}}: wygasło {{date}}",
     "badge": "Znajomy",
-    "seeEverything": "Pokaż wszystko"
+    "seeEverything": "Pokaż wszystko",
+    "qr": "Kod QR",
+    "qrLabel": "Kod QR linku z zaproszeniem",
+    "scan": "Jesteście razem? Ta osoba może też zeskanować to aparatem telefonu."
   },
   "health": {
     "title": "Stan serwera",

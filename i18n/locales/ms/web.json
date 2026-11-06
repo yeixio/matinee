@@ -1124,11 +1124,19 @@
     "join": "Cipta akaun saya",
     "welcome": "Selamat datang ke {{server}}",
     "welcomeHint": "Anda boleh menonton terus dalam pelayar ini, atau pada telefon dan TV.",
-    "apps": "Tonton pada telefon atau TV",
-    "appsHint": "Pasang aplikasi Matinee, pilih Tambah pelayan dan masukkan alamat ini. Kemudian log masuk dengan nama pengguna dan kata laluan baharu anda.",
     "copy": "Salin",
     "getApps": "Tempat untuk mendapatkan aplikasi",
-    "start": "Mula menonton"
+    "start": "Mula menonton",
+    "phone": "Tonton pada telefon anda",
+    "phoneHint": "Buka aplikasi Matinee dan ia akan menambah pelayan ini untuk anda. Kemudian log masuk dengan nama pengguna dan kata laluan baharu anda.",
+    "openApp": "Buka dalam aplikasi Matinee",
+    "qrLabel": "Kod QR yang membuka aplikasi Matinee pada telefon anda",
+    "scanHint": "Imbas dengan kamera telefon. Aplikasi Matinee dibuka dengan pelayan ini ditambah, sedia untuk log masuk.",
+    "tv": "Tonton pada TV anda",
+    "tvHint": "Selepas aplikasi pada telefon anda log masuk, buka Matinee pada TV dan pilih Sediakan dengan telefon. Imbas kod yang ditunjukkan TV dengan telefon anda, dan TV sedia. Tiada menaip dengan alat kawalan jauh.",
+    "typeInstead": "Atau taip alamat ini dalam aplikasi di bawah Tambah pelayan:",
+    "openTitle": "Buka {{server}} dalam aplikasi",
+    "openHint": "Aplikasi Matinee dibuka dengan pelayan ini. Jika tiada apa-apa berlaku, dapatkan aplikasi dahulu, kemudian kembali ke halaman ini."
   },
   "friends": {
     "title": "Rakan",
@@ -1153,7 +1161,10 @@
     "usedBy": "{{name}} menyertai pada {{date}}",
     "expired": "{{name}} tamat tempoh pada {{date}}",
     "badge": "Rakan",
-    "seeEverything": "Benarkan lihat semua"
+    "seeEverything": "Benarkan lihat semua",
+    "qr": "Kod QR",
+    "qrLabel": "Kod QR pautan jemputan",
+    "scan": "Sedang bersama? Mereka juga boleh mengimbas ini dengan kamera telefon."
   },
   "health": {
     "title": "Kesihatan pelayan",

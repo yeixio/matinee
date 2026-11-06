@@ -1124,11 +1124,19 @@
     "join": "Tạo tài khoản của tôi",
     "welcome": "Chào mừng đến với {{server}}",
     "welcomeHint": "Bạn có thể xem ngay trong trình duyệt này, hoặc trên điện thoại và TV.",
-    "apps": "Xem trên điện thoại hoặc TV",
-    "appsHint": "Cài ứng dụng Matinee, chọn Thêm máy chủ và nhập địa chỉ này. Sau đó đăng nhập bằng tên người dùng và mật khẩu mới.",
     "copy": "Sao chép",
     "getApps": "Nơi tải ứng dụng",
-    "start": "Bắt đầu xem"
+    "start": "Bắt đầu xem",
+    "phone": "Xem trên điện thoại",
+    "phoneHint": "Mở ứng dụng Matinee, ứng dụng sẽ tự thêm máy chủ này cho bạn. Sau đó đăng nhập bằng tên người dùng và mật khẩu mới.",
+    "openApp": "Mở trong ứng dụng Matinee",
+    "qrLabel": "Mã QR mở ứng dụng Matinee trên điện thoại của bạn",
+    "scanHint": "Quét bằng camera điện thoại. Ứng dụng Matinee mở ra với máy chủ này đã được thêm, sẵn sàng để đăng nhập.",
+    "tv": "Xem trên TV",
+    "tvHint": "Khi ứng dụng trên điện thoại đã đăng nhập, mở Matinee trên TV và chọn Thiết lập bằng điện thoại. Quét mã TV hiển thị bằng điện thoại là xong. Không cần gõ bằng điều khiển.",
+    "typeInstead": "Hoặc nhập địa chỉ này trong ứng dụng ở mục Thêm máy chủ:",
+    "openTitle": "Mở {{server}} trong ứng dụng",
+    "openHint": "Ứng dụng Matinee mở ra với máy chủ này. Nếu không có gì xảy ra, hãy cài ứng dụng trước rồi quay lại trang này."
   },
   "friends": {
     "title": "Bạn bè",
@@ -1153,7 +1161,10 @@
     "usedBy": "{{name}} đã tham gia ngày {{date}}",
     "expired": "{{name}} đã hết hạn ngày {{date}}",
     "badge": "Bạn bè",
-    "seeEverything": "Cho xem tất cả"
+    "seeEverything": "Cho xem tất cả",
+    "qr": "Mã QR",
+    "qrLabel": "Mã QR của liên kết mời",
+    "scan": "Đang ở cùng nhau? Họ cũng có thể quét mã này bằng camera điện thoại."
   },
   "health": {
     "title": "Tình trạng máy chủ",

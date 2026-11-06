@@ -1128,11 +1128,19 @@
     "join": "Opret min konto",
     "welcome": "Velkommen til {{server}}",
     "welcomeHint": "Du kan se med lige her i browseren eller på din telefon og dit tv.",
-    "apps": "Se på din telefon eller dit tv",
-    "appsHint": "Hent Matinee-appen, vælg Tilføj server, og skriv denne adresse. Log derefter ind med dit nye brugernavn og din nye adgangskode.",
     "copy": "Kopiér",
     "getApps": "Hvor du finder apps",
-    "start": "Begynd at se"
+    "start": "Begynd at se",
+    "phone": "Se på din telefon",
+    "phoneHint": "Åbn Matinee-appen, så tilføjer den denne server for dig. Log derefter ind med dit nye brugernavn og din adgangskode.",
+    "openApp": "Åbn i Matinee-appen",
+    "qrLabel": "QR-kode, der åbner Matinee-appen på din telefon",
+    "scanHint": "Scan den med telefonens kamera. Matinee-appen åbner med denne server tilføjet, klar til at logge ind.",
+    "tv": "Se på dit tv",
+    "tvHint": "Når appen på telefonen er logget ind, åbner du Matinee på tv'et og vælger Opsæt med telefonen. Scan koden på tv'et med telefonen, så er tv'et klar. Ingen tastning med fjernbetjeningen.",
+    "typeInstead": "Eller skriv denne adresse i appen under Tilføj server:",
+    "openTitle": "Åbn {{server}} i appen",
+    "openHint": "Matinee-appen åbner med denne server. Hvis der ikke sker noget, så hent appen først og kom tilbage til denne side."
   },
   "friends": {
     "title": "Venner",
@@ -1159,7 +1167,10 @@
     "usedBy": "{{name}} kom med {{date}}",
     "expired": "{{name}} udløb {{date}}",
     "badge": "Ven",
-    "seeEverything": "Lad dem se alt"
+    "seeEverything": "Lad dem se alt",
+    "qr": "QR-kode",
+    "qrLabel": "QR-kode til invitationslinket",
+    "scan": "Er I sammen? De kan også scanne dette med telefonens kamera."
   },
   "health": {
     "title": "Serverens helbred",

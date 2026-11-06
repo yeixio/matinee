@@ -1124,11 +1124,19 @@
     "join": "创建我的账户",
     "welcome": "欢迎来到 {{server}}",
     "welcomeHint": "你可以直接在这个浏览器里看，也可以在手机和电视上看。",
-    "apps": "在手机或电视上看",
-    "appsHint": "安装 Matinee 应用，选择“添加服务器”并输入这个地址。然后用新的用户名和密码登录。",
     "copy": "复制",
     "getApps": "在哪里获取应用",
-    "start": "开始观看"
+    "start": "开始观看",
+    "phone": "在手机上看",
+    "phoneHint": "打开 Matinee 应用，它会为你添加这台服务器。然后用新的用户名和密码登录。",
+    "openApp": "在 Matinee 应用中打开",
+    "qrLabel": "在手机上打开 Matinee 应用的二维码",
+    "scanHint": "用手机相机扫描。Matinee 应用会打开并已添加这台服务器，直接登录即可。",
+    "tv": "在电视上看",
+    "tvHint": "手机上的应用登录后，在电视上打开 Matinee 并选择“用手机设置”。用手机扫描电视上显示的码，电视就准备好了。无需用遥控器打字。",
+    "typeInstead": "或在应用的“添加服务器”中输入这个地址：",
+    "openTitle": "在应用中打开 {{server}}",
+    "openHint": "Matinee 应用会带着这台服务器打开。如果没有反应，请先安装应用，再回到这个页面。"
   },
   "friends": {
     "title": "朋友",
@@ -1153,7 +1161,10 @@
     "usedBy": "{{name}} 于 {{date}} 加入",
     "expired": "{{name}} 于 {{date}} 过期",
     "badge": "朋友",
-    "seeEverything": "允许查看全部"
+    "seeEverything": "允许查看全部",
+    "qr": "二维码",
+    "qrLabel": "邀请链接的二维码",
+    "scan": "当面分享？对方也可以用手机相机扫描这个码。"
   },
   "health": {
     "title": "服务器状态",
