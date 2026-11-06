@@ -286,7 +286,7 @@ func (w *Watcher) collect(ctx context.Context, lib store.Library, kind Kind, cha
 }
 
 // wanted reports whether a changed path could matter to the library: a
-// folder, a file the library plays, or something that's gone.
+// folder, a file the library plays, an .nfo file, or something that's gone.
 func wanted(kind Kind, video bool, p string) bool {
 	name := filepath.Base(p)
 	if strings.HasPrefix(name, ".") {
@@ -298,6 +298,9 @@ func wanted(kind Kind, video bool, p string) bool {
 	}
 	if info.IsDir() {
 		return !(video && IsExtraDir(name, false))
+	}
+	if video && strings.EqualFold(filepath.Ext(name), ".nfo") {
+		return true // details for the files next to it
 	}
 	return kind.Wants(p) && !(video && IsExtraFile(name))
 }

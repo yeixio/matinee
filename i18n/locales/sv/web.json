@@ -687,7 +687,11 @@
       "go": "Gå",
       "drives": "Enheter",
       "podcastsNoFolders": "Poddar behöver ingen mapp. Lägg till program från biblioteket när det har skapats.",
-      "podcastsChecked": "Kollas efter nya avsnitt varje timme"
+      "podcastsChecked": "Kollas efter nya avsnitt varje timme",
+      "details": "Detaljer",
+      "detailsLocal": "Föredra .nfo-filer",
+      "detailsOnline": "Föredra online",
+      "detailsLocalOnly": "Bara .nfo-filer"
     },
     "people": {
       "title": "Personer",
@@ -1071,6 +1075,17 @@
     "locked": "Vald för hand, så genomsökningar lämnar den i fred.",
     "noKey": "Lägg till en TMDB-nyckel i Inställningar → Affischer och detaljer för att slå upp titlar.",
     "saving": "Sparar…"
+  },
+  "editDetails": {
+    "button": "Redigera detaljer",
+    "title": "Redigera detaljer för {{title}}",
+    "name": "Titel",
+    "overview": "Beskrivning",
+    "genres": "Genrer, åtskilda med kommatecken",
+    "rating": "Betyg av 10",
+    "locked": "Det du ändrar här blir kvar som du skrev det: genomsökningar och sökningar online rör det inte.",
+    "undo": "Ångra mina ändringar",
+    "fromFile": "En del av detta kommer från en .nfo-fil bredvid."
   },
   "import": {
     "title": "Importera från en annan mediaserver",

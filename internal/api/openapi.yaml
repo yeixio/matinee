@@ -957,6 +957,27 @@ paths:
       parameters: [{ $ref: "#/components/parameters/ID" }]
       responses:
         "202": { description: Scanning. Watch `scanning` on GET /libraries. }
+  /libraries/{id}/metadata-mode:
+    put:
+      summary: Choose where a movie or TV library's details come from first (admins only)
+      description: >
+        `""` prefers .nfo files next to the media and fills in the rest
+        online (the default), `online` prefers online details, and
+        `localOnly` looks nothing up online. Ids in .nfo files pin the
+        online match in the first two.
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [mode]
+              properties:
+                mode: { type: string, enum: ["", online, localOnly] }
+      responses:
+        "204": { description: Saved. }
+        "400": { $ref: "#/components/responses/Error" }
+        "404": { $ref: "#/components/responses/Error" }
   /libraries/{id}/artwork:
     post:
       summary: Find missing artwork in a music or audiobook library (admins only)
@@ -2576,6 +2597,41 @@ paths:
         "200": { description: The item., content: { application/json: { schema: { $ref: "#/components/schemas/Item" } } } }
         "404": { $ref: "#/components/responses/Error" }
         "502": { $ref: "#/components/responses/Error" }
+  /items/{id}/details:
+    put:
+      summary: Edit a movie's, show's, season's or episode's details (admins)
+      description: >
+        Sets the fields sent and locks them, so lookups and scans leave them
+        as they are. Fields left out stay. A show's or season's title and
+        year come from its folder and can't be edited. The item's
+        `lockedFields` lists what was edited; `localFields` what an .nfo
+        file next to it set.
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title: { type: string }
+                year: { type: integer, description: 0 for none }
+                overview: { type: string }
+                genres: { type: array, items: { type: string } }
+                rating: { type: number, description: Out of 10; 0 for none }
+      responses:
+        "200": { description: The item., content: { application/json: { schema: { $ref: "#/components/schemas/Item" } } } }
+        "400": { $ref: "#/components/responses/Error" }
+        "404": { $ref: "#/components/responses/Error" }
+    delete:
+      summary: Undo hand edits to an item's details (admins)
+      description: >
+        Unlocks every edited field. The details come from the .nfo file
+        next to it and online again, and a movie's or episode's title and
+        year from its file name on the next scan.
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      responses:
+        "200": { description: The item., content: { application/json: { schema: { $ref: "#/components/schemas/Item" } } } }
+        "404": { $ref: "#/components/responses/Error" }
   /items/{id}/cover:
     put:
       summary: Pick an album's or book's cover (admins)

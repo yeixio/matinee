@@ -169,6 +169,16 @@ func (s *Scanner) ScanPaths(ctx context.Context, lib store.Library, paths []stri
 	return s.run(ctx, lib, paths)
 }
 
+// touchesNFO reports whether a watcher's changed paths include an .nfo file.
+func touchesNFO(paths []string) bool {
+	for _, p := range paths {
+		if strings.EqualFold(filepath.Ext(p), ".nfo") {
+			return true
+		}
+	}
+	return false
+}
+
 // target is where a scan walks from, inside one of the library's folders.
 type target struct{ root, start string }
 
@@ -348,6 +358,11 @@ func (s *Scanner) run(ctx context.Context, lib store.Library, paths []string) (S
 	}
 	if lib.Kind != "music" && (!partial || st.Added+st.Updated+st.Removed > 0) {
 		if _, err := s.Store.GroupVersions(ctx, lib.ID, Edition); err != nil {
+			return st, err
+		}
+	}
+	if video && (!partial || st.Added+st.Updated+st.Removed > 0 || touchesNFO(paths)) {
+		if err := ReadNFOs(ctx, s.Store, lib); err != nil {
 			return st, err
 		}
 	}

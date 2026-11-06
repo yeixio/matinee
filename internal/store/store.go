@@ -684,6 +684,12 @@ var migrations = []string{
 	// those are filed again on the next scan.
 	`UPDATE items SET mtime = 0 WHERE kind = 'episode' AND path IS NOT NULL
 		AND parent_id IN (SELECT id FROM items WHERE kind = 'season' AND index_number = 0)`,
+	// 123–126: details from .nfo files and details admins edit by hand
+	// (see localmeta.go), and where each library's details come from first.
+	"ALTER TABLE items ADD COLUMN locked_fields TEXT NOT NULL DEFAULT ''",
+	"ALTER TABLE items ADD COLUMN nfo_fields TEXT NOT NULL DEFAULT ''",
+	"ALTER TABLE items ADD COLUMN nfo_hash TEXT NOT NULL DEFAULT ''",
+	"ALTER TABLE libraries ADD COLUMN metadata_mode TEXT NOT NULL DEFAULT ''",
 }
 
 func now() int64 { return time.Now().Unix() }
@@ -1002,6 +1008,9 @@ type Library struct {
 	Name  string   `json:"name"`
 	Kind  string   `json:"kind"` // movies, tv or music
 	Paths []string `json:"paths"`
+	// MetadataMode says where movies' and shows' details come from first:
+	// PreferLocal, PreferOnline or LocalOnly.
+	MetadataMode string `json:"metadataMode"`
 }
 
 func (s *Store) CreateLibrary(ctx context.Context, name, kind string, paths []string) (Library, error) {
@@ -1053,7 +1062,7 @@ func (s *Store) LibraryCounts(ctx context.Context) (map[int64]LibraryCount, erro
 }
 
 func (s *Store) Libraries(ctx context.Context) ([]Library, error) {
-	rows, err := s.db.QueryContext(ctx, "SELECT id, name, kind FROM libraries ORDER BY name")
+	rows, err := s.db.QueryContext(ctx, "SELECT id, name, kind, metadata_mode FROM libraries ORDER BY name")
 	if err != nil {
 		return nil, err
 	}
@@ -1061,7 +1070,7 @@ func (s *Store) Libraries(ctx context.Context) ([]Library, error) {
 	byID := map[int64]int{}
 	for rows.Next() {
 		l := Library{Paths: []string{}}
-		if err := rows.Scan(&l.ID, &l.Name, &l.Kind); err != nil {
+		if err := rows.Scan(&l.ID, &l.Name, &l.Kind, &l.MetadataMode); err != nil {
 			rows.Close()
 			return nil, err
 		}

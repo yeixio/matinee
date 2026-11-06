@@ -14,6 +14,7 @@ import (
 	"sync/atomic"
 
 	"github.com/yeixio/matinee/internal/mediaid"
+	"github.com/yeixio/matinee/internal/nfo"
 	"github.com/yeixio/matinee/internal/store"
 )
 
@@ -115,6 +116,16 @@ func (f *Fetcher) FetchLibrary(ctx context.Context, lib store.Library) {
 		f.Log.Error("list items needing metadata", "err", err)
 		return
 	}
+	if lib.MetadataMode == store.LocalOnly {
+		// Only the files next to the media describe this library.
+		for _, it := range items {
+			if err := f.Store.ApplyMetadata(ctx, it.ID, nil); err != nil {
+				f.Log.Error("save metadata", "err", err)
+				return
+			}
+		}
+		return
+	}
 	matched := 0
 	for _, it := range items {
 		if ctx.Err() != nil {
@@ -200,6 +211,14 @@ func (f *Fetcher) query(ctx context.Context, lib store.Library, it store.Item) (
 	case "movie":
 		if it.Path != "" {
 			q.IDs = mediaid.Movie(it.Path)
+			if !q.IDs.Any() {
+				// The ids in an .nfo file next to it. movie.nfo counts only in
+				// a movie's own folder, not loose in the library's.
+				ownFolder := !slices.Contains(lib.Paths, filepath.Dir(it.Path))
+				if info, ok := nfo.ForMovie(it.Path, ownFolder); ok {
+					q.IDs = info.IDs
+				}
+			}
 		}
 		return q, ready
 	case "show":
@@ -266,7 +285,11 @@ func (f *Fetcher) showIDs(ctx context.Context, lib store.Library, showID int64) 
 			continue
 		}
 		if parts := strings.Split(filepath.ToSlash(rel), "/"); len(parts) >= 2 {
-			return mediaid.Parse(parts[0])
+			if ids := mediaid.Parse(parts[0]); ids.Any() {
+				return ids
+			}
+			info, _ := nfo.ForShow(filepath.Join(root, parts[0]))
+			return info.IDs
 		}
 	}
 	return mediaid.IDs{}

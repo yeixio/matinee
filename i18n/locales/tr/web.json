@@ -687,7 +687,11 @@
       "go": "Git",
       "drives": "Sürücüler",
       "podcastsNoFolders": "Podcast’ler klasöre ihtiyaç duymaz. Kitaplık oluşturulduktan sonra programları oradan ekleyin.",
-      "podcastsChecked": "Yeni bölümler saatte bir denetlenir"
+      "podcastsChecked": "Yeni bölümler saatte bir denetlenir",
+      "details": "Ayrıntılar",
+      "detailsLocal": ".nfo dosyalarını tercih et",
+      "detailsOnline": "Çevrimiçini tercih et",
+      "detailsLocalOnly": "Yalnızca .nfo dosyaları"
     },
     "people": {
       "title": "Kişiler",
@@ -1071,6 +1075,17 @@
     "locked": "Elle seçildi, taramalar değiştirmez.",
     "noKey": "Başlık aramak için Ayarlar → Afişler ve ayrıntılar bölümüne bir TMDB anahtarı ekleyin.",
     "saving": "Kaydediliyor…"
+  },
+  "editDetails": {
+    "button": "Ayrıntıları düzenle",
+    "title": "{{title}} ayrıntılarını düzenle",
+    "name": "Başlık",
+    "overview": "Açıklama",
+    "genres": "Türler, virgülle ayrılmış",
+    "rating": "10 üzerinden puan",
+    "locked": "Burada değiştirdiğiniz, yazdığınız gibi kalır: taramalar ve çevrimiçi aramalar ona dokunmaz.",
+    "undo": "Düzenlemelerimi geri al",
+    "fromFile": "Bunların bir kısmı yanındaki .nfo dosyasından gelir."
   },
   "import": {
     "title": "Başka bir medya sunucusundan içe aktar",

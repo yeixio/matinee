@@ -683,7 +683,11 @@
       "go": "Pergi",
       "drives": "Pemacu",
       "podcastsNoFolders": "Podcast tidak memerlukan folder. Tambah rancangan dari pustaka setelah ia dicipta.",
-      "podcastsChecked": "Episod baharu disemak setiap jam"
+      "podcastsChecked": "Episod baharu disemak setiap jam",
+      "details": "Butiran",
+      "detailsLocal": "Utamakan fail .nfo",
+      "detailsOnline": "Utamakan dalam talian",
+      "detailsLocalOnly": "Fail .nfo sahaja"
     },
     "people": {
       "title": "Orang",
@@ -1067,6 +1071,17 @@
     "locked": "Dipilih secara manual, jadi imbasan tidak mengubahnya.",
     "noKey": "Tambah kunci TMDB dalam Tetapan → Poster dan butiran untuk mencari tajuk.",
     "saving": "Menyimpan…"
+  },
+  "editDetails": {
+    "button": "Sunting butiran",
+    "title": "Sunting butiran {{title}}",
+    "name": "Tajuk",
+    "overview": "Penerangan",
+    "genres": "Genre, dipisahkan dengan koma",
+    "rating": "Penilaian daripada 10",
+    "locked": "Apa yang anda ubah di sini kekal seperti yang anda tulis: imbasan dan carian dalam talian tidak menyentuhnya.",
+    "undo": "Buat asal suntingan saya",
+    "fromFile": "Sebahagiannya datang daripada fail .nfo di sebelahnya."
   },
   "import": {
     "title": "Import daripada pelayan media lain",

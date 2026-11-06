@@ -477,10 +477,19 @@ export type Library = {
   name: string
   kind: 'movies' | 'tv' | 'music' | string
   paths: string[]
+  // Where a movie or TV library's details come from first: '' .nfo files
+  // next to the media, then online; 'online' online first; 'localOnly'
+  // only the files.
+  metadataMode?: MetadataMode
   scanning: boolean
   // Empty until the server has set up watching, just after it starts.
   watch: FolderWatch[]
 }
+
+export type MetadataMode = '' | 'online' | 'localOnly'
+
+/** An admin's change to a title's details; fields left out stay. */
+export type DetailsEdit = { title?: string; year?: number; overview?: string; genres?: string[]; rating?: number }
 
 export type GaplessStream = { url: string; startSec: number; tracks: { id: number; startSec: number }[] }
 
@@ -548,6 +557,10 @@ export type Item = {
   onWatchList?: boolean
   /** Movies and shows: genres from the online match. */
   genres?: string[]
+  /** Details an admin edited by hand, which scans and lookups leave alone. */
+  lockedFields?: string[]
+  /** Details an .nfo file next to the media set. */
+  localFields?: string[]
   // What the background analysis found, like 4k, hdr, dolby-vision, atmos,
   // 5.1 (see openapi.yaml). Shows and seasons get their episodes' tags.
   mediaTags?: string[]
@@ -1605,6 +1618,9 @@ export const api = {
     request<ItemMatch>('GET', `/api/v1/items/${id}/match?${new URLSearchParams({ q, ...(year ? { year: String(year) } : {}) })}`),
   setMatch: (id: number, ref: string) => request<Item>('PUT', `/api/v1/items/${id}/match`, { ref }),
   clearMatch: (id: number) => request<Item>('DELETE', `/api/v1/items/${id}/match`),
+  editDetails: (id: number, edit: DetailsEdit) => request<Item>('PUT', `/api/v1/items/${id}/details`, edit),
+  undoDetailEdits: (id: number) => request<Item>('DELETE', `/api/v1/items/${id}/details`),
+  setMetadataMode: (id: number, mode: MetadataMode) => request<void>('PUT', `/api/v1/libraries/${id}/metadata-mode`, { mode }),
   refreshItem: (id: number) => request<Item>('POST', `/api/v1/items/${id}/refresh`),
   // Bringing history over from another media server (Settings → Import).
   findImports: () => request<{ found: string[]; uploaded: boolean }>('GET', '/api/v1/import/find'),

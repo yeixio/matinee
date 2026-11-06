@@ -199,6 +199,32 @@ Cover names for albums and books can be in any case and can end in `.jpg`, `.jpe
 
 <!-- /since -->
 
+## Details from .nfo files
+
+<!-- since: v0.2.4 -->
+
+If another tool already wrote `.nfo` files for your library, Matinee reads them after each scan and uses their title, year, description, genres, rating and artwork:
+
+| File | Where | Used for |
+| --- | --- | --- |
+| `<file name>.nfo` or `movie.nfo` | next to the movie | the movie |
+| `tvshow.nfo` | show folder | the show |
+| `<file name>.nfo` | next to the episode | the episode |
+
+A TMDB, IMDb or TVDB id in a movie's or show's `.nfo` file pins the match, the same as an id in its folder name. A file with only a link to the title's page works too. A show keeps the title and year of its folder, so name the folder the way you want the show called. Change an `.nfo` file and Matinee picks up the change on its next scan.
+
+Each library has a **Details** setting in **Settings → Libraries**:
+
+- **Prefer .nfo files** (the default): what a file says wins, and anything it leaves out is looked up online.
+- **Prefer online**: online details win, and `.nfo` files only fill gaps and pin matches.
+- **Only .nfo files**: nothing is looked up online for this library.
+
+### Edit details by hand
+
+Admins can open a movie, show, season or episode and choose **Edit details** to change its title, description, genres or rating. What you change stays as you wrote it: later scans, `.nfo` files and online lookups leave it alone. **Undo my edits** in the same dialog goes back to what the files and the online lookup say.
+
+<!-- /since -->
+
 ## Subtitles
 
 Put subtitle files next to the video, named like the video plus a language code:

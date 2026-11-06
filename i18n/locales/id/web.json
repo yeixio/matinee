@@ -683,7 +683,11 @@
       "go": "Buka",
       "drives": "Drive",
       "podcastsNoFolders": "Podcast tidak memerlukan folder. Tambahkan acara dari pustaka setelah dibuat.",
-      "podcastsChecked": "Episode baru diperiksa setiap jam"
+      "podcastsChecked": "Episode baru diperiksa setiap jam",
+      "details": "Detail",
+      "detailsLocal": "Utamakan file .nfo",
+      "detailsOnline": "Utamakan online",
+      "detailsLocalOnly": "Hanya file .nfo"
     },
     "people": {
       "title": "Orang",
@@ -1067,6 +1071,17 @@
     "locked": "Dipilih manual, jadi pemindaian tidak mengubahnya.",
     "noKey": "Tambahkan kunci TMDB di Pengaturan → Poster dan detail untuk mencari judul.",
     "saving": "Menyimpan…"
+  },
+  "editDetails": {
+    "button": "Edit detail",
+    "title": "Edit detail {{title}}",
+    "name": "Judul",
+    "overview": "Deskripsi",
+    "genres": "Genre, dipisahkan koma",
+    "rating": "Rating dari 10",
+    "locked": "Yang Anda ubah di sini tetap seperti yang Anda tulis: pemindaian dan pencarian online tidak menyentuhnya.",
+    "undo": "Batalkan suntingan saya",
+    "fromFile": "Sebagian berasal dari file .nfo di sebelahnya."
   },
   "import": {
     "title": "Impor dari server media lain",

@@ -683,7 +683,11 @@
       "go": "移動",
       "drives": "ドライブ",
       "podcastsNoFolders": "ポッドキャストにフォルダーは不要です。ライブラリを作成したら、そこから番組を追加してください。",
-      "podcastsChecked": "1 時間ごとに新しいエピソードを確認"
+      "podcastsChecked": "1 時間ごとに新しいエピソードを確認",
+      "details": "詳細",
+      "detailsLocal": ".nfo ファイルを優先",
+      "detailsOnline": "オンラインを優先",
+      "detailsLocalOnly": ".nfo ファイルのみ"
     },
     "people": {
       "title": "メンバー",
@@ -1067,6 +1071,17 @@
     "locked": "手動で選んだため、スキャンでは変わりません。",
     "noKey": "タイトルを調べるには、設定 → ポスターと詳細 で TMDB キーを追加してください。",
     "saving": "保存中…"
+  },
+  "editDetails": {
+    "button": "詳細を編集",
+    "title": "{{title}} の詳細を編集",
+    "name": "タイトル",
+    "overview": "説明",
+    "genres": "ジャンル(カンマ区切り)",
+    "rating": "評価(10点満点)",
+    "locked": "ここで変更した内容は書いたとおりに保たれ、スキャンやオンライン検索で変わりません。",
+    "undo": "編集を元に戻す",
+    "fromFile": "一部は隣にある .nfo ファイルから読み込まれています。"
   },
   "import": {
     "title": "別のメディアサーバーからインポート",

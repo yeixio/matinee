@@ -3,7 +3,7 @@ import { Activity, ChevronLeft, ChevronRight, Folder, FolderOpen, Gauge, Globe, 
 import { useEffect, useState, type FormEvent, type ReactNode } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import { Link, Navigate, useLocation, useNavigate, useParams } from 'react-router-dom'
-import { api, type ConnectStatus, type LibraryKind, type PlaybackPrefs, type RemoteStatus, type User, type Account as AccountInfo } from '../api'
+import { api, type ConnectStatus, type LibraryKind, type MetadataMode, type PlaybackPrefs, type RemoteStatus, type User, type Account as AccountInfo } from '../api'
 import { LanguagePicker } from '../components/LanguagePicker'
 import { LiveTVSettings } from '../components/LiveTVSettings'
 import { NewFiles, watchSummary } from '../components/LibraryWatch'
@@ -176,6 +176,7 @@ function Libraries() {
   const [adding, setAdding] = useState(false)
   const refresh = () => qc.invalidateQueries({ queryKey: ['libraries'] })
   const scan = useMutation({ mutationFn: api.scanLibrary, onSuccess: () => setTimeout(refresh, 300) })
+  const setMode = useMutation({ mutationFn: ({ id, mode }: { id: number; mode: MetadataMode }) => api.setMetadataMode(id, mode), onSuccess: refresh })
   const [findingArt, setFindingArt] = useState<number[]>([])
   const findArt = useMutation({
     mutationFn: api.findArtwork,
@@ -215,6 +216,20 @@ function Libraries() {
               <div className="truncate text-xs text-muted">{l.kind === 'podcasts' ? t('settings.libraries.podcastsChecked') : l.paths.join(' · ')}</div>
               {l.watch.length > 0 && <div className="truncate text-xs text-faint">{watchSummary(l, settings?.watchPollSeconds || 30)}</div>}
               {findingArt.includes(l.id) && <div className="text-xs text-accent">{t('settings.libraries.findingArtwork', { name: l.name })}</div>}
+              {(l.kind === 'movies' || l.kind === 'tv') && (
+                <label className="mt-1.5 flex items-center gap-2 text-xs text-muted">
+                  {t('settings.libraries.details')}
+                  <select
+                    className="rounded-md border border-line bg-surface px-2 py-1 text-xs text-text"
+                    value={l.metadataMode ?? ''}
+                    onChange={(e) => setMode.mutate({ id: l.id, mode: e.target.value as MetadataMode })}
+                  >
+                    <option value="">{t('settings.libraries.detailsLocal')}</option>
+                    <option value="online">{t('settings.libraries.detailsOnline')}</option>
+                    <option value="localOnly">{t('settings.libraries.detailsLocalOnly')}</option>
+                  </select>
+                </label>
+              )}
             </div>
             {(l.kind === 'music' || l.kind === 'audiobooks') && (
               <Button

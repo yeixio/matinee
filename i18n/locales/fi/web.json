@@ -687,7 +687,11 @@
       "go": "Siirry",
       "drives": "Asemat",
       "podcastsNoFolders": "Podcastit eivät tarvitse kansiota. Lisää ohjelmia kirjastosta, kun se on luotu.",
-      "podcastsChecked": "Uudet jaksot tarkistetaan tunnin välein"
+      "podcastsChecked": "Uudet jaksot tarkistetaan tunnin välein",
+      "details": "Tiedot",
+      "detailsLocal": "Suosi .nfo-tiedostoja",
+      "detailsOnline": "Suosi verkkoa",
+      "detailsLocalOnly": "Vain .nfo-tiedostot"
     },
     "people": {
       "title": "Ihmiset",
@@ -1071,6 +1075,17 @@
     "locked": "Valittu käsin, joten skannaukset eivät muuta sitä.",
     "noKey": "Lisää TMDB-avain kohdassa Asetukset → Julisteet ja tiedot, jotta nimikkeitä voi hakea.",
     "saving": "Tallennetaan…"
+  },
+  "editDetails": {
+    "button": "Muokkaa tietoja",
+    "title": "Muokkaa kohteen {{title}} tietoja",
+    "name": "Nimi",
+    "overview": "Kuvaus",
+    "genres": "Lajityypit pilkuilla eroteltuina",
+    "rating": "Arvio asteikolla 10",
+    "locked": "Tässä muuttamasi pysyy kirjoittamassasi muodossa: tarkistukset ja verkkohaut eivät koske siihen.",
+    "undo": "Kumoa muutokseni",
+    "fromFile": "Osa näistä tulee vieressä olevasta .nfo-tiedostosta."
   },
   "import": {
     "title": "Tuo toisesta mediapalvelimesta",

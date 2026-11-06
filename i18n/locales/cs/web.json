@@ -695,7 +695,11 @@
       "go": "Přejít",
       "drives": "Jednotky",
       "podcastsNoFolders": "Podcasty nepotřebují složku. Pořady přidáte v knihovně, jakmile ji vytvoříte.",
-      "podcastsChecked": "Nové díly se kontrolují každou hodinu"
+      "podcastsChecked": "Nové díly se kontrolují každou hodinu",
+      "details": "Podrobnosti",
+      "detailsLocal": "Upřednostnit soubory .nfo",
+      "detailsOnline": "Upřednostnit online",
+      "detailsLocalOnly": "Pouze soubory .nfo"
     },
     "people": {
       "title": "Lidé",
@@ -1079,6 +1083,17 @@
     "locked": "Vybráno ručně, prohledávání to nezmění.",
     "noKey": "Pro vyhledávání titulů přidejte klíč TMDB v Nastavení → Plakáty a podrobnosti.",
     "saving": "Ukládání…"
+  },
+  "editDetails": {
+    "button": "Upravit podrobnosti",
+    "title": "Upravit podrobnosti: {{title}}",
+    "name": "Název",
+    "overview": "Popis",
+    "genres": "Žánry oddělené čárkami",
+    "rating": "Hodnocení z 10",
+    "locked": "Co tu změníte, zůstane tak, jak jste to napsali: skenování ani online vyhledávání to nezmění.",
+    "undo": "Vrátit mé úpravy",
+    "fromFile": "Některé z nich pocházejí ze souboru .nfo vedle."
   },
   "import": {
     "title": "Importovat z jiného mediálního serveru",

@@ -691,7 +691,11 @@
       "go": "Mergi",
       "drives": "Unități",
       "podcastsNoFolders": "Podcasturile nu au nevoie de un dosar. Adaugă emisiuni din bibliotecă după ce o creezi.",
-      "podcastsChecked": "Episoadele noi sunt verificate în fiecare oră"
+      "podcastsChecked": "Episoadele noi sunt verificate în fiecare oră",
+      "details": "Detalii",
+      "detailsLocal": "Preferă fișierele .nfo",
+      "detailsOnline": "Preferă online",
+      "detailsLocalOnly": "Doar fișiere .nfo"
     },
     "people": {
       "title": "Persoane",
@@ -1075,6 +1079,17 @@
     "locked": "Ales manual, scanările nu îl schimbă.",
     "noKey": "Adaugă o cheie TMDB în Setări → Afișe și detalii pentru a căuta titluri.",
     "saving": "Se salvează…"
+  },
+  "editDetails": {
+    "button": "Editează detaliile",
+    "title": "Editează detaliile pentru {{title}}",
+    "name": "Titlu",
+    "overview": "Descriere",
+    "genres": "Genuri, separate prin virgulă",
+    "rating": "Notă din 10",
+    "locked": "Ce schimbi aici rămâne cum ai scris: scanările și căutările online nu îl ating.",
+    "undo": "Anulează modificările mele",
+    "fromFile": "Unele provin dintr-un fișier .nfo de lângă el."
   },
   "import": {
     "title": "Importă de pe alt server media",

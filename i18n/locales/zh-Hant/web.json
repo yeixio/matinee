@@ -683,7 +683,11 @@
       "go": "前往",
       "drives": "磁碟機",
       "podcastsNoFolders": "Podcast 不需要資料夾。媒體庫建立後，在那裡加入節目。",
-      "podcastsChecked": "每小時檢查新單集"
+      "podcastsChecked": "每小時檢查新單集",
+      "details": "詳細資料",
+      "detailsLocal": "優先使用 .nfo 檔案",
+      "detailsOnline": "優先使用線上資訊",
+      "detailsLocalOnly": "僅使用 .nfo 檔案"
     },
     "people": {
       "title": "成員",
@@ -1067,6 +1071,17 @@
     "locked": "手動選擇，掃描不會變更。",
     "noKey": "請在 設定 → 海報與詳細資料 中加入 TMDB 金鑰以查詢片名。",
     "saving": "正在儲存…"
+  },
+  "editDetails": {
+    "button": "編輯詳細資料",
+    "title": "編輯 {{title}} 的詳細資料",
+    "name": "標題",
+    "overview": "簡介",
+    "genres": "類型,以逗號分隔",
+    "rating": "評分(滿分 10)",
+    "locked": "你在這裡修改的內容會保持原樣:掃描和線上查詢都不會更動它。",
+    "undo": "復原我的修改",
+    "fromFile": "其中部分來自旁邊的 .nfo 檔案。"
   },
   "import": {
     "title": "從其他媒體伺服器匯入",
