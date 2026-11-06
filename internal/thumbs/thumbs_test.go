@@ -59,8 +59,9 @@ func TestMakeSheets(t *testing.T) {
 	root := t.TempDir()
 	file := filepath.Join(root, "Film (2020).mkv")
 	// 50 seconds of 16:9 video with a keyframe a second: 25 pictures 2 s apart.
+	// 10 bits, like most HEVC, whose frames FFmpeg would hand over in 16.
 	if out, err := exec.Command(ffmpeg, "-v", "error", "-f", "lavfi", "-i", "testsrc2=s=640x360:r=10:d=50",
-		"-c:v", "libx264", "-preset", "ultrafast", "-g", "10", file).CombinedOutput(); err != nil {
+		"-c:v", "libx264", "-preset", "ultrafast", "-g", "10", "-pix_fmt", "yuv420p10le", file).CombinedOutput(); err != nil {
 		t.Fatalf("make file: %v\n%s", err, out)
 	}
 	st := storetest.Open(t)

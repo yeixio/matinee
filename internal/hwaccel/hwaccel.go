@@ -62,6 +62,9 @@ var gpuScaler = map[Kind]string{
 	VAAPI: "scale_vaapi",
 	NVENC: "scale_cuda",
 	QSV:   "scale_qsv",
+	// VideoToolbox's needs FFmpeg 6.1 or later; older ones decode on the
+	// CPU (the startup test of the full pipeline fails).
+	VideoToolbox: "scale_vt",
 }
 
 // decodes lists the source codecs (as ffprobe names them) each backend's
@@ -261,9 +264,18 @@ func filters(a *Accel, m Mode, codec, toneMap string) (input []string, chain fun
 		input = append(input, "-hwaccel_output_format", "qsv", "-c:v", qsvDecoder[codec])
 		chain = down("scale_qsv=w='min(%d,iw)':h=-2:format=%s", "nv12", "format=nv12")
 	case VideoToolbox:
-		// Decoded frames come back to memory for the software resize,
-		// which is cheap next to decoding.
-		input = []string{"-hwaccel", "videotoolbox"}
+		// Requiring VideoToolbox's own frames makes a decode the GPU can't
+		// do fail, rather than quietly running on the CPU, so the startup
+		// test proves it and a transcode falls back to Encode. The encoder
+		// takes the resized frames as they are.
+		input = []string{"-hwaccel", "videotoolbox", "-hwaccel_output_format", "videotoolbox_vld"}
+		chain = func(w int) string {
+			f := fmt.Sprintf("scale_vt=w='min(%d,iw)':h=-2", w)
+			if toneMap != "" {
+				f += ",hwdownload,format=p010le," + toneMap
+			}
+			return f
+		}
 	case AMF:
 		input = []string{"-hwaccel", "auto"}
 	}

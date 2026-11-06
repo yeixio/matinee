@@ -280,6 +280,13 @@ func gpuName(k Kind, log string) string {
 			return g[1]
 		}
 		return strings.TrimSpace(m[1])
+	case VideoToolbox:
+		// Apple silicon's GPU is part of the chip, so the chip's name says
+		// which it is. An Intel Mac's CPU name says nothing about its GPU.
+		out, err := exec.Command("sysctl", "-n", "machdep.cpu.brand_string").Output()
+		if name := strings.TrimSpace(string(out)); err == nil && strings.HasPrefix(name, "Apple ") {
+			return name
+		}
 	case NVENC:
 		out, err := exec.Command("nvidia-smi", "--query-gpu=name", "--format=csv,noheader").Output()
 		if err == nil {
