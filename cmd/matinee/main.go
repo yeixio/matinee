@@ -297,7 +297,10 @@ func run() error {
 		go backups.Run(ctx)
 	}
 	// Settings → Server health → Updates (internal/update).
-	updates := newUpdates(db, log, stop)
+	updates := newUpdates(db, log, stop, func() bool {
+		playing, transcodes := apiServer.StreamCounts()
+		return playing+transcodes > 0
+	})
 	apiServer.Updates = updates
 	go updates.Run(ctx)
 	if _, problems := theme.Load(cfg.ThemeDir()); len(problems) > 0 {

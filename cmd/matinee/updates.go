@@ -17,12 +17,13 @@ import (
 var restartRequested atomic.Bool
 
 // restartPath is the binary to start: the path the server started from,
-// read before the update moved a new file there.
+// read before the update moved a new file there, or Homebrew's link to the
+// version it just installed.
 var restartPath string
 
 // newUpdates sets up update checks for how this server was installed.
 // stop shuts the server down, for a restart into an update.
-func newUpdates(db *store.Store, log *slog.Logger, stop func()) *update.Manager {
+func newUpdates(db *store.Store, log *slog.Logger, stop func(), busy func() bool) *update.Manager {
 	env := update.OSEnv()
 	build := update.ParseBuild(version.Version)
 	in := update.Detect(build, env)
@@ -31,7 +32,9 @@ func newUpdates(db *store.Store, log *slog.Logger, stop func()) *update.Manager 
 		Store: db, Log: log, Build: build, Install: in,
 		GitHub:     &update.GitHub{Base: envOr("MATINEE_UPDATE_REPO", update.DefaultRepo)},
 		Executable: env.Executable,
-		Restart: func() {
+		Busy:       busy,
+		Restart: func(exe string) {
+			restartPath = exe
 			restartRequested.Store(true)
 			stop()
 		},

@@ -6,6 +6,7 @@ set -e
 case "$1" in
 remove | 0)
   if command -v systemctl >/dev/null 2>&1 && [ -d /run/systemd/system ]; then
+    systemctl disable --now matinee-update.path || true
     systemctl disable --now matinee.service || true
   fi
   ;;

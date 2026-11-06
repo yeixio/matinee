@@ -63,6 +63,7 @@ export function UpdateSettings() {
               <ArrowUpCircle className="size-5 shrink-0 text-accent" />
               <span className="min-w-0 flex-1">
                 <span className="font-medium">{t('settings.updates.available', { version: shortVersion(available.version) })}</span>{' '}
+                {data.waiting && <span className="text-muted">{t('settings.updates.waiting')} </span>}
                 <a href={available.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-accent underline">
                   {t('settings.updates.whatsNew')} <ExternalLink className="size-3" />
                 </a>
@@ -161,11 +162,12 @@ function HowItUpdates({ data }: { data: Updates }) {
       return <Trans i18nKey="settings.updates.how.argocd" values={{ app: install.application }} components={{ code }} />
     case 'binary':
       return <Trans i18nKey={install.canApply ? 'settings.updates.how.binary' : 'settings.updates.how.binaryReadOnly'} components={{ code }} />
-    case 'kubernetes':
-    case 'docker':
     case 'apt':
     case 'dnf':
     case 'homebrew':
+      return <Trans i18nKey={install.canApply ? `settings.updates.how.${install.kind}Apply` : `settings.updates.how.${install.kind}`} components={{ code }} />
+    case 'kubernetes':
+    case 'docker':
     case 'app':
     case 'source':
       return <Trans i18nKey={`settings.updates.how.${install.kind}`} components={{ code }} />

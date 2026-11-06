@@ -314,7 +314,11 @@ func TestPass(t *testing.T) {
 	if checkPass(key, p, "abd", now) || checkPass([]byte("other"), p, "abc", now) || checkPass(key, p, "abc", now.Add(2*time.Hour)) {
 		t.Fatal("bad pass accepted")
 	}
-	if checkPass(key, p[:len(p)-2]+"AA", "abc", now) || checkPass(key, "v1.x", "abc", now) {
+	// Change the signature's first character, whatever it is. (Not the last:
+	// unpadded base64 ignores its spare bits, so it can decode the same.)
+	i := strings.LastIndex(p, ".") + 1
+	forged := p[:i] + map[bool]string{true: "B", false: "A"}[p[i] == 'A'] + p[i+1:]
+	if checkPass(key, forged, "abc", now) || checkPass(key, "v1.x", "abc", now) {
 		t.Fatal("forged pass accepted")
 	}
 }

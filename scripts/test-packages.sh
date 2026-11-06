@@ -46,6 +46,11 @@ sleep 1
 check='
   test -f /etc/matinee/matinee.env
   getent passwd matinee >/dev/null
+  # The update helper (Settings → Updates) finds nothing newer than what it just installed.
+  test -f /usr/lib/systemd/system/matinee-update.path
+  test -d /var/lib/matinee/update
+  /usr/lib/matinee/update.sh
+  grep -q "result: unchanged" /var/log/matinee-update.log || { cat /var/log/matinee-update.log; exit 1; }
   runuser -u matinee -- env MATINEE_DATA_DIR=/var/lib/matinee MATINEE_ADDR=127.0.0.1:7199 /usr/bin/matinee >/tmp/matinee.log 2>&1 &
   for i in $(seq 1 30); do
     if curl -fsS http://127.0.0.1:7199/healthz >/dev/null 2>&1; then echo "matinee is up"; exit 0; fi

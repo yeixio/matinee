@@ -1,0 +1,14 @@
+[Unit]
+Description=Install a Matinee update an admin asked for in Settings
+Documentation=https://matinee.yeix.io/docs/server/updates/
+
+# The server (user matinee) asks by making this file. The update service
+# only ever upgrades the matinee package from this system's own
+# repositories. To install updates only by hand:
+#   systemctl disable --now matinee-update.path
+[Path]
+PathExists=/var/lib/matinee/update/request
+Unit=matinee-update.service
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,10 @@
+[Unit]
+Description=Upgrade the Matinee package
+Documentation=https://matinee.yeix.io/docs/server/updates/
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/lib/matinee/update.sh
+TimeoutStartSec=20min

@@ -6,6 +6,7 @@ import (
 	"errors"
 	"log/slog"
 	"net/http"
+	"path/filepath"
 	"runtime"
 	"runtime/debug"
 	"sync"
@@ -55,11 +56,15 @@ type Manager struct {
 	GitHub  *GitHub
 	// Argo is set for KindArgoCD.
 	Argo Argo
-	// Executable and Restart are for KindBinary: Restart stops the server
-	// and starts the new one in its place.
+	// Executable and Restart are for the installs that replace the server's
+	// own file (a binary, Homebrew): Restart stops the server and starts exe
+	// in its place.
 	Executable string
-	Restart    func()
-	HTTP       *http.Client
+	Restart    func(exe string)
+	// Busy is whether anyone is watching or listening, which holds off an
+	// automatic update until they're done.
+	Busy func() bool
+	HTTP *http.Client
 	// Every is how often it looks; an hour by default.
 	Every time.Duration
 	Now   func() time.Time
@@ -70,6 +75,7 @@ type Manager struct {
 	lastError string
 	applying  string // the version being installed
 	since     time.Time
+	waiting   bool // an automatic update waits for nobody to be watching
 }
 
 // applyingFor is how long an update shows as on its way. An Argo CD
@@ -88,6 +94,8 @@ type Status struct {
 	// Following is whether Argo CD follows main by itself.
 	Following bool   `json:"following,omitempty"`
 	Applying  string `json:"applying,omitempty"`
+	// Waiting is an automatic update that installs once nobody is watching.
+	Waiting   bool   `json:"waiting,omitempty"`
 	LastError string `json:"lastError,omitempty"`
 }
 
@@ -211,6 +219,7 @@ func (m *Manager) Check(ctx context.Context) {
 	m.mu.Lock()
 	m.checked = m.now()
 	m.lastError = ""
+	m.waiting = false
 	if err != nil {
 		m.lastError = err.Error()
 	} else {
@@ -229,6 +238,15 @@ func (m *Manager) Check(ctx context.Context) {
 		return
 	}
 	if _, following := m.following(ctx); following {
+		return
+	}
+	// Installing restarts the server (under Argo CD, the rollout replaces
+	// its pod), so wait for everyone to finish.
+	if m.Busy != nil && m.Busy() {
+		m.log().Info("updates: installing once nobody is watching", "version", c.Version)
+		m.mu.Lock()
+		m.waiting = true
+		m.mu.Unlock()
 		return
 	}
 	if err := m.Apply(ctx); err != nil {
@@ -272,10 +290,12 @@ func (m *Manager) Apply(ctx context.Context) error {
 	case KindBinary:
 		m.log().Info("updates: installing", "version", c.Version)
 		err = replaceBinary(ctx, m.HTTP, c, m.Executable, runtime.GOOS, runtime.GOARCH, goarm())
-		if err == nil && m.Restart != nil {
-			m.log().Info("updates: restarting into the new version", "version", c.Version)
-			go m.Restart()
+		if err == nil {
+			m.restart(c, m.Executable)
 		}
+	case KindHomebrew, KindApt, KindDnf:
+		// These take minutes, longer than the request that asked.
+		go m.upgrade(c)
 	default:
 		err = ErrCantApply
 	}
@@ -287,6 +307,37 @@ func (m *Manager) Apply(ctx context.Context) error {
 	return err
 }
 
+func (m *Manager) restart(c *Candidate, exe string) {
+	if m.Restart != nil {
+		m.log().Info("updates: restarting into the new version", "version", c.Version)
+		go m.Restart(exe)
+	}
+}
+
+// upgrade has the package manager install c: Homebrew directly, apt and
+// dnf through the packages' root helper.
+func (m *Manager) upgrade(c *Candidate) {
+	ctx, cancel := context.WithTimeout(context.Background(), 20*time.Minute)
+	defer cancel()
+	m.log().Info("updates: installing", "version", c.Version, "with", m.Install.Kind)
+	var err error
+	if m.Install.Kind == KindHomebrew {
+		if err = upgradeHomebrew(ctx, m.Install.Prefix); err == nil {
+			// opt/matinee always points at the installed version.
+			m.restart(c, filepath.Join(m.Install.Prefix, "opt", "matinee", "bin", "matinee"))
+			return
+		}
+	} else {
+		// The new package's install script restarts the server, so
+		// coming back from this means it didn't happen.
+		err = requestPackage(ctx, PackageRequest, PackageLog)
+	}
+	m.mu.Lock()
+	m.applying = ""
+	m.mu.Unlock()
+	m.fail(err)
+}
+
 // Status is what Settings shows.
 func (m *Manager) Status(ctx context.Context) Status {
 	st := Status{Build: m.Build, Install: m.Install, Settings: m.Settings(ctx)}
@@ -294,6 +345,7 @@ func (m *Manager) Status(ctx context.Context) Status {
 	m.mu.Lock()
 	defer m.mu.Unlock()
 	st.Checked, st.Available, st.Applying, st.LastError = m.checked, m.available, m.applying, m.lastError
+	st.Waiting = m.waiting && st.Applying == ""
 	if st.Applying != "" && m.now().Sub(m.since) > applyingFor {
 		st.Applying = ""
 	}
@@ -303,6 +355,10 @@ func (m *Manager) Status(ctx context.Context) Status {
 	}
 	return st
 }
+
+// waitRetry is how soon an automatic update that's waiting for nobody to
+// be watching looks again.
+var waitRetry = 10 * time.Minute
 
 // Run looks for updates a minute after the server starts, then every hour.
 func (m *Manager) Run(ctx context.Context) {
@@ -321,7 +377,13 @@ func (m *Manager) Run(ctx context.Context) {
 			return
 		case <-t.C:
 			m.Check(ctx)
-			t.Reset(every)
+			next := every
+			m.mu.Lock()
+			if m.waiting {
+				next = min(every, waitRetry)
+			}
+			m.mu.Unlock()
+			t.Reset(next)
 		}
 	}
 }
