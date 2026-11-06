@@ -24,6 +24,30 @@ Movies/
 
 The year matters: it tells two films with the same title apart.
 
+<!-- since: v0.2.4 -->
+## Pin a match with an id
+
+When a title keeps matching the wrong film or show, put its id in the folder or file name. Matinee then looks it up by the id instead of searching by name:
+
+```
+Movies/
+└── Harbor Lights (2019) {tmdb-12345}/
+    └── Harbor Lights (2019).mkv
+TV/
+└── Crumb Street (2021) [tvdbid-81189]/
+    └── Season 1/
+        └── Crumb Street - S01E01.mkv
+```
+
+| Tag | Id from |
+| --- | --- |
+| `{tmdb-12345}` or `[tmdbid-12345]` | The Movie Database |
+| `{imdb-tt0111161}` or `[imdbid-tt0111161]` | IMDb |
+| `{tvdb-81189}` or `[tvdbid-81189]` | TheTVDB, for shows |
+
+Radarr and Sonarr can add these to folder names for you (the `{TmdbId}`, `{ImdbId}` and `{TvdbId}` naming tokens). Two show folders with different TMDB ids stay two shows even when their names match. The tags never show in titles. A match you fixed by hand on the title's page always wins over a tag.
+<!-- /since -->
+
 <!-- since: v0.2.1 -->
 ### Several versions of a movie
 
@@ -60,6 +84,16 @@ TV/
 ```
 
 `S01E02` can be anywhere in the name, so `Crumb Street - S01E02 - Dough Rises.mkv` works too. Specials go in `Season 0`.
+
+<!-- since: v0.2.4 -->
+### Two episodes in one file
+
+A file that holds two or more episodes names the first and the last: `Crumb Street - S01E01E02.mkv`, `S01E01-E02`, `S01E01-02` or `1x01-1x02` all work. It shows as one item in the season, called "Episodes 1–2" unless the file name gives it a title.
+
+### Shows with the same name
+
+Put the year in the show's folder name, `Crumb Street (1998)` and `Crumb Street (2021)`, and Matinee keeps them as two shows and looks each up as the one from that year. A show folder without a year joins the show it names.
+<!-- /since -->
 
 ## Music
 

@@ -14,6 +14,8 @@ func TestParseMovie(t *testing.T) {
 		{"/m/2001 A Space Odyssey (1968).mp4", "2001 A Space Odyssey", 1968},
 		{"/m/Blade_Runner_2049_2017_2160p_UHD.mkv", "Blade Runner 2049", 2017},
 		{"/m/Amelie.avi", "Amelie", 0},
+		{"/m/Heat (1995) {tmdb-949}/Heat (1995) {tmdb-949}.mkv", "Heat", 1995},
+		{"/m/Heat [imdbid-tt0113277].mkv", "Heat", 0},
 	}
 	for _, c := range cases {
 		got := ParseMovie(c.path)
@@ -40,6 +42,12 @@ func TestParseEpisode(t *testing.T) {
 		if !got.OK || got.Show != c.show || got.Season != c.season || got.Episode != c.ep || got.Title != c.title {
 			t.Errorf("ParseEpisode(%q) = %+v, want %s S%dE%d %q", c.path, got, c.show, c.season, c.ep, c.title)
 		}
+	}
+	if got := ParseEpisode("/tv", "/tv/Doctor Who (2005) {tvdb-78804}/Season 1/Doctor.Who.S01E01.mkv"); got.Show != "Doctor Who" || got.ShowYear != 2005 || got.ShowIDs.TVDB != 78804 {
+		t.Errorf("show folder year and id: %+v", got)
+	}
+	if got := ParseEpisode("/tv", "/tv/Breaking Bad [tmdbid-1396]/Season 1/x.S01E01.mkv"); got.Show != "Breaking Bad" || got.ShowIDs.TMDB != 1396 {
+		t.Errorf("show folder tmdb id: %+v", got)
 	}
 	if ParseEpisode("/tv", "/tv/Show/extras/behind the scenes.mkv").OK {
 		t.Error("a file without an episode number should not parse")
@@ -114,6 +122,30 @@ func TestEdition(t *testing.T) {
 		}
 		if e := Edition(c.path); e != c.edition {
 			t.Errorf("Edition(%q) = %q, want %q", c.path, e, c.edition)
+		}
+	}
+}
+
+func TestParseMultiEpisode(t *testing.T) {
+	cases := []struct {
+		name    string
+		ep, end int
+		title   string
+	}{
+		{"Show - S01E01E02 - Pilot.mkv", 1, 2, "Pilot"},
+		{"Show.S02E05-E06.720p.mkv", 5, 6, ""},
+		{"Show - S01E01-02 - Pilot.mkv", 1, 2, "Pilot"},
+		{"Show - S01E01-E03.mkv", 1, 3, ""},
+		{"Show 1x01-1x02.avi", 1, 2, ""},
+		{"Show 1x01-02.avi", 1, 2, ""},
+		{"Show.S01E01.1080p.mkv", 1, 0, ""},
+		{"Show.S01E01-1080p.mkv", 1, 0, ""},
+		{"Show - S01E05 - Part 2.mkv", 5, 0, "Part 2"},
+	}
+	for _, c := range cases {
+		got := ParseEpisode("/tv", "/tv/Show/Season 1/"+c.name)
+		if !got.OK || got.Episode != c.ep || got.EndEpisode != c.end || got.Title != c.title {
+			t.Errorf("ParseEpisode(%q) = %+v, want E%d-E%d %q", c.name, got, c.ep, c.end, c.title)
 		}
 	}
 }

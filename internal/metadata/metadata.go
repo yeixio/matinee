@@ -7,11 +7,13 @@ import (
 	"context"
 	"encoding/json"
 	"log/slog"
+	"path/filepath"
 	"slices"
 	"strings"
 	"sync"
 	"sync/atomic"
 
+	"github.com/yeixio/matinee/internal/mediaid"
 	"github.com/yeixio/matinee/internal/store"
 )
 
@@ -23,7 +25,10 @@ type Query struct {
 	ShowID  int64 // provider id of the season's or episode's show
 	Season  int
 	Episode int
-	Artist  string // the album's artist, or the book's author
+	// IDs are the ids in a movie's or show's file or folder name, which
+	// pin its match instead of a search by title.
+	IDs    mediaid.IDs
+	Artist string // the album's artist, or the book's author
 	// MusicBrainz ids from an album's tags, when its files have them.
 	ReleaseID      string
 	ReleaseGroupID string
@@ -115,7 +120,7 @@ func (f *Fetcher) FetchLibrary(ctx context.Context, lib store.Library) {
 		if ctx.Err() != nil {
 			return
 		}
-		q, state := f.query(ctx, it)
+		q, state := f.query(ctx, lib, it)
 		switch state {
 		case retryLater:
 			continue
@@ -186,12 +191,20 @@ const (
 	retryLater            // depends on a lookup that hasn't succeeded yet
 )
 
-func (f *Fetcher) query(ctx context.Context, it store.Item) (Query, queryState) {
+func (f *Fetcher) query(ctx context.Context, lib store.Library, it store.Item) (Query, queryState) {
 	q := Query{Kind: it.Kind, Title: it.Title, Path: it.Path, Data: it.PluginData}
 	if it.Year != nil {
 		q.Year = *it.Year
 	}
 	switch it.Kind {
+	case "movie":
+		if it.Path != "" {
+			q.IDs = mediaid.Movie(it.Path)
+		}
+		return q, ready
+	case "show":
+		q.IDs = f.showIDs(ctx, lib, it.ID)
+		return q, ready
 	case "artist":
 		if it.Title == "Unknown Artist" {
 			return q, noMatch
@@ -238,6 +251,25 @@ func (f *Fetcher) query(ctx context.Context, it store.Item) (Query, queryState) 
 		return f.showQuery(ctx, q, *season.ParentID, *season.IndexNumber, *it.IndexNumber)
 	}
 	return q, ready
+}
+
+// showIDs reads the ids in a show's folder name: the folder right under
+// the library folder that holds its episodes.
+func (f *Fetcher) showIDs(ctx context.Context, lib store.Library, showID int64) mediaid.IDs {
+	file, err := f.Store.FileUnder(ctx, showID)
+	if err != nil || file == "" {
+		return mediaid.IDs{}
+	}
+	for _, root := range lib.Paths {
+		rel, err := filepath.Rel(root, file)
+		if err != nil || strings.HasPrefix(rel, "..") {
+			continue
+		}
+		if parts := strings.Split(filepath.ToSlash(rel), "/"); len(parts) >= 2 {
+			return mediaid.Parse(parts[0])
+		}
+	}
+	return mediaid.IDs{}
 }
 
 // showQuery fills in the show's provider id for a season or episode lookup.

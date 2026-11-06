@@ -5,6 +5,8 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
+
+	"github.com/yeixio/matinee/internal/mediaid"
 )
 
 var (
@@ -13,7 +15,11 @@ var (
 
 	// "Show.Name.S01E02", "Show Name - s1e2", "Show_Name_1x02"
 	episodeRe = regexp.MustCompile(`(?i)^(.*?)[\s._-]*(?:s(\d{1,3})[\s._-]*e(\d{1,4})|(\d{1,2})x(\d{1,3}))`)
-	seasonDir = regexp.MustCompile(`(?i)^(?:season|series|s)[\s._-]*(\d{1,3})$`)
+	// The second episode of a file that holds two or more, right after the
+	// first: "E02" in S01E01E02 or S01E01-E02, "02" in S01E01-02, "1x02"
+	// in 1x01-1x02. A number must end there, so "S01E01-1080p" isn't one.
+	endEpisodeRe = regexp.MustCompile(`(?i)^(?:[\s._]*-?[\s._]*e(\d{1,4})|-\d{1,2}x(\d{1,4})|-(\d{1,4}))(?:[^\dpi]|$)`)
+	seasonDir    = regexp.MustCompile(`(?i)^(?:season|series|s)[\s._-]*(\d{1,3})$`)
 	// A plausible release year; boundaries are checked in parseMovieName.
 	yearRe = regexp.MustCompile(`(?:19|20)\d{2}`)
 	// Words that mark where the title ends in release-style names.
@@ -62,7 +68,7 @@ func ParseMovie(path string) MovieInfo {
 }
 
 func parseMovieName(name string) MovieInfo {
-	name, _ = splitEdition(name)
+	name, _ = splitEdition(mediaid.Strip(name))
 	cut := len(name)
 	if loc := junkRe.FindStringIndex(name); loc != nil {
 		cut = loc[0]
@@ -90,7 +96,17 @@ type EpisodeInfo struct {
 	Show    string
 	Season  int
 	Episode int
-	Title   string // episode title when the name carries one
+	// EndEpisode is the last episode of a file that holds several, such
+	// as 2 in S01E01E02; 0 when it holds one.
+	EndEpisode int
+	Title      string // episode title when the name carries one
+	// ShowYear is the year in the show's folder name, as in
+	// "Doctor Who (2005)", which tells same-named shows apart; 0 when the
+	// folder names none.
+	ShowYear int
+	// ShowIDs are the ids in the show's folder name, as in
+	// "Breaking Bad {tvdb-81189}".
+	ShowIDs mediaid.IDs
 	OK      bool
 }
 
@@ -102,7 +118,7 @@ func ParseEpisode(libraryRoot, path string) EpisodeInfo {
 	if m == nil {
 		return EpisodeInfo{}
 	}
-	info := EpisodeInfo{OK: true, Show: cleanTitle(m[1])}
+	info := EpisodeInfo{OK: true, Show: cleanTitle(mediaid.Strip(m[1]))}
 	if m[2] != "" {
 		info.Season, _ = strconv.Atoi(m[2])
 		info.Episode, _ = strconv.Atoi(m[3])
@@ -111,6 +127,20 @@ func ParseEpisode(libraryRoot, path string) EpisodeInfo {
 		info.Episode, _ = strconv.Atoi(m[5])
 	}
 	rest := stem(path)[len(m[0]):]
+	if e := endEpisodeRe.FindStringSubmatchIndex(rest); e != nil {
+		for g := 1; g <= 3; g++ {
+			if e[2*g] >= 0 {
+				end, _ := strconv.Atoi(rest[e[2*g]:e[2*g+1]])
+				// Two parts of one release, not a range: S01E05-E03, or a
+				// number that can't be an episode this close.
+				if end > info.Episode && end-info.Episode < 10 {
+					info.EndEpisode = end
+					rest = rest[e[2*g+1]:]
+				}
+				break
+			}
+		}
+	}
 	if loc := junkRe.FindStringIndex(rest); loc != nil {
 		rest = rest[:loc[0]]
 	}
@@ -120,20 +150,14 @@ func ParseEpisode(libraryRoot, path string) EpisodeInfo {
 	if rel, err := filepath.Rel(libraryRoot, path); err == nil {
 		parts := strings.Split(filepath.ToSlash(rel), "/")
 		if len(parts) >= 2 && !seasonDir.MatchString(parts[0]) {
-			info.Show = cleanTitle(stripYear(parts[0]))
+			mi := parseMovieName(parts[0])
+			info.Show, info.ShowYear, info.ShowIDs = mi.Title, mi.Year, mediaid.Parse(parts[0])
 		}
 	}
 	if info.Show == "" {
 		info.Show = "Unknown Show"
 	}
 	return info
-}
-
-func stripYear(s string) string {
-	if mi := parseMovieName(s); mi.Year != 0 {
-		return mi.Title
-	}
-	return s
 }
 
 // TrackInfo is a music file's place in the library, from tags or folders.

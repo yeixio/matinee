@@ -185,7 +185,7 @@ func (tv) Index(ctx context.Context, st *store.Store, f File) (store.Item, error
 		// Not an episode name; file it under its folder as a special.
 		ep = EpisodeInfo{Show: cleanTitle(filepath.Base(filepath.Dir(f.Path))), Title: cleanTitle(stem(f.Path))}
 	}
-	showID, err := st.EnsureContainer(ctx, f.Library.ID, nil, "show", ep.Show, nil, nil)
+	showID, err := st.EnsureShow(ctx, f.Library.ID, ep.Show, ep.ShowYear, ep.ShowIDs.TMDB)
 	if err != nil {
 		return store.Item{}, err
 	}
@@ -206,7 +206,11 @@ func (tv) Index(ctx context.Context, st *store.Store, f File) (store.Item, error
 		return store.Item{}, err
 	}
 	it := store.Item{Kind: "episode", ParentID: &seasonID, IndexNumber: nonZero(ep.Episode), Title: ep.Title}
-	if it.Title == "" {
+	switch {
+	case it.Title != "":
+	case ep.EndEpisode > 0:
+		it.Title = "Episodes " + strconv.Itoa(ep.Episode) + "–" + strconv.Itoa(ep.EndEpisode)
+	default:
 		it.Title = "Episode " + strconv.Itoa(ep.Episode)
 	}
 	it.Poster = findArt(filepath.Dir(f.Path), stem(f.Path)+"-thumb.jpg", stem(f.Path)+".jpg")

@@ -656,6 +656,18 @@ var migrations = []string{
 	// 112: a request filed with Box Office, which decides it on its
 	// Requests page: its id there (see boxoffice_requests.go in api).
 	"ALTER TABLE requests ADD COLUMN boxoffice_id BIGINT NOT NULL DEFAULT 0",
+	// 113–114: ids in folder and file names, like {tmdb-949}, now pin a
+	// match and keep same-named shows apart. Files named with them are
+	// filed again on the next scan, and their movies looked up again by id.
+	`UPDATE items SET mtime = 0 WHERE path IS NOT NULL AND kind IN ('movie', 'episode')
+		AND (LOWER(path) LIKE '%tmdb%' OR LOWER(path) LIKE '%tvdb%' OR LOWER(path) LIKE '%imdb%')`,
+	`UPDATE items SET meta_at = NULL WHERE path IS NOT NULL AND kind = 'movie' AND match_locked = 0
+		AND (LOWER(path) LIKE '%tmdb%' OR LOWER(path) LIKE '%imdb%')`,
+	// 115–116: shows of the same name can be two shows now (see
+	// EnsureShow), so a show's title no longer has to be unique.
+	"DROP INDEX items_container_key",
+	`CREATE UNIQUE INDEX items_container_key ON items(library_id, kind, COALESCE(parent_id, 0), title, COALESCE(index_number, -1))
+		WHERE path IS NULL AND kind <> 'show'`,
 }
 
 func now() int64 { return time.Now().Unix() }
