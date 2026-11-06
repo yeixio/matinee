@@ -1,0 +1,59 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Origin: Matinee
+Label: Matinee
+Suite: stable
+Codename: stable
+Architectures: amd64 arm64 armhf
+Components: main
+Description: Matinee media server
+Date: Fri, 06 Nov 2026 12:33:37 +0000
+MD5Sum:
+ f3d82e98c4f38bcabc0a1d208bc75684              184 Release
+ 8d398f6b2c35f2cbb4e46c7de33260b4              670 main/binary-amd64/Packages
+ 7fad1cc6a25faac80a2f75d90e39fe3c              479 main/binary-amd64/Packages.gz
+ a5719fd8603c16c609df4bd64c77574d              670 main/binary-arm64/Packages
+ b054e0948ed27792fd378c8baf8d3cda              478 main/binary-arm64/Packages.gz
+ aeaf64be79831995b9980ff53f3733da              670 main/binary-armhf/Packages
+ 1d8277eceb1a3406e10978b3b2de522a              480 main/binary-armhf/Packages.gz
+SHA1:
+ 22b226d0017aabd896377f6dfb14d39f0c7fed69              184 Release
+ f734f05f9c034921f67517964016446aa1a08298              670 main/binary-amd64/Packages
+ 9d604c5b4541c41f584a0bd62cb12cbc7c20896f              479 main/binary-amd64/Packages.gz
+ 7e49f406cf336e77588d34f83bb481ee64f0bf13              670 main/binary-arm64/Packages
+ 6857ee4db5007111fe1984b27e7b0a9399f4ba94              478 main/binary-arm64/Packages.gz
+ 166a796a31b9ed34842a2d31c3bd0c888e41b78c              670 main/binary-armhf/Packages
+ c0182bf757ccfe0c7b10b2522f90e5a76cf917fe              480 main/binary-armhf/Packages.gz
+SHA256:
+ 2dbacaf11351b5188e2b0ad7a57162b8d54e8569d72622608de85e3b49e1fc09              184 Release
+ 10da09e848162c3b9a8f2553b89ca5d161dd3c51f33a9a8649f33140750f71c7              670 main/binary-amd64/Packages
+ 6a4217d069a4097bb52ff0083988a4b26200eff52f85b1c21b34c82780ee4839              479 main/binary-amd64/Packages.gz
+ cc92a6e07bc7828ac286c8ab2a955d4bc85cf2ba07d7b9f88d6d549b03056aa4              670 main/binary-arm64/Packages
+ 819c0d3793ea50682d75f6403cb3e16a5917b8ab1c76383f0d2573a86d583fba              478 main/binary-arm64/Packages.gz
+ 94800343905eaef2ece9de505aeb034ec71b874a563650e2251a831d8b0adfd0              670 main/binary-armhf/Packages
+ 9fc5eceb680c7c8ea3453cb45d5f71d1860faa54dfb3210fc2d36fcd74ac59ab              480 main/binary-armhf/Packages.gz
+SHA512:
+ f9a615fb8176a9991bd5d674abfa67ee1165fe62fe0bbf9c14659b09ee63b317db53d0a62ed5e9b3648518e2263199692754e02c3683b02260d4278f538ebd2c              184 Release
+ f6ed9a6fdf216aea6efd730a4d7ef2e015c507f8f808d8ab2d5e69e2cddb672fb3c83174636968efe089a3bc52f034a9e62cc0ea5394a9473f23bdd0fae177ac              670 main/binary-amd64/Packages
+ 623446c5d1f81c11cb9d6ad19ba474eae55ed6682aeb6abebae31c6d6c1f5f4db94ad4d5a0572235b7c0508eca7627a5b0904387144ef07598b1e1fb66a9b5d1              479 main/binary-amd64/Packages.gz
+ 2f627e86abb49dab3cc8ec269e52507ba7bfd4d03f28ed1a469402983ab2c68ce4c25df2ed1c450819f003ba89cfc72b8dc56f1175b74913f3c8a17303c1baff              670 main/binary-arm64/Packages
+ 9320ae756528e980b2d12f50a885c69cd791736b4f054eec626d956273632dabc8cbf049e0c6a857a6568667c2d5813740526d9a0986d83318bf22a879f67e9b              478 main/binary-arm64/Packages.gz
+ 51976c540e9fba740197166bc1745a437b3317f4b3abb73faf7387b842ca1d8dac721b2c50d6de00c59d7ad7aa1a6b5d6b32c5f50444460131c3100fabbcc659              670 main/binary-armhf/Packages
+ 3724703338e0d13a0948ab7009fbe4c281711d56b98035d6cd14acd8d8dfea8753dfb4287cc2fa20510ddd6d621cf62a9cff48c689b30e753b4fa04fad7dee9b              480 main/binary-armhf/Packages.gz
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEETuM/jO4Ha7DJp8VZIfW+n3JqKJUFAmrtySEACgkQIfW+n3Jq
+KJVXmg/7BM7xRDSf+QNF3a9AzuqfNO4R2Nyh4tEJx83kHMlrNlYwS/qx5SWlrzJ7
+ufklUXpwsME/OrrkUGJlcOh3pdfG4VC/MxOfBdQtNE5KbfZR5B8xBO3vbhn6CixQ
+6lVrlBq2Z5lUOJm9VK1ZJz+Qe5XVxrcA+VFg1YhkgIFgdOOXN/LYLJZrOZ4C4/AW
+0Ew00mW+w1ix7CIUU/hM3dm18EyPGSXnJ7cpG3jnjK5mogdGCbxPbOWVdzxIlEPs
+E4FYanfNcuGq3Ey8vMCiUUXmUbiqgeRArxQvZ805Q+PAzZe2OAP3L2ICFB5svubq
+XuSm16n9Rtc4mXYhekcTooMKwMSylgUf2poXBxAk7RKzy7ZMKDYH2fNI1/rAVRqx
+gBUF72b27NkDk6+eIeBUITxBu5TswVgfTbtyIPpPcKzhwn22wT6LQHBNFRekSerD
+pg6JwsdmdorytaWkdMnltya8Kk318qG5vO+nE4SV381RM9Kvuv719AB5TGaQiQ3f
+RpJ5jhuS5ZlZ6IUCRI7Jj/wgNO6YlaJ2pJfX1q9c+ui2W25BKriZ2mclESeklM+9
+i5dXxOx7PAfYuyb2WUSAS9K4Tjt86CwOQWmgfMEQXFa7HIyTme0GPa/+xZZFo8oe
+9LooTwTCrelv9aJrNHwqm+Exr0beNRABgRMT2SUbGKrXOUXWR/s=
+=1RVO
+-----END PGP SIGNATURE-----
