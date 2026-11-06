@@ -9,6 +9,8 @@ Type=simple
 User=matinee
 Group=matinee
 Environment=MATINEE_DATA_DIR=/var/lib/matinee
+# apt or dnf updates Matinee (Settings → Server health → Updates says so).
+Environment=MATINEE_INSTALL=package
 # Settings such as MATINEE_TMDB_KEY. Edit it, then: systemctl restart matinee
 EnvironmentFile=-/etc/matinee/matinee.env
 ExecStart=/usr/bin/matinee

@@ -931,6 +931,45 @@
         "upgrade": "Bir güncellemeden önce",
         "before-restore": "Bir geri yüklemeden önce"
       }
+    },
+    "updates": {
+      "title": "Güncellemeler",
+      "running": "Bu sunucu <code>{{version}}</code> sürümünü çalıştırıyor.",
+      "failed": "Güncellemelerde bir sorun oluştu: {{error}}",
+      "applying": "{{version}} sürümüne güncelleniyor. Matinee hazır olunca yeniden başlar ve oynatma kaldığı yerden devam eder.",
+      "available": "{{version}} çıktı.",
+      "whatsNew": "Yenilikler",
+      "apply": "{{version}} sürümüne güncelle",
+      "applyConfirm": "Şimdi {{version}} sürümüne güncellensin mi? Matinee yeniden başlar ve izleyenler geri döndüğünde kaldıkları yerden devam eder.",
+      "following": "Argo CD main'i izliyor, bu yüzden her yeni derleme kendiliğinden dağıtılır.",
+      "upToDate": "Güncelsiniz.",
+      "notChecked": "Matinee henüz güncelleme aramadı.",
+      "check": "Şimdi denetle",
+      "checking": "Denetleniyor…",
+      "checked": "Son denetim: {{time}}.",
+      "channel": "Güncellemelerin kaynağı",
+      "release": "Sürümler",
+      "releaseHint": "Etiketli sürümler, her biri kendi sürüm notlarıyla. Önerilir.",
+      "main": "Main",
+      "beta": "Riskli beta",
+      "mainHint": "Her değişiklik, denetimlerini geçer geçmez. Yenilikleri ilk siz alırsınız, bazen de bozuk şeyleri.",
+      "mainImagesOnly": "main derlemeleri yalnızca kapsayıcı imajı olarak var, bu yüzden bu sunucu sürümleri izler.",
+      "mainConfirm": "main izlensin mi? Bu bir beta: her değişikliği denetimlerini geçer geçmez, kimse denemeden alırsınız ve arada bir biri bozuk olur.",
+      "auto": "Güncellemeleri otomatik yükle",
+      "autoHint": "Matinee her saat bakar ve yeni bir sürüm bulduğu anda yükler. Aksi halde Güncelle'ye basmanızı bekler.",
+      "autoMainHint": "main'in her derlemesi hazır olur olmaz yüklenir. Aksi halde Matinee Güncelle'ye basmanızı bekler.",
+      "how": {
+        "argocd": "Matinee, Argo CD Application'ı <code>{{app}}</code> yeni sürüme taşıyarak güncellenir ve Argo CD onu dağıtır.",
+        "kubernetes": "Matinee kendi Helm chart'ından çalışır, bu yüzden <code>helm upgrade</code> ile güncellenir. Buradan güncellemek için Argo CD ile kurun ve chart'ın <code>updates.argoCD</code> değerlerini ayarlayın.",
+        "docker": "Matinee bir kapsayıcıda çalışır ve kapsayıcı kendini değiştiremez. Güncellemek için yeni imajı çekin ve kapsayıcıyı yeniden oluşturun, örneğin <code>docker compose pull && docker compose up -d</code> ile. <code>latest</code> etiketi sürümleri, <code>main</code> ise main'i izler. Watchtower ya da NAS'ınızın uygulama mağazası bunu otomatik yapabilir.",
+        "apt": "Matinee apt ile kuruldu, onu apt günceller: <code>sudo apt update && sudo apt upgrade matinee</code>",
+        "dnf": "Matinee dnf ile kuruldu, onu dnf günceller: <code>sudo dnf upgrade matinee</code>",
+        "homebrew": "Matinee Homebrew ile kuruldu, onu Homebrew günceller: <code>brew upgrade matinee</code>",
+        "app": "Bu bilgisayardaki Matinee uygulaması güncellemeleri kendisi yükler.",
+        "binary": "Matinee yeni sürümü indirip denetleyerek, kendi dosyasının yerine koyarak ve yeniden başlayarak güncellenir.",
+        "binaryReadOnly": "Matinee kendi dosyasını değiştiremiyor, çünkü klasörüne yazma izni yok. Yeni sürümü sürüm sayfasından indirip elle değiştirin.",
+        "source": "Bu sunucu kaynak koddan derlendi, bu yüzden karşılaştırılacak bir sürüm yok. Güncellemek için değişiklikleri çekip yeniden derleyin."
+      }
     }
   },
   "language": {

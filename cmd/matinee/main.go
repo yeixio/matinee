@@ -60,7 +60,7 @@ import (
 )
 
 func main() {
-	cmd := run
+	cmd := runAndRestart
 	if len(os.Args) > 1 {
 		switch os.Args[1] {
 		case "init-db-secret":
@@ -296,6 +296,10 @@ func run() error {
 		apiServer.Backups = backups
 		go backups.Run(ctx)
 	}
+	// Settings → Server health → Updates (internal/update).
+	updates := newUpdates(db, log, stop)
+	apiServer.Updates = updates
+	go updates.Run(ctx)
 	if _, problems := theme.Load(cfg.ThemeDir()); len(problems) > 0 {
 		for _, p := range problems {
 			log.Warn("skipping a theme file", "dir", cfg.ThemeDir(), "err", p)

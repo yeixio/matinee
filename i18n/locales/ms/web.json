@@ -927,6 +927,45 @@
         "upgrade": "Sebelum kemas kini",
         "before-restore": "Sebelum pemulihan"
       }
+    },
+    "updates": {
+      "title": "Kemas kini",
+      "running": "Pelayan ini menjalankan <code>{{version}}</code>.",
+      "failed": "Kemas kini menghadapi masalah: {{error}}",
+      "applying": "Mengemas kini ke {{version}}. Matinee dimulakan semula apabila sedia, dan main balik bersambung dari tempat ia berhenti.",
+      "available": "{{version}} sudah keluar.",
+      "whatsNew": "Apa yang baharu",
+      "apply": "Kemas kini ke {{version}}",
+      "applyConfirm": "Kemas kini ke {{version}} sekarang? Matinee dimulakan semula, dan sesiapa yang sedang menonton bersambung dari tempat mereka apabila ia kembali.",
+      "following": "Argo CD mengikut main, jadi setiap binaan baharu dilancarkan dengan sendirinya.",
+      "upToDate": "Anda sudah terkini.",
+      "notChecked": "Matinee belum mencari kemas kini.",
+      "check": "Semak sekarang",
+      "checking": "Menyemak…",
+      "checked": "Kali terakhir disemak {{time}}.",
+      "channel": "Dapatkan kemas kini daripada",
+      "release": "Keluaran",
+      "releaseHint": "Versi bertag, setiap satu dengan nota keluarannya. Disyorkan.",
+      "main": "Main",
+      "beta": "Beta berisiko",
+      "mainHint": "Setiap perubahan sebaik sahaja ia lulus semakan. Anda mendapat perkara baharu dahulu, dan kadangkala perkara yang rosak.",
+      "mainImagesOnly": "Binaan main hanya ada sebagai imej bekas, jadi pelayan ini mengikut keluaran.",
+      "mainConfirm": "Ikut main? Ini beta: anda mendapat setiap perubahan sebaik sahaja ia lulus semakan, sebelum sesiapa mencubanya, dan sekali-sekala ada yang rosak.",
+      "auto": "Pasang kemas kini secara automatik",
+      "autoHint": "Matinee menyemak setiap jam dan memasang keluaran baharu sebaik sahaja menemuinya. Jika tidak, ia menunggu anda menekan Kemas kini.",
+      "autoMainHint": "Setiap binaan main dipasang sebaik sahaja sedia. Jika tidak, Matinee menunggu anda menekan Kemas kini.",
+      "how": {
+        "argocd": "Matinee mengemas kini dirinya dengan mengalihkan Application Argo CD <code>{{app}}</code> ke versi baharu, dan Argo CD melancarkannya.",
+        "kubernetes": "Matinee berjalan daripada carta Helmnya, jadi ia dikemas kini dengan <code>helm upgrade</code>. Untuk mengemas kininya dari sini, pasang dengan Argo CD dan tetapkan nilai <code>updates.argoCD</code> carta.",
+        "docker": "Matinee berjalan dalam bekas, yang tidak boleh menggantikan dirinya sendiri. Untuk mengemas kini, tarik imej baharu dan cipta semula bekas, contohnya dengan <code>docker compose pull && docker compose up -d</code>. Tag <code>latest</code> mengikut keluaran dan <code>main</code> mengikut main. Watchtower, atau kedai aplikasi NAS anda, boleh melakukannya secara automatik.",
+        "apt": "Matinee dipasang dengan apt, yang mengemas kininya: <code>sudo apt update && sudo apt upgrade matinee</code>",
+        "dnf": "Matinee dipasang dengan dnf, yang mengemas kininya: <code>sudo dnf upgrade matinee</code>",
+        "homebrew": "Matinee dipasang dengan Homebrew, yang mengemas kininya: <code>brew upgrade matinee</code>",
+        "app": "Aplikasi Matinee pada komputer ini memasang kemas kini sendiri.",
+        "binary": "Matinee mengemas kini dirinya dengan memuat turun versi baharu, menyemaknya, meletakkannya di tempat failnya sendiri dan dimulakan semula.",
+        "binaryReadOnly": "Matinee tidak boleh menggantikan failnya sendiri kerana ia tidak dibenarkan menulis ke foldernya. Muat turun versi baharu dari halaman keluarannya dan gantikan secara manual.",
+        "source": "Pelayan ini dibina daripada kod sumber, jadi tiada keluaran untuk dibandingkan. Tarik perubahan dan bina semula untuk mengemas kini."
+      }
     }
   },
   "language": {

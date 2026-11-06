@@ -11,6 +11,7 @@ import { MediaAnalysis } from '../components/MediaAnalysis'
 import { ServerHealth } from '../components/ServerHealth'
 import { AlertSettings } from '../components/AlertSettings'
 import { BackupSettings } from '../components/BackupSettings'
+import { UpdateSettings } from '../components/UpdateSettings'
 import { Plugins } from '../components/PluginSettings'
 import { Profiles } from '../components/ProfileSettings'
 import { FriendLibraries, Friends } from '../components/FriendSettings'
@@ -38,7 +39,7 @@ export const settingsSections: Record<string, string> = {
   transcoding: 'streaming',
   'home-network': 'network', 'remote-access': 'network',
   arr: 'add-ons', overseerr: 'add-ons', plugins: 'add-ons',
-  'server-health': 'health', alerts: 'health', backups: 'health',
+  'server-health': 'health', updates: 'health', alerts: 'health', backups: 'health',
   'live-tv': 'live-tv',
 }
 
@@ -66,7 +67,7 @@ export default function Settings() {
     },
     ...(admin
       ? [
-          { id: 'health', icon: Activity, sections: [['server-health', <ServerHealth />], ['alerts', <AlertSettings />], ['backups', <BackupSettings />]], wide: true },
+          { id: 'health', icon: Activity, sections: [['server-health', <ServerHealth />], ['updates', <UpdateSettings />], ['alerts', <AlertSettings />], ['backups', <BackupSettings />]], wide: true },
           { id: 'libraries', icon: LibraryBig, sections: [['libraries', <Libraries />], ['import', <ImportSettings />], ['new-files', <NewFiles />], ['media-analysis', <MediaAnalysis />]] },
           { id: 'people', icon: UsersRound, sections: [['people', <Users me={me} />], ['friends', <Friends />], ['profiles', <Profiles />]] },
           { id: 'content', icon: ImageIcon, sections: [['posters', <TMDBKey />], ['podcast-index', <PodcastIndexKey />], ['subtitles', <OpenSubtitlesKey />], ['subtitle-sync', <SubtitleSyncSetting />], ['lyrics', <OnlineLyrics />], ['trailers', <Trailers />], ['home-rows', <HolidayRows />]] },

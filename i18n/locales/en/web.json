@@ -931,6 +931,45 @@
         "upgrade": "Before an upgrade",
         "before-restore": "Before a restore"
       }
+    },
+    "updates": {
+      "title": "Updates",
+      "running": "This server runs <code>{{version}}</code>.",
+      "failed": "Updates ran into a problem: {{error}}",
+      "applying": "Updating to {{version}}. Matinee restarts once it's ready, and players pick up where they were.",
+      "available": "{{version}} is out.",
+      "whatsNew": "What's new",
+      "apply": "Update to {{version}}",
+      "applyConfirm": "Update to {{version}} now? Matinee restarts, and anyone watching picks up where they were once it's back.",
+      "following": "Argo CD follows main, so each new build rolls out by itself.",
+      "upToDate": "You're up to date.",
+      "notChecked": "Matinee hasn't looked for updates yet.",
+      "check": "Check now",
+      "checking": "Checking…",
+      "checked": "Last checked {{time}}.",
+      "channel": "Get updates from",
+      "release": "Releases",
+      "releaseHint": "Tagged versions, each with its release notes. Recommended.",
+      "main": "Main",
+      "beta": "Risky beta",
+      "mainHint": "Every change as soon as it passes its checks. You get new things first, and sometimes things that are broken.",
+      "mainImagesOnly": "Builds of main come only as container images, so this server follows releases.",
+      "mainConfirm": "Follow main? It's a beta: you get every change as soon as it passes its checks, before anyone has tried it, and now and then one is broken.",
+      "auto": "Install updates automatically",
+      "autoHint": "Matinee looks every hour and installs a new release as soon as it finds one. Otherwise it waits for you to press Update.",
+      "autoMainHint": "Each build of main installs as soon as it's ready. Otherwise Matinee waits for you to press Update.",
+      "how": {
+        "argocd": "Matinee updates by moving the Argo CD Application <code>{{app}}</code> to the new version, and Argo CD rolls it out.",
+        "kubernetes": "Matinee runs from its Helm chart, so it's updated with <code>helm upgrade</code>. To update it from here, install it with Argo CD and set the chart's <code>updates.argoCD</code> values.",
+        "docker": "Matinee runs in a container, which can't replace itself. To update, pull the new image and recreate the container, such as with <code>docker compose pull && docker compose up -d</code>. The <code>latest</code> tag follows releases and <code>main</code> follows main. Watchtower, or your NAS's app store, can do it automatically.",
+        "apt": "Matinee was installed with apt, which updates it: <code>sudo apt update && sudo apt upgrade matinee</code>",
+        "dnf": "Matinee was installed with dnf, which updates it: <code>sudo dnf upgrade matinee</code>",
+        "homebrew": "Matinee was installed with Homebrew, which updates it: <code>brew upgrade matinee</code>",
+        "app": "The Matinee app on this computer installs updates itself.",
+        "binary": "Matinee updates by downloading the new version, checking it, putting it in place of its own file and restarting.",
+        "binaryReadOnly": "Matinee can't replace its own file, because it isn't allowed to write to its folder. Download the new version from its release page and replace it by hand.",
+        "source": "This server was built from source, so there's no release to compare it with. Pull and build again to update."
+      }
     }
   },
   "language": {
