@@ -63,7 +63,7 @@ jobs:
       - name: Build FFmpeg
         if: steps.ffmpeg-cache.outputs.cache-hit != 'true'
         run: |
-          brew install nasm pkgconf
+          brew install nasm pkgconf autoconf automake libtool
           scripts/build-mac-ffmpeg.sh ~/mac-ffmpeg
 
       - name: Test the app
