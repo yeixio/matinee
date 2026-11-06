@@ -3,4 +3,5 @@ dist/
 .astro/
 src/content/docs/
 demo/.cache/
+demo/.cache-public/
 dist-all/

@@ -10,6 +10,7 @@ import path from 'node:path'
 import { chromium } from 'playwright'
 import { backdrop, cover, portrait, poster, stationLogo } from './art.mjs'
 import { albums, audiobooks, discover, movies, people, podcasts, shows, stations, channels } from './catalog.mjs'
+import { backdrop as wide, cut, download } from './commons.mjs'
 
 const ff = (...args) => execFileSync('ffmpeg', ['-v', 'error', '-y', ...args])
 
@@ -78,6 +79,28 @@ function subtitles(file, lines) {
   writeFileSync(file, srt)
 }
 
+/**
+ * The README library's artwork, cut from Wikimedia Commons originals
+ * (public-catalog.mjs): the poster for a film, a wide backdrop made from
+ * it, and a show's title card for its episodes.
+ */
+async function commonsArt(root, images) {
+  const originals = path.join(root, 'commons')
+  for (const t of [...movies, ...shows]) {
+    const src = await download(t.art, originals)
+    await cut(src, path.join(images, `poster-${t.id}.jpg`), 780, 1170, 0.5)
+    await wide(src, path.join(images, `backdrop-${t.id}.jpg`), 1920, 1080)
+    t.seasons?.forEach((eps, si) => {
+      execFileSync('cp', [path.join(images, `poster-${t.id}.jpg`), path.join(images, `poster-${t.id}-s${si + 1}.jpg`)])
+      eps.forEach((_, ei) => execFileSync('cp', [path.join(images, `backdrop-${t.id}.jpg`), path.join(images, `still-${t.id}-${si + 1}-${ei + 1}.jpg`)]))
+    })
+  }
+  for (const [i, a] of albums.entries()) await cut(await download(a.art, originals), path.join(images, `cover-${i}.jpg`), 600, 600, 0.3)
+  for (const [i, b] of audiobooks.entries()) await cut(await download(b.art, originals), path.join(images, `book-${i}.jpg`), 600, 600, 0.3)
+  // The artist picture: the first album's cover.
+  albums.forEach((_, i) => execFileSync('cp', [path.join(images, 'cover-0.jpg'), path.join(images, `artist-${i}.jpg`)]))
+}
+
 export async function makeLibrary(root) {
   const media = path.join(root, 'media')
   const images = path.join(root, 'images')
@@ -88,28 +111,31 @@ export async function makeLibrary(root) {
     return file
   }
 
-  for (const m of movies) {
-    art(`poster-${m.id}.jpg`, poster(m.scene ?? m.id, m.title, true, undefined, '', m.hue ?? 0), 780, 1170)
-    art(`backdrop-${m.id}.jpg`, backdrop(m.scene ?? m.id, true, undefined, m.hue ?? 0), 1920, 1080)
-  }
-  for (const s of shows) {
-    art(`poster-${s.id}.jpg`, poster(s.scene ?? s.id, s.title, true, undefined, '', s.hue ?? 0), 780, 1170)
-    art(`backdrop-${s.id}.jpg`, backdrop(s.scene ?? s.id, true, undefined, s.hue ?? 0), 1920, 1080)
-    s.seasons.forEach((eps, si) => {
-      art(`poster-${s.id}-s${si + 1}.jpg`, poster(s.scene ?? s.id, s.title, true, undefined, `Season ${si + 1}`, (s.hue ?? 0) + si * 40), 780, 1170)
-      eps.forEach((_, ei) => art(`still-${s.id}-${si + 1}-${ei + 1}.jpg`, backdrop(s.scene ?? s.id, false, undefined, (s.hue ?? 0) + si * 40 + ei * 25), 1280, 720))
+  if (movies[0].art) await commonsArt(root, images)
+  else {
+    for (const m of movies) {
+      art(`poster-${m.id}.jpg`, poster(m.scene ?? m.id, m.title, true, undefined, '', m.hue ?? 0), 780, 1170)
+      art(`backdrop-${m.id}.jpg`, backdrop(m.scene ?? m.id, true, undefined, m.hue ?? 0), 1920, 1080)
+    }
+    for (const s of shows) {
+      art(`poster-${s.id}.jpg`, poster(s.scene ?? s.id, s.title, true, undefined, '', s.hue ?? 0), 780, 1170)
+      art(`backdrop-${s.id}.jpg`, backdrop(s.scene ?? s.id, true, undefined, s.hue ?? 0), 1920, 1080)
+      s.seasons.forEach((eps, si) => {
+        art(`poster-${s.id}-s${si + 1}.jpg`, poster(s.scene ?? s.id, s.title, true, undefined, `Season ${si + 1}`, (s.hue ?? 0) + si * 40), 780, 1170)
+        eps.forEach((_, ei) => art(`still-${s.id}-${si + 1}-${ei + 1}.jpg`, backdrop(s.scene ?? s.id, false, undefined, (s.hue ?? 0) + si * 40 + ei * 25), 1280, 720))
+      })
+    }
+    for (const p of people) art(`person-${p.id}.jpg`, portrait(p.id), 632, 632)
+    albums.forEach((a, i) => {
+      art(`cover-${i}.jpg`, cover(a.scene, a.album, a.artist, a.hue ?? 0), 600, 600)
+      art(`artist-${i}.jpg`, portrait(40 + i * 3), 632, 632)
     })
+    audiobooks.forEach((b, i) => art(`book-${i}.jpg`, cover(b.scene, b.title, b.author, b.hue ?? 0), 600, 600))
   }
   for (const t of discover) {
     art(`poster-${t.id}.jpg`, poster(t.scene, t.title, true, undefined, '', t.hue), 780, 1170)
     art(`backdrop-${t.id}.jpg`, backdrop(t.scene, true, undefined, t.hue), 1920, 1080)
   }
-  for (const p of people) art(`person-${p.id}.jpg`, portrait(p.id), 632, 632)
-  albums.forEach((a, i) => {
-    art(`cover-${i}.jpg`, cover(a.scene, a.album, a.artist, a.hue ?? 0), 600, 600)
-    art(`artist-${i}.jpg`, portrait(40 + i * 3), 632, 632)
-  })
-  audiobooks.forEach((b, i) => art(`book-${i}.jpg`, cover(b.scene, b.title, b.author, b.hue ?? 0), 600, 600))
   podcasts.forEach((p, i) => art(`podcast-${i}.jpg`, cover(p.scene, p.title, p.author, p.hue ?? 0), 600, 600))
   stations.forEach((st, i) => art(`station-${i}.jpg`, stationLogo(st.name, st.hue), 400, 400))
   channels.forEach((c, i) => art(`channel-${i}.jpg`, stationLogo(c.name, c.hue), 400, 400))
@@ -147,7 +173,7 @@ export async function makeLibrary(root) {
     a.tracks.forEach((t, n) => {
       const file = path.join(dir, `${String(n + 1).padStart(2, '0')} ${t}.flac`)
       // Made-up words for the first album's first song, timed, so the player shows lyrics.
-      if (i === 0 && n === 0) writeFileSync(file.replace(/\.flac$/, '.lrc'), openingCredits)
+      if (i === 0 && n === 0 && !a.art) writeFileSync(file.replace(/\.flac$/, '.lrc'), openingCredits)
       if (existsSync(file)) return
       // A little tune, so the visualizer has a beat, a bass line and some hiss to show.
       ff('-f', 'lavfi', '-i', `aevalsrc='${tune(110 + n * 20)}':s=22050:d=${150 + n * 23}`, '-af', 'volume=0.05', '-sample_fmt', 's16',

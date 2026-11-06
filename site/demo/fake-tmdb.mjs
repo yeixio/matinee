@@ -15,8 +15,10 @@ const genreNames = {
 }
 const genres = (ids) => ids.map((id) => ({ id, name: genreNames[id] }))
 const person = (id) => people.find((p) => p.id === id)
-const credit = (c) => ({ ...c, name: person(c.id).name, profile_path: `/person-${c.id}.jpg`, known_for_department: 'Acting' })
-const crewOf = (list) => list.map(([id, job]) => ({ id, job, department: job === 'Director' ? 'Directing' : job === 'Screenplay' ? 'Writing' : 'Sound', name: person(id).name, profile_path: `/person-${id}.jpg` }))
+// A person's photo, unless they have none (the README's real people don't).
+const photo = (id) => (person(id)?.photo === false ? null : `/person-${id}.jpg`)
+const credit = (c) => ({ ...c, name: person(c.id).name, profile_path: photo(c.id), known_for_department: 'Acting' })
+const crewOf = (list) => list.map(([id, job]) => ({ id, job, department: job === 'Director' ? 'Directing' : job === 'Screenplay' ? 'Writing' : 'Sound', name: person(id).name, profile_path: photo(id) }))
 const named = (list) => (list ?? []).map((name, i) => ({ id: i + 1, name }))
 
 function searchResult(t, tv) {
@@ -46,7 +48,7 @@ function showDetails(s) {
     genres: genres(s.genres), networks: named(s.networks), production_countries: [],
     spoken_languages: [{ iso_639_1: 'en', english_name: 'English', name: 'English' }],
     number_of_seasons: s.seasons.length, number_of_episodes: s.seasons.flat().length,
-    created_by: s.creators.map((id) => ({ id, name: person(id).name, profile_path: `/person-${id}.jpg` })),
+    created_by: s.creators.map((id) => ({ id, name: person(id).name, profile_path: photo(id) })),
     aggregate_credits: { cast: s.cast.map((c) => ({ ...credit(c), roles: [{ character: c.character, episode_count: s.seasons.flat().length }], total_episode_count: s.seasons.flat().length })), crew: [] },
     content_ratings: { results: [{ iso_3166_1: 'US', rating: s.cert }] },
     keywords: { results: [] },
@@ -98,7 +100,7 @@ function answer(p, q) {
   }
   if ((m = p.match(/^\/3\/person\/(\d+)$/))) {
     const x = person(Number(m[1]))
-    return x && { biography: x.bio, birthday: x.born, place_of_birth: x.place, known_for_department: x.known ?? 'Acting', profile_path: `/person-${x.id}.jpg` }
+    return x && { biography: x.bio, birthday: x.born, place_of_birth: x.place, known_for_department: x.known ?? 'Acting', profile_path: photo(x.id) }
   }
   return null
 }
