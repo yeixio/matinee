@@ -1297,6 +1297,25 @@ export type Backups = {
   lastError?: string
 }
 
+export type UpdateChannel = 'release' | 'main'
+export type UpdateSettings = { channel: UpdateChannel; auto: boolean }
+export type InstallKind = 'argocd' | 'kubernetes' | 'docker' | 'apt' | 'dnf' | 'homebrew' | 'app' | 'binary' | 'source'
+/** Newer versions of Matinee (Settings → Server health → Updates). */
+export type Updates = {
+  build: { version: string; release?: string; commit?: string }
+  install: { kind: InstallKind; canApply: boolean; channels: UpdateChannel[] | null; application?: string }
+  settings: UpdateSettings
+  checked?: string
+  available?: { channel: UpdateChannel; version: string; revision: string; imageTag: string; url: string; published?: string; commits?: number }
+  /** What the Argo CD Application installs now. */
+  source?: { targetRevision: string; imageTag?: string }
+  /** Argo CD follows main by itself. */
+  following?: boolean
+  /** The version on its way. */
+  applying?: string
+  lastError?: string
+}
+
 export interface PlaybackReport {
   kind: 'stall' | 'error'
   positionMs: number
@@ -1663,6 +1682,10 @@ export const api = {
   // rating: 1 to 10 (half stars), or null to take it back.
   rate: (id: number, rating: number | null) =>
     rating ? request<void>('PUT', `/api/v1/items/${id}/rating`, { rating }) : request<void>('DELETE', `/api/v1/items/${id}/rating`),
+  updates: () => request<Updates>('GET', '/api/v1/admin/updates'),
+  saveUpdateSettings: (s: UpdateSettings) => request<Updates>('PUT', '/api/v1/admin/updates', s),
+  checkUpdates: () => request<Updates>('POST', '/api/v1/admin/updates/check'),
+  applyUpdate: () => request<Updates>('POST', '/api/v1/admin/updates/apply'),
   backups: () => request<Backups>('GET', '/api/v1/admin/backups'),
   makeBackup: () => request<Backups>('POST', '/api/v1/admin/backups'),
   saveBackupSettings: (s: BackupSettings) => request<Backups>('PUT', '/api/v1/admin/backups/settings', s),

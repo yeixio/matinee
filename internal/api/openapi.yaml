@@ -1398,6 +1398,52 @@ paths:
             schema: { $ref: "#/components/schemas/NotificationIDs" }
       responses:
         "204": { description: Cleared. }
+  /admin/updates:
+    get:
+      summary: The running version, how it was installed, and any newer one (admins only)
+      responses:
+        "200":
+          description: Updates.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Updates" }
+    put:
+      summary: Which channel to follow and whether to install updates automatically (admins only)
+      description: >-
+        Under Argo CD, it also sets the Application: following the edge branch for main
+        installed automatically, otherwise staying on the running version until an update is installed.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/UpdateSettings" }
+      responses:
+        "200":
+          description: Saved, and looked for updates on the channel.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Updates" }
+  /admin/updates/check:
+    post:
+      summary: Look for a newer version now (admins only)
+      responses:
+        "200":
+          description: Looked.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Updates" }
+  /admin/updates/apply:
+    post:
+      summary: Install the newer version that was found (admins only)
+      description: >-
+        Under Argo CD, moves the Application to it and Argo CD rolls it out. A plain binary replaces
+        itself and restarts. Anywhere else, lastError says the server can't.
+      responses:
+        "200":
+          description: On its way (applying), or why not (lastError).
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Updates" }
   /admin/notifications:
     get:
       summary: What admins are told about (admins only)
@@ -4748,6 +4794,48 @@ components:
               time: { type: integer, description: Milliseconds. }
               reason: { type: string, enum: [scheduled, manual, upgrade, before-restore] }
         restore: { type: string, description: The backup that replaces the database at the next start. }
+        lastError: { type: string }
+    UpdateSettings:
+      type: object
+      properties:
+        channel: { type: string, enum: [release, main], description: Tagged releases (the default) or every build of main, a beta. }
+        auto: { type: boolean, description: Install updates as they're found, where the server can. }
+    Updates:
+      type: object
+      properties:
+        build:
+          type: object
+          properties:
+            version: { type: string }
+            release: { type: string, description: The release it is, such as 0.2.3. }
+            commit: { type: string, description: The commit on main it was built from. }
+        install:
+          type: object
+          properties:
+            kind: { type: string, enum: [argocd, kubernetes, docker, apt, dnf, homebrew, app, binary, source] }
+            canApply: { type: boolean, description: The server can install updates itself. }
+            channels: { type: array, items: { type: string, enum: [release, main] } }
+            application: { type: string, description: The Argo CD Application, as namespace/name. }
+        settings: { $ref: "#/components/schemas/UpdateSettings" }
+        checked: { type: string, format: date-time }
+        available:
+          type: object
+          properties:
+            channel: { type: string, enum: [release, main] }
+            version: { type: string }
+            revision: { type: string }
+            imageTag: { type: string }
+            url: { type: string }
+            published: { type: string, format: date-time }
+            commits: { type: integer, description: Commits on main since this build. }
+        source:
+          type: object
+          description: What the Argo CD Application installs now.
+          properties:
+            targetRevision: { type: string }
+            imageTag: { type: string }
+        following: { type: boolean, description: Argo CD follows the edge branch by itself. }
+        applying: { type: string, description: The version on its way. }
         lastError: { type: string }
     WatchedCount:
       type: object

@@ -1,0 +1,41 @@
+{{- with .Values.updates.argoCD.application }}
+{{- $name := include "matinee.fullname" $ }}
+# Lets Matinee move the Argo CD Application it's installed from to a newer
+# version (Settings → Server health → Updates): get and patch that one
+# Application, nothing else.
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ $name }}
+  labels:
+    {{- include "matinee.labels" $ | nindent 4 }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: {{ $name }}-updates
+  namespace: {{ $.Values.updates.argoCD.namespace }}
+  labels:
+    {{- include "matinee.labels" $ | nindent 4 }}
+rules:
+  - apiGroups: [argoproj.io]
+    resources: [applications]
+    resourceNames: [{{ . | quote }}]
+    verbs: [get, patch]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ $name }}-updates
+  namespace: {{ $.Values.updates.argoCD.namespace }}
+  labels:
+    {{- include "matinee.labels" $ | nindent 4 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: {{ $name }}-updates
+subjects:
+  - kind: ServiceAccount
+    name: {{ $name }}
+    namespace: {{ $.Release.Namespace }}
+{{- end }}

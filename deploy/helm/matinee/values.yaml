@@ -200,6 +200,21 @@ gpu:
     runtimeClassName: nvidia
     count: 1
 
+# Settings → Server health → Updates. Matinee looks for newer versions on
+# its own; to install them itself, it moves the Argo CD Application it's
+# installed from to the new version, and Argo CD rolls it out. Name that
+# Application here, and the chart lets Matinee read and change it (only
+# it). Have whatever manages the Application ignore its
+# spec.source.targetRevision and spec.source.helm.parameters, or it puts
+# them back: see the Kubernetes guide.
+updates:
+  argoCD:
+    # The Application's name, such as matinee. Empty: Matinee only says
+    # what's new, and helm upgrade installs it.
+    application: ""
+    # Where Argo CD keeps its Applications.
+    namespace: argocd
+
 env: []
 #  - name: MATINEE_SCAN_INTERVAL
 #    value: 30m

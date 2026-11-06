@@ -935,6 +935,45 @@
         "upgrade": "לפני עדכון",
         "before-restore": "לפני שחזור"
       }
+    },
+    "updates": {
+      "title": "עדכונים",
+      "running": "השרת הזה מריץ את <code>{{version}}</code>.",
+      "failed": "העדכונים נתקלו בבעיה: {{error}}",
+      "applying": "מעדכן ל־{{version}}. Matinee יופעל מחדש כשיהיה מוכן, והניגון ימשיך מאותה נקודה.",
+      "available": "{{version}} יצאה.",
+      "whatsNew": "מה חדש",
+      "apply": "עדכון ל־{{version}}",
+      "applyConfirm": "לעדכן עכשיו ל־{{version}}? Matinee יופעל מחדש, ומי שצופה ימשיך מאותה נקודה כשיחזור.",
+      "following": "Argo CD עוקב אחרי main, כך שכל בנייה חדשה נפרסת מעצמה.",
+      "upToDate": "הגרסה שלך עדכנית.",
+      "notChecked": "Matinee עוד לא חיפש עדכונים.",
+      "check": "בדיקה עכשיו",
+      "checking": "בודק…",
+      "checked": "נבדק לאחרונה {{time}}.",
+      "channel": "קבלת עדכונים מ־",
+      "release": "גרסאות",
+      "releaseHint": "גרסאות מתויגות, כל אחת עם הערות הגרסה שלה. מומלץ.",
+      "main": "Main",
+      "beta": "בטא מסוכנת",
+      "mainHint": "כל שינוי ברגע שהוא עובר את הבדיקות שלו. תקבלו חידושים ראשונים, ולפעמים גם דברים שבורים.",
+      "mainImagesOnly": "בניות של main קיימות רק כתמונות קונטיינר, ולכן השרת הזה עוקב אחרי הגרסאות.",
+      "mainConfirm": "לעקוב אחרי main? זו בטא: תקבלו כל שינוי ברגע שהוא עובר את הבדיקות שלו, לפני שמישהו ניסה אותו, ומדי פעם אחד מהם שבור.",
+      "auto": "התקנת עדכונים אוטומטית",
+      "autoHint": "Matinee בודק כל שעה ומתקין גרסה חדשה ברגע שהוא מוצא אחת. אחרת הוא מחכה שתלחצו על עדכון.",
+      "autoMainHint": "כל בנייה של main מותקנת ברגע שהיא מוכנה. אחרת Matinee מחכה שתלחצו על עדכון.",
+      "how": {
+        "argocd": "Matinee מתעדכן על ידי העברת ה־Application של Argo CD <code>{{app}}</code> לגרסה החדשה, ו־Argo CD פורס אותה.",
+        "kubernetes": "Matinee רץ מה־Helm chart שלו, ולכן מתעדכן עם <code>helm upgrade</code>. כדי לעדכן אותו מכאן, התקינו אותו עם Argo CD והגדירו את ערכי <code>updates.argoCD</code> של ה־chart.",
+        "docker": "Matinee רץ בקונטיינר, שלא יכול להחליף את עצמו. כדי לעדכן, משכו את התמונה החדשה וצרו מחדש את הקונטיינר, למשל עם <code>docker compose pull && docker compose up -d</code>. התגית <code>latest</code> עוקבת אחרי הגרסאות ו־<code>main</code> אחרי main. Watchtower, או חנות האפליקציות של ה־NAS, יכולים לעשות זאת אוטומטית.",
+        "apt": "Matinee הותקן עם apt, שמעדכן אותו: <code>sudo apt update && sudo apt upgrade matinee</code>",
+        "dnf": "Matinee הותקן עם dnf, שמעדכן אותו: <code>sudo dnf upgrade matinee</code>",
+        "homebrew": "Matinee הותקן עם Homebrew, שמעדכן אותו: <code>brew upgrade matinee</code>",
+        "app": "אפליקציית Matinee במחשב הזה מתקינה עדכונים בעצמה.",
+        "binary": "Matinee מתעדכן בכך שהוא מוריד את הגרסה החדשה, בודק אותה, שם אותה במקום הקובץ שלו ומופעל מחדש.",
+        "binaryReadOnly": "Matinee לא יכול להחליף את הקובץ שלו, כי אסור לו לכתוב לתיקייה שלו. הורידו את הגרסה החדשה מדף הגרסה והחליפו אותו ידנית.",
+        "source": "השרת הזה נבנה מקוד מקור, ולכן אין גרסה להשוות אליה. משכו את השינויים ובנו מחדש כדי לעדכן."
+      }
     }
   },
   "language": {

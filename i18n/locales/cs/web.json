@@ -939,6 +939,45 @@
         "upgrade": "Před aktualizací",
         "before-restore": "Před obnovením"
       }
+    },
+    "updates": {
+      "title": "Aktualizace",
+      "running": "Tento server běží ve verzi <code>{{version}}</code>.",
+      "failed": "Při aktualizacích nastal problém: {{error}}",
+      "applying": "Probíhá aktualizace na {{version}}. Matinee se restartuje, až bude připraveno, a přehrávání pokračuje tam, kde bylo.",
+      "available": "Vyšla verze {{version}}.",
+      "whatsNew": "Co je nového",
+      "apply": "Aktualizovat na {{version}}",
+      "applyConfirm": "Aktualizovat teď na {{version}}? Matinee se restartuje a kdo se dívá, bude po jeho návratu pokračovat tam, kde byl.",
+      "following": "Argo CD sleduje main, takže každé nové sestavení se nasadí samo.",
+      "upToDate": "Máte nejnovější verzi.",
+      "notChecked": "Matinee zatím nehledalo aktualizace.",
+      "check": "Zkontrolovat teď",
+      "checking": "Kontroluje se…",
+      "checked": "Naposledy zkontrolováno {{time}}.",
+      "channel": "Získávat aktualizace z",
+      "release": "Vydání",
+      "releaseHint": "Označené verze, každá s poznámkami k vydání. Doporučeno.",
+      "main": "Main",
+      "beta": "Riskantní beta",
+      "mainHint": "Každá změna, jakmile projde kontrolami. Novinky dostanete první, a někdy i věci, které nefungují.",
+      "mainImagesOnly": "Sestavení z main existují jen jako obrazy kontejnerů, takže tento server sleduje vydání.",
+      "mainConfirm": "Sledovat main? Je to beta: dostanete každou změnu, jakmile projde kontrolami, dřív, než ji kdokoli vyzkouší, a občas některá nefunguje.",
+      "auto": "Instalovat aktualizace automaticky",
+      "autoHint": "Matinee každou hodinu hledá a nové vydání nainstaluje, jakmile ho najde. Jinak čeká, až stisknete Aktualizovat.",
+      "autoMainHint": "Každé sestavení z main se nainstaluje, jakmile je připravené. Jinak Matinee čeká, až stisknete Aktualizovat.",
+      "how": {
+        "argocd": "Matinee se aktualizuje tak, že přesune Application v Argo CD <code>{{app}}</code> na novou verzi, a Argo CD ji nasadí.",
+        "kubernetes": "Matinee běží ze svého Helm chartu, takže se aktualizuje příkazem <code>helm upgrade</code>. Chcete-li ho aktualizovat odsud, nainstalujte ho přes Argo CD a nastavte hodnoty chartu <code>updates.argoCD</code>.",
+        "docker": "Matinee běží v kontejneru, který se nemůže sám nahradit. Pro aktualizaci stáhněte nový obraz a kontejner vytvořte znovu, například příkazem <code>docker compose pull && docker compose up -d</code>. Tag <code>latest</code> sleduje vydání a <code>main</code> sleduje main. Watchtower nebo obchod s aplikacemi vašeho NAS to zvládne automaticky.",
+        "apt": "Matinee bylo nainstalováno přes apt, který ho aktualizuje: <code>sudo apt update && sudo apt upgrade matinee</code>",
+        "dnf": "Matinee bylo nainstalováno přes dnf, který ho aktualizuje: <code>sudo dnf upgrade matinee</code>",
+        "homebrew": "Matinee bylo nainstalováno přes Homebrew, který ho aktualizuje: <code>brew upgrade matinee</code>",
+        "app": "Aplikace Matinee na tomto počítači instaluje aktualizace sama.",
+        "binary": "Matinee se aktualizuje tak, že stáhne novou verzi, zkontroluje ji, dá ji na místo svého souboru a restartuje se.",
+        "binaryReadOnly": "Matinee nemůže nahradit svůj vlastní soubor, protože nesmí zapisovat do své složky. Stáhněte novou verzi ze stránky vydání a nahraďte ho ručně.",
+        "source": "Tento server byl sestaven ze zdrojového kódu, takže není s jakým vydáním ho porovnat. Pro aktualizaci stáhněte změny a sestavte ho znovu."
+      }
     }
   },
   "language": {

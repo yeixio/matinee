@@ -935,6 +935,45 @@
         "upgrade": "Avant une mise à jour",
         "before-restore": "Avant une restauration"
       }
+    },
+    "updates": {
+      "title": "Mises à jour",
+      "running": "Ce serveur exécute <code>{{version}}</code>.",
+      "failed": "Les mises à jour ont rencontré un problème : {{error}}",
+      "applying": "Mise à jour vers {{version}}. Matinee redémarre dès qu'elle est prête, et la lecture reprend où elle en était.",
+      "available": "{{version}} est disponible.",
+      "whatsNew": "Nouveautés",
+      "apply": "Mettre à jour vers {{version}}",
+      "applyConfirm": "Mettre à jour vers {{version}} maintenant ? Matinee redémarre, et ceux qui regardent reprennent où ils en étaient à son retour.",
+      "following": "Argo CD suit main, donc chaque nouvelle build se déploie toute seule.",
+      "upToDate": "Vous êtes à jour.",
+      "notChecked": "Matinee n'a pas encore cherché de mises à jour.",
+      "check": "Vérifier maintenant",
+      "checking": "Vérification…",
+      "checked": "Dernière vérification : {{time}}.",
+      "channel": "Recevoir les mises à jour de",
+      "release": "Versions publiées",
+      "releaseHint": "Versions étiquetées, chacune avec ses notes de version. Recommandé.",
+      "main": "Main",
+      "beta": "Bêta risquée",
+      "mainHint": "Chaque changement dès qu'il passe ses vérifications. Vous avez les nouveautés en premier, et parfois des choses cassées.",
+      "mainImagesOnly": "Les builds de main n'existent qu'en images de conteneur, donc ce serveur suit les versions publiées.",
+      "mainConfirm": "Suivre main ? C'est une bêta : vous recevez chaque changement dès qu'il passe ses vérifications, avant que quiconque l'ait essayé, et de temps en temps l'un d'eux est cassé.",
+      "auto": "Installer les mises à jour automatiquement",
+      "autoHint": "Matinee vérifie toutes les heures et installe une nouvelle version dès qu'il en trouve une. Sinon, il attend que vous appuyiez sur Mettre à jour.",
+      "autoMainHint": "Chaque build de main s'installe dès qu'elle est prête. Sinon, Matinee attend que vous appuyiez sur Mettre à jour.",
+      "how": {
+        "argocd": "Matinee se met à jour en déplaçant l'Application Argo CD <code>{{app}}</code> vers la nouvelle version, et Argo CD la déploie.",
+        "kubernetes": "Matinee tourne depuis son chart Helm, il se met donc à jour avec <code>helm upgrade</code>. Pour le mettre à jour d'ici, installez-le avec Argo CD et définissez les valeurs <code>updates.argoCD</code> du chart.",
+        "docker": "Matinee tourne dans un conteneur, qui ne peut pas se remplacer lui-même. Pour mettre à jour, récupérez la nouvelle image et recréez le conteneur, par exemple avec <code>docker compose pull && docker compose up -d</code>. Le tag <code>latest</code> suit les versions publiées et <code>main</code> suit main. Watchtower, ou la boutique d'apps de votre NAS, peut le faire automatiquement.",
+        "apt": "Matinee a été installé avec apt, qui le met à jour : <code>sudo apt update && sudo apt upgrade matinee</code>",
+        "dnf": "Matinee a été installé avec dnf, qui le met à jour : <code>sudo dnf upgrade matinee</code>",
+        "homebrew": "Matinee a été installé avec Homebrew, qui le met à jour : <code>brew upgrade matinee</code>",
+        "app": "L'app Matinee de cet ordinateur installe elle-même les mises à jour.",
+        "binary": "Matinee se met à jour en téléchargeant la nouvelle version, en la vérifiant, en la mettant à la place de son propre fichier, puis en redémarrant.",
+        "binaryReadOnly": "Matinee ne peut pas remplacer son propre fichier, car il n'a pas le droit d'écrire dans son dossier. Téléchargez la nouvelle version depuis sa page de publication et remplacez-le à la main.",
+        "source": "Ce serveur a été compilé depuis les sources, il n'y a donc pas de version publiée à laquelle le comparer. Récupérez les changements et recompilez pour mettre à jour."
+      }
     }
   },
   "language": {

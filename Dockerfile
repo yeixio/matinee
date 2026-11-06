@@ -42,7 +42,8 @@ RUN apt-get update \
 ENV NVIDIA_DRIVER_CAPABILITIES=compute,video,utility
 COPY --from=server /out/matinee /usr/local/bin/matinee
 USER matinee
-ENV MATINEE_DATA_DIR=/data MATINEE_ADDR=:7171
+# MATINEE_INSTALL tells Settings → Updates that a new image is the way to update.
+ENV MATINEE_DATA_DIR=/data MATINEE_ADDR=:7171 MATINEE_INSTALL=docker
 VOLUME /data
 EXPOSE 7171
 HEALTHCHECK --interval=30s --timeout=3s CMD wget -qO- http://127.0.0.1:7171/healthz || exit 1

@@ -19,6 +19,9 @@ spec:
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
     spec:
+      {{- if .Values.updates.argoCD.application }}
+      serviceAccountName: {{ include "matinee.fullname" . }}
+      {{- end }}
       {{- if .Values.remoteAccess.enabled }}
       # Remote access talks to the home router, which only the node's own
       # network reaches.
@@ -83,6 +86,13 @@ spec:
           env:
             - name: MATINEE_ADDR
               value: ":7171"
+            # Settings → Server health → Updates says who installs updates.
+            - name: MATINEE_INSTALL
+              value: helm
+            {{- with .Values.updates.argoCD.application }}
+            - name: MATINEE_ARGOCD_APPLICATION
+              value: {{ printf "%s/%s" $.Values.updates.argoCD.namespace . | quote }}
+            {{- end }}
             - name: MATINEE_DRAIN_DELAY
               value: "{{ include "matinee.drainDelay" . }}s"
             - name: MATINEE_SHUTDOWN_TIMEOUT

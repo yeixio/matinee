@@ -927,6 +927,45 @@
         "upgrade": "Trước khi cập nhật",
         "before-restore": "Trước khi khôi phục"
       }
+    },
+    "updates": {
+      "title": "Cập nhật",
+      "running": "Máy chủ này đang chạy <code>{{version}}</code>.",
+      "failed": "Cập nhật gặp sự cố: {{error}}",
+      "applying": "Đang cập nhật lên {{version}}. Matinee khởi động lại khi sẵn sàng, và việc phát tiếp tục từ chỗ đang xem.",
+      "available": "Đã có {{version}}.",
+      "whatsNew": "Có gì mới",
+      "apply": "Cập nhật lên {{version}}",
+      "applyConfirm": "Cập nhật lên {{version}} ngay bây giờ? Matinee sẽ khởi động lại, và ai đang xem sẽ tiếp tục từ chỗ cũ khi nó quay lại.",
+      "following": "Argo CD theo dõi main, nên mỗi bản dựng mới tự được triển khai.",
+      "upToDate": "Bạn đang dùng bản mới nhất.",
+      "notChecked": "Matinee chưa tìm bản cập nhật.",
+      "check": "Kiểm tra ngay",
+      "checking": "Đang kiểm tra…",
+      "checked": "Kiểm tra lần cuối {{time}}.",
+      "channel": "Nhận cập nhật từ",
+      "release": "Bản phát hành",
+      "releaseHint": "Các phiên bản có thẻ, mỗi bản kèm ghi chú phát hành. Nên dùng.",
+      "main": "Main",
+      "beta": "Beta rủi ro",
+      "mainHint": "Mọi thay đổi ngay khi vượt qua kiểm tra. Bạn có cái mới trước tiên, và đôi khi cả thứ bị hỏng.",
+      "mainImagesOnly": "Bản dựng của main chỉ có dạng image container, nên máy chủ này theo các bản phát hành.",
+      "mainConfirm": "Theo dõi main? Đây là bản beta: bạn nhận mọi thay đổi ngay khi vượt qua kiểm tra, trước khi có ai thử, và thỉnh thoảng sẽ có cái bị hỏng.",
+      "auto": "Tự động cài đặt cập nhật",
+      "autoHint": "Matinee kiểm tra mỗi giờ và cài bản phát hành mới ngay khi tìm thấy. Nếu không, nó chờ bạn nhấn Cập nhật.",
+      "autoMainHint": "Mỗi bản dựng của main được cài ngay khi sẵn sàng. Nếu không, Matinee chờ bạn nhấn Cập nhật.",
+      "how": {
+        "argocd": "Matinee tự cập nhật bằng cách chuyển Application Argo CD <code>{{app}}</code> sang phiên bản mới, và Argo CD triển khai nó.",
+        "kubernetes": "Matinee chạy từ Helm chart của nó, nên được cập nhật bằng <code>helm upgrade</code>. Để cập nhật từ đây, hãy cài bằng Argo CD và đặt các giá trị <code>updates.argoCD</code> của chart.",
+        "docker": "Matinee chạy trong một container, vốn không thể tự thay thế. Để cập nhật, hãy kéo image mới và tạo lại container, chẳng hạn bằng <code>docker compose pull && docker compose up -d</code>. Thẻ <code>latest</code> theo các bản phát hành và <code>main</code> theo main. Watchtower, hoặc kho ứng dụng của NAS, có thể làm việc này tự động.",
+        "apt": "Matinee được cài bằng apt, và apt cập nhật nó: <code>sudo apt update && sudo apt upgrade matinee</code>",
+        "dnf": "Matinee được cài bằng dnf, và dnf cập nhật nó: <code>sudo dnf upgrade matinee</code>",
+        "homebrew": "Matinee được cài bằng Homebrew, và Homebrew cập nhật nó: <code>brew upgrade matinee</code>",
+        "app": "Ứng dụng Matinee trên máy tính này tự cài đặt cập nhật.",
+        "binary": "Matinee tự cập nhật bằng cách tải phiên bản mới, kiểm tra, đặt vào chỗ tệp của chính nó và khởi động lại.",
+        "binaryReadOnly": "Matinee không thể thay tệp của chính nó vì không được phép ghi vào thư mục của mình. Hãy tải phiên bản mới từ trang phát hành và thay thủ công.",
+        "source": "Máy chủ này được dựng từ mã nguồn, nên không có bản phát hành nào để so sánh. Hãy kéo thay đổi về và dựng lại để cập nhật."
+      }
     }
   },
   "language": {

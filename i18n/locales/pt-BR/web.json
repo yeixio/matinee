@@ -935,6 +935,45 @@
         "upgrade": "Antes de uma atualização",
         "before-restore": "Antes de uma restauração"
       }
+    },
+    "updates": {
+      "title": "Atualizações",
+      "running": "Este servidor roda <code>{{version}}</code>.",
+      "failed": "As atualizações tiveram um problema: {{error}}",
+      "applying": "Atualizando para {{version}}. O Matinee reinicia quando estiver pronto, e a reprodução continua de onde estava.",
+      "available": "{{version}} foi lançado.",
+      "whatsNew": "Novidades",
+      "apply": "Atualizar para {{version}}",
+      "applyConfirm": "Atualizar para {{version}} agora? O Matinee reinicia, e quem estiver assistindo continua de onde estava quando ele voltar.",
+      "following": "O Argo CD segue main, então cada nova build é implantada sozinha.",
+      "upToDate": "Você está atualizado.",
+      "notChecked": "O Matinee ainda não procurou atualizações.",
+      "check": "Verificar agora",
+      "checking": "Verificando…",
+      "checked": "Última verificação: {{time}}.",
+      "channel": "Receber atualizações de",
+      "release": "Lançamentos",
+      "releaseHint": "Versões com tag, cada uma com suas notas de lançamento. Recomendado.",
+      "main": "Main",
+      "beta": "Beta arriscado",
+      "mainHint": "Cada mudança assim que passa nas verificações. Você recebe as novidades primeiro e, às vezes, coisas quebradas.",
+      "mainImagesOnly": "As builds de main existem só como imagens de contêiner, então este servidor segue os lançamentos.",
+      "mainConfirm": "Seguir main? É um beta: você recebe cada mudança assim que passa nas verificações, antes que alguém a teste, e de vez em quando uma está quebrada.",
+      "auto": "Instalar atualizações automaticamente",
+      "autoHint": "O Matinee verifica a cada hora e instala um novo lançamento assim que encontra. Caso contrário, espera você tocar em Atualizar.",
+      "autoMainHint": "Cada build de main é instalada assim que fica pronta. Caso contrário, o Matinee espera você tocar em Atualizar.",
+      "how": {
+        "argocd": "O Matinee se atualiza movendo a Application do Argo CD <code>{{app}}</code> para a nova versão, e o Argo CD a implanta.",
+        "kubernetes": "O Matinee roda a partir do seu chart do Helm, então é atualizado com <code>helm upgrade</code>. Para atualizá-lo daqui, instale-o com o Argo CD e defina os valores <code>updates.argoCD</code> do chart.",
+        "docker": "O Matinee roda em um contêiner, que não consegue substituir a si mesmo. Para atualizar, baixe a nova imagem e recrie o contêiner, por exemplo com <code>docker compose pull && docker compose up -d</code>. A tag <code>latest</code> segue os lançamentos e <code>main</code> segue main. O Watchtower, ou a loja de apps do seu NAS, pode fazer isso automaticamente.",
+        "apt": "O Matinee foi instalado com o apt, que o atualiza: <code>sudo apt update && sudo apt upgrade matinee</code>",
+        "dnf": "O Matinee foi instalado com o dnf, que o atualiza: <code>sudo dnf upgrade matinee</code>",
+        "homebrew": "O Matinee foi instalado com o Homebrew, que o atualiza: <code>brew upgrade matinee</code>",
+        "app": "O app Matinee neste computador instala as atualizações sozinho.",
+        "binary": "O Matinee se atualiza baixando a nova versão, verificando-a, colocando-a no lugar do próprio arquivo e reiniciando.",
+        "binaryReadOnly": "O Matinee não consegue substituir o próprio arquivo, porque não tem permissão para gravar na pasta dele. Baixe a nova versão na página do lançamento e substitua à mão.",
+        "source": "Este servidor foi compilado a partir do código-fonte, então não há lançamento para comparar. Baixe as mudanças e compile de novo para atualizar."
+      }
     }
   },
   "language": {

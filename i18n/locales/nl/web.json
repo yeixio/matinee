@@ -931,6 +931,45 @@
         "upgrade": "Vóór een update",
         "before-restore": "Vóór een herstel"
       }
+    },
+    "updates": {
+      "title": "Updates",
+      "running": "Deze server draait <code>{{version}}</code>.",
+      "failed": "Er ging iets mis met de updates: {{error}}",
+      "applying": "Bijwerken naar {{version}}. Matinee start opnieuw zodra het klaar is, en afspelen gaat verder waar het was.",
+      "available": "{{version}} is uit.",
+      "whatsNew": "Wat is er nieuw",
+      "apply": "Bijwerken naar {{version}}",
+      "applyConfirm": "Nu bijwerken naar {{version}}? Matinee start opnieuw, en wie aan het kijken is gaat verder waar hij was zodra het terug is.",
+      "following": "Argo CD volgt main, dus elke nieuwe build wordt vanzelf uitgerold.",
+      "upToDate": "Je bent helemaal bij.",
+      "notChecked": "Matinee heeft nog niet naar updates gezocht.",
+      "check": "Nu controleren",
+      "checking": "Controleren…",
+      "checked": "Laatst gecontroleerd: {{time}}.",
+      "channel": "Updates ontvangen van",
+      "release": "Releases",
+      "releaseHint": "Getagde versies, elk met release notes. Aanbevolen.",
+      "main": "Main",
+      "beta": "Riskante bèta",
+      "mainHint": "Elke wijziging zodra die door de controles komt. Je krijgt nieuwe dingen als eerste, en soms dingen die stuk zijn.",
+      "mainImagesOnly": "Builds van main bestaan alleen als container-images, dus deze server volgt de releases.",
+      "mainConfirm": "main volgen? Het is een bèta: je krijgt elke wijziging zodra die door de controles komt, voordat iemand het heeft geprobeerd, en af en toe is er een stuk.",
+      "auto": "Updates automatisch installeren",
+      "autoHint": "Matinee kijkt elk uur en installeert een nieuwe release zodra het er een vindt. Anders wacht het tot je op Bijwerken drukt.",
+      "autoMainHint": "Elke build van main wordt geïnstalleerd zodra die klaar is. Anders wacht Matinee tot je op Bijwerken drukt.",
+      "how": {
+        "argocd": "Matinee werkt zichzelf bij door de Argo CD-Application <code>{{app}}</code> naar de nieuwe versie te zetten, en Argo CD rolt die uit.",
+        "kubernetes": "Matinee draait vanuit zijn Helm-chart en wordt dus bijgewerkt met <code>helm upgrade</code>. Om het hiervandaan bij te werken, installeer je het met Argo CD en stel je de waarden <code>updates.argoCD</code> van de chart in.",
+        "docker": "Matinee draait in een container, die zichzelf niet kan vervangen. Haal om bij te werken de nieuwe image op en maak de container opnieuw, bijvoorbeeld met <code>docker compose pull && docker compose up -d</code>. De tag <code>latest</code> volgt de releases en <code>main</code> volgt main. Watchtower, of de app-store van je NAS, kan het automatisch doen.",
+        "apt": "Matinee is geïnstalleerd met apt, dat het bijwerkt: <code>sudo apt update && sudo apt upgrade matinee</code>",
+        "dnf": "Matinee is geïnstalleerd met dnf, dat het bijwerkt: <code>sudo dnf upgrade matinee</code>",
+        "homebrew": "Matinee is geïnstalleerd met Homebrew, dat het bijwerkt: <code>brew upgrade matinee</code>",
+        "app": "De Matinee-app op deze computer installeert updates zelf.",
+        "binary": "Matinee werkt zichzelf bij door de nieuwe versie te downloaden, te controleren, op de plek van zijn eigen bestand te zetten en opnieuw te starten.",
+        "binaryReadOnly": "Matinee kan zijn eigen bestand niet vervangen, omdat het niet in zijn map mag schrijven. Download de nieuwe versie van de releasepagina en vervang het met de hand.",
+        "source": "Deze server is vanuit de broncode gebouwd, dus er is geen release om mee te vergelijken. Haal de wijzigingen op en bouw opnieuw om bij te werken."
+      }
     }
   },
   "language": {

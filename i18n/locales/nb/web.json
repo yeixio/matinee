@@ -931,6 +931,45 @@
         "upgrade": "Før en oppdatering",
         "before-restore": "Før en gjenoppretting"
       }
+    },
+    "updates": {
+      "title": "Oppdateringer",
+      "running": "Denne serveren kjører <code>{{version}}</code>.",
+      "failed": "Oppdateringene møtte et problem: {{error}}",
+      "applying": "Oppdaterer til {{version}}. Matinee starter på nytt når den er klar, og avspillingen fortsetter der den var.",
+      "available": "{{version}} er ute.",
+      "whatsNew": "Hva er nytt",
+      "apply": "Oppdater til {{version}}",
+      "applyConfirm": "Oppdatere til {{version}} nå? Matinee starter på nytt, og de som ser på fortsetter der de var når den er tilbake.",
+      "following": "Argo CD følger main, så hvert nytt bygg rulles ut av seg selv.",
+      "upToDate": "Du er oppdatert.",
+      "notChecked": "Matinee har ikke sett etter oppdateringer ennå.",
+      "check": "Sjekk nå",
+      "checking": "Sjekker…",
+      "checked": "Sist sjekket {{time}}.",
+      "channel": "Hent oppdateringer fra",
+      "release": "Utgivelser",
+      "releaseHint": "Taggede versjoner, hver med sine utgivelsesnotater. Anbefalt.",
+      "main": "Main",
+      "beta": "Risikabel beta",
+      "mainHint": "Hver endring så snart den består kontrollene. Du får nye ting først, og av og til ting som er ødelagt.",
+      "mainImagesOnly": "Bygg av main finnes bare som containerbilder, så denne serveren følger utgivelsene.",
+      "mainConfirm": "Følge main? Det er en beta: du får hver endring så snart den består kontrollene, før noen har prøvd den, og av og til er en ødelagt.",
+      "auto": "Installer oppdateringer automatisk",
+      "autoHint": "Matinee ser etter hver time og installerer en ny utgivelse så snart den finner en. Ellers venter den til du trykker Oppdater.",
+      "autoMainHint": "Hvert bygg av main installeres så snart det er klart. Ellers venter Matinee til du trykker Oppdater.",
+      "how": {
+        "argocd": "Matinee oppdaterer seg ved å flytte Argo CD-applikasjonen <code>{{app}}</code> til den nye versjonen, og Argo CD ruller den ut.",
+        "kubernetes": "Matinee kjører fra sitt Helm-chart og oppdateres derfor med <code>helm upgrade</code>. For å oppdatere herfra, installer det med Argo CD og angi chartets verdier <code>updates.argoCD</code>.",
+        "docker": "Matinee kjører i en container, som ikke kan erstatte seg selv. For å oppdatere, hent det nye bildet og lag containeren på nytt, for eksempel med <code>docker compose pull && docker compose up -d</code>. Taggen <code>latest</code> følger utgivelsene og <code>main</code> følger main. Watchtower, eller appbutikken på NAS-en din, kan gjøre det automatisk.",
+        "apt": "Matinee ble installert med apt, som oppdaterer det: <code>sudo apt update && sudo apt upgrade matinee</code>",
+        "dnf": "Matinee ble installert med dnf, som oppdaterer det: <code>sudo dnf upgrade matinee</code>",
+        "homebrew": "Matinee ble installert med Homebrew, som oppdaterer det: <code>brew upgrade matinee</code>",
+        "app": "Matinee-appen på denne datamaskinen installerer oppdateringer selv.",
+        "binary": "Matinee oppdaterer seg ved å laste ned den nye versjonen, sjekke den, legge den i stedet for sin egen fil og starte på nytt.",
+        "binaryReadOnly": "Matinee kan ikke erstatte sin egen fil, fordi den ikke har lov til å skrive i mappen sin. Last ned den nye versjonen fra utgivelsessiden og erstatt den for hånd.",
+        "source": "Denne serveren ble bygget fra kildekode, så det finnes ingen utgivelse å sammenligne med. Hent endringene og bygg på nytt for å oppdatere."
+      }
     }
   },
   "language": {
