@@ -6,7 +6,7 @@ sidebar:
   order: 12
 ---
 
-Matinee looks for a newer version every hour and shows it in **Settings → Server health → Updates**, with a link to what's new. Where it can install updates itself, it does so when you press **Update**, or as soon as it finds one if you turn on **Install updates automatically**.
+Matinee looks for a newer version every hour and shows it in **Settings → Server health → Updates**, with a link to what's new. Where it can install updates itself, it does so when you press **Update**, or by itself if you turn on **Install updates automatically**. Installing restarts the server, so an automatic update waits until nobody is watching or listening; Settings says when one is waiting.
 
 ## Releases or main
 
@@ -27,14 +27,24 @@ It depends on how you installed Matinee, and Settings says which applies to your
 | Kubernetes, through Argo CD | Matinee moves its Argo CD Application to the new version and Argo CD rolls it out. Needs a little setup; see below. |
 | Kubernetes, with Helm | `helm upgrade` with the new chart version. Matinee shows what's new. |
 | Docker, Compose, a NAS app store | A container can't replace itself: pull the new image and recreate the container (`docker compose pull && docker compose up -d`). The `latest` tag follows releases and `main` follows main. Watchtower, or your NAS's app store, can do it automatically. |
-| apt or dnf | Your package manager: `sudo apt upgrade matinee` or `sudo dnf upgrade matinee`. |
-| Homebrew | `brew upgrade matinee`. |
+| apt or dnf | Matinee asks the small helper that comes with its package to upgrade it, and the helper has apt or dnf upgrade the `matinee` package and nothing else. See below. By hand: `sudo apt update && sudo apt upgrade matinee` or `sudo dnf upgrade matinee`. |
+| Homebrew | Matinee runs `brew upgrade matinee` as the user it runs as, then restarts into the new version. |
 | Matinee Server for Mac, the Windows installer | The app updates itself. |
 | The download for Linux or macOS | Matinee downloads the new version, checks it against the release's checksums, puts it in place of its own file and restarts. It needs to be allowed to write to its own folder. |
 
 When Matinee restarts into a new version, the apps say so and pick up where they were once it's back.
 
 If your server can't install updates itself, Matinee can still tell you about them: leave the channel on **Releases** and check Settings now and then, or turn on the restart [alert](/docs/server/alerts/) to hear when it comes back on a new version.
+
+## apt and dnf
+
+The server runs as its own `matinee` user, which can't install packages. The package adds a helper for that: `matinee-update.path`, a systemd unit that watches `/var/lib/matinee/update/request`. When Matinee writes there, the helper runs as root, upgrades only the `matinee` package from the repository you installed it from, and the package restarts the server. It writes what happened to `/var/log/matinee-update.log`, and Settings shows the error if it didn't work.
+
+To keep updates in your own hands, turn the helper off. It stays off through later upgrades, and Settings shows the command to run instead:
+
+```sh
+sudo systemctl disable --now matinee-update.path
+```
 
 ## Kubernetes with Argo CD
 

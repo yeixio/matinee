@@ -97,6 +97,10 @@ func TestDetect(t *testing.T) {
 		{"deb", rel, env(map[string]string{"MATINEE_INSTALL": "package"}, []string{"/etc/debian_version"}, "/usr/bin/matinee"), KindApt, false, false},
 		{"rpm", rel, env(nil, nil, "/usr/bin/matinee"), KindDnf, false, false},
 		{"brew", rel, env(nil, nil, "/opt/homebrew/Cellar/matinee/0.2.2/bin/matinee"), KindHomebrew, false, false},
+		{"brew it can run", rel, env(nil, []string{"/opt/homebrew/bin/brew"}, "/opt/homebrew/Cellar/matinee/0.2.2/bin/matinee"), KindHomebrew, true, false},
+		{"deb with its helper", rel, env(map[string]string{"MATINEE_INSTALL": "package"}, []string{"/etc/debian_version", "/usr/lib/systemd/system/matinee-update.path", packageHelper}, "/usr/bin/matinee"), KindApt, true, false},
+		{"rpm with its helper", rel, env(nil, []string{"/lib/systemd/system/matinee-update.path", packageHelper}, "/usr/bin/matinee"), KindDnf, true, false},
+		{"deb with its helper turned off", rel, env(map[string]string{"MATINEE_INSTALL": "package"}, []string{"/etc/debian_version", "/usr/lib/systemd/system/matinee-update.path"}, "/usr/bin/matinee"), KindApt, false, false},
 		{"mac app", rel, env(nil, nil, "/Applications/Matinee Server.app/Contents/MacOS/matinee"), KindApp, false, false},
 		{"windows app", rel, env(map[string]string{"MATINEE_STOP_ON_STDIN_CLOSE": "1"}, nil, `C:\Program Files\Matinee\matinee.exe`), KindApp, false, false},
 		{"binary", rel, env(nil, nil, "/opt/matinee/matinee"), KindBinary, true, false},
@@ -403,5 +407,59 @@ func TestApplyingExpires(t *testing.T) {
 	now = now.Add(applyingFor + time.Minute)
 	if a := m.Status(ctx).Applying; a != "" {
 		t.Fatalf("still applying %s after the rollout should have finished", a)
+	}
+}
+
+func TestAutomaticWaitsForNobodyWatching(t *testing.T) {
+	ctx := context.Background()
+	f := &fakeGitHub{tag: "v0.2.3"}
+	watching := true
+	m := &Manager{
+		Store: memStore{}, Build: ParseBuild("v0.2.2"),
+		Install:    Install{Kind: KindBinary, CanApply: true, Channels: []string{ChannelRelease}},
+		GitHub:     &GitHub{Base: f.server(t).URL + "/repos/x/m"},
+		Executable: filepath.Join(t.TempDir(), "matinee"),
+		Busy:       func() bool { return watching },
+	}
+	if _, err := m.SaveSettings(ctx, Settings{Channel: ChannelRelease, Auto: true}); err != nil {
+		t.Fatal(err)
+	}
+	st := m.Status(ctx)
+	if !st.Waiting || st.Applying != "" || st.LastError != "" || st.Available == nil {
+		t.Fatalf("someone is watching, so it should wait: %+v", st)
+	}
+	// Once nobody is, it installs (and here fails: the release has no archive).
+	watching = false
+	m.Check(ctx)
+	if st := m.Status(ctx); st.Waiting || st.LastError == "" {
+		t.Fatalf("nobody is watching, so it should have tried: %+v", st)
+	}
+}
+
+func TestPackageHelper(t *testing.T) {
+	if r := packageResult("upgrading\nresult: ok\n"); r != "ok" {
+		t.Error(r)
+	}
+	if r := packageResult("upgrading\nReading package lists...\n"); r != "" {
+		t.Error(r)
+	}
+	dir := t.TempDir()
+	req, log := filepath.Join(dir, "update", "request"), filepath.Join(dir, "update.log")
+	// The helper: removes the request, then finds nothing newer.
+	go func() {
+		for {
+			if _, err := os.Stat(req); err == nil {
+				os.Remove(req)
+				time.Sleep(20 * time.Millisecond)
+				os.WriteFile(log, []byte("matinee is already the newest version\nresult: unchanged\n"), 0o644)
+				return
+			}
+			time.Sleep(10 * time.Millisecond)
+		}
+	}()
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+	if err := requestPackage(ctx, req, log); err == nil || !strings.Contains(err.Error(), "doesn't have the new version") {
+		t.Fatalf("got %v", err)
 	}
 }

@@ -53,6 +53,14 @@ contents:
       mode: 0755
   - src: ${ROOT}/packaging/linux/matinee.service
     dst: /usr/lib/systemd/system/matinee.service
+  - src: ${ROOT}/packaging/linux/matinee-update.path
+    dst: /usr/lib/systemd/system/matinee-update.path
+  - src: ${ROOT}/packaging/linux/matinee-update.service
+    dst: /usr/lib/systemd/system/matinee-update.service
+  - src: ${ROOT}/packaging/linux/update.sh
+    dst: /usr/lib/matinee/update.sh
+    file_info:
+      mode: 0755
   - src: ${ROOT}/packaging/linux/matinee.env
     dst: /etc/matinee/matinee.env
     type: config|noreplace

@@ -1314,6 +1314,8 @@ export type Updates = {
   /** The version on its way. */
   applying?: string
   lastError?: string
+  /** An automatic update that installs once nobody is watching. */
+  waiting?: boolean
 }
 
 export interface PlaybackReport {

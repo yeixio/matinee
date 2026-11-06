@@ -32,7 +32,23 @@ type Install struct {
 	Channels []string `json:"channels"`
 	// Application is the Argo CD Application, as namespace/name.
 	Application string `json:"application,omitempty"`
+	// Prefix is Homebrew's prefix, such as /opt/homebrew.
+	Prefix string `json:"-"`
 }
+
+// PackageRequest is where the server asks the Linux packages' root helper
+// (matinee-update.path) to upgrade the matinee package, and PackageLog is
+// where the helper says how it went. The log is outside the server's data
+// directory, which the helper, as root, never writes into.
+const (
+	PackageRequest = "/var/lib/matinee/update/request"
+	PackageLog     = "/var/log/matinee-update.log"
+)
+
+// packageHelper is there while the packages' helper is turned on
+// (systemctl enable matinee-update.path); an admin who turns it off installs
+// updates by hand.
+const packageHelper = "/etc/systemd/system/multi-user.target.wants/matinee-update.path"
 
 // Env reads the environment; tests give their own.
 type Env struct {
@@ -114,6 +130,14 @@ func Detect(b Build, env Env) Install {
 	case KindBinary:
 		// Windows won't replace a running program; its installer does that.
 		in.CanApply = env.GOOS != "windows" && env.Executable != "" && env.Writable(filepath.Dir(env.Executable))
+	case KindHomebrew:
+		// brew upgrade runs as the user the service runs as, who installed it.
+		if i := strings.Index(env.Executable, "/Cellar/"); i > 0 {
+			in.Prefix = env.Executable[:i]
+			in.CanApply = env.Exists(filepath.Join(in.Prefix, "bin", "brew"))
+		}
+	case KindApt, KindDnf:
+		in.CanApply = env.Exists(packageHelper) && env.Writable(filepath.Dir(PackageRequest))
 	case KindSource:
 		in.Channels = nil
 	}
