@@ -1136,11 +1136,19 @@
     "join": "Vytvořit účet",
     "welcome": "Vítejte v {{server}}",
     "welcomeHint": "Sledovat můžete přímo tady v prohlížeči, nebo na telefonu a televizi.",
-    "apps": "Sledovat na telefonu nebo televizi",
-    "appsHint": "Stáhněte si aplikaci Matinee, zvolte Přidat server a zadejte tuto adresu. Pak se přihlaste novým uživatelským jménem a heslem.",
     "copy": "Kopírovat",
     "getApps": "Kde získat aplikace",
-    "start": "Začít sledovat"
+    "start": "Začít sledovat",
+    "phone": "Sledujte na telefonu",
+    "phoneHint": "Otevřete aplikaci Matinee a ta za vás přidá tento server. Pak se přihlaste novým uživatelským jménem a heslem.",
+    "openApp": "Otevřít v aplikaci Matinee",
+    "qrLabel": "QR kód, který otevře aplikaci Matinee v telefonu",
+    "scanHint": "Naskenujte ho fotoaparátem telefonu. Aplikace Matinee se otevře s přidaným serverem, připravená k přihlášení.",
+    "tv": "Sledujte na televizi",
+    "tvHint": "Jakmile je aplikace v telefonu přihlášená, otevřete Matinee na televizi a zvolte Nastavit telefonem. Naskenujte telefonem kód z televize a je hotovo. Žádné psaní ovladačem.",
+    "typeInstead": "Nebo zadejte tuto adresu v aplikaci v části Přidat server:",
+    "openTitle": "Otevřít {{server}} v aplikaci",
+    "openHint": "Aplikace Matinee se otevře s tímto serverem. Pokud se nic nestane, nejdřív si aplikaci nainstalujte a vraťte se na tuto stránku."
   },
   "friends": {
     "title": "Přátelé",
@@ -1171,7 +1179,10 @@
     "usedBy": "{{name}} se připojil(a) {{date}}",
     "expired": "{{name}}: platnost skončila {{date}}",
     "badge": "Přítel",
-    "seeEverything": "Ukázat vše"
+    "seeEverything": "Ukázat vše",
+    "qr": "QR kód",
+    "qrLabel": "QR kód odkazu s pozvánkou",
+    "scan": "Jste spolu? Může to také naskenovat fotoaparátem telefonu."
   },
   "health": {
     "title": "Stav serveru",

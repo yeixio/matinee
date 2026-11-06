@@ -1128,11 +1128,19 @@
     "join": "Fiókom létrehozása",
     "welcome": "Üdv itt: {{server}}",
     "welcomeHint": "Nézhetsz itt a böngészőben, vagy a telefonodon és a tévén.",
-    "apps": "Nézés telefonon vagy tévén",
-    "appsHint": "Töltsd le a Matinee appot, válaszd a Szerver hozzáadása lehetőséget, és írd be ezt a címet. Utána jelentkezz be az új felhasználóneveddel és jelszavaddal.",
     "copy": "Másolás",
     "getApps": "Honnan töltheted le az appokat",
-    "start": "Nézés indítása"
+    "start": "Nézés indítása",
+    "phone": "Nézd a telefonodon",
+    "phoneHint": "Nyisd meg a Matinee alkalmazást, és hozzáadja neked ezt a szervert. Utána jelentkezz be az új felhasználóneveddel és jelszavaddal.",
+    "openApp": "Megnyitás a Matinee alkalmazásban",
+    "qrLabel": "QR-kód, amely megnyitja a Matinee alkalmazást a telefonodon",
+    "scanHint": "Olvasd be a telefon kamerájával. A Matinee alkalmazás ezzel a szerverrel nyílik meg, bejelentkezésre készen.",
+    "tv": "Nézd a tévén",
+    "tvHint": "Ha a telefonos alkalmazás be van jelentkezve, nyisd meg a Matinee-t a tévén, és válaszd a Beállítás telefonnal lehetőséget. Olvasd be a telefonnal a tévén látható kódot, és kész. Nem kell gépelni a távirányítóval.",
+    "typeInstead": "Vagy írd be ezt a címet az alkalmazásban a Szerver hozzáadása résznél:",
+    "openTitle": "{{server}} megnyitása az alkalmazásban",
+    "openHint": "A Matinee alkalmazás ezzel a szerverrel nyílik meg. Ha semmi sem történik, előbb telepítsd az alkalmazást, majd térj vissza erre az oldalra."
   },
   "friends": {
     "title": "Barátok",
@@ -1159,7 +1167,10 @@
     "usedBy": "{{name}} csatlakozott: {{date}}",
     "expired": "{{name}} lejárt: {{date}}",
     "badge": "Barát",
-    "seeEverything": "Minden látható legyen"
+    "seeEverything": "Minden látható legyen",
+    "qr": "QR-kód",
+    "qrLabel": "A meghívó link QR-kódja",
+    "scan": "Együtt vagytok? A telefonja kamerájával is beolvashatja ezt."
   },
   "health": {
     "title": "Szerverállapot",

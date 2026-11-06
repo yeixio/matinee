@@ -1132,11 +1132,19 @@
     "join": "Créer mon compte",
     "welcome": "Bienvenue sur {{server}}",
     "welcomeHint": "Vous pouvez regarder ici dans votre navigateur, ou sur votre téléphone et votre TV.",
-    "apps": "Regarder sur votre téléphone ou votre TV",
-    "appsHint": "Installez l'app Matinee, choisissez Ajouter un serveur et saisissez cette adresse. Connectez-vous ensuite avec votre nouveau nom d'utilisateur et mot de passe.",
     "copy": "Copier",
     "getApps": "Où trouver les apps",
-    "start": "Commencer à regarder"
+    "start": "Commencer à regarder",
+    "phone": "Regarder sur votre téléphone",
+    "phoneHint": "Ouvrez l'app Matinee : elle ajoute ce serveur pour vous. Connectez-vous ensuite avec votre nouveau nom d'utilisateur et mot de passe.",
+    "openApp": "Ouvrir dans l'app Matinee",
+    "qrLabel": "QR code qui ouvre l'app Matinee sur votre téléphone",
+    "scanHint": "Scannez-le avec l'appareil photo de votre téléphone. L'app Matinee s'ouvre avec ce serveur ajouté, prête pour la connexion.",
+    "tv": "Regarder sur votre téléviseur",
+    "tvHint": "Une fois l'app connectée sur votre téléphone, ouvrez Matinee sur le téléviseur et choisissez Configurer avec votre téléphone. Scannez le code affiché avec votre téléphone, et le téléviseur est prêt. Rien à taper avec la télécommande.",
+    "typeInstead": "Ou saisissez cette adresse dans l'app, sous Ajouter un serveur :",
+    "openTitle": "Ouvrir {{server}} dans l'app",
+    "openHint": "L'app Matinee s'ouvre avec ce serveur. Si rien ne se passe, installez d'abord l'app, puis revenez sur cette page."
   },
   "friends": {
     "title": "Amis",
@@ -1165,7 +1173,10 @@
     "usedBy": "{{name}} a rejoint le {{date}}",
     "expired": "{{name}} a expiré le {{date}}",
     "badge": "Ami",
-    "seeEverything": "Tout lui montrer"
+    "seeEverything": "Tout lui montrer",
+    "qr": "QR code",
+    "qrLabel": "QR code du lien d'invitation",
+    "scan": "Vous êtes ensemble ? La personne peut aussi scanner ceci avec l'appareil photo de son téléphone."
   },
   "health": {
     "title": "État du serveur",

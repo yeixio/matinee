@@ -1128,11 +1128,19 @@
     "join": "Mein Konto erstellen",
     "welcome": "Willkommen bei {{server}}",
     "welcomeHint": "Du kannst direkt hier im Browser schauen oder auf deinem Handy und Fernseher.",
-    "apps": "Auf Handy oder Fernseher schauen",
-    "appsHint": "Hol dir die Matinee-App, wähle Server hinzufügen und gib diese Adresse ein. Melde dich dann mit deinem neuen Benutzernamen und Passwort an.",
     "copy": "Kopieren",
     "getApps": "Wo es die Apps gibt",
-    "start": "Loslegen"
+    "start": "Loslegen",
+    "phone": "Auf dem Handy schauen",
+    "phoneHint": "Öffne die Matinee-App, sie fügt diesen Server für dich hinzu. Melde dich dann mit deinem neuen Benutzernamen und Passwort an.",
+    "openApp": "In der Matinee-App öffnen",
+    "qrLabel": "QR-Code, der die Matinee-App auf deinem Handy öffnet",
+    "scanHint": "Scanne das mit der Handykamera. Die Matinee-App öffnet sich mit diesem Server, bereit zum Anmelden.",
+    "tv": "Auf dem Fernseher schauen",
+    "tvHint": "Sobald die App auf deinem Handy angemeldet ist, öffne Matinee auf dem Fernseher und wähle Mit dem Handy einrichten. Scanne den Code auf dem Fernseher mit dem Handy, und der Fernseher ist bereit. Ganz ohne Tippen mit der Fernbedienung.",
+    "typeInstead": "Oder gib diese Adresse in der App unter Server hinzufügen ein:",
+    "openTitle": "{{server}} in der App öffnen",
+    "openHint": "Die Matinee-App öffnet sich mit diesem Server. Wenn nichts passiert, hol dir zuerst die App und komm dann auf diese Seite zurück."
   },
   "friends": {
     "title": "Freunde",
@@ -1159,7 +1167,10 @@
     "usedBy": "{{name}} ist am {{date}} beigetreten",
     "expired": "{{name}} ist am {{date}} abgelaufen",
     "badge": "Freund",
-    "seeEverything": "Alles sehen lassen"
+    "seeEverything": "Alles sehen lassen",
+    "qr": "QR-Code",
+    "qrLabel": "QR-Code des Einladungslinks",
+    "scan": "Zeigst du es jemandem persönlich? Er kann das auch mit der Handykamera scannen."
   },
   "health": {
     "title": "Serverzustand",

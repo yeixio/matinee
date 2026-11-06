@@ -1132,11 +1132,19 @@
     "join": "Creează-mi contul",
     "welcome": "Bun venit la {{server}}",
     "welcomeHint": "Poți urmări chiar aici în browser sau pe telefon și TV.",
-    "apps": "Urmărește pe telefon sau TV",
-    "appsHint": "Instalează aplicația Matinee, alege Adaugă server și scrie această adresă. Apoi conectează-te cu noul nume de utilizator și noua parolă.",
     "copy": "Copiază",
     "getApps": "De unde iei aplicațiile",
-    "start": "Începe să urmărești"
+    "start": "Începe să urmărești",
+    "phone": "Urmărește pe telefon",
+    "phoneHint": "Deschide aplicația Matinee și va adăuga acest server pentru tine. Apoi conectează-te cu noul nume de utilizator și parola.",
+    "openApp": "Deschide în aplicația Matinee",
+    "qrLabel": "Cod QR care deschide aplicația Matinee pe telefon",
+    "scanHint": "Scanează-l cu camera telefonului. Aplicația Matinee se deschide cu acest server adăugat, gata de conectare.",
+    "tv": "Urmărește pe televizor",
+    "tvHint": "După ce aplicația de pe telefon este conectată, deschide Matinee pe televizor și alege Configurează cu telefonul. Scanează cu telefonul codul de pe televizor și gata. Fără tastare cu telecomanda.",
+    "typeInstead": "Sau scrie această adresă în aplicație, la Adaugă server:",
+    "openTitle": "Deschide {{server}} în aplicație",
+    "openHint": "Aplicația Matinee se deschide cu acest server. Dacă nu se întâmplă nimic, instalează mai întâi aplicația, apoi revino pe această pagină."
   },
   "friends": {
     "title": "Prieteni",
@@ -1165,7 +1173,10 @@
     "usedBy": "{{name}} s-a alăturat pe {{date}}",
     "expired": "{{name}} a expirat pe {{date}}",
     "badge": "Prieten",
-    "seeEverything": "Lasă-l să vadă tot"
+    "seeEverything": "Lasă-l să vadă tot",
+    "qr": "Cod QR",
+    "qrLabel": "Codul QR al linkului de invitație",
+    "scan": "Sunteți împreună? Poate scana și asta cu camera telefonului."
   },
   "health": {
     "title": "Starea serverului",

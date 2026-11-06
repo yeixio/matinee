@@ -1124,11 +1124,19 @@
     "join": "Buat akun saya",
     "welcome": "Selamat datang di {{server}}",
     "welcomeHint": "Kamu bisa menonton langsung di browser ini, atau di ponsel dan TV.",
-    "apps": "Tonton di ponsel atau TV",
-    "appsHint": "Pasang aplikasi Matinee, pilih Tambah server, lalu masukkan alamat ini. Kemudian masuk dengan nama pengguna dan kata sandi barumu.",
     "copy": "Salin",
     "getApps": "Tempat mendapatkan aplikasinya",
-    "start": "Mulai menonton"
+    "start": "Mulai menonton",
+    "phone": "Tonton di ponselmu",
+    "phoneHint": "Buka aplikasi Matinee dan server ini akan ditambahkan untukmu. Lalu masuk dengan nama pengguna dan kata sandi barumu.",
+    "openApp": "Buka di aplikasi Matinee",
+    "qrLabel": "Kode QR yang membuka aplikasi Matinee di ponselmu",
+    "scanHint": "Pindai dengan kamera ponsel. Aplikasi Matinee terbuka dengan server ini sudah ditambahkan, siap untuk masuk.",
+    "tv": "Tonton di TV",
+    "tvHint": "Setelah aplikasi di ponselmu masuk, buka Matinee di TV dan pilih Siapkan dengan ponsel. Pindai kode yang ditampilkan TV dengan ponselmu, dan TV siap. Tanpa mengetik dengan remote.",
+    "typeInstead": "Atau ketik alamat ini di aplikasi pada Tambah server:",
+    "openTitle": "Buka {{server}} di aplikasi",
+    "openHint": "Aplikasi Matinee terbuka dengan server ini. Jika tidak terjadi apa-apa, pasang aplikasinya dulu, lalu kembali ke halaman ini."
   },
   "friends": {
     "title": "Teman",
@@ -1153,7 +1161,10 @@
     "usedBy": "{{name}} bergabung pada {{date}}",
     "expired": "{{name}} kedaluwarsa pada {{date}}",
     "badge": "Teman",
-    "seeEverything": "Izinkan melihat semuanya"
+    "seeEverything": "Izinkan melihat semuanya",
+    "qr": "Kode QR",
+    "qrLabel": "Kode QR tautan undangan",
+    "scan": "Sedang bersama? Mereka juga bisa memindai ini dengan kamera ponsel."
   },
   "health": {
     "title": "Kesehatan server",

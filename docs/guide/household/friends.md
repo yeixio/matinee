@@ -13,7 +13,7 @@ Friends are people outside your household who watch on your server: your parents
 1. Go to **Settings → People and profiles → Friends**.
 2. Type who it's for (only you see this), and pick how long the link works: a day, a week or a month.
 3. Tick the libraries to share. Movies and TV are ticked to start with; home videos, music and anything else stay private until you tick them.
-4. Press **Make invite link**, then **Copy** or **Share** and send it however you like.
+4. Press **Make invite link**, then **Copy** or **Share** and send it however you like.<!-- since: v0.2.3 --> Showing someone in person? The link also comes as a QR code they can scan with their phone's camera, and **QR code** next to any unsent link brings it back.<!-- /since -->
 
 ![Settings → Friends with an invite link ready to send](../images/friends.webp)
 
@@ -26,6 +26,18 @@ The link opens a page that says whose server it is and what you've shared. Your 
 ![The invite page a friend sees](../images/invite.webp)
 
 The page after that has the address to type into the [phone and TV apps](/docs/apps/phone-and-tv/) under **Add server**, and they sign in there with the same username and password.<!-- since: v0.1.14 --> Once their phone app is signed in, they can set up their TV without typing the address on the remote: the TV app shows a QR code they scan with that phone. See [Set up a new TV with your phone](/docs/apps/signing-in/#set-up-a-new-tv-with-your-phone).<!-- /since -->
+
+<!-- since: v0.2.3 -->
+### Phones and TVs without typing
+
+The page after joining walks your friend through it:
+
+- **On a phone**, **Open in the Matinee app** opens the app with your server already added and their username filled in, so they only type their password.
+- **On a computer**, the page shows a QR code instead. They scan it with their phone's camera, and the same thing happens on the phone. If the app isn't installed yet, the page it opens says where to get it.
+- **On a TV**, once the phone app is signed in, they open Matinee on the TV and pick **Set up with your phone**, then scan the TV's code with the phone. Nothing to type on the remote.
+
+The address is still on the page for anyone who'd rather type it.
+<!-- /since -->
 
 Friends need to reach your server from outside your home, so turn on [remote access](/docs/server/remote-access/) first, or use your own domain. Until the server can be reached from outside, the Friends settings say so, and links only work on your home network.
 

@@ -28,6 +28,7 @@ import { remote } from './remote'
 const Watch = lazy(() => import('./pages/Watch'))
 const InvitePage = lazy(() => import('./pages/Join').then((m) => ({ default: m.InvitePage })))
 const JoinedPage = lazy(() => import('./pages/Join').then((m) => ({ default: m.JoinedPage })))
+const AppPage = lazy(() => import('./pages/Join').then((m) => ({ default: m.AppPage })))
 const TogetherPage = lazy(() => import('./pages/Join').then((m) => ({ default: m.TogetherPage })))
 const Settings = lazy(() => import('./pages/Settings'))
 const Link = lazy(() => import('./pages/Link'))
@@ -80,6 +81,14 @@ function Screens() {
     return (
       <Suspense fallback={null}>
         <InvitePage code={invite} />
+      </Suspense>
+    )
+  }
+  // A scanned QR code for the phone app works whoever's signed in, or nobody.
+  if (pathname === '/app') {
+    return (
+      <Suspense fallback={null}>
+        <AppPage />
       </Suspense>
     )
   }

@@ -1124,11 +1124,19 @@
     "join": "建立我的帳號",
     "welcome": "歡迎來到 {{server}}",
     "welcomeHint": "你可以直接在這個瀏覽器裡看，也可以在手機和電視上看。",
-    "apps": "在手機或電視上看",
-    "appsHint": "安裝 Matinee App，選擇「新增伺服器」並輸入這個位址。然後用新的使用者名稱和密碼登入。",
     "copy": "複製",
     "getApps": "在哪裡取得 App",
-    "start": "開始觀看"
+    "start": "開始觀看",
+    "phone": "在手機上看",
+    "phoneHint": "打開 Matinee App，它會為你加入這台伺服器。然後用新的使用者名稱和密碼登入。",
+    "openApp": "在 Matinee App 中開啟",
+    "qrLabel": "在手機上開啟 Matinee App 的 QR 碼",
+    "scanHint": "用手機相機掃描。Matinee App 會開啟並已加入這台伺服器，直接登入即可。",
+    "tv": "在電視上看",
+    "tvHint": "手機上的 App 登入後，在電視上打開 Matinee 並選擇「用手機設定」。用手機掃描電視上顯示的碼，電視就準備好了。不必用遙控器打字。",
+    "typeInstead": "或在 App 的「加入伺服器」中輸入這個位址：",
+    "openTitle": "在 App 中開啟 {{server}}",
+    "openHint": "Matinee App 會帶著這台伺服器開啟。如果沒有反應，請先安裝 App，再回到這個頁面。"
   },
   "friends": {
     "title": "朋友",
@@ -1153,7 +1161,10 @@
     "usedBy": "{{name}} 於 {{date}} 加入",
     "expired": "{{name}} 於 {{date}} 過期",
     "badge": "朋友",
-    "seeEverything": "允許查看全部"
+    "seeEverything": "允許查看全部",
+    "qr": "QR 碼",
+    "qrLabel": "邀請連結的 QR 碼",
+    "scan": "當面分享？對方也可以用手機相機掃描這個碼。"
   },
   "health": {
     "title": "伺服器狀態",

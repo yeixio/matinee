@@ -1,10 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { Check, Copy, Link2, Share2, Trash2 } from 'lucide-react'
+import { Check, Copy, Link2, QrCode as QrIcon, Share2, Trash2 } from 'lucide-react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { api, type Account, type Invite, type Library } from '../api'
 import { formatLocale } from '../i18n'
+import { QrCode } from './QrCode'
 import { LibraryIcon, useLibraries } from './Shell'
 import { Button, Field, inputClass } from './ui'
 
@@ -150,7 +151,7 @@ function MadeInvite({ invite }: { invite: Invite }) {
     <div className="space-y-2 rounded-xl border border-accent/40 bg-accent/5 p-4">
       <p className="text-sm font-medium">{t('friends.made')}</p>
       <div className="flex flex-wrap items-center gap-2">
-        <code dir="ltr" className="min-w-0 flex-1 truncate rounded-lg bg-text/10 px-3 py-2 text-sm select-all">
+        <code dir="ltr" className="min-w-0 flex-1 truncate rounded-lg bg-text/10 px-3 py-2 text-sm select-all" data-testid="invite-url">
           {invite.url}
         </code>
         <Button onClick={copy} icon={copied ? <Check className="size-4 text-accent" /> : <Copy className="size-4" />}>
@@ -163,6 +164,10 @@ function MadeInvite({ invite }: { invite: Invite }) {
         )}
       </div>
       <p className="text-xs text-muted">{t('friends.onceOnly', { date: formatDate(invite.expiresAt) })}</p>
+      <div className="flex items-center gap-4 pt-2">
+        <QrCode value={invite.url} size={128} label={t('friends.qrLabel')} />
+        <p className="text-sm text-muted">{t('friends.scan')}</p>
+      </div>
     </div>
   )
 }
@@ -171,6 +176,7 @@ function InviteRow({ invite, libraries }: { invite: Invite; libraries: Library[]
   const { t } = useTranslation()
   const qc = useQueryClient()
   const [copied, setCopied] = useState(false)
+  const [qr, setQr] = useState(false)
   const remove = useMutation({
     mutationFn: () => api.deleteInvite(invite.code),
     onSuccess: () => qc.invalidateQueries({ queryKey: ['invites'] }),
@@ -197,9 +203,18 @@ function InviteRow({ invite, libraries }: { invite: Invite; libraries: Library[]
       >
         {copied ? t('common:together.copied') : t('invite.copy')}
       </Button>
+      <Button variant="ghost" className="h-9 px-3" icon={<QrIcon className="size-4" />} onClick={() => setQr(!qr)} aria-expanded={qr}>
+        {t('friends.qr')}
+      </Button>
       <Button variant="ghost" className="h-9 px-3 hover:text-danger" icon={<Trash2 className="size-4" />} disabled={remove.isPending} onClick={() => remove.mutate()}>
         {t('friends.takeBack')}
       </Button>
+      {qr && (
+        <div className="flex w-full items-center gap-4">
+          <QrCode value={invite.url} size={128} label={t('friends.qrLabel')} />
+          <p className="text-sm text-muted">{t('friends.scan')}</p>
+        </div>
+      )}
     </div>
   )
 }
