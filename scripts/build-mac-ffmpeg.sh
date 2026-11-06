@@ -1,15 +1,18 @@
 #!/bin/bash
 # Builds universal (arm64 + x86_64) ffmpeg and ffprobe for Matinee Server.app
-# from source: FFmpeg with x264 for software encoding and VideoToolbox for the
-# Mac's hardware encoder, linked statically so they need nothing but macOS.
-# Usage: scripts/build-mac-ffmpeg.sh <out dir>   (on a Mac, with nasm and
-# pkg-config from Homebrew)
+# from source: FFmpeg with x264 for software encoding, VideoToolbox for the
+# Mac's hardware encoder and zimg for tone mapping HDR, linked statically so
+# they need nothing but macOS.
+# Usage: scripts/build-mac-ffmpeg.sh <out dir>   (on a Mac, with nasm,
+# pkg-config, autoconf, automake and libtool from Homebrew)
 set -euo pipefail
 
 FFMPEG_VERSION=7.1.2
 FFMPEG_SHA256=${FFMPEG_SHA256:-}
 # x264's stable branch, pinned to a commit.
 X264_COMMIT=${X264_COMMIT:-}
+# zimg converts HDR to linear light and BT.709 for tone mapping (zscale).
+ZIMG_TAG=release-3.0.6
 MACOS_MIN=13.0
 # Assembly files too, not only C, are built for this macOS.
 export MACOSX_DEPLOYMENT_TARGET=$MACOS_MIN
@@ -36,6 +39,10 @@ else
 	echo "::warning::x264 isn't pinned; stable is at $(git -C "$work/x264" rev-parse HEAD)"
 fi
 
+git clone -q --depth 1 --recurse-submodules --shallow-submodules --branch "$ZIMG_TAG" \
+	https://github.com/sekrit-twc/zimg.git "$work/zimg"
+(cd "$work/zimg" && ./autogen.sh >/dev/null)
+
 for arch in arm64 x86_64; do
 	prefix="$work/prefix-$arch"
 	flags="-arch $arch -mmacosx-version-min=$MACOS_MIN"
@@ -51,6 +58,14 @@ for arch in arm64 x86_64; do
 		make -j"$jobs" && make install)
 	echo "::endgroup::"
 
+	echo "::group::zimg ($arch)"
+	cp -R "$work/zimg" "$work/zimg-$arch"
+	(cd "$work/zimg-$arch" &&
+		./configure --prefix="$prefix" --host="$host" --enable-static --disable-shared --with-pic \
+			CC=clang CXX=clang++ CFLAGS="$flags" CXXFLAGS="$flags" LDFLAGS="$flags" &&
+		make -j"$jobs" && make install)
+	echo "::endgroup::"
+
 	echo "::group::FFmpeg ($arch)"
 	src="$work/ffmpeg-$arch"
 	cp -R "$work/ffmpeg-${FFMPEG_VERSION}" "$src"
@@ -59,8 +74,8 @@ for arch in arm64 x86_64; do
 	(cd "$src" && PKG_CONFIG_PATH="$prefix/lib/pkgconfig" ./configure \
 		--prefix="$prefix" --cc=clang --arch="$ffarch" --target-os=darwin ${cross[@]+"${cross[@]}"} \
 		--extra-cflags="$flags -I$prefix/include" --extra-ldflags="$flags -L$prefix/lib" \
-		--pkg-config-flags=--static --extra-libs=-liconv \
-		--enable-gpl --enable-libx264 \
+		--pkg-config-flags=--static --extra-libs="-liconv -lc++" \
+		--enable-gpl --enable-libx264 --enable-libzimg \
 		--disable-autodetect --enable-videotoolbox --enable-audiotoolbox \
 		--enable-zlib --enable-bzlib --enable-iconv --enable-securetransport \
 		--disable-shared --enable-static --disable-doc --disable-ffplay --disable-debug &&
@@ -82,12 +97,18 @@ for tool in ffmpeg ffprobe; do
 done
 "$out/ffmpeg" -hide_banner -encoders | grep -q libx264
 "$out/ffmpeg" -hide_banner -encoders | grep -q h264_videotoolbox
+# Matinee tone maps with zscale and tonemap (internal/stream/tonemap.go).
+"$out/ffmpeg" -hide_banner -filters | grep -qw zscale
+"$out/ffmpeg" -hide_banner -filters | grep -qw tonemap
+"$out/ffmpeg" -hide_banner -filters | grep -qw scale_vt
 
 cat > "$out/FFmpeg.txt" <<NOTICE
 Matinee Server includes ffmpeg and ffprobe from FFmpeg ${FFMPEG_VERSION}
 (https://ffmpeg.org), built with x264 ($(git -C "$work/x264" rev-parse HEAD),
-https://code.videolan.org/videolan/x264). Both are under the GNU General Public
-License, version 2 or later. Their source is at the addresses above, and
+https://code.videolan.org/videolan/x264) and zimg ($ZIMG_TAG,
+https://github.com/sekrit-twc/zimg). FFmpeg and x264 are under the GNU General
+Public License, version 2 or later, and zimg under the WTFPL. Their source is
+at the addresses above, and
 scripts/build-mac-ffmpeg.sh in https://github.com/yeixio/matinee builds them.
 
 Configuration: $("$out/ffmpeg" -hide_banner -buildconf 2>&1 | tr -s ' \n' ' ')

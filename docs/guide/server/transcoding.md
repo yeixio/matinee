@@ -54,7 +54,12 @@ Converted video is always SDR, so when Matinee converts an HDR film (HDR10, HDR1
 
 - Dolby Vision profiles 7 and 8 are tone mapped from the HDR10 or HLG picture they carry.
 - Dolby Vision profile 5 has no such picture, and needs FFmpeg's libplacebo with a Vulkan device (a GPU, or Mesa's software one). Without it, those files convert without tone mapping.
-- Tone mapping needs an FFmpeg built with zimg. The Docker image and the Linux packages have one. On a Mac, neither the FFmpeg inside Matinee Server nor Homebrew's has it yet, so HDR films convert without tone mapping there. The setting says so when the server's FFmpeg can't.
+- Tone mapping needs an FFmpeg built with zimg. The Docker image and the Linux packages have one. Homebrew's FFmpeg doesn't, so a server installed with `brew` converts HDR films without tone mapping. The setting says so when the server's FFmpeg can't.
+<!-- /since -->
+<!-- since: v0.3.0 -->
+- Matinee Server, the Mac app, tone maps too: the FFmpeg inside it now includes zimg.
+<!-- /since -->
+<!-- since: v0.2.0 -->
 - With a GPU, the picture is still decoded and resized on the GPU, and tone mapped on the CPU at the smaller size, which is light work.
 
 **Settings → Server health** marks a stream **HDR made SDR** while it's tone mapped.
