@@ -13,7 +13,9 @@ import (
 // and subtitles, the way ffprobe describes an MKV remux.
 const dolbyVisionRemux = `{
   "format": {"format_name": "matroska,webm", "duration": "7380.5", "size": "61000000000", "bit_rate": "66123456"},
-  "chapters": [{}, {}, {}],
+  "chapters": [{"start_time": "0.000000", "end_time": "300.5", "tags": {"title": "Opening "}},
+               {"start_time": "300.5", "end_time": "7000"},
+               {"start_time": "7000", "end_time": "7380.5", "tags": {"title": "End Credits"}}],
   "streams": [
     {"codec_type": "video", "codec_name": "hevc", "profile": "Main 10", "width": 3840, "height": 2160,
      "pix_fmt": "yuv420p10le", "color_transfer": "smpte2084", "color_primaries": "bt2020", "color_space": "bt2020nc",
@@ -37,6 +39,10 @@ func TestParseMediaInfo(t *testing.T) {
 	}
 	if mi.Container != "matroska" || mi.DurationMs != 7380500 || mi.Size != 61000000000 || mi.Bitrate != 66123456 || mi.Chapters != 3 {
 		t.Fatalf("format: %+v", mi)
+	}
+	if len(mi.ChapterList) != 3 || mi.ChapterList[0] != (Chapter{Title: "Opening", EndMs: 300500}) ||
+		mi.ChapterList[1] != (Chapter{StartMs: 300500, EndMs: 7000000}) || mi.ChapterList[2].Title != "End Credits" {
+		t.Fatalf("chapter list: %+v", mi.ChapterList)
 	}
 	v := mi.Video[0]
 	if v.Resolution != "4K" || v.HDR != "dolby-vision" || v.HDRBase != "hdr10" || v.DVProfile != 8 || v.BitDepth != 10 ||

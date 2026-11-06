@@ -16,12 +16,28 @@ Move the mouse over the seek bar, or drag it, and a small picture of that moment
 - **On a touch screen**, drag along the bar with your finger. The bar is taller on phones, so it's easy to catch.
 - **With the keyboard**, tab to the bar and use the arrow keys: the picture shows where each press takes you.
 
+## Chapters on the bar
+
+From Matinee 0.2.3, a movie or episode whose file has its own chapters (most Blu-ray and DVD rips do) shows a small notch in the seek bar where each chapter starts. Point at the bar, or drag it, and the chapter's name shows above the time, so you can find the start of a scene by its name.
+
+![Chapter notches on the seek bar, with the chapter's name above the preview time](../images/seek-chapters.webp)
+
+Chapters come from the file itself, so there's nothing to set up. Matinee reads them when it [analyzes](/docs/server/media-analysis/) the file. After the update to 0.2.3 it reads every file once more in the background to pick them up, which only looks at each file's description and is quick. A file with no chapters, or just one, has a plain bar.
+
+## Jumping far
+
+When a video is being [converted](/docs/server/transcoding/) as it plays, a jump past what's ready has to start the conversion again from the new spot, which takes a moment. From Matinee 0.2.3, instead of going black, the player keeps a picture on screen with a spinner over it until the video carries on: the preview picture of where you're going, or the last frame that was showing when the video has no previews yet.
+
+![The picture of where you jumped to, held with a spinner while the video starts again](../images/seek-held-frame.webp)
+
 ## On phones and TVs
 
 In the [phone and TV apps](/docs/apps/phone-and-tv/) (from app version 1.0.23):
 
 - **On a phone or tablet**, drag along the bar. The picture rides above your finger, and the video jumps there when you let go.
 - **On a TV**, press left or right on the remote, or rewind and fast forward. The picture shows where the presses add up to, and the video jumps there a moment after you stop.
+
+From app version 1.0.32 the apps show the chapter notches and names too, and keep the picture on screen with a spinner after a far jump.
 
 ## Where the pictures come from
 

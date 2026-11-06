@@ -1295,6 +1295,9 @@ type itemView struct {
 	// its chapters, the season's audio or the picture going dark; absent
 	// when unknown. (Credits is the cast and crew.)
 	EndCredits *endCreditsView `json:"endCredits,omitempty"`
+	// Chapters are a video's own marked chapters, in order, for marks on
+	// the seek bar; absent when it has fewer than two or isn't analyzed.
+	Chapters []probe.Chapter `json:"chapters,omitempty"`
 	// FilePath is where the file is on the server, for admins only.
 	FilePath string `json:"filePath,omitempty"`
 	FileSize int64  `json:"fileSize,omitempty"`
@@ -1322,6 +1325,14 @@ func (s *Server) getItem(w http.ResponseWriter, r *http.Request) {
 		v.MediaInfo, v.MediaInfoStale = s.mediaInfo(r, it)
 		v.Intro = s.intro(r.Context(), it, v.MediaInfo)
 		v.EndCredits = s.endCredits(r.Context(), it, v.MediaInfo)
+		if mi := v.MediaInfo; mi != nil && mi.ChapterList != nil {
+			if it.VideoCodec != "" && len(mi.ChapterList) >= 2 {
+				v.Chapters = mi.ChapterList
+			}
+			c := *mi
+			c.ChapterList = nil
+			v.MediaInfo = &c
+		}
 		// Apps from before endCredits start Up next at mediaInfo.creditsMs.
 		// Credits with something after them leave it at the end, so that
 		// plays too.
