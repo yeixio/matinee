@@ -55,9 +55,11 @@ for (const file of walk(out).filter((f) => /\.mdx?$/.test(f))) {
 
 // The feature table: docs/features.json, shown where a page says
 // <!-- features -->. The build stops if the table leaves an app out of a
-// feature or links a page that isn't there.
+// feature or links a page that isn't there. A guide for a release from
+// before the table has no such page, so it isn't checked.
 const featuresFile = path.join(src, 'features.json')
-if (existsSync(featuresFile)) {
+const featurePages = walk(out).filter((f) => /\.mdx?$/.test(f) && readFileSync(f, 'utf8').includes('<!-- features -->'))
+if (featurePages.length && existsSync(featuresFile)) {
   const features = JSON.parse(readFileSync(featuresFile, 'utf8'))
   const hasPage = (doc) => {
     const rel = doc.replace(/#.*$/, '').replace(/^\/docs\/?/, '').replace(/\/$/, '')
@@ -68,10 +70,8 @@ if (existsSync(featuresFile)) {
     console.error(`docs/features.json:\n  ${problems.join('\n  ')}`)
     process.exit(1)
   }
-  for (const file of walk(out).filter((f) => /\.mdx?$/.test(f))) {
-    const text = readFileSync(file, 'utf8')
-    if (text.includes('<!-- features -->')) writeFileSync(file, text.replace('<!-- features -->', featureMarkdown(features).replace(/\]\(\/docs\//g, `](${base}docs/`)))
-  }
+  const tables = featureMarkdown(features).replace(/\]\(\/docs\//g, `](${base}docs/`)
+  for (const file of featurePages) writeFileSync(file, readFileSync(file, 'utf8').replace('<!-- features -->', tables))
 }
 
 // Release notes, newest first, up to the release being built.
