@@ -62,16 +62,20 @@ var gpuScaler = map[Kind]string{
 	VAAPI: "scale_vaapi",
 	NVENC: "scale_cuda",
 	QSV:   "scale_qsv",
+	// VideoToolbox's needs FFmpeg 6.1 or later; older ones decode on the
+	// CPU (the startup test of the full pipeline fails).
+	VideoToolbox: "scale_vt",
 }
 
 // decodes lists the source codecs (as ffprobe names them) each backend's
 // full pipeline decodes on the GPU. Older GPUs lack some of them; FFmpeg
-// then fails quickly and the transcode falls back (see Plan).
+// then fails quickly and the transcode falls back (see Plan). Apple silicon
+// doesn't decode MPEG-2 or MPEG-4 Part 2 (tested on an M5 Pro).
 var decodes = map[Kind][]string{
 	VAAPI:        {"h264", "hevc", "vp9", "av1", "mpeg2video", "vc1", "vp8"},
 	NVENC:        {"h264", "hevc", "vp9", "av1", "mpeg2video", "vc1", "vp8", "mpeg4"},
 	QSV:          {"h264", "hevc", "vp9", "av1", "mpeg2video", "vc1", "vp8"},
-	VideoToolbox: {"h264", "hevc", "vp9", "av1", "mpeg2video", "mpeg4", "prores"},
+	VideoToolbox: {"h264", "hevc", "vp9", "av1", "prores"},
 	AMF:          {"h264", "hevc", "vp9", "av1", "mpeg2video", "vc1"},
 }
 
@@ -261,9 +265,20 @@ func filters(a *Accel, m Mode, codec, toneMap string) (input []string, chain fun
 		input = append(input, "-hwaccel_output_format", "qsv", "-c:v", qsvDecoder[codec])
 		chain = down("scale_qsv=w='min(%d,iw)':h=-2:format=%s", "nv12", "format=nv12")
 	case VideoToolbox:
-		// Decoded frames come back to memory for the software resize,
-		// which is cheap next to decoding.
-		input = []string{"-hwaccel", "videotoolbox"}
+		// Requiring VideoToolbox's own frames makes a decode the GPU can't
+		// do fail, rather than quietly running on the CPU, so the startup
+		// test proves it and a transcode falls back to Encode. The encoder
+		// takes the resized frames as they are.
+		input = []string{"-hwaccel", "videotoolbox", "-hwaccel_output_format", "videotoolbox_vld"}
+		chain = func(w int) string {
+			f := fmt.Sprintf("scale_vt=w='min(%d,iw)':h=-2", w)
+			if toneMap != "" {
+				// Frames come down in the source's depth: 10 bits for
+				// nearly all HDR, 8 for the odd 8-bit HLG file.
+				f += ",hwdownload,format=p010le|nv12," + toneMap
+			}
+			return f
+		}
 	case AMF:
 		input = []string{"-hwaccel", "auto"}
 	}

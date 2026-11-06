@@ -474,7 +474,9 @@ func filters(tonemap string) string {
 	if tonemap != "" {
 		f += "," + tonemap
 	}
-	return f
+	// FFmpeg's ppm encoder keeps 16 bits per channel for 10-bit sources,
+	// and readPPM takes 8.
+	return f + ",format=rgb24"
 }
 
 // reading reads the whole file once, decoding only its keyframes, and

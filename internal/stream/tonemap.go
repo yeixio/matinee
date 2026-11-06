@@ -11,7 +11,10 @@ import (
 
 // Tone mapping turns an HDR picture into SDR when it's converted: without
 // it, HDR shown as SDR looks flat, grey and washed out. Every conversion
-// makes 8-bit SDR H.264, so every HDR picture converted is tone mapped.
+// makes 8-bit SDR H.264, so every HDR picture converted is tone mapped when
+// FFmpeg has the tools for it (zscale, or libplacebo). Without them, such as
+// with Homebrew's FFmpeg, the picture is converted as is and Settings says
+// that tone mapping isn't available.
 
 // The ways to tone map an admin can pick, and ToneMapOff for none.
 const (
