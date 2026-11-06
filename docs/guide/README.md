@@ -12,6 +12,11 @@ on `main` becomes the next release's guide.
   leave it out. Part of a page works the same between `<!-- since: vX.Y.Z -->`
   and `<!-- /since -->`; text that a feature makes out of date goes between
   `<!-- until: vX.Y.Z -->` and `<!-- /until -->`, which only older guides keep.
+- A new feature gets a row in `../features.json`, saying for each app whether
+  it has it (`true`), which issue adds it (`"matinee-apps#123"`), or why it
+  doesn't need it (`{"na": "..."}`). The **Features on each app** page
+  (`apps/features.md`) is made from it, and the site build stops if a row
+  leaves an app out or links a page that isn't there.
 - Screenshots live in `images/`; don't take them by hand. `pnpm shots` in
   `site/` makes all of them from a real server running a made-up library.
   `pnpm shots:library <address>` then retakes the browsing and watching ones

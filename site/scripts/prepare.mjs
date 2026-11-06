@@ -12,7 +12,7 @@
 // way round: only the guides for releases before v0.3.0 keep it.
 import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
-import { compare, semver } from './prepare-lib.mjs'
+import { compare, featureMarkdown, featureProblems, semver } from './prepare-lib.mjs'
 
 const site = path.resolve(import.meta.dirname, '..')
 const src = path.resolve(process.env.DOCS_SRC ?? path.join(site, '..'), 'docs')
@@ -51,6 +51,27 @@ for (const file of walk(out).filter((f) => /\.mdx?$/.test(f))) {
     text = text.replace(/^---\n/, `---\neditUrl: https://github.com/yeixio/matinee/edit/main/docs/guide/${rel}\n`)
   }
   writeFileSync(file, text)
+}
+
+// The feature table: docs/features.json, shown where a page says
+// <!-- features -->. The build stops if the table leaves an app out of a
+// feature or links a page that isn't there. A guide for a release from
+// before the table has no such page, so it isn't checked.
+const featuresFile = path.join(src, 'features.json')
+const featurePages = walk(out).filter((f) => /\.mdx?$/.test(f) && readFileSync(f, 'utf8').includes('<!-- features -->'))
+if (featurePages.length && existsSync(featuresFile)) {
+  const features = JSON.parse(readFileSync(featuresFile, 'utf8'))
+  const hasPage = (doc) => {
+    const rel = doc.replace(/#.*$/, '').replace(/^\/docs\/?/, '').replace(/\/$/, '')
+    return [`${rel}.md`, `${rel}.mdx`, `${rel}/index.md`, rel === '' ? 'index.md' : null].some((f) => f && existsSync(path.join(out, f)))
+  }
+  const problems = featureProblems(features, hasPage)
+  if (problems.length) {
+    console.error(`docs/features.json:\n  ${problems.join('\n  ')}`)
+    process.exit(1)
+  }
+  const tables = featureMarkdown(features).replace(/\]\(\/docs\//g, `](${base}docs/`)
+  for (const file of featurePages) writeFileSync(file, readFileSync(file, 'utf8').replace('<!-- features -->', tables))
 }
 
 // Release notes, newest first, up to the release being built.

@@ -16,5 +16,6 @@ Fixes #
 - [ ] I agree to the [Matinee Contributor License Agreement](../CLA.md).
 - [ ] Tests added or updated where it makes sense
 - [ ] Docs or README updated if behavior changed
+- [ ] Which apps get this? `docs/features.json` says so for each app; any app that doesn't get it yet links the issue that adds it
 - [ ] No secrets, personal data or private URLs included
 - [ ] API changes only add fields or routes (apps depend on it)

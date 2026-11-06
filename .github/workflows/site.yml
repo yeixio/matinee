@@ -32,6 +32,9 @@ jobs:
           cache-dependency-path: site/pnpm-lock.yaml
       - run: pnpm install --frozen-lockfile
         working-directory: site
+      # The feature table's checks (docs/features.json); the build checks it too.
+      - run: node --test scripts/*.test.mjs
+        working-directory: site
       - run: pnpm build:all
         working-directory: site
       - uses: actions/upload-artifact@v4
