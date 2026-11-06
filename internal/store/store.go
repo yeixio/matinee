@@ -679,6 +679,11 @@ var migrations = []string{
 		LOWER(path) LIKE '%cd1%' OR LOWER(path) LIKE '%cd_1%' OR LOWER(path) LIKE '%dvd1%' OR LOWER(path) LIKE '%dvd_1%' OR LOWER(path) LIKE '%disc1%' OR LOWER(path) LIKE '%disc_1%' OR LOWER(path) LIKE '%disk1%' OR LOWER(path) LIKE '%disk_1%' OR LOWER(path) LIKE '%part1%' OR LOWER(path) LIKE '%part_1%' OR LOWER(path) LIKE '%pt1%' OR LOWER(path) LIKE '%pt_1%')`,
 	`UPDATE items SET meta_at = NULL WHERE kind = 'movie' AND path IS NOT NULL AND tmdb_id IS NULL AND match_locked = 0 AND (
 		LOWER(path) LIKE '%cd1%' OR LOWER(path) LIKE '%cd_1%' OR LOWER(path) LIKE '%dvd1%' OR LOWER(path) LIKE '%dvd_1%' OR LOWER(path) LIKE '%disc1%' OR LOWER(path) LIKE '%disc_1%' OR LOWER(path) LIKE '%disk1%' OR LOWER(path) LIKE '%disk_1%' OR LOWER(path) LIKE '%part1%' OR LOWER(path) LIKE '%part_1%' OR LOWER(path) LIKE '%pt1%' OR LOWER(path) LIKE '%pt_1%')`,
+	// 122: episodes named without S01E01 ("Season 2/04 - Title.mkv") or by
+	// air date are understood now. Before, they were filed as specials;
+	// those are filed again on the next scan.
+	`UPDATE items SET mtime = 0 WHERE kind = 'episode' AND path IS NOT NULL
+		AND parent_id IN (SELECT id FROM items WHERE kind = 'season' AND index_number = 0)`,
 }
 
 func now() int64 { return time.Now().Unix() }

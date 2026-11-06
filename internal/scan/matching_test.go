@@ -140,3 +140,37 @@ func TestScanMovieInParts(t *testing.T) {
 		t.Errorf("regroup: %d %v", n, err)
 	}
 }
+
+// A daily show's episodes go in their year's season, in date order, and
+// a season folder's numbered files are its episodes.
+func TestScanDailyAndNumberedEpisodes(t *testing.T) {
+	root := t.TempDir()
+	makeVideos(t, root,
+		"The Nightly Desk/2024-03-15.mkv",
+		"The Nightly Desk/The.Nightly.Desk.2024.01.02.Guest.mkv",
+		"Crumb Street/Season 2/02 - Rise.mkv",
+		"Crumb Street/Season 2/01 - Dough.mkv",
+	)
+	st, lib := scanLib(t, "tv", root)
+	ctx := context.Background()
+	top, _ := st.TopLevel(ctx, 0, lib.ID)
+	if len(top) != 2 {
+		t.Fatalf("shows: %+v", top)
+	}
+	want := map[string][]string{"The Nightly Desk": {"2024", "Guest", "Mar 15, 2024"}, "Crumb Street": {"Season 2", "Dough", "Rise"}}
+	for _, show := range top {
+		seasons, _ := st.Children(ctx, 0, show.ID)
+		if len(seasons) != 1 {
+			t.Fatalf("%s seasons: %+v", show.Title, seasons)
+		}
+		eps, _ := st.Children(ctx, 0, seasons[0].ID)
+		w := want[show.Title]
+		if seasons[0].Title != w[0] || len(eps) != 2 || eps[0].Title != w[1] || eps[1].Title != w[2] {
+			var got []string
+			for _, e := range eps {
+				got = append(got, e.Title)
+			}
+			t.Errorf("%s: season %q, episodes %v; want %v", show.Title, seasons[0].Title, got, w)
+		}
+	}
+}

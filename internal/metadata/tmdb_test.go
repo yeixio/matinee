@@ -290,3 +290,44 @@ func TestTMDBLookupByIDs(t *testing.T) {
 		t.Errorf("fallback: %+v %v", m, err)
 	}
 }
+
+// Daily shows' episodes are found by the day they aired.
+func TestTMDBDailyEpisodes(t *testing.T) {
+	mux := http.NewServeMux()
+	mux.HandleFunc("GET /tv/500", func(w http.ResponseWriter, r *http.Request) {
+		json.NewEncoder(w).Encode(map[string]any{"id": 500, "seasons": []map[string]any{
+			{"season_number": 28, "air_date": "2023-01-09"},
+			{"season_number": 29, "air_date": "2024-01-08"},
+		}})
+	})
+	mux.HandleFunc("GET /tv/500/season/{n}", func(w http.ResponseWriter, r *http.Request) {
+		switch r.PathValue("n") {
+		case "28":
+			json.NewEncoder(w).Encode(map[string]any{"id": 2800, "season_number": 28, "air_date": "2023-01-09",
+				"episodes": []map[string]any{{"id": 1, "name": "New Year", "air_date": "2024-01-02"}}})
+		case "29":
+			json.NewEncoder(w).Encode(map[string]any{"id": 2900, "season_number": 29, "air_date": "2024-01-08", "overview": "The 2024 run.",
+				"episodes": []map[string]any{{"id": 2, "name": "A Guest", "air_date": "2024-03-15"}}})
+		default:
+			w.WriteHeader(http.StatusNotFound)
+		}
+	})
+	ts := httptest.NewServer(mux)
+	t.Cleanup(ts.Close)
+	tm := NewTMDB("k")
+	tm.BaseURL, tm.ImageURL = ts.URL, "https://img/"
+	ctx := context.Background()
+	if m, err := tm.Lookup(ctx, Query{Kind: "episode", ShowID: 500, Season: 2024, Episode: 315}); err != nil || m == nil || m.TMDBID != 2 || m.Title != "A Guest" {
+		t.Fatalf("episode: %+v %v", m, err)
+	}
+	// Early January can still be the season before.
+	if m, err := tm.Lookup(ctx, Query{Kind: "episode", ShowID: 500, Season: 2024, Episode: 102}); err != nil || m == nil || m.TMDBID != 1 {
+		t.Fatalf("carried-over season: %+v %v", m, err)
+	}
+	if m, err := tm.Lookup(ctx, Query{Kind: "episode", ShowID: 500, Season: 2024, Episode: 401}); err != nil || m != nil {
+		t.Fatalf("no such day: %+v %v", m, err)
+	}
+	if m, err := tm.Lookup(ctx, Query{Kind: "season", ShowID: 500, Season: 2024}); err != nil || m == nil || m.TMDBID != 2900 || m.Year != 2024 {
+		t.Fatalf("season: %+v %v", m, err)
+	}
+}

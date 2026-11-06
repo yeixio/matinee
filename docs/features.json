@@ -196,6 +196,19 @@
               }
             },
             {
+              "name": "Episodes without S01E01, and daily shows by date",
+              "doc": "/docs/getting-started/organizing-media/",
+              "since": "v0.2.4",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
               "name": "Coming soon (Radarr and Sonarr)",
               "doc": "/docs/server/radarr-and-sonarr/",
               "apps": {

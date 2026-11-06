@@ -103,6 +103,36 @@ TV/
 `S01E02` can be anywhere in the name, so `Crumb Street - S01E02 - Dough Rises.mkv` works too. Specials go in `Season 0`.
 
 <!-- since: v0.2.4 -->
+### Episodes without S01E01
+
+Inside a season folder, a number is enough. These all work:
+
+```
+TV/
+└── Crumb Street/
+    ├── Season 2/
+    │   ├── 04 - Dough Rises.mkv
+    │   ├── 05.mkv
+    │   └── Episode 6.mkv
+    └── Specials/
+        └── 01 - Holiday Bake.mkv
+```
+
+`Ep 06` and `E06` work too. Season folders can be called `Season 2`, `S02`, or the word for season in your language, such as `Staffel 2`, `Temporada 2` or `Saison 2`. A `Specials` folder is season 0.
+
+### Daily shows
+
+Talk shows and the news are usually named by the day they aired. Matinee files each under a season for its year, in date order, and finds the episode online by its date:
+
+```
+TV/
+└── The Nightly Desk/
+    ├── The Nightly Desk 2024-03-15.mkv
+    └── The.Nightly.Desk.2024.03.18.Guest.Name.720p.mkv
+```
+
+The date can be written `2024-03-15`, `2024.03.15` or `2024 03 15`. A year in the show's folder name, like `Crumb Street (2021)`, is never read as a date.
+
 ### Two episodes in one file
 
 A file that holds two or more episodes names the first and the last: `Crumb Street - S01E01E02.mkv`, `S01E01-E02`, `S01E01-02` or `1x01-1x02` all work. It shows as one item in the season, called "Episodes 1–2" unless the file name gives it a title.

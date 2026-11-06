@@ -149,3 +149,50 @@ func TestParseMultiEpisode(t *testing.T) {
 		}
 	}
 }
+
+func TestParseEpisodeWithoutCode(t *testing.T) {
+	cases := []struct {
+		path       string
+		show       string
+		season, ep int
+		title      string
+		date       string
+	}{
+		{"/tv/Crumb Street/Season 2/04 - Infection.mkv", "Crumb Street", 2, 4, "Infection", ""},
+		{"/tv/Crumb Street/Season 2/04.mkv", "Crumb Street", 2, 4, "", ""},
+		{"/tv/Crumb Street/Season 2/Episode 4.mkv", "Crumb Street", 2, 4, "", ""},
+		{"/tv/Crumb Street/Season 2/Crumb Street Ep 04 - Infection.mkv", "Crumb Street", 2, 4, "Infection", ""},
+		{"/tv/Crumb Street/S02/E04.720p.mkv", "Crumb Street", 2, 4, "", ""},
+		{"/tv/Crumb Street/Staffel 2/04 - Infektion.mkv", "Crumb Street", 2, 4, "Infektion", ""},
+		{"/tv/Crumb Street/Temporada 2/04.mkv", "Crumb Street", 2, 4, "", ""},
+		{"/tv/Crumb Street/Saison 2/04.mkv", "Crumb Street", 2, 4, "", ""},
+		{"/tv/Crumb Street/Specials/01 - Christmas.mkv", "Crumb Street", 0, 1, "Christmas", ""},
+		// Daily shows, by air date.
+		{"/tv/The Nightly Desk/2024-03-15.mkv", "The Nightly Desk", 2024, 315, "", "2024-03-15"},
+		{"/tv/The.Nightly.Desk.2024.03.15.Guest.Name.720p.mkv", "The Nightly Desk", 2024, 315, "Guest Name", "2024-03-15"},
+		{"/tv/The Nightly Desk/Season 2024/The Nightly Desk 2024 03 15 - Guest.mkv", "The Nightly Desk", 2024, 315, "Guest", "2024-03-15"},
+		// A show's year is not a date, and codes still win.
+		{"/tv/Show (2019)/Season 1/Show - S01E01.mkv", "Show", 1, 1, "", ""},
+	}
+	for _, c := range cases {
+		got := ParseEpisode("/tv", c.path)
+		if !got.OK || got.Show != c.show || got.Season != c.season || got.Episode != c.ep || got.Title != c.title || got.AirDate != c.date {
+			t.Errorf("ParseEpisode(%q) = %+v, want %s S%dE%d %q %q", c.path, got, c.show, c.season, c.ep, c.title, c.date)
+		}
+	}
+	for _, p := range []string{
+		"/tv/Crumb Street/Behind the scenes.mkv",
+		"/tv/Crumb Street/Season 2/Making of.mkv",
+		"/tv/Crumb Street/2024-02-30.mkv", // no such day
+	} {
+		if got := ParseEpisode("/tv", p); got.OK {
+			t.Errorf("ParseEpisode(%q) = %+v, want no episode", p, got)
+		}
+	}
+	if got := ShowOf("/tv", "/tv/Crumb Street (2021)/Season 1/Making of.mkv"); got.Show != "Crumb Street" || got.ShowYear != 2021 {
+		t.Errorf("ShowOf: %+v", got)
+	}
+	if DailyEpisode(2024, 315) != "2024-03-15" {
+		t.Error("DailyEpisode")
+	}
+}

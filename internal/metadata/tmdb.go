@@ -31,8 +31,9 @@ type TMDB struct {
 	// Region picks which country's age ratings to show; defaults to US.
 	Region string
 
-	mu  sync.RWMutex
-	key string
+	mu    sync.RWMutex
+	key   string
+	daily dailyCache
 }
 
 // ErrNoKey is what lookups fail with while TMDB has no key.
@@ -388,6 +389,9 @@ func genreNames(ids []int) []string {
 }
 
 func (t *TMDB) episode(ctx context.Context, q Query) (*store.Metadata, error) {
+	if dailySeason(q.Season) {
+		return t.dailyEpisodeLookup(ctx, q)
+	}
 	var res struct {
 		ID          int64   `json:"id"`
 		Name        string  `json:"name"`
@@ -409,6 +413,9 @@ func (t *TMDB) episode(ctx context.Context, q Query) (*store.Metadata, error) {
 }
 
 func (t *TMDB) season(ctx context.Context, q Query) (*store.Metadata, error) {
+	if dailySeason(q.Season) {
+		return t.dailySeasonLookup(ctx, q)
+	}
 	var res struct {
 		ID         int64  `json:"id"`
 		Overview   string `json:"overview"`

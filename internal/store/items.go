@@ -677,9 +677,11 @@ func (s *Store) NeedsMetadata(ctx context.Context, libraryID int64, kinds []stri
 
 // Metadata is what an online provider knows about an item.
 type Metadata struct {
-	TMDBID   int64
-	MBID     string // MusicBrainz id, for artists and albums
-	Title    string // only applied to episodes, whose file names rarely carry one
+	TMDBID int64
+	MBID   string // MusicBrainz id, for artists and albums
+	// Title is only applied to episodes whose file names carry none, named
+	// "Episode 4" or, for daily shows, "Mar 15, 2024".
+	Title    string
 	Overview string
 	Year     int
 	Rating   float64
@@ -710,7 +712,8 @@ func applyMetadata(ctx context.Context, e execer, id int64, m *Metadata) error {
 			poster = CASE WHEN poster IS NULL OR poster LIKE 'http%' THEN COALESCE(?, poster) ELSE poster END,
 			backdrop = CASE WHEN backdrop IS NULL OR backdrop LIKE 'http%' THEN COALESCE(?, backdrop) ELSE backdrop END,
 			genres = COALESCE(?, genres), facts = COALESCE(?, facts),
-			title = CASE WHEN kind = 'episode' AND ? != '' AND title LIKE 'Episode %' THEN ? ELSE title END,
+			title = CASE WHEN kind = 'episode' AND ? != '' AND (title LIKE 'Episode %'
+				OR title LIKE '___ _, ____' OR title LIKE '___ __, ____') THEN ? ELSE title END,
 			meta_at = ?, details_at = NULL
 		WHERE id = ?`,
 		nullInt64(m.TMDBID), nullStr(m.MBID), nullStr(m.Overview), nullFloat(m.Rating), nullInt(m.Year), nullStr(m.Poster), nullStr(m.Backdrop),

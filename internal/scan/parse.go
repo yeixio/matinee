@@ -1,10 +1,12 @@
 package scan
 
 import (
+	"fmt"
 	"path/filepath"
 	"regexp"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/yeixio/matinee/internal/mediaid"
 )
@@ -19,7 +21,16 @@ var (
 	// first: "E02" in S01E01E02 or S01E01-E02, "02" in S01E01-02, "1x02"
 	// in 1x01-1x02. A number must end there, so "S01E01-1080p" isn't one.
 	endEpisodeRe = regexp.MustCompile(`(?i)^(?:[\s._]*-?[\s._]*e(\d{1,4})|-\d{1,2}x(\d{1,4})|-(\d{1,4}))(?:[^\dpi]|$)`)
-	seasonDir    = regexp.MustCompile(`(?i)^(?:season|series|s)[\s._-]*(\d{1,3})$`)
+	// "Season 2", "S02", and the word for season in a few languages.
+	seasonDir = regexp.MustCompile(`(?i)^(?:season|series|staffel|temporada|saison|stagione|seizoen|sezon|säsong|sæson|sesong|kausi|s)[\s._-]*(\d{1,4})$`)
+	// A folder of specials, filed as season 0.
+	specialsDir = regexp.MustCompile(`(?i)^specials?$`)
+	// An air date, for daily shows: 2024-03-15, 2024.03.15 or 2024 03 15.
+	airDateRe = regexp.MustCompile(`(?:^|[\s._\-\[(])((?:19|20)\d{2})([\s._-])(0[1-9]|1[0-2])[\s._-](0[1-9]|[12]\d|3[01])(?:$|[\s._\-\])])`)
+	// "Episode 4", "Ep 04", "E04" in a file in a season folder.
+	episodeWordRe = regexp.MustCompile(`(?i)(?:^|[\s._\-\[(])(?:episode|ep|e)[\s._-]*(\d{1,4})(?:$|[\s._\-\])])`)
+	// "04 - Infection", "04", "4." at the start of a file in a season folder.
+	leadingNumberRe = regexp.MustCompile(`^(\d{1,3})(?:$|[\s._\-\])])`)
 	// A plausible release year; boundaries are checked in parseMovieName.
 	yearRe = regexp.MustCompile(`(?:19|20)\d{2}`)
 	// Words that mark where the title ends in release-style names.
@@ -107,55 +118,136 @@ type EpisodeInfo struct {
 	// ShowIDs are the ids in the show's folder name, as in
 	// "Breaking Bad {tvdb-81189}".
 	ShowIDs mediaid.IDs
+	// AirDate is the day a daily show's episode aired, as 2024-03-15, when
+	// that's how it's named. Its season is the year, and its episode the
+	// month and day as one number (315), so a year's episodes sort by date.
+	AirDate string
 	OK      bool
 }
 
-// ParseEpisode understands "Show/Season 1/Show - S01E02 - Title.mkv" and
-// release-style "Show.Name.S01E02.720p.mkv". The show name comes from the
-// library folder layout when it's there, since file names are often abbreviated.
+// DailySeason reports whether a season number is a daily show's year.
+func DailySeason(n int) bool { return n >= 1900 }
+
+// DailyEpisode turns a daily show's season and episode back into its air
+// date, as 2024-03-15.
+func DailyEpisode(season, episode int) string {
+	return fmt.Sprintf("%04d-%02d-%02d", season, episode/100, episode%100)
+}
+
+// ParseEpisode understands "Show/Season 1/Show - S01E02 - Title.mkv",
+// release-style "Show.Name.S01E02.720p.mkv", daily shows named by date
+// ("Show/2024-03-15.mkv"), and, inside a season folder, names without a
+// season ("Season 2/04 - Title.mkv", "Season 2/Episode 4.mkv"). The show
+// name comes from the library folder layout when it's there, since file
+// names are often abbreviated.
 func ParseEpisode(libraryRoot, path string) EpisodeInfo {
-	m := episodeRe.FindStringSubmatch(stem(path))
-	if m == nil {
-		return EpisodeInfo{}
-	}
-	info := EpisodeInfo{OK: true, Show: cleanTitle(mediaid.Strip(m[1]))}
-	if m[2] != "" {
-		info.Season, _ = strconv.Atoi(m[2])
-		info.Episode, _ = strconv.Atoi(m[3])
-	} else {
-		info.Season, _ = strconv.Atoi(m[4])
-		info.Episode, _ = strconv.Atoi(m[5])
-	}
-	rest := stem(path)[len(m[0]):]
-	if e := endEpisodeRe.FindStringSubmatchIndex(rest); e != nil {
-		for g := 1; g <= 3; g++ {
-			if e[2*g] >= 0 {
-				end, _ := strconv.Atoi(rest[e[2*g]:e[2*g+1]])
-				// Two parts of one release, not a range: S01E05-E03, or a
-				// number that can't be an episode this close.
-				if end > info.Episode && end-info.Episode < 10 {
-					info.EndEpisode = end
-					rest = rest[e[2*g+1]:]
+	name := stem(path)
+	var info EpisodeInfo
+	var rest string
+	if m := episodeRe.FindStringSubmatchIndex(name); m != nil {
+		info = EpisodeInfo{OK: true, Show: cleanTitle(mediaid.Strip(name[m[2]:m[3]]))}
+		if m[4] >= 0 {
+			info.Season, _ = strconv.Atoi(name[m[4]:m[5]])
+			info.Episode, _ = strconv.Atoi(name[m[6]:m[7]])
+		} else {
+			info.Season, _ = strconv.Atoi(name[m[8]:m[9]])
+			info.Episode, _ = strconv.Atoi(name[m[10]:m[11]])
+		}
+		rest = name[m[1]:]
+		if e := endEpisodeRe.FindStringSubmatchIndex(rest); e != nil {
+			for g := 1; g <= 3; g++ {
+				if e[2*g] >= 0 {
+					end, _ := strconv.Atoi(rest[e[2*g]:e[2*g+1]])
+					// Two parts of one release, not a range: S01E05-E03, or a
+					// number that can't be an episode this close.
+					if end > info.Episode && end-info.Episode < 10 {
+						info.EndEpisode = end
+						rest = rest[e[2*g+1]:]
+					}
+					break
 				}
-				break
 			}
 		}
+	} else if m := airDateRe.FindStringSubmatchIndex(name); m != nil && dateOK(name[m[2]:m[3]], name[m[6]:m[7]], name[m[8]:m[9]]) {
+		y, _ := strconv.Atoi(name[m[2]:m[3]])
+		mo, _ := strconv.Atoi(name[m[6]:m[7]])
+		d, _ := strconv.Atoi(name[m[8]:m[9]])
+		info = EpisodeInfo{OK: true, Show: cleanTitle(mediaid.Strip(name[:m[2]])), Season: y, Episode: mo*100 + d,
+			AirDate: fmt.Sprintf("%04d-%02d-%02d", y, mo, d)}
+		rest = name[m[9]:]
+	} else if season, ok := seasonOf(filepath.Base(filepath.Dir(path))); ok {
+		if m := episodeWordRe.FindStringSubmatchIndex(name); m != nil {
+			info = EpisodeInfo{OK: true, Season: season}
+			info.Episode, _ = strconv.Atoi(name[m[2]:m[3]])
+			rest = name[m[3]:]
+		} else if m := leadingNumberRe.FindStringSubmatchIndex(name); m != nil {
+			info = EpisodeInfo{OK: true, Season: season}
+			info.Episode, _ = strconv.Atoi(name[m[2]:m[3]])
+			rest = name[m[3]:]
+		}
+		if info.OK && info.Episode == 0 && season != 0 {
+			info = EpisodeInfo{}
+		}
+	}
+	if !info.OK {
+		return info
 	}
 	if loc := junkRe.FindStringIndex(rest); loc != nil {
 		rest = rest[:loc[0]]
 	}
-	info.Title = cleanTitle(rest)
-
-	// Prefer the top folder under the library root as the show name.
-	if rel, err := filepath.Rel(libraryRoot, path); err == nil {
-		parts := strings.Split(filepath.ToSlash(rel), "/")
-		if len(parts) >= 2 && !seasonDir.MatchString(parts[0]) {
-			mi := parseMovieName(parts[0])
-			info.Show, info.ShowYear, info.ShowIDs = mi.Title, mi.Year, mediaid.Parse(parts[0])
-		}
+	info.Title = cleanTitle(mediaid.Strip(rest))
+	if show, year, ids, ok := showFolder(libraryRoot, path); ok {
+		info.Show, info.ShowYear, info.ShowIDs = show, year, ids
 	}
 	if info.Show == "" {
 		info.Show = "Unknown Show"
+	}
+	return info
+}
+
+// seasonOf reads a season folder's number: "Season 2", "S02", "Staffel 2",
+// or 0 for "Specials".
+func seasonOf(dir string) (int, bool) {
+	if specialsDir.MatchString(dir) {
+		return 0, true
+	}
+	if m := seasonDir.FindStringSubmatch(strings.TrimSpace(dir)); m != nil {
+		n, _ := strconv.Atoi(m[1])
+		return n, true
+	}
+	return 0, false
+}
+
+// dateOK checks a date's day exists in its month.
+func dateOK(y, m, d string) bool {
+	_, err := time.Parse("2006-01-02", y+"-"+m+"-"+d)
+	return err == nil
+}
+
+// showFolder reads the show's folder, the one right under the library
+// folder, when the file is in one: its name, its year and its ids.
+func showFolder(libraryRoot, path string) (show string, year int, ids mediaid.IDs, ok bool) {
+	rel, err := filepath.Rel(libraryRoot, path)
+	if err != nil {
+		return "", 0, ids, false
+	}
+	parts := strings.Split(filepath.ToSlash(rel), "/")
+	if len(parts) < 2 || parts[0] == ".." {
+		return "", 0, ids, false
+	}
+	if _, isSeason := seasonOf(parts[0]); isSeason {
+		return "", 0, ids, false
+	}
+	mi := parseMovieName(parts[0])
+	return mi.Title, mi.Year, mediaid.Parse(parts[0]), mi.Title != ""
+}
+
+// ShowOf names the show a file in a TV library belongs to, from its
+// folder, for files that don't name an episode, such as a special.
+func ShowOf(libraryRoot, path string) EpisodeInfo {
+	info := EpisodeInfo{Show: cleanTitle(filepath.Base(filepath.Dir(path)))}
+	if show, year, ids, ok := showFolder(libraryRoot, path); ok {
+		info.Show, info.ShowYear, info.ShowIDs = show, year, ids
 	}
 	return info
 }
