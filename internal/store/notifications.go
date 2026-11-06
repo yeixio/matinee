@@ -60,13 +60,16 @@ var numbers = regexp.MustCompile(`\b\d+(?:[.,]\d+)*\b`)
 // groupKey says which notifications are the same one again: the same
 // event, title and wording, about the same title in the library. For one
 // that isn't about a title, such as a disk filling up, figures in the
-// wording can change (it's 93% full now, not 92%) and it's still the same.
+// wording can change (it's 93% full now, not 92%), or its title can say
+// it's still true, and it's still the same.
 func groupKey(n Notification) string {
-	body := n.Body
+	title, body := n.Title, n.Body
 	if n.TMDBID == 0 && n.TVDBID == 0 {
+		// An alert that's still true says so in its title.
+		title = strings.TrimSuffix(title, " (still)")
 		body = numbers.ReplaceAllString(body, "#")
 	}
-	return fmt.Sprintf("%s\n%s\n%s\n%s:%d:%d", n.Event, n.Title, body, n.Kind, n.TMDBID, n.TVDBID)
+	return fmt.Sprintf("%s\n%s\n%s\n%s:%d:%d", n.Event, title, body, n.Kind, n.TMDBID, n.TVDBID)
 }
 
 // levelRank orders levels, least serious first.
