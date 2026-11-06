@@ -594,6 +594,7 @@
     },
     "overseerr": {
       "intro": "Connect it to add a Discover tab: what's trending, recommendations based on what people watch, and a way to ask for anything. Jellyseerr works too.",
+      "boxOfficeFirst": "Box Office fills Discover and takes requests now, so Overseerr isn't used. You can disconnect it.",
       "notConnected": "Not connected · for Discover",
       "requestAs": "Requests from people without an Overseerr account",
       "madeAsOwner": "Made as {{name}} (the API key's owner)",
@@ -988,9 +989,9 @@
   "discover": {
     "title": "Discover",
     "emptyTitle": "Nothing to discover yet",
-    "connectIt": "Connect Overseerr to see what's trending, get recommendations, and ask for new movies and shows.",
+    "connectIt": "Connect Box Office or Overseerr to see what's trending, get recommendations, and ask for new movies and shows.",
     "openSettings": "Open settings",
-    "notConnected": "An admin hasn't connected Overseerr to this server.",
+    "notConnected": "An admin hasn't connected Box Office or Overseerr to this server.",
     "placeholder": "Find any movie or show…",
     "unavailable": "Discover isn't available right now",
     "open": "Open",

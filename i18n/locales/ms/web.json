@@ -590,6 +590,7 @@
     },
     "overseerr": {
       "intro": "Sambungkannya untuk menambah tab Teroka: apa yang sohor kini, cadangan berdasarkan tontonan orang, dan cara untuk meminta apa sahaja. Jellyseerr juga boleh.",
+      "boxOfficeFirst": "Box Office kini mengisi Teroka dan menerima permintaan, jadi Overseerr tidak digunakan. Anda boleh memutuskannya.",
       "notConnected": "Tidak disambungkan · untuk Teroka",
       "requestAs": "Permintaan daripada orang tanpa akaun Overseerr",
       "madeAsOwner": "Dibuat sebagai {{name}} (pemilik kunci API)",
@@ -984,9 +985,9 @@
   "discover": {
     "title": "Teroka",
     "emptyTitle": "Belum ada apa-apa untuk diteroka",
-    "connectIt": "Sambungkan Overseerr untuk melihat apa yang sohor kini, mendapat cadangan, dan meminta filem dan siri baharu.",
+    "connectIt": "Sambungkan Box Office / Overseerr untuk melihat apa yang sohor kini, mendapat cadangan, dan meminta filem dan siri baharu.",
     "openSettings": "Buka tetapan",
-    "notConnected": "Pentadbir belum menyambungkan Overseerr ke pelayan ini.",
+    "notConnected": "Pentadbir belum menyambungkan Box Office / Overseerr ke pelayan ini.",
     "placeholder": "Cari mana-mana filem atau siri…",
     "unavailable": "Teroka tidak tersedia sekarang",
     "open": "Buka",

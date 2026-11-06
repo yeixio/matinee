@@ -653,6 +653,9 @@ var migrations = []string{
 		created_at BIGINT NOT NULL,
 		PRIMARY KEY (user_id, kind, tmdb_id, tvdb_id)
 	)`,
+	// 112: a request filed with Box Office, which decides it on its
+	// Requests page: its id there (see boxoffice_requests.go in api).
+	"ALTER TABLE requests ADD COLUMN boxoffice_id BIGINT NOT NULL DEFAULT 0",
 }
 
 func now() int64 { return time.Now().Unix() }

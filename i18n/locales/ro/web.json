@@ -598,6 +598,7 @@
     },
     "overseerr": {
       "intro": "Conectează-l ca să adaugi fila Descoperă: ce e în tendințe, recomandări după ce văd oamenii și un mod de a cere orice. Merge și Jellyseerr.",
+      "boxOfficeFirst": "Box Office completează acum Descoperă și primește cererile, așa că Overseerr nu mai este folosit. Îl poți deconecta.",
       "notConnected": "Neconectat · pentru Descoperă",
       "requestAs": "Cereri de la oameni fără cont Overseerr",
       "madeAsOwner": "Făcute ca {{name}} (proprietarul cheii API)",
@@ -992,9 +993,9 @@
   "discover": {
     "title": "Descoperă",
     "emptyTitle": "Nimic de descoperit încă",
-    "connectIt": "Conectează Overseerr ca să vezi ce e în tendințe, să primești recomandări și să ceri filme și seriale noi.",
+    "connectIt": "Conectează Box Office / Overseerr ca să vezi ce e în tendințe, să primești recomandări și să ceri filme și seriale noi.",
     "openSettings": "Deschide setările",
-    "notConnected": "Un administrator nu a conectat Overseerr la acest server.",
+    "notConnected": "Un administrator nu a conectat Box Office / Overseerr la acest server.",
     "placeholder": "Găsește orice film sau serial…",
     "unavailable": "Descoperă nu e disponibil acum",
     "open": "Deschide",

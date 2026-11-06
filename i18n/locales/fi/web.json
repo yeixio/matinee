@@ -594,6 +594,7 @@
     },
     "overseerr": {
       "intro": "Yhdistä se, niin saat Löydä-välilehden: mikä on nousussa, suosituksia sen mukaan mitä ihmiset katsovat ja tavan pyytää mitä tahansa. Myös Jellyseerr toimii.",
+      "boxOfficeFirst": "Box Office täyttää nyt Löydä-näkymän ja ottaa pyynnöt vastaan, joten Overseerria ei käytetä. Voit katkaista sen yhteyden.",
       "notConnected": "Ei yhdistetty · Löydä-välilehteä varten",
       "requestAs": "Pyynnöt ihmisiltä, joilla ei ole Overseerr-tiliä",
       "madeAsOwner": "Tehdään käyttäjänä {{name}} (API-avaimen omistaja)",
@@ -988,9 +989,9 @@
   "discover": {
     "title": "Löydä",
     "emptyTitle": "Ei vielä mitään löydettävää",
-    "connectIt": "Yhdistä Overseerr nähdäksesi mikä on nousussa, saadaksesi suosituksia ja pyytääksesi uusia elokuvia ja sarjoja.",
+    "connectIt": "Yhdistä Box Office / Overseerr nähdäksesi mikä on nousussa, saadaksesi suosituksia ja pyytääksesi uusia elokuvia ja sarjoja.",
     "openSettings": "Avaa asetukset",
-    "notConnected": "Ylläpitäjä ei ole yhdistänyt Overseerria tähän palvelimeen.",
+    "notConnected": "Ylläpitäjä ei ole yhdistänyt Box Office / Overseerria tähän palvelimeen.",
     "placeholder": "Etsi mikä tahansa elokuva tai sarja…",
     "unavailable": "Löydä ei ole juuri nyt käytettävissä",
     "open": "Avaa",

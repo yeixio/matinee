@@ -9,7 +9,10 @@ sidebar:
 When an admin has [connected Overseerr](/docs/server/overseerr/), a **Discover** tab appears next to your libraries, on the web and in the apps. It's for finding things you don't have yet.
 
 <!-- since: v0.2.3 -->
-[Box Office](/docs/server/radarr-and-sonarr/#box-office) brings the tab too: once it's connected under **Settings → Add-ons**, Discover appears with no other setup, filled from Box Office. If Overseerr is connected as well, Discover comes from Overseerr.
+[Box Office](/docs/server/radarr-and-sonarr/#box-office) brings the tab too: once it's connected under **Settings → Add-ons**, Discover appears with no other setup, filled from Box Office. <!-- until: v0.2.4 -->If Overseerr is connected as well, Discover comes from Overseerr.<!-- /until -->
+<!-- /since -->
+<!-- since: v0.2.4 -->
+If Overseerr is connected as well, Discover still comes from Box Office, and what you ask for goes to Box Office.
 <!-- /since -->
 
 ![Discover: rows of titles like the ones you watched lately, with a Requested badge on one](../images/discover.webp)
@@ -32,7 +35,11 @@ Click a poster to read about it. If you can ask for titles on this server, **Req
 ![A show opened from Discover, with a Request the show button](../images/discover-title.webp)
 
 <!-- since: v0.2.3 -->
-With Box Office, asking from Discover is the same as any other [request](/docs/server/radarr-and-sonarr/#who-can-add-titles): it's added straight away, or waits in **Requests** for an admin, as the server's setting says. Box Office then finds and downloads it.
+<!-- until: v0.2.4 -->With Box Office, asking from Discover is the same as any other [request](/docs/server/radarr-and-sonarr/#who-can-add-titles): it's added straight away, or waits in **Requests** for an admin, as the server's setting says. Box Office then finds and downloads it.
+<!-- /until -->
+<!-- /since -->
+<!-- since: v0.2.4 -->
+With Box Office, your request goes to [Box Office's Requests page](/docs/server/radarr-and-sonarr/#requests-on-box-offices-requests-page), where an admin approves it unless it's approved automatically. You'll see it under **Your requests**, and the bell tells you when it's approved or declined. Box Office then finds and downloads it.
 <!-- /since -->
 
 With Overseerr, what happens next is up to Overseerr. If your Overseerr account can add titles straight away, it starts downloading; otherwise it waits for an admin to approve it there. Either way, it shows up in your library by itself once it's downloaded, and [Recently added](/docs/watching/home/) puts it at the front of Home.

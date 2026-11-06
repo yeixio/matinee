@@ -594,6 +594,7 @@
     },
     "overseerr": {
       "intro": "Anslut den för att lägga till fliken Upptäck: det som trendar, rekommendationer utifrån vad folk tittar på och ett sätt att be om vad som helst. Jellyseerr fungerar också.",
+      "boxOfficeFirst": "Box Office fyller nu Upptäck och tar emot önskemål, så Overseerr används inte. Du kan koppla från det.",
       "notConnected": "Inte ansluten · för Upptäck",
       "requestAs": "Förfrågningar från personer utan Overseerr-konto",
       "madeAsOwner": "Görs som {{name}} (API-nyckelns ägare)",
@@ -988,9 +989,9 @@
   "discover": {
     "title": "Upptäck",
     "emptyTitle": "Inget att upptäcka än",
-    "connectIt": "Anslut Overseerr för att se vad som trendar, få rekommendationer och be om nya filmer och serier.",
+    "connectIt": "Anslut Box Office / Overseerr för att se vad som trendar, få rekommendationer och be om nya filmer och serier.",
     "openSettings": "Öppna inställningar",
-    "notConnected": "En administratör har inte anslutit Overseerr till den här servern.",
+    "notConnected": "En administratör har inte anslutit Box Office / Overseerr till den här servern.",
     "placeholder": "Hitta en film eller serie…",
     "unavailable": "Upptäck är inte tillgängligt just nu",
     "open": "Öppna",

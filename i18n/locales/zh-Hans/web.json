@@ -590,6 +590,7 @@
     },
     "overseerr": {
       "intro": "连接后会多出“发现”标签:热门趋势、根据大家观看内容的推荐,以及请求任何影片的方式。Jellyseerr 也可以。",
+      "boxOfficeFirst": "现在由 Box Office 提供“发现”内容并接收请求，因此不再使用 Overseerr。你可以断开它。",
       "notConnected": "未连接 · 用于“发现”",
       "requestAs": "没有 Overseerr 帐户的人的请求",
       "madeAsOwner": "以 {{name}} 的身份发出(API 密钥所有者)",
@@ -984,9 +985,9 @@
   "discover": {
     "title": "发现",
     "emptyTitle": "暂时没有可发现的内容",
-    "connectIt": "连接 Overseerr,查看热门趋势、获得推荐,并请求新的电影和剧集。",
+    "connectIt": "连接 Box Office / Overseerr,查看热门趋势、获得推荐,并请求新的电影和剧集。",
     "openSettings": "打开设置",
-    "notConnected": "管理员尚未将 Overseerr 连接到此服务器。",
+    "notConnected": "管理员尚未将 Box Office / Overseerr 连接到此服务器。",
     "placeholder": "查找任意电影或剧集…",
     "unavailable": "“发现”暂时不可用",
     "open": "打开",

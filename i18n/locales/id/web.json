@@ -590,6 +590,7 @@
     },
     "overseerr": {
       "intro": "Hubungkan agar ada tab Jelajahi: yang sedang tren, rekomendasi berdasarkan tontonan orang, dan cara meminta apa saja. Jellyseerr juga bisa.",
+      "boxOfficeFirst": "Box Office kini mengisi Jelajahi dan menerima permintaan, jadi Overseerr tidak dipakai. Kamu bisa memutuskannya.",
       "notConnected": "Tidak terhubung · untuk Jelajahi",
       "requestAs": "Permintaan dari orang tanpa akun Overseerr",
       "madeAsOwner": "Dibuat sebagai {{name}} (pemilik kunci API)",
@@ -984,9 +985,9 @@
   "discover": {
     "title": "Jelajahi",
     "emptyTitle": "Belum ada yang bisa dijelajahi",
-    "connectIt": "Hubungkan Overseerr untuk melihat yang sedang tren, mendapat rekomendasi, dan meminta film dan serial baru.",
+    "connectIt": "Hubungkan Box Office / Overseerr untuk melihat yang sedang tren, mendapat rekomendasi, dan meminta film dan serial baru.",
     "openSettings": "Buka pengaturan",
-    "notConnected": "Admin belum menghubungkan Overseerr ke server ini.",
+    "notConnected": "Admin belum menghubungkan Box Office / Overseerr ke server ini.",
     "placeholder": "Cari film atau serial apa saja…",
     "unavailable": "Jelajahi sedang tidak tersedia",
     "open": "Buka",

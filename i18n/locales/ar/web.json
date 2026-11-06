@@ -610,6 +610,7 @@
     },
     "overseerr": {
       "intro": "اربطه لإضافة تبويب استكشاف: ما هو رائج، وتوصيات بناءً على ما يشاهده الناس، وطريقة لطلب أي شيء. يعمل Jellyseerr أيضًا.",
+      "boxOfficeFirst": "صار Box Office يملأ «استكشاف» ويستقبل الطلبات، لذا لا يُستخدم Overseerr. يمكنك قطع اتصاله.",
       "notConnected": "غير متصل · لتبويب استكشاف",
       "requestAs": "طلبات الأشخاص الذين ليس لديهم حساب Overseerr",
       "madeAsOwner": "تُرسل باسم {{name}} (مالك مفتاح API)",
@@ -1004,9 +1005,9 @@
   "discover": {
     "title": "استكشاف",
     "emptyTitle": "لا شيء لاستكشافه بعد",
-    "connectIt": "اربط Overseerr لترى ما هو رائج وتحصل على توصيات وتطلب أفلامًا ومسلسلات جديدة.",
+    "connectIt": "اربط Box Office / Overseerr لترى ما هو رائج وتحصل على توصيات وتطلب أفلامًا ومسلسلات جديدة.",
     "openSettings": "فتح الإعدادات",
-    "notConnected": "لم يربط أي مسؤول Overseerr بهذا الخادم.",
+    "notConnected": "لم يربط أي مسؤول Box Office / Overseerr بهذا الخادم.",
     "placeholder": "ابحث عن أي فيلم أو مسلسل…",
     "unavailable": "الاستكشاف غير متاح الآن",
     "open": "فتح",

@@ -16,9 +16,9 @@ function discoverRowTitle(r: DiscoverRow): string {
   return i18n.exists(`common:discover.rows.${r.id}`) ? i18n.t(`common:discover.rows.${r.id}`) : r.title
 }
 
-// Discover: new movies and shows from Overseerr, starting with ones like
-// what you watched lately, and a way to ask for them. Only there when an
-// admin connected Overseerr.
+// Discover: new movies and shows from Box Office or Overseerr, starting
+// with ones like what you watched lately, and a way to ask for them. Only
+// there when an admin connected one of them.
 export default function Discover() {
   const { t } = useTranslation()
   const { data: me } = useQuery<User>({ queryKey: ['me'], queryFn: api.me, staleTime: Infinity })
@@ -28,7 +28,7 @@ export default function Discover() {
   const [q, setQ] = useState(text.trim())
   const [open, setOpen] = useState<DiscoverTitle>()
 
-  // Searching goes out to the internet through Overseerr, so wait for a pause in typing.
+  // Searching goes out to the internet, through Box Office or Overseerr, so wait for a pause in typing.
   useEffect(() => {
     const timer = window.setTimeout(() => {
       setQ(text.trim())
@@ -53,7 +53,7 @@ export default function Discover() {
         {me?.isAdmin ? (
           <>
             <p>{t('discover.connectIt')}</p>
-            <Link to="/settings/add-ons#overseerr">
+            <Link to="/settings/add-ons#boxoffice">
               <Button variant="primary" className="mt-6">
                 {t('discover.openSettings')}
               </Button>

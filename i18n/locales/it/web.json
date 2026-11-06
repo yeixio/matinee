@@ -598,6 +598,7 @@
     },
     "overseerr": {
       "intro": "Collegalo per aggiungere la scheda Scopri: cosa va di moda, consigli in base a ciò che le persone guardano e un modo per chiedere qualsiasi cosa. Funziona anche Jellyseerr.",
+      "boxOfficeFirst": "Ora è Box Office a riempire Scopri e a ricevere le richieste, quindi Overseerr non viene usato. Puoi scollegarlo.",
       "notConnected": "Non collegato · per Scopri",
       "requestAs": "Richieste di chi non ha un account Overseerr",
       "madeAsOwner": "Fatte come {{name}} (proprietario della chiave API)",
@@ -992,9 +993,9 @@
   "discover": {
     "title": "Scopri",
     "emptyTitle": "Ancora niente da scoprire",
-    "connectIt": "Collega Overseerr per vedere cosa va di moda, ricevere consigli e chiedere nuovi film e serie.",
+    "connectIt": "Collega Box Office / Overseerr per vedere cosa va di moda, ricevere consigli e chiedere nuovi film e serie.",
     "openSettings": "Apri le impostazioni",
-    "notConnected": "Nessun amministratore ha collegato Overseerr a questo server.",
+    "notConnected": "Nessun amministratore ha collegato Box Office / Overseerr a questo server.",
     "placeholder": "Trova qualsiasi film o serie…",
     "unavailable": "Scopri non è disponibile in questo momento",
     "open": "Apri",

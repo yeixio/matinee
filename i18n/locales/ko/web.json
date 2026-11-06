@@ -590,6 +590,7 @@
     },
     "overseerr": {
       "intro": "연결하면 둘러보기 탭이 생겨요: 지금 뜨는 작품, 사람들이 보는 작품을 바탕으로 한 추천, 무엇이든 요청하는 방법까지. Jellyseerr도 됩니다.",
+      "boxOfficeFirst": "이제 Box Office가 둘러보기를 채우고 요청을 받으므로 Overseerr는 사용되지 않습니다. 연결을 해제해도 됩니다.",
       "notConnected": "연결 안 됨 · 둘러보기용",
       "requestAs": "Overseerr 계정이 없는 사람의 요청",
       "madeAsOwner": "{{name}}(으)로 요청 (API 키 소유자)",
@@ -984,9 +985,9 @@
   "discover": {
     "title": "둘러보기",
     "emptyTitle": "아직 둘러볼 것이 없어요",
-    "connectIt": "Overseerr를 연결하면 지금 뜨는 작품을 보고, 추천을 받고, 새 영화와 시리즈를 요청할 수 있어요.",
+    "connectIt": "Box Office / Overseerr를 연결하면 지금 뜨는 작품을 보고, 추천을 받고, 새 영화와 시리즈를 요청할 수 있어요.",
     "openSettings": "설정 열기",
-    "notConnected": "관리자가 이 서버에 Overseerr를 연결하지 않았어요.",
+    "notConnected": "관리자가 이 서버에 Box Office / Overseerr를 연결하지 않았어요.",
     "placeholder": "영화나 시리즈 찾기…",
     "unavailable": "지금은 둘러보기를 쓸 수 없어요",
     "open": "열기",

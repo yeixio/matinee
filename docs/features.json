@@ -208,6 +208,19 @@
               }
             },
             {
+              "name": "Requests on Box Office's Requests page",
+              "doc": "/docs/server/radarr-and-sonarr/#requests-on-box-offices-requests-page",
+              "since": "v0.2.4",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
               "name": "Your requests and Report a problem",
               "doc": "/docs/watching/discover/",
               "apps": {

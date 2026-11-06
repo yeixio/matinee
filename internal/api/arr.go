@@ -620,6 +620,9 @@ func (s *Server) createRequest(w http.ResponseWriter, r *http.Request) {
 func (s *Server) approve(ctx context.Context, req store.Request, profile int) (store.Request, error) {
 	app, _ := appFor(req.Kind)
 	profile = cmp.Or(profile, req.QualityProfileID)
+	if req.BoxOfficeID != 0 {
+		return s.approveWithBoxOffice(ctx, req, profile)
+	}
 	var err error
 	if req.Ask != "" {
 		// Another edition, or a better or replacement copy, from Box Office.
@@ -722,6 +725,10 @@ func (s *Server) declineRequest(w http.ResponseWriter, r *http.Request) {
 		writeError(w, http.StatusConflict, "already approved")
 		return
 	}
+	if req.BoxOfficeID != 0 && req.State == store.RequestPending {
+		s.declineWithBoxOffice(w, r, req)
+		return
+	}
 	if err := s.Store.UpdateRequest(r.Context(), req.ID, store.RequestDeclined, "", req.QualityProfileID); err != nil {
 		s.serverError(w, err)
 		return
@@ -741,6 +748,7 @@ func (s *Server) deleteRequest(w http.ResponseWriter, r *http.Request) {
 		writeError(w, http.StatusNotFound, "request not found")
 		return
 	}
+	s.withdrawFromBoxOffice(r.Context(), req)
 	if err := s.Store.DeleteRequest(r.Context(), req.ID); err != nil {
 		s.serverError(w, err)
 		return
@@ -1074,6 +1082,9 @@ func (s *Server) requestTitle(w http.ResponseWriter, r *http.Request, auto bool,
 			writeError(w, http.StatusBadRequest, "no such quality profile")
 			return store.Request{}, false
 		}
+	}
+	if desk, ok := s.requestDesk(ctx, kind); ok && t.TMDBID != 0 {
+		return s.fileWithBoxOffice(w, r, auto, desk, kind, t, profileID)
 	}
 	req, err := s.Store.CreateRequest(ctx, store.Request{
 		Kind: kind, TMDBID: t.TMDBID, TVDBID: t.TVDBID, Title: t.Title, Year: t.Year, Poster: t.Poster,

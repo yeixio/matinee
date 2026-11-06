@@ -590,6 +590,7 @@
     },
     "overseerr": {
       "intro": "連線後會多出「探索」分頁:熱門趨勢、根據大家觀看內容的推薦,以及請求任何影片的方式。Jellyseerr 也可以。",
+      "boxOfficeFirst": "現在由 Box Office 提供「探索」內容並接收請求，因此不再使用 Overseerr。你可以中斷它的連線。",
       "notConnected": "未連線 · 用於「探索」",
       "requestAs": "沒有 Overseerr 帳號的人的請求",
       "madeAsOwner": "以 {{name}} 的身分送出(API 金鑰擁有者)",
@@ -984,9 +985,9 @@
   "discover": {
     "title": "探索",
     "emptyTitle": "暫時沒有可探索的內容",
-    "connectIt": "連線 Overseerr,查看熱門趨勢、取得推薦,並請求新的電影和影集。",
+    "connectIt": "連線 Box Office / Overseerr,查看熱門趨勢、取得推薦,並請求新的電影和影集。",
     "openSettings": "開啟設定",
-    "notConnected": "管理員尚未將 Overseerr 連線到此伺服器。",
+    "notConnected": "管理員尚未將 Box Office / Overseerr 連線到此伺服器。",
     "placeholder": "尋找任何電影或影集…",
     "unavailable": "「探索」暫時無法使用",
     "open": "開啟",

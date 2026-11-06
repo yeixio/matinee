@@ -594,6 +594,7 @@
     },
     "overseerr": {
       "intro": "Verbinde es, um einen Tab „Entdecken“ hinzuzufügen: was gerade angesagt ist, Empfehlungen nach dem, was alle schauen, und eine Möglichkeit, alles anzufragen. Jellyseerr funktioniert auch.",
+      "boxOfficeFirst": "Box Office füllt jetzt Entdecken und nimmt Anfragen an, daher wird Overseerr nicht genutzt. Du kannst es trennen.",
       "notConnected": "Nicht verbunden · für Entdecken",
       "requestAs": "Anfragen von Personen ohne Overseerr-Konto",
       "madeAsOwner": "Gestellt als {{name}} (Besitzer des API-Schlüssels)",
@@ -988,9 +989,9 @@
   "discover": {
     "title": "Entdecken",
     "emptyTitle": "Noch nichts zu entdecken",
-    "connectIt": "Verbinde Overseerr, um zu sehen, was angesagt ist, Empfehlungen zu bekommen und neue Filme und Serien anzufragen.",
+    "connectIt": "Verbinde Box Office / Overseerr, um zu sehen, was angesagt ist, Empfehlungen zu bekommen und neue Filme und Serien anzufragen.",
     "openSettings": "Einstellungen öffnen",
-    "notConnected": "Ein Admin hat Overseerr noch nicht mit diesem Server verbunden.",
+    "notConnected": "Ein Admin hat Box Office / Overseerr noch nicht mit diesem Server verbunden.",
     "placeholder": "Beliebigen Film oder beliebige Serie finden…",
     "unavailable": "Entdecken ist gerade nicht verfügbar",
     "open": "Öffnen",

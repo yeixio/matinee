@@ -594,6 +594,7 @@
     },
     "overseerr": {
       "intro": "Koppel het om een tabblad Ontdekken toe te voegen: wat populair is, aanbevelingen op basis van wat mensen kijken, en een manier om alles aan te vragen. Jellyseerr werkt ook.",
+      "boxOfficeFirst": "Box Office vult nu Ontdekken en neemt verzoeken aan, dus Overseerr wordt niet gebruikt. Je kunt het loskoppelen.",
       "notConnected": "Niet gekoppeld · voor Ontdekken",
       "requestAs": "Aanvragen van mensen zonder Overseerr-account",
       "madeAsOwner": "Gedaan als {{name}} (eigenaar van de API-sleutel)",
@@ -988,9 +989,9 @@
   "discover": {
     "title": "Ontdekken",
     "emptyTitle": "Nog niets te ontdekken",
-    "connectIt": "Koppel Overseerr om te zien wat populair is, aanbevelingen te krijgen en nieuwe films en series aan te vragen.",
+    "connectIt": "Koppel Box Office / Overseerr om te zien wat populair is, aanbevelingen te krijgen en nieuwe films en series aan te vragen.",
     "openSettings": "Instellingen openen",
-    "notConnected": "Een beheerder heeft Overseerr nog niet aan deze server gekoppeld.",
+    "notConnected": "Een beheerder heeft Box Office / Overseerr nog niet aan deze server gekoppeld.",
     "placeholder": "Zoek een film of serie…",
     "unavailable": "Ontdekken is nu niet beschikbaar",
     "open": "Openen",

@@ -598,6 +598,7 @@
     },
     "overseerr": {
       "intro": "חבר אותו כדי להוסיף לשונית „גילוי”: מה טרנדי, המלצות לפי מה שאנשים צופים, ודרך לבקש כל דבר. גם Jellyseerr עובד.",
+      "boxOfficeFirst": "Box Office ממלא עכשיו את 'גילוי' ומקבל את הבקשות, כך ש-Overseerr לא בשימוש. אפשר לנתק אותו.",
       "notConnected": "לא מחובר · עבור „גילוי”",
       "requestAs": "בקשות של אנשים בלי חשבון Overseerr",
       "madeAsOwner": "נשלחות בשם {{name}} (בעל מפתח ה־API)",
@@ -992,9 +993,9 @@
   "discover": {
     "title": "גילוי",
     "emptyTitle": "עוד אין מה לגלות",
-    "connectIt": "חבר את Overseerr כדי לראות מה טרנדי, לקבל המלצות ולבקש סרטים וסדרות חדשים.",
+    "connectIt": "חבר את Box Office / Overseerr כדי לראות מה טרנדי, לקבל המלצות ולבקש סרטים וסדרות חדשים.",
     "openSettings": "פתיחת ההגדרות",
-    "notConnected": "מנהל עוד לא חיבר את Overseerr לשרת הזה.",
+    "notConnected": "מנהל עוד לא חיבר את Box Office / Overseerr לשרת הזה.",
     "placeholder": "חיפוש כל סרט או סדרה…",
     "unavailable": "„גילוי” לא זמין כרגע",
     "open": "פתיחה",

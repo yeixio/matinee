@@ -163,6 +163,7 @@ func (s *Server) ReadBoxOffice(ctx context.Context) {
 		}
 		s.boxOffices.set(app, state)
 	}
+	s.syncBoxOfficeRequests(ctx)
 }
 
 // readFeed passes on what one Box Office has said since last time. The

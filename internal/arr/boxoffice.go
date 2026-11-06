@@ -4,6 +4,7 @@ import (
 	"context"
 	"net/url"
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -111,4 +112,64 @@ func (c *Client) BoxOfficeDiscoverSearch(ctx context.Context, q string) ([]BoxOf
 	out := []BoxOfficeTitle{}
 	err := c.do(ctx, "GET", "/boxoffice/discover/search", url.Values{"q": {q}}, nil, &out)
 	return out, err
+}
+
+// BoxOfficeRequest is a request on Box Office's Requests page, as Box
+// Office has it.
+type BoxOfficeRequest struct {
+	ID     int64  `json:"id"`
+	Kind   string `json:"kind"` // movie or series
+	TMDBID int    `json:"tmdbId"`
+	Title  string `json:"title"`
+	// Status is pending, approved or declined, and Reply the admin's words
+	// for a declined one.
+	Status string `json:"status"`
+	Reply  string `json:"reply,omitempty"`
+	// State is how far it's got: pending, declined, searching,
+	// downloading, partial, available, paused or removed.
+	State string `json:"state"`
+}
+
+// BoxOfficeAsk files a request on Box Office's Requests page for the
+// Matinee account named user. approved says it's to be added at once
+// (Matinee lets this person add titles); profile is a quality profile, or
+// 0. Box Office's rules, such as weekly limits, come back as an *Error
+// with Status 422 and the words for the person in Reason.
+func (c *Client) BoxOfficeAsk(ctx context.Context, user string, tmdbID int, approved bool, profile int) (BoxOfficeRequest, error) {
+	var r BoxOfficeRequest
+	err := c.do(ctx, "POST", "/boxoffice/requests", nil, map[string]any{"user": user, "tmdbId": tmdbID, "approved": approved, "qualityProfileId": profile}, &r)
+	return r, err
+}
+
+// BoxOfficeRequests is where requests on Box Office stand, by id. Ones Box
+// Office no longer has are left out.
+func (c *Client) BoxOfficeRequests(ctx context.Context, ids []int64) ([]BoxOfficeRequest, error) {
+	s := make([]string, len(ids))
+	for i, id := range ids {
+		s[i] = strconv.FormatInt(id, 10)
+	}
+	var out []BoxOfficeRequest
+	err := c.do(ctx, "GET", "/boxoffice/requests", url.Values{"ids": {strings.Join(s, ",")}}, nil, &out)
+	return out, err
+}
+
+// BoxOfficeApprove approves a request on Box Office, with a quality
+// profile or 0 for Box Office's.
+func (c *Client) BoxOfficeApprove(ctx context.Context, id int64, profile int) (BoxOfficeRequest, error) {
+	var r BoxOfficeRequest
+	err := c.do(ctx, "POST", "/boxoffice/requests/"+strconv.FormatInt(id, 10)+"/approve", nil, map[string]any{"qualityProfileId": profile}, &r)
+	return r, err
+}
+
+// BoxOfficeDecline declines a request on Box Office.
+func (c *Client) BoxOfficeDecline(ctx context.Context, id int64, reply string) (BoxOfficeRequest, error) {
+	var r BoxOfficeRequest
+	err := c.do(ctx, "POST", "/boxoffice/requests/"+strconv.FormatInt(id, 10)+"/decline", nil, map[string]any{"reply": reply}, &r)
+	return r, err
+}
+
+// BoxOfficeWithdraw takes back a request on Box Office that's still
+// waiting there.
+func (c *Client) BoxOfficeWithdraw(ctx context.Context, id int64) error {
+	return c.do(ctx, "DELETE", "/boxoffice/requests/"+strconv.FormatInt(id, 10), nil, nil, nil)
 }
