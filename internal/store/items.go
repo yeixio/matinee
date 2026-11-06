@@ -66,6 +66,10 @@ type Item struct {
 	VersionOf *int64 `json:"versionOf,omitempty"`
 	// Edition is the cut a version's file name names, such as "Director's Cut".
 	Edition string `json:"edition,omitempty"`
+	// Parts are the files of a movie that comes in parts (CD1, CD2), in
+	// order, the movie's own first; absent for a movie in one file. See
+	// GroupParts.
+	Parts []FilePart `json:"parts,omitempty"`
 	// For books and their parts: who wrote it, and for a part the book's
 	// title (the book's id is ParentID). Books also name their narrators
 	// and their place in a series, such as 2 or 2.5.
@@ -263,7 +267,7 @@ func intPtr(n sql.NullInt64) *int {
 }
 
 func (s *Store) queryItems(ctx context.Context, where, order string, args ...any) ([]Item, error) {
-	rows, err := s.db.QueryContext(ctx, "SELECT "+itemCols+itemFrom+" WHERE ("+where+") AND i.version_of IS NULL"+visibleToMe+" ORDER BY "+order, args...)
+	rows, err := s.db.QueryContext(ctx, "SELECT "+itemCols+itemFrom+" WHERE ("+where+") AND i.version_of IS NULL AND i.file_part_of IS NULL"+visibleToMe+" ORDER BY "+order, args...)
 	if err != nil {
 		return nil, err
 	}
@@ -282,6 +286,9 @@ func (s *Store) queryItems(ctx context.Context, where, order string, args ...any
 	}
 	// Done with the rows before asking for translations: SQLite in tests has one connection.
 	rows.Close()
+	if err := s.fillParts(ctx, out); err != nil {
+		return nil, err
+	}
 	return out, s.localize(ctx, out)
 }
 
@@ -297,6 +304,9 @@ func (s *Store) Item(ctx context.Context, userID, id int64) (Item, error) {
 	}
 	s.markPending(&it)
 	one := []Item{it}
+	if err := s.fillParts(ctx, one); err != nil {
+		return it, err
+	}
 	err = s.localize(ctx, one)
 	return one[0], err
 }
@@ -667,9 +677,11 @@ func (s *Store) NeedsMetadata(ctx context.Context, libraryID int64, kinds []stri
 
 // Metadata is what an online provider knows about an item.
 type Metadata struct {
-	TMDBID   int64
-	MBID     string // MusicBrainz id, for artists and albums
-	Title    string // only applied to episodes, whose file names rarely carry one
+	TMDBID int64
+	MBID   string // MusicBrainz id, for artists and albums
+	// Title is only applied to episodes whose file names carry none, named
+	// "Episode 4" or, for daily shows, "Mar 15, 2024".
+	Title    string
 	Overview string
 	Year     int
 	Rating   float64
@@ -700,7 +712,8 @@ func applyMetadata(ctx context.Context, e execer, id int64, m *Metadata) error {
 			poster = CASE WHEN poster IS NULL OR poster LIKE 'http%' THEN COALESCE(?, poster) ELSE poster END,
 			backdrop = CASE WHEN backdrop IS NULL OR backdrop LIKE 'http%' THEN COALESCE(?, backdrop) ELSE backdrop END,
 			genres = COALESCE(?, genres), facts = COALESCE(?, facts),
-			title = CASE WHEN kind = 'episode' AND ? != '' AND title LIKE 'Episode %' THEN ? ELSE title END,
+			title = CASE WHEN kind = 'episode' AND ? != '' AND (title LIKE 'Episode %'
+				OR title LIKE '___ _, ____' OR title LIKE '___ __, ____') THEN ? ELSE title END,
 			meta_at = ?, details_at = NULL
 		WHERE id = ?`,
 		nullInt64(m.TMDBID), nullStr(m.MBID), nullStr(m.Overview), nullFloat(m.Rating), nullInt(m.Year), nullStr(m.Poster), nullStr(m.Backdrop),

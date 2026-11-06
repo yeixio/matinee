@@ -29,7 +29,9 @@ type LibraryFile struct {
 	tmdbID int64
 	// VersionOf is the item this file is another version of, or 0.
 	VersionOf int64
-	edition   string
+	// PartOf is the movie this file is a later part of, or 0.
+	PartOf  int64
+	edition string
 }
 
 // LibraryFiles lists a library's files with their match keys.
@@ -37,7 +39,7 @@ func (s *Store) LibraryFiles(ctx context.Context, libraryID int64) ([]LibraryFil
 	rows, err := s.db.QueryContext(ctx, `
 		SELECT i.id, i.path, i.kind, i.title, COALESCE(i.year, 0), i.index_number, COALESCE(i.disc_number, 0),
 			COALESCE(i.parent_id, 0), COALESCE(i.tmdb_id, 0), COALESCE(se.parent_id, 0), se.index_number,
-			COALESCE(i.version_of, 0), COALESCE(i.edition, '')
+			COALESCE(i.version_of, 0), COALESCE(i.edition, ''), COALESCE(i.file_part_of, 0)
 		FROM items i LEFT JOIN items se ON i.kind = 'episode' AND se.id = i.parent_id
 		WHERE i.library_id = ? AND i.path IS NOT NULL`, libraryID)
 	if err != nil {
@@ -51,7 +53,7 @@ func (s *Store) LibraryFiles(ctx context.Context, libraryID int64) ([]LibraryFil
 		var year, disc int
 		var parent, showID int64
 		var index, season sql.NullInt64
-		if err := rows.Scan(&f.ID, &f.Path, &f.Kind, &title, &year, &index, &disc, &parent, &f.tmdbID, &showID, &season, &f.VersionOf, &f.edition); err != nil {
+		if err := rows.Scan(&f.ID, &f.Path, &f.Kind, &title, &year, &index, &disc, &parent, &f.tmdbID, &showID, &season, &f.VersionOf, &f.edition, &f.PartOf); err != nil {
 			return nil, err
 		}
 		f.Key = fileKey(f.Kind, title, year, index, disc, parent, showID, season)
@@ -255,6 +257,12 @@ func carryUserData(ctx context.Context, t execer, keep, from int64, tables []str
 		AND NOT EXISTS (SELECT 1 FROM progress o WHERE o.item_id = ? AND o.user_id = progress.user_id)`, keep, from, keep); err != nil {
 		return err
 	}
+	return carryRows(ctx, t, keep, from, tables)
+}
+
+// carryRows moves the rows of tables about item from to item keep, unless
+// keep has its own.
+func carryRows(ctx context.Context, t execer, keep, from int64, tables []struct{ table, key string }) error {
 	for _, u := range tables {
 		q := "UPDATE " + u.table + " SET item_id = ? WHERE item_id = ?"
 		args := []any{keep, from}

@@ -1,7 +1,10 @@
 package stream
 
 import (
+	"crypto/sha256"
+	"encoding/hex"
 	"errors"
+	"fmt"
 	"io"
 	"mime"
 	"net"
@@ -10,6 +13,7 @@ import (
 	"net/url"
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
 	"sync/atomic"
 	"syscall"
@@ -180,9 +184,43 @@ func serveRemote(w http.ResponseWriter, r *http.Request, it store.Item) {
 // Input is FFmpeg's input options for an item's media: its file, or its
 // address on the internet, reconnecting if the host drops the connection.
 func Input(it store.Item) []string {
+	if len(it.Parts) > 1 {
+		if list, err := partsList(it.Parts); err == nil {
+			return []string{"-f", "concat", "-safe", "0", "-i", list}
+		}
+	}
 	if !store.IsRemote(it.Path) {
 		return []string{"-i", it.Path}
 	}
 	return []string{"-user_agent", remoteUserAgent, "-reconnect", "1", "-reconnect_streamed", "1",
 		"-reconnect_on_network_error", "1", "-reconnect_delay_max", "10", "-i", store.EpisodeURL(it.Path)}
+}
+
+// partsList writes FFmpeg's list of a movie's parts (CD1, CD2), which it
+// reads as one video, and returns where. Lists are named after what's in
+// them, so a movie's is written once and shared by everyone playing it.
+func partsList(parts []store.FilePart) (string, error) {
+	var b strings.Builder
+	b.WriteString("ffconcat version 1.0\n")
+	for _, p := range parts {
+		b.WriteString("file '" + strings.ReplaceAll(p.Path, "'", `'\''`) + "'\n")
+		if p.DurationMs > 0 {
+			// Known lengths let FFmpeg seek straight to the right part.
+			fmt.Fprintf(&b, "duration %.3f\n", float64(p.DurationMs)/1000)
+		}
+	}
+	sum := sha256.Sum256([]byte(b.String()))
+	dir := filepath.Join(os.TempDir(), "matinee-parts")
+	path := filepath.Join(dir, hex.EncodeToString(sum[:12])+".ffconcat")
+	if _, err := os.Stat(path); err == nil {
+		return path, nil
+	}
+	if err := os.MkdirAll(dir, 0o755); err != nil {
+		return "", err
+	}
+	tmp := path + ".tmp" + strconv.Itoa(os.Getpid())
+	if err := os.WriteFile(tmp, []byte(b.String()), 0o644); err != nil {
+		return "", err
+	}
+	return path, os.Rename(tmp, path)
 }

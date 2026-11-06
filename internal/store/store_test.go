@@ -101,6 +101,9 @@ func TestMigrateFromVersion1(t *testing.T) {
 		"DROP INDEX notifications_grouping",
 		"DROP INDEX notifications_user",
 		"DROP TABLE notifications",
+		"DROP INDEX items_file_part_of",
+		"ALTER TABLE items DROP COLUMN file_part",
+		"ALTER TABLE items DROP COLUMN file_part_of",
 		"UPDATE schema_version SET version = 1",
 	} {
 		if _, err := s.db.ExecContext(ctx, q); err != nil {

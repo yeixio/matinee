@@ -9,6 +9,7 @@ import (
 	"strconv"
 	"strings"
 	"sync"
+	"time"
 
 	"github.com/yeixio/matinee/internal/probe"
 	"github.com/yeixio/matinee/internal/store"
@@ -182,8 +183,9 @@ func (tv) Playable(pr probe.Result) bool { return pr.VideoCodec != "" }
 func (tv) Index(ctx context.Context, st *store.Store, f File) (store.Item, error) {
 	ep := ParseEpisode(f.Root, f.Path)
 	if !ep.OK {
-		// Not an episode name; file it under its folder as a special.
-		ep = EpisodeInfo{Show: cleanTitle(filepath.Base(filepath.Dir(f.Path))), Title: cleanTitle(stem(f.Path))}
+		// Not an episode name; file it under its show as a special.
+		ep = ShowOf(f.Root, f.Path)
+		ep.Title = cleanTitle(stem(f.Path))
 	}
 	showID, err := st.EnsureShow(ctx, f.Library.ID, ep.Show, ep.ShowYear, ep.ShowIDs.TMDB)
 	if err != nil {
@@ -208,6 +210,10 @@ func (tv) Index(ctx context.Context, st *store.Store, f File) (store.Item, error
 	it := store.Item{Kind: "episode", ParentID: &seasonID, IndexNumber: nonZero(ep.Episode), Title: ep.Title}
 	switch {
 	case it.Title != "":
+	case ep.AirDate != "":
+		if d, err := time.Parse("2006-01-02", ep.AirDate); err == nil {
+			it.Title = d.Format("Jan 2, 2006")
+		}
 	case ep.EndEpisode > 0:
 		it.Title = "Episodes " + strconv.Itoa(ep.Episode) + "–" + strconv.Itoa(ep.EndEpisode)
 	default:
@@ -447,6 +453,9 @@ func isCompilation(tags map[string]string) bool {
 func seasonTitle(n int) string {
 	if n == 0 {
 		return "Specials"
+	}
+	if DailySeason(n) {
+		return strconv.Itoa(n) // a daily show's year
 	}
 	return "Season " + strconv.Itoa(n)
 }

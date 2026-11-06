@@ -7,6 +7,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"strings"
 	"testing"
 
 	"github.com/yeixio/matinee/internal/probe"
@@ -97,5 +98,79 @@ func TestScanMultiEpisodeFile(t *testing.T) {
 	eps, _ := st.Children(ctx, 0, seasons[0].ID)
 	if len(eps) != 2 || eps[0].Title != "Episodes 1–2" || eps[1].Title != "Third" {
 		t.Fatalf("episodes: %+v", eps)
+	}
+}
+
+// CD1 and CD2 of a movie are one movie that plays both, in order.
+func TestScanMovieInParts(t *testing.T) {
+	root := t.TempDir()
+	makeVideos(t, root,
+		"Heat (1995)/Heat (1995) CD2.mkv",
+		"Heat (1995)/Heat (1995) CD1.mkv",
+		"Ronin.1998.Part1.XviD.mkv",
+		"Ronin.1998.Part2.XviD.mkv",
+		"Deathly Hallows Part 1 (2010)/Deathly Hallows Part 1 (2010).mkv",
+		"Deathly Hallows Part 2 (2011)/Deathly Hallows Part 2 (2011).mkv",
+		"Lone (2001)/Lone (2001) CD1.mkv",
+	)
+	st, lib := scanLib(t, "movies", root)
+	ctx := context.Background()
+	top, _ := st.TopLevel(ctx, 0, lib.ID)
+	titles := map[string]store.Item{}
+	for _, it := range top {
+		titles[it.Title] = it
+	}
+	if len(top) != 5 {
+		t.Fatalf("movies: %v", titles)
+	}
+	for _, name := range []string{"Heat", "Ronin"} {
+		it, err := st.Item(ctx, 0, titles[name].ID)
+		if err != nil || len(it.Parts) != 2 || it.Container != "" || it.DurationMs == nil || *it.DurationMs < 1900 {
+			t.Fatalf("%s: %+v %v", name, it, err)
+		}
+		if !strings.Contains(it.Parts[0].Path, "1") || !strings.Contains(it.Parts[1].Path, "2") {
+			t.Errorf("%s parts out of order: %+v", name, it.Parts)
+		}
+	}
+	if it := titles["Lone"]; len(it.Parts) != 0 {
+		t.Errorf("a lone CD1 is a movie of its own: %+v", it)
+	}
+	// Scanning again changes nothing.
+	if n, err := st.GroupParts(ctx, lib.ID, PartKey); err != nil || n != 0 {
+		t.Errorf("regroup: %d %v", n, err)
+	}
+}
+
+// A daily show's episodes go in their year's season, in date order, and
+// a season folder's numbered files are its episodes.
+func TestScanDailyAndNumberedEpisodes(t *testing.T) {
+	root := t.TempDir()
+	makeVideos(t, root,
+		"The Nightly Desk/2024-03-15.mkv",
+		"The Nightly Desk/The.Nightly.Desk.2024.01.02.Guest.mkv",
+		"Crumb Street/Season 2/02 - Rise.mkv",
+		"Crumb Street/Season 2/01 - Dough.mkv",
+	)
+	st, lib := scanLib(t, "tv", root)
+	ctx := context.Background()
+	top, _ := st.TopLevel(ctx, 0, lib.ID)
+	if len(top) != 2 {
+		t.Fatalf("shows: %+v", top)
+	}
+	want := map[string][]string{"The Nightly Desk": {"2024", "Guest", "Mar 15, 2024"}, "Crumb Street": {"Season 2", "Dough", "Rise"}}
+	for _, show := range top {
+		seasons, _ := st.Children(ctx, 0, show.ID)
+		if len(seasons) != 1 {
+			t.Fatalf("%s seasons: %+v", show.Title, seasons)
+		}
+		eps, _ := st.Children(ctx, 0, seasons[0].ID)
+		w := want[show.Title]
+		if seasons[0].Title != w[0] || len(eps) != 2 || eps[0].Title != w[1] || eps[1].Title != w[2] {
+			var got []string
+			for _, e := range eps {
+				got = append(got, e.Title)
+			}
+			t.Errorf("%s: season %q, episodes %v; want %v", show.Title, seasons[0].Title, got, w)
+		}
 	}
 }

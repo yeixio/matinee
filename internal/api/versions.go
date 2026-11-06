@@ -33,10 +33,14 @@ func (s *Server) addVersions(r *http.Request, v *itemView) error {
 		return err
 	}
 	for _, it := range vs {
+		mime := stream.MimeType(it.Path)
+		if len(it.Parts) > 1 {
+			mime = "" // played as one through the server
+		}
 		v.Versions = append(v.Versions, versionView{
 			ID: it.ID, Edition: it.Edition, Width: it.Width, Height: it.Height,
 			VideoCodec: it.VideoCodec, AudioCodec: it.AudioCodec, Container: it.Container,
-			MimeType: stream.MimeType(it.Path), MediaTags: it.MediaTags, DurationMs: it.DurationMs, Size: it.Size,
+			MimeType: mime, MediaTags: it.MediaTags, DurationMs: it.DurationMs, Size: it.Size,
 		})
 	}
 	return nil

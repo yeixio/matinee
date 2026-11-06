@@ -40,7 +40,8 @@ func (s *Server) itemThumbnails(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	v := thumbnailsView{State: "off"}
-	if s.Thumbs != nil {
+	// Pictures are made from one file, so a movie in parts has none yet.
+	if s.Thumbs != nil && len(it.Parts) < 2 {
 		mode, err := s.Thumbs.Mode(r.Context())
 		if err != nil {
 			s.serverError(w, err)

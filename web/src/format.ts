@@ -36,8 +36,14 @@ export function progressFraction(positionMs?: number, durationMs?: number): numb
   return Math.min(1, positionMs / durationMs)
 }
 
-// "S1 · E2" for an episode.
+// "S1 · E2" for an episode. A daily show's episode, filed under its year
+// with the month and day as its number (2024, 315), is its air date.
 export function episodeCode(season?: number, episode?: number): string {
+  if (season && season >= 1900 && episode) {
+    const day = `${season}-${String(Math.floor(episode / 100)).padStart(2, '0')}-${String(episode % 100).padStart(2, '0')}`
+    const date = shortDate(day, formatLocale())
+    if (date) return date
+  }
   return i18n.t('common:episodeCode', { season: season ?? 0, episode: episode ?? '?' })
 }
 
