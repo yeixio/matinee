@@ -29,21 +29,21 @@ type FilePart struct {
 // part. A movie needs at least two different parts.
 func (s *Store) GroupParts(ctx context.Context, libraryID int64, partKey func(path string) (key string, part int)) (changed int, err error) {
 	rows, err := s.db.QueryContext(ctx, `
-		SELECT id, path, COALESCE(file_part_of, 0), COALESCE(file_part, 0) FROM items
+		SELECT id, path, COALESCE(file_part_of, 0), COALESCE(file_part, 0), COALESCE(duration_ms, 0) FROM items
 		WHERE library_id = ? AND kind = 'movie' AND path IS NOT NULL`, libraryID)
 	if err != nil {
 		return 0, err
 	}
 	type file struct {
-		id, partOf int64
-		part, was  int
+		id, partOf, ms int64
+		part, was      int
 	}
 	groups := map[string][]file{}
 	var all []file
 	for rows.Next() {
 		var f file
 		var path string
-		if err := rows.Scan(&f.id, &path, &f.partOf, &f.was); err != nil {
+		if err := rows.Scan(&f.id, &path, &f.partOf, &f.was, &f.ms); err != nil {
 			rows.Close()
 			return 0, err
 		}
@@ -72,7 +72,7 @@ func (s *Store) GroupParts(ctx context.Context, libraryID int64, partKey func(pa
 				kept = append(kept, f) // a second copy of a part stays a movie of its own
 			}
 		}
-		if len(kept) < 2 {
+		if len(kept) < 2 || allFeatureLength(kept, func(f file) int64 { return f.ms }) {
 			continue
 		}
 		for i, f := range kept {
@@ -112,6 +112,21 @@ func (s *Store) GroupParts(ctx context.Context, libraryID int64, partKey func(pa
 		changed++
 	}
 	return changed, t.Commit()
+}
+
+// featureLength is how long a file runs at least to be a whole movie
+// rather than a part of one. Halves of a movie on two CDs run about an
+// hour each; "Disk 1" and "Disk 2" that each run this long are two copies
+// or cuts of the movie, which are kept apart (and grouped as versions).
+const featureLength = 80 * 60 * 1000
+
+func allFeatureLength[T any](files []T, ms func(T) int64) bool {
+	for _, f := range files {
+		if ms(f) < featureLength {
+			return false
+		}
+	}
+	return true
 }
 
 // fillParts gives the movies among items that come in parts their parts,
