@@ -90,6 +90,7 @@ func NewManager(st *store.Store, ffmpeg, dir string, log *slog.Logger) *Manager 
 // original, or a conversion in the cache named after everything that
 // affects its contents, so identical requests share it.
 func (m *Manager) Plan(d *store.Download, it store.Item, q Quality) {
+	q = forParts(it, q)
 	d.SourceSize, d.SourceMtime = it.Size, it.Mtime
 	if store.IsRemote(it.Path) && q.Name == store.QualityOriginal {
 		// An episode on the internet: fetched into the cache as it is.
@@ -115,6 +116,15 @@ func (m *Manager) Plan(d *store.Download, it store.Item, q Quality) {
 		ext, mime = ".m4a", "audio/mp4"
 	}
 	d.File, d.MimeType = filepath.Join(m.Dir, hex.EncodeToString(sum[:12])+ext), mime
+}
+
+// forParts makes a download of a movie in parts (CD1, CD2) one file: its
+// original files are several, so it's converted at the best quality.
+func forParts(it store.Item, q Quality) Quality {
+	if len(it.Parts) > 1 && q.Name == store.QualityOriginal {
+		return Qualities[1]
+	}
+	return q
 }
 
 // Converted says whether a download's file is one Matinee made (and may delete).
@@ -252,6 +262,7 @@ func (m *Manager) build(ctx context.Context, d store.Download) (sums, int64, err
 			return sums{}, 0, errors.New("that subtitle track is gone")
 		}
 	}
+	q = forParts(it, q)
 	part := d.File + ".part"
 	defer os.Remove(part)
 	if store.IsRemote(it.Path) && q.Name == store.QualityOriginal {

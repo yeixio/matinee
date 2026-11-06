@@ -122,7 +122,7 @@ func versionGroups(files []LibraryFile) [][]LibraryFile {
 	byMatch := map[string][]int{}
 	keyMatches := map[string]map[int64]bool{}
 	for i, f := range files {
-		if f.Kind == "movie" && f.tmdbID != 0 {
+		if f.Kind == "movie" && f.tmdbID != 0 && f.PartOf == 0 {
 			k := "tmdb|" + strconv.FormatInt(f.tmdbID, 10)
 			byMatch[k] = append(byMatch[k], i)
 			if f.Key != "" {
@@ -135,6 +135,9 @@ func versionGroups(files []LibraryFile) [][]LibraryFile {
 	}
 	for i, f := range files {
 		switch {
+		case f.PartOf != 0:
+			// A later part of a movie is part of it, not a version of it.
+			byMatch["file|"+strconv.FormatInt(f.ID, 10)] = []int{i}
 		case f.Kind == "movie" && f.tmdbID != 0:
 		case f.Key == "":
 			byMatch["file|"+strconv.FormatInt(f.ID, 10)] = []int{i}
@@ -219,5 +222,9 @@ func (s *Store) Versions(ctx context.Context, userID, id int64) ([]Item, error) 
 		}
 		out = append(out, it)
 	}
-	return out, rows.Err()
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	rows.Close()
+	return out, s.fillParts(ctx, out)
 }

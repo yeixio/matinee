@@ -56,7 +56,7 @@ type MovieInfo struct {
 // ParseMovie reads "Title (Year)" or release-style "Title.Year.1080p.BluRay"
 // from the file name, falling back to the folder name when the file is generic.
 func ParseMovie(path string) MovieInfo {
-	name := stem(path)
+	name, _ := Part(path) // "Heat (1995) CD1" is Heat
 	info := parseMovieName(name)
 	if info.Year == 0 {
 		// Files like "movie.mkv" in "Heat (1995)/" take the folder's name.

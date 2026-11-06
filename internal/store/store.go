@@ -668,6 +668,17 @@ var migrations = []string{
 	"DROP INDEX items_container_key",
 	`CREATE UNIQUE INDEX items_container_key ON items(library_id, kind, COALESCE(parent_id, 0), title, COALESCE(index_number, -1))
 		WHERE path IS NULL AND kind <> 'show'`,
+	// 117–119: a movie in parts (CD1, CD2) is one movie: its other parts
+	// point to its first (see fileparts.go).
+	"ALTER TABLE items ADD COLUMN file_part_of BIGINT REFERENCES items(id) ON DELETE SET NULL",
+	"ALTER TABLE items ADD COLUMN file_part INTEGER",
+	"CREATE INDEX items_file_part_of ON items(file_part_of)",
+	// 120–121: a first part named "Heat CD1" was titled so; it's filed
+	// again, without the part in its title, and looked up again by that.
+	`UPDATE items SET mtime = 0 WHERE kind = 'movie' AND path IS NOT NULL AND (
+		LOWER(path) LIKE '%cd1%' OR LOWER(path) LIKE '%cd_1%' OR LOWER(path) LIKE '%dvd1%' OR LOWER(path) LIKE '%dvd_1%' OR LOWER(path) LIKE '%disc1%' OR LOWER(path) LIKE '%disc_1%' OR LOWER(path) LIKE '%disk1%' OR LOWER(path) LIKE '%disk_1%' OR LOWER(path) LIKE '%part1%' OR LOWER(path) LIKE '%part_1%' OR LOWER(path) LIKE '%pt1%' OR LOWER(path) LIKE '%pt_1%')`,
+	`UPDATE items SET meta_at = NULL WHERE kind = 'movie' AND path IS NOT NULL AND tmdb_id IS NULL AND match_locked = 0 AND (
+		LOWER(path) LIKE '%cd1%' OR LOWER(path) LIKE '%cd_1%' OR LOWER(path) LIKE '%dvd1%' OR LOWER(path) LIKE '%dvd_1%' OR LOWER(path) LIKE '%disc1%' OR LOWER(path) LIKE '%disc_1%' OR LOWER(path) LIKE '%disk1%' OR LOWER(path) LIKE '%disk_1%' OR LOWER(path) LIKE '%part1%' OR LOWER(path) LIKE '%part_1%' OR LOWER(path) LIKE '%pt1%' OR LOWER(path) LIKE '%pt_1%')`,
 }
 
 func now() int64 { return time.Now().Unix() }
@@ -1019,7 +1030,7 @@ func (s *Store) LibraryCounts(ctx context.Context) (map[int64]LibraryCount, erro
 	rows, err := s.db.QueryContext(ctx, `SELECT library_id,
 		SUM(CASE WHEN parent_id IS NULL THEN 1 ELSE 0 END),
 		SUM(CASE WHEN path IS NOT NULL AND path <> '' THEN 1 ELSE 0 END)
-		FROM items WHERE version_of IS NULL GROUP BY library_id`)
+		FROM items WHERE version_of IS NULL AND file_part_of IS NULL GROUP BY library_id`)
 	if err != nil {
 		return nil, err
 	}

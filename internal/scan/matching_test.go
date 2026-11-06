@@ -7,6 +7,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"strings"
 	"testing"
 
 	"github.com/yeixio/matinee/internal/probe"
@@ -97,5 +98,45 @@ func TestScanMultiEpisodeFile(t *testing.T) {
 	eps, _ := st.Children(ctx, 0, seasons[0].ID)
 	if len(eps) != 2 || eps[0].Title != "Episodes 1–2" || eps[1].Title != "Third" {
 		t.Fatalf("episodes: %+v", eps)
+	}
+}
+
+// CD1 and CD2 of a movie are one movie that plays both, in order.
+func TestScanMovieInParts(t *testing.T) {
+	root := t.TempDir()
+	makeVideos(t, root,
+		"Heat (1995)/Heat (1995) CD2.mkv",
+		"Heat (1995)/Heat (1995) CD1.mkv",
+		"Ronin.1998.Part1.XviD.mkv",
+		"Ronin.1998.Part2.XviD.mkv",
+		"Deathly Hallows Part 1 (2010)/Deathly Hallows Part 1 (2010).mkv",
+		"Deathly Hallows Part 2 (2011)/Deathly Hallows Part 2 (2011).mkv",
+		"Lone (2001)/Lone (2001) CD1.mkv",
+	)
+	st, lib := scanLib(t, "movies", root)
+	ctx := context.Background()
+	top, _ := st.TopLevel(ctx, 0, lib.ID)
+	titles := map[string]store.Item{}
+	for _, it := range top {
+		titles[it.Title] = it
+	}
+	if len(top) != 5 {
+		t.Fatalf("movies: %v", titles)
+	}
+	for _, name := range []string{"Heat", "Ronin"} {
+		it, err := st.Item(ctx, 0, titles[name].ID)
+		if err != nil || len(it.Parts) != 2 || it.Container != "" || it.DurationMs == nil || *it.DurationMs < 1900 {
+			t.Fatalf("%s: %+v %v", name, it, err)
+		}
+		if !strings.Contains(it.Parts[0].Path, "1") || !strings.Contains(it.Parts[1].Path, "2") {
+			t.Errorf("%s parts out of order: %+v", name, it.Parts)
+		}
+	}
+	if it := titles["Lone"]; len(it.Parts) != 0 {
+		t.Errorf("a lone CD1 is a movie of its own: %+v", it)
+	}
+	// Scanning again changes nothing.
+	if n, err := st.GroupParts(ctx, lib.ID, PartKey); err != nil || n != 0 {
+		t.Errorf("regroup: %d %v", n, err)
 	}
 }

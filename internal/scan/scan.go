@@ -340,6 +340,12 @@ func (s *Scanner) run(ctx context.Context, lib store.Library, paths []string) (S
 			return st, err
 		}
 	}
+	if lib.Kind == "movies" && (!partial || st.Added+st.Updated+st.Removed > 0) {
+		// CD1 and CD2 are one movie; before versions, so they aren't two versions of it.
+		if _, err := s.Store.GroupParts(ctx, lib.ID, PartKey); err != nil {
+			return st, err
+		}
+	}
 	if lib.Kind != "music" && (!partial || st.Added+st.Updated+st.Removed > 0) {
 		if _, err := s.Store.GroupVersions(ctx, lib.ID, Edition); err != nil {
 			return st, err

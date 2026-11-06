@@ -19,7 +19,7 @@ func (s *Store) Counts(ctx context.Context) (Counts, error) {
 		(SELECT COUNT(*) FROM libraries)`).Scan(&c.Users, &c.Libraries); err != nil {
 		return c, err
 	}
-	rows, err := s.db.QueryContext(ctx, "SELECT kind, COUNT(*) FROM items WHERE version_of IS NULL GROUP BY kind")
+	rows, err := s.db.QueryContext(ctx, "SELECT kind, COUNT(*) FROM items WHERE version_of IS NULL AND file_part_of IS NULL GROUP BY kind")
 	if err != nil {
 		return c, err
 	}

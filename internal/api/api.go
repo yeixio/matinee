@@ -1345,6 +1345,24 @@ func (s *Server) getItem(w http.ResponseWriter, r *http.Request) {
 		if currentUser(r).IsAdmin {
 			v.FilePath = it.Path
 		}
+		if len(it.Parts) > 1 {
+			// A movie in parts plays as one video through the server. Its
+			// intro and chapters are in its first part, but the credits
+			// found are where that part ends.
+			v.MimeType, v.EndCredits = "", nil
+			v.FileSize = 0
+			for _, p := range it.Parts {
+				v.FileSize += p.Size
+			}
+			if mi := v.MediaInfo; mi != nil {
+				c := *mi
+				c.CreditsMs = 0
+				if it.DurationMs != nil {
+					c.DurationMs = *it.DurationMs
+				}
+				v.MediaInfo = &c
+			}
+		}
 	}
 	if it.Playable && it.VideoCodec != "" {
 		v.Subtitles = s.subtitleTracks(r.Context(), it)

@@ -25,6 +25,23 @@ Movies/
 The year matters: it tells two films with the same title apart.
 
 <!-- since: v0.2.4 -->
+### Movies in several files
+
+A movie split across files, the way rips that fit on CDs come, plays as one movie: its parts one after the other, with one seek bar and one place to resume from. Number the parts at the end of the name:
+
+```
+Movies/
+└── Harbor Lights (2019)/
+    ├── Harbor Lights (2019) CD1.avi
+    └── Harbor Lights (2019) CD2.avi
+```
+
+`CD1`, `DVD1`, `Disc 1`, `Disk1`, `Part1` and `pt1` all work, with or without a space, a dot or a dash before the number. The parts must be in the same folder and named the same apart from the number. `Part` counts only after the year or in a folder named with the year, so a film called `Harbor Lights Part 2 (2021)` stays a title of its own.
+
+The movie streams through your server, which joins the parts as it plays. Downloading it for offline gives one file, at 1080p. Seek bar previews and the end credits mark aren't made for a movie in parts yet.
+<!-- /since -->
+
+<!-- since: v0.2.4 -->
 ## Pin a match with an id
 
 When a title keeps matching the wrong film or show, put its id in the folder or file name. Matinee then looks it up by the id instead of searching by name:
