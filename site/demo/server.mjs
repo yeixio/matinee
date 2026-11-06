@@ -13,7 +13,8 @@ import { startFakeTMDB } from './fake-tmdb.mjs'
 import { makeLibrary } from './library.mjs'
 
 const repo = path.resolve(import.meta.dirname, '../..')
-export const cache = path.join(import.meta.dirname, '.cache')
+// The README's public-domain library builds in a folder of its own.
+export const cache = path.join(import.meta.dirname, process.env.MATINEE_DEMO_LIBRARY === 'public' ? '.cache-public' : '.cache')
 const tmdbPort = 7399
 /** Where the stand-in Overseerr listens, for Settings → Overseerr. */
 export const overseerrURL = 'http://127.0.0.1:7400'

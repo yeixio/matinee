@@ -8,6 +8,7 @@
     "build:all": "node scripts/build-all.mjs",
     "shots": "node demo/shoot.mjs",
     "shots:library": "node demo/shoot-library.mjs",
+    "shots:readme": "node demo/shoot-readme.mjs",
     "roadmap": "node scripts/roadmap.mjs"
   },
   "dependencies": {

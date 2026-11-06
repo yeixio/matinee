@@ -13,9 +13,10 @@ export const phone = { viewport: { width: 390, height: 844 }, deviceScaleFactor:
 /**
  * Helpers for one browser and server. only: the shot names to save (all
  * when empty). paths: on-disk media folder to show as /media instead.
+ * dir: where to save them, the guide's images unless it says otherwise.
  */
-export function capture(browser, { origin, only = new Set(), paths }) {
-  mkdirSync(out, { recursive: true })
+export function capture(browser, { origin, only = new Set(), paths, dir = out }) {
+  mkdirSync(dir, { recursive: true })
 
   async function open(options, token) {
     const ctx = await browser.newContext({ ...options, reducedMotion: 'reduce' })
@@ -73,7 +74,7 @@ export function capture(browser, { origin, only = new Set(), paths }) {
     }
     const img = sharp(png)
     const { width } = await img.metadata()
-    await (width > maxWidth ? img.resize({ width: maxWidth }) : img).webp({ quality: 86 }).toFile(path.join(out, `${name}.webp`))
+    await (width > maxWidth ? img.resize({ width: maxWidth }) : img).webp({ quality: 86 }).toFile(path.join(dir, `${name}.webp`))
     console.log('shot', name)
   }
 

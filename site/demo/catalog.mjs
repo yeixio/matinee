@@ -6,7 +6,7 @@
 const G = { action: 28, adventure: 12, animation: 16, comedy: 35, crime: 80, drama: 18, family: 10751, fantasy: 14, history: 36, mystery: 9648, romance: 10749, scifi: 878, thriller: 53, western: 37 }
 const TV = { kids: 10762, scififantasy: 10765, comedy: 35, drama: 18, mystery: 9648, animation: 16 }
 
-export const people = [
+export let people = [
   { id: 1, name: 'Ada Lindqvist', born: '1988-02-14', place: 'Bergen, Norway', bio: 'Ada Lindqvist is a Norwegian actress known for quiet, watchful roles. She trained at the Oslo National Academy of the Arts and spent a decade on stage before her first film.' },
   { id: 2, name: 'Tomas Reyes', born: '1979-07-02', place: 'Valparaíso, Chile', bio: 'Tomas Reyes started out as a cinema usher and still knows every seat in the house. He has played fishermen, priests and one very tired detective.' },
   { id: 3, name: 'June Okafor', born: '1995-11-23', place: 'Lagos, Nigeria', bio: 'June Okafor moved from music videos to features and is known for comedies with a sad streak.' },
@@ -29,7 +29,7 @@ const cast = (...list) => list.map(([id, character], order) => ({ id, character,
 
 // Movies. scene picks the artwork (art.mjs); hue tints it for titles that
 // share a scene.
-export const movies = [
+export let movies = [
   {
     id: 101, title: 'The Long Matinee', year: 2024, date: '2024-03-08', minutes: 124, genres: [G.drama, G.mystery, G.fantasy], cert: 'PG-13', vote: 8.1,
     tagline: 'Tomorrow is already showing.',
@@ -150,7 +150,7 @@ export const movies = [
   },
 ]
 
-export const shows = [
+export let shows = [
   {
     id: 201, title: 'Crumb Street', year: 2022, date: '2022-01-14', genres: [TV.comedy, TV.drama], cert: 'TV-PG', vote: 8.1, status: 'Returning Series',
     overview: 'Two rival bakers inherit the same bakery on the same street, and neither will sell.',
@@ -184,7 +184,7 @@ export const shows = [
 ]
 
 // Made-up albums; label is the record label their tags name.
-export const albums = [
+export let albums = [
   { artist: 'Aurora Static', album: 'Signal Fires', label: 'Lantern Records', year: 2021, scene: 202, tracks: ['Opening Credits', 'Velvet Seats', 'Intermission', 'Projector Hum', 'Snowline', 'Encore'] },
   { artist: 'The Midnight Reels', album: 'Late Show', label: 'Marquee Sound', year: 2019, scene: 105, tracks: ['Neon Marquee', 'Back Row', 'Usher\'s Waltz', 'Double Feature', 'Closing Time'] },
   { artist: 'Harbor Choir', album: 'Lights on the Water', label: 'Lantern Records', year: 2023, scene: 102, tracks: ['Quay', 'Night Ferry', 'Lanterns', 'Tide Tables'] },
@@ -196,7 +196,7 @@ export const albums = [
 
 // Made-up audiobooks: a series in two books (one file with chapters inside,
 // then a folder with a file per chapter), and two books on their own.
-export const audiobooks = [
+export let audiobooks = [
   {
     author: 'Mara Ellison', series: 'The Lantern Coast', index: 1, title: 'The Tide Keeper', narrator: 'Owen Hale', year: 2020, scene: 102, hue: 190, whole: true,
     overview: 'A lighthouse keeper on a fogbound coast finds a logbook written in her own hand, dated forty years from now.',
@@ -260,7 +260,7 @@ export const podcasts = [
   { title: 'Lantern Coast Mysteries', author: 'Mara Ellison', scene: 202, hue: 20, categories: ['Fiction', 'Drama'], description: 'An audio drama from the world of The Lantern Coast, a new chapter every fortnight.', episodes: [['Part One: The Drowned Tower', 45, 9, '']] },
 ]
 
-export const keywords = [
+export let keywords = [
   { id: 1, name: 'cinema' },
   { id: 2, name: 'island' },
   { id: 3, name: 'broadcast' },
@@ -290,7 +290,7 @@ export const discover = [
 ]
 
 // What Overseerr recommends for a title in the demo library, by TMDB id.
-export const recommendations = {
+export let recommendations = {
   101: [317, 315, 307, 304, 301, 116, 316, 305],
   102: [316, 308, 303, 306, 314, 301],
   201: [308, 317, 309, 302, 305, 306],
@@ -328,3 +328,9 @@ export const channels = [
   { name: 'Atlas Travel', country: 'CA', categories: ['travel'], language: 'eng', hue: 255, shows: ['Slow Roads', 'Islands', 'Night Markets'] },
   { name: 'Canal Noticias', country: 'MX', categories: ['news'], language: 'spa', hue: 0, shows: ['Primera Hora', 'Noticias al Día'] },
 ]
+
+// The README's library of public-domain and Creative Commons titles
+// (public-catalog.mjs) in place of the made-up one, for `pnpm shots:readme`.
+if (process.env.MATINEE_DEMO_LIBRARY === 'public') {
+  ;({ people, movies, shows, albums, audiobooks, keywords, recommendations } = await import('./public-catalog.mjs'))
+}

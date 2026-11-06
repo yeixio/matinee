@@ -11,20 +11,22 @@ Coming from Plex? Matinee [brings your watch history over](https://matinee.yeix.
 [![Donate to Matinee](https://img.shields.io/badge/Donate-Support_Matinee-ff6a55?logo=stripe&logoColor=white)](https://yeix.io/matinee/donate)
 [![Works with Box Office](https://img.shields.io/badge/Works_with-Box_Office-d7372b)](#box-office)
 
-![Home in the web player](docs/guide/images/home.webp)
+![Home in the web player](docs/images/readme/home.webp)
 
 <p>
-  <img src="docs/guide/images/movie.webp" width="49%" alt="A movie's page, with its details, badges and cast">
-  <img src="docs/guide/images/up-next.webp" width="49%" alt="The next episode coming up as the credits start">
-  <img src="docs/guide/images/filters.webp" width="49%" alt="Filtering a library by genre, decade, rating, quality and more">
-  <img src="docs/guide/images/who-is-watching.webp" width="49%" alt="Profiles for everyone in the house">
+  <img src="docs/images/readme/movie.webp" width="49%" alt="A movie's page, with its details, badges and cast">
+  <img src="docs/images/readme/up-next.webp" width="49%" alt="The next episode coming up as the credits start">
+  <img src="docs/images/readme/library.webp" width="49%" alt="The movies library: Big Buck Bunny, Charade, Detour, The General, Metropolis and more">
+  <img src="docs/images/readme/filters.webp" width="49%" alt="Filtering a library by genre, decade, rating, quality and more">
 </p>
 
 <p>
-  <img src="docs/guide/images/app-phone-home.webp" width="18%" alt="Home in the phone app">
-  <img src="docs/guide/images/app-phone-details.webp" width="18%" alt="A movie in the phone app">
-  <img src="docs/guide/images/app-tv-home.webp" width="57%" alt="Home in the TV app">
+  <img src="docs/images/readme/app-phone-home.webp" width="18%" alt="Home in the phone app">
+  <img src="docs/images/readme/app-phone-details.webp" width="18%" alt="A movie in the phone app">
+  <img src="docs/images/readme/app-tv-home.webp" width="57%" alt="Home in the TV app">
 </p>
+
+<sub>The screenshots use public-domain and Creative Commons films, cartoons, sheet music and books. Artwork from Wikimedia Commons; see [the credits](docs/images/readme/CREDITS.md).</sub>
 
 **Status:** early. The server and web player work end to end, and the [phone and TV apps](https://matinee.yeix.io/docs/apps/phone-and-tv/) are on the way to the App Store and Google Play.
 
