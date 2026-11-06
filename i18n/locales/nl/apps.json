@@ -624,5 +624,46 @@
     "openSettings": "Instellingen openen",
     "offer": "Krijg deze als meldingen op dit apparaat, ook als Matinee gesloten is.",
     "turnOn": "Aanzetten"
+  },
+  "boxOffice": {
+    "onItsWay": "Onderweg",
+    "stage": {
+      "searching": "Wordt gezocht",
+      "queued": "Wacht op downloaden",
+      "downloading": "Wordt gedownload",
+      "paused": "Gepauzeerd",
+      "waiting": "Gedownload",
+      "checking": "Wordt gecontroleerd",
+      "repairing": "Wordt gerepareerd",
+      "unpacking": "Wordt uitgepakt",
+      "importing": "Gaat naar de bibliotheek",
+      "waitingToMove": "Wacht op een beheerder",
+      "imported": "Binnenkort klaar",
+      "problem": "Wacht op een goede kopie"
+    },
+    "eta": "Nog ongeveer {{time}}",
+    "notifyMe": "Laat het me weten",
+    "notifying": "We laten het je weten",
+    "copies": {
+      "button": "Andere kopieën",
+      "editions": "Andere edities",
+      "looking": "Edities zoeken…",
+      "none": "Nu geen andere edities gevonden.",
+      "owned": "In de bibliotheek",
+      "keepBoth": "Ernaast toevoegen",
+      "replace": "Deze kopie vervangen",
+      "better": "Om een betere kopie vragen",
+      "bad": "Deze kopie is slecht",
+      "reason": "Wat is er mis mee?",
+      "sent": "Gevraagd. Het is onderweg.",
+      "pending": "Gevraagd. Een beheerder kijkt ernaar.",
+      "needsApproval": "Een beheerder keurt deze eerst goed.",
+      "reasons": {
+        "language": "Verkeerde taal",
+        "sync": "Niet synchroon",
+        "picture": "Slecht beeld",
+        "other": "Iets anders"
+      }
+    }
   }
 }

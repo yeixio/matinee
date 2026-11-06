@@ -638,5 +638,46 @@
     "openSettings": "Otwórz ustawienia",
     "offer": "Otrzymuj je jako powiadomienia na tym urządzeniu, nawet gdy Matinee jest zamknięte.",
     "turnOn": "Włącz"
+  },
+  "boxOffice": {
+    "onItsWay": "W drodze",
+    "stage": {
+      "searching": "Szukam",
+      "queued": "Czeka na pobranie",
+      "downloading": "Pobieranie",
+      "paused": "Wstrzymane",
+      "waiting": "Pobrane",
+      "checking": "Sprawdzanie",
+      "repairing": "Naprawianie",
+      "unpacking": "Rozpakowywanie",
+      "importing": "Przenoszenie do biblioteki",
+      "waitingToMove": "Czeka na administratora",
+      "imported": "Wkrótce gotowe",
+      "problem": "Czeka na dobrą kopię"
+    },
+    "eta": "Zostało około {{time}}",
+    "notifyMe": "Powiadom mnie",
+    "notifying": "Damy znać",
+    "copies": {
+      "button": "Inne kopie",
+      "editions": "Inne wydania",
+      "looking": "Szukanie wydań…",
+      "none": "Teraz nie ma innych wydań.",
+      "owned": "W bibliotece",
+      "keepBoth": "Dodaj obok",
+      "replace": "Zastąp tę kopię",
+      "better": "Poproś o lepszą kopię",
+      "bad": "Ta kopia jest zła",
+      "reason": "Co z nią nie tak?",
+      "sent": "Wysłano. Już w drodze.",
+      "pending": "Wysłano. Administrator to sprawdzi.",
+      "needsApproval": "Najpierw zatwierdza je administrator.",
+      "reasons": {
+        "language": "Zły język",
+        "sync": "Brak synchronizacji",
+        "picture": "Słaby obraz",
+        "other": "Coś innego"
+      }
+    }
   }
 }

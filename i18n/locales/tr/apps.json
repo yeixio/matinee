@@ -624,5 +624,46 @@
     "openSettings": "Ayarları aç",
     "offer": "Bunları, Matinee kapalıyken bile bu cihazda bildirim olarak al.",
     "turnOn": "Aç"
+  },
+  "boxOffice": {
+    "onItsWay": "Yolda",
+    "stage": {
+      "searching": "Aranıyor",
+      "queued": "İndirilmeyi bekliyor",
+      "downloading": "İndiriliyor",
+      "paused": "Duraklatıldı",
+      "waiting": "İndirildi",
+      "checking": "Denetleniyor",
+      "repairing": "Onarılıyor",
+      "unpacking": "Açılıyor",
+      "importing": "Kitaplığa taşınıyor",
+      "waitingToMove": "Bir yöneticiyi bekliyor",
+      "imported": "Yakında hazır",
+      "problem": "İyi bir kopya bekleniyor"
+    },
+    "eta": "Yaklaşık {{time}} kaldı",
+    "notifyMe": "Bana haber ver",
+    "notifying": "Haber vereceğiz",
+    "copies": {
+      "button": "Diğer kopyalar",
+      "editions": "Diğer sürümler",
+      "looking": "Sürümler aranıyor…",
+      "none": "Şu an başka sürüm bulunamadı.",
+      "owned": "Kitaplıkta",
+      "keepBoth": "Yanına ekle",
+      "replace": "Bu kopyayı değiştir",
+      "better": "Daha iyi bir kopya iste",
+      "bad": "Bu kopya kötü",
+      "reason": "Sorunu ne?",
+      "sent": "İstendi. Yolda.",
+      "pending": "İstendi. Bir yönetici bakacak.",
+      "needsApproval": "Bunları önce bir yönetici onaylar.",
+      "reasons": {
+        "language": "Yanlış dil",
+        "sync": "Senkron dışı",
+        "picture": "Kötü görüntü",
+        "other": "Başka bir şey"
+      }
+    }
   }
 }

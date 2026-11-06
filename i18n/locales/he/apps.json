@@ -631,5 +631,46 @@
     "openSettings": "פתיחת ההגדרות",
     "offer": "לקבל אותן כהתראות במכשיר הזה, גם כש-Matinee סגורה.",
     "turnOn": "הפעלה"
+  },
+  "boxOffice": {
+    "onItsWay": "בדרך",
+    "stage": {
+      "searching": "מחפשים",
+      "queued": "ממתין להורדה",
+      "downloading": "מוריד",
+      "paused": "מושהה",
+      "waiting": "הורד",
+      "checking": "בבדיקה",
+      "repairing": "בתיקון",
+      "unpacking": "בפריסה",
+      "importing": "עובר לספרייה",
+      "waitingToMove": "ממתין למנהל",
+      "imported": "מוכן בקרוב",
+      "problem": "ממתין לעותק טוב"
+    },
+    "eta": "נותרו בערך {{time}}",
+    "notifyMe": "תודיעו לי",
+    "notifying": "נודיע לך",
+    "copies": {
+      "button": "עותקים אחרים",
+      "editions": "מהדורות אחרות",
+      "looking": "מחפשים מהדורות…",
+      "none": "אין כרגע מהדורות אחרות.",
+      "owned": "בספרייה",
+      "keepBoth": "הוספה לצד",
+      "replace": "החלפת העותק הזה",
+      "better": "בקשת עותק טוב יותר",
+      "bad": "העותק הזה פגום",
+      "reason": "מה הבעיה בו?",
+      "sent": "התבקש. בדרך.",
+      "pending": "התבקש. מנהל יבדוק.",
+      "needsApproval": "מנהל מאשר אותן קודם.",
+      "reasons": {
+        "language": "שפה שגויה",
+        "sync": "לא מסונכרן",
+        "picture": "תמונה גרועה",
+        "other": "משהו אחר"
+      }
+    }
   }
 }

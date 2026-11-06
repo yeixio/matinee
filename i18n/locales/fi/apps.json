@@ -624,5 +624,46 @@
     "openSettings": "Avaa asetukset",
     "offer": "Saat nämä ilmoituksina tälle laitteelle, myös kun Matinee on suljettu.",
     "turnOn": "Ota käyttöön"
+  },
+  "boxOffice": {
+    "onItsWay": "Tulossa",
+    "stage": {
+      "searching": "Etsitään",
+      "queued": "Odottaa latausta",
+      "downloading": "Ladataan",
+      "paused": "Keskeytetty",
+      "waiting": "Ladattu",
+      "checking": "Tarkistetaan",
+      "repairing": "Korjataan",
+      "unpacking": "Puretaan",
+      "importing": "Siirretään kirjastoon",
+      "waitingToMove": "Odottaa ylläpitäjää",
+      "imported": "Pian valmis",
+      "problem": "Odottaa hyvää kopiota"
+    },
+    "eta": "Noin {{time}} jäljellä",
+    "notifyMe": "Ilmoita minulle",
+    "notifying": "Ilmoitamme sinulle",
+    "copies": {
+      "button": "Muut kopiot",
+      "editions": "Muut versiot",
+      "looking": "Etsitään versioita…",
+      "none": "Muita versioita ei löytynyt juuri nyt.",
+      "owned": "Kirjastossa",
+      "keepBoth": "Lisää rinnalle",
+      "replace": "Korvaa tämä kopio",
+      "better": "Pyydä parempi kopio",
+      "bad": "Tämä kopio on huono",
+      "reason": "Mikä siinä on vialla?",
+      "sent": "Pyydetty. Se on tulossa.",
+      "pending": "Pyydetty. Ylläpitäjä katsoo sen.",
+      "needsApproval": "Ylläpitäjä hyväksyy nämä ensin.",
+      "reasons": {
+        "language": "Väärä kieli",
+        "sync": "Ei tahdissa",
+        "picture": "Huono kuva",
+        "other": "Jotain muuta"
+      }
+    }
   }
 }

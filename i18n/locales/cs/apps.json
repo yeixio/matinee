@@ -638,5 +638,46 @@
     "openSettings": "Otevřít nastavení",
     "offer": "Dostávejte je jako oznámení na tomto zařízení, i když je Matinee zavřené.",
     "turnOn": "Zapnout"
+  },
+  "boxOffice": {
+    "onItsWay": "Na cestě",
+    "stage": {
+      "searching": "Hledá se",
+      "queued": "Čeká na stažení",
+      "downloading": "Stahuje se",
+      "paused": "Pozastaveno",
+      "waiting": "Staženo",
+      "checking": "Kontroluje se",
+      "repairing": "Opravuje se",
+      "unpacking": "Rozbaluje se",
+      "importing": "Přesouvá se do knihovny",
+      "waitingToMove": "Čeká na správce",
+      "imported": "Brzy připraveno",
+      "problem": "Čeká na dobrou kopii"
+    },
+    "eta": "Zbývá asi {{time}}",
+    "notifyMe": "Upozornit mě",
+    "notifying": "Dáme vám vědět",
+    "copies": {
+      "button": "Jiné kopie",
+      "editions": "Jiné edice",
+      "looking": "Hledají se edice…",
+      "none": "Teď nebyly nalezeny žádné jiné edice.",
+      "owned": "V knihovně",
+      "keepBoth": "Přidat vedle",
+      "replace": "Nahradit tuto kopii",
+      "better": "Požádat o lepší kopii",
+      "bad": "Tato kopie je špatná",
+      "reason": "Co je s ní špatně?",
+      "sent": "Požádáno. Je na cestě.",
+      "pending": "Požádáno. Podívá se na to správce.",
+      "needsApproval": "Tyto nejdřív schvaluje správce.",
+      "reasons": {
+        "language": "Špatný jazyk",
+        "sync": "Nesynchronizované",
+        "picture": "Špatný obraz",
+        "other": "Něco jiného"
+      }
+    }
   }
 }
