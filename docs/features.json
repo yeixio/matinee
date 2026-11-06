@@ -170,6 +170,19 @@
               }
             },
             {
+              "name": "Match by ids in folder names, multi-episode files",
+              "doc": "/docs/getting-started/organizing-media/",
+              "since": "v0.2.4",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
               "name": "Coming soon (Radarr and Sonarr)",
               "doc": "/docs/server/radarr-and-sonarr/",
               "apps": {

@@ -12,6 +12,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/yeixio/matinee/internal/mediaid"
 	"github.com/yeixio/matinee/internal/store"
 	"github.com/yeixio/matinee/internal/store/storetest"
 )
@@ -46,6 +47,16 @@ func fakeTMDB(t *testing.T) *TMDB {
 	})
 	mux.HandleFunc("GET /tv/1396/season/1/episode/1", func(w http.ResponseWriter, r *http.Request) {
 		json.NewEncoder(w).Encode(map[string]any{"id": 62085, "name": "Pilot", "overview": "It begins.", "still_path": "/s.jpg"})
+	})
+	mux.HandleFunc("GET /find/{id}", func(w http.ResponseWriter, r *http.Request) {
+		res := map[string]any{"movie_results": []any{}, "tv_results": []any{}}
+		switch r.PathValue("id") + "|" + r.URL.Query().Get("external_source") {
+		case "tt0113277|imdb_id":
+			res["movie_results"] = []map[string]any{{"id": 949, "title": "Heat", "release_date": "1995-12-15"}}
+		case "81189|tvdb_id":
+			res["tv_results"] = []map[string]any{{"id": 1396, "name": "Breaking Bad", "first_air_date": "2008-01-20"}}
+		}
+		json.NewEncoder(w).Encode(res)
 	})
 	ts := httptest.NewServer(mux)
 	t.Cleanup(ts.Close)
@@ -256,5 +267,26 @@ func TestTMDBWithoutKey(t *testing.T) {
 	tm.SetKey("good")
 	if !tm.Ready() || len(tm.Kinds()) == 0 {
 		t.Fatal("with a key it looks up movies and TV")
+	}
+}
+
+// Ids in file and folder names pin the match instead of a title search.
+func TestTMDBLookupByIDs(t *testing.T) {
+	tm := fakeTMDB(t)
+	ctx := context.Background()
+	for _, q := range []Query{
+		{Kind: "movie", Title: "Something Else", IDs: mediaid.IDs{TMDB: 949}},
+		{Kind: "movie", Title: "Something Else", IDs: mediaid.IDs{IMDB: "tt0113277"}},
+	} {
+		if m, err := tm.Lookup(ctx, q); err != nil || m == nil || m.TMDBID != 949 {
+			t.Errorf("%+v: %+v %v", q.IDs, m, err)
+		}
+	}
+	if m, err := tm.Lookup(ctx, Query{Kind: "show", Title: "Nope", IDs: mediaid.IDs{TVDB: 81189}}); err != nil || m == nil || m.TMDBID != 1396 {
+		t.Errorf("tvdb: %+v %v", m, err)
+	}
+	// An id TMDB doesn't know falls back to the title.
+	if m, err := tm.Lookup(ctx, Query{Kind: "movie", Title: "Heat", IDs: mediaid.IDs{IMDB: "tt9999999"}}); err != nil || m == nil || m.TMDBID != 949 {
+		t.Errorf("fallback: %+v %v", m, err)
 	}
 }

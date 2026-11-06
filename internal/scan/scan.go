@@ -328,6 +328,13 @@ func (s *Scanner) run(ctx context.Context, lib store.Library, paths []string) (S
 	}
 	st.Removed, st.Replaced = removed, replaced
 	st.Updated += replaced
+	if video && !partial {
+		// Files filed again, as under a show their folder now tells apart,
+		// can leave a show or season behind.
+		if err := s.Store.PruneEmpty(ctx, lib.ID); err != nil {
+			return st, err
+		}
+	}
 	if fk, ok := kind.(Finisher); ok && (!partial || st.Added+st.Updated+st.Removed > 0) {
 		if err := fk.FinishScan(ctx, s.Store, lib); err != nil {
 			return st, err

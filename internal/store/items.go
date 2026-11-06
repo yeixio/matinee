@@ -478,6 +478,98 @@ func (s *Store) EnsureContainer(ctx context.Context, libraryID int64, parentID *
 	return id, err
 }
 
+// EnsureShow finds or creates a TV show by its title, keeping apart shows
+// that share a name but not a year or a TMDB id, as "Doctor Who (1963)"
+// and "Doctor Who (2005)" do. year and tmdbID are what the show's folder
+// name says, 0 when it says nothing. A show whose year or id isn't known
+// yet takes the first folder that names one.
+func (s *Store) EnsureShow(ctx context.Context, libraryID int64, title string, year int, tmdbID int64) (int64, error) {
+	rows, err := s.db.QueryContext(ctx, `
+		SELECT id, COALESCE(year, 0), COALESCE(tmdb_id, 0) FROM items
+		WHERE path IS NULL AND library_id = ? AND kind = 'show' AND parent_id IS NULL
+		  AND (title = ? OR tmdb_id = ?)
+		ORDER BY id`, libraryID, title, nullInt64(tmdbID))
+	if err != nil {
+		return 0, err
+	}
+	type show struct {
+		id, tmdb int64
+		year     int
+	}
+	var found []show
+	for rows.Next() {
+		var c show
+		if err := rows.Scan(&c.id, &c.year, &c.tmdb); err != nil {
+			rows.Close()
+			return 0, err
+		}
+		found = append(found, c)
+	}
+	rows.Close()
+	if err := rows.Err(); err != nil {
+		return 0, err
+	}
+	// Best: the same id; then the same year; then one not yet told apart.
+	best, rank := int64(0), 0
+	for _, c := range found {
+		r := 0
+		switch {
+		case tmdbID != 0 && c.tmdb == tmdbID:
+			r = 4
+		case tmdbID != 0 && c.tmdb != 0:
+			continue // another show of the same name
+		case year != 0 && c.year == year:
+			r = 3
+		case year != 0 && c.year != 0:
+			continue
+		case year == 0 && tmdbID == 0:
+			r = 2
+		default:
+			r = 1
+		}
+		if r > rank {
+			best, rank = c.id, r
+		}
+	}
+	if best != 0 {
+		if year != 0 {
+			if _, err := s.db.ExecContext(ctx, "UPDATE items SET year = ? WHERE id = ? AND year IS NULL", year, best); err != nil {
+				return 0, err
+			}
+		}
+		if tmdbID != 0 {
+			// A show without a match takes the folder's id and is looked up
+			// again by it, unless an admin cleared its match by hand.
+			res, err := s.db.ExecContext(ctx, `UPDATE items SET tmdb_id = ?, meta_at = NULL
+				WHERE id = ? AND tmdb_id IS NULL AND match_locked = 0`, tmdbID, best)
+			if err != nil {
+				return 0, err
+			}
+			if n, _ := res.RowsAffected(); n > 0 {
+				// Its seasons and episodes found nothing without it; look again.
+				if _, err := s.db.ExecContext(ctx, `UPDATE items SET meta_at = NULL WHERE tmdb_id IS NULL AND (parent_id = ?
+					OR parent_id IN (SELECT id FROM items WHERE parent_id = ?))`, best, best); err != nil {
+					return 0, err
+				}
+			}
+		}
+		return best, nil
+	}
+	var id int64
+	err = s.db.QueryRowContext(ctx, `
+		INSERT INTO items (library_id, kind, title, sort_title, year, tmdb_id, added_at)
+		VALUES (?, 'show', ?, ?, ?, ?, ?) RETURNING id`,
+		libraryID, title, SortTitle(title), nullInt(year), nullInt64(tmdbID), now()).Scan(&id)
+	return id, err
+}
+
+// PruneEmpty deletes a library's shows, seasons, artists and albums left
+// with nothing in them, such as a show whose episodes a scan filed under
+// another show.
+func (s *Store) PruneEmpty(ctx context.Context, libraryID int64) error {
+	return pruneEmpty(ctx, s.db, libraryID)
+}
+
 // UpsertFile inserts or updates a playable item keyed by its path. The
 // scanner only calls it for new or changed files, so an update drops what
 // the background analysis knew about the old file.

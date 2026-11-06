@@ -17,6 +17,7 @@ import (
 	"time"
 
 	"github.com/yeixio/matinee/i18n"
+	"github.com/yeixio/matinee/internal/mediaid"
 	"github.com/yeixio/matinee/internal/store"
 )
 
@@ -91,10 +92,15 @@ func (t *TMDB) Kinds() []string {
 
 func (t *TMDB) Lookup(ctx context.Context, q Query) (*store.Metadata, error) {
 	switch q.Kind {
-	case "movie":
-		return t.search(ctx, "movie", q.Title, q.Year)
-	case "show":
-		return t.search(ctx, "tv", q.Title, q.Year)
+	case "movie", "show":
+		if m, err := t.byIDs(ctx, q.Kind, q.IDs); m != nil || err != nil {
+			return m, err
+		}
+		kind := "movie"
+		if q.Kind == "show" {
+			kind = "tv"
+		}
+		return t.search(ctx, kind, q.Title, q.Year)
 	case "season":
 		return t.season(ctx, q)
 	case "episode":
@@ -217,7 +223,7 @@ var imdbID = regexp.MustCompile(`\btt\d{5,}\b`)
 var ErrUnknownRef = errors.New("not a TMDB id, TMDB address or IMDb id")
 
 // Find looks up one movie or show (kind movie or show) by a TMDB id (949
-// or tmdb:949), a
+// or tmdb:949), a TheTVDB id (tvdb:81189), a
 // themoviedb.org address or an IMDb id (tt0113277, or an imdb.com
 // address). It returns nil, nil when there's no such title.
 func (t *TMDB) Find(ctx context.Context, kind, ref string) (*store.Metadata, *Candidate, error) {
@@ -226,13 +232,21 @@ func (t *TMDB) Find(ctx context.Context, kind, ref string) (*store.Metadata, *Ca
 		ref = strings.TrimSpace(ref[len("tmdb:"):])
 	}
 	var r searchResult
+	tvdb, isTVDB := strings.CutPrefix(strings.ToLower(ref), "tvdb:")
 	switch {
-	case imdbID.MatchString(ref):
+	case imdbID.MatchString(ref) || isTVDB:
 		var res struct {
 			Movies []searchResult `json:"movie_results"`
 			Shows  []searchResult `json:"tv_results"`
 		}
-		err := t.get(ctx, "/find/"+imdbID.FindString(ref), url.Values{"external_source": {"imdb_id"}}, &res)
+		id, source := imdbID.FindString(ref), "imdb_id"
+		if isTVDB {
+			id, source = strings.TrimSpace(tvdb), "tvdb_id"
+			if _, err := strconv.ParseInt(id, 10, 64); err != nil {
+				return nil, nil, ErrUnknownRef
+			}
+		}
+		err := t.get(ctx, "/find/"+id, url.Values{"external_source": {source}}, &res)
 		if err == errNotFound {
 			return nil, nil, nil
 		}
@@ -282,6 +296,29 @@ func (t *TMDB) Find(ctx context.Context, kind, ref string) (*store.Metadata, *Ca
 	}
 	c := t.candidate(r)
 	return t.metadata(r), &c, nil
+}
+
+// byIDs looks up a movie or show by the ids in its file or folder name,
+// TMDB's own first. It returns nil, nil when there are none, or none of
+// them finds anything, so the title is searched for instead.
+func (t *TMDB) byIDs(ctx context.Context, kind string, ids mediaid.IDs) (*store.Metadata, error) {
+	var refs []string
+	if ids.TMDB != 0 {
+		refs = append(refs, strconv.FormatInt(ids.TMDB, 10))
+	}
+	if ids.IMDB != "" {
+		refs = append(refs, ids.IMDB)
+	}
+	if ids.TVDB != 0 && kind == "show" {
+		refs = append(refs, "tvdb:"+strconv.FormatInt(ids.TVDB, 10))
+	}
+	for _, ref := range refs {
+		m, _, err := t.Find(ctx, kind, ref)
+		if m != nil || err != nil {
+			return m, err
+		}
+	}
+	return nil, nil
 }
 
 // Genres looks up the genres of a movie or show matched before Matinee kept them.
