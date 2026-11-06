@@ -142,6 +142,7 @@
   "tmdb_didnt_accept_that_key": "Το TMDB δεν δέχτηκε αυτό το κλειδί",
   "tmdb_couldnt_be_reached_to_check_the_key": "Δεν ήταν δυνατή η σύνδεση με το TMDB για έλεγχο του κλειδιού",
   "this_server_cant_change_its_tmdb_key": "αυτός ο διακομιστής δεν μπορεί να αλλάξει το κλειδί TMDB του",
+  "this_server_doesnt_look_for_updates": "αυτός ο διακομιστής δεν ελέγχει για ενημερώσεις",
   "this_server_doesnt_offer_remote_access": "αυτός ο διακομιστής δεν προσφέρει απομακρυσμένη πρόσβαση",
   "this_server_doesnt_use_matinee_connect": "αυτός ο διακομιστής δεν χρησιμοποιεί το Matinee Connect",
   "bad_client_id": "μη έγκυρο αναγνωριστικό πελάτη",

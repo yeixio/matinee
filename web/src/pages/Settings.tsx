@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { Activity, ChevronLeft, ChevronRight, Folder, FolderOpen, Gauge, Globe, Image as ImageIcon, KeyRound, LibraryBig, Monitor, Plus, Puzzle, RefreshCw, Trash2, Tv, UserPlus, UserRound, UsersRound, X, type LucideIcon } from 'lucide-react'
+import { Activity, ChevronLeft, ChevronRight, CircleArrowUp, Folder, FolderOpen, Gauge, Globe, Image as ImageIcon, KeyRound, LibraryBig, Monitor, Plus, Puzzle, RefreshCw, Trash2, Tv, UserPlus, UserRound, UsersRound, X, type LucideIcon } from 'lucide-react'
 import { useEffect, useState, type FormEvent, type ReactNode } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import { Link, Navigate, useLocation, useNavigate, useParams } from 'react-router-dom'
@@ -11,6 +11,7 @@ import { MediaAnalysis } from '../components/MediaAnalysis'
 import { ServerHealth } from '../components/ServerHealth'
 import { AlertSettings } from '../components/AlertSettings'
 import { BackupSettings } from '../components/BackupSettings'
+import { UpdateSettings } from '../components/UpdateSettings'
 import { Plugins } from '../components/PluginSettings'
 import { Profiles } from '../components/ProfileSettings'
 import { FriendLibraries, Friends } from '../components/FriendSettings'
@@ -39,6 +40,7 @@ export const settingsSections: Record<string, string> = {
   'home-network': 'network', 'remote-access': 'network',
   arr: 'add-ons', overseerr: 'add-ons', plugins: 'add-ons',
   'server-health': 'health', alerts: 'health', backups: 'health',
+  updates: 'updates',
   'live-tv': 'live-tv',
 }
 
@@ -47,6 +49,8 @@ export default function Settings() {
   const { group: groupId } = useParams()
   const { hash } = useLocation()
   const { data: me } = useQuery<User>({ queryKey: ['me'], queryFn: api.me, staleTime: Infinity })
+  // A dot on Updates when a newer version is out.
+  const { data: updates } = useQuery({ queryKey: ['updates'], queryFn: api.updates, enabled: !!me?.isAdmin, staleTime: 60_000 })
   useScrollToHash(hash)
   if (!me) return null
 
@@ -67,6 +71,7 @@ export default function Settings() {
     ...(admin
       ? [
           { id: 'health', icon: Activity, sections: [['server-health', <ServerHealth />], ['alerts', <AlertSettings />], ['backups', <BackupSettings />]], wide: true },
+          { id: 'updates', icon: CircleArrowUp, sections: [['updates', <UpdateSettings />]] },
           { id: 'libraries', icon: LibraryBig, sections: [['libraries', <Libraries />], ['import', <ImportSettings />], ['new-files', <NewFiles />], ['media-analysis', <MediaAnalysis />]] },
           { id: 'people', icon: UsersRound, sections: [['people', <Users me={me} />], ['friends', <Friends />], ['profiles', <Profiles />]] },
           { id: 'content', icon: ImageIcon, sections: [['posters', <TMDBKey />], ['podcast-index', <PodcastIndexKey />], ['subtitles', <OpenSubtitlesKey />], ['subtitle-sync', <SubtitleSyncSetting />], ['lyrics', <OnlineLyrics />], ['trailers', <Trailers />], ['home-rows', <HolidayRows />]] },
@@ -130,6 +135,9 @@ export default function Settings() {
                       {t(`settings.groups.${g.id}.title`)}
                       <span className="block text-xs font-normal text-faint md:hidden">{t(`settings.groups.${g.id}.hint`)}</span>
                     </span>
+                    {g.id === 'updates' && updates?.latest && (
+                      <span className="size-2 shrink-0 rounded-full bg-accent" role="img" aria-label={t('settings.updates.availableShort')} title={t('settings.updates.availableShort')} />
+                    )}
                     <ChevronRight className="size-4 text-faint md:hidden rtl:-scale-x-100" />
                   </Link>
                 </li>

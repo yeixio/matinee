@@ -142,6 +142,7 @@
   "tmdb_didnt_accept_that_key": "TMDB가 그 키를 받아들이지 않았습니다",
   "tmdb_couldnt_be_reached_to_check_the_key": "키를 확인하려고 했지만 TMDB에 연결할 수 없습니다",
   "this_server_cant_change_its_tmdb_key": "이 서버는 TMDB 키를 바꿀 수 없습니다",
+  "this_server_doesnt_look_for_updates": "이 서버는 업데이트를 확인하지 않습니다",
   "this_server_doesnt_offer_remote_access": "이 서버는 원격 접속을 제공하지 않습니다",
   "this_server_doesnt_use_matinee_connect": "이 서버는 Matinee Connect를 사용하지 않습니다",
   "bad_client_id": "클라이언트 ID가 올바르지 않습니다",

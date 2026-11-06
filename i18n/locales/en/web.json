@@ -898,6 +898,10 @@
         "title": "Server health",
         "hint": "Load, playback, jobs, problems and the log"
       },
+      "updates": {
+        "title": "Updates",
+        "hint": "New versions, the beta channel and installing them"
+      },
       "live-tv": {
         "title": "Live TV",
         "hint": "Channel playlists and guides"
@@ -930,6 +934,61 @@
         "manual": "Made by hand",
         "upgrade": "Before an upgrade",
         "before-restore": "Before a restore"
+      }
+    },
+    "updates": {
+      "title": "Updates",
+      "intro": "Matinee asks GitHub for newer versions every six hours. Nothing goes through anyone else's servers.",
+      "channel": "Follow",
+      "stable": "Stable releases",
+      "beta": "Beta (risky)",
+      "stableHint": "Stable releases are tested and come with release notes. Beta follows every change that passes Matinee's checks, for people who want new features first.",
+      "betaHint": "Beta follows every change that passes Matinee's checks. You get new features first, and sometimes new bugs with them. Switch back to Stable releases at any time; you'll move to the next release when it's out.",
+      "betaConfirm": "Follow beta builds? They get every change first and can break things. Back up first, and switch back to Stable releases at any time.",
+      "betaUnavailable": "Beta builds come as container images only, so this server follows stable releases.",
+      "mode": "When there's a new version",
+      "modeInstall": "Install it when nobody is watching",
+      "modeNotify": "Show it here",
+      "modeOff": "Don't check",
+      "checkNow": "Check now",
+      "checking": "Checking…",
+      "running": "This server runs {{version}}.",
+      "checked": "Last checked {{time}}.",
+      "notChecked": "Not checked yet.",
+      "upToDate": "You're up to date.",
+      "ahead": "This build is newer than the latest release. The next release is offered once it's out.",
+      "available": "{{version}} is available",
+      "availableShort": "Update available",
+      "published": "Out since {{time}}",
+      "install": "Install {{version}}",
+      "installConfirm": "Install {{version}} now? Matinee restarts to finish. Anyone watching sees that the server is restarting, and picks up where they were.",
+      "downloading": "Downloading {{version}}…",
+      "installing": "Installing {{version}}…",
+      "restarting": "Restarting into {{version}}…",
+      "updated": "Updated to {{version}}.",
+      "reload": "Reload",
+      "failed": "Couldn't install {{version}}: {{error}}",
+      "checkFailed": "Couldn't look for updates: {{error}}",
+      "dev": "This is a development build, so Matinee can't tell which versions are newer.",
+      "notes": "What's new",
+      "changes": "Changes since this build",
+      "allChanges": "All changes on GitHub",
+      "releasePage": "Release page",
+      "autoHint": "Matinee installs new versions by itself when nobody is watching or listening, then restarts. The database is backed up first.",
+      "howTo": "How to install it",
+      "copy": "Copy",
+      "copied": "Copied",
+      "how": {
+        "docker": "Matinee runs in a container, which can't replace itself. Pull the new image and start the container again:",
+        "kubernetes": "Matinee runs in Kubernetes. Upgrade its Helm release:",
+        "managed": "{{tool}} deploys this server from Git, so make the change there and {{tool}} rolls it out:",
+        "package": "Upgrade the matinee package:",
+        "homebrew": "Upgrade it with Homebrew:",
+        "binary": "Download the archive for this computer from the release page, put its matinee in place of this one, and restart Matinee.",
+        "readOnly": "Matinee can't write to the folder it runs from, so it can't replace itself. Download the archive for this computer from the release page, put its matinee in place of this one, and restart Matinee.",
+        "windows": "On Windows, the Matinee installer from the release page updates Matinee.",
+        "macApp": "The Matinee Server app installs updates itself: open it from the menu bar and choose Check for updates…",
+        "windowsApp": "The Matinee tray app installs updates itself: right-click its icon and choose Check for updates."
       }
     }
   },

@@ -906,6 +906,10 @@
         "title": "Stav serveru",
         "hint": "Zátěž, přehrávání, úlohy, problémy a protokol"
       },
+      "updates": {
+        "title": "Aktualizace",
+        "hint": "Nové verze, beta kanál a jejich instalace"
+      },
       "live-tv": {
         "title": "Živé vysílání",
         "hint": "Seznamy kanálů a programy"
@@ -938,6 +942,61 @@
         "manual": "Ruční",
         "upgrade": "Před aktualizací",
         "before-restore": "Před obnovením"
+      }
+    },
+    "updates": {
+      "title": "Aktualizace",
+      "intro": "Matinee se každých šest hodin ptá GitHubu na nové verze. Nic neprochází přes cizí servery.",
+      "channel": "Sledovat",
+      "stable": "Stabilní verze",
+      "beta": "Beta (riskantní)",
+      "stableHint": "Stabilní verze jsou otestované a mají poznámky k vydání. Beta sleduje každou změnu, která projde kontrolami Matinee, pro ty, kdo chtějí novinky jako první.",
+      "betaHint": "Beta sleduje každou změnu, která projde kontrolami Matinee. Novinky dostanete jako první a někdy s nimi i nové chyby. Ke stabilním verzím se můžete kdykoli vrátit; přejdete na další verzi, jakmile vyjde.",
+      "betaConfirm": "Sledovat beta sestavení? Dostávají každou změnu jako první a mohou něco rozbít. Nejdřív si udělejte zálohu; ke stabilním verzím se můžete kdykoli vrátit.",
+      "betaUnavailable": "Beta sestavení existují jen jako obrazy kontejnerů, takže tento server sleduje stabilní verze.",
+      "mode": "Když vyjde nová verze",
+      "modeInstall": "Nainstalovat, když nikdo nesleduje",
+      "modeNotify": "Zobrazit ji tady",
+      "modeOff": "Nekontrolovat",
+      "checkNow": "Zkontrolovat teď",
+      "checking": "Kontroluji…",
+      "running": "Tento server běží na {{version}}.",
+      "checked": "Naposledy zkontrolováno {{time}}.",
+      "notChecked": "Zatím nezkontrolováno.",
+      "upToDate": "Máte nejnovější verzi.",
+      "ahead": "Toto sestavení je novější než poslední vydání. Další vydání bude nabídnuto, jakmile vyjde.",
+      "available": "Je k dispozici {{version}}",
+      "availableShort": "Je k dispozici aktualizace",
+      "published": "Venku od {{time}}",
+      "install": "Nainstalovat {{version}}",
+      "installConfirm": "Nainstalovat {{version}} teď? Matinee se nakonec restartuje. Kdo se právě dívá, uvidí, že se server restartuje, a bude pokračovat tam, kde byl.",
+      "downloading": "Stahuji {{version}}…",
+      "installing": "Instaluji {{version}}…",
+      "restarting": "Restartuji do {{version}}…",
+      "updated": "Aktualizováno na {{version}}.",
+      "reload": "Načíst znovu",
+      "failed": "{{version}} se nepodařilo nainstalovat: {{error}}",
+      "checkFailed": "Nepodařilo se vyhledat aktualizace: {{error}}",
+      "dev": "Toto je vývojové sestavení, takže Matinee nepozná, které verze jsou novější.",
+      "notes": "Co je nového",
+      "changes": "Změny od tohoto sestavení",
+      "allChanges": "Všechny změny na GitHubu",
+      "releasePage": "Stránka vydání",
+      "autoHint": "Matinee instaluje nové verze samo, když se nikdo nedívá ani neposlouchá, a pak se restartuje. Databáze se nejdřív zálohuje.",
+      "howTo": "Jak ji nainstalovat",
+      "copy": "Kopírovat",
+      "copied": "Zkopírováno",
+      "how": {
+        "docker": "Matinee běží v kontejneru, který se nemůže sám nahradit. Stáhněte nový obraz a znovu spusťte kontejner:",
+        "kubernetes": "Matinee běží v Kubernetes. Aktualizujte jeho Helm release:",
+        "managed": "{{tool}} nasazuje tento server z Gitu, takže změnu proveďte tam a {{tool}} ji nasadí:",
+        "package": "Aktualizujte balíček matinee:",
+        "homebrew": "Aktualizujte ho pomocí Homebrew:",
+        "binary": "Stáhněte archiv pro tento počítač ze stránky vydání, nahraďte tento matinee tím z archivu a restartujte Matinee.",
+        "readOnly": "Matinee nemůže zapisovat do složky, ze které běží, takže se nemůže nahradit. Stáhněte archiv pro tento počítač ze stránky vydání, nahraďte tento matinee tím z archivu a restartujte Matinee.",
+        "windows": "Ve Windows Matinee aktualizuje instalační program Matinee ze stránky vydání.",
+        "macApp": "Aplikace Matinee Server instaluje aktualizace sama: otevřete ji z řádku nabídek a zvolte Check for updates…",
+        "windowsApp": "Aplikace Matinee v oznamovací oblasti instaluje aktualizace sama: klikněte pravým tlačítkem na její ikonu a zvolte Check for updates."
       }
     }
   },

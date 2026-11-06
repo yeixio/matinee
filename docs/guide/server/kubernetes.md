@@ -98,3 +98,7 @@ source:
 ```
 
 **Settings** then shows the commit you run as `main-<commit>`. For releases instead, install from `oci://ghcr.io/yeixio/charts/matinee` with a version.
+
+<!-- since: v0.2.3 -->
+Set `updates.managedBy: argocd` (or `flux`) so **Settings → Updates** shows the change to make in Git when a new version is out, instead of a `helm upgrade` that the next sync would undo. With the beta channel it lists every change since the commit you run. See [Updates](/docs/server/updates/).
+<!-- /since -->

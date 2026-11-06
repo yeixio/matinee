@@ -142,6 +142,7 @@
   "tmdb_didnt_accept_that_key": "TMDB không chấp nhận khóa đó",
   "tmdb_couldnt_be_reached_to_check_the_key": "Không thể kết nối TMDB để kiểm tra khóa",
   "this_server_cant_change_its_tmdb_key": "máy chủ này không thể đổi khóa TMDB của nó",
+  "this_server_doesnt_look_for_updates": "máy chủ này không kiểm tra cập nhật",
   "this_server_doesnt_offer_remote_access": "máy chủ này không cung cấp truy cập từ xa",
   "this_server_doesnt_use_matinee_connect": "máy chủ này không dùng Matinee Connect",
   "bad_client_id": "id máy khách không hợp lệ",

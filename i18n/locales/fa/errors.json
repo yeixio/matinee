@@ -142,6 +142,7 @@
   "tmdb_didnt_accept_that_key": "TMDB این کلید را نپذیرفت",
   "tmdb_couldnt_be_reached_to_check_the_key": "برای بررسی کلید نمی‌توان به TMDB دسترسی پیدا کرد",
   "this_server_cant_change_its_tmdb_key": "این سرور نمی‌تواند کلید TMDB خود را تغییر دهد",
+  "this_server_doesnt_look_for_updates": "این سرور به‌روزرسانی‌ها را بررسی نمی‌کند",
   "this_server_doesnt_offer_remote_access": "این سرور دسترسی از راه دور ارائه نمی‌دهد",
   "this_server_doesnt_use_matinee_connect": "این سرور از Matinee Connect استفاده نمی‌کند",
   "bad_client_id": "شناسه کلاینت نامعتبر است",

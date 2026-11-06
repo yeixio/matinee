@@ -200,6 +200,13 @@ gpu:
     runtimeClassName: nvidia
     count: 1
 
+# Settings → Updates says when a newer Matinee is out and shows the helm
+# upgrade that installs it. When a GitOps tool deploys this chart from Git,
+# name it (argocd, flux or anything else), and Settings shows the change to
+# make in Git instead.
+updates:
+  managedBy: ""
+
 env: []
 #  - name: MATINEE_SCAN_INTERVAL
 #    value: 30m

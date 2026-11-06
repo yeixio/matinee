@@ -898,6 +898,10 @@
         "title": "Servergezondheid",
         "hint": "Belasting, afspelen, taken, problemen en het logboek"
       },
+      "updates": {
+        "title": "Updates",
+        "hint": "Nieuwe versies, het bètakanaal en installeren"
+      },
       "live-tv": {
         "title": "Live-tv",
         "hint": "Zenderlijsten en gidsen"
@@ -930,6 +934,61 @@
         "manual": "Met de hand",
         "upgrade": "Vóór een update",
         "before-restore": "Vóór een herstel"
+      }
+    },
+    "updates": {
+      "title": "Updates",
+      "intro": "Matinee vraagt GitHub elke zes uur naar nieuwe versies. Niets loopt via de servers van anderen.",
+      "channel": "Volgen",
+      "stable": "Stabiele versies",
+      "beta": "Bèta (riskant)",
+      "stableHint": "Stabiele versies zijn getest en hebben release notes. Bèta volgt elke wijziging die door de controles van Matinee komt, voor wie nieuwe functies als eerste wil.",
+      "betaHint": "Bèta volgt elke wijziging die door de controles van Matinee komt. Je krijgt nieuwe functies als eerste, en soms nieuwe bugs erbij. Je kunt altijd terug naar Stabiele versies; je gaat dan mee met de volgende versie zodra die uit is.",
+      "betaConfirm": "Bèta-builds volgen? Die krijgen elke wijziging als eerste en kunnen dingen kapotmaken. Maak eerst een back-up; je kunt altijd terug naar Stabiele versies.",
+      "betaUnavailable": "Bèta-builds bestaan alleen als container-images, dus deze server volgt stabiele versies.",
+      "mode": "Bij een nieuwe versie",
+      "modeInstall": "Installeren als niemand kijkt",
+      "modeNotify": "Hier tonen",
+      "modeOff": "Niet zoeken",
+      "checkNow": "Nu zoeken",
+      "checking": "Zoeken…",
+      "running": "Deze server draait {{version}}.",
+      "checked": "Laatst gezocht: {{time}}.",
+      "notChecked": "Nog niet gezocht.",
+      "upToDate": "Je bent up-to-date.",
+      "ahead": "Deze build is nieuwer dan de nieuwste versie. De volgende versie wordt aangeboden zodra die uit is.",
+      "available": "{{version}} is beschikbaar",
+      "availableShort": "Update beschikbaar",
+      "published": "Uit sinds {{time}}",
+      "install": "{{version}} installeren",
+      "installConfirm": "{{version}} nu installeren? Matinee start daarna opnieuw. Wie aan het kijken is, ziet dat de server herstart en gaat verder waar hij was.",
+      "downloading": "{{version}} downloaden…",
+      "installing": "{{version}} installeren…",
+      "restarting": "Herstarten met {{version}}…",
+      "updated": "Bijgewerkt naar {{version}}.",
+      "reload": "Opnieuw laden",
+      "failed": "Kon {{version}} niet installeren: {{error}}",
+      "checkFailed": "Kon niet naar updates zoeken: {{error}}",
+      "dev": "Dit is een ontwikkelbuild, dus Matinee kan niet zien welke versies nieuwer zijn.",
+      "notes": "Wat is er nieuw",
+      "changes": "Wijzigingen sinds deze build",
+      "allChanges": "Alle wijzigingen op GitHub",
+      "releasePage": "Versiepagina",
+      "autoHint": "Matinee installeert nieuwe versies zelf als niemand kijkt of luistert, en start dan opnieuw. De database wordt eerst geback-upt.",
+      "howTo": "Zo installeer je het",
+      "copy": "Kopiëren",
+      "copied": "Gekopieerd",
+      "how": {
+        "docker": "Matinee draait in een container, die zichzelf niet kan vervangen. Haal het nieuwe image op en start de container opnieuw:",
+        "kubernetes": "Matinee draait in Kubernetes. Upgrade de Helm-release:",
+        "managed": "{{tool}} rolt deze server uit vanuit Git, dus pas het daar aan en {{tool}} rolt het uit:",
+        "package": "Upgrade het pakket matinee:",
+        "homebrew": "Upgrade het met Homebrew:",
+        "binary": "Download het archief voor deze computer van de versiepagina, zet de matinee daaruit in de plaats van deze en start Matinee opnieuw.",
+        "readOnly": "Matinee kan niet schrijven in de map waar het vanuit draait, dus het kan zichzelf niet vervangen. Download het archief voor deze computer van de versiepagina, zet de matinee daaruit in de plaats van deze en start Matinee opnieuw.",
+        "windows": "Op Windows werkt het Matinee-installatieprogramma van de versiepagina Matinee bij.",
+        "macApp": "De app Matinee Server installeert updates zelf: open hem via de menubalk en kies Check for updates…",
+        "windowsApp": "De Matinee-app in het systeemvak installeert updates zelf: klik met rechts op het pictogram en kies Check for updates."
       }
     }
   },

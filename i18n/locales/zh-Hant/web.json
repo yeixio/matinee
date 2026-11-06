@@ -894,6 +894,10 @@
         "title": "伺服器狀態",
         "hint": "負載、播放、工作、問題和記錄"
       },
+      "updates": {
+        "title": "更新",
+        "hint": "新版本、測試版頻道與安裝"
+      },
       "live-tv": {
         "title": "直播電視",
         "hint": "頻道清單與節目表"
@@ -926,6 +930,61 @@
         "manual": "手動",
         "upgrade": "升級前",
         "before-restore": "還原前"
+      }
+    },
+    "updates": {
+      "title": "更新",
+      "intro": "Matinee 每六小時向 GitHub 查詢一次新版本。不會經過任何其他人的伺服器。",
+      "channel": "跟隨",
+      "stable": "穩定版",
+      "beta": "測試版（有風險）",
+      "stableHint": "穩定版經過測試，並附有發行說明。測試版跟隨每個通過 Matinee 檢查的變更，適合想搶先用到新功能的人。",
+      "betaHint": "測試版跟隨每個通過 Matinee 檢查的變更。你會最先用到新功能，有時也會隨之遇到新問題。隨時可以切回穩定版；下一個版本發行時你就會轉到它。",
+      "betaConfirm": "要跟隨測試版組建嗎？它們最先收到每個變更，可能會出問題。請先備份；隨時可以切回穩定版。",
+      "betaUnavailable": "測試版組建只以容器映像檔提供，所以這台伺服器跟隨穩定版。",
+      "mode": "有新版本時",
+      "modeInstall": "在沒人觀看時安裝",
+      "modeNotify": "在這裡顯示",
+      "modeOff": "不檢查",
+      "checkNow": "立即檢查",
+      "checking": "正在檢查…",
+      "running": "這台伺服器執行的是 {{version}}。",
+      "checked": "上次檢查：{{time}}。",
+      "notChecked": "尚未檢查。",
+      "upToDate": "已是最新版本。",
+      "ahead": "這個組建比最新發行的版本更新。下一個版本發行後會提供給你。",
+      "available": "{{version}} 已推出",
+      "availableShort": "有可用更新",
+      "published": "發行於 {{time}}",
+      "install": "安裝 {{version}}",
+      "installConfirm": "現在安裝 {{version}} 嗎？Matinee 會重新啟動以完成安裝。正在觀看的人會看到伺服器正在重新啟動，並從原處繼續。",
+      "downloading": "正在下載 {{version}}…",
+      "installing": "正在安裝 {{version}}…",
+      "restarting": "正在重新啟動為 {{version}}…",
+      "updated": "已更新到 {{version}}。",
+      "reload": "重新載入",
+      "failed": "無法安裝 {{version}}：{{error}}",
+      "checkFailed": "無法檢查更新：{{error}}",
+      "dev": "這是開發組建，Matinee 無法判斷哪些版本較新。",
+      "notes": "新功能",
+      "changes": "這個組建之後的變更",
+      "allChanges": "在 GitHub 上查看所有變更",
+      "releasePage": "發行頁面",
+      "autoHint": "在沒人觀看或收聽時，Matinee 會自動安裝新版本，然後重新啟動。會先備份資料庫。",
+      "howTo": "如何安裝",
+      "copy": "複製",
+      "copied": "已複製",
+      "how": {
+        "docker": "Matinee 在容器中執行，無法取代自己。請拉取新的映像檔並重新啟動容器：",
+        "kubernetes": "Matinee 在 Kubernetes 中執行。請升級它的 Helm release：",
+        "managed": "{{tool}} 從 Git 部署這台伺服器，請在 Git 中修改，{{tool}} 會完成部署：",
+        "package": "升級 matinee 套件：",
+        "homebrew": "使用 Homebrew 升級：",
+        "binary": "從發行頁面下載適用於這台電腦的壓縮檔，用其中的 matinee 取代目前這個，然後重新啟動 Matinee。",
+        "readOnly": "Matinee 無法寫入它執行所在的資料夾，因此無法取代自己。從發行頁面下載適用於這台電腦的壓縮檔，用其中的 matinee 取代目前這個，然後重新啟動 Matinee。",
+        "windows": "在 Windows 上，請用發行頁面上的 Matinee 安裝程式來更新 Matinee。",
+        "macApp": "Matinee Server 應用程式會自己安裝更新：從選單列開啟它，選擇 Check for updates…",
+        "windowsApp": "Matinee 系統匣應用程式會自己安裝更新：在它的圖示上按右鍵，選擇 Check for updates。"
       }
     }
   },

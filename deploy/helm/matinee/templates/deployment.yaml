@@ -83,6 +83,18 @@ spec:
           env:
             - name: MATINEE_ADDR
               value: ":7171"
+            # Settings → Updates shows the helm upgrade for this release, or
+            # the change to make in Git when updates.managedBy is set.
+            - name: MATINEE_INSTALL
+              value: kubernetes
+            - name: MATINEE_HELM_RELEASE
+              value: {{ .Release.Name | quote }}
+            - name: MATINEE_HELM_NAMESPACE
+              value: {{ .Release.Namespace | quote }}
+            {{- with .Values.updates.managedBy }}
+            - name: MATINEE_UPDATES_MANAGED_BY
+              value: {{ . | quote }}
+            {{- end }}
             - name: MATINEE_DRAIN_DELAY
               value: "{{ include "matinee.drainDelay" . }}s"
             - name: MATINEE_SHUTDOWN_TIMEOUT

@@ -55,6 +55,7 @@ import (
 	"github.com/yeixio/matinee/internal/theme"
 	"github.com/yeixio/matinee/internal/thumbs"
 	"github.com/yeixio/matinee/internal/together"
+	"github.com/yeixio/matinee/internal/update"
 	"github.com/yeixio/matinee/internal/version"
 	"github.com/yeixio/matinee/web"
 )
@@ -72,6 +73,13 @@ func main() {
 	if err := cmd(); err != nil {
 		fmt.Fprintln(os.Stderr, "matinee:", err)
 		os.Exit(1)
+	}
+	// An update was installed (Settings → Updates): carry on as the new version.
+	if exe := update.RestartPath(); exe != "" {
+		if err := update.Exec(exe); err != nil {
+			fmt.Fprintln(os.Stderr, "matinee: start the new version:", err)
+			os.Exit(1)
+		}
 	}
 }
 
@@ -291,6 +299,22 @@ func run() error {
 	// admins' own mail server and webhooks.
 	alerter := &alerts.Manager{Store: db, Log: log, Server: cfg.ServerName, URL: cfg.PublicURL, Version: version.Version, Read: apiServer.AlertReadings}
 	apiServer.Alerts = alerter
+	// Newer versions, straight from GitHub (Settings → Updates).
+	updates := &update.Manager{
+		Store: db, Log: log, Version: version.Version,
+		Install: update.Detect(update.Local(), version.Version),
+		Checker: update.NewChecker(version.Version),
+		Busy: func() bool {
+			playing, transcodes := apiServer.StreamCounts()
+			return playing+transcodes > 0
+		},
+		Restart: func(exe string) {
+			update.RestartWith(exe)
+			stop()
+		},
+	}
+	apiServer.Updates = updates
+	go updates.Run(ctx)
 	if backups != nil {
 		backups.Failed = alerter.BackupFailed
 		apiServer.Backups = backups

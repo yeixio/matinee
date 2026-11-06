@@ -898,6 +898,10 @@
         "title": "Serverens helbred",
         "hint": "Belastning, afspilning, job, problemer og loggen"
       },
+      "updates": {
+        "title": "Opdateringer",
+        "hint": "Nye versioner, betakanalen og installation"
+      },
       "live-tv": {
         "title": "Live-tv",
         "hint": "Kanallister og programoversigter"
@@ -930,6 +934,61 @@
         "manual": "Lavet i hånden",
         "upgrade": "Før en opdatering",
         "before-restore": "Før en gendannelse"
+      }
+    },
+    "updates": {
+      "title": "Opdateringer",
+      "intro": "Matinee spørger GitHub efter nye versioner hver sjette time. Intet går gennem andres servere.",
+      "channel": "Følg",
+      "stable": "Stabile versioner",
+      "beta": "Beta (risikabelt)",
+      "stableHint": "Stabile versioner er testet og har udgivelsesnoter. Beta følger hver ændring, der består Matinees tjek, for dig, der vil have nyheder først.",
+      "betaHint": "Beta følger hver ændring, der består Matinees tjek. Du får nyheder først og nogle gange nye fejl med. Skift tilbage til Stabile versioner når som helst; du går videre til næste version, når den kommer.",
+      "betaConfirm": "Følge betabyg? De får hver ændring først og kan ødelægge ting. Tag en sikkerhedskopi først; du kan skifte tilbage til Stabile versioner når som helst.",
+      "betaUnavailable": "Betabyg findes kun som containerbilleder, så denne server følger stabile versioner.",
+      "mode": "Når der er en ny version",
+      "modeInstall": "Installer, når ingen ser med",
+      "modeNotify": "Vis den her",
+      "modeOff": "Tjek ikke",
+      "checkNow": "Tjek nu",
+      "checking": "Tjekker…",
+      "running": "Denne server kører {{version}}.",
+      "checked": "Sidst tjekket {{time}}.",
+      "notChecked": "Ikke tjekket endnu.",
+      "upToDate": "Du har den nyeste version.",
+      "ahead": "Dette byg er nyere end den nyeste version. Næste version tilbydes, når den kommer.",
+      "available": "{{version}} er tilgængelig",
+      "availableShort": "Opdatering tilgængelig",
+      "published": "Ude siden {{time}}",
+      "install": "Installer {{version}}",
+      "installConfirm": "Installere {{version}} nu? Matinee genstarter for at blive færdig. Den, der ser med, kan se, at serveren genstarter, og fortsætter, hvor de var.",
+      "downloading": "Henter {{version}}…",
+      "installing": "Installerer {{version}}…",
+      "restarting": "Genstarter med {{version}}…",
+      "updated": "Opdateret til {{version}}.",
+      "reload": "Genindlæs",
+      "failed": "Kunne ikke installere {{version}}: {{error}}",
+      "checkFailed": "Kunne ikke søge efter opdateringer: {{error}}",
+      "dev": "Dette er et udviklingsbyg, så Matinee kan ikke se, hvilke versioner der er nyere.",
+      "notes": "Nyheder",
+      "changes": "Ændringer siden dette byg",
+      "allChanges": "Alle ændringer på GitHub",
+      "releasePage": "Udgivelsesside",
+      "autoHint": "Matinee installerer nye versioner selv, når ingen ser eller lytter, og genstarter derefter. Databasen sikkerhedskopieres først.",
+      "howTo": "Sådan installerer du den",
+      "copy": "Kopiér",
+      "copied": "Kopieret",
+      "how": {
+        "docker": "Matinee kører i en container, som ikke kan erstatte sig selv. Hent det nye billede, og start containeren igen:",
+        "kubernetes": "Matinee kører i Kubernetes. Opgrader dens Helm-release:",
+        "managed": "{{tool}} udruller denne server fra Git, så lav ændringen der, så udruller {{tool}} den:",
+        "package": "Opgrader pakken matinee:",
+        "homebrew": "Opgrader med Homebrew:",
+        "binary": "Hent arkivet til denne computer fra udgivelsessiden, erstat denne matinee med den fra arkivet, og genstart Matinee.",
+        "readOnly": "Matinee kan ikke skrive i mappen, den kører fra, så den kan ikke erstatte sig selv. Hent arkivet til denne computer fra udgivelsessiden, erstat denne matinee med den fra arkivet, og genstart Matinee.",
+        "windows": "På Windows opdaterer Matinee-installationsprogrammet fra udgivelsessiden Matinee.",
+        "macApp": "Appen Matinee Server installerer selv opdateringer: åbn den fra menulinjen, og vælg Check for updates…",
+        "windowsApp": "Matinee-appen i meddelelsesområdet installerer selv opdateringer: højreklik på ikonet, og vælg Check for updates."
       }
     }
   },

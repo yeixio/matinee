@@ -142,6 +142,7 @@
   "tmdb_didnt_accept_that_key": "TMDB לא קיבל את המפתח הזה",
   "tmdb_couldnt_be_reached_to_check_the_key": "לא ניתן היה להתחבר ל-TMDB כדי לבדוק את המפתח",
   "this_server_cant_change_its_tmdb_key": "השרת הזה לא יכול לשנות את מפתח ה-TMDB שלו",
+  "this_server_doesnt_look_for_updates": "השרת הזה לא בודק עדכונים",
   "this_server_doesnt_offer_remote_access": "השרת הזה לא מציע גישה מרחוק",
   "this_server_doesnt_use_matinee_connect": "השרת הזה לא משתמש ב-Matinee Connect",
   "bad_client_id": "מזהה לקוח לא תקין",

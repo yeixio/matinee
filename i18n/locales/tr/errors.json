@@ -142,6 +142,7 @@
   "tmdb_didnt_accept_that_key": "TMDB bu anahtarı kabul etmedi",
   "tmdb_couldnt_be_reached_to_check_the_key": "Anahtarı doğrulamak için TMDB'ye ulaşılamadı",
   "this_server_cant_change_its_tmdb_key": "bu sunucu TMDB anahtarını değiştiremez",
+  "this_server_doesnt_look_for_updates": "bu sunucu güncellemeleri kontrol etmiyor",
   "this_server_doesnt_offer_remote_access": "bu sunucu uzaktan erişim sunmuyor",
   "this_server_doesnt_use_matinee_connect": "bu sunucu Matinee Connect kullanmıyor",
   "bad_client_id": "geçersiz istemci kimliği",

@@ -902,6 +902,10 @@
         "title": "État du serveur",
         "hint": "Charge, lecture, tâches, problèmes et journal"
       },
+      "updates": {
+        "title": "Mises à jour",
+        "hint": "Nouvelles versions, canal bêta et installation"
+      },
       "live-tv": {
         "title": "TV en direct",
         "hint": "Listes de chaînes et guides"
@@ -934,6 +938,61 @@
         "manual": "Faite à la main",
         "upgrade": "Avant une mise à jour",
         "before-restore": "Avant une restauration"
+      }
+    },
+    "updates": {
+      "title": "Mises à jour",
+      "intro": "Matinee demande à GitHub s'il existe une nouvelle version toutes les six heures. Rien ne passe par les serveurs de quelqu'un d'autre.",
+      "channel": "Suivre",
+      "stable": "Versions stables",
+      "beta": "Bêta (risqué)",
+      "stableHint": "Les versions stables sont testées et accompagnées de notes de version. La bêta suit chaque changement qui passe les vérifications de Matinee, pour qui veut les nouveautés en premier.",
+      "betaHint": "La bêta suit chaque changement qui passe les vérifications de Matinee. Vous avez les nouveautés en premier, et parfois de nouveaux bugs avec. Revenez aux versions stables à tout moment ; vous passerez à la prochaine version dès sa sortie.",
+      "betaConfirm": "Suivre les versions bêta ? Elles reçoivent chaque changement en premier et peuvent casser des choses. Faites d'abord une sauvegarde ; vous pouvez revenir aux versions stables à tout moment.",
+      "betaUnavailable": "Les versions bêta n'existent que sous forme d'images de conteneur, donc ce serveur suit les versions stables.",
+      "mode": "Quand une nouvelle version sort",
+      "modeInstall": "L'installer quand personne ne regarde",
+      "modeNotify": "L'afficher ici",
+      "modeOff": "Ne pas vérifier",
+      "checkNow": "Vérifier maintenant",
+      "checking": "Vérification…",
+      "running": "Ce serveur exécute {{version}}.",
+      "checked": "Dernière vérification : {{time}}.",
+      "notChecked": "Pas encore vérifié.",
+      "upToDate": "Vous êtes à jour.",
+      "ahead": "Cette version est plus récente que la dernière version publiée. La prochaine sera proposée dès sa sortie.",
+      "available": "{{version}} est disponible",
+      "availableShort": "Mise à jour disponible",
+      "published": "Disponible depuis le {{time}}",
+      "install": "Installer {{version}}",
+      "installConfirm": "Installer {{version}} maintenant ? Matinee redémarre pour terminer. Les personnes en train de regarder voient que le serveur redémarre et reprennent là où elles en étaient.",
+      "downloading": "Téléchargement de {{version}}…",
+      "installing": "Installation de {{version}}…",
+      "restarting": "Redémarrage sur {{version}}…",
+      "updated": "Mis à jour vers {{version}}.",
+      "reload": "Recharger",
+      "failed": "Impossible d'installer {{version}} : {{error}}",
+      "checkFailed": "Impossible de rechercher des mises à jour : {{error}}",
+      "dev": "C'est une version de développement, Matinee ne peut donc pas savoir quelles versions sont plus récentes.",
+      "notes": "Nouveautés",
+      "changes": "Changements depuis cette version",
+      "allChanges": "Tous les changements sur GitHub",
+      "releasePage": "Page de la version",
+      "autoHint": "Matinee installe les nouvelles versions tout seul quand personne ne regarde ni n'écoute, puis redémarre. La base de données est sauvegardée avant.",
+      "howTo": "Comment l'installer",
+      "copy": "Copier",
+      "copied": "Copié",
+      "how": {
+        "docker": "Matinee tourne dans un conteneur, qui ne peut pas se remplacer lui-même. Téléchargez la nouvelle image et relancez le conteneur :",
+        "kubernetes": "Matinee tourne dans Kubernetes. Mettez à jour sa release Helm :",
+        "managed": "{{tool}} déploie ce serveur depuis Git : faites le changement là-bas et {{tool}} le déploiera :",
+        "package": "Mettez à jour le paquet matinee :",
+        "homebrew": "Mettez-le à jour avec Homebrew :",
+        "binary": "Téléchargez l'archive pour cet ordinateur sur la page de la version, remplacez ce matinee par le sien et redémarrez Matinee.",
+        "readOnly": "Matinee ne peut pas écrire dans le dossier d'où il s'exécute, il ne peut donc pas se remplacer. Téléchargez l'archive pour cet ordinateur sur la page de la version, remplacez ce matinee par le sien et redémarrez Matinee.",
+        "windows": "Sous Windows, l'installateur de Matinee disponible sur la page de la version met Matinee à jour.",
+        "macApp": "L'app Matinee Server installe ses mises à jour elle-même : ouvrez-la depuis la barre des menus et choisissez Check for updates…",
+        "windowsApp": "L'app de la zone de notification de Matinee installe ses mises à jour elle-même : faites un clic droit sur son icône et choisissez Check for updates."
       }
     }
   },

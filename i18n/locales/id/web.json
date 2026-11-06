@@ -894,6 +894,10 @@
         "title": "Kesehatan server",
         "hint": "Beban, pemutaran, tugas, masalah, dan log"
       },
+      "updates": {
+        "title": "Pembaruan",
+        "hint": "Versi baru, kanal beta, dan cara memasangnya"
+      },
       "live-tv": {
         "title": "TV Langsung",
         "hint": "Daftar saluran dan panduan acara"
@@ -926,6 +930,61 @@
         "manual": "Dibuat manual",
         "upgrade": "Sebelum pembaruan",
         "before-restore": "Sebelum pemulihan"
+      }
+    },
+    "updates": {
+      "title": "Pembaruan",
+      "intro": "Matinee menanyakan versi baru ke GitHub setiap enam jam. Tidak ada yang lewat server pihak lain.",
+      "channel": "Ikuti",
+      "stable": "Rilis stabil",
+      "beta": "Beta (berisiko)",
+      "stableHint": "Rilis stabil sudah diuji dan disertai catatan rilis. Beta mengikuti setiap perubahan yang lolos pemeriksaan Matinee, untuk yang ingin fitur baru lebih dulu.",
+      "betaHint": "Beta mengikuti setiap perubahan yang lolos pemeriksaan Matinee. Anda dapat fitur baru lebih dulu, dan kadang bug baru juga. Kembali ke Rilis stabil kapan saja; Anda pindah ke rilis berikutnya saat keluar.",
+      "betaConfirm": "Ikuti build beta? Build ini mendapat setiap perubahan lebih dulu dan bisa merusak sesuatu. Buat cadangan dulu; Anda bisa kembali ke Rilis stabil kapan saja.",
+      "betaUnavailable": "Build beta hanya tersedia sebagai image container, jadi server ini mengikuti rilis stabil.",
+      "mode": "Saat ada versi baru",
+      "modeInstall": "Pasang saat tidak ada yang menonton",
+      "modeNotify": "Tampilkan di sini",
+      "modeOff": "Jangan periksa",
+      "checkNow": "Periksa sekarang",
+      "checking": "Memeriksa…",
+      "running": "Server ini menjalankan {{version}}.",
+      "checked": "Terakhir diperiksa {{time}}.",
+      "notChecked": "Belum diperiksa.",
+      "upToDate": "Anda sudah memakai versi terbaru.",
+      "ahead": "Build ini lebih baru dari rilis terbaru. Rilis berikutnya ditawarkan saat keluar.",
+      "available": "{{version}} tersedia",
+      "availableShort": "Pembaruan tersedia",
+      "published": "Keluar sejak {{time}}",
+      "install": "Pasang {{version}}",
+      "installConfirm": "Pasang {{version}} sekarang? Matinee dimulai ulang untuk menyelesaikannya. Yang sedang menonton melihat server dimulai ulang dan melanjutkan dari posisi terakhir.",
+      "downloading": "Mengunduh {{version}}…",
+      "installing": "Memasang {{version}}…",
+      "restarting": "Memulai ulang ke {{version}}…",
+      "updated": "Diperbarui ke {{version}}.",
+      "reload": "Muat ulang",
+      "failed": "Tidak dapat memasang {{version}}: {{error}}",
+      "checkFailed": "Tidak dapat memeriksa pembaruan: {{error}}",
+      "dev": "Ini build pengembangan, jadi Matinee tidak tahu versi mana yang lebih baru.",
+      "notes": "Yang baru",
+      "changes": "Perubahan sejak build ini",
+      "allChanges": "Semua perubahan di GitHub",
+      "releasePage": "Halaman rilis",
+      "autoHint": "Matinee memasang versi baru sendiri saat tidak ada yang menonton atau mendengarkan, lalu dimulai ulang. Basis data dicadangkan lebih dulu.",
+      "howTo": "Cara memasangnya",
+      "copy": "Salin",
+      "copied": "Disalin",
+      "how": {
+        "docker": "Matinee berjalan di container, yang tidak bisa mengganti dirinya sendiri. Tarik image baru dan jalankan ulang container:",
+        "kubernetes": "Matinee berjalan di Kubernetes. Upgrade rilis Helm-nya:",
+        "managed": "{{tool}} menerapkan server ini dari Git, jadi buat perubahannya di sana dan {{tool}} akan menerapkannya:",
+        "package": "Upgrade paket matinee:",
+        "homebrew": "Upgrade dengan Homebrew:",
+        "binary": "Unduh arsip untuk komputer ini dari halaman rilis, ganti matinee ini dengan yang ada di arsip, lalu mulai ulang Matinee.",
+        "readOnly": "Matinee tidak bisa menulis ke folder tempatnya berjalan, jadi tidak bisa mengganti dirinya. Unduh arsip untuk komputer ini dari halaman rilis, ganti matinee ini dengan yang ada di arsip, lalu mulai ulang Matinee.",
+        "windows": "Di Windows, penginstal Matinee dari halaman rilis yang memperbarui Matinee.",
+        "macApp": "Aplikasi Matinee Server memasang pembaruan sendiri: buka dari bilah menu dan pilih Check for updates…",
+        "windowsApp": "Aplikasi baki Matinee memasang pembaruan sendiri: klik kanan ikonnya dan pilih Check for updates."
       }
     }
   },

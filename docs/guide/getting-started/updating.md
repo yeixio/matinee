@@ -11,6 +11,12 @@ The bottom of **Settings** shows the server's version, such as `Matinee server v
 
 ## Updating
 
+<!-- since: v0.2.3 -->
+**Settings → Updates** tells admins when a new version is out, and installs it for you on the packages, Homebrew and the release archives, by hand or by itself when nobody is watching. You can also follow beta builds there. See [Updates](/docs/server/updates/).
+
+To update by hand:
+<!-- /since -->
+
 | How you installed | How to update |
 | --- | --- |
 | Docker | `docker pull ghcr.io/yeixio/matinee:latest`, then recreate the container |

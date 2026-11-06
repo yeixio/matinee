@@ -898,6 +898,10 @@
         "title": "Szerverállapot",
         "hint": "Terhelés, lejátszás, feladatok, hibák és a napló"
       },
+      "updates": {
+        "title": "Frissítések",
+        "hint": "Új verziók, a béta csatorna és telepítésük"
+      },
       "live-tv": {
         "title": "Élő TV",
         "hint": "Csatornalisták és műsorújságok"
@@ -930,6 +934,61 @@
         "manual": "Kézi",
         "upgrade": "Frissítés előtt",
         "before-restore": "Visszaállítás előtt"
+      }
+    },
+    "updates": {
+      "title": "Frissítések",
+      "intro": "A Matinee hatóránként megkérdezi a GitHubot az új verziókról. Semmi sem megy át mások szerverein.",
+      "channel": "Követés",
+      "stable": "Stabil kiadások",
+      "beta": "Béta (kockázatos)",
+      "stableHint": "A stabil kiadások teszteltek, és kiadási megjegyzéseik vannak. A béta minden olyan változást követ, amely átmegy a Matinee ellenőrzésein, azoknak, akik elsőként akarják az újdonságokat.",
+      "betaHint": "A béta minden olyan változást követ, amely átmegy a Matinee ellenőrzésein. Elsőként kapod az újdonságokat, és néha velük új hibákat is. Bármikor visszaválthatsz a stabil kiadásokra; a következő kiadásra lépsz, amint megjelenik.",
+      "betaConfirm": "Követed a béta buildeket? Minden változást elsőként kapnak, és elronthatnak dolgokat. Előbb készíts biztonsági mentést; bármikor visszaválthatsz a stabil kiadásokra.",
+      "betaUnavailable": "Béta buildek csak konténerképként léteznek, ezért ez a szerver a stabil kiadásokat követi.",
+      "mode": "Ha új verzió jelenik meg",
+      "modeInstall": "Telepítés, amikor senki sem néz semmit",
+      "modeNotify": "Megjelenítés itt",
+      "modeOff": "Ne keressen",
+      "checkNow": "Keresés most",
+      "checking": "Keresés…",
+      "running": "Ezen a szerveren {{version}} fut.",
+      "checked": "Utoljára keresve: {{time}}.",
+      "notChecked": "Még nem volt keresés.",
+      "upToDate": "A legfrissebb verziót használod.",
+      "ahead": "Ez a build újabb a legutóbbi kiadásnál. A következő kiadást akkor ajánlja fel, amikor megjelenik.",
+      "available": "Elérhető: {{version}}",
+      "availableShort": "Frissítés érhető el",
+      "published": "Megjelent: {{time}}",
+      "install": "{{version}} telepítése",
+      "installConfirm": "Telepíted most a(z) {{version}} verziót? A Matinee a végén újraindul. Aki éppen néz valamit, látja, hogy a szerver újraindul, és ott folytatja, ahol tartott.",
+      "downloading": "{{version}} letöltése…",
+      "installing": "{{version}} telepítése…",
+      "restarting": "Újraindítás ezzel: {{version}}…",
+      "updated": "Frissítve erre: {{version}}.",
+      "reload": "Újratöltés",
+      "failed": "Nem sikerült telepíteni ezt: {{version}}: {{error}}",
+      "checkFailed": "Nem sikerült frissítéseket keresni: {{error}}",
+      "dev": "Ez egy fejlesztői build, ezért a Matinee nem tudja, mely verziók újabbak.",
+      "notes": "Újdonságok",
+      "changes": "Változások e build óta",
+      "allChanges": "Minden változás a GitHubon",
+      "releasePage": "Kiadási oldal",
+      "autoHint": "A Matinee magától telepíti az új verziókat, amikor senki sem néz vagy hallgat semmit, majd újraindul. Előtte biztonsági mentést készít az adatbázisról.",
+      "howTo": "Így telepítheted",
+      "copy": "Másolás",
+      "copied": "Másolva",
+      "how": {
+        "docker": "A Matinee konténerben fut, amely nem tudja lecserélni önmagát. Töltsd le az új képet, és indítsd újra a konténert:",
+        "kubernetes": "A Matinee Kubernetesben fut. Frissítsd a Helm release-ét:",
+        "managed": "A(z) {{tool}} Gitből telepíti ezt a szervert, ezért ott módosítsd, és a(z) {{tool}} kiviszi:",
+        "package": "Frissítsd a matinee csomagot:",
+        "homebrew": "Frissítsd a Homebrew-val:",
+        "binary": "Töltsd le a számítógépedhez való archívumot a kiadási oldalról, cseréld le ezt a matinee-t az archívumban lévőre, és indítsd újra a Matinee-t.",
+        "readOnly": "A Matinee nem tud írni abba a mappába, ahonnan fut, ezért nem tudja lecserélni önmagát. Töltsd le a számítógépedhez való archívumot a kiadási oldalról, cseréld le ezt a matinee-t az archívumban lévőre, és indítsd újra a Matinee-t.",
+        "windows": "Windowson a kiadási oldalon lévő Matinee-telepítő frissíti a Matinee-t.",
+        "macApp": "A Matinee Server alkalmazás magától telepíti a frissítéseket: nyisd meg a menüsorból, és válaszd a Check for updates… pontot.",
+        "windowsApp": "A Matinee tálcaalkalmazása magától telepíti a frissítéseket: kattints jobb gombbal az ikonjára, és válaszd a Check for updates pontot."
       }
     }
   },

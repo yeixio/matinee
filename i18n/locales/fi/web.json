@@ -898,6 +898,10 @@
         "title": "Palvelimen tila",
         "hint": "Kuorma, toisto, tehtävät, ongelmat ja loki"
       },
+      "updates": {
+        "title": "Päivitykset",
+        "hint": "Uudet versiot, beetakanava ja asentaminen"
+      },
       "live-tv": {
         "title": "Suora TV",
         "hint": "Kanavalistat ja ohjelmaoppaat"
@@ -930,6 +934,61 @@
         "manual": "Käsin tehty",
         "upgrade": "Ennen päivitystä",
         "before-restore": "Ennen palautusta"
+      }
+    },
+    "updates": {
+      "title": "Päivitykset",
+      "intro": "Matinee kysyy GitHubilta uusia versioita kuuden tunnin välein. Mikään ei kulje kenenkään muun palvelimien kautta.",
+      "channel": "Seuraa",
+      "stable": "Vakaat versiot",
+      "beta": "Beeta (riskialtis)",
+      "stableHint": "Vakaat versiot on testattu, ja niissä on julkaisutiedot. Beeta seuraa jokaista muutosta, joka läpäisee Matineen tarkistukset, niille, jotka haluavat uudet ominaisuudet ensimmäisinä.",
+      "betaHint": "Beeta seuraa jokaista muutosta, joka läpäisee Matineen tarkistukset. Saat uudet ominaisuudet ensimmäisenä ja joskus uusia vikoja niiden mukana. Voit palata vakaisiin versioihin milloin vain; siirryt seuraavaan versioon, kun se ilmestyy.",
+      "betaConfirm": "Seurataanko beetaversioita? Ne saavat jokaisen muutoksen ensimmäisinä ja voivat rikkoa asioita. Tee ensin varmuuskopio; voit palata vakaisiin versioihin milloin vain.",
+      "betaUnavailable": "Beetaversioita on vain konttikuvina, joten tämä palvelin seuraa vakaita versioita.",
+      "mode": "Kun uusi versio ilmestyy",
+      "modeInstall": "Asenna, kun kukaan ei katso",
+      "modeNotify": "Näytä se täällä",
+      "modeOff": "Älä tarkista",
+      "checkNow": "Tarkista nyt",
+      "checking": "Tarkistetaan…",
+      "running": "Tällä palvelimella on {{version}}.",
+      "checked": "Viimeksi tarkistettu {{time}}.",
+      "notChecked": "Ei vielä tarkistettu.",
+      "upToDate": "Sinulla on uusin versio.",
+      "ahead": "Tämä versio on uudempi kuin uusin julkaisu. Seuraavaa julkaisua tarjotaan, kun se ilmestyy.",
+      "available": "{{version}} on saatavilla",
+      "availableShort": "Päivitys saatavilla",
+      "published": "Julkaistu {{time}}",
+      "install": "Asenna {{version}}",
+      "installConfirm": "Asennetaanko {{version}} nyt? Matinee käynnistyy uudelleen lopuksi. Katsojat näkevät, että palvelin käynnistyy uudelleen, ja jatkavat siitä, mihin jäivät.",
+      "downloading": "Ladataan {{version}}…",
+      "installing": "Asennetaan {{version}}…",
+      "restarting": "Käynnistetään uudelleen versiolla {{version}}…",
+      "updated": "Päivitetty versioon {{version}}.",
+      "reload": "Lataa uudelleen",
+      "failed": "Versiota {{version}} ei voitu asentaa: {{error}}",
+      "checkFailed": "Päivityksiä ei voitu tarkistaa: {{error}}",
+      "dev": "Tämä on kehitysversio, joten Matinee ei tiedä, mitkä versiot ovat uudempia.",
+      "notes": "Mitä uutta",
+      "changes": "Muutokset tämän version jälkeen",
+      "allChanges": "Kaikki muutokset GitHubissa",
+      "releasePage": "Julkaisusivu",
+      "autoHint": "Matinee asentaa uudet versiot itse, kun kukaan ei katso tai kuuntele, ja käynnistyy sitten uudelleen. Tietokanta varmuuskopioidaan ensin.",
+      "howTo": "Näin asennat sen",
+      "copy": "Kopioi",
+      "copied": "Kopioitu",
+      "how": {
+        "docker": "Matinee toimii kontissa, joka ei voi korvata itseään. Hae uusi kuva ja käynnistä kontti uudelleen:",
+        "kubernetes": "Matinee toimii Kubernetesissa. Päivitä sen Helm-julkaisu:",
+        "managed": "{{tool}} ottaa tämän palvelimen käyttöön Gitistä, joten tee muutos siellä, niin {{tool}} vie sen käyttöön:",
+        "package": "Päivitä matinee-paketti:",
+        "homebrew": "Päivitä se Homebrew’lla:",
+        "binary": "Lataa tämän tietokoneen arkisto julkaisusivulta, korvaa tämä matinee arkiston matineella ja käynnistä Matinee uudelleen.",
+        "readOnly": "Matinee ei voi kirjoittaa kansioon, josta se toimii, joten se ei voi korvata itseään. Lataa tämän tietokoneen arkisto julkaisusivulta, korvaa tämä matinee arkiston matineella ja käynnistä Matinee uudelleen.",
+        "windows": "Windowsissa julkaisusivun Matinee-asennusohjelma päivittää Matineen.",
+        "macApp": "Matinee Server -sovellus asentaa päivitykset itse: avaa se valikkoriviltä ja valitse Check for updates…",
+        "windowsApp": "Matineen ilmoitusalueen sovellus asentaa päivitykset itse: napsauta sen kuvaketta hiiren oikealla ja valitse Check for updates."
       }
     }
   },

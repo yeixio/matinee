@@ -44,6 +44,7 @@ import (
 	"github.com/yeixio/matinee/internal/subtitle"
 	"github.com/yeixio/matinee/internal/thumbs"
 	"github.com/yeixio/matinee/internal/together"
+	"github.com/yeixio/matinee/internal/update"
 	"github.com/yeixio/matinee/internal/version"
 )
 
@@ -193,7 +194,10 @@ type Server struct {
 	// (see alerts.go); nil makes one that only sends while the API runs.
 	Alerts *alerts.Manager
 	// Backups makes and restores copies of a SQLite database; nil makes none.
-	Backups    *backup.Manager
+	Backups *backup.Manager
+	// Updates finds newer versions and installs them where it can
+	// (Settings → Updates); nil offers none.
+	Updates    *update.Manager
 	alertsOnce sync.Once
 }
 
@@ -307,6 +311,10 @@ func (s *Server) routes() []route {
 		{"GET /admin/backups/{name}", adminOnly, s.downloadBackup},
 		{"DELETE /admin/backups/{name}", adminOnly, s.deleteBackup},
 		{"POST /admin/backups/{name}/restore", adminOnly, s.restoreBackup},
+		{"GET /admin/updates", adminOnly, s.getUpdates},
+		{"PUT /admin/updates/settings", adminOnly, s.putUpdateSettings},
+		{"POST /admin/updates/check", adminOnly, s.checkUpdates},
+		{"POST /admin/updates/apply", adminOnly, s.applyUpdate},
 		{"GET /notifications", signedIn, grownUps(s.listNotifications)},
 		{"POST /notifications/read", signedIn, grownUps(s.readNotifications)},
 		{"POST /notifications/clear", signedIn, grownUps(s.clearNotifications)},

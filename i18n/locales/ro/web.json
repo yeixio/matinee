@@ -902,6 +902,10 @@
         "title": "Starea serverului",
         "hint": "Încărcare, redare, sarcini, probleme și jurnalul"
       },
+      "updates": {
+        "title": "Actualizări",
+        "hint": "Versiuni noi, canalul beta și instalarea lor"
+      },
       "live-tv": {
         "title": "TV în direct",
         "hint": "Liste de canale și ghiduri"
@@ -934,6 +938,61 @@
         "manual": "Făcută manual",
         "upgrade": "Înainte de o actualizare",
         "before-restore": "Înainte de o restaurare"
+      }
+    },
+    "updates": {
+      "title": "Actualizări",
+      "intro": "Matinee întreabă GitHub de versiuni noi la fiecare șase ore. Nimic nu trece prin serverele altcuiva.",
+      "channel": "Urmărește",
+      "stable": "Versiuni stabile",
+      "beta": "Beta (riscant)",
+      "stableHint": "Versiunile stabile sunt testate și au note de lansare. Beta urmează fiecare schimbare care trece de verificările Matinee, pentru cine vrea noutățile primul.",
+      "betaHint": "Beta urmează fiecare schimbare care trece de verificările Matinee. Primești noutățile primul și, uneori, erori noi odată cu ele. Poți reveni oricând la Versiuni stabile; treci la următoarea versiune când apare.",
+      "betaConfirm": "Urmărești versiunile beta? Primesc fiecare schimbare primele și pot strica lucruri. Fă întâi o copie de rezervă; poți reveni oricând la Versiuni stabile.",
+      "betaUnavailable": "Versiunile beta există doar ca imagini de container, așa că acest server urmează versiunile stabile.",
+      "mode": "Când apare o versiune nouă",
+      "modeInstall": "Instaleaz-o când nu se uită nimeni",
+      "modeNotify": "Arat-o aici",
+      "modeOff": "Nu verifica",
+      "checkNow": "Verifică acum",
+      "checking": "Se verifică…",
+      "running": "Acest server rulează {{version}}.",
+      "checked": "Ultima verificare: {{time}}.",
+      "notChecked": "Încă neverificat.",
+      "upToDate": "Ai cea mai nouă versiune.",
+      "ahead": "Această versiune este mai nouă decât ultima lansare. Următoarea lansare va fi oferită când apare.",
+      "available": "{{version}} este disponibilă",
+      "availableShort": "Actualizare disponibilă",
+      "published": "Disponibilă din {{time}}",
+      "install": "Instalează {{version}}",
+      "installConfirm": "Instalezi {{version}} acum? Matinee repornește ca să termine. Cine se uită vede că serverul repornește și continuă de unde a rămas.",
+      "downloading": "Se descarcă {{version}}…",
+      "installing": "Se instalează {{version}}…",
+      "restarting": "Repornire cu {{version}}…",
+      "updated": "Actualizat la {{version}}.",
+      "reload": "Reîncarcă",
+      "failed": "Nu s-a putut instala {{version}}: {{error}}",
+      "checkFailed": "Nu s-au putut căuta actualizări: {{error}}",
+      "dev": "Aceasta este o versiune de dezvoltare, deci Matinee nu poate ști care versiuni sunt mai noi.",
+      "notes": "Ce e nou",
+      "changes": "Schimbări de la această versiune",
+      "allChanges": "Toate schimbările pe GitHub",
+      "releasePage": "Pagina lansării",
+      "autoHint": "Matinee instalează singur versiunile noi când nu se uită și nu ascultă nimeni, apoi repornește. Înainte face o copie a bazei de date.",
+      "howTo": "Cum o instalezi",
+      "copy": "Copiază",
+      "copied": "Copiat",
+      "how": {
+        "docker": "Matinee rulează într-un container, care nu se poate înlocui singur. Descarcă imaginea nouă și pornește din nou containerul:",
+        "kubernetes": "Matinee rulează în Kubernetes. Actualizează release-ul Helm:",
+        "managed": "{{tool}} implementează acest server din Git, așa că fă schimbarea acolo și {{tool}} o aplică:",
+        "package": "Actualizează pachetul matinee:",
+        "homebrew": "Actualizează-l cu Homebrew:",
+        "binary": "Descarcă arhiva pentru acest computer de pe pagina lansării, pune matinee din ea în locul acestuia și repornește Matinee.",
+        "readOnly": "Matinee nu poate scrie în folderul din care rulează, deci nu se poate înlocui singur. Descarcă arhiva pentru acest computer de pe pagina lansării, pune matinee din ea în locul acestuia și repornește Matinee.",
+        "windows": "Pe Windows, programul de instalare Matinee de pe pagina lansării actualizează Matinee.",
+        "macApp": "Aplicația Matinee Server își instalează singură actualizările: deschide-o din bara de meniu și alege Check for updates…",
+        "windowsApp": "Aplicația Matinee din zona de notificare își instalează singură actualizările: dă clic dreapta pe pictogramă și alege Check for updates."
       }
     }
   },

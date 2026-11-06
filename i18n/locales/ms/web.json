@@ -894,6 +894,10 @@
         "title": "Kesihatan pelayan",
         "hint": "Beban, main balik, tugas, masalah dan log"
       },
+      "updates": {
+        "title": "Kemas kini",
+        "hint": "Versi baharu, saluran beta dan cara memasangnya"
+      },
       "live-tv": {
         "title": "TV Langsung",
         "hint": "Senarai saluran dan panduan rancangan"
@@ -926,6 +930,61 @@
         "manual": "Dibuat sendiri",
         "upgrade": "Sebelum kemas kini",
         "before-restore": "Sebelum pemulihan"
+      }
+    },
+    "updates": {
+      "title": "Kemas kini",
+      "intro": "Matinee bertanya kepada GitHub tentang versi baharu setiap enam jam. Tiada apa-apa melalui pelayan pihak lain.",
+      "channel": "Ikut",
+      "stable": "Keluaran stabil",
+      "beta": "Beta (berisiko)",
+      "stableHint": "Keluaran stabil telah diuji dan disertakan nota keluaran. Beta mengikut setiap perubahan yang lulus semakan Matinee, untuk mereka yang mahu ciri baharu dahulu.",
+      "betaHint": "Beta mengikut setiap perubahan yang lulus semakan Matinee. Anda dapat ciri baharu dahulu, dan kadangkala pepijat baharu bersamanya. Kembali ke Keluaran stabil bila-bila masa; anda beralih ke keluaran seterusnya apabila ia keluar.",
+      "betaConfirm": "Ikut binaan beta? Ia mendapat setiap perubahan dahulu dan boleh merosakkan sesuatu. Buat sandaran dahulu; anda boleh kembali ke Keluaran stabil bila-bila masa.",
+      "betaUnavailable": "Binaan beta hanya ada sebagai imej kontena, jadi pelayan ini mengikut keluaran stabil.",
+      "mode": "Apabila ada versi baharu",
+      "modeInstall": "Pasang apabila tiada sesiapa menonton",
+      "modeNotify": "Tunjukkan di sini",
+      "modeOff": "Jangan semak",
+      "checkNow": "Semak sekarang",
+      "checking": "Menyemak…",
+      "running": "Pelayan ini menjalankan {{version}}.",
+      "checked": "Kali terakhir disemak {{time}}.",
+      "notChecked": "Belum disemak.",
+      "upToDate": "Anda menggunakan versi terkini.",
+      "ahead": "Binaan ini lebih baharu daripada keluaran terkini. Keluaran seterusnya ditawarkan apabila ia keluar.",
+      "available": "{{version}} tersedia",
+      "availableShort": "Kemas kini tersedia",
+      "published": "Keluar sejak {{time}}",
+      "install": "Pasang {{version}}",
+      "installConfirm": "Pasang {{version}} sekarang? Matinee dimulakan semula untuk selesai. Sesiapa yang menonton nampak pelayan sedang dimulakan semula dan menyambung dari tempat mereka berhenti.",
+      "downloading": "Memuat turun {{version}}…",
+      "installing": "Memasang {{version}}…",
+      "restarting": "Memulakan semula ke {{version}}…",
+      "updated": "Dikemas kini ke {{version}}.",
+      "reload": "Muat semula",
+      "failed": "Tidak dapat memasang {{version}}: {{error}}",
+      "checkFailed": "Tidak dapat menyemak kemas kini: {{error}}",
+      "dev": "Ini binaan pembangunan, jadi Matinee tidak dapat tahu versi mana yang lebih baharu.",
+      "notes": "Apa yang baharu",
+      "changes": "Perubahan sejak binaan ini",
+      "allChanges": "Semua perubahan di GitHub",
+      "releasePage": "Halaman keluaran",
+      "autoHint": "Matinee memasang versi baharu sendiri apabila tiada sesiapa menonton atau mendengar, kemudian dimulakan semula. Pangkalan data disandarkan dahulu.",
+      "howTo": "Cara memasangnya",
+      "copy": "Salin",
+      "copied": "Disalin",
+      "how": {
+        "docker": "Matinee berjalan dalam kontena, yang tidak boleh menggantikan dirinya. Tarik imej baharu dan mulakan semula kontena:",
+        "kubernetes": "Matinee berjalan dalam Kubernetes. Naik taraf keluaran Helm-nya:",
+        "managed": "{{tool}} menggunakan pelayan ini dari Git, jadi buat perubahan di sana dan {{tool}} akan melancarkannya:",
+        "package": "Naik taraf pakej matinee:",
+        "homebrew": "Naik taraf dengan Homebrew:",
+        "binary": "Muat turun arkib untuk komputer ini dari halaman keluaran, gantikan matinee ini dengan yang ada dalam arkib, dan mulakan semula Matinee.",
+        "readOnly": "Matinee tidak boleh menulis ke folder tempat ia berjalan, jadi ia tidak boleh menggantikan dirinya. Muat turun arkib untuk komputer ini dari halaman keluaran, gantikan matinee ini dengan yang ada dalam arkib, dan mulakan semula Matinee.",
+        "windows": "Di Windows, pemasang Matinee dari halaman keluaran mengemas kini Matinee.",
+        "macApp": "Aplikasi Matinee Server memasang kemas kini sendiri: bukanya dari bar menu dan pilih Check for updates…",
+        "windowsApp": "Aplikasi dulang Matinee memasang kemas kini sendiri: klik kanan ikonnya dan pilih Check for updates."
       }
     }
   },

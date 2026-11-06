@@ -12,9 +12,13 @@ for group in render video; do
   fi
 done
 install -d -m 0750 -o matinee -g matinee /var/lib/matinee
+# Where the server asks matinee-update.path to install an update.
+install -d -m 0750 -o matinee -g matinee /var/lib/matinee/update
 if command -v systemctl >/dev/null 2>&1 && [ -d /run/systemd/system ]; then
   systemctl daemon-reload || true
   systemctl enable matinee.service || true
+  # Lets admins install updates from Settings → Updates.
+  systemctl enable --now matinee-update.path || true
   systemctl restart matinee.service || true
   echo "Matinee is running. Open http://$(hostname):7171 to set it up."
 fi

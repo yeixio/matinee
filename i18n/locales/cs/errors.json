@@ -142,6 +142,7 @@
   "tmdb_didnt_accept_that_key": "TMDB tento klíč nepřijalo",
   "tmdb_couldnt_be_reached_to_check_the_key": "TMDB se nepodařilo kontaktovat kvůli ověření klíče",
   "this_server_cant_change_its_tmdb_key": "tento server nemůže změnit svůj klíč TMDB",
+  "this_server_doesnt_look_for_updates": "tento server nehledá aktualizace",
   "this_server_doesnt_offer_remote_access": "tento server nenabízí vzdálený přístup",
   "this_server_doesnt_use_matinee_connect": "tento server nepoužívá Matinee Connect",
   "bad_client_id": "neplatné ID klienta",

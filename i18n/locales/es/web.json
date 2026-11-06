@@ -902,6 +902,10 @@
         "title": "Estado del servidor",
         "hint": "Carga, reproducción, tareas, problemas y el registro"
       },
+      "updates": {
+        "title": "Actualizaciones",
+        "hint": "Versiones nuevas, el canal beta y cómo instalarlas"
+      },
       "live-tv": {
         "title": "TV en directo",
         "hint": "Listas de canales y guías"
@@ -934,6 +938,61 @@
         "manual": "Hecha a mano",
         "upgrade": "Antes de una actualización",
         "before-restore": "Antes de una restauración"
+      }
+    },
+    "updates": {
+      "title": "Actualizaciones",
+      "intro": "Matinee pregunta a GitHub por versiones nuevas cada seis horas. Nada pasa por servidores de terceros.",
+      "channel": "Seguir",
+      "stable": "Versiones estables",
+      "beta": "Beta (arriesgado)",
+      "stableHint": "Las versiones estables están probadas y traen notas de la versión. Beta sigue cada cambio que supera las comprobaciones de Matinee, para quien quiere las novedades primero.",
+      "betaHint": "Beta sigue cada cambio que supera las comprobaciones de Matinee. Recibes las novedades primero y, a veces, errores nuevos con ellas. Puedes volver a Versiones estables cuando quieras; pasarás a la siguiente versión cuando salga.",
+      "betaConfirm": "¿Seguir las compilaciones beta? Reciben cada cambio primero y pueden romper cosas. Haz una copia de seguridad antes; puedes volver a Versiones estables cuando quieras.",
+      "betaUnavailable": "Las compilaciones beta solo existen como imágenes de contenedor, así que este servidor sigue las versiones estables.",
+      "mode": "Cuando hay una versión nueva",
+      "modeInstall": "Instalarla cuando nadie esté viendo",
+      "modeNotify": "Mostrarla aquí",
+      "modeOff": "No buscar",
+      "checkNow": "Buscar ahora",
+      "checking": "Buscando…",
+      "running": "Este servidor usa {{version}}.",
+      "checked": "Última búsqueda: {{time}}.",
+      "notChecked": "Aún no se ha buscado.",
+      "upToDate": "Estás al día.",
+      "ahead": "Esta compilación es más nueva que la última versión. Se ofrecerá la siguiente cuando salga.",
+      "available": "{{version}} está disponible",
+      "availableShort": "Actualización disponible",
+      "published": "Disponible desde {{time}}",
+      "install": "Instalar {{version}}",
+      "installConfirm": "¿Instalar {{version}} ahora? Matinee se reinicia para terminar. Quien esté viendo algo verá que el servidor se reinicia y seguirá donde estaba.",
+      "downloading": "Descargando {{version}}…",
+      "installing": "Instalando {{version}}…",
+      "restarting": "Reiniciando con {{version}}…",
+      "updated": "Actualizado a {{version}}.",
+      "reload": "Recargar",
+      "failed": "No se pudo instalar {{version}}: {{error}}",
+      "checkFailed": "No se pudieron buscar actualizaciones: {{error}}",
+      "dev": "Es una compilación de desarrollo, así que Matinee no puede saber qué versiones son más nuevas.",
+      "notes": "Novedades",
+      "changes": "Cambios desde esta compilación",
+      "allChanges": "Todos los cambios en GitHub",
+      "releasePage": "Página de la versión",
+      "autoHint": "Matinee instala las versiones nuevas por sí solo cuando nadie está viendo ni escuchando, y luego se reinicia. Antes hace una copia de la base de datos.",
+      "howTo": "Cómo instalarla",
+      "copy": "Copiar",
+      "copied": "Copiado",
+      "how": {
+        "docker": "Matinee se ejecuta en un contenedor, que no puede reemplazarse a sí mismo. Descarga la imagen nueva y vuelve a iniciar el contenedor:",
+        "kubernetes": "Matinee se ejecuta en Kubernetes. Actualiza su release de Helm:",
+        "managed": "{{tool}} despliega este servidor desde Git, así que haz el cambio allí y {{tool}} lo aplicará:",
+        "package": "Actualiza el paquete matinee:",
+        "homebrew": "Actualízalo con Homebrew:",
+        "binary": "Descarga el archivo para este equipo desde la página de la versión, pon su matinee en lugar de este y reinicia Matinee.",
+        "readOnly": "Matinee no puede escribir en la carpeta desde la que se ejecuta, así que no puede reemplazarse. Descarga el archivo para este equipo desde la página de la versión, pon su matinee en lugar de este y reinicia Matinee.",
+        "windows": "En Windows, el instalador de Matinee de la página de la versión actualiza Matinee.",
+        "macApp": "La app Matinee Server instala las actualizaciones por sí sola: ábrela desde la barra de menús y elige Check for updates…",
+        "windowsApp": "La app de la bandeja de Matinee instala las actualizaciones por sí sola: haz clic derecho en su icono y elige Check for updates."
       }
     }
   },

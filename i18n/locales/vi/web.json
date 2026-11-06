@@ -894,6 +894,10 @@
         "title": "Tình trạng máy chủ",
         "hint": "Tải, phát, tác vụ, sự cố và nhật ký"
       },
+      "updates": {
+        "title": "Cập nhật",
+        "hint": "Phiên bản mới, kênh beta và cách cài đặt"
+      },
       "live-tv": {
         "title": "Truyền hình trực tiếp",
         "hint": "Danh sách kênh và lịch phát sóng"
@@ -926,6 +930,61 @@
         "manual": "Làm thủ công",
         "upgrade": "Trước khi cập nhật",
         "before-restore": "Trước khi khôi phục"
+      }
+    },
+    "updates": {
+      "title": "Cập nhật",
+      "intro": "Matinee hỏi GitHub về phiên bản mới mỗi sáu giờ. Không có gì đi qua máy chủ của bên khác.",
+      "channel": "Theo dõi",
+      "stable": "Bản phát hành ổn định",
+      "beta": "Beta (rủi ro)",
+      "stableHint": "Bản ổn định đã được kiểm thử và có ghi chú phát hành. Beta theo mọi thay đổi vượt qua các kiểm tra của Matinee, dành cho ai muốn có tính năng mới trước.",
+      "betaHint": "Beta theo mọi thay đổi vượt qua các kiểm tra của Matinee. Bạn có tính năng mới trước, và đôi khi kèm lỗi mới. Có thể quay lại Bản phát hành ổn định bất cứ lúc nào; bạn sẽ chuyển sang bản phát hành tiếp theo khi nó ra mắt.",
+      "betaConfirm": "Theo dõi các bản beta? Chúng nhận mọi thay đổi trước và có thể làm hỏng thứ gì đó. Hãy sao lưu trước; bạn có thể quay lại Bản phát hành ổn định bất cứ lúc nào.",
+      "betaUnavailable": "Bản beta chỉ có dưới dạng image container, nên máy chủ này theo các bản phát hành ổn định.",
+      "mode": "Khi có phiên bản mới",
+      "modeInstall": "Cài khi không ai đang xem",
+      "modeNotify": "Hiển thị ở đây",
+      "modeOff": "Không kiểm tra",
+      "checkNow": "Kiểm tra ngay",
+      "checking": "Đang kiểm tra…",
+      "running": "Máy chủ này đang chạy {{version}}.",
+      "checked": "Kiểm tra lần cuối {{time}}.",
+      "notChecked": "Chưa kiểm tra.",
+      "upToDate": "Bạn đang dùng bản mới nhất.",
+      "ahead": "Bản dựng này mới hơn bản phát hành mới nhất. Bản phát hành tiếp theo sẽ được đề xuất khi ra mắt.",
+      "available": "Đã có {{version}}",
+      "availableShort": "Có bản cập nhật",
+      "published": "Ra mắt từ {{time}}",
+      "install": "Cài {{version}}",
+      "installConfirm": "Cài {{version}} ngay? Matinee sẽ khởi động lại để hoàn tất. Ai đang xem sẽ thấy máy chủ đang khởi động lại và tiếp tục từ chỗ đang xem.",
+      "downloading": "Đang tải {{version}}…",
+      "installing": "Đang cài {{version}}…",
+      "restarting": "Đang khởi động lại với {{version}}…",
+      "updated": "Đã cập nhật lên {{version}}.",
+      "reload": "Tải lại",
+      "failed": "Không thể cài {{version}}: {{error}}",
+      "checkFailed": "Không thể kiểm tra cập nhật: {{error}}",
+      "dev": "Đây là bản dựng phát triển, nên Matinee không biết phiên bản nào mới hơn.",
+      "notes": "Có gì mới",
+      "changes": "Thay đổi kể từ bản dựng này",
+      "allChanges": "Mọi thay đổi trên GitHub",
+      "releasePage": "Trang phát hành",
+      "autoHint": "Matinee tự cài phiên bản mới khi không ai đang xem hoặc nghe, rồi khởi động lại. Cơ sở dữ liệu được sao lưu trước.",
+      "howTo": "Cách cài đặt",
+      "copy": "Sao chép",
+      "copied": "Đã sao chép",
+      "how": {
+        "docker": "Matinee chạy trong container, không thể tự thay thế. Kéo image mới và khởi động lại container:",
+        "kubernetes": "Matinee chạy trong Kubernetes. Nâng cấp bản phát hành Helm của nó:",
+        "managed": "{{tool}} triển khai máy chủ này từ Git, nên hãy thay đổi ở đó và {{tool}} sẽ triển khai:",
+        "package": "Nâng cấp gói matinee:",
+        "homebrew": "Nâng cấp bằng Homebrew:",
+        "binary": "Tải tệp nén cho máy này từ trang phát hành, thay matinee này bằng tệp trong đó, rồi khởi động lại Matinee.",
+        "readOnly": "Matinee không thể ghi vào thư mục nó đang chạy, nên không thể tự thay thế. Tải tệp nén cho máy này từ trang phát hành, thay matinee này bằng tệp trong đó, rồi khởi động lại Matinee.",
+        "windows": "Trên Windows, trình cài đặt Matinee từ trang phát hành sẽ cập nhật Matinee.",
+        "macApp": "Ứng dụng Matinee Server tự cài cập nhật: mở nó từ thanh menu và chọn Check for updates…",
+        "windowsApp": "Ứng dụng khay của Matinee tự cài cập nhật: nhấp chuột phải vào biểu tượng và chọn Check for updates."
       }
     }
   },

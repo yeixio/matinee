@@ -898,6 +898,10 @@
         "title": "Serverhälsa",
         "hint": "Belastning, uppspelning, jobb, problem och loggen"
       },
+      "updates": {
+        "title": "Uppdateringar",
+        "hint": "Nya versioner, betakanalen och installation"
+      },
       "live-tv": {
         "title": "Live-tv",
         "hint": "Kanallistor och tablåer"
@@ -930,6 +934,61 @@
         "manual": "Gjord för hand",
         "upgrade": "Före en uppdatering",
         "before-restore": "Före en återställning"
+      }
+    },
+    "updates": {
+      "title": "Uppdateringar",
+      "intro": "Matinee frågar GitHub efter nya versioner var sjätte timme. Inget går via någon annans servrar.",
+      "channel": "Följ",
+      "stable": "Stabila versioner",
+      "beta": "Beta (riskabelt)",
+      "stableHint": "Stabila versioner är testade och har versionsinformation. Beta följer varje ändring som klarar Matinees kontroller, för dig som vill ha nyheter först.",
+      "betaHint": "Beta följer varje ändring som klarar Matinees kontroller. Du får nyheterna först, och ibland nya buggar med dem. Byt tillbaka till Stabila versioner när du vill; du går över till nästa version när den kommer.",
+      "betaConfirm": "Följa betabyggen? De får varje ändring först och kan förstöra saker. Säkerhetskopiera först; du kan byta tillbaka till Stabila versioner när du vill.",
+      "betaUnavailable": "Betabyggen finns bara som containeravbildningar, så den här servern följer stabila versioner.",
+      "mode": "När det finns en ny version",
+      "modeInstall": "Installera när ingen tittar",
+      "modeNotify": "Visa den här",
+      "modeOff": "Leta inte",
+      "checkNow": "Leta nu",
+      "checking": "Letar…",
+      "running": "Den här servern kör {{version}}.",
+      "checked": "Senast kontrollerad {{time}}.",
+      "notChecked": "Inte kontrollerad än.",
+      "upToDate": "Du har den senaste versionen.",
+      "ahead": "Det här bygget är nyare än den senaste versionen. Nästa version erbjuds när den kommer.",
+      "available": "{{version}} finns",
+      "availableShort": "Uppdatering finns",
+      "published": "Ute sedan {{time}}",
+      "install": "Installera {{version}}",
+      "installConfirm": "Installera {{version}} nu? Matinee startar om för att bli klar. Den som tittar ser att servern startar om och fortsätter där den var.",
+      "downloading": "Laddar ner {{version}}…",
+      "installing": "Installerar {{version}}…",
+      "restarting": "Startar om med {{version}}…",
+      "updated": "Uppdaterad till {{version}}.",
+      "reload": "Ladda om",
+      "failed": "Kunde inte installera {{version}}: {{error}}",
+      "checkFailed": "Kunde inte leta efter uppdateringar: {{error}}",
+      "dev": "Det här är ett utvecklingsbygge, så Matinee kan inte avgöra vilka versioner som är nyare.",
+      "notes": "Nyheter",
+      "changes": "Ändringar sedan det här bygget",
+      "allChanges": "Alla ändringar på GitHub",
+      "releasePage": "Versionssida",
+      "autoHint": "Matinee installerar nya versioner själv när ingen tittar eller lyssnar, och startar sedan om. Databasen säkerhetskopieras först.",
+      "howTo": "Så installerar du den",
+      "copy": "Kopiera",
+      "copied": "Kopierat",
+      "how": {
+        "docker": "Matinee körs i en container, som inte kan ersätta sig själv. Hämta den nya avbildningen och starta containern igen:",
+        "kubernetes": "Matinee körs i Kubernetes. Uppgradera dess Helm-release:",
+        "managed": "{{tool}} driftsätter den här servern från Git, så gör ändringen där så rullar {{tool}} ut den:",
+        "package": "Uppgradera paketet matinee:",
+        "homebrew": "Uppgradera med Homebrew:",
+        "binary": "Ladda ner arkivet för den här datorn från versionssidan, byt ut den här matinee mot den i arkivet och starta om Matinee.",
+        "readOnly": "Matinee kan inte skriva i mappen den körs från, så den kan inte ersätta sig själv. Ladda ner arkivet för den här datorn från versionssidan, byt ut den här matinee mot den i arkivet och starta om Matinee.",
+        "windows": "I Windows uppdaterar Matinees installationsprogram från versionssidan Matinee.",
+        "macApp": "Appen Matinee Server installerar uppdateringar själv: öppna den från menyraden och välj Check for updates…",
+        "windowsApp": "Matinees app i meddelandefältet installerar uppdateringar själv: högerklicka på ikonen och välj Check for updates."
       }
     }
   },

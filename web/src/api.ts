@@ -1297,6 +1297,37 @@ export type Backups = {
   lastError?: string
 }
 
+/** Newer versions and how to install them (Settings → Updates). */
+export type UpdateSettings = { channel: 'stable' | 'beta'; mode: 'install' | 'notify' | 'off' }
+export type UpdateKind = 'binary' | 'docker' | 'kubernetes' | 'deb' | 'rpm' | 'homebrew' | 'macos-app' | 'windows-app'
+export type UpdateRelease = {
+  version: string
+  url: string
+  notes?: string
+  published?: number
+  commits?: { sha: string; title: string; url: string }[]
+  more?: number
+}
+export type Updates = {
+  current: string
+  install: {
+    kind: UpdateKind
+    managedBy?: string
+    canApply: boolean
+    why?: 'managed' | 'read-only' | 'no-helper' | 'windows' | 'dev'
+    beta: boolean
+    release?: string
+    namespace?: string
+  }
+  settings: UpdateSettings
+  checked?: number
+  error?: string
+  latest?: UpdateRelease
+  ahead?: boolean
+  apply: { state?: 'downloading' | 'installing' | 'restarting' | 'failed'; version?: string; error?: string }
+  steps?: string[]
+}
+
 export interface PlaybackReport {
   kind: 'stall' | 'error'
   positionMs: number
@@ -1668,6 +1699,10 @@ export const api = {
   saveBackupSettings: (s: BackupSettings) => request<Backups>('PUT', '/api/v1/admin/backups/settings', s),
   restoreBackup: (name: string) => request<Backups>('POST', `/api/v1/admin/backups/${encodeURIComponent(name)}/restore`),
   cancelRestore: () => request<Backups>('DELETE', '/api/v1/admin/backups/restore'),
+  updates: () => request<Updates>('GET', '/api/v1/admin/updates'),
+  saveUpdateSettings: (s: UpdateSettings) => request<Updates>('PUT', '/api/v1/admin/updates/settings', s),
+  checkUpdates: () => request<Updates>('POST', '/api/v1/admin/updates/check'),
+  applyUpdate: () => request<Updates>('POST', '/api/v1/admin/updates/apply'),
   deleteBackup: (name: string) => request<Backups>('DELETE', `/api/v1/admin/backups/${encodeURIComponent(name)}`),
   backupUrl: (name: string) => `/api/v1/admin/backups/${encodeURIComponent(name)}`,
   // How much of a movie, episode, season or show is watched, and marking it all.

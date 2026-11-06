@@ -142,6 +142,7 @@
   "tmdb_didnt_accept_that_key": "TMDB tidak menerima kunci itu",
   "tmdb_couldnt_be_reached_to_check_the_key": "TMDB tidak dapat dihubungi untuk menyemak kunci",
   "this_server_cant_change_its_tmdb_key": "pelayan ini tidak boleh menukar kunci TMDB-nya",
+  "this_server_doesnt_look_for_updates": "pelayan ini tidak menyemak kemas kini",
   "this_server_doesnt_offer_remote_access": "pelayan ini tidak menawarkan akses jauh",
   "this_server_doesnt_use_matinee_connect": "pelayan ini tidak menggunakan Matinee Connect",
   "bad_client_id": "id klien tidak sah",

@@ -142,6 +142,7 @@
   "tmdb_didnt_accept_that_key": "TMDB 不接受此金鑰",
   "tmdb_couldnt_be_reached_to_check_the_key": "無法連線到 TMDB 以檢查金鑰",
   "this_server_cant_change_its_tmdb_key": "此伺服器無法變更其 TMDB 金鑰",
+  "this_server_doesnt_look_for_updates": "這台伺服器不檢查更新",
   "this_server_doesnt_offer_remote_access": "此伺服器不提供遠端存取",
   "this_server_doesnt_use_matinee_connect": "此伺服器未使用 Matinee Connect",
   "bad_client_id": "用戶端 ID 無效",

@@ -902,6 +902,10 @@
         "title": "Stato del server",
         "hint": "Carico, riproduzione, attività, problemi e registro"
       },
+      "updates": {
+        "title": "Aggiornamenti",
+        "hint": "Nuove versioni, il canale beta e come installarle"
+      },
       "live-tv": {
         "title": "TV in diretta",
         "hint": "Elenchi di canali e guide"
@@ -934,6 +938,61 @@
         "manual": "Fatto a mano",
         "upgrade": "Prima di un aggiornamento",
         "before-restore": "Prima di un ripristino"
+      }
+    },
+    "updates": {
+      "title": "Aggiornamenti",
+      "intro": "Matinee chiede a GitHub se ci sono nuove versioni ogni sei ore. Niente passa dai server di altri.",
+      "channel": "Segui",
+      "stable": "Versioni stabili",
+      "beta": "Beta (rischiosa)",
+      "stableHint": "Le versioni stabili sono testate e hanno le note di rilascio. Beta segue ogni modifica che supera i controlli di Matinee, per chi vuole le novità per primo.",
+      "betaHint": "Beta segue ogni modifica che supera i controlli di Matinee. Ricevi le novità per primo e a volte anche nuovi bug. Puoi tornare alle versioni stabili quando vuoi; passerai alla prossima versione appena esce.",
+      "betaConfirm": "Seguire le build beta? Ricevono ogni modifica per prime e possono rompere qualcosa. Fai prima un backup; puoi tornare alle versioni stabili quando vuoi.",
+      "betaUnavailable": "Le build beta esistono solo come immagini container, quindi questo server segue le versioni stabili.",
+      "mode": "Quando c'è una nuova versione",
+      "modeInstall": "Installala quando nessuno sta guardando",
+      "modeNotify": "Mostrala qui",
+      "modeOff": "Non controllare",
+      "checkNow": "Controlla ora",
+      "checking": "Controllo…",
+      "running": "Questo server usa {{version}}.",
+      "checked": "Ultimo controllo: {{time}}.",
+      "notChecked": "Non ancora controllato.",
+      "upToDate": "Sei aggiornato.",
+      "ahead": "Questa build è più recente dell'ultima versione. La prossima versione verrà proposta appena esce.",
+      "available": "È disponibile {{version}}",
+      "availableShort": "Aggiornamento disponibile",
+      "published": "Disponibile dal {{time}}",
+      "install": "Installa {{version}}",
+      "installConfirm": "Installare {{version}} ora? Matinee si riavvia per finire. Chi sta guardando vede che il server si sta riavviando e riprende da dove era.",
+      "downloading": "Download di {{version}}…",
+      "installing": "Installazione di {{version}}…",
+      "restarting": "Riavvio con {{version}}…",
+      "updated": "Aggiornato a {{version}}.",
+      "reload": "Ricarica",
+      "failed": "Impossibile installare {{version}}: {{error}}",
+      "checkFailed": "Impossibile cercare aggiornamenti: {{error}}",
+      "dev": "Questa è una build di sviluppo, quindi Matinee non può sapere quali versioni sono più recenti.",
+      "notes": "Novità",
+      "changes": "Modifiche da questa build",
+      "allChanges": "Tutte le modifiche su GitHub",
+      "releasePage": "Pagina della versione",
+      "autoHint": "Matinee installa le nuove versioni da solo quando nessuno sta guardando o ascoltando, poi si riavvia. Prima fa un backup del database.",
+      "howTo": "Come installarla",
+      "copy": "Copia",
+      "copied": "Copiato",
+      "how": {
+        "docker": "Matinee gira in un container, che non può sostituirsi da solo. Scarica la nuova immagine e riavvia il container:",
+        "kubernetes": "Matinee gira in Kubernetes. Aggiorna la sua release Helm:",
+        "managed": "{{tool}} distribuisce questo server da Git, quindi fai la modifica lì e {{tool}} la applicherà:",
+        "package": "Aggiorna il pacchetto matinee:",
+        "homebrew": "Aggiornalo con Homebrew:",
+        "binary": "Scarica l'archivio per questo computer dalla pagina della versione, metti il suo matinee al posto di questo e riavvia Matinee.",
+        "readOnly": "Matinee non può scrivere nella cartella da cui gira, quindi non può sostituirsi. Scarica l'archivio per questo computer dalla pagina della versione, metti il suo matinee al posto di questo e riavvia Matinee.",
+        "windows": "Su Windows, il programma di installazione di Matinee dalla pagina della versione aggiorna Matinee.",
+        "macApp": "L'app Matinee Server installa gli aggiornamenti da sola: aprila dalla barra dei menu e scegli Check for updates…",
+        "windowsApp": "L'app di Matinee nell'area di notifica installa gli aggiornamenti da sola: fai clic destro sulla sua icona e scegli Check for updates."
       }
     }
   },

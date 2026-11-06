@@ -238,6 +238,7 @@
   "this_library_already_has_a_show_with_that_name": "this library already has a show with that name",
   "this_plugin_was_made_for_a_different_version_of_matinee": "this plugin was made for a different version of Matinee",
   "this_server_cant_change_its_tmdb_key": "this server can't change its TMDB key",
+  "this_server_doesnt_look_for_updates": "this server doesn't look for updates",
   "this_server_doesnt_offer_remote_access": "this server doesn't offer remote access",
   "this_server_doesnt_use_matinee_connect": "this server doesn't use Matinee Connect",
   "this_server_doesnt_watch_library_folders": "this server doesn't watch library folders",

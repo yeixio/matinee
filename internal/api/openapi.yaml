@@ -1280,6 +1280,57 @@ paths:
           content:
             text/plain:
               schema: { type: string }
+  /admin/updates:
+    get:
+      summary: This server's version and any newer one (admins only)
+      description: |
+        Matinee asks GitHub for newer versions every six hours: releases on
+        the stable channel, or builds of main that passed every check on the
+        beta channel (container installs only). Where it can replace itself
+        (install.canApply: release archives, Homebrew, and the apt and dnf
+        packages with their update helper) an admin can install the newer
+        version, and the server restarts into it; elsewhere steps lists the
+        commands to run.
+      responses:
+        "200":
+          description: The update status.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Updates" }
+  /admin/updates/settings:
+    put:
+      summary: The channel to follow and what to do about new versions (admins only)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/UpdateSettings" }
+      responses:
+        "200":
+          description: Saved. A new channel is checked at once.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Updates" }
+        "400": { description: A channel or mode this server doesn't offer. }
+  /admin/updates/check:
+    post:
+      summary: Look for a newer version now (admins only)
+      responses:
+        "200":
+          description: What GitHub said; error says why a check failed.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Updates" }
+  /admin/updates/apply:
+    post:
+      summary: Install the newer version and restart (admins only)
+      responses:
+        "202":
+          description: Installing; apply.state follows it until the server restarts.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Updates" }
+        "409": { description: This server can't install updates itself, there's nothing newer, or an update is already being installed. }
   /admin/backups:
     get:
       summary: Database backups and their settings (admins only)
@@ -4731,6 +4782,49 @@ components:
       properties:
         everyHours: { type: integer, description: Hours between scheduled backups; 0 turns them off. Default 24. }
         keep: { type: integer, description: How many of each kind to keep. Default 7. }
+    UpdateSettings:
+      type: object
+      properties:
+        channel: { type: string, enum: [stable, beta] }
+        mode: { type: string, enum: [install, notify, off], description: "install: install new versions when nobody is watching (where the server can); notify: show them; off: never ask GitHub." }
+    Updates:
+      type: object
+      properties:
+        current: { type: string, description: "v1.2.3, or main-abc1234 for a build of main." }
+        install:
+          type: object
+          properties:
+            kind: { type: string, enum: [binary, docker, kubernetes, deb, rpm, homebrew, macos-app, windows-app] }
+            managedBy: { type: string, description: "What deploys the server from Git, such as argocd (MATINEE_UPDATES_MANAGED_BY)." }
+            canApply: { type: boolean }
+            why: { type: string, enum: [managed, read-only, no-helper, windows, dev] }
+            beta: { type: boolean, description: Whether the beta channel is offered. }
+            release: { type: string }
+            namespace: { type: string }
+        settings: { $ref: "#/components/schemas/UpdateSettings" }
+        checked: { type: integer, description: Unix milliseconds of the last check. }
+        error: { type: string }
+        latest:
+          type: object
+          properties:
+            version: { type: string }
+            url: { type: string }
+            notes: { type: string, description: The release notes (Markdown). }
+            published: { type: integer }
+            commits:
+              type: array
+              items:
+                type: object
+                properties: { sha: { type: string }, title: { type: string }, url: { type: string } }
+            more: { type: integer }
+        ahead: { type: boolean, description: This build is newer than anything on the channel. }
+        apply:
+          type: object
+          properties:
+            state: { type: string, enum: [downloading, installing, restarting, failed] }
+            version: { type: string }
+            error: { type: string }
+        steps: { type: array, items: { type: string }, description: Commands that install latest by hand. }
     Backups:
       type: object
       properties:

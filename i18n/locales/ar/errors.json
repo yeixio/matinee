@@ -142,6 +142,7 @@
   "tmdb_didnt_accept_that_key": "لم يقبل TMDB هذا المفتاح",
   "tmdb_couldnt_be_reached_to_check_the_key": "تعذّر الوصول إلى TMDB للتحقق من المفتاح",
   "this_server_cant_change_its_tmdb_key": "لا يمكن لهذا الخادم تغيير مفتاح TMDB الخاص به",
+  "this_server_doesnt_look_for_updates": "هذا الخادم لا يبحث عن تحديثات",
   "this_server_doesnt_offer_remote_access": "لا يوفّر هذا الخادم الوصول عن بُعد",
   "this_server_doesnt_use_matinee_connect": "لا يستخدم هذا الخادم Matinee Connect",
   "bad_client_id": "معرّف العميل غير صالح",

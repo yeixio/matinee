@@ -142,6 +142,7 @@
   "tmdb_didnt_accept_that_key": "TMDB nie przyjął tego klucza",
   "tmdb_couldnt_be_reached_to_check_the_key": "Nie udało się połączyć z TMDB, aby sprawdzić klucz",
   "this_server_cant_change_its_tmdb_key": "ten serwer nie może zmienić swojego klucza TMDB",
+  "this_server_doesnt_look_for_updates": "ten serwer nie sprawdza aktualizacji",
   "this_server_doesnt_offer_remote_access": "ten serwer nie oferuje dostępu zdalnego",
   "this_server_doesnt_use_matinee_connect": "ten serwer nie korzysta z Matinee Connect",
   "bad_client_id": "nieprawidłowy identyfikator klienta",

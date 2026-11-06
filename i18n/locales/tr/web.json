@@ -898,6 +898,10 @@
         "title": "Sunucu durumu",
         "hint": "Yük, oynatma, işler, sorunlar ve günlük"
       },
+      "updates": {
+        "title": "Güncellemeler",
+        "hint": "Yeni sürümler, beta kanalı ve kurulumları"
+      },
       "live-tv": {
         "title": "Canlı TV",
         "hint": "Kanal listeleri ve yayın akışları"
@@ -930,6 +934,61 @@
         "manual": "Elle alınmış",
         "upgrade": "Bir güncellemeden önce",
         "before-restore": "Bir geri yüklemeden önce"
+      }
+    },
+    "updates": {
+      "title": "Güncellemeler",
+      "intro": "Matinee her altı saatte bir GitHub'a yeni sürüm olup olmadığını sorar. Hiçbir şey başkasının sunucularından geçmez.",
+      "channel": "Takip et",
+      "stable": "Kararlı sürümler",
+      "beta": "Beta (riskli)",
+      "stableHint": "Kararlı sürümler test edilmiştir ve sürüm notlarıyla gelir. Beta, Matinee'nin kontrollerinden geçen her değişikliği takip eder; yenilikleri ilk almak isteyenler içindir.",
+      "betaHint": "Beta, Matinee'nin kontrollerinden geçen her değişikliği takip eder. Yenilikleri ilk siz alırsınız, bazen de yanında yeni hatalar. İstediğiniz zaman Kararlı sürümlere dönebilirsiniz; bir sonraki sürüm çıkınca ona geçersiniz.",
+      "betaConfirm": "Beta derlemeleri takip edilsin mi? Her değişikliği ilk onlar alır ve bir şeyleri bozabilirler. Önce yedek alın; istediğiniz zaman Kararlı sürümlere dönebilirsiniz.",
+      "betaUnavailable": "Beta derlemeler yalnızca konteyner imajı olarak var, bu yüzden bu sunucu kararlı sürümleri takip ediyor.",
+      "mode": "Yeni bir sürüm çıktığında",
+      "modeInstall": "Kimse izlemiyorken kur",
+      "modeNotify": "Burada göster",
+      "modeOff": "Kontrol etme",
+      "checkNow": "Şimdi kontrol et",
+      "checking": "Kontrol ediliyor…",
+      "running": "Bu sunucu {{version}} çalıştırıyor.",
+      "checked": "Son kontrol: {{time}}.",
+      "notChecked": "Henüz kontrol edilmedi.",
+      "upToDate": "Güncelsiniz.",
+      "ahead": "Bu derleme en son sürümden daha yeni. Bir sonraki sürüm çıkınca önerilecek.",
+      "available": "{{version}} çıktı",
+      "availableShort": "Güncelleme var",
+      "published": "{{time}} tarihinden beri",
+      "install": "{{version}} sürümünü kur",
+      "installConfirm": "{{version}} şimdi kurulsun mu? Matinee bitirmek için yeniden başlar. İzleyenler sunucunun yeniden başladığını görür ve kaldıkları yerden devam eder.",
+      "downloading": "{{version}} indiriliyor…",
+      "installing": "{{version}} kuruluyor…",
+      "restarting": "{{version}} ile yeniden başlatılıyor…",
+      "updated": "{{version}} sürümüne güncellendi.",
+      "reload": "Yenile",
+      "failed": "{{version}} kurulamadı: {{error}}",
+      "checkFailed": "Güncellemeler aranamadı: {{error}}",
+      "dev": "Bu bir geliştirme derlemesi, bu yüzden Matinee hangi sürümlerin daha yeni olduğunu bilemez.",
+      "notes": "Yenilikler",
+      "changes": "Bu derlemeden bu yana değişiklikler",
+      "allChanges": "GitHub'daki tüm değişiklikler",
+      "releasePage": "Sürüm sayfası",
+      "autoHint": "Matinee, kimse izlemiyor veya dinlemiyorken yeni sürümleri kendisi kurar ve sonra yeniden başlar. Önce veritabanını yedekler.",
+      "howTo": "Nasıl kurulur",
+      "copy": "Kopyala",
+      "copied": "Kopyalandı",
+      "how": {
+        "docker": "Matinee bir konteynerde çalışıyor ve kendini değiştiremez. Yeni imajı çekin ve konteyneri yeniden başlatın:",
+        "kubernetes": "Matinee Kubernetes'te çalışıyor. Helm sürümünü yükseltin:",
+        "managed": "{{tool}} bu sunucuyu Git'ten dağıtıyor, bu yüzden değişikliği orada yapın, {{tool}} onu uygular:",
+        "package": "matinee paketini yükseltin:",
+        "homebrew": "Homebrew ile yükseltin:",
+        "binary": "Bu bilgisayar için arşivi sürüm sayfasından indirin, içindeki matinee'yi bununla değiştirin ve Matinee'yi yeniden başlatın.",
+        "readOnly": "Matinee çalıştığı klasöre yazamıyor, bu yüzden kendini değiştiremez. Bu bilgisayar için arşivi sürüm sayfasından indirin, içindeki matinee'yi bununla değiştirin ve Matinee'yi yeniden başlatın.",
+        "windows": "Windows'ta Matinee'yi sürüm sayfasındaki Matinee yükleyicisi günceller.",
+        "macApp": "Matinee Server uygulaması güncellemeleri kendisi kurar: menü çubuğundan açın ve Check for updates… seçin.",
+        "windowsApp": "Matinee bildirim alanı uygulaması güncellemeleri kendisi kurar: simgesine sağ tıklayın ve Check for updates seçin."
       }
     }
   },
