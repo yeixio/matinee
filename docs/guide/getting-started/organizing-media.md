@@ -38,6 +38,8 @@ Movies/
 
 `CD1`, `DVD1`, `Disc 1`, `Disk1`, `Part1` and `pt1` all work, with or without a space, a dot or a dash before the number. The parts must be in the same folder and named the same apart from the number. `Part` counts only after the year or in a folder named with the year, so a film called `Harbor Lights Part 2 (2021)` stays a title of its own.
 
+Files that each run 80 minutes or more are whole movies rather than parts, so `Disk1` and `Disk2` copies of a full Blu-ray become [versions](#several-versions-of-a-movie) of one movie instead of playing back to back.
+
 The movie streams through your server, which joins the parts as it plays. Downloading it for offline gives one file, at 1080p. Seek bar previews and the end credits mark aren't made for a movie in parts yet.
 <!-- /since -->
 

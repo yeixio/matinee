@@ -253,3 +253,35 @@ func TestScanReadsShowNFOFiles(t *testing.T) {
 		t.Fatalf("episode: %+v", eps)
 	}
 }
+
+// "Disk 1" and "Disk 2" files that each run as long as a movie are two
+// copies of it, not its halves: they're versions, not parts.
+func TestScanFullLengthDisksAreVersions(t *testing.T) {
+	ffmpeg, err := exec.LookPath("ffmpeg")
+	if err != nil {
+		t.Skip("ffmpeg not installed")
+	}
+	root := t.TempDir()
+	first := filepath.Join(root, "Heat (1995)", "Heat (1995) Disk1.mkv")
+	os.MkdirAll(filepath.Dir(first), 0o755)
+	// 82 minutes at one tiny frame a second.
+	if out, err := exec.Command(ffmpeg, "-loglevel", "error", "-f", "lavfi", "-i", "color=c=black:s=16x16:r=1:d=4920",
+		"-c:v", "libx264", "-preset", "ultrafast", "-g", "600", first).CombinedOutput(); err != nil {
+		t.Skipf("make video: %v\n%s", err, out)
+	}
+	b, _ := os.ReadFile(first)
+	os.WriteFile(filepath.Join(root, "Heat (1995)", "Heat (1995) Disk2.mkv"), b, 0o644)
+	st, lib := scanLib(t, "movies", root)
+	ctx := context.Background()
+	top, _ := st.TopLevel(ctx, 0, lib.ID)
+	if len(top) != 1 {
+		t.Fatalf("movies: %+v", top)
+	}
+	it, err := st.Item(ctx, 0, top[0].ID)
+	if err != nil || len(it.Parts) != 0 {
+		t.Fatalf("full-length disks joined as parts: %+v %v", it.Parts, err)
+	}
+	if vs, err := st.Versions(ctx, 0, it.ID); err != nil || len(vs) != 2 {
+		t.Errorf("versions: %+v %v", vs, err)
+	}
+}
