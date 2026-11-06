@@ -418,7 +418,10 @@ func (t *Transcoder) start(ctx context.Context, userID int64, it store.Item, sta
 		// A GPU that fails partway through (rather than at the start) leaves
 		// the player stuck; when it starts again, this item skips that mode.
 		if err != nil && !killed && kind != "" {
-			t.Log.Warn("transcode failed on the GPU partway through", "session", id, "item", it.ID, "accel", kind, "mode", mode, "err", err)
+			// One that never made a segment is retried, and logged, by the caller.
+			if ready {
+				t.Log.Warn("transcode failed on the GPU partway through", "session", id, "item", it.ID, "accel", kind, "mode", mode, "err", err)
+			}
 			t.hwFailed(it.ID, kind, mode)
 		}
 		close(s.done)
@@ -650,6 +653,13 @@ type logWriter struct {
 }
 
 func (l *logWriter) Write(p []byte) (int, error) {
-	l.log.Warn("ffmpeg", "session", l.session, "msg", string(p))
+	msg := string(p)
+	// Some errors list every pixel format FFmpeg knows, kilobytes of them.
+	if len(msg) > maxLogLine {
+		msg = strings.ToValidUTF8(msg[:maxLogLine], "") + "…"
+	}
+	l.log.Warn("ffmpeg", "session", l.session, "msg", msg)
 	return len(p), nil
 }
+
+const maxLogLine = 500

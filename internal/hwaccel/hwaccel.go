@@ -69,12 +69,13 @@ var gpuScaler = map[Kind]string{
 
 // decodes lists the source codecs (as ffprobe names them) each backend's
 // full pipeline decodes on the GPU. Older GPUs lack some of them; FFmpeg
-// then fails quickly and the transcode falls back (see Plan).
+// then fails quickly and the transcode falls back (see Plan). Apple silicon
+// doesn't decode MPEG-2 or MPEG-4 Part 2 (tested on an M5 Pro).
 var decodes = map[Kind][]string{
 	VAAPI:        {"h264", "hevc", "vp9", "av1", "mpeg2video", "vc1", "vp8"},
 	NVENC:        {"h264", "hevc", "vp9", "av1", "mpeg2video", "vc1", "vp8", "mpeg4"},
 	QSV:          {"h264", "hevc", "vp9", "av1", "mpeg2video", "vc1", "vp8"},
-	VideoToolbox: {"h264", "hevc", "vp9", "av1", "mpeg2video", "mpeg4", "prores"},
+	VideoToolbox: {"h264", "hevc", "vp9", "av1", "prores"},
 	AMF:          {"h264", "hevc", "vp9", "av1", "mpeg2video", "vc1"},
 }
 
@@ -272,7 +273,9 @@ func filters(a *Accel, m Mode, codec, toneMap string) (input []string, chain fun
 		chain = func(w int) string {
 			f := fmt.Sprintf("scale_vt=w='min(%d,iw)':h=-2", w)
 			if toneMap != "" {
-				f += ",hwdownload,format=p010le," + toneMap
+				// Frames come down in the source's depth: 10 bits for
+				// nearly all HDR, 8 for the odd 8-bit HLG file.
+				f += ",hwdownload,format=p010le|nv12," + toneMap
 			}
 			return f
 		}

@@ -72,7 +72,7 @@ func TestArgs(t *testing.T) {
 		{
 			name: "videotoolbox full tone mapped", accel: &Accel{Kind: VideoToolbox}, mode: Full, video: hdr,
 			input:  "-hwaccel videotoolbox -hwaccel_output_format videotoolbox_vld",
-			output: "-map 0:v:0 -vf scale_vt=w='min(1920,iw)':h=-2,hwdownload,format=p010le,TM -c:v h264_videotoolbox -b:v 8M -profile:v high" + keyframes,
+			output: "-map 0:v:0 -vf scale_vt=w='min(1920,iw)':h=-2,hwdownload,format=p010le|nv12,TM -c:v h264_videotoolbox -b:v 8M -profile:v high" + keyframes,
 		},
 		{
 			name: "videotoolbox encode", accel: &Accel{Kind: VideoToolbox}, mode: Encode, video: hevc,
