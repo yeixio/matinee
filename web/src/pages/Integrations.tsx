@@ -43,7 +43,7 @@ export function Integrations() {
       {data && (data.radarr.connected || data.sonarr.connected) && <BoxOfficeNotifications />}
       <div id="overseerr" className="scroll-mt-24 pt-4">
         <h2 className="text-lg font-semibold">Overseerr</h2>
-        <p className="mt-1 text-sm text-muted">{t('integrations.overseerr.intro')}</p>
+        <p className="mt-1 text-sm text-muted">{t(overseerr?.boxOffice ? 'integrations.overseerr.boxOfficeFirst' : 'integrations.overseerr.intro')}</p>
       </div>
       {overseerr && <OverseerrConnectionCard saved={overseerr} />}
       {((data && (data.radarr.connected || data.sonarr.connected)) || overseerr?.connected) && <RequestModeSetting />}

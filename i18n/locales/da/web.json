@@ -594,6 +594,7 @@
     },
     "overseerr": {
       "intro": "Forbind den for at tilføje fanen Udforsk: hvad der er populært, anbefalinger ud fra hvad folk ser, og en måde at bede om hvad som helst. Jellyseerr virker også.",
+      "boxOfficeFirst": "Box Office udfylder nu Udforsk og tager imod ønsker, så Overseerr bruges ikke. Du kan afbryde forbindelsen.",
       "notConnected": "Ikke forbundet · til Udforsk",
       "requestAs": "Anmodninger fra folk uden Overseerr-konto",
       "madeAsOwner": "Lavet som {{name}} (ejeren af API-nøglen)",
@@ -988,9 +989,9 @@
   "discover": {
     "title": "Udforsk",
     "emptyTitle": "Intet at udforske endnu",
-    "connectIt": "Forbind Overseerr for at se hvad der er populært, få anbefalinger og bede om nye film og serier.",
+    "connectIt": "Forbind Box Office / Overseerr for at se hvad der er populært, få anbefalinger og bede om nye film og serier.",
     "openSettings": "Åbn indstillinger",
-    "notConnected": "En administrator har ikke forbundet Overseerr til denne server.",
+    "notConnected": "En administrator har ikke forbundet Box Office / Overseerr til denne server.",
     "placeholder": "Find en film eller serie…",
     "unavailable": "Udforsk er ikke tilgængelig lige nu",
     "open": "Åbn",

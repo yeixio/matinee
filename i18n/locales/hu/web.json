@@ -594,6 +594,7 @@
     },
     "overseerr": {
       "intro": "Kapcsold össze, és lesz egy Felfedezés lap: mi a felkapott, ajánlások aszerint, amit az emberek néznek, és egy mód bármi kérésére. A Jellyseerr is működik.",
+      "boxOfficeFirst": "A Felfedezés lapot most a Box Office tölti meg, és ő fogadja a kéréseket is, így az Overseerr nincs használatban. Leválaszthatod.",
       "notConnected": "Nincs összekapcsolva · a Felfedezéshez",
       "requestAs": "Overseerr-fiók nélküliek kérései",
       "madeAsOwner": "{{name}} nevében (az API-kulcs tulajdonosa)",
@@ -988,9 +989,9 @@
   "discover": {
     "title": "Felfedezés",
     "emptyTitle": "Még nincs mit felfedezni",
-    "connectIt": "Kapcsold össze az Overseerrt, hogy lásd, mi a felkapott, ajánlásokat kapj, és új filmeket és sorozatokat kérj.",
+    "connectIt": "Kapcsold össze az Box Office / Overseerrt, hogy lásd, mi a felkapott, ajánlásokat kapj, és új filmeket és sorozatokat kérj.",
     "openSettings": "Beállítások megnyitása",
-    "notConnected": "Egy adminisztrátor még nem kapcsolta össze az Overseerrt ezzel a szerverrel.",
+    "notConnected": "Egy adminisztrátor még nem kapcsolta össze az Box Office / Overseerrt ezzel a szerverrel.",
     "placeholder": "Keress bármilyen filmet vagy sorozatot…",
     "unavailable": "A Felfedezés most nem érhető el",
     "open": "Megnyitás",

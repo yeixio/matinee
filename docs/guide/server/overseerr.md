@@ -19,6 +19,10 @@ If you run [Overseerr](https://overseerr.dev/), or Jellyseerr, which works the s
 
 The Discover tab appears straight away. **Disconnect** takes it away again.
 
+<!-- since: v0.2.4 -->
+When [Box Office](/docs/server/radarr-and-sonarr/#box-office) is connected, it fills Discover and takes requests instead, even with Overseerr connected, so you can retire Overseerr. The Overseerr entry says so, and **Disconnect** removes it without affecting Discover.
+<!-- /since -->
+
 ## Who requests are made as
 
 Matinee asks Overseerr in the name of the person asking, so Overseerr's own rules apply: who needs approval, request limits, and which quality and folder titles get.

@@ -598,6 +598,7 @@
     },
     "overseerr": {
       "intro": "Conéctalo para añadir una pestaña Descubrir: lo que es tendencia, recomendaciones según lo que ve la gente y una forma de pedir cualquier cosa. Jellyseerr también funciona.",
+      "boxOfficeFirst": "Box Office ahora llena Descubrir y recibe las solicitudes, así que Overseerr no se usa. Puedes desconectarlo.",
       "notConnected": "No conectado · para Descubrir",
       "requestAs": "Solicitudes de personas sin cuenta de Overseerr",
       "madeAsOwner": "Hechas como {{name}} (dueño de la clave API)",
@@ -992,9 +993,9 @@
   "discover": {
     "title": "Descubrir",
     "emptyTitle": "Aún no hay nada que descubrir",
-    "connectIt": "Conecta Overseerr para ver lo que es tendencia, recibir recomendaciones y pedir películas y series nuevas.",
+    "connectIt": "Conecta Box Office / Overseerr para ver lo que es tendencia, recibir recomendaciones y pedir películas y series nuevas.",
     "openSettings": "Abrir ajustes",
-    "notConnected": "Un administrador no ha conectado Overseerr a este servidor.",
+    "notConnected": "Un administrador no ha conectado Box Office / Overseerr a este servidor.",
     "placeholder": "Busca cualquier película o serie…",
     "unavailable": "Descubrir no está disponible ahora",
     "open": "Abrir",

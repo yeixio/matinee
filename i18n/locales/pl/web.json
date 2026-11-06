@@ -602,6 +602,7 @@
     },
     "overseerr": {
       "intro": "Połącz, aby dodać kartę Odkrywaj: co jest na czasie, polecenia na podstawie tego, co ludzie oglądają, i sposób, by poprosić o cokolwiek. Jellyseerr też działa.",
+      "boxOfficeFirst": "Odkrywaj wypełnia teraz Box Office i to on przyjmuje prośby, więc Overseerr nie jest używany. Możesz go odłączyć.",
       "notConnected": "Niepołączony · dla Odkrywaj",
       "requestAs": "Prośby od osób bez konta w Overseerr",
       "madeAsOwner": "Składane jako {{name}} (właściciel klucza API)",
@@ -996,9 +997,9 @@
   "discover": {
     "title": "Odkrywaj",
     "emptyTitle": "Na razie nie ma nic do odkrycia",
-    "connectIt": "Połącz Overseerr, aby widzieć, co jest na czasie, dostawać polecenia i prosić o nowe filmy i seriale.",
+    "connectIt": "Połącz Box Office / Overseerr, aby widzieć, co jest na czasie, dostawać polecenia i prosić o nowe filmy i seriale.",
     "openSettings": "Otwórz ustawienia",
-    "notConnected": "Administrator nie połączył Overseerr z tym serwerem.",
+    "notConnected": "Administrator nie połączył Box Office / Overseerr z tym serwerem.",
     "placeholder": "Znajdź dowolny film lub serial…",
     "unavailable": "Odkrywaj jest teraz niedostępne",
     "open": "Otwórz",

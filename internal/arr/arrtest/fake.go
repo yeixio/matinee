@@ -47,7 +47,13 @@ type Fake struct {
 	Activity map[string]any
 	Editions map[string]any
 	Asked    []map[string]any
-	nextID   int
+	// TakesRequests makes it a Box Office that takes requests on its
+	// Requests page: Requests are those filed, by id. RequestRule, when
+	// set, turns new ones down with those words, as a weekly limit does.
+	TakesRequests bool
+	Requests      map[int64]map[string]any
+	RequestRule   string
+	nextID        int
 }
 
 // Notify adds to Box Office's feed, numbering it.
@@ -151,6 +157,9 @@ func (f *Fake) serve(w http.ResponseWriter, r *http.Request) {
 		if f.Discover != nil {
 			features = append(features, "discover")
 		}
+		if f.TakesRequests {
+			features = append(features, "requests")
+		}
 		if f.Pairing {
 			features = append(features, "progress", "upgrades")
 			if f.App == arr.Radarr {
@@ -165,6 +174,8 @@ func (f *Fake) serve(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		write(w, v)
+	case strings.HasPrefix(path, "/boxoffice/requests") && f.TakesRequests:
+		f.serveRequests(w, r, path, body)
 	case path == "/boxoffice/activity" && f.Pairing:
 		write(w, f.Activity)
 	case path == "/boxoffice/editions" && f.Pairing && r.Method == http.MethodGet:
@@ -312,4 +323,61 @@ func NewBoxOffice(t *testing.T) *BoxOffice {
 	b.URL, b.Close = ts.URL, ts.Close
 	b.Radarr.URL, b.Sonarr.URL = ts.URL+"/radarr", ts.URL+"/sonarr"
 	return b
+}
+
+func (f *Fake) serveRequests(w http.ResponseWriter, r *http.Request, path string, body map[string]any) {
+	if f.Requests == nil {
+		f.Requests = map[int64]map[string]any{}
+	}
+	rest := strings.Trim(strings.TrimPrefix(path, "/boxoffice/requests"), "/")
+	idPart, action, _ := strings.Cut(rest, "/")
+	id, _ := strconv.ParseInt(idPart, 10, 64)
+	rule := func(msg string) {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusUnprocessableEntity)
+		json.NewEncoder(w).Encode(map[string]string{"message": msg})
+	}
+	req := f.Requests[id]
+	switch {
+	case rest == "" && r.Method == http.MethodPost:
+		if f.RequestRule != "" {
+			rule(f.RequestRule)
+			return
+		}
+		status := "pending"
+		if body["approved"] == true {
+			status = "approved"
+		}
+		id := int64(len(f.Requests) + 100)
+		body["id"], body["kind"], body["status"], body["state"] = id, f.kind(), status, status
+		f.Requests[id] = body
+		w.WriteHeader(http.StatusCreated)
+		write(w, body)
+	case rest == "" && r.Method == http.MethodGet:
+		out := []map[string]any{}
+		for _, s := range strings.Split(r.URL.Query().Get("ids"), ",") {
+			id, _ := strconv.ParseInt(s, 10, 64)
+			if m, ok := f.Requests[id]; ok {
+				out = append(out, m)
+			}
+		}
+		write(w, out)
+	case req == nil:
+		http.NotFound(w, r)
+	case r.Method == http.MethodDelete:
+		if req["status"] == "pending" {
+			delete(f.Requests, id)
+		}
+		w.WriteHeader(http.StatusNoContent)
+	case req["status"] != "pending":
+		rule("that request was " + req["status"].(string) + " already")
+	case action == "approve":
+		req["status"], req["state"], req["approvedWith"] = "approved", "searching", body["qualityProfileId"]
+		write(w, req)
+	case action == "decline":
+		req["status"], req["state"], req["reply"] = "declined", "declined", body["reply"]
+		write(w, req)
+	default:
+		http.NotFound(w, r)
+	}
 }

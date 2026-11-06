@@ -14,12 +14,13 @@ import (
 	"github.com/yeixio/matinee/internal/store"
 )
 
-// Box Office in place of Overseerr: when Overseerr isn't connected and
-// Radarr or Sonarr goes to a Box Office that has Discover, the Discover tab
-// comes from Box Office instead. The rows are the same (with Box Office's
+// Box Office in place of Overseerr: when Radarr or Sonarr goes to a Box
+// Office that has Discover, the Discover tab comes from Box Office, even
+// with Overseerr connected too. The rows are the same (with Box Office's
 // recommendations for the library on top of the ones for what someone
-// watched), and asking for a title is an ordinary request, which follows
-// the server's request setting and waits for an admin when it says so.
+// watched), and asking for a title is an ordinary request: filed on Box
+// Office's Requests page when it takes requests (boxoffice_requests.go),
+// else following the server's request setting here.
 
 // discoverTTL is how long Box Office's rows are kept here; Box Office
 // keeps TMDB's lists longer, but where each title stands changes.

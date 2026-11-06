@@ -66,7 +66,22 @@ Under **Who can add movies and shows**, pick one:
 ## Discover from Box Office
 
 <!-- since: v0.2.3 -->
-When Box Office is connected, everyone gets the [Discover](/docs/watching/discover/) tab on the web and in the phone and TV apps, with nothing else to set up: trending, popular and upcoming titles, recommendations for what they watched and for what's in your libraries, and a search for any movie or show. Asking for a title there is an ordinary request through Box Office, so **Who can add movies and shows** applies. Kids profiles don't see Discover. If [Overseerr](/docs/server/overseerr/) is also connected, Discover comes from Overseerr instead. Disconnecting Box Office takes the tab away.
+When Box Office is connected, everyone gets the [Discover](/docs/watching/discover/) tab on the web and in the phone and TV apps, with nothing else to set up: trending, popular and upcoming titles, recommendations for what they watched and for what's in your libraries, and a search for any movie or show. Asking for a title there is an ordinary request through Box Office, so **Who can add movies and shows** applies. Kids profiles don't see Discover. <!-- until: v0.2.4 -->If [Overseerr](/docs/server/overseerr/) is also connected, Discover comes from Overseerr instead. <!-- /until -->Disconnecting Box Office takes the tab away.
+<!-- /since -->
+
+<!-- since: v0.2.4 -->
+Box Office comes first: if [Overseerr](/docs/server/overseerr/) is connected too, Discover still comes from Box Office and Overseerr isn't used. Its entry under **Settings → Add-ons** says so, and you can disconnect it. Servers without Box Office keep using Overseerr as before.
+
+### Requests on Box Office's Requests page
+
+When Box Office takes requests, asking for a movie or show in Matinee, from Discover or from **Requests → Ask for something**, on the web or in the phone and TV apps, files it on Box Office's **Requests** page under the person's Matinee account. That's the same account they'd use to sign in to Box Office's request site, so everything they've asked for is in one place, whichever way they asked.
+
+- **Box Office decides.** Its rules apply: who's approved automatically, and weekly limits, both set on its **Requests** page. If Box Office says no, for example because someone reached their weekly limit, they see why straight away.
+- **Admins' requests are added straight away,** and so is everyone's when **Who can add movies and shows** says requests are added right away.
+- **Approve or decline in either place.** An admin can use Box Office's **Requests** page or Matinee's **Requests** tab, which passes the decision on. Matinee catches up with what's decided on Box Office within half a minute, and tells the person who asked in the bell.
+- **Deleting a request that's still waiting** takes it off Box Office's page too.
+
+Nothing needs setting up, and Box Office's request site doesn't need to be turned on. Without a Box Office that takes requests, requests work as described above.
 <!-- /since -->
 
 ## Notifications from Box Office

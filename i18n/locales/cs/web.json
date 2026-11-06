@@ -602,6 +602,7 @@
     },
     "overseerr": {
       "intro": "Připojte ho a přidejte kartu Objevovat: co je v trendu, doporučení podle toho, co lidé sledují, a možnost požádat o cokoli. Funguje i Jellyseerr.",
+      "boxOfficeFirst": "Objevovat teď plní Box Office a přijímá i žádosti, takže se Overseerr nepoužívá. Můžete ho odpojit.",
       "notConnected": "Nepřipojeno · pro Objevovat",
       "requestAs": "Žádosti lidí bez účtu Overseerr",
       "madeAsOwner": "Podávané jako {{name}} (vlastník klíče API)",
@@ -996,9 +997,9 @@
   "discover": {
     "title": "Objevovat",
     "emptyTitle": "Zatím není co objevovat",
-    "connectIt": "Připojte Overseerr, abyste viděli, co je v trendu, dostávali doporučení a mohli žádat o nové filmy a seriály.",
+    "connectIt": "Připojte Box Office / Overseerr, abyste viděli, co je v trendu, dostávali doporučení a mohli žádat o nové filmy a seriály.",
     "openSettings": "Otevřít nastavení",
-    "notConnected": "Správce k tomuto serveru Overseerr nepřipojil.",
+    "notConnected": "Správce k tomuto serveru Box Office / Overseerr nepřipojil.",
     "placeholder": "Najděte jakýkoli film nebo seriál…",
     "unavailable": "Objevovat teď není k dispozici",
     "open": "Otevřít",

@@ -5592,6 +5592,7 @@ components:
         reason: { type: string, description: Why the copy there is bad. }
         seasonNumber: { type: integer, description: The episode a better or replacement copy is for. }
         episodeNumber: { type: integer }
+        boxOfficeId: { type: integer, description: "Its id on Box Office's Requests page, for a request filed with a Box Office that takes requests; Box Office decides it, and Matinee passes on approvals, declines and deletes." }
     Issue:
       type: object
       properties:

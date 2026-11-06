@@ -80,6 +80,8 @@ var ErrNotFound = errors.New("not found")
 type Error struct {
 	Status  int
 	Message string
+	// Reason is the app's own words, without its name, when it gave any.
+	Reason string
 	// redirect is where the app sent the request instead, unfollowed.
 	redirect *url.URL
 }
@@ -168,7 +170,8 @@ func (c *Client) do(ctx context.Context, method, path string, query url.Values, 
 	case res.StatusCode == http.StatusNotFound:
 		return ErrNotFound
 	case res.StatusCode >= 300:
-		return &Error{Status: res.StatusCode, Message: c.App.Name() + ": " + errorMessage(res)}
+		msg := errorMessage(res)
+		return &Error{Status: res.StatusCode, Message: c.App.Name() + ": " + msg, Reason: msg}
 	}
 	if out == nil {
 		return nil

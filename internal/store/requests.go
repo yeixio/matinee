@@ -51,6 +51,9 @@ type Request struct {
 	Reason  string `json:"reason,omitempty"`
 	Season  int    `json:"seasonNumber,omitempty"`
 	Episode int    `json:"episodeNumber,omitempty"`
+	// BoxOfficeID is the request's id on Box Office's Requests page, for
+	// one filed there; 0 for one Matinee decides itself.
+	BoxOfficeID int64 `json:"boxOfficeId,omitempty"`
 }
 
 // What a request asks Box Office for, beyond adding a title.
@@ -61,14 +64,14 @@ const (
 )
 
 const requestCols = `r.id, r.kind, r.tmdb_id, r.tvdb_id, r.title, r.year, r.poster, r.quality_profile_id, r.state, r.error,
-	r.user_id, COALESCE(u.username, ''), r.created_at, r.updated_at, r.ask, r.edition, r.mode, r.reason, r.season, r.episode`
+	r.user_id, COALESCE(u.username, ''), r.created_at, r.updated_at, r.ask, r.edition, r.mode, r.reason, r.season, r.episode, r.boxoffice_id`
 
 const requestFrom = ` FROM requests r LEFT JOIN users u ON u.id = r.user_id`
 
 func scanRequest(row scanner) (Request, error) {
 	var r Request
 	err := row.Scan(&r.ID, &r.Kind, &r.TMDBID, &r.TVDBID, &r.Title, &r.Year, &r.Poster, &r.QualityProfileID, &r.State, &r.Error,
-		&r.UserID, &r.Username, &r.CreatedAt, &r.UpdatedAt, &r.Ask, &r.Edition, &r.Mode, &r.Reason, &r.Season, &r.Episode)
+		&r.UserID, &r.Username, &r.CreatedAt, &r.UpdatedAt, &r.Ask, &r.Edition, &r.Mode, &r.Reason, &r.Season, &r.Episode, &r.BoxOfficeID)
 	if errors.Is(err, sql.ErrNoRows) {
 		return r, ErrNotFound
 	}
@@ -81,14 +84,18 @@ func newID() string {
 	return hex.EncodeToString(b)
 }
 
-// CreateRequest saves a new request, pending.
+// CreateRequest saves a new request, pending unless it says otherwise (as
+// one Box Office decided at once does).
 func (s *Store) CreateRequest(ctx context.Context, r Request) (Request, error) {
-	r.ID, r.State, r.CreatedAt, r.UpdatedAt = newID(), RequestPending, now(), now()
+	r.ID, r.CreatedAt, r.UpdatedAt = newID(), now(), now()
+	if r.State == "" {
+		r.State = RequestPending
+	}
 	_, err := s.db.ExecContext(ctx, `INSERT INTO requests
-		(id, user_id, kind, tmdb_id, tvdb_id, title, year, poster, quality_profile_id, state, error, created_at, updated_at, ask, edition, mode, reason, season, episode)
-		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, '', ?, ?, ?, ?, ?, ?, ?, ?)`,
+		(id, user_id, kind, tmdb_id, tvdb_id, title, year, poster, quality_profile_id, state, error, created_at, updated_at, ask, edition, mode, reason, season, episode, boxoffice_id)
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, '', ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
 		r.ID, r.UserID, r.Kind, r.TMDBID, r.TVDBID, r.Title, r.Year, r.Poster, r.QualityProfileID, r.State, r.CreatedAt, r.UpdatedAt,
-		r.Ask, r.Edition, r.Mode, r.Reason, r.Season, r.Episode)
+		r.Ask, r.Edition, r.Mode, r.Reason, r.Season, r.Episode, r.BoxOfficeID)
 	if err != nil {
 		return r, err
 	}
@@ -150,6 +157,26 @@ func (s *Store) UpdateRequest(ctx context.Context, id, state, errMsg string, qua
 		return ErrNotFound
 	}
 	return nil
+}
+
+// BoxOfficeRequests are the requests of a kind filed with Box Office
+// that are still waiting there.
+func (s *Store) BoxOfficeRequests(ctx context.Context, kind string) ([]Request, error) {
+	rows, err := s.db.QueryContext(ctx, "SELECT "+requestCols+requestFrom+
+		" WHERE r.kind = ? AND r.boxoffice_id <> 0 AND r.state = 'pending' ORDER BY r.created_at LIMIT 500", kind)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	out := []Request{}
+	for rows.Next() {
+		r, err := scanRequest(rows)
+		if err != nil {
+			return nil, err
+		}
+		out = append(out, r)
+	}
+	return out, rows.Err()
 }
 
 func (s *Store) DeleteRequest(ctx context.Context, id string) error {

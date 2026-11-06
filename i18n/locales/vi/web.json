@@ -590,6 +590,7 @@
     },
     "overseerr": {
       "intro": "Kết nối để thêm thẻ Khám phá: những gì đang thịnh hành, gợi ý dựa trên những gì mọi người xem và cách yêu cầu bất cứ thứ gì. Jellyseerr cũng dùng được.",
+      "boxOfficeFirst": "Giờ Box Office lấp đầy mục Khám phá và nhận yêu cầu, nên Overseerr không được dùng. Bạn có thể ngắt kết nối nó.",
       "notConnected": "Chưa kết nối · cho Khám phá",
       "requestAs": "Yêu cầu từ người không có tài khoản Overseerr",
       "madeAsOwner": "Gửi dưới tên {{name}} (chủ khóa API)",
@@ -984,9 +985,9 @@
   "discover": {
     "title": "Khám phá",
     "emptyTitle": "Chưa có gì để khám phá",
-    "connectIt": "Kết nối Overseerr để xem những gì đang thịnh hành, nhận gợi ý và yêu cầu phim lẻ, phim bộ mới.",
+    "connectIt": "Kết nối Box Office / Overseerr để xem những gì đang thịnh hành, nhận gợi ý và yêu cầu phim lẻ, phim bộ mới.",
     "openSettings": "Mở cài đặt",
-    "notConnected": "Quản trị viên chưa kết nối Overseerr với máy chủ này.",
+    "notConnected": "Quản trị viên chưa kết nối Box Office / Overseerr với máy chủ này.",
     "placeholder": "Tìm phim lẻ hoặc phim bộ bất kỳ…",
     "unavailable": "Khám phá hiện không dùng được",
     "open": "Mở",

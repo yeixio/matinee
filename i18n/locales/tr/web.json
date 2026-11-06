@@ -594,6 +594,7 @@
     },
     "overseerr": {
       "intro": "Keşfet sekmesi eklemek için bağla: trend olanlar, insanların izlediklerine göre öneriler ve her şeyi isteyebileceğin bir yol. Jellyseerr de çalışır.",
+      "boxOfficeFirst": "Keşfet'i artık Box Office dolduruyor ve istekleri o alıyor, bu yüzden Overseerr kullanılmıyor. Bağlantısını kesebilirsin.",
       "notConnected": "Bağlı değil · Keşfet için",
       "requestAs": "Overseerr hesabı olmayanların istekleri",
       "madeAsOwner": "{{name}} olarak yapılır (API anahtarının sahibi)",
@@ -988,9 +989,9 @@
   "discover": {
     "title": "Keşfet",
     "emptyTitle": "Henüz keşfedilecek bir şey yok",
-    "connectIt": "Trend olanları görmek, öneri almak ve yeni film ve dizi istemek için Overseerr'ı bağla.",
+    "connectIt": "Trend olanları görmek, öneri almak ve yeni film ve dizi istemek için Box Office / Overseerr'ı bağla.",
     "openSettings": "Ayarları aç",
-    "notConnected": "Bir yönetici Overseerr'ı bu sunucuya bağlamadı.",
+    "notConnected": "Bir yönetici Box Office / Overseerr'ı bu sunucuya bağlamadı.",
     "placeholder": "Herhangi bir film ya da dizi bul…",
     "unavailable": "Keşfet şu anda kullanılamıyor",
     "open": "Aç",

@@ -18,8 +18,10 @@ import (
 
 // Overseerr, connected by an admin, fills the Discover tab: what's trending
 // and popular, titles like the ones someone watched lately, and a way to
-// ask for any of them. Without it, a connected Box Office fills it instead
-// (see discover_boxoffice.go); without either there's no Discover tab.
+// ask for any of them. A connected Box Office with Discover fills it
+// instead, whether or not Overseerr is connected too (see
+// discover_boxoffice.go), and takes the requests on its Requests page (see
+// boxoffice_requests.go); without either there's no Discover tab.
 //
 // Requests go to Overseerr as the Overseerr user with the same name as the
 // person asking (or their account, for a profile), so Overseerr's own
@@ -84,6 +86,9 @@ type overseerrView struct {
 	URL       string `json:"url"`
 	HasAPIKey bool   `json:"hasApiKey"`
 	RequestAs int    `json:"requestAs"`
+	// BoxOffice says a Box Office fills the Discover tab, so Overseerr
+	// isn't used even when it's connected.
+	BoxOffice bool `json:"boxOffice,omitempty"`
 }
 
 func viewOverseerr(c overseerr.Config) overseerrView {
@@ -96,7 +101,9 @@ func (s *Server) getOverseerr(w http.ResponseWriter, r *http.Request) {
 		s.serverError(w, err)
 		return
 	}
-	writeJSON(w, http.StatusOK, viewOverseerr(c))
+	v := viewOverseerr(c)
+	_, v.BoxOffice = s.boxOfficeDiscovery(r.Context())
+	writeJSON(w, http.StatusOK, v)
 }
 
 // overseerrCandidate is the connection an admin is trying. Leaving the API
@@ -298,11 +305,11 @@ const becauseRows = 2
 
 func (s *Server) discover(w http.ResponseWriter, r *http.Request) {
 	ctx, u := r.Context(), currentUser(r)
-	cl, _, err := s.overseerrClient(ctx)
-	if bo, ok := s.boxOfficeDiscovery(ctx); ok && errors.Is(err, errNotConnected) {
+	if bo, ok := s.boxOfficeDiscovery(ctx); ok {
 		s.discoverFromBoxOffice(w, r, bo)
 		return
 	}
+	cl, _, err := s.overseerrClient(ctx)
 	if err != nil {
 		s.overseerrError(w, r, err)
 		return
@@ -397,11 +404,11 @@ func (s *Server) discoverRowPage(w http.ResponseWriter, r *http.Request) {
 	ctx, u, id := r.Context(), currentUser(r), r.PathValue("id")
 	page, _ := strconv.Atoi(r.URL.Query().Get("page"))
 	page = max(page, 1)
-	cl, _, err := s.overseerrClient(ctx)
-	if bo, ok := s.boxOfficeDiscovery(ctx); ok && errors.Is(err, errNotConnected) {
+	if bo, ok := s.boxOfficeDiscovery(ctx); ok {
 		s.discoverRowFromBoxOffice(w, r, bo, min(page, discoverRowPages))
 		return
 	}
+	cl, _, err := s.overseerrClient(ctx)
 	if err != nil {
 		s.overseerrError(w, r, err)
 		return
@@ -463,11 +470,11 @@ func (s *Server) discoverSearch(w http.ResponseWriter, r *http.Request) {
 		writeJSON(w, http.StatusOK, []discoverTitle{})
 		return
 	}
-	cl, _, err := s.overseerrClient(ctx)
-	if bo, ok := s.boxOfficeDiscovery(ctx); ok && errors.Is(err, errNotConnected) {
+	if bo, ok := s.boxOfficeDiscovery(ctx); ok {
 		s.discoverSearchBoxOffice(w, r, bo, clip(q, 200))
 		return
 	}
+	cl, _, err := s.overseerrClient(ctx)
 	if err != nil {
 		s.overseerrError(w, r, err)
 		return
@@ -542,11 +549,11 @@ func (s *Server) discoverRequest(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	ctx := r.Context()
-	cl, c, err := s.overseerrClient(ctx)
-	if _, ok := s.boxOfficeDiscovery(ctx); ok && errors.Is(err, errNotConnected) {
+	if _, ok := s.boxOfficeDiscovery(ctx); ok {
 		s.discoverRequestBoxOffice(w, r, auto, in.Kind, in.TMDBID)
 		return
 	}
+	cl, c, err := s.overseerrClient(ctx)
 	if err != nil {
 		s.overseerrError(w, r, err)
 		return
