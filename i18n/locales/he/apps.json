@@ -382,7 +382,9 @@
   "library": {
     "nothingUnwatched": "אין כאן שום דבר שלא נצפה",
     "nothingMatches": "אין התאמות",
-    "clearFilters": "ניקוי מסננים"
+    "clearFilters": "ניקוי מסננים",
+    "letters": "מעבר לאות",
+    "jumpTo": "מעבר אל {{letter}}"
   },
   "upNext": {
     "upNext": "הבא בתור",

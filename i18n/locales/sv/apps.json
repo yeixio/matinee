@@ -377,7 +377,9 @@
   "library": {
     "nothingUnwatched": "Inget osett här",
     "nothingMatches": "Inget matchar",
-    "clearFilters": "Rensa filter"
+    "clearFilters": "Rensa filter",
+    "letters": "Hoppa till en bokstav",
+    "jumpTo": "Hoppa till {{letter}}"
   },
   "upNext": {
     "upNext": "Nästa",

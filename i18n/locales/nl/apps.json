@@ -377,7 +377,9 @@
   "library": {
     "nothingUnwatched": "Niets ongezien hier",
     "nothingMatches": "Niets komt overeen",
-    "clearFilters": "Filters wissen"
+    "clearFilters": "Filters wissen",
+    "letters": "Naar een letter springen",
+    "jumpTo": "Naar {{letter}} springen"
   },
   "upNext": {
     "upNext": "Hierna",

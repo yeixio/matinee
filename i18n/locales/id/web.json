@@ -222,7 +222,9 @@
     "seenEverything": "Kamu sudah menonton semua yang ada di perpustakaan ini.",
     "clearFilters": "Hapus filter",
     "appearAsFound": "Judul muncul saat ditemukan.",
-    "noMedia": "Matinee mencari di {{paths}} dan tidak menemukan media."
+    "noMedia": "Matinee mencari di {{paths}} dan tidak menemukan media.",
+    "letters": "Lompat ke huruf",
+    "jumpTo": "Lompat ke {{letter}}"
   },
   "nothingHereYet": "Belum ada apa-apa di sini",
   "collection": {

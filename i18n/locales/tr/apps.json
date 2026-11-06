@@ -377,7 +377,9 @@
   "library": {
     "nothingUnwatched": "Burada izlenmemiş bir şey yok",
     "nothingMatches": "Eşleşen bir şey yok",
-    "clearFilters": "Filtreleri temizle"
+    "clearFilters": "Filtreleri temizle",
+    "letters": "Bir harfe atla",
+    "jumpTo": "{{letter}} harfine atla"
   },
   "upNext": {
     "upNext": "Sıradaki",

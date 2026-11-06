@@ -382,7 +382,9 @@
   "library": {
     "nothingUnwatched": "Nimic nevăzut aici",
     "nothingMatches": "Nimic nu se potrivește",
-    "clearFilters": "Șterge filtrele"
+    "clearFilters": "Șterge filtrele",
+    "letters": "Salt la o literă",
+    "jumpTo": "Salt la {{letter}}"
   },
   "upNext": {
     "upNext": "Urmează",

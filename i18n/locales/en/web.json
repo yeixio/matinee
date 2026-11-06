@@ -223,7 +223,9 @@
     "seenEverything": "You’ve seen everything in this library.",
     "clearFilters": "Clear filters",
     "appearAsFound": "Titles appear as they are found.",
-    "noMedia": "Matinee looked in {{paths}} and found no media."
+    "noMedia": "Matinee looked in {{paths}} and found no media.",
+    "letters": "Jump to a letter",
+    "jumpTo": "Jump to {{letter}}"
   },
   "nothingHereYet": "Nothing here yet",
   "collection": {

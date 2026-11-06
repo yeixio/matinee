@@ -225,7 +225,9 @@
     "seenEverything": "V této knihovně jsi viděl(a) všechno.",
     "clearFilters": "Vymazat filtry",
     "appearAsFound": "Tituly se objevují, jak se nacházejí.",
-    "noMedia": "Matinee hledal v {{paths}} a nenašel žádná média."
+    "noMedia": "Matinee hledal v {{paths}} a nenašel žádná média.",
+    "letters": "Přejít na písmeno",
+    "jumpTo": "Přejít na {{letter}}"
   },
   "nothingHereYet": "Zatím tu nic není",
   "collection": {

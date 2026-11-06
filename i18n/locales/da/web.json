@@ -223,7 +223,9 @@
     "seenEverything": "Du har set alt i dette bibliotek.",
     "clearFilters": "Ryd filtre",
     "appearAsFound": "Titler vises, efterhånden som de bliver fundet.",
-    "noMedia": "Matinee kiggede i {{paths}} og fandt ingen medier."
+    "noMedia": "Matinee kiggede i {{paths}} og fandt ingen medier.",
+    "letters": "Spring til et bogstav",
+    "jumpTo": "Spring til {{letter}}"
   },
   "nothingHereYet": "Intet her endnu",
   "collection": {

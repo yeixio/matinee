@@ -225,7 +225,9 @@
     "seenEverything": "Ти переглянув(ла) все в цій медіатеці.",
     "clearFilters": "Скинути фільтри",
     "appearAsFound": "Фільми й серіали з'являються в міру знаходження.",
-    "noMedia": "Matinee шукав у {{paths}} і не знайшов медіафайлів."
+    "noMedia": "Matinee шукав у {{paths}} і не знайшов медіафайлів.",
+    "letters": "Перейти до літери",
+    "jumpTo": "Перейти до {{letter}}"
   },
   "nothingHereYet": "Тут поки порожньо",
   "collection": {

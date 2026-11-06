@@ -377,7 +377,9 @@
   "library": {
     "nothingUnwatched": "Itt nincs semmi, amit ne láttál volna",
     "nothingMatches": "Semmi sem egyezik",
-    "clearFilters": "Szűrők törlése"
+    "clearFilters": "Szűrők törlése",
+    "letters": "Ugrás betűre",
+    "jumpTo": "Ugrás ide: {{letter}}"
   },
   "upNext": {
     "upNext": "Következik",

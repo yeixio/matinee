@@ -223,7 +223,9 @@
     "seenEverything": "Έχεις δει τα πάντα σε αυτή τη βιβλιοθήκη.",
     "clearFilters": "Καθαρισμός φίλτρων",
     "appearAsFound": "Οι τίτλοι εμφανίζονται καθώς βρίσκονται.",
-    "noMedia": "Το Matinee έψαξε στο {{paths}} και δεν βρήκε πολυμέσα."
+    "noMedia": "Το Matinee έψαξε στο {{paths}} και δεν βρήκε πολυμέσα.",
+    "letters": "Μετάβαση σε γράμμα",
+    "jumpTo": "Μετάβαση στο {{letter}}"
   },
   "nothingHereYet": "Τίποτα εδώ ακόμα",
   "collection": {

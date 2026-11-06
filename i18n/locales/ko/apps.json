@@ -372,7 +372,9 @@
   "library": {
     "nothingUnwatched": "여기에는 안 본 작품이 없습니다",
     "nothingMatches": "일치하는 항목 없음",
-    "clearFilters": "필터 지우기"
+    "clearFilters": "필터 지우기",
+    "letters": "글자로 이동",
+    "jumpTo": "{{letter}}(으)로 이동"
   },
   "upNext": {
     "upNext": "다음 작품",

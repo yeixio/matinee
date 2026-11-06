@@ -223,7 +223,9 @@
     "seenEverything": "Bu kütüphanedeki her şeyi izledin.",
     "clearFilters": "Filtreleri temizle",
     "appearAsFound": "Yapımlar bulundukça görünür.",
-    "noMedia": "Matinee {{paths}} içinde aradı ve medya bulamadı."
+    "noMedia": "Matinee {{paths}} içinde aradı ve medya bulamadı.",
+    "letters": "Bir harfe atla",
+    "jumpTo": "{{letter}} harfine atla"
   },
   "nothingHereYet": "Burada henüz bir şey yok",
   "collection": {

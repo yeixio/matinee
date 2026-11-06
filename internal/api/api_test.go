@@ -189,6 +189,11 @@ func TestEndToEnd(t *testing.T) {
 	if len(movies) != 1 || movies[0].Title != "Big Test Movie" || movies[0].Year == nil || *movies[0].Year != 2021 {
 		t.Fatalf("movies: %+v", movies)
 	}
+	var letters []store.Letter
+	c.do("GET", "/api/libraries/"+itoa(byKind["movies"])+"/letters", nil, &letters)
+	if len(letters) != 1 || letters[0] != (store.Letter{Letter: "B", Index: 0, Count: 1}) {
+		t.Fatalf("letters: %+v", letters)
+	}
 	movie := movies[0]
 	if movie.VideoCodec != "h264" || movie.DurationMs == nil {
 		t.Fatalf("movie was not probed: %+v", movie)

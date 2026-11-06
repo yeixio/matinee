@@ -377,7 +377,9 @@
   "library": {
     "nothingUnwatched": "Ei katsomatonta täällä",
     "nothingMatches": "Mikään ei vastaa",
-    "clearFilters": "Tyhjennä suodattimet"
+    "clearFilters": "Tyhjennä suodattimet",
+    "letters": "Siirry kirjaimeen",
+    "jumpTo": "Siirry kirjaimeen {{letter}}"
   },
   "upNext": {
     "upNext": "Seuraavaksi",

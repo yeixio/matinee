@@ -222,7 +222,9 @@
     "seenEverything": "이 라이브러리의 모든 작품을 봤습니다.",
     "clearFilters": "필터 지우기",
     "appearAsFound": "작품은 발견되는 대로 표시됩니다.",
-    "noMedia": "Matinee가 {{paths}}에서 찾아봤지만 미디어가 없습니다."
+    "noMedia": "Matinee가 {{paths}}에서 찾아봤지만 미디어가 없습니다.",
+    "letters": "글자로 이동",
+    "jumpTo": "{{letter}}(으)로 이동"
   },
   "nothingHereYet": "아직 아무것도 없습니다",
   "collection": {

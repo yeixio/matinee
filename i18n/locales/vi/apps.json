@@ -372,7 +372,9 @@
   "library": {
     "nothingUnwatched": "Không còn gì chưa xem ở đây",
     "nothingMatches": "Không có kết quả",
-    "clearFilters": "Xóa bộ lọc"
+    "clearFilters": "Xóa bộ lọc",
+    "letters": "Chuyển đến chữ cái",
+    "jumpTo": "Chuyển đến {{letter}}"
   },
   "upNext": {
     "upNext": "Tiếp theo",

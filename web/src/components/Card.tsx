@@ -1,5 +1,5 @@
 import { Check, Play } from 'lucide-react'
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { type RefObject, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useWindowVirtualizer } from '@tanstack/react-virtual'
 import { useQueryClient } from '@tanstack/react-query'
@@ -81,10 +81,28 @@ export function PosterCard({ item, wide = false }: { item: Item; wide?: boolean 
 
 // Big libraries only draw the rows near the screen; a few thousand cards at
 // once make switching libraries slow.
-export function PosterGrid({ items, wide = false }: { items: Item[]; wide?: boolean }) {
-  if (items.length > 120) return <VirtualPosterGrid items={items} wide={wide} />
+/** Scrolls a poster grid so the title at an index is at the top, under the header. */
+export type JumpTo = (index: number) => void
+
+/** How far down the window y is, less the sticky header and a little room. */
+function scrollUnderHeader(y: number) {
+  const header = document.querySelector('header')?.getBoundingClientRect().height ?? 64
+  window.scrollTo({ top: Math.max(0, y - header - 12) })
+}
+
+export function PosterGrid({ items, wide = false, jumpRef }: { items: Item[]; wide?: boolean; jumpRef?: RefObject<JumpTo | null> }) {
+  const ref = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    if (!jumpRef || items.length > 120) return
+    jumpRef.current = (index) => {
+      const card = ref.current?.children[index]
+      if (card) scrollUnderHeader(card.getBoundingClientRect().top + window.scrollY)
+    }
+  }, [jumpRef, items.length])
+  if (items.length > 120) return <VirtualPosterGrid items={items} wide={wide} jumpRef={jumpRef} />
   return (
     <div
+      ref={ref}
       className="grid gap-x-4 gap-y-6"
       style={{ gridTemplateColumns: `repeat(auto-fill, minmax(${wide ? 240 : 140}px, 1fr))` }}
     >
@@ -99,7 +117,7 @@ const gapX = 16 // gap-x-4
 const gapY = 24 // gap-y-6
 const captionHeight = 44 // mt-2 plus the title and subtitle lines
 
-function VirtualPosterGrid({ items, wide }: { items: Item[]; wide: boolean }) {
+function VirtualPosterGrid({ items, wide, jumpRef }: { items: Item[]; wide: boolean; jumpRef?: RefObject<JumpTo | null> }) {
   const ref = useRef<HTMLDivElement>(null)
   const [width, setWidth] = useState(0)
   const [top, setTop] = useState(0)
@@ -131,6 +149,14 @@ function VirtualPosterGrid({ items, wide }: { items: Item[]; wide: boolean }) {
     scrollMargin: top,
   })
   useEffect(() => rows.measure(), [rows, rowHeight])
+  useEffect(() => {
+    if (!jumpRef) return
+    // Rows all have the same height, so a title's row says where it is.
+    jumpRef.current = (index) => {
+      const el = ref.current
+      if (el) scrollUnderHeader(el.getBoundingClientRect().top + window.scrollY + Math.floor(index / cols) * rowHeight)
+    }
+  }, [jumpRef, cols, rowHeight])
 
   return (
     <div ref={ref} className="relative" style={{ height: rows.getTotalSize() }}>

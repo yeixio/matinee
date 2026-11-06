@@ -377,7 +377,9 @@
   "library": {
     "nothingUnwatched": "یہاں کچھ بھی ان دیکھا نہیں",
     "nothingMatches": "کچھ نہیں ملتا",
-    "clearFilters": "فلٹرز صاف کریں"
+    "clearFilters": "فلٹرز صاف کریں",
+    "letters": "کسی حرف پر جائیں",
+    "jumpTo": "{{letter}} پر جائیں"
   },
   "upNext": {
     "upNext": "اگلا",

@@ -382,7 +382,9 @@
   "library": {
     "nothingUnwatched": "Niente da vedere qui",
     "nothingMatches": "Nessun risultato",
-    "clearFilters": "Cancella i filtri"
+    "clearFilters": "Cancella i filtri",
+    "letters": "Vai a una lettera",
+    "jumpTo": "Vai alla {{letter}}"
   },
   "upNext": {
     "upNext": "Prossimo",

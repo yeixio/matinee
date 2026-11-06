@@ -286,6 +286,7 @@ func (s *Server) routes() []route {
 		{"POST /libraries/{id}/artwork", adminOnly, s.refreshLibraryArtwork},
 		{"PUT /libraries/{id}/metadata-mode", adminOnly, s.setLibraryMetadataMode},
 		{"GET /libraries/{id}/items", reader, s.libraryItems},
+		{"GET /libraries/{id}/letters", reader, s.libraryLetters},
 		{"GET /libraries/{id}/filters", reader, s.libraryFilters},
 		{"GET /libraries/{id}/people", reader, s.libraryPeople},
 		{"GET /libraries/{id}/series", reader, s.librarySeries},

@@ -223,7 +223,9 @@
     "seenEverything": "Mindent láttál ebben a könyvtárban.",
     "clearFilters": "Szűrők törlése",
     "appearAsFound": "A címek megjelennek, ahogy előkerülnek.",
-    "noMedia": "A Matinee itt keresett: {{paths}}, de nem talált médiát."
+    "noMedia": "A Matinee itt keresett: {{paths}}, de nem talált médiát.",
+    "letters": "Ugrás betűre",
+    "jumpTo": "Ugrás ide: {{letter}}"
   },
   "nothingHereYet": "Még nincs itt semmi",
   "collection": {

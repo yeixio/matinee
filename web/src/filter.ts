@@ -128,6 +128,8 @@ export const sortLabels = labels<SortField>('common:sort', ['title', 'added', 'r
 
 // Title and runtime run low to high unless asked, the rest high to low (as on the server).
 export const defaultDesc = (s: SortField) => s !== 'title' && s !== 'runtime'
+/** Whether the list runs high to low (Z to A for titles). */
+export const isDesc = (f: ItemFilter) => (f.order ? f.order === 'desc' : defaultDesc(f.sort ?? 'title'))
 
 export const watchedLabels = labels<Watched>('common:watched', ['unwatched', 'inProgress', 'watched', 'notStarted'])
 

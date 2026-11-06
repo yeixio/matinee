@@ -223,7 +223,9 @@
     "seenEverything": "آپ اس لائبریری میں سب کچھ دیکھ چکے ہیں۔",
     "clearFilters": "فلٹرز صاف کریں",
     "appearAsFound": "عنوانات ملتے ہی نظر آتے ہیں۔",
-    "noMedia": "Matinee نے {{paths}} میں دیکھا اور کوئی میڈیا نہیں ملا۔"
+    "noMedia": "Matinee نے {{paths}} میں دیکھا اور کوئی میڈیا نہیں ملا۔",
+    "letters": "کسی حرف پر جائیں",
+    "jumpTo": "{{letter}} پر جائیں"
   },
   "nothingHereYet": "یہاں ابھی کچھ نہیں",
   "collection": {

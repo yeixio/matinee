@@ -1011,6 +1011,32 @@ paths:
       responses:
         "200": { $ref: "#/components/responses/Items" }
         "400": { $ref: "#/components/responses/Error" }
+  /libraries/{id}/letters:
+    get:
+      summary: Where each letter starts in a library's title list, for an A to Z bar
+      description: >
+        Takes the same parameters as GET /libraries/{id}/items and says where
+        titles starting with each letter begin in that list, in list order.
+        Letters fold accents (É files under E); digits and symbols file under `#`;
+        letters of other alphabets come as themselves. Only the title sort
+        runs in letter order, so any other `sort` gets an empty list.
+      parameters:
+        - { $ref: "#/components/parameters/ID" }
+        - { $ref: "#/components/parameters/Filter" }
+      responses:
+        "200":
+          description: The letters in list order.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    letter: { type: string, example: A }
+                    index: { type: integer, description: The first title's place in the items list, from 0. }
+                    count: { type: integer }
+        "400": { $ref: "#/components/responses/Error" }
   /libraries/{id}/filters:
     get:
       summary: What a library can be filtered by

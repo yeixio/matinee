@@ -377,7 +377,9 @@
   "library": {
     "nothingUnwatched": "यहाँ बिना देखा कुछ नहीं",
     "nothingMatches": "कुछ मेल नहीं खाता",
-    "clearFilters": "फ़िल्टर हटाएँ"
+    "clearFilters": "फ़िल्टर हटाएँ",
+    "letters": "किसी अक्षर पर जाएँ",
+    "jumpTo": "{{letter}} पर जाएँ"
   },
   "upNext": {
     "upNext": "आगे",

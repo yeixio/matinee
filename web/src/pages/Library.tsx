@@ -1,8 +1,10 @@
 import { keepPreviousData, useQuery } from '@tanstack/react-query'
+import { useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { api, pendingRefetch, type Library as LibraryInfo } from '../api'
-import { GridSkeleton, PosterGrid } from '../components/Card'
+import { AlphaBar } from '../components/AlphaBar'
+import { GridSkeleton, type JumpTo, PosterGrid } from '../components/Card'
 import { PinnedCollections, SaveAsCollectionButton } from '../components/Collections'
 import { FilterBar } from '../components/FilterBar'
 import { LibraryIcon, useLibraries } from '../components/Shell'
@@ -10,7 +12,10 @@ import { Button, EmptyState } from '../components/ui'
 import Books from './Books'
 import Music from './Music'
 import Podcasts from './Podcasts'
-import { activeCount, clearPicks, toSearchParams, useLibraryFilter } from '../filter'
+import { activeCount, clearPicks, isDesc, toSearchParams, useLibraryFilter } from '../filter'
+
+// Lists this long get the A to Z bar.
+const LETTERS_FROM = 60
 
 export default function Library() {
   const id = Number(useParams().id)
@@ -34,6 +39,16 @@ function Titles({ id, lib }: { id: number; lib?: LibraryInfo }) {
     placeholderData: keepPreviousData,
     refetchInterval: (q) => (lib?.scanning ? 3000 : pendingRefetch(q.state.data)),
   })
+  // Sorted by title, a long list gets letters to jump to.
+  const byTitle = (filter.sort ?? 'title') === 'title'
+  const { data: letters } = useQuery({
+    queryKey: ['library-letters', id, toSearchParams(filter).toString()],
+    queryFn: () => api.libraryLetters(id, filter),
+    enabled: byTitle && (items?.length ?? 0) >= LETTERS_FROM,
+    refetchInterval: lib?.scanning ? 3000 : false,
+  })
+  const jumpTo = useRef<JumpTo>(null)
+  const showLetters = byTitle && !isPlaceholderData && (items?.length ?? 0) >= LETTERS_FROM && (letters?.length ?? 0) > 1
   const filtered = activeCount(filter) > 0
   const onlyUnwatched = filtered && activeCount(filter) === 1 && filter.watched === 'unwatched'
 
@@ -60,8 +75,9 @@ function Titles({ id, lib }: { id: number; lib?: LibraryInfo }) {
       {isPending ? (
         <GridSkeleton />
       ) : items && items.length > 0 ? (
-        <div className={`transition-opacity ${isPlaceholderData ? 'opacity-60' : ''}`}>
-          <PosterGrid items={items} />
+        <div className={`transition-opacity ${isPlaceholderData ? 'opacity-60' : ''} ${showLetters ? 'pe-4 md:pe-5' : ''}`}>
+          <PosterGrid items={items} jumpRef={jumpTo} />
+          {showLetters && letters && <AlphaBar letters={letters} desc={isDesc(filter)} onJump={(i) => jumpTo.current?.(i)} />}
         </div>
       ) : filtered ? (
         <EmptyState title={onlyUnwatched ? t('library.nothingUnwatched') : t('library.nothingMatches')}>
