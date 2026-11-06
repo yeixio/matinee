@@ -222,7 +222,9 @@
     "seenEverything": "このライブラリはすべて観ました。",
     "clearFilters": "フィルタをクリア",
     "appearAsFound": "タイトルは見つかり次第表示されます。",
-    "noMedia": "Matinee は {{paths}} を探しましたが、メディアは見つかりませんでした。"
+    "noMedia": "Matinee は {{paths}} を探しましたが、メディアは見つかりませんでした。",
+    "letters": "文字へ移動",
+    "jumpTo": "{{letter}} へ移動"
   },
   "nothingHereYet": "まだ何もありません",
   "collection": {

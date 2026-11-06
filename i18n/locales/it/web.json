@@ -224,7 +224,9 @@
     "seenEverything": "Hai visto tutto in questa libreria.",
     "clearFilters": "Cancella i filtri",
     "appearAsFound": "I titoli compaiono man mano che vengono trovati.",
-    "noMedia": "Matinee ha cercato in {{paths}} e non ha trovato contenuti."
+    "noMedia": "Matinee ha cercato in {{paths}} e non ha trovato contenuti.",
+    "letters": "Vai a una lettera",
+    "jumpTo": "Vai alla {{letter}}"
   },
   "nothingHereYet": "Ancora niente qui",
   "collection": {

@@ -387,7 +387,9 @@
   "library": {
     "nothingUnwatched": "Здесь нет непросмотренного",
     "nothingMatches": "Ничего не найдено",
-    "clearFilters": "Сбросить фильтры"
+    "clearFilters": "Сбросить фильтры",
+    "letters": "Перейти к букве",
+    "jumpTo": "Перейти к {{letter}}"
   },
   "upNext": {
     "upNext": "Далее",

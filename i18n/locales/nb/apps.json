@@ -377,7 +377,9 @@
   "library": {
     "nothingUnwatched": "Ingenting usett her",
     "nothingMatches": "Ingenting samsvarer",
-    "clearFilters": "Fjern filtre"
+    "clearFilters": "Fjern filtre",
+    "letters": "Hopp til en bokstav",
+    "jumpTo": "Hopp til {{letter}}"
   },
   "upNext": {
     "upNext": "Neste",

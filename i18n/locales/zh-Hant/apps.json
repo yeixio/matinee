@@ -372,7 +372,9 @@
   "library": {
     "nothingUnwatched": "這裡沒有未看的內容",
     "nothingMatches": "沒有匹配項",
-    "clearFilters": "清除篩選"
+    "clearFilters": "清除篩選",
+    "letters": "跳到字母",
+    "jumpTo": "跳到 {{letter}}"
   },
   "upNext": {
     "upNext": "接下來",

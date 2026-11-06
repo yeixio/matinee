@@ -223,7 +223,9 @@
     "seenEverything": "आपने इस लाइब्रेरी में सब कुछ देख लिया है।",
     "clearFilters": "फ़िल्टर हटाएँ",
     "appearAsFound": "टाइटल मिलते ही दिखते हैं।",
-    "noMedia": "Matinee ने {{paths}} में देखा और कोई मीडिया नहीं मिला।"
+    "noMedia": "Matinee ने {{paths}} में देखा और कोई मीडिया नहीं मिला।",
+    "letters": "किसी अक्षर पर जाएँ",
+    "jumpTo": "{{letter}} पर जाएँ"
   },
   "nothingHereYet": "अभी यहाँ कुछ नहीं",
   "collection": {

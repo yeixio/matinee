@@ -223,7 +223,9 @@
     "seenEverything": "Du har sett allt i det här biblioteket.",
     "clearFilters": "Rensa filter",
     "appearAsFound": "Titlar visas allteftersom de hittas.",
-    "noMedia": "Matinee letade i {{paths}} och hittade inga medier."
+    "noMedia": "Matinee letade i {{paths}} och hittade inga medier.",
+    "letters": "Hoppa till en bokstav",
+    "jumpTo": "Hoppa till {{letter}}"
   },
   "nothingHereYet": "Inget här än",
   "collection": {

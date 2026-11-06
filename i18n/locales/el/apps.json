@@ -377,7 +377,9 @@
   "library": {
     "nothingUnwatched": "Τίποτα που δεν έχεις δει εδώ",
     "nothingMatches": "Τίποτα δεν ταιριάζει",
-    "clearFilters": "Καθαρισμός φίλτρων"
+    "clearFilters": "Καθαρισμός φίλτρων",
+    "letters": "Μετάβαση σε γράμμα",
+    "jumpTo": "Μετάβαση στο {{letter}}"
   },
   "upNext": {
     "upNext": "Επόμενο",

@@ -71,6 +71,19 @@
               }
             },
             {
+              "name": "Jump to a letter (A to Z)",
+              "doc": "/docs/watching/browsing/",
+              "since": "v0.2.4",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
               "name": "Collections",
               "doc": "/docs/watching/collections/",
               "apps": {

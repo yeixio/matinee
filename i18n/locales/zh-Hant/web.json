@@ -222,7 +222,9 @@
     "seenEverything": "這個媒體庫裡的內容你都看過了。",
     "clearFilters": "清除篩選",
     "appearAsFound": "作品會在找到後陸續顯示。",
-    "noMedia": "Matinee 在 {{paths}} 中尋找過，但沒有找到媒體。"
+    "noMedia": "Matinee 在 {{paths}} 中尋找過，但沒有找到媒體。",
+    "letters": "跳到字母",
+    "jumpTo": "跳到 {{letter}}"
   },
   "nothingHereYet": "這裡還沒有內容",
   "collection": {

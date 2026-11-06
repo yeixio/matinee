@@ -377,7 +377,9 @@
   "library": {
     "nothingUnwatched": "Hier ist nichts ungesehen",
     "nothingMatches": "Nichts passt",
-    "clearFilters": "Filter zurücksetzen"
+    "clearFilters": "Filter zurücksetzen",
+    "letters": "Zu einem Buchstaben springen",
+    "jumpTo": "Zu {{letter}} springen"
   },
   "upNext": {
     "upNext": "Als Nächstes",

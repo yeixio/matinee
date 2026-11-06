@@ -19,6 +19,18 @@ The menu at the top right sorts by **Title**, **Date added**, **Release date**, 
 **My rating** sorts by your own [ratings](/docs/watching/title-pages/#your-ratings), highest first. From app version 1.0.21, the apps have it under **Filter & sort** too.
 <!-- /since -->
 
+## Jumping to a letter
+
+<!-- since: v0.2.4 -->
+A library with 60 or more titles, sorted by **Title**, has the letters **#** and **A** to **Z** down the right edge of the screen. Click a letter to jump to the titles that start with it. On a phone, slide your finger along the letters and the grid follows, with the letter you're on shown large in the middle. **#** is for titles that start with a number or a symbol, and letters with accents count as the plain letter, so *Élan* is under **E**. Letters the library has no titles for are dimmed.
+
+![The A to Z bar down the right edge of a large Movies library](../images/library-letters.webp)
+
+![Sliding a finger along the letters on a phone (phone)](../images/phone-library-letters.webp)
+
+The letters follow your filters: with only unwatched titles showing, they jump between those. Sorted any other way, the letters go away, since the list isn't in letter order. From app version 1.0.33, the phone, tablet and TV apps have them too; on a TV, press left from the first poster in a row to reach the letters, then up and down to pick one.
+<!-- /since -->
+
 ## Filters
 
 **Unwatched** next to **Filters** is a one-click filter for what you haven't seen. **Filters** opens everything else:

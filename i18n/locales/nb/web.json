@@ -223,7 +223,9 @@
     "seenEverything": "Du har sett alt i dette biblioteket.",
     "clearFilters": "Fjern filtre",
     "appearAsFound": "Titler vises etter hvert som de blir funnet.",
-    "noMedia": "Matinee lette i {{paths}} og fant ingen medier."
+    "noMedia": "Matinee lette i {{paths}} og fant ingen medier.",
+    "letters": "Hopp til en bokstav",
+    "jumpTo": "Hopp til {{letter}}"
   },
   "nothingHereYet": "Ingenting her ennå",
   "collection": {

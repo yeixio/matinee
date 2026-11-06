@@ -227,7 +227,9 @@
     "seenEverything": "شاهدت كل ما في هذه المكتبة.",
     "clearFilters": "مسح عوامل التصفية",
     "appearAsFound": "تظهر العناوين عند العثور عليها.",
-    "noMedia": "بحث Matinee في {{paths}} ولم يجد أي وسائط."
+    "noMedia": "بحث Matinee في {{paths}} ولم يجد أي وسائط.",
+    "letters": "الانتقال إلى حرف",
+    "jumpTo": "الانتقال إلى {{letter}}"
   },
   "nothingHereYet": "لا شيء هنا بعد",
   "collection": {

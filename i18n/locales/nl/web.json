@@ -223,7 +223,9 @@
     "seenEverything": "Je hebt alles in deze bibliotheek gezien.",
     "clearFilters": "Filters wissen",
     "appearAsFound": "Titels verschijnen zodra ze gevonden worden.",
-    "noMedia": "Matinee heeft in {{paths}} gezocht en geen media gevonden."
+    "noMedia": "Matinee heeft in {{paths}} gezocht en geen media gevonden.",
+    "letters": "Naar een letter springen",
+    "jumpTo": "Naar {{letter}} springen"
   },
   "nothingHereYet": "Hier is nog niets",
   "collection": {

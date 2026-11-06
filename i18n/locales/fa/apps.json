@@ -377,7 +377,9 @@
   "library": {
     "nothingUnwatched": "اینجا چیز دیده‌نشده‌ای نیست",
     "nothingMatches": "چیزی جور نیست",
-    "clearFilters": "پاک کردن فیلترها"
+    "clearFilters": "پاک کردن فیلترها",
+    "letters": "رفتن به یک حرف",
+    "jumpTo": "رفتن به {{letter}}"
   },
   "upNext": {
     "upNext": "بعدی",

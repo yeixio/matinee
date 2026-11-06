@@ -397,7 +397,9 @@
   "library": {
     "nothingUnwatched": "لا شيء لم تشاهده هنا",
     "nothingMatches": "لا شيء يطابق",
-    "clearFilters": "مسح عوامل التصفية"
+    "clearFilters": "مسح عوامل التصفية",
+    "letters": "الانتقال إلى حرف",
+    "jumpTo": "الانتقال إلى {{letter}}"
   },
   "upNext": {
     "upNext": "التالي",

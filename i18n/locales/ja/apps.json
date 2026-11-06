@@ -372,7 +372,9 @@
   "library": {
     "nothingUnwatched": "未視聴のものはありません",
     "nothingMatches": "一致するものはありません",
-    "clearFilters": "フィルタをクリア"
+    "clearFilters": "フィルタをクリア",
+    "letters": "文字へ移動",
+    "jumpTo": "{{letter}} へ移動"
   },
   "upNext": {
     "upNext": "次はこちら",

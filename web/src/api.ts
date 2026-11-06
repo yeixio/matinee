@@ -455,6 +455,13 @@ export type FilterValue = { value: string; label?: string; count: number }
 export type FilterPerson = { id: number; name: string; hasPhoto: boolean; count: number }
 
 // What a library can be filtered by: the values its titles have, most common first.
+/** Where titles starting with a letter begin in a library's list (A to Z bar). */
+export interface Letter {
+  letter: string
+  index: number
+  count: number
+}
+
 export type FilterOptions = {
   genres: FilterValue[]
   tags: FilterValue[]
@@ -1425,6 +1432,11 @@ export const api = {
   libraryItems: (id: number, filter: ItemFilter = {}) => {
     const q = toSearchParams({ ...filter, library: undefined }).toString()
     return request<Item[]>('GET', `/api/v1/libraries/${id}/items${q ? `?${q}` : ''}`)
+  },
+  // Where each letter starts in libraryItems' list for the same filter; empty unless sorted by title.
+  libraryLetters: (id: number, filter: ItemFilter = {}) => {
+    const q = toSearchParams({ ...filter, library: undefined }).toString()
+    return request<Letter[]>('GET', `/api/v1/libraries/${id}/letters${q ? `?${q}` : ''}`)
   },
   filterItems: (filter: ItemFilter) => request<Item[]>('GET', `/api/v1/items?${toSearchParams(filter)}`),
   libraryFilters: (id: number) => request<FilterOptions>('GET', `/api/v1/libraries/${id}/filters`),

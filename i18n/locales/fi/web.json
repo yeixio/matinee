@@ -223,7 +223,9 @@
     "seenEverything": "Olet katsonut kaiken tässä kirjastossa.",
     "clearFilters": "Tyhjennä suodattimet",
     "appearAsFound": "Nimikkeet näkyvät sitä mukaa kuin niitä löytyy.",
-    "noMedia": "Matinee etsi kohteesta {{paths}} eikä löytänyt mediaa."
+    "noMedia": "Matinee etsi kohteesta {{paths}} eikä löytänyt mediaa.",
+    "letters": "Siirry kirjaimeen",
+    "jumpTo": "Siirry kirjaimeen {{letter}}"
   },
   "nothingHereYet": "Täällä ei ole vielä mitään",
   "collection": {

@@ -372,7 +372,9 @@
   "library": {
     "nothingUnwatched": "Tiada yang belum ditonton di sini",
     "nothingMatches": "Tiada yang sepadan",
-    "clearFilters": "Kosongkan penapis"
+    "clearFilters": "Kosongkan penapis",
+    "letters": "Lompat ke huruf",
+    "jumpTo": "Lompat ke {{letter}}"
   },
   "upNext": {
     "upNext": "Seterusnya",

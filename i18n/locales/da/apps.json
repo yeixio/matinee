@@ -377,7 +377,9 @@
   "library": {
     "nothingUnwatched": "Intet uset her",
     "nothingMatches": "Intet matcher",
-    "clearFilters": "Ryd filtre"
+    "clearFilters": "Ryd filtre",
+    "letters": "Spring til et bogstav",
+    "jumpTo": "Spring til {{letter}}"
   },
   "upNext": {
     "upNext": "Næste",

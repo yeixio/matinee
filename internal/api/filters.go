@@ -25,6 +25,29 @@ func (s *Server) libraryItems(w http.ResponseWriter, r *http.Request) {
 	s.writeFiltered(w, r, f)
 }
 
+// libraryLetters says where each letter starts in the list libraryItems
+// gives for the same parameters, for the A to Z bar beside the grid. Only
+// the title sort has letters; other sorts get an empty list.
+func (s *Server) libraryLetters(w http.ResponseWriter, r *http.Request) {
+	id, ok := pathID(r)
+	if !ok {
+		writeError(w, http.StatusBadRequest, "bad id")
+		return
+	}
+	f, err := store.ParseItemFilter(r.URL.Query())
+	if err != nil {
+		writeError(w, http.StatusBadRequest, err.Error())
+		return
+	}
+	f.Library = []int64{id}
+	letters, err := s.Store.FilterLetters(r.Context(), currentUser(r).ID, f)
+	if err != nil {
+		s.serverError(w, err)
+		return
+	}
+	writeJSON(w, http.StatusOK, letters)
+}
+
 // filterItems is libraryItems across libraries (?library= picks some).
 func (s *Server) filterItems(w http.ResponseWriter, r *http.Request) {
 	f, err := store.ParseItemFilter(r.URL.Query())

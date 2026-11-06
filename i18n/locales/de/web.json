@@ -223,7 +223,9 @@
     "seenEverything": "Du hast alles in dieser Mediathek gesehen.",
     "clearFilters": "Filter zurücksetzen",
     "appearAsFound": "Titel erscheinen, sobald sie gefunden werden.",
-    "noMedia": "Matinee hat in {{paths}} gesucht und keine Medien gefunden."
+    "noMedia": "Matinee hat in {{paths}} gesucht und keine Medien gefunden.",
+    "letters": "Zu einem Buchstaben springen",
+    "jumpTo": "Zu {{letter}} springen"
   },
   "nothingHereYet": "Hier ist noch nichts",
   "collection": {

@@ -387,7 +387,9 @@
   "library": {
     "nothingUnwatched": "Nie ma tu nic nieobejrzanego",
     "nothingMatches": "Nic nie pasuje",
-    "clearFilters": "Wyczyść filtry"
+    "clearFilters": "Wyczyść filtry",
+    "letters": "Przejdź do litery",
+    "jumpTo": "Przejdź do {{letter}}"
   },
   "upNext": {
     "upNext": "Następnie",

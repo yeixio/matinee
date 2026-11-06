@@ -222,7 +222,9 @@
     "seenEverything": "คุณดูทุกอย่างในคลังนี้แล้ว",
     "clearFilters": "ล้างตัวกรอง",
     "appearAsFound": "เรื่องต่างๆ จะแสดงเมื่อพบ",
-    "noMedia": "Matinee ค้นใน {{paths}} แล้วไม่พบสื่อ"
+    "noMedia": "Matinee ค้นใน {{paths}} แล้วไม่พบสื่อ",
+    "letters": "ข้ามไปยังตัวอักษร",
+    "jumpTo": "ข้ามไปที่ {{letter}}"
   },
   "nothingHereYet": "ยังไม่มีอะไรที่นี่",
   "collection": {

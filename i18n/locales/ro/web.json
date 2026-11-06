@@ -224,7 +224,9 @@
     "seenEverything": "Ai văzut tot din această bibliotecă.",
     "clearFilters": "Șterge filtrele",
     "appearAsFound": "Titlurile apar pe măsură ce sunt găsite.",
-    "noMedia": "Matinee a căutat în {{paths}} și nu a găsit niciun fișier media."
+    "noMedia": "Matinee a căutat în {{paths}} și nu a găsit niciun fișier media.",
+    "letters": "Salt la o literă",
+    "jumpTo": "Salt la {{letter}}"
   },
   "nothingHereYet": "Nimic aici încă",
   "collection": {

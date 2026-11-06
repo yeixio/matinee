@@ -223,7 +223,9 @@
     "seenEverything": "همه‌چیز این کتابخانه را دیده‌اید.",
     "clearFilters": "پاک کردن فیلترها",
     "appearAsFound": "عنوان‌ها به محض پیدا شدن نمایش داده می‌شوند.",
-    "noMedia": "Matinee در {{paths}} گشت و رسانه‌ای پیدا نکرد."
+    "noMedia": "Matinee در {{paths}} گشت و رسانه‌ای پیدا نکرد.",
+    "letters": "رفتن به یک حرف",
+    "jumpTo": "رفتن به {{letter}}"
   },
   "nothingHereYet": "هنوز چیزی اینجا نیست",
   "collection": {

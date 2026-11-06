@@ -387,7 +387,9 @@
   "library": {
     "nothingUnwatched": "Nic nezhlédnutého",
     "nothingMatches": "Nic neodpovídá",
-    "clearFilters": "Vymazat filtry"
+    "clearFilters": "Vymazat filtry",
+    "letters": "Přejít na písmeno",
+    "jumpTo": "Přejít na {{letter}}"
   },
   "upNext": {
     "upNext": "Další na řadě",

@@ -222,7 +222,9 @@
     "seenEverything": "Bạn đã xem hết mọi thứ trong thư viện này.",
     "clearFilters": "Xóa bộ lọc",
     "appearAsFound": "Nội dung hiện ra khi được tìm thấy.",
-    "noMedia": "Matinee đã tìm trong {{paths}} nhưng không thấy nội dung nào."
+    "noMedia": "Matinee đã tìm trong {{paths}} nhưng không thấy nội dung nào.",
+    "letters": "Chuyển đến chữ cái",
+    "jumpTo": "Chuyển đến {{letter}}"
   },
   "nothingHereYet": "Chưa có gì ở đây",
   "collection": {

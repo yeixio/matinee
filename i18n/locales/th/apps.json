@@ -372,7 +372,9 @@
   "library": {
     "nothingUnwatched": "ไม่มีเรื่องที่ยังไม่ได้ดูที่นี่",
     "nothingMatches": "ไม่มีผลลัพธ์",
-    "clearFilters": "ล้างตัวกรอง"
+    "clearFilters": "ล้างตัวกรอง",
+    "letters": "ข้ามไปยังตัวอักษร",
+    "jumpTo": "ข้ามไปที่ {{letter}}"
   },
   "upNext": {
     "upNext": "ถัดไป",
