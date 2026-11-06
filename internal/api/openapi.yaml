@@ -5986,6 +5986,18 @@ components:
                 startMs: { type: integer }
                 endMs: { type: integer }
                 source: { type: string, enum: [chapters, audio] }
+            chapters:
+              type: array
+              description: >
+                Videos only: the file's own chapters in order, for marks on the seek bar. Left out when it has
+                fewer than two or isn't analyzed yet.
+              items:
+                type: object
+                required: [startMs, endMs]
+                properties:
+                  title: { type: string }
+                  startMs: { type: integer }
+                  endMs: { type: integer }
             filePath: { type: string, description: Where the file is on the server. Admins only. }
             fileSize: { type: integer, description: Bytes. }
             details: { $ref: "#/components/schemas/Details" }

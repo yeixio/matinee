@@ -13,8 +13,9 @@ import (
 )
 
 // MediaInfoVersion goes up when Analyze learns something new, so files
-// analyzed before are looked at again.
-const MediaInfoVersion = 3
+// analyzed before are looked at again. 4 keeps the chapters themselves,
+// not just how many there are.
+const MediaInfoVersion = 4
 
 // MediaInfo is everything worth knowing about a file's streams, from a
 // slower and more thorough look than the scanner's.
@@ -27,6 +28,9 @@ type MediaInfo struct {
 	Audio      []AudioStream `json:"audio"`
 	Subtitles  []Subtitle    `json:"subtitles"`
 	Chapters   int           `json:"chapters,omitempty"`
+	// ChapterList is the file's chapters in order, for marks on the seek
+	// bar. The API moves it to the item's own chapters.
+	ChapterList []Chapter `json:"chapterList,omitempty"`
 	// CreditsMs is where the closing credits start, when a chapter says so.
 	// Players offer the next episode from there.
 	CreditsMs int64 `json:"creditsMs,omitempty"`
@@ -202,6 +206,7 @@ func parseMediaInfo(data []byte) (MediaInfo, error) {
 		mi.DurationMs = int64(d * 1000)
 	}
 	mi.Size, _ = strconv.ParseInt(o.Format.Size, 10, 64)
+	mi.ChapterList = chapterList(o.Chapters)
 	mi.CreditsMs = creditsStart(o.Chapters, mi.DurationMs)
 	mi.IntroStartMs, mi.IntroEndMs = introRange(o.Chapters, mi.DurationMs)
 	mi.Bitrate, _ = strconv.ParseInt(o.Format.BitRate, 10, 64)
@@ -438,6 +443,21 @@ func ChannelLabel(n int) string {
 		return fmt.Sprintf("%d.0", n)
 	}
 	return fmt.Sprintf("%d.1", n-1)
+}
+
+// chapterList turns ffprobe's chapters into Chapters, leaving out any it
+// can't read or that have no length.
+func chapterList(chapters []chapter) []Chapter {
+	var out []Chapter
+	for _, c := range chapters {
+		start, err1 := strconv.ParseFloat(c.StartTime, 64)
+		end, err2 := strconv.ParseFloat(c.EndTime, 64)
+		if err1 != nil || err2 != nil || end <= start || start < 0 {
+			continue
+		}
+		out = append(out, Chapter{Title: strings.TrimSpace(tag(c.Tags, "title")), StartMs: int64(start * 1000), EndMs: int64(end * 1000)})
+	}
+	return out
 }
 
 // creditsStart finds the chapter where the closing credits begin, or 0. It

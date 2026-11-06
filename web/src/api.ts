@@ -827,6 +827,9 @@ export type QualityStep = { id: string; label: string; width: number; height: nu
 // home), or null.
 export type Streaming = { adaptive: boolean; steps: QualityStep[]; cap: QualityStep | null }
 
+/** A video's own marked chapter. */
+export type Chapter = { title?: string; startMs: number; endMs: number }
+
 export type EndCredits = { startMs: number; endMs?: number; source: 'chapters' | 'audio' | 'video' }
 
 export type MediaInfo = {
@@ -937,6 +940,9 @@ export type ItemDetail = Item & {
   // music a season's episodes share, or the picture going dark. endMs is set
   // when something plays after them. Left out when unknown.
   endCredits?: EndCredits
+  // Videos: the file's own chapters, for marks on the seek bar. Left out
+  // with fewer than two, or until the file is analyzed.
+  chapters?: Chapter[]
   filePath?: string // admins only
   fileSize?: number
   details?: Details

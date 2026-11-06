@@ -25,8 +25,9 @@ import { clampDelay, DELAY_STEP_MS, delayLabel, loadClearVoice, loadDelay, saveC
 import { QualityMenu } from '../player/QualityMenu'
 import { LONG_STALL_MS, levelName, overCap, Rebuffers, startQuality, type Quality } from '../player/quality'
 import { parseVTT, type Cue } from '../player/vtt'
-import { preloadSheets, SeekPreview } from '../player/SeekPreview'
-import { askAgain } from '../player/thumbnails'
+import { chapterMarks, chapterTitleAt } from '../player/chapters'
+import { grabFrame, HeldFrame, preloadSheets, SeekPreview } from '../player/SeekPreview'
+import { askAgain, spotAt } from '../player/thumbnails'
 import { PluginPlayer } from '../player/PluginPlayer'
 import { useAudio } from '../player/AudioPlayer'
 import { playerFor, usePlayers } from '../plugins'
@@ -176,6 +177,9 @@ function Player({ id }: { id: number }) {
     refetchInterval: (q) => askAgain(q.state.data, thumbAsks.current),
   })
   const [hoverAt, setHoverAt] = useState<number>()
+  // While a far seek starts the stream again: where it's going, and the
+  // last frame when there's no preview picture, so it isn't black.
+  const [held, setHeld] = useState<{ at: number; still?: string }>()
   const bar = useRef<HTMLDivElement>(null)
   const preloaded = useRef(false)
   const preload = () => {
@@ -715,7 +719,10 @@ function Player({ id }: { id: number }) {
     const rel = to - offset.current
     const end = el.seekable.length ? el.seekable.end(el.seekable.length - 1) : 0
     if (rel >= 0 && rel <= end) el.currentTime = rel
-    else startHls(to)
+    else {
+      setHeld({ at: to, still: spotAt(thumbs, to) ? undefined : grabFrame(el) })
+      startHls(to)
+    }
   }
 
   // Direct play seeks live while dragging. A transcode restarts on each far
@@ -1113,6 +1120,7 @@ function Player({ id }: { id: number }) {
   // The preview shows where the pointer is, or where a drag or the arrow keys are taking the bar.
   const previewAt = hoverAt ?? scrub
   const frac = duration ? Math.min(1, shown / duration) : 0
+  const marks = chapterMarks(item?.chapters, duration)
 
   return (
     <div
@@ -1147,8 +1155,8 @@ function Player({ id }: { id: number }) {
             fallBack()
           }
         }}
-        onPlaying={() => setWaiting(false)}
-        onCanPlay={() => setWaiting(false)}
+        onPlaying={() => (setWaiting(false), setHeld(undefined))}
+        onCanPlay={() => (setWaiting(false), setHeld(undefined))}
         onSeeking={() => (jumped.current = Date.now())}
         onVolumeChange={() => setMuted(!!video.current?.muted)}
         onSeeked={() => remote.report()}
@@ -1240,6 +1248,7 @@ function Player({ id }: { id: number }) {
         </div>
       )}
 
+      {held && waiting && !error && !away && <HeldFrame id={id} thumbs={thumbs} at={held.at} still={held.still} />}
       {(waiting || !item) && !error && !away && (
         <div className="pointer-events-none absolute inset-0 grid place-items-center">
           <Spinner className="size-12" />
@@ -1307,9 +1316,15 @@ function Player({ id }: { id: number }) {
             }}
             onPointerLeave={() => !dragging.current && setHoverAt(undefined)}
           >
-            {previewAt !== undefined && <SeekPreview id={id} thumbs={thumbs} at={previewAt} duration={duration} />}
-            <div className="h-1 w-full rounded-full bg-white/25 transition-all group-hover:h-1.5">
+            {previewAt !== undefined && (
+              <SeekPreview id={id} thumbs={thumbs} at={previewAt} duration={duration} chapter={chapterTitleAt(item?.chapters, previewAt)} />
+            )}
+            <div className="relative h-1 w-full rounded-full bg-white/25 transition-all group-hover:h-1.5">
               <div className="h-full rounded-full bg-accent" style={{ width: `${frac * 100}%` }} />
+              {/* A small gap in the bar where each chapter starts. */}
+              {marks.map((f) => (
+                <div key={f} className="absolute inset-y-0 w-0.5 -translate-x-1/2 bg-black/70" style={{ left: `${f * 100}%` }} data-testid="chapter-mark" />
+              ))}
             </div>
             <input
               type="range"
