@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"errors"
+	"slices"
 	"strconv"
 	"strings"
 
@@ -68,10 +69,11 @@ func (s *Store) localize(ctx context.Context, items []Item) error {
 	for i := range items {
 		it := &items[i]
 		if t, ok := tr[it.ID]; ok {
-			if t.Title != "" {
+			// What an admin or a file next to the title set is kept as written.
+			if t.Title != "" && !it.keeps(FieldTitle) {
 				it.Title = t.Title
 			}
-			if t.Overview != "" {
+			if t.Overview != "" && !it.keeps(FieldOverview) {
 				it.Overview = t.Overview
 			}
 		}
@@ -258,4 +260,9 @@ func (s *Store) MetadataLanguages(ctx context.Context) ([]string, error) {
 		}
 	}
 	return out, rows.Err()
+}
+
+// keeps reports whether an admin or an .nfo file set a field of the item.
+func (it Item) keeps(field string) bool {
+	return slices.Contains(it.LockedFields, field) || slices.Contains(it.LocalFields, field)
 }

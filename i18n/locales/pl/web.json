@@ -695,7 +695,11 @@
       "go": "Przejdź",
       "drives": "Dyski",
       "podcastsNoFolders": "Podcasty nie potrzebują folderu. Dodawaj audycje w bibliotece po jej utworzeniu.",
-      "podcastsChecked": "Nowe odcinki sprawdzane co godzinę"
+      "podcastsChecked": "Nowe odcinki sprawdzane co godzinę",
+      "details": "Szczegóły",
+      "detailsLocal": "Wolę pliki .nfo",
+      "detailsOnline": "Wolę online",
+      "detailsLocalOnly": "Tylko pliki .nfo"
     },
     "people": {
       "title": "Osoby",
@@ -1079,6 +1083,17 @@
     "locked": "Wybrane ręcznie, więc skanowanie go nie zmieni.",
     "noKey": "Dodaj klucz TMDB w Ustawienia → Plakaty i szczegóły, aby wyszukiwać tytuły.",
     "saving": "Zapisywanie…"
+  },
+  "editDetails": {
+    "button": "Edytuj szczegóły",
+    "title": "Edytuj szczegóły: {{title}}",
+    "name": "Tytuł",
+    "overview": "Opis",
+    "genres": "Gatunki, oddzielone przecinkami",
+    "rating": "Ocena w skali do 10",
+    "locked": "To, co tu zmienisz, zostaje tak, jak napisałeś: skanowanie i wyszukiwanie online tego nie zmieniają.",
+    "undo": "Cofnij moje zmiany",
+    "fromFile": "Część z nich pochodzi z pliku .nfo obok."
   },
   "import": {
     "title": "Importuj z innego serwera multimediów",

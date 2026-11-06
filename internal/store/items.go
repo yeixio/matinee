@@ -70,6 +70,10 @@ type Item struct {
 	// order, the movie's own first; absent for a movie in one file. See
 	// GroupParts.
 	Parts []FilePart `json:"parts,omitempty"`
+	// LockedFields are the details an admin edited by hand, which no
+	// lookup changes; LocalFields the ones an .nfo file next to it set.
+	LockedFields []string `json:"lockedFields,omitempty"`
+	LocalFields  []string `json:"localFields,omitempty"`
 	// For books and their parts: who wrote it, and for a part the book's
 	// title (the book's id is ParentID). Books also name their narrators
 	// and their place in a series, such as 2 or 2.5.
@@ -169,7 +173,7 @@ const itemCols = `
 	CASE WHEN i.kind = 'album' THEN COALESCE(i.gapless_found, 0) ELSE 0 END,
 	CASE WHEN i.kind = 'album' THEN COALESCE(i.label, '')
 		WHEN i.kind = 'track' THEN (SELECT COALESCE(al.label, '') FROM items al WHERE al.id = i.parent_id) ELSE '' END,
-	i.version_of, COALESCE(i.edition, '')`
+	i.version_of, COALESCE(i.edition, ''), COALESCE(i.locked_fields, ''), COALESCE(i.nfo_fields, '')`
 
 const itemFrom = ` FROM (SELECT CAST(? AS BIGINT) AS id) me CROSS JOIN items i LEFT JOIN progress p ON p.item_id = COALESCE(i.version_of, i.id) AND p.user_id = me.id`
 
@@ -192,15 +196,22 @@ func scanItem(r scanner) (Item, error) {
 	var mine sql.NullInt64
 	var gaplessChoice sql.NullInt64
 	var versionOf sql.NullInt64
+	var locked, local string
 	err := r.Scan(&it.ID, &it.LibraryID, &parent, &it.Kind, &it.Title, &year, &idx, &disc,
 		&dur, &it.Container, &it.VideoCodec, &it.AudioCodec, &w, &h, &it.AddedAt, &it.Path, &it.Size, &it.Mtime,
 		&it.ChildCount, &it.PositionMs, &it.Played,
 		&it.Overview, &rating, &it.Poster, &it.Backdrop, &tmdb, &it.MetaAt,
 		&showTitle, &seasonIdx, &it.OnWatchList, &tags, &genres, &showID, &facts, &data,
 		&artist, &artistID, &album, &narrators, &it.Series, &seriesIdx, &it.Released, &mine,
-		&it.Gapless, &gaplessChoice, &it.GaplessFound, &it.RecordLabel, &versionOf, &it.Edition)
+		&it.Gapless, &gaplessChoice, &it.GaplessFound, &it.RecordLabel, &versionOf, &it.Edition, &locked, &local)
 	if err != nil {
 		return it, err
+	}
+	if locked != "" {
+		it.LockedFields = strings.Split(locked, ",")
+	}
+	if local != "" {
+		it.LocalFields = strings.Split(local, ",")
 	}
 	if parent.Valid {
 		it.ParentID = &parent.Int64
@@ -592,7 +603,9 @@ func (s *Store) UpsertFile(ctx context.Context, it Item) (int64, error) {
 		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 		ON CONFLICT (path) DO UPDATE SET
 			library_id = excluded.library_id, parent_id = excluded.parent_id, kind = excluded.kind,
-			title = excluded.title, sort_title = excluded.sort_title, year = excluded.year,
+			title = CASE WHEN `+keptFromScan(FieldTitle)+` THEN items.title ELSE excluded.title END,
+			sort_title = CASE WHEN `+keptFromScan(FieldTitle)+` THEN items.sort_title ELSE excluded.sort_title END,
+			year = CASE WHEN `+keptFromScan(FieldYear)+` THEN items.year ELSE excluded.year END,
 			index_number = excluded.index_number, disc_number = excluded.disc_number,
 			size = excluded.size, mtime = excluded.mtime, duration_ms = excluded.duration_ms,
 			container = excluded.container, video_codec = excluded.video_codec, audio_codec = excluded.audio_codec,
@@ -707,12 +720,16 @@ func (s *Store) ApplyMetadata(ctx context.Context, id int64, m *Metadata) error 
 func applyMetadata(ctx context.Context, e execer, id int64, m *Metadata) error {
 	_, err := e.ExecContext(ctx, `
 		UPDATE items SET
-			tmdb_id = ?, mbid = ?, overview = COALESCE(?, overview), rating = ?,
+			tmdb_id = ?, mbid = ?,
+			overview = CASE WHEN `+keptFromOnline(FieldOverview)+` THEN overview ELSE COALESCE(?, overview) END,
+			rating = CASE WHEN `+keptFromOnline(FieldRating)+` THEN rating ELSE ? END,
 			year = COALESCE(year, ?),
-			poster = CASE WHEN poster IS NULL OR poster LIKE 'http%' THEN COALESCE(?, poster) ELSE poster END,
-			backdrop = CASE WHEN backdrop IS NULL OR backdrop LIKE 'http%' THEN COALESCE(?, backdrop) ELSE backdrop END,
-			genres = COALESCE(?, genres), facts = COALESCE(?, facts),
-			title = CASE WHEN kind = 'episode' AND ? != '' AND (title LIKE 'Episode %'
+			poster = CASE WHEN `+keptFromOnline(FieldPoster)+` THEN poster
+				WHEN poster IS NULL OR poster LIKE 'http%' THEN COALESCE(?, poster) ELSE poster END,
+			backdrop = CASE WHEN `+keptFromOnline(FieldBackdrop)+` THEN backdrop
+				WHEN backdrop IS NULL OR backdrop LIKE 'http%' THEN COALESCE(?, backdrop) ELSE backdrop END,
+			genres = CASE WHEN `+keptFromOnline(FieldGenres)+` THEN genres ELSE COALESCE(?, genres) END, facts = COALESCE(?, facts),
+			title = CASE WHEN kind = 'episode' AND ? != '' AND NOT `+keptFromOnline(FieldTitle)+` AND (title LIKE 'Episode %'
 				OR title LIKE '___ _, ____' OR title LIKE '___ __, ____') THEN ? ELSE title END,
 			meta_at = ?, details_at = NULL
 		WHERE id = ?`,

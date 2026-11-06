@@ -687,7 +687,11 @@
       "go": "Gå",
       "drives": "Drev",
       "podcastsNoFolders": "Podcasts behøver ingen mappe. Tilføj programmer fra biblioteket, når det er oprettet.",
-      "podcastsChecked": "Tjekkes for nye afsnit hver time"
+      "podcastsChecked": "Tjekkes for nye afsnit hver time",
+      "details": "Detaljer",
+      "detailsLocal": "Foretræk .nfo-filer",
+      "detailsOnline": "Foretræk online",
+      "detailsLocalOnly": "Kun .nfo-filer"
     },
     "people": {
       "title": "Personer",
@@ -1071,6 +1075,17 @@
     "locked": "Valgt i hånden, så scanninger lader den være.",
     "noKey": "Tilføj en TMDB-nøgle i Indstillinger → Plakater og detaljer for at slå titler op.",
     "saving": "Gemmer…"
+  },
+  "editDetails": {
+    "button": "Rediger detaljer",
+    "title": "Rediger detaljer for {{title}}",
+    "name": "Titel",
+    "overview": "Beskrivelse",
+    "genres": "Genrer, adskilt med komma",
+    "rating": "Bedømmelse ud af 10",
+    "locked": "Det, du ændrer her, forbliver, som du skrev det: scanninger og opslag online rører det ikke.",
+    "undo": "Fortryd mine ændringer",
+    "fromFile": "Noget af dette kommer fra en .nfo-fil ved siden af."
   },
   "import": {
     "title": "Importér fra en anden medieserver",

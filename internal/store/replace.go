@@ -30,7 +30,11 @@ type LibraryFile struct {
 	// VersionOf is the item this file is another version of, or 0.
 	VersionOf int64
 	// PartOf is the movie this file is a later part of, or 0.
-	PartOf  int64
+	PartOf int64
+	// ShowID is an episode's show; NFOHash identifies the .nfo file last
+	// read for the file, "" for none.
+	ShowID  int64
+	NFOHash string
 	edition string
 }
 
@@ -39,7 +43,7 @@ func (s *Store) LibraryFiles(ctx context.Context, libraryID int64) ([]LibraryFil
 	rows, err := s.db.QueryContext(ctx, `
 		SELECT i.id, i.path, i.kind, i.title, COALESCE(i.year, 0), i.index_number, COALESCE(i.disc_number, 0),
 			COALESCE(i.parent_id, 0), COALESCE(i.tmdb_id, 0), COALESCE(se.parent_id, 0), se.index_number,
-			COALESCE(i.version_of, 0), COALESCE(i.edition, ''), COALESCE(i.file_part_of, 0)
+			COALESCE(i.version_of, 0), COALESCE(i.edition, ''), COALESCE(i.file_part_of, 0), COALESCE(i.nfo_hash, '')
 		FROM items i LEFT JOIN items se ON i.kind = 'episode' AND se.id = i.parent_id
 		WHERE i.library_id = ? AND i.path IS NOT NULL`, libraryID)
 	if err != nil {
@@ -53,9 +57,10 @@ func (s *Store) LibraryFiles(ctx context.Context, libraryID int64) ([]LibraryFil
 		var year, disc int
 		var parent, showID int64
 		var index, season sql.NullInt64
-		if err := rows.Scan(&f.ID, &f.Path, &f.Kind, &title, &year, &index, &disc, &parent, &f.tmdbID, &showID, &season, &f.VersionOf, &f.edition, &f.PartOf); err != nil {
+		if err := rows.Scan(&f.ID, &f.Path, &f.Kind, &title, &year, &index, &disc, &parent, &f.tmdbID, &showID, &season, &f.VersionOf, &f.edition, &f.PartOf, &f.NFOHash); err != nil {
 			return nil, err
 		}
+		f.ShowID = showID
 		f.Key = fileKey(f.Kind, title, year, index, disc, parent, showID, season)
 		out = append(out, f)
 	}

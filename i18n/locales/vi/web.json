@@ -683,7 +683,11 @@
       "go": "Đi",
       "drives": "Ổ đĩa",
       "podcastsNoFolders": "Podcast không cần thư mục. Hãy thêm chương trình từ thư viện sau khi tạo.",
-      "podcastsChecked": "Kiểm tra tập mới mỗi giờ"
+      "podcastsChecked": "Kiểm tra tập mới mỗi giờ",
+      "details": "Thông tin",
+      "detailsLocal": "Ưu tiên tệp .nfo",
+      "detailsOnline": "Ưu tiên trực tuyến",
+      "detailsLocalOnly": "Chỉ tệp .nfo"
     },
     "people": {
       "title": "Mọi người",
@@ -1067,6 +1071,17 @@
     "locked": "Đã chọn thủ công nên các lần quét không thay đổi.",
     "noKey": "Thêm khóa TMDB trong Cài đặt → Áp phích và chi tiết để tra cứu phim.",
     "saving": "Đang lưu…"
+  },
+  "editDetails": {
+    "button": "Sửa thông tin",
+    "title": "Sửa thông tin của {{title}}",
+    "name": "Tiêu đề",
+    "overview": "Mô tả",
+    "genres": "Thể loại, cách nhau bằng dấu phẩy",
+    "rating": "Điểm trên 10",
+    "locked": "Những gì bạn sửa ở đây sẽ giữ nguyên như bạn viết: quét và tra cứu trực tuyến không động đến.",
+    "undo": "Hoàn tác thay đổi của tôi",
+    "fromFile": "Một số thông tin lấy từ tệp .nfo bên cạnh."
   },
   "import": {
     "title": "Nhập từ máy chủ media khác",

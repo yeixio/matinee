@@ -77,7 +77,10 @@ func (s *Store) SetMatch(ctx context.Context, id int64, m *Metadata, locked bool
 			metaAt = now()
 		}
 		if _, err := t.ExecContext(ctx, `
-			UPDATE items SET tmdb_id = NULL, overview = NULL, rating = NULL, genres = NULL,
+			UPDATE items SET tmdb_id = NULL,
+				overview = CASE WHEN `+keptFromOnline(FieldOverview)+` THEN overview END,
+				rating = CASE WHEN `+keptFromOnline(FieldRating)+` THEN rating END,
+				genres = CASE WHEN `+keptFromOnline(FieldGenres)+` THEN genres END,
 				details = NULL, details_at = NULL, released = NULL, rating_level = NULL, translations_at = NULL,
 				poster = CASE WHEN poster LIKE 'http%' THEN NULL ELSE poster END,
 				backdrop = CASE WHEN backdrop LIKE 'http%' THEN NULL ELSE backdrop END,

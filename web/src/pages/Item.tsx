@@ -10,6 +10,7 @@ import { FileDetailsButton, Languages, QualityBadges } from '../components/Media
 import { PosterGrid } from '../components/Card'
 import { AddToCollectionButton } from '../components/Collections'
 import { ExtrasRow } from '../components/Extras'
+import { EditDetailsButton } from '../components/EditDetails'
 import { FixMatchButton } from '../components/MatchPicker'
 import { CastRows, KeyPeople, MoreDetailsButton } from '../components/Credits'
 import { RelatedRows } from '../components/Related'
@@ -208,6 +209,7 @@ function Header({ item, kids }: { item: ItemDetail; kids?: Item[] }) {
             {me?.isAdmin && (item.kind === 'movie' || item.kind === 'show') && (
               <FixMatchButton item={item} open={fixing} onOpenChange={setFixing} />
             )}
+            {me?.isAdmin && ['movie', 'show', 'season', 'episode'].includes(item.kind) && <EditDetailsButton item={item} />}
             {me?.isAdmin && fixing && show && <Navigate to={`/item/${show.id}?fix=match`} replace />}
           </div>
         </div>

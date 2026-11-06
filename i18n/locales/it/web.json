@@ -691,7 +691,11 @@
       "go": "Vai",
       "drives": "Unità",
       "podcastsNoFolders": "I podcast non hanno bisogno di una cartella. Aggiungi i programmi dalla libreria dopo averla creata.",
-      "podcastsChecked": "Nuovi episodi controllati ogni ora"
+      "podcastsChecked": "Nuovi episodi controllati ogni ora",
+      "details": "Dettagli",
+      "detailsLocal": "Preferisci i file .nfo",
+      "detailsOnline": "Preferisci online",
+      "detailsLocalOnly": "Solo file .nfo"
     },
     "people": {
       "title": "Persone",
@@ -1075,6 +1079,17 @@
     "locked": "Scelto a mano, le scansioni non lo cambiano.",
     "noKey": "Aggiungi una chiave TMDB in Impostazioni → Locandine e dettagli per cercare i titoli.",
     "saving": "Salvataggio…"
+  },
+  "editDetails": {
+    "button": "Modifica dettagli",
+    "title": "Modifica i dettagli di {{title}}",
+    "name": "Titolo",
+    "overview": "Descrizione",
+    "genres": "Generi, separati da virgole",
+    "rating": "Voto su 10",
+    "locked": "Ciò che modifichi qui resta come l’hai scritto: le scansioni e le ricerche online non lo toccano.",
+    "undo": "Annulla le mie modifiche",
+    "fromFile": "Alcuni provengono da un file .nfo accanto."
   },
   "import": {
     "title": "Importa da un altro server multimediale",

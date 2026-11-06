@@ -687,7 +687,11 @@
       "go": "Ga",
       "drives": "Stations",
       "podcastsNoFolders": "Podcasts hebben geen map nodig. Voeg programma’s toe vanuit de bibliotheek zodra die bestaat.",
-      "podcastsChecked": "Elk uur gecontroleerd op nieuwe afleveringen"
+      "podcastsChecked": "Elk uur gecontroleerd op nieuwe afleveringen",
+      "details": "Details",
+      "detailsLocal": "Liever .nfo-bestanden",
+      "detailsOnline": "Liever online",
+      "detailsLocalOnly": "Alleen .nfo-bestanden"
     },
     "people": {
       "title": "Mensen",
@@ -1071,6 +1075,17 @@
     "locked": "Met de hand gekozen, scans laten het zo.",
     "noKey": "Voeg een TMDB-sleutel toe in Instellingen → Posters en details om titels op te zoeken.",
     "saving": "Opslaan…"
+  },
+  "editDetails": {
+    "button": "Details bewerken",
+    "title": "Details van {{title}} bewerken",
+    "name": "Titel",
+    "overview": "Beschrijving",
+    "genres": "Genres, gescheiden door komma's",
+    "rating": "Beoordeling op 10",
+    "locked": "Wat je hier wijzigt, blijft zoals je het schreef: scans en online opzoekingen laten het met rust.",
+    "undo": "Mijn wijzigingen ongedaan maken",
+    "fromFile": "Een deel hiervan komt uit een .nfo-bestand ernaast."
   },
   "import": {
     "title": "Importeren uit een andere mediaserver",

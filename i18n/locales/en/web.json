@@ -687,7 +687,11 @@
       "go": "Go",
       "drives": "Drives",
       "podcastsNoFolders": "Podcasts don't need a folder. Add shows from the library once it's created.",
-      "podcastsChecked": "Checked for new episodes every hour"
+      "podcastsChecked": "Checked for new episodes every hour",
+      "details": "Details",
+      "detailsLocal": "Prefer .nfo files",
+      "detailsOnline": "Prefer online",
+      "detailsLocalOnly": "Only .nfo files"
     },
     "people": {
       "title": "People",
@@ -1071,6 +1075,17 @@
     "locked": "Picked by hand, so scans leave it as it is.",
     "noKey": "Add a TMDB key in Settings → Posters and details to look titles up.",
     "saving": "Saving…"
+  },
+  "editDetails": {
+    "button": "Edit details",
+    "title": "Edit details of {{title}}",
+    "name": "Title",
+    "overview": "Description",
+    "genres": "Genres, separated by commas",
+    "rating": "Rating out of 10",
+    "locked": "What you change here stays as you wrote it: scans and online lookups leave it alone.",
+    "undo": "Undo my edits",
+    "fromFile": "Some of these come from an .nfo file next to it."
   },
   "import": {
     "title": "Import from another media server",

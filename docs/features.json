@@ -196,6 +196,32 @@
               }
             },
             {
+              "name": "Details from .nfo files",
+              "doc": "/docs/getting-started/organizing-media/",
+              "since": "v0.2.4",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
+              "name": "Edit a title's details by hand",
+              "doc": "/docs/getting-started/organizing-media/",
+              "since": "v0.2.4",
+              "apps": {
+                "web": true,
+                "ios": {"na": "Details are edited by an admin in the web app."},
+                "android": {"na": "Details are edited by an admin in the web app."},
+                "appletv": {"na": "Details are edited by an admin in the web app."},
+                "androidtv": {"na": "Details are edited by an admin in the web app."},
+                "tvweb": {"na": "Details are edited by an admin in the web app."}
+              }
+            },
+            {
               "name": "Episodes without S01E01, and daily shows by date",
               "doc": "/docs/getting-started/organizing-media/",
               "since": "v0.2.4",

@@ -174,3 +174,82 @@ func TestScanDailyAndNumberedEpisodes(t *testing.T) {
 		}
 	}
 }
+
+// .nfo files next to the media describe it, pin its match and win over
+// online details unless the library prefers those; hand edits win over both.
+func TestScanReadsNFOFiles(t *testing.T) {
+	root := t.TempDir()
+	makeVideos(t, root, "Heat (1995)/Heat (1995).mkv")
+	write := func(rel, body string) {
+		if err := os.WriteFile(filepath.Join(root, rel), []byte(body), 0o644); err != nil {
+			t.Fatal(err)
+		}
+	}
+	write("Heat (1995)/movie.nfo", `<movie><title>Heat (Director's Print)</title><plot>A heist.</plot><genre>Crime</genre><uniqueid type="tmdb">949</uniqueid></movie>`)
+	st, lib := scanLib(t, "movies", root)
+	ctx := context.Background()
+	top, _ := st.TopLevel(ctx, 0, lib.ID)
+	var movie store.Item
+	for _, it := range top {
+		if it.Kind == "movie" {
+			movie, _ = st.Item(ctx, 0, it.ID)
+		}
+	}
+	if movie.Title != "Heat (Director's Print)" || movie.Overview != "A heist." || movie.TMDBID == nil || *movie.TMDBID != 949 || movie.MetaAt != 0 {
+		t.Fatalf("movie from its .nfo: %+v", movie)
+	}
+	// Online details don't replace the file's, but fill in the rest.
+	st.ApplyMetadata(ctx, movie.ID, &store.Metadata{TMDBID: 949, Overview: "Online words.", Rating: 7.9})
+	movie, _ = st.Item(ctx, 0, movie.ID)
+	if movie.Overview != "A heist." || movie.Rating == nil || *movie.Rating != 7.9 {
+		t.Fatalf("online over local: %+v", movie)
+	}
+	// Unless the library prefers online details.
+	st.SetMetadataMode(ctx, lib.ID, store.PreferOnline)
+	st.ApplyMetadata(ctx, movie.ID, &store.Metadata{TMDBID: 949, Overview: "Online words."})
+	if movie, _ = st.Item(ctx, 0, movie.ID); movie.Overview != "Online words." {
+		t.Fatalf("prefer online: %+v", movie)
+	}
+	// A hand edit wins over everything, rescans included.
+	title := "Heat"
+	overview := "My words."
+	if err := st.EditDetails(ctx, movie.ID, store.Edit{Title: &title, Overview: &overview}); err != nil {
+		t.Fatal(err)
+	}
+	st.ApplyMetadata(ctx, movie.ID, &store.Metadata{TMDBID: 949, Overview: "Online words."})
+	s := &Scanner{Store: st, Prober: probe.Prober{Path: "ffprobe"}, Log: slog.New(slog.NewTextHandler(io.Discard, nil))}
+	st.ApplyLocal(ctx, movie.ID, nil) // as if the .nfo changed
+	if _, err := s.Scan(ctx, lib); err != nil {
+		t.Fatal(err)
+	}
+	if movie, _ = st.Item(ctx, 0, movie.ID); movie.Title != "Heat" || movie.Overview != "My words." {
+		t.Fatalf("hand edit: %+v", movie)
+	}
+	if err := st.UnlockDetails(ctx, movie.ID); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := s.Scan(ctx, lib); err != nil {
+		t.Fatal(err)
+	}
+	if movie, _ = st.Item(ctx, 0, movie.ID); movie.Title != "Heat (Director's Print)" || len(movie.LockedFields) != 0 {
+		t.Fatalf("unlocked: %+v", movie)
+	}
+}
+
+func TestScanReadsShowNFOFiles(t *testing.T) {
+	root := t.TempDir()
+	makeVideos(t, root, "Crumb Street/Season 1/Crumb Street - S01E01.mkv")
+	os.WriteFile(filepath.Join(root, "Crumb Street/tvshow.nfo"), []byte(`<tvshow><title>Something Else</title><plot>A bakery.</plot><uniqueid type="tmdb">77</uniqueid></tvshow>`), 0o644)
+	os.WriteFile(filepath.Join(root, "Crumb Street/Season 1/Crumb Street - S01E01.nfo"), []byte(`<episodedetails><title>Dough Rises</title></episodedetails>`), 0o644)
+	st, lib := scanLib(t, "tv", root)
+	ctx := context.Background()
+	top, _ := st.TopLevel(ctx, 0, lib.ID)
+	if len(top) != 1 || top[0].Title != "Crumb Street" || top[0].Overview != "A bakery." || top[0].TMDBID == nil || *top[0].TMDBID != 77 {
+		t.Fatalf("show keeps its folder's name, takes the rest: %+v", top)
+	}
+	seasons, _ := st.Children(ctx, 0, top[0].ID)
+	eps, _ := st.Children(ctx, 0, seasons[0].ID)
+	if len(eps) != 1 || eps[0].Title != "Dough Rises" {
+		t.Fatalf("episode: %+v", eps)
+	}
+}

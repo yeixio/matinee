@@ -687,7 +687,11 @@
       "go": "Ugrás",
       "drives": "Meghajtók",
       "podcastsNoFolders": "A podcastokhoz nem kell mappa. A könyvtár létrehozása után ott adhatsz hozzá műsorokat.",
-      "podcastsChecked": "Óránként ellenőrzi az új epizódokat"
+      "podcastsChecked": "Óránként ellenőrzi az új epizódokat",
+      "details": "Részletek",
+      "detailsLocal": ".nfo fájlok előnyben",
+      "detailsOnline": "Online előnyben",
+      "detailsLocalOnly": "Csak .nfo fájlok"
     },
     "people": {
       "title": "Személyek",
@@ -1071,6 +1075,17 @@
     "locked": "Kézzel választva, a keresések nem módosítják.",
     "noKey": "A címek kereséséhez adj meg TMDB-kulcsot a Beállítások → Plakátok és részletek alatt.",
     "saving": "Mentés…"
+  },
+  "editDetails": {
+    "button": "Részletek szerkesztése",
+    "title": "{{title}} részleteinek szerkesztése",
+    "name": "Cím",
+    "overview": "Leírás",
+    "genres": "Műfajok, vesszővel elválasztva",
+    "rating": "Értékelés 10-ből",
+    "locked": "Amit itt módosítasz, úgy marad, ahogy írtad: a vizsgálatok és az online keresések nem nyúlnak hozzá.",
+    "undo": "Módosításaim visszavonása",
+    "fromFile": "Ezek egy része a mellette lévő .nfo fájlból származik."
   },
   "import": {
     "title": "Importálás másik médiaszerverről",
