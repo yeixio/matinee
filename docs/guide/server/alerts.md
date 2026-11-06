@@ -20,7 +20,7 @@ Every alert is on until you turn it off. Change the numbers to suit your server.
 
 | Alert | When it's sent |
 | --- | --- |
-| **A disk is almost full** | A disk the server uses gets to 90% full (or what you set). That's the data folder, transcoding scratch space, seek bar previews, artwork, downloads and every library folder. You hear again once a day while it stays full, and once more when there's room again. |
+| **A disk is almost full** | A disk the server uses gets to 90% full (or what you set). That's the data folder, transcoding scratch space, seek bar previews, artwork, downloads and every library folder. <!-- until: v0.2.3 -->You hear again once a day while it stays full, and once more when there's room again.<!-- /until --><!-- since: v0.2.3 -->You hear once, then again only if it gets 5 points fuller (95%, say) or nearly out of room (98%), and once more when there's room again. A disk that goes a point or two under and back doesn't count as clearing up, and restarting the server doesn't send it again.<!-- /since --> |
 | **A library folder can't be read** | A library folder has been out of reach for 2 minutes, which usually means a network share has dropped. A share that's gone for a moment doesn't count. You hear again when it's back. |
 | **Errors pile up** | The server logs 10 or more errors within 15 minutes (or what you set). The alert names the most common ones. |
 | **Transcodes keep failing** | 3 or more transcodes fail within 15 minutes (or what you set), so players couldn't play. That's often a GPU that's stopped working, or FFmpeg that can't read the files. |
