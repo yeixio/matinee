@@ -11,8 +11,10 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/yeixio/matinee/internal/alerts"
+	"github.com/yeixio/matinee/internal/stream"
 	"github.com/yeixio/matinee/internal/version"
 )
 
@@ -111,7 +113,21 @@ func (s *Server) metrics(w http.ResponseWriter, r *http.Request) {
 		started, failed := s.Transcoder.Counts()
 		b.counter("matinee_transcodes_started_total", "Transcodes started since the server started.", float64(started))
 		b.counter("matinee_transcodes_failed_total", "Transcodes that failed since the server started.", float64(failed))
+		superseded, procs := s.Transcoder.Stats()
+		b.counter("matinee_transcodes_superseded_total", "Transcodes stopped because the player seeked elsewhere before or while they ran.", float64(superseded))
+		b.gauge("matinee_ffmpeg_processes", "FFmpeg processes Matinee runs for playback now, including stopped ones still exiting. More than matinee_transcodes_active for long means FFmpeg isn't stopping.", float64(procs))
+		slow := 0
+		for _, t := range s.Transcoder.Sessions() {
+			// Speed is known once a few pieces are made.
+			if t.Speed > 0 && t.Speed < 1 && time.Since(time.UnixMilli(t.Started)) > 30*time.Second {
+				slow++
+			}
+		}
+		b.gauge("matinee_transcodes_slow", "Transcodes making video slower than it plays, so their players will buffer.", float64(slow))
+		b.histogram("matinee_transcode_start_seconds", "How long players wait for a transcode to start (a play or a far seek), until its first piece is ready.", s.Transcoder.StartTimes)
+		b.histogram("matinee_segment_wait_seconds", "How long players wait for each transcoded piece they ask for. Long waits are buffering.", s.Transcoder.SegmentWaits)
 	}
+	writeRuntimeMetrics(&b)
 
 	libs, _ := s.Store.Libraries(r.Context())
 	disks := s.disks(s.storageUses(libs))
@@ -190,6 +206,18 @@ func (b *metricsWriter) sample(name string, v float64, labels ...string) {
 func (b *metricsWriter) gauge(name, help string, v float64, labels ...string) {
 	b.help(name, "gauge", help)
 	b.sample(name, v, labels...)
+}
+
+// histogram writes h in Prometheus's histogram format.
+func (b *metricsWriter) histogram(name, help string, h *stream.Histogram) {
+	bounds, cum, sum := h.Snapshot()
+	b.help(name, "histogram", help)
+	for i, le := range bounds {
+		b.sample(name+"_bucket", float64(cum[i]), "le", strconv.FormatFloat(le, 'f', -1, 64))
+	}
+	b.sample(name+"_bucket", float64(cum[len(cum)-1]), "le", "+Inf")
+	b.sample(name+"_sum", sum)
+	b.sample(name+"_count", float64(cum[len(cum)-1]))
 }
 
 func (b *metricsWriter) counter(name, help string, v float64) {

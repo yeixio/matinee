@@ -139,10 +139,23 @@ func TestMetrics(t *testing.T) {
 	if code != http.StatusOK {
 		t.Fatalf("scrape: %d %s", code, body)
 	}
-	for _, want := range []string{"# TYPE matinee_http_requests_total counter", "matinee_build_info{version=", "matinee_disk_free_bytes{path=", `matinee_alerts_firing{rule="disk"} 0`, "matinee_transcodes_failed_total 0"} {
+	for _, want := range []string{"# TYPE matinee_http_requests_total counter", "matinee_build_info{version=", "matinee_disk_free_bytes{path=", `matinee_alerts_firing{rule="disk"} 0`, "matinee_transcodes_failed_total 0",
+		"matinee_ffmpeg_processes 0", "matinee_transcodes_superseded_total 0", `matinee_transcode_start_seconds_bucket{le="+Inf"} 0`,
+		"# TYPE matinee_segment_wait_seconds histogram", "matinee_heap_live_bytes "} {
 		if !strings.Contains(body, want) {
 			t.Errorf("metrics lack %q:\n%s", want, body)
 		}
+	}
+
+	// So does the profiler, which is how a slow or leaking server is looked into.
+	if code, _ := get("/debug/pprof/goroutine?debug=1", "wrong"); code != http.StatusUnauthorized {
+		t.Fatalf("profiler with a wrong token: %d", code)
+	}
+	if code, body := get("/debug/pprof/goroutine?debug=1", m.Token); code != http.StatusOK || !strings.Contains(body, "goroutine profile:") {
+		t.Fatalf("goroutine profile: %d %.200s", code, body)
+	}
+	if code, _ := get("/debug/pprof/cmdline", m.Token); code != http.StatusNotFound {
+		t.Fatalf("command line: %d", code)
 	}
 
 	// The dashboard summary takes the same token.

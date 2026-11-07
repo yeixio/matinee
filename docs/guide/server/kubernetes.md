@@ -88,6 +88,40 @@ spec:
 To really make a volume bigger on such a class, make a new claim of the size you want, point `existingClaim` at it, and delete the old one.
 <!-- /since -->
 
+<!-- since: v0.2.4 -->
+### Prometheus and alerts
+
+With the Prometheus Operator (kube-prometheus-stack, say), the chart can have Prometheus scrape Matinee's [metrics](/docs/server/alerts/#prometheus-metrics) and alert when playback gets slow or the server leaks. Turn metrics on in **Settings → Server health → Alerts**, put the token in a Secret, and turn on both:
+
+```sh
+kubectl -n media create secret generic matinee-metrics --from-literal=token=<the metrics token>
+```
+
+```yaml
+metrics:
+  tokenSecret: {name: matinee-metrics, key: token}
+  serviceMonitor:
+    enabled: true
+    labels: {release: kube-prometheus-stack} # what your Prometheus selects by
+  prometheusRule:
+    enabled: true
+    labels: {release: kube-prometheus-stack}
+```
+
+| Alert | When |
+| --- | --- |
+| `MatineeDown` | Prometheus can't reach Matinee for 5 minutes. |
+| `MatineeSlowStarts` | 1 in 10 starts and seeks takes over 8 seconds (`slowStartSeconds`) for 15 minutes. |
+| `MatineeBuffering` | Players wait over 5 seconds for more than 1 in 20 pieces for 10 minutes. |
+| `MatineeTranscodesTooSlow` | A transcode makes video slower than it plays for 5 minutes. |
+| `MatineeFFmpegNotStopping` | FFmpeg keeps running after its transcode ended, for 5 minutes. |
+| `MatineeGoroutinesGrowing`, `MatineeOpenFilesGrowing`, `MatineeMemoryGrowing` | Signs of a leak: past `maxGoroutines`, `maxOpenFiles`, or `maxHeapBytes` and still climbing. |
+
+Add your own under `metrics.prometheusRule.extraRules`.
+
+`metrics.grafanaDashboard.enabled` adds a Grafana dashboard, **Matinee / Playback and resources**, for Grafana's dashboard sidecar to pick up. Set `namespace` to where the sidecar looks (often `monitoring`). It shows how long plays and seeks take to start, buffering, FFmpeg processes against transcodes, memory, goroutines, open files and CPU.
+<!-- /since -->
+
 ## Replicas
 
 Run one replica for now: a transcode in progress lives in the pod that started it. More replicas work with `service.sessionAffinity: ClientIP`, so each device keeps talking to the same pod.

@@ -2,13 +2,10 @@ package stream
 
 import (
 	"context"
-	"crypto/rand"
-	"encoding/hex"
 	"errors"
 	"fmt"
 	"math"
 	"os"
-	"os/exec"
 	"path/filepath"
 	"strconv"
 	"strings"
@@ -34,14 +31,7 @@ func (t *Transcoder) StartGapless(ctx context.Context, userID int64, group strin
 	if len(tracks) == 0 || len(tracks) > MaxGapless {
 		return "", fmt.Errorf("a gapless stream joins 1 to %d songs", MaxGapless)
 	}
-	t.mu.Lock()
-	for id, s := range t.sessions {
-		if s.userID == userID && s.group == group {
-			s.superseded = true
-			t.killLocked(id)
-		}
-	}
-	t.mu.Unlock()
+	claim := t.claim(sessionKey{user: userID, group: group})
 
 	length := -startSec
 	for _, tr := range tracks {
@@ -53,9 +43,7 @@ func (t *Transcoder) StartGapless(ctx context.Context, userID int64, group strin
 	if length <= 0 {
 		return "", errors.New("starts past the end")
 	}
-	b := make([]byte, 12)
-	rand.Read(b)
-	id := hex.EncodeToString(b)
+	id := newSessionID()
 	dir := filepath.Join(t.Dir, id)
 	if err := os.MkdirAll(dir, 0o755); err != nil {
 		return "", err
@@ -73,27 +61,19 @@ func (t *Transcoder) StartGapless(ctx context.Context, userID int64, group strin
 	args = append(args, "-f", "hls", "-hls_time", strconv.Itoa(segmentSeconds), "-hls_list_size", "0",
 		"-hls_segment_filename", filepath.Join(dir, "seg%05d.ts"), filepath.Join(dir, "ffmpeg.m3u8"))
 
-	cmd := exec.Command(t.FFmpeg, args...)
+	cmd := t.command(args)
 	cmd.Stderr = &logWriter{log: t.Log, session: id}
 	if err := cmd.Start(); err != nil {
 		os.RemoveAll(dir)
 		return "", fmt.Errorf("start ffmpeg: %w", err)
 	}
+	t.procs.Add(1)
 	s := &session{id: id, userID: userID, itemID: tracks[0].ID, group: group, dir: dir, cmd: cmd, done: make(chan struct{}),
 		lastSeen: time.Now(), started: time.Now(), startSec: startSec, mode: hwaccel.CPU, audioOnly: true}
-	go func() {
-		err := cmd.Wait()
-		t.mu.Lock()
-		killed, ready := s.killed, s.ready
-		t.mu.Unlock()
-		if err != nil && !killed && ready {
-			t.failures.Add(1)
-		}
-		close(s.done)
-	}()
-	t.mu.Lock()
-	t.sessions[id] = s
-	t.mu.Unlock()
+	go t.wait(s, nil)
+	if !t.register(s, claim) {
+		return "", ErrSuperseded
+	}
 	t.started.Add(1)
 	t.Log.Info("gapless stream started", "session", id, "group", group, "songs", len(tracks), "first", tracks[0].ID, "start", startSec)
 

@@ -127,7 +127,42 @@ The metrics are at `/metrics` on the server's address, and answer only with the 
 
 Counts that end in `_total` start again from zero when the server restarts, which Prometheus expects.
 
-On Kubernetes, point a ServiceMonitor or scrape job at the Matinee service's port with the token as a bearer token, the same as the config above.
+On Kubernetes, point a ServiceMonitor or scrape job at the Matinee service's port with the token as a bearer token, the same as the config above. The Helm chart can make one, with alerts ready to go (see [Kubernetes](/docs/server/kubernetes/#prometheus-and-alerts)).
+
+<!-- since: v0.2.4 -->
+### Is playback fast?
+
+These say how quickly players get going and whether the server keeps up, and give away a server that's slowly leaking.
+
+| Metric | What it is |
+| --- | --- |
+| `matinee_transcode_start_seconds` | How long players wait for a transcode to start: pressing play, or seeking past what's been made. A histogram, so Grafana can show the typical and the worst. |
+| `matinee_segment_wait_seconds` | How long players wait for each transcoded piece they ask for. Long waits are buffering. |
+| `matinee_transcodes_slow` | Transcodes making video slower than it plays. Their players will buffer. |
+| `matinee_transcodes_superseded_total` | Transcodes stopped because the player jumped somewhere else. Lots of these are normal when someone scrubs. |
+| `matinee_ffmpeg_processes` | FFmpeg processes running for playback. It should match `matinee_transcodes_active` within a few seconds. More for minutes means FFmpeg isn't stopping. |
+| `matinee_heap_live_bytes` | Memory held by the server's live data. It goes up and down with use; one that only climbs over days is a leak. |
+| `matinee_open_files` | Files and connections the server has open (Linux). |
+| `matinee_gc_cycles_total` | How often the server has cleaned up memory. |
+
+To get a useful picture, look at these in Grafana:
+
+- **Start time**: `histogram_quantile(0.9, sum by (le) (rate(matinee_transcode_start_seconds_bucket[15m])))` is how long 9 in 10 starts take. On most servers it's a second or two.
+- **Buffering**: `1 - sum(rate(matinee_segment_wait_seconds_bucket{le="5"}[10m])) / sum(rate(matinee_segment_wait_seconds_count[10m]))` is the share of pieces players waited over 5 seconds for.
+
+### Profiling
+
+When the server is slow or its memory keeps growing, Go's profiler shows where. It's at `/debug/pprof/` and takes the metrics token too, so it's off while metrics are off.
+
+```sh
+curl -H "Authorization: Bearer $TOKEN" -o heap.pprof https://matinee.example.com/debug/pprof/heap
+curl -H "Authorization: Bearer $TOKEN" -o cpu.pprof "https://matinee.example.com/debug/pprof/profile?seconds=30"
+curl -H "Authorization: Bearer $TOKEN" "https://matinee.example.com/debug/pprof/goroutine?debug=1" > goroutines.txt
+go tool pprof -http=: heap.pprof
+```
+
+Attach the files to a bug report if you'd like us to look.
+<!-- /since -->
 
 ## Dashboards
 

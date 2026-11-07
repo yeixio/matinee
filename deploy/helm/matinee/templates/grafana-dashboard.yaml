@@ -1,0 +1,17 @@
+{{- if .Values.metrics.grafanaDashboard.enabled }}
+# A Grafana dashboard of playback speed and the server's resources, picked
+# up by Grafana's dashboard sidecar (kube-prometheus-stack has one).
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "matinee.fullname" . }}-dashboard
+  {{- with .Values.metrics.grafanaDashboard.namespace }}
+  namespace: {{ . }}
+  {{- end }}
+  labels:
+    {{- include "matinee.labels" . | nindent 4 }}
+    {{- toYaml .Values.metrics.grafanaDashboard.labels | nindent 4 }}
+data:
+  matinee-playback.json: |
+    {{- .Files.Get "files/grafana-dashboard.json" | nindent 4 }}
+{{- end }}
