@@ -345,6 +345,8 @@
     "endsAt": "Selesai pukul {{time}}",
     "position": "Posisi",
     "positionOf": "{{at}} dari {{total}}",
+    "chapters": "Bab",
+    "chapterN": "Bab {{n}}",
     "castingTo": "Diputar di {{name}}",
     "airPlaying": "Diputar di TV Anda dengan AirPlay",
     "castControls": "Tampilkan kontrol",

@@ -350,6 +350,8 @@
     "endsAt": "Eindigt om {{time}}",
     "position": "Positie",
     "positionOf": "{{at}} van {{total}}",
+    "chapters": "Hoofdstukken",
+    "chapterN": "Hoofdstuk {{n}}",
     "castingTo": "Speelt af op {{name}}",
     "airPlaying": "Speelt af op je tv via AirPlay",
     "castControls": "Bediening tonen",

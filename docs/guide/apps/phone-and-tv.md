@@ -105,9 +105,9 @@ The remote works the way it does in your TV's own player:
 | Press | While something plays |
 | --- | --- |
 | Select, or Play/Pause | Pause, and play again |
-| Left or right | Back or forward 10 seconds (hold for a minute); rewind and fast forward on remotes that have them do the same. <!-- since: v0.1.11 -->From app version 1.0.23, a picture of where you'll land shows above the bar ([seek bar previews](/docs/watching/seek-previews/)).<!-- /since --> <!-- since: v0.2.4 -->From app version 1.0.33 on Apple TV, a swipe left or right on the Siri Remote's touch surface does the same, and sliding your finger along it scrubs: the knob follows your finger with the picture there, and the video moves there when you let go.<!-- /since --> |
+| Left or right | Back or forward 10 seconds (hold for a minute<!-- since: v0.2.4 -->, or from app version 1.0.34 a whole chapter in a video that has [chapters](#chapters)<!-- /since -->); rewind and fast forward on remotes that have them do the same. <!-- since: v0.1.11 -->From app version 1.0.23, a picture of where you'll land shows above the bar ([seek bar previews](/docs/watching/seek-previews/)).<!-- /since --> <!-- since: v0.2.4 -->From app version 1.0.33 on Apple TV, a swipe left or right on the Siri Remote's touch surface does the same, and sliding your finger along it scrubs: the knob follows your finger with the picture there, and the video moves there when you let go.<!-- /since --> |
 | Up | Show the bar: where you are, the time left and when it ends |
-| Down | Show the bar and go to the buttons under it: **Audio**, **Subtitles** and **Sleep timer** |
+| Down | Show the bar and go to the buttons under it: **Audio**, **Subtitles**<!-- since: v0.2.4 -->, **Chapters**<!-- /since --> and **Sleep timer** |
 | Up or Back, on the buttons | Back to the bar |
 | Back | Leave the player |
 
@@ -128,6 +128,18 @@ At the bottom of **More subtitles**, **Find subtitles…** looks for subtitles o
 <!-- /since -->
 
 ![Picking the audio track on a TV](../images/app-tv-audio.webp)
+
+<!-- since: v0.2.4 -->
+### Chapters
+
+From app version 1.0.34, a movie or episode whose file has its own chapters (most Blu-ray and DVD rips do) gets a **Chapters** button under the bar, which says the chapter playing. Select it for a row of every chapter along the bottom of the screen: a picture from a little way into each (the [seek bar previews](/docs/watching/seek-previews/), once the server has made them), its name and where it starts. The chapter playing has the remote's focus and an accent border. Left and right go along the row, select plays from that chapter, and back closes the row.
+
+![The chapters of a film on a TV, with a picture of each](../images/app-tv-chapters.webp)
+
+You can also skip a whole chapter without opening the list. While the bar is up or the video plays, hold left or right on the remote (on the Siri Remote, click and hold the left or right of the clickpad). Held right goes to the start of the next chapter. Held left goes back to the start of the chapter playing, or to the one before when it only started a few seconds ago, the way a CD player's back button works. Each hold adds up before the video jumps, with the chapter's name over the bar, so two holds skip two chapters. In a video without chapters, holding still skips a minute.
+
+Chapters come from the file itself, so there's nothing to set up. Samsung and LG remotes don't send a held press, so on those TVs use the **Chapters** button.
+<!-- /since -->
 
 The app remembers the subtitle language you pick for the next episode and the next film, as the browser does. Picture subtitles from Blu-rays and DVDs, and another sound track in a file the TV can't play as it is, need the server to convert the video again from where you are, so the picture pauses for a moment.
 

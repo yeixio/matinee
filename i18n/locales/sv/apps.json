@@ -350,6 +350,8 @@
     "endsAt": "Slutar {{time}}",
     "position": "Position",
     "positionOf": "{{at}} av {{total}}",
+    "chapters": "Kapitel",
+    "chapterN": "Kapitel {{n}}",
     "castingTo": "Spelas upp på {{name}}",
     "airPlaying": "Spelas upp på din tv med AirPlay",
     "castControls": "Visa kontroller",

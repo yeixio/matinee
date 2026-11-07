@@ -345,6 +345,8 @@
     "endsAt": "{{time}} に終了",
     "position": "再生位置",
     "positionOf": "{{at}} / {{total}}",
+    "chapters": "チャプター",
+    "chapterN": "チャプター {{n}}",
     "castingTo": "{{name}} で再生中",
     "airPlaying": "AirPlay でテレビで再生中",
     "castControls": "コントロールを表示",

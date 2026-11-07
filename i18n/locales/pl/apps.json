@@ -360,6 +360,8 @@
     "endsAt": "Koniec o {{time}}",
     "position": "Pozycja",
     "positionOf": "{{at}} z {{total}}",
+    "chapters": "Rozdziały",
+    "chapterN": "Rozdział {{n}}",
     "castingTo": "Odtwarzanie na {{name}}",
     "airPlaying": "Odtwarzanie na telewizorze przez AirPlay",
     "castControls": "Pokaż sterowanie",

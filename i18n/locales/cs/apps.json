@@ -360,6 +360,8 @@
     "endsAt": "Skončí v {{time}}",
     "position": "Pozice",
     "positionOf": "{{at}} z {{total}}",
+    "chapters": "Kapitoly",
+    "chapterN": "Kapitola {{n}}",
     "castingTo": "Přehrává se na {{name}}",
     "airPlaying": "Přehrává se na televizi přes AirPlay",
     "castControls": "Zobrazit ovládání",
