@@ -2,12 +2,9 @@ package stream
 
 import (
 	"context"
-	"crypto/rand"
-	"encoding/hex"
 	"errors"
 	"fmt"
 	"os"
-	"os/exec"
 	"path/filepath"
 	"strconv"
 	"time"
@@ -29,18 +26,9 @@ type LiveInput struct {
 // keeps the last minute or so, and stops once nobody asks for it.
 func (t *Transcoder) StartLive(ctx context.Context, userID int64, in LiveInput) (string, error) {
 	group := "live:" + in.Channel
-	t.mu.Lock()
-	for id, s := range t.sessions {
-		if s.userID == userID && s.group == group {
-			s.superseded = true
-			t.killLocked(id)
-		}
-	}
-	t.mu.Unlock()
+	claim := t.claim(sessionKey{user: userID, group: group})
 
-	b := make([]byte, 12)
-	rand.Read(b)
-	id := hex.EncodeToString(b)
+	id := newSessionID()
 	dir := filepath.Join(t.Dir, id)
 	if err := os.MkdirAll(dir, 0o755); err != nil {
 		return "", err
@@ -53,27 +41,19 @@ func (t *Transcoder) StartLive(ctx context.Context, userID int64, in LiveInput) 
 		"-i", in.URL, "-map", "0:v:0?", "-map", "0:a:0?", "-c:v", "copy", "-c:a", "aac", "-ac", "2", "-b:a", "192k", "-sn",
 		"-f", "hls", "-hls_time", strconv.Itoa(segmentSeconds), "-hls_list_size", "15", "-hls_flags", "delete_segments+omit_endlist",
 		"-hls_segment_filename", filepath.Join(dir, "seg%05d.ts"), filepath.Join(dir, "index.m3u8"))
-	cmd := exec.Command(t.FFmpeg, args...)
+	cmd := t.command(args)
 	cmd.Stderr = &logWriter{log: t.Log, session: id}
 	if err := cmd.Start(); err != nil {
 		os.RemoveAll(dir)
 		return "", fmt.Errorf("start ffmpeg: %w", err)
 	}
+	t.procs.Add(1)
 	s := &session{id: id, userID: userID, group: group, dir: dir, cmd: cmd, done: make(chan struct{}),
 		lastSeen: time.Now(), started: time.Now(), mode: hwaccel.CPU, copyVideo: true, live: true}
-	go func() {
-		err := cmd.Wait()
-		t.mu.Lock()
-		killed, ready := s.killed, s.ready
-		t.mu.Unlock()
-		if err != nil && !killed && ready {
-			t.failures.Add(1)
-		}
-		close(s.done)
-	}()
-	t.mu.Lock()
-	t.sessions[id] = s
-	t.mu.Unlock()
+	go t.wait(s, nil)
+	if !t.register(s, claim) {
+		return "", ErrSuperseded
+	}
 	t.started.Add(1)
 	t.Log.Info("live channel stream started", "session", id, "channel", in.Channel)
 

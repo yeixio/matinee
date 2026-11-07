@@ -1,0 +1,75 @@
+{{- if .Values.metrics.prometheusRule.enabled }}
+{{- $job := include "matinee.fullname" . }}
+# Alerts that playback is getting slow or the server is leaking, from the
+# numbers in /metrics. See the guide's Monitoring page for what each means.
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: {{ include "matinee.fullname" . }}
+  labels:
+    {{- include "matinee.labels" . | nindent 4 }}
+    {{- with .Values.metrics.prometheusRule.labels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  groups:
+    - name: matinee
+      rules:
+        - alert: MatineeDown
+          expr: up{job="{{ $job }}"} == 0
+          for: 5m
+          labels: {severity: critical}
+          annotations:
+            summary: Matinee isn't answering Prometheus.
+        - alert: MatineeSlowStarts
+          # 9 in 10 plays and far seeks should start within this many seconds.
+          expr: histogram_quantile(0.9, sum by (le) (rate(matinee_transcode_start_seconds_bucket{job="{{ $job }}"}[15m]))) > {{ .Values.metrics.prometheusRule.slowStartSeconds }}
+          for: 15m
+          labels: {severity: warning}
+          annotations:
+            summary: "Transcodes take {{ "{{" }} $value | humanize {{ "}}" }}s to start (9 in 10 within that)."
+        - alert: MatineeBuffering
+          # Share of transcoded pieces players waited more than 5 s for.
+          expr: |
+            (sum(rate(matinee_segment_wait_seconds_bucket{job="{{ $job }}",le="+Inf"}[10m])) - sum(rate(matinee_segment_wait_seconds_bucket{job="{{ $job }}",le="5"}[10m])))
+              / sum(rate(matinee_segment_wait_seconds_count{job="{{ $job }}"}[10m])) > 0.05
+          for: 10m
+          labels: {severity: warning}
+          annotations:
+            summary: "Players waited over 5 s for {{ "{{" }} $value | humanizePercentage {{ "}}" }} of transcoded pieces."
+        - alert: MatineeTranscodesTooSlow
+          expr: max(matinee_transcodes_slow{job="{{ $job }}"}) > 0
+          for: 5m
+          labels: {severity: warning}
+          annotations:
+            summary: "{{ "{{" }} $value {{ "}}" }} transcodes make video slower than it plays; their players will buffer."
+        - alert: MatineeFFmpegNotStopping
+          # FFmpegs left running after their transcodes ended.
+          expr: max(matinee_ffmpeg_processes{job="{{ $job }}"} - matinee_transcodes_active{job="{{ $job }}"}) > 0
+          for: 5m
+          labels: {severity: warning}
+          annotations:
+            summary: "{{ "{{" }} $value {{ "}}" }} FFmpeg processes outlived their transcodes."
+        - alert: MatineeGoroutinesGrowing
+          expr: max(matinee_goroutines{job="{{ $job }}"}) > {{ .Values.metrics.prometheusRule.maxGoroutines }}
+          for: 30m
+          labels: {severity: warning}
+          annotations:
+            summary: "Matinee runs {{ "{{" }} $value {{ "}}" }} goroutines; something isn't finishing."
+        - alert: MatineeOpenFilesGrowing
+          expr: max(matinee_open_files{job="{{ $job }}"}) > {{ .Values.metrics.prometheusRule.maxOpenFiles }}
+          for: 30m
+          labels: {severity: warning}
+          annotations:
+            summary: "Matinee has {{ "{{" }} $value {{ "}}" }} files open; something isn't closing them."
+        - alert: MatineeMemoryGrowing
+          # Live memory that keeps climbing for hours is a leak, not a cache.
+          expr: max(matinee_heap_live_bytes{job="{{ $job }}"}) > {{ .Values.metrics.prometheusRule.maxHeapBytes }} and deriv(matinee_heap_live_bytes{job="{{ $job }}"}[6h]) > 0
+          for: 1h
+          labels: {severity: warning}
+          annotations:
+            summary: "Matinee holds {{ "{{" }} $value | humanize1024 {{ "}}" }}B and it keeps growing."
+        {{- with .Values.metrics.prometheusRule.extraRules }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+{{- end }}

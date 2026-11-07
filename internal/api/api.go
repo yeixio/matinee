@@ -548,6 +548,9 @@ func (s *Server) Handler() http.Handler {
 	mux.HandleFunc("GET /metrics", s.metrics)
 	// A short JSON summary for dashboards, with the same token (stats.go).
 	mux.HandleFunc("GET /stats", s.stats)
+	// Go's profiler, with the same token, for chasing slowness and leaks
+	// (see profiling.go).
+	mux.HandleFunc("GET /debug/pprof/{profile...}", s.pprof)
 
 	mux.HandleFunc("/api/", func(w http.ResponseWriter, r *http.Request) {
 		writeError(w, http.StatusNotFound, "no such endpoint")

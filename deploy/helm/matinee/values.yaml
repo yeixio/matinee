@@ -33,6 +33,38 @@ service:
   # ClientIP keeps a viewer on one pod when replicaCount > 1.
   sessionAffinity: None
 
+# Prometheus Operator (kube-prometheus-stack): scrape /metrics and alert
+# when playback gets slow or the server leaks. Turn metrics on in Matinee
+# (Settings → Server health → Alerts) and put the token in a Secret:
+#   kubectl create secret generic matinee-metrics --from-literal=token=<token>
+metrics:
+  tokenSecret:
+    name: ""
+    key: token
+  serviceMonitor:
+    enabled: false
+    interval: 30s
+    scrapeTimeout: 10s
+    # Labels your Prometheus selects ServiceMonitors by, such as
+    # {release: kube-prometheus-stack}.
+    labels: {}
+  prometheusRule:
+    enabled: false
+    labels: {}
+    # MatineeSlowStarts: 9 in 10 starts should take less than this.
+    slowStartSeconds: 8
+    maxGoroutines: 5000
+    maxOpenFiles: 4000
+    maxHeapBytes: 1073741824
+    extraRules: []
+  # A Grafana dashboard: start times, buffering, FFmpeg, memory and CPU.
+  grafanaDashboard:
+    enabled: false
+    # Where Grafana's sidecar looks, such as monitoring; empty is the release's.
+    namespace: ""
+    labels:
+      grafana_dashboard: "1"
+
 ingress:
   enabled: false
   className: ""

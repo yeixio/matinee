@@ -54,10 +54,101 @@ type Transcoder struct {
 	// next ones go straight to a mode that works.
 	failed map[int64]failure
 	stop   chan struct{}
+	// claims holds the newest start asked for each viewer's stream (see
+	// claim), so a start that lost a race with a newer seek stops itself.
+	claims map[sessionKey]claimed
+	seq    uint64
 
 	// For admin alerts and metrics: transcodes started since the server
 	// started, and those that failed to start or broke off partway.
 	started, failures atomic.Int64
+	// superseded counts starts a newer seek replaced; procs is FFmpeg
+	// processes running now, including stopped ones still exiting.
+	superseded, procs atomic.Int64
+	// How long players wait for a stream to start, and for its pieces.
+	StartTimes, SegmentWaits *Histogram
+}
+
+// sessionKey is what a viewer has one stream of: an item, or a group such as
+// an album played gapless or a live channel.
+type sessionKey struct {
+	user, item int64
+	group      string
+}
+
+type claimed struct {
+	n  uint64
+	at time.Time
+}
+
+// claim stops the viewer's stream for k, if any, and marks a newer start
+// for it. The start registers with the number returned (see register).
+func (t *Transcoder) claim(k sessionKey) uint64 {
+	t.mu.Lock()
+	defer t.mu.Unlock()
+	t.seq++
+	t.claims[k] = claimed{t.seq, time.Now()}
+	for id, s := range t.sessions {
+		if s.key() == k {
+			s.superseded = true
+			t.superseded.Add(1)
+			t.killLocked(id)
+		}
+	}
+	return t.seq
+}
+
+// register adds a started session, unless a newer start for the same
+// stream came in while its FFmpeg was starting (overlapping seeks); then it
+// stops it and reports false.
+func (t *Transcoder) register(s *session, claim uint64) bool {
+	t.mu.Lock()
+	defer t.mu.Unlock()
+	t.sessions[s.id] = s
+	if c, ok := t.claims[s.key()]; ok && c.n != claim {
+		s.superseded = true
+		t.superseded.Add(1)
+		t.killLocked(s.id)
+		return false
+	}
+	return true
+}
+
+func (s *session) key() sessionKey {
+	if s.group != "" {
+		return sessionKey{user: s.userID, group: s.group}
+	}
+	return sessionKey{user: s.userID, item: s.itemID}
+}
+
+// command is FFmpeg with args, set to stop with the server (see procAttr).
+func (t *Transcoder) command(args []string) *exec.Cmd {
+	cmd := exec.Command(t.FFmpeg, args...)
+	cmd.SysProcAttr = procAttr()
+	return cmd
+}
+
+// wait waits for a session's FFmpeg to exit, counts a failure, and closes
+// s.done; it's run as a goroutine once FFmpeg has started.
+func (t *Transcoder) wait(s *session, after func(err error, killed, ready bool)) {
+	err := s.cmd.Wait()
+	t.procs.Add(-1)
+	t.mu.Lock()
+	killed, ready := s.killed, s.ready
+	t.mu.Unlock()
+	if err != nil && !killed && ready {
+		t.failures.Add(1)
+	}
+	if after != nil {
+		after(err, killed, ready)
+	}
+	close(s.done)
+}
+
+// Stats is the transcoder's numbers for metrics: starts a newer seek
+// replaced, and FFmpeg processes running now.
+func (t *Transcoder) Stats() (superseded, processes int64) {
+	return t.superseded.Load(), t.procs.Load()
 }
 
 // Counts is how many transcodes have started since the server started, and
@@ -116,7 +207,9 @@ func NewTranscoder(ffmpeg, dir string, hw Accelerator, log *slog.Logger) *Transc
 	// Leftovers from a previous run are never valid.
 	os.RemoveAll(dir)
 	os.MkdirAll(dir, 0o755)
-	t := &Transcoder{FFmpeg: ffmpeg, Dir: dir, Log: log, HW: hw, sessions: map[string]*session{}, failed: map[int64]failure{}, stop: make(chan struct{})}
+	t := &Transcoder{FFmpeg: ffmpeg, Dir: dir, Log: log, HW: hw, sessions: map[string]*session{}, failed: map[int64]failure{},
+		claims: map[sessionKey]claimed{}, stop: make(chan struct{}),
+		StartTimes: NewHistogram(0.25, 0.5, 1, 2, 4, 8, 15, 30), SegmentWaits: NewHistogram(0.05, 0.25, 1, 2, 5, 10, 15)}
 	go t.reap()
 	return t
 }
@@ -215,14 +308,8 @@ func audioFilters(delayMs int, clearVoice bool) string {
 // only what it can't take, usually the sound, is converted.
 func (t *Transcoder) StartFor(ctx context.Context, userID int64, it store.Item, startSec float64, req Request, steps ...Step) (string, error) {
 	burnSub, audio := req.BurnSub, req.Audio
-	t.mu.Lock()
-	for id, s := range t.sessions {
-		if s.userID == userID && s.itemID == it.ID && s.group == "" {
-			s.superseded = true
-			t.killLocked(id)
-		}
-	}
-	t.mu.Unlock()
+	begin := time.Now()
+	claim := t.claim(sessionKey{user: userID, item: it.ID})
 
 	var accel *hwaccel.Accel
 	if t.HW != nil {
@@ -247,11 +334,12 @@ func (t *Transcoder) StartFor(ctx context.Context, userID int64, it store.Item, 
 	}
 	modes := t.plan(accel, it.ID, video, copyVideo)
 	for i, mode := range modes {
-		id, err := t.start(ctx, userID, it, startSec, accel, mode, video, audio, audioFilters(req.AudioDelayMs, req.ClearVoice), req.BurnFile, copyVideo, why, steps, copyOutput)
+		id, err := t.start(ctx, claim, userID, it, startSec, accel, mode, video, audio, audioFilters(req.AudioDelayMs, req.ClearVoice), req.BurnFile, copyVideo, why, steps, copyOutput)
 		if err == nil || i == len(modes)-1 || errors.Is(err, ErrSuperseded) || ctx.Err() != nil {
 			switch {
 			case err == nil:
 				t.started.Add(1)
+				t.StartTimes.Observe(time.Since(begin).Seconds())
 			case !errors.Is(err, ErrSuperseded) && ctx.Err() == nil:
 				t.started.Add(1)
 				t.failures.Add(1)
@@ -291,10 +379,12 @@ func (t *Transcoder) hwFailed(itemID int64, kind hwaccel.Kind, mode hwaccel.Mode
 	}
 }
 
-func (t *Transcoder) start(ctx context.Context, userID int64, it store.Item, startSec float64, accel *hwaccel.Accel, mode hwaccel.Mode, video hwaccel.Video, audio int, audioFilter string, burnFile string, copyVideo bool, why string, steps []Step, copyOutput []string) (string, error) {
-	b := make([]byte, 12)
-	rand.Read(b)
-	id := hex.EncodeToString(b)
+func (t *Transcoder) start(ctx context.Context, claim uint64, userID int64, it store.Item, startSec float64, accel *hwaccel.Accel, mode hwaccel.Mode, video hwaccel.Video, audio int, audioFilter string, burnFile string, copyVideo bool, why string, steps []Step, copyOutput []string) (string, error) {
+	// A player that already gave up (a seek it moved on from) needs no FFmpeg.
+	if err := ctx.Err(); err != nil {
+		return "", err
+	}
+	id := newSessionID()
 	dir := filepath.Join(t.Dir, id)
 	if err := os.MkdirAll(dir, 0o755); err != nil {
 		return "", err
@@ -401,27 +491,25 @@ func (t *Transcoder) start(ctx context.Context, userID int64, it store.Item, sta
 	}
 
 	t.Log.Debug("ffmpeg command", "session", id, "args", args)
-	cmd := exec.Command(t.FFmpeg, args...)
+	cmd := t.command(args)
 	cmd.Stderr = &logWriter{log: t.Log, session: id}
 	if err := cmd.Start(); err != nil {
 		os.RemoveAll(dir)
 		return "", fmt.Errorf("start ffmpeg: %w", err)
 	}
+	t.procs.Add(1)
+	var quality []string
+	for _, s := range steps {
+		quality = append(quality, s.ID)
+	}
 	s := &session{id: id, userID: userID, itemID: it.ID, dir: dir, cmd: cmd, done: make(chan struct{}), lastSeen: time.Now(),
-		started: time.Now(), startSec: startSec, mode: mode, copyVideo: copyVideo, why: why, toneMapped: video.ToneMap != "", audioOnly: it.VideoCodec == "", burnSub: video.BurnSub >= 0 || video.Styled != ""}
+		started: time.Now(), startSec: startSec, mode: mode, quality: quality, copyVideo: copyVideo, why: why, toneMapped: video.ToneMap != "", audioOnly: it.VideoCodec == "", burnSub: video.BurnSub >= 0 || video.Styled != ""}
 	var kind hwaccel.Kind
 	if mode != hwaccel.CPU {
 		kind = accel.Kind
 		s.accel = accel
 	}
-	go func() {
-		err := cmd.Wait()
-		t.mu.Lock()
-		killed, ready := s.killed, s.ready
-		t.mu.Unlock()
-		if err != nil && !killed && ready {
-			t.failures.Add(1)
-		}
+	go t.wait(s, func(err error, killed, ready bool) {
 		// A GPU that fails partway through (rather than at the start) leaves
 		// the player stuck; when it starts again, this item skips that mode.
 		if err != nil && !killed && kind != "" {
@@ -431,18 +519,10 @@ func (t *Transcoder) start(ctx context.Context, userID int64, it store.Item, sta
 			}
 			t.hwFailed(it.ID, kind, mode)
 		}
-		close(s.done)
-	}()
-	t.mu.Lock()
-	t.sessions[id] = s
-	t.mu.Unlock()
-	var quality []string
-	for _, s := range steps {
-		quality = append(quality, s.ID)
+	})
+	if !t.register(s, claim) {
+		return "", ErrSuperseded
 	}
-	t.mu.Lock()
-	s.quality = quality
-	t.mu.Unlock()
 	t.Log.Info("transcode started", "session", id, "item", it.ID, "start", startSec,
 		"videoCopy", copyVideo, "convertWhy", why, "burnSub", video.BurnSub, "audio", audio, "accel", kind, "mode", mode, "quality", quality)
 
@@ -490,7 +570,12 @@ func (t *Transcoder) ServeFile(w http.ResponseWriter, r *http.Request, userID in
 	allowAnyOrigin(w)
 	path := filepath.Join(s.dir, name)
 	if !strings.HasSuffix(name, ".m3u8") {
-		if err := waitFor(r.Context(), s, path, 15*time.Second); err != nil {
+		began := time.Now()
+		err := waitFor(r.Context(), s, path, 15*time.Second)
+		if r.Context().Err() == nil {
+			t.SegmentWaits.Observe(time.Since(began).Seconds())
+		}
+		if err != nil {
 			http.Error(w, "segment not ready", http.StatusServiceUnavailable)
 			return
 		}
@@ -639,19 +724,52 @@ func (t *Transcoder) reap() {
 					t.killLocked(id)
 				}
 			}
+			// A start takes a minute at most (startup waits, GPU retries),
+			// so older claims can't be raced any more.
+			for k, c := range t.claims {
+				if time.Since(c.at) > idleTimeout {
+					delete(t.claims, k)
+				}
+			}
 			t.mu.Unlock()
 		}
 	}
 }
 
-// Close stops every session.
+// Close stops every session and waits a few seconds for their FFmpegs
+// to exit and their files to go.
 func (t *Transcoder) Close() {
 	close(t.stop)
 	t.mu.Lock()
-	for id := range t.sessions {
+	var stopped []*session
+	for id, s := range t.sessions {
+		stopped = append(stopped, s)
 		t.killLocked(id)
 	}
 	t.mu.Unlock()
+	deadline := time.After(5 * time.Second)
+	for _, s := range stopped {
+		select {
+		case <-s.done:
+		case <-deadline:
+			return
+		}
+	}
+	// killLocked removes each one's files once it has exited.
+	for _, s := range stopped {
+		for range 50 {
+			if _, err := os.Stat(s.dir); err != nil {
+				break
+			}
+			time.Sleep(10 * time.Millisecond)
+		}
+	}
+}
+
+func newSessionID() string {
+	b := make([]byte, 12)
+	rand.Read(b)
+	return hex.EncodeToString(b)
 }
 
 type logWriter struct {
