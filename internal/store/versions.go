@@ -72,15 +72,18 @@ func (s *Store) GroupVersions(ctx context.Context, libraryID int64, edition func
 		return ch, err
 	}
 	defer t.Rollback()
-	for _, f := range videos {
-		if e := edition(f.Path); e != f.edition {
-			if _, err := t.ExecContext(ctx, "UPDATE items SET edition = ? WHERE id = ?", nullStr(e), f.ID); err != nil {
-				return ch, err
+	groups := versionGroups(videos)
+	for _, group := range groups {
+		for i, e := range groupEditions(group, edition) {
+			if f := group[i]; e != f.edition {
+				if _, err := t.ExecContext(ctx, "UPDATE items SET edition = ? WHERE id = ?", nullStr(e), f.ID); err != nil {
+					return ch, err
+				}
+				ch.Editions++
 			}
-			ch.Editions++
 		}
 	}
-	for _, group := range versionGroups(videos) {
+	for _, group := range groups {
 		primary := titleOf(group)
 		for _, f := range group {
 			want := primary
@@ -112,6 +115,52 @@ func (s *Store) GroupVersions(ctx context.Context, libraryID int64, edition func
 		}
 	}
 	return ch, t.Commit()
+}
+
+// groupEditions is the edition of each file of a group: what its name
+// says or, for a movie's file whose name doesn't, a guess from how long
+// it runs against the group's other files. One that runs notably longer
+// than another (5 minutes and 5% of the shorter, so a PAL copy running
+// 4% short or a few seconds of logos don't count) is the Extended cut,
+// and one notably shorter the Theatrical. Box Office guesses the same way.
+func groupEditions(group []LibraryFile, edition func(path string) string) []string {
+	out := make([]string, len(group))
+	for i, f := range group {
+		out[i] = edition(f.Path)
+	}
+	for i, f := range group {
+		if out[i] != "" || f.Kind != "movie" || f.durationMS <= 0 {
+			continue
+		}
+		longer, shorter := false, false
+		for j, o := range group {
+			if j == i || !differentCut(f.durationMS, o.durationMS) {
+				continue
+			}
+			if f.durationMS > o.durationMS {
+				longer = true
+			} else {
+				shorter = true
+			}
+		}
+		switch {
+		case longer:
+			out[i] = "Extended Edition"
+		case shorter:
+			out[i] = "Theatrical"
+		}
+	}
+	return out
+}
+
+// differentCut says whether two running times (ms) are far enough apart
+// to be different cuts of a movie; unknown times never are.
+func differentCut(a, b int64) bool {
+	if a <= 0 || b <= 0 {
+		return false
+	}
+	lo, hi := min(a, b), max(a, b)
+	return hi-lo >= 5*60*1000 && float64(hi-lo) >= 0.05*float64(lo)
 }
 
 // versionGroups sorts files into the same movie or episode. Every file is
