@@ -59,6 +59,10 @@ import (
 	"github.com/yeixio/matinee/web"
 )
 
+// databaseWait is how long the server waits for a PostgreSQL server that
+// doesn't answer yet before it gives up.
+const databaseWait = 150 * time.Second
+
 func main() {
 	cmd := runAndRestart
 	if len(os.Args) > 1 {
@@ -114,6 +118,14 @@ func run() error {
 			return fmt.Errorf("restore the database: %w", err)
 		}
 		opts.BeforeMigrate = backups.BeforeMigrate
+	} else {
+		// PostgreSQL may be starting at the same time (both pods replaced at
+		// once on Kubernetes). Until it answers the server isn't listening,
+		// so it isn't ready either; the chart's startup probe allows 3 minutes.
+		opts.Wait = databaseWait
+		opts.Waiting = func(err error, next time.Duration) {
+			log.Warn("waiting for the database", "retry_in", next, "err", err)
+		}
 	}
 	db, err := store.OpenWith(cfg.Database(), opts)
 	if err != nil {

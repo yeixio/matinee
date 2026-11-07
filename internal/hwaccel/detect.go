@@ -11,6 +11,7 @@ import (
 	"path/filepath"
 	"regexp"
 	"runtime"
+	"slices"
 	"strings"
 	"sync"
 	"time"
@@ -198,10 +199,39 @@ func devices(k Kind) []string {
 		return []string{d}
 	}
 	nodes, _ := filepath.Glob("/dev/dri/renderD*")
-	if k == QSV && len(nodes) == 0 {
-		return []string{""}
+	if k == QSV {
+		if len(nodes) == 0 {
+			return []string{""}
+		}
+		return intelNodes(nodes)
 	}
 	return nodes
+}
+
+// intelNodes leaves out the render nodes of other makers' GPUs. Quick Sync
+// is Intel's, so trying it on an AMD or NVIDIA GPU failed with an error on
+// every start. A node whose maker can't be read is kept.
+func intelNodes(nodes []string) []string {
+	return slices.DeleteFunc(slices.Clone(nodes), func(n string) bool {
+		v := renderVendor(n)
+		return v != "" && v != intelVendor
+	})
+}
+
+// intelVendor is Intel's PCI vendor id.
+const intelVendor = "0x8086"
+
+// sysDRM is where Linux describes each render node's device.
+var sysDRM = "/sys/class/drm"
+
+// renderVendor is the PCI vendor id of the GPU behind a render node, such as
+// "0x8086" (Intel) or "0x1002" (AMD), or "" when it can't be read.
+func renderVendor(node string) string {
+	b, err := os.ReadFile(filepath.Join(sysDRM, filepath.Base(node), "device", "vendor"))
+	if err != nil {
+		return ""
+	}
+	return strings.ToLower(strings.TrimSpace(string(b)))
 }
 
 // try runs a one-second transcode in mode m: of a test pattern into out (an

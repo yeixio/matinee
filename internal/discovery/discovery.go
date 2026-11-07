@@ -5,10 +5,10 @@ package discovery
 
 import (
 	"context"
-	"fmt"
 	"log/slog"
 	"net"
 	"strings"
+	"time"
 
 	"github.com/libp2p/zeroconf/v2"
 )
@@ -44,21 +44,46 @@ func (a Announcement) TXT() []string {
 	return txt
 }
 
-// Run announces a until ctx ends.
+// Run announces a until ctx ends. When the network isn't ready to announce
+// on (no interface up yet, or multicast refused), it says why and tries
+// again, waiting a little longer each time, rather than giving up.
 func Run(ctx context.Context, a Announcement, log *slog.Logger) error {
 	name := a.Name
 	if name == "" {
 		name = "Matinee"
 	}
-	server, err := zeroconf.Register(name, Service, "local.", a.Port, a.TXT(), homeInterfaces())
-	if err != nil {
-		return fmt.Errorf("announce on the local network: %w", err)
+	delay := retryFirst
+	for {
+		server, err := register(name, Service, "local.", a.Port, a.TXT(), homeInterfaces())
+		if err == nil {
+			log.Info("announcing on the local network", "name", name, "port", a.Port, "url", a.URL)
+			<-ctx.Done()
+			server.Shutdown()
+			return nil
+		}
+		log.Warn("can't announce on the local network yet; trying again", "err", err, "retry_in", delay)
+		select {
+		case <-ctx.Done():
+			return nil
+		case <-time.After(delay):
+		}
+		delay = min(delay*2, retryMax)
 	}
-	log.Info("announcing on the local network", "name", name, "port", a.Port, "url", a.URL)
-	<-ctx.Done()
-	server.Shutdown()
-	return nil
 }
+
+// How long Run waits before trying to announce again: retryFirst, doubling
+// up to retryMax.
+var (
+	retryFirst = 2 * time.Second
+	retryMax   = time.Minute
+)
+
+// register is zeroconf.Register, swapped in tests.
+var register = func(instance, service, domain string, port int, text []string, ifaces []net.Interface) (shutdowner, error) {
+	return zeroconf.Register(instance, service, domain, port, text, ifaces)
+}
+
+type shutdowner interface{ Shutdown() }
 
 // virtualPrefixes name the interfaces of containers, Kubernetes networks and
 // VPNs. A server on a cluster node or a Docker host has several; announcing
