@@ -46,6 +46,10 @@ func OpenWith(dsn string, o Options) (*Store, error) {
 			return nil, err
 		}
 		conn.SetMaxOpenConns(20)
+		if err := waitUntilReady(context.Background(), conn, o.Wait, o.Waiting); err != nil {
+			conn.Close()
+			return nil, err
+		}
 		d = &db{DB: conn, dialect: postgres}
 	} else {
 		conn, err := sql.Open("sqlite", "file:"+dsn+"?_pragma=foreign_keys(1)&_pragma=busy_timeout(5000)&_pragma=journal_mode(WAL)&_pragma=synchronous(NORMAL)")
@@ -84,6 +88,41 @@ func OpenWith(dsn string, o Options) (*Store, error) {
 		return nil, fmt.Errorf("starter collections: %w", err)
 	}
 	return s, nil
+}
+
+// waitUntilReady pings conn until it answers or wait has passed, waiting a
+// little longer after each failure (1s, 2s, 4s, up to 10s). A PostgreSQL
+// server that restarts with Matinee, such as both pods being replaced at
+// once on Kubernetes, takes a few seconds to take connections, and giving
+// up at once made the server exit and crash-loop.
+func waitUntilReady(ctx context.Context, conn *sql.DB, wait time.Duration, waiting func(error, time.Duration)) error {
+	deadline := time.Now().Add(wait)
+	delay := time.Second
+	for {
+		pingCtx, cancel := context.WithTimeout(ctx, 5*time.Second)
+		err := conn.PingContext(pingCtx)
+		cancel()
+		if err == nil {
+			return nil
+		}
+		left := time.Until(deadline)
+		if left <= 0 {
+			if wait > 0 {
+				return fmt.Errorf("the database didn't answer for %s: %w", wait.Round(time.Second), err)
+			}
+			return err
+		}
+		delay = min(delay, left)
+		if waiting != nil {
+			waiting(err, delay)
+		}
+		select {
+		case <-ctx.Done():
+			return ctx.Err()
+		case <-time.After(delay):
+		}
+		delay = min(delay*2, 10*time.Second)
+	}
 }
 
 // withoutJIT turns off PostgreSQL's JIT compiler for Matinee's connections,

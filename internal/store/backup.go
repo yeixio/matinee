@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"os"
+	"time"
 )
 
 // ErrBackupUnsupported: Matinee copies SQLite databases itself; a
@@ -18,6 +19,13 @@ type Options struct {
 	// to a newer schema, from version from to version to, so it can be
 	// backed up first. An error stops the start.
 	BeforeMigrate func(s *Store, from, to int) error
+	// Wait is how long to keep trying a PostgreSQL server that doesn't
+	// answer yet, such as one starting at the same time as Matinee. Zero
+	// tries once.
+	Wait time.Duration
+	// Waiting is told each time the database didn't answer and when the
+	// next try is.
+	Waiting func(err error, next time.Duration)
 }
 
 // SQLite says whether the database is a SQLite file (which Backup copies).
