@@ -39,6 +39,10 @@ In the [phone and TV apps](/docs/apps/phone-and-tv/) (from app version 1.0.23):
 
 From app version 1.0.32 the apps show the chapter notches and names too, and keep the picture on screen with a spinner after a far jump.
 
+<!-- since: v0.2.4 -->
+From app version 1.0.34 the TV apps also list the chapters with a picture of each under **Chapters**, and holding left or right on the remote skips a whole chapter. See [Chapters](/docs/apps/phone-and-tv/#chapters).
+<!-- /since -->
+
 ## Where the pictures come from
 
 Matinee makes the pictures itself, a small frame every few seconds of each movie and episode (every 10 seconds for anything over half an hour). It does that in the background once every file is [analyzed](/docs/server/media-analysis/), at the same gentle pace and lowest priority, and only once per file. A replaced file gets new pictures. HDR videos get pictures in their true colours rather than washed out.

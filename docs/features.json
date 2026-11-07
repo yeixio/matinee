@@ -444,6 +444,19 @@
               }
             },
             {
+              "name": "Chapter list and skipping chapters",
+              "doc": "/docs/apps/phone-and-tv/#chapters",
+              "since": "v0.2.4",
+              "apps": {
+                "web": "matinee#347",
+                "ios": "matinee-apps#184",
+                "android": "matinee-apps#184",
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
               "name": "Scrub by sliding on the remote",
               "doc": "/docs/apps/phone-and-tv/#watching-on-a-tv",
               "since": "v0.2.4",

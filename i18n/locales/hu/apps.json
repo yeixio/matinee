@@ -350,6 +350,8 @@
     "endsAt": "Vége: {{time}}",
     "position": "Pozíció",
     "positionOf": "{{at}} / {{total}}",
+    "chapters": "Fejezetek",
+    "chapterN": "{{n}}. fejezet",
     "castingTo": "Lejátszás itt: {{name}}",
     "airPlaying": "Lejátszás a tévén AirPlay-jel",
     "castControls": "Vezérlők megjelenítése",

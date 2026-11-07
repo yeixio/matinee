@@ -355,6 +355,8 @@
     "endsAt": "Termina às {{time}}",
     "position": "Posição",
     "positionOf": "{{at}} de {{total}}",
+    "chapters": "Capítulos",
+    "chapterN": "Capítulo {{n}}",
     "castingTo": "Reproduzindo em {{name}}",
     "airPlaying": "Reproduzindo na sua TV com AirPlay",
     "castControls": "Mostrar controles",

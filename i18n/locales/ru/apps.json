@@ -360,6 +360,8 @@
     "endsAt": "Закончится в {{time}}",
     "position": "Позиция",
     "positionOf": "{{at}} из {{total}}",
+    "chapters": "Главы",
+    "chapterN": "Глава {{n}}",
     "castingTo": "Воспроизводится на {{name}}",
     "airPlaying": "Воспроизводится на телевизоре через AirPlay",
     "castControls": "Показать управление",

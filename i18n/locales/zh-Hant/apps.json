@@ -345,6 +345,8 @@
     "endsAt": "{{time}} 結束",
     "position": "播放位置",
     "positionOf": "{{at}} / {{total}}",
+    "chapters": "章節",
+    "chapterN": "第 {{n}} 章",
     "castingTo": "正在 {{name}} 上播放",
     "airPlaying": "正在透過 AirPlay 在電視上播放",
     "castControls": "顯示控制項",

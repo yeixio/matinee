@@ -355,6 +355,8 @@
     "endsAt": "Se termină la {{time}}",
     "position": "Poziție",
     "positionOf": "{{at}} din {{total}}",
+    "chapters": "Capitole",
+    "chapterN": "Capitolul {{n}}",
     "castingTo": "Se redă pe {{name}}",
     "airPlaying": "Se redă pe televizor prin AirPlay",
     "castControls": "Arată comenzile",

@@ -350,6 +350,8 @@
     "endsAt": "{{time}} पर खत्म",
     "position": "स्थिति",
     "positionOf": "{{total}} में से {{at}}",
+    "chapters": "अध्याय",
+    "chapterN": "अध्याय {{n}}",
     "castingTo": "{{name}} पर चल रहा है",
     "airPlaying": "AirPlay से आपके टीवी पर चल रहा है",
     "castControls": "नियंत्रण दिखाएँ",

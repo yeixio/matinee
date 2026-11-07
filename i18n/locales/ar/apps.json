@@ -370,6 +370,8 @@
     "endsAt": "ينتهي عند {{time}}",
     "position": "الموضع",
     "positionOf": "{{at}} من {{total}}",
+    "chapters": "الفصول",
+    "chapterN": "الفصل {{n}}",
     "castingTo": "يُعرض على {{name}}",
     "airPlaying": "يُعرض على التلفزيون عبر AirPlay",
     "castControls": "إظهار عناصر التحكم",
