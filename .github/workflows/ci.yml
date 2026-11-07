@@ -116,6 +116,8 @@ jobs:
       # Recreate needs no drain delay; RollingUpdate waits 5s for the Service.
       - run: "helm template t deploy/helm/matinee | grep -q 'terminationGracePeriodSeconds: 20'"
       - run: "helm template t deploy/helm/matinee --set strategy.type=RollingUpdate | grep -q 'terminationGracePeriodSeconds: 25'"
+      # Without a cluster to look at, volumes get the size asked for.
+      - run: "helm template t deploy/helm/matinee --set thumbnails.persistence.size=60Gi | grep -q 'storage: 60Gi'"
 
   docker:
     runs-on: ubuntu-latest

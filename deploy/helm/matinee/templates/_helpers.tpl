@@ -59,3 +59,31 @@ true
 0
 {{- end -}}
 {{- end -}}
+
+{{/*
+The size to ask for on one of the chart's volumes. Many storage classes
+(local-path among them) can't grow a volume, and Kubernetes refuses the
+whole upgrade when a bigger size is asked of one, so when the volume
+already exists on such a class, keep the size it has. Plain `helm upgrade`
+can look; under Argo CD or `helm template` there's nothing to look up, so
+see "Volume sizes" in docs/guide/server/kubernetes.md.
+Call with (dict "ctx" $ "name" "<claim name>" "size" "<wanted size>").
+*/}}
+{{- define "matinee.pvcSize" -}}
+{{- $size := toString .size -}}
+{{- $pvc := lookup "v1" "PersistentVolumeClaim" .ctx.Release.Namespace .name -}}
+{{- if $pvc -}}
+{{- $live := toString (dig "spec" "resources" "requests" "storage" "" $pvc) -}}
+{{- if and $live (ne $live $size) -}}
+{{- $class := dig "spec" "storageClassName" "" $pvc -}}
+{{- $sc := dict -}}
+{{- if $class -}}
+{{- $sc = lookup "storage.k8s.io/v1" "StorageClass" "" $class -}}
+{{- end -}}
+{{- if not (dig "allowVolumeExpansion" false ($sc | default dict)) -}}
+{{- $size = $live -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+{{- $size -}}
+{{- end -}}

@@ -16,5 +16,5 @@ spec:
   {{- end }}
   resources:
     requests:
-      storage: {{ $r.persistence.size }}
+      storage: {{ include "matinee.pvcSize" (dict "ctx" $ "name" (printf "%s-remote" (include "matinee.fullname" .)) "size" $r.persistence.size) }}
 {{- end }}

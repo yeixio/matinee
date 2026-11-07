@@ -69,6 +69,25 @@ kubectl create secret generic matinee-tmdb --from-literal=tmdb-api-key=your-key
 
 Transcodes and the image cache use a local `emptyDir`, so they're fast and never land on network storage.
 
+<!-- since: v0.2.4 -->
+### Volume sizes
+
+Many storage classes can't grow a volume once it's made, `local-path` among them, and Kubernetes then refuses the whole upgrade if a bigger `size` is asked of one ("only dynamically provisioned pvc can be resized"). With plain `helm upgrade`, the chart notices and keeps the size the volume already has. Argo CD and Flux render the chart without looking at the cluster, so tell them to leave volume sizes as they are:
+
+```yaml
+spec:
+  ignoreDifferences:
+    - kind: PersistentVolumeClaim
+      jsonPointers:
+        - /spec/resources/requests/storage
+  syncPolicy:
+    syncOptions:
+      - RespectIgnoreDifferences=true
+```
+
+To really make a volume bigger on such a class, make a new claim of the size you want, point `existingClaim` at it, and delete the old one.
+<!-- /since -->
+
 ## Replicas
 
 Run one replica for now: a transcode in progress lives in the pod that started it. More replicas work with `service.sessionAffinity: ClientIP`, so each device keeps talking to the same pod.
