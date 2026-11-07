@@ -4,8 +4,10 @@ import (
 	"bytes"
 	"context"
 	"encoding/binary"
+	"fmt"
 	"io"
 	"log/slog"
+	"math"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -201,5 +203,81 @@ func TestStartDolbyVision(t *testing.T) {
 		t.Errorf("5 for an HDR10 screen: %s, want it converted", kind)
 	} else if _, err := os.Stat(filepath.Join(dir, "cache", id, "seg00000.ts")); err != nil {
 		t.Error(err)
+	}
+}
+
+// TestCopiedPictureInSyncWithoutEditLists checks a copied HEVC picture and
+// its converted sound line up through the pieces' own times, not through
+// edit lists in the init piece, which Apple's players don't apply to HLS.
+// Started between keyframes, the picture starts at the keyframe before and
+// the sound where playback starts, so the sound has to come that much later.
+func TestCopiedPictureInSyncWithoutEditLists(t *testing.T) {
+	ffmpeg, err := exec.LookPath("ffmpeg")
+	if err != nil {
+		t.Skip("ffmpeg not installed")
+	}
+	ffprobe, err := exec.LookPath("ffprobe")
+	if err != nil {
+		t.Skip("ffprobe not installed")
+	}
+	dir := t.TempDir()
+	src := filepath.Join(dir, "film.mkv")
+	gen := exec.Command(ffmpeg, "-hide_banner", "-loglevel", "error",
+		"-f", "lavfi", "-i", "color=black:size=320x180:rate=24000/1001:duration=20,drawbox=enable='lt(mod(t,2),0.05)':color=white:t=fill",
+		"-f", "lavfi", "-i", "sine=f=440:r=48000:duration=20",
+		"-c:v", "libx265", "-preset", "ultrafast", "-x265-params", "log-level=none:keyint=120:min-keyint=120:bframes=3",
+		"-c:a", "ac3", "-shortest", src)
+	if out, err := gen.CombinedOutput(); err != nil {
+		t.Skipf("can't make an HEVC clip here: %v\n%s", err, out)
+	}
+	tr := NewTranscoder(ffmpeg, filepath.Join(dir, "cache"), nil, slog.New(slog.NewTextHandler(io.Discard, nil)))
+	defer tr.Close()
+	can := Plays{Video: []string{"hevc"}, HDR: []string{"hdr10", "hlg"}}
+	for i, at := range []float64{0, 7} {
+		it := store.Item{ID: int64(i + 1), Path: src, VideoCodec: "hevc", AudioCodec: "ac3", Width: intp(320)}
+		id, err := tr.StartFor(context.Background(), int64(i+1), it, at, Request{BurnSub: -1, Audio: -1, Plays: can, Picture: Picture{Known: true}})
+		if err != nil {
+			t.Fatal(err)
+		}
+		init, _ := os.ReadFile(filepath.Join(dir, "cache", id, "init.mp4"))
+		seg, _ := os.ReadFile(filepath.Join(dir, "cache", id, "seg00000.m4s"))
+		if len(init) == 0 || len(seg) == 0 {
+			t.Fatalf("start at %v: no init piece or first piece", at)
+		}
+		if bytes.Contains(init, []byte("elst")) {
+			t.Errorf("start at %v: the init piece has edit lists", at)
+		}
+		first := filepath.Join(dir, "first.mp4")
+		os.WriteFile(first, append(slices.Clone(init), seg...), 0o644)
+		// Packet times as a player that doesn't apply edit lists reads them.
+		times := func(kind string) []float64 {
+			out, err := exec.Command(ffprobe, "-v", "error", "-ignore_editlist", "1", "-select_streams", kind,
+				"-show_entries", "packet=pts_time", "-of", "csv=p=0", first).Output()
+			if err != nil {
+				t.Fatal(err)
+			}
+			var ts []float64
+			for _, l := range strings.Fields(string(out)) {
+				var v float64
+				if _, err := fmt.Sscan(strings.TrimSuffix(l, ","), &v); err == nil {
+					ts = append(ts, v)
+				}
+			}
+			slices.Sort(ts)
+			return ts
+		}
+		video, audio := times("v"), times("a")
+		if len(video) == 0 || len(audio) < 2 {
+			t.Fatalf("start at %v: %d video and %d audio packets", at, len(video), len(audio))
+		}
+		// The picture starts on the keyframe at or before at (every 120
+		// frames, 5.005 s).
+		keyframe := math.Floor(at/5.005) * 5.005
+		// The sound's first frame is its encoder delay; what's heard starts
+		// with the second.
+		gap := audio[1] - video[0]
+		if want := at - keyframe; math.Abs(gap-want) > 0.05 {
+			t.Errorf("start at %v: sound starts %.3f s after the picture, want %.3f s", at, gap, want)
+		}
 	}
 }
