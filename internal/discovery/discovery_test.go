@@ -1,10 +1,14 @@
 package discovery
 
 import (
+	"context"
+	"errors"
+	"log/slog"
 	"net"
 	"slices"
 	"strings"
 	"testing"
+	"time"
 )
 
 func TestTXT(t *testing.T) {
@@ -52,5 +56,43 @@ func TestHomeInterfacesSkipContainersAndVPNs(t *testing.T) {
 	}
 	if !virtual("CNI0") || virtual("eth0") || virtual("enp5s0") || virtual("br0") {
 		t.Fatal("Virtual misjudged a name")
+	}
+}
+
+type fakeServer struct{ shut chan struct{} }
+
+func (f fakeServer) Shutdown() { close(f.shut) }
+
+// A failed announce is tried again until it works, instead of ending Run.
+func TestRunRetries(t *testing.T) {
+	oldReg, oldFirst := register, retryFirst
+	t.Cleanup(func() { register, retryFirst = oldReg, oldFirst })
+	retryFirst = time.Millisecond
+	tries := 0
+	up := make(chan struct{})
+	srv := fakeServer{shut: make(chan struct{})}
+	register = func(string, string, string, int, []string, []net.Interface) (shutdowner, error) {
+		tries++
+		if tries < 3 {
+			return nil, errors.New("no multicast interface")
+		}
+		close(up)
+		return srv, nil
+	}
+	ctx, cancel := context.WithCancel(context.Background())
+	done := make(chan error)
+	go func() { done <- Run(ctx, Announcement{Port: 443}, slog.New(slog.DiscardHandler)) }()
+	select {
+	case <-up:
+	case <-time.After(5 * time.Second):
+		t.Fatal("never announced")
+	}
+	cancel()
+	if err := <-done; err != nil {
+		t.Fatal(err)
+	}
+	<-srv.shut
+	if tries != 3 {
+		t.Errorf("tries = %d, want 3", tries)
 	}
 }
