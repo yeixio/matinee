@@ -360,6 +360,8 @@
     "endsAt": "Закінчиться о {{time}}",
     "position": "Позиція",
     "positionOf": "{{at}} з {{total}}",
+    "chapters": "Розділи",
+    "chapterN": "Розділ {{n}}",
     "castingTo": "Відтворюється на {{name}}",
     "airPlaying": "Відтворюється на телевізорі через AirPlay",
     "castControls": "Показати керування",

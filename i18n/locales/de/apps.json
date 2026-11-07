@@ -350,6 +350,8 @@
     "endsAt": "Endet um {{time}}",
     "position": "Position",
     "positionOf": "{{at}} von {{total}}",
+    "chapters": "Kapitel",
+    "chapterN": "Kapitel {{n}}",
     "castingTo": "Läuft auf {{name}}",
     "airPlaying": "Läuft per AirPlay auf deinem Fernseher",
     "castControls": "Steuerung anzeigen",

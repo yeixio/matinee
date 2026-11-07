@@ -350,6 +350,8 @@
     "endsAt": "پایان در {{time}}",
     "position": "موقعیت",
     "positionOf": "{{at}} از {{total}}",
+    "chapters": "فصل‌ها",
+    "chapterN": "فصل {{n}}",
     "castingTo": "در حال پخش روی {{name}}",
     "airPlaying": "در حال پخش روی تلویزیون با AirPlay",
     "castControls": "نمایش کنترل‌ها",

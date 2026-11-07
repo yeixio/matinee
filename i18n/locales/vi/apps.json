@@ -345,6 +345,8 @@
     "endsAt": "Kết thúc lúc {{time}}",
     "position": "Vị trí",
     "positionOf": "{{at}} / {{total}}",
+    "chapters": "Chương",
+    "chapterN": "Chương {{n}}",
     "castingTo": "Đang phát trên {{name}}",
     "airPlaying": "Đang phát trên TV qua AirPlay",
     "castControls": "Hiện điều khiển",

@@ -355,6 +355,8 @@
     "endsAt": "מסתיים ב-{{time}}",
     "position": "מיקום",
     "positionOf": "{{at}} מתוך {{total}}",
+    "chapters": "פרקים",
+    "chapterN": "פרק {{n}}",
     "castingTo": "מתנגן ב-{{name}}",
     "airPlaying": "מתנגן בטלוויזיה דרך AirPlay",
     "castControls": "הצגת פקדים",

@@ -345,6 +345,8 @@
     "endsAt": "{{time}}에 종료",
     "position": "위치",
     "positionOf": "{{at}} / {{total}}",
+    "chapters": "챕터",
+    "chapterN": "챕터 {{n}}",
     "castingTo": "{{name}}에서 재생 중",
     "airPlaying": "AirPlay로 TV에서 재생 중",
     "castControls": "컨트롤 표시",

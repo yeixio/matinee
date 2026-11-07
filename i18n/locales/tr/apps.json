@@ -350,6 +350,8 @@
     "endsAt": "Bitiş: {{time}}",
     "position": "Konum",
     "positionOf": "{{at}} / {{total}}",
+    "chapters": "Bölümler",
+    "chapterN": "Bölüm {{n}}",
     "castingTo": "{{name}} üzerinde oynatılıyor",
     "airPlaying": "AirPlay ile TV'nizde oynatılıyor",
     "castControls": "Kontrolleri göster",

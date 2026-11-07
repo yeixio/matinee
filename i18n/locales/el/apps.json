@@ -350,6 +350,8 @@
     "endsAt": "Τελειώνει στις {{time}}",
     "position": "Θέση",
     "positionOf": "{{at}} από {{total}}",
+    "chapters": "Κεφάλαια",
+    "chapterN": "Κεφάλαιο {{n}}",
     "castingTo": "Αναπαραγωγή σε {{name}}",
     "airPlaying": "Αναπαραγωγή στην τηλεόρασή σας μέσω AirPlay",
     "castControls": "Εμφάνιση χειριστηρίων",

@@ -350,6 +350,8 @@
     "endsAt": "{{time}} پر ختم",
     "position": "مقام",
     "positionOf": "{{total}} میں سے {{at}}",
+    "chapters": "ابواب",
+    "chapterN": "باب {{n}}",
     "castingTo": "{{name}} پر چل رہا ہے",
     "airPlaying": "AirPlay کے ذریعے آپ کے ٹی وی پر چل رہا ہے",
     "castControls": "کنٹرولز دکھائیں",

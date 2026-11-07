@@ -345,6 +345,8 @@
     "endsAt": "Tamat pada {{time}}",
     "position": "Kedudukan",
     "positionOf": "{{at}} daripada {{total}}",
+    "chapters": "Bab",
+    "chapterN": "Bab {{n}}",
     "castingTo": "Dimainkan di {{name}}",
     "airPlaying": "Dimainkan di TV anda dengan AirPlay",
     "castControls": "Tunjukkan kawalan",
