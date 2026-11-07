@@ -278,6 +278,7 @@
   "issue": {
     "video": "Gambar",
     "audio": "Bunyi",
+    "language": "Bahasa salah",
     "subtitles": "Sari kata",
     "wrong": "Tajuk salah",
     "other": "Lain-lain"

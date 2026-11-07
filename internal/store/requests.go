@@ -54,6 +54,13 @@ type Request struct {
 	// BoxOfficeID is the request's id on Box Office's Requests page, for
 	// one filed there; 0 for one Matinee decides itself.
 	BoxOfficeID int64 `json:"boxOfficeId,omitempty"`
+	// Problem is the problem reported (an Issue's kind) that an
+	// AskReplace is for, and Language the language (ISO 639-1) the sound
+	// should be in, for the wrong language.
+	Problem  string `json:"problem,omitempty"`
+	Language string `json:"language,omitempty"`
+	// FileName is the name of the file reported, for a Problem.
+	FileName string `json:"-"`
 }
 
 // What a request asks Box Office for, beyond adding a title.
@@ -64,14 +71,14 @@ const (
 )
 
 const requestCols = `r.id, r.kind, r.tmdb_id, r.tvdb_id, r.title, r.year, r.poster, r.quality_profile_id, r.state, r.error,
-	r.user_id, COALESCE(u.username, ''), r.created_at, r.updated_at, r.ask, r.edition, r.mode, r.reason, r.season, r.episode, r.boxoffice_id`
+	r.user_id, COALESCE(u.username, ''), r.created_at, r.updated_at, r.ask, r.edition, r.mode, r.reason, r.season, r.episode, r.boxoffice_id, r.problem, r.language, r.file_name`
 
 const requestFrom = ` FROM requests r LEFT JOIN users u ON u.id = r.user_id`
 
 func scanRequest(row scanner) (Request, error) {
 	var r Request
 	err := row.Scan(&r.ID, &r.Kind, &r.TMDBID, &r.TVDBID, &r.Title, &r.Year, &r.Poster, &r.QualityProfileID, &r.State, &r.Error,
-		&r.UserID, &r.Username, &r.CreatedAt, &r.UpdatedAt, &r.Ask, &r.Edition, &r.Mode, &r.Reason, &r.Season, &r.Episode, &r.BoxOfficeID)
+		&r.UserID, &r.Username, &r.CreatedAt, &r.UpdatedAt, &r.Ask, &r.Edition, &r.Mode, &r.Reason, &r.Season, &r.Episode, &r.BoxOfficeID, &r.Problem, &r.Language, &r.FileName)
 	if errors.Is(err, sql.ErrNoRows) {
 		return r, ErrNotFound
 	}
@@ -92,10 +99,10 @@ func (s *Store) CreateRequest(ctx context.Context, r Request) (Request, error) {
 		r.State = RequestPending
 	}
 	_, err := s.db.ExecContext(ctx, `INSERT INTO requests
-		(id, user_id, kind, tmdb_id, tvdb_id, title, year, poster, quality_profile_id, state, error, created_at, updated_at, ask, edition, mode, reason, season, episode, boxoffice_id)
-		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, '', ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+		(id, user_id, kind, tmdb_id, tvdb_id, title, year, poster, quality_profile_id, state, error, created_at, updated_at, ask, edition, mode, reason, season, episode, boxoffice_id, problem, language, file_name)
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, '', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
 		r.ID, r.UserID, r.Kind, r.TMDBID, r.TVDBID, r.Title, r.Year, r.Poster, r.QualityProfileID, r.State, r.CreatedAt, r.UpdatedAt,
-		r.Ask, r.Edition, r.Mode, r.Reason, r.Season, r.Episode, r.BoxOfficeID)
+		r.Ask, r.Edition, r.Mode, r.Reason, r.Season, r.Episode, r.BoxOfficeID, r.Problem, r.Language, r.FileName)
 	if err != nil {
 		return r, err
 	}
@@ -201,8 +208,18 @@ func (s *Store) LibraryMatch(ctx context.Context, kind string, tmdbID int, title
 
 // ---- problems people report with an item ----
 
-// Issue kinds.
-var IssueKinds = []string{"video", "audio", "subtitles", "wrong", "other"}
+// Issue kinds. "language" is sound in the wrong language.
+var IssueKinds = []string{"video", "audio", "language", "subtitles", "wrong", "other"}
+
+// FixableIssues are the kinds Box Office fixes by itself, by getting
+// another copy: the others wait for an admin.
+var FixableIssues = []string{"video", "audio", "language", "wrong"}
+
+// Issue resolutions.
+const (
+	// IssueReplaced: another copy took the reported one's place.
+	IssueReplaced = "replaced"
+)
 
 type Issue struct {
 	ID         string `json:"id"`
@@ -215,15 +232,25 @@ type Issue struct {
 	Username   string `json:"username"`
 	CreatedAt  int64  `json:"createdAt"`
 	ResolvedAt int64  `json:"resolvedAt,omitempty"`
+	// Language is the language (ISO 639-1) the sound should be in, for
+	// the wrong language.
+	Language string `json:"language,omitempty"`
+	// RequestID is the request for another copy sent to Box Office for
+	// it, if any, and FileKey the reported file (see FileKey), to tell
+	// when another has taken its place.
+	RequestID string `json:"requestId,omitempty"`
+	FileKey   string `json:"-"`
 }
 
-const issueCols = `x.id, x.item_id, x.kind, x.note, x.resolved, x.resolution, x.user_id, COALESCE(u.username, ''), x.created_at, x.resolved_at`
+const issueCols = `x.id, x.item_id, x.kind, x.note, x.resolved, x.resolution, x.user_id, COALESCE(u.username, ''), x.created_at, x.resolved_at,
+	x.language, x.request_id, x.file_key`
 
 const issueFrom = ` FROM issues x LEFT JOIN users u ON u.id = x.user_id`
 
 func scanIssue(row scanner) (Issue, error) {
 	var x Issue
-	err := row.Scan(&x.ID, &x.ItemID, &x.Kind, &x.Note, &x.Resolved, &x.Resolution, &x.UserID, &x.Username, &x.CreatedAt, &x.ResolvedAt)
+	err := row.Scan(&x.ID, &x.ItemID, &x.Kind, &x.Note, &x.Resolved, &x.Resolution, &x.UserID, &x.Username, &x.CreatedAt, &x.ResolvedAt,
+		&x.Language, &x.RequestID, &x.FileKey)
 	if errors.Is(err, sql.ErrNoRows) {
 		return x, ErrNotFound
 	}
@@ -232,8 +259,8 @@ func scanIssue(row scanner) (Issue, error) {
 
 func (s *Store) CreateIssue(ctx context.Context, x Issue) (Issue, error) {
 	x.ID, x.CreatedAt = newID(), now()
-	_, err := s.db.ExecContext(ctx, "INSERT INTO issues (id, user_id, item_id, kind, note, resolved, resolution, created_at, resolved_at) VALUES (?, ?, ?, ?, ?, 0, '', ?, 0)",
-		x.ID, x.UserID, x.ItemID, x.Kind, strings.TrimSpace(x.Note), x.CreatedAt)
+	_, err := s.db.ExecContext(ctx, "INSERT INTO issues (id, user_id, item_id, kind, note, resolved, resolution, created_at, resolved_at, language, request_id, file_key) VALUES (?, ?, ?, ?, ?, 0, '', ?, 0, ?, ?, ?)",
+		x.ID, x.UserID, x.ItemID, x.Kind, strings.TrimSpace(x.Note), x.CreatedAt, x.Language, x.RequestID, x.FileKey)
 	if err != nil {
 		return x, err
 	}
@@ -278,11 +305,55 @@ func (s *Store) ResolveIssue(ctx context.Context, id, resolution string) error {
 	return nil
 }
 
+// SetIssueRequest links an issue to the request for another copy sent
+// to Box Office for it.
+func (s *Store) SetIssueRequest(ctx context.Context, id, requestID string) error {
+	_, err := s.db.ExecContext(ctx, "UPDATE issues SET request_id = ? WHERE id = ?", requestID, id)
+	return err
+}
+
+// FixingIssues are the open issues Box Office was asked to fix.
+func (s *Store) FixingIssues(ctx context.Context) ([]Issue, error) {
+	rows, err := s.db.QueryContext(ctx, "SELECT "+issueCols+issueFrom+" WHERE x.resolved = 0 AND x.request_id <> ''")
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	out := []Issue{}
+	for rows.Next() {
+		x, err := scanIssue(rows)
+		if err != nil {
+			return nil, err
+		}
+		out = append(out, x)
+	}
+	return out, rows.Err()
+}
+
+// FileKey says which file an item has, to notice another taking its
+// place: its path, size and modification time. "" for an item without
+// a file.
+func (s *Store) FileKey(ctx context.Context, itemID int64) (string, error) {
+	var path sql.NullString
+	var size, mtime sql.NullInt64
+	err := s.db.QueryRowContext(ctx, "SELECT path, size, mtime FROM items WHERE id = ?", itemID).Scan(&path, &size, &mtime)
+	if errors.Is(err, sql.ErrNoRows) {
+		return "", ErrNotFound
+	}
+	if err != nil || !path.Valid {
+		return "", err
+	}
+	return path.String + "|" + strconv.FormatInt(size.Int64, 10) + "|" + strconv.FormatInt(mtime.Int64, 10), nil
+}
+
 // Waiting counts pending requests and open issues, for admins' badge.
+// Issues Box Office is fixing, or whose fix is a pending request, don't
+// count.
 func (s *Store) Waiting(ctx context.Context) (requests, issues int, err error) {
 	err = s.db.QueryRowContext(ctx, `SELECT
 		(SELECT COUNT(*) FROM requests WHERE state = 'pending'),
-		(SELECT COUNT(*) FROM issues WHERE resolved = 0)`).Scan(&requests, &issues)
+		(SELECT COUNT(*) FROM issues x WHERE x.resolved = 0 AND NOT EXISTS
+			(SELECT 1 FROM requests r WHERE r.id = x.request_id AND r.state IN ('pending', 'approved')))`).Scan(&requests, &issues)
 	return
 }
 

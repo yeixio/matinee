@@ -516,7 +516,20 @@
     "whatsWrong": "Quel est le problème avec {{title}} ?",
     "details": "Détails (facultatif)",
     "detailsExample": "Par exemple : plus de son après 20 minutes",
-    "send": "Envoyer"
+    "send": "Envoyer",
+    "shouldBeIn": "Il devrait être en",
+    "shouldBeInShort": "devrait être en {{language}}",
+    "fixing": "Merci. Box Office récupère une autre copie, et vous serez prévenu quand elle sera là.",
+    "fixWaits": "Merci. Box Office récupérera une autre copie dès qu'un admin aura approuvé.",
+    "fixFailed": "Merci. Box Office n'a pas pu s'en charger, un admin va regarder.",
+    "boxOfficeFixes": "Box Office va bloquer la source de cette copie et en récupérer une autre. Vous serez prévenu quand elle sera là.",
+    "boxOfficeAfterAdmin": "Dès qu'un admin aura approuvé, Box Office récupérera une autre copie.",
+    "fix": {
+      "waiting": "En attente qu'un admin approuve une autre copie",
+      "fixing": "Box Office récupère une autre copie",
+      "failed": "Box Office n'a pas pu récupérer une autre copie.",
+      "fixed": "Corrigé avec une autre copie"
+    }
   },
   "quality": {
     "label": "Qualité",
@@ -1556,7 +1569,8 @@
     },
     "settings": {
       "approval": "Les autres éditions et les meilleures copies demandent toujours l’accord d’un admin",
-      "approvalDetail": "Même quand les demandes sont ajoutées tout de suite. Avec Box Office uniquement."
+      "approvalDetail": "Même quand les demandes sont ajoutées tout de suite. Avec Box Office uniquement.",
+      "approvalReports": "Les problèmes signalés aussi, que Box Office corrige sinon tout de suite."
     }
   }
 }

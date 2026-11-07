@@ -100,6 +100,16 @@ type BoxOfficeUpgrade struct {
 	Episode int    `json:"episodeNumber,omitempty"`
 	Want    string `json:"want"` // better, or replace (the copy there is bad)
 	Reason  string `json:"reason,omitempty"`
+	// Problem is what someone reported with the copy, for want replace,
+	// to a Box Office with "problems": wrong, language, video or audio;
+	// Language is the language (ISO 639-1) the sound should be in, for
+	// language; ReportedBy is who reported it.
+	Problem    string `json:"problem,omitempty"`
+	Language   string `json:"language,omitempty"`
+	ReportedBy string `json:"reportedBy,omitempty"`
+	// FileName is the reported file's name, so Box Office leaves its copy
+	// alone when it isn't that file (the title matched wrong here).
+	FileName string `json:"fileName,omitempty"`
 }
 
 // BoxOfficeAskUpgrade has Box Office look for a better copy, or another

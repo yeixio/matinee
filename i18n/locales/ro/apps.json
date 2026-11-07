@@ -676,5 +676,16 @@
         "other": "Altceva"
       }
     }
+  },
+  "report": {
+    "button": "Raportează o problemă",
+    "whatsWrong": "Ce nu e în regulă cu {{title}}?",
+    "thanks": "Mulțumim, un administrator se va uita.",
+    "shouldBeIn": "Ar trebui să fie în",
+    "fixing": "Mulțumim. Box Office aduce altă copie și vei fi anunțat când e gata.",
+    "fixWaits": "Mulțumim. Box Office va aduce altă copie după ce un admin aprobă.",
+    "fixFailed": "Mulțumim. Box Office nu a putut prelua asta, așa că un admin se va uita.",
+    "boxOfficeFixes": "Box Office va bloca sursa acestei copii și va aduce alta. Vei fi anunțat când e gata.",
+    "boxOfficeAfterAdmin": "După ce un admin aprobă, Box Office va aduce altă copie."
   }
 }

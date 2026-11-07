@@ -278,6 +278,7 @@
   "issue": {
     "video": "Gambar",
     "audio": "Suara",
+    "language": "Bahasa salah",
     "subtitles": "Subtitel",
     "wrong": "Judul salah",
     "other": "Hal lain"

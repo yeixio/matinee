@@ -508,7 +508,20 @@
     "whatsWrong": "《{{title}}》有什麼問題？",
     "details": "詳情（可選）",
     "detailsExample": "例如：20 分鐘後沒有聲音",
-    "send": "傳送"
+    "send": "傳送",
+    "shouldBeIn": "應為以下語言",
+    "shouldBeInShort": "應為{{language}}",
+    "fixing": "謝謝。Box Office 正在取得另一個副本，完成後會通知你。",
+    "fixWaits": "謝謝。管理員核准後，Box Office 會取得另一個副本。",
+    "fixFailed": "謝謝。Box Office 無法處理，管理員會查看。",
+    "boxOfficeFixes": "Box Office 會封鎖此副本的來源並取得另一個。完成後會通知你。",
+    "boxOfficeAfterAdmin": "管理員核准後，Box Office 會取得另一個副本。",
+    "fix": {
+      "waiting": "等待管理員核准另一個副本",
+      "fixing": "Box Office 正在取得另一個副本",
+      "failed": "Box Office 無法取得另一個副本。",
+      "fixed": "已用另一個副本修正"
+    }
   },
   "quality": {
     "label": "畫質",
@@ -1534,7 +1547,8 @@
     },
     "settings": {
       "approval": "其他版本和更好的副本一律需要管理員核准",
-      "approvalDetail": "即使要求會立即加入也一樣。僅限 Box Office。"
+      "approvalDetail": "即使要求會立即加入也一樣。僅限 Box Office。",
+      "approvalReports": "回報的問題也一樣，否則 Box Office 會立即修正。"
     }
   }
 }

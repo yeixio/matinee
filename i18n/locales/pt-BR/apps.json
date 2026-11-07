@@ -676,5 +676,16 @@
         "other": "Outra coisa"
       }
     }
+  },
+  "report": {
+    "button": "Informar um problema",
+    "whatsWrong": "O que há de errado com {{title}}?",
+    "thanks": "Obrigado, um administrador vai dar uma olhada.",
+    "shouldBeIn": "Deveria estar em",
+    "fixing": "Obrigado. O Box Office está buscando outra cópia, e você será avisado quando chegar.",
+    "fixWaits": "Obrigado. O Box Office buscará outra cópia assim que um admin aprovar.",
+    "fixFailed": "Obrigado. O Box Office não conseguiu cuidar disso, então um admin vai dar uma olhada.",
+    "boxOfficeFixes": "O Box Office vai bloquear a origem desta cópia e buscar outra. Você será avisado quando chegar.",
+    "boxOfficeAfterAdmin": "Assim que um admin aprovar, o Box Office buscará outra cópia."
   }
 }

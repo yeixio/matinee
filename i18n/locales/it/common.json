@@ -334,6 +334,7 @@
   "issue": {
     "video": "Immagine",
     "audio": "Audio",
+    "language": "Lingua sbagliata",
     "subtitles": "Sottotitoli",
     "wrong": "Titolo sbagliato",
     "other": "Altro"

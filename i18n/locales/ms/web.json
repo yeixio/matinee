@@ -508,7 +508,20 @@
     "whatsWrong": "Apa masalah dengan {{title}}?",
     "details": "Butiran (pilihan)",
     "detailsExample": "Contohnya: tiada bunyi selepas 20 minit",
-    "send": "Hantar"
+    "send": "Hantar",
+    "shouldBeIn": "Ia sepatutnya dalam bahasa",
+    "shouldBeInShort": "sepatutnya {{language}}",
+    "fixing": "Terima kasih. Box Office sedang mendapatkan salinan lain, dan anda akan dimaklumkan apabila siap.",
+    "fixWaits": "Terima kasih. Box Office akan mendapatkan salinan lain selepas admin meluluskan.",
+    "fixFailed": "Terima kasih. Box Office tidak dapat menguruskannya, jadi admin akan melihatnya.",
+    "boxOfficeFixes": "Box Office akan menyekat sumber salinan ini dan mendapatkan yang lain. Anda akan dimaklumkan apabila siap.",
+    "boxOfficeAfterAdmin": "Selepas admin meluluskan, Box Office akan mendapatkan salinan lain.",
+    "fix": {
+      "waiting": "Menunggu admin meluluskan salinan lain",
+      "fixing": "Box Office sedang mendapatkan salinan lain",
+      "failed": "Box Office tidak dapat mendapatkan salinan lain.",
+      "fixed": "Dibaiki dengan salinan lain"
+    }
   },
   "quality": {
     "label": "Kualiti",
@@ -1534,7 +1547,8 @@
     },
     "settings": {
       "approval": "Edisi lain dan salinan yang lebih baik sentiasa memerlukan kelulusan pentadbir",
-      "approvalDetail": "Walaupun permintaan ditambah serta-merta. Hanya dengan Box Office."
+      "approvalDetail": "Walaupun permintaan ditambah serta-merta. Hanya dengan Box Office.",
+      "approvalReports": "Juga masalah yang dilaporkan, yang biasanya terus dibaiki oleh Box Office."
     }
   }
 }

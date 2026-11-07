@@ -216,3 +216,106 @@ func TestEditionsAndCopiesFromBoxOffice(t *testing.T) {
 		t.Fatalf("bad want: %d", code)
 	}
 }
+
+// A problem someone reports goes to a Box Office that fixes problems, which
+// gets another copy; once another file is in, the report closes and the
+// person who made it is told.
+func TestReportedProblemsFixedByBoxOffice(t *testing.T) {
+	e := pairingSetup(t)
+	bo := arrtest.NewBoxOffice(t)
+	bo.Radarr.Pairing, bo.Radarr.Problems = true, true
+	bo.Radarr.Add(map[string]any{"tmdbId": 78, "title": "Blade Runner", "year": 1982, "hasFile": true})
+	if code := e.admin.do("PUT", "/api/v1/integrations/boxoffice", boxOfficeConfig{URL: bo.URL, APIKey: bo.Key}, nil); code != 200 {
+		t.Fatalf("connect: %d", code)
+	}
+	e.srv.ReadBoxOffice(t.Context())
+	ctx := t.Context()
+	path := "/api/v1/items/" + strconv.FormatInt(e.movie, 10) + "/issues"
+
+	var opts requestOptions
+	e.ellen.do("GET", "/api/v1/requests/options", nil, &opts)
+	if opts.BoxOffice == nil || !opts.BoxOffice.FixMovies || opts.BoxOffice.FixShows || opts.BoxOffice.ReportsNeedApproval {
+		t.Fatalf("options: %+v", opts.BoxOffice)
+	}
+
+	// The wrong language needs the language it should be in.
+	if code := e.ellen.do("POST", path, map[string]any{"kind": "language"}, nil); code != 400 {
+		t.Fatalf("no language: %d", code)
+	}
+	// Even with requests waiting for an admin (the default), Box Office
+	// is asked straight away.
+	var v issueView
+	if code := e.ellen.do("POST", path, map[string]any{"kind": "language", "language": "en", "note": "German dub"}, &v); code != 201 || v.Fix == nil || v.Fix.State != "fixing" {
+		t.Fatalf("report: %d %+v", code, v)
+	}
+	last := bo.Radarr.Asked[len(bo.Radarr.Asked)-1]
+	if last["path"] != "/boxoffice/upgrade" || last["want"] != "replace" || last["problem"] != "language" || last["language"] != "en" ||
+		last["reportedBy"] != "ellen" || last["reason"] != "German dub" || last["tmdbId"] != float64(78) || last["fileName"] != "Blade Runner.mkv" {
+		t.Fatalf("asked: %+v", last)
+	}
+	// It isn't waiting on an admin.
+	if _, issues, _ := e.db.Waiting(ctx); issues != 0 {
+		t.Fatalf("waiting: %d", issues)
+	}
+	// Subtitles aren't Box Office's to fix: they wait for an admin.
+	var subs issueView
+	e.ellen.do("POST", path, map[string]any{"kind": "subtitles"}, &subs)
+	if subs.Fix != nil || len(bo.Radarr.Asked) != 1 {
+		t.Fatalf("subtitles: %+v %d", subs, len(bo.Radarr.Asked))
+	}
+	if _, issues, _ := e.db.Waiting(ctx); issues != 1 {
+		t.Fatalf("waiting: %d", issues)
+	}
+
+	// Nothing changed yet: it stays open.
+	e.srv.settleIssues(ctx)
+	if x, _ := e.db.Issue(ctx, v.ID); x.Resolved {
+		t.Fatal("closed before a new copy is in")
+	}
+	// Another copy took its place.
+	year := 1982
+	e.db.UpsertFile(ctx, store.Item{LibraryID: v.Item.LibraryID, Kind: "movie", Title: "Blade Runner", Year: &year, Path: "/m/Blade Runner.mkv", Size: 5 << 30, Mtime: 1700000000})
+	e.srv.settleIssues(ctx)
+	x, _ := e.db.Issue(ctx, v.ID)
+	if !x.Resolved || x.Resolution != store.IssueReplaced {
+		t.Fatalf("not closed: %+v", x)
+	}
+	notes, _, _ := e.db.Notifications(ctx, []int64{e.ellenID}, 10)
+	if len(notes) == 0 || notes[0].Event != "issue.fixed" || notes[0].Title != "Another copy of Blade Runner is in" {
+		t.Fatalf("notifications: %+v", notes)
+	}
+	var list []issueView
+	e.ellen.do("GET", "/api/v1/issues", nil, &list)
+	for _, l := range list {
+		if l.ID == v.ID && (l.Fix == nil || l.Fix.State != "fixed") {
+			t.Fatalf("listed: %+v", l)
+		}
+	}
+
+	// With Settings making Box Office asks wait, Ellen's waits for an
+	// admin, and approving it sends it.
+	e.admin.do("PUT", "/api/v1/settings", map[string]any{"boxOfficeAsksNeedApproval": true}, nil)
+	v = issueView{}
+	if code := e.ellen.do("POST", path, map[string]any{"kind": "wrong"}, &v); code != 201 || v.Fix == nil || v.Fix.State != "waiting" {
+		t.Fatalf("report waiting: %d %+v", code, v)
+	}
+	if len(bo.Radarr.Asked) != 1 {
+		t.Fatalf("sent before approval: %+v", bo.Radarr.Asked)
+	}
+	if code := e.admin.do("POST", "/api/v1/requests/"+v.RequestID+"/approve", nil, nil); code != 200 {
+		t.Fatalf("approve: %d", code)
+	}
+	if last := bo.Radarr.Asked[len(bo.Radarr.Asked)-1]; last["problem"] != "wrong" || last["want"] != "replace" {
+		t.Fatalf("asked: %+v", last)
+	}
+
+	// A Box Office without "problems" gets nothing: the report waits for
+	// an admin, as before.
+	bo.Radarr.Problems = false
+	e.srv.ReadBoxOffice(ctx)
+	n := len(bo.Radarr.Asked)
+	var plain issueView
+	if e.ellen.do("POST", path, map[string]any{"kind": "video"}, &plain); plain.Fix != nil || len(bo.Radarr.Asked) != n {
+		t.Fatalf("without problems: %+v", plain)
+	}
+}

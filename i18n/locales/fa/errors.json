@@ -274,5 +274,6 @@
   "couldnt_start_playback_for_this_extra": "پخش این محتوای اضافی ممکن نشد",
   "no_such_extra": "چنین محتوای اضافی وجود ندارد",
   "only_an_admin_can_add_a_station_on_the_home_network": "فقط مدیر می‌تواند ایستگاهی در شبکه خانگی اضافه کند",
-  "startms_give_a_number_of_milliseconds": "startMs: تعدادی میلی‌ثانیه وارد کنید"
+  "startms_give_a_number_of_milliseconds": "startMs: تعدادی میلی‌ثانیه وارد کنید",
+  "say_which_language_it_should_be_in": "بگویید به چه زبانی باید باشد"
 }

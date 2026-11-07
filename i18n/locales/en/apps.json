@@ -669,5 +669,16 @@
         "other": "Something else"
       }
     }
+  },
+  "report": {
+    "button": "Report a problem",
+    "whatsWrong": "What's wrong with {{title}}?",
+    "thanks": "Thanks, an admin will take a look.",
+    "shouldBeIn": "It should be in",
+    "fixing": "Thanks. Box Office is getting another copy, and you'll be told when it's in.",
+    "fixWaits": "Thanks. Box Office will get another copy once an admin approves.",
+    "fixFailed": "Thanks. Box Office couldn't take this on, so an admin will take a look.",
+    "boxOfficeFixes": "Box Office will block where this copy came from and get another. You'll be told when it's in.",
+    "boxOfficeAfterAdmin": "Once an admin approves, Box Office will get another copy."
   }
 }

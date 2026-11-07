@@ -274,5 +274,6 @@
   "couldnt_start_playback_for_this_extra": "nie udało się odtworzyć tego dodatku",
   "no_such_extra": "nie ma takiego dodatku",
   "only_an_admin_can_add_a_station_on_the_home_network": "tylko administrator może dodać stację z sieci domowej",
-  "startms_give_a_number_of_milliseconds": "startMs: podaj liczbę milisekund"
+  "startms_give_a_number_of_milliseconds": "startMs: podaj liczbę milisekund",
+  "say_which_language_it_should_be_in": "podaj, w jakim języku powinien być"
 }

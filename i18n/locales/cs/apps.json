@@ -683,5 +683,16 @@
         "other": "Něco jiného"
       }
     }
+  },
+  "report": {
+    "button": "Nahlásit problém",
+    "whatsWrong": "Co je špatně s {{title}}?",
+    "thanks": "Díky, správce se na to podívá.",
+    "shouldBeIn": "Měl by být v jazyce",
+    "fixing": "Díky. Box Office stahuje jinou kopii a dáme vědět, až bude hotová.",
+    "fixWaits": "Díky. Box Office stáhne jinou kopii, jakmile to správce schválí.",
+    "fixFailed": "Díky. Box Office to nemohl převzít, takže se na to podívá správce.",
+    "boxOfficeFixes": "Box Office zablokuje zdroj této kopie a stáhne jinou. Dáme vědět, až bude hotová.",
+    "boxOfficeAfterAdmin": "Jakmile to správce schválí, Box Office stáhne jinou kopii."
   }
 }

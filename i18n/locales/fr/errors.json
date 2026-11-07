@@ -274,5 +274,6 @@
   "couldnt_start_playback_for_this_extra": "impossible de lire ce bonus",
   "no_such_extra": "bonus introuvable",
   "only_an_admin_can_add_a_station_on_the_home_network": "seul un administrateur peut ajouter une station du réseau domestique",
-  "startms_give_a_number_of_milliseconds": "startMs : indiquez un nombre de millisecondes"
+  "startms_give_a_number_of_milliseconds": "startMs : indiquez un nombre de millisecondes",
+  "say_which_language_it_should_be_in": "indiquez dans quelle langue il devrait être"
 }

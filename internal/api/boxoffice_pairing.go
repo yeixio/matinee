@@ -39,6 +39,7 @@ const (
 	featureProgress = "progress"
 	featureEditions = "editions"
 	featureUpgrades = "upgrades"
+	featureProblems = "problems"
 )
 
 // offers says an app goes to a Box Office that said it has a feature.
@@ -71,6 +72,12 @@ type pairingView struct {
 	// AsksNeedApproval says editions and copies this person asks for wait
 	// for an admin.
 	AsksNeedApproval bool `json:"asksNeedApproval"`
+	// FixMovies and FixShows say Box Office fixes problems reported with
+	// movies and episodes by itself, getting another copy ("problems").
+	FixMovies bool `json:"fixMovies"`
+	FixShows  bool `json:"fixShows"`
+	// ReportsNeedApproval says those fixes wait for an admin first.
+	ReportsNeedApproval bool `json:"reportsNeedApproval"`
 }
 
 // pairing is what Box Office offers, or nil without one.
@@ -80,14 +87,32 @@ func (s *Server) pairing(ctx context.Context, u store.User) (*pairingView, error
 		Editions:      s.boxOffices.offers(arr.Radarr, featureEditions),
 		UpgradeMovies: s.boxOffices.offers(arr.Radarr, featureUpgrades),
 		UpgradeShows:  s.boxOffices.offers(arr.Sonarr, featureUpgrades),
+		FixMovies:     s.boxOffices.offers(arr.Radarr, featureProblems),
+		FixShows:      s.boxOffices.offers(arr.Sonarr, featureProblems),
 	}
 	p.Upgrades = p.UpgradeMovies || p.UpgradeShows
 	if !p.Progress && !p.Editions && !p.Upgrades {
 		return nil, nil
 	}
 	need, err := s.asksNeedApproval(ctx, u)
+	if err != nil {
+		return nil, err
+	}
 	p.AsksNeedApproval = need
+	p.ReportsNeedApproval, err = s.reportsNeedApproval(ctx, u)
 	return &p, err
+}
+
+// reportsNeedApproval says whether the fix for a problem someone reports
+// waits for an admin: only when Settings makes what's asked of Box Office
+// always wait. Unlike asking for a copy, reporting a problem doesn't
+// follow the request setting, as a bad copy is no new title.
+func (s *Server) reportsNeedApproval(ctx context.Context, u store.User) (bool, error) {
+	if u.IsAdmin {
+		return false, nil
+	}
+	v, err := s.Store.Setting(ctx, settingAsksNeedApproval)
+	return v == "true", err
 }
 
 // asksNeedApproval says whether what someone asks Box Office for waits
@@ -504,6 +529,9 @@ func (s *Server) sendAsk(ctx context.Context, req store.Request) error {
 		return cl.BoxOfficeAskEdition(ctx, req.TMDBID, req.Edition, req.Mode)
 	case store.AskBetter, store.AskReplace:
 		u := arr.BoxOfficeUpgrade{Want: req.Ask, Reason: req.Reason}
+		if req.Problem != "" && s.boxOffices.offers(app, featureProblems) {
+			u.Problem, u.Language, u.ReportedBy, u.FileName = req.Problem, req.Language, req.Username, req.FileName
+		}
 		if req.Kind == "movie" {
 			u.TMDBID = req.TMDBID
 		} else {

@@ -278,6 +278,7 @@
   "issue": {
     "video": "画面",
     "audio": "声音",
+    "language": "语言不对",
     "subtitles": "字幕",
     "wrong": "标题错误",
     "other": "其他问题"

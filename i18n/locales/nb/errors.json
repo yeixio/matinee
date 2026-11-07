@@ -274,5 +274,6 @@
   "couldnt_start_playback_for_this_extra": "kunne ikke spille av dette ekstramaterialet",
   "no_such_extra": "ikke noe slikt ekstramateriale",
   "only_an_admin_can_add_a_station_on_the_home_network": "bare en administrator kan legge til en stasjon på hjemmenettverket",
-  "startms_give_a_number_of_milliseconds": "startMs: oppgi et antall millisekunder"
+  "startms_give_a_number_of_milliseconds": "startMs: oppgi et antall millisekunder",
+  "say_which_language_it_should_be_in": "si hvilket språk den skulle vært på"
 }

@@ -274,5 +274,6 @@
   "couldnt_start_playback_for_this_extra": "nu s-a putut reda acest material bonus",
   "no_such_extra": "nu există acest material bonus",
   "only_an_admin_can_add_a_station_on_the_home_network": "doar un administrator poate adăuga un post din rețeaua de acasă",
-  "startms_give_a_number_of_milliseconds": "startMs: indică un număr de milisecunde"
+  "startms_give_a_number_of_milliseconds": "startMs: indică un număr de milisecunde",
+  "say_which_language_it_should_be_in": "spune în ce limbă ar trebui să fie"
 }

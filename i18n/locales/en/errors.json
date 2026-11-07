@@ -178,6 +178,7 @@
   "say_hello_first": "say hello first",
   "say_what_to_play": "say what to play",
   "say_which_edition": "say which edition",
+  "say_which_language_it_should_be_in": "say which language it should be in",
   "say_which_title_kind_movie_or_show_and_tmdbid_or_tvdbid": "say which title: kind (movie or show) and tmdbId or tvdbId",
   "send_the_tmdb_id_tmdb_address_or_imdb_id_to_match_with": "send the TMDB id, TMDB address or IMDb id to match with",
   "set_up_email_or_a_webhook_first": "set up email or a webhook first",

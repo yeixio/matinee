@@ -662,5 +662,16 @@
         "other": "Lainnya"
       }
     }
+  },
+  "report": {
+    "button": "Laporkan masalah",
+    "whatsWrong": "Ada apa dengan {{title}}?",
+    "thanks": "Terima kasih, admin akan memeriksanya.",
+    "shouldBeIn": "Seharusnya dalam bahasa",
+    "fixing": "Terima kasih. Box Office sedang mengambil salinan lain, dan kamu akan diberi tahu saat siap.",
+    "fixWaits": "Terima kasih. Box Office akan mengambil salinan lain setelah admin menyetujui.",
+    "fixFailed": "Terima kasih. Box Office tidak bisa menanganinya, jadi admin akan memeriksanya.",
+    "boxOfficeFixes": "Box Office akan memblokir sumber salinan ini dan mengambil yang lain. Kamu akan diberi tahu saat siap.",
+    "boxOfficeAfterAdmin": "Setelah admin menyetujui, Box Office akan mengambil salinan lain."
   }
 }

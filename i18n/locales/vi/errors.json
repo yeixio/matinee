@@ -274,5 +274,6 @@
   "couldnt_start_playback_for_this_extra": "không thể phát nội dung bổ sung này",
   "no_such_extra": "không có nội dung bổ sung này",
   "only_an_admin_can_add_a_station_on_the_home_network": "chỉ quản trị viên mới có thể thêm đài trên mạng gia đình",
-  "startms_give_a_number_of_milliseconds": "startMs: hãy nhập số mili giây"
+  "startms_give_a_number_of_milliseconds": "startMs: hãy nhập số mili giây",
+  "say_which_language_it_should_be_in": "hãy cho biết lẽ ra là ngôn ngữ nào"
 }

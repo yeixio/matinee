@@ -274,5 +274,6 @@
   "couldnt_start_playback_for_this_extra": "یہ اضافی مواد نہیں چل سکا",
   "no_such_extra": "ایسا کوئی اضافی مواد نہیں",
   "only_an_admin_can_add_a_station_on_the_home_network": "ہوم نیٹ ورک پر اسٹیشن صرف ایڈمن شامل کر سکتا ہے",
-  "startms_give_a_number_of_milliseconds": "startMs: ملی سیکنڈ کی تعداد دیں"
+  "startms_give_a_number_of_milliseconds": "startMs: ملی سیکنڈ کی تعداد دیں",
+  "say_which_language_it_should_be_in": "بتائیں کہ یہ کس زبان میں ہونا چاہیے"
 }

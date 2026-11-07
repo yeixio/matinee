@@ -669,5 +669,16 @@
         "other": "Başka bir şey"
       }
     }
+  },
+  "report": {
+    "button": "Sorun bildir",
+    "whatsWrong": "{{title}} ile ilgili sorun ne?",
+    "thanks": "Teşekkürler, bir yönetici bakacak.",
+    "shouldBeIn": "Şu dilde olmalı",
+    "fixing": "Teşekkürler. Box Office başka bir kopya getiriyor, hazır olunca haber vereceğiz.",
+    "fixWaits": "Teşekkürler. Bir yönetici onaylayınca Box Office başka bir kopya getirecek.",
+    "fixFailed": "Teşekkürler. Box Office bunu üstlenemedi, bir yönetici bakacak.",
+    "boxOfficeFixes": "Box Office bu kopyanın kaynağını engelleyip başka bir kopya getirecek. Hazır olunca haber vereceğiz.",
+    "boxOfficeAfterAdmin": "Bir yönetici onaylayınca Box Office başka bir kopya getirecek."
   }
 }

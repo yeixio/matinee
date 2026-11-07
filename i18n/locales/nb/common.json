@@ -306,6 +306,7 @@
   "issue": {
     "video": "Bilde",
     "audio": "Lyd",
+    "language": "Feil språk",
     "subtitles": "Undertekster",
     "wrong": "Feil tittel",
     "other": "Noe annet"

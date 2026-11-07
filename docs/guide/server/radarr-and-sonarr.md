@@ -63,6 +63,24 @@ Under **Who can add movies and shows**, pick one:
 - **Requests:** admins see everyone's requests here and **Approve** or **Decline** them. Everyone else sees **Your requests** and where each one is up to.
 - **Problems:** reports from **Report a problem** on a title's page. An admin can **Close** one once it's sorted, or click **Replace file**, which deletes the file in Radarr or Sonarr and has it download another copy. Everyone else sees **Your reports**.
 
+### Problems Box Office fixes by itself
+
+<!-- since: v0.2.4 -->
+When [Box Office](https://github.com/yeixio/boxoffice) is connected, a problem with the copy itself fixes itself. On a movie's or episode's page, **Report a problem** and pick what's wrong:
+
+| Problem | What Box Office does |
+| --- | --- |
+| **Picture** or **Sound** | Blocks the release the copy came from and gets another. |
+| **Wrong language** | Asks which language it should be in (your app's language is picked to start with). Box Office skips releases whose names say they're only in other languages, prefers ones that name yours, and turns down a download whose sound turns out to be in another language again, trying the next one. |
+| **Wrong title** | The file is another movie or episode: Box Office blocks it and gets the right one. If the file isn't the copy Box Office has, Matinee has probably matched the title wrong, so nothing is replaced and the report waits for an admin, who can use **Fix match**. |
+
+The old copy moves to Box Office's recycle folder once the new one is in, so a mistaken report is easy to undo. When the new copy arrives, the report closes by itself and whoever reported it is told in the bell (and on their phone, if they [get notifications](/docs/apps/notifications/)). Until then, **Requests → Problems** says Box Office is getting another copy, and Box Office shows what was reported, and by whom, on the movie's or show's page.
+
+Reports go to Box Office straight away, whoever makes them and whatever **Who can add movies and shows** says, since a bad copy isn't a new title. To check each one first, turn on **Other editions and better copies always need an admin's approval** under **Settings → Add-ons → Box Office**: reports then wait under **Requests**, and approving one sends it. Admins' own reports always go straight through.
+
+**Subtitles** and **Something else** still go to an admin, as do reports for titles Box Office doesn't have, and every report when Box Office isn't connected. For subtitles, try [finding subtitles](/docs/watching/finding-subtitles/) in the player first.
+<!-- /since -->
+
 ## Discover from Box Office
 
 <!-- since: v0.2.3 -->

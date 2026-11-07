@@ -274,5 +274,6 @@
   "couldnt_start_playback_for_this_extra": "无法播放此花絮",
   "no_such_extra": "没有这个花絮",
   "only_an_admin_can_add_a_station_on_the_home_network": "只有管理员可以添加家庭网络上的电台",
-  "startms_give_a_number_of_milliseconds": "startMs：请填写毫秒数"
+  "startms_give_a_number_of_milliseconds": "startMs：请填写毫秒数",
+  "say_which_language_it_should_be_in": "请说明应为哪种语言"
 }

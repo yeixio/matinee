@@ -512,7 +512,20 @@
     "whatsWrong": "Wat is er mis met {{title}}?",
     "details": "Details (optioneel)",
     "detailsExample": "Bijvoorbeeld: geen geluid na 20 minuten",
-    "send": "Versturen"
+    "send": "Versturen",
+    "shouldBeIn": "Het zou moeten zijn in het",
+    "shouldBeInShort": "zou {{language}} moeten zijn",
+    "fixing": "Bedankt. Box Office haalt een andere kopie, en je hoort het als die er is.",
+    "fixWaits": "Bedankt. Box Office haalt een andere kopie zodra een beheerder het goedkeurt.",
+    "fixFailed": "Bedankt. Box Office kon dit niet oppakken, dus een beheerder kijkt ernaar.",
+    "boxOfficeFixes": "Box Office blokkeert waar deze kopie vandaan kwam en haalt een andere. Je hoort het als die er is.",
+    "boxOfficeAfterAdmin": "Zodra een beheerder het goedkeurt, haalt Box Office een andere kopie.",
+    "fix": {
+      "waiting": "Wacht tot een beheerder een andere kopie goedkeurt",
+      "fixing": "Box Office haalt een andere kopie",
+      "failed": "Box Office kon geen andere kopie halen.",
+      "fixed": "Opgelost met een andere kopie"
+    }
   },
   "quality": {
     "label": "Kwaliteit",
@@ -1545,7 +1558,8 @@
     },
     "settings": {
       "approval": "Andere edities en betere kopieën hebben altijd goedkeuring van een beheerder nodig",
-      "approvalDetail": "Ook als verzoeken meteen worden toegevoegd. Alleen met Box Office."
+      "approvalDetail": "Ook als verzoeken meteen worden toegevoegd. Alleen met Box Office.",
+      "approvalReports": "Ook gemelde problemen, die Box Office anders meteen oplost."
     }
   }
 }

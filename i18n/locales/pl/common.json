@@ -362,6 +362,7 @@
   "issue": {
     "video": "Obraz",
     "audio": "Dźwięk",
+    "language": "Zły język",
     "subtitles": "Napisy",
     "wrong": "Zły tytuł",
     "other": "Coś innego"

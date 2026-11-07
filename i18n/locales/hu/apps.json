@@ -669,5 +669,16 @@
         "other": "Valami más"
       }
     }
+  },
+  "report": {
+    "button": "Probléma jelentése",
+    "whatsWrong": "Mi a baj ezzel: {{title}}?",
+    "thanks": "Köszönjük, egy rendszergazda megnézi.",
+    "shouldBeIn": "Ezen a nyelven kellene lennie",
+    "fixing": "Köszönjük. A Box Office szerez egy másik másolatot, és szólunk, ha megvan.",
+    "fixWaits": "Köszönjük. A Box Office szerez egy másik másolatot, amint egy admin jóváhagyja.",
+    "fixFailed": "Köszönjük. A Box Office nem tudta átvenni, ezért egy admin nézi meg.",
+    "boxOfficeFixes": "A Box Office letiltja ennek a másolatnak a forrását, és szerez egy másikat. Szólunk, ha megvan.",
+    "boxOfficeAfterAdmin": "Amint egy admin jóváhagyja, a Box Office szerez egy másik másolatot."
   }
 }

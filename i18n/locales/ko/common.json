@@ -278,6 +278,7 @@
   "issue": {
     "video": "화면",
     "audio": "소리",
+    "language": "잘못된 언어",
     "subtitles": "자막",
     "wrong": "제목이 틀림",
     "other": "기타"

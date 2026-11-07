@@ -512,7 +512,20 @@
     "whatsWrong": "Mi a baj ezzel: {{title}}?",
     "details": "Részletek (nem kötelező)",
     "detailsExample": "Pl.: 20 perc után nincs hang",
-    "send": "Küldés"
+    "send": "Küldés",
+    "shouldBeIn": "Ezen a nyelven kellene lennie",
+    "shouldBeInShort": "{{language}} kellene legyen",
+    "fixing": "Köszönjük. A Box Office szerez egy másik másolatot, és szólunk, ha megvan.",
+    "fixWaits": "Köszönjük. A Box Office szerez egy másik másolatot, amint egy admin jóváhagyja.",
+    "fixFailed": "Köszönjük. A Box Office nem tudta átvenni, ezért egy admin nézi meg.",
+    "boxOfficeFixes": "A Box Office letiltja ennek a másolatnak a forrását, és szerez egy másikat. Szólunk, ha megvan.",
+    "boxOfficeAfterAdmin": "Amint egy admin jóváhagyja, a Box Office szerez egy másik másolatot.",
+    "fix": {
+      "waiting": "Arra vár, hogy egy admin jóváhagyjon egy másik másolatot",
+      "fixing": "A Box Office másik másolatot szerez",
+      "failed": "A Box Office nem tudott másik másolatot szerezni.",
+      "fixed": "Másik másolattal javítva"
+    }
   },
   "quality": {
     "label": "Minőség",
@@ -1545,7 +1558,8 @@
     },
     "settings": {
       "approval": "A más kiadásokhoz és jobb másolatokhoz mindig admin jóváhagyása kell",
-      "approvalDetail": "Akkor is, ha a kérések azonnal bekerülnek. Csak Box Office-szal."
+      "approvalDetail": "Akkor is, ha a kérések azonnal bekerülnek. Csak Box Office-szal.",
+      "approvalReports": "A bejelentett problémák is, amelyeket a Box Office egyébként azonnal javít."
     }
   }
 }

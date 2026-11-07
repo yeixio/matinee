@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link, useSearchParams } from 'react-router-dom'
 import { api, type Issue, type Title, type TitleKind, type TitleRequest, type User } from '../api'
-import { issueKindLabel, RemotePoster, useRequestOptions } from '../components/Arr'
+import { issueKindLabel, languageName, RemotePoster, useRequestOptions } from '../components/Arr'
 import { askLabel } from '../components/BoxOffice'
 import { Button, EmptyState, Spinner } from '../components/ui'
 import { episodeCode } from '../format'
@@ -356,9 +356,16 @@ function Problems({ admin }: { admin: boolean }) {
             </div>
             <div className="text-xs text-muted">
               {issueKindLabel(x.kind)}
+              {x.language && ` (${t('report.shouldBeInShort', { language: languageName(x.language) })})`}
               {admin && ` · ${x.username}`} · {ago(x.createdAt)}
               {x.resolved && ` · ${x.resolution === 'replaced' ? t('requests.fileReplaced') : t('requests.closed')}`}
             </div>
+            {!x.resolved && x.fix && (
+              <p className={`mt-1 text-sm ${x.fix.state === 'failed' ? 'text-danger' : 'text-accent'}`}>
+                {t(`report.fix.${x.fix.state}`)}
+                {admin && x.fix.error && ` ${x.fix.error}`}
+              </p>
+            )}
             {x.note && <p className="mt-1 text-sm text-text/85">{x.note}</p>}
           </div>
           {admin && !x.resolved && (

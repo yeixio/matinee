@@ -306,6 +306,7 @@
   "issue": {
     "video": "Kép",
     "audio": "Hang",
+    "language": "Rossz nyelv",
     "subtitles": "Feliratok",
     "wrong": "Rossz cím",
     "other": "Valami más"

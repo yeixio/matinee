@@ -3,7 +3,7 @@ import { Flag, X } from 'lucide-react'
 import { useState, type FormEvent } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
-import { api, type IssueKind, type Item, type Upcoming, type User } from '../api'
+import { api, fixableIssues, type BoxOfficePairing, type Issue, type IssueKind, type Item, type Upcoming, type User } from '../api'
 import { episodeCode, hue } from '../format'
 import i18n, { formatLocale } from '../i18n'
 import { Row, RowItem } from './Row'
@@ -125,28 +125,75 @@ export function ComingSoonRow() {
   )
 }
 
-export const issueKinds: IssueKind[] = ['video', 'audio', 'subtitles', 'wrong', 'other']
+export const issueKinds: IssueKind[] = ['video', 'audio', 'language', 'subtitles', 'wrong', 'other']
 export const issueKindLabel = (kind: string) => i18n.t(`common:issue.${kind}`, { defaultValue: kind })
 
-// Report a problem with an item, for an admin to fix.
+// Languages a copy reported in the wrong language can be wanted in (those
+// Box Office knows release names and audio tracks by).
+export const reportLanguages = [
+  'en', 'es', 'fr', 'de', 'it', 'pt', 'nl', 'sv', 'no', 'da', 'fi', 'pl', 'cs', 'hu',
+  'ru', 'uk', 'tr', 'el', 'ja', 'ko', 'zh', 'hi', 'ta', 'te', 'ar', 'he', 'th', 'vi',
+]
+
+/** languageName is a language's name in the app's language, from its ISO 639-1 code. */
+export function languageName(code: string) {
+  try {
+    return new Intl.DisplayNames([formatLocale()], { type: 'language' }).of(code) ?? code
+  } catch {
+    return code
+  }
+}
+
+/** The language a copy is most likely wanted in: the app's own, when it's one of reportLanguages. */
+export function defaultReportLanguage() {
+  const base = (i18n.language || 'en').split('-')[0].replace('nb', 'no')
+  return reportLanguages.includes(base) ? base : 'en'
+}
+
+/** Whether Box Office fixes a problem of this kind with this item by itself. */
+export function boxOfficeFixes(opts: { boxOffice?: BoxOfficePairing } | undefined, item: Item, kind: IssueKind) {
+  const bo = opts?.boxOffice
+  if (!fixableIssues.includes(kind)) return false
+  return item.kind === 'movie' ? !!bo?.fixMovies : item.kind === 'episode' && !!bo?.fixShows
+}
+
+/** reportedMessage says what happens next to a problem someone just reported. */
+export function reportedMessage(x: Issue) {
+  switch (x.fix?.state) {
+    case 'fixing':
+      return i18n.t('report.fixing')
+    case 'waiting':
+      return i18n.t('report.fixWaits')
+    case 'failed':
+      return i18n.t('report.fixFailed')
+  }
+  return i18n.t('report.thanks')
+}
+
+// Report a problem with an item. With Box Office, problems with the copy
+// itself (picture, sound, language, wrong title) are fixed by Box Office
+// getting another; the rest are for an admin.
 export function ReportProblem({ item }: { item: Item }) {
   const { t } = useTranslation()
   const qc = useQueryClient()
   const { data: opts } = useRequestOptions()
   const [open, setOpen] = useState(false)
   const [kind, setKind] = useState<IssueKind>('video')
+  const [language, setLanguage] = useState(defaultReportLanguage)
   const [note, setNote] = useState('')
   const report = useMutation({
-    mutationFn: () => api.reportIssue(item.id, kind, note),
+    mutationFn: () => api.reportIssue(item.id, kind, note, kind === 'language' ? language : ''),
     onSuccess: () => {
       setNote('')
       qc.invalidateQueries({ queryKey: ['issues'] })
+      qc.invalidateQueries({ queryKey: ['requests'] })
+      qc.invalidateQueries({ queryKey: ['comingSoon'] })
       qc.invalidateQueries({ queryKey: ['requestOptions'] })
     },
   })
   if (!opts?.canReport) return null
   if (report.isSuccess && !open) {
-    return <span className="flex h-10 items-center text-sm text-muted">{t('report.thanks')}</span>
+    return <span className="flex min-h-10 max-w-md items-center text-sm text-muted">{reportedMessage(report.data)}</span>
   }
   if (!open) {
     return (
@@ -155,6 +202,7 @@ export function ReportProblem({ item }: { item: Item }) {
       </Button>
     )
   }
+  const fixes = boxOfficeFixes(opts, item, kind)
   const submit = (e: FormEvent) => {
     e.preventDefault()
     report.mutate(undefined, { onSuccess: () => setOpen(false) })
@@ -173,6 +221,7 @@ export function ReportProblem({ item }: { item: Item }) {
             type="button"
             key={k}
             onClick={() => setKind(k)}
+            aria-pressed={kind === k}
             className={`rounded-full border px-3 py-1.5 text-sm transition-colors ${
               kind === k ? 'border-accent bg-accent/10 text-text' : 'border-line text-muted hover:border-faint'
             }`}
@@ -181,6 +230,20 @@ export function ReportProblem({ item }: { item: Item }) {
           </button>
         ))}
       </div>
+      {kind === 'language' && (
+        <Field label={t('report.shouldBeIn')}>
+          <select className={inputClass} value={language} onChange={(e) => setLanguage(e.target.value)}>
+            {reportLanguages
+              .map((code) => ({ code, name: languageName(code) }))
+              .sort((a, b) => a.name.localeCompare(b.name))
+              .map((l) => (
+                <option key={l.code} value={l.code}>
+                  {l.name}
+                </option>
+              ))}
+          </select>
+        </Field>
+      )}
       <Field label={t('report.details')}>
         <textarea
           className={`${inputClass} h-20 py-2`}
@@ -190,6 +253,11 @@ export function ReportProblem({ item }: { item: Item }) {
           placeholder={t('report.detailsExample')}
         />
       </Field>
+      {fixes && (
+        <p className="text-sm text-muted">
+          {opts?.boxOffice?.reportsNeedApproval ? t('report.boxOfficeAfterAdmin') : t('report.boxOfficeFixes')}
+        </p>
+      )}
       {report.error && <p className="text-sm text-danger">{report.error.message}</p>}
       <div className="flex justify-end">
         <Button variant="primary" disabled={report.isPending}>
