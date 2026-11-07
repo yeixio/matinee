@@ -43,6 +43,7 @@ type Scanner struct {
 	running map[int64]bool
 	since   map[int64]time.Time  // when each running scan started
 	last    map[int64]ScanReport // each library's last full scan
+	stuck   map[string]bool      // library folders whose check hasn't come back
 }
 
 // ScanReport is how a library's last full scan went, for the admin dashboard.
@@ -246,7 +247,7 @@ func (s *Scanner) run(ctx context.Context, lib store.Library, paths []string) (S
 		ok, checked := rootOK[root]
 		if !checked {
 			// An empty folder is usually a share that isn't mounted yet, too.
-			entries, err := os.ReadDir(root)
+			entries, err := s.readRoot(root)
 			if ok = err == nil && len(entries) > 0; !ok {
 				s.Log.Warn("library folder missing or empty; keeping its items", "library", lib.Name, "path", root, "err", err)
 			}
@@ -585,4 +586,50 @@ func (s *Scanner) indexFile(ctx context.Context, kind Kind, lib store.Library, r
 func isUnprobed(k Kind) bool {
 	_, ok := k.(Unprobed)
 	return ok
+}
+
+// rootWait is how long a library folder may take to list before a scan
+// skips it. A network share whose server stopped answering can hang a
+// read for minutes while the kernel reconnects.
+var rootWait = 15 * time.Second
+
+// readDir is os.ReadDir, swapped in tests.
+var readDir = os.ReadDir
+
+// errNotAnswering is a library folder that didn't list within rootWait.
+var errNotAnswering = errors.New("not answering (is the network share down?)")
+
+// readRoot lists a library folder, giving up after rootWait so a share that
+// stopped answering skips its library instead of holding up the scan. Its
+// items are kept, as for a share that isn't mounted. A folder whose last
+// read is still stuck isn't read again until that one returns.
+func (s *Scanner) readRoot(root string) ([]os.DirEntry, error) {
+	s.mu.Lock()
+	if s.stuck[root] {
+		s.mu.Unlock()
+		return nil, errNotAnswering
+	}
+	if s.stuck == nil {
+		s.stuck = map[string]bool{}
+	}
+	s.stuck[root] = true
+	s.mu.Unlock()
+	type result struct {
+		entries []os.DirEntry
+		err     error
+	}
+	done := make(chan result, 1)
+	go func() {
+		entries, err := readDir(root)
+		s.mu.Lock()
+		delete(s.stuck, root)
+		s.mu.Unlock()
+		done <- result{entries, err}
+	}()
+	select {
+	case r := <-done:
+		return r.entries, r.err
+	case <-time.After(rootWait):
+		return nil, errNotAnswering
+	}
 }
