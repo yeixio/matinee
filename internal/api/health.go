@@ -8,6 +8,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"slices"
 	"strconv"
 	"strings"
 	"sync"
@@ -314,19 +315,30 @@ func (s *Server) disks(uses []healthUse) []healthDisk {
 		results[i] = *byPath[paths[i]]
 	}
 	out := []healthDisk{}
-	index := map[health.Disk]int{}
 	for i, u := range uses {
 		res := results[i]
 		if res.ok {
-			if j, ok := index[res.d]; ok {
+			if j := slices.IndexFunc(out, func(o healthDisk) bool { return o.Reachable && sameDisk(o.Disk, res.d) }); j >= 0 {
 				out[j].Uses = append(out[j].Uses, u)
 				continue
 			}
-			index[res.d] = len(out)
 		}
 		out = append(out, healthDisk{Disk: res.d, Reachable: res.ok, Uses: []healthUse{u}})
 	}
 	return out
+}
+
+// sameDisk says whether two folders' readings are of one disk: the same
+// size, and free space a moment apart. Shares of one NAS each report its
+// whole disk, but files written between the readings change the free
+// space, and comparing it exactly listed (and alerted about) one disk once
+// per share.
+func sameDisk(a, b health.Disk) bool {
+	const drift = 1 << 30 // 1 GiB
+	if a.Total != b.Total {
+		return false
+	}
+	return max(a.Free, b.Free)-min(a.Free, b.Free) <= drift
 }
 
 // diskWait is how long the dashboard waits for a folder's disk. A network
