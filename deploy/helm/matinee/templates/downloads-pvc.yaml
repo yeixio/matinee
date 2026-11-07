@@ -13,5 +13,5 @@ spec:
   {{- end }}
   resources:
     requests:
-      storage: {{ $p.size }}
+      storage: {{ include "matinee.pvcSize" (dict "ctx" $ "name" (printf "%s-downloads" (include "matinee.fullname" .)) "size" $p.size) }}
 {{- end }}
