@@ -444,6 +444,19 @@
               }
             },
             {
+              "name": "Scrub by sliding on the remote",
+              "doc": "/docs/apps/phone-and-tv/#watching-on-a-tv",
+              "since": "v0.2.4",
+              "apps": {
+                "web": {"na": "Drag along the bar instead"},
+                "ios": {"na": "Drag along the bar instead"},
+                "android": {"na": "Drag along the bar instead"},
+                "appletv": true,
+                "androidtv": {"na": "Its remotes have no touch surface"},
+                "tvweb": {"na": "Their remotes have no touch surface"}
+              }
+            },
+            {
               "name": "Sleep timer",
               "doc": "/docs/watching/playing/#sleep-timer",
               "since": "v0.1.1",
