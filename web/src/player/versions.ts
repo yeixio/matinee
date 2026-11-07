@@ -3,6 +3,7 @@
 // and otherwise the one that suits this screen plays.
 import type { HDR, Version } from '../api'
 import { hdrLabel, sizeLabel } from '../media'
+import { duration } from '../format'
 
 /** resolutionLabel names a picture height the way people know it. */
 export function resolutionLabel(height?: number): string {
@@ -23,9 +24,14 @@ export function versionLabel(v: Version): string {
   return [resolutionLabel(v.height), hdr && hdrLabel[hdr], v.edition].filter(Boolean).join(' · ')
 }
 
-/** versionDetail is the smaller print: size and codecs. */
+/**
+ * versionDetail is the smaller print: how long a cut runs (an edition is
+ * often told apart by its length alone), then size and codecs.
+ */
 export function versionDetail(v: Version): string {
-  return [v.size ? sizeLabel(v.size) : '', v.videoCodec?.toUpperCase(), v.container?.toUpperCase()].filter(Boolean).join(' · ')
+  return [v.edition && v.durationMs ? duration(v.durationMs) : '', v.size ? sizeLabel(v.size) : '', v.videoCodec?.toUpperCase(), v.container?.toUpperCase()]
+    .filter(Boolean)
+    .join(' · ')
 }
 
 export type PickOptions = {

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import type { Version } from '../api'
-import { pickVersion, resolutionLabel, versionLabel } from './versions'
+import { pickVersion, resolutionLabel, versionDetail, versionLabel } from './versions'
 
 const uhd: Version = { id: 1, height: 2160, width: 3840, mediaTags: ['4k', 'hdr', 'dolby-vision'] }
 const hd: Version = { id: 2, height: 1080, width: 1920, edition: "Director's Cut" }
@@ -11,6 +11,10 @@ describe('versions', () => {
     expect(versionLabel(uhd)).toBe('4K · Dolby Vision')
     expect(versionLabel(hd)).toBe("1080p · Director's Cut")
     expect(resolutionLabel(800)).toBe('720p')
+  })
+  it('says how long a cut runs', () => {
+    expect(versionDetail({ ...hd, durationMs: 201 * 60000, container: 'mkv' })).toMatch(/3.*21.*MKV/)
+    expect(versionDetail({ ...sd, durationMs: 201 * 60000, container: 'mkv' })).toBe('MKV')
   })
   it('picks the biggest picture that fits the screen', () => {
     expect(pickVersion([uhd, hd, sd], { maxHeight: 1080 })?.id).toBe(2)
