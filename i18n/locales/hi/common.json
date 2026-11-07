@@ -306,6 +306,7 @@
   "issue": {
     "video": "तस्वीर",
     "audio": "आवाज़",
+    "language": "गलत भाषा",
     "subtitles": "सबटाइटल",
     "wrong": "गलत शीर्षक",
     "other": "कुछ और"

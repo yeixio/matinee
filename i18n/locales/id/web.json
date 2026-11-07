@@ -508,7 +508,20 @@
     "whatsWrong": "Ada apa dengan {{title}}?",
     "details": "Detail (opsional)",
     "detailsExample": "Misalnya: tidak ada suara setelah 20 menit",
-    "send": "Kirim"
+    "send": "Kirim",
+    "shouldBeIn": "Seharusnya dalam bahasa",
+    "shouldBeInShort": "seharusnya {{language}}",
+    "fixing": "Terima kasih. Box Office sedang mengambil salinan lain, dan kamu akan diberi tahu saat siap.",
+    "fixWaits": "Terima kasih. Box Office akan mengambil salinan lain setelah admin menyetujui.",
+    "fixFailed": "Terima kasih. Box Office tidak bisa menanganinya, jadi admin akan memeriksanya.",
+    "boxOfficeFixes": "Box Office akan memblokir sumber salinan ini dan mengambil yang lain. Kamu akan diberi tahu saat siap.",
+    "boxOfficeAfterAdmin": "Setelah admin menyetujui, Box Office akan mengambil salinan lain.",
+    "fix": {
+      "waiting": "Menunggu admin menyetujui salinan lain",
+      "fixing": "Box Office sedang mengambil salinan lain",
+      "failed": "Box Office tidak bisa mengambil salinan lain.",
+      "fixed": "Diperbaiki dengan salinan lain"
+    }
   },
   "quality": {
     "label": "Kualitas",
@@ -1534,7 +1547,8 @@
     },
     "settings": {
       "approval": "Edisi lain dan salinan yang lebih baik selalu perlu persetujuan admin",
-      "approvalDetail": "Meskipun permintaan langsung ditambahkan. Hanya dengan Box Office."
+      "approvalDetail": "Meskipun permintaan langsung ditambahkan. Hanya dengan Box Office.",
+      "approvalReports": "Juga masalah yang dilaporkan, yang biasanya langsung diperbaiki Box Office."
     }
   }
 }

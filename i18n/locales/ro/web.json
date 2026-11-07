@@ -516,7 +516,20 @@
     "whatsWrong": "Ce nu e în regulă cu {{title}}?",
     "details": "Detalii (opțional)",
     "detailsExample": "De ex.: fără sunet după 20 de minute",
-    "send": "Trimite"
+    "send": "Trimite",
+    "shouldBeIn": "Ar trebui să fie în",
+    "shouldBeInShort": "ar trebui să fie în {{language}}",
+    "fixing": "Mulțumim. Box Office aduce altă copie și vei fi anunțat când e gata.",
+    "fixWaits": "Mulțumim. Box Office va aduce altă copie după ce un admin aprobă.",
+    "fixFailed": "Mulțumim. Box Office nu a putut prelua asta, așa că un admin se va uita.",
+    "boxOfficeFixes": "Box Office va bloca sursa acestei copii și va aduce alta. Vei fi anunțat când e gata.",
+    "boxOfficeAfterAdmin": "După ce un admin aprobă, Box Office va aduce altă copie.",
+    "fix": {
+      "waiting": "Așteaptă ca un admin să aprobe altă copie",
+      "fixing": "Box Office aduce altă copie",
+      "failed": "Box Office nu a putut aduce altă copie.",
+      "fixed": "Rezolvat cu altă copie"
+    }
   },
   "quality": {
     "label": "Calitate",
@@ -1556,7 +1569,8 @@
     },
     "settings": {
       "approval": "Alte ediții și copii mai bune au mereu nevoie de aprobarea unui administrator",
-      "approvalDetail": "Chiar și când cererile sunt adăugate imediat. Doar cu Box Office."
+      "approvalDetail": "Chiar și când cererile sunt adăugate imediat. Doar cu Box Office.",
+      "approvalReports": "Și problemele raportate, pe care altfel Box Office le rezolvă imediat."
     }
   }
 }

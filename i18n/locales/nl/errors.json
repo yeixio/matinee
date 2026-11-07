@@ -274,5 +274,6 @@
   "couldnt_start_playback_for_this_extra": "kon deze extra niet afspelen",
   "no_such_extra": "die extra bestaat niet",
   "only_an_admin_can_add_a_station_on_the_home_network": "alleen een beheerder kan een zender op het thuisnetwerk toevoegen",
-  "startms_give_a_number_of_milliseconds": "startMs: geef een aantal milliseconden op"
+  "startms_give_a_number_of_milliseconds": "startMs: geef een aantal milliseconden op",
+  "say_which_language_it_should_be_in": "zeg in welke taal het zou moeten zijn"
 }

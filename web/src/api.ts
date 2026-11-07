@@ -297,6 +297,12 @@ export type BoxOfficePairing = {
   upgradeMovies: boolean
   upgradeShows: boolean
   asksNeedApproval: boolean
+  // fixMovies, fixShows: Box Office fixes problems reported with movies and
+  // episodes by itself, getting another copy; reportsNeedApproval: this
+  // account's reports wait for an admin first.
+  fixMovies?: boolean
+  fixShows?: boolean
+  reportsNeedApproval?: boolean
 }
 
 // A title on its way from Box Office: searching (asked for, not found yet),
@@ -424,7 +430,12 @@ export type Upcoming = {
   tmdbId?: number
 }
 
-export type IssueKind = 'video' | 'audio' | 'subtitles' | 'wrong' | 'other'
+export type IssueKind = 'video' | 'audio' | 'language' | 'subtitles' | 'wrong' | 'other'
+// The kinds Box Office fixes by itself, by getting another copy.
+export const fixableIssues: IssueKind[] = ['video', 'audio', 'language', 'wrong']
+// Where Box Office's fix for a reported problem stands: waiting for an
+// admin, fixing (getting another copy), failed, or fixed.
+export type IssueFix = { state: 'waiting' | 'fixing' | 'failed' | 'fixed'; error?: string }
 export type Issue = {
   id: string
   itemId: number
@@ -438,6 +449,10 @@ export type Issue = {
   username: string
   createdAt: number
   resolvedAt?: number
+  // The language (ISO 639-1) the sound should be in, for language.
+  language?: string
+  requestId?: string
+  fix?: IssueFix
 }
 
 export type Device = {
@@ -1558,7 +1573,8 @@ export const api = {
     request<{ app: ArrApp; qualityProfileId: number; qualityProfiles: QualityProfile[] }>('GET', `/api/v1/items/${id}/quality`),
   setItemQuality: (id: number, qualityProfileId: number) =>
     request<{ app: ArrApp; qualityProfileId: number; qualityProfiles: QualityProfile[] }>('PUT', `/api/v1/items/${id}/quality`, { qualityProfileId }),
-  reportIssue: (id: number, kind: IssueKind, note: string) => request<Issue>('POST', `/api/v1/items/${id}/issues`, { kind, note }),
+  reportIssue: (id: number, kind: IssueKind, note: string, language = '') =>
+    request<Issue>('POST', `/api/v1/items/${id}/issues`, { kind, note, language }),
   issues: (all = false) => request<Issue[]>('GET', `/api/v1/issues${all ? '?all=1' : ''}`),
   resolveIssue: (id: string) => request<void>('POST', `/api/v1/issues/${id}/resolve`),
   replaceIssueFile: (id: string) => request<void>('POST', `/api/v1/issues/${id}/replace`),

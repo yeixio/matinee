@@ -362,6 +362,7 @@
   "issue": {
     "video": "Obraz",
     "audio": "Zvuk",
+    "language": "Špatný jazyk",
     "subtitles": "Titulky",
     "wrong": "Špatný název",
     "other": "Něco jiného"

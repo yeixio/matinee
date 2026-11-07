@@ -512,7 +512,20 @@
     "whatsWrong": "Hva er galt med {{title}}?",
     "details": "Detaljer (valgfritt)",
     "detailsExample": "F.eks.: ingen lyd etter 20 minutter",
-    "send": "Send"
+    "send": "Send",
+    "shouldBeIn": "Den skulle vært på",
+    "shouldBeInShort": "skulle vært på {{language}}",
+    "fixing": "Takk. Box Office henter en annen kopi, og du får beskjed når den er klar.",
+    "fixWaits": "Takk. Box Office henter en annen kopi når en admin godkjenner.",
+    "fixFailed": "Takk. Box Office kunne ikke ta seg av det, så en admin ser på det.",
+    "boxOfficeFixes": "Box Office blokkerer kilden til denne kopien og henter en annen. Du får beskjed når den er klar.",
+    "boxOfficeAfterAdmin": "Når en admin godkjenner, henter Box Office en annen kopi.",
+    "fix": {
+      "waiting": "Venter på at en admin godkjenner en annen kopi",
+      "fixing": "Box Office henter en annen kopi",
+      "failed": "Box Office kunne ikke hente en annen kopi.",
+      "fixed": "Fikset med en annen kopi"
+    }
   },
   "quality": {
     "label": "Kvalitet",
@@ -1545,7 +1558,8 @@
     },
     "settings": {
       "approval": "Andre utgaver og bedre kopier trenger alltid godkjenning fra en admin",
-      "approvalDetail": "Også når forespørsler legges til med en gang. Bare med Box Office."
+      "approvalDetail": "Også når forespørsler legges til med en gang. Bare med Box Office.",
+      "approvalReports": "Også rapporterte problemer, som Box Office ellers fikser med en gang."
     }
   }
 }

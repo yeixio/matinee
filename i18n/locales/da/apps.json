@@ -667,5 +667,16 @@
         "other": "Noget andet"
       }
     }
+  },
+  "report": {
+    "button": "Rapportér et problem",
+    "whatsWrong": "Hvad er der galt med {{title}}?",
+    "thanks": "Tak, en administrator kigger på det.",
+    "shouldBeIn": "Den burde være på",
+    "fixing": "Tak. Box Office henter en anden kopi, og du får besked, når den er klar.",
+    "fixWaits": "Tak. Box Office henter en anden kopi, når en admin godkender.",
+    "fixFailed": "Tak. Box Office kunne ikke tage sig af det, så en admin kigger på det.",
+    "boxOfficeFixes": "Box Office blokerer kilden til denne kopi og henter en anden. Du får besked, når den er klar.",
+    "boxOfficeAfterAdmin": "Når en admin godkender, henter Box Office en anden kopi."
   }
 }

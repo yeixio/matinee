@@ -528,7 +528,20 @@
     "whatsWrong": "ما المشكلة في {{title}}؟",
     "details": "التفاصيل (اختياري)",
     "detailsExample": "مثلًا: لا صوت بعد 20 دقيقة",
-    "send": "إرسال"
+    "send": "إرسال",
+    "shouldBeIn": "يجب أن يكون باللغة",
+    "shouldBeInShort": "يجب أن يكون باللغة {{language}}",
+    "fixing": "شكرًا. يجلب Box Office نسخة أخرى، وسنخبرك عندما تصبح جاهزة.",
+    "fixWaits": "شكرًا. سيجلب Box Office نسخة أخرى بعد موافقة المسؤول.",
+    "fixFailed": "شكرًا. لم يتمكن Box Office من التعامل مع هذا، لذا سيلقي المسؤول نظرة.",
+    "boxOfficeFixes": "سيحظر Box Office مصدر هذه النسخة ويجلب أخرى. سنخبرك عندما تصبح جاهزة.",
+    "boxOfficeAfterAdmin": "بعد موافقة المسؤول، سيجلب Box Office نسخة أخرى.",
+    "fix": {
+      "waiting": "بانتظار موافقة المسؤول على نسخة أخرى",
+      "fixing": "يجلب Box Office نسخة أخرى",
+      "failed": "لم يتمكن Box Office من جلب نسخة أخرى.",
+      "fixed": "تم الإصلاح بنسخة أخرى"
+    }
   },
   "quality": {
     "label": "الجودة",
@@ -1589,7 +1602,8 @@
     },
     "settings": {
       "approval": "الإصدارات الأخرى والنسخ الأفضل تحتاج دائمًا إلى موافقة مشرف",
-      "approvalDetail": "حتى عندما تُضاف الطلبات فورًا. مع Box Office فقط."
+      "approvalDetail": "حتى عندما تُضاف الطلبات فورًا. مع Box Office فقط.",
+      "approvalReports": "وكذلك المشكلات المُبلغ عنها، التي يصلحها Box Office فورًا عادةً."
     }
   }
 }

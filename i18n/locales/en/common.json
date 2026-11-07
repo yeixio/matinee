@@ -306,6 +306,7 @@
   "issue": {
     "video": "Picture",
     "audio": "Sound",
+    "language": "Wrong language",
     "subtitles": "Subtitles",
     "wrong": "Wrong title",
     "other": "Something else"

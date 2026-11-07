@@ -667,5 +667,16 @@
         "other": "Jotain muuta"
       }
     }
+  },
+  "report": {
+    "button": "Ilmoita ongelmasta",
+    "whatsWrong": "Mikä nimikkeessä {{title}} on vialla?",
+    "thanks": "Kiitos, ylläpitäjä katsoo asiaa.",
+    "shouldBeIn": "Sen pitäisi olla kielellä",
+    "fixing": "Kiitos. Box Office hakee toisen kopion, ja saat tiedon, kun se on valmis.",
+    "fixWaits": "Kiitos. Box Office hakee toisen kopion, kun ylläpitäjä hyväksyy.",
+    "fixFailed": "Kiitos. Box Office ei voinut hoitaa tätä, joten ylläpitäjä katsoo sen.",
+    "boxOfficeFixes": "Box Office estää tämän kopion lähteen ja hakee toisen. Saat tiedon, kun se on valmis.",
+    "boxOfficeAfterAdmin": "Kun ylläpitäjä hyväksyy, Box Office hakee toisen kopion."
   }
 }

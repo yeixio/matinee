@@ -660,5 +660,16 @@
         "other": "その他"
       }
     }
+  },
+  "report": {
+    "button": "問題を報告",
+    "whatsWrong": "「{{title}}」のどこに問題がありますか？",
+    "thanks": "ありがとうございます。管理者が確認します。",
+    "shouldBeIn": "本来の言語",
+    "fixing": "ありがとうございます。Box Office が別のコピーを取得中です。届いたらお知らせします。",
+    "fixWaits": "ありがとうございます。管理者が承認すると、Box Office が別のコピーを取得します。",
+    "fixFailed": "ありがとうございます。Box Office では対応できなかったため、管理者が確認します。",
+    "boxOfficeFixes": "Box Office はこのコピーの入手元をブロックし、別のコピーを取得します。届いたらお知らせします。",
+    "boxOfficeAfterAdmin": "管理者が承認すると、Box Office が別のコピーを取得します。"
   }
 }

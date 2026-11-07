@@ -274,5 +274,6 @@
   "couldnt_start_playback_for_this_extra": "לא ניתן היה להפעיל את התוספת הזו",
   "no_such_extra": "אין תוספת כזו",
   "only_an_admin_can_add_a_station_on_the_home_network": "רק מנהל יכול להוסיף תחנה ברשת הביתית",
-  "startms_give_a_number_of_milliseconds": "startMs: יש לציין מספר אלפיות שנייה"
+  "startms_give_a_number_of_milliseconds": "startMs: יש לציין מספר אלפיות שנייה",
+  "say_which_language_it_should_be_in": "ציין באיזו שפה זה אמור להיות"
 }

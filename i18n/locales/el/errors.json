@@ -274,5 +274,6 @@
   "couldnt_start_playback_for_this_extra": "δεν ήταν δυνατή η αναπαραγωγή αυτού του επιπλέον υλικού",
   "no_such_extra": "δεν υπάρχει τέτοιο επιπλέον υλικό",
   "only_an_admin_can_add_a_station_on_the_home_network": "μόνο ένας διαχειριστής μπορεί να προσθέσει σταθμό στο οικιακό δίκτυο",
-  "startms_give_a_number_of_milliseconds": "startMs: δώστε έναν αριθμό χιλιοστών του δευτερολέπτου"
+  "startms_give_a_number_of_milliseconds": "startMs: δώστε έναν αριθμό χιλιοστών του δευτερολέπτου",
+  "say_which_language_it_should_be_in": "πείτε σε ποια γλώσσα θα έπρεπε να είναι"
 }

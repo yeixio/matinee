@@ -299,6 +299,19 @@
               }
             },
             {
+              "name": "Problems fixed by Box Office",
+              "doc": "/docs/server/radarr-and-sonarr/#problems-box-office-fixes-by-itself",
+              "since": "v0.2.4",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
               "name": "Your requests and Report a problem",
               "doc": "/docs/watching/discover/",
               "apps": {

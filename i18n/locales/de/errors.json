@@ -274,5 +274,6 @@
   "couldnt_start_playback_for_this_extra": "Dieses Extra konnte nicht abgespielt werden",
   "no_such_extra": "Kein solches Extra",
   "only_an_admin_can_add_a_station_on_the_home_network": "nur ein Admin kann einen Sender im Heimnetz hinzufügen",
-  "startms_give_a_number_of_milliseconds": "startMs: gib eine Anzahl Millisekunden an"
+  "startms_give_a_number_of_milliseconds": "startMs: gib eine Anzahl Millisekunden an",
+  "say_which_language_it_should_be_in": "gib an, welche Sprache es sein sollte"
 }

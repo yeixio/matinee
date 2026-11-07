@@ -674,5 +674,16 @@
         "other": "משהו אחר"
       }
     }
+  },
+  "report": {
+    "button": "דיווח על בעיה",
+    "whatsWrong": "מה הבעיה עם {{title}}?",
+    "thanks": "תודה, מנהל יבדוק את זה.",
+    "shouldBeIn": "זה אמור להיות ב",
+    "fixing": "תודה. Box Office מביא עותק אחר, ונודיע לך כשיהיה מוכן.",
+    "fixWaits": "תודה. Box Office יביא עותק אחר ברגע שמנהל יאשר.",
+    "fixFailed": "תודה. Box Office לא הצליח לטפל בזה, אז מנהל יבדוק.",
+    "boxOfficeFixes": "Box Office יחסום את המקור של העותק הזה ויביא אחר. נודיע לך כשיהיה מוכן.",
+    "boxOfficeAfterAdmin": "ברגע שמנהל יאשר, Box Office יביא עותק אחר."
   }
 }

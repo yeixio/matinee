@@ -508,7 +508,20 @@
     "whatsWrong": "{{title}} bị làm sao?",
     "details": "Chi tiết (không bắt buộc)",
     "detailsExample": "Ví dụ: mất tiếng sau 20 phút",
-    "send": "Gửi"
+    "send": "Gửi",
+    "shouldBeIn": "Lẽ ra phải là tiếng",
+    "shouldBeInShort": "lẽ ra là tiếng {{language}}",
+    "fixing": "Cảm ơn. Box Office đang lấy bản khác, bạn sẽ được báo khi xong.",
+    "fixWaits": "Cảm ơn. Box Office sẽ lấy bản khác sau khi quản trị viên duyệt.",
+    "fixFailed": "Cảm ơn. Box Office không thể nhận việc này, nên quản trị viên sẽ xem.",
+    "boxOfficeFixes": "Box Office sẽ chặn nguồn của bản này và lấy bản khác. Bạn sẽ được báo khi xong.",
+    "boxOfficeAfterAdmin": "Sau khi quản trị viên duyệt, Box Office sẽ lấy bản khác.",
+    "fix": {
+      "waiting": "Đang chờ quản trị viên duyệt bản khác",
+      "fixing": "Box Office đang lấy bản khác",
+      "failed": "Box Office không lấy được bản khác.",
+      "fixed": "Đã sửa bằng bản khác"
+    }
   },
   "quality": {
     "label": "Chất lượng",
@@ -1534,7 +1547,8 @@
     },
     "settings": {
       "approval": "Phiên bản khác và bản tốt hơn luôn cần quản trị viên duyệt",
-      "approvalDetail": "Kể cả khi yêu cầu được thêm ngay. Chỉ với Box Office."
+      "approvalDetail": "Kể cả khi yêu cầu được thêm ngay. Chỉ với Box Office.",
+      "approvalReports": "Cả các sự cố được báo, vốn Box Office sẽ sửa ngay nếu không bật."
     }
   }
 }

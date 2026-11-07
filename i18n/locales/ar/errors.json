@@ -274,5 +274,6 @@
   "couldnt_start_playback_for_this_extra": "تعذر تشغيل هذا المحتوى الإضافي",
   "no_such_extra": "لا يوجد محتوى إضافي كهذا",
   "only_an_admin_can_add_a_station_on_the_home_network": "لا يمكن إلا للمسؤول إضافة محطة على الشبكة المنزلية",
-  "startms_give_a_number_of_milliseconds": "startMs: أدخل عددًا من المللي ثانية"
+  "startms_give_a_number_of_milliseconds": "startMs: أدخل عددًا من المللي ثانية",
+  "say_which_language_it_should_be_in": "اذكر اللغة التي يجب أن يكون بها"
 }

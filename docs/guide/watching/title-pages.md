@@ -24,7 +24,7 @@ Click any poster to open its page. Everything Matinee knows about the title is h
 | **Trailer** | Plays a trailer: one of your own trailer files, or one from YouTube via TMDB. Shown when there is one. |
 | **Add to watch list** | Saves it to your [watch list](/docs/watching/watch-list/). |
 | **Collections** | Adds it to (or takes it out of) one of your [collections](/docs/watching/collections/). |
-| **Report a problem** | Tells an admin what's wrong: the picture, the sound, the subtitles, or the wrong title. Admins find reports under **Requests** (the inbox icon). |
+| **Report a problem** | Tells an admin what's wrong: the picture, the sound, the wrong language, the subtitles, or the wrong title. Admins find reports under **Requests** (the inbox icon). With Box Office, problems with the copy itself fix themselves: see [Problems Box Office fixes by itself](/docs/server/radarr-and-sonarr/#problems-box-office-fixes-by-itself). |
 | **More details** | Release date, studio, countries, budget and box office, awards, and the full crew. |
 | **File details** | Everything about the file itself: see [File details](#file-details). |
 

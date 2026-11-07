@@ -667,5 +667,16 @@
         "other": "Iets anders"
       }
     }
+  },
+  "report": {
+    "button": "Een probleem melden",
+    "whatsWrong": "Wat is er mis met {{title}}?",
+    "thanks": "Bedankt, een beheerder kijkt ernaar.",
+    "shouldBeIn": "Het zou moeten zijn in het",
+    "fixing": "Bedankt. Box Office haalt een andere kopie, en je hoort het als die er is.",
+    "fixWaits": "Bedankt. Box Office haalt een andere kopie zodra een beheerder het goedkeurt.",
+    "fixFailed": "Bedankt. Box Office kon dit niet oppakken, dus een beheerder kijkt ernaar.",
+    "boxOfficeFixes": "Box Office blokkeert waar deze kopie vandaan kwam en haalt een andere. Je hoort het als die er is.",
+    "boxOfficeAfterAdmin": "Zodra een beheerder het goedkeurt, haalt Box Office een andere kopie."
   }
 }

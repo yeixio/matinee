@@ -274,5 +274,6 @@
   "couldnt_start_playback_for_this_extra": "tidak bisa memutar ekstra ini",
   "no_such_extra": "ekstra tidak ditemukan",
   "only_an_admin_can_add_a_station_on_the_home_network": "hanya admin yang dapat menambahkan stasiun di jaringan rumah",
-  "startms_give_a_number_of_milliseconds": "startMs: berikan jumlah milidetik"
+  "startms_give_a_number_of_milliseconds": "startMs: berikan jumlah milidetik",
+  "say_which_language_it_should_be_in": "sebutkan bahasa yang seharusnya"
 }

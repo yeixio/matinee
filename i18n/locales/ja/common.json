@@ -278,6 +278,7 @@
   "issue": {
     "video": "映像",
     "audio": "音声",
+    "language": "言語が違う",
     "subtitles": "字幕",
     "wrong": "タイトルが違う",
     "other": "その他"

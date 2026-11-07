@@ -508,7 +508,20 @@
     "whatsWrong": "「{{title}}」のどこに問題がありますか？",
     "details": "詳細（任意）",
     "detailsExample": "例: 20分後に音が出ない",
-    "send": "送信"
+    "send": "送信",
+    "shouldBeIn": "本来の言語",
+    "shouldBeInShort": "本来は{{language}}",
+    "fixing": "ありがとうございます。Box Office が別のコピーを取得中です。届いたらお知らせします。",
+    "fixWaits": "ありがとうございます。管理者が承認すると、Box Office が別のコピーを取得します。",
+    "fixFailed": "ありがとうございます。Box Office では対応できなかったため、管理者が確認します。",
+    "boxOfficeFixes": "Box Office はこのコピーの入手元をブロックし、別のコピーを取得します。届いたらお知らせします。",
+    "boxOfficeAfterAdmin": "管理者が承認すると、Box Office が別のコピーを取得します。",
+    "fix": {
+      "waiting": "別のコピーの承認を管理者に待っています",
+      "fixing": "Box Office が別のコピーを取得中",
+      "failed": "Box Office は別のコピーを取得できませんでした。",
+      "fixed": "別のコピーで修正済み"
+    }
   },
   "quality": {
     "label": "画質",
@@ -1534,7 +1547,8 @@
     },
     "settings": {
       "approval": "ほかのエディションとより良いコピーは常に管理者の承認が必要",
-      "approvalDetail": "リクエストがすぐ追加される設定でも。Box Office 使用時のみ。"
+      "approvalDetail": "リクエストがすぐ追加される設定でも。Box Office 使用時のみ。",
+      "approvalReports": "報告された問題も含みます（通常は Box Office がすぐに修正します）。"
     }
   }
 }

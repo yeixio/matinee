@@ -306,6 +306,7 @@
   "issue": {
     "video": "Beeld",
     "audio": "Geluid",
+    "language": "Verkeerde taal",
     "subtitles": "Ondertiteling",
     "wrong": "Verkeerde titel",
     "other": "Iets anders"

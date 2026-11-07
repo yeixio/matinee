@@ -681,5 +681,16 @@
         "other": "Coś innego"
       }
     }
+  },
+  "report": {
+    "button": "Zgłoś problem",
+    "whatsWrong": "Co jest nie tak z {{title}}?",
+    "thanks": "Dzięki, administrator się temu przyjrzy.",
+    "shouldBeIn": "Powinien być w języku",
+    "fixing": "Dzięki. Box Office pobiera inną kopię, damy znać, gdy będzie gotowa.",
+    "fixWaits": "Dzięki. Box Office pobierze inną kopię, gdy administrator zatwierdzi.",
+    "fixFailed": "Dzięki. Box Office nie mógł się tym zająć, więc spojrzy na to administrator.",
+    "boxOfficeFixes": "Box Office zablokuje źródło tej kopii i pobierze inną. Damy znać, gdy będzie gotowa.",
+    "boxOfficeAfterAdmin": "Gdy administrator zatwierdzi, Box Office pobierze inną kopię."
   }
 }

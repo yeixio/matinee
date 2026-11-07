@@ -512,7 +512,20 @@
     "whatsWrong": "Mikä nimikkeessä {{title}} on vialla?",
     "details": "Lisätiedot (valinnainen)",
     "detailsExample": "Esim.: ei ääntä 20 minuutin jälkeen",
-    "send": "Lähetä"
+    "send": "Lähetä",
+    "shouldBeIn": "Sen pitäisi olla kielellä",
+    "shouldBeInShort": "pitäisi olla: {{language}}",
+    "fixing": "Kiitos. Box Office hakee toisen kopion, ja saat tiedon, kun se on valmis.",
+    "fixWaits": "Kiitos. Box Office hakee toisen kopion, kun ylläpitäjä hyväksyy.",
+    "fixFailed": "Kiitos. Box Office ei voinut hoitaa tätä, joten ylläpitäjä katsoo sen.",
+    "boxOfficeFixes": "Box Office estää tämän kopion lähteen ja hakee toisen. Saat tiedon, kun se on valmis.",
+    "boxOfficeAfterAdmin": "Kun ylläpitäjä hyväksyy, Box Office hakee toisen kopion.",
+    "fix": {
+      "waiting": "Odottaa, että ylläpitäjä hyväksyy toisen kopion",
+      "fixing": "Box Office hakee toista kopiota",
+      "failed": "Box Office ei saanut toista kopiota.",
+      "fixed": "Korjattu toisella kopiolla"
+    }
   },
   "quality": {
     "label": "Laatu",
@@ -1545,7 +1558,8 @@
     },
     "settings": {
       "approval": "Muut versiot ja paremmat kopiot vaativat aina ylläpitäjän hyväksynnän",
-      "approvalDetail": "Silloinkin, kun pyynnöt lisätään heti. Vain Box Officen kanssa."
+      "approvalDetail": "Silloinkin, kun pyynnöt lisätään heti. Vain Box Officen kanssa.",
+      "approvalReports": "Myös ilmoitetut ongelmat, jotka Box Office muuten korjaa heti."
     }
   }
 }

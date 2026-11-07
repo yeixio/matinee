@@ -43,7 +43,10 @@ type Fake struct {
 	// Radarr, editions): Activity is what /boxoffice/activity answers,
 	// Editions /boxoffice/editions, and Asked records what was posted to
 	// /boxoffice/editions and /boxoffice/upgrade, with its "path".
-	Pairing  bool
+	Pairing bool
+	// Problems makes a Box Office with Pairing fix reported problems
+	// ("problems").
+	Problems bool
 	Activity map[string]any
 	Editions map[string]any
 	Asked    []map[string]any
@@ -162,6 +165,9 @@ func (f *Fake) serve(w http.ResponseWriter, r *http.Request) {
 		}
 		if f.Pairing {
 			features = append(features, "progress", "upgrades")
+			if f.Problems {
+				features = append(features, "problems")
+			}
 			if f.App == arr.Radarr {
 				features = append(features, "editions")
 			}

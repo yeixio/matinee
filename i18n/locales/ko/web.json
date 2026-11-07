@@ -508,7 +508,20 @@
     "whatsWrong": "{{title}}에 어떤 문제가 있나요?",
     "details": "상세 내용 (선택)",
     "detailsExample": "예: 20분 후 소리가 안 나요",
-    "send": "보내기"
+    "send": "보내기",
+    "shouldBeIn": "원래 언어",
+    "shouldBeInShort": "원래 {{language}}",
+    "fixing": "감사합니다. Box Office가 다른 사본을 가져오는 중이며, 준비되면 알려 드립니다.",
+    "fixWaits": "감사합니다. 관리자가 승인하면 Box Office가 다른 사본을 가져옵니다.",
+    "fixFailed": "감사합니다. Box Office가 처리할 수 없어 관리자가 확인합니다.",
+    "boxOfficeFixes": "Box Office가 이 사본의 출처를 차단하고 다른 사본을 가져옵니다. 준비되면 알려 드립니다.",
+    "boxOfficeAfterAdmin": "관리자가 승인하면 Box Office가 다른 사본을 가져옵니다.",
+    "fix": {
+      "waiting": "다른 사본에 대한 관리자 승인 대기 중",
+      "fixing": "Box Office가 다른 사본을 가져오는 중",
+      "failed": "Box Office가 다른 사본을 가져오지 못했습니다.",
+      "fixed": "다른 사본으로 해결됨"
+    }
   },
   "quality": {
     "label": "화질",
@@ -1534,7 +1547,8 @@
     },
     "settings": {
       "approval": "다른 에디션과 더 좋은 사본은 항상 관리자 승인이 필요",
-      "approvalDetail": "요청이 바로 추가될 때도요. Box Office에서만."
+      "approvalDetail": "요청이 바로 추가될 때도요. Box Office에서만.",
+      "approvalReports": "신고된 문제도 포함됩니다. 그렇지 않으면 Box Office가 바로 해결합니다."
     }
   }
 }

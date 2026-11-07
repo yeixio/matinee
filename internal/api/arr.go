@@ -5,8 +5,11 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io"
 	"net/http"
+	"path/filepath"
+	"regexp"
 	"slices"
 	"strconv"
 	"strings"
@@ -928,7 +931,21 @@ type issueView struct {
 	Item *store.Item `json:"item,omitempty"`
 	// Replaceable says an admin can have Radarr or Sonarr fetch another copy.
 	Replaceable bool `json:"replaceable"`
+	// Fix is how Box Office fixing it by itself is going, when it was
+	// asked to.
+	Fix *issueFix `json:"fix,omitempty"`
 }
+
+// issueFix is where Box Office's fix for a reported problem stands.
+type issueFix struct {
+	// State is waiting (for an admin to approve), fixing (Box Office is
+	// getting another copy), failed (asking Box Office failed; Error says
+	// why) or fixed (another copy is in).
+	State string `json:"state"`
+	Error string `json:"error,omitempty"`
+}
+
+var reLanguage = regexp.MustCompile(`^[a-z]{2}$`)
 
 func (s *Server) reportIssue(w http.ResponseWriter, r *http.Request) {
 	it, ok := s.loadItem(w, r)
@@ -936,8 +953,9 @@ func (s *Server) reportIssue(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	var in struct {
-		Kind string `json:"kind"`
-		Note string `json:"note"`
+		Kind     string `json:"kind"`
+		Note     string `json:"note"`
+		Language string `json:"language"`
 	}
 	if err := readJSON(r, &in); err != nil {
 		writeError(w, http.StatusBadRequest, "invalid request")
@@ -947,12 +965,162 @@ func (s *Server) reportIssue(w http.ResponseWriter, r *http.Request) {
 		writeError(w, http.StatusBadRequest, "kind must be one of: "+strings.Join(store.IssueKinds, ", "))
 		return
 	}
-	x, err := s.Store.CreateIssue(r.Context(), store.Issue{ItemID: it.ID, Kind: in.Kind, Note: clip(in.Note, 1000), UserID: currentUser(r).ID})
+	in.Language = strings.ToLower(strings.TrimSpace(in.Language))
+	if in.Kind != "language" {
+		in.Language = ""
+	} else if !reLanguage.MatchString(in.Language) {
+		writeError(w, http.StatusBadRequest, "say which language it should be in")
+		return
+	}
+	ctx, u := r.Context(), currentUser(r)
+	key, err := s.Store.FileKey(ctx, it.ID)
+	if err != nil && !errors.Is(err, store.ErrNotFound) {
+		s.serverError(w, err)
+		return
+	}
+	x, err := s.Store.CreateIssue(ctx, store.Issue{ItemID: it.ID, Kind: in.Kind, Note: clip(in.Note, 1000), Language: in.Language, UserID: u.ID, FileKey: key})
 	if err != nil {
 		s.serverError(w, err)
 		return
 	}
-	writeJSON(w, http.StatusCreated, issueView{Issue: x, Item: &it})
+	if err := s.fixIssue(ctx, u, it, &x); err != nil {
+		s.serverError(w, err)
+		return
+	}
+	v := issueView{Issue: x, Item: &it}
+	if v.Fix, err = s.issueFixState(ctx, x); err != nil {
+		s.serverError(w, err)
+		return
+	}
+	writeJSON(w, http.StatusCreated, v)
+}
+
+// fixIssue asks Box Office to fix a reported problem by itself, when it
+// can: a problem with a movie's or an episode's copy (store.FixableIssues)
+// that Box Office has, with a Box Office that fixes problems. It blocks
+// the bad copy's release and gets another. The fix waits for an admin
+// when Settings says what's asked of Box Office does. Otherwise the
+// issue waits for an admin, as before.
+func (s *Server) fixIssue(ctx context.Context, u store.User, it store.Item, x *store.Issue) error {
+	app, ok := appFor(it.Kind)
+	if !ok || !replaceable(it.Kind) || !slices.Contains(store.FixableIssues, x.Kind) || !s.boxOffices.offers(app, featureProblems) {
+		return nil
+	}
+	m, err := s.managedItem(ctx, it)
+	if err != nil {
+		// Not one Box Office has: an admin will see to it.
+		s.Log.Info("a reported problem waits for an admin: Box Office doesn't have the title", "item", it.ID, "err", err)
+		return nil
+	}
+	req := store.Request{Ask: store.AskReplace, Problem: x.Kind, Language: x.Language, Reason: x.Note,
+		UserID: u.ID, Title: m.title.Title, Year: m.title.Year, Poster: m.title.Poster}
+	if it.Path != "" {
+		req.FileName = filepath.Base(it.Path)
+	}
+	if m.app == arr.Radarr {
+		req.Kind, req.TMDBID = "movie", m.title.TMDBID
+	} else {
+		req.Kind, req.TMDBID, req.TVDBID, req.Season, req.Episode = "show", m.title.TMDBID, m.title.TVDBID, m.season, m.episode
+		if req.TVDBID == 0 || req.Episode == 0 {
+			return nil
+		}
+	}
+	need, err := s.reportsNeedApproval(ctx, u)
+	if err != nil {
+		return err
+	}
+	saved, err := s.Store.CreateRequest(ctx, req)
+	if err != nil {
+		return err
+	}
+	if err := s.Store.SetIssueRequest(ctx, x.ID, saved.ID); err != nil {
+		return err
+	}
+	x.RequestID = saved.ID
+	if !need {
+		_, err = s.approve(ctx, saved, 0)
+	}
+	return err
+}
+
+// issueFixState is where Box Office's fix for an issue stands, or nil
+// when it wasn't asked to fix it.
+func (s *Server) issueFixState(ctx context.Context, x store.Issue) (*issueFix, error) {
+	if x.RequestID == "" {
+		return nil, nil
+	}
+	if x.Resolution == store.IssueReplaced {
+		return &issueFix{State: "fixed"}, nil
+	}
+	req, err := s.Store.Request(ctx, x.RequestID)
+	if errors.Is(err, store.ErrNotFound) {
+		return nil, nil
+	}
+	if err != nil {
+		return nil, err
+	}
+	switch req.State {
+	case store.RequestPending:
+		return &issueFix{State: "waiting"}, nil
+	case store.RequestApproved:
+		return &issueFix{State: "fixing"}, nil
+	case store.RequestFailed:
+		return &issueFix{State: "failed", Error: req.Error}, nil
+	}
+	return nil, nil // declined: an admin sees to it
+}
+
+// settleIssues closes the problems Box Office was asked to fix once
+// another copy has taken the reported one's place, and tells whoever
+// reported each. A scan keeps an item when its file is replaced, so the
+// item's file changing is the sign.
+func (s *Server) settleIssues(ctx context.Context) {
+	issues, err := s.Store.FixingIssues(ctx)
+	if err != nil {
+		s.Log.Warn("couldn't list the problems Box Office is fixing", "err", err)
+		return
+	}
+	for _, x := range issues {
+		if x.FileKey == "" {
+			continue
+		}
+		key, err := s.Store.FileKey(ctx, x.ItemID)
+		if err != nil || key == "" || key == x.FileKey {
+			continue
+		}
+		if err := s.Store.ResolveIssue(ctx, x.ID, store.IssueReplaced); err != nil {
+			s.Log.Warn("couldn't close a fixed problem", "issue", x.ID, "err", err)
+			continue
+		}
+		s.tellFixed(ctx, x)
+	}
+}
+
+// tellFixed tells the person who reported a problem that another copy is
+// in.
+func (s *Server) tellFixed(ctx context.Context, x store.Issue) {
+	it, err := s.Store.Item(ctx, 0, x.ItemID)
+	if err != nil {
+		return
+	}
+	req, _ := s.Store.Request(ctx, x.RequestID)
+	title := it.Title
+	if req.Title != "" && it.Kind == "episode" {
+		title = fmt.Sprintf("%s S%02dE%02d", req.Title, req.Season, req.Episode)
+	}
+	n := store.Notification{
+		UserID: x.UserID, Source: "issue:" + x.ID + ":fixed", Event: "issue.fixed", Level: store.NotificationInfo,
+		Title: "Another copy of " + title + " is in", Body: "The problem you reported is fixed. Box Office got another copy.",
+		Kind: req.Kind, TMDBID: req.TMDBID, TVDBID: req.TVDBID, Poster: req.Poster, CreatedAt: time.Now().Unix(),
+	}
+	saved, added, err := s.Store.AddNotification(ctx, n)
+	if err != nil {
+		s.Log.Warn("couldn't tell someone their problem is fixed", "issue", x.ID, "err", err)
+		return
+	}
+	if added == store.AddedNew {
+		s.pushNotification(ctx, x.UserID, s.notificationView(ctx, saved))
+	}
 }
 
 func (s *Server) listIssues(w http.ResponseWriter, r *http.Request) {
@@ -985,6 +1153,10 @@ func (s *Server) listIssues(w http.ResponseWriter, r *http.Request) {
 		out[i].Item = &it
 		app, _ := appFor(it.Kind)
 		out[i].Replaceable = u.IsAdmin && !x.Resolved && replaceable(it.Kind) && conn[app]
+		if out[i].Fix, err = s.issueFixState(ctx, x); err != nil {
+			s.serverError(w, err)
+			return
+		}
 	}
 	writeJSON(w, http.StatusOK, out)
 }
@@ -1043,7 +1215,7 @@ func (s *Server) replaceIssue(w http.ResponseWriter, r *http.Request) {
 		s.arrError(w, r, m.app, err)
 		return
 	}
-	if err := s.Store.ResolveIssue(ctx, x.ID, "replaced"); err != nil {
+	if err := s.Store.ResolveIssue(ctx, x.ID, store.IssueReplaced); err != nil {
 		s.serverError(w, err)
 		return
 	}

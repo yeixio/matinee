@@ -278,6 +278,7 @@
   "issue": {
     "video": "Hình ảnh",
     "audio": "Âm thanh",
+    "language": "Sai ngôn ngữ",
     "subtitles": "Phụ đề",
     "wrong": "Sai tên",
     "other": "Vấn đề khác"

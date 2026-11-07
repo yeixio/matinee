@@ -660,5 +660,16 @@
         "other": "Lain-lain"
       }
     }
+  },
+  "report": {
+    "button": "Laporkan masalah",
+    "whatsWrong": "Apa masalah dengan {{title}}?",
+    "thanks": "Terima kasih, pentadbir akan menelitinya.",
+    "shouldBeIn": "Ia sepatutnya dalam bahasa",
+    "fixing": "Terima kasih. Box Office sedang mendapatkan salinan lain, dan anda akan dimaklumkan apabila siap.",
+    "fixWaits": "Terima kasih. Box Office akan mendapatkan salinan lain selepas admin meluluskan.",
+    "fixFailed": "Terima kasih. Box Office tidak dapat menguruskannya, jadi admin akan melihatnya.",
+    "boxOfficeFixes": "Box Office akan menyekat sumber salinan ini dan mendapatkan yang lain. Anda akan dimaklumkan apabila siap.",
+    "boxOfficeAfterAdmin": "Selepas admin meluluskan, Box Office akan mendapatkan salinan lain."
   }
 }

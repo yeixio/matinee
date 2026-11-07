@@ -274,5 +274,6 @@
   "couldnt_start_playback_for_this_extra": "tento bonus nelze přehrát",
   "no_such_extra": "takový bonus neexistuje",
   "only_an_admin_can_add_a_station_on_the_home_network": "stanici v domácí síti může přidat jen správce",
-  "startms_give_a_number_of_milliseconds": "startMs: zadejte počet milisekund"
+  "startms_give_a_number_of_milliseconds": "startMs: zadejte počet milisekund",
+  "say_which_language_it_should_be_in": "uveď, v jakém jazyce by měl být"
 }

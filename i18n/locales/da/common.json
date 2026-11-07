@@ -306,6 +306,7 @@
   "issue": {
     "video": "Billede",
     "audio": "Lyd",
+    "language": "Forkert sprog",
     "subtitles": "Undertekster",
     "wrong": "Forkert titel",
     "other": "Noget andet"

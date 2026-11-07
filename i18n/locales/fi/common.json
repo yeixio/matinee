@@ -306,6 +306,7 @@
   "issue": {
     "video": "Kuva",
     "audio": "Ääni",
+    "language": "Väärä kieli",
     "subtitles": "Tekstitykset",
     "wrong": "Väärä nimike",
     "other": "Jotain muuta"

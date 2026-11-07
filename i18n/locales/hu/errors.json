@@ -274,5 +274,6 @@
   "couldnt_start_playback_for_this_extra": "nem sikerült lejátszani ezt az extrát",
   "no_such_extra": "nincs ilyen extra",
   "only_an_admin_can_add_a_station_on_the_home_network": "otthoni hálózaton lévő állomást csak rendszergazda adhat hozzá",
-  "startms_give_a_number_of_milliseconds": "startMs: adj meg ezredmásodperceket"
+  "startms_give_a_number_of_milliseconds": "startMs: adj meg ezredmásodperceket",
+  "say_which_language_it_should_be_in": "add meg, milyen nyelvűnek kellene lennie"
 }

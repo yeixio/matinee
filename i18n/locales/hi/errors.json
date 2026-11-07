@@ -274,5 +274,6 @@
   "couldnt_start_playback_for_this_extra": "यह अतिरिक्त सामग्री नहीं चल सकी",
   "no_such_extra": "ऐसी कोई अतिरिक्त सामग्री नहीं है",
   "only_an_admin_can_add_a_station_on_the_home_network": "होम नेटवर्क पर स्टेशन केवल एडमिन जोड़ सकता है",
-  "startms_give_a_number_of_milliseconds": "startMs: मिलीसेकंड की संख्या दें"
+  "startms_give_a_number_of_milliseconds": "startMs: मिलीसेकंड की संख्या दें",
+  "say_which_language_it_should_be_in": "बताएँ कि यह किस भाषा में होना चाहिए"
 }

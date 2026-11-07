@@ -729,6 +729,16 @@ var migrations = []string{
 	"ALTER TABLE items ADD COLUMN nfo_fields TEXT NOT NULL DEFAULT ''",
 	"ALTER TABLE items ADD COLUMN nfo_hash TEXT NOT NULL DEFAULT ''",
 	"ALTER TABLE libraries ADD COLUMN metadata_mode TEXT NOT NULL DEFAULT ''",
+	// 127–132: problems reported with a copy that Box Office fixes by
+	// itself: what was reported and the language wanted go with the request
+	// for another copy, and the issue keeps that request and the file it
+	// was about, to close once another file is in (see requests.go).
+	"ALTER TABLE requests ADD COLUMN problem TEXT NOT NULL DEFAULT ''",
+	"ALTER TABLE requests ADD COLUMN language TEXT NOT NULL DEFAULT ''",
+	"ALTER TABLE issues ADD COLUMN language TEXT NOT NULL DEFAULT ''",
+	"ALTER TABLE issues ADD COLUMN request_id TEXT NOT NULL DEFAULT ''",
+	"ALTER TABLE issues ADD COLUMN file_key TEXT NOT NULL DEFAULT ''",
+	"ALTER TABLE requests ADD COLUMN file_name TEXT NOT NULL DEFAULT ''",
 }
 
 func now() int64 { return time.Now().Unix() }

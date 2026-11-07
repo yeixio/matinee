@@ -306,6 +306,7 @@
   "issue": {
     "video": "Bild",
     "audio": "Ljud",
+    "language": "Fel språk",
     "subtitles": "Undertexter",
     "wrong": "Fel titel",
     "other": "Något annat"

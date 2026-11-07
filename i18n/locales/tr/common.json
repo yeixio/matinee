@@ -306,6 +306,7 @@
   "issue": {
     "video": "Görüntü",
     "audio": "Ses",
+    "language": "Yanlış dil",
     "subtitles": "Altyazılar",
     "wrong": "Yanlış ad",
     "other": "Başka bir şey"

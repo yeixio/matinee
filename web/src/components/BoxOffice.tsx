@@ -374,6 +374,8 @@ export function AsksApprovalSetting() {
         </span>
         <span className="block text-sm text-muted">
           {t("boxOffice.settings.approvalDetail")}
+          {(opts?.boxOffice?.fixMovies || opts?.boxOffice?.fixShows) &&
+            ` ${t("boxOffice.settings.approvalReports")}`}
         </span>
       </span>
     </label>

@@ -520,7 +520,20 @@
     "whatsWrong": "Co je špatně s {{title}}?",
     "details": "Podrobnosti (nepovinné)",
     "detailsExample": "Např.: po 20 minutách žádný zvuk",
-    "send": "Odeslat"
+    "send": "Odeslat",
+    "shouldBeIn": "Měl by být v jazyce",
+    "shouldBeInShort": "měl by být: {{language}}",
+    "fixing": "Díky. Box Office stahuje jinou kopii a dáme vědět, až bude hotová.",
+    "fixWaits": "Díky. Box Office stáhne jinou kopii, jakmile to správce schválí.",
+    "fixFailed": "Díky. Box Office to nemohl převzít, takže se na to podívá správce.",
+    "boxOfficeFixes": "Box Office zablokuje zdroj této kopie a stáhne jinou. Dáme vědět, až bude hotová.",
+    "boxOfficeAfterAdmin": "Jakmile to správce schválí, Box Office stáhne jinou kopii.",
+    "fix": {
+      "waiting": "Čeká na schválení jiné kopie správcem",
+      "fixing": "Box Office stahuje jinou kopii",
+      "failed": "Box Office nemohl získat jinou kopii.",
+      "fixed": "Opraveno jinou kopií"
+    }
   },
   "quality": {
     "label": "Kvalita",
@@ -1567,7 +1580,8 @@
     },
     "settings": {
       "approval": "Jiné edice a lepší kopie vždy potřebují schválení správce",
-      "approvalDetail": "I když se žádosti přidávají hned. Jen s Box Office."
+      "approvalDetail": "I když se žádosti přidávají hned. Jen s Box Office.",
+      "approvalReports": "Také nahlášené problémy, které by jinak Box Office opravil hned."
     }
   }
 }
