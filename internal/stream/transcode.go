@@ -366,7 +366,14 @@ func (t *Transcoder) start(ctx context.Context, userID int64, it store.Item, sta
 	ext := ".ts"
 	if fragmented(it.VideoCodec, copyVideo) {
 		ext = ".m4s"
-		args = append(args, "-hls_segment_type", "fmp4", "-hls_fmp4_init_filename", "init.mp4")
+		// No edit lists: FFmpeg otherwise lines the sound up with the picture
+		// only in the init piece's edit lists (the sound's encoder delay, the
+		// picture's reordered frames, and after a seek the time between the
+		// keyframe the copied picture starts on and the sound). Apple's
+		// players don't follow those in HLS the way FFmpeg means them, and
+		// the sound came a little ahead of the picture on iPhones and Apple
+		// TVs. Without them, the pieces' own times say when each sample plays.
+		args = append(args, "-hls_segment_type", "fmp4", "-hls_fmp4_init_filename", "init.mp4", "-hls_segment_options", "use_editlist=0")
 	}
 	firstSegments := []string{filepath.Join(dir, "seg00000"+ext)}
 	if adaptive {
