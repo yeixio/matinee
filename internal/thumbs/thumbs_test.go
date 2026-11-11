@@ -159,6 +159,35 @@ func TestMakeSheets(t *testing.T) {
 	if vids, n, err := st.UnreadableVideos(ctx, Version, 10); err != nil || n != 1 || len(vids) != 1 || vids[0].ID != files[0].ID {
 		t.Fatalf("unreadable: %+v %d %v", vids, n, err)
 	}
+
+	// A video whose share stops answering each time it's read is set aside
+	// after slowfs.StallsBeforeSetAside tries, even by a new Generator, as
+	// after a restart. It isn't checked for damage: that would read it again.
+	st.ClearThumbnails(ctx, files[0].ID)
+	reported = nil
+	damaged = func(context.Context, string, string, int64, func(int)) bool { t.Fatal("checked a file on a stalled share"); return false }
+	oldWait := slowfs.Wait
+	slowfs.Wait = 20 * time.Millisecond
+	release := make(chan struct{})
+	t.Cleanup(func() { close(release); slowfs.Wait = oldWait })
+	slowfs.Do(files[0].Path, func() (int, error) { <-release; return 0, nil })
+	for i := 1; i < slowfs.StallsBeforeSetAside; i++ {
+		g := &Generator{Store: st, FFmpeg: ffmpeg, Dir: t.TempDir(), Log: log}
+		if g.Make(ctx, files[0]) {
+			t.Fatalf("set aside after %d stalls", i)
+		}
+	}
+	g = &Generator{Store: st, FFmpeg: ffmpeg, Dir: t.TempDir(), Log: log}
+	g.OnUnreadable(func(_ context.Context, id int64) { reported = append(reported, id) })
+	if !g.Make(ctx, files[0]) {
+		t.Fatal("didn't set aside a video its share keeps stopping on")
+	}
+	if len(reported) != 1 {
+		t.Fatalf("reported %v", reported)
+	}
+	if _, n, _ := st.UnreadableVideos(ctx, Version, 10); n != 1 {
+		t.Fatalf("unreadable: %d", n)
+	}
 }
 
 // A file FFmpeg can't read is remembered as unreadable rather than tried

@@ -288,6 +288,14 @@ func (g *Generator) retryLater(id int64) bool {
 	return ok
 }
 
+// stalls is where share stalls are counted: the database, when there is one.
+func (g *Generator) stalls() slowfs.Stalls {
+	if g.Store == nil {
+		return nil
+	}
+	return g.Store
+}
+
 // lock keeps two makers off one video: the background pass and someone
 // pressing play.
 func (g *Generator) lock(id int64) func() {
@@ -319,13 +327,24 @@ func (g *Generator) Make(ctx context.Context, f store.ThumbnailFile) bool {
 		f = cur
 	}
 	t, err := g.make(ctx, f)
+	verdict := slowfs.TryLater
+	if errors.Is(err, context.DeadlineExceeded) && ctx.Err() == nil {
+		verdict = g.timeouts.Add(ctx, g.stalls(), f.ID, f.Path, store.MediaKey(0, f.Size, f.Mtime))
+		if verdict == slowfs.CheckFile && !damaged(ctx, g.FFmpeg, f.Path, f.DurationMs, g.LowPriority) {
+			verdict = slowfs.TryLater
+		}
+	}
 	switch {
 	case ctx.Err() != nil:
 		return false
-	case errors.Is(err, context.DeadlineExceeded) && g.timeouts.Add(f.ID, f.Path) &&
-		damaged(ctx, g.FFmpeg, f.Path, f.DurationMs, g.LowPriority):
-		// It keeps timing out with its share answering: most likely damaged.
-		g.Log.Warn("thumbnails: video keeps timing out; leaving it until it changes (it may be damaged)", "path", f.Path)
+	case verdict != slowfs.TryLater:
+		// It keeps timing out with its share answering, or its share keeps
+		// stopping while it's read: most likely damaged.
+		if verdict == slowfs.SetAside {
+			g.Log.Warn("thumbnails: the network share keeps stopping while this video is read; leaving it until it changes (it may be damaged)", "path", f.Path)
+		} else {
+			g.Log.Warn("thumbnails: video keeps timing out; leaving it until it changes (it may be damaged)", "path", f.Path)
+		}
 		t = store.Thumbnails{} // stored as unreadable, until the file changes
 		g.mu.Lock()
 		report := g.unreadable

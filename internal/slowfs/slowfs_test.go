@@ -1,6 +1,7 @@
 package slowfs
 
 import (
+	"context"
 	"errors"
 	"os"
 	"path/filepath"
@@ -54,19 +55,22 @@ func TestDoGivesUpOnAHungShare(t *testing.T) {
 	}
 }
 
-// A file that keeps timing out with its share answering is given up on
-// after GiveUpAfter timeouts; one on a share that's stalled isn't counted.
+// A file that keeps timing out with its share answering is checked for
+// damage after GiveUpAfter timeouts. One whose share stalls while it's read
+// is tried later, until the share has stalled StallsBeforeSetAside times
+// during its reads.
 func TestTimeoutsGiveUp(t *testing.T) {
+	ctx := t.Context()
 	var to Timeouts
 	file := filepath.Join(t.TempDir(), "a.mkv")
 	os.WriteFile(file, []byte("x"), 0o644)
 	for i := 1; i < GiveUpAfter; i++ {
-		if to.Add(1, file) {
-			t.Fatalf("gave up after %d", i)
+		if v := to.Add(ctx, nil, 1, file, "k"); v != TryLater {
+			t.Fatalf("gave up after %d: %v", i, v)
 		}
 	}
-	if !to.Add(1, file) {
-		t.Fatalf("didn't give up after %d", GiveUpAfter)
+	if v := to.Add(ctx, nil, 1, file, "k"); v != CheckFile {
+		t.Fatalf("didn't give up after %d: %v", GiveUpAfter, v)
 	}
 
 	old := Wait
@@ -77,8 +81,24 @@ func TestTimeoutsGiveUp(t *testing.T) {
 	defer close(release)
 	Do(stalled, func() (int, error) { <-release; return 0, nil })
 	for range GiveUpAfter + 1 {
-		if to.Add(2, stalled) {
-			t.Fatal("gave up on a file whose share isn't answering")
+		if v := to.Add(ctx, nil, 2, stalled, "k"); v != TryLater {
+			t.Fatalf("gave up on a file whose share isn't answering, with nowhere to count stalls: %v", v)
 		}
 	}
+	counts := fakeStalls{}
+	for i := 1; i < StallsBeforeSetAside; i++ {
+		if v := to.Add(ctx, counts, 2, stalled, "k"); v != TryLater {
+			t.Fatalf("set aside after %d stalls: %v", i, v)
+		}
+	}
+	if v := to.Add(ctx, counts, 2, stalled, "k"); v != SetAside {
+		t.Fatalf("didn't set aside after %d stalls: %v", StallsBeforeSetAside, v)
+	}
+}
+
+type fakeStalls map[int64]int
+
+func (f fakeStalls) AddShareStall(_ context.Context, id int64, _ string, _ time.Duration) (int, error) {
+	f[id]++
+	return f[id], nil
 }
