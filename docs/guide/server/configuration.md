@@ -71,7 +71,7 @@ Most of Matinee is set up in the web player under **Settings**. A few things abo
 | `MATINEE_SCAN_INTERVAL` | `15m` | How often libraries are rescanned in full; `0` turns it off ([more](/docs/server/new-files/)) |
 <!-- /until -->
 <!-- since: v0.2.4 -->
-| `MATINEE_SCAN_INTERVAL` | `15m` | How often libraries are rescanned in full until an admin picks an interval in Settings; `0` turns it off ([more](/docs/server/new-files/#full-rescans)) |
+| `MATINEE_SCAN_INTERVAL` | `6h` | How often libraries are rescanned in full until an admin picks an interval in Settings; `0` turns it off ([more](/docs/server/new-files/#full-rescans)) |
 <!-- /since -->
 | `MATINEE_WATCH_POLL_INTERVAL` | `30s` | How often folders on network shares are checked for new files |
 | `MATINEE_DISCOVERY` | `true` | Announce the server on the local network so the apps find it |

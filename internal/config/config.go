@@ -104,7 +104,7 @@ func Load(args []string) (Config, error) {
 	fs.BoolVar(&c.Plugins, "plugins", env("MATINEE_PLUGINS", "true") != "false", "let admins install plugins in Settings")
 	fs.BoolVar(&c.PodcastsHomeNetwork, "podcasts-home-network", env("MATINEE_PODCASTS_HOME_NETWORK", "false") == "true", "let podcast feeds and radio stations come from addresses on the home network too (off: only from the internet)")
 	fs.StringVar(&c.PluginCatalog, "plugin-catalog", env("MATINEE_PLUGIN_CATALOG", "https://matinee.yeix.io/plugins.json"), "list of official plugins Settings offers; off for none")
-	interval := fs.String("scan-interval", env("MATINEE_SCAN_INTERVAL", "15m"), "periodic rescan interval, 0 to disable")
+	interval := fs.String("scan-interval", env("MATINEE_SCAN_INTERVAL", "6h"), "how often every library is rescanned in full until an admin picks in Settings, 0 to disable")
 	drainDelay := fs.String("drain-delay", env("MATINEE_DRAIN_DELAY", "0s"), "on shutdown, how long to keep serving after telling players the server is restarting (the Helm chart uses 5s)")
 	shutdownTimeout := fs.String("shutdown-timeout", env("MATINEE_SHUTDOWN_TIMEOUT", "10s"), "on shutdown, how long requests in flight get to finish")
 	watchPoll := fs.String("watch-poll-interval", env("MATINEE_WATCH_POLL_INTERVAL", "30s"), "how often folders on network shares are checked for new files")
