@@ -1271,6 +1271,7 @@
       },
       "burnSub": "Untertitel eingebrannt",
       "toneMapped": "HDR zu SDR",
+      "saving": "wenig Platz: behält nur die Minuten um die Wiedergabestelle",
       "why": {
         "codec": "das Gerät kann dieses Videoformat nicht abspielen",
         "hdr": "der Bildschirm kann dieses HDR nicht zeigen",
@@ -1279,7 +1280,12 @@
       "started": "Gestartet {{time}}",
       "stop": "Stoppen",
       "stopHint": "Beendet FFmpeg. Ist der Player noch offen, startet er eine neue Transkodierung.",
-      "cpuOnly": "Transkodierungen laufen auf der CPU."
+      "cpuOnly": "Transkodierungen laufen auf der CPU.",
+      "space": "Platz für Transkodierungen: {{free}} frei.",
+      "spaceOfLimit": "Platz für Transkodierungen: {{free}} frei vom Limit von {{limit}}.",
+      "spaceShort": "Transkodierungen haben wenig Platz ({{free}} frei), daher behalten lange Videos nur die Minuten um die Wiedergabestelle.",
+      "spaceOut": "Ein Video konnte {{time}} nicht abgespielt werden, weil der Platz für Transkodierungen ausging (jetzt {{free}} frei).",
+      "spaceTip": "Gib dem Transkodierungsordner mehr Platz oder schaffe Platz auf seiner Festplatte."
     },
     "problems": {
       "title": "Warnungen und Fehler",
@@ -1387,7 +1393,9 @@
       "restart": "Der Server startet oder startet neu",
       "restartHint": "Sagt, ob er aktualisiert wurde oder ohne sauberes Herunterfahren beendet wurde.",
       "backup": "Eine Sicherung schlägt fehl",
-      "backupHint": "Wenn die Datenbank nicht gesichert werden kann."
+      "backupHint": "Wenn die Datenbank nicht gesichert werden kann.",
+      "transcodeSpace": "Transkodierungen geht der Platz aus",
+      "transcodeSpaceHint": "Wenn ein Video nicht abgespielt werden kann, weil der Transkodierungsordner voll ist."
     },
     "email": {
       "title": "E-Mail",

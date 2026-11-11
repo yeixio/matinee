@@ -1279,6 +1279,7 @@
       },
       "burnSub": "sous-titres incrustés",
       "toneMapped": "HDR en SDR",
+      "saving": "manque de place : ne garde que les minutes autour de la lecture",
       "why": {
         "codec": "l'appareil ne lit pas ce format vidéo",
         "hdr": "l'écran n'affiche pas ce HDR",
@@ -1287,7 +1288,12 @@
       "started": "Démarré {{time}}",
       "stop": "Arrêter",
       "stopHint": "Arrête FFmpeg. Si le lecteur est encore ouvert, il lance un nouveau transcodage.",
-      "cpuOnly": "Les transcodages tournent sur le processeur."
+      "cpuOnly": "Les transcodages tournent sur le processeur.",
+      "space": "Place pour les transcodages : {{free}} libres.",
+      "spaceOfLimit": "Place pour les transcodages : {{free}} libres sur la limite de {{limit}}.",
+      "spaceShort": "Les transcodages manquent de place ({{free}} libres) : les longues vidéos ne gardent que les minutes autour de la lecture.",
+      "spaceOut": "Une vidéo n'a pas pu être lue {{time}} car les transcodages ont manqué de place ({{free}} libres maintenant).",
+      "spaceTip": "Donnez plus de place au dossier de transcodage ou libérez de l'espace sur son disque."
     },
     "problems": {
       "title": "Avertissements et erreurs",
@@ -1398,7 +1404,9 @@
       "restart": "Le serveur démarre ou redémarre",
       "restartHint": "Indique s'il a été mis à jour, ou s'il s'est arrêté sans s'éteindre proprement.",
       "backup": "Une sauvegarde échoue",
-      "backupHint": "Quand la base de données ne peut pas être sauvegardée."
+      "backupHint": "Quand la base de données ne peut pas être sauvegardée.",
+      "transcodeSpace": "Les transcodages manquent de place",
+      "transcodeSpaceHint": "Quand une vidéo ne peut pas être lue parce que le dossier de transcodage est plein."
     },
     "email": {
       "title": "E-mail",

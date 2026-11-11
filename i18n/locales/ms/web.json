@@ -1263,6 +1263,7 @@
       },
       "burnSub": "sari kata dibenamkan",
       "toneMapped": "HDR ke SDR",
+      "saving": "ruang kurang: simpan hanya minit di sekitar kedudukan main",
       "why": {
         "codec": "peranti tidak dapat memainkan format video ini",
         "hdr": "skrin tidak dapat memaparkan HDR ini",
@@ -1271,7 +1272,12 @@
       "started": "Bermula {{time}}",
       "stop": "Hentikan",
       "stopHint": "Menghentikan FFmpeg. Jika pemain masih terbuka, ia memulakan transkod baharu.",
-      "cpuOnly": "Transkod berjalan pada CPU."
+      "cpuOnly": "Transkod berjalan pada CPU.",
+      "space": "Ruang untuk transkod: {{free}} kosong.",
+      "spaceOfLimit": "Ruang untuk transkod: {{free}} kosong daripada had {{limit}}.",
+      "spaceShort": "Ruang transkod kurang ({{free}} kosong), jadi video panjang hanya menyimpan minit di sekitar kedudukan main.",
+      "spaceOut": "Sebuah video tidak dapat dimainkan {{time}} kerana ruang transkod habis ({{free}} kosong sekarang).",
+      "spaceTip": "Beri folder transkod lebih banyak ruang, atau kosongkan cakeranya."
     },
     "problems": {
       "title": "Amaran dan ralat",
@@ -1376,7 +1382,9 @@
       "restart": "Pelayan bermula atau dimulakan semula",
       "restartHint": "Memberitahu sama ada ia dikemas kini, atau berhenti tanpa ditutup dengan betul.",
       "backup": "Sandaran gagal",
-      "backupHint": "Apabila pangkalan data tidak dapat disandarkan."
+      "backupHint": "Apabila pangkalan data tidak dapat disandarkan.",
+      "transcodeSpace": "Ruang transkod habis",
+      "transcodeSpaceHint": "Apabila video tidak dapat dimainkan kerana folder transkod penuh."
     },
     "email": {
       "title": "E-mel",

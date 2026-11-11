@@ -22,6 +22,7 @@ func TestExplain(t *testing.T) {
 		{"slow share beats everything", Facts{ReadMs: 2500, Converting: true, Speed: 0.5, DownloadBps: 1}, CauseSlowDisk, "disk", map[string]string{"seconds": "2.5"}},
 		{"share slower than the file", Facts{ReadMs: 300, ReadBps: 10_000_000, NeededBps: 40_000_000}, CauseSlowDisk, "disk", nil},
 		{"nothing known", Facts{}, CauseUnknown, "", nil},
+		{"out of room beats everything", Facts{NoSpace: true, ReadMs: 2500, DownloadBps: 1, NeededBps: 8_000_000}, CauseNoSpace, "space", nil},
 	} {
 		got := Explain(c.f)
 		if got.Code != c.code || got.Tip != c.tip {

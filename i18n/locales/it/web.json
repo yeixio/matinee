@@ -1279,6 +1279,7 @@
       },
       "burnSub": "sottotitoli impressi",
       "toneMapped": "Da HDR a SDR",
+      "saving": "poco spazio: tiene solo i minuti intorno al punto di riproduzione",
       "why": {
         "codec": "il dispositivo non riproduce questo formato video",
         "hdr": "lo schermo non mostra questo HDR",
@@ -1287,7 +1288,12 @@
       "started": "Avviata {{time}}",
       "stop": "Ferma",
       "stopHint": "Ferma FFmpeg. Se il player è ancora aperto, avvia una nuova transcodifica.",
-      "cpuOnly": "Le transcodifiche usano la CPU."
+      "cpuOnly": "Le transcodifiche usano la CPU.",
+      "space": "Spazio per le transcodifiche: {{free}} liberi.",
+      "spaceOfLimit": "Spazio per le transcodifiche: {{free}} liberi sul limite di {{limit}}.",
+      "spaceShort": "Le transcodifiche hanno poco spazio ({{free}} liberi), quindi i video lunghi tengono solo i minuti intorno al punto di riproduzione.",
+      "spaceOut": "Un video non si è potuto riprodurre {{time}} perché le transcodifiche hanno esaurito lo spazio (ora {{free}} liberi).",
+      "spaceTip": "Dai più spazio alla cartella di transcodifica o libera spazio sul suo disco."
     },
     "problems": {
       "title": "Avvisi ed errori",
@@ -1398,7 +1404,9 @@
       "restart": "Il server si avvia o si riavvia",
       "restartHint": "Dice se è stato aggiornato o se si è fermato senza spegnersi correttamente.",
       "backup": "Un backup non riesce",
-      "backupHint": "Quando non si riesce a fare il backup del database."
+      "backupHint": "Quando non si riesce a fare il backup del database.",
+      "transcodeSpace": "Le transcodifiche esauriscono lo spazio",
+      "transcodeSpaceHint": "Quando un video non si può riprodurre perché la cartella di transcodifica è piena."
     },
     "email": {
       "title": "Email",

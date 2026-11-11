@@ -679,6 +679,7 @@
     "slowConvert": "De server zet deze video om op {{speed}}× snelheid, trager dan hij afspeelt.",
     "slowConnection": "De verbinding haalt {{have}} Mbps en deze video heeft {{need}} Mbps nodig.",
     "unknown": "De server en de verbinding zagen er goed uit. Misschien viel het netwerk even weg.",
+    "noSpace": "De server heeft geen ruimte meer om deze video om te zetten.",
     "converted": {
       "codec": "Hij wordt omgezet omdat dit apparaat het videoformaat niet afspeelt.",
       "hdr": "Hij wordt omgezet omdat dit scherm zijn HDR niet toont.",
@@ -689,7 +690,8 @@
       "gpu": "Tip voor beheerders: een GPU voor transcoderen zet veel sneller om. Zie Instellingen → Streaming.",
       "lowerQuality": "Tip voor beheerders: de GPU houdt het niet bij. Minder streams tegelijk of een lagere kwaliteit helpt.",
       "adaptive": "Tip voor beheerders: zet adaptieve kwaliteit aan in Instellingen → Streaming, zodat spelers lager kunnen gaan.",
-      "disk": "Tip voor beheerders: controleer in Serverstatus de schijf of netwerkshare van deze bibliotheek."
+      "disk": "Tip voor beheerders: controleer in Serverstatus de schijf of netwerkshare van deze bibliotheek.",
+      "space": "Tip voor beheerders: geef de transcodeermap meer ruimte, of maak ruimte vrij op de schijf. Serverstatus laat zien hoeveel hij heeft."
     },
     "test": "Verbinding testen",
     "testing": "Bezig met testen…",

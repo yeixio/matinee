@@ -679,6 +679,7 @@
     "slowConvert": "Sunucu bu videoyu {{speed}}× hızda dönüştürüyor, oynatıldığından yavaş.",
     "slowConnection": "Bağlantı {{have}} Mbps alıyor, bu video {{need}} Mbps istiyor.",
     "unknown": "Sunucu ve bağlantı iyi görünüyordu. Ağ bir an kopmuş olabilir.",
+    "noSpace": "Sunucunun bu videoyu dönüştürecek yeri kalmadı.",
     "converted": {
       "codec": "Bu cihaz video biçimini oynatamadığı için dönüştürülüyor.",
       "hdr": "Bu ekran HDR'ını gösteremediği için dönüştürülüyor.",
@@ -689,7 +690,8 @@
       "gpu": "Yönetici ipucu: dönüştürme için bir GPU çok daha hızlıdır. Ayarlar → Akış'a bakın.",
       "lowerQuality": "Yönetici ipucu: GPU yetişemiyor. Aynı anda daha az akış veya daha düşük kalite yardımcı olur.",
       "adaptive": "Yönetici ipucu: oynatıcılar kaliteyi düşürebilsin diye Ayarlar → Akış'ta uyarlanabilir kaliteyi açın.",
-      "disk": "Yönetici ipucu: Sunucu durumu'nda bu kitaplığın diskini veya ağ paylaşımını kontrol edin."
+      "disk": "Yönetici ipucu: Sunucu durumu'nda bu kitaplığın diskini veya ağ paylaşımını kontrol edin.",
+      "space": "Yönetici ipucu: dönüştürme klasörüne daha fazla yer verin veya diskinde yer açın. Sunucu durumu ne kadar yeri olduğunu gösterir."
     },
     "test": "Bağlantıyı test et",
     "testing": "Test ediliyor…",

@@ -679,6 +679,7 @@
     "slowConvert": "Palvelin muuntaa videota {{speed}}× nopeudella, hitaammin kuin se toistuu.",
     "slowConnection": "Yhteys saa {{have}} Mbit/s, ja video tarvitsee {{need}} Mbit/s.",
     "unknown": "Palvelin ja yhteys näyttivät hyviltä. Verkko saattoi katketa hetkeksi.",
+    "noSpace": "Palvelimelta loppui tila tämän videon muuntamiseen.",
     "converted": {
       "codec": "Se muunnetaan, koska tämä laite ei toista sen videomuotoa.",
       "hdr": "Se muunnetaan, koska tämä näyttö ei näytä sen HDR:ää.",
@@ -689,7 +690,8 @@
       "gpu": "Vinkki ylläpitäjille: GPU muuntaa paljon nopeammin. Katso Asetukset → Suoratoisto.",
       "lowerQuality": "Vinkki ylläpitäjille: GPU ei pysy perässä. Vähemmän samanaikaisia virtoja tai matalampi laatu auttaa.",
       "adaptive": "Vinkki ylläpitäjille: ota mukautuva laatu käyttöön kohdassa Asetukset → Suoratoisto, jotta soittimet voivat laskea laatua.",
-      "disk": "Vinkki ylläpitäjille: tarkista Palvelimen tila -näkymästä tämän kirjaston levy tai verkkojako."
+      "disk": "Vinkki ylläpitäjille: tarkista Palvelimen tila -näkymästä tämän kirjaston levy tai verkkojako.",
+      "space": "Vinkki ylläpitäjille: anna muunnoskansiolle lisää tilaa tai vapauta tilaa sen levyltä. Palvelimen tila näyttää, paljonko sillä on."
     },
     "test": "Testaa yhteys",
     "testing": "Testataan…",

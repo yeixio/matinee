@@ -252,6 +252,7 @@
   "the_channel_isnt_answering_right_now": "il canale non risponde in questo momento",
   "the_guides_address_isnt_a_web_address": "l’indirizzo della guida non è un indirizzo web",
   "the_playlist_couldnt_be_read_reason": "impossibile leggere l’elenco: {{reason}}",
+  "the_server_is_out_of_room_to_convert_this_video": "il server non ha spazio per convertire questo video",
   "only_movies_and_shows_have_a_match_to_fix": "solo film e serie hanno un abbinamento da correggere",
   "add_a_tmdb_key_in_settings_posters_and_details_to_look_titles_up": "aggiungi una chiave TMDB in Impostazioni → Locandine e dettagli per cercare i titoli",
   "tmdb_didnt_accept_the_key_in_settings_posters_and_details": "TMDB non ha accettato la chiave in Impostazioni → Locandine e dettagli",

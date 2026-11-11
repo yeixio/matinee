@@ -252,6 +252,7 @@
   "the_channel_isnt_answering_right_now": "चैनल अभी जवाब नहीं दे रहा",
   "the_guides_address_isnt_a_web_address": "गाइड का पता वेब पता नहीं है",
   "the_playlist_couldnt_be_read_reason": "सूची पढ़ी नहीं जा सकी: {{reason}}",
+  "the_server_is_out_of_room_to_convert_this_video": "इस वीडियो को बदलने के लिए सर्वर में जगह नहीं है",
   "only_movies_and_shows_have_a_match_to_fix": "केवल फ़िल्मों और शो का मिलान ठीक किया जा सकता है",
   "add_a_tmdb_key_in_settings_posters_and_details_to_look_titles_up": "शीर्षक खोजने के लिए सेटिंग्स → पोस्टर और विवरण में TMDB कुंजी जोड़ें",
   "tmdb_didnt_accept_the_key_in_settings_posters_and_details": "TMDB ने सेटिंग्स → पोस्टर और विवरण वाली कुंजी स्वीकार नहीं की",

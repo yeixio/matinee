@@ -100,7 +100,10 @@ media: []
 #    subPath: "TV Shows"  # optional: mount one folder of the volume
 
 # Transcode segments and the image cache. Rebuilt on demand, so emptyDir is fine.
-# Use a fast local disk; network storage slows transcoding down.
+# Use a fast local disk; network storage slows transcoding down. Matinee keeps
+# transcodes within sizeLimit: a video bigger than the room left keeps only the
+# minutes around where it plays, so 50Gi plays any film (more room just keeps
+# more of it for seeking back).
 cache:
   sizeLimit: 50Gi
   medium: ""  # "Memory" puts it in RAM (counts against the memory limit)

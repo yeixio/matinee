@@ -1263,6 +1263,7 @@
       },
       "burnSub": "subtitel ditanam",
       "toneMapped": "HDR ke SDR",
+      "saving": "ruang kurang: hanya menyimpan menit di sekitar posisi putar",
       "why": {
         "codec": "perangkat tidak dapat memutar format video ini",
         "hdr": "layar tidak dapat menampilkan HDR ini",
@@ -1271,7 +1272,12 @@
       "started": "Dimulai {{time}}",
       "stop": "Hentikan",
       "stopHint": "Menghentikan FFmpeg. Jika pemutar masih terbuka, pemutar akan memulai transcode baru.",
-      "cpuOnly": "Transcode berjalan di CPU."
+      "cpuOnly": "Transcode berjalan di CPU.",
+      "space": "Ruang untuk transcode: {{free}} kosong.",
+      "spaceOfLimit": "Ruang untuk transcode: {{free}} kosong dari batas {{limit}}.",
+      "spaceShort": "Ruang transcode kurang ({{free}} kosong), jadi video panjang hanya menyimpan menit di sekitar posisi putar.",
+      "spaceOut": "Sebuah video tidak bisa diputar {{time}} karena ruang transcode habis ({{free}} kosong sekarang).",
+      "spaceTip": "Beri folder transcode lebih banyak ruang, atau kosongkan disknya."
     },
     "problems": {
       "title": "Peringatan dan galat",
@@ -1376,7 +1382,9 @@
       "restart": "Server mulai atau dimulai ulang",
       "restartHint": "Memberi tahu apakah server diperbarui, atau berhenti tanpa dimatikan dengan benar.",
       "backup": "Pencadangan gagal",
-      "backupHint": "Saat basis data tidak bisa dicadangkan."
+      "backupHint": "Saat basis data tidak bisa dicadangkan.",
+      "transcodeSpace": "Ruang transcode habis",
+      "transcodeSpaceHint": "Saat video tidak bisa diputar karena folder transcode penuh."
     },
     "email": {
       "title": "Email",

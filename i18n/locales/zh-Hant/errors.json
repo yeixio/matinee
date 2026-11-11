@@ -252,6 +252,7 @@
   "the_channel_isnt_answering_right_now": "頻道目前沒有回應",
   "the_guides_address_isnt_a_web_address": "節目表位址不是網址",
   "the_playlist_couldnt_be_read_reason": "無法讀取清單：{{reason}}",
+  "the_server_is_out_of_room_to_convert_this_video": "伺服器沒有足夠的空間來轉換這部影片",
   "only_movies_and_shows_have_a_match_to_fix": "只有電影和節目可以修正比對",
   "add_a_tmdb_key_in_settings_posters_and_details_to_look_titles_up": "請在 設定 → 海報與詳細資料 中加入 TMDB 金鑰以查詢片名",
   "tmdb_didnt_accept_the_key_in_settings_posters_and_details": "TMDB 不接受 設定 → 海報與詳細資料 中的金鑰",

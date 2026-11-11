@@ -299,7 +299,11 @@ function Player({ id }: { id: number }) {
           h.loadSource(url)
           h.attachMedia(el)
           h.on(Hls.Events.ERROR, (_, d) => {
-            if (d.fatal && seq === hlsSeq.current) recoverRef.current?.(position(), 'transcode')
+            if (seq !== hlsSeq.current) return
+            // A piece the server cleared to make room (a long video when the
+            // transcode folder is short of it): start again from here.
+            if (d.response?.code === 410) startHls(position())
+            else if (d.fatal) recoverRef.current?.(position(), 'transcode')
           })
           // How fast pieces arrive, for saying why it buffered.
           h.on(Hls.Events.FRAG_LOADED, (_, d) => {
@@ -921,7 +925,8 @@ function Player({ id }: { id: number }) {
       })
       .then(({ cause }) => {
         setCause(cause)
-        if (kind === 'stall' && worthSaying(cause)) flash(causeText(tr, cause), 7000)
+        // A transcode that ran out of room is worth saying even when it starts again.
+        if ((kind === 'stall' || cause.code === 'noSpace') && worthSaying(cause)) flash(causeText(tr, cause), 7000)
       })
       .catch(() => {})
   }

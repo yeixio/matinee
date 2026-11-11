@@ -252,6 +252,7 @@
   "the_channel_isnt_answering_right_now": "a csatorna most nem válaszol",
   "the_guides_address_isnt_a_web_address": "a műsorújság címe nem webcím",
   "the_playlist_couldnt_be_read_reason": "a lista nem olvasható: {{reason}}",
+  "the_server_is_out_of_room_to_convert_this_video": "a szervernek nincs helye a videó átkódolásához",
   "only_movies_and_shows_have_a_match_to_fix": "csak filmeknek és sorozatoknak van javítható egyezése",
   "add_a_tmdb_key_in_settings_posters_and_details_to_look_titles_up": "a címek kereséséhez adj meg TMDB-kulcsot a Beállítások → Plakátok és részletek alatt",
   "tmdb_didnt_accept_the_key_in_settings_posters_and_details": "a TMDB nem fogadta el a kulcsot (Beállítások → Plakátok és részletek)",

@@ -1263,6 +1263,7 @@
       },
       "burnSub": "자막 입힘",
       "toneMapped": "HDR을 SDR로",
+      "saving": "공간 부족: 재생 위치 주변 몇 분만 보관",
       "why": {
         "codec": "기기가 이 동영상 형식을 재생할 수 없음",
         "hdr": "화면이 이 HDR을 표시할 수 없음",
@@ -1271,7 +1272,12 @@
       "started": "{{time}} 시작",
       "stop": "중지",
       "stopHint": "FFmpeg를 중지합니다. 플레이어가 아직 열려 있으면 새 트랜스코딩을 시작합니다.",
-      "cpuOnly": "트랜스코딩은 CPU에서 실행됩니다."
+      "cpuOnly": "트랜스코딩은 CPU에서 실행됩니다.",
+      "space": "트랜스코딩 공간: {{free}} 남음.",
+      "spaceOfLimit": "트랜스코딩 공간: 한도 {{limit}} 중 {{free}} 남음.",
+      "spaceShort": "트랜스코딩 공간이 부족해({{free}} 남음) 긴 동영상은 재생 위치 주변 몇 분만 보관합니다.",
+      "spaceOut": "트랜스코딩 공간이 부족해 {{time}} 동영상을 재생하지 못했습니다(지금 {{free}} 남음).",
+      "spaceTip": "트랜스코딩 폴더에 공간을 더 주거나 그 디스크를 비우세요."
     },
     "problems": {
       "title": "경고 및 오류",
@@ -1376,7 +1382,9 @@
       "restart": "서버가 시작되거나 다시 시작됨",
       "restartHint": "업데이트되었는지, 제대로 종료되지 않고 멈췄는지 알려 줍니다.",
       "backup": "백업 실패",
-      "backupHint": "데이터베이스를 백업하지 못했을 때."
+      "backupHint": "데이터베이스를 백업하지 못했을 때.",
+      "transcodeSpace": "트랜스코딩 공간 부족",
+      "transcodeSpaceHint": "트랜스코딩 폴더가 가득 차서 동영상을 재생할 수 없을 때."
     },
     "email": {
       "title": "이메일",

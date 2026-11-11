@@ -51,6 +51,9 @@ Most of Matinee is set up in the web player under **Settings**. A few things abo
 | --- | --- | --- |
 | `MATINEE_ADDR` | `:7171` | Listen address |
 | `MATINEE_DATA_DIR` | `./data` | SQLite database (when used), image cache, transcode scratch space |
+<!-- since: v0.2.4 -->
+| `MATINEE_CACHE_LIMIT` | none | How much the data folder's volume may hold when that's less than its disk, such as `50Gi` or `45G`: a Kubernetes `emptyDir`'s `sizeLimit` or a quota. Transcodes keep within it ([more](/docs/server/transcoding/#when-the-transcode-folder-runs-short-of-room)). The Helm chart sets it |
+<!-- /since -->
 | `MATINEE_DATABASE_URL` | empty | `postgres://…` to use PostgreSQL instead of SQLite |
 | `MATINEE_TMDB_KEY` | empty | TMDB API key or read access token, for [posters and details](/docs/getting-started/posters-and-details/) |
 | `MATINEE_RATING_COUNTRY` | `US` | Whose age ratings [kids profiles](/docs/household/profiles/) use, such as `GB`, `CA`, `AU` or `DE` |

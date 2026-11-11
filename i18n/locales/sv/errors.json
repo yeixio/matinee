@@ -252,6 +252,7 @@
   "the_channel_isnt_answering_right_now": "kanalen svarar inte just nu",
   "the_guides_address_isnt_a_web_address": "tablåns adress är ingen webbadress",
   "the_playlist_couldnt_be_read_reason": "listan kunde inte läsas: {{reason}}",
+  "the_server_is_out_of_room_to_convert_this_video": "servern har inte plats att koda om den här videon",
   "only_movies_and_shows_have_a_match_to_fix": "bara filmer och serier har en matchning att rätta",
   "add_a_tmdb_key_in_settings_posters_and_details_to_look_titles_up": "lägg till en TMDB-nyckel i Inställningar → Affischer och detaljer för att slå upp titlar",
   "tmdb_didnt_accept_the_key_in_settings_posters_and_details": "TMDB godtog inte nyckeln i Inställningar → Affischer och detaljer",

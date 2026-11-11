@@ -1279,6 +1279,7 @@
       },
       "burnSub": "subtitrări încorporate",
       "toneMapped": "HDR în SDR",
+      "saving": "spațiu puțin: păstrează doar minutele din jurul locului de redare",
       "why": {
         "codec": "dispozitivul nu redă acest format video",
         "hdr": "ecranul nu afișează acest HDR",
@@ -1287,7 +1288,12 @@
       "started": "Pornită {{time}}",
       "stop": "Oprește",
       "stopHint": "Oprește FFmpeg. Dacă playerul e încă deschis, pornește o nouă transcodare.",
-      "cpuOnly": "Transcodările rulează pe procesor."
+      "cpuOnly": "Transcodările rulează pe procesor.",
+      "space": "Spațiu pentru transcodări: {{free}} liberi.",
+      "spaceOfLimit": "Spațiu pentru transcodări: {{free}} liberi din limita de {{limit}}.",
+      "spaceShort": "Transcodările au spațiu puțin ({{free}} liberi), așa că videoclipurile lungi păstrează doar minutele din jurul locului de redare.",
+      "spaceOut": "Un videoclip nu a putut fi redat {{time}} pentru că transcodările au rămas fără spațiu (acum {{free}} liberi).",
+      "spaceTip": "Dă mai mult spațiu dosarului de transcodare sau eliberează spațiu pe discul lui."
     },
     "problems": {
       "title": "Avertismente și erori",
@@ -1398,7 +1404,9 @@
       "restart": "Serverul pornește sau repornește",
       "restartHint": "Spune dacă a fost actualizat sau s-a oprit fără să se închidă corect.",
       "backup": "O copie de rezervă eșuează",
-      "backupHint": "Când baza de date nu poate fi copiată."
+      "backupHint": "Când baza de date nu poate fi copiată.",
+      "transcodeSpace": "Transcodările rămân fără spațiu",
+      "transcodeSpaceHint": "Când un videoclip nu poate fi redat pentru că dosarul de transcodare e plin."
     },
     "email": {
       "title": "E-mail",

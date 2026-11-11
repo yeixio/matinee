@@ -711,6 +711,7 @@
     "slowConvert": "Il server converte questo video a {{speed}}× di velocità, più lentamente di quanto si riproduce.",
     "slowConnection": "La connessione arriva a {{have}} Mbps e questo video ne richiede {{need}}.",
     "unknown": "Server e connessione sembravano a posto. Forse la rete è caduta per un momento.",
+    "noSpace": "Il server ha esaurito lo spazio per convertire questo video.",
     "converted": {
       "codec": "Viene convertito perché questo dispositivo non riproduce il suo formato video.",
       "hdr": "Viene convertito perché questo schermo non mostra il suo HDR.",
@@ -721,7 +722,8 @@
       "gpu": "Consiglio per gli admin: una GPU per la transcodifica converte molto più in fretta. Vedi Impostazioni → Streaming.",
       "lowerQuality": "Consiglio per gli admin: la GPU non tiene il passo. Aiutano meno stream insieme o una qualità più bassa.",
       "adaptive": "Consiglio per gli admin: attiva la qualità adattiva in Impostazioni → Streaming, così i player possono scendere di qualità.",
-      "disk": "Consiglio per gli admin: controlla in Stato del server il disco o la condivisione di rete di questa libreria."
+      "disk": "Consiglio per gli admin: controlla in Stato del server il disco o la condivisione di rete di questa libreria.",
+      "space": "Consiglio per gli admin: dai più spazio alla cartella di transcodifica o libera spazio sul suo disco. Stato del server mostra quanto ne ha."
     },
     "test": "Prova la connessione",
     "testing": "Prova in corso…",

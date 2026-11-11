@@ -32,6 +32,9 @@ type Facts struct {
 	Adaptive bool
 	// Remote: the player is away from home.
 	Remote bool
+	// NoSpace: the transcode stopped, or couldn't start, because the
+	// server's transcode folder ran out of room.
+	NoSpace bool
 }
 
 // The causes Explain finds, most specific first.
@@ -42,6 +45,8 @@ const (
 	CauseSlowConvert = "slowConvert"
 	// The connection between the player and the server is slower than the stream.
 	CauseSlowConnection = "slowConnection"
+	// The server's transcode folder ran out of room.
+	CauseNoSpace = "noSpace"
 	// Nothing found on the server's side or in the speed; Wi-Fi dropping
 	// for a moment, say.
 	CauseUnknown = "unknown"
@@ -49,7 +54,7 @@ const (
 
 // Cause is why playback stalled. Values fill in its wording, such as
 // "have" and "need" in Mbps. Tip is what an admin could change, for
-// admins only: gpu, lowerQuality, adaptive, disk, ""
+// admins only: gpu, lowerQuality, adaptive, disk, space, ""
 type Cause struct {
 	Code   string            `json:"code"`
 	Values map[string]string `json:"values,omitempty"`
@@ -83,6 +88,8 @@ func Explain(f Facts) Cause {
 		return strconv.FormatFloat(v, 'f', 1, 64)
 	}
 	switch {
+	case f.NoSpace:
+		c.Code, c.Tip = CauseNoSpace, "space"
 	case f.ReadMs >= slowReadMs || f.ReadBps > 0 && f.NeededBps > 0 && float64(f.ReadBps) < float64(f.NeededBps)*headroom:
 		c.Code, c.Tip = CauseSlowDisk, "disk"
 		c.Values["seconds"] = strconv.FormatFloat(float64(f.ReadMs)/1000, 'f', 1, 64)

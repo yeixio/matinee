@@ -252,6 +252,7 @@
   "the_channel_isnt_answering_right_now": "de zender reageert nu niet",
   "the_guides_address_isnt_a_web_address": "het adres van de gids is geen webadres",
   "the_playlist_couldnt_be_read_reason": "de lijst kon niet worden gelezen: {{reason}}",
+  "the_server_is_out_of_room_to_convert_this_video": "de server heeft geen ruimte om deze video om te zetten",
   "only_movies_and_shows_have_a_match_to_fix": "alleen films en series hebben een koppeling om te corrigeren",
   "add_a_tmdb_key_in_settings_posters_and_details_to_look_titles_up": "voeg een TMDB-sleutel toe in Instellingen → Posters en details om titels op te zoeken",
   "tmdb_didnt_accept_the_key_in_settings_posters_and_details": "TMDB accepteerde de sleutel in Instellingen → Posters en details niet",

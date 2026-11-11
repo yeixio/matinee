@@ -1263,6 +1263,7 @@
       },
       "burnSub": "字幕已燒錄",
       "toneMapped": "HDR 轉 SDR",
+      "saving": "空間不足:只保留播放位置前後的幾分鐘",
       "why": {
         "codec": "裝置無法播放這種影片格式",
         "hdr": "螢幕無法顯示這種 HDR",
@@ -1271,7 +1272,12 @@
       "started": "開始於{{time}}",
       "stop": "停止",
       "stopHint": "停止 FFmpeg。如果播放器仍開著，它會開始新的轉碼。",
-      "cpuOnly": "轉碼在 CPU 上進行。"
+      "cpuOnly": "轉碼在 CPU 上進行。",
+      "space": "轉碼空間:剩餘 {{free}}。",
+      "spaceOfLimit": "轉碼空間:上限 {{limit}},剩餘 {{free}}。",
+      "spaceShort": "轉碼空間不足(剩餘 {{free}}),長影片只保留播放位置前後的幾分鐘。",
+      "spaceOut": "{{time}}有影片因轉碼空間用完而無法播放(現在剩餘 {{free}})。",
+      "spaceTip": "給轉碼資料夾更多空間,或清理它所在的磁碟。"
     },
     "problems": {
       "title": "警告和錯誤",
@@ -1376,7 +1382,9 @@
       "restart": "伺服器啟動或重新啟動",
       "restartHint": "說明它是否已更新，或是否未正常關閉就停止了。",
       "backup": "備份失敗",
-      "backupHint": "無法備份資料庫時。"
+      "backupHint": "無法備份資料庫時。",
+      "transcodeSpace": "轉碼空間用完",
+      "transcodeSpaceHint": "當轉碼資料夾已滿導致影片無法播放時。"
     },
     "email": {
       "title": "電子郵件",

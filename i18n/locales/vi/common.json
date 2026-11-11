@@ -647,6 +647,7 @@
     "slowConvert": "Máy chủ chuyển đổi video này ở tốc độ {{speed}}×, chậm hơn tốc độ phát.",
     "slowConnection": "Kết nối đạt {{have}} Mbps, còn video này cần {{need}} Mbps.",
     "unknown": "Máy chủ và kết nối đều ổn. Có thể mạng bị rớt trong chốc lát.",
+    "noSpace": "Máy chủ đã hết chỗ để chuyển đổi video này.",
     "converted": {
       "codec": "Video được chuyển đổi vì thiết bị này không phát được định dạng video.",
       "hdr": "Video được chuyển đổi vì màn hình này không hiển thị được HDR.",
@@ -657,7 +658,8 @@
       "gpu": "Mẹo cho quản trị viên: GPU để chuyển mã nhanh hơn nhiều. Xem Cài đặt → Phát trực tuyến.",
       "lowerQuality": "Mẹo cho quản trị viên: GPU không theo kịp. Bớt luồng cùng lúc hoặc chất lượng thấp hơn sẽ giúp.",
       "adaptive": "Mẹo cho quản trị viên: bật chất lượng thích ứng trong Cài đặt → Phát trực tuyến để trình phát có thể hạ chất lượng.",
-      "disk": "Mẹo cho quản trị viên: kiểm tra ổ đĩa hoặc thư mục mạng của thư viện này trong Tình trạng máy chủ."
+      "disk": "Mẹo cho quản trị viên: kiểm tra ổ đĩa hoặc thư mục mạng của thư viện này trong Tình trạng máy chủ.",
+      "space": "Mẹo cho quản trị viên: cấp thêm chỗ cho thư mục chuyển mã hoặc giải phóng ổ đĩa của nó. Tình trạng máy chủ cho biết nó còn bao nhiêu."
     },
     "test": "Kiểm tra kết nối",
     "testing": "Đang kiểm tra…",

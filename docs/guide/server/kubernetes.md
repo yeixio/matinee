@@ -68,6 +68,9 @@ kubectl create secret generic matinee-tmdb --from-literal=tmdb-api-key=your-key
 <!-- /since -->
 
 Transcodes and the image cache use a local `emptyDir`, so they're fast and never land on network storage.
+<!-- since: v0.2.4 -->
+Its size is `cache.sizeLimit` (50Gi). Kubernetes evicts the pod if the `emptyDir` grows past it, so the chart tells Matinee the limit, and transcodes keep within it: a film bigger than the room left keeps only the minutes around where it plays ([more](/docs/server/transcoding/#when-the-transcode-folder-runs-short-of-room)). 50Gi plays any film; more room lets people seek back further without waiting.
+<!-- /since -->
 
 <!-- since: v0.2.4 -->
 ### Volume sizes

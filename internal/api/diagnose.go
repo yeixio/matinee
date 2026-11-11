@@ -66,6 +66,7 @@ func (s *Server) reportPlayback(w http.ResponseWriter, r *http.Request) {
 		f.NeededBps = s.itemBitrate(r, it)
 	}
 	if s.Transcoder != nil {
+		f.NoSpace = s.Transcoder.OutOfSpace(u.ID, it.ID)
 		if t, ok := s.Transcoder.SessionFor(u.ID, it.ID); ok && t.Kind == "video" {
 			f.Converting, f.Why, f.Speed, f.GPU = true, t.Why, t.Speed, t.Accel != ""
 			// What's sent is the conversion, not the file.

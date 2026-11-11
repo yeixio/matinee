@@ -252,6 +252,7 @@
   "the_channel_isnt_answering_right_now": "شبکه الان پاسخ نمی‌دهد",
   "the_guides_address_isnt_a_web_address": "نشانی جدول پخش نشانی وب نیست",
   "the_playlist_couldnt_be_read_reason": "فهرست خوانده نشد: {{reason}}",
+  "the_server_is_out_of_room_to_convert_this_video": "سرور برای تبدیل این ویدیو فضا ندارد",
   "only_movies_and_shows_have_a_match_to_fix": "فقط فیلم‌ها و سریال‌ها تطبیق قابل اصلاح دارند",
   "add_a_tmdb_key_in_settings_posters_and_details_to_look_titles_up": "برای جستجوی عنوان‌ها، در تنظیمات ← پوسترها و جزئیات یک کلید TMDB اضافه کنید",
   "tmdb_didnt_accept_the_key_in_settings_posters_and_details": "TMDB کلید تنظیمات ← پوسترها و جزئیات را نپذیرفت",

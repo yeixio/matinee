@@ -711,6 +711,7 @@
     "slowConvert": "Le serveur convertit cette vidéo à {{speed}}× la vitesse, plus lentement qu'elle ne se lit.",
     "slowConnection": "La connexion atteint {{have}} Mb/s, et cette vidéo demande {{need}} Mb/s.",
     "unknown": "Le serveur et la connexion semblaient bons. Le réseau a peut-être coupé un instant.",
+    "noSpace": "Le serveur n'a plus de place pour convertir cette vidéo.",
     "converted": {
       "codec": "Elle est convertie car cet appareil ne lit pas son format vidéo.",
       "hdr": "Elle est convertie car cet écran n'affiche pas son HDR.",
@@ -721,7 +722,8 @@
       "gpu": "Conseil admin : un GPU pour le transcodage convertit bien plus vite. Voir Réglages → Streaming.",
       "lowerQuality": "Conseil admin : le GPU ne suit pas. Moins de flux à la fois ou une qualité plus basse aident.",
       "adaptive": "Conseil admin : activez la qualité adaptative dans Réglages → Streaming, pour que les lecteurs puissent baisser la qualité.",
-      "disk": "Conseil admin : vérifiez dans État du serveur le disque ou le partage réseau de cette bibliothèque."
+      "disk": "Conseil admin : vérifiez dans État du serveur le disque ou le partage réseau de cette bibliothèque.",
+      "space": "Conseil admin : donnez plus de place au dossier de transcodage ou libérez de l'espace sur son disque. État du serveur indique combien il en a."
     },
     "test": "Tester la connexion",
     "testing": "Test en cours…",

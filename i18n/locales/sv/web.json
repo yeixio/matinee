@@ -1271,6 +1271,7 @@
       },
       "burnSub": "undertexter inbrända",
       "toneMapped": "HDR till SDR",
+      "saving": "ont om plats: behåller bara minuterna runt uppspelningen",
       "why": {
         "codec": "enheten kan inte spela upp det här videoformatet",
         "hdr": "skärmen kan inte visa den här HDR-typen",
@@ -1279,7 +1280,12 @@
       "started": "Startade {{time}}",
       "stop": "Stoppa",
       "stopHint": "Stoppar FFmpeg. Om spelaren fortfarande är öppen startar den en ny omkodning.",
-      "cpuOnly": "Omkodningar körs på processorn."
+      "cpuOnly": "Omkodningar körs på processorn.",
+      "space": "Plats för omkodningar: {{free}} ledigt.",
+      "spaceOfLimit": "Plats för omkodningar: {{free}} ledigt av gränsen på {{limit}}.",
+      "spaceShort": "Omkodningarna har ont om plats ({{free}} ledigt), så långa videor behåller bara minuterna runt uppspelningen.",
+      "spaceOut": "En video kunde inte spelas {{time}} eftersom omkodningarna fick slut på plats ({{free}} ledigt nu).",
+      "spaceTip": "Ge omkodningsmappen mer plats, eller frigör plats på dess disk."
     },
     "problems": {
       "title": "Varningar och fel",
@@ -1387,7 +1393,9 @@
       "restart": "Servern startar eller startar om",
       "restartHint": "Säger om den uppdaterades, eller stannade utan att stängas av ordentligt.",
       "backup": "En säkerhetskopia misslyckas",
-      "backupHint": "När databasen inte kan säkerhetskopieras."
+      "backupHint": "När databasen inte kan säkerhetskopieras.",
+      "transcodeSpace": "Omkodningar får slut på plats",
+      "transcodeSpaceHint": "När en video inte kan spelas eftersom omkodningsmappen är full."
     },
     "email": {
       "title": "E-post",

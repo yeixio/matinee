@@ -1287,6 +1287,7 @@
       },
       "burnSub": "vypálené titulky",
       "toneMapped": "HDR na SDR",
+      "saving": "málo místa: drží jen minuty kolem místa přehrávání",
       "why": {
         "codec": "zařízení tento formát videa nepřehraje",
         "hdr": "obrazovka toto HDR nezobrazí",
@@ -1295,7 +1296,12 @@
       "started": "Začal {{time}}",
       "stop": "Zastavit",
       "stopHint": "Zastaví FFmpeg. Pokud je přehrávač stále otevřený, spustí nový převod.",
-      "cpuOnly": "Převody běží na procesoru."
+      "cpuOnly": "Převody běží na procesoru.",
+      "space": "Místo pro převody: volných {{free}}.",
+      "spaceOfLimit": "Místo pro převody: volných {{free}} z limitu {{limit}}.",
+      "spaceShort": "Převodům dochází místo (volných {{free}}), takže dlouhá videa drží jen minuty kolem místa přehrávání.",
+      "spaceOut": "Video {{time}} nešlo přehrát, protože převodům došlo místo (teď volných {{free}}).",
+      "spaceTip": "Dejte složce pro převody víc místa nebo uvolněte její disk."
     },
     "problems": {
       "title": "Varování a chyby",
@@ -1409,7 +1415,9 @@
       "restart": "Server se spouští nebo restartuje",
       "restartHint": "Řekne, zda byl aktualizován, nebo se zastavil bez řádného vypnutí.",
       "backup": "Záloha selže",
-      "backupHint": "Když databázi nejde zálohovat."
+      "backupHint": "Když databázi nejde zálohovat.",
+      "transcodeSpace": "Převodům dojde místo",
+      "transcodeSpaceHint": "Když video nejde přehrát, protože je složka pro převody plná."
     },
     "email": {
       "title": "E-mail",

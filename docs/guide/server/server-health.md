@@ -47,6 +47,10 @@ When a stream stopped to buffer in the last few minutes, it says why under the t
 
 ![Playing now and Transcodes, with a movie playing directly and two transcodes on the CPU](../images/server-health-playing.webp)
 
+<!-- since: v0.2.4 -->
+Under the list is the room transcodes have left. When long videos don't fit, it turns into a warning and those transcodes are marked *short of room*: they keep only the minutes around where they play. It also warns when a video couldn't play for lack of room in the last half hour. See [When the transcode folder runs short of room](/docs/server/transcoding/#when-the-transcode-folder-runs-short-of-room).
+<!-- /since -->
+
 **Stop** ends a transcode that's stuck. If the player is still open, it asks for a new one when it carries on, so stopping is safe.
 
 ## Warnings and errors

@@ -1271,6 +1271,7 @@
       },
       "burnSub": "tekstitys poltettu kuvaan",
       "toneMapped": "HDR:stä SDR:ksi",
+      "saving": "tila vähissä: pitää vain toistokohdan ympärillä olevat minuutit",
       "why": {
         "codec": "laite ei toista tätä videomuotoa",
         "hdr": "näyttö ei näytä tätä HDR:ää",
@@ -1279,7 +1280,12 @@
       "started": "Alkoi {{time}}",
       "stop": "Pysäytä",
       "stopHint": "Pysäyttää FFmpegin. Jos soitin on yhä auki, se aloittaa uuden muunnoksen.",
-      "cpuOnly": "Muunnokset tehdään suorittimella."
+      "cpuOnly": "Muunnokset tehdään suorittimella.",
+      "space": "Tilaa muunnoksille: {{free}} vapaana.",
+      "spaceOfLimit": "Tilaa muunnoksille: {{free}} vapaana {{limit}}:n rajasta.",
+      "spaceShort": "Muunnoksilta on tila vähissä ({{free}} vapaana), joten pitkät videot pitävät vain toistokohdan ympärillä olevat minuutit.",
+      "spaceOut": "Videota ei voitu toistaa {{time}}, koska muunnoksilta loppui tila (nyt {{free}} vapaana).",
+      "spaceTip": "Anna muunnoskansiolle lisää tilaa tai vapauta tilaa sen levyltä."
     },
     "problems": {
       "title": "Varoitukset ja virheet",
@@ -1387,7 +1393,9 @@
       "restart": "Palvelin käynnistyy tai käynnistyy uudelleen",
       "restartHint": "Kertoo, päivitettiinkö se tai pysähtyikö se sammumatta siististi.",
       "backup": "Varmuuskopio epäonnistuu",
-      "backupHint": "Kun tietokantaa ei voi varmuuskopioida."
+      "backupHint": "Kun tietokantaa ei voi varmuuskopioida.",
+      "transcodeSpace": "Muunnoksilta loppuu tila",
+      "transcodeSpaceHint": "Kun videota ei voi toistaa, koska muunnoskansio on täynnä."
     },
     "email": {
       "title": "Sähköposti",

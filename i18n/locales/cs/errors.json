@@ -252,6 +252,7 @@
   "the_channel_isnt_answering_right_now": "kanál teď neodpovídá",
   "the_guides_address_isnt_a_web_address": "adresa programu není webová adresa",
   "the_playlist_couldnt_be_read_reason": "seznam se nepodařilo přečíst: {{reason}}",
+  "the_server_is_out_of_room_to_convert_this_video": "serveru došlo místo pro převod tohoto videa",
   "only_movies_and_shows_have_a_match_to_fix": "shodu lze opravit jen u filmů a seriálů",
   "add_a_tmdb_key_in_settings_posters_and_details_to_look_titles_up": "pro vyhledávání titulů přidejte klíč TMDB v Nastavení → Plakáty a podrobnosti",
   "tmdb_didnt_accept_the_key_in_settings_posters_and_details": "TMDB nepřijalo klíč v Nastavení → Plakáty a podrobnosti",

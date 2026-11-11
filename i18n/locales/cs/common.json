@@ -743,6 +743,7 @@
     "slowConvert": "Server převádí toto video rychlostí {{speed}}×, pomaleji, než se přehrává.",
     "slowConnection": "Připojení zvládá {{have}} Mb/s a toto video potřebuje {{need}} Mb/s.",
     "unknown": "Server i připojení vypadaly dobře. Síť možná na chvíli vypadla.",
+    "noSpace": "Serveru došlo místo pro převod tohoto videa.",
     "converted": {
       "codec": "Převádí se, protože toto zařízení nepřehraje jeho formát videa.",
       "hdr": "Převádí se, protože tato obrazovka neukáže jeho HDR.",
@@ -753,7 +754,8 @@
       "gpu": "Tip pro správce: GPU pro překódování převádí mnohem rychleji. Viz Nastavení → Streamování.",
       "lowerQuality": "Tip pro správce: GPU nestíhá. Pomůže méně streamů naráz nebo nižší kvalita.",
       "adaptive": "Tip pro správce: zapněte adaptivní kvalitu v Nastavení → Streamování, aby přehrávače mohly kvalitu snížit.",
-      "disk": "Tip pro správce: zkontrolujte ve Stavu serveru disk nebo síťové sdílení této knihovny."
+      "disk": "Tip pro správce: zkontrolujte ve Stavu serveru disk nebo síťové sdílení této knihovny.",
+      "space": "Tip pro správce: dejte složce pro převody víc místa nebo uvolněte její disk. Stav serveru ukazuje, kolik ho má."
     },
     "test": "Otestovat připojení",
     "testing": "Testuje se…",

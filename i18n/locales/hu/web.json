@@ -1271,6 +1271,7 @@
       },
       "burnSub": "beégetett felirat",
       "toneMapped": "HDR-ből SDR",
+      "saving": "kevés a hely: csak a lejátszási pont körüli perceket tartja meg",
       "why": {
         "codec": "az eszköz nem játssza le ezt a videóformátumot",
         "hdr": "a képernyő nem jeleníti meg ezt a HDR-t",
@@ -1279,7 +1280,12 @@
       "started": "Indult {{time}}",
       "stop": "Leállítás",
       "stopHint": "Leállítja az FFmpeget. Ha a lejátszó még nyitva van, új átkódolást indít.",
-      "cpuOnly": "Az átkódolás a processzoron fut."
+      "cpuOnly": "Az átkódolás a processzoron fut.",
+      "space": "Hely az átkódolásoknak: {{free}} szabad.",
+      "spaceOfLimit": "Hely az átkódolásoknak: {{free}} szabad a(z) {{limit}} korlátból.",
+      "spaceShort": "Az átkódolásoknak kevés a hely ({{free}} szabad), ezért a hosszú videók csak a lejátszási pont körüli perceket tartják meg.",
+      "spaceOut": "Egy videót nem lehetett lejátszani {{time}}, mert az átkódolásoknak elfogyott a hely (most {{free}} szabad).",
+      "spaceTip": "Adj több helyet az átkódolási mappának, vagy szabadíts fel helyet a lemezén."
     },
     "problems": {
       "title": "Figyelmeztetések és hibák",
@@ -1387,7 +1393,9 @@
       "restart": "A szerver elindul vagy újraindul",
       "restartHint": "Megmondja, frissült-e, vagy rendes leállás nélkül állt le.",
       "backup": "Egy mentés sikertelen",
-      "backupHint": "Amikor az adatbázist nem lehet menteni."
+      "backupHint": "Amikor az adatbázist nem lehet menteni.",
+      "transcodeSpace": "Az átkódolásoknak elfogy a hely",
+      "transcodeSpaceHint": "Ha egy videó nem játszható le, mert az átkódolási mappa megtelt."
     },
     "email": {
       "title": "E-mail",

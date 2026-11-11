@@ -1271,6 +1271,7 @@
       },
       "burnSub": "altyazılar gömülü",
       "toneMapped": "HDR'den SDR'ye",
+      "saving": "yer az: yalnızca oynatılan yerin çevresindeki dakikaları tutar",
       "why": {
         "codec": "cihaz bu video biçimini oynatamıyor",
         "hdr": "ekran bu HDR'yi gösteremiyor",
@@ -1279,7 +1280,12 @@
       "started": "Başladı: {{time}}",
       "stop": "Durdur",
       "stopHint": "FFmpeg’i durdurur. Oynatıcı hâlâ açıksa yeni bir dönüştürme başlatır.",
-      "cpuOnly": "Dönüştürmeler işlemcide çalışır."
+      "cpuOnly": "Dönüştürmeler işlemcide çalışır.",
+      "space": "Dönüştürmeler için yer: {{free}} boş.",
+      "spaceOfLimit": "Dönüştürmeler için yer: {{limit}} sınırından {{free}} boş.",
+      "spaceShort": "Dönüştürmelerin yeri az ({{free}} boş), bu yüzden uzun videolar yalnızca oynatılan yerin çevresindeki dakikaları tutar.",
+      "spaceOut": "Dönüştürmelerin yeri bittiği için bir video {{time}} oynatılamadı (şimdi {{free}} boş).",
+      "spaceTip": "Dönüştürme klasörüne daha fazla yer verin veya diskinde yer açın."
     },
     "problems": {
       "title": "Uyarılar ve hatalar",
@@ -1387,7 +1393,9 @@
       "restart": "Sunucu başlıyor veya yeniden başlıyor",
       "restartHint": "Güncellenip güncellenmediğini veya düzgün kapanmadan durup durmadığını söyler.",
       "backup": "Bir yedekleme başarısız olur",
-      "backupHint": "Veritabanı yedeklenemediğinde."
+      "backupHint": "Veritabanı yedeklenemediğinde.",
+      "transcodeSpace": "Dönüştürmelerin yeri biter",
+      "transcodeSpaceHint": "Dönüştürme klasörü dolu olduğu için bir video oynatılamadığında."
     },
     "email": {
       "title": "E-posta",

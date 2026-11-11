@@ -24,6 +24,9 @@ Every alert is on until you turn it off. Change the numbers to suit your server.
 | **A library folder can't be read** | A library folder has been out of reach for 2 minutes, which usually means a network share has dropped. A share that's gone for a moment doesn't count. You hear again when it's back. |
 | **Errors pile up** | The server logs 10 or more errors within 15 minutes (or what you set). The alert names the most common ones. |
 | **Transcodes keep failing** | 3 or more transcodes fail within 15 minutes (or what you set), so players couldn't play. That's often a GPU that's stopped working, or FFmpeg that can't read the files. |
+<!-- since: v0.2.4 -->
+| **Transcodes run out of room** | A video couldn't start, or stopped partway, because the transcode folder was full. The alert says how much room was left; see [When the transcode folder runs short of room](/docs/server/transcoding/#when-the-transcode-folder-runs-short-of-room). Sent at most once an hour. |
+<!-- /since -->
 | **The server starts or restarts** | The server starts. The alert says if it was updated, and warns when it stopped last time without shutting down cleanly, such as after a crash, the container being killed, or a power cut. |
 
 Errors and failing transcodes are sent at most once an hour while they keep happening, so a bad night doesn't flood your inbox.

@@ -252,6 +252,7 @@
   "the_channel_isnt_answering_right_now": "kanava ei vastaa juuri nyt",
   "the_guides_address_isnt_a_web_address": "oppaan osoite ei ole verkko-osoite",
   "the_playlist_couldnt_be_read_reason": "listaa ei voitu lukea: {{reason}}",
+  "the_server_is_out_of_room_to_convert_this_video": "palvelimella ei ole tilaa tämän videon muuntamiseen",
   "only_movies_and_shows_have_a_match_to_fix": "vain elokuvilla ja sarjoilla on korjattava tunnistus",
   "add_a_tmdb_key_in_settings_posters_and_details_to_look_titles_up": "lisää TMDB-avain kohdassa Asetukset → Julisteet ja tiedot, jotta nimikkeitä voi hakea",
   "tmdb_didnt_accept_the_key_in_settings_posters_and_details": "TMDB ei hyväksynyt avainta kohdassa Asetukset → Julisteet ja tiedot",
