@@ -3,6 +3,13 @@ name: Site
 # The website at matinee.yeix.io: the landing page and the user guide, once
 # per release. Pushes to main and release tags rebuild it and publish it to
 # the site branch, which the web server pulls.
+#
+# The Roadmap page is built from the target/* and priority/* labels on the
+# issues here and in matinee-apps. Issue changes here, and an hourly check
+# (which also catches matinee-apps), refresh it, and rebuild the site only
+# when the roadmap actually changed. Reading the private matinee-apps issues
+# needs the ROADMAP_TOKEN secret: a fine-grained token with read access to
+# its issues. Without it the apps' items stay as they were.
 on:
   push:
     branches: [main]
@@ -10,10 +17,55 @@ on:
     paths: ['docs/**', 'site/**', '.github/workflows/site.yml']
   pull_request:
     paths: ['docs/**', 'site/**', '.github/workflows/site.yml']
+  issues:
+    types: [opened, edited, closed, reopened, labeled, unlabeled, deleted, transferred]
+  schedule:
+    - cron: '23 * * * *'
   workflow_dispatch:
 
+# Labelling a batch of issues starts a run for each; only the last one counts.
+concurrency:
+  group: site-${{ github.event_name == 'pull_request' && github.head_ref || github.event_name == 'push' && github.ref || 'roadmap' }}
+  cancel-in-progress: true
+
 jobs:
+  roadmap:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: read
+    outputs:
+      changed: ${{ steps.refresh.outputs.changed }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || 'main' }}
+          sparse-checkout: site
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      # The data the live site was built from, to tell whether anything changed.
+      - name: Fetch the published roadmap
+        run: |
+          if git fetch -q --depth=1 origin site && git show origin/site:roadmap.json > "$RUNNER_TEMP/roadmap.tmp"; then
+            mv "$RUNNER_TEMP/roadmap.tmp" "$RUNNER_TEMP/published-roadmap.json"
+          fi
+      - name: Refresh the roadmap from GitHub issues
+        id: refresh
+        working-directory: site
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ROADMAP_APPS_TOKEN: ${{ secrets.ROADMAP_TOKEN }}
+        run: node scripts/roadmap.mjs --previous "$RUNNER_TEMP/published-roadmap.json"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: roadmap
+          path: site/src/roadmap.json
+
   build:
+    needs: roadmap
+    # Issue changes and the hourly check rebuild only when the roadmap moved.
+    if: ${{ (github.event_name != 'issues' && github.event_name != 'schedule') || needs.roadmap.outputs.changed == 'true' }}
     runs-on: ubuntu-latest
     steps:
       # Every build reads each release's guide from its tag, and /next/ from
@@ -32,6 +84,10 @@ jobs:
           cache-dependency-path: site/pnpm-lock.yaml
       - run: pnpm install --frozen-lockfile
         working-directory: site
+      - uses: actions/download-artifact@v4
+        with:
+          name: roadmap
+          path: site/src
       # The feature table's checks (docs/features.json); the build checks it too.
       - run: node --test scripts/*.test.mjs
         working-directory: site
