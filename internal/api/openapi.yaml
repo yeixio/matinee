@@ -3038,7 +3038,7 @@ paths:
         - { name: start, in: query, schema: { type: number }, description: Seconds into the file. }
         - { name: subtitle, in: query, schema: { type: string }, description: A subtitle track to burn in (picture-based tracks, or a styled one with styled=1). }
         - { name: styled, in: query, schema: { type: string, enum: ["1"] }, description: "Draw the `subtitle` track's ASS/SSA styling into the video, with the file's fonts, for players that can't draw it themselves. Converts the video." }
-        - { name: audio, in: query, schema: { type: integer, minimum: 0 }, description: "Which audio stream to play: its index among the file's audio streams (mediaInfo.audio[].index). The first when left out." }
+        - { name: audio, in: query, schema: { type: integer, minimum: 0 }, description: "Which audio stream to play: its index among the file's audio streams (mediaInfo.audio[].index). When left out, the one the item's trackPick names (the first for files not analyzed yet)." }
         - { name: audioDelay, in: query, schema: { type: integer, minimum: -2000, maximum: 2000 }, description: "Moves the sound against the picture, in milliseconds, for lip sync: later when positive, earlier when negative." }
         - { name: voice, in: query, schema: { type: string, enum: ["1"] }, description: "1 turns on Clear voice: the sound mixed to stereo with the dialogue brought forward and loud moments evened out." }
         - name: quality

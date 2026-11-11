@@ -286,7 +286,8 @@ function Player({ id }: { id: number }) {
           repack ? 'original' : qualityNow.current,
           playsQuery(plays),
           delayNow.current,
-          audioNow.current ?? (fileAudio(item) || undefined),
+          // Always said, since the server otherwise plays its own pick.
+          audioNow.current ?? fileAudio(item),
           voiceNow.current && !!item.videoCodec,
         )
         if (seq !== hlsSeq.current) return

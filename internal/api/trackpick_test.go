@@ -177,6 +177,15 @@ func TestTrackChoices(t *testing.T) {
 	if v := get(eps[0].ID); *v.TrackPick.Audio != 2 || v.TrackPick.Subtitle != "" || v.TrackPick.AudioRemembered {
 		t.Fatalf("first pick: %+v", v.TrackPick)
 	}
+	// A stream started without saying which sound (apps from before
+	// trackPick) plays the same pick.
+	var hls struct{ Audio *int }
+	if code := c.do("POST", "/api/v1/items/"+itoa(eps[0].ID)+"/hls", nil, &hls); code != 200 || hls.Audio == nil || *hls.Audio != 2 {
+		t.Fatalf("stream without audio: %d %v", code, hls.Audio)
+	}
+	if code := c.do("POST", "/api/v1/items/"+itoa(eps[0].ID)+"/hls?audio=0", nil, &hls); code != 200 || *hls.Audio != 0 {
+		t.Fatalf("stream asking for the dub: %d %v", code, *hls.Audio)
+	}
 	// Someone who reads Spanish and always wants subtitles.
 	c.do("PUT", "/api/v1/me/playback", map[string]any{"subtitles": map[string]any{"mode": "always", "languages": []string{"es"}}}, nil)
 	v := get(eps[0].ID)

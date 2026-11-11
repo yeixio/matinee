@@ -349,11 +349,8 @@ func (s *Server) addTrackPick(r *http.Request, v *itemView) {
 		}
 	}
 	appLanguage := s.requestLanguage(r, user)
+	original := s.originalLanguage(r, v)
 	if !known {
-		original := ""
-		if v.Details != nil {
-			original = v.Details.OriginalLanguage
-		}
 		played, known = pickAudio(audio, appLanguage, original)
 	}
 	if known {
@@ -375,12 +372,49 @@ func (s *Server) addTrackPick(r *http.Request, v *itemView) {
 			appLanguage = i18n.Source
 		}
 		audioLanguage := played.Language
-		if audioLanguage == "" && v.Details != nil {
-			audioLanguage = v.Details.OriginalLanguage
+		if audioLanguage == "" {
+			audioLanguage = original
 		}
 		pick.Subtitle = pickSubtitle(v.Subtitles, prefs.Subtitles, appLanguage, audioLanguage)
 	}
 	v.TrackPick = pick
+}
+
+// originalLanguage is the language a title was made in: its own
+// details', else its show's.
+func (s *Server) originalLanguage(r *http.Request, v *itemView) string {
+	if v.Details != nil && v.Details.OriginalLanguage != "" {
+		return v.Details.OriginalLanguage
+	}
+	if len(v.Parents) > 0 && v.Parents[0].Kind == "show" {
+		if d, err := s.Store.ItemDetails(r.Context(), v.Parents[0].ID); err == nil && d != nil {
+			return d.OriginalLanguage
+		}
+	}
+	return ""
+}
+
+// startAudio is the sound a stream plays when the player doesn't say: the
+// same pick the item's trackPick names, so apps from before trackPick
+// start in the person's language too.
+func (s *Server) startAudio(r *http.Request, it store.Item, mi *probe.MediaInfo) int {
+	if mi == nil || len(mi.Audio) == 0 || it.VideoCodec == "" {
+		return 0
+	}
+	v := itemView{Item: it, MediaInfo: mi}
+	if it.Kind == "episode" {
+		if show, ok := s.showOf(r, it); ok {
+			v.Parents = []store.Item{show}
+		}
+	}
+	if d, err := s.Store.ItemDetails(r.Context(), it.ID); err == nil {
+		v.Details = d
+	}
+	s.addTrackPick(r, &v)
+	if v.TrackPick == nil || v.TrackPick.Audio == nil {
+		return 0
+	}
+	return *v.TrackPick.Audio
 }
 
 // trackChoiceIn is a pick from a player. Only what's sent changes: a
