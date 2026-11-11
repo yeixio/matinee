@@ -22,6 +22,8 @@ import (
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/yeixio/matinee/internal/namefix"
 )
 
 // App is one of the apps Matinee connects to.
@@ -544,9 +546,12 @@ func Match(list []Title, title string, year int) (Title, bool) {
 	return Title{}, false
 }
 
+// matchKey is a title for matching: lower case letters and digits, without
+// accents, so "Ame\u0301lie" from a Mac-written folder, "Amélie" and
+// "Amelie" are the same title.
 func matchKey(s string) string {
 	var b strings.Builder
-	for _, r := range strings.ToLower(s) {
+	for _, r := range namefix.Fold(s) {
 		if r >= 'a' && r <= 'z' || r >= '0' && r <= '9' || r > 127 {
 			b.WriteRune(r)
 		}

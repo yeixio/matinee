@@ -18,6 +18,7 @@ import (
 
 	"github.com/yeixio/matinee/i18n"
 	"github.com/yeixio/matinee/internal/mediaid"
+	"github.com/yeixio/matinee/internal/namefix"
 	"github.com/yeixio/matinee/internal/store"
 )
 
@@ -124,6 +125,9 @@ type searchResult struct {
 }
 
 func (t *TMDB) search(ctx context.Context, kind, title string, year int) (*store.Metadata, error) {
+	// TMDB finds "Amélie" but not the same name with its accent written
+	// as a separate mark, as a Mac writes it.
+	title = namefix.Repair(title)
 	params := url.Values{"query": {title}, "include_adult": {"false"}}
 	if year > 0 {
 		if kind == "movie" {

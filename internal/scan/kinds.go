@@ -11,6 +11,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/yeixio/matinee/internal/namefix"
 	"github.com/yeixio/matinee/internal/probe"
 	"github.com/yeixio/matinee/internal/store"
 )
@@ -402,7 +403,7 @@ func trackFromTags(tags map[string]string, fromPath TrackInfo) TrackInfo {
 	pick := func(dst *string, keys ...string) bool {
 		for _, k := range keys {
 			if v := strings.TrimSpace(tags[k]); v != "" {
-				*dst = v
+				*dst = namefix.Repair(v)
 				return true
 			}
 		}

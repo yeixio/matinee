@@ -93,3 +93,15 @@ func TestNotTheAPI(t *testing.T) {
 		t.Fatalf("web page: %v", err)
 	}
 }
+
+func TestMatchAccents(t *testing.T) {
+	list := []arr.Title{{Title: "Amélie", Year: 2001}, {Title: "Æon Flux", Year: 2005}}
+	for _, q := range []string{"Amélie", "Amelie", "AMÉLIE"} {
+		if got, ok := arr.Match(list, q, 2001); !ok || got.Title != "Amélie" {
+			t.Errorf("Match(%q) = %v, %v", q, got, ok)
+		}
+	}
+	if got, ok := arr.Match(list, "Aeon Flux", 2005); !ok || got.Title != "Æon Flux" {
+		t.Errorf("Match(Aeon Flux) = %v, %v", got, ok)
+	}
+}
