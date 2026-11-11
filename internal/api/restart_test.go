@@ -25,7 +25,7 @@ func TestRestart(t *testing.T) {
 	}
 	for range 2 {
 		var out restartAnswer
-		if code := admin.do("POST", "/api/v1/admin/restart", nil, &out); code != http.StatusAccepted || out.BootID != bootID {
+		if code := admin.do("POST", "/api/v1/admin/restart", nil, &out); code != http.StatusOK || out.BootID != bootID {
 			t.Fatalf("restart: %d %+v", code, out)
 		}
 	}

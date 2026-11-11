@@ -70,12 +70,12 @@ export function RestartServer({ playing }: { playing: number }) {
 
   const busy = state.step === 'restarting'
   return (
-    <div className="flex flex-col items-start gap-2 sm:items-end">
+    <div className="flex flex-col items-start gap-2 sm:shrink-0 sm:items-end">
       <Button variant="danger" icon={<RotateCw className={`size-4 ${busy ? 'animate-spin' : ''}`} />} disabled={busy} onClick={restart}>
         {busy ? t('settings.restart.restarting') : t('settings.restart.button')}
       </Button>
       {state.step !== 'idle' && (
-        <p role="status" className={`flex items-start gap-2 text-sm ${state.step === 'failed' || (busy && state.slow) ? 'text-danger' : 'text-muted'}`}>
+        <p role="status" className={`flex max-w-sm items-start gap-2 text-sm ${state.step === 'failed' || (busy && state.slow) ? 'text-danger' : 'text-muted'}`}>
           {state.step === 'restarting' &&
             (state.slow ? (
               <>

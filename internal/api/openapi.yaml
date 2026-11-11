@@ -1509,7 +1509,7 @@ paths:
         they were) and starts again. Once /health answers with a bootId other than this one, it's back.
         GET /admin/health's server.canRestart says whether this server can restart itself.
       responses:
-        "202":
+        "200":
           description: Restarting.
           content:
             application/json:

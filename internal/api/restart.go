@@ -27,5 +27,5 @@ func (s *Server) restartServer(w http.ResponseWriter, r *http.Request) {
 		// After this answer is on its way: shutting down waits for it.
 		go s.Restart()
 	}
-	writeJSON(w, http.StatusAccepted, restartAnswer{BootID: bootID})
+	writeJSON(w, http.StatusOK, restartAnswer{BootID: bootID})
 }
