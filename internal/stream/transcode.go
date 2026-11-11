@@ -476,10 +476,30 @@ func (t *Transcoder) start(ctx context.Context, claim uint64, userID int64, it s
 	case it.VideoCodec != "":
 		output = append(output, "-map", audioMap+"?", "-sn", "-c:a", "aac", "-ac", "2", "-b:a", audioRate(0))
 	}
+	// A copied picture can only start on a keyframe, up to a few seconds
+	// before startSec. Cut at startSec, the sound would start that much after
+	// the picture, and in fMP4 pieces its first frame is stretched over the
+	// gap (there's no other way to say it starts later). Apple's players play
+	// the rest of the sound right after that one frame, so all of it came as
+	// much as the gap ahead of the picture. So the sound starts from the same
+	// keyframe (-noaccurate_seek), with a moment of silence in front so it
+	// never starts after the picture. That also covers the picture's
+	// reordered frames, which put it a few frames after the sound even from
+	// the start, and sound formats that can't start on any packet.
+	resumeCopy := copyVideo && startSec > 0
+	if copyVideo && fragmented(it.VideoCodec, copyVideo) {
+		if audioFilter != "" {
+			audioFilter += ","
+		}
+		audioFilter += "adelay=250:all=1,asetpts=PTS-0.25/TB"
+	}
 	if audioFilter != "" && withAudio && it.VideoCodec != "" {
 		output = append(output, "-af", audioFilter)
 	}
 	if startSec > 0 {
+		if resumeCopy {
+			args = append(args, "-noaccurate_seek")
+		}
 		args = append(args, "-ss", strconv.FormatFloat(startSec, 'f', 3, 64))
 	}
 	args = append(args, Input(it)...)

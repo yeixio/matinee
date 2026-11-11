@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"io"
 	"log/slog"
-	"math"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -209,8 +208,9 @@ func TestStartDolbyVision(t *testing.T) {
 // TestCopiedPictureInSyncWithoutEditLists checks a copied HEVC picture and
 // its converted sound line up through the pieces' own times, not through
 // edit lists in the init piece, which Apple's players don't apply to HLS.
-// Started between keyframes, the picture starts at the keyframe before and
-// the sound where playback starts, so the sound has to come that much later.
+// Started between keyframes, the picture starts at the keyframe before, and
+// the sound has to start there too rather than leave a gap for a stretched
+// first frame to cover.
 func TestCopiedPictureInSyncWithoutEditLists(t *testing.T) {
 	ffmpeg, err := exec.LookPath("ffmpeg")
 	if err != nil {
@@ -270,14 +270,17 @@ func TestCopiedPictureInSyncWithoutEditLists(t *testing.T) {
 		if len(video) == 0 || len(audio) < 2 {
 			t.Fatalf("start at %v: %d video and %d audio packets", at, len(video), len(audio))
 		}
-		// The picture starts on the keyframe at or before at (every 120
-		// frames, 5.005 s).
-		keyframe := math.Floor(at/5.005) * 5.005
-		// The sound's first frame is its encoder delay; what's heard starts
-		// with the second.
-		gap := audio[1] - video[0]
-		if want := at - keyframe; math.Abs(gap-want) > 0.05 {
-			t.Errorf("start at %v: sound starts %.3f s after the picture, want %.3f s", at, gap, want)
+		// Apple's players play sound frames back to back, whatever time a
+		// stretched frame claims. So the sound has to run frame after frame
+		// (1024 samples, 21 ms) and start no later than the picture.
+		for i := 1; i < len(audio); i++ {
+			if step := audio[i] - audio[i-1]; step > 0.03 {
+				t.Errorf("start at %v: sound frame %d lasts %.3f s", at, i-1, step)
+				break
+			}
+		}
+		if audio[0] > video[0]+0.001 {
+			t.Errorf("start at %v: the sound starts %.3f s after the picture", at, audio[0]-video[0])
 		}
 	}
 }
