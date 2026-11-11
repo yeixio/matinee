@@ -998,6 +998,24 @@ export type ItemDetail = Item & {
   feed?: PodcastFeed
   // Podcast episodes: their web page and type.
   episode?: { link?: string; episodeType: 'full' | 'trailer' | 'bonus' }
+  // Videos: the sound and subtitles to start with, for this person. Left out
+  // by servers from before it.
+  trackPick?: TrackPick
+}
+
+/**
+ * The tracks a video starts with, worked out by the server so every player
+ * starts the same way: what the person picked for the title (or its show)
+ * last time, else the best sound in their language, and subtitles as their
+ * choices say.
+ */
+export type TrackPick = {
+  // The audio stream's index, as in mediaInfo; left out until the file is analyzed.
+  audio?: number
+  // The subtitle track's id; "" for none.
+  subtitle: string
+  audioRemembered?: boolean
+  subtitleRemembered?: boolean
 }
 
 export type PodcastFeed = {
@@ -1518,6 +1536,9 @@ export const api = {
   setMyLanguage: (language: string) => request<{ language: string }>('PUT', '/api/v1/me/language', { language }),
   playback: () => request<PlaybackPrefs>('GET', '/api/v1/me/playback'),
   setPlayback: (p: Partial<PlaybackPrefs>) => request<PlaybackPrefs>('PUT', '/api/v1/me/playback', p),
+  // Remembers a sound or subtitle track picked while watching ("off" for no
+  // subtitles), for the next time the title (or its show) plays.
+  setTracks: (id: number, pick: { audio?: number; subtitle?: string }) => request<void>('PUT', `/api/v1/items/${id}/tracks`, pick),
   users: () => request<Account[]>('GET', '/api/v1/users'),
   // friend: false lets the account see every library again.
   setFriend: (id: number, friend: boolean, libraries?: number[]) =>

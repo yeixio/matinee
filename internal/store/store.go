@@ -739,6 +739,20 @@ var migrations = []string{
 	"ALTER TABLE issues ADD COLUMN request_id TEXT NOT NULL DEFAULT ''",
 	"ALTER TABLE issues ADD COLUMN file_key TEXT NOT NULL DEFAULT ''",
 	"ALTER TABLE requests ADD COLUMN file_name TEXT NOT NULL DEFAULT ''",
+	// 133: the sound and subtitle tracks each person picked for a title,
+	// played again next time (see trackchoices.go).
+	`CREATE TABLE track_choices (
+		user_id           BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+		item_id           BIGINT NOT NULL REFERENCES items(id) ON DELETE CASCADE,
+		audio             INTEGER NOT NULL DEFAULT -1, -- index among the audio streams; -1 when not picked
+		audio_language    TEXT NOT NULL DEFAULT '',
+		audio_kind        TEXT NOT NULL DEFAULT '', -- commentary or descriptive, else ''
+		subtitle          TEXT NOT NULL DEFAULT '', -- a track id, off, or '' when not picked
+		subtitle_language TEXT NOT NULL DEFAULT '',
+		subtitle_kind     TEXT NOT NULL DEFAULT '', -- forced or sdh, else ''
+		updated_at        BIGINT NOT NULL,
+		PRIMARY KEY (user_id, item_id)
+	)`,
 }
 
 func now() int64 { return time.Now().Unix() }
