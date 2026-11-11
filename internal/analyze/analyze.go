@@ -741,7 +741,8 @@ func (a *Analyzer) analyze(ctx context.Context, f store.AnalysisFile) bool {
 	switch {
 	case errors.Is(err, context.Canceled):
 		return false
-	case errors.Is(err, context.DeadlineExceeded):
+	case errors.Is(err, context.DeadlineExceeded) && !slowfs.Answering(f.Path):
+		// The share's fault, not the file's: try it again later.
 		a.Log.Warn("media analysis: ffprobe timed out", "path", f.Path)
 		a.timedOut(f.ID)
 		return false
