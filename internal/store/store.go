@@ -757,6 +757,14 @@ var migrations = []string{
 		updated_at        BIGINT NOT NULL,
 		PRIMARY KEY (user_id, item_id)
 	)`,
+	// 134: how many times a file's share stopped answering while a
+	// background job read it (see stalls.go).
+	`CREATE TABLE share_stalls (
+		item_id  BIGINT PRIMARY KEY REFERENCES items(id) ON DELETE CASCADE,
+		file_key TEXT NOT NULL, -- the file's size and mtime, see MediaKey
+		count    INTEGER NOT NULL,
+		last_at  BIGINT NOT NULL
+	)`,
 }
 
 func now() int64 { return time.Now().Unix() }
