@@ -13,7 +13,7 @@ services:
     # router, use the host's network instead of the ports above (Linux only):
     # network_mode: host
     environment:
-      MATINEE_SCAN_INTERVAL: 15m
+      MATINEE_SCAN_INTERVAL: 6h
       # MATINEE_TMDB_KEY: your-themoviedb-key
       # MATINEE_DATABASE_URL: postgres://matinee:matinee@postgres:5432/matinee?sslmode=disable
     volumes:

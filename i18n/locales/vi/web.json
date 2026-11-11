@@ -407,8 +407,19 @@
         "hint": "Tệp mới hiện ra ở lần quét đầy đủ tiếp theo, hoặc khi bạn bấm Quét."
       }
     },
-    "rescan": "Mỗi thư viện cũng được quét lại toàn bộ mỗi {{every}}, để bắt mọi thứ khác, như một tệp bị thay thế tại chỗ trên thư mục mạng.",
-    "rescanOff": "Quét lại toàn bộ đã bị tắt trên máy chủ này (MATINEE_SCAN_INTERVAL=0)."
+    "rescanLabel": "Quét lại toàn bộ",
+    "rescanEvery": "Mỗi {{every}}",
+    "rescanNever": "Không bao giờ",
+    "rescanHint": "Quét lại toàn bộ sẽ đọc lại mọi thư mục thư viện và phát hiện những gì việc theo dõi tệp mới không thấy, như một tệp được thay thế tại chỗ trên thư mục chia sẻ. Với thư viện lớn trên thư mục chia sẻ mạng, khoảng cách dài hơn giúp thư mục chia sẻ luôn phản hồi nhanh.",
+    "rescanNext": "Lần tới: {{time}}"
+  },
+  "timeZone": {
+    "title": "Múi giờ",
+    "intro": "Đồng hồ của máy chủ: thời gian trong nhật ký, khi nào các hàng ngày lễ trên Trang chủ bắt đầu và mọi thứ khác phụ thuộc vào thời gian trong ngày.",
+    "system": "Của máy tính này ({{zone}})",
+    "systemUnknown": "Của máy tính này",
+    "restart": "Matinee sẽ chuyển sang {{zone}} vào lần khởi động tới.",
+    "restartSystem": "Matinee sẽ quay lại múi giờ của máy tính này vào lần khởi động tới."
   },
   "analysis": {
     "title": "Phân tích nội dung",

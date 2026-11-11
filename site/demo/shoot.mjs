@@ -722,6 +722,8 @@ try {
     await page.reload()
     await sleep(800)
     await shot(page, 'media-analysis', { target: section(page, 'Media analysis') })
+    await settings(page, 'health')
+    await shot(page, 'time-zone', { target: section(page, 'Time zone') })
     await settings(page, 'content')
     await shot(page, 'tmdb-key', { target: section(page, 'Posters and details') })
     await shot(page, 'settings-lyrics', { target: section(page, 'Lyrics') })

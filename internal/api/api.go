@@ -52,12 +52,12 @@ type Server struct {
 	Store   *store.Store
 	Scanner *scan.Scanner
 	Watcher *scan.Watcher // nil means libraries aren't watched for changes
-	// ScanInterval is how often every library is rescanned; 0 means never.
-	ScanInterval time.Duration
-	Transcoder   *stream.Transcoder
-	HW           *hwaccel.Manager // hardware transcoding; nil means the CPU only
-	Downloads    *download.Manager
-	Analyzer     *analyze.Analyzer // nil when media analysis is off for this server
+	// Schedule rescans every library every so often; nil means never.
+	Schedule   *scan.Schedule
+	Transcoder *stream.Transcoder
+	HW         *hwaccel.Manager // hardware transcoding; nil means the CPU only
+	Downloads  *download.Manager
+	Analyzer   *analyze.Analyzer // nil when media analysis is off for this server
 	// Thumbs makes and keeps the seek bar's pictures; nil offers none.
 	Thumbs *thumbs.Generator
 	Art    *artwork.Cache

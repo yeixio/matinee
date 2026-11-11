@@ -416,8 +416,19 @@
         "hint": "Nové soubory se objeví při dalším úplném prohledání nebo když stiskneš Prohledat."
       }
     },
-    "rescan": "Každá knihovna se také celá znovu prohledá každých {{every}}, což zachytí vše ostatní, například soubor nahrazený na síťovém úložišti.",
-    "rescanOff": "Úplné prohledávání je na tomto serveru vypnuté (MATINEE_SCAN_INTERVAL=0)."
+    "rescanLabel": "Úplné opětovné prohledání",
+    "rescanEvery": "Každých {{every}}",
+    "rescanNever": "Nikdy",
+    "rescanHint": "Úplné opětovné prohledání znovu přečte každou složku knihovny a zachytí to, co sledování nových souborů nezachytí, třeba soubor nahrazený na místě ve sdílené složce. U velké knihovny na síťové sdílené složce udrží delší interval sdílenou složku svižnou.",
+    "rescanNext": "Další: {{time}}"
+  },
+  "timeZone": {
+    "title": "Časové pásmo",
+    "intro": "Hodiny serveru: časy v jeho protokolu, kdy začínají sváteční řady na Domů a vše ostatní, co se řídí denní dobou.",
+    "system": "Pásmo tohoto počítače ({{zone}})",
+    "systemUnknown": "Pásmo tohoto počítače",
+    "restart": "Matinee přejde na {{zone}} při příštím spuštění.",
+    "restartSystem": "Matinee se při příštím spuštění vrátí k časovému pásmu tohoto počítače."
   },
   "analysis": {
     "title": "Analýza médií",

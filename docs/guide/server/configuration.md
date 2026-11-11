@@ -30,6 +30,10 @@ Admins also have **Server health**, a dashboard of the server's load, what's pla
 **Server health** also has **Alerts**, which email you or post to Discord, ntfy or Home Assistant when something needs you, and turns on Prometheus metrics. See [Alerts and metrics](/docs/server/alerts/).
 <!-- /since -->
 
+<!-- since: v0.2.4 -->
+**Server health** also has **Time zone**. See [Time zone](#time-zone) below.
+<!-- /since -->
+
 ![Settings on a computer, with the groups down the left side and Libraries open](../images/settings-groups.webp)
 
 ![Settings on a phone, listing the groups (phone)](../images/phone-settings.webp)
@@ -66,7 +70,12 @@ Most of Matinee is set up in the web player under **Settings**. A few things abo
 | `MATINEE_PODCASTS_HOME_NETWORK` | `false` | Let [podcast](/docs/watching/podcasts/) feeds and episodes, and [radio stations](/docs/watching/music/#radio-stations), come from addresses on the home network too, for shows and streams you host yourself |
 <!-- /since -->
 | `MATINEE_WIKIDATA` | `true` | Look up awards on Wikidata. Set `false` to skip awards |
+<!-- until: v0.2.4 -->
 | `MATINEE_SCAN_INTERVAL` | `15m` | How often libraries are rescanned in full; `0` turns it off ([more](/docs/server/new-files/)) |
+<!-- /until -->
+<!-- since: v0.2.4 -->
+| `MATINEE_SCAN_INTERVAL` | `6h` | How often libraries are rescanned in full until an admin picks an interval in Settings; `0` turns it off ([more](/docs/server/new-files/#full-rescans)) |
+<!-- /since -->
 | `MATINEE_WATCH_POLL_INTERVAL` | `30s` | How often folders on network shares are checked for new files |
 | `MATINEE_DISCOVERY` | `true` | Announce the server on the local network so the apps find it |
 | `MATINEE_SERVER_NAME` | `Matinee` | The name the apps show for this server |
@@ -84,6 +93,16 @@ Most of Matinee is set up in the web player under **Settings**. A few things abo
 | `MATINEE_VAAPI_DEVICE` | empty | The GPU to use for VAAPI on a machine with several, such as `/dev/dri/renderD129` |
 
 Each variable also works as a flag: `MATINEE_SCAN_INTERVAL=1h` is `--scan-interval=1h`.
+
+<!-- since: v0.2.4 -->
+## Time zone
+
+The server's clock goes by its time zone: the times in its log, when Home's [holiday rows](/docs/watching/home/) start, and anything else that goes by the time of day. Matinee starts in the computer's own time zone, or the one in the `TZ` environment variable (such as `TZ=America/Juneau`), which a container or Kubernetes install usually needs since it has none of its own.
+
+To pick another, open **Settings → Server health → Time zone** and choose one from the list. The first choice, **This computer's**, goes back to the computer's or `TZ`'s. Matinee switches the next time it starts, and says so until then: restart it, or wait for its next update.
+
+![The Time zone setting](../images/time-zone.webp)
+<!-- /since -->
 
 ## SQLite or PostgreSQL?
 

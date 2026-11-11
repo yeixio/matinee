@@ -47,7 +47,7 @@ Open http://localhost:7171, create the admin account and add your folders. There
 ## What it does
 
 - **Libraries** for movies, TV and music. Point it at folders; it names things from the file and folder names (`Movie (2021)`, `Show/Season 1/Show - S01E02.mkv`, `Artist/Album/01 Track.flac`), reads music tags, and picks up `poster.jpg`, `fanart.jpg` and `cover.jpg` next to your files.
-- **New files show up in seconds.** Matinee watches library folders and adds what you copy in, rename or delete a few seconds after the copy finishes, scanning just that file or folder. Folders on this machine's own disks announce changes as they happen; network shares (SMB, NFS) don't, so Matinee checks those every 30 seconds by looking at each folder's modification time, which is cheap even on a big library. A full rescan every 15 minutes catches the rest. Settings → New files shows how each library is watched.
+- **New files show up in seconds.** Matinee watches library folders and adds what you copy in, rename or delete a few seconds after the copy finishes, scanning just that file or folder. Folders on this machine's own disks announce changes as they happen; network shares (SMB, NFS) don't, so Matinee checks those every 30 seconds by looking at each folder's modification time, which is cheap even on a big library. A full rescan every 6 hours (pick how often in Settings) catches the rest. Settings → New files shows how each library is watched.
 - **Plays anywhere.** Files the browser can play stream as-is, with instant seeking. Anything else is converted on the fly with FFmpeg to HLS. H.264 video is repackaged, not re-encoded, so it costs almost no CPU.
 - **Subtitles** from the file itself or from files next to it (`Movie.en.srt`, `Movie.en.forced.srt`, `.vtt`, `.ass`). Text subtitles are drawn by the player; Blu-ray and DVD picture subtitles are burned into the video while converting. The player remembers your language from one episode to the next.
 - **Skips intros and credits,** and offers the next episode as the credits start. Guides: [intros](https://matinee.yeix.io/docs/watching/skipping-intros/), [credits](https://matinee.yeix.io/docs/watching/skipping-credits/).
@@ -267,7 +267,7 @@ Every setting is a flag or an environment variable.
 | `MATINEE_OPENLIBRARY` | `true` | Look up audiobook covers and author photos on Open Library. No key needed. Set `false` to use only local artwork |
 | `MATINEE_PODCASTS_HOME_NETWORK` | `false` | Let podcast feeds and episodes come from addresses on the home network too, for shows you host yourself. Off, Matinee only fetches them from the internet |
 | `MATINEE_WIKIDATA` | `true` | Look up the awards movies and shows won or were nominated for on Wikidata. No key needed. Set `false` to skip awards |
-| `MATINEE_SCAN_INTERVAL` | `15m` | How often libraries are rescanned in full; `0` turns it off |
+| `MATINEE_SCAN_INTERVAL` | `6h` | How often libraries are rescanned in full until an admin picks in Settings; `0` turns it off |
 | `MATINEE_WATCH_POLL_INTERVAL` | `30s` | How often folders on network shares are checked for new files. A big library on a slow share is checked less often by itself, so the share stays responsive |
 | `MATINEE_DISCOVERY` | `true` | Announce the server on the local network so the apps find it ([more](#finding-it-from-the-apps)) |
 | `MATINEE_SERVER_NAME` | `Matinee` | The name the apps show for this server |

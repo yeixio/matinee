@@ -407,8 +407,19 @@
         "hint": "新文件会在下次完整扫描时出现，或在你点击“扫描”时出现。"
       }
     },
-    "rescan": "每个媒体库还会每 {{every}}完整重新扫描一次，以发现其他变化，比如共享上被原地替换的文件。",
-    "rescanOff": "此服务器已关闭完整重新扫描（MATINEE_SCAN_INTERVAL=0）。"
+    "rescanLabel": "完整重新扫描",
+    "rescanEvery": "每 {{every}}",
+    "rescanNever": "从不",
+    "rescanHint": "完整重新扫描会重新读取每个资料库文件夹，发现监视新文件时发现不了的变化，比如共享上被原地替换的文件。网络共享上的大型资料库，间隔长一些能让共享保持流畅。",
+    "rescanNext": "下一次：{{time}}"
+  },
+  "timeZone": {
+    "title": "时区",
+    "intro": "服务器的时钟：日志中的时间、主页节日行何时开始，以及其他按一天中的时间运作的一切。",
+    "system": "这台电脑的时区（{{zone}}）",
+    "systemUnknown": "这台电脑的时区",
+    "restart": "Matinee 下次启动时会切换到 {{zone}}。",
+    "restartSystem": "Matinee 下次启动时会改回这台电脑的时区。"
   },
   "analysis": {
     "title": "媒体分析",

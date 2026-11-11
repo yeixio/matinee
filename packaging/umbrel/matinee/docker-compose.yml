@@ -15,7 +15,7 @@ services:
       MATINEE_DATA_DIR: /data
       # The folder picker in Settings → Libraries starts here.
       MATINEE_MEDIA_ROOT: /media
-      MATINEE_SCAN_INTERVAL: 15m
+      MATINEE_SCAN_INTERVAL: 6h
     volumes:
       - ${APP_DATA_DIR}/data/matinee:/data
       - ${UMBREL_ROOT}/data/storage/downloads:/media/downloads:ro

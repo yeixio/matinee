@@ -139,10 +139,18 @@ export type Settings = {
   publicURLHomeOnly?: boolean
   // How library folders are watched for new files.
   libraryWatch: WatchMode
-  // Set on the server's command line: how often polled folders are checked,
-  // and how often every library is rescanned in full (0 for never).
+  // Set on the server's command line: how often polled folders are checked.
   watchPollSeconds: number
+  // How often every library is rescanned in full (0 for never), and when
+  // the next one starts (milliseconds; absent when they're off).
   scanIntervalSeconds: number
+  nextScan?: number
+  // The time zone an admin picked, such as America/Juneau, or '' for the
+  // machine's own (systemTimeZone, when known). The server switches when it
+  // next starts; timeZoneInUse is the one it runs in now.
+  timeZone: string
+  systemTimeZone?: string
+  timeZoneInUse?: string
   // Where the TMDB key in use comes from, and its last four characters.
   // The key itself is never sent; an admin changes it with tmdbKey.
   tmdb: { source: 'settings' | 'environment' | 'built-in' | 'none'; hint?: string }
@@ -1487,7 +1495,7 @@ export const api = {
   reanalyze: (id: number) => request<void>('POST', `/api/v1/items/${id}/analyze`),
   settings: () => request<Settings>('GET', '/api/v1/settings'),
   // tmdbKey replaces the server's TMDB key; "" goes back to the one it started with.
-  saveSettings: (s: Partial<Omit<Settings, 'hardware' | 'themeProblems' | 'watchPollSeconds' | 'scanIntervalSeconds' | 'tmdb'>> & { tmdbKey?: string }) =>
+  saveSettings: (s: Partial<Omit<Settings, 'hardware' | 'themeProblems' | 'watchPollSeconds' | 'nextScan' | 'systemTimeZone' | 'timeZoneInUse' | 'tmdb'>> & { tmdbKey?: string }) =>
     request<Settings>('PUT', '/api/v1/settings', s),
   connectPlans: () => request<{ plans: ConnectPlan[] }>('GET', '/api/v1/settings/connect/plans').then((r) => r.plans),
   connectSubscribe: (plan: ConnectPlan['id']) => request<{ url: string }>('POST', '/api/v1/settings/connect/subscribe', { plan }),

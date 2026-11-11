@@ -410,8 +410,19 @@
         "hint": "Az új fájlok a következő teljes átvizsgáláskor jelennek meg, vagy ha megnyomod az Átvizsgálás gombot."
       }
     },
-    "rescan": "Minden könyvtár teljes újravizsgálata is megtörténik {{every}}ként, ami minden mást is elkap, például egy megosztáson helyben lecserélt fájlt.",
-    "rescanOff": "A teljes átvizsgálás ki van kapcsolva ezen a szerveren (MATINEE_SCAN_INTERVAL=0)."
+    "rescanLabel": "Teljes újraolvasások",
+    "rescanEvery": "{{every}} időközönként",
+    "rescanNever": "Soha",
+    "rescanHint": "A teljes újraolvasás minden könyvtármappát újra beolvas, és észreveszi, amit az új fájlok figyelése nem, például egy megosztáson helyben lecserélt fájlt. Nagy könyvtárnál hálózati megosztáson a hosszabb időköz gyorsan reagálóvá teszi a megosztást.",
+    "rescanNext": "Következő: {{time}}"
+  },
+  "timeZone": {
+    "title": "Időzóna",
+    "intro": "A szerver órája: a naplójában lévő időpontok, az ünnepi sorok kezdete a Kezdőlapon és minden más, ami a napszakhoz igazodik.",
+    "system": "Ennek a számítógépnek az időzónája ({{zone}})",
+    "systemUnknown": "Ennek a számítógépnek az időzónája",
+    "restart": "A Matinee a következő indításkor átvált erre: {{zone}}.",
+    "restartSystem": "A Matinee a következő indításkor visszavált ennek a számítógépnek az időzónájára."
   },
   "analysis": {
     "title": "Médiaelemzés",

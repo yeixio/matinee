@@ -37,7 +37,16 @@ Intro and credits markers and seek bar pictures are made again in the background
 
 ## Full rescans
 
+<!-- until: v0.2.4 -->
 As well, Matinee rescans every library in full every 15 minutes to catch anything else. Change that with `MATINEE_SCAN_INTERVAL` (such as `1h`), or `0` to turn it off.
+<!-- /until -->
+<!-- since: v0.2.4 -->
+As well, Matinee rescans every library in full every so often to catch anything watching can't, like a file replaced in place on a share. Pick how often under **Full rescans** in **Settings → Libraries → New files**: every 15 or 30 minutes, every 1, 6, 12 or 24 hours, or **Never**. The next rescan's time shows below it, and a new pick counts from when you make it. **Watch for new files** doesn't change this; turning it **Off** leaves full rescans on.
+
+Each rescan reads every folder and file of every library, so on a big library on a network share it's real work for the share. If the share or the web player slows down every so often, or new files show up quickly anyway, pick a longer interval. The default, every 6 hours, is plenty for most homes.
+
+Until you pick one, the server uses `MATINEE_SCAN_INTERVAL`, which is every 6 hours unless it's set (every 15 minutes before v0.2.4).
+<!-- /since -->
 
 ## Big libraries on slow shares
 

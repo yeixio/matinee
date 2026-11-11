@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/yeixio/matinee/internal/scan"
+	"github.com/yeixio/matinee/internal/tz"
 )
 
 func TestFromHome(t *testing.T) {
@@ -181,7 +182,7 @@ func TestToneMappingSetting(t *testing.T) {
 func TestLibraryWatchSetting(t *testing.T) {
 	c, tmp := newTestServer(t, func(s *Server) {
 		s.Watcher = scan.NewWatcher(s.Scanner, s.Log)
-		s.ScanInterval = 15 * time.Minute
+		s.Schedule = &scan.Schedule{Scanner: s.Scanner, Default: 15 * time.Minute}
 		go s.Watcher.Run(s.BackgroundCtx)
 	})
 	var login struct{ Token string }
@@ -274,5 +275,42 @@ func TestCrossOriginFromHome(t *testing.T) {
 	// The server's own pages are no other origin.
 	if res := send("GET", "/api/v1/home", c.base, ""); res.StatusCode != http.StatusOK || res.Header.Get("Access-Control-Allow-Origin") != "" {
 		t.Errorf("same origin: %d %v", res.StatusCode, res.Header)
+	}
+}
+
+func TestScanScheduleAndTimeZoneSettings(t *testing.T) {
+	c, _ := newTestServer(t, func(s *Server) {
+		s.Schedule = &scan.Schedule{Scanner: s.Scanner, Default: 15 * time.Minute}
+		go s.Schedule.Run(s.BackgroundCtx)
+	})
+	var login struct{ Token string }
+	c.do("POST", "/api/v1/setup", credentials{"admin", "correct horse"}, &login)
+	c.token = login.Token
+	var set serverSettings
+	c.do("GET", "/api/v1/settings", nil, &set)
+	if set.ScanIntervalSeconds != 900 || set.TimeZone != "" {
+		t.Fatalf("defaults: %+v", set)
+	}
+	for _, bad := range []map[string]any{{"scanIntervalSeconds": 60}, {"scanIntervalSeconds": 30 * 24 * 3600}, {"timeZone": "Mars/Olympus_Mons"}} {
+		if code := c.do("PUT", "/api/v1/settings", bad, nil); code != http.StatusBadRequest {
+			t.Errorf("%v: %d", bad, code)
+		}
+	}
+	if code := c.do("PUT", "/api/v1/settings", map[string]any{"scanIntervalSeconds": 6 * 3600, "timeZone": "America/Juneau"}, &set); code != 200 ||
+		set.ScanIntervalSeconds != 6*3600 || set.TimeZone != "America/Juneau" {
+		t.Fatalf("set: %d %+v", code, set)
+	}
+	// The server switches when it next starts.
+	if set.TimeZoneInUse != tz.System() {
+		t.Errorf("in use: %q", set.TimeZoneInUse)
+	}
+	// What a client got back can be sent back as it is.
+	if code := c.do("PUT", "/api/v1/settings", set, &set); code != 200 || set.ScanIntervalSeconds != 6*3600 {
+		t.Fatalf("round trip: %d %+v", code, set)
+	}
+	set = serverSettings{} // absent fields stay as they were otherwise
+	if code := c.do("PUT", "/api/v1/settings", map[string]any{"scanIntervalSeconds": 0, "timeZone": ""}, &set); code != 200 ||
+		set.ScanIntervalSeconds != 0 || set.NextScan != 0 || set.TimeZone != "" {
+		t.Fatalf("off: %d %+v", code, set)
 	}
 }

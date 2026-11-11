@@ -410,8 +410,19 @@
         "hint": "Nieuwe bestanden verschijnen bij de volgende volledige scan, of als je op Scannen drukt."
       }
     },
-    "rescan": "Elke bibliotheek wordt ook elke {{every}} volledig opnieuw gescand, zodat al het andere ook wordt opgemerkt, zoals een bestand dat op een share is vervangen.",
-    "rescanOff": "Volledige scans staan uit op deze server (MATINEE_SCAN_INTERVAL=0)."
+    "rescanLabel": "Volledige herscans",
+    "rescanEvery": "Elke {{every}}",
+    "rescanNever": "Nooit",
+    "rescanHint": "Een volledige herscan leest elke bibliotheekmap opnieuw en vangt op wat het volgen van nieuwe bestanden mist, zoals een bestand dat op een share ter plekke is vervangen. Bij een grote bibliotheek op een netwerkshare houdt een langere tussenpoos de share vlot.",
+    "rescanNext": "Volgende: {{time}}"
+  },
+  "timeZone": {
+    "title": "Tijdzone",
+    "intro": "De klok van de server: de tijden in het logboek, wanneer de feestdagrijen op Home beginnen en alles wat van het tijdstip afhangt.",
+    "system": "Die van deze computer ({{zone}})",
+    "systemUnknown": "Die van deze computer",
+    "restart": "Matinee schakelt bij de volgende start over naar {{zone}}.",
+    "restartSystem": "Matinee gaat bij de volgende start terug naar de tijdzone van deze computer."
   },
   "analysis": {
     "title": "Media-analyse",

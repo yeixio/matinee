@@ -410,8 +410,19 @@
         "hint": "Yeni dosyalar bir sonraki tam taramada veya Tara'ya bastığında görünür."
       }
     },
-    "rescan": "Her kütüphane ayrıca her {{every}} baştan taranır; bu, paylaşımda yerinde değiştirilen bir dosya gibi diğer her şeyi yakalar.",
-    "rescanOff": "Tam yeniden taramalar bu sunucuda kapalı (MATINEE_SCAN_INTERVAL=0)."
+    "rescanLabel": "Tam yeniden taramalar",
+    "rescanEvery": "Her {{every}}",
+    "rescanNever": "Hiçbir zaman",
+    "rescanHint": "Tam yeniden tarama her kitaplık klasörünü yeniden okur ve yeni dosyaları izlemenin yakalayamadığını, örneğin bir paylaşımda yerinde değiştirilmiş bir dosyayı yakalar. Ağ paylaşımındaki büyük bir kitaplıkta daha uzun bir aralık paylaşımı hızlı tutar.",
+    "rescanNext": "Sonraki: {{time}}"
+  },
+  "timeZone": {
+    "title": "Saat dilimi",
+    "intro": "Sunucunun saati: günlüğündeki saatler, Ana Sayfa'daki bayram satırlarının ne zaman başladığı ve günün saatine bağlı diğer her şey.",
+    "system": "Bu bilgisayarınki ({{zone}})",
+    "systemUnknown": "Bu bilgisayarınki",
+    "restart": "Matinee bir sonraki başlatmada {{zone}} saat dilimine geçer.",
+    "restartSystem": "Matinee bir sonraki başlatmada bu bilgisayarın saat dilimine döner."
   },
   "analysis": {
     "title": "Medya analizi",

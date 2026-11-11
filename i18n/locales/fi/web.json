@@ -410,8 +410,19 @@
         "hint": "Uudet tiedostot ilmestyvät seuraavassa täydessä skannauksessa tai kun painat Skannaa."
       }
     },
-    "rescan": "Jokainen kirjasto skannataan myös kokonaan {{every}} välein, mikä löytää kaiken muun, kuten verkkojaossa korvatun tiedoston.",
-    "rescanOff": "Täydet skannaukset ovat pois päältä tällä palvelimella (MATINEE_SCAN_INTERVAL=0)."
+    "rescanLabel": "Täydet uudelleenskannaukset",
+    "rescanEvery": "{{every}} välein",
+    "rescanNever": "Ei koskaan",
+    "rescanHint": "Täysi uudelleenskannaus lukee jokaisen kirjastokansion uudelleen ja huomaa sen, mitä uusien tiedostojen seuranta ei huomaa, kuten jaetulla levyllä paikalleen korvatun tiedoston. Suurella kirjastolla verkkojaossa pidempi väli pitää jaon nopeana.",
+    "rescanNext": "Seuraava: {{time}}"
+  },
+  "timeZone": {
+    "title": "Aikavyöhyke",
+    "intro": "Palvelimen kello: lokin ajat, milloin Kotisivun juhlapyhärivit alkavat ja kaikki muu, mikä riippuu kellonajasta.",
+    "system": "Tämän tietokoneen ({{zone}})",
+    "systemUnknown": "Tämän tietokoneen",
+    "restart": "Matinee vaihtaa aikavyöhykkeeseen {{zone}}, kun se käynnistyy seuraavan kerran.",
+    "restartSystem": "Matinee palaa tämän tietokoneen aikavyöhykkeeseen, kun se käynnistyy seuraavan kerran."
   },
   "analysis": {
     "title": "Media-analyysi",

@@ -413,8 +413,19 @@
         "hint": "Fișierele noi apar la următoarea scanare completă sau când apeși Scanează."
       }
     },
-    "rescan": "Fiecare bibliotecă este de asemenea rescanată complet la fiecare {{every}}, ceea ce prinde orice altceva, cum ar fi un fișier înlocuit pe o partajare.",
-    "rescanOff": "Rescanările complete sunt dezactivate pe acest server (MATINEE_SCAN_INTERVAL=0)."
+    "rescanLabel": "Rescanări complete",
+    "rescanEvery": "La fiecare {{every}}",
+    "rescanNever": "Niciodată",
+    "rescanHint": "O rescanare completă citește din nou fiecare dosar al bibliotecii și prinde ce nu vede urmărirea fișierelor noi, cum ar fi un fișier înlocuit pe loc într-o partajare. Pentru o bibliotecă mare pe o partajare de rețea, un interval mai lung păstrează partajarea receptivă.",
+    "rescanNext": "Următoarea: {{time}}"
+  },
+  "timeZone": {
+    "title": "Fus orar",
+    "intro": "Ceasul serverului: orele din jurnal, când încep rândurile de sărbători din Acasă și orice altceva ce ține de ora din zi.",
+    "system": "Cel al acestui calculator ({{zone}})",
+    "systemUnknown": "Cel al acestui calculator",
+    "restart": "Matinee trece la {{zone}} la următoarea pornire.",
+    "restartSystem": "Matinee revine la fusul orar al acestui calculator la următoarea pornire."
   },
   "analysis": {
     "title": "Analiză media",

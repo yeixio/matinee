@@ -413,8 +413,19 @@
         "hint": "Arquivos novos aparecem na próxima verificação completa ou quando você toca em Verificar."
       }
     },
-    "rescan": "Cada biblioteca também é verificada por inteiro a cada {{every}}, o que pega todo o resto, como um arquivo substituído no lugar em um compartilhamento.",
-    "rescanOff": "As verificações completas estão desativadas neste servidor (MATINEE_SCAN_INTERVAL=0)."
+    "rescanLabel": "Reescaneamentos completos",
+    "rescanEvery": "A cada {{every}}",
+    "rescanNever": "Nunca",
+    "rescanHint": "Um reescaneamento completo lê de novo cada pasta da biblioteca e pega o que a observação de arquivos novos não consegue, como um arquivo substituído no lugar em um compartilhamento. Em uma biblioteca grande em um compartilhamento de rede, um intervalo maior mantém o compartilhamento ágil.",
+    "rescanNext": "Próximo: {{time}}"
+  },
+  "timeZone": {
+    "title": "Fuso horário",
+    "intro": "O relógio do servidor: os horários no registro, quando começam as fileiras de datas comemorativas no Início e tudo que depende da hora do dia.",
+    "system": "O deste computador ({{zone}})",
+    "systemUnknown": "O deste computador",
+    "restart": "O Matinee muda para {{zone}} na próxima vez que iniciar.",
+    "restartSystem": "O Matinee volta ao fuso horário deste computador na próxima vez que iniciar."
   },
   "analysis": {
     "title": "Análise de mídia",

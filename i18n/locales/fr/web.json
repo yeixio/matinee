@@ -413,8 +413,19 @@
         "hint": "Les nouveaux fichiers apparaissent à la prochaine analyse complète, ou quand vous appuyez sur Analyser."
       }
     },
-    "rescan": "Chaque bibliothèque est aussi entièrement réanalysée toutes les {{every}}, ce qui rattrape le reste, comme un fichier remplacé sur place sur un partage.",
-    "rescanOff": "Les analyses complètes sont désactivées sur ce serveur (MATINEE_SCAN_INTERVAL=0)."
+    "rescanLabel": "Réanalyses complètes",
+    "rescanEvery": "Toutes les {{every}}",
+    "rescanNever": "Jamais",
+    "rescanHint": "Une réanalyse complète relit chaque dossier de bibliothèque et rattrape ce que la surveillance des nouveaux fichiers ne peut pas voir, comme un fichier remplacé sur place sur un partage. Pour une grande bibliothèque sur un partage réseau, un intervalle plus long garde le partage réactif.",
+    "rescanNext": "Prochaine : {{time}}"
+  },
+  "timeZone": {
+    "title": "Fuseau horaire",
+    "intro": "L'horloge du serveur : les heures de son journal, le début des rangées de fêtes sur l'Accueil et tout ce qui dépend de l'heure.",
+    "system": "Celui de cet ordinateur ({{zone}})",
+    "systemUnknown": "Celui de cet ordinateur",
+    "restart": "Matinee passera à {{zone}} à son prochain démarrage.",
+    "restartSystem": "Matinee reviendra au fuseau horaire de cet ordinateur à son prochain démarrage."
   },
   "analysis": {
     "title": "Analyse des médias",

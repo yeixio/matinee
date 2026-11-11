@@ -413,8 +413,19 @@
         "hint": "Los archivos nuevos aparecen en el próximo escaneo completo o cuando pulses Escanear."
       }
     },
-    "rescan": "Además, cada biblioteca se vuelve a escanear entera cada {{every}}, lo que detecta todo lo demás, como un archivo sustituido en un recurso compartido.",
-    "rescanOff": "Los escaneos completos están desactivados en este servidor (MATINEE_SCAN_INTERVAL=0)."
+    "rescanLabel": "Reescaneos completos",
+    "rescanEvery": "Cada {{every}}",
+    "rescanNever": "Nunca",
+    "rescanHint": "Un reescaneo completo vuelve a leer cada carpeta de biblioteca y detecta lo que la vigilancia de archivos nuevos no puede, como un archivo reemplazado en su sitio en una carpeta compartida. En una biblioteca grande en una carpeta de red, un intervalo más largo mantiene la carpeta ágil.",
+    "rescanNext": "Próximo: {{time}}"
+  },
+  "timeZone": {
+    "title": "Zona horaria",
+    "intro": "El reloj del servidor: las horas de su registro, cuándo empiezan las filas de festividades en Inicio y todo lo que depende de la hora del día.",
+    "system": "La de este equipo ({{zone}})",
+    "systemUnknown": "La de este equipo",
+    "restart": "Matinee cambiará a {{zone}} la próxima vez que se inicie.",
+    "restartSystem": "Matinee volverá a la zona horaria de este equipo la próxima vez que se inicie."
   },
   "analysis": {
     "title": "Análisis de contenido",
