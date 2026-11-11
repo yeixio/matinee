@@ -9,6 +9,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/yeixio/matinee/internal/probe"
 	"github.com/yeixio/matinee/internal/slowfs"
 	"github.com/yeixio/matinee/internal/store"
 )
@@ -100,8 +101,8 @@ func (d *Detector) retryLater(id int64) bool {
 // timedOut has a file that timed out tried again later, or, once it keeps
 // timing out with its share answering, stored as unreadable until it
 // changes (see slowfs.Timeouts).
-func (d *Detector) timedOut(id int64, path string) {
-	if d.timeouts.Add(id, path) {
+func (d *Detector) timedOut(ctx context.Context, id int64, path string, durationMs int64) {
+	if d.timeouts.Add(id, path) && probe.Damaged(ctx, d.FFmpeg, path, durationMs, d.LowPriority) {
 		d.Log.Warn("intro detection: file keeps timing out; leaving it until it changes (it may be damaged)", "path", path)
 		return
 	}
@@ -144,7 +145,7 @@ func (d *Detector) Season(ctx context.Context, season []store.IntroEpisode) int 
 				d.Log.Warn("intro detection: can't read audio", "path", e.Path, "err", err)
 			}
 			if errors.Is(err, context.DeadlineExceeded) && ctx.Err() == nil {
-				d.timedOut(e.ID, e.Path)
+				d.timedOut(ctx, e.ID, e.Path, e.DurationMs)
 			}
 			return Print{}, false
 		}

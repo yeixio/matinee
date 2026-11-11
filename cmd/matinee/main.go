@@ -248,7 +248,7 @@ func run() (err error) {
 	// Media analysis reads every file once more, slowly and at the lowest
 	// priority, for the details the scan doesn't need (see internal/analyze).
 	analyzer := &analyze.Analyzer{
-		Store: db, Log: log,
+		Store: db, Log: log, FFmpeg: cfg.FFmpegPath,
 		Prober: probe.Prober{Path: cfg.FFprobePath, Timeout: 2 * time.Minute, LowPriority: true},
 		Busy:   func() bool { return transcoder.Active() > 0 || hub.Playing() },
 		// Then it finds each TV episode's intro by matching the audio of a

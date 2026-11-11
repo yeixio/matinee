@@ -72,7 +72,10 @@ var (
 )
 
 type Analyzer struct {
-	Store  *store.Store
+	Store *store.Store
+	// FFmpeg, when set, checks whether a file whose analysis timed out is
+	// damaged (see probe.Damaged) before it's set aside as unreadable.
+	FFmpeg string
 	Prober probe.Prober // should be LowPriority
 	Log    *slog.Logger
 	// Busy reports whether anything is playing right now, transcoded or
@@ -741,8 +744,11 @@ func (a *Analyzer) analyze(ctx context.Context, f store.AnalysisFile) bool {
 	switch {
 	case errors.Is(err, context.Canceled):
 		return false
-	case errors.Is(err, context.DeadlineExceeded) && !slowfs.Answering(f.Path):
-		// The share's fault, not the file's: try it again later.
+	case errors.Is(err, context.DeadlineExceeded) &&
+		(!slowfs.Answering(f.Path) || a.FFmpeg == "" || !probe.Damaged(ctx, a.FFmpeg, f.Path, 0, probe.LowerPriority)):
+		// The share's fault, or a slow moment, not the file's: try it again
+		// later. A file is only taken for damaged once jumping around in it
+		// times out too.
 		a.Log.Warn("media analysis: ffprobe timed out", "path", f.Path)
 		a.timedOut(f.ID)
 		return false
