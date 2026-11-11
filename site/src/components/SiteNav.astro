@@ -1,6 +1,6 @@
 ---
 // The top bar on the landing page, the Download page and the Roadmap page. `current` marks the
-// tab for the page you're on.
+// tab for the page you're on. On phones the links fold into a menu button.
 interface Props {
   current?: 'roadmap' | 'download'
 }
@@ -17,7 +17,13 @@ const home = current ? base : ''
     <img src={`${base}favicon.svg`} alt="" width="30" height="30" />
     Matinee
   </a>
-  <nav>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
+    <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+      <path class="bars" d="M4 7h16M4 12h16M4 17h16" />
+      <path class="cross" d="M6 6l12 12M18 6L6 18" />
+    </svg>
+  </button>
+  <nav id="site-nav">
     <a href={`${base}docs/`}>Guide</a>
     <a class="nav-apps" href={`${home}#apps`}>Apps</a>
     <a class="nav-install" href={`${base}download/`} aria-current={current === 'download' ? 'page' : undefined}>Download</a>
@@ -26,3 +32,26 @@ const home = current ? base : ''
     <a class="donate" href={donate}>Donate</a>
   </nav>
 </header>
+
+<script>
+  const header = document.querySelector<HTMLElement>('header.nav')!
+  const toggle = header.querySelector<HTMLButtonElement>('.nav-toggle')!
+  const setOpen = (open: boolean) => {
+    header.classList.toggle('menu-open', open)
+    toggle.setAttribute('aria-expanded', String(open))
+  }
+  toggle.addEventListener('click', () => setOpen(!header.classList.contains('menu-open')))
+  // Close after picking a link (section links stay on the page), on Escape,
+  // on a tap outside the menu, and when the window grows past phone width.
+  header.querySelectorAll('nav a').forEach((a) => a.addEventListener('click', () => setOpen(false)))
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && header.classList.contains('menu-open')) {
+      setOpen(false)
+      toggle.focus()
+    }
+  })
+  document.addEventListener('click', (e) => {
+    if (!header.contains(e.target as Node)) setOpen(false)
+  })
+  matchMedia('(min-width: 721px)').addEventListener('change', (e) => e.matches && setOpen(false))
+</script>

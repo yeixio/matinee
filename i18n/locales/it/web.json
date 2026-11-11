@@ -201,11 +201,12 @@
     "boxSet": "Cofanetto"
   },
   "search": {
-    "placeholder": "Film, serie, artisti, album…",
+    "placeholder": "Film, serie, attori, artisti, album…",
     "nothing": "Nessun risultato per «{{q}}»",
     "lookingForNew": "Cerchi qualcosa di nuovo?",
     "addIt": "Aggiungilo",
-    "askForIt": "Richiedilo"
+    "askForIt": "Richiedilo",
+    "people": "Persone"
   },
   "person": {
     "notFound": "Persona non trovata",

@@ -201,11 +201,12 @@
     "boxSet": "Filmsorozat"
   },
   "search": {
-    "placeholder": "Filmek, sorozatok, előadók, albumok…",
+    "placeholder": "Filmek, sorozatok, színészek, előadók, albumok…",
     "nothing": "Semmi sem egyezik ezzel: „{{q}}”",
     "lookingForNew": "Valami újat keresel?",
     "addIt": "Hozzáadás",
-    "askForIt": "Kérd"
+    "askForIt": "Kérd",
+    "people": "Személyek"
   },
   "person": {
     "notFound": "A személy nem található",

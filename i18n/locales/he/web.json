@@ -201,11 +201,12 @@
     "boxSet": "סט"
   },
   "search": {
-    "placeholder": "סרטים, סדרות, אמנים, אלבומים…",
+    "placeholder": "סרטים, סדרות, שחקנים, אמנים, אלבומים…",
     "nothing": "אין התאמות ל„{{q}}”",
     "lookingForNew": "מחפש משהו חדש?",
     "addIt": "להוסיף",
-    "askForIt": "לבקש"
+    "askForIt": "לבקש",
+    "people": "אנשים"
   },
   "person": {
     "notFound": "האדם לא נמצא",

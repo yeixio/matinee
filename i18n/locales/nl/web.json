@@ -201,11 +201,12 @@
     "boxSet": "Box"
   },
   "search": {
-    "placeholder": "Films, series, artiesten, albums…",
+    "placeholder": "Films, series, acteurs, artiesten, albums…",
     "nothing": "Niets komt overeen met ‘{{q}}’",
     "lookingForNew": "Op zoek naar iets nieuws?",
     "addIt": "Toevoegen",
-    "askForIt": "Aanvragen"
+    "askForIt": "Aanvragen",
+    "people": "Personen"
   },
   "person": {
     "notFound": "Persoon niet gevonden",

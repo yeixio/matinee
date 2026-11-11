@@ -201,11 +201,12 @@
     "boxSet": "Bộ phim"
   },
   "search": {
-    "placeholder": "Phim, chương trình, nghệ sĩ, album…",
+    "placeholder": "Phim, chương trình, diễn viên, nghệ sĩ, album…",
     "nothing": "Không có kết quả cho \"{{q}}\"",
     "lookingForNew": "Bạn đang tìm thứ gì mới?",
     "addIt": "Thêm",
-    "askForIt": "Yêu cầu"
+    "askForIt": "Yêu cầu",
+    "people": "Mọi người"
   },
   "person": {
     "notFound": "Không tìm thấy người này",
