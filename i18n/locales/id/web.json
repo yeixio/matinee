@@ -445,7 +445,7 @@
     "mode": {
       "gentle": {
         "label": "Lembut",
-        "hint": "Satu file setiap beberapa detik, dan tidak ada saat server sedang mengonversi sesuatu untuk diputar."
+        "hint": "Satu file setiap beberapa detik."
       },
       "normal": {
         "label": "Normal",
@@ -455,6 +455,10 @@
         "label": "Mati",
         "hint": "Dijeda sampai kamu menyalakannya lagi."
       }
+    },
+    "pause": {
+      "label": "Jeda saat ada yang diputar",
+      "hint": "Analisis, deteksi intro dan kredit, pratinjau bilah geser, dan pindai ulang penuh terjadwal menunggu selama ada yang menonton atau mendengarkan, agar pemutaran mendapat disk dan jaringan sepenuhnya. Pemutar yang dijeda tidak dihitung, dan pemindaian yang Anda mulai sendiri tetap berjalan."
     },
     "intros": {
       "label": "Temukan intro serial",

@@ -449,7 +449,7 @@
     "mode": {
       "gentle": {
         "label": "Skånsom",
-        "hint": "Én fil med noen sekunders mellomrom, og ingen mens serveren konverterer noe for avspilling."
+        "hint": "Én fil med noen sekunders mellomrom."
       },
       "normal": {
         "label": "Normal",
@@ -459,6 +459,10 @@
         "label": "Av",
         "hint": "Satt på pause til du slår den på igjen."
       }
+    },
+    "pause": {
+      "label": "Pause mens noe spilles",
+      "hint": "Analyse, gjenkjenning av intro og rulletekst, forhåndsvisninger for tidslinjen og planlagte fullstendige nyskanninger venter mens noen ser eller lytter, så avspillingen har diskene og nettverket for seg selv. En pauset spiller teller ikke, og skanninger du starter selv kjører fortsatt."
     },
     "intros": {
       "label": "Finn introer i serier",

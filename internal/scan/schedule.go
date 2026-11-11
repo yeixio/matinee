@@ -33,6 +33,9 @@ type Schedule struct {
 	Scanner *Scanner
 	// Default is how often until the admin changes it: MATINEE_SCAN_INTERVAL.
 	Default time.Duration
+	// Wait, when set, reports whether a rescan that's due should wait,
+	// because something is playing; it starts once that's over.
+	Wait func(ctx context.Context) bool
 
 	mu     sync.Mutex
 	next   time.Time // when the next rescan starts; zero when they're off
@@ -119,6 +122,7 @@ func (s *Schedule) Run(ctx context.Context) {
 		case <-ctx.Done():
 		case <-s.change:
 		case <-wait:
+			s.waitForPlayback(ctx)
 			s.Scanner.ScanAll(ctx)
 		}
 		if t != nil {
@@ -126,6 +130,27 @@ func (s *Schedule) Run(ctx context.Context) {
 		}
 		if ctx.Err() != nil {
 			return
+		}
+	}
+}
+
+// playbackCheck is how often a rescan that's waiting for playback looks
+// again.
+var playbackCheck = 30 * time.Second
+
+// waitForPlayback holds a rescan that's due while Wait says so.
+func (s *Schedule) waitForPlayback(ctx context.Context) {
+	if s.Wait == nil || !s.Wait(ctx) {
+		return
+	}
+	s.Scanner.Log.Info("full rescan waits until playback ends")
+	t := time.NewTicker(playbackCheck)
+	defer t.Stop()
+	for s.Wait(ctx) {
+		select {
+		case <-ctx.Done():
+			return
+		case <-t.C:
 		}
 	}
 }

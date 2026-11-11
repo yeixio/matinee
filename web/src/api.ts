@@ -1181,6 +1181,8 @@ export type LogQuery = { level?: LogLevel; q?: string; before?: number; limit?: 
 
 export type AnalysisStatus = {
   mode: AnalysisMode
+  // Background jobs and scheduled rescans wait while something plays.
+  pauseWhilePlaying: boolean
   state: 'analyzing' | 'intros' | 'credits' | 'gapless' | 'thumbnails' | 'waiting' | 'slowDisk' | 'idle' | 'off'
   total: number
   done: number
@@ -1501,6 +1503,7 @@ export const api = {
   setIntroDetection: (intros: boolean) => request<AnalysisStatus>('PUT', '/api/v1/analysis', { intros }),
   setCreditsDetection: (credits: boolean) => request<AnalysisStatus>('PUT', '/api/v1/analysis', { credits }),
   setThumbnailMode: (thumbnails: ThumbnailMode) => request<AnalysisStatus>('PUT', '/api/v1/analysis', { thumbnails }),
+  setPauseWhilePlaying: (pauseWhilePlaying: boolean) => request<AnalysisStatus>('PUT', '/api/v1/analysis', { pauseWhilePlaying }),
   reanalyze: (id: number) => request<void>('POST', `/api/v1/items/${id}/analyze`),
   settings: () => request<Settings>('GET', '/api/v1/settings'),
   // tmdbKey replaces the server's TMDB key; "" goes back to the one it started with.

@@ -453,7 +453,7 @@
     "mode": {
       "gentle": {
         "label": "Douce",
-        "hint": "Un fichier toutes les quelques secondes, et aucun pendant que le serveur convertit quelque chose pour la lecture."
+        "hint": "Un fichier toutes les quelques secondes."
       },
       "normal": {
         "label": "Normale",
@@ -463,6 +463,10 @@
         "label": "Désactivée",
         "hint": "En pause jusqu’à ce que vous la réactiviez."
       }
+    },
+    "pause": {
+      "label": "Mettre en pause pendant la lecture",
+      "hint": "L'analyse, la détection des génériques, les aperçus de la barre de lecture et les réanalyses complètes planifiées attendent tant que quelqu'un regarde ou écoute, pour que la lecture ait les disques et le réseau pour elle. Un lecteur en pause ne compte pas, et les analyses que vous lancez vous-même continuent."
     },
     "intros": {
       "label": "Trouver les intros des séries",

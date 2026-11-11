@@ -453,7 +453,7 @@
     "mode": {
       "gentle": {
         "label": "Suave",
-        "hint": "Un archivo cada pocos segundos, y ninguno mientras el servidor convierte algo para reproducir."
+        "hint": "Un archivo cada pocos segundos."
       },
       "normal": {
         "label": "Normal",
@@ -463,6 +463,10 @@
         "label": "Desactivado",
         "hint": "En pausa hasta que lo vuelvas a activar."
       }
+    },
+    "pause": {
+      "label": "Pausar mientras algo se reproduce",
+      "hint": "El análisis, la detección de intros y créditos, las vistas previas de la barra y los reescaneos completos programados esperan mientras alguien ve o escucha algo, para que la reproducción tenga los discos y la red para sí. Un reproductor en pausa no cuenta, y los escaneos que inicias tú siguen funcionando."
     },
     "intros": {
       "label": "Encontrar intros de series",

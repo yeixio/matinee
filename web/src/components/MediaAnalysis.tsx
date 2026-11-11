@@ -30,6 +30,10 @@ export function MediaAnalysis() {
     mutationFn: api.setThumbnailMode,
     onSuccess: (s) => qc.setQueryData(['analysis'], s),
   })
+  const setPause = useMutation({
+    mutationFn: api.setPauseWhilePlaying,
+    onSuccess: (s) => qc.setQueryData(['analysis'], s),
+  })
   if (!st) return null
   const pct = st.total ? Math.floor((st.done / st.total) * 100) : 100
   const state = {
@@ -89,6 +93,19 @@ export function MediaAnalysis() {
         <p className="text-xs text-muted">{modes.includes(st.mode) && t(`analysis.mode.${st.mode}.hint`)}</p>
         {setMode.error && <p className="text-sm text-danger">{setMode.error.message}</p>}
       </div>
+      <label className="flex cursor-pointer items-start gap-4 rounded-xl border border-line/60 bg-surface/50 p-5">
+        <span className="min-w-0 flex-1">
+          <span className="block font-medium">{t('analysis.pause.label')}</span>
+          <span className="mt-1 block text-sm text-muted">{t('analysis.pause.hint')}</span>
+        </span>
+        <input
+          type="checkbox"
+          className="mt-1 size-5 accent-[var(--color-accent)]"
+          checked={st.pauseWhilePlaying}
+          disabled={setPause.isPending}
+          onChange={() => setPause.mutate(!st.pauseWhilePlaying)}
+        />
+      </label>
       {st.intros && (
         <label className="flex cursor-pointer items-start gap-4 rounded-xl border border-line/60 bg-surface/50 p-5">
           <span className="min-w-0 flex-1">

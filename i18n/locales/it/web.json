@@ -453,7 +453,7 @@
     "mode": {
       "gentle": {
         "label": "Delicata",
-        "hint": "Un file ogni pochi secondi, e nessuno mentre il server converte qualcosa per la riproduzione."
+        "hint": "Un file ogni pochi secondi."
       },
       "normal": {
         "label": "Normale",
@@ -463,6 +463,10 @@
         "label": "Disattivata",
         "hint": "In pausa finché non la riattivi."
       }
+    },
+    "pause": {
+      "label": "Metti in pausa durante la riproduzione",
+      "hint": "Analisi, rilevamento di sigle e titoli di coda, anteprime della barra e nuove scansioni complete programmate aspettano mentre qualcuno guarda o ascolta, così la riproduzione ha dischi e rete tutti per sé. Un lettore in pausa non conta, e le scansioni che avvii tu continuano."
     },
     "intros": {
       "label": "Trova le intro delle serie",

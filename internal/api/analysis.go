@@ -40,12 +40,15 @@ func (s *Server) putAnalysis(w http.ResponseWriter, r *http.Request) {
 		Credits *bool        `json:"credits"` // look for episodes' and movies' end credits
 		// When to make the seek bar's pictures: all, onPlay or off.
 		Thumbnails thumbs.Mode `json:"thumbnails"`
+		// Whether background jobs and scheduled rescans wait while
+		// something plays.
+		PauseWhilePlaying *bool `json:"pauseWhilePlaying"`
 	}
 	if err := readJSON(r, &in); err != nil {
 		writeError(w, http.StatusBadRequest, "bad request")
 		return
 	}
-	if (in.Mode != "" || (in.Intros == nil && in.Credits == nil && in.Thumbnails == "")) && in.Mode != analyze.Gentle && in.Mode != analyze.Normal && in.Mode != analyze.Off {
+	if (in.Mode != "" || (in.Intros == nil && in.Credits == nil && in.Thumbnails == "" && in.PauseWhilePlaying == nil)) && in.Mode != analyze.Gentle && in.Mode != analyze.Normal && in.Mode != analyze.Off {
 		writeError(w, http.StatusBadRequest, "mode must be gentle, normal or off")
 		return
 	}
@@ -67,6 +70,12 @@ func (s *Server) putAnalysis(w http.ResponseWriter, r *http.Request) {
 	}
 	if in.Credits != nil {
 		if err := s.Analyzer.SetCreditsOn(r.Context(), *in.Credits); err != nil {
+			s.serverError(w, err)
+			return
+		}
+	}
+	if in.PauseWhilePlaying != nil {
+		if err := s.Analyzer.SetPauseWhilePlaying(r.Context(), *in.PauseWhilePlaying); err != nil {
 			s.serverError(w, err)
 			return
 		}

@@ -445,7 +445,7 @@
     "mode": {
       "gentle": {
         "label": "Nhẹ nhàng",
-        "hint": "Một tệp mỗi vài giây, và không tệp nào khi máy chủ đang chuyển đổi gì đó để phát."
+        "hint": "Mỗi vài giây một tệp."
       },
       "normal": {
         "label": "Bình thường",
@@ -455,6 +455,10 @@
         "label": "Tắt",
         "hint": "Tạm dừng cho đến khi bạn bật lại."
       }
+    },
+    "pause": {
+      "label": "Tạm dừng khi đang phát",
+      "hint": "Phân tích, nhận diện đoạn mở đầu và danh đề, ảnh xem trước thanh tua và các lần quét lại toàn bộ theo lịch sẽ chờ khi có người đang xem hoặc nghe, để việc phát được dùng trọn ổ đĩa và mạng. Trình phát đang tạm dừng không tính, và các lần quét bạn tự bắt đầu vẫn chạy."
     },
     "intros": {
       "label": "Tìm đoạn mở đầu phim bộ",

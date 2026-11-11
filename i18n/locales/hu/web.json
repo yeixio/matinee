@@ -449,7 +449,7 @@
     "mode": {
       "gentle": {
         "label": "Kíméletes",
-        "hint": "Néhány másodpercenként egy fájl, és egy sem, amíg a szerver valamit lejátszáshoz alakít át."
+        "hint": "Néhány másodpercenként egy fájl."
       },
       "normal": {
         "label": "Normál",
@@ -459,6 +459,10 @@
         "label": "Ki",
         "hint": "Szüneteltetve, amíg újra be nem kapcsolod."
       }
+    },
+    "pause": {
+      "label": "Szüneteltetés lejátszás közben",
+      "hint": "Az elemzés, a főcím- és stáblistafelismerés, a csúszka előnézeti képei és az ütemezett teljes újraolvasások várnak, amíg valaki néz vagy hallgat valamit, így a lejátszásé a lemezek és a hálózat. A szüneteltetett lejátszó nem számít, és az általad indított beolvasások futnak."
     },
     "intros": {
       "label": "Sorozatbevezetők keresése",

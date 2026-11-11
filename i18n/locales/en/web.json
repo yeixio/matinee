@@ -449,7 +449,7 @@
     "mode": {
       "gentle": {
         "label": "Gentle",
-        "hint": "One file every few seconds, and none while the server is converting something for playback."
+        "hint": "One file every few seconds."
       },
       "normal": {
         "label": "Normal",
@@ -459,6 +459,10 @@
         "label": "Off",
         "hint": "Paused until you turn it back on."
       }
+    },
+    "pause": {
+      "label": "Pause while something plays",
+      "hint": "Analysis, intro and credits detection, seek bar previews and scheduled full rescans wait while anyone is watching or listening, so playback has the disks and network to itself. A paused player doesn't count, and scans you start yourself still run."
     },
     "intros": {
       "label": "Find TV intros",

@@ -449,7 +449,7 @@
     "mode": {
       "gentle": {
         "label": "Rustig",
-        "hint": "Elke paar seconden één bestand, en geen terwijl de server iets omzet om af te spelen."
+        "hint": "Eén bestand per paar seconden."
       },
       "normal": {
         "label": "Normaal",
@@ -459,6 +459,10 @@
         "label": "Uit",
         "hint": "Gepauzeerd tot je het weer aanzet."
       }
+    },
+    "pause": {
+      "label": "Pauzeren terwijl er iets speelt",
+      "hint": "Analyse, intro- en aftitelingdetectie, voorbeelden voor de zoekbalk en geplande volledige herscans wachten zolang iemand kijkt of luistert, zodat het afspelen de schijven en het netwerk voor zich heeft. Een gepauzeerde speler telt niet mee, en scans die je zelf start gaan door."
     },
     "intros": {
       "label": "Intro’s van series vinden",

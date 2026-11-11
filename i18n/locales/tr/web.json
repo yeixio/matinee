@@ -449,7 +449,7 @@
     "mode": {
       "gentle": {
         "label": "Nazik",
-        "hint": "Birkaç saniyede bir dosya; sunucu oynatma için bir şey dönüştürürken hiç yok."
+        "hint": "Birkaç saniyede bir dosya."
       },
       "normal": {
         "label": "Normal",
@@ -459,6 +459,10 @@
         "label": "Kapalı",
         "hint": "Tekrar açana kadar duraklatıldı."
       }
+    },
+    "pause": {
+      "label": "Bir şey oynatılırken duraklat",
+      "hint": "Analiz, giriş ve jenerik algılama, arama çubuğu önizlemeleri ve planlı tam yeniden taramalar biri izlerken ya da dinlerken bekler, böylece oynatma diskleri ve ağı kendine ayırır. Duraklatılmış bir oynatıcı sayılmaz, kendi başlattığın taramalar yine çalışır."
     },
     "intros": {
       "label": "Dizi girişlerini bul",

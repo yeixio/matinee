@@ -2,6 +2,7 @@ package scan
 
 import (
 	"context"
+	"sync/atomic"
 	"testing"
 	"time"
 
@@ -60,4 +61,27 @@ func TestScheduleRun(t *testing.T) {
 	waitNext(24 * time.Hour)
 	cancel()
 	<-done
+}
+
+// A rescan that's due waits while something plays, then runs.
+func TestScheduleWaitsForPlayback(t *testing.T) {
+	old := playbackCheck
+	playbackCheck = 10 * time.Millisecond
+	t.Cleanup(func() { playbackCheck = old })
+	var playing atomic.Bool
+	playing.Store(true)
+	s := &Schedule{Scanner: &Scanner{Store: storetest.Open(t), Log: quietLog()}, Wait: func(context.Context) bool { return playing.Load() }}
+	done := make(chan struct{})
+	go func() { s.waitForPlayback(context.Background()); close(done) }()
+	select {
+	case <-done:
+		t.Fatal("didn't wait while something played")
+	case <-time.After(50 * time.Millisecond):
+	}
+	playing.Store(false)
+	select {
+	case <-done:
+	case <-time.After(time.Second):
+		t.Fatal("still waiting after playback ended")
+	}
 }

@@ -453,7 +453,7 @@
     "mode": {
       "gentle": {
         "label": "Blândă",
-        "hint": "Un fișier la câteva secunde și niciunul cât timp serverul convertește ceva pentru redare."
+        "hint": "Câte un fișier la câteva secunde."
       },
       "normal": {
         "label": "Normală",
@@ -463,6 +463,10 @@
         "label": "Dezactivată",
         "hint": "În pauză până o reactivezi."
       }
+    },
+    "pause": {
+      "label": "Pauză cât rulează ceva",
+      "hint": "Analiza, detectarea genericelor, previzualizările barei de derulare și rescanările complete programate așteaptă cât timp cineva vizionează sau ascultă ceva, ca redarea să aibă discurile și rețeaua doar pentru ea. Un player pus pe pauză nu contează, iar scanările pornite de tine continuă."
     },
     "intros": {
       "label": "Găsește introurile serialelor",
