@@ -71,3 +71,12 @@ export function featureMarkdown(data) {
   }
   return out.join('\n')
 }
+
+/**
+ * unlinkMissing turns a link to a guide page this release doesn't have into
+ * plain text. A guide for an older release leaves out pages marked `since` a
+ * later one, and links to them would otherwise go nowhere.
+ */
+export function unlinkMissing(text, hasPage) {
+  return text.replace(/(?<!!)\[([^\]]+)\]\((\/docs\/[^)\s]*)\)/g, (link, label, href) => (hasPage(href) ? link : label))
+}

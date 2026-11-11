@@ -2,7 +2,7 @@
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import { test } from 'node:test'
-import { featureMarkdown, featureProblems } from './prepare-lib.mjs'
+import { featureMarkdown, featureProblems, unlinkMissing } from './prepare-lib.mjs'
 
 const table = (apps) => ({ tables: [{ id: 't', title: 'Watching', apps: [{ id: 'web', name: 'Web' }, { id: 'tv', name: 'TV' }], groups: [{ title: 'Playing', features: [{ name: 'Skip intro', doc: '/docs/x/', since: 'v0.1.10', apps }] }] }] })
 
@@ -37,4 +37,10 @@ test('reasons are listed under the table', () => {
 test('the real table is complete', () => {
   const data = JSON.parse(readFileSync(new URL('../../docs/features.json', import.meta.url), 'utf8'))
   assert.deepEqual(featureProblems(data), [])
+})
+
+test('links to pages a release does not have become plain text', () => {
+  const has = (doc) => doc.startsWith('/docs/here/')
+  assert.equal(unlinkMissing('See [this](/docs/here/#a) and [that](/docs/gone/).', has), 'See [this](/docs/here/#a) and that.')
+  assert.equal(unlinkMissing('[GitHub](https://github.com/x) ![shot](/docs/gone.png)', has), '[GitHub](https://github.com/x) ![shot](/docs/gone.png)')
 })

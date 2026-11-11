@@ -12,7 +12,7 @@
 // way round: only the guides for releases before v0.3.0 keep it.
 import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
-import { compare, featureMarkdown, featureProblems, semver } from './prepare-lib.mjs'
+import { compare, featureMarkdown, featureProblems, semver, unlinkMissing } from './prepare-lib.mjs'
 
 const site = path.resolve(import.meta.dirname, '..')
 const src = path.resolve(process.env.DOCS_SRC ?? path.join(site, '..'), 'docs')
@@ -35,14 +35,21 @@ function walk(dir) {
 }
 
 for (const file of walk(out).filter((f) => /\.mdx?$/.test(f))) {
+  const since = readFileSync(file, 'utf8').match(/^---\n[\s\S]*?^since:\s*(\S+)/m)?.[1]
+  if (released && since && compare(since, version) > 0) rmSync(file)
+}
+
+// Whether this release's guide has the page a /docs/... link points to.
+const hasPage = (doc) => {
+  const rel = doc.replace(/#.*$/, '').replace(/^\/docs\/?/, '').replace(/\/$/, '')
+  return [`${rel}.md`, `${rel}.mdx`, `${rel}/index.md`, rel === '' ? 'index.md' : null].some((f) => f && existsSync(path.join(out, f)))
+}
+
+for (const file of walk(out).filter((f) => /\.mdx?$/.test(f))) {
   let text = readFileSync(file, 'utf8')
-  const since = text.match(/^---\n[\s\S]*?^since:\s*(\S+)/m)?.[1]
-  if (released && since && compare(since, version) > 0) {
-    rmSync(file)
-    continue
-  }
   text = text.replace(/<!-- since: (\S+) -->\n?([\s\S]*?)<!-- \/since -->\n?/g, (_, v, part) => (released && compare(v, version) > 0 ? '' : part))
   text = text.replace(/<!-- until: (\S+) -->\n?([\s\S]*?)<!-- \/until -->\n?/g, (_, v, part) => (released && compare(v, version) > 0 ? part : ''))
+  text = unlinkMissing(text, hasPage)
   // Links between pages are written from the site's root (/docs/...); keep
   // them inside this version's copy of the guide.
   text = text.replace(/\]\(\/docs\//g, `](${base}docs/`)
@@ -61,10 +68,6 @@ const featuresFile = path.join(src, 'features.json')
 const featurePages = walk(out).filter((f) => /\.mdx?$/.test(f) && readFileSync(f, 'utf8').includes('<!-- features -->'))
 if (featurePages.length && existsSync(featuresFile)) {
   const features = JSON.parse(readFileSync(featuresFile, 'utf8'))
-  const hasPage = (doc) => {
-    const rel = doc.replace(/#.*$/, '').replace(/^\/docs\/?/, '').replace(/\/$/, '')
-    return [`${rel}.md`, `${rel}.mdx`, `${rel}/index.md`, rel === '' ? 'index.md' : null].some((f) => f && existsSync(path.join(out, f)))
-  }
   const problems = featureProblems(features, hasPage)
   if (problems.length) {
     console.error(`docs/features.json:\n  ${problems.join('\n  ')}`)
