@@ -1429,7 +1429,7 @@
       "backup": "Kopia się nie udaje",
       "backupHint": "Gdy nie da się zrobić kopii bazy danych.",
       "transcodeSpace": "Transkodowaniom brakuje miejsca",
-      "transcodeSpaceHint": "Gdy wideo nie da się odtworzyć, bo folder transkodowania jest pełny."
+      "transcodeSpaceHint": "Gdy w folderze transkodowania zaczyna brakować miejsca, zanim jakieś wideo się nie uda, i gdy wideo nie da się odtworzyć, bo folder jest pełny."
     },
     "email": {
       "title": "E-mail",

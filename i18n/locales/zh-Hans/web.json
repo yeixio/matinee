@@ -1396,7 +1396,7 @@
       "backup": "备份失败",
       "backupHint": "无法备份数据库时。",
       "transcodeSpace": "转码空间用完",
-      "transcodeSpaceHint": "当转码文件夹已满导致视频无法播放时。"
+      "transcodeSpaceHint": "转码文件夹空间不足时(在视频失败之前),以及因文件夹已满导致视频无法播放时。"
     },
     "email": {
       "title": "邮件",

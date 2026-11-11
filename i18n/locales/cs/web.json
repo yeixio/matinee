@@ -1429,7 +1429,7 @@
       "backup": "Záloha selže",
       "backupHint": "Když databázi nejde zálohovat.",
       "transcodeSpace": "Převodům dojde místo",
-      "transcodeSpaceHint": "Když video nejde přehrát, protože je složka pro převody plná."
+      "transcodeSpaceHint": "Když složce pro převody dochází místo, ještě než nějaké video selže, a když video nejde přehrát, protože je plná."
     },
     "email": {
       "title": "E-mail",

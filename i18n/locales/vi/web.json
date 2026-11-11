@@ -1396,7 +1396,7 @@
       "backup": "Sao lưu thất bại",
       "backupHint": "Khi không thể sao lưu cơ sở dữ liệu.",
       "transcodeSpace": "Chuyển mã hết chỗ",
-      "transcodeSpaceHint": "Khi video không phát được vì thư mục chuyển mã đã đầy."
+      "transcodeSpaceHint": "Khi thư mục chuyển mã sắp hết chỗ, trước khi video nào bị lỗi, và khi video không phát được vì thư mục đã đầy."
     },
     "email": {
       "title": "Email",

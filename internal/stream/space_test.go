@@ -111,6 +111,8 @@ func TestSavingSpaceKeepsAWindow(t *testing.T) {
 	var free atomic.Int64
 	free.Store(80 << 20)
 	tr.freeSpace = func() (int64, bool) { return free.Load(), true }
+	heads := make(chan string, 2)
+	tr.OnShort = func(free string) { heads <- free }
 
 	id, err := tr.StartFor(context.Background(), 7, it, 0, Request{BurnSub: -1})
 	if err != nil {
@@ -119,6 +121,15 @@ func TestSavingSpaceKeepsAWindow(t *testing.T) {
 	info, _ := tr.SessionFor(7, 1)
 	if !info.Saving {
 		t.Fatal("transcode doesn't save space though the video won't fit")
+	}
+	// Admins hear before anything fails, once.
+	select {
+	case f := <-heads:
+		if !strings.HasSuffix(f, " GB") {
+			t.Errorf("told %q free, want GB", f)
+		}
+	case <-time.After(time.Second):
+		t.Fatal("admins weren't told the folder is short of room")
 	}
 	get := func(n int) int {
 		req := httptest.NewRequest("GET", "/", nil)

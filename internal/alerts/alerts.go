@@ -403,6 +403,19 @@ func (m *Manager) TranscodeSpace(ctx context.Context, detail string) {
 			"Give it more room or free up its disk; Settings → Server health shows how much it has."})
 }
 
+// TranscodeSpaceShort tells the admins the transcode folder is short of
+// room, before any video fails: long videos keep only the minutes around
+// where they play. The transcoder sends it at most daily.
+func (m *Manager) TranscodeSpaceShort(ctx context.Context, free string) {
+	c, err := m.Config(ctx)
+	if err != nil || !c.Rules.Space.On || c.Channels() == 0 {
+		return
+	}
+	m.deliver(ctx, c, Alert{Rule: RuleSpace, Key: RuleSpace + ":short", Level: LevelInfo, Title: "Transcode folder is short of room",
+		Message: "The transcode folder has " + free + " free, too little to hold a whole long video, so transcodes now keep only the minutes around where they play. " +
+			"Videos still play, but seeking far back takes a moment longer, and a fuller disk could stop them. Give it more room or free up its disk; Settings → Server health shows how much it has."})
+}
+
 // Stopped notes a clean shutdown, so the next start isn't taken for a crash.
 func (m *Manager) Stopped(ctx context.Context) {
 	b, _ := json.Marshal(runState{Version: m.Version})

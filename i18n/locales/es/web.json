@@ -1418,7 +1418,7 @@
       "backup": "Falla una copia de seguridad",
       "backupHint": "Cuando no se puede copiar la base de datos.",
       "transcodeSpace": "Las transcodificaciones se quedan sin espacio",
-      "transcodeSpaceHint": "Cuando un video no se puede reproducir porque la carpeta de transcodificación está llena."
+      "transcodeSpaceHint": "Cuando a la carpeta de transcodificación le falta espacio, antes de que falle un video, y cuando uno no se puede reproducir porque está llena."
     },
     "email": {
       "title": "Correo",

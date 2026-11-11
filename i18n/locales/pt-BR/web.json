@@ -1418,7 +1418,7 @@
       "backup": "Um backup falha",
       "backupHint": "Quando não é possível fazer backup do banco de dados.",
       "transcodeSpace": "As transcodificações ficam sem espaço",
-      "transcodeSpaceHint": "Quando um vídeo não pode tocar porque a pasta de transcodificação está cheia."
+      "transcodeSpaceHint": "Quando a pasta de transcodificação fica com pouco espaço, antes de algum vídeo falhar, e quando um vídeo não pode tocar porque ela está cheia."
     },
     "email": {
       "title": "E-mail",

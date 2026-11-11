@@ -93,6 +93,8 @@ type spaceState struct {
 	// lack of room, and when.
 	out     map[sessionKey]time.Time
 	lastOut time.Time
+	// lastShortTell is when OnShort was last called.
+	lastShortTell time.Time
 }
 
 // room is what transcodes can still write, after the reserve; ok is false
@@ -330,15 +332,34 @@ func (t *Transcoder) saveSpace() {
 			running = append(running, s)
 		}
 	}
-	if newly > 0 && !t.space.short {
-		t.space.short = true
-		t.Log.Warn("the transcode folder is short of room; transcodes keep only the minutes around where they play",
-			"dir", t.Dir, "transcodes", len(running))
+	if newly > 0 {
+		t.shortLocked()
 	}
 	t.mu.Unlock()
 	for _, s := range running {
 		t.keepWindow(s)
 	}
+}
+
+// shortLocked notes that transcodes have started saving space: logged once
+// each time it starts, and the admins told (see OnShort) at most daily, so
+// they hear before a video fails. t.mu is held.
+func (t *Transcoder) shortLocked() {
+	if t.space.short {
+		return
+	}
+	t.space.short = true
+	t.Log.Warn("the transcode folder is short of room; transcodes keep only the minutes around where they play", "dir", t.Dir)
+	now := time.Now()
+	if t.OnShort == nil || now.Sub(t.space.lastShortTell) < 24*time.Hour {
+		return
+	}
+	t.space.lastShortTell = now
+	notify := t.OnShort
+	go func() {
+		free, _, _ := t.room()
+		notify(gigabytes(free + spaceReserve))
+	}()
 }
 
 // keepWindow, for a transcode saving space, deletes pieces well behind its

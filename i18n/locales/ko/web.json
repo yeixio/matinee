@@ -1396,7 +1396,7 @@
       "backup": "백업 실패",
       "backupHint": "데이터베이스를 백업하지 못했을 때.",
       "transcodeSpace": "트랜스코딩 공간 부족",
-      "transcodeSpaceHint": "트랜스코딩 폴더가 가득 차서 동영상을 재생할 수 없을 때."
+      "transcodeSpaceHint": "동영상이 실패하기 전 트랜스코딩 폴더 공간이 부족해질 때, 그리고 폴더가 가득 차서 동영상을 재생할 수 없을 때."
     },
     "email": {
       "title": "이메일",

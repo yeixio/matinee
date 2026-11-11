@@ -1407,7 +1407,7 @@
       "backup": "A backup fails",
       "backupHint": "When the database can't be backed up.",
       "transcodeSpace": "Transcodes run out of room",
-      "transcodeSpaceHint": "When a video can't play because the transcode folder is full."
+      "transcodeSpaceHint": "When the transcode folder runs short of room, before any video fails, and when one can't play because it's full."
     },
     "email": {
       "title": "Email",

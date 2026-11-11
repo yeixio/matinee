@@ -1418,7 +1418,7 @@
       "backup": "Une sauvegarde échoue",
       "backupHint": "Quand la base de données ne peut pas être sauvegardée.",
       "transcodeSpace": "Les transcodages manquent de place",
-      "transcodeSpaceHint": "Quand une vidéo ne peut pas être lue parce que le dossier de transcodage est plein."
+      "transcodeSpaceHint": "Quand le dossier de transcodage manque de place, avant qu'une vidéo échoue, et quand une vidéo ne peut pas être lue parce qu'il est plein."
     },
     "email": {
       "title": "E-mail",

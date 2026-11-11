@@ -73,6 +73,9 @@ type Transcoder struct {
 	// start or stopped for lack of room, at most hourly, to alert admins.
 	Limit     SpaceLimit
 	OnNoSpace func(detail string)
+	// OnShort, if set, hears (at most daily) when transcodes start saving
+	// space because the folder is short of room, with how much is free.
+	OnShort func(free string)
 	// freeSpace replaces the disk's free space in tests.
 	freeSpace func() (int64, bool)
 	space     spaceState
@@ -554,6 +557,9 @@ func (t *Transcoder) start(ctx context.Context, claim uint64, userID int64, it s
 		started: time.Now(), startSec: startSec, mode: mode, quality: quality, copyVideo: copyVideo, why: why, toneMapped: video.ToneMap != "", audioOnly: it.VideoCodec == "", burnSub: video.BurnSub >= 0 || video.Styled != "",
 		rate: rate, saving: saving, segFmt: segFmt}
 	if saving {
+		t.mu.Lock()
+		t.shortLocked()
+		t.mu.Unlock()
 		t.Log.Info("transcode saves space: the whole video won't fit in the transcode folder, so it keeps only the minutes around where it plays",
 			"session", id, "item", it.ID)
 	}
