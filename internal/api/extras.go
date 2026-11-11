@@ -14,6 +14,7 @@ import (
 
 	"github.com/yeixio/matinee/internal/probe"
 	"github.com/yeixio/matinee/internal/scan"
+	"github.com/yeixio/matinee/internal/slowfs"
 	"github.com/yeixio/matinee/internal/store"
 	"github.com/yeixio/matinee/internal/stream"
 )
@@ -51,7 +52,7 @@ func (s *Server) findExtras(ctx context.Context, it store.Item) (own, show []sca
 	switch it.Kind {
 	case "movie":
 		if root := s.libraryRoot(ctx, it.LibraryID, it.Path); root != "" {
-			own = scan.MovieExtras(root, it.Path)
+			own, _ = slowfs.Do(it.Path, func() ([]scan.Extra, error) { return scan.MovieExtras(root, it.Path), nil })
 		}
 	case "show", "season":
 		file, err := s.Store.FileUnder(ctx, it.ID)
@@ -63,16 +64,26 @@ func (s *Server) findExtras(ctx context.Context, it store.Item) (own, show []sca
 			break
 		}
 		showDir, seasonDir := scan.ShowFolders(root, file)
+		folderExtras := func(dir string) []scan.Extra {
+			extras, _ := slowfs.Do(dir, func() ([]scan.Extra, error) { return scan.FolderExtras(dir), nil })
+			return extras
+		}
 		if showDir != "" {
-			show = scan.FolderExtras(showDir)
+			show = folderExtras(showDir)
 		}
 		if it.Kind == "show" {
 			own = show
 		} else if seasonDir != "" {
-			own = scan.FolderExtras(seasonDir)
+			own = folderExtras(seasonDir)
 		}
 	}
 	return own, show
+}
+
+// statOnShare is os.Stat on a library file, without waiting on a network
+// share that stopped answering (see slowfs).
+func statOnShare(path string) (os.FileInfo, error) {
+	return slowfs.Do(path, func() (os.FileInfo, error) { return os.Stat(path) })
 }
 
 // extraID names an extra by its file, so it stays the same while other
@@ -200,7 +211,7 @@ func (s *Server) extraImage(w http.ResponseWriter, r *http.Request) {
 	if !ok {
 		return
 	}
-	info, err := os.Stat(e.extra.Path)
+	info, err := statOnShare(e.extra.Path)
 	if err != nil {
 		http.NotFound(w, r)
 		return

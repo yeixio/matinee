@@ -16,6 +16,8 @@ import (
 	"strings"
 	"sync"
 	"time"
+
+	"github.com/yeixio/matinee/internal/slowfs"
 )
 
 type Cache struct {
@@ -87,12 +89,17 @@ func (c *Cache) resolve(ctx context.Context, src string) (string, error) {
 		if len(parts) != 3 {
 			return "", fmt.Errorf("bad frame source %q", src)
 		}
-		return c.cached(src, ".jpg", func(dst string) error { return c.frame(ctx, parts[2], parts[0], dst) })
+		return c.cached(src, ".jpg", func(dst string) error {
+			return onShare(parts[2], 30*time.Second, func() error { return c.frame(ctx, parts[2], parts[0], dst) })
+		})
 	case strings.HasPrefix(src, "embedded:"):
 		audio := strings.TrimPrefix(src, "embedded:")
-		return c.cached(src, ".jpg", func(dst string) error { return c.extract(ctx, audio, dst) })
+		return c.cached(src, ".jpg", func(dst string) error {
+			return onShare(audio, 20*time.Second, func() error { return c.extract(ctx, audio, dst) })
+		})
 	default:
-		if _, err := os.Stat(src); err != nil {
+		// A cover in a library folder, which may be on a network share.
+		if err := onShare(src, slowfs.Wait, func() error { _, err := os.Stat(src); return err }); err != nil {
 			return "", err
 		}
 		return src, nil
@@ -180,4 +187,12 @@ func (c *Cache) extract(ctx context.Context, audio, dst string) error {
 		return fmt.Errorf("extract cover: %w: %s", err, out)
 	}
 	return nil
+}
+
+// onShare runs fn, which reads a file in a library, giving up after wait
+// rather than making the request wait on a network share that stopped
+// answering (see slowfs).
+func onShare(path string, wait time.Duration, fn func() error) error {
+	_, err := slowfs.DoWithin(path, wait, func() (struct{}, error) { return struct{}{}, fn() })
+	return err
 }

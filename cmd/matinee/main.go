@@ -49,6 +49,7 @@ import (
 	"github.com/yeixio/matinee/internal/rating"
 	"github.com/yeixio/matinee/internal/remote"
 	"github.com/yeixio/matinee/internal/scan"
+	"github.com/yeixio/matinee/internal/slowfs"
 	"github.com/yeixio/matinee/internal/spectrum"
 	"github.com/yeixio/matinee/internal/store"
 	"github.com/yeixio/matinee/internal/stream"
@@ -140,6 +141,8 @@ func run() error {
 
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
 	defer stop()
+	// Pages don't wait on a network share that stopped answering (see slowfs).
+	slowfs.Log = log
 	// The time zone an admin picked goes before anything reads the clock.
 	if err := tz.Load(ctx, db); err != nil {
 		return err
