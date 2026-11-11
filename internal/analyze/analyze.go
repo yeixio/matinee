@@ -22,6 +22,7 @@ import (
 	"github.com/yeixio/matinee/internal/gapless"
 	"github.com/yeixio/matinee/internal/intro"
 	"github.com/yeixio/matinee/internal/probe"
+	"github.com/yeixio/matinee/internal/slowfs"
 	"github.com/yeixio/matinee/internal/store"
 	"github.com/yeixio/matinee/internal/thumbs"
 )
@@ -66,6 +67,7 @@ var (
 	retryTimedOut = time.Hour        // before trying a file that timed out again
 	slowDiskRest  = 10 * time.Minute // after several timeouts in a row
 	statTimeout   = 30 * time.Second // a stat that takes longer means a hung share
+	shareCheck    = 30 * time.Second // how often to look whether a share that stalled answers again
 	batch         = 200
 )
 
@@ -416,6 +418,9 @@ func (a *Analyzer) pass(ctx context.Context) (int, error) {
 					return n, nil
 				}
 			}
+			if !a.shareAnswers(ctx, f.Path) {
+				return n, ctx.Err()
+			}
 			a.setState(StateAnalyzing, f.Title)
 			if a.analyze(ctx, f) {
 				n++
@@ -475,6 +480,9 @@ func (a *Analyzer) findIntros(ctx context.Context) int {
 				return false
 			}
 		}
+		if !a.shareAnswers(ctx, e.Path) {
+			return false
+		}
 		a.setState(StateIntros, a.seasonName(ctx, e))
 		return ctx.Err() == nil
 	})
@@ -525,6 +533,9 @@ func (a *Analyzer) findCredits(ctx context.Context) int {
 		if v.Kind == "episode" {
 			name = a.seasonName(ctx, store.IntroEpisode{SeasonID: v.Group, Title: v.Title})
 		}
+		if !a.shareAnswers(ctx, v.Path) {
+			return false
+		}
 		a.setState(StateCredits, name)
 		return ctx.Err() == nil
 	})
@@ -563,6 +574,9 @@ func (a *Analyzer) findGapless(ctx context.Context) int {
 			if mode, _ = a.Mode(ctx); mode == Off {
 				return false
 			}
+		}
+		if len(al.Tracks) > 0 && !a.shareAnswers(ctx, al.Tracks[0].Path) {
+			return false
 		}
 		name := al.Title
 		if al.Artist != "" {
@@ -614,6 +628,9 @@ func (a *Analyzer) makeThumbs(ctx context.Context) int {
 			if mode, _ = a.Mode(ctx); mode == Off {
 				return false
 			}
+		}
+		if !a.shareAnswers(ctx, f.Path) {
+			return false
 		}
 		a.setState(StateThumbs, f.Title)
 		return ctx.Err() == nil
@@ -710,21 +727,38 @@ func (a *Analyzer) timedOut(id int64) {
 }
 
 // statWithin stats a file, giving up after d: a stat on a hung network
-// share can block for minutes.
+// share can block for minutes. One that hangs marks the share as not
+// answering (see slowfs), for pages and the other background jobs too.
 func statWithin(path string, d time.Duration) (os.FileInfo, error) {
-	type result struct {
-		info os.FileInfo
-		err  error
-	}
-	c := make(chan result, 1)
-	go func() {
-		info, err := os.Stat(path)
-		c <- result{info, err}
-	}()
-	select {
-	case r := <-c:
-		return r.info, r.err
-	case <-time.After(d):
+	info, err := slowfs.DoWithin(path, d, func() (os.FileInfo, error) { return os.Stat(path) })
+	if errors.Is(err, slowfs.ErrNotAnswering) {
 		return nil, fmt.Errorf("stat %s: %w", path, context.DeadlineExceeded)
+	}
+	return info, err
+}
+
+// shareAnswers waits, while the network share path is on isn't answering,
+// before a background job reads from it: reading a stalled share only
+// piles more work onto it. It checks with a quick stat every shareCheck
+// (sooner after a scan or setting change), and reports false when ctx
+// ends.
+func (a *Analyzer) shareAnswers(ctx context.Context, path string) bool {
+	waited := false
+	for {
+		_, err := slowfs.Do(path, func() (struct{}, error) { _, err := os.Stat(path); return struct{}{}, err })
+		if !errors.Is(err, slowfs.ErrNotAnswering) {
+			if waited {
+				a.Log.Info("background jobs: the network share is answering again; carrying on", "share", slowfs.Root(path))
+			}
+			return ctx.Err() == nil
+		}
+		if !waited {
+			a.Log.Warn("background jobs: a network share isn't answering; waiting for it", "share", slowfs.Root(path))
+			waited = true
+		}
+		a.setState(StateSlowDisk, "")
+		if a.sleep(ctx, shareCheck); ctx.Err() != nil {
+			return false
+		}
 	}
 }

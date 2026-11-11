@@ -4,6 +4,7 @@ import (
 	"context"
 	"io"
 	"log/slog"
+	"os"
 	"os/exec"
 	"path/filepath"
 	"sync/atomic"
@@ -12,6 +13,7 @@ import (
 
 	"github.com/yeixio/matinee/internal/probe"
 	"github.com/yeixio/matinee/internal/scan"
+	"github.com/yeixio/matinee/internal/slowfs"
 	"github.com/yeixio/matinee/internal/store/storetest"
 )
 
@@ -68,5 +70,45 @@ func TestGentleWaitsForPlayback(t *testing.T) {
 	top, _ := st.TopLevel(ctx, 0, lib.ID)
 	if len(top) != 1 || len(top[0].MediaTags) == 0 || top[0].MediaTags[0] != "sd" {
 		t.Fatalf("tags: %+v", top)
+	}
+}
+
+// Background jobs wait while a file's network share isn't answering, and
+// carry on once it does.
+func TestWaitsForAStalledShare(t *testing.T) {
+	oldWait, oldCheck := slowfs.Wait, shareCheck
+	slowfs.Wait, shareCheck = 50*time.Millisecond, 20*time.Millisecond
+	t.Cleanup(func() { slowfs.Wait, shareCheck = oldWait, oldCheck })
+	dir := t.TempDir()
+	file := filepath.Join(dir, "a.mkv")
+	os.WriteFile(file, []byte("x"), 0o644)
+	// A call on the share that hangs, as on a NAS that stopped answering.
+	release := make(chan struct{})
+	slowfs.Do(file, func() (int, error) { <-release; return 0, nil })
+
+	a := &Analyzer{Log: slog.New(slog.NewTextHandler(io.Discard, nil))}
+	a.init()
+	done := make(chan bool, 1)
+	go func() { done <- a.shareAnswers(context.Background(), file) }()
+	time.Sleep(150 * time.Millisecond)
+	select {
+	case <-done:
+		t.Fatal("didn't wait for the stalled share")
+	default:
+	}
+	a.mu.Lock()
+	state := a.state
+	a.mu.Unlock()
+	if state != StateSlowDisk {
+		t.Fatalf("state %q while waiting", state)
+	}
+	close(release)
+	select {
+	case ok := <-done:
+		if !ok {
+			t.Fatal("gave up instead of carrying on")
+		}
+	case <-time.After(2 * time.Second):
+		t.Fatal("still waiting after the share answered")
 	}
 }
