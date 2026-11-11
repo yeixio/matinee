@@ -32,6 +32,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/yeixio/matinee/internal/probe"
 	"github.com/yeixio/matinee/internal/slowfs"
 	"github.com/yeixio/matinee/internal/store"
 )
@@ -59,6 +60,9 @@ var (
 	retryTimedOut = time.Hour
 	batch         = 200
 )
+
+// damaged is probe.Damaged, swapped in tests.
+var damaged = probe.Damaged
 
 // Mode is when pictures are made, an admin setting.
 type Mode string
@@ -318,7 +322,8 @@ func (g *Generator) Make(ctx context.Context, f store.ThumbnailFile) bool {
 	switch {
 	case ctx.Err() != nil:
 		return false
-	case errors.Is(err, context.DeadlineExceeded) && g.timeouts.Add(f.ID, f.Path):
+	case errors.Is(err, context.DeadlineExceeded) && g.timeouts.Add(f.ID, f.Path) &&
+		damaged(ctx, g.FFmpeg, f.Path, f.DurationMs, g.LowPriority):
 		// It keeps timing out with its share answering: most likely damaged.
 		g.Log.Warn("thumbnails: video keeps timing out; leaving it until it changes (it may be damaged)", "path", f.Path)
 		t = store.Thumbnails{} // stored as unreadable, until the file changes

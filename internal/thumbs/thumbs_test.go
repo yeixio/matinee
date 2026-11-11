@@ -125,8 +125,21 @@ func TestMakeSheets(t *testing.T) {
 
 	// A video that keeps timing out, as a damaged one does, is stored as
 	// unreadable after slowfs.GiveUpAfter tries and listed as such.
-	oldFrame := frameTimeout
-	t.Cleanup(func() { frameTimeout = oldFrame })
+	oldFrame, oldDamaged := frameTimeout, damaged
+	t.Cleanup(func() { frameTimeout, damaged = oldFrame, oldDamaged })
+	// The re-test of a healthy file clears it: a slow moment isn't damage.
+	damaged = func(context.Context, string, string, int64, func(int)) bool { return false }
+	if g := (&Generator{Store: st, FFmpeg: ffmpeg, Dir: t.TempDir(), Log: log}); true {
+		seekAbove, frameTimeout = 0, time.Nanosecond
+		files, _ := st.ThumbnailFiles(ctx, 0, 10)
+		if g.Make(ctx, files[0]) {
+			t.Fatal("set a healthy video aside after one slow read")
+		}
+		if vids, n, _ := st.UnreadableVideos(ctx, Version, 10); n != 0 {
+			t.Fatalf("unreadable: %+v", vids)
+		}
+	}
+	damaged = func(context.Context, string, string, int64, func(int)) bool { return true }
 	seekAbove, frameTimeout = 0, time.Nanosecond
 	g := &Generator{Store: st, FFmpeg: ffmpeg, Dir: t.TempDir(), Log: log, LowPriority: probe.LowerPriority}
 	var reported []int64
