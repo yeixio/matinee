@@ -68,7 +68,7 @@ func (f *testFeed) xml(n int) string {
 <itunes:image href="` + f.srv.URL + `/art.jpg"/>
 <itunes:category text="Fiction"><itunes:category text="Drama"/></itunes:category>
 `)
-	day := time.Date(2026, 10, 30, 12, 0, 0, 0, time.UTC)
+	day := feedDay()
 	for i := n; i >= 1; i-- {
 		fmt.Fprintf(&b, `<item>
 <title>Episode %d</title>
@@ -84,6 +84,14 @@ func (f *testFeed) xml(n int) string {
 	b.WriteString(`<item><title>Video only</title><guid>video</guid><enclosure url="` + f.srv.URL + `/v.mp4" type="video/mp4" length="1"/></item>
 </channel></rss>`)
 	return b.String()
+}
+
+// feedDay is when a test feed's newest episode came out: yesterday, so its
+// episodes stay among Home's new episodes (from the last newEpisodeDays)
+// whenever the tests run.
+func feedDay() time.Time {
+	y, m, d := time.Now().UTC().AddDate(0, 0, -1).Date()
+	return time.Date(y, m, d, 12, 0, 0, 0, time.UTC)
 }
 
 // A podcast library follows shows by their feeds: adding one lists its
@@ -132,7 +140,7 @@ func TestPodcasts(t *testing.T) {
 		t.Fatalf("episodes: %+v", eps)
 	}
 	ep := eps[0]
-	if !ep.Playable || ep.Kind != "podcastEpisode" || ep.Podcast != "Night Shift Radio" || ep.Released != "2026-10-30" ||
+	if !ep.Playable || ep.Kind != "podcastEpisode" || ep.Podcast != "Night Shift Radio" || ep.Released != feedDay().Format(time.DateOnly) ||
 		ep.DurationMs == nil || *ep.DurationMs != 600_000 || ep.Overview != "Show notes for 3.\n• One" {
 		t.Fatalf("episode: %+v", ep)
 	}
