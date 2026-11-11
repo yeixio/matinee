@@ -132,7 +132,7 @@ func (s *Server) syncPending(item int64, track string) bool {
 // either as they were before no longer counts.
 func syncKey(it store.Item, t subtitle.Track) string {
 	stamp := func(p string) string {
-		info, err := os.Stat(p)
+		info, err := statOnShare(p)
 		if err != nil {
 			return "?"
 		}

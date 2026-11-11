@@ -23,7 +23,7 @@ To hear about problems without looking, turn on [alerts](/docs/server/alerts/): 
 
 ## A new file doesn't show up
 
-Matinee notices new files by itself within a minute or so; on network shares it checks every 30 seconds by default. If something still hasn't appeared, click **Scan** on the library under **Settings → Libraries**. See [New files](/docs/server/new-files/) for how this works and how to tune it.
+Matinee notices new files by itself within a minute or so; on network shares it checks every <!-- until: v0.2.4 -->30 seconds<!-- /until --><!-- since: v0.2.4 -->2 minutes<!-- /since --> by default. If something still hasn't appeared, click **Scan** on the library under **Settings → Libraries**. See [New files](/docs/server/new-files/) for how this works and how to tune it.
 
 ## The library folder is empty in the picker
 
@@ -36,6 +36,16 @@ The folder picker shows what the *server* can see. In Docker, your media has to 
 - You can always type the server's address instead, such as `http://192.168.1.20:7171`.
 
 See [Home network](/docs/server/home-network/).
+
+<!-- since: v0.2.4 -->
+## Pages are slow or parts are missing while a network share is down
+
+When the SMB or NFS server holding a library stops answering, the computer Matinee runs on can wait minutes for it before giving up. Matinee doesn't make pages wait with it. Anything a page reads straight from the share, such as a title's extras and trailers, covers kept next to the files, and stills from extras, gets a few seconds; after that the page loads without it. Until the share answers again, those parts are left out straight away instead of each waiting in turn. Everything else, from browsing to search, comes from Matinee's own database and doesn't need the share.
+
+Server health lists *network share isn't answering* among its warnings with the share's folder while this lasts, and logs when it answers again. Playing a file from that share still needs it, so playback waits or fails until it's back.
+
+If it happens often, look at the share's server and the network first. On a big library, longer intervals for [checking for new files and full rescans](/docs/server/new-files/) take load off the share.
+<!-- /since -->
 
 ## Playback stutters or keeps buffering
 

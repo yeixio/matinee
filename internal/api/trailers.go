@@ -5,7 +5,6 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
-	"os"
 	"path/filepath"
 	"strconv"
 	"strings"
@@ -14,6 +13,7 @@ import (
 	"github.com/yeixio/matinee/internal/metadata"
 	"github.com/yeixio/matinee/internal/probe"
 	"github.com/yeixio/matinee/internal/scan"
+	"github.com/yeixio/matinee/internal/slowfs"
 	"github.com/yeixio/matinee/internal/store"
 	"github.com/yeixio/matinee/internal/stream"
 )
@@ -123,13 +123,13 @@ func (s *Server) libraryRoot(ctx context.Context, libraryID int64, path string) 
 
 // probeTrailer reads a trailer or other extra's file, remembering the answer until the file changes.
 func (s *Server) probeTrailer(ctx context.Context, path string) (probe.Result, error) {
-	info, err := os.Stat(path)
+	info, err := statOnShare(path)
 	if err != nil {
 		return probe.Result{}, err
 	}
 	key := fmt.Sprintf("trailer-probe:%s:%d:%d", path, info.Size(), info.ModTime().UnixNano())
 	return cached(&s.trailerCache, key, 24*time.Hour, func() (probe.Result, error) {
-		return s.Scanner.Prober.Probe(ctx, path)
+		return slowfs.DoWithin(path, 30*time.Second, func() (probe.Result, error) { return s.Scanner.Prober.Probe(ctx, path) })
 	})
 }
 
