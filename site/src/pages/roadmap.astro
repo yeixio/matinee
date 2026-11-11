@@ -1,7 +1,8 @@
 ---
-// The Roadmap page: what's coming in the next releases, read from
-// src/roadmap.json. `pnpm roadmap` refreshes it from the target/* and
-// priority/* labels on GitHub.
+// The Roadmap page: what's coming in the next releases and what's already
+// done in each, read from src/roadmap.json. The Site workflow refreshes that
+// from the target/* and priority/* labels on GitHub before every build, when
+// an issue changes, and every hour (`pnpm roadmap` does the same by hand).
 import '@fontsource-variable/inter'
 import '@fontsource-variable/fraunces'
 import '../styles/site.css'
@@ -11,9 +12,15 @@ import roadmap from '../roadmap.json'
 const base = import.meta.env.BASE_URL
 const github = 'https://github.com/yeixio/matinee'
 
-type Item = { repo: string; number: number; title: string; target: string; priority: number }
+type Item = { repo: string; number: number; title: string; target: string; priority: number; done?: boolean }
 const items = roadmap.items as Item[]
-const targets = roadmap.targets.map((t) => ({ ...t, items: items.filter((i) => i.target === t.id) })).filter((t) => t.items.length > 0)
+const all = roadmap.targets.map((t) => {
+  const mine = items.filter((i) => i.target === t.id)
+  return { ...t, open: mine.filter((i) => !i.done), done: mine.filter((i) => i.done) }
+})
+// Releases with work left come first, in order; finished ones follow.
+const targets = [...all.filter((t) => t.open.length > 0), ...all.filter((t) => t.open.length === 0 && t.done.length > 0)]
+const tagFor = (t: (typeof targets)[number], index: number) => (t.open.length === 0 ? `Done · ${t.label}` : index === 0 ? `Next · ${t.label}` : t.label)
 
 // The apps' repository is private, so only the server's issues link to GitHub.
 const link = (i: Item) => (i.repo === 'matinee' ? `${github}/issues/${i.number}` : undefined)
@@ -46,7 +53,8 @@ const updated = roadmap.updated
         <h1>What's coming next</h1>
         <p class="lede">
           The next releases, in the order we plan to ship them. Each server release comes with app updates for the same
-          features. Plans change as we learn, so this page follows the issues on GitHub.
+          features. Plans change as we learn, so this page follows the issues on GitHub, and what's already done is listed
+          under each release.
         </p>
         <nav class="jump" aria-label="Releases">
           {targets.map((t) => <a href={`#${t.id}`}>{t.label}</a>)}
@@ -58,22 +66,43 @@ const updated = roadmap.updated
           targets.map((t, index) => (
             <article class="target" id={t.id}>
               <header>
-                <span class:list={['tag', { next: index === 0 }]}>{index === 0 ? `Next · ${t.label}` : t.label}</span>
+                <span class:list={['tag', { next: index === 0 && t.open.length > 0, finished: t.open.length === 0 }]}>{tagFor(t, index)}</span>
                 <h2>{t.name}</h2>
                 <p>{t.summary}</p>
               </header>
-              <ul>
-                {t.items.map((i) => {
-                  const href = link(i)
-                  return (
-                    <li>
-                      <span class="where">{i.repo === 'matinee' ? 'Server' : 'Apps'}</span>
-                      {href ? <a href={href}>{i.title}</a> : <span class="title">{i.title}</span>}
-                      {i.priority === 1 && <span class="top">Top priority</span>}
-                    </li>
-                  )
-                })}
-              </ul>
+              {t.open.length > 0 && (
+                <ul>
+                  {t.open.map((i) => {
+                    const href = link(i)
+                    return (
+                      <li>
+                        <span class="where">{i.repo === 'matinee' ? 'Server' : 'Apps'}</span>
+                        {href ? <a href={href}>{i.title}</a> : <span class="title">{i.title}</span>}
+                        {i.priority === 1 && <span class="top">Top priority</span>}
+                      </li>
+                    )
+                  })}
+                </ul>
+              )}
+              {t.done.length > 0 && (
+                <details class="done" open={t.open.length === 0}>
+                  <summary>
+                    Done <span class="count">{t.done.length}</span>
+                  </summary>
+                  <ul>
+                    {t.done.map((i) => {
+                      const href = link(i)
+                      return (
+                        <li>
+                          <span class="where">{i.repo === 'matinee' ? 'Server' : 'Apps'}</span>
+                          <span class="check" aria-label="Done">✓</span>
+                          {href ? <a href={href}>{i.title}</a> : <span class="title">{i.title}</span>}
+                        </li>
+                      )
+                    })}
+                  </ul>
+                </details>
+              )}
             </article>
           ))
         }
@@ -158,6 +187,43 @@ const updated = roadmap.updated
     background: var(--accent);
     border-color: var(--accent);
     color: #1a0e0c;
+  }
+  .tag.finished {
+    color: var(--accent-2);
+  }
+  .done {
+    border-top: 1px solid var(--line);
+    padding: 4px 0 8px;
+  }
+  .done summary {
+    cursor: pointer;
+    padding: 12px 0 8px;
+    color: var(--muted);
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  .done summary:hover {
+    color: var(--text);
+  }
+  .done .count {
+    margin-left: 4px;
+    padding: 1px 8px;
+    border-radius: 999px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    font-size: 0.78rem;
+  }
+  .done ul {
+    margin-top: 0;
+  }
+  .done li a,
+  .done li .title {
+    color: var(--muted);
+  }
+  .check {
+    flex-shrink: 0;
+    color: var(--accent-2);
+    font-weight: 700;
   }
   .target ul {
     list-style: none;

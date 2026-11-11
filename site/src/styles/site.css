@@ -406,17 +406,74 @@ img {
   clip: rect(0 0 0 0);
   white-space: nowrap;
 }
-@media (max-width: 480px) {
-  .nav nav a.github {
-    display: none;
-  }
+/* The menu button that holds the links on phones. */
+.nav-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin: -4px -8px -4px 0;
+  padding: 0;
+  color: var(--text);
+  background: none;
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
 }
-@media (max-width: 400px) {
+.nav-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+}
+.nav-toggle path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+.nav-toggle .cross,
+.nav.menu-open .nav-toggle .bars {
+  display: none;
+}
+.nav.menu-open .nav-toggle .cross {
+  display: inline;
+}
+@media (max-width: 720px) {
   .nav {
     padding: 14px 16px;
   }
-  .nav nav a.nav-roadmap {
+  .nav-toggle {
+    display: inline-flex;
+  }
+  .nav nav,
+  .nav nav a.nav-apps {
     display: none;
+  }
+  .nav.menu-open nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 8px 16px 16px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    box-shadow: 0 16px 32px rgb(0 0 0 / 0.4);
+  }
+  .nav.menu-open nav a,
+  .nav.menu-open nav a.nav-apps {
+    display: block;
+    padding: 14px 4px;
+    font-size: 1.05rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .nav.menu-open nav a:last-child {
+    border-bottom: 0;
+  }
+  .nav.menu-open nav a[aria-current='page'] {
+    color: var(--accent-2);
+    box-shadow: none;
   }
 }
 

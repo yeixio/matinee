@@ -1603,6 +1603,8 @@ export const api = {
   // A row with all its titles, by its id (see HomeRow).
   row: (id: string) => request<HomeRow>('GET', `/api/v1/rows/${encodeURIComponent(id)}`),
   search: (q: string) => request<Item[]>('GET', `/api/v1/search?q=${encodeURIComponent(q)}`),
+  // Cast members whose names match, in the most titles first.
+  searchPeople: (q: string) => request<FilterPerson[]>('GET', `/api/v1/search/people?q=${encodeURIComponent(q)}`),
   item: (id: number) => request<ItemDetail>('GET', `/api/v1/items/${id}`),
   children: (id: number) => request<Item[]>('GET', `/api/v1/items/${id}/children`),
   // Every track of an artist or album, in playing order.

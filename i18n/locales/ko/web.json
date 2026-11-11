@@ -201,11 +201,12 @@
     "boxSet": "박스 세트"
   },
   "search": {
-    "placeholder": "영화, 프로그램, 아티스트, 앨범…",
+    "placeholder": "영화, 프로그램, 배우, 아티스트, 앨범…",
     "nothing": "\"{{q}}\"와(과) 일치하는 항목이 없습니다",
     "lookingForNew": "새로운 걸 찾고 있나요?",
     "addIt": "추가하기",
-    "askForIt": "요청하기"
+    "askForIt": "요청하기",
+    "people": "인물"
   },
   "person": {
     "notFound": "인물을 찾을 수 없음",

@@ -201,11 +201,12 @@
     "boxSet": "ボックスセット"
   },
   "search": {
-    "placeholder": "映画、番組、アーティスト、アルバム…",
+    "placeholder": "映画、番組、俳優、アーティスト、アルバム…",
     "nothing": "「{{q}}」に一致するものはありません",
     "lookingForNew": "何か新しいものをお探しですか？",
     "addIt": "追加する",
-    "askForIt": "リクエストする"
+    "askForIt": "リクエストする",
+    "people": "人物"
   },
   "person": {
     "notFound": "人物が見つかりません",
