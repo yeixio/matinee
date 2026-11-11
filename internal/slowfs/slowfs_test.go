@@ -2,6 +2,8 @@ package slowfs
 
 import (
 	"errors"
+	"os"
+	"path/filepath"
 	"testing"
 	"time"
 )
@@ -49,5 +51,34 @@ func TestDoGivesUpOnAHungShare(t *testing.T) {
 	}
 	if v, err := Do("/media/movies/b.mkv", func() (int, error) { return 4, nil }); err != nil || v != 4 {
 		t.Fatalf("after it answered: %v %v", v, err)
+	}
+}
+
+// A file that keeps timing out with its share answering is given up on
+// after GiveUpAfter timeouts; one on a share that's stalled isn't counted.
+func TestTimeoutsGiveUp(t *testing.T) {
+	var to Timeouts
+	file := filepath.Join(t.TempDir(), "a.mkv")
+	os.WriteFile(file, []byte("x"), 0o644)
+	for i := 1; i < GiveUpAfter; i++ {
+		if to.Add(1, file) {
+			t.Fatalf("gave up after %d", i)
+		}
+	}
+	if !to.Add(1, file) {
+		t.Fatalf("didn't give up after %d", GiveUpAfter)
+	}
+
+	old := Wait
+	Wait = 20 * time.Millisecond
+	t.Cleanup(func() { Wait = old })
+	stalled := "/stalled-share/media/b.mkv"
+	release := make(chan struct{})
+	defer close(release)
+	Do(stalled, func() (int, error) { <-release; return 0, nil })
+	for range GiveUpAfter + 1 {
+		if to.Add(2, stalled) {
+			t.Fatal("gave up on a file whose share isn't answering")
+		}
 	}
 }

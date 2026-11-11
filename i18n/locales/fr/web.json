@@ -1344,7 +1344,14 @@
       "downloads": "Téléchargements pour les appareils",
       "downloadCounts": "{{waiting}} en attente, {{converting}} en conversion, {{failed}} en échec",
       "nothing": "Rien à faire",
-      "importing": "Import de l’historique de visionnage"
+      "importing": "Import de l’historique de visionnage",
+      "unreadable": {
+        "title": "Vidéos illisibles",
+        "hint": "Probablement endommagées, comme un téléchargement dont la fin n'a jamais été écrite. Remplacez-les ; chacune est réessayée dès que son fichier change.",
+        "more_one": "et {{count}} autre",
+        "more_many": "et {{count}} autres",
+        "more_other": "et {{count}} autres"
+      }
     },
     "disks": {
       "title": "Espace disque",

@@ -1169,6 +1169,10 @@ export type Health = {
   transcodeSpace?: { free: number; used: number; limit?: number; short?: boolean; outOfSpace?: number }
   jobs: {
     scans: { libraryId: number; name: string; kind: string; scanning: boolean; since?: number; reason?: ScanReason; last?: ScanReport }[]
+    // Videos that couldn't be read for their seek bar pictures (most likely
+    // damaged files), the first few, and how many in all.
+    unreadable?: { itemId: number; title: string; path: string }[]
+    unreadableCount?: number
     analysis?: AnalysisStatus
     downloads: Record<string, number>
     importing?: boolean

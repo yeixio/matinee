@@ -1334,7 +1334,13 @@
       "downloads": "Lataukset laitteille",
       "downloadCounts": "{{waiting}} odottaa, {{converting}} muunnetaan, {{failed}} epäonnistui",
       "nothing": "Ei tehtävää",
-      "importing": "Tuodaan katseluhistoriaa"
+      "importing": "Tuodaan katseluhistoriaa",
+      "unreadable": {
+        "title": "Videot, joita ei voitu lukea",
+        "hint": "Todennäköisesti vioittuneita, kuten lataus, jonka loppua ei koskaan kirjoitettu. Korvaa ne; kutakin yritetään uudelleen, kun sen tiedosto muuttuu.",
+        "more_one": "ja {{count}} muu",
+        "more_other": "ja {{count}} muuta"
+      }
     },
     "disks": {
       "title": "Levytila",

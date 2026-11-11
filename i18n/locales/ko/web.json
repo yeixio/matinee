@@ -1324,7 +1324,12 @@
       "downloads": "기기용 다운로드",
       "downloadCounts": "대기 {{waiting}}, 변환 중 {{converting}}, 실패 {{failed}}",
       "nothing": "할 일 없음",
-      "importing": "시청 기록 가져오는 중"
+      "importing": "시청 기록 가져오는 중",
+      "unreadable": {
+        "title": "읽을 수 없는 동영상",
+        "hint": "손상되었을 가능성이 큽니다. 끝부분이 기록되지 않은 다운로드 같은 경우입니다. 교체하세요. 파일이 바뀌면 다시 시도합니다.",
+        "more_other": "외 {{count}}개"
+      }
     },
     "disks": {
       "title": "디스크 공간",

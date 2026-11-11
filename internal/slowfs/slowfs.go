@@ -14,6 +14,7 @@ package slowfs
 import (
 	"errors"
 	"log/slog"
+	"os"
 	"path/filepath"
 	"slices"
 	"strings"
@@ -148,4 +149,45 @@ func Stuck() []Share {
 	}
 	slices.SortFunc(out, func(a, b Share) int { return strings.Compare(a.Root, b.Root) })
 	return out
+}
+
+// Answering reports whether the share path is on answers a quick stat now.
+// A background job asks after a file timed out, to tell a damaged file
+// from a share that stalled.
+func Answering(path string) bool {
+	_, err := Do(path, func() (struct{}, error) { _, err := os.Stat(path); return struct{}{}, err })
+	return !errors.Is(err, ErrNotAnswering)
+}
+
+// GiveUpAfter is how many times in a row reading a file may time out, with
+// its share answering each time, before a background job takes it for
+// damaged (say, a video whose seek index was never written, which FFmpeg
+// crawls through on every jump) and leaves it alone until it changes.
+const GiveUpAfter = 3
+
+// Timeouts counts, per file, reads that timed out while the file's share
+// was answering. The zero value is ready to use.
+type Timeouts struct {
+	mu    sync.Mutex
+	count map[int64]int
+}
+
+// Add counts a timeout on file id at path, unless the share isn't
+// answering, and reports whether the file has now timed out GiveUpAfter
+// times and should be left alone.
+func (t *Timeouts) Add(id int64, path string) (giveUp bool) {
+	if !Answering(path) {
+		return false // the share's fault, not the file's
+	}
+	t.mu.Lock()
+	defer t.mu.Unlock()
+	if t.count == nil {
+		t.count = map[int64]int{}
+	}
+	t.count[id]++
+	if t.count[id] >= GiveUpAfter {
+		delete(t.count, id)
+		return true
+	}
+	return false
 }

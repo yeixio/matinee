@@ -67,6 +67,9 @@ The list starts empty each time the server starts.
 - **Media analysis**, **Find TV intros** and **Seek bar previews**: how far they are. See [Media analysis](/docs/server/media-analysis/).
 - **Downloads for devices**: downloads waiting to be converted, being converted, and ones that failed.
 - **Importing watch history**, while an [import](/docs/getting-started/switching/) runs.
+<!-- since: v0.2.4 -->
+- **Videos that couldn't be read**: videos the seek bar previews couldn't be made of, by title, each linking to its page (hover for the file's path). They're most likely damaged, such as a download whose end was never written. A video lands here when making its previews failed, or timed out three times while its network share was answering, so a share that's slow for a while doesn't put good files here. Replace them, for example by having Box Office or Radarr grab them again; each one is tried again once its file changes.
+<!-- /since -->
 
 ## Disk space
 

@@ -1344,7 +1344,14 @@
       "downloads": "Descărcări pentru dispozitive",
       "downloadCounts": "în așteptare: {{waiting}}, în conversie: {{converting}}, eșuate: {{failed}}",
       "nothing": "Nimic de făcut",
-      "importing": "Se importă istoricul vizionărilor"
+      "importing": "Se importă istoricul vizionărilor",
+      "unreadable": {
+        "title": "Videoclipuri care nu au putut fi citite",
+        "hint": "Cel mai probabil deteriorate, cum ar fi o descărcare al cărei final nu a fost scris niciodată. Înlocuiește-le; fiecare e încercat din nou când i se schimbă fișierul.",
+        "more_few": "și încă {{count}}",
+        "more_one": "și încă {{count}}",
+        "more_other": "și încă {{count}}"
+      }
     },
     "disks": {
       "title": "Spațiu pe disc",

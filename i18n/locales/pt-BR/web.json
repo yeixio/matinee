@@ -1344,7 +1344,14 @@
       "downloads": "Downloads para dispositivos",
       "downloadCounts": "{{waiting}} aguardando, {{converting}} convertendo, {{failed}} com falha",
       "nothing": "Nada a fazer",
-      "importing": "Importando o histórico"
+      "importing": "Importando o histórico",
+      "unreadable": {
+        "title": "Vídeos que não puderam ser lidos",
+        "hint": "Provavelmente danificados, como um download cujo final nunca foi gravado. Substitua-os; cada um é tentado de novo quando o arquivo muda.",
+        "more_one": "e mais {{count}}",
+        "more_many": "e mais {{count}}",
+        "more_other": "e mais {{count}}"
+      }
     },
     "disks": {
       "title": "Espaço em disco",

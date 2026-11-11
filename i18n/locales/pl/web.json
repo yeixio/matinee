@@ -1354,7 +1354,15 @@
       "downloads": "Pobrania na urządzenia",
       "downloadCounts": "oczekujące: {{waiting}}, konwertowane: {{converting}}, nieudane: {{failed}}",
       "nothing": "Nic do zrobienia",
-      "importing": "Importowanie historii oglądania"
+      "importing": "Importowanie historii oglądania",
+      "unreadable": {
+        "title": "Filmy, których nie udało się odczytać",
+        "hint": "Najpewniej uszkodzone, np. pobieranie, którego koniec nigdy nie został zapisany. Zastąp je; każdy jest ponawiany, gdy jego plik się zmieni.",
+        "more_one": "i jeszcze {{count}}",
+        "more_few": "i jeszcze {{count}}",
+        "more_many": "i jeszcze {{count}}",
+        "more_other": "i jeszcze {{count}}"
+      }
     },
     "disks": {
       "title": "Miejsce na dysku",

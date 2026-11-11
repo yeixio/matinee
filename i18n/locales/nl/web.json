@@ -1334,7 +1334,13 @@
       "downloads": "Downloads voor apparaten",
       "downloadCounts": "{{waiting}} wachtend, {{converting}} bezig met omzetten, {{failed}} mislukt",
       "nothing": "Niets te doen",
-      "importing": "Kijkgeschiedenis importeren"
+      "importing": "Kijkgeschiedenis importeren",
+      "unreadable": {
+        "title": "Video's die niet gelezen konden worden",
+        "hint": "Waarschijnlijk beschadigd, zoals een download waarvan het einde nooit is weggeschreven. Vervang ze; elke wordt opnieuw geprobeerd zodra het bestand verandert.",
+        "more_one": "en nog {{count}}",
+        "more_other": "en nog {{count}}"
+      }
     },
     "disks": {
       "title": "Schijfruimte",

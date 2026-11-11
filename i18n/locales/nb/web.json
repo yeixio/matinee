@@ -1334,7 +1334,13 @@
       "downloads": "Nedlastinger til enheter",
       "downloadCounts": "{{waiting}} venter, {{converting}} konverteres, {{failed}} mislyktes",
       "nothing": "Ingenting å gjøre",
-      "importing": "Importerer seerhistorikk"
+      "importing": "Importerer seerhistorikk",
+      "unreadable": {
+        "title": "Videoer som ikke kunne leses",
+        "hint": "Mest sannsynlig skadet, som en nedlasting der slutten aldri ble skrevet. Bytt dem ut; hver av dem prøves igjen når filen endres.",
+        "more_one": "og {{count}} til",
+        "more_other": "og {{count}} til"
+      }
     },
     "disks": {
       "title": "Diskplass",

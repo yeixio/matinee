@@ -24,6 +24,7 @@ import (
 	"github.com/yeixio/matinee/internal/scan"
 	"github.com/yeixio/matinee/internal/store"
 	"github.com/yeixio/matinee/internal/stream"
+	"github.com/yeixio/matinee/internal/thumbs"
 	"github.com/yeixio/matinee/internal/version"
 )
 
@@ -126,11 +127,26 @@ type healthScan struct {
 	Last      *scan.ScanReport `json:"last,omitempty"`
 }
 
+// healthFile is a library file Server health points out.
+type healthFile struct {
+	ItemID int64  `json:"itemId"`
+	Title  string `json:"title"`
+	Path   string `json:"path"`
+}
+
+// unreadableShown is how many unreadable videos Server health lists.
+const unreadableShown = 20
+
 type healthJobs struct {
-	Scans     []healthScan    `json:"scans"`
-	Analysis  *analyze.Status `json:"analysis,omitempty"`
-	Downloads map[string]int  `json:"downloads"`
-	Importing bool            `json:"importing,omitempty"`
+	Scans    []healthScan    `json:"scans"`
+	Analysis *analyze.Status `json:"analysis,omitempty"`
+	// Unreadable lists videos that couldn't be read for their seek bar
+	// pictures (most likely damaged files, worth replacing), at most
+	// unreadableShown of them; UnreadableCount is how many there are.
+	Unreadable      []healthFile   `json:"unreadable,omitempty"`
+	UnreadableCount int            `json:"unreadableCount,omitempty"`
+	Downloads       map[string]int `json:"downloads"`
+	Importing       bool           `json:"importing,omitempty"`
 }
 
 type healthReport struct {
@@ -255,6 +271,12 @@ func (s *Server) getHealth(w http.ResponseWriter, r *http.Request) {
 	if s.Analyzer != nil {
 		if st, err := s.Analyzer.Status(dbCtx); err == nil {
 			out.Jobs.Analysis = &st
+		}
+	}
+	if vids, n, err := s.Store.UnreadableVideos(dbCtx, thumbs.Version, unreadableShown); err == nil {
+		out.Jobs.UnreadableCount = n
+		for _, v := range vids {
+			out.Jobs.Unreadable = append(out.Jobs.Unreadable, healthFile{ItemID: v.ID, Title: v.Title, Path: v.Path})
 		}
 	}
 	out.Jobs.Downloads = map[string]int{}

@@ -1324,7 +1324,12 @@
       "downloads": "Muat turun untuk peranti",
       "downloadCounts": "{{waiting}} menunggu, {{converting}} ditukar, {{failed}} gagal",
       "nothing": "Tiada kerja",
-      "importing": "Mengimport sejarah tontonan"
+      "importing": "Mengimport sejarah tontonan",
+      "unreadable": {
+        "title": "Video yang tidak dapat dibaca",
+        "hint": "Kemungkinan besar rosak, seperti muat turun yang bahagian akhirnya tidak pernah ditulis. Gantikannya; setiap satu dicuba semula apabila failnya berubah.",
+        "more_other": "dan {{count}} lagi"
+      }
     },
     "disks": {
       "title": "Ruang cakera",

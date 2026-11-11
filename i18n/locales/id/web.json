@@ -1324,7 +1324,12 @@
       "downloads": "Unduhan untuk perangkat",
       "downloadCounts": "{{waiting}} menunggu, {{converting}} dikonversi, {{failed}} gagal",
       "nothing": "Tidak ada yang dikerjakan",
-      "importing": "Mengimpor riwayat tontonan"
+      "importing": "Mengimpor riwayat tontonan",
+      "unreadable": {
+        "title": "Video yang tidak bisa dibaca",
+        "hint": "Kemungkinan besar rusak, seperti unduhan yang bagian akhirnya tidak pernah ditulis. Ganti video ini; masing-masing dicoba lagi setelah filenya berubah.",
+        "more_other": "dan {{count}} lagi"
+      }
     },
     "disks": {
       "title": "Ruang disk",

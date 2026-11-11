@@ -1324,7 +1324,12 @@
       "downloads": "Tải xuống cho thiết bị",
       "downloadCounts": "{{waiting}} đang chờ, {{converting}} đang chuyển đổi, {{failed}} thất bại",
       "nothing": "Không có việc gì",
-      "importing": "Đang nhập lịch sử xem"
+      "importing": "Đang nhập lịch sử xem",
+      "unreadable": {
+        "title": "Video không đọc được",
+        "hint": "Có lẽ đã bị hỏng, chẳng hạn một bản tải về chưa ghi xong phần cuối. Hãy thay thế; mỗi video sẽ được thử lại khi tệp thay đổi.",
+        "more_other": "và {{count}} video khác"
+      }
     },
     "disks": {
       "title": "Dung lượng đĩa",

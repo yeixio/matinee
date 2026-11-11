@@ -2,6 +2,7 @@ import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tansta
 import { AlertTriangle, CircleCheck, CircleX, Download, HardDrive, Pause, Radio, Search, Square, Wifi, WifiOff } from 'lucide-react'
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom'
 import { causeText } from '../player/why'
 import { api, type Health, type HealthPoint, type HealthProblem, type LogLevel, type LogLine } from '../api'
 import i18n, { formatLocale } from '../i18n'
@@ -604,6 +605,30 @@ function Jobs({ h }: { h: Health }) {
           bad={!!dl.failed}
         />
         {h.jobs.importing && <Job label={t('health.jobs.importing')} busy status="" />}
+        {!!h.jobs.unreadableCount && (
+          <div className="space-y-1.5 p-4 text-sm">
+            <div className="flex items-baseline justify-between gap-3">
+              <span className="flex min-w-0 items-center gap-2 font-medium">
+                <AlertTriangle className="size-3.5 shrink-0 text-danger" aria-hidden />
+                <span className="truncate">{t('health.jobs.unreadable.title')}</span>
+              </span>
+              <span className="shrink-0 text-danger tabular-nums">{h.jobs.unreadableCount}</span>
+            </div>
+            <p className="text-xs text-faint">{t('health.jobs.unreadable.hint')}</p>
+            <ul className="space-y-0.5 text-xs">
+              {h.jobs.unreadable?.map((v) => (
+                <li key={v.itemId} className="truncate" title={v.path}>
+                  <Link to={`/item/${v.itemId}`} className="text-muted hover:text-text">
+                    {v.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            {h.jobs.unreadableCount > (h.jobs.unreadable?.length ?? 0) && (
+              <p className="text-xs text-faint">{t('health.jobs.unreadable.more', { count: h.jobs.unreadableCount - (h.jobs.unreadable?.length ?? 0) })}</p>
+            )}
+          </div>
+        )}
       </div>
     </div>
   )

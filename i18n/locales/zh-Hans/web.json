@@ -1324,7 +1324,12 @@
       "downloads": "设备下载",
       "downloadCounts": "等待 {{waiting}}，转换中 {{converting}}，失败 {{failed}}",
       "nothing": "无待办事项",
-      "importing": "正在导入观看记录"
+      "importing": "正在导入观看记录",
+      "unreadable": {
+        "title": "无法读取的视频",
+        "hint": "很可能已损坏，比如结尾从未写入的下载。请替换它们；文件一旦变化就会重试。",
+        "more_other": "还有 {{count}} 个"
+      }
     },
     "disks": {
       "title": "磁盘空间",
