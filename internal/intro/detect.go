@@ -99,11 +99,22 @@ func (d *Detector) retryLater(id int64) bool {
 }
 
 // timedOut has a file that timed out tried again later, or, once it keeps
-// timing out with its share answering, stored as unreadable until it
-// changes (see slowfs.Timeouts).
-func (d *Detector) timedOut(ctx context.Context, id int64, path string, durationMs int64) {
-	if d.timeouts.Add(id, path) && probe.Damaged(ctx, d.FFmpeg, path, durationMs, d.LowPriority) {
-		d.Log.Warn("intro detection: file keeps timing out; leaving it until it changes (it may be damaged)", "path", path)
+// timing out with its share answering or its share keeps stopping while
+// it's read, stored as unreadable until it changes (see slowfs.Timeouts).
+// key is the file's version, see store.MediaKey.
+func (d *Detector) timedOut(ctx context.Context, id int64, path, key string, durationMs int64) {
+	var stalls slowfs.Stalls
+	if d.Store != nil {
+		stalls = d.Store
+	}
+	switch d.timeouts.Add(ctx, stalls, id, path, key) {
+	case slowfs.CheckFile:
+		if probe.Damaged(ctx, d.FFmpeg, path, durationMs, d.LowPriority) {
+			d.Log.Warn("intro detection: file keeps timing out; leaving it until it changes (it may be damaged)", "path", path)
+			return
+		}
+	case slowfs.SetAside:
+		d.Log.Warn("intro detection: the network share keeps stopping while this file is read; leaving it until it changes (it may be damaged)", "path", path)
 		return
 	}
 	d.mu.Lock()
@@ -145,7 +156,7 @@ func (d *Detector) Season(ctx context.Context, season []store.IntroEpisode) int 
 				d.Log.Warn("intro detection: can't read audio", "path", e.Path, "err", err)
 			}
 			if errors.Is(err, context.DeadlineExceeded) && ctx.Err() == nil {
-				d.timedOut(ctx, e.ID, e.Path, e.DurationMs)
+				d.timedOut(ctx, e.ID, e.Path, store.MediaKey(0, e.Size, e.Mtime), e.DurationMs)
 			}
 			return Print{}, false
 		}

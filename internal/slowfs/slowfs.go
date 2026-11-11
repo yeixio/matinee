@@ -12,6 +12,7 @@
 package slowfs
 
 import (
+	"context"
 	"errors"
 	"log/slog"
 	"os"
@@ -169,6 +170,41 @@ func Answering(path string) bool {
 // reach more.
 const GiveUpAfter = 1
 
+// StallsBeforeSetAside is how many times a file's share may stop answering
+// while a background job reads the file before the job takes the file for
+// the cause and leaves it alone until it changes. Some damaged files do
+// that: a video whose seek index points past its end has the server
+// reading where nothing is, and the share stops answering everyone for
+// close to a minute. Three, and only within StallsWithin, so that a share
+// that drops now and then, whatever is being read, doesn't set good files
+// aside.
+const StallsBeforeSetAside = 3
+
+// StallsWithin is how close together those stalls must be.
+const StallsWithin = 7 * 24 * time.Hour
+
+// Stalls keeps count of the times a file's share stopped answering while
+// the file was read, across restarts (see store.AddShareStall). key names
+// the file's version, its size and modification time, and a new key starts
+// the count over.
+type Stalls interface {
+	AddShareStall(ctx context.Context, id int64, key string, within time.Duration) (int, error)
+}
+
+// Verdict is what to do with a file whose read timed out.
+type Verdict int
+
+const (
+	// TryLater: the share stalled, and it's too soon to blame the file.
+	TryLater Verdict = iota
+	// CheckFile: the share answered, so the file may be damaged; see
+	// probe.Damaged.
+	CheckFile
+	// SetAside: the share stalled StallsBeforeSetAside times while the file
+	// was read; leave it until it changes.
+	SetAside
+)
+
 // Timeouts counts, per file, reads that timed out while the file's share
 // was answering. The zero value is ready to use.
 type Timeouts struct {
@@ -176,12 +212,19 @@ type Timeouts struct {
 	count map[int64]int
 }
 
-// Add counts a timeout on file id at path, unless the share isn't
-// answering, and reports whether the file has now timed out GiveUpAfter
-// times and should be left alone.
-func (t *Timeouts) Add(id int64, path string) (giveUp bool) {
+// Add counts a timeout reading file id at path, whose version is key, and
+// says what to do about it. A timeout while the share isn't answering is
+// counted in stalls, when not nil.
+func (t *Timeouts) Add(ctx context.Context, stalls Stalls, id int64, path, key string) Verdict {
 	if !Answering(path) {
-		return false // the share's fault, not the file's
+		if stalls == nil {
+			return TryLater
+		}
+		n, err := stalls.AddShareStall(ctx, id, key, StallsWithin)
+		if err != nil || n < StallsBeforeSetAside {
+			return TryLater
+		}
+		return SetAside
 	}
 	t.mu.Lock()
 	defer t.mu.Unlock()
@@ -191,7 +234,7 @@ func (t *Timeouts) Add(id int64, path string) (giveUp bool) {
 	t.count[id]++
 	if t.count[id] >= GiveUpAfter {
 		delete(t.count, id)
-		return true
+		return CheckFile
 	}
-	return false
+	return TryLater
 }

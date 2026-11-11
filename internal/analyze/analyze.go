@@ -376,6 +376,9 @@ func (a *Analyzer) Reanalyze(ctx context.Context, id int64) error {
 	if err := a.Store.ClearThumbnails(ctx, id); err != nil {
 		return err
 	}
+	if err := a.Store.ClearShareStalls(ctx, id); err != nil {
+		return err
+	}
 	a.mu.Lock()
 	a.init()
 	delete(a.retryAfter, id)
