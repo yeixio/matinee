@@ -413,6 +413,8 @@
         "hint": "Arquivos novos aparecem na próxima verificação completa ou quando você toca em Verificar."
       }
     },
+    "checkLabel": "Procurar arquivos novos",
+    "checkHint": "Com que frequência são verificadas as pastas que não avisam mudanças: compartilhamentos de rede, ou todas as pastas no modo por tempo. Cada verificação olha todas as pastas; em uma biblioteca grande em um compartilhamento de rede, um intervalo maior o mantém ágil.",
     "rescanLabel": "Reescaneamentos completos",
     "rescanEvery": "A cada {{every}}",
     "rescanNever": "Nunca",

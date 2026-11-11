@@ -413,6 +413,8 @@
         "hint": "Los archivos nuevos aparecen en el próximo escaneo completo o cuando pulses Escanear."
       }
     },
+    "checkLabel": "Buscar archivos nuevos",
+    "checkHint": "Cada cuánto se revisan las carpetas que no avisan de cambios: carpetas de red, o todas si se revisan con temporizador. Cada revisión mira todas las carpetas; en una biblioteca grande en una carpeta de red, un intervalo más largo la mantiene ágil.",
     "rescanLabel": "Reescaneos completos",
     "rescanEvery": "Cada {{every}}",
     "rescanNever": "Nunca",

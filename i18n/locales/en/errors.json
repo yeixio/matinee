@@ -277,6 +277,7 @@
   "usernames_are_at_most_40_characters": "usernames are at most 40 characters",
   "volume_must_be_between_0_and_1": "volume must be between 0 and 1",
   "want_must_be_better_or_replace": "want must be better or replace",
+  "watchpollseconds_must_be_from_10_to_3600": "watchPollSeconds must be from 10 to 3600",
   "wrong_pin": "wrong PIN",
   "wrong_username_or_password": "wrong username or password",
   "you_cant_remove_your_own_account": "you can't remove your own account",

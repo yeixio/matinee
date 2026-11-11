@@ -10,6 +10,7 @@ import (
 	"os"
 	"path/filepath"
 	"slices"
+	"strconv"
 	"strings"
 	"sync"
 	"time"
@@ -50,6 +51,16 @@ const (
 // SettingWatch holds the WatchMode.
 const SettingWatch = "library_watch"
 
+// SettingWatchPoll is how often polled folders are checked, in seconds.
+// Unset, the server's MATINEE_WATCH_POLL_INTERVAL applies.
+const SettingWatchPoll = "watch_poll"
+
+// How often an admin can have polled folders checked.
+const (
+	MinWatchPoll = 10 * time.Second
+	MaxWatchPoll = time.Hour
+)
+
 // How a folder is being watched, for FolderWatch.Method.
 const (
 	MethodEvents  = "events"
@@ -69,9 +80,9 @@ type FolderWatch struct {
 type Watcher struct {
 	Scanner *Scanner
 	Log     *slog.Logger
-	// PollInterval is how often polled folders are checked. A pass that takes
-	// long (a big library on a slow share) waits longer, so polling never
-	// keeps the share busy.
+	// PollInterval is how often polled folders are checked until an admin
+	// picks in Settings (see Poll). A pass that takes long (a big library on
+	// a slow share) waits longer, so polling never keeps the share busy.
 	PollInterval time.Duration
 	// Quiet is how long a path must hold still before it's scanned, so a
 	// file still being copied isn't read half way.
@@ -105,6 +116,32 @@ func (w *Watcher) SetMode(ctx context.Context, m WatchMode) error {
 		return fmt.Errorf("unknown watch mode %q", m)
 	}
 	if err := w.Scanner.Store.SetSetting(ctx, SettingWatch, string(m)); err != nil {
+		return err
+	}
+	w.Reload()
+	return nil
+}
+
+// Poll is how often polled folders are checked: the admin's pick, or
+// PollInterval.
+func (w *Watcher) Poll(ctx context.Context) (time.Duration, error) {
+	v, err := w.Scanner.Store.Setting(ctx, SettingWatchPoll)
+	if err != nil || v == "" {
+		return w.PollInterval, err
+	}
+	n, err := strconv.ParseInt(v, 10, 64)
+	if d := time.Duration(n) * time.Second; err == nil && d >= MinWatchPoll && d <= MaxWatchPoll {
+		return d, nil
+	}
+	return w.PollInterval, nil
+}
+
+// SetPoll changes how often polled folders are checked, from the next check.
+func (w *Watcher) SetPoll(ctx context.Context, d time.Duration) error {
+	if d < MinWatchPoll || d > MaxWatchPoll {
+		return fmt.Errorf("folders can be checked every %v to %v", MinWatchPoll, MaxWatchPoll)
+	}
+	if err := w.Scanner.Store.SetSetting(ctx, SettingWatchPoll, strconv.FormatInt(int64(d/time.Second), 10)); err != nil {
 		return err
 	}
 	w.Reload()
@@ -163,6 +200,10 @@ func (w *Watcher) start(ctx context.Context, wg *sync.WaitGroup) error {
 	if err != nil {
 		return err
 	}
+	every, err := w.Poll(ctx)
+	if err != nil {
+		return err
+	}
 	libs, err := w.Scanner.Store.Libraries(ctx)
 	if err != nil {
 		return err
@@ -177,13 +218,13 @@ func (w *Watcher) start(ctx context.Context, wg *sync.WaitGroup) error {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
-			w.watchLibrary(ctx, lib, mode)
+			w.watchLibrary(ctx, lib, mode, every)
 		}()
 	}
 	return nil
 }
 
-func (w *Watcher) watchLibrary(ctx context.Context, lib store.Library, mode WatchMode) {
+func (w *Watcher) watchLibrary(ctx context.Context, lib store.Library, mode WatchMode, every time.Duration) {
 	kind, ok := KindByName(lib.Kind)
 	if !ok {
 		return
@@ -220,7 +261,7 @@ func (w *Watcher) watchLibrary(ctx context.Context, lib store.Library, mode Watc
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
-			w.poll(ctx, polled, changes)
+			w.poll(ctx, polled, changes, every)
 		}()
 	}
 	w.collect(ctx, lib, kind, changes)
@@ -420,13 +461,13 @@ type polledDir struct {
 // count as recent. It also covers some clock difference with a share.
 const recentChange = 2 * time.Second
 
-func (w *Watcher) poll(ctx context.Context, roots []string, changes chan<- string) {
+func (w *Watcher) poll(ctx context.Context, roots []string, changes chan<- string, every time.Duration) {
 	dirs := map[string]*polledDir{}
 	for _, root := range roots {
 		dirs[root] = nil // listed on the first pass, without reporting what's there
 		w.pollDir(ctx, root, dirs, nil)
 	}
-	wait := w.PollInterval
+	wait := every
 	for {
 		select {
 		case <-ctx.Done():
@@ -444,8 +485,8 @@ func (w *Watcher) poll(ctx context.Context, roots []string, changes chan<- strin
 			w.pollDir(ctx, dir, dirs, changes)
 		}
 		took := time.Since(start)
-		wait = max(w.PollInterval, 4*took)
-		if wait > w.PollInterval {
+		wait = max(every, 4*took)
+		if wait > every {
 			w.Log.Debug("polling library folders is slow; checking less often", "folders", len(dirs), "took", took, "next", wait)
 		}
 	}

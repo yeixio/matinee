@@ -157,7 +157,7 @@ func TestPollNoticesChanges(t *testing.T) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	changes := make(chan string, 64)
-	go w.poll(ctx, []string{root}, changes)
+	go w.poll(ctx, []string{root}, changes, w.PollInterval)
 	time.Sleep(100 * time.Millisecond) // first look, which reports nothing
 
 	e2 := filepath.Join(root, "Show", "Season 1", "e2.mkv")

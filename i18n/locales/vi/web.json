@@ -407,6 +407,8 @@
         "hint": "Tệp mới hiện ra ở lần quét đầy đủ tiếp theo, hoặc khi bạn bấm Quét."
       }
     },
+    "checkLabel": "Kiểm tra tệp mới",
+    "checkHint": "Tần suất kiểm tra các thư mục không tự báo thay đổi: thư mục chia sẻ mạng, hoặc mọi thư mục khi kiểm tra theo hẹn giờ. Mỗi lần kiểm tra xem qua mọi thư mục; với thư viện lớn trên thư mục chia sẻ mạng, khoảng cách dài hơn giúp nó phản hồi nhanh.",
     "rescanLabel": "Quét lại toàn bộ",
     "rescanEvery": "Mỗi {{every}}",
     "rescanNever": "Không bao giờ",

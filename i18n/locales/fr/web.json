@@ -413,6 +413,8 @@
         "hint": "Les nouveaux fichiers apparaissent à la prochaine analyse complète, ou quand vous appuyez sur Analyser."
       }
     },
+    "checkLabel": "Rechercher les nouveaux fichiers",
+    "checkHint": "La fréquence de vérification des dossiers qui ne signalent pas leurs changements : partages réseau, ou tous les dossiers en mode minuterie. Chaque vérification parcourt tous les dossiers ; pour une grande bibliothèque sur un partage réseau, un intervalle plus long garde le partage réactif.",
     "rescanLabel": "Réanalyses complètes",
     "rescanEvery": "Toutes les {{every}}",
     "rescanNever": "Jamais",

@@ -410,6 +410,8 @@
         "hint": "Nya filer dyker upp vid nästa fullständiga skanning, eller när du trycker på Skanna."
       }
     },
+    "checkLabel": "Leta efter nya filer",
+    "checkHint": "Hur ofta mappar som inte meddelar ändringar kontrolleras: nätverksresurser, eller alla mappar när kontrollen sker på timer. Varje kontroll tittar på varje mapp; för ett stort bibliotek på en nätverksresurs håller ett längre intervall resursen lättrörlig.",
     "rescanLabel": "Fullständiga omsökningar",
     "rescanEvery": "Var {{every}}",
     "rescanNever": "Aldrig",

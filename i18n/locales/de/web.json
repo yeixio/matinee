@@ -410,6 +410,8 @@
         "hint": "Neue Dateien erscheinen beim nächsten vollständigen Scan oder wenn du auf „Scannen“ drückst."
       }
     },
+    "checkLabel": "Nach neuen Dateien suchen",
+    "checkHint": "Wie oft Ordner geprüft werden, die Änderungen nicht melden: Netzwerkfreigaben oder jeder Ordner, wenn auf einen Zeitplan gestellt. Jede Prüfung sieht sich jeden Ordner an; bei einer großen Mediathek auf einer Netzwerkfreigabe hält ein längerer Abstand die Freigabe reaktionsschnell.",
     "rescanLabel": "Vollständige Scans",
     "rescanEvery": "Alle {{every}}",
     "rescanNever": "Nie",

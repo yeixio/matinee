@@ -416,6 +416,8 @@
         "hint": "Nové soubory se objeví při dalším úplném prohledání nebo když stiskneš Prohledat."
       }
     },
+    "checkLabel": "Hledat nové soubory",
+    "checkHint": "Jak často se kontrolují složky, které změny neohlašují: síťové sdílené složky, nebo všechny složky při kontrole podle časovače. Každá kontrola projde každou složku; u velké knihovny na síťové složce udrží delší interval složku svižnou.",
     "rescanLabel": "Úplné opětovné prohledání",
     "rescanEvery": "Každých {{every}}",
     "rescanNever": "Nikdy",

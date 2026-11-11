@@ -410,6 +410,8 @@
         "hint": "Yeni dosyalar bir sonraki tam taramada veya Tara'ya bastığında görünür."
       }
     },
+    "checkLabel": "Yeni dosyaları denetle",
+    "checkHint": "Değişiklikleri bildirmeyen klasörlerin ne sıklıkla denetleneceği: ağ paylaşımları veya zamanlayıcıyla denetlemede tüm klasörler. Her denetim her klasöre bakar; ağ paylaşımındaki büyük bir kitaplıkta daha uzun bir aralık paylaşımı hızlı tutar.",
     "rescanLabel": "Tam yeniden taramalar",
     "rescanEvery": "Her {{every}}",
     "rescanNever": "Hiçbir zaman",

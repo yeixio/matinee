@@ -413,6 +413,8 @@
         "hint": "Fișierele noi apar la următoarea scanare completă sau când apeși Scanează."
       }
     },
+    "checkLabel": "Caută fișiere noi",
+    "checkHint": "Cât de des sunt verificate dosarele care nu anunță schimbările: partajări de rețea sau toate dosarele la verificarea după cronometru. Fiecare verificare trece prin fiecare dosar; pentru o bibliotecă mare pe o partajare de rețea, un interval mai lung o păstrează receptivă.",
     "rescanLabel": "Rescanări complete",
     "rescanEvery": "La fiecare {{every}}",
     "rescanNever": "Niciodată",

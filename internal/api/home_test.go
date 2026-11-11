@@ -196,6 +196,14 @@ func TestLibraryWatchSetting(t *testing.T) {
 	if code := c.do("PUT", "/api/v1/settings", map[string]any{"libraryWatch": "sometimes"}, nil); code != http.StatusBadRequest {
 		t.Fatalf("bad mode: %d", code)
 	}
+	for _, bad := range []int{1, 2 * 3600} {
+		if code := c.do("PUT", "/api/v1/settings", map[string]any{"watchPollSeconds": bad}, nil); code != http.StatusBadRequest {
+			t.Fatalf("poll every %ds: %d", bad, code)
+		}
+	}
+	if code := c.do("PUT", "/api/v1/settings", map[string]any{"watchPollSeconds": 300}, &set); code != 200 || set.WatchPollSeconds != 300 {
+		t.Fatalf("poll every 5 minutes: %d %+v", code, set)
+	}
 
 	dir := filepath.Join(tmp, "movies")
 	os.MkdirAll(dir, 0o755)

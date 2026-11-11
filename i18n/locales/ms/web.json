@@ -407,6 +407,8 @@
         "hint": "Fail baharu muncul pada imbasan penuh seterusnya, atau apabila anda menekan Imbas."
       }
     },
+    "checkLabel": "Semak fail baharu",
+    "checkHint": "Kekerapan folder yang tidak memaklumkan perubahan disemak: perkongsian rangkaian, atau semua folder apabila disemak mengikut pemasa. Setiap semakan melihat setiap folder; bagi pustaka besar pada perkongsian rangkaian, selang yang lebih panjang mengekalkannya responsif.",
     "rescanLabel": "Imbas semula penuh",
     "rescanEvery": "Setiap {{every}}",
     "rescanNever": "Tidak pernah",

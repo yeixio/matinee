@@ -410,6 +410,8 @@
         "hint": "Uudet tiedostot ilmestyvät seuraavassa täydessä skannauksessa tai kun painat Skannaa."
       }
     },
+    "checkLabel": "Tarkista uudet tiedostot",
+    "checkHint": "Kuinka usein tarkistetaan kansiot, jotka eivät ilmoita muutoksista: verkkojaot tai kaikki kansiot ajastetussa tilassa. Jokainen tarkistus käy läpi jokaisen kansion; suurella kirjastolla verkkojaossa pidempi väli pitää jaon nopeana.",
     "rescanLabel": "Täydet uudelleenskannaukset",
     "rescanEvery": "{{every}} välein",
     "rescanNever": "Ei koskaan",

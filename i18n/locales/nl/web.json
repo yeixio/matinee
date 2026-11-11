@@ -410,6 +410,8 @@
         "hint": "Nieuwe bestanden verschijnen bij de volgende volledige scan, of als je op Scannen drukt."
       }
     },
+    "checkLabel": "Zoeken naar nieuwe bestanden",
+    "checkHint": "Hoe vaak mappen die geen wijzigingen melden worden gecontroleerd: netwerkshares, of alle mappen bij controleren op een timer. Elke controle bekijkt elke map; bij een grote bibliotheek op een netwerkshare houdt een langere tussenpoos de share vlot.",
     "rescanLabel": "Volledige herscans",
     "rescanEvery": "Elke {{every}}",
     "rescanNever": "Nooit",

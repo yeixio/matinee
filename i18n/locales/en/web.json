@@ -410,6 +410,8 @@
         "hint": "New files show up at the next full rescan, or when you press Scan."
       }
     },
+    "checkLabel": "Check for new files",
+    "checkHint": "How often folders that don't announce changes are checked: network shares, or every folder when checking on a timer. Each check looks at every folder, so on a big library on a network share, a longer interval keeps the share responsive.",
     "rescanLabel": "Full rescans",
     "rescanEvery": "Every {{every}}",
     "rescanNever": "Never",

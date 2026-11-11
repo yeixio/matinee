@@ -413,6 +413,8 @@
         "hint": "I nuovi file compaiono alla prossima scansione completa o quando premi Scansiona."
       }
     },
+    "checkLabel": "Cerca nuovi file",
+    "checkHint": "Ogni quanto vengono controllate le cartelle che non segnalano i cambiamenti: condivisioni di rete, o tutte le cartelle con il controllo a intervalli. Ogni controllo guarda tutte le cartelle; con una libreria grande su una condivisione di rete, un intervallo più lungo la mantiene reattiva.",
     "rescanLabel": "Nuove scansioni complete",
     "rescanEvery": "Ogni {{every}}",
     "rescanNever": "Mai",

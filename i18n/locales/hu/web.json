@@ -410,6 +410,8 @@
         "hint": "Az új fájlok a következő teljes átvizsgáláskor jelennek meg, vagy ha megnyomod az Átvizsgálás gombot."
       }
     },
+    "checkLabel": "Új fájlok keresése",
+    "checkHint": "Milyen gyakran ellenőrzi a változásokat nem jelző mappákat: hálózati megosztásokat, vagy időzített módban minden mappát. Minden ellenőrzés végignéz minden mappát; nagy könyvtárnál hálózati megosztáson a hosszabb időköz gyorsan reagálóvá teszi a megosztást.",
     "rescanLabel": "Teljes újraolvasások",
     "rescanEvery": "{{every}} időközönként",
     "rescanNever": "Soha",

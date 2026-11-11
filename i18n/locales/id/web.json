@@ -407,6 +407,8 @@
         "hint": "File baru muncul pada pemindaian penuh berikutnya, atau saat kamu menekan Pindai."
       }
     },
+    "checkLabel": "Periksa file baru",
+    "checkHint": "Seberapa sering folder yang tidak memberi tahu perubahan diperiksa: folder berbagi jaringan, atau semua folder saat diperiksa dengan timer. Setiap pemeriksaan melihat setiap folder; untuk pustaka besar di folder berbagi jaringan, jeda yang lebih panjang menjaganya tetap responsif.",
     "rescanLabel": "Pindai ulang penuh",
     "rescanEvery": "Setiap {{every}}",
     "rescanNever": "Tidak pernah",

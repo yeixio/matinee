@@ -19,6 +19,10 @@ Copy a film into a library folder and it shows up in Matinee a few seconds after
 
 Each library under **Settings → Libraries** says how it's watched.
 
+<!-- since: v0.2.4 -->
+**Check for new files**, below the three modes, sets how often folders that don't announce changes are checked: network shares, or every folder in **Check on a timer**. It's every 2 minutes unless you pick another, from every 30 seconds to every 10 minutes. Each check looks at every folder (not every file), so on a big library on a network share a longer interval keeps the share responsive; 5 minutes is a good pick there. The times in the table above are from before you could pick.
+<!-- /since -->
+
 <!-- since: v0.2.0 -->
 ## Upgraded and renamed files
 
@@ -60,4 +64,9 @@ If a network share stopped answering, the scan stops as soon as the share answer
 
 ## Big libraries on slow shares
 
+<!-- until: v0.2.4 -->
 `MATINEE_WATCH_POLL_INTERVAL` sets how often network shares are checked (default `30s`). A big library on a slow share is checked less often by itself, so the share stays responsive.
+<!-- /until -->
+<!-- since: v0.2.4 -->
+A big library on a slow share is checked less often by itself, so the share stays responsive: when a check takes long, the next one waits four times as long as it took. To check less often to begin with, pick a longer interval under **Check for new files**. `MATINEE_WATCH_POLL_INTERVAL` (default `2m`) still sets the interval until you pick one.
+<!-- /since -->

@@ -410,6 +410,8 @@
         "hint": "Nye filer dukker opp ved neste fullstendige skanning, eller når du trykker Skann."
       }
     },
+    "checkLabel": "Se etter nye filer",
+    "checkHint": "Hvor ofte mapper som ikke melder fra om endringer sjekkes: nettverksdelinger, eller alle mapper når de sjekkes på timer. Hver sjekk ser på hver mappe; for et stort bibliotek på en nettverksdeling holder et lengre intervall delingen rask.",
     "rescanLabel": "Fullstendige nyskanninger",
     "rescanEvery": "Hver {{every}}",
     "rescanNever": "Aldri",
