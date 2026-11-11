@@ -283,5 +283,6 @@
   "timezone_must_be_a_time_zone_such_as_america_juneau_or_empty": "timeZone doit être un fuseau horaire comme America/Juneau, ou vide",
   "this_library_isnt_being_scanned": "cette bibliothèque n'est pas en cours d'analyse",
   "watchpollseconds_must_be_from_10_to_3600": "watchPollSeconds doit être compris entre 10 et 3600",
-  "this_server_cant_restart_itself_restart_it_the_way_it_was_started": "ce serveur ne peut pas redémarrer tout seul ; redémarrez-le comme il a été lancé"
+  "this_server_cant_restart_itself_restart_it_the_way_it_was_started": "ce serveur ne peut pas redémarrer tout seul ; redémarrez-le comme il a été lancé",
+  "this_titles_files_cant_be_read_right_now_the_network_share_theyre_on_isnt_answering": "les fichiers de ce titre ne peuvent pas être lus pour le moment : le partage réseau où ils se trouvent ne répond pas"
 }

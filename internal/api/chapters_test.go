@@ -2,9 +2,12 @@ package api
 
 import (
 	"context"
+	"net/http"
 	"testing"
+	"time"
 
 	"github.com/yeixio/matinee/internal/probe"
+	"github.com/yeixio/matinee/internal/slowfs"
 	"github.com/yeixio/matinee/internal/store"
 )
 
@@ -49,5 +52,41 @@ func TestItemChapters(t *testing.T) {
 	c.do("GET", "/api/v1/items/"+id, nil, &v)
 	if v.Chapters != nil {
 		t.Fatalf("one chapter: %+v", v.Chapters)
+	}
+}
+
+// While a title's network share isn't answering, its page still loads
+// straight away (without the subtitle files beside it), and playing it
+// says at once that its files can't be read, rather than waiting on the
+// share.
+func TestItemWithShareDown(t *testing.T) {
+	c, _, db := newTestServerStore(t)
+	ctx := context.Background()
+	var login struct{ Token string }
+	c.do("POST", "/api/v1/setup", credentials{"admin", "correct horse"}, &login)
+	c.token = login.Token
+	lib, _ := db.CreateLibrary(ctx, "Movies", "movies", []string{"/stalled-share/movies"})
+	id, err := db.UpsertFile(ctx, store.Item{LibraryID: lib.ID, Kind: "movie", Title: "Dune", VideoCodec: "h264",
+		Path: "/stalled-share/movies/Dune (2021)/Dune.mkv"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	old := slowfs.Wait
+	slowfs.Wait = 50 * time.Millisecond
+	t.Cleanup(func() { slowfs.Wait = old })
+	release := make(chan struct{})
+	defer close(release)
+	slowfs.Do("/stalled-share/movies/x", func() (int, error) { <-release; return 0, nil })
+
+	start := time.Now()
+	var v struct{ Title string }
+	if code := c.do("GET", "/api/v1/items/"+itoa(id), nil, &v); code != http.StatusOK || v.Title != "Dune" || time.Since(start) > 2*time.Second {
+		t.Fatalf("item: %d %+v after %v", code, v, time.Since(start))
+	}
+	if code := c.do("GET", "/api/v1/items/"+itoa(id)+"/file", nil, nil); code != http.StatusServiceUnavailable {
+		t.Fatalf("file: %d", code)
+	}
+	if code := c.do("POST", "/api/v1/items/"+itoa(id)+"/hls", nil, nil); code != http.StatusServiceUnavailable {
+		t.Fatalf("hls: %d", code)
 	}
 }

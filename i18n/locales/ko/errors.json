@@ -283,5 +283,6 @@
   "timezone_must_be_a_time_zone_such_as_america_juneau_or_empty": "timeZone은 America/Juneau 같은 시간대이거나 비어 있어야 합니다",
   "this_library_isnt_being_scanned": "이 라이브러리는 스캔 중이 아닙니다",
   "watchpollseconds_must_be_from_10_to_3600": "watchPollSeconds는 10에서 3600 사이여야 합니다",
-  "this_server_cant_restart_itself_restart_it_the_way_it_was_started": "이 서버는 스스로 다시 시작할 수 없습니다. 시작했던 방식대로 다시 시작하세요"
+  "this_server_cant_restart_itself_restart_it_the_way_it_was_started": "이 서버는 스스로 다시 시작할 수 없습니다. 시작했던 방식대로 다시 시작하세요",
+  "this_titles_files_cant_be_read_right_now_the_network_share_theyre_on_isnt_answering": "지금은 이 작품의 파일을 읽을 수 없습니다. 파일이 있는 네트워크 공유가 응답하지 않습니다"
 }
