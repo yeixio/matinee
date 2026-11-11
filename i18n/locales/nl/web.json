@@ -449,7 +449,7 @@
     "mode": {
       "gentle": {
         "label": "Rustig",
-        "hint": "Elke paar seconden één bestand, en geen terwijl de server iets omzet om af te spelen."
+        "hint": "Eén bestand per paar seconden."
       },
       "normal": {
         "label": "Normaal",
@@ -459,6 +459,10 @@
         "label": "Uit",
         "hint": "Gepauzeerd tot je het weer aanzet."
       }
+    },
+    "pause": {
+      "label": "Pauzeren terwijl er iets speelt",
+      "hint": "Analyse, intro- en aftitelingdetectie, voorbeelden voor de zoekbalk en geplande volledige herscans wachten zolang iemand kijkt of luistert, zodat het afspelen de schijven en het netwerk voor zich heeft. Een gepauzeerde speler telt niet mee, en scans die je zelf start gaan door."
     },
     "intros": {
       "label": "Intro’s van series vinden",
@@ -1009,6 +1013,16 @@
         "binaryReadOnly": "Matinee kan zijn eigen bestand niet vervangen, omdat het niet in zijn map mag schrijven. Download de nieuwe versie van de releasepagina en vervang het met de hand.",
         "source": "Deze server is vanuit de broncode gebouwd, dus er is geen release om mee te vergelijken. Haal de wijzigingen op en bouw opnieuw om bij te werken."
       }
+    },
+    "restart": {
+      "button": "Server herstarten",
+      "restarting": "Herstarten…",
+      "confirm": "Matinee nu herstarten? Het is binnen een paar seconden terug.",
+      "confirmPlaying": "Matinee nu herstarten? Streams die nu spelen: {{count}}. Ze pauzeren en gaan verder waar ze waren zodra het terug is.",
+      "waiting": "Matinee herstart. Deze pagina gaat verder zodra het terug is.",
+      "slow": "Matinee is na twee minuten nog niet terug. Bekijk het logboek of start het opnieuw zoals het is geïnstalleerd.",
+      "back": "Matinee is herstart en weer terug.",
+      "failed": "Herstarten mislukt: {{error}}"
     }
   },
   "language": {

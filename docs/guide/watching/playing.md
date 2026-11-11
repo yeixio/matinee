@@ -62,7 +62,7 @@ Under **Settings → You → Subtitles** you choose when subtitles show, and Mat
 - **When the sound isn't in my language**: full subtitles when a film plays in a language that isn't one of yours, and only forced lines when it is. Good for watching foreign films without switching subtitles on every time.
 - **Always**: full subtitles whenever a file has them in one of your languages.
 
-List your languages in the order you want them: Matinee uses the first one a file has. With none listed, it uses the language the app is in. Picking subtitles in the player changes your choice too: **Off** turns them off for next time, and picking a language puts it first.
+List your languages in the order you want them: Matinee uses the first one a file has. With none listed, it uses the language the app is in. Picking subtitles in the player changes your choice too: **Off** turns them off for next time, and picking a language puts it first.<!-- since: v0.2.4 --> The title you picked them in also [remembers the exact track](#which-sound-and-subtitles-a-video-starts-with).<!-- /since -->
 
 ### How subtitles look
 
@@ -102,6 +102,20 @@ Clear voice belongs to the browser, phone or TV you turn it on in, so every film
 ## Audio tracks
 
 When a file has more than one audio track, such as another language or a director's commentary, the **Audio** button in the player lists them all. Picking another track plays it through the server from the same spot. A title page's [Extras](/docs/watching/extras/#commentaries) row starts a movie with its commentary straight away.
+<!-- /since -->
+
+<!-- since: v0.2.4 -->
+### Which sound and subtitles a video starts with
+
+Many files carry several audio tracks, and the one marked as the file's default isn't always the one you want: a film can start with a dub in another language. Matinee picks for you instead, the same way in the browser and in every app:
+
+1. **What you picked last time.** Change the sound or the subtitles while you watch and Matinee remembers it for that title, for your profile. Play it again on any device and it starts the way you left it. In a show, your pick carries on to the next episodes in the same language, so switching an anime to Japanese with English subtitles once is enough. Each person and profile keeps their own picks.
+2. **Your language.** Otherwise the sound is in the language Matinee shows you, which is the one under **Settings → You → Language**, or your browser's or device's when that's set to Automatic. When the file has nothing in your language, it plays in the title's original language, and failing that, the file's own default.
+3. **The best track in that language.** When a file has several tracks in the language, Matinee takes the best one: Dolby Atmos or DTS:X first, then the most channels (7.1 over 5.1 over stereo), then the better format (lossless over Dolby Digital Plus over Dolby Digital over AAC). Commentaries and audio description only play when you pick them.
+
+Subtitles start as your choices under [When subtitles come on](#when-subtitles-come-on) say, measured against the sound Matinee picked: with **When the sound isn't in my language**, an English film you hear in English starts without them.
+
+Matinee knows a file's tracks once [media analysis](/docs/server/media-analysis/) has looked at it; until then, a new file starts with its own default. A track other than the file's default plays through the server, so a browser may convert the sound for it. The phone and TV apps switch tracks on the device itself when they can.
 <!-- /since -->
 
 ## Picking up where you left off

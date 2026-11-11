@@ -79,6 +79,8 @@ type healthServer struct {
 	// Internet says which sites outside the server aren't answering, and
 	// whether the internet as a whole looks down.
 	Internet *netstate.Status `json:"internet,omitempty"`
+	// CanRestart is whether an admin can restart the server from Settings.
+	CanRestart bool `json:"canRestart"`
 }
 
 type healthDisk struct {
@@ -156,7 +158,7 @@ func (s *Server) getHealth(w http.ResponseWriter, r *http.Request) {
 	m := s.health()
 	out := healthReport{
 		Server: healthServer{Name: s.Name, Version: version.Version, APIVersion: APIVersion, State: s.serverState(),
-			PublicURL: s.PublicURL, ScanInterval: s.scanInterval(ctx).Milliseconds()},
+			PublicURL: s.PublicURL, ScanInterval: s.scanInterval(ctx).Milliseconds(), CanRestart: s.canRestart()},
 		System:     m.System(),
 		Streams:    []healthStream{},
 		Transcodes: []healthTranscode{},

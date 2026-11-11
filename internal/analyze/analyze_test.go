@@ -112,3 +112,29 @@ func TestWaitsForAStalledShare(t *testing.T) {
 		t.Fatal("still waiting after the share answered")
 	}
 }
+
+// Background jobs wait while something plays, unless the admin turns that
+// off; nothing playing never makes them wait.
+func TestPauseWhilePlayingSetting(t *testing.T) {
+	ctx := context.Background()
+	playing := true
+	a := &Analyzer{Store: storetest.Open(t), Log: slog.New(slog.NewTextHandler(io.Discard, nil)), Busy: func() bool { return playing }}
+	a.init()
+	if on, err := a.PauseWhilePlaying(ctx); err != nil || !on || !a.Playing(ctx) {
+		t.Fatalf("default: on %v, waits %v, %v", on, a.Playing(ctx), err)
+	}
+	if err := a.SetPauseWhilePlaying(ctx, false); err != nil {
+		t.Fatal(err)
+	}
+	if a.Playing(ctx) {
+		t.Fatal("waits with the setting off")
+	}
+	if st, err := a.Status(ctx); err != nil || st.PauseWhilePlaying {
+		t.Fatalf("status: %+v %v", st, err)
+	}
+	a.SetPauseWhilePlaying(ctx, true)
+	playing = false
+	if a.Playing(ctx) {
+		t.Fatal("waits with nothing playing")
+	}
+}

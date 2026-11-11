@@ -445,7 +445,7 @@
     "mode": {
       "gentle": {
         "label": "Lembut",
-        "hint": "Satu fail setiap beberapa saat, dan tiada langsung semasa pelayan menukar sesuatu untuk main balik."
+        "hint": "Satu fail setiap beberapa saat."
       },
       "normal": {
         "label": "Biasa",
@@ -455,6 +455,10 @@
         "label": "Mati",
         "hint": "Dijeda sehingga anda menghidupkannya semula."
       }
+    },
+    "pause": {
+      "label": "Jeda semasa sesuatu dimainkan",
+      "hint": "Analisis, pengesanan intro dan kredit, pratonton bar seret dan imbas semula penuh berjadual menunggu selagi ada yang menonton atau mendengar, supaya main balik mendapat cakera dan rangkaian sepenuhnya. Pemain yang dijeda tidak dikira, dan imbasan yang anda mulakan sendiri tetap berjalan."
     },
     "intros": {
       "label": "Cari intro rancangan TV",
@@ -1005,6 +1009,16 @@
         "binaryReadOnly": "Matinee tidak boleh menggantikan failnya sendiri kerana ia tidak dibenarkan menulis ke foldernya. Muat turun versi baharu dari halaman keluarannya dan gantikan secara manual.",
         "source": "Pelayan ini dibina daripada kod sumber, jadi tiada keluaran untuk dibandingkan. Tarik perubahan dan bina semula untuk mengemas kini."
       }
+    },
+    "restart": {
+      "button": "Mulakan semula pelayan",
+      "restarting": "Memulakan semula…",
+      "confirm": "Mulakan semula Matinee sekarang? Ia kembali dalam beberapa saat.",
+      "confirmPlaying": "Mulakan semula Matinee sekarang? Strim yang sedang dimainkan: {{count}}. Ia dijeda dan bersambung dari tempat tadi apabila ia kembali.",
+      "waiting": "Matinee sedang dimulakan semula. Halaman ini bersambung apabila ia kembali.",
+      "slow": "Matinee belum kembali selepas dua minit. Lihat lognya, atau mulakan semula mengikut cara ia dipasang.",
+      "back": "Matinee telah dimulakan semula dan kembali.",
+      "failed": "Tidak dapat dimulakan semula: {{error}}"
     }
   },
   "language": {

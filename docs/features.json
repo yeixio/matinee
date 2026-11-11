@@ -392,6 +392,19 @@
               }
             },
             {
+              "name": "Starts in your language and remembers your tracks",
+              "doc": "/docs/watching/playing/#which-sound-and-subtitles-a-video-starts-with",
+              "since": "v0.2.4",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
               "name": "Audio delay",
               "doc": "/docs/watching/playing/#audio-delay",
               "since": "v0.2.1",

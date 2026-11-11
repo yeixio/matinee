@@ -613,6 +613,17 @@ try {
     await page.context().close()
   }
 
+  // --- Restart server (docs/guide/server/server-health.md) ---
+  if (wanted('server-restart')) {
+    const page = await open(desktop, token)
+    await settings(page, 'health')
+    page.once('dialog', (d) => d.accept())
+    await page.getByRole('button', { name: 'Restart server' }).click()
+    await page.getByText('Matinee restarted and is back.').waitFor({ timeout: 60_000 })
+    await shot(page, 'server-restart', { target: page.locator('#server-health > section > div:nth-child(1) > div:first-child') })
+    await page.context().close()
+  }
+
   // --- Alerts (docs/guide/server/alerts.md) ---
   if (['alerts', 'alerts-sent', 'alerts-metrics'].some(wanted)) {
     // A webhook that takes alerts here, standing in for Home Assistant.

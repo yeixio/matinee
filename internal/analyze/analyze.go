@@ -2,8 +2,8 @@
 // recording each file's full media info: resolution and HDR, codecs and
 // bitrates, audio channels and languages, subtitles. It is built to go
 // unnoticed: one file at a time at the lowest CPU and disk priority, with a
-// pause between files and while anyone is watching something transcoded, so
-// network shares and the server stay responsive. Progress lives in the
+// pause between files and while anything is playing (unless the admin turns
+// that off), so network shares and the server stay responsive. Progress lives in the
 // database, so it picks up where it was after a restart, and a file is
 // looked at again only when it changes.
 package analyze
@@ -31,8 +31,7 @@ import (
 type Mode string
 
 const (
-	// Gentle analyzes a file every few seconds and waits while anyone is
-	// watching something transcoded. The default.
+	// Gentle analyzes a file every few seconds. The default.
 	Gentle Mode = "gentle"
 	// Normal analyzes files back to back, still at the lowest priority.
 	Normal Mode = "normal"
@@ -41,6 +40,7 @@ const (
 )
 
 const (
+	settingPause   = "pauseWhilePlaying" // "off" keeps working while something plays
 	settingMode    = "mediaAnalysis"
 	settingIntros  = "introDetection"   // "off" turns it off
 	settingCredits = "creditsDetection" // "off" turns it off
@@ -49,7 +49,7 @@ const (
 // State says what the analysis is doing right now.
 const (
 	StateAnalyzing = "analyzing"
-	StateWaiting   = "waiting"    // for playback to finish
+	StateWaiting   = "waiting"    // for playback to finish (PauseWhilePlaying)
 	StateSlowDisk  = "slowDisk"   // files kept timing out; resting before trying again
 	StateIntros    = "intros"     // looking for the intros of a season's episodes
 	StateCredits   = "credits"    // looking for the end credits of a season's episodes or a movie
@@ -75,8 +75,9 @@ type Analyzer struct {
 	Store  *store.Store
 	Prober probe.Prober // should be LowPriority
 	Log    *slog.Logger
-	// Busy reports whether anyone is watching something the server is
-	// transcoding right now. Gentle analysis waits until nobody is.
+	// Busy reports whether anything is playing right now, transcoded or
+	// not. While it is, every background job waits, unless the admin turned
+	// that off (PauseWhilePlaying).
 	Busy func() bool
 	// Intros, when set, looks for TV episodes' intros once every file is
 	// analyzed, at the same pace and priority.
@@ -98,6 +99,8 @@ type Analyzer struct {
 	introsSet  bool
 	credits    bool
 	creditsSet bool
+	pause      bool
+	pauseSet   bool
 	state      string
 	current    string // title of the file being analyzed
 	retryAfter map[int64]time.Time
@@ -107,8 +110,12 @@ type Analyzer struct {
 
 // Status is the analysis' progress, for admins.
 type Status struct {
-	Mode  Mode   `json:"mode"`
-	State string `json:"state"`
+	Mode Mode `json:"mode"`
+	// PauseWhilePlaying says every background job (this one, intros,
+	// credits, gapless, seek bar pictures and scheduled rescans) waits
+	// while something plays.
+	PauseWhilePlaying bool   `json:"pauseWhilePlaying"`
+	State             string `json:"state"`
 	// Total is how many files the libraries have; Done how many are analyzed
 	// as they are now, Unreadable among them the ones ffprobe couldn't read.
 	Total      int    `json:"total"`
@@ -222,6 +229,46 @@ func (a *Analyzer) SetIntrosOn(ctx context.Context, on bool) error {
 	return nil
 }
 
+// PauseWhilePlaying says whether background jobs wait while something
+// plays, an admin setting, on by default.
+func (a *Analyzer) PauseWhilePlaying(ctx context.Context) (bool, error) {
+	a.mu.Lock()
+	defer a.mu.Unlock()
+	if !a.pauseSet {
+		v, err := a.Store.Setting(ctx, settingPause)
+		if err != nil {
+			return true, err
+		}
+		a.pause, a.pauseSet = v != "off", true
+	}
+	return a.pause, nil
+}
+
+func (a *Analyzer) SetPauseWhilePlaying(ctx context.Context, on bool) error {
+	v := "on"
+	if !on {
+		v = "off"
+	}
+	if err := a.Store.SetSetting(ctx, settingPause, v); err != nil {
+		return err
+	}
+	a.mu.Lock()
+	a.pause, a.pauseSet = on, true
+	a.mu.Unlock()
+	a.Wake()
+	return nil
+}
+
+// Playing reports whether background work should wait right now: something
+// is playing and the admin has it wait.
+func (a *Analyzer) Playing(ctx context.Context) bool {
+	if a.Busy == nil || !a.Busy() {
+		return false
+	}
+	on, _ := a.PauseWhilePlaying(ctx)
+	return on
+}
+
 // CreditsOn says whether to look for end credits, an admin setting, on by
 // default.
 func (a *Analyzer) CreditsOn(ctx context.Context) (bool, error) {
@@ -294,9 +341,13 @@ func (a *Analyzer) Status(ctx context.Context) (Status, error) {
 			return Status{}, err
 		}
 	}
+	pause, err := a.PauseWhilePlaying(ctx)
+	if err != nil {
+		return Status{}, err
+	}
 	a.mu.Lock()
 	defer a.mu.Unlock()
-	st := Status{Mode: mode, State: a.state, Total: total, Done: done, Unreadable: unreadable, Current: a.current, Intros: is, Credits: cs, Thumbnails: ts}
+	st := Status{Mode: mode, PauseWhilePlaying: pause, State: a.state, Total: total, Done: done, Unreadable: unreadable, Current: a.current, Intros: is, Credits: cs, Thumbnails: ts}
 	if st.State == "" {
 		st.State = StateIdle
 	}
@@ -408,7 +459,7 @@ func (a *Analyzer) pass(ctx context.Context) (int, error) {
 			if mode == Off {
 				return n, nil
 			}
-			for mode == Gentle && a.Busy != nil && a.Busy() {
+			for a.Playing(ctx) {
 				a.setState(StateWaiting, "")
 				a.sleep(ctx, busyCheck)
 				if ctx.Err() != nil {
@@ -470,7 +521,7 @@ func (a *Analyzer) findIntros(ctx context.Context) int {
 			a.sleep(ctx, gentlePause)
 		}
 		first = false
-		for mode == Gentle && a.Busy != nil && a.Busy() {
+		for a.Playing(ctx) {
 			a.setState(StateWaiting, "")
 			a.sleep(ctx, busyCheck)
 			if ctx.Err() != nil {
@@ -519,7 +570,7 @@ func (a *Analyzer) findCredits(ctx context.Context) int {
 			a.sleep(ctx, gentlePause)
 		}
 		first = false
-		for mode == Gentle && a.Busy != nil && a.Busy() {
+		for a.Playing(ctx) {
 			a.setState(StateWaiting, "")
 			a.sleep(ctx, busyCheck)
 			if ctx.Err() != nil {
@@ -565,7 +616,7 @@ func (a *Analyzer) findGapless(ctx context.Context) int {
 			a.sleep(ctx, gentlePause)
 		}
 		first = false
-		for mode == Gentle && a.Busy != nil && a.Busy() {
+		for a.Playing(ctx) {
 			a.setState(StateWaiting, "")
 			a.sleep(ctx, busyCheck)
 			if ctx.Err() != nil {
@@ -619,7 +670,7 @@ func (a *Analyzer) makeThumbs(ctx context.Context) int {
 			a.sleep(ctx, gentlePause)
 		}
 		first = false
-		for mode == Gentle && a.Busy != nil && a.Busy() {
+		for a.Playing(ctx) {
 			a.setState(StateWaiting, "")
 			a.sleep(ctx, busyCheck)
 			if ctx.Err() != nil {

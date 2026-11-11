@@ -196,7 +196,11 @@ type Server struct {
 	// Backups makes and restores copies of a SQLite database; nil makes none.
 	Backups *backup.Manager
 	// Updates looks for newer versions and installs them where it can.
-	Updates    *update.Manager
+	Updates *update.Manager
+	// Restart stops the server and starts it again (cmd/matinee); nil
+	// when it can't restart itself.
+	Restart    func()
+	restarting atomic.Bool
 	alertsOnce sync.Once
 }
 
@@ -321,6 +325,7 @@ func (s *Server) routes() []route {
 		{"PUT /admin/updates", adminOnly, s.putUpdates},
 		{"POST /admin/updates/check", adminOnly, s.checkUpdates},
 		{"POST /admin/updates/apply", adminOnly, s.applyUpdate},
+		{"POST /admin/restart", adminOnly, s.restartServer},
 		{"GET /admin/notifications", adminOnly, s.getNotificationSettings},
 		{"PUT /admin/notifications", adminOnly, s.putNotificationSettings},
 		{"GET /admin/alerts", adminOnly, s.getAlerts},
@@ -367,6 +372,7 @@ func (s *Server) routes() []route {
 		{"GET /people/{id}", reader, s.getPerson},
 		{"GET /people/{id}/image", reader, s.personImage},
 		{"PUT /items/{id}/progress", reader, s.setProgress},
+		{"PUT /items/{id}/tracks", reader, s.setTrackChoice},
 		{"GET /items/{id}/watched", reader, s.getWatched},
 		{"PUT /items/{id}/watched", reader, s.setWatched},
 		{"DELETE /continue-watching/{id}", reader, s.hideFromContinueWatching},
@@ -1353,6 +1359,9 @@ type itemView struct {
 	// Versions are the files of a movie or episode with more than one,
 	// the title's own first; absent when it has only one.
 	Versions []versionView `json:"versions,omitempty"`
+	// TrackPick is which sound and subtitles a video starts with, for this
+	// person (see trackpick.go).
+	TrackPick *trackPickView `json:"trackPick,omitempty"`
 }
 
 func (s *Server) getItem(w http.ResponseWriter, r *http.Request) {
@@ -1429,6 +1438,7 @@ func (s *Server) getItem(w http.ResponseWriter, r *http.Request) {
 		s.serverError(w, err)
 		return
 	}
+	s.addTrackPick(r, &v)
 	writeJSON(w, http.StatusOK, v)
 }
 

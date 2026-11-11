@@ -157,7 +157,7 @@ func (s *Server) podcastDirectory(w http.ResponseWriter, r *http.Request) {
 	if q != "" {
 		key = "search:" + strings.ToLower(q)
 	}
-	shows, err := cached(&s.podcastCache, key, 30*time.Minute, func() ([]podcast.Show, error) {
+	shows, err := cachedWithin(&s.podcastCache, key, 30*time.Minute, cacheFetch, func(ctx context.Context) ([]podcast.Show, error) {
 		if q != "" {
 			return ix.Search(ctx, q, 40)
 		}

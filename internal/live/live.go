@@ -438,6 +438,17 @@ func (h *Hub) Client(id string, allowed func(Client) bool) (Client, bool) {
 }
 
 // Players lists the players allowed may see, online ones first.
+// Playing reports whether any player that's online is playing something
+// right now, not paused.
+func (h *Hub) Playing() bool {
+	for _, c := range h.Clients(func(Client) bool { return true }) {
+		if c.Online && c.Playing != nil && !c.Playing.Paused {
+			return true
+		}
+	}
+	return false
+}
+
 func (h *Hub) Clients(allowed func(Client) bool) []Client {
 	h.mu.Lock()
 	defer h.mu.Unlock()

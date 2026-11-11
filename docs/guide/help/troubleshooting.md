@@ -47,6 +47,12 @@ Server health lists *network share isn't answering* among its warnings with the 
 If it happens often, look at the share's server and the network first. On a big library, longer intervals for [checking for new files and full rescans](/docs/server/new-files/) take load off the share.
 <!-- /since -->
 
+<!-- since: v0.2.4 -->
+## Box Office, Radarr or another service is slow or restarting
+
+Pages never wait long on another service. What they show from Box Office, Radarr, Sonarr, Overseerr, TMDB and the like comes from what Matinee last heard, and it asks again in the background. When it has nothing yet, as just after a restart, a page waits at most a few seconds, then shows that part empty and fills it in next time. A search you typed, such as for subtitles or a podcast, still waits for its answer. A cover that couldn't be found isn't looked for again for an hour, so a page with missing covers stays quick.
+<!-- /since -->
+
 ## Playback stutters or keeps buffering
 
 <!-- since: v0.2.0 -->

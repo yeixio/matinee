@@ -449,7 +449,7 @@
     "mode": {
       "gentle": {
         "label": "Nazik",
-        "hint": "Birkaç saniyede bir dosya; sunucu oynatma için bir şey dönüştürürken hiç yok."
+        "hint": "Birkaç saniyede bir dosya."
       },
       "normal": {
         "label": "Normal",
@@ -459,6 +459,10 @@
         "label": "Kapalı",
         "hint": "Tekrar açana kadar duraklatıldı."
       }
+    },
+    "pause": {
+      "label": "Bir şey oynatılırken duraklat",
+      "hint": "Analiz, giriş ve jenerik algılama, arama çubuğu önizlemeleri ve planlı tam yeniden taramalar biri izlerken ya da dinlerken bekler, böylece oynatma diskleri ve ağı kendine ayırır. Duraklatılmış bir oynatıcı sayılmaz, kendi başlattığın taramalar yine çalışır."
     },
     "intros": {
       "label": "Dizi girişlerini bul",
@@ -1009,6 +1013,16 @@
         "binaryReadOnly": "Matinee kendi dosyasını değiştiremiyor, çünkü klasörüne yazma izni yok. Yeni sürümü sürüm sayfasından indirip elle değiştirin.",
         "source": "Bu sunucu kaynak koddan derlendi, bu yüzden karşılaştırılacak bir sürüm yok. Güncellemek için değişiklikleri çekip yeniden derleyin."
       }
+    },
+    "restart": {
+      "button": "Sunucuyu yeniden başlat",
+      "restarting": "Yeniden başlatılıyor…",
+      "confirm": "Matinee şimdi yeniden başlatılsın mı? Birkaç saniye içinde geri gelir.",
+      "confirmPlaying": "Matinee şimdi yeniden başlatılsın mı? Şu an oynatılan yayınlar: {{count}}. Duraklarlar ve geri geldiğinde kaldıkları yerden devam ederler.",
+      "waiting": "Matinee yeniden başlıyor. Bu sayfa geri geldiğinde devam eder.",
+      "slow": "Matinee iki dakika sonra hâlâ geri gelmedi. Günlüğüne bakın veya kurulduğu şekilde yeniden başlatın.",
+      "back": "Matinee yeniden başladı ve geri geldi.",
+      "failed": "Yeniden başlatılamadı: {{error}}"
     }
   },
   "language": {

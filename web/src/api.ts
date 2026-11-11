@@ -998,6 +998,24 @@ export type ItemDetail = Item & {
   feed?: PodcastFeed
   // Podcast episodes: their web page and type.
   episode?: { link?: string; episodeType: 'full' | 'trailer' | 'bonus' }
+  // Videos: the sound and subtitles to start with, for this person. Left out
+  // by servers from before it.
+  trackPick?: TrackPick
+}
+
+/**
+ * The tracks a video starts with, worked out by the server so every player
+ * starts the same way: what the person picked for the title (or its show)
+ * last time, else the best sound in their language, and subtitles as their
+ * choices say.
+ */
+export type TrackPick = {
+  // The audio stream's index, as in mediaInfo; left out until the file is analyzed.
+  audio?: number
+  // The subtitle track's id; "" for none.
+  subtitle: string
+  audioRemembered?: boolean
+  subtitleRemembered?: boolean
 }
 
 export type PodcastFeed = {
@@ -1070,6 +1088,8 @@ export type Health = {
     remote?: RemoteStatus
     scanIntervalMs: number
     watching?: string
+    // Whether an admin can restart the server from Settings.
+    canRestart?: boolean
     internet?: InternetStatus
   }
   system: {
@@ -1196,6 +1216,8 @@ export type LogRun = {
 
 export type AnalysisStatus = {
   mode: AnalysisMode
+  // Background jobs and scheduled rescans wait while something plays.
+  pauseWhilePlaying: boolean
   state: 'analyzing' | 'intros' | 'credits' | 'gapless' | 'thumbnails' | 'waiting' | 'slowDisk' | 'idle' | 'off'
   total: number
   done: number
@@ -1518,6 +1540,7 @@ export const api = {
   setIntroDetection: (intros: boolean) => request<AnalysisStatus>('PUT', '/api/v1/analysis', { intros }),
   setCreditsDetection: (credits: boolean) => request<AnalysisStatus>('PUT', '/api/v1/analysis', { credits }),
   setThumbnailMode: (thumbnails: ThumbnailMode) => request<AnalysisStatus>('PUT', '/api/v1/analysis', { thumbnails }),
+  setPauseWhilePlaying: (pauseWhilePlaying: boolean) => request<AnalysisStatus>('PUT', '/api/v1/analysis', { pauseWhilePlaying }),
   reanalyze: (id: number) => request<void>('POST', `/api/v1/items/${id}/analyze`),
   settings: () => request<Settings>('GET', '/api/v1/settings'),
   // tmdbKey replaces the server's TMDB key; "" goes back to the one it started with.
@@ -1535,6 +1558,9 @@ export const api = {
   setMyLanguage: (language: string) => request<{ language: string }>('PUT', '/api/v1/me/language', { language }),
   playback: () => request<PlaybackPrefs>('GET', '/api/v1/me/playback'),
   setPlayback: (p: Partial<PlaybackPrefs>) => request<PlaybackPrefs>('PUT', '/api/v1/me/playback', p),
+  // Remembers a sound or subtitle track picked while watching ("off" for no
+  // subtitles), for the next time the title (or its show) plays.
+  setTracks: (id: number, pick: { audio?: number; subtitle?: string }) => request<void>('PUT', `/api/v1/items/${id}/tracks`, pick),
   users: () => request<Account[]>('GET', '/api/v1/users'),
   // friend: false lets the account see every library again.
   setFriend: (id: number, friend: boolean, libraries?: number[]) =>
@@ -1781,6 +1807,7 @@ export const api = {
   saveUpdateSettings: (s: UpdateSettings) => request<Updates>('PUT', '/api/v1/admin/updates', s),
   checkUpdates: () => request<Updates>('POST', '/api/v1/admin/updates/check'),
   applyUpdate: () => request<Updates>('POST', '/api/v1/admin/updates/apply'),
+  restartServer: () => request<{ bootId: string }>('POST', '/api/v1/admin/restart'),
   backups: () => request<Backups>('GET', '/api/v1/admin/backups'),
   makeBackup: () => request<Backups>('POST', '/api/v1/admin/backups'),
   saveBackupSettings: (s: BackupSettings) => request<Backups>('PUT', '/api/v1/admin/backups/settings', s),

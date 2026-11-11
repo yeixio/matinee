@@ -449,7 +449,7 @@
     "mode": {
       "gentle": {
         "label": "Kevyt",
-        "hint": "Yksi tiedosto muutaman sekunnin välein, eikä yhtään, kun palvelin muuntaa jotain toistoa varten."
+        "hint": "Yksi tiedosto muutaman sekunnin välein."
       },
       "normal": {
         "label": "Normaali",
@@ -459,6 +459,10 @@
         "label": "Pois",
         "hint": "Tauolla, kunnes kytket sen takaisin päälle."
       }
+    },
+    "pause": {
+      "label": "Tauko toiston ajaksi",
+      "hint": "Analyysi, alkutunnusten ja lopputekstien tunnistus, aikajanan esikatselukuvat ja ajastetut täydet uudelleenskannaukset odottavat, kun joku katsoo tai kuuntelee, jotta toistolla on levyt ja verkko käytössään. Tauolla oleva soitin ei lasketa, ja itse käynnistämäsi skannaukset jatkuvat."
     },
     "intros": {
       "label": "Etsi sarjojen alkutunnarit",
@@ -1009,6 +1013,16 @@
         "binaryReadOnly": "Matinee ei voi korvata omaa tiedostoaan, koska sillä ei ole oikeutta kirjoittaa kansioonsa. Lataa uusi versio sen julkaisusivulta ja vaihda tiedosto käsin.",
         "source": "Tämä palvelin on käännetty lähdekoodista, joten sitä ei voi verrata mihinkään julkaisuun. Hae muutokset ja käännä uudelleen päivittääksesi."
       }
+    },
+    "restart": {
+      "button": "Käynnistä palvelin uudelleen",
+      "restarting": "Käynnistetään uudelleen…",
+      "confirm": "Käynnistetäänkö Matinee uudelleen nyt? Se palaa muutamassa sekunnissa.",
+      "confirmPlaying": "Käynnistetäänkö Matinee uudelleen nyt? Toistossa olevia striimejä: {{count}}. Ne pysähtyvät ja jatkavat samasta kohdasta, kun se palaa.",
+      "waiting": "Matinee käynnistyy uudelleen. Tämä sivu jatkaa, kun se palaa.",
+      "slow": "Matinee ei ole palannut kahdessa minuutissa. Katso sen loki tai käynnistä se uudelleen samalla tavalla kuin se asennettiin.",
+      "back": "Matinee käynnistyi uudelleen ja on taas päällä.",
+      "failed": "Uudelleenkäynnistys epäonnistui: {{error}}"
     }
   },
   "language": {

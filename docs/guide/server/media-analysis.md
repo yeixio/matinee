@@ -27,14 +27,22 @@ After that, it makes the small pictures players show above the seek bar while yo
 
 ## Gentle on your server
 
-The analysis reads one file at a time at the lowest priority, waits while someone's watching something being converted, and rests for a few minutes when files are slow to read.<!-- since: v0.2.4 --> When a network share stops answering altogether, as when the NAS is waking a sleeping drive or its mover is busy, the analysis, intro and credits detection, gapless listening and seek bar pictures all wait for the share instead of queuing more reads behind the stuck one, checking every 30 seconds; Server health shows them as resting until it answers.<!-- /since --> It looks at a file again only when the file changes, so after the first pass it has little to do.
+The analysis reads one file at a time at the lowest priority, waits while someone's watching something <!-- until: v0.2.4 -->being converted<!-- /until --><!-- since: v0.2.4 -->(see below)<!-- /since -->, and rests for a few minutes when files are slow to read.<!-- since: v0.2.4 --> When a network share stops answering altogether, as when the NAS is waking a sleeping drive or its mover is busy, the analysis, intro and credits detection, gapless listening and seek bar pictures all wait for the share instead of queuing more reads behind the stuck one, checking every 30 seconds; Server health shows them as resting until it answers.<!-- /since --> It looks at a file again only when the file changes, so after the first pass it has little to do.
 
 Admins can see its progress under **Settings → Libraries → Media analysis** and pick a speed:
 
 | Speed | |
 | --- | --- |
-| **Gentle** (default) | One file every few seconds, and none while the server is converting something for playback. |
+| **Gentle** (default) | One file every few seconds<!-- until: v0.2.4 -->, and none while the server is converting something for playback<!-- /until -->. |
 | **Normal** | Files back to back, still at the lowest priority. Good for the first pass over a new library. |
 | **Off** | Paused until you turn it back on. |
 
 On a big library the first pass on Gentle takes a while; switch to Normal to hurry it along. Everything works in the meantime, and titles get their badges as they're reached.
+
+<!-- since: v0.2.4 -->
+## Pause while something plays
+
+**Pause while something plays**, on by default, has the analysis, intro and credits detection, gapless listening, seek bar pictures and the scheduled [full rescans](/docs/server/new-files/#full-rescans) wait while anyone is watching or listening, whether the server converts the stream or plays the file as it is. Playback then has the disks and the network to itself, which matters most with big files on a network share. Work carries on when nothing is playing; a paused player doesn't count. Scans you start with **Scan**, and new files found by watching library folders, still go ahead.
+
+Turn it off under **Settings → Libraries → Media analysis** to have the background work keep going during playback, at the speed you picked above.
+<!-- /since -->

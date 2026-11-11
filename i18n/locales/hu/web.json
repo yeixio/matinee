@@ -449,7 +449,7 @@
     "mode": {
       "gentle": {
         "label": "Kíméletes",
-        "hint": "Néhány másodpercenként egy fájl, és egy sem, amíg a szerver valamit lejátszáshoz alakít át."
+        "hint": "Néhány másodpercenként egy fájl."
       },
       "normal": {
         "label": "Normál",
@@ -459,6 +459,10 @@
         "label": "Ki",
         "hint": "Szüneteltetve, amíg újra be nem kapcsolod."
       }
+    },
+    "pause": {
+      "label": "Szüneteltetés lejátszás közben",
+      "hint": "Az elemzés, a főcím- és stáblistafelismerés, a csúszka előnézeti képei és az ütemezett teljes újraolvasások várnak, amíg valaki néz vagy hallgat valamit, így a lejátszásé a lemezek és a hálózat. A szüneteltetett lejátszó nem számít, és az általad indított beolvasások futnak."
     },
     "intros": {
       "label": "Sorozatbevezetők keresése",
@@ -1009,6 +1013,16 @@
         "binaryReadOnly": "A Matinee nem tudja lecserélni a saját fájlját, mert nem írhat a mappájába. Töltsd le az új verziót a kiadási oldaláról, és cseréld le kézzel.",
         "source": "Ez a szerver forráskódból készült, így nincs kiadás, amihez hasonlítani lehetne. Frissítéshez töltsd le a változásokat, és fordítsd újra."
       }
+    },
+    "restart": {
+      "button": "Szerver újraindítása",
+      "restarting": "Újraindítás…",
+      "confirm": "Újraindítod most a Matinee-t? Pár másodperc múlva visszatér.",
+      "confirmPlaying": "Újraindítod most a Matinee-t? Most futó lejátszások: {{count}}. Megállnak, és ott folytatódnak, ahol voltak, amint visszatér.",
+      "waiting": "A Matinee újraindul. Ez az oldal folytatódik, amint visszatér.",
+      "slow": "A Matinee két perc után sem tért vissza. Nézd meg a naplóját, vagy indítsd el újra úgy, ahogy telepítve lett.",
+      "back": "A Matinee újraindult, és újra elérhető.",
+      "failed": "Nem sikerült újraindítani: {{error}}"
     }
   },
   "language": {

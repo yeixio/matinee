@@ -453,7 +453,7 @@
     "mode": {
       "gentle": {
         "label": "Suave",
-        "hint": "Um arquivo a cada poucos segundos, e nenhum enquanto o servidor converte algo para reprodução."
+        "hint": "Um arquivo a cada poucos segundos."
       },
       "normal": {
         "label": "Normal",
@@ -463,6 +463,10 @@
         "label": "Desativada",
         "hint": "Pausada até você ativar de novo."
       }
+    },
+    "pause": {
+      "label": "Pausar enquanto algo toca",
+      "hint": "A análise, a detecção de aberturas e créditos, as prévias da barra e os reescaneamentos completos agendados esperam enquanto alguém assiste ou ouve algo, para a reprodução ter os discos e a rede só para ela. Um player pausado não conta, e escaneamentos que você inicia continuam."
     },
     "intros": {
       "label": "Encontrar aberturas de séries",
@@ -1013,6 +1017,16 @@
         "binaryReadOnly": "O Matinee não consegue substituir o próprio arquivo, porque não tem permissão para gravar na pasta dele. Baixe a nova versão na página do lançamento e substitua à mão.",
         "source": "Este servidor foi compilado a partir do código-fonte, então não há lançamento para comparar. Baixe as mudanças e compile de novo para atualizar."
       }
+    },
+    "restart": {
+      "button": "Reiniciar servidor",
+      "restarting": "Reiniciando…",
+      "confirm": "Reiniciar o Matinee agora? Ele volta em alguns segundos.",
+      "confirmPlaying": "Reiniciar o Matinee agora? Reproduções em andamento: {{count}}. Elas pausam e continuam de onde pararam quando ele voltar.",
+      "waiting": "O Matinee está reiniciando. Esta página continua quando ele voltar.",
+      "slow": "O Matinee não voltou depois de dois minutos. Veja o log dele ou inicie-o de novo do jeito que foi instalado.",
+      "back": "O Matinee reiniciou e está de volta.",
+      "failed": "Não foi possível reiniciar: {{error}}"
     }
   },
   "language": {

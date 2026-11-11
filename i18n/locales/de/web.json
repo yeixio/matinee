@@ -449,7 +449,7 @@
     "mode": {
       "gentle": {
         "label": "Behutsam",
-        "hint": "Alle paar Sekunden eine Datei, und keine, während der Server etwas für die Wiedergabe umwandelt."
+        "hint": "Eine Datei alle paar Sekunden."
       },
       "normal": {
         "label": "Normal",
@@ -459,6 +459,10 @@
         "label": "Aus",
         "hint": "Pausiert, bis du es wieder einschaltest."
       }
+    },
+    "pause": {
+      "label": "Pausieren, während etwas läuft",
+      "hint": "Analyse, Intro- und Abspannerkennung, Vorschaubilder für die Suchleiste und geplante vollständige Scans warten, solange jemand etwas schaut oder hört, damit die Wiedergabe Festplatten und Netzwerk für sich hat. Ein pausierter Player zählt nicht, und Scans, die du selbst startest, laufen weiter."
     },
     "intros": {
       "label": "TV-Intros finden",
@@ -1009,6 +1013,16 @@
         "binaryReadOnly": "Matinee kann seine eigene Datei nicht ersetzen, weil es nicht in seinen Ordner schreiben darf. Lade die neue Version von ihrer Release-Seite herunter und ersetze sie von Hand.",
         "source": "Dieser Server wurde aus dem Quellcode gebaut, daher gibt es kein Release zum Vergleichen. Hol dir den neuen Stand und baue erneut, um zu aktualisieren."
       }
+    },
+    "restart": {
+      "button": "Server neu starten",
+      "restarting": "Startet neu…",
+      "confirm": "Matinee jetzt neu starten? In ein paar Sekunden ist es wieder da.",
+      "confirmPlaying": "Matinee jetzt neu starten? Laufende Streams: {{count}}. Sie halten an und machen dort weiter, wo sie waren, sobald Matinee wieder da ist.",
+      "waiting": "Matinee startet neu. Diese Seite macht weiter, sobald es wieder da ist.",
+      "slow": "Matinee ist nach zwei Minuten noch nicht wieder da. Sieh ins Protokoll oder starte es so, wie es installiert wurde.",
+      "back": "Matinee wurde neu gestartet und ist wieder da.",
+      "failed": "Neustart fehlgeschlagen: {{error}}"
     }
   },
   "language": {

@@ -190,7 +190,7 @@ func (s *Server) boxOfficeActivity(ctx context.Context) (arr.BoxOfficeActivity, 
 			continue
 		}
 		// Both of Box Office's APIs answer with everything: one is enough.
-		a, err := cached(&s.arrCache, "boxoffice-activity:"+s.boxOffices.id(app), comingSoonTTL, func() (arr.BoxOfficeActivity, error) {
+		a, err := cached(&s.arrCache, "boxoffice-activity:"+s.boxOffices.id(app), comingSoonTTL, func(ctx context.Context) (arr.BoxOfficeActivity, error) {
 			callCtx, cancel := context.WithTimeout(ctx, 10*time.Second)
 			defer cancel()
 			return cl.BoxOfficeActivity(callCtx)
@@ -394,8 +394,8 @@ func (s *Server) getItemEditions(w http.ResponseWriter, r *http.Request) {
 	if !ok {
 		return
 	}
-	e, err := cached(&s.arrCache, "boxoffice-editions:"+strconv.Itoa(m.title.TMDBID), 10*time.Minute, func() (arr.BoxOfficeEditions, error) {
-		return m.client.BoxOfficeEditions(r.Context(), m.title.TMDBID)
+	e, err := cached(&s.arrCache, "boxoffice-editions:"+strconv.Itoa(m.title.TMDBID), 10*time.Minute, func(ctx context.Context) (arr.BoxOfficeEditions, error) {
+		return m.client.BoxOfficeEditions(ctx, m.title.TMDBID)
 	})
 	if err != nil {
 		s.arrError(w, r, m.app, err)
