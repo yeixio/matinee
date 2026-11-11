@@ -1687,7 +1687,8 @@ func (s *Server) startHLS(w http.ResponseWriter, r *http.Request) {
 	}
 	// audio picks one of the file's audio streams (its index among them, as
 	// in the item's mediaInfo), for another language or a commentary.
-	audio := 0
+	// Without it, the stream plays the track the item's trackPick names.
+	var audio int
 	if a := r.URL.Query().Get("audio"); a != "" {
 		n, err := strconv.Atoi(a)
 		if mi, _ := s.mediaInfo(r, it); err != nil || n < 0 || (mi != nil && n >= len(mi.Audio)) {
@@ -1695,6 +1696,9 @@ func (s *Server) startHLS(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		audio = n
+	} else {
+		mi, _ := s.mediaInfo(r, it)
+		audio = s.startAudio(r, it, mi)
 	}
 	// quality is auto (adaptive), original, or one quality step's id.
 	steps, quality, err := s.hlsSteps(r, it, r.URL.Query().Get("quality"))
