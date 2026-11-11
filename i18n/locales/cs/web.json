@@ -701,6 +701,7 @@
       "title": "Knihovny",
       "none": "Zatím žádné knihovny.",
       "scan": "Prohledat",
+      "stopScan": "Zastavit prohledávání",
       "findArtwork": "Najít obrázky",
       "findingArtwork": "Hledáme chybějící obaly v knihovně {{name}}. Objeví se, jakmile se najdou.",
       "remove": "Odebrat {{name}}",
@@ -1327,7 +1328,14 @@
       "title": "Úlohy na pozadí",
       "scan": "Prohledání: {{library}}",
       "scanning": "Prohledává se {{time}}",
+      "why": {
+        "schedule": "Plánované úplné prohledání",
+        "watcher": "Nové nebo změněné soubory",
+        "manual": "Spuštěno tlačítkem Prohledat",
+        "server": "Spuštěno serverem"
+      },
       "lastScan": "{{time}}, trvalo {{took}}",
+      "stopped": "Zastaveno {{time}}, po {{took}}",
       "scanCounts": "přidáno {{added}}, aktualizováno {{updated}}, odebráno {{removed}}, nepřehratelné {{failed}}",
       "scanFailed": "Selhalo: {{error}}",
       "notScanned": "Od spuštění serveru neprohledáno",

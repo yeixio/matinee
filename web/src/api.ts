@@ -512,6 +512,8 @@ export type Library = {
   // only the files.
   metadataMode?: MetadataMode
   scanning: boolean
+  // What started the running scan.
+  scanReason?: ScanReason
   // Empty until the server has set up watching, just after it starts.
   watch: FolderWatch[]
 }
@@ -1050,7 +1052,11 @@ export type HealthProblem = {
 export type LogAttr = { key: string; value: string }
 export type LogLine = { seq: number; time: number; level: 'debug' | 'info' | 'warn' | 'error'; message: string; attrs?: LogAttr[] }
 export type LogLevel = LogLine['level']
-export type ScanReport = { started: number; tookMs: number; added: number; updated: number; removed: number; failed: number; unplayable: number; error?: string }
+// What started a scan: the periodic full rescan, files that changed in a
+// watched folder, an admin pressing Scan, or the server itself (a new
+// library, a new TMDB key).
+export type ScanReason = 'schedule' | 'watcher' | 'manual' | 'server'
+export type ScanReport = { started: number; tookMs: number; added: number; updated: number; removed: number; failed: number; unplayable: number; error?: string; reason?: ScanReason; stopped?: boolean }
 export type Health = {
   server: {
     name: string
@@ -1156,7 +1162,7 @@ export type Health = {
     showTitle?: string
   }[]
   jobs: {
-    scans: { libraryId: number; name: string; kind: string; scanning: boolean; since?: number; last?: ScanReport }[]
+    scans: { libraryId: number; name: string; kind: string; scanning: boolean; since?: number; reason?: ScanReason; last?: ScanReport }[]
     analysis?: AnalysisStatus
     downloads: Record<string, number>
     importing?: boolean
@@ -1450,6 +1456,8 @@ export const api = {
     request<Library>('POST', '/api/v1/libraries', { name, kind, paths }),
   deleteLibrary: (id: number) => request<void>('DELETE', `/api/v1/libraries/${id}`),
   scanLibrary: (id: number) => request<void>('POST', `/api/v1/libraries/${id}/scan`),
+  // Stops a library's running scan, whatever started it; what it found stays.
+  stopScan: (id: number) => request<void>('DELETE', `/api/v1/libraries/${id}/scan`),
   // Looks again in the folders and online for a music or audiobook library's missing covers.
   findArtwork: (id: number) => request<{ lookingUp: number }>('POST', `/api/v1/libraries/${id}/artwork`),
   libraryItems: (id: number, filter: ItemFilter = {}) => {

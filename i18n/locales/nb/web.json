@@ -693,6 +693,7 @@
       "title": "Biblioteker",
       "none": "Ingen biblioteker ennå.",
       "scan": "Skann",
+      "stopScan": "Stopp skanning",
       "findArtwork": "Finn bilder",
       "findingArtwork": "Leter etter manglende omslag i {{name}}. De vises etter hvert som de blir funnet.",
       "remove": "Fjern {{name}}",
@@ -1307,7 +1308,14 @@
       "title": "Bakgrunnsjobber",
       "scan": "Skann {{library}}",
       "scanning": "Skanner i {{time}}",
+      "why": {
+        "schedule": "Planlagt fullstendig nyskanning",
+        "watcher": "Nye eller endrede filer",
+        "manual": "Startet med Skann",
+        "server": "Startet av serveren"
+      },
       "lastScan": "{{time}}, tok {{took}}",
+      "stopped": "Stoppet {{time}}, etter {{took}}",
       "scanCounts": "{{added}} lagt til, {{updated}} oppdatert, {{removed}} fjernet, {{failed}} kan ikke spilles",
       "scanFailed": "Mislyktes: {{error}}",
       "notScanned": "Ikke skannet siden serveren startet",

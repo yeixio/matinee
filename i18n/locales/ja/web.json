@@ -689,6 +689,7 @@
       "title": "ライブラリ",
       "none": "まだライブラリはありません。",
       "scan": "スキャン",
+      "stopScan": "スキャンを停止",
       "findArtwork": "画像を探す",
       "findingArtwork": "{{name}} で足りないカバーを探しています。見つかりしだい表示されます。",
       "remove": "{{name}}を削除",
@@ -1297,7 +1298,14 @@
       "title": "バックグラウンドジョブ",
       "scan": "{{library}}のスキャン",
       "scanning": "スキャン中（{{time}}経過）",
+      "why": {
+        "schedule": "予定されたフルスキャン",
+        "watcher": "新規または変更されたファイル",
+        "manual": "スキャンボタンで開始",
+        "server": "サーバーが開始"
+      },
       "lastScan": "{{time}}、所要 {{took}}",
+      "stopped": "{{time}}に停止（{{took}}後）",
       "scanCounts": "追加 {{added}}、更新 {{updated}}、削除 {{removed}}、再生不可 {{failed}}",
       "scanFailed": "失敗: {{error}}",
       "notScanned": "サーバーの起動以来スキャンしていません",

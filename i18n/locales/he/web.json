@@ -697,6 +697,7 @@
       "title": "ספריות",
       "none": "עוד אין ספריות.",
       "scan": "סריקה",
+      "stopScan": "עצירת הסריקה",
       "findArtwork": "חיפוש תמונות",
       "findingArtwork": "מחפשים עטיפות חסרות ב-{{name}}. הן יופיעו ברגע שיימצאו.",
       "remove": "הסרת {{name}}",
@@ -1317,7 +1318,14 @@
       "title": "משימות ברקע",
       "scan": "סריקת {{library}}",
       "scanning": "סורק כבר {{time}}",
+      "why": {
+        "schedule": "סריקה מלאה מתוזמנת",
+        "watcher": "קבצים חדשים או שהשתנו",
+        "manual": "הופעלה בלחצן סריקה",
+        "server": "הופעלה על ידי השרת"
+      },
       "lastScan": "{{time}}, נמשכה {{took}}",
+      "stopped": "נעצרה {{time}}, אחרי {{took}}",
       "scanCounts": "נוספו {{added}}, עודכנו {{updated}}, הוסרו {{removed}}, לא ניתנים לניגון {{failed}}",
       "scanFailed": "נכשלה: {{error}}",
       "notScanned": "לא נסרקה מאז שהשרת הופעל",

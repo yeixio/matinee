@@ -693,6 +693,7 @@
       "title": "Bibliotheken",
       "none": "Nog geen bibliotheken.",
       "scan": "Scannen",
+      "stopScan": "Scan stoppen",
       "findArtwork": "Afbeeldingen zoeken",
       "findingArtwork": "Ontbrekende hoezen in {{name}} worden gezocht. Ze verschijnen zodra ze gevonden zijn.",
       "remove": "{{name}} verwijderen",
@@ -1307,7 +1308,14 @@
       "title": "Achtergrondtaken",
       "scan": "{{library}} scannen",
       "scanning": "Al {{time}} aan het scannen",
+      "why": {
+        "schedule": "Geplande volledige herscan",
+        "watcher": "Nieuwe of gewijzigde bestanden",
+        "manual": "Gestart met Scannen",
+        "server": "Gestart door de server"
+      },
       "lastScan": "{{time}}, duurde {{took}}",
+      "stopped": "Gestopt {{time}}, na {{took}}",
       "scanCounts": "{{added}} toegevoegd, {{updated}} bijgewerkt, {{removed}} verwijderd, {{failed}} niet afspeelbaar",
       "scanFailed": "Mislukt: {{error}}",
       "notScanned": "Niet gescand sinds de server is gestart",

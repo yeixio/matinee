@@ -693,6 +693,7 @@
       "title": "Kütüphaneler",
       "none": "Henüz kütüphane yok.",
       "scan": "Tara",
+      "stopScan": "Taramayı durdur",
       "findArtwork": "Görselleri bul",
       "findingArtwork": "{{name}} içindeki eksik kapaklar aranıyor. Bulundukça görünecekler.",
       "remove": "{{name}} kaldır",
@@ -1307,7 +1308,14 @@
       "title": "Arka plan işleri",
       "scan": "{{library}} taraması",
       "scanning": "{{time}} süredir taranıyor",
+      "why": {
+        "schedule": "Planlı tam yeniden tarama",
+        "watcher": "Yeni veya değişen dosyalar",
+        "manual": "Tara ile başlatıldı",
+        "server": "Sunucu tarafından başlatıldı"
+      },
       "lastScan": "{{time}}, {{took}} sürdü",
+      "stopped": "{{time}} durduruldu, {{took}} sonra",
       "scanCounts": "{{added}} eklendi, {{updated}} güncellendi, {{removed}} kaldırıldı, {{failed}} oynatılamıyor",
       "scanFailed": "Başarısız: {{error}}",
       "notScanned": "Sunucu başladığından beri taranmadı",

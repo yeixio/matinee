@@ -693,6 +693,7 @@
       "title": "Bibliotek",
       "none": "Inga bibliotek än.",
       "scan": "Skanna",
+      "stopScan": "Stoppa sökning",
       "findArtwork": "Hitta bilder",
       "findingArtwork": "Letar efter omslag som saknas i {{name}}. De visas allteftersom de hittas.",
       "remove": "Ta bort {{name}}",
@@ -1307,7 +1308,14 @@
       "title": "Bakgrundsjobb",
       "scan": "Skanna {{library}}",
       "scanning": "Skannar sedan {{time}}",
+      "why": {
+        "schedule": "Schemalagd fullständig omsökning",
+        "watcher": "Nya eller ändrade filer",
+        "manual": "Startad med Sök igenom",
+        "server": "Startad av servern"
+      },
       "lastScan": "{{time}}, tog {{took}}",
+      "stopped": "Stoppad {{time}}, efter {{took}}",
       "scanCounts": "{{added}} tillagda, {{updated}} uppdaterade, {{removed}} borttagna, {{failed}} ospelbara",
       "scanFailed": "Misslyckades: {{error}}",
       "notScanned": "Inte skannad sedan servern startade",

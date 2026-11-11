@@ -48,6 +48,16 @@ Each rescan reads every folder and file of every library, so on a big library on
 Until you pick one, the server uses `MATINEE_SCAN_INTERVAL`, which is every 6 hours unless it's set (every 15 minutes before v0.2.4).
 <!-- /since -->
 
+<!-- since: v0.2.4 -->
+## Stopping a scan
+
+While a library is being scanned, whatever started it, **Settings → Libraries** shows **Stop scan** in place of **Scan** next to it, and so does its row under **Background jobs** in [Server health](/docs/server/server-health/#background-jobs). Hover over the button to see what started the scan.
+
+Stopping keeps everything the scan already added or updated, and removes nothing: files it didn't get to are looked at by the next scan. Stopping a scheduled full rescan stops it for that library only; the rest are still rescanned, and the schedule carries on. To stop full rescans altogether, pick **Never** under **Full rescans**.
+
+If a network share stopped answering, the scan stops as soon as the share answers or the computer gives up on it, which can take a minute or two.
+<!-- /since -->
+
 ## Big libraries on slow shares
 
 `MATINEE_WATCH_POLL_INTERVAL` sets how often network shares are checked (default `30s`). A big library on a slow share is checked less often by itself, so the share stays responsive.

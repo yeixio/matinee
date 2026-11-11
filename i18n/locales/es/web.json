@@ -697,6 +697,7 @@
       "title": "Bibliotecas",
       "none": "Aún no hay bibliotecas.",
       "scan": "Escanear",
+      "stopScan": "Detener escaneo",
       "findArtwork": "Buscar imágenes",
       "findingArtwork": "Buscando las portadas que faltan en {{name}}. Aparecerán a medida que se encuentren.",
       "remove": "Quitar {{name}}",
@@ -1317,7 +1318,14 @@
       "title": "Tareas en segundo plano",
       "scan": "Escanear {{library}}",
       "scanning": "Escaneando desde hace {{time}}",
+      "why": {
+        "schedule": "Reescaneo completo programado",
+        "watcher": "Archivos nuevos o cambiados",
+        "manual": "Iniciado con Escanear",
+        "server": "Iniciado por el servidor"
+      },
       "lastScan": "{{time}}, tardó {{took}}",
+      "stopped": "Detenido {{time}}, tras {{took}}",
       "scanCounts": "{{added}} añadidos, {{updated}} actualizados, {{removed}} quitados, {{failed}} no reproducibles",
       "scanFailed": "Falló: {{error}}",
       "notScanned": "Sin escanear desde que arrancó el servidor",

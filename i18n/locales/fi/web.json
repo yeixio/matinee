@@ -693,6 +693,7 @@
       "title": "Kirjastot",
       "none": "Ei vielä kirjastoja.",
       "scan": "Skannaa",
+      "stopScan": "Pysäytä skannaus",
       "findArtwork": "Etsi kuvat",
       "findingArtwork": "Etsitään puuttuvia kansikuvia kirjastosta {{name}}. Ne näkyvät sitä mukaa kuin niitä löytyy.",
       "remove": "Poista {{name}}",
@@ -1307,7 +1308,14 @@
       "title": "Taustatehtävät",
       "scan": "Kirjaston {{library}} haku",
       "scanning": "Haku käynnissä {{time}}",
+      "why": {
+        "schedule": "Ajastettu täysi uudelleenskannaus",
+        "watcher": "Uudet tai muuttuneet tiedostot",
+        "manual": "Aloitettu Skannaa-painikkeella",
+        "server": "Palvelimen aloittama"
+      },
       "lastScan": "{{time}}, kesti {{took}}",
+      "stopped": "Pysäytetty {{time}}, kesti {{took}}",
       "scanCounts": "{{added}} lisätty, {{updated}} päivitetty, {{removed}} poistettu, {{failed}} ei toistettavissa",
       "scanFailed": "Epäonnistui: {{error}}",
       "notScanned": "Ei haettu palvelimen käynnistyksen jälkeen",
