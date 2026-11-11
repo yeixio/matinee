@@ -415,8 +415,19 @@
         "hint": "Nowe pliki pojawią się przy następnym pełnym skanowaniu lub gdy naciśniesz Skanuj."
       }
     },
-    "rescan": "Każda biblioteka jest też w całości skanowana co {{every}}, co wychwytuje resztę, np. plik podmieniony na udziale.",
-    "rescanOff": "Pełne skanowanie jest wyłączone na tym serwerze (MATINEE_SCAN_INTERVAL=0)."
+    "rescanLabel": "Pełne ponowne skanowanie",
+    "rescanEvery": "Co {{every}}",
+    "rescanNever": "Nigdy",
+    "rescanHint": "Pełne ponowne skanowanie odczytuje każdy folder biblioteki od nowa i wychwytuje to, czego nie wykryje obserwowanie nowych plików, np. plik podmieniony w miejscu na udziale. Przy dużej bibliotece na udziale sieciowym dłuższy odstęp pozwala udziałowi działać płynnie.",
+    "rescanNext": "Następne: {{time}}"
+  },
+  "timeZone": {
+    "title": "Strefa czasowa",
+    "intro": "Zegar serwera: godziny w dzienniku, początek świątecznych rzędów na stronie głównej i wszystko, co zależy od pory dnia.",
+    "system": "Strefa tego komputera ({{zone}})",
+    "systemUnknown": "Strefa tego komputera",
+    "restart": "Matinee przełączy się na {{zone}} przy następnym uruchomieniu.",
+    "restartSystem": "Matinee wróci do strefy czasowej tego komputera przy następnym uruchomieniu."
   },
   "analysis": {
     "title": "Analiza multimediów",

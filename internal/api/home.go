@@ -12,12 +12,14 @@ import (
 	"strconv"
 	"strings"
 	"sync"
+	"time"
 
 	"github.com/yeixio/matinee/internal/hwaccel"
 	"github.com/yeixio/matinee/internal/metadata"
 	"github.com/yeixio/matinee/internal/remote"
 	"github.com/yeixio/matinee/internal/scan"
 	"github.com/yeixio/matinee/internal/stream"
+	"github.com/yeixio/matinee/internal/tz"
 )
 
 // Devices on the home network can browse and play without signing in,
@@ -209,12 +211,22 @@ type serverSettings struct {
 	// network shares), poll (the quick check everywhere) or off. See
 	// internal/scan/watch.go.
 	LibraryWatch scan.WatchMode `json:"libraryWatch"`
-	// WatchPollSeconds is how often polled folders are checked, and
-	// ScanIntervalSeconds how often every library is rescanned in full (0
-	// for never). Both are set on the server's command line and can't be
-	// changed here.
-	WatchPollSeconds    int `json:"watchPollSeconds"`
-	ScanIntervalSeconds int `json:"scanIntervalSeconds"`
+	// WatchPollSeconds is how often polled folders are checked, set on the
+	// server's command line.
+	WatchPollSeconds int `json:"watchPollSeconds"`
+	// ScanIntervalSeconds is how often every library is rescanned in full,
+	// 0 for never; MATINEE_SCAN_INTERVAL until an admin changes it.
+	// NextScan is when the next one starts (milliseconds), absent when
+	// they're off.
+	ScanIntervalSeconds int   `json:"scanIntervalSeconds"`
+	NextScan            int64 `json:"nextScan,omitempty"`
+	// TimeZone is the time zone an admin picked for the server, such as
+	// America/Juneau, or "" for the machine's own, which SystemTimeZone
+	// names when it's known. The server switches to it when it next starts;
+	// TimeZoneInUse is the one it runs in now ("" when not known).
+	TimeZone       string `json:"timeZone"`
+	SystemTimeZone string `json:"systemTimeZone,omitempty"`
+	TimeZoneInUse  string `json:"timeZoneInUse,omitempty"`
 	// TMDB says where the TMDB key in use comes from. An admin changes it
 	// with tmdbKey (see tmdbkey.go); the key itself is never sent back.
 	TMDB tmdbStatus `json:"tmdb"`
@@ -282,12 +294,32 @@ func (s *Server) settings(ctx context.Context) (serverSettings, error) {
 		st := hw.Status()
 		set.Hardware, set.HardwareAcceleration = &st, st.Preference
 	}
-	set.LibraryWatch, set.ScanIntervalSeconds = scan.WatchOff, int(s.ScanInterval.Seconds())
+	set.LibraryWatch, set.ScanIntervalSeconds = scan.WatchOff, int(s.scanInterval(ctx).Seconds())
+	if sch := s.Schedule; sch != nil {
+		if next := sch.Next(); !next.IsZero() {
+			set.NextScan = next.UnixMilli()
+		}
+	}
+	zone, zerr := s.Store.Setting(ctx, tz.Setting)
+	if zerr != nil {
+		return set, zerr
+	}
+	set.TimeZone, set.SystemTimeZone, set.TimeZoneInUse = zone, tz.System(), tz.InUse()
 	if w := s.Watcher; w != nil && err == nil {
 		set.LibraryWatch, err = w.Mode(ctx)
 		set.WatchPollSeconds = int(w.PollInterval.Seconds())
 	}
 	return set, err
+}
+
+// scanInterval is how often every library is rescanned in full; 0 means
+// never.
+func (s *Server) scanInterval(ctx context.Context) time.Duration {
+	if s.Schedule == nil {
+		return 0
+	}
+	d, _ := s.Schedule.Interval(ctx)
+	return d
 }
 
 func (s *Server) getSettings(w http.ResponseWriter, r *http.Request) {
@@ -318,17 +350,21 @@ func (s *Server) putSettings(w http.ResponseWriter, r *http.Request) {
 		RemoteAccess         *bool     `json:"remoteAccess"`
 		RemoteForwardedPort  *int      `json:"remoteForwardedPort"`
 		LibraryWatch         *string   `json:"libraryWatch"`
+		ScanIntervalSeconds  *int      `json:"scanIntervalSeconds"`
+		TimeZone             *string   `json:"timeZone"`
 		// TMDBKey replaces the TMDB key; "" goes back to the environment's.
 		TMDBKey *string `json:"tmdbKey"`
 		// Read-only; accepted so a client can send back what it got.
-		Hardware            json.RawMessage `json:"hardware"`
-		ToneMapTools        json.RawMessage `json:"toneMapTools"`
-		ThemeProblems       json.RawMessage `json:"themeProblems"`
-		Remote              json.RawMessage `json:"remote"`
-		PublicURL           json.RawMessage `json:"publicURL"`
-		WatchPollSeconds    json.RawMessage `json:"watchPollSeconds"`
-		ScanIntervalSeconds json.RawMessage `json:"scanIntervalSeconds"`
-		TMDB                json.RawMessage `json:"tmdb"`
+		Hardware         json.RawMessage `json:"hardware"`
+		ToneMapTools     json.RawMessage `json:"toneMapTools"`
+		ThemeProblems    json.RawMessage `json:"themeProblems"`
+		Remote           json.RawMessage `json:"remote"`
+		PublicURL        json.RawMessage `json:"publicURL"`
+		WatchPollSeconds json.RawMessage `json:"watchPollSeconds"`
+		NextScan         json.RawMessage `json:"nextScan"`
+		SystemTimeZone   json.RawMessage `json:"systemTimeZone"`
+		TimeZoneInUse    json.RawMessage `json:"timeZoneInUse"`
+		TMDB             json.RawMessage `json:"tmdb"`
 	}
 	if err := readJSON(r, &in); err != nil {
 		writeError(w, http.StatusBadRequest, "bad request")
@@ -409,6 +445,31 @@ func (s *Server) putSettings(w http.ResponseWriter, r *http.Request) {
 			}
 		case mode != scan.WatchOff:
 			writeError(w, http.StatusBadRequest, "this server doesn't watch library folders")
+			return
+		}
+	}
+	if n := in.ScanIntervalSeconds; n != nil && time.Duration(*n)*time.Second != s.scanInterval(ctx) {
+		if s.Schedule == nil {
+			writeError(w, http.StatusBadRequest, "this server doesn't rescan its libraries")
+			return
+		}
+		d := time.Duration(*n) * time.Second
+		if !scan.ValidScanInterval(d) {
+			writeError(w, http.StatusBadRequest, "scanIntervalSeconds must be 0 or from 900 to 604800")
+			return
+		}
+		if err := s.Schedule.SetInterval(ctx, d); err != nil {
+			s.serverError(w, err)
+			return
+		}
+	}
+	if z := in.TimeZone; z != nil {
+		if !tz.Valid(*z) {
+			writeError(w, http.StatusBadRequest, "timeZone must be a time zone such as America/Juneau, or empty")
+			return
+		}
+		if err := s.Store.SetSetting(ctx, tz.Setting, *z); err != nil {
+			s.serverError(w, err)
 			return
 		}
 	}

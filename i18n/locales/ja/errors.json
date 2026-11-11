@@ -275,5 +275,8 @@
   "no_such_extra": "その特典映像はありません",
   "only_an_admin_can_add_a_station_on_the_home_network": "ホームネットワーク上の局を追加できるのは管理者だけです",
   "startms_give_a_number_of_milliseconds": "startMs: ミリ秒の数値を指定してください",
-  "say_which_language_it_should_be_in": "本来の言語を指定してください"
+  "say_which_language_it_should_be_in": "本来の言語を指定してください",
+  "this_server_doesnt_rescan_its_libraries": "このサーバーはライブラリを再スキャンしません",
+  "scanintervalseconds_must_be_0_or_from_900_to_604800": "scanIntervalSeconds は 0 か 900 から 604800 の間である必要があります",
+  "timezone_must_be_a_time_zone_such_as_america_juneau_or_empty": "timeZone は America/Juneau のようなタイムゾーンか、空である必要があります"
 }

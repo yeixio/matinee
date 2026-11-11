@@ -409,8 +409,19 @@
         "hint": "New files show up at the next full rescan, or when you press Scan."
       }
     },
-    "rescan": "Every library is also rescanned in full every {{every}}, which catches anything else, like a file replaced in place on a share.",
-    "rescanOff": "Full rescans are turned off on this server (MATINEE_SCAN_INTERVAL=0)."
+    "rescanLabel": "Full rescans",
+    "rescanEvery": "Every {{every}}",
+    "rescanNever": "Never",
+    "rescanHint": "A full rescan reads every library folder again, which catches what watching for new files can't, like a file replaced in place on a share. On a big library on a network share, a longer interval keeps the share responsive.",
+    "rescanNext": "Next one: {{time}}"
+  },
+  "timeZone": {
+    "title": "Time zone",
+    "intro": "The server's clock: the times in its log, when Home's holiday rows start, and anything else that goes by the time of day.",
+    "system": "This computer's ({{zone}})",
+    "systemUnknown": "This computer's",
+    "restart": "Matinee switches to {{zone}} the next time it starts.",
+    "restartSystem": "Matinee switches back to this computer's time zone the next time it starts."
   },
   "analysis": {
     "title": "Media analysis",

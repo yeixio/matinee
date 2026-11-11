@@ -409,8 +409,19 @@
         "hint": "Nya filer dyker upp vid nästa fullständiga skanning, eller när du trycker på Skanna."
       }
     },
-    "rescan": "Varje bibliotek skannas också om helt var {{every}}, vilket fångar allt annat, som en fil som ersatts på en nätverksresurs.",
-    "rescanOff": "Fullständiga omskanningar är avstängda på den här servern (MATINEE_SCAN_INTERVAL=0)."
+    "rescanLabel": "Fullständiga omsökningar",
+    "rescanEvery": "Var {{every}}",
+    "rescanNever": "Aldrig",
+    "rescanHint": "En fullständig omsökning läser varje biblioteksmapp igen och fångar det som bevakningen av nya filer missar, som en fil som ersatts på plats på en delad mapp. För ett stort bibliotek på en nätverksresurs håller ett längre intervall resursen lättrörlig.",
+    "rescanNext": "Nästa: {{time}}"
+  },
+  "timeZone": {
+    "title": "Tidszon",
+    "intro": "Serverns klocka: tiderna i loggen, när helgraderna på Hem börjar och allt annat som går efter tid på dygnet.",
+    "system": "Den här datorns ({{zone}})",
+    "systemUnknown": "Den här datorns",
+    "restart": "Matinee byter till {{zone}} nästa gång den startar.",
+    "restartSystem": "Matinee går tillbaka till den här datorns tidszon nästa gång den startar."
   },
   "analysis": {
     "title": "Medieanalys",

@@ -409,8 +409,19 @@
         "hint": "Neue Dateien erscheinen beim nächsten vollständigen Scan oder wenn du auf „Scannen“ drückst."
       }
     },
-    "rescan": "Jede Mediathek wird außerdem alle {{every}} vollständig neu gescannt. Das erfasst alles andere, etwa eine Datei, die auf einer Freigabe ersetzt wurde.",
-    "rescanOff": "Vollständige Scans sind auf diesem Server ausgeschaltet (MATINEE_SCAN_INTERVAL=0)."
+    "rescanLabel": "Vollständige Scans",
+    "rescanEvery": "Alle {{every}}",
+    "rescanNever": "Nie",
+    "rescanHint": "Ein vollständiger Scan liest jeden Mediathek-Ordner erneut und erfasst, was das Beobachten neuer Dateien nicht kann, etwa eine Datei, die auf einer Freigabe ersetzt wurde. Bei einer großen Mediathek auf einer Netzwerkfreigabe hält ein längerer Abstand die Freigabe reaktionsschnell.",
+    "rescanNext": "Nächster: {{time}}"
+  },
+  "timeZone": {
+    "title": "Zeitzone",
+    "intro": "Die Uhr des Servers: die Zeiten in seinem Protokoll, wann die Feiertagsreihen auf der Startseite beginnen und alles andere, was sich nach der Tageszeit richtet.",
+    "system": "Die dieses Computers ({{zone}})",
+    "systemUnknown": "Die dieses Computers",
+    "restart": "Matinee wechselt beim nächsten Start zu {{zone}}.",
+    "restartSystem": "Matinee wechselt beim nächsten Start zurück zur Zeitzone dieses Computers."
   },
   "analysis": {
     "title": "Medienanalyse",

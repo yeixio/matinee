@@ -406,8 +406,19 @@
         "hint": "File baru muncul pada pemindaian penuh berikutnya, atau saat kamu menekan Pindai."
       }
     },
-    "rescan": "Setiap perpustakaan juga dipindai ulang penuh setiap {{every}}, yang menangkap hal lain, seperti file yang diganti di tempat pada folder jaringan.",
-    "rescanOff": "Pemindaian ulang penuh dimatikan di server ini (MATINEE_SCAN_INTERVAL=0)."
+    "rescanLabel": "Pindai ulang penuh",
+    "rescanEvery": "Setiap {{every}}",
+    "rescanNever": "Tidak pernah",
+    "rescanHint": "Pindai ulang penuh membaca ulang setiap folder pustaka dan menangkap yang tidak terlihat oleh pemantauan file baru, seperti file yang diganti di tempat pada folder berbagi. Untuk pustaka besar di folder berbagi jaringan, jeda yang lebih panjang menjaga folder berbagi tetap responsif.",
+    "rescanNext": "Berikutnya: {{time}}"
+  },
+  "timeZone": {
+    "title": "Zona waktu",
+    "intro": "Jam server: waktu di log-nya, kapan baris hari raya di Beranda dimulai, dan apa pun yang bergantung pada waktu.",
+    "system": "Milik komputer ini ({{zone}})",
+    "systemUnknown": "Milik komputer ini",
+    "restart": "Matinee beralih ke {{zone}} saat berikutnya dimulai.",
+    "restartSystem": "Matinee kembali ke zona waktu komputer ini saat berikutnya dimulai."
   },
   "analysis": {
     "title": "Analisis media",

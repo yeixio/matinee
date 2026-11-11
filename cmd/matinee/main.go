@@ -55,6 +55,7 @@ import (
 	"github.com/yeixio/matinee/internal/theme"
 	"github.com/yeixio/matinee/internal/thumbs"
 	"github.com/yeixio/matinee/internal/together"
+	"github.com/yeixio/matinee/internal/tz"
 	"github.com/yeixio/matinee/internal/version"
 	"github.com/yeixio/matinee/web"
 )
@@ -138,6 +139,10 @@ func run() error {
 
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
 	defer stop()
+	// The time zone an admin picked goes before anything reads the clock.
+	if err := tz.Load(ctx, db); err != nil {
+		return err
+	}
 	// Windows has no SIGTERM, so the Windows tray app (cmd/matinee-tray)
 	// stops the server by closing its stdin. That also stops it if the tray
 	// app dies.
@@ -267,6 +272,9 @@ func run() error {
 	watcher := scan.NewWatcher(scanner, log)
 	watcher.PollInterval = cfg.WatchPoll
 	go watcher.Run(ctx)
+	// And every library is rescanned in full every so often, as often as
+	// the admin picked (MATINEE_SCAN_INTERVAL until they do).
+	schedule := &scan.Schedule{Scanner: scanner, Default: cfg.ScanInterval}
 
 	downloads := download.NewManager(db, cfg.FFmpegPath, cfg.DownloadDir(), log)
 
@@ -275,7 +283,7 @@ func run() error {
 		return err
 	}
 	apiServer := &api.Server{
-		Store: db, Scanner: scanner, Watcher: watcher, ScanInterval: cfg.ScanInterval, Transcoder: transcoder, HW: hw, Downloads: downloads, Analyzer: analyzer, Thumbs: thumbnails,
+		Store: db, Scanner: scanner, Watcher: watcher, Schedule: schedule, Transcoder: transcoder, HW: hw, Downloads: downloads, Analyzer: analyzer, Thumbs: thumbnails,
 		Art:       artwork.NewCache(cfg.ImageDir(), cfg.FFmpegPath),
 		Covers:    metadata.NewCovers(version.Version, mb, ol),
 		Subtitles: subtitle.NewConverter(cfg.FFmpegPath, cfg.SubtitleDir()).WithFFprobe(cfg.FFprobePath),
@@ -412,21 +420,7 @@ func run() error {
 		ReadHeaderTimeout: 10 * time.Second,
 	}
 
-	if cfg.ScanInterval > 0 {
-		go func() {
-			scanner.ScanAll(ctx)
-			t := time.NewTicker(cfg.ScanInterval)
-			defer t.Stop()
-			for {
-				select {
-				case <-ctx.Done():
-					return
-				case <-t.C:
-					scanner.ScanAll(ctx)
-				}
-			}
-		}()
-	}
+	go schedule.Run(ctx)
 
 	if cfg.Discovery {
 		go func() {

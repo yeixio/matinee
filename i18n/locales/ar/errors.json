@@ -275,5 +275,8 @@
   "no_such_extra": "لا يوجد محتوى إضافي كهذا",
   "only_an_admin_can_add_a_station_on_the_home_network": "لا يمكن إلا للمسؤول إضافة محطة على الشبكة المنزلية",
   "startms_give_a_number_of_milliseconds": "startMs: أدخل عددًا من المللي ثانية",
-  "say_which_language_it_should_be_in": "اذكر اللغة التي يجب أن يكون بها"
+  "say_which_language_it_should_be_in": "اذكر اللغة التي يجب أن يكون بها",
+  "this_server_doesnt_rescan_its_libraries": "هذا الخادم لا يعيد فحص مكتباته",
+  "scanintervalseconds_must_be_0_or_from_900_to_604800": "يجب أن تكون scanIntervalSeconds صفرًا أو بين 900 و604800",
+  "timezone_must_be_a_time_zone_such_as_america_juneau_or_empty": "يجب أن تكون timeZone منطقة زمنية مثل America/Juneau، أو فارغة"
 }

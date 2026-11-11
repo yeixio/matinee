@@ -406,8 +406,19 @@
         "hint": "Fail baharu muncul pada imbasan penuh seterusnya, atau apabila anda menekan Imbas."
       }
     },
-    "rescan": "Setiap pustaka juga diimbas semula sepenuhnya setiap {{every}}, yang menangkap apa sahaja yang lain, seperti fail yang diganti di tempatnya pada perkongsian.",
-    "rescanOff": "Imbasan semula penuh dimatikan pada pelayan ini (MATINEE_SCAN_INTERVAL=0)."
+    "rescanLabel": "Imbas semula penuh",
+    "rescanEvery": "Setiap {{every}}",
+    "rescanNever": "Tidak pernah",
+    "rescanHint": "Imbas semula penuh membaca semula setiap folder pustaka dan menangkap apa yang tidak dapat dilihat oleh pemantauan fail baharu, seperti fail yang diganti di tempatnya pada perkongsian. Bagi pustaka besar pada perkongsian rangkaian, selang yang lebih panjang mengekalkan perkongsian responsif.",
+    "rescanNext": "Seterusnya: {{time}}"
+  },
+  "timeZone": {
+    "title": "Zon waktu",
+    "intro": "Jam pelayan: masa dalam lognya, bila baris hari perayaan di Laman Utama bermula, dan apa-apa lagi yang bergantung pada waktu.",
+    "system": "Milik komputer ini ({{zone}})",
+    "systemUnknown": "Milik komputer ini",
+    "restart": "Matinee bertukar ke {{zone}} apabila ia dimulakan seterusnya.",
+    "restartSystem": "Matinee kembali ke zon waktu komputer ini apabila ia dimulakan seterusnya."
   },
   "analysis": {
     "title": "Analisis media",

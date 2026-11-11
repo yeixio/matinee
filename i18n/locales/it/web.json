@@ -412,8 +412,19 @@
         "hint": "I nuovi file compaiono alla prossima scansione completa o quando premi Scansiona."
       }
     },
-    "rescan": "Ogni libreria viene anche riscansionata per intero ogni {{every}}, così da cogliere tutto il resto, come un file sostituito sul posto in una condivisione.",
-    "rescanOff": "Le scansioni complete sono disattivate su questo server (MATINEE_SCAN_INTERVAL=0)."
+    "rescanLabel": "Nuove scansioni complete",
+    "rescanEvery": "Ogni {{every}}",
+    "rescanNever": "Mai",
+    "rescanHint": "Una nuova scansione completa rilegge ogni cartella della libreria e coglie ciò che il controllo dei nuovi file non vede, come un file sostituito sul posto in una condivisione. Con una libreria grande su una condivisione di rete, un intervallo più lungo mantiene reattiva la condivisione.",
+    "rescanNext": "Prossima: {{time}}"
+  },
+  "timeZone": {
+    "title": "Fuso orario",
+    "intro": "L'orologio del server: gli orari del suo registro, quando iniziano le righe delle feste nella Home e tutto ciò che dipende dall'ora del giorno.",
+    "system": "Quello di questo computer ({{zone}})",
+    "systemUnknown": "Quello di questo computer",
+    "restart": "Matinee passerà a {{zone}} al prossimo avvio.",
+    "restartSystem": "Matinee tornerà al fuso orario di questo computer al prossimo avvio."
   },
   "analysis": {
     "title": "Analisi dei contenuti",

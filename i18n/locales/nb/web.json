@@ -409,8 +409,19 @@
         "hint": "Nye filer dukker opp ved neste fullstendige skanning, eller når du trykker Skann."
       }
     },
-    "rescan": "Hvert bibliotek skannes også helt på nytt hvert {{every}}, som fanger opp alt annet, som en fil som er erstattet på en nettverksressurs.",
-    "rescanOff": "Fullstendige skanninger er slått av på denne serveren (MATINEE_SCAN_INTERVAL=0)."
+    "rescanLabel": "Fullstendige nyskanninger",
+    "rescanEvery": "Hver {{every}}",
+    "rescanNever": "Aldri",
+    "rescanHint": "En fullstendig nyskanning leser hver biblioteksmappe på nytt og fanger opp det overvåkingen av nye filer ikke ser, som en fil som er byttet ut på stedet på en delt mappe. For et stort bibliotek på en nettverksdeling holder et lengre intervall delingen rask.",
+    "rescanNext": "Neste: {{time}}"
+  },
+  "timeZone": {
+    "title": "Tidssone",
+    "intro": "Serverens klokke: tidene i loggen, når høytidsradene på Hjem starter, og alt annet som går etter tid på døgnet.",
+    "system": "Denne datamaskinens ({{zone}})",
+    "systemUnknown": "Denne datamaskinens",
+    "restart": "Matinee bytter til {{zone}} neste gang den starter.",
+    "restartSystem": "Matinee går tilbake til denne datamaskinens tidssone neste gang den starter."
   },
   "analysis": {
     "title": "Medieanalyse",

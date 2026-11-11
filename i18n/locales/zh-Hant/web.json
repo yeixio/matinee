@@ -406,8 +406,19 @@
         "hint": "新檔案會在下次完整掃描時出現，或在你點按「掃描」時出現。"
       }
     },
-    "rescan": "每個媒體庫還會每 {{every}}完整重新掃描一次，以發現其他變化，比如共享上被原地替換的檔案。",
-    "rescanOff": "此伺服器已關閉完整重新掃描（MATINEE_SCAN_INTERVAL=0）。"
+    "rescanLabel": "完整重新掃描",
+    "rescanEvery": "每 {{every}}",
+    "rescanNever": "永不",
+    "rescanHint": "完整重新掃描會重新讀取每個媒體庫資料夾，找出監看新檔案時找不到的變更，例如共享上被原地替換的檔案。網路共享上的大型媒體庫，間隔長一點能讓共享保持順暢。",
+    "rescanNext": "下一次：{{time}}"
+  },
+  "timeZone": {
+    "title": "時區",
+    "intro": "伺服器的時鐘：記錄中的時間、首頁節日列何時開始，以及其他依一天中時間運作的一切。",
+    "system": "這台電腦的時區（{{zone}}）",
+    "systemUnknown": "這台電腦的時區",
+    "restart": "Matinee 下次啟動時會切換到 {{zone}}。",
+    "restartSystem": "Matinee 下次啟動時會改回這台電腦的時區。"
   },
   "analysis": {
     "title": "媒體分析",

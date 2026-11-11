@@ -275,5 +275,8 @@
   "no_such_extra": "δεν υπάρχει τέτοιο επιπλέον υλικό",
   "only_an_admin_can_add_a_station_on_the_home_network": "μόνο ένας διαχειριστής μπορεί να προσθέσει σταθμό στο οικιακό δίκτυο",
   "startms_give_a_number_of_milliseconds": "startMs: δώστε έναν αριθμό χιλιοστών του δευτερολέπτου",
-  "say_which_language_it_should_be_in": "πείτε σε ποια γλώσσα θα έπρεπε να είναι"
+  "say_which_language_it_should_be_in": "πείτε σε ποια γλώσσα θα έπρεπε να είναι",
+  "this_server_doesnt_rescan_its_libraries": "αυτός ο διακομιστής δεν επανασαρώνει τις βιβλιοθήκες του",
+  "scanintervalseconds_must_be_0_or_from_900_to_604800": "το scanIntervalSeconds πρέπει να είναι 0 ή από 900 έως 604800",
+  "timezone_must_be_a_time_zone_such_as_america_juneau_or_empty": "το timeZone πρέπει να είναι ζώνη ώρας όπως America/Juneau, ή κενό"
 }
