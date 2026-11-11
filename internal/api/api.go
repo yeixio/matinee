@@ -332,6 +332,7 @@ func (s *Server) routes() []route {
 		{"GET /home", reader, s.home},
 		{"GET /rows/{id}", reader, s.rowPage},
 		{"GET /search", reader, s.search},
+		{"GET /search/people", reader, s.searchPeople},
 		{"GET /search/play", reader, s.searchPlay},
 		{"GET /items/{id}", reader, s.getItem},
 		{"GET /items/{id}/children", reader, s.itemChildren},
@@ -1263,6 +1264,17 @@ func (s *Server) search(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	writeJSON(w, http.StatusOK, items)
+}
+
+// searchPeople finds cast members by name, as search finds what they're
+// in, for the People row above the results.
+func (s *Server) searchPeople(w http.ResponseWriter, r *http.Request) {
+	people, err := s.Store.SearchPeople(r.Context(), currentUser(r).ID, r.URL.Query().Get("q"), 12)
+	if err != nil {
+		s.serverError(w, err)
+		return
+	}
+	writeJSON(w, http.StatusOK, people)
 }
 
 func (s *Server) loadItem(w http.ResponseWriter, r *http.Request) (store.Item, bool) {

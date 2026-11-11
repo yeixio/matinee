@@ -201,11 +201,12 @@
     "boxSet": "電影系列"
   },
   "search": {
-    "placeholder": "電影、劇集、藝人、專輯…",
+    "placeholder": "電影、劇集、演員、藝人、專輯…",
     "nothing": "沒有與「{{q}}」匹配的內容",
     "lookingForNew": "想找點新東西？",
     "addIt": "新增",
-    "askForIt": "請求新增"
+    "askForIt": "請求新增",
+    "people": "人物"
   },
   "person": {
     "notFound": "找不到此人",

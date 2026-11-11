@@ -201,11 +201,12 @@
     "boxSet": "Boks"
   },
   "search": {
-    "placeholder": "Filmer, serier, artister, album…",
+    "placeholder": "Filmer, serier, skuespillere, artister, album…",
     "nothing": "Ingenting samsvarer med «{{q}}»",
     "lookingForNew": "Ser du etter noe nytt?",
     "addIt": "Legg til",
-    "askForIt": "Ønsk deg den"
+    "askForIt": "Ønsk deg den",
+    "people": "Personer"
   },
   "person": {
     "notFound": "Personen ble ikke funnet",
