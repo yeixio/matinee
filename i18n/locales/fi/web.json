@@ -1621,7 +1621,9 @@
     "settings": {
       "approval": "Muut versiot ja paremmat kopiot vaativat aina ylläpitäjän hyväksynnän",
       "approvalDetail": "Silloinkin, kun pyynnöt lisätään heti. Vain Box Officen kanssa.",
-      "approvalReports": "Myös ilmoitetut ongelmat, jotka Box Office muuten korjaa heti."
+      "approvalReports": "Myös ilmoitetut ongelmat, jotka Box Office muuten korjaa heti.",
+      "replaceDamaged": "Korvaa vioittuneet videot itsestään",
+      "replaceDamagedDetail": "Kun Matinee löytää vioittuneen elokuvan tai jakson (luku aikakatkaistaan kerta toisensa jälkeen, vaikka jako vastaa, ja hypyt siinä myös), se ilmoittaa kuvaongelmasta ja Box Office hakee toisen kopion. Pois: vioittuneet videot vain luetellaan palvelimen tilassa."
     }
   }
 }

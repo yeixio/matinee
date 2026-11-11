@@ -1084,10 +1084,14 @@ const unreadableNote = "Reported by Matinee: reading this file keeps timing out 
 
 // ReportUnreadable reports a problem with a video the background jobs gave
 // up reading as damaged, when a Box Office that fixes problems is
-// connected, so Box Office gets another copy by itself. It's filed once,
+// connected and an admin turned this on (settingReplaceDamaged), so Box
+// Office gets another copy by itself. It's filed once,
 // in the name of the first admin, and not while the video has a problem
 // reported already.
 func (s *Server) ReportUnreadable(ctx context.Context, itemID int64) {
+	if on, err := s.Store.Setting(ctx, settingReplaceDamaged); err != nil || on != "true" {
+		return // an admin hasn't asked for it (Settings → Box Office)
+	}
 	it, err := s.Store.Item(ctx, 0, itemID)
 	if err != nil {
 		return

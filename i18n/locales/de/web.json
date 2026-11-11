@@ -1621,7 +1621,9 @@
     "settings": {
       "approval": "Andere Fassungen und bessere Kopien brauchen immer die Zustimmung eines Admins",
       "approvalDetail": "Auch wenn Anfragen sofort hinzugefügt werden. Nur mit Box Office.",
-      "approvalReports": "Auch gemeldete Probleme, die Box Office sonst sofort behebt."
+      "approvalReports": "Auch gemeldete Probleme, die Box Office sonst sofort behebt.",
+      "replaceDamaged": "Beschädigte Videos selbst ersetzen",
+      "replaceDamagedDetail": "Findet Matinee einen beschädigten Film oder eine beschädigte Folge (das Lesen läuft immer wieder in eine Zeitüberschreitung, obwohl die Freigabe antwortet, und auch Sprünge darin), meldet es ein Bildproblem und Box Office holt eine andere Kopie. Aus: Beschädigte Videos werden nur in der Serverübersicht aufgeführt."
     }
   }
 }
