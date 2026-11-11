@@ -177,6 +177,7 @@ function Libraries() {
   const [adding, setAdding] = useState(false)
   const refresh = () => qc.invalidateQueries({ queryKey: ['libraries'] })
   const scan = useMutation({ mutationFn: api.scanLibrary, onSuccess: () => setTimeout(refresh, 300) })
+  const stopScan = useMutation({ mutationFn: api.stopScan, onSuccess: () => setTimeout(refresh, 300) })
   const setMode = useMutation({ mutationFn: ({ id, mode }: { id: number; mode: MetadataMode }) => api.setMetadataMode(id, mode), onSuccess: refresh })
   const [findingArt, setFindingArt] = useState<number[]>([])
   const findArt = useMutation({
@@ -244,14 +245,21 @@ function Libraries() {
                 <span className="hidden md:inline">{t('settings.libraries.findArtwork')}</span>
               </Button>
             )}
-            <Button
-              variant="ghost"
-              icon={<RefreshCw className={`size-4 ${l.scanning ? 'animate-spin' : ''}`} />}
-              disabled={l.scanning}
-              onClick={() => scan.mutate(l.id)}
-            >
-              <span className="hidden sm:inline">{l.scanning ? t('nav.scanning') : t('settings.libraries.scan')}</span>
-            </Button>
+            {l.scanning ? (
+              <Button
+                variant="ghost"
+                icon={<X className="size-4" />}
+                title={l.scanReason && t(`health.jobs.why.${l.scanReason}`)}
+                disabled={stopScan.isPending}
+                onClick={() => stopScan.mutate(l.id)}
+              >
+                <span className="hidden sm:inline">{t('settings.libraries.stopScan')}</span>
+              </Button>
+            ) : (
+              <Button variant="ghost" icon={<RefreshCw className="size-4" />} onClick={() => scan.mutate(l.id)}>
+                <span className="hidden sm:inline">{t('settings.libraries.scan')}</span>
+              </Button>
+            )}
             <Button
               variant="ghost"
               icon={<Trash2 className="size-4" />}

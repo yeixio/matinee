@@ -689,6 +689,7 @@
       "title": "媒體庫",
       "none": "還沒有媒體庫。",
       "scan": "掃描",
+      "stopScan": "停止掃描",
       "findArtwork": "尋找圖片",
       "findingArtwork": "正在為 {{name}} 尋找缺少的封面，找到後會立即顯示。",
       "remove": "移除{{name}}",
@@ -1303,7 +1304,14 @@
       "title": "背景工作",
       "scan": "掃描{{library}}",
       "scanning": "已掃描 {{time}}",
+      "why": {
+        "schedule": "排定的完整重新掃描",
+        "watcher": "新增或變更的檔案",
+        "manual": "透過「掃描」開始",
+        "server": "由伺服器開始"
+      },
       "lastScan": "{{time}}，耗時 {{took}}",
+      "stopped": "{{time}}已停止，歷時 {{took}}",
       "scanCounts": "新增 {{added}}，更新 {{updated}}，移除 {{removed}}，無法播放 {{failed}}",
       "scanFailed": "失敗：{{error}}",
       "notScanned": "伺服器啟動以來未掃描",

@@ -279,5 +279,6 @@
   "say_which_language_it_should_be_in": "ange vilket språk den borde vara på",
   "this_server_doesnt_rescan_its_libraries": "den här servern söker inte igenom sina bibliotek igen",
   "scanintervalseconds_must_be_0_or_from_900_to_604800": "scanIntervalSeconds måste vara 0 eller mellan 900 och 604800",
-  "timezone_must_be_a_time_zone_such_as_america_juneau_or_empty": "timeZone måste vara en tidszon som America/Juneau, eller tom"
+  "timezone_must_be_a_time_zone_such_as_america_juneau_or_empty": "timeZone måste vara en tidszon som America/Juneau, eller tom",
+  "this_library_isnt_being_scanned": "det här biblioteket genomsöks inte"
 }

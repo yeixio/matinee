@@ -42,6 +42,8 @@ type Scanner struct {
 	missing map[int64]map[string]time.Time // per library, files held by MissingGrace and since when
 	running map[int64]bool
 	since   map[int64]time.Time  // when each running scan started
+	why     map[int64]Reason     // what started each running scan
+	stop    map[int64]func()     // stops each running scan
 	last    map[int64]ScanReport // each library's last full scan
 	stuck   map[string]bool      // library folders whose check hasn't come back
 }
@@ -57,20 +59,52 @@ type ScanReport struct {
 	Failed     int    `json:"failed"`
 	Unplayable int    `json:"unplayable"`
 	Error      string `json:"error,omitempty"`
+	// Reason is what started it; Stopped says an admin stopped it before
+	// it finished.
+	Reason  Reason `json:"reason,omitempty"`
+	Stopped bool   `json:"stopped,omitempty"`
 }
 
-// Report says since when a library is being scanned (zero when it isn't),
-// and how its last full scan went, if there was one since the server started.
-func (s *Scanner) Report(libraryID int64) (since time.Time, last *ScanReport) {
+// Reason is what started a scan.
+type Reason string
+
+const (
+	ReasonSchedule Reason = "schedule" // the periodic full rescan
+	ReasonWatcher  Reason = "watcher"  // files that changed in a watched folder
+	ReasonManual   Reason = "manual"   // an admin pressed Scan
+	ReasonServer   Reason = "server"   // anything else, such as a new library or TMDB key
+)
+
+type reasonKey struct{}
+
+// WithReason marks the scans run with ctx as started by r.
+func WithReason(ctx context.Context, r Reason) context.Context {
+	return context.WithValue(ctx, reasonKey{}, r)
+}
+
+func reasonOf(ctx context.Context) Reason {
+	if r, ok := ctx.Value(reasonKey{}).(Reason); ok {
+		return r
+	}
+	return ReasonServer
+}
+
+// ErrStopped is the error of a scan an admin stopped.
+var ErrStopped = errors.New("scan stopped")
+
+// Report says since when a library is being scanned (zero when it isn't)
+// and what started that, and how its last full scan went, if there was one
+// since the server started.
+func (s *Scanner) Report(libraryID int64) (since time.Time, why Reason, last *ScanReport) {
 	s.mu.Lock()
 	defer s.mu.Unlock()
 	if s.running[libraryID] {
-		since = s.since[libraryID]
+		since, why = s.since[libraryID], s.why[libraryID]
 	}
 	if r, ok := s.last[libraryID]; ok {
 		last = &r
 	}
-	return since, last
+	return since, why, last
 }
 
 type Stats struct {
@@ -97,6 +131,28 @@ func (s *Scanner) Running(libraryID int64) bool {
 	return s.running[libraryID]
 }
 
+// Reason says what started a library's running scan, "" when there's none.
+func (s *Scanner) Reason(libraryID int64) Reason {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	return s.why[libraryID]
+}
+
+// Stop stops a library's running scan, keeping what it found so far. A
+// file call stuck on a network share that stopped answering ends only when
+// the share answers or the kernel gives up on it. It reports false when
+// the library isn't being scanned.
+func (s *Scanner) Stop(libraryID int64) bool {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	stop, ok := s.stop[libraryID]
+	if !ok {
+		return false
+	}
+	stop()
+	return true
+}
+
 // ScanAll scans every library, one at a time.
 func (s *Scanner) ScanAll(ctx context.Context) {
 	libs, err := s.Store.Libraries(ctx)
@@ -105,7 +161,7 @@ func (s *Scanner) ScanAll(ctx context.Context) {
 		return
 	}
 	for _, lib := range libs {
-		if _, err := s.Scan(ctx, lib); err != nil && !errors.Is(err, ErrAlreadyRunning) {
+		if _, err := s.Scan(ctx, lib); err != nil && !errors.Is(err, ErrAlreadyRunning) && !errors.Is(err, ErrStopped) {
 			s.Log.Error("scan failed", "library", lib.Name, "err", err)
 		}
 	}
@@ -114,7 +170,8 @@ func (s *Scanner) ScanAll(ctx context.Context) {
 // Scan brings one library in line with its folders. Unchanged files (same
 // size and mtime) are skipped, so rescans are cheap.
 func (s *Scanner) Scan(ctx context.Context, lib store.Library) (Stats, error) {
-	if !s.claim(lib.ID) {
+	ctx, ok := s.claim(ctx, lib.ID)
+	if !ok {
 		return Stats{}, ErrAlreadyRunning
 	}
 	defer s.release(lib.ID)
@@ -126,12 +183,13 @@ func (s *Scanner) Scan(ctx context.Context, lib store.Library) (Stats, error) {
 // and anyone polling for it to finish, never sees it idle before it has
 // begun. It reports false when a scan of the library is already running.
 func (s *Scanner) Start(ctx context.Context, lib store.Library) bool {
-	if !s.claim(lib.ID) {
+	ctx, ok := s.claim(ctx, lib.ID)
+	if !ok {
 		return false
 	}
 	go func() {
 		defer s.release(lib.ID)
-		if _, err := s.scanAndReport(ctx, lib); err != nil {
+		if _, err := s.scanAndReport(ctx, lib); err != nil && !errors.Is(err, ErrStopped) {
 			s.Log.Error("scan failed", "library", lib.Name, "err", err)
 		}
 	}()
@@ -142,8 +200,12 @@ func (s *Scanner) scanAndReport(ctx context.Context, lib store.Library) (Stats, 
 	start := time.Now()
 	st, err := s.run(ctx, lib, nil)
 	r := ScanReport{Started: start.UnixMilli(), TookMs: time.Since(start).Milliseconds(), Added: st.Added, Updated: st.Updated,
-		Removed: st.Removed, Replaced: st.Replaced, Failed: st.Failed, Unplayable: st.Unplayable}
-	if err != nil {
+		Removed: st.Removed, Replaced: st.Replaced, Failed: st.Failed, Unplayable: st.Unplayable, Reason: reasonOf(ctx)}
+	switch {
+	case errors.Is(err, ErrStopped):
+		r.Stopped = true
+		s.Log.Info("scan stopped", "library", lib.Name, "added", st.Added, "updated", st.Updated, "took", time.Since(start).Round(time.Millisecond))
+	case err != nil:
 		r.Error = err.Error()
 	}
 	s.mu.Lock()
@@ -163,7 +225,8 @@ func (s *Scanner) ScanPaths(ctx context.Context, lib store.Library, paths []stri
 	if len(paths) == 0 {
 		return Stats{}, nil
 	}
-	if !s.claim(lib.ID) {
+	ctx, ok := s.claim(ctx, lib.ID)
+	if !ok {
 		return Stats{}, ErrAlreadyRunning
 	}
 	defer s.release(lib.ID)
@@ -183,32 +246,44 @@ func touchesNFO(paths []string) bool {
 // target is where a scan walks from, inside one of the library's folders.
 type target struct{ root, start string }
 
-// claim marks a library as being scanned, unless it already is.
-func (s *Scanner) claim(libraryID int64) bool {
+// claim marks a library as being scanned, unless it already is, and
+// returns the context to scan it with, which Stop ends.
+func (s *Scanner) claim(ctx context.Context, libraryID int64) (context.Context, bool) {
 	s.mu.Lock()
 	defer s.mu.Unlock()
 	if s.running == nil {
-		s.running = map[int64]bool{}
+		s.running, s.since, s.why, s.stop = map[int64]bool{}, map[int64]time.Time{}, map[int64]Reason{}, map[int64]func(){}
 	}
 	if s.running[libraryID] {
-		return false
+		return ctx, false
 	}
+	ctx, cancel := context.WithCancelCause(ctx)
 	s.running[libraryID] = true
-	if s.since == nil {
-		s.since = map[int64]time.Time{}
-	}
 	s.since[libraryID] = time.Now()
-	return true
+	s.why[libraryID] = reasonOf(ctx)
+	s.stop[libraryID] = func() { cancel(ErrStopped) }
+	return ctx, true
 }
 
 func (s *Scanner) release(libraryID int64) {
 	s.mu.Lock()
+	if stop := s.stop[libraryID]; stop != nil {
+		stop() // frees the context; the scan is over
+	}
 	delete(s.running, libraryID)
+	delete(s.why, libraryID)
+	delete(s.stop, libraryID)
 	s.mu.Unlock()
 }
 
-// run scans a library the caller has claimed.
-func (s *Scanner) run(ctx context.Context, lib store.Library, paths []string) (Stats, error) {
+// run scans a library the caller has claimed. A scan Stop ended returns
+// ErrStopped.
+func (s *Scanner) run(ctx context.Context, lib store.Library, paths []string) (st Stats, err error) {
+	defer func() {
+		if err != nil && errors.Is(context.Cause(ctx), ErrStopped) {
+			err = ErrStopped
+		}
+	}()
 	kind, ok := KindByName(lib.Kind)
 	if !ok {
 		return Stats{}, fmt.Errorf("unknown library kind %q", lib.Kind)
@@ -236,7 +311,6 @@ func (s *Scanner) run(ctx context.Context, lib store.Library, paths []string) (S
 		}
 	}
 	start := time.Now()
-	var st Stats
 	seen := map[string]bool{}
 	// A folder that can't be read, such as an unmounted network share, must
 	// not look like every file in it was deleted, so its items are kept.
@@ -469,7 +543,7 @@ func (s *Scanner) heldMissing(libraryID int64) map[string]time.Time {
 // recheck scans files held by MissingGrace again, once their wait is over.
 func (s *Scanner) recheck(lib store.Library, paths []string) {
 	for {
-		_, err := s.ScanPaths(context.Background(), lib, paths)
+		_, err := s.ScanPaths(WithReason(context.Background(), ReasonWatcher), lib, paths)
 		if !errors.Is(err, ErrAlreadyRunning) {
 			if err != nil {
 				s.Log.Warn("scan missing files", "library", lib.Name, "err", err)

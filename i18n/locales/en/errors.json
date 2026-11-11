@@ -239,6 +239,7 @@
   "this_invite_link_doesnt_work_ask_for_another": "this invite link doesn't work; ask for another",
   "this_invite_was_already_used": "this invite was already used",
   "this_library_already_has_a_show_with_that_name": "this library already has a show with that name",
+  "this_library_isnt_being_scanned": "this library isn't being scanned",
   "this_plugin_was_made_for_a_different_version_of_matinee": "this plugin was made for a different version of Matinee",
   "this_server_cant_change_its_tmdb_key": "this server can't change its TMDB key",
   "this_server_doesnt_offer_remote_access": "this server doesn't offer remote access",

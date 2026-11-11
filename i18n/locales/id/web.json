@@ -689,6 +689,7 @@
       "title": "Perpustakaan",
       "none": "Belum ada perpustakaan.",
       "scan": "Pindai",
+      "stopScan": "Hentikan pindaian",
       "findArtwork": "Cari gambar",
       "findingArtwork": "Mencari sampul yang hilang di {{name}}. Sampul muncul begitu ditemukan.",
       "remove": "Hapus {{name}}",
@@ -1303,7 +1304,14 @@
       "title": "Tugas latar belakang",
       "scan": "Pindai {{library}}",
       "scanning": "Memindai selama {{time}}",
+      "why": {
+        "schedule": "Pindai ulang penuh terjadwal",
+        "watcher": "File baru atau berubah",
+        "manual": "Dimulai dengan Pindai",
+        "server": "Dimulai oleh server"
+      },
       "lastScan": "{{time}}, butuh {{took}}",
+      "stopped": "Dihentikan {{time}}, setelah {{took}}",
       "scanCounts": "{{added}} ditambahkan, {{updated}} diperbarui, {{removed}} dihapus, {{failed}} tidak bisa diputar",
       "scanFailed": "Gagal: {{error}}",
       "notScanned": "Belum dipindai sejak server dimulai",

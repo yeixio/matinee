@@ -693,6 +693,7 @@
       "title": "Mediatheken",
       "none": "Noch keine Mediatheken.",
       "scan": "Scannen",
+      "stopScan": "Scan stoppen",
       "findArtwork": "Bilder suchen",
       "findingArtwork": "Fehlende Cover in {{name}} werden gesucht. Sie erscheinen, sobald sie gefunden sind.",
       "remove": "{{name}} entfernen",
@@ -1313,7 +1314,14 @@
       "title": "Hintergrundaufgaben",
       "scan": "{{library}} durchsuchen",
       "scanning": "Wird seit {{time}} durchsucht",
+      "why": {
+        "schedule": "Geplanter vollständiger Scan",
+        "watcher": "Neue oder geänderte Dateien",
+        "manual": "Mit „Scannen“ gestartet",
+        "server": "Vom Server gestartet"
+      },
       "lastScan": "{{time}}, dauerte {{took}}",
+      "stopped": "Gestoppt {{time}}, nach {{took}}",
       "scanCounts": "{{added}} hinzugefügt, {{updated}} aktualisiert, {{removed}} entfernt, {{failed}} nicht abspielbar",
       "scanFailed": "Fehlgeschlagen: {{error}}",
       "notScanned": "Seit dem Serverstart nicht durchsucht",
