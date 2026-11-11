@@ -216,7 +216,8 @@ function Player({ id }: { id: number }) {
   const [params] = useSearchParams()
   const startAt = params.get('t')
   // The audio track picked (?audio=N, as from a commentary on the title
-  // page, or the Audio menu); undefined plays the file's own default.
+  // page, the server's pick, or the Audio menu); undefined plays the
+  // file's own default.
   const audioParam = params.get('audio')
   const [audioPick, setAudioPick] = useState<number>()
   const audioNow = useRef<number>(undefined)
@@ -378,12 +379,18 @@ function Player({ id }: { id: number }) {
           : !item.played && item.positionMs
             ? item.positionMs / 1000
             : 0
-    const pick = pickSubtitles(item.subtitles ?? [], subPrefs, { appLanguage: i18n.language, audioLanguage: audioLanguageOf(item) })
+    // The server says which tracks to start with (what the person picked
+    // for this title last time, or the best sound in their language);
+    // servers from before that leave it to the player.
+    const serverPick = item.trackPick
+    const pick = serverPick
+      ? item.subtitles?.find((t) => t.id === serverPick.subtitle)
+      : pickSubtitles(item.subtitles ?? [], subPrefs, { appLanguage: i18n.language, audioLanguage: audioLanguageOf(item) })
     const d = item.videoCodec ? loadDelay(item.versionOf ?? item.id) : { ms: 0, forTitle: false }
     delayNow.current = d.ms
     setDelay(d)
     // Only a track the file has; its own default plays as it is.
-    const a = audioParam !== null ? Number(audioParam) : NaN
+    const a = audioParam !== null ? Number(audioParam) : (serverPick?.audio ?? NaN)
     audioNow.current = item.mediaInfo?.audio.some((t) => t.index === a) && a !== fileAudio(item) ? a : undefined
     setAudioPick(audioNow.current)
     const q = startQuality(streaming)
@@ -409,6 +416,8 @@ function Player({ id }: { id: number }) {
   // again when it can.
   const selectAudio = (index: number) => {
     if (!item) return
+    // Played again next time, and in the rest of the show.
+    api.setTracks(item.id, { audio: index }).catch(() => {})
     audioNow.current = index === fileAudio(item) ? undefined : index
     setAudioPick(audioNow.current)
     if (!burned.current && direct(qualityNow.current)) playDirect(position())
@@ -564,6 +573,7 @@ function Player({ id }: { id: number }) {
   // A pick in the player is what the person wants next time too, on every device.
   const rememberSub = (t: SubtitleTrack | undefined) => {
     savePreference(t)
+    if (item) api.setTracks(item.id, { subtitle: t?.id ?? 'off' }).catch(() => {})
     const next = afterPick(subPrefs, t, i18n.language)
     qc.setQueryData<typeof prefs>(['playback'], (p) => (p ? { ...p, subtitles: next } : p))
     api.setPlayback({ subtitles: next }).catch(() => {})
@@ -572,6 +582,7 @@ function Player({ id }: { id: number }) {
   // Turning subtitles On keeps the person's languages as they are.
   const autoSub = item ? autoSubtitles(item.subtitles ?? [], subPrefs, { appLanguage: i18n.language, audioLanguage: audioLanguageOf(item) }) : undefined
   const rememberAuto = () => {
+    if (item && autoSub) api.setTracks(item.id, { subtitle: autoSub.id }).catch(() => {})
     const next = afterAuto(subPrefs)
     qc.setQueryData<typeof prefs>(['playback'], (p) => (p ? { ...p, subtitles: next } : p))
     api.setPlayback({ subtitles: next }).catch(() => {})

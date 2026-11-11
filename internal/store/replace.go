@@ -190,6 +190,7 @@ var userTables = []struct{ table, key string }{
 	{"downloads", "device_id"},
 	{"found_subtitles", ""},
 	{"issues", ""},
+	{"track_choices", "user_id"},
 }
 
 // MoveFile gives item keep the file of item from, then deletes from. keep

@@ -2493,6 +2493,28 @@ paths:
                 played: { type: boolean }
       responses:
         "204": { description: Saved. }
+  /items/{id}/tracks:
+    put:
+      summary: Remember the tracks picked while watching
+      description: |
+        Players send the sound or subtitle track the person picked, and the
+        video starts with it next time (see trackPick on GET /items/{id}).
+        An episode's pick carries over to the rest of its show, and a
+        version's to the title's other versions, by language. Send only
+        what changed.
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                audio: { type: integer, description: The audio stream's index, as in mediaInfo. }
+                subtitle: { type: string, description: A subtitle track's id, or "off". }
+      responses:
+        "204": { description: Saved. }
+        "400": { description: Not a video, or no such track. }
   /items/{id}/watched:
     get:
       summary: How much of an item is watched
@@ -6131,6 +6153,21 @@ components:
               properties:
                 link: { type: string, description: The episode's web page. }
                 episodeType: { type: string, enum: [full, trailer, bonus] }
+            trackPick:
+              type: object
+              description: >
+                Videos only: the sound and subtitles to start with, for the person asking. What they picked for the
+                title last time (PUT /items/{id}/tracks), or for another episode of its show or version of the
+                title, in the same language; else the best sound in their language (Atmos or DTS:X, then the most
+                channels, then the better format), else in the title's original language, else the file's
+                default; and subtitles as their subtitle choices say. Commentaries and audio description only
+                play when picked.
+              required: [subtitle]
+              properties:
+                audio: { type: integer, description: The audio stream's index, as in mediaInfo. Left out until the file is analyzed. }
+                subtitle: { type: string, description: The subtitle track's id; empty for none. }
+                audioRemembered: { type: boolean, description: The person picked this sound before. }
+                subtitleRemembered: { type: boolean, description: The person picked these subtitles before. }
     MediaInfo:
       type: object
       description: A file's streams in detail, from the background analysis. Left out until the file is analyzed.

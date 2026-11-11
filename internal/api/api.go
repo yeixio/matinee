@@ -366,6 +366,7 @@ func (s *Server) routes() []route {
 		{"GET /people/{id}", reader, s.getPerson},
 		{"GET /people/{id}/image", reader, s.personImage},
 		{"PUT /items/{id}/progress", reader, s.setProgress},
+		{"PUT /items/{id}/tracks", reader, s.setTrackChoice},
 		{"GET /items/{id}/watched", reader, s.getWatched},
 		{"PUT /items/{id}/watched", reader, s.setWatched},
 		{"DELETE /continue-watching/{id}", reader, s.hideFromContinueWatching},
@@ -1352,6 +1353,9 @@ type itemView struct {
 	// Versions are the files of a movie or episode with more than one,
 	// the title's own first; absent when it has only one.
 	Versions []versionView `json:"versions,omitempty"`
+	// TrackPick is which sound and subtitles a video starts with, for this
+	// person (see trackpick.go).
+	TrackPick *trackPickView `json:"trackPick,omitempty"`
 }
 
 func (s *Server) getItem(w http.ResponseWriter, r *http.Request) {
@@ -1428,6 +1432,7 @@ func (s *Server) getItem(w http.ResponseWriter, r *http.Request) {
 		s.serverError(w, err)
 		return
 	}
+	s.addTrackPick(r, &v)
 	writeJSON(w, http.StatusOK, v)
 }
 
