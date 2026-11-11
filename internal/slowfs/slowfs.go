@@ -152,11 +152,22 @@ func Stuck() []Share {
 	return out
 }
 
-// Answering reports whether the share path is on answers a quick stat now.
-// A background job asks after a file timed out, to tell a damaged file
-// from a share that stalled.
+// Answering reports whether the share path is on answers now: whether
+// listing path's folder comes back in time. A background job asks after a
+// file timed out, to tell a damaged file from a share that stalled. Not a
+// stat of the file: the kernel can answer that from its cache of the
+// file's details (actimeo) while the server is stuck, but a folder listing
+// has to ask the server.
 func Answering(path string) bool {
-	_, err := Do(path, func() (struct{}, error) { _, err := os.Stat(path); return struct{}{}, err })
+	_, err := Do(path, func() (struct{}, error) {
+		f, err := os.Open(filepath.Dir(path))
+		if err != nil {
+			return struct{}{}, err
+		}
+		defer f.Close()
+		_, err = f.Readdirnames(1)
+		return struct{}{}, err
+	})
 	return !errors.Is(err, ErrNotAnswering)
 }
 
