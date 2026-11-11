@@ -21,6 +21,7 @@ import (
 	"time"
 
 	"github.com/yeixio/matinee/internal/intro"
+	"github.com/yeixio/matinee/internal/slowfs"
 	"github.com/yeixio/matinee/internal/store"
 )
 
@@ -64,6 +65,7 @@ type Detector struct {
 
 	mu         sync.Mutex
 	retryAfter map[int64]time.Time
+	timeouts   slowfs.Timeouts
 }
 
 // Pass looks at every season and movie with a video the detector hasn't
@@ -115,7 +117,14 @@ func (d *Detector) retryLater(id int64) bool {
 	return ok
 }
 
-func (d *Detector) timedOut(id int64) {
+// timedOut has a file that timed out tried again later, or, once it keeps
+// timing out with its share answering, stored as unreadable until it
+// changes (see slowfs.Timeouts).
+func (d *Detector) timedOut(id int64, path string) {
+	if d.timeouts.Add(id, path) {
+		d.Log.Warn("credits detection: file keeps timing out; leaving it until it changes (it may be damaged)", "path", path)
+		return
+	}
 	d.mu.Lock()
 	defer d.mu.Unlock()
 	if d.retryAfter == nil {
@@ -157,7 +166,7 @@ func (d *Detector) Group(ctx context.Context, group []store.CreditsVideo) int {
 		}
 		d.Log.Warn("credits detection: can't read "+what, "path", v.Path, "err", err)
 		if errors.Is(err, context.DeadlineExceeded) {
-			d.timedOut(v.ID)
+			d.timedOut(v.ID, v.Path)
 		}
 	}
 	// Chapters first: they need no listening or looking.

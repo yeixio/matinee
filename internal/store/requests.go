@@ -294,6 +294,14 @@ func (s *Store) Issues(ctx context.Context, userID int64, limit int) ([]Issue, e
 	return out, rows.Err()
 }
 
+// OpenIssue reports whether an item has a problem reported that isn't
+// resolved yet.
+func (s *Store) OpenIssue(ctx context.Context, itemID int64) (bool, error) {
+	var n int
+	err := s.db.QueryRowContext(ctx, "SELECT COUNT(*) FROM issues WHERE item_id = ? AND resolved = 0", itemID).Scan(&n)
+	return n > 0, err
+}
+
 func (s *Store) ResolveIssue(ctx context.Context, id, resolution string) error {
 	res, err := s.db.ExecContext(ctx, "UPDATE issues SET resolved = 1, resolution = ?, resolved_at = ? WHERE id = ?", resolution, now(), id)
 	if err != nil {

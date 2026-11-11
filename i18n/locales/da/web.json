@@ -1344,7 +1344,13 @@
       "downloads": "Downloads til enheder",
       "downloadCounts": "{{waiting}} venter, {{converting}} konverteres, {{failed}} mislykkedes",
       "nothing": "Intet at lave",
-      "importing": "Importerer visningshistorik"
+      "importing": "Importerer visningshistorik",
+      "unreadable": {
+        "title": "Videoer, der ikke kunne læses",
+        "hint": "Sandsynligvis beskadigede, fx en download, hvis slutning aldrig blev skrevet. Udskift dem; hver prøves igen, når filen ændres.",
+        "more_one": "og {{count}} mere",
+        "more_other": "og {{count}} mere"
+      }
     },
     "disks": {
       "title": "Diskplads",

@@ -1344,7 +1344,13 @@
       "downloads": "Cihazlar için indirmeler",
       "downloadCounts": "{{waiting}} bekliyor, {{converting}} dönüştürülüyor, {{failed}} başarısız",
       "nothing": "Yapılacak iş yok",
-      "importing": "İzleme geçmişi içe aktarılıyor"
+      "importing": "İzleme geçmişi içe aktarılıyor",
+      "unreadable": {
+        "title": "Okunamayan videolar",
+        "hint": "Büyük olasılıkla hasarlı, örneğin sonu hiç yazılmamış bir indirme. Bunları değiştir; her biri dosyası değişince yeniden denenir.",
+        "more_one": "ve {{count}} tane daha",
+        "more_other": "ve {{count}} tane daha"
+      }
     },
     "disks": {
       "title": "Disk alanı",

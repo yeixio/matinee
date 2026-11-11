@@ -1364,7 +1364,15 @@
       "downloads": "Stahování do zařízení",
       "downloadCounts": "čeká {{waiting}}, převádí se {{converting}}, selhalo {{failed}}",
       "nothing": "Nic na práci",
-      "importing": "Importuje se historie sledování"
+      "importing": "Importuje se historie sledování",
+      "unreadable": {
+        "title": "Videa, která nešla přečíst",
+        "hint": "Nejspíš poškozená, třeba stažený soubor, jehož konec se nikdy nezapsal. Nahraďte je; každé se zkusí znovu, jakmile se jeho soubor změní.",
+        "more_few": "a ještě {{count}}",
+        "more_many": "a ještě {{count}}",
+        "more_one": "a ještě {{count}}",
+        "more_other": "a ještě {{count}}"
+      }
     },
     "disks": {
       "title": "Místo na disku",

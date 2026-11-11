@@ -169,3 +169,44 @@ func (s *Store) ThumbnailCounts(ctx context.Context, version int) (total, done i
 	}
 	return total, done, rows.Err()
 }
+
+// UnreadableVideo is a video the seek bar's pictures couldn't be made of,
+// as it is now: most likely a damaged file.
+type UnreadableVideo struct {
+	ID    int64
+	Title string
+	Path  string
+}
+
+// UnreadableVideos lists the videos, as they are now, that couldn't be read
+// for their seek bar pictures, by title, at most limit of them, and how many
+// there are in all.
+func (s *Store) UnreadableVideos(ctx context.Context, version, limit int) ([]UnreadableVideo, int, error) {
+	rows, err := s.db.QueryContext(ctx, `
+		SELECT i.id, i.title, i.path, COALESCE(i.size, 0), COALESCE(i.mtime, 0), t.file_key
+		FROM items i JOIN thumbnails t ON t.item_id = i.id
+		WHERE t.count = 0 AND `+thumbnailVideos+`
+		ORDER BY i.sort_title, i.id`)
+	if err != nil {
+		return nil, 0, err
+	}
+	defer rows.Close()
+	var out []UnreadableVideo
+	total := 0
+	for rows.Next() {
+		var v UnreadableVideo
+		var size, mtime int64
+		var key string
+		if err := rows.Scan(&v.ID, &v.Title, &v.Path, &size, &mtime, &key); err != nil {
+			return nil, 0, err
+		}
+		if key != MediaKey(version, size, mtime) {
+			continue // changed since; tried again
+		}
+		total++
+		if len(out) < limit {
+			out = append(out, v)
+		}
+	}
+	return out, total, rows.Err()
+}

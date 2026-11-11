@@ -1344,7 +1344,13 @@
       "downloads": "Downloads for devices",
       "downloadCounts": "{{waiting}} waiting, {{converting}} converting, {{failed}} failed",
       "nothing": "Nothing to do",
-      "importing": "Importing watch history"
+      "importing": "Importing watch history",
+      "unreadable": {
+        "title": "Videos that couldn't be read",
+        "hint": "Most likely damaged, such as a download whose end was never written. Replace them; each is tried again once its file changes.",
+        "more_one": "and {{count}} more",
+        "more_other": "and {{count}} more"
+      }
     },
     "disks": {
       "title": "Disk space",

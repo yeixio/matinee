@@ -1384,7 +1384,17 @@
       "downloads": "تنزيلات للأجهزة",
       "downloadCounts": "{{waiting}} في الانتظار، {{converting}} قيد التحويل، {{failed}} فشلت",
       "nothing": "لا شيء للقيام به",
-      "importing": "استيراد سجل المشاهدة"
+      "importing": "استيراد سجل المشاهدة",
+      "unreadable": {
+        "title": "مقاطع فيديو تعذّرت قراءتها",
+        "hint": "على الأرجح تالفة، مثل تنزيل لم تُكتب نهايته قط. استبدلها؛ تُعاد محاولة كل منها عندما يتغير ملفه.",
+        "more_few": "و{{count}} أخرى",
+        "more_many": "و{{count}} أخرى",
+        "more_one": "و{{count}} أخرى",
+        "more_other": "و{{count}} أخرى",
+        "more_two": "و{{count}} أخرى",
+        "more_zero": "و{{count}} أخرى"
+      }
     },
     "disks": {
       "title": "مساحة القرص",

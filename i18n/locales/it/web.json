@@ -1354,7 +1354,14 @@
       "downloads": "Download per i dispositivi",
       "downloadCounts": "{{waiting}} in attesa, {{converting}} in conversione, {{failed}} non riusciti",
       "nothing": "Niente da fare",
-      "importing": "Importazione della cronologia"
+      "importing": "Importazione della cronologia",
+      "unreadable": {
+        "title": "Video che non è stato possibile leggere",
+        "hint": "Probabilmente danneggiati, come un download la cui fine non è mai stata scritta. Sostituiscili; ognuno viene riprovato quando il suo file cambia.",
+        "more_one": "e {{count}} altro",
+        "more_many": "e altri {{count}}",
+        "more_other": "e altri {{count}}"
+      }
     },
     "disks": {
       "title": "Spazio su disco",

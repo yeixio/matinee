@@ -1334,7 +1334,12 @@
       "downloads": "デバイス用ダウンロード",
       "downloadCounts": "待機 {{waiting}}、変換中 {{converting}}、失敗 {{failed}}",
       "nothing": "処理待ちなし",
-      "importing": "視聴履歴を読み込み中"
+      "importing": "視聴履歴を読み込み中",
+      "unreadable": {
+        "title": "読み込めなかった動画",
+        "hint": "破損している可能性が高いです（最後まで書き込まれなかったダウンロードなど）。差し替えてください。ファイルが変わると再試行されます。",
+        "more_other": "ほか {{count}} 件"
+      }
     },
     "disks": {
       "title": "ディスク容量",

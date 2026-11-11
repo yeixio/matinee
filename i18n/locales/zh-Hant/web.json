@@ -1334,7 +1334,12 @@
       "downloads": "裝置下載",
       "downloadCounts": "等待 {{waiting}}，轉換中 {{converting}}，失敗 {{failed}}",
       "nothing": "沒有待辦事項",
-      "importing": "正在匯入觀看紀錄"
+      "importing": "正在匯入觀看紀錄",
+      "unreadable": {
+        "title": "無法讀取的影片",
+        "hint": "很可能已損壞，例如結尾從未寫入的下載。請替換它們；檔案一旦變更就會重試。",
+        "more_other": "還有 {{count}} 個"
+      }
     },
     "disks": {
       "title": "磁碟空間",

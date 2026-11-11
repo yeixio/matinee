@@ -1078,6 +1078,52 @@ func (s *Server) reportIssue(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, http.StatusCreated, v)
 }
 
+// unreadableNote is the note on the problem Matinee reports itself for a
+// video it gave up reading.
+const unreadableNote = "Reported by Matinee: reading this file keeps timing out while its share answers, so it's most likely damaged (for example, a download whose end was never written)."
+
+// ReportUnreadable reports a problem with a video the background jobs gave
+// up reading as damaged, when a Box Office that fixes problems is
+// connected, so Box Office gets another copy by itself. It's filed once,
+// in the name of the first admin, and not while the video has a problem
+// reported already.
+func (s *Server) ReportUnreadable(ctx context.Context, itemID int64) {
+	it, err := s.Store.Item(ctx, 0, itemID)
+	if err != nil {
+		return
+	}
+	app, ok := appFor(it.Kind)
+	if !ok || !replaceable(it.Kind) || !s.boxOffices.offers(app, featureProblems) {
+		return
+	}
+	if open, err := s.Store.OpenIssue(ctx, itemID); err != nil || open {
+		return
+	}
+	users, err := s.Store.Users(ctx)
+	if err != nil {
+		return
+	}
+	i := slices.IndexFunc(users, func(u store.User) bool { return u.IsAdmin })
+	if i < 0 {
+		return
+	}
+	admin := users[i]
+	key, err := s.Store.FileKey(ctx, it.ID)
+	if err != nil {
+		return
+	}
+	x, err := s.Store.CreateIssue(ctx, store.Issue{ItemID: it.ID, Kind: "video", Note: unreadableNote, UserID: admin.ID, FileKey: key})
+	if err != nil {
+		s.Log.Warn("report a damaged video", "item", it.ID, "err", err)
+		return
+	}
+	if err := s.fixIssue(ctx, admin, it, &x); err != nil {
+		s.Log.Warn("report a damaged video", "item", it.ID, "err", err)
+		return
+	}
+	s.Log.Info("reported a damaged video to Box Office", "item", it.ID, "title", it.Title, "path", it.Path)
+}
+
 // fixIssue asks Box Office to fix a reported problem by itself, when it
 // can: a problem with a movie's or an episode's copy (store.FixableIssues)
 // that Box Office has, with a Box Office that fixes problems. It blocks

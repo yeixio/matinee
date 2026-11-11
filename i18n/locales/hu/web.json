@@ -1344,7 +1344,13 @@
       "downloads": "Letöltések eszközökre",
       "downloadCounts": "{{waiting}} vár, {{converting}} átalakítás alatt, {{failed}} sikertelen",
       "nothing": "Nincs teendő",
-      "importing": "Megtekintési előzmények importálása"
+      "importing": "Megtekintési előzmények importálása",
+      "unreadable": {
+        "title": "Nem olvasható videók",
+        "hint": "Valószínűleg sérültek, például egy letöltés, amelynek a vége sosem íródott ki. Cseréld le őket; mindegyiket újra megpróbálja, amint a fájlja megváltozik.",
+        "more_one": "és még {{count}}",
+        "more_other": "és még {{count}}"
+      }
     },
     "disks": {
       "title": "Lemezterület",

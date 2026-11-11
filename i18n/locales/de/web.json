@@ -1344,7 +1344,13 @@
       "downloads": "Downloads für Geräte",
       "downloadCounts": "{{waiting}} wartend, {{converting}} in Umwandlung, {{failed}} fehlgeschlagen",
       "nothing": "Nichts zu tun",
-      "importing": "Wiedergabeverlauf wird importiert"
+      "importing": "Wiedergabeverlauf wird importiert",
+      "unreadable": {
+        "title": "Videos, die nicht gelesen werden konnten",
+        "hint": "Wahrscheinlich beschädigt, etwa ein Download, dessen Ende nie geschrieben wurde. Ersetze sie; jedes wird erneut versucht, sobald sich die Datei ändert.",
+        "more_one": "und {{count}} weiteres",
+        "more_other": "und {{count}} weitere"
+      }
     },
     "disks": {
       "title": "Speicherplatz",

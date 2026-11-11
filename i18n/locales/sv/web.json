@@ -1344,7 +1344,13 @@
       "downloads": "Nedladdningar för enheter",
       "downloadCounts": "{{waiting}} väntar, {{converting}} konverteras, {{failed}} misslyckades",
       "nothing": "Inget att göra",
-      "importing": "Importerar tittarhistorik"
+      "importing": "Importerar tittarhistorik",
+      "unreadable": {
+        "title": "Videor som inte kunde läsas",
+        "hint": "Troligen skadade, som en nedladdning vars slut aldrig skrevs. Ersätt dem; var och en försöks igen när filen ändras.",
+        "more_one": "och {{count}} till",
+        "more_other": "och {{count}} till"
+      }
     },
     "disks": {
       "title": "Diskutrymme",
