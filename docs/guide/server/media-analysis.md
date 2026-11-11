@@ -27,7 +27,7 @@ After that, it makes the small pictures players show above the seek bar while yo
 
 ## Gentle on your server
 
-The analysis reads one file at a time at the lowest priority, waits while someone's watching something being converted, and rests for a few minutes when files are slow to read. It looks at a file again only when the file changes, so after the first pass it has little to do.
+The analysis reads one file at a time at the lowest priority, waits while someone's watching something being converted, and rests for a few minutes when files are slow to read.<!-- since: v0.2.4 --> When a network share stops answering altogether, as when the NAS is waking a sleeping drive or its mover is busy, the analysis, intro and credits detection, gapless listening and seek bar pictures all wait for the share instead of queuing more reads behind the stuck one, checking every 30 seconds; Server health shows them as resting until it answers.<!-- /since --> It looks at a file again only when the file changes, so after the first pass it has little to do.
 
 Admins can see its progress under **Settings → Libraries → Media analysis** and pick a speed:
 
