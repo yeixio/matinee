@@ -85,6 +85,12 @@ var sidecarExts = map[string]string{".srt": "subrip", ".vtt": "webvtt", ".ass": 
 // List returns a video's tracks: embedded streams in file order, then
 // sidecar files. Codecs Matinee can't show at all are left out.
 func List(videoPath string, embedded []probe.Subtitle) []Track {
+	return append(Embedded(embedded), Sidecars(videoPath)...)
+}
+
+// Embedded is List without the subtitle files beside the video: the
+// tracks inside it, from what probing it found.
+func Embedded(embedded []probe.Subtitle) []Track {
 	out := []Track{}
 	for _, s := range embedded {
 		t := Track{
@@ -107,7 +113,7 @@ func List(videoPath string, embedded []probe.Subtitle) []Track {
 		}
 		out = append(out, t)
 	}
-	return append(out, Sidecars(videoPath)...)
+	return out
 }
 
 // Sidecars finds subtitle files named after a video, like "Movie.srt",

@@ -38,6 +38,7 @@ import (
 	"github.com/yeixio/matinee/internal/radio"
 	"github.com/yeixio/matinee/internal/remote"
 	"github.com/yeixio/matinee/internal/scan"
+	"github.com/yeixio/matinee/internal/slowfs"
 	"github.com/yeixio/matinee/internal/spectrum"
 	"github.com/yeixio/matinee/internal/store"
 	"github.com/yeixio/matinee/internal/stream"
@@ -1638,7 +1639,25 @@ func (s *Server) directFile(w http.ResponseWriter, r *http.Request) {
 		s.playStation(w, r, it)
 		return
 	}
+	if !filesAnswering(w, it) {
+		return
+	}
 	stream.ServeDirect(w, r, it)
+}
+
+// filesAnswering says whether an item's file can be read now, and otherwise
+// answers that its network share isn't answering, at once and with a 503,
+// so a player says the title can't be read right now rather than waiting
+// on the share or saying the server can't be reached.
+func filesAnswering(w http.ResponseWriter, it store.Item) bool {
+	if it.Path == "" || !filepath.IsAbs(it.Path) {
+		return true // played from the internet, not a library folder
+	}
+	if !slowfs.Answering(it.Path) {
+		writeError(w, http.StatusServiceUnavailable, "this title's files can't be read right now: the network share they're on isn't answering")
+		return false
+	}
+	return true
 }
 
 func (s *Server) startHLS(w http.ResponseWriter, r *http.Request) {
@@ -1648,6 +1667,9 @@ func (s *Server) startHLS(w http.ResponseWriter, r *http.Request) {
 	}
 	if !it.Playable {
 		writeError(w, http.StatusBadRequest, "not a playable item")
+		return
+	}
+	if !filesAnswering(w, it) {
 		return
 	}
 	start, _ := strconv.ParseFloat(r.URL.Query().Get("start"), 64)
@@ -1760,14 +1782,19 @@ func (s *Server) subtitleTracks(ctx context.Context, it store.Item) []subtitle.T
 		s.Log.Warn("subtitle streams", "item", it.ID, "err", err)
 	} else if ok {
 		json.Unmarshal([]byte(raw), &embedded)
-	} else if pr, err := s.Scanner.Prober.Probe(ctx, it.Path); err == nil {
+	} else if pr, err := slowfs.DoWithin(it.Path, 15*time.Second, func() (probe.Result, error) { return s.Scanner.Prober.Probe(ctx, it.Path) }); err == nil {
 		embedded = pr.Subtitles
 		b, _ := json.Marshal(pr.SubtitleList())
 		if err := s.Store.SetSubtitleStreams(ctx, it.ID, string(b)); err != nil {
 			s.Log.Warn("save subtitle streams", "item", it.ID, "err", err)
 		}
 	}
-	tracks := subtitle.List(it.Path, embedded)
+	tracks := subtitle.Embedded(embedded)
+	// The subtitle files beside the video are left out while its network
+	// share isn't answering, rather than holding up the title's page.
+	if side, err := slowfs.Do(it.Path, func() ([]subtitle.Track, error) { return subtitle.Sidecars(it.Path), nil }); err == nil {
+		tracks = append(tracks, side...)
+	}
 	u, _ := auth.UserFrom(ctx)
 	tracks = append(tracks, s.foundTracks(ctx, u, it)...)
 	s.applySyncs(ctx, it, tracks)
