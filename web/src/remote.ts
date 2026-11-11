@@ -175,6 +175,12 @@ async function loop(signal: AbortSignal) {
 
 function leave() {
   if (active) fetch(path(), { method: 'DELETE', credentials: 'same-origin', keepalive: true }).catch(() => {})
+  // Hand the turn back right away. WebKit (Safari, and every browser on
+  // iOS) freezes the page that replaces this one, as on a reload, before
+  // it draws anything, while this page still holds the lock.
+  releaseLock?.()
+  releaseLock = undefined
+  current?.abort()
 }
 
 // hold talks to the server until this tab stops or another takes over.
@@ -186,14 +192,23 @@ async function hold() {
   if (current === ctl) active = false
 }
 
+// releaseLock lets go of the turn this tab holds, at once.
+let releaseLock: (() => void) | undefined
+
 // acquire waits for this tab's turn. steal takes it now, for a tab that
-// opens a player while another tab has the turn.
+// opens a player while another tab has the turn. The turn is held until
+// hold returns or leave releases it, whichever comes first.
 function acquire(steal = false) {
   if (!navigator.locks) {
     if (!active) hold()
     return
   }
-  navigator.locks.request('matinee-remote', steal ? { steal: true } : {}, hold).catch(() => {
+  const held = () =>
+    new Promise<void>((release) => {
+      releaseLock = release
+      hold().then(release, release)
+    })
+  navigator.locks.request('matinee-remote', steal ? { steal: true } : {}, held).catch(() => {
     // Another tab took over: stop, and wait for another turn.
     current?.abort()
     active = false
@@ -208,6 +223,10 @@ export const remote = {
     if (running) return
     running = true
     window.addEventListener('pagehide', leave)
+    // Back from the back-forward cache: leave handed the turn back.
+    window.addEventListener('pageshow', (e) => {
+      if (e.persisted && !active) acquire()
+    })
     acquire()
   },
   // A player opened; it gets commands until the returned function is

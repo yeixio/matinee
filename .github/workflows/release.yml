@@ -79,7 +79,7 @@ jobs:
         with:
           go-version-file: go.mod
       - name: Install ffmpeg
-        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends ffmpeg
+        run: scripts/apt-install.sh ffmpeg
       - run: make lint
       - name: Test
         run: |
@@ -207,8 +207,7 @@ jobs:
           path: dist
       - name: Install packaging tools
         run: |
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends dpkg-dev apt-utils createrepo-c rpm
+          scripts/apt-install.sh dpkg-dev apt-utils createrepo-c rpm
           go install github.com/goreleaser/nfpm/v2/cmd/nfpm@v2.41.3
           echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
       - name: Build .deb and .rpm packages
@@ -260,7 +259,7 @@ jobs:
           cache-dependency-path: web/pnpm-lock.yaml
       - run: make web
       - name: Install NSIS
-        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends nsis
+        run: scripts/apt-install.sh nsis
       - name: Set up signing
         if: ${{ vars.AZURE_SIGNING_ACCOUNT != '' }}
         env:
