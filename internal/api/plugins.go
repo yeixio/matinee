@@ -142,8 +142,8 @@ func (s *Server) pluginCatalog(w http.ResponseWriter, r *http.Request) {
 		writeJSON(w, http.StatusOK, []catalogEntry{})
 		return
 	}
-	entries, err := cached(&s.catalogCache, "catalog", time.Hour, func() ([]catalogEntry, error) {
-		ctx, cancel := context.WithTimeout(r.Context(), 15*time.Second)
+	entries, err := cached(&s.catalogCache, "catalog", time.Hour, func(ctx context.Context) ([]catalogEntry, error) {
+		ctx, cancel := context.WithTimeout(ctx, 15*time.Second)
 		defer cancel()
 		req, err := http.NewRequestWithContext(ctx, http.MethodGet, s.PluginCatalog, nil)
 		if err != nil {

@@ -128,7 +128,7 @@ func (s *Server) probeTrailer(ctx context.Context, path string) (probe.Result, e
 		return probe.Result{}, err
 	}
 	key := fmt.Sprintf("trailer-probe:%s:%d:%d", path, info.Size(), info.ModTime().UnixNano())
-	return cached(&s.trailerCache, key, 24*time.Hour, func() (probe.Result, error) {
+	return cached(&s.trailerCache, key, 24*time.Hour, func(ctx context.Context) (probe.Result, error) {
 		return slowfs.DoWithin(path, 30*time.Second, func() (probe.Result, error) { return s.Scanner.Prober.Probe(ctx, path) })
 	})
 }
@@ -155,7 +155,7 @@ func (s *Server) remoteTrailers(ctx context.Context, it store.Item) []metadata.V
 	}
 	load := func(season int) []metadata.Video {
 		key := fmt.Sprintf("trailers:%s:%d:%d:%s", kind, *id, season, store.LanguageFrom(ctx))
-		vids, err := cached(&s.trailerCache, key, 12*time.Hour, func() ([]metadata.Video, error) {
+		vids, err := cached(&s.trailerCache, key, 12*time.Hour, func(ctx context.Context) ([]metadata.Video, error) {
 			return s.TrailerSource.Trailers(ctx, kind, *id, season)
 		})
 		if err != nil {

@@ -381,14 +381,14 @@ func (s *Server) discover(w http.ResponseWriter, r *http.Request) {
 // The pages of Overseerr's lists, cached a while: they change slowly, and
 // each is a trip out to TMDB.
 func (s *Server) recommendationsPage(ctx context.Context, cl *overseerr.Client, kind string, tmdbID, page int) (discoverPage, error) {
-	return cached(&s.discoverCache, "rec:"+kind+":"+strconv.Itoa(tmdbID)+":"+strconv.Itoa(page), time.Hour, func() (discoverPage, error) {
+	return cached(&s.discoverCache, "rec:"+kind+":"+strconv.Itoa(tmdbID)+":"+strconv.Itoa(page), time.Hour, func(ctx context.Context) (discoverPage, error) {
 		t, n, err := cl.RecommendationsPage(ctx, kind, tmdbID, page)
 		return discoverPage{t, n}, err
 	})
 }
 
 func (s *Server) discoverListPage(ctx context.Context, cl *overseerr.Client, list string, page int) (discoverPage, error) {
-	return cached(&s.discoverCache, "list:"+list+":"+strconv.Itoa(page), 30*time.Minute, func() (discoverPage, error) {
+	return cached(&s.discoverCache, "list:"+list+":"+strconv.Itoa(page), 30*time.Minute, func(ctx context.Context) (discoverPage, error) {
 		t, n, err := cl.DiscoverPage(ctx, list, page)
 		return discoverPage{t, n}, err
 	})
@@ -496,7 +496,7 @@ func (s *Server) discoverSearch(w http.ResponseWriter, r *http.Request) {
 // the same name as the person asking or their account, else the admin's
 // pick (the key's owner for Matinee's admins).
 func (s *Server) requestUser(ctx context.Context, cl *overseerr.Client, c overseerr.Config, u store.User) (int, error) {
-	users, err := cached(&s.discoverCache, "users", 10*time.Minute, func() ([]overseerr.User, error) {
+	users, err := cached(&s.discoverCache, "users", 10*time.Minute, func(ctx context.Context) ([]overseerr.User, error) {
 		return cl.Users(ctx)
 	})
 	if err != nil {

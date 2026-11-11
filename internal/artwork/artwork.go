@@ -6,6 +6,7 @@ import (
 	"context"
 	"crypto/sha1"
 	"encoding/hex"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -17,6 +18,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/yeixio/matinee/internal/netstate"
 	"github.com/yeixio/matinee/internal/slowfs"
 )
 
@@ -30,6 +32,7 @@ type Cache struct {
 
 	mu       sync.Mutex
 	inflight map[string]*sync.Mutex
+	failed   map[string]time.Time // images that couldn't be had, until when they're tried again
 }
 
 func NewCache(dir, ffmpeg string) *Cache {
@@ -128,12 +131,31 @@ func (c *Cache) cached(key, ext string, fill func(dst string) error) (string, er
 	if _, err := os.Stat(dst); err == nil {
 		return dst, nil
 	}
+	// One that couldn't be had a moment ago isn't tried again for a while,
+	// so a page full of missing covers doesn't wait on each one every time.
+	c.mu.Lock()
+	until, failed := c.failed[name]
+	c.mu.Unlock()
+	if failed && time.Now().Before(until) {
+		return "", errRecentlyFailed
+	}
 	if err := os.MkdirAll(filepath.Dir(dst), 0o755); err != nil {
 		return "", err
 	}
 	tmp := dst + ".tmp"
 	if err := fill(tmp); err != nil {
 		os.Remove(tmp)
+		// A share that isn't answering, a site known to be down or a page
+		// that went away says nothing about the image; it's tried again
+		// next time.
+		if !errors.Is(err, slowfs.ErrNotAnswering) && !errors.Is(err, netstate.ErrDown) && !errors.Is(err, context.Canceled) {
+			c.mu.Lock()
+			if c.failed == nil {
+				c.failed = map[string]time.Time{}
+			}
+			c.failed[name] = time.Now().Add(FailedWait)
+			c.mu.Unlock()
+		}
 		return "", err
 	}
 	return dst, os.Rename(tmp, dst)
@@ -196,3 +218,10 @@ func onShare(path string, wait time.Duration, fn func() error) error {
 	_, err := slowfs.DoWithin(path, wait, func() (struct{}, error) { return struct{}{}, fn() })
 	return err
 }
+
+// FailedWait is how long an image that couldn't be had (a cover art site
+// that doesn't have it, a video a still can't be taken from) waits before
+// it's tried again.
+var FailedWait = time.Hour
+
+var errRecentlyFailed = errors.New("couldn't be had a moment ago")
