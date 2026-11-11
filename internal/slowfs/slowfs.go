@@ -162,8 +162,12 @@ func Answering(path string) bool {
 // GiveUpAfter is how many times in a row reading a file may time out, with
 // its share answering each time, before a background job takes it for
 // damaged (say, a video whose seek index was never written, which FFmpeg
-// crawls through on every jump) and leaves it alone until it changes.
-const GiveUpAfter = 3
+// crawls through on every jump) and leaves it alone until it changes. Once:
+// a background job looks at each file once, and again only when it
+// changes, so a timeout with the share answering is that look's answer. A
+// count kept in memory would also start over with every restart, and never
+// reach more.
+const GiveUpAfter = 1
 
 // Timeouts counts, per file, reads that timed out while the file's share
 // was answering. The zero value is ready to use.
