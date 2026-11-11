@@ -606,7 +606,7 @@ try {
     const page = await open(desktop, token)
     await settings(page, 'health')
     await page.getByRole('heading', { name: 'Log', level: 3 }).scrollIntoViewIfNeeded()
-    await page.getByLabel('Run').selectOption(String(started))
+    await page.locator('select:has(option:text-is("This run"))').selectOption(String(started))
     await page.getByText('The server crashed').waitFor()
     await sleep(800)
     await shot(page, 'server-health-crash', { target: page.locator('#server-health > section > div:nth-child(5)') })
