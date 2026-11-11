@@ -1013,6 +1013,16 @@
         "binaryReadOnly": "Matinee kan ikke erstatte sin egen fil, fordi den ikke har lov til å skrive i mappen sin. Last ned den nye versjonen fra utgivelsessiden og erstatt den for hånd.",
         "source": "Denne serveren ble bygget fra kildekode, så det finnes ingen utgivelse å sammenligne med. Hent endringene og bygg på nytt for å oppdatere."
       }
+    },
+    "restart": {
+      "button": "Start serveren på nytt",
+      "restarting": "Starter på nytt…",
+      "confirm": "Starte Matinee på nytt nå? Den er tilbake om noen sekunder.",
+      "confirmPlaying": "Starte Matinee på nytt nå? Strømmer som spilles nå: {{count}}. De settes på pause og fortsetter der de var når den er tilbake.",
+      "waiting": "Matinee starter på nytt. Siden fortsetter når den er tilbake.",
+      "slow": "Matinee har ikke kommet tilbake etter to minutter. Se i loggen, eller start den igjen slik den ble installert.",
+      "back": "Matinee har startet på nytt og er tilbake.",
+      "failed": "Kunne ikke starte på nytt: {{error}}"
     }
   },
   "language": {

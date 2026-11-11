@@ -1009,6 +1009,16 @@
         "binaryReadOnly": "Matinee 无权写入自己所在的文件夹，因此无法替换自己的文件。请从发布页面下载新版本并手动替换。",
         "source": "此服务器是从源代码构建的，没有可比较的正式版本。要更新，请拉取改动并重新构建。"
       }
+    },
+    "restart": {
+      "button": "重启服务器",
+      "restarting": "正在重启…",
+      "confirm": "现在重启 Matinee 吗？几秒后就会恢复。",
+      "confirmPlaying": "现在重启 Matinee 吗？正在播放的串流：{{count}}。它们会暂停，恢复后从原处继续。",
+      "waiting": "Matinee 正在重启。恢复后此页面会继续。",
+      "slow": "两分钟后 Matinee 仍未恢复。请查看它的日志，或按安装方式重新启动它。",
+      "back": "Matinee 已重启并恢复。",
+      "failed": "无法重启：{{error}}"
     }
   },
   "language": {

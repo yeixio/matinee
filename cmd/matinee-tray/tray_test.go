@@ -22,23 +22,37 @@ import (
 func TestMain(m *testing.M) {
 	switch os.Getenv("FAKE_MATINEE") {
 	case "serve":
-		if os.Getenv("MATINEE_STOP_ON_STDIN_CLOSE") != "1" {
-			os.Exit(3)
-		}
-		ln, err := net.Listen("tcp", os.Getenv("FAKE_ADDR"))
-		if err != nil {
-			os.Exit(4)
-		}
-		go http.Serve(ln, http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			fmt.Fprint(w, `{"status":"ok","version":"0.1.8","state":"running"}`)
-		}))
-		io.Copy(io.Discard, os.Stdin)
-		fmt.Println("stopped cleanly")
-		os.Exit(0)
+		fakeServe()
 	case "crash":
 		os.Exit(2)
+	case "restart":
+		// Asks to be restarted the first few times, as Settings' Restart
+		// does, then serves.
+		count := os.Getenv("FAKE_COUNT")
+		b, _ := os.ReadFile(count)
+		os.WriteFile(count, append(b, 'x'), 0o644)
+		if len(b) < 4 {
+			os.Exit(restartExitCode)
+		}
+		fakeServe()
 	}
 	os.Exit(m.Run())
+}
+
+func fakeServe() {
+	if os.Getenv("MATINEE_STOP_ON_STDIN_CLOSE") != "1" {
+		os.Exit(3)
+	}
+	ln, err := net.Listen("tcp", os.Getenv("FAKE_ADDR"))
+	if err != nil {
+		os.Exit(4)
+	}
+	go http.Serve(ln, http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprint(w, `{"status":"ok","version":"0.1.8","state":"running"}`)
+	}))
+	io.Copy(io.Discard, os.Stdin)
+	fmt.Println("stopped cleanly")
+	os.Exit(0)
 }
 
 // syncBuffer is a log both processes write to.
@@ -125,6 +139,28 @@ func TestServerThatKeepsCrashingStaysStopped(t *testing.T) {
 	// Start tries again from scratch.
 	s.Start()
 	waitFor(t, s, Failed)
+}
+
+// A server stopping to be restarted starts again at once, however often,
+// and isn't counted as a crash.
+func TestServerRestartsWhenItAsks(t *testing.T) {
+	exe, _ := os.Executable()
+	addr := freeAddr(t)
+	log := &syncBuffer{}
+	count := t.TempDir() + "/count"
+	s := &Server{Exe: exe, Env: []string{"FAKE_MATINEE=restart", "FAKE_COUNT=" + count, "FAKE_ADDR=" + addr}, Log: log,
+		HealthURL: "http://" + addr + "/api/v1/health", RestartDelay: time.Hour}
+	if err := s.Start(); err != nil {
+		t.Fatal(err)
+	}
+	waitFor(t, s, Running)
+	if n := strings.Count(log.String(), "asked to restart"); n != 4 {
+		t.Fatalf("restarted %d times, want 4: %s", n, log.String())
+	}
+	if s.LastError() != nil {
+		t.Fatalf("a restart is no error: %v", s.LastError())
+	}
+	s.Stop(5 * time.Second)
 }
 
 func TestNewer(t *testing.T) {

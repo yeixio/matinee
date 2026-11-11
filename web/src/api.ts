@@ -1088,6 +1088,8 @@ export type Health = {
     remote?: RemoteStatus
     scanIntervalMs: number
     watching?: string
+    // Whether an admin can restart the server from Settings.
+    canRestart?: boolean
     internet?: InternetStatus
   }
   system: {
@@ -1788,6 +1790,7 @@ export const api = {
   saveUpdateSettings: (s: UpdateSettings) => request<Updates>('PUT', '/api/v1/admin/updates', s),
   checkUpdates: () => request<Updates>('POST', '/api/v1/admin/updates/check'),
   applyUpdate: () => request<Updates>('POST', '/api/v1/admin/updates/apply'),
+  restartServer: () => request<{ bootId: string }>('POST', '/api/v1/admin/restart'),
   backups: () => request<Backups>('GET', '/api/v1/admin/backups'),
   makeBackup: () => request<Backups>('POST', '/api/v1/admin/backups'),
   saveBackupSettings: (s: BackupSettings) => request<Backups>('PUT', '/api/v1/admin/backups/settings', s),

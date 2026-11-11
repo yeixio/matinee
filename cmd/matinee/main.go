@@ -333,6 +333,7 @@ func run() error {
 		return playing+transcodes > 0
 	})
 	apiServer.Updates = updates
+	apiServer.Restart = newRestart(stop)
 	go updates.Run(ctx)
 	if _, problems := theme.Load(cfg.ThemeDir()); len(problems) > 0 {
 		for _, p := range problems {

@@ -1017,6 +1017,16 @@
         "binaryReadOnly": "Matinee ne peut pas remplacer son propre fichier, car il n'a pas le droit d'écrire dans son dossier. Téléchargez la nouvelle version depuis sa page de publication et remplacez-le à la main.",
         "source": "Ce serveur a été compilé depuis les sources, il n'y a donc pas de version publiée à laquelle le comparer. Récupérez les changements et recompilez pour mettre à jour."
       }
+    },
+    "restart": {
+      "button": "Redémarrer le serveur",
+      "restarting": "Redémarrage…",
+      "confirm": "Redémarrer Matinee maintenant ? Il revient en quelques secondes.",
+      "confirmPlaying": "Redémarrer Matinee maintenant ? Lectures en cours : {{count}}. Elles se mettent en pause et reprennent là où elles en étaient à son retour.",
+      "waiting": "Matinee redémarre. Cette page continue dès son retour.",
+      "slow": "Matinee n'est pas revenu après deux minutes. Consultez son journal ou relancez-le comme il a été installé.",
+      "back": "Matinee a redémarré et est de retour.",
+      "failed": "Impossible de redémarrer : {{error}}"
     }
   },
   "language": {

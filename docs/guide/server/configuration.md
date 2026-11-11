@@ -104,7 +104,7 @@ Each variable also works as a flag: `MATINEE_SCAN_INTERVAL=1h` is `--scan-interv
 
 The server's clock goes by its time zone: the times in its log, when Home's [holiday rows](/docs/watching/home/) start, and anything else that goes by the time of day. Matinee starts in the computer's own time zone, or the one in the `TZ` environment variable (such as `TZ=America/Juneau`), which a container or Kubernetes install usually needs since it has none of its own.
 
-To pick another, open **Settings → Server health → Time zone** and choose one from the list. The first choice, **This computer's**, goes back to the computer's or `TZ`'s. Matinee switches the next time it starts, and says so until then: restart it, or wait for its next update.
+To pick another, open **Settings → Server health → Time zone** and choose one from the list. The first choice, **This computer's**, goes back to the computer's or `TZ`'s. Matinee switches the next time it starts, and says so until then: restart it<!-- since: v0.2.4 --> with **Restart server** at the top of [Server health](/docs/server/server-health/#restart-the-server)<!-- /since -->, or wait for its next update.
 
 ![The Time zone setting](../images/time-zone.webp)
 <!-- /since -->

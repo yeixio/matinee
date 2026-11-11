@@ -1021,6 +1021,16 @@
         "binaryReadOnly": "Matinee nie może zastąpić własnego pliku, bo nie ma prawa zapisu w swoim folderze. Pobierz nową wersję ze strony wydania i podmień plik ręcznie.",
         "source": "Ten serwer zbudowano ze źródeł, więc nie ma wydania, z którym można go porównać. Pobierz zmiany i zbuduj ponownie, aby zaktualizować."
       }
+    },
+    "restart": {
+      "button": "Uruchom serwer ponownie",
+      "restarting": "Ponowne uruchamianie…",
+      "confirm": "Uruchomić Matinee ponownie? Wróci za kilka sekund.",
+      "confirmPlaying": "Uruchomić Matinee ponownie? Odtwarzane teraz strumienie: {{count}}. Zatrzymają się i wznowią od tego samego miejsca, gdy wróci.",
+      "waiting": "Matinee uruchamia się ponownie. Ta strona będzie działać dalej, gdy wróci.",
+      "slow": "Matinee nie wrócił po dwóch minutach. Sprawdź jego dziennik albo uruchom go tak, jak został zainstalowany.",
+      "back": "Matinee uruchomił się ponownie i działa.",
+      "failed": "Nie udało się uruchomić ponownie: {{error}}"
     }
   },
   "language": {

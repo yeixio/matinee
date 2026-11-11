@@ -12,8 +12,9 @@ import (
 	"github.com/yeixio/matinee/internal/version"
 )
 
-// restartRequested is set when the server stops to start a new version of
-// itself (a plain binary that installed an update).
+// restartRequested is set when the server stops to start again: a new
+// version of itself (a plain binary that installed an update), or the same
+// one when an admin pressed Restart.
 var restartRequested atomic.Bool
 
 // restartPath is the binary to start: the path the server started from,
@@ -51,6 +52,18 @@ func newUpdates(db *store.Store, log *slog.Logger, stop func(), busy func() bool
 	}
 	log.Info("updates", "install", m.Install.Kind, "can_install", m.Install.CanApply)
 	return m
+}
+
+// newRestart is Settings' Restart: the server stops the way it does for a
+// deploy and starts the same binary again. nil where it can't.
+func newRestart(stop func()) func() {
+	if !canRestart() {
+		return nil
+	}
+	return func() {
+		restartRequested.Store(true)
+		stop()
+	}
 }
 
 func envOr(key, def string) string {

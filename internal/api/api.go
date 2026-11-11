@@ -196,7 +196,11 @@ type Server struct {
 	// Backups makes and restores copies of a SQLite database; nil makes none.
 	Backups *backup.Manager
 	// Updates looks for newer versions and installs them where it can.
-	Updates    *update.Manager
+	Updates *update.Manager
+	// Restart stops the server and starts it again (cmd/matinee); nil
+	// when it can't restart itself.
+	Restart    func()
+	restarting atomic.Bool
 	alertsOnce sync.Once
 }
 
@@ -320,6 +324,7 @@ func (s *Server) routes() []route {
 		{"PUT /admin/updates", adminOnly, s.putUpdates},
 		{"POST /admin/updates/check", adminOnly, s.checkUpdates},
 		{"POST /admin/updates/apply", adminOnly, s.applyUpdate},
+		{"POST /admin/restart", adminOnly, s.restartServer},
 		{"GET /admin/notifications", adminOnly, s.getNotificationSettings},
 		{"PUT /admin/notifications", adminOnly, s.putNotificationSettings},
 		{"GET /admin/alerts", adminOnly, s.getAlerts},

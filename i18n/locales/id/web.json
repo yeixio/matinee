@@ -1009,6 +1009,16 @@
         "binaryReadOnly": "Matinee tidak bisa mengganti berkasnya sendiri karena tidak boleh menulis ke foldernya. Unduh versi baru dari halaman rilisnya dan ganti secara manual.",
         "source": "Server ini dibangun dari kode sumber, jadi tidak ada rilis untuk dibandingkan. Tarik perubahan dan bangun ulang untuk memperbarui."
       }
+    },
+    "restart": {
+      "button": "Mulai ulang server",
+      "restarting": "Memulai ulang…",
+      "confirm": "Mulai ulang Matinee sekarang? Akan kembali dalam beberapa detik.",
+      "confirmPlaying": "Mulai ulang Matinee sekarang? Stream yang sedang diputar: {{count}}. Stream akan dijeda dan dilanjutkan dari posisi terakhir setelah kembali.",
+      "waiting": "Matinee sedang dimulai ulang. Halaman ini lanjut setelah kembali.",
+      "slow": "Matinee belum kembali setelah dua menit. Lihat log-nya, atau jalankan lagi dengan cara pemasangannya.",
+      "back": "Matinee sudah dimulai ulang dan kembali.",
+      "failed": "Gagal memulai ulang: {{error}}"
     }
   },
   "language": {

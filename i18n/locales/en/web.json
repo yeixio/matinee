@@ -1013,6 +1013,16 @@
         "binaryReadOnly": "Matinee can't replace its own file, because it isn't allowed to write to its folder. Download the new version from its release page and replace it by hand.",
         "source": "This server was built from source, so there's no release to compare it with. Pull and build again to update."
       }
+    },
+    "restart": {
+      "button": "Restart server",
+      "restarting": "Restarting…",
+      "confirm": "Restart Matinee now? It's back in a few seconds.",
+      "confirmPlaying": "Restart Matinee now? Streams playing right now: {{count}}. They pause and pick up where they were once it's back.",
+      "waiting": "Matinee is restarting. This page carries on once it's back.",
+      "slow": "Matinee hasn't come back after two minutes. Look at its log, or start it again the way it was installed.",
+      "back": "Matinee restarted and is back.",
+      "failed": "Couldn't restart: {{error}}"
     }
   },
   "language": {

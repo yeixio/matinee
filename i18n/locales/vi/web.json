@@ -1009,6 +1009,16 @@
         "binaryReadOnly": "Matinee không thể thay tệp của chính nó vì không được phép ghi vào thư mục của mình. Hãy tải phiên bản mới từ trang phát hành và thay thủ công.",
         "source": "Máy chủ này được dựng từ mã nguồn, nên không có bản phát hành nào để so sánh. Hãy kéo thay đổi về và dựng lại để cập nhật."
       }
+    },
+    "restart": {
+      "button": "Khởi động lại máy chủ",
+      "restarting": "Đang khởi động lại…",
+      "confirm": "Khởi động lại Matinee ngay? Vài giây là xong.",
+      "confirmPlaying": "Khởi động lại Matinee ngay? Luồng đang phát: {{count}}. Chúng sẽ tạm dừng và tiếp tục từ chỗ cũ khi Matinee hoạt động lại.",
+      "waiting": "Matinee đang khởi động lại. Trang này sẽ tiếp tục khi Matinee hoạt động lại.",
+      "slow": "Sau hai phút Matinee vẫn chưa hoạt động lại. Hãy xem nhật ký hoặc khởi động lại theo cách đã cài đặt.",
+      "back": "Matinee đã khởi động lại và hoạt động trở lại.",
+      "failed": "Không thể khởi động lại: {{error}}"
     }
   },
   "language": {

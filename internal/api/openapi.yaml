@@ -1501,6 +1501,28 @@ paths:
           content:
             application/json:
               schema: { $ref: "#/components/schemas/Updates" }
+  /admin/restart:
+    post:
+      summary: Restart the server (admins only)
+      description: >-
+        The server stops the way it does for a deploy (players hear it's restarting and pick up where
+        they were) and starts again. Once /health answers with a bootId other than this one, it's back.
+        GET /admin/health's server.canRestart says whether this server can restart itself.
+      responses:
+        "200":
+          description: Restarting.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [bootId]
+                properties:
+                  bootId: { type: string, description: The run that's stopping. }
+        "409":
+          description: This server can't restart itself (Windows, outside the tray app).
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Error" }
   /admin/notifications:
     get:
       summary: What admins are told about (admins only)

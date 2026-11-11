@@ -1021,6 +1021,16 @@
         "binaryReadOnly": "Matinee nemůže nahradit svůj vlastní soubor, protože nesmí zapisovat do své složky. Stáhněte novou verzi ze stránky vydání a nahraďte ho ručně.",
         "source": "Tento server byl sestaven ze zdrojového kódu, takže není s jakým vydáním ho porovnat. Pro aktualizaci stáhněte změny a sestavte ho znovu."
       }
+    },
+    "restart": {
+      "button": "Restartovat server",
+      "restarting": "Restartuje se…",
+      "confirm": "Restartovat Matinee teď? Za pár sekund bude zpět.",
+      "confirmPlaying": "Restartovat Matinee teď? Právě přehrávané streamy: {{count}}. Pozastaví se a po návratu pokračují tam, kde byly.",
+      "waiting": "Matinee se restartuje. Tato stránka bude pokračovat, až bude zpět.",
+      "slow": "Matinee se ani po dvou minutách nevrátil. Podívejte se do jeho protokolu nebo ho spusťte znovu tak, jak byl nainstalován.",
+      "back": "Matinee se restartoval a je zpět.",
+      "failed": "Restart se nezdařil: {{error}}"
     }
   },
   "language": {
