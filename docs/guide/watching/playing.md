@@ -89,6 +89,10 @@ While there's a delay, the server sends the sound moved (only the sound is conve
 From version 1.0.27 the phone and TV apps have **Audio delay** in the player too (the timer button on a phone, in the player's menu on a TV). Press **Sound earlier** or **Sound later** until the sound matches; each phone or TV keeps its own, and **Just for this title** works the same way.
 <!-- /since -->
 
+<!-- since: v0.2.4 -->
+An audio delay is for your speakers or one odd file, not for every film. When an iPhone, iPad or Apple TV plays a 4K or HDR film as it is (HEVC or AV1), the server now lines the sound up with the picture itself. Before, the sound could come up to a second or two early after you resumed or skipped, by a different amount each time, so a delay set to make up for it was wrong the next time. If you set one for that, set it back to **No delay**.
+<!-- /since -->
+
 <!-- since: v0.2.2 -->
 ## Clear voice
 
