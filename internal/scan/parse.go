@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/yeixio/matinee/internal/mediaid"
+	"github.com/yeixio/matinee/internal/namefix"
 )
 
 var (
@@ -42,8 +43,11 @@ var (
 func isVideo(path string) bool { return videoExts[strings.ToLower(filepath.Ext(path))] }
 func isAudio(path string) bool { return audioExts[strings.ToLower(filepath.Ext(path))] }
 
-// cleanTitle turns "The.Dark_Knight " into "The Dark Knight".
+// cleanTitle turns "The.Dark_Knight " into "The Dark Knight", and a name
+// written oddly on disk back into its title: "Ame\u0301lie" (accents as
+// macOS writes them) into "Amélie", garbled "Ã\u0086on Flux" into "Æon Flux".
 func cleanTitle(s string) string {
+	s = namefix.Repair(s)
 	s = strings.NewReplacer(".", " ", "_", " ").Replace(s)
 	s = strings.TrimSpace(s)
 	s = strings.TrimRight(s, " -([")
@@ -284,10 +288,10 @@ func ParseTrackPath(libraryRoot, path string) TrackInfo {
 			}
 		}
 		if len(parts) >= 3 {
-			info.Artist = parts[len(parts)-3]
-			info.Album = parts[len(parts)-2]
+			info.Artist = namefix.Repair(parts[len(parts)-3])
+			info.Album = namefix.Repair(parts[len(parts)-2])
 		} else if len(parts) == 2 {
-			info.Album = parts[0]
+			info.Album = namefix.Repair(parts[0])
 		}
 	}
 	if mi := parseMovieName(info.Album); mi.Year != 0 {

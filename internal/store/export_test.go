@@ -27,3 +27,12 @@ func (s *Store) SetMetaAt(ctx context.Context, id, at int64) error {
 	_, err := s.db.ExecContext(ctx, "UPDATE items SET meta_at = ? WHERE id = ?", at, id)
 	return err
 }
+
+// RepairNamesAgain runs the one-time repair of titles from oddly written
+// file names again.
+func (s *Store) RepairNamesAgain(ctx context.Context) error {
+	if _, err := s.db.ExecContext(ctx, "DELETE FROM settings WHERE key = 'backfill:names'"); err != nil {
+		return err
+	}
+	return s.repairNames(ctx)
+}

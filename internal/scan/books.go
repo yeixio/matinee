@@ -9,6 +9,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/yeixio/matinee/internal/namefix"
 	"github.com/yeixio/matinee/internal/probe"
 	"github.com/yeixio/matinee/internal/store"
 )
@@ -186,7 +187,7 @@ func ParseBookPath(libraryRoot, path string) BookFile {
 // bookTitle tidies a file or folder name into a title. Unlike a movie's,
 // dots stay: they're in names like "Mr. Smith" or "Book 1.5".
 func bookTitle(s string) string {
-	return spacesRe.ReplaceAllString(strings.TrimSpace(strings.ReplaceAll(s, "_", " ")), " ")
+	return spacesRe.ReplaceAllString(strings.TrimSpace(strings.ReplaceAll(namefix.Repair(s), "_", " ")), " ")
 }
 
 // splitSeriesIndex takes a book's place in its series out of its title.

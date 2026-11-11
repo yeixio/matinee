@@ -79,6 +79,10 @@ func OpenWith(dsn string, o Options) (*Store, error) {
 		d.Close()
 		return nil, fmt.Errorf("backfill filters: %w", err)
 	}
+	if err := s.repairNames(context.Background()); err != nil {
+		d.Close()
+		return nil, fmt.Errorf("repair names: %w", err)
+	}
 	if err := s.groupNotifications(context.Background()); err != nil {
 		d.Close()
 		return nil, fmt.Errorf("group notifications: %w", err)
