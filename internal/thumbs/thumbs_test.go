@@ -2,6 +2,7 @@ package thumbs
 
 import (
 	"context"
+	"errors"
 	"image"
 	"image/jpeg"
 	"io"
@@ -9,6 +10,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"strconv"
 	"testing"
 	"time"
 
@@ -204,5 +206,63 @@ func TestUnreadable(t *testing.T) {
 	_, err = g.make(context.Background(), store.ThumbnailFile{ID: 1, Path: filepath.Join(t.TempDir(), "missing.mkv"), DurationMs: 10_000})
 	if err == nil {
 		t.Fatal("want an error")
+	}
+}
+
+// fakeFFmpeg writes a stand-in for FFmpeg that hands over a 2x2 picture for
+// any jump, and hangs on jumps at or past hangFrom seconds, or exactly at
+// hangAt, as FFmpeg does on a file whose end is damaged.
+func fakeFFmpeg(t *testing.T, hangFrom, hangAt int) string {
+	t.Helper()
+	path := filepath.Join(t.TempDir(), "ffmpeg")
+	script := `#!/bin/sh
+while [ "$#" -gt 0 ]; do
+	if [ "$1" = "-ss" ]; then at=${2%%.*}; fi
+	shift
+done
+if [ "$at" -ge ` + strconv.Itoa(hangFrom) + ` ] || [ "$at" -eq ` + strconv.Itoa(hangAt) + ` ]; then exec sleep 5; fi
+printf 'P6\n2 2\n255\n'
+printf '\377\0\0\377\0\0\377\0\0\377\0\0'
+`
+	if err := os.WriteFile(path, []byte(script), 0o755); err != nil {
+		t.Fatal(err)
+	}
+	return path
+}
+
+// A big file whose end can't be read keeps its pictures up to there, and a
+// jump that's slow once is skipped; neither is taken for a damaged file.
+func TestJumpingDamagedEnd(t *testing.T) {
+	if _, err := exec.LookPath("sh"); err != nil {
+		t.Skip("no shell")
+	}
+	old := frameTimeout
+	t.Cleanup(func() { frameTimeout = old })
+	frameTimeout = 200 * time.Millisecond
+	log := slog.New(slog.NewTextHandler(io.Discard, nil))
+	jump := func(ffmpeg string, count int) (int, error) {
+		g := &Generator{FFmpeg: ffmpeg, Log: log}
+		n := 0
+		err := g.jumping(context.Background(), "film.mkv", time.Second, count, "", func(*frame) error { n++; return nil })
+		return n, err
+	}
+
+	// The last 3 of 10 points hang: the first of them is skipped, and the
+	// second stops there with 8 pictures and no error (finish fills in the
+	// rest).
+	if n, err := jump(fakeFFmpeg(t, 7, -1), 10); err != nil || n != 8 {
+		t.Fatalf("damaged end: %d pictures, err %v", n, err)
+	}
+	// One slow point early on is skipped: all 10, the one before standing in.
+	if n, err := jump(fakeFFmpeg(t, 1000, 2), 10); err != nil || n != 10 {
+		t.Fatalf("one slow jump: %d pictures, err %v", n, err)
+	}
+	// Hanging from before the middle is a damaged file.
+	if _, err := jump(fakeFFmpeg(t, 3, -1), 10); !errors.Is(err, context.DeadlineExceeded) {
+		t.Fatalf("hangs before the middle: err %v", err)
+	}
+	// So is one that hangs at its very start.
+	if _, err := jump(fakeFFmpeg(t, 0, -1), 10); !errors.Is(err, context.DeadlineExceeded) {
+		t.Fatalf("hangs at the start: err %v", err)
 	}
 }
