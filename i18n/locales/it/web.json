@@ -1415,7 +1415,19 @@
       },
       "live": "Segui le nuove righe",
       "older": "Mostra righe precedenti",
-      "empty": "Nessuna riga corrisponde."
+      "empty": "Nessuna riga corrisponde.",
+      "introRuns": "Le ultime {{count}} righe dall'avvio del server. I log delle ultime 10 esecuzioni sono conservati anche nella cartella dei dati, così qui si può leggere cosa è successo prima di un crash o di un riavvio.",
+      "run": "Esecuzione",
+      "runs": {
+        "current": "Questa esecuzione",
+        "clean": "chiusa correttamente",
+        "crashed": "andata in crash",
+        "unclean": "chiusa inaspettatamente",
+        "errors": "errori: {{count}}"
+      },
+      "earlierRun": "Dal {{from}} al {{to}}, versione {{version}} su {{host}}.",
+      "uncleanNote": "Si è fermata senza chiudersi correttamente: forse è stata terminata, ad esempio perché usava troppa memoria, o la macchina è rimasta senza corrente. Le sue ultime righe sono qui sotto.",
+      "crashTitle": "Il server è andato in crash"
     },
     "internet": {
       "offline": "Nessuna connessione a internet da {{time}}",

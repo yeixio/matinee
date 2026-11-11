@@ -1404,7 +1404,19 @@
       },
       "live": "Follow new lines",
       "older": "Show older lines",
-      "empty": "No lines match."
+      "empty": "No lines match.",
+      "introRuns": "The latest {{count}} lines since the server started. The logs of the last 10 runs are kept in the data folder too, so what happened before a crash or a restart can still be read here.",
+      "run": "Run",
+      "runs": {
+        "current": "This run",
+        "clean": "stopped cleanly",
+        "crashed": "crashed",
+        "unclean": "stopped unexpectedly",
+        "errors": "errors: {{count}}"
+      },
+      "earlierRun": "From {{from}} to {{to}}, version {{version}} on {{host}}.",
+      "uncleanNote": "It stopped without shutting down cleanly: it may have been killed, for example for using too much memory, or the machine lost power. Its last lines are below.",
+      "crashTitle": "The server crashed"
     },
     "internet": {
       "offline": "No internet connection for {{time}}",

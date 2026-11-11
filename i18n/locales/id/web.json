@@ -1393,7 +1393,19 @@
       },
       "live": "Ikuti baris baru",
       "older": "Tampilkan baris lebih lama",
-      "empty": "Tidak ada baris yang cocok."
+      "empty": "Tidak ada baris yang cocok.",
+      "introRuns": "{{count}} baris terbaru sejak server dimulai. Log dari 10 kali jalan terakhir juga disimpan di folder data, jadi apa yang terjadi sebelum crash atau restart tetap bisa dibaca di sini.",
+      "run": "Jalan",
+      "runs": {
+        "current": "Jalan ini",
+        "clean": "berhenti dengan benar",
+        "crashed": "crash",
+        "unclean": "berhenti tiba-tiba",
+        "errors": "galat: {{count}}"
+      },
+      "earlierRun": "Dari {{from}} sampai {{to}}, versi {{version}} di {{host}}.",
+      "uncleanNote": "Berhenti tanpa dimatikan dengan benar: mungkin dihentikan paksa, misalnya karena memakai terlalu banyak memori, atau listrik mesin padam. Baris terakhirnya ada di bawah.",
+      "crashTitle": "Server crash"
     },
     "internet": {
       "offline": "Tidak ada koneksi internet selama {{time}}",

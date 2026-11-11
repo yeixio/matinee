@@ -1404,7 +1404,19 @@
       },
       "live": "Seuraa uusia rivejä",
       "older": "Näytä vanhemmat rivit",
-      "empty": "Mikään rivi ei täsmää."
+      "empty": "Mikään rivi ei täsmää.",
+      "introRuns": "Viimeisimmät {{count}} riviä palvelimen käynnistyksen jälkeen. Viimeisten 10 ajon lokit säilytetään myös datakansiossa, joten täältä voi lukea, mitä tapahtui ennen kaatumista tai uudelleenkäynnistystä.",
+      "run": "Ajo",
+      "runs": {
+        "current": "Tämä ajo",
+        "clean": "pysähtyi siististi",
+        "crashed": "kaatui",
+        "unclean": "pysähtyi odottamatta",
+        "errors": "virheitä: {{count}}"
+      },
+      "earlierRun": "{{from}} – {{to}}, versio {{version}} koneella {{host}}.",
+      "uncleanNote": "Se pysähtyi sammumatta siististi: se on ehkä lopetettu esimerkiksi liiallisen muistinkäytön vuoksi, tai koneesta katkesi virta. Sen viimeiset rivit ovat alla.",
+      "crashTitle": "Palvelin kaatui"
     },
     "internet": {
       "offline": "Ei internetyhteyttä {{time}}",

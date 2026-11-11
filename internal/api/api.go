@@ -310,6 +310,7 @@ func (s *Server) routes() []route {
 		{"GET /admin/health", adminOnly, s.getHealth},
 		{"GET /admin/logs", adminOnly, s.getLogs},
 		{"GET /admin/logs/download", adminOnly, s.downloadLogs},
+		{"GET /admin/logs/runs", adminOnly, s.getLogRuns},
 		{"GET /admin/backups", adminOnly, s.getBackups},
 		{"POST /admin/backups", adminOnly, s.makeBackup},
 		{"PUT /admin/backups/settings", adminOnly, s.setBackupSettings},

@@ -1426,7 +1426,19 @@
       },
       "live": "Sledovat nové řádky",
       "older": "Zobrazit starší řádky",
-      "empty": "Žádné odpovídající řádky."
+      "empty": "Žádné odpovídající řádky.",
+      "introRuns": "Posledních {{count}} řádků od spuštění serveru. Logy posledních 10 běhů se ukládají i do datové složky, takže si tu můžete přečíst, co se stalo před pádem nebo restartem.",
+      "run": "Běh",
+      "runs": {
+        "current": "Tento běh",
+        "clean": "ukončen správně",
+        "crashed": "spadl",
+        "unclean": "ukončen nečekaně",
+        "errors": "chyby: {{count}}"
+      },
+      "earlierRun": "Od {{from}} do {{to}}, verze {{version}} na {{host}}.",
+      "uncleanNote": "Skončil bez řádného vypnutí: mohl být ukončen, například kvůli příliš velké spotřebě paměti, nebo vypadl proud. Jeho poslední řádky jsou níže.",
+      "crashTitle": "Server spadl"
     },
     "internet": {
       "offline": "Bez připojení k internetu {{time}}",

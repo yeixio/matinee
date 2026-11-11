@@ -1393,7 +1393,19 @@
       },
       "live": "Theo dõi dòng mới",
       "older": "Hiện các dòng cũ hơn",
-      "empty": "Không có dòng nào khớp."
+      "empty": "Không có dòng nào khớp.",
+      "introRuns": "{{count}} dòng mới nhất kể từ khi máy chủ khởi động. Nhật ký của 10 lần chạy gần nhất cũng được giữ trong thư mục dữ liệu, nên vẫn đọc được ở đây chuyện gì đã xảy ra trước khi máy chủ gặp sự cố hoặc khởi động lại.",
+      "run": "Lần chạy",
+      "runs": {
+        "current": "Lần chạy này",
+        "clean": "đã dừng bình thường",
+        "crashed": "gặp sự cố",
+        "unclean": "dừng bất ngờ",
+        "errors": "lỗi: {{count}}"
+      },
+      "earlierRun": "Từ {{from}} đến {{to}}, phiên bản {{version}} trên {{host}}.",
+      "uncleanNote": "Nó dừng mà không tắt đúng cách: có thể đã bị buộc dừng, chẳng hạn vì dùng quá nhiều bộ nhớ, hoặc máy bị mất điện. Các dòng cuối cùng ở bên dưới.",
+      "crashTitle": "Máy chủ gặp sự cố"
     },
     "internet": {
       "offline": "Không có kết nối internet trong {{time}}",

@@ -268,6 +268,7 @@
   "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "只有電影、劇集、季和節目可以標記為已看",
   "only_movies_have_editions": "只有電影有版本",
   "no_such_backup": "沒有這個備份",
+  "no_such_run": "沒有這次執行",
   "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "此伺服器的資料庫是 PostgreSQL;請用 pg_dump 備份",
   "audiodelay_is_milliseconds_between_2000_and_2000": "音訊延遲以毫秒為單位，範圍為 -2000 到 2000。",
   "subtitle_choices_arent_ones_the_apps_know": "應用程式無法識別這些字幕選項",

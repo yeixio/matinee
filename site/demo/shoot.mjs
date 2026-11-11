@@ -8,13 +8,15 @@
 // Needs Go, FFmpeg and Playwright's Chromium. The first run makes the demo
 // library in demo/.cache, which takes a few minutes.
 
+import { writeFileSync } from 'node:fs'
 import http from 'node:http'
+import path from 'node:path'
 import { chromium } from 'playwright'
 import { cover } from './art.mjs'
 import { capture, desktop, phone, sleep } from './capture.mjs'
 import { onAir, stations } from './catalog.mjs'
 import { feedURL, guideURL, stationFound } from './fake-podcasts.mjs'
-import { addLibraries, admin, api, origin, overseerrURL, podcastsPort, setUp, startServer } from './server.mjs'
+import { addLibraries, admin, api, cache, origin, overseerrURL, podcastsPort, setUp, startServer } from './server.mjs'
 
 const { media, stop } = await startServer()
 const browser = await chromium.launch()
@@ -575,6 +577,40 @@ try {
     await shot(page, 'server-health-log', { target: part(5) })
     await page.context().close()
     await viewer.context().close()
+  }
+
+  // --- An earlier run that crashed (server-health.md#earlier-runs-and-crashes) ---
+  if (wanted('server-health-crash')) {
+    // A run from last night that ran out of memory partway through a scan,
+    // as the server saves it (internal/health/runs.go).
+    const logs = path.join(cache, 'data', 'logs')
+    const started = Date.now() - 9 * 3600_000
+    const at = (min) => started + min * 60_000
+    let seq = 0
+    const line = (min, level, message, attrs) => JSON.stringify({ seq: ++seq, time: at(min), level, message, ...(attrs ? { attrs: Object.entries(attrs).map(([key, value]) => ({ key, value })) } : {}) })
+    writeFileSync(
+      path.join(logs, `${started}.log`),
+      [
+        JSON.stringify({ run: started, version: 'v0.2.3', host: 'matinee-7d9c5b6f4-x2k8q' }),
+        line(0, 'info', 'matinee started', { version: 'v0.2.3', addr: ':7171' }),
+        line(42, 'info', 'scan started', { library: 'Movies', reason: 'schedule' }),
+        line(44, 'warn', 'slow read', { path: '/media/movies/Harbor Lights (1951)/Harbor Lights.mkv', took: '12.4s' }),
+        line(45, 'error', 'probe failed', { path: '/media/movies/Night Ferry (1948)/Night Ferry.mkv', err: 'ffprobe: signal: killed' }),
+        line(46, 'info', 'scan progress', { library: 'Movies', done: '812', total: '1630' }),
+      ].join('\n') + '\n',
+    )
+    writeFileSync(
+      path.join(logs, `${started}.crash`),
+      'fatal error: runtime: out of memory\n\nruntime stack:\nruntime.throw({0x1a2b3c4, 0x16})\n\t/usr/local/go/src/runtime/panic.go:1101 +0x48\nruntime.sysMap(0xc0a0000000, 0x4000000, 0x2f8c1d0)\n\t/usr/local/go/src/runtime/mem_linux.go:167 +0x84\n\ngoroutine 2187 [running]:\ngithub.com/yeixio/matinee/internal/scan.(*Scanner).probe(...)\n\t/src/internal/scan/probe.go:88 +0x1f4\n',
+    )
+    const page = await open(desktop, token)
+    await settings(page, 'health')
+    await page.getByRole('heading', { name: 'Log', level: 3 }).scrollIntoViewIfNeeded()
+    await page.locator('select:has(option:text-is("This run"))').selectOption(String(started))
+    await page.getByText('The server crashed').waitFor()
+    await sleep(800)
+    await shot(page, 'server-health-crash', { target: page.locator('#server-health > section > div:nth-child(5)') })
+    await page.context().close()
   }
 
   // --- Restart server (docs/guide/server/server-health.md) ---

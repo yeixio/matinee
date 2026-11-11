@@ -268,6 +268,7 @@
   "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "Só filmes, episódios, temporadas e séries podem ser marcados como assistidos",
   "only_movies_have_editions": "só filmes têm edições",
   "no_such_backup": "Backup não encontrado",
+  "no_such_run": "Execução não encontrada",
   "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "O banco de dados deste servidor é PostgreSQL; faça backup com pg_dump",
   "audiodelay_is_milliseconds_between_2000_and_2000": "O atraso do áudio é em milissegundos, entre -2000 e 2000.",
   "subtitle_choices_arent_ones_the_apps_know": "Os apps não reconhecem essas opções de legendas",

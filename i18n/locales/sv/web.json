@@ -1404,7 +1404,19 @@
       },
       "live": "Följ nya rader",
       "older": "Visa äldre rader",
-      "empty": "Inga rader matchar."
+      "empty": "Inga rader matchar.",
+      "introRuns": "De senaste {{count}} raderna sedan servern startade. Loggarna från de senaste 10 körningarna sparas också i datamappen, så det går att läsa här vad som hände före en krasch eller omstart.",
+      "run": "Körning",
+      "runs": {
+        "current": "Den här körningen",
+        "clean": "stoppades korrekt",
+        "crashed": "kraschade",
+        "unclean": "stoppades oväntat",
+        "errors": "fel: {{count}}"
+      },
+      "earlierRun": "Från {{from}} till {{to}}, version {{version}} på {{host}}.",
+      "uncleanNote": "Den stoppades utan att stängas av korrekt: den kan ha avslutats, till exempel för att den använde för mycket minne, eller så bröts strömmen. De sista raderna finns nedan.",
+      "crashTitle": "Servern kraschade"
     },
     "internet": {
       "offline": "Ingen internetanslutning sedan {{time}}",

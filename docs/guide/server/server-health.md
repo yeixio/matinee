@@ -100,4 +100,18 @@ The page keeps the latest 5,000 lines the server has logged since it started. Se
 
 ![The log, searched for "transcode"](../images/server-health-log.webp)
 
+<!-- since: v0.2.4 -->
+### Earlier runs and crashes
+
+Each time the server runs, it also saves its log to the `logs` folder in its data folder, as it goes. So when the server crashes, is killed for using too much memory, loses power or is replaced by a new container, its last lines are still there after it comes back.
+
+When the server has run more than once, **Run** above the log picks which run to read: **This run**, or an earlier one by when it started, with whether it stopped cleanly, crashed or stopped unexpectedly, and how many errors it logged. An earlier run shows when it started and ended, its version, and the machine or pod it ran on. If it crashed, what the server printed as it crashed comes first: the first lines say what went wrong and where. Search, the level buttons and **Download** work on an earlier run too, and its download ends with the crash.
+
+![An earlier run that ran out of memory: when it ran, the crash, and its last lines](../images/server-health-crash.webp)
+
+The last 10 runs are kept, each up to about 32 MB (when a run logs more, its oldest lines go first). The [restart alert](/docs/server/alerts/) points here when the server stopped without shutting down cleanly.
+
+On Kubernetes, the Helm chart keeps the `logs` folder on a volume of its own (`logs.persistence`, see [Kubernetes](/docs/server/kubernetes/)), so a new pod sees the logs of the pods before it. With Docker, it's in the data folder you mounted (`./data/logs` in the example `docker-compose.yml`).
+<!-- /since -->
+
 The full log is wherever the server's output goes: `docker logs matinee` with Docker, `kubectl logs` on Kubernetes, `journalctl -u matinee` with a Linux package, and **Show log** in the menu of the [Mac](/docs/getting-started/mac/) and [Windows](/docs/getting-started/windows/) apps. Set `MATINEE_DEBUG=1` to log more detail, including every request; the page keeps those lines too.

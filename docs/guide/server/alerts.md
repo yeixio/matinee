@@ -27,7 +27,7 @@ Every alert is on until you turn it off. Change the numbers to suit your server.
 <!-- since: v0.2.4 -->
 | **Transcodes run out of room** | A heads-up first: the transcode folder is too small to hold a whole long video, so transcodes have started keeping only the minutes around where they play. Videos still play; this is your warning before anything fails, sent at most once a day. Then, if a video couldn't start or stopped partway because the folder was full, a warning saying how much room was left, at most once an hour. See [When the transcode folder runs short of room](/docs/server/transcoding/#when-the-transcode-folder-runs-short-of-room). |
 <!-- /since -->
-| **The server starts or restarts** | The server starts. The alert says if it was updated, and warns when it stopped last time without shutting down cleanly, such as after a crash, the container being killed, or a power cut. |
+| **The server starts or restarts** | The server starts. The alert says if it was updated, and warns when it stopped last time without shutting down cleanly, such as after a crash, the container being killed, or a power cut.<!-- since: v0.2.4 --> That run's log, and the crash if there was one, is in [Server health](/docs/server/server-health/#earlier-runs-and-crashes).<!-- /since --> |
 
 Errors and failing transcodes are sent at most once an hour while they keep happening, so a bad night doesn't flood your inbox.
 

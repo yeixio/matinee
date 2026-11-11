@@ -1404,7 +1404,19 @@
       },
       "live": "Új sorok követése",
       "older": "Régebbi sorok",
-      "empty": "Nincs egyező sor."
+      "empty": "Nincs egyező sor.",
+      "introRuns": "Az utolsó {{count}} sor a szerver indulása óta. Az utolsó 10 futás naplója az adatmappában is megmarad, így itt elolvasható, mi történt egy összeomlás vagy újraindítás előtt.",
+      "run": "Futás",
+      "runs": {
+        "current": "Ez a futás",
+        "clean": "rendben leállt",
+        "crashed": "összeomlott",
+        "unclean": "váratlanul leállt",
+        "errors": "hibák: {{count}}"
+      },
+      "earlierRun": "{{from}} – {{to}}, {{version}} verzió, gép: {{host}}.",
+      "uncleanNote": "Rendes leállás nélkül állt le: talán leállították, például mert túl sok memóriát használt, vagy elment az áram. Az utolsó sorai lent vannak.",
+      "crashTitle": "A szerver összeomlott"
     },
     "internet": {
       "offline": "{{time}} óta nincs internetkapcsolat",

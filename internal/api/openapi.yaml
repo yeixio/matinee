@@ -1298,8 +1298,11 @@ paths:
       summary: The latest log lines, newest first (admins only)
       description: >
         The server keeps its latest 5,000 log lines in memory, from when it
-        started. Page back with before.
+        started. Page back with before. With run, an earlier run's lines
+        instead (GET /admin/logs/runs), read from its log file, and what Go
+        printed if it crashed.
       parameters:
+        - { name: run, in: query, schema: { type: string }, description: An earlier run's id; this run when left out. }
         - { name: level, in: query, schema: { type: string, enum: [debug, info, warn, error] }, description: The least serious level to show. }
         - { name: q, in: query, schema: { type: string }, description: Text the line has, in any case. }
         - { name: before, in: query, schema: { type: integer }, description: Only lines older than this one (its seq). }
@@ -1325,10 +1328,12 @@ paths:
                           type: array
                           items: { type: object, properties: { key: { type: string }, value: { type: string } } }
                   more: { type: boolean }
+                  crash: { type: string, description: What Go printed when an earlier run crashed. }
   /admin/logs/download:
     get:
       summary: The latest log lines as a text file, oldest first (admins only)
       parameters:
+        - { name: run, in: query, schema: { type: string }, description: An earlier run's id, whose whole log is sent, ending with its crash. }
         - { name: level, in: query, schema: { type: string, enum: [debug, info, warn, error] } }
         - { name: q, in: query, schema: { type: string } }
       responses:
@@ -1337,6 +1342,40 @@ paths:
           content:
             text/plain:
               schema: { type: string }
+  /admin/logs/runs:
+    get:
+      summary: The runs whose logs are kept, newest (this one) first (admins only)
+      description: >
+        Each run of the server saves its log to the logs folder in its data
+        folder, so an earlier run's (such as one that crashed or was killed)
+        can still be read. The last 10 are kept. kept is false when the
+        folder couldn't be written.
+      responses:
+        "200":
+          description: The runs.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  kept: { type: boolean }
+                  dir: { type: string }
+                  runs:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id: { type: string }
+                        started: { type: integer, description: Milliseconds. }
+                        ended: { type: integer, description: Milliseconds, its last line or when it stopped. }
+                        version: { type: string }
+                        host: { type: string, description: The machine or pod it ran on. }
+                        current: { type: boolean }
+                        clean: { type: boolean, description: It shut down cleanly. }
+                        crashed: { type: boolean, description: Go printed a crash; GET /admin/logs?run= returns it. }
+                        lines: { type: integer }
+                        warnings: { type: integer }
+                        errors: { type: integer }
   /admin/backups:
     get:
       summary: Database backups and their settings (admins only)

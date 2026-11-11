@@ -1415,7 +1415,19 @@
       },
       "live": "Suivre les nouvelles lignes",
       "older": "Afficher les lignes plus anciennes",
-      "empty": "Aucune ligne ne correspond."
+      "empty": "Aucune ligne ne correspond.",
+      "introRuns": "Les {{count}} dernières lignes depuis le démarrage du serveur. Les journaux des 10 dernières exécutions sont aussi gardés dans le dossier de données : on peut donc lire ici ce qui s'est passé avant un plantage ou un redémarrage.",
+      "run": "Exécution",
+      "runs": {
+        "current": "Cette exécution",
+        "clean": "arrêtée proprement",
+        "crashed": "plantée",
+        "unclean": "arrêtée de façon inattendue",
+        "errors": "erreurs : {{count}}"
+      },
+      "earlierRun": "Du {{from}} au {{to}}, version {{version}} sur {{host}}.",
+      "uncleanNote": "Elle s'est arrêtée sans s'éteindre proprement : elle a peut-être été tuée, par exemple pour avoir utilisé trop de mémoire, ou la machine a perdu le courant. Ses dernières lignes sont ci-dessous.",
+      "crashTitle": "Le serveur a planté"
     },
     "internet": {
       "offline": "Pas de connexion internet depuis {{time}}",

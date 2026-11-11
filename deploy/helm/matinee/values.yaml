@@ -143,6 +143,18 @@ thumbnails:
     # Or use a claim you made yourself.
     existingClaim: ""
 
+# Each run's log, crash included (Settings → Server health → Log), so what
+# happened before a crash or a restart can still be read from the next pod.
+# The last 10 runs are kept, at most 32 MB each. Set enabled: false to keep
+# them in the cache above (they still survive a crash, but not a new pod).
+logs:
+  persistence:
+    enabled: true
+    size: 1Gi
+    storageClass: ""
+    # Or use a claim you made yourself.
+    existingClaim: ""
+
 database:
   # Use an existing PostgreSQL instead of the bundled one (set postgresql.enabled=false):
   # either a full URL here...

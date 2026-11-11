@@ -367,7 +367,7 @@ func (m *Manager) Started(ctx context.Context) {
 	var lines []string
 	if known && prev.Running {
 		a.Level, a.Title = LevelWarning, "Matinee restarted unexpectedly"
-		lines = append(lines, "The server stopped without shutting down cleanly, so it may have crashed, been killed, or the machine lost power. The log from before the restart is wherever the server's output goes.")
+		lines = append(lines, "The server stopped without shutting down cleanly, so it may have crashed, been killed, or the machine lost power. Its log from before the restart, and the crash if there was one, is under Settings → Server health → Log (pick the earlier run).")
 	} else {
 		lines = append(lines, "The server started.")
 	}

@@ -268,6 +268,7 @@
   "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "Chỉ phim, tập, mùa và chương trình mới có thể đánh dấu đã xem",
   "only_movies_have_editions": "chỉ phim mới có phiên bản",
   "no_such_backup": "Không có bản sao lưu này",
+  "no_such_run": "Không có lần chạy này",
   "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "Cơ sở dữ liệu của máy chủ này là PostgreSQL; hãy sao lưu bằng pg_dump",
   "audiodelay_is_milliseconds_between_2000_and_2000": "Độ trễ âm thanh tính bằng mili giây, từ -2000 đến 2000.",
   "subtitle_choices_arent_ones_the_apps_know": "Ứng dụng không nhận ra các lựa chọn phụ đề này",

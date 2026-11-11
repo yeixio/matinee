@@ -82,7 +82,7 @@ func main() {
 	}
 }
 
-func run() error {
+func run() (err error) {
 	cfg, err := config.Load(os.Args[1:])
 	if err != nil {
 		return err
@@ -95,6 +95,24 @@ func run() error {
 	logs := health.NewLogs(health.DefaultLines)
 	log := slog.New(logs.Handler(slog.NewTextHandler(os.Stderr, &slog.HandlerOptions{Level: level})))
 	monitor := health.NewMonitor(logs)
+	// Each run's log is saved in the data folder too, crash included, so
+	// what happened before a crash or a restart (even in an earlier
+	// container) can still be read in Server health.
+	runs, runsErr := health.StartRuns(cfg.LogDir(), version.Version, time.Now())
+	if runsErr != nil {
+		log.Warn("can't save this run's log; only the latest lines are kept in memory", "dir", cfg.LogDir(), "err", runsErr)
+	} else {
+		logs.Keep(runs)
+	}
+	// What other code prints with Go's log package, such as a request that
+	// panicked, goes to the same log.
+	slog.SetDefault(log)
+	defer func() {
+		if err != nil {
+			log.Error("matinee stopped", "err", err)
+		}
+		runs.Close(err == nil)
+	}()
 	// Calls to sites on the internet fail at once while they're known to be
 	// down, so an outage never holds up a page, a scan or playback.
 	connections := netstate.New()

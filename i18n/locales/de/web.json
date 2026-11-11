@@ -1404,7 +1404,19 @@
       },
       "live": "Neuen Zeilen folgen",
       "older": "Ältere Zeilen zeigen",
-      "empty": "Keine passenden Zeilen."
+      "empty": "Keine passenden Zeilen.",
+      "introRuns": "Die letzten {{count}} Zeilen seit dem Start des Servers. Die Protokolle der letzten 10 Läufe werden auch im Datenordner aufbewahrt, sodass sich hier nachlesen lässt, was vor einem Absturz oder Neustart passiert ist.",
+      "run": "Lauf",
+      "runs": {
+        "current": "Dieser Lauf",
+        "clean": "sauber beendet",
+        "crashed": "abgestürzt",
+        "unclean": "unerwartet beendet",
+        "errors": "Fehler: {{count}}"
+      },
+      "earlierRun": "Von {{from}} bis {{to}}, Version {{version}} auf {{host}}.",
+      "uncleanNote": "Er wurde nicht sauber beendet: Vielleicht wurde er abgebrochen, etwa wegen zu hohen Speicherverbrauchs, oder der Rechner hatte keinen Strom mehr. Seine letzten Zeilen stehen unten.",
+      "crashTitle": "Der Server ist abgestürzt"
     },
     "internet": {
       "offline": "Seit {{time}} keine Internetverbindung",

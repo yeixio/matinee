@@ -1404,7 +1404,19 @@
       },
       "live": "Følg nye linjer",
       "older": "Vis eldre linjer",
-      "empty": "Ingen linjer passer."
+      "empty": "Ingen linjer passer.",
+      "introRuns": "De siste {{count}} linjene siden serveren startet. Loggene fra de siste 10 kjøringene lagres også i datamappen, så du kan lese her hva som skjedde før et krasj eller en omstart.",
+      "run": "Kjøring",
+      "runs": {
+        "current": "Denne kjøringen",
+        "clean": "stoppet ordentlig",
+        "crashed": "krasjet",
+        "unclean": "stoppet uventet",
+        "errors": "feil: {{count}}"
+      },
+      "earlierRun": "Fra {{from}} til {{to}}, versjon {{version}} på {{host}}.",
+      "uncleanNote": "Den stoppet uten å avslutte ordentlig: den kan ha blitt drept, for eksempel for å bruke for mye minne, eller maskinen mistet strømmen. De siste linjene står nedenfor.",
+      "crashTitle": "Serveren krasjet"
     },
     "internet": {
       "offline": "Ingen internettilkobling på {{time}}",

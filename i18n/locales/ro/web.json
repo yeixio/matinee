@@ -1415,7 +1415,19 @@
       },
       "live": "Urmărește rândurile noi",
       "older": "Arată rânduri mai vechi",
-      "empty": "Niciun rând nu se potrivește."
+      "empty": "Niciun rând nu se potrivește.",
+      "introRuns": "Ultimele {{count}} rânduri de la pornirea serverului. Jurnalele ultimelor 10 rulări sunt păstrate și în folderul de date, ca să poți citi aici ce s-a întâmplat înainte de o cădere sau o repornire.",
+      "run": "Rulare",
+      "runs": {
+        "current": "Rularea aceasta",
+        "clean": "oprită corect",
+        "crashed": "s-a blocat",
+        "unclean": "oprită neașteptat",
+        "errors": "erori: {{count}}"
+      },
+      "earlierRun": "De la {{from}} la {{to}}, versiunea {{version}} pe {{host}}.",
+      "uncleanNote": "S-a oprit fără o închidere corectă: poate a fost oprită forțat, de exemplu pentru că folosea prea multă memorie, sau s-a întrerupt curentul. Ultimele rânduri sunt mai jos.",
+      "crashTitle": "Serverul s-a blocat"
     },
     "internet": {
       "offline": "Fără conexiune la internet de {{time}}",

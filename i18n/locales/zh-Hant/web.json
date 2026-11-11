@@ -1393,7 +1393,19 @@
       },
       "live": "跟隨新行",
       "older": "顯示較早的行",
-      "empty": "沒有符合的行。"
+      "empty": "沒有符合的行。",
+      "introRuns": "伺服器啟動以來的最新 {{count}} 行。最近 10 次執行的日誌也會保存在資料夾中，因此可以在這裡查看當機或重新啟動前發生了什麼。",
+      "run": "執行",
+      "runs": {
+        "current": "本次執行",
+        "clean": "正常停止",
+        "crashed": "已當機",
+        "unclean": "意外停止",
+        "errors": "錯誤：{{count}}"
+      },
+      "earlierRun": "從 {{from}} 到 {{to}}，版本 {{version}}，位於 {{host}}。",
+      "uncleanNote": "它沒有正常關閉就停止了：可能被強制結束（例如使用過多記憶體），或機器斷電。最後幾行在下方。",
+      "crashTitle": "伺服器已當機"
     },
     "internet": {
       "offline": "已 {{time}} 沒有網際網路連線",
