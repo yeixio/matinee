@@ -1633,7 +1633,9 @@
     "settings": {
       "approval": "Outras edições e cópias melhores sempre precisam da aprovação de um admin",
       "approvalDetail": "Mesmo quando os pedidos são adicionados na hora. Só com o Box Office.",
-      "approvalReports": "Também os problemas relatados, que o Box Office resolveria na hora."
+      "approvalReports": "Também os problemas relatados, que o Box Office resolveria na hora.",
+      "replaceDamaged": "Substituir sozinho vídeos danificados",
+      "replaceDamagedDetail": "Quando o Matinee encontra um filme ou episódio danificado (a leitura esgota o tempo repetidamente mesmo com o compartilhamento respondendo, e os saltos dentro dele também), ele relata um problema de imagem e o Box Office busca outra cópia. Desligado: vídeos danificados só aparecem na saúde do servidor."
     }
   }
 }

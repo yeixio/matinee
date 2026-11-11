@@ -1621,7 +1621,9 @@
     "settings": {
       "approval": "A más kiadásokhoz és jobb másolatokhoz mindig admin jóváhagyása kell",
       "approvalDetail": "Akkor is, ha a kérések azonnal bekerülnek. Csak Box Office-szal.",
-      "approvalReports": "A bejelentett problémák is, amelyeket a Box Office egyébként azonnal javít."
+      "approvalReports": "A bejelentett problémák is, amelyeket a Box Office egyébként azonnal javít.",
+      "replaceDamaged": "Sérült videók automatikus cseréje",
+      "replaceDamagedDetail": "Ha a Matinee sérült filmet vagy epizódot talál (az olvasása újra és újra időtúllépésbe fut, pedig a megosztás válaszol, és az ugrások is), képhibát jelent, és a Box Office másik példányt szerez. Ki: a sérült videók csak a szerver állapotában szerepelnek."
     }
   }
 }

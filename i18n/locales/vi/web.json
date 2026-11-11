@@ -1609,7 +1609,9 @@
     "settings": {
       "approval": "Phiên bản khác và bản tốt hơn luôn cần quản trị viên duyệt",
       "approvalDetail": "Kể cả khi yêu cầu được thêm ngay. Chỉ với Box Office.",
-      "approvalReports": "Cả các sự cố được báo, vốn Box Office sẽ sửa ngay nếu không bật."
+      "approvalReports": "Cả các sự cố được báo, vốn Box Office sẽ sửa ngay nếu không bật.",
+      "replaceDamaged": "Tự thay video bị hỏng",
+      "replaceDamagedDetail": "Khi Matinee thấy một phim hoặc tập bị hỏng (đọc liên tục quá thời gian dù thư mục chia sẻ vẫn phản hồi, và tua bên trong cũng vậy), nó báo lỗi hình ảnh và Box Office lấy một bản khác. Tắt: video hỏng chỉ được liệt kê trong tình trạng máy chủ."
     }
   }
 }

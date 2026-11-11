@@ -1645,7 +1645,9 @@
     "settings": {
       "approval": "Jiné edice a lepší kopie vždy potřebují schválení správce",
       "approvalDetail": "I když se žádosti přidávají hned. Jen s Box Office.",
-      "approvalReports": "Také nahlášené problémy, které by jinak Box Office opravil hned."
+      "approvalReports": "Také nahlášené problémy, které by jinak Box Office opravil hned.",
+      "replaceDamaged": "Poškozená videa nahrazovat samo",
+      "replaceDamagedDetail": "Když Matinee najde poškozený film nebo díl (čtení opakovaně vyprší, i když sdílená složka odpovídá, a skoky v něm také), nahlásí problém s obrazem a Box Office stáhne jinou kopii. Vypnuto: poškozená videa jsou jen uvedena ve stavu serveru."
     }
   }
 }

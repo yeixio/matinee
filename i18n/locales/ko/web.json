@@ -1609,7 +1609,9 @@
     "settings": {
       "approval": "다른 에디션과 더 좋은 사본은 항상 관리자 승인이 필요",
       "approvalDetail": "요청이 바로 추가될 때도요. Box Office에서만.",
-      "approvalReports": "신고된 문제도 포함됩니다. 그렇지 않으면 Box Office가 바로 해결합니다."
+      "approvalReports": "신고된 문제도 포함됩니다. 그렇지 않으면 Box Office가 바로 해결합니다.",
+      "replaceDamaged": "손상된 동영상 자동 교체",
+      "replaceDamagedDetail": "Matinee가 손상된 영화나 에피소드를 찾으면(공유가 응답하는데도 읽기가 계속 시간 초과되고, 중간으로 건너뛰기도 그럴 때) 화면 문제로 신고하고 Box Office가 다른 사본을 받습니다. 끄면: 손상된 동영상은 서버 상태에 나열되기만 합니다."
     }
   }
 }

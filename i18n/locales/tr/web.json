@@ -1621,7 +1621,9 @@
     "settings": {
       "approval": "Diğer sürümler ve daha iyi kopyalar her zaman yönetici onayı gerektirir",
       "approvalDetail": "İstekler hemen eklense bile. Yalnızca Box Office ile.",
-      "approvalReports": "Bildirilen sorunlar da; Box Office bunları aksi halde hemen düzeltir."
+      "approvalReports": "Bildirilen sorunlar da; Box Office bunları aksi halde hemen düzeltir.",
+      "replaceDamaged": "Hasarlı videoları kendiliğinden değiştir",
+      "replaceDamagedDetail": "Matinee hasarlı bir film veya bölüm bulduğunda (paylaşım yanıt verdiği hâlde okuma tekrar tekrar zaman aşımına uğruyor, içinde atlamak da öyle), bir görüntü sorunu bildirir ve Box Office başka bir kopya getirir. Kapalı: hasarlı videolar yalnızca sunucu durumunda listelenir."
     }
   }
 }

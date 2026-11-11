@@ -1609,7 +1609,9 @@
     "settings": {
       "approval": "其他版本和更好的副本始终需要管理员批准",
       "approvalDetail": "即使请求会立即添加也是如此。仅限 Box Office。",
-      "approvalReports": "报告的问题也一样，否则 Box Office 会立即修复。"
+      "approvalReports": "报告的问题也一样，否则 Box Office 会立即修复。",
+      "replaceDamaged": "自动替换损坏的视频",
+      "replaceDamagedDetail": "Matinee 发现电影或剧集损坏时（共享有响应但读取反复超时，在其中跳转也是如此），会报告画面问题，由 Box Office 获取另一份副本。关闭时：损坏的视频只列在服务器状态中。"
     }
   }
 }

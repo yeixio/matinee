@@ -1633,7 +1633,9 @@
     "settings": {
       "approval": "Alte ediții și copii mai bune au mereu nevoie de aprobarea unui administrator",
       "approvalDetail": "Chiar și când cererile sunt adăugate imediat. Doar cu Box Office.",
-      "approvalReports": "Și problemele raportate, pe care altfel Box Office le rezolvă imediat."
+      "approvalReports": "Și problemele raportate, pe care altfel Box Office le rezolvă imediat.",
+      "replaceDamaged": "Înlocuiește singur videoclipurile deteriorate",
+      "replaceDamagedDetail": "Când Matinee găsește un film sau episod deteriorat (citirea expiră iar și iar deși partajarea răspunde, la fel și salturile în el), raportează o problemă de imagine și Box Office aduce altă copie. Dezactivat: videoclipurile deteriorate sunt doar listate în starea serverului."
     }
   }
 }

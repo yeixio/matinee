@@ -337,6 +337,19 @@ func TestDamagedVideoReportedToBoxOffice(t *testing.T) {
 		t.Fatalf("connect: %d", code)
 	}
 	e.srv.ReadBoxOffice(ctx)
+	// Box Office connected, but replacing damaged videos is off to start
+	// with: nothing is filed.
+	e.srv.ReportUnreadable(ctx, e.movie)
+	if open, _ := e.db.OpenIssue(ctx, e.movie); open || len(bo.Radarr.Asked) != 0 {
+		t.Fatalf("filed with the setting off: %+v", bo.Radarr.Asked)
+	}
+	var got serverSettings
+	if code := e.admin.do("GET", "/api/v1/settings", nil, &got); code != 200 || got.BoxOfficeReplaceDamaged {
+		t.Fatalf("settings: %d %+v", code, got)
+	}
+	if code := e.admin.do("PUT", "/api/v1/settings", map[string]any{"boxOfficeReplaceDamaged": true}, nil); code != 200 && code != 204 {
+		t.Fatalf("turn on: %d", code)
+	}
 	e.srv.ReportUnreadable(ctx, e.movie)
 	if open, _ := e.db.OpenIssue(ctx, e.movie); !open {
 		t.Fatal("no issue filed")
