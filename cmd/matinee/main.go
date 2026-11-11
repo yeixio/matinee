@@ -314,6 +314,9 @@ func run() error {
 			{Use: "images", Path: cfg.ImageDir()}, {Use: "downloads", Path: cfg.DownloadDir()},
 		},
 	}
+	// A video given up on as damaged is reported to Box Office, which
+	// fetches another copy.
+	thumbnails.OnUnreadable(apiServer.ReportUnreadable)
 	monitor.Streams = apiServer.StreamCounts
 	go monitor.Run(ctx)
 	// Admin alerts (Settings → Server health → Alerts) go straight to the

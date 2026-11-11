@@ -95,6 +95,7 @@ type Generator struct {
 	loaded     bool
 	retryAfter map[int64]time.Time
 	timeouts   slowfs.Timeouts
+	unreadable func(ctx context.Context, id int64)
 	making     map[int64]*sync.Mutex
 	requested  map[int64]bool
 	requests   chan int64
@@ -107,6 +108,14 @@ func (g *Generator) init() {
 		g.requested = map[int64]bool{}
 		g.requests = make(chan int64, 64)
 	}
+}
+
+// OnUnreadable has report hear about each video given up on because reading
+// it keeps timing out (most likely a damaged file), to report it.
+func (g *Generator) OnUnreadable(report func(ctx context.Context, id int64)) {
+	g.mu.Lock()
+	g.unreadable = report
+	g.mu.Unlock()
 }
 
 // Mode returns the admin's setting, All unless they changed it.
@@ -313,6 +322,12 @@ func (g *Generator) Make(ctx context.Context, f store.ThumbnailFile) bool {
 		// It keeps timing out with its share answering: most likely damaged.
 		g.Log.Warn("thumbnails: video keeps timing out; leaving it until it changes (it may be damaged)", "path", f.Path)
 		t = store.Thumbnails{} // stored as unreadable, until the file changes
+		g.mu.Lock()
+		report := g.unreadable
+		g.mu.Unlock()
+		if report != nil {
+			report(ctx, f.ID)
+		}
 	case errors.Is(err, context.DeadlineExceeded):
 		g.Log.Warn("thumbnails: ffmpeg timed out", "path", f.Path)
 		g.mu.Lock()

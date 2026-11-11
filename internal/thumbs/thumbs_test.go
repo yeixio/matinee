@@ -129,6 +129,8 @@ func TestMakeSheets(t *testing.T) {
 	t.Cleanup(func() { frameTimeout = oldFrame })
 	seekAbove, frameTimeout = 0, time.Nanosecond
 	g := &Generator{Store: st, FFmpeg: ffmpeg, Dir: t.TempDir(), Log: log, LowPriority: probe.LowerPriority}
+	var reported []int64
+	g.OnUnreadable(func(_ context.Context, id int64) { reported = append(reported, id) })
 	files, _ := st.ThumbnailFiles(ctx, 0, 10)
 	for range slowfs.GiveUpAfter - 1 {
 		if g.Make(ctx, files[0]) {
@@ -137,6 +139,9 @@ func TestMakeSheets(t *testing.T) {
 	}
 	if !g.Make(ctx, files[0]) {
 		t.Fatal("didn't give up on a video that keeps timing out")
+	}
+	if len(reported) != 1 || reported[0] != files[0].ID {
+		t.Fatalf("reported %v", reported)
 	}
 	if vids, n, err := st.UnreadableVideos(ctx, Version, 10); err != nil || n != 1 || len(vids) != 1 || vids[0].ID != files[0].ID {
 		t.Fatalf("unreadable: %+v %d %v", vids, n, err)

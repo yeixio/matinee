@@ -319,3 +319,37 @@ func TestReportedProblemsFixedByBoxOffice(t *testing.T) {
 		t.Fatalf("without problems: %+v", plain)
 	}
 }
+
+// A video the background jobs gave up reading is reported to a Box Office
+// that fixes problems, once, and Box Office is asked for another copy.
+func TestDamagedVideoReportedToBoxOffice(t *testing.T) {
+	e := pairingSetup(t)
+	ctx := t.Context()
+	// Without Box Office, nothing is filed.
+	e.srv.ReportUnreadable(ctx, e.movie)
+	if open, _ := e.db.OpenIssue(ctx, e.movie); open {
+		t.Fatal("filed without Box Office")
+	}
+	bo := arrtest.NewBoxOffice(t)
+	bo.Radarr.Pairing, bo.Radarr.Problems = true, true
+	bo.Radarr.Add(map[string]any{"tmdbId": 78, "title": "Blade Runner", "year": 1982, "hasFile": true})
+	if code := e.admin.do("PUT", "/api/v1/integrations/boxoffice", boxOfficeConfig{URL: bo.URL, APIKey: bo.Key}, nil); code != 200 {
+		t.Fatalf("connect: %d", code)
+	}
+	e.srv.ReadBoxOffice(ctx)
+	e.srv.ReportUnreadable(ctx, e.movie)
+	if open, _ := e.db.OpenIssue(ctx, e.movie); !open {
+		t.Fatal("no issue filed")
+	}
+	if len(bo.Radarr.Asked) != 1 {
+		t.Fatalf("asked: %+v", bo.Radarr.Asked)
+	}
+	if last := bo.Radarr.Asked[0]; last["want"] != "replace" || last["problem"] != "video" || last["tmdbId"] != float64(78) {
+		t.Fatalf("asked: %+v", last)
+	}
+	// Again while that's open: nothing more.
+	e.srv.ReportUnreadable(ctx, e.movie)
+	if len(bo.Radarr.Asked) != 1 {
+		t.Fatalf("asked twice: %+v", bo.Radarr.Asked)
+	}
+}
