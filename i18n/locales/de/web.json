@@ -1009,6 +1009,16 @@
         "binaryReadOnly": "Matinee kann seine eigene Datei nicht ersetzen, weil es nicht in seinen Ordner schreiben darf. Lade die neue Version von ihrer Release-Seite herunter und ersetze sie von Hand.",
         "source": "Dieser Server wurde aus dem Quellcode gebaut, daher gibt es kein Release zum Vergleichen. Hol dir den neuen Stand und baue erneut, um zu aktualisieren."
       }
+    },
+    "restart": {
+      "button": "Server neu starten",
+      "restarting": "Startet neu…",
+      "confirm": "Matinee jetzt neu starten? In ein paar Sekunden ist es wieder da.",
+      "confirmPlaying": "Matinee jetzt neu starten? Laufende Streams: {{count}}. Sie halten an und machen dort weiter, wo sie waren, sobald Matinee wieder da ist.",
+      "waiting": "Matinee startet neu. Diese Seite macht weiter, sobald es wieder da ist.",
+      "slow": "Matinee ist nach zwei Minuten noch nicht wieder da. Sieh ins Protokoll oder starte es so, wie es installiert wurde.",
+      "back": "Matinee wurde neu gestartet und ist wieder da.",
+      "failed": "Neustart fehlgeschlagen: {{error}}"
     }
   },
   "language": {

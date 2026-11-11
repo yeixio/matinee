@@ -1009,6 +1009,16 @@
         "binaryReadOnly": "A Matinee nem tudja lecserélni a saját fájlját, mert nem írhat a mappájába. Töltsd le az új verziót a kiadási oldaláról, és cseréld le kézzel.",
         "source": "Ez a szerver forráskódból készült, így nincs kiadás, amihez hasonlítani lehetne. Frissítéshez töltsd le a változásokat, és fordítsd újra."
       }
+    },
+    "restart": {
+      "button": "Szerver újraindítása",
+      "restarting": "Újraindítás…",
+      "confirm": "Újraindítod most a Matinee-t? Pár másodperc múlva visszatér.",
+      "confirmPlaying": "Újraindítod most a Matinee-t? Most futó lejátszások: {{count}}. Megállnak, és ott folytatódnak, ahol voltak, amint visszatér.",
+      "waiting": "A Matinee újraindul. Ez az oldal folytatódik, amint visszatér.",
+      "slow": "A Matinee két perc után sem tért vissza. Nézd meg a naplóját, vagy indítsd el újra úgy, ahogy telepítve lett.",
+      "back": "A Matinee újraindult, és újra elérhető.",
+      "failed": "Nem sikerült újraindítani: {{error}}"
     }
   },
   "language": {

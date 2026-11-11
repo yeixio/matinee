@@ -1013,6 +1013,16 @@
         "binaryReadOnly": "Matinee no puede reemplazar su propio archivo porque no tiene permiso para escribir en su carpeta. Descarga la nueva versión desde su página de publicación y reemplázalo a mano.",
         "source": "Este servidor se compiló desde el código fuente, así que no hay versión con la que compararlo. Descarga los cambios y vuelve a compilar para actualizar."
       }
+    },
+    "restart": {
+      "button": "Reiniciar servidor",
+      "restarting": "Reiniciando…",
+      "confirm": "¿Reiniciar Matinee ahora? Vuelve en unos segundos.",
+      "confirmPlaying": "¿Reiniciar Matinee ahora? Reproducciones en curso: {{count}}. Se pausan y siguen donde estaban cuando vuelva.",
+      "waiting": "Matinee se está reiniciando. Esta página continúa cuando vuelva.",
+      "slow": "Matinee no ha vuelto después de dos minutos. Mira su registro o inícialo de nuevo como se instaló.",
+      "back": "Matinee se reinició y ya está de vuelta.",
+      "failed": "No se pudo reiniciar: {{error}}"
     }
   },
   "language": {

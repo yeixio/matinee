@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { causeText } from '../player/why'
 import { api, type Health, type HealthPoint, type HealthProblem, type LogLevel, type LogLine } from '../api'
 import i18n, { formatLocale } from '../i18n'
+import { RestartServer } from './RestartServer'
 import { Button, inputClass } from './ui'
 
 // Settings → Server health: how the server is doing, for an admin working
@@ -36,7 +37,7 @@ export function ServerHealth() {
   return (
     <section className="space-y-10">
       <div className="space-y-4">
-        <Header />
+        <Header h={h} />
         <StatusLine h={h} />
         <Internet h={h} />
         <Tiles h={h} />
@@ -57,12 +58,15 @@ export function ServerHealth() {
   )
 }
 
-function Header() {
+function Header({ h }: { h?: Health }) {
   const { t } = useTranslation()
   return (
-    <div>
-      <h2 className="text-lg font-semibold">{t('health.title')}</h2>
-      <p className="mt-1 text-sm text-muted">{t('health.intro')}</p>
+    <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+      <div>
+        <h2 className="text-lg font-semibold">{t('health.title')}</h2>
+        <p className="mt-1 text-sm text-muted">{t('health.intro')}</p>
+      </div>
+      {h?.server.canRestart && <RestartServer playing={h.streams.length} />}
     </div>
   )
 }

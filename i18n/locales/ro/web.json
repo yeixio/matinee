@@ -1013,6 +1013,16 @@
         "binaryReadOnly": "Matinee nu își poate înlocui propriul fișier, pentru că nu are voie să scrie în folderul său. Descarcă noua versiune de pe pagina ei și înlocuiește-l manual.",
         "source": "Acest server a fost compilat din codul sursă, așa că nu există o versiune cu care să-l compari. Descarcă schimbările și compilează din nou pentru a actualiza."
       }
+    },
+    "restart": {
+      "button": "Repornește serverul",
+      "restarting": "Se repornește…",
+      "confirm": "Repornești Matinee acum? Revine în câteva secunde.",
+      "confirmPlaying": "Repornești Matinee acum? Redări în curs: {{count}}. Se opresc și continuă de unde au rămas când revine.",
+      "waiting": "Matinee se repornește. Pagina continuă când revine.",
+      "slow": "Matinee nu a revenit după două minute. Uită-te în jurnalul lui sau pornește-l din nou așa cum a fost instalat.",
+      "back": "Matinee a repornit și a revenit.",
+      "failed": "Nu s-a putut reporni: {{error}}"
     }
   },
   "language": {

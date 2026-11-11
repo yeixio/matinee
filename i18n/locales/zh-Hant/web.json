@@ -1005,6 +1005,16 @@
         "binaryReadOnly": "Matinee 無權寫入自己所在的資料夾，因此無法替換自己的檔案。請從發行頁面下載新版本並手動替換。",
         "source": "這台伺服器是從原始碼建置的，沒有可比較的正式版本。若要更新，請拉取變更並重新建置。"
       }
+    },
+    "restart": {
+      "button": "重新啟動伺服器",
+      "restarting": "正在重新啟動…",
+      "confirm": "現在重新啟動 Matinee 嗎？幾秒後就會恢復。",
+      "confirmPlaying": "現在重新啟動 Matinee 嗎？正在播放的串流：{{count}}。它們會暫停，恢復後從原處繼續。",
+      "waiting": "Matinee 正在重新啟動。恢復後此頁面會繼續。",
+      "slow": "兩分鐘後 Matinee 仍未恢復。請查看它的記錄，或依安裝方式重新啟動它。",
+      "back": "Matinee 已重新啟動並恢復。",
+      "failed": "無法重新啟動：{{error}}"
     }
   },
   "language": {

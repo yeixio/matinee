@@ -30,6 +30,10 @@ const (
 	crashWindow = 5 * time.Minute
 )
 
+// restartExitCode is the server stopping to be started again at once, as
+// when an admin presses Restart in Settings (cmd/matinee/restart_other.go).
+const restartExitCode = 75
+
 // Server runs the matinee server as a child process. Closing its stdin
 // stops it (MATINEE_STOP_ON_STDIN_CLOSE in cmd/matinee), since Windows has
 // no SIGTERM; that also stops it if the tray app goes away.
@@ -98,6 +102,14 @@ func (s *Server) wait(cmd *exec.Cmd, done chan struct{}) {
 	}
 	s.cmd, s.stdin = nil, nil
 	if !s.wanted {
+		return
+	}
+	if exit, ok := err.(*exec.ExitError); ok && exit.ExitCode() == restartExitCode {
+		fmt.Fprintln(s.Log, "tray: the server asked to restart; starting it again")
+		s.lastErr = nil
+		if err := s.startLocked(); err != nil {
+			fmt.Fprintf(s.Log, "tray: %v\n", err)
+		}
 		return
 	}
 	if err == nil {

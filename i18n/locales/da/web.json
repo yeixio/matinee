@@ -1009,6 +1009,16 @@
         "binaryReadOnly": "Matinee kan ikke erstatte sin egen fil, fordi den ikke må skrive i sin mappe. Hent den nye version fra udgivelsessiden, og erstat den i hånden.",
         "source": "Denne server blev bygget fra kildekode, så der er ingen udgivelse at sammenligne med. Hent ændringerne, og byg igen for at opdatere."
       }
+    },
+    "restart": {
+      "button": "Genstart server",
+      "restarting": "Genstarter…",
+      "confirm": "Genstart Matinee nu? Den er tilbage om få sekunder.",
+      "confirmPlaying": "Genstart Matinee nu? Streams, der spiller lige nu: {{count}}. De pauser og fortsætter, hvor de var, når den er tilbage.",
+      "waiting": "Matinee genstarter. Siden fortsætter, når den er tilbage.",
+      "slow": "Matinee er ikke kommet tilbage efter to minutter. Se loggen, eller start den igen, som den blev installeret.",
+      "back": "Matinee er genstartet og tilbage.",
+      "failed": "Kunne ikke genstarte: {{error}}"
     }
   },
   "language": {

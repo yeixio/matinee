@@ -1013,6 +1013,16 @@
         "binaryReadOnly": "Matinee non può sostituire il proprio file perché non può scrivere nella sua cartella. Scarica la nuova versione dalla sua pagina di rilascio e sostituiscilo a mano.",
         "source": "Questo server è stato compilato dai sorgenti, quindi non c'è una release con cui confrontarlo. Scarica le modifiche e ricompila per aggiornare."
       }
+    },
+    "restart": {
+      "button": "Riavvia server",
+      "restarting": "Riavvio…",
+      "confirm": "Riavviare Matinee ora? Torna in pochi secondi.",
+      "confirmPlaying": "Riavviare Matinee ora? Riproduzioni in corso: {{count}}. Si mettono in pausa e riprendono da dove erano quando torna.",
+      "waiting": "Matinee si sta riavviando. Questa pagina riprende quando torna.",
+      "slow": "Matinee non è tornato dopo due minuti. Controlla il suo registro o riavvialo come è stato installato.",
+      "back": "Matinee si è riavviato ed è tornato.",
+      "failed": "Impossibile riavviare: {{error}}"
     }
   },
   "language": {

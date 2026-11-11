@@ -35,6 +35,20 @@ Below it are four readings, each with a chart of the last hour. Point at a chart
 
 On Linux, including Docker and Kubernetes, CPU and memory include the FFmpeg processes Matinee runs to convert video, so a busy transcode shows up there. On a Mac or Windows they count the server alone. Hover over the reading to see which.
 
+<!-- since: v0.2.4 -->
+## Restart the server
+
+**Restart server**, at the top right of Server health, stops Matinee and starts it again. It's there for when something seems stuck, to finish [restoring a backup](/docs/server/backups/), or to switch to a new [time zone](/docs/server/configuration/#time-zone).
+
+Matinee asks first, and says how many streams are playing. It restarts the same way it does for an [update](/docs/server/updates/): anyone watching or listening sees that the server is restarting, and their player picks up where it was once it's back, usually within a few seconds. Server health waits for it and says when it's back. If it isn't back after two minutes, the page says so; look at the server's log, or start it again the way you installed it.
+
+![Restart server at the top of Server health, after Matinee came back](../images/server-restart.webp)
+
+Matinee starts again with the same settings it started with. To pick up a change to its [environment variables](/docs/server/configuration/), such as in `matinee.env` or your `docker-compose.yml`, restart it the way you installed it instead: `sudo systemctl restart matinee`, `brew services restart matinee`, **Restart server** in the Mac app's menu, or recreating the container.
+
+The button is there on Linux, macOS, Docker and Kubernetes, and on Windows when the Matinee tray app runs the server.
+<!-- /since -->
+
 ## Playing now and transcodes
 
 **Playing now** lists every player that has something open: who, on which device and app, how far along, and whether it plays the file directly or the server is converting it. Players away from home are marked.

@@ -21,7 +21,7 @@ Backups go in the `backups` folder in the data folder, such as `/data/backups` i
 Admins see every backup with when it was made, why, and how big it is. From there you can:
 
 - **Download** a backup, to keep it somewhere else.
-- **Restore** a backup. Matinee puts it in place of the database the next time it starts, so restart Matinee to finish (in Docker, restart the container). Anything that changed after the backup was made is lost, so the database as it was just before the restore is kept as a backup too. **Cancel restore** keeps things as they are, as long as Matinee hasn't restarted yet.
+- **Restore** a backup. Matinee puts it in place of the database the next time it starts, so restart Matinee to finish<!-- until: v0.2.4 --> (in Docker, restart the container)<!-- /until --><!-- since: v0.2.4 --> with **Restart server** at the top of [Server health](/docs/server/server-health/#restart-the-server)<!-- /since -->. Anything that changed after the backup was made is lost, so the database as it was just before the restore is kept as a backup too. **Cancel restore** keeps things as they are, as long as Matinee hasn't restarted yet.
 - **Delete** one you don't need.
 
 If a backup fails, it says why there, and admins get an [alert](/docs/server/alerts/) if alerts are set up. You can turn that alert off under **Alerts** with **A backup fails**.

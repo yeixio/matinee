@@ -1005,6 +1005,16 @@
         "binaryReadOnly": "Matinee tidak boleh menggantikan failnya sendiri kerana ia tidak dibenarkan menulis ke foldernya. Muat turun versi baharu dari halaman keluarannya dan gantikan secara manual.",
         "source": "Pelayan ini dibina daripada kod sumber, jadi tiada keluaran untuk dibandingkan. Tarik perubahan dan bina semula untuk mengemas kini."
       }
+    },
+    "restart": {
+      "button": "Mulakan semula pelayan",
+      "restarting": "Memulakan semula…",
+      "confirm": "Mulakan semula Matinee sekarang? Ia kembali dalam beberapa saat.",
+      "confirmPlaying": "Mulakan semula Matinee sekarang? Strim yang sedang dimainkan: {{count}}. Ia dijeda dan bersambung dari tempat tadi apabila ia kembali.",
+      "waiting": "Matinee sedang dimulakan semula. Halaman ini bersambung apabila ia kembali.",
+      "slow": "Matinee belum kembali selepas dua minit. Lihat lognya, atau mulakan semula mengikut cara ia dipasang.",
+      "back": "Matinee telah dimulakan semula dan kembali.",
+      "failed": "Tidak dapat dimulakan semula: {{error}}"
     }
   },
   "language": {

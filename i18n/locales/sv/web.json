@@ -1009,6 +1009,16 @@
         "binaryReadOnly": "Matinee kan inte ersätta sin egen fil, eftersom den inte får skriva i sin mapp. Hämta den nya versionen från utgåvans sida och ersätt den för hand.",
         "source": "Den här servern byggdes från källkod, så det finns ingen utgåva att jämföra med. Hämta ändringarna och bygg igen för att uppdatera."
       }
+    },
+    "restart": {
+      "button": "Starta om servern",
+      "restarting": "Startar om…",
+      "confirm": "Starta om Matinee nu? Den är tillbaka om några sekunder.",
+      "confirmPlaying": "Starta om Matinee nu? Strömmar som spelas just nu: {{count}}. De pausar och fortsätter där de var när den är tillbaka.",
+      "waiting": "Matinee startar om. Sidan fortsätter när den är tillbaka.",
+      "slow": "Matinee har inte kommit tillbaka efter två minuter. Titta i loggen eller starta den igen så som den installerades.",
+      "back": "Matinee har startat om och är tillbaka.",
+      "failed": "Kunde inte starta om: {{error}}"
     }
   },
   "language": {
