@@ -410,6 +410,8 @@
         "hint": "Nye filer dukker op ved næste fulde scanning, eller når du trykker på Scan."
       }
     },
+    "checkLabel": "Tjek for nye filer",
+    "checkHint": "Hvor ofte mapper, der ikke melder ændringer, bliver tjekket: netværksdrev eller alle mapper ved tjek på timer. Hvert tjek ser på hver mappe; ved et stort bibliotek på et netværksdrev holder et længere interval drevet hurtigt.",
     "rescanLabel": "Fulde genscanninger",
     "rescanEvery": "Hver {{every}}",
     "rescanNever": "Aldrig",
@@ -693,6 +695,7 @@
       "title": "Biblioteker",
       "none": "Ingen biblioteker endnu.",
       "scan": "Scan",
+      "stopScan": "Stop scanning",
       "findArtwork": "Find billeder",
       "findingArtwork": "Leder efter manglende covers i {{name}}. De vises, efterhånden som de findes.",
       "remove": "Fjern {{name}}",
@@ -1313,7 +1316,14 @@
       "title": "Baggrundsjob",
       "scan": "Scan {{library}}",
       "scanning": "Scanner i {{time}}",
+      "why": {
+        "schedule": "Planlagt fuld genscanning",
+        "watcher": "Nye eller ændrede filer",
+        "manual": "Startet med Scan",
+        "server": "Startet af serveren"
+      },
       "lastScan": "{{time}}, tog {{took}}",
+      "stopped": "Stoppet {{time}}, efter {{took}}",
       "scanCounts": "{{added}} tilføjet, {{updated}} opdateret, {{removed}} fjernet, {{failed}} kan ikke afspilles",
       "scanFailed": "Mislykkedes: {{error}}",
       "notScanned": "Ikke scannet siden serveren startede",

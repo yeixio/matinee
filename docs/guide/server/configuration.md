@@ -76,7 +76,12 @@ Most of Matinee is set up in the web player under **Settings**. A few things abo
 <!-- since: v0.2.4 -->
 | `MATINEE_SCAN_INTERVAL` | `6h` | How often libraries are rescanned in full until an admin picks an interval in Settings; `0` turns it off ([more](/docs/server/new-files/#full-rescans)) |
 <!-- /since -->
+<!-- until: v0.2.4 -->
 | `MATINEE_WATCH_POLL_INTERVAL` | `30s` | How often folders on network shares are checked for new files |
+<!-- /until -->
+<!-- since: v0.2.4 -->
+| `MATINEE_WATCH_POLL_INTERVAL` | `2m` | How often folders on network shares are checked for new files until an admin picks in Settings ([more](/docs/server/new-files/)) |
+<!-- /since -->
 | `MATINEE_DISCOVERY` | `true` | Announce the server on the local network so the apps find it |
 | `MATINEE_SERVER_NAME` | `Matinee` | The name the apps show for this server |
 | `MATINEE_PUBLIC_URL` | empty | The address the apps should use, such as `https://matinee.example.com` |

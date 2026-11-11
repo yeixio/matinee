@@ -410,6 +410,8 @@
         "hint": "New files show up at the next full rescan, or when you press Scan."
       }
     },
+    "checkLabel": "Check for new files",
+    "checkHint": "How often folders that don't announce changes are checked: network shares, or every folder when checking on a timer. Each check looks at every folder, so on a big library on a network share, a longer interval keeps the share responsive.",
     "rescanLabel": "Full rescans",
     "rescanEvery": "Every {{every}}",
     "rescanNever": "Never",
@@ -693,6 +695,7 @@
       "title": "Libraries",
       "none": "No libraries yet.",
       "scan": "Scan",
+      "stopScan": "Stop scan",
       "findArtwork": "Find artwork",
       "findingArtwork": "Looking for missing covers in {{name}}. They show up as they're found.",
       "remove": "Remove {{name}}",
@@ -1313,7 +1316,14 @@
       "title": "Background jobs",
       "scan": "Scan {{library}}",
       "scanning": "Scanning for {{time}}",
+      "why": {
+        "schedule": "Scheduled full rescan",
+        "watcher": "New or changed files",
+        "manual": "Started with Scan",
+        "server": "Started by the server"
+      },
       "lastScan": "{{time}}, took {{took}}",
+      "stopped": "Stopped {{time}}, after {{took}}",
       "scanCounts": "{{added}} added, {{updated}} updated, {{removed}} removed, {{failed}} not playable",
       "scanFailed": "Failed: {{error}}",
       "notScanned": "Not scanned since the server started",

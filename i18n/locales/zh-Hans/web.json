@@ -407,6 +407,8 @@
         "hint": "新文件会在下次完整扫描时出现，或在你点击“扫描”时出现。"
       }
     },
+    "checkLabel": "检查新文件",
+    "checkHint": "多久检查一次不会通知变化的文件夹：网络共享，或按定时检查时的所有文件夹。每次检查都会查看每个文件夹；网络共享上的大型资料库，间隔长一些能让共享保持流畅。",
     "rescanLabel": "完整重新扫描",
     "rescanEvery": "每 {{every}}",
     "rescanNever": "从不",
@@ -689,6 +691,7 @@
       "title": "媒体库",
       "none": "还没有媒体库。",
       "scan": "扫描",
+      "stopScan": "停止扫描",
       "findArtwork": "查找图片",
       "findingArtwork": "正在为 {{name}} 查找缺失的封面，找到后会立即显示。",
       "remove": "移除{{name}}",
@@ -1303,7 +1306,14 @@
       "title": "后台任务",
       "scan": "扫描{{library}}",
       "scanning": "已扫描 {{time}}",
+      "why": {
+        "schedule": "定时完整重新扫描",
+        "watcher": "新增或更改的文件",
+        "manual": "通过“扫描”开始",
+        "server": "由服务器开始"
+      },
       "lastScan": "{{time}}，用时 {{took}}",
+      "stopped": "{{time}}已停止，用时 {{took}}",
       "scanCounts": "新增 {{added}}，更新 {{updated}}，移除 {{removed}}，无法播放 {{failed}}",
       "scanFailed": "失败：{{error}}",
       "notScanned": "服务器启动以来未扫描",

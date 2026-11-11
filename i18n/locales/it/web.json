@@ -413,6 +413,8 @@
         "hint": "I nuovi file compaiono alla prossima scansione completa o quando premi Scansiona."
       }
     },
+    "checkLabel": "Cerca nuovi file",
+    "checkHint": "Ogni quanto vengono controllate le cartelle che non segnalano i cambiamenti: condivisioni di rete, o tutte le cartelle con il controllo a intervalli. Ogni controllo guarda tutte le cartelle; con una libreria grande su una condivisione di rete, un intervallo più lungo la mantiene reattiva.",
     "rescanLabel": "Nuove scansioni complete",
     "rescanEvery": "Ogni {{every}}",
     "rescanNever": "Mai",
@@ -697,6 +699,7 @@
       "title": "Librerie",
       "none": "Ancora nessuna libreria.",
       "scan": "Scansiona",
+      "stopScan": "Interrompi scansione",
       "findArtwork": "Trova immagini",
       "findingArtwork": "Ricerca delle copertine mancanti in {{name}}. Compaiono man mano che vengono trovate.",
       "remove": "Rimuovi {{name}}",
@@ -1323,7 +1326,14 @@
       "title": "Attività in background",
       "scan": "Scansione di {{library}}",
       "scanning": "Scansione in corso da {{time}}",
+      "why": {
+        "schedule": "Nuova scansione completa programmata",
+        "watcher": "File nuovi o modificati",
+        "manual": "Avviata con Scansiona",
+        "server": "Avviata dal server"
+      },
       "lastScan": "{{time}}, durata {{took}}",
+      "stopped": "Interrotta {{time}}, dopo {{took}}",
       "scanCounts": "{{added}} aggiunti, {{updated}} aggiornati, {{removed}} rimossi, {{failed}} non riproducibili",
       "scanFailed": "Non riuscita: {{error}}",
       "notScanned": "Non scansionata dall’avvio del server",

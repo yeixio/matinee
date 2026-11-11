@@ -413,6 +413,8 @@
         "hint": "Les nouveaux fichiers apparaissent à la prochaine analyse complète, ou quand vous appuyez sur Analyser."
       }
     },
+    "checkLabel": "Rechercher les nouveaux fichiers",
+    "checkHint": "La fréquence de vérification des dossiers qui ne signalent pas leurs changements : partages réseau, ou tous les dossiers en mode minuterie. Chaque vérification parcourt tous les dossiers ; pour une grande bibliothèque sur un partage réseau, un intervalle plus long garde le partage réactif.",
     "rescanLabel": "Réanalyses complètes",
     "rescanEvery": "Toutes les {{every}}",
     "rescanNever": "Jamais",
@@ -697,6 +699,7 @@
       "title": "Bibliothèques",
       "none": "Aucune bibliothèque pour l’instant.",
       "scan": "Analyser",
+      "stopScan": "Arrêter l'analyse",
       "findArtwork": "Trouver les images",
       "findingArtwork": "Recherche des pochettes manquantes dans {{name}}. Elles s'affichent au fur et à mesure.",
       "remove": "Retirer {{name}}",
@@ -1323,7 +1326,14 @@
       "title": "Tâches en arrière-plan",
       "scan": "Analyse de {{library}}",
       "scanning": "Analyse en cours depuis {{time}}",
+      "why": {
+        "schedule": "Réanalyse complète planifiée",
+        "watcher": "Fichiers nouveaux ou modifiés",
+        "manual": "Lancée avec Analyser",
+        "server": "Lancée par le serveur"
+      },
       "lastScan": "{{time}}, a pris {{took}}",
+      "stopped": "Arrêtée {{time}}, après {{took}}",
       "scanCounts": "{{added}} ajoutés, {{updated}} mis à jour, {{removed}} retirés, {{failed}} illisibles",
       "scanFailed": "Échec : {{error}}",
       "notScanned": "Pas analysée depuis le démarrage du serveur",

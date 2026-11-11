@@ -410,6 +410,8 @@
         "hint": "Az új fájlok a következő teljes átvizsgáláskor jelennek meg, vagy ha megnyomod az Átvizsgálás gombot."
       }
     },
+    "checkLabel": "Új fájlok keresése",
+    "checkHint": "Milyen gyakran ellenőrzi a változásokat nem jelző mappákat: hálózati megosztásokat, vagy időzített módban minden mappát. Minden ellenőrzés végignéz minden mappát; nagy könyvtárnál hálózati megosztáson a hosszabb időköz gyorsan reagálóvá teszi a megosztást.",
     "rescanLabel": "Teljes újraolvasások",
     "rescanEvery": "{{every}} időközönként",
     "rescanNever": "Soha",
@@ -693,6 +695,7 @@
       "title": "Könyvtárak",
       "none": "Még nincsenek könyvtárak.",
       "scan": "Átvizsgálás",
+      "stopScan": "Beolvasás leállítása",
       "findArtwork": "Képek keresése",
       "findingArtwork": "A hiányzó borítók keresése itt: {{name}}. Ahogy előkerülnek, megjelennek.",
       "remove": "{{name}} eltávolítása",
@@ -1313,7 +1316,14 @@
       "title": "Háttérfeladatok",
       "scan": "{{library}} átvizsgálása",
       "scanning": "{{time}} óta vizsgál",
+      "why": {
+        "schedule": "Ütemezett teljes újraolvasás",
+        "watcher": "Új vagy módosult fájlok",
+        "manual": "A Beolvasás gombbal indítva",
+        "server": "A szerver indította"
+      },
       "lastScan": "{{time}}, {{took}} volt",
+      "stopped": "Leállítva {{time}}, {{took}} után",
       "scanCounts": "{{added}} új, {{updated}} frissítve, {{removed}} eltávolítva, {{failed}} nem lejátszható",
       "scanFailed": "Sikertelen: {{error}}",
       "notScanned": "A szerver indulása óta nem volt átvizsgálva",

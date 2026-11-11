@@ -196,6 +196,14 @@ func TestLibraryWatchSetting(t *testing.T) {
 	if code := c.do("PUT", "/api/v1/settings", map[string]any{"libraryWatch": "sometimes"}, nil); code != http.StatusBadRequest {
 		t.Fatalf("bad mode: %d", code)
 	}
+	for _, bad := range []int{1, 2 * 3600} {
+		if code := c.do("PUT", "/api/v1/settings", map[string]any{"watchPollSeconds": bad}, nil); code != http.StatusBadRequest {
+			t.Fatalf("poll every %ds: %d", bad, code)
+		}
+	}
+	if code := c.do("PUT", "/api/v1/settings", map[string]any{"watchPollSeconds": 300}, &set); code != 200 || set.WatchPollSeconds != 300 {
+		t.Fatalf("poll every 5 minutes: %d %+v", code, set)
+	}
 
 	dir := filepath.Join(tmp, "movies")
 	os.MkdirAll(dir, 0o755)
@@ -312,5 +320,24 @@ func TestScanScheduleAndTimeZoneSettings(t *testing.T) {
 	if code := c.do("PUT", "/api/v1/settings", map[string]any{"scanIntervalSeconds": 0, "timeZone": ""}, &set); code != 200 ||
 		set.ScanIntervalSeconds != 0 || set.NextScan != 0 || set.TimeZone != "" {
 		t.Fatalf("off: %d %+v", code, set)
+	}
+}
+
+func TestStopScanRoute(t *testing.T) {
+	c, tmp := newTestServer(t)
+	var login struct{ Token string }
+	c.do("POST", "/api/v1/setup", credentials{"admin", "correct horse"}, &login)
+	c.token = login.Token
+	dir := filepath.Join(tmp, "movies")
+	os.MkdirAll(dir, 0o755)
+	var lib libraryView
+	c.do("POST", "/api/libraries", map[string]any{"name": "Movies", "kind": "movies", "paths": []string{dir}}, &lib)
+	for deadline := time.Now().Add(5 * time.Second); c.srv.Scanner.Running(lib.ID); time.Sleep(10 * time.Millisecond) {
+		if time.Now().After(deadline) {
+			t.Fatal("the new library's scan didn't finish")
+		}
+	}
+	if code := c.do("DELETE", "/api/v1/libraries/"+itoa(lib.ID)+"/scan", nil, nil); code != http.StatusConflict {
+		t.Fatalf("stopping an idle library: %d", code)
 	}
 }

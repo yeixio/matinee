@@ -122,6 +122,7 @@ type healthScan struct {
 	Kind      string           `json:"kind"`
 	Scanning  bool             `json:"scanning"`
 	Since     int64            `json:"since,omitempty"`
+	Reason    scan.Reason      `json:"reason,omitempty"` // what started the running scan
 	Last      *scan.ScanReport `json:"last,omitempty"`
 }
 
@@ -243,10 +244,10 @@ func (s *Server) getHealth(w http.ResponseWriter, r *http.Request) {
 	for _, l := range libs {
 		hs := healthScan{LibraryID: l.ID, Name: l.Name, Kind: l.Kind}
 		if s.Scanner != nil {
-			since, last := s.Scanner.Report(l.ID)
+			since, why, last := s.Scanner.Report(l.ID)
 			hs.Scanning, hs.Last = !since.IsZero(), last
 			if hs.Scanning {
-				hs.Since = since.UnixMilli()
+				hs.Since, hs.Reason = since.UnixMilli(), why
 			}
 		}
 		out.Jobs.Scans = append(out.Jobs.Scans, hs)

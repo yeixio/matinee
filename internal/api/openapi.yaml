@@ -957,6 +957,16 @@ paths:
       parameters: [{ $ref: "#/components/parameters/ID" }]
       responses:
         "202": { description: Scanning. Watch `scanning` on GET /libraries. }
+    delete:
+      summary: Stop a library's running scan, whatever started it (admins only)
+      description: >
+        What the scan found so far stays; files it didn't get to are looked
+        at by the next scan. `scanReason` on GET /libraries says what
+        started the running scan.
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      responses:
+        "202": { description: Stopping. }
+        "409": { description: The library isn't being scanned. }
   /libraries/{id}/metadata-mode:
     put:
       summary: Choose where a movie or TV library's details come from first (admins only)

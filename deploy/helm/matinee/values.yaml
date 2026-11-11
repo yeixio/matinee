@@ -254,7 +254,7 @@ env: []
 #  - name: MATINEE_SCAN_INTERVAL
 #    value: 12h
 #  - name: MATINEE_WATCH_POLL_INTERVAL   # how often SMB/NFS folders are checked for new files
-#    value: 30s
+#    value: 5m
 
 resources: {}
 #  requests: {cpu: 500m, memory: 512Mi}

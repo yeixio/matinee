@@ -416,6 +416,8 @@
         "hint": "Nowe pliki pojawią się przy następnym pełnym skanowaniu lub gdy naciśniesz Skanuj."
       }
     },
+    "checkLabel": "Sprawdzanie nowych plików",
+    "checkHint": "Jak często sprawdzane są foldery, które nie zgłaszają zmian: udziały sieciowe albo wszystkie foldery przy sprawdzaniu według czasu. Każde sprawdzenie przegląda każdy folder; przy dużej bibliotece na udziale sieciowym dłuższy odstęp pozwala mu działać płynnie.",
     "rescanLabel": "Pełne ponowne skanowanie",
     "rescanEvery": "Co {{every}}",
     "rescanNever": "Nigdy",
@@ -701,6 +703,7 @@
       "title": "Biblioteki",
       "none": "Brak bibliotek.",
       "scan": "Skanuj",
+      "stopScan": "Zatrzymaj skanowanie",
       "findArtwork": "Znajdź obrazy",
       "findingArtwork": "Szukamy brakujących okładek w {{name}}. Pojawią się, gdy tylko zostaną znalezione.",
       "remove": "Usuń: {{name}}",
@@ -1333,7 +1336,14 @@
       "title": "Zadania w tle",
       "scan": "Skanowanie: {{library}}",
       "scanning": "Skanowanie od {{time}}",
+      "why": {
+        "schedule": "Zaplanowane pełne skanowanie",
+        "watcher": "Nowe lub zmienione pliki",
+        "manual": "Uruchomione przyciskiem Skanuj",
+        "server": "Uruchomione przez serwer"
+      },
       "lastScan": "{{time}}, trwało {{took}}",
+      "stopped": "Zatrzymano {{time}}, po {{took}}",
       "scanCounts": "dodane: {{added}}, zaktualizowane: {{updated}}, usunięte: {{removed}}, nieodtwarzalne: {{failed}}",
       "scanFailed": "Niepowodzenie: {{error}}",
       "notScanned": "Nie skanowano od uruchomienia serwera",

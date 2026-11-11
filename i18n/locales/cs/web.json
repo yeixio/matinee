@@ -416,6 +416,8 @@
         "hint": "Nové soubory se objeví při dalším úplném prohledání nebo když stiskneš Prohledat."
       }
     },
+    "checkLabel": "Hledat nové soubory",
+    "checkHint": "Jak často se kontrolují složky, které změny neohlašují: síťové sdílené složky, nebo všechny složky při kontrole podle časovače. Každá kontrola projde každou složku; u velké knihovny na síťové složce udrží delší interval složku svižnou.",
     "rescanLabel": "Úplné opětovné prohledání",
     "rescanEvery": "Každých {{every}}",
     "rescanNever": "Nikdy",
@@ -701,6 +703,7 @@
       "title": "Knihovny",
       "none": "Zatím žádné knihovny.",
       "scan": "Prohledat",
+      "stopScan": "Zastavit prohledávání",
       "findArtwork": "Najít obrázky",
       "findingArtwork": "Hledáme chybějící obaly v knihovně {{name}}. Objeví se, jakmile se najdou.",
       "remove": "Odebrat {{name}}",
@@ -1333,7 +1336,14 @@
       "title": "Úlohy na pozadí",
       "scan": "Prohledání: {{library}}",
       "scanning": "Prohledává se {{time}}",
+      "why": {
+        "schedule": "Plánované úplné prohledání",
+        "watcher": "Nové nebo změněné soubory",
+        "manual": "Spuštěno tlačítkem Prohledat",
+        "server": "Spuštěno serverem"
+      },
       "lastScan": "{{time}}, trvalo {{took}}",
+      "stopped": "Zastaveno {{time}}, po {{took}}",
       "scanCounts": "přidáno {{added}}, aktualizováno {{updated}}, odebráno {{removed}}, nepřehratelné {{failed}}",
       "scanFailed": "Selhalo: {{error}}",
       "notScanned": "Od spuštění serveru neprohledáno",

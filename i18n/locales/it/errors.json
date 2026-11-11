@@ -279,5 +279,7 @@
   "say_which_language_it_should_be_in": "indica in che lingua dovrebbe essere",
   "this_server_doesnt_rescan_its_libraries": "questo server non riesegue la scansione delle librerie",
   "scanintervalseconds_must_be_0_or_from_900_to_604800": "scanIntervalSeconds deve essere 0 o tra 900 e 604800",
-  "timezone_must_be_a_time_zone_such_as_america_juneau_or_empty": "timeZone deve essere un fuso orario come America/Juneau, o vuoto"
+  "timezone_must_be_a_time_zone_such_as_america_juneau_or_empty": "timeZone deve essere un fuso orario come America/Juneau, o vuoto",
+  "this_library_isnt_being_scanned": "questa libreria non è in fase di scansione",
+  "watchpollseconds_must_be_from_10_to_3600": "watchPollSeconds deve essere tra 10 e 3600"
 }

@@ -139,7 +139,8 @@ export type Settings = {
   publicURLHomeOnly?: boolean
   // How library folders are watched for new files.
   libraryWatch: WatchMode
-  // Set on the server's command line: how often polled folders are checked.
+  // How often polled folders (network shares, or all in poll mode) are
+  // checked for new files.
   watchPollSeconds: number
   // How often every library is rescanned in full (0 for never), and when
   // the next one starts (milliseconds; absent when they're off).
@@ -512,6 +513,8 @@ export type Library = {
   // only the files.
   metadataMode?: MetadataMode
   scanning: boolean
+  // What started the running scan.
+  scanReason?: ScanReason
   // Empty until the server has set up watching, just after it starts.
   watch: FolderWatch[]
 }
@@ -1050,7 +1053,11 @@ export type HealthProblem = {
 export type LogAttr = { key: string; value: string }
 export type LogLine = { seq: number; time: number; level: 'debug' | 'info' | 'warn' | 'error'; message: string; attrs?: LogAttr[] }
 export type LogLevel = LogLine['level']
-export type ScanReport = { started: number; tookMs: number; added: number; updated: number; removed: number; failed: number; unplayable: number; error?: string }
+// What started a scan: the periodic full rescan, files that changed in a
+// watched folder, an admin pressing Scan, or the server itself (a new
+// library, a new TMDB key).
+export type ScanReason = 'schedule' | 'watcher' | 'manual' | 'server'
+export type ScanReport = { started: number; tookMs: number; added: number; updated: number; removed: number; failed: number; unplayable: number; error?: string; reason?: ScanReason; stopped?: boolean }
 export type Health = {
   server: {
     name: string
@@ -1161,7 +1168,7 @@ export type Health = {
   /** Room transcodes have, in bytes (see the server's stream.Space). */
   transcodeSpace?: { free: number; used: number; limit?: number; short?: boolean; outOfSpace?: number }
   jobs: {
-    scans: { libraryId: number; name: string; kind: string; scanning: boolean; since?: number; last?: ScanReport }[]
+    scans: { libraryId: number; name: string; kind: string; scanning: boolean; since?: number; reason?: ScanReason; last?: ScanReport }[]
     analysis?: AnalysisStatus
     downloads: Record<string, number>
     importing?: boolean
@@ -1456,6 +1463,8 @@ export const api = {
     request<Library>('POST', '/api/v1/libraries', { name, kind, paths }),
   deleteLibrary: (id: number) => request<void>('DELETE', `/api/v1/libraries/${id}`),
   scanLibrary: (id: number) => request<void>('POST', `/api/v1/libraries/${id}/scan`),
+  // Stops a library's running scan, whatever started it; what it found stays.
+  stopScan: (id: number) => request<void>('DELETE', `/api/v1/libraries/${id}/scan`),
   // Looks again in the folders and online for a music or audiobook library's missing covers.
   findArtwork: (id: number) => request<{ lookingUp: number }>('POST', `/api/v1/libraries/${id}/artwork`),
   libraryItems: (id: number, filter: ItemFilter = {}) => {
@@ -1495,7 +1504,7 @@ export const api = {
   reanalyze: (id: number) => request<void>('POST', `/api/v1/items/${id}/analyze`),
   settings: () => request<Settings>('GET', '/api/v1/settings'),
   // tmdbKey replaces the server's TMDB key; "" goes back to the one it started with.
-  saveSettings: (s: Partial<Omit<Settings, 'hardware' | 'themeProblems' | 'watchPollSeconds' | 'nextScan' | 'systemTimeZone' | 'timeZoneInUse' | 'tmdb'>> & { tmdbKey?: string }) =>
+  saveSettings: (s: Partial<Omit<Settings, 'hardware' | 'themeProblems' | 'nextScan' | 'systemTimeZone' | 'timeZoneInUse' | 'tmdb'>> & { tmdbKey?: string }) =>
     request<Settings>('PUT', '/api/v1/settings', s),
   connectPlans: () => request<{ plans: ConnectPlan[] }>('GET', '/api/v1/settings/connect/plans').then((r) => r.plans),
   connectSubscribe: (plan: ConnectPlan['id']) => request<{ url: string }>('POST', '/api/v1/settings/connect/subscribe', { plan }),

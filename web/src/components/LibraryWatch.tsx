@@ -71,10 +71,43 @@ export function NewFiles() {
           ))}
         </div>
         <p className="text-xs text-muted">{t(`newFiles.mode.${current}.hint`, { every: poll })}</p>
+        {current !== 'off' && <CheckEvery seconds={data.watchPollSeconds} />}
         {save.error && <p className="text-sm text-danger">{save.error.message}</p>}
       </div>
       <FullRescans />
     </section>
+  )
+}
+
+// How often polled folders can be checked, in seconds.
+const checkChoices = [30, 60, 2 * 60, 5 * 60, 10 * 60]
+
+// How often folders that don't announce changes (network shares, or every
+// folder on a timer) are checked for new files.
+function CheckEvery({ seconds }: { seconds: number }) {
+  const { t } = useTranslation()
+  const qc = useQueryClient()
+  const save = useMutation({
+    mutationFn: (watchPollSeconds: number) => api.saveSettings({ watchPollSeconds }),
+    onSuccess: (s) => {
+      qc.setQueryData(['settings'], s)
+      setTimeout(() => qc.invalidateQueries({ queryKey: ['libraries'] }), 500)
+    },
+  })
+  const choices = checkChoices.includes(seconds) ? checkChoices : [...checkChoices, seconds].sort((a, b) => a - b)
+  return (
+    <label className="block space-y-1.5">
+      <span className="text-sm font-medium">{t('newFiles.checkLabel')}</span>
+      <select className={inputClass} value={seconds} disabled={save.isPending} onChange={(e) => save.mutate(Number(e.target.value))}>
+        {choices.map((s) => (
+          <option key={s} value={s}>
+            {t('newFiles.rescanEvery', { every: every(s) })}
+          </option>
+        ))}
+      </select>
+      <span className="block text-xs text-muted">{t('newFiles.checkHint')}</span>
+      {save.error && <span className="block text-sm text-danger">{save.error.message}</span>}
+    </label>
   )
 }
 

@@ -211,8 +211,9 @@ type serverSettings struct {
 	// network shares), poll (the quick check everywhere) or off. See
 	// internal/scan/watch.go.
 	LibraryWatch scan.WatchMode `json:"libraryWatch"`
-	// WatchPollSeconds is how often polled folders are checked, set on the
-	// server's command line.
+	// WatchPollSeconds is how often polled folders (on network shares, or
+	// all of them in poll mode) are checked for new files;
+	// MATINEE_WATCH_POLL_INTERVAL until an admin changes it.
 	WatchPollSeconds int `json:"watchPollSeconds"`
 	// ScanIntervalSeconds is how often every library is rescanned in full,
 	// 0 for never; MATINEE_SCAN_INTERVAL until an admin changes it.
@@ -307,7 +308,11 @@ func (s *Server) settings(ctx context.Context) (serverSettings, error) {
 	set.TimeZone, set.SystemTimeZone, set.TimeZoneInUse = zone, tz.System(), tz.InUse()
 	if w := s.Watcher; w != nil && err == nil {
 		set.LibraryWatch, err = w.Mode(ctx)
-		set.WatchPollSeconds = int(w.PollInterval.Seconds())
+		every, perr := w.Poll(ctx)
+		if perr != nil {
+			return set, perr
+		}
+		set.WatchPollSeconds = int(every.Seconds())
 	}
 	return set, err
 }
@@ -351,20 +356,20 @@ func (s *Server) putSettings(w http.ResponseWriter, r *http.Request) {
 		RemoteForwardedPort  *int      `json:"remoteForwardedPort"`
 		LibraryWatch         *string   `json:"libraryWatch"`
 		ScanIntervalSeconds  *int      `json:"scanIntervalSeconds"`
+		WatchPollSeconds     *int      `json:"watchPollSeconds"`
 		TimeZone             *string   `json:"timeZone"`
 		// TMDBKey replaces the TMDB key; "" goes back to the environment's.
 		TMDBKey *string `json:"tmdbKey"`
 		// Read-only; accepted so a client can send back what it got.
-		Hardware         json.RawMessage `json:"hardware"`
-		ToneMapTools     json.RawMessage `json:"toneMapTools"`
-		ThemeProblems    json.RawMessage `json:"themeProblems"`
-		Remote           json.RawMessage `json:"remote"`
-		PublicURL        json.RawMessage `json:"publicURL"`
-		WatchPollSeconds json.RawMessage `json:"watchPollSeconds"`
-		NextScan         json.RawMessage `json:"nextScan"`
-		SystemTimeZone   json.RawMessage `json:"systemTimeZone"`
-		TimeZoneInUse    json.RawMessage `json:"timeZoneInUse"`
-		TMDB             json.RawMessage `json:"tmdb"`
+		Hardware       json.RawMessage `json:"hardware"`
+		ToneMapTools   json.RawMessage `json:"toneMapTools"`
+		ThemeProblems  json.RawMessage `json:"themeProblems"`
+		Remote         json.RawMessage `json:"remote"`
+		PublicURL      json.RawMessage `json:"publicURL"`
+		NextScan       json.RawMessage `json:"nextScan"`
+		SystemTimeZone json.RawMessage `json:"systemTimeZone"`
+		TimeZoneInUse  json.RawMessage `json:"timeZoneInUse"`
+		TMDB           json.RawMessage `json:"tmdb"`
 	}
 	if err := readJSON(r, &in); err != nil {
 		writeError(w, http.StatusBadRequest, "bad request")
@@ -446,6 +451,22 @@ func (s *Server) putSettings(w http.ResponseWriter, r *http.Request) {
 		case mode != scan.WatchOff:
 			writeError(w, http.StatusBadRequest, "this server doesn't watch library folders")
 			return
+		}
+	}
+	if n := in.WatchPollSeconds; n != nil && s.Watcher != nil {
+		d := time.Duration(*n) * time.Second
+		if cur, err := s.Watcher.Poll(ctx); err != nil {
+			s.serverError(w, err)
+			return
+		} else if d != cur {
+			if d < scan.MinWatchPoll || d > scan.MaxWatchPoll {
+				writeError(w, http.StatusBadRequest, "watchPollSeconds must be from 10 to 3600")
+				return
+			}
+			if err := s.Watcher.SetPoll(ctx, d); err != nil {
+				s.serverError(w, err)
+				return
+			}
 		}
 	}
 	if n := in.ScanIntervalSeconds; n != nil && time.Duration(*n)*time.Second != s.scanInterval(ctx) {

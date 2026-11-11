@@ -23,7 +23,7 @@ type Config struct {
 	FFmpegPath    string        // ffmpeg binary
 	FFprobePath   string        // ffprobe binary
 	ScanInterval  time.Duration // periodic library rescan; 0 disables it
-	WatchPoll     time.Duration // how often folders on network shares are checked for new files
+	WatchPoll     time.Duration // how often folders on network shares are checked for new files, until an admin picks
 	TMDBKey       string        // themoviedb.org API key or read token; empty disables online metadata
 	RatingCountry string        // whose age ratings to use, such as US or GB
 	DatabaseURL   string        // postgres:// URL; empty uses SQLite in DataDir
@@ -113,7 +113,7 @@ func Load(args []string) (Config, error) {
 	drainDelay := fs.String("drain-delay", env("MATINEE_DRAIN_DELAY", "0s"), "on shutdown, how long to keep serving after telling players the server is restarting (the Helm chart uses 5s)")
 	shutdownTimeout := fs.String("shutdown-timeout", env("MATINEE_SHUTDOWN_TIMEOUT", "10s"), "on shutdown, how long requests in flight get to finish")
 	cacheLimit := fs.String("cache-limit", env("MATINEE_CACHE_LIMIT", ""), "how much the data folder's volume may hold when less than its disk, such as 50Gi (the Helm chart sets its cache.sizeLimit); transcodes keep within it")
-	watchPoll := fs.String("watch-poll-interval", env("MATINEE_WATCH_POLL_INTERVAL", "30s"), "how often folders on network shares are checked for new files")
+	watchPoll := fs.String("watch-poll-interval", env("MATINEE_WATCH_POLL_INTERVAL", "2m"), "how often folders on network shares are checked for new files until an admin picks in Settings")
 	if err := fs.Parse(args); err != nil {
 		return c, err
 	}

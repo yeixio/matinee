@@ -413,6 +413,8 @@
         "hint": "Fișierele noi apar la următoarea scanare completă sau când apeși Scanează."
       }
     },
+    "checkLabel": "Caută fișiere noi",
+    "checkHint": "Cât de des sunt verificate dosarele care nu anunță schimbările: partajări de rețea sau toate dosarele la verificarea după cronometru. Fiecare verificare trece prin fiecare dosar; pentru o bibliotecă mare pe o partajare de rețea, un interval mai lung o păstrează receptivă.",
     "rescanLabel": "Rescanări complete",
     "rescanEvery": "La fiecare {{every}}",
     "rescanNever": "Niciodată",
@@ -697,6 +699,7 @@
       "title": "Biblioteci",
       "none": "Nicio bibliotecă încă.",
       "scan": "Scanează",
+      "stopScan": "Oprește scanarea",
       "findArtwork": "Caută imagini",
       "findingArtwork": "Se caută copertele lipsă din {{name}}. Apar pe măsură ce sunt găsite.",
       "remove": "Elimină {{name}}",
@@ -1323,7 +1326,14 @@
       "title": "Sarcini în fundal",
       "scan": "Scanare {{library}}",
       "scanning": "Se scanează de {{time}}",
+      "why": {
+        "schedule": "Rescanare completă programată",
+        "watcher": "Fișiere noi sau modificate",
+        "manual": "Pornită cu Scanează",
+        "server": "Pornită de server"
+      },
       "lastScan": "{{time}}, a durat {{took}}",
+      "stopped": "Oprită {{time}}, după {{took}}",
       "scanCounts": "adăugate: {{added}}, actualizate: {{updated}}, eliminate: {{removed}}, imposibil de redat: {{failed}}",
       "scanFailed": "Eșuată: {{error}}",
       "notScanned": "Nescanată de la pornirea serverului",

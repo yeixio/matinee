@@ -279,5 +279,7 @@
   "say_which_language_it_should_be_in": "add meg, milyen nyelvűnek kellene lennie",
   "this_server_doesnt_rescan_its_libraries": "ez a szerver nem olvassa újra a könyvtárait",
   "scanintervalseconds_must_be_0_or_from_900_to_604800": "a scanIntervalSeconds értéke 0 vagy 900 és 604800 közötti kell legyen",
-  "timezone_must_be_a_time_zone_such_as_america_juneau_or_empty": "a timeZone egy időzóna kell legyen, például America/Juneau, vagy üres"
+  "timezone_must_be_a_time_zone_such_as_america_juneau_or_empty": "a timeZone egy időzóna kell legyen, például America/Juneau, vagy üres",
+  "this_library_isnt_being_scanned": "ezt a könyvtárat most nem olvassa be",
+  "watchpollseconds_must_be_from_10_to_3600": "a watchPollSeconds értéke 10 és 3600 közötti kell legyen"
 }

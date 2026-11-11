@@ -413,6 +413,8 @@
         "hint": "Arquivos novos aparecem na próxima verificação completa ou quando você toca em Verificar."
       }
     },
+    "checkLabel": "Procurar arquivos novos",
+    "checkHint": "Com que frequência são verificadas as pastas que não avisam mudanças: compartilhamentos de rede, ou todas as pastas no modo por tempo. Cada verificação olha todas as pastas; em uma biblioteca grande em um compartilhamento de rede, um intervalo maior o mantém ágil.",
     "rescanLabel": "Reescaneamentos completos",
     "rescanEvery": "A cada {{every}}",
     "rescanNever": "Nunca",
@@ -697,6 +699,7 @@
       "title": "Bibliotecas",
       "none": "Nenhuma biblioteca ainda.",
       "scan": "Verificar",
+      "stopScan": "Parar escaneamento",
       "findArtwork": "Buscar imagens",
       "findingArtwork": "Procurando as capas que faltam em {{name}}. Elas aparecem conforme são encontradas.",
       "remove": "Remover {{name}}",
@@ -1323,7 +1326,14 @@
       "title": "Tarefas em segundo plano",
       "scan": "Escanear {{library}}",
       "scanning": "Escaneando há {{time}}",
+      "why": {
+        "schedule": "Reescaneamento completo agendado",
+        "watcher": "Arquivos novos ou alterados",
+        "manual": "Iniciado com Escanear",
+        "server": "Iniciado pelo servidor"
+      },
       "lastScan": "{{time}}, levou {{took}}",
+      "stopped": "Parado {{time}}, após {{took}}",
       "scanCounts": "{{added}} adicionados, {{updated}} atualizados, {{removed}} removidos, {{failed}} não reproduzíveis",
       "scanFailed": "Falhou: {{error}}",
       "notScanned": "Não escaneada desde que o servidor iniciou",
