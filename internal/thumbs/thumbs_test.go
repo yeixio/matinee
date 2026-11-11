@@ -206,3 +206,45 @@ func TestUnreadable(t *testing.T) {
 		t.Fatal("want an error")
 	}
 }
+
+// A video that can't be read is stored as unreadable only once it fails
+// twice in a row: one failure may be its share reconnecting.
+func TestUnreadableAfterTwoFailures(t *testing.T) {
+	ffmpeg, err := exec.LookPath("ffmpeg")
+	if err != nil {
+		t.Skip("ffmpeg not installed")
+	}
+	root := t.TempDir()
+	file := filepath.Join(root, "Film (2020).mkv")
+	if out, err := exec.Command(ffmpeg, "-v", "error", "-f", "lavfi", "-i", "testsrc2=s=320x180:r=10:d=5",
+		"-c:v", "libx264", "-preset", "ultrafast", file).CombinedOutput(); err != nil {
+		t.Fatalf("make file: %v\n%s", err, out)
+	}
+	st := storetest.Open(t)
+	ctx := context.Background()
+	log := slog.New(slog.NewTextHandler(io.Discard, nil))
+	lib, _ := st.CreateLibrary(ctx, "Movies", "movies", []string{root})
+	if _, err := (&scan.Scanner{Store: st, Prober: probe.Prober{Path: "ffprobe"}, Log: log}).Scan(ctx, lib); err != nil {
+		t.Fatal(err)
+	}
+	// Garbled since it was scanned.
+	data, _ := os.ReadFile(file)
+	for i := range data {
+		data[i] = 0
+	}
+	os.WriteFile(file, data, 0o644)
+	files, _ := st.ThumbnailFiles(ctx, 0, 10)
+	g := &Generator{Store: st, FFmpeg: ffmpeg, Dir: t.TempDir(), Log: log}
+	if g.Make(ctx, files[0]) {
+		t.Fatal("set aside after one failure")
+	}
+	if _, n, _ := st.UnreadableVideos(ctx, Version, 10); n != 0 {
+		t.Fatalf("unreadable after one failure: %d", n)
+	}
+	if !g.Make(ctx, files[0]) {
+		t.Fatal("didn't set aside after two failures")
+	}
+	if _, n, _ := st.UnreadableVideos(ctx, Version, 10); n != 1 {
+		t.Fatalf("unreadable: %d", n)
+	}
+}

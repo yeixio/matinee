@@ -765,6 +765,11 @@ var migrations = []string{
 		count    INTEGER NOT NULL,
 		last_at  BIGINT NOT NULL
 	)`,
+	// 135: forget videos set aside as unreadable before the background
+	// jobs could tell a damaged file from a share that dropped while it was
+	// read. Most were fine; they get their previews made again, and the
+	// damaged ones are set aside again.
+	"DELETE FROM thumbnails WHERE count = 0",
 }
 
 func now() int64 { return time.Now().Unix() }

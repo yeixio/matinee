@@ -98,6 +98,7 @@ type Generator struct {
 	mode       Mode
 	loaded     bool
 	retryAfter map[int64]time.Time
+	failed     map[int64]bool // videos whose last read failed, see firstFailure
 	timeouts   slowfs.Timeouts
 	unreadable func(ctx context.Context, id int64)
 	making     map[int64]*sync.Mutex
@@ -108,6 +109,7 @@ type Generator struct {
 func (g *Generator) init() {
 	if g.requests == nil {
 		g.retryAfter = map[int64]time.Time{}
+		g.failed = map[int64]bool{}
 		g.making = map[int64]*sync.Mutex{}
 		g.requested = map[int64]bool{}
 		g.requests = make(chan int64, 64)
@@ -288,6 +290,16 @@ func (g *Generator) retryLater(id int64) bool {
 	return ok
 }
 
+// firstFailure reports whether reading video id failed for the first time
+// in a row, and remembers that it did.
+func (g *Generator) firstFailure(id int64) bool {
+	g.mu.Lock()
+	defer g.mu.Unlock()
+	first := !g.failed[id]
+	g.failed[id] = true
+	return first
+}
+
 // stalls is where share stalls are counted: the database, when there is one.
 func (g *Generator) stalls() slowfs.Stalls {
 	if g.Store == nil {
@@ -358,10 +370,22 @@ func (g *Generator) Make(ctx context.Context, f store.ThumbnailFile) bool {
 		g.retryAfter[f.ID] = time.Now().Add(retryTimedOut)
 		g.mu.Unlock()
 		return false
+	case err != nil && (!slowfs.Answering(f.Path) || g.firstFailure(f.ID)):
+		// A read that fails while the share reconnects isn't the file's
+		// fault, and neither, most likely, is one failure: try it again
+		// later.
+		g.Log.Warn("thumbnails: can't read video; trying again later", "path", f.Path, "err", err)
+		g.mu.Lock()
+		g.retryAfter[f.ID] = time.Now().Add(retryTimedOut)
+		g.mu.Unlock()
+		return false
 	case err != nil:
 		g.Log.Warn("thumbnails: can't read video", "path", f.Path, "err", err)
 		t = store.Thumbnails{} // stored as unreadable, until the file changes
 	}
+	g.mu.Lock()
+	delete(g.failed, f.ID)
+	g.mu.Unlock()
 	if err := g.Store.SetThumbnails(ctx, f.ID, t, Key(f)); err != nil {
 		g.Log.Warn("thumbnails: save", "item", f.ID, "err", err)
 		return false
