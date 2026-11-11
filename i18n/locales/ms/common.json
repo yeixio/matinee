@@ -647,6 +647,7 @@
     "slowConvert": "Pelayan menukar video ini pada kelajuan {{speed}}×, lebih perlahan daripada ia dimainkan.",
     "slowConnection": "Sambungan mendapat {{have}} Mbps, dan video ini memerlukan {{need}} Mbps.",
     "unknown": "Pelayan dan sambungan kelihatan baik. Rangkaian mungkin terputus seketika.",
+    "noSpace": "Pelayan kehabisan ruang untuk menukar video ini.",
     "converted": {
       "codec": "Ia ditukar kerana peranti ini tidak dapat memainkan format videonya.",
       "hdr": "Ia ditukar kerana skrin ini tidak dapat menunjukkan HDR-nya.",
@@ -657,7 +658,8 @@
       "gpu": "Petua pentadbir: GPU untuk transkod menukar jauh lebih pantas. Lihat Tetapan → Penstriman.",
       "lowerQuality": "Petua pentadbir: GPU tidak dapat mengejar. Kurang strim serentak atau kualiti lebih rendah membantu.",
       "adaptive": "Petua pentadbir: hidupkan kualiti adaptif dalam Tetapan → Penstriman supaya pemain boleh turun kualiti.",
-      "disk": "Petua pentadbir: semak cakera atau perkongsian rangkaian pustaka ini dalam Kesihatan pelayan."
+      "disk": "Petua pentadbir: semak cakera atau perkongsian rangkaian pustaka ini dalam Kesihatan pelayan.",
+      "space": "Petua pentadbir: beri folder transkod lebih banyak ruang, atau kosongkan cakeranya. Kesihatan pelayan menunjukkan berapa banyak yang ada."
     },
     "test": "Uji sambungan",
     "testing": "Menguji…",

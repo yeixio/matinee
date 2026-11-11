@@ -252,6 +252,7 @@
   "the_channel_isnt_answering_right_now": "kênh hiện không phản hồi",
   "the_guides_address_isnt_a_web_address": "địa chỉ lịch phát sóng không phải địa chỉ web",
   "the_playlist_couldnt_be_read_reason": "không đọc được danh sách: {{reason}}",
+  "the_server_is_out_of_room_to_convert_this_video": "máy chủ không còn chỗ để chuyển đổi video này",
   "only_movies_and_shows_have_a_match_to_fix": "chỉ phim và chương trình mới có nhận diện để sửa",
   "add_a_tmdb_key_in_settings_posters_and_details_to_look_titles_up": "thêm khóa TMDB trong Cài đặt → Áp phích và chi tiết để tra cứu phim",
   "tmdb_didnt_accept_the_key_in_settings_posters_and_details": "TMDB không chấp nhận khóa trong Cài đặt → Áp phích và chi tiết",

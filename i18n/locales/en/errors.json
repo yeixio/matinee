@@ -224,6 +224,7 @@
   "the_guides_address_isnt_a_web_address": "the guide's address isn't a web address",
   "the_image_is_too_big_20_mb_at_most": "the image is too big (20 MB at most)",
   "the_playlist_couldnt_be_read_reason": "the playlist couldn't be read: {{reason}}",
+  "the_server_is_out_of_room_to_convert_this_video": "the server is out of room to convert this video",
   "the_server_needs_at_least_one_admin": "the server needs at least one admin",
   "the_station_couldnt_be_reached_check_the_address_and_try_again": "the station couldn't be reached. Check the address and try again.",
   "the_station_couldnt_be_reached_reason": "the station couldn't be reached: {{reason}}",

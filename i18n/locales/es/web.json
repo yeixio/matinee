@@ -1280,6 +1280,7 @@
       },
       "burnSub": "subtítulos incrustados",
       "toneMapped": "HDR a SDR",
+      "saving": "poco espacio: guarda solo los minutos alrededor de donde se reproduce",
       "why": {
         "codec": "el dispositivo no reproduce este formato de vídeo",
         "hdr": "la pantalla no muestra este HDR",
@@ -1288,7 +1289,12 @@
       "started": "Empezó {{time}}",
       "stop": "Detener",
       "stopHint": "Detiene FFmpeg. Si el reproductor sigue abierto, empieza una nueva transcodificación.",
-      "cpuOnly": "Las transcodificaciones se hacen en la CPU."
+      "cpuOnly": "Las transcodificaciones se hacen en la CPU.",
+      "space": "Espacio para transcodificaciones: {{free}} libres.",
+      "spaceOfLimit": "Espacio para transcodificaciones: {{free}} libres del límite de {{limit}}.",
+      "spaceShort": "A las transcodificaciones les falta espacio ({{free}} libres), así que los videos largos guardan solo los minutos alrededor de donde se reproducen.",
+      "spaceOut": "Un video no se pudo reproducir {{time}} porque las transcodificaciones se quedaron sin espacio ({{free}} libres ahora).",
+      "spaceTip": "Da más espacio a la carpeta de transcodificación o libera espacio en su disco."
     },
     "problems": {
       "title": "Avisos y errores",
@@ -1399,7 +1405,9 @@
       "restart": "El servidor se inicia o se reinicia",
       "restartHint": "Indica si se actualizó o si se detuvo sin apagarse correctamente.",
       "backup": "Falla una copia de seguridad",
-      "backupHint": "Cuando no se puede copiar la base de datos."
+      "backupHint": "Cuando no se puede copiar la base de datos.",
+      "transcodeSpace": "Las transcodificaciones se quedan sin espacio",
+      "transcodeSpaceHint": "Cuando un video no se puede reproducir porque la carpeta de transcodificación está llena."
     },
     "email": {
       "title": "Correo",

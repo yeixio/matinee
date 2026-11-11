@@ -252,6 +252,7 @@
   "the_channel_isnt_answering_right_now": "канал зараз не відповідає",
   "the_guides_address_isnt_a_web_address": "адреса телепрограми не є вебадресою",
   "the_playlist_couldnt_be_read_reason": "не вдалося прочитати список: {{reason}}",
+  "the_server_is_out_of_room_to_convert_this_video": "на сервері немає місця для перекодування цього відео",
   "only_movies_and_shows_have_a_match_to_fix": "зіставлення можна виправити лише для фільмів і серіалів",
   "add_a_tmdb_key_in_settings_posters_and_details_to_look_titles_up": "додайте ключ TMDB у Налаштування → Постери й подробиці, щоб шукати назви",
   "tmdb_didnt_accept_the_key_in_settings_posters_and_details": "TMDB не прийняв ключ із Налаштування → Постери й подробиці",

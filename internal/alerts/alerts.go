@@ -46,6 +46,7 @@ const (
 	RuleTranscodes = "transcodes"
 	RuleRestart    = "restart"
 	RuleBackup     = "backup"
+	RuleSpace      = "transcodeSpace"
 	RuleTest       = "test"
 )
 
@@ -104,6 +105,8 @@ type Rules struct {
 	Transcodes RateRule `json:"transcodes"`
 	Restart    Toggle   `json:"restart"`
 	Backup     Toggle   `json:"backup"`
+	// Space: a video couldn't play because the transcode folder ran out of room.
+	Space Toggle `json:"transcodeSpace"`
 }
 
 // Toggle is a rule that's on or off.
@@ -133,6 +136,7 @@ func DefaultRules() Rules {
 		Transcodes: RateRule{On: true, Count: 3, Minutes: 15},
 		Restart:    Toggle{On: true},
 		Backup:     Toggle{On: true},
+		Space:      Toggle{On: true},
 	}
 }
 
@@ -384,6 +388,19 @@ func (m *Manager) BackupFailed(ctx context.Context, err error) {
 	}
 	m.deliver(ctx, c, Alert{Rule: RuleBackup, Key: RuleBackup, Level: LevelWarning, Title: "Database backup failed",
 		Message: "Matinee couldn't back up its database: " + err.Error() + ". Backups are under Settings → Server health → Backups."})
+}
+
+// TranscodeSpace tells the admins a video couldn't start, or stopped
+// partway, because the transcode folder ran out of room; detail says how.
+// The transcoder sends it at most hourly.
+func (m *Manager) TranscodeSpace(ctx context.Context, detail string) {
+	c, err := m.Config(ctx)
+	if err != nil || !c.Rules.Space.On || c.Channels() == 0 {
+		return
+	}
+	m.deliver(ctx, c, Alert{Rule: RuleSpace, Key: RuleSpace, Level: LevelWarning, Title: "Transcodes ran out of room",
+		Message: "A video couldn't play because the transcode folder ran out of room (" + detail + "). " +
+			"Give it more room or free up its disk; Settings → Server health shows how much it has."})
 }
 
 // Stopped notes a clean shutdown, so the next start isn't taken for a crash.

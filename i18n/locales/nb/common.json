@@ -679,6 +679,7 @@
     "slowConvert": "Serveren konverterer videoen i {{speed}}× hastighet, saktere enn den spilles.",
     "slowConnection": "Tilkoblingen får {{have}} Mbps, og videoen trenger {{need}} Mbps.",
     "unknown": "Serveren og tilkoblingen så bra ut. Nettverket kan ha falt ut et øyeblikk.",
+    "noSpace": "Serveren gikk tom for plass til å omkode denne videoen.",
     "converted": {
       "codec": "Den konverteres fordi enheten ikke spiller videoformatet.",
       "hdr": "Den konverteres fordi skjermen ikke viser HDR-en.",
@@ -689,7 +690,8 @@
       "gpu": "Tips for administratorer: en GPU for omkoding konverterer mye raskere. Se Innstillinger → Strømming.",
       "lowerQuality": "Tips for administratorer: GPU-en henger ikke med. Færre strømmer samtidig eller lavere kvalitet hjelper.",
       "adaptive": "Tips for administratorer: slå på adaptiv kvalitet i Innstillinger → Strømming, så spillere kan gå ned.",
-      "disk": "Tips for administratorer: sjekk disken eller nettverksressursen til biblioteket i Serverhelse."
+      "disk": "Tips for administratorer: sjekk disken eller nettverksressursen til biblioteket i Serverhelse.",
+      "space": "Tips for administratorer: gi omkodingsmappen mer plass, eller frigjør plass på disken dens. Serverhelse viser hvor mye den har."
     },
     "test": "Test tilkoblingen",
     "testing": "Tester…",

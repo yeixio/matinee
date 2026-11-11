@@ -252,6 +252,7 @@
   "the_channel_isnt_answering_right_now": "kanał teraz nie odpowiada",
   "the_guides_address_isnt_a_web_address": "adres przewodnika nie jest adresem internetowym",
   "the_playlist_couldnt_be_read_reason": "nie udało się odczytać listy: {{reason}}",
+  "the_server_is_out_of_room_to_convert_this_video": "serwerowi brakuje miejsca na przekodowanie tego wideo",
   "only_movies_and_shows_have_a_match_to_fix": "tylko filmy i seriale mają dopasowanie do poprawienia",
   "add_a_tmdb_key_in_settings_posters_and_details_to_look_titles_up": "dodaj klucz TMDB w Ustawienia → Plakaty i szczegóły, aby wyszukiwać tytuły",
   "tmdb_didnt_accept_the_key_in_settings_posters_and_details": "TMDB nie zaakceptowało klucza z Ustawienia → Plakaty i szczegóły",

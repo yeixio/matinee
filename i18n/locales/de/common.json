@@ -679,6 +679,7 @@
     "slowConvert": "Der Server wandelt dieses Video mit {{speed}}-facher Geschwindigkeit um, langsamer als es abspielt.",
     "slowConnection": "Die Verbindung schafft {{have}} Mbit/s, dieses Video braucht {{need}} Mbit/s.",
     "unknown": "Server und Verbindung sahen gut aus. Vielleicht war das Netzwerk kurz weg.",
+    "noSpace": "Dem Server ist der Platz zum Umwandeln dieses Videos ausgegangen.",
     "converted": {
       "codec": "Es wird umgewandelt, weil dieses Gerät das Videoformat nicht abspielt.",
       "hdr": "Es wird umgewandelt, weil dieser Bildschirm sein HDR nicht zeigt.",
@@ -689,7 +690,8 @@
       "gpu": "Tipp für Admins: Eine GPU zum Transkodieren wandelt viel schneller um. Siehe Einstellungen → Streaming.",
       "lowerQuality": "Tipp für Admins: Die GPU kommt nicht hinterher. Weniger Streams gleichzeitig oder eine niedrigere Qualität helfen.",
       "adaptive": "Tipp für Admins: Schalte unter Einstellungen → Streaming adaptive Qualität ein, damit Player herunterschalten können.",
-      "disk": "Tipp für Admins: Prüfe in Serverzustand die Festplatte oder Netzwerkfreigabe dieser Mediathek."
+      "disk": "Tipp für Admins: Prüfe in Serverzustand die Festplatte oder Netzwerkfreigabe dieser Mediathek.",
+      "space": "Tipp für Admins: Gib dem Transkodierungsordner mehr Platz oder schaffe Platz auf seiner Festplatte. Serverzustand zeigt, wie viel er hat."
     },
     "test": "Verbindung testen",
     "testing": "Wird getestet…",

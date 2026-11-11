@@ -252,6 +252,7 @@
   "the_channel_isnt_answering_right_now": "la chaîne ne répond pas pour le moment",
   "the_guides_address_isnt_a_web_address": "l’adresse du guide n’est pas une adresse web",
   "the_playlist_couldnt_be_read_reason": "la liste n’a pas pu être lue : {{reason}}",
+  "the_server_is_out_of_room_to_convert_this_video": "le serveur n'a plus de place pour convertir cette vidéo",
   "only_movies_and_shows_have_a_match_to_fix": "seuls les films et les séries ont une identification à corriger",
   "add_a_tmdb_key_in_settings_posters_and_details_to_look_titles_up": "ajoutez une clé TMDB dans Réglages → Affiches et détails pour rechercher des titres",
   "tmdb_didnt_accept_the_key_in_settings_posters_and_details": "TMDB n'a pas accepté la clé de Réglages → Affiches et détails",

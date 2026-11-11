@@ -647,6 +647,7 @@
     "slowConvert": "Server mengonversi video ini dengan kecepatan {{speed}}×, lebih lambat daripada pemutarannya.",
     "slowConnection": "Koneksi mendapat {{have}} Mbps, dan video ini butuh {{need}} Mbps.",
     "unknown": "Server dan koneksi tampak baik. Jaringan mungkin terputus sesaat.",
+    "noSpace": "Server kehabisan ruang untuk mengonversi video ini.",
     "converted": {
       "codec": "Video dikonversi karena perangkat ini tidak bisa memutar format videonya.",
       "hdr": "Video dikonversi karena layar ini tidak bisa menampilkan HDR-nya.",
@@ -657,7 +658,8 @@
       "gpu": "Tips admin: GPU untuk transcoding mengonversi jauh lebih cepat. Lihat Pengaturan → Streaming.",
       "lowerQuality": "Tips admin: GPU tidak sanggup mengejar. Lebih sedikit stream sekaligus atau kualitas lebih rendah akan membantu.",
       "adaptive": "Tips admin: aktifkan kualitas adaptif di Pengaturan → Streaming agar pemutar bisa menurunkan kualitas.",
-      "disk": "Tips admin: periksa disk atau folder jaringan pustaka ini di Kesehatan server."
+      "disk": "Tips admin: periksa disk atau folder jaringan pustaka ini di Kesehatan server.",
+      "space": "Tips admin: beri folder transcode lebih banyak ruang, atau kosongkan disknya. Kesehatan server menunjukkan berapa yang tersedia."
     },
     "test": "Uji koneksi",
     "testing": "Menguji…",

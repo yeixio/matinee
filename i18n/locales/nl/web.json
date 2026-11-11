@@ -1272,6 +1272,7 @@
       },
       "burnSub": "ondertiteling ingebrand",
       "toneMapped": "HDR naar SDR",
+      "saving": "weinig ruimte: houdt alleen de minuten rond het afspeelpunt",
       "why": {
         "codec": "het apparaat speelt dit videoformaat niet af",
         "hdr": "het scherm kan deze HDR niet tonen",
@@ -1280,7 +1281,12 @@
       "started": "Gestart {{time}}",
       "stop": "Stoppen",
       "stopHint": "Stopt FFmpeg. Staat de speler nog open, dan start die een nieuwe transcodering.",
-      "cpuOnly": "Transcoderingen draaien op de CPU."
+      "cpuOnly": "Transcoderingen draaien op de CPU.",
+      "space": "Ruimte voor transcoderingen: {{free}} vrij.",
+      "spaceOfLimit": "Ruimte voor transcoderingen: {{free}} vrij van de limiet van {{limit}}.",
+      "spaceShort": "Transcoderingen hebben weinig ruimte ({{free}} vrij), dus lange video's houden alleen de minuten rond het afspeelpunt.",
+      "spaceOut": "Een video kon {{time}} niet spelen omdat de ruimte voor transcoderingen op was ({{free}} nu vrij).",
+      "spaceTip": "Geef de transcodeermap meer ruimte, of maak ruimte vrij op de schijf."
     },
     "problems": {
       "title": "Waarschuwingen en fouten",
@@ -1388,7 +1394,9 @@
       "restart": "De server start of herstart",
       "restartHint": "Zegt of hij is bijgewerkt, of gestopt is zonder netjes af te sluiten.",
       "backup": "Een back-up mislukt",
-      "backupHint": "Als er geen back-up van de database gemaakt kan worden."
+      "backupHint": "Als er geen back-up van de database gemaakt kan worden.",
+      "transcodeSpace": "Transcoderingen hebben geen ruimte meer",
+      "transcodeSpaceHint": "Als een video niet kan spelen omdat de transcodeermap vol is."
     },
     "email": {
       "title": "E-mail",

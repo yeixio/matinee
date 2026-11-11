@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strconv"
 	"time"
 
 	"github.com/yeixio/matinee/internal/connect"
@@ -47,6 +48,10 @@ type Config struct {
 	// requests in flight up to ShutdownTimeout to finish.
 	DrainDelay      time.Duration
 	ShutdownTimeout time.Duration
+	// CacheLimit is how much the volume the data folder is on may hold, when
+	// that's less than its disk (a Kubernetes emptyDir's sizeLimit); 0 for
+	// none. Transcodes keep within it (see stream.SpaceLimit).
+	CacheLimit int64
 }
 
 // Database is what store.Open takes: the PostgreSQL URL, or the SQLite file.
@@ -107,6 +112,7 @@ func Load(args []string) (Config, error) {
 	interval := fs.String("scan-interval", env("MATINEE_SCAN_INTERVAL", "15m"), "periodic rescan interval, 0 to disable")
 	drainDelay := fs.String("drain-delay", env("MATINEE_DRAIN_DELAY", "0s"), "on shutdown, how long to keep serving after telling players the server is restarting (the Helm chart uses 5s)")
 	shutdownTimeout := fs.String("shutdown-timeout", env("MATINEE_SHUTDOWN_TIMEOUT", "10s"), "on shutdown, how long requests in flight get to finish")
+	cacheLimit := fs.String("cache-limit", env("MATINEE_CACHE_LIMIT", ""), "how much the data folder's volume may hold when less than its disk, such as 50Gi (the Helm chart sets its cache.sizeLimit); transcodes keep within it")
 	watchPoll := fs.String("watch-poll-interval", env("MATINEE_WATCH_POLL_INTERVAL", "30s"), "how often folders on network shares are checked for new files")
 	if err := fs.Parse(args); err != nil {
 		return c, err
@@ -140,6 +146,9 @@ func Load(args []string) (Config, error) {
 	if c.ShutdownTimeout, err = time.ParseDuration(*shutdownTimeout); err != nil || c.ShutdownTimeout < 0 {
 		return c, fmt.Errorf("shutdown-timeout: want a duration, like 10s")
 	}
+	if c.CacheLimit, err = ParseSize(*cacheLimit); err != nil {
+		return c, fmt.Errorf("cache-limit: %w", err)
+	}
 	if err := os.MkdirAll(c.TranscodeDir(), 0o755); err != nil {
 		return c, fmt.Errorf("create data dir: %w", err)
 	}
@@ -151,4 +160,28 @@ func env(key, def string) string {
 		return v
 	}
 	return def
+}
+
+// ParseSize reads a size such as 50Gi, 45G, 500Mi or 1073741824 (bytes),
+// as Kubernetes writes them; "" is 0.
+func ParseSize(s string) (int64, error) {
+	if s == "" {
+		return 0, nil
+	}
+	units := []struct {
+		suffix string
+		mult   float64
+	}{{"Ki", 1 << 10}, {"Mi", 1 << 20}, {"Gi", 1 << 30}, {"Ti", 1 << 40}, {"k", 1e3}, {"K", 1e3}, {"M", 1e6}, {"G", 1e9}, {"T", 1e12}}
+	mult, num := 1.0, s
+	for _, u := range units {
+		if len(s) > len(u.suffix) && s[len(s)-len(u.suffix):] == u.suffix {
+			mult, num = u.mult, s[:len(s)-len(u.suffix)]
+			break
+		}
+	}
+	v, err := strconv.ParseFloat(num, 64)
+	if err != nil || v < 0 {
+		return 0, fmt.Errorf("want a size such as 50Gi or 45G, not %q", s)
+	}
+	return int64(v * mult), nil
 }

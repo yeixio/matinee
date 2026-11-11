@@ -1280,6 +1280,7 @@
       },
       "burnSub": "legendas embutidas",
       "toneMapped": "HDR para SDR",
+      "saving": "pouco espaço: guarda só os minutos em torno de onde está tocando",
       "why": {
         "codec": "o aparelho não reproduz este formato de vídeo",
         "hdr": "a tela não mostra este HDR",
@@ -1288,7 +1289,12 @@
       "started": "Começou {{time}}",
       "stop": "Parar",
       "stopHint": "Para o FFmpeg. Se o player ainda estiver aberto, ele inicia uma nova transcodificação.",
-      "cpuOnly": "As transcodificações rodam na CPU."
+      "cpuOnly": "As transcodificações rodam na CPU.",
+      "space": "Espaço para transcodificações: {{free}} livres.",
+      "spaceOfLimit": "Espaço para transcodificações: {{free}} livres do limite de {{limit}}.",
+      "spaceShort": "As transcodificações estão com pouco espaço ({{free}} livres), então vídeos longos guardam só os minutos em torno de onde estão tocando.",
+      "spaceOut": "Um vídeo não pôde tocar {{time}} porque as transcodificações ficaram sem espaço ({{free}} livres agora).",
+      "spaceTip": "Dê mais espaço à pasta de transcodificação ou libere espaço no disco dela."
     },
     "problems": {
       "title": "Avisos e erros",
@@ -1399,7 +1405,9 @@
       "restart": "O servidor inicia ou reinicia",
       "restartHint": "Diz se ele foi atualizado ou se parou sem desligar corretamente.",
       "backup": "Um backup falha",
-      "backupHint": "Quando não é possível fazer backup do banco de dados."
+      "backupHint": "Quando não é possível fazer backup do banco de dados.",
+      "transcodeSpace": "As transcodificações ficam sem espaço",
+      "transcodeSpaceHint": "Quando um vídeo não pode tocar porque a pasta de transcodificação está cheia."
     },
     "email": {
       "title": "E-mail",

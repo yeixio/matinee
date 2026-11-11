@@ -1272,6 +1272,7 @@
       },
       "burnSub": "undertekster brent inn",
       "toneMapped": "HDR til SDR",
+      "saving": "lite plass: beholder bare minuttene rundt avspillingen",
       "why": {
         "codec": "enheten kan ikke spille av dette videoformatet",
         "hdr": "skjermen kan ikke vise denne HDR-typen",
@@ -1280,7 +1281,12 @@
       "started": "Startet {{time}}",
       "stop": "Stopp",
       "stopHint": "Stopper FFmpeg. Er spilleren fortsatt åpen, starter den en ny omkoding.",
-      "cpuOnly": "Omkodinger kjører på CPU-en."
+      "cpuOnly": "Omkodinger kjører på CPU-en.",
+      "space": "Plass til omkodinger: {{free}} ledig.",
+      "spaceOfLimit": "Plass til omkodinger: {{free}} ledig av grensen på {{limit}}.",
+      "spaceShort": "Omkodingene har lite plass ({{free}} ledig), så lange videoer beholder bare minuttene rundt avspillingen.",
+      "spaceOut": "En video kunne ikke spilles av {{time}} fordi omkodingene gikk tom for plass ({{free}} ledig nå).",
+      "spaceTip": "Gi omkodingsmappen mer plass, eller frigjør plass på disken dens."
     },
     "problems": {
       "title": "Advarsler og feil",
@@ -1388,7 +1394,9 @@
       "restart": "Serveren starter eller starter på nytt",
       "restartHint": "Sier om den ble oppdatert, eller stoppet uten å slå seg av ordentlig.",
       "backup": "En sikkerhetskopi mislykkes",
-      "backupHint": "Når databasen ikke kan sikkerhetskopieres."
+      "backupHint": "Når databasen ikke kan sikkerhetskopieres.",
+      "transcodeSpace": "Omkodinger går tom for plass",
+      "transcodeSpaceHint": "Når en video ikke kan spilles av fordi omkodingsmappen er full."
     },
     "email": {
       "title": "E-post",

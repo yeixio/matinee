@@ -180,6 +180,11 @@ func (s *Server) extraHLS(w http.ResponseWriter, r *http.Request) {
 		writeError(w, http.StatusConflict, "replaced by a newer seek")
 		return
 	}
+	if errors.Is(err, stream.ErrNoSpace) {
+		// Said in the player in plain words; admins also get an alert.
+		writeError(w, http.StatusInsufficientStorage, "the server is out of room to convert this video")
+		return
+	}
 	if err != nil {
 		s.Log.Error("transcode extra", "item", it.ID, "err", err)
 		writeError(w, http.StatusInternalServerError, "couldn't start playback for this extra")

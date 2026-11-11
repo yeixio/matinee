@@ -252,6 +252,7 @@
   "the_channel_isnt_answering_right_now": "kanal şu an yanıt vermiyor",
   "the_guides_address_isnt_a_web_address": "yayın akışının adresi bir web adresi değil",
   "the_playlist_couldnt_be_read_reason": "liste okunamadı: {{reason}}",
+  "the_server_is_out_of_room_to_convert_this_video": "sunucunun bu videoyu dönüştürecek yeri yok",
   "only_movies_and_shows_have_a_match_to_fix": "yalnızca filmlerin ve dizilerin düzeltilecek eşleşmesi olur",
   "add_a_tmdb_key_in_settings_posters_and_details_to_look_titles_up": "başlık aramak için Ayarlar → Afişler ve ayrıntılar bölümüne bir TMDB anahtarı ekleyin",
   "tmdb_didnt_accept_the_key_in_settings_posters_and_details": "TMDB, Ayarlar → Afişler ve ayrıntılar'daki anahtarı kabul etmedi",

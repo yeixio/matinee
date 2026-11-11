@@ -137,6 +137,12 @@ export function AlertSettings() {
               on={form.rules.backup?.on ?? true}
               onToggle={(on) => change((f) => (f.rules.backup = { on }))}
             />
+            <RuleRow
+              title={t('alerts.rules.transcodeSpace')}
+              hint={t('alerts.rules.transcodeSpaceHint')}
+              on={form.rules.transcodeSpace?.on ?? true}
+              onToggle={(on) => change((f) => (f.rules.transcodeSpace = { on }))}
+            />
           </div>
         </div>
 

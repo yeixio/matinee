@@ -711,6 +711,7 @@
     "slowConvert": "Serverul convertește acest videoclip la viteză {{speed}}×, mai încet decât rulează.",
     "slowConnection": "Conexiunea are {{have}} Mbps, iar acest videoclip are nevoie de {{need}} Mbps.",
     "unknown": "Serverul și conexiunea păreau în regulă. Poate rețeaua a căzut o clipă.",
+    "noSpace": "Serverul a rămas fără spațiu pentru a converti acest videoclip.",
     "converted": {
       "codec": "Este convertit pentru că acest dispozitiv nu redă formatul video.",
       "hdr": "Este convertit pentru că acest ecran nu afișează HDR-ul lui.",
@@ -721,7 +722,8 @@
       "gpu": "Sfat pentru admini: un GPU pentru transcodare convertește mult mai repede. Vezi Setări → Streaming.",
       "lowerQuality": "Sfat pentru admini: GPU-ul nu ține pasul. Ajută mai puține fluxuri deodată sau o calitate mai mică.",
       "adaptive": "Sfat pentru admini: activează calitatea adaptivă în Setări → Streaming, ca playerele să poată coborî.",
-      "disk": "Sfat pentru admini: verifică în Starea serverului discul sau partajarea de rețea a acestei biblioteci."
+      "disk": "Sfat pentru admini: verifică în Starea serverului discul sau partajarea de rețea a acestei biblioteci.",
+      "space": "Sfat pentru admini: dă mai mult spațiu dosarului de transcodare sau eliberează spațiu pe discul lui. Starea serverului arată cât are."
     },
     "test": "Testează conexiunea",
     "testing": "Se testează…",

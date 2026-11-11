@@ -67,6 +67,15 @@ type Transcoder struct {
 	superseded, procs atomic.Int64
 	// How long players wait for a stream to start, and for its pieces.
 	StartTimes, SegmentWaits *Histogram
+
+	// Limit caps the room transcodes have below their disk's free space
+	// (see space.go). OnNoSpace, if set, hears when a transcode couldn't
+	// start or stopped for lack of room, at most hourly, to alert admins.
+	Limit     SpaceLimit
+	OnNoSpace func(detail string)
+	// freeSpace replaces the disk's free space in tests.
+	freeSpace func() (int64, bool)
+	space     spaceState
 }
 
 // sessionKey is what a viewer has one stream of: an item, or a group such as
@@ -201,6 +210,23 @@ type session struct {
 	// live is a live TV channel (see StartLive): players start near its
 	// newest piece, and old pieces are gone.
 	live bool
+
+	// Room (see space.go), under Transcoder.mu. rate is about how many
+	// bytes a second FFmpeg writes (0 for streams not checked); saving says
+	// it keeps only the minutes around its player. segFmt names its (first
+	// stream's) pieces by number; lastSeg is the piece a player last asked
+	// for, and keptFrom the first one still on disk. paused says FFmpeg is
+	// stopped where it is, since pausedAt, after pausedFor in earlier
+	// pauses; noSpace that FFmpeg found the disk full.
+	rate      float64
+	saving    bool
+	segFmt    string
+	lastSeg   int
+	keptFrom  int
+	paused    bool
+	pausedAt  time.Time
+	pausedFor time.Duration
+	noSpace   bool
 }
 
 func NewTranscoder(ffmpeg, dir string, hw Accelerator, log *slog.Logger) *Transcoder {
@@ -211,6 +237,7 @@ func NewTranscoder(ffmpeg, dir string, hw Accelerator, log *slog.Logger) *Transc
 		claims: map[sessionKey]claimed{}, stop: make(chan struct{}),
 		StartTimes: NewHistogram(0.25, 0.5, 1, 2, 4, 8, 15, 30), SegmentWaits: NewHistogram(0.05, 0.25, 1, 2, 5, 10, 15)}
 	go t.reap()
+	go t.watchSpace()
 	return t
 }
 
@@ -335,11 +362,15 @@ func (t *Transcoder) StartFor(ctx context.Context, userID int64, it store.Item, 
 	modes := t.plan(accel, it.ID, video, copyVideo)
 	for i, mode := range modes {
 		id, err := t.start(ctx, claim, userID, it, startSec, accel, mode, video, audio, audioFilters(req.AudioDelayMs, req.ClearVoice), req.BurnFile, copyVideo, why, steps, copyOutput)
-		if err == nil || i == len(modes)-1 || errors.Is(err, ErrSuperseded) || ctx.Err() != nil {
+		if err == nil || i == len(modes)-1 || errors.Is(err, ErrSuperseded) || errors.Is(err, ErrNoSpace) || ctx.Err() != nil {
 			switch {
 			case err == nil:
 				t.started.Add(1)
 				t.StartTimes.Observe(time.Since(begin).Seconds())
+				t.roomAgain(sessionKey{user: userID, item: it.ID})
+			case errors.Is(err, ErrNoSpace):
+				// Not the file's fault, nor FFmpeg's: its own alert says so.
+				t.ranOut(sessionKey{user: userID, item: it.ID}, strings.TrimPrefix(err.Error(), ErrNoSpace.Error()+": "))
 			case !errors.Is(err, ErrSuperseded) && ctx.Err() == nil:
 				t.started.Add(1)
 				t.failures.Add(1)
@@ -409,6 +440,13 @@ func (t *Transcoder) start(ctx context.Context, claim uint64, userID int64, it s
 	} else if len(steps) == 1 {
 		video.MaxWidth = steps[0].Width
 		video.Renditions = renditions(steps)
+	}
+	// Room for it: as it is, saving space, or none (see space.go).
+	rate := streamRate(it, copyVideo, steps)
+	saving, err := t.fit(it, startSec, rate)
+	if err != nil {
+		os.RemoveAll(dir)
+		return "", err
 	}
 	var output []string
 	switch {
@@ -492,7 +530,13 @@ func (t *Transcoder) start(ctx context.Context, claim uint64, userID int64, it s
 
 	t.Log.Debug("ffmpeg command", "session", id, "args", args)
 	cmd := t.command(args)
-	cmd.Stderr = &logWriter{log: t.Log, session: id}
+	// Set once the session is: FFmpeg can't fill the disk before it starts.
+	var started atomic.Pointer[session]
+	cmd.Stderr = &logWriter{log: t.Log, session: id, full: func() {
+		if s := started.Load(); s != nil {
+			t.diskFull(s)
+		}
+	}}
 	if err := cmd.Start(); err != nil {
 		os.RemoveAll(dir)
 		return "", fmt.Errorf("start ffmpeg: %w", err)
@@ -502,8 +546,18 @@ func (t *Transcoder) start(ctx context.Context, claim uint64, userID int64, it s
 	for _, s := range steps {
 		quality = append(quality, s.ID)
 	}
+	segFmt := filepath.Join(dir, "seg%05d"+ext)
+	if adaptive {
+		segFmt = filepath.Join(dir, "seg_0_%05d.ts")
+	}
 	s := &session{id: id, userID: userID, itemID: it.ID, dir: dir, cmd: cmd, done: make(chan struct{}), lastSeen: time.Now(),
-		started: time.Now(), startSec: startSec, mode: mode, quality: quality, copyVideo: copyVideo, why: why, toneMapped: video.ToneMap != "", audioOnly: it.VideoCodec == "", burnSub: video.BurnSub >= 0 || video.Styled != ""}
+		started: time.Now(), startSec: startSec, mode: mode, quality: quality, copyVideo: copyVideo, why: why, toneMapped: video.ToneMap != "", audioOnly: it.VideoCodec == "", burnSub: video.BurnSub >= 0 || video.Styled != "",
+		rate: rate, saving: saving, segFmt: segFmt}
+	if saving {
+		t.Log.Info("transcode saves space: the whole video won't fit in the transcode folder, so it keeps only the minutes around where it plays",
+			"session", id, "item", it.ID)
+	}
+	started.Store(s)
 	var kind hwaccel.Kind
 	if mode != hwaccel.CPU {
 		kind = accel.Kind
@@ -570,12 +624,33 @@ func (t *Transcoder) ServeFile(w http.ResponseWriter, r *http.Request, userID in
 	allowAnyOrigin(w)
 	path := filepath.Join(s.dir, name)
 	if !strings.HasSuffix(name, ".m3u8") {
+		if n, ok := segmentNumber(name); ok {
+			t.mu.Lock()
+			s.lastSeg = n
+			gone := n < s.keptFrom
+			t.mu.Unlock()
+			if gone {
+				// Cleared to save space (see space.go): the player starts
+				// a new transcode from here.
+				http.Error(w, "this part of the video was cleared to make room", http.StatusGone)
+				return
+			}
+			// A player that caught up with a paused FFmpeg gets it going.
+			t.throttle(s)
+		}
 		began := time.Now()
 		err := waitFor(r.Context(), s, path, 15*time.Second)
 		if r.Context().Err() == nil {
 			t.SegmentWaits.Observe(time.Since(began).Seconds())
 		}
 		if err != nil {
+			t.mu.Lock()
+			full := s.noSpace
+			t.mu.Unlock()
+			if full {
+				http.Error(w, "the server is out of room to convert this video", http.StatusInsufficientStorage)
+				return
+			}
 			http.Error(w, "segment not ready", http.StatusServiceUnavailable)
 			return
 		}
@@ -673,6 +748,16 @@ func nextSegment(file string) string {
 	}
 	n, _ := strconv.Atoi(m[2])
 	return filepath.Join(filepath.Dir(file), fmt.Sprintf("%s%05d%s", m[1], n+1, m[3]))
+}
+
+// segmentNumber is a piece's number from its name.
+func segmentNumber(name string) (int, bool) {
+	m := segmentRe.FindStringSubmatch(name)
+	if m == nil {
+		return 0, false
+	}
+	n, err := strconv.Atoi(m[2])
+	return n, err == nil
 }
 
 func fileExists(p string) bool { _, err := os.Stat(p); return err == nil }
@@ -775,10 +860,16 @@ func newSessionID() string {
 type logWriter struct {
 	log     *slog.Logger
 	session string
+	// full, if set, is called once when FFmpeg says the disk is full.
+	full     func()
+	fullOnce sync.Once
 }
 
 func (l *logWriter) Write(p []byte) (int, error) {
 	msg := string(p)
+	if l.full != nil && strings.Contains(msg, "No space left on device") {
+		l.fullOnce.Do(l.full)
+	}
 	// Some errors list every pixel format FFmpeg knows, kilobytes of them.
 	if len(msg) > maxLogLine {
 		msg = strings.ToValidUTF8(msg[:maxLogLine], "") + "…"

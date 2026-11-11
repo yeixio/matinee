@@ -1264,6 +1264,7 @@
       },
       "burnSub": "phụ đề ghi vào hình",
       "toneMapped": "HDR sang SDR",
+      "saving": "thiếu chỗ: chỉ giữ vài phút quanh chỗ đang phát",
       "why": {
         "codec": "thiết bị không phát được định dạng video này",
         "hdr": "màn hình không hiển thị được HDR này",
@@ -1272,7 +1273,12 @@
       "started": "Bắt đầu {{time}}",
       "stop": "Dừng",
       "stopHint": "Dừng FFmpeg. Nếu trình phát vẫn mở, nó sẽ bắt đầu một lượt chuyển mã mới.",
-      "cpuOnly": "Chuyển mã chạy trên CPU."
+      "cpuOnly": "Chuyển mã chạy trên CPU.",
+      "space": "Chỗ cho chuyển mã: còn trống {{free}}.",
+      "spaceOfLimit": "Chỗ cho chuyển mã: còn trống {{free}} trong giới hạn {{limit}}.",
+      "spaceShort": "Chuyển mã đang thiếu chỗ (còn trống {{free}}), nên video dài chỉ giữ vài phút quanh chỗ đang phát.",
+      "spaceOut": "Một video không phát được {{time}} vì chuyển mã hết chỗ (giờ còn trống {{free}}).",
+      "spaceTip": "Cấp thêm chỗ cho thư mục chuyển mã hoặc giải phóng ổ đĩa của nó."
     },
     "problems": {
       "title": "Cảnh báo và lỗi",
@@ -1377,7 +1383,9 @@
       "restart": "Máy chủ khởi động hoặc khởi động lại",
       "restartHint": "Cho biết máy chủ đã được cập nhật, hay đã dừng mà không tắt đúng cách.",
       "backup": "Sao lưu thất bại",
-      "backupHint": "Khi không thể sao lưu cơ sở dữ liệu."
+      "backupHint": "Khi không thể sao lưu cơ sở dữ liệu.",
+      "transcodeSpace": "Chuyển mã hết chỗ",
+      "transcodeSpaceHint": "Khi video không phát được vì thư mục chuyển mã đã đầy."
     },
     "email": {
       "title": "Email",

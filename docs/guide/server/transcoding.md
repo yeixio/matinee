@@ -83,6 +83,22 @@ Dolby Vision files come in a few kinds (profiles), and each plays the best way t
 - When a screen gets the HDR10 or HLG picture, the server takes the Dolby Vision data out so no player mistakes it for Dolby Vision it can't show. That needs FFmpeg 7.1 or later, which the Docker image has; with an older FFmpeg the data stays in, and players that don't show Dolby Vision ignore it.
 
 <!-- /since -->
+<!-- since: v0.2.4 -->
+## When the transcode folder runs short of room
+
+A transcode writes the video into the transcode folder as it plays, and a repackaged 4K remux takes as much room as its file: a 100 GB film needs 100 GB. Before FFmpeg starts, Matinee works out how much the rest of the video will take and compares it with the room the folder has.
+
+- **It fits.** The transcode runs as usual, and seeking back anywhere is instant.
+- **It doesn't fit.** The transcode saves space: it keeps only the minutes around where the player is. Pieces more than two minutes behind are deleted, and FFmpeg waits once it's three minutes ahead, going on as the player catches up. Any length of film plays in a few gigabytes. Seeking further back than what's kept starts the transcode again from there, which takes a moment longer.
+- **Not even a few minutes fit.** The video doesn't start, and the player says *The server is out of room to convert this video* instead of failing without a reason.
+
+The room is checked every few seconds while transcodes run. When something else fills the disk, or several people start long films at once, the running transcodes start saving space before the disk is full. If the disk still fills up, that transcode stops, the player says the server ran out of room, and its [Why it buffered](/docs/watching/why-it-buffered/) note says so too.
+
+Admins see the room left under **Transcodes** in [Server health](/docs/server/server-health/), with a warning while transcodes are saving space, and get the **Transcodes run out of room** [alert](/docs/server/alerts/).
+
+Matinee keeps 512 MB free on the disk for everything else, such as the database. When the folder's volume has a size limit smaller than its disk, as a Kubernetes `emptyDir` does, set `MATINEE_CACHE_LIMIT` to it so Matinee keeps within it ([configuration](/docs/server/configuration/)). The [Helm chart](/docs/server/kubernetes/) does this for you.
+<!-- /since -->
+
 ## Giving Matinee a GPU
 
 **Docker:** pass `/dev/dri` in for AMD and Intel, and add the group that owns it on the host:

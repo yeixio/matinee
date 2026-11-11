@@ -252,6 +252,7 @@
   "the_channel_isnt_answering_right_now": "چینل ابھی جواب نہیں دے رہا",
   "the_guides_address_isnt_a_web_address": "گائیڈ کا پتا ویب پتا نہیں ہے",
   "the_playlist_couldnt_be_read_reason": "فہرست پڑھی نہیں جا سکی: {{reason}}",
+  "the_server_is_out_of_room_to_convert_this_video": "اس ویڈیو کو بدلنے کے لیے سرور میں جگہ نہیں ہے",
   "only_movies_and_shows_have_a_match_to_fix": "صرف فلموں اور شوز کا میچ درست کیا جا سکتا ہے",
   "add_a_tmdb_key_in_settings_posters_and_details_to_look_titles_up": "عنوان تلاش کرنے کے لیے ترتیبات ← پوسٹر اور تفصیلات میں TMDB کلید شامل کریں",
   "tmdb_didnt_accept_the_key_in_settings_posters_and_details": "TMDB نے ترتیبات ← پوسٹر اور تفصیلات والی کلید قبول نہیں کی",

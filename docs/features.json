@@ -509,6 +509,19 @@
               }
             },
             {
+              "name": "Says when the server runs out of room to convert",
+              "doc": "/docs/server/transcoding/#when-the-transcode-folder-runs-short-of-room",
+              "since": "v0.2.4",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
               "name": "Watch together",
               "doc": "/docs/watching/watch-together/",
               "since": "v0.1.10",

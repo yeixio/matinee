@@ -252,6 +252,7 @@
   "the_channel_isnt_answering_right_now": "チャンネルが今応答していません",
   "the_guides_address_isnt_a_web_address": "番組表のアドレスがWebアドレスではありません",
   "the_playlist_couldnt_be_read_reason": "リストを読み込めませんでした: {{reason}}",
+  "the_server_is_out_of_room_to_convert_this_video": "この動画を変換するためのサーバーの空き容量がありません",
   "only_movies_and_shows_have_a_match_to_fix": "一致を修正できるのは映画と番組だけです",
   "add_a_tmdb_key_in_settings_posters_and_details_to_look_titles_up": "タイトルを調べるには、設定 → ポスターと詳細 で TMDB キーを追加してください",
   "tmdb_didnt_accept_the_key_in_settings_posters_and_details": "設定 → ポスターと詳細 のキーが TMDB に受け付けられませんでした",

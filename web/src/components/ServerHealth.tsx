@@ -382,6 +382,7 @@ function Streams({ h }: { h: Health }) {
                     x.quality?.length && x.quality.join(', '),
                     x.burnSub && t('health.transcodes.burnSub'),
                     x.toneMapped && t('health.transcodes.toneMapped'),
+                    x.saving && t('health.transcodes.saving'),
                   ]
                     .filter(Boolean)
                     .join(' · ')}
@@ -402,9 +403,35 @@ function Streams({ h }: { h: Health }) {
             </div>
           ))}
         </div>
+        <SpaceLine h={h} />
         <HWLine h={h} />
       </div>
     </div>
+  )
+}
+
+// The room transcodes have: a warning when they're short of it or one
+// couldn't play for lack of it lately (see the server's stream/space.go).
+function SpaceLine({ h }: { h: Health }) {
+  const { t } = useTranslation()
+  const sp = h.transcodeSpace
+  if (!sp) return null
+  const free = bytes(sp.free)
+  if (sp.short || sp.outOfSpace) {
+    return (
+      <p className="flex items-start gap-1.5 text-sm">
+        <AlertTriangle className="mt-0.5 size-4 shrink-0 text-danger" aria-hidden />
+        <span>
+          {sp.outOfSpace ? t('health.transcodes.spaceOut', { free, time: ago(sp.outOfSpace) }) : t('health.transcodes.spaceShort', { free })}{' '}
+          {t('health.transcodes.spaceTip')}
+        </span>
+      </p>
+    )
+  }
+  return (
+    <p className="text-xs text-muted">
+      {sp.limit ? t('health.transcodes.spaceOfLimit', { free, limit: bytes(sp.limit) }) : t('health.transcodes.space', { free })}
+    </p>
   )
 }
 

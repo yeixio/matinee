@@ -1288,6 +1288,7 @@
       },
       "burnSub": "wypalone napisy",
       "toneMapped": "HDR na SDR",
+      "saving": "mało miejsca: trzyma tylko minuty wokół miejsca odtwarzania",
       "why": {
         "codec": "urządzenie nie odtwarza tego formatu wideo",
         "hdr": "ekran nie wyświetla tego HDR",
@@ -1296,7 +1297,12 @@
       "started": "Rozpoczęte {{time}}",
       "stop": "Zatrzymaj",
       "stopHint": "Zatrzymuje FFmpeg. Jeśli odtwarzacz jest nadal otwarty, rozpocznie nowe transkodowanie.",
-      "cpuOnly": "Transkodowania działają na procesorze."
+      "cpuOnly": "Transkodowania działają na procesorze.",
+      "space": "Miejsce na transkodowania: wolne {{free}}.",
+      "spaceOfLimit": "Miejsce na transkodowania: wolne {{free}} z limitu {{limit}}.",
+      "spaceShort": "Transkodowaniom brakuje miejsca (wolne {{free}}), więc długie wideo trzymają tylko minuty wokół miejsca odtwarzania.",
+      "spaceOut": "Wideo nie dało się odtworzyć {{time}}, bo transkodowaniom zabrakło miejsca (teraz wolne {{free}}).",
+      "spaceTip": "Daj folderowi transkodowania więcej miejsca albo zwolnij miejsce na jego dysku."
     },
     "problems": {
       "title": "Ostrzeżenia i błędy",
@@ -1410,7 +1416,9 @@
       "restart": "Serwer uruchamia się lub restartuje",
       "restartHint": "Mówi, czy został zaktualizowany, czy zatrzymał się bez poprawnego zamknięcia.",
       "backup": "Kopia się nie udaje",
-      "backupHint": "Gdy nie da się zrobić kopii bazy danych."
+      "backupHint": "Gdy nie da się zrobić kopii bazy danych.",
+      "transcodeSpace": "Transkodowaniom brakuje miejsca",
+      "transcodeSpaceHint": "Gdy wideo nie da się odtworzyć, bo folder transkodowania jest pełny."
     },
     "email": {
       "title": "E-mail",

@@ -51,6 +51,11 @@ type SessionInfo struct {
 	// time: below 1 it can't keep up. 0 once it has finished, or before
 	// it has made anything.
 	Speed float64 `json:"speed,omitempty"`
+	// Saving says the transcode folder hasn't room for all of it, so it
+	// keeps only the minutes around where it plays (see space.go); Waiting
+	// says FFmpeg is paused, far enough ahead of the player.
+	Saving  bool `json:"saving,omitempty"`
+	Waiting bool `json:"waiting,omitempty"`
 }
 
 // speed is how many seconds of video s has made for each second it's been
@@ -59,16 +64,24 @@ func (s *session) speed(now time.Time) float64 {
 	if s.dir == "" || isDone(s) {
 		return 0
 	}
-	elapsed := now.Sub(s.started).Seconds()
+	// Time paused to save space (see space.go) isn't time converting.
+	paused := s.pausedFor
+	if s.paused {
+		paused += now.Sub(s.pausedAt)
+	}
+	elapsed := (now.Sub(s.started) - paused).Seconds()
 	entries, err := os.ReadDir(s.dir)
 	if err != nil || elapsed <= 0 {
 		return 0
 	}
+	// The newest of one stream's pieces (the only one, or an adaptive
+	// stream's first): older ones may be cleared to save space.
 	n := 0
 	for _, e := range entries {
-		// One stream's pieces: the only one, or an adaptive stream's first.
 		if firstStreamSegment.MatchString(e.Name()) {
-			n++
+			if i, ok := segmentNumber(e.Name()); ok {
+				n = max(n, i+1)
+			}
 		}
 	}
 	if n == 0 {
@@ -112,6 +125,7 @@ func (t *Transcoder) Sessions() []SessionInfo {
 		if !s.audioOnly && !s.live {
 			info.Speed = s.speed(time.Now())
 		}
+		info.Saving, info.Waiting = s.saving, s.paused
 		out = append(out, info)
 	}
 	sort.Slice(out, func(i, j int) bool { return out[i].Started < out[j].Started })

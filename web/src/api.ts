@@ -1143,10 +1143,15 @@ export type Health = {
     burnSub?: boolean
     adaptive?: boolean
     pid?: number
+    /** Short of room: keeps only the minutes around where it plays; waiting: FFmpeg paused, far enough ahead. */
+    saving?: boolean
+    waiting?: boolean
     user?: string
     title?: string
     showTitle?: string
   }[]
+  /** Room transcodes have, in bytes (see the server's stream.Space). */
+  transcodeSpace?: { free: number; used: number; limit?: number; short?: boolean; outOfSpace?: number }
   jobs: {
     scans: { libraryId: number; name: string; kind: string; scanning: boolean; since?: number; last?: ScanReport }[]
     analysis?: AnalysisStatus
@@ -1244,6 +1249,7 @@ export type AlertRules = {
   transcodes: RateRule
   restart: { on: boolean }
   backup?: { on: boolean }
+  transcodeSpace?: { on: boolean }
 }
 export type AlertEmail = {
   on: boolean
@@ -1373,10 +1379,10 @@ export interface PlaybackReport {
 
 /** Why playback stalled, as the server worked it out. */
 export interface PlaybackCause {
-  code: 'slowDisk' | 'slowConvert' | 'slowConnection' | 'unknown'
+  code: 'slowDisk' | 'slowConvert' | 'slowConnection' | 'noSpace' | 'unknown'
   values?: Record<string, string>
   /** What an admin could change; only admins get one. */
-  tip?: 'gpu' | 'lowerQuality' | 'adaptive' | 'disk'
+  tip?: 'gpu' | 'lowerQuality' | 'adaptive' | 'disk' | 'space'
   /** Why the server converts this video at all. */
   converted?: 'codec' | 'hdr' | 'subtitle' | 'quality'
   at: number

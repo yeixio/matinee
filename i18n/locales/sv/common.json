@@ -679,6 +679,7 @@
     "slowConvert": "Servern konverterar videon i {{speed}}× hastighet, långsammare än den spelas.",
     "slowConnection": "Anslutningen klarar {{have}} Mbit/s och videon behöver {{need}} Mbit/s.",
     "unknown": "Servern och anslutningen såg bra ut. Nätverket kan ha försvunnit en stund.",
+    "noSpace": "Servern fick slut på plats för att koda om den här videon.",
     "converted": {
       "codec": "Den konverteras eftersom enheten inte spelar dess videoformat.",
       "hdr": "Den konverteras eftersom skärmen inte visar dess HDR.",
@@ -689,7 +690,8 @@
       "gpu": "Tips för administratörer: en GPU för omkodning konverterar mycket snabbare. Se Inställningar → Streaming.",
       "lowerQuality": "Tips för administratörer: GPU:n hinner inte med. Färre strömmar samtidigt eller lägre kvalitet hjälper.",
       "adaptive": "Tips för administratörer: slå på adaptiv kvalitet i Inställningar → Streaming så att spelare kan gå ner.",
-      "disk": "Tips för administratörer: kontrollera disken eller nätverksresursen för biblioteket i Serverhälsa."
+      "disk": "Tips för administratörer: kontrollera disken eller nätverksresursen för biblioteket i Serverhälsa.",
+      "space": "Tips för administratörer: ge omkodningsmappen mer plats, eller frigör plats på dess disk. Serverhälsa visar hur mycket den har."
     },
     "test": "Testa anslutningen",
     "testing": "Testar…",

@@ -252,6 +252,7 @@
   "the_channel_isnt_answering_right_now": "ช่องไม่ตอบสนองในตอนนี้",
   "the_guides_address_isnt_a_web_address": "ที่อยู่ผังรายการไม่ใช่ที่อยู่เว็บ",
   "the_playlist_couldnt_be_read_reason": "อ่านรายการไม่ได้: {{reason}}",
+  "the_server_is_out_of_room_to_convert_this_video": "เซิร์ฟเวอร์มีพื้นที่ไม่พอสำหรับแปลงวิดีโอนี้",
   "only_movies_and_shows_have_a_match_to_fix": "แก้การจับคู่ได้เฉพาะภาพยนตร์และซีรีส์",
   "add_a_tmdb_key_in_settings_posters_and_details_to_look_titles_up": "เพิ่มคีย์ TMDB ใน การตั้งค่า → โปสเตอร์และรายละเอียด เพื่อค้นหาเรื่อง",
   "tmdb_didnt_accept_the_key_in_settings_posters_and_details": "TMDB ไม่ยอมรับคีย์ใน การตั้งค่า → โปสเตอร์และรายละเอียด",

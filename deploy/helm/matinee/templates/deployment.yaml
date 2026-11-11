@@ -99,6 +99,12 @@ spec:
               value: "{{ .Values.shutdown.timeoutSeconds }}s"
             - name: MATINEE_DATA_DIR
               value: /cache
+            # Transcodes keep within the cache volume's size limit (a full
+            # emptyDir gets the pod evicted), saving space for long videos.
+            {{- if .Values.cache.sizeLimit }}
+            - name: MATINEE_CACHE_LIMIT
+              value: {{ .Values.cache.sizeLimit | quote }}
+            {{- end }}
             - name: MATINEE_MEDIA_ROOT
               value: {{ .Values.mediaRoot | quote }}
             # The pod network doesn't reach the home network; discovery.yaml announces it instead.

@@ -142,10 +142,12 @@ type healthReport struct {
 	HW            *hwaccel.Status   `json:"hw,omitempty"`
 	Streams       []healthStream    `json:"streams"`
 	Transcodes    []healthTranscode `json:"transcodes"`
-	Jobs          healthJobs        `json:"jobs"`
-	Problems      []health.Problem  `json:"problems"`
-	LogLines      int               `json:"logLines"`
-	LogsSince     int64             `json:"logsSince,omitempty"`
+	// TranscodeSpace is the room transcodes have (see stream.Space).
+	TranscodeSpace *stream.Space    `json:"transcodeSpace,omitempty"`
+	Jobs           healthJobs       `json:"jobs"`
+	Problems       []health.Problem `json:"problems"`
+	LogLines       int              `json:"logLines"`
+	LogsSince      int64            `json:"logsSince,omitempty"`
 }
 
 func (s *Server) getHealth(w http.ResponseWriter, r *http.Request) {
@@ -214,6 +216,9 @@ func (s *Server) getHealth(w http.ResponseWriter, r *http.Request) {
 		out.Streams = append(out.Streams, st)
 	}
 	if s.Transcoder != nil {
+		if sp, ok := s.Transcoder.Space(); ok {
+			out.TranscodeSpace = &sp
+		}
 		names := map[int64]string{}
 		for _, t := range s.Transcoder.Sessions() {
 			ht := healthTranscode{SessionInfo: t}

@@ -1272,6 +1272,7 @@
       },
       "burnSub": "subtitles drawn in",
       "toneMapped": "HDR made SDR",
+      "saving": "short of room: keeps only the minutes around where it plays",
       "why": {
         "codec": "the device can't play this video format",
         "hdr": "the screen can't show this HDR",
@@ -1280,7 +1281,12 @@
       "started": "Started {{time}}",
       "stop": "Stop",
       "stopHint": "Stops FFmpeg. If the player is still open, it starts a new transcode.",
-      "cpuOnly": "Transcodes run on the CPU."
+      "cpuOnly": "Transcodes run on the CPU.",
+      "space": "Room for transcodes: {{free}} free.",
+      "spaceOfLimit": "Room for transcodes: {{free}} free of the {{limit}} limit.",
+      "spaceShort": "Transcodes are short of room ({{free}} free), so long videos keep only the minutes around where they play.",
+      "spaceOut": "A video couldn't play {{time}} because transcodes ran out of room ({{free}} free now).",
+      "spaceTip": "Give the transcode folder more room or free up its disk."
     },
     "problems": {
       "title": "Warnings and errors",
@@ -1388,7 +1394,9 @@
       "restart": "The server starts or restarts",
       "restartHint": "Says whether it was updated, or stopped without shutting down cleanly.",
       "backup": "A backup fails",
-      "backupHint": "When the database can't be backed up."
+      "backupHint": "When the database can't be backed up.",
+      "transcodeSpace": "Transcodes run out of room",
+      "transcodeSpaceHint": "When a video can't play because the transcode folder is full."
     },
     "email": {
       "title": "Email",

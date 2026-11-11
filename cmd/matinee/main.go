@@ -19,6 +19,7 @@ import (
 	"strconv"
 	"strings"
 	"sync"
+	"sync/atomic"
 	"syscall"
 	"time"
 
@@ -201,6 +202,11 @@ func run() error {
 	go hw.Detect(ctx)
 	transcoder := stream.NewTranscoder(cfg.FFmpegPath, cfg.TranscodeDir(), hw, log)
 	defer transcoder.Close()
+	if cfg.CacheLimit > 0 {
+		// The volume has a cap below its disk (a Kubernetes emptyDir): what
+		// else is in the data folder counts against it too.
+		transcoder.Limit = stream.SpaceLimit{Size: cfg.CacheLimit, Others: othersInCache(ctx, cfg.DataDir, cfg.TranscodeDir())}
+	}
 
 	thumbnails := &thumbs.Generator{Store: db, FFmpeg: cfg.FFmpegPath, Dir: cfg.ThumbnailDir(), Log: log, LowPriority: probe.LowerPriority}
 	if err := os.MkdirAll(cfg.ThumbnailDir(), 0o755); err != nil {
@@ -303,6 +309,7 @@ func run() error {
 	// admins' own mail server and webhooks.
 	alerter := &alerts.Manager{Store: db, Log: log, Server: cfg.ServerName, URL: cfg.PublicURL, Version: version.Version, Read: apiServer.AlertReadings}
 	apiServer.Alerts = alerter
+	transcoder.OnNoSpace = func(detail string) { alerter.TranscodeSpace(ctx, detail) }
 	if backups != nil {
 		backups.Failed = alerter.BackupFailed
 		apiServer.Backups = backups
@@ -560,4 +567,25 @@ func listenPort(addr string) int {
 		return n
 	}
 	return 7171
+}
+
+// othersInCache is how much of the data folder's volume everything but
+// transcodes uses, measured now and every five minutes after (walking the
+// image cache each time a transcode checks its room would be slow).
+func othersInCache(ctx context.Context, dataDir, transcodeDir string) func() int64 {
+	var used atomic.Int64
+	used.Store(stream.DirSize(dataDir, transcodeDir))
+	go func() {
+		tick := time.NewTicker(5 * time.Minute)
+		defer tick.Stop()
+		for {
+			select {
+			case <-ctx.Done():
+				return
+			case <-tick.C:
+				used.Store(stream.DirSize(dataDir, transcodeDir))
+			}
+		}
+	}()
+	return used.Load
 }

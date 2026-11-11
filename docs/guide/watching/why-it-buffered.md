@@ -19,6 +19,9 @@ When nothing looked slow, no note pops up. The gauge says that the server and th
 - **The server reads the file slowly.** Reading a piece of the file took the server two seconds or more, or it reads slower than the video plays. This is usually a busy network share or a sleeping disk.
 - **The server converts slower than the video plays.** The server is converting this video (for example to a format the device plays, or to draw in subtitles) at less than real time.
 - **The connection is slower than the video.** Pieces arrived slower than the video needs. Away from home, your home connection's upload speed is often the limit.
+<!-- since: v0.2.4 -->
+- **The server ran out of room.** The server's transcode folder filled up while converting this video. Admins can give it more room or free up its disk ([more](/docs/server/transcoding/#when-the-transcode-folder-runs-short-of-room)).
+<!-- /since -->
 - **Nothing found.** The server and the connection both looked fine.
 
 ## Test connection

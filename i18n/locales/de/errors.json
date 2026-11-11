@@ -252,6 +252,7 @@
   "the_channel_isnt_answering_right_now": "der Sender antwortet gerade nicht",
   "the_guides_address_isnt_a_web_address": "die Adresse des Programmführers ist keine Webadresse",
   "the_playlist_couldnt_be_read_reason": "die Senderliste konnte nicht gelesen werden: {{reason}}",
+  "the_server_is_out_of_room_to_convert_this_video": "dem Server fehlt der Platz, um dieses Video umzuwandeln",
   "only_movies_and_shows_have_a_match_to_fix": "nur Filme und Serien haben eine Zuordnung zum Korrigieren",
   "add_a_tmdb_key_in_settings_posters_and_details_to_look_titles_up": "füge in Einstellungen → Poster und Details einen TMDB-Schlüssel hinzu, um Titel nachzuschlagen",
   "tmdb_didnt_accept_the_key_in_settings_posters_and_details": "TMDB hat den Schlüssel in Einstellungen → Poster und Details nicht akzeptiert",

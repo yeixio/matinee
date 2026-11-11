@@ -252,6 +252,7 @@
   "the_channel_isnt_answering_right_now": "saluran sedang tidak merespons",
   "the_guides_address_isnt_a_web_address": "alamat panduan bukan alamat web",
   "the_playlist_couldnt_be_read_reason": "daftar tidak dapat dibaca: {{reason}}",
+  "the_server_is_out_of_room_to_convert_this_video": "server kehabisan ruang untuk mengonversi video ini",
   "only_movies_and_shows_have_a_match_to_fix": "hanya film dan serial yang punya kecocokan untuk diperbaiki",
   "add_a_tmdb_key_in_settings_posters_and_details_to_look_titles_up": "tambahkan kunci TMDB di Pengaturan → Poster dan detail untuk mencari judul",
   "tmdb_didnt_accept_the_key_in_settings_posters_and_details": "TMDB tidak menerima kunci di Pengaturan → Poster dan detail",
