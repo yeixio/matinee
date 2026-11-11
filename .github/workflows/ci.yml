@@ -27,7 +27,7 @@ jobs:
         with:
           go-version-file: go.mod
       - name: Install ffmpeg
-        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends ffmpeg
+        run: scripts/apt-install.sh ffmpeg
       - name: Lint
         run: make lint
       - name: Install Pebble
@@ -230,16 +230,9 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version-file: go.mod
-      # The runners' DNS sometimes can't find Ubuntu's mirrors for a while:
-      # retry for a few minutes before failing.
       - name: Install packaging tools
         run: |
-          for try in 1 2 3 4 5; do
-            sudo apt-get -o Acquire::Retries=3 update &&
-              sudo apt-get -o Acquire::Retries=3 install -y --no-install-recommends dpkg-dev apt-utils createrepo-c rpm && break
-            [ "$try" = 5 ] && exit 1
-            sleep $((try * 30))
-          done
+          scripts/apt-install.sh dpkg-dev apt-utils createrepo-c rpm
           go install github.com/goreleaser/nfpm/v2/cmd/nfpm@v2.41.3
           echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
       # The packaging is under test here, not the web player, so a stand-in
@@ -263,13 +256,7 @@ jobs:
         with:
           go-version-file: go.mod
       - name: Install NSIS
-        run: |
-          for try in 1 2 3 4 5; do
-            sudo apt-get -o Acquire::Retries=3 update &&
-              sudo apt-get -o Acquire::Retries=3 install -y --no-install-recommends nsis && break
-            [ "$try" = 5 ] && exit 1
-            sleep $((try * 30))
-          done
+        run: scripts/apt-install.sh nsis
       # The installer is under test here, not the web player, so a stand-in
       # page saves building it. It's numbered as the next release, so the
       # tray app doesn't offer the current one as an update.
