@@ -201,11 +201,12 @@
     "boxSet": "Box"
   },
   "search": {
-    "placeholder": "Filmer, serier, artister, album…",
+    "placeholder": "Filmer, serier, skådespelare, artister, album…",
     "nothing": "Inget matchar ”{{q}}”",
     "lookingForNew": "Letar du efter något nytt?",
     "addIt": "Lägg till",
-    "askForIt": "Önska den"
+    "askForIt": "Önska den",
+    "people": "Personer"
   },
   "person": {
     "notFound": "Personen hittades inte",

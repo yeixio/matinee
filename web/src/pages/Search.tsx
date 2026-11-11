@@ -3,9 +3,11 @@ import { Search as SearchIcon } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link, useSearchParams } from 'react-router-dom'
-import { api, type Item } from '../api'
+import { api, type FilterPerson, type Item } from '../api'
 import { useRequestOptions } from '../components/Arr'
 import { PosterGrid } from '../components/Card'
+import { PersonPhoto, personLink } from '../components/Credits'
+import { Row } from '../components/Row'
 import { Tracks } from '../components/Tracks'
 import { EmptyState } from '../components/ui'
 
@@ -32,6 +34,15 @@ export default function Search() {
     placeholderData: (prev) => prev,
   })
 
+  // Actors whose names match; what they're in is among the results too.
+  const people = useQuery({
+    queryKey: ['search', 'people', q],
+    queryFn: () => api.searchPeople(q),
+    enabled: q.length > 1,
+    placeholderData: (prev) => prev,
+  })
+  const found = q.length > 1 ? (people.data ?? []) : []
+
   return (
     <div className="space-y-6">
       <div className="relative max-w-2xl">
@@ -45,7 +56,8 @@ export default function Search() {
         />
         {isFetching && <div className="absolute end-4 top-1/2 size-2 -translate-y-1/2 animate-pulse rounded-full bg-accent" />}
       </div>
-      {q && data && (data.length > 0 ? <Results items={data} /> : <EmptyState title={tr('search.nothing', { q })} />)}
+      {found.length > 0 && <People people={found} />}
+      {q && data && (data.length > 0 ? <Results items={data} /> : found.length === 0 && <EmptyState title={tr('search.nothing', { q })} />)}
       {/* Not in the library? Ask for it. */}
       {q && data && opts?.discover ? (
         <p className="text-center text-sm text-muted">
@@ -84,5 +96,21 @@ function Results({ items }: { items: Item[] }) {
         <Tracks items={songs} showArt showArtist showAlbum numbered={false} />
       </section>
     </div>
+  )
+}
+
+// People are the cast members a search names, each leading to their page.
+function People({ people }: { people: FilterPerson[] }) {
+  const { t } = useTranslation()
+  return (
+    <Row title={t('search.people')}>
+      {people.map((p) => (
+        <Link key={p.id} to={personLink(p.id)} className="group block w-28 shrink-0 snap-start text-center md:w-32">
+          <PersonPhoto id={p.id} name={p.name} hasPhoto={p.hasPhoto} className="mx-auto aspect-square w-24 transition group-hover:ring-2 group-hover:ring-accent/70 md:w-28" />
+          <div className="mt-2 line-clamp-2 text-sm leading-tight font-medium group-hover:text-accent-strong">{p.name}</div>
+          <div className="mt-0.5 text-xs leading-tight text-muted">{t('common:count.titles', { count: p.count })}</div>
+        </Link>
+      ))}
+    </Row>
   )
 }

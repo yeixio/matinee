@@ -201,11 +201,12 @@
     "boxSet": "Boksi"
   },
   "search": {
-    "placeholder": "Elokuvia, sarjoja, artisteja, albumeja…",
+    "placeholder": "Elokuvia, sarjoja, näyttelijöitä, artisteja, albumeja…",
     "nothing": "Mikään ei vastaa hakua ”{{q}}”",
     "lookingForNew": "Etsitkö jotain uutta?",
     "addIt": "Lisää se",
-    "askForIt": "Toivo sitä"
+    "askForIt": "Toivo sitä",
+    "people": "Henkilöt"
   },
   "person": {
     "notFound": "Henkilöä ei löytynyt",

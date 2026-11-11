@@ -201,11 +201,12 @@
     "boxSet": "Coffret"
   },
   "search": {
-    "placeholder": "Films, séries, artistes, albums…",
+    "placeholder": "Films, séries, acteurs, artistes, albums…",
     "nothing": "Aucun résultat pour « {{q}} »",
     "lookingForNew": "Vous cherchez quelque chose de nouveau ?",
     "addIt": "L’ajouter",
-    "askForIt": "Le demander"
+    "askForIt": "Le demander",
+    "people": "Personnes"
   },
   "person": {
     "notFound": "Personne introuvable",

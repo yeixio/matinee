@@ -60,6 +60,8 @@ Like a set of filters? **Save as collection** turns it into a [smart collection]
 
 Click the magnifying glass at the top (or **Search** in the apps) and start typing. Results come up as you type, matching titles across every library: movies, shows, episodes, artists, albums and songs.
 
+Search finds people too. Type an actor's name, or the start of it ("keanu", "sigourney wea"), and the movies and shows they're in come up after any titles named like it, with the matching cast members in a **People** row above that lead to their pages. In the apps, the same search finds what an actor is in.
+
 ![Search results for a word, across movies, shows and music](../images/search.webp)
 
 ## On a phone
