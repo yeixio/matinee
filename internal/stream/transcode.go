@@ -476,6 +476,17 @@ func (t *Transcoder) start(ctx context.Context, claim uint64, userID int64, it s
 	case it.VideoCodec != "":
 		output = append(output, "-map", audioMap+"?", "-sn", "-c:a", "aac", "-ac", "2", "-b:a", audioRate(0))
 	}
+	if fragmented(it.VideoCodec, copyVideo) && !adaptive {
+		// Line the sound up with the copied picture (see align.go). Without
+		// it the session still plays, with the sound early by up to a
+		// keyframe's distance.
+		if dts, err := t.firstCopiedDTS(ctx, it, startSec); err != nil {
+			t.Log.Warn("transcode: can't line the sound up with the copied picture", "session", id, "item", it.ID, "err", err)
+		} else {
+			output = append(output, "-ar", strconv.Itoa(alignedRate))
+			audioFilter = strings.Trim(audioFilter+","+AlignFilter(dts), ",")
+		}
+	}
 	if audioFilter != "" && withAudio && it.VideoCodec != "" {
 		output = append(output, "-af", audioFilter)
 	}
@@ -503,7 +514,9 @@ func (t *Transcoder) start(ctx context.Context, claim uint64, userID int64, it s
 		// keyframe the copied picture starts on and the sound). Apple's
 		// players don't follow those in HLS the way FFmpeg means them, and
 		// the sound came a little ahead of the picture on iPhones and Apple
-		// TVs. Without them, the pieces' own times say when each sample plays.
+		// TVs. Without them, the pieces' own times say when each sample plays,
+		// and the sound is lined up with the picture before it's encoded
+		// (see align.go).
 		args = append(args, "-hls_segment_type", "fmp4", "-hls_fmp4_init_filename", "init.mp4", "-hls_segment_options", "use_editlist=0")
 	}
 	firstSegments := []string{filepath.Join(dir, "seg00000"+ext)}
