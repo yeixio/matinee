@@ -67,6 +67,10 @@ func (c Config) ImageDir() string     { return filepath.Join(c.DataDir, "images"
 func (c Config) SubtitleDir() string  { return filepath.Join(c.DataDir, "subtitles") }
 func (c Config) LevelsDir() string    { return filepath.Join(c.DataDir, "levels") }
 
+// LogDir keeps each run's log (internal/health), so the log from before a
+// crash or a restart can still be read.
+func (c Config) LogDir() string { return filepath.Join(c.DataDir, "logs") }
+
 // BackupDir holds copies of a SQLite database (internal/backup).
 func (c Config) BackupDir() string { return filepath.Join(c.DataDir, "backups") }
 

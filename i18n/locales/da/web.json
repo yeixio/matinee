@@ -1390,7 +1390,19 @@
       },
       "live": "Følg nye linjer",
       "older": "Vis ældre linjer",
-      "empty": "Ingen linjer passer."
+      "empty": "Ingen linjer passer.",
+      "introRuns": "De seneste {{count}} linjer siden serveren startede. Logfilerne fra de sidste 10 kørsler gemmes også i datamappen, så du kan læse her, hvad der skete før et nedbrud eller en genstart.",
+      "run": "Kørsel",
+      "runs": {
+        "current": "Denne kørsel",
+        "clean": "stoppet korrekt",
+        "crashed": "gik ned",
+        "unclean": "stoppet uventet",
+        "errors": "fejl: {{count}}"
+      },
+      "earlierRun": "Fra {{from}} til {{to}}, version {{version}} på {{host}}.",
+      "uncleanNote": "Den stoppede uden at lukke korrekt ned: den kan være blevet dræbt, for eksempel fordi den brugte for meget hukommelse, eller maskinen mistede strømmen. De sidste linjer står nedenfor.",
+      "crashTitle": "Serveren gik ned"
     },
     "internet": {
       "offline": "Ingen internetforbindelse i {{time}}",

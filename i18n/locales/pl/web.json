@@ -1412,7 +1412,19 @@
       },
       "live": "Śledź nowe wiersze",
       "older": "Pokaż starsze wiersze",
-      "empty": "Brak pasujących wierszy."
+      "empty": "Brak pasujących wierszy.",
+      "introRuns": "Ostatnie {{count}} wierszy od uruchomienia serwera. Logi ostatnich 10 uruchomień są też przechowywane w folderze danych, więc można tu przeczytać, co działo się przed awarią lub restartem.",
+      "run": "Uruchomienie",
+      "runs": {
+        "current": "To uruchomienie",
+        "clean": "zatrzymane prawidłowo",
+        "crashed": "awaria",
+        "unclean": "zatrzymane nieoczekiwanie",
+        "errors": "błędy: {{count}}"
+      },
+      "earlierRun": "Od {{from}} do {{to}}, wersja {{version}} na {{host}}.",
+      "uncleanNote": "Zatrzymało się bez prawidłowego zamknięcia: mogło zostać zabite, na przykład za użycie zbyt dużej ilości pamięci, albo zabrakło zasilania. Ostatnie wiersze są poniżej.",
+      "crashTitle": "Serwer uległ awarii"
     },
     "internet": {
       "offline": "Brak połączenia z internetem od {{time}}",

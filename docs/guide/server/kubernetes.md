@@ -67,6 +67,10 @@ kubectl create secret generic matinee-tmdb --from-literal=tmdb-api-key=your-key
 `thumbnails.persistence` (on, 20Gi) keeps the [seek bar previews](/docs/watching/seek-previews/), about 4 MB per movie. Set `storageClass` or `existingClaim`, or a bigger `size` for a big library.
 <!-- /since -->
 
+<!-- since: v0.2.4 -->
+`logs.persistence` (on, 1Gi) keeps the logs of the last 10 runs, so a crash's errors can still be read in [Server health](/docs/server/server-health/#earlier-runs-and-crashes) from the pod that replaced it. Set `storageClass` or `existingClaim`.
+<!-- /since -->
+
 Transcodes and the image cache use a local `emptyDir`, so they're fast and never land on network storage.
 <!-- since: v0.2.4 -->
 Its size is `cache.sizeLimit` (50Gi). Kubernetes evicts the pod if the `emptyDir` grows past it, so the chart tells Matinee the limit, and transcodes keep within it: a film bigger than the room left keeps only the minutes around where it plays ([more](/docs/server/transcoding/#when-the-transcode-folder-runs-short-of-room)). 50Gi plays any film; more room lets people seek back further without waiting.

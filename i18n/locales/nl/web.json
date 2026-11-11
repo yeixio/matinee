@@ -1390,7 +1390,19 @@
       },
       "live": "Nieuwe regels volgen",
       "older": "Oudere regels tonen",
-      "empty": "Geen regels gevonden."
+      "empty": "Geen regels gevonden.",
+      "introRuns": "De laatste {{count}} regels sinds de server is gestart. De logs van de laatste 10 runs worden ook in de datamap bewaard, zodat je hier kunt lezen wat er vóór een crash of herstart gebeurde.",
+      "run": "Run",
+      "runs": {
+        "current": "Deze run",
+        "clean": "netjes gestopt",
+        "crashed": "gecrasht",
+        "unclean": "onverwacht gestopt",
+        "errors": "fouten: {{count}}"
+      },
+      "earlierRun": "Van {{from}} tot {{to}}, versie {{version}} op {{host}}.",
+      "uncleanNote": "Hij stopte zonder netjes af te sluiten: misschien is hij afgebroken, bijvoorbeeld omdat hij te veel geheugen gebruikte, of viel de stroom uit. De laatste regels staan hieronder.",
+      "crashTitle": "De server is gecrasht"
     },
     "internet": {
       "offline": "Al {{time}} geen internetverbinding",

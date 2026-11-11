@@ -410,9 +410,27 @@ func logQuery(r *http.Request) health.Query {
 	return health.Query{Level: q.Get("level"), Text: q.Get("q"), Before: before, Limit: limit}
 }
 
-// getLogs lists the latest log lines, newest first.
+// getLogs lists log lines, newest first: this run's latest, or an earlier
+// run's (?run=<id>, from GET /admin/logs/runs) with what Go printed if it
+// crashed.
 func (s *Server) getLogs(w http.ResponseWriter, r *http.Request) {
 	m := s.health()
+	run := r.URL.Query().Get("run")
+	if runs := m.Logs.Runs(); run != "" && runs != nil && run != runs.ID() {
+		lines, more, err := runs.Lines(run, logQuery(r))
+		if err != nil {
+			writeError(w, http.StatusNotFound, "no such run")
+			return
+		}
+		out := map[string]any{"lines": lines, "more": more}
+		if r.URL.Query().Get("before") == "" {
+			if c := runs.Crash(run); c != "" {
+				out["crash"] = c
+			}
+		}
+		writeJSON(w, http.StatusOK, out)
+		return
+	}
 	if m.Logs == nil {
 		writeJSON(w, http.StatusOK, map[string]any{"lines": []health.Entry{}, "more": false})
 		return
@@ -421,18 +439,51 @@ func (s *Server) getLogs(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, http.StatusOK, map[string]any{"lines": lines, "more": more})
 }
 
+// getLogRuns lists the runs whose logs are kept, newest (this one) first.
+func (s *Server) getLogRuns(w http.ResponseWriter, r *http.Request) {
+	runs := s.health().Logs.Runs()
+	if runs == nil {
+		writeJSON(w, http.StatusOK, map[string]any{"runs": []health.RunInfo{}, "kept": false})
+		return
+	}
+	writeJSON(w, http.StatusOK, map[string]any{"runs": runs.List(), "kept": true, "dir": runs.Dir()})
+}
+
 // downloadLogs sends the matching log lines as a text file, oldest first,
-// to attach to a bug report.
+// to attach to a bug report: this run's, or an earlier one's with its crash.
 func (s *Server) downloadLogs(w http.ResponseWriter, r *http.Request) {
 	q := logQuery(r)
-	q.Limit = health.DefaultLines * 4
+	run := r.URL.Query().Get("run")
 	var lines []health.Entry
-	if m := s.health(); m.Logs != nil {
-		lines, _ = m.Logs.Lines(q)
+	crash := ""
+	m := s.health()
+	if runs := m.Logs.Runs(); run != "" && runs != nil && run != runs.ID() {
+		q.Limit = 1 << 30
+		var err error
+		if lines, _, err = runs.Lines(run, q); err != nil {
+			writeError(w, http.StatusNotFound, "no such run")
+			return
+		}
+		crash = runs.Crash(run)
+	} else {
+		run = ""
+		q.Limit = health.DefaultLines * 4
+		if m.Logs != nil {
+			lines, _ = m.Logs.Lines(q)
+		}
+	}
+	name := time.Now().Format("2006-01-02-150405")
+	if run != "" {
+		started, _ := strconv.ParseInt(run, 10, 64)
+		name = time.UnixMilli(started).Format("2006-01-02-150405") + "-earlier-run"
 	}
 	w.Header().Set("Content-Type", "text/plain; charset=utf-8")
-	w.Header().Set("Content-Disposition", fmt.Sprintf(`attachment; filename="matinee-%s.log"`, time.Now().Format("2006-01-02-150405")))
+	w.Header().Set("Content-Disposition", fmt.Sprintf(`attachment; filename="matinee-%s.log"`, name))
 	fmt.Fprintf(w, "# Matinee %s, %s\n", version.Version, time.Now().Format(time.RFC3339))
+	if run != "" {
+		started, _ := strconv.ParseInt(run, 10, 64)
+		fmt.Fprintf(w, "# An earlier run, started %s\n", time.UnixMilli(started).Format(time.RFC3339))
+	}
 	for i := len(lines) - 1; i >= 0; i-- {
 		e := lines[i]
 		var b strings.Builder
@@ -447,6 +498,9 @@ func (s *Server) downloadLogs(w http.ResponseWriter, r *http.Request) {
 		}
 		b.WriteString("\n")
 		w.Write([]byte(b.String()))
+	}
+	if crash != "" {
+		fmt.Fprintf(w, "\n# The server crashed:\n%s", crash)
 	}
 }
 

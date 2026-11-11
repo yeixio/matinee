@@ -1177,7 +1177,22 @@ export type Health = {
   logLines: number
   logsSince?: number
 }
-export type LogQuery = { level?: LogLevel; q?: string; before?: number; limit?: number }
+export type LogQuery = { level?: LogLevel; q?: string; before?: number; limit?: number; run?: string }
+// A run of the server whose log is kept in its data folder: this one, or an
+// earlier one, such as one that crashed.
+export type LogRun = {
+  id: string
+  started: number
+  ended?: number
+  version?: string
+  host?: string
+  current?: boolean
+  clean?: boolean
+  crashed?: boolean
+  lines: number
+  warnings: number
+  errors: number
+}
 
 export type AnalysisStatus = {
   mode: AnalysisMode
@@ -1440,6 +1455,7 @@ function logParams(q: LogQuery): string {
   if (q.q) p.set('q', q.q)
   if (q.before) p.set('before', String(q.before))
   if (q.limit) p.set('limit', String(q.limit))
+  if (q.run) p.set('run', q.run)
   return p.toString()
 }
 
@@ -1488,7 +1504,8 @@ export const api = {
 
   analysis: () => request<AnalysisStatus>('GET', '/api/v1/analysis'),
   health: () => request<Health>('GET', '/api/v1/admin/health'),
-  logs: (q: LogQuery) => request<{ lines: LogLine[]; more: boolean }>('GET', `/api/v1/admin/logs?${logParams(q)}`),
+  logs: (q: LogQuery) => request<{ lines: LogLine[]; more: boolean; crash?: string }>('GET', `/api/v1/admin/logs?${logParams(q)}`),
+  logRuns: () => request<{ runs: LogRun[]; kept: boolean }>('GET', '/api/v1/admin/logs/runs'),
   logsDownloadURL: (q: LogQuery) => `/api/v1/admin/logs/download?${logParams(q)}`,
   alerts: () => request<AlertSettings>('GET', '/api/v1/admin/alerts'),
   saveAlerts: (c: AlertConfig) => request<AlertSettings>('PUT', '/api/v1/admin/alerts', c),

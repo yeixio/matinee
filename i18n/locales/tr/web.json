@@ -1390,7 +1390,19 @@
       },
       "live": "Yeni satırları takip et",
       "older": "Daha eski satırları göster",
-      "empty": "Eşleşen satır yok."
+      "empty": "Eşleşen satır yok.",
+      "introRuns": "Sunucu başladığından beri son {{count}} satır. Son 10 çalıştırmanın günlükleri veri klasöründe de saklanır; böylece bir çökme ya da yeniden başlatmadan önce ne olduğu burada okunabilir.",
+      "run": "Çalıştırma",
+      "runs": {
+        "current": "Bu çalıştırma",
+        "clean": "düzgün durdu",
+        "crashed": "çöktü",
+        "unclean": "beklenmedik şekilde durdu",
+        "errors": "hata: {{count}}"
+      },
+      "earlierRun": "{{from}} – {{to}}, sürüm {{version}}, {{host}} üzerinde.",
+      "uncleanNote": "Düzgün kapanmadan durdu: örneğin çok fazla bellek kullandığı için sonlandırılmış olabilir ya da makinenin elektriği kesilmiş olabilir. Son satırları aşağıda.",
+      "crashTitle": "Sunucu çöktü"
     },
     "internet": {
       "offline": "{{time}} süredir internet bağlantısı yok",

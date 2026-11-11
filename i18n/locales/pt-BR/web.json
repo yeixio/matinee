@@ -1401,7 +1401,19 @@
       },
       "live": "Acompanhar novas linhas",
       "older": "Mostrar linhas anteriores",
-      "empty": "Nenhuma linha corresponde."
+      "empty": "Nenhuma linha corresponde.",
+      "introRuns": "As últimas {{count}} linhas desde que o servidor iniciou. Os logs das últimas 10 execuções também ficam guardados na pasta de dados, então dá para ler aqui o que aconteceu antes de uma falha ou reinício.",
+      "run": "Execução",
+      "runs": {
+        "current": "Esta execução",
+        "clean": "parou normalmente",
+        "crashed": "travou",
+        "unclean": "parou inesperadamente",
+        "errors": "erros: {{count}}"
+      },
+      "earlierRun": "De {{from}} a {{to}}, versão {{version}} em {{host}}.",
+      "uncleanNote": "Ela parou sem encerrar normalmente: pode ter sido finalizada, por exemplo por usar memória demais, ou a máquina ficou sem energia. As últimas linhas estão abaixo.",
+      "crashTitle": "O servidor travou"
     },
     "internet": {
       "offline": "Sem conexão com a internet há {{time}}",

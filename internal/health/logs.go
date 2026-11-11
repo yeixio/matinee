@@ -64,6 +64,7 @@ type Logs struct {
 	warnings int64 // since the server started
 	errors   int64
 	now      func() time.Time
+	runs     *Runs // where this run's lines are saved too, if anywhere
 }
 
 // NewLogs keeps up to n lines.
@@ -72,6 +73,24 @@ func NewLogs(n int) *Logs {
 		n = DefaultLines
 	}
 	return &Logs{lines: make([]Entry, n), problems: map[string]*Problem{}, now: time.Now}
+}
+
+// Keep saves every line kept from now on to this run's log file too, so it
+// can still be read after a crash or a restart.
+func (l *Logs) Keep(r *Runs) {
+	l.mu.Lock()
+	defer l.mu.Unlock()
+	l.runs = r
+}
+
+// Runs is where earlier runs' logs are, or nil.
+func (l *Logs) Runs() *Runs {
+	if l == nil {
+		return nil
+	}
+	l.mu.Lock()
+	defer l.mu.Unlock()
+	return l.runs
 }
 
 // Handler logs to inner and keeps a copy of every line at Info and above
@@ -117,6 +136,9 @@ func (l *Logs) add(t time.Time, lv slog.Level, msg string, attrs []Attr) {
 	l.next++
 	if l.next == len(l.lines) {
 		l.next, l.full = 0, true
+	}
+	if l.runs != nil {
+		l.runs.write(e)
 	}
 	if lv < slog.LevelWarn {
 		return

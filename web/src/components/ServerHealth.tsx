@@ -3,7 +3,7 @@ import { AlertTriangle, CircleCheck, CircleX, Download, HardDrive, Pause, Radio,
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
 import { causeText } from '../player/why'
-import { api, type Health, type HealthPoint, type HealthProblem, type LogLevel, type LogLine } from '../api'
+import { api, type Health, type HealthPoint, type HealthProblem, type LogLevel, type LogLine, type LogRun } from '../api'
 import i18n, { formatLocale } from '../i18n'
 import { Button, inputClass } from './ui'
 
@@ -729,38 +729,47 @@ function Details({ h }: { h: Health }) {
 
 const levels: (LogLevel | 'all')[] = ['all', 'warn', 'error']
 
+const dateTime = (ms: number) => new Intl.DateTimeFormat(formatLocale(), { dateStyle: 'medium', timeStyle: 'short' }).format(ms)
+
 function Log({ h, search }: { h: Health; search: { q: string; level?: LogLevel; n: number } }) {
   const { t } = useTranslation()
   const [text, setText] = useState(search.q)
   const [q, setQ] = useState(search.q)
   const [level, setLevel] = useState<LogLevel | 'all'>(search.level ?? 'all')
   const [live, setLive] = useState(true)
+  // '' is this run; otherwise an earlier run's id, such as one that crashed.
+  const [run, setRun] = useState('')
+  const runs = useQuery({ queryKey: ['logRuns'], queryFn: api.logRuns, refetchInterval: 30_000 })
+  const earlier = runs.data?.runs.find((r) => r.id === run && !r.current)
   useEffect(() => {
     if (!search.n) return
     setText(search.q)
     setQ(search.q)
     setLevel(search.level ?? 'all')
+    setRun('')
   }, [search])
   // Search a moment after typing stops.
   useEffect(() => {
     const id = setTimeout(() => setQ(text.trim()), 300)
     return () => clearTimeout(id)
   }, [text])
-  const query = { q, level: level === 'all' ? undefined : level, limit: 200 }
+  const query = { q, level: level === 'all' ? undefined : level, limit: 200, run: earlier?.id }
   const logs = useInfiniteQuery({
-    queryKey: ['logs', query.q, query.level],
+    queryKey: ['logs', query.q, query.level, query.run ?? ''],
     queryFn: ({ pageParam }) => api.logs({ ...query, before: pageParam || undefined }),
     initialPageParam: 0,
     getNextPageParam: (last) => (last.more && last.lines.length ? last.lines[last.lines.length - 1].seq : undefined),
-    refetchInterval: live ? REFRESH_MS : false,
+    refetchInterval: live && !earlier ? REFRESH_MS : false,
   })
   const lines = useMemo(() => logs.data?.pages.flatMap((p) => p.lines) ?? [], [logs.data])
+  const crash = earlier ? logs.data?.pages[0]?.crash : undefined
+  const kept = runs.data?.kept ?? false
   return (
     <div className="space-y-3">
       <div className="flex flex-wrap items-end justify-between gap-3">
-        <div>
+        <div className="min-w-0 flex-1 basis-80">
           <h3 className="font-semibold">{t('health.log.title')}</h3>
-          <p className="mt-1 text-sm text-muted">{t('health.log.intro', { count: h.logLines })}</p>
+          <p className="mt-1 text-sm text-muted">{t(kept ? 'health.log.introRuns' : 'health.log.intro', { count: h.logLines })}</p>
         </div>
         <a href={api.logsDownloadURL(query)} download>
           <Button icon={<Download className="size-4" />} tabIndex={-1}>
@@ -768,6 +777,35 @@ function Log({ h, search }: { h: Health; search: { q: string; level?: LogLevel; 
           </Button>
         </a>
       </div>
+      {kept && runs.data && runs.data.runs.length > 1 && (
+        <div className="space-y-2">
+          <label className="flex flex-wrap items-center gap-2 text-sm">
+            <span className="text-muted">{t('health.log.run')}</span>
+            <select className={`${inputClass} w-auto min-w-0 max-w-full`} value={earlier?.id ?? ''} onChange={(e) => setRun(e.target.value)}>
+              {runs.data.runs.map((r) => (
+                <option key={r.id} value={r.current ? '' : r.id}>
+                  {runLabel(r, t)}
+                </option>
+              ))}
+            </select>
+          </label>
+          {earlier && (
+            <p className="text-sm text-muted">
+              {t('health.log.earlierRun', { from: dateTime(earlier.started), to: dateTime(earlier.ended ?? earlier.started), version: earlier.version || '?', host: earlier.host || '?' })}
+              {!earlier.clean && !earlier.crashed && <> {t('health.log.uncleanNote')}</>}
+            </p>
+          )}
+        </div>
+      )}
+      {crash && (
+        <div className="overflow-hidden rounded-xl border border-danger/40 bg-surface/50">
+          <p className="flex items-center gap-2 border-b border-line/60 bg-danger/5 px-3 py-2 text-sm font-semibold text-danger">
+            <CircleX className="size-4 shrink-0" aria-hidden />
+            {t('health.log.crashTitle')}
+          </p>
+          <pre className="max-h-64 overflow-auto whitespace-pre-wrap break-words p-3 font-mono text-xs leading-relaxed">{crash}</pre>
+        </div>
+      )}
       <div className="flex flex-wrap items-center gap-2">
         <label className="relative min-w-0 flex-1 basis-64">
           <span className="sr-only">{t('health.log.search')}</span>
@@ -787,10 +825,12 @@ function Log({ h, search }: { h: Health; search: { q: string; level?: LogLevel; 
             </button>
           ))}
         </div>
-        <label className="flex cursor-pointer items-center gap-2 text-sm text-muted">
-          <input type="checkbox" checked={live} onChange={(e) => setLive(e.target.checked)} className="accent-[var(--color-accent)]" />
-          {t('health.log.live')}
-        </label>
+        {!earlier && (
+          <label className="flex cursor-pointer items-center gap-2 text-sm text-muted">
+            <input type="checkbox" checked={live} onChange={(e) => setLive(e.target.checked)} className="accent-[var(--color-accent)]" />
+            {t('health.log.live')}
+          </label>
+        )}
       </div>
       <div className={`${card} overflow-hidden`}>
         <div className="max-h-[32rem] overflow-auto font-mono text-xs leading-relaxed" role="log">
@@ -809,6 +849,14 @@ function Log({ h, search }: { h: Health; search: { q: string; level?: LogLevel; 
       </div>
     </div>
   )
+}
+
+// "Nov 10, 2026, 2:04 PM · crashed · errors: 3"
+function runLabel(r: LogRun, t: (key: string, opts?: Record<string, unknown>) => string): string {
+  if (r.current) return t('health.log.runs.current')
+  const parts = [dateTime(r.started), t(`health.log.runs.${r.crashed ? 'crashed' : r.clean ? 'clean' : 'unclean'}`)]
+  if (r.errors) parts.push(t('health.log.runs.errors', { count: r.errors }))
+  return parts.join(' · ')
 }
 
 function LogRow({ line }: { line: LogLine }) {

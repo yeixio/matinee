@@ -1401,7 +1401,19 @@
       },
       "live": "Seguir las líneas nuevas",
       "older": "Mostrar líneas anteriores",
-      "empty": "Ninguna línea coincide."
+      "empty": "Ninguna línea coincide.",
+      "introRuns": "Las últimas {{count}} líneas desde que se inició el servidor. Los registros de las últimas 10 ejecuciones también se guardan en la carpeta de datos, para que aquí se pueda leer lo que pasó antes de un fallo o un reinicio.",
+      "run": "Ejecución",
+      "runs": {
+        "current": "Esta ejecución",
+        "clean": "se detuvo correctamente",
+        "crashed": "falló",
+        "unclean": "se detuvo inesperadamente",
+        "errors": "errores: {{count}}"
+      },
+      "earlierRun": "Del {{from}} al {{to}}, versión {{version}} en {{host}}.",
+      "uncleanNote": "Se detuvo sin cerrarse correctamente: quizá se forzó su cierre, por ejemplo por usar demasiada memoria, o el equipo se quedó sin corriente. Sus últimas líneas están abajo.",
+      "crashTitle": "El servidor falló"
     },
     "internet": {
       "offline": "Sin conexión a internet desde hace {{time}}",

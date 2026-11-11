@@ -1379,7 +1379,19 @@
       },
       "live": "Ikuti baris baharu",
       "older": "Tunjukkan baris lebih lama",
-      "empty": "Tiada baris sepadan."
+      "empty": "Tiada baris sepadan.",
+      "introRuns": "{{count}} baris terkini sejak pelayan dimulakan. Log 10 larian terakhir juga disimpan dalam folder data, jadi apa yang berlaku sebelum ranap atau mula semula masih boleh dibaca di sini.",
+      "run": "Larian",
+      "runs": {
+        "current": "Larian ini",
+        "clean": "berhenti dengan betul",
+        "crashed": "ranap",
+        "unclean": "berhenti tanpa diduga",
+        "errors": "ralat: {{count}}"
+      },
+      "earlierRun": "Dari {{from}} hingga {{to}}, versi {{version}} pada {{host}}.",
+      "uncleanNote": "Ia berhenti tanpa ditutup dengan betul: mungkin ia dihentikan paksa, contohnya kerana menggunakan terlalu banyak memori, atau bekalan elektrik terputus. Baris terakhirnya ada di bawah.",
+      "crashTitle": "Pelayan ranap"
     },
     "internet": {
       "offline": "Tiada sambungan internet selama {{time}}",

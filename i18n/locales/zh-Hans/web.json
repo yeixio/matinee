@@ -1379,7 +1379,19 @@
       },
       "live": "跟随新行",
       "older": "显示更早的行",
-      "empty": "没有匹配的行。"
+      "empty": "没有匹配的行。",
+      "introRuns": "服务器启动以来的最新 {{count}} 行。最近 10 次运行的日志也保存在数据文件夹中，因此可以在这里查看崩溃或重启前发生了什么。",
+      "run": "运行",
+      "runs": {
+        "current": "本次运行",
+        "clean": "正常停止",
+        "crashed": "已崩溃",
+        "unclean": "意外停止",
+        "errors": "错误：{{count}}"
+      },
+      "earlierRun": "从 {{from}} 到 {{to}}，版本 {{version}}，位于 {{host}}。",
+      "uncleanNote": "它没有正常关闭就停止了：可能被强制终止（例如占用内存过多），或机器断电。最后几行在下方。",
+      "crashTitle": "服务器已崩溃"
     },
     "internet": {
       "offline": "已 {{time}} 没有互联网连接",
