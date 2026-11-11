@@ -696,6 +696,7 @@
       "title": "Bibliotecas",
       "none": "Nenhuma biblioteca ainda.",
       "scan": "Verificar",
+      "stopScan": "Parar escaneamento",
       "findArtwork": "Buscar imagens",
       "findingArtwork": "Procurando as capas que faltam em {{name}}. Elas aparecem conforme são encontradas.",
       "remove": "Remover {{name}}",
@@ -1316,7 +1317,14 @@
       "title": "Tarefas em segundo plano",
       "scan": "Escanear {{library}}",
       "scanning": "Escaneando há {{time}}",
+      "why": {
+        "schedule": "Reescaneamento completo agendado",
+        "watcher": "Arquivos novos ou alterados",
+        "manual": "Iniciado com Escanear",
+        "server": "Iniciado pelo servidor"
+      },
       "lastScan": "{{time}}, levou {{took}}",
+      "stopped": "Parado {{time}}, após {{took}}",
       "scanCounts": "{{added}} adicionados, {{updated}} atualizados, {{removed}} removidos, {{failed}} não reproduzíveis",
       "scanFailed": "Falhou: {{error}}",
       "notScanned": "Não escaneada desde que o servidor iniciou",

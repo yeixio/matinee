@@ -94,6 +94,7 @@ func (s *Schedule) Run(ctx context.Context) {
 	s.mu.Lock()
 	s.init()
 	s.mu.Unlock()
+	ctx = WithReason(ctx, ReasonSchedule)
 	if d, _ := s.Interval(ctx); d > 0 {
 		s.Scanner.ScanAll(ctx)
 	}

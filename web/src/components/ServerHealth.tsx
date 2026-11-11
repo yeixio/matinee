@@ -499,6 +499,8 @@ function Attr({ k, v }: { k: string; v: string }) {
 
 function Jobs({ h }: { h: Health }) {
   const { t } = useTranslation()
+  const qc = useQueryClient()
+  const stop = useMutation({ mutationFn: api.stopScan, onSuccess: () => qc.invalidateQueries({ queryKey: ['health'] }) })
   const a = h.jobs.analysis
   const dl = h.jobs.downloads
   const preparing = (dl.queued ?? 0) + (dl.preparing ?? 0)
@@ -517,13 +519,26 @@ function Jobs({ h }: { h: Health }) {
                 : s.last
                   ? s.last.error
                     ? t('health.jobs.scanFailed', { error: s.last.error })
-                    : t('health.jobs.lastScan', { time: ago(s.last.started + s.last.tookMs), took: span(s.last.tookMs) })
+                    : s.last.stopped
+                      ? t('health.jobs.stopped', { time: ago(s.last.started + s.last.tookMs), took: span(s.last.tookMs) })
+                      : t('health.jobs.lastScan', { time: ago(s.last.started + s.last.tookMs), took: span(s.last.tookMs) })
                   : t('health.jobs.notScanned')
             }
             detail={
-              !s.scanning && s.last && !s.last.error
-                ? t('health.jobs.scanCounts', { added: s.last.added, updated: s.last.updated, removed: s.last.removed, failed: s.last.failed + s.last.unplayable })
-                : undefined
+              s.scanning
+                ? s.reason && t(`health.jobs.why.${s.reason}`)
+                : s.last && !s.last.error
+                  ? [s.last.reason && t(`health.jobs.why.${s.last.reason}`), t('health.jobs.scanCounts', { added: s.last.added, updated: s.last.updated, removed: s.last.removed, failed: s.last.failed + s.last.unplayable })]
+                      .filter(Boolean)
+                      .join(' · ')
+                  : undefined
+            }
+            action={
+              s.scanning ? (
+                <Button variant="ghost" icon={<Square className="size-3.5" />} disabled={stop.isPending} onClick={() => stop.mutate(s.libraryId)}>
+                  {t('settings.libraries.stopScan')}
+                </Button>
+              ) : undefined
             }
             bad={!!s.last?.error}
           />
@@ -567,7 +582,7 @@ function Jobs({ h }: { h: Health }) {
   )
 }
 
-function Job({ label, status, detail, busy, bad, progress }: { label: string; status: string; detail?: string; busy?: boolean; bad?: boolean; progress?: number }) {
+function Job({ label, status, detail, busy, bad, progress, action }: { label: string; status: string; detail?: string; busy?: boolean; bad?: boolean; progress?: number; action?: ReactNode }) {
   return (
     <div className="space-y-1.5 p-4 text-sm">
       <div className="flex items-baseline justify-between gap-3">
@@ -582,7 +597,12 @@ function Job({ label, status, detail, busy, bad, progress }: { label: string; st
           <div className="h-full bg-accent" style={{ width: `${Math.floor(progress * 100)}%` }} />
         </div>
       )}
-      {detail && <div className="truncate text-xs text-faint">{detail}</div>}
+      {(detail || action) && (
+        <div className="flex items-center justify-between gap-3">
+          <div className="truncate text-xs text-faint">{detail}</div>
+          {action}
+        </div>
+      )}
     </div>
   )
 }

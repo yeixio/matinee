@@ -708,6 +708,7 @@
       "title": "المكتبات",
       "none": "لا مكتبات بعد.",
       "scan": "فحص",
+      "stopScan": "إيقاف الفحص",
       "findArtwork": "البحث عن الصور",
       "findingArtwork": "جارٍ البحث عن الأغلفة الناقصة في {{name}}. ستظهر فور العثور عليها.",
       "remove": "إزالة {{name}}",
@@ -1346,7 +1347,14 @@
       "title": "مهام في الخلفية",
       "scan": "فحص {{library}}",
       "scanning": "يُفحص منذ {{time}}",
+      "why": {
+        "schedule": "إعادة فحص كاملة مجدولة",
+        "watcher": "ملفات جديدة أو متغيرة",
+        "manual": "بدأ بزر الفحص",
+        "server": "بدأه الخادم"
+      },
       "lastScan": "{{time}}، استغرق {{took}}",
+      "stopped": "توقف {{time}}، بعد {{took}}",
       "scanCounts": "أُضيف {{added}}، حُدّث {{updated}}، أُزيل {{removed}}، لا يعمل {{failed}}",
       "scanFailed": "فشل: {{error}}",
       "notScanned": "لم يُفحص منذ تشغيل الخادم",

@@ -688,6 +688,7 @@
       "title": "媒体库",
       "none": "还没有媒体库。",
       "scan": "扫描",
+      "stopScan": "停止扫描",
       "findArtwork": "查找图片",
       "findingArtwork": "正在为 {{name}} 查找缺失的封面，找到后会立即显示。",
       "remove": "移除{{name}}",
@@ -1296,7 +1297,14 @@
       "title": "后台任务",
       "scan": "扫描{{library}}",
       "scanning": "已扫描 {{time}}",
+      "why": {
+        "schedule": "定时完整重新扫描",
+        "watcher": "新增或更改的文件",
+        "manual": "通过“扫描”开始",
+        "server": "由服务器开始"
+      },
       "lastScan": "{{time}}，用时 {{took}}",
+      "stopped": "{{time}}已停止，用时 {{took}}",
       "scanCounts": "新增 {{added}}，更新 {{updated}}，移除 {{removed}}，无法播放 {{failed}}",
       "scanFailed": "失败：{{error}}",
       "notScanned": "服务器启动以来未扫描",

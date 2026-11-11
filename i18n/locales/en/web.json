@@ -692,6 +692,7 @@
       "title": "Libraries",
       "none": "No libraries yet.",
       "scan": "Scan",
+      "stopScan": "Stop scan",
       "findArtwork": "Find artwork",
       "findingArtwork": "Looking for missing covers in {{name}}. They show up as they're found.",
       "remove": "Remove {{name}}",
@@ -1306,7 +1307,14 @@
       "title": "Background jobs",
       "scan": "Scan {{library}}",
       "scanning": "Scanning for {{time}}",
+      "why": {
+        "schedule": "Scheduled full rescan",
+        "watcher": "New or changed files",
+        "manual": "Started with Scan",
+        "server": "Started by the server"
+      },
       "lastScan": "{{time}}, took {{took}}",
+      "stopped": "Stopped {{time}}, after {{took}}",
       "scanCounts": "{{added}} added, {{updated}} updated, {{removed}} removed, {{failed}} not playable",
       "scanFailed": "Failed: {{error}}",
       "notScanned": "Not scanned since the server started",

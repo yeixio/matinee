@@ -692,6 +692,7 @@
       "title": "Könyvtárak",
       "none": "Még nincsenek könyvtárak.",
       "scan": "Átvizsgálás",
+      "stopScan": "Beolvasás leállítása",
       "findArtwork": "Képek keresése",
       "findingArtwork": "A hiányzó borítók keresése itt: {{name}}. Ahogy előkerülnek, megjelennek.",
       "remove": "{{name}} eltávolítása",
@@ -1306,7 +1307,14 @@
       "title": "Háttérfeladatok",
       "scan": "{{library}} átvizsgálása",
       "scanning": "{{time}} óta vizsgál",
+      "why": {
+        "schedule": "Ütemezett teljes újraolvasás",
+        "watcher": "Új vagy módosult fájlok",
+        "manual": "A Beolvasás gombbal indítva",
+        "server": "A szerver indította"
+      },
       "lastScan": "{{time}}, {{took}} volt",
+      "stopped": "Leállítva {{time}}, {{took}} után",
       "scanCounts": "{{added}} új, {{updated}} frissítve, {{removed}} eltávolítva, {{failed}} nem lejátszható",
       "scanFailed": "Sikertelen: {{error}}",
       "notScanned": "A szerver indulása óta nem volt átvizsgálva",

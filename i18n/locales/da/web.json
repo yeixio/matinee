@@ -692,6 +692,7 @@
       "title": "Biblioteker",
       "none": "Ingen biblioteker endnu.",
       "scan": "Scan",
+      "stopScan": "Stop scanning",
       "findArtwork": "Find billeder",
       "findingArtwork": "Leder efter manglende covers i {{name}}. De vises, efterhånden som de findes.",
       "remove": "Fjern {{name}}",
@@ -1306,7 +1307,14 @@
       "title": "Baggrundsjob",
       "scan": "Scan {{library}}",
       "scanning": "Scanner i {{time}}",
+      "why": {
+        "schedule": "Planlagt fuld genscanning",
+        "watcher": "Nye eller ændrede filer",
+        "manual": "Startet med Scan",
+        "server": "Startet af serveren"
+      },
       "lastScan": "{{time}}, tog {{took}}",
+      "stopped": "Stoppet {{time}}, efter {{took}}",
       "scanCounts": "{{added}} tilføjet, {{updated}} opdateret, {{removed}} fjernet, {{failed}} kan ikke afspilles",
       "scanFailed": "Mislykkedes: {{error}}",
       "notScanned": "Ikke scannet siden serveren startede",

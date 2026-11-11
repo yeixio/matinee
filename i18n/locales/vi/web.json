@@ -688,6 +688,7 @@
       "title": "Thư viện",
       "none": "Chưa có thư viện nào.",
       "scan": "Quét",
+      "stopScan": "Dừng quét",
       "findArtwork": "Tìm hình ảnh",
       "findingArtwork": "Đang tìm ảnh bìa còn thiếu trong {{name}}. Ảnh sẽ hiện ngay khi tìm thấy.",
       "remove": "Xóa {{name}}",
@@ -1296,7 +1297,14 @@
       "title": "Tác vụ nền",
       "scan": "Quét {{library}}",
       "scanning": "Đang quét được {{time}}",
+      "why": {
+        "schedule": "Quét lại toàn bộ theo lịch",
+        "watcher": "Tệp mới hoặc đã thay đổi",
+        "manual": "Bắt đầu bằng nút Quét",
+        "server": "Do máy chủ bắt đầu"
+      },
       "lastScan": "{{time}}, mất {{took}}",
+      "stopped": "Đã dừng {{time}}, sau {{took}}",
       "scanCounts": "thêm {{added}}, cập nhật {{updated}}, gỡ {{removed}}, không phát được {{failed}}",
       "scanFailed": "Thất bại: {{error}}",
       "notScanned": "Chưa quét từ khi máy chủ khởi động",

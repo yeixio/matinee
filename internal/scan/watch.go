@@ -268,7 +268,7 @@ func (w *Watcher) collect(ctx context.Context, lib store.Library, kind Kind, cha
 			if len(ready) == 0 {
 				continue
 			}
-			_, err := w.Scanner.ScanPaths(ctx, lib, ready)
+			_, err := w.Scanner.ScanPaths(WithReason(ctx, ReasonWatcher), lib, ready)
 			if errors.Is(err, ErrAlreadyRunning) {
 				for _, p := range ready {
 					pending[p].last = now // try again once the scan is done

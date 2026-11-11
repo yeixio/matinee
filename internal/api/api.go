@@ -283,6 +283,7 @@ func (s *Server) routes() []route {
 		{"POST /libraries", adminOnly, s.createLibrary},
 		{"DELETE /libraries/{id}", adminOnly, s.deleteLibrary},
 		{"POST /libraries/{id}/scan", adminOnly, s.scanLibrary},
+		{"DELETE /libraries/{id}/scan", adminOnly, s.stopScan},
 		{"POST /libraries/{id}/artwork", adminOnly, s.refreshLibraryArtwork},
 		{"PUT /libraries/{id}/metadata-mode", adminOnly, s.setLibraryMetadataMode},
 		{"GET /libraries/{id}/items", reader, s.libraryItems},
@@ -953,6 +954,8 @@ func (s *Server) createUser(w http.ResponseWriter, r *http.Request) {
 type libraryView struct {
 	store.Library
 	Scanning bool `json:"scanning"`
+	// ScanReason is what started the running scan (scan.Reason).
+	ScanReason scan.Reason `json:"scanReason,omitempty"`
 	// Watch says how each folder is watched for new files (scan.FolderWatch).
 	Watch []scan.FolderWatch `json:"watch"`
 	// Counts are how many titles (movies, shows, artists) and how many
@@ -964,6 +967,9 @@ type libraryView struct {
 
 func (s *Server) libraryView(l store.Library, scanning bool) libraryView {
 	v := libraryView{Library: l, Scanning: scanning}
+	if scanning && s.Scanner != nil {
+		v.ScanReason = s.Scanner.Reason(l.ID)
+	}
 	if s.Watcher != nil {
 		v.Watch = s.Watcher.Status(l.ID)
 	}
@@ -1088,7 +1094,22 @@ func (s *Server) scanLibrary(w http.ResponseWriter, r *http.Request) {
 		// Every show's feed, now, however recently it was checked.
 		go s.Podcasts.RefreshLibrary(s.BackgroundCtx, lib)
 	} else {
-		s.Scanner.Start(s.BackgroundCtx, lib)
+		s.Scanner.Start(scan.WithReason(s.BackgroundCtx, scan.ReasonManual), lib)
+	}
+	w.WriteHeader(http.StatusAccepted)
+}
+
+// stopScan stops a library's running scan, whatever started it. What it
+// found so far stays; files it didn't get to are looked at next time.
+func (s *Server) stopScan(w http.ResponseWriter, r *http.Request) {
+	id, ok := pathID(r)
+	if !ok {
+		writeError(w, http.StatusBadRequest, "bad id")
+		return
+	}
+	if !s.Scanner.Stop(id) {
+		writeError(w, http.StatusConflict, "this library isn't being scanned")
+		return
 	}
 	w.WriteHeader(http.StatusAccepted)
 }

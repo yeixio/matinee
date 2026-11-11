@@ -696,6 +696,7 @@
       "title": "Bibliothèques",
       "none": "Aucune bibliothèque pour l’instant.",
       "scan": "Analyser",
+      "stopScan": "Arrêter l'analyse",
       "findArtwork": "Trouver les images",
       "findingArtwork": "Recherche des pochettes manquantes dans {{name}}. Elles s'affichent au fur et à mesure.",
       "remove": "Retirer {{name}}",
@@ -1316,7 +1317,14 @@
       "title": "Tâches en arrière-plan",
       "scan": "Analyse de {{library}}",
       "scanning": "Analyse en cours depuis {{time}}",
+      "why": {
+        "schedule": "Réanalyse complète planifiée",
+        "watcher": "Fichiers nouveaux ou modifiés",
+        "manual": "Lancée avec Analyser",
+        "server": "Lancée par le serveur"
+      },
       "lastScan": "{{time}}, a pris {{took}}",
+      "stopped": "Arrêtée {{time}}, après {{took}}",
       "scanCounts": "{{added}} ajoutés, {{updated}} mis à jour, {{removed}} retirés, {{failed}} illisibles",
       "scanFailed": "Échec : {{error}}",
       "notScanned": "Pas analysée depuis le démarrage du serveur",

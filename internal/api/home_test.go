@@ -314,3 +314,22 @@ func TestScanScheduleAndTimeZoneSettings(t *testing.T) {
 		t.Fatalf("off: %d %+v", code, set)
 	}
 }
+
+func TestStopScanRoute(t *testing.T) {
+	c, tmp := newTestServer(t)
+	var login struct{ Token string }
+	c.do("POST", "/api/v1/setup", credentials{"admin", "correct horse"}, &login)
+	c.token = login.Token
+	dir := filepath.Join(tmp, "movies")
+	os.MkdirAll(dir, 0o755)
+	var lib libraryView
+	c.do("POST", "/api/libraries", map[string]any{"name": "Movies", "kind": "movies", "paths": []string{dir}}, &lib)
+	for deadline := time.Now().Add(5 * time.Second); c.srv.Scanner.Running(lib.ID); time.Sleep(10 * time.Millisecond) {
+		if time.Now().After(deadline) {
+			t.Fatal("the new library's scan didn't finish")
+		}
+	}
+	if code := c.do("DELETE", "/api/v1/libraries/"+itoa(lib.ID)+"/scan", nil, nil); code != http.StatusConflict {
+		t.Fatalf("stopping an idle library: %d", code)
+	}
+}
