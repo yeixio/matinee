@@ -5412,6 +5412,9 @@ components:
         boxOfficeAsksNeedApproval:
           type: boolean
           description: Other editions and better copies asked for from Box Office always wait for an admin, even when requests are added right away. Off by default.
+        boxOfficeReplaceDamaged:
+          type: boolean
+          description: Report videos the background jobs find damaged to Box Office, which gets another copy by itself. Off by default.
         holidayRows:
           type: boolean
           description: Show a row of titles for a holiday on Home in the weeks before it. On by default.

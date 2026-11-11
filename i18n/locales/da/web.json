@@ -1621,7 +1621,9 @@
     "settings": {
       "approval": "Andre udgaver og bedre kopier kræver altid godkendelse fra en admin",
       "approvalDetail": "Også når anmodninger tilføjes med det samme. Kun med Box Office.",
-      "approvalReports": "Også rapporterede problemer, som Box Office ellers retter med det samme."
+      "approvalReports": "Også rapporterede problemer, som Box Office ellers retter med det samme.",
+      "replaceDamaged": "Udskift selv beskadigede videoer",
+      "replaceDamagedDetail": "Når Matinee finder en beskadiget film eller episode (læsning løber tør for tid igen og igen, selvom drevet svarer, og spring i den også), melder den et billedproblem, og Box Office henter en anden kopi. Fra: beskadigede videoer vises kun i serverens tilstand."
     }
   }
 }

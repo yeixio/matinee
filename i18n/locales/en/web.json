@@ -1621,7 +1621,9 @@
     "settings": {
       "approval": "Other editions and better copies always need an admin's approval",
       "approvalDetail": "Even when what people ask for is added right away. Only with Box Office.",
-      "approvalReports": "Reported problems too, which Box Office otherwise fixes straight away."
+      "approvalReports": "Reported problems too, which Box Office otherwise fixes straight away.",
+      "replaceDamaged": "Replace damaged videos by themselves",
+      "replaceDamagedDetail": "When Matinee finds a movie or episode damaged (reading it keeps timing out while its share answers, and jumping around in it does too), it reports a picture problem and Box Office gets another copy. Off: damaged videos are only listed in Server health."
     }
   }
 }

@@ -1645,7 +1645,9 @@
     "settings": {
       "approval": "Inne wydania i lepsze kopie zawsze wymagają zgody administratora",
       "approvalDetail": "Nawet gdy prośby są dodawane od razu. Tylko z Box Office.",
-      "approvalReports": "Także zgłoszone problemy, które Box Office inaczej naprawia od razu."
+      "approvalReports": "Także zgłoszone problemy, które Box Office inaczej naprawia od razu.",
+      "replaceDamaged": "Samodzielnie zastępuj uszkodzone filmy",
+      "replaceDamagedDetail": "Gdy Matinee znajdzie uszkodzony film lub odcinek (odczyt ciągle przekracza czas, choć udział odpowiada, a przeskoki w nim też), zgłasza problem z obrazem, a Box Office pobiera inną kopię. Wyłączone: uszkodzone filmy są tylko wymienione w stanie serwera."
     }
   }
 }

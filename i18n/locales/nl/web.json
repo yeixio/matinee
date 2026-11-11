@@ -1621,7 +1621,9 @@
     "settings": {
       "approval": "Andere edities en betere kopieën hebben altijd goedkeuring van een beheerder nodig",
       "approvalDetail": "Ook als verzoeken meteen worden toegevoegd. Alleen met Box Office.",
-      "approvalReports": "Ook gemelde problemen, die Box Office anders meteen oplost."
+      "approvalReports": "Ook gemelde problemen, die Box Office anders meteen oplost.",
+      "replaceDamaged": "Beschadigde video's vanzelf vervangen",
+      "replaceDamagedDetail": "Als Matinee een beschadigde film of aflevering vindt (lezen loopt steeds vast terwijl de share antwoordt, en springen erin ook), meldt het een beeldprobleem en haalt Box Office een andere kopie. Uit: beschadigde video's staan alleen in de servergezondheid."
     }
   }
 }
