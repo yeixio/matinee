@@ -449,7 +449,7 @@
     "mode": {
       "gentle": {
         "label": "Kevyt",
-        "hint": "Yksi tiedosto muutaman sekunnin välein, eikä yhtään, kun palvelin muuntaa jotain toistoa varten."
+        "hint": "Yksi tiedosto muutaman sekunnin välein."
       },
       "normal": {
         "label": "Normaali",
@@ -459,6 +459,10 @@
         "label": "Pois",
         "hint": "Tauolla, kunnes kytket sen takaisin päälle."
       }
+    },
+    "pause": {
+      "label": "Tauko toiston ajaksi",
+      "hint": "Analyysi, alkutunnusten ja lopputekstien tunnistus, aikajanan esikatselukuvat ja ajastetut täydet uudelleenskannaukset odottavat, kun joku katsoo tai kuuntelee, jotta toistolla on levyt ja verkko käytössään. Tauolla oleva soitin ei lasketa, ja itse käynnistämäsi skannaukset jatkuvat."
     },
     "intros": {
       "label": "Etsi sarjojen alkutunnarit",

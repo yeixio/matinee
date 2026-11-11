@@ -449,7 +449,7 @@
     "mode": {
       "gentle": {
         "label": "Försiktig",
-        "hint": "En fil med några sekunders mellanrum, och ingen medan servern konverterar något för uppspelning."
+        "hint": "En fil med några sekunders mellanrum."
       },
       "normal": {
         "label": "Normal",
@@ -459,6 +459,10 @@
         "label": "Av",
         "hint": "Pausad tills du slår på den igen."
       }
+    },
+    "pause": {
+      "label": "Pausa medan något spelas",
+      "hint": "Analys, identifiering av intron och eftertexter, förhandsvisningar för sökfältet och schemalagda fullständiga omsökningar väntar medan någon tittar eller lyssnar, så att uppspelningen har diskarna och nätverket för sig själv. En pausad spelare räknas inte, och sökningar du startar själv körs ändå."
     },
     "intros": {
       "label": "Hitta intron i serier",

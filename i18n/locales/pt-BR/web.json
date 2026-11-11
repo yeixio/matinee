@@ -453,7 +453,7 @@
     "mode": {
       "gentle": {
         "label": "Suave",
-        "hint": "Um arquivo a cada poucos segundos, e nenhum enquanto o servidor converte algo para reprodução."
+        "hint": "Um arquivo a cada poucos segundos."
       },
       "normal": {
         "label": "Normal",
@@ -463,6 +463,10 @@
         "label": "Desativada",
         "hint": "Pausada até você ativar de novo."
       }
+    },
+    "pause": {
+      "label": "Pausar enquanto algo toca",
+      "hint": "A análise, a detecção de aberturas e créditos, as prévias da barra e os reescaneamentos completos agendados esperam enquanto alguém assiste ou ouve algo, para a reprodução ter os discos e a rede só para ela. Um player pausado não conta, e escaneamentos que você inicia continuam."
     },
     "intros": {
       "label": "Encontrar aberturas de séries",

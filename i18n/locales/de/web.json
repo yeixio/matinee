@@ -449,7 +449,7 @@
     "mode": {
       "gentle": {
         "label": "Behutsam",
-        "hint": "Alle paar Sekunden eine Datei, und keine, während der Server etwas für die Wiedergabe umwandelt."
+        "hint": "Eine Datei alle paar Sekunden."
       },
       "normal": {
         "label": "Normal",
@@ -459,6 +459,10 @@
         "label": "Aus",
         "hint": "Pausiert, bis du es wieder einschaltest."
       }
+    },
+    "pause": {
+      "label": "Pausieren, während etwas läuft",
+      "hint": "Analyse, Intro- und Abspannerkennung, Vorschaubilder für die Suchleiste und geplante vollständige Scans warten, solange jemand etwas schaut oder hört, damit die Wiedergabe Festplatten und Netzwerk für sich hat. Ein pausierter Player zählt nicht, und Scans, die du selbst startest, laufen weiter."
     },
     "intros": {
       "label": "TV-Intros finden",

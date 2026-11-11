@@ -223,12 +223,16 @@ func run() error {
 	// Videos someone plays get their pictures right away.
 	go thumbnails.Serve(ctx)
 
+	// What's playing where, remote control, and the event feed for home
+	// automation (internal/live).
+	hub := live.New()
+	go hub.Run(ctx)
 	// Media analysis reads every file once more, slowly and at the lowest
 	// priority, for the details the scan doesn't need (see internal/analyze).
 	analyzer := &analyze.Analyzer{
 		Store: db, Log: log,
 		Prober: probe.Prober{Path: cfg.FFprobePath, Timeout: 2 * time.Minute, LowPriority: true},
-		Busy:   func() bool { return transcoder.Active() > 0 },
+		Busy:   func() bool { return transcoder.Active() > 0 || hub.Playing() },
 		// Then it finds each TV episode's intro by matching the audio of a
 		// season's episodes (see internal/intro).
 		Intros: &intro.Detector{Store: db, FFmpeg: cfg.FFmpegPath, Log: log, LowPriority: probe.LowerPriority},
@@ -255,10 +259,6 @@ func run() error {
 		db.SetMetadataKinds(fetcher.Kinds()...)
 		plugins.OnChange = func() { db.SetMetadataKinds(fetcher.Kinds()...) }
 	}
-	// What's playing where, remote control, and the event feed for home
-	// automation (internal/live).
-	hub := live.New()
-	go hub.Run(ctx)
 	// Watch together sessions (internal/together).
 	sessions := together.New()
 	go sessions.Run(ctx)
@@ -283,7 +283,7 @@ func run() error {
 	go watcher.Run(ctx)
 	// And every library is rescanned in full every so often, as often as
 	// the admin picked (MATINEE_SCAN_INTERVAL until they do).
-	schedule := &scan.Schedule{Scanner: scanner, Default: cfg.ScanInterval}
+	schedule := &scan.Schedule{Scanner: scanner, Default: cfg.ScanInterval, Wait: analyzer.Playing}
 
 	downloads := download.NewManager(db, cfg.FFmpegPath, cfg.DownloadDir(), log)
 

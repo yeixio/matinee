@@ -457,7 +457,7 @@
     "mode": {
       "gentle": {
         "label": "Šetrně",
-        "hint": "Jeden soubor každých pár sekund a žádný, když server něco převádí pro přehrávání."
+        "hint": "Jeden soubor každých pár sekund."
       },
       "normal": {
         "label": "Normálně",
@@ -467,6 +467,10 @@
         "label": "Vypnuto",
         "hint": "Pozastaveno, dokud to znovu nezapneš."
       }
+    },
+    "pause": {
+      "label": "Pozastavit během přehrávání",
+      "hint": "Analýza, rozpoznávání úvodních a závěrečných titulků, náhledy pro posuvník a plánovaná úplná prohledání počkají, dokud se někdo dívá nebo poslouchá, aby přehrávání mělo disky a síť pro sebe. Pozastavený přehrávač se nepočítá a prohledávání spuštěná vámi běží dál."
     },
     "intros": {
       "label": "Hledat úvody seriálů",

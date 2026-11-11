@@ -457,7 +457,7 @@
     "mode": {
       "gentle": {
         "label": "Łagodnie",
-        "hint": "Jeden plik co kilka sekund i żadnego, gdy serwer konwertuje coś do odtwarzania."
+        "hint": "Jeden plik co kilka sekund."
       },
       "normal": {
         "label": "Normalnie",
@@ -467,6 +467,10 @@
         "label": "Wyłączona",
         "hint": "Wstrzymano do ponownego włączenia."
       }
+    },
+    "pause": {
+      "label": "Wstrzymaj podczas odtwarzania",
+      "hint": "Analiza, wykrywanie czołówek i napisów końcowych, podglądy paska przewijania i zaplanowane pełne skanowania czekają, dopóki ktoś ogląda lub słucha, żeby odtwarzanie miało dyski i sieć dla siebie. Wstrzymany odtwarzacz się nie liczy, a skanowania uruchomione przez ciebie działają dalej."
     },
     "intros": {
       "label": "Wyszukuj czołówki seriali",
