@@ -165,7 +165,10 @@ func TestMakeSheets(t *testing.T) {
 	// after a restart. It isn't checked for damage: that would read it again.
 	st.ClearThumbnails(ctx, files[0].ID)
 	reported = nil
-	damaged = func(context.Context, string, string, int64, func(int)) bool { t.Fatal("checked a file on a stalled share"); return false }
+	damaged = func(context.Context, string, string, int64, func(int)) bool {
+		t.Fatal("checked a file on a stalled share")
+		return false
+	}
 	oldWait := slowfs.Wait
 	slowfs.Wait = 20 * time.Millisecond
 	release := make(chan struct{})
