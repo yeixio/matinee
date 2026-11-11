@@ -201,11 +201,12 @@
     "boxSet": "Caja recopilatoria"
   },
   "search": {
-    "placeholder": "Películas, series, artistas, álbumes…",
+    "placeholder": "Películas, series, actores, artistas, álbumes…",
     "nothing": "Nada coincide con «{{q}}»",
     "lookingForNew": "¿Buscas algo nuevo?",
     "addIt": "Añadirlo",
-    "askForIt": "Pedirlo"
+    "askForIt": "Pedirlo",
+    "people": "Personas"
   },
   "person": {
     "notFound": "Persona no encontrada",

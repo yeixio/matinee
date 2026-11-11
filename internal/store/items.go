@@ -371,37 +371,101 @@ func (s *Store) Tracks(ctx context.Context, userID, id int64) ([]Item, error) {
 		userID, id, id, id)
 }
 
-// Search matches titles by word prefix, e.g. "star wa" finds "Star Wars".
+// Search matches titles by word prefix, e.g. "star wa" finds "Star Wars",
+// and the movies and shows of cast members matched the same way, e.g.
+// "keanu" finds what Keanu Reeves is in. Titles named like the search
+// come first.
 func (s *Store) Search(ctx context.Context, userID int64, q string, limit int) ([]Item, error) {
-	// Keep letters and digits only, so user input can't change the query syntax.
-	var words []string
-	for _, w := range strings.FieldsFunc(strings.ToLower(q), func(r rune) bool {
-		return !unicode.IsLetter(r) && !unicode.IsDigit(r)
-	}) {
-		words = append(words, w)
-	}
+	words := searchWords(q)
 	if len(words) == 0 {
 		return []Item{}, nil
 	}
 	// Titles also match in the language people see them in, word by word.
-	translated, args := "FALSE", []any{}
+	translated, targs := "FALSE", []any{}
 	if lang := translating(ctx); lang != "" {
 		var like []string
 		for _, w := range words {
 			like = append(like, `t.search LIKE ? ESCAPE '\'`)
-			args = append(args, "%"+likeEscape(w)+"%")
+			targs = append(targs, "%"+likeEscape(w)+"%")
 		}
 		translated = "i.id IN (SELECT t.item_id FROM item_translations t WHERE t.language = ? AND " + strings.Join(like, " AND ") + ")"
-		args = append([]any{lang}, args...)
+		targs = append([]any{lang}, targs...)
 	}
+	named := "(i.id IN (SELECT rowid FROM items_fts WHERE items_fts MATCH ?) OR " + translated + ")"
+	match := `"` + strings.Join(words, `"* "`) + `"*`
 	if s.db.dialect == postgres {
-		return s.queryItems(ctx,
-			"(to_tsvector('simple', i.title) @@ to_tsquery('simple', ?) OR "+translated+") AND i.kind NOT IN ('season', 'part', 'podcastEpisode')",
-			"i.sort_title LIMIT ?", append(append([]any{userID, strings.Join(words, ":* & ") + ":*"}, args...), limit)...)
+		named = "(to_tsvector('simple', i.title) @@ to_tsquery('simple', ?) OR " + translated + ")"
+		match = strings.Join(words, ":* & ") + ":*"
 	}
-	return s.queryItems(ctx,
-		"(i.id IN (SELECT rowid FROM items_fts WHERE items_fts MATCH ?) OR "+translated+") AND i.kind NOT IN ('season', 'part', 'podcastEpisode')",
-		"i.sort_title LIMIT ?", append(append([]any{userID, `"` + strings.Join(words, `"* "`) + `"*`}, args...), limit)...)
+	nargs := append([]any{match}, targs...)
+	// A season's cast counts toward its show.
+	names, pargs := personNamed("pe.name", words)
+	cast := `i.id IN (SELECT CASE WHEN ci.kind = 'season' THEN ci.parent_id ELSE ci.id END
+		FROM credits c JOIN people pe ON pe.id = c.person_id JOIN items ci ON ci.id = c.item_id
+		WHERE c.kind = 'cast' AND ` + names + `)`
+	where := "(" + named + " OR " + cast + ") AND i.kind NOT IN ('season', 'part', 'podcastEpisode')"
+	order := "CASE WHEN " + named + " THEN 0 ELSE 1 END, i.sort_title LIMIT ?"
+	args := append([]any{userID}, nargs...)
+	args = append(args, pargs...)
+	args = append(args, nargs...)
+	return s.queryItems(ctx, where, order, append(args, limit)...)
+}
+
+// searchWords are a search's words, lowercase: letters and digits only, so
+// user input can't change the query syntax.
+func searchWords(q string) []string {
+	return strings.FieldsFunc(strings.ToLower(q), func(r rune) bool {
+		return !unicode.IsLetter(r) && !unicode.IsDigit(r)
+	})
+}
+
+// personNamed matches a name column whose words start with each of words,
+// as FilterPeople does: "tom ha" matches Tom Hanks.
+func personNamed(col string, words []string) (string, []any) {
+	var conds []string
+	var args []any
+	for _, w := range words {
+		conds = append(conds, `(LOWER(`+col+`) LIKE ? ESCAPE '\' OR LOWER(`+col+`) LIKE ? ESCAPE '\')`)
+		args = append(args, likeEscape(w)+"%", "% "+likeEscape(w)+"%")
+	}
+	return strings.Join(conds, " AND "), args
+}
+
+// SearchPeople finds cast members of titles the user may see by name, as
+// Search does, in the most titles first. Guest parts count toward their
+// show.
+func (s *Store) SearchPeople(ctx context.Context, userID int64, q string, limit int) ([]FilterPerson, error) {
+	words := searchWords(q)
+	out := []FilterPerson{}
+	if len(words) == 0 {
+		return out, nil
+	}
+	names, args := personNamed("pe.name", words)
+	rows, err := s.db.QueryContext(ctx, `
+		SELECT pe.id, pe.name, pe.photo IS NOT NULL AND pe.photo <> '', COUNT(DISTINCT COALESCE(sh.id, se.id, i.id)) AS n
+		FROM (SELECT CAST(? AS BIGINT) AS id) me
+		CROSS JOIN credits c
+		JOIN people pe ON pe.id = c.person_id
+		JOIN items i ON i.id = c.item_id
+		LEFT JOIN items se ON se.id = i.parent_id
+		LEFT JOIN items sh ON sh.id = se.parent_id
+		WHERE c.kind IN ('cast', 'guest') AND `+names+visibleToMe+`
+		GROUP BY pe.id, pe.name, pe.photo
+		ORDER BY n DESC, pe.name LIMIT ?`, append(append([]any{userID}, args...), limit)...)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	for rows.Next() {
+		var p FilterPerson
+		var photo sql.NullBool
+		if err := rows.Scan(&p.ID, &p.Name, &photo, &p.Count); err != nil {
+			return nil, err
+		}
+		p.HasPhoto = photo.Bool
+		out = append(out, p)
+	}
+	return out, rows.Err()
 }
 
 // RecentlyAdded lists the newest movies, albums, books and shows. A show counts as

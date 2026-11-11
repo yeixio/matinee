@@ -201,11 +201,12 @@
     "boxSet": "Colecție de filme"
   },
   "search": {
-    "placeholder": "Filme, seriale, artiști, albume…",
+    "placeholder": "Filme, seriale, actori, artiști, albume…",
     "nothing": "Nimic nu se potrivește cu „{{q}}”",
     "lookingForNew": "Cauți ceva nou?",
     "addIt": "Adaugă-l",
-    "askForIt": "Cere-l"
+    "askForIt": "Cere-l",
+    "people": "Persoane"
   },
   "person": {
     "notFound": "Persoana nu a fost găsită",

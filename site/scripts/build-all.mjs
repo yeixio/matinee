@@ -72,5 +72,7 @@ for (const tag of tags.slice(1)) {
   versions.push({ id: tag, label: tag, base: `/${tag}/` })
 }
 writeFileSync(path.join(out, 'versions.json'), JSON.stringify(versions, null, 2))
+// The Roadmap page's data, so the Site workflow can tell when the issues change.
+cpSync(path.join(site, 'src/roadmap.json'), path.join(out, 'roadmap.json'))
 if (!existsSync(path.join(out, 'index.html'))) throw new Error('no landing page was built')
 console.log(`\nBuilt ${versions.map((v) => v.id).join(', ')} into ${out}`)

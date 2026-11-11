@@ -201,11 +201,12 @@
     "boxSet": "Kolekce"
   },
   "search": {
-    "placeholder": "Filmy, seriály, interpreti, alba…",
+    "placeholder": "Filmy, seriály, herci, interpreti, alba…",
     "nothing": "Nic neodpovídá „{{q}}“",
     "lookingForNew": "Hledáš něco nového?",
     "addIt": "Přidat",
-    "askForIt": "Požádat o něj"
+    "askForIt": "Požádat o něj",
+    "people": "Lidé"
   },
   "person": {
     "notFound": "Osoba nenalezena",

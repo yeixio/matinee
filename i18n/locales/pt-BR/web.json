@@ -201,11 +201,12 @@
     "boxSet": "Box"
   },
   "search": {
-    "placeholder": "Filmes, séries, artistas, álbuns…",
+    "placeholder": "Filmes, séries, atores, artistas, álbuns…",
     "nothing": "Nada corresponde a “{{q}}”",
     "lookingForNew": "Procurando algo novo?",
     "addIt": "Adicionar",
-    "askForIt": "Pedir"
+    "askForIt": "Pedir",
+    "people": "Pessoas"
   },
   "person": {
     "notFound": "Pessoa não encontrada",

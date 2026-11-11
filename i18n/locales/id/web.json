@@ -201,11 +201,12 @@
     "boxSet": "Box set"
   },
   "search": {
-    "placeholder": "Film, acara, artis, album…",
+    "placeholder": "Film, acara, aktor, artis, album…",
     "nothing": "Tidak ada yang cocok dengan \"{{q}}\"",
     "lookingForNew": "Mencari sesuatu yang baru?",
     "addIt": "Tambahkan",
-    "askForIt": "Minta"
+    "askForIt": "Minta",
+    "people": "Orang"
   },
   "person": {
     "notFound": "Orang tidak ditemukan",

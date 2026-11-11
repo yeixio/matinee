@@ -201,11 +201,12 @@
     "boxSet": "Film serisi"
   },
   "search": {
-    "placeholder": "Filmler, diziler, sanatçılar, albümler…",
+    "placeholder": "Filmler, diziler, oyuncular, sanatçılar, albümler…",
     "nothing": "\"{{q}}\" ile eşleşen bir şey yok",
     "lookingForNew": "Yeni bir şey mi arıyorsun?",
     "addIt": "Ekle",
-    "askForIt": "İste"
+    "askForIt": "İste",
+    "people": "Kişiler"
   },
   "person": {
     "notFound": "Kişi bulunamadı",

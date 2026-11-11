@@ -1702,10 +1702,29 @@ paths:
   /search:
     get:
       summary: Search titles
+      description: |
+        Titles whose names have words starting with each word of q, then
+        movies and shows with a cast member named that way ("keanu" finds
+        what Keanu Reeves is in). A season's cast counts toward its show.
       parameters:
         - { name: q, in: query, required: true, schema: { type: string } }
       responses:
         "200": { $ref: "#/components/responses/Items" }
+  /search/people:
+    get:
+      summary: Cast members by name
+      description: |
+        People in the cast (or guest stars) of titles the user may see whose
+        names have words starting with each word of q, in the most titles
+        first; up to 12. GET /people/{id} is what each is in.
+      parameters:
+        - { name: q, in: query, required: true, schema: { type: string } }
+      responses:
+        "200":
+          description: The people.
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: "#/components/schemas/FilterPerson" } }
   /search/play:
     get:
       summary: The one thing to play for what someone asked for out loud
