@@ -268,6 +268,7 @@
   "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "صرف فلمیں، اقساط، سیزن اور شوز دیکھے گئے کے طور پر نشان زد ہو سکتے ہیں",
   "only_movies_have_editions": "ایڈیشن صرف فلموں کے ہوتے ہیں",
   "no_such_backup": "ایسا کوئی بیک اپ نہیں",
+  "no_such_run": "ایسا کوئی رن نہیں ہے",
   "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "اس سرور کا ڈیٹا بیس PostgreSQL ہے؛ pg_dump سے بیک اپ لیں",
   "audiodelay_is_milliseconds_between_2000_and_2000": "آڈیو تاخیر ملی سیکنڈ میں، -2000 اور 2000 کے درمیان ہوتی ہے۔",
   "subtitle_choices_arent_ones_the_apps_know": "ایپس ان سب ٹائٹل انتخابات کو نہیں پہچانتیں",

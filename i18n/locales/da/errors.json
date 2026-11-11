@@ -268,6 +268,7 @@
   "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "Kun film, afsnit, sæsoner og serier kan markeres som set",
   "only_movies_have_editions": "kun film har udgaver",
   "no_such_backup": "Ingen sådan kopi",
+  "no_such_run": "Ingen sådan kørsel",
   "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "Serverens database er PostgreSQL; tag en sikkerhedskopi med pg_dump",
   "audiodelay_is_milliseconds_between_2000_and_2000": "Lydforsinkelsen er i millisekunder, mellem -2000 og 2000.",
   "subtitle_choices_arent_ones_the_apps_know": "Disse undertekstvalg kender apperne ikke",

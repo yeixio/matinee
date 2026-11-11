@@ -268,6 +268,7 @@
   "only_movies_episodes_seasons_and_shows_can_be_marked_watched": "Csak filmek, epizódok, évadok és sorozatok jelölhetők megnézettnek",
   "only_movies_have_editions": "csak filmeknek van kiadása",
   "no_such_backup": "Nincs ilyen mentés",
+  "no_such_run": "Nincs ilyen futás",
   "this_servers_database_is_postgresql_back_it_up_with_pg_dump": "A szerver adatbázisa PostgreSQL; mentsd pg_dumppal",
   "audiodelay_is_milliseconds_between_2000_and_2000": "A hangkésleltetés ezredmásodpercben adható meg, -2000 és 2000 között.",
   "subtitle_choices_arent_ones_the_apps_know": "Ezeket a feliratbeállításokat az alkalmazások nem ismerik",
