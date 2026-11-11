@@ -244,11 +244,11 @@ func (s *Server) searchSubtitles(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	key := strings.Join(append([]string{it.Path}, langs...), "|")
-	results, err := cached(&s.openSubs.cache, key, searchCacheTTL, func() ([]subtitle.Found, error) {
+	results, err := cachedWithin(&s.openSubs.cache, key, searchCacheTTL, cacheFetch, func(ctx context.Context) ([]subtitle.Found, error) {
 		if h, err := subtitle.FileHash(it.Path); err == nil {
 			q.Hash = h
 		}
-		ctx, cancel := context.WithTimeout(r.Context(), 30*time.Second)
+		ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
 		defer cancel()
 		return c.Search(ctx, q)
 	})

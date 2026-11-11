@@ -141,13 +141,13 @@ func (s *Server) discoverFromBoxOffice(w http.ResponseWriter, r *http.Request, c
 	var wg sync.WaitGroup
 	for i, t := range watched {
 		wg.Go(func() {
-			rows[i], errs[i] = cached(&s.discoverCache, "bo:like:"+t.Kind+":"+strconv.Itoa(t.TMDBID), discoverTTL, func() (arr.BoxOfficeRow, error) {
+			rows[i], errs[i] = cached(&s.discoverCache, "bo:like:"+t.Kind+":"+strconv.Itoa(t.TMDBID), discoverTTL, func(ctx context.Context) (arr.BoxOfficeRow, error) {
 				return cl.BoxOfficeDiscoverRow(ctx, "like-"+boxOfficeKind(t.Kind)+"-"+strconv.Itoa(t.TMDBID), 1)
 			})
 		})
 	}
 	wg.Go(func() {
-		home, homeErr = cached(&s.discoverCache, "bo:home", discoverTTL, func() (arr.BoxOfficeDiscover, error) { return cl.BoxOfficeDiscoverHome(ctx) })
+		home, homeErr = cached(&s.discoverCache, "bo:home", discoverTTL, func(ctx context.Context) (arr.BoxOfficeDiscover, error) { return cl.BoxOfficeDiscoverHome(ctx) })
 	})
 	wg.Wait()
 
@@ -218,7 +218,7 @@ func (s *Server) discoverRowFromBoxOffice(w http.ResponseWriter, r *http.Request
 		writeError(w, http.StatusNotFound, "no such row")
 		return
 	}
-	p, err := cached(&s.discoverCache, "bo:row:"+boID+":"+strconv.Itoa(page), discoverTTL, func() (arr.BoxOfficeRow, error) {
+	p, err := cached(&s.discoverCache, "bo:row:"+boID+":"+strconv.Itoa(page), discoverTTL, func(ctx context.Context) (arr.BoxOfficeRow, error) {
 		return cl.BoxOfficeDiscoverRow(ctx, boID, page)
 	})
 	if err != nil {

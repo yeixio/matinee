@@ -121,11 +121,15 @@ func (s *Server) arrError(w http.ResponseWriter, r *http.Request, app arr.App, e
 	}
 }
 
-// ttlCache keeps answers from Radarr and Sonarr for a while, so pages that
-// show them don't each wait on those apps. Changing a connection clears it.
+// ttlCache keeps answers from other services (Radarr and Sonarr, Box
+// Office, TMDB, Overseerr and the like) for a while, so pages that show
+// them don't each wait on those services, and so a service that's slow or
+// down never holds a page up (see cached). Changing a connection clears it.
 type ttlCache struct {
 	mu      sync.Mutex
 	entries map[string]cacheEntry
+	loading map[string]chan struct{} // keys being fetched, closed when done
+	errs    map[string]error         // the last fetch's error, for whoever waited on it
 }
 
 type cacheEntry struct {
@@ -133,34 +137,113 @@ type cacheEntry struct {
 	value   any
 }
 
-func cached[T any](c *ttlCache, key string, ttl time.Duration, load func() (T, error)) (T, error) {
+// How long a page waits for an answer it doesn't have yet, how long the
+// fetch itself may take, and how long past its ttl an answer may still be
+// shown while a fresh one is fetched. Variables so tests can shorten them.
+var (
+	cacheWait  = 3 * time.Second
+	cacheFetch = 30 * time.Second
+	cacheStale = 24 * time.Hour
+)
+
+// errSlow is an answer that didn't come within cacheWait. It's still
+// being fetched, and the next page that asks gets it.
+var errSlow = errors.New("still waiting for an answer")
+
+// cached answers from c when it can, so a page never waits long on
+// another service. A fresh answer comes back as it is. A stale one (up to
+// cacheStale past its ttl) comes back at once while a fresh one is fetched
+// in the background. Without one, cached waits up to cacheWait for load and
+// then returns errSlow, letting load finish in the background so the next
+// page has the answer. Only one load per key runs at a time. load gets a
+// context of its own, ended after cacheFetch, so it isn't cut short when
+// the page that started it is done. Errors aren't kept.
+func cached[T any](c *ttlCache, key string, ttl time.Duration, load func(ctx context.Context) (T, error)) (T, error) {
+	return cachedWithin(c, key, ttl, cacheWait, load)
+}
+
+// cachedWithin is cached for an answer someone asked for and is watching
+// for, such as a search they typed, which may wait up to wait for it.
+func cachedWithin[T any](c *ttlCache, key string, ttl, wait time.Duration, load func(ctx context.Context) (T, error)) (T, error) {
+	var zero T
 	c.mu.Lock()
-	if e, ok := c.entries[key]; ok && time.Now().Before(e.expires) {
+	e, have := c.entries[key]
+	now := time.Now()
+	if have && now.Before(e.expires) {
 		c.mu.Unlock()
 		return e.value.(T), nil
 	}
+	if have && now.After(e.expires.Add(cacheStale)) {
+		have = false
+	}
+	done, fetching := c.loading[key]
+	if !fetching {
+		if c.loading == nil {
+			c.loading = map[string]chan struct{}{}
+		}
+		done = make(chan struct{})
+		c.loading[key] = done
+		go c.fetch(key, ttl, done, func(ctx context.Context) (any, error) { return load(ctx) })
+	}
 	c.mu.Unlock()
-	v, err := load()
-	if err != nil {
-		return v, err
+	if have {
+		return e.value.(T), nil
+	}
+	t := time.NewTimer(wait)
+	defer t.Stop()
+	select {
+	case <-done:
+	case <-t.C:
+		return zero, errSlow
 	}
 	c.mu.Lock()
-	if c.entries == nil {
-		c.entries = map[string]cacheEntry{}
-	}
-	c.entries[key] = cacheEntry{time.Now().Add(ttl), v}
+	e, have = c.entries[key]
+	err := c.lastErr(key)
 	c.mu.Unlock()
-	return v, nil
+	if have && e.value != nil {
+		if v, ok := e.value.(T); ok {
+			return v, nil
+		}
+	}
+	if err == nil {
+		err = errSlow
+	}
+	return zero, err
 }
+
+// fetch runs one load for key and keeps what it answers.
+func (c *ttlCache) fetch(key string, ttl time.Duration, done chan struct{}, load func(ctx context.Context) (any, error)) {
+	ctx, cancel := context.WithTimeout(context.Background(), cacheFetch)
+	defer cancel()
+	v, err := load(ctx)
+	c.mu.Lock()
+	if err == nil {
+		if c.entries == nil {
+			c.entries = map[string]cacheEntry{}
+		}
+		c.entries[key] = cacheEntry{time.Now().Add(ttl), v}
+		delete(c.errs, key)
+	} else {
+		if c.errs == nil {
+			c.errs = map[string]error{}
+		}
+		c.errs[key] = err
+	}
+	delete(c.loading, key)
+	c.mu.Unlock()
+	close(done)
+}
+
+func (c *ttlCache) lastErr(key string) error { return c.errs[key] }
 
 func (c *ttlCache) clear() {
 	c.mu.Lock()
-	c.entries = nil
+	c.entries, c.errs = nil, nil
 	c.mu.Unlock()
 }
 
 func (s *Server) qualityProfiles(ctx context.Context, cl *arr.Client) ([]arr.QualityProfile, error) {
-	return cached(&s.arrCache, "profiles:"+string(cl.App), 5*time.Minute, func() ([]arr.QualityProfile, error) {
+	return cached(&s.arrCache, "profiles:"+string(cl.App), 5*time.Minute, func(ctx context.Context) ([]arr.QualityProfile, error) {
 		return cl.QualityProfiles(ctx)
 	})
 }
@@ -788,7 +871,7 @@ func (s *Server) upcoming(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		wg.Go(func() {
-			items, err := cached(&s.arrCache, "upcoming:"+string(app)+":"+strconv.Itoa(days), 10*time.Minute, func() ([]arr.Upcoming, error) {
+			items, err := cached(&s.arrCache, "upcoming:"+string(app)+":"+strconv.Itoa(days), 10*time.Minute, func(ctx context.Context) ([]arr.Upcoming, error) {
 				return cl.Calendar(ctx, from, to)
 			})
 			mu.Lock()
