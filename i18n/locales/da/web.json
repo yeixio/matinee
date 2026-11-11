@@ -1407,7 +1407,7 @@
       "backup": "En sikkerhedskopi mislykkes",
       "backupHint": "Når databasen ikke kan sikkerhedskopieres.",
       "transcodeSpace": "Omkodninger løber tør for plads",
-      "transcodeSpaceHint": "Når en video ikke kan afspilles, fordi omkodningsmappen er fuld."
+      "transcodeSpaceHint": "Når omkodningsmappen mangler plads, før nogen video fejler, og når en video ikke kan afspilles, fordi den er fuld."
     },
     "email": {
       "title": "E-mail",

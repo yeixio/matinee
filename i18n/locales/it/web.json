@@ -1418,7 +1418,7 @@
       "backup": "Un backup non riesce",
       "backupHint": "Quando non si riesce a fare il backup del database.",
       "transcodeSpace": "Le transcodifiche esauriscono lo spazio",
-      "transcodeSpaceHint": "Quando un video non si può riprodurre perché la cartella di transcodifica è piena."
+      "transcodeSpaceHint": "Quando la cartella di transcodifica ha poco spazio, prima che un video non riesca, e quando un video non si può riprodurre perché è piena."
     },
     "email": {
       "title": "Email",

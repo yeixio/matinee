@@ -1407,7 +1407,7 @@
       "backup": "Eine Sicherung schlägt fehl",
       "backupHint": "Wenn die Datenbank nicht gesichert werden kann.",
       "transcodeSpace": "Transkodierungen geht der Platz aus",
-      "transcodeSpaceHint": "Wenn ein Video nicht abgespielt werden kann, weil der Transkodierungsordner voll ist."
+      "transcodeSpaceHint": "Wenn dem Transkodierungsordner der Platz knapp wird, bevor ein Video scheitert, und wenn ein Video nicht abspielt, weil er voll ist."
     },
     "email": {
       "title": "E-Mail",

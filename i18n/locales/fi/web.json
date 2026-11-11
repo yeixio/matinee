@@ -1407,7 +1407,7 @@
       "backup": "Varmuuskopio epäonnistuu",
       "backupHint": "Kun tietokantaa ei voi varmuuskopioida.",
       "transcodeSpace": "Muunnoksilta loppuu tila",
-      "transcodeSpaceHint": "Kun videota ei voi toistaa, koska muunnoskansio on täynnä."
+      "transcodeSpaceHint": "Kun muunnoskansion tila käy vähiin, ennen kuin mikään video epäonnistuu, ja kun videota ei voi toistaa, koska kansio on täynnä."
     },
     "email": {
       "title": "Sähköposti",

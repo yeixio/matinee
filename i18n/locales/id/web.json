@@ -1396,7 +1396,7 @@
       "backup": "Pencadangan gagal",
       "backupHint": "Saat basis data tidak bisa dicadangkan.",
       "transcodeSpace": "Ruang transcode habis",
-      "transcodeSpaceHint": "Saat video tidak bisa diputar karena folder transcode penuh."
+      "transcodeSpaceHint": "Saat ruang folder transcode menipis, sebelum ada video yang gagal, dan saat video tidak bisa diputar karena folder penuh."
     },
     "email": {
       "title": "Email",

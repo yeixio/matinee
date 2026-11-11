@@ -1407,7 +1407,7 @@
       "backup": "Bir yedekleme başarısız olur",
       "backupHint": "Veritabanı yedeklenemediğinde.",
       "transcodeSpace": "Dönüştürmelerin yeri biter",
-      "transcodeSpaceHint": "Dönüştürme klasörü dolu olduğu için bir video oynatılamadığında."
+      "transcodeSpaceHint": "Dönüştürme klasörünün yeri azaldığında, herhangi bir video başarısız olmadan önce, ve klasör dolu olduğu için bir video oynatılamadığında."
     },
     "email": {
       "title": "E-posta",

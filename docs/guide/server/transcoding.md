@@ -94,7 +94,7 @@ A transcode writes the video into the transcode folder as it plays, and a repack
 
 The room is checked every few seconds while transcodes run. When something else fills the disk, or several people start long films at once, the running transcodes start saving space before the disk is full. If the disk still fills up, that transcode stops, the player says the server ran out of room, and its [Why it buffered](/docs/watching/why-it-buffered/) note says so too.
 
-Admins see the room left under **Transcodes** in [Server health](/docs/server/server-health/), with a warning while transcodes are saving space, and get the **Transcodes run out of room** [alert](/docs/server/alerts/).
+Admins see the room left under **Transcodes** in [Server health](/docs/server/server-health/), with a warning while transcodes are saving space. The **Transcodes run out of room** [alert](/docs/server/alerts/) sends a heads-up as soon as transcodes start saving space (at most once a day), before any video fails, and a warning if one does.
 
 Matinee keeps 512 MB free on the disk for everything else, such as the database. When the folder's volume has a size limit smaller than its disk, as a Kubernetes `emptyDir` does, set `MATINEE_CACHE_LIMIT` to it so Matinee keeps within it ([configuration](/docs/server/configuration/)). The [Helm chart](/docs/server/kubernetes/) does this for you.
 <!-- /since -->

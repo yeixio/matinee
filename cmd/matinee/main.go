@@ -318,6 +318,7 @@ func run() error {
 	alerter := &alerts.Manager{Store: db, Log: log, Server: cfg.ServerName, URL: cfg.PublicURL, Version: version.Version, Read: apiServer.AlertReadings}
 	apiServer.Alerts = alerter
 	transcoder.OnNoSpace = func(detail string) { alerter.TranscodeSpace(ctx, detail) }
+	transcoder.OnShort = func(free string) { alerter.TranscodeSpaceShort(ctx, free) }
 	if backups != nil {
 		backups.Failed = alerter.BackupFailed
 		apiServer.Backups = backups

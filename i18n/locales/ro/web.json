@@ -1418,7 +1418,7 @@
       "backup": "O copie de rezervă eșuează",
       "backupHint": "Când baza de date nu poate fi copiată.",
       "transcodeSpace": "Transcodările rămân fără spațiu",
-      "transcodeSpaceHint": "Când un videoclip nu poate fi redat pentru că dosarul de transcodare e plin."
+      "transcodeSpaceHint": "Când dosarul de transcodare are spațiu puțin, înainte să eșueze vreun videoclip, și când un videoclip nu poate fi redat pentru că e plin."
     },
     "email": {
       "title": "E-mail",

@@ -1407,7 +1407,7 @@
       "backup": "Egy mentés sikertelen",
       "backupHint": "Amikor az adatbázist nem lehet menteni.",
       "transcodeSpace": "Az átkódolásoknak elfogy a hely",
-      "transcodeSpaceHint": "Ha egy videó nem játszható le, mert az átkódolási mappa megtelt."
+      "transcodeSpaceHint": "Ha az átkódolási mappában kevés a hely, még mielőtt egy videó hibát adna, és ha egy videó nem játszható le, mert megtelt."
     },
     "email": {
       "title": "E-mail",

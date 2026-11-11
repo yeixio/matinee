@@ -1407,7 +1407,7 @@
       "backup": "Een back-up mislukt",
       "backupHint": "Als er geen back-up van de database gemaakt kan worden.",
       "transcodeSpace": "Transcoderingen hebben geen ruimte meer",
-      "transcodeSpaceHint": "Als een video niet kan spelen omdat de transcodeermap vol is."
+      "transcodeSpaceHint": "Als de transcodeermap krap in de ruimte zit, voordat een video mislukt, en als een video niet kan spelen omdat hij vol is."
     },
     "email": {
       "title": "E-mail",

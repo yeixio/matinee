@@ -1396,7 +1396,7 @@
       "backup": "Sandaran gagal",
       "backupHint": "Apabila pangkalan data tidak dapat disandarkan.",
       "transcodeSpace": "Ruang transkod habis",
-      "transcodeSpaceHint": "Apabila video tidak dapat dimainkan kerana folder transkod penuh."
+      "transcodeSpaceHint": "Apabila ruang folder transkod semakin kurang, sebelum mana-mana video gagal, dan apabila video tidak dapat dimainkan kerana folder penuh."
     },
     "email": {
       "title": "E-mel",
