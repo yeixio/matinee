@@ -169,6 +169,10 @@ type serverSettings struct {
 	// requests are added right away (see boxoffice_pairing.go). Off unless
 	// an admin turns it on.
 	BoxOfficeAsksNeedApproval bool `json:"boxOfficeAsksNeedApproval"`
+	// BoxOfficeReplaceDamaged reports videos the background jobs find
+	// damaged to Box Office, which gets another copy (see
+	// ReportUnreadable). Off unless an admin turns it on.
+	BoxOfficeReplaceDamaged bool `json:"boxOfficeReplaceDamaged"`
 	// OnlineLyrics looks up songs' words on LRCLIB when there are none
 	// next to the song or in its tags (see lyrics.go). Off unless an admin
 	// turns it on.
@@ -274,6 +278,10 @@ func (s *Server) settings(ctx context.Context) (serverSettings, error) {
 	if err != nil {
 		return serverSettings{}, err
 	}
+	replaceDamaged, err := s.Store.Setting(ctx, settingReplaceDamaged)
+	if err != nil {
+		return serverSettings{}, err
+	}
 	asksNeed, err := s.Store.Setting(ctx, settingAsksNeedApproval)
 	if err != nil {
 		return serverSettings{}, err
@@ -283,7 +291,7 @@ func (s *Server) settings(ctx context.Context) (serverSettings, error) {
 	set := serverSettings{AdaptiveQuality: quality.Adaptive, QualitySteps: stepIDs(quality.Steps), RemoteQualityCap: quality.Cap, RequireSignInAtHome: required, Requests: mode, RemoteTrailers: trailers, HolidayRows: holidaysOn, OnlineLyrics: lyricsOn, SubtitleSync: s.autoSyncs(ctx), Theme: def,
 		RemoteAccess: remoteOn, RemoteForwardedPort: forwarded, Remote: s.remoteStatus(), PublicURL: s.PublicURL, PublicURLHomeOnly: s.PublicURL != "" && !s.publicURLIsPublic(ctx), TMDB: tmdb,
 		ThemeProblems: []string{}, HardwareAcceleration: hwaccel.Auto, Hardware: &hwaccel.Status{Available: []hwaccel.Accel{}}, ToneMapping: toneMap,
-		BoxOfficeAsksNeedApproval: asksNeed == "true"}
+		BoxOfficeAsksNeedApproval: asksNeed == "true", BoxOfficeReplaceDamaged: replaceDamaged == "true"}
 	if s.Transcoder != nil {
 		tools := s.Transcoder.ToneTools()
 		set.ToneMapTools = &tools
@@ -346,6 +354,7 @@ func (s *Server) putSettings(w http.ResponseWriter, r *http.Request) {
 		RemoteTrailers       *bool     `json:"remoteTrailers"`
 		HolidayRows          *bool     `json:"holidayRows"`
 		BoxOfficeAsksNeed    *bool     `json:"boxOfficeAsksNeedApproval"`
+		BoxOfficeReplace     *bool     `json:"boxOfficeReplaceDamaged"`
 		OnlineLyrics         *bool     `json:"onlineLyrics"`
 		SubtitleSync         *bool     `json:"subtitleSync"`
 		AdaptiveQuality      *bool     `json:"adaptiveQuality"`
@@ -528,6 +537,12 @@ func (s *Server) putSettings(w http.ResponseWriter, r *http.Request) {
 	}
 	if in.AdaptiveQuality != nil {
 		if err := s.Store.SetSetting(ctx, settingAdaptiveQuality, strconv.FormatBool(*in.AdaptiveQuality)); err != nil {
+			s.serverError(w, err)
+			return
+		}
+	}
+	if in.BoxOfficeReplace != nil {
+		if err := s.Store.SetSetting(ctx, settingReplaceDamaged, strconv.FormatBool(*in.BoxOfficeReplace)); err != nil {
 			s.serverError(w, err)
 			return
 		}

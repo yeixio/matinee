@@ -34,6 +34,12 @@ import (
 // for an admin, whatever the request setting says. Off by default.
 const settingAsksNeedApproval = "boxoffice_asks_need_approval"
 
+// settingReplaceDamaged is "true" when a video the background jobs find
+// damaged is reported to Box Office, which gets another copy (see
+// ReportUnreadable). Off by default: only an admin decides to have copies
+// replaced by themselves.
+const settingReplaceDamaged = "boxoffice_replace_damaged"
+
 // Box Office's features.
 const (
 	featureProgress = "progress"

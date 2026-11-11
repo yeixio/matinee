@@ -1609,7 +1609,9 @@
     "settings": {
       "approval": "Edisi lain dan salinan yang lebih baik selalu perlu persetujuan admin",
       "approvalDetail": "Meskipun permintaan langsung ditambahkan. Hanya dengan Box Office.",
-      "approvalReports": "Juga masalah yang dilaporkan, yang biasanya langsung diperbaiki Box Office."
+      "approvalReports": "Juga masalah yang dilaporkan, yang biasanya langsung diperbaiki Box Office.",
+      "replaceDamaged": "Ganti sendiri video yang rusak",
+      "replaceDamagedDetail": "Saat Matinee menemukan film atau episode yang rusak (membacanya terus melewati batas waktu padahal folder berbagi merespons, begitu pula lompatan di dalamnya), Matinee melaporkan masalah gambar dan Box Office mengambil salinan lain. Mati: video rusak hanya dicantumkan di kesehatan server."
     }
   }
 }

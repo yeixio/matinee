@@ -113,6 +113,9 @@ export type Settings = {
   holidayRows: boolean
   // Other editions and better copies from Box Office always wait for an admin.
   boxOfficeAsksNeedApproval?: boolean
+  // Videos the background jobs find damaged are reported to Box Office,
+  // which gets another copy by itself.
+  boxOfficeReplaceDamaged?: boolean
   // Look up songs' words on LRCLIB when there are none next to the song or in its tags.
   onlineLyrics: boolean
   // Line subtitle files up with the audio the first time a video plays with them.

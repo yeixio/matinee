@@ -1621,7 +1621,9 @@
     "settings": {
       "approval": "Andra utgåvor och bättre kopior kräver alltid godkännande av en admin",
       "approvalDetail": "Även när förfrågningar läggs till direkt. Bara med Box Office.",
-      "approvalReports": "Även rapporterade problem, som Box Office annars åtgärdar direkt."
+      "approvalReports": "Även rapporterade problem, som Box Office annars åtgärdar direkt.",
+      "replaceDamaged": "Ersätt skadade videor av sig själv",
+      "replaceDamagedDetail": "När Matinee hittar en skadad film eller ett skadat avsnitt (läsningen tar slut på tid gång på gång fast resursen svarar, och hopp i den också) rapporterar den ett bildproblem och Box Office hämtar en annan kopia. Av: skadade videor listas bara i serverhälsan."
     }
   }
 }

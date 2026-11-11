@@ -343,6 +343,40 @@ export function askLabel(r: TitleRequest): string {
   return "";
 }
 
+/** ReplaceDamagedSetting lets admins have Box Office replace videos Matinee finds damaged. Off by default. */
+export function ReplaceDamagedSetting() {
+  const { t } = useTranslation();
+  const qc = useQueryClient();
+  const { data: opts } = useRequestOptions();
+  const { data } = useQuery({ queryKey: ["settings"], queryFn: api.settings });
+  const save = useMutation({
+    mutationFn: api.saveSettings,
+    onSuccess: (s) => qc.setQueryData(["settings"], s),
+  });
+  if (!opts?.boxOffice?.fixMovies && !opts?.boxOffice?.fixShows) return null;
+  return (
+    <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-line/60 bg-surface/50 p-3">
+      <input
+        type="checkbox"
+        className="mt-1 accent-[var(--color-accent)]"
+        checked={!!data?.boxOfficeReplaceDamaged}
+        disabled={!data || save.isPending}
+        onChange={(e) =>
+          save.mutate({ boxOfficeReplaceDamaged: e.target.checked })
+        }
+      />
+      <span>
+        <span className="block text-sm font-medium">
+          {t("boxOffice.settings.replaceDamaged")}
+        </span>
+        <span className="block text-sm text-muted">
+          {t("boxOffice.settings.replaceDamagedDetail")}
+        </span>
+      </span>
+    </label>
+  );
+}
+
 /** AsksApprovalSetting lets admins make editions and better copies always wait for them. */
 export function AsksApprovalSetting() {
   const { t } = useTranslation();

@@ -1633,7 +1633,9 @@
     "settings": {
       "approval": "Le altre edizioni e le copie migliori richiedono sempre l’approvazione di un amministratore",
       "approvalDetail": "Anche quando le richieste vengono aggiunte subito. Solo con Box Office.",
-      "approvalReports": "Anche i problemi segnalati, che altrimenti Box Office risolve subito."
+      "approvalReports": "Anche i problemi segnalati, che altrimenti Box Office risolve subito.",
+      "replaceDamaged": "Sostituisci da sé i video danneggiati",
+      "replaceDamagedDetail": "Quando Matinee trova un film o un episodio danneggiato (la lettura va in timeout ripetutamente anche se la condivisione risponde, e così i salti al suo interno), segnala un problema all'immagine e Box Office prende un'altra copia. Disattivato: i video danneggiati sono solo elencati nello stato del server."
     }
   }
 }
