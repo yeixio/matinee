@@ -534,9 +534,17 @@ func (g *Generator) reading(ctx context.Context, path string, interval time.Dura
 
 // jumping jumps to each point in turn and takes the keyframe there, for
 // files where that reads much less than reading them through.
+//
+// One jump that times out is skipped, its picture standing in for the one
+// before: a big 4K file on a busy share can take a while to answer once.
+// Two in a row past the middle mean the file's end is damaged (a seek
+// index pointing past the end, or an end never written), and the pictures
+// so far are kept, the last one standing in for the rest, as reading does
+// for a file damaged near its end. Only a file that times out at its start
+// or twice in a row before its middle is given up on.
 func (g *Generator) jumping(ctx context.Context, path string, interval time.Duration, count int, tonemap string, add func(*frame) error) error {
 	var last *frame
-	failed, lead := 0, 0
+	failed, lead, stalls := 0, 0, 0
 	for i := range count {
 		at := time.Duration(i) * interval
 		fctx, cancel := context.WithTimeout(ctx, frameTimeout)
@@ -553,9 +561,20 @@ func (g *Generator) jumping(ctx context.Context, path string, interval time.Dura
 		if ctx.Err() != nil {
 			return ctx.Err()
 		}
+		timedOut := errors.Is(err, context.DeadlineExceeded)
+		if timedOut {
+			stalls++
+		} else {
+			stalls = 0
+		}
+		if timedOut && last != nil && stalls >= 2 && i >= count/2 {
+			g.Log.Info("thumbnails: the end of this video can't be read; keeping the pictures up to there", "path", path,
+				"at", at.Round(time.Second).String())
+			return nil // finish fills in the rest with the last picture
+		}
 		if err != nil || fr == nil {
 			failed++
-			if errors.Is(err, context.DeadlineExceeded) || (last == nil && failed >= 3) {
+			if (timedOut && (last == nil || stalls >= 2)) || (last == nil && failed >= 3) {
 				if err == nil || err == io.EOF {
 					err = errors.New("no pictures came out")
 				}
