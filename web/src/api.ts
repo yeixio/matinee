@@ -1534,11 +1534,15 @@ export interface GameFolder {
   files: { name: string; path: string }[]
 }
 
+/** The game host's desktop (Steam's screen with a mouse and keyboard), passed on by the server for admins. */
+export const gameHostDesktopUrl =
+  '/api/v1/games/host/desktop/web/index.html?path=api/v1/games/host/desktop/websockify&autoconnect=true&resize=remote&audio=false'
+
 export const api = {
   gameStreaming: () => request<GameStreaming>('GET', '/api/v1/games/streaming'),
   gameFiles: (path?: string) => request<GameFolder>('GET', `/api/v1/games/files${path ? `?path=${encodeURIComponent(path)}` : ''}`),
   gameHostGames: () => request<{ games: GameHostGame[] }>('GET', '/api/v1/games/host'),
-  playGame: (body: { path?: string; lagTest?: boolean; hostApp?: number; offer: string }) =>
+  playGame: (body: { path?: string; lagTest?: boolean; hostApp?: number; steam?: boolean; offer: string }) =>
     request<{ id: string; answer: string; system: string; analog?: boolean; width: number; height: number; aspect: number; fps: number }>(
       'POST',
       '/api/v1/games/play',

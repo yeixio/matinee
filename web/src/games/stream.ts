@@ -83,6 +83,8 @@ export interface StreamOptions {
   lagTest?: boolean
   /** A PC game on the game host, by its Steam app id. */
   hostApp?: number
+  /** Steam itself on the game host, in Big Picture. */
+  steam?: boolean
   /** Called once the server says which system plays the game. */
   onStart?: (game: { system: string; analog: boolean }) => void
   video: HTMLVideoElement
@@ -112,7 +114,7 @@ export async function startGame(o: StreamOptions): Promise<GameStream> {
   let analog = false
   try {
     const offer = pc.localDescription!.sdp
-    const res = o.itemId !== undefined ? await api.playGameItem(o.itemId, offer) : await api.playGame({ path: o.path, lagTest: o.lagTest, hostApp: o.hostApp, offer })
+    const res = o.itemId !== undefined ? await api.playGameItem(o.itemId, offer) : await api.playGame({ path: o.path, lagTest: o.lagTest, hostApp: o.hostApp, steam: o.steam, offer })
     id = res.id
     analog = !!res.analog
     o.onStart?.({ system: res.system, analog })

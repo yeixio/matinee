@@ -2,6 +2,8 @@ package gamehost
 
 import (
 	"context"
+	"io"
+	"net/http"
 	"net/http/httptest"
 	"os"
 	"os/exec"
@@ -213,4 +215,106 @@ func TestPlay(t *testing.T) {
 		time.Sleep(100 * time.Millisecond)
 	}
 	t.Fatal("still busy after the game ended")
+}
+
+func TestPlayBigPicture(t *testing.T) {
+	ffmpeg, err := exec.LookPath("ffmpeg")
+	if err != nil {
+		t.Skip("no ffmpeg")
+	}
+	dir := t.TempDir()
+	calls := filepath.Join(dir, "calls")
+	steam := filepath.Join(dir, "steam")
+	os.WriteFile(steam, []byte("#!/bin/sh\necho \"$@\" >> "+calls+"\n"), 0o755)
+	h := &Host{SteamRoot: dir, Token: "t", FFmpeg: ffmpeg, Steam: steam,
+		VideoInput: []string{"-re", "-f", "lavfi", "-i", "testsrc2=size=640x360:rate=30"},
+		AudioInput: []string{"-re", "-f", "lavfi", "-i", "sine=frequency=440:sample_rate=48000"}}
+	srv := httptest.NewServer(h.Handler())
+	defer srv.Close()
+	ctx, cancel := context.WithTimeout(context.Background(), 20*time.Second)
+	defer cancel()
+	conn, _, err := (&Client{URL: srv.URL, Token: "t"}).Play(ctx, BigPicture, 640, 360, 30)
+	if err != nil {
+		t.Fatal(err)
+	}
+	// Still playing after a few seconds with no game running: Big Picture
+	// lasts until the player leaves.
+	deadline := time.Now().Add(7 * time.Second)
+	for time.Now().Before(deadline) {
+		if _, _, err := conn.Read(ctx); err != nil {
+			t.Fatalf("stream ended: %v", err)
+		}
+	}
+	conn.Close(websocket.StatusNormalClosure, "")
+	for i := 0; i < 50 && h.busy.Load(); i++ {
+		time.Sleep(100 * time.Millisecond)
+	}
+	b, _ := os.ReadFile(calls)
+	if got := string(b); got != "steam://open/bigpicture\nsteam://close/bigpicture\n" {
+		t.Fatalf("steam was run with %q", got)
+	}
+}
+
+func TestDesktop(t *testing.T) {
+	// The desktop: a page, and a socket that echoes.
+	desk := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.Header.Get("Cookie") != "" || r.Header.Get("Authorization") != "" {
+			t.Errorf("credentials reached the desktop: %v", r.Header)
+		}
+		if r.URL.Path == "/websockify" {
+			c, err := websocket.Accept(w, r, nil)
+			if err != nil {
+				return
+			}
+			defer c.CloseNow()
+			typ, b, err := c.Read(r.Context())
+			if err == nil {
+				c.Write(r.Context(), typ, b)
+			}
+			return
+		}
+		w.Write([]byte("page " + r.URL.Path + "?" + r.URL.RawQuery))
+	}))
+	defer desk.Close()
+	host := httptest.NewServer((&Host{Token: "t", Desktop: desk.URL}).Handler())
+	defer host.Close()
+	c := &Client{URL: host.URL, Token: "t"}
+	// Matinee's side, passing on what comes after /desktop/.
+	matinee := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		c.Desktop(strings.TrimPrefix(r.URL.Path, "/desktop/")).ServeHTTP(w, r)
+	}))
+	defer matinee.Close()
+
+	if resp, err := http.Get(host.URL + DesktopPath + "web/index.html"); err != nil || resp.StatusCode != http.StatusUnauthorized {
+		t.Fatalf("desktop without the token: %v %v", resp, err)
+	}
+	req, _ := http.NewRequest("GET", matinee.URL+"/desktop/web/index.html?autoconnect=true", nil)
+	req.Header.Set("Cookie", "matinee_session=secret")
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		t.Fatal(err)
+	}
+	b, _ := io.ReadAll(resp.Body)
+	resp.Body.Close()
+	if string(b) != "page /web/index.html?autoconnect=true" {
+		t.Fatalf("page: %d %q", resp.StatusCode, b)
+	}
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+	ws, _, err := websocket.Dial(ctx, "ws"+strings.TrimPrefix(matinee.URL, "http")+"/desktop/websockify", nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer ws.CloseNow()
+	ws.Write(ctx, websocket.MessageBinary, []byte("hi"))
+	if _, b, err := ws.Read(ctx); err != nil || string(b) != "hi" {
+		t.Fatalf("socket: %q %v", b, err)
+	}
+
+	// No desktop: 404.
+	none := httptest.NewServer((&Host{}).Handler())
+	defer none.Close()
+	if resp, _ := http.Get(none.URL + DesktopPath); resp == nil || resp.StatusCode != http.StatusNotFound {
+		t.Fatal("desktop without one")
+	}
 }

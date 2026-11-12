@@ -1245,6 +1245,15 @@ paths:
                         size: { type: integer, description: Bytes on disk. }
         "404": { description: No game host is set up. }
         "502": { description: The game host didn't answer. }
+  /games/host/desktop/{path}:
+    get:
+      summary: The game host's desktop (preview)
+      description: "Admins only. Passes on the game host's desktop page (such as noVNC in a Steam container) and its WebSocket, for signing in to Steam and installing games. Open web/index.html?path=api/v1/games/host/desktop/websockify&autoconnect=true&resize=remote."
+      parameters:
+        - { name: path, in: path, required: true, schema: { type: string } }
+      responses:
+        "200": { description: The desktop's page or file. }
+        "404": { description: No game host, or it has no desktop. }
   /games/play:
     post:
       summary: Start playing a game on the server, streamed over WebRTC (admins only)
@@ -1264,6 +1273,7 @@ paths:
                 path: { type: string, description: The game file, or a zip holding it. }
                 lagTest: { type: boolean, description: Play the built-in lag test instead of a game. }
                 hostApp: { type: integer, description: "Play this PC game on the game host instead (preview), by its Steam app id; see GET /games/host." }
+                steam: { type: boolean, description: "Play Steam itself on the game host, full screen in Big Picture, where the player picks games with the controller (preview)." }
                 offer: { type: string, description: The player's SDP offer. }
                 direct: { type: boolean, description: "With no offer: the WebSocket stream instead of WebRTC (see POST /items/{id}/game)." }
       responses:
