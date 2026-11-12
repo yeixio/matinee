@@ -5459,6 +5459,7 @@ components:
         series: { type: array, items: { type: string }, description: Books in these series. }
         narrator: { type: array, items: { type: string }, description: Books any of these people narrate. }
         label: { type: array, items: { type: string }, description: "Record labels: albums on them, artists with albums on them, and their songs." }
+        platform: { type: array, items: { type: string }, description: "Games for any of these systems, such as Super Nintendo." }
         sort: { type: string, enum: [title, added, released, year, rating, myRating, runtime, lastPlayed, series], default: title, description: "series is a book's place in its series; myRating is the person's own rating." }
         order: { type: string, enum: [asc, desc], description: Title and runtime run low to high by default, the others high to low. Titles missing the field go last. }
         limit: { type: integer }
@@ -5485,6 +5486,7 @@ components:
         languages: { type: array, items: { $ref: "#/components/schemas/FilterValue" } }
         certifications: { type: array, items: { $ref: "#/components/schemas/FilterValue" } }
         collections: { type: array, items: { $ref: "#/components/schemas/FilterValue" } }
+        platforms: { type: array, items: { $ref: "#/components/schemas/FilterValue" }, description: The systems of a Games library's games. }
         directors: { type: array, items: { $ref: "#/components/schemas/FilterPerson" }, description: The most credited 30. }
         cast: { type: array, items: { $ref: "#/components/schemas/FilterPerson" }, description: The most credited 30. }
         yearMin: { type: integer }

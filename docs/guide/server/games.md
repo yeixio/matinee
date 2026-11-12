@@ -43,6 +43,22 @@ For PlayStation games of more than one disc, keep an `.m3u` list beside the disc
 
 To recognize games Matinee downloads the [libretro database](https://github.com/libretro/libretro-database)'s lists for each system once and keeps them for a month, in `games/lists` in Matinee's data folder; box art comes from [libretro's thumbnails](https://thumbnails.libretro.com). Without internet, games are named by their files and have no box art. Nothing about your games is sent anywhere.
 
+<!-- since: v0.2.6 -->
+### Box art
+
+Matinee tries hard to find a picture for every game, in this order:
+
+1. **Your own picture.** An image named like the game beside it, such as `Tetris (World).png` next to `Tetris (World).gb`, or in a folder other game apps and scrapers keep pictures in: `boxart`, `covers`, `images`, `media/box2dfront`, `downloaded_media/covers` and the like. Names ending in `-image`, `-boxart` or `-cover` count too.
+2. **libretro's box art** for the game, or the same game's from another region (the USA's, then the world's, Europe's and Japan's) when yours has none. Names that differ only by a "The", an "&" or punctuation still match.
+3. **libretro's title screen**, or failing that a screenshot, when there's no box art at all.
+
+To pick from what libretro has, Matinee keeps its list of pictures for each system for a month, in `games/lists/art`.
+
+### Picking a system
+
+In a Games library with games for more than one system, the systems sit above the games: pick one to see only its games, or **All**. **Filters** has them too, to pick several.
+<!-- /since -->
+
 ## Playing a game
 
 1. Connect a controller to the computer and press any button on it, so the browser sees it. Xbox, PlayStation and most other controllers work. Without one, the keyboard works: arrow keys, **Z** and **X** for B and A, **A** and **S** for Y and X, **Enter** for Start.
