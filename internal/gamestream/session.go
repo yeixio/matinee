@@ -408,10 +408,11 @@ func (s *Session) input(reply func([]byte), b []byte) {
 // Stop ends the game, keeping its save.
 func (s *Session) Stop() {
 	s.once.Do(func() {
-		close(s.done)
+		// Unlisted first, so a game counts as gone once Done says so.
 		s.m.mu.Lock()
 		delete(s.m.sessions, s.ID)
 		s.m.mu.Unlock()
+		close(s.done)
 		if s.cancel != nil {
 			s.cancel()
 		}
