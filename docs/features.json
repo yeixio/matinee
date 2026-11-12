@@ -209,6 +209,19 @@
               }
             },
             {
+              "name": "Anime episodes numbered from the first, in aired, DVD or absolute order",
+              "doc": "/docs/getting-started/organizing-media/",
+              "since": "v0.2.4",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
               "name": "Details from .nfo files",
               "doc": "/docs/getting-started/organizing-media/",
               "since": "v0.2.4",

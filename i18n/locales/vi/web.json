@@ -1125,7 +1125,12 @@
     "rating": "Điểm trên 10",
     "locked": "Những gì bạn sửa ở đây sẽ giữ nguyên như bạn viết: quét và tra cứu trực tuyến không động đến.",
     "undo": "Hoàn tác thay đổi của tôi",
-    "fromFile": "Một số thông tin lấy từ tệp .nfo bên cạnh."
+    "fromFile": "Một số thông tin lấy từ tệp .nfo bên cạnh.",
+    "order": "Thứ tự tập",
+    "orderAired": "Theo thứ tự phát sóng",
+    "orderDvd": "Bộ DVD và Blu-ray",
+    "orderAbsolute": "Một mùa dài, đánh số từ tập đầu",
+    "orderHelp": "Dành cho các tập được đánh số từ tập đầu, như Phim - 0123."
   },
   "import": {
     "title": "Nhập từ máy chủ media khác",

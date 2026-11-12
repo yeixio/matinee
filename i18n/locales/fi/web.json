@@ -1129,7 +1129,12 @@
     "rating": "Arvio asteikolla 10",
     "locked": "Tässä muuttamasi pysyy kirjoittamassasi muodossa: tarkistukset ja verkkohaut eivät koske siihen.",
     "undo": "Kumoa muutokseni",
-    "fromFile": "Osa näistä tulee vieressä olevasta .nfo-tiedostosta."
+    "fromFile": "Osa näistä tulee vieressä olevasta .nfo-tiedostosta.",
+    "order": "Jaksojen järjestys",
+    "orderAired": "Esitysjärjestyksessä",
+    "orderDvd": "DVD- ja Blu-ray-boksit",
+    "orderAbsolute": "Yksi pitkä kausi, numeroitu ensimmäisestä",
+    "orderHelp": "Jaksoille, jotka on numeroitu ensimmäisestä alkaen, kuten Sarja - 0123."
   },
   "import": {
     "title": "Tuo toisesta mediapalvelimesta",

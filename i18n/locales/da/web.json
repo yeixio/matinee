@@ -1129,7 +1129,12 @@
     "rating": "Bedømmelse ud af 10",
     "locked": "Det, du ændrer her, forbliver, som du skrev det: scanninger og opslag online rører det ikke.",
     "undo": "Fortryd mine ændringer",
-    "fromFile": "Noget af dette kommer fra en .nfo-fil ved siden af."
+    "fromFile": "Noget af dette kommer fra en .nfo-fil ved siden af.",
+    "order": "Afsnitsrækkefølge",
+    "orderAired": "Som de blev sendt",
+    "orderDvd": "DVD- og Blu-ray-bokse",
+    "orderAbsolute": "Én lang sæson, nummereret fra det første",
+    "orderHelp": "Til afsnit nummereret fra det første, som Serie - 0123."
   },
   "import": {
     "title": "Importér fra en anden medieserver",

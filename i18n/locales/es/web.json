@@ -1133,7 +1133,12 @@
     "rating": "Valoración sobre 10",
     "locked": "Lo que cambies aquí se queda como lo escribiste: los escaneos y las búsquedas en línea no lo tocan.",
     "undo": "Deshacer mis cambios",
-    "fromFile": "Parte de esto viene de un archivo .nfo junto a él."
+    "fromFile": "Parte de esto viene de un archivo .nfo junto a él.",
+    "order": "Orden de los episodios",
+    "orderAired": "Según su emisión",
+    "orderDvd": "Ediciones en DVD y Blu-ray",
+    "orderAbsolute": "Una sola temporada larga, numerada desde el primero",
+    "orderHelp": "Para episodios numerados desde el primero, como Serie - 0123."
   },
   "import": {
     "title": "Importar desde otro servidor multimedia",

@@ -1129,7 +1129,12 @@
     "rating": "10 üzerinden puan",
     "locked": "Burada değiştirdiğiniz, yazdığınız gibi kalır: taramalar ve çevrimiçi aramalar ona dokunmaz.",
     "undo": "Düzenlemelerimi geri al",
-    "fromFile": "Bunların bir kısmı yanındaki .nfo dosyasından gelir."
+    "fromFile": "Bunların bir kısmı yanındaki .nfo dosyasından gelir.",
+    "order": "Bölüm sırası",
+    "orderAired": "Yayınlandığı gibi",
+    "orderDvd": "DVD ve Blu-ray setleri",
+    "orderAbsolute": "Tek uzun sezon, ilkinden itibaren numaralı",
+    "orderHelp": "İlkinden itibaren numaralanmış bölümler için, örneğin Dizi - 0123."
   },
   "import": {
     "title": "Başka bir medya sunucusundan içe aktar",

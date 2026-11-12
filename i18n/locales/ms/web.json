@@ -1125,7 +1125,12 @@
     "rating": "Penilaian daripada 10",
     "locked": "Apa yang anda ubah di sini kekal seperti yang anda tulis: imbasan dan carian dalam talian tidak menyentuhnya.",
     "undo": "Buat asal suntingan saya",
-    "fromFile": "Sebahagiannya datang daripada fail .nfo di sebelahnya."
+    "fromFile": "Sebahagiannya datang daripada fail .nfo di sebelahnya.",
+    "order": "Susunan episod",
+    "orderAired": "Seperti yang disiarkan",
+    "orderDvd": "Set DVD dan Blu-ray",
+    "orderAbsolute": "Satu musim panjang, bernombor dari yang pertama",
+    "orderHelp": "Untuk episod yang bernombor dari yang pertama, seperti Siri - 0123."
   },
   "import": {
     "title": "Import daripada pelayan media lain",

@@ -113,8 +113,14 @@ func (f *Fetcher) seasonDetails(ctx context.Context, d Detailer, it store.Item) 
 	if err != nil {
 		return err
 	}
+	// Episodes shown in another order than they aired are elsewhere in
+	// TMDB's seasons; their own details would be another episode's.
+	moved, err := f.Store.MovedEpisodes(ctx, it.ID)
+	if err != nil {
+		return err
+	}
 	for _, ep := range kids {
-		if ep.IndexNumber == nil {
+		if ep.IndexNumber == nil || moved[ep.ID] {
 			continue
 		}
 		if eu, ok := episodes[*ep.IndexNumber]; ok {

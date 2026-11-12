@@ -220,6 +220,10 @@ func (tv) Index(ctx context.Context, st *store.Store, f File) (store.Item, error
 	default:
 		it.Title = "Episode " + strconv.Itoa(ep.Episode)
 	}
+	if ep.Absolute > 0 {
+		// Put in its season once the show is matched (see store.PlaceEpisode).
+		it.Absolute, it.AbsoluteCompact = &ep.Absolute, ep.Compact
+	}
 	it.Poster = findArt(filepath.Dir(f.Path), stem(f.Path)+"-thumb.jpg", stem(f.Path)+".jpg")
 	return it, nil
 }

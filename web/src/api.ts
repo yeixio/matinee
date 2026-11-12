@@ -1004,7 +1004,14 @@ export type ItemDetail = Item & {
   // Videos: the sound and subtitles to start with, for this person. Left out
   // by servers from before it.
   trackPick?: TrackPick
+  // Shows whose files are named by each episode's number from the first
+  // ("Show - 0123"): the order those are put in seasons by.
+  episodeOrder?: EpisodeOrder
+  // Episodes named that way: the number.
+  absolute?: number
 }
+
+export type EpisodeOrder = 'aired' | 'dvd' | 'absolute'
 
 /**
  * The tracks a video starts with, worked out by the server so every player
@@ -1723,6 +1730,7 @@ export const api = {
   clearMatch: (id: number) => request<Item>('DELETE', `/api/v1/items/${id}/match`),
   editDetails: (id: number, edit: DetailsEdit) => request<Item>('PUT', `/api/v1/items/${id}/details`, edit),
   undoDetailEdits: (id: number) => request<Item>('DELETE', `/api/v1/items/${id}/details`),
+  setEpisodeOrder: (id: number, order: EpisodeOrder) => request<void>('PUT', `/api/v1/items/${id}/episode-order`, { order }),
   setMetadataMode: (id: number, mode: MetadataMode) => request<void>('PUT', `/api/v1/libraries/${id}/metadata-mode`, { mode }),
   refreshItem: (id: number) => request<Item>('POST', `/api/v1/items/${id}/refresh`),
   // Bringing history over from another media server (Settings → Import).

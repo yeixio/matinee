@@ -32,6 +32,16 @@ var (
 	episodeWordRe = regexp.MustCompile(`(?i)(?:^|[\s._\-\[(])(?:episode|ep|e)[\s._-]*(\d{1,4})(?:$|[\s._\-\])])`)
 	// "04 - Infection", "04", "4." at the start of a file in a season folder.
 	leadingNumberRe = regexp.MustCompile(`^(\d{1,3})(?:$|[\s._\-\])])`)
+	// "Show - 0123", "[Group] Show - 12v2 (1080p)": an episode numbered from
+	// the show's first, as anime often is, or "Show - 104" for season 1
+	// episode 4. The number can't run into a resolution such as 1080p.
+	absoluteRe = regexp.MustCompile(`^(.*?\S)\s+-\s+(?:#|ep?\s*)?(\d{1,4})(?:v\d)?(?:$|[\s._\-\[(])`)
+	// Release groups and checksums in brackets, as fansubs name files.
+	bracketsRe = regexp.MustCompile(`^\s*(?:\[[^\]]*\]\s*)+`)
+	versionRe  = regexp.MustCompile(`^v\d`)
+	tagsRe     = regexp.MustCompile(`\[[^\]]*\]|\([^)]*\)`)
+	// "Episode 123", "Ep 123" in a file outside a season folder.
+	absoluteWordRe = regexp.MustCompile(`(?i)(?:^|[\s._\-\[(])(?:episode|ep)[\s._-]*(\d{1,4})(?:$|[\s._\-\])])`)
 	// A plausible release year; boundaries are checked in parseMovieName.
 	yearRe = regexp.MustCompile(`(?:19|20)\d{2}`)
 	// Words that mark where the title ends in release-style names.
@@ -122,6 +132,14 @@ type EpisodeInfo struct {
 	// ShowIDs are the ids in the show's folder name, as in
 	// "Breaking Bad {tvdb-81189}".
 	ShowIDs mediaid.IDs
+	// Absolute is the episode's number counted from the show's first, when
+	// that's how the file is named ("Show - 0123"). The scanner files it as
+	// season 1, episode Absolute until the show is matched online; then
+	// it moves to the season it's in (see metadata.PlaceEpisodes).
+	// Compact says the number might instead be a season and an episode
+	// run together, as 104 for season 1, episode 4.
+	Absolute int
+	Compact  bool
 	// AirDate is the day a daily show's episode aired, as 2024-03-15, when
 	// that's how it's named. Its season is the year, and its episode the
 	// month and day as one number (315), so a year's episodes sort by date.
@@ -141,7 +159,9 @@ func DailyEpisode(season, episode int) string {
 // ParseEpisode understands "Show/Season 1/Show - S01E02 - Title.mkv",
 // release-style "Show.Name.S01E02.720p.mkv", daily shows named by date
 // ("Show/2024-03-15.mkv"), and, inside a season folder, names without a
-// season ("Season 2/04 - Title.mkv", "Season 2/Episode 4.mkv"). The show
+// season ("Season 2/04 - Title.mkv", "Season 2/Episode 4.mkv"), and
+// outside one, names numbered from the show's first episode ("Show -
+// 0123.mkv", see EpisodeInfo.Absolute). The show
 // name comes from the library folder layout when it's there, since file
 // names are often abbreviated.
 func ParseEpisode(libraryRoot, path string) EpisodeInfo {
@@ -188,10 +208,18 @@ func ParseEpisode(libraryRoot, path string) EpisodeInfo {
 			info = EpisodeInfo{OK: true, Season: season}
 			info.Episode, _ = strconv.Atoi(name[m[2]:m[3]])
 			rest = name[m[3]:]
+		} else if m := absoluteRe.FindStringSubmatchIndex(bracketsRe.ReplaceAllString(name, "")); m != nil {
+			// "Season 2/Show - 05.mkv" is episode 5 of season 2.
+			trimmed := bracketsRe.ReplaceAllString(name, "")
+			info = EpisodeInfo{OK: true, Season: season, Show: cleanTitle(mediaid.Strip(trimmed[m[2]:m[3]]))}
+			info.Episode, _ = strconv.Atoi(trimmed[m[4]:m[5]])
+			rest = trimmed[m[5]:]
 		}
 		if info.OK && info.Episode == 0 && season != 0 {
 			info = EpisodeInfo{}
 		}
+	} else {
+		info, rest = parseAbsolute(name)
 	}
 	if !info.OK {
 		return info
@@ -207,6 +235,33 @@ func ParseEpisode(libraryRoot, path string) EpisodeInfo {
 		info.Show = "Unknown Show"
 	}
 	return info
+}
+
+// parseAbsolute reads an episode named by its number counted from the
+// show's first: "[Group] Show - 0123 [1080p]", "Show - 12v2", "Show
+// Episode 123". A year is never read as one.
+func parseAbsolute(name string) (EpisodeInfo, string) {
+	brackets := bracketsRe.FindString(name)
+	trimmed := name[len(brackets):]
+	var show, num, rest string
+	if m := absoluteRe.FindStringSubmatchIndex(trimmed); m != nil {
+		show, num, rest = trimmed[m[2]:m[3]], trimmed[m[4]:m[5]], trimmed[m[5]:]
+	} else if m := absoluteWordRe.FindStringSubmatchIndex(trimmed); m != nil {
+		show, num, rest = trimmed[:m[0]], trimmed[m[2]:m[3]], trimmed[m[3]:]
+	} else {
+		return EpisodeInfo{}, ""
+	}
+	// Fansubs end the name with the version, resolution and a checksum.
+	rest = strings.TrimSpace(tagsRe.ReplaceAllString(versionRe.ReplaceAllString(rest, ""), " "))
+	n, _ := strconv.Atoi(num)
+	if n == 0 || len(num) == 4 && yearRe.MatchString(num) {
+		return EpisodeInfo{}, ""
+	}
+	info := EpisodeInfo{OK: true, Show: cleanTitle(mediaid.Strip(show)), Season: 1, Episode: n, Absolute: n}
+	// 104 might be season 1, episode 4, unless it's written 0104 or the
+	// file is a fansub's, which number from the first.
+	info.Compact = len(num) == 3 && brackets == "" && n%100 != 0
+	return info, rest
 }
 
 // seasonOf reads a season folder's number: "Season 2", "S02", "Staffel 2",
