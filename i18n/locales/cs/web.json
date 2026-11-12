@@ -717,7 +717,8 @@
         "tv": "Seriály",
         "music": "Hudba",
         "audiobooks": "Audioknihy",
-        "podcasts": "Podcasty"
+        "podcasts": "Podcasty",
+        "games": "Hry"
       },
       "type": "Typ",
       "folders": "Složky",
@@ -1702,6 +1703,14 @@
       "decode": "Dekódování",
       "fps": "Snímky za sekundu"
     },
-    "pickGameHintAny": "Hry, které vlastníte: soubor hry nebo zip, který ho obsahuje."
+    "pickGameHintAny": "Hry, které vlastníte: soubor hry nebo zip, který ho obsahuje.",
+    "fact": {
+      "system": "Systém",
+      "region": "Region",
+      "publisher": "Vydavatel",
+      "players": "Hráči",
+      "genre": "Žánr"
+    },
+    "tapToPlay": "Stiskněte pro hraní"
   }
 }

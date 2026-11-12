@@ -709,7 +709,8 @@
         "tv": "TV shows",
         "music": "Music",
         "audiobooks": "Audiobooks",
-        "podcasts": "Podcasts"
+        "podcasts": "Podcasts",
+        "games": "Games"
       },
       "type": "Type",
       "folders": "Folders",
@@ -1678,6 +1679,14 @@
       "decode": "Decoding",
       "fps": "Frames a second"
     },
-    "pickGameHintAny": "Games you own: a game file, or a zip holding one."
+    "pickGameHintAny": "Games you own: a game file, or a zip holding one.",
+    "fact": {
+      "system": "System",
+      "region": "Region",
+      "publisher": "Publisher",
+      "players": "Players",
+      "genre": "Genre"
+    },
+    "tapToPlay": "Press to play"
   }
 }

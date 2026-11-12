@@ -1366,6 +1366,9 @@ type itemView struct {
 	// Versions are the files of a movie or episode with more than one,
 	// the title's own first; absent when it has only one.
 	Versions []versionView `json:"versions,omitempty"`
+	// StreamedGame says the item is a game this server plays itself and
+	// streams to the app (POST /items/{id}/game).
+	StreamedGame bool `json:"streamedGame,omitempty"`
 	// TrackPick is which sound and subtitles a video starts with, for this
 	// person (see trackpick.go).
 	TrackPick *trackPickView `json:"trackPick,omitempty"`
@@ -1427,6 +1430,9 @@ func (s *Server) getItem(w http.ResponseWriter, r *http.Request) {
 				v.MediaInfo = &c
 			}
 		}
+	}
+	if it.Kind == "game" && it.Path != "" && s.Games != nil {
+		_, v.StreamedGame = s.Games.SystemFor(it.Path)
 	}
 	if it.Playable && it.VideoCodec != "" {
 		v.Subtitles = s.subtitleTracks(r.Context(), it)

@@ -281,7 +281,8 @@ function AddLibrary({ onDone }: { onDone: () => void }) {
   const qc = useQueryClient()
   // Plugins can add kinds of their own, with their own labels.
   const { data: fromServer } = useQuery({ queryKey: ['libraryKinds'], queryFn: api.libraryKinds, retry: false })
-  const kinds = [...builtInKinds, ...(fromServer ?? []).filter((k) => k.plugin)]
+  // Games is built in but only offered by servers that have it.
+  const kinds = [...builtInKinds, ...(fromServer ?? []).filter((k) => k.plugin || k.name === 'games')]
   const [kind, setKind] = useState('movies')
   const kindName = (name: string) => kinds.find((k) => k.name === name)?.label ?? i18n.t(`settings.libraries.kind.${name}`)
   const description = kinds.find((k) => k.name === kind)?.description

@@ -709,7 +709,8 @@
         "tv": "Tv-series",
         "music": "Muziek",
         "audiobooks": "Luisterboeken",
-        "podcasts": "Podcasts"
+        "podcasts": "Podcasts",
+        "games": "Games"
       },
       "type": "Type",
       "folders": "Mappen",
@@ -1678,6 +1679,14 @@
       "decode": "Decoderen",
       "fps": "Beelden per seconde"
     },
-    "pickGameHintAny": "Games die je bezit: een gamebestand of een zip met een game erin."
+    "pickGameHintAny": "Games die je bezit: een gamebestand of een zip met een game erin.",
+    "fact": {
+      "system": "Systeem",
+      "region": "Regio",
+      "publisher": "Uitgever",
+      "players": "Spelers",
+      "genre": "Genre"
+    },
+    "tapToPlay": "Druk om te spelen"
   }
 }

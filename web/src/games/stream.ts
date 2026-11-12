@@ -78,6 +78,8 @@ export interface GameStream {
 
 export interface StreamOptions {
   path?: string
+  /** A game in a Games library, played by its item instead of its path. */
+  itemId?: number
   lagTest?: boolean
   /** Called once the server says which system plays the game. */
   onStart?: (game: { system: string; analog: boolean }) => void
@@ -107,7 +109,8 @@ export async function startGame(o: StreamOptions): Promise<GameStream> {
   let id = ''
   let analog = false
   try {
-    const res = await api.playGame({ path: o.path, lagTest: o.lagTest, offer: pc.localDescription!.sdp })
+    const offer = pc.localDescription!.sdp
+    const res = o.itemId !== undefined ? await api.playGameItem(o.itemId, offer) : await api.playGame({ path: o.path, lagTest: o.lagTest, offer })
     id = res.id
     analog = !!res.analog
     o.onStart?.({ system: res.system, analog })

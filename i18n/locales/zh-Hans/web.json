@@ -705,7 +705,8 @@
         "tv": "电视剧",
         "music": "音乐",
         "audiobooks": "有声书",
-        "podcasts": "播客"
+        "podcasts": "播客",
+        "games": "游戏"
       },
       "type": "类型",
       "folders": "文件夹",
@@ -1666,6 +1667,14 @@
       "decode": "解码",
       "fps": "每秒帧数"
     },
-    "pickGameHintAny": "你拥有的游戏：游戏文件，或包含它的 zip。"
+    "pickGameHintAny": "你拥有的游戏：游戏文件，或包含它的 zip。",
+    "fact": {
+      "system": "平台",
+      "region": "地区",
+      "publisher": "发行商",
+      "players": "玩家人数",
+      "genre": "类型"
+    },
+    "tapToPlay": "按下开始游戏"
   }
 }

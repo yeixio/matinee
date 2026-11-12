@@ -290,5 +290,6 @@
   "no_emulator_on_this_server_plays_that_game": "geen emulator op deze server speelt die game",
   "cant_find_that_emulator": "kan die emulator niet vinden",
   "couldnt_save_the_emulator": "kan de emulator niet opslaan",
-  "that_file_isnt_an_emulator_this_server_can_run_reason": "dat bestand is geen emulator die deze server kan uitvoeren: {{reason}}"
+  "that_file_isnt_an_emulator_this_server_can_run_reason": "dat bestand is geen emulator die deze server kan uitvoeren: {{reason}}",
+  "not_a_game": "geen game"
 }

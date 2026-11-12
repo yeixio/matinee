@@ -705,7 +705,8 @@
         "tv": "Chương trình TV",
         "music": "Nhạc",
         "audiobooks": "Sách nói",
-        "podcasts": "Podcast"
+        "podcasts": "Podcast",
+        "games": "Trò chơi"
       },
       "type": "Loại",
       "folders": "Thư mục",
@@ -1666,6 +1667,14 @@
       "decode": "Giải mã",
       "fps": "Khung hình mỗi giây"
     },
-    "pickGameHintAny": "Trò chơi bạn sở hữu: một tệp trò chơi, hoặc một tệp zip chứa nó."
+    "pickGameHintAny": "Trò chơi bạn sở hữu: một tệp trò chơi, hoặc một tệp zip chứa nó.",
+    "fact": {
+      "system": "Hệ máy",
+      "region": "Khu vực",
+      "publisher": "Nhà phát hành",
+      "players": "Người chơi",
+      "genre": "Thể loại"
+    },
+    "tapToPlay": "Nhấn để chơi"
   }
 }

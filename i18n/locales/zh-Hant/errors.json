@@ -290,5 +290,6 @@
   "no_emulator_on_this_server_plays_that_game": "此伺服器上沒有能執行該遊戲的模擬器",
   "cant_find_that_emulator": "找不到該模擬器",
   "couldnt_save_the_emulator": "無法儲存模擬器",
-  "that_file_isnt_an_emulator_this_server_can_run_reason": "該檔案不是這台伺服器能執行的模擬器：{{reason}}"
+  "that_file_isnt_an_emulator_this_server_can_run_reason": "該檔案不是這台伺服器能執行的模擬器：{{reason}}",
+  "not_a_game": "不是遊戲"
 }

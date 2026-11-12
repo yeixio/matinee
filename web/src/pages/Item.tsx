@@ -316,15 +316,17 @@ function EpisodeList({ items }: { items: Item[] }) {
   )
 }
 
-// Facts are labelled lines a plugin found for an item of its kinds, such as
-// who made a game.
+// Facts are labelled lines found for an item, such as who made a game: by a
+// plugin, labelled in its words, or by a Games library, labelled with a key
+// translated here.
 function Facts({ item }: { item: Item }) {
+  const { t } = useTranslation()
   if (!item.facts?.length) return null
   return (
     <dl className="grid max-w-3xl grid-cols-[auto_1fr] gap-x-6 gap-y-1 text-sm">
       {item.facts.map((f, i) => (
         <div key={i} className="contents">
-          <dt className="text-muted">{f.label}</dt>
+          <dt className="text-muted">{t(`games.fact.${f.label}`, { defaultValue: f.label })}</dt>
           <dd className="text-text/85">{f.value}</dd>
         </div>
       ))}

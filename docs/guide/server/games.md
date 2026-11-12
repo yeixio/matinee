@@ -1,6 +1,6 @@
 ---
 title: Games
-description: Play games on your Matinee server and stream them to a player with a controller, with the built-in emulators or your own. A preview for admins, with a lag test.
+description: Play games on your Matinee server and stream them to a player with a controller. A Games library with box art for everyone, built-in emulators or your own, and a lag test.
 since: v0.2.4
 sidebar:
   order: 11
@@ -8,7 +8,7 @@ sidebar:
 
 Matinee can play games for you on the server and stream them to your screen, the same way it streams a film. You connect a controller, pick a game and play: the emulator, its settings and the video all stay on the server, so there's nothing to install or set up on the device you play on.
 
-This is a **preview**. For now only admins can play, in the web player, and you pick the game from a folder. A Games library with box art for everyone, and playing in the phone and TV apps, come next ([#395](https://github.com/yeixio/matinee/issues/395), [#394](https://github.com/yeixio/matinee/issues/394)).
+This is a **preview**. For now you play in the web player; playing in the phone and TV apps comes next ([#394](https://github.com/yeixio/matinee/issues/394)).
 
 ## What it plays
 
@@ -30,12 +30,26 @@ The PlayStation emulator doesn't need the console's BIOS, but plays more games, 
 
 Games with a battery save, such as RPGs, keep their saves on the server, one for each person, and pick up where you saved next time.
 
+## A Games library
+
+Add your games as a library and everyone you share it with can browse them with box art and play them, like films.
+
+1. In **Settings → Libraries** press **Add library**, pick **Games** and add the folder your games are in.
+2. Matinee finds each game and fills in its name, year, system, region, publisher, number of players and genre, and its box art.
+
+Games can be named and sorted any way you like. Matinee tells the system by the folder a game is in when the folder is named for it (`Game Boy`, `gba`, `snes`, `Mega Drive`, `PlayStation` and so on), otherwise by what's in a zip or the file's ending. It then recognizes the game by its contents, so even `tetris copy.gb` is found as Tetris (World) (Rev 1), and falls back to the file's name for games it doesn't know, such as homebrew.
+
+For PlayStation games of more than one disc, keep an `.m3u` list beside the discs: the game shows once, and you change discs in the game. Arcade sets are left to the [Arcade](/docs/server/arcade/) library for now.
+
+To recognize games Matinee downloads the [libretro database](https://github.com/libretro/libretro-database)'s lists for each system once and keeps them for a month, in `games/lists` in Matinee's data folder; box art comes from [libretro's thumbnails](https://thumbnails.libretro.com). Without internet, games are named by their files and have no box art. Nothing about your games is sent anywhere.
+
 ## Playing a game
 
-1. Open **Settings → Streaming → Games** and press **Try playing a game**.
-2. Connect a controller to the computer and press any button on it, so the browser sees it. Xbox, PlayStation and most other controllers work. Without one, the keyboard works: arrow keys, **Z** and **X** for B and A, **A** and **S** for Y and X, **Enter** for Start.
-3. Find the game in the folder list and click it. It opens full screen.
-4. Close it with the **×** at the top. A battery save is kept.
+1. Connect a controller to the computer and press any button on it, so the browser sees it. Xbox, PlayStation and most other controllers work. Without one, the keyboard works: arrow keys, **Z** and **X** for B and A, **A** and **S** for Y and X, **Enter** for Start.
+2. Open a game in your Games library and press **Play**. It opens full screen.
+3. Close it with the **×** at the top. A battery save is kept.
+
+Admins can also play any game file on the server without adding it to a library: in **Settings → Streaming → Games** press **Try playing a game** and find it in the folder list.
 
 The controller buttons go by where they sit, not by their letters: the bottom face button is B and the right one is A, as on the consoles. For the N64 the left stick is the N64's stick and the right stick its C buttons; on the keyboard the arrow keys move the stick.
 

@@ -290,5 +290,6 @@
   "no_emulator_on_this_server_plays_that_game": "ezen a szerveren egy emulátor sem játssza ezt a játékot",
   "cant_find_that_emulator": "nem található az emulátor",
   "couldnt_save_the_emulator": "nem sikerült menteni az emulátort",
-  "that_file_isnt_an_emulator_this_server_can_run_reason": "ez a fájl nem olyan emulátor, amelyet ez a szerver futtatni tud: {{reason}}"
+  "that_file_isnt_an_emulator_this_server_can_run_reason": "ez a fájl nem olyan emulátor, amelyet ez a szerver futtatni tud: {{reason}}",
+  "not_a_game": "nem játék"
 }

@@ -24,7 +24,8 @@ func (s *Server) gameRoutes() []route {
 		{"GET /games/streaming", adminOnly, s.gameStreaming},
 		{"GET /games/files", adminOnly, s.gameFiles},
 		{"POST /games/play", adminOnly, s.playGame},
-		{"DELETE /games/play/{id}", adminOnly, s.stopGame},
+		{"POST /items/{id}/game", signedIn, s.playGameItem},
+		{"DELETE /games/play/{id}", signedIn, s.stopGame},
 		{"GET /games/emulators", adminOnly, s.gameEmulators},
 		{"POST /games/emulators", adminOnly, s.addGameEmulator},
 		{"DELETE /games/emulators/{file}", adminOnly, s.removeGameEmulator},
@@ -121,15 +122,53 @@ func (s *Server) playGame(w http.ResponseWriter, r *http.Request) {
 		}
 		g.System, g.Path, system, analog = sys, body.Path, sys.Key, sys.Analog
 	}
+	s.startGame(w, r, g, body.Offer, system, analog)
+}
+
+// playGameItem plays a game from a Games library, for anyone who can see
+// it.
+func (s *Server) playGameItem(w http.ResponseWriter, r *http.Request) {
+	if s.Games == nil {
+		writeError(w, http.StatusNotFound, errNoGames)
+		return
+	}
+	it, ok := s.loadItem(w, r)
+	if !ok {
+		return
+	}
+	var body struct {
+		Offer string `json:"offer"`
+	}
+	if err := readJSON(r, &body); err != nil || body.Offer == "" {
+		writeError(w, http.StatusBadRequest, "bad request")
+		return
+	}
+	if it.Kind != "game" || it.Path == "" {
+		writeError(w, http.StatusBadRequest, "not a game")
+		return
+	}
+	if !filesAnswering(w, it) {
+		return
+	}
+	sys, ok := s.Games.SystemFor(it.Path)
+	if !ok {
+		writeError(w, http.StatusBadRequest, "no emulator on this server plays that game")
+		return
+	}
+	g := gamestream.Game{Owner: strconv.FormatInt(currentUser(r).ID, 10), System: sys, Path: it.Path}
+	s.startGame(w, r, g, body.Offer, sys.Key, sys.Analog)
+}
+
+func (s *Server) startGame(w http.ResponseWriter, r *http.Request, g gamestream.Game, offer, system string, analog bool) {
 	ctx, cancel := context.WithTimeout(r.Context(), 20*time.Second)
 	defer cancel()
-	sess, answer, err := s.Games.Start(ctx, g, body.Offer)
+	sess, answer, err := s.Games.Start(ctx, g, offer)
 	if errors.Is(err, gamestream.ErrBusy) {
 		writeError(w, http.StatusServiceUnavailable, "too many games are being played right now")
 		return
 	}
 	if err != nil {
-		s.Log.Warn("couldn't start game", "path", body.Path, "err", err)
+		s.Log.Warn("couldn't start game", "path", g.Path, "err", err)
 		writeError(w, http.StatusBadRequest, "couldn't start the game: "+err.Error())
 		return
 	}
@@ -142,7 +181,9 @@ func (s *Server) stopGame(w http.ResponseWriter, r *http.Request) {
 		writeError(w, http.StatusNotFound, errNoGames)
 		return
 	}
-	if sess := s.Games.Get(r.PathValue("id")); sess != nil {
+	// Only the person playing, or an admin, can end a game.
+	u := currentUser(r)
+	if sess := s.Games.Get(r.PathValue("id")); sess != nil && (sess.Owner == strconv.FormatInt(u.ID, 10) || u.IsAdmin) {
 		sess.Stop()
 	}
 	w.WriteHeader(http.StatusNoContent)

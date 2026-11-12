@@ -705,7 +705,8 @@
         "tv": "電視劇",
         "music": "音樂",
         "audiobooks": "有聲書",
-        "podcasts": "Podcast"
+        "podcasts": "Podcast",
+        "games": "遊戲"
       },
       "type": "類型",
       "folders": "資料夾",
@@ -1666,6 +1667,14 @@
       "decode": "解碼",
       "fps": "每秒影格數"
     },
-    "pickGameHintAny": "你擁有的遊戲：遊戲檔案，或包含它的 zip。"
+    "pickGameHintAny": "你擁有的遊戲：遊戲檔案，或包含它的 zip。",
+    "fact": {
+      "system": "平台",
+      "region": "地區",
+      "publisher": "發行商",
+      "players": "玩家人數",
+      "genre": "類型"
+    },
+    "tapToPlay": "按下開始遊戲"
   }
 }

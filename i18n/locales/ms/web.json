@@ -705,7 +705,8 @@
         "tv": "Rancangan TV",
         "music": "Muzik",
         "audiobooks": "Buku audio",
-        "podcasts": "Podcast"
+        "podcasts": "Podcast",
+        "games": "Permainan"
       },
       "type": "Jenis",
       "folders": "Folder",
@@ -1666,6 +1667,14 @@
       "decode": "Penyahkodan",
       "fps": "Bingkai sesaat"
     },
-    "pickGameHintAny": "Permainan milik anda: fail permainan, atau zip yang mengandungi satu."
+    "pickGameHintAny": "Permainan milik anda: fail permainan, atau zip yang mengandungi satu.",
+    "fact": {
+      "system": "Sistem",
+      "region": "Rantau",
+      "publisher": "Penerbit",
+      "players": "Pemain",
+      "genre": "Genre"
+    },
+    "tapToPlay": "Tekan untuk bermain"
   }
 }

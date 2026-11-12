@@ -290,5 +290,6 @@
   "no_emulator_on_this_server_plays_that_game": "هیچ شبیه‌سازی روی این سرور این بازی را اجرا نمی‌کند",
   "cant_find_that_emulator": "این شبیه‌ساز پیدا نشد",
   "couldnt_save_the_emulator": "ذخیرهٔ شبیه‌ساز ممکن نشد",
-  "that_file_isnt_an_emulator_this_server_can_run_reason": "این فایل شبیه‌سازی نیست که این سرور بتواند اجرا کند: {{reason}}"
+  "that_file_isnt_an_emulator_this_server_can_run_reason": "این فایل شبیه‌سازی نیست که این سرور بتواند اجرا کند: {{reason}}",
+  "not_a_game": "بازی نیست"
 }

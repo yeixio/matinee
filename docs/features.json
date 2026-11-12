@@ -655,6 +655,19 @@
               }
             },
             {
+              "name": "Games library with box art",
+              "doc": "/docs/server/games/#a-games-library",
+              "since": "v0.2.4",
+              "apps": {
+                "web": true,
+                "ios": "matinee#394",
+                "android": "matinee#394",
+                "appletv": "matinee#394",
+                "androidtv": "matinee#394",
+                "tvweb": "matinee#394"
+              }
+            },
+            {
               "name": "Add your own game emulators",
               "doc": "/docs/server/games/#adding-your-own-emulator",
               "since": "v0.2.4",

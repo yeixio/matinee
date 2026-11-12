@@ -290,5 +290,6 @@
   "no_emulator_on_this_server_plays_that_game": "жоден емулятор на цьому сервері не запускає цю гру",
   "cant_find_that_emulator": "емулятор не знайдено",
   "couldnt_save_the_emulator": "не вдалося зберегти емулятор",
-  "that_file_isnt_an_emulator_this_server_can_run_reason": "цей файл не є емулятором, який може запустити цей сервер: {{reason}}"
+  "that_file_isnt_an_emulator_this_server_can_run_reason": "цей файл не є емулятором, який може запустити цей сервер: {{reason}}",
+  "not_a_game": "це не гра"
 }
