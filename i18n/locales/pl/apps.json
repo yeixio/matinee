@@ -694,5 +694,23 @@
     "fixFailed": "Dzięki. Box Office nie mógł się tym zająć, więc spojrzy na to administrator.",
     "boxOfficeFixes": "Box Office zablokuje źródło tej kopii i pobierze inną. Damy znać, gdy będzie gotowa.",
     "boxOfficeAfterAdmin": "Gdy administrator zatwierdzi, Box Office pobierze inną kopię."
+  },
+  "games": {
+    "starting": "Uruchamianie gry…",
+    "couldntStart": "Nie udało się uruchomić gry",
+    "lostConnection": "Utracono połączenie z grą",
+    "stop": "Przestań grać",
+    "controller": "Połączono {{name}}",
+    "connectController": "Podłącz kontroler, aby grać",
+    "pairHint": "Sparuj kontroler w ustawieniach Bluetooth telewizora, a potem naciśnij dowolny przycisk.",
+    "leaveHint": "Naciśnij Wstecz na pilocie, aby zakończyć",
+    "fact": {
+      "system": "System",
+      "region": "Region",
+      "publisher": "Wydawca",
+      "players": "Gracze",
+      "genre": "Gatunek"
+    },
+    "notHere": "Gry nie działają jeszcze na tym urządzeniu"
   }
 }

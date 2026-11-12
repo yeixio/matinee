@@ -705,7 +705,8 @@
         "tv": "Acara TV",
         "music": "Musik",
         "audiobooks": "Buku audio",
-        "podcasts": "Podcast"
+        "podcasts": "Podcast",
+        "games": "Game"
       },
       "type": "Jenis",
       "folders": "Folder",
@@ -1666,6 +1667,14 @@
       "decode": "Dekode",
       "fps": "Bingkai per detik"
     },
-    "pickGameHintAny": "Game milikmu: file game, atau zip yang berisi satu."
+    "pickGameHintAny": "Game milikmu: file game, atau zip yang berisi satu.",
+    "fact": {
+      "system": "Sistem",
+      "region": "Wilayah",
+      "publisher": "Penerbit",
+      "players": "Pemain",
+      "genre": "Genre"
+    },
+    "tapToPlay": "Tekan untuk bermain"
   }
 }

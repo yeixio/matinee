@@ -673,5 +673,23 @@
     "fixFailed": "謝謝。Box Office 無法處理，管理員會查看。",
     "boxOfficeFixes": "Box Office 會封鎖此副本的來源並取得另一個。完成後會通知你。",
     "boxOfficeAfterAdmin": "管理員核准後，Box Office 會取得另一個副本。"
+  },
+  "games": {
+    "starting": "正在啟動遊戲…",
+    "couldntStart": "無法啟動遊戲",
+    "lostConnection": "與遊戲的連線已中斷",
+    "stop": "停止遊戲",
+    "controller": "{{name}} 已連線",
+    "connectController": "連接遊戲控制器即可開始遊戲",
+    "pairHint": "在電視的藍牙設定中配對控制器，然後按控制器上的任一按鈕。",
+    "leaveHint": "按遙控器上的返回鍵停止",
+    "fact": {
+      "system": "平台",
+      "region": "地區",
+      "publisher": "發行商",
+      "players": "玩家人數",
+      "genre": "類型"
+    },
+    "notHere": "此裝置暫不支援玩遊戲"
   }
 }

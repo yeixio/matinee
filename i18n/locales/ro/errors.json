@@ -290,5 +290,6 @@
   "no_emulator_on_this_server_plays_that_game": "niciun emulator de pe acest server nu rulează acest joc",
   "cant_find_that_emulator": "emulatorul nu a fost găsit",
   "couldnt_save_the_emulator": "emulatorul nu a putut fi salvat",
-  "that_file_isnt_an_emulator_this_server_can_run_reason": "fișierul nu este un emulator pe care acest server îl poate rula: {{reason}}"
+  "that_file_isnt_an_emulator_this_server_can_run_reason": "fișierul nu este un emulator pe care acest server îl poate rula: {{reason}}",
+  "not_a_game": "nu este un joc"
 }

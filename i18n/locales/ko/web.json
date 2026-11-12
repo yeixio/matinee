@@ -705,7 +705,8 @@
         "tv": "TV 프로그램",
         "music": "음악",
         "audiobooks": "오디오북",
-        "podcasts": "팟캐스트"
+        "podcasts": "팟캐스트",
+        "games": "게임"
       },
       "type": "유형",
       "folders": "폴더",
@@ -1666,6 +1667,14 @@
       "decode": "디코딩",
       "fps": "초당 프레임"
     },
-    "pickGameHintAny": "가지고 있는 게임: 게임 파일 또는 게임이 든 zip."
+    "pickGameHintAny": "가지고 있는 게임: 게임 파일 또는 게임이 든 zip.",
+    "fact": {
+      "system": "기종",
+      "region": "지역",
+      "publisher": "배급사",
+      "players": "플레이어 수",
+      "genre": "장르"
+    },
+    "tapToPlay": "눌러서 플레이"
   }
 }

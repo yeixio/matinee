@@ -713,7 +713,8 @@
         "tv": "Series de TV",
         "music": "Música",
         "audiobooks": "Audiolibros",
-        "podcasts": "Pódcasts"
+        "podcasts": "Pódcasts",
+        "games": "Juegos"
       },
       "type": "Tipo",
       "folders": "Carpetas",
@@ -1690,6 +1691,14 @@
       "decode": "Decodificación",
       "fps": "Fotogramas por segundo"
     },
-    "pickGameHintAny": "Juegos que tienes: un archivo de juego o un zip que contenga uno."
+    "pickGameHintAny": "Juegos que tienes: un archivo de juego o un zip que contenga uno.",
+    "fact": {
+      "system": "Sistema",
+      "region": "Región",
+      "publisher": "Editor",
+      "players": "Jugadores",
+      "genre": "Género"
+    },
+    "tapToPlay": "Pulsa para jugar"
   }
 }

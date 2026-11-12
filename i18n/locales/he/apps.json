@@ -687,5 +687,23 @@
     "fixFailed": "תודה. Box Office לא הצליח לטפל בזה, אז מנהל יבדוק.",
     "boxOfficeFixes": "Box Office יחסום את המקור של העותק הזה ויביא אחר. נודיע לך כשיהיה מוכן.",
     "boxOfficeAfterAdmin": "ברגע שמנהל יאשר, Box Office יביא עותק אחר."
+  },
+  "games": {
+    "starting": "המשחק מתחיל…",
+    "couldntStart": "לא ניתן להפעיל את המשחק",
+    "lostConnection": "החיבור למשחק אבד",
+    "stop": "הפסקת משחק",
+    "controller": "{{name}} מחובר",
+    "connectController": "חברו בקר משחק כדי לשחק",
+    "pairHint": "צמדו בקר בהגדרות ה-Bluetooth של הטלוויזיה ולחצו על כפתור כלשהו בו.",
+    "leaveHint": "לחצו על חזרה בשלט כדי לעצור",
+    "fact": {
+      "system": "מערכת",
+      "region": "אזור",
+      "publisher": "מוציא לאור",
+      "players": "שחקנים",
+      "genre": "ז'אנר"
+    },
+    "notHere": "משחקים עדיין לא פועלים במכשיר הזה"
   }
 }

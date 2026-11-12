@@ -673,5 +673,23 @@
     "fixFailed": "Terima kasih. Box Office tidak bisa menanganinya, jadi admin akan memeriksanya.",
     "boxOfficeFixes": "Box Office akan memblokir sumber salinan ini dan mengambil yang lain. Kamu akan diberi tahu saat siap.",
     "boxOfficeAfterAdmin": "Setelah admin menyetujui, Box Office akan mengambil salinan lain."
+  },
+  "games": {
+    "starting": "Memulai game…",
+    "couldntStart": "Game tidak dapat dimulai",
+    "lostConnection": "Koneksi ke game terputus",
+    "stop": "Berhenti bermain",
+    "controller": "{{name}} terhubung",
+    "connectController": "Hubungkan pengontrol game untuk bermain",
+    "pairHint": "Sandingkan pengontrol di pengaturan Bluetooth TV, lalu tekan tombol apa saja di pengontrol.",
+    "leaveHint": "Tekan Kembali di remote untuk berhenti",
+    "fact": {
+      "system": "Sistem",
+      "region": "Wilayah",
+      "publisher": "Penerbit",
+      "players": "Pemain",
+      "genre": "Genre"
+    },
+    "notHere": "Game belum bisa dimainkan di perangkat ini"
   }
 }

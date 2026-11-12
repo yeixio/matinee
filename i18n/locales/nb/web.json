@@ -709,7 +709,8 @@
         "tv": "TV-serier",
         "music": "Musikk",
         "audiobooks": "Lydbøker",
-        "podcasts": "Podkaster"
+        "podcasts": "Podkaster",
+        "games": "Spill"
       },
       "type": "Type",
       "folders": "Mapper",
@@ -1678,6 +1679,14 @@
       "decode": "Dekoding",
       "fps": "Bilder per sekund"
     },
-    "pickGameHintAny": "Spill du eier: en spillfil eller en zip med en i."
+    "pickGameHintAny": "Spill du eier: en spillfil eller en zip med en i.",
+    "fact": {
+      "system": "System",
+      "region": "Region",
+      "publisher": "Utgiver",
+      "players": "Spillere",
+      "genre": "Sjanger"
+    },
+    "tapToPlay": "Trykk for å spille"
   }
 }

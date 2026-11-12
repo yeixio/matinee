@@ -1260,11 +1260,45 @@ paths:
         "503": { description: As many games are being played as the server allows. }
   /games/play/{id}:
     delete:
-      summary: Stop a game (admins only); its save is kept
+      summary: Stop a game, the person's own (or any, for admins); its save is kept
       parameters:
         - { name: id, in: path, required: true, schema: { type: string } }
       responses:
         "204": { description: Stopped. }
+  /items/{id}/game:
+    post:
+      summary: Start playing a game from a Games library, streamed over WebRTC
+      description: >-
+        Like POST /games/play, for anyone who can see the item, when the item says streamedGame. The
+        offer, data channel and answer are the same; stop it with DELETE /games/play/{id}.
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                offer: { type: string, description: The player's SDP offer. }
+      responses:
+        "200":
+          description: Started; the same answer as POST /games/play.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id: { type: string }
+                  answer: { type: string, description: The server's SDP answer. }
+                  system: { type: string }
+                  analog: { type: boolean, description: "Send the sticks as sticks, not as the d-pad." }
+                  width: { type: integer }
+                  height: { type: integer }
+                  aspect: { type: number }
+                  fps: { type: number }
+        "400": { description: "Not a game, no emulator for it, or it couldn't start." }
+        "404": { description: No such item, or games aren't set up. }
+        "503": { description: As many games are being played as the server allows. }
   /import:
     get:
       summary: How the import from another media server is going (admins only)
@@ -6333,6 +6367,7 @@ components:
                   durationMs: { type: integer }
                   size: { type: integer, description: Bytes. }
             subtitleSearch: { type: boolean, description: "The person can look for more subtitles online (GET /items/{id}/subtitles/search)." }
+            streamedGame: { type: boolean, description: "A game this server plays and streams (POST /items/{id}/game)." }
             parents: { type: array, items: { $ref: "#/components/schemas/Item" }, description: Root first, such as show then season. }
             mediaInfo: { $ref: "#/components/schemas/MediaInfo" }
             mediaInfoStale: { type: boolean, description: The file changed since it was analyzed; a new analysis is on its way. }

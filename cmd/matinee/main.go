@@ -33,6 +33,7 @@ import (
 	"github.com/yeixio/matinee/internal/credits"
 	"github.com/yeixio/matinee/internal/discovery"
 	"github.com/yeixio/matinee/internal/download"
+	"github.com/yeixio/matinee/internal/gamelib"
 	"github.com/yeixio/matinee/internal/gamestream"
 	"github.com/yeixio/matinee/internal/gapless"
 	"github.com/yeixio/matinee/internal/health"
@@ -333,6 +334,9 @@ func run() (err error) {
 			{Use: "images", Path: cfg.ImageDir()}, {Use: "downloads", Path: cfg.DownloadDir()},
 		},
 	}
+	// The Games library kind (internal/gamelib); its games play through
+	// the game streaming below.
+	scan.Register(&gamelib.Kind{Dir: filepath.Join(cfg.DataDir, "games", "lists"), Log: log})
 	// Games played on the server and streamed to players (internal/gamestream).
 	if cfg.GamesDir != "" {
 		games, err := gamestream.NewManager(gamestream.Config{

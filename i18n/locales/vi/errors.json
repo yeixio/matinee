@@ -290,5 +290,6 @@
   "no_emulator_on_this_server_plays_that_game": "không trình giả lập nào trên máy chủ này chạy được trò chơi đó",
   "cant_find_that_emulator": "không tìm thấy trình giả lập đó",
   "couldnt_save_the_emulator": "không lưu được trình giả lập",
-  "that_file_isnt_an_emulator_this_server_can_run_reason": "tệp này không phải trình giả lập mà máy chủ này chạy được: {{reason}}"
+  "that_file_isnt_an_emulator_this_server_can_run_reason": "tệp này không phải trình giả lập mà máy chủ này chạy được: {{reason}}",
+  "not_a_game": "không phải trò chơi"
 }

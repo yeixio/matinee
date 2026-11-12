@@ -290,5 +290,6 @@
   "no_emulator_on_this_server_plays_that_game": "このサーバーのエミュレーターではそのゲームを遊べません",
   "cant_find_that_emulator": "そのエミュレーターが見つかりません",
   "couldnt_save_the_emulator": "エミュレーターを保存できませんでした",
-  "that_file_isnt_an_emulator_this_server_can_run_reason": "このファイルは、このサーバーで実行できるエミュレーターではありません：{{reason}}"
+  "that_file_isnt_an_emulator_this_server_can_run_reason": "このファイルは、このサーバーで実行できるエミュレーターではありません：{{reason}}",
+  "not_a_game": "ゲームではありません"
 }

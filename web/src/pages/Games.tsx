@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query'
-import { ChevronLeft, Folder, Gamepad2, Gauge, X } from 'lucide-react'
-import { useEffect, useRef, useState } from 'react'
+import { ChevronLeft, Folder, Gamepad2, Gauge } from 'lucide-react'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSearchParams } from 'react-router-dom'
-import { api, ApiError } from '../api'
+import { api } from '../api'
 import { Button } from '../components/ui'
-import { startGame, type GameStream, type Lag } from '../games/stream'
+import { GamePlayer } from '../games/GamePlayer'
 
 /**
  * Playing games streamed from the server, first version: an admin picks a
@@ -94,98 +94,7 @@ export default function Games() {
         </div>
       </section>
 
-      {playing && <Player {...playing} onClose={() => setPlaying(undefined)} />}
-    </div>
-  )
-}
-
-function Player({ name, path, lagTest, onClose }: { name: string; path?: string; lagTest?: boolean; onClose: () => void }) {
-  const { t } = useTranslation()
-  const video = useRef<HTMLVideoElement>(null)
-  const box = useRef<HTMLDivElement>(null)
-  const [lag, setLag] = useState<Lag>({})
-  const [error, setError] = useState<string>()
-  const [starting, setStarting] = useState(true)
-  const [showLag, setShowLag] = useState(true)
-
-  useEffect(() => {
-    let stream: GameStream | undefined
-    let cancelled = false
-    box.current?.requestFullscreen?.().catch(() => {})
-    startGame({
-      path,
-      lagTest,
-      video: video.current!,
-      onLag: (l) => {
-        setLag(l)
-        setStarting(false)
-      },
-      onEnd: (err) => {
-        if (err) setError(t('games.lostConnection'))
-      },
-    })
-      .then((s) => {
-        if (cancelled) s.stop()
-        else stream = s
-      })
-      .catch((e) => {
-        setError(e instanceof ApiError ? e.message : t('games.couldntStart'))
-        setStarting(false)
-      })
-    return () => {
-      cancelled = true
-      stream?.stop()
-      if (document.fullscreenElement) document.exitFullscreen().catch(() => {})
-    }
-  }, [path, lagTest, t])
-
-  const ms = (v?: number) => (v === undefined ? '…' : t('games.ms', { value: Math.round(v) }))
-  return (
-    <div ref={box} className="fixed inset-0 z-50 flex flex-col bg-black text-white">
-      <div className="flex items-center gap-3 px-4 py-3">
-        <div className="min-w-0 flex-1">
-          <div className="truncate font-medium">{name}</div>
-          <div className="truncate text-xs text-white/60">{lag.controller ? t('games.controller', { name: lag.controller }) : t('games.pressButton')}</div>
-        </div>
-        <button type="button" className="rounded-lg px-3 py-1.5 text-sm text-white/70 hover:bg-white/10" onClick={() => setShowLag(!showLag)}>
-          {showLag ? t('games.hideLag') : t('games.showLag')}
-        </button>
-        <button type="button" className="rounded-full p-2 hover:bg-white/10" aria-label={t('games.stop')} onClick={onClose}>
-          <X className="size-5" />
-        </button>
-      </div>
-      <div className="relative min-h-0 flex-1">
-        <video ref={video} autoPlay playsInline className="absolute inset-0 size-full object-contain [image-rendering:pixelated]" />
-        {starting && !error && <div className="absolute inset-0 grid place-items-center text-white/70">{t('games.starting')}</div>}
-        {error && (
-          <div className="absolute inset-0 grid place-items-center p-6 text-center">
-            <div>
-              <p>{error}</p>
-              <Button variant="primary" className="mt-4" onClick={onClose}>
-                {t('games.back')}
-              </Button>
-            </div>
-          </div>
-        )}
-        {showLag && !error && !starting && (
-          <dl className="absolute end-4 bottom-4 grid grid-cols-[auto_auto] gap-x-4 gap-y-0.5 rounded-xl bg-black/70 px-4 py-3 text-xs tabular-nums">
-            {lagTest && (
-              <>
-                <dt className="text-white/60">{t('games.lag.measured')}</dt>
-                <dd className="text-end font-semibold">{lag.measured === undefined ? t('games.lag.pressA') : ms(lag.measured)}</dd>
-              </>
-            )}
-            <dt className="text-white/60">{t('games.lag.network')}</dt>
-            <dd className="text-end">{ms(lag.roundTrip)}</dd>
-            <dt className="text-white/60">{t('games.lag.server')}</dt>
-            <dd className="text-end">{ms(lag.server)}</dd>
-            <dt className="text-white/60">{t('games.lag.decode')}</dt>
-            <dd className="text-end">{ms(lag.decode)}</dd>
-            <dt className="text-white/60">{t('games.lag.fps')}</dt>
-            <dd className="text-end">{lag.fps === undefined ? '…' : Math.round(lag.fps)}</dd>
-          </dl>
-        )}
-      </div>
+      {playing && <GamePlayer {...playing} onClose={() => setPlaying(undefined)} />}
     </div>
   )
 }

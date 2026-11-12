@@ -290,5 +290,6 @@
   "no_emulator_on_this_server_plays_that_game": "nessun emulatore su questo server esegue quel gioco",
   "cant_find_that_emulator": "impossibile trovare quell'emulatore",
   "couldnt_save_the_emulator": "impossibile salvare l'emulatore",
-  "that_file_isnt_an_emulator_this_server_can_run_reason": "quel file non è un emulatore che questo server può eseguire: {{reason}}"
+  "that_file_isnt_an_emulator_this_server_can_run_reason": "quel file non è un emulatore che questo server può eseguire: {{reason}}",
+  "not_a_game": "non è un gioco"
 }

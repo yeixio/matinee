@@ -713,7 +713,8 @@
         "tv": "Seriale TV",
         "music": "Muzică",
         "audiobooks": "Audiobookuri",
-        "podcasts": "Podcasturi"
+        "podcasts": "Podcasturi",
+        "games": "Jocuri"
       },
       "type": "Tip",
       "folders": "Dosare",
@@ -1690,6 +1691,14 @@
       "decode": "Decodare",
       "fps": "Cadre pe secundă"
     },
-    "pickGameHintAny": "Jocuri pe care le deții: un fișier de joc sau un zip care conține unul."
+    "pickGameHintAny": "Jocuri pe care le deții: un fișier de joc sau un zip care conține unul.",
+    "fact": {
+      "system": "Sistem",
+      "region": "Regiune",
+      "publisher": "Editor",
+      "players": "Jucători",
+      "genre": "Gen"
+    },
+    "tapToPlay": "Apasă pentru a juca"
   }
 }

@@ -983,6 +983,8 @@ export type ItemDetail = Item & {
   // Left out until the file is analyzed; stale while it changed and waits to be analyzed again.
   mediaInfo?: MediaInfo
   mediaInfoStale?: boolean
+  // A game this server plays and streams (api.playGameItem).
+  streamedGame?: boolean
   // Episodes: where the intro plays, from a chapter or found by matching the
   // season's audio. Left out when unknown.
   intro?: { startMs: number; endMs: number; source: 'chapters' | 'audio' }
@@ -1532,6 +1534,12 @@ export const api = {
       'POST',
       '/api/v1/games/play',
       body,
+    ),
+  playGameItem: (id: number, offer: string) =>
+    request<{ id: string; answer: string; system: string; analog?: boolean; width: number; height: number; aspect: number; fps: number }>(
+      'POST',
+      `/api/v1/items/${id}/game`,
+      { offer },
     ),
   stopGame: (id: string) => request<void>('DELETE', `/api/v1/games/play/${encodeURIComponent(id)}`),
   gameEmulators: () => request<{ emulators: GameEmulator[]; platform: string }>('GET', '/api/v1/games/emulators'),

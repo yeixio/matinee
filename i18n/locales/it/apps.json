@@ -687,5 +687,23 @@
     "fixFailed": "Grazie. Box Office non ha potuto occuparsene, un admin darà un'occhiata.",
     "boxOfficeFixes": "Box Office bloccherà l'origine di questa copia e ne prenderà un'altra. Ti avviseremo quando sarà pronta.",
     "boxOfficeAfterAdmin": "Quando un admin approverà, Box Office prenderà un'altra copia."
+  },
+  "games": {
+    "starting": "Avvio del gioco…",
+    "couldntStart": "Impossibile avviare il gioco",
+    "lostConnection": "La connessione al gioco si è interrotta",
+    "stop": "Smetti di giocare",
+    "controller": "{{name}} connesso",
+    "connectController": "Collega un controller per giocare",
+    "pairHint": "Abbina un controller nelle impostazioni Bluetooth del televisore, poi premi un tasto qualsiasi.",
+    "leaveHint": "Premi Indietro sul telecomando per uscire",
+    "fact": {
+      "system": "Sistema",
+      "region": "Regione",
+      "publisher": "Editore",
+      "players": "Giocatori",
+      "genre": "Genere"
+    },
+    "notHere": "I giochi non funzionano ancora su questo dispositivo"
   }
 }

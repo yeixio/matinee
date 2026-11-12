@@ -687,5 +687,23 @@
     "fixFailed": "Mulțumim. Box Office nu a putut prelua asta, așa că un admin se va uita.",
     "boxOfficeFixes": "Box Office va bloca sursa acestei copii și va aduce alta. Vei fi anunțat când e gata.",
     "boxOfficeAfterAdmin": "După ce un admin aprobă, Box Office va aduce altă copie."
+  },
+  "games": {
+    "starting": "Se pornește jocul…",
+    "couldntStart": "Jocul nu a putut porni",
+    "lostConnection": "Conexiunea cu jocul s-a pierdut",
+    "stop": "Oprește jocul",
+    "controller": "{{name}} conectat",
+    "connectController": "Conectează un controller pentru a juca",
+    "pairHint": "Asociază un controller în setările Bluetooth ale televizorului, apoi apasă orice buton.",
+    "leaveHint": "Apasă Înapoi pe telecomandă pentru a opri",
+    "fact": {
+      "system": "Sistem",
+      "region": "Regiune",
+      "publisher": "Editor",
+      "players": "Jucători",
+      "genre": "Gen"
+    },
+    "notHere": "Jocurile nu funcționează încă pe acest dispozitiv"
   }
 }

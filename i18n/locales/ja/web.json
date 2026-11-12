@@ -705,7 +705,8 @@
         "tv": "テレビ番組",
         "music": "音楽",
         "audiobooks": "オーディオブック",
-        "podcasts": "ポッドキャスト"
+        "podcasts": "ポッドキャスト",
+        "games": "ゲーム"
       },
       "type": "種類",
       "folders": "フォルダ",
@@ -1666,6 +1667,14 @@
       "decode": "デコード",
       "fps": "フレーム/秒"
     },
-    "pickGameHintAny": "持っているゲーム：ゲームファイル、またはそれを含む zip。"
+    "pickGameHintAny": "持っているゲーム：ゲームファイル、またはそれを含む zip。",
+    "fact": {
+      "system": "機種",
+      "region": "地域",
+      "publisher": "発売元",
+      "players": "プレイ人数",
+      "genre": "ジャンル"
+    },
+    "tapToPlay": "押してプレイ"
   }
 }

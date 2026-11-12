@@ -290,5 +290,6 @@
   "no_emulator_on_this_server_plays_that_game": "ไม่มีอีมูเลเตอร์บนเซิร์ฟเวอร์นี้ที่เล่นเกมนั้นได้",
   "cant_find_that_emulator": "ไม่พบอีมูเลเตอร์นั้น",
   "couldnt_save_the_emulator": "บันทึกอีมูเลเตอร์ไม่ได้",
-  "that_file_isnt_an_emulator_this_server_can_run_reason": "ไฟล์นี้ไม่ใช่อีมูเลเตอร์ที่เซิร์ฟเวอร์นี้รันได้: {{reason}}"
+  "that_file_isnt_an_emulator_this_server_can_run_reason": "ไฟล์นี้ไม่ใช่อีมูเลเตอร์ที่เซิร์ฟเวอร์นี้รันได้: {{reason}}",
+  "not_a_game": "ไม่ใช่เกม"
 }

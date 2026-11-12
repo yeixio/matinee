@@ -709,7 +709,8 @@
         "tv": "Serien",
         "music": "Musik",
         "audiobooks": "Hörbücher",
-        "podcasts": "Podcasts"
+        "podcasts": "Podcasts",
+        "games": "Spiele"
       },
       "type": "Art",
       "folders": "Ordner",
@@ -1678,6 +1679,14 @@
       "decode": "Dekodieren",
       "fps": "Bilder pro Sekunde"
     },
-    "pickGameHintAny": "Spiele, die dir gehören: eine Spieldatei oder ein Zip mit einer."
+    "pickGameHintAny": "Spiele, die dir gehören: eine Spieldatei oder ein Zip mit einer.",
+    "fact": {
+      "system": "System",
+      "region": "Region",
+      "publisher": "Publisher",
+      "players": "Spieler",
+      "genre": "Genre"
+    },
+    "tapToPlay": "Zum Spielen drücken"
   }
 }

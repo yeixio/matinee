@@ -673,5 +673,23 @@
     "fixFailed": "Terima kasih. Box Office tidak dapat menguruskannya, jadi admin akan melihatnya.",
     "boxOfficeFixes": "Box Office akan menyekat sumber salinan ini dan mendapatkan yang lain. Anda akan dimaklumkan apabila siap.",
     "boxOfficeAfterAdmin": "Selepas admin meluluskan, Box Office akan mendapatkan salinan lain."
+  },
+  "games": {
+    "starting": "Memulakan permainan…",
+    "couldntStart": "Tidak dapat memulakan permainan",
+    "lostConnection": "Sambungan ke permainan terputus",
+    "stop": "Berhenti bermain",
+    "controller": "{{name}} disambungkan",
+    "connectController": "Sambungkan pengawal permainan untuk bermain",
+    "pairHint": "Pasangkan pengawal dalam tetapan Bluetooth TV, kemudian tekan mana-mana butang padanya.",
+    "leaveHint": "Tekan Kembali pada alat kawalan jauh untuk berhenti",
+    "fact": {
+      "system": "Sistem",
+      "region": "Rantau",
+      "publisher": "Penerbit",
+      "players": "Pemain",
+      "genre": "Genre"
+    },
+    "notHere": "Permainan belum boleh dimainkan pada peranti ini"
   }
 }

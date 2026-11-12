@@ -290,5 +290,6 @@
   "no_emulator_on_this_server_plays_that_game": "ingen emulator på serveren kan spille det spillet",
   "cant_find_that_emulator": "finner ikke den emulatoren",
   "couldnt_save_the_emulator": "kunne ikke lagre emulatoren",
-  "that_file_isnt_an_emulator_this_server_can_run_reason": "filen er ikke en emulator denne serveren kan kjøre: {{reason}}"
+  "that_file_isnt_an_emulator_this_server_can_run_reason": "filen er ikke en emulator denne serveren kan kjøre: {{reason}}",
+  "not_a_game": "ikke et spill"
 }

@@ -29,6 +29,7 @@ import { chapterMarks, chapterTitleAt } from '../player/chapters'
 import { grabFrame, HeldFrame, preloadSheets, SeekPreview } from '../player/SeekPreview'
 import { askAgain, spotAt } from '../player/thumbnails'
 import { PluginPlayer } from '../player/PluginPlayer'
+import { GamePlayer } from '../games/GamePlayer'
 import { useAudio } from '../player/AudioPlayer'
 import { playerFor, usePlayers } from '../plugins'
 import { remote, watchPath, type CommandType, type PlayerHooks } from '../remote'
@@ -84,6 +85,8 @@ export default function Watch() {
     } else audio.pause()
   }, [item?.id]) // eslint-disable-line react-hooks/exhaustive-deps
   if (song || otherVersion) return null
+  // Games the server plays itself stream from it, ahead of any plugin's player.
+  if (item?.streamedGame) return <GamePlayer name={item.title} itemId={item.id} onClose={exit} />
   if (item && plugin) return <PluginPlayer item={item} player={plugin} onExit={exit} />
   if (!item || (isPending && !builtInKinds.includes(item.kind))) {
     return (

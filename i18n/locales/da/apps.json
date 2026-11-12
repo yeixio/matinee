@@ -680,5 +680,23 @@
     "fixFailed": "Tak. Box Office kunne ikke tage sig af det, så en admin kigger på det.",
     "boxOfficeFixes": "Box Office blokerer kilden til denne kopi og henter en anden. Du får besked, når den er klar.",
     "boxOfficeAfterAdmin": "Når en admin godkender, henter Box Office en anden kopi."
+  },
+  "games": {
+    "starting": "Starter spillet…",
+    "couldntStart": "Spillet kunne ikke starte",
+    "lostConnection": "Forbindelsen til spillet blev afbrudt",
+    "stop": "Stop med at spille",
+    "controller": "{{name}} tilsluttet",
+    "connectController": "Tilslut en spilcontroller for at spille",
+    "pairHint": "Par en controller i tv'ets Bluetooth-indstillinger, og tryk på en knap på den.",
+    "leaveHint": "Tryk på Tilbage på fjernbetjeningen for at stoppe",
+    "fact": {
+      "system": "System",
+      "region": "Region",
+      "publisher": "Udgiver",
+      "players": "Spillere",
+      "genre": "Genre"
+    },
+    "notHere": "Spil kan endnu ikke spilles på denne enhed"
   }
 }

@@ -680,5 +680,23 @@
     "fixFailed": "Teşekkürler. Box Office bunu üstlenemedi, bir yönetici bakacak.",
     "boxOfficeFixes": "Box Office bu kopyanın kaynağını engelleyip başka bir kopya getirecek. Hazır olunca haber vereceğiz.",
     "boxOfficeAfterAdmin": "Bir yönetici onaylayınca Box Office başka bir kopya getirecek."
+  },
+  "games": {
+    "starting": "Oyun başlatılıyor…",
+    "couldntStart": "Oyun başlatılamadı",
+    "lostConnection": "Oyunla bağlantı koptu",
+    "stop": "Oynamayı bırak",
+    "controller": "{{name}} bağlandı",
+    "connectController": "Oynamak için bir oyun kumandası bağlayın",
+    "pairHint": "Televizyonun Bluetooth ayarlarından bir kumanda eşleştirin, sonra üzerindeki herhangi bir düğmeye basın.",
+    "leaveHint": "Durdurmak için kumandada Geri'ye basın",
+    "fact": {
+      "system": "Sistem",
+      "region": "Bölge",
+      "publisher": "Yayıncı",
+      "players": "Oyuncular",
+      "genre": "Tür"
+    },
+    "notHere": "Oyunlar bu cihazda henüz oynanamıyor"
   }
 }

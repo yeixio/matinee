@@ -709,7 +709,8 @@
         "tv": "Tévésorozatok",
         "music": "Zene",
         "audiobooks": "Hangoskönyvek",
-        "podcasts": "Podcastok"
+        "podcasts": "Podcastok",
+        "games": "Játékok"
       },
       "type": "Típus",
       "folders": "Mappák",
@@ -1678,6 +1679,14 @@
       "decode": "Dekódolás",
       "fps": "Képkocka másodpercenként"
     },
-    "pickGameHintAny": "Saját játékaid: egy játékfájl vagy egy zip, amelyben van egy."
+    "pickGameHintAny": "Saját játékaid: egy játékfájl vagy egy zip, amelyben van egy.",
+    "fact": {
+      "system": "Rendszer",
+      "region": "Régió",
+      "publisher": "Kiadó",
+      "players": "Játékosok",
+      "genre": "Műfaj"
+    },
+    "tapToPlay": "Nyomd meg a játékhoz"
   }
 }

@@ -709,7 +709,8 @@
         "tv": "TV-sarjat",
         "music": "Musiikki",
         "audiobooks": "Äänikirjat",
-        "podcasts": "Podcastit"
+        "podcasts": "Podcastit",
+        "games": "Pelit"
       },
       "type": "Tyyppi",
       "folders": "Kansiot",
@@ -1678,6 +1679,14 @@
       "decode": "Purku",
       "fps": "Kuvaa sekunnissa"
     },
-    "pickGameHintAny": "Omistamasi pelit: pelitiedosto tai zip, jossa on sellainen."
+    "pickGameHintAny": "Omistamasi pelit: pelitiedosto tai zip, jossa on sellainen.",
+    "fact": {
+      "system": "Järjestelmä",
+      "region": "Alue",
+      "publisher": "Julkaisija",
+      "players": "Pelaajat",
+      "genre": "Lajityyppi"
+    },
+    "tapToPlay": "Paina pelataksesi"
   }
 }

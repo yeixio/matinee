@@ -680,5 +680,23 @@
     "fixFailed": "Köszönjük. A Box Office nem tudta átvenni, ezért egy admin nézi meg.",
     "boxOfficeFixes": "A Box Office letiltja ennek a másolatnak a forrását, és szerez egy másikat. Szólunk, ha megvan.",
     "boxOfficeAfterAdmin": "Amint egy admin jóváhagyja, a Box Office szerez egy másik másolatot."
+  },
+  "games": {
+    "starting": "A játék indul…",
+    "couldntStart": "Nem sikerült elindítani a játékot",
+    "lostConnection": "Megszakadt a kapcsolat a játékkal",
+    "stop": "Játék befejezése",
+    "controller": "{{name}} csatlakoztatva",
+    "connectController": "Csatlakoztass egy kontrollert a játékhoz",
+    "pairHint": "Párosíts egy kontrollert a tévé Bluetooth-beállításaiban, majd nyomd meg bármelyik gombját.",
+    "leaveHint": "A leállításhoz nyomd meg a Vissza gombot a távirányítón",
+    "fact": {
+      "system": "Rendszer",
+      "region": "Régió",
+      "publisher": "Kiadó",
+      "players": "Játékosok",
+      "genre": "Műfaj"
+    },
+    "notHere": "Ezen az eszközön még nem lehet játszani"
   }
 }

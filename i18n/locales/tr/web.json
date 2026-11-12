@@ -709,7 +709,8 @@
         "tv": "TV dizileri",
         "music": "Müzik",
         "audiobooks": "Sesli kitaplar",
-        "podcasts": "Podcast’ler"
+        "podcasts": "Podcast’ler",
+        "games": "Oyunlar"
       },
       "type": "Tür",
       "folders": "Klasörler",
@@ -1678,6 +1679,14 @@
       "decode": "Kod çözme",
       "fps": "Saniyedeki kare"
     },
-    "pickGameHintAny": "Sahip olduğunuz oyunlar: bir oyun dosyası ya da onu içeren bir zip."
+    "pickGameHintAny": "Sahip olduğunuz oyunlar: bir oyun dosyası ya da onu içeren bir zip.",
+    "fact": {
+      "system": "Sistem",
+      "region": "Bölge",
+      "publisher": "Yayıncı",
+      "players": "Oyuncular",
+      "genre": "Tür"
+    },
+    "tapToPlay": "Oynamak için bas"
   }
 }
