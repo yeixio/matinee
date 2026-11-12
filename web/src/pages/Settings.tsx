@@ -24,6 +24,7 @@ import { Integrations } from './Integrations'
 import { ImportSettings } from '../components/ImportSettings'
 import i18n, { formatLocale } from '../i18n'
 import { DeviceIcon } from './Link'
+import { GameStreamingSettings } from '../components/GameStreamingSettings'
 
 // Settings, in groups: everyone's own settings first, then the server's,
 // one group per page. Desktop lists the groups down the side; a phone opens
@@ -37,7 +38,7 @@ export const settingsSections: Record<string, string> = {
   libraries: 'libraries', import: 'libraries', 'new-files': 'libraries', 'media-analysis': 'libraries',
   people: 'people', friends: 'people', profiles: 'people',
   posters: 'content', 'podcast-index': 'content', subtitles: 'content', 'subtitle-sync': 'content', lyrics: 'content', trailers: 'content', 'home-rows': 'content',
-  transcoding: 'streaming',
+  transcoding: 'streaming', games: 'streaming',
   'home-network': 'network', 'remote-access': 'network',
   arr: 'add-ons', overseerr: 'add-ons', plugins: 'add-ons',
   'server-health': 'health', updates: 'health', alerts: 'health', backups: 'health', 'time-zone': 'health',
@@ -72,7 +73,7 @@ export default function Settings() {
           { id: 'libraries', icon: LibraryBig, sections: [['libraries', <Libraries />], ['import', <ImportSettings />], ['new-files', <NewFiles />], ['media-analysis', <MediaAnalysis />]] },
           { id: 'people', icon: UsersRound, sections: [['people', <Users me={me} />], ['friends', <Friends />], ['profiles', <Profiles />]] },
           { id: 'content', icon: ImageIcon, sections: [['posters', <TMDBKey />], ['podcast-index', <PodcastIndexKey />], ['subtitles', <OpenSubtitlesKey />], ['subtitle-sync', <SubtitleSyncSetting />], ['lyrics', <OnlineLyrics />], ['trailers', <Trailers />], ['home-rows', <HolidayRows />]] },
-          { id: 'streaming', icon: Gauge, sections: [['transcoding', <Transcoding />]] },
+          { id: 'streaming', icon: Gauge, sections: [['transcoding', <Transcoding />], ['games', <GameStreamingSettings />]] },
           { id: 'network', icon: Globe, sections: [['home-network', <HomeNetwork />], ['remote-access', <RemoteAccess />]] },
           { id: 'live-tv', icon: Tv, sections: [['live-tv', <LiveTVSettings />]] },
           { id: 'add-ons', icon: Puzzle, sections: [['arr', <Integrations />], ['plugins', <Plugins />]] },

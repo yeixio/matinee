@@ -284,5 +284,8 @@
   "this_library_isnt_being_scanned": "cette bibliothèque n'est pas en cours d'analyse",
   "watchpollseconds_must_be_from_10_to_3600": "watchPollSeconds doit être compris entre 10 et 3600",
   "this_server_cant_restart_itself_restart_it_the_way_it_was_started": "ce serveur ne peut pas redémarrer tout seul ; redémarrez-le comme il a été lancé",
-  "this_titles_files_cant_be_read_right_now_the_network_share_theyre_on_isnt_answering": "les fichiers de ce titre ne peuvent pas être lus pour le moment : le partage réseau où ils se trouvent ne répond pas"
+  "this_titles_files_cant_be_read_right_now_the_network_share_theyre_on_isnt_answering": "les fichiers de ce titre ne peuvent pas être lus pour le moment : le partage réseau où ils se trouvent ne répond pas",
+  "too_many_games_are_being_played_right_now": "trop de jeux sont en cours en ce moment",
+  "cant_find_that_game": "jeu introuvable",
+  "no_emulator_on_this_server_plays_that_game": "aucun émulateur de ce serveur ne lit ce jeu"
 }

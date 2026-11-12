@@ -284,5 +284,8 @@
   "this_library_isnt_being_scanned": "această bibliotecă nu este scanată acum",
   "watchpollseconds_must_be_from_10_to_3600": "watchPollSeconds trebuie să fie între 10 și 3600",
   "this_server_cant_restart_itself_restart_it_the_way_it_was_started": "acest server nu se poate reporni singur; repornește-l așa cum a fost pornit",
-  "this_titles_files_cant_be_read_right_now_the_network_share_theyre_on_isnt_answering": "fișierele acestui titlu nu pot fi citite acum: partajarea de rețea pe care se află nu răspunde"
+  "this_titles_files_cant_be_read_right_now_the_network_share_theyre_on_isnt_answering": "fișierele acestui titlu nu pot fi citite acum: partajarea de rețea pe care se află nu răspunde",
+  "too_many_games_are_being_played_right_now": "se joacă prea multe jocuri acum",
+  "cant_find_that_game": "jocul nu a fost găsit",
+  "no_emulator_on_this_server_plays_that_game": "niciun emulator de pe acest server nu rulează acest joc"
 }

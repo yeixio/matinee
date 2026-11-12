@@ -83,6 +83,13 @@ spec:
             - name: remote
               containerPort: {{ .Values.remoteAccess.port }}
             {{- end }}
+            {{- if .Values.games.port }}
+            # Games stream straight to players on the node's address.
+            - name: games
+              containerPort: {{ .Values.games.port }}
+              hostPort: {{ .Values.games.port }}
+              protocol: UDP
+            {{- end }}
           env:
             - name: MATINEE_ADDR
               value: ":7171"
@@ -126,6 +133,21 @@ spec:
               {{- else }}
               value: ":7172"
               {{- end }}
+            {{- end }}
+            {{- if .Values.games.port }}
+            - name: MATINEE_GAMES_PORT
+              value: {{ .Values.games.port | quote }}
+            {{- if not .Values.remoteAccess.enabled }}
+            # The pod can't see the node's address, which players reach the
+            # games port at, so it's handed in.
+            - name: MATINEE_GAMES_PUBLIC_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            {{- end }}
+            {{- else }}
+            - name: MATINEE_GAMES_DIR
+              value: "off"
             {{- end }}
             - name: MATINEE_DATABASE_URL
               valueFrom:

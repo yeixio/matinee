@@ -284,5 +284,8 @@
   "this_library_isnt_being_scanned": "dette biblioteket skannes ikke nå",
   "watchpollseconds_must_be_from_10_to_3600": "watchPollSeconds må være mellom 10 og 3600",
   "this_server_cant_restart_itself_restart_it_the_way_it_was_started": "denne serveren kan ikke starte seg selv på nytt; start den på nytt slik den ble startet",
-  "this_titles_files_cant_be_read_right_now_the_network_share_theyre_on_isnt_answering": "filene til denne tittelen kan ikke leses nå: nettverksdelingen de ligger på svarer ikke"
+  "this_titles_files_cant_be_read_right_now_the_network_share_theyre_on_isnt_answering": "filene til denne tittelen kan ikke leses nå: nettverksdelingen de ligger på svarer ikke",
+  "too_many_games_are_being_played_right_now": "for mange spill spilles akkurat nå",
+  "cant_find_that_game": "finner ikke det spillet",
+  "no_emulator_on_this_server_plays_that_game": "ingen emulator på serveren kan spille det spillet"
 }

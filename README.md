@@ -273,6 +273,9 @@ Every setting is a flag or an environment variable.
 | `MATINEE_SERVER_NAME` | `Matinee` | The name the apps show for this server |
 | `MATINEE_PUBLIC_URL` | empty | The address the apps should connect to, such as `https://matinee.example.com`, at home and away; empty uses this machine's IP and port at home, and remote access's address away |
 | `MATINEE_HOME_ADDR` | empty | A second listen address just for the home network, such as `:7172`, when the main one is behind a proxy. Only devices that connect here can watch without signing in (see above) |
+| `MATINEE_GAMES_PORT` | `7173` | The UDP port games stream to players through (publish it as UDP); `0` for any |
+| `MATINEE_GAMES_PUBLIC_IP` | empty | The addresses players reach the games port at, comma separated, when the server can't see its own |
+| `MATINEE_GAMES_DIR` | `/usr/lib/matinee/games` | Where the game runner and its emulators are; `off` turns games off |
 | `MATINEE_REMOTE_ADDR` | `:7443` | HTTPS listen address for remote access, which an admin turns on in Settings ([more](#reaching-it-away-from-home)); `off` to not offer it |
 | `MATINEE_PLUGINS` | `true` | Let admins install plugins in Settings ([guide](https://matinee.yeix.io/docs/server/plugins/)); `false` turns them off |
 | `MATINEE_PLUGIN_CATALOG` | `https://matinee.yeix.io/plugins.json` | The list of official plugins Settings offers; `off` for none |

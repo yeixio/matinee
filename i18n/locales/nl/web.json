@@ -1023,6 +1023,13 @@
       "slow": "Matinee is na twee minuten nog niet terug. Bekijk het logboek of start het opnieuw zoals het is geïnstalleerd.",
       "back": "Matinee is herstart en weer terug.",
       "failed": "Herstarten mislukt: {{error}}"
+    },
+    "games": {
+      "title": "Games",
+      "intro": "Speel games op deze server en stream ze naar elk apparaat, met een controller. Dit is een preview voor beheerders: probeer hoe het voelt.",
+      "ready": "Klaar, met emulators voor {{systems}}.",
+      "notSetUp": "Niet beschikbaar: deze server heeft de game-runner en emulators niet. De Docker-image heeft ze.",
+      "open": "Een game proberen"
     }
   },
   "language": {
@@ -1629,6 +1636,35 @@
       "approvalReports": "Ook gemelde problemen, die Box Office anders meteen oplost.",
       "replaceDamaged": "Beschadigde video's vanzelf vervangen",
       "replaceDamagedDetail": "Als Matinee een beschadigde film of aflevering vindt (lezen loopt steeds vast terwijl de share antwoordt, en springen erin ook), meldt het een beeldprobleem en haalt Box Office een andere kopie. Uit: beschadigde video's staan alleen in de servergezondheid."
+    }
+  },
+  "games": {
+    "title": "Games (preview)",
+    "intro": "Games draaien op deze server en worden naar je gestreamd, zodat elk apparaat ze met een controller kan spelen. Deze preview is om uit te proberen: kies een game of start de vertragingstest.",
+    "lagTest": "Vertragingstest",
+    "lagTestHint": "Beweeg het vierkant met de d-pad. Het scherm wordt wit zolang A of B is ingedrukt: film controller en scherm samen om het te meten.",
+    "play": "Spelen",
+    "pickGame": "Kies een game",
+    "pickGameHint": "Games die van jou zijn: Game Boy-, Game Boy Color-, Game Boy Advance- en NES-bestanden, of zips met een ervan.",
+    "up": "Map omhoog",
+    "emptyFolder": "Geen mappen of games hier.",
+    "controller": "Controller: {{name}}",
+    "pressButton": "Verbind een controller en druk op een knop, of gebruik het toetsenbord: pijlen, Z, X, A, S en Enter.",
+    "showLag": "Vertraging tonen",
+    "hideLag": "Vertraging verbergen",
+    "stop": "Stoppen met spelen",
+    "starting": "Starten…",
+    "back": "Terug",
+    "lostConnection": "Verbinding met de server verbroken.",
+    "couldntStart": "Kon de game niet starten.",
+    "ms": "{{value}} ms",
+    "lag": {
+      "measured": "Gemeten, knop tot beeld",
+      "pressA": "Druk op A",
+      "network": "Netwerk, heen en terug",
+      "server": "Server, één beeld",
+      "decode": "Decoderen",
+      "fps": "Beelden per seconde"
     }
   }
 }

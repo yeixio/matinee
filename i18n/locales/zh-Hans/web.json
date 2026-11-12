@@ -1019,6 +1019,13 @@
       "slow": "两分钟后 Matinee 仍未恢复。请查看它的日志，或按安装方式重新启动它。",
       "back": "Matinee 已重启并恢复。",
       "failed": "无法重启：{{error}}"
+    },
+    "games": {
+      "title": "游戏",
+      "intro": "在这台服务器上玩游戏，并用手柄串流到任何设备。这是面向管理员的预览：试试感觉如何。",
+      "ready": "已就绪，有 {{systems}} 的模拟器。",
+      "notSetUp": "不可用：此服务器没有游戏运行器和模拟器。Docker 镜像中有。",
+      "open": "试玩游戏"
     }
   },
   "language": {
@@ -1617,6 +1624,35 @@
       "approvalReports": "报告的问题也一样，否则 Box Office 会立即修复。",
       "replaceDamaged": "自动替换损坏的视频",
       "replaceDamagedDetail": "Matinee 发现电影或剧集损坏时（共享有响应但读取反复超时，在其中跳转也是如此），会报告画面问题，由 Box Office 获取另一份副本。关闭时：损坏的视频只列在服务器状态中。"
+    }
+  },
+  "games": {
+    "title": "游戏（预览）",
+    "intro": "游戏在这台服务器上运行并串流给你，任何设备都能用手柄来玩。此预览用于试用：选择一个游戏，或开始延迟测试。",
+    "lagTest": "延迟测试",
+    "lagTestHint": "用方向键移动方块。按住 A 或 B 时屏幕变白：把手柄和屏幕一起录下来即可测量。",
+    "play": "开始玩",
+    "pickGame": "选择游戏",
+    "pickGameHint": "你拥有的游戏：Game Boy、Game Boy Color、Game Boy Advance 和 NES 文件，或包含其中之一的 zip。",
+    "up": "上一级文件夹",
+    "emptyFolder": "这里没有文件夹或游戏。",
+    "controller": "手柄：{{name}}",
+    "pressButton": "连接手柄并按任意键，或使用键盘：方向键、Z、X、A、S 和 Enter。",
+    "showLag": "显示延迟",
+    "hideLag": "隐藏延迟",
+    "stop": "停止游戏",
+    "starting": "正在启动…",
+    "back": "返回",
+    "lostConnection": "与服务器的连接已断开。",
+    "couldntStart": "无法启动游戏。",
+    "ms": "{{value}} 毫秒",
+    "lag": {
+      "measured": "实测，从按键到画面",
+      "pressA": "按 A",
+      "network": "网络往返",
+      "server": "服务器，一帧",
+      "decode": "解码",
+      "fps": "每秒帧数"
     }
   }
 }

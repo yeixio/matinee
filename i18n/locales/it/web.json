@@ -1027,6 +1027,13 @@
       "slow": "Matinee non è tornato dopo due minuti. Controlla il suo registro o riavvialo come è stato installato.",
       "back": "Matinee si è riavviato ed è tornato.",
       "failed": "Impossibile riavviare: {{error}}"
+    },
+    "games": {
+      "title": "Giochi",
+      "intro": "Gioca su questo server e trasmetti a qualsiasi dispositivo, con un controller. È un'anteprima per gli admin: prova come va.",
+      "ready": "Pronto, con emulatori per {{systems}}.",
+      "notSetUp": "Non disponibile: questo server non ha il runner dei giochi e gli emulatori. L'immagine Docker li include.",
+      "open": "Prova un gioco"
     }
   },
   "language": {
@@ -1641,6 +1648,35 @@
       "approvalReports": "Anche i problemi segnalati, che altrimenti Box Office risolve subito.",
       "replaceDamaged": "Sostituisci da sé i video danneggiati",
       "replaceDamagedDetail": "Quando Matinee trova un film o un episodio danneggiato (la lettura va in timeout ripetutamente anche se la condivisione risponde, e così i salti al suo interno), segnala un problema all'immagine e Box Office prende un'altra copia. Disattivato: i video danneggiati sono solo elencati nello stato del server."
+    }
+  },
+  "games": {
+    "title": "Giochi (anteprima)",
+    "intro": "I giochi girano su questo server e vengono trasmessi a te, così qualsiasi dispositivo può giocarli con un controller. Questa anteprima serve per provare: scegli un gioco o avvia il test del ritardo.",
+    "lagTest": "Test del ritardo",
+    "lagTestHint": "Muovi il quadrato con la croce direzionale. Lo schermo diventa bianco mentre tieni premuto A o B: riprendi controller e schermo insieme per misurarlo.",
+    "play": "Gioca",
+    "pickGame": "Scegli un gioco",
+    "pickGameHint": "Giochi tuoi: file Game Boy, Game Boy Color, Game Boy Advance e NES, o zip che ne contengono uno.",
+    "up": "Cartella superiore",
+    "emptyFolder": "Nessuna cartella o gioco qui.",
+    "controller": "Controller: {{name}}",
+    "pressButton": "Collega un controller e premi un tasto, oppure usa la tastiera: frecce, Z, X, A, S e Invio.",
+    "showLag": "Mostra ritardo",
+    "hideLag": "Nascondi ritardo",
+    "stop": "Smetti di giocare",
+    "starting": "Avvio…",
+    "back": "Indietro",
+    "lostConnection": "Connessione al server persa.",
+    "couldntStart": "Impossibile avviare il gioco.",
+    "ms": "{{value}} ms",
+    "lag": {
+      "measured": "Misurato, dal tasto all'immagine",
+      "pressA": "Premi A",
+      "network": "Rete, andata e ritorno",
+      "server": "Server, un fotogramma",
+      "decode": "Decodifica",
+      "fps": "Fotogrammi al secondo"
     }
   }
 }

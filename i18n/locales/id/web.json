@@ -1019,6 +1019,13 @@
       "slow": "Matinee belum kembali setelah dua menit. Lihat log-nya, atau jalankan lagi dengan cara pemasangannya.",
       "back": "Matinee sudah dimulai ulang dan kembali.",
       "failed": "Gagal memulai ulang: {{error}}"
+    },
+    "games": {
+      "title": "Game",
+      "intro": "Main game di server ini dan alirkan ke perangkat apa pun dengan kontroler. Ini pratinjau untuk admin: coba rasakan.",
+      "ready": "Siap, dengan emulator untuk {{systems}}.",
+      "notSetUp": "Tidak tersedia: server ini tidak punya pemutar game dan emulator. Image Docker memilikinya.",
+      "open": "Coba sebuah game"
     }
   },
   "language": {
@@ -1617,6 +1624,35 @@
       "approvalReports": "Juga masalah yang dilaporkan, yang biasanya langsung diperbaiki Box Office.",
       "replaceDamaged": "Ganti sendiri video yang rusak",
       "replaceDamagedDetail": "Saat Matinee menemukan film atau episode yang rusak (membacanya terus melewati batas waktu padahal folder berbagi merespons, begitu pula lompatan di dalamnya), Matinee melaporkan masalah gambar dan Box Office mengambil salinan lain. Mati: video rusak hanya dicantumkan di kesehatan server."
+    }
+  },
+  "games": {
+    "title": "Game (pratinjau)",
+    "intro": "Game berjalan di server ini dan dialirkan kepadamu, jadi perangkat apa pun bisa memainkannya dengan kontroler. Pratinjau ini untuk mencoba: pilih game, atau mulai uji jeda.",
+    "lagTest": "Uji jeda",
+    "lagTestHint": "Gerakkan kotak dengan d-pad. Layar menjadi putih selama A atau B ditekan: rekam kontroler dan layar bersama untuk mengukurnya.",
+    "play": "Main",
+    "pickGame": "Pilih game",
+    "pickGameHint": "Game milikmu: file Game Boy, Game Boy Color, Game Boy Advance, dan NES, atau zip berisi salah satunya.",
+    "up": "Naik satu folder",
+    "emptyFolder": "Tidak ada folder atau game di sini.",
+    "controller": "Kontroler: {{name}}",
+    "pressButton": "Sambungkan kontroler dan tekan tombol, atau pakai keyboard: panah, Z, X, A, S, dan Enter.",
+    "showLag": "Tampilkan jeda",
+    "hideLag": "Sembunyikan jeda",
+    "stop": "Berhenti main",
+    "starting": "Memulai…",
+    "back": "Kembali",
+    "lostConnection": "Koneksi ke server terputus.",
+    "couldntStart": "Game tidak bisa dimulai.",
+    "ms": "{{value}} md",
+    "lag": {
+      "measured": "Terukur, tombol ke gambar",
+      "pressA": "Tekan A",
+      "network": "Jaringan, pulang pergi",
+      "server": "Server, satu bingkai",
+      "decode": "Dekode",
+      "fps": "Bingkai per detik"
     }
   }
 }

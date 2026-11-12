@@ -33,6 +33,7 @@ import (
 	"github.com/yeixio/matinee/internal/credits"
 	"github.com/yeixio/matinee/internal/discovery"
 	"github.com/yeixio/matinee/internal/download"
+	"github.com/yeixio/matinee/internal/gamestream"
 	"github.com/yeixio/matinee/internal/gapless"
 	"github.com/yeixio/matinee/internal/health"
 	"github.com/yeixio/matinee/internal/hwaccel"
@@ -331,6 +332,21 @@ func run() (err error) {
 			{Use: "data", Path: cfg.DataDir}, {Use: "transcode", Path: cfg.TranscodeDir()}, {Use: "thumbnails", Path: cfg.ThumbnailDir()},
 			{Use: "images", Path: cfg.ImageDir()}, {Use: "downloads", Path: cfg.DownloadDir()},
 		},
+	}
+	// Games played on the server and streamed to players (internal/gamestream).
+	if cfg.GamesDir != "" {
+		games, err := gamestream.NewManager(gamestream.Config{
+			FFmpeg: cfg.FFmpegPath, Runner: filepath.Join(cfg.GamesDir, "matinee-game-runner"), CoreDir: filepath.Join(cfg.GamesDir, "cores"),
+			SaveDir: cfg.GameSaveDir(), SystemDir: cfg.GameSystemDir(), WorkDir: cfg.GameWorkDir(),
+			Port: cfg.GamesPort, PublicIPs: cfg.GamesPublicIPs,
+		}, log)
+		if err != nil {
+			log.Warn("games can't be played", "err", err)
+		} else {
+			defer games.Close()
+			os.RemoveAll(cfg.GameWorkDir())
+			apiServer.Games = games
+		}
 	}
 	// A video given up on as damaged is reported to Box Office, which
 	// fetches another copy.

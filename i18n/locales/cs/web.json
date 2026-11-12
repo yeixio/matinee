@@ -1031,6 +1031,13 @@
       "slow": "Matinee se ani po dvou minutách nevrátil. Podívejte se do jeho protokolu nebo ho spusťte znovu tak, jak byl nainstalován.",
       "back": "Matinee se restartoval a je zpět.",
       "failed": "Restart se nezdařil: {{error}}"
+    },
+    "games": {
+      "title": "Hry",
+      "intro": "Hrajte hry na tomto serveru a streamujte je do jakéhokoli zařízení s ovladačem. Je to náhled pro správce: vyzkoušejte to.",
+      "ready": "Připraveno, s emulátory pro {{systems}}.",
+      "notSetUp": "Nedostupné: na serveru chybí spouštěč her a emulátory. Obraz Dockeru je obsahuje.",
+      "open": "Vyzkoušet hru"
     }
   },
   "language": {
@@ -1653,6 +1660,35 @@
       "approvalReports": "Také nahlášené problémy, které by jinak Box Office opravil hned.",
       "replaceDamaged": "Poškozená videa nahrazovat samo",
       "replaceDamagedDetail": "Když Matinee najde poškozený film nebo díl (čtení opakovaně vyprší, i když sdílená složka odpovídá, a skoky v něm také), nahlásí problém s obrazem a Box Office stáhne jinou kopii. Vypnuto: poškozená videa jsou jen uvedena ve stavu serveru."
+    }
+  },
+  "games": {
+    "title": "Hry (náhled)",
+    "intro": "Hry běží na tomto serveru a streamují se k vám, takže je lze hrát s ovladačem na jakémkoli zařízení. Tento náhled slouží k vyzkoušení: vyberte hru nebo spusťte test zpoždění.",
+    "lagTest": "Test zpoždění",
+    "lagTestHint": "Pohybujte čtvercem pomocí křížového ovladače. Obrazovka zbělá, dokud držíte A nebo B: natočte ovladač a obrazovku zároveň a změřte to.",
+    "play": "Hrát",
+    "pickGame": "Vyberte hru",
+    "pickGameHint": "Vaše hry: soubory Game Boy, Game Boy Color, Game Boy Advance a NES nebo zipy s jedním z nich.",
+    "up": "O složku výš",
+    "emptyFolder": "Žádné složky ani hry.",
+    "controller": "Ovladač: {{name}}",
+    "pressButton": "Připojte ovladač a stiskněte tlačítko, nebo použijte klávesnici: šipky, Z, X, A, S a Enter.",
+    "showLag": "Zobrazit zpoždění",
+    "hideLag": "Skrýt zpoždění",
+    "stop": "Přestat hrát",
+    "starting": "Spouštění…",
+    "back": "Zpět",
+    "lostConnection": "Spojení se serverem bylo přerušeno.",
+    "couldntStart": "Hru se nepodařilo spustit.",
+    "ms": "{{value}} ms",
+    "lag": {
+      "measured": "Změřeno, od tlačítka po obraz",
+      "pressA": "Stiskněte A",
+      "network": "Síť, tam a zpět",
+      "server": "Server, jeden snímek",
+      "decode": "Dekódování",
+      "fps": "Snímky za sekundu"
     }
   }
 }

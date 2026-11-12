@@ -284,5 +284,8 @@
   "this_library_isnt_being_scanned": "ця медіатека зараз не сканується",
   "watchpollseconds_must_be_from_10_to_3600": "watchPollSeconds має бути від 10 до 3600",
   "this_server_cant_restart_itself_restart_it_the_way_it_was_started": "цей сервер не може перезапустити себе сам; перезапустіть його так, як його було запущено",
-  "this_titles_files_cant_be_read_right_now_the_network_share_theyre_on_isnt_answering": "файли цього фільму зараз не прочитати: мережева тека, де вони лежать, не відповідає"
+  "this_titles_files_cant_be_read_right_now_the_network_share_theyre_on_isnt_answering": "файли цього фільму зараз не прочитати: мережева тека, де вони лежать, не відповідає",
+  "too_many_games_are_being_played_right_now": "зараз запущено забагато ігор",
+  "cant_find_that_game": "гру не знайдено",
+  "no_emulator_on_this_server_plays_that_game": "жоден емулятор на цьому сервері не запускає цю гру"
 }

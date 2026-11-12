@@ -1027,6 +1027,13 @@
       "slow": "O Matinee não voltou depois de dois minutos. Veja o log dele ou inicie-o de novo do jeito que foi instalado.",
       "back": "O Matinee reiniciou e está de volta.",
       "failed": "Não foi possível reiniciar: {{error}}"
+    },
+    "games": {
+      "title": "Jogos",
+      "intro": "Jogue neste servidor e transmita para qualquer aparelho, com um controle. É uma prévia para admins: experimente.",
+      "ready": "Pronto, com emuladores para {{systems}}.",
+      "notSetUp": "Indisponível: este servidor não tem o executor de jogos e os emuladores. A imagem Docker tem.",
+      "open": "Experimentar um jogo"
     }
   },
   "language": {
@@ -1641,6 +1648,35 @@
       "approvalReports": "Também os problemas relatados, que o Box Office resolveria na hora.",
       "replaceDamaged": "Substituir sozinho vídeos danificados",
       "replaceDamagedDetail": "Quando o Matinee encontra um filme ou episódio danificado (a leitura esgota o tempo repetidamente mesmo com o compartilhamento respondendo, e os saltos dentro dele também), ele relata um problema de imagem e o Box Office busca outra cópia. Desligado: vídeos danificados só aparecem na saúde do servidor."
+    }
+  },
+  "games": {
+    "title": "Jogos (prévia)",
+    "intro": "Os jogos rodam neste servidor e são transmitidos para você, então qualquer aparelho pode jogá-los com um controle. Esta prévia é para testar: escolha um jogo ou inicie o teste de atraso.",
+    "lagTest": "Teste de atraso",
+    "lagTestHint": "Mova o quadrado com o direcional. A tela fica branca enquanto A ou B está pressionado: filme o controle e a tela juntos para medir.",
+    "play": "Jogar",
+    "pickGame": "Escolha um jogo",
+    "pickGameHint": "Jogos seus: arquivos de Game Boy, Game Boy Color, Game Boy Advance e NES, ou zips com um deles.",
+    "up": "Subir uma pasta",
+    "emptyFolder": "Nenhuma pasta ou jogo aqui.",
+    "controller": "Controle: {{name}}",
+    "pressButton": "Conecte um controle e aperte um botão, ou use o teclado: setas, Z, X, A, S e Enter.",
+    "showLag": "Mostrar atraso",
+    "hideLag": "Ocultar atraso",
+    "stop": "Parar de jogar",
+    "starting": "Iniciando…",
+    "back": "Voltar",
+    "lostConnection": "A conexão com o servidor caiu.",
+    "couldntStart": "Não foi possível iniciar o jogo.",
+    "ms": "{{value}} ms",
+    "lag": {
+      "measured": "Medido, do botão à imagem",
+      "pressA": "Aperte A",
+      "network": "Rede, ida e volta",
+      "server": "Servidor, um quadro",
+      "decode": "Decodificação",
+      "fps": "Quadros por segundo"
     }
   }
 }

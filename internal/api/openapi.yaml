@@ -1136,6 +1136,87 @@ paths:
                   dirs: { type: array, items: { type: string }, description: The subfolders' names. }
                   paths: { type: array, items: { type: string }, description: The subfolders' full paths, in the same order. }
                   drives: { type: boolean, description: "True when this is a Windows server's list of drives, which isn't a folder to pick." }
+  /games/streaming:
+    get:
+      summary: Whether this server can play games and stream them, and which systems (admins only, first version)
+      responses:
+        "200":
+          description: What's here.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  available: { type: boolean }
+                  systems:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        key: { type: string, example: gb }
+                        name: { type: string, example: Game Boy }
+                        extensions: { type: array, items: { type: string } }
+                  lagTest: { type: boolean, description: The built-in lag test is here. }
+                  playing: { type: integer, description: How many games are being played now. }
+  /games/files:
+    get:
+      summary: List a folder's subfolders and the files in it that might be games (admins only)
+      parameters:
+        - { name: path, in: query, schema: { type: string }, description: Empty starts at the server's media folder. }
+      responses:
+        "200":
+          description: The folder.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  path: { type: string }
+                  parent: { type: string }
+                  dirs: { type: array, items: { type: object, properties: { name: { type: string }, path: { type: string } } } }
+                  files: { type: array, items: { type: object, properties: { name: { type: string }, path: { type: string } } } }
+  /games/play:
+    post:
+      summary: Start playing a game on the server, streamed over WebRTC (admins only)
+      description: >-
+        Send a WebRTC offer with one video and one audio transceiver (receive only) and a data channel.
+        The answer comes back with every candidate in it. On the data channel, send buttons held as
+        bytes [1, port, low, high] (a bitmask of libretro's joypad buttons, B=0 … R3=15) and pings as
+        [2, …], which come straight back. Once a second the server sends JSON text with how long it
+        takes with each frame. Starting a game ends any other the same person is playing.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                path: { type: string, description: The game file, or a zip holding it. }
+                lagTest: { type: boolean, description: Play the built-in lag test instead of a game. }
+                offer: { type: string, description: The player's SDP offer. }
+      responses:
+        "200":
+          description: Started.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id: { type: string }
+                  answer: { type: string, description: The server's SDP answer. }
+                  system: { type: string }
+                  width: { type: integer }
+                  height: { type: integer }
+                  aspect: { type: number }
+                  fps: { type: number }
+        "400": { description: "No such game, no emulator for it, or it couldn't start." }
+        "503": { description: As many games are being played as the server allows. }
+  /games/play/{id}:
+    delete:
+      summary: Stop a game (admins only); its save is kept
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        "204": { description: Stopped. }
   /import:
     get:
       summary: How the import from another media server is going (admins only)

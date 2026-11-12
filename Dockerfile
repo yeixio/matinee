@@ -25,6 +25,29 @@ RUN --mount=type=secret,id=tmdb_key \
     -ldflags "-s -w -X github.com/yeixio/matinee/internal/version.Version=${VERSION} -X github.com/yeixio/matinee/internal/config.DefaultTMDBKey=${TMDB_KEY}" \
     -o /out/matinee ./cmd/matinee
 
+# The game runner and the emulators that play games on the server
+# (games/). Built on the build machine for the target, with a cross
+# compiler, which is much faster than building under emulation.
+FROM --platform=$BUILDPLATFORM debian:trixie AS games
+ARG TARGETARCH BUILDARCH
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends ca-certificates git make cmake gcc g++ binutils \
+    && case "$TARGETARCH" in \
+         "$BUILDARCH") ;; \
+         arm64) apt-get install -y --no-install-recommends gcc-aarch64-linux-gnu g++-aarch64-linux-gnu binutils-aarch64-linux-gnu ;; \
+         arm) apt-get install -y --no-install-recommends gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf binutils-arm-linux-gnueabihf ;; \
+         amd64) apt-get install -y --no-install-recommends gcc-x86-64-linux-gnu g++-x86-64-linux-gnu binutils-x86-64-linux-gnu ;; \
+       esac \
+    && rm -rf /var/lib/apt/lists/*
+COPY games/ /src/games/
+RUN case "$TARGETARCH" in \
+      "$BUILDARCH") host= ;; \
+      arm64) host=aarch64-linux-gnu ;; \
+      arm) host=arm-linux-gnueabihf ;; \
+      amd64) host=x86_64-linux-gnu ;; \
+    esac \
+    && HOST=$host sh /src/games/build.sh /out/games
+
 # Debian rather than Alpine: its FFmpeg is built with every hardware backend
 # Matinee uses on Linux, and glibc lets NVIDIA's container runtime add its
 # driver libraries. mesa-va-drivers runs VAAPI on AMD GPUs (and older Intel);
@@ -41,10 +64,12 @@ RUN apt-get update \
 # Tells NVIDIA's container runtime to add the video encode/decode libraries.
 ENV NVIDIA_DRIVER_CAPABILITIES=compute,video,utility
 COPY --from=server /out/matinee /usr/local/bin/matinee
+COPY --from=games /out/games /usr/lib/matinee/games
 USER matinee
 # MATINEE_INSTALL tells Settings → Updates that a new image is the way to update.
 ENV MATINEE_DATA_DIR=/data MATINEE_ADDR=:7171 MATINEE_INSTALL=docker
 VOLUME /data
-EXPOSE 7171
+# 7173/udp streams games to players.
+EXPOSE 7171 7173/udp
 HEALTHCHECK --interval=30s --timeout=3s CMD wget -qO- http://127.0.0.1:7171/healthz || exit 1
 ENTRYPOINT ["matinee"]

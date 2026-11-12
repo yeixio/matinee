@@ -640,6 +640,19 @@
                   "na": "TVs stream from the server instead."
                 }
               }
+            },
+            {
+              "name": "Play games streamed from the server (preview)",
+              "doc": "/docs/server/games/",
+              "since": "v0.2.4",
+              "apps": {
+                "web": true,
+                "ios": "matinee#394",
+                "android": "matinee#394",
+                "appletv": "matinee#394",
+                "androidtv": "matinee#394",
+                "tvweb": "matinee#394"
+              }
             }
           ]
         },

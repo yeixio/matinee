@@ -284,5 +284,8 @@
   "this_library_isnt_being_scanned": "det här biblioteket genomsöks inte",
   "watchpollseconds_must_be_from_10_to_3600": "watchPollSeconds måste vara mellan 10 och 3600",
   "this_server_cant_restart_itself_restart_it_the_way_it_was_started": "den här servern kan inte starta om sig själv; starta om den så som den startades",
-  "this_titles_files_cant_be_read_right_now_the_network_share_theyre_on_isnt_answering": "filerna för den här titeln kan inte läsas just nu: nätverksresursen de ligger på svarar inte"
+  "this_titles_files_cant_be_read_right_now_the_network_share_theyre_on_isnt_answering": "filerna för den här titeln kan inte läsas just nu: nätverksresursen de ligger på svarar inte",
+  "too_many_games_are_being_played_right_now": "för många spel spelas just nu",
+  "cant_find_that_game": "hittar inte det spelet",
+  "no_emulator_on_this_server_plays_that_game": "ingen emulator på servern kan spela det spelet"
 }

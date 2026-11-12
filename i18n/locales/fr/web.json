@@ -1027,6 +1027,13 @@
       "slow": "Matinee n'est pas revenu après deux minutes. Consultez son journal ou relancez-le comme il a été installé.",
       "back": "Matinee a redémarré et est de retour.",
       "failed": "Impossible de redémarrer : {{error}}"
+    },
+    "games": {
+      "title": "Jeux",
+      "intro": "Jouez sur ce serveur et diffusez vers n'importe quel appareil, avec une manette. C'est un aperçu pour les admins : essayez pour voir.",
+      "ready": "Prêt, avec des émulateurs pour {{systems}}.",
+      "notSetUp": "Indisponible : ce serveur n'a pas le lanceur de jeux ni les émulateurs. L'image Docker les inclut.",
+      "open": "Essayer un jeu"
     }
   },
   "language": {
@@ -1641,6 +1648,35 @@
       "approvalReports": "Les problèmes signalés aussi, que Box Office corrige sinon tout de suite.",
       "replaceDamaged": "Remplacer d'eux-mêmes les vidéos endommagées",
       "replaceDamagedDetail": "Quand Matinee trouve un film ou un épisode endommagé (sa lecture expire sans cesse alors que le partage répond, et les sauts dedans aussi), il signale un problème d'image et Box Office récupère une autre copie. Désactivé : les vidéos endommagées sont seulement listées dans l'état du serveur."
+    }
+  },
+  "games": {
+    "title": "Jeux (aperçu)",
+    "intro": "Les jeux tournent sur ce serveur et sont diffusés vers vous, pour jouer sur n'importe quel appareil avec une manette. Cet aperçu sert à essayer : choisissez un jeu ou lancez le test de latence.",
+    "lagTest": "Test de latence",
+    "lagTestHint": "Déplacez le carré avec la croix directionnelle. L'écran devient blanc tant que A ou B est enfoncé : filmez la manette et l'écran ensemble pour mesurer.",
+    "play": "Jouer",
+    "pickGame": "Choisir un jeu",
+    "pickGameHint": "Vos propres jeux : fichiers Game Boy, Game Boy Color, Game Boy Advance et NES, ou zips qui en contiennent un.",
+    "up": "Dossier parent",
+    "emptyFolder": "Aucun dossier ni jeu ici.",
+    "controller": "Manette : {{name}}",
+    "pressButton": "Connectez une manette et appuyez sur un bouton, ou utilisez le clavier : flèches, Z, X, A, S et Entrée.",
+    "showLag": "Afficher la latence",
+    "hideLag": "Masquer la latence",
+    "stop": "Arrêter de jouer",
+    "starting": "Démarrage…",
+    "back": "Retour",
+    "lostConnection": "Connexion au serveur perdue.",
+    "couldntStart": "Impossible de lancer le jeu.",
+    "ms": "{{value}} ms",
+    "lag": {
+      "measured": "Mesuré, du bouton à l'image",
+      "pressA": "Appuyez sur A",
+      "network": "Réseau, aller-retour",
+      "server": "Serveur, une image",
+      "decode": "Décodage",
+      "fps": "Images par seconde"
     }
   }
 }

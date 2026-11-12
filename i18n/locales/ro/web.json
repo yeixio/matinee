@@ -1027,6 +1027,13 @@
       "slow": "Matinee nu a revenit după două minute. Uită-te în jurnalul lui sau pornește-l din nou așa cum a fost instalat.",
       "back": "Matinee a repornit și a revenit.",
       "failed": "Nu s-a putut reporni: {{error}}"
+    },
+    "games": {
+      "title": "Jocuri",
+      "intro": "Joacă pe acest server și transmite pe orice dispozitiv, cu un controller. Este o previzualizare pentru administratori: încearcă.",
+      "ready": "Gata, cu emulatoare pentru {{systems}}.",
+      "notSetUp": "Indisponibil: serverul nu are rulatorul de jocuri și emulatoarele. Imaginea Docker le are.",
+      "open": "Încearcă un joc"
     }
   },
   "language": {
@@ -1641,6 +1648,35 @@
       "approvalReports": "Și problemele raportate, pe care altfel Box Office le rezolvă imediat.",
       "replaceDamaged": "Înlocuiește singur videoclipurile deteriorate",
       "replaceDamagedDetail": "Când Matinee găsește un film sau episod deteriorat (citirea expiră iar și iar deși partajarea răspunde, la fel și salturile în el), raportează o problemă de imagine și Box Office aduce altă copie. Dezactivat: videoclipurile deteriorate sunt doar listate în starea serverului."
+    }
+  },
+  "games": {
+    "title": "Jocuri (previzualizare)",
+    "intro": "Jocurile rulează pe acest server și sunt transmise la tine, astfel încât orice dispozitiv le poate juca cu un controller. Această previzualizare e pentru încercare: alege un joc sau pornește testul de întârziere.",
+    "lagTest": "Test de întârziere",
+    "lagTestHint": "Mută pătratul cu crucea direcțională. Ecranul devine alb cât timp ții apăsat A sau B: filmează controllerul și ecranul împreună ca să măsori.",
+    "play": "Joacă",
+    "pickGame": "Alege un joc",
+    "pickGameHint": "Jocurile tale: fișiere Game Boy, Game Boy Color, Game Boy Advance și NES, sau arhive zip cu unul dintre ele.",
+    "up": "Un dosar mai sus",
+    "emptyFolder": "Niciun dosar sau joc aici.",
+    "controller": "Controller: {{name}}",
+    "pressButton": "Conectează un controller și apasă un buton, sau folosește tastatura: săgeți, Z, X, A, S și Enter.",
+    "showLag": "Arată întârzierea",
+    "hideLag": "Ascunde întârzierea",
+    "stop": "Oprește jocul",
+    "starting": "Se pornește…",
+    "back": "Înapoi",
+    "lostConnection": "Conexiunea cu serverul s-a pierdut.",
+    "couldntStart": "Jocul nu a putut porni.",
+    "ms": "{{value}} ms",
+    "lag": {
+      "measured": "Măsurat, de la buton la imagine",
+      "pressA": "Apasă A",
+      "network": "Rețea, dus-întors",
+      "server": "Server, un cadru",
+      "decode": "Decodare",
+      "fps": "Cadre pe secundă"
     }
   }
 }

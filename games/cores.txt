@@ -1,0 +1,8 @@
+# The emulators Matinee plays games with on the server: one line each,
+#   name  source  commit  how it's built
+# build.sh builds them into the image; internal/gamestream/systems.go says
+# which systems each plays. Every one is free software Matinee may hand
+# out with the server (GPL or MPL); none with a non-commercial licence.
+gambatte  https://github.com/libretro/gambatte-libretro  77f2567d718b8973d02caa2daa8dce4953faf811  make
+fceumm    https://github.com/libretro/libretro-fceumm    e0f3086a8104f8fbbe49a2615b10401504a9533f  make
+mgba      https://github.com/mgba-emu/mgba               26b7884bc25a5933960f3cdcd98bac1ae14d42e2  cmake

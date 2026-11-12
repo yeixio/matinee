@@ -113,6 +113,7 @@ jobs:
       - run: helm template t deploy/helm/matinee --set gpu.type=vaapi --set 'gpu.vaapi.groups={993}' > /dev/null
       - run: helm template t deploy/helm/matinee --set gpu.type=vaapi --set gpu.vaapi.resource=amd.com/gpu > /dev/null
       - run: helm template t deploy/helm/matinee --set gpu.type=nvidia > /dev/null
+      - run: "helm template t deploy/helm/matinee --set games.port=0 | grep -q 'MATINEE_GAMES_DIR'"
       - run: "helm template t deploy/helm/matinee --set metrics.serviceMonitor.enabled=true --set metrics.tokenSecret.name=m --set metrics.prometheusRule.enabled=true | grep -q 'alert: MatineeFFmpegNotStopping'"
       - run: "helm template t deploy/helm/matinee --set metrics.grafanaDashboard.enabled=true | grep -q 'matinee-playback'"
       # Recreate needs no drain delay; RollingUpdate waits 5s for the Service.

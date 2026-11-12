@@ -1019,6 +1019,13 @@
       "slow": "Sau hai phút Matinee vẫn chưa hoạt động lại. Hãy xem nhật ký hoặc khởi động lại theo cách đã cài đặt.",
       "back": "Matinee đã khởi động lại và hoạt động trở lại.",
       "failed": "Không thể khởi động lại: {{error}}"
+    },
+    "games": {
+      "title": "Trò chơi",
+      "intro": "Chơi trên máy chủ này và truyền đến mọi thiết bị bằng tay cầm. Đây là bản xem trước cho quản trị viên: hãy thử.",
+      "ready": "Sẵn sàng, có trình giả lập cho {{systems}}.",
+      "notSetUp": "Không khả dụng: máy chủ này không có trình chạy trò chơi và trình giả lập. Ảnh Docker có sẵn.",
+      "open": "Thử một trò chơi"
     }
   },
   "language": {
@@ -1617,6 +1624,35 @@
       "approvalReports": "Cả các sự cố được báo, vốn Box Office sẽ sửa ngay nếu không bật.",
       "replaceDamaged": "Tự thay video bị hỏng",
       "replaceDamagedDetail": "Khi Matinee thấy một phim hoặc tập bị hỏng (đọc liên tục quá thời gian dù thư mục chia sẻ vẫn phản hồi, và tua bên trong cũng vậy), nó báo lỗi hình ảnh và Box Office lấy một bản khác. Tắt: video hỏng chỉ được liệt kê trong tình trạng máy chủ."
+    }
+  },
+  "games": {
+    "title": "Trò chơi (xem trước)",
+    "intro": "Trò chơi chạy trên máy chủ này và được truyền đến bạn, nên mọi thiết bị đều chơi được bằng tay cầm. Bản xem trước này để thử: chọn một trò chơi hoặc bắt đầu kiểm tra độ trễ.",
+    "lagTest": "Kiểm tra độ trễ",
+    "lagTestHint": "Di chuyển ô vuông bằng nút hướng. Màn hình chuyển trắng khi giữ A hoặc B: quay tay cầm và màn hình cùng lúc để đo.",
+    "play": "Chơi",
+    "pickGame": "Chọn trò chơi",
+    "pickGameHint": "Trò chơi của bạn: tệp Game Boy, Game Boy Color, Game Boy Advance và NES, hoặc tệp zip chứa một trong số đó.",
+    "up": "Lên một thư mục",
+    "emptyFolder": "Không có thư mục hay trò chơi nào ở đây.",
+    "controller": "Tay cầm: {{name}}",
+    "pressButton": "Kết nối tay cầm và nhấn một nút, hoặc dùng bàn phím: phím mũi tên, Z, X, A, S và Enter.",
+    "showLag": "Hiện độ trễ",
+    "hideLag": "Ẩn độ trễ",
+    "stop": "Dừng chơi",
+    "starting": "Đang khởi động…",
+    "back": "Quay lại",
+    "lostConnection": "Mất kết nối với máy chủ.",
+    "couldntStart": "Không thể khởi động trò chơi.",
+    "ms": "{{value}} ms",
+    "lag": {
+      "measured": "Đo được, từ nút đến hình",
+      "pressA": "Nhấn A",
+      "network": "Mạng, đi và về",
+      "server": "Máy chủ, một khung hình",
+      "decode": "Giải mã",
+      "fps": "Khung hình mỗi giây"
     }
   }
 }
