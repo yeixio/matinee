@@ -8,7 +8,7 @@ sidebar:
 
 Matinee can play games for you on the server and stream them to your screen, the same way it streams a film. You connect a controller, pick a game and play: the emulator, its settings and the video all stay on the server, so there's nothing to install or set up on the device you play on.
 
-This is a **preview**. You play in the web player and in the phone and TV apps ([below](#in-the-apps)), except on Apple TV for now ([#394](https://github.com/yeixio/matinee/issues/394)).
+This is a **preview**. You play in the web player and in the phone and TV apps ([below](#in-the-apps)).
 
 ## What it plays
 
@@ -61,8 +61,12 @@ The iPhone, iPad and Android apps, Android TV, Fire TV, and Samsung and LG TVs p
 - **On a phone or tablet** the game turns sideways and shows buttons on the screen: a d-pad, A, B, X, Y, L, R, Select and Start. Use both thumbs at once. On the N64 the d-pad moves the stick.
 - **With a controller**, pair it with the phone, tablet or TV in its Bluetooth settings first. The buttons on the screen make way when it connects; tap the screen to bring them back. Up to four controllers play at once, each as its own player.
 - **To stop**, press the **×** at the top, the TV remote's **Back**, or the controller's own home button.
+<!-- /since -->
 
-Apple TV doesn't play games yet.
+<!-- since: v0.2.5 -->
+#### On Apple TV
+
+From app version 1.0.40, Apple TV plays games too, with a server from 0.2.5 on. Pair the controller under **Settings → Remotes and Devices → Bluetooth** on the Apple TV. Apple TV gets the game straight over the connection it already has to the server, so it doesn't need the [games port](#the-games-port). Press the Siri Remote's **Back** button (**Menu** on older remotes), or the controller's own home button, to stop.
 <!-- /since -->
 
 ## How fast it is

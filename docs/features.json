@@ -649,7 +649,7 @@
                 "web": true,
                 "ios": true,
                 "android": true,
-                "appletv": "matinee#394",
+                "appletv": true,
                 "androidtv": true,
                 "tvweb": true
               }
@@ -662,7 +662,7 @@
                 "web": true,
                 "ios": true,
                 "android": true,
-                "appletv": "matinee#394",
+                "appletv": true,
                 "androidtv": true,
                 "tvweb": true
               }
