@@ -273,6 +273,7 @@
   "audiodelay_is_milliseconds_between_2000_and_2000": "音声の遅延はミリ秒で、-2000〜2000 の範囲です。",
   "subtitle_choices_arent_ones_the_apps_know": "アプリが認識できない字幕の設定です",
   "no_such_font": "そのフォントはありません",
+  "no_such_game": "そのゲームはありません",
   "couldnt_start_playback_for_this_extra": "この特典映像を再生できませんでした",
   "no_such_extra": "その特典映像はありません",
   "only_an_admin_can_add_a_station_on_the_home_network": "ホームネットワーク上の局を追加できるのは管理者だけです",

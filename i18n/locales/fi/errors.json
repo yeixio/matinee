@@ -273,6 +273,7 @@
   "audiodelay_is_milliseconds_between_2000_and_2000": "Äänen viive annetaan millisekunteina, välillä -2000–2000.",
   "subtitle_choices_arent_ones_the_apps_know": "Sovellukset eivät tunne näitä tekstitysvalintoja",
   "no_such_font": "Fonttia ei ole",
+  "no_such_game": "peliä ei ole",
   "couldnt_start_playback_for_this_extra": "tätä lisämateriaalia ei voitu toistaa",
   "no_such_extra": "lisämateriaalia ei löydy",
   "only_an_admin_can_add_a_station_on_the_home_network": "vain ylläpitäjä voi lisätä aseman kotiverkosta",

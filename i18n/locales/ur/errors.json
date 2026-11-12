@@ -273,6 +273,7 @@
   "audiodelay_is_milliseconds_between_2000_and_2000": "آڈیو تاخیر ملی سیکنڈ میں، -2000 اور 2000 کے درمیان ہوتی ہے۔",
   "subtitle_choices_arent_ones_the_apps_know": "ایپس ان سب ٹائٹل انتخابات کو نہیں پہچانتیں",
   "no_such_font": "ایسا کوئی فونٹ نہیں ہے",
+  "no_such_game": "ایسا کوئی گیم نہیں ہے",
   "couldnt_start_playback_for_this_extra": "یہ اضافی مواد نہیں چل سکا",
   "no_such_extra": "ایسا کوئی اضافی مواد نہیں",
   "only_an_admin_can_add_a_station_on_the_home_network": "ہوم نیٹ ورک پر اسٹیشن صرف ایڈمن شامل کر سکتا ہے",
