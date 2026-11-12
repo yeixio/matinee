@@ -35,6 +35,7 @@ const Link = lazy(() => import('./pages/Link'))
 const Requests = lazy(() => import('./pages/Requests'))
 const Upcoming = lazy(() => import('./pages/Upcoming'))
 const LiveTV = lazy(() => import('./pages/LiveTV'))
+const Games = lazy(() => import('./pages/Games'))
 const Discover = lazy(() => import('./pages/Discover'))
 const DiscoverRowPage = lazy(() => import('./pages/Discover').then((m) => ({ default: m.DiscoverRowPage })))
 
@@ -131,6 +132,7 @@ function Screens() {
           <Route path="/settings/:group" element={grownUps(<Settings />)} />
           <Route path="/upcoming" element={grownUps(<Upcoming />)} />
           <Route path="/live" element={grownUps(<LiveTV />)} />
+          <Route path="/games" element={me.data.isAdmin ? <Games /> : <Navigate to="/" replace />} />
           <Route path="/discover" element={grownUps(<Discover />)} />
           <Route path="/discover/row/:id" element={grownUps(<DiscoverRowPage />)} />
           <Route path="/requests" element={grownUps(me.data.guest ? <Login /> : <Requests />)} />

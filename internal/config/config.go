@@ -7,6 +7,7 @@ import (
 	"os"
 	"path/filepath"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/yeixio/matinee/internal/connect"
@@ -52,7 +53,23 @@ type Config struct {
 	// that's less than its disk (a Kubernetes emptyDir's sizeLimit); 0 for
 	// none. Transcodes keep within it (see stream.SpaceLimit).
 	CacheLimit int64
+	// GamesDir has matinee-game-runner and its emulators (cores/); "" for
+	// a server that doesn't play games. GamesPort is the UDP port games
+	// stream through, 0 for any; GamesPublicIPs the addresses players
+	// reach it at, when the server can't see its own.
+	GamesDir       string
+	GamesPort      int
+	GamesPublicIPs []string
 }
+
+// GameSaveDir has games' saves, a folder per person.
+func (c Config) GameSaveDir() string { return filepath.Join(c.DataDir, "games", "saves") }
+
+// GameSystemDir has BIOS files the emulators that need one look for.
+func (c Config) GameSystemDir() string { return filepath.Join(c.DataDir, "games", "system") }
+
+// GameWorkDir has games unpacked from zips while they're played.
+func (c Config) GameWorkDir() string { return filepath.Join(c.DataDir, "games", "playing") }
 
 // Database is what store.Open takes: the PostgreSQL URL, or the SQLite file.
 func (c Config) Database() string {
@@ -113,6 +130,9 @@ func Load(args []string) (Config, error) {
 	fs.BoolVar(&c.Plugins, "plugins", env("MATINEE_PLUGINS", "true") != "false", "let admins install plugins in Settings")
 	fs.BoolVar(&c.PodcastsHomeNetwork, "podcasts-home-network", env("MATINEE_PODCASTS_HOME_NETWORK", "false") == "true", "let podcast feeds and radio stations come from addresses on the home network too (off: only from the internet)")
 	fs.StringVar(&c.PluginCatalog, "plugin-catalog", env("MATINEE_PLUGIN_CATALOG", "https://matinee.yeix.io/plugins.json"), "list of official plugins Settings offers; off for none")
+	fs.StringVar(&c.GamesDir, "games-dir", env("MATINEE_GAMES_DIR", defaultGamesDir()), "folder with matinee-game-runner and its emulators; off to not play games")
+	fs.IntVar(&c.GamesPort, "games-port", envInt("MATINEE_GAMES_PORT", 7173), "UDP port games stream to players through; 0 for any")
+	gamesIPs := fs.String("games-public-ip", env("MATINEE_GAMES_PUBLIC_IP", ""), "addresses players reach the games port at, comma separated, when the server can't see its own (behind NAT)")
 	interval := fs.String("scan-interval", env("MATINEE_SCAN_INTERVAL", "6h"), "how often every library is rescanned in full until an admin picks in Settings, 0 to disable")
 	drainDelay := fs.String("drain-delay", env("MATINEE_DRAIN_DELAY", "0s"), "on shutdown, how long to keep serving after telling players the server is restarting (the Helm chart uses 5s)")
 	shutdownTimeout := fs.String("shutdown-timeout", env("MATINEE_SHUTDOWN_TIMEOUT", "10s"), "on shutdown, how long requests in flight get to finish")
@@ -128,6 +148,14 @@ func Load(args []string) (Config, error) {
 	c.ScanInterval = d
 	if c.RemoteAddr == "off" {
 		c.RemoteAddr = ""
+	}
+	if c.GamesDir == "off" {
+		c.GamesDir = ""
+	}
+	for _, ip := range strings.Split(*gamesIPs, ",") {
+		if ip = strings.TrimSpace(ip); ip != "" {
+			c.GamesPublicIPs = append(c.GamesPublicIPs, ip)
+		}
 	}
 	if c.PluginCatalog == "off" {
 		c.PluginCatalog = ""
@@ -157,6 +185,35 @@ func Load(args []string) (Config, error) {
 		return c, fmt.Errorf("create data dir: %w", err)
 	}
 	return c, nil
+}
+
+func envInt(key string, def int) int {
+	if v, err := strconv.Atoi(os.Getenv(key)); err == nil {
+		return v
+	}
+	return def
+}
+
+// defaultGamesDir is where the image and the packages put the game runner:
+// /usr/lib/matinee/games, or games next to the matinee binary.
+func defaultGamesDir() string {
+	for _, d := range []string{"/usr/lib/matinee/games", exeDir("games")} {
+		if d == "" {
+			continue
+		}
+		if _, err := os.Stat(filepath.Join(d, "matinee-game-runner")); err == nil {
+			return d
+		}
+	}
+	return ""
+}
+
+func exeDir(name string) string {
+	exe, err := os.Executable()
+	if err != nil {
+		return ""
+	}
+	return filepath.Join(filepath.Dir(exe), name)
 }
 
 func env(key, def string) string {

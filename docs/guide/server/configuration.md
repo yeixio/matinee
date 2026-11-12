@@ -86,6 +86,9 @@ Most of Matinee is set up in the web player under **Settings**. A few things abo
 | `MATINEE_SERVER_NAME` | `Matinee` | The name the apps show for this server |
 | `MATINEE_PUBLIC_URL` | empty | The address the apps should use, such as `https://matinee.example.com` |
 | `MATINEE_HOME_ADDR` | empty | A second listen address just for the [home network](/docs/server/home-network/), such as `:7172` |
+| `MATINEE_GAMES_PORT` | `7173` | The UDP port [games](/docs/server/games/) stream to players through; `0` for any |
+| `MATINEE_GAMES_PUBLIC_IP` | empty | The addresses players reach the games port at, comma separated, when the server can't see its own (behind NAT or in a container). The Helm chart sets it |
+| `MATINEE_GAMES_DIR` | `/usr/lib/matinee/games` | Where the game runner and its emulators are; `off` turns games off |
 | `MATINEE_REMOTE_ADDR` | `:7443` | HTTPS address for [remote access](/docs/server/remote-access/); `off` to not offer it |
 | `MATINEE_CONNECT_URL` | `https://connect.matinee.yeix.io` | The lookup service that helps the apps find the server after its address changes. It only learns the address, never carries media; `off` to not use it |
 | `MATINEE_PLUGINS` | `true` | Let admins install [plugins](/docs/server/plugins/); `false` turns plugins off |

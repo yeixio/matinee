@@ -1023,6 +1023,13 @@
       "slow": "A Matinee két perc után sem tért vissza. Nézd meg a naplóját, vagy indítsd el újra úgy, ahogy telepítve lett.",
       "back": "A Matinee újraindult, és újra elérhető.",
       "failed": "Nem sikerült újraindítani: {{error}}"
+    },
+    "games": {
+      "title": "Játékok",
+      "intro": "Játssz ezen a szerveren, és streameld bármely eszközre kontrollerrel. Ez egy előzetes adminoknak: próbáld ki.",
+      "ready": "Kész, emulátorokkal ehhez: {{systems}}.",
+      "notSetUp": "Nem elérhető: a szerveren nincs játékfuttató és emulátor. A Docker-kép tartalmazza őket.",
+      "open": "Játék kipróbálása"
     }
   },
   "language": {
@@ -1629,6 +1636,35 @@
       "approvalReports": "A bejelentett problémák is, amelyeket a Box Office egyébként azonnal javít.",
       "replaceDamaged": "Sérült videók automatikus cseréje",
       "replaceDamagedDetail": "Ha a Matinee sérült filmet vagy epizódot talál (az olvasása újra és újra időtúllépésbe fut, pedig a megosztás válaszol, és az ugrások is), képhibát jelent, és a Box Office másik példányt szerez. Ki: a sérült videók csak a szerver állapotában szerepelnek."
+    }
+  },
+  "games": {
+    "title": "Játékok (előzetes)",
+    "intro": "A játékok ezen a szerveren futnak, és hozzád streamelődnek, így bármely eszközön játszhatók kontrollerrel. Ez az előzetes kipróbálásra való: válassz játékot, vagy indítsd a késleltetési tesztet.",
+    "lagTest": "Késleltetési teszt",
+    "lagTestHint": "Mozgasd a négyzetet a nyílgombokkal. A képernyő fehér, amíg A vagy B le van nyomva: vedd fel együtt a kontrollert és a képernyőt a méréshez.",
+    "play": "Játék",
+    "pickGame": "Válassz játékot",
+    "pickGameHint": "Saját játékaid: Game Boy, Game Boy Color, Game Boy Advance és NES fájlok, vagy ezeket tartalmazó zipek.",
+    "up": "Egy mappával feljebb",
+    "emptyFolder": "Nincs itt mappa vagy játék.",
+    "controller": "Kontroller: {{name}}",
+    "pressButton": "Csatlakoztass egy kontrollert és nyomj meg egy gombot, vagy használd a billentyűzetet: nyilak, Z, X, A, S és Enter.",
+    "showLag": "Késleltetés mutatása",
+    "hideLag": "Késleltetés elrejtése",
+    "stop": "Játék befejezése",
+    "starting": "Indítás…",
+    "back": "Vissza",
+    "lostConnection": "Megszakadt a kapcsolat a szerverrel.",
+    "couldntStart": "Nem sikerült elindítani a játékot.",
+    "ms": "{{value}} ms",
+    "lag": {
+      "measured": "Mért, gombtól a képig",
+      "pressA": "Nyomd meg az A-t",
+      "network": "Hálózat, oda-vissza",
+      "server": "Szerver, egy képkocka",
+      "decode": "Dekódolás",
+      "fps": "Képkocka másodpercenként"
     }
   }
 }

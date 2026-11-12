@@ -284,5 +284,8 @@
   "this_library_isnt_being_scanned": "此媒體庫未在掃描",
   "watchpollseconds_must_be_from_10_to_3600": "watchPollSeconds 必須介於 10 到 3600",
   "this_server_cant_restart_itself_restart_it_the_way_it_was_started": "此伺服器無法自行重新啟動；請依啟動它的方式重新啟動",
-  "this_titles_files_cant_be_read_right_now_the_network_share_theyre_on_isnt_answering": "目前無法讀取此作品的檔案：它們所在的網路共享沒有回應"
+  "this_titles_files_cant_be_read_right_now_the_network_share_theyre_on_isnt_answering": "目前無法讀取此作品的檔案：它們所在的網路共享沒有回應",
+  "too_many_games_are_being_played_right_now": "目前執行的遊戲太多",
+  "cant_find_that_game": "找不到該遊戲",
+  "no_emulator_on_this_server_plays_that_game": "此伺服器上沒有能執行該遊戲的模擬器"
 }

@@ -1023,6 +1023,13 @@
       "slow": "Matinee hasn't come back after two minutes. Look at its log, or start it again the way it was installed.",
       "back": "Matinee restarted and is back.",
       "failed": "Couldn't restart: {{error}}"
+    },
+    "games": {
+      "title": "Games",
+      "intro": "Play games on this server and stream them to any device, with a controller. This is a preview, for admins: try it and see how it feels.",
+      "ready": "Ready, with emulators for {{systems}}.",
+      "notSetUp": "Not available: this server doesn't have the game runner and emulators. The Docker image has them.",
+      "open": "Try playing a game"
     }
   },
   "language": {
@@ -1629,6 +1636,35 @@
       "approvalReports": "Reported problems too, which Box Office otherwise fixes straight away.",
       "replaceDamaged": "Replace damaged videos by themselves",
       "replaceDamagedDetail": "When Matinee finds a movie or episode damaged (reading it keeps timing out while its share answers, and jumping around in it does too), it reports a picture problem and Box Office gets another copy. Off: damaged videos are only listed in Server health."
+    }
+  },
+  "games": {
+    "title": "Games (preview)",
+    "intro": "Games run on this server and stream to you, so any device can play them with a controller. This preview is for trying it out: pick a game, or start the lag test.",
+    "lagTest": "Lag test",
+    "lagTestHint": "Move the square with the d-pad. The screen turns white while A or B is held: film the controller and the screen together to time it.",
+    "play": "Play",
+    "pickGame": "Pick a game",
+    "pickGameHint": "Games you own: Game Boy, Game Boy Color, Game Boy Advance and NES files, or zips holding one.",
+    "up": "Up a folder",
+    "emptyFolder": "No folders or games here.",
+    "controller": "Controller: {{name}}",
+    "pressButton": "Connect a controller and press a button, or use the keyboard: arrows, Z, X, A, S and Enter.",
+    "showLag": "Show lag",
+    "hideLag": "Hide lag",
+    "stop": "Stop playing",
+    "starting": "Starting…",
+    "back": "Back",
+    "lostConnection": "Lost the connection to the server.",
+    "couldntStart": "Couldn't start the game.",
+    "ms": "{{value}} ms",
+    "lag": {
+      "measured": "Measured, press to picture",
+      "pressA": "Press A",
+      "network": "Network, there and back",
+      "server": "Server, one frame",
+      "decode": "Decoding",
+      "fps": "Frames a second"
     }
   }
 }

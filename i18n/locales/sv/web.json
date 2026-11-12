@@ -1023,6 +1023,13 @@
       "slow": "Matinee har inte kommit tillbaka efter två minuter. Titta i loggen eller starta den igen så som den installerades.",
       "back": "Matinee har startat om och är tillbaka.",
       "failed": "Kunde inte starta om: {{error}}"
+    },
+    "games": {
+      "title": "Spel",
+      "intro": "Spela spel på den här servern och strömma dem till alla enheter, med handkontroll. Det här är en förhandsversion för administratörer: prova hur det känns.",
+      "ready": "Klar, med emulatorer för {{systems}}.",
+      "notSetUp": "Inte tillgängligt: servern saknar spelkörare och emulatorer. Docker-avbildningen har dem.",
+      "open": "Prova ett spel"
     }
   },
   "language": {
@@ -1629,6 +1636,35 @@
       "approvalReports": "Även rapporterade problem, som Box Office annars åtgärdar direkt.",
       "replaceDamaged": "Ersätt skadade videor av sig själv",
       "replaceDamagedDetail": "När Matinee hittar en skadad film eller ett skadat avsnitt (läsningen tar slut på tid gång på gång fast resursen svarar, och hopp i den också) rapporterar den ett bildproblem och Box Office hämtar en annan kopia. Av: skadade videor listas bara i serverhälsan."
+    }
+  },
+  "games": {
+    "title": "Spel (förhandsversion)",
+    "intro": "Spelen körs på den här servern och strömmas till dig, så alla enheter kan spela dem med en handkontroll. Förhandsversionen är för att testa: välj ett spel eller starta fördröjningstestet.",
+    "lagTest": "Fördröjningstest",
+    "lagTestHint": "Flytta fyrkanten med styrkorset. Skärmen blir vit medan A eller B hålls in: filma handkontrollen och skärmen tillsammans för att mäta.",
+    "play": "Spela",
+    "pickGame": "Välj ett spel",
+    "pickGameHint": "Spel du äger: Game Boy-, Game Boy Color-, Game Boy Advance- och NES-filer, eller zip-filer med ett av dem.",
+    "up": "Upp en mapp",
+    "emptyFolder": "Inga mappar eller spel här.",
+    "controller": "Handkontroll: {{name}}",
+    "pressButton": "Anslut en handkontroll och tryck på en knapp, eller använd tangentbordet: pilar, Z, X, A, S och Enter.",
+    "showLag": "Visa fördröjning",
+    "hideLag": "Dölj fördröjning",
+    "stop": "Sluta spela",
+    "starting": "Startar…",
+    "back": "Tillbaka",
+    "lostConnection": "Anslutningen till servern bröts.",
+    "couldntStart": "Kunde inte starta spelet.",
+    "ms": "{{value}} ms",
+    "lag": {
+      "measured": "Uppmätt, knapp till bild",
+      "pressA": "Tryck på A",
+      "network": "Nätverk, fram och tillbaka",
+      "server": "Server, en bildruta",
+      "decode": "Avkodning",
+      "fps": "Bildrutor per sekund"
     }
   }
 }

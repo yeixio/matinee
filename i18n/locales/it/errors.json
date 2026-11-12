@@ -284,5 +284,8 @@
   "this_library_isnt_being_scanned": "questa libreria non è in fase di scansione",
   "watchpollseconds_must_be_from_10_to_3600": "watchPollSeconds deve essere tra 10 e 3600",
   "this_server_cant_restart_itself_restart_it_the_way_it_was_started": "questo server non può riavviarsi da solo; riavvialo come è stato avviato",
-  "this_titles_files_cant_be_read_right_now_the_network_share_theyre_on_isnt_answering": "i file di questo titolo non si possono leggere ora: la condivisione di rete in cui si trovano non risponde"
+  "this_titles_files_cant_be_read_right_now_the_network_share_theyre_on_isnt_answering": "i file di questo titolo non si possono leggere ora: la condivisione di rete in cui si trovano non risponde",
+  "too_many_games_are_being_played_right_now": "troppi giochi in corso in questo momento",
+  "cant_find_that_game": "impossibile trovare quel gioco",
+  "no_emulator_on_this_server_plays_that_game": "nessun emulatore su questo server esegue quel gioco"
 }

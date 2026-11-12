@@ -1019,6 +1019,13 @@
       "slow": "Matinee belum kembali selepas dua minit. Lihat lognya, atau mulakan semula mengikut cara ia dipasang.",
       "back": "Matinee telah dimulakan semula dan kembali.",
       "failed": "Tidak dapat dimulakan semula: {{error}}"
+    },
+    "games": {
+      "title": "Permainan",
+      "intro": "Main permainan pada pelayan ini dan strim ke mana-mana peranti dengan pengawal. Ini pratonton untuk pentadbir: cubalah.",
+      "ready": "Sedia, dengan emulator untuk {{systems}}.",
+      "notSetUp": "Tidak tersedia: pelayan ini tiada pelari permainan dan emulator. Imej Docker memilikinya.",
+      "open": "Cuba permainan"
     }
   },
   "language": {
@@ -1617,6 +1624,35 @@
       "approvalReports": "Juga masalah yang dilaporkan, yang biasanya terus dibaiki oleh Box Office.",
       "replaceDamaged": "Gantikan sendiri video yang rosak",
       "replaceDamagedDetail": "Apabila Matinee menemui filem atau episod yang rosak (membacanya berulang kali tamat masa walaupun perkongsian menjawab, begitu juga lompatan di dalamnya), ia melaporkan masalah gambar dan Box Office mendapatkan salinan lain. Mati: video rosak hanya disenaraikan dalam kesihatan pelayan."
+    }
+  },
+  "games": {
+    "title": "Permainan (pratonton)",
+    "intro": "Permainan berjalan pada pelayan ini dan distrim kepada anda, jadi mana-mana peranti boleh memainkannya dengan pengawal. Pratonton ini untuk mencuba: pilih permainan, atau mulakan ujian lengah.",
+    "lagTest": "Ujian lengah",
+    "lagTestHint": "Gerakkan segi empat dengan d-pad. Skrin menjadi putih selagi A atau B ditekan: rakam pengawal dan skrin bersama untuk mengukurnya.",
+    "play": "Main",
+    "pickGame": "Pilih permainan",
+    "pickGameHint": "Permainan milik anda: fail Game Boy, Game Boy Color, Game Boy Advance dan NES, atau zip yang mengandungi salah satunya.",
+    "up": "Naik satu folder",
+    "emptyFolder": "Tiada folder atau permainan di sini.",
+    "controller": "Pengawal: {{name}}",
+    "pressButton": "Sambungkan pengawal dan tekan butang, atau guna papan kekunci: anak panah, Z, X, A, S dan Enter.",
+    "showLag": "Tunjuk lengah",
+    "hideLag": "Sembunyi lengah",
+    "stop": "Berhenti bermain",
+    "starting": "Memulakan…",
+    "back": "Kembali",
+    "lostConnection": "Sambungan ke pelayan terputus.",
+    "couldntStart": "Tidak dapat memulakan permainan.",
+    "ms": "{{value}} ms",
+    "lag": {
+      "measured": "Diukur, butang ke gambar",
+      "pressA": "Tekan A",
+      "network": "Rangkaian, pergi balik",
+      "server": "Pelayan, satu bingkai",
+      "decode": "Penyahkodan",
+      "fps": "Bingkai sesaat"
     }
   }
 }

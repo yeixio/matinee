@@ -1027,6 +1027,13 @@
       "slow": "Matinee no ha vuelto después de dos minutos. Mira su registro o inícialo de nuevo como se instaló.",
       "back": "Matinee se reinició y ya está de vuelta.",
       "failed": "No se pudo reiniciar: {{error}}"
+    },
+    "games": {
+      "title": "Juegos",
+      "intro": "Juega en este servidor y transmite a cualquier dispositivo con un mando. Es una vista previa para administradores: pruébala.",
+      "ready": "Listo, con emuladores para {{systems}}.",
+      "notSetUp": "No disponible: este servidor no tiene el ejecutor de juegos ni los emuladores. La imagen de Docker los incluye.",
+      "open": "Probar un juego"
     }
   },
   "language": {
@@ -1641,6 +1648,35 @@
       "approvalReports": "También los problemas notificados, que Box Office si no arregla al momento.",
       "replaceDamaged": "Reemplazar solos los vídeos dañados",
       "replaceDamagedDetail": "Cuando Matinee encuentra una película o un episodio dañado (leerlo agota el tiempo una y otra vez aunque la carpeta compartida responde, y saltar dentro de él también), informa de un problema de imagen y Box Office consigue otra copia. Desactivado: los vídeos dañados solo aparecen en el estado del servidor."
+    }
+  },
+  "games": {
+    "title": "Juegos (vista previa)",
+    "intro": "Los juegos se ejecutan en este servidor y se transmiten a ti, así cualquier dispositivo puede jugarlos con un mando. Esta vista previa es para probar: elige un juego o inicia la prueba de retraso.",
+    "lagTest": "Prueba de retraso",
+    "lagTestHint": "Mueve el cuadrado con la cruceta. La pantalla se pone blanca mientras mantienes A o B: graba el mando y la pantalla juntos para medirlo.",
+    "play": "Jugar",
+    "pickGame": "Elige un juego",
+    "pickGameHint": "Juegos tuyos: archivos de Game Boy, Game Boy Color, Game Boy Advance y NES, o zips que contengan uno.",
+    "up": "Subir una carpeta",
+    "emptyFolder": "No hay carpetas ni juegos aquí.",
+    "controller": "Mando: {{name}}",
+    "pressButton": "Conecta un mando y pulsa un botón, o usa el teclado: flechas, Z, X, A, S e Intro.",
+    "showLag": "Mostrar retraso",
+    "hideLag": "Ocultar retraso",
+    "stop": "Dejar de jugar",
+    "starting": "Iniciando…",
+    "back": "Volver",
+    "lostConnection": "Se perdió la conexión con el servidor.",
+    "couldntStart": "No se pudo iniciar el juego.",
+    "ms": "{{value}} ms",
+    "lag": {
+      "measured": "Medido, del botón a la imagen",
+      "pressA": "Pulsa A",
+      "network": "Red, ida y vuelta",
+      "server": "Servidor, un fotograma",
+      "decode": "Decodificación",
+      "fps": "Fotogramas por segundo"
     }
   }
 }

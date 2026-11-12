@@ -1031,6 +1031,13 @@
       "slow": "Matinee nie wrócił po dwóch minutach. Sprawdź jego dziennik albo uruchom go tak, jak został zainstalowany.",
       "back": "Matinee uruchomił się ponownie i działa.",
       "failed": "Nie udało się uruchomić ponownie: {{error}}"
+    },
+    "games": {
+      "title": "Gry",
+      "intro": "Graj na tym serwerze i przesyłaj na dowolne urządzenie, z kontrolerem. To wersja zapoznawcza dla adminów: sprawdź, jak działa.",
+      "ready": "Gotowe, z emulatorami dla: {{systems}}.",
+      "notSetUp": "Niedostępne: na tym serwerze brak programu do gier i emulatorów. Obraz Docker je ma.",
+      "open": "Wypróbuj grę"
     }
   },
   "language": {
@@ -1653,6 +1660,35 @@
       "approvalReports": "Także zgłoszone problemy, które Box Office inaczej naprawia od razu.",
       "replaceDamaged": "Samodzielnie zastępuj uszkodzone filmy",
       "replaceDamagedDetail": "Gdy Matinee znajdzie uszkodzony film lub odcinek (odczyt ciągle przekracza czas, choć udział odpowiada, a przeskoki w nim też), zgłasza problem z obrazem, a Box Office pobiera inną kopię. Wyłączone: uszkodzone filmy są tylko wymienione w stanie serwera."
+    }
+  },
+  "games": {
+    "title": "Gry (wersja zapoznawcza)",
+    "intro": "Gry działają na tym serwerze i są do ciebie przesyłane, więc każde urządzenie może w nie grać z kontrolerem. Ta wersja służy do wypróbowania: wybierz grę albo uruchom test opóźnienia.",
+    "lagTest": "Test opóźnienia",
+    "lagTestHint": "Poruszaj kwadratem krzyżakiem. Ekran robi się biały, gdy trzymasz A lub B: nagraj kontroler i ekran razem, aby to zmierzyć.",
+    "play": "Graj",
+    "pickGame": "Wybierz grę",
+    "pickGameHint": "Twoje gry: pliki Game Boy, Game Boy Color, Game Boy Advance i NES albo zipy z jednym z nich.",
+    "up": "Folder wyżej",
+    "emptyFolder": "Brak folderów i gier.",
+    "controller": "Kontroler: {{name}}",
+    "pressButton": "Podłącz kontroler i naciśnij przycisk albo użyj klawiatury: strzałki, Z, X, A, S i Enter.",
+    "showLag": "Pokaż opóźnienie",
+    "hideLag": "Ukryj opóźnienie",
+    "stop": "Zakończ grę",
+    "starting": "Uruchamianie…",
+    "back": "Wróć",
+    "lostConnection": "Utracono połączenie z serwerem.",
+    "couldntStart": "Nie udało się uruchomić gry.",
+    "ms": "{{value}} ms",
+    "lag": {
+      "measured": "Zmierzone, od przycisku do obrazu",
+      "pressA": "Naciśnij A",
+      "network": "Sieć, tam i z powrotem",
+      "server": "Serwer, jedna klatka",
+      "decode": "Dekodowanie",
+      "fps": "Klatki na sekundę"
     }
   }
 }

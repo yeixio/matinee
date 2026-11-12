@@ -1023,6 +1023,13 @@
       "slow": "Matinee er ikke kommet tilbage efter to minutter. Se loggen, eller start den igen, som den blev installeret.",
       "back": "Matinee er genstartet og tilbage.",
       "failed": "Kunne ikke genstarte: {{error}}"
+    },
+    "games": {
+      "title": "Spil",
+      "intro": "Spil på denne server og stream til enhver enhed med en controller. Dette er en forhåndsvisning for administratorer: prøv, hvordan det føles.",
+      "ready": "Klar, med emulatorer til {{systems}}.",
+      "notSetUp": "Ikke tilgængelig: serveren mangler spilkøreren og emulatorerne. Docker-imaget har dem.",
+      "open": "Prøv et spil"
     }
   },
   "language": {
@@ -1629,6 +1636,35 @@
       "approvalReports": "Også rapporterede problemer, som Box Office ellers retter med det samme.",
       "replaceDamaged": "Udskift selv beskadigede videoer",
       "replaceDamagedDetail": "Når Matinee finder en beskadiget film eller episode (læsning løber tør for tid igen og igen, selvom drevet svarer, og spring i den også), melder den et billedproblem, og Box Office henter en anden kopi. Fra: beskadigede videoer vises kun i serverens tilstand."
+    }
+  },
+  "games": {
+    "title": "Spil (forhåndsvisning)",
+    "intro": "Spil kører på denne server og streames til dig, så enhver enhed kan spille dem med en controller. Denne forhåndsvisning er til at prøve: vælg et spil, eller start forsinkelsestesten.",
+    "lagTest": "Forsinkelsestest",
+    "lagTestHint": "Flyt firkanten med retningsknapperne. Skærmen bliver hvid, mens A eller B holdes nede: film controller og skærm sammen for at måle det.",
+    "play": "Spil",
+    "pickGame": "Vælg et spil",
+    "pickGameHint": "Spil, du ejer: Game Boy-, Game Boy Color-, Game Boy Advance- og NES-filer, eller zip-filer med et af dem.",
+    "up": "En mappe op",
+    "emptyFolder": "Ingen mapper eller spil her.",
+    "controller": "Controller: {{name}}",
+    "pressButton": "Tilslut en controller og tryk på en knap, eller brug tastaturet: pile, Z, X, A, S og Enter.",
+    "showLag": "Vis forsinkelse",
+    "hideLag": "Skjul forsinkelse",
+    "stop": "Stop med at spille",
+    "starting": "Starter…",
+    "back": "Tilbage",
+    "lostConnection": "Forbindelsen til serveren blev afbrudt.",
+    "couldntStart": "Kunne ikke starte spillet.",
+    "ms": "{{value}} ms",
+    "lag": {
+      "measured": "Målt, knap til billede",
+      "pressA": "Tryk på A",
+      "network": "Netværk, frem og tilbage",
+      "server": "Server, ét billede",
+      "decode": "Afkodning",
+      "fps": "Billeder i sekundet"
     }
   }
 }

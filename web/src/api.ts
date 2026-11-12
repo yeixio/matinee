@@ -1495,7 +1495,27 @@ function logParams(q: LogQuery): string {
   return p.toString()
 }
 
+/** Which systems this server plays games for (Settings → Streaming → Games). */
+export interface GameStreaming {
+  available: boolean
+  systems: { key: string; name: string; extensions: string[] }[]
+  lagTest: boolean
+  playing?: number
+}
+
+export interface GameFolder {
+  path: string
+  parent: string
+  dirs: { name: string; path: string }[]
+  files: { name: string; path: string }[]
+}
+
 export const api = {
+  gameStreaming: () => request<GameStreaming>('GET', '/api/v1/games/streaming'),
+  gameFiles: (path?: string) => request<GameFolder>('GET', `/api/v1/games/files${path ? `?path=${encodeURIComponent(path)}` : ''}`),
+  playGame: (body: { path?: string; lagTest?: boolean; offer: string }) =>
+    request<{ id: string; answer: string; system: string; width: number; height: number; aspect: number; fps: number }>('POST', '/api/v1/games/play', body),
+  stopGame: (id: string) => request<void>('DELETE', `/api/v1/games/play/${encodeURIComponent(id)}`),
   server: () => request<{ version: string; apiVersion: number; name?: string; remoteURL?: string }>('GET', '/api/v1/server'),
   setup: () => request<{ needsSetup: boolean }>('GET', '/api/v1/setup'),
   createAdmin: (username: string, password: string) =>

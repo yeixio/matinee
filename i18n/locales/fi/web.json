@@ -1023,6 +1023,13 @@
       "slow": "Matinee ei ole palannut kahdessa minuutissa. Katso sen loki tai käynnistä se uudelleen samalla tavalla kuin se asennettiin.",
       "back": "Matinee käynnistyi uudelleen ja on taas päällä.",
       "failed": "Uudelleenkäynnistys epäonnistui: {{error}}"
+    },
+    "games": {
+      "title": "Pelit",
+      "intro": "Pelaa tällä palvelimella ja suoratoista mille tahansa laitteelle ohjaimella. Tämä on esikatselu ylläpitäjille: kokeile, miltä se tuntuu.",
+      "ready": "Valmis, emulaattorit järjestelmille {{systems}}.",
+      "notSetUp": "Ei käytettävissä: palvelimelta puuttuvat pelinajaja ja emulaattorit. Docker-kuvassa ne ovat.",
+      "open": "Kokeile peliä"
     }
   },
   "language": {
@@ -1629,6 +1636,35 @@
       "approvalReports": "Myös ilmoitetut ongelmat, jotka Box Office muuten korjaa heti.",
       "replaceDamaged": "Korvaa vioittuneet videot itsestään",
       "replaceDamagedDetail": "Kun Matinee löytää vioittuneen elokuvan tai jakson (luku aikakatkaistaan kerta toisensa jälkeen, vaikka jako vastaa, ja hypyt siinä myös), se ilmoittaa kuvaongelmasta ja Box Office hakee toisen kopion. Pois: vioittuneet videot vain luetellaan palvelimen tilassa."
+    }
+  },
+  "games": {
+    "title": "Pelit (esikatselu)",
+    "intro": "Pelit pyörivät tällä palvelimella ja suoratoistetaan sinulle, joten millä tahansa laitteella voi pelata ohjaimella. Tämä esikatselu on kokeilua varten: valitse peli tai aloita viivetesti.",
+    "lagTest": "Viivetesti",
+    "lagTestHint": "Liikuta neliötä ristiohjaimella. Ruutu muuttuu valkoiseksi, kun A tai B on pohjassa: kuvaa ohjain ja ruutu yhdessä mitataksesi.",
+    "play": "Pelaa",
+    "pickGame": "Valitse peli",
+    "pickGameHint": "Omistamasi pelit: Game Boy-, Game Boy Color-, Game Boy Advance- ja NES-tiedostot tai niitä sisältävät zipit.",
+    "up": "Kansio ylöspäin",
+    "emptyFolder": "Ei kansioita tai pelejä täällä.",
+    "controller": "Ohjain: {{name}}",
+    "pressButton": "Yhdistä ohjain ja paina nappia, tai käytä näppäimistöä: nuolet, Z, X, A, S ja Enter.",
+    "showLag": "Näytä viive",
+    "hideLag": "Piilota viive",
+    "stop": "Lopeta peli",
+    "starting": "Käynnistetään…",
+    "back": "Takaisin",
+    "lostConnection": "Yhteys palvelimeen katkesi.",
+    "couldntStart": "Peliä ei voitu käynnistää.",
+    "ms": "{{value}} ms",
+    "lag": {
+      "measured": "Mitattu, napista kuvaan",
+      "pressA": "Paina A",
+      "network": "Verkko, edestakaisin",
+      "server": "Palvelin, yksi kuva",
+      "decode": "Purku",
+      "fps": "Kuvaa sekunnissa"
     }
   }
 }

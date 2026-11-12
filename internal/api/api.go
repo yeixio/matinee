@@ -26,6 +26,7 @@ import (
 	"github.com/yeixio/matinee/internal/backup"
 	"github.com/yeixio/matinee/internal/diagnose"
 	"github.com/yeixio/matinee/internal/download"
+	"github.com/yeixio/matinee/internal/gamestream"
 	"github.com/yeixio/matinee/internal/health"
 	"github.com/yeixio/matinee/internal/hwaccel"
 	"github.com/yeixio/matinee/internal/live"
@@ -107,6 +108,10 @@ type Server struct {
 	// ThemeDir holds the admin's own theme files (see themes.go); empty means
 	// only the built-in themes.
 	ThemeDir string
+
+	// Games plays games on the server and streams them to players (see
+	// games.go); nil when this server can't.
+	Games *gamestream.Manager
 
 	// Remote keeps remote access going (see remote.go); nil when this
 	// server doesn't offer it.
@@ -543,7 +548,7 @@ func (s *Server) Handler() http.Handler {
 		w.Write([]byte("ok"))
 	})
 
-	for _, rt := range append(s.routes(), s.liveRoutes()...) {
+	for _, rt := range append(append(s.routes(), s.liveRoutes()...), s.gameRoutes()...) {
 		var h http.Handler = rt.handler
 		if rt.access != public {
 			h = s.requireUser(rt.handler, rt.access)

@@ -1023,6 +1023,13 @@
       "slow": "Matinee ist nach zwei Minuten noch nicht wieder da. Sieh ins Protokoll oder starte es so, wie es installiert wurde.",
       "back": "Matinee wurde neu gestartet und ist wieder da.",
       "failed": "Neustart fehlgeschlagen: {{error}}"
+    },
+    "games": {
+      "title": "Spiele",
+      "intro": "Spiele auf diesem Server spielen und mit Controller auf jedes Gerät streamen. Dies ist eine Vorschau für Admins: Probier aus, wie es sich anfühlt.",
+      "ready": "Bereit, mit Emulatoren für {{systems}}.",
+      "notSetUp": "Nicht verfügbar: Diesem Server fehlen der Spiele-Runner und die Emulatoren. Das Docker-Image hat sie.",
+      "open": "Ein Spiel ausprobieren"
     }
   },
   "language": {
@@ -1629,6 +1636,35 @@
       "approvalReports": "Auch gemeldete Probleme, die Box Office sonst sofort behebt.",
       "replaceDamaged": "Beschädigte Videos selbst ersetzen",
       "replaceDamagedDetail": "Findet Matinee einen beschädigten Film oder eine beschädigte Folge (das Lesen läuft immer wieder in eine Zeitüberschreitung, obwohl die Freigabe antwortet, und auch Sprünge darin), meldet es ein Bildproblem und Box Office holt eine andere Kopie. Aus: Beschädigte Videos werden nur in der Serverübersicht aufgeführt."
+    }
+  },
+  "games": {
+    "title": "Spiele (Vorschau)",
+    "intro": "Spiele laufen auf diesem Server und werden zu dir gestreamt, so kann jedes Gerät sie mit einem Controller spielen. Diese Vorschau ist zum Ausprobieren: Wähle ein Spiel oder starte den Verzögerungstest.",
+    "lagTest": "Verzögerungstest",
+    "lagTestHint": "Bewege das Quadrat mit dem Steuerkreuz. Solange A oder B gedrückt ist, wird der Bildschirm weiß: Filme Controller und Bildschirm zusammen, um es zu messen.",
+    "play": "Spielen",
+    "pickGame": "Spiel wählen",
+    "pickGameHint": "Spiele, die dir gehören: Game Boy-, Game Boy Color-, Game Boy Advance- und NES-Dateien oder Zips mit einer davon.",
+    "up": "Einen Ordner höher",
+    "emptyFolder": "Hier sind keine Ordner oder Spiele.",
+    "controller": "Controller: {{name}}",
+    "pressButton": "Verbinde einen Controller und drücke eine Taste, oder nutze die Tastatur: Pfeiltasten, Z, X, A, S und Enter.",
+    "showLag": "Verzögerung zeigen",
+    "hideLag": "Verzögerung ausblenden",
+    "stop": "Spiel beenden",
+    "starting": "Wird gestartet…",
+    "back": "Zurück",
+    "lostConnection": "Die Verbindung zum Server ist abgebrochen.",
+    "couldntStart": "Das Spiel konnte nicht starten.",
+    "ms": "{{value}} ms",
+    "lag": {
+      "measured": "Gemessen, Taste bis Bild",
+      "pressA": "Drücke A",
+      "network": "Netzwerk, hin und zurück",
+      "server": "Server, ein Bild",
+      "decode": "Dekodieren",
+      "fps": "Bilder pro Sekunde"
     }
   }
 }

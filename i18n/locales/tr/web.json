@@ -1023,6 +1023,13 @@
       "slow": "Matinee iki dakika sonra hâlâ geri gelmedi. Günlüğüne bakın veya kurulduğu şekilde yeniden başlatın.",
       "back": "Matinee yeniden başladı ve geri geldi.",
       "failed": "Yeniden başlatılamadı: {{error}}"
+    },
+    "games": {
+      "title": "Oyunlar",
+      "intro": "Bu sunucuda oyun oynayın ve kumandayla her cihaza yayınlayın. Bu, yöneticiler için bir önizleme: nasıl hissettirdiğini deneyin.",
+      "ready": "Hazır, {{systems}} için emülatörlerle.",
+      "notSetUp": "Kullanılamıyor: bu sunucuda oyun çalıştırıcı ve emülatörler yok. Docker imajında var.",
+      "open": "Bir oyun dene"
     }
   },
   "language": {
@@ -1629,6 +1636,35 @@
       "approvalReports": "Bildirilen sorunlar da; Box Office bunları aksi halde hemen düzeltir.",
       "replaceDamaged": "Hasarlı videoları kendiliğinden değiştir",
       "replaceDamagedDetail": "Matinee hasarlı bir film veya bölüm bulduğunda (paylaşım yanıt verdiği hâlde okuma tekrar tekrar zaman aşımına uğruyor, içinde atlamak da öyle), bir görüntü sorunu bildirir ve Box Office başka bir kopya getirir. Kapalı: hasarlı videolar yalnızca sunucu durumunda listelenir."
+    }
+  },
+  "games": {
+    "title": "Oyunlar (önizleme)",
+    "intro": "Oyunlar bu sunucuda çalışır ve size yayınlanır, böylece her cihaz bir oyun kumandasıyla oynayabilir. Bu önizleme denemek içindir: bir oyun seçin veya gecikme testini başlatın.",
+    "lagTest": "Gecikme testi",
+    "lagTestHint": "Kareyi yön tuşlarıyla hareket ettirin. A veya B basılıyken ekran beyazlaşır: ölçmek için kumandayı ve ekranı birlikte çekin.",
+    "play": "Oyna",
+    "pickGame": "Bir oyun seçin",
+    "pickGameHint": "Size ait oyunlar: Game Boy, Game Boy Color, Game Boy Advance ve NES dosyaları ya da bunlardan birini içeren zip'ler.",
+    "up": "Bir klasör yukarı",
+    "emptyFolder": "Burada klasör veya oyun yok.",
+    "controller": "Kumanda: {{name}}",
+    "pressButton": "Bir kumanda bağlayıp bir tuşa basın ya da klavyeyi kullanın: oklar, Z, X, A, S ve Enter.",
+    "showLag": "Gecikmeyi göster",
+    "hideLag": "Gecikmeyi gizle",
+    "stop": "Oynamayı bırak",
+    "starting": "Başlatılıyor…",
+    "back": "Geri",
+    "lostConnection": "Sunucuyla bağlantı koptu.",
+    "couldntStart": "Oyun başlatılamadı.",
+    "ms": "{{value}} ms",
+    "lag": {
+      "measured": "Ölçülen, tuştan görüntüye",
+      "pressA": "A'ya basın",
+      "network": "Ağ, gidiş dönüş",
+      "server": "Sunucu, bir kare",
+      "decode": "Kod çözme",
+      "fps": "Saniyedeki kare"
     }
   }
 }

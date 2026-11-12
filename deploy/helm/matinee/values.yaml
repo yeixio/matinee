@@ -219,6 +219,13 @@ remoteAccess:
     storageClass: ""
     existingClaim: ""
 
+# Games played on the server and streamed to players with a controller (a
+# preview: Settings → Streaming → Games). Pictures, sound and buttons go over
+# one UDP port on the node, like the home port, so players at home reach it
+# directly. 0 turns games off.
+games:
+  port: 7173
+
 # Hardware transcoding. Matinee tests the GPUs it can see at startup and uses
 # the best one that works (Settings → Transcoding shows which, and lets an
 # admin pick another or turn it off). These values give the pod a GPU. To run

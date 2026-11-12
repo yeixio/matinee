@@ -284,5 +284,8 @@
   "this_library_isnt_being_scanned": "pustaka ini tidak sedang diimbas",
   "watchpollseconds_must_be_from_10_to_3600": "watchPollSeconds mestilah antara 10 dan 3600",
   "this_server_cant_restart_itself_restart_it_the_way_it_was_started": "pelayan ini tidak boleh memulakan semula dirinya sendiri; mulakan semula mengikut cara ia dimulakan",
-  "this_titles_files_cant_be_read_right_now_the_network_share_theyre_on_isnt_answering": "fail tajuk ini tidak dapat dibaca sekarang: perkongsian rangkaian tempat ia berada tidak menjawab"
+  "this_titles_files_cant_be_read_right_now_the_network_share_theyre_on_isnt_answering": "fail tajuk ini tidak dapat dibaca sekarang: perkongsian rangkaian tempat ia berada tidak menjawab",
+  "too_many_games_are_being_played_right_now": "terlalu banyak permainan sedang dimainkan sekarang",
+  "cant_find_that_game": "permainan itu tidak dijumpai",
+  "no_emulator_on_this_server_plays_that_game": "tiada emulator pada pelayan ini memainkan permainan itu"
 }
