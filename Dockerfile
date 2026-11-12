@@ -24,6 +24,11 @@ RUN --mount=type=secret,id=tmdb_key \
     CGO_ENABLED=0 GOOS=$TARGETOS GOARCH=$TARGETARCH GOARM="${TARGETVARIANT#v}" go build -trimpath \
     -ldflags "-s -w -X github.com/yeixio/matinee/internal/version.Version=${VERSION} -X github.com/yeixio/matinee/internal/config.DefaultTMDBKey=${TMDB_KEY}" \
     -o /out/matinee ./cmd/matinee
+# The game host for PC games (docs/guide/server/games.md), shipped in the
+# image so a Steam container can copy it in.
+RUN CGO_ENABLED=0 GOOS=$TARGETOS GOARCH=$TARGETARCH GOARM="${TARGETVARIANT#v}" go build -trimpath \
+    -ldflags "-s -w -X github.com/yeixio/matinee/internal/version.Version=${VERSION}" \
+    -o /out/matinee-gamehost ./cmd/matinee-gamehost
 
 # The game runner and the emulators that play games on the server
 # (games/). Built on the build machine for the target, with a cross
@@ -66,6 +71,7 @@ RUN apt-get update \
 # Tells NVIDIA's container runtime to add the video encode/decode libraries.
 ENV NVIDIA_DRIVER_CAPABILITIES=compute,video,utility
 COPY --from=server /out/matinee /usr/local/bin/matinee
+COPY --from=server /out/matinee-gamehost /usr/local/bin/matinee-gamehost
 COPY --from=games /out/games /usr/lib/matinee/games
 USER matinee
 # MATINEE_INSTALL tells Settings → Updates that a new image is the way to update.
