@@ -30,10 +30,10 @@ RUN --mount=type=secret,id=tmdb_key \
 # compiler, which is much faster than building under emulation.
 FROM --platform=$BUILDPLATFORM debian:trixie AS games
 # libgl-dev only for its headers: the N64 emulator, built without OpenGL,
-# still includes them.
+# still includes them. nasm assembles its x86-64 recompiler.
 ARG TARGETARCH BUILDARCH
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends ca-certificates git make cmake gcc g++ binutils libgl-dev \
+    && apt-get install -y --no-install-recommends ca-certificates git make cmake gcc g++ binutils libgl-dev nasm \
     && case "$TARGETARCH" in \
          "$BUILDARCH") ;; \
          arm64) apt-get install -y --no-install-recommends gcc-aarch64-linux-gnu g++-aarch64-linux-gnu binutils-aarch64-linux-gnu ;; \
