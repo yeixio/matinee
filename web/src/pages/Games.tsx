@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { ChevronLeft, Folder, Gamepad2, Gauge } from 'lucide-react'
+import { ChevronLeft, Folder, Gamepad2, Gauge, Monitor } from 'lucide-react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSearchParams } from 'react-router-dom'
@@ -18,7 +18,10 @@ export default function Games() {
   const path = params.get('path') ?? undefined
   const streaming = useQuery({ queryKey: ['game-streaming'], queryFn: api.gameStreaming })
   const folder = useQuery({ queryKey: ['game-files', path], queryFn: () => api.gameFiles(path), enabled: !!streaming.data?.available })
-  const [playing, setPlaying] = useState<{ name: string; path?: string; lagTest?: boolean }>()
+  // A game host (Steam on a PC with a graphics card) answers 404 when there
+  // isn't one, and its section stays hidden.
+  const host = useQuery({ queryKey: ['game-host'], queryFn: api.gameHostGames, enabled: !!streaming.data?.available, retry: false })
+  const [playing, setPlaying] = useState<{ name: string; path?: string; hostApp?: number; lagTest?: boolean }>()
 
   if (streaming.data && !streaming.data.available) {
     return (
@@ -49,6 +52,24 @@ export default function Games() {
           <Button variant="primary" onClick={() => setPlaying({ name: t('games.lagTest'), lagTest: true })}>
             {t('games.play')}
           </Button>
+        </section>
+      )}
+
+      {host.data && (
+        <section className="space-y-2">
+          <h2 className="text-lg font-semibold">{t('games.hostGames')}</h2>
+          <p className="text-sm text-muted">{t('games.hostGamesHint')}</p>
+          <ul className="rounded-xl border border-line/60 bg-surface/50 py-1">
+            {host.data.games.map((g) => (
+              <li key={g.appId}>
+                <button type="button" className="flex w-full items-center gap-3 px-4 py-2 text-start hover:bg-text/5" onClick={() => setPlaying({ name: g.name, hostApp: g.appId })}>
+                  <Monitor className="size-4 shrink-0 text-accent" />
+                  <span className="truncate">{g.name}</span>
+                </button>
+              </li>
+            ))}
+            {host.data.games.length === 0 && <li className="px-4 py-3 text-sm text-muted">{t('games.hostGamesEmpty')}</li>}
+          </ul>
         </section>
       )}
 

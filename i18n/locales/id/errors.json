@@ -274,6 +274,8 @@
   "subtitle_choices_arent_ones_the_apps_know": "Aplikasi tidak mengenali pilihan subtitel ini",
   "no_such_font": "Font tidak ada",
   "no_such_game": "game tidak ditemukan",
+  "no_game_host_is_set_up": "Belum ada host game yang diatur",
+  "the_game_host_is_already_playing_a_game": "Host game sedang menjalankan game lain",
   "couldnt_start_playback_for_this_extra": "tidak bisa memutar ekstra ini",
   "no_such_extra": "ekstra tidak ditemukan",
   "only_an_admin_can_add_a_station_on_the_home_network": "hanya admin yang dapat menambahkan stasiun di jaringan rumah",

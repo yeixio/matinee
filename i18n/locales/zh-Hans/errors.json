@@ -274,6 +274,8 @@
   "subtitle_choices_arent_ones_the_apps_know": "应用无法识别这些字幕选项",
   "no_such_font": "没有这个字体",
   "no_such_game": "没有这个游戏",
+  "no_game_host_is_set_up": "尚未设置游戏主机",
+  "the_game_host_is_already_playing_a_game": "游戏主机已在运行一个游戏",
   "couldnt_start_playback_for_this_extra": "无法播放此花絮",
   "no_such_extra": "没有这个花絮",
   "only_an_admin_can_add_a_station_on_the_home_network": "只有管理员可以添加家庭网络上的电台",

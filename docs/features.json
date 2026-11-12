@@ -692,6 +692,19 @@
                 "androidtv": {"na": "Emulators are added by an admin in the web app."},
                 "tvweb": {"na": "Emulators are added by an admin in the web app."}
               }
+            },
+            {
+              "name": "Play PC games from Steam (preview)",
+              "doc": "/docs/server/games/#pc-games-from-steam-preview",
+              "since": "v0.2.6",
+              "apps": {
+                "web": true,
+                "ios": {"na": "PC games are a preview, played from the web app for now."},
+                "android": {"na": "PC games are a preview, played from the web app for now."},
+                "appletv": {"na": "PC games are a preview, played from the web app for now."},
+                "androidtv": {"na": "PC games are a preview, played from the web app for now."},
+                "tvweb": {"na": "PC games are a preview, played from the web app for now."}
+              }
             }
           ]
         },

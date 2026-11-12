@@ -26,6 +26,7 @@ import (
 	"github.com/yeixio/matinee/internal/backup"
 	"github.com/yeixio/matinee/internal/diagnose"
 	"github.com/yeixio/matinee/internal/download"
+	"github.com/yeixio/matinee/internal/gamehost"
 	"github.com/yeixio/matinee/internal/gamestream"
 	"github.com/yeixio/matinee/internal/health"
 	"github.com/yeixio/matinee/internal/hwaccel"
@@ -112,6 +113,8 @@ type Server struct {
 	// Games plays games on the server and streams them to players (see
 	// games.go); nil when this server can't.
 	Games *gamestream.Manager
+	// GameHost plays PC games (internal/gamehost), when one is set up.
+	GameHost *gamehost.Client
 
 	// Remote keeps remote access going (see remote.go); nil when this
 	// server doesn't offer it.

@@ -16,9 +16,12 @@ import (
 	"sync/atomic"
 	"time"
 
+	"github.com/coder/websocket"
 	"github.com/pion/ice/v4"
 	"github.com/pion/rtp"
 	"github.com/pion/webrtc/v4"
+
+	"github.com/yeixio/matinee/internal/gamehost"
 )
 
 // Config says where the pieces are.
@@ -118,6 +121,10 @@ type Game struct {
 	System  System
 	LagTest bool
 	Path    string // the game file; empty for the lag test
+	// Host, when set, plays AppID there (a PC game, see internal/gamehost)
+	// instead of emulating it here.
+	Host  *gamehost.Client
+	AppID int
 	// Owner is whose saves these are; one person plays one game at a time.
 	Owner string
 }
@@ -131,13 +138,15 @@ type Session struct {
 	Owner string
 	Info  Info
 
-	m      *Manager
-	pc     *webrtc.PeerConnection
-	runner *Runner
-	work   string
-	cancel context.CancelFunc
-	once   sync.Once
-	done   chan struct{}
+	m        *Manager
+	pc       *webrtc.PeerConnection
+	runner   *Runner
+	host     *websocket.Conn // a game host's stream, for a PC game
+	hostDone chan error
+	work     string
+	cancel   context.CancelFunc
+	once     sync.Once
+	done     chan struct{}
 	// Started is when the player connected and the game began.
 	Started time.Time
 
@@ -172,8 +181,10 @@ func (m *Manager) Start(ctx context.Context, g Game, offer string) (*Session, st
 	if g.LagTest {
 		core = filepath.Join(m.cfg.CoreDir, LagTest)
 	}
-	if _, err := os.Stat(core); core == "" || err != nil {
-		return nil, "", fmt.Errorf("no emulator for this game on this server")
+	if g.Host == nil {
+		if _, err := os.Stat(core); core == "" || err != nil {
+			return nil, "", fmt.Errorf("no emulator for this game on this server")
+		}
 	}
 	// One game per person: starting another ends the one before.
 	m.mu.Lock()
@@ -202,25 +213,14 @@ func (m *Manager) Start(ctx context.Context, g Game, offer string) (*Session, st
 			s.Stop()
 		}
 	}()
-	s.work = filepath.Join(m.cfg.WorkDir, id)
-	if err = os.MkdirAll(s.work, 0o755); err != nil {
+	if g.Host != nil {
+		err = s.startHost(ctx, g)
+	} else {
+		err = s.startEmulator(g, core)
+	}
+	if err != nil {
 		return nil, "", err
 	}
-	path := g.Path
-	if strings.EqualFold(filepath.Ext(path), ".zip") && !g.System.playsZips() {
-		if path, err = unzipGame(path, s.work); err != nil {
-			return nil, "", err
-		}
-	}
-	saves := filepath.Join(m.cfg.SaveDir, safeName(g.Owner))
-	if err = os.MkdirAll(saves, 0o755); err != nil {
-		return nil, "", err
-	}
-	os.MkdirAll(m.cfg.SystemDir, 0o755)
-	if s.runner, err = StartRunner(m.cfg.Runner, core, path, saves, m.cfg.SystemDir, g.System.Options); err != nil {
-		return nil, "", err
-	}
-	s.Info = s.runner.Info
 
 	answer := ""
 	if offer != "" {
@@ -252,6 +252,32 @@ func (m *Manager) Start(ctx context.Context, g Game, offer string) (*Session, st
 		s.Stop()
 	}()
 	return s, answer, nil
+}
+
+// startEmulator starts the emulator for g.
+func (s *Session) startEmulator(g Game, core string) error {
+	m := s.m
+	var err error
+	s.work = filepath.Join(m.cfg.WorkDir, s.ID)
+	if err = os.MkdirAll(s.work, 0o755); err != nil {
+		return err
+	}
+	path := g.Path
+	if strings.EqualFold(filepath.Ext(path), ".zip") && !g.System.playsZips() {
+		if path, err = unzipGame(path, s.work); err != nil {
+			return err
+		}
+	}
+	saves := filepath.Join(m.cfg.SaveDir, safeName(g.Owner))
+	if err = os.MkdirAll(saves, 0o755); err != nil {
+		return err
+	}
+	os.MkdirAll(m.cfg.SystemDir, 0o755)
+	if s.runner, err = StartRunner(m.cfg.Runner, core, path, saves, m.cfg.SystemDir, g.System.Options); err != nil {
+		return err
+	}
+	s.Info = s.runner.Info
+	return nil
 }
 
 // startWebRTC answers the player's offer; the session connects once the
@@ -325,6 +351,9 @@ func (s *Session) startWebRTC(ctx context.Context, offer string) (string, error)
 
 // play runs the game, encoding as it goes, until it stops.
 func (s *Session) play(ctx context.Context) error {
+	if s.host != nil {
+		return s.playHost(ctx)
+	}
 	venc, err := startVideo(ctx, s.m.cfg.FFmpeg, s.Info)
 	if err != nil {
 		return err
@@ -391,6 +420,10 @@ func (s *Session) input(reply func([]byte), b []byte) {
 	if len(b) == 0 {
 		return
 	}
+	if s.host != nil && b[0] != 2 {
+		s.hostInput(b)
+		return
+	}
 	switch b[0] {
 	case 1:
 		if len(b) >= 4 {
@@ -421,6 +454,10 @@ func (s *Session) Stop() {
 		}
 		if s.runner != nil {
 			s.runner.Close()
+		}
+		if s.host != nil {
+			// Closing the host's stream ends the game there.
+			s.host.Close(websocket.StatusNormalClosure, "game over")
 		}
 		if s.work != "" {
 			os.RemoveAll(s.work)
