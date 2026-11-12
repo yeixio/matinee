@@ -73,3 +73,52 @@ func TestFind(t *testing.T) {
 		t.Errorf("own name first: %+v", info)
 	}
 }
+
+func TestParsePeople(t *testing.T) {
+	info := Parse([]byte(`<movie>
+  <director>Ann Lee / Bo Park</director>
+  <credits>Cy Diaz</credits>
+  <writer>Cy Diaz</writer>
+  <actor><name>Second Star</name><role>Mate</role><order>1</order></actor>
+  <actor><name>Lead Star</name><role>Keeper</role><order>0</order><thumb>https://img.example/lead.jpg</thumb><tmdbid>42</tmdbid></actor>
+  <actor><name>Guesty</name><role>Visitor</role><type>GuestStar</type></actor>
+  <actor><name>Lead Star</name><role>Twice</role></actor>
+  <actor><name></name></actor>
+</movie>`))
+	names := func(ps []Person) []string {
+		var out []string
+		for _, p := range ps {
+			out = append(out, p.Name+":"+p.Role)
+		}
+		return out
+	}
+	if got := names(info.Cast); !slices.Equal(got, []string{"Lead Star:Keeper", "Second Star:Mate"}) {
+		t.Errorf("cast: %v", got)
+	}
+	if info.Cast[0].TMDBID != 42 || info.Cast[0].Thumb != "https://img.example/lead.jpg" {
+		t.Errorf("lead: %+v", info.Cast[0])
+	}
+	if got := names(info.Guests); !slices.Equal(got, []string{"Guesty:Visitor"}) {
+		t.Errorf("guests: %v", got)
+	}
+	if got := names(info.Crew); !slices.Equal(got, []string{"Ann Lee:Director", "Bo Park:Director", "Cy Diaz:Writer"}) {
+		t.Errorf("crew: %v", got)
+	}
+	if info.Empty() {
+		t.Error("a file that only credits people isn't empty")
+	}
+}
+
+func TestReadFindsActorPhotos(t *testing.T) {
+	dir := t.TempDir()
+	os.MkdirAll(filepath.Join(dir, ".actors"), 0o755)
+	os.WriteFile(filepath.Join(dir, ".actors", "Lead_Star.jpg"), []byte("jpg"), 0o644)
+	os.WriteFile(filepath.Join(dir, "tvshow.nfo"), []byte(`<tvshow><actor><name>Lead Star</name></actor><actor><name>Other</name><thumb>other.png</thumb></actor></tvshow>`), 0o644)
+	info, ok := ForShow(dir)
+	if !ok || len(info.Cast) != 2 {
+		t.Fatalf("read: %+v %v", info, ok)
+	}
+	if info.Cast[0].Thumb != filepath.Join(dir, ".actors", "Lead_Star.jpg") || info.Cast[1].Thumb != filepath.Join(dir, "other.png") {
+		t.Errorf("photos: %+v", info.Cast)
+	}
+}

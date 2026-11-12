@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"errors"
+	"hash/fnv"
 	"slices"
 	"strings"
 )
@@ -46,6 +47,8 @@ const (
 	FieldRating   = "rating"
 	FieldPoster   = "poster"
 	FieldBackdrop = "backdrop"
+	// FieldPeople is the cast and crew, which only a file sets.
+	FieldPeople = "people"
 )
 
 // fieldIn is SQL for "field f is in the comma list in column col".
@@ -77,6 +80,10 @@ type Local struct {
 	Rating   float64
 	Poster   string // a local path or a web address
 	Backdrop string
+	// Cast, Guests and Crew are the people the file credits. A person
+	// whose TMDB id the file doesn't name gets an id of their own, below
+	// zero (see LocalPersonID).
+	Cast, Guests, Crew []Credit
 	// TMDBID pins the match, when the file says which title it is.
 	TMDBID int64
 	// Hash identifies the file's contents; ApplyLocal does nothing when
@@ -98,7 +105,20 @@ func (l Local) fields() []string {
 	add(l.Rating > 0, FieldRating)
 	add(l.Poster != "", FieldPoster)
 	add(l.Backdrop != "", FieldBackdrop)
+	add(l.hasPeople(), FieldPeople)
 	return f
+}
+
+func (l Local) hasPeople() bool { return len(l.Cast)+len(l.Guests)+len(l.Crew) > 0 }
+
+// LocalPersonID is the id of a person a file next to the media credits
+// without their TMDB id: below zero, so it's never a TMDB person's, and
+// the same for the same name in every file, so their page lists all
+// their titles.
+func LocalPersonID(name string) int64 {
+	h := fnv.New64a()
+	h.Write([]byte(strings.ToLower(strings.Join(strings.Fields(name), " "))))
+	return -int64(h.Sum64()>>2) - 1
 }
 
 // LocalHash returns the hash of the file last applied to an item, "" for none.
@@ -116,6 +136,9 @@ func (s *Store) LocalHash(ctx context.Context, id int64) (string, error) {
 // admin locked stay as they are. A TMDB id the file names becomes the
 // item's match, looked up again, unless an admin picked the match.
 func (s *Store) ApplyLocal(ctx context.Context, id int64, l *Local) error {
+	if err := s.applyLocalPeople(ctx, id, l); err != nil {
+		return err
+	}
 	if l == nil {
 		_, err := s.db.ExecContext(ctx, "UPDATE items SET nfo_fields = '', nfo_hash = '' WHERE id = ? AND nfo_hash <> ''", id)
 		return err
@@ -257,4 +280,59 @@ func (s *Store) UnlockDetails(ctx context.Context, id int64) error {
 		meta_at = CASE WHEN match_locked = 1 THEN meta_at END, details_at = NULL, translations_at = NULL
 		WHERE id = ?`, id)
 	return err
+}
+
+// applyLocalPeople stores the cast and crew a file credits. Online
+// credits win only in a library that prefers online details, once they're
+// in. When a file that credited people no longer does, its credits go
+// and the online ones are looked up again.
+func (s *Store) applyLocalPeople(ctx context.Context, id int64, l *Local) error {
+	var fields, mode string
+	var online bool
+	err := s.db.QueryRowContext(ctx, `
+		SELECT COALESCE(i.nfo_fields, ''), COALESCE(l.metadata_mode, ''), i.tmdb_id IS NOT NULL AND COALESCE(i.details_at, 0) > 0
+		FROM items i JOIN libraries l ON l.id = i.library_id WHERE i.id = ?`, id).Scan(&fields, &mode, &online)
+	if errors.Is(err, sql.ErrNoRows) {
+		return ErrNotFound
+	}
+	if err != nil {
+		return err
+	}
+	had := slices.Contains(strings.Split(fields, ","), FieldPeople)
+	switch {
+	case l != nil && l.hasPeople():
+		if mode == PreferOnline && online {
+			return nil
+		}
+		t, err := s.db.BeginTx(ctx)
+		if err != nil {
+			return err
+		}
+		defer t.Rollback()
+		if err := applyCredits(ctx, t, id, DetailsUpdate{Cast: l.Cast, Guests: l.Guests, Crew: l.Crew}); err != nil {
+			return err
+		}
+		return t.Commit()
+	case had:
+		if _, err := s.db.ExecContext(ctx, "DELETE FROM credits WHERE item_id = ?", id); err != nil {
+			return err
+		}
+		// An episode's credits come with its season's details.
+		_, err := s.db.ExecContext(ctx, `UPDATE items SET details_at = NULL WHERE id = ?
+			OR id = (SELECT parent_id FROM items WHERE id = ? AND kind = 'episode')`, id, id)
+		return err
+	}
+	return nil
+}
+
+// peopleKept reports whether an online lookup leaves an item's cast and
+// crew alone: a file next to it credits them and the library doesn't
+// prefer online details.
+func peopleKept(ctx context.Context, t *tx, id int64) (bool, error) {
+	var kept bool
+	err := t.QueryRowContext(ctx, "SELECT "+keptFromOnline(FieldPeople)+" FROM items WHERE id = ?", id).Scan(&kept)
+	if errors.Is(err, sql.ErrNoRows) {
+		return false, nil
+	}
+	return kept, err
 }
