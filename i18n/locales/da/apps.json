@@ -696,6 +696,7 @@
       "publisher": "Udgiver",
       "players": "Spillere",
       "genre": "Genre"
-    }
+    },
+    "notHere": "Spil kan endnu ikke spilles på denne enhed"
   }
 }

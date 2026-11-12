@@ -696,6 +696,7 @@
       "publisher": "Utgivare",
       "players": "Spelare",
       "genre": "Genre"
-    }
+    },
+    "notHere": "Spel fungerar inte på den här enheten än"
   }
 }

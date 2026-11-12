@@ -696,6 +696,7 @@
       "publisher": "Utgiver",
       "players": "Spillere",
       "genre": "Sjanger"
-    }
+    },
+    "notHere": "Spill fungerer ikke på denne enheten ennå"
   }
 }

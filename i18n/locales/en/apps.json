@@ -696,6 +696,7 @@
       "publisher": "Publisher",
       "players": "Players",
       "genre": "Genre"
-    }
+    },
+    "notHere": "Games don't play on this device yet"
   }
 }

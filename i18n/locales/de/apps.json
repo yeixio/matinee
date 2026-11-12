@@ -696,6 +696,7 @@
       "publisher": "Publisher",
       "players": "Spieler",
       "genre": "Genre"
-    }
+    },
+    "notHere": "Spiele laufen auf diesem Gerät noch nicht"
   }
 }

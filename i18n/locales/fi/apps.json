@@ -696,6 +696,7 @@
       "publisher": "Julkaisija",
       "players": "Pelaajat",
       "genre": "Lajityyppi"
-    }
+    },
+    "notHere": "Pelejä ei voi vielä pelata tällä laitteella"
   }
 }

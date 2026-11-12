@@ -689,6 +689,7 @@
       "publisher": "Penerbit",
       "players": "Pemain",
       "genre": "Genre"
-    }
+    },
+    "notHere": "Permainan belum boleh dimainkan pada peranti ini"
   }
 }

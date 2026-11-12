@@ -703,6 +703,7 @@
       "publisher": "Editor",
       "players": "Jugadores",
       "genre": "Género"
-    }
+    },
+    "notHere": "Los juegos aún no funcionan en este dispositivo"
   }
 }
