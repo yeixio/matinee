@@ -1129,7 +1129,12 @@
     "rating": "Bewertung von 10",
     "locked": "Was du hier änderst, bleibt so, wie du es geschrieben hast: Scans und Online-Abfragen lassen es unverändert.",
     "undo": "Meine Änderungen zurücknehmen",
-    "fromFile": "Einiges davon stammt aus einer .nfo-Datei daneben."
+    "fromFile": "Einiges davon stammt aus einer .nfo-Datei daneben.",
+    "order": "Episodenreihenfolge",
+    "orderAired": "Wie ausgestrahlt",
+    "orderDvd": "DVD- und Blu-ray-Boxen",
+    "orderAbsolute": "Eine lange Staffel, ab der ersten nummeriert",
+    "orderHelp": "Für Episoden, die ab der ersten durchnummeriert sind, etwa Serie - 0123."
   },
   "import": {
     "title": "Aus einem anderen Medienserver importieren",

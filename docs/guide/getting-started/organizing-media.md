@@ -122,6 +122,28 @@ TV/
 
 `Ep 06` and `E06` work too. Season folders can be called `Season 2`, `S02`, or the word for season in your language, such as `Staffel 2`, `Temporada 2` or `Saison 2`. A `Specials` folder is season 0.
 
+### Anime and other shows numbered from the first episode
+
+Many anime releases number every episode from the show's first instead of by season. Put them in the show's folder, with or without the release group and tags:
+
+```
+TV/
+└── Frieren/
+    ├── [SubsPlease] Frieren - 01 (1080p) [A1B2C3D4].mkv
+    ├── Frieren - 0029 [1080p].mkv
+    └── Frieren Episode 30.mkv
+```
+
+Matinee files them under season 1 until the show is matched online, then moves each to the season it's in, looked up from TMDB. Admins can choose how a show's episodes are split into seasons: open the show, choose **Edit details**, and pick an **Episode order**:
+
+- **As they aired** (the default): the seasons TMDB lists for the show.
+- **DVD and Blu-ray sets**: the seasons of the disc sets, when TMDB has a DVD order for the show. Shows without one keep the aired seasons.
+- **One long season, numbered from the first**: every episode in one season, numbered as the files are.
+
+A number like `Crumb Street - 104.mkv` can mean season 1, episode 4. Matinee reads it that way when the show has no 104th episode, or when the show isn't from Japan, and as the 104th episode otherwise. Write `0104` to always mean the 104th episode. A four-digit number that looks like a year, such as `2019`, is never read as an episode.
+
+Inside a season folder, `Season 2/Crumb Street - 05.mkv` is episode 5 of season 2.
+
 ### Daily shows
 
 Talk shows and the news are usually named by the day they aired. Matinee files each under a season for its year, in date order, and finds the episode online by its date:

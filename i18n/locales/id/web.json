@@ -1125,7 +1125,12 @@
     "rating": "Rating dari 10",
     "locked": "Yang Anda ubah di sini tetap seperti yang Anda tulis: pemindaian dan pencarian online tidak menyentuhnya.",
     "undo": "Batalkan suntingan saya",
-    "fromFile": "Sebagian berasal dari file .nfo di sebelahnya."
+    "fromFile": "Sebagian berasal dari file .nfo di sebelahnya.",
+    "order": "Urutan episode",
+    "orderAired": "Sesuai penayangan",
+    "orderDvd": "Set DVD dan Blu-ray",
+    "orderAbsolute": "Satu musim panjang, dinomori dari yang pertama",
+    "orderHelp": "Untuk episode yang dinomori dari yang pertama, seperti Serial - 0123."
   },
   "import": {
     "title": "Impor dari server media lain",

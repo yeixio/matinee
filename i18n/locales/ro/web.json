@@ -1133,7 +1133,12 @@
     "rating": "Notă din 10",
     "locked": "Ce schimbi aici rămâne cum ai scris: scanările și căutările online nu îl ating.",
     "undo": "Anulează modificările mele",
-    "fromFile": "Unele provin dintr-un fișier .nfo de lângă el."
+    "fromFile": "Unele provin dintr-un fișier .nfo de lângă el.",
+    "order": "Ordinea episoadelor",
+    "orderAired": "Cum au fost difuzate",
+    "orderDvd": "Seturi DVD și Blu-ray",
+    "orderAbsolute": "Un singur sezon lung, numerotat de la primul",
+    "orderHelp": "Pentru episoade numerotate de la primul, ca Serial - 0123."
   },
   "import": {
     "title": "Importă de pe alt server media",

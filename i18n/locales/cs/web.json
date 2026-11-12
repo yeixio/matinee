@@ -1137,7 +1137,12 @@
     "rating": "Hodnocení z 10",
     "locked": "Co tu změníte, zůstane tak, jak jste to napsali: skenování ani online vyhledávání to nezmění.",
     "undo": "Vrátit mé úpravy",
-    "fromFile": "Některé z nich pocházejí ze souboru .nfo vedle."
+    "fromFile": "Některé z nich pocházejí ze souboru .nfo vedle.",
+    "order": "Pořadí epizod",
+    "orderAired": "Jak se vysílaly",
+    "orderDvd": "Kolekce DVD a Blu-ray",
+    "orderAbsolute": "Jedna dlouhá řada, číslovaná od první",
+    "orderHelp": "Pro epizody číslované od první, např. Seriál - 0123."
   },
   "import": {
     "title": "Importovat z jiného mediálního serveru",

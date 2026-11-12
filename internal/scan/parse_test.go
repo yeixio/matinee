@@ -196,3 +196,35 @@ func TestParseEpisodeWithoutCode(t *testing.T) {
 		t.Error("DailyEpisode")
 	}
 }
+
+func TestParseAbsoluteEpisode(t *testing.T) {
+	cases := []struct {
+		path     string
+		show     string
+		absolute int
+		compact  bool
+		title    string
+	}{
+		{"/tv/Frieren/[SubsPlease] Sousou no Frieren - 01 (1080p) [A1B2C3D4].mkv", "Frieren", 1, false, ""},
+		{"/tv/One Piece/One Piece - 0123 [1080p].mkv", "One Piece", 123, false, ""},
+		{"/tv/One Piece/One Piece - 1071v2 - Gear 5.mkv", "One Piece", 1071, false, "Gear 5"},
+		{"/tv/Crumb Street/Crumb Street - 104.mkv", "Crumb Street", 104, true, ""},
+		{"/tv/[Grp] Naruto - 104 [720p].mkv", "Naruto", 104, false, ""},
+		{"/tv/Bleach/Bleach Episode 300.mkv", "Bleach", 300, false, ""},
+	}
+	for _, c := range cases {
+		got := ParseEpisode("/tv", c.path)
+		if !got.OK || got.Show != c.show || got.Absolute != c.absolute || got.Season != 1 || got.Episode != c.absolute || got.Compact != c.compact || got.Title != c.title {
+			t.Errorf("ParseEpisode(%q) = %+v, want %s #%d compact=%v %q", c.path, got, c.show, c.absolute, c.compact, c.title)
+		}
+	}
+	for _, p := range []string{"/tv/Show/Show - 2019.mkv", "/tv/Show/Show - 1080p.mkv", "/tv/Show/Show - Special.mkv"} {
+		if got := ParseEpisode("/tv", p); got.OK {
+			t.Errorf("ParseEpisode(%q) = %+v, want no episode", p, got)
+		}
+	}
+	// In a season folder, the number is the season's episode.
+	if got := ParseEpisode("/tv", "/tv/Crumb Street/Season 2/Crumb Street - 05.mkv"); !got.OK || got.Season != 2 || got.Episode != 5 || got.Absolute != 0 {
+		t.Errorf("season folder: %+v", got)
+	}
+}

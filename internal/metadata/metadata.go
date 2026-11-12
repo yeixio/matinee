@@ -126,13 +126,44 @@ func (f *Fetcher) FetchLibrary(ctx context.Context, lib store.Library) {
 		}
 		return
 	}
-	matched := 0
+	matched, waiting := f.lookUp(ctx, lib, items)
+	// Episodes named by absolute number wait for their show's match to
+	// be put in seasons; then they're looked up where they went.
+	if f.PlaceEpisodes(ctx, lib) > 0 || waiting {
+		if more, err := f.Store.NeedsMetadata(ctx, lib.ID, f.Kinds()); err == nil {
+			n, _ := f.lookUp(ctx, lib, more)
+			matched += n
+		}
+	}
+	if ctx.Err() != nil {
+		return
+	}
+	if matched > 0 && f.Edition != nil {
+		// Files matched to the same movie are versions of one title.
+		if _, err := f.Store.GroupVersions(ctx, lib.ID, f.Edition); err != nil {
+			f.Log.Error("group versions", "err", err)
+		}
+	}
+	if len(items) > 0 {
+		f.Log.Info("metadata done", "library", lib.Name, "looked_up", len(items), "matched", matched)
+	}
+	f.fetchGenres(ctx, lib)
+	f.FetchDetails(ctx, lib)
+	f.FetchTranslations(ctx, lib)
+}
+
+// lookUp looks items up online, and returns how many matched and
+// whether some episodes wait to be put in their seasons first.
+func (f *Fetcher) lookUp(ctx context.Context, lib store.Library, items []store.Item) (matched int, waiting bool) {
 	for _, it := range items {
 		if ctx.Err() != nil {
-			return
+			return matched, waiting
 		}
 		q, state := f.query(ctx, lib, it)
 		switch state {
+		case unplaced:
+			waiting = true
+			continue
 		case retryLater:
 			continue
 		case noMatch:
@@ -153,18 +184,7 @@ func (f *Fetcher) FetchLibrary(ctx context.Context, lib store.Library) {
 			f.Log.Error("save metadata", "err", err)
 		}
 	}
-	if matched > 0 && f.Edition != nil {
-		// Files matched to the same movie are versions of one title.
-		if _, err := f.Store.GroupVersions(ctx, lib.ID, f.Edition); err != nil {
-			f.Log.Error("group versions", "err", err)
-		}
-	}
-	if len(items) > 0 {
-		f.Log.Info("metadata done", "library", lib.Name, "looked_up", len(items), "matched", matched)
-	}
-	f.fetchGenres(ctx, lib)
-	f.FetchDetails(ctx, lib)
-	f.FetchTranslations(ctx, lib)
+	return matched, waiting
 }
 
 // fetchGenres fills in genres for movies and shows matched before Matinee
@@ -200,6 +220,7 @@ const (
 	ready      queryState = iota
 	noMatch               // can never match, e.g. an episode of an unmatched show
 	retryLater            // depends on a lookup that hasn't succeeded yet
+	unplaced              // an episode to put in its season first
 )
 
 func (f *Fetcher) query(ctx context.Context, lib store.Library, it store.Item) (Query, queryState) {
@@ -267,7 +288,20 @@ func (f *Fetcher) query(ctx context.Context, lib store.Library, it store.Item) (
 		if err != nil || season.ParentID == nil || season.IndexNumber == nil {
 			return q, noMatch
 		}
-		return f.showQuery(ctx, q, *season.ParentID, *season.IndexNumber, *it.IndexNumber)
+		q, state := f.showQuery(ctx, q, *season.ParentID, *season.IndexNumber, *it.IndexNumber)
+		if state != ready {
+			return q, state
+		}
+		absolute, placed, ts, te, err := f.Store.EpisodePlace(ctx, it.ID)
+		switch {
+		case err != nil:
+			return q, retryLater
+		case absolute && !placed:
+			return q, unplaced // put in its season first (see PlaceEpisodes)
+		case ts != 0 || te != 0:
+			q.Season, q.Episode = ts, te
+		}
+		return q, ready
 	}
 	return q, ready
 }

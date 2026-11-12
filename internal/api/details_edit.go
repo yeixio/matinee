@@ -113,3 +113,43 @@ func (s *Server) setLibraryMetadataMode(w http.ResponseWriter, r *http.Request) 
 	}
 	w.WriteHeader(http.StatusNoContent)
 }
+
+// addEpisodeOrder says how a show's episodes named by absolute number are
+// put in seasons, and an episode's absolute number.
+func (s *Server) addEpisodeOrder(ctx context.Context, v *itemView) error {
+	var err error
+	switch v.Kind {
+	case "show":
+		order, absolute, e := s.Store.EpisodeOrder(ctx, v.ID)
+		if absolute {
+			v.EpisodeOrder = order
+		}
+		err = e
+	case "episode":
+		v.Absolute, err = s.Store.AbsoluteNumber(ctx, v.ID)
+	}
+	return err
+}
+
+// PUT /items/{id}/episode-order {"order": "aired" | "dvd" | "absolute"}:
+// how a show's episodes named by their number from the first are put in
+// seasons. They move in the background.
+func (s *Server) setEpisodeOrder(w http.ResponseWriter, r *http.Request) {
+	it, ok := s.loadItem(w, r)
+	if !ok {
+		return
+	}
+	var in struct {
+		Order string `json:"order"`
+	}
+	if err := readJSON(r, &in); err != nil || it.Kind != "show" || !store.ValidEpisodeOrder(in.Order) {
+		writeError(w, http.StatusBadRequest, "invalid request")
+		return
+	}
+	if err := s.Store.SetEpisodeOrder(r.Context(), it.ID, in.Order); err != nil {
+		s.serverError(w, err)
+		return
+	}
+	s.refetch(it)
+	w.WriteHeader(http.StatusNoContent)
+}

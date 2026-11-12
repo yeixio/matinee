@@ -1129,7 +1129,12 @@
     "rating": "Rating out of 10",
     "locked": "What you change here stays as you wrote it: scans and online lookups leave it alone.",
     "undo": "Undo my edits",
-    "fromFile": "Some of these come from an .nfo file next to it."
+    "fromFile": "Some of these come from an .nfo file next to it.",
+    "order": "Episode order",
+    "orderAired": "As they aired",
+    "orderDvd": "DVD and Blu-ray sets",
+    "orderAbsolute": "One long season, numbered from the first",
+    "orderHelp": "For episodes named by their number from the first, such as Show - 0123."
   },
   "import": {
     "title": "Import from another media server",

@@ -772,6 +772,18 @@ var migrations = []string{
 	"DELETE FROM thumbnails WHERE count = 0",
 	// 136: .nfo files' cast and crew are read now; read every file again.
 	"UPDATE items SET nfo_hash = '' WHERE nfo_hash <> ''",
+	// 137–143: episodes named by their number from the show's first
+	// ("Show - 0123"), and the order each show's are put in seasons by
+	// (see absolute.go). Before, they were filed as specials; those are
+	// filed again on the next scan.
+	"ALTER TABLE items ADD COLUMN absolute_number INTEGER",
+	"ALTER TABLE items ADD COLUMN absolute_compact INTEGER NOT NULL DEFAULT 0",
+	"ALTER TABLE items ADD COLUMN placed_order TEXT NOT NULL DEFAULT ''",
+	"ALTER TABLE items ADD COLUMN tmdb_season INTEGER",
+	"ALTER TABLE items ADD COLUMN tmdb_episode INTEGER",
+	"ALTER TABLE items ADD COLUMN episode_order TEXT NOT NULL DEFAULT ''",
+	`UPDATE items SET mtime = 0 WHERE kind = 'episode' AND path IS NOT NULL
+		AND parent_id IN (SELECT id FROM items WHERE kind = 'season' AND index_number = 0)`,
 }
 
 func now() int64 { return time.Now().Unix() }

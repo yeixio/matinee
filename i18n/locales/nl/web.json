@@ -1129,7 +1129,12 @@
     "rating": "Beoordeling op 10",
     "locked": "Wat je hier wijzigt, blijft zoals je het schreef: scans en online opzoekingen laten het met rust.",
     "undo": "Mijn wijzigingen ongedaan maken",
-    "fromFile": "Een deel hiervan komt uit een .nfo-bestand ernaast."
+    "fromFile": "Een deel hiervan komt uit een .nfo-bestand ernaast.",
+    "order": "Volgorde van afleveringen",
+    "orderAired": "Zoals uitgezonden",
+    "orderDvd": "Dvd- en Blu-ray-boxen",
+    "orderAbsolute": "Eén lang seizoen, genummerd vanaf de eerste",
+    "orderHelp": "Voor afleveringen genummerd vanaf de eerste, zoals Serie - 0123."
   },
   "import": {
     "title": "Importeren uit een andere mediaserver",

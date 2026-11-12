@@ -2,14 +2,14 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { PencilLine, Undo2 } from 'lucide-react'
 import { type FormEvent, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { api, type DetailsEdit, type Item } from '../api'
+import { api, type DetailsEdit, type EpisodeOrder, type ItemDetail } from '../api'
 import { Dialog } from './Collections'
 import { Button, Field, inputClass } from './ui'
 
 // EditDetails lets an admin write a title's details by hand. What they
 // change is kept: scans and online lookups leave it alone until they undo
 // their edits. A show's or season's name and year come from its folder.
-export function EditDetails({ item, onClose }: { item: Item; onClose: () => void }) {
+export function EditDetails({ item, onClose }: { item: ItemDetail; onClose: () => void }) {
   const { t } = useTranslation()
   const qc = useQueryClient()
   const named = item.kind === 'movie' || item.kind === 'episode'
@@ -18,11 +18,20 @@ export function EditDetails({ item, onClose }: { item: Item; onClose: () => void
   const [overview, setOverview] = useState(item.overview ?? '')
   const [genres, setGenres] = useState((item.genres ?? []).join(', '))
   const [rating, setRating] = useState(item.rating ? String(Math.round(item.rating * 10) / 10) : '')
+  // Shows whose files are numbered from the first episode pick the
+  // seasons those go in.
+  const [order, setOrder] = useState<EpisodeOrder | undefined>(item.episodeOrder)
   const done = () => {
     qc.invalidateQueries()
     onClose()
   }
-  const save = useMutation({ mutationFn: (e: DetailsEdit) => api.editDetails(item.id, e), onSuccess: done })
+  const save = useMutation({
+    mutationFn: async (e: DetailsEdit) => {
+      if (order && order !== item.episodeOrder) await api.setEpisodeOrder(item.id, order)
+      if (Object.keys(e).length > 0) await api.editDetails(item.id, e)
+    },
+    onSuccess: done,
+  })
   const undo = useMutation({ mutationFn: () => api.undoDetailEdits(item.id), onSuccess: done })
 
   const submit = (e: FormEvent) => {
@@ -37,7 +46,7 @@ export function EditDetails({ item, onClose }: { item: Item; onClose: () => void
     if (g.join('|') !== (item.genres ?? []).join('|')) edit.genres = g
     const r = Math.min(10, Math.max(0, Number(rating.replace(',', '.')) || 0))
     if (Math.abs(r - (item.rating ?? 0)) > 0.05) edit.rating = r
-    if (Object.keys(edit).length === 0) return onClose()
+    if (Object.keys(edit).length === 0 && order === item.episodeOrder) return onClose()
     save.mutate(edit)
   }
   const busy = save.isPending || undo.isPending
@@ -80,6 +89,16 @@ export function EditDetails({ item, onClose }: { item: Item; onClose: () => void
             <input className={inputClass} inputMode="decimal" value={rating} onChange={(e) => setRating(e.target.value.slice(0, 4))} />
           </Field>
         </div>
+        {order && (
+          <Field label={t('editDetails.order')}>
+            <select className={inputClass} value={order} onChange={(e) => setOrder(e.target.value as EpisodeOrder)}>
+              <option value="aired">{t('editDetails.orderAired')}</option>
+              <option value="dvd">{t('editDetails.orderDvd')}</option>
+              <option value="absolute">{t('editDetails.orderAbsolute')}</option>
+            </select>
+            <p className="mt-1 text-sm text-muted">{t('editDetails.orderHelp')}</p>
+          </Field>
+        )}
         <p className="text-sm text-muted">{t('editDetails.locked')}</p>
         {item.localFields?.length ? <p className="text-sm text-muted">{t('editDetails.fromFile')}</p> : null}
         {error && <p className="text-sm text-danger">{error.message}</p>}
@@ -103,7 +122,7 @@ export function EditDetails({ item, onClose }: { item: Item; onClose: () => void
 }
 
 // EditDetailsButton opens EditDetails, for admins on a title's page.
-export function EditDetailsButton({ item }: { item: Item }) {
+export function EditDetailsButton({ item }: { item: ItemDetail }) {
   const { t } = useTranslation()
   const [open, setOpen] = useState(false)
   return (

@@ -386,6 +386,7 @@ func (s *Server) routes() []route {
 		{"POST /items/{id}/refresh", adminOnly, s.refreshItem},
 		{"PUT /items/{id}/details", adminOnly, s.editItemDetails},
 		{"DELETE /items/{id}/details", adminOnly, s.unlockItemDetails},
+		{"PUT /items/{id}/episode-order", adminOnly, s.setEpisodeOrder},
 		{"DELETE /items/{id}/cover", adminOnly, s.resetCover},
 		{"GET /items/{id}/file", reader, s.directFile},
 		{"GET /items/{id}/audio", reader, s.itemAudio},
@@ -1363,6 +1364,13 @@ type itemView struct {
 	// TrackPick is which sound and subtitles a video starts with, for this
 	// person (see trackpick.go).
 	TrackPick *trackPickView `json:"trackPick,omitempty"`
+	// EpisodeOrder is how a show's episodes named by their number from the
+	// first ("Show - 0123") are put in seasons: aired, dvd or absolute.
+	// Absent for shows without such episodes.
+	EpisodeOrder string `json:"episodeOrder,omitempty"`
+	// Absolute is an episode's number from the show's first, when its file
+	// is named that way.
+	Absolute int `json:"absolute,omitempty"`
 }
 
 func (s *Server) getItem(w http.ResponseWriter, r *http.Request) {
@@ -1428,6 +1436,10 @@ func (s *Server) getItem(w http.ResponseWriter, r *http.Request) {
 		p = parent.ParentID
 	}
 	if err := s.addDetails(r.Context(), &v); err != nil {
+		s.serverError(w, err)
+		return
+	}
+	if err := s.addEpisodeOrder(r.Context(), &v); err != nil {
 		s.serverError(w, err)
 		return
 	}

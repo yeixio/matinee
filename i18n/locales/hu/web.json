@@ -1129,7 +1129,12 @@
     "rating": "Értékelés 10-ből",
     "locked": "Amit itt módosítasz, úgy marad, ahogy írtad: a vizsgálatok és az online keresések nem nyúlnak hozzá.",
     "undo": "Módosításaim visszavonása",
-    "fromFile": "Ezek egy része a mellette lévő .nfo fájlból származik."
+    "fromFile": "Ezek egy része a mellette lévő .nfo fájlból származik.",
+    "order": "Epizódok sorrendje",
+    "orderAired": "Ahogy adásba kerültek",
+    "orderDvd": "DVD- és Blu-ray-kiadások",
+    "orderAbsolute": "Egy hosszú évad, az elsőtől számozva",
+    "orderHelp": "Az elsőtől számozott epizódokhoz, például Sorozat - 0123."
   },
   "import": {
     "title": "Importálás másik médiaszerverről",

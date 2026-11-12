@@ -2770,6 +2770,29 @@ paths:
       responses:
         "200": { description: The item., content: { application/json: { schema: { $ref: "#/components/schemas/Item" } } } }
         "404": { $ref: "#/components/responses/Error" }
+  /items/{id}/episode-order:
+    put:
+      summary: Set the order a show's absolute-numbered episodes go in (admins)
+      description: >
+        For a show whose files are named by each episode's number from the
+        first ("Show - 0123"): aired puts them in the seasons as they aired,
+        dvd in the seasons of the DVD sets (TMDB's DVD episode group), and
+        absolute in one long season. They move in the background. The show
+        reports its order as `episodeOrder`, and an episode its number as
+        `absolute`.
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [order]
+              properties:
+                order: { type: string, enum: [aired, dvd, absolute] }
+      responses:
+        "204": { description: Set. }
+        "400": { $ref: "#/components/responses/Error" }
+        "404": { $ref: "#/components/responses/Error" }
   /items/{id}/cover:
     put:
       summary: Pick an album's or book's cover (admins)
@@ -6232,6 +6255,13 @@ components:
                 subtitle: { type: string, description: The subtitle track's id; empty for none. }
                 audioRemembered: { type: boolean, description: The person picked this sound before. }
                 subtitleRemembered: { type: boolean, description: The person picked these subtitles before. }
+            episodeOrder:
+              type: string
+              enum: [aired, dvd, absolute]
+              description: >
+                Shows whose files are named by each episode's number from the first only: the order those
+                episodes are put in seasons by (PUT /items/{id}/episode-order).
+            absolute: { type: integer, description: "Episodes only: the episode's number from the show's first, when its file is named that way." }
     MediaInfo:
       type: object
       description: A file's streams in detail, from the background analysis. Left out until the file is analyzed.

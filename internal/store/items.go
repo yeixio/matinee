@@ -127,6 +127,12 @@ type Item struct {
 	// PluginData is what a plugin keeps with an item of a kind it adds, as
 	// JSON, for the plugin's player.
 	PluginData json.RawMessage `json:"pluginData,omitempty"`
+	// Absolute is an episode's number counted from the show's first, when
+	// its file is named that way, only set when upserting a file;
+	// AbsoluteCompact says it might be a season and episode run together,
+	// as 104. See absolute.go.
+	Absolute        *int `json:"-"`
+	AbsoluteCompact bool `json:"-"`
 	// Details are applied with ApplyMetadata after a scan files the item,
 	// when the library kind already knows them (a plugin's kinds can).
 	Details *Metadata `json:"-"`
@@ -663,14 +669,20 @@ func (s *Store) UpsertFile(ctx context.Context, it Item) (int64, error) {
 	err := s.db.QueryRowContext(ctx, `
 		INSERT INTO items (library_id, parent_id, kind, title, sort_title, year, index_number, disc_number,
 			path, size, mtime, duration_ms, container, video_codec, audio_codec, width, height, poster, backdrop, subtitle_streams,
-			facts, plugin_data, chapters, track_artist, added_at)
-		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			facts, plugin_data, chapters, track_artist, absolute_number, absolute_compact, added_at)
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 		ON CONFLICT (path) DO UPDATE SET
-			library_id = excluded.library_id, parent_id = excluded.parent_id, kind = excluded.kind,
+			library_id = excluded.library_id, kind = excluded.kind,
+			parent_id = CASE WHEN `+keptPlace+` THEN items.parent_id ELSE excluded.parent_id END,
+			index_number = CASE WHEN `+keptPlace+` THEN items.index_number ELSE excluded.index_number END,
+			tmdb_season = CASE WHEN `+keptPlace+` THEN items.tmdb_season END,
+			tmdb_episode = CASE WHEN `+keptPlace+` THEN items.tmdb_episode END,
+			placed_order = CASE WHEN `+keptPlace+` THEN items.placed_order ELSE '' END,
+			absolute_number = excluded.absolute_number, absolute_compact = excluded.absolute_compact,
 			title = CASE WHEN `+keptFromScan(FieldTitle)+` THEN items.title ELSE excluded.title END,
 			sort_title = CASE WHEN `+keptFromScan(FieldTitle)+` THEN items.sort_title ELSE excluded.sort_title END,
 			year = CASE WHEN `+keptFromScan(FieldYear)+` THEN items.year ELSE excluded.year END,
-			index_number = excluded.index_number, disc_number = excluded.disc_number,
+			disc_number = excluded.disc_number,
 			size = excluded.size, mtime = excluded.mtime, duration_ms = excluded.duration_ms,
 			container = excluded.container, video_codec = excluded.video_codec, audio_codec = excluded.audio_codec,
 			width = excluded.width, height = excluded.height, subtitle_streams = excluded.subtitle_streams,
@@ -683,7 +695,7 @@ func (s *Store) UpsertFile(ctx context.Context, it Item) (int64, error) {
 		it.LibraryID, it.ParentID, it.Kind, it.Title, SortTitle(it.Title), it.Year, it.IndexNumber, it.DiscNumber,
 		it.Path, it.Size, it.Mtime, it.DurationMs, nullStr(it.Container), nullStr(it.VideoCodec), nullStr(it.AudioCodec),
 		it.Width, it.Height, nullStr(it.Poster), nullStr(it.Backdrop), nullStr(it.SubtitleStreams),
-		nullJSON(it.Facts), nullStr(string(it.PluginData)), nullJSON(it.Chapters), trackArtist(it), now()).Scan(&id)
+		nullJSON(it.Facts), nullStr(string(it.PluginData)), nullJSON(it.Chapters), trackArtist(it), it.Absolute, boolInt(it.AbsoluteCompact), now()).Scan(&id)
 	return id, err
 }
 
