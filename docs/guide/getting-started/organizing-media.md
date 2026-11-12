@@ -213,6 +213,8 @@ If another tool already wrote `.nfo` files for your library, Matinee reads them 
 | `tvshow.nfo` | show folder | the show |
 | `<file name>.nfo` | next to the episode | the episode |
 
+The cast and crew in a file's `<actor>`, `<director>`, `<writer>` and `<credits>` entries show on the title's page, each with a page of their own listing what else they're in. A photo comes from the actor's `<thumb>`, or from the `.actors` folder next to the file (`.actors/Jane_Doe.jpg`), as Kodi keeps them. An actor's `<tmdbid>` links them to the same person in titles matched online.
+
 A TMDB, IMDb or TVDB id in a movie's or show's `.nfo` file pins the match, the same as an id in its folder name. A file with only a link to the title's page works too. A show keeps the title and year of its folder, so name the folder the way you want the show called. Change an `.nfo` file and Matinee picks up the change on its next scan.
 
 Each library has a **Details** setting in **Settings → Libraries**:

@@ -48,7 +48,8 @@ func ReadNFOs(ctx context.Context, st *store.Store, lib store.Library) error {
 			return nil
 		}
 		l := &store.Local{Title: info.Title, Year: info.Year, Overview: info.Plot, Genres: info.Genres,
-			Rating: info.Rating, Poster: localArt(info.Poster), Backdrop: localArt(info.Backdrop), Hash: info.Hash}
+			Rating: info.Rating, Poster: localArt(info.Poster), Backdrop: localArt(info.Backdrop), Hash: info.Hash,
+			Cast: credits(info.Cast), Guests: credits(info.Guests), Crew: credits(info.Crew)}
 		if pin {
 			l.TMDBID = info.IDs.TMDB
 		}
@@ -104,6 +105,32 @@ func ReadNFOs(ctx context.Context, st *store.Store, lib store.Library) error {
 		}
 	}
 	return nil
+}
+
+// credits turns the people an .nfo file credits into the item's credits.
+func credits(people []nfo.Person) []store.Credit {
+	var out []store.Credit
+	for _, p := range people {
+		c := store.Credit{PersonID: p.TMDBID, Name: p.Name, Role: p.Role, Department: p.Department, Photo: localPhoto(p.Thumb)}
+		if c.PersonID == 0 {
+			c.PersonID = store.LocalPersonID(p.Name)
+		}
+		out = append(out, c)
+	}
+	return out
+}
+
+// localPhoto keeps a person's photo an .nfo file names when it's a web
+// address or an image file that's there.
+func localPhoto(p string) string {
+	switch strings.ToLower(filepath.Ext(p)) {
+	case ".jpg", ".jpeg", ".png", ".webp":
+		return localArt(p)
+	}
+	if strings.HasPrefix(p, "https://") || strings.HasPrefix(p, "http://") {
+		return p
+	}
+	return ""
 }
 
 // localArt keeps an image an .nfo file names when it's a web address or

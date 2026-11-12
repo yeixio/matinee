@@ -285,3 +285,56 @@ func TestScanFullLengthDisksAreVersions(t *testing.T) {
 		t.Errorf("versions: %+v %v", vs, err)
 	}
 }
+
+func TestScanReadsNFOPeople(t *testing.T) {
+	root := t.TempDir()
+	makeVideos(t, root, "Heat (1995)/Heat (1995).mkv")
+	nfoPath := filepath.Join(root, "Heat (1995)/movie.nfo")
+	os.MkdirAll(filepath.Join(root, "Heat (1995)/.actors"), 0o755)
+	os.WriteFile(filepath.Join(root, "Heat (1995)/.actors/Lead_Star.jpg"), []byte("jpg"), 0o644)
+	os.WriteFile(nfoPath, []byte(`<movie><director>Ann Lee</director>
+		<actor><name>Lead Star</name><role>Keeper</role></actor>
+		<actor><name>Known One</name><role>Mate</role><tmdbid>42</tmdbid></actor></movie>`), 0o644)
+	st, lib := scanLib(t, "movies", root)
+	ctx := context.Background()
+	top, _ := st.TopLevel(ctx, 0, lib.ID)
+	if len(top) != 1 {
+		t.Fatalf("movies: %+v", top)
+	}
+	id := top[0].ID
+	c, err := st.ItemCredits(ctx, id)
+	if err != nil || len(c.Cast) != 2 || len(c.Crew) != 1 {
+		t.Fatalf("credits from the .nfo: %+v %v", c, err)
+	}
+	lead := c.Cast[0]
+	if lead.Name != "Lead Star" || lead.Role != "Keeper" || lead.PersonID >= 0 || !lead.HasPhoto || c.Cast[1].PersonID != 42 {
+		t.Fatalf("cast: %+v", c.Cast)
+	}
+	if p, err := st.Person(ctx, lead.PersonID); err != nil || p.Name != "Lead Star" {
+		t.Fatalf("person page: %+v %v", p, err)
+	}
+	// Online credits don't replace the file's.
+	online := store.DetailsUpdate{Cast: []store.Credit{{PersonID: 7, Name: "Online Person"}}}
+	if err := st.ApplyDetails(ctx, id, online); err != nil {
+		t.Fatal(err)
+	}
+	if c, _ = st.ItemCredits(ctx, id); len(c.Cast) != 2 || c.Cast[0].Name != "Lead Star" {
+		t.Fatalf("online over the file's: %+v", c.Cast)
+	}
+	// Unless the library prefers online details.
+	st.SetMetadataMode(ctx, lib.ID, store.PreferOnline)
+	st.ApplyDetails(ctx, id, online)
+	if c, _ = st.ItemCredits(ctx, id); len(c.Cast) != 1 || c.Cast[0].Name != "Online Person" {
+		t.Fatalf("prefer online: %+v", c.Cast)
+	}
+	// Without the file, its credits go and the online ones come back.
+	st.SetMetadataMode(ctx, lib.ID, store.PreferLocal)
+	os.Remove(nfoPath)
+	if err := ReadNFOs(ctx, st, lib); err != nil {
+		t.Fatal(err)
+	}
+	it, _ := st.Item(ctx, 0, id)
+	if len(it.LocalFields) != 0 {
+		t.Fatalf("still from a file: %+v", it.LocalFields)
+	}
+}

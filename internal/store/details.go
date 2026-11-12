@@ -122,7 +122,7 @@ func (s *Store) ApplyDetails(ctx context.Context, id int64, u DetailsUpdate) err
 		string(js), now(), releaseDate(u.Details), nullInt(u.RatingLevel), id); err != nil {
 		return err
 	}
-	if err := applyCredits(ctx, t, id, u); err != nil {
+	if err := applyOnlineCredits(ctx, t, id, u); err != nil {
 		return err
 	}
 	if _, err := t.ExecContext(ctx, "DELETE FROM item_terms WHERE item_id = ?", id); err != nil {
@@ -157,10 +157,19 @@ func (s *Store) ApplyEpisodeDetails(ctx context.Context, id int64, u DetailsUpda
 		string(js), now(), releaseDate(u.Details), id); err != nil {
 		return err
 	}
-	if err := applyCredits(ctx, t, id, u); err != nil {
+	if err := applyOnlineCredits(ctx, t, id, u); err != nil {
 		return err
 	}
 	return t.Commit()
+}
+
+// applyOnlineCredits replaces an item's credits with ones looked up
+// online, unless a file next to it credits people (see peopleKept).
+func applyOnlineCredits(ctx context.Context, t *tx, id int64, u DetailsUpdate) error {
+	if kept, err := peopleKept(ctx, t, id); err != nil || kept {
+		return err
+	}
+	return applyCredits(ctx, t, id, u)
 }
 
 func applyCredits(ctx context.Context, t *tx, id int64, u DetailsUpdate) error {

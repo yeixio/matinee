@@ -11,6 +11,8 @@ import (
 	"io"
 	"os"
 	"path/filepath"
+	"slices"
+	"sort"
 	"strconv"
 	"strings"
 
@@ -29,6 +31,9 @@ type Info struct {
 	IDs      mediaid.IDs
 	Poster   string // a local image the file names, or a web address
 	Backdrop string
+	// Cast are the actors, in billing order; Guests an episode's guest
+	// stars; Crew its directors and writers.
+	Cast, Guests, Crew []Person
 	// Season and Episode, for an episode's file.
 	Season, Episode int
 	Aired           string // YYYY-MM-DD
@@ -36,10 +41,35 @@ type Info struct {
 	Hash string
 }
 
+// Person is someone an .nfo file credits: an actor and the part they
+// play, or a director or writer.
+type Person struct {
+	Name string
+	// Role is the character an actor plays, or a crew member's job, such
+	// as Director.
+	Role       string
+	Department string // Directing or Writing, for crew
+	Thumb      string // a local image or a web address
+	TMDBID     int64  // when the file names the person's TMDB id
+}
+
 // Empty reports whether the file said nothing Matinee uses.
 func (i Info) Empty() bool {
 	return i.Title == "" && i.Year == 0 && i.Plot == "" && i.Tagline == "" && len(i.Genres) == 0 &&
-		i.Rating == 0 && !i.IDs.Any() && i.Poster == "" && i.Backdrop == ""
+		i.Rating == 0 && !i.IDs.Any() && i.Poster == "" && i.Backdrop == "" && !i.HasPeople()
+}
+
+// HasPeople reports whether the file credits anyone.
+func (i Info) HasPeople() bool { return len(i.Cast)+len(i.Guests)+len(i.Crew) > 0 }
+
+type actor struct {
+	Name      string `xml:"name"`
+	Role      string `xml:"role"`
+	Order     string `xml:"order"`
+	SortOrder string `xml:"sortorder"`
+	Thumb     string `xml:"thumb"`
+	TMDbID    string `xml:"tmdbid"`
+	Type      string `xml:"type"` // Actor or GuestStar, in some tools' files
 }
 
 type uniqueID struct {
@@ -81,6 +111,10 @@ type doc struct {
 	Fanart    []thumb    `xml:"fanart>thumb"`
 	Season    string     `xml:"season"`
 	Episode   string     `xml:"episode"`
+	Actors    []actor    `xml:"actor"`
+	Directors []string   `xml:"director"`
+	Writers   []string   `xml:"writer"`
+	Credits   []string   `xml:"credits"` // writers, as Kodi names them
 }
 
 // Read reads an .nfo file. Files that are only a link to a web page, as
@@ -94,12 +128,42 @@ func Read(path string) (info Info, ok bool) {
 	info = Parse(b)
 	info.Hash = hex.EncodeToString(sum[:12])
 	// Images named relative to the file are next to it.
+	dir := filepath.Dir(path)
 	for _, p := range []*string{&info.Poster, &info.Backdrop} {
 		if *p != "" && !strings.Contains(*p, "://") && !filepath.IsAbs(*p) {
-			*p = filepath.Join(filepath.Dir(path), *p)
+			*p = filepath.Join(dir, *p)
+		}
+	}
+	for _, list := range [][]Person{info.Cast, info.Guests, info.Crew} {
+		for i := range list {
+			p := &list[i]
+			switch {
+			case p.Thumb == "":
+				// Kodi keeps people's photos in an .actors folder next to the
+				// file, named for them with _ for spaces.
+				p.Thumb = actorPhoto(dir, p.Name)
+			case !strings.Contains(p.Thumb, "://") && !filepath.IsAbs(p.Thumb):
+				p.Thumb = filepath.Join(dir, p.Thumb)
+			}
 		}
 	}
 	return info, true
+}
+
+// actorPhoto finds a person's photo in the .actors folder in dir, "" when
+// there's none.
+func actorPhoto(dir, name string) string {
+	base := strings.ReplaceAll(name, " ", "_")
+	if base == "" || strings.ContainsAny(base, `/\`) || strings.HasPrefix(base, ".") {
+		return ""
+	}
+	for _, ext := range []string{".jpg", ".png", ".jpeg", ".webp"} {
+		p := filepath.Join(dir, ".actors", base+ext)
+		if st, err := os.Stat(p); err == nil && !st.IsDir() {
+			return p
+		}
+	}
+	return ""
 }
 
 // Parse reads an .nfo file's contents.
@@ -151,12 +215,80 @@ func Parse(b []byte) Info {
 			info.Backdrop = v
 		}
 	}
+	info.Cast, info.Guests = people(d.Actors)
+	info.Crew = crew(d)
 	info.Season, _ = strconv.Atoi(strings.TrimSpace(d.Season))
 	info.Episode, _ = strconv.Atoi(strings.TrimSpace(d.Episode))
 	if a := strings.TrimSpace(d.Aired); len(a) >= 10 {
 		info.Aired = a[:10]
 	}
 	return info
+}
+
+// people reads the actors a file lists, in billing order: by their
+// order when the file numbers them, else as listed. Guest stars, which
+// some tools mark, come apart.
+func people(actors []actor) (cast, guests []Person) {
+	type ranked struct {
+		Person
+		order int
+	}
+	var c, g []ranked
+	seen := map[string]bool{}
+	for i, a := range actors {
+		name := strings.TrimSpace(a.Name)
+		if name == "" || seen[strings.ToLower(name)] {
+			continue
+		}
+		seen[strings.ToLower(name)] = true
+		order := 1<<20 + i // unnumbered ones after the numbered, as listed
+		for _, o := range []string{a.Order, a.SortOrder} {
+			if n, err := strconv.Atoi(strings.TrimSpace(o)); err == nil && n >= 0 {
+				order = n
+				break
+			}
+		}
+		p := ranked{Person{Name: name, Role: strings.TrimSpace(a.Role), Thumb: strings.TrimSpace(a.Thumb)}, order}
+		if n, err := strconv.ParseInt(strings.TrimSpace(a.TMDbID), 10, 64); err == nil && n > 0 {
+			p.TMDBID = n
+		}
+		if strings.EqualFold(strings.TrimSpace(a.Type), "GuestStar") {
+			g = append(g, p)
+		} else {
+			c = append(c, p)
+		}
+	}
+	out := func(list []ranked) []Person {
+		sort.SliceStable(list, func(i, j int) bool { return list[i].order < list[j].order })
+		var ps []Person
+		for _, r := range list {
+			ps = append(ps, r.Person)
+		}
+		return ps
+	}
+	return out(c), out(g)
+}
+
+// crew reads a file's directors and writers.
+func crew(d doc) []Person {
+	var out []Person
+	seen := map[string]bool{}
+	add := func(names []string, job, dept string) {
+		for _, n := range names {
+			// Some tools put several in one, split by /.
+			for _, name := range strings.FieldsFunc(n, func(r rune) bool { return r == '/' }) {
+				name = strings.TrimSpace(name)
+				if name == "" || seen[job+"|"+strings.ToLower(name)] {
+					continue
+				}
+				seen[job+"|"+strings.ToLower(name)] = true
+				out = append(out, Person{Name: name, Role: job, Department: dept})
+			}
+		}
+	}
+	add(d.Directors, "Director", "Directing")
+	add(append(slices.Clip(d.Writers), d.Credits...), "Writer", "Writing")
+	return out
 }
 
 func year(s string) int {

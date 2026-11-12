@@ -157,7 +157,8 @@ func (s *Server) getPerson(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	ctx := r.Context()
-	if ready(s.People) && time.Since(time.Unix(p.InfoAt, 0)) > personRefresh {
+	// People below zero come from files next to the media, not TMDB.
+	if p.ID > 0 && ready(s.People) && time.Since(time.Unix(p.InfoAt, 0)) > personRefresh {
 		lookup, cancel := context.WithTimeout(ctx, 5*time.Second)
 		info, err := s.People.Person(lookup, p.ID)
 		cancel()

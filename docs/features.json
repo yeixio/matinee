@@ -222,6 +222,19 @@
               }
             },
             {
+              "name": "Cast and crew from .nfo files",
+              "doc": "/docs/getting-started/organizing-media/",
+              "since": "v0.2.4",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
               "name": "Edit a title's details by hand",
               "doc": "/docs/getting-started/organizing-media/",
               "since": "v0.2.4",

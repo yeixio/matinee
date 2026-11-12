@@ -770,6 +770,8 @@ var migrations = []string{
 	// read. Most were fine; they get their previews made again, and the
 	// damaged ones are set aside again.
 	"DELETE FROM thumbnails WHERE count = 0",
+	// 136: .nfo files' cast and crew are read now; read every file again.
+	"UPDATE items SET nfo_hash = '' WHERE nfo_hash <> ''",
 }
 
 func now() int64 { return time.Now().Unix() }
