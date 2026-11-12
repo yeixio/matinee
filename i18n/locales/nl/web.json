@@ -1029,7 +1029,20 @@
       "intro": "Speel games op deze server en stream ze naar elk apparaat, met een controller. Dit is een preview voor beheerders: probeer hoe het voelt.",
       "ready": "Klaar, met emulators voor {{systems}}.",
       "notSetUp": "Niet beschikbaar: deze server heeft de game-runner en emulators niet. De Docker-image heeft ze.",
-      "open": "Een game proberen"
+      "open": "Een game proberen",
+      "emulators": "Emulators",
+      "emulatorsIntro": "Matinee heeft ingebouwde emulators. Je kunt je eigen toevoegen: een libretro-core gebouwd voor {{platform}} (een .so-bestand). Matinee vraagt welke games hij speelt en gebruikt hem daarvoor vóór de ingebouwde.",
+      "emulatorsTrust": "Een emulator is een programma dat op deze server draait. Voeg er alleen een toe die je vertrouwt.",
+      "addEmulator": "Emulator toevoegen",
+      "adding": "Toevoegen…",
+      "added": "{{name}} toegevoegd.",
+      "couldntAdd": "Kan de emulator niet toevoegen.",
+      "removeConfirm": "{{name}} verwijderen? De games gaan terug naar een ingebouwde emulator, als die ze speelt.",
+      "cantUse": "Niet bruikbaar: {{reason}}",
+      "plays": "Speelt {{what}}",
+      "builtIn": "Ingebouwd",
+      "remove": "Verwijderen",
+      "bios": "Sommige emulators hebben een BIOS-bestand van de console nodig: zet het in games/system in de datamap van Matinee."
     }
   },
   "language": {
@@ -1645,7 +1658,6 @@
     "lagTestHint": "Beweeg het vierkant met de d-pad. Het scherm wordt wit zolang A of B is ingedrukt: film controller en scherm samen om het te meten.",
     "play": "Spelen",
     "pickGame": "Kies een game",
-    "pickGameHint": "Games die van jou zijn: Game Boy-, Game Boy Color-, Game Boy Advance- en NES-bestanden, of zips met een ervan.",
     "up": "Map omhoog",
     "emptyFolder": "Geen mappen of games hier.",
     "controller": "Controller: {{name}}",
@@ -1665,6 +1677,7 @@
       "server": "Server, één beeld",
       "decode": "Decoderen",
       "fps": "Beelden per seconde"
-    }
+    },
+    "pickGameHintAny": "Games die je bezit: een gamebestand of een zip met een game erin."
   }
 }

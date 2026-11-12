@@ -1025,7 +1025,20 @@
       "intro": "Main permainan pada pelayan ini dan strim ke mana-mana peranti dengan pengawal. Ini pratonton untuk pentadbir: cubalah.",
       "ready": "Sedia, dengan emulator untuk {{systems}}.",
       "notSetUp": "Tidak tersedia: pelayan ini tiada pelari permainan dan emulator. Imej Docker memilikinya.",
-      "open": "Cuba permainan"
+      "open": "Cuba permainan",
+      "emulators": "Emulator",
+      "emulatorsIntro": "Matinee disertakan dengan emulator. Anda boleh menambah sendiri: teras libretro yang dibina untuk {{platform}} (fail .so). Matinee bertanya permainan apa yang dimainkannya, dan menggunakannya untuk permainan itu sebelum yang terbina dalam.",
+      "emulatorsTrust": "Emulator ialah program yang berjalan pada pelayan ini. Tambah hanya yang anda percayai.",
+      "addEmulator": "Tambah emulator",
+      "adding": "Menambah…",
+      "added": "{{name}} ditambah.",
+      "couldntAdd": "Tidak dapat menambah emulator.",
+      "removeConfirm": "Buang {{name}}? Permainannya kembali kepada emulator terbina dalam, jika ada.",
+      "cantUse": "Tidak boleh digunakan: {{reason}}",
+      "plays": "Memainkan {{what}}",
+      "builtIn": "Terbina dalam",
+      "remove": "Buang",
+      "bios": "Sesetengah emulator memerlukan fail BIOS daripada konsol: letakkannya dalam games/system di folder data Matinee."
     }
   },
   "language": {
@@ -1633,7 +1646,6 @@
     "lagTestHint": "Gerakkan segi empat dengan d-pad. Skrin menjadi putih selagi A atau B ditekan: rakam pengawal dan skrin bersama untuk mengukurnya.",
     "play": "Main",
     "pickGame": "Pilih permainan",
-    "pickGameHint": "Permainan milik anda: fail Game Boy, Game Boy Color, Game Boy Advance dan NES, atau zip yang mengandungi salah satunya.",
     "up": "Naik satu folder",
     "emptyFolder": "Tiada folder atau permainan di sini.",
     "controller": "Pengawal: {{name}}",
@@ -1653,6 +1665,7 @@
       "server": "Pelayan, satu bingkai",
       "decode": "Penyahkodan",
       "fps": "Bingkai sesaat"
-    }
+    },
+    "pickGameHintAny": "Permainan milik anda: fail permainan, atau zip yang mengandungi satu."
   }
 }

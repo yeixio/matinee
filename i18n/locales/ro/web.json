@@ -1033,7 +1033,20 @@
       "intro": "Joacă pe acest server și transmite pe orice dispozitiv, cu un controller. Este o previzualizare pentru administratori: încearcă.",
       "ready": "Gata, cu emulatoare pentru {{systems}}.",
       "notSetUp": "Indisponibil: serverul nu are rulatorul de jocuri și emulatoarele. Imaginea Docker le are.",
-      "open": "Încearcă un joc"
+      "open": "Încearcă un joc",
+      "emulators": "Emulatoare",
+      "emulatorsIntro": "Matinee vine cu emulatoare. Poți adăuga propriile tale: un core libretro compilat pentru {{platform}} (un fișier .so). Matinee îl întreabă ce jocuri rulează și îl folosește pentru ele înaintea celor incluse.",
+      "emulatorsTrust": "Un emulator este un program care rulează pe acest server. Adaugă doar unul în care ai încredere.",
+      "addEmulator": "Adaugă un emulator",
+      "adding": "Se adaugă…",
+      "added": "{{name}} a fost adăugat.",
+      "couldntAdd": "Emulatorul nu a putut fi adăugat.",
+      "removeConfirm": "Elimini {{name}}? Jocurile lui revin la un emulator inclus, dacă există unul.",
+      "cantUse": "Nu poate fi folosit: {{reason}}",
+      "plays": "Rulează {{what}}",
+      "builtIn": "Inclus",
+      "remove": "Elimină",
+      "bios": "Unele emulatoare au nevoie de un fișier BIOS de pe consolă: pune-l în games/system din folderul de date Matinee."
     }
   },
   "language": {
@@ -1657,7 +1670,6 @@
     "lagTestHint": "Mută pătratul cu crucea direcțională. Ecranul devine alb cât timp ții apăsat A sau B: filmează controllerul și ecranul împreună ca să măsori.",
     "play": "Joacă",
     "pickGame": "Alege un joc",
-    "pickGameHint": "Jocurile tale: fișiere Game Boy, Game Boy Color, Game Boy Advance și NES, sau arhive zip cu unul dintre ele.",
     "up": "Un dosar mai sus",
     "emptyFolder": "Niciun dosar sau joc aici.",
     "controller": "Controller: {{name}}",
@@ -1677,6 +1689,7 @@
       "server": "Server, un cadru",
       "decode": "Decodare",
       "fps": "Cadre pe secundă"
-    }
+    },
+    "pickGameHintAny": "Jocuri pe care le deții: un fișier de joc sau un zip care conține unul."
   }
 }

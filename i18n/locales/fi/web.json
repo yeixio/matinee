@@ -1029,7 +1029,20 @@
       "intro": "Pelaa tällä palvelimella ja suoratoista mille tahansa laitteelle ohjaimella. Tämä on esikatselu ylläpitäjille: kokeile, miltä se tuntuu.",
       "ready": "Valmis, emulaattorit järjestelmille {{systems}}.",
       "notSetUp": "Ei käytettävissä: palvelimelta puuttuvat pelinajaja ja emulaattorit. Docker-kuvassa ne ovat.",
-      "open": "Kokeile peliä"
+      "open": "Kokeile peliä",
+      "emulators": "Emulaattorit",
+      "emulatorsIntro": "Matineessa on valmiita emulaattoreita. Voit lisätä omia: libretro-coren, joka on käännetty alustalle {{platform}} (.so-tiedosto). Matinee kysyy siltä, mitä pelejä se pelaa, ja käyttää sitä niihin ennen valmiita.",
+      "emulatorsTrust": "Emulaattori on ohjelma, joka toimii tällä palvelimella. Lisää vain sellainen, johon luotat.",
+      "addEmulator": "Lisää emulaattori",
+      "adding": "Lisätään…",
+      "added": "{{name}} lisätty.",
+      "couldntAdd": "Emulaattoria ei voitu lisätä.",
+      "removeConfirm": "Poistetaanko {{name}}? Sen pelit palaavat valmiille emulaattorille, jos sellainen pelaa niitä.",
+      "cantUse": "Ei käytettävissä: {{reason}}",
+      "plays": "Pelaa: {{what}}",
+      "builtIn": "Valmiina",
+      "remove": "Poista",
+      "bios": "Jotkin emulaattorit tarvitsevat konsolin BIOS-tiedoston: laita se Matineen datakansion kansioon games/system."
     }
   },
   "language": {
@@ -1645,7 +1658,6 @@
     "lagTestHint": "Liikuta neliötä ristiohjaimella. Ruutu muuttuu valkoiseksi, kun A tai B on pohjassa: kuvaa ohjain ja ruutu yhdessä mitataksesi.",
     "play": "Pelaa",
     "pickGame": "Valitse peli",
-    "pickGameHint": "Omistamasi pelit: Game Boy-, Game Boy Color-, Game Boy Advance- ja NES-tiedostot tai niitä sisältävät zipit.",
     "up": "Kansio ylöspäin",
     "emptyFolder": "Ei kansioita tai pelejä täällä.",
     "controller": "Ohjain: {{name}}",
@@ -1665,6 +1677,7 @@
       "server": "Palvelin, yksi kuva",
       "decode": "Purku",
       "fps": "Kuvaa sekunnissa"
-    }
+    },
+    "pickGameHintAny": "Omistamasi pelit: pelitiedosto tai zip, jossa on sellainen."
   }
 }

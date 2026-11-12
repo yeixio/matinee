@@ -1033,7 +1033,20 @@
       "intro": "Jogue neste servidor e transmita para qualquer aparelho, com um controle. É uma prévia para admins: experimente.",
       "ready": "Pronto, com emuladores para {{systems}}.",
       "notSetUp": "Indisponível: este servidor não tem o executor de jogos e os emuladores. A imagem Docker tem.",
-      "open": "Experimentar um jogo"
+      "open": "Experimentar um jogo",
+      "emulators": "Emuladores",
+      "emulatorsIntro": "O Matinee vem com emuladores. Você pode adicionar os seus: um core libretro compilado para {{platform}} (um arquivo .so). O Matinee pergunta quais jogos ele roda e o usa para eles antes dos embutidos.",
+      "emulatorsTrust": "Um emulador é um programa que roda neste servidor. Adicione só um em que você confia.",
+      "addEmulator": "Adicionar um emulador",
+      "adding": "Adicionando…",
+      "added": "{{name}} adicionado.",
+      "couldntAdd": "Não foi possível adicionar o emulador.",
+      "removeConfirm": "Remover {{name}}? Os jogos dele voltam para um emulador embutido, se houver um.",
+      "cantUse": "Não pode ser usado: {{reason}}",
+      "plays": "Roda {{what}}",
+      "builtIn": "Embutido",
+      "remove": "Remover",
+      "bios": "Alguns emuladores precisam de um arquivo de BIOS do console: coloque-o em games/system na pasta de dados do Matinee."
     }
   },
   "language": {
@@ -1657,7 +1670,6 @@
     "lagTestHint": "Mova o quadrado com o direcional. A tela fica branca enquanto A ou B está pressionado: filme o controle e a tela juntos para medir.",
     "play": "Jogar",
     "pickGame": "Escolha um jogo",
-    "pickGameHint": "Jogos seus: arquivos de Game Boy, Game Boy Color, Game Boy Advance e NES, ou zips com um deles.",
     "up": "Subir uma pasta",
     "emptyFolder": "Nenhuma pasta ou jogo aqui.",
     "controller": "Controle: {{name}}",
@@ -1677,6 +1689,7 @@
       "server": "Servidor, um quadro",
       "decode": "Decodificação",
       "fps": "Quadros por segundo"
-    }
+    },
+    "pickGameHintAny": "Jogos que você tem: um arquivo de jogo ou um zip com um."
   }
 }

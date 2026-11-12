@@ -1029,7 +1029,20 @@
       "intro": "Play games on this server and stream them to any device, with a controller. This is a preview, for admins: try it and see how it feels.",
       "ready": "Ready, with emulators for {{systems}}.",
       "notSetUp": "Not available: this server doesn't have the game runner and emulators. The Docker image has them.",
-      "open": "Try playing a game"
+      "open": "Try playing a game",
+      "emulators": "Emulators",
+      "emulatorsIntro": "Matinee comes with emulators. You can add your own: a libretro core built for {{platform}} (a .so file). Matinee asks it which games it plays, and it plays them ahead of the built-in ones.",
+      "emulatorsTrust": "An emulator is a program that runs on this server. Only add one you trust.",
+      "addEmulator": "Add an emulator",
+      "adding": "Adding…",
+      "added": "Added {{name}}.",
+      "couldntAdd": "Couldn't add the emulator.",
+      "removeConfirm": "Remove {{name}}? Its games go back to a built-in emulator, if one plays them.",
+      "cantUse": "Can't be used: {{reason}}",
+      "plays": "Plays {{what}}",
+      "builtIn": "Built in",
+      "remove": "Remove",
+      "bios": "Some emulators need a BIOS file from the console: put it in games/system in Matinee's data folder."
     }
   },
   "language": {
@@ -1645,7 +1658,6 @@
     "lagTestHint": "Move the square with the d-pad. The screen turns white while A or B is held: film the controller and the screen together to time it.",
     "play": "Play",
     "pickGame": "Pick a game",
-    "pickGameHint": "Games you own: Game Boy, Game Boy Color, Game Boy Advance and NES files, or zips holding one.",
     "up": "Up a folder",
     "emptyFolder": "No folders or games here.",
     "controller": "Controller: {{name}}",
@@ -1665,6 +1677,7 @@
       "server": "Server, one frame",
       "decode": "Decoding",
       "fps": "Frames a second"
-    }
+    },
+    "pickGameHintAny": "Games you own: a game file, or a zip holding one."
   }
 }

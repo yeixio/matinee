@@ -1,6 +1,6 @@
 ---
 title: Games
-description: Play games on your Matinee server and stream them to a player with a controller. A preview for admins, with a lag test.
+description: Play games on your Matinee server and stream them to a player with a controller, with the built-in emulators or your own. A preview for admins, with a lag test.
 since: v0.2.4
 sidebar:
   order: 11
@@ -12,13 +12,21 @@ This is a **preview**. For now only admins can play, in the web player, and you 
 
 ## What it plays
 
-| System | Files |
-| --- | --- |
-| Game Boy and Game Boy Color | `.gb`, `.gbc` |
-| Game Boy Advance | `.gba` |
-| Nintendo Entertainment System | `.nes`, `.fds` |
+| System | Files | Emulator |
+| --- | --- | --- |
+| Game Boy and Game Boy Color | `.gb`, `.gbc` | Gambatte |
+| Game Boy Advance | `.gba` | mGBA |
+| Nintendo Entertainment System | `.nes`, `.fds` | FCEUmm |
+| Super Nintendo | `.sfc`, `.smc` | bsnes |
+| Sega Genesis / Mega Drive | `.md`, `.gen`, `.bin` | clownmdemu |
+| Nintendo 64 | `.n64`, `.v64`, `.z64` | ParaLLEl N64 |
+| PlayStation | `.cue` (with its `.bin` tracks beside it), `.chd`, `.pbp`, `.m3u`, `.iso` | PCSX ReARMed |
 
-A zip holding one of these works too. Matinee plays only the games you already have: it never looks for, links to or downloads games.
+A zip holding one of these works too, including a zip of a PlayStation disc's `.cue` and `.bin` files. Matinee plays only the games you already have: it never looks for, links to or downloads games. You can add emulators for other systems yourself (see [Adding your own emulator](#adding-your-own-emulator)).
+
+None of these needs a graphics card in the server: the N64 picture is drawn in software, which wants a recent CPU with a few cores to spare. The Super Nintendo and N64 emulators aren't in the image for 32-bit ARM boards, which are too slow for them.
+
+The PlayStation emulator doesn't need the console's BIOS, but plays more games, more faithfully, with one: put your own BIOS file (such as `scph5501.bin`) in `games/system` in Matinee's data folder.
 
 Games with a battery save, such as RPGs, keep their saves on the server, one for each person, and pick up where you saved next time.
 
@@ -29,7 +37,7 @@ Games with a battery save, such as RPGs, keep their saves on the server, one for
 3. Find the game in the folder list and click it. It opens full screen.
 4. Close it with the **×** at the top. A battery save is kept.
 
-The controller buttons go by where they sit, not by their letters: the bottom face button is B and the right one is A, as on the consoles.
+The controller buttons go by where they sit, not by their letters: the bottom face button is B and the right one is A, as on the consoles. For the N64 the left stick is the N64's stick and the right stick its C buttons; on the keyboard the arrow keys move the stick.
 
 ## How fast it is
 
@@ -51,4 +59,18 @@ The Docker image and the Helm chart include the game runner and the emulators. O
 
 ## The emulators
 
-Matinee plays games with free, open-source emulators, each in its own process so a game that crashes can't take the server with it: [Gambatte](https://github.com/libretro/gambatte-libretro) for the Game Boy, [mGBA](https://mgba.io) for the Game Boy Advance, and [FCEUmm](https://github.com/libretro/libretro-fceumm) for the NES. Their licences are in `/usr/lib/matinee/games/licenses` in the image.
+Matinee plays games with free, open-source emulators, each in its own process so a game that crashes can't take the server with it: [Gambatte](https://github.com/libretro/gambatte-libretro) for the Game Boy, [mGBA](https://mgba.io) for the Game Boy Advance, [FCEUmm](https://github.com/libretro/libretro-fceumm) for the NES, [bsnes](https://github.com/libretro/bsnes-libretro) for the Super Nintendo, [clownmdemu](https://github.com/Clownacy/clownmdemu-libretro) for the Genesis, [ParaLLEl N64](https://github.com/libretro/parallel-n64) for the N64 and [PCSX ReARMed](https://github.com/libretro/pcsx_rearmed) for the PlayStation. Their licences are in `/usr/lib/matinee/games/licenses` in the image.
+
+## Adding your own emulator
+
+You can add any emulator that's a **libretro core**, for a system Matinee doesn't play yet, or to play a system with a different emulator than the built-in one.
+
+1. Get the core built for your server: a file ending in `_libretro.so` for Linux on the server's kind of CPU. **Settings → Streaming → Games** says which one you need, such as **Linux x86_64** for most PCs or **Linux aarch64** for a Raspberry Pi 4 or 5. The libretro project's [nightly builds](https://buildbot.libretro.com/nightly/linux/) have most cores, zipped.
+2. Unzip it, and in **Settings → Streaming → Games → Emulators** press **Add an emulator** and pick the `.so` file.
+3. Matinee loads it to ask which files it plays. If that works it's added, listed with the files it plays, and those games play with it from then on, ahead of a built-in emulator for the same files. If it doesn't, Matinee says why (built for another kind of computer, say) and doesn't keep it.
+
+An emulator is a program that runs on your server, so add only ones you trust, such as libretro's own builds. Each runs in its own process like the built-in ones.
+
+You can also copy cores into `games/cores` in Matinee's data folder by hand; Matinee picks them up the next time it lists games. To remove one, press the bin next to it, or delete the file.
+
+Some emulators need a BIOS file from the console. Put it in `games/system` in Matinee's data folder, named as the emulator's own documentation says. Emulators that draw with a graphics card (OpenGL or Vulkan) can't run on the server yet. An arcade emulator that plays zips is given the zip as it is, so the zip has to be the set of game files that emulator's version expects.

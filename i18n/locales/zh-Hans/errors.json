@@ -287,5 +287,8 @@
   "this_titles_files_cant_be_read_right_now_the_network_share_theyre_on_isnt_answering": "现在无法读取此作品的文件：它们所在的网络共享没有响应",
   "too_many_games_are_being_played_right_now": "当前运行的游戏太多",
   "cant_find_that_game": "找不到该游戏",
-  "no_emulator_on_this_server_plays_that_game": "此服务器上没有能运行该游戏的模拟器"
+  "no_emulator_on_this_server_plays_that_game": "此服务器上没有能运行该游戏的模拟器",
+  "cant_find_that_emulator": "找不到该模拟器",
+  "couldnt_save_the_emulator": "无法保存模拟器",
+  "that_file_isnt_an_emulator_this_server_can_run_reason": "该文件不是这台服务器能运行的模拟器：{{reason}}"
 }

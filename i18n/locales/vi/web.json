@@ -1025,7 +1025,20 @@
       "intro": "Chơi trên máy chủ này và truyền đến mọi thiết bị bằng tay cầm. Đây là bản xem trước cho quản trị viên: hãy thử.",
       "ready": "Sẵn sàng, có trình giả lập cho {{systems}}.",
       "notSetUp": "Không khả dụng: máy chủ này không có trình chạy trò chơi và trình giả lập. Ảnh Docker có sẵn.",
-      "open": "Thử một trò chơi"
+      "open": "Thử một trò chơi",
+      "emulators": "Trình giả lập",
+      "emulatorsIntro": "Matinee có sẵn trình giả lập. Bạn có thể thêm của riêng mình: một libretro core dựng cho {{platform}} (tệp .so). Matinee hỏi nó chơi được trò nào và dùng nó cho các trò đó trước trình có sẵn.",
+      "emulatorsTrust": "Trình giả lập là chương trình chạy trên máy chủ này. Chỉ thêm trình bạn tin tưởng.",
+      "addEmulator": "Thêm trình giả lập",
+      "adding": "Đang thêm…",
+      "added": "Đã thêm {{name}}.",
+      "couldntAdd": "Không thêm được trình giả lập.",
+      "removeConfirm": "Gỡ {{name}}? Các trò của nó sẽ quay về trình giả lập có sẵn, nếu có.",
+      "cantUse": "Không dùng được: {{reason}}",
+      "plays": "Chơi {{what}}",
+      "builtIn": "Có sẵn",
+      "remove": "Gỡ",
+      "bios": "Một số trình giả lập cần tệp BIOS từ máy chơi game: đặt nó vào games/system trong thư mục dữ liệu của Matinee."
     }
   },
   "language": {
@@ -1633,7 +1646,6 @@
     "lagTestHint": "Di chuyển ô vuông bằng nút hướng. Màn hình chuyển trắng khi giữ A hoặc B: quay tay cầm và màn hình cùng lúc để đo.",
     "play": "Chơi",
     "pickGame": "Chọn trò chơi",
-    "pickGameHint": "Trò chơi của bạn: tệp Game Boy, Game Boy Color, Game Boy Advance và NES, hoặc tệp zip chứa một trong số đó.",
     "up": "Lên một thư mục",
     "emptyFolder": "Không có thư mục hay trò chơi nào ở đây.",
     "controller": "Tay cầm: {{name}}",
@@ -1653,6 +1665,7 @@
       "server": "Máy chủ, một khung hình",
       "decode": "Giải mã",
       "fps": "Khung hình mỗi giây"
-    }
+    },
+    "pickGameHintAny": "Trò chơi bạn sở hữu: một tệp trò chơi, hoặc một tệp zip chứa nó."
   }
 }

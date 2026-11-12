@@ -1153,11 +1153,57 @@ paths:
                     items:
                       type: object
                       properties:
-                        key: { type: string, example: gb }
+                        key: { type: string, example: gb, description: "Box Office's key; an added emulator's is custom-<file>." }
                         name: { type: string, example: Game Boy }
+                        emulator: { type: string, example: Gambatte }
                         extensions: { type: array, items: { type: string } }
+                        analog: { type: boolean, description: The controller has analog sticks. }
+                        custom: { type: boolean, description: An admin added this emulator. }
                   lagTest: { type: boolean, description: The built-in lag test is here. }
                   playing: { type: integer, description: How many games are being played now. }
+                  platform: { type: string, example: Linux x86_64, description: The kind of emulator file this server runs. }
+  /games/emulators:
+    get:
+      summary: The emulators on this server, those an admin added first (admins only)
+      responses:
+        "200":
+          description: Every emulator.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  platform: { type: string, example: Linux x86_64 }
+                  emulators:
+                    type: array
+                    items: { $ref: "#/components/schemas/GameEmulator" }
+    post:
+      summary: Add an emulator of your own, a libretro core (admins only)
+      description: >-
+        The body is the core file itself, a Linux .so built for this server's kind of computer. Matinee
+        loads it to ask which games it plays, and keeps it only if that works. It then plays those
+        games, ahead of the built-in emulators. One with the same file name is replaced.
+      parameters:
+        - { name: file, in: query, required: true, schema: { type: string, example: snes9x_libretro.so } }
+      requestBody:
+        content:
+          application/octet-stream:
+            schema: { type: string, format: binary }
+      responses:
+        "200":
+          description: Added.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/GameEmulator" }
+        "400": { description: "Not an emulator this server can run; the reason is in params.reason." }
+  /games/emulators/{file}:
+    delete:
+      summary: Remove an emulator an admin added (admins only)
+      parameters:
+        - { name: file, in: path, required: true, schema: { type: string } }
+      responses:
+        "204": { description: Removed. }
+        "404": { description: No such added emulator. }
   /games/files:
     get:
       summary: List a folder's subfolders and the files in it that might be games (admins only)
@@ -1181,8 +1227,9 @@ paths:
       description: >-
         Send a WebRTC offer with one video and one audio transceiver (receive only) and a data channel.
         The answer comes back with every candidate in it. On the data channel, send buttons held as
-        bytes [1, port, low, high] (a bitmask of libretro's joypad buttons, B=0 … R3=15) and pings as
-        [2, …], which come straight back. Once a second the server sends JSON text with how long it
+        bytes [1, port, low, high] (a bitmask of libretro's joypad buttons, B=0 … R3=15), analog sticks
+        as [3, port, axis, value] (axis 0/1 the left stick's x/y, 2/3 the right's, value a signed byte),
+        and pings as [2, …], which come straight back. Once a second the server sends JSON text with how long it
         takes with each frame. Starting a game ends any other the same person is playing.
       requestBody:
         content:
@@ -1204,6 +1251,7 @@ paths:
                   id: { type: string }
                   answer: { type: string, description: The server's SDP answer. }
                   system: { type: string }
+                  analog: { type: boolean, description: "Send the sticks as sticks, not as the d-pad." }
                   width: { type: integer }
                   height: { type: integer }
                   aspect: { type: number }
@@ -5070,6 +5118,16 @@ components:
             type: array
             items: { $ref: "#/components/schemas/Item" }
   schemas:
+    GameEmulator:
+      type: object
+      properties:
+        file: { type: string, example: snes9x_libretro.so }
+        name: { type: string, example: Snes9x }
+        version: { type: string }
+        systems: { type: array, items: { type: string }, description: A built-in emulator's systems. }
+        extensions: { type: array, items: { type: string }, example: [.sfc, .smc] }
+        builtIn: { type: boolean, description: It came with Matinee and can't be removed. }
+        error: { type: string, description: "Why an added emulator can't be used." }
     BackupSettings:
       type: object
       properties:

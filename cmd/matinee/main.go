@@ -337,7 +337,7 @@ func run() (err error) {
 	if cfg.GamesDir != "" {
 		games, err := gamestream.NewManager(gamestream.Config{
 			FFmpeg: cfg.FFmpegPath, Runner: filepath.Join(cfg.GamesDir, "matinee-game-runner"), CoreDir: filepath.Join(cfg.GamesDir, "cores"),
-			SaveDir: cfg.GameSaveDir(), SystemDir: cfg.GameSystemDir(), WorkDir: cfg.GameWorkDir(),
+			UserCoreDir: cfg.GameCoreDir(), SaveDir: cfg.GameSaveDir(), SystemDir: cfg.GameSystemDir(), WorkDir: cfg.GameWorkDir(),
 			Port: cfg.GamesPort, PublicIPs: cfg.GamesPublicIPs,
 		}, log)
 		if err != nil {

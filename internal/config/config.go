@@ -68,6 +68,9 @@ func (c Config) GameSaveDir() string { return filepath.Join(c.DataDir, "games", 
 // GameSystemDir has BIOS files the emulators that need one look for.
 func (c Config) GameSystemDir() string { return filepath.Join(c.DataDir, "games", "system") }
 
+// GameCoreDir has the emulators an admin added themselves.
+func (c Config) GameCoreDir() string { return filepath.Join(c.DataDir, "games", "cores") }
+
 // GameWorkDir has games unpacked from zips while they're played.
 func (c Config) GameWorkDir() string { return filepath.Join(c.DataDir, "games", "playing") }
 

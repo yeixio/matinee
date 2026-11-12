@@ -1033,7 +1033,20 @@
       "intro": "Jouez sur ce serveur et diffusez vers n'importe quel appareil, avec une manette. C'est un aperçu pour les admins : essayez pour voir.",
       "ready": "Prêt, avec des émulateurs pour {{systems}}.",
       "notSetUp": "Indisponible : ce serveur n'a pas le lanceur de jeux ni les émulateurs. L'image Docker les inclut.",
-      "open": "Essayer un jeu"
+      "open": "Essayer un jeu",
+      "emulators": "Émulateurs",
+      "emulatorsIntro": "Matinee est fourni avec des émulateurs. Vous pouvez ajouter les vôtres : un core libretro compilé pour {{platform}} (un fichier .so). Matinee lui demande quels jeux il prend en charge, et l'utilise pour eux avant ceux intégrés.",
+      "emulatorsTrust": "Un émulateur est un programme qui s'exécute sur ce serveur. N'ajoutez que ceux en qui vous avez confiance.",
+      "addEmulator": "Ajouter un émulateur",
+      "adding": "Ajout…",
+      "added": "{{name}} ajouté.",
+      "couldntAdd": "Impossible d'ajouter l'émulateur.",
+      "removeConfirm": "Retirer {{name}} ? Ses jeux reviennent à un émulateur intégré, s'il y en a un pour eux.",
+      "cantUse": "Inutilisable : {{reason}}",
+      "plays": "Joue {{what}}",
+      "builtIn": "Intégré",
+      "remove": "Retirer",
+      "bios": "Certains émulateurs ont besoin d'un fichier BIOS de la console : placez-le dans games/system du dossier de données de Matinee."
     }
   },
   "language": {
@@ -1657,7 +1670,6 @@
     "lagTestHint": "Déplacez le carré avec la croix directionnelle. L'écran devient blanc tant que A ou B est enfoncé : filmez la manette et l'écran ensemble pour mesurer.",
     "play": "Jouer",
     "pickGame": "Choisir un jeu",
-    "pickGameHint": "Vos propres jeux : fichiers Game Boy, Game Boy Color, Game Boy Advance et NES, ou zips qui en contiennent un.",
     "up": "Dossier parent",
     "emptyFolder": "Aucun dossier ni jeu ici.",
     "controller": "Manette : {{name}}",
@@ -1677,6 +1689,7 @@
       "server": "Serveur, une image",
       "decode": "Décodage",
       "fps": "Images par seconde"
-    }
+    },
+    "pickGameHintAny": "Vos propres jeux : un fichier de jeu, ou un zip qui en contient un."
   }
 }

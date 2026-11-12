@@ -653,6 +653,19 @@
                 "androidtv": "matinee#394",
                 "tvweb": "matinee#394"
               }
+            },
+            {
+              "name": "Add your own game emulators",
+              "doc": "/docs/server/games/#adding-your-own-emulator",
+              "since": "v0.2.4",
+              "apps": {
+                "web": true,
+                "ios": {"na": "Emulators are added by an admin in the web app."},
+                "android": {"na": "Emulators are added by an admin in the web app."},
+                "appletv": {"na": "Emulators are added by an admin in the web app."},
+                "androidtv": {"na": "Emulators are added by an admin in the web app."},
+                "tvweb": {"na": "Emulators are added by an admin in the web app."}
+              }
             }
           ]
         },

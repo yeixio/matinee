@@ -287,5 +287,8 @@
   "this_titles_files_cant_be_read_right_now_the_network_share_theyre_on_isnt_answering": "soubory tohoto titulu teď nejdou přečíst: síťová sdílená složka, na které jsou, neodpovídá",
   "too_many_games_are_being_played_right_now": "právě se hraje příliš mnoho her",
   "cant_find_that_game": "tuto hru nelze najít",
-  "no_emulator_on_this_server_plays_that_game": "žádný emulátor na tomto serveru tuto hru nespustí"
+  "no_emulator_on_this_server_plays_that_game": "žádný emulátor na tomto serveru tuto hru nespustí",
+  "cant_find_that_emulator": "ten emulátor nelze najít",
+  "couldnt_save_the_emulator": "emulátor se nepodařilo uložit",
+  "that_file_isnt_an_emulator_this_server_can_run_reason": "ten soubor není emulátor, který tento server dokáže spustit: {{reason}}"
 }

@@ -287,5 +287,8 @@
   "this_titles_files_cant_be_read_right_now_the_network_share_theyre_on_isnt_answering": "지금은 이 작품의 파일을 읽을 수 없습니다. 파일이 있는 네트워크 공유가 응답하지 않습니다",
   "too_many_games_are_being_played_right_now": "지금 실행 중인 게임이 너무 많습니다",
   "cant_find_that_game": "그 게임을 찾을 수 없습니다",
-  "no_emulator_on_this_server_plays_that_game": "이 서버의 에뮬레이터로는 그 게임을 실행할 수 없습니다"
+  "no_emulator_on_this_server_plays_that_game": "이 서버의 에뮬레이터로는 그 게임을 실행할 수 없습니다",
+  "cant_find_that_emulator": "해당 에뮬레이터를 찾을 수 없습니다",
+  "couldnt_save_the_emulator": "에뮬레이터를 저장할 수 없습니다",
+  "that_file_isnt_an_emulator_this_server_can_run_reason": "이 파일은 이 서버에서 실행할 수 있는 에뮬레이터가 아닙니다: {{reason}}"
 }

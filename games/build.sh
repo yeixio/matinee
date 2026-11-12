@@ -21,16 +21,35 @@ mkdir -p "$out/cores" "$out/licenses"
 
 work=$(mktemp -d)
 trap 'rm -rf "$work"' EXIT
-grep -v '^\s*#' "$here/cores.txt" | grep -v '^\s*$' | while read -r name repo commit how; do
+# The CPU being built for, in the names cores' makefiles use.
+arch=$(${host:+$host-}gcc -dumpmachine | cut -d- -f1)
+case $arch in arm*) arch=arm ;; esac
+
+grep -v '^\s*#' "$here/cores.txt" | grep -v '^\s*$' | while read -r name repo commit how vars; do
+	# only=x86_64,aarch64 builds it for those CPUs alone.
+	only=$(echo "$vars" | tr ' ' '\n' | sed -n 's/^only=//p')
+	vars=$(echo "$vars" | tr ' ' '\n' | grep -v '^only=' | tr '\n' ' ')
+	if [ -n "$only" ] && ! echo ",$only," | grep -q ",$arch,"; then
+		echo "== $name: not for $arch"
+		continue
+	fi
 	echo "== $name"
 	src="$work/$name"
 	git init -q "$src"
 	git -C "$src" fetch -q --depth 1 "$repo" "$commit"
 	git -C "$src" checkout -q FETCH_HEAD
+	if [ -f "$src/.gitmodules" ]; then
+		git -C "$src" submodule -q update --init --recursive --depth 1 ||
+			git -C "$src" submodule -q update --init --recursive
+	fi
 	case $how in
 	make)
-		make -C "$src" -f Makefile.libretro -j"$jobs" platform=unix CC="$cc" CXX="$cxx" >"$work/$name.log" 2>&1 ||
-			{ tail -50 "$work/$name.log"; exit 1; }
+		makefile=Makefile
+		[ -f "$src/Makefile.libretro" ] && makefile=Makefile.libretro
+		# shellcheck disable=SC2086 # vars are separate settings
+		make -C "$src" -f $makefile -j"$jobs" platform=unix CC="$cc" CXX="$cxx" $(echo "$vars" | sed "s/@ARCH@/$arch/g") \
+			>"$work/$name.log" 2>&1 ||
+			{ tail -80 "$work/$name.log"; exit 1; }
 		cp "$src/${name}_libretro.so" "$out/cores/"
 		;;
 	cmake)
@@ -48,11 +67,16 @@ grep -v '^\s*#' "$here/cores.txt" | grep -v '^\s*$' | while read -r name repo co
 		cp "$src/build/${name}_libretro.so" "$out/cores/"
 		;;
 	esac
-	for l in COPYING Copying LICENSE LICENSE.txt; do
+	for l in COPYING Copying LICENSE LICENSE.txt LICENCE.txt GPLv3.txt mupen64plus-core/LICENSES; do
 		if [ -f "$src/$l" ]; then
 			{ echo "$name, built from $repo at $commit"; echo; cat "$src/$l"; } >"$out/licenses/$name.txt"
 			break
 		fi
 	done
 	"${host:+$host-}strip" --strip-unneeded "$out/cores/${name}_libretro.so"
+	# Built for this computer, the runner can check it loads and says
+	# which games it plays.
+	if [ -z "$host" ]; then
+		"$out/matinee-game-runner" --info "$out/cores/${name}_libretro.so" || exit 1
+	fi
 done

@@ -287,5 +287,8 @@
   "this_titles_files_cant_be_read_right_now_the_network_share_theyre_on_isnt_answering": "file judul ini tidak bisa dibaca sekarang: folder berbagi jaringan tempatnya berada tidak merespons",
   "too_many_games_are_being_played_right_now": "terlalu banyak game dimainkan sekarang",
   "cant_find_that_game": "game itu tidak ditemukan",
-  "no_emulator_on_this_server_plays_that_game": "tidak ada emulator di server ini yang memainkan game itu"
+  "no_emulator_on_this_server_plays_that_game": "tidak ada emulator di server ini yang memainkan game itu",
+  "cant_find_that_emulator": "emulator itu tidak ditemukan",
+  "couldnt_save_the_emulator": "tidak bisa menyimpan emulator",
+  "that_file_isnt_an_emulator_this_server_can_run_reason": "file itu bukan emulator yang bisa dijalankan server ini: {{reason}}"
 }

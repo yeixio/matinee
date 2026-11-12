@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { Btn, padMask } from './stream'
+import { Btn, padMask, stickValues } from './stream'
 
 const pad = (pressed: number[], axes = [0, 0]) => ({
   buttons: Array.from({ length: 17 }, (_, i) => ({ pressed: pressed.includes(i), touched: false, value: pressed.includes(i) ? 1 : 0 })),
@@ -20,7 +20,18 @@ describe('padMask', () => {
     expect(padMask(pad([], [0.3, -0.2]))).toBe(0)
   })
 
+  it('leaves the stick alone for a console with sticks', () => {
+    expect(padMask(pad([12], [-0.9, 0.8]), false)).toBe(1 << Btn.Up)
+  })
+
   it('ignores the guide button', () => {
     expect(padMask(pad([16]))).toBe(0)
+  })
+})
+
+describe('stickValues', () => {
+  it('sends sticks as signed bytes with a dead zone', () => {
+    expect(stickValues({ axes: [1, -1, 0.05, -0.5] })).toEqual([127, -127, 0, -63])
+    expect(stickValues({ axes: [] })).toEqual([0, 0, 0, 0])
   })
 })

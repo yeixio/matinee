@@ -1,8 +1,15 @@
 # The emulators Matinee plays games with on the server: one line each,
-#   name  source  commit  how it's built
+#   name  source  commit  how it's built  [make settings…]
 # build.sh builds them into the image; internal/gamestream/systems.go says
 # which systems each plays. Every one is free software Matinee may hand
-# out with the server (GPL or MPL); none with a non-commercial licence.
-gambatte  https://github.com/libretro/gambatte-libretro  77f2567d718b8973d02caa2daa8dce4953faf811  make
-fceumm    https://github.com/libretro/libretro-fceumm    e0f3086a8104f8fbbe49a2615b10401504a9533f  make
-mgba      https://github.com/mgba-emu/mgba               26b7884bc25a5933960f3cdcd98bac1ae14d42e2  cmake
+# out with the server (GPL, AGPL or MPL); none with a non-commercial
+# licence. None needs a graphics card. @ARCH@ in a setting is the CPU being
+# built for (x86_64, aarch64 or arm), and only=… builds it for those
+# alone: 32-bit ARM boards are too slow for the heaviest.
+gambatte      https://github.com/libretro/gambatte-libretro    77f2567d718b8973d02caa2daa8dce4953faf811  make
+fceumm        https://github.com/libretro/libretro-fceumm      e0f3086a8104f8fbbe49a2615b10401504a9533f  make
+mgba          https://github.com/mgba-emu/mgba                 26b7884bc25a5933960f3cdcd98bac1ae14d42e2  cmake
+bsnes         https://github.com/libretro/bsnes-libretro       b51612a74c4ff4b91aa55eb094940d9d848e0e96  make  only=x86_64,aarch64
+clownmdemu    https://github.com/Clownacy/clownmdemu-libretro  004044c2cee2b3e3c7452145a40f7b5ea648d8c4  make
+pcsx_rearmed  https://github.com/libretro/pcsx_rearmed         7b0e8f8fadfbce3d170d195b9d9eecaabfa08c8e  make
+parallel_n64  https://github.com/libretro/parallel-n64         9874979a98c3c255d742cf884b9f4cb422cad87d  make  only=x86_64,aarch64 ARCH=@ARCH@ HAVE_OPENGL=0 HAVE_PARALLEL=0 HAVE_PARALLEL_RSP=0 HAVE_THR_AL=1 HAVE_GLIDE64=0 HAVE_GLIDEN64=0 HAVE_GLN64=0 HAVE_RICE=0

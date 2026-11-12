@@ -287,5 +287,8 @@
   "this_titles_files_cant_be_read_right_now_the_network_share_theyre_on_isnt_answering": "de bestanden van deze titel kunnen nu niet gelezen worden: de netwerkshare waarop ze staan reageert niet",
   "too_many_games_are_being_played_right_now": "er worden nu te veel games gespeeld",
   "cant_find_that_game": "kan die game niet vinden",
-  "no_emulator_on_this_server_plays_that_game": "geen emulator op deze server speelt die game"
+  "no_emulator_on_this_server_plays_that_game": "geen emulator op deze server speelt die game",
+  "cant_find_that_emulator": "kan die emulator niet vinden",
+  "couldnt_save_the_emulator": "kan de emulator niet opslaan",
+  "that_file_isnt_an_emulator_this_server_can_run_reason": "dat bestand is geen emulator die deze server kan uitvoeren: {{reason}}"
 }

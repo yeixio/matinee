@@ -287,5 +287,8 @@
   "this_titles_files_cant_be_read_right_now_the_network_share_theyre_on_isnt_answering": "filerne til denne titel kan ikke læses lige nu: netværksdrevet, de ligger på, svarer ikke",
   "too_many_games_are_being_played_right_now": "der spilles for mange spil lige nu",
   "cant_find_that_game": "kan ikke finde det spil",
-  "no_emulator_on_this_server_plays_that_game": "ingen emulator på serveren kan spille det spil"
+  "no_emulator_on_this_server_plays_that_game": "ingen emulator på serveren kan spille det spil",
+  "cant_find_that_emulator": "kan ikke finde den emulator",
+  "couldnt_save_the_emulator": "kunne ikke gemme emulatoren",
+  "that_file_isnt_an_emulator_this_server_can_run_reason": "filen er ikke en emulator, som denne server kan køre: {{reason}}"
 }

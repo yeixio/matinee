@@ -7,14 +7,19 @@ package gamestream
 import (
 	"bufio"
 	"bytes"
+	"context"
 	"encoding/binary"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"io"
+	"os"
 	"os/exec"
+	"path/filepath"
+	"sort"
 	"strings"
 	"sync"
+	"time"
 )
 
 // Info is what the emulator tells us before the first frame: every frame is
@@ -39,12 +44,25 @@ type Runner struct {
 }
 
 // StartRunner starts the runner for game (empty for a core that needs no
-// game) and waits for its Info.
-func StartRunner(runnerPath, core, game, saveDir, systemDir string) (*Runner, error) {
+// game) and waits for its Info. options set the emulator's settings that
+// shouldn't keep their defaults.
+func StartRunner(runnerPath, core, game, saveDir, systemDir string, options map[string]string) (*Runner, error) {
 	if game == "" {
 		game = "-"
 	}
 	cmd := exec.Command(runnerPath, core, game, saveDir, systemDir)
+	if len(options) > 0 {
+		keys := make([]string, 0, len(options))
+		for k := range options {
+			keys = append(keys, k)
+		}
+		sort.Strings(keys)
+		var b strings.Builder
+		for _, k := range keys {
+			fmt.Fprintf(&b, "%s=%s\n", k, options[k])
+		}
+		cmd.Env = append(os.Environ(), "MATINEE_GAME_OPTIONS="+b.String())
+	}
 	in, err := cmd.StdinPipe()
 	if err != nil {
 		return nil, err
@@ -136,6 +154,18 @@ func (r *Runner) SetButtons(port int, mask uint16) error {
 	return err
 }
 
+// SetStick says where an analog stick is: axis 0 and 1 are the left
+// stick's x and y, 2 and 3 the right's, from -128 (left, up) to 127.
+func (r *Runner) SetStick(port, axis int, v int8) error {
+	if port < 0 || port > 3 || axis < 0 || axis > 3 {
+		return nil
+	}
+	r.mu.Lock()
+	defer r.mu.Unlock()
+	_, err := r.in.Write([]byte{'X', byte(port), byte(axis), byte(v)})
+	return err
+}
+
 // Close saves the game and stops the runner.
 func (r *Runner) Close() error {
 	r.mu.Lock()
@@ -160,4 +190,47 @@ func (l *limitedWriter) Write(p []byte) (int, error) {
 	l.n -= len(q)
 	l.w.Write(q)
 	return len(p), nil
+}
+
+// CoreInfo is what an emulator core says about itself.
+type CoreInfo struct {
+	Name    string `json:"name"`
+	Version string `json:"version"`
+	// Extensions are the files it plays, lower case with a leading dot.
+	Extensions   []string `json:"extensions"`
+	NeedFullpath bool     `json:"needFullpath"`
+}
+
+// ReadCoreInfo asks the runner what the core at path is. It fails for a file
+// that isn't a libretro core this server can load (built for another kind
+// of computer, say).
+func ReadCoreInfo(ctx context.Context, runnerPath, core string) (CoreInfo, error) {
+	ctx, cancel := context.WithTimeout(ctx, 10*time.Second)
+	defer cancel()
+	cmd := exec.CommandContext(ctx, runnerPath, "--info", core)
+	var stderr bytes.Buffer
+	cmd.Stderr = &limitedWriter{w: &stderr, n: 4 << 10}
+	out, err := cmd.Output()
+	if err != nil {
+		if msg := strings.TrimSpace(stderr.String()); msg != "" {
+			return CoreInfo{}, errors.New(msg)
+		}
+		return CoreInfo{}, err
+	}
+	var info CoreInfo
+	if err := json.Unmarshal(out, &info); err != nil {
+		return CoreInfo{}, fmt.Errorf("emulator said: %w", err)
+	}
+	exts := info.Extensions[:0]
+	for _, e := range info.Extensions {
+		e = strings.ToLower(strings.TrimSpace(strings.TrimPrefix(e, ".")))
+		if e != "" {
+			exts = append(exts, "."+e)
+		}
+	}
+	info.Extensions = exts
+	if info.Name == "" {
+		info.Name = strings.TrimSuffix(strings.TrimSuffix(filepath.Base(core), ".so"), "_libretro")
+	}
+	return info, nil
 }

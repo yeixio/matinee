@@ -1037,7 +1037,20 @@
       "intro": "Graj na tym serwerze i przesyłaj na dowolne urządzenie, z kontrolerem. To wersja zapoznawcza dla adminów: sprawdź, jak działa.",
       "ready": "Gotowe, z emulatorami dla: {{systems}}.",
       "notSetUp": "Niedostępne: na tym serwerze brak programu do gier i emulatorów. Obraz Docker je ma.",
-      "open": "Wypróbuj grę"
+      "open": "Wypróbuj grę",
+      "emulators": "Emulatory",
+      "emulatorsIntro": "Matinee ma wbudowane emulatory. Możesz dodać własne: rdzeń libretro zbudowany dla {{platform}} (plik .so). Matinee pyta go, jakie gry obsługuje, i używa go do nich przed wbudowanymi.",
+      "emulatorsTrust": "Emulator to program działający na tym serwerze. Dodawaj tylko takie, którym ufasz.",
+      "addEmulator": "Dodaj emulator",
+      "adding": "Dodawanie…",
+      "added": "Dodano {{name}}.",
+      "couldntAdd": "Nie udało się dodać emulatora.",
+      "removeConfirm": "Usunąć {{name}}? Jego gry wrócą do wbudowanego emulatora, jeśli taki je obsługuje.",
+      "cantUse": "Nie można użyć: {{reason}}",
+      "plays": "Obsługuje {{what}}",
+      "builtIn": "Wbudowany",
+      "remove": "Usuń",
+      "bios": "Niektóre emulatory potrzebują pliku BIOS z konsoli: umieść go w games/system w folderze danych Matinee."
     }
   },
   "language": {
@@ -1669,7 +1682,6 @@
     "lagTestHint": "Poruszaj kwadratem krzyżakiem. Ekran robi się biały, gdy trzymasz A lub B: nagraj kontroler i ekran razem, aby to zmierzyć.",
     "play": "Graj",
     "pickGame": "Wybierz grę",
-    "pickGameHint": "Twoje gry: pliki Game Boy, Game Boy Color, Game Boy Advance i NES albo zipy z jednym z nich.",
     "up": "Folder wyżej",
     "emptyFolder": "Brak folderów i gier.",
     "controller": "Kontroler: {{name}}",
@@ -1689,6 +1701,7 @@
       "server": "Serwer, jedna klatka",
       "decode": "Dekodowanie",
       "fps": "Klatki na sekundę"
-    }
+    },
+    "pickGameHintAny": "Gry, które posiadasz: plik gry lub zip z grą."
   }
 }

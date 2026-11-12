@@ -1029,7 +1029,20 @@
       "intro": "Bu sunucuda oyun oynayın ve kumandayla her cihaza yayınlayın. Bu, yöneticiler için bir önizleme: nasıl hissettirdiğini deneyin.",
       "ready": "Hazır, {{systems}} için emülatörlerle.",
       "notSetUp": "Kullanılamıyor: bu sunucuda oyun çalıştırıcı ve emülatörler yok. Docker imajında var.",
-      "open": "Bir oyun dene"
+      "open": "Bir oyun dene",
+      "emulators": "Emülatörler",
+      "emulatorsIntro": "Matinee yerleşik emülatörlerle gelir. Kendinizinkini ekleyebilirsiniz: {{platform}} için derlenmiş bir libretro çekirdeği (.so dosyası). Matinee ona hangi oyunları oynattığını sorar ve bu oyunlar için yerleşik olanlardan önce onu kullanır.",
+      "emulatorsTrust": "Emülatör bu sunucuda çalışan bir programdır. Yalnızca güvendiğiniz birini ekleyin.",
+      "addEmulator": "Emülatör ekle",
+      "adding": "Ekleniyor…",
+      "added": "{{name}} eklendi.",
+      "couldntAdd": "Emülatör eklenemedi.",
+      "removeConfirm": "{{name}} kaldırılsın mı? Oyunları, varsa yerleşik bir emülatöre geri döner.",
+      "cantUse": "Kullanılamıyor: {{reason}}",
+      "plays": "Oynatır: {{what}}",
+      "builtIn": "Yerleşik",
+      "remove": "Kaldır",
+      "bios": "Bazı emülatörler konsoldan bir BIOS dosyasına ihtiyaç duyar: onu Matinee veri klasöründeki games/system içine koyun."
     }
   },
   "language": {
@@ -1645,7 +1658,6 @@
     "lagTestHint": "Kareyi yön tuşlarıyla hareket ettirin. A veya B basılıyken ekran beyazlaşır: ölçmek için kumandayı ve ekranı birlikte çekin.",
     "play": "Oyna",
     "pickGame": "Bir oyun seçin",
-    "pickGameHint": "Size ait oyunlar: Game Boy, Game Boy Color, Game Boy Advance ve NES dosyaları ya da bunlardan birini içeren zip'ler.",
     "up": "Bir klasör yukarı",
     "emptyFolder": "Burada klasör veya oyun yok.",
     "controller": "Kumanda: {{name}}",
@@ -1665,6 +1677,7 @@
       "server": "Sunucu, bir kare",
       "decode": "Kod çözme",
       "fps": "Saniyedeki kare"
-    }
+    },
+    "pickGameHintAny": "Sahip olduğunuz oyunlar: bir oyun dosyası ya da onu içeren bir zip."
   }
 }

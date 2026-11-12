@@ -287,5 +287,8 @@
   "this_titles_files_cant_be_read_right_now_the_network_share_theyre_on_isnt_answering": "les fichiers de ce titre ne peuvent pas être lus pour le moment : le partage réseau où ils se trouvent ne répond pas",
   "too_many_games_are_being_played_right_now": "trop de jeux sont en cours en ce moment",
   "cant_find_that_game": "jeu introuvable",
-  "no_emulator_on_this_server_plays_that_game": "aucun émulateur de ce serveur ne lit ce jeu"
+  "no_emulator_on_this_server_plays_that_game": "aucun émulateur de ce serveur ne lit ce jeu",
+  "cant_find_that_emulator": "impossible de trouver cet émulateur",
+  "couldnt_save_the_emulator": "impossible d'enregistrer l'émulateur",
+  "that_file_isnt_an_emulator_this_server_can_run_reason": "ce fichier n'est pas un émulateur que ce serveur peut exécuter : {{reason}}"
 }

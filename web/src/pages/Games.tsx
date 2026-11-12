@@ -54,7 +54,7 @@ export default function Games() {
 
       <section className="space-y-2">
         <h2 className="text-lg font-semibold">{t('games.pickGame')}</h2>
-        <p className="text-sm text-muted">{t('games.pickGameHint')}</p>
+        <p className="text-sm text-muted">{t('games.pickGameHintAny')}</p>
         <div className="rounded-xl border border-line/60 bg-surface/50">
           <div className="flex items-center gap-2 border-b border-line/60 px-3 py-2 text-sm">
             {folder.data && folder.data.parent !== folder.data.path && (
