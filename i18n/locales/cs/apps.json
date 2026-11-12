@@ -694,5 +694,22 @@
     "fixFailed": "Díky. Box Office to nemohl převzít, takže se na to podívá správce.",
     "boxOfficeFixes": "Box Office zablokuje zdroj této kopie a stáhne jinou. Dáme vědět, až bude hotová.",
     "boxOfficeAfterAdmin": "Jakmile to správce schválí, Box Office stáhne jinou kopii."
+  },
+  "games": {
+    "starting": "Spouštění hry…",
+    "couldntStart": "Hru se nepodařilo spustit",
+    "lostConnection": "Spojení se hrou bylo přerušeno",
+    "stop": "Přestat hrát",
+    "controller": "{{name}} připojen",
+    "connectController": "Pro hraní připojte herní ovladač",
+    "pairHint": "Spárujte ovladač v nastavení Bluetooth televize a stiskněte na něm libovolné tlačítko.",
+    "leaveHint": "Hru ukončíte tlačítkem Zpět na ovladači",
+    "fact": {
+      "system": "Systém",
+      "region": "Region",
+      "publisher": "Vydavatel",
+      "players": "Hráči",
+      "genre": "Žánr"
+    }
   }
 }

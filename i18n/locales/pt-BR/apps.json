@@ -687,5 +687,22 @@
     "fixFailed": "Obrigado. O Box Office não conseguiu cuidar disso, então um admin vai dar uma olhada.",
     "boxOfficeFixes": "O Box Office vai bloquear a origem desta cópia e buscar outra. Você será avisado quando chegar.",
     "boxOfficeAfterAdmin": "Assim que um admin aprovar, o Box Office buscará outra cópia."
+  },
+  "games": {
+    "starting": "Iniciando o jogo…",
+    "couldntStart": "Não foi possível iniciar o jogo",
+    "lostConnection": "A conexão com o jogo caiu",
+    "stop": "Parar de jogar",
+    "controller": "{{name}} conectado",
+    "connectController": "Conecte um controle para jogar",
+    "pairHint": "Pareie um controle nas configurações de Bluetooth da TV e aperte qualquer botão nele.",
+    "leaveHint": "Aperte Voltar no controle remoto para sair",
+    "fact": {
+      "system": "Sistema",
+      "region": "Região",
+      "publisher": "Editora",
+      "players": "Jogadores",
+      "genre": "Gênero"
+    }
   }
 }

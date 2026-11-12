@@ -673,5 +673,22 @@
     "fixFailed": "감사합니다. Box Office가 처리할 수 없어 관리자가 확인합니다.",
     "boxOfficeFixes": "Box Office가 이 사본의 출처를 차단하고 다른 사본을 가져옵니다. 준비되면 알려 드립니다.",
     "boxOfficeAfterAdmin": "관리자가 승인하면 Box Office가 다른 사본을 가져옵니다."
+  },
+  "games": {
+    "starting": "게임 시작 중…",
+    "couldntStart": "게임을 시작할 수 없습니다",
+    "lostConnection": "게임과의 연결이 끊어졌습니다",
+    "stop": "플레이 중지",
+    "controller": "{{name}} 연결됨",
+    "connectController": "플레이하려면 게임 컨트롤러를 연결하세요",
+    "pairHint": "TV의 블루투스 설정에서 컨트롤러를 페어링한 다음 아무 버튼이나 누르세요.",
+    "leaveHint": "중지하려면 리모컨의 뒤로 버튼을 누르세요",
+    "fact": {
+      "system": "기종",
+      "region": "지역",
+      "publisher": "배급사",
+      "players": "플레이어 수",
+      "genre": "장르"
+    }
   }
 }

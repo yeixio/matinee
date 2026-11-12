@@ -680,5 +680,22 @@
     "fixFailed": "Kiitos. Box Office ei voinut hoitaa tätä, joten ylläpitäjä katsoo sen.",
     "boxOfficeFixes": "Box Office estää tämän kopion lähteen ja hakee toisen. Saat tiedon, kun se on valmis.",
     "boxOfficeAfterAdmin": "Kun ylläpitäjä hyväksyy, Box Office hakee toisen kopion."
+  },
+  "games": {
+    "starting": "Peli käynnistyy…",
+    "couldntStart": "Peliä ei voitu käynnistää",
+    "lostConnection": "Yhteys peliin katkesi",
+    "stop": "Lopeta pelaaminen",
+    "controller": "{{name}} yhdistetty",
+    "connectController": "Yhdistä peliohjain pelataksesi",
+    "pairHint": "Pariliitä ohjain television Bluetooth-asetuksissa ja paina mitä tahansa sen painiketta.",
+    "leaveHint": "Lopeta painamalla kaukosäätimen Takaisin-painiketta",
+    "fact": {
+      "system": "Järjestelmä",
+      "region": "Alue",
+      "publisher": "Julkaisija",
+      "players": "Pelaajat",
+      "genre": "Lajityyppi"
+    }
   }
 }

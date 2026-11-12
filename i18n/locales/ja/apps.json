@@ -673,5 +673,22 @@
     "fixFailed": "ありがとうございます。Box Office では対応できなかったため、管理者が確認します。",
     "boxOfficeFixes": "Box Office はこのコピーの入手元をブロックし、別のコピーを取得します。届いたらお知らせします。",
     "boxOfficeAfterAdmin": "管理者が承認すると、Box Office が別のコピーを取得します。"
+  },
+  "games": {
+    "starting": "ゲームを起動中…",
+    "couldntStart": "ゲームを起動できませんでした",
+    "lostConnection": "ゲームとの接続が切れました",
+    "stop": "プレイをやめる",
+    "controller": "{{name}} が接続されました",
+    "connectController": "プレイするにはコントローラを接続してください",
+    "pairHint": "テレビの Bluetooth 設定でコントローラをペアリングし、いずれかのボタンを押してください。",
+    "leaveHint": "リモコンの戻るボタンで終了します",
+    "fact": {
+      "system": "機種",
+      "region": "地域",
+      "publisher": "発売元",
+      "players": "プレイ人数",
+      "genre": "ジャンル"
+    }
   }
 }

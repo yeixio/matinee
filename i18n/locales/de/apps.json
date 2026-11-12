@@ -680,5 +680,22 @@
     "fixFailed": "Danke. Box Office konnte das nicht übernehmen, ein Admin sieht es sich an.",
     "boxOfficeFixes": "Box Office sperrt die Quelle dieser Kopie und besorgt eine andere. Du wirst benachrichtigt, wenn sie da ist.",
     "boxOfficeAfterAdmin": "Sobald ein Admin zustimmt, besorgt Box Office eine andere Kopie."
+  },
+  "games": {
+    "starting": "Spiel wird gestartet…",
+    "couldntStart": "Das Spiel konnte nicht gestartet werden",
+    "lostConnection": "Die Verbindung zum Spiel wurde getrennt",
+    "stop": "Spielen beenden",
+    "controller": "{{name}} verbunden",
+    "connectController": "Verbinde einen Controller, um zu spielen",
+    "pairHint": "Kopple einen Controller in den Bluetooth-Einstellungen des Fernsehers und drücke eine beliebige Taste darauf.",
+    "leaveHint": "Zum Beenden auf der Fernbedienung Zurück drücken",
+    "fact": {
+      "system": "System",
+      "region": "Region",
+      "publisher": "Publisher",
+      "players": "Spieler",
+      "genre": "Genre"
+    }
   }
 }

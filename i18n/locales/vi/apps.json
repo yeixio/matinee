@@ -673,5 +673,22 @@
     "fixFailed": "Cảm ơn. Box Office không thể nhận việc này, nên quản trị viên sẽ xem.",
     "boxOfficeFixes": "Box Office sẽ chặn nguồn của bản này và lấy bản khác. Bạn sẽ được báo khi xong.",
     "boxOfficeAfterAdmin": "Sau khi quản trị viên duyệt, Box Office sẽ lấy bản khác."
+  },
+  "games": {
+    "starting": "Đang khởi động trò chơi…",
+    "couldntStart": "Không thể khởi động trò chơi",
+    "lostConnection": "Mất kết nối với trò chơi",
+    "stop": "Dừng chơi",
+    "controller": "Đã kết nối {{name}}",
+    "connectController": "Kết nối tay cầm để chơi",
+    "pairHint": "Ghép nối tay cầm trong cài đặt Bluetooth của TV, rồi nhấn nút bất kỳ trên tay cầm.",
+    "leaveHint": "Nhấn Quay lại trên điều khiển để dừng",
+    "fact": {
+      "system": "Hệ máy",
+      "region": "Khu vực",
+      "publisher": "Nhà phát hành",
+      "players": "Người chơi",
+      "genre": "Thể loại"
+    }
   }
 }

@@ -680,5 +680,22 @@
     "fixFailed": "Bedankt. Box Office kon dit niet oppakken, dus een beheerder kijkt ernaar.",
     "boxOfficeFixes": "Box Office blokkeert waar deze kopie vandaan kwam en haalt een andere. Je hoort het als die er is.",
     "boxOfficeAfterAdmin": "Zodra een beheerder het goedkeurt, haalt Box Office een andere kopie."
+  },
+  "games": {
+    "starting": "Game starten…",
+    "couldntStart": "Kan de game niet starten",
+    "lostConnection": "De verbinding met de game is verbroken",
+    "stop": "Stoppen met spelen",
+    "controller": "{{name}} verbonden",
+    "connectController": "Verbind een controller om te spelen",
+    "pairHint": "Koppel een controller in de bluetoothinstellingen van de tv en druk op een willekeurige knop.",
+    "leaveHint": "Druk op Terug op de afstandsbediening om te stoppen",
+    "fact": {
+      "system": "Systeem",
+      "region": "Regio",
+      "publisher": "Uitgever",
+      "players": "Spelers",
+      "genre": "Genre"
+    }
   }
 }

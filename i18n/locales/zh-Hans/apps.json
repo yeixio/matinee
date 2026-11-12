@@ -673,5 +673,22 @@
     "fixFailed": "谢谢。Box Office 无法处理，管理员会查看。",
     "boxOfficeFixes": "Box Office 会屏蔽此副本的来源并获取另一个。就绪后会通知你。",
     "boxOfficeAfterAdmin": "管理员批准后，Box Office 会获取另一个副本。"
+  },
+  "games": {
+    "starting": "正在启动游戏…",
+    "couldntStart": "无法启动游戏",
+    "lostConnection": "与游戏的连接已断开",
+    "stop": "停止游戏",
+    "controller": "{{name}} 已连接",
+    "connectController": "连接游戏手柄即可开始游戏",
+    "pairHint": "在电视的蓝牙设置中配对手柄，然后按手柄上的任意按钮。",
+    "leaveHint": "按遥控器上的返回键停止",
+    "fact": {
+      "system": "平台",
+      "region": "地区",
+      "publisher": "发行商",
+      "players": "玩家人数",
+      "genre": "类型"
+    }
   }
 }

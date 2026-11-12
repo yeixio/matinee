@@ -687,5 +687,22 @@
     "fixFailed": "Merci. Box Office n'a pas pu s'en charger, un admin va regarder.",
     "boxOfficeFixes": "Box Office va bloquer la source de cette copie et en récupérer une autre. Vous serez prévenu quand elle sera là.",
     "boxOfficeAfterAdmin": "Dès qu'un admin aura approuvé, Box Office récupérera une autre copie."
+  },
+  "games": {
+    "starting": "Lancement du jeu…",
+    "couldntStart": "Impossible de lancer le jeu",
+    "lostConnection": "La connexion au jeu a été perdue",
+    "stop": "Arrêter de jouer",
+    "controller": "{{name}} connectée",
+    "connectController": "Connectez une manette pour jouer",
+    "pairHint": "Associez une manette dans les réglages Bluetooth du téléviseur, puis appuyez sur n'importe quel bouton.",
+    "leaveHint": "Appuyez sur Retour sur la télécommande pour arrêter",
+    "fact": {
+      "system": "Système",
+      "region": "Région",
+      "publisher": "Éditeur",
+      "players": "Joueurs",
+      "genre": "Genre"
+    }
   }
 }
