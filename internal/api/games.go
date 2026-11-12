@@ -13,6 +13,7 @@ import (
 	"time"
 
 	"github.com/coder/websocket"
+	"github.com/yeixio/matinee/internal/gamehost"
 	"github.com/yeixio/matinee/internal/gamestream"
 )
 
@@ -25,6 +26,7 @@ func (s *Server) gameRoutes() []route {
 		{"GET /games/streaming", adminOnly, s.gameStreaming},
 		{"GET /games/files", adminOnly, s.gameFiles},
 		{"POST /games/play", adminOnly, s.playGame},
+		{"GET /games/host", adminOnly, s.gameHostGames},
 		{"POST /items/{id}/game", signedIn, s.playGameItem},
 		{"DELETE /games/play/{id}", signedIn, s.stopGame},
 		{"GET /games/play/{id}/stream", signedIn, s.streamGame},
@@ -101,15 +103,24 @@ func (s *Server) playGame(w http.ResponseWriter, r *http.Request) {
 	var body struct {
 		Path    string `json:"path"`
 		LagTest bool   `json:"lagTest"`
+		// HostApp is a game on the game host, by its Steam app id.
+		HostApp int    `json:"hostApp"`
 		Offer   string `json:"offer"`
+		Direct  bool   `json:"direct"`
 	}
-	if err := readJSON(r, &body); err != nil || body.Offer == "" {
+	if err := readJSON(r, &body); err != nil || (body.Offer == "") == !body.Direct {
 		writeError(w, http.StatusBadRequest, "bad request")
 		return
 	}
 	g := gamestream.Game{Owner: strconv.FormatInt(currentUser(r).ID, 10)}
 	system, analog := "lagtest", false
-	if body.LagTest {
+	if body.HostApp > 0 {
+		if s.GameHost == nil {
+			writeError(w, http.StatusNotFound, "no game host is set up")
+			return
+		}
+		g.Host, g.AppID, system, analog = s.GameHost, body.HostApp, "pc", true
+	} else if body.LagTest {
 		g.LagTest = true
 	} else {
 		st, err := os.Stat(body.Path)
@@ -125,6 +136,23 @@ func (s *Server) playGame(w http.ResponseWriter, r *http.Request) {
 		g.System, g.Path, system, analog = sys, body.Path, sys.Key, sys.Analog
 	}
 	s.startGame(w, r, g, body.Offer, system, analog)
+}
+
+// gameHostGames lists the games the game host has installed.
+func (s *Server) gameHostGames(w http.ResponseWriter, r *http.Request) {
+	if s.GameHost == nil {
+		writeError(w, http.StatusNotFound, "no game host is set up")
+		return
+	}
+	games, err := s.GameHost.Games(r.Context())
+	if err != nil {
+		writeError(w, http.StatusBadGateway, err.Error())
+		return
+	}
+	if games == nil {
+		games = []gamehost.Game{}
+	}
+	writeJSON(w, http.StatusOK, map[string]any{"games": games})
 }
 
 // playGameItem plays a game from a Games library, for anyone who can see
@@ -168,6 +196,10 @@ func (s *Server) startGame(w http.ResponseWriter, r *http.Request, g gamestream.
 	ctx, cancel := context.WithTimeout(r.Context(), 20*time.Second)
 	defer cancel()
 	sess, answer, err := s.Games.Start(ctx, g, offer)
+	if errors.Is(err, gamehost.ErrBusy) {
+		writeError(w, http.StatusConflict, "the game host is already playing a game")
+		return
+	}
 	if errors.Is(err, gamestream.ErrBusy) {
 		writeError(w, http.StatusServiceUnavailable, "too many games are being played right now")
 		return

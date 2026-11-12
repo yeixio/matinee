@@ -120,3 +120,41 @@ An emulator is a program that runs on your server, so add only ones you trust, s
 You can also copy cores into `games/cores` in Matinee's data folder by hand; Matinee picks them up the next time it lists games. To remove one, press the bin next to it, or delete the file.
 
 Some emulators need a BIOS file from the console. Put it in `games/system` in Matinee's data folder, named as the emulator's own documentation says. Emulators that draw with a graphics card (OpenGL or Vulkan) can't run on the server yet. An arcade emulator that plays zips is given the zip as it is, so the zip has to be the set of game files that emulator's version expects.
+
+<!-- since: v0.2.6 -->
+## PC games from Steam (preview)
+
+Matinee can also stream PC games from Steam. The games don't run on the Matinee server: they run on a **game host**, a Linux computer with a graphics card and Steam on it, such as a gaming PC. The game host plays the game, records its picture and sound on its graphics card, and sends them to Matinee, which streams them to your player the same way it streams console games. Your controller works as a controller plugged into the game host.
+
+Only the games you own and have installed in Steam on the game host are listed. Matinee never downloads games.
+
+This is an early preview, played from **Games** in the web app by an admin:
+
+1. On the game host, sign in to Steam and install the games you want to play.
+2. Run `matinee-gamehost` on the game host, as the user Steam runs as, with a secret token of your own:
+
+   ```sh
+   MATINEE_GAMEHOST_TOKEN=pick-a-long-secret matinee-gamehost
+   ```
+
+   It listens on port `7174`. It needs FFmpeg, a desktop session for the game to draw on (it uses `DISPLAY`, `:0` if unset), PulseAudio or PipeWire for the sound, and write access to `/dev/uinput` for the controllers. For now, build it from Matinee's source with `go build ./cmd/matinee-gamehost`.
+3. Tell the Matinee server where it is:
+
+   | Setting | What it's for |
+   | --- | --- |
+   | `MATINEE_GAME_HOST` | The game host's address, such as `http://gaming-pc:7174`. |
+   | `MATINEE_GAME_HOST_TOKEN` | The same token as the game host's. |
+
+4. Open **Games** in the web app. **PC games** lists what's installed on the game host. Pick one to play.
+
+The game host plays one game at a time. Closing the player quits the game.
+
+| Game host setting | Default | What it's for |
+| --- | --- | --- |
+| `MATINEE_GAMEHOST_LISTEN` | `:7174` | The address it listens on. |
+| `MATINEE_GAMEHOST_TOKEN` | | The token Matinee must send. Required. |
+| `MATINEE_GAMEHOST_HOME` | your home folder | Where to look for Steam. |
+| `MATINEE_GAMEHOST_VAAPI` | `/dev/dri/renderD128` | The graphics card to encode on. Without one, it encodes on the CPU, which is slower. |
+| `MATINEE_GAMEHOST_AUDIO` | the default output | The PulseAudio source to record the sound from. |
+| `MATINEE_GAMEHOST_BITRATE` | `20` | The video bitrate in megabits per second. |
+<!-- /since -->

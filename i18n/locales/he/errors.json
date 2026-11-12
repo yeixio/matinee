@@ -274,6 +274,8 @@
   "subtitle_choices_arent_ones_the_apps_know": "האפליקציות אינן מכירות את בחירות הכתוביות האלה",
   "no_such_font": "אין גופן כזה",
   "no_such_game": "אין משחק כזה",
+  "no_game_host_is_set_up": "לא הוגדר מארח משחקים",
+  "the_game_host_is_already_playing_a_game": "מארח המשחקים כבר מריץ משחק",
   "couldnt_start_playback_for_this_extra": "לא ניתן היה להפעיל את התוספת הזו",
   "no_such_extra": "אין תוספת כזו",
   "only_an_admin_can_add_a_station_on_the_home_network": "רק מנהל יכול להוסיף תחנה ברשת הביתית",

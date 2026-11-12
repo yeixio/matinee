@@ -9,7 +9,22 @@ import { startGame, type GameStream, type Lag } from './stream'
  * A game streamed from the server, full screen: a file picked on the Games
  * page, the lag test, or a game in a Games library (itemId).
  */
-export function GamePlayer({ name, path, itemId, lagTest, onClose }: { name: string; path?: string; itemId?: number; lagTest?: boolean; onClose: () => void }) {
+export function GamePlayer({
+  name,
+  path,
+  itemId,
+  hostApp,
+  lagTest,
+  onClose,
+}: {
+  name: string
+  path?: string
+  itemId?: number
+  /** A PC game on the game host, by its Steam app id. */
+  hostApp?: number
+  lagTest?: boolean
+  onClose: () => void
+}) {
   const { t } = useTranslation()
   const video = useRef<HTMLVideoElement>(null)
   const box = useRef<HTMLDivElement>(null)
@@ -29,6 +44,7 @@ export function GamePlayer({ name, path, itemId, lagTest, onClose }: { name: str
     startGame({
       path,
       itemId,
+      hostApp,
       lagTest,
       video: video.current!,
       onLag: (l) => {
@@ -52,7 +68,7 @@ export function GamePlayer({ name, path, itemId, lagTest, onClose }: { name: str
       stream?.stop()
       if (document.fullscreenElement) document.exitFullscreen().catch(() => {})
     }
-  }, [path, itemId, lagTest, t])
+  }, [path, itemId, hostApp, lagTest, t])
 
   const ms = (v?: number) => (v === undefined ? '…' : t('games.ms', { value: Math.round(v) }))
   return (

@@ -1520,6 +1520,13 @@ export interface GameEmulator {
   error?: string
 }
 
+/** A PC game installed on the game host (Steam). */
+export interface GameHostGame {
+  appId: number
+  name: string
+  size?: number
+}
+
 export interface GameFolder {
   path: string
   parent: string
@@ -1530,7 +1537,8 @@ export interface GameFolder {
 export const api = {
   gameStreaming: () => request<GameStreaming>('GET', '/api/v1/games/streaming'),
   gameFiles: (path?: string) => request<GameFolder>('GET', `/api/v1/games/files${path ? `?path=${encodeURIComponent(path)}` : ''}`),
-  playGame: (body: { path?: string; lagTest?: boolean; offer: string }) =>
+  gameHostGames: () => request<{ games: GameHostGame[] }>('GET', '/api/v1/games/host'),
+  playGame: (body: { path?: string; lagTest?: boolean; hostApp?: number; offer: string }) =>
     request<{ id: string; answer: string; system: string; analog?: boolean; width: number; height: number; aspect: number; fps: number }>(
       'POST',
       '/api/v1/games/play',

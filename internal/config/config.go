@@ -60,6 +60,9 @@ type Config struct {
 	GamesDir       string
 	GamesPort      int
 	GamesPublicIPs []string
+	// GameHost is a game host's address (cmd/matinee-gamehost), where PC
+	// games are played, and GameHostToken what it asks for.
+	GameHost, GameHostToken string
 }
 
 // GameSaveDir has games' saves, a folder per person.
@@ -136,6 +139,8 @@ func Load(args []string) (Config, error) {
 	fs.StringVar(&c.GamesDir, "games-dir", env("MATINEE_GAMES_DIR", defaultGamesDir()), "folder with matinee-game-runner and its emulators; off to not play games")
 	fs.IntVar(&c.GamesPort, "games-port", envInt("MATINEE_GAMES_PORT", 7173), "UDP port games stream to players through; 0 for any")
 	gamesIPs := fs.String("games-public-ip", env("MATINEE_GAMES_PUBLIC_IP", ""), "addresses players reach the games port at, comma separated, when the server can't see its own (behind NAT)")
+	fs.StringVar(&c.GameHost, "game-host", env("MATINEE_GAME_HOST", ""), "address of a game host that plays PC games, such as http://steam:7174 (preview)")
+	fs.StringVar(&c.GameHostToken, "game-host-token", env("MATINEE_GAME_HOST_TOKEN", ""), "the game host's token")
 	interval := fs.String("scan-interval", env("MATINEE_SCAN_INTERVAL", "6h"), "how often every library is rescanned in full until an admin picks in Settings, 0 to disable")
 	drainDelay := fs.String("drain-delay", env("MATINEE_DRAIN_DELAY", "0s"), "on shutdown, how long to keep serving after telling players the server is restarting (the Helm chart uses 5s)")
 	shutdownTimeout := fs.String("shutdown-timeout", env("MATINEE_SHUTDOWN_TIMEOUT", "10s"), "on shutdown, how long requests in flight get to finish")

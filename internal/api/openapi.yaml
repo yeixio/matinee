@@ -1221,6 +1221,30 @@ paths:
                   parent: { type: string }
                   dirs: { type: array, items: { type: object, properties: { name: { type: string }, path: { type: string } } } }
                   files: { type: array, items: { type: object, properties: { name: { type: string }, path: { type: string } } } }
+  /games/host:
+    get:
+      summary: The PC games installed on the game host (admins only, preview)
+      description: >-
+        A game host (matinee-gamehost) runs beside Steam and plays its games for Matinee, which streams
+        them like emulated games. Set it up with MATINEE_GAME_HOST and MATINEE_GAME_HOST_TOKEN.
+      responses:
+        "200":
+          description: The games, by name.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  games:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        appId: { type: integer, description: Steam's app id. }
+                        name: { type: string }
+                        size: { type: integer, description: Bytes on disk. }
+        "404": { description: No game host is set up. }
+        "502": { description: The game host didn't answer. }
   /games/play:
     post:
       summary: Start playing a game on the server, streamed over WebRTC (admins only)
@@ -1239,7 +1263,9 @@ paths:
               properties:
                 path: { type: string, description: The game file, or a zip holding it. }
                 lagTest: { type: boolean, description: Play the built-in lag test instead of a game. }
+                hostApp: { type: integer, description: "Play this PC game on the game host instead (preview), by its Steam app id; see GET /games/host." }
                 offer: { type: string, description: The player's SDP offer. }
+                direct: { type: boolean, description: "With no offer: the WebSocket stream instead of WebRTC (see POST /items/{id}/game)." }
       responses:
         "200":
           description: Started.

@@ -274,6 +274,8 @@
   "subtitle_choices_arent_ones_the_apps_know": "برنامه‌ها این گزینه‌های زیرنویس را نمی‌شناسند",
   "no_such_font": "چنین فونتی وجود ندارد",
   "no_such_game": "چنین بازی‌ای وجود ندارد",
+  "no_game_host_is_set_up": "هیچ میزبان بازی تنظیم نشده است",
+  "the_game_host_is_already_playing_a_game": "میزبان بازی در حال اجرای بازی دیگری است",
   "couldnt_start_playback_for_this_extra": "پخش این محتوای اضافی ممکن نشد",
   "no_such_extra": "چنین محتوای اضافی وجود ندارد",
   "only_an_admin_can_add_a_station_on_the_home_network": "فقط مدیر می‌تواند ایستگاهی در شبکه خانگی اضافه کند",

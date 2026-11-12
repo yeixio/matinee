@@ -33,6 +33,7 @@ import (
 	"github.com/yeixio/matinee/internal/credits"
 	"github.com/yeixio/matinee/internal/discovery"
 	"github.com/yeixio/matinee/internal/download"
+	"github.com/yeixio/matinee/internal/gamehost"
 	"github.com/yeixio/matinee/internal/gamelib"
 	"github.com/yeixio/matinee/internal/gamestream"
 	"github.com/yeixio/matinee/internal/gapless"
@@ -350,6 +351,9 @@ func run() (err error) {
 			defer games.Close()
 			os.RemoveAll(cfg.GameWorkDir())
 			apiServer.Games = games
+			if cfg.GameHost != "" {
+				apiServer.GameHost = &gamehost.Client{URL: cfg.GameHost, Token: cfg.GameHostToken}
+			}
 		}
 	}
 	// A video given up on as damaged is reported to Box Office, which
