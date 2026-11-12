@@ -36,6 +36,7 @@ type Info struct {
 // Runner is one game being played by matinee-game-runner.
 type Runner struct {
 	cmd    *exec.Cmd
+	readMu sync.Mutex // one reader of out at a time
 	out    *bufio.Reader
 	mu     sync.Mutex
 	in     io.WriteCloser
@@ -102,6 +103,8 @@ func StartRunner(runnerPath, core, game, saveDir, systemDir string, options map[
 const maxMessage = 64 << 20
 
 func (r *Runner) next() (byte, []byte, error) {
+	r.readMu.Lock()
+	defer r.readMu.Unlock()
 	var h [8]byte
 	if _, err := io.ReadFull(r.out, h[:]); err != nil {
 		return 0, nil, err
@@ -166,11 +169,26 @@ func (r *Runner) SetStick(port, axis int, v int8) error {
 	return err
 }
 
+// closeWait is how long the runner may take to save and stop before it is
+// killed.
+const closeWait = 15 * time.Second
+
 // Close saves the game and stops the runner.
 func (r *Runner) Close() error {
 	r.mu.Lock()
 	r.in.Close()
 	r.mu.Unlock()
+	// Keep reading what it sends, or a runner stuck writing a frame nobody
+	// reads never sees its input close and never stops.
+	go func() {
+		for {
+			if _, _, err := r.next(); err != nil {
+				return
+			}
+		}
+	}()
+	t := time.AfterFunc(closeWait, func() { r.cmd.Process.Kill() })
+	defer t.Stop()
 	return r.cmd.Wait()
 }
 
