@@ -273,6 +273,7 @@
   "audiodelay_is_milliseconds_between_2000_and_2000": "A hangkésleltetés ezredmásodpercben adható meg, -2000 és 2000 között.",
   "subtitle_choices_arent_ones_the_apps_know": "Ezeket a feliratbeállításokat az alkalmazások nem ismerik",
   "no_such_font": "Nincs ilyen betűtípus",
+  "no_such_game": "nincs ilyen játék",
   "couldnt_start_playback_for_this_extra": "nem sikerült lejátszani ezt az extrát",
   "no_such_extra": "nincs ilyen extra",
   "only_an_admin_can_add_a_station_on_the_home_network": "otthoni hálózaton lévő állomást csak rendszergazda adhat hozzá",

@@ -143,10 +143,30 @@ type Session struct {
 
 	dc           atomic.Pointer[webrtc.DataChannel]
 	encodeMicros atomic.Int64
+
+	// How the picture, sound and messages reach the player: over WebRTC,
+	// or straight over a WebSocket (direct.go). Set before connected closes.
+	video, audio func(*rtp.Packet) error
+	text         func(string)
+	connected    chan struct{}
+	connectOnce  sync.Once
+}
+
+// connect starts the game streaming through the given senders, once.
+func (s *Session) connect(video, audio func(*rtp.Packet) error, text func(string)) bool {
+	ok := false
+	s.connectOnce.Do(func() {
+		s.video, s.audio, s.text = video, audio, text
+		close(s.connected)
+		ok = true
+	})
+	return ok
 }
 
 // Start starts g and answers the player's WebRTC offer. The game itself
-// begins once the player has connected.
+// begins once the player has connected. With no offer, the player connects
+// straight to the session instead (see Session.ServeDirect), and there's
+// no answer.
 func (m *Manager) Start(ctx context.Context, g Game, offer string) (*Session, string, error) {
 	core := g.System.Core
 	if g.LagTest {
@@ -175,7 +195,7 @@ func (m *Manager) Start(ctx context.Context, g Game, offer string) (*Session, st
 	}
 
 	id := newID()
-	s := &Session{ID: id, Owner: g.Owner, m: m, done: make(chan struct{})}
+	s := &Session{ID: id, Owner: g.Owner, m: m, done: make(chan struct{}), connected: make(chan struct{})}
 	var err error
 	defer func() {
 		if err != nil {
@@ -202,34 +222,74 @@ func (m *Manager) Start(ctx context.Context, g Game, offer string) (*Session, st
 	}
 	s.Info = s.runner.Info
 
+	answer := ""
+	if offer != "" {
+		if answer, err = s.startWebRTC(ctx, offer); err != nil {
+			return nil, "", err
+		}
+	}
+
+	m.mu.Lock()
+	m.sessions[id] = s
+	m.mu.Unlock()
+
+	playCtx, cancel := context.WithCancel(context.Background())
+	s.cancel = cancel
+	go func() {
+		select {
+		case <-s.connected:
+		case <-time.After(30 * time.Second):
+			m.log.Info("game player never connected", "session", id)
+			s.Stop()
+			return
+		case <-s.done:
+			return
+		}
+		s.Started = time.Now()
+		if err := s.play(playCtx); err != nil && playCtx.Err() == nil {
+			m.log.Warn("game stopped", "session", id, "err", err)
+		}
+		s.Stop()
+	}()
+	return s, answer, nil
+}
+
+// startWebRTC answers the player's offer; the session connects once the
+// player's side does.
+func (s *Session) startWebRTC(ctx context.Context, offer string) (string, error) {
+	m := s.m
+	var err error
 	if s.pc, err = m.api.NewPeerConnection(webrtc.Configuration{}); err != nil {
-		return nil, "", err
+		return "", err
 	}
 	video, err := webrtc.NewTrackLocalStaticRTP(videoCodec, "video", "game")
 	if err != nil {
-		return nil, "", err
+		return "", err
 	}
 	audio, err := webrtc.NewTrackLocalStaticRTP(audioCodec, "audio", "game")
 	if err != nil {
-		return nil, "", err
+		return "", err
 	}
 	for _, t := range []webrtc.TrackLocal{video, audio} {
 		var sender *webrtc.RTPSender
 		if sender, err = s.pc.AddTrack(t); err != nil {
-			return nil, "", err
+			return "", err
 		}
 		go drainRTCP(sender)
 	}
 	s.pc.OnDataChannel(func(dc *webrtc.DataChannel) {
 		s.dc.Store(dc)
-		dc.OnMessage(func(msg webrtc.DataChannelMessage) { s.input(dc, msg.Data) })
+		dc.OnMessage(func(msg webrtc.DataChannelMessage) { s.input(func(b []byte) { dc.Send(b) }, msg.Data) })
 	})
-	connected := make(chan struct{})
-	var connectedOnce sync.Once
+	text := func(t string) {
+		if dc := s.dc.Load(); dc != nil {
+			dc.SendText(t)
+		}
+	}
 	s.pc.OnConnectionStateChange(func(st webrtc.PeerConnectionState) {
 		switch st {
 		case webrtc.PeerConnectionStateConnected:
-			connectedOnce.Do(func() { close(connected) })
+			s.connect(video.WriteRTP, audio.WriteRTP, text)
 		case webrtc.PeerConnectionStateFailed, webrtc.PeerConnectionStateClosed:
 			go s.Stop()
 		case webrtc.PeerConnectionStateDisconnected:
@@ -244,50 +304,27 @@ func (m *Manager) Start(ctx context.Context, g Game, offer string) (*Session, st
 	})
 
 	if err = s.pc.SetRemoteDescription(webrtc.SessionDescription{Type: webrtc.SDPTypeOffer, SDP: offer}); err != nil {
-		return nil, "", fmt.Errorf("bad offer: %w", err)
+		return "", fmt.Errorf("bad offer: %w", err)
 	}
 	answer, err := s.pc.CreateAnswer(nil)
 	if err != nil {
-		return nil, "", err
+		return "", err
 	}
 	gathered := webrtc.GatheringCompletePromise(s.pc)
 	if err = s.pc.SetLocalDescription(answer); err != nil {
-		return nil, "", err
+		return "", err
 	}
 	select {
 	case <-gathered:
 	case <-ctx.Done():
-		err = ctx.Err()
-		return nil, "", err
+		return "", ctx.Err()
 	}
 
-	m.mu.Lock()
-	m.sessions[id] = s
-	m.mu.Unlock()
-
-	playCtx, cancel := context.WithCancel(context.Background())
-	s.cancel = cancel
-	go func() {
-		select {
-		case <-connected:
-		case <-time.After(30 * time.Second):
-			m.log.Info("game player never connected", "session", id)
-			s.Stop()
-			return
-		case <-s.done:
-			return
-		}
-		s.Started = time.Now()
-		if err := s.play(playCtx, video, audio); err != nil && playCtx.Err() == nil {
-			m.log.Warn("game stopped", "session", id, "err", err)
-		}
-		s.Stop()
-	}()
-	return s, s.pc.LocalDescription().SDP, nil
+	return s.pc.LocalDescription().SDP, nil
 }
 
 // play runs the game, encoding as it goes, until it stops.
-func (s *Session) play(ctx context.Context, video, audio *webrtc.TrackLocalStaticRTP) error {
+func (s *Session) play(ctx context.Context) error {
 	venc, err := startVideo(ctx, s.m.cfg.FFmpeg, s.Info)
 	if err != nil {
 		return err
@@ -313,9 +350,9 @@ func (s *Session) play(ctx context.Context, video, audio *webrtc.TrackLocalStati
 			}
 			mu.Unlock()
 		}
-		return video.WriteRTP(p)
+		return s.video(p)
 	})
-	go aenc.forward(audio.WriteRTP)
+	go aenc.forward(s.audio)
 	go s.sendStats(ctx)
 	return s.runner.Run(func(f []byte) error {
 		mu.Lock()
@@ -330,7 +367,7 @@ func (s *Session) play(ctx context.Context, video, audio *webrtc.TrackLocalStati
 }
 
 // sendStats tells the player, once a second, how long the server takes
-// with each frame, as JSON text on the data channel.
+// with each frame, as JSON text.
 func (s *Session) sendStats(ctx context.Context) {
 	t := time.NewTicker(time.Second)
 	defer t.Stop()
@@ -340,19 +377,17 @@ func (s *Session) sendStats(ctx context.Context) {
 			return
 		case <-t.C:
 		}
-		if dc := s.dc.Load(); dc != nil {
-			frame := 1000 / s.Info.FPS
-			dc.SendText(fmt.Sprintf(`{"encodeMs":%.1f,"frameMs":%.1f}`, float64(s.encodeMicros.Load())/1000, frame))
-		}
+		frame := 1000 / s.Info.FPS
+		s.text(fmt.Sprintf(`{"encodeMs":%.1f,"frameMs":%.1f}`, float64(s.encodeMicros.Load())/1000, frame))
 	}
 }
 
-// Input messages from the player on the data channel:
+// Input messages from the player, on the data channel or the WebSocket:
 //
 //	1 port lo hi   buttons held (see Runner.SetButtons)
 //	2 …            a ping: sent straight back, to time the round trip
 //	3 port axis v  an analog stick (see Runner.SetStick), v a signed byte
-func (s *Session) input(dc *webrtc.DataChannel, b []byte) {
+func (s *Session) input(reply func([]byte), b []byte) {
 	if len(b) == 0 {
 		return
 	}
@@ -362,7 +397,7 @@ func (s *Session) input(dc *webrtc.DataChannel, b []byte) {
 			s.runner.SetButtons(int(b[1]), uint16(b[2])|uint16(b[3])<<8)
 		}
 	case 2:
-		dc.Send(b)
+		reply(b)
 	case 3:
 		if len(b) >= 4 {
 			s.runner.SetStick(int(b[1]), int(b[2]), int8(b[3]))

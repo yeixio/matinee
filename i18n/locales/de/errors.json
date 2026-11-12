@@ -273,6 +273,7 @@
   "audiodelay_is_milliseconds_between_2000_and_2000": "Die Tonverzögerung ist in Millisekunden zwischen -2000 und 2000 anzugeben.",
   "subtitle_choices_arent_ones_the_apps_know": "Diese Untertitel-Einstellungen kennen die Apps nicht",
   "no_such_font": "Diese Schrift gibt es nicht",
+  "no_such_game": "kein solches Spiel",
   "couldnt_start_playback_for_this_extra": "Dieses Extra konnte nicht abgespielt werden",
   "no_such_extra": "Kein solches Extra",
   "only_an_admin_can_add_a_station_on_the_home_network": "nur ein Admin kann einen Sender im Heimnetz hinzufügen",

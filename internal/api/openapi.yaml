@@ -1265,12 +1265,27 @@ paths:
         - { name: id, in: path, required: true, schema: { type: string } }
       responses:
         "204": { description: Stopped. }
+  /games/play/{id}/stream:
+    get:
+      summary: The direct stream of a game started with direct, as a WebSocket (the person's own game)
+      description: >-
+        For players without WebRTC. Binary messages from the server are a kind byte and an RTP
+        packet: 0x10 video (H.264, packetization mode 1, SPS and PPS in the stream), 0x11 sound
+        (Opus, 48 kHz stereo). Pings (kind 2) come back as sent, and text messages are the same JSON
+        stats as on the WebRTC data channel. The player sends the data channel's input messages as
+        binary messages. Closing the WebSocket ends the game.
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        "101": { description: Switching to the WebSocket. }
+        "404": { description: No such game, or not this person's. }
   /items/{id}/game:
     post:
-      summary: Start playing a game from a Games library, streamed over WebRTC
+      summary: Start playing a game from a Games library, streamed over WebRTC or directly
       description: >-
         Like POST /games/play, for anyone who can see the item, when the item says streamedGame. The
-        offer, data channel and answer are the same; stop it with DELETE /games/play/{id}.
+        offer, data channel and answer are the same; stop it with DELETE /games/play/{id}. With
+        direct instead of an offer, connect to the stream path within 30 seconds.
       parameters:
         - { name: id, in: path, required: true, schema: { type: integer } }
       requestBody:
@@ -1280,6 +1295,7 @@ paths:
               type: object
               properties:
                 offer: { type: string, description: The player's SDP offer. }
+                direct: { type: boolean, description: "Stream over a WebSocket instead of WebRTC; leave out the offer." }
       responses:
         "200":
           description: Started; the same answer as POST /games/play.
@@ -1289,7 +1305,8 @@ paths:
                 type: object
                 properties:
                   id: { type: string }
-                  answer: { type: string, description: The server's SDP answer. }
+                  answer: { type: string, description: "The server's SDP answer; empty when direct." }
+                  stream: { type: string, description: "With direct, the path of the stream, under the API's base." }
                   system: { type: string }
                   analog: { type: boolean, description: "Send the sticks as sticks, not as the d-pad." }
                   width: { type: integer }

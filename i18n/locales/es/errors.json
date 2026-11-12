@@ -273,6 +273,7 @@
   "audiodelay_is_milliseconds_between_2000_and_2000": "El retraso de audio va en milisegundos, entre -2000 y 2000.",
   "subtitle_choices_arent_ones_the_apps_know": "Las aplicaciones no reconocen estas opciones de subtítulos",
   "no_such_font": "No existe esa fuente",
+  "no_such_game": "no existe ese juego",
   "couldnt_start_playback_for_this_extra": "no se pudo reproducir este extra",
   "no_such_extra": "no existe ese extra",
   "only_an_admin_can_add_a_station_on_the_home_network": "solo un administrador puede añadir una emisora de la red doméstica",

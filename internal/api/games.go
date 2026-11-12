@@ -12,6 +12,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/coder/websocket"
 	"github.com/yeixio/matinee/internal/gamestream"
 )
 
@@ -26,6 +27,7 @@ func (s *Server) gameRoutes() []route {
 		{"POST /games/play", adminOnly, s.playGame},
 		{"POST /items/{id}/game", signedIn, s.playGameItem},
 		{"DELETE /games/play/{id}", signedIn, s.stopGame},
+		{"GET /games/play/{id}/stream", signedIn, s.streamGame},
 		{"GET /games/emulators", adminOnly, s.gameEmulators},
 		{"POST /games/emulators", adminOnly, s.addGameEmulator},
 		{"DELETE /games/emulators/{file}", adminOnly, s.removeGameEmulator},
@@ -138,8 +140,11 @@ func (s *Server) playGameItem(w http.ResponseWriter, r *http.Request) {
 	}
 	var body struct {
 		Offer string `json:"offer"`
+		// Direct asks for the WebSocket stream (streamGame) instead of
+		// WebRTC, for players without it.
+		Direct bool `json:"direct"`
 	}
-	if err := readJSON(r, &body); err != nil || body.Offer == "" {
+	if err := readJSON(r, &body); err != nil || (body.Offer == "") == !body.Direct {
 		writeError(w, http.StatusBadRequest, "bad request")
 		return
 	}
@@ -172,8 +177,35 @@ func (s *Server) startGame(w http.ResponseWriter, r *http.Request, g gamestream.
 		writeError(w, http.StatusBadRequest, "couldn't start the game: "+err.Error())
 		return
 	}
-	writeJSON(w, http.StatusOK, map[string]any{"id": sess.ID, "answer": answer, "system": system, "analog": analog,
-		"width": sess.Info.Width, "height": sess.Info.Height, "aspect": sess.Info.Aspect, "fps": sess.Info.FPS})
+	res := map[string]any{"id": sess.ID, "answer": answer, "system": system, "analog": analog,
+		"width": sess.Info.Width, "height": sess.Info.Height, "aspect": sess.Info.Aspect, "fps": sess.Info.FPS}
+	if offer == "" {
+		res["stream"] = "games/play/" + sess.ID + "/stream"
+	}
+	writeJSON(w, http.StatusOK, res)
+}
+
+// streamGame is the direct stream of a game started with direct set: a
+// WebSocket carrying the picture, sound and buttons (gamestream/direct.go).
+func (s *Server) streamGame(w http.ResponseWriter, r *http.Request) {
+	if s.Games == nil {
+		writeError(w, http.StatusNotFound, errNoGames)
+		return
+	}
+	sess := s.Games.Get(r.PathValue("id"))
+	if sess == nil || sess.Owner != strconv.FormatInt(currentUser(r).ID, 10) {
+		writeError(w, http.StatusNotFound, "no such game")
+		return
+	}
+	// The player is an app, not a page, so there's no origin to check.
+	conn, err := websocket.Accept(w, r, &websocket.AcceptOptions{InsecureSkipVerify: true})
+	if err != nil {
+		return
+	}
+	defer conn.CloseNow()
+	if err := sess.ServeDirect(r.Context(), conn); err != nil {
+		s.Log.Debug("game stream ended", "session", sess.ID, "err", err)
+	}
 }
 
 func (s *Server) stopGame(w http.ResponseWriter, r *http.Request) {

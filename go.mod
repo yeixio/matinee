@@ -4,6 +4,8 @@ go 1.26.0
 
 require (
 	fyne.io/systray v1.12.2
+	github.com/bodgit/sevenzip v1.6.1
+	github.com/coder/websocket v1.8.15
 	github.com/fsnotify/fsnotify v1.10.1
 	github.com/huin/goupnp v1.3.0
 	github.com/jackc/pgx/v5 v5.11.0
@@ -23,7 +25,6 @@ require (
 require (
 	github.com/andybalholm/brotli v1.1.1 // indirect
 	github.com/bodgit/plumbing v1.3.0 // indirect
-	github.com/bodgit/sevenzip v1.6.1 // indirect
 	github.com/bodgit/windows v1.0.1 // indirect
 	github.com/dustin/go-humanize v1.1.0 // indirect
 	github.com/godbus/dbus/v5 v5.1.0 // indirect

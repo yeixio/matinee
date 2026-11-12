@@ -273,6 +273,7 @@
   "audiodelay_is_milliseconds_between_2000_and_2000": "音訊延遲以毫秒為單位，範圍為 -2000 到 2000。",
   "subtitle_choices_arent_ones_the_apps_know": "應用程式無法識別這些字幕選項",
   "no_such_font": "沒有這個字型",
+  "no_such_game": "沒有這個遊戲",
   "couldnt_start_playback_for_this_extra": "無法播放此花絮",
   "no_such_extra": "沒有這個花絮",
   "only_an_admin_can_add_a_station_on_the_home_network": "只有管理員可以新增家用網路上的電台",
