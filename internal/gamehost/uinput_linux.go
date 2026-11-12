@@ -108,6 +108,9 @@ func (p *pad) close() {
 // gamePIDs are the processes Steam started for a game: they carry its app
 // id in SteamAppId or SteamGameId.
 func gamePIDs(appID int) []int {
+	if appID == BigPicture {
+		return anyGamePIDs()
+	}
 	want := [][]byte{[]byte("SteamAppId=" + strconv.Itoa(appID) + "\x00"), []byte("SteamGameId=" + strconv.Itoa(appID) + "\x00")}
 	entries, _ := os.ReadDir("/proc")
 	var out []int
@@ -129,6 +132,41 @@ func gamePIDs(appID int) []int {
 				}
 				break
 			}
+		}
+	}
+	return out
+}
+
+// anyGamePIDs are the processes of whatever games Steam is running: those
+// with a Steam app id, other than Steam's own.
+func anyGamePIDs() []int {
+	entries, _ := os.ReadDir("/proc")
+	var out []int
+	self := os.Getpid()
+	for _, e := range entries {
+		pid, err := strconv.Atoi(e.Name())
+		if err != nil || pid == self {
+			continue
+		}
+		env, err := os.ReadFile(filepath.Join("/proc", e.Name(), "environ"))
+		if err != nil {
+			continue
+		}
+		game := false
+		for _, kv := range bytes.Split(env, []byte{0}) {
+			if v, ok := bytes.CutPrefix(kv, []byte("SteamAppId=")); ok {
+				id, _ := strconv.Atoi(string(v))
+				game = id > 0
+				break
+			}
+		}
+		if !game {
+			continue
+		}
+		switch cmd, _ := os.ReadFile(filepath.Join("/proc", e.Name(), "comm")); strings.TrimSpace(string(cmd)) {
+		case "steam", "steamwebhelper", "steam-runtime-l", "srt-logger":
+		default:
+			out = append(out, pid)
 		}
 	}
 	return out

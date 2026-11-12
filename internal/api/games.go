@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"net/http"
+	"net/url"
 	"os"
 	"path/filepath"
 	"runtime"
@@ -27,6 +28,7 @@ func (s *Server) gameRoutes() []route {
 		{"GET /games/files", adminOnly, s.gameFiles},
 		{"POST /games/play", adminOnly, s.playGame},
 		{"GET /games/host", adminOnly, s.gameHostGames},
+		{"GET /games/host/desktop/{path...}", adminOnly, s.gameHostDesktop},
 		{"POST /items/{id}/game", signedIn, s.playGameItem},
 		{"DELETE /games/play/{id}", signedIn, s.stopGame},
 		{"GET /games/play/{id}/stream", signedIn, s.streamGame},
@@ -104,9 +106,11 @@ func (s *Server) playGame(w http.ResponseWriter, r *http.Request) {
 		Path    string `json:"path"`
 		LagTest bool   `json:"lagTest"`
 		// HostApp is a game on the game host, by its Steam app id.
-		HostApp int    `json:"hostApp"`
-		Offer   string `json:"offer"`
-		Direct  bool   `json:"direct"`
+		HostApp int `json:"hostApp"`
+		// Steam plays Steam itself on the game host, in Big Picture.
+		Steam  bool   `json:"steam"`
+		Offer  string `json:"offer"`
+		Direct bool   `json:"direct"`
 	}
 	if err := readJSON(r, &body); err != nil || (body.Offer == "") == !body.Direct {
 		writeError(w, http.StatusBadRequest, "bad request")
@@ -114,12 +118,15 @@ func (s *Server) playGame(w http.ResponseWriter, r *http.Request) {
 	}
 	g := gamestream.Game{Owner: strconv.FormatInt(currentUser(r).ID, 10)}
 	system, analog := "lagtest", false
-	if body.HostApp > 0 {
+	if body.HostApp > 0 || body.Steam {
 		if s.GameHost == nil {
 			writeError(w, http.StatusNotFound, "no game host is set up")
 			return
 		}
 		g.Host, g.AppID, system, analog = s.GameHost, body.HostApp, "pc", true
+		if body.Steam {
+			g.AppID = gamehost.BigPicture
+		}
 	} else if body.LagTest {
 		g.LagTest = true
 	} else {
@@ -153,6 +160,23 @@ func (s *Server) gameHostGames(w http.ResponseWriter, r *http.Request) {
 		games = []gamehost.Game{}
 	}
 	writeJSON(w, http.StatusOK, map[string]any{"games": games})
+}
+
+// gameHostDesktop passes on the game host's desktop, a web page showing its
+// screen where an admin signs in to Steam and installs games. It controls
+// the whole computer, so it's for admins, from Matinee's own pages only.
+func (s *Server) gameHostDesktop(w http.ResponseWriter, r *http.Request) {
+	if s.GameHost == nil {
+		writeError(w, http.StatusNotFound, "no game host is set up")
+		return
+	}
+	if o := r.Header.Get("Origin"); o != "" {
+		if u, err := url.Parse(o); err != nil || u.Host != r.Host {
+			http.Error(w, "cross-site request", http.StatusForbidden)
+			return
+		}
+	}
+	s.GameHost.Desktop(r.PathValue("path")).ServeHTTP(w, r)
 }
 
 // playGameItem plays a game from a Games library, for anyone who can see

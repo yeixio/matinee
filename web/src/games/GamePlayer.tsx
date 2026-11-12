@@ -14,6 +14,7 @@ export function GamePlayer({
   path,
   itemId,
   hostApp,
+  steam,
   lagTest,
   onClose,
 }: {
@@ -22,6 +23,8 @@ export function GamePlayer({
   itemId?: number
   /** A PC game on the game host, by its Steam app id. */
   hostApp?: number
+  /** Steam itself on the game host, in Big Picture. */
+  steam?: boolean
   lagTest?: boolean
   onClose: () => void
 }) {
@@ -45,6 +48,7 @@ export function GamePlayer({
       path,
       itemId,
       hostApp,
+      steam,
       lagTest,
       video: video.current!,
       onLag: (l) => {
@@ -68,7 +72,7 @@ export function GamePlayer({
       stream?.stop()
       if (document.fullscreenElement) document.exitFullscreen().catch(() => {})
     }
-  }, [path, itemId, hostApp, lagTest, t])
+  }, [path, itemId, hostApp, steam, lagTest, t])
 
   const ms = (v?: number) => (v === undefined ? '…' : t('games.ms', { value: Math.round(v) }))
   return (

@@ -25,8 +25,10 @@ import (
 
 // Host is the game host's side: it serves the protocol in protocol.go.
 type Host struct {
-	// SteamRoot is Steam's folder (see SteamRoot).
+	// SteamRoot is Steam's folder (see SteamRoot), or empty to look for it
+	// in SteamHome each time: on a first start Steam hasn't made it yet.
 	SteamRoot string
+	SteamHome string
 	// Token is what Matinee must send; empty lets anyone on the network in.
 	Token string
 	// Display is the X display the games show on, such as :55.
@@ -43,7 +45,10 @@ type Host struct {
 	// Steam is the command that launches a game: Steam's own, run with
 	// -applaunch <app id>.
 	Steam string
-	Log   *slog.Logger
+	// Desktop is the address of a web page showing this computer's screen
+	// (see desktop.go), or empty for none.
+	Desktop string
+	Log     *slog.Logger
 	// VideoInput and AudioInput replace FFmpeg's input arguments, for tests.
 	VideoInput, AudioInput []string
 
@@ -57,6 +62,7 @@ func (h *Host) Handler() http.Handler {
 	mux := http.NewServeMux()
 	mux.HandleFunc("GET /v1/games", h.auth(h.games))
 	mux.HandleFunc("GET /v1/play/{app}", h.auth(h.play))
+	mux.HandleFunc(DesktopPath, h.auth(h.desktop()))
 	mux.HandleFunc("GET /healthz", func(w http.ResponseWriter, r *http.Request) { w.Write([]byte("ok\n")) })
 	return mux
 }
@@ -75,7 +81,17 @@ func (h *Host) auth(next http.HandlerFunc) http.HandlerFunc {
 }
 
 func (h *Host) games(w http.ResponseWriter, r *http.Request) {
-	games, err := Installed(h.SteamRoot)
+	root := h.SteamRoot
+	if root == "" {
+		var err error
+		if root, err = SteamRoot(h.SteamHome); err != nil {
+			// No Steam yet: nothing installed.
+			w.Header().Set("Content-Type", "application/json")
+			w.Write([]byte(`{"games":[]}` + "\n"))
+			return
+		}
+	}
+	games, err := Installed(root)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -93,7 +109,7 @@ const writeWait = 5 * time.Second
 
 func (h *Host) play(w http.ResponseWriter, r *http.Request) {
 	app, err := strconv.Atoi(r.PathValue("app"))
-	if err != nil || app <= 0 {
+	if err != nil || app < 0 {
 		http.Error(w, "bad app id", http.StatusBadRequest)
 		return
 	}
@@ -125,7 +141,12 @@ func (h *Host) play(w http.ResponseWriter, r *http.Request) {
 		conn.Close(websocket.StatusInternalError, "couldn't launch the game")
 		return
 	}
-	defer stopGame(app)
+	defer func() {
+		if app == BigPicture {
+			h.steamURL("steam://close/bigpicture")
+		}
+		stopGame(app)
+	}()
 	log.Info("playing", "width", width, "height", height, "fps", fps)
 
 	var wmu sync.Mutex
@@ -176,6 +197,10 @@ func (h *Host) play(w http.ResponseWriter, r *http.Request) {
 				cancel()
 				return
 			case <-time.After(2 * time.Second):
+			}
+			if app == BigPicture {
+				// Played until the player leaves: games come and go in it.
+				continue
 			}
 			if len(gamePIDs(app)) > 0 {
 				seen, gone = true, 0
@@ -243,8 +268,22 @@ func clampSize(w, h int) (int, int) {
 	return w &^ 1, h &^ 1
 }
 
+// BigPicture, as an app id, plays Steam itself: its Big Picture mode full
+// screen, where the player picks and quits games with the controller.
+const BigPicture = 0
+
 func (h *Host) launch(app int) error {
-	cmd := exec.Command(cmp.Or(h.Steam, "steam"), "-applaunch", strconv.Itoa(app))
+	if app == BigPicture {
+		return h.steamURL("steam://open/bigpicture")
+	}
+	return h.steamRun("-applaunch", strconv.Itoa(app))
+}
+
+// steamURL hands a steam:// link to the running Steam.
+func (h *Host) steamURL(u string) error { return h.steamRun(u) }
+
+func (h *Host) steamRun(args ...string) error {
+	cmd := exec.Command(cmp.Or(h.Steam, "steam"), args...)
 	cmd.Env = h.env()
 	if err := cmd.Start(); err != nil {
 		return err

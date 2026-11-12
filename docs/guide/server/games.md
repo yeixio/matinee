@@ -145,9 +145,13 @@ This is an early preview, played from **Games** in the web app by an admin:
    | `MATINEE_GAME_HOST` | The game host's address, such as `http://gaming-pc:7174`. |
    | `MATINEE_GAME_HOST_TOKEN` | The same token as the game host's. |
 
-4. Open **Games** in the web app. **PC games** lists what's installed on the game host. Pick one to play.
+4. Open **Games** in the web app. Under **PC games**, **Steam** opens Steam's Big Picture full screen, where you pick, play and quit games with your controller, as on a TV console. Below it, each installed game starts on its own.
 
-The game host plays one game at a time. Closing the player quits the game.
+The game host plays one game at a time. Closing the player quits the game, or leaves Big Picture.
+
+### Signing in to Steam from Matinee
+
+If the game host's computer has no screen of its own, such as Steam in a container, give the game host the address of a web page that shows its screen (`MATINEE_GAMEHOST_DESKTOP`, such as the noVNC page a Steam container serves). **Games → PC games → Steam desktop** then opens that screen in your browser, through Matinee, so you can sign in to Steam and install games without opening another port. Only admins can open it: it controls the whole computer.
 
 | Game host setting | Default | What it's for |
 | --- | --- | --- |
@@ -157,4 +161,5 @@ The game host plays one game at a time. Closing the player quits the game.
 | `MATINEE_GAMEHOST_VAAPI` | `/dev/dri/renderD128` | The graphics card to encode on. Without one, it encodes on the CPU, which is slower. |
 | `MATINEE_GAMEHOST_AUDIO` | the default output | The PulseAudio source to record the sound from. |
 | `MATINEE_GAMEHOST_BITRATE` | `20` | The video bitrate in megabits per second. |
+| `MATINEE_GAMEHOST_DESKTOP` | | The address of a web page showing the game host's screen, such as `http://127.0.0.1:8083`, opened by **Steam desktop**. |
 <!-- /since -->
