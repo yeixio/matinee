@@ -12,6 +12,12 @@
 
 #include "../runner/libretro.h"
 
+// Built with other extensions, it stands in for an emulator an admin
+// added, in Matinee's tests.
+#ifndef LAGTEST_EXTENSIONS
+#define LAGTEST_EXTENSIONS ""
+#endif
+
 #define W 320
 #define H 240
 #define RATE 48000
@@ -22,6 +28,7 @@ static int16_t snd[RATE / FPS * 2];
 static int x = W / 2 - 16, y = H / 2 - 16;
 static unsigned tick;
 static double phase;
+static uint32_t square = 0xff6f5e;
 
 static retro_environment_t env;
 static retro_video_refresh_t video;
@@ -33,13 +40,23 @@ RETRO_API void retro_set_environment(retro_environment_t cb) {
   env = cb;
   bool yes = true;
   cb(RETRO_ENVIRONMENT_SET_SUPPORT_NO_GAME, &yes);
+  // A setting, to show the runner hands them over: the square's colour.
+  static struct retro_core_option_v2_definition defs[] = {
+      {"lagtest_square", "Square", NULL, NULL, NULL, NULL, {{"coral", NULL}, {"blue", NULL}, {NULL, NULL}}, "coral"},
+      {NULL, NULL, NULL, NULL, NULL, NULL, {{NULL, NULL}}, NULL},
+  };
+  static struct retro_core_options_v2 opts = {NULL, defs};
+  cb(RETRO_ENVIRONMENT_SET_CORE_OPTIONS_V2, &opts);
 }
 RETRO_API void retro_set_video_refresh(retro_video_refresh_t cb) { video = cb; }
 RETRO_API void retro_set_audio_sample(retro_audio_sample_t cb) { (void)cb; }
 RETRO_API void retro_set_audio_sample_batch(retro_audio_sample_batch_t cb) { audio = cb; }
 RETRO_API void retro_set_input_poll(retro_input_poll_t cb) { poll_input = cb; }
 RETRO_API void retro_set_input_state(retro_input_state_t cb) { input = cb; }
-RETRO_API void retro_init(void) {}
+RETRO_API void retro_init(void) {
+  struct retro_variable v = {"lagtest_square", NULL};
+  if (env(RETRO_ENVIRONMENT_GET_VARIABLE, &v) && v.value && strcmp(v.value, "blue") == 0) square = 0x3050ff;
+}
 RETRO_API void retro_deinit(void) {}
 RETRO_API unsigned retro_api_version(void) { return RETRO_API_VERSION; }
 
@@ -47,7 +64,7 @@ RETRO_API void retro_get_system_info(struct retro_system_info *info) {
   memset(info, 0, sizeof *info);
   info->library_name = "Matinee lag test";
   info->library_version = "1";
-  info->valid_extensions = "";
+  info->valid_extensions = LAGTEST_EXTENSIONS;
 }
 
 RETRO_API void retro_get_system_av_info(struct retro_system_av_info *info) {
@@ -111,6 +128,15 @@ RETRO_API void retro_run(void) {
   if (held(RETRO_DEVICE_ID_JOYPAD_RIGHT) && x < W - 32) x += 4;
   if (held(RETRO_DEVICE_ID_JOYPAD_UP) && y > 0) y -= 4;
   if (held(RETRO_DEVICE_ID_JOYPAD_DOWN) && y < H - 32) y += 4;
+  // The left stick moves it too.
+  int sx = input(0, RETRO_DEVICE_ANALOG, RETRO_DEVICE_INDEX_ANALOG_LEFT, RETRO_DEVICE_ID_ANALOG_X);
+  int sy = input(0, RETRO_DEVICE_ANALOG, RETRO_DEVICE_INDEX_ANALOG_LEFT, RETRO_DEVICE_ID_ANALOG_Y);
+  x += sx / 8192;
+  y += sy / 8192;
+  if (x < 0) x = 0;
+  if (x > W - 32) x = W - 32;
+  if (y < 0) y = 0;
+  if (y > H - 32) y = H - 32;
   bool flash = held(RETRO_DEVICE_ID_JOYPAD_A) || held(RETRO_DEVICE_ID_JOYPAD_B);
   uint32_t bg = flash ? 0xffffff : 0x1a1420;
   for (int i = 0; i < W * H; i++) fb[i] = bg;
@@ -119,7 +145,7 @@ RETRO_API void retro_run(void) {
   for (int j = H - 8; j < H; j++)
     for (int i = 0; i < 8; i++) fb[j * W + (bar + i) % W] = 0x888888;
   for (int j = y; j < y + 32; j++)
-    for (int i = x; i < x + 32; i++) fb[j * W + i] = 0xff6f5e;
+    for (int i = x; i < x + 32; i++) fb[j * W + i] = square;
   video(fb, W, H, W * 4);
 
   bool beep = held(RETRO_DEVICE_ID_JOYPAD_START);

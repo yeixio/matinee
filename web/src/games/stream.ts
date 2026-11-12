@@ -21,18 +21,36 @@ export const keyButtons: Record<string, number> = {
   Enter: Btn.Start, ShiftRight: Btn.Select, ShiftLeft: Btn.Select,
 }
 
-/** padMask is the buttons held on a standard-layout gamepad, with the left stick as the d-pad. */
-export function padMask(pad: Pick<Gamepad, 'buttons' | 'axes'>): number {
+/**
+ * padMask is the buttons held on a standard-layout gamepad. The left stick
+ * is the d-pad too, unless stickAsDpad is false (for a console that has
+ * sticks of its own, which get them as sticks).
+ */
+export function padMask(pad: Pick<Gamepad, 'buttons' | 'axes'>, stickAsDpad = true): number {
   let mask = 0
   pad.buttons.forEach((b, i) => {
     if (i < padButtons.length && (b.pressed || b.value > 0.5)) mask |= 1 << padButtons[i]
   })
+  if (!stickAsDpad) return mask
   const [x = 0, y = 0] = pad.axes
   if (x < -0.5) mask |= 1 << Btn.Left
   if (x > 0.5) mask |= 1 << Btn.Right
   if (y < -0.5) mask |= 1 << Btn.Up
   if (y > 0.5) mask |= 1 << Btn.Down
   return mask
+}
+
+/**
+ * stickValues are a standard-layout gamepad's sticks (left x, left y, right
+ * x, right y) as the signed bytes the server takes, with a small dead zone
+ * so a stick at rest is still.
+ */
+export function stickValues(pad: Pick<Gamepad, 'axes'>): number[] {
+  return [0, 1, 2, 3].map((i) => {
+    const v = pad.axes[i] ?? 0
+    if (Math.abs(v) < 0.12) return 0
+    return Math.max(-128, Math.min(127, Math.round(v * 127)))
+  })
 }
 
 /** How long things take, in milliseconds, for the lag numbers. */
@@ -61,6 +79,8 @@ export interface GameStream {
 export interface StreamOptions {
   path?: string
   lagTest?: boolean
+  /** Called once the server says which system plays the game. */
+  onStart?: (game: { system: string; analog: boolean }) => void
   video: HTMLVideoElement
   onLag: (lag: Lag) => void
   onEnd: (error?: string) => void
@@ -85,9 +105,12 @@ export async function startGame(o: StreamOptions): Promise<GameStream> {
   await pc.setLocalDescription(await pc.createOffer())
   await gathered(pc)
   let id = ''
+  let analog = false
   try {
     const res = await api.playGame({ path: o.path, lagTest: o.lagTest, offer: pc.localDescription!.sdp })
     id = res.id
+    analog = !!res.analog
+    o.onStart?.({ system: res.system, analog })
     await pc.setRemoteDescription({ type: 'answer', sdp: res.answer })
   } catch (e) {
     pc.close()
@@ -158,16 +181,45 @@ export async function startGame(o: StreamOptions): Promise<GameStream> {
     }
     o.video.requestVideoFrameCallback(onFrame)
   }
+  // Sticks, for a console that has them: each sent when it moves, all of
+  // them every 50 ms besides.
+  const sticks = [0, 0, 0, 0]
+  let sticksAt = 0
+  const sendStick = (axis: number, v: number) => {
+    if (dc.readyState !== 'open') return
+    dc.send(new Uint8Array([3, 0, axis, v & 0xff]))
+    sticks[axis] = v
+  }
   let frame = 0
   const poll = () => {
     let mask = 0
-    for (const k of keys) mask |= 1 << k
+    let held = [0, 0, 0, 0]
+    for (const k of keys) {
+      // With sticks, the arrow keys are the left stick.
+      if (analog && k === Btn.Left) held[0] = -127
+      else if (analog && k === Btn.Right) held[0] = 127
+      else if (analog && k === Btn.Up) held[1] = -127
+      else if (analog && k === Btn.Down) held[1] = 127
+      else mask |= 1 << k
+    }
     for (const pad of navigator.getGamepads?.() ?? []) {
       if (!pad) continue
       controller ??= pad.id
-      mask |= padMask(pad)
+      mask |= padMask(pad, !analog)
+      if (analog) {
+        const v = stickValues(pad)
+        // The first controller with a stick off centre has its way.
+        if (held.every((h) => h === 0)) held = v
+      }
     }
     if (mask !== sent || performance.now() - sentAt > 50) send(mask)
+    if (analog) {
+      const again = performance.now() - sticksAt > 50
+      held.forEach((v, axis) => {
+        if (v !== sticks[axis] || again) sendStick(axis, v)
+      })
+      if (again) sticksAt = performance.now()
+    }
     frame = requestAnimationFrame(poll)
   }
   frame = requestAnimationFrame(poll)

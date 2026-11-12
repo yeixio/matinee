@@ -1025,7 +1025,20 @@
       "intro": "在这台服务器上玩游戏，并用手柄串流到任何设备。这是面向管理员的预览：试试感觉如何。",
       "ready": "已就绪，有 {{systems}} 的模拟器。",
       "notSetUp": "不可用：此服务器没有游戏运行器和模拟器。Docker 镜像中有。",
-      "open": "试玩游戏"
+      "open": "试玩游戏",
+      "emulators": "模拟器",
+      "emulatorsIntro": "Matinee 自带模拟器。你也可以添加自己的：为 {{platform}} 构建的 libretro 核心（.so 文件）。Matinee 会询问它能玩哪些游戏，并在这些游戏上优先于内置模拟器使用它。",
+      "emulatorsTrust": "模拟器是在这台服务器上运行的程序。只添加你信任的。",
+      "addEmulator": "添加模拟器",
+      "adding": "正在添加…",
+      "added": "已添加 {{name}}。",
+      "couldntAdd": "无法添加模拟器。",
+      "removeConfirm": "移除 {{name}}？它的游戏会改回由内置模拟器运行（如果有）。",
+      "cantUse": "无法使用：{{reason}}",
+      "plays": "支持：{{what}}",
+      "builtIn": "内置",
+      "remove": "移除",
+      "bios": "有些模拟器需要主机的 BIOS 文件：把它放到 Matinee 数据文件夹的 games/system 中。"
     }
   },
   "language": {
@@ -1633,7 +1646,6 @@
     "lagTestHint": "用方向键移动方块。按住 A 或 B 时屏幕变白：把手柄和屏幕一起录下来即可测量。",
     "play": "开始玩",
     "pickGame": "选择游戏",
-    "pickGameHint": "你拥有的游戏：Game Boy、Game Boy Color、Game Boy Advance 和 NES 文件，或包含其中之一的 zip。",
     "up": "上一级文件夹",
     "emptyFolder": "这里没有文件夹或游戏。",
     "controller": "手柄：{{name}}",
@@ -1653,6 +1665,7 @@
       "server": "服务器，一帧",
       "decode": "解码",
       "fps": "每秒帧数"
-    }
+    },
+    "pickGameHintAny": "你拥有的游戏：游戏文件，或包含它的 zip。"
   }
 }

@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"runtime"
 	"sort"
 	"strconv"
 	"strings"
@@ -24,6 +25,9 @@ func (s *Server) gameRoutes() []route {
 		{"GET /games/files", adminOnly, s.gameFiles},
 		{"POST /games/play", adminOnly, s.playGame},
 		{"DELETE /games/play/{id}", adminOnly, s.stopGame},
+		{"GET /games/emulators", adminOnly, s.gameEmulators},
+		{"POST /games/emulators", adminOnly, s.addGameEmulator},
+		{"DELETE /games/emulators/{file}", adminOnly, s.removeGameEmulator},
 	}
 }
 
@@ -39,7 +43,7 @@ func (s *Server) gameStreaming(w http.ResponseWriter, r *http.Request) {
 		systems = []gamestream.System{}
 	}
 	writeJSON(w, http.StatusOK, map[string]any{"available": true, "systems": systems, "lagTest": s.Games.HasLagTest(),
-		"playing": s.Games.Count()})
+		"playing": s.Games.Count(), "platform": corePlatform()})
 }
 
 // gameFiles lists a folder's subfolders and the files in it that might be
@@ -101,9 +105,9 @@ func (s *Server) playGame(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	g := gamestream.Game{Owner: strconv.FormatInt(currentUser(r).ID, 10)}
-	system := "lagtest"
+	system, analog := "lagtest", false
 	if body.LagTest {
-		g.Core = gamestream.LagTest
+		g.LagTest = true
 	} else {
 		st, err := os.Stat(body.Path)
 		if err != nil || st.IsDir() {
@@ -115,7 +119,7 @@ func (s *Server) playGame(w http.ResponseWriter, r *http.Request) {
 			writeError(w, http.StatusBadRequest, "no emulator on this server plays that game")
 			return
 		}
-		g.Core, g.Path, system = sys.Core, body.Path, sys.Key
+		g.System, g.Path, system, analog = sys, body.Path, sys.Key, sys.Analog
 	}
 	ctx, cancel := context.WithTimeout(r.Context(), 20*time.Second)
 	defer cancel()
@@ -129,7 +133,7 @@ func (s *Server) playGame(w http.ResponseWriter, r *http.Request) {
 		writeError(w, http.StatusBadRequest, "couldn't start the game: "+err.Error())
 		return
 	}
-	writeJSON(w, http.StatusOK, map[string]any{"id": sess.ID, "answer": answer, "system": system,
+	writeJSON(w, http.StatusOK, map[string]any{"id": sess.ID, "answer": answer, "system": system, "analog": analog,
 		"width": sess.Info.Width, "height": sess.Info.Height, "aspect": sess.Info.Aspect, "fps": sess.Info.FPS})
 }
 
@@ -140,6 +144,67 @@ func (s *Server) stopGame(w http.ResponseWriter, r *http.Request) {
 	}
 	if sess := s.Games.Get(r.PathValue("id")); sess != nil {
 		sess.Stop()
+	}
+	w.WriteHeader(http.StatusNoContent)
+}
+
+// corePlatform is the kind of emulator file this server runs, for telling
+// an admin which to download: libretro's own names for Linux builds.
+func corePlatform() string {
+	switch runtime.GOARCH {
+	case "amd64":
+		return "Linux x86_64"
+	case "arm64":
+		return "Linux aarch64"
+	case "arm":
+		return "Linux armhf"
+	}
+	return "Linux " + runtime.GOARCH
+}
+
+func (s *Server) gameEmulators(w http.ResponseWriter, r *http.Request) {
+	if s.Games == nil {
+		writeError(w, http.StatusNotFound, errNoGames)
+		return
+	}
+	writeJSON(w, http.StatusOK, map[string]any{"emulators": s.Games.Emulators(), "platform": corePlatform()})
+}
+
+// addGameEmulator takes an emulator an admin uploaded: the file itself as
+// the body, its name in ?file=.
+func (s *Server) addGameEmulator(w http.ResponseWriter, r *http.Request) {
+	if s.Games == nil {
+		writeError(w, http.StatusNotFound, errNoGames)
+		return
+	}
+	file := r.URL.Query().Get("file")
+	if file == "" {
+		writeError(w, http.StatusBadRequest, "bad request")
+		return
+	}
+	e, err := s.Games.AddEmulator(r.Context(), file, http.MaxBytesReader(w, r.Body, gamestream.MaxEmulatorSize))
+	if errors.Is(err, gamestream.ErrNotEmulator) {
+		reason := strings.TrimPrefix(strings.TrimPrefix(err.Error(), gamestream.ErrNotEmulator.Error()), ": ")
+		writeErrorWith(w, http.StatusBadRequest, "that file isn't an emulator this server can run: {{reason}}", map[string]string{"reason": reason})
+		return
+	}
+	if err != nil {
+		s.Log.Warn("couldn't add emulator", "file", file, "err", err)
+		writeError(w, http.StatusInternalServerError, "couldn't save the emulator")
+		return
+	}
+	s.Log.Info("emulator added", "file", e.File, "name", e.Name, "by", currentUser(r).Username)
+	writeJSON(w, http.StatusOK, e)
+}
+
+func (s *Server) removeGameEmulator(w http.ResponseWriter, r *http.Request) {
+	if s.Games == nil {
+		writeError(w, http.StatusNotFound, errNoGames)
+		return
+	}
+	if err := s.Games.RemoveEmulator(r.PathValue("file")); err != nil {
+		writeError(w, http.StatusNotFound, "can't find that emulator")
+		return
 	}
 	w.WriteHeader(http.StatusNoContent)
 }

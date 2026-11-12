@@ -287,5 +287,8 @@
   "this_titles_files_cant_be_read_right_now_the_network_share_theyre_on_isnt_answering": "filerna för den här titeln kan inte läsas just nu: nätverksresursen de ligger på svarar inte",
   "too_many_games_are_being_played_right_now": "för många spel spelas just nu",
   "cant_find_that_game": "hittar inte det spelet",
-  "no_emulator_on_this_server_plays_that_game": "ingen emulator på servern kan spela det spelet"
+  "no_emulator_on_this_server_plays_that_game": "ingen emulator på servern kan spela det spelet",
+  "cant_find_that_emulator": "hittar inte den emulatorn",
+  "couldnt_save_the_emulator": "kunde inte spara emulatorn",
+  "that_file_isnt_an_emulator_this_server_can_run_reason": "filen är inte en emulator som den här servern kan köra: {{reason}}"
 }

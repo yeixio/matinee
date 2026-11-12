@@ -1029,7 +1029,20 @@
       "intro": "Spiele auf diesem Server spielen und mit Controller auf jedes Gerät streamen. Dies ist eine Vorschau für Admins: Probier aus, wie es sich anfühlt.",
       "ready": "Bereit, mit Emulatoren für {{systems}}.",
       "notSetUp": "Nicht verfügbar: Diesem Server fehlen der Spiele-Runner und die Emulatoren. Das Docker-Image hat sie.",
-      "open": "Ein Spiel ausprobieren"
+      "open": "Ein Spiel ausprobieren",
+      "emulators": "Emulatoren",
+      "emulatorsIntro": "Matinee bringt Emulatoren mit. Du kannst eigene hinzufügen: einen libretro-Core für {{platform}} (eine .so-Datei). Matinee fragt ihn, welche Spiele er spielt, und nutzt ihn dafür vor den eingebauten.",
+      "emulatorsTrust": "Ein Emulator ist ein Programm, das auf diesem Server läuft. Füge nur einen hinzu, dem du vertraust.",
+      "addEmulator": "Emulator hinzufügen",
+      "adding": "Wird hinzugefügt…",
+      "added": "{{name}} hinzugefügt.",
+      "couldntAdd": "Der Emulator konnte nicht hinzugefügt werden.",
+      "removeConfirm": "{{name}} entfernen? Seine Spiele gehen an einen eingebauten Emulator zurück, falls einer sie spielt.",
+      "cantUse": "Nicht nutzbar: {{reason}}",
+      "plays": "Spielt {{what}}",
+      "builtIn": "Eingebaut",
+      "remove": "Entfernen",
+      "bios": "Manche Emulatoren brauchen eine BIOS-Datei von der Konsole: Lege sie in games/system im Datenordner von Matinee."
     }
   },
   "language": {
@@ -1645,7 +1658,6 @@
     "lagTestHint": "Bewege das Quadrat mit dem Steuerkreuz. Solange A oder B gedrückt ist, wird der Bildschirm weiß: Filme Controller und Bildschirm zusammen, um es zu messen.",
     "play": "Spielen",
     "pickGame": "Spiel wählen",
-    "pickGameHint": "Spiele, die dir gehören: Game Boy-, Game Boy Color-, Game Boy Advance- und NES-Dateien oder Zips mit einer davon.",
     "up": "Einen Ordner höher",
     "emptyFolder": "Hier sind keine Ordner oder Spiele.",
     "controller": "Controller: {{name}}",
@@ -1665,6 +1677,7 @@
       "server": "Server, ein Bild",
       "decode": "Dekodieren",
       "fps": "Bilder pro Sekunde"
-    }
+    },
+    "pickGameHintAny": "Spiele, die dir gehören: eine Spieldatei oder ein Zip mit einer."
   }
 }

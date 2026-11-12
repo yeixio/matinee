@@ -1029,7 +1029,20 @@
       "intro": "Spil på denne server og stream til enhver enhed med en controller. Dette er en forhåndsvisning for administratorer: prøv, hvordan det føles.",
       "ready": "Klar, med emulatorer til {{systems}}.",
       "notSetUp": "Ikke tilgængelig: serveren mangler spilkøreren og emulatorerne. Docker-imaget har dem.",
-      "open": "Prøv et spil"
+      "open": "Prøv et spil",
+      "emulators": "Emulatorer",
+      "emulatorsIntro": "Matinee har indbyggede emulatorer. Du kan tilføje dine egne: en libretro-core bygget til {{platform}} (en .so-fil). Matinee spørger, hvilke spil den spiller, og bruger den til dem før de indbyggede.",
+      "emulatorsTrust": "En emulator er et program, der kører på denne server. Tilføj kun en, du stoler på.",
+      "addEmulator": "Tilføj en emulator",
+      "adding": "Tilføjer…",
+      "added": "{{name}} er tilføjet.",
+      "couldntAdd": "Kunne ikke tilføje emulatoren.",
+      "removeConfirm": "Fjern {{name}}? Dens spil går tilbage til en indbygget emulator, hvis en spiller dem.",
+      "cantUse": "Kan ikke bruges: {{reason}}",
+      "plays": "Spiller {{what}}",
+      "builtIn": "Indbygget",
+      "remove": "Fjern",
+      "bios": "Nogle emulatorer skal bruge en BIOS-fil fra konsollen: læg den i games/system i Matinees datamappe."
     }
   },
   "language": {
@@ -1645,7 +1658,6 @@
     "lagTestHint": "Flyt firkanten med retningsknapperne. Skærmen bliver hvid, mens A eller B holdes nede: film controller og skærm sammen for at måle det.",
     "play": "Spil",
     "pickGame": "Vælg et spil",
-    "pickGameHint": "Spil, du ejer: Game Boy-, Game Boy Color-, Game Boy Advance- og NES-filer, eller zip-filer med et af dem.",
     "up": "En mappe op",
     "emptyFolder": "Ingen mapper eller spil her.",
     "controller": "Controller: {{name}}",
@@ -1665,6 +1677,7 @@
       "server": "Server, ét billede",
       "decode": "Afkodning",
       "fps": "Billeder i sekundet"
-    }
+    },
+    "pickGameHintAny": "Spil du ejer: en spilfil eller en zip med en i."
   }
 }

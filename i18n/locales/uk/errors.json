@@ -287,5 +287,8 @@
   "this_titles_files_cant_be_read_right_now_the_network_share_theyre_on_isnt_answering": "файли цього фільму зараз не прочитати: мережева тека, де вони лежать, не відповідає",
   "too_many_games_are_being_played_right_now": "зараз запущено забагато ігор",
   "cant_find_that_game": "гру не знайдено",
-  "no_emulator_on_this_server_plays_that_game": "жоден емулятор на цьому сервері не запускає цю гру"
+  "no_emulator_on_this_server_plays_that_game": "жоден емулятор на цьому сервері не запускає цю гру",
+  "cant_find_that_emulator": "емулятор не знайдено",
+  "couldnt_save_the_emulator": "не вдалося зберегти емулятор",
+  "that_file_isnt_an_emulator_this_server_can_run_reason": "цей файл не є емулятором, який може запустити цей сервер: {{reason}}"
 }

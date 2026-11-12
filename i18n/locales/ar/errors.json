@@ -287,5 +287,8 @@
   "this_titles_files_cant_be_read_right_now_the_network_share_theyre_on_isnt_answering": "تعذّرت قراءة ملفات هذا العنوان الآن: المجلد المشترك في الشبكة الذي توجد عليه لا يستجيب",
   "too_many_games_are_being_played_right_now": "تُلعب ألعاب كثيرة جدًا الآن",
   "cant_find_that_game": "تعذّر العثور على هذه اللعبة",
-  "no_emulator_on_this_server_plays_that_game": "لا يوجد محاكٍ على هذا الخادم يشغّل هذه اللعبة"
+  "no_emulator_on_this_server_plays_that_game": "لا يوجد محاكٍ على هذا الخادم يشغّل هذه اللعبة",
+  "cant_find_that_emulator": "تعذّر العثور على هذا المحاكي",
+  "couldnt_save_the_emulator": "تعذّر حفظ المحاكي",
+  "that_file_isnt_an_emulator_this_server_can_run_reason": "هذا الملف ليس محاكيًا يستطيع هذا الخادم تشغيله: {{reason}}"
 }

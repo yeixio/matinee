@@ -287,5 +287,8 @@
   "this_titles_files_cant_be_read_right_now_the_network_share_theyre_on_isnt_answering": "τα αρχεία αυτού του τίτλου δεν μπορούν να διαβαστούν αυτή τη στιγμή: ο κοινόχρηστος φάκελος δικτύου όπου βρίσκονται δεν απαντά",
   "too_many_games_are_being_played_right_now": "παίζονται πάρα πολλά παιχνίδια αυτή τη στιγμή",
   "cant_find_that_game": "δεν βρέθηκε αυτό το παιχνίδι",
-  "no_emulator_on_this_server_plays_that_game": "κανένας εξομοιωτής σε αυτόν τον διακομιστή δεν παίζει αυτό το παιχνίδι"
+  "no_emulator_on_this_server_plays_that_game": "κανένας εξομοιωτής σε αυτόν τον διακομιστή δεν παίζει αυτό το παιχνίδι",
+  "cant_find_that_emulator": "δεν βρέθηκε αυτός ο εξομοιωτής",
+  "couldnt_save_the_emulator": "δεν ήταν δυνατή η αποθήκευση του εξομοιωτή",
+  "that_file_isnt_an_emulator_this_server_can_run_reason": "αυτό το αρχείο δεν είναι εξομοιωτής που μπορεί να τρέξει αυτός ο διακομιστής: {{reason}}"
 }

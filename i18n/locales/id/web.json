@@ -1025,7 +1025,20 @@
       "intro": "Main game di server ini dan alirkan ke perangkat apa pun dengan kontroler. Ini pratinjau untuk admin: coba rasakan.",
       "ready": "Siap, dengan emulator untuk {{systems}}.",
       "notSetUp": "Tidak tersedia: server ini tidak punya pemutar game dan emulator. Image Docker memilikinya.",
-      "open": "Coba sebuah game"
+      "open": "Coba sebuah game",
+      "emulators": "Emulator",
+      "emulatorsIntro": "Matinee dilengkapi emulator. Kamu bisa menambahkan milikmu sendiri: core libretro yang dibuat untuk {{platform}} (file .so). Matinee menanyakan game apa yang bisa dimainkannya, lalu memakainya untuk game itu sebelum emulator bawaan.",
+      "emulatorsTrust": "Emulator adalah program yang berjalan di server ini. Tambahkan hanya yang kamu percayai.",
+      "addEmulator": "Tambah emulator",
+      "adding": "Menambahkan…",
+      "added": "{{name}} ditambahkan.",
+      "couldntAdd": "Tidak bisa menambahkan emulator.",
+      "removeConfirm": "Hapus {{name}}? Game-gamenya kembali ke emulator bawaan, jika ada.",
+      "cantUse": "Tidak bisa dipakai: {{reason}}",
+      "plays": "Memainkan {{what}}",
+      "builtIn": "Bawaan",
+      "remove": "Hapus",
+      "bios": "Beberapa emulator butuh file BIOS dari konsol: taruh di games/system dalam folder data Matinee."
     }
   },
   "language": {
@@ -1633,7 +1646,6 @@
     "lagTestHint": "Gerakkan kotak dengan d-pad. Layar menjadi putih selama A atau B ditekan: rekam kontroler dan layar bersama untuk mengukurnya.",
     "play": "Main",
     "pickGame": "Pilih game",
-    "pickGameHint": "Game milikmu: file Game Boy, Game Boy Color, Game Boy Advance, dan NES, atau zip berisi salah satunya.",
     "up": "Naik satu folder",
     "emptyFolder": "Tidak ada folder atau game di sini.",
     "controller": "Kontroler: {{name}}",
@@ -1653,6 +1665,7 @@
       "server": "Server, satu bingkai",
       "decode": "Dekode",
       "fps": "Bingkai per detik"
-    }
+    },
+    "pickGameHintAny": "Game milikmu: file game, atau zip yang berisi satu."
   }
 }

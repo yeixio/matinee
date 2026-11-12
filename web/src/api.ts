@@ -1498,9 +1498,23 @@ function logParams(q: LogQuery): string {
 /** Which systems this server plays games for (Settings → Streaming → Games). */
 export interface GameStreaming {
   available: boolean
-  systems: { key: string; name: string; extensions: string[] }[]
+  systems: { key: string; name: string; emulator?: string; extensions: string[]; analog?: boolean; custom?: boolean }[]
   lagTest: boolean
   playing?: number
+  /** The kind of emulator file this server runs, like "Linux x86_64". */
+  platform?: string
+}
+
+/** An emulator on the server: built in, or one an admin added. */
+export interface GameEmulator {
+  file: string
+  name: string
+  version?: string
+  systems?: string[]
+  extensions: string[]
+  builtIn: boolean
+  /** Why an added emulator can't be used. */
+  error?: string
 }
 
 export interface GameFolder {
@@ -1514,8 +1528,23 @@ export const api = {
   gameStreaming: () => request<GameStreaming>('GET', '/api/v1/games/streaming'),
   gameFiles: (path?: string) => request<GameFolder>('GET', `/api/v1/games/files${path ? `?path=${encodeURIComponent(path)}` : ''}`),
   playGame: (body: { path?: string; lagTest?: boolean; offer: string }) =>
-    request<{ id: string; answer: string; system: string; width: number; height: number; aspect: number; fps: number }>('POST', '/api/v1/games/play', body),
+    request<{ id: string; answer: string; system: string; analog?: boolean; width: number; height: number; aspect: number; fps: number }>(
+      'POST',
+      '/api/v1/games/play',
+      body,
+    ),
   stopGame: (id: string) => request<void>('DELETE', `/api/v1/games/play/${encodeURIComponent(id)}`),
+  gameEmulators: () => request<{ emulators: GameEmulator[]; platform: string }>('GET', '/api/v1/games/emulators'),
+  addGameEmulator: async (file: File) => {
+    const res = await fetch(`/api/v1/games/emulators?file=${encodeURIComponent(file.name)}`, {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/octet-stream' },
+      body: file,
+    })
+    return response<GameEmulator>(res)
+  },
+  removeGameEmulator: (file: string) => request<void>('DELETE', `/api/v1/games/emulators/${encodeURIComponent(file)}`),
   server: () => request<{ version: string; apiVersion: number; name?: string; remoteURL?: string }>('GET', '/api/v1/server'),
   setup: () => request<{ needsSetup: boolean }>('GET', '/api/v1/setup'),
   createAdmin: (username: string, password: string) =>

@@ -1029,7 +1029,20 @@
       "intro": "Spill på denne serveren og strøm til alle enheter, med kontroller. Dette er en forhåndsvisning for administratorer: prøv hvordan det føles.",
       "ready": "Klar, med emulatorer for {{systems}}.",
       "notSetUp": "Ikke tilgjengelig: serveren mangler spillkjøreren og emulatorene. Docker-bildet har dem.",
-      "open": "Prøv et spill"
+      "open": "Prøv et spill",
+      "emulators": "Emulatorer",
+      "emulatorsIntro": "Matinee har innebygde emulatorer. Du kan legge til dine egne: en libretro-core bygget for {{platform}} (en .so-fil). Matinee spør hvilke spill den spiller, og bruker den til dem før de innebygde.",
+      "emulatorsTrust": "En emulator er et program som kjører på denne serveren. Legg bare til en du stoler på.",
+      "addEmulator": "Legg til en emulator",
+      "adding": "Legger til…",
+      "added": "{{name}} er lagt til.",
+      "couldntAdd": "Kunne ikke legge til emulatoren.",
+      "removeConfirm": "Fjerne {{name}}? Spillene går tilbake til en innebygd emulator, hvis en spiller dem.",
+      "cantUse": "Kan ikke brukes: {{reason}}",
+      "plays": "Spiller {{what}}",
+      "builtIn": "Innebygd",
+      "remove": "Fjern",
+      "bios": "Noen emulatorer trenger en BIOS-fil fra konsollen: legg den i games/system i Matinees datamappe."
     }
   },
   "language": {
@@ -1645,7 +1658,6 @@
     "lagTestHint": "Flytt firkanten med styrekorset. Skjermen blir hvit mens A eller B holdes inne: film kontrolleren og skjermen sammen for å måle.",
     "play": "Spill",
     "pickGame": "Velg et spill",
-    "pickGameHint": "Spill du eier: Game Boy-, Game Boy Color-, Game Boy Advance- og NES-filer, eller zip-filer med ett av dem.",
     "up": "Opp en mappe",
     "emptyFolder": "Ingen mapper eller spill her.",
     "controller": "Kontroller: {{name}}",
@@ -1665,6 +1677,7 @@
       "server": "Server, ett bilde",
       "decode": "Dekoding",
       "fps": "Bilder per sekund"
-    }
+    },
+    "pickGameHintAny": "Spill du eier: en spillfil eller en zip med en i."
   }
 }

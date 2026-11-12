@@ -1029,7 +1029,20 @@
       "intro": "Spela spel på den här servern och strömma dem till alla enheter, med handkontroll. Det här är en förhandsversion för administratörer: prova hur det känns.",
       "ready": "Klar, med emulatorer för {{systems}}.",
       "notSetUp": "Inte tillgängligt: servern saknar spelkörare och emulatorer. Docker-avbildningen har dem.",
-      "open": "Prova ett spel"
+      "open": "Prova ett spel",
+      "emulators": "Emulatorer",
+      "emulatorsIntro": "Matinee har inbyggda emulatorer. Du kan lägga till egna: en libretro-core byggd för {{platform}} (en .so-fil). Matinee frågar vilka spel den spelar och använder den för dem före de inbyggda.",
+      "emulatorsTrust": "En emulator är ett program som körs på den här servern. Lägg bara till en du litar på.",
+      "addEmulator": "Lägg till en emulator",
+      "adding": "Lägger till…",
+      "added": "{{name}} har lagts till.",
+      "couldntAdd": "Kunde inte lägga till emulatorn.",
+      "removeConfirm": "Ta bort {{name}}? Dess spel går tillbaka till en inbyggd emulator om någon spelar dem.",
+      "cantUse": "Kan inte användas: {{reason}}",
+      "plays": "Spelar {{what}}",
+      "builtIn": "Inbyggd",
+      "remove": "Ta bort",
+      "bios": "Vissa emulatorer behöver en BIOS-fil från konsolen: lägg den i games/system i Matinees datamapp."
     }
   },
   "language": {
@@ -1645,7 +1658,6 @@
     "lagTestHint": "Flytta fyrkanten med styrkorset. Skärmen blir vit medan A eller B hålls in: filma handkontrollen och skärmen tillsammans för att mäta.",
     "play": "Spela",
     "pickGame": "Välj ett spel",
-    "pickGameHint": "Spel du äger: Game Boy-, Game Boy Color-, Game Boy Advance- och NES-filer, eller zip-filer med ett av dem.",
     "up": "Upp en mapp",
     "emptyFolder": "Inga mappar eller spel här.",
     "controller": "Handkontroll: {{name}}",
@@ -1665,6 +1677,7 @@
       "server": "Server, en bildruta",
       "decode": "Avkodning",
       "fps": "Bildrutor per sekund"
-    }
+    },
+    "pickGameHintAny": "Spel du äger: en spelfil eller en zip med en i."
   }
 }

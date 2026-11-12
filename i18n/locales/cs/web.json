@@ -1037,7 +1037,20 @@
       "intro": "Hrajte hry na tomto serveru a streamujte je do jakéhokoli zařízení s ovladačem. Je to náhled pro správce: vyzkoušejte to.",
       "ready": "Připraveno, s emulátory pro {{systems}}.",
       "notSetUp": "Nedostupné: na serveru chybí spouštěč her a emulátory. Obraz Dockeru je obsahuje.",
-      "open": "Vyzkoušet hru"
+      "open": "Vyzkoušet hru",
+      "emulators": "Emulátory",
+      "emulatorsIntro": "Matinee má vestavěné emulátory. Můžete přidat vlastní: jádro libretro sestavené pro {{platform}} (soubor .so). Matinee se ho zeptá, které hry hraje, a použije ho pro ně přednostně.",
+      "emulatorsTrust": "Emulátor je program, který běží na tomto serveru. Přidávejte jen ty, kterým důvěřujete.",
+      "addEmulator": "Přidat emulátor",
+      "adding": "Přidávání…",
+      "added": "{{name}} přidán.",
+      "couldntAdd": "Emulátor se nepodařilo přidat.",
+      "removeConfirm": "Odebrat {{name}}? Jeho hry se vrátí k vestavěnému emulátoru, pokud nějaký existuje.",
+      "cantUse": "Nelze použít: {{reason}}",
+      "plays": "Hraje {{what}}",
+      "builtIn": "Vestavěný",
+      "remove": "Odebrat",
+      "bios": "Některé emulátory potřebují soubor BIOS z konzole: vložte ho do games/system v datové složce Matinee."
     }
   },
   "language": {
@@ -1669,7 +1682,6 @@
     "lagTestHint": "Pohybujte čtvercem pomocí křížového ovladače. Obrazovka zbělá, dokud držíte A nebo B: natočte ovladač a obrazovku zároveň a změřte to.",
     "play": "Hrát",
     "pickGame": "Vyberte hru",
-    "pickGameHint": "Vaše hry: soubory Game Boy, Game Boy Color, Game Boy Advance a NES nebo zipy s jedním z nich.",
     "up": "O složku výš",
     "emptyFolder": "Žádné složky ani hry.",
     "controller": "Ovladač: {{name}}",
@@ -1689,6 +1701,7 @@
       "server": "Server, jeden snímek",
       "decode": "Dekódování",
       "fps": "Snímky za sekundu"
-    }
+    },
+    "pickGameHintAny": "Hry, které vlastníte: soubor hry nebo zip, který ho obsahuje."
   }
 }

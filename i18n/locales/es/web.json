@@ -1033,7 +1033,20 @@
       "intro": "Juega en este servidor y transmite a cualquier dispositivo con un mando. Es una vista previa para administradores: pruébala.",
       "ready": "Listo, con emuladores para {{systems}}.",
       "notSetUp": "No disponible: este servidor no tiene el ejecutor de juegos ni los emuladores. La imagen de Docker los incluye.",
-      "open": "Probar un juego"
+      "open": "Probar un juego",
+      "emulators": "Emuladores",
+      "emulatorsIntro": "Matinee incluye emuladores. Puedes añadir los tuyos: un core de libretro compilado para {{platform}} (un archivo .so). Matinee le pregunta qué juegos ejecuta y lo usa para ellos antes que los incluidos.",
+      "emulatorsTrust": "Un emulador es un programa que se ejecuta en este servidor. Añade solo uno en el que confíes.",
+      "addEmulator": "Añadir un emulador",
+      "adding": "Añadiendo…",
+      "added": "{{name}} añadido.",
+      "couldntAdd": "No se pudo añadir el emulador.",
+      "removeConfirm": "¿Quitar {{name}}? Sus juegos vuelven a un emulador incluido, si alguno los ejecuta.",
+      "cantUse": "No se puede usar: {{reason}}",
+      "plays": "Ejecuta {{what}}",
+      "builtIn": "Incluido",
+      "remove": "Quitar",
+      "bios": "Algunos emuladores necesitan un archivo BIOS de la consola: ponlo en games/system dentro de la carpeta de datos de Matinee."
     }
   },
   "language": {
@@ -1657,7 +1670,6 @@
     "lagTestHint": "Mueve el cuadrado con la cruceta. La pantalla se pone blanca mientras mantienes A o B: graba el mando y la pantalla juntos para medirlo.",
     "play": "Jugar",
     "pickGame": "Elige un juego",
-    "pickGameHint": "Juegos tuyos: archivos de Game Boy, Game Boy Color, Game Boy Advance y NES, o zips que contengan uno.",
     "up": "Subir una carpeta",
     "emptyFolder": "No hay carpetas ni juegos aquí.",
     "controller": "Mando: {{name}}",
@@ -1677,6 +1689,7 @@
       "server": "Servidor, un fotograma",
       "decode": "Decodificación",
       "fps": "Fotogramas por segundo"
-    }
+    },
+    "pickGameHintAny": "Juegos que tienes: un archivo de juego o un zip que contenga uno."
   }
 }

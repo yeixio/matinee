@@ -287,5 +287,8 @@
   "this_titles_files_cant_be_read_right_now_the_network_share_theyre_on_isnt_answering": "אי אפשר לקרוא כרגע את הקבצים של הכותר הזה: תיקיית הרשת המשותפת שהם נמצאים בה לא עונה",
   "too_many_games_are_being_played_right_now": "יותר מדי משחקים פועלים כרגע",
   "cant_find_that_game": "המשחק לא נמצא",
-  "no_emulator_on_this_server_plays_that_game": "אין אמולטור בשרת הזה שמריץ את המשחק"
+  "no_emulator_on_this_server_plays_that_game": "אין אמולטור בשרת הזה שמריץ את המשחק",
+  "cant_find_that_emulator": "האמולטור לא נמצא",
+  "couldnt_save_the_emulator": "לא ניתן היה לשמור את האמולטור",
+  "that_file_isnt_an_emulator_this_server_can_run_reason": "הקובץ הזה אינו אמולטור שהשרת הזה יכול להריץ: {{reason}}"
 }

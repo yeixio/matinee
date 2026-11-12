@@ -23,12 +23,14 @@ import (
 
 // Config says where the pieces are.
 type Config struct {
-	FFmpeg    string
-	Runner    string // matinee-game-runner
-	CoreDir   string // the emulator cores (*.so)
-	SaveDir   string // games' saves, a folder per person under it
-	SystemDir string // BIOS files some systems need
-	WorkDir   string // games unpacked from zips while they're played
+	FFmpeg  string
+	Runner  string // matinee-game-runner
+	CoreDir string // the emulator cores (*.so) built into Matinee
+	// UserCoreDir has the emulator cores an admin added (see emulators.go).
+	UserCoreDir string
+	SaveDir     string // games' saves, a folder per person under it
+	SystemDir   string // BIOS files some systems need
+	WorkDir     string // games unpacked from zips while they're played
 	// Port is the one UDP port every stream goes through, so a firewall or
 	// a container needs only that one opened; 0 picks ports at random.
 	Port int
@@ -48,6 +50,9 @@ type Manager struct {
 
 	mu       sync.Mutex
 	sessions map[string]*Session
+
+	coresMu   sync.Mutex
+	userCores map[string]userCore // by file name
 }
 
 // NewManager sets up WebRTC on cfg.Port.
@@ -108,8 +113,11 @@ func (m *Manager) Close() {
 
 // Game is what to play.
 type Game struct {
-	Core string // core file name in CoreDir
-	Path string // the game file; empty for a core that needs none
+	// System is what plays it: its Core and Options. Leave it empty, with
+	// LagTest set, for the lag test.
+	System  System
+	LagTest bool
+	Path    string // the game file; empty for the lag test
 	// Owner is whose saves these are; one person plays one game at a time.
 	Owner string
 }
@@ -140,8 +148,11 @@ type Session struct {
 // Start starts g and answers the player's WebRTC offer. The game itself
 // begins once the player has connected.
 func (m *Manager) Start(ctx context.Context, g Game, offer string) (*Session, string, error) {
-	core := filepath.Join(m.cfg.CoreDir, filepath.Base(g.Core))
-	if _, err := os.Stat(core); err != nil {
+	core := g.System.Core
+	if g.LagTest {
+		core = filepath.Join(m.cfg.CoreDir, LagTest)
+	}
+	if _, err := os.Stat(core); core == "" || err != nil {
 		return nil, "", fmt.Errorf("no emulator for this game on this server")
 	}
 	// One game per person: starting another ends the one before.
@@ -176,7 +187,7 @@ func (m *Manager) Start(ctx context.Context, g Game, offer string) (*Session, st
 		return nil, "", err
 	}
 	path := g.Path
-	if strings.EqualFold(filepath.Ext(path), ".zip") {
+	if strings.EqualFold(filepath.Ext(path), ".zip") && !g.System.playsZips() {
 		if path, err = unzipGame(path, s.work); err != nil {
 			return nil, "", err
 		}
@@ -186,7 +197,7 @@ func (m *Manager) Start(ctx context.Context, g Game, offer string) (*Session, st
 		return nil, "", err
 	}
 	os.MkdirAll(m.cfg.SystemDir, 0o755)
-	if s.runner, err = StartRunner(m.cfg.Runner, core, path, saves, m.cfg.SystemDir); err != nil {
+	if s.runner, err = StartRunner(m.cfg.Runner, core, path, saves, m.cfg.SystemDir, g.System.Options); err != nil {
 		return nil, "", err
 	}
 	s.Info = s.runner.Info
@@ -340,6 +351,7 @@ func (s *Session) sendStats(ctx context.Context) {
 //
 //	1 port lo hi   buttons held (see Runner.SetButtons)
 //	2 …            a ping: sent straight back, to time the round trip
+//	3 port axis v  an analog stick (see Runner.SetStick), v a signed byte
 func (s *Session) input(dc *webrtc.DataChannel, b []byte) {
 	if len(b) == 0 {
 		return
@@ -351,6 +363,10 @@ func (s *Session) input(dc *webrtc.DataChannel, b []byte) {
 		}
 	case 2:
 		dc.Send(b)
+	case 3:
+		if len(b) >= 4 {
+			s.runner.SetStick(int(b[1]), int(b[2]), int8(b[3]))
+		}
 	}
 }
 
@@ -421,49 +437,75 @@ func safeName(s string) string {
 	return s
 }
 
-// maxUnzipped is the biggest game we'll unpack from a zip. The cartridge
-// systems played this way are all far smaller.
-const maxUnzipped = 512 << 20
+// maxUnzipped is the biggest game we'll unpack from a zip: a cartridge is
+// far smaller, a set of PlayStation discs about this big.
+const maxUnzipped = 4 << 30
 
-// unzipGame unpacks the game from a zip into dir and returns its path: the
-// zip's biggest file, which is the game in a zip that also holds a readme.
+// unzipGame unpacks the game from a zip into dir and returns its path (see
+// zipGame). A disc's tracks are unpacked with it, beside it.
 func unzipGame(path, dir string) (string, error) {
 	zr, err := zip.OpenReader(path)
 	if err != nil {
 		return "", fmt.Errorf("can't open the zip: %w", err)
 	}
 	defer zr.Close()
-	var best *zip.File
-	for _, f := range zr.File {
-		if f.FileInfo().IsDir() || strings.HasPrefix(filepath.Base(f.Name), ".") {
-			continue
-		}
-		if best == nil || f.UncompressedSize64 > best.UncompressedSize64 {
-			best = f
-		}
-	}
+	best, whole := zipGame(zr.File)
 	if best == nil {
 		return "", fmt.Errorf("the zip is empty")
 	}
-	if best.UncompressedSize64 > maxUnzipped {
+	files := []*zip.File{best}
+	if whole {
+		files = nil
+		for _, f := range zr.File {
+			if !f.FileInfo().IsDir() {
+				files = append(files, f)
+			}
+		}
+	}
+	var total uint64
+	for _, f := range files {
+		total += f.UncompressedSize64
+	}
+	if total > maxUnzipped {
 		return "", fmt.Errorf("the game in the zip is too big")
 	}
-	rc, err := best.Open()
+	var out string
+	left := int64(maxUnzipped)
+	for _, f := range files {
+		// A lone game is named like the zip, so saves are named after the
+		// game, with the file's own extension, which some emulators go by.
+		// A disc's files keep their names, which its .cue refers to.
+		name := filepath.Base(f.Name)
+		if !whole {
+			name = strings.TrimSuffix(filepath.Base(path), filepath.Ext(path)) + filepath.Ext(f.Name)
+		}
+		to := filepath.Join(dir, safeName(name))
+		n, err := unzipFile(f, to, left)
+		if err != nil {
+			return "", err
+		}
+		left -= n
+		if f == best {
+			out = to
+		}
+	}
+	return out, nil
+}
+
+func unzipFile(f *zip.File, to string, limit int64) (int64, error) {
+	rc, err := f.Open()
 	if err != nil {
-		return "", err
+		return 0, err
 	}
 	defer rc.Close()
-	// Named like the zip, so saves are named after the game, with the
-	// file's own extension, which some emulators go by.
-	name := strings.TrimSuffix(filepath.Base(path), filepath.Ext(path)) + filepath.Ext(best.Name)
-	out := filepath.Join(dir, safeName(name))
-	f, err := os.Create(out)
+	w, err := os.Create(to)
 	if err != nil {
-		return "", err
+		return 0, err
 	}
-	if _, err := io.Copy(f, io.LimitReader(rc, maxUnzipped)); err != nil {
-		f.Close()
-		return "", err
+	n, err := io.Copy(w, io.LimitReader(rc, limit))
+	if err != nil {
+		w.Close()
+		return n, err
 	}
-	return out, f.Close()
+	return n, w.Close()
 }

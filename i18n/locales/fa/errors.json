@@ -287,5 +287,8 @@
   "this_titles_files_cant_be_read_right_now_the_network_share_theyre_on_isnt_answering": "فایل‌های این عنوان الان خوانده نمی‌شوند: پوشه اشتراکی شبکه‌ای که روی آن هستند پاسخ نمی‌دهد",
   "too_many_games_are_being_played_right_now": "الان بازی‌های زیادی در حال اجراست",
   "cant_find_that_game": "این بازی پیدا نشد",
-  "no_emulator_on_this_server_plays_that_game": "هیچ شبیه‌سازی روی این سرور این بازی را اجرا نمی‌کند"
+  "no_emulator_on_this_server_plays_that_game": "هیچ شبیه‌سازی روی این سرور این بازی را اجرا نمی‌کند",
+  "cant_find_that_emulator": "این شبیه‌ساز پیدا نشد",
+  "couldnt_save_the_emulator": "ذخیرهٔ شبیه‌ساز ممکن نشد",
+  "that_file_isnt_an_emulator_this_server_can_run_reason": "این فایل شبیه‌سازی نیست که این سرور بتواند اجرا کند: {{reason}}"
 }

@@ -287,5 +287,8 @@
   "this_titles_files_cant_be_read_right_now_the_network_share_theyre_on_isnt_answering": "इस शीर्षक की फ़ाइलें अभी पढ़ी नहीं जा सकतीं: जिस नेटवर्क शेयर पर वे हैं, वह जवाब नहीं दे रहा",
   "too_many_games_are_being_played_right_now": "अभी बहुत सारे गेम चल रहे हैं",
   "cant_find_that_game": "वह गेम नहीं मिला",
-  "no_emulator_on_this_server_plays_that_game": "इस सर्वर का कोई एम्युलेटर यह गेम नहीं चलाता"
+  "no_emulator_on_this_server_plays_that_game": "इस सर्वर का कोई एम्युलेटर यह गेम नहीं चलाता",
+  "cant_find_that_emulator": "वह एमुलेटर नहीं मिला",
+  "couldnt_save_the_emulator": "एमुलेटर सहेजा नहीं जा सका",
+  "that_file_isnt_an_emulator_this_server_can_run_reason": "यह फ़ाइल ऐसा एमुलेटर नहीं है जिसे यह सर्वर चला सके: {{reason}}"
 }
