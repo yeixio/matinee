@@ -53,6 +53,18 @@ Admins can also play any game file on the server without adding it to a library:
 
 The controller buttons go by where they sit, not by their letters: the bottom face button is B and the right one is A, as on the consoles. For the N64 the left stick is the N64's stick and the right stick its C buttons; on the keyboard the arrow keys move the stick.
 
+<!-- since: v0.2.4 -->
+### In the apps
+
+The iPhone, iPad and Android apps, Android TV, Fire TV, and Samsung and LG TVs play games from your Games library too. Open a game and press **Play**.
+
+- **On a phone or tablet** the game turns sideways and shows buttons on the screen: a d-pad, A, B, X, Y, L, R, Select and Start. Use both thumbs at once. On the N64 the d-pad moves the stick.
+- **With a controller**, pair it with the phone, tablet or TV in its Bluetooth settings first. The buttons on the screen make way when it connects; tap the screen to bring them back. Up to four controllers play at once, each as its own player.
+- **To stop**, press the **×** at the top, the TV remote's **Back**, or the controller's own home button.
+
+Apple TV doesn't play games yet.
+<!-- /since -->
+
 ## How fast it is
 
 Every press goes to the server and the picture comes back, so there's a little more delay than playing on the device itself. On a home network it's usually a few hundredths of a second, which suits most games. A wired connection helps the most.

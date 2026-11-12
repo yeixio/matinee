@@ -647,11 +647,11 @@
               "since": "v0.2.4",
               "apps": {
                 "web": true,
-                "ios": "matinee#394",
-                "android": "matinee#394",
+                "ios": true,
+                "android": true,
                 "appletv": "matinee#394",
-                "androidtv": "matinee#394",
-                "tvweb": "matinee#394"
+                "androidtv": true,
+                "tvweb": true
               }
             },
             {
@@ -660,11 +660,11 @@
               "since": "v0.2.4",
               "apps": {
                 "web": true,
-                "ios": "matinee#394",
-                "android": "matinee#394",
+                "ios": true,
+                "android": true,
                 "appletv": "matinee#394",
-                "androidtv": "matinee#394",
-                "tvweb": "matinee#394"
+                "androidtv": true,
+                "tvweb": true
               }
             },
             {
