@@ -48,6 +48,8 @@ export function FilterBar({ value: f, onChange, libraryId, libraryKind }: Props)
   const count = activeCount(f)
   const set = (patch: Partial<ItemFilter>) => onChange({ ...f, ...patch })
   const music = libraryKind === 'music'
+  const games = libraryKind === 'games'
+  const platforms = options?.platforms ?? []
 
   return (
     <div className="space-y-3">
@@ -64,7 +66,10 @@ export function FilterBar({ value: f, onChange, libraryId, libraryKind }: Props)
           <span className="hidden sm:inline">{t('filters.title')}</span>
           {count > 0 && <span className="rounded-full bg-accent px-1.5 text-xs font-semibold text-on-accent">{count}</span>}
         </button>
-        {!music && (
+        {games && platforms.length > 1 && (
+          <PlatformChips platforms={platforms} selected={f.platform} onChange={(platform) => set({ platform })} />
+        )}
+        {!music && !games && (
           <Chip active={f.watched === 'unwatched'} onClick={() => set({ watched: f.watched === 'unwatched' ? undefined : 'unwatched' })}>
             {t('common:watched.unwatched')}
           </Chip>
@@ -101,6 +106,34 @@ export function FilterBar({ value: f, onChange, libraryId, libraryKind }: Props)
       {open && (
         <FilterPanel value={f} onChange={onChange} options={options} libraryId={libraryId} libraryKind={libraryKind} onClose={() => setOpen(false)} />
       )}
+    </div>
+  )
+}
+
+// PlatformChips picks one of a Games library's systems, or all of them,
+// in a row that scrolls sideways when there are many.
+function PlatformChips({ platforms, selected, onChange }: {
+  platforms: FilterValue[]
+  selected?: string[]
+  onChange: (platform: string[] | undefined) => void
+}) {
+  const { t } = useTranslation()
+  const sorted = [...platforms].sort((a, b) => a.value.localeCompare(b.value))
+  return (
+    <div className="-my-1 flex max-w-full min-w-0 flex-1 gap-2 overflow-x-auto py-1 [scrollbar-width:none]" role="group" aria-label={t('filters.section.platform')}>
+      <Chip active={!selected?.length} onClick={() => onChange(undefined)}>
+        {t('filters.all')}
+      </Chip>
+      {sorted.map((p) => (
+        <Chip
+          key={p.value}
+          active={selected?.length === 1 && selected[0] === p.value}
+          onClick={() => onChange(selected?.length === 1 && selected[0] === p.value ? undefined : [p.value])}
+          title={t('common:count.titles', { count: p.count })}
+        >
+          {p.value}
+        </Chip>
+      ))}
     </div>
   )
 }
@@ -152,7 +185,7 @@ function ActiveChips({ f, options, onChange, shows }: { f: ItemFilter; options?:
   const set = (patch: Partial<ItemFilter>) => onChange({ ...f, ...patch })
   const chips: ReactNode[] = []
   const add = (key: string, label: string, patch: Partial<ItemFilter>) => chips.push(<Removable key={key} label={label} onRemove={() => set(patch)} />)
-  const list = <K extends 'genre' | 'notGenre' | 'tag' | 'notTag' | 'studio' | 'country' | 'language' | 'certification'>(
+  const list = <K extends 'genre' | 'notGenre' | 'tag' | 'notTag' | 'studio' | 'platform' | 'country' | 'language' | 'certification'>(
     k: K,
     label: (v: string) => string,
   ) => f[k]?.forEach((v) => add(`${k}:${v}`, label(v), { [k]: toggleIn(f[k], v) }))
@@ -182,6 +215,7 @@ function ActiveChips({ f, options, onChange, shows }: { f: ItemFilter; options?:
     chips.push(<PersonChip key={`p${id}`} id={id} kind="with" options={options} onRemove={() => set({ person: toggleIn(f.person, id) })} />),
   )
   list('studio', (v) => v)
+  list('platform', (v) => v)
   list('country', (v) => v)
   list('language', (v) => v)
   list('certification', (v) => t('filters.chip.certification', { rating: v }))
@@ -257,7 +291,7 @@ function FilterPanel({ value: f, onChange, options, libraryId, libraryKind, onCl
   const set = (patch: Partial<ItemFilter>) => onChange({ ...f, ...patch })
   const shows = libraryKind === 'tv'
   const music = libraryKind === 'music'
-  const strs = (k: 'genre' | 'tag' | 'studio' | 'country' | 'language' | 'certification') => ({
+  const strs = (k: 'genre' | 'tag' | 'studio' | 'platform' | 'country' | 'language' | 'certification') => ({
     selected: f[k] ?? [],
     onToggle: (v: string) => set({ [k]: toggleIn(f[k], v) }),
   })
@@ -398,6 +432,11 @@ function FilterPanel({ value: f, onChange, options, libraryId, libraryKind, onCl
               set={set}
               shows={shows}
             />
+          )}
+          {!!options?.platforms?.length && (
+            <Section title={t('filters.section.platform')}>
+              <Values values={options.platforms} {...strs('platform')} />
+            </Section>
           )}
           {!!options?.studios.length && (
             <Section title={shows ? t('filters.section.network') : t('filters.section.studio')}>

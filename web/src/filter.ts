@@ -42,6 +42,7 @@ export type ItemFilter = {
   series?: string[]
   narrator?: string[]
   label?: string[]
+  platform?: string[]
   sort?: SortField
   order?: 'asc' | 'desc'
   limit?: number
@@ -81,6 +82,7 @@ const fields: Record<keyof ItemFilter, FieldType> = {
   series: 'strings',
   narrator: 'strings',
   label: 'strings',
+  platform: 'strings',
   sort: 'string',
   order: 'string',
   limit: 'number',

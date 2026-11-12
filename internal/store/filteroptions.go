@@ -134,6 +134,7 @@ type FilterOptions struct {
 	Languages      []FilterValue  `json:"languages"`
 	Certifications []FilterValue  `json:"certifications"`
 	Collections    []FilterValue  `json:"collections"`
+	Platforms      []FilterValue  `json:"platforms"` // games' systems
 	Directors      []FilterPerson `json:"directors"` // the most frequent
 	Cast           []FilterPerson `json:"cast"`      // the most frequent
 	YearMin        int            `json:"yearMin,omitempty"`
@@ -164,8 +165,13 @@ func (s *Store) FilterOptions(ctx context.Context, libraryID int64) (FilterOptio
 	if err != nil {
 		return o, err
 	}
-	genres, tags := map[string]int{}, map[string]int{}
+	genres, tags, platforms := map[string]int{}, map[string]int{}, map[string]int{}
 	for _, it := range items {
+		for _, f := range it.Facts {
+			if f.Label == FactPlatform && it.Kind == "game" {
+				platforms[f.Value]++
+			}
+		}
 		for _, g := range it.Genres {
 			genres[g]++
 		}
@@ -184,6 +190,7 @@ func (s *Store) FilterOptions(ctx context.Context, libraryID int64) (FilterOptio
 		o.HasRuntimes = o.HasRuntimes || it.DurationMs != nil || it.Kind == "show"
 	}
 	o.Genres, o.Tags = sortedValues(genres, nil), sortedValues(tags, nil)
+	o.Platforms = sortedValues(platforms, nil)
 
 	terms := map[string]map[string]int{}
 	rows, err := s.db.QueryContext(ctx, `

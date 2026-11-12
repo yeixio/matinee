@@ -360,6 +360,7 @@
       "quality": "Kwaliteit",
       "network": "Zender of studio",
       "studio": "Studio",
+      "platform": "Platform",
       "ageRating": "Leeftijdsclassificatie",
       "language": "Oorspronkelijke taal",
       "country": "Land",

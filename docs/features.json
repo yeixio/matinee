@@ -668,6 +668,19 @@
               }
             },
             {
+              "name": "Pick games by system",
+              "doc": "/docs/server/games/#picking-a-system",
+              "since": "v0.2.6",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
               "name": "Add your own game emulators",
               "doc": "/docs/server/games/#adding-your-own-emulator",
               "since": "v0.2.4",

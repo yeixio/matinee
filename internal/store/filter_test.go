@@ -18,7 +18,7 @@ import (
 func TestItemFilterRoundTrip(t *testing.T) {
 	q, _ := url.ParseQuery("genre=Comedy&genre=Drama&notGenre=Horror&yearMin=1980&yearMax=1989&releasedWithin=90" +
 		"&addedAfter=2026-01-01&ratingMin=7.5&runtimeMax=95&watched=unwatched&tag=4k&tag=hdr&person=1,2&director=3" +
-		"&studio=A24&country=Japan&language=Japanese&certification=PG-13&collection=8091&watchList=true&sort=year&order=asc&limit=50&q=star&kind=movie&library=4&other=x")
+		"&studio=A24&country=Japan&language=Japanese&certification=PG-13&collection=8091&platform=Game+Boy&watchList=true&sort=year&order=asc&limit=50&q=star&kind=movie&library=4&other=x")
 	f, err := store.ParseItemFilter(q)
 	if err != nil {
 		t.Fatal(err)
@@ -253,3 +253,50 @@ func TestFilterItems(t *testing.T) {
 }
 
 func itoa(n int64) string { return strconv.FormatInt(n, 10) }
+
+// Games are filtered by the system they're for, and a library's filters
+// list its systems.
+func TestFilterGamesByPlatform(t *testing.T) {
+	db := storetest.Open(t)
+	ctx := context.Background()
+	user, _ := db.CreateUser(ctx, "mike", "hash", true)
+	lib, _ := db.CreateLibrary(ctx, "Games", "games", []string{"/g"})
+	game := func(title, system string) {
+		if _, err := db.UpsertFile(ctx, store.Item{LibraryID: lib.ID, Kind: "game", Title: title, Path: "/g/" + title,
+			Facts: []store.Fact{{Label: store.FactPlatform, Value: system}, {Label: "genre", Value: "Platform"}}}); err != nil {
+			t.Fatal(err)
+		}
+	}
+	game("Tetris", "Game Boy")
+	game("Kirby", "Game Boy")
+	game("Sonic", "Sega Genesis / Mega Drive")
+	game("Zelda", "Super Nintendo")
+	titles := func(platforms ...string) []string {
+		items, err := db.FilterItems(ctx, user.ID, store.ItemFilter{Library: []int64{lib.ID}, Platform: platforms})
+		if err != nil {
+			t.Fatal(err)
+		}
+		var out []string
+		for _, it := range items {
+			out = append(out, it.Title)
+		}
+		slices.Sort(out)
+		return out
+	}
+	if got := titles("Game Boy"); !slices.Equal(got, []string{"Kirby", "Tetris"}) {
+		t.Fatalf("Game Boy: %v", got)
+	}
+	if got := titles("Sega Genesis / Mega Drive", "Super Nintendo"); !slices.Equal(got, []string{"Sonic", "Zelda"}) {
+		t.Fatalf("Genesis and SNES: %v", got)
+	}
+	if got := titles("Game"); len(got) != 0 {
+		t.Fatalf("part of a name: %v", got)
+	}
+	o, err := db.FilterOptions(ctx, lib.ID)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(o.Platforms) != 3 || o.Platforms[0] != (store.FilterValue{Value: "Game Boy", Count: 2}) {
+		t.Fatalf("platforms: %+v", o.Platforms)
+	}
+}

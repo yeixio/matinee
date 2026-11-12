@@ -497,6 +497,7 @@ export type FilterOptions = {
   languages: FilterValue[]
   certifications: FilterValue[]
   collections: FilterValue[]
+  platforms?: FilterValue[]
   directors: FilterPerson[]
   cast: FilterPerson[]
   yearMin?: number

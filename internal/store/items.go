@@ -144,6 +144,10 @@ type Fact struct {
 	Value string `json:"value"`
 }
 
+// FactPlatform labels the system a game is for, such as Super Nintendo
+// (gamelib.FactSystem); games are filtered by it.
+const FactPlatform = "system"
+
 // itemCols selects an item plus the given user's progress and whether it's
 // on their watch list. The user id is the first bind argument.
 const itemCols = `

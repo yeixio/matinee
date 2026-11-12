@@ -2,6 +2,7 @@ package store
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"net/url"
 	"regexp"
@@ -72,6 +73,8 @@ type ItemFilter struct {
 	Narrator []string `json:"narrator,omitempty"` // books any of these people narrate
 
 	Label []string `json:"label,omitempty"` // record labels: albums on them, and artists with albums on them
+
+	Platform []string `json:"platform,omitempty"` // games for any of these systems, such as Super Nintendo
 
 	Sort  string `json:"sort,omitempty"`  // see SortFields; title by default
 	Order string `json:"order,omitempty"` // asc or desc; each sort has its own default
@@ -155,6 +158,7 @@ func ParseItemFilter(q url.Values) (ItemFilter, error) {
 	f.WatchList = q.Get("watchList") == "true" || q.Get("watchList") == "1"
 	f.Series, f.Narrator = strs("series"), strs("narrator")
 	f.Label = strs("label")
+	f.Platform = strs("platform")
 	f.Sort, f.Order, f.Limit = q.Get("sort"), q.Get("order"), num("limit")
 	if err != nil {
 		return f, err
@@ -247,6 +251,7 @@ func (f ItemFilter) Values() url.Values {
 	strs("series", f.Series)
 	strs("narrator", f.Narrator)
 	strs("label", f.Label)
+	strs("platform", f.Platform)
 	str("sort", f.Sort)
 	str("order", f.Order)
 	num("limit", f.Limit)
@@ -476,6 +481,16 @@ func (f ItemFilter) sql(today time.Time) (where, order string, args []any) {
 		add("(i.label IN ("+in+") OR EXISTS (SELECT 1 FROM items f WHERE f.parent_id = i.id AND f.label IN ("+in+"))"+
 			" OR EXISTS (SELECT 1 FROM items f WHERE f.id = i.parent_id AND f.label IN ("+in+")))",
 			repeat(3, anyArgs(f.Label)...)...)
+	}
+	if len(f.Platform) > 0 {
+		var or []string
+		var args []any
+		for _, p := range f.Platform {
+			b, _ := json.Marshal(Fact{Label: FactPlatform, Value: p})
+			or = append(or, `COALESCE(i.facts, '') LIKE ? ESCAPE '\'`)
+			args = append(args, "%"+likeEscape(string(b))+"%")
+		}
+		add("("+strings.Join(or, " OR ")+")", args...)
 	}
 	if len(f.Narrator) > 0 {
 		var or []string

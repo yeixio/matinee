@@ -784,6 +784,11 @@ var migrations = []string{
 	"ALTER TABLE items ADD COLUMN episode_order TEXT NOT NULL DEFAULT ''",
 	`UPDATE items SET mtime = 0 WHERE kind = 'episode' AND path IS NOT NULL
 		AND parent_id IN (SELECT id FROM items WHERE kind = 'season' AND index_number = 0)`,
+	// 144: games' box art is looked for harder (pictures beside them, and
+	// libretro's for another region or a name written differently); every
+	// game in a Games library is filed again on the next scan.
+	`UPDATE items SET mtime = 0 WHERE kind = 'game' AND path IS NOT NULL
+		AND library_id IN (SELECT id FROM libraries WHERE kind = 'games')`,
 }
 
 func now() int64 { return time.Now().Unix() }

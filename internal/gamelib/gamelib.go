@@ -47,7 +47,7 @@ const (
 // Facts' labels. The web player shows them in its own language
 // (games.fact.* in web.json); other clients show them as they are.
 const (
-	FactSystem    = "system"
+	FactSystem    = store.FactPlatform
 	FactRegion    = "region"
 	FactPublisher = "publisher"
 	FactPlayers   = "players"
@@ -67,6 +67,7 @@ type Kind struct {
 
 	mu    sync.Mutex
 	lists map[string]*lists // by system key
+	arts  map[artListKey]artList
 	dlMu  sync.Mutex
 }
 
@@ -120,7 +121,19 @@ func (k *Kind) Index(ctx context.Context, st *store.Store, f scan.File) (store.I
 			}
 		}
 	}
-	return k.item(sys, name, facts), nil
+	it := k.item(sys, name, facts)
+	fileStem := strings.TrimSuffix(filepath.Base(f.Path), filepath.Ext(f.Path))
+	it.Poster = localArt(f.Path, fileStem)
+	if it.Poster == "" && stem != fileStem {
+		it.Poster = localArt(f.Path, stem)
+	}
+	if it.Poster == "" && name != fileStem {
+		it.Poster = localArt(f.Path, name)
+	}
+	if it.Poster == "" {
+		it.Poster = k.onlineArt(ctx, sys, name)
+	}
+	return it, nil
 }
 
 func (k *Kind) item(sys gamedat.System, name string, facts *gamedat.Facts) store.Item {
@@ -143,10 +156,6 @@ func (k *Kind) item(sys gamedat.System, name string, facts *gamedat.Facts) store
 			it.Facts = append(it.Facts, store.Fact{Label: FactGenre, Value: facts.Genre})
 			it.Details = &store.Metadata{Genres: []string{facts.Genre}}
 		}
-	}
-	if sys.Libretro != "" {
-		it.Poster = strings.TrimRight(cmp.Or(k.Art, DefaultArt), "/") + "/" + url.PathEscape(sys.Libretro) +
-			"/Named_Boxarts/" + url.PathEscape(gamedat.ThumbName(name)) + ".png"
 	}
 	return it
 }
