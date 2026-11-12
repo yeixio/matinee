@@ -8,7 +8,7 @@ sidebar:
 
 Matinee can play games for you on the server and stream them to your screen, the same way it streams a film. You connect a controller, pick a game and play: the emulator, its settings and the video all stay on the server, so there's nothing to install or set up on the device you play on.
 
-This is a **preview**. For now you play in the web player; playing in the phone and TV apps comes next ([#394](https://github.com/yeixio/matinee/issues/394)).
+This is a **preview**. You play in the web player and in the phone and TV apps ([below](#in-the-apps)), except on Apple TV for now ([#394](https://github.com/yeixio/matinee/issues/394)).
 
 ## What it plays
 
