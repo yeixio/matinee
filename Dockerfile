@@ -61,6 +61,7 @@ RUN case "$TARGETARCH" in \
 # release existed has no MAME: change this step to rebuild it.)
 RUN apt-get update && apt-get install -y --no-install-recommends curl xz-utils && rm -rf /var/lib/apt/lists/* \
     && v=$(sed -n 's/^version=//p' /src/games/mame.txt) && c=$(sed -n 's/^commit=//p' /src/games/mame.txt | cut -c1-7) \
+    && b=$(sed -n 's/^build=//p' /src/games/mame.txt) && c="$c${b:+-$b}" \
     && base="https://github.com/yeixio/matinee/releases/download/mame-core-$v-$c" \
     && case "$TARGETARCH" in amd64|arm64) \
          if curl -fsSL -o /tmp/mame.so.xz "$base/mame_libretro-$TARGETARCH.so.xz" && curl -fsSL -o /tmp/SHA256SUMS "$base/SHA256SUMS"; then \

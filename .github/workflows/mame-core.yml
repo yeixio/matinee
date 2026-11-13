@@ -32,7 +32,8 @@ jobs:
           commit=$(sed -n 's/^commit=//p' games/mame.txt)
           echo "version=$version" >> "$GITHUB_OUTPUT"
           echo "commit=$commit" >> "$GITHUB_OUTPUT"
-          echo "tag=mame-core-$version-${commit:0:7}" >> "$GITHUB_OUTPUT"
+          build=$(sed -n 's/^build=//p' games/mame.txt)
+          echo "tag=mame-core-$version-${commit:0:7}${build:+-$build}" >> "$GITHUB_OUTPUT"
       - id: exists
         env:
           GH_TOKEN: ${{ github.token }}
@@ -48,6 +49,9 @@ jobs:
     needs: version
     if: needs.version.outputs.exists != 'true'
     runs-on: ${{ matrix.runner }}
+    # The server image's Debian: a core built on a newer system needs a
+    # newer glibc than the image has, and won't load.
+    container: debian:trixie
     timeout-minutes: 345
     strategy:
       fail-fast: false
@@ -56,6 +60,10 @@ jobs:
           - { arch: amd64, runner: ubuntu-latest }
           - { arch: arm64, runner: ubuntu-24.04-arm }
     steps:
+      - name: Get build tools
+        run: |
+          apt-get update -q
+          apt-get install -y -q --no-install-recommends build-essential git ca-certificates curl python3 xz-utils binutils
       - uses: actions/checkout@v4
       - name: Get MAME
         run: |
@@ -67,7 +75,7 @@ jobs:
       - name: Get lld
         if: matrix.arch == 'arm64'
         run: |
-          sudo apt-get update -q && sudo apt-get install -y -q lld
+          apt-get install -y -q --no-install-recommends lld
           echo "LDOPTS=-fuse-ld=lld" >> "$GITHUB_ENV"
       # Arcade machines only: consoles have their own emulators in Matinee.
       - name: Build
@@ -103,7 +111,9 @@ jobs:
   publish:
     name: Publish
     needs: [version, build]
-    if: github.ref == 'refs/heads/main'
+    # On main, or run by hand (to publish a build before the change that
+    # needs it is merged).
+    if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     permissions:
       contents: write
