@@ -13,6 +13,7 @@ here=$(cd "$(dirname "$0")" && pwd)
 host=${HOST:-}
 cc=${host:+$host-}gcc
 cxx=${host:+$host-}g++
+strip=${host:+$host-}strip
 jobs=$(nproc 2>/dev/null || echo 4)
 mkdir -p "$out/cores" "$out/licenses"
 
@@ -51,7 +52,7 @@ grep -v '^\s*#' "$here/cores.txt" | grep -v '^\s*$' | while read -r name repo co
 		makefile=Makefile
 		[ -f "$mk/Makefile.libretro" ] && makefile=Makefile.libretro
 		# shellcheck disable=SC2086 # vars are separate settings
-		make -C "$mk" -f $makefile -j"$jobs" platform=unix CC="$cc" CXX="$cxx" $(echo "$vars" | sed "s/@ARCH@/$arch/g") \
+		make -C "$mk" -f $makefile -j"$jobs" platform=unix CC="$cc" CXX="$cxx" STRIP="$strip" $(echo "$vars" | sed "s/@ARCH@/$arch/g") \
 			>"$work/$name.log" 2>&1 ||
 			{ tail -80 "$work/$name.log"; exit 1; }
 		cp "$mk/${name}_libretro.so" "$out/cores/"
