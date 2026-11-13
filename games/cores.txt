@@ -21,11 +21,11 @@ virtualjaguar     https://github.com/libretro/virtualjaguar-libretro   8543bbffa
 gearsystem        https://github.com/drhelius/Gearsystem               5bcc4289b365d5c5401c937f4c909a158264def8  make  dir=platforms/libretro
 gearcoleco        https://github.com/drhelius/Gearcoleco               8b716ef56c91b4b2d07fa104c505e7550f039d2c  make  dir=platforms/libretro
 freeintv          https://github.com/libretro/FreeIntv                 ef3e0fe322bec62a7f916c0bb0834c08c348d0b4  make
-mednafen_pce_fast https://github.com/libretro/beetle-pce-fast-libretro 2de1ce1c3f237b161c126c54ba407990bb86d1e9  make
+mednafen_pce_fast https://github.com/libretro/beetle-pce-fast-libretro 2de1ce1c3f237b161c126c54ba407990bb86d1e9  make mac_stdio=1
 mednafen_ngp      https://github.com/libretro/beetle-ngp-libretro      a50d5ac288a81f2104ddf43195a4efdd15c72227  make
 mednafen_wswan    https://github.com/libretro/beetle-wswan-libretro    4b01295838ea89e3f1355bbe4cb5cf98aa6108cd  make
 mednafen_vb       https://github.com/libretro/beetle-vb-libretro       d5ae54c8e23b573a3b34e888b2d48a588027e92c  make
-vice_x64          https://github.com/libretro/vice-libretro            76cde0b2cc4e52106618f2cc5d9d1112d9205c89  make  only=x86_64,aarch64 EMUTYPE=x64
+vice_x64          https://github.com/libretro/vice-libretro            76cde0b2cc4e52106618f2cc5d9d1112d9205c89  make  only=x86_64,aarch64 EMUTYPE=x64 mac_stdio=1
 puae              https://github.com/libretro/libretro-uae             d366f77c60e5a5f059f129cc3773d3048306083b  make  only=x86_64,aarch64
-fuse              https://github.com/libretro/fuse-libretro            e997e2bc32c888348f862f69f2c53babfedf7791  make
+fuse              https://github.com/libretro/fuse-libretro            e997e2bc32c888348f862f69f2c53babfedf7791  make mac_stdio=1
 dosbox_pure       https://github.com/libretro/dosbox-pure              e39497e7c2a32c67c26e6598dd14f6d58c384bfd  make  only=x86_64,aarch64

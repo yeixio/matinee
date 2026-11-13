@@ -18,10 +18,6 @@ host=${HOST:-}
 os=$(uname -s)
 if [ "$os" = Darwin ]; then
 	cc=clang cxx=clang++ strip=strip platform=osx
-	# Older zlibs bundled with some emulators define fdopen away on a Mac,
-	# which breaks the SDK's stdio.h unless it comes first. From the
-	# environment, so a makefile's own CFLAGS add to it.
-	export CFLAGS="${CFLAGS:-} -include stdio.h"
 	jobs=$(sysctl -n hw.ncpu)
 	runner_libs="-ldl -lm"
 else
@@ -62,7 +58,14 @@ while read -r name repo commit how vars <&3; do
 	only=$(echo "$vars" | tr ' ' '\n' | sed -n 's/^only=//p')
 	# dir=sub/folder is where its libretro makefile is, when not at the top.
 	dir=$(echo "$vars" | tr ' ' '\n' | sed -n 's/^dir=//p')
-	vars=$(echo "$vars" | tr ' ' '\n' | grep -v '^only=' | grep -v '^dir=' | tr '\n' ' ')
+	# mac_stdio=1: the old zlib it bundles defines fdopen away on a Mac,
+	# which breaks the SDK's stdio.h unless that comes first.
+	mac_stdio=$(echo "$vars" | tr ' ' '\n' | sed -n 's/^mac_stdio=//p')
+	vars=$(echo "$vars" | tr ' ' '\n' | grep -v '^only=' | grep -v '^dir=' | grep -v '^mac_stdio=' | tr '\n' ' ')
+	extra_cflags=""
+	if [ "$os" = Darwin ] && [ -n "$mac_stdio" ]; then
+		extra_cflags="-include stdio.h"
+	fi
 	if [ -n "$only" ] && ! echo ",$only," | grep -q ",$arch,"; then
 		echo "== $name: not for $arch"
 		continue
@@ -81,9 +84,16 @@ while read -r name repo commit how vars <&3; do
 		mk="$src${dir:+/$dir}"
 		makefile=Makefile
 		[ -f "$mk/Makefile.libretro" ] && makefile=Makefile.libretro
+		# Extra CFLAGS go in the environment, so a makefile's own add to
+		# them; it's left unset otherwise, as "CFLAGS ?=" defaults need.
 		# shellcheck disable=SC2086 # vars are separate settings
-		if ! make -C "$mk" -f $makefile -j"$jobs" platform=$platform CC="$cc" CXX="$cxx" STRIP="$strip" $(echo "$vars" | sed "s/@ARCH@/$arch/g") \
-			>"$work/$name.log" 2>&1; then
+		if ! (
+			if [ -n "$extra_cflags" ]; then
+				CFLAGS="${CFLAGS:-} $extra_cflags"
+				export CFLAGS
+			fi
+			exec make -C "$mk" -f $makefile -j"$jobs" platform=$platform CC="$cc" CXX="$cxx" STRIP="$strip" $(echo "$vars" | sed "s/@ARCH@/$arch/g")
+		) >"$work/$name.log" 2>&1; then
 			broke "$name" 80
 			continue
 		fi
