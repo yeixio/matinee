@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { causeText } from '../player/why'
-import { api, type Health, type HealthPoint, type HealthProblem, type LogLevel, type LogLine, type LogRun } from '../api'
+import { api, type AnalysisStatus, type Health, type HealthPoint, type HealthProblem, type LogLevel, type LogLine, type LogRun } from '../api'
 import i18n, { formatLocale } from '../i18n'
 import { RestartServer } from './RestartServer'
 import { Button, inputClass } from './ui'
@@ -536,6 +536,17 @@ function Jobs({ h }: { h: Health }) {
   const a = h.jobs.analysis
   const dl = h.jobs.downloads
   const preparing = (dl.queued ?? 0) + (dl.preparing ?? 0)
+  // The background jobs take turns, and the server reports one title for
+  // whichever is working now. Show it under that job only, so a finished job
+  // never looks busy. Waiting for playback or a slow disk shows under the
+  // first job that still has work left.
+  const waitingFor = a && (a.state === 'waiting' || a.state === 'slowDisk') ? firstUnfinished(a) : undefined
+  const jobDetail = (job: Background): string | undefined => {
+    if (!a) return undefined
+    if (waitingFor === job) return t(a.state === 'waiting' ? 'analysis.state.waiting' : 'analysis.state.slowDisk')
+    if (!a.current) return undefined
+    return (a.state === 'analyzing' ? 'analysis' : a.state) === job ? a.current : undefined
+  }
   return (
     <div className="space-y-3">
       <h3 className="font-semibold">{t('health.jobs.title')}</h3>
@@ -582,7 +593,7 @@ function Jobs({ h }: { h: Health }) {
               busy={a.state === 'analyzing'}
               status={a.mode === 'off' ? t('analysis.state.paused') : t('analysis.progress', { done: a.done, total: a.total })}
               progress={a.total ? a.done / a.total : 1}
-              detail={a.state === 'waiting' ? t('analysis.state.waiting') : a.state === 'slowDisk' ? t('analysis.state.slowDisk') : a.current}
+              detail={jobDetail('analysis') ?? (a.state === 'gapless' ? t('analysis.state.gapless', { album: a.current ?? '' }) : undefined)}
             />
             {a.intros && (
               <Job
@@ -590,6 +601,16 @@ function Jobs({ h }: { h: Health }) {
                 busy={a.state === 'intros'}
                 status={a.intros.on ? t('analysis.progress', { done: a.intros.done, total: a.intros.total }) : t('analysis.mode.off.label')}
                 progress={a.intros.on && a.intros.total ? a.intros.done / a.intros.total : undefined}
+                detail={jobDetail('intros')}
+              />
+            )}
+            {a.credits && (
+              <Job
+                label={t('analysis.credits.label')}
+                busy={a.state === 'credits'}
+                status={a.credits.on ? t('analysis.progress', { done: a.credits.done, total: a.credits.total }) : t('analysis.mode.off.label')}
+                progress={a.credits.on && a.credits.total ? a.credits.done / a.credits.total : undefined}
+                detail={jobDetail('credits')}
               />
             )}
             {a.thumbnails && (
@@ -598,6 +619,7 @@ function Jobs({ h }: { h: Health }) {
                 busy={a.state === 'thumbnails'}
                 status={a.thumbnails.mode === 'off' ? t('analysis.mode.off.label') : t('analysis.progress', { done: a.thumbnails.done, total: a.thumbnails.total })}
                 progress={a.thumbnails.mode !== 'off' && a.thumbnails.total ? a.thumbnails.done / a.thumbnails.total : undefined}
+                detail={jobDetail('thumbnails')}
               />
             )}
           </>
@@ -636,6 +658,18 @@ function Jobs({ h }: { h: Health }) {
       </div>
     </div>
   )
+}
+
+type Background = 'analysis' | 'intros' | 'credits' | 'thumbnails'
+
+// firstUnfinished is the background job next in line: the analysis works
+// through files first, then intros, end credits and seek bar previews.
+function firstUnfinished(a: AnalysisStatus): Background {
+  if (a.done < a.total) return 'analysis'
+  if (a.intros?.on && a.intros.done < a.intros.total) return 'intros'
+  if (a.credits?.on && a.credits.done < a.credits.total) return 'credits'
+  if (a.thumbnails && a.thumbnails.mode !== 'off' && a.thumbnails.done < a.thumbnails.total) return 'thumbnails'
+  return 'analysis'
 }
 
 function Job({ label, status, detail, busy, bad, progress, action }: { label: string; status: string; detail?: string; busy?: boolean; bad?: boolean; progress?: number; action?: ReactNode }) {
