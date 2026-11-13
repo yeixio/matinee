@@ -109,6 +109,70 @@ jobs:
             mame-COPYING.txt
           compression-level: 0
 
+  # Apple silicon Macs, for Matinee Server.app. Added to the release on its
+  # own, so a release that has the Linux cores gets the Mac one without
+  # building those again.
+  build-mac:
+    name: MAME (Mac)
+    needs: version
+    runs-on: macos-15
+    timeout-minutes: 345
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      TAG: ${{ needs.version.outputs.tag }}
+      # The oldest macOS Matinee Server.app runs on.
+      MACOSX_DEPLOYMENT_TARGET: '13.0'
+    steps:
+      - id: have
+        run: |
+          if gh release view "$TAG" --repo '${{ github.repository }}' --json assets --jq '.assets[].name' 2>/dev/null | grep -qx mame_libretro-darwin-arm64.so.xz; then
+            echo "done=1" >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/checkout@v4
+        if: steps.have.outputs.done != '1'
+      - name: Get MAME
+        if: steps.have.outputs.done != '1'
+        run: |
+          git init -q mame-src
+          git -C mame-src fetch -q --depth 1 https://github.com/libretro/mame '${{ needs.version.outputs.commit }}'
+          git -C mame-src checkout -q FETCH_HEAD
+      - name: Build
+        if: steps.have.outputs.done != '1'
+        working-directory: mame-src
+        run: |
+          make -f Makefile.libretro -j"$(sysctl -n hw.ncpu)" SUBTARGET=arcade platform=osx > ../build.log 2>&1 || { tail -200 ../build.log; exit 1; }
+          tail -5 ../build.log
+          ls -la ./*_libretro.*
+      - name: Package
+        if: steps.have.outputs.done != '1'
+        run: |
+          mkdir out
+          lib=$(ls mame-src/*_libretro.dylib mame-src/*_libretro.so 2>/dev/null | head -1)
+          cp "$lib" out/mame_libretro.so
+          strip -x out/mame_libretro.so
+          xz -T0 -6 -c out/mame_libretro.so > mame_libretro-darwin-arm64.so.xz
+          ls -la out mame_libretro-darwin-arm64.so.xz
+      - name: Play gridlee
+        if: steps.have.outputs.done != '1'
+        run: |
+          cc -O2 -o out/matinee-game-runner games/runner/runner.c -ldl -lm
+          out/matinee-game-runner --info out/mame_libretro.so
+          mkdir roms
+          curl -fsSL -o roms/gridlee.zip https://www.mamedev.org/roms/gridlee/gridlee.zip
+          python3 games/mame-test/play.py out/matinee-game-runner out/mame_libretro.so roms/gridlee.zip 30
+      # Into the release once it exists (the Linux builds publish it), on
+      # main or a run by hand.
+      - name: Publish
+        if: steps.have.outputs.done != '1' && (github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch')
+        run: |
+          for _ in $(seq 60); do gh release view "$TAG" --repo '${{ github.repository }}' > /dev/null 2>&1 && break; sleep 60; done
+          gh release download "$TAG" --repo '${{ github.repository }}' --pattern SHA256SUMS --clobber
+          shasum -a 256 mame_libretro-darwin-arm64.so.xz >> SHA256SUMS
+          cat SHA256SUMS
+          gh release upload "$TAG" mame_libretro-darwin-arm64.so.xz SHA256SUMS --clobber --repo '${{ github.repository }}'
+
   publish:
     name: Publish
     needs: [version, build]
