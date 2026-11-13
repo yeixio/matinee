@@ -143,7 +143,11 @@ jobs:
         if: steps.have.outputs.done != '1'
         working-directory: mame-src
         run: |
-          make -f Makefile.libretro -j"$(sysctl -n hw.ncpu)" SUBTARGET=arcade platform=osx > ../build.log 2>&1 || { tail -200 ../build.log; exit 1; }
+          # Without CROSS_COMPILE=1 its makefile builds for Intel Macs, even
+          # on Apple silicon.
+          make -f Makefile.libretro -j"$(sysctl -n hw.ncpu)" SUBTARGET=arcade platform=osx CROSS_COMPILE=1 \
+            LIBRETRO_APPLE_PLATFORM=arm64-apple-macos13.0 LIBRETRO_APPLE_ISYSROOT="$(xcrun --show-sdk-path)" > ../build.log 2>&1 || { tail -200 ../build.log; exit 1; }
+          file ./*_libretro.*
           tail -5 ../build.log
           ls -la ./*_libretro.*
       - name: Package
