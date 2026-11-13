@@ -451,9 +451,18 @@ static double now(void) {
 }
 
 static void sleep_until(double t) {
+#ifdef __APPLE__
+  /* macOS has no clock_nanosleep: sleep for what's left instead. */
+  double left = t - now();
+  if (left <= 0) return;
+  struct timespec ts = {.tv_sec = (time_t)left, .tv_nsec = (long)((left - (double)(time_t)left) * 1e9)};
+  while (nanosleep(&ts, &ts) == -1 && errno == EINTR) {
+  }
+#else
   struct timespec ts = {.tv_sec = (time_t)t, .tv_nsec = (long)((t - (double)(time_t)t) * 1e9)};
   while (clock_nanosleep(CLOCK_MONOTONIC, TIMER_ABSTIME, &ts, NULL) == EINTR) {
   }
+#endif
 }
 
 static void json_string(const char *s) {

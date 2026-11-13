@@ -205,9 +205,10 @@ func envInt(key string, def int) int {
 }
 
 // defaultGamesDir is where the image and the packages put the game runner:
-// /usr/lib/matinee/games, or games next to the matinee binary.
+// /usr/lib/matinee/games, games next to the matinee binary, or the Mac
+// app's Contents/Resources/games.
 func defaultGamesDir() string {
-	for _, d := range []string{"/usr/lib/matinee/games", exeDir("games")} {
+	for _, d := range []string{"/usr/lib/matinee/games", exeDir("games"), exeDir(filepath.Join("..", "Resources", "games"))} {
 		if d == "" {
 			continue
 		}

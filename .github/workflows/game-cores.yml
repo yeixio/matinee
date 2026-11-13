@@ -1,7 +1,7 @@
 name: Game emulators
 
 # Builds the game runner and the emulators in games/cores.txt once for each
-# Linux CPU the server runs on, and publishes them as a release
+# Linux CPU the server runs on, and for Apple silicon Macs, and publishes them as a release
 # (games/cores-tag.sh names it). The Docker image and the Linux packages
 # download them instead of compiling them. MAME is built on its own
 # (mame-core.yml). Everything is built on Ubuntu 22.04, whose glibc (2.35)
@@ -78,11 +78,40 @@ jobs:
           path: matinee-games-linux-${{ matrix.arch }}.tar.xz
           compression-level: 0
 
+  # Apple silicon Macs, for Matinee Server.app. An emulator that doesn't
+  # build or load on a Mac yet is left out (KEEP_GOING), and its games say
+  # there's no emulator there.
+  build-mac:
+    name: Emulators (Mac)
+    needs: version
+    if: needs.version.outputs.exists != 'true'
+    runs-on: macos-15
+    timeout-minutes: 120
+    env:
+      # The oldest macOS Matinee Server.app runs on.
+      MACOSX_DEPLOYMENT_TARGET: '13.0'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        run: KEEP_GOING=1 sh games/build.sh out
+      - name: Package
+        run: |
+          ls -la out out/cores
+          file out/matinee-game-runner out/cores/*.so
+          tar -C out -cf - . | xz -T0 -6 > matinee-games-darwin-arm64.tar.xz
+          ls -la ./*.tar.xz
+      - uses: actions/upload-artifact@v4
+        with:
+          name: games-darwin-arm64
+          path: matinee-games-darwin-arm64.tar.xz
+          compression-level: 0
+
   publish:
     name: Publish
-    needs: [version, build]
+    needs: [version, build, build-mac]
     # On main, or run by hand (to publish emulators before the change that
-    # needs them is merged).
+    # needs them is merged). A run by hand tags main: the token can't tag a
+    # commit that changes workflows main doesn't have yet.
     if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     permissions:
@@ -95,11 +124,11 @@ jobs:
       - env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          sha256sum matinee-games-linux-*.tar.xz > SHA256SUMS
+          sha256sum matinee-games-*.tar.xz > SHA256SUMS
           cat SHA256SUMS
-          gh release create '${{ needs.version.outputs.tag }}' matinee-games-linux-*.tar.xz SHA256SUMS \
+          gh release create '${{ needs.version.outputs.tag }}' matinee-games-*.tar.xz SHA256SUMS \
             --repo '${{ github.repository }}' \
-            --target "$GITHUB_SHA" \
+            --target "${{ github.ref == 'refs/heads/main' && github.sha || 'main' }}" \
             --title 'Game emulators (${{ needs.version.outputs.tag }})' \
-            --notes 'The game runner and emulators in games/cores.txt, built for Linux (amd64, arm64, 32-bit ARM). The Matinee server image and Linux packages include them. Each emulator is built from the commit listed in games/cores.txt; its licence is in licenses/.' \
+            --notes 'The game runner and emulators in games/cores.txt, built for Linux (amd64, arm64, 32-bit ARM) and Apple silicon Macs. The Matinee server image, the Linux packages and Matinee Server.app include them. Each emulator is built from the commit listed in games/cores.txt; its licence is in licenses/.' \
             --latest=false

@@ -6,5 +6,5 @@
 # runner names a new release, so stale emulators are never reused.
 set -eu
 dir=${1:-$(dirname "$0")}
-h=$(cat "$dir/cores.txt" "$dir/build.sh" "$dir/runner/runner.c" "$dir/runner/libretro.h" "$dir/testcore/testcore.c" | sha256sum | cut -c1-12)
+h=$(cat "$dir/cores.txt" "$dir/build.sh" "$dir/runner/runner.c" "$dir/runner/libretro.h" "$dir/testcore/testcore.c" | { sha256sum 2>/dev/null || shasum -a 256; } | cut -c1-12)
 echo "game-cores-$h"

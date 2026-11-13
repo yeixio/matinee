@@ -21,6 +21,7 @@ on:
     paths:
       - macos/**
       - scripts/build-mac-*.sh
+      - games/**
       - .github/workflows/mac.yml
   workflow_dispatch:
   workflow_call:
@@ -120,6 +121,9 @@ jobs:
         env:
           TMDB_KEY: ${{ inputs.tag != '' && secrets.TMDB_API_KEY || '' }}
           SPARKLE_PRIVATE_KEY: ${{ steps.secrets.outputs.ready && secrets.SPARKLE_PRIVATE_KEY || '' }}
+          # A release has games; a pull request's build may come before
+          # their emulators are published.
+          REQUIRE_GAMES: ${{ inputs.tag != '' && '1' || '' }}
         run: |
           version="${TAG#v}"
           [ -n "$version" ] || version="0.0.0-dev.$(git rev-parse --short HEAD)"
@@ -131,6 +135,13 @@ jobs:
           app="dist/mac/Matinee Server.app/Contents/MacOS"
           for f in matinee ffmpeg ffprobe "Matinee Server"; do lipo -info "$app/$f"; done
           "$app/ffmpeg" -hide_banner -version | head -n 1
+          "$app/ffmpeg" -hide_banner -encoders | grep -E 'libx264|libopus'
+          # The bundled emulators load in the signed runner, when there are any.
+          games="dist/mac/Matinee Server.app/Contents/Resources/games"
+          if [ -d "$games" ]; then
+            for core in "$games"/cores/*.so; do "$games/matinee-game-runner" --info "$core" > /dev/null || { echo "::error::$(basename "$core") doesn't load"; exit 1; }; done
+            echo "$(ls "$games"/cores | wc -l) emulators load"
+          fi
           # The bundled server answers with the bundled FFmpeg.
           data="$(mktemp -d)"
           MATINEE_DATA_DIR="$data" MATINEE_ADDR=127.0.0.1:7199 MATINEE_DISCOVERY=false \
