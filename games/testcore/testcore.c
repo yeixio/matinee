@@ -8,6 +8,7 @@
 
 #include <stdbool.h>
 #include <stdint.h>
+#include <stdio.h>
 #include <string.h>
 
 #include "../runner/libretro.h"
@@ -100,6 +101,10 @@ RETRO_API void retro_cheat_set(unsigned index, bool enabled, const char *code) {
 }
 RETRO_API bool retro_load_game(const struct retro_game_info *game) {
   (void)game;
+  // Some emulators (MAME) print to stdout: the runner keeps that out of
+  // its messages.
+  printf("9.1a noise from the emulator\n");
+  fflush(stdout);
   enum retro_pixel_format f = RETRO_PIXEL_FORMAT_XRGB8888;
   return env(RETRO_ENVIRONMENT_SET_PIXEL_FORMAT, &f);
 }
