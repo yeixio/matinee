@@ -122,13 +122,17 @@ static size_t last_save_len;
 
 // ---- output ----
 
+// out is where messages go: stdout, moved aside in main so that whatever an
+// emulator prints (MAME does) lands in stderr and not among the messages.
+static int out = 1;
+
 static void write_all(const void *p, size_t n) {
   const uint8_t *b = p;
   while (n > 0) {
 #ifdef _WIN32
-    int w = _write(1, b, n > 1 << 30 ? 1 << 30 : (unsigned)n);
+    int w = _write(out, b, n > 1 << 30 ? 1 << 30 : (unsigned)n);
 #else
-    ssize_t w = write(1, b, n);
+    ssize_t w = write(out, b, n);
 #endif
     if (w < 0) {
       if (errno == EINTR) continue;
@@ -586,8 +590,14 @@ int main(int argc, char **argv) {
   _setmode(0, _O_BINARY);
   _setmode(1, _O_BINARY);
   timeBeginPeriod(1);
+  out = _dup(1);
+  if (out < 0 || _dup2(2, 1) != 0) out = 1;
+  else _setmode(out, _O_BINARY);
 #else
   fcntl(0, F_SETFL, fcntl(0, F_GETFL) | O_NONBLOCK);
+  out = dup(1);
+  if (out < 0 || dup2(2, 1) < 0) out = 1;
+  else fcntl(out, F_SETFD, FD_CLOEXEC);
 #endif
 
   void *lib = dlopen(core_path, RTLD_NOW | RTLD_LOCAL);
