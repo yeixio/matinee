@@ -521,6 +521,17 @@ export type Library = {
   scanReason?: ScanReason
   // Empty until the server has set up watching, just after it starts.
   watch: FolderWatch[]
+  /** What the last full scan left out on purpose and why, most first. */
+  skipped?: SkipCount[]
+}
+
+/** Files a scan left out for one reason: 'arcade' sets, or 'unknown' (not a game for a system Matinee knows). */
+export interface SkipCount {
+  reason: string
+  /** The folder under the library's they're in. */
+  group?: string
+  count: number
+  example?: string
 }
 
 export type MetadataMode = '' | 'online' | 'localOnly'

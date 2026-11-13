@@ -228,7 +228,23 @@
     "appearAsFound": "Фільми й серіали з'являються в міру знаходження.",
     "noMedia": "Matinee шукав у {{paths}} і не знайшов медіафайлів.",
     "letters": "Перейти до літери",
-    "jumpTo": "Перейти до {{letter}}"
+    "jumpTo": "Перейти до {{letter}}",
+    "skipped": {
+      "title_one": "Пропущено {{count}} файл",
+      "title_few": "Пропущено {{count}} файли",
+      "title_many": "Пропущено {{count}} файлів",
+      "title_other": "Пропущено {{count}} файлу",
+      "topFolder": "Верхня тека",
+      "arcade_one": "{{count}} аркадний набір. Аркадні ігри запускаються з бібліотеки Arcade.",
+      "arcade_few": "{{count}} аркадні набори. Аркадні ігри запускаються з бібліотеки Arcade.",
+      "arcade_many": "{{count}} аркадних наборів. Аркадні ігри запускаються з бібліотеки Arcade.",
+      "arcade_other": "{{count}} аркадного набору. Аркадні ігри запускаються з бібліотеки Arcade.",
+      "unknown_one": "{{count}} файл, який Matinee ще не вміє відтворювати, наприклад {{example}}.",
+      "unknown_few": "{{count}} файли, які Matinee ще не вміє відтворювати, наприклад {{example}}.",
+      "unknown_many": "{{count}} файлів, які Matinee ще не вміє відтворювати, наприклад {{example}}.",
+      "unknown_other": "{{count}} файлу, які Matinee ще не вміє відтворювати, наприклад {{example}}.",
+      "addArcade": "Додати бібліотеку Arcade"
+    }
   },
   "nothingHereYet": "Тут поки порожньо",
   "collection": {

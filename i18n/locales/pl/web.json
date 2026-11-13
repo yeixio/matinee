@@ -228,7 +228,23 @@
     "appearAsFound": "Tytuły pojawiają się w miarę wyszukiwania.",
     "noMedia": "Matinee przeszukało {{paths}} i nie znalazło multimediów.",
     "letters": "Przejdź do litery",
-    "jumpTo": "Przejdź do {{letter}}"
+    "jumpTo": "Przejdź do {{letter}}",
+    "skipped": {
+      "title_one": "Pominięto {{count}} plik",
+      "title_few": "Pominięto {{count}} pliki",
+      "title_many": "Pominięto {{count}} plików",
+      "title_other": "Pominięto {{count}} pliku",
+      "topFolder": "Folder główny",
+      "arcade_one": "{{count}} zestaw arcade. Gry arcade uruchamia się z biblioteki Arcade.",
+      "arcade_few": "{{count}} zestawy arcade. Gry arcade uruchamia się z biblioteki Arcade.",
+      "arcade_many": "{{count}} zestawów arcade. Gry arcade uruchamia się z biblioteki Arcade.",
+      "arcade_other": "{{count}} zestawu arcade. Gry arcade uruchamia się z biblioteki Arcade.",
+      "unknown_one": "{{count}} plik, którego Matinee jeszcze nie odtwarza, np. {{example}}.",
+      "unknown_few": "{{count}} pliki, których Matinee jeszcze nie odtwarza, np. {{example}}.",
+      "unknown_many": "{{count}} plików, których Matinee jeszcze nie odtwarza, np. {{example}}.",
+      "unknown_other": "{{count}} pliku, których Matinee jeszcze nie odtwarza, np. {{example}}.",
+      "addArcade": "Dodaj bibliotekę Arcade"
+    }
   },
   "nothingHereYet": "Nic tu jeszcze nie ma",
   "collection": {

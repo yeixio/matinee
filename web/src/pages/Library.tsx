@@ -7,6 +7,7 @@ import { AlphaBar } from '../components/AlphaBar'
 import { GridSkeleton, type JumpTo, PosterGrid } from '../components/Card'
 import { PinnedCollections, SaveAsCollectionButton } from '../components/Collections'
 import { FilterBar } from '../components/FilterBar'
+import { SkippedFiles } from '../components/SkippedFiles'
 import { LibraryIcon, useLibraries } from '../components/Shell'
 import { Button, EmptyState } from '../components/ui'
 import Books from './Books'
@@ -69,6 +70,7 @@ function Titles({ id, lib }: { id: number; lib?: LibraryInfo }) {
           </div>
         )}
       </div>
+      <SkippedFiles skipped={lib?.skipped} />
       {/* Collections pinned to this library, while no filter is on. */}
       {!filtered && <PinnedCollections library={id} />}
       <FilterBar value={filter} onChange={setFilter} libraryId={id} libraryKind={lib?.kind} />

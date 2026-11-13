@@ -226,7 +226,17 @@
     "appearAsFound": "Titles appear as they are found.",
     "noMedia": "Matinee looked in {{paths}} and found no media.",
     "letters": "Jump to a letter",
-    "jumpTo": "Jump to {{letter}}"
+    "jumpTo": "Jump to {{letter}}",
+    "skipped": {
+      "title_one": "{{count}} file was left out",
+      "title_other": "{{count}} files were left out",
+      "topFolder": "Top folder",
+      "arcade_one": "{{count}} arcade set. Arcade games play from an Arcade library.",
+      "arcade_other": "{{count}} arcade sets. Arcade games play from an Arcade library.",
+      "unknown_one": "{{count}} file Matinee can't play yet, such as {{example}}.",
+      "unknown_other": "{{count}} files Matinee can't play yet, such as {{example}}.",
+      "addArcade": "Add an Arcade library"
+    }
   },
   "nothingHereYet": "Nothing here yet",
   "collection": {

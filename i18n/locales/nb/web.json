@@ -226,7 +226,17 @@
     "appearAsFound": "Titler vises etter hvert som de blir funnet.",
     "noMedia": "Matinee lette i {{paths}} og fant ingen medier.",
     "letters": "Hopp til en bokstav",
-    "jumpTo": "Hopp til {{letter}}"
+    "jumpTo": "Hopp til {{letter}}",
+    "skipped": {
+      "title_one": "{{count}} fil ble utelatt",
+      "title_other": "{{count}} filer ble utelatt",
+      "topFolder": "Øverste mappe",
+      "arcade_one": "{{count}} arkadesett. Arkadespill spilles fra et Arcade-bibliotek.",
+      "arcade_other": "{{count}} arkadesett. Arkadespill spilles fra et Arcade-bibliotek.",
+      "unknown_one": "{{count}} fil som Matinee ikke kan spille av ennå, for eksempel {{example}}.",
+      "unknown_other": "{{count}} filer som Matinee ikke kan spille av ennå, for eksempel {{example}}.",
+      "addArcade": "Legg til et Arcade-bibliotek"
+    }
   },
   "nothingHereYet": "Ingenting her ennå",
   "collection": {

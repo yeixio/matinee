@@ -694,6 +694,19 @@
               }
             },
             {
+              "name": "See which game files were left out and why",
+              "doc": "/docs/server/games/#a-games-library",
+              "since": "v0.2.7",
+              "apps": {
+                "web": true,
+                "ios": {"na": "Library problems are shown to admins in the web app."},
+                "android": {"na": "Library problems are shown to admins in the web app."},
+                "appletv": {"na": "Library problems are shown to admins in the web app."},
+                "androidtv": {"na": "Library problems are shown to admins in the web app."},
+                "tvweb": {"na": "Library problems are shown to admins in the web app."}
+              }
+            },
+            {
               "name": "Play PC games from Steam (preview)",
               "doc": "/docs/server/games/#pc-games-from-steam-preview",
               "since": "v0.2.6",

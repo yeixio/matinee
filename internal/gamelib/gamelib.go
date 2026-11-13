@@ -93,9 +93,12 @@ func (k *Kind) Wants(path string) bool {
 // Index files one game.
 func (k *Kind) Index(ctx context.Context, st *store.Store, f scan.File) (store.Item, error) {
 	sys, inside, ok := SystemFor(f.Root, f.Path)
-	if !ok || sys.Arcade {
+	switch {
+	case ok && sys.Arcade:
 		// Arcade games come with the Arcade library for now.
-		return store.Item{}, scan.ErrSkip
+		return store.Item{}, scan.Skip(SkipArcade, topFolder(f.Root, f.Path))
+	case !ok:
+		return store.Item{}, scan.Skip(SkipUnknown, topFolder(f.Root, f.Path))
 	}
 	if sys.Disc && strings.EqualFold(filepath.Ext(f.Path), ".cue") && hasPlaylist(filepath.Dir(f.Path)) {
 		// The .m3u beside it lists this disc with the game's others.
@@ -134,6 +137,29 @@ func (k *Kind) Index(ctx context.Context, st *store.Store, f scan.File) (store.I
 		it.Poster = k.onlineArt(ctx, sys, name)
 	}
 	return it, nil
+}
+
+// Why games are left out (scan.Skip), for admins.
+const (
+	// SkipArcade is an arcade set: the Arcade library plays those.
+	SkipArcade = "arcade"
+	// SkipUnknown is a file Matinee can't tell is a game for a system it
+	// knows, such as a zip without a console game in it, or a game in a
+	// folder for a system it doesn't play.
+	SkipUnknown = "unknown"
+)
+
+// topFolder is the folder under the library's that path is in, which is
+// usually its system's, or "" for a file at the top.
+func topFolder(root, path string) string {
+	rel, err := filepath.Rel(root, path)
+	if err != nil {
+		return ""
+	}
+	if first, _, ok := strings.Cut(filepath.ToSlash(rel), "/"); ok {
+		return first
+	}
+	return ""
 }
 
 func (k *Kind) item(sys gamedat.System, name string, facts *gamedat.Facts) store.Item {

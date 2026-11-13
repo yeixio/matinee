@@ -225,7 +225,14 @@
     "appearAsFound": "작품은 발견되는 대로 표시됩니다.",
     "noMedia": "Matinee가 {{paths}}에서 찾아봤지만 미디어가 없습니다.",
     "letters": "글자로 이동",
-    "jumpTo": "{{letter}}(으)로 이동"
+    "jumpTo": "{{letter}}(으)로 이동",
+    "skipped": {
+      "title_other": "파일 {{count}}개가 제외되었습니다",
+      "topFolder": "최상위 폴더",
+      "arcade_other": "아케이드 세트 {{count}}개. 아케이드 게임은 Arcade 라이브러리에서 실행됩니다.",
+      "unknown_other": "Matinee가 아직 재생할 수 없는 파일 {{count}}개 (예: {{example}}).",
+      "addArcade": "Arcade 라이브러리 추가"
+    }
   },
   "nothingHereYet": "아직 아무것도 없습니다",
   "collection": {

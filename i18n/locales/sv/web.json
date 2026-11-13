@@ -226,7 +226,17 @@
     "appearAsFound": "Titlar visas allteftersom de hittas.",
     "noMedia": "Matinee letade i {{paths}} och hittade inga medier.",
     "letters": "Hoppa till en bokstav",
-    "jumpTo": "Hoppa till {{letter}}"
+    "jumpTo": "Hoppa till {{letter}}",
+    "skipped": {
+      "title_one": "{{count}} fil hoppades över",
+      "title_other": "{{count}} filer hoppades över",
+      "topFolder": "Översta mappen",
+      "arcade_one": "{{count}} arkadset. Arkadspel spelas från ett Arcade-bibliotek.",
+      "arcade_other": "{{count}} arkadset. Arkadspel spelas från ett Arcade-bibliotek.",
+      "unknown_one": "{{count}} fil som Matinee inte kan spela upp än, till exempel {{example}}.",
+      "unknown_other": "{{count}} filer som Matinee inte kan spela upp än, till exempel {{example}}.",
+      "addArcade": "Lägg till ett Arcade-bibliotek"
+    }
   },
   "nothingHereYet": "Inget här än",
   "collection": {

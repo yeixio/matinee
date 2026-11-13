@@ -6208,6 +6208,16 @@ components:
               path: { type: string }
               method: { type: string, enum: [events, polling, off] }
               reason: { type: string, description: 'Why a folder is polled, such as "network share (cifs)".' }
+        skipped:
+          type: array
+          description: What the last full scan left out on purpose and why, most first. Missing when nothing was, or before the first full scan.
+          items:
+            type: object
+            properties:
+              reason: { type: string, description: 'Why, such as "arcade" (an arcade set, for an Arcade library) or "unknown" (not a game for a system Matinee knows).' }
+              group: { type: string, description: The folder under the library's that the files are in. }
+              count: { type: integer }
+              example: { type: string, description: One of the files, by name. }
     BookGroup:
       type: object
       description: A series or a narrator of audiobooks.

@@ -225,7 +225,14 @@
     "appearAsFound": "作品會在找到後陸續顯示。",
     "noMedia": "Matinee 在 {{paths}} 中尋找過，但沒有找到媒體。",
     "letters": "跳到字母",
-    "jumpTo": "跳到 {{letter}}"
+    "jumpTo": "跳到 {{letter}}",
+    "skipped": {
+      "title_other": "有 {{count}} 個檔案未收錄",
+      "topFolder": "頂層資料夾",
+      "arcade_other": "{{count}} 個大型電玩遊戲集。大型電玩遊戲需在 Arcade 媒體庫中遊玩。",
+      "unknown_other": "{{count}} 個 Matinee 暫時無法播放的檔案，例如 {{example}}。",
+      "addArcade": "新增 Arcade 媒體庫"
+    }
   },
   "nothingHereYet": "這裡還沒有內容",
   "collection": {

@@ -227,7 +227,20 @@
     "appearAsFound": "כותרים יופיעו כשיימצאו.",
     "noMedia": "Matinee חיפש ב־{{paths}} ולא מצא מדיה.",
     "letters": "מעבר לאות",
-    "jumpTo": "מעבר אל {{letter}}"
+    "jumpTo": "מעבר אל {{letter}}",
+    "skipped": {
+      "title_one": "קובץ אחד הושמט",
+      "title_two": "שני קבצים הושמטו",
+      "title_other": "{{count}} קבצים הושמטו",
+      "topFolder": "תיקייה ראשית",
+      "arcade_one": "ערכת ארקייד אחת. משחקי ארקייד פועלים מספריית Arcade.",
+      "arcade_two": "שתי ערכות ארקייד. משחקי ארקייד פועלים מספריית Arcade.",
+      "arcade_other": "{{count}} ערכות ארקייד. משחקי ארקייד פועלים מספריית Arcade.",
+      "unknown_one": "קובץ אחד ש-Matinee עדיין לא יכול להפעיל, כמו {{example}}.",
+      "unknown_two": "שני קבצים ש-Matinee עדיין לא יכול להפעיל, כמו {{example}}.",
+      "unknown_other": "{{count}} קבצים ש-Matinee עדיין לא יכול להפעיל, כמו {{example}}.",
+      "addArcade": "הוספת ספריית Arcade"
+    }
   },
   "nothingHereYet": "אין כאן עדיין כלום",
   "collection": {

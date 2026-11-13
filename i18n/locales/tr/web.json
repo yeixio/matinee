@@ -226,7 +226,17 @@
     "appearAsFound": "Yapımlar bulundukça görünür.",
     "noMedia": "Matinee {{paths}} içinde aradı ve medya bulamadı.",
     "letters": "Bir harfe atla",
-    "jumpTo": "{{letter}} harfine atla"
+    "jumpTo": "{{letter}} harfine atla",
+    "skipped": {
+      "title_one": "{{count}} dosya dışarıda bırakıldı",
+      "title_other": "{{count}} dosya dışarıda bırakıldı",
+      "topFolder": "Üst klasör",
+      "arcade_one": "{{count}} arcade seti. Arcade oyunları bir Arcade kitaplığından oynanır.",
+      "arcade_other": "{{count}} arcade seti. Arcade oyunları bir Arcade kitaplığından oynanır.",
+      "unknown_one": "Matinee'nin henüz oynatamadığı {{count}} dosya, örneğin {{example}}.",
+      "unknown_other": "Matinee'nin henüz oynatamadığı {{count}} dosya, örneğin {{example}}.",
+      "addArcade": "Arcade kitaplığı ekle"
+    }
   },
   "nothingHereYet": "Burada henüz bir şey yok",
   "collection": {

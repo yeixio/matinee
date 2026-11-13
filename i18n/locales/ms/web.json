@@ -225,7 +225,14 @@
     "appearAsFound": "Tajuk muncul apabila ditemui.",
     "noMedia": "Matinee mencari dalam {{paths}} dan tidak menemui media.",
     "letters": "Lompat ke huruf",
-    "jumpTo": "Lompat ke {{letter}}"
+    "jumpTo": "Lompat ke {{letter}}",
+    "skipped": {
+      "title_other": "{{count}} fail ditinggalkan",
+      "topFolder": "Folder teratas",
+      "arcade_other": "{{count}} set arked. Permainan arked dimainkan dari pustaka Arcade.",
+      "unknown_other": "{{count}} fail yang belum boleh dimainkan oleh Matinee, contohnya {{example}}.",
+      "addArcade": "Tambah pustaka Arcade"
+    }
   },
   "nothingHereYet": "Belum ada apa-apa di sini",
   "collection": {

@@ -227,7 +227,20 @@
     "appearAsFound": "Les titres apparaissent au fur et à mesure.",
     "noMedia": "Matinee a cherché dans {{paths}} et n’a trouvé aucun média.",
     "letters": "Aller à une lettre",
-    "jumpTo": "Aller à {{letter}}"
+    "jumpTo": "Aller à {{letter}}",
+    "skipped": {
+      "title_one": "{{count}} fichier a été laissé de côté",
+      "title_many": "{{count}} de fichiers ont été laissés de côté",
+      "title_other": "{{count}} fichiers ont été laissés de côté",
+      "topFolder": "Dossier principal",
+      "arcade_one": "{{count}} jeu d'arcade. Les jeux d'arcade se lancent depuis une bibliothèque Arcade.",
+      "arcade_many": "{{count}} de jeux d'arcade. Les jeux d'arcade se lancent depuis une bibliothèque Arcade.",
+      "arcade_other": "{{count}} jeux d'arcade. Les jeux d'arcade se lancent depuis une bibliothèque Arcade.",
+      "unknown_one": "{{count}} fichier que Matinee ne peut pas encore lire, comme {{example}}.",
+      "unknown_many": "{{count}} de fichiers que Matinee ne peut pas encore lire, comme {{example}}.",
+      "unknown_other": "{{count}} fichiers que Matinee ne peut pas encore lire, comme {{example}}.",
+      "addArcade": "Ajouter une bibliothèque Arcade"
+    }
   },
   "nothingHereYet": "Rien ici pour l’instant",
   "collection": {

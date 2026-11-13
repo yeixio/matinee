@@ -227,7 +227,20 @@
     "appearAsFound": "Titlurile apar pe măsură ce sunt găsite.",
     "noMedia": "Matinee a căutat în {{paths}} și nu a găsit niciun fișier media.",
     "letters": "Salt la o literă",
-    "jumpTo": "Salt la {{letter}}"
+    "jumpTo": "Salt la {{letter}}",
+    "skipped": {
+      "title_one": "{{count}} fișier a fost omis",
+      "title_few": "{{count}} fișiere au fost omise",
+      "title_other": "{{count}} de fișiere au fost omise",
+      "topFolder": "Dosarul principal",
+      "arcade_one": "{{count}} set arcade. Jocurile arcade rulează dintr-o bibliotecă Arcade.",
+      "arcade_few": "{{count}} seturi arcade. Jocurile arcade rulează dintr-o bibliotecă Arcade.",
+      "arcade_other": "{{count}} de seturi arcade. Jocurile arcade rulează dintr-o bibliotecă Arcade.",
+      "unknown_one": "{{count}} fișier pe care Matinee nu îl poate reda încă, de exemplu {{example}}.",
+      "unknown_few": "{{count}} fișiere pe care Matinee nu le poate reda încă, de exemplu {{example}}.",
+      "unknown_other": "{{count}} de fișiere pe care Matinee nu le poate reda încă, de exemplu {{example}}.",
+      "addArcade": "Adaugă o bibliotecă Arcade"
+    }
   },
   "nothingHereYet": "Nimic aici încă",
   "collection": {

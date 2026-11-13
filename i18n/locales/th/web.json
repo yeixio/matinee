@@ -225,7 +225,14 @@
     "appearAsFound": "เรื่องต่างๆ จะแสดงเมื่อพบ",
     "noMedia": "Matinee ค้นใน {{paths}} แล้วไม่พบสื่อ",
     "letters": "ข้ามไปยังตัวอักษร",
-    "jumpTo": "ข้ามไปที่ {{letter}}"
+    "jumpTo": "ข้ามไปที่ {{letter}}",
+    "skipped": {
+      "title_other": "ข้ามไป {{count}} ไฟล์",
+      "topFolder": "โฟลเดอร์บนสุด",
+      "arcade_other": "ชุดอาร์เคด {{count}} ชุด เกมอาร์เคดเล่นจากคลัง Arcade",
+      "unknown_other": "{{count}} ไฟล์ที่ Matinee ยังเล่นไม่ได้ เช่น {{example}}",
+      "addArcade": "เพิ่มคลัง Arcade"
+    }
   },
   "nothingHereYet": "ยังไม่มีอะไรที่นี่",
   "collection": {
