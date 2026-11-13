@@ -161,12 +161,23 @@ static void fail(const char *fmt, ...) {
 
 // ---- libretro callbacks ----
 
+// last_log is the emulator's last warning or error, which says why a game
+// didn't start ("Not an iNES file!").
+static char last_log[256];
+
 static void core_log(enum retro_log_level level, const char *fmt, ...) {
   if (level < RETRO_LOG_WARN) return;
   va_list ap;
   va_start(ap, fmt);
   vfprintf(stderr, fmt, ap);
   va_end(ap);
+  char line[sizeof last_log];
+  va_start(ap, fmt);
+  vsnprintf(line, sizeof line, fmt, ap);
+  va_end(ap);
+  size_t n = strlen(line);
+  while (n > 0 && (line[n - 1] == '\n' || line[n - 1] == '\r' || line[n - 1] == ' ')) line[--n] = 0;
+  if (n > 0) memcpy(last_log, line, n + 1);
 }
 
 // ---- core options ----
@@ -645,7 +656,10 @@ int main(int argc, char **argv) {
       if (*c == '/' || *c == '\\') base = c + 1;
     snprintf(save_path, sizeof save_path, "%s/%s.srm", save_dir, base);
   }
-  if (!core.load_game(strcmp(game, "-") != 0 ? &info : NULL)) fail("the emulator couldn't start this game");
+  if (!core.load_game(strcmp(game, "-") != 0 ? &info : NULL)) {
+    if (last_log[0]) fail("the emulator couldn't start this game (it said: %s)", last_log);
+    fail("the emulator couldn't start this game");
+  }
   for (unsigned p = 0; p < MAX_PORTS; p++) core.set_controller_port_device(p, RETRO_DEVICE_JOYPAD);
   read_save();
 

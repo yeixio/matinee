@@ -1,10 +1,12 @@
 package gamestream
 
 import (
-	"archive/zip"
 	"path/filepath"
+	"regexp"
 	"slices"
 	"strings"
+
+	"github.com/yeixio/matinee/internal/gamedat"
 )
 
 // System is a game console Matinee can play, and the emulator it uses.
@@ -30,6 +32,11 @@ type System struct {
 // playsZips says the emulator takes a zip as it is, as arcade emulators
 // do, instead of the game inside it.
 func (s System) playsZips() bool { return slices.Contains(s.Extensions, ".zip") }
+
+// playsArchive says the emulator takes this zip or 7z as it is.
+func (s System) playsArchive(path string) bool {
+	return slices.Contains(s.Extensions, strings.ToLower(filepath.Ext(path)))
+}
 
 // builtIn are the consoles the emulators in games/cores.txt play. The keys
 // are Box Office's. Where two emulators take the same kind of file, the one
@@ -102,7 +109,7 @@ func (m *Manager) HasLagTest() bool {
 func (m *Manager) SystemFor(path string) (System, bool) {
 	systems := m.Available()
 	ext := strings.ToLower(filepath.Ext(path))
-	if ext == ".zip" {
+	if gamedat.IsArchive(path) {
 		if s, ok := systemByExt(systems, zipGameExt(path)); ok {
 			return s, true
 		}
@@ -120,7 +127,7 @@ func (m *Manager) SystemForGame(path, key string) (System, bool) {
 	}
 	systems := m.Available()
 	ext := strings.ToLower(filepath.Ext(path))
-	if ext == ".zip" && key != "mame" && key != "pc" {
+	if gamedat.IsArchive(path) && key != "mame" && key != "pc" {
 		if inner := zipGameExt(path); inner != "" {
 			ext = inner
 		}
@@ -154,21 +161,20 @@ func systemByExt(systems []System, ext string) (System, bool) {
 // alone, for listing folders without opening every zip.
 func (m *Manager) IsGameFile(name string) bool {
 	ext := strings.ToLower(filepath.Ext(name))
-	if ext == ".zip" {
+	if gamedat.IsArchive(name) {
 		return true
 	}
 	_, ok := systemByExt(m.Available(), ext)
 	return ok
 }
 
-// zipGameExt is the extension of the game in a zip (see zipGame).
+// zipGameExt is the extension of the game in a zip or 7z (see zipGame).
 func zipGameExt(path string) string {
-	zr, err := zip.OpenReader(path)
+	files, err := gamedat.ListArchive(path)
 	if err != nil {
 		return ""
 	}
-	defer zr.Close()
-	best, _ := zipGame(zr.File)
+	best, _ := zipGame(files, nil)
 	if best == nil {
 		return ""
 	}
@@ -179,25 +185,68 @@ func zipGameExt(path string) string {
 // which are played instead of the tracks themselves.
 var discLists = []string{".m3u", ".cue", ".gdi", ".ccd"}
 
-// zipGame is the game in a zip: the file listing its discs or tracks if
-// there is one (whole says every file must be unpacked beside it), or else
-// the biggest file, which is the game in a zip that also holds a readme.
-func zipGame(files []*zip.File) (best *zip.File, whole bool) {
-	rank := func(f *zip.File) int {
+// zipGame is the game in a zip or 7z: the file listing its discs or tracks
+// if there is one (whole says every file must be unpacked beside it), else
+// a file of the kind the emulator plays (exts, when known), the best of
+// them by its name, then the biggest, which is the game in a zip that also
+// holds a readme. "Best" matters for GoodTools-style archives that hold
+// every dump of a game: a verified good one ([!]) from the US or Europe,
+// not a bad dump, an overdump, a hack or a beta.
+func zipGame(files []gamedat.File, exts []string) (best *gamedat.File, whole bool) {
+	rank := func(f *gamedat.File) int {
 		return len(discLists) - max(-1, slices.Index(discLists, strings.ToLower(filepath.Ext(f.Name))))
 	}
-	for _, f := range files {
-		if f.FileInfo().IsDir() || strings.HasPrefix(filepath.Base(f.Name), ".") {
+	plays := func(f *gamedat.File) bool {
+		return len(exts) == 0 || slices.Contains(exts, strings.ToLower(filepath.Ext(f.Name)))
+	}
+	better := func(f, b *gamedat.File) bool {
+		if rf, rb := rank(f), rank(b); rf != rb {
+			return rf < rb
+		}
+		if pf, pb := plays(f), plays(b); pf != pb {
+			return pf
+		}
+		if qf, qb := dumpRank(f.Base()), dumpRank(b.Base()); qf != qb {
+			return qf < qb
+		}
+		if f.Size != b.Size {
+			return f.Size > b.Size
+		}
+		return f.Name < b.Name
+	}
+	for i := range files {
+		f := &files[i]
+		if strings.HasPrefix(f.Base(), ".") {
 			continue
 		}
-		switch {
-		case best == nil:
-			best = f
-		case rank(f) < rank(best):
-			best = f
-		case rank(f) == rank(best) && f.UncompressedSize64 > best.UncompressedSize64:
+		if best == nil || better(f, best) {
 			best = f
 		}
 	}
 	return best, best != nil && slices.Contains(discLists, strings.ToLower(filepath.Ext(best.Name)))
 }
+
+// dumpFlag are GoodTools' and No-Intro's marks for a dump that isn't the
+// game as sold: bad, overdumped, trained, hacked, fixed, pirate,
+// translated, alternative, or not finished.
+var dumpFlag = regexp.MustCompile(`(?i)\[(b|o|t|h|f|p|a|T[+-])[0-9a-z+ -]*\]|\((beta|proto|prototype|demo|sample|hack|pirate|unl)[^)]*\)`)
+
+// dumpRank orders a game's dumps by name, lower being better.
+func dumpRank(name string) int {
+	r := 10 * len(dumpFlag.FindAllString(name, -1))
+	if strings.Contains(name, "[!]") {
+		r -= 5
+	}
+	switch {
+	case usRegion.MatchString(name):
+		r -= 3
+	case euRegion.MatchString(name):
+		r -= 2
+	}
+	return r
+}
+
+var (
+	usRegion = regexp.MustCompile(`\((U|USA|World|UE|JU|JUE|USA, Europe)\)`)
+	euRegion = regexp.MustCompile(`\((E|Europe)\)`)
+)

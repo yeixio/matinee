@@ -45,7 +45,7 @@ From 0.2.7 it also plays:
 ColecoVision and Intellivision games need the console's own BIOS: put yours in `games/system` in Matinee's data folder (`colecovision.rom` for the ColecoVision, `exec.bin` and `grom.bin` for the Intellivision). The Amiga plays best with your own Kickstart ROM there too (`kick34005.A500` and the like). A DOS game is played from the zip in a folder named for it, such as `pc` or `dos`. The arcade, Atari Jaguar, Commodore 64, Amiga and DOS emulators aren't in the image for 32-bit ARM boards.
 <!-- /since -->
 
-A zip holding one of these works too, including a zip of a PlayStation disc's `.cue` and `.bin` files. Matinee plays only the games you already have: it never looks for, links to or downloads games. You can add emulators for other systems yourself (see [Adding your own emulator](#adding-your-own-emulator)).
+A zip or 7z holding one of these works too, including a zip of a PlayStation disc's `.cue` and `.bin` files. When an archive holds several dumps of a game, as GoodTools sets do, Matinee plays the verified good one (`[!]`), preferring the US or European release, over bad dumps, overdumps, hacks, translations and betas. Matinee plays only the games you already have: it never looks for, links to or downloads games. You can add emulators for other systems yourself (see [Adding your own emulator](#adding-your-own-emulator)).
 
 None of these needs a graphics card in the server: the N64 picture is drawn in software, which wants a recent CPU with a few cores to spare. The Super Nintendo and N64 emulators aren't in the image for 32-bit ARM boards, which are too slow for them.
 
