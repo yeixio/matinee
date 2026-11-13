@@ -97,6 +97,16 @@ Back always goes one step back: from a screen to the one before, from any tab to
 
 <!-- /since -->
 
+<!-- since: v0.2.6 -->
+### Back to the top
+
+From version 1.0.41, Back (Menu on the Siri Remote) is the quick way up from far down a screen:
+
+- **On Home**, Back from anywhere in the rows comes up to the banner's **Play** and **More info** buttons. Back again goes to the top bar, and only Back from the top bar leaves the app.
+- **In a library, a row's See more, your watch list, Search, Discover or Settings**, Back while you're scrolled down jumps back to the top and puts you on the top bar. From the top, Back goes back a screen as usual.
+
+<!-- /since -->
+
 <!-- since: v0.1.4 -->
 ## Watching on a TV
 
