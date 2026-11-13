@@ -54,6 +54,20 @@ RUN case "$TARGETARCH" in \
       amd64) host=x86_64-linux-gnu ;; \
     esac \
     && HOST=$host sh /src/games/build.sh /out/games
+# The arcade emulator, MAME, is built on its own because it takes hours
+# (games/mame.txt, .github/workflows/mame-core.yml): fetched from its
+# release, for 64-bit machines. Until that release exists the image has no
+# arcade emulator, and arcade games say so.
+RUN apt-get update && apt-get install -y --no-install-recommends curl xz-utils && rm -rf /var/lib/apt/lists/* \
+    && v=$(sed -n 's/^version=//p' /src/games/mame.txt) && c=$(sed -n 's/^commit=//p' /src/games/mame.txt | cut -c1-7) \
+    && base="https://github.com/yeixio/matinee/releases/download/mame-core-$v-$c" \
+    && case "$TARGETARCH" in amd64|arm64) \
+         if curl -fsSL -o /tmp/mame.so.xz "$base/mame_libretro-$TARGETARCH.so.xz" && curl -fsSL -o /tmp/SHA256SUMS "$base/SHA256SUMS"; then \
+           (cd /tmp && grep " mame_libretro-$TARGETARCH.so.xz\$" SHA256SUMS | sed "s/mame_libretro-$TARGETARCH.so.xz/mame.so.xz/" | sha256sum -c -) \
+           && xz -d -c /tmp/mame.so.xz > /out/games/cores/mame_libretro.so \
+           && curl -fsSL -o /out/games/licenses/mame.txt "$base/mame-COPYING.txt"; \
+         else echo "no MAME release mame-core-$v-$c yet"; fi ;; \
+       esac
 
 # Debian rather than Alpine: its FFmpeg is built with every hardware backend
 # Matinee uses on Linux, and glibc lets NVIDIA's container runtime add its

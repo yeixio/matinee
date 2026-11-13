@@ -689,8 +689,13 @@
       "region": "Rantau",
       "publisher": "Penerbit",
       "players": "Pemain",
-      "genre": "Genre"
+      "genre": "Genre",
+      "screen": "Skrin"
     },
-    "notHere": "Permainan belum boleh dimainkan pada peranti ini"
+    "notHere": "Permainan belum boleh dimainkan pada peranti ini",
+    "noEmulatorFor": "Matinee belum boleh memainkan permainan {{system}}: pelayan ini tiada emulator untuknya.",
+    "noEmulator": "Matinee belum boleh memainkan permainan ini: pelayan ini tiada emulator untuknya.",
+    "addEmulatorWeb": "Pentadbir boleh menambahnya dalam Tetapan → Penstriman → Permainan di pemain web.",
+    "emulatorGuide": "Cara menambah emulator sendiri"
   }
 }

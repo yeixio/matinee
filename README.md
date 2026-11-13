@@ -267,6 +267,7 @@ Every setting is a flag or an environment variable.
 | `MATINEE_OPENLIBRARY` | `true` | Look up audiobook covers and author photos on Open Library. No key needed. Set `false` to use only local artwork |
 | `MATINEE_PODCASTS_HOME_NETWORK` | `false` | Let podcast feeds and episodes come from addresses on the home network too, for shows you host yourself. Off, Matinee only fetches them from the internet |
 | `MATINEE_WIKIDATA` | `true` | Look up the awards movies and shows won or were nominated for on Wikidata. No key needed. Set `false` to skip awards |
+| `MATINEE_WIKIPEDIA` | `true` | Look up games' summaries on Wikipedia and their genres on Wikidata. No key needed. Set `false` to skip them |
 | `MATINEE_SCAN_INTERVAL` | `6h` | How often libraries are rescanned in full until an admin picks in Settings; `0` turns it off |
 | `MATINEE_WATCH_POLL_INTERVAL` | `2m` | How often folders on network shares are checked for new files until an admin picks in Settings. A big library on a slow share is checked less often by itself, so the share stays responsive |
 | `MATINEE_DISCOVERY` | `true` | Announce the server on the local network so the apps find it ([more](#finding-it-from-the-apps)) |
@@ -323,12 +324,11 @@ internal/hwaccel     finds the GPU and builds FFmpeg's arguments for it
 internal/store       SQLite / PostgreSQL storage
 internal/plugin      runs plugins: WebAssembly in a sandbox (wazero)
 pluginsdk/           the SDK for writing plugins (MIT licensed)
-plugins/arcade/      the Arcade plugin: MAME in the web player
 web/                 React + Vite web player
 deploy/helm/matinee  Helm chart
 ```
 
-Plugins add library kinds, details, players and reactions to events without changing Matinee; the [developer guide](https://matinee.yeix.io/docs/plugins/overview/) explains how to write one, with a tutorial, the `matinee-plugin` tool and a Go SDK. The [Arcade plugin](plugins/arcade) is the first: it plays arcade games in the web player with MAME.
+Plugins add library kinds, details, players and reactions to events without changing Matinee; the [developer guide](https://matinee.yeix.io/docs/plugins/overview/) explains how to write one, with a tutorial, the `matinee-plugin` tool and a Go SDK.
 
 The API is plain JSON over HTTP under `/api/v1`, open to any client, and documented in [`openapi.yaml`](internal/api/openapi.yaml) (also served at `/api/v1/openapi.yaml`). Within v1 it only grows; breaking changes would go in a v2 served alongside it. Kubernetes probes are at `/healthz` (process up) and `/readyz` (database reachable).
 

@@ -52,6 +52,8 @@ const (
 	FactPublisher = "publisher"
 	FactPlayers   = "players"
 	FactGenre     = "genre"
+	// FactScreen is "Vertical" for an arcade game with an upright screen.
+	FactScreen = "screen"
 )
 
 // Kind is the Games library kind.
@@ -62,13 +64,20 @@ type Kind struct {
 	// such as for a mirror or a test; empty uses the defaults.
 	LibretroDB string
 	Art        string
-	HTTP       *http.Client
-	Log        *slog.Logger
+	// MAMEList overrides where MAME's list of machines comes from (see
+	// DefaultMAMEList).
+	MAMEList string
+	HTTP     *http.Client
+	Log      *slog.Logger
 
 	mu    sync.Mutex
 	lists map[string]*lists // by system key
 	arts  map[artListKey]artList
 	dlMu  sync.Mutex
+
+	arcadeMu    sync.Mutex
+	arcadeL     *arcadeList
+	arcadeTried time.Time
 }
 
 // lists are what's known about one system's games.
@@ -78,7 +87,10 @@ type lists struct {
 	facts gamedat.FactIndex
 }
 
-var _ scan.Unprobed = (*Kind)(nil)
+var (
+	_ scan.Unprobed = (*Kind)(nil)
+	_ scan.Finisher = (*Kind)(nil)
+)
 
 func (k *Kind) Name() string               { return KindName }
 func (k *Kind) Unprobed()                  {}
@@ -93,10 +105,12 @@ func (k *Kind) Wants(path string) bool {
 // Index files one game.
 func (k *Kind) Index(ctx context.Context, st *store.Store, f scan.File) (store.Item, error) {
 	sys, inside, ok := SystemFor(f.Root, f.Path)
+	if !sys.Arcade && k.misfiledArcade(ctx, f.Path) {
+		sys, ok = gamedat.Systems[0], true
+	}
 	switch {
 	case ok && sys.Arcade:
-		// Arcade games come with the Arcade library for now.
-		return store.Item{}, scan.Skip(SkipArcade, topFolder(f.Root, f.Path))
+		return k.indexArcade(ctx, sys, f)
 	case !ok:
 		return store.Item{}, scan.Skip(SkipUnknown, topFolder(f.Root, f.Path))
 	}
@@ -136,18 +150,15 @@ func (k *Kind) Index(ctx context.Context, st *store.Store, f scan.File) (store.I
 	if it.Poster == "" {
 		it.Poster = k.onlineArt(ctx, sys, name)
 	}
+	it.Backdrop = k.onlineBackdrop(ctx, sys, name)
+	it.PluginData = groupData(sys.Key+"|"+looseTitle(cmp.Or(gamedat.Title(name), name)), editionOf(name))
 	return it, nil
 }
 
-// Why games are left out (scan.Skip), for admins.
-const (
-	// SkipArcade is an arcade set: the Arcade library plays those.
-	SkipArcade = "arcade"
-	// SkipUnknown is a file Matinee can't tell is a game for a system it
-	// knows, such as a zip without a console game in it, or a game in a
-	// folder for a system it doesn't play.
-	SkipUnknown = "unknown"
-)
+// SkipUnknown is why a file is left out (scan.Skip) when Matinee can't
+// tell it's a game for a system it knows, such as a zip that holds no
+// console's game and isn't one of MAME's sets.
+const SkipUnknown = "unknown"
 
 // topFolder is the folder under the library's that path is in, which is
 // usually its system's, or "" for a file at the top.

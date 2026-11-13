@@ -703,8 +703,13 @@
       "region": "Regione",
       "publisher": "Editore",
       "players": "Giocatori",
-      "genre": "Genere"
+      "genre": "Genere",
+      "screen": "Schermo"
     },
-    "notHere": "I giochi non funzionano ancora su questo dispositivo"
+    "notHere": "I giochi non funzionano ancora su questo dispositivo",
+    "noEmulatorFor": "Matinee non può ancora avviare i giochi {{system}}: su questo server non c'è un emulatore per loro.",
+    "noEmulator": "Matinee non può ancora avviare questo gioco: su questo server non c'è un emulatore per lui.",
+    "addEmulatorWeb": "Un amministratore può aggiungerne uno in Impostazioni → Streaming → Giochi nel player web.",
+    "emulatorGuide": "Come aggiungere un tuo emulatore"
   }
 }

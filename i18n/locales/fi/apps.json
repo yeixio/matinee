@@ -696,8 +696,13 @@
       "region": "Alue",
       "publisher": "Julkaisija",
       "players": "Pelaajat",
-      "genre": "Lajityyppi"
+      "genre": "Lajityyppi",
+      "screen": "Näyttö"
     },
-    "notHere": "Pelejä ei voi vielä pelata tällä laitteella"
+    "notHere": "Pelejä ei voi vielä pelata tällä laitteella",
+    "noEmulatorFor": "Matinee ei vielä osaa pelata {{system}}-pelejä: tällä palvelimella ei ole niille emulaattoria.",
+    "noEmulator": "Matinee ei vielä osaa pelata tätä peliä: tällä palvelimella ei ole sille emulaattoria.",
+    "addEmulatorWeb": "Ylläpitäjä voi lisätä sellaisen verkkosoittimen kohdassa Asetukset → Suoratoisto → Pelit.",
+    "emulatorGuide": "Näin lisäät oman emulaattorin"
   }
 }

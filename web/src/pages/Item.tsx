@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { Check, CheckCheck, ChevronRight, ImageOff, LoaderCircle, Play } from 'lucide-react'
+import { Check, CheckCheck, ChevronRight, ImageOff, Info, LoaderCircle, Play } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { Link, Navigate, useParams, useSearchParams } from 'react-router-dom'
 import { api, pendingRefetch, type Item, type ItemDetail, type User } from '../api'
@@ -171,9 +171,10 @@ function Header({ item, kids }: { item: ItemDetail; kids?: Item[] }) {
 
           <KeyPeople item={item} />
           <Facts item={item} />
+          {item.noEmulator && <NoEmulator item={item} user={me} />}
 
           <div className="flex flex-wrap gap-3">
-            {item.playable && (
+            {item.playable && !item.noEmulator && (
               <Link to={version ? `/watch/${version.id}?v=1` : `/watch/${item.id}`}>
                 <Button variant="primary" icon={<Play className="size-4 fill-current" />}>
                   {resume ? t('item.resumeFrom', { time: clock(item.positionMs! / 1000) }) : t('item.play')}
@@ -315,6 +316,36 @@ function EpisodeList({ items }: { items: Item[] }) {
     </section>
   )
 }
+
+// NoEmulator says a game can't be played here yet, and why: Matinee has
+// no emulator for its system. It says where one can be added: in Settings
+// for an admin, and how, in the guide.
+function NoEmulator({ item, user }: { item: Item; user?: User }) {
+  const { t } = useTranslation()
+  const system = item.facts?.find((f) => f.label === 'system')?.value
+  return (
+    <div className="flex max-w-3xl items-start gap-2 rounded-lg border border-line/60 bg-surface/50 px-3 py-2 text-sm text-text/85">
+      <Info className="mt-0.5 size-4 shrink-0 text-accent" />
+      <div className="space-y-1">
+        <p>{system ? t('games.noEmulatorFor', { system }) : t('games.noEmulator')}</p>
+        <p className="flex flex-wrap gap-x-4 gap-y-1">
+          {user?.isAdmin ? (
+            <Link to="/settings/streaming#games" className="text-accent hover:underline">
+              {t('games.addEmulator')}
+            </Link>
+          ) : (
+            <span className="text-muted">{t('games.askAdminEmulator')}</span>
+          )}
+          <a href={emulatorGuide} target="_blank" rel="noreferrer" className="text-accent hover:underline">
+            {t('games.emulatorGuide')}
+          </a>
+        </p>
+      </div>
+    </div>
+  )
+}
+
+const emulatorGuide = 'https://matinee.yeix.io/docs/server/games/#adding-your-own-emulator'
 
 // Facts are labelled lines found for an item, such as who made a game: by a
 // plugin, labelled in its words, or by a Games library, labelled with a key

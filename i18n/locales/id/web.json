@@ -229,9 +229,7 @@
     "skipped": {
       "title_other": "{{count}} file dilewati",
       "topFolder": "Folder teratas",
-      "arcade_other": "{{count}} set arcade. Game arcade dimainkan dari pustaka Arcade.",
-      "unknown_other": "{{count}} file yang belum bisa diputar Matinee, misalnya {{example}}.",
-      "addArcade": "Tambahkan pustaka Arcade"
+      "unknown_other": "{{count}} file yang belum bisa diputar Matinee, misalnya {{example}}."
     }
   },
   "nothingHereYet": "Belum ada apa-apa di sini",
@@ -1688,8 +1686,14 @@
       "region": "Wilayah",
       "publisher": "Penerbit",
       "players": "Pemain",
-      "genre": "Genre"
+      "genre": "Genre",
+      "screen": "Layar"
     },
-    "tapToPlay": "Tekan untuk bermain"
+    "tapToPlay": "Tekan untuk bermain",
+    "noEmulatorFor": "Matinee belum bisa memainkan game {{system}}: server ini belum punya emulator untuknya.",
+    "noEmulator": "Matinee belum bisa memainkan game ini: server ini belum punya emulator untuknya.",
+    "addEmulator": "Tambahkan emulator di Pengaturan",
+    "emulatorGuide": "Cara menambahkan emulator sendiri",
+    "askAdminEmulator": "Admin bisa menambahkan emulator untuknya."
   }
 }

@@ -710,8 +710,13 @@
       "region": "Region",
       "publisher": "Wydawca",
       "players": "Gracze",
-      "genre": "Gatunek"
+      "genre": "Gatunek",
+      "screen": "Ekran"
     },
-    "notHere": "Gry nie działają jeszcze na tym urządzeniu"
+    "notHere": "Gry nie działają jeszcze na tym urządzeniu",
+    "noEmulatorFor": "Matinee nie uruchamia jeszcze gier na {{system}}: na tym serwerze nie ma dla nich emulatora.",
+    "noEmulator": "Matinee nie uruchamia jeszcze tej gry: na tym serwerze nie ma dla niej emulatora.",
+    "addEmulatorWeb": "Administrator może go dodać w odtwarzaczu webowym: Ustawienia → Streaming → Gry.",
+    "emulatorGuide": "Jak dodać własny emulator"
   }
 }

@@ -6433,6 +6433,7 @@ components:
                   size: { type: integer, description: Bytes. }
             subtitleSearch: { type: boolean, description: "The person can look for more subtitles online (GET /items/{id}/subtitles/search)." }
             streamedGame: { type: boolean, description: "A game this server plays and streams (POST /items/{id}/game)." }
+            noEmulator: { type: boolean, description: "A game of a Games library that no emulator on this server plays yet. Apps show no Play button for it." }
             parents: { type: array, items: { $ref: "#/components/schemas/Item" }, description: Root first, such as show then season. }
             mediaInfo: { $ref: "#/components/schemas/MediaInfo" }
             mediaInfoStale: { type: boolean, description: The file changed since it was analyzed; a new analysis is on its way. }

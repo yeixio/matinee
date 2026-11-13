@@ -696,8 +696,13 @@
       "region": "Bölge",
       "publisher": "Yayıncı",
       "players": "Oyuncular",
-      "genre": "Tür"
+      "genre": "Tür",
+      "screen": "Ekran"
     },
-    "notHere": "Oyunlar bu cihazda henüz oynanamıyor"
+    "notHere": "Oyunlar bu cihazda henüz oynanamıyor",
+    "noEmulatorFor": "Matinee henüz {{system}} oyunlarını oynatamıyor: bu sunucuda onlar için bir emülatör yok.",
+    "noEmulator": "Matinee bu oyunu henüz oynatamıyor: bu sunucuda onun için bir emülatör yok.",
+    "addEmulatorWeb": "Bir yönetici web oynatıcıda Ayarlar → Akış → Oyunlar bölümünden ekleyebilir.",
+    "emulatorGuide": "Kendi emülatörünüzü nasıl eklersiniz"
   }
 }

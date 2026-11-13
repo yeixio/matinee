@@ -525,7 +525,7 @@ export type Library = {
   skipped?: SkipCount[]
 }
 
-/** Files a scan left out for one reason: 'arcade' sets, or 'unknown' (not a game for a system Matinee knows). */
+/** Files a scan left out for one reason, such as 'unknown': not a game for a system Matinee knows. */
 export interface SkipCount {
   reason: string
   /** The folder under the library's they're in. */
@@ -997,6 +997,8 @@ export type ItemDetail = Item & {
   mediaInfoStale?: boolean
   // A game this server plays and streams (api.playGameItem).
   streamedGame?: boolean
+  // A game of a Games library that no emulator on this server plays yet.
+  noEmulator?: boolean
   // Episodes: where the intro plays, from a chapter or found by matching the
   // season's audio. Left out when unknown.
   intro?: { startMs: number; endMs: number; source: 'chapters' | 'audio' }

@@ -696,8 +696,13 @@
       "region": "Régió",
       "publisher": "Kiadó",
       "players": "Játékosok",
-      "genre": "Műfaj"
+      "genre": "Műfaj",
+      "screen": "Képernyő"
     },
-    "notHere": "Ezen az eszközön még nem lehet játszani"
+    "notHere": "Ezen az eszközön még nem lehet játszani",
+    "noEmulatorFor": "A Matinee még nem tud {{system}}-játékokat futtatni: ezen a szerveren nincs hozzájuk emulátor.",
+    "noEmulator": "A Matinee még nem tudja futtatni ezt a játékot: ezen a szerveren nincs hozzá emulátor.",
+    "addEmulatorWeb": "Egy rendszergazda hozzáadhat egyet a webes lejátszóban: Beállítások → Streamelés → Játékok.",
+    "emulatorGuide": "Így adhatsz hozzá saját emulátort"
   }
 }

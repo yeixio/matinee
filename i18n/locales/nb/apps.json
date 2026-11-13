@@ -696,8 +696,13 @@
       "region": "Region",
       "publisher": "Utgiver",
       "players": "Spillere",
-      "genre": "Sjanger"
+      "genre": "Sjanger",
+      "screen": "Skjerm"
     },
-    "notHere": "Spill fungerer ikke på denne enheten ennå"
+    "notHere": "Spill fungerer ikke på denne enheten ennå",
+    "noEmulatorFor": "Matinee kan ikke spille {{system}}-spill ennå: det finnes ingen emulator for dem på denne serveren.",
+    "noEmulator": "Matinee kan ikke spille dette spillet ennå: det finnes ingen emulator for det på denne serveren.",
+    "addEmulatorWeb": "En administrator kan legge til en under Innstillinger → Strømming → Spill i nettspilleren.",
+    "emulatorGuide": "Slik legger du til din egen emulator"
   }
 }

@@ -32,6 +32,11 @@ type System struct {
 	Disc bool `json:"-"`
 }
 
+// MAMEVersion is the version of MAME arcade sets are checked against and
+// played with: games/mame.txt's, the server's MAME. ROM sets are made for
+// one version of MAME.
+const MAMEVersion = "0.289"
+
 // Systems are the systems Matinee knows, MAME first. They're Box Office's
 // (internal/gamedat there), plus the PlayStation.
 var Systems = []System{
@@ -73,10 +78,50 @@ var Systems = []System{
 		Exts: []string{".ws"}, Folders: []string{"ws", "wonderswan"}},
 	{Key: "wonderswancolor", Name: "WonderSwan Color", Short: "WSC", Maker: "Bandai", Libretro: "Bandai - WonderSwan Color",
 		Exts: []string{".wsc"}, Folders: []string{"wsc", "wonderswancolor"}},
+	{Key: "32x", Name: "Sega 32X", Short: "32X", Maker: "Sega", Libretro: "Sega - 32X",
+		Exts: []string{".32x"}, Folders: []string{"32x", "sega32x"}},
+	{Key: "atari5200", Name: "Atari 5200", Short: "5200", Maker: "Atari", Libretro: "Atari - 5200",
+		Exts: []string{".a52"}, Folders: []string{"atari5200", "a5200", "5200"}},
+	{Key: "jaguar", Name: "Atari Jaguar", Short: "Jaguar", Maker: "Atari", Libretro: "Atari - Jaguar",
+		Exts: []string{".j64", ".jag"}, Folders: []string{"jaguar", "atarijaguar"}},
+	{Key: "colecovision", Name: "ColecoVision", Short: "Coleco", Maker: "Coleco", Libretro: "Coleco - ColecoVision",
+		Exts: []string{".col"}, Folders: []string{"colecovision", "coleco"}},
+	{Key: "intellivision", Name: "Intellivision", Short: "Intv", Maker: "Mattel", Libretro: "Mattel - Intellivision",
+		Exts: []string{".int"}, Folders: []string{"intellivision", "intv"}},
+	{Key: "c64", Name: "Commodore 64", Short: "C64", Maker: "Commodore", Libretro: "Commodore - 64",
+		Exts: []string{".d64", ".t64", ".prg", ".crt", ".g64"}, Folders: []string{"c64", "commodore64"}},
+	{Key: "amiga", Name: "Amiga", Short: "Amiga", Maker: "Commodore", Libretro: "Commodore - Amiga",
+		Exts: []string{".adf", ".ipf"}, Folders: []string{"amiga", "commodoreamiga"}},
+	{Key: "zxspectrum", Name: "ZX Spectrum", Short: "ZX", Maker: "Sinclair", Libretro: "Sinclair - ZX Spectrum +3",
+		Exts: []string{".tzx", ".z80", ".sna"}, Folders: []string{"zxspectrum", "spectrum", "zx"}},
+	{Key: "msx", Name: "MSX", Short: "MSX", Maker: "Microsoft", Libretro: "Microsoft - MSX",
+		Exts: []string{".mx1", ".mx2"}, Folders: []string{"msx", "msx1", "msx2"}},
+	{Key: "nds", Name: "Nintendo DS", Short: "DS", Maker: "Nintendo", Libretro: "Nintendo - Nintendo DS",
+		Exts: []string{".nds"}, Folders: []string{"nds", "ds", "nintendods"}},
+	{Key: "3ds", Name: "Nintendo 3DS", Short: "3DS", Maker: "Nintendo", Libretro: "Nintendo - Nintendo 3DS",
+		Exts: []string{".3ds", ".cia"}, Folders: []string{"3ds", "n3ds", "nintendo3ds"}},
 	// Discs, which No-Intro doesn't list: told by name. A .bin is a track
 	// listed in a .cue, not a game of its own.
 	{Key: "psx", Name: "PlayStation", Short: "PS1", Maker: "Sony", Libretro: "Sony - PlayStation", Disc: true,
 		Exts: []string{".cue", ".chd", ".pbp", ".m3u"}, Folders: []string{"psx", "ps1", "playstation", "psone", "sonyplaystation"}},
+	{Key: "segacd", Name: "Sega CD / Mega-CD", Short: "Sega CD", Maker: "Sega", Libretro: "Sega - Mega-CD - Sega CD", Disc: true,
+		Folders: []string{"segacd", "megacd", "segamegacd"}},
+	{Key: "saturn", Name: "Sega Saturn", Short: "Saturn", Maker: "Sega", Libretro: "Sega - Saturn", Disc: true,
+		Folders: []string{"saturn", "segasaturn"}},
+	{Key: "dreamcast", Name: "Dreamcast", Short: "DC", Maker: "Sega", Libretro: "Sega - Dreamcast", Disc: true,
+		Exts: []string{".gdi", ".cdi"}, Folders: []string{"dreamcast", "dc", "segadreamcast"}},
+	{Key: "ps2", Name: "PlayStation 2", Short: "PS2", Maker: "Sony", Libretro: "Sony - PlayStation 2", Disc: true,
+		Folders: []string{"ps2", "playstation2", "sonyplaystation2"}},
+	{Key: "psp", Name: "PlayStation Portable", Short: "PSP", Maker: "Sony", Libretro: "Sony - PlayStation Portable", Disc: true,
+		Exts: []string{".cso"}, Folders: []string{"psp", "playstationportable"}},
+	{Key: "gamecube", Name: "GameCube", Short: "GC", Maker: "Nintendo", Libretro: "Nintendo - GameCube", Disc: true,
+		Exts: []string{".gcm", ".rvz"}, Folders: []string{"gamecube", "gc", "ngc", "nintendogamecube"}},
+	{Key: "wii", Name: "Wii", Short: "Wii", Maker: "Nintendo", Libretro: "Nintendo - Wii", Disc: true,
+		Exts: []string{".wbfs"}, Folders: []string{"wii", "nintendowii"}},
+	{Key: "switch", Name: "Nintendo Switch", Short: "Switch", Maker: "Nintendo", Disc: true,
+		Exts: []string{".nsp", ".xci"}, Folders: []string{"switch", "nintendoswitch", "ns"}},
+	{Key: "pc", Name: "PC", Short: "PC", Maker: "PC", Libretro: "DOS", Disc: true,
+		Folders: []string{"pc", "dos", "msdos", "windows"}},
 }
 
 // LookupSystem finds a system by key.

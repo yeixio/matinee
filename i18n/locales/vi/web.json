@@ -229,9 +229,7 @@
     "skipped": {
       "title_other": "Đã bỏ qua {{count}} tệp",
       "topFolder": "Thư mục trên cùng",
-      "arcade_other": "{{count}} bộ arcade. Trò chơi arcade chạy từ thư viện Arcade.",
-      "unknown_other": "{{count}} tệp Matinee chưa phát được, ví dụ {{example}}.",
-      "addArcade": "Thêm thư viện Arcade"
+      "unknown_other": "{{count}} tệp Matinee chưa phát được, ví dụ {{example}}."
     }
   },
   "nothingHereYet": "Chưa có gì ở đây",
@@ -1688,8 +1686,14 @@
       "region": "Khu vực",
       "publisher": "Nhà phát hành",
       "players": "Người chơi",
-      "genre": "Thể loại"
+      "genre": "Thể loại",
+      "screen": "Màn hình"
     },
-    "tapToPlay": "Nhấn để chơi"
+    "tapToPlay": "Nhấn để chơi",
+    "noEmulatorFor": "Matinee chưa chơi được trò chơi {{system}}: máy chủ này chưa có trình giả lập cho chúng.",
+    "noEmulator": "Matinee chưa chơi được trò chơi này: máy chủ này chưa có trình giả lập cho nó.",
+    "addEmulator": "Thêm trình giả lập trong Cài đặt",
+    "emulatorGuide": "Cách thêm trình giả lập của riêng bạn",
+    "askAdminEmulator": "Quản trị viên có thể thêm trình giả lập cho nó."
   }
 }

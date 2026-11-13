@@ -231,11 +231,8 @@
       "title_one": "{{count}} fil blev udeladt",
       "title_other": "{{count}} filer blev udeladt",
       "topFolder": "Øverste mappe",
-      "arcade_one": "{{count}} arkadesæt. Arkadespil spilles fra et Arcade-bibliotek.",
-      "arcade_other": "{{count}} arkadesæt. Arkadespil spilles fra et Arcade-bibliotek.",
       "unknown_one": "{{count}} fil, som Matinee ikke kan afspille endnu, f.eks. {{example}}.",
-      "unknown_other": "{{count}} filer, som Matinee ikke kan afspille endnu, f.eks. {{example}}.",
-      "addArcade": "Tilføj et Arcade-bibliotek"
+      "unknown_other": "{{count}} filer, som Matinee ikke kan afspille endnu, f.eks. {{example}}."
     }
   },
   "nothingHereYet": "Intet her endnu",
@@ -1703,8 +1700,14 @@
       "region": "Region",
       "publisher": "Udgiver",
       "players": "Spillere",
-      "genre": "Genre"
+      "genre": "Genre",
+      "screen": "Skærm"
     },
-    "tapToPlay": "Tryk for at spille"
+    "tapToPlay": "Tryk for at spille",
+    "noEmulatorFor": "Matinee kan ikke spille {{system}}-spil endnu: der er ingen emulator til dem på denne server.",
+    "noEmulator": "Matinee kan ikke spille dette spil endnu: der er ingen emulator til det på denne server.",
+    "addEmulator": "Tilføj en emulator i Indstillinger",
+    "emulatorGuide": "Sådan tilføjer du din egen emulator",
+    "askAdminEmulator": "En administrator kan tilføje en emulator til det."
   }
 }

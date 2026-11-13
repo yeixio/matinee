@@ -229,9 +229,7 @@
     "skipped": {
       "title_other": "ข้ามไป {{count}} ไฟล์",
       "topFolder": "โฟลเดอร์บนสุด",
-      "arcade_other": "ชุดอาร์เคด {{count}} ชุด เกมอาร์เคดเล่นจากคลัง Arcade",
-      "unknown_other": "{{count}} ไฟล์ที่ Matinee ยังเล่นไม่ได้ เช่น {{example}}",
-      "addArcade": "เพิ่มคลัง Arcade"
+      "unknown_other": "{{count}} ไฟล์ที่ Matinee ยังเล่นไม่ได้ เช่น {{example}}"
     }
   },
   "nothingHereYet": "ยังไม่มีอะไรที่นี่",
@@ -1688,8 +1686,14 @@
       "region": "ภูมิภาค",
       "publisher": "ผู้จัดจำหน่าย",
       "players": "ผู้เล่น",
-      "genre": "ประเภท"
+      "genre": "ประเภท",
+      "screen": "หน้าจอ"
     },
-    "tapToPlay": "กดเพื่อเล่น"
+    "tapToPlay": "กดเพื่อเล่น",
+    "noEmulatorFor": "Matinee ยังเล่นเกม {{system}} ไม่ได้ เพราะเซิร์ฟเวอร์นี้ไม่มีอีมูเลเตอร์สำหรับเกมเหล่านี้",
+    "noEmulator": "Matinee ยังเล่นเกมนี้ไม่ได้ เพราะเซิร์ฟเวอร์นี้ไม่มีอีมูเลเตอร์สำหรับเกมนี้",
+    "addEmulator": "เพิ่มอีมูเลเตอร์ในการตั้งค่า",
+    "emulatorGuide": "วิธีเพิ่มอีมูเลเตอร์ของคุณเอง",
+    "askAdminEmulator": "ผู้ดูแลระบบเพิ่มอีมูเลเตอร์สำหรับเกมนี้ได้"
   }
 }

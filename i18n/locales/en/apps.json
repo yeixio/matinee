@@ -696,8 +696,13 @@
       "region": "Region",
       "publisher": "Publisher",
       "players": "Players",
-      "genre": "Genre"
+      "genre": "Genre",
+      "screen": "Screen"
     },
-    "notHere": "Games don't play on this device yet"
+    "notHere": "Games don't play on this device yet",
+    "noEmulatorFor": "Matinee can't play {{system}} games yet: there's no emulator for them on this server.",
+    "noEmulator": "Matinee can't play this game yet: there's no emulator for it on this server.",
+    "addEmulatorWeb": "An admin can add one in Settings → Streaming → Games in the web player.",
+    "emulatorGuide": "How to add your own emulator"
   }
 }

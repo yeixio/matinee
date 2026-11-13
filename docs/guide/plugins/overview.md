@@ -56,6 +56,5 @@ go install github.com/yeixio/matinee/cmd/matinee-plugin@latest
 ## Examples
 
 - **[Stories](https://github.com/yeixio/matinee/tree/main/pluginsdk/examples/stories)** files short stories kept as text files and comes with a reader that remembers where you got to. It's small, and it's what [Your first plugin](/docs/plugins/first-plugin/) builds.
-- **[Arcade](https://github.com/yeixio/matinee/tree/main/plugins/arcade)** plays arcade games with MAME built to WebAssembly. It uses every part of the API: library folders with artwork, details looked up online, data for the player, files from elsewhere in the library, and saved states in storage.
 
 Next, build [your first plugin](/docs/plugins/first-plugin/).

@@ -8,6 +8,7 @@ package gamedat
 import (
 	"encoding/xml"
 	"io"
+	"slices"
 	"strconv"
 	"strings"
 )
@@ -26,6 +27,16 @@ type Machine struct {
 	// Runnable is false for a set MAME can't start on its own.
 	Runnable bool
 	Players  int
+	// Buttons and Controls are from the first <input>'s controls, such
+	// as joy and 2 buttons; Rotate is the first screen's turn in degrees
+	// (90 or 270 for an upright screen); Status is how well MAME plays it
+	// (good, imperfect or preliminary) and SaveState whether it can save
+	// a game's place.
+	Buttons   int
+	Controls  []string
+	Rotate    int
+	Status    string
+	SaveState bool
 	// DefaultBIOS is the BIOS set a BIOS machine uses unless told
 	// otherwise.
 	DefaultBIOS string
@@ -35,6 +46,8 @@ type Machine struct {
 	Disks   []Disk
 	Devices []string
 	HasRoms bool
+
+	hasDisplay bool
 }
 
 // Rom is one file of a set.
@@ -161,6 +174,25 @@ func ParseXML(r io.Reader, want func(name string) bool) (*List, error) {
 			case "input":
 				if m != nil {
 					m.Players, _ = strconv.Atoi(attr(t, "players"))
+				}
+			case "control":
+				if m != nil {
+					if c := attr(t, "type"); c != "" && !slices.Contains(m.Controls, c) {
+						m.Controls = append(m.Controls, c)
+					}
+					if b, _ := strconv.Atoi(attr(t, "buttons")); b > m.Buttons {
+						m.Buttons = b
+					}
+				}
+			case "display":
+				if m != nil && !m.hasDisplay {
+					m.hasDisplay = true
+					m.Rotate, _ = strconv.Atoi(attr(t, "rotate"))
+				}
+			case "driver":
+				if m != nil {
+					m.Status = attr(t, "status")
+					m.SaveState = attr(t, "savestate") == "supported"
 				}
 			}
 		case xml.CharData:

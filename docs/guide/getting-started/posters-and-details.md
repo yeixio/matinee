@@ -83,6 +83,9 @@ Two more sources need no key and are on by default:
 - **Open Library** fills in audiobook covers and author photos for books without their own. Set `MATINEE_OPENLIBRARY=false` to use only your own files.
 <!-- /since -->
 - **Wikidata** adds the awards a movie or show won or was nominated for. Set `MATINEE_WIKIDATA=false` to skip them.
+<!-- since: v0.2.7 -->
+- **Wikipedia** adds a summary to each game in a Games library, and Wikidata its genres. Set `MATINEE_WIKIPEDIA=false` to skip them.
+<!-- /since -->
 
 ## Age ratings in your country
 

@@ -689,8 +689,13 @@
       "region": "지역",
       "publisher": "배급사",
       "players": "플레이어 수",
-      "genre": "장르"
+      "genre": "장르",
+      "screen": "화면"
     },
-    "notHere": "이 기기에서는 아직 게임을 할 수 없습니다"
+    "notHere": "이 기기에서는 아직 게임을 할 수 없습니다",
+    "noEmulatorFor": "Matinee는 아직 {{system}} 게임을 실행할 수 없습니다. 이 서버에 해당 에뮬레이터가 없습니다.",
+    "noEmulator": "Matinee는 아직 이 게임을 실행할 수 없습니다. 이 서버에 해당 에뮬레이터가 없습니다.",
+    "addEmulatorWeb": "관리자가 웹 플레이어의 설정 → 스트리밍 → 게임에서 추가할 수 있습니다.",
+    "emulatorGuide": "직접 에뮬레이터를 추가하는 방법"
   }
 }

@@ -32,6 +32,7 @@ type Config struct {
 	MusicBrainz   bool          // look up artists and albums on MusicBrainz (no key needed)
 	OpenLibrary   bool          // look up audiobook covers and author photos on Open Library (no key needed)
 	Wikidata      bool          // look up movies' and shows' awards on Wikidata (no key needed)
+	Wikipedia     bool          // look up games' summaries on Wikipedia and genres on Wikidata (no key needed)
 	Discovery     bool          // announce the server on the local network so the apps find it
 	ServerName    string        // the name the apps show for this server
 	PublicURL     string        // the address the apps should connect to; empty uses this host's IP and port
@@ -124,6 +125,7 @@ func Load(args []string) (Config, error) {
 	fs.StringVar(&c.RatingCountry, "rating-country", env("MATINEE_RATING_COUNTRY", "US"), "country whose age ratings kids profiles go by, such as US, GB or DE")
 	fs.StringVar(&c.MediaRoot, "media-root", env("MATINEE_MEDIA_ROOT", "/"), "folder the library picker starts in")
 	fs.BoolVar(&c.Wikidata, "wikidata", env("MATINEE_WIKIDATA", "true") != "false", "look up awards on wikidata.org")
+	fs.BoolVar(&c.Wikipedia, "wikipedia", env("MATINEE_WIKIPEDIA", "true") != "false", "look up games' summaries on wikipedia.org and genres on wikidata.org")
 	fs.BoolVar(&c.MusicBrainz, "musicbrainz", env("MATINEE_MUSICBRAINZ", "true") != "false", "look up artists and albums on musicbrainz.org")
 	fs.BoolVar(&c.OpenLibrary, "openlibrary", env("MATINEE_OPENLIBRARY", "true") != "false", "look up audiobook covers and author photos on openlibrary.org")
 	fs.BoolVar(&c.Discovery, "discovery", env("MATINEE_DISCOVERY", "true") != "false", "announce this server on the local network so the apps find it")

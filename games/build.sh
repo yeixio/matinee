@@ -13,10 +13,12 @@ here=$(cd "$(dirname "$0")" && pwd)
 host=${HOST:-}
 cc=${host:+$host-}gcc
 cxx=${host:+$host-}g++
+strip=${host:+$host-}strip
 jobs=$(nproc 2>/dev/null || echo 4)
 mkdir -p "$out/cores" "$out/licenses"
 
-"$cc" -O2 -Wall -o "$out/matinee-game-runner" "$here/runner/runner.c" -ldl
+# libm for every emulator, loaded into the runner: some forget to link it.
+"$cc" -O2 -Wall -o "$out/matinee-game-runner" "$here/runner/runner.c" -ldl -Wl,--no-as-needed -lm
 "$cc" -O2 -Wall -shared -fPIC -o "$out/cores/lagtest.so" "$here/testcore/testcore.c"
 
 work=$(mktemp -d)
@@ -28,7 +30,9 @@ case $arch in arm*) arch=arm ;; esac
 grep -v '^\s*#' "$here/cores.txt" | grep -v '^\s*$' | while read -r name repo commit how vars; do
 	# only=x86_64,aarch64 builds it for those CPUs alone.
 	only=$(echo "$vars" | tr ' ' '\n' | sed -n 's/^only=//p')
-	vars=$(echo "$vars" | tr ' ' '\n' | grep -v '^only=' | tr '\n' ' ')
+	# dir=sub/folder is where its libretro makefile is, when not at the top.
+	dir=$(echo "$vars" | tr ' ' '\n' | sed -n 's/^dir=//p')
+	vars=$(echo "$vars" | tr ' ' '\n' | grep -v '^only=' | grep -v '^dir=' | tr '\n' ' ')
 	if [ -n "$only" ] && ! echo ",$only," | grep -q ",$arch,"; then
 		echo "== $name: not for $arch"
 		continue
@@ -44,13 +48,14 @@ grep -v '^\s*#' "$here/cores.txt" | grep -v '^\s*$' | while read -r name repo co
 	fi
 	case $how in
 	make)
+		mk="$src${dir:+/$dir}"
 		makefile=Makefile
-		[ -f "$src/Makefile.libretro" ] && makefile=Makefile.libretro
+		[ -f "$mk/Makefile.libretro" ] && makefile=Makefile.libretro
 		# shellcheck disable=SC2086 # vars are separate settings
-		make -C "$src" -f $makefile -j"$jobs" platform=unix CC="$cc" CXX="$cxx" $(echo "$vars" | sed "s/@ARCH@/$arch/g") \
+		make -C "$mk" -f $makefile -j"$jobs" platform=unix CC="$cc" CXX="$cxx" STRIP="$strip" $(echo "$vars" | sed "s/@ARCH@/$arch/g") \
 			>"$work/$name.log" 2>&1 ||
 			{ tail -80 "$work/$name.log"; exit 1; }
-		cp "$src/${name}_libretro.so" "$out/cores/"
+		cp "$mk/${name}_libretro.so" "$out/cores/"
 		;;
 	cmake)
 		set -- -DBUILD_LIBRETRO=ON -DBUILD_QT=OFF -DBUILD_SDL=OFF -DBUILD_GL=OFF -DBUILD_GLES2=OFF -DBUILD_GLES3=OFF \
@@ -67,7 +72,7 @@ grep -v '^\s*#' "$here/cores.txt" | grep -v '^\s*$' | while read -r name repo co
 		cp "$src/build/${name}_libretro.so" "$out/cores/"
 		;;
 	esac
-	for l in COPYING Copying LICENSE LICENSE.txt LICENCE.txt GPLv3.txt mupen64plus-core/LICENSES; do
+	for l in COPYING Copying LICENSE LICENSE.txt License.txt LICENCE.txt GPLv3.txt mupen64plus-core/LICENSES stella/license.txt; do
 		if [ -f "$src/$l" ]; then
 			{ echo "$name, built from $repo at $commit"; echo; cat "$src/$l"; } >"$out/licenses/$name.txt"
 			break

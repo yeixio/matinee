@@ -220,6 +220,9 @@ func run() (err error) {
 		ol = metadata.NewOpenLibrary(version.Version)
 		fetcher.Providers = append(fetcher.Providers, ol)
 	}
+	if cfg.Wikipedia {
+		fetcher.Providers = append(fetcher.Providers, metadata.NewWikipedia(version.Version))
+	}
 	db.SetMetadataKinds(fetcher.Kinds()...)
 	// Testing the GPU takes a few seconds; transcodes use the CPU until it's done.
 	hw := hwaccel.NewManager(cfg.FFmpegPath, log)
@@ -277,6 +280,9 @@ func run() (err error) {
 		}
 		defer plugins.Close(context.Background())
 		fetcher.Plugins = plugins.Providers
+		if cfg.Wikipedia {
+			fetcher.Providers = append(fetcher.Providers, metadata.NewWikipedia(version.Version))
+		}
 		db.SetMetadataKinds(fetcher.Kinds()...)
 		plugins.OnChange = func() { db.SetMetadataKinds(fetcher.Kinds()...) }
 	}
@@ -414,6 +420,9 @@ func run() (err error) {
 	// without a key.
 	apiServer.OnArr = func() {
 		arrMeta.Forget()
+		if cfg.Wikipedia {
+			fetcher.Providers = append(fetcher.Providers, metadata.NewWikipedia(version.Version))
+		}
 		db.SetMetadataKinds(fetcher.Kinds()...)
 		libs, err := db.Libraries(ctx)
 		if err != nil {
@@ -424,6 +433,9 @@ func run() (err error) {
 		}
 	}
 	apiServer.OnTMDBKey = func() {
+		if cfg.Wikipedia {
+			fetcher.Providers = append(fetcher.Providers, metadata.NewWikipedia(version.Version))
+		}
 		db.SetMetadataKinds(fetcher.Kinds()...)
 		scanner.ScanAll(ctx)
 	}

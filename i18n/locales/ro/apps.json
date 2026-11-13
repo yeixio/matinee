@@ -703,8 +703,13 @@
       "region": "Regiune",
       "publisher": "Editor",
       "players": "Jucători",
-      "genre": "Gen"
+      "genre": "Gen",
+      "screen": "Ecran"
     },
-    "notHere": "Jocurile nu funcționează încă pe acest dispozitiv"
+    "notHere": "Jocurile nu funcționează încă pe acest dispozitiv",
+    "noEmulatorFor": "Matinee nu poate rula încă jocuri {{system}}: pe acest server nu există un emulator pentru ele.",
+    "noEmulator": "Matinee nu poate rula încă acest joc: pe acest server nu există un emulator pentru el.",
+    "addEmulatorWeb": "Un administrator poate adăuga unul din Setări → Streaming → Jocuri în playerul web.",
+    "emulatorGuide": "Cum îți adaugi propriul emulator"
   }
 }

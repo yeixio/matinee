@@ -231,11 +231,8 @@
       "title_one": "{{count}} fájl kimaradt",
       "title_other": "{{count}} fájl kimaradt",
       "topFolder": "Fő mappa",
-      "arcade_one": "{{count}} arcade készlet. Az arcade játékok egy Arcade könyvtárból indulnak.",
-      "arcade_other": "{{count}} arcade készlet. Az arcade játékok egy Arcade könyvtárból indulnak.",
       "unknown_one": "{{count}} fájl, amelyet a Matinee még nem tud lejátszani, például {{example}}.",
-      "unknown_other": "{{count}} fájl, amelyet a Matinee még nem tud lejátszani, például {{example}}.",
-      "addArcade": "Arcade könyvtár hozzáadása"
+      "unknown_other": "{{count}} fájl, amelyet a Matinee még nem tud lejátszani, például {{example}}."
     }
   },
   "nothingHereYet": "Még nincs itt semmi",
@@ -1703,8 +1700,14 @@
       "region": "Régió",
       "publisher": "Kiadó",
       "players": "Játékosok",
-      "genre": "Műfaj"
+      "genre": "Műfaj",
+      "screen": "Képernyő"
     },
-    "tapToPlay": "Nyomd meg a játékhoz"
+    "tapToPlay": "Nyomd meg a játékhoz",
+    "noEmulatorFor": "A Matinee még nem tud {{system}}-játékokat futtatni: ezen a szerveren nincs hozzájuk emulátor.",
+    "noEmulator": "A Matinee még nem tudja futtatni ezt a játékot: ezen a szerveren nincs hozzá emulátor.",
+    "addEmulator": "Emulátor hozzáadása a Beállításokban",
+    "emulatorGuide": "Így adhatsz hozzá saját emulátort",
+    "askAdminEmulator": "Egy rendszergazda hozzáadhat hozzá emulátort."
   }
 }

@@ -27,6 +27,7 @@ import (
 	"github.com/yeixio/matinee/internal/diagnose"
 	"github.com/yeixio/matinee/internal/download"
 	"github.com/yeixio/matinee/internal/gamehost"
+	"github.com/yeixio/matinee/internal/gamelib"
 	"github.com/yeixio/matinee/internal/gamestream"
 	"github.com/yeixio/matinee/internal/health"
 	"github.com/yeixio/matinee/internal/hwaccel"
@@ -1378,6 +1379,9 @@ type itemView struct {
 	// StreamedGame says the item is a game this server plays itself and
 	// streams to the app (POST /items/{id}/game).
 	StreamedGame bool `json:"streamedGame,omitempty"`
+	// NoEmulator says the item is a game of a Games library that no
+	// emulator on this server plays (yet), such as a Switch game.
+	NoEmulator bool `json:"noEmulator,omitempty"`
 	// TrackPick is which sound and subtitles a video starts with, for this
 	// person (see trackpick.go).
 	TrackPick *trackPickView `json:"trackPick,omitempty"`
@@ -1441,7 +1445,8 @@ func (s *Server) getItem(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	if it.Kind == "game" && it.Path != "" && s.Games != nil {
-		_, v.StreamedGame = s.Games.SystemFor(it.Path)
+		_, v.StreamedGame = s.Games.SystemForGame(it.Path, gamelib.SystemKey(it.PluginData))
+		v.NoEmulator = !v.StreamedGame && gamelib.InLibrary(it.PluginData)
 	}
 	if it.Playable && it.VideoCodec != "" {
 		v.Subtitles = s.subtitleTracks(r.Context(), it)

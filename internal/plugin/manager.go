@@ -86,6 +86,12 @@ type Manager struct {
 	plays   playbackTracker
 }
 
+// Retired are plugins whose work Matinee now does itself, by id, with
+// why. They're removed when the server starts and can't be installed.
+var Retired = map[string]string{
+	"arcade": "Games libraries play arcade games themselves, on every device",
+}
+
 // Open loads the plugins in dir and starts the ones that are on.
 func Open(ctx context.Context, dir string, st *store.Store, log *slog.Logger) (*Manager, error) {
 	if err := os.MkdirAll(dir, 0o755); err != nil {
@@ -110,6 +116,14 @@ func Open(ctx context.Context, dir string, st *store.Store, log *slog.Logger) (*
 		p, err := m.load(ctx, filepath.Join(dir, e.Name()))
 		if err != nil {
 			log.Warn("skipping a plugin folder", "dir", e.Name(), "err", err)
+			continue
+		}
+		if why, ok := Retired[p.ID]; ok {
+			log.Info("removing a plugin Matinee no longer needs", "plugin", p.ID, "why", why)
+			os.RemoveAll(p.dir)
+			os.RemoveAll(m.dataDir(p.ID))
+			st.SetSetting(ctx, settingKey(p.ID), "")
+			st.DeletePluginStorage(ctx, p.ID)
 			continue
 		}
 		m.plugins[p.ID] = p
@@ -421,6 +435,9 @@ func (m *Manager) Install(ctx context.Context, pkg []byte) (View, error) {
 	man, err := readManifest(zr)
 	if err != nil {
 		return View{}, err
+	}
+	if why, ok := Retired[man.ID]; ok {
+		return View{}, fmt.Errorf("%w: Matinee no longer needs this plugin: %s", ErrBadPackage, why)
 	}
 	tmp, err := os.MkdirTemp(m.Dir, ".install-")
 	if err != nil {

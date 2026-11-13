@@ -233,13 +233,9 @@
       "title_two": "שני קבצים הושמטו",
       "title_other": "{{count}} קבצים הושמטו",
       "topFolder": "תיקייה ראשית",
-      "arcade_one": "ערכת ארקייד אחת. משחקי ארקייד פועלים מספריית Arcade.",
-      "arcade_two": "שתי ערכות ארקייד. משחקי ארקייד פועלים מספריית Arcade.",
-      "arcade_other": "{{count}} ערכות ארקייד. משחקי ארקייד פועלים מספריית Arcade.",
       "unknown_one": "קובץ אחד ש-Matinee עדיין לא יכול להפעיל, כמו {{example}}.",
       "unknown_two": "שני קבצים ש-Matinee עדיין לא יכול להפעיל, כמו {{example}}.",
-      "unknown_other": "{{count}} קבצים ש-Matinee עדיין לא יכול להפעיל, כמו {{example}}.",
-      "addArcade": "הוספת ספריית Arcade"
+      "unknown_other": "{{count}} קבצים ש-Matinee עדיין לא יכול להפעיל, כמו {{example}}."
     }
   },
   "nothingHereYet": "אין כאן עדיין כלום",
@@ -1718,8 +1714,14 @@
       "region": "אזור",
       "publisher": "מוציא לאור",
       "players": "שחקנים",
-      "genre": "ז'אנר"
+      "genre": "ז'אנר",
+      "screen": "מסך"
     },
-    "tapToPlay": "לחצו כדי לשחק"
+    "tapToPlay": "לחצו כדי לשחק",
+    "noEmulatorFor": "Matinee עדיין לא יכול להפעיל משחקי {{system}}: אין להם אמולטור בשרת הזה.",
+    "noEmulator": "Matinee עדיין לא יכול להפעיל את המשחק הזה: אין לו אמולטור בשרת הזה.",
+    "addEmulator": "הוספת אמולטור בהגדרות",
+    "emulatorGuide": "איך מוסיפים אמולטור משלכם",
+    "askAdminEmulator": "מנהל יכול להוסיף לו אמולטור."
   }
 }

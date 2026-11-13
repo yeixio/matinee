@@ -1,12 +1,12 @@
 ---
 title: Plugins
-description: Add new kinds of libraries and players to Matinee, such as arcade games, and control what each plugin can reach.
+description: Add new kinds of libraries and players to Matinee, and control what each plugin can reach.
 since: v0.1.1
 sidebar:
   order: 9
 ---
 
-Plugins add things Matinee doesn't do by itself: a new kind of library with its own player, such as [arcade games](/docs/server/arcade/), or something that happens when a title is added or someone starts watching. Only admins can add them, in **Settings → Add-ons → Plugins**.
+Plugins add things Matinee doesn't do by itself: a new kind of library with its own player, or something that happens when a title is added or someone starts watching. Only admins can add them, in **Settings → Add-ons → Plugins**.
 
 ## Adding a plugin
 

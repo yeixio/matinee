@@ -231,11 +231,8 @@
       "title_one": "{{count}} Datei wurde ausgelassen",
       "title_other": "{{count}} Dateien wurden ausgelassen",
       "topFolder": "Oberster Ordner",
-      "arcade_one": "{{count}} Arcade-Set. Arcade-Spiele laufen in einer Arcade-Mediathek.",
-      "arcade_other": "{{count}} Arcade-Sets. Arcade-Spiele laufen in einer Arcade-Mediathek.",
       "unknown_one": "{{count}} Datei, die Matinee noch nicht abspielen kann, z. B. {{example}}.",
-      "unknown_other": "{{count}} Dateien, die Matinee noch nicht abspielen kann, z. B. {{example}}.",
-      "addArcade": "Arcade-Mediathek hinzufügen"
+      "unknown_other": "{{count}} Dateien, die Matinee noch nicht abspielen kann, z. B. {{example}}."
     }
   },
   "nothingHereYet": "Hier ist noch nichts",
@@ -1703,8 +1700,14 @@
       "region": "Region",
       "publisher": "Publisher",
       "players": "Spieler",
-      "genre": "Genre"
+      "genre": "Genre",
+      "screen": "Bildschirm"
     },
-    "tapToPlay": "Zum Spielen drücken"
+    "tapToPlay": "Zum Spielen drücken",
+    "noEmulatorFor": "Matinee kann {{system}}-Spiele noch nicht spielen: Auf diesem Server gibt es keinen Emulator dafür.",
+    "noEmulator": "Matinee kann dieses Spiel noch nicht spielen: Auf diesem Server gibt es keinen Emulator dafür.",
+    "addEmulator": "Emulator in den Einstellungen hinzufügen",
+    "emulatorGuide": "So fügst du einen eigenen Emulator hinzu",
+    "askAdminEmulator": "Ein Admin kann einen Emulator dafür hinzufügen."
   }
 }

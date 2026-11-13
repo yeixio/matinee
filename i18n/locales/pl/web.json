@@ -235,15 +235,10 @@
       "title_many": "Pominięto {{count}} plików",
       "title_other": "Pominięto {{count}} pliku",
       "topFolder": "Folder główny",
-      "arcade_one": "{{count}} zestaw arcade. Gry arcade uruchamia się z biblioteki Arcade.",
-      "arcade_few": "{{count}} zestawy arcade. Gry arcade uruchamia się z biblioteki Arcade.",
-      "arcade_many": "{{count}} zestawów arcade. Gry arcade uruchamia się z biblioteki Arcade.",
-      "arcade_other": "{{count}} zestawu arcade. Gry arcade uruchamia się z biblioteki Arcade.",
       "unknown_one": "{{count}} plik, którego Matinee jeszcze nie odtwarza, np. {{example}}.",
       "unknown_few": "{{count}} pliki, których Matinee jeszcze nie odtwarza, np. {{example}}.",
       "unknown_many": "{{count}} plików, których Matinee jeszcze nie odtwarza, np. {{example}}.",
-      "unknown_other": "{{count}} pliku, których Matinee jeszcze nie odtwarza, np. {{example}}.",
-      "addArcade": "Dodaj bibliotekę Arcade"
+      "unknown_other": "{{count}} pliku, których Matinee jeszcze nie odtwarza, np. {{example}}."
     }
   },
   "nothingHereYet": "Nic tu jeszcze nie ma",
@@ -1733,8 +1728,14 @@
       "region": "Region",
       "publisher": "Wydawca",
       "players": "Gracze",
-      "genre": "Gatunek"
+      "genre": "Gatunek",
+      "screen": "Ekran"
     },
-    "tapToPlay": "Naciśnij, aby grać"
+    "tapToPlay": "Naciśnij, aby grać",
+    "noEmulatorFor": "Matinee nie uruchamia jeszcze gier na {{system}}: na tym serwerze nie ma dla nich emulatora.",
+    "noEmulator": "Matinee nie uruchamia jeszcze tej gry: na tym serwerze nie ma dla niej emulatora.",
+    "addEmulator": "Dodaj emulator w Ustawieniach",
+    "emulatorGuide": "Jak dodać własny emulator",
+    "askAdminEmulator": "Administrator może dodać dla niej emulator."
   }
 }

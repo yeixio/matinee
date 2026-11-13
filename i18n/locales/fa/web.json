@@ -231,11 +231,8 @@
       "title_one": "{{count}} فایل کنار گذاشته شد",
       "title_other": "{{count}} فایل کنار گذاشته شد",
       "topFolder": "پوشهٔ اصلی",
-      "arcade_one": "{{count}} مجموعهٔ آرکید. بازی‌های آرکید از کتابخانهٔ Arcade اجرا می‌شوند.",
-      "arcade_other": "{{count}} مجموعهٔ آرکید. بازی‌های آرکید از کتابخانهٔ Arcade اجرا می‌شوند.",
       "unknown_one": "{{count}} فایل که Matinee هنوز نمی‌تواند پخش کند، مثل {{example}}.",
-      "unknown_other": "{{count}} فایل که Matinee هنوز نمی‌تواند پخش کند، مثل {{example}}.",
-      "addArcade": "افزودن کتابخانهٔ Arcade"
+      "unknown_other": "{{count}} فایل که Matinee هنوز نمی‌تواند پخش کند، مثل {{example}}."
     }
   },
   "nothingHereYet": "هنوز چیزی اینجا نیست",
@@ -1703,8 +1700,14 @@
       "region": "منطقه",
       "publisher": "ناشر",
       "players": "بازیکنان",
-      "genre": "ژانر"
+      "genre": "ژانر",
+      "screen": "صفحه"
     },
-    "tapToPlay": "برای بازی فشار دهید"
+    "tapToPlay": "برای بازی فشار دهید",
+    "noEmulatorFor": "Matinee هنوز نمی‌تواند بازی‌های {{system}} را اجرا کند: روی این سرور شبیه‌سازی برای آن‌ها نیست.",
+    "noEmulator": "Matinee هنوز نمی‌تواند این بازی را اجرا کند: روی این سرور شبیه‌سازی برای آن نیست.",
+    "addEmulator": "افزودن شبیه‌ساز در تنظیمات",
+    "emulatorGuide": "چطور شبیه‌ساز خودتان را اضافه کنید",
+    "askAdminEmulator": "یک مدیر می‌تواند برای آن شبیه‌ساز اضافه کند."
   }
 }

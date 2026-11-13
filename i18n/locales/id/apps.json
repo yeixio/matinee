@@ -689,8 +689,13 @@
       "region": "Wilayah",
       "publisher": "Penerbit",
       "players": "Pemain",
-      "genre": "Genre"
+      "genre": "Genre",
+      "screen": "Layar"
     },
-    "notHere": "Game belum bisa dimainkan di perangkat ini"
+    "notHere": "Game belum bisa dimainkan di perangkat ini",
+    "noEmulatorFor": "Matinee belum bisa memainkan game {{system}}: server ini belum punya emulator untuknya.",
+    "noEmulator": "Matinee belum bisa memainkan game ini: server ini belum punya emulator untuknya.",
+    "addEmulatorWeb": "Admin bisa menambahkannya di Pengaturan → Streaming → Game di pemutar web.",
+    "emulatorGuide": "Cara menambahkan emulator sendiri"
   }
 }

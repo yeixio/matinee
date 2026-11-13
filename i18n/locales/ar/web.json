@@ -239,19 +239,12 @@
       "title_many": "استُبعد {{count}} ملفًا",
       "title_other": "استُبعد {{count}} ملف",
       "topFolder": "المجلد الرئيسي",
-      "arcade_zero": "لا توجد مجموعات أركيد. ألعاب الأركيد تعمل من مكتبة Arcade.",
-      "arcade_one": "مجموعة أركيد واحدة. ألعاب الأركيد تعمل من مكتبة Arcade.",
-      "arcade_two": "مجموعتا أركيد. ألعاب الأركيد تعمل من مكتبة Arcade.",
-      "arcade_few": "{{count}} مجموعات أركيد. ألعاب الأركيد تعمل من مكتبة Arcade.",
-      "arcade_many": "{{count}} مجموعة أركيد. ألعاب الأركيد تعمل من مكتبة Arcade.",
-      "arcade_other": "{{count}} مجموعة أركيد. ألعاب الأركيد تعمل من مكتبة Arcade.",
       "unknown_zero": "لا توجد ملفات لا يستطيع Matinee تشغيلها، مثل {{example}}.",
       "unknown_one": "ملف واحد لا يستطيع Matinee تشغيله بعد، مثل {{example}}.",
       "unknown_two": "ملفان لا يستطيع Matinee تشغيلهما بعد، مثل {{example}}.",
       "unknown_few": "{{count}} ملفات لا يستطيع Matinee تشغيلها بعد، مثل {{example}}.",
       "unknown_many": "{{count}} ملفًا لا يستطيع Matinee تشغيلها بعد، مثل {{example}}.",
-      "unknown_other": "{{count}} ملف لا يستطيع Matinee تشغيلها بعد، مثل {{example}}.",
-      "addArcade": "إضافة مكتبة Arcade"
+      "unknown_other": "{{count}} ملف لا يستطيع Matinee تشغيلها بعد، مثل {{example}}."
     }
   },
   "nothingHereYet": "لا شيء هنا بعد",
@@ -1763,8 +1756,14 @@
       "region": "المنطقة",
       "publisher": "الناشر",
       "players": "اللاعبون",
-      "genre": "النوع"
+      "genre": "النوع",
+      "screen": "الشاشة"
     },
-    "tapToPlay": "اضغط للعب"
+    "tapToPlay": "اضغط للعب",
+    "noEmulatorFor": "لا يستطيع Matinee تشغيل ألعاب {{system}} بعد: لا يوجد محاكٍ لها على هذا الخادم.",
+    "noEmulator": "لا يستطيع Matinee تشغيل هذه اللعبة بعد: لا يوجد محاكٍ لها على هذا الخادم.",
+    "addEmulator": "أضف محاكيًا من الإعدادات",
+    "emulatorGuide": "كيف تضيف محاكيًا خاصًا بك",
+    "askAdminEmulator": "يمكن للمسؤول إضافة محاكٍ لها."
   }
 }

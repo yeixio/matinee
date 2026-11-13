@@ -233,13 +233,9 @@
       "title_many": "{{count}} di file sono stati esclusi",
       "title_other": "{{count}} file sono stati esclusi",
       "topFolder": "Cartella principale",
-      "arcade_one": "{{count}} gioco arcade. I giochi arcade si avviano da una libreria Arcade.",
-      "arcade_many": "{{count}} di giochi arcade. I giochi arcade si avviano da una libreria Arcade.",
-      "arcade_other": "{{count}} giochi arcade. I giochi arcade si avviano da una libreria Arcade.",
       "unknown_one": "{{count}} file che Matinee non sa ancora riprodurre, come {{example}}.",
       "unknown_many": "{{count}} di file che Matinee non sa ancora riprodurre, come {{example}}.",
-      "unknown_other": "{{count}} file che Matinee non sa ancora riprodurre, come {{example}}.",
-      "addArcade": "Aggiungi una libreria Arcade"
+      "unknown_other": "{{count}} file che Matinee non sa ancora riprodurre, come {{example}}."
     }
   },
   "nothingHereYet": "Ancora niente qui",
@@ -1718,8 +1714,14 @@
       "region": "Regione",
       "publisher": "Editore",
       "players": "Giocatori",
-      "genre": "Genere"
+      "genre": "Genere",
+      "screen": "Schermo"
     },
-    "tapToPlay": "Premi per giocare"
+    "tapToPlay": "Premi per giocare",
+    "noEmulatorFor": "Matinee non può ancora avviare i giochi {{system}}: su questo server non c'è un emulatore per loro.",
+    "noEmulator": "Matinee non può ancora avviare questo gioco: su questo server non c'è un emulatore per lui.",
+    "addEmulator": "Aggiungi un emulatore nelle Impostazioni",
+    "emulatorGuide": "Come aggiungere un tuo emulatore",
+    "askAdminEmulator": "Un amministratore può aggiungere un emulatore."
   }
 }

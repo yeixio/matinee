@@ -1,12 +1,12 @@
 import { useQuery } from '@tanstack/react-query'
 import { Info } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
 import { api, type SkipCount, type User } from '../api'
 
 /**
  * Tells admins which files the last scan left out of a library and why,
- * such as arcade sets in a Games library, so they don't just go missing.
+ * such as zips in a Games library that hold no game, so they don't just
+ * go missing.
  */
 export function SkippedFiles({ skipped }: { skipped?: SkipCount[] }) {
   const { t } = useTranslation()
@@ -26,17 +26,7 @@ export function SkippedFiles({ skipped }: { skipped?: SkipCount[] }) {
               {s.group || t('library.skipped.topFolder')}
             </span>
             {': '}
-            {s.reason === 'arcade'
-              ? t('library.skipped.arcade', { count: s.count })
-              : t('library.skipped.unknown', { count: s.count, example: s.example ?? '' })}
-            {s.reason === 'arcade' && (
-              <>
-                {' '}
-                <Link to="/settings/libraries" className="text-accent hover:underline">
-                  {t('library.skipped.addArcade')}
-                </Link>
-              </>
-            )}
+            {t('library.skipped.unknown', { count: s.count, example: s.example ?? '' })}
           </li>
         ))}
       </ul>
