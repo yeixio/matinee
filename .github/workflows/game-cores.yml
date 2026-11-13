@@ -110,7 +110,8 @@ jobs:
     name: Publish
     needs: [version, build, build-mac]
     # On main, or run by hand (to publish emulators before the change that
-    # needs them is merged).
+    # needs them is merged). A run by hand tags main: the token can't tag a
+    # commit that changes workflows main doesn't have yet.
     if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     permissions:
@@ -127,7 +128,7 @@ jobs:
           cat SHA256SUMS
           gh release create '${{ needs.version.outputs.tag }}' matinee-games-*.tar.xz SHA256SUMS \
             --repo '${{ github.repository }}' \
-            --target "$GITHUB_SHA" \
+            --target "${{ github.ref == 'refs/heads/main' && github.sha || 'main' }}" \
             --title 'Game emulators (${{ needs.version.outputs.tag }})' \
             --notes 'The game runner and emulators in games/cores.txt, built for Linux (amd64, arm64, 32-bit ARM) and Apple silicon Macs. The Matinee server image, the Linux packages and Matinee Server.app include them. Each emulator is built from the commit listed in games/cores.txt; its licence is in licenses/.' \
             --latest=false
