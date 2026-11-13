@@ -11,6 +11,10 @@ on:
   push:
     branches: [main]
     paths: ['games/cores.txt', 'games/build.sh', 'games/cores-tag.sh', 'games/runner/**', 'games/testcore/**', '.github/workflows/game-cores.yml']
+  # A pull request that changes them builds them too, to check they build;
+  # only main (or a run by hand) publishes.
+  pull_request:
+    paths: ['games/cores.txt', 'games/build.sh', 'games/cores-tag.sh', 'games/runner/**', 'games/testcore/**', '.github/workflows/game-cores.yml']
   workflow_dispatch:
 
 permissions:
