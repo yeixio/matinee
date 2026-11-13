@@ -1,7 +1,8 @@
 name: Arcade emulator
 
 # Builds MAME's libretro core (games/mame.txt), the arcade emulator the
-# server plays arcade games with, for 64-bit Intel/AMD and ARM, plays a
+# server plays arcade games with, for 64-bit Intel/AMD and ARM Linux, Apple
+# silicon Macs and Windows, plays a
 # free game with it, and publishes it as a release the Dockerfile
 # downloads. MAME takes hours to build, so this runs only when
 # games/mame.txt or this file changes, and never again for a release that
@@ -9,7 +10,7 @@ name: Arcade emulator
 on:
   push:
     branches: [main]
-    paths: ['games/mame.txt', 'games/mame-test/**', '.github/workflows/mame-core.yml']
+    paths: ['games/mame.txt', 'games/mame-test/**', 'games/mame-add-asset.sh', '.github/workflows/mame-core.yml']
   workflow_dispatch:
 
 permissions:
@@ -108,6 +109,141 @@ jobs:
             mame_libretro-${{ matrix.arch }}.so.xz
             mame-COPYING.txt
           compression-level: 0
+
+  # Apple silicon Macs, for Matinee Server.app. Added to the release on its
+  # own, so a release that has the Linux cores gets the Mac one without
+  # building those again.
+  build-mac:
+    name: MAME (Mac)
+    needs: version
+    runs-on: macos-15
+    timeout-minutes: 345
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      TAG: ${{ needs.version.outputs.tag }}
+      # The oldest macOS Matinee Server.app runs on.
+      MACOSX_DEPLOYMENT_TARGET: '13.0'
+    steps:
+      - id: have
+        run: |
+          if gh release view "$TAG" --repo '${{ github.repository }}' --json assets --jq '.assets[].name' 2>/dev/null | grep -qx mame_libretro-darwin-arm64.so.xz; then
+            echo "done=1" >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/checkout@v4
+        if: steps.have.outputs.done != '1'
+      - name: Get MAME
+        if: steps.have.outputs.done != '1'
+        run: |
+          git init -q mame-src
+          git -C mame-src fetch -q --depth 1 https://github.com/libretro/mame '${{ needs.version.outputs.commit }}'
+          git -C mame-src checkout -q FETCH_HEAD
+      - name: Build
+        if: steps.have.outputs.done != '1'
+        working-directory: mame-src
+        run: |
+          # Without CROSS_COMPILE=1 its makefile builds for Intel Macs, even
+          # on Apple silicon.
+          make -f Makefile.libretro -j"$(sysctl -n hw.ncpu)" SUBTARGET=arcade platform=osx CROSS_COMPILE=1 \
+            LIBRETRO_APPLE_PLATFORM=arm64-apple-macos13.0 LIBRETRO_APPLE_ISYSROOT="$(xcrun --show-sdk-path)" > ../build.log 2>&1 || { tail -200 ../build.log; exit 1; }
+          file ./*_libretro.*
+          tail -5 ../build.log
+          ls -la ./*_libretro.*
+      - name: Package
+        if: steps.have.outputs.done != '1'
+        run: |
+          mkdir out
+          lib=$(ls mame-src/*_libretro.dylib mame-src/*_libretro.so 2>/dev/null | head -1)
+          cp "$lib" out/mame_libretro.so
+          strip -x out/mame_libretro.so
+          xz -T0 -6 -c out/mame_libretro.so > mame_libretro-darwin-arm64.so.xz
+          ls -la out mame_libretro-darwin-arm64.so.xz
+      - name: Play gridlee
+        if: steps.have.outputs.done != '1'
+        run: |
+          cc -O2 -o out/matinee-game-runner games/runner/runner.c -ldl -lm
+          out/matinee-game-runner --info out/mame_libretro.so
+          mkdir roms
+          curl -fsSL -o roms/gridlee.zip https://www.mamedev.org/roms/gridlee/gridlee.zip
+          python3 games/mame-test/play.py out/matinee-game-runner out/mame_libretro.so roms/gridlee.zip 30
+      # Into the release once it exists (the Linux builds publish it), on
+      # main or a run by hand.
+      - name: Publish
+        if: steps.have.outputs.done != '1' && (github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch')
+        run: sh games/mame-add-asset.sh "$TAG" mame_libretro-darwin-arm64.so.xz
+
+  # Windows (x64; Windows on Arm runs it too), built with MSYS2's MinGW, the
+  # way MAME itself is built for Windows. Added to the release like the
+  # Mac one.
+  build-windows:
+    name: MAME (Windows)
+    needs: version
+    runs-on: windows-latest
+    timeout-minutes: 345
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      TAG: ${{ needs.version.outputs.tag }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - id: have
+        run: |
+          if gh release view "$TAG" --repo '${{ github.repository }}' --json assets --jq '.assets[].name' 2>/dev/null | grep -qx mame_libretro-windows-amd64.so.xz; then
+            echo "done=1" >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/checkout@v4
+        if: steps.have.outputs.done != '1'
+      - uses: msys2/setup-msys2@v2
+        if: steps.have.outputs.done != '1'
+        with:
+          msystem: MINGW64
+          update: false
+          install: git make xz mingw-w64-x86_64-gcc mingw-w64-x86_64-lld mingw-w64-x86_64-python
+      - name: Get MAME
+        if: steps.have.outputs.done != '1'
+        run: |
+          git init -q mame-src
+          git -C mame-src fetch -q --depth 1 https://github.com/libretro/mame '${{ needs.version.outputs.commit }}'
+          git -C mame-src checkout -q FETCH_HEAD
+      - name: Build
+        if: steps.have.outputs.done != '1'
+        shell: msys2 {0}
+        working-directory: mame-src
+        run: |
+          # The runner's ANDROID_NDK_HOME makes the makefile look for the
+          # Android NDK, at a Windows path it can't read.
+          unset ANDROID_NDK_HOME ANDROID_NDK_ROOT ANDROID_NDK_LATEST_HOME
+          make -f Makefile.libretro -j"$(nproc)" SUBTARGET=arcade platform=win CC=gcc CXX=g++ AR=ar > ../build.log 2>&1 || { tail -200 ../build.log; exit 1; }
+          tail -5 ../build.log
+          ls -la ./*_libretro.*
+      - name: Package
+        if: steps.have.outputs.done != '1'
+        shell: msys2 {0}
+        run: |
+          mkdir out
+          lib=$(ls mame-src/*_libretro.dll | head -1)
+          cp "$lib" out/mame_libretro.so
+          strip --strip-unneeded out/mame_libretro.so
+          # Only Windows' own DLLs: no MinGW runtime to ship beside it.
+          objdump -p out/mame_libretro.so | grep 'DLL Name' | tee dlls.txt
+          if grep -iE 'libgcc|libstdc|libwinpthread' dlls.txt; then echo "needs MinGW's runtime DLLs" >&2; exit 1; fi
+          gcc -O2 -o out/matinee-game-runner.exe games/runner/runner.c -lwinmm -static
+          xz -T0 -6 -c out/mame_libretro.so > mame_libretro-windows-amd64.so.xz
+          ls -la out mame_libretro-windows-amd64.so.xz
+      - name: Play gridlee
+        if: steps.have.outputs.done != '1'
+        run: |
+          out/matinee-game-runner.exe --info out/mame_libretro.so
+          mkdir roms
+          curl -fsSL -o roms/gridlee.zip https://www.mamedev.org/roms/gridlee/gridlee.zip
+          python games/mame-test/play.py out/matinee-game-runner.exe out/mame_libretro.so roms/gridlee.zip 30
+      - name: Publish
+        if: steps.have.outputs.done != '1' && (github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch')
+        run: sh games/mame-add-asset.sh "$TAG" mame_libretro-windows-amd64.so.xz
 
   publish:
     name: Publish

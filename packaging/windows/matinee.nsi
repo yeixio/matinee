@@ -1,6 +1,6 @@
 ; The Matinee installer for Windows. scripts/package-windows.sh builds it:
 ;   makensis -DVERSION=0.1.8 -DNUMVER=0.1.8.0 -DARCH=x64 -DSTAGE=<folder> -DOUTFILE=<exe> [-DSIGN=<command>] matinee.nsi
-; STAGE holds matinee.exe, matinee-tray.exe, ffmpeg\ and LICENSE.txt.
+; STAGE holds matinee.exe, matinee-tray.exe, ffmpeg\, games\ and LICENSE.txt.
 ;
 ; Flags: /S installs without questions, /update (with /S) starts Matinee
 ; again afterwards, which is how the tray app updates itself.
@@ -101,6 +101,7 @@ Section "Matinee"
   SetOutPath "$INSTDIR"
   ; ffmpeg\ is replaced whole, so libraries from an older FFmpeg don't linger.
   RMDir /r "$INSTDIR\ffmpeg"
+  RMDir /r "$INSTDIR\games"
   File /r "${STAGE}\*.*"
   WriteUninstaller "$INSTDIR\uninstall.exe"
 
@@ -150,6 +151,7 @@ Section "Uninstall"
   DeleteRegValue HKCU "Software\Microsoft\Windows\CurrentVersion\Run" "Matinee"
 
   RMDir /r "$INSTDIR\ffmpeg"
+  RMDir /r "$INSTDIR\games"
   Delete "$INSTDIR\matinee.exe"
   Delete "$INSTDIR\matinee-tray.exe"
   Delete "$INSTDIR\LICENSE.txt"

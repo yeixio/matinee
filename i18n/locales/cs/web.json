@@ -1052,7 +1052,7 @@
       "notSetUp": "Nedostupné: na serveru chybí spouštěč her a emulátory. Obraz Dockeru je obsahuje.",
       "open": "Vyzkoušet hru",
       "emulators": "Emulátory",
-      "emulatorsIntro": "Matinee má vestavěné emulátory. Můžete přidat vlastní: jádro libretro sestavené pro {{platform}} (soubor .so). Matinee se ho zeptá, které hry hraje, a použije ho pro ně přednostně.",
+      "emulatorsIntro": "Matinee má vestavěné emulátory. Můžete přidat vlastní: jádro libretro sestavené pro {{platform}} (soubor {{ext}}). Matinee se ho zeptá, které hry hraje, a použije ho pro ně přednostně.",
       "emulatorsTrust": "Emulátor je program, který běží na tomto serveru. Přidávejte jen ty, kterým důvěřujete.",
       "addEmulator": "Přidat emulátor",
       "adding": "Přidávání…",

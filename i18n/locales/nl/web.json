@@ -1040,7 +1040,7 @@
       "notSetUp": "Niet beschikbaar: deze server heeft de game-runner en emulators niet. De Docker-image heeft ze.",
       "open": "Een game proberen",
       "emulators": "Emulators",
-      "emulatorsIntro": "Matinee heeft ingebouwde emulators. Je kunt je eigen toevoegen: een libretro-core gebouwd voor {{platform}} (een .so-bestand). Matinee vraagt welke games hij speelt en gebruikt hem daarvoor vóór de ingebouwde.",
+      "emulatorsIntro": "Matinee heeft ingebouwde emulators. Je kunt je eigen toevoegen: een libretro-core gebouwd voor {{platform}} (een {{ext}}-bestand). Matinee vraagt welke games hij speelt en gebruikt hem daarvoor vóór de ingebouwde.",
       "emulatorsTrust": "Een emulator is een programma dat op deze server draait. Voeg er alleen een toe die je vertrouwt.",
       "addEmulator": "Emulator toevoegen",
       "adding": "Toevoegen…",

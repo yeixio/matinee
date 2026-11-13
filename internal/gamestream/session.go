@@ -1,7 +1,6 @@
 package gamestream
 
 import (
-	"archive/zip"
 	"context"
 	"crypto/rand"
 	"encoding/hex"
@@ -21,6 +20,7 @@ import (
 	"github.com/pion/rtp"
 	"github.com/pion/webrtc/v4"
 
+	"github.com/yeixio/matinee/internal/gamedat"
 	"github.com/yeixio/matinee/internal/gamehost"
 )
 
@@ -301,8 +301,8 @@ func (s *Session) startEmulator(g Game, core string) error {
 		return err
 	}
 	path := g.Path
-	if strings.EqualFold(filepath.Ext(path), ".zip") && !g.System.playsZips() {
-		if path, err = unzipGame(path, s.work); err != nil {
+	if gamedat.IsArchive(path) && !g.System.playsArchive(path) {
+		if path, err = unzipGame(path, s.work, g.System.Extensions); err != nil {
 			return err
 		}
 	}
@@ -552,59 +552,54 @@ func safeName(s string) string {
 // far smaller, a set of PlayStation discs about this big.
 const maxUnzipped = 4 << 30
 
-// unzipGame unpacks the game from a zip into dir and returns its path (see
-// zipGame). A disc's tracks are unpacked with it, beside it.
-func unzipGame(path, dir string) (string, error) {
-	zr, err := zip.OpenReader(path)
+// unzipGame unpacks the game from a zip or 7z into dir and returns its path
+// (see zipGame; exts are the files the emulator plays, when known). A
+// disc's tracks are unpacked with it, beside it.
+func unzipGame(path, dir string, exts []string) (string, error) {
+	all, err := gamedat.ListArchive(path)
 	if err != nil {
-		return "", fmt.Errorf("can't open the zip: %w", err)
+		return "", fmt.Errorf("can't open the %s: %w", strings.TrimPrefix(strings.ToLower(filepath.Ext(path)), "."), err)
 	}
-	defer zr.Close()
-	best, whole := zipGame(zr.File)
+	best, whole := zipGame(all, exts)
 	if best == nil {
-		return "", fmt.Errorf("the zip is empty")
+		return "", fmt.Errorf("the archive is empty")
 	}
-	files := []*zip.File{best}
+	files := []gamedat.File{*best}
 	if whole {
-		files = nil
-		for _, f := range zr.File {
-			if !f.FileInfo().IsDir() {
-				files = append(files, f)
-			}
-		}
+		files = all
 	}
-	var total uint64
+	var total int64
 	for _, f := range files {
-		total += f.UncompressedSize64
+		total += f.Size
 	}
 	if total > maxUnzipped {
-		return "", fmt.Errorf("the game in the zip is too big")
+		return "", fmt.Errorf("the game in the archive is too big")
 	}
 	var out string
 	left := int64(maxUnzipped)
 	for _, f := range files {
-		// A lone game is named like the zip, so saves are named after the
-		// game, with the file's own extension, which some emulators go by.
-		// A disc's files keep their names, which its .cue refers to.
-		name := filepath.Base(f.Name)
+		// A lone game is named like the archive, so saves are named after
+		// the game, with the file's own extension, which some emulators go
+		// by. A disc's files keep their names, which its .cue refers to.
+		name := f.Base()
 		if !whole {
 			name = strings.TrimSuffix(filepath.Base(path), filepath.Ext(path)) + filepath.Ext(f.Name)
 		}
 		to := filepath.Join(dir, safeName(name))
-		n, err := unzipFile(f, to, left)
+		n, err := unpackFile(path, f.Name, to, left)
 		if err != nil {
 			return "", err
 		}
 		left -= n
-		if f == best {
+		if f.Name == best.Name {
 			out = to
 		}
 	}
 	return out, nil
 }
 
-func unzipFile(f *zip.File, to string, limit int64) (int64, error) {
-	rc, err := f.Open()
+func unpackFile(archive, name, to string, limit int64) (int64, error) {
+	rc, err := gamedat.OpenInArchive(archive, name)
 	if err != nil {
 		return 0, err
 	}

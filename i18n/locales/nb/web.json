@@ -1040,7 +1040,7 @@
       "notSetUp": "Ikke tilgjengelig: serveren mangler spillkjøreren og emulatorene. Docker-bildet har dem.",
       "open": "Prøv et spill",
       "emulators": "Emulatorer",
-      "emulatorsIntro": "Matinee har innebygde emulatorer. Du kan legge til dine egne: en libretro-core bygget for {{platform}} (en .so-fil). Matinee spør hvilke spill den spiller, og bruker den til dem før de innebygde.",
+      "emulatorsIntro": "Matinee har innebygde emulatorer. Du kan legge til dine egne: en libretro-core bygget for {{platform}} (en {{ext}}-fil). Matinee spør hvilke spill den spiller, og bruker den til dem før de innebygde.",
       "emulatorsTrust": "En emulator er et program som kjører på denne serveren. Legg bare til en du stoler på.",
       "addEmulator": "Legg til en emulator",
       "adding": "Legger til…",

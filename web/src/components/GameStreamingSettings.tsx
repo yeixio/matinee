@@ -50,13 +50,13 @@ function Emulators() {
   return (
     <div className="space-y-3">
       <h3 className="font-semibold">{t('settings.games.emulators')}</h3>
-      <p className="text-sm text-muted">{t('settings.games.emulatorsIntro', { platform: data?.platform ?? 'Linux' })}</p>
+      <p className="text-sm text-muted">{t('settings.games.emulatorsIntro', { platform: data?.platform ?? 'Linux', ext: data?.ext ?? '.so' })}</p>
       <p className="text-sm text-muted">{t('settings.games.emulatorsTrust')}</p>
       <div className="flex flex-wrap items-center gap-3">
         <input
           ref={input}
           type="file"
-          accept=".so"
+          accept=".so,.dll,.dylib"
           className="hidden"
           onChange={(e) => {
             const f = e.target.files?.[0]

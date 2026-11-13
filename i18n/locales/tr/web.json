@@ -1040,7 +1040,7 @@
       "notSetUp": "Kullanılamıyor: bu sunucuda oyun çalıştırıcı ve emülatörler yok. Docker imajında var.",
       "open": "Bir oyun dene",
       "emulators": "Emülatörler",
-      "emulatorsIntro": "Matinee yerleşik emülatörlerle gelir. Kendinizinkini ekleyebilirsiniz: {{platform}} için derlenmiş bir libretro çekirdeği (.so dosyası). Matinee ona hangi oyunları oynattığını sorar ve bu oyunlar için yerleşik olanlardan önce onu kullanır.",
+      "emulatorsIntro": "Matinee yerleşik emülatörlerle gelir. Kendinizinkini ekleyebilirsiniz: {{platform}} için derlenmiş bir libretro çekirdeği ({{ext}} dosyası). Matinee ona hangi oyunları oynattığını sorar ve bu oyunlar için yerleşik olanlardan önce onu kullanır.",
       "emulatorsTrust": "Emülatör bu sunucuda çalışan bir programdır. Yalnızca güvendiğiniz birini ekleyin.",
       "addEmulator": "Emülatör ekle",
       "adding": "Ekleniyor…",

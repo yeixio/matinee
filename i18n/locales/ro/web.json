@@ -1046,7 +1046,7 @@
       "notSetUp": "Indisponibil: serverul nu are rulatorul de jocuri și emulatoarele. Imaginea Docker le are.",
       "open": "Încearcă un joc",
       "emulators": "Emulatoare",
-      "emulatorsIntro": "Matinee vine cu emulatoare. Poți adăuga propriile tale: un core libretro compilat pentru {{platform}} (un fișier .so). Matinee îl întreabă ce jocuri rulează și îl folosește pentru ele înaintea celor incluse.",
+      "emulatorsIntro": "Matinee vine cu emulatoare. Poți adăuga propriile tale: un core libretro compilat pentru {{platform}} (un fișier {{ext}}). Matinee îl întreabă ce jocuri rulează și îl folosește pentru ele înaintea celor incluse.",
       "emulatorsTrust": "Un emulator este un program care rulează pe acest server. Adaugă doar unul în care ai încredere.",
       "addEmulator": "Adaugă un emulator",
       "adding": "Se adaugă…",

@@ -1034,7 +1034,7 @@
       "notSetUp": "無法使用：此伺服器沒有遊戲執行器和模擬器。Docker 映像檔中有。",
       "open": "試玩遊戲",
       "emulators": "模擬器",
-      "emulatorsIntro": "Matinee 內建模擬器。你也可以加入自己的：為 {{platform}} 建置的 libretro 核心（.so 檔案）。Matinee 會詢問它能玩哪些遊戲，並在這些遊戲上優先於內建模擬器使用它。",
+      "emulatorsIntro": "Matinee 內建模擬器。你也可以加入自己的：為 {{platform}} 建置的 libretro 核心（{{ext}} 檔案）。Matinee 會詢問它能玩哪些遊戲，並在這些遊戲上優先於內建模擬器使用它。",
       "emulatorsTrust": "模擬器是在這台伺服器上執行的程式。只加入你信任的。",
       "addEmulator": "加入模擬器",
       "adding": "正在加入…",

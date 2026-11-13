@@ -1034,7 +1034,7 @@
       "notSetUp": "Không khả dụng: máy chủ này không có trình chạy trò chơi và trình giả lập. Ảnh Docker có sẵn.",
       "open": "Thử một trò chơi",
       "emulators": "Trình giả lập",
-      "emulatorsIntro": "Matinee có sẵn trình giả lập. Bạn có thể thêm của riêng mình: một libretro core dựng cho {{platform}} (tệp .so). Matinee hỏi nó chơi được trò nào và dùng nó cho các trò đó trước trình có sẵn.",
+      "emulatorsIntro": "Matinee có sẵn trình giả lập. Bạn có thể thêm của riêng mình: một libretro core dựng cho {{platform}} (tệp {{ext}}). Matinee hỏi nó chơi được trò nào và dùng nó cho các trò đó trước trình có sẵn.",
       "emulatorsTrust": "Trình giả lập là chương trình chạy trên máy chủ này. Chỉ thêm trình bạn tin tưởng.",
       "addEmulator": "Thêm trình giả lập",
       "adding": "Đang thêm…",

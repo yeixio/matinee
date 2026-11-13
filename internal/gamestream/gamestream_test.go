@@ -15,6 +15,8 @@ import (
 	"time"
 
 	"github.com/pion/webrtc/v4"
+
+	"github.com/yeixio/matinee/internal/gamedat"
 )
 
 // built has the runner and the lag test core, compiled for the tests; empty
@@ -179,7 +181,7 @@ func TestUnzipGame(t *testing.T) {
 	w.Write(make([]byte, 32768))
 	zw.Close()
 	f.Close()
-	out, err := unzipGame(zpath, dir)
+	out, err := unzipGame(zpath, dir, nil)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -341,6 +343,15 @@ func TestUserEmulators(t *testing.T) {
 	if _, ok := m.SystemFor("/games/Thing.tst"); ok {
 		t.Fatal("still plays .tst")
 	}
+
+	// A Mac or Windows emulator's .dylib or .dll is kept as .so, like the
+	// built-in ones.
+	f, _ = os.Open(filepath.Join(built, "custom_libretro.so"))
+	e, err = m.AddEmulator(context.Background(), "mac_libretro.dylib", f)
+	f.Close()
+	if err != nil || e.File != "mac_libretro.so" {
+		t.Fatalf("added %+v: %v", e, err)
+	}
 }
 
 // A zip of a disc unpacks every track beside the .cue, which is played.
@@ -359,7 +370,7 @@ func TestUnzipDisc(t *testing.T) {
 		t.Fatalf("game in the zip is %q", ext)
 	}
 	out := t.TempDir()
-	got, err := unzipGame(zpath, out)
+	got, err := unzipGame(zpath, out, nil)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -387,5 +398,28 @@ func TestBrokenBuiltIn(t *testing.T) {
 	m.checkBuiltIn(context.Background())
 	if s, ok := m.SystemFor("game.gb"); ok {
 		t.Fatalf("a broken emulator plays .gb: %+v", s)
+	}
+}
+
+// A GoodTools-style 7z holds every dump of a game: the verified US one is
+// played, not a beta, bad dump, overdump or translation.
+func TestUnpackGoodSet(t *testing.T) {
+	src := filepath.Join("testdata", "goodset.7z")
+	if ext := zipGameExt(src); ext != ".nes" {
+		t.Fatalf("game in the 7z is %q", ext)
+	}
+	out := t.TempDir()
+	got, err := unzipGame(src, out, []string{".nes", ".fds"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if filepath.Base(got) != "goodset.nes" {
+		t.Fatalf("unpacked to %s", got)
+	}
+	b, _ := os.ReadFile(got)
+	files, _ := gamedat.ListArchive(src)
+	best, _ := zipGame(files, nil)
+	if best.Base() != "1943 - The Battle of Midway (U) [!].nes" || len(b) != 64 {
+		t.Fatalf("picked %s (%d bytes)", best.Base(), len(b))
 	}
 }

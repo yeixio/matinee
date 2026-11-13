@@ -1040,7 +1040,7 @@
       "notSetUp": "Nicht verfügbar: Diesem Server fehlen der Spiele-Runner und die Emulatoren. Das Docker-Image hat sie.",
       "open": "Ein Spiel ausprobieren",
       "emulators": "Emulatoren",
-      "emulatorsIntro": "Matinee bringt Emulatoren mit. Du kannst eigene hinzufügen: einen libretro-Core für {{platform}} (eine .so-Datei). Matinee fragt ihn, welche Spiele er spielt, und nutzt ihn dafür vor den eingebauten.",
+      "emulatorsIntro": "Matinee bringt Emulatoren mit. Du kannst eigene hinzufügen: einen libretro-Core für {{platform}} (eine {{ext}}-Datei). Matinee fragt ihn, welche Spiele er spielt, und nutzt ihn dafür vor den eingebauten.",
       "emulatorsTrust": "Ein Emulator ist ein Programm, das auf diesem Server läuft. Füge nur einen hinzu, dem du vertraust.",
       "addEmulator": "Emulator hinzufügen",
       "adding": "Wird hinzugefügt…",

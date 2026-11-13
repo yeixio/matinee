@@ -1,7 +1,8 @@
 name: Game emulators
 
 # Builds the game runner and the emulators in games/cores.txt once for each
-# Linux CPU the server runs on, and for Apple silicon Macs, and publishes them as a release
+# Linux CPU the server runs on, for Apple silicon Macs and for Windows (x64),
+# and publishes them as a release
 # (games/cores-tag.sh names it). The Docker image and the Linux packages
 # download them instead of compiling them. MAME is built on its own
 # (mame-core.yml). Everything is built on Ubuntu 22.04, whose glibc (2.35)
@@ -106,9 +107,64 @@ jobs:
           path: matinee-games-darwin-arm64.tar.xz
           compression-level: 0
 
+  # Windows, cross-built with MinGW, then checked on real Windows below.
+  # The x64 build goes in both installers: Windows on Arm runs x64 programs.
+  build-windows:
+    name: Emulators (Windows)
+    needs: version
+    if: needs.version.outputs.exists != 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Get build tools
+        run: sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -q --no-install-recommends gcc-mingw-w64-x86-64 g++-mingw-w64-x86-64 nasm
+      - uses: actions/checkout@v4
+      - name: Build
+        run: HOST=x86_64-w64-mingw32 KEEP_GOING=1 sh games/build.sh out
+      - name: Package
+        run: |
+          ls -la out out/cores
+          # Only Windows' own DLLs: MinGW's runtime isn't shipped beside them.
+          for f in out/*.exe out/cores/*.so; do
+            if x86_64-w64-mingw32-objdump -p "$f" | grep 'DLL Name' | grep -iE 'libgcc|libstdc|libwinpthread'; then
+              echo "$f needs MinGW's runtime DLLs" >&2
+              exit 1
+            fi
+          done
+          tar -C out -cf - . | xz -T0 -6 > matinee-games-windows-amd64.tar.xz
+          ls -la ./*.tar.xz
+      - uses: actions/upload-artifact@v4
+        with:
+          name: games-windows-amd64
+          path: matinee-games-windows-amd64.tar.xz
+          compression-level: 0
+
+  test-windows:
+    name: Emulators load on Windows
+    needs: build-windows
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: games-windows-amd64
+      - name: Every emulator loads, and the runner plays
+        run: |
+          mkdir games && xz -dc matinee-games-windows-amd64.tar.xz | tar -C games -xf -
+          cd games
+          for c in cores/*.so; do
+            echo "$c: $(./matinee-game-runner.exe --info "$c")"
+          done
+          # The lag test plays until Matinee (here, printf) closes stdin.
+          printf 'B\0\1\0' | ./matinee-game-runner.exe cores/lagtest.so - . . > out.bin
+          head -c 1 out.bin | grep -q I
+          ls -l out.bin
+
   publish:
     name: Publish
-    needs: [version, build, build-mac]
+    needs: [version, build, build-mac, test-windows]
     # On main, or run by hand (to publish emulators before the change that
     # needs them is merged). A run by hand tags main: the token can't tag a
     # commit that changes workflows main doesn't have yet.
@@ -130,5 +186,5 @@ jobs:
             --repo '${{ github.repository }}' \
             --target "${{ github.ref == 'refs/heads/main' && github.sha || 'main' }}" \
             --title 'Game emulators (${{ needs.version.outputs.tag }})' \
-            --notes 'The game runner and emulators in games/cores.txt, built for Linux (amd64, arm64, 32-bit ARM) and Apple silicon Macs. The Matinee server image, the Linux packages and Matinee Server.app include them. Each emulator is built from the commit listed in games/cores.txt; its licence is in licenses/.' \
+            --notes 'The game runner and emulators in games/cores.txt, built for Linux (amd64, arm64, 32-bit ARM), Apple silicon Macs and Windows (x64). The Matinee server image, the Linux packages, Matinee Server.app and the Windows installers include them. Each emulator is built from the commit listed in games/cores.txt; its licence is in licenses/.' \
             --latest=false
