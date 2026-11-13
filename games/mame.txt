@@ -1,0 +1,9 @@
+# The arcade emulator: MAME's libretro core, built from libretro's copy of
+# MAME. It takes hours to build, so .github/workflows/mame-core.yml builds
+# it once per change here and publishes it as the release
+# mame-core-<version>-<first 7 of commit>, which the Dockerfile downloads.
+# MAME is GPL-2.0-or-later; its licence ships in the image beside it. Keep
+# the version to the one Matinee's arcade list is for (internal/gamedat):
+# ROM sets are made for one MAME version.
+version=0.289
+commit=5f5a07748ce5c239c4118463ce8e6473743d4859

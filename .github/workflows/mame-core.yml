@@ -1,0 +1,118 @@
+name: Arcade emulator
+
+# Builds MAME's libretro core (games/mame.txt), the arcade emulator the
+# server plays arcade games with, for 64-bit Intel/AMD and ARM, plays a
+# free game with it, and publishes it as a release the Dockerfile
+# downloads. MAME takes hours to build, so this runs only when
+# games/mame.txt or this file changes, and never again for a release that
+# exists.
+on:
+  push:
+    branches: [main]
+    paths: ['games/mame.txt', 'games/mame-test/**', '.github/workflows/mame-core.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  version:
+    name: Version
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.v.outputs.version }}
+      commit: ${{ steps.v.outputs.commit }}
+      tag: ${{ steps.v.outputs.tag }}
+      exists: ${{ steps.exists.outputs.exists }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: v
+        run: |
+          version=$(sed -n 's/^version=//p' games/mame.txt)
+          commit=$(sed -n 's/^commit=//p' games/mame.txt)
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "commit=$commit" >> "$GITHUB_OUTPUT"
+          echo "tag=mame-core-$version-${commit:0:7}" >> "$GITHUB_OUTPUT"
+      - id: exists
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view '${{ steps.v.outputs.tag }}' > /dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  build:
+    name: MAME (${{ matrix.arch }})
+    needs: version
+    if: needs.version.outputs.exists != 'true'
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 345
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { arch: amd64, runner: ubuntu-latest }
+          - { arch: arm64, runner: ubuntu-24.04-arm }
+    steps:
+      - uses: actions/checkout@v4
+      - name: Get MAME
+        run: |
+          git init -q mame-src
+          git -C mame-src fetch -q --depth 1 https://github.com/libretro/mame '${{ needs.version.outputs.commit }}'
+          git -C mame-src checkout -q FETCH_HEAD
+      # Arcade machines only: consoles have their own emulators in Matinee.
+      - name: Build
+        working-directory: mame-src
+        run: |
+          make -f Makefile.libretro -j"$(nproc)" SUBTARGET=arcade > ../build.log 2>&1 || { tail -200 ../build.log; exit 1; }
+          tail -5 ../build.log
+          ls -la ./*_libretro.so
+      - name: Package
+        run: |
+          mkdir out
+          so=$(ls mame-src/*_libretro.so | head -1)
+          strip --strip-unneeded "$so"
+          cp "$so" out/mame_libretro.so
+          xz -T0 -6 -c out/mame_libretro.so > 'mame_libretro-${{ matrix.arch }}.so.xz'
+          cp mame-src/COPYING mame-COPYING.txt
+          ls -la out mame_libretro-*.so.xz
+      - name: Play gridlee
+        run: |
+          cc -O2 -o out/matinee-game-runner games/runner/runner.c -ldl
+          out/matinee-game-runner --info out/mame_libretro.so
+          mkdir roms
+          curl -fsSL -o roms/gridlee.zip https://www.mamedev.org/roms/gridlee/gridlee.zip
+          python3 games/mame-test/play.py out/matinee-game-runner out/mame_libretro.so roms/gridlee.zip 30
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mame-${{ matrix.arch }}
+          path: |
+            mame_libretro-${{ matrix.arch }}.so.xz
+            mame-COPYING.txt
+          compression-level: 0
+
+  publish:
+    name: Publish
+    needs: [version, build]
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: mame-*
+          merge-multiple: true
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          sha256sum mame_libretro-*.so.xz > SHA256SUMS
+          cat SHA256SUMS
+          gh release create '${{ needs.version.outputs.tag }}' mame_libretro-*.so.xz mame-COPYING.txt SHA256SUMS \
+            --repo '${{ github.repository }}' \
+            --target "$GITHUB_SHA" \
+            --title 'Arcade emulator: MAME ${{ needs.version.outputs.version }}' \
+            --notes 'MAME ${{ needs.version.outputs.version }} as a libretro core, built from https://github.com/libretro/mame at ${{ needs.version.outputs.commit }} (GPL-2.0-or-later). The Matinee server image plays arcade games with it.' \
+            --latest=false
