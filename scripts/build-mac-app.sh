@@ -5,7 +5,10 @@
 #   VERSION=0.2.0 scripts/build-mac-app.sh
 #
 # Universal (arm64 + x86_64): the server, FFmpeg (scripts/build-mac-ffmpeg.sh,
-# or a folder of prebuilt ones in FFMPEG_DIR) and the app from macos/.
+# or a folder of prebuilt ones in FFMPEG_DIR) and the app from macos/. The
+# game runner and emulators, built for Apple silicon by the "Game emulators"
+# workflow, go in Contents/Resources/games (REQUIRE_GAMES=1 fails without
+# them; otherwise the app is built without games).
 #
 # Each of these is optional; without them the app is built unsigned, for
 # trying out and for CI on pull requests:
@@ -43,6 +46,23 @@ cp "$ffmpeg_dir/ffmpeg" "$ffmpeg_dir/ffprobe" "$contents/MacOS/"
 cp "$ffmpeg_dir/FFmpeg.txt" "$contents/Resources/"
 echo "::endgroup::"
 
+echo "::group::Games"
+games_tag="$(sh games/cores-tag.sh games)"
+f=matinee-games-darwin-arm64.tar.xz
+base="https://github.com/yeixio/matinee/releases/download/$games_tag"
+if curl -fsSL --retry 3 -o "$work/$f" "$base/$f" && curl -fsSL --retry 3 -o "$work/games-SHA256SUMS" "$base/SHA256SUMS"; then
+	(cd "$work" && grep " $f\$" games-SHA256SUMS | shasum -a 256 -c -)
+	mkdir -p "$contents/Resources/games"
+	tar -xJf "$work/$f" -C "$contents/Resources/games"
+	ls "$contents/Resources/games/cores"
+elif [ -n "${REQUIRE_GAMES:-}" ]; then
+	echo "::error::no $games_tag release with Mac emulators"
+	exit 1
+else
+	echo "::notice::No $games_tag release with Mac emulators yet: the app is built without games."
+fi
+echo "::endgroup::"
+
 echo "::group::App"
 swift build --package-path macos -c release --arch arm64 --arch x86_64
 products="$(swift build --package-path macos -c release --arch arm64 --arch x86_64 --show-bin-path)"
@@ -70,6 +90,14 @@ echo "::endgroup::"
 
 echo "::group::Sign"
 identity="${MAC_SIGN_IDENTITY:-}"
+# sign_games signs the emulators, then the runner that loads them, with its
+# own entitlements (macos/Resources/game-runner.entitlements.plist).
+sign_games() {
+	local g="$contents/Resources/games"
+	[ -d "$g" ] || return 0
+	for core in "$g"/cores/*.so; do sign "$core"; done
+	sign --entitlements macos/Resources/game-runner.entitlements.plist "$g/matinee-game-runner"
+}
 if [ -n "$identity" ]; then
 	sign() { codesign --force --sign "$identity" --options runtime --timestamp "$@"; }
 	# Sparkle's pieces inside out, as its documentation says for apps
@@ -81,9 +109,12 @@ if [ -n "$identity" ]; then
 	sign "$fw/Updater.app"
 	sign "$contents/Frameworks/Sparkle.framework"
 	for tool in matinee ffmpeg ffprobe; do sign "$contents/MacOS/$tool"; done
+	sign_games
 	sign --entitlements macos/Resources/entitlements.plist "$app"
 else
 	echo "::notice::No MAC_SIGN_IDENTITY: the app is signed ad hoc and runs only on this Mac (or after right-click → Open)."
+	sign() { codesign --force --sign - "$@"; }
+	sign_games
 	codesign --force --deep --sign - "$app"
 fi
 codesign --verify --deep --strict --verbose=2 "$app"

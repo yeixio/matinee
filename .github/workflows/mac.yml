@@ -21,6 +21,7 @@ on:
     paths:
       - macos/**
       - scripts/build-mac-*.sh
+      - games/**
       - .github/workflows/mac.yml
   workflow_dispatch:
   workflow_call:
@@ -120,6 +121,9 @@ jobs:
         env:
           TMDB_KEY: ${{ inputs.tag != '' && secrets.TMDB_API_KEY || '' }}
           SPARKLE_PRIVATE_KEY: ${{ steps.secrets.outputs.ready && secrets.SPARKLE_PRIVATE_KEY || '' }}
+          # A release has games; a pull request's build may come before
+          # their emulators are published.
+          REQUIRE_GAMES: ${{ inputs.tag != '' && '1' || '' }}
         run: |
           version="${TAG#v}"
           [ -n "$version" ] || version="0.0.0-dev.$(git rev-parse --short HEAD)"
