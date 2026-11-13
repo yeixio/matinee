@@ -275,6 +275,14 @@ func (f *Fetcher) query(ctx context.Context, lib store.Library, it store.Item) (
 			}
 		}
 		return q, ready
+	case "game":
+		// Only a Games library's games, once for each game: its other
+		// versions (regions, arcade clones) share its page.
+		var d struct{ Group string }
+		if it.VersionOf != nil || json.Unmarshal(it.PluginData, &d) != nil || d.Group == "" {
+			return q, noMatch
+		}
+		return q, ready
 	case "season":
 		if it.ParentID == nil || it.IndexNumber == nil {
 			return q, noMatch

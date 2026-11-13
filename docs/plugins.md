@@ -15,4 +15,4 @@ Its pages live in [guide/plugins](guide/plugins):
 The SDK is [pluginsdk](../pluginsdk), the `matinee-plugin` tool is
 [cmd/matinee-plugin](../cmd/matinee-plugin), and
 [pluginsdk/examples/stories](../pluginsdk/examples/stories) is a small
-complete plugin. The [Arcade plugin](../plugins/arcade) uses every part.
+complete plugin.

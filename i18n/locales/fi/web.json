@@ -231,11 +231,8 @@
       "title_one": "{{count}} tiedosto jätettiin pois",
       "title_other": "{{count}} tiedostoa jätettiin pois",
       "topFolder": "Ylin kansio",
-      "arcade_one": "{{count}} arcade-sarja. Arcade-pelit pelataan Arcade-kirjastosta.",
-      "arcade_other": "{{count}} arcade-sarjaa. Arcade-pelit pelataan Arcade-kirjastosta.",
       "unknown_one": "{{count}} tiedosto, jota Matinee ei vielä osaa toistaa, esimerkiksi {{example}}.",
-      "unknown_other": "{{count}} tiedostoa, joita Matinee ei vielä osaa toistaa, esimerkiksi {{example}}.",
-      "addArcade": "Lisää Arcade-kirjasto"
+      "unknown_other": "{{count}} tiedostoa, joita Matinee ei vielä osaa toistaa, esimerkiksi {{example}}."
     }
   },
   "nothingHereYet": "Täällä ei ole vielä mitään",
@@ -1703,8 +1700,14 @@
       "region": "Alue",
       "publisher": "Julkaisija",
       "players": "Pelaajat",
-      "genre": "Lajityyppi"
+      "genre": "Lajityyppi",
+      "screen": "Näyttö"
     },
-    "tapToPlay": "Paina pelataksesi"
+    "tapToPlay": "Paina pelataksesi",
+    "noEmulatorFor": "Matinee ei vielä osaa pelata {{system}}-pelejä: tällä palvelimella ei ole niille emulaattoria.",
+    "noEmulator": "Matinee ei vielä osaa pelata tätä peliä: tällä palvelimella ei ole sille emulaattoria.",
+    "addEmulator": "Lisää emulaattori asetuksissa",
+    "emulatorGuide": "Näin lisäät oman emulaattorin",
+    "askAdminEmulator": "Ylläpitäjä voi lisätä sille emulaattorin."
   }
 }

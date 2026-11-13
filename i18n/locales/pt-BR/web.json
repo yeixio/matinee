@@ -233,13 +233,9 @@
       "title_many": "{{count}} de arquivos ficaram de fora",
       "title_other": "{{count}} arquivos ficaram de fora",
       "topFolder": "Pasta principal",
-      "arcade_one": "{{count}} jogo de arcade. Jogos de arcade rodam em uma biblioteca Arcade.",
-      "arcade_many": "{{count}} de jogos de arcade. Jogos de arcade rodam em uma biblioteca Arcade.",
-      "arcade_other": "{{count}} jogos de arcade. Jogos de arcade rodam em uma biblioteca Arcade.",
       "unknown_one": "{{count}} arquivo que o Matinee ainda não reproduz, como {{example}}.",
       "unknown_many": "{{count}} de arquivos que o Matinee ainda não reproduz, como {{example}}.",
-      "unknown_other": "{{count}} arquivos que o Matinee ainda não reproduz, como {{example}}.",
-      "addArcade": "Adicionar uma biblioteca Arcade"
+      "unknown_other": "{{count}} arquivos que o Matinee ainda não reproduz, como {{example}}."
     }
   },
   "nothingHereYet": "Nada aqui ainda",
@@ -1718,8 +1714,14 @@
       "region": "Região",
       "publisher": "Editora",
       "players": "Jogadores",
-      "genre": "Gênero"
+      "genre": "Gênero",
+      "screen": "Tela"
     },
-    "tapToPlay": "Toque para jogar"
+    "tapToPlay": "Toque para jogar",
+    "noEmulatorFor": "O Matinee ainda não roda jogos de {{system}}: não há um emulador para eles neste servidor.",
+    "noEmulator": "O Matinee ainda não roda este jogo: não há um emulador para ele neste servidor.",
+    "addEmulator": "Adicionar um emulador nas Configurações",
+    "emulatorGuide": "Como adicionar seu próprio emulador",
+    "askAdminEmulator": "Um administrador pode adicionar um emulador para ele."
   }
 }

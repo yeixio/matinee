@@ -694,6 +694,45 @@
               }
             },
             {
+              "name": "Arcade games in the Games library",
+              "doc": "/docs/server/arcade/",
+              "since": "v0.2.7",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
+              "name": "Game summaries and genres from Wikipedia",
+              "doc": "/docs/server/games/#details",
+              "since": "v0.2.7",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
+              "name": "Every game shows, with a note when there's no emulator for it",
+              "doc": "/docs/server/games/#a-games-library",
+              "since": "v0.2.7",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
               "name": "See which game files were left out and why",
               "doc": "/docs/server/games/#a-games-library",
               "since": "v0.2.7",

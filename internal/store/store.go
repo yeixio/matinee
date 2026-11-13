@@ -789,6 +789,14 @@ var migrations = []string{
 	// game in a Games library is filed again on the next scan.
 	`UPDATE items SET mtime = 0 WHERE kind = 'game' AND path IS NOT NULL
 		AND library_id IN (SELECT id FROM libraries WHERE kind = 'games')`,
+	// 145: the Games library plays arcade games itself, so the Arcade
+	// plugin's libraries become Games libraries.
+	"UPDATE libraries SET kind = 'games' WHERE kind = 'arcade'",
+	// 146: Games libraries file arcade sets, more systems' games, each
+	// game's other versions under it and its backdrop; every game is filed
+	// again on the next scan.
+	`UPDATE items SET mtime = 0 WHERE kind = 'game' AND path IS NOT NULL
+		AND library_id IN (SELECT id FROM libraries WHERE kind = 'games')`,
 }
 
 func now() int64 { return time.Now().Unix() }

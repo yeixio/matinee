@@ -703,8 +703,13 @@
       "region": "Região",
       "publisher": "Editora",
       "players": "Jogadores",
-      "genre": "Gênero"
+      "genre": "Gênero",
+      "screen": "Tela"
     },
-    "notHere": "Os jogos ainda não funcionam neste aparelho"
+    "notHere": "Os jogos ainda não funcionam neste aparelho",
+    "noEmulatorFor": "O Matinee ainda não roda jogos de {{system}}: não há um emulador para eles neste servidor.",
+    "noEmulator": "O Matinee ainda não roda este jogo: não há um emulador para ele neste servidor.",
+    "addEmulatorWeb": "Um administrador pode adicionar um em Configurações → Streaming → Jogos no player web.",
+    "emulatorGuide": "Como adicionar seu próprio emulador"
   }
 }

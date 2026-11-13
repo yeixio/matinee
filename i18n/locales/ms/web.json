@@ -229,9 +229,7 @@
     "skipped": {
       "title_other": "{{count}} fail ditinggalkan",
       "topFolder": "Folder teratas",
-      "arcade_other": "{{count}} set arked. Permainan arked dimainkan dari pustaka Arcade.",
-      "unknown_other": "{{count}} fail yang belum boleh dimainkan oleh Matinee, contohnya {{example}}.",
-      "addArcade": "Tambah pustaka Arcade"
+      "unknown_other": "{{count}} fail yang belum boleh dimainkan oleh Matinee, contohnya {{example}}."
     }
   },
   "nothingHereYet": "Belum ada apa-apa di sini",
@@ -1688,8 +1686,14 @@
       "region": "Rantau",
       "publisher": "Penerbit",
       "players": "Pemain",
-      "genre": "Genre"
+      "genre": "Genre",
+      "screen": "Skrin"
     },
-    "tapToPlay": "Tekan untuk bermain"
+    "tapToPlay": "Tekan untuk bermain",
+    "noEmulatorFor": "Matinee belum boleh memainkan permainan {{system}}: pelayan ini tiada emulator untuknya.",
+    "noEmulator": "Matinee belum boleh memainkan permainan ini: pelayan ini tiada emulator untuknya.",
+    "addEmulator": "Tambah emulator dalam Tetapan",
+    "emulatorGuide": "Cara menambah emulator sendiri",
+    "askAdminEmulator": "Pentadbir boleh menambah emulator untuknya."
   }
 }

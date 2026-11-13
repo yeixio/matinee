@@ -33,7 +33,7 @@ Say on your plugin's page:
 
 For a new version, raise `version` in `plugin.json`, build, and publish the new file. People install it the same way, and Matinee replaces the old version.
 
-To build releases in CI, run `go test ./...` and `matinee-plugin build`, then attach the package to a release. The Arcade plugin's [workflow](https://github.com/yeixio/matinee/blob/main/.github/workflows/arcade.yml) does this, and also plays a game in a headless browser before releasing.
+To build releases in CI, run `go test ./...` and `matinee-plugin build`, then attach the package to a release.
 
 ## The official list
 

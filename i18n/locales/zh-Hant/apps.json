@@ -689,8 +689,13 @@
       "region": "地區",
       "publisher": "發行商",
       "players": "玩家人數",
-      "genre": "類型"
+      "genre": "類型",
+      "screen": "螢幕"
     },
-    "notHere": "此裝置暫不支援玩遊戲"
+    "notHere": "此裝置暫不支援玩遊戲",
+    "noEmulatorFor": "Matinee 暫時還不能執行 {{system}} 遊戲：此伺服器上沒有對應的模擬器。",
+    "noEmulator": "Matinee 暫時還不能執行這款遊戲：此伺服器上沒有對應的模擬器。",
+    "addEmulatorWeb": "管理員可以在網頁播放器的「設定 → 串流 → 遊戲」中新增。",
+    "emulatorGuide": "如何新增你自己的模擬器"
   }
 }

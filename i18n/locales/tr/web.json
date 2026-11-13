@@ -231,11 +231,8 @@
       "title_one": "{{count}} dosya dışarıda bırakıldı",
       "title_other": "{{count}} dosya dışarıda bırakıldı",
       "topFolder": "Üst klasör",
-      "arcade_one": "{{count}} arcade seti. Arcade oyunları bir Arcade kitaplığından oynanır.",
-      "arcade_other": "{{count}} arcade seti. Arcade oyunları bir Arcade kitaplığından oynanır.",
       "unknown_one": "Matinee'nin henüz oynatamadığı {{count}} dosya, örneğin {{example}}.",
-      "unknown_other": "Matinee'nin henüz oynatamadığı {{count}} dosya, örneğin {{example}}.",
-      "addArcade": "Arcade kitaplığı ekle"
+      "unknown_other": "Matinee'nin henüz oynatamadığı {{count}} dosya, örneğin {{example}}."
     }
   },
   "nothingHereYet": "Burada henüz bir şey yok",
@@ -1703,8 +1700,14 @@
       "region": "Bölge",
       "publisher": "Yayıncı",
       "players": "Oyuncular",
-      "genre": "Tür"
+      "genre": "Tür",
+      "screen": "Ekran"
     },
-    "tapToPlay": "Oynamak için bas"
+    "tapToPlay": "Oynamak için bas",
+    "noEmulatorFor": "Matinee henüz {{system}} oyunlarını oynatamıyor: bu sunucuda onlar için bir emülatör yok.",
+    "noEmulator": "Matinee bu oyunu henüz oynatamıyor: bu sunucuda onun için bir emülatör yok.",
+    "addEmulator": "Ayarlar'dan emülatör ekle",
+    "emulatorGuide": "Kendi emülatörünüzü nasıl eklersiniz",
+    "askAdminEmulator": "Bir yönetici bunun için emülatör ekleyebilir."
   }
 }

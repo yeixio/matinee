@@ -689,8 +689,13 @@
       "region": "Khu vực",
       "publisher": "Nhà phát hành",
       "players": "Người chơi",
-      "genre": "Thể loại"
+      "genre": "Thể loại",
+      "screen": "Màn hình"
     },
-    "notHere": "Chưa thể chơi trò chơi trên thiết bị này"
+    "notHere": "Chưa thể chơi trò chơi trên thiết bị này",
+    "noEmulatorFor": "Matinee chưa chơi được trò chơi {{system}}: máy chủ này chưa có trình giả lập cho chúng.",
+    "noEmulator": "Matinee chưa chơi được trò chơi này: máy chủ này chưa có trình giả lập cho nó.",
+    "addEmulatorWeb": "Quản trị viên có thể thêm trong Cài đặt → Phát trực tuyến → Trò chơi trên trình phát web.",
+    "emulatorGuide": "Cách thêm trình giả lập của riêng bạn"
   }
 }

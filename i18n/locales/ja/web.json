@@ -229,9 +229,7 @@
     "skipped": {
       "title_other": "{{count}}個のファイルが除外されました",
       "topFolder": "最上位フォルダー",
-      "arcade_other": "アーケードセット{{count}}個。アーケードゲームは Arcade ライブラリで遊べます。",
-      "unknown_other": "Matinee がまだ再生できないファイル{{count}}個（例: {{example}}）。",
-      "addArcade": "Arcade ライブラリを追加"
+      "unknown_other": "Matinee がまだ再生できないファイル{{count}}個（例: {{example}}）。"
     }
   },
   "nothingHereYet": "まだ何もありません",
@@ -1688,8 +1686,14 @@
       "region": "地域",
       "publisher": "発売元",
       "players": "プレイ人数",
-      "genre": "ジャンル"
+      "genre": "ジャンル",
+      "screen": "画面"
     },
-    "tapToPlay": "押してプレイ"
+    "tapToPlay": "押してプレイ",
+    "noEmulatorFor": "Matinee はまだ {{system}} のゲームを遊べません。このサーバーにはそのエミュレーターがありません。",
+    "noEmulator": "Matinee はまだこのゲームを遊べません。このサーバーにはそのエミュレーターがありません。",
+    "addEmulator": "設定でエミュレーターを追加",
+    "emulatorGuide": "自分のエミュレーターを追加する方法",
+    "askAdminEmulator": "管理者がエミュレーターを追加できます。"
   }
 }

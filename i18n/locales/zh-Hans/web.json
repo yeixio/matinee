@@ -229,9 +229,7 @@
     "skipped": {
       "title_other": "有 {{count}} 个文件未收录",
       "topFolder": "顶层文件夹",
-      "arcade_other": "{{count}} 个街机游戏集。街机游戏需在 Arcade 媒体库中游玩。",
-      "unknown_other": "{{count}} 个 Matinee 暂时无法播放的文件，例如 {{example}}。",
-      "addArcade": "添加 Arcade 媒体库"
+      "unknown_other": "{{count}} 个 Matinee 暂时无法播放的文件，例如 {{example}}。"
     }
   },
   "nothingHereYet": "这里还没有内容",
@@ -1688,8 +1686,14 @@
       "region": "地区",
       "publisher": "发行商",
       "players": "玩家人数",
-      "genre": "类型"
+      "genre": "类型",
+      "screen": "屏幕"
     },
-    "tapToPlay": "按下开始游戏"
+    "tapToPlay": "按下开始游戏",
+    "noEmulatorFor": "Matinee 暂时还不能运行 {{system}} 游戏：此服务器上没有对应的模拟器。",
+    "noEmulator": "Matinee 暂时还不能运行这款游戏：此服务器上没有对应的模拟器。",
+    "addEmulator": "在设置中添加模拟器",
+    "emulatorGuide": "如何添加你自己的模拟器",
+    "askAdminEmulator": "管理员可以为它添加模拟器。"
   }
 }

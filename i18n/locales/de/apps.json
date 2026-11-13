@@ -696,8 +696,13 @@
       "region": "Region",
       "publisher": "Publisher",
       "players": "Spieler",
-      "genre": "Genre"
+      "genre": "Genre",
+      "screen": "Bildschirm"
     },
-    "notHere": "Spiele laufen auf diesem Gerät noch nicht"
+    "notHere": "Spiele laufen auf diesem Gerät noch nicht",
+    "noEmulatorFor": "Matinee kann {{system}}-Spiele noch nicht spielen: Auf diesem Server gibt es keinen Emulator dafür.",
+    "noEmulator": "Matinee kann dieses Spiel noch nicht spielen: Auf diesem Server gibt es keinen Emulator dafür.",
+    "addEmulatorWeb": "Ein Admin kann im Webplayer unter Einstellungen → Streaming → Spiele einen hinzufügen.",
+    "emulatorGuide": "So fügst du einen eigenen Emulator hinzu"
   }
 }

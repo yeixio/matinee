@@ -710,8 +710,13 @@
       "region": "Region",
       "publisher": "Vydavatel",
       "players": "Hráči",
-      "genre": "Žánr"
+      "genre": "Žánr",
+      "screen": "Obrazovka"
     },
-    "notHere": "Hry na tomto zařízení zatím nefungují"
+    "notHere": "Hry na tomto zařízení zatím nefungují",
+    "noEmulatorFor": "Matinee zatím neumí spouštět hry pro {{system}}: na tomto serveru pro ně není emulátor.",
+    "noEmulator": "Matinee zatím neumí spustit tuto hru: na tomto serveru pro ni není emulátor.",
+    "addEmulatorWeb": "Správce ho může přidat ve webovém přehrávači: Nastavení → Streamování → Hry.",
+    "emulatorGuide": "Jak přidat vlastní emulátor"
   }
 }

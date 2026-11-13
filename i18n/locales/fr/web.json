@@ -233,13 +233,9 @@
       "title_many": "{{count}} de fichiers ont été laissés de côté",
       "title_other": "{{count}} fichiers ont été laissés de côté",
       "topFolder": "Dossier principal",
-      "arcade_one": "{{count}} jeu d'arcade. Les jeux d'arcade se lancent depuis une bibliothèque Arcade.",
-      "arcade_many": "{{count}} de jeux d'arcade. Les jeux d'arcade se lancent depuis une bibliothèque Arcade.",
-      "arcade_other": "{{count}} jeux d'arcade. Les jeux d'arcade se lancent depuis une bibliothèque Arcade.",
       "unknown_one": "{{count}} fichier que Matinee ne peut pas encore lire, comme {{example}}.",
       "unknown_many": "{{count}} de fichiers que Matinee ne peut pas encore lire, comme {{example}}.",
-      "unknown_other": "{{count}} fichiers que Matinee ne peut pas encore lire, comme {{example}}.",
-      "addArcade": "Ajouter une bibliothèque Arcade"
+      "unknown_other": "{{count}} fichiers que Matinee ne peut pas encore lire, comme {{example}}."
     }
   },
   "nothingHereYet": "Rien ici pour l’instant",
@@ -1718,8 +1714,14 @@
       "region": "Région",
       "publisher": "Éditeur",
       "players": "Joueurs",
-      "genre": "Genre"
+      "genre": "Genre",
+      "screen": "Écran"
     },
-    "tapToPlay": "Appuyez pour jouer"
+    "tapToPlay": "Appuyez pour jouer",
+    "noEmulatorFor": "Matinee ne peut pas encore lancer les jeux {{system}} : ce serveur n'a pas d'émulateur pour eux.",
+    "noEmulator": "Matinee ne peut pas encore lancer ce jeu : ce serveur n'a pas d'émulateur pour lui.",
+    "addEmulator": "Ajouter un émulateur dans les réglages",
+    "emulatorGuide": "Comment ajouter votre propre émulateur",
+    "askAdminEmulator": "Un administrateur peut ajouter un émulateur pour lui."
   }
 }

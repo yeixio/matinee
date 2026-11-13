@@ -233,13 +233,9 @@
       "title_few": "{{count}} fișiere au fost omise",
       "title_other": "{{count}} de fișiere au fost omise",
       "topFolder": "Dosarul principal",
-      "arcade_one": "{{count}} set arcade. Jocurile arcade rulează dintr-o bibliotecă Arcade.",
-      "arcade_few": "{{count}} seturi arcade. Jocurile arcade rulează dintr-o bibliotecă Arcade.",
-      "arcade_other": "{{count}} de seturi arcade. Jocurile arcade rulează dintr-o bibliotecă Arcade.",
       "unknown_one": "{{count}} fișier pe care Matinee nu îl poate reda încă, de exemplu {{example}}.",
       "unknown_few": "{{count}} fișiere pe care Matinee nu le poate reda încă, de exemplu {{example}}.",
-      "unknown_other": "{{count}} de fișiere pe care Matinee nu le poate reda încă, de exemplu {{example}}.",
-      "addArcade": "Adaugă o bibliotecă Arcade"
+      "unknown_other": "{{count}} de fișiere pe care Matinee nu le poate reda încă, de exemplu {{example}}."
     }
   },
   "nothingHereYet": "Nimic aici încă",
@@ -1718,8 +1714,14 @@
       "region": "Regiune",
       "publisher": "Editor",
       "players": "Jucători",
-      "genre": "Gen"
+      "genre": "Gen",
+      "screen": "Ecran"
     },
-    "tapToPlay": "Apasă pentru a juca"
+    "tapToPlay": "Apasă pentru a juca",
+    "noEmulatorFor": "Matinee nu poate rula încă jocuri {{system}}: pe acest server nu există un emulator pentru ele.",
+    "noEmulator": "Matinee nu poate rula încă acest joc: pe acest server nu există un emulator pentru el.",
+    "addEmulator": "Adaugă un emulator în Setări",
+    "emulatorGuide": "Cum îți adaugi propriul emulator",
+    "askAdminEmulator": "Un administrator poate adăuga un emulator pentru el."
   }
 }

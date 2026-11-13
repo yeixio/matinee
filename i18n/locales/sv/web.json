@@ -231,11 +231,8 @@
       "title_one": "{{count}} fil hoppades över",
       "title_other": "{{count}} filer hoppades över",
       "topFolder": "Översta mappen",
-      "arcade_one": "{{count}} arkadset. Arkadspel spelas från ett Arcade-bibliotek.",
-      "arcade_other": "{{count}} arkadset. Arkadspel spelas från ett Arcade-bibliotek.",
       "unknown_one": "{{count}} fil som Matinee inte kan spela upp än, till exempel {{example}}.",
-      "unknown_other": "{{count}} filer som Matinee inte kan spela upp än, till exempel {{example}}.",
-      "addArcade": "Lägg till ett Arcade-bibliotek"
+      "unknown_other": "{{count}} filer som Matinee inte kan spela upp än, till exempel {{example}}."
     }
   },
   "nothingHereYet": "Inget här än",
@@ -1703,8 +1700,14 @@
       "region": "Region",
       "publisher": "Utgivare",
       "players": "Spelare",
-      "genre": "Genre"
+      "genre": "Genre",
+      "screen": "Skärm"
     },
-    "tapToPlay": "Tryck för att spela"
+    "tapToPlay": "Tryck för att spela",
+    "noEmulatorFor": "Matinee kan inte spela {{system}}-spel än: det finns ingen emulator för dem på den här servern.",
+    "noEmulator": "Matinee kan inte spela det här spelet än: det finns ingen emulator för det på den här servern.",
+    "addEmulator": "Lägg till en emulator i Inställningar",
+    "emulatorGuide": "Så lägger du till en egen emulator",
+    "askAdminEmulator": "En administratör kan lägga till en emulator för det."
   }
 }

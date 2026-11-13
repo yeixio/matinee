@@ -696,8 +696,13 @@
       "region": "Regio",
       "publisher": "Uitgever",
       "players": "Spelers",
-      "genre": "Genre"
+      "genre": "Genre",
+      "screen": "Scherm"
     },
-    "notHere": "Games werken nog niet op dit apparaat"
+    "notHere": "Games werken nog niet op dit apparaat",
+    "noEmulatorFor": "Matinee kan {{system}}-games nog niet spelen: er is geen emulator voor op deze server.",
+    "noEmulator": "Matinee kan deze game nog niet spelen: er is geen emulator voor op deze server.",
+    "addEmulatorWeb": "Een beheerder kan er een toevoegen via Instellingen → Streaming → Games in de webspeler.",
+    "emulatorGuide": "Zo voeg je je eigen emulator toe"
   }
 }

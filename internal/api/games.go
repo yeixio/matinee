@@ -15,6 +15,7 @@ import (
 
 	"github.com/coder/websocket"
 	"github.com/yeixio/matinee/internal/gamehost"
+	"github.com/yeixio/matinee/internal/gamelib"
 	"github.com/yeixio/matinee/internal/gamestream"
 )
 
@@ -207,7 +208,7 @@ func (s *Server) playGameItem(w http.ResponseWriter, r *http.Request) {
 	if !filesAnswering(w, it) {
 		return
 	}
-	sys, ok := s.Games.SystemFor(it.Path)
+	sys, ok := s.Games.SystemForGame(it.Path, gamelib.SystemKey(it.PluginData))
 	if !ok {
 		writeError(w, http.StatusBadRequest, "no emulator on this server plays that game")
 		return

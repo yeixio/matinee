@@ -229,9 +229,7 @@
     "skipped": {
       "title_other": "파일 {{count}}개가 제외되었습니다",
       "topFolder": "최상위 폴더",
-      "arcade_other": "아케이드 세트 {{count}}개. 아케이드 게임은 Arcade 라이브러리에서 실행됩니다.",
-      "unknown_other": "Matinee가 아직 재생할 수 없는 파일 {{count}}개 (예: {{example}}).",
-      "addArcade": "Arcade 라이브러리 추가"
+      "unknown_other": "Matinee가 아직 재생할 수 없는 파일 {{count}}개 (예: {{example}})."
     }
   },
   "nothingHereYet": "아직 아무것도 없습니다",
@@ -1688,8 +1686,14 @@
       "region": "지역",
       "publisher": "배급사",
       "players": "플레이어 수",
-      "genre": "장르"
+      "genre": "장르",
+      "screen": "화면"
     },
-    "tapToPlay": "눌러서 플레이"
+    "tapToPlay": "눌러서 플레이",
+    "noEmulatorFor": "Matinee는 아직 {{system}} 게임을 실행할 수 없습니다. 이 서버에 해당 에뮬레이터가 없습니다.",
+    "noEmulator": "Matinee는 아직 이 게임을 실행할 수 없습니다. 이 서버에 해당 에뮬레이터가 없습니다.",
+    "addEmulator": "설정에서 에뮬레이터 추가",
+    "emulatorGuide": "직접 에뮬레이터를 추가하는 방법",
+    "askAdminEmulator": "관리자가 에뮬레이터를 추가할 수 있습니다."
   }
 }

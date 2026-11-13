@@ -696,8 +696,13 @@
       "region": "Region",
       "publisher": "Udgiver",
       "players": "Spillere",
-      "genre": "Genre"
+      "genre": "Genre",
+      "screen": "Skærm"
     },
-    "notHere": "Spil kan endnu ikke spilles på denne enhed"
+    "notHere": "Spil kan endnu ikke spilles på denne enhed",
+    "noEmulatorFor": "Matinee kan ikke spille {{system}}-spil endnu: der er ingen emulator til dem på denne server.",
+    "noEmulator": "Matinee kan ikke spille dette spil endnu: der er ingen emulator til det på denne server.",
+    "addEmulatorWeb": "En administrator kan tilføje en under Indstillinger → Streaming → Spil i webafspilleren.",
+    "emulatorGuide": "Sådan tilføjer du din egen emulator"
   }
 }

@@ -231,11 +231,8 @@
       "title_one": "{{count}} فائل چھوڑ دی گئی",
       "title_other": "{{count}} فائلیں چھوڑ دی گئیں",
       "topFolder": "اوپر والا فولڈر",
-      "arcade_one": "{{count}} آرکیڈ سیٹ۔ آرکیڈ گیمز Arcade لائبریری سے چلتی ہیں۔",
-      "arcade_other": "{{count}} آرکیڈ سیٹ۔ آرکیڈ گیمز Arcade لائبریری سے چلتی ہیں۔",
       "unknown_one": "{{count}} فائل جو Matinee ابھی نہیں چلا سکتا، جیسے {{example}}۔",
-      "unknown_other": "{{count}} فائلیں جو Matinee ابھی نہیں چلا سکتا، جیسے {{example}}۔",
-      "addArcade": "Arcade لائبریری شامل کریں"
+      "unknown_other": "{{count}} فائلیں جو Matinee ابھی نہیں چلا سکتا، جیسے {{example}}۔"
     }
   },
   "nothingHereYet": "یہاں ابھی کچھ نہیں",
@@ -1703,8 +1700,14 @@
       "region": "علاقہ",
       "publisher": "ناشر",
       "players": "کھلاڑی",
-      "genre": "صنف"
+      "genre": "صنف",
+      "screen": "اسکرین"
     },
-    "tapToPlay": "کھیلنے کے لیے دبائیں"
+    "tapToPlay": "کھیلنے کے لیے دبائیں",
+    "noEmulatorFor": "Matinee ابھی {{system}} گیمز نہیں چلا سکتا: اس سرور پر ان کے لیے کوئی ایمولیٹر نہیں ہے۔",
+    "noEmulator": "Matinee ابھی یہ گیم نہیں چلا سکتا: اس سرور پر اس کے لیے کوئی ایمولیٹر نہیں ہے۔",
+    "addEmulator": "ترتیبات میں ایمولیٹر شامل کریں",
+    "emulatorGuide": "اپنا ایمولیٹر کیسے شامل کریں",
+    "askAdminEmulator": "ایڈمن اس کے لیے ایمولیٹر شامل کر سکتا ہے۔"
   }
 }

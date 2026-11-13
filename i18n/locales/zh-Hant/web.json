@@ -229,9 +229,7 @@
     "skipped": {
       "title_other": "有 {{count}} 個檔案未收錄",
       "topFolder": "頂層資料夾",
-      "arcade_other": "{{count}} 個大型電玩遊戲集。大型電玩遊戲需在 Arcade 媒體庫中遊玩。",
-      "unknown_other": "{{count}} 個 Matinee 暫時無法播放的檔案，例如 {{example}}。",
-      "addArcade": "新增 Arcade 媒體庫"
+      "unknown_other": "{{count}} 個 Matinee 暫時無法播放的檔案，例如 {{example}}。"
     }
   },
   "nothingHereYet": "這裡還沒有內容",
@@ -1688,8 +1686,14 @@
       "region": "地區",
       "publisher": "發行商",
       "players": "玩家人數",
-      "genre": "類型"
+      "genre": "類型",
+      "screen": "螢幕"
     },
-    "tapToPlay": "按下開始遊戲"
+    "tapToPlay": "按下開始遊戲",
+    "noEmulatorFor": "Matinee 暫時還不能執行 {{system}} 遊戲：此伺服器上沒有對應的模擬器。",
+    "noEmulator": "Matinee 暫時還不能執行這款遊戲：此伺服器上沒有對應的模擬器。",
+    "addEmulator": "在設定中新增模擬器",
+    "emulatorGuide": "如何新增你自己的模擬器",
+    "askAdminEmulator": "管理員可以為它新增模擬器。"
   }
 }

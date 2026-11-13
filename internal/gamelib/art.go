@@ -82,13 +82,30 @@ var artKinds = []string{"Named_Boxarts", "Named_Titles", "Named_Snaps"}
 // Without the lists of what libretro has, it guesses its box art's
 // address by name.
 func (k *Kind) onlineArt(ctx context.Context, sys gamedat.System, name string) string {
+	return k.onlineArtOf(ctx, sys, name, artKinds, true)
+}
+
+// backdropKinds are libretro's pictures of a game being played, for the
+// backdrop behind its page: a screenshot, else its title screen.
+var backdropKinds = []string{"Named_Snaps", "Named_Titles"}
+
+// onlineBackdrop is the address of libretro's picture of the game being
+// played, or "".
+func (k *Kind) onlineBackdrop(ctx context.Context, sys gamedat.System, name string) string {
+	return k.onlineArtOf(ctx, sys, name, backdropKinds, false)
+}
+
+// onlineArtOf is libretro's first picture of kinds for a game. guess
+// makes up the address of the first kind's when libretro's lists can't be
+// had.
+func (k *Kind) onlineArtOf(ctx context.Context, sys gamedat.System, name string, kinds []string, guess bool) string {
 	if sys.Libretro == "" {
 		return ""
 	}
 	base := strings.TrimRight(cmp.Or(k.Art, DefaultArt), "/") + "/" + url.PathEscape(sys.Libretro) + "/"
 	addr := func(kind, file string) string { return base + kind + "/" + url.PathEscape(file) + ".png" }
 	known := false
-	for _, kind := range artKinds {
+	for _, kind := range kinds {
 		have, err := k.artList(ctx, sys.Libretro, kind)
 		if err != nil || have == nil {
 			continue
@@ -98,10 +115,10 @@ func (k *Kind) onlineArt(ctx context.Context, sys gamedat.System, name string) s
 			return addr(kind, file)
 		}
 	}
-	if known {
+	if known || !guess {
 		return ""
 	}
-	return addr(artKinds[0], gamedat.ThumbName(name))
+	return addr(kinds[0], gamedat.ThumbName(name))
 }
 
 // artNames are the pictures libretro has of one kind for one system, by

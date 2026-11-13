@@ -231,11 +231,8 @@
       "title_one": "{{count}} file was left out",
       "title_other": "{{count}} files were left out",
       "topFolder": "Top folder",
-      "arcade_one": "{{count}} arcade set. Arcade games play from an Arcade library.",
-      "arcade_other": "{{count}} arcade sets. Arcade games play from an Arcade library.",
       "unknown_one": "{{count}} file Matinee can't play yet, such as {{example}}.",
-      "unknown_other": "{{count}} files Matinee can't play yet, such as {{example}}.",
-      "addArcade": "Add an Arcade library"
+      "unknown_other": "{{count}} files Matinee can't play yet, such as {{example}}."
     }
   },
   "nothingHereYet": "Nothing here yet",
@@ -1703,8 +1700,14 @@
       "region": "Region",
       "publisher": "Publisher",
       "players": "Players",
-      "genre": "Genre"
+      "genre": "Genre",
+      "screen": "Screen"
     },
-    "tapToPlay": "Press to play"
+    "tapToPlay": "Press to play",
+    "noEmulatorFor": "Matinee can't play {{system}} games yet: there's no emulator for them on this server.",
+    "noEmulator": "Matinee can't play this game yet: there's no emulator for it on this server.",
+    "addEmulator": "Add an emulator in Settings",
+    "emulatorGuide": "How to add your own emulator",
+    "askAdminEmulator": "An admin can add an emulator for it."
   }
 }

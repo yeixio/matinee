@@ -48,6 +48,29 @@ var builtIn = []System{
 	// Discs come as a .cue with its .bin tracks beside it, or one .chd or
 	// .pbp. A .bin alone is a Genesis cartridge.
 	{Key: "psx", Name: "PlayStation", Emulator: "PCSX ReARMed", Core: "pcsx_rearmed_libretro.so", Extensions: []string{".cue", ".chd", ".pbp", ".m3u", ".iso"}},
+	{Key: "atari2600", Name: "Atari 2600", Emulator: "Stella 2014", Core: "stella2014_libretro.so", Extensions: []string{".a26"}},
+	{Key: "atari5200", Name: "Atari 5200", Emulator: "a5200", Core: "a5200_libretro.so", Extensions: []string{".a52"}},
+	{Key: "atari7800", Name: "Atari 7800", Emulator: "ProSystem", Core: "prosystem_libretro.so", Extensions: []string{".a78"}},
+	{Key: "lynx", Name: "Atari Lynx", Emulator: "Beetle Lynx", Core: "mednafen_lynx_libretro.so", Extensions: []string{".lnx"}},
+	{Key: "jaguar", Name: "Atari Jaguar", Emulator: "Virtual Jaguar", Core: "virtualjaguar_libretro.so", Extensions: []string{".j64", ".jag"}},
+	{Key: "sms", Name: "Sega Master System", Emulator: "Gearsystem", Core: "gearsystem_libretro.so", Extensions: []string{".sms"}},
+	{Key: "gamegear", Name: "Game Gear", Emulator: "Gearsystem", Core: "gearsystem_libretro.so", Extensions: []string{".gg"}},
+	{Key: "colecovision", Name: "ColecoVision", Emulator: "Gearcoleco", Core: "gearcoleco_libretro.so", Extensions: []string{".col"}},
+	{Key: "intellivision", Name: "Intellivision", Emulator: "FreeIntv", Core: "freeintv_libretro.so", Extensions: []string{".int"}},
+	{Key: "pce", Name: "PC Engine / TurboGrafx-16", Emulator: "Beetle PCE Fast", Core: "mednafen_pce_fast_libretro.so", Extensions: []string{".pce"}},
+	{Key: "ngp", Name: "Neo Geo Pocket", Emulator: "Beetle NeoPop", Core: "mednafen_ngp_libretro.so", Extensions: []string{".ngp"}},
+	{Key: "ngpc", Name: "Neo Geo Pocket Color", Emulator: "Beetle NeoPop", Core: "mednafen_ngp_libretro.so", Extensions: []string{".ngc"}},
+	{Key: "wonderswan", Name: "WonderSwan", Emulator: "Beetle Cygne", Core: "mednafen_wswan_libretro.so", Extensions: []string{".ws"}},
+	{Key: "wonderswancolor", Name: "WonderSwan Color", Emulator: "Beetle Cygne", Core: "mednafen_wswan_libretro.so", Extensions: []string{".wsc"}},
+	{Key: "vb", Name: "Virtual Boy", Emulator: "Beetle VB", Core: "mednafen_vb_libretro.so", Extensions: []string{".vb"}},
+	{Key: "c64", Name: "Commodore 64", Emulator: "VICE", Core: "vice_x64_libretro.so", Extensions: []string{".d64", ".t64", ".prg", ".crt", ".g64"}},
+	{Key: "amiga", Name: "Amiga", Emulator: "PUAE", Core: "puae_libretro.so", Extensions: []string{".adf", ".ipf"}},
+	{Key: "zxspectrum", Name: "ZX Spectrum", Emulator: "Fuse", Core: "fuse_libretro.so", Extensions: []string{".tzx", ".z80", ".sna"}},
+	// Emulators that take a zip as it is come last, so a console's game in
+	// a zip goes to its console. They play only games filed for their
+	// system (SystemForGame). MAME is built on its own (games/mame.txt).
+	{Key: "pc", Name: "PC (DOS)", Emulator: "DOSBox Pure", Core: "dosbox_pure_libretro.so", Extensions: []string{".dosz", ".exe"}},
+	{Key: "mame", Name: "Arcade", Emulator: "MAME", Core: "mame_libretro.so", Extensions: []string{".zip", ".7z"}},
 }
 
 // LagTest is the built-in lag test, which needs no game file.
@@ -85,6 +108,34 @@ func (m *Manager) SystemFor(path string) (System, bool) {
 		}
 	}
 	return systemByExt(systems, ext)
+}
+
+// SystemForGame says which system plays a game of a Games library, filed
+// for the system key (gamedat's): an emulator an admin added for its
+// files, else the built-in one for its system. Without a key it's
+// SystemFor.
+func (m *Manager) SystemForGame(path, key string) (System, bool) {
+	if key == "" {
+		return m.SystemFor(path)
+	}
+	systems := m.Available()
+	ext := strings.ToLower(filepath.Ext(path))
+	if ext == ".zip" && key != "mame" && key != "pc" {
+		if inner := zipGameExt(path); inner != "" {
+			ext = inner
+		}
+	}
+	for _, s := range systems {
+		if s.Custom && slices.Contains(s.Extensions, ext) {
+			return s, true
+		}
+	}
+	for _, s := range systems {
+		if !s.Custom && s.Key == key {
+			return s, true
+		}
+	}
+	return System{}, false
 }
 
 func systemByExt(systems []System, ext string) (System, bool) {

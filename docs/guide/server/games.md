@@ -22,6 +22,29 @@ This is a **preview**. You play in the web player and in the phone and TV apps (
 | Nintendo 64 | `.n64`, `.v64`, `.z64` | ParaLLEl N64 |
 | PlayStation | `.cue` (with its `.bin` tracks beside it), `.chd`, `.pbp`, `.m3u`, `.iso` | PCSX ReARMed |
 
+<!-- since: v0.2.7 -->
+From 0.2.7 it also plays:
+
+| System | Files | Emulator |
+| --- | --- | --- |
+| Arcade games | MAME 0.289 sets, one `.zip` or `.7z` per game (see [Arcade games](/docs/server/arcade/)) | MAME |
+| Atari 2600, 5200 and 7800 | `.a26`, `.a52`, `.a78` | Stella 2014, a5200, ProSystem |
+| Atari Lynx and Jaguar | `.lnx`, `.j64`, `.jag` | Beetle Lynx, Virtual Jaguar |
+| Sega Master System and Game Gear | `.sms`, `.gg` | Gearsystem |
+| ColecoVision | `.col` | Gearcoleco |
+| Intellivision | `.int` | FreeIntv |
+| PC Engine / TurboGrafx-16 | `.pce` | Beetle PCE Fast |
+| Neo Geo Pocket and Pocket Color | `.ngp`, `.ngc` | Beetle NeoPop |
+| WonderSwan and WonderSwan Color | `.ws`, `.wsc` | Beetle Cygne |
+| Virtual Boy | `.vb` | Beetle VB |
+| Commodore 64 | `.d64`, `.t64`, `.prg`, `.crt`, `.g64` | VICE |
+| Amiga | `.adf`, `.ipf` | PUAE |
+| ZX Spectrum | `.tzx`, `.z80`, `.sna` | Fuse |
+| DOS PCs | a zip of the game's folder | DOSBox Pure |
+
+ColecoVision and Intellivision games need the console's own BIOS: put yours in `games/system` in Matinee's data folder (`colecovision.rom` for the ColecoVision, `exec.bin` and `grom.bin` for the Intellivision). The Amiga plays best with your own Kickstart ROM there too (`kick34005.A500` and the like). A DOS game is played from the zip in a folder named for it, such as `pc` or `dos`. The arcade, Atari Jaguar, Commodore 64, Amiga and DOS emulators aren't in the image for 32-bit ARM boards.
+<!-- /since -->
+
 A zip holding one of these works too, including a zip of a PlayStation disc's `.cue` and `.bin` files. Matinee plays only the games you already have: it never looks for, links to or downloads games. You can add emulators for other systems yourself (see [Adding your own emulator](#adding-your-own-emulator)).
 
 None of these needs a graphics card in the server: the N64 picture is drawn in software, which wants a recent CPU with a few cores to spare. The Super Nintendo and N64 emulators aren't in the image for 32-bit ARM boards, which are too slow for them.
@@ -39,10 +62,22 @@ Add your games as a library and everyone you share it with can browse them with 
 
 Games can be named and sorted any way you like. Matinee tells the system by the folder a game is in when the folder is named for it (`Game Boy`, `gba`, `snes`, `Mega Drive`, `PlayStation` and so on), otherwise by what's in a zip or the file's ending. It then recognizes the game by its contents, so even `tetris copy.gb` is found as Tetris (World) (Rev 1), and falls back to the file's name for games it doesn't know, such as homebrew.
 
-For PlayStation games of more than one disc, keep an `.m3u` list beside the discs: the game shows once, and you change discs in the game. Arcade sets are left to the [Arcade](/docs/server/arcade/) library for now.
+For PlayStation games of more than one disc, keep an `.m3u` list beside the discs: the game shows once, and you change discs in the game.
 
 <!-- since: v0.2.7 -->
-If a game you added doesn't show up, open the Games library: admins see a note at the top saying how many files were left out and why, grouped by folder. Arcade sets are counted there, as are files Matinee can't play yet, such as games for a system it has no emulator for (you can [add your own](#adding-your-own-emulator)) or zips that hold something other than a console game.
+Arcade sets go in the same library, in a folder such as `mame` or `arcade`: see [Arcade games](/docs/server/arcade/).
+
+**Every game shows**, even one for a system Matinee has no emulator for yet, such as the Nintendo Switch, GameCube or PlayStation 2. Its page says so instead of offering **Play**, with a link for admins to [add an emulator](#adding-your-own-emulator) for it.
+
+**A game shows once.** The same game for another region or a later revision, such as `Super Game (Europe)` next to `Super Game (USA)`, is a version of it, like a film's versions: the page shows the release most likely wanted (the USA's or the world's, then Europe's), and an arcade game's clones sit under it the same way.
+
+If a file doesn't show up, open the Games library: admins see a note at the top saying how many files were left out and why, grouped by folder, such as zips that hold neither a console's game nor one of MAME's sets.
+<!-- /since -->
+
+<!-- since: v0.2.7 -->
+### Details
+
+Each game gets a page like a film's: its box art, a screenshot behind it, the year, who made it, how many play, and a summary from the start of its [Wikipedia](https://en.wikipedia.org) article, with its genres from Wikidata. Set `MATINEE_WIKIPEDIA=false` to skip the summaries.
 <!-- /since -->
 
 To recognize games Matinee downloads the [libretro database](https://github.com/libretro/libretro-database)'s lists for each system once and keeps them for a month, in `games/lists` in Matinee's data folder; box art comes from [libretro's thumbnails](https://thumbnails.libretro.com). Without internet, games are named by their files and have no box art. Nothing about your games is sent anywhere.
@@ -110,6 +145,10 @@ The Docker image and the Helm chart include the game runner and the emulators. O
 ## The emulators
 
 Matinee plays games with free, open-source emulators, each in its own process so a game that crashes can't take the server with it: [Gambatte](https://github.com/libretro/gambatte-libretro) for the Game Boy, [mGBA](https://mgba.io) for the Game Boy Advance, [FCEUmm](https://github.com/libretro/libretro-fceumm) for the NES, [bsnes](https://github.com/libretro/bsnes-libretro) for the Super Nintendo, [clownmdemu](https://github.com/Clownacy/clownmdemu-libretro) for the Genesis, [ParaLLEl N64](https://github.com/libretro/parallel-n64) for the N64 and [PCSX ReARMed](https://github.com/libretro/pcsx_rearmed) for the PlayStation. Their licences are in `/usr/lib/matinee/games/licenses` in the image.
+
+<!-- since: v0.2.7 -->
+From 0.2.7 there are also [MAME](https://www.mamedev.org) for arcade games, and [Stella](https://stella-emu.github.io), a5200, ProSystem, Beetle (from [Mednafen](https://mednafen.github.io)), Virtual Jaguar, [Gearsystem](https://github.com/drhelius/Gearsystem), [Gearcoleco](https://github.com/drhelius/Gearcoleco), FreeIntv, [VICE](https://vice-emu.sourceforge.io), PUAE, [Fuse](https://fuse-emulator.sourceforge.net) and [DOSBox Pure](https://github.com/schellingb/dosbox-pure) for the systems in the table above.
+<!-- /since -->
 
 ## Adding your own emulator
 

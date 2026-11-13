@@ -10,30 +10,30 @@ Every plugin has a `plugin.json` at the top of its package. Matinee reads it whe
 
 ```json
 {
-  "id": "arcade",
-  "name": "Arcade",
+  "id": "comics",
+  "name": "Comics",
   "version": "1.0.0",
   "api": 1,
-  "description": "Play arcade games in the web player with MAME.",
+  "description": "Read comic books in the web player.",
   "author": "The Matinee authors",
   "license": "AGPL-3.0-or-later",
-  "homepage": "https://matinee.yeix.io/docs/server/arcade/",
+  "homepage": "https://example.com/matinee-comics",
   "icon": "icon.png",
   "server": "server.wasm",
   "libraryKinds": [
     {
-      "name": "arcade",
-      "label": "Arcade",
-      "description": "MAME ROM sets, one zip per game.",
-      "extensions": [".zip", ".7z"],
-      "itemKinds": ["game"]
+      "name": "comics",
+      "label": "Comics",
+      "description": "Comic books, one .cbz or .cbr file per issue.",
+      "extensions": [".cbz", ".cbr"],
+      "itemKinds": ["comic"]
     }
   ],
-  "metadata": ["game"],
+  "metadata": ["comic"],
   "events": ["playback.started"],
-  "players": [{ "itemKinds": ["game"], "entry": "player/index.html" }],
+  "players": [{ "itemKinds": ["comic"], "entry": "player/index.html" }],
   "settings": [{ "key": "apiKey", "label": "API key", "description": "From your account page.", "secret": true }],
-  "permissions": { "network": ["raw.githubusercontent.com"] }
+  "permissions": { "network": ["comicvine.gamespot.com"] }
 }
 ```
 
@@ -67,7 +67,7 @@ A plugin needs a server part, a player, or both.
 
 | Field | | |
 | --- | --- | --- |
-| `name` | required | The kind's name, such as `arcade`: 2 to 31 lowercase letters, digits and dashes, starting with a letter. It must be unique on the server: two plugins can't add the same kind. |
+| `name` | required | The kind's name, such as `comics`: 2 to 31 lowercase letters, digits and dashes, starting with a letter. It must be unique on the server: two plugins can't add the same kind. |
 | `label` | required | Shown when adding a library, such as *Arcade*. |
 | `description` | | Shown under the label: what goes in such a library. |
 | `extensions` | required | The file extensions the server part is asked about, such as `[".zip", ".7z"]`. Matinee skips other files without asking, and the player can only fetch files with these extensions. |

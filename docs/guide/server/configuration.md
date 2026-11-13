@@ -70,6 +70,7 @@ Most of Matinee is set up in the web player under **Settings**. A few things abo
 | `MATINEE_PODCASTS_HOME_NETWORK` | `false` | Let [podcast](/docs/watching/podcasts/) feeds and episodes, and [radio stations](/docs/watching/music/#radio-stations), come from addresses on the home network too, for shows and streams you host yourself |
 <!-- /since -->
 | `MATINEE_WIKIDATA` | `true` | Look up awards on Wikidata. Set `false` to skip awards |
+| `MATINEE_WIKIPEDIA` | `true` | Look up games' summaries on Wikipedia and their genres on Wikidata. Set `false` to skip them |
 <!-- until: v0.2.4 -->
 | `MATINEE_SCAN_INTERVAL` | `15m` | How often libraries are rescanned in full; `0` turns it off ([more](/docs/server/new-files/)) |
 <!-- /until -->
