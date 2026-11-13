@@ -214,6 +214,9 @@ jobs:
         shell: msys2 {0}
         working-directory: mame-src
         run: |
+          # The runner's ANDROID_NDK_HOME makes the makefile look for the
+          # Android NDK, at a Windows path it can't read.
+          unset ANDROID_NDK_HOME ANDROID_NDK_ROOT ANDROID_NDK_LATEST_HOME
           make -f Makefile.libretro -j"$(nproc)" SUBTARGET=arcade platform=win CC=gcc CXX=g++ AR=ar > ../build.log 2>&1 || { tail -200 ../build.log; exit 1; }
           tail -5 ../build.log
           ls -la ./*_libretro.*
