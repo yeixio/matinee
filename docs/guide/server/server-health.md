@@ -79,6 +79,11 @@ The list starts empty each time the server starts.
 
 - **Scan** for each library: whether it's being scanned now, and how the last full scan since the server started went (how long it took, what it added, updated and removed, and files that couldn't be played).<!-- since: v0.2.4 --> It also says what started the scan: the scheduled [full rescan](/docs/server/new-files/#full-rescans), new or changed files in a watched folder, someone pressing **Scan**, or the server itself (say, for a library just added). **Stop scan** stops one that's running; see [Stopping a scan](/docs/server/new-files/#stopping-a-scan).<!-- /since -->
 - **Media analysis**, **Find TV intros** and **Seek bar previews**: how far they are. See [Media analysis](/docs/server/media-analysis/).
+<!-- since: v0.2.7 -->
+- **Find end credits** sits with them, and how far it is.
+
+  These jobs take turns: Matinee analyzes every file first, then looks for intros, then end credits, then makes seek bar previews. Only the one working now has the pulsing dot, with the title it's on under it. So **Media analysis 11,055 of 11,055** with no title means it's finished, even while seek bar previews are still being made. **Waiting for playback to finish** shows under the job that's next in line.
+<!-- /since -->
 - **Downloads for devices**: downloads waiting to be converted, being converted, and ones that failed.
 - **Importing watch history**, while an [import](/docs/getting-started/switching/) runs.
 <!-- since: v0.2.4 -->
