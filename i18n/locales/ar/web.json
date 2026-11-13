@@ -230,7 +230,29 @@
     "appearAsFound": "تظهر العناوين عند العثور عليها.",
     "noMedia": "بحث Matinee في {{paths}} ولم يجد أي وسائط.",
     "letters": "الانتقال إلى حرف",
-    "jumpTo": "الانتقال إلى {{letter}}"
+    "jumpTo": "الانتقال إلى {{letter}}",
+    "skipped": {
+      "title_zero": "لم يُستبعد أي ملف",
+      "title_one": "استُبعد ملف واحد",
+      "title_two": "استُبعد ملفان",
+      "title_few": "استُبعدت {{count}} ملفات",
+      "title_many": "استُبعد {{count}} ملفًا",
+      "title_other": "استُبعد {{count}} ملف",
+      "topFolder": "المجلد الرئيسي",
+      "arcade_zero": "لا توجد مجموعات أركيد. ألعاب الأركيد تعمل من مكتبة Arcade.",
+      "arcade_one": "مجموعة أركيد واحدة. ألعاب الأركيد تعمل من مكتبة Arcade.",
+      "arcade_two": "مجموعتا أركيد. ألعاب الأركيد تعمل من مكتبة Arcade.",
+      "arcade_few": "{{count}} مجموعات أركيد. ألعاب الأركيد تعمل من مكتبة Arcade.",
+      "arcade_many": "{{count}} مجموعة أركيد. ألعاب الأركيد تعمل من مكتبة Arcade.",
+      "arcade_other": "{{count}} مجموعة أركيد. ألعاب الأركيد تعمل من مكتبة Arcade.",
+      "unknown_zero": "لا توجد ملفات لا يستطيع Matinee تشغيلها، مثل {{example}}.",
+      "unknown_one": "ملف واحد لا يستطيع Matinee تشغيله بعد، مثل {{example}}.",
+      "unknown_two": "ملفان لا يستطيع Matinee تشغيلهما بعد، مثل {{example}}.",
+      "unknown_few": "{{count}} ملفات لا يستطيع Matinee تشغيلها بعد، مثل {{example}}.",
+      "unknown_many": "{{count}} ملفًا لا يستطيع Matinee تشغيلها بعد، مثل {{example}}.",
+      "unknown_other": "{{count}} ملف لا يستطيع Matinee تشغيلها بعد، مثل {{example}}.",
+      "addArcade": "إضافة مكتبة Arcade"
+    }
   },
   "nothingHereYet": "لا شيء هنا بعد",
   "collection": {

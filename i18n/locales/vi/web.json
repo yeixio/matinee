@@ -225,7 +225,14 @@
     "appearAsFound": "Nội dung hiện ra khi được tìm thấy.",
     "noMedia": "Matinee đã tìm trong {{paths}} nhưng không thấy nội dung nào.",
     "letters": "Chuyển đến chữ cái",
-    "jumpTo": "Chuyển đến {{letter}}"
+    "jumpTo": "Chuyển đến {{letter}}",
+    "skipped": {
+      "title_other": "Đã bỏ qua {{count}} tệp",
+      "topFolder": "Thư mục trên cùng",
+      "arcade_other": "{{count}} bộ arcade. Trò chơi arcade chạy từ thư viện Arcade.",
+      "unknown_other": "{{count}} tệp Matinee chưa phát được, ví dụ {{example}}.",
+      "addArcade": "Thêm thư viện Arcade"
+    }
   },
   "nothingHereYet": "Chưa có gì ở đây",
   "collection": {

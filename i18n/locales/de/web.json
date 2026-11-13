@@ -226,7 +226,17 @@
     "appearAsFound": "Titel erscheinen, sobald sie gefunden werden.",
     "noMedia": "Matinee hat in {{paths}} gesucht und keine Medien gefunden.",
     "letters": "Zu einem Buchstaben springen",
-    "jumpTo": "Zu {{letter}} springen"
+    "jumpTo": "Zu {{letter}} springen",
+    "skipped": {
+      "title_one": "{{count}} Datei wurde ausgelassen",
+      "title_other": "{{count}} Dateien wurden ausgelassen",
+      "topFolder": "Oberster Ordner",
+      "arcade_one": "{{count}} Arcade-Set. Arcade-Spiele laufen in einer Arcade-Mediathek.",
+      "arcade_other": "{{count}} Arcade-Sets. Arcade-Spiele laufen in einer Arcade-Mediathek.",
+      "unknown_one": "{{count}} Datei, die Matinee noch nicht abspielen kann, z. B. {{example}}.",
+      "unknown_other": "{{count}} Dateien, die Matinee noch nicht abspielen kann, z. B. {{example}}.",
+      "addArcade": "Arcade-Mediathek hinzufügen"
+    }
   },
   "nothingHereYet": "Hier ist noch nichts",
   "collection": {

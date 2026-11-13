@@ -225,7 +225,14 @@
     "appearAsFound": "Judul muncul saat ditemukan.",
     "noMedia": "Matinee mencari di {{paths}} dan tidak menemukan media.",
     "letters": "Lompat ke huruf",
-    "jumpTo": "Lompat ke {{letter}}"
+    "jumpTo": "Lompat ke {{letter}}",
+    "skipped": {
+      "title_other": "{{count}} file dilewati",
+      "topFolder": "Folder teratas",
+      "arcade_other": "{{count}} set arcade. Game arcade dimainkan dari pustaka Arcade.",
+      "unknown_other": "{{count}} file yang belum bisa diputar Matinee, misalnya {{example}}.",
+      "addArcade": "Tambahkan pustaka Arcade"
+    }
   },
   "nothingHereYet": "Belum ada apa-apa di sini",
   "collection": {

@@ -226,7 +226,17 @@
     "appearAsFound": "Οι τίτλοι εμφανίζονται καθώς βρίσκονται.",
     "noMedia": "Το Matinee έψαξε στο {{paths}} και δεν βρήκε πολυμέσα.",
     "letters": "Μετάβαση σε γράμμα",
-    "jumpTo": "Μετάβαση στο {{letter}}"
+    "jumpTo": "Μετάβαση στο {{letter}}",
+    "skipped": {
+      "title_one": "{{count}} αρχείο παραλείφθηκε",
+      "title_other": "{{count}} αρχεία παραλείφθηκαν",
+      "topFolder": "Κύριος φάκελος",
+      "arcade_one": "{{count}} σετ arcade. Τα παιχνίδια arcade παίζονται από βιβλιοθήκη Arcade.",
+      "arcade_other": "{{count}} σετ arcade. Τα παιχνίδια arcade παίζονται από βιβλιοθήκη Arcade.",
+      "unknown_one": "{{count}} αρχείο που το Matinee δεν παίζει ακόμη, όπως {{example}}.",
+      "unknown_other": "{{count}} αρχεία που το Matinee δεν παίζει ακόμη, όπως {{example}}.",
+      "addArcade": "Προσθήκη βιβλιοθήκης Arcade"
+    }
   },
   "nothingHereYet": "Τίποτα εδώ ακόμα",
   "collection": {

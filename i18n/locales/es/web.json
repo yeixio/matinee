@@ -227,7 +227,20 @@
     "appearAsFound": "Los títulos aparecen a medida que se encuentran.",
     "noMedia": "Matinee buscó en {{paths}} y no encontró contenido.",
     "letters": "Ir a una letra",
-    "jumpTo": "Ir a la {{letter}}"
+    "jumpTo": "Ir a la {{letter}}",
+    "skipped": {
+      "title_one": "Se omitió {{count}} archivo",
+      "title_many": "Se omitieron {{count}} de archivos",
+      "title_other": "Se omitieron {{count}} archivos",
+      "topFolder": "Carpeta principal",
+      "arcade_one": "{{count}} juego arcade. Los juegos arcade se juegan desde una biblioteca Arcade.",
+      "arcade_many": "{{count}} de juegos arcade. Los juegos arcade se juegan desde una biblioteca Arcade.",
+      "arcade_other": "{{count}} juegos arcade. Los juegos arcade se juegan desde una biblioteca Arcade.",
+      "unknown_one": "{{count}} archivo que Matinee aún no puede reproducir, como {{example}}.",
+      "unknown_many": "{{count}} de archivos que Matinee aún no puede reproducir, como {{example}}.",
+      "unknown_other": "{{count}} archivos que Matinee aún no puede reproducir, como {{example}}.",
+      "addArcade": "Añadir una biblioteca Arcade"
+    }
   },
   "nothingHereYet": "Aún no hay nada",
   "collection": {

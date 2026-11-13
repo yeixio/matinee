@@ -226,7 +226,17 @@
     "appearAsFound": "عنوانات ملتے ہی نظر آتے ہیں۔",
     "noMedia": "Matinee نے {{paths}} میں دیکھا اور کوئی میڈیا نہیں ملا۔",
     "letters": "کسی حرف پر جائیں",
-    "jumpTo": "{{letter}} پر جائیں"
+    "jumpTo": "{{letter}} پر جائیں",
+    "skipped": {
+      "title_one": "{{count}} فائل چھوڑ دی گئی",
+      "title_other": "{{count}} فائلیں چھوڑ دی گئیں",
+      "topFolder": "اوپر والا فولڈر",
+      "arcade_one": "{{count}} آرکیڈ سیٹ۔ آرکیڈ گیمز Arcade لائبریری سے چلتی ہیں۔",
+      "arcade_other": "{{count}} آرکیڈ سیٹ۔ آرکیڈ گیمز Arcade لائبریری سے چلتی ہیں۔",
+      "unknown_one": "{{count}} فائل جو Matinee ابھی نہیں چلا سکتا، جیسے {{example}}۔",
+      "unknown_other": "{{count}} فائلیں جو Matinee ابھی نہیں چلا سکتا، جیسے {{example}}۔",
+      "addArcade": "Arcade لائبریری شامل کریں"
+    }
   },
   "nothingHereYet": "یہاں ابھی کچھ نہیں",
   "collection": {

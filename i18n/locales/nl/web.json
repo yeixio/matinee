@@ -226,7 +226,17 @@
     "appearAsFound": "Titels verschijnen zodra ze gevonden worden.",
     "noMedia": "Matinee heeft in {{paths}} gezocht en geen media gevonden.",
     "letters": "Naar een letter springen",
-    "jumpTo": "Naar {{letter}} springen"
+    "jumpTo": "Naar {{letter}} springen",
+    "skipped": {
+      "title_one": "{{count}} bestand is overgeslagen",
+      "title_other": "{{count}} bestanden zijn overgeslagen",
+      "topFolder": "Hoofdmap",
+      "arcade_one": "{{count}} arcadeset. Arcadegames speel je vanuit een Arcade-bibliotheek.",
+      "arcade_other": "{{count}} arcadesets. Arcadegames speel je vanuit een Arcade-bibliotheek.",
+      "unknown_one": "{{count}} bestand dat Matinee nog niet kan afspelen, zoals {{example}}.",
+      "unknown_other": "{{count}} bestanden die Matinee nog niet kan afspelen, zoals {{example}}.",
+      "addArcade": "Arcade-bibliotheek toevoegen"
+    }
   },
   "nothingHereYet": "Hier is nog niets",
   "collection": {

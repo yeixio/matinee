@@ -41,6 +41,10 @@ Games can be named and sorted any way you like. Matinee tells the system by the 
 
 For PlayStation games of more than one disc, keep an `.m3u` list beside the discs: the game shows once, and you change discs in the game. Arcade sets are left to the [Arcade](/docs/server/arcade/) library for now.
 
+<!-- since: v0.2.7 -->
+If a game you added doesn't show up, open the Games library: admins see a note at the top saying how many files were left out and why, grouped by folder. Arcade sets are counted there, as are files Matinee can't play yet, such as games for a system it has no emulator for (you can [add your own](#adding-your-own-emulator)) or zips that hold something other than a console game.
+<!-- /since -->
+
 To recognize games Matinee downloads the [libretro database](https://github.com/libretro/libretro-database)'s lists for each system once and keeps them for a month, in `games/lists` in Matinee's data folder; box art comes from [libretro's thumbnails](https://thumbnails.libretro.com). Without internet, games are named by their files and have no box art. Nothing about your games is sent anywhere.
 
 <!-- since: v0.2.6 -->

@@ -3,6 +3,7 @@ package gamelib
 import (
 	"archive/zip"
 	"context"
+	"errors"
 	"fmt"
 	"hash/crc32"
 	"net/http"
@@ -127,8 +128,30 @@ func TestIndex(t *testing.T) {
 	// Arcade sets are left to the Arcade library for now.
 	z = filepath.Join(root, "mame", "pacman.zip")
 	writeZip(t, z, map[string][]byte{"pacman.6e": []byte("rom")})
-	if _, err = k.Index(ctx, nil, file(t, root, z)); err != scan.ErrSkip {
+	if _, err = k.Index(ctx, nil, file(t, root, z)); !errors.Is(err, scan.ErrSkip) {
 		t.Fatalf("arcade set: %v", err)
+	}
+}
+
+// Files left out say why, so admins can see it.
+func TestSkipReasons(t *testing.T) {
+	ctx := context.Background()
+	root := t.TempDir()
+	k := &Kind{}
+	cases := []struct{ path, reason, group string }{
+		{filepath.Join(root, "mame", "pacman.zip"), SkipArcade, "mame"},
+		{filepath.Join(root, "c64", "esprade.zip"), SkipUnknown, "c64"},
+		{filepath.Join(root, "stray.zip"), SkipUnknown, ""},
+	}
+	for _, c := range cases {
+		writeZip(t, c.path, map[string][]byte{"rom.u1": []byte("rom")})
+		_, err := k.Index(ctx, nil, file(t, root, c.path))
+		if !errors.Is(err, scan.ErrSkip) {
+			t.Fatalf("%s: %v", c.path, err)
+		}
+		if reason, group := scan.SkipOf(err); reason != c.reason || group != c.group {
+			t.Fatalf("%s: %q, %q", c.path, reason, group)
+		}
 	}
 }
 

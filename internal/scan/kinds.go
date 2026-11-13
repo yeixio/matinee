@@ -2,6 +2,7 @@ package scan
 
 import (
 	"context"
+	"errors"
 	"io/fs"
 	"os"
 	"path/filepath"
@@ -71,6 +72,34 @@ type Remote interface {
 
 // ErrSkip from Index leaves a file out, like one with nothing playable.
 var ErrSkip = errUnplayable
+
+// Skip from Index leaves a file out and says why, so admins are told
+// (ScanReport.Skipped) instead of the file just not showing up. Reason is
+// a short key the apps word, such as "arcade"; Group is what it's about,
+// such as the folder the file is in.
+func Skip(reason, group string) error { return &skipError{reason, group} }
+
+type skipError struct{ reason, group string }
+
+// SkipOf is the reason and group of an error from Skip, or "" for others.
+func SkipOf(err error) (reason, group string) {
+	var se *skipError
+	if errors.As(err, &se) {
+		return se.reason, se.group
+	}
+	return "", ""
+}
+
+func (e *skipError) Error() string        { return "left out: " + e.reason }
+func (e *skipError) Is(target error) bool { return target == errUnplayable }
+
+// SkipCount is how many files a scan left out for one reason.
+type SkipCount struct {
+	Reason  string `json:"reason"`
+	Group   string `json:"group,omitempty"`
+	Count   int    `json:"count"`
+	Example string `json:"example,omitempty"` // one of the files, by name
+}
 
 var (
 	kindsMu sync.RWMutex

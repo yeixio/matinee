@@ -50,15 +50,17 @@ type Scanner struct {
 
 // ScanReport is how a library's last full scan went, for the admin dashboard.
 type ScanReport struct {
-	Started    int64  `json:"started"` // milliseconds
-	TookMs     int64  `json:"tookMs"`
-	Added      int    `json:"added"`
-	Updated    int    `json:"updated"`
-	Removed    int    `json:"removed"`
-	Replaced   int    `json:"replaced"`
-	Failed     int    `json:"failed"`
-	Unplayable int    `json:"unplayable"`
-	Error      string `json:"error,omitempty"`
+	Started    int64 `json:"started"` // milliseconds
+	TookMs     int64 `json:"tookMs"`
+	Added      int   `json:"added"`
+	Updated    int   `json:"updated"`
+	Removed    int   `json:"removed"`
+	Replaced   int   `json:"replaced"`
+	Failed     int   `json:"failed"`
+	Unplayable int   `json:"unplayable"`
+	// Skipped says why files were left out, where the library's kind said.
+	Skipped []SkipCount `json:"skipped,omitempty"`
+	Error   string      `json:"error,omitempty"`
 	// Reason is what started it; Stopped says an admin stopped it before
 	// it finished.
 	Reason  Reason `json:"reason,omitempty"`
@@ -92,6 +94,13 @@ func reasonOf(ctx context.Context) Reason {
 // ErrStopped is the error of a scan an admin stopped.
 var ErrStopped = errors.New("scan stopped")
 
+// Skipped is what the library's last full scan left out, and why.
+func (s *Scanner) Skipped(libraryID int64) []SkipCount {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	return s.last[libraryID].Skipped
+}
+
 // Report says since when a library is being scanned (zero when it isn't)
 // and what started that, and how its last full scan went, if there was one
 // since the server started.
@@ -114,7 +123,25 @@ type Stats struct {
 	// file and kept everyone's watch history.
 	Replaced   int
 	Unplayable int // files with no playable stream, left out
-	Took       time.Duration
+	// Skipped are the files a Kind left out with a reason (see Skip),
+	// most first.
+	Skipped []SkipCount
+	Took    time.Duration
+}
+
+// addSkip counts a file left out with a reason.
+func (st *Stats) addSkip(err error, path string) {
+	reason, group := SkipOf(err)
+	if reason == "" {
+		return
+	}
+	for i := range st.Skipped {
+		if st.Skipped[i].Reason == reason && st.Skipped[i].Group == group {
+			st.Skipped[i].Count++
+			return
+		}
+	}
+	st.Skipped = append(st.Skipped, SkipCount{Reason: reason, Group: group, Count: 1, Example: filepath.Base(path)})
 }
 
 var ErrAlreadyRunning = errors.New("scan already running")
@@ -200,7 +227,7 @@ func (s *Scanner) scanAndReport(ctx context.Context, lib store.Library) (Stats, 
 	start := time.Now()
 	st, err := s.run(ctx, lib, nil)
 	r := ScanReport{Started: start.UnixMilli(), TookMs: time.Since(start).Milliseconds(), Added: st.Added, Updated: st.Updated,
-		Removed: st.Removed, Replaced: st.Replaced, Failed: st.Failed, Unplayable: st.Unplayable, Reason: reasonOf(ctx)}
+		Removed: st.Removed, Replaced: st.Replaced, Failed: st.Failed, Unplayable: st.Unplayable, Skipped: st.Skipped, Reason: reasonOf(ctx)}
 	switch {
 	case errors.Is(err, ErrStopped):
 		r.Stopped = true
@@ -373,6 +400,7 @@ func (s *Scanner) run(ctx context.Context, lib store.Library, paths []string) (s
 					s.Log.Debug("not playable", "path", path, "err", err)
 					delete(seen, path)
 					st.Unplayable++
+					st.addSkip(err, path)
 				case errors.Is(err, errProbeTimeout):
 					// A slow share isn't a broken file: keep what's listed and retry next scan.
 					s.Log.Warn("index file", "path", path, "err", err)
@@ -450,6 +478,7 @@ func (s *Scanner) run(ctx context.Context, lib store.Library, paths []string) (s
 		}
 	}
 	st.Took = time.Since(start)
+	slices.SortStableFunc(st.Skipped, func(a, b SkipCount) int { return b.Count - a.Count })
 	changed := st.Added+st.Updated+st.Removed > 0
 	if s.AfterScan != nil && (!partial || changed) {
 		s.AfterScan(ctx, lib)

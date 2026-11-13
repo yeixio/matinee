@@ -976,6 +976,9 @@ type libraryView struct {
 	ScanReason scan.Reason `json:"scanReason,omitempty"`
 	// Watch says how each folder is watched for new files (scan.FolderWatch).
 	Watch []scan.FolderWatch `json:"watch"`
+	// Skipped is what the last full scan left out and why, such as arcade
+	// sets in a Games library (scan.SkipCount).
+	Skipped []scan.SkipCount `json:"skipped,omitempty"`
 	// Counts are how many titles (movies, shows, artists) and how many
 	// files the library has, for admins who ask with ?counts=1, such as
 	// Home Assistant's sensors.
@@ -993,6 +996,9 @@ func (s *Server) libraryView(l store.Library, scanning bool) libraryView {
 	}
 	if v.Watch == nil {
 		v.Watch = []scan.FolderWatch{}
+	}
+	if s.Scanner != nil {
+		v.Skipped = s.Scanner.Skipped(l.ID)
 	}
 	return v
 }

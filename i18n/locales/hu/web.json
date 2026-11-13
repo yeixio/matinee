@@ -226,7 +226,17 @@
     "appearAsFound": "A címek megjelennek, ahogy előkerülnek.",
     "noMedia": "A Matinee itt keresett: {{paths}}, de nem talált médiát.",
     "letters": "Ugrás betűre",
-    "jumpTo": "Ugrás ide: {{letter}}"
+    "jumpTo": "Ugrás ide: {{letter}}",
+    "skipped": {
+      "title_one": "{{count}} fájl kimaradt",
+      "title_other": "{{count}} fájl kimaradt",
+      "topFolder": "Fő mappa",
+      "arcade_one": "{{count}} arcade készlet. Az arcade játékok egy Arcade könyvtárból indulnak.",
+      "arcade_other": "{{count}} arcade készlet. Az arcade játékok egy Arcade könyvtárból indulnak.",
+      "unknown_one": "{{count}} fájl, amelyet a Matinee még nem tud lejátszani, például {{example}}.",
+      "unknown_other": "{{count}} fájl, amelyet a Matinee még nem tud lejátszani, például {{example}}.",
+      "addArcade": "Arcade könyvtár hozzáadása"
+    }
   },
   "nothingHereYet": "Még nincs itt semmi",
   "collection": {

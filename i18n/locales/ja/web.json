@@ -225,7 +225,14 @@
     "appearAsFound": "タイトルは見つかり次第表示されます。",
     "noMedia": "Matinee は {{paths}} を探しましたが、メディアは見つかりませんでした。",
     "letters": "文字へ移動",
-    "jumpTo": "{{letter}} へ移動"
+    "jumpTo": "{{letter}} へ移動",
+    "skipped": {
+      "title_other": "{{count}}個のファイルが除外されました",
+      "topFolder": "最上位フォルダー",
+      "arcade_other": "アーケードセット{{count}}個。アーケードゲームは Arcade ライブラリで遊べます。",
+      "unknown_other": "Matinee がまだ再生できないファイル{{count}}個（例: {{example}}）。",
+      "addArcade": "Arcade ライブラリを追加"
+    }
   },
   "nothingHereYet": "まだ何もありません",
   "collection": {

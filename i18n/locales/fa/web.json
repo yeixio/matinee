@@ -226,7 +226,17 @@
     "appearAsFound": "عنوان‌ها به محض پیدا شدن نمایش داده می‌شوند.",
     "noMedia": "Matinee در {{paths}} گشت و رسانه‌ای پیدا نکرد.",
     "letters": "رفتن به یک حرف",
-    "jumpTo": "رفتن به {{letter}}"
+    "jumpTo": "رفتن به {{letter}}",
+    "skipped": {
+      "title_one": "{{count}} فایل کنار گذاشته شد",
+      "title_other": "{{count}} فایل کنار گذاشته شد",
+      "topFolder": "پوشهٔ اصلی",
+      "arcade_one": "{{count}} مجموعهٔ آرکید. بازی‌های آرکید از کتابخانهٔ Arcade اجرا می‌شوند.",
+      "arcade_other": "{{count}} مجموعهٔ آرکید. بازی‌های آرکید از کتابخانهٔ Arcade اجرا می‌شوند.",
+      "unknown_one": "{{count}} فایل که Matinee هنوز نمی‌تواند پخش کند، مثل {{example}}.",
+      "unknown_other": "{{count}} فایل که Matinee هنوز نمی‌تواند پخش کند، مثل {{example}}.",
+      "addArcade": "افزودن کتابخانهٔ Arcade"
+    }
   },
   "nothingHereYet": "هنوز چیزی اینجا نیست",
   "collection": {

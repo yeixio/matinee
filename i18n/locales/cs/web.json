@@ -228,7 +228,23 @@
     "appearAsFound": "Tituly se objevují, jak se nacházejí.",
     "noMedia": "Matinee hledal v {{paths}} a nenašel žádná média.",
     "letters": "Přejít na písmeno",
-    "jumpTo": "Přejít na {{letter}}"
+    "jumpTo": "Přejít na {{letter}}",
+    "skipped": {
+      "title_one": "{{count}} soubor byl vynechán",
+      "title_few": "{{count}} soubory byly vynechány",
+      "title_many": "{{count}} souboru bylo vynecháno",
+      "title_other": "{{count}} souborů bylo vynecháno",
+      "topFolder": "Hlavní složka",
+      "arcade_one": "{{count}} arkádová sada. Arkádové hry se spouštějí z knihovny Arcade.",
+      "arcade_few": "{{count}} arkádové sady. Arkádové hry se spouštějí z knihovny Arcade.",
+      "arcade_many": "{{count}} arkádové sady. Arkádové hry se spouštějí z knihovny Arcade.",
+      "arcade_other": "{{count}} arkádových sad. Arkádové hry se spouštějí z knihovny Arcade.",
+      "unknown_one": "{{count}} soubor, který Matinee zatím neumí přehrát, např. {{example}}.",
+      "unknown_few": "{{count}} soubory, které Matinee zatím neumí přehrát, např. {{example}}.",
+      "unknown_many": "{{count}} souboru, které Matinee zatím neumí přehrát, např. {{example}}.",
+      "unknown_other": "{{count}} souborů, které Matinee zatím neumí přehrát, např. {{example}}.",
+      "addArcade": "Přidat knihovnu Arcade"
+    }
   },
   "nothingHereYet": "Zatím tu nic není",
   "collection": {

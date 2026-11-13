@@ -226,7 +226,17 @@
     "appearAsFound": "टाइटल मिलते ही दिखते हैं।",
     "noMedia": "Matinee ने {{paths}} में देखा और कोई मीडिया नहीं मिला।",
     "letters": "किसी अक्षर पर जाएँ",
-    "jumpTo": "{{letter}} पर जाएँ"
+    "jumpTo": "{{letter}} पर जाएँ",
+    "skipped": {
+      "title_one": "{{count}} फ़ाइल छोड़ दी गई",
+      "title_other": "{{count}} फ़ाइलें छोड़ दी गईं",
+      "topFolder": "सबसे ऊपर का फ़ोल्डर",
+      "arcade_one": "{{count}} आर्केड सेट। आर्केड गेम Arcade लाइब्रेरी से चलते हैं।",
+      "arcade_other": "{{count}} आर्केड सेट। आर्केड गेम Arcade लाइब्रेरी से चलते हैं।",
+      "unknown_one": "{{count}} फ़ाइल जिसे Matinee अभी नहीं चला सकता, जैसे {{example}}।",
+      "unknown_other": "{{count}} फ़ाइलें जिन्हें Matinee अभी नहीं चला सकता, जैसे {{example}}।",
+      "addArcade": "Arcade लाइब्रेरी जोड़ें"
+    }
   },
   "nothingHereYet": "अभी यहाँ कुछ नहीं",
   "collection": {

@@ -225,7 +225,14 @@
     "appearAsFound": "作品会在找到后陆续显示。",
     "noMedia": "Matinee 在 {{paths}} 中查找过，但没有找到媒体。",
     "letters": "跳到字母",
-    "jumpTo": "跳到 {{letter}}"
+    "jumpTo": "跳到 {{letter}}",
+    "skipped": {
+      "title_other": "有 {{count}} 个文件未收录",
+      "topFolder": "顶层文件夹",
+      "arcade_other": "{{count}} 个街机游戏集。街机游戏需在 Arcade 媒体库中游玩。",
+      "unknown_other": "{{count}} 个 Matinee 暂时无法播放的文件，例如 {{example}}。",
+      "addArcade": "添加 Arcade 媒体库"
+    }
   },
   "nothingHereYet": "这里还没有内容",
   "collection": {
