@@ -370,3 +370,22 @@ func TestUnzipDisc(t *testing.T) {
 		t.Fatalf("unpacked %d files", len(entries))
 	}
 }
+
+// A built-in emulator that doesn't load on this computer is left out, so
+// its games say there's no emulator instead of failing to start.
+func TestBrokenBuiltIn(t *testing.T) {
+	needBuilt(t)
+	dir := t.TempDir()
+	// Gambatte plays .gb; this one isn't a library at all.
+	if err := os.WriteFile(filepath.Join(dir, "gambatte_libretro.so"), []byte("not a core"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	m := &Manager{cfg: Config{Runner: filepath.Join(built, "matinee-game-runner"), CoreDir: dir}, log: slog.New(slog.NewTextHandler(io.Discard, nil))}
+	if _, ok := m.SystemFor("game.gb"); !ok {
+		t.Fatal("before the check, the emulator should count")
+	}
+	m.checkBuiltIn(context.Background())
+	if s, ok := m.SystemFor("game.gb"); ok {
+		t.Fatalf("a broken emulator plays .gb: %+v", s)
+	}
+}

@@ -15,22 +15,68 @@ PKG_VERSION="$(printf '%s' "$VERSION" | sed 's/-/~/')"
 work="$(mktemp -d)"
 trap 'rm -rf "$work"' EXIT
 
-# archive arch, deb arch, rpm arch (empty: no rpm)
+# The game runner and emulators, built once by the "Game emulators" and
+# "Arcade emulator" workflows. A release fails without them
+# (REQUIRE_GAMES=1); other builds, such as a pull request's before its
+# emulators are published, leave games out and say so.
+games_tag="$(sh games/cores-tag.sh games)"
+mame_v="$(sed -n 's/^version=//p' games/mame.txt)"
+mame_c="$(sed -n 's/^commit=//p' games/mame.txt | cut -c1-7)"
+mame_b="$(sed -n 's/^build=//p' games/mame.txt)"
+mame_tag="mame-core-$mame_v-$mame_c${mame_b:+-$mame_b}"
+releases="https://github.com/yeixio/matinee/releases/download"
+# fetch_games ARCH DIR: the emulators for ARCH (amd64, arm64, arm) into DIR.
+fetch_games() {
+  local arch=$1 dir=$2 f="matinee-games-linux-$1.tar.xz"
+  mkdir -p "$dir"
+  if ! curl -fsSL -o "$work/$f" "$releases/$games_tag/$f" ||
+    ! curl -fsSL -o "$work/games-SHA256SUMS" "$releases/$games_tag/SHA256SUMS"; then
+    return 1
+  fi
+  (cd "$work" && grep " $f\$" games-SHA256SUMS | sha256sum -c -) >/dev/null
+  tar -xJf "$work/$f" -C "$dir"
+  case $arch in amd64 | arm64)
+    local m="mame_libretro-$arch.so.xz"
+    if curl -fsSL -o "$work/$m" "$releases/$mame_tag/$m" &&
+      curl -fsSL -o "$work/mame-SHA256SUMS" "$releases/$mame_tag/SHA256SUMS"; then
+      (cd "$work" && grep " $m\$" mame-SHA256SUMS | sha256sum -c -) >/dev/null
+      xz -d -c "$work/$m" > "$dir/cores/mame_libretro.so"
+      curl -fsSL -o "$dir/licenses/mame.txt" "$releases/$mame_tag/mame-COPYING.txt"
+    elif [ -n "${REQUIRE_GAMES:-}" ]; then
+      echo "no $mame_tag release: the arcade emulator is missing" >&2
+      exit 1
+    fi
+    ;;
+  esac
+}
+
+# archive arch, deb arch, rpm arch (empty: no rpm), emulators' arch
 targets=(
-  "amd64 amd64 x86_64"
-  "arm64 arm64 aarch64"
+  "amd64 amd64 x86_64 amd64"
+  "arm64 arm64 aarch64 arm64"
   # Fedora and RHEL dropped 32-bit ARM, so armv7 is deb only.
-  "armv7 armhf -"
+  "armv7 armhf - arm"
 )
 built=0
 for t in "${targets[@]}"; do
-  read -r arch debarch rpmarch <<<"$t"
+  read -r arch debarch rpmarch gamesarch <<<"$t"
   name="matinee_${VERSION}_linux_${arch}"
   if [ ! -f "dist/$name.tar.gz" ]; then
     echo "skipping linux/$arch: no dist/$name.tar.gz"
     continue
   fi
   tar -C "$work" -xzf "dist/$name.tar.gz"
+  games=""
+  if fetch_games "$gamesarch" "$work/games-$arch"; then
+    games="  - src: $work/games-$arch
+    dst: /usr/lib/matinee/games
+    type: tree"
+  elif [ -n "${REQUIRE_GAMES:-}" ]; then
+    echo "no $games_tag release: the game emulators for $arch are missing" >&2
+    exit 1
+  else
+    echo "no $games_tag release: linux/$arch packaged without games"
+  fi
   cfg="$work/$arch.yaml"
   cat > "$cfg" <<YAML
 name: matinee
@@ -70,6 +116,7 @@ contents:
     dst: /usr/share/doc/matinee/LICENSE
   - src: ${ROOT}/README.md
     dst: /usr/share/doc/matinee/README.md
+${games}
 scripts:
   postinstall: ${ROOT}/packaging/linux/postinstall.sh
   preremove: ${ROOT}/packaging/linux/preremove.sh

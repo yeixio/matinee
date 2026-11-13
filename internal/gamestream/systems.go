@@ -83,7 +83,7 @@ func (m *Manager) Available() []System {
 	out := m.userSystems()
 	for _, s := range builtIn {
 		s.Core = filepath.Join(m.cfg.CoreDir, s.Core)
-		if fileExists(s.Core) {
+		if fileExists(s.Core) && !m.isBroken(s.Core) {
 			out = append(out, s)
 		}
 	}

@@ -140,7 +140,7 @@ Games stream over **UDP port 7173**, separately from the web player's port. On t
 | `MATINEE_GAMES_PUBLIC_IP` | | The addresses players reach that port at, comma separated, when the server can't see its own, such as in a container that isn't on the host network. The Helm chart sets it to the node's address. |
 | `MATINEE_GAMES_DIR` | `/usr/lib/matinee/games` | Where the game runner and emulators are. `off` turns games off. |
 
-The Docker image and the Helm chart include the game runner and the emulators. Other installs don't have them yet, and **Settings → Streaming → Games** says so.
+The Docker image, the Helm chart and, from 0.2.7, the apt and dnf packages include the game runner and the emulators, so there's nothing to install. The Mac app, the Windows installer and Homebrew don't have them yet: their Games libraries show your games, and **Settings → Streaming → Games** says this server can't play them.
 
 ## The emulators
 
