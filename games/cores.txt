@@ -6,6 +6,7 @@
 # licence. None needs a graphics card. @ARCH@ in a setting is the CPU being
 # built for (x86_64, aarch64 or arm), and only=… builds it for those
 # alone: 32-bit ARM boards are too slow for the heaviest.
+#   win:NAME=VALUE is a make setting for Windows builds alone.
 gambatte      https://github.com/libretro/gambatte-libretro    77f2567d718b8973d02caa2daa8dce4953faf811  make
 fceumm        https://github.com/libretro/libretro-fceumm      e0f3086a8104f8fbbe49a2615b10401504a9533f  make
 mgba          https://github.com/mgba-emu/mgba                 26b7884bc25a5933960f3cdcd98bac1ae14d42e2  cmake
@@ -28,4 +29,4 @@ mednafen_vb       https://github.com/libretro/beetle-vb-libretro       d5ae54c8e
 vice_x64          https://github.com/libretro/vice-libretro            76cde0b2cc4e52106618f2cc5d9d1112d9205c89  make  only=x86_64,aarch64 EMUTYPE=x64 mac_stdio=1
 puae              https://github.com/libretro/libretro-uae             d366f77c60e5a5f059f129cc3773d3048306083b  make  only=x86_64,aarch64
 fuse              https://github.com/libretro/fuse-libretro            e997e2bc32c888348f862f69f2c53babfedf7791  make mac_stdio=1
-dosbox_pure       https://github.com/libretro/dosbox-pure              e39497e7c2a32c67c26e6598dd14f6d58c384bfd  make  only=x86_64,aarch64
+dosbox_pure       https://github.com/libretro/dosbox-pure              e39497e7c2a32c67c26e6598dd14f6d58c384bfd  make  only=x86_64,aarch64 win:MAKE_CPUFLAGS=-static

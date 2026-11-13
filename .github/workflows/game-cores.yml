@@ -124,6 +124,13 @@ jobs:
       - name: Package
         run: |
           ls -la out out/cores
+          # Only Windows' own DLLs: MinGW's runtime isn't shipped beside them.
+          for f in out/*.exe out/cores/*.so; do
+            if x86_64-w64-mingw32-objdump -p "$f" | grep 'DLL Name' | grep -iE 'libgcc|libstdc|libwinpthread'; then
+              echo "$f needs MinGW's runtime DLLs" >&2
+              exit 1
+            fi
+          done
           tar -C out -cf - . | xz -T0 -6 > matinee-games-windows-amd64.tar.xz
           ls -la ./*.tar.xz
       - uses: actions/upload-artifact@v4

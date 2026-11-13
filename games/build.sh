@@ -70,7 +70,12 @@ while read -r name repo commit how vars <&3; do
 	# mac_stdio=1: the old zlib it bundles defines fdopen away on a Mac,
 	# which breaks the SDK's stdio.h unless that comes first.
 	mac_stdio=$(echo "$vars" | tr ' ' '\n' | sed -n 's/^mac_stdio=//p')
-	vars=$(echo "$vars" | tr ' ' '\n' | grep -v '^only=' | grep -v '^dir=' | grep -v '^mac_stdio=' | tr '\n' ' ')
+	# win:NAME=VALUE is a make setting for Windows builds alone.
+	win_vars=$(echo "$vars" | tr ' ' '\n' | sed -n 's/^win://p' | tr '\n' ' ')
+	vars=$(echo "$vars" | tr ' ' '\n' | grep -v '^only=' | grep -v '^dir=' | grep -v '^mac_stdio=' | grep -v '^win:' | tr '\n' ' ')
+	if [ "$os" = Windows ]; then
+		vars="$vars $win_vars"
+	fi
 	extra_cflags=""
 	if [ "$os" = Darwin ] && [ -n "$mac_stdio" ]; then
 		extra_cflags="-include stdio.h"
