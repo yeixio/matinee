@@ -91,10 +91,14 @@ static size_t last_save_len;
 
 // ---- output ----
 
+// out is where messages go: stdout, moved aside in main so that whatever an
+// emulator prints (MAME does) lands in stderr and not among the messages.
+static int out = 1;
+
 static void write_all(const void *p, size_t n) {
   const uint8_t *b = p;
   while (n > 0) {
-    ssize_t w = write(1, b, n);
+    ssize_t w = write(out, b, n);
     if (w < 0) {
       if (errno == EINTR) continue;
       exit(0);  // Matinee went away: nothing left to play for
@@ -524,6 +528,9 @@ int main(int argc, char **argv) {
   save_dir = argv[3];
   system_dir = argv[4];
   fcntl(0, F_SETFL, fcntl(0, F_GETFL) | O_NONBLOCK);
+  out = dup(1);
+  if (out < 0 || dup2(2, 1) < 0) out = 1;
+  else fcntl(out, F_SETFD, FD_CLOEXEC);
 
   void *lib = dlopen(core_path, RTLD_NOW | RTLD_LOCAL);
   if (!lib) fail("couldn't load the emulator: %s", dlerror());
