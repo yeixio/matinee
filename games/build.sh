@@ -18,6 +18,10 @@ host=${HOST:-}
 os=$(uname -s)
 if [ "$os" = Darwin ]; then
 	cc=clang cxx=clang++ strip=strip platform=osx
+	# Older zlibs bundled with some emulators define fdopen away on a Mac,
+	# which breaks the SDK's stdio.h unless it comes first. From the
+	# environment, so a makefile's own CFLAGS add to it.
+	export CFLAGS="${CFLAGS:-} -include stdio.h"
 	jobs=$(sysctl -n hw.ncpu)
 	runner_libs="-ldl -lm"
 else
@@ -92,7 +96,8 @@ while read -r name repo commit how vars <&3; do
 			-DBUILD_SHARED=OFF -DBUILD_STATIC=OFF -DSKIP_LIBRARY=ON -DUSE_FFMPEG=OFF -DUSE_ZLIB=OFF -DUSE_PNG=OFF \
 			-DUSE_LIBZIP=OFF -DUSE_MINIZIP=OFF -DUSE_SQLITE3=OFF -DUSE_ELF=OFF -DUSE_LZMA=OFF -DUSE_EDITLINE=OFF \
 			-DUSE_EPOXY=OFF -DUSE_DISCORD_RPC=OFF -DUSE_LUA=OFF -DUSE_JSON_C=OFF -DENABLE_SCRIPTING=OFF -DENABLE_DEBUGGERS=OFF \
-			-DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER="$cc" -DCMAKE_CXX_COMPILER="$cxx"
+			-DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER="$cc" -DCMAKE_CXX_COMPILER="$cxx" \
+			-DCMAKE_POLICY_VERSION_MINIMUM=3.5
 		if [ -n "$host" ]; then
 			set -- "$@" -DCMAKE_SYSTEM_NAME=Linux -DCMAKE_SYSTEM_PROCESSOR="${host%%-*}"
 		fi
