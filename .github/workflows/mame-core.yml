@@ -202,7 +202,9 @@ jobs:
         with:
           msystem: MINGW64
           update: false
-          install: git make xz mingw-w64-x86_64-gcc mingw-w64-x86_64-lld mingw-w64-x86_64-python
+          # SDL2 only for its headers: MAME's Windows input code takes its key
+          # codes from them.
+          install: git make xz mingw-w64-x86_64-gcc mingw-w64-x86_64-lld mingw-w64-x86_64-python mingw-w64-x86_64-SDL2
       - name: Get MAME
         if: steps.have.outputs.done != '1'
         run: |
