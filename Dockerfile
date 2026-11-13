@@ -31,14 +31,16 @@ RUN CGO_ENABLED=0 GOOS=$TARGETOS GOARCH=$TARGETARCH GOARM="${TARGETVARIANT#v}" g
     -o /out/matinee-gamehost ./cmd/matinee-gamehost
 
 # The game runner and the emulators that play games on the server
-# (games/). Built on the build machine for the target, with a cross
-# compiler, which is much faster than building under emulation.
+# (games/). They're built once, by the "Game emulators" workflow, and
+# downloaded here; only when that release doesn't exist yet (a change to
+# games/ not yet merged) are they built here, on the build machine for the
+# target with a cross compiler, which is much faster than under emulation.
 FROM --platform=$BUILDPLATFORM debian:trixie AS games
 # libgl-dev only for its headers: the N64 emulator, built without OpenGL,
 # still includes them. nasm assembles its x86-64 recompiler.
 ARG TARGETARCH BUILDARCH
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends ca-certificates git make cmake gcc g++ binutils libgl-dev nasm \
+    && apt-get install -y --no-install-recommends ca-certificates curl xz-utils git make cmake gcc g++ binutils libgl-dev nasm \
     && case "$TARGETARCH" in \
          "$BUILDARCH") ;; \
          arm64) apt-get install -y --no-install-recommends gcc-aarch64-linux-gnu g++-aarch64-linux-gnu binutils-aarch64-linux-gnu ;; \
@@ -47,20 +49,29 @@ RUN apt-get update \
        esac \
     && rm -rf /var/lib/apt/lists/*
 COPY games/ /src/games/
-RUN case "$TARGETARCH" in \
-      "$BUILDARCH") host= ;; \
-      arm64) host=aarch64-linux-gnu ;; \
-      arm) host=arm-linux-gnueabihf ;; \
-      amd64) host=x86_64-linux-gnu ;; \
-    esac \
-    && HOST=$host sh /src/games/build.sh /out/games
+RUN tag=$(sh /src/games/cores-tag.sh /src/games) && f="matinee-games-linux-$TARGETARCH.tar.xz" \
+    && base="https://github.com/yeixio/matinee/releases/download/$tag" \
+    && if curl -fsSL -o "/tmp/$f" "$base/$f" && curl -fsSL -o /tmp/SHA256SUMS "$base/SHA256SUMS"; then \
+         (cd /tmp && grep " $f\$" SHA256SUMS | sha256sum -c -) \
+         && mkdir -p /out/games && tar -xJf "/tmp/$f" -C /out/games && rm "/tmp/$f" \
+         && echo "emulators from $tag"; \
+       else \
+         echo "no $tag release yet: building the emulators" \
+         && case "$TARGETARCH" in \
+              "$BUILDARCH") host= ;; \
+              arm64) host=aarch64-linux-gnu ;; \
+              arm) host=arm-linux-gnueabihf ;; \
+              amd64) host=x86_64-linux-gnu ;; \
+            esac \
+         && HOST=$host sh /src/games/build.sh /out/games; \
+       fi
 # The arcade emulator, MAME, is built on its own because it takes hours
 # (games/mame.txt, .github/workflows/mame-core.yml): fetched from its
 # release, for 64-bit machines. Until that release exists the image has no
 # arcade emulator, and arcade games say so. (A layer cached from before a
 # release existed has no MAME: change this step to rebuild it.)
-RUN apt-get update && apt-get install -y --no-install-recommends curl xz-utils && rm -rf /var/lib/apt/lists/* \
-    && v=$(sed -n 's/^version=//p' /src/games/mame.txt) && c=$(sed -n 's/^commit=//p' /src/games/mame.txt | cut -c1-7) \
+RUN v=$(sed -n 's/^version=//p' /src/games/mame.txt) && c=$(sed -n 's/^commit=//p' /src/games/mame.txt | cut -c1-7) \
+    && b=$(sed -n 's/^build=//p' /src/games/mame.txt) && c="$c${b:+-$b}" \
     && base="https://github.com/yeixio/matinee/releases/download/mame-core-$v-$c" \
     && case "$TARGETARCH" in amd64|arm64) \
          if curl -fsSL -o /tmp/mame.so.xz "$base/mame_libretro-$TARGETARCH.so.xz" && curl -fsSL -o /tmp/SHA256SUMS "$base/SHA256SUMS"; then \

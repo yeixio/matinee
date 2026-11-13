@@ -211,6 +211,8 @@ jobs:
           go install github.com/goreleaser/nfpm/v2/cmd/nfpm@v2.41.3
           echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
       - name: Build .deb and .rpm packages
+        env:
+          REQUIRE_GAMES: "1"
         run: VERSION="${TAG#v}" scripts/package-linux.sh
       # A stable release publishes the repositories, so it fails without the
       # signing key rather than publishing them unsigned.

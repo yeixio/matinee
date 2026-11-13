@@ -56,6 +56,13 @@ type Manager struct {
 
 	coresMu   sync.Mutex
 	userCores map[string]userCore // by file name
+
+	// broken are the built-in emulators that don't load on this computer
+	// (built for a newer system, say), by path, with why. checkBuiltIn
+	// fills it when the server starts; they're left out of Available, so
+	// their games say there's no emulator rather than failing to start.
+	brokenMu sync.Mutex
+	broken   map[string]string
 }
 
 // NewManager sets up WebRTC on cfg.Port.
@@ -88,7 +95,38 @@ func NewManager(cfg Config, log *slog.Logger) (*Manager, error) {
 		return nil, err
 	}
 	m.api = webrtc.NewAPI(webrtc.WithSettingEngine(se), webrtc.WithMediaEngine(&me))
+	go m.checkBuiltIn(context.Background())
 	return m, nil
+}
+
+// checkBuiltIn asks the runner about each built-in emulator, one at a time,
+// and notes the ones that don't load.
+func (m *Manager) checkBuiltIn(ctx context.Context) {
+	if m.cfg.Runner == "" {
+		return
+	}
+	for _, s := range builtIn {
+		core := filepath.Join(m.cfg.CoreDir, s.Core)
+		if !fileExists(core) {
+			continue
+		}
+		if _, err := ReadCoreInfo(ctx, m.cfg.Runner, core); err != nil {
+			m.log.Warn("a built-in emulator doesn't load here; its games show as having no emulator", "emulator", s.Core, "err", err)
+			m.brokenMu.Lock()
+			if m.broken == nil {
+				m.broken = map[string]string{}
+			}
+			m.broken[core] = err.Error()
+			m.brokenMu.Unlock()
+		}
+	}
+}
+
+func (m *Manager) isBroken(core string) bool {
+	m.brokenMu.Lock()
+	defer m.brokenMu.Unlock()
+	_, bad := m.broken[core]
+	return bad
 }
 
 var (
