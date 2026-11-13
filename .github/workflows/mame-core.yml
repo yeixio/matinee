@@ -62,6 +62,13 @@ jobs:
           git init -q mame-src
           git -C mame-src fetch -q --depth 1 https://github.com/libretro/mame '${{ needs.version.outputs.commit }}'
           git -C mame-src checkout -q FETCH_HEAD
+      # The arm64 core is too big for GNU ld's 128 MB branch range; lld adds
+      # the long-branch stubs it needs.
+      - name: Get lld
+        if: matrix.arch == 'arm64'
+        run: |
+          sudo apt-get update -q && sudo apt-get install -y -q lld
+          echo "LDOPTS=-fuse-ld=lld" >> "$GITHUB_ENV"
       # Arcade machines only: consoles have their own emulators in Matinee.
       - name: Build
         working-directory: mame-src
