@@ -140,7 +140,7 @@ Games stream over **UDP port 7173**, separately from the web player's port. On t
 | `MATINEE_GAMES_PUBLIC_IP` | | The addresses players reach that port at, comma separated, when the server can't see its own, such as in a container that isn't on the host network. The Helm chart sets it to the node's address. |
 | `MATINEE_GAMES_DIR` | `/usr/lib/matinee/games` | Where the game runner and emulators are. `off` turns games off. |
 
-The Docker image, the Helm chart and, from 0.2.7, the apt and dnf packages and Matinee Server.app on Macs with Apple silicon include the game runner and the emulators, so there's nothing to install. Arcade games don't play on a Mac yet. The Windows installer and Homebrew don't have emulators yet: their Games libraries show your games, and **Settings → Streaming → Games** says this server can't play them.
+The Docker image, the Helm chart and, from 0.2.7, the apt and dnf packages, Matinee Server.app on Macs with Apple silicon and the Windows installer (on Intel, AMD and Arm PCs alike) include the game runner and the emulators, so there's nothing to install. Homebrew doesn't have emulators yet: its Games library shows your games, and **Settings → Streaming → Games** says this server can't play them.
 
 ## The emulators
 
@@ -154,8 +154,8 @@ From 0.2.7 there are also [MAME](https://www.mamedev.org) for arcade games, and 
 
 You can add any emulator that's a **libretro core**, for a system Matinee doesn't play yet, or to play a system with a different emulator than the built-in one.
 
-1. Get the core built for your server: a file ending in `_libretro.so` for Linux on the server's kind of CPU. **Settings → Streaming → Games** says which one you need, such as **Linux x86_64** for most PCs or **Linux aarch64** for a Raspberry Pi 4 or 5. The libretro project's [nightly builds](https://buildbot.libretro.com/nightly/linux/) have most cores, zipped.
-2. Unzip it, and in **Settings → Streaming → Games → Emulators** press **Add an emulator** and pick the `.so` file.
+1. Get the core built for your server: a file ending in `_libretro.so` for Linux, `_libretro.dll` for Windows or `_libretro.dylib` for a Mac, for the server's kind of CPU. **Settings → Streaming → Games** says which one you need, such as **Linux x86_64** for most Linux PCs, **Linux aarch64** for a Raspberry Pi 4 or 5, **Windows x86_64** or **macOS arm64**. The libretro project's [nightly builds](https://buildbot.libretro.com/nightly/) have most cores, zipped.
+2. Unzip it, and in **Settings → Streaming → Games → Emulators** press **Add an emulator** and pick the file.
 3. Matinee loads it to ask which files it plays. If that works it's added, listed with the files it plays, and those games play with it from then on, ahead of a built-in emulator for the same files. If it doesn't, Matinee says why (built for another kind of computer, say) and doesn't keep it.
 
 An emulator is a program that runs on your server, so add only ones you trust, such as libretro's own builds. Each runs in its own process like the built-in ones.

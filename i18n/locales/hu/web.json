@@ -1040,7 +1040,7 @@
       "notSetUp": "Nem elérhető: a szerveren nincs játékfuttató és emulátor. A Docker-kép tartalmazza őket.",
       "open": "Játék kipróbálása",
       "emulators": "Emulátorok",
-      "emulatorsIntro": "A Matinee beépített emulátorokkal érkezik. Hozzáadhatod a sajátodat is: egy {{platform}} rendszerre fordított libretro core-t (.so fájl). A Matinee megkérdezi, milyen játékokat futtat, és azokhoz a beépítettek előtt használja.",
+      "emulatorsIntro": "A Matinee beépített emulátorokkal érkezik. Hozzáadhatod a sajátodat is: egy {{platform}} rendszerre fordított libretro core-t ({{ext}} fájl). A Matinee megkérdezi, milyen játékokat futtat, és azokhoz a beépítettek előtt használja.",
       "emulatorsTrust": "Az emulátor egy program, amely ezen a szerveren fut. Csak olyat adj hozzá, amelyben megbízol.",
       "addEmulator": "Emulátor hozzáadása",
       "adding": "Hozzáadás…",

@@ -1040,7 +1040,7 @@
       "notSetUp": "Inte tillgängligt: servern saknar spelkörare och emulatorer. Docker-avbildningen har dem.",
       "open": "Prova ett spel",
       "emulators": "Emulatorer",
-      "emulatorsIntro": "Matinee har inbyggda emulatorer. Du kan lägga till egna: en libretro-core byggd för {{platform}} (en .so-fil). Matinee frågar vilka spel den spelar och använder den för dem före de inbyggda.",
+      "emulatorsIntro": "Matinee har inbyggda emulatorer. Du kan lägga till egna: en libretro-core byggd för {{platform}} (en {{ext}}-fil). Matinee frågar vilka spel den spelar och använder den för dem före de inbyggda.",
       "emulatorsTrust": "En emulator är ett program som körs på den här servern. Lägg bara till en du litar på.",
       "addEmulator": "Lägg till en emulator",
       "adding": "Lägger till…",

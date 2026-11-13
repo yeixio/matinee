@@ -1040,7 +1040,7 @@
       "notSetUp": "Ei käytettävissä: palvelimelta puuttuvat pelinajaja ja emulaattorit. Docker-kuvassa ne ovat.",
       "open": "Kokeile peliä",
       "emulators": "Emulaattorit",
-      "emulatorsIntro": "Matineessa on valmiita emulaattoreita. Voit lisätä omia: libretro-coren, joka on käännetty alustalle {{platform}} (.so-tiedosto). Matinee kysyy siltä, mitä pelejä se pelaa, ja käyttää sitä niihin ennen valmiita.",
+      "emulatorsIntro": "Matineessa on valmiita emulaattoreita. Voit lisätä omia: libretro-coren, joka on käännetty alustalle {{platform}} ({{ext}}-tiedosto). Matinee kysyy siltä, mitä pelejä se pelaa, ja käyttää sitä niihin ennen valmiita.",
       "emulatorsTrust": "Emulaattori on ohjelma, joka toimii tällä palvelimella. Lisää vain sellainen, johon luotat.",
       "addEmulator": "Lisää emulaattori",
       "adding": "Lisätään…",

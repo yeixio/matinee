@@ -248,7 +248,7 @@ func ReadCoreInfo(ctx context.Context, runnerPath, core string) (CoreInfo, error
 	}
 	info.Extensions = exts
 	if info.Name == "" {
-		info.Name = strings.TrimSuffix(strings.TrimSuffix(filepath.Base(core), ".so"), "_libretro")
+		info.Name = strings.TrimSuffix(strings.TrimSuffix(filepath.Base(core), filepath.Ext(core)), "_libretro")
 	}
 	return info, nil
 }

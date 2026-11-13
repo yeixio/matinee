@@ -1568,7 +1568,7 @@ export const api = {
       { offer },
     ),
   stopGame: (id: string) => request<void>('DELETE', `/api/v1/games/play/${encodeURIComponent(id)}`),
-  gameEmulators: () => request<{ emulators: GameEmulator[]; platform: string }>('GET', '/api/v1/games/emulators'),
+  gameEmulators: () => request<{ emulators: GameEmulator[]; platform: string; ext?: string }>('GET', '/api/v1/games/emulators'),
   addGameEmulator: async (file: File) => {
     const res = await fetch(`/api/v1/games/emulators?file=${encodeURIComponent(file.name)}`, {
       method: 'POST',

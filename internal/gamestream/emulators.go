@@ -62,7 +62,7 @@ func (m *Manager) scanUserCores() []string {
 	seen := map[string]bool{}
 	for _, e := range entries {
 		name := e.Name()
-		if e.IsDir() || strings.HasPrefix(name, ".") || !strings.HasSuffix(name, ".so") {
+		if e.IsDir() || strings.HasPrefix(name, ".") || !isCoreFile(name) {
 			continue
 		}
 		st, err := e.Info()
@@ -101,7 +101,7 @@ func (m *Manager) userSystems() []System {
 			continue
 		}
 		out = append(out, System{
-			Key: "custom-" + strings.TrimSuffix(strings.TrimSuffix(name, ".so"), "_libretro"), Name: c.info.Name,
+			Key: "custom-" + strings.TrimSuffix(strings.TrimSuffix(name, filepath.Ext(name)), "_libretro"), Name: c.info.Name,
 			Emulator: c.info.Name, Extensions: c.info.Extensions, Custom: true,
 			Core: filepath.Join(m.cfg.UserCoreDir, name),
 		})
@@ -154,8 +154,15 @@ func userEmulator(name string, c userCore) Emulator {
 // refused with ErrNotEmulator, and not kept.
 func (m *Manager) AddEmulator(ctx context.Context, file string, r io.Reader) (Emulator, error) {
 	name := safeName(filepath.Base(file))
+	// Windows and Mac emulators end in .dll and .dylib; they're kept as
+	// .so, like the built-in ones, so every server finds them the same way.
+	for _, ext := range []string{".dll", ".dylib"} {
+		if strings.HasSuffix(strings.ToLower(name), ext) {
+			name = name[:len(name)-len(ext)] + ".so"
+		}
+	}
 	if !strings.HasSuffix(name, ".so") || strings.HasPrefix(name, ".") {
-		return Emulator{}, fmt.Errorf("%w: an emulator is a libretro core, a file ending in .so", ErrNotEmulator)
+		return Emulator{}, fmt.Errorf("%w: an emulator is a libretro core, a file ending in .so (.dll on Windows, .dylib on a Mac)", ErrNotEmulator)
 	}
 	if err := os.MkdirAll(m.cfg.UserCoreDir, 0o755); err != nil {
 		return Emulator{}, err
@@ -199,7 +206,7 @@ func (m *Manager) AddEmulator(ctx context.Context, file string, r io.Reader) (Em
 // with it carry on until they end.
 func (m *Manager) RemoveEmulator(file string) error {
 	name := filepath.Base(file)
-	if m.cfg.UserCoreDir == "" || name != file || strings.HasPrefix(name, ".") || !strings.HasSuffix(name, ".so") {
+	if m.cfg.UserCoreDir == "" || name != file || strings.HasPrefix(name, ".") || !isCoreFile(name) {
 		return os.ErrNotExist
 	}
 	if err := os.Remove(filepath.Join(m.cfg.UserCoreDir, name)); err != nil {
@@ -207,6 +214,16 @@ func (m *Manager) RemoveEmulator(file string) error {
 	}
 	m.scanUserCores()
 	return nil
+}
+
+// isCoreFile reports whether name is an emulator's file: .so, or a copied-in
+// Windows .dll or Mac .dylib.
+func isCoreFile(name string) bool {
+	switch strings.ToLower(filepath.Ext(name)) {
+	case ".so", ".dll", ".dylib":
+		return true
+	}
+	return false
 }
 
 func fileExists(path string) bool {

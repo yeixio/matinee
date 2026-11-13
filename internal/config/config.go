@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"runtime"
 	"strconv"
 	"strings"
 	"time"
@@ -212,11 +213,21 @@ func defaultGamesDir() string {
 		if d == "" {
 			continue
 		}
-		if _, err := os.Stat(filepath.Join(d, "matinee-game-runner")); err == nil {
+		if _, err := os.Stat(GameRunner(d)); err == nil {
 			return d
 		}
 	}
 	return ""
+}
+
+// GameRunner is the path of matinee-game-runner in a games folder
+// (matinee-game-runner.exe on Windows).
+func GameRunner(gamesDir string) string {
+	name := "matinee-game-runner"
+	if runtime.GOOS == "windows" {
+		name += ".exe"
+	}
+	return filepath.Join(gamesDir, name)
 }
 
 func exeDir(name string) string {

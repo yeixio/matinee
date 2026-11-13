@@ -1034,7 +1034,7 @@
       "notSetUp": "Tidak tersedia: pelayan ini tiada pelari permainan dan emulator. Imej Docker memilikinya.",
       "open": "Cuba permainan",
       "emulators": "Emulator",
-      "emulatorsIntro": "Matinee disertakan dengan emulator. Anda boleh menambah sendiri: teras libretro yang dibina untuk {{platform}} (fail .so). Matinee bertanya permainan apa yang dimainkannya, dan menggunakannya untuk permainan itu sebelum yang terbina dalam.",
+      "emulatorsIntro": "Matinee disertakan dengan emulator. Anda boleh menambah sendiri: teras libretro yang dibina untuk {{platform}} (fail {{ext}}). Matinee bertanya permainan apa yang dimainkannya, dan menggunakannya untuk permainan itu sebelum yang terbina dalam.",
       "emulatorsTrust": "Emulator ialah program yang berjalan pada pelayan ini. Tambah hanya yang anda percayai.",
       "addEmulator": "Tambah emulator",
       "adding": "Menambah…",

@@ -24,6 +24,47 @@ cache="${FFMPEG_CACHE:-$root/.cache/ffmpeg}"
 mkdir -p "$cache"
 curl -fsSL "$FFMPEG_BASE/checksums.sha256" -o "$cache/checksums.sha256"
 
+# The game runner and emulators for Windows, built once by the "Game
+# emulators" and "Arcade emulator" workflows. They're x64 builds and go in
+# both installers: Windows on Arm runs them as it runs any x64 program. A
+# release fails without them (REQUIRE_GAMES=1); other builds leave games
+# out and say so.
+releases="https://github.com/yeixio/matinee/releases/download"
+games_tag="$(sh games/cores-tag.sh games)"
+mame_tag="mame-core-$(sed -n 's/^version=//p' games/mame.txt)-$(sed -n 's/^commit=//p' games/mame.txt | cut -c1-7)"
+mame_b="$(sed -n 's/^build=//p' games/mame.txt)"
+mame_tag="$mame_tag${mame_b:+-$mame_b}"
+games="$cache/games-$games_tag"
+if [ ! -f "$games/matinee-game-runner.exe" ]; then
+	rm -rf "$games" "$games.tmp"
+	mkdir -p "$games.tmp"
+	f=matinee-games-windows-amd64.tar.xz
+	if curl -fsSL -o "$cache/$f" "$releases/$games_tag/$f" &&
+		curl -fsSL -o "$cache/games-SHA256SUMS" "$releases/$games_tag/SHA256SUMS"; then
+		(cd "$cache" && grep " $f\$" games-SHA256SUMS | sha256sum -c -)
+		tar -xJf "$cache/$f" -C "$games.tmp"
+		m=mame_libretro-windows-amd64.so.xz
+		if curl -fsSL -o "$cache/$m" "$releases/$mame_tag/$m" &&
+			curl -fsSL -o "$cache/mame-SHA256SUMS" "$releases/$mame_tag/SHA256SUMS"; then
+			(cd "$cache" && grep " $m\$" mame-SHA256SUMS | sha256sum -c -)
+			xz -d -c "$cache/$m" > "$games.tmp/cores/mame_libretro.so"
+			curl -fsSL -o "$games.tmp/licenses/mame.txt" "$releases/$mame_tag/mame-COPYING.txt"
+		elif [ -n "${REQUIRE_GAMES:-}" ]; then
+			echo "no Windows arcade emulator in $mame_tag" >&2
+			exit 1
+		else
+			echo "no Windows arcade emulator in $mame_tag: packaging without it"
+		fi
+		mv "$games.tmp" "$games"
+	elif [ -n "${REQUIRE_GAMES:-}" ]; then
+		echo "no $games_tag release with Windows emulators" >&2
+		exit 1
+	else
+		rm -rf "$games.tmp"
+		echo "no $games_tag release with Windows emulators: packaging without games"
+	fi
+fi
+
 sign=""
 if [ -n "${WINDOWS_SIGNING:-}" ]; then
 	sign="$root/scripts/sign-windows.sh"
@@ -74,6 +115,9 @@ for arch in ${ARCHES:-x64 arm64}; do
 	TXT
 	rm -rf "$stage/unzip"
 	cp LICENSE "$stage/LICENSE.txt"
+	if [ -d "$games" ]; then
+		cp -R "$games" "$stage/games"
+	fi
 
 	if [ -n "$sign" ]; then
 		"$sign" "$stage/matinee.exe" "$stage/matinee-tray.exe"

@@ -38,11 +38,9 @@
 // When stdin closes, the save is written and the runner exits.
 
 #define _GNU_SOURCE
-#include <dlfcn.h>
 #include <errno.h>
 #include <fcntl.h>
 #include <math.h>
-#include <poll.h>
 #include <stdarg.h>
 #include <stdbool.h>
 #include <stdint.h>
@@ -51,7 +49,40 @@
 #include <string.h>
 #include <sys/stat.h>
 #include <time.h>
+
+#ifdef _WIN32
+// Windows has no dlopen, poll or clock_nanosleep: these stand in for them.
+#include <io.h>
+#include <windows.h>
+
+#define RTLD_NOW 0
+#define RTLD_LOCAL 0
+static void *dlopen(const char *path, int flags) {
+  (void)flags;
+  // Look for the emulator's own DLLs next to it, not only next to the runner.
+  return (void *)LoadLibraryExA(path, NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
+}
+static void *dlsym(void *lib, const char *name) { return (void *)GetProcAddress((HMODULE)lib, name); }
+static const char *dlerror(void) {
+  static char msg[512];
+  DWORD err = GetLastError();
+  DWORD n = FormatMessageA(FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, NULL, err, 0, msg, sizeof msg, NULL);
+  while (n > 0 && (msg[n - 1] == '\r' || msg[n - 1] == '\n' || msg[n - 1] == ' ')) msg[--n] = 0;
+  if (!n) snprintf(msg, sizeof msg, "error %lu", (unsigned long)err);
+  return msg;
+}
+#define fsync _commit
+#define unlink _unlink
+// rename won't replace a file on Windows; MoveFileEx will.
+static int replace_file(const char *from, const char *to) {
+  return MoveFileExA(from, to, MOVEFILE_REPLACE_EXISTING | MOVEFILE_WRITE_THROUGH) ? 0 : -1;
+}
+#else
+#include <dlfcn.h>
+#include <poll.h>
 #include <unistd.h>
+#define replace_file rename
+#endif
 
 #include "libretro.h"
 
@@ -98,7 +129,11 @@ static int out = 1;
 static void write_all(const void *p, size_t n) {
   const uint8_t *b = p;
   while (n > 0) {
+#ifdef _WIN32
+    int w = _write(out, b, n > 1 << 30 ? 1 << 30 : (unsigned)n);
+#else
     ssize_t w = write(out, b, n);
+#endif
     if (w < 0) {
       if (errno == EINTR) continue;
       exit(0);  // Matinee went away: nothing left to play for
@@ -356,11 +391,23 @@ static bool read_input(void) {
   static uint8_t buf[256];
   static size_t have;
   for (;;) {
+#ifdef _WIN32
+    // Matinee's end of stdin is a pipe: peek so the read never waits.
+    DWORD avail = 0;
+    if (!PeekNamedPipe((HANDLE)_get_osfhandle(0), NULL, 0, NULL, &avail, NULL))
+      return GetLastError() != ERROR_BROKEN_PIPE;  // broken: Matinee closed it
+    if (avail == 0) return true;
+    DWORD want = (DWORD)(sizeof buf - have);
+    int n = _read(0, buf + have, avail < want ? avail : want);
+    if (n == 0) return false;
+    if (n < 0) return errno == EINTR || errno == EAGAIN;
+#else
     struct pollfd p = {.fd = 0, .events = POLLIN};
     if (poll(&p, 1, 0) <= 0) return true;
     ssize_t n = read(0, buf + have, sizeof buf - have);
     if (n == 0) return false;
     if (n < 0) return errno == EINTR || errno == EAGAIN;
+#endif
     have += (size_t)n;
     size_t i = 0;
     for (; i + 4 <= have; i += 4) {
@@ -409,7 +456,7 @@ static void write_save(void) {
   bool ok = fwrite(mem, 1, n, f) == n;
   ok = fflush(f) == 0 && fsync(fileno(f)) == 0 && ok;
   fclose(f);
-  if (!ok || rename(tmp, save_path) != 0) {
+  if (!ok || replace_file(tmp, save_path) != 0) {
     unlink(tmp);
     return;
   }
@@ -449,13 +496,25 @@ static uint8_t *read_file(const char *path, size_t *len) {
 }
 
 static double now(void) {
+#ifdef _WIN32
+  static LARGE_INTEGER freq;
+  LARGE_INTEGER c;
+  if (!freq.QuadPart) QueryPerformanceFrequency(&freq);
+  QueryPerformanceCounter(&c);
+  return (double)c.QuadPart / (double)freq.QuadPart;
+#else
   struct timespec t;
   clock_gettime(CLOCK_MONOTONIC, &t);
   return (double)t.tv_sec + (double)t.tv_nsec / 1e9;
+#endif
 }
 
 static void sleep_until(double t) {
-#ifdef __APPLE__
+#ifdef _WIN32
+  // Whole milliseconds: timeBeginPeriod(1) in main makes Sleep that precise.
+  double left = t - now();
+  if (left >= 0.001) Sleep((DWORD)(left * 1000));
+#elif defined(__APPLE__)
   /* macOS has no clock_nanosleep: sleep for what's left instead. */
   double left = t - now();
   if (left <= 0) return;
@@ -527,10 +586,19 @@ int main(int argc, char **argv) {
   const char *core_path = argv[1], *game = argv[2];
   save_dir = argv[3];
   system_dir = argv[4];
+#ifdef _WIN32
+  _setmode(0, _O_BINARY);
+  _setmode(1, _O_BINARY);
+  timeBeginPeriod(1);
+  out = _dup(1);
+  if (out < 0 || _dup2(2, 1) != 0) out = 1;
+  else _setmode(out, _O_BINARY);
+#else
   fcntl(0, F_SETFL, fcntl(0, F_GETFL) | O_NONBLOCK);
   out = dup(1);
   if (out < 0 || dup2(2, 1) < 0) out = 1;
   else fcntl(out, F_SETFD, FD_CLOEXEC);
+#endif
 
   void *lib = dlopen(core_path, RTLD_NOW | RTLD_LOCAL);
   if (!lib) fail("couldn't load the emulator: %s", dlerror());
@@ -572,8 +640,9 @@ int main(int argc, char **argv) {
       info.data = data;
       info.size = len;
     }
-    const char *base = strrchr(game, '/');
-    base = base ? base + 1 : game;
+    const char *base = game;
+    for (const char *c = game; *c; c++)
+      if (*c == '/' || *c == '\\') base = c + 1;
     snprintf(save_path, sizeof save_path, "%s/%s.srm", save_dir, base);
   }
   if (!core.load_game(strcmp(game, "-") != 0 ? &info : NULL)) fail("the emulator couldn't start this game");

@@ -9,6 +9,8 @@
 # HOST cross-compiles, e.g. HOST=aarch64-linux-gnu with that gcc installed.
 # On a Mac it builds for that Mac's CPU with its own compiler; the cores
 # keep the .so name there too, so the server finds them the same way.
+# HOST=x86_64-w64-mingw32 builds for Windows (the runner is then
+# matinee-game-runner.exe, and the cores, .dll files, keep the .so name too).
 # KEEP_GOING=1 leaves out an emulator that doesn't build instead of failing.
 set -eu
 mkdir -p "${1:?usage: build.sh OUT}"
@@ -20,6 +22,11 @@ if [ "$os" = Darwin ]; then
 	cc=clang cxx=clang++ strip=strip platform=osx
 	jobs=$(sysctl -n hw.ncpu)
 	runner_libs="-ldl -lm"
+elif echo "$host" | grep -q mingw; then
+	os=Windows
+	cc=$host-gcc cxx=$host-g++ strip=$host-strip platform=win
+	jobs=$(nproc 2>/dev/null || echo 4)
+	runner_libs="-lwinmm -static"
 else
 	cc=${host:+$host-}gcc cxx=${host:+$host-}g++ strip=${host:+$host-}strip platform=unix
 	jobs=$(nproc 2>/dev/null || echo 4)
@@ -29,7 +36,9 @@ fi
 mkdir -p "$out/cores" "$out/licenses"
 
 # shellcheck disable=SC2086 # separate flags
-"$cc" -O2 -Wall -o "$out/matinee-game-runner" "$here/runner/runner.c" $runner_libs
+runner=matinee-game-runner
+[ "$os" = Windows ] && runner=matinee-game-runner.exe
+"$cc" -O2 -Wall -o "$out/$runner" "$here/runner/runner.c" $runner_libs
 "$cc" -O2 -Wall -shared -fPIC -o "$out/cores/lagtest.so" "$here/testcore/testcore.c"
 failed=""
 
@@ -99,6 +108,7 @@ while read -r name repo commit how vars <&3; do
 		fi
 		lib="$mk/${name}_libretro.so"
 		[ -f "$lib" ] || lib="$mk/${name}_libretro.dylib"
+		[ -f "$lib" ] || lib="$mk/${name}_libretro.dll"
 		cp "$lib" "$out/cores/${name}_libretro.so"
 		;;
 	cmake)
@@ -108,7 +118,10 @@ while read -r name repo commit how vars <&3; do
 			-DUSE_EPOXY=OFF -DUSE_DISCORD_RPC=OFF -DUSE_LUA=OFF -DUSE_JSON_C=OFF -DENABLE_SCRIPTING=OFF -DENABLE_DEBUGGERS=OFF \
 			-DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER="$cc" -DCMAKE_CXX_COMPILER="$cxx" \
 			-DCMAKE_POLICY_VERSION_MINIMUM=3.5
-		if [ -n "$host" ]; then
+		if [ "$os" = Windows ]; then
+			set -- "$@" -DCMAKE_SYSTEM_NAME=Windows -DCMAKE_SYSTEM_PROCESSOR="${host%%-*}" \
+				-DCMAKE_SHARED_LINKER_FLAGS="-static-libgcc -static-libstdc++ -static"
+		elif [ -n "$host" ]; then
 			set -- "$@" -DCMAKE_SYSTEM_NAME=Linux -DCMAKE_SYSTEM_PROCESSOR="${host%%-*}"
 		fi
 		if ! { cmake -S "$src" -B "$src/build" "$@" >"$work/$name.log" 2>&1 &&
@@ -118,6 +131,7 @@ while read -r name repo commit how vars <&3; do
 		fi
 		lib="$src/build/${name}_libretro.so"
 		[ -f "$lib" ] || lib="$src/build/${name}_libretro.dylib"
+		[ -f "$lib" ] || lib="$src/build/${name}_libretro.dll"
 		cp "$lib" "$out/cores/${name}_libretro.so"
 		;;
 	esac
@@ -134,7 +148,7 @@ while read -r name repo commit how vars <&3; do
 	fi
 	# Built for this computer, the runner can check it loads and says
 	# which games it plays.
-	if [ -z "$host" ] && ! "$out/matinee-game-runner" --info "$out/cores/${name}_libretro.so" >"$work/$name.log" 2>&1; then
+	if [ -z "$host" ] && ! "$out/$runner" --info "$out/cores/${name}_libretro.so" >"$work/$name.log" 2>&1; then
 		broke "$name" 20
 		continue
 	fi
