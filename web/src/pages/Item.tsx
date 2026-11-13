@@ -6,6 +6,7 @@ import { api, pendingRefetch, type Item, type ItemDetail, type User } from '../a
 import { ItemQuality, ReportProblem } from '../components/Arr'
 import { OtherCopies } from '../components/BoxOffice'
 import { Artwork } from '../components/Artwork'
+import { AddEmulatorButton } from '../components/GameStreamingSettings'
 import { FileDetailsButton, Languages, QualityBadges } from '../components/MediaInfo'
 import { PosterGrid } from '../components/Card'
 import { AddToCollectionButton } from '../components/Collections'
@@ -322,20 +323,21 @@ function EpisodeList({ items }: { items: Item[] }) {
 // for an admin, and how, in the guide.
 function NoEmulator({ item, user }: { item: Item; user?: User }) {
   const { t } = useTranslation()
+  const qc = useQueryClient()
   const system = item.facts?.find((f) => f.label === 'system')?.value
   return (
     <div className="flex max-w-3xl items-start gap-2 rounded-lg border border-line/60 bg-surface/50 px-3 py-2 text-sm text-text/85">
       <Info className="mt-0.5 size-4 shrink-0 text-accent" />
       <div className="space-y-1">
         <p>{system ? t('games.noEmulatorFor', { system }) : t('games.noEmulator')}</p>
+        {user?.isAdmin && (
+          <div className="space-y-1 pt-1">
+            <AddEmulatorButton onAdded={() => qc.invalidateQueries({ queryKey: ['item', item.id] })} />
+            <p className="text-muted">{t('settings.games.emulatorsTrust')}</p>
+          </div>
+        )}
         <p className="flex flex-wrap gap-x-4 gap-y-1">
-          {user?.isAdmin ? (
-            <Link to="/settings/streaming#games" className="text-accent hover:underline">
-              {t('games.addEmulator')}
-            </Link>
-          ) : (
-            <span className="text-muted">{t('games.askAdminEmulator')}</span>
-          )}
+          {!user?.isAdmin && <span className="text-muted">{t('games.askAdminEmulator')}</span>}
           <a href={emulatorGuide} target="_blank" rel="noreferrer" className="text-accent hover:underline">
             {t('games.emulatorGuide')}
           </a>

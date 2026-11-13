@@ -158,6 +158,10 @@ You can add any emulator that's a **libretro core**, for a system Matinee doesn'
 2. Unzip it, and in **Settings → Streaming → Games → Emulators** press **Add an emulator** and pick the file.
 3. Matinee loads it to ask which files it plays. If that works it's added, listed with the files it plays, and those games play with it from then on, ahead of a built-in emulator for the same files. If it doesn't, Matinee says why (built for another kind of computer, say) and doesn't keep it.
 
+<!-- since: v0.2.7 -->
+You can also add one straight from a game's page: a game Matinee can't play yet says so, and admins get an **Add an emulator** button right there. Once the emulator is added, the game's **Play** button appears.
+<!-- /since -->
+
 An emulator is a program that runs on your server, so add only ones you trust, such as libretro's own builds. Each runs in its own process like the built-in ones.
 
 You can also copy cores into `games/cores` in Matinee's data folder by hand; Matinee picks them up the next time it lists games. To remove one, press the bin next to it, or delete the file.
