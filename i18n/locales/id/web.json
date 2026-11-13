@@ -1034,7 +1034,7 @@
       "notSetUp": "Tidak tersedia: server ini tidak punya pemutar game dan emulator. Image Docker memilikinya.",
       "open": "Coba sebuah game",
       "emulators": "Emulator",
-      "emulatorsIntro": "Matinee dilengkapi emulator. Kamu bisa menambahkan milikmu sendiri: core libretro yang dibuat untuk {{platform}} (file .so). Matinee menanyakan game apa yang bisa dimainkannya, lalu memakainya untuk game itu sebelum emulator bawaan.",
+      "emulatorsIntro": "Matinee dilengkapi emulator. Kamu bisa menambahkan milikmu sendiri: core libretro yang dibuat untuk {{platform}} (file {{ext}}). Matinee menanyakan game apa yang bisa dimainkannya, lalu memakainya untuk game itu sebelum emulator bawaan.",
       "emulatorsTrust": "Emulator adalah program yang berjalan di server ini. Tambahkan hanya yang kamu percayai.",
       "addEmulator": "Tambah emulator",
       "adding": "Menambahkan…",

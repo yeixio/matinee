@@ -1040,7 +1040,7 @@
       "notSetUp": "Not available: this server doesn't have the game runner and emulators. The Docker image has them.",
       "open": "Try playing a game",
       "emulators": "Emulators",
-      "emulatorsIntro": "Matinee comes with emulators. You can add your own: a libretro core built for {{platform}} (a .so file). Matinee asks it which games it plays, and it plays them ahead of the built-in ones.",
+      "emulatorsIntro": "Matinee comes with emulators. You can add your own: a libretro core built for {{platform}} (a {{ext}} file). Matinee asks it which games it plays, and it plays them ahead of the built-in ones.",
       "emulatorsTrust": "An emulator is a program that runs on this server. Only add one you trust.",
       "addEmulator": "Add an emulator",
       "adding": "Adding…",

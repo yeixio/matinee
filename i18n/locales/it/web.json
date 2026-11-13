@@ -1046,7 +1046,7 @@
       "notSetUp": "Non disponibile: questo server non ha il runner dei giochi e gli emulatori. L'immagine Docker li include.",
       "open": "Prova un gioco",
       "emulators": "Emulatori",
-      "emulatorsIntro": "Matinee include degli emulatori. Puoi aggiungerne di tuoi: un core libretro compilato per {{platform}} (un file .so). Matinee gli chiede quali giochi supporta e lo usa per quelli prima di quelli integrati.",
+      "emulatorsIntro": "Matinee include degli emulatori. Puoi aggiungerne di tuoi: un core libretro compilato per {{platform}} (un file {{ext}}). Matinee gli chiede quali giochi supporta e lo usa per quelli prima di quelli integrati.",
       "emulatorsTrust": "Un emulatore è un programma che gira su questo server. Aggiungi solo emulatori di cui ti fidi.",
       "addEmulator": "Aggiungi un emulatore",
       "adding": "Aggiunta…",

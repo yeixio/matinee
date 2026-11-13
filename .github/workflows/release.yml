@@ -286,6 +286,7 @@ jobs:
           AZURE_SIGNING_ENDPOINT: ${{ vars.AZURE_SIGNING_ENDPOINT }}
           AZURE_SIGNING_ACCOUNT: ${{ vars.AZURE_SIGNING_ACCOUNT }}
           AZURE_SIGNING_PROFILE: ${{ vars.AZURE_SIGNING_PROFILE }}
+          REQUIRE_GAMES: "1"
         run: VERSION="${TAG#v}" scripts/package-windows.sh
       - uses: actions/upload-artifact@v4
         with:

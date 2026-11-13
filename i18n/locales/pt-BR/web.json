@@ -1046,7 +1046,7 @@
       "notSetUp": "Indisponível: este servidor não tem o executor de jogos e os emuladores. A imagem Docker tem.",
       "open": "Experimentar um jogo",
       "emulators": "Emuladores",
-      "emulatorsIntro": "O Matinee vem com emuladores. Você pode adicionar os seus: um core libretro compilado para {{platform}} (um arquivo .so). O Matinee pergunta quais jogos ele roda e o usa para eles antes dos embutidos.",
+      "emulatorsIntro": "O Matinee vem com emuladores. Você pode adicionar os seus: um core libretro compilado para {{platform}} (um arquivo {{ext}}). O Matinee pergunta quais jogos ele roda e o usa para eles antes dos embutidos.",
       "emulatorsTrust": "Um emulador é um programa que roda neste servidor. Adicione só um em que você confia.",
       "addEmulator": "Adicionar um emulador",
       "adding": "Adicionando…",

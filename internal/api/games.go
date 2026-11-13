@@ -281,15 +281,29 @@ func (s *Server) stopGame(w http.ResponseWriter, r *http.Request) {
 // corePlatform is the kind of emulator file this server runs, for telling
 // an admin which to download: libretro's own names for Linux builds.
 func corePlatform() string {
-	switch runtime.GOARCH {
-	case "amd64":
-		return "Linux x86_64"
-	case "arm64":
-		return "Linux aarch64"
-	case "arm":
-		return "Linux armhf"
+	os := map[string]string{"darwin": "macOS", "windows": "Windows"}[runtime.GOOS]
+	if os == "" {
+		os = "Linux"
 	}
-	return "Linux " + runtime.GOARCH
+	arch := map[string]string{"amd64": "x86_64", "arm64": "aarch64", "arm": "armhf"}[runtime.GOARCH]
+	if os == "macOS" && runtime.GOARCH == "arm64" {
+		arch = "arm64"
+	}
+	if arch == "" {
+		arch = runtime.GOARCH
+	}
+	return os + " " + arch
+}
+
+// coreExt is how an emulator built for this server's system ends.
+func coreExt() string {
+	switch runtime.GOOS {
+	case "windows":
+		return ".dll"
+	case "darwin":
+		return ".dylib"
+	}
+	return ".so"
 }
 
 func (s *Server) gameEmulators(w http.ResponseWriter, r *http.Request) {
@@ -297,7 +311,7 @@ func (s *Server) gameEmulators(w http.ResponseWriter, r *http.Request) {
 		writeError(w, http.StatusNotFound, errNoGames)
 		return
 	}
-	writeJSON(w, http.StatusOK, map[string]any{"emulators": s.Games.Emulators(), "platform": corePlatform()})
+	writeJSON(w, http.StatusOK, map[string]any{"emulators": s.Games.Emulators(), "platform": corePlatform(), "ext": coreExt()})
 }
 
 // addGameEmulator takes an emulator an admin uploaded: the file itself as

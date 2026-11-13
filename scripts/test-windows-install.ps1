@@ -56,6 +56,20 @@ foreach ($f in "matinee.exe", "matinee-tray.exe", "uninstall.exe", "LICENSE.txt"
 # Read all of its output: stopping after the first line would end ffmpeg early.
 $out = & (Join-Path $dir "ffmpeg\ffmpeg.exe") -hide_banner -version
 Check ($LASTEXITCODE -eq 0) "bundled ffmpeg runs: $($out | Select-Object -First 1)"
+
+# Games: when the installer has them, every emulator must load in the runner
+# on real Windows (an x64 build, so Windows on Arm runs it emulated).
+$runner = Join-Path $dir "games\matinee-game-runner.exe"
+if (Test-Path $runner) {
+  $cores = Get-ChildItem (Join-Path $dir "games\cores") -Filter *.so
+  foreach ($c in $cores) {
+    $info = & $runner --info $c.FullName 2>&1
+    Check ($LASTEXITCODE -eq 0) "emulator $($c.Name) loads: $info"
+  }
+  Check ($cores.Count -gt 10) "$($cores.Count) emulators installed"
+} else {
+  Write-Host "::warning::this installer has no games (no Windows emulators published yet)"
+}
 Check (Test-Path "$env:ProgramData\Microsoft\Windows\Start Menu\Programs\Matinee.lnk") "Start menu shortcut"
 $rule = Get-NetFirewallRule -DisplayName "Matinee" -ErrorAction SilentlyContinue
 Check ($null -ne $rule) "firewall rule"

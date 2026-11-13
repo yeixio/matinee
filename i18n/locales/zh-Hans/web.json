@@ -1034,7 +1034,7 @@
       "notSetUp": "不可用：此服务器没有游戏运行器和模拟器。Docker 镜像中有。",
       "open": "试玩游戏",
       "emulators": "模拟器",
-      "emulatorsIntro": "Matinee 自带模拟器。你也可以添加自己的：为 {{platform}} 构建的 libretro 核心（.so 文件）。Matinee 会询问它能玩哪些游戏，并在这些游戏上优先于内置模拟器使用它。",
+      "emulatorsIntro": "Matinee 自带模拟器。你也可以添加自己的：为 {{platform}} 构建的 libretro 核心（{{ext}} 文件）。Matinee 会询问它能玩哪些游戏，并在这些游戏上优先于内置模拟器使用它。",
       "emulatorsTrust": "模拟器是在这台服务器上运行的程序。只添加你信任的。",
       "addEmulator": "添加模拟器",
       "adding": "正在添加…",

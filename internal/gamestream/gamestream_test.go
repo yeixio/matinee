@@ -341,6 +341,15 @@ func TestUserEmulators(t *testing.T) {
 	if _, ok := m.SystemFor("/games/Thing.tst"); ok {
 		t.Fatal("still plays .tst")
 	}
+
+	// A Mac or Windows emulator's .dylib or .dll is kept as .so, like the
+	// built-in ones.
+	f, _ = os.Open(filepath.Join(built, "custom_libretro.so"))
+	e, err = m.AddEmulator(context.Background(), "mac_libretro.dylib", f)
+	f.Close()
+	if err != nil || e.File != "mac_libretro.so" {
+		t.Fatalf("added %+v: %v", e, err)
+	}
 }
 
 // A zip of a disc unpacks every track beside the .cue, which is played.

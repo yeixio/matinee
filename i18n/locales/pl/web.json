@@ -1052,7 +1052,7 @@
       "notSetUp": "Niedostępne: na tym serwerze brak programu do gier i emulatorów. Obraz Docker je ma.",
       "open": "Wypróbuj grę",
       "emulators": "Emulatory",
-      "emulatorsIntro": "Matinee ma wbudowane emulatory. Możesz dodać własne: rdzeń libretro zbudowany dla {{platform}} (plik .so). Matinee pyta go, jakie gry obsługuje, i używa go do nich przed wbudowanymi.",
+      "emulatorsIntro": "Matinee ma wbudowane emulatory. Możesz dodać własne: rdzeń libretro zbudowany dla {{platform}} (plik {{ext}}). Matinee pyta go, jakie gry obsługuje, i używa go do nich przed wbudowanymi.",
       "emulatorsTrust": "Emulator to program działający na tym serwerze. Dodawaj tylko takie, którym ufasz.",
       "addEmulator": "Dodaj emulator",
       "adding": "Dodawanie…",
