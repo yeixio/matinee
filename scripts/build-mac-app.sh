@@ -54,6 +54,22 @@ if curl -fsSL --retry 3 -o "$work/$f" "$base/$f" && curl -fsSL --retry 3 -o "$wo
 	(cd "$work" && grep " $f\$" games-SHA256SUMS | shasum -a 256 -c -)
 	mkdir -p "$contents/Resources/games"
 	tar -xJf "$work/$f" -C "$contents/Resources/games"
+	# The arcade emulator, built on its own (mame-core.yml).
+	mame_v="$(sed -n 's/^version=//p' games/mame.txt)"
+	mame_c="$(sed -n 's/^commit=//p' games/mame.txt | cut -c1-7)"
+	mame_b="$(sed -n 's/^build=//p' games/mame.txt)"
+	mame="https://github.com/yeixio/matinee/releases/download/mame-core-$mame_v-$mame_c${mame_b:+-$mame_b}"
+	m=mame_libretro-darwin-arm64.so.xz
+	if curl -fsSL --retry 3 -o "$work/$m" "$mame/$m" && curl -fsSL --retry 3 -o "$work/mame-SHA256SUMS" "$mame/SHA256SUMS"; then
+		(cd "$work" && grep " $m\$" mame-SHA256SUMS | shasum -a 256 -c -)
+		xz -d -c "$work/$m" > "$contents/Resources/games/cores/mame_libretro.so"
+		curl -fsSL --retry 3 -o "$contents/Resources/games/licenses/mame.txt" "$mame/mame-COPYING.txt"
+	elif [ -n "${REQUIRE_GAMES:-}" ]; then
+		echo "::error::no Mac arcade emulator in its release"
+		exit 1
+	else
+		echo "::notice::No Mac arcade emulator yet: the app is built without it."
+	fi
 	ls "$contents/Resources/games/cores"
 elif [ -n "${REQUIRE_GAMES:-}" ]; then
 	echo "::error::no $games_tag release with Mac emulators"
