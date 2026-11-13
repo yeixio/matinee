@@ -49,9 +49,10 @@ jobs:
     needs: version
     if: needs.version.outputs.exists != 'true'
     runs-on: ${{ matrix.runner }}
-    # The server image's Debian: a core built on a newer system needs a
-    # newer glibc than the image has, and won't load.
-    container: debian:trixie
+    # An older system than any Matinee runs on (glibc 2.35): a core built
+    # on a newer one needs a newer glibc and won't load. It also runs on the
+    # Linux packages' Debian 12+, Ubuntu 22.04+ and Fedora.
+    container: ubuntu:22.04
     timeout-minutes: 345
     strategy:
       fail-fast: false
@@ -63,7 +64,7 @@ jobs:
       - name: Get build tools
         run: |
           apt-get update -q
-          apt-get install -y -q --no-install-recommends build-essential git ca-certificates curl python3 xz-utils binutils
+          DEBIAN_FRONTEND=noninteractive apt-get install -y -q --no-install-recommends build-essential git ca-certificates curl python3 xz-utils binutils
       - uses: actions/checkout@v4
       - name: Get MAME
         run: |

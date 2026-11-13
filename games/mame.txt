@@ -3,7 +3,7 @@
 # it once per change here and publishes it as the release
 # mame-core-<version>-<first 7 of commit>-<build>, which the Dockerfile
 # downloads. Raise build to publish the same MAME built again. It's built on
-# the image's Debian, so it needs no newer glibc than the image has.
+# Ubuntu 22.04, so it needs no newer glibc than any system Matinee runs on.
 # MAME is GPL-2.0-or-later; its licence ships in the image beside it. Keep
 # the version to the one Matinee's arcade list is for (internal/gamedat):
 # ROM sets are made for one MAME version.
