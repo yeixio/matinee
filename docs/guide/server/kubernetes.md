@@ -129,6 +129,19 @@ Add your own under `metrics.prometheusRule.extraRules`.
 `metrics.grafanaDashboard.enabled` adds a Grafana dashboard, **Matinee / Playback and resources**, for Grafana's dashboard sidecar to pick up. Set `namespace` to where the sidecar looks (often `monitoring`). It shows how long plays and seeks take to start, buffering, FFmpeg processes against transcodes, memory, goroutines, open files and CPU.
 <!-- /since -->
 
+<!-- since: v0.2.7 -->
+### AppArmor
+
+Some kernel updates break the default AppArmor profile that the container runtime gives every container: programs in a container can no longer send each other signals. The bundled PostgreSQL then never finishes starting, its log says `could not signal for checkpoint: Permission denied`, and Matinee waits for its database. Until the node's kernel is fixed (or you boot the previous one), run Matinee's pods without that profile:
+
+```yaml
+appArmorProfile:
+  type: Unconfined
+```
+
+It applies to the server, discovery and the bundled PostgreSQL. Leave it empty (the default) to keep the node's own profile.
+<!-- /since -->
+
 ## Replicas
 
 Run one replica for now: a transcode in progress lives in the pod that started it. More replicas work with `service.sessionAffinity: ClientIP`, so each device keeps talking to the same pod.

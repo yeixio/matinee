@@ -55,6 +55,9 @@ spec:
       {{- if $limits }}
       {{- $_ := set $resources "limits" $limits }}
       {{- end }}
+      {{- with .Values.appArmorProfile }}
+      {{- $_ := set $podSecurity "appArmorProfile" . }}
+      {{- end }}
       securityContext:
         {{- toYaml $podSecurity | nindent 8 }}
       # Room for the drain delay and requests in flight (see shutdown in values.yaml).
