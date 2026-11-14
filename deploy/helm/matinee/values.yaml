@@ -285,6 +285,13 @@ podSecurityContext:
   fsGroup: 1000
   runAsNonRoot: true
 
+# The AppArmor profile for every Matinee pod (server, discovery and the
+# bundled PostgreSQL). Empty keeps the node's default. Set
+# {type: Unconfined} on a node whose kernel and default profile stop
+# programs in a container from signalling each other (PostgreSQL then fails
+# with "could not signal for checkpoint: Permission denied").
+appArmorProfile: {}
+
 securityContext:
   allowPrivilegeEscalation: false
   readOnlyRootFilesystem: true

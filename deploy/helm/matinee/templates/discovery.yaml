@@ -27,8 +27,12 @@ spec:
     spec:
       hostNetwork: true
       dnsPolicy: ClusterFirstWithHostNet
+      {{- $podSecurity := deepCopy .Values.podSecurityContext }}
+      {{- with .Values.appArmorProfile }}
+      {{- $_ := set $podSecurity "appArmorProfile" . }}
+      {{- end }}
       securityContext:
-        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+        {{- toYaml $podSecurity | nindent 8 }}
       containers:
         - name: announce
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"

@@ -44,6 +44,10 @@ spec:
         runAsGroup: 70
         runAsNonRoot: true
         fsGroup: 70
+        {{- with .Values.appArmorProfile }}
+        appArmorProfile:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
       containers:
         - name: postgresql
           image: "{{ .Values.postgresql.image.repository }}:{{ .Values.postgresql.image.tag }}"
