@@ -116,3 +116,15 @@ To pick another, open **Settings → Server health → Time zone** and choose on
 ## SQLite or PostgreSQL?
 
 SQLite is the default and needs nothing else. It's right for a single machine or a NAS, as long as the data folder is on a local disk. Use PostgreSQL on Kubernetes, or whenever the data would otherwise live on network storage, where SQLite's file locking isn't reliable.
+
+<!-- since: v0.2.7 -->
+### When PostgreSQL isn't answering
+
+If PostgreSQL is down, restarting, or on a machine that's off, Matinee doesn't give up. It keeps trying, a little less often each time (up to every 30 seconds), and opens as soon as the database answers. Nobody needs to restart it.
+
+While it waits, the web player shows **Matinee is waiting for its database** and checks again every few seconds, and the apps say the server isn't available yet. The server's log says `waiting for the database` with the reason on each try.
+
+On Kubernetes the server counts as alive but not ready while it waits (`/healthz` answers, `/readyz` doesn't), so it isn't restarted and gets no traffic until the database is back.
+
+Matinee only stops when waiting can't help: when PostgreSQL says the password or user name is wrong, or that the database doesn't exist. Fix `MATINEE_DATABASE_URL` and start it again.
+<!-- /since -->

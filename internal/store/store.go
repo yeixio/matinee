@@ -15,6 +15,7 @@ import (
 	"sync/atomic"
 	"time"
 
+	"github.com/jackc/pgx/v5/pgconn"
 	_ "github.com/jackc/pgx/v5/stdlib"
 	_ "modernc.org/sqlite"
 )
@@ -95,12 +96,19 @@ func OpenWith(dsn string, o Options) (*Store, error) {
 }
 
 // waitUntilReady pings conn until it answers or wait has passed, waiting a
-// little longer after each failure (1s, 2s, 4s, up to 10s). A PostgreSQL
-// server that restarts with Matinee, such as both pods being replaced at
-// once on Kubernetes, takes a few seconds to take connections, and giving
-// up at once made the server exit and crash-loop.
+// little longer after each failure (1s, 2s, 4s, up to 10s, or 30s when it
+// waits forever). A PostgreSQL server that restarts with Matinee, such as
+// both pods being replaced at once on Kubernetes, takes a few seconds to take
+// connections, and giving up at once made the server exit and crash-loop.
+// A negative wait keeps trying until the database answers, except for an
+// answer no retry changes, such as a wrong password (see permanent).
 func waitUntilReady(ctx context.Context, conn *sql.DB, wait time.Duration, waiting func(error, time.Duration)) error {
+	forever := wait < 0
 	deadline := time.Now().Add(wait)
+	longest := 10 * time.Second
+	if forever {
+		longest = 30 * time.Second
+	}
 	delay := time.Second
 	for {
 		pingCtx, cancel := context.WithTimeout(ctx, 5*time.Second)
@@ -109,14 +117,19 @@ func waitUntilReady(ctx context.Context, conn *sql.DB, wait time.Duration, waiti
 		if err == nil {
 			return nil
 		}
-		left := time.Until(deadline)
-		if left <= 0 {
-			if wait > 0 {
-				return fmt.Errorf("the database didn't answer for %s: %w", wait.Round(time.Second), err)
-			}
+		if permanent(err) {
 			return err
 		}
-		delay = min(delay, left)
+		left := time.Until(deadline)
+		if !forever {
+			if left <= 0 {
+				if wait > 0 {
+					return fmt.Errorf("the database didn't answer for %s: %w", wait.Round(time.Second), err)
+				}
+				return err
+			}
+			delay = min(delay, left)
+		}
 		if waiting != nil {
 			waiting(err, delay)
 		}
@@ -125,8 +138,25 @@ func waitUntilReady(ctx context.Context, conn *sql.DB, wait time.Duration, waiti
 			return ctx.Err()
 		case <-time.After(delay):
 		}
-		delay = min(delay*2, 10*time.Second)
+		delay = min(delay*2, longest)
 	}
+}
+
+// permanent says whether PostgreSQL answered in a way that trying again won't
+// change: the password or user is wrong, or the database doesn't exist. A
+// server that's down, starting or unreachable isn't permanent.
+func permanent(err error) bool {
+	var pg *pgconn.PgError
+	if !errors.As(err, &pg) {
+		return false
+	}
+	switch pg.Code {
+	case "28P01", // invalid_password
+		"28000", // invalid_authorization_specification
+		"3D000": // invalid_catalog_name (no such database)
+		return true
+	}
+	return false
 }
 
 // withoutJIT turns off PostgreSQL's JIT compiler for Matinee's connections,
