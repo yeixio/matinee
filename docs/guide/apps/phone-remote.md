@@ -10,6 +10,8 @@ The Matinee app on your phone or tablet can drive Matinee on your TV: move aroun
 
 It works with Matinee on Apple TV, Android TV, Google TV, Fire TV, Samsung and LG TVs. There's nothing to set up on the server, and nothing goes through anyone else's servers: your phone sends each press to your own Matinee server, which hands it to the TV.
 
+![The Remote in the phone app, controlling a TV that's playing a film (phone)](../images/app-phone-remote.webp)
+
 ## Open the remote
 
 1. Open Matinee on the TV.
