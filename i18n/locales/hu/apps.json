@@ -728,6 +728,19 @@
     "pcGamesHint": "A játékgazdán telepített Steam-játékok, annak videokártyáján futnak, és ide streamelődnek.",
     "pcGamesEmpty": "A játékgazdán még nincs telepített játék.",
     "steam": "Steam",
-    "steamHint": "A Steam Big Picture módja teljes képernyőn: válassz, játssz és lépj ki a kontrollerrel."
+    "steamHint": "A Steam Big Picture módja teljes képernyőn: válassz, játssz és lépj ki a kontrollerrel.",
+    "menuHint": "Nyomd meg a távirányító Vissza gombját a gépeléshez, egérhez és máshoz",
+    "typeText": "Szöveg beírása",
+    "typePassword": "Jelszó beírása",
+    "typeHere": "Írj ide, majd válaszd a Küldést",
+    "send": "Küldés",
+    "pressEnter": "Enter lenyomása",
+    "pressTab": "Tab lenyomása",
+    "backspace": "Backspace",
+    "mouseOn": "Kontroller használata egérként",
+    "mouseOff": "Kontroller használata kontrollerként",
+    "mouseHint": "A kontroller egér: a bal kar mozgatja, az alsó gomb kattint, a jobb gomb jobb kattint, a jobb kar görget.",
+    "backToGame": "Vissza a játékhoz",
+    "notTyped": "Nem sikerült beírni: {{chars}}"
   }
 }

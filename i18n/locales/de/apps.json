@@ -728,6 +728,19 @@
     "pcGamesHint": "Steam-Spiele auf deinem Spiele-Host, gespielt auf seiner Grafikkarte und hierher gestreamt.",
     "pcGamesEmpty": "Auf dem Spiele-Host sind noch keine Spiele installiert.",
     "steam": "Steam",
-    "steamHint": "Steams Big Picture im Vollbild: Spiele mit dem Controller auswählen, spielen und beenden."
+    "steamHint": "Steams Big Picture im Vollbild: Spiele mit dem Controller auswählen, spielen und beenden.",
+    "menuHint": "Drücke Zurück auf der Fernbedienung für Tippen, eine Maus und mehr",
+    "typeText": "Text tippen",
+    "typePassword": "Passwort tippen",
+    "typeHere": "Hier tippen, dann Senden wählen",
+    "send": "Senden",
+    "pressEnter": "Eingabe drücken",
+    "pressTab": "Tab drücken",
+    "backspace": "Rücktaste",
+    "mouseOn": "Controller als Maus verwenden",
+    "mouseOff": "Controller als Controller verwenden",
+    "mouseHint": "Der Controller ist eine Maus: Der linke Stick bewegt sie, die untere Taste klickt, die rechte Taste macht einen Rechtsklick und der rechte Stick scrollt.",
+    "backToGame": "Zurück zum Spiel",
+    "notTyped": "Konnte nicht tippen: {{chars}}"
   }
 }

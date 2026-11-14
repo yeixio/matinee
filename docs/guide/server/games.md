@@ -204,6 +204,18 @@ In the web app, your keyboard and mouse control PC games and Steam as they are, 
 The Matinee apps play PC games too, from app 1.0.42: on a TV, phone or tablet, **PC games** sits at the top of each Games library for admins, with **Steam** and each installed game. Play with a controller.
 <!-- /since -->
 
+<!-- since: v0.2.9 -->
+### Typing and a mouse on a TV
+
+Steam's sign-in and some PC games need a keyboard and a mouse. From app 1.0.44, press **Back** on the TV remote while a PC game plays (on a phone or tablet, the keypad button at the top) for a menu:
+
+- **Type text** and **Type a password** open the TV's own keyboard. Choose **Send** and what you typed is typed into the game. A phone set up as the TV's remote can type into it too.
+- **Press Enter**, **Press Tab** and **Backspace** press those keys.
+- **Use the controller as a mouse**: the left stick moves the pointer, the d-pad nudges it, the bottom button clicks, the right button right-clicks and the right stick scrolls. Choose **Use the controller as a controller** in the menu to go back.
+
+For example, to sign in to Steam: use the controller as a mouse to click the account name box, then **Type text** for your account name, **Press Tab**, **Type a password**, and **Press Enter**. If the sign-in QR code has expired, click it to get a new one.
+<!-- /since -->
+
 <!-- since: v0.2.7 -->
 **PC games** also sits at the top of each Games library, above the console games. If the game host is set up but isn't answering, PC games says why instead of disappearing, such as when the game host computer is off or `matinee-gamehost` isn't running.
 <!-- /since -->

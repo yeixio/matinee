@@ -735,6 +735,19 @@
     "pcGamesHint": "Les jeux Steam installés sur votre hôte de jeux, joués sur sa carte graphique et diffusés ici.",
     "pcGamesEmpty": "Aucun jeu n’est encore installé sur l’hôte de jeux.",
     "steam": "Steam",
-    "steamHint": "Big Picture de Steam en plein écran : choisissez, jouez et quittez les jeux à la manette."
+    "steamHint": "Big Picture de Steam en plein écran : choisissez, jouez et quittez les jeux à la manette.",
+    "menuHint": "Appuyez sur Retour de la télécommande pour taper, une souris et plus",
+    "typeText": "Taper du texte",
+    "typePassword": "Taper un mot de passe",
+    "typeHere": "Tapez ici, puis choisissez Envoyer",
+    "send": "Envoyer",
+    "pressEnter": "Appuyer sur Entrée",
+    "pressTab": "Appuyer sur Tab",
+    "backspace": "Retour arrière",
+    "mouseOn": "Utiliser la manette comme souris",
+    "mouseOff": "Utiliser la manette comme manette",
+    "mouseHint": "La manette est une souris : le stick gauche la déplace, le bouton du bas clique, celui de droite fait un clic droit et le stick droit fait défiler.",
+    "backToGame": "Retour au jeu",
+    "notTyped": "Impossible de taper : {{chars}}"
   }
 }

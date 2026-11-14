@@ -721,6 +721,19 @@
     "pcGamesHint": "游戏主机上安装的 Steam 游戏,在它的显卡上运行并串流到这里。",
     "pcGamesEmpty": "游戏主机上还没有安装游戏。",
     "steam": "Steam",
-    "steamHint": "全屏显示 Steam 的大屏幕模式:用手柄选择、游玩和退出游戏。"
+    "steamHint": "全屏显示 Steam 的大屏幕模式:用手柄选择、游玩和退出游戏。",
+    "menuHint": "按遥控器上的返回键可打字、用鼠标等",
+    "typeText": "输入文字",
+    "typePassword": "输入密码",
+    "typeHere": "在这里输入，然后选择发送",
+    "send": "发送",
+    "pressEnter": "按 Enter",
+    "pressTab": "按 Tab",
+    "backspace": "退格",
+    "mouseOn": "把手柄当鼠标用",
+    "mouseOff": "把手柄当手柄用",
+    "mouseHint": "手柄现在是鼠标：左摇杆移动，下方按钮点击，右侧按钮右键点击，右摇杆滚动。",
+    "backToGame": "回到游戏",
+    "notTyped": "无法输入：{{chars}}"
   }
 }

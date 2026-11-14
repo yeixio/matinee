@@ -735,6 +735,19 @@
     "pcGamesHint": "Jogos da Steam instalados no seu host de jogos, rodando na placa de vídeo dele e transmitidos para cá.",
     "pcGamesEmpty": "Ainda não há jogos instalados no host de jogos.",
     "steam": "Steam",
-    "steamHint": "Big Picture da Steam em tela cheia: escolha, jogue e saia dos jogos com o controle."
+    "steamHint": "Big Picture da Steam em tela cheia: escolha, jogue e saia dos jogos com o controle.",
+    "menuHint": "Aperte Voltar no controle remoto para digitar, usar um mouse e mais",
+    "typeText": "Digitar texto",
+    "typePassword": "Digitar uma senha",
+    "typeHere": "Digite aqui e escolha Enviar",
+    "send": "Enviar",
+    "pressEnter": "Apertar Enter",
+    "pressTab": "Apertar Tab",
+    "backspace": "Apagar",
+    "mouseOn": "Usar o controle como mouse",
+    "mouseOff": "Usar o controle como controle",
+    "mouseHint": "O controle é um mouse: o analógico esquerdo move, o botão de baixo clica, o da direita faz clique direito e o analógico direito rola.",
+    "backToGame": "Voltar ao jogo",
+    "notTyped": "Não foi possível digitar: {{chars}}"
   }
 }

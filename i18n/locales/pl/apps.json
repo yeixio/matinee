@@ -742,6 +742,19 @@
     "pcGamesHint": "Gry ze Steam zainstalowane na hoście gier, uruchamiane na jego karcie graficznej i przesyłane tutaj.",
     "pcGamesEmpty": "Na hoście gier nie ma jeszcze zainstalowanych gier.",
     "steam": "Steam",
-    "steamHint": "Big Picture ze Steam na pełnym ekranie: wybieraj, graj i wychodź z gier kontrolerem."
+    "steamHint": "Big Picture ze Steam na pełnym ekranie: wybieraj, graj i wychodź z gier kontrolerem.",
+    "menuHint": "Naciśnij Wstecz na pilocie, aby pisać, używać myszy i nie tylko",
+    "typeText": "Wpisz tekst",
+    "typePassword": "Wpisz hasło",
+    "typeHere": "Pisz tutaj, potem wybierz Wyślij",
+    "send": "Wyślij",
+    "pressEnter": "Naciśnij Enter",
+    "pressTab": "Naciśnij Tab",
+    "backspace": "Backspace",
+    "mouseOn": "Używaj kontrolera jako myszy",
+    "mouseOff": "Używaj kontrolera jako kontrolera",
+    "mouseHint": "Kontroler jest myszą: lewa gałka ją przesuwa, dolny przycisk klika, prawy klika prawym, a prawa gałka przewija.",
+    "backToGame": "Wróć do gry",
+    "notTyped": "Nie udało się wpisać: {{chars}}"
   }
 }

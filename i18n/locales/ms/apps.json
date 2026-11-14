@@ -721,6 +721,19 @@
     "pcGamesHint": "Permainan Steam yang dipasang pada hos permainan anda, dimainkan pada kad grafiknya dan distrim ke sini.",
     "pcGamesEmpty": "Belum ada permainan dipasang pada hos permainan.",
     "steam": "Steam",
-    "steamHint": "Big Picture Steam skrin penuh: pilih, main dan keluar permainan dengan pengawal."
+    "steamHint": "Big Picture Steam skrin penuh: pilih, main dan keluar permainan dengan pengawal.",
+    "menuHint": "Tekan Kembali pada alat kawalan jauh untuk menaip, tetikus dan banyak lagi",
+    "typeText": "Taip teks",
+    "typePassword": "Taip kata laluan",
+    "typeHere": "Taip di sini, kemudian pilih Hantar",
+    "send": "Hantar",
+    "pressEnter": "Tekan Enter",
+    "pressTab": "Tekan Tab",
+    "backspace": "Backspace",
+    "mouseOn": "Guna pengawal sebagai tetikus",
+    "mouseOff": "Guna pengawal sebagai pengawal",
+    "mouseHint": "Pengawal ialah tetikus: kayu kiri menggerakkannya, butang bawah mengklik, butang kanan klik kanan dan kayu kanan menatal.",
+    "backToGame": "Kembali ke permainan",
+    "notTyped": "Tidak dapat menaip: {{chars}}"
   }
 }

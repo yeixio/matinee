@@ -728,6 +728,19 @@
     "pcGamesHint": "Oyun sunucunda kurulu Steam oyunları, onun ekran kartında çalışır ve buraya aktarılır.",
     "pcGamesEmpty": "Oyun sunucusunda henüz kurulu oyun yok.",
     "steam": "Steam",
-    "steamHint": "Steam Big Picture tam ekran: oyunları kontrolcüyle seç, oyna ve kapat."
+    "steamHint": "Steam Big Picture tam ekran: oyunları kontrolcüyle seç, oyna ve kapat.",
+    "menuHint": "Yazmak, fare ve daha fazlası için kumandada Geri'ye bas",
+    "typeText": "Metin yaz",
+    "typePassword": "Parola yaz",
+    "typeHere": "Buraya yaz, sonra Gönder'i seç",
+    "send": "Gönder",
+    "pressEnter": "Enter'a bas",
+    "pressTab": "Tab'a bas",
+    "backspace": "Geri sil",
+    "mouseOn": "Oyun kumandasını fare olarak kullan",
+    "mouseOff": "Oyun kumandasını kumanda olarak kullan",
+    "mouseHint": "Kumanda bir fare: sol çubuk hareket ettirir, alt düğme tıklar, sağ düğme sağ tıklar, sağ çubuk kaydırır.",
+    "backToGame": "Oyuna dön",
+    "notTyped": "Yazılamadı: {{chars}}"
   }
 }

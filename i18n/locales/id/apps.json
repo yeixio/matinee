@@ -721,6 +721,19 @@
     "pcGamesHint": "Game Steam yang terpasang di host game, dimainkan di kartu grafisnya dan di-stream ke sini.",
     "pcGamesEmpty": "Belum ada game yang terpasang di host game.",
     "steam": "Steam",
-    "steamHint": "Big Picture Steam layar penuh: pilih, mainkan, dan keluar dari game dengan kontroler."
+    "steamHint": "Big Picture Steam layar penuh: pilih, mainkan, dan keluar dari game dengan kontroler.",
+    "menuHint": "Tekan Kembali di remote untuk mengetik, mouse, dan lainnya",
+    "typeText": "Ketik teks",
+    "typePassword": "Ketik kata sandi",
+    "typeHere": "Ketik di sini, lalu pilih Kirim",
+    "send": "Kirim",
+    "pressEnter": "Tekan Enter",
+    "pressTab": "Tekan Tab",
+    "backspace": "Backspace",
+    "mouseOn": "Pakai kontroler sebagai mouse",
+    "mouseOff": "Pakai kontroler sebagai kontroler",
+    "mouseHint": "Kontroler menjadi mouse: stik kiri menggerakkan, tombol bawah mengeklik, tombol kanan klik kanan, dan stik kanan menggulir.",
+    "backToGame": "Kembali ke game",
+    "notTyped": "Tidak bisa mengetik: {{chars}}"
   }
 }
