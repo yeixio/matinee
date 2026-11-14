@@ -1,0 +1,969 @@
+{
+  "targets": [
+    {
+      "id": "v0.2",
+      "label": "v0.2",
+      "name": "Dependable at home",
+      "summary": "Matinee keeps working when the internet is down, your watch history survives a replaced or renamed file, a wrong match is easy to fix, and when playback stutters Matinee tells you why. More files play as they are, and HDR looks right when it has to be converted."
+    },
+    {
+      "id": "v0.3",
+      "label": "v0.3",
+      "name": "Plays everything well",
+      "summary": "Subtitles with their full styling, timing and audio delay controls, Dolby Vision handled for each kind of screen, several versions of a film under one title, and a TV app where your libraries are one press away."
+    },
+    {
+      "id": "v0.4",
+      "label": "v0.4",
+      "name": "Your library, your way",
+      "summary": "Better matching for unusual names, extras, local .nfo files, a Home screen you arrange yourself, sign-in with your own identity provider, and streaming limits for each person."
+    },
+    {
+      "id": "stores",
+      "label": "Ongoing",
+      "name": "More devices",
+      "summary": "Getting the apps into more stores, alongside the releases above."
+    },
+    {
+      "id": "later",
+      "label": "Later",
+      "name": "Ideas we want to build",
+      "summary": "Not scheduled yet. If one of these matters to you, say so on its issue, or pick it up: help is welcome."
+    }
+  ],
+  "updated": "2026-11-14",
+  "items": [
+    {
+      "repo": "matinee",
+      "number": 69,
+      "title": "Verify hardware transcoding on NVIDIA (NVENC/NVDEC)",
+      "target": "later",
+      "priority": 2
+    },
+    {
+      "repo": "matinee",
+      "number": 70,
+      "title": "Verify hardware transcoding on Intel (VAAPI and Quick Sync)",
+      "target": "later",
+      "priority": 2
+    },
+    {
+      "repo": "matinee",
+      "number": 72,
+      "title": "Verify hardware transcoding on AMD with Windows (AMF)",
+      "target": "later",
+      "priority": 2
+    },
+    {
+      "repo": "matinee",
+      "number": 73,
+      "title": "Verify hardware transcoding on Raspberry Pi (V4L2)",
+      "target": "later",
+      "priority": 2
+    },
+    {
+      "repo": "matinee",
+      "number": 111,
+      "title": "Docs: a guide page for choosing your language",
+      "target": "v0.4",
+      "priority": 2
+    },
+    {
+      "repo": "matinee",
+      "number": 116,
+      "title": "Docs: a \"Settings at a glance\" page",
+      "target": "v0.4",
+      "priority": 2
+    },
+    {
+      "repo": "matinee",
+      "number": 125,
+      "title": "Test the Umbrel App Store package and submit it",
+      "target": "v0.2",
+      "priority": 2
+    },
+    {
+      "repo": "matinee",
+      "number": 126,
+      "title": "Test the ZimaOS / CasaOS App Store entry and submit it",
+      "target": "v0.2",
+      "priority": 2
+    },
+    {
+      "repo": "matinee",
+      "number": 127,
+      "title": "Test the TrueNAS app and submit it to the community train",
+      "target": "v0.2",
+      "priority": 2
+    },
+    {
+      "repo": "matinee",
+      "number": 128,
+      "title": "Test the Unraid template",
+      "target": "v0.2",
+      "priority": 2
+    },
+    {
+      "repo": "matinee",
+      "number": 226,
+      "title": "Show extras (featurettes, deleted scenes, behind the scenes) and skip sample files",
+      "target": "v0.4",
+      "priority": 2
+    },
+    {
+      "repo": "matinee",
+      "number": 229,
+      "title": "Playback history for admins, and why each stream is being converted",
+      "target": "v0.4",
+      "priority": 2
+    },
+    {
+      "repo": "matinee",
+      "number": 230,
+      "title": "Per-person streaming limits: quality away from home and simultaneous streams",
+      "target": "v0.4",
+      "priority": 2
+    },
+    {
+      "repo": "matinee",
+      "number": 231,
+      "title": "Sign in with your own identity provider (OpenID Connect)",
+      "target": "v0.4",
+      "priority": 2
+    },
+    {
+      "repo": "matinee",
+      "number": 232,
+      "title": "Customize Home: reorder, hide and pin rows",
+      "target": "v0.4",
+      "priority": 2
+    },
+    {
+      "repo": "matinee",
+      "number": 235,
+      "title": "Sync watched history and ratings with Trakt",
+      "target": "v0.4",
+      "priority": 2
+    },
+    {
+      "repo": "matinee",
+      "number": 327,
+      "title": "Tone map HDR on Homebrew installs",
+      "target": "later",
+      "priority": 2
+    },
+    {
+      "repo": "matinee",
+      "number": 337,
+      "title": "Don't let a network share that stops answering hang requests or shutdown",
+      "target": "later",
+      "priority": 2
+    },
+    {
+      "repo": "matinee",
+      "number": 341,
+      "title": "Nightly player soak test: a real browser abusing the web player for 30 minutes",
+      "target": "later",
+      "priority": 2
+    },
+    {
+      "repo": "matinee",
+      "number": 342,
+      "title": "Benchmarks in CI with regression budgets for playback and hot API paths",
+      "target": "later",
+      "priority": 2
+    },
+    {
+      "repo": "matinee",
+      "number": 343,
+      "title": "Limit how many transcodes run at once, server-wide and per user",
+      "target": "later",
+      "priority": 2
+    },
+    {
+      "repo": "matinee",
+      "number": 345,
+      "title": "Count what players feel: time to first frame and rebuffers in /metrics",
+      "target": "later",
+      "priority": 2
+    },
+    {
+      "repo": "matinee",
+      "number": 373,
+      "title": "Handle videos whose seek index is broken near the end",
+      "target": "v0.4",
+      "priority": 2
+    },
+    {
+      "repo": "matinee",
+      "number": 377,
+      "title": "Check each stream's sound and picture timing as it's written, and fall back when it's wrong",
+      "target": "later",
+      "priority": 2
+    },
+    {
+      "repo": "matinee",
+      "number": 387,
+      "title": "Keep surround sound when the server converts audio",
+      "target": "later",
+      "priority": 2
+    },
+    {
+      "repo": "matinee-apps",
+      "number": 51,
+      "title": "Fire TV and Fire tablets (Amazon Appstore)",
+      "target": "stores",
+      "priority": 2
+    },
+    {
+      "repo": "matinee-apps",
+      "number": 55,
+      "title": "Samsung TVs (Tizen)",
+      "target": "stores",
+      "priority": 2
+    },
+    {
+      "repo": "matinee-apps",
+      "number": 56,
+      "title": "LG TVs (webOS)",
+      "target": "stores",
+      "priority": 2
+    },
+    {
+      "repo": "matinee-apps",
+      "number": 64,
+      "title": "Bring the apps to more devices (tracking)",
+      "target": "stores",
+      "priority": 2
+    },
+    {
+      "repo": "matinee-apps",
+      "number": 171,
+      "title": "Collections in the phone and TV apps",
+      "target": "v0.4",
+      "priority": 2
+    },
+    {
+      "repo": "matinee-apps",
+      "number": 172,
+      "title": "Mark as watched in the phone and TV apps",
+      "target": "v0.4",
+      "priority": 2
+    },
+    {
+      "repo": "matinee-apps",
+      "number": 193,
+      "title": "Bit-perfect audio passthrough to the receiver",
+      "target": "later",
+      "priority": 2
+    },
+    {
+      "repo": "matinee-apps",
+      "number": 194,
+      "title": "Match the screen's frame rate and HDR mode to the film",
+      "target": "later",
+      "priority": 2
+    },
+    {
+      "repo": "matinee",
+      "number": 9,
+      "title": "Run several replicas on Kubernetes (HA)",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee",
+      "number": 10,
+      "title": "MySQL / MariaDB support",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee",
+      "number": 15,
+      "title": "Casting: Chromecast and AirPlay",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee",
+      "number": 25,
+      "title": "Hosted metadata proxy so servers don't call TMDB with a shared key",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee",
+      "number": 31,
+      "title": "Activity indicator for what the server is working on",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee",
+      "number": 32,
+      "title": "Winamp-style music visualizations",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee",
+      "number": 35,
+      "title": "Great music playback: gapless, leveling, lyrics, mixes",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee",
+      "number": 43,
+      "title": "Playback speed control in the video player",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee",
+      "number": 44,
+      "title": "Keyboard shortcuts overlay in the player (press ?)",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee",
+      "number": 50,
+      "title": "Add ESLint and Prettier to the web player, and run them in CI",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee",
+      "number": 57,
+      "title": "Download rules: keep the next episodes, remove watched, storage limit",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee",
+      "number": 63,
+      "title": "Radarr and Sonarr: follow-ups after the first version",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee",
+      "number": 112,
+      "title": "Docs: mark everything added since v0.1.0 with since: in the guide",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee",
+      "number": 114,
+      "title": "Docs: screenshots for the guide pages that have none",
+      "target": "v0.4",
+      "priority": 3
+    },
+    {
+      "repo": "matinee",
+      "number": 115,
+      "title": "Docs: show the phone and TV apps in the Watching pages",
+      "target": "v0.4",
+      "priority": 3
+    },
+    {
+      "repo": "matinee",
+      "number": 169,
+      "title": "Play movies and shows by voice on TVs",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee",
+      "number": 172,
+      "title": "Podcasts: sync subscriptions and played episodes with gpodder.net",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee",
+      "number": 173,
+      "title": "Podcasts: video episodes",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee",
+      "number": 174,
+      "title": "Podcasts: chapters and transcripts from the podcast namespace",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee",
+      "number": 175,
+      "title": "Podcasts: keep episodes on the server",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee",
+      "number": 236,
+      "title": "Two-step sign-in for accounts",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee",
+      "number": 237,
+      "title": "Scrobble music to ListenBrainz and Last.fm",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee",
+      "number": 238,
+      "title": "Picture-in-picture in the web player",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee",
+      "number": 239,
+      "title": "Photo and home video libraries",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee",
+      "number": 240,
+      "title": "Live TV and recording from network tuners",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee",
+      "number": 255,
+      "title": "Spread transcoding and storage across more than one machine",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee",
+      "number": 256,
+      "title": "Website: a plain page of promises (what's free, what's paid, what we'll never do)",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee",
+      "number": 259,
+      "title": "Record live TV (DVR)",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee",
+      "number": 260,
+      "title": "Live TV from HDHomeRun and other network tuners",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee",
+      "number": 324,
+      "title": "Serve test sound and picture clips for the TV setup tools",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee",
+      "number": 338,
+      "title": "Find out what filled the memory limit when Matinee was OOM-killed at 35 MB",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee",
+      "number": 344,
+      "title": "Check every package's tests for leaked goroutines",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee",
+      "number": 347,
+      "title": "Web player: chapter list and skipping chapters",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee",
+      "number": 361,
+      "title": "Wake library disks when someone's around",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee",
+      "number": 388,
+      "title": "Theater events for lights, curtains and other room cues",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee",
+      "number": 389,
+      "title": "Pre-show sequence before a film",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee",
+      "number": 390,
+      "title": "Documented control protocol for theater control systems",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee",
+      "number": 391,
+      "title": "Theater mode for home theaters",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee-apps",
+      "number": 13,
+      "title": "Requests, Coming soon and Report a problem in the apps",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee-apps",
+      "number": 43,
+      "title": "Translate the iOS permission prompts and store-facing app name",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee-apps",
+      "number": 57,
+      "title": "Hisense and other VIDAA TVs",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee-apps",
+      "number": 58,
+      "title": "Xbox",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee-apps",
+      "number": 59,
+      "title": "Windows desktop",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee-apps",
+      "number": 60,
+      "title": "Linux desktop and Steam Deck",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee-apps",
+      "number": 61,
+      "title": "Roku",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee-apps",
+      "number": 62,
+      "title": "PlayStation 5",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee-apps",
+      "number": 63,
+      "title": "Meta Quest",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee-apps",
+      "number": 80,
+      "title": "Reach the Fire TV devices the APK can't install on",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee-apps",
+      "number": 129,
+      "title": "Playback speed for films and shows in the phone and TV apps",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee-apps",
+      "number": 130,
+      "title": "Open a title in another player app",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee-apps",
+      "number": 141,
+      "title": "One Home across several servers",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee-apps",
+      "number": 150,
+      "title": "Draw styled ASS/SSA subtitles on the device instead of converting",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee-apps",
+      "number": 173,
+      "title": "Radio stations in the car and on watches",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee-apps",
+      "number": 180,
+      "title": "TV app: Tune your TV and speakers (speaker levels and picture test patterns)",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee-apps",
+      "number": 184,
+      "title": "Phones and tablets: chapter list and skipping chapters",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee-apps",
+      "number": 192,
+      "title": "Apple TV: start the next song while the app is in the background",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee-apps",
+      "number": 195,
+      "title": "Projector framing: constant image height, masking and overscan",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee-apps",
+      "number": 196,
+      "title": "Theater kiosk mode and HDMI-CEC control",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee-apps",
+      "number": 197,
+      "title": "Home theater PC player for Linux and Windows",
+      "target": "later",
+      "priority": 3
+    },
+    {
+      "repo": "matinee",
+      "number": 277,
+      "title": "Remote control: navigation keys, typing, audio track, and live updates for phone remotes",
+      "target": "later",
+      "priority": 2,
+      "done": true,
+      "closed": "2026-11-14"
+    },
+    {
+      "repo": "matinee-apps",
+      "number": 151,
+      "title": "Use a phone or tablet as a remote for the TV and other Matinee players",
+      "target": "later",
+      "priority": 2,
+      "done": true,
+      "closed": "2026-11-14"
+    },
+    {
+      "repo": "matinee",
+      "number": 224,
+      "title": "Recognize episodes named without an S01E01 code",
+      "target": "v0.4",
+      "priority": 2,
+      "done": true,
+      "closed": "2026-11-12"
+    },
+    {
+      "repo": "matinee",
+      "number": 41,
+      "title": "Recognize multi-episode files (S01E01E02, S01E01-E02)",
+      "target": "v0.4",
+      "priority": 2,
+      "done": true,
+      "closed": "2026-11-06"
+    },
+    {
+      "repo": "matinee",
+      "number": 42,
+      "title": "Recognize date-based episodes for daily shows",
+      "target": "v0.4",
+      "priority": 2,
+      "done": true,
+      "closed": "2026-11-06"
+    },
+    {
+      "repo": "matinee",
+      "number": 71,
+      "title": "Verify hardware transcoding on Macs (VideoToolbox)",
+      "target": "v0.3",
+      "priority": 2,
+      "done": true,
+      "closed": "2026-11-06"
+    },
+    {
+      "repo": "matinee",
+      "number": 225,
+      "title": "Pin a match with ids in folder names, and keep same-named shows apart",
+      "target": "v0.4",
+      "priority": 2,
+      "done": true,
+      "closed": "2026-11-06"
+    },
+    {
+      "repo": "matinee",
+      "number": 227,
+      "title": "Read local .nfo files and keep manual edits",
+      "target": "v0.4",
+      "priority": 2,
+      "done": true,
+      "closed": "2026-11-06"
+    },
+    {
+      "repo": "matinee-apps",
+      "number": 137,
+      "title": "TV: your libraries one press away, and choose where the app opens",
+      "target": "v0.3",
+      "priority": 2,
+      "done": true,
+      "closed": "2026-11-05"
+    },
+    {
+      "repo": "matinee-apps",
+      "number": 140,
+      "title": "Same features on every app: a feature table and a parity check before release",
+      "target": "v0.3",
+      "priority": 2,
+      "done": true,
+      "closed": "2026-11-05"
+    },
+    {
+      "repo": "matinee",
+      "number": 18,
+      "title": "Subtitles: per-user preferences and smarter defaults",
+      "target": "v0.3",
+      "priority": 2,
+      "done": true,
+      "closed": "2026-11-04"
+    },
+    {
+      "repo": "matinee",
+      "number": 19,
+      "title": "Subtitles: VobSub (.idx/.sub) and PGS (.sup) sidecar files, and Subs/ folders",
+      "target": "v0.3",
+      "priority": 2,
+      "done": true,
+      "closed": "2026-11-04"
+    },
+    {
+      "repo": "matinee",
+      "number": 20,
+      "title": "Subtitles: render ASS/SSA with full styling (anime)",
+      "target": "v0.3",
+      "priority": 2,
+      "done": true,
+      "closed": "2026-11-04"
+    },
+    {
+      "repo": "matinee",
+      "number": 45,
+      "title": "Mark as watched / unwatched from the item page",
+      "target": "v0.2",
+      "priority": 2,
+      "done": true,
+      "closed": "2026-11-04"
+    },
+    {
+      "repo": "matinee",
+      "number": 219,
+      "title": "Keep watch history, ratings and lists when a file is replaced or renamed",
+      "target": "v0.2",
+      "priority": 1,
+      "done": true,
+      "closed": "2026-11-04"
+    },
+    {
+      "repo": "matinee",
+      "number": 220,
+      "title": "Send HEVC and AV1 video as-is to devices that play it, instead of converting to H.264",
+      "target": "v0.2",
+      "priority": 1,
+      "done": true,
+      "closed": "2026-11-04"
+    },
+    {
+      "repo": "matinee",
+      "number": 221,
+      "title": "Tone map HDR to SDR when converting video, so colors don't look washed out",
+      "target": "v0.2",
+      "priority": 1,
+      "done": true,
+      "closed": "2026-11-04"
+    },
+    {
+      "repo": "matinee",
+      "number": 222,
+      "title": "Fix a wrong match: search for the right title, pick it, and refresh details",
+      "target": "v0.2",
+      "priority": 1,
+      "done": true,
+      "closed": "2026-11-04"
+    },
+    {
+      "repo": "matinee",
+      "number": 223,
+      "title": "Show several versions of a movie or episode as one title, with a version picker",
+      "target": "v0.3",
+      "priority": 1,
+      "done": true,
+      "closed": "2026-11-04"
+    },
+    {
+      "repo": "matinee",
+      "number": 228,
+      "title": "Back up the database automatically and restore it from Settings",
+      "target": "v0.2",
+      "priority": 2,
+      "done": true,
+      "closed": "2026-11-04"
+    },
+    {
+      "repo": "matinee",
+      "number": 233,
+      "title": "Make dialogue easier to hear: night mode and volume leveling for films and shows",
+      "target": "v0.3",
+      "priority": 2,
+      "done": true,
+      "closed": "2026-11-04"
+    },
+    {
+      "repo": "matinee",
+      "number": 234,
+      "title": "Subtitle look and timing: size, color, background, and a sync offset",
+      "target": "v0.3",
+      "priority": 2,
+      "done": true,
+      "closed": "2026-11-04"
+    },
+    {
+      "repo": "matinee",
+      "number": 251,
+      "title": "Keep working with no internet: sign-in, browsing and playback at home",
+      "target": "v0.2",
+      "priority": 1,
+      "done": true,
+      "closed": "2026-11-04"
+    },
+    {
+      "repo": "matinee",
+      "number": 252,
+      "title": "Explain why playback buffered or failed, and what to do about it",
+      "target": "v0.2",
+      "priority": 1,
+      "done": true,
+      "closed": "2026-11-04"
+    },
+    {
+      "repo": "matinee",
+      "number": 253,
+      "title": "Dolby Vision: keep it where the screen supports it, fall back cleanly where it doesn't",
+      "target": "v0.3",
+      "priority": 2,
+      "done": true,
+      "closed": "2026-11-04"
+    },
+    {
+      "repo": "matinee",
+      "number": 254,
+      "title": "Audio delay control in the web player, for lip sync",
+      "target": "v0.3",
+      "priority": 2,
+      "done": true,
+      "closed": "2026-11-04"
+    },
+    {
+      "repo": "matinee-apps",
+      "number": 128,
+      "title": "Subtitle look and timing in the phone and TV apps",
+      "target": "v0.3",
+      "priority": 2,
+      "done": true,
+      "closed": "2026-11-04"
+    },
+    {
+      "repo": "matinee-apps",
+      "number": 134,
+      "title": "Keep working at home when the internet is down",
+      "target": "v0.2",
+      "priority": 1,
+      "done": true,
+      "closed": "2026-11-04"
+    },
+    {
+      "repo": "matinee-apps",
+      "number": 135,
+      "title": "Ask each device what it can play instead of using a fixed list",
+      "target": "v0.2",
+      "priority": 1,
+      "done": true,
+      "closed": "2026-11-04"
+    },
+    {
+      "repo": "matinee-apps",
+      "number": 136,
+      "title": "Report playback problems to the server and show why something buffers",
+      "target": "v0.2",
+      "priority": 2,
+      "done": true,
+      "closed": "2026-11-04"
+    },
+    {
+      "repo": "matinee-apps",
+      "number": 138,
+      "title": "Show ASS/SSA subtitles with their styling in the phone and TV apps",
+      "target": "v0.3",
+      "priority": 2,
+      "done": true,
+      "closed": "2026-11-04"
+    },
+    {
+      "repo": "matinee-apps",
+      "number": 139,
+      "title": "Audio delay control in the phone and TV apps, for lip sync",
+      "target": "v0.3",
+      "priority": 2,
+      "done": true,
+      "closed": "2026-11-04"
+    }
+  ]
+}
