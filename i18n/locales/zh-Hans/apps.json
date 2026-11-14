@@ -493,7 +493,27 @@
     "nothing": "目前没有即将推出的内容。"
   },
   "remote": {
-    "controlledBy": "由 {{name}} 控制"
+    "controlledBy": "由 {{name}} 控制",
+    "title": "遥控器",
+    "settingsHint": "把这部手机用作电视上 Matinee 的遥控器。",
+    "signInFirst": "登录后即可把这部手机用作遥控器。",
+    "noPlayers": "在电视上打开 Matinee，它就会出现在这里。",
+    "up": "上",
+    "down": "下",
+    "left": "左",
+    "right": "右",
+    "select": "确定",
+    "back": "返回",
+    "home": "主页",
+    "playPause": "播放或暂停",
+    "back10": "后退 10 秒",
+    "forward30": "前进 30 秒",
+    "stop": "停止",
+    "typeHere": "在电视上输入",
+    "typeHint": "输入的内容会实时进入电视的搜索。",
+    "offline": "{{name}} 现在没有打开。",
+    "cantDo": "{{name}} 做不到这一点。请更新它上面的 Matinee。",
+    "failed": "没有发送到 {{name}}。请重试。"
   },
   "car": {
     "listenNow": "立即收听",

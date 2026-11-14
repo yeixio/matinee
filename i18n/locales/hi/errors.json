@@ -296,5 +296,8 @@
   "that_file_isnt_an_emulator_this_server_can_run_reason": "यह फ़ाइल ऐसा एमुलेटर नहीं है जिसे यह सर्वर चला सके: {{reason}}",
   "not_a_game": "यह गेम नहीं है",
   "say_where_to_move_the_database_a_postgresql_url_or_a_sqlite_files_full_path": "बताएँ कि डेटाबेस कहाँ ले जाना है: एक PostgreSQL URL या SQLite फ़ाइल का पूरा पाथ",
-  "on_kubernetes_the_data_folder_is_emptied_whenever_matinees_pod_is_replaced_so_the_database_cant_be_a_sqlite_file_there_move_it_to_a_postgresql_database": "Kubernetes पर डेटा फ़ोल्डर हर बार Matinee का पॉड बदलने पर खाली हो जाता है, इसलिए वहाँ डेटाबेस SQLite फ़ाइल नहीं हो सकता; इसे PostgreSQL डेटाबेस में ले जाएँ"
+  "on_kubernetes_the_data_folder_is_emptied_whenever_matinees_pod_is_replaced_so_the_database_cant_be_a_sqlite_file_there_move_it_to_a_postgresql_database": "Kubernetes पर डेटा फ़ोल्डर हर बार Matinee का पॉड बदलने पर खाली हो जाता है, इसलिए वहाँ डेटाबेस SQLite फ़ाइल नहीं हो सकता; इसे PostgreSQL डेटाबेस में ले जाएँ",
+  "key_must_be_up_down_left_right_select_back_home_or_playpause": "key up, down, left, right, select, back, home या playPause होना चाहिए",
+  "text_can_be_at_most_200_characters": "text में ज़्यादा से ज़्यादा 200 अक्षर हो सकते हैं",
+  "text_is_required": "text ज़रूरी है"
 }

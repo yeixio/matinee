@@ -500,7 +500,27 @@
     "nothing": "Most semmi sem érkezik."
   },
   "remote": {
-    "controlledBy": "Vezérelve innen: {{name}}"
+    "controlledBy": "Vezérelve innen: {{name}}",
+    "title": "Távirányító",
+    "settingsHint": "Használd ezt a telefont a tévén futó Matinee távirányítójaként.",
+    "signInFirst": "Jelentkezz be, hogy távirányítóként használhasd ezt a telefont.",
+    "noPlayers": "Nyisd meg a Matinee-t a tévén, és itt megjelenik.",
+    "up": "Fel",
+    "down": "Le",
+    "left": "Balra",
+    "right": "Jobbra",
+    "select": "OK",
+    "back": "Vissza",
+    "home": "Kezdőlap",
+    "playPause": "Lejátszás vagy szünet",
+    "back10": "10 másodperc vissza",
+    "forward30": "30 másodperc előre",
+    "stop": "Leállítás",
+    "typeHere": "Gépelés a tévére",
+    "typeHint": "Gépelés közben a tévé keresőjébe kerül.",
+    "offline": "{{name}} most nincs megnyitva.",
+    "cantDo": "{{name}} erre nem képes. Frissítsd rajta a Matinee-t.",
+    "failed": "Ez nem jutott el ide: {{name}}. Próbáld újra."
   },
   "car": {
     "listenNow": "Hallgasd most",

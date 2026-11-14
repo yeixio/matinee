@@ -507,7 +507,27 @@
     "nothing": "Rien n'arrive pour le moment."
   },
   "remote": {
-    "controlledBy": "Contrôlé depuis {{name}}"
+    "controlledBy": "Contrôlé depuis {{name}}",
+    "title": "Télécommande",
+    "settingsHint": "Utilisez ce téléphone comme télécommande de Matinee sur votre téléviseur.",
+    "signInFirst": "Connectez-vous pour utiliser ce téléphone comme télécommande.",
+    "noPlayers": "Ouvrez Matinee sur votre téléviseur et il apparaîtra ici.",
+    "up": "Haut",
+    "down": "Bas",
+    "left": "Gauche",
+    "right": "Droite",
+    "select": "OK",
+    "back": "Retour",
+    "home": "Accueil",
+    "playPause": "Lecture ou pause",
+    "back10": "Reculer de 10 secondes",
+    "forward30": "Avancer de 30 secondes",
+    "stop": "Arrêter",
+    "typeHere": "Écrire sur le téléviseur",
+    "typeHint": "Va dans la recherche du téléviseur pendant que vous tapez.",
+    "offline": "{{name}} n'est pas ouvert pour le moment.",
+    "cantDo": "{{name}} ne peut pas faire cela. Mettez Matinee à jour dessus.",
+    "failed": "Cela n'a pas atteint {{name}}. Réessayez."
   },
   "car": {
     "listenNow": "Écouter",

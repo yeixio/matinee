@@ -500,7 +500,27 @@
     "nothing": "Inget är på väg just nu."
   },
   "remote": {
-    "controlledBy": "Styrs från {{name}}"
+    "controlledBy": "Styrs från {{name}}",
+    "title": "Fjärrkontroll",
+    "settingsHint": "Använd den här telefonen som fjärrkontroll för Matinee på din tv.",
+    "signInFirst": "Logga in för att använda den här telefonen som fjärrkontroll.",
+    "noPlayers": "Öppna Matinee på din tv så visas den här.",
+    "up": "Upp",
+    "down": "Ned",
+    "left": "Vänster",
+    "right": "Höger",
+    "select": "OK",
+    "back": "Tillbaka",
+    "home": "Hem",
+    "playPause": "Spela eller pausa",
+    "back10": "10 sekunder bakåt",
+    "forward30": "30 sekunder framåt",
+    "stop": "Stoppa",
+    "typeHere": "Skriv på tv:n",
+    "typeHint": "Hamnar i tv:ns sökning medan du skriver.",
+    "offline": "{{name}} är inte öppen just nu.",
+    "cantDo": "{{name}} kan inte göra det. Uppdatera Matinee på den.",
+    "failed": "Det nådde inte {{name}}. Försök igen."
   },
   "car": {
     "listenNow": "Lyssna nu",

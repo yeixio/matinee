@@ -296,5 +296,8 @@
   "that_file_isnt_an_emulator_this_server_can_run_reason": "该文件不是这台服务器能运行的模拟器：{{reason}}",
   "not_a_game": "不是游戏",
   "say_where_to_move_the_database_a_postgresql_url_or_a_sqlite_files_full_path": "请说明要把数据库迁移到哪里:PostgreSQL URL 或 SQLite 文件的完整路径",
-  "on_kubernetes_the_data_folder_is_emptied_whenever_matinees_pod_is_replaced_so_the_database_cant_be_a_sqlite_file_there_move_it_to_a_postgresql_database": "在 Kubernetes 上,每次替换 Matinee 的 Pod 时数据文件夹都会被清空,所以数据库不能是那里的 SQLite 文件;请迁移到 PostgreSQL 数据库"
+  "on_kubernetes_the_data_folder_is_emptied_whenever_matinees_pod_is_replaced_so_the_database_cant_be_a_sqlite_file_there_move_it_to_a_postgresql_database": "在 Kubernetes 上,每次替换 Matinee 的 Pod 时数据文件夹都会被清空,所以数据库不能是那里的 SQLite 文件;请迁移到 PostgreSQL 数据库",
+  "key_must_be_up_down_left_right_select_back_home_or_playpause": "key 必须是 up, down, left, right, select, back, home 或 playPause",
+  "text_can_be_at_most_200_characters": "text 最多 200 个字符",
+  "text_is_required": "必须提供 text"
 }

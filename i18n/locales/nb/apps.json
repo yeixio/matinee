@@ -500,7 +500,27 @@
     "nothing": "Ingenting er på vei akkurat nå."
   },
   "remote": {
-    "controlledBy": "Styrt fra {{name}}"
+    "controlledBy": "Styrt fra {{name}}",
+    "title": "Fjernkontroll",
+    "settingsHint": "Bruk denne telefonen som fjernkontroll for Matinee på TV-en.",
+    "signInFirst": "Logg på for å bruke denne telefonen som fjernkontroll.",
+    "noPlayers": "Åpne Matinee på TV-en, så vises den her.",
+    "up": "Opp",
+    "down": "Ned",
+    "left": "Venstre",
+    "right": "Høyre",
+    "select": "OK",
+    "back": "Tilbake",
+    "home": "Hjem",
+    "playPause": "Spill av eller pause",
+    "back10": "10 sekunder tilbake",
+    "forward30": "30 sekunder frem",
+    "stop": "Stopp",
+    "typeHere": "Skriv på TV-en",
+    "typeHint": "Havner i TV-ens søk mens du skriver.",
+    "offline": "{{name}} er ikke åpen akkurat nå.",
+    "cantDo": "{{name}} kan ikke gjøre det. Oppdater Matinee på den.",
+    "failed": "Det nådde ikke {{name}}. Prøv igjen."
   },
   "car": {
     "listenNow": "Lytt nå",

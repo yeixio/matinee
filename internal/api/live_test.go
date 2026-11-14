@@ -74,9 +74,6 @@ func TestRemoteControl(t *testing.T) {
 		}
 	}
 	next("snapshot")
-	if code := ellen.do("GET", "/api/v1/events", nil, nil); code != http.StatusForbidden {
-		t.Fatalf("only admins follow everything, got %d", code)
-	}
 
 	// The TV says hello as the home guest.
 	hello := map[string]any{"name": "Living room TV", "platform": "tvos", "commands": []string{"play", "pause", "seek", "playItem", "fly"}}
@@ -96,11 +93,9 @@ func TestRemoteControl(t *testing.T) {
 	if code := admin.do("GET", "/api/v1/clients", nil, &clients); code != 200 || len(clients) != 1 || clients[0].ID != "tv-1234567" {
 		t.Fatalf("admin's clients: %d %+v", code, clients)
 	}
-	if code := ellen.do("GET", "/api/v1/clients", nil, &clients); code != 200 || len(clients) != 0 {
+	// At home, grown-ups also see the home guest's TV.
+	if code := ellen.do("GET", "/api/v1/clients", nil, &clients); code != 200 || len(clients) != 1 {
 		t.Fatalf("ellen's clients: %d %+v", code, clients)
-	}
-	if code := ellen.do("POST", "/api/v1/clients/tv-1234567/commands", map[string]any{"type": "pause"}, nil); code != http.StatusNotFound {
-		t.Fatalf("ellen can't control the TV, got %d", code)
 	}
 	if code := tv.do("GET", "/api/v1/clients", nil, nil); code != http.StatusUnauthorized {
 		t.Fatalf("the guest can't list clients, got %d", code)
@@ -210,11 +205,110 @@ func TestRemoteControl(t *testing.T) {
 	}
 
 	// Ellen's own iPad shows up for her, and she can control it.
+	// The home TV, now offline, stays in her list too.
 	ellen.do("PUT", "/api/v1/clients/ipad-1234567", map[string]any{"name": "iPad", "platform": "ios", "commands": []string{"pause"}}, nil)
-	if code := ellen.do("GET", "/api/v1/clients", nil, &clients); code != 200 || len(clients) != 1 {
+	clients = nil
+	if code := ellen.do("GET", "/api/v1/clients", nil, &clients); code != 200 || len(clients) != 2 || clients[0].ID != "ipad-1234567" {
 		t.Fatalf("ellen's clients: %d %+v", code, clients)
 	}
 	if code := ellen.do("POST", "/api/v1/clients/ipad-1234567/commands", map[string]any{"type": "pause"}, &sent); code != http.StatusAccepted || sent.From != "Ellen's iPad" {
 		t.Fatalf("ellen pauses her iPad: %d %+v", code, sent)
+	}
+}
+
+// A phone used as a remote presses keys and types on the person's own TV,
+// and follows only their own players.
+func TestPhoneRemote(t *testing.T) {
+	db := storetest.Open(t)
+	srv := &Server{Store: db, Scanner: &scan.Scanner{Store: db}, Log: slog.New(slog.NewTextHandler(io.Discard, nil))}
+	ts := httptest.NewServer(srv.Handler())
+	t.Cleanup(ts.Close)
+	admin := &client{t: t, base: ts.URL}
+	var login struct{ Token string }
+	admin.do("POST", "/api/v1/setup", credentials{"admin", "correct horse"}, &login)
+	admin.token = login.Token
+	if code := admin.do("POST", "/api/v1/users", map[string]any{"username": "ellen", "password": "battery staple"}, nil); code != http.StatusCreated {
+		t.Fatalf("create user: %d", code)
+	}
+	phone := signIn(t, admin, "ellen", "battery staple", "Ellen's iPhone")
+	tv := signIn(t, admin, "ellen", "battery staple", "Bedroom TV")
+
+	// Ellen follows her own players.
+	req, _ := http.NewRequest("GET", ts.URL+"/api/v1/events", nil)
+	req.Header.Set("Authorization", "Bearer "+phone.token)
+	res, err := http.DefaultClient.Do(req)
+	if err != nil || res.StatusCode != 200 {
+		t.Fatalf("events: %v %v", err, res)
+	}
+	defer res.Body.Close()
+	feed := make(chan live.Event, 100)
+	go func() {
+		sc := bufio.NewScanner(res.Body)
+		for sc.Scan() {
+			if data, ok := strings.CutPrefix(sc.Text(), "data: "); ok {
+				var e live.Event
+				json.Unmarshal([]byte(data), &e)
+				feed <- e
+			}
+		}
+	}()
+	next := func() live.Event {
+		t.Helper()
+		select {
+		case e := <-feed:
+			return e
+		case <-time.After(5 * time.Second):
+			t.Fatal("no event")
+		}
+		return live.Event{}
+	}
+	if e := next(); e.Type != "snapshot" {
+		t.Fatalf("first event: %+v", e)
+	}
+
+	// Someone else's TV says hello first, then Ellen's.
+	if code := admin.do("PUT", "/api/v1/clients/admin-tv-123", map[string]any{"name": "Office TV", "platform": "androidtv", "commands": []string{"playItem", "key"}}, nil); code != 200 {
+		t.Fatalf("admin's hello: %d", code)
+	}
+	if code := tv.do("PUT", "/api/v1/clients/bedroom-tv-123", map[string]any{"name": "Bedroom TV", "platform": "tvos", "commands": []string{"playItem", "key", "text"}}, nil); code != 200 {
+		t.Fatalf("hello: %d", code)
+	}
+	if e := next(); e.Type != live.EventClientUpdated || e.Client.ID != "bedroom-tv-123" {
+		t.Fatalf("Ellen sees only her own players, got %+v", e)
+	}
+
+	send := func(cmd map[string]any) int {
+		t.Helper()
+		return phone.do("POST", "/api/v1/clients/bedroom-tv-123/commands", cmd, nil)
+	}
+	for _, cmd := range []map[string]any{
+		{"type": "key"},
+		{"type": "key", "key": "jump"},
+		{"type": "text"},
+		{"type": "text", "text": strings.Repeat("a", live.MaxText+1)},
+	} {
+		if code := send(cmd); code != http.StatusBadRequest {
+			t.Errorf("%v: got %d", cmd, code)
+		}
+	}
+	for _, cmd := range []map[string]any{
+		{"type": "key", "key": "down"},
+		{"type": "key", "key": "select"},
+		{"type": "text", "text": "Paddington"},
+		{"type": "text", "text": ""},
+	} {
+		if code := send(cmd); code != http.StatusAccepted {
+			t.Errorf("%v: got %d", cmd, code)
+		}
+	}
+	var got struct{ Commands []live.Command }
+	if code := tv.do("GET", "/api/v1/clients/bedroom-tv-123/commands", nil, &got); code != 200 || len(got.Commands) != 4 {
+		t.Fatalf("commands: %d %+v", code, got)
+	}
+	if c := got.Commands; c[0].Key != "down" || c[1].Key != "select" || *c[2].Text != "Paddington" || c[3].Text == nil || *c[3].Text != "" || c[0].From != "Ellen's iPhone" {
+		t.Fatalf("commands: %+v", c)
+	}
+	if code := phone.do("POST", "/api/v1/clients/admin-tv-123/commands", map[string]any{"type": "key", "key": "up"}, nil); code != http.StatusNotFound {
+		t.Fatalf("Ellen can't press keys on someone else's TV, got %d", code)
 	}
 }

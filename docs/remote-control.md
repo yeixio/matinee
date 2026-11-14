@@ -1,8 +1,9 @@
 # Remote control
 
 Every Matinee player tells the server what it's playing and takes commands,
-so Home Assistant (see the guide's Home Assistant page) and, later, people's
-other devices can see what's on and control it. This page is the shared
+so Home Assistant (see the guide's Home Assistant page) and people's other
+devices, such as a phone used as the TV's remote, can see what's on and
+control it. This page is the shared
 behaviour for the web player (`web/src/remote.ts`) and the apps. The API is
 `/clients` in `internal/api/openapi.yaml`; the server side is
 `internal/live` and `internal/api/live.go`.
@@ -41,7 +42,17 @@ behaviour for the web player (`web/src/remote.ts`) and the apps. The API is
   - `sleep` sets the sleep timer (see sleep-timer.md): `minutes` from now,
     `endOfItem`, or `minutes: 0` to turn it off.
   - `subtitles` shows `track`, or none for "".
-- When a command has `from`, show "Controlled from {name}" for a few
+  - `key` presses a remote button on a TV app, as if on its own remote:
+    `up`, `down`, `left`, `right` move focus, `select` presses what's
+    focused, `back` does what the remote's back (Menu) button does, `home`
+    goes to Home, `playPause` is the play button. The TV apps take it, and
+    the phone apps' Remote sends it.
+  - `text` types into the box being typed in, such as Search, replacing
+    what's there (`""` clears it). With no box open, the TV opens Search
+    with it.
+- Keys and text don't show "Controlled from": the person is holding the
+  phone and looking at the TV.
+- When a playback command has `from`, show "Controlled from {name}" for a few
   seconds, so nobody wonders why the film paused by itself.
 - After a command, report the new state right away.
 
@@ -65,5 +76,7 @@ behaviour for the web player (`web/src/remote.ts`) and the apps. The API is
 
 The home guest (devices at home that didn't sign in) can report and take
 commands but not send them. Grown-ups who signed in can see and control
-their own account's players. Admins see and control everything, and only
-they can follow `GET /events`, which is what Home Assistant signs in as.
+their own account's players, and follow their events with `GET /events`.
+Admins see, control and follow everything, which is what Home Assistant
+signs in as. A phone controls a TV only when both are signed in to the
+same account; the home guest's TVs need an admin.

@@ -523,7 +523,7 @@ func (s *Server) routes() []route {
 		{"GET /clients", signedIn, grownUps(s.listClients)},
 		{"GET /clients/{client}", signedIn, grownUps(s.getClient)},
 		{"POST /clients/{client}/commands", signedIn, grownUps(s.sendCommand)},
-		{"GET /events", adminOnly, s.events},
+		{"GET /events", signedIn, grownUps(s.events)},
 
 		{"POST /together", reader, s.startTogether},
 		{"GET /together/{code}", reader, s.peekTogether},

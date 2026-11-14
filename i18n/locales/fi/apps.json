@@ -500,7 +500,27 @@
     "nothing": "Mitään ei ole tulossa juuri nyt."
   },
   "remote": {
-    "controlledBy": "Ohjattu laitteesta {{name}}"
+    "controlledBy": "Ohjattu laitteesta {{name}}",
+    "title": "Kaukosäädin",
+    "settingsHint": "Käytä tätä puhelinta television Matineen kaukosäätimenä.",
+    "signInFirst": "Kirjaudu sisään, jotta voit käyttää tätä puhelinta kaukosäätimenä.",
+    "noPlayers": "Avaa Matinee televisiossa, niin se näkyy tässä.",
+    "up": "Ylös",
+    "down": "Alas",
+    "left": "Vasemmalle",
+    "right": "Oikealle",
+    "select": "OK",
+    "back": "Takaisin",
+    "home": "Koti",
+    "playPause": "Toista tai keskeytä",
+    "back10": "10 sekuntia taaksepäin",
+    "forward30": "30 sekuntia eteenpäin",
+    "stop": "Pysäytä",
+    "typeHere": "Kirjoita televisioon",
+    "typeHint": "Menee television hakuun sitä mukaa kuin kirjoitat.",
+    "offline": "{{name}} ei ole nyt auki.",
+    "cantDo": "{{name}} ei pysty siihen. Päivitä sen Matinee.",
+    "failed": "Se ei mennyt perille laitteeseen {{name}}. Yritä uudelleen."
   },
   "car": {
     "listenNow": "Kuuntele nyt",

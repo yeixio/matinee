@@ -507,7 +507,27 @@
     "nothing": "Nada a caminho no momento."
   },
   "remote": {
-    "controlledBy": "Controlado por {{name}}"
+    "controlledBy": "Controlado por {{name}}",
+    "title": "Controle remoto",
+    "settingsHint": "Use este celular como controle remoto do Matinee na sua TV.",
+    "signInFirst": "Entre para usar este celular como controle remoto.",
+    "noPlayers": "Abra o Matinee na sua TV e ela aparece aqui.",
+    "up": "Cima",
+    "down": "Baixo",
+    "left": "Esquerda",
+    "right": "Direita",
+    "select": "OK",
+    "back": "Voltar",
+    "home": "Início",
+    "playPause": "Reproduzir ou pausar",
+    "back10": "Voltar 10 segundos",
+    "forward30": "Avançar 30 segundos",
+    "stop": "Parar",
+    "typeHere": "Digitar na TV",
+    "typeHint": "Vai para a busca da TV enquanto você digita.",
+    "offline": "{{name}} não está aberto agora.",
+    "cantDo": "{{name}} não consegue fazer isso. Atualize o Matinee nele.",
+    "failed": "Isso não chegou a {{name}}. Tente de novo."
   },
   "car": {
     "listenNow": "Ouvir agora",

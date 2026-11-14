@@ -493,7 +493,27 @@
     "nothing": "Hiện chưa có gì sắp ra mắt."
   },
   "remote": {
-    "controlledBy": "Được điều khiển từ {{name}}"
+    "controlledBy": "Được điều khiển từ {{name}}",
+    "title": "Điều khiển",
+    "settingsHint": "Dùng điện thoại này làm điều khiển cho Matinee trên TV.",
+    "signInFirst": "Đăng nhập để dùng điện thoại này làm điều khiển.",
+    "noPlayers": "Mở Matinee trên TV và TV sẽ hiện ở đây.",
+    "up": "Lên",
+    "down": "Xuống",
+    "left": "Trái",
+    "right": "Phải",
+    "select": "OK",
+    "back": "Quay lại",
+    "home": "Trang chủ",
+    "playPause": "Phát hoặc tạm dừng",
+    "back10": "Lùi 10 giây",
+    "forward30": "Tiến 30 giây",
+    "stop": "Dừng",
+    "typeHere": "Gõ trên TV",
+    "typeHint": "Chữ bạn gõ đi thẳng vào ô tìm kiếm trên TV.",
+    "offline": "{{name}} hiện không mở.",
+    "cantDo": "{{name}} không làm được việc đó. Hãy cập nhật Matinee trên thiết bị đó.",
+    "failed": "Lệnh chưa đến được {{name}}. Hãy thử lại."
   },
   "car": {
     "listenNow": "Nghe ngay",
