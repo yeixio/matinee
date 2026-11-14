@@ -703,6 +703,11 @@
     "noEmulatorFor": "Matinee can't play {{system}} games yet: there's no emulator for them on this server.",
     "noEmulator": "Matinee can't play this game yet: there's no emulator for it on this server.",
     "addEmulatorWeb": "An admin can add one in Settings → Streaming → Games in the web player.",
-    "emulatorGuide": "How to add your own emulator"
+    "emulatorGuide": "How to add your own emulator",
+    "pcGames": "PC games (preview)",
+    "pcGamesHint": "Steam games installed on your game host, played on its graphics card and streamed here.",
+    "pcGamesEmpty": "No games are installed on the game host yet.",
+    "steam": "Steam",
+    "steamHint": "Steam's Big Picture, full screen: pick, play and quit games with your controller."
   }
 }

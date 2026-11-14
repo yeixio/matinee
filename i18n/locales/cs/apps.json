@@ -717,6 +717,11 @@
     "noEmulatorFor": "Matinee zatím neumí spouštět hry pro {{system}}: na tomto serveru pro ně není emulátor.",
     "noEmulator": "Matinee zatím neumí spustit tuto hru: na tomto serveru pro ni není emulátor.",
     "addEmulatorWeb": "Správce ho může přidat ve webovém přehrávači: Nastavení → Streamování → Hry.",
-    "emulatorGuide": "Jak přidat vlastní emulátor"
+    "emulatorGuide": "Jak přidat vlastní emulátor",
+    "pcGames": "Hry pro PC (náhled)",
+    "pcGamesHint": "Hry ze Steamu nainstalované na herním hostiteli, běží na jeho grafické kartě a streamují se sem.",
+    "pcGamesEmpty": "Na herním hostiteli zatím nejsou nainstalované žádné hry.",
+    "steam": "Steam",
+    "steamHint": "Big Picture ze Steamu přes celou obrazovku: hry vybírejte, hrajte a ukončujte ovladačem."
   }
 }

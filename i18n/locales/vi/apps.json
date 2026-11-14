@@ -696,6 +696,11 @@
     "noEmulatorFor": "Matinee chưa chơi được trò chơi {{system}}: máy chủ này chưa có trình giả lập cho chúng.",
     "noEmulator": "Matinee chưa chơi được trò chơi này: máy chủ này chưa có trình giả lập cho nó.",
     "addEmulatorWeb": "Quản trị viên có thể thêm trong Cài đặt → Phát trực tuyến → Trò chơi trên trình phát web.",
-    "emulatorGuide": "Cách thêm trình giả lập của riêng bạn"
+    "emulatorGuide": "Cách thêm trình giả lập của riêng bạn",
+    "pcGames": "Trò chơi PC (bản xem trước)",
+    "pcGamesHint": "Trò chơi Steam cài trên máy chủ trò chơi, chạy trên card đồ họa của nó và phát trực tuyến tới đây.",
+    "pcGamesEmpty": "Máy chủ trò chơi chưa cài trò chơi nào.",
+    "steam": "Steam",
+    "steamHint": "Big Picture của Steam toàn màn hình: chọn, chơi và thoát trò chơi bằng tay cầm."
   }
 }

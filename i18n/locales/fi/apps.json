@@ -703,6 +703,11 @@
     "noEmulatorFor": "Matinee ei vielä osaa pelata {{system}}-pelejä: tällä palvelimella ei ole niille emulaattoria.",
     "noEmulator": "Matinee ei vielä osaa pelata tätä peliä: tällä palvelimella ei ole sille emulaattoria.",
     "addEmulatorWeb": "Ylläpitäjä voi lisätä sellaisen verkkosoittimen kohdassa Asetukset → Suoratoisto → Pelit.",
-    "emulatorGuide": "Näin lisäät oman emulaattorin"
+    "emulatorGuide": "Näin lisäät oman emulaattorin",
+    "pcGames": "PC-pelit (esikatselu)",
+    "pcGamesHint": "Pelipalvelimelle asennetut Steam-pelit, pelattuna sen näytönohjaimella ja suoratoistettuna tänne.",
+    "pcGamesEmpty": "Pelipalvelimelle ei ole vielä asennettu pelejä.",
+    "steam": "Steam",
+    "steamHint": "Steamin Big Picture koko näytöllä: valitse, pelaa ja lopeta pelit ohjaimella."
   }
 }

@@ -696,6 +696,11 @@
     "noEmulatorFor": "Matinee belum bisa memainkan game {{system}}: server ini belum punya emulator untuknya.",
     "noEmulator": "Matinee belum bisa memainkan game ini: server ini belum punya emulator untuknya.",
     "addEmulatorWeb": "Admin bisa menambahkannya di Pengaturan → Streaming → Game di pemutar web.",
-    "emulatorGuide": "Cara menambahkan emulator sendiri"
+    "emulatorGuide": "Cara menambahkan emulator sendiri",
+    "pcGames": "Game PC (pratinjau)",
+    "pcGamesHint": "Game Steam yang terpasang di host game, dimainkan di kartu grafisnya dan di-stream ke sini.",
+    "pcGamesEmpty": "Belum ada game yang terpasang di host game.",
+    "steam": "Steam",
+    "steamHint": "Big Picture Steam layar penuh: pilih, mainkan, dan keluar dari game dengan kontroler."
   }
 }

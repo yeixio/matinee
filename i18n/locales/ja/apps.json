@@ -696,6 +696,11 @@
     "noEmulatorFor": "Matinee はまだ {{system}} のゲームを遊べません。このサーバーにはそのエミュレーターがありません。",
     "noEmulator": "Matinee はまだこのゲームを遊べません。このサーバーにはそのエミュレーターがありません。",
     "addEmulatorWeb": "管理者が Web プレーヤーの「設定 → ストリーミング → ゲーム」で追加できます。",
-    "emulatorGuide": "自分のエミュレーターを追加する方法"
+    "emulatorGuide": "自分のエミュレーターを追加する方法",
+    "pcGames": "PC ゲーム(プレビュー)",
+    "pcGamesHint": "ゲームホストにインストールされた Steam のゲームを、そのグラフィックカードで動かしてここにストリーミングします。",
+    "pcGamesEmpty": "ゲームホストにはまだゲームがインストールされていません。",
+    "steam": "Steam",
+    "steamHint": "Steam の Big Picture を全画面で:コントローラーでゲームを選んで遊び、終了できます。"
   }
 }

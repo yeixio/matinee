@@ -710,6 +710,11 @@
     "noEmulatorFor": "O Matinee ainda não roda jogos de {{system}}: não há um emulador para eles neste servidor.",
     "noEmulator": "O Matinee ainda não roda este jogo: não há um emulador para ele neste servidor.",
     "addEmulatorWeb": "Um administrador pode adicionar um em Configurações → Streaming → Jogos no player web.",
-    "emulatorGuide": "Como adicionar seu próprio emulador"
+    "emulatorGuide": "Como adicionar seu próprio emulador",
+    "pcGames": "Jogos de PC (prévia)",
+    "pcGamesHint": "Jogos da Steam instalados no seu host de jogos, rodando na placa de vídeo dele e transmitidos para cá.",
+    "pcGamesEmpty": "Ainda não há jogos instalados no host de jogos.",
+    "steam": "Steam",
+    "steamHint": "Big Picture da Steam em tela cheia: escolha, jogue e saia dos jogos com o controle."
   }
 }

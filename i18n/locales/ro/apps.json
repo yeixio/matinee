@@ -710,6 +710,11 @@
     "noEmulatorFor": "Matinee nu poate rula încă jocuri {{system}}: pe acest server nu există un emulator pentru ele.",
     "noEmulator": "Matinee nu poate rula încă acest joc: pe acest server nu există un emulator pentru el.",
     "addEmulatorWeb": "Un administrator poate adăuga unul din Setări → Streaming → Jocuri în playerul web.",
-    "emulatorGuide": "Cum îți adaugi propriul emulator"
+    "emulatorGuide": "Cum îți adaugi propriul emulator",
+    "pcGames": "Jocuri PC (previzualizare)",
+    "pcGamesHint": "Jocuri Steam instalate pe gazda de jocuri, rulate pe placa ei video și transmise aici.",
+    "pcGamesEmpty": "Încă nu sunt jocuri instalate pe gazda de jocuri.",
+    "steam": "Steam",
+    "steamHint": "Big Picture din Steam pe tot ecranul: alege, joacă și închide jocuri cu controlerul."
   }
 }

@@ -696,6 +696,11 @@
     "noEmulatorFor": "Matinee belum boleh memainkan permainan {{system}}: pelayan ini tiada emulator untuknya.",
     "noEmulator": "Matinee belum boleh memainkan permainan ini: pelayan ini tiada emulator untuknya.",
     "addEmulatorWeb": "Pentadbir boleh menambahnya dalam Tetapan → Penstriman → Permainan di pemain web.",
-    "emulatorGuide": "Cara menambah emulator sendiri"
+    "emulatorGuide": "Cara menambah emulator sendiri",
+    "pcGames": "Permainan PC (pratonton)",
+    "pcGamesHint": "Permainan Steam yang dipasang pada hos permainan anda, dimainkan pada kad grafiknya dan distrim ke sini.",
+    "pcGamesEmpty": "Belum ada permainan dipasang pada hos permainan.",
+    "steam": "Steam",
+    "steamHint": "Big Picture Steam skrin penuh: pilih, main dan keluar permainan dengan pengawal."
   }
 }

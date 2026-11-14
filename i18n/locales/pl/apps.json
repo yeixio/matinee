@@ -717,6 +717,11 @@
     "noEmulatorFor": "Matinee nie uruchamia jeszcze gier na {{system}}: na tym serwerze nie ma dla nich emulatora.",
     "noEmulator": "Matinee nie uruchamia jeszcze tej gry: na tym serwerze nie ma dla niej emulatora.",
     "addEmulatorWeb": "Administrator może go dodać w odtwarzaczu webowym: Ustawienia → Streaming → Gry.",
-    "emulatorGuide": "Jak dodać własny emulator"
+    "emulatorGuide": "Jak dodać własny emulator",
+    "pcGames": "Gry na PC (podgląd)",
+    "pcGamesHint": "Gry ze Steam zainstalowane na hoście gier, uruchamiane na jego karcie graficznej i przesyłane tutaj.",
+    "pcGamesEmpty": "Na hoście gier nie ma jeszcze zainstalowanych gier.",
+    "steam": "Steam",
+    "steamHint": "Big Picture ze Steam na pełnym ekranie: wybieraj, graj i wychodź z gier kontrolerem."
   }
 }

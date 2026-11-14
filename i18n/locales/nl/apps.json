@@ -703,6 +703,11 @@
     "noEmulatorFor": "Matinee kan {{system}}-games nog niet spelen: er is geen emulator voor op deze server.",
     "noEmulator": "Matinee kan deze game nog niet spelen: er is geen emulator voor op deze server.",
     "addEmulatorWeb": "Een beheerder kan er een toevoegen via Instellingen → Streaming → Games in de webspeler.",
-    "emulatorGuide": "Zo voeg je je eigen emulator toe"
+    "emulatorGuide": "Zo voeg je je eigen emulator toe",
+    "pcGames": "Pc-games (preview)",
+    "pcGamesHint": "Steam-games op je gamehost, gespeeld op zijn videokaart en hierheen gestreamd.",
+    "pcGamesEmpty": "Er staan nog geen games op de gamehost.",
+    "steam": "Steam",
+    "steamHint": "Big Picture van Steam schermvullend: kies, speel en sluit games met je controller."
   }
 }

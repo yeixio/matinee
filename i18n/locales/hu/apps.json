@@ -703,6 +703,11 @@
     "noEmulatorFor": "A Matinee még nem tud {{system}}-játékokat futtatni: ezen a szerveren nincs hozzájuk emulátor.",
     "noEmulator": "A Matinee még nem tudja futtatni ezt a játékot: ezen a szerveren nincs hozzá emulátor.",
     "addEmulatorWeb": "Egy rendszergazda hozzáadhat egyet a webes lejátszóban: Beállítások → Streamelés → Játékok.",
-    "emulatorGuide": "Így adhatsz hozzá saját emulátort"
+    "emulatorGuide": "Így adhatsz hozzá saját emulátort",
+    "pcGames": "PC-játékok (előzetes)",
+    "pcGamesHint": "A játékgazdán telepített Steam-játékok, annak videokártyáján futnak, és ide streamelődnek.",
+    "pcGamesEmpty": "A játékgazdán még nincs telepített játék.",
+    "steam": "Steam",
+    "steamHint": "A Steam Big Picture módja teljes képernyőn: válassz, játssz és lépj ki a kontrollerrel."
   }
 }

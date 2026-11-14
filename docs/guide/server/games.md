@@ -175,7 +175,7 @@ Matinee can also stream PC games from Steam. The games don't run on the Matinee 
 
 Only the games you own and have installed in Steam on the game host are listed. Matinee never downloads games.
 
-This is an early preview, played from **Games** in the web app by an admin:
+This is an early preview, played by an admin from **Games** in the web app, or from a Games library in the web app and the Matinee apps:
 
 1. On the game host, sign in to Steam and install the games you want to play.
 2. Run `matinee-gamehost` on the game host, as the user Steam runs as, with a secret token of your own:
@@ -198,6 +198,10 @@ The game host plays one game at a time. Closing the player quits the game, or le
 
 <!-- since: v0.2.7 -->
 In the web app, your keyboard and mouse control PC games and Steam as they are, so you can click Steam's buttons, type and play without a controller. A controller works too. For a game that turns the view with the mouse, choose **Capture mouse** at the top of the player; press Esc to let the mouse go. The game host needs write access to `/dev/uinput` for this, as it does for controllers.
+<!-- /since -->
+
+<!-- since: v0.2.7 -->
+The Matinee apps play PC games too, from app 1.0.42: on a TV, phone or tablet, **PC games** sits at the top of each Games library for admins, with **Steam** and each installed game. Play with a controller.
 <!-- /since -->
 
 <!-- since: v0.2.7 -->
