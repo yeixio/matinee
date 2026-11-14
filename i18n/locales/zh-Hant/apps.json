@@ -721,6 +721,19 @@
     "pcGamesHint": "遊戲主機上安裝的 Steam 遊戲,在它的顯示卡上執行並串流到這裡。",
     "pcGamesEmpty": "遊戲主機上還沒有安裝遊戲。",
     "steam": "Steam",
-    "steamHint": "全螢幕顯示 Steam 的大螢幕模式:用手把選擇、遊玩和結束遊戲。"
+    "steamHint": "全螢幕顯示 Steam 的大螢幕模式:用手把選擇、遊玩和結束遊戲。",
+    "menuHint": "按遙控器上的返回鍵可打字、用滑鼠等",
+    "typeText": "輸入文字",
+    "typePassword": "輸入密碼",
+    "typeHere": "在這裡輸入，然後選擇傳送",
+    "send": "傳送",
+    "pressEnter": "按 Enter",
+    "pressTab": "按 Tab",
+    "backspace": "退格",
+    "mouseOn": "把手把當滑鼠用",
+    "mouseOff": "把手把當手把用",
+    "mouseHint": "手把現在是滑鼠：左搖桿移動，下方按鈕點擊，右側按鈕按右鍵，右搖桿捲動。",
+    "backToGame": "回到遊戲",
+    "notTyped": "無法輸入：{{chars}}"
   }
 }

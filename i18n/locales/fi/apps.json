@@ -728,6 +728,19 @@
     "pcGamesHint": "Pelipalvelimelle asennetut Steam-pelit, pelattuna sen näytönohjaimella ja suoratoistettuna tänne.",
     "pcGamesEmpty": "Pelipalvelimelle ei ole vielä asennettu pelejä.",
     "steam": "Steam",
-    "steamHint": "Steamin Big Picture koko näytöllä: valitse, pelaa ja lopeta pelit ohjaimella."
+    "steamHint": "Steamin Big Picture koko näytöllä: valitse, pelaa ja lopeta pelit ohjaimella.",
+    "menuHint": "Paina kaukosäätimen Takaisin-painiketta kirjoittaaksesi, hiirelle ja muuhun",
+    "typeText": "Kirjoita tekstiä",
+    "typePassword": "Kirjoita salasana",
+    "typeHere": "Kirjoita tähän ja valitse Lähetä",
+    "send": "Lähetä",
+    "pressEnter": "Paina Enter",
+    "pressTab": "Paina Tab",
+    "backspace": "Askelpalautin",
+    "mouseOn": "Käytä ohjainta hiirenä",
+    "mouseOff": "Käytä ohjainta ohjaimena",
+    "mouseHint": "Ohjain on hiiri: vasen tikku liikuttaa sitä, alin painike napsauttaa, oikea painike napsauttaa oikealla ja oikea tikku vierittää.",
+    "backToGame": "Takaisin peliin",
+    "notTyped": "Ei voitu kirjoittaa: {{chars}}"
   }
 }

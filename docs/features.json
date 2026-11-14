@@ -759,16 +759,16 @@
               }
             },
             {
-              "name": "Play PC games with a keyboard and mouse",
+              "name": "Type and use a mouse in PC games",
               "doc": "/docs/server/games/#pc-games-from-steam-preview",
               "since": "v0.2.7",
               "apps": {
                 "web": true,
-                "ios": {"na": "The apps play PC games with a controller."},
-                "android": {"na": "The apps play PC games with a controller."},
-                "appletv": {"na": "The apps play PC games with a controller."},
-                "androidtv": {"na": "The apps play PC games with a controller."},
-                "tvweb": {"na": "The apps play PC games with a controller."}
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
               }
             }
           ]

@@ -721,6 +721,19 @@
     "pcGamesHint": "ゲームホストにインストールされた Steam のゲームを、そのグラフィックカードで動かしてここにストリーミングします。",
     "pcGamesEmpty": "ゲームホストにはまだゲームがインストールされていません。",
     "steam": "Steam",
-    "steamHint": "Steam の Big Picture を全画面で:コントローラーでゲームを選んで遊び、終了できます。"
+    "steamHint": "Steam の Big Picture を全画面で:コントローラーでゲームを選んで遊び、終了できます。",
+    "menuHint": "リモコンの戻るを押すと、文字入力やマウスなどが使えます",
+    "typeText": "文字を入力",
+    "typePassword": "パスワードを入力",
+    "typeHere": "ここに入力して、送信を選びます",
+    "send": "送信",
+    "pressEnter": "Enterを押す",
+    "pressTab": "Tabを押す",
+    "backspace": "後退",
+    "mouseOn": "コントローラーをマウスとして使う",
+    "mouseOff": "コントローラーをコントローラーとして使う",
+    "mouseHint": "コントローラーがマウスになります：左スティックで移動、下のボタンでクリック、右のボタンで右クリック、右スティックでスクロール。",
+    "backToGame": "ゲームに戻る",
+    "notTyped": "入力できませんでした：{{chars}}"
   }
 }

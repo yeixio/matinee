@@ -728,6 +728,19 @@
     "pcGamesHint": "Steam-games op je gamehost, gespeeld op zijn videokaart en hierheen gestreamd.",
     "pcGamesEmpty": "Er staan nog geen games op de gamehost.",
     "steam": "Steam",
-    "steamHint": "Big Picture van Steam schermvullend: kies, speel en sluit games met je controller."
+    "steamHint": "Big Picture van Steam schermvullend: kies, speel en sluit games met je controller.",
+    "menuHint": "Druk op Terug op de afstandsbediening om te typen, voor een muis en meer",
+    "typeText": "Tekst typen",
+    "typePassword": "Wachtwoord typen",
+    "typeHere": "Typ hier en kies Versturen",
+    "send": "Versturen",
+    "pressEnter": "Enter drukken",
+    "pressTab": "Tab drukken",
+    "backspace": "Backspace",
+    "mouseOn": "Controller als muis gebruiken",
+    "mouseOff": "Controller als controller gebruiken",
+    "mouseHint": "De controller is een muis: de linkerstick beweegt hem, de onderste knop klikt, de rechterknop klikt rechts en de rechterstick scrolt.",
+    "backToGame": "Terug naar het spel",
+    "notTyped": "Kon niet typen: {{chars}}"
   }
 }

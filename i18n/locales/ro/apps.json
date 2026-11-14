@@ -735,6 +735,19 @@
     "pcGamesHint": "Jocuri Steam instalate pe gazda de jocuri, rulate pe placa ei video și transmise aici.",
     "pcGamesEmpty": "Încă nu sunt jocuri instalate pe gazda de jocuri.",
     "steam": "Steam",
-    "steamHint": "Big Picture din Steam pe tot ecranul: alege, joacă și închide jocuri cu controlerul."
+    "steamHint": "Big Picture din Steam pe tot ecranul: alege, joacă și închide jocuri cu controlerul.",
+    "menuHint": "Apasă Înapoi pe telecomandă pentru tastare, un mouse și altele",
+    "typeText": "Tastează text",
+    "typePassword": "Tastează o parolă",
+    "typeHere": "Tastează aici, apoi alege Trimite",
+    "send": "Trimite",
+    "pressEnter": "Apasă Enter",
+    "pressTab": "Apasă Tab",
+    "backspace": "Backspace",
+    "mouseOn": "Folosește controllerul ca mouse",
+    "mouseOff": "Folosește controllerul ca controller",
+    "mouseHint": "Controllerul e un mouse: stickul stâng îl mișcă, butonul de jos face clic, cel din dreapta clic dreapta, iar stickul drept derulează.",
+    "backToGame": "Înapoi la joc",
+    "notTyped": "Nu s-a putut tasta: {{chars}}"
   }
 }

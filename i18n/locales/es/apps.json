@@ -735,6 +735,19 @@
     "pcGamesHint": "Juegos de Steam instalados en tu host de juegos, ejecutados en su tarjeta gráfica y transmitidos aquí.",
     "pcGamesEmpty": "Todavía no hay juegos instalados en el host de juegos.",
     "steam": "Steam",
-    "steamHint": "Big Picture de Steam a pantalla completa: elige, juega y cierra juegos con el mando."
+    "steamHint": "Big Picture de Steam a pantalla completa: elige, juega y cierra juegos con el mando.",
+    "menuHint": "Pulsa Atrás en el mando para escribir, usar un ratón y más",
+    "typeText": "Escribir texto",
+    "typePassword": "Escribir una contraseña",
+    "typeHere": "Escribe aquí y elige Enviar",
+    "send": "Enviar",
+    "pressEnter": "Pulsar Intro",
+    "pressTab": "Pulsar Tab",
+    "backspace": "Retroceso",
+    "mouseOn": "Usar el mando como ratón",
+    "mouseOff": "Usar el mando como mando",
+    "mouseHint": "El mando es un ratón: el stick izquierdo lo mueve, el botón de abajo hace clic, el de la derecha hace clic derecho y el stick derecho desplaza.",
+    "backToGame": "Volver al juego",
+    "notTyped": "No se pudo escribir: {{chars}}"
   }
 }

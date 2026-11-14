@@ -728,6 +728,19 @@
     "pcGamesHint": "Steam games installed on your game host, played on its graphics card and streamed here.",
     "pcGamesEmpty": "No games are installed on the game host yet.",
     "steam": "Steam",
-    "steamHint": "Steam's Big Picture, full screen: pick, play and quit games with your controller."
+    "steamHint": "Steam's Big Picture, full screen: pick, play and quit games with your controller.",
+    "menuHint": "Press Back on the remote for typing, a mouse and more",
+    "typeText": "Type text",
+    "typePassword": "Type a password",
+    "typeHere": "Type here, then choose Send",
+    "send": "Send",
+    "pressEnter": "Press Enter",
+    "pressTab": "Press Tab",
+    "backspace": "Backspace",
+    "mouseOn": "Use the controller as a mouse",
+    "mouseOff": "Use the controller as a controller",
+    "mouseHint": "The controller is a mouse: the left stick moves it, the bottom button clicks, the right button right-clicks and the right stick scrolls.",
+    "backToGame": "Back to the game",
+    "notTyped": "Couldn't type: {{chars}}"
   }
 }

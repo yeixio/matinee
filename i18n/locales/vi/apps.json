@@ -721,6 +721,19 @@
     "pcGamesHint": "Trò chơi Steam cài trên máy chủ trò chơi, chạy trên card đồ họa của nó và phát trực tuyến tới đây.",
     "pcGamesEmpty": "Máy chủ trò chơi chưa cài trò chơi nào.",
     "steam": "Steam",
-    "steamHint": "Big Picture của Steam toàn màn hình: chọn, chơi và thoát trò chơi bằng tay cầm."
+    "steamHint": "Big Picture của Steam toàn màn hình: chọn, chơi và thoát trò chơi bằng tay cầm.",
+    "menuHint": "Nhấn Quay lại trên điều khiển để gõ chữ, dùng chuột và hơn thế",
+    "typeText": "Gõ chữ",
+    "typePassword": "Gõ mật khẩu",
+    "typeHere": "Gõ ở đây, rồi chọn Gửi",
+    "send": "Gửi",
+    "pressEnter": "Nhấn Enter",
+    "pressTab": "Nhấn Tab",
+    "backspace": "Xóa lùi",
+    "mouseOn": "Dùng tay cầm làm chuột",
+    "mouseOff": "Dùng tay cầm làm tay cầm",
+    "mouseHint": "Tay cầm là chuột: cần trái di chuyển, nút dưới nhấp, nút phải nhấp chuột phải và cần phải cuộn.",
+    "backToGame": "Quay lại trò chơi",
+    "notTyped": "Không gõ được: {{chars}}"
   }
 }

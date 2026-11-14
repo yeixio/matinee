@@ -728,6 +728,19 @@
     "pcGamesHint": "Steam-spill installert på spillverten din, spilt på grafikkortet dens og strømmet hit.",
     "pcGamesEmpty": "Ingen spill er installert på spillverten ennå.",
     "steam": "Steam",
-    "steamHint": "Steams Big Picture i fullskjerm: velg, spill og avslutt spill med kontrolleren."
+    "steamHint": "Steams Big Picture i fullskjerm: velg, spill og avslutt spill med kontrolleren.",
+    "menuHint": "Trykk Tilbake på fjernkontrollen for å skrive, en mus og mer",
+    "typeText": "Skriv tekst",
+    "typePassword": "Skriv et passord",
+    "typeHere": "Skriv her, og velg Send",
+    "send": "Send",
+    "pressEnter": "Trykk Enter",
+    "pressTab": "Trykk Tab",
+    "backspace": "Tilbake",
+    "mouseOn": "Bruk kontrolleren som mus",
+    "mouseOff": "Bruk kontrolleren som kontroller",
+    "mouseHint": "Kontrolleren er en mus: venstre spak flytter den, nederste knapp klikker, høyre knapp høyreklikker og høyre spak ruller.",
+    "backToGame": "Tilbake til spillet",
+    "notTyped": "Kunne ikke skrive: {{chars}}"
   }
 }

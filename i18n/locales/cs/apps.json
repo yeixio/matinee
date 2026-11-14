@@ -742,6 +742,19 @@
     "pcGamesHint": "Hry ze Steamu nainstalované na herním hostiteli, běží na jeho grafické kartě a streamují se sem.",
     "pcGamesEmpty": "Na herním hostiteli zatím nejsou nainstalované žádné hry.",
     "steam": "Steam",
-    "steamHint": "Big Picture ze Steamu přes celou obrazovku: hry vybírejte, hrajte a ukončujte ovladačem."
+    "steamHint": "Big Picture ze Steamu přes celou obrazovku: hry vybírejte, hrajte a ukončujte ovladačem.",
+    "menuHint": "Stiskněte Zpět na ovladači pro psaní, myš a další",
+    "typeText": "Napsat text",
+    "typePassword": "Napsat heslo",
+    "typeHere": "Pište sem a pak zvolte Odeslat",
+    "send": "Odeslat",
+    "pressEnter": "Stisknout Enter",
+    "pressTab": "Stisknout Tab",
+    "backspace": "Backspace",
+    "mouseOn": "Používat ovladač jako myš",
+    "mouseOff": "Používat ovladač jako ovladač",
+    "mouseHint": "Ovladač je myš: levá páčka ji posouvá, spodní tlačítko kliká, pravé tlačítko kliká pravým a pravá páčka posouvá stránku.",
+    "backToGame": "Zpět ke hře",
+    "notTyped": "Nepodařilo se napsat: {{chars}}"
   }
 }
