@@ -1,0 +1,7 @@
+[matinee]
+name=Matinee
+baseurl=https://raw.githubusercontent.com/yeixio/matinee/packages/rpm
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://raw.githubusercontent.com/yeixio/matinee/packages/matinee.asc

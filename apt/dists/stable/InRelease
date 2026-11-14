@@ -1,0 +1,59 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Origin: Matinee
+Label: Matinee
+Suite: stable
+Codename: stable
+Architectures: amd64 arm64 armhf
+Components: main
+Description: Matinee media server
+Date: Sat, 14 Nov 2026 14:35:00 +0000
+MD5Sum:
+ 4764369b93b0ced16bdd5723921d5f0d              184 Release
+ b1a582c1731f8ebeda740922cbbc4c71              672 main/binary-amd64/Packages
+ 19148920cba93082f15bf02572300823              482 main/binary-amd64/Packages.gz
+ 8ced6ce2df88a51d3a8ae4773010119c              671 main/binary-arm64/Packages
+ 9fbb47986803456ee5850592cdc5395f              482 main/binary-arm64/Packages.gz
+ 5e761b1bae1648187fc76dfca87c788a              670 main/binary-armhf/Packages
+ ae947a3c247f1437f99ff773fb22641c              481 main/binary-armhf/Packages.gz
+SHA1:
+ 8269bd12047f8b9c7fdd27dcd0f9201884e87e64              184 Release
+ e259faac16c0c32efd5a98aa0bb10bd3f9607312              672 main/binary-amd64/Packages
+ 2e849912a9efe4bec2b53f9f94ccc286370ddf9a              482 main/binary-amd64/Packages.gz
+ 9a576f0c9a58a8f891ba4e0e6c9486e7ebb71372              671 main/binary-arm64/Packages
+ 006d9e92de2c7cdc7d207c251c044ebb84c29eef              482 main/binary-arm64/Packages.gz
+ cd254bc73e80eac43de32fda5396d274d0ba5387              670 main/binary-armhf/Packages
+ 84d847f46fbf0a9edc7450b326abc875ec4c3ae7              481 main/binary-armhf/Packages.gz
+SHA256:
+ 45d5182476b3ae5a6538484124aa7d982d3b509625a4c63fdb7d4543267f1aad              184 Release
+ f7a44c73af49f6a9f8bb7f724bd14430a5c7c780bb338a8c96642c52fe554729              672 main/binary-amd64/Packages
+ 8715d01d69843695b2598d48454b6e12d67d8fa9a46811c96d5ca23af404498a              482 main/binary-amd64/Packages.gz
+ ee925edc9eea23293577987317b2d76e5d313f36ee846857a65280cf8d9adda7              671 main/binary-arm64/Packages
+ b42d2697c3438e3b5a12c139ab92c9da3a2dc6b7deec95f6bc299cbb6bb8d9f3              482 main/binary-arm64/Packages.gz
+ b9623262fcf8d7953b51db5f8d6afd757ac38ac0b531507f94aca69e1b51be32              670 main/binary-armhf/Packages
+ 664456835dc53b5e9c610e63028d3b2b2fa62bdbfb94a99fe21726e88e7763eb              481 main/binary-armhf/Packages.gz
+SHA512:
+ 6346fbbc2a17e44c775bdf0f4ceba6eb098a2bb77d4d7836c7d61c32c27a253b36b3c14d99d3f393f48397b08b84e8a4d27dc2caca5181c498d75b133b7ba4b9              184 Release
+ 9f46952b9a8c5200c44e2521e39e866b4938f52712ea7b121f9da0c9645bbd4ecfb4fb2ebd1c9debe33950d92cafdc983f6f7c38c00b6f75c02e1289134aed5d              672 main/binary-amd64/Packages
+ 52ca56d16a31ccfdb1a56eb6228d23f1df4e236751ca6865f71f08aea074bccee07743e6fa8bc0ebe33a60156b41f97c5bc2c57a4f214d35eb23e544132477a2              482 main/binary-amd64/Packages.gz
+ ac7d60b19d7ba9a005634ea7a0ef55855b413c9bf6ef82cf85f8b38177af09d8d90af34624eb7c3fca25f697fbf2485786fff186fad7e4dfc76970945fc8c543              671 main/binary-arm64/Packages
+ 4e594628960baa543fa5a073aed38c096bee7d7ea4c8f6be222a5ba2d6e48d50df6ca0a80267b61e29256f18f60b47986bedd67de3462b0dff3ab976712fdc9f              482 main/binary-arm64/Packages.gz
+ 665617d078abd197caf44375e355433f8a9b83d3e590b1a824c023a21521690cc6161a49095bda54def819c62c6a83b3b49848b462312c510f45a18faf7224bd              670 main/binary-armhf/Packages
+ 9437c7979dba3893c83cc019e4a68777e90878c2136e2f597d0d6867e7311ab5f1bea58e4fcf1b10f54099a55f6273b45b6f78d11f98534cfc9af0eee61cd4bc              481 main/binary-armhf/Packages.gz
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEETuM/jO4Ha7DJp8VZIfW+n3JqKJUFAmr4cZQACgkQIfW+n3Jq
+KJXzIRAAx8CEGnx+YLwtiEQyq6Qm5odX2v0eLUijFTYP7dKN4bIwShOOxlO5QZCi
+AzJIVkZ/MfGdCjfNeZ4A9qjVrVUec3BlmBW8VLtGuERI2Iuqfw2asai+h4NOLj9r
+I4fNH4tezSSGQBgvmaIZL91WgOdy6KdCpSz7o5htQ5LWtvCMTuJU5JHQ3NsMGM3T
++NC/SPj8ETJBmLsThVmjyWqKru/aE+pQRQU6G7TIGyynZk8nLbzMn46Cnrx1P272
+6dqKhTpid4iTI3Vd9yJiSJmk17XqOF3IsIvFmKyouqCmhRzF+WJT4nPAEExvjN9D
+ulKHnyu91Zk5E8cyvWwS7YrAlhyJ2NdZFLXTzJFkQwFR8pR3HX19Tsze6SHsDBW1
+sFufN1LUu9Ey9gDKAvJcDFM6erRT7kn/aIPwL6WyZh3i0vin7lkeL19XdnIOJ5wQ
+V9N/IPC2WQdYk3t7Y63o5fELpEQDlj3tpQbIKu+502+RSCEKFPIBOeNScsyxefvs
+b8edvm488F4J9hCHRenlMqxiyzACx58VwQbBN53umiaGwzEd0/fwQUp5NE92YpC0
+uVSyF7F2DLwrRJMyF+oA9g/pT4ku/7WRelTuRCQMyLnaX6eefMvUmFYTKbmBl8Z2
+C6MIQUlC67eyW5dtEdFoDrIR1lnvNuppDenT9BlPGIyn/1n6PVE=
+=eUSk
+-----END PGP SIGNATURE-----
