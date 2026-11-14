@@ -34,6 +34,7 @@ var moving atomic.Pointer[string]
 func serveWhileWaiting(addrs []string, log *slog.Logger) (stop func()) {
 	h := waitingHandler()
 	var servers []*http.Server
+	var listeners []net.Listener
 	for _, addr := range addrs {
 		if addr == "" {
 			continue
@@ -46,6 +47,7 @@ func serveWhileWaiting(addrs []string, log *slog.Logger) (stop func()) {
 		}
 		srv := &http.Server{Handler: h, ReadHeaderTimeout: 10 * time.Second}
 		servers = append(servers, srv)
+		listeners = append(listeners, ln)
 		go func() {
 			if err := srv.Serve(ln); err != nil && !errors.Is(err, http.ErrServerClosed) {
 				log.Warn("waiting page stopped", "addr", addr, "err", err)
@@ -57,6 +59,12 @@ func serveWhileWaiting(addrs []string, log *slog.Logger) (stop func()) {
 		defer cancel()
 		for _, s := range servers {
 			s.Shutdown(ctx)
+		}
+		// Shutdown only closes listeners Serve has started on; one whose
+		// goroutine hasn't run yet (a SQLite database opens at once) would
+		// keep the address from the real server.
+		for _, ln := range listeners {
+			ln.Close()
 		}
 	}
 }
