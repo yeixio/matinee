@@ -4,14 +4,14 @@ package gamehost
 
 import "errors"
 
-type pad struct{ state padState }
+type device struct{}
 
-func newPad(int) (*pad, error) {
-	return nil, errors.New("virtual gamepads need Linux for now")
+func newDevice(deviceSpec) (*device, error) {
+	return nil, errors.New("virtual controllers, keyboards and mice need Linux for now")
 }
 
-func (p *pad) send([]event) error { return nil }
-func (p *pad) close()             {}
+func (d *device) send([]event) error { return nil }
+func (d *device) close()             {}
 
 func gamePIDs(int) []int { return nil }
 func stopGame(int)       {}

@@ -1692,6 +1692,8 @@
     "steamDesktopHint": "Inicia sesión en Steam e instala juegos en la pantalla del host de juegos. Se abre en una pestaña nueva.",
     "controller": "Mando: {{name}}",
     "pressButton": "Conecta un mando y pulsa un botón, o usa el teclado: flechas, Z, X, A, S e Intro.",
+    "keyboardMouse": "Tu teclado y tu ratón controlan el juego. También funciona un mando.",
+    "captureMouse": "Capturar ratón",
     "showLag": "Mostrar retraso",
     "hideLag": "Ocultar retraso",
     "stop": "Dejar de jugar",

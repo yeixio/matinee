@@ -342,7 +342,12 @@ func (s *Session) startWebRTC(ctx context.Context, offer string) (string, error)
 		go drainRTCP(sender)
 	}
 	s.pc.OnDataChannel(func(dc *webrtc.DataChannel) {
-		s.dc.Store(dc)
+		// The player's keyboard and mouse for a PC game come on a channel
+		// of their own, ordered and sure to arrive, so a key let go is never
+		// lost; the lag numbers go back on the input one.
+		if dc.Label() != "keys" {
+			s.dc.Store(dc)
+		}
 		dc.OnMessage(func(msg webrtc.DataChannelMessage) { s.input(func(b []byte) { dc.Send(b) }, msg.Data) })
 	})
 	text := func(t string) {

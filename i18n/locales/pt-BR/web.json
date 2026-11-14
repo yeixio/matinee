@@ -1692,6 +1692,8 @@
     "steamDesktopHint": "Entre na Steam e instale jogos na tela do host de jogos. Abre em uma nova aba.",
     "controller": "Controle: {{name}}",
     "pressButton": "Conecte um controle e aperte um botão, ou use o teclado: setas, Z, X, A, S e Enter.",
+    "keyboardMouse": "Seu teclado e mouse controlam o jogo. Um controle também funciona.",
+    "captureMouse": "Capturar mouse",
     "showLag": "Mostrar atraso",
     "hideLag": "Ocultar atraso",
     "stop": "Parar de jogar",

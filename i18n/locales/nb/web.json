@@ -1678,6 +1678,8 @@
     "steamDesktopHint": "Logg på Steam og installer spill på spillvertens skjerm. Åpnes i en ny fane.",
     "controller": "Kontroller: {{name}}",
     "pressButton": "Koble til en kontroller og trykk på en knapp, eller bruk tastaturet: piler, Z, X, A, S og Enter.",
+    "keyboardMouse": "Tastaturet og musen styrer spillet. En kontroller fungerer også.",
+    "captureMouse": "Fang musen",
     "showLag": "Vis forsinkelse",
     "hideLag": "Skjul forsinkelse",
     "stop": "Slutt å spille",

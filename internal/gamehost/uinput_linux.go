@@ -22,33 +22,46 @@ const (
 	uiDevDestroy = 0x5502
 	uiSetEvBit   = 0x40045564
 	uiSetKeyBit  = 0x40045565
+	uiSetRelBit  = 0x40045566
 	uiSetAbsBit  = 0x40045567
 )
 
-// pad is one virtual gamepad made with /dev/uinput.
-type pad struct {
-	f     *os.File
-	state padState
+// device is one virtual input device made with /dev/uinput.
+type device struct {
+	f *os.File
 }
 
-// newPad makes a virtual Xbox 360 pad, which Steam Input knows.
-func newPad(n int) (*pad, error) {
+// newDevice makes a virtual input device with what spec says it has.
+func newDevice(spec deviceSpec) (*device, error) {
 	f, err := os.OpenFile("/dev/uinput", os.O_WRONLY|unix.O_NONBLOCK, 0)
 	if err != nil {
-		return nil, fmt.Errorf("can't make a virtual gamepad: %w", err)
+		return nil, fmt.Errorf("can't make a virtual %s: %w", spec.Name, err)
 	}
 	fd := int(f.Fd())
-	set := func(req uint, v int) error { return unix.IoctlSetInt(fd, req, v) }
-	for _, err := range []error{set(uiSetEvBit, evKey), set(uiSetEvBit, evAbs), set(uiSetEvBit, evSyn)} {
-		if err != nil {
-			f.Close()
-			return nil, fmt.Errorf("uinput: %w", err)
-		}
+	fail := func(err error) (*device, error) {
+		f.Close()
+		return nil, fmt.Errorf("uinput: %w", err)
 	}
-	for _, k := range padKeys {
-		if err := set(uiSetKeyBit, int(k)); err != nil {
-			f.Close()
-			return nil, fmt.Errorf("uinput: %w", err)
+	set := func(req uint, v int) error { return unix.IoctlSetInt(fd, req, v) }
+	bits := []struct {
+		req  uint
+		ev   int
+		list []uint16
+	}{{uiSetKeyBit, evKey, spec.Keys}, {uiSetRelBit, evRel, spec.Rels}}
+	if err := set(uiSetEvBit, evSyn); err != nil {
+		return fail(err)
+	}
+	for _, b := range bits {
+		if len(b.list) == 0 {
+			continue
+		}
+		if err := set(uiSetEvBit, b.ev); err != nil {
+			return fail(err)
+		}
+		for _, c := range b.list {
+			if err := set(b.req, int(c)); err != nil {
+				return fail(err)
+			}
 		}
 	}
 	// struct uinput_user_dev: name[80], input_id (bustype, vendor,
@@ -60,29 +73,31 @@ func newPad(n int) (*pad, error) {
 		FFMax                      uint32
 		AbsMax, AbsMin, Fuzz, Flat [64]int32
 	}
-	copy(dev.Name[:], fmt.Sprintf("Matinee Controller %d", n+1))
-	dev.Bus, dev.Vendor, dev.Product, dev.Ver = 0x03, 0x045e, 0x028e, 0x0110 // USB, Microsoft, Xbox 360 pad
-	for _, a := range padAxes {
+	copy(dev.Name[:], spec.Name)
+	dev.Bus, dev.Vendor, dev.Product, dev.Ver = spec.Bus, spec.Vendor, spec.Product, spec.Version
+	if len(spec.Abs) > 0 {
+		if err := set(uiSetEvBit, evAbs); err != nil {
+			return fail(err)
+		}
+	}
+	for _, a := range spec.Abs {
 		if err := set(uiSetAbsBit, int(a.Code)); err != nil {
-			f.Close()
-			return nil, fmt.Errorf("uinput: %w", err)
+			return fail(err)
 		}
 		dev.AbsMax[a.Code], dev.AbsMin[a.Code], dev.Flat[a.Code] = a.Max, a.Min, a.Flat
 	}
 	var b bytes.Buffer
 	binary.Write(&b, binary.NativeEndian, &dev)
 	if _, err := f.Write(b.Bytes()); err != nil {
-		f.Close()
-		return nil, fmt.Errorf("uinput: %w", err)
+		return fail(err)
 	}
 	if err := unix.IoctlSetInt(fd, uiDevCreate, 0); err != nil {
-		f.Close()
-		return nil, fmt.Errorf("uinput: %w", err)
+		return fail(err)
 	}
-	return &pad{f: f}, nil
+	return &device{f: f}, nil
 }
 
-func (p *pad) send(evs []event) error {
+func (d *device) send(evs []event) error {
 	if len(evs) == 0 {
 		return nil
 	}
@@ -96,13 +111,13 @@ func (p *pad) send(evs []event) error {
 			Value      int32
 		}{now.Unix(), int64(now.Nanosecond() / 1000), e.Type, e.Code, e.Value})
 	}
-	_, err := p.f.Write(b.Bytes())
+	_, err := d.f.Write(b.Bytes())
 	return err
 }
 
-func (p *pad) close() {
-	unix.IoctlSetInt(int(p.f.Fd()), uiDevDestroy, 0)
-	p.f.Close()
+func (d *device) close() {
+	unix.IoctlSetInt(int(d.f.Fd()), uiDevDestroy, 0)
+	d.f.Close()
 }
 
 // gamePIDs are the processes Steam started for a game: they carry its app

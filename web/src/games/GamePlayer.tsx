@@ -39,6 +39,8 @@ export function GamePlayer({
   // picture paused until there is one.
   const [blocked, setBlocked] = useState(false)
   const [showLag, setShowLag] = useState(itemId === undefined)
+  // A PC game takes the keyboard and mouse as they are.
+  const pcGame = hostApp !== undefined || !!steam
 
   useEffect(() => {
     let stream: GameStream | undefined
@@ -80,8 +82,16 @@ export function GamePlayer({
       <div className="flex items-center gap-3 px-4 py-3">
         <div className="min-w-0 flex-1">
           <div className="truncate font-medium">{name}</div>
-          <div className="truncate text-xs text-white/60">{lag.controller ? t('games.controller', { name: lag.controller }) : t('games.pressButton')}</div>
+          <div className="truncate text-xs text-white/60">
+            {lag.controller ? t('games.controller', { name: lag.controller }) : pcGame ? t('games.keyboardMouse') : t('games.pressButton')}
+          </div>
         </div>
+        {pcGame && (
+          // For games that turn the view with the mouse; Esc lets it go.
+          <button type="button" className="rounded-lg px-3 py-1.5 text-sm text-white/70 hover:bg-white/10" onClick={() => video.current?.requestPointerLock?.()}>
+            {t('games.captureMouse')}
+          </button>
+        )}
         <button type="button" className="rounded-lg px-3 py-1.5 text-sm text-white/70 hover:bg-white/10" onClick={() => setShowLag(!showLag)}>
           {showLag ? t('games.hideLag') : t('games.showLag')}
         </button>

@@ -1678,6 +1678,8 @@
     "steamDesktopHint": "Sign in to Steam and install games on the game host's screen. Opens in a new tab.",
     "controller": "Controller: {{name}}",
     "pressButton": "Connect a controller and press a button, or use the keyboard: arrows, Z, X, A, S and Enter.",
+    "keyboardMouse": "Your keyboard and mouse control the game. A controller works too.",
+    "captureMouse": "Capture mouse",
     "showLag": "Show lag",
     "hideLag": "Hide lag",
     "stop": "Stop playing",

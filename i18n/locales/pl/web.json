@@ -1706,6 +1706,8 @@
     "steamDesktopHint": "Zaloguj się do Steam i instaluj gry na ekranie hosta gier. Otwiera się w nowej karcie.",
     "controller": "Kontroler: {{name}}",
     "pressButton": "Podłącz kontroler i naciśnij przycisk albo użyj klawiatury: strzałki, Z, X, A, S i Enter.",
+    "keyboardMouse": "Grą sterujesz klawiaturą i myszą. Kontroler też działa.",
+    "captureMouse": "Przechwyć mysz",
     "showLag": "Pokaż opóźnienie",
     "hideLag": "Ukryj opóźnienie",
     "stop": "Zakończ grę",

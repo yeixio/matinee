@@ -215,12 +215,27 @@ func (h *Host) play(w http.ResponseWriter, r *http.Request) {
 		}
 	}()
 
+	// The player's controllers, keyboard and mouse, made when first used.
+	type pad struct {
+		dev   *device
+		state padState
+	}
 	var pads [4]*pad
+	var keyboard, pointer *device
+	held := map[uint16]bool{}
 	defer func() {
 		for _, p := range pads {
 			if p != nil {
-				p.close()
+				p.dev.close()
 			}
+		}
+		if keyboard != nil {
+			// Nothing stays pressed once the player has gone.
+			keyboard.send(releaseAll(held))
+			keyboard.close()
+		}
+		if pointer != nil {
+			pointer.close()
 		}
 	}()
 	padFor := func(port int) *pad {
@@ -228,31 +243,58 @@ func (h *Host) play(w http.ResponseWriter, r *http.Request) {
 			return nil
 		}
 		if pads[port] == nil {
-			p, err := newPad(port)
+			d, err := newDevice(padSpec(port))
 			if err != nil {
 				log.Warn("no virtual gamepad", "err", err)
 				return nil
 			}
-			pads[port] = p
+			pads[port] = &pad{dev: d}
 		}
 		return pads[port]
+	}
+	// A device that couldn't be made isn't tried again for every key.
+	var noKeyboard, noPointer bool
+	deviceFor := func(k kbmKind) *device {
+		open := func(d **device, failed *bool, spec deviceSpec) *device {
+			if *d == nil && !*failed {
+				var err error
+				if *d, err = newDevice(spec); err != nil {
+					log.Warn("no virtual "+spec.Name, "err", err)
+					*failed = true
+				}
+			}
+			return *d
+		}
+		switch k {
+		case kbmKeys:
+			return open(&keyboard, &noKeyboard, keyboardSpec())
+		case kbmPointer:
+			return open(&pointer, &noPointer, pointerSpec())
+		}
+		return nil
 	}
 	for {
 		typ, b, err := conn.Read(ctx)
 		if err != nil {
 			return
 		}
-		if typ != websocket.MessageBinary || len(b) < 4 {
+		if typ != websocket.MessageBinary || len(b) < 3 {
 			continue
 		}
 		switch b[0] {
 		case 1:
-			if p := padFor(int(b[1])); p != nil {
-				p.send(p.state.setButtons(uint16(b[2]) | uint16(b[3])<<8))
+			if p := padFor(int(b[1])); p != nil && len(b) >= 4 {
+				p.dev.send(p.state.setButtons(uint16(b[2]) | uint16(b[3])<<8))
 			}
 		case 3:
-			if p := padFor(int(b[1])); p != nil {
-				p.send(p.state.setStick(int(b[2]), int8(b[3])))
+			if p := padFor(int(b[1])); p != nil && len(b) >= 4 {
+				p.dev.send(p.state.setStick(int(b[2]), int8(b[3])))
+			}
+		default:
+			if k, evs := kbmEvents(b, held); len(evs) > 0 {
+				if d := deviceFor(k); d != nil {
+					d.send(evs)
+				}
 			}
 		}
 	}

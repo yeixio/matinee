@@ -1692,6 +1692,8 @@
     "steamDesktopHint": "Conectează-te la Steam și instalează jocuri pe ecranul gazdei de jocuri. Se deschide într-o filă nouă.",
     "controller": "Controller: {{name}}",
     "pressButton": "Conectează un controller și apasă un buton, sau folosește tastatura: săgeți, Z, X, A, S și Enter.",
+    "keyboardMouse": "Tastatura și mouse-ul controlează jocul. Merge și un controller.",
+    "captureMouse": "Capturează mouse-ul",
     "showLag": "Arată întârzierea",
     "hideLag": "Ascunde întârzierea",
     "stop": "Oprește jocul",

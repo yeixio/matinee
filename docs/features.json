@@ -757,6 +757,19 @@
                 "androidtv": {"na": "PC games are a preview, played from the web app for now."},
                 "tvweb": {"na": "PC games are a preview, played from the web app for now."}
               }
+            },
+            {
+              "name": "Play PC games with a keyboard and mouse",
+              "doc": "/docs/server/games/#pc-games-from-steam-preview",
+              "since": "v0.2.7",
+              "apps": {
+                "web": true,
+                "ios": {"na": "PC games are a preview, played from the web app for now."},
+                "android": {"na": "PC games are a preview, played from the web app for now."},
+                "appletv": {"na": "PC games are a preview, played from the web app for now."},
+                "androidtv": {"na": "PC games are a preview, played from the web app for now."},
+                "tvweb": {"na": "PC games are a preview, played from the web app for now."}
+              }
             }
           ]
         },

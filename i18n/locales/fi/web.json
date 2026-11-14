@@ -1678,6 +1678,8 @@
     "steamDesktopHint": "Kirjaudu Steamiin ja asenna pelejä pelipalvelimen näytöllä. Avautuu uuteen välilehteen.",
     "controller": "Ohjain: {{name}}",
     "pressButton": "Yhdistä ohjain ja paina nappia, tai käytä näppäimistöä: nuolet, Z, X, A, S ja Enter.",
+    "keyboardMouse": "Näppäimistö ja hiiri ohjaavat peliä. Myös peliohjain toimii.",
+    "captureMouse": "Kaappaa hiiri",
     "showLag": "Näytä viive",
     "hideLag": "Piilota viive",
     "stop": "Lopeta peli",

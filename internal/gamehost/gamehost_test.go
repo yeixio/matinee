@@ -318,3 +318,40 @@ func TestDesktop(t *testing.T) {
 		t.Fatal("desktop without one")
 	}
 }
+
+func TestKeyboardMouseEvents(t *testing.T) {
+	held := map[uint16]bool{}
+	k, evs := kbmEvents([]byte{4, 30, 0, 1}, held) // KEY_A down
+	if k != kbmKeys || len(evs) != 2 || evs[0] != (event{evKey, 30, 1}) {
+		t.Fatalf("key down: %v %v", k, evs)
+	}
+	if _, evs := kbmEvents([]byte{4, 30, 0, 1}, held); evs != nil {
+		t.Errorf("a key held isn't pressed again: %v", evs)
+	}
+	if _, evs := kbmEvents([]byte{4, 0, 1, 1}, held); evs != nil {
+		t.Errorf("code 256 is past the keyboard: %v", evs)
+	}
+	k, evs = kbmEvents([]byte{5, 0xff, 0xff, 0x00, 0x80}, held)
+	if k != kbmPointer || evs[0] != (event{evAbs, absX, 65535}) || evs[1] != (event{evAbs, absY, 32768}) {
+		t.Errorf("pointer: %v %v", k, evs)
+	}
+	k, evs = kbmEvents([]byte{6, 0xfb, 0xff, 3, 0}, held) // dx -5, dy 3
+	if k != kbmKeys || evs[0] != (event{evRel, relX, -5}) || evs[1] != (event{evRel, relY, 3}) {
+		t.Errorf("move: %v %v", k, evs)
+	}
+	k, evs = kbmEvents([]byte{7, 2, 1}, held)
+	if k != kbmKeys || evs[0] != (event{evKey, btnRight, 1}) {
+		t.Errorf("right button: %v %v", k, evs)
+	}
+	if _, evs := kbmEvents([]byte{7, 9, 1}, held); evs != nil {
+		t.Errorf("unknown button: %v", evs)
+	}
+	_, evs = kbmEvents([]byte{8, 0xff, 0}, held)
+	if len(evs) != 2 || evs[0] != (event{evRel, relWheel, -1}) {
+		t.Errorf("wheel: %v", evs)
+	}
+	evs = releaseAll(held)
+	if len(evs) != 3 || held[30] || held[btnRight] {
+		t.Errorf("release all: %v %v", evs, held)
+	}
+}
