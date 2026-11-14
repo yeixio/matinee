@@ -974,6 +974,33 @@
         "before-restore": "復元前"
       }
     },
+    "database": {
+      "title": "データベース",
+      "usesSqlite": "Matinee は SQLite ファイル {{where}} を使っています。",
+      "usesPostgres": "Matinee は PostgreSQL データベース {{where}} を使っています。",
+      "movedFrom": "{{time}} に {{from}} から移動しました:{{rows}} 行をコピーして数えました。",
+      "configured": "サーバーの設定には、移動元のデータベース {{old}} がまだ書かれています。この新しいデータベースに変更してください(MATINEE_DATABASE_URL、または Helm チャートの database.url)。それまでは古いデータベースを動かしたままにしてください。新しいデータベースの場所を Matinee に伝えるのは古いほうです。",
+      "pending": "Matinee は次回起動時にデータベースを {{where}} へ移動します。",
+      "cancel": "移動をキャンセル",
+      "moving": "データベースを移動しています。すべてのコピーと確認が終わると Matinee が再び開きます。",
+      "moved": "移動しました。Matinee は新しいデータベースで動いており、古いデータベースはそのまま残っています。",
+      "failed": "前回の移動はうまくいかなかったため、Matinee はデータベースを変更せずに使い続けています:{{error}}",
+      "intro": "すべてを別のデータベースへ移動します。Matinee が移動先の自分のテーブルにコピーし、両方で各テーブルの行数を数えてから切り替えます。今のデータベースのデータはすべて残ります。",
+      "moveTo": "移動先",
+      "postgres": "PostgreSQL",
+      "sqlite": "SQLite ファイル",
+      "noSqliteHere": "Kubernetes では Matinee のデータフォルダーが Pod の入れ替えのたびに空になるため、そこに SQLite ファイルは置けません。",
+      "url": "PostgreSQL のアドレス",
+      "urlHint": "PostgreSQL サーバー上の、Matinee のユーザーが所有する空のデータベース。先に作成してください(例:CREATE DATABASE matinee)。",
+      "file": "ファイル",
+      "fileHint": "消えないディスク上の、新しいファイルのフルパス。",
+      "check": "確認",
+      "checking": "確認中…",
+      "checkOk": "Matinee は {{where}} へ移動できます。",
+      "move": "データベースを移動",
+      "moveConfirm": "データベースを {{where}} へ移動しますか?Matinee が再起動し、すべてをコピーして確認し、新しいデータベースで開きます。再生は少しのあいだ止まります。",
+      "restartByHand": "このサーバーは自分で再起動できません。移動を完了するには Matinee を再起動してください。"
+    },
     "updates": {
       "title": "アップデート",
       "running": "このサーバーは <code>{{version}}</code> で動いています。",

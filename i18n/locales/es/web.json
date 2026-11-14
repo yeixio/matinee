@@ -986,6 +986,33 @@
         "before-restore": "Antes de una restauración"
       }
     },
+    "database": {
+      "title": "Base de datos",
+      "usesSqlite": "Matinee usa el archivo SQLite {{where}}.",
+      "usesPostgres": "Matinee usa la base de datos PostgreSQL {{where}}.",
+      "movedFrom": "Trasladada aquí desde {{from}} el {{time}}: {{rows}} filas copiadas y contadas.",
+      "configured": "La configuración del servidor aún indica la base de datos de la que se trasladó, {{old}}. Cámbiala a esta (MATINEE_DATABASE_URL, o database.url en el chart de Helm). Hasta entonces, mantén la antigua en marcha: le dice a Matinee dónde está la nueva.",
+      "pending": "Matinee trasladará su base de datos a {{where}} la próxima vez que se inicie.",
+      "cancel": "Cancelar traslado",
+      "moving": "Trasladando la base de datos. Matinee vuelve a abrirse cuando todo esté copiado y comprobado.",
+      "moved": "Trasladada. Matinee ya funciona con la nueva base de datos y la antigua se conserva tal cual.",
+      "failed": "El último traslado no funcionó, así que Matinee mantuvo su base de datos sin cambios: {{error}}",
+      "intro": "Traslada todo a otra base de datos: Matinee lo copia en sus propias tablas allí, cuenta las filas de cada tabla en ambas y luego cambia. La base de datos actual conserva todos sus datos.",
+      "moveTo": "Trasladar a",
+      "postgres": "PostgreSQL",
+      "sqlite": "Archivo SQLite",
+      "noSqliteHere": "En Kubernetes, la carpeta de datos de Matinee se vacía cada vez que se reemplaza su pod, así que no puede haber un archivo SQLite allí.",
+      "url": "Dirección de PostgreSQL",
+      "urlHint": "Una base de datos vacía en el servidor PostgreSQL, propiedad del usuario de Matinee. Créala antes, por ejemplo con CREATE DATABASE matinee.",
+      "file": "Archivo",
+      "fileHint": "La ruta completa de un archivo nuevo, en un disco que perdure.",
+      "check": "Comprobar",
+      "checking": "Comprobando…",
+      "checkOk": "Matinee puede trasladarse a {{where}}.",
+      "move": "Trasladar base de datos",
+      "moveConfirm": "¿Trasladar la base de datos a {{where}}? Matinee se reinicia, copia todo, lo comprueba y abre con la nueva base de datos. La reproducción se detiene un momento.",
+      "restartByHand": "Este servidor no puede reiniciarse solo: reinicia Matinee para terminar un traslado."
+    },
     "updates": {
       "title": "Actualizaciones",
       "running": "Este servidor ejecuta <code>{{version}}</code>.",

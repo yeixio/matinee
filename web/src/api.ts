@@ -1427,6 +1427,24 @@ export type Backups = {
   lastError?: string
 }
 
+/** Which database the server uses, and moving it (Settings → Server health → Database). */
+export type DatabaseInfo = {
+  kind: 'sqlite' | 'postgres'
+  /** The database in use: a PostgreSQL URL without its password, or a SQLite file. */
+  where: string
+  /** Set when the server's settings still name the database it was moved from. */
+  configured?: string
+  movedFrom?: { from: string; at: number; rows: number }
+  /** A move waiting for the next start. */
+  pending?: string
+  lastError?: string
+  canRestart: boolean
+  /** Where a SQLite file could go. */
+  suggestedFile?: string
+  /** False on Kubernetes, where the data folder doesn't last. */
+  sqliteOk: boolean
+}
+
 export type UpdateChannel = 'release' | 'main'
 export type UpdateSettings = { channel: UpdateChannel; auto: boolean }
 export type InstallKind = 'argocd' | 'kubernetes' | 'docker' | 'apt' | 'dnf' | 'homebrew' | 'app' | 'binary' | 'source'
@@ -1906,6 +1924,10 @@ export const api = {
   checkUpdates: () => request<Updates>('POST', '/api/v1/admin/updates/check'),
   applyUpdate: () => request<Updates>('POST', '/api/v1/admin/updates/apply'),
   restartServer: () => request<{ bootId: string }>('POST', '/api/v1/admin/restart'),
+  database: () => request<DatabaseInfo>('GET', '/api/v1/admin/database'),
+  checkDatabaseMove: (to: string) => request<{ where: string }>('POST', '/api/v1/admin/database/check', { to }),
+  moveDatabase: (to: string) => request<DatabaseInfo & { restarting: boolean; bootId?: string }>('POST', '/api/v1/admin/database/move', { to }),
+  cancelDatabaseMove: () => request<DatabaseInfo>('DELETE', '/api/v1/admin/database/move'),
   backups: () => request<Backups>('GET', '/api/v1/admin/backups'),
   makeBackup: () => request<Backups>('POST', '/api/v1/admin/backups'),
   saveBackupSettings: (s: BackupSettings) => request<Backups>('PUT', '/api/v1/admin/backups/settings', s),

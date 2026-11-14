@@ -992,6 +992,33 @@
         "before-restore": "Przed przywróceniem"
       }
     },
+    "database": {
+      "title": "Baza danych",
+      "usesSqlite": "Matinee używa pliku SQLite {{where}}.",
+      "usesPostgres": "Matinee używa bazy danych PostgreSQL {{where}}.",
+      "movedFrom": "Przeniesiona tutaj z {{from}} dnia {{time}}: liczba skopiowanych i policzonych wierszy: {{rows}}.",
+      "configured": "Ustawienia serwera wciąż wskazują bazę, z której ją przeniesiono: {{old}}. Zmień je na tę (MATINEE_DATABASE_URL lub database.url w charcie Helm). Do tego czasu nie wyłączaj starej bazy: to ona mówi Matinee, gdzie jest nowa.",
+      "pending": "Matinee przeniesie bazę danych do {{where}} przy następnym uruchomieniu.",
+      "cancel": "Anuluj przeniesienie",
+      "moving": "Przenoszenie bazy danych. Matinee otworzy się, gdy wszystko zostanie skopiowane i sprawdzone.",
+      "moved": "Przeniesiono. Matinee działa teraz na nowej bazie, a stara pozostała bez zmian.",
+      "failed": "Ostatnie przeniesienie się nie udało, więc Matinee zachował dotychczasową bazę bez zmian: {{error}}",
+      "intro": "Przenieś wszystko do innej bazy: Matinee kopiuje dane do własnych tabel, liczy wiersze każdej tabeli w obu bazach, a potem się przełącza. Obecna baza zachowuje wszystkie dane.",
+      "moveTo": "Przenieś do",
+      "postgres": "PostgreSQL",
+      "sqlite": "Plik SQLite",
+      "noSqliteHere": "W Kubernetes folder danych Matinee jest czyszczony przy każdej wymianie poda, więc plik SQLite nie może tam być.",
+      "url": "Adres PostgreSQL",
+      "urlHint": "Pusta baza na serwerze PostgreSQL, należąca do użytkownika Matinee. Najpierw ją utwórz, np. poleceniem CREATE DATABASE matinee.",
+      "file": "Plik",
+      "fileHint": "Pełna ścieżka nowego pliku na trwałym dysku.",
+      "check": "Sprawdź",
+      "checking": "Sprawdzanie…",
+      "checkOk": "Matinee może przenieść się do {{where}}.",
+      "move": "Przenieś bazę danych",
+      "moveConfirm": "Przenieść bazę danych do {{where}}? Matinee uruchomi się ponownie, skopiuje wszystko, sprawdzi i otworzy nową bazę. Odtwarzanie na chwilę się zatrzyma.",
+      "restartByHand": "Ten serwer nie może sam się zrestartować: uruchom ponownie Matinee, aby dokończyć przeniesienie."
+    },
     "updates": {
       "title": "Aktualizacje",
       "running": "Ten serwer działa w wersji <code>{{version}}</code>.",

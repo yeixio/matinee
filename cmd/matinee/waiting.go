@@ -4,15 +4,23 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"html"
 	"log/slog"
 	"net"
 	"net/http"
 	"strings"
+	"sync/atomic"
 	"time"
 )
 
 // waitingMessage is what people see while the server waits for its database.
 const waitingMessage = "Matinee is waiting for its database"
+
+// movingMessage is what they see while it moves its database (database.go).
+const movingMessage = "Matinee is moving its database"
+
+// moving is how far a database move is, while one runs; nil otherwise.
+var moving atomic.Pointer[string]
 
 // serveWhileWaiting answers on the server's addresses while it waits for a
 // PostgreSQL server that doesn't answer yet, so the server doesn't give up
@@ -26,6 +34,7 @@ const waitingMessage = "Matinee is waiting for its database"
 func serveWhileWaiting(addrs []string, log *slog.Logger) (stop func()) {
 	h := waitingHandler()
 	var servers []*http.Server
+	var listeners []net.Listener
 	for _, addr := range addrs {
 		if addr == "" {
 			continue
@@ -38,6 +47,7 @@ func serveWhileWaiting(addrs []string, log *slog.Logger) (stop func()) {
 		}
 		srv := &http.Server{Handler: h, ReadHeaderTimeout: 10 * time.Second}
 		servers = append(servers, srv)
+		listeners = append(listeners, ln)
 		go func() {
 			if err := srv.Serve(ln); err != nil && !errors.Is(err, http.ErrServerClosed) {
 				log.Warn("waiting page stopped", "addr", addr, "err", err)
@@ -49,6 +59,12 @@ func serveWhileWaiting(addrs []string, log *slog.Logger) (stop func()) {
 		defer cancel()
 		for _, s := range servers {
 			s.Shutdown(ctx)
+		}
+		// Shutdown only closes listeners Serve has started on; one whose
+		// goroutine hasn't run yet (a SQLite database opens at once) would
+		// keep the address from the real server.
+		for _, ln := range listeners {
+			ln.Close()
 		}
 	}
 }
@@ -65,15 +81,20 @@ func waitingHandler() http.Handler {
 		}
 		w.Header().Set("Retry-After", "10")
 		w.Header().Set("Cache-Control", "no-store")
+		message, code, page := waitingMessage, "waiting_for_the_database", waitingPage
+		if p := moving.Load(); p != nil {
+			message, code = movingMessage, "moving_the_database"
+			page = strings.Replace(movingPage, "{progress}", html.EscapeString(*p), 1)
+		}
 		if strings.HasPrefix(r.URL.Path, "/api/") || !strings.Contains(r.Header.Get("Accept"), "text/html") {
 			w.Header().Set("Content-Type", "application/json")
 			w.WriteHeader(http.StatusServiceUnavailable)
-			json.NewEncoder(w).Encode(map[string]string{"error": waitingMessage, "code": "waiting_for_the_database"})
+			json.NewEncoder(w).Encode(map[string]string{"error": message, "code": code})
 			return
 		}
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 		w.WriteHeader(http.StatusServiceUnavailable)
-		w.Write([]byte(waitingPage))
+		w.Write([]byte(page))
 	})
 }
 
@@ -106,3 +127,9 @@ p { color: var(--muted); margin: 0 0 .75rem; }
 </body>
 </html>
 `
+
+// movingPage is waitingPage for a database move an admin asked for.
+var movingPage = strings.Replace(strings.Replace(waitingPage,
+	"<h1><span class=\"dot\"></span>Matinee is waiting for its database</h1>\n<p>The server is running, but its PostgreSQL database isn't answering yet. Matinee keeps trying and opens as soon as it does.</p>",
+	"<h1><span class=\"dot\"></span>Matinee is moving its database</h1>\n<p>An admin asked to move Matinee's database. It opens again as soon as everything is copied and checked. {progress}</p>", 1),
+	`content="10"`, `content="5"`, 1)

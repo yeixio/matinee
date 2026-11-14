@@ -980,6 +980,33 @@
         "before-restore": "Before a restore"
       }
     },
+    "database": {
+      "title": "Database",
+      "usesSqlite": "Matinee uses the SQLite file {{where}}.",
+      "usesPostgres": "Matinee uses the PostgreSQL database {{where}}.",
+      "movedFrom": "Moved here from {{from}} on {{time}}: {{rows}} rows copied and counted.",
+      "configured": "The server's settings still name the database it was moved from, {{old}}. Change them to this one (MATINEE_DATABASE_URL, or database.url in the Helm chart). Until then, keep the old database running: it tells Matinee where the new one is.",
+      "pending": "Matinee moves its database to {{where}} the next time it starts.",
+      "cancel": "Cancel move",
+      "moving": "Moving the database. Matinee opens again once everything is copied and checked.",
+      "moved": "Moved. Matinee now runs on the new database, and the old one is kept as it was.",
+      "failed": "The last move didn't work, so Matinee kept the database it had, unchanged: {{error}}",
+      "intro": "Move everything to another database: Matinee copies it into its own tables there, counts every table's rows in both, then switches over. The database it uses now keeps all its data.",
+      "moveTo": "Move to",
+      "postgres": "PostgreSQL",
+      "sqlite": "SQLite file",
+      "noSqliteHere": "On Kubernetes, Matinee's data folder is emptied whenever its pod is replaced, so a SQLite file can't live there.",
+      "url": "PostgreSQL address",
+      "urlHint": "An empty database on the PostgreSQL server, which Matinee's user owns. Create it first, such as with CREATE DATABASE matinee.",
+      "file": "File",
+      "fileHint": "The full path of a new file, on a disk that lasts.",
+      "check": "Check",
+      "checking": "Checking…",
+      "checkOk": "Matinee can move to {{where}}.",
+      "move": "Move database",
+      "moveConfirm": "Move the database to {{where}}? Matinee restarts, copies everything, checks it and opens on the new database. Playback stops for a moment.",
+      "restartByHand": "This server can't restart itself: restart Matinee to finish a move."
+    },
     "updates": {
       "title": "Updates",
       "running": "This server runs <code>{{version}}</code>.",

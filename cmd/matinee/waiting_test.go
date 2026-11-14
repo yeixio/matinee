@@ -1,6 +1,9 @@
 package main
 
 import (
+	"io"
+	"log/slog"
+	"net"
 	"net/http"
 	"net/http/httptest"
 	"strings"
@@ -33,5 +36,25 @@ func TestWaitingHandler(t *testing.T) {
 	w = get("/movies", "text/html,application/xhtml+xml")
 	if w.Code != http.StatusServiceUnavailable || !strings.Contains(w.Body.String(), "waiting for its database") {
 		t.Errorf("page = %d", w.Code)
+	}
+}
+
+// Stopping the waiting page frees its addresses at once, even when it's
+// stopped before it started serving (a SQLite database opens straight away).
+func TestStopWaitingFreesTheAddress(t *testing.T) {
+	log := slog.New(slog.NewTextHandler(io.Discard, nil))
+	for range 50 {
+		ln, err := net.Listen("tcp", "127.0.0.1:0")
+		if err != nil {
+			t.Fatal(err)
+		}
+		addr := ln.Addr().String()
+		ln.Close()
+		serveWhileWaiting([]string{addr}, log)()
+		again, err := net.Listen("tcp", addr)
+		if err != nil {
+			t.Fatalf("the address is still taken: %v", err)
+		}
+		again.Close()
 	}
 }

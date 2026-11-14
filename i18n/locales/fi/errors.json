@@ -294,5 +294,7 @@
   "cant_find_that_emulator": "emulaattoria ei löydy",
   "couldnt_save_the_emulator": "emulaattoria ei voitu tallentaa",
   "that_file_isnt_an_emulator_this_server_can_run_reason": "tiedosto ei ole emulaattori, jota tämä palvelin voi ajaa: {{reason}}",
-  "not_a_game": "ei ole peli"
+  "not_a_game": "ei ole peli",
+  "say_where_to_move_the_database_a_postgresql_url_or_a_sqlite_files_full_path": "kerro, minne tietokanta siirretään: PostgreSQL-URL tai SQLite-tiedoston koko polku",
+  "on_kubernetes_the_data_folder_is_emptied_whenever_matinees_pod_is_replaced_so_the_database_cant_be_a_sqlite_file_there_move_it_to_a_postgresql_database": "Kubernetesissa datakansio tyhjennetään aina, kun Matineen pod vaihdetaan, joten tietokanta ei voi olla siellä SQLite-tiedosto; siirrä se PostgreSQL-tietokantaan"
 }

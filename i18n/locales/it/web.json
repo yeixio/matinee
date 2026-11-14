@@ -986,6 +986,33 @@
         "before-restore": "Prima di un ripristino"
       }
     },
+    "database": {
+      "title": "Database",
+      "usesSqlite": "Matinee usa il file SQLite {{where}}.",
+      "usesPostgres": "Matinee usa il database PostgreSQL {{where}}.",
+      "movedFrom": "Spostato qui da {{from}} il {{time}}: {{rows}} righe copiate e contate.",
+      "configured": "Le impostazioni del server indicano ancora il database da cui è stato spostato, {{old}}. Cambiale con questo (MATINEE_DATABASE_URL, o database.url nel chart Helm). Fino ad allora lascia attivo il vecchio database: dice a Matinee dov'è il nuovo.",
+      "pending": "Matinee sposterà il suo database in {{where}} al prossimo avvio.",
+      "cancel": "Annulla spostamento",
+      "moving": "Spostamento del database. Matinee si riapre appena tutto è copiato e verificato.",
+      "moved": "Spostato. Matinee ora usa il nuovo database e il vecchio resta com'era.",
+      "failed": "L'ultimo spostamento non è riuscito, quindi Matinee ha tenuto il suo database invariato: {{error}}",
+      "intro": "Sposta tutto in un altro database: Matinee lo copia nelle proprie tabelle, conta le righe di ogni tabella in entrambi e poi passa al nuovo. Il database attuale conserva tutti i dati.",
+      "moveTo": "Sposta in",
+      "postgres": "PostgreSQL",
+      "sqlite": "File SQLite",
+      "noSqliteHere": "Su Kubernetes la cartella dati di Matinee viene svuotata ogni volta che il pod viene sostituito, quindi lì non può esserci un file SQLite.",
+      "url": "Indirizzo PostgreSQL",
+      "urlHint": "Un database vuoto sul server PostgreSQL, di proprietà dell'utente di Matinee. Crealo prima, ad esempio con CREATE DATABASE matinee.",
+      "file": "File",
+      "fileHint": "Il percorso completo di un nuovo file, su un disco che dura.",
+      "check": "Verifica",
+      "checking": "Verifica in corso…",
+      "checkOk": "Matinee può spostarsi in {{where}}.",
+      "move": "Sposta database",
+      "moveConfirm": "Spostare il database in {{where}}? Matinee si riavvia, copia tutto, lo verifica e si apre sul nuovo database. La riproduzione si ferma per un momento.",
+      "restartByHand": "Questo server non può riavviarsi da solo: riavvia Matinee per completare uno spostamento."
+    },
     "updates": {
       "title": "Aggiornamenti",
       "running": "Questo server esegue <code>{{version}}</code>.",

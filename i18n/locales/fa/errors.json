@@ -294,5 +294,7 @@
   "cant_find_that_emulator": "این شبیه‌ساز پیدا نشد",
   "couldnt_save_the_emulator": "ذخیرهٔ شبیه‌ساز ممکن نشد",
   "that_file_isnt_an_emulator_this_server_can_run_reason": "این فایل شبیه‌سازی نیست که این سرور بتواند اجرا کند: {{reason}}",
-  "not_a_game": "بازی نیست"
+  "not_a_game": "بازی نیست",
+  "say_where_to_move_the_database_a_postgresql_url_or_a_sqlite_files_full_path": "بگویید پایگاه داده به کجا منتقل شود: یک نشانی URL برای PostgreSQL یا مسیر کامل یک فایل SQLite",
+  "on_kubernetes_the_data_folder_is_emptied_whenever_matinees_pod_is_replaced_so_the_database_cant_be_a_sqlite_file_there_move_it_to_a_postgresql_database": "در Kubernetes پوشه داده هر بار که pod مربوط به Matinee جایگزین می‌شود خالی می‌شود، پس پایگاه داده نمی‌تواند آنجا فایل SQLite باشد؛ آن را به یک پایگاه داده PostgreSQL منتقل کنید"
 }

@@ -974,6 +974,33 @@
         "before-restore": "Sebelum pemulihan"
       }
     },
+    "database": {
+      "title": "Pangkalan data",
+      "usesSqlite": "Matinee menggunakan fail SQLite {{where}}.",
+      "usesPostgres": "Matinee menggunakan pangkalan data PostgreSQL {{where}}.",
+      "movedFrom": "Dipindahkan ke sini dari {{from}} pada {{time}}: {{rows}} baris disalin dan dikira.",
+      "configured": "Tetapan pelayan masih menamakan pangkalan data asalnya, {{old}}. Tukarkannya kepada yang ini (MATINEE_DATABASE_URL, atau database.url dalam carta Helm). Sehingga itu, biarkan pangkalan data lama berjalan: ia memberitahu Matinee di mana yang baharu.",
+      "pending": "Matinee akan memindahkan pangkalan datanya ke {{where}} apabila ia dimulakan seterusnya.",
+      "cancel": "Batalkan pemindahan",
+      "moving": "Memindahkan pangkalan data. Matinee dibuka semula sebaik sahaja semuanya disalin dan disemak.",
+      "moved": "Sudah dipindahkan. Matinee kini berjalan pada pangkalan data baharu, dan yang lama disimpan seperti asal.",
+      "failed": "Pemindahan terakhir tidak berjaya, jadi Matinee mengekalkan pangkalan datanya tanpa perubahan: {{error}}",
+      "intro": "Pindahkan semuanya ke pangkalan data lain: Matinee menyalinnya ke dalam jadualnya sendiri di sana, mengira baris setiap jadual dalam kedua-duanya, kemudian bertukar. Pangkalan data semasa mengekalkan semua datanya.",
+      "moveTo": "Pindahkan ke",
+      "postgres": "PostgreSQL",
+      "sqlite": "Fail SQLite",
+      "noSqliteHere": "Di Kubernetes, folder data Matinee dikosongkan setiap kali pod-nya diganti, jadi fail SQLite tidak boleh disimpan di situ.",
+      "url": "Alamat PostgreSQL",
+      "urlHint": "Pangkalan data kosong pada pelayan PostgreSQL yang dimiliki pengguna Matinee. Ciptanya dahulu, contohnya dengan CREATE DATABASE matinee.",
+      "file": "Fail",
+      "fileHint": "Laluan penuh fail baharu, pada cakera yang kekal.",
+      "check": "Semak",
+      "checking": "Menyemak…",
+      "checkOk": "Matinee boleh berpindah ke {{where}}.",
+      "move": "Pindahkan pangkalan data",
+      "moveConfirm": "Pindahkan pangkalan data ke {{where}}? Matinee dimulakan semula, menyalin semuanya, menyemaknya dan dibuka pada pangkalan data baharu. Main balik berhenti seketika.",
+      "restartByHand": "Pelayan ini tidak boleh memulakan semula dirinya: mulakan semula Matinee untuk menyelesaikan pemindahan."
+    },
     "updates": {
       "title": "Kemas kini",
       "running": "Pelayan ini menjalankan <code>{{version}}</code>.",

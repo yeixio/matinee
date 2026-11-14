@@ -992,6 +992,33 @@
         "before-restore": "Před obnovením"
       }
     },
+    "database": {
+      "title": "Databáze",
+      "usesSqlite": "Matinee používá soubor SQLite {{where}}.",
+      "usesPostgres": "Matinee používá databázi PostgreSQL {{where}}.",
+      "movedFrom": "Přesunuto sem z {{from}} dne {{time}}: zkopírováno a spočítáno řádků: {{rows}}.",
+      "configured": "Nastavení serveru stále uvádí databázi, ze které se přesouvalo: {{old}}. Změňte je na tuto (MATINEE_DATABASE_URL nebo database.url v Helm chartu). Do té doby nechte starou databázi běžet: říká Matinee, kde je nová.",
+      "pending": "Matinee přesune svou databázi do {{where}} při příštím spuštění.",
+      "cancel": "Zrušit přesun",
+      "moving": "Databáze se přesouvá. Matinee se znovu otevře, až bude vše zkopírováno a zkontrolováno.",
+      "moved": "Přesunuto. Matinee teď běží na nové databázi a stará zůstala beze změny.",
+      "failed": "Poslední přesun se nepovedl, takže Matinee ponechal svou databázi beze změny: {{error}}",
+      "intro": "Přesuňte vše do jiné databáze: Matinee data zkopíruje do svých tabulek, spočítá řádky každé tabulky v obou a pak přepne. Současná databáze si ponechá všechna data.",
+      "moveTo": "Přesunout do",
+      "postgres": "PostgreSQL",
+      "sqlite": "Soubor SQLite",
+      "noSqliteHere": "V Kubernetes se datová složka Matinee vyprázdní při každé výměně podu, takže tam soubor SQLite být nemůže.",
+      "url": "Adresa PostgreSQL",
+      "urlHint": "Prázdná databáze na serveru PostgreSQL, kterou vlastní uživatel Matinee. Nejprve ji vytvořte, například příkazem CREATE DATABASE matinee.",
+      "file": "Soubor",
+      "fileHint": "Úplná cesta k novému souboru na trvalém disku.",
+      "check": "Zkontrolovat",
+      "checking": "Kontroluje se…",
+      "checkOk": "Matinee se může přesunout do {{where}}.",
+      "move": "Přesunout databázi",
+      "moveConfirm": "Přesunout databázi do {{where}}? Matinee se restartuje, vše zkopíruje, zkontroluje a otevře se s novou databází. Přehrávání se na chvíli zastaví.",
+      "restartByHand": "Tento server se nemůže restartovat sám: přesun dokončíte restartem Matinee."
+    },
     "updates": {
       "title": "Aktualizace",
       "running": "Tento server běží ve verzi <code>{{version}}</code>.",

@@ -55,7 +55,7 @@ kubectl create secret generic matinee-tmdb --from-literal=tmdb-api-key=your-key
 | `media` | none | Your media folders. |
 | `downloads.persistence` | on, 50Gi | Where [downloads for the apps](/docs/apps/downloads/) are prepared. Set `storageClass` or `existingClaim`. |
 | `plugins.persistence` | on, 5Gi | Where installed [plugins](/docs/server/plugins/) and what they keep live. Set `storageClass` or `existingClaim`. |
-| `postgresql.enabled` | `true` | The bundled database. To use your own, turn it off and set `database.url` or `database.existingSecret`. |
+| `postgresql.enabled` | `true` | The bundled database. To use your own, turn it off and set `database.url` or `database.existingSecret`. To move to your own later, see [Moving the database](/docs/server/moving-the-database/#on-kubernetes). |
 | `discovery.*` | on | Lets the apps find the server at home; see below. |
 | `remoteAccess.*` | off | Watching away from home when the ingress only works at home; see below. |
 | `gpu.type` | `none` | `vaapi` (AMD, Intel) or `nvidia` for [hardware transcoding](/docs/server/transcoding/). |

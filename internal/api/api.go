@@ -205,6 +205,8 @@ type Server struct {
 	Alerts *alerts.Manager
 	// Backups makes and restores copies of a SQLite database; nil makes none.
 	Backups *backup.Manager
+	// Database is where the database is, for moving it (see database.go).
+	Database DatabaseInfo
 	// Updates looks for newer versions and installs them where it can.
 	Updates *update.Manager
 	// Restart stops the server and starts it again (cmd/matinee); nil
@@ -328,6 +330,10 @@ func (s *Server) routes() []route {
 		{"GET /admin/backups/{name}", adminOnly, s.downloadBackup},
 		{"DELETE /admin/backups/{name}", adminOnly, s.deleteBackup},
 		{"POST /admin/backups/{name}/restore", adminOnly, s.restoreBackup},
+		{"GET /admin/database", adminOnly, s.getDatabase},
+		{"POST /admin/database/check", adminOnly, s.checkDatabaseMove},
+		{"POST /admin/database/move", adminOnly, s.moveDatabase},
+		{"DELETE /admin/database/move", adminOnly, s.cancelDatabaseMove},
 		{"GET /notifications", signedIn, grownUps(s.listNotifications)},
 		{"POST /notifications/read", signedIn, grownUps(s.readNotifications)},
 		{"POST /notifications/clear", signedIn, grownUps(s.clearNotifications)},

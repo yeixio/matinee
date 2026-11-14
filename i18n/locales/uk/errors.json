@@ -294,5 +294,7 @@
   "cant_find_that_emulator": "емулятор не знайдено",
   "couldnt_save_the_emulator": "не вдалося зберегти емулятор",
   "that_file_isnt_an_emulator_this_server_can_run_reason": "цей файл не є емулятором, який може запустити цей сервер: {{reason}}",
-  "not_a_game": "це не гра"
+  "not_a_game": "це не гра",
+  "say_where_to_move_the_database_a_postgresql_url_or_a_sqlite_files_full_path": "вкажіть, куди перенести базу даних: URL PostgreSQL або повний шлях до файлу SQLite",
+  "on_kubernetes_the_data_folder_is_emptied_whenever_matinees_pod_is_replaced_so_the_database_cant_be_a_sqlite_file_there_move_it_to_a_postgresql_database": "у Kubernetes папка даних очищується щоразу, коли замінюють под Matinee, тож база даних не може бути там файлом SQLite; перенесіть її до бази даних PostgreSQL"
 }

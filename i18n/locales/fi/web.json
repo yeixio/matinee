@@ -980,6 +980,33 @@
         "before-restore": "Ennen palautusta"
       }
     },
+    "database": {
+      "title": "Tietokanta",
+      "usesSqlite": "Matinee käyttää SQLite-tiedostoa {{where}}.",
+      "usesPostgres": "Matinee käyttää PostgreSQL-tietokantaa {{where}}.",
+      "movedFrom": "Siirretty tänne kohteesta {{from}} {{time}}: {{rows}} riviä kopioitu ja laskettu.",
+      "configured": "Palvelimen asetukset osoittavat yhä tietokantaan, josta se siirrettiin: {{old}}. Vaihda ne tähän (MATINEE_DATABASE_URL tai Helm-kaavion database.url). Pidä vanha tietokanta siihen asti käynnissä: se kertoo Matineelle, missä uusi on.",
+      "pending": "Matinee siirtää tietokantansa kohteeseen {{where}} seuraavalla käynnistyskerralla.",
+      "cancel": "Peru siirto",
+      "moving": "Tietokantaa siirretään. Matinee avautuu taas, kun kaikki on kopioitu ja tarkistettu.",
+      "moved": "Siirretty. Matinee toimii nyt uudella tietokannalla, ja vanha säilyy ennallaan.",
+      "failed": "Viimeisin siirto ei onnistunut, joten Matinee piti tietokantansa muuttamattomana: {{error}}",
+      "intro": "Siirrä kaikki toiseen tietokantaan: Matinee kopioi tiedot sinne omiin tauluihinsa, laskee jokaisen taulun rivit molemmissa ja vaihtaa sitten. Nykyinen tietokanta säilyttää kaikki tietonsa.",
+      "moveTo": "Siirrä kohteeseen",
+      "postgres": "PostgreSQL",
+      "sqlite": "SQLite-tiedosto",
+      "noSqliteHere": "Kubernetesissa Matineen datakansio tyhjennetään aina, kun sen pod vaihdetaan, joten SQLite-tiedosto ei voi olla siellä.",
+      "url": "PostgreSQL-osoite",
+      "urlHint": "Tyhjä tietokanta PostgreSQL-palvelimella, jonka omistaa Matineen käyttäjä. Luo se ensin, esimerkiksi komennolla CREATE DATABASE matinee.",
+      "file": "Tiedosto",
+      "fileHint": "Uuden tiedoston koko polku levyllä, joka säilyy.",
+      "check": "Tarkista",
+      "checking": "Tarkistetaan…",
+      "checkOk": "Matinee voi siirtyä kohteeseen {{where}}.",
+      "move": "Siirrä tietokanta",
+      "moveConfirm": "Siirretäänkö tietokanta kohteeseen {{where}}? Matinee käynnistyy uudelleen, kopioi kaiken, tarkistaa sen ja avautuu uudella tietokannalla. Toisto pysähtyy hetkeksi.",
+      "restartByHand": "Tämä palvelin ei voi käynnistää itseään uudelleen: käynnistä Matinee uudelleen siirron viimeistelemiseksi."
+    },
     "updates": {
       "title": "Päivitykset",
       "running": "Tämä palvelin käyttää versiota <code>{{version}}</code>.",

@@ -189,8 +189,17 @@ func (s *Store) migrate() error {
 		return err
 	}
 	defer t.Rollback()
+	if err := migrateIn(ctx, t, s.db.dialect); err != nil {
+		return err
+	}
+	return t.Commit()
+}
+
+// migrateIn makes Matinee's tables, or brings them up to date, in t (which
+// the caller commits).
+func migrateIn(ctx context.Context, t *tx, d dialect) error {
 	schema := schemaSQLite
-	if s.db.dialect == postgres {
+	if d == postgres {
 		schema = schemaPostgres
 		// Several pods may start at once; only one migrates.
 		if _, err := t.ExecContext(ctx, "SELECT pg_advisory_xact_lock(7171)"); err != nil {
@@ -211,7 +220,7 @@ func (s *Store) migrate() error {
 		version = 1
 	}
 	if version > len(migrations) {
-		return t.Commit() // up to date, or made by a newer Matinee
+		return nil // up to date, or made by a newer Matinee
 	}
 	// Later changes, in order. Each runs once on databases made before it.
 	for _, m := range migrations[version-1:] {
@@ -223,10 +232,8 @@ func (s *Store) migrate() error {
 	if _, err := t.ExecContext(ctx, "DELETE FROM schema_version"); err != nil {
 		return err
 	}
-	if _, err := t.ExecContext(ctx, "INSERT INTO schema_version (version) VALUES (?)", version); err != nil {
-		return err
-	}
-	return t.Commit()
+	_, err := t.ExecContext(ctx, "INSERT INTO schema_version (version) VALUES (?)", version)
+	return err
 }
 
 // migrations take the schema from version 1 (the schema files) upward. They

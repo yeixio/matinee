@@ -974,6 +974,33 @@
         "before-restore": "Trước khi khôi phục"
       }
     },
+    "database": {
+      "title": "Cơ sở dữ liệu",
+      "usesSqlite": "Matinee đang dùng tệp SQLite {{where}}.",
+      "usesPostgres": "Matinee đang dùng cơ sở dữ liệu PostgreSQL {{where}}.",
+      "movedFrom": "Đã chuyển đến đây từ {{from}} vào {{time}}: {{rows}} hàng đã được sao chép và đếm.",
+      "configured": "Cài đặt của máy chủ vẫn ghi cơ sở dữ liệu cũ, {{old}}. Hãy đổi sang cơ sở dữ liệu này (MATINEE_DATABASE_URL, hoặc database.url trong Helm chart). Cho đến lúc đó, hãy để cơ sở dữ liệu cũ chạy: nó cho Matinee biết cơ sở dữ liệu mới ở đâu.",
+      "pending": "Matinee sẽ chuyển cơ sở dữ liệu sang {{where}} vào lần khởi động tới.",
+      "cancel": "Hủy chuyển",
+      "moving": "Đang chuyển cơ sở dữ liệu. Matinee mở lại khi mọi thứ đã được sao chép và kiểm tra.",
+      "moved": "Đã chuyển. Matinee giờ chạy trên cơ sở dữ liệu mới, còn cơ sở dữ liệu cũ được giữ nguyên.",
+      "failed": "Lần chuyển gần nhất không thành công, nên Matinee giữ nguyên cơ sở dữ liệu của mình: {{error}}",
+      "intro": "Chuyển mọi thứ sang cơ sở dữ liệu khác: Matinee sao chép vào các bảng của chính nó ở đó, đếm số hàng của từng bảng ở cả hai nơi rồi chuyển sang. Cơ sở dữ liệu hiện tại vẫn giữ toàn bộ dữ liệu.",
+      "moveTo": "Chuyển sang",
+      "postgres": "PostgreSQL",
+      "sqlite": "Tệp SQLite",
+      "noSqliteHere": "Trên Kubernetes, thư mục dữ liệu của Matinee bị xóa trống mỗi khi pod được thay, nên không thể đặt tệp SQLite ở đó.",
+      "url": "Địa chỉ PostgreSQL",
+      "urlHint": "Một cơ sở dữ liệu trống trên máy chủ PostgreSQL, thuộc sở hữu của người dùng Matinee. Hãy tạo trước, ví dụ bằng CREATE DATABASE matinee.",
+      "file": "Tệp",
+      "fileHint": "Đường dẫn đầy đủ của một tệp mới, trên ổ đĩa lâu dài.",
+      "check": "Kiểm tra",
+      "checking": "Đang kiểm tra…",
+      "checkOk": "Matinee có thể chuyển sang {{where}}.",
+      "move": "Chuyển cơ sở dữ liệu",
+      "moveConfirm": "Chuyển cơ sở dữ liệu sang {{where}}? Matinee khởi động lại, sao chép mọi thứ, kiểm tra và mở trên cơ sở dữ liệu mới. Việc phát sẽ dừng một lát.",
+      "restartByHand": "Máy chủ này không tự khởi động lại được: hãy khởi động lại Matinee để hoàn tất việc chuyển."
+    },
     "updates": {
       "title": "Cập nhật",
       "running": "Máy chủ này đang chạy <code>{{version}}</code>.",

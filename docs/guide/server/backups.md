@@ -39,3 +39,7 @@ pg_dump --format=custom --file=matinee-$(date +%F).dump "$MATINEE_DATABASE_URL"
 ```
 
 and restore one into an empty database with `pg_restore --dbname="$MATINEE_DATABASE_URL" matinee-2026-11-04.dump`. On Kubernetes, the database's own backup tools (or a CronJob running `pg_dump`) do the same. Take one before an update too.
+
+<!-- since: v0.2.7 -->
+To move from SQLite to PostgreSQL or back, or to another PostgreSQL server, see [Moving the database](/docs/server/moving-the-database/).
+<!-- /since -->

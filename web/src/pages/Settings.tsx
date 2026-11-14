@@ -11,6 +11,7 @@ import { MediaAnalysis } from '../components/MediaAnalysis'
 import { ServerHealth } from '../components/ServerHealth'
 import { AlertSettings } from '../components/AlertSettings'
 import { BackupSettings } from '../components/BackupSettings'
+import { DatabaseMove } from '../components/DatabaseMove'
 import { UpdateSettings } from '../components/UpdateSettings'
 import { TimeZoneSetting } from '../components/TimeZoneSetting'
 import { Plugins } from '../components/PluginSettings'
@@ -69,7 +70,7 @@ export default function Settings() {
     },
     ...(admin
       ? [
-          { id: 'health', icon: Activity, sections: [['server-health', <ServerHealth />], ['updates', <UpdateSettings />], ['alerts', <AlertSettings />], ['backups', <BackupSettings />], ['time-zone', <TimeZoneSetting />]], wide: true },
+          { id: 'health', icon: Activity, sections: [['server-health', <ServerHealth />], ['updates', <UpdateSettings />], ['alerts', <AlertSettings />], ['backups', <BackupSettings />], ['database', <DatabaseMove />], ['time-zone', <TimeZoneSetting />]], wide: true },
           { id: 'libraries', icon: LibraryBig, sections: [['libraries', <Libraries />], ['import', <ImportSettings />], ['new-files', <NewFiles />], ['media-analysis', <MediaAnalysis />]] },
           { id: 'people', icon: UsersRound, sections: [['people', <Users me={me} />], ['friends', <Friends />], ['profiles', <Profiles />]] },
           { id: 'content', icon: ImageIcon, sections: [['posters', <TMDBKey />], ['podcast-index', <PodcastIndexKey />], ['subtitles', <OpenSubtitlesKey />], ['subtitle-sync', <SubtitleSyncSetting />], ['lyrics', <OnlineLyrics />], ['trailers', <Trailers />], ['home-rows', <HolidayRows />]] },

@@ -980,6 +980,33 @@
         "before-restore": "Vor einer Wiederherstellung"
       }
     },
+    "database": {
+      "title": "Datenbank",
+      "usesSqlite": "Matinee nutzt die SQLite-Datei {{where}}.",
+      "usesPostgres": "Matinee nutzt die PostgreSQL-Datenbank {{where}}.",
+      "movedFrom": "Am {{time}} von {{from}} hierher umgezogen: {{rows}} Zeilen kopiert und gezählt.",
+      "configured": "Die Servereinstellungen nennen noch die Datenbank, aus der umgezogen wurde: {{old}}. Ändere sie auf diese (MATINEE_DATABASE_URL oder database.url im Helm-Chart). Lass die alte Datenbank bis dahin laufen: Sie sagt Matinee, wo die neue ist.",
+      "pending": "Matinee zieht seine Datenbank beim nächsten Start nach {{where}} um.",
+      "cancel": "Umzug abbrechen",
+      "moving": "Die Datenbank zieht um. Matinee öffnet wieder, sobald alles kopiert und geprüft ist.",
+      "moved": "Umgezogen. Matinee läuft jetzt mit der neuen Datenbank, die alte bleibt, wie sie war.",
+      "failed": "Der letzte Umzug hat nicht geklappt, daher behält Matinee seine bisherige Datenbank unverändert: {{error}}",
+      "intro": "Alles in eine andere Datenbank umziehen: Matinee kopiert es dort in seine eigenen Tabellen, zählt die Zeilen jeder Tabelle in beiden und wechselt dann. Die jetzige Datenbank behält alle Daten.",
+      "moveTo": "Umziehen nach",
+      "postgres": "PostgreSQL",
+      "sqlite": "SQLite-Datei",
+      "noSqliteHere": "Unter Kubernetes wird Matinees Datenordner geleert, wenn sein Pod ersetzt wird, daher kann dort keine SQLite-Datei liegen.",
+      "url": "PostgreSQL-Adresse",
+      "urlHint": "Eine leere Datenbank auf dem PostgreSQL-Server, die Matinees Benutzer gehört. Lege sie zuerst an, etwa mit CREATE DATABASE matinee.",
+      "file": "Datei",
+      "fileHint": "Der vollständige Pfad einer neuen Datei, auf einem Datenträger, der bleibt.",
+      "check": "Prüfen",
+      "checking": "Wird geprüft…",
+      "checkOk": "Matinee kann nach {{where}} umziehen.",
+      "move": "Datenbank umziehen",
+      "moveConfirm": "Die Datenbank nach {{where}} umziehen? Matinee startet neu, kopiert alles, prüft es und öffnet mit der neuen Datenbank. Die Wiedergabe stoppt kurz.",
+      "restartByHand": "Dieser Server kann sich nicht selbst neu starten: Starte Matinee neu, um einen Umzug abzuschließen."
+    },
     "updates": {
       "title": "Updates",
       "running": "Dieser Server läuft mit <code>{{version}}</code>.",

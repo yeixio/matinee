@@ -27,7 +27,6 @@ import (
 	"github.com/yeixio/matinee/internal/analyze"
 	"github.com/yeixio/matinee/internal/api"
 	"github.com/yeixio/matinee/internal/artwork"
-	"github.com/yeixio/matinee/internal/backup"
 	"github.com/yeixio/matinee/internal/config"
 	"github.com/yeixio/matinee/internal/connect"
 	"github.com/yeixio/matinee/internal/credits"
@@ -73,6 +72,8 @@ func main() {
 			cmd = initDBSecret
 		case "announce":
 			cmd = announce
+		case "database":
+			cmd = databaseCommand
 		}
 	}
 	if err := cmd(); err != nil {
@@ -127,40 +128,16 @@ func run() (err error) {
 		}
 	}
 
-	// A SQLite database is backed up before an upgrade changes it, every
-	// day, and when an admin asks (internal/backup); a restore an admin
-	// asked for takes its place now, before it's opened.
-	var backups *backup.Manager
-	var opts store.Options
-	if cfg.DatabaseURL == "" {
-		backups = &backup.Manager{Dir: cfg.BackupDir(), DBPath: cfg.Database(), Log: log}
-		if _, err := backup.ApplyRestore(context.Background(), cfg.Database(), cfg.BackupDir(), log); err != nil {
-			return fmt.Errorf("restore the database: %w", err)
-		}
-		opts.BeforeMigrate = backups.BeforeMigrate
-	}
-	// PostgreSQL may be starting at the same time (both pods replaced at
-	// once on Kubernetes), restarting, or down with the machine it runs on.
-	// The server waits for it as long as it takes rather than exiting, and
-	// answers meanwhile with a page that says so (see serveWhileWaiting). A
-	// wrong password or database name still stops it, since waiting won't help.
-	stopWaiting := func() {}
-	if cfg.DatabaseURL != "" {
-		opts.Wait = -1
-		opts.Waiting = func(err error, next time.Duration) {
-			log.Warn("waiting for the database", "retry_in", next, "err", err)
-		}
-		stopWaiting = serveWhileWaiting([]string{cfg.Addr, cfg.HomeAddr}, log)
-	}
+	// The waiting page answers while the server waits for a PostgreSQL
+	// database, or moves the database for an admin (see openDatabase).
+	stopWaiting := serveWhileWaiting([]string{cfg.Addr, cfg.HomeAddr}, log)
 	defer stopWaiting()
-	db, err := store.OpenWith(cfg.Database(), opts)
+	opened, err := openDatabase(context.Background(), cfg, log)
 	if err != nil {
-		return fmt.Errorf("open database: %w", err)
+		return err
 	}
+	db, backups := opened.db, opened.backups
 	defer db.Close()
-	if backups != nil {
-		backups.Store = db
-	}
 
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
 	defer stop()
@@ -387,6 +364,7 @@ func run() (err error) {
 	})
 	apiServer.Updates = updates
 	apiServer.Restart = newRestart(stop)
+	apiServer.Database = api.DatabaseInfo{DSN: opened.dsn, Configured: opened.configured, DataDir: cfg.DataDir, Kubernetes: os.Getenv("MATINEE_INSTALL") == "helm" || os.Getenv("KUBERNETES_SERVICE_HOST") != ""}
 	go updates.Run(ctx)
 	if _, problems := theme.Load(cfg.ThemeDir()); len(problems) > 0 {
 		for _, p := range problems {
@@ -516,7 +494,7 @@ func run() (err error) {
 		go func() { errc <- homeSrv.ListenAndServe() }()
 	}
 	dbKind := "sqlite"
-	if cfg.DatabaseURL != "" {
+	if store.IsPostgres(opened.dsn) {
 		dbKind = "postgres"
 	}
 	go alerter.Run(ctx)

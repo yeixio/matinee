@@ -974,6 +974,33 @@
         "before-restore": "Sebelum pemulihan"
       }
     },
+    "database": {
+      "title": "Database",
+      "usesSqlite": "Matinee memakai file SQLite {{where}}.",
+      "usesPostgres": "Matinee memakai database PostgreSQL {{where}}.",
+      "movedFrom": "Dipindahkan ke sini dari {{from}} pada {{time}}: {{rows}} baris disalin dan dihitung.",
+      "configured": "Pengaturan server masih menyebut database asalnya, {{old}}. Ubah ke database ini (MATINEE_DATABASE_URL, atau database.url di chart Helm). Sampai saat itu, biarkan database lama tetap berjalan: database itu memberi tahu Matinee di mana yang baru.",
+      "pending": "Matinee akan memindahkan database-nya ke {{where}} saat berikutnya dimulai.",
+      "cancel": "Batalkan pemindahan",
+      "moving": "Memindahkan database. Matinee terbuka lagi setelah semuanya disalin dan diperiksa.",
+      "moved": "Selesai dipindahkan. Matinee kini berjalan dengan database baru, dan yang lama tetap seperti semula.",
+      "failed": "Pemindahan terakhir gagal, jadi Matinee mempertahankan database-nya tanpa perubahan: {{error}}",
+      "intro": "Pindahkan semuanya ke database lain: Matinee menyalinnya ke tabel miliknya di sana, menghitung baris setiap tabel di keduanya, lalu beralih. Database yang dipakai sekarang tetap menyimpan semua datanya.",
+      "moveTo": "Pindahkan ke",
+      "postgres": "PostgreSQL",
+      "sqlite": "File SQLite",
+      "noSqliteHere": "Di Kubernetes, folder data Matinee dikosongkan setiap kali pod-nya diganti, jadi file SQLite tidak bisa disimpan di sana.",
+      "url": "Alamat PostgreSQL",
+      "urlHint": "Database kosong di server PostgreSQL yang dimiliki pengguna Matinee. Buat dulu, misalnya dengan CREATE DATABASE matinee.",
+      "file": "File",
+      "fileHint": "Path lengkap file baru, di disk yang permanen.",
+      "check": "Periksa",
+      "checking": "Memeriksa…",
+      "checkOk": "Matinee bisa pindah ke {{where}}.",
+      "move": "Pindahkan database",
+      "moveConfirm": "Pindahkan database ke {{where}}? Matinee dimulai ulang, menyalin semuanya, memeriksanya, lalu terbuka dengan database baru. Pemutaran berhenti sebentar.",
+      "restartByHand": "Server ini tidak bisa memulai ulang sendiri: mulai ulang Matinee untuk menyelesaikan pemindahan."
+    },
     "updates": {
       "title": "Pembaruan",
       "running": "Server ini menjalankan <code>{{version}}</code>.",
