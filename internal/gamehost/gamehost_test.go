@@ -218,6 +218,11 @@ func TestPlay(t *testing.T) {
 }
 
 func TestPlayBigPicture(t *testing.T) {
+	t.Run("desktop", func(t *testing.T) { testBigPicture(t, false, "steam://open/bigpicture\nsteam://close/bigpicture\n") })
+	t.Run("tv mode", func(t *testing.T) { testBigPicture(t, true, "steam://open/bigpicture\n") })
+}
+
+func testBigPicture(t *testing.T, tv bool, want string) {
 	ffmpeg, err := exec.LookPath("ffmpeg")
 	if err != nil {
 		t.Skip("no ffmpeg")
@@ -226,7 +231,7 @@ func TestPlayBigPicture(t *testing.T) {
 	calls := filepath.Join(dir, "calls")
 	steam := filepath.Join(dir, "steam")
 	os.WriteFile(steam, []byte("#!/bin/sh\necho \"$@\" >> "+calls+"\n"), 0o755)
-	h := &Host{SteamRoot: dir, Token: "t", FFmpeg: ffmpeg, Steam: steam,
+	h := &Host{SteamRoot: dir, Token: "t", FFmpeg: ffmpeg, Steam: steam, TVMode: tv,
 		VideoInput: []string{"-re", "-f", "lavfi", "-i", "testsrc2=size=640x360:rate=30"},
 		AudioInput: []string{"-re", "-f", "lavfi", "-i", "sine=frequency=440:sample_rate=48000"}}
 	srv := httptest.NewServer(h.Handler())
@@ -250,7 +255,7 @@ func TestPlayBigPicture(t *testing.T) {
 		time.Sleep(100 * time.Millisecond)
 	}
 	b, _ := os.ReadFile(calls)
-	if got := string(b); got != "steam://open/bigpicture\nsteam://close/bigpicture\n" {
+	if got := string(b); got != want {
 		t.Fatalf("steam was run with %q", got)
 	}
 }

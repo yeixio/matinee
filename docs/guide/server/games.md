@@ -234,3 +234,13 @@ If the game host's computer has no screen of its own, such as Steam in a contain
 | `MATINEE_GAMEHOST_BITRATE` | `20` | The video bitrate in megabits per second. |
 | `MATINEE_GAMEHOST_DESKTOP` | | The address of a web page showing the game host's screen, such as `http://127.0.0.1:8083`, opened by **Steam desktop**. |
 <!-- /since -->
+
+<!-- since: v0.2.9 -->
+### TV mode for a Steam-only computer
+
+If the game host's computer only runs Steam, such as a Steam container, set `MATINEE_GAMEHOST_TV_MODE=true` and start Steam with `-gamepadui`. Steam then always shows Big Picture, its TV and controller screen, and stays there when a player leaves instead of going back to a desktop. Leave TV mode off on a computer you also use as a desktop, so Big Picture closes after you play.
+
+| Game host setting | Default | What it's for |
+| --- | --- | --- |
+| `MATINEE_GAMEHOST_TV_MODE` | `false` | Keep Steam in Big Picture when a player leaves. |
+<!-- /since -->

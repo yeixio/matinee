@@ -29,6 +29,7 @@ func main() {
 	audio := flag.String("audio", env("MATINEE_GAMEHOST_AUDIO", ""), "PulseAudio source to capture; empty is the default output's monitor (MATINEE_GAMEHOST_AUDIO)")
 	steam := flag.String("steam", env("MATINEE_GAMEHOST_STEAM", "steam"), "Steam's command (MATINEE_GAMEHOST_STEAM)")
 	desktop := flag.String("desktop", env("MATINEE_GAMEHOST_DESKTOP", ""), "address of a web page showing this computer's screen, such as http://127.0.0.1:8083, for admins to sign in to Steam through Matinee (MATINEE_GAMEHOST_DESKTOP)")
+	tv := flag.Bool("tv-mode", env("MATINEE_GAMEHOST_TV_MODE", "") == "true", "keep Steam in Big Picture when a player leaves, for a computer that only runs Steam (MATINEE_GAMEHOST_TV_MODE=true)")
 	bitrate, _ := strconv.Atoi(env("MATINEE_GAMEHOST_BITRATE", "20"))
 	flag.IntVar(&bitrate, "bitrate", bitrate, "picture bitrate in megabits a second (MATINEE_GAMEHOST_BITRATE)")
 	flag.Parse()
@@ -44,8 +45,8 @@ func main() {
 		log.Warn("no token set: anyone on the network can start games here")
 	}
 	h := &gamehost.Host{SteamHome: *steamHome, Token: *token, Display: *display, FFmpeg: *ffmpeg, VAAPI: *vaapi,
-		AudioSource: *audio, Bitrate: bitrate, Steam: *steam, Desktop: *desktop, Log: log}
-	log.Info("game host ready", "listen", *listen, "home", *steamHome, "display", *display, "gpu", *vaapi, "desktop", *desktop)
+		AudioSource: *audio, Bitrate: bitrate, Steam: *steam, Desktop: *desktop, TVMode: *tv, Log: log}
+	log.Info("game host ready", "listen", *listen, "home", *steamHome, "display", *display, "gpu", *vaapi, "desktop", *desktop, "tv_mode", *tv)
 	srv := &http.Server{Addr: *listen, Handler: h.Handler(), ReadHeaderTimeout: 10 * time.Second}
 	if err := srv.ListenAndServe(); err != nil {
 		fmt.Fprintln(os.Stderr, err)
