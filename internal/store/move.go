@@ -91,9 +91,11 @@ type table struct {
 	columns []column
 	// refs are the tables its rows refer to, which are copied first.
 	refs []string
-	// parent is a column referring to the same table's key (pk), such as
-	// an episode's season; parents are copied before their children.
-	parent, pk string
+	// parents are columns referring to the same table's key (pk), such as
+	// an episode's season, or the file a version or a part belongs to; the
+	// rows they refer to are copied first.
+	parents []string
+	pk      string
 }
 
 type column struct {
@@ -531,7 +533,7 @@ func sqliteTables(ctx context.Context, t *tx) ([]table, error) {
 			}
 			tb.refs = append(tb.refs, ref)
 			if ref == name && len(pks) == 1 && (to == "" || to == pks[0]) {
-				tb.parent, tb.pk = from, pks[0]
+				tb.parents, tb.pk = append(tb.parents, from), pks[0]
 			}
 		}
 		rows.Close()
@@ -592,7 +594,7 @@ func postgresTables(ctx context.Context, t *tx) ([]table, error) {
 		}
 		out[i].refs = append(out[i].refs, ref)
 		if ref == name && !strings.Contains(from, ",") && !strings.Contains(to, ",") {
-			out[i].parent, out[i].pk = from, to
+			out[i].parents, out[i].pk = append(out[i].parents, from), to
 		}
 	}
 	rows.Close()
@@ -607,19 +609,8 @@ func copyTable(ctx context.Context, src, dst *tx, to dialect, t table, copied fu
 	}
 	list := strings.Join(cols, ", ")
 	q := "SELECT " + list + " FROM " + quote(t.name) + where(t)
-	if t.parent != "" {
-		// Parents first: each row after the one it belongs to. A row whose
-		// parent is missing isn't copied, and the counts then say so.
-		sel := make([]string, len(t.columns))
-		for i, c := range cols {
-			sel[i] = "t." + c
-		}
-		pk, parent := quote(t.pk), quote(t.parent)
-		q = "WITH RECURSIVE depth(k, d) AS (" +
-			"SELECT " + pk + ", 0 FROM " + quote(t.name) + " WHERE " + parent + " IS NULL " +
-			"UNION ALL SELECT c." + pk + ", depth.d + 1 FROM " + quote(t.name) + " c JOIN depth ON c." + parent + " = depth.k) " +
-			"SELECT " + strings.Join(sel, ", ") + " FROM " + quote(t.name) + " t JOIN depth ON depth.k = t." + pk +
-			strings.Replace(where(t), "WHERE", "WHERE t.", 1) + " ORDER BY depth.d, t." + pk
+	if len(t.parents) > 0 {
+		q = parentsFirst(t, cols)
 	}
 	rows, err := src.QueryContext(ctx, q)
 	if err != nil {
@@ -627,7 +618,7 @@ func copyTable(ctx context.Context, src, dst *tx, to dialect, t table, copied fu
 	}
 	defer rows.Close()
 	// SQLite takes up to 32766 values to a statement, PostgreSQL 65535.
-	per := max(1, min(500, 30000/len(cols)))
+	per := max(1, min(moveBatch, 30000/len(cols)))
 	insert := func(n int) string {
 		row := "(" + strings.TrimSuffix(strings.Repeat("?, ", len(cols)), ", ") + ")"
 		return "INSERT INTO " + quote(t.name) + " (" + list + ") VALUES " + strings.TrimSuffix(strings.Repeat(row+", ", n), ", ")
@@ -677,6 +668,32 @@ func copyTable(ctx context.Context, src, dst *tx, to dialect, t table, copied fu
 	return n, flush()
 }
 
+// parentsFirst selects t's rows so that each comes after every row of t it
+// refers to: ordered by the longest chain of references above it (an
+// episode after its season after its show; a version or a part after the
+// file it belongs to). A row that refers to itself counts as referring to
+// nothing. A row in a circle of references, or under one, isn't selected,
+// and the counts then say so.
+func parentsFirst(t table, cols []string) string {
+	pk, name := quote(t.pk), quote(t.name)
+	var edges []string
+	for _, p := range t.parents {
+		p = quote(p)
+		edges = append(edges, "SELECT "+pk+" AS child, "+p+" AS parent FROM "+name+" WHERE "+p+" IS NOT NULL AND "+p+" <> "+pk)
+	}
+	sel := make([]string, len(cols))
+	for i, c := range cols {
+		sel[i] = "t." + c
+	}
+	return "WITH RECURSIVE edges(child, parent) AS (" + strings.Join(edges, " UNION ALL ") + "), " +
+		"depth(k, d) AS (" +
+		"SELECT " + pk + ", 0 FROM " + name + " WHERE " + pk + " NOT IN (SELECT child FROM edges) " +
+		"UNION SELECT edges.child, depth.d + 1 FROM edges JOIN depth ON edges.parent = depth.k WHERE depth.d < 64), " +
+		"deepest(k, d) AS (SELECT k, MAX(d) FROM depth GROUP BY k) " +
+		"SELECT " + strings.Join(sel, ", ") + " FROM " + name + " t JOIN deepest ON deepest.k = t." + pk +
+		strings.Replace(where(t), "WHERE", "WHERE t.", 1) + " ORDER BY deepest.d, t." + pk
+}
+
 // convert makes a value read from one database fit the other's column.
 func convert(v any, c column, to dialect) any {
 	switch x := v.(type) {
@@ -714,6 +731,11 @@ func moveSequences(ctx context.Context, t *tx, tables []table) error {
 	}
 	return nil
 }
+
+// moveBatch is the most rows one INSERT copies. A reference within one
+// statement is only checked at its end, so tests copy a row at a time to
+// see that every row comes after the rows it refers to.
+var moveBatch = 500
 
 func quote(name string) string { return `"` + strings.ReplaceAll(name, `"`, `""`) + `"` }
 

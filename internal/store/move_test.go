@@ -86,6 +86,29 @@ func fill(t *testing.T, s *Store) (userID, episodeID int64) {
 	if _, err := s.db.ExecContext(ctx, "UPDATE items SET parent_id = ? WHERE id = ?", season, ep); err != nil {
 		t.Fatal(err)
 	}
+	// Versions and parts refer to another file of the same table too, made
+	// after them here: a 4K version and a second part before the file they
+	// belong to, and a file that names itself.
+	var files []int64
+	for _, name := range []string{"4k", "part2", "main", "self"} {
+		id, err := s.UpsertFile(ctx, Item{LibraryID: lib.ID, Kind: "movie", Title: "Film " + name, Path: "/media/movies/" + name + ".mkv"})
+		if err != nil {
+			t.Fatal(err)
+		}
+		files = append(files, id)
+	}
+	for _, q := range []struct {
+		sql      string
+		row, ref int64
+	}{
+		{"UPDATE items SET version_of = ? WHERE id = ?", files[0], files[2]},
+		{"UPDATE items SET file_part_of = ? WHERE id = ?", files[1], files[2]},
+		{"UPDATE items SET version_of = ? WHERE id = ?", files[3], files[3]},
+	} {
+		if _, err := s.db.ExecContext(ctx, q.sql, q.ref, q.row); err != nil {
+			t.Fatal(err)
+		}
+	}
 	if err := s.SetProgress(ctx, u.ID, ep, 60000, false); err != nil {
 		t.Fatal(err)
 	}
@@ -105,6 +128,8 @@ func fill(t *testing.T, s *Store) (userID, episodeID int64) {
 func ptr[T any](v T) *T { return &v }
 
 func TestMove(t *testing.T) {
+	moveBatch = 1
+	t.Cleanup(func() { moveBatch = 500 })
 	for _, c := range []struct{ from, to string }{
 		{"sqlite", "sqlite"},
 		{"sqlite", "postgres"},
