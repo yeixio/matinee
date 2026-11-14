@@ -65,10 +65,6 @@ import (
 	"github.com/yeixio/matinee/web"
 )
 
-// databaseWait is how long the server waits for a PostgreSQL server that
-// doesn't answer yet before it gives up.
-const databaseWait = 150 * time.Second
-
 func main() {
 	cmd := runAndRestart
 	if len(os.Args) > 1 {
@@ -142,15 +138,21 @@ func run() (err error) {
 			return fmt.Errorf("restore the database: %w", err)
 		}
 		opts.BeforeMigrate = backups.BeforeMigrate
-	} else {
-		// PostgreSQL may be starting at the same time (both pods replaced at
-		// once on Kubernetes). Until it answers the server isn't listening,
-		// so it isn't ready either; the chart's startup probe allows 3 minutes.
-		opts.Wait = databaseWait
+	}
+	// PostgreSQL may be starting at the same time (both pods replaced at
+	// once on Kubernetes), restarting, or down with the machine it runs on.
+	// The server waits for it as long as it takes rather than exiting, and
+	// answers meanwhile with a page that says so (see serveWhileWaiting). A
+	// wrong password or database name still stops it, since waiting won't help.
+	stopWaiting := func() {}
+	if cfg.DatabaseURL != "" {
+		opts.Wait = -1
 		opts.Waiting = func(err error, next time.Duration) {
 			log.Warn("waiting for the database", "retry_in", next, "err", err)
 		}
+		stopWaiting = serveWhileWaiting([]string{cfg.Addr, cfg.HomeAddr}, log)
 	}
+	defer stopWaiting()
 	db, err := store.OpenWith(cfg.Database(), opts)
 	if err != nil {
 		return fmt.Errorf("open database: %w", err)
@@ -505,6 +507,7 @@ func run() (err error) {
 	}
 
 	errc := make(chan error, 2)
+	stopWaiting()
 	go func() { errc <- srv.ListenAndServe() }()
 	// The home network's own entrance, when the main address is behind a proxy.
 	var homeSrv *http.Server

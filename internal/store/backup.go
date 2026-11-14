@@ -21,7 +21,8 @@ type Options struct {
 	BeforeMigrate func(s *Store, from, to int) error
 	// Wait is how long to keep trying a PostgreSQL server that doesn't
 	// answer yet, such as one starting at the same time as Matinee. Zero
-	// tries once.
+	// tries once; a negative wait keeps trying until it answers, unless it
+	// says the password, user or database is wrong.
 	Wait time.Duration
 	// Waiting is told each time the database didn't answer and when the
 	// next try is.

@@ -178,9 +178,12 @@ spec:
               path: /readyz
               port: http
             periodSeconds: 10
+          # Alive, not ready: while the server waits for its database it
+          # answers /healthz, so Kubernetes keeps it instead of restarting it,
+          # and it takes traffic once /readyz says the database answers.
           startupProbe:
             httpGet:
-              path: /readyz
+              path: /healthz
               port: http
             periodSeconds: 3
             failureThreshold: 60
