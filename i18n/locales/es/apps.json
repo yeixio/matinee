@@ -710,6 +710,11 @@
     "noEmulatorFor": "Matinee aún no puede jugar a juegos de {{system}}: este servidor no tiene un emulador para ellos.",
     "noEmulator": "Matinee aún no puede jugar a este juego: este servidor no tiene un emulador para él.",
     "addEmulatorWeb": "Un administrador puede añadir uno en Ajustes → Streaming → Juegos del reproductor web.",
-    "emulatorGuide": "Cómo añadir tu propio emulador"
+    "emulatorGuide": "Cómo añadir tu propio emulador",
+    "pcGames": "Juegos de PC (vista previa)",
+    "pcGamesHint": "Juegos de Steam instalados en tu host de juegos, ejecutados en su tarjeta gráfica y transmitidos aquí.",
+    "pcGamesEmpty": "Todavía no hay juegos instalados en el host de juegos.",
+    "steam": "Steam",
+    "steamHint": "Big Picture de Steam a pantalla completa: elige, juega y cierra juegos con el mando."
   }
 }

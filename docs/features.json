@@ -751,11 +751,11 @@
               "since": "v0.2.6",
               "apps": {
                 "web": true,
-                "ios": {"na": "PC games are a preview, played from the web app for now."},
-                "android": {"na": "PC games are a preview, played from the web app for now."},
-                "appletv": {"na": "PC games are a preview, played from the web app for now."},
-                "androidtv": {"na": "PC games are a preview, played from the web app for now."},
-                "tvweb": {"na": "PC games are a preview, played from the web app for now."}
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
               }
             },
             {
@@ -764,11 +764,11 @@
               "since": "v0.2.7",
               "apps": {
                 "web": true,
-                "ios": {"na": "PC games are a preview, played from the web app for now."},
-                "android": {"na": "PC games are a preview, played from the web app for now."},
-                "appletv": {"na": "PC games are a preview, played from the web app for now."},
-                "androidtv": {"na": "PC games are a preview, played from the web app for now."},
-                "tvweb": {"na": "PC games are a preview, played from the web app for now."}
+                "ios": {"na": "The apps play PC games with a controller."},
+                "android": {"na": "The apps play PC games with a controller."},
+                "appletv": {"na": "The apps play PC games with a controller."},
+                "androidtv": {"na": "The apps play PC games with a controller."},
+                "tvweb": {"na": "The apps play PC games with a controller."}
               }
             }
           ]

@@ -696,6 +696,11 @@
     "noEmulatorFor": "Matinee 暫時還不能執行 {{system}} 遊戲：此伺服器上沒有對應的模擬器。",
     "noEmulator": "Matinee 暫時還不能執行這款遊戲：此伺服器上沒有對應的模擬器。",
     "addEmulatorWeb": "管理員可以在網頁播放器的「設定 → 串流 → 遊戲」中新增。",
-    "emulatorGuide": "如何新增你自己的模擬器"
+    "emulatorGuide": "如何新增你自己的模擬器",
+    "pcGames": "PC 遊戲(預覽)",
+    "pcGamesHint": "遊戲主機上安裝的 Steam 遊戲,在它的顯示卡上執行並串流到這裡。",
+    "pcGamesEmpty": "遊戲主機上還沒有安裝遊戲。",
+    "steam": "Steam",
+    "steamHint": "全螢幕顯示 Steam 的大螢幕模式:用手把選擇、遊玩和結束遊戲。"
   }
 }

@@ -703,6 +703,11 @@
     "noEmulatorFor": "Matinee kan ikke spille {{system}}-spill ennå: det finnes ingen emulator for dem på denne serveren.",
     "noEmulator": "Matinee kan ikke spille dette spillet ennå: det finnes ingen emulator for det på denne serveren.",
     "addEmulatorWeb": "En administrator kan legge til en under Innstillinger → Strømming → Spill i nettspilleren.",
-    "emulatorGuide": "Slik legger du til din egen emulator"
+    "emulatorGuide": "Slik legger du til din egen emulator",
+    "pcGames": "PC-spill (forhåndsvisning)",
+    "pcGamesHint": "Steam-spill installert på spillverten din, spilt på grafikkortet dens og strømmet hit.",
+    "pcGamesEmpty": "Ingen spill er installert på spillverten ennå.",
+    "steam": "Steam",
+    "steamHint": "Steams Big Picture i fullskjerm: velg, spill og avslutt spill med kontrolleren."
   }
 }
