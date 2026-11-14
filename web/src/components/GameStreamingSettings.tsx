@@ -107,3 +107,43 @@ function EmulatorRow({ emulator: e, onRemove }: { emulator: GameEmulator; onRemo
     </li>
   )
 }
+
+/**
+ * A button that uploads an emulator and says how it went, for the "no
+ * emulator yet" note on a game's page. done runs once it's added.
+ */
+export function AddEmulatorButton({ onAdded }: { onAdded?: () => void }) {
+  const { t } = useTranslation()
+  const qc = useQueryClient()
+  const input = useRef<HTMLInputElement>(null)
+  const add = useMutation({
+    mutationFn: (f: File) => api.addGameEmulator(f),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['game-emulators'] })
+      qc.invalidateQueries({ queryKey: ['game-streaming'] })
+      onAdded?.()
+    },
+  })
+  return (
+    <span className="inline-flex flex-wrap items-center gap-x-3 gap-y-1">
+      <input
+        ref={input}
+        type="file"
+        accept=".so,.dll,.dylib"
+        className="hidden"
+        onChange={(e) => {
+          const f = e.target.files?.[0]
+          e.target.value = ''
+          if (f) add.mutate(f)
+        }}
+      />
+      <Button icon={<Upload className="size-4" />} disabled={add.isPending} onClick={() => input.current?.click()}>
+        {add.isPending ? t('settings.games.adding') : t('settings.games.addEmulator')}
+      </Button>
+      {add.isSuccess && <span className="text-muted">{t('settings.games.added', { name: add.data.name })}</span>}
+      {add.error && (
+        <span className="text-danger">{add.error instanceof ApiError ? add.error.message : t('settings.games.couldntAdd')}</span>
+      )}
+    </span>
+  )
+}

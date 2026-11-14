@@ -8,6 +8,7 @@ import { GridSkeleton, type JumpTo, PosterGrid } from '../components/Card'
 import { PinnedCollections, SaveAsCollectionButton } from '../components/Collections'
 import { FilterBar } from '../components/FilterBar'
 import { SkippedFiles } from '../components/SkippedFiles'
+import { PCGames } from '../games/PCGames'
 import { LibraryIcon, useLibraries } from '../components/Shell'
 import { Button, EmptyState } from '../components/ui'
 import Books from './Books'
@@ -71,6 +72,8 @@ function Titles({ id, lib }: { id: number; lib?: LibraryInfo }) {
         )}
       </div>
       <SkippedFiles skipped={lib?.skipped} />
+      {/* Steam on the game host, when there is one, beside the library's own games. */}
+      {lib?.kind === 'games' && !filtered && <PCGames />}
       {/* Collections pinned to this library, while no filter is on. */}
       {!filtered && <PinnedCollections library={id} />}
       <FilterBar value={filter} onChange={setFilter} libraryId={id} libraryKind={lib?.kind} />

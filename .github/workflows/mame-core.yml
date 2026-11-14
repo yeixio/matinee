@@ -202,7 +202,9 @@ jobs:
         with:
           msystem: MINGW64
           update: false
-          install: git make xz mingw-w64-x86_64-gcc mingw-w64-x86_64-lld mingw-w64-x86_64-python
+          # SDL2 only for its headers: MAME's Windows input code takes its key
+          # codes from them.
+          install: git make xz mingw-w64-x86_64-gcc mingw-w64-x86_64-lld mingw-w64-x86_64-python mingw-w64-x86_64-SDL2
       - name: Get MAME
         if: steps.have.outputs.done != '1'
         run: |
@@ -217,7 +219,12 @@ jobs:
           # The runner's ANDROID_NDK_HOME makes the makefile look for the
           # Android NDK, at a Windows path it can't read.
           unset ANDROID_NDK_HOME ANDROID_NDK_ROOT ANDROID_NDK_LATEST_HOME
-          make -f Makefile.libretro -j"$(nproc)" SUBTARGET=arcade platform=win CC=gcc CXX=g++ AR=ar > ../build.log 2>&1 || { tail -200 ../build.log; exit 1; }
+          make -f Makefile.libretro -j"$(nproc)" SUBTARGET=arcade platform=win CC=gcc CXX=g++ AR=ar > ../build.log 2>&1 || {
+            # With -j the error is often far above the end of the log.
+            grep -n -E 'error|Error [0-9]|undefined reference|No such file|too long|cannot' ../build.log | grep -v -E -- '-Werror|-Wno-error|error\.(cpp|h|o)' | head -80
+            tail -60 ../build.log
+            exit 1
+          }
           tail -5 ../build.log
           ls -la ./*_libretro.*
       - name: Package

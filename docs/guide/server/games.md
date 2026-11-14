@@ -158,6 +158,10 @@ You can add any emulator that's a **libretro core**, for a system Matinee doesn'
 2. Unzip it, and in **Settings → Streaming → Games → Emulators** press **Add an emulator** and pick the file.
 3. Matinee loads it to ask which files it plays. If that works it's added, listed with the files it plays, and those games play with it from then on, ahead of a built-in emulator for the same files. If it doesn't, Matinee says why (built for another kind of computer, say) and doesn't keep it.
 
+<!-- since: v0.2.7 -->
+You can also add one straight from a game's page: a game Matinee can't play yet says so, and admins get an **Add an emulator** button right there. Once the emulator is added, the game's **Play** button appears.
+<!-- /since -->
+
 An emulator is a program that runs on your server, so add only ones you trust, such as libretro's own builds. Each runs in its own process like the built-in ones.
 
 You can also copy cores into `games/cores` in Matinee's data folder by hand; Matinee picks them up the next time it lists games. To remove one, press the bin next to it, or delete the file.
@@ -191,6 +195,10 @@ This is an early preview, played from **Games** in the web app by an admin:
 4. Open **Games** in the web app. Under **PC games**, **Steam** opens Steam's Big Picture full screen, where you pick, play and quit games with your controller, as on a TV console. Below it, each installed game starts on its own.
 
 The game host plays one game at a time. Closing the player quits the game, or leaves Big Picture.
+
+<!-- since: v0.2.7 -->
+**PC games** also sits at the top of each Games library, above the console games. If the game host is set up but isn't answering, PC games says why instead of disappearing, such as when the game host computer is off or `matinee-gamehost` isn't running.
+<!-- /since -->
 
 ### Signing in to Steam from Matinee
 
