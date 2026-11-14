@@ -1669,6 +1669,74 @@ paths:
               schema: { $ref: "#/components/schemas/Backups" }
         "400": { description: The file isn't a Matinee database. }
         "404": { description: No such backup. }
+  /admin/database:
+    get:
+      summary: Which database Matinee uses, and any move (admins only)
+      description: |
+        The database in use (a PostgreSQL URL without its password, or a
+        SQLite file), where it was moved from, a move waiting for the next
+        start, and why the last move failed. `configured` is set when the
+        server's settings still name the database it was moved from.
+      responses:
+        "200":
+          description: The database.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Database" }
+  /admin/database/check:
+    post:
+      summary: Check a database Matinee could move to (admins only)
+      description: |
+        Connects to it and checks it isn't the one in use and has none of
+        Matinee's data yet. Nothing is moved or changed.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/DatabaseMove" }
+      responses:
+        "200":
+          description: Matinee can move there.
+          content:
+            application/json:
+              schema: { type: object, properties: { where: { type: string } } }
+        "400": { description: It can't, and why. }
+  /admin/database/move:
+    post:
+      summary: Move the database to another one (admins only)
+      description: |
+        Checks the database as `/admin/database/check` does, then moves to
+        it the next time the server starts, before anything else uses the
+        database: everything is copied through Matinee's own schema, every
+        table's rows are counted in both, and the server switches over. The
+        old database keeps its data. When the server can restart itself, it
+        does so now (`restarting`, with the `bootId` of the run that stops).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/DatabaseMove" }
+      responses:
+        "200":
+          description: The move waits for the next start, or is starting.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - { $ref: "#/components/schemas/Database" }
+                  - type: object
+                    properties:
+                      restarting: { type: boolean }
+                      bootId: { type: string }
+        "400": { description: It can't move there, and why. }
+    delete:
+      summary: Cancel a move that waits for the next start (admins only)
+      responses:
+        "200":
+          description: Cancelled.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Database" }
   /notifications:
     get:
       summary: Your notifications
@@ -5220,6 +5288,28 @@ components:
       properties:
         everyHours: { type: integer, description: Hours between scheduled backups; 0 turns them off. Default 24. }
         keep: { type: integer, description: How many of each kind to keep. Default 7. }
+    Database:
+      type: object
+      properties:
+        kind: { type: string, enum: [sqlite, postgres] }
+        where: { type: string, description: The database in use, without a password. }
+        configured: { type: string, description: What the server's settings say, when that's the database it was moved from. }
+        movedFrom:
+          type: object
+          properties:
+            from: { type: string }
+            at: { type: integer, description: Unix seconds. }
+            rows: { type: integer }
+        pending: { type: string, description: A move waiting for the next start. }
+        lastError: { type: string, description: Why the last move failed. }
+        canRestart: { type: boolean }
+        suggestedFile: { type: string, description: Where a SQLite file could go. }
+        sqliteOk: { type: boolean, description: False on Kubernetes, where the data folder doesn't last. }
+    DatabaseMove:
+      type: object
+      required: [to]
+      properties:
+        to: { type: string, description: "A PostgreSQL URL (postgres://user:password@host:5432/matinee) or a SQLite file's full path." }
     Backups:
       type: object
       properties:

@@ -294,5 +294,7 @@
   "cant_find_that_emulator": "האמולטור לא נמצא",
   "couldnt_save_the_emulator": "לא ניתן היה לשמור את האמולטור",
   "that_file_isnt_an_emulator_this_server_can_run_reason": "הקובץ הזה אינו אמולטור שהשרת הזה יכול להריץ: {{reason}}",
-  "not_a_game": "זה לא משחק"
+  "not_a_game": "זה לא משחק",
+  "say_where_to_move_the_database_a_postgresql_url_or_a_sqlite_files_full_path": "ציין לאן להעביר את מסד הנתונים: כתובת URL של PostgreSQL או הנתיב המלא של קובץ SQLite",
+  "on_kubernetes_the_data_folder_is_emptied_whenever_matinees_pod_is_replaced_so_the_database_cant_be_a_sqlite_file_there_move_it_to_a_postgresql_database": "ב-Kubernetes תיקיית הנתונים מתרוקנת בכל פעם שה-pod של Matinee מוחלף, ולכן מסד הנתונים לא יכול להיות שם קובץ SQLite; העבר אותו למסד נתונים PostgreSQL"
 }

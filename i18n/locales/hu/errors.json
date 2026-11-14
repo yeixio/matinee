@@ -294,5 +294,7 @@
   "cant_find_that_emulator": "nem található az emulátor",
   "couldnt_save_the_emulator": "nem sikerült menteni az emulátort",
   "that_file_isnt_an_emulator_this_server_can_run_reason": "ez a fájl nem olyan emulátor, amelyet ez a szerver futtatni tud: {{reason}}",
-  "not_a_game": "nem játék"
+  "not_a_game": "nem játék",
+  "say_where_to_move_the_database_a_postgresql_url_or_a_sqlite_files_full_path": "add meg, hová költözzön az adatbázis: egy PostgreSQL URL-t vagy egy SQLite-fájl teljes elérési útját",
+  "on_kubernetes_the_data_folder_is_emptied_whenever_matinees_pod_is_replaced_so_the_database_cant_be_a_sqlite_file_there_move_it_to_a_postgresql_database": "Kubernetesen az adatmappa kiürül, valahányszor a Matinee podját lecserélik, így ott az adatbázis nem lehet SQLite-fájl; költöztesd egy PostgreSQL-adatbázisba"
 }

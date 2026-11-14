@@ -986,6 +986,33 @@
         "before-restore": "לפני שחזור"
       }
     },
+    "database": {
+      "title": "מסד נתונים",
+      "usesSqlite": "Matinee משתמש בקובץ ה-SQLite ‏{{where}}.",
+      "usesPostgres": "Matinee משתמש במסד הנתונים PostgreSQL ‏{{where}}.",
+      "movedFrom": "הועבר לכאן מ-{{from}} ב-{{time}}: הועתקו ונספרו {{rows}} שורות.",
+      "configured": "הגדרות השרת עדיין מציינות את מסד הנתונים שממנו הועבר, {{old}}. שנה אותן למסד הזה (MATINEE_DATABASE_URL, או database.url בתרשים Helm). עד אז השאר את המסד הישן פועל: הוא אומר ל-Matinee איפה החדש.",
+      "pending": "Matinee יעביר את מסד הנתונים שלו אל {{where}} בפעם הבאה שיופעל.",
+      "cancel": "ביטול ההעברה",
+      "moving": "מסד הנתונים מועבר. Matinee ייפתח שוב ברגע שהכול יועתק וייבדק.",
+      "moved": "הועבר. Matinee פועל עכשיו על מסד הנתונים החדש, והישן נשמר כפי שהיה.",
+      "failed": "ההעברה האחרונה לא הצליחה, ולכן Matinee שמר על מסד הנתונים שלו ללא שינוי: {{error}}",
+      "intro": "העבר הכול למסד נתונים אחר: Matinee מעתיק את הנתונים לטבלאות שלו שם, סופר את השורות של כל טבלה בשניהם ואז עובר. מסד הנתונים הנוכחי שומר את כל הנתונים שלו.",
+      "moveTo": "העברה אל",
+      "postgres": "PostgreSQL",
+      "sqlite": "קובץ SQLite",
+      "noSqliteHere": "ב-Kubernetes תיקיית הנתונים של Matinee מתרוקנת בכל פעם שה-pod מוחלף, ולכן קובץ SQLite לא יכול להיות שם.",
+      "url": "כתובת PostgreSQL",
+      "urlHint": "מסד נתונים ריק בשרת PostgreSQL שבבעלות המשתמש של Matinee. צור אותו קודם, למשל עם CREATE DATABASE matinee.",
+      "file": "קובץ",
+      "fileHint": "הנתיב המלא של קובץ חדש, בדיסק קבוע.",
+      "check": "בדיקה",
+      "checking": "בודק…",
+      "checkOk": "Matinee יכול לעבור אל {{where}}.",
+      "move": "העברת מסד הנתונים",
+      "moveConfirm": "להעביר את מסד הנתונים אל {{where}}? Matinee יופעל מחדש, יעתיק הכול, יבדוק ויפתח על מסד הנתונים החדש. הניגון ייעצר לרגע.",
+      "restartByHand": "השרת הזה לא יכול להפעיל את עצמו מחדש: הפעל מחדש את Matinee כדי להשלים את ההעברה."
+    },
     "updates": {
       "title": "עדכונים",
       "running": "השרת הזה מריץ את <code>{{version}}</code>.",

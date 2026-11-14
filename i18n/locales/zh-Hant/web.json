@@ -974,6 +974,33 @@
         "before-restore": "還原前"
       }
     },
+    "database": {
+      "title": "資料庫",
+      "usesSqlite": "Matinee 正在使用 SQLite 檔案 {{where}}。",
+      "usesPostgres": "Matinee 正在使用 PostgreSQL 資料庫 {{where}}。",
+      "movedFrom": "於 {{time}} 從 {{from}} 搬移至此:已複製並核對 {{rows}} 列。",
+      "configured": "伺服器設定中仍寫著搬移前的資料庫 {{old}}。請改成這個資料庫(MATINEE_DATABASE_URL,或 Helm chart 中的 database.url)。在那之前請讓舊資料庫繼續運作:它會告訴 Matinee 新資料庫在哪裡。",
+      "pending": "Matinee 會在下次啟動時把資料庫搬移到 {{where}}。",
+      "cancel": "取消搬移",
+      "moving": "正在搬移資料庫。全部複製並檢查完畢後,Matinee 會重新開啟。",
+      "moved": "搬移完成。Matinee 現在使用新資料庫,舊資料庫維持原樣。",
+      "failed": "上次搬移沒有成功,因此 Matinee 繼續使用原本的資料庫,未做任何變更:{{error}}",
+      "intro": "把所有內容搬移到另一個資料庫:Matinee 會把資料複製到那裡它自己的資料表中,在兩邊逐表核對列數,然後切換。目前的資料庫會保留全部資料。",
+      "moveTo": "搬移到",
+      "postgres": "PostgreSQL",
+      "sqlite": "SQLite 檔案",
+      "noSqliteHere": "在 Kubernetes 上,每次替換 Pod 時 Matinee 的資料夾都會被清空,所以不能把 SQLite 檔案放在那裡。",
+      "url": "PostgreSQL 位址",
+      "urlHint": "PostgreSQL 伺服器上一個空的資料庫,歸 Matinee 的使用者所有。請先建立,例如使用 CREATE DATABASE matinee。",
+      "file": "檔案",
+      "fileHint": "新檔案的完整路徑,需位於會保留的磁碟上。",
+      "check": "檢查",
+      "checking": "正在檢查…",
+      "checkOk": "Matinee 可以搬移到 {{where}}。",
+      "move": "搬移資料庫",
+      "moveConfirm": "要把資料庫搬移到 {{where}} 嗎?Matinee 會重新啟動,複製所有內容,檢查後以新資料庫開啟。播放會暫停片刻。",
+      "restartByHand": "這台伺服器無法自行重新啟動:請重新啟動 Matinee 以完成搬移。"
+    },
     "updates": {
       "title": "更新",
       "running": "這台伺服器執行的是 <code>{{version}}</code>。",

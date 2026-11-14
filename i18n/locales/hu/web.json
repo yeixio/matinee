@@ -980,6 +980,33 @@
         "before-restore": "Visszaállítás előtt"
       }
     },
+    "database": {
+      "title": "Adatbázis",
+      "usesSqlite": "A Matinee a(z) {{where}} SQLite-fájlt használja.",
+      "usesPostgres": "A Matinee a(z) {{where}} PostgreSQL-adatbázist használja.",
+      "movedFrom": "Ide költöztetve innen: {{from}}, ekkor: {{time}}. Átmásolt és megszámolt sorok: {{rows}}.",
+      "configured": "A szerver beállításai még a régi adatbázist adják meg: {{old}}. Állítsd át erre (MATINEE_DATABASE_URL vagy a Helm chart database.url értéke). Addig hagyd futni a régit: az mondja meg a Matinee-nek, hol az új.",
+      "pending": "A Matinee a következő indításkor ide költözteti az adatbázisát: {{where}}.",
+      "cancel": "Költöztetés megszakítása",
+      "moving": "Az adatbázis költözik. A Matinee újra megnyílik, ha minden át van másolva és ellenőrizve.",
+      "moved": "Kész. A Matinee most az új adatbázissal fut, a régi változatlan maradt.",
+      "failed": "Az utolsó költöztetés nem sikerült, így a Matinee változatlanul megtartotta az adatbázisát: {{error}}",
+      "intro": "Költöztess mindent egy másik adatbázisba: a Matinee átmásolja a saját tábláiba, mindkét helyen megszámolja minden tábla sorait, majd átvált. A mostani adatbázis megtartja minden adatát.",
+      "moveTo": "Költöztetés ide",
+      "postgres": "PostgreSQL",
+      "sqlite": "SQLite-fájl",
+      "noSqliteHere": "Kubernetesen a Matinee adatmappája kiürül, valahányszor a podot lecserélik, így ott nem lehet SQLite-fájl.",
+      "url": "PostgreSQL-cím",
+      "urlHint": "Egy üres adatbázis a PostgreSQL-szerveren, a Matinee felhasználójának tulajdonában. Előbb hozd létre, például a CREATE DATABASE matinee paranccsal.",
+      "file": "Fájl",
+      "fileHint": "Egy új fájl teljes elérési útja, tartós lemezen.",
+      "check": "Ellenőrzés",
+      "checking": "Ellenőrzés…",
+      "checkOk": "A Matinee ide költözhet: {{where}}.",
+      "move": "Adatbázis költöztetése",
+      "moveConfirm": "Költözteted az adatbázist ide: {{where}}? A Matinee újraindul, mindent átmásol, ellenőriz, és az új adatbázissal nyílik meg. A lejátszás egy pillanatra leáll.",
+      "restartByHand": "Ez a szerver nem tudja magát újraindítani: a költöztetés befejezéséhez indítsd újra a Matinee-t."
+    },
     "updates": {
       "title": "Frissítések",
       "running": "Ez a szerver ezt a verziót futtatja: <code>{{version}}</code>.",

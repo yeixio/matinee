@@ -986,6 +986,33 @@
         "before-restore": "Înainte de o restaurare"
       }
     },
+    "database": {
+      "title": "Bază de date",
+      "usesSqlite": "Matinee folosește fișierul SQLite {{where}}.",
+      "usesPostgres": "Matinee folosește baza de date PostgreSQL {{where}}.",
+      "movedFrom": "Mutată aici din {{from}} pe {{time}}: rânduri copiate și numărate: {{rows}}.",
+      "configured": "Setările serverului indică încă baza de date din care s-a mutat, {{old}}. Schimbă-le la aceasta (MATINEE_DATABASE_URL sau database.url în chartul Helm). Până atunci, lasă baza veche pornită: ea îi spune lui Matinee unde este cea nouă.",
+      "pending": "Matinee își va muta baza de date în {{where}} la următoarea pornire.",
+      "cancel": "Anulează mutarea",
+      "moving": "Se mută baza de date. Matinee se deschide din nou după ce totul este copiat și verificat.",
+      "moved": "Mutată. Matinee rulează acum pe baza de date nouă, iar cea veche a rămas neschimbată.",
+      "failed": "Ultima mutare nu a reușit, așa că Matinee și-a păstrat baza de date neschimbată: {{error}}",
+      "intro": "Mută totul în altă bază de date: Matinee copiază datele în propriile tabele de acolo, numără rândurile fiecărui tabel în ambele, apoi comută. Baza de date actuală își păstrează toate datele.",
+      "moveTo": "Mută în",
+      "postgres": "PostgreSQL",
+      "sqlite": "Fișier SQLite",
+      "noSqliteHere": "Pe Kubernetes, folderul de date al lui Matinee este golit de fiecare dată când podul este înlocuit, deci acolo nu poate exista un fișier SQLite.",
+      "url": "Adresă PostgreSQL",
+      "urlHint": "O bază de date goală pe serverul PostgreSQL, deținută de utilizatorul Matinee. Creeaz-o întâi, de exemplu cu CREATE DATABASE matinee.",
+      "file": "Fișier",
+      "fileHint": "Calea completă a unui fișier nou, pe un disc durabil.",
+      "check": "Verifică",
+      "checking": "Se verifică…",
+      "checkOk": "Matinee se poate muta în {{where}}.",
+      "move": "Mută baza de date",
+      "moveConfirm": "Muți baza de date în {{where}}? Matinee repornește, copiază totul, verifică și se deschide pe baza nouă. Redarea se oprește pentru o clipă.",
+      "restartByHand": "Acest server nu se poate reporni singur: repornește Matinee pentru a termina o mutare."
+    },
     "updates": {
       "title": "Actualizări",
       "running": "Acest server rulează <code>{{version}}</code>.",

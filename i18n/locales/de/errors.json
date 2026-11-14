@@ -294,5 +294,7 @@
   "cant_find_that_emulator": "dieser Emulator wurde nicht gefunden",
   "couldnt_save_the_emulator": "der Emulator konnte nicht gespeichert werden",
   "that_file_isnt_an_emulator_this_server_can_run_reason": "diese Datei ist kein Emulator, den dieser Server ausführen kann: {{reason}}",
-  "not_a_game": "kein Spiel"
+  "not_a_game": "kein Spiel",
+  "say_where_to_move_the_database_a_postgresql_url_or_a_sqlite_files_full_path": "gib an, wohin die Datenbank umziehen soll: eine PostgreSQL-URL oder der vollständige Pfad einer SQLite-Datei",
+  "on_kubernetes_the_data_folder_is_emptied_whenever_matinees_pod_is_replaced_so_the_database_cant_be_a_sqlite_file_there_move_it_to_a_postgresql_database": "unter Kubernetes wird der Datenordner geleert, wenn Matinees Pod ersetzt wird, daher kann die Datenbank dort keine SQLite-Datei sein; zieh sie in eine PostgreSQL-Datenbank um"
 }

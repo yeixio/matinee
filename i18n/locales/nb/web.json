@@ -980,6 +980,33 @@
         "before-restore": "Før en gjenoppretting"
       }
     },
+    "database": {
+      "title": "Database",
+      "usesSqlite": "Matinee bruker SQLite-filen {{where}}.",
+      "usesPostgres": "Matinee bruker PostgreSQL-databasen {{where}}.",
+      "movedFrom": "Flyttet hit fra {{from}} {{time}}: {{rows}} rader kopiert og telt.",
+      "configured": "Serverinnstillingene peker fortsatt på databasen den ble flyttet fra, {{old}}. Endre dem til denne (MATINEE_DATABASE_URL, eller database.url i Helm-chartet). La den gamle databasen kjøre til da: den forteller Matinee hvor den nye er.",
+      "pending": "Matinee flytter databasen til {{where}} neste gang den starter.",
+      "cancel": "Avbryt flytting",
+      "moving": "Databasen flyttes. Matinee åpner igjen når alt er kopiert og sjekket.",
+      "moved": "Flyttet. Matinee kjører nå på den nye databasen, og den gamle er beholdt som den var.",
+      "failed": "Den siste flyttingen virket ikke, så Matinee beholdt databasen sin uendret: {{error}}",
+      "intro": "Flytt alt til en annen database: Matinee kopierer det inn i sine egne tabeller der, teller radene i hver tabell i begge og bytter så over. Databasen som brukes nå, beholder alle dataene.",
+      "moveTo": "Flytt til",
+      "postgres": "PostgreSQL",
+      "sqlite": "SQLite-fil",
+      "noSqliteHere": "På Kubernetes tømmes Matinees datamappe hver gang poden byttes ut, så en SQLite-fil kan ikke ligge der.",
+      "url": "PostgreSQL-adresse",
+      "urlHint": "En tom database på PostgreSQL-serveren som Matinees bruker eier. Lag den først, for eksempel med CREATE DATABASE matinee.",
+      "file": "Fil",
+      "fileHint": "Den fullstendige banen til en ny fil, på en disk som varer.",
+      "check": "Sjekk",
+      "checking": "Sjekker…",
+      "checkOk": "Matinee kan flytte til {{where}}.",
+      "move": "Flytt database",
+      "moveConfirm": "Flytte databasen til {{where}}? Matinee starter på nytt, kopierer alt, sjekker det og åpner med den nye databasen. Avspillingen stopper et øyeblikk.",
+      "restartByHand": "Denne serveren kan ikke starte seg selv på nytt: start Matinee på nytt for å fullføre en flytting."
+    },
     "updates": {
       "title": "Oppdateringer",
       "running": "Denne serveren kjører <code>{{version}}</code>.",

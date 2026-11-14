@@ -980,6 +980,33 @@
         "before-restore": "Vóór een herstel"
       }
     },
+    "database": {
+      "title": "Database",
+      "usesSqlite": "Matinee gebruikt het SQLite-bestand {{where}}.",
+      "usesPostgres": "Matinee gebruikt de PostgreSQL-database {{where}}.",
+      "movedFrom": "Op {{time}} hierheen verhuisd van {{from}}: {{rows}} rijen gekopieerd en geteld.",
+      "configured": "De serverinstellingen noemen nog de database waaruit verhuisd is, {{old}}. Zet ze op deze (MATINEE_DATABASE_URL, of database.url in de Helm-chart). Laat tot dan de oude database draaien: die vertelt Matinee waar de nieuwe is.",
+      "pending": "Matinee verhuist zijn database bij de volgende start naar {{where}}.",
+      "cancel": "Verhuizing annuleren",
+      "moving": "De database verhuist. Matinee opent weer zodra alles gekopieerd en gecontroleerd is.",
+      "moved": "Verhuisd. Matinee draait nu op de nieuwe database en de oude blijft zoals hij was.",
+      "failed": "De laatste verhuizing lukte niet, dus Matinee hield zijn database ongewijzigd: {{error}}",
+      "intro": "Verhuis alles naar een andere database: Matinee kopieert het daar in zijn eigen tabellen, telt de rijen van elke tabel in beide en schakelt dan over. De huidige database houdt al zijn gegevens.",
+      "moveTo": "Verhuizen naar",
+      "postgres": "PostgreSQL",
+      "sqlite": "SQLite-bestand",
+      "noSqliteHere": "Op Kubernetes wordt de datamap van Matinee geleegd wanneer de pod wordt vervangen, dus daar kan geen SQLite-bestand staan.",
+      "url": "PostgreSQL-adres",
+      "urlHint": "Een lege database op de PostgreSQL-server, eigendom van de gebruiker van Matinee. Maak hem eerst aan, bijvoorbeeld met CREATE DATABASE matinee.",
+      "file": "Bestand",
+      "fileHint": "Het volledige pad van een nieuw bestand, op een schijf die blijft.",
+      "check": "Controleren",
+      "checking": "Controleren…",
+      "checkOk": "Matinee kan verhuizen naar {{where}}.",
+      "move": "Database verhuizen",
+      "moveConfirm": "De database naar {{where}} verhuizen? Matinee herstart, kopieert alles, controleert het en opent op de nieuwe database. Afspelen stopt even.",
+      "restartByHand": "Deze server kan zichzelf niet herstarten: herstart Matinee om een verhuizing af te ronden."
+    },
     "updates": {
       "title": "Updates",
       "running": "Deze server draait <code>{{version}}</code>.",

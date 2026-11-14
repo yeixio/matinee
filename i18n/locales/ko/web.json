@@ -974,6 +974,33 @@
         "before-restore": "복원 전"
       }
     },
+    "database": {
+      "title": "데이터베이스",
+      "usesSqlite": "Matinee는 SQLite 파일 {{where}}을(를) 사용합니다.",
+      "usesPostgres": "Matinee는 PostgreSQL 데이터베이스 {{where}}을(를) 사용합니다.",
+      "movedFrom": "{{time}}에 {{from}}에서 옮겨 왔습니다: {{rows}}개 행을 복사하고 셌습니다.",
+      "configured": "서버 설정에는 아직 옮기기 전 데이터베이스 {{old}}이(가) 적혀 있습니다. 이 데이터베이스로 바꾸세요(MATINEE_DATABASE_URL 또는 Helm 차트의 database.url). 그때까지는 이전 데이터베이스를 계속 켜 두세요. 새 데이터베이스가 어디 있는지 Matinee에 알려 주는 것이 이전 데이터베이스입니다.",
+      "pending": "Matinee가 다음에 시작할 때 데이터베이스를 {{where}}(으)로 옮깁니다.",
+      "cancel": "옮기기 취소",
+      "moving": "데이터베이스를 옮기는 중입니다. 모두 복사하고 확인하면 Matinee가 다시 열립니다.",
+      "moved": "옮겼습니다. Matinee가 이제 새 데이터베이스로 실행되며, 이전 데이터베이스는 그대로 남아 있습니다.",
+      "failed": "마지막 옮기기에 실패해 Matinee가 기존 데이터베이스를 바꾸지 않고 계속 사용합니다: {{error}}",
+      "intro": "모든 것을 다른 데이터베이스로 옮깁니다. Matinee가 그곳의 자체 테이블로 복사하고, 양쪽에서 테이블마다 행 수를 센 뒤 전환합니다. 지금 쓰는 데이터베이스의 데이터는 모두 남습니다.",
+      "moveTo": "옮길 곳",
+      "postgres": "PostgreSQL",
+      "sqlite": "SQLite 파일",
+      "noSqliteHere": "Kubernetes에서는 Pod가 교체될 때마다 Matinee의 데이터 폴더가 비워지므로 그곳에 SQLite 파일을 둘 수 없습니다.",
+      "url": "PostgreSQL 주소",
+      "urlHint": "PostgreSQL 서버에 있는, Matinee 사용자가 소유한 빈 데이터베이스입니다. 먼저 만들어 두세요(예: CREATE DATABASE matinee).",
+      "file": "파일",
+      "fileHint": "오래 유지되는 디스크에 있는 새 파일의 전체 경로입니다.",
+      "check": "확인",
+      "checking": "확인 중…",
+      "checkOk": "Matinee가 {{where}}(으)로 옮길 수 있습니다.",
+      "move": "데이터베이스 옮기기",
+      "moveConfirm": "데이터베이스를 {{where}}(으)로 옮길까요? Matinee가 다시 시작해 모든 것을 복사하고 확인한 뒤 새 데이터베이스로 열립니다. 재생이 잠시 멈춥니다.",
+      "restartByHand": "이 서버는 스스로 다시 시작할 수 없습니다. 옮기기를 마치려면 Matinee를 다시 시작하세요."
+    },
     "updates": {
       "title": "업데이트",
       "running": "이 서버는 <code>{{version}}</code> 버전으로 실행 중입니다.",

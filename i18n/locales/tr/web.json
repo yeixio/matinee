@@ -980,6 +980,33 @@
         "before-restore": "Bir geri yüklemeden önce"
       }
     },
+    "database": {
+      "title": "Veritabanı",
+      "usesSqlite": "Matinee {{where}} SQLite dosyasını kullanıyor.",
+      "usesPostgres": "Matinee {{where}} PostgreSQL veritabanını kullanıyor.",
+      "movedFrom": "{{time}} tarihinde {{from}} konumundan buraya taşındı: {{rows}} satır kopyalandı ve sayıldı.",
+      "configured": "Sunucunun ayarları hâlâ taşındığı eski veritabanını gösteriyor: {{old}}. Bunu bu veritabanıyla değiştirin (MATINEE_DATABASE_URL veya Helm chart'ında database.url). O zamana kadar eski veritabanını çalışır tutun: Matinee'ye yenisinin nerede olduğunu o söyler.",
+      "pending": "Matinee bir sonraki açılışta veritabanını {{where}} konumuna taşıyacak.",
+      "cancel": "Taşımayı iptal et",
+      "moving": "Veritabanı taşınıyor. Her şey kopyalanıp denetlenince Matinee yeniden açılır.",
+      "moved": "Taşındı. Matinee artık yeni veritabanıyla çalışıyor; eskisi olduğu gibi duruyor.",
+      "failed": "Son taşıma başarısız oldu, bu yüzden Matinee veritabanını değiştirmeden korudu: {{error}}",
+      "intro": "Her şeyi başka bir veritabanına taşıyın: Matinee verileri oradaki kendi tablolarına kopyalar, her tablonun satırlarını iki tarafta da sayar ve sonra geçiş yapar. Şu anki veritabanı tüm verilerini korur.",
+      "moveTo": "Şuraya taşı",
+      "postgres": "PostgreSQL",
+      "sqlite": "SQLite dosyası",
+      "noSqliteHere": "Kubernetes'te Matinee'nin veri klasörü pod her değiştirildiğinde boşaltılır, bu yüzden orada SQLite dosyası tutulamaz.",
+      "url": "PostgreSQL adresi",
+      "urlHint": "PostgreSQL sunucusunda Matinee kullanıcısına ait boş bir veritabanı. Önce oluşturun, örneğin CREATE DATABASE matinee ile.",
+      "file": "Dosya",
+      "fileHint": "Kalıcı bir diskteki yeni bir dosyanın tam yolu.",
+      "check": "Denetle",
+      "checking": "Denetleniyor…",
+      "checkOk": "Matinee {{where}} konumuna taşınabilir.",
+      "move": "Veritabanını taşı",
+      "moveConfirm": "Veritabanı {{where}} konumuna taşınsın mı? Matinee yeniden başlar, her şeyi kopyalar, denetler ve yeni veritabanıyla açılır. Oynatma bir an durur.",
+      "restartByHand": "Bu sunucu kendini yeniden başlatamıyor: taşımayı bitirmek için Matinee'yi yeniden başlatın."
+    },
     "updates": {
       "title": "Güncellemeler",
       "running": "Bu sunucu <code>{{version}}</code> sürümünü çalıştırıyor.",

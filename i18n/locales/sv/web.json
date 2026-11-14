@@ -980,6 +980,33 @@
         "before-restore": "Före en återställning"
       }
     },
+    "database": {
+      "title": "Databas",
+      "usesSqlite": "Matinee använder SQLite-filen {{where}}.",
+      "usesPostgres": "Matinee använder PostgreSQL-databasen {{where}}.",
+      "movedFrom": "Flyttad hit från {{from}} den {{time}}: {{rows}} rader kopierade och räknade.",
+      "configured": "Serverns inställningar anger fortfarande databasen den flyttades från, {{old}}. Ändra dem till den här (MATINEE_DATABASE_URL, eller database.url i Helm-charten). Låt den gamla databasen vara igång tills dess: den talar om för Matinee var den nya finns.",
+      "pending": "Matinee flyttar sin databas till {{where}} nästa gång den startar.",
+      "cancel": "Avbryt flytt",
+      "moving": "Databasen flyttas. Matinee öppnar igen när allt är kopierat och kontrollerat.",
+      "moved": "Flyttad. Matinee kör nu på den nya databasen, och den gamla finns kvar som den var.",
+      "failed": "Den senaste flytten fungerade inte, så Matinee behöll sin databas oförändrad: {{error}}",
+      "intro": "Flytta allt till en annan databas: Matinee kopierar det till sina egna tabeller där, räknar raderna i varje tabell i båda och byter sedan. Den nuvarande databasen behåller alla sina data.",
+      "moveTo": "Flytta till",
+      "postgres": "PostgreSQL",
+      "sqlite": "SQLite-fil",
+      "noSqliteHere": "På Kubernetes töms Matinees datamapp varje gång podden byts ut, så en SQLite-fil kan inte ligga där.",
+      "url": "PostgreSQL-adress",
+      "urlHint": "En tom databas på PostgreSQL-servern som ägs av Matinees användare. Skapa den först, till exempel med CREATE DATABASE matinee.",
+      "file": "Fil",
+      "fileHint": "Den fullständiga sökvägen till en ny fil, på en disk som består.",
+      "check": "Kontrollera",
+      "checking": "Kontrollerar…",
+      "checkOk": "Matinee kan flytta till {{where}}.",
+      "move": "Flytta databas",
+      "moveConfirm": "Flytta databasen till {{where}}? Matinee startar om, kopierar allt, kontrollerar det och öppnar med den nya databasen. Uppspelningen stannar en stund.",
+      "restartByHand": "Den här servern kan inte starta om sig själv: starta om Matinee för att slutföra en flytt."
+    },
     "updates": {
       "title": "Uppdateringar",
       "running": "Den här servern kör <code>{{version}}</code>.",

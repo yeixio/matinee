@@ -986,6 +986,33 @@
         "before-restore": "Avant une restauration"
       }
     },
+    "database": {
+      "title": "Base de données",
+      "usesSqlite": "Matinee utilise le fichier SQLite {{where}}.",
+      "usesPostgres": "Matinee utilise la base de données PostgreSQL {{where}}.",
+      "movedFrom": "Déplacée ici depuis {{from}} le {{time}} : {{rows}} lignes copiées et comptées.",
+      "configured": "Les réglages du serveur indiquent encore la base de données d'origine, {{old}}. Remplacez-la par celle-ci (MATINEE_DATABASE_URL, ou database.url dans le chart Helm). D'ici là, laissez l'ancienne en marche : elle indique à Matinee où se trouve la nouvelle.",
+      "pending": "Matinee déplacera sa base de données vers {{where}} à son prochain démarrage.",
+      "cancel": "Annuler le déplacement",
+      "moving": "Déplacement de la base de données. Matinee rouvre dès que tout est copié et vérifié.",
+      "moved": "Déplacée. Matinee fonctionne maintenant avec la nouvelle base de données, et l'ancienne est gardée telle quelle.",
+      "failed": "Le dernier déplacement n'a pas fonctionné, Matinee a donc gardé sa base de données intacte : {{error}}",
+      "intro": "Déplacez tout vers une autre base de données : Matinee le copie dans ses propres tables, compte les lignes de chaque table des deux côtés, puis bascule. La base actuelle garde toutes ses données.",
+      "moveTo": "Déplacer vers",
+      "postgres": "PostgreSQL",
+      "sqlite": "Fichier SQLite",
+      "noSqliteHere": "Sous Kubernetes, le dossier de données de Matinee est vidé chaque fois que son pod est remplacé, donc un fichier SQLite ne peut pas s'y trouver.",
+      "url": "Adresse PostgreSQL",
+      "urlHint": "Une base de données vide sur le serveur PostgreSQL, appartenant à l'utilisateur de Matinee. Créez-la d'abord, par exemple avec CREATE DATABASE matinee.",
+      "file": "Fichier",
+      "fileHint": "Le chemin complet d'un nouveau fichier, sur un disque qui dure.",
+      "check": "Vérifier",
+      "checking": "Vérification…",
+      "checkOk": "Matinee peut être déplacé vers {{where}}.",
+      "move": "Déplacer la base de données",
+      "moveConfirm": "Déplacer la base de données vers {{where}} ? Matinee redémarre, copie tout, vérifie et rouvre sur la nouvelle base. La lecture s'arrête un instant.",
+      "restartByHand": "Ce serveur ne peut pas redémarrer tout seul : redémarrez Matinee pour terminer un déplacement."
+    },
     "updates": {
       "title": "Mises à jour",
       "running": "Ce serveur exécute <code>{{version}}</code>.",

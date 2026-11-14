@@ -974,6 +974,33 @@
         "before-restore": "恢复前"
       }
     },
+    "database": {
+      "title": "数据库",
+      "usesSqlite": "Matinee 正在使用 SQLite 文件 {{where}}。",
+      "usesPostgres": "Matinee 正在使用 PostgreSQL 数据库 {{where}}。",
+      "movedFrom": "于 {{time}} 从 {{from}} 迁移至此:已复制并核对 {{rows}} 行。",
+      "configured": "服务器设置中仍写着迁移前的数据库 {{old}}。请改为这个数据库(MATINEE_DATABASE_URL,或 Helm chart 中的 database.url)。在那之前请让旧数据库保持运行:它会告诉 Matinee 新数据库在哪里。",
+      "pending": "Matinee 将在下次启动时把数据库迁移到 {{where}}。",
+      "cancel": "取消迁移",
+      "moving": "正在迁移数据库。全部复制并检查完毕后,Matinee 会重新打开。",
+      "moved": "迁移完成。Matinee 现在使用新数据库,旧数据库保持原样。",
+      "failed": "上次迁移未成功,因此 Matinee 继续使用原来的数据库,未做任何更改:{{error}}",
+      "intro": "把所有内容迁移到另一个数据库:Matinee 会把数据复制到那里它自己的表中,在两边逐表核对行数,然后切换。当前数据库会保留全部数据。",
+      "moveTo": "迁移到",
+      "postgres": "PostgreSQL",
+      "sqlite": "SQLite 文件",
+      "noSqliteHere": "在 Kubernetes 上,每次替换 Pod 时 Matinee 的数据文件夹都会被清空,所以不能把 SQLite 文件放在那里。",
+      "url": "PostgreSQL 地址",
+      "urlHint": "PostgreSQL 服务器上一个空的数据库,归 Matinee 的用户所有。请先创建,例如使用 CREATE DATABASE matinee。",
+      "file": "文件",
+      "fileHint": "新文件的完整路径,需位于持久存在的磁盘上。",
+      "check": "检查",
+      "checking": "正在检查…",
+      "checkOk": "Matinee 可以迁移到 {{where}}。",
+      "move": "迁移数据库",
+      "moveConfirm": "要把数据库迁移到 {{where}} 吗?Matinee 会重启,复制所有内容,检查后用新数据库打开。播放会暂停片刻。",
+      "restartByHand": "此服务器无法自行重启:请重启 Matinee 以完成迁移。"
+    },
     "updates": {
       "title": "更新",
       "running": "此服务器运行的是 <code>{{version}}</code>。",

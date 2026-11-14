@@ -986,6 +986,33 @@
         "before-restore": "Antes de uma restauração"
       }
     },
+    "database": {
+      "title": "Banco de dados",
+      "usesSqlite": "O Matinee usa o arquivo SQLite {{where}}.",
+      "usesPostgres": "O Matinee usa o banco de dados PostgreSQL {{where}}.",
+      "movedFrom": "Movido para cá de {{from}} em {{time}}: {{rows}} linhas copiadas e contadas.",
+      "configured": "As configurações do servidor ainda indicam o banco de dados de origem, {{old}}. Troque-as por este (MATINEE_DATABASE_URL, ou database.url no chart do Helm). Até lá, mantenha o antigo funcionando: ele diz ao Matinee onde está o novo.",
+      "pending": "O Matinee moverá seu banco de dados para {{where}} na próxima vez que iniciar.",
+      "cancel": "Cancelar mudança",
+      "moving": "Movendo o banco de dados. O Matinee abre de novo assim que tudo for copiado e conferido.",
+      "moved": "Movido. O Matinee agora usa o novo banco de dados, e o antigo continua como estava.",
+      "failed": "A última mudança não deu certo, então o Matinee manteve seu banco de dados sem alterações: {{error}}",
+      "intro": "Mova tudo para outro banco de dados: o Matinee copia para as próprias tabelas lá, conta as linhas de cada tabela nos dois e então troca. O banco atual mantém todos os dados.",
+      "moveTo": "Mover para",
+      "postgres": "PostgreSQL",
+      "sqlite": "Arquivo SQLite",
+      "noSqliteHere": "No Kubernetes, a pasta de dados do Matinee é esvaziada sempre que o pod é substituído, então um arquivo SQLite não pode ficar lá.",
+      "url": "Endereço do PostgreSQL",
+      "urlHint": "Um banco de dados vazio no servidor PostgreSQL, pertencente ao usuário do Matinee. Crie-o antes, por exemplo com CREATE DATABASE matinee.",
+      "file": "Arquivo",
+      "fileHint": "O caminho completo de um arquivo novo, em um disco que permaneça.",
+      "check": "Verificar",
+      "checking": "Verificando…",
+      "checkOk": "O Matinee pode mudar para {{where}}.",
+      "move": "Mover banco de dados",
+      "moveConfirm": "Mover o banco de dados para {{where}}? O Matinee reinicia, copia tudo, confere e abre no novo banco. A reprodução para por um momento.",
+      "restartByHand": "Este servidor não consegue reiniciar sozinho: reinicie o Matinee para concluir uma mudança."
+    },
     "updates": {
       "title": "Atualizações",
       "running": "Este servidor roda <code>{{version}}</code>.",
