@@ -112,7 +112,7 @@ jobs:
       - run: helm template t deploy/helm/matinee --set discovery.url=https://matinee.example.com > /dev/null
       - name: appArmorProfile reaches every pod
         run: |
-          test "$(helm template t deploy/helm/matinee --set appArmorProfile.type=Unconfined | grep -c 'type: Unconfined')" = 3
+          test "$(helm template t deploy/helm/matinee --set appArmorProfile.type=Unconfined --set discovery.url=https://matinee.example.com | grep -c 'type: Unconfined')" = 3
       - run: helm template t deploy/helm/matinee --set gpu.type=vaapi --set 'gpu.vaapi.groups={993}' > /dev/null
       - run: helm template t deploy/helm/matinee --set gpu.type=vaapi --set gpu.vaapi.resource=amd.com/gpu > /dev/null
       - run: helm template t deploy/helm/matinee --set gpu.type=nvidia > /dev/null
