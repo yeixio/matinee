@@ -5075,9 +5075,12 @@ paths:
               schema: { type: array, items: { $ref: "#/components/schemas/Client" } }
   /events:
     get:
-      summary: Follow what happens, live (admins only)
+      summary: Follow what happens, live
       description: |
-        Server-sent events (`text/event-stream`). Each event's name is its
+        Admins follow everything. Other grown-ups follow only their own
+        players: the snapshot lists the clients they may control, and they
+        get only those clients' events (no `item.added` or
+        `library.scanned`). Server-sent events (`text/event-stream`). Each event's name is its
         `type` and its data is an Event. The first is `snapshot`, with every
         client in `clients`; after that come `client.updated`,
         `client.removed`, `playback.started`, `playback.paused`,
@@ -6913,7 +6916,7 @@ components:
         notification: { $ref: "#/components/schemas/Notification" }
     CommandType:
       type: string
-      enum: [play, pause, stop, seek, next, previous, playItem, volume, mute, sleep, subtitles]
+      enum: [play, pause, stop, seek, next, previous, playItem, volume, mute, sleep, subtitles, key, text]
     Command:
       type: object
       required: [type]
@@ -6928,6 +6931,8 @@ components:
         minutes: { type: integer, minimum: 0, maximum: 1440, description: "sleep: stop after this many minutes; 0 cancels the timer." }
         endOfItem: { type: boolean, description: "sleep: stop at the end of what's playing." }
         track: { type: string, description: "subtitles: the track to show; empty for none." }
+        key: { type: string, enum: [up, down, left, right, select, back, home, playPause], description: "key: the remote button to press, for TV apps used from a phone." }
+        text: { type: string, maxLength: 200, description: "text: what to type in the box being typed in (such as Search), replacing what's there; empty clears it." }
         from: { type: string, readOnly: true, description: Who sent it, such as the name of the device that signed in. }
     Client:
       type: object

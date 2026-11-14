@@ -31,7 +31,8 @@ const (
 	// MaxWait is the longest a player's request for commands is held open.
 	MaxWait = 30 * time.Second
 	// queueSize is how many commands wait for a player that's slow to ask.
-	queueSize = 8
+	// A phone used as a remote sends a key per press, so it allows a few.
+	queueSize = 16
 )
 
 // Things a player can be asked to do. Players list the ones they can in
@@ -48,7 +49,17 @@ const (
 	CommandMute      = "mute"      // mute or unmute (Muted)
 	CommandSleep     = "sleep"     // stop after Minutes, or at the end (EndOfItem); 0 cancels
 	CommandSubtitles = "subtitles" // show subtitle Track, or none for ""
+	CommandKey       = "key"       // press Key on the remote, for TV apps (see Keys)
+	CommandText      = "text"      // type Text into the box being typed in, replacing what's there
 )
+
+// Keys are the remote buttons a key command can press: the arrows and OK
+// move around and pick, back goes back, home goes to Home, and playPause is
+// the remote's play button.
+var Keys = []string{"up", "down", "left", "right", "select", "back", "home", "playPause"}
+
+// MaxText is the longest a text command may be.
+const MaxText = 200
 
 // CommandNotify tells the person using a player something (Notification),
 // such as a title they asked for being ready. Only the server sends it, to
@@ -57,7 +68,7 @@ const CommandNotify = "notify"
 
 // Commands are every command there is.
 var Commands = []string{CommandPlay, CommandPause, CommandStop, CommandSeek, CommandNext, CommandPrevious,
-	CommandPlayItem, CommandVolume, CommandMute, CommandSleep, CommandSubtitles}
+	CommandPlayItem, CommandVolume, CommandMute, CommandSleep, CommandSubtitles, CommandKey, CommandText}
 
 // Event types in the feed.
 const (
@@ -167,6 +178,8 @@ type Command struct {
 	Minutes    *int     `json:"minutes,omitempty"`
 	EndOfItem  bool     `json:"endOfItem,omitempty"`
 	Track      *string  `json:"track,omitempty"`
+	Key        string   `json:"key,omitempty"`  // key
+	Text       *string  `json:"text,omitempty"` // text; "" empties the box
 	// From names who sent it, such as "Home Assistant", so a player can say so.
 	From string `json:"from,omitempty"`
 	// Notification is what to show, for notify.

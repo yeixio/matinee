@@ -981,6 +981,21 @@
               }
             },
             {
+              "name": "Use your phone or tablet as the TV's remote",
+              "doc": "/docs/apps/phone-remote/",
+              "since": "v0.2.8",
+              "apps": {
+                "web": {
+                  "na": "Use the phone app as the remote."
+                },
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
               "name": "Move the database to PostgreSQL or another server",
               "doc": "/docs/server/moving-the-database/",
               "since": "v0.2.7",

@@ -8,9 +8,11 @@ import (
 	"fmt"
 	"net/http"
 	"regexp"
+	"slices"
 	"strconv"
 	"strings"
 	"time"
+	"unicode/utf8"
 
 	"github.com/yeixio/matinee/internal/auth"
 	"github.com/yeixio/matinee/internal/live"
@@ -25,7 +27,7 @@ import (
 // GET /clients/{client}/commands, which waits until one comes. Grown-ups who
 // signed in see their own clients and can send them commands; admins see and
 // control every client, which is what Home Assistant does. Admins can follow
-// everything that happens with GET /events.
+// everything that happens with GET /events, and grown-ups their own players.
 
 // clientIDPattern is what a client's own id looks like: one it made up once
 // and keeps, such as a UUID.
@@ -151,16 +153,20 @@ func (s *Server) clientCommands(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, http.StatusOK, map[string]any{"commands": cmds, "restarting": s.live().Closing()})
 }
 
-// controls says which clients a person may see and control: an admin's are
-// everyone's, anyone else's are their own account's.
-func controls(u store.User) func(live.Client) bool {
+// controls says which clients someone may see and control: an admin's are
+// everyone's; a grown-up's are their own account's, and at home also the
+// home guest's players there (the TVs nobody signed in on), since anyone at
+// home could pick up that TV's remote anyway.
+func (s *Server) controls(r *http.Request) func(live.Client) bool {
+	u := currentUser(r)
+	home := !u.Guest && s.fromHome(r)
 	return func(p live.Client) bool {
-		return u.IsAdmin || (!u.Guest && p.Account() == u.Account())
+		return u.IsAdmin || (!u.Guest && p.Account() == u.Account()) || (home && p.User.Guest && !p.Remote)
 	}
 }
 
 func (s *Server) listClients(w http.ResponseWriter, r *http.Request) {
-	writeJSON(w, http.StatusOK, s.live().Clients(controls(currentUser(r))))
+	writeJSON(w, http.StatusOK, s.live().Clients(s.controls(r)))
 }
 
 func (s *Server) getClient(w http.ResponseWriter, r *http.Request) {
@@ -168,7 +174,7 @@ func (s *Server) getClient(w http.ResponseWriter, r *http.Request) {
 	if !ok {
 		return
 	}
-	p, ok := s.live().Client(id, controls(currentUser(r)))
+	p, ok := s.live().Client(id, s.controls(r))
 	if !ok {
 		writeError(w, http.StatusNotFound, "no such client")
 		return
@@ -199,7 +205,7 @@ func (s *Server) sendCommand(w http.ResponseWriter, r *http.Request) {
 	if name, err := s.Store.SessionDeviceName(r.Context(), auth.Token(r)); err == nil && name != "" {
 		c.From = name
 	}
-	c, err := s.live().Send(id, controls(currentUser(r)), c)
+	c, err := s.live().Send(id, s.controls(r), c)
 	switch {
 	case errors.Is(err, live.ErrNoClient):
 		writeError(w, http.StatusNotFound, "no such client")
@@ -249,7 +255,7 @@ func (s *Server) checkCommand(r *http.Request, client string, c *live.Command) s
 		}
 		// It plays as whoever uses the client, so it has to be something
 		// they may watch: a kids profile only gets what it could pick itself.
-		p, ok := s.live().Client(client, controls(currentUser(r)))
+		p, ok := s.live().Client(client, s.controls(r))
 		if !ok {
 			return "no such client"
 		}
@@ -263,6 +269,17 @@ func (s *Server) checkCommand(r *http.Request, client string, c *live.Command) s
 		c.ItemID = it.ID
 		i := LiveItem(it)
 		c.Item = &i
+	case live.CommandKey:
+		if !slices.Contains(live.Keys, c.Key) {
+			return "key must be up, down, left, right, select, back, home or playPause"
+		}
+	case live.CommandText:
+		if c.Text == nil {
+			return "text is required"
+		}
+		if utf8.RuneCountInString(*c.Text) > live.MaxText {
+			return "text can be at most 200 characters"
+		}
 	case live.CommandPlay, live.CommandPause, live.CommandStop, live.CommandNext, live.CommandPrevious:
 	default:
 		return "unknown command"
@@ -323,7 +340,8 @@ func (s *Server) playTarget(ctx context.Context, userID int64, it store.Item) (s
 
 // events follows everything that happens, as server-sent events. It starts
 // with a snapshot of every client, so a follower that reconnects knows
-// where things stand.
+// where things stand. Admins see everything; other grown-ups see their own
+// players, as in GET /clients.
 func (s *Server) events(w http.ResponseWriter, r *http.Request) {
 	rc := http.NewResponseController(w)
 	events, cancel := s.live().Subscribe()
@@ -339,7 +357,33 @@ func (s *Server) events(w http.ResponseWriter, r *http.Request) {
 		}
 		return rc.Flush() == nil
 	}
-	if !send("snapshot", map[string]any{"type": "snapshot", "time": time.Now().UnixMilli(), "clients": s.live().Clients(controls(currentUser(r)))}) {
+	u := currentUser(r)
+	allowed := s.controls(r)
+	clients := s.live().Clients(allowed)
+	// Anyone but an admin follows only their own players: the ones they may
+	// control, and those leaving the list.
+	mine := map[string]bool{}
+	for _, c := range clients {
+		mine[c.ID] = true
+	}
+	shown := func(e live.Event) bool {
+		if u.IsAdmin {
+			return true
+		}
+		switch {
+		case e.Client != nil:
+			if !allowed(*e.Client) {
+				return false
+			}
+			mine[e.Client.ID] = true
+			return true
+		case e.Type == live.EventClientRemoved && mine[e.ClientID]:
+			delete(mine, e.ClientID)
+			return true
+		}
+		return false
+	}
+	if !send("snapshot", map[string]any{"type": "snapshot", "time": time.Now().UnixMilli(), "clients": clients}) {
 		return
 	}
 	t := time.NewTicker(eventKeepAlive)
@@ -351,6 +395,9 @@ func (s *Server) events(w http.ResponseWriter, r *http.Request) {
 		case e, ok := <-events:
 			if !ok {
 				return
+			}
+			if !shown(e) {
+				continue
 			}
 			if !send(e.Type, e) {
 				return
