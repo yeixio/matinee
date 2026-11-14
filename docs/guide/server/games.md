@@ -196,6 +196,10 @@ This is an early preview, played from **Games** in the web app by an admin:
 
 The game host plays one game at a time. Closing the player quits the game, or leaves Big Picture.
 
+<!-- since: v0.2.7 -->
+**PC games** also sits at the top of each Games library, above the console games. If the game host is set up but isn't answering, PC games says why instead of disappearing, such as when the game host computer is off or `matinee-gamehost` isn't running.
+<!-- /since -->
+
 ### Signing in to Steam from Matinee
 
 If the game host's computer has no screen of its own, such as Steam in a container, give the game host the address of a web page that shows its screen (`MATINEE_GAMEHOST_DESKTOP`, such as the noVNC page a Steam container serves). **Games → PC games → Steam desktop** then opens that screen in your browser, through Matinee, so you can sign in to Steam and install games without opening another port. Only admins can open it: it controls the whole computer.
