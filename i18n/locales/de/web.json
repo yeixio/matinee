@@ -1678,6 +1678,8 @@
     "steamDesktopHint": "Bei Steam anmelden und Spiele auf dem Bildschirm des Spiele-Hosts installieren. Öffnet sich in einem neuen Tab.",
     "controller": "Controller: {{name}}",
     "pressButton": "Verbinde einen Controller und drücke eine Taste, oder nutze die Tastatur: Pfeiltasten, Z, X, A, S und Enter.",
+    "keyboardMouse": "Tastatur und Maus steuern das Spiel. Ein Controller geht auch.",
+    "captureMouse": "Maus einfangen",
     "showLag": "Verzögerung zeigen",
     "hideLag": "Verzögerung ausblenden",
     "stop": "Spiel beenden",

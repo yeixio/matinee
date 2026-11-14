@@ -1,5 +1,7 @@
 package gamehost
 
+import "fmt"
+
 // The player's buttons and sticks become a virtual Xbox-style gamepad,
 // which Steam and almost every PC game know. Buttons come as libretro's
 // bits (B=0 … R3=15; see gamestream.Runner.SetButtons) and sticks as a
@@ -82,6 +84,25 @@ var padAxes = []axisRange{
 	{absRX, -32768, 32767, 128}, {absRY, -32768, 32767, 128},
 	{absZ, 0, 255, 0}, {absRZ, 0, 255, 0},
 	{absHat0X, -1, 1, 0}, {absHat0Y, -1, 1, 0},
+}
+
+// deviceSpec is what a virtual input device has.
+type deviceSpec struct {
+	Name                          string
+	Bus, Vendor, Product, Version uint16
+	Keys, Rels                    []uint16
+	Abs                           []axisRange
+}
+
+// padSpec is a virtual Xbox 360 pad, which Steam Input knows.
+func padSpec(n int) deviceSpec {
+	return deviceSpec{
+		Name: fmt.Sprintf("Matinee Controller %d", n+1),
+		// USB, Microsoft, Xbox 360 pad.
+		Bus: 0x03, Vendor: 0x045e, Product: 0x028e, Version: 0x0110,
+		Keys: padKeys,
+		Abs:  padAxes,
+	}
 }
 
 // padState is what's held on one pad, to send only what changed.

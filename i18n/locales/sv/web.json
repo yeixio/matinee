@@ -1678,6 +1678,8 @@
     "steamDesktopHint": "Logga in på Steam och installera spel på spelvärdens skärm. Öppnas i en ny flik.",
     "controller": "Handkontroll: {{name}}",
     "pressButton": "Anslut en handkontroll och tryck på en knapp, eller använd tangentbordet: pilar, Z, X, A, S och Enter.",
+    "keyboardMouse": "Tangentbordet och musen styr spelet. En handkontroll fungerar också.",
+    "captureMouse": "Fånga musen",
     "showLag": "Visa fördröjning",
     "hideLag": "Dölj fördröjning",
     "stop": "Sluta spela",

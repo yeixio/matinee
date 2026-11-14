@@ -1692,6 +1692,8 @@
     "steamDesktopHint": "Connectez-vous à Steam et installez des jeux sur l’écran de l’hôte de jeux. S’ouvre dans un nouvel onglet.",
     "controller": "Manette : {{name}}",
     "pressButton": "Connectez une manette et appuyez sur un bouton, ou utilisez le clavier : flèches, Z, X, A, S et Entrée.",
+    "keyboardMouse": "Votre clavier et votre souris contrôlent le jeu. Une manette fonctionne aussi.",
+    "captureMouse": "Capturer la souris",
     "showLag": "Afficher la latence",
     "hideLag": "Masquer la latence",
     "stop": "Arrêter de jouer",

@@ -1692,6 +1692,8 @@
     "steamDesktopHint": "Accedi a Steam e installa giochi sullo schermo dell’host di giochi. Si apre in una nuova scheda.",
     "controller": "Controller: {{name}}",
     "pressButton": "Collega un controller e premi un tasto, oppure usa la tastiera: frecce, Z, X, A, S e Invio.",
+    "keyboardMouse": "Tastiera e mouse controllano il gioco. Funziona anche un controller.",
+    "captureMouse": "Cattura il mouse",
     "showLag": "Mostra ritardo",
     "hideLag": "Nascondi ritardo",
     "stop": "Smetti di giocare",

@@ -1678,6 +1678,8 @@
     "steamDesktopHint": "Oyun sunucusunun ekranında Steam'e giriş yap ve oyun kur. Yeni sekmede açılır.",
     "controller": "Kumanda: {{name}}",
     "pressButton": "Bir kumanda bağlayıp bir tuşa basın ya da klavyeyi kullanın: oklar, Z, X, A, S ve Enter.",
+    "keyboardMouse": "Oyunu klavye ve fareyle kontrol edersiniz. Oyun kumandası da çalışır.",
+    "captureMouse": "Fareyi yakala",
     "showLag": "Gecikmeyi göster",
     "hideLag": "Gecikmeyi gizle",
     "stop": "Oynamayı bırak",

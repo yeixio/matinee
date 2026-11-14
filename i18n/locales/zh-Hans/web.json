@@ -1664,6 +1664,8 @@
     "steamDesktopHint": "在游戏主机的屏幕上登录 Steam 并安装游戏。在新标签页中打开。",
     "controller": "手柄：{{name}}",
     "pressButton": "连接手柄并按任意键，或使用键盘：方向键、Z、X、A、S 和 Enter。",
+    "keyboardMouse": "用键盘和鼠标操控游戏，也可以用手柄。",
+    "captureMouse": "捕获鼠标",
     "showLag": "显示延迟",
     "hideLag": "隐藏延迟",
     "stop": "停止游戏",

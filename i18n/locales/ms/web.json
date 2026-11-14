@@ -1664,6 +1664,8 @@
     "steamDesktopHint": "Log masuk ke Steam dan pasang permainan pada skrin hos permainan. Dibuka dalam tab baharu.",
     "controller": "Pengawal: {{name}}",
     "pressButton": "Sambungkan pengawal dan tekan butang, atau guna papan kekunci: anak panah, Z, X, A, S dan Enter.",
+    "keyboardMouse": "Papan kekunci dan tetikus anda mengawal permainan. Pengawal juga boleh digunakan.",
+    "captureMouse": "Tangkap tetikus",
     "showLag": "Tunjuk lengah",
     "hideLag": "Sembunyi lengah",
     "stop": "Berhenti bermain",

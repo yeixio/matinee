@@ -1664,6 +1664,8 @@
     "steamDesktopHint": "Đăng nhập Steam và cài trò chơi trên màn hình của máy chủ trò chơi. Mở trong thẻ mới.",
     "controller": "Tay cầm: {{name}}",
     "pressButton": "Kết nối tay cầm và nhấn một nút, hoặc dùng bàn phím: phím mũi tên, Z, X, A, S và Enter.",
+    "keyboardMouse": "Bàn phím và chuột điều khiển trò chơi. Tay cầm cũng dùng được.",
+    "captureMouse": "Giữ chuột",
     "showLag": "Hiện độ trễ",
     "hideLag": "Ẩn độ trễ",
     "stop": "Dừng chơi",

@@ -1664,6 +1664,8 @@
     "steamDesktopHint": "게임 호스트 화면에서 Steam에 로그인하고 게임을 설치하세요. 새 탭에서 열립니다.",
     "controller": "컨트롤러: {{name}}",
     "pressButton": "컨트롤러를 연결하고 버튼을 누르거나 키보드를 사용하세요: 화살표, Z, X, A, S, Enter.",
+    "keyboardMouse": "키보드와 마우스로 게임을 조작합니다. 컨트롤러도 됩니다.",
+    "captureMouse": "마우스 잡기",
     "showLag": "지연 표시",
     "hideLag": "지연 숨기기",
     "stop": "플레이 중지",

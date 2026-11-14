@@ -197,6 +197,10 @@ This is an early preview, played from **Games** in the web app by an admin:
 The game host plays one game at a time. Closing the player quits the game, or leaves Big Picture.
 
 <!-- since: v0.2.7 -->
+In the web app, your keyboard and mouse control PC games and Steam as they are, so you can click Steam's buttons, type and play without a controller. A controller works too. For a game that turns the view with the mouse, choose **Capture mouse** at the top of the player; press Esc to let the mouse go. The game host needs write access to `/dev/uinput` for this, as it does for controllers.
+<!-- /since -->
+
+<!-- since: v0.2.7 -->
 **PC games** also sits at the top of each Games library, above the console games. If the game host is set up but isn't answering, PC games says why instead of disappearing, such as when the game host computer is off or `matinee-gamehost` isn't running.
 <!-- /since -->
 

@@ -1664,6 +1664,8 @@
     "steamDesktopHint": "Masuk ke Steam dan pasang game di layar host game. Terbuka di tab baru.",
     "controller": "Kontroler: {{name}}",
     "pressButton": "Sambungkan kontroler dan tekan tombol, atau pakai keyboard: panah, Z, X, A, S, dan Enter.",
+    "keyboardMouse": "Keyboard dan mouse Anda mengendalikan game. Kontroler juga bisa.",
+    "captureMouse": "Tangkap mouse",
     "showLag": "Tampilkan jeda",
     "hideLag": "Sembunyikan jeda",
     "stop": "Berhenti main",

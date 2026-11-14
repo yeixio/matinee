@@ -1706,6 +1706,8 @@
     "steamDesktopHint": "Přihlaste se do Steamu a instalujte hry na obrazovce herního hostitele. Otevře se v nové kartě.",
     "controller": "Ovladač: {{name}}",
     "pressButton": "Připojte ovladač a stiskněte tlačítko, nebo použijte klávesnici: šipky, Z, X, A, S a Enter.",
+    "keyboardMouse": "Hru ovládáte klávesnicí a myší. Funguje i ovladač.",
+    "captureMouse": "Zachytit myš",
     "showLag": "Zobrazit zpoždění",
     "hideLag": "Skrýt zpoždění",
     "stop": "Přestat hrát",

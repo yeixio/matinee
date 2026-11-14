@@ -1678,6 +1678,8 @@
     "steamDesktopHint": "Log ind på Steam og installer spil på spilværtens skærm. Åbner i en ny fane.",
     "controller": "Controller: {{name}}",
     "pressButton": "Tilslut en controller og tryk på en knap, eller brug tastaturet: pile, Z, X, A, S og Enter.",
+    "keyboardMouse": "Dit tastatur og din mus styrer spillet. En controller virker også.",
+    "captureMouse": "Fang musen",
     "showLag": "Vis forsinkelse",
     "hideLag": "Skjul forsinkelse",
     "stop": "Stop med at spille",

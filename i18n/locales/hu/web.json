@@ -1678,6 +1678,8 @@
     "steamDesktopHint": "Jelentkezz be a Steambe, és telepíts játékokat a játékgazda képernyőjén. Új lapon nyílik meg.",
     "controller": "Kontroller: {{name}}",
     "pressButton": "Csatlakoztass egy kontrollert és nyomj meg egy gombot, vagy használd a billentyűzetet: nyilak, Z, X, A, S és Enter.",
+    "keyboardMouse": "A billentyűzet és az egér irányítja a játékot. Kontroller is használható.",
+    "captureMouse": "Egér befogása",
     "showLag": "Késleltetés mutatása",
     "hideLag": "Késleltetés elrejtése",
     "stop": "Játék befejezése",

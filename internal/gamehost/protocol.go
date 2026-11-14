@@ -28,7 +28,8 @@ import (
 // KindVideo (H.264, packetization mode 1, keyframes with their SPS and
 // PPS) and KindAudio (Opus, 48 kHz stereo). Matinee sends the player's
 // input messages as they come (1 port lo hi: buttons, 3 port axis v: a
-// stick; see gamestream.Session.input). Closing the socket ends the game.
+// stick; see gamestream.Session.input; 4 to 8: the keyboard and mouse,
+// see kbm.go). Closing the socket ends the game.
 
 const (
 	KindVideo = 0x10

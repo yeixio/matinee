@@ -1664,6 +1664,8 @@
     "steamDesktopHint": "在遊戲主機的螢幕上登入 Steam 並安裝遊戲。在新分頁中開啟。",
     "controller": "手把：{{name}}",
     "pressButton": "連接手把並按任一鍵，或使用鍵盤：方向鍵、Z、X、A、S 和 Enter。",
+    "keyboardMouse": "用鍵盤和滑鼠操控遊戲，也可以用手把。",
+    "captureMouse": "擷取滑鼠",
     "showLag": "顯示延遲",
     "hideLag": "隱藏延遲",
     "stop": "停止遊戲",

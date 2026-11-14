@@ -3,6 +3,7 @@
 // internal/gamestream on the server).
 
 import { api } from '../api'
+import { sendKeyboardAndMouse } from './keyboard'
 
 /** libretro's joypad buttons, as bits of the mask the server takes. */
 export const Btn = { B: 0, Y: 1, Select: 2, Start: 3, Up: 4, Down: 5, Left: 6, Right: 7, A: 8, X: 9, L: 10, R: 11, L2: 12, R2: 13, L3: 14, R3: 15 } as const
@@ -99,6 +100,10 @@ export async function startGame(o: StreamOptions): Promise<GameStream> {
   // Buttons are sent again and again, so a lost message needn't be resent:
   // unordered with no retries, the newest always gets through first.
   const dc = pc.createDataChannel('input', { ordered: false, maxRetransmits: 0 })
+  // A PC game takes the keyboard and mouse as they are, instead of the
+  // keyboard standing in for a controller.
+  const pcGame = o.hostApp !== undefined || !!o.steam
+  const stopKeyboard = pcGame ? sendKeyboardAndMouse(pc, o.video) : undefined
   const media = new MediaStream()
   pc.ontrack = (e) => {
     media.addTrack(e.track)
@@ -120,6 +125,7 @@ export async function startGame(o: StreamOptions): Promise<GameStream> {
     o.onStart?.({ system: res.system, analog })
     await pc.setRemoteDescription({ type: 'answer', sdp: res.answer })
   } catch (e) {
+    stopKeyboard?.()
     pc.close()
     throw e
   }
@@ -132,6 +138,7 @@ export async function startGame(o: StreamOptions): Promise<GameStream> {
     clearInterval(timer)
     removeEventListener('keydown', onKey)
     removeEventListener('keyup', onKey)
+    stopKeyboard?.()
     pc.close()
     api.stopGame(id).catch(() => {})
     o.onEnd(error)
@@ -160,6 +167,7 @@ export async function startGame(o: StreamOptions): Promise<GameStream> {
     sentAt = performance.now()
   }
   const onKey = (e: KeyboardEvent) => {
+    if (pcGame) return
     const b = keyButtons[e.code]
     if (b === undefined) return
     e.preventDefault()
