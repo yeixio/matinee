@@ -36,7 +36,13 @@ spec:
         app.kubernetes.io/instance: {{ .Release.Name }}
         app.kubernetes.io/component: postgresql
     spec:
+      # Start as the postgres user (70 in the Alpine image) rather than root,
+      # so the image never switches users with gosu. gosu froze at 100% CPU
+      # on some newer Linux kernels, and Postgres never started.
       securityContext:
+        runAsUser: 70
+        runAsGroup: 70
+        runAsNonRoot: true
         fsGroup: 70
       containers:
         - name: postgresql
