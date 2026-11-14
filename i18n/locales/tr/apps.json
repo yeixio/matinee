@@ -500,7 +500,27 @@
     "nothing": "Şu anda yolda bir şey yok."
   },
   "remote": {
-    "controlledBy": "{{name}} tarafından kontrol ediliyor"
+    "controlledBy": "{{name}} tarafından kontrol ediliyor",
+    "title": "Kumanda",
+    "settingsHint": "Bu telefonu televizyonundaki Matinee için kumanda olarak kullan.",
+    "signInFirst": "Bu telefonu kumanda olarak kullanmak için oturum aç.",
+    "noPlayers": "Televizyonunda Matinee'yi aç, burada görünsün.",
+    "up": "Yukarı",
+    "down": "Aşağı",
+    "left": "Sol",
+    "right": "Sağ",
+    "select": "Tamam",
+    "back": "Geri",
+    "home": "Ana sayfa",
+    "playPause": "Oynat veya duraklat",
+    "back10": "10 saniye geri",
+    "forward30": "30 saniye ileri",
+    "stop": "Durdur",
+    "typeHere": "Televizyona yaz",
+    "typeHint": "Yazdıkça televizyonun aramasına gider.",
+    "offline": "{{name}} şu anda açık değil.",
+    "cantDo": "{{name}} bunu yapamıyor. Üzerindeki Matinee'yi güncelle.",
+    "failed": "Bu, {{name}} cihazına ulaşmadı. Tekrar dene."
   },
   "car": {
     "listenNow": "Şimdi dinle",

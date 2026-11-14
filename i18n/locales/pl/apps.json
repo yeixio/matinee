@@ -514,7 +514,27 @@
     "nothing": "Na razie nic nie nadchodzi."
   },
   "remote": {
-    "controlledBy": "Sterowane z {{name}}"
+    "controlledBy": "Sterowane z {{name}}",
+    "title": "Pilot",
+    "settingsHint": "Używaj tego telefonu jako pilota do Matinee na telewizorze.",
+    "signInFirst": "Zaloguj się, aby używać tego telefonu jako pilota.",
+    "noPlayers": "Otwórz Matinee na telewizorze, a pojawi się tutaj.",
+    "up": "W górę",
+    "down": "W dół",
+    "left": "W lewo",
+    "right": "W prawo",
+    "select": "OK",
+    "back": "Wstecz",
+    "home": "Start",
+    "playPause": "Odtwórz lub wstrzymaj",
+    "back10": "10 sekund do tyłu",
+    "forward30": "30 sekund do przodu",
+    "stop": "Zatrzymaj",
+    "typeHere": "Pisz na telewizorze",
+    "typeHint": "Trafia do wyszukiwania na telewizorze w trakcie pisania.",
+    "offline": "{{name}} nie jest teraz otwarty.",
+    "cantDo": "{{name}} nie potrafi tego zrobić. Zaktualizuj na nim Matinee.",
+    "failed": "To nie dotarło do {{name}}. Spróbuj ponownie."
   },
   "car": {
     "listenNow": "Słuchaj teraz",

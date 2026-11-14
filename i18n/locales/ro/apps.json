@@ -507,7 +507,27 @@
     "nothing": "Momentan nu vine nimic."
   },
   "remote": {
-    "controlledBy": "Controlat de pe {{name}}"
+    "controlledBy": "Controlat de pe {{name}}",
+    "title": "Telecomandă",
+    "settingsHint": "Folosește acest telefon ca telecomandă pentru Matinee pe televizor.",
+    "signInFirst": "Conectează-te ca să folosești acest telefon ca telecomandă.",
+    "noPlayers": "Deschide Matinee pe televizor și va apărea aici.",
+    "up": "Sus",
+    "down": "Jos",
+    "left": "Stânga",
+    "right": "Dreapta",
+    "select": "OK",
+    "back": "Înapoi",
+    "home": "Acasă",
+    "playPause": "Redare sau pauză",
+    "back10": "Înapoi 10 secunde",
+    "forward30": "Înainte 30 de secunde",
+    "stop": "Oprește",
+    "typeHere": "Scrie pe televizor",
+    "typeHint": "Ajunge în căutarea televizorului pe măsură ce scrii.",
+    "offline": "{{name}} nu este deschis acum.",
+    "cantDo": "{{name}} nu poate face asta. Actualizează Matinee pe el.",
+    "failed": "Nu a ajuns la {{name}}. Încearcă din nou."
   },
   "car": {
     "listenNow": "Ascultă acum",

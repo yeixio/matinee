@@ -493,7 +493,27 @@
     "nothing": "지금은 예정된 것이 없어요."
   },
   "remote": {
-    "controlledBy": "{{name}}에서 제어함"
+    "controlledBy": "{{name}}에서 제어함",
+    "title": "리모컨",
+    "settingsHint": "이 휴대폰을 TV의 Matinee 리모컨으로 사용하세요.",
+    "signInFirst": "이 휴대폰을 리모컨으로 사용하려면 로그인하세요.",
+    "noPlayers": "TV에서 Matinee를 열면 여기에 표시됩니다.",
+    "up": "위",
+    "down": "아래",
+    "left": "왼쪽",
+    "right": "오른쪽",
+    "select": "확인",
+    "back": "뒤로",
+    "home": "홈",
+    "playPause": "재생 또는 일시정지",
+    "back10": "10초 뒤로",
+    "forward30": "30초 앞으로",
+    "stop": "정지",
+    "typeHere": "TV에 입력",
+    "typeHint": "입력하는 대로 TV 검색에 들어갑니다.",
+    "offline": "{{name}}이(가) 지금 열려 있지 않습니다.",
+    "cantDo": "{{name}}에서는 할 수 없습니다. 해당 기기의 Matinee를 업데이트하세요.",
+    "failed": "{{name}}에 전달되지 않았습니다. 다시 시도하세요."
   },
   "car": {
     "listenNow": "지금 듣기",

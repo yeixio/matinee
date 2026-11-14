@@ -500,7 +500,27 @@
     "nothing": "Er komt op dit moment niets aan."
   },
   "remote": {
-    "controlledBy": "Bediend vanaf {{name}}"
+    "controlledBy": "Bediend vanaf {{name}}",
+    "title": "Afstandsbediening",
+    "settingsHint": "Gebruik deze telefoon als afstandsbediening voor Matinee op je tv.",
+    "signInFirst": "Log in om deze telefoon als afstandsbediening te gebruiken.",
+    "noPlayers": "Open Matinee op je tv en hij verschijnt hier.",
+    "up": "Omhoog",
+    "down": "Omlaag",
+    "left": "Links",
+    "right": "Rechts",
+    "select": "OK",
+    "back": "Terug",
+    "home": "Start",
+    "playPause": "Afspelen of pauzeren",
+    "back10": "10 seconden terug",
+    "forward30": "30 seconden vooruit",
+    "stop": "Stoppen",
+    "typeHere": "Typen op de tv",
+    "typeHint": "Gaat tijdens het typen naar de zoekfunctie van de tv.",
+    "offline": "{{name}} is nu niet geopend.",
+    "cantDo": "{{name}} kan dat niet. Werk Matinee daarop bij.",
+    "failed": "Dat kwam niet aan bij {{name}}. Probeer het opnieuw."
   },
   "car": {
     "listenNow": "Nu luisteren",

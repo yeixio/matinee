@@ -493,7 +493,27 @@
     "nothing": "目前沒有即將推出的內容。"
   },
   "remote": {
-    "controlledBy": "由 {{name}} 控制"
+    "controlledBy": "由 {{name}} 控制",
+    "title": "遙控器",
+    "settingsHint": "把這支手機當作電視上 Matinee 的遙控器。",
+    "signInFirst": "登入後即可把這支手機當作遙控器。",
+    "noPlayers": "在電視上開啟 Matinee，它就會出現在這裡。",
+    "up": "上",
+    "down": "下",
+    "left": "左",
+    "right": "右",
+    "select": "確定",
+    "back": "返回",
+    "home": "首頁",
+    "playPause": "播放或暫停",
+    "back10": "倒退 10 秒",
+    "forward30": "快轉 30 秒",
+    "stop": "停止",
+    "typeHere": "在電視上輸入",
+    "typeHint": "輸入的內容會即時進入電視的搜尋。",
+    "offline": "{{name}} 目前沒有開啟。",
+    "cantDo": "{{name}} 無法這樣做。請更新它上面的 Matinee。",
+    "failed": "沒有送到 {{name}}。請再試一次。"
   },
   "car": {
     "listenNow": "立即收聽",

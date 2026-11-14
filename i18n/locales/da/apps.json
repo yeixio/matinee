@@ -500,7 +500,27 @@
     "nothing": "Intet er på vej lige nu."
   },
   "remote": {
-    "controlledBy": "Styret fra {{name}}"
+    "controlledBy": "Styret fra {{name}}",
+    "title": "Fjernbetjening",
+    "settingsHint": "Brug denne telefon som fjernbetjening til Matinee på dit tv.",
+    "signInFirst": "Log ind for at bruge denne telefon som fjernbetjening.",
+    "noPlayers": "Åbn Matinee på dit tv, så vises det her.",
+    "up": "Op",
+    "down": "Ned",
+    "left": "Venstre",
+    "right": "Højre",
+    "select": "OK",
+    "back": "Tilbage",
+    "home": "Hjem",
+    "playPause": "Afspil eller pause",
+    "back10": "10 sekunder tilbage",
+    "forward30": "30 sekunder frem",
+    "stop": "Stop",
+    "typeHere": "Skriv på tv'et",
+    "typeHint": "Ender i tv'ets søgning, mens du skriver.",
+    "offline": "{{name}} er ikke åben lige nu.",
+    "cantDo": "{{name}} kan ikke gøre det. Opdater Matinee på det.",
+    "failed": "Det nåede ikke frem til {{name}}. Prøv igen."
   },
   "car": {
     "listenNow": "Lyt nu",

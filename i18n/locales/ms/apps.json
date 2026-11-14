@@ -493,7 +493,27 @@
     "nothing": "Tiada apa-apa yang akan datang buat masa ini."
   },
   "remote": {
-    "controlledBy": "Dikawal dari {{name}}"
+    "controlledBy": "Dikawal dari {{name}}",
+    "title": "Alat kawalan jauh",
+    "settingsHint": "Gunakan telefon ini sebagai alat kawalan jauh untuk Matinee pada TV anda.",
+    "signInFirst": "Log masuk untuk menggunakan telefon ini sebagai alat kawalan jauh.",
+    "noPlayers": "Buka Matinee pada TV anda dan ia akan muncul di sini.",
+    "up": "Atas",
+    "down": "Bawah",
+    "left": "Kiri",
+    "right": "Kanan",
+    "select": "OK",
+    "back": "Kembali",
+    "home": "Laman utama",
+    "playPause": "Main atau jeda",
+    "back10": "Undur 10 saat",
+    "forward30": "Maju 30 saat",
+    "stop": "Henti",
+    "typeHere": "Taip pada TV",
+    "typeHint": "Masuk ke carian TV semasa anda menaip.",
+    "offline": "{{name}} tidak dibuka sekarang.",
+    "cantDo": "{{name}} tidak boleh berbuat begitu. Kemas kini Matinee padanya.",
+    "failed": "Itu tidak sampai ke {{name}}. Cuba lagi."
   },
   "car": {
     "listenNow": "Dengar sekarang",

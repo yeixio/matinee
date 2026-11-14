@@ -507,7 +507,27 @@
     "nothing": "Al momento non c'è niente in arrivo."
   },
   "remote": {
-    "controlledBy": "Controllato da {{name}}"
+    "controlledBy": "Controllato da {{name}}",
+    "title": "Telecomando",
+    "settingsHint": "Usa questo telefono come telecomando di Matinee sulla TV.",
+    "signInFirst": "Accedi per usare questo telefono come telecomando.",
+    "noPlayers": "Apri Matinee sulla TV e comparirà qui.",
+    "up": "Su",
+    "down": "Giù",
+    "left": "Sinistra",
+    "right": "Destra",
+    "select": "OK",
+    "back": "Indietro",
+    "home": "Home",
+    "playPause": "Riproduci o metti in pausa",
+    "back10": "Indietro di 10 secondi",
+    "forward30": "Avanti di 30 secondi",
+    "stop": "Interrompi",
+    "typeHere": "Scrivi sulla TV",
+    "typeHint": "Va nella ricerca della TV mentre scrivi.",
+    "offline": "{{name}} non è aperto in questo momento.",
+    "cantDo": "{{name}} non può farlo. Aggiorna Matinee su quel dispositivo.",
+    "failed": "Non è arrivato a {{name}}. Riprova."
   },
   "car": {
     "listenNow": "Ascolta ora",

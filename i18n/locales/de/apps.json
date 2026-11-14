@@ -500,7 +500,27 @@
     "nothing": "Gerade kommt nichts Neues."
   },
   "remote": {
-    "controlledBy": "Gesteuert von {{name}}"
+    "controlledBy": "Gesteuert von {{name}}",
+    "title": "Fernbedienung",
+    "settingsHint": "Nutze dieses Telefon als Fernbedienung für Matinee auf deinem Fernseher.",
+    "signInFirst": "Melde dich an, um dieses Telefon als Fernbedienung zu nutzen.",
+    "noPlayers": "Öffne Matinee auf deinem Fernseher, dann erscheint er hier.",
+    "up": "Hoch",
+    "down": "Runter",
+    "left": "Links",
+    "right": "Rechts",
+    "select": "OK",
+    "back": "Zurück",
+    "home": "Start",
+    "playPause": "Wiedergabe oder Pause",
+    "back10": "10 Sekunden zurück",
+    "forward30": "30 Sekunden vor",
+    "stop": "Stopp",
+    "typeHere": "Auf dem Fernseher tippen",
+    "typeHint": "Landet beim Tippen in der Suche des Fernsehers.",
+    "offline": "{{name}} ist gerade nicht geöffnet.",
+    "cantDo": "{{name}} kann das nicht. Aktualisiere Matinee darauf.",
+    "failed": "Das hat {{name}} nicht erreicht. Versuch es noch einmal."
   },
   "car": {
     "listenNow": "Jetzt hören",

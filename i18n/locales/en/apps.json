@@ -500,7 +500,27 @@
     "nothing": "Nothing on the way right now."
   },
   "remote": {
-    "controlledBy": "Controlled from {{name}}"
+    "controlledBy": "Controlled from {{name}}",
+    "title": "Remote",
+    "settingsHint": "Use this phone as the remote for Matinee on your TV.",
+    "signInFirst": "Sign in to use this phone as a remote.",
+    "noPlayers": "Open Matinee on your TV and it shows up here.",
+    "up": "Up",
+    "down": "Down",
+    "left": "Left",
+    "right": "Right",
+    "select": "OK",
+    "back": "Back",
+    "home": "Home",
+    "playPause": "Play or pause",
+    "back10": "Back 10 seconds",
+    "forward30": "Forward 30 seconds",
+    "stop": "Stop",
+    "typeHere": "Type on the TV",
+    "typeHint": "Goes into the TV's search as you type.",
+    "offline": "{{name}} isn't open right now.",
+    "cantDo": "{{name}} can't do that. Update Matinee on it.",
+    "failed": "That didn't reach {{name}}. Try again."
   },
   "car": {
     "listenNow": "Listen now",

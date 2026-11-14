@@ -493,7 +493,27 @@
     "nothing": "今のところ予定はありません。"
   },
   "remote": {
-    "controlledBy": "{{name}} から操作されました"
+    "controlledBy": "{{name}} から操作されました",
+    "title": "リモコン",
+    "settingsHint": "このスマートフォンをテレビの Matinee のリモコンとして使います。",
+    "signInFirst": "このスマートフォンをリモコンとして使うにはサインインしてください。",
+    "noPlayers": "テレビで Matinee を開くと、ここに表示されます。",
+    "up": "上",
+    "down": "下",
+    "left": "左",
+    "right": "右",
+    "select": "OK",
+    "back": "戻る",
+    "home": "ホーム",
+    "playPause": "再生または一時停止",
+    "back10": "10秒戻る",
+    "forward30": "30秒進む",
+    "stop": "停止",
+    "typeHere": "テレビに入力",
+    "typeHint": "入力した文字がそのままテレビの検索に入ります。",
+    "offline": "{{name}} は今は開いていません。",
+    "cantDo": "{{name}} ではこの操作ができません。Matinee をアップデートしてください。",
+    "failed": "{{name}} に届きませんでした。もう一度お試しください。"
   },
   "car": {
     "listenNow": "今すぐ聴く",

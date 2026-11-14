@@ -514,7 +514,27 @@
     "nothing": "Momentálně nic nového nepřichází."
   },
   "remote": {
-    "controlledBy": "Ovládáno z {{name}}"
+    "controlledBy": "Ovládáno z {{name}}",
+    "title": "Dálkový ovladač",
+    "settingsHint": "Používejte tento telefon jako dálkový ovladač pro Matinee na televizi.",
+    "signInFirst": "Přihlaste se, abyste mohli tento telefon používat jako ovladač.",
+    "noPlayers": "Otevřete Matinee na televizi a objeví se tady.",
+    "up": "Nahoru",
+    "down": "Dolů",
+    "left": "Doleva",
+    "right": "Doprava",
+    "select": "OK",
+    "back": "Zpět",
+    "home": "Domů",
+    "playPause": "Přehrát nebo pozastavit",
+    "back10": "O 10 sekund zpět",
+    "forward30": "O 30 sekund vpřed",
+    "stop": "Zastavit",
+    "typeHere": "Psát na televizi",
+    "typeHint": "Při psaní se to propisuje do hledání na televizi.",
+    "offline": "{{name}} teď není otevřené.",
+    "cantDo": "{{name}} to neumí. Aktualizujte na něm Matinee.",
+    "failed": "K zařízení {{name}} to nedorazilo. Zkuste to znovu."
   },
   "car": {
     "listenNow": "Poslouchat",

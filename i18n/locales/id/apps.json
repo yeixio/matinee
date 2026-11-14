@@ -493,7 +493,27 @@
     "nothing": "Belum ada yang akan datang saat ini."
   },
   "remote": {
-    "controlledBy": "Dikendalikan dari {{name}}"
+    "controlledBy": "Dikendalikan dari {{name}}",
+    "title": "Remote",
+    "settingsHint": "Gunakan ponsel ini sebagai remote untuk Matinee di TV Anda.",
+    "signInFirst": "Masuk untuk menggunakan ponsel ini sebagai remote.",
+    "noPlayers": "Buka Matinee di TV Anda dan TV itu muncul di sini.",
+    "up": "Atas",
+    "down": "Bawah",
+    "left": "Kiri",
+    "right": "Kanan",
+    "select": "OK",
+    "back": "Kembali",
+    "home": "Beranda",
+    "playPause": "Putar atau jeda",
+    "back10": "Mundur 10 detik",
+    "forward30": "Maju 30 detik",
+    "stop": "Hentikan",
+    "typeHere": "Ketik di TV",
+    "typeHint": "Masuk ke pencarian TV saat Anda mengetik.",
+    "offline": "{{name}} sedang tidak dibuka.",
+    "cantDo": "{{name}} tidak bisa melakukannya. Perbarui Matinee di perangkat itu.",
+    "failed": "Tidak sampai ke {{name}}. Coba lagi."
   },
   "car": {
     "listenNow": "Dengarkan",
