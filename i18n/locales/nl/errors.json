@@ -296,5 +296,8 @@
   "that_file_isnt_an_emulator_this_server_can_run_reason": "dat bestand is geen emulator die deze server kan uitvoeren: {{reason}}",
   "not_a_game": "geen game",
   "say_where_to_move_the_database_a_postgresql_url_or_a_sqlite_files_full_path": "geef aan waarheen de database moet: een PostgreSQL-URL of het volledige pad van een SQLite-bestand",
-  "on_kubernetes_the_data_folder_is_emptied_whenever_matinees_pod_is_replaced_so_the_database_cant_be_a_sqlite_file_there_move_it_to_a_postgresql_database": "op Kubernetes wordt de datamap geleegd wanneer de pod van Matinee wordt vervangen, dus de database kan daar geen SQLite-bestand zijn; verhuis hem naar een PostgreSQL-database"
+  "on_kubernetes_the_data_folder_is_emptied_whenever_matinees_pod_is_replaced_so_the_database_cant_be_a_sqlite_file_there_move_it_to_a_postgresql_database": "op Kubernetes wordt de datamap geleegd wanneer de pod van Matinee wordt vervangen, dus de database kan daar geen SQLite-bestand zijn; verhuis hem naar een PostgreSQL-database",
+  "key_must_be_up_down_left_right_select_back_home_or_playpause": "key moet up, down, left, right, select, back, home of playPause zijn",
+  "text_can_be_at_most_200_characters": "text mag hoogstens 200 tekens lang zijn",
+  "text_is_required": "text is verplicht"
 }
