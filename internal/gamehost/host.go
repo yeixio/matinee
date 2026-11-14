@@ -48,7 +48,10 @@ type Host struct {
 	// Desktop is the address of a web page showing this computer's screen
 	// (see desktop.go), or empty for none.
 	Desktop string
-	Log     *slog.Logger
+	// TVMode keeps Steam in Big Picture when a player leaves, for a
+	// computer that only runs Steam, such as a Steam container.
+	TVMode bool
+	Log    *slog.Logger
 	// VideoInput and AudioInput replace FFmpeg's input arguments, for tests.
 	VideoInput, AudioInput []string
 
@@ -142,7 +145,7 @@ func (h *Host) play(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	defer func() {
-		if app == BigPicture {
+		if app == BigPicture && !h.TVMode {
 			h.steamURL("steam://close/bigpicture")
 		}
 		stopGame(app)
