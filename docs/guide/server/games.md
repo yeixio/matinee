@@ -192,7 +192,11 @@ This is an early preview, played by an admin from **Games** in the web app, or f
    | `MATINEE_GAME_HOST` | The game host's address, such as `http://gaming-pc:7174`. |
    | `MATINEE_GAME_HOST_TOKEN` | The same token as the game host's. |
 
-4. Open **Games** in the web app. Under **PC games**, **Steam** opens Steam's Big Picture full screen, where you pick, play and quit games with your controller, as on a TV console. Below it, each installed game starts on its own.
+4. Open **Games** in the web app. Under **PC games**, **Steam** opens Steam's Big Picture full screen, where you pick, play and quit games with your controller, as on a TV console.
+
+   <!-- since: v0.2.9 -->
+   **Steam** is the one button: browse your games, start them, and install or remove them inside Big Picture, as on a Steam Deck. Each installed game no longer gets its own button.
+   <!-- /since -->
 
 The game host plays one game at a time. Closing the player quits the game, or leaves Big Picture.
 
@@ -201,7 +205,7 @@ In the web app, your keyboard and mouse control PC games and Steam as they are, 
 <!-- /since -->
 
 <!-- since: v0.2.7 -->
-The Matinee apps play PC games too, from app 1.0.42: on a TV, phone or tablet, **PC games** sits at the top of each Games library for admins, with **Steam** and each installed game. Play with a controller.
+The Matinee apps play PC games too, from app 1.0.42: on a TV, phone or tablet, **PC games** sits at the top of each Games library for admins, with **Steam**. Play with a controller.
 <!-- /since -->
 
 <!-- since: v0.2.9 -->
