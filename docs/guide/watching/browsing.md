@@ -52,6 +52,12 @@ The letters follow your filters: with only unwatched titles showing, they jump b
 
 Pick as many as you like; **Show results** applies them. The filters in use show as chips above the posters, each with an **×** to take it off. Matinee remembers each library's filters, and they're part of the page's address, so you can bookmark or share a filtered view.
 
+<!-- since: v0.2.9 -->
+On a TV, from app version 1.0.44, **Filter & sort** fits on one screen: each kind of filter is a tile that says what's picked, three across. Press select on a tile to open its choices in a line under it, pick with left, right and select, then press back (or select on the tile again) to close it. Up from any tile goes to **Show titles**.
+
+![Filter & sort on a TV, with Genre open and Comedy picked](../images/app-tv-filters.webp)
+<!-- /since -->
+
 :::tip
 Like a set of filters? **Save as collection** turns it into a [smart collection](/docs/watching/collections/) that keeps itself up to date and can be pinned to Home.
 :::
