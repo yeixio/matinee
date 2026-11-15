@@ -93,17 +93,19 @@ From version 1.0.28, **Settings → Top bar** on the TV puts the libraries you w
 
 ![Settings → Top bar on a TV, with Movies in the top bar](../images/app-tv-top-bar.webp)
 
-Back always goes one step back: from a screen to the one before, from any tab to Home, and on Home first up to the top bar. Only Back from the top bar on Home leaves the app.
-
 <!-- /since -->
 
 <!-- since: v0.2.6 -->
-### Back to the top
+### Back on a TV
 
-From version 1.0.41, Back (Menu on the Siri Remote) is the quick way up from far down a screen:
+Back (Menu on older Siri Remotes) always takes the same steps, in this order:
 
-- **On Home**, Back from anywhere in the rows comes up to the banner's **Play** and **More info** buttons. Back again goes to the top bar, and only Back from the top bar leaves the app.
-- **In a library, a row's See more, your watch list, Search, Discover or Settings**, Back while you're scrolled down jumps back to the top and puts you on the top bar. From the top, Back goes back a screen as usual.
+1. **On a screen you opened**, such as a library, a movie, a row's See more or your watch list, Back goes straight to the screen before it, however far down you are.
+2. **On Home**, Back from anywhere in the rows comes up to the banner's **Play** and **More info** buttons.
+3. **On any tab** (Home, Libraries, Search, Discover or Settings), Back goes back to the top and puts you on the top bar.
+4. **From the top bar**, Back leaves Matinee.
+
+From version 1.0.44 a screen you opened always goes straight back. Before that, Back far down a library first jumped to the top, and on Apple TV it could show the screen before for a moment and then return to the library. Back on Libraries now comes up to the top bar too, and Back from the top bar of any tab leaves the app rather than going to Home first.
 
 <!-- /since -->
 
