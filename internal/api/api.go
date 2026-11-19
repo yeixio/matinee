@@ -138,6 +138,7 @@ type Server struct {
 	draining        atomic.Bool     // the server is shutting down (see drain.go)
 	arrCache        ttlCache        // answers from Radarr and Sonarr (see arr.go)
 	boxOffices      boxOffices      // the Box Offices notifications come from (see notifications.go)
+	watchReports    watchReports    // what they were last told has been watched (see boxoffice_watched.go)
 	discoverCache   ttlCache        // answers from Overseerr (see discover.go)
 	catalogCache    ttlCache        // the official plugins (see plugins.go)
 	trailerCache    ttlCache        // trailer files' probes and TMDB's trailer lists (see trailers.go)
