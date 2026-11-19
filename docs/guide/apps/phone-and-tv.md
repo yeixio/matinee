@@ -101,11 +101,19 @@ From version 1.0.28, **Settings → Top bar** on the TV puts the libraries you w
 Back (Menu on older Siri Remotes) always takes the same steps, in this order:
 
 1. **On a screen you opened**, such as a library, a movie, a row's See more or your watch list, Back goes straight to the screen before it, however far down you are.
-2. **On Home**, Back from anywhere in the rows comes up to the banner's **Play** and **More info** buttons.
-3. **On any tab** (Home, Libraries, Search, Discover or Settings), Back goes back to the top and puts you on the top bar.
-4. **From the top bar**, Back leaves Matinee.
+2. **On any tab** (Home, Libraries, Search, Discover or Settings), Back goes back to the top and puts you on the top bar.
+3. **From the top bar**, Back leaves Matinee.
 
 From version 1.0.44 a screen you opened always goes straight back. Before that, Back far down a library first jumped to the top, and on Apple TV it could show the screen before for a moment and then return to the library. Back on Libraries now comes up to the top bar too, and Back from the top bar of any tab leaves the app rather than going to Home first.
+
+<!-- /since -->
+
+<!-- since: v0.2.10 -->
+### Home's banner
+
+The banner at the top of Home shows the title you're on in the rows: its backdrop, details and a short summary. It has no buttons, so the remote never stops there. Select a title in the rows to open its page and play it from there. Up from the first row, or Back from anywhere in the rows, goes straight to the top bar.
+
+From version 1.0.48 of the TV app. Before that, the banner had **Play** and **More info** buttons between the rows and the top bar, and Back from the rows stopped on them first.
 
 <!-- /since -->
 
