@@ -109,9 +109,11 @@ func (s *Server) playGame(w http.ResponseWriter, r *http.Request) {
 		// HostApp is a game on the game host, by its Steam app id.
 		HostApp int `json:"hostApp"`
 		// Steam plays Steam itself on the game host, in Big Picture.
-		Steam  bool   `json:"steam"`
-		Offer  string `json:"offer"`
-		Direct bool   `json:"direct"`
+		Steam bool `json:"steam"`
+		// PlayStation plays a paired console (playstation.go), by its id.
+		PlayStation string `json:"playstation"`
+		Offer       string `json:"offer"`
+		Direct      bool   `json:"direct"`
 	}
 	if err := readJSON(r, &body); err != nil || (body.Offer == "") == !body.Direct {
 		writeError(w, http.StatusBadRequest, "bad request")
@@ -119,7 +121,15 @@ func (s *Server) playGame(w http.ResponseWriter, r *http.Request) {
 	}
 	g := gamestream.Game{Owner: strconv.FormatInt(currentUser(r).ID, 10)}
 	system, analog := "lagtest", false
-	if body.HostApp > 0 || body.Steam {
+	timeout := 20 * time.Second
+	if body.PlayStation != "" {
+		start, err := s.playStationGame(r.Context(), body.PlayStation)
+		if err != nil {
+			writeError(w, http.StatusNotFound, err.Error())
+			return
+		}
+		g.Remote, system, analog, timeout = start, "playstation", true, consoleStartTimeout
+	} else if body.HostApp > 0 || body.Steam {
 		if s.GameHost == nil {
 			writeError(w, http.StatusNotFound, "no game host is set up")
 			return
@@ -143,7 +153,7 @@ func (s *Server) playGame(w http.ResponseWriter, r *http.Request) {
 		}
 		g.System, g.Path, system, analog = sys, body.Path, sys.Key, sys.Analog
 	}
-	s.startGame(w, r, g, body.Offer, system, analog)
+	s.startGame(w, r, g, body.Offer, system, analog, timeout)
 }
 
 // gameHostGames lists the games the game host has installed.
@@ -214,11 +224,11 @@ func (s *Server) playGameItem(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	g := gamestream.Game{Owner: strconv.FormatInt(currentUser(r).ID, 10), System: sys, Path: it.Path}
-	s.startGame(w, r, g, body.Offer, sys.Key, sys.Analog)
+	s.startGame(w, r, g, body.Offer, sys.Key, sys.Analog, 20*time.Second)
 }
 
-func (s *Server) startGame(w http.ResponseWriter, r *http.Request, g gamestream.Game, offer, system string, analog bool) {
-	ctx, cancel := context.WithTimeout(r.Context(), 20*time.Second)
+func (s *Server) startGame(w http.ResponseWriter, r *http.Request, g gamestream.Game, offer, system string, analog bool, timeout time.Duration) {
+	ctx, cancel := context.WithTimeout(r.Context(), timeout)
 	defer cancel()
 	sess, answer, err := s.Games.Start(ctx, g, offer)
 	if errors.Is(err, gamehost.ErrBusy) {

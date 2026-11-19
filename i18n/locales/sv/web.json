@@ -1737,6 +1737,35 @@
     "noEmulator": "Matinee kan inte spela det här spelet än: det finns ingen emulator för det på den här servern.",
     "addEmulator": "Lägg till en emulator i Inställningar",
     "emulatorGuide": "Så lägger du till en egen emulator",
-    "askAdminEmulator": "En administratör kan lägga till en emulator för det."
+    "askAdminEmulator": "En administratör kan lägga till en emulator för det.",
+    "ps": {
+      "title": "PlayStation",
+      "hint": "Spela din PS5 eller PS4 härifrån, strömmad över ditt hemnätverk med Remote Play. Inte gjort eller godkänt av Sony.",
+      "signInTitle": "Logga in på PlayStation",
+      "signInHint": "Parkopplingen behöver ditt PSN-konto-ID. Logga in på PlayStations sida; när den visar \"redirect\", kopiera adressen från adressfältet och klistra in den här. Matinee sparar bara ID:t.",
+      "openSignIn": "Öppna PlayStation-inloggningen",
+      "redirectPlaceholder": "Klistra in adressen här",
+      "useAccountId": "Jag har mitt konto-ID",
+      "useSignIn": "Logga in i stället",
+      "accountIdHint": "Klistra in ditt PSN-konto-ID: 12 bokstäver och siffror som slutar med =, som andra Remote Play-appar visar det.",
+      "accountIdPlaceholder": "Konto-ID",
+      "pairTitle": "Parkoppla en konsol",
+      "pairHintPS5": "Öppna Inställningar → System → Fjärrspel → Parkoppla enhet på PS5:an och ange koden som visas. IP-adressen finns under Inställningar → Nätverk → Anslutningsstatus.",
+      "pairHintPS4": "Öppna Inställningar → Inställningar för fjärrspelsanslutning → Lägg till enhet på PS4:an och ange koden som visas. IP-adressen finns under Inställningar → Nätverk → Visa anslutningsstatus.",
+      "address": "IP-adress",
+      "console": "Konsol",
+      "code": "Kod",
+      "pair": "Parkoppla",
+      "pairing": "Parkopplar…",
+      "stateReady": "På",
+      "stateStandby": "Viloläge",
+      "stateOff": "Svarar inte",
+      "wake": "Väck",
+      "waking": "Väcker…",
+      "remove": "Ta bort {{name}}",
+      "signOut": "Logga ut från PlayStation",
+      "starting": "Väcker PlayStation och startar Remote Play. Det kan ta en minut.",
+      "buttons": "Select är pekplattan, Select och Start tillsammans PS-knappen"
+    }
   }
 }

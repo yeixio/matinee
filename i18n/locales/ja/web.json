@@ -1723,6 +1723,35 @@
     "noEmulator": "Matinee はまだこのゲームを遊べません。このサーバーにはそのエミュレーターがありません。",
     "addEmulator": "設定でエミュレーターを追加",
     "emulatorGuide": "自分のエミュレーターを追加する方法",
-    "askAdminEmulator": "管理者がエミュレーターを追加できます。"
+    "askAdminEmulator": "管理者がエミュレーターを追加できます。",
+    "ps": {
+      "title": "PlayStation",
+      "hint": "PS5やPS4をここからプレイできます。Remote Playで家のネットワーク経由でストリーミングします。Sonyが作成または承認したものではありません。",
+      "signInTitle": "PlayStationにサインイン",
+      "signInHint": "ペアリングにはPSNのアカウントIDが必要です。PlayStationのページでサインインし、「redirect」と表示されたらアドレスバーのアドレスをコピーしてここに貼り付けてください。Matineeが保存するのはIDだけです。",
+      "openSignIn": "PlayStationのサインインを開く",
+      "redirectPlaceholder": "ここにアドレスを貼り付け",
+      "useAccountId": "アカウントIDを持っています",
+      "useSignIn": "サインインする",
+      "accountIdHint": "PSNのアカウントIDを貼り付けてください。ほかのRemote Playアプリで表示される、=で終わる12文字の英数字です。",
+      "accountIdPlaceholder": "アカウントID",
+      "pairTitle": "本体をペアリング",
+      "pairHintPS5": "PS5で 設定 → システム → リモートプレイ → 機器を登録する を開き、表示されたコードを入力します。IPアドレスは 設定 → ネットワーク → 接続状況 にあります。",
+      "pairHintPS4": "PS4で 設定 → リモートプレイ接続設定 → 機器を登録する を開き、表示されたコードを入力します。IPアドレスは 設定 → ネットワーク → 接続状況を確認する にあります。",
+      "address": "IPアドレス",
+      "console": "本体",
+      "code": "コード",
+      "pair": "ペアリング",
+      "pairing": "ペアリング中…",
+      "stateReady": "オン",
+      "stateStandby": "レストモード",
+      "stateOff": "応答なし",
+      "wake": "起動",
+      "waking": "起動中…",
+      "remove": "{{name}}を削除",
+      "signOut": "PlayStationからサインアウト",
+      "starting": "PlayStationを起動してRemote Playを開始しています。1分ほどかかることがあります。",
+      "buttons": "Selectはタッチパッド、SelectとStartの同時押しはPSボタン"
+    }
   }
 }

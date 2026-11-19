@@ -1723,6 +1723,35 @@
     "noEmulator": "Matinee belum bisa memainkan game ini: server ini belum punya emulator untuknya.",
     "addEmulator": "Tambahkan emulator di Pengaturan",
     "emulatorGuide": "Cara menambahkan emulator sendiri",
-    "askAdminEmulator": "Admin bisa menambahkan emulator untuknya."
+    "askAdminEmulator": "Admin bisa menambahkan emulator untuknya.",
+    "ps": {
+      "title": "PlayStation",
+      "hint": "Mainkan PS5 atau PS4 kamu dari sini, di-stream lewat jaringan rumah dengan Remote Play. Tidak dibuat atau didukung oleh Sony.",
+      "signInTitle": "Masuk ke PlayStation",
+      "signInHint": "Penyandingan butuh ID akun PSN kamu. Masuk di halaman PlayStation; saat muncul \"redirect\", salin alamat dari bilah alamat dan tempel di sini. Matinee hanya menyimpan ID-nya.",
+      "openSignIn": "Buka halaman masuk PlayStation",
+      "redirectPlaceholder": "Tempel alamatnya di sini",
+      "useAccountId": "Saya punya ID akun",
+      "useSignIn": "Masuk saja",
+      "accountIdHint": "Tempel ID akun PSN kamu: 12 huruf dan angka yang diakhiri =, seperti yang ditunjukkan aplikasi Remote Play lain.",
+      "accountIdPlaceholder": "ID akun",
+      "pairTitle": "Sandingkan konsol",
+      "pairHintPS5": "Di PS5, buka Pengaturan → Sistem → Remote Play → Sandingkan Perangkat, lalu masukkan kode yang muncul. Alamat IP-nya ada di Pengaturan → Jaringan → Status Koneksi.",
+      "pairHintPS4": "Di PS4, buka Pengaturan → Pengaturan Koneksi Remote Play → Tambah Perangkat, lalu masukkan kode yang muncul. Alamat IP-nya ada di Pengaturan → Jaringan → Lihat Status Koneksi.",
+      "address": "Alamat IP",
+      "console": "Konsol",
+      "code": "Kode",
+      "pair": "Sandingkan",
+      "pairing": "Menyandingkan…",
+      "stateReady": "Menyala",
+      "stateStandby": "Mode istirahat",
+      "stateOff": "Tidak menjawab",
+      "wake": "Bangunkan",
+      "waking": "Membangunkan…",
+      "remove": "Hapus {{name}}",
+      "signOut": "Keluar dari PlayStation",
+      "starting": "Membangunkan PlayStation dan memulai Remote Play. Ini bisa makan waktu semenit.",
+      "buttons": "Select adalah touchpad, Select dan Start bersamaan tombol PS"
+    }
   }
 }

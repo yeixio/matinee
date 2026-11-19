@@ -1737,6 +1737,35 @@
     "noEmulator": "Matinee kan ikke spille dette spil endnu: der er ingen emulator til det på denne server.",
     "addEmulator": "Tilføj en emulator i Indstillinger",
     "emulatorGuide": "Sådan tilføjer du din egen emulator",
-    "askAdminEmulator": "En administrator kan tilføje en emulator til det."
+    "askAdminEmulator": "En administrator kan tilføje en emulator til det.",
+    "ps": {
+      "title": "PlayStation",
+      "hint": "Spil din PS5 eller PS4 herfra, streamet over dit hjemmenetværk med Remote Play. Ikke lavet eller godkendt af Sony.",
+      "signInTitle": "Log ind på PlayStation",
+      "signInHint": "Parringen kræver dit PSN-konto-id. Log ind på PlayStations side; når den viser \"redirect\", kopierer du adressen fra adresselinjen og indsætter den her. Matinee gemmer kun id'et.",
+      "openSignIn": "Åbn PlayStation-login",
+      "redirectPlaceholder": "Indsæt adressen her",
+      "useAccountId": "Jeg har mit konto-id",
+      "useSignIn": "Log ind i stedet",
+      "accountIdHint": "Indsæt dit PSN-konto-id: 12 bogstaver og tal, der ender på =, som andre Remote Play-apps viser det.",
+      "accountIdPlaceholder": "Konto-id",
+      "pairTitle": "Par en konsol",
+      "pairHintPS5": "Åbn Indstillinger → System → Fjernafspilning → Par enhed på din PS5, og indtast den viste kode. IP-adressen står under Indstillinger → Netværk → Forbindelsesstatus.",
+      "pairHintPS4": "Åbn Indstillinger → Forbindelsesindstillinger til fjernafspilning → Tilføj enhed på din PS4, og indtast den viste kode. IP-adressen står under Indstillinger → Netværk → Vis forbindelsesstatus.",
+      "address": "IP-adresse",
+      "console": "Konsol",
+      "code": "Kode",
+      "pair": "Par",
+      "pairing": "Parrer…",
+      "stateReady": "Tændt",
+      "stateStandby": "Hviletilstand",
+      "stateOff": "Svarer ikke",
+      "wake": "Væk",
+      "waking": "Vækker…",
+      "remove": "Fjern {{name}}",
+      "signOut": "Log ud af PlayStation",
+      "starting": "Vækker PlayStation og starter Remote Play. Det kan tage et minut.",
+      "buttons": "Select er touchpladen, Select og Start sammen PS-knappen"
+    }
   }
 }

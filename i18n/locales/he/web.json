@@ -1751,6 +1751,35 @@
     "noEmulator": "Matinee עדיין לא יכול להפעיל את המשחק הזה: אין לו אמולטור בשרת הזה.",
     "addEmulator": "הוספת אמולטור בהגדרות",
     "emulatorGuide": "איך מוסיפים אמולטור משלכם",
-    "askAdminEmulator": "מנהל יכול להוסיף לו אמולטור."
+    "askAdminEmulator": "מנהל יכול להוסיף לו אמולטור.",
+    "ps": {
+      "title": "PlayStation",
+      "hint": "שחקו ב-PS5 או ב-PS4 שלכם מכאן, בהזרמה ברשת הביתית עם Remote Play. לא נוצר או אושר על ידי Sony.",
+      "signInTitle": "התחברות ל-PlayStation",
+      "signInHint": "לצימוד צריך את מזהה חשבון ה-PSN שלכם. התחברו בדף של PlayStation; כשיופיע \"redirect\", העתיקו את הכתובת משורת הכתובת והדביקו אותה כאן. Matinee שומר רק את המזהה.",
+      "openSignIn": "פתיחת ההתחברות ל-PlayStation",
+      "redirectPlaceholder": "הדביקו כאן את הכתובת",
+      "useAccountId": "יש לי מזהה חשבון",
+      "useSignIn": "להתחבר במקום זאת",
+      "accountIdHint": "הדביקו את מזהה חשבון ה-PSN: ‏12 אותיות וספרות שמסתיימות ב-=, כפי שאפליקציות Remote Play אחרות מציגות אותו.",
+      "accountIdPlaceholder": "מזהה חשבון",
+      "pairTitle": "צימוד קונסולה",
+      "pairHintPS5": "ב-PS5, פתחו הגדרות ← מערכת ← משחק מרחוק ← צימוד מכשיר והזינו את הקוד שמוצג. כתובת ה-IP נמצאת בהגדרות ← רשת ← מצב חיבור.",
+      "pairHintPS4": "ב-PS4, פתחו הגדרות ← הגדרות חיבור משחק מרחוק ← הוספת מכשיר והזינו את הקוד שמוצג. כתובת ה-IP נמצאת בהגדרות ← רשת ← הצגת מצב חיבור.",
+      "address": "כתובת IP",
+      "console": "קונסולה",
+      "code": "קוד",
+      "pair": "צימוד",
+      "pairing": "מצמד…",
+      "stateReady": "פועלת",
+      "stateStandby": "מצב מנוחה",
+      "stateOff": "לא עונה",
+      "wake": "העירו",
+      "waking": "מעיר…",
+      "remove": "הסרת {{name}}",
+      "signOut": "התנתקות מ-PlayStation",
+      "starting": "מעירים את ה-PlayStation ומפעילים את Remote Play. זה יכול לקחת דקה.",
+      "buttons": "Select הוא משטח המגע, ו-Select עם Start יחד הם כפתור ה-PS"
+    }
   }
 }

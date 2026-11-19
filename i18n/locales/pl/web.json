@@ -1765,6 +1765,35 @@
     "noEmulator": "Matinee nie uruchamia jeszcze tej gry: na tym serwerze nie ma dla niej emulatora.",
     "addEmulator": "Dodaj emulator w Ustawieniach",
     "emulatorGuide": "Jak dodać własny emulator",
-    "askAdminEmulator": "Administrator może dodać dla niej emulator."
+    "askAdminEmulator": "Administrator może dodać dla niej emulator.",
+    "ps": {
+      "title": "PlayStation",
+      "hint": "Graj na swojej PS5 lub PS4 stąd, strumieniowo przez sieć domową dzięki Remote Play. Nie stworzone ani nie wspierane przez Sony.",
+      "signInTitle": "Zaloguj się do PlayStation",
+      "signInHint": "Do parowania potrzebny jest identyfikator konta PSN. Zaloguj się na stronie PlayStation; gdy pokaże „redirect”, skopiuj adres z paska adresu i wklej go tutaj. Matinee zachowuje tylko identyfikator.",
+      "openSignIn": "Otwórz logowanie PlayStation",
+      "redirectPlaceholder": "Wklej tutaj adres",
+      "useAccountId": "Mam identyfikator konta",
+      "useSignIn": "Zaloguj się zamiast tego",
+      "accountIdHint": "Wklej identyfikator konta PSN: 12 liter i cyfr zakończonych znakiem =, tak jak pokazują go inne aplikacje Remote Play.",
+      "accountIdPlaceholder": "Identyfikator konta",
+      "pairTitle": "Sparuj konsolę",
+      "pairHintPS5": "Na PS5 otwórz Ustawienia → System → Odtwarzanie zdalne → Sparuj urządzenie i wpisz wyświetlony kod. Adres IP znajdziesz w Ustawienia → Sieć → Stan połączenia.",
+      "pairHintPS4": "Na PS4 otwórz Ustawienia → Ustawienia połączenia odtwarzania zdalnego → Dodaj urządzenie i wpisz wyświetlony kod. Adres IP znajdziesz w Ustawienia → Sieć → Wyświetl stan połączenia.",
+      "address": "Adres IP",
+      "console": "Konsola",
+      "code": "Kod",
+      "pair": "Sparuj",
+      "pairing": "Parowanie…",
+      "stateReady": "Włączona",
+      "stateStandby": "Tryb odpoczynku",
+      "stateOff": "Nie odpowiada",
+      "wake": "Wybudź",
+      "waking": "Wybudzanie…",
+      "remove": "Usuń {{name}}",
+      "signOut": "Wyloguj się z PlayStation",
+      "starting": "Wybudzanie PlayStation i uruchamianie Remote Play. To może potrwać minutę.",
+      "buttons": "Select to touchpad, Select i Start razem to przycisk PS"
+    }
   }
 }

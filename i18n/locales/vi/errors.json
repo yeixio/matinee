@@ -299,5 +299,7 @@
   "on_kubernetes_the_data_folder_is_emptied_whenever_matinees_pod_is_replaced_so_the_database_cant_be_a_sqlite_file_there_move_it_to_a_postgresql_database": "trên Kubernetes thư mục dữ liệu bị xóa trống mỗi khi pod của Matinee được thay, nên cơ sở dữ liệu không thể là tệp SQLite ở đó; hãy chuyển nó sang cơ sở dữ liệu PostgreSQL",
   "key_must_be_up_down_left_right_select_back_home_or_playpause": "key phải là up, down, left, right, select, back, home hoặc playPause",
   "text_can_be_at_most_200_characters": "text tối đa 200 ký tự",
-  "text_is_required": "text là bắt buộc"
+  "text_is_required": "text là bắt buộc",
+  "sign_in_to_playstation_first": "hãy đăng nhập PlayStation trước",
+  "this_server_cant_play_playstation_games": "máy chủ này không thể chơi trò chơi PlayStation"
 }

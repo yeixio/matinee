@@ -1765,6 +1765,35 @@
     "noEmulator": "Matinee zatím neumí spustit tuto hru: na tomto serveru pro ni není emulátor.",
     "addEmulator": "Přidat emulátor v Nastavení",
     "emulatorGuide": "Jak přidat vlastní emulátor",
-    "askAdminEmulator": "Správce pro ni může přidat emulátor."
+    "askAdminEmulator": "Správce pro ni může přidat emulátor.",
+    "ps": {
+      "title": "PlayStation",
+      "hint": "Hrajte na své PS5 nebo PS4 odsud, streamováno přes domácí síť pomocí Remote Play. Nevytvořeno ani neschváleno společností Sony.",
+      "signInTitle": "Přihlásit se k PlayStation",
+      "signInHint": "Spárování potřebuje ID vašeho účtu PSN. Přihlaste se na stránce PlayStation; až ukáže „redirect“, zkopírujte adresu z adresního řádku a vložte ji sem. Matinee si ponechá jen ID.",
+      "openSignIn": "Otevřít přihlášení k PlayStation",
+      "redirectPlaceholder": "Sem vložte adresu",
+      "useAccountId": "Mám ID účtu",
+      "useSignIn": "Raději se přihlásit",
+      "accountIdHint": "Vložte ID účtu PSN: 12 písmen a číslic končících znakem =, jak ho ukazují jiné aplikace Remote Play.",
+      "accountIdPlaceholder": "ID účtu",
+      "pairTitle": "Spárovat konzoli",
+      "pairHintPS5": "Na PS5 otevřete Nastavení → Systém → Dálkové hraní → Spárovat zařízení a zadejte zobrazený kód. IP adresu najdete v Nastavení → Síť → Stav připojení.",
+      "pairHintPS4": "Na PS4 otevřete Nastavení → Nastavení připojení dálkového hraní → Přidat zařízení a zadejte zobrazený kód. IP adresu najdete v Nastavení → Síť → Zobrazit stav připojení.",
+      "address": "IP adresa",
+      "console": "Konzole",
+      "code": "Kód",
+      "pair": "Spárovat",
+      "pairing": "Párování…",
+      "stateReady": "Zapnutá",
+      "stateStandby": "Klidový režim",
+      "stateOff": "Neodpovídá",
+      "wake": "Probudit",
+      "waking": "Probouzení…",
+      "remove": "Odebrat {{name}}",
+      "signOut": "Odhlásit se z PlayStation",
+      "starting": "Probouzím PlayStation a spouštím Remote Play. Může to trvat minutu.",
+      "buttons": "Select je touchpad, Select a Start dohromady tlačítko PS"
+    }
   }
 }

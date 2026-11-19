@@ -15,6 +15,7 @@ export function GamePlayer({
   itemId,
   hostApp,
   steam,
+  playstation,
   lagTest,
   onClose,
 }: {
@@ -25,6 +26,8 @@ export function GamePlayer({
   hostApp?: number
   /** Steam itself on the game host, in Big Picture. */
   steam?: boolean
+  /** A paired PlayStation, by its id. */
+  playstation?: string
   lagTest?: boolean
   onClose: () => void
 }) {
@@ -51,6 +54,7 @@ export function GamePlayer({
       itemId,
       hostApp,
       steam,
+      playstation,
       lagTest,
       video: video.current!,
       onLag: (l) => {
@@ -74,7 +78,7 @@ export function GamePlayer({
       stream?.stop()
       if (document.fullscreenElement) document.exitFullscreen().catch(() => {})
     }
-  }, [path, itemId, hostApp, steam, lagTest, t])
+  }, [path, itemId, hostApp, steam, playstation, lagTest, t])
 
   const ms = (v?: number) => (v === undefined ? '…' : t('games.ms', { value: Math.round(v) }))
   return (
@@ -84,6 +88,7 @@ export function GamePlayer({
           <div className="truncate font-medium">{name}</div>
           <div className="truncate text-xs text-white/60">
             {lag.controller ? t('games.controller', { name: lag.controller }) : pcGame ? t('games.keyboardMouse') : t('games.pressButton')}
+            {playstation && ` · ${t('games.ps.buttons')}`}
           </div>
         </div>
         {pcGame && (
@@ -114,7 +119,11 @@ export function GamePlayer({
             </Button>
           </div>
         )}
-        {starting && !error && <div className="absolute inset-0 grid place-items-center text-white/70">{t('games.starting')}</div>}
+        {starting && !error && (
+          <div className="absolute inset-0 grid place-items-center p-6 text-center text-white/70">
+            {playstation ? t('games.ps.starting') : t('games.starting')}
+          </div>
+        )}
         {error && (
           <div className="absolute inset-0 grid place-items-center p-6 text-center">
             <div>

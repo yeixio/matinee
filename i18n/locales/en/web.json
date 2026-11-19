@@ -1737,6 +1737,35 @@
     "noEmulator": "Matinee can't play this game yet: there's no emulator for it on this server.",
     "addEmulator": "Add an emulator in Settings",
     "emulatorGuide": "How to add your own emulator",
-    "askAdminEmulator": "An admin can add an emulator for it."
+    "askAdminEmulator": "An admin can add an emulator for it.",
+    "ps": {
+      "title": "PlayStation",
+      "hint": "Play your PS5 or PS4 from here, streamed over your home network with Remote Play. Not made or endorsed by Sony.",
+      "signInTitle": "Sign in to PlayStation",
+      "signInHint": "Pairing needs your PSN account ID. Sign in on PlayStation's page; when it shows \"redirect\", copy the address from the address bar and paste it here. Matinee keeps only the ID.",
+      "openSignIn": "Open PlayStation sign-in",
+      "redirectPlaceholder": "Paste the address here",
+      "useAccountId": "I have my account ID",
+      "useSignIn": "Sign in instead",
+      "accountIdHint": "Paste your PSN account ID: 12 letters and numbers ending in =, as other Remote Play apps show it.",
+      "accountIdPlaceholder": "Account ID",
+      "pairTitle": "Pair a console",
+      "pairHintPS5": "On the PS5, open Settings → System → Remote Play → Pair Device, and enter the code it shows. Its IP address is under Settings → Network → Connection Status.",
+      "pairHintPS4": "On the PS4, open Settings → Remote Play Connection Settings → Add Device, and enter the code it shows. Its IP address is under Settings → Network → View Connection Status.",
+      "address": "IP address",
+      "console": "Console",
+      "code": "Code",
+      "pair": "Pair",
+      "pairing": "Pairing…",
+      "stateReady": "On",
+      "stateStandby": "Rest mode",
+      "stateOff": "Not answering",
+      "wake": "Wake",
+      "waking": "Waking…",
+      "remove": "Remove {{name}}",
+      "signOut": "Sign out of PlayStation",
+      "starting": "Waking the PlayStation and starting Remote Play. This can take a minute.",
+      "buttons": "Select is the touchpad, Select and Start the PS button"
+    }
   }
 }

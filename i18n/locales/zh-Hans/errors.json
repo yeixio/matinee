@@ -299,5 +299,7 @@
   "on_kubernetes_the_data_folder_is_emptied_whenever_matinees_pod_is_replaced_so_the_database_cant_be_a_sqlite_file_there_move_it_to_a_postgresql_database": "在 Kubernetes 上,每次替换 Matinee 的 Pod 时数据文件夹都会被清空,所以数据库不能是那里的 SQLite 文件;请迁移到 PostgreSQL 数据库",
   "key_must_be_up_down_left_right_select_back_home_or_playpause": "key 必须是 up, down, left, right, select, back, home 或 playPause",
   "text_can_be_at_most_200_characters": "text 最多 200 个字符",
-  "text_is_required": "必须提供 text"
+  "text_is_required": "必须提供 text",
+  "sign_in_to_playstation_first": "请先登录 PlayStation",
+  "this_server_cant_play_playstation_games": "此服务器无法运行 PlayStation 游戏"
 }

@@ -1723,6 +1723,35 @@
     "noEmulator": "Matinee chưa chơi được trò chơi này: máy chủ này chưa có trình giả lập cho nó.",
     "addEmulator": "Thêm trình giả lập trong Cài đặt",
     "emulatorGuide": "Cách thêm trình giả lập của riêng bạn",
-    "askAdminEmulator": "Quản trị viên có thể thêm trình giả lập cho nó."
+    "askAdminEmulator": "Quản trị viên có thể thêm trình giả lập cho nó.",
+    "ps": {
+      "title": "PlayStation",
+      "hint": "Chơi PS5 hoặc PS4 của bạn từ đây, truyền qua mạng gia đình bằng Remote Play. Không do Sony tạo ra hay xác nhận.",
+      "signInTitle": "Đăng nhập PlayStation",
+      "signInHint": "Ghép nối cần ID tài khoản PSN của bạn. Đăng nhập trên trang PlayStation; khi trang hiện \"redirect\", sao chép địa chỉ trên thanh địa chỉ và dán vào đây. Matinee chỉ giữ ID.",
+      "openSignIn": "Mở trang đăng nhập PlayStation",
+      "redirectPlaceholder": "Dán địa chỉ vào đây",
+      "useAccountId": "Tôi có ID tài khoản",
+      "useSignIn": "Đăng nhập thay vào đó",
+      "accountIdHint": "Dán ID tài khoản PSN: 12 chữ cái và số kết thúc bằng =, như các ứng dụng Remote Play khác hiển thị.",
+      "accountIdPlaceholder": "ID tài khoản",
+      "pairTitle": "Ghép nối máy chơi game",
+      "pairHintPS5": "Trên PS5, mở Cài đặt → Hệ thống → Chơi từ xa → Ghép nối thiết bị và nhập mã hiển thị. Địa chỉ IP nằm ở Cài đặt → Mạng → Trạng thái kết nối.",
+      "pairHintPS4": "Trên PS4, mở Cài đặt → Cài đặt kết nối Chơi từ xa → Thêm thiết bị và nhập mã hiển thị. Địa chỉ IP nằm ở Cài đặt → Mạng → Xem trạng thái kết nối.",
+      "address": "Địa chỉ IP",
+      "console": "Máy chơi game",
+      "code": "Mã",
+      "pair": "Ghép nối",
+      "pairing": "Đang ghép nối…",
+      "stateReady": "Đang bật",
+      "stateStandby": "Chế độ nghỉ",
+      "stateOff": "Không phản hồi",
+      "wake": "Đánh thức",
+      "waking": "Đang đánh thức…",
+      "remove": "Gỡ {{name}}",
+      "signOut": "Đăng xuất PlayStation",
+      "starting": "Đang đánh thức PlayStation và khởi động Remote Play. Có thể mất một phút.",
+      "buttons": "Select là bàn di cảm ứng, Select và Start cùng lúc là nút PS"
+    }
   }
 }

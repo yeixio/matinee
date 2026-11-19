@@ -1751,6 +1751,35 @@
     "noEmulator": "Matinee non può ancora avviare questo gioco: su questo server non c'è un emulatore per lui.",
     "addEmulator": "Aggiungi un emulatore nelle Impostazioni",
     "emulatorGuide": "Come aggiungere un tuo emulatore",
-    "askAdminEmulator": "Un amministratore può aggiungere un emulatore."
+    "askAdminEmulator": "Un amministratore può aggiungere un emulatore.",
+    "ps": {
+      "title": "PlayStation",
+      "hint": "Gioca alla tua PS5 o PS4 da qui, in streaming sulla rete di casa con Remote Play. Non realizzato né approvato da Sony.",
+      "signInTitle": "Accedi a PlayStation",
+      "signInHint": "Per l'abbinamento serve l'ID account PSN. Accedi alla pagina di PlayStation; quando mostra \"redirect\", copia l'indirizzo dalla barra degli indirizzi e incollalo qui. Matinee conserva solo l'ID.",
+      "openSignIn": "Apri l'accesso a PlayStation",
+      "redirectPlaceholder": "Incolla qui l'indirizzo",
+      "useAccountId": "Ho il mio ID account",
+      "useSignIn": "Accedi invece",
+      "accountIdHint": "Incolla il tuo ID account PSN: 12 lettere e numeri che finiscono con =, come lo mostrano altre app di Remote Play.",
+      "accountIdPlaceholder": "ID account",
+      "pairTitle": "Abbina una console",
+      "pairHintPS5": "Sulla PS5 apri Impostazioni → Sistema → Riproduzione remota → Associa dispositivo e inserisci il codice mostrato. L'indirizzo IP è in Impostazioni → Rete → Stato connessione.",
+      "pairHintPS4": "Sulla PS4 apri Impostazioni → Impostazioni connessione Riproduzione remota → Aggiungi dispositivo e inserisci il codice mostrato. L'indirizzo IP è in Impostazioni → Rete → Visualizza stato connessione.",
+      "address": "Indirizzo IP",
+      "console": "Console",
+      "code": "Codice",
+      "pair": "Abbina",
+      "pairing": "Abbinamento…",
+      "stateReady": "Accesa",
+      "stateStandby": "Modalità riposo",
+      "stateOff": "Non risponde",
+      "wake": "Riattiva",
+      "waking": "Riattivazione…",
+      "remove": "Rimuovi {{name}}",
+      "signOut": "Esci da PlayStation",
+      "starting": "Riattivo la PlayStation e avvio Remote Play. Può richiedere un minuto.",
+      "buttons": "Select è il touchpad, Select e Start insieme il tasto PS"
+    }
   }
 }

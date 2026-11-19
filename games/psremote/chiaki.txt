@@ -1,0 +1,2 @@
+repo=https://github.com/streetpea/chiaki-ng.git
+commit=43728af2e639fecb8a7af1cd68c29820a40de973

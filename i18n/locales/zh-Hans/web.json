@@ -1723,6 +1723,35 @@
     "noEmulator": "Matinee 暂时还不能运行这款游戏：此服务器上没有对应的模拟器。",
     "addEmulator": "在设置中添加模拟器",
     "emulatorGuide": "如何添加你自己的模拟器",
-    "askAdminEmulator": "管理员可以为它添加模拟器。"
+    "askAdminEmulator": "管理员可以为它添加模拟器。",
+    "ps": {
+      "title": "PlayStation",
+      "hint": "在这里玩你的 PS5 或 PS4，通过 Remote Play 在家庭网络中串流。并非由 Sony 制作或认可。",
+      "signInTitle": "登录 PlayStation",
+      "signInHint": "配对需要你的 PSN 账号 ID。在 PlayStation 页面登录；当页面显示“redirect”时，复制地址栏中的地址并粘贴到这里。Matinee 只保存这个 ID。",
+      "openSignIn": "打开 PlayStation 登录",
+      "redirectPlaceholder": "在这里粘贴地址",
+      "useAccountId": "我有账号 ID",
+      "useSignIn": "改为登录",
+      "accountIdHint": "粘贴你的 PSN 账号 ID：以 = 结尾的 12 个字母和数字，与其他 Remote Play 应用显示的一样。",
+      "accountIdPlaceholder": "账号 ID",
+      "pairTitle": "配对主机",
+      "pairHintPS5": "在 PS5 上打开 设置 → 系统 → 遥控游玩 → 配对设备，然后输入显示的代码。它的 IP 地址在 设置 → 网络 → 连接状态 中。",
+      "pairHintPS4": "在 PS4 上打开 设置 → 遥控游玩连接设置 → 添加设备，然后输入显示的代码。它的 IP 地址在 设置 → 网络 → 查看连接状态 中。",
+      "address": "IP 地址",
+      "console": "主机",
+      "code": "代码",
+      "pair": "配对",
+      "pairing": "正在配对…",
+      "stateReady": "已开机",
+      "stateStandby": "待机模式",
+      "stateOff": "无响应",
+      "wake": "唤醒",
+      "waking": "正在唤醒…",
+      "remove": "移除 {{name}}",
+      "signOut": "退出 PlayStation",
+      "starting": "正在唤醒 PlayStation 并启动 Remote Play，可能需要一分钟。",
+      "buttons": "Select 是触摸板，同时按 Select 和 Start 是 PS 按钮"
+    }
   }
 }
