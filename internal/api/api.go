@@ -1016,8 +1016,9 @@ func (s *Server) listLibraries(w http.ResponseWriter, r *http.Request) {
 		s.serverError(w, err)
 		return
 	}
+	admin := currentUser(r).IsAdmin
 	var counts map[int64]store.LibraryCount
-	if r.URL.Query().Get("counts") == "1" && currentUser(r).IsAdmin {
+	if r.URL.Query().Get("counts") == "1" && admin {
 		if counts, err = s.Store.LibraryCounts(r.Context()); err != nil {
 			s.serverError(w, err)
 			return
@@ -1032,6 +1033,11 @@ func (s *Server) listLibraries(w http.ResponseWriter, r *http.Request) {
 		}
 		if ok {
 			v := s.libraryView(l, s.Scanner.Running(l.ID))
+			if !admin {
+				// Folders and what the scan left out are for the admins
+				// who set the library up, not for everyone who watches it.
+				v.Paths, v.Watch, v.Skipped = []string{}, []scan.FolderWatch{}, nil
+			}
 			if counts != nil {
 				c := counts[l.ID]
 				v.Titles, v.Files = &c.Titles, &c.Files
