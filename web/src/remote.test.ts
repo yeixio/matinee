@@ -36,3 +36,23 @@ describe('remote control turn', () => {
     expect(released).toBe(true)
   })
 })
+
+// Plain http on the home network has no crypto.randomUUID (#439).
+describe('client id over plain http', () => {
+  afterEach(() => {
+    vi.unstubAllGlobals()
+    vi.resetModules()
+  })
+
+  it('makes a UUID without crypto.randomUUID', async () => {
+    const real = globalThis.crypto
+    vi.stubGlobal('crypto', {
+      getRandomValues: (a: Uint8Array) => real.getRandomValues(a),
+    })
+    const { newId, clientId } = await import('./remote')
+    const id = newId()
+    expect(id).toMatch(/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/)
+    expect(newId()).not.toBe(id)
+    expect(clientId()).toMatch(/^[0-9a-f-]{36}$/)
+  })
+})
