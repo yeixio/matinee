@@ -17,7 +17,7 @@ import (
 //
 //	continueWatching, recentlyAdded, newReleases, watchList
 //	recentlyAdded:{kind}                           (Recently added, split by kind: movie, show, album, book, podcast)
-//	continueListening, newEpisodes, genre:{genre}, holiday:{id}, collection:{id}   (Home's other rows)
+//	continueListening, newEpisodes, leavingSoon, genre:{genre}, holiday:{id}, collection:{id}   (Home's other rows)
 //	related:{item id}                              (More like this)
 
 // Home's own rows, each a list in the /home answer.
@@ -81,6 +81,9 @@ func (s *Server) fullRow(ctx context.Context, u store.User, id string) (HomeRow,
 	case rowListening:
 		row.Title = "Continue listening"
 		row.Items, err = s.Store.ContinueListening(ctx, u.ID, rowAllItems)
+	case rowLeaving:
+		row.Title = "Leaving soon"
+		row.Items, err = s.leavingSoon(ctx, u, rowAllItems)
 	case rowNewEpisodes:
 		row.Title = "New episodes"
 		row.Items, err = s.Store.NewEpisodes(ctx, u.ID, today().AddDate(0, 0, -newEpisodeDays).Unix(), rowAllItems)

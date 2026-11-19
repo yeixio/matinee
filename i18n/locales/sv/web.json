@@ -72,7 +72,8 @@
     "scanning": "Skannar ditt bibliotek",
     "scanningHint": "Nya titlar dyker upp här så fort de hittas.",
     "removeNamed": "Ta bort {{title}} från Fortsätt titta",
-    "remove": "Ta bort från Fortsätt titta"
+    "remove": "Ta bort från Fortsätt titta",
+    "leavingSoon": "Försvinner snart"
   },
   "hero": {
     "upNext": "Nästa",

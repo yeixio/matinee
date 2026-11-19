@@ -196,3 +196,23 @@ func (c *Client) BoxOfficeReportWatched(ctx context.Context, people int, titles 
 	}
 	return c.do(ctx, "PUT", "/boxoffice/watched", nil, map[string]any{"people": people, "titles": titles}, nil)
 }
+
+// BoxOfficeLeaving is a title Box Office's clean-up rules have listed as
+// leaving soon. Its status says "leaving" when it has the list.
+type BoxOfficeLeaving struct {
+	TMDBID   int       `json:"tmdbId"`
+	TVDBID   int       `json:"tvdbId,omitempty"`
+	Title    string    `json:"title"`
+	Year     int       `json:"year,omitempty"`
+	LeavesAt time.Time `json:"leavesAt"`
+}
+
+// BoxOfficeLeavingSoon is this app's kind of title (movies as Radarr,
+// shows as Sonarr) that's leaving soon, soonest first.
+func (c *Client) BoxOfficeLeavingSoon(ctx context.Context) ([]BoxOfficeLeaving, error) {
+	var out struct {
+		Titles []BoxOfficeLeaving `json:"titles"`
+	}
+	err := c.do(ctx, "GET", "/boxoffice/leaving", nil, nil, &out)
+	return out.Titles, err
+}

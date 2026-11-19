@@ -72,7 +72,8 @@
     "scanning": "Scansione della libreria",
     "scanningHint": "I nuovi titoli compaiono qui appena vengono trovati.",
     "removeNamed": "Rimuovi {{title}} da Continua a guardare",
-    "remove": "Rimuovi da Continua a guardare"
+    "remove": "Rimuovi da Continua a guardare",
+    "leavingSoon": "In uscita"
   },
   "hero": {
     "upNext": "Prossimo",

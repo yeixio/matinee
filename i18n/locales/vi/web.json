@@ -72,7 +72,8 @@
     "scanning": "Đang quét thư viện của bạn",
     "scanningHint": "Nội dung mới sẽ hiện ở đây ngay khi được tìm thấy.",
     "removeNamed": "Xóa {{title}} khỏi Xem tiếp",
-    "remove": "Xóa khỏi Xem tiếp"
+    "remove": "Xóa khỏi Xem tiếp",
+    "leavingSoon": "Sắp rời đi"
   },
   "hero": {
     "upNext": "Tiếp theo",

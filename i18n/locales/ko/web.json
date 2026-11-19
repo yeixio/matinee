@@ -72,7 +72,8 @@
     "scanning": "라이브러리를 스캔하는 중",
     "scanningHint": "새 작품은 발견되는 대로 여기에 표시됩니다.",
     "removeNamed": "이어 보기에서 {{title}} 삭제",
-    "remove": "이어 보기에서 삭제"
+    "remove": "이어 보기에서 삭제",
+    "leavingSoon": "곧 삭제 예정"
   },
   "hero": {
     "upNext": "다음 작품",

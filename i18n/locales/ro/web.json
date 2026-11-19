@@ -72,7 +72,8 @@
     "scanning": "Se scanează biblioteca",
     "scanningHint": "Titlurile noi apar aici imediat ce sunt găsite.",
     "removeNamed": "Elimină {{title}} din Continuă vizionarea",
-    "remove": "Elimină din Continuă vizionarea"
+    "remove": "Elimină din Continuă vizionarea",
+    "leavingSoon": "Pleacă în curând"
   },
   "hero": {
     "upNext": "Urmează",

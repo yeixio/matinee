@@ -72,7 +72,8 @@
     "scanning": "Skanowanie biblioteki",
     "scanningHint": "Nowe tytuły pojawią się tutaj, gdy tylko zostaną znalezione.",
     "removeNamed": "Usuń {{title}} z Oglądaj dalej",
-    "remove": "Usuń z Oglądaj dalej"
+    "remove": "Usuń z Oglądaj dalej",
+    "leavingSoon": "Wkrótce znikną"
   },
   "hero": {
     "upNext": "Następnie",

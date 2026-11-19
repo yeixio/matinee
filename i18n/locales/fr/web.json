@@ -72,7 +72,8 @@
     "scanning": "Analyse de votre bibliothèque",
     "scanningHint": "Les nouveaux titres apparaissent ici dès qu’ils sont trouvés.",
     "removeNamed": "Retirer {{title}} de Reprendre",
-    "remove": "Retirer de Reprendre"
+    "remove": "Retirer de Reprendre",
+    "leavingSoon": "Partent bientôt"
   },
   "hero": {
     "upNext": "À suivre",

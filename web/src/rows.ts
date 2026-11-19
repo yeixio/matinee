@@ -8,6 +8,7 @@ const ownRows: Record<string, string> = {
   continueWatching: 'home.continueWatching',
   continueListening: 'common:books.continueListening',
   newEpisodes: 'common:podcasts.newEpisodes',
+  leavingSoon: 'home.leavingSoon',
   recentlyAdded: 'home.recentlyAdded',
   newReleases: 'home.newReleases',
   watchList: 'nav.watchList',

@@ -72,7 +72,8 @@
     "scanning": "Je bibliotheek wordt gescand",
     "scanningHint": "Nieuwe titels verschijnen hier zodra ze gevonden zijn.",
     "removeNamed": "{{title}} uit Verder kijken halen",
-    "remove": "Uit Verder kijken halen"
+    "remove": "Uit Verder kijken halen",
+    "leavingSoon": "Vertrekt binnenkort"
   },
   "hero": {
     "upNext": "Hierna",

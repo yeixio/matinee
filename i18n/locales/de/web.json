@@ -72,7 +72,8 @@
     "scanning": "Deine Mediathek wird gescannt",
     "scanningHint": "Neue Titel erscheinen hier, sobald sie gefunden werden.",
     "removeNamed": "{{title}} aus „Weiterschauen“ entfernen",
-    "remove": "Aus „Weiterschauen“ entfernen"
+    "remove": "Aus „Weiterschauen“ entfernen",
+    "leavingSoon": "Verschwindet bald"
   },
   "hero": {
     "upNext": "Als Nächstes",

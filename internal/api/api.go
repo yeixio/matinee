@@ -1301,6 +1301,18 @@ func (s *Server) home(w http.ResponseWriter, r *http.Request) {
 	// episodes of the shows they follow, then a holiday coming up,
 	// then pinned collections, then the day's genres.
 	rows = append(append(holidayRows, pinned...), rows...)
+	// What Box Office is about to clear out comes before those, while
+	// there's still time to watch it.
+	leaving, err := s.leavingSoon(ctx, currentUser(r), homeRowItems+1)
+	if err != nil {
+		s.serverError(w, err)
+		return
+	}
+	if len(leaving) > 0 {
+		row := HomeRow{ID: rowLeaving, Title: "Leaving soon"}
+		row.Items, row.More = cut(leaving, homeRowItems)
+		rows = append([]HomeRow{row}, rows...)
+	}
 	if len(episodes) > 0 {
 		row := HomeRow{ID: rowNewEpisodes, Title: "New episodes"}
 		row.Items, row.More = cut(episodes, homeRowItems)

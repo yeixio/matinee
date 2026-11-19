@@ -72,7 +72,8 @@
     "scanning": "Verificando sua biblioteca",
     "scanningHint": "Novos títulos aparecem aqui assim que são encontrados.",
     "removeNamed": "Remover {{title}} de Continuar assistindo",
-    "remove": "Remover de Continuar assistindo"
+    "remove": "Remover de Continuar assistindo",
+    "leavingSoon": "Saindo em breve"
   },
   "hero": {
     "upNext": "A seguir",
