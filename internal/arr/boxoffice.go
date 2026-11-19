@@ -173,3 +173,26 @@ func (c *Client) BoxOfficeDecline(ctx context.Context, id int64, reply string) (
 func (c *Client) BoxOfficeWithdraw(ctx context.Context, id int64) error {
 	return c.do(ctx, "DELETE", "/boxoffice/requests/"+strconv.FormatInt(id, 10), nil, nil, nil)
 }
+
+// Box Office's clean-up rules go by what has been watched, which only
+// Matinee knows. Its status says "watched" when it takes the report.
+
+// BoxOfficeWatched is how much one title has been watched, by everyone
+// together: counts of people, never who.
+type BoxOfficeWatched struct {
+	TMDBID     int        `json:"tmdbId"`
+	LastPlayed *time.Time `json:"lastPlayed,omitempty"`
+	Viewers    int        `json:"viewers"`
+	FinishedBy int        `json:"finishedBy"`
+	FinishedAt *time.Time `json:"finishedAt,omitempty"`
+}
+
+// BoxOfficeReportWatched tells Box Office what has been watched of this
+// app's kind of title (movies as Radarr, shows as Sonarr), and how many
+// people there are. Each report replaces the last.
+func (c *Client) BoxOfficeReportWatched(ctx context.Context, people int, titles []BoxOfficeWatched) error {
+	if titles == nil {
+		titles = []BoxOfficeWatched{}
+	}
+	return c.do(ctx, "PUT", "/boxoffice/watched", nil, map[string]any{"people": people, "titles": titles}, nil)
+}

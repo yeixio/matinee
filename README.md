@@ -216,6 +216,8 @@ The [guide](https://matinee.yeix.io/docs/getting-started/posters-and-details/) h
 
 That one connection does what Radarr and Sonarr do below, such as requests and Coming soon. On top of that, people hear when what they asked for is found and when it's ready to watch, in the web player and the apps, and admins hear about failed and quarantined downloads. Moving in from Radarr and Sonarr in Box Office can switch Matinee over for you as its last step. The [guide](docs/guide/server/radarr-and-sonarr.md#box-office) has the details.
 
+So that Box Office can suggest watched titles to clear out, Matinee also tells it, for each movie and show, how many people have played it, how many have finished it, and when. It sends counts only, never who watched what, and it sends nothing to Radarr or Sonarr. Matinee itself never deletes anything because of this.
+
 ### Radarr and Sonarr
 
 If you use [Radarr](https://radarr.video/) for movies or [Sonarr](https://sonarr.tv/) for TV, connect them under **Settings → Radarr and Sonarr**:
