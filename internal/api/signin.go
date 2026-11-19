@@ -3,6 +3,7 @@ package api
 import (
 	"net"
 	"net/http"
+	"slices"
 	"strconv"
 	"strings"
 	"sync"
@@ -18,7 +19,9 @@ import (
 // Requests from home neither count nor get turned away, so a household can
 // always sign in at home, even while someone outside is guessing at an
 // account; a right password there clears the username too. Behind a proxy
-// the address is the proxy's, so only the username counts there.
+// the address is the proxy's, so only the username counts there. The remote
+// access port is the server's own, with no proxy in front, so the address
+// always counts there, whatever headers the request carries.
 
 const (
 	signInFreeTries     = 5  // per username
@@ -28,6 +31,10 @@ const (
 	// signInForget is how long after its last wrong password a username or
 	// address starts over.
 	signInForget = 24 * time.Hour
+	// signInMaxKeys is the most usernames and addresses kept at once. Anyone
+	// can try any username, real or not, so without a limit the list grows
+	// for as long as someone keeps making names up.
+	signInMaxKeys = 10_000
 )
 
 type signInGuard struct {
@@ -50,7 +57,10 @@ func (s *Server) signInKeys(r *http.Request, username string) (keys []string, ho
 	if s.fromHome(r) && !crossOrigin(r) {
 		return keys, true
 	}
-	if direct(r) {
+	// A request to the remote access port came straight from its sender:
+	// headers that say otherwise are the sender's own, and don't get it out
+	// of the address's limit.
+	if direct(r) || r.Context().Value(remoteKey{}) != nil {
 		if host, _, err := net.SplitHostPort(r.RemoteAddr); err == nil {
 			keys = append(keys, "addr:"+host)
 		}
@@ -104,12 +114,8 @@ func (g *signInGuard) record(keys []string, ok bool) {
 	if g.keys == nil {
 		g.keys = map[string]*signInFails{}
 	}
-	if len(g.keys) > 10_000 {
-		for k, f := range g.keys {
-			if now.Sub(f.last) > signInForget {
-				delete(g.keys, k)
-			}
-		}
+	if len(g.keys) >= signInMaxKeys {
+		g.makeRoom(now)
 	}
 	for _, k := range keys {
 		f := g.keys[k]
@@ -130,6 +136,29 @@ func (g *signInGuard) record(keys []string, ok bool) {
 			}
 			f.until = now.Add(lock)
 		}
+	}
+}
+
+// makeRoom forgets the usernames and addresses that have started over, and
+// when that isn't enough, the ones that went longest without a wrong
+// password, until a tenth of the list is free.
+func (g *signInGuard) makeRoom(now time.Time) {
+	for k, f := range g.keys {
+		if now.Sub(f.last) > signInForget {
+			delete(g.keys, k)
+		}
+	}
+	over := len(g.keys) - signInMaxKeys*9/10
+	if over <= 0 {
+		return
+	}
+	oldest := make([]string, 0, len(g.keys))
+	for k := range g.keys {
+		oldest = append(oldest, k)
+	}
+	slices.SortFunc(oldest, func(a, b string) int { return g.keys[a].last.Compare(g.keys[b].last) })
+	for _, k := range oldest[:over] {
+		delete(g.keys, k)
 	}
 }
 

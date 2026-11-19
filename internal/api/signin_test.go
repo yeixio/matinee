@@ -2,7 +2,9 @@ package api
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -113,5 +115,59 @@ func TestSignInLimit(t *testing.T) {
 	}
 	if w := try(outside, "correct horse"); w.Code != http.StatusOK {
 		t.Fatalf("wrong passwords at home locked the account outside: %d", w.Code)
+	}
+}
+
+// Made-up usernames can't grow the list without end, and the ones tried
+// most recently are the ones kept.
+func TestSignInGuardKeepsAFixedNumber(t *testing.T) {
+	now := time.Unix(1_000_000, 0)
+	g := &signInGuard{now: func() time.Time { return now }}
+	for i := range signInMaxKeys * 3 {
+		now = now.Add(time.Second)
+		g.record([]string{fmt.Sprintf("user:made-up-%d", i)}, false)
+	}
+	if len(g.keys) > signInMaxKeys {
+		t.Fatalf("kept %d usernames, want at most %d", len(g.keys), signInMaxKeys)
+	}
+	if g.keys[fmt.Sprintf("user:made-up-%d", signInMaxKeys*3-1)] == nil {
+		t.Fatal("forgot the username tried last")
+	}
+	if g.keys["user:made-up-0"] != nil {
+		t.Fatal("kept the username tried first")
+	}
+}
+
+// On the remote access port nothing sits between the sender and the server,
+// so a forwarding header doesn't get a request out of its address's limit.
+func TestSignInLimitOnTheRemotePortIgnoresForwardingHeaders(t *testing.T) {
+	c, _ := newTestServer(t)
+	c.do("POST", "/api/v1/setup", credentials{"admin", "correct horse"}, nil)
+
+	try := func(username string, remote bool) int {
+		body, _ := json.Marshal(credentials{username, "wrong password"})
+		r := httptest.NewRequest("POST", "/api/v1/auth/login", bytes.NewReader(body))
+		r.RemoteAddr = "203.0.113.9:4000"
+		r.Header.Set("X-Forwarded-For", "198.51.100.4")
+		if remote {
+			r = r.WithContext(context.WithValue(r.Context(), remoteKey{}, true))
+		}
+		w := httptest.NewRecorder()
+		c.srv.Handler().ServeHTTP(w, r)
+		return w.Code
+	}
+
+	// One password across many usernames, from one address.
+	for i := range signInFreeAddrTries {
+		if code := try(fmt.Sprintf("someone-%d", i), true); code != http.StatusUnauthorized {
+			t.Fatalf("try %d on the remote port: %d", i+1, code)
+		}
+	}
+	if code := try("someone-else", true); code != http.StatusTooManyRequests {
+		t.Fatalf("the address never locked on the remote port: %d", code)
+	}
+	// Behind a real proxy the address is the proxy's, and still doesn't count.
+	if code := try("another-name", false); code != http.StatusUnauthorized {
+		t.Fatalf("through a proxy: %d", code)
 	}
 }
