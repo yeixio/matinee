@@ -1751,6 +1751,35 @@
     "noEmulator": "Matinee nu poate rula încă acest joc: pe acest server nu există un emulator pentru el.",
     "addEmulator": "Adaugă un emulator în Setări",
     "emulatorGuide": "Cum îți adaugi propriul emulator",
-    "askAdminEmulator": "Un administrator poate adăuga un emulator pentru el."
+    "askAdminEmulator": "Un administrator poate adăuga un emulator pentru el.",
+    "ps": {
+      "title": "PlayStation",
+      "hint": "Joacă pe PS5 sau PS4 de aici, transmis prin rețeaua de acasă cu Remote Play. Nu este creat sau aprobat de Sony.",
+      "signInTitle": "Conectează-te la PlayStation",
+      "signInHint": "Asocierea are nevoie de ID-ul contului PSN. Conectează-te pe pagina PlayStation; când arată \"redirect\", copiază adresa din bara de adrese și lipește-o aici. Matinee păstrează doar ID-ul.",
+      "openSignIn": "Deschide conectarea PlayStation",
+      "redirectPlaceholder": "Lipește adresa aici",
+      "useAccountId": "Am ID-ul contului",
+      "useSignIn": "Mai bine mă conectez",
+      "accountIdHint": "Lipește ID-ul contului PSN: 12 litere și cifre care se termină cu =, așa cum îl arată alte aplicații Remote Play.",
+      "accountIdPlaceholder": "ID cont",
+      "pairTitle": "Asociază o consolă",
+      "pairHintPS5": "Pe PS5, deschide Setări → Sistem → Redare la distanță → Asociere dispozitiv și introdu codul afișat. Adresa IP e la Setări → Rețea → Starea conexiunii.",
+      "pairHintPS4": "Pe PS4, deschide Setări → Setări conexiune redare la distanță → Adăugare dispozitiv și introdu codul afișat. Adresa IP e la Setări → Rețea → Vizualizare stare conexiune.",
+      "address": "Adresă IP",
+      "console": "Consolă",
+      "code": "Cod",
+      "pair": "Asociază",
+      "pairing": "Se asociază…",
+      "stateReady": "Pornită",
+      "stateStandby": "Mod repaus",
+      "stateOff": "Nu răspunde",
+      "wake": "Trezește",
+      "waking": "Se trezește…",
+      "remove": "Elimină {{name}}",
+      "signOut": "Deconectează-te de la PlayStation",
+      "starting": "Se trezește PlayStation și pornește Remote Play. Poate dura un minut.",
+      "buttons": "Select este touchpadul, Select și Start împreună butonul PS"
+    }
   }
 }

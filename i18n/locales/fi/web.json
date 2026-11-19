@@ -1737,6 +1737,35 @@
     "noEmulator": "Matinee ei vielä osaa pelata tätä peliä: tällä palvelimella ei ole sille emulaattoria.",
     "addEmulator": "Lisää emulaattori asetuksissa",
     "emulatorGuide": "Näin lisäät oman emulaattorin",
-    "askAdminEmulator": "Ylläpitäjä voi lisätä sille emulaattorin."
+    "askAdminEmulator": "Ylläpitäjä voi lisätä sille emulaattorin.",
+    "ps": {
+      "title": "PlayStation",
+      "hint": "Pelaa PS5:tä tai PS4:ää täältä, kotiverkon yli suoratoistettuna Remote Playn avulla. Ei Sonyn tekemä tai hyväksymä.",
+      "signInTitle": "Kirjaudu PlayStationiin",
+      "signInHint": "Laiteparin muodostus tarvitsee PSN-tilisi tunnuksen. Kirjaudu PlayStationin sivulla; kun siinä lukee \"redirect\", kopioi osoite osoiteriviltä ja liitä se tähän. Matinee säilyttää vain tunnuksen.",
+      "openSignIn": "Avaa PlayStation-kirjautuminen",
+      "redirectPlaceholder": "Liitä osoite tähän",
+      "useAccountId": "Minulla on tilitunnukseni",
+      "useSignIn": "Kirjaudu sen sijaan",
+      "accountIdHint": "Liitä PSN-tilisi tunnus: 12 kirjainta ja numeroa, jotka päättyvät =-merkkiin, kuten muut Remote Play -sovellukset sen näyttävät.",
+      "accountIdPlaceholder": "Tilitunnus",
+      "pairTitle": "Muodosta pari konsolin kanssa",
+      "pairHintPS5": "Avaa PS5:llä Asetukset → Järjestelmä → Etäpeli → Muodosta laitepari ja anna näkyvä koodi. IP-osoite löytyy kohdasta Asetukset → Verkko → Yhteyden tila.",
+      "pairHintPS4": "Avaa PS4:llä Asetukset → Etäpeliyhteyden asetukset → Lisää laite ja anna näkyvä koodi. IP-osoite löytyy kohdasta Asetukset → Verkko → Näytä yhteyden tila.",
+      "address": "IP-osoite",
+      "console": "Konsoli",
+      "code": "Koodi",
+      "pair": "Muodosta pari",
+      "pairing": "Muodostetaan paria…",
+      "stateReady": "Päällä",
+      "stateStandby": "Lepotila",
+      "stateOff": "Ei vastaa",
+      "wake": "Herätä",
+      "waking": "Herätetään…",
+      "remove": "Poista {{name}}",
+      "signOut": "Kirjaudu ulos PlayStationista",
+      "starting": "Herätetään PlayStation ja käynnistetään Remote Play. Tämä voi kestää minuutin.",
+      "buttons": "Select on kosketuslevy, Select ja Start yhdessä PS-painike"
+    }
   }
 }

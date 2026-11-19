@@ -1737,6 +1737,35 @@
     "noEmulator": "Matinee kan deze game nog niet spelen: er is geen emulator voor op deze server.",
     "addEmulator": "Voeg een emulator toe in Instellingen",
     "emulatorGuide": "Zo voeg je je eigen emulator toe",
-    "askAdminEmulator": "Een beheerder kan er een emulator voor toevoegen."
+    "askAdminEmulator": "Een beheerder kan er een emulator voor toevoegen.",
+    "ps": {
+      "title": "PlayStation",
+      "hint": "Speel je PS5 of PS4 vanaf hier, gestreamd over je thuisnetwerk met Remote Play. Niet gemaakt of goedgekeurd door Sony.",
+      "signInTitle": "Inloggen bij PlayStation",
+      "signInHint": "Voor koppelen is je PSN-account-ID nodig. Log in op de pagina van PlayStation; als daar \"redirect\" staat, kopieer je het adres uit de adresbalk en plak je het hier. Matinee bewaart alleen de ID.",
+      "openSignIn": "PlayStation-login openen",
+      "redirectPlaceholder": "Plak het adres hier",
+      "useAccountId": "Ik heb mijn account-ID",
+      "useSignIn": "Liever inloggen",
+      "accountIdHint": "Plak je PSN-account-ID: 12 letters en cijfers die op = eindigen, zoals andere Remote Play-apps het tonen.",
+      "accountIdPlaceholder": "Account-ID",
+      "pairTitle": "Een console koppelen",
+      "pairHintPS5": "Open op de PS5 Instellingen → Systeem → Remote Play → Apparaat koppelen en voer de getoonde code in. Het IP-adres staat onder Instellingen → Netwerk → Verbindingsstatus.",
+      "pairHintPS4": "Open op de PS4 Instellingen → Instellingen voor Remote Play-verbinding → Apparaat toevoegen en voer de getoonde code in. Het IP-adres staat onder Instellingen → Netwerk → Verbindingsstatus bekijken.",
+      "address": "IP-adres",
+      "console": "Console",
+      "code": "Code",
+      "pair": "Koppelen",
+      "pairing": "Koppelen…",
+      "stateReady": "Aan",
+      "stateStandby": "Rustmodus",
+      "stateOff": "Antwoordt niet",
+      "wake": "Wekken",
+      "waking": "Wekken…",
+      "remove": "{{name}} verwijderen",
+      "signOut": "Uitloggen bij PlayStation",
+      "starting": "De PlayStation wordt gewekt en Remote Play gestart. Dat kan een minuut duren.",
+      "buttons": "Select is het touchpad, Select en Start samen de PS-knop"
+    }
   }
 }

@@ -38,6 +38,7 @@ import (
 	"github.com/yeixio/matinee/internal/plugin"
 	"github.com/yeixio/matinee/internal/podcast"
 	"github.com/yeixio/matinee/internal/probe"
+	"github.com/yeixio/matinee/internal/psremote"
 	"github.com/yeixio/matinee/internal/radio"
 	"github.com/yeixio/matinee/internal/remote"
 	"github.com/yeixio/matinee/internal/scan"
@@ -116,6 +117,9 @@ type Server struct {
 	Games *gamestream.Manager
 	// GameHost plays PC games (internal/gamehost), when one is set up.
 	GameHost *gamehost.Client
+	// PlayStation plays a PlayStation on the home network (see
+	// playstation.go); nil when this server can't.
+	PlayStation *psremote.Bridge
 
 	// Remote keeps remote access going (see remote.go); nil when this
 	// server doesn't offer it.
@@ -558,7 +562,7 @@ func (s *Server) Handler() http.Handler {
 		w.Write([]byte("ok"))
 	})
 
-	for _, rt := range append(append(s.routes(), s.liveRoutes()...), s.gameRoutes()...) {
+	for _, rt := range append(append(append(s.routes(), s.liveRoutes()...), s.gameRoutes()...), s.playStationRoutes()...) {
 		var h http.Handler = rt.handler
 		if rt.access != public {
 			h = s.requireUser(rt.handler, rt.access)

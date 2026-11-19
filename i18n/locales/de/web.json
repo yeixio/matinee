@@ -1737,6 +1737,35 @@
     "noEmulator": "Matinee kann dieses Spiel noch nicht spielen: Auf diesem Server gibt es keinen Emulator dafür.",
     "addEmulator": "Emulator in den Einstellungen hinzufügen",
     "emulatorGuide": "So fügst du einen eigenen Emulator hinzu",
-    "askAdminEmulator": "Ein Admin kann einen Emulator dafür hinzufügen."
+    "askAdminEmulator": "Ein Admin kann einen Emulator dafür hinzufügen.",
+    "ps": {
+      "title": "PlayStation",
+      "hint": "Spiele deine PS5 oder PS4 von hier aus, per Remote Play über dein Heimnetz gestreamt. Nicht von Sony erstellt oder unterstützt.",
+      "signInTitle": "Bei PlayStation anmelden",
+      "signInHint": "Zum Koppeln wird deine PSN-Konto-ID gebraucht. Melde dich auf der PlayStation-Seite an; wenn dort „redirect“ steht, kopiere die Adresse aus der Adressleiste und füge sie hier ein. Matinee speichert nur die ID.",
+      "openSignIn": "PlayStation-Anmeldung öffnen",
+      "redirectPlaceholder": "Adresse hier einfügen",
+      "useAccountId": "Ich habe meine Konto-ID",
+      "useSignIn": "Stattdessen anmelden",
+      "accountIdHint": "Füge deine PSN-Konto-ID ein: 12 Buchstaben und Ziffern, die auf = enden, wie andere Remote-Play-Apps sie zeigen.",
+      "accountIdPlaceholder": "Konto-ID",
+      "pairTitle": "Konsole koppeln",
+      "pairHintPS5": "Öffne auf der PS5 Einstellungen → System → Remote Play → Gerät koppeln und gib den angezeigten Code ein. Ihre IP-Adresse steht unter Einstellungen → Netzwerk → Verbindungsstatus.",
+      "pairHintPS4": "Öffne auf der PS4 Einstellungen → Remote Play-Verbindungseinstellungen → Gerät hinzufügen und gib den angezeigten Code ein. Ihre IP-Adresse steht unter Einstellungen → Netzwerk → Verbindungsstatus anzeigen.",
+      "address": "IP-Adresse",
+      "console": "Konsole",
+      "code": "Code",
+      "pair": "Koppeln",
+      "pairing": "Wird gekoppelt…",
+      "stateReady": "An",
+      "stateStandby": "Ruhemodus",
+      "stateOff": "Antwortet nicht",
+      "wake": "Aufwecken",
+      "waking": "Wird aufgeweckt…",
+      "remove": "{{name}} entfernen",
+      "signOut": "Von PlayStation abmelden",
+      "starting": "Die PlayStation wird aufgeweckt und Remote Play gestartet. Das kann eine Minute dauern.",
+      "buttons": "Select ist das Touchpad, Select und Start zusammen die PS-Taste"
+    }
   }
 }

@@ -1737,6 +1737,35 @@
     "noEmulator": "A Matinee még nem tudja futtatni ezt a játékot: ezen a szerveren nincs hozzá emulátor.",
     "addEmulator": "Emulátor hozzáadása a Beállításokban",
     "emulatorGuide": "Így adhatsz hozzá saját emulátort",
-    "askAdminEmulator": "Egy rendszergazda hozzáadhat hozzá emulátort."
+    "askAdminEmulator": "Egy rendszergazda hozzáadhat hozzá emulátort.",
+    "ps": {
+      "title": "PlayStation",
+      "hint": "Játssz a PS5-ön vagy PS4-en innen, az otthoni hálózaton át streamelve a Remote Play segítségével. Nem a Sony készítette vagy támogatja.",
+      "signInTitle": "Bejelentkezés a PlayStationbe",
+      "signInHint": "A párosításhoz a PSN-fiókazonosítód kell. Jelentkezz be a PlayStation oldalán; amikor azt mutatja, hogy \"redirect\", másold ki a címet a címsorból, és illeszd be ide. A Matinee csak az azonosítót tartja meg.",
+      "openSignIn": "PlayStation-bejelentkezés megnyitása",
+      "redirectPlaceholder": "Illeszd be ide a címet",
+      "useAccountId": "Megvan a fiókazonosítóm",
+      "useSignIn": "Inkább bejelentkezem",
+      "accountIdHint": "Illeszd be a PSN-fiókazonosítód: 12 betű és szám, ami =-re végződik, ahogy más Remote Play-alkalmazások mutatják.",
+      "accountIdPlaceholder": "Fiókazonosító",
+      "pairTitle": "Konzol párosítása",
+      "pairHintPS5": "A PS5-ön nyisd meg a Beállítások → Rendszer → Távoli lejátszás → Eszköz párosítása menüt, és add meg a megjelenő kódot. Az IP-cím a Beállítások → Hálózat → Kapcsolat állapota alatt van.",
+      "pairHintPS4": "A PS4-en nyisd meg a Beállítások → Távoli lejátszás kapcsolatbeállításai → Eszköz hozzáadása menüt, és add meg a megjelenő kódot. Az IP-cím a Beállítások → Hálózat → Kapcsolat állapotának megtekintése alatt van.",
+      "address": "IP-cím",
+      "console": "Konzol",
+      "code": "Kód",
+      "pair": "Párosítás",
+      "pairing": "Párosítás…",
+      "stateReady": "Bekapcsolva",
+      "stateStandby": "Nyugalmi mód",
+      "stateOff": "Nem válaszol",
+      "wake": "Felébresztés",
+      "waking": "Ébresztés…",
+      "remove": "{{name}} eltávolítása",
+      "signOut": "Kijelentkezés a PlayStationből",
+      "starting": "A PlayStation felébresztése és a Remote Play indítása. Ez egy percig is eltarthat.",
+      "buttons": "A Select az érintőpanel, a Select és a Start együtt a PS gomb"
+    }
   }
 }

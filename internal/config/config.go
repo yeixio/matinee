@@ -65,6 +65,9 @@ type Config struct {
 	// GameHost is a game host's address (cmd/matinee-gamehost), where PC
 	// games are played, and GameHostToken what it asks for.
 	GameHost, GameHostToken string
+	// PSRemote is matinee-psremote (games/psremote), which plays a
+	// PlayStation on the home network; "" when this install hasn't it.
+	PSRemote string
 }
 
 // GameSaveDir has games' saves, a folder per person.
@@ -144,6 +147,7 @@ func Load(args []string) (Config, error) {
 	gamesIPs := fs.String("games-public-ip", env("MATINEE_GAMES_PUBLIC_IP", ""), "addresses players reach the games port at, comma separated, when the server can't see its own (behind NAT)")
 	fs.StringVar(&c.GameHost, "game-host", env("MATINEE_GAME_HOST", ""), "address of a game host that plays PC games, such as http://steam:7174 (preview)")
 	fs.StringVar(&c.GameHostToken, "game-host-token", env("MATINEE_GAME_HOST_TOKEN", ""), "the game host's token")
+	fs.StringVar(&c.PSRemote, "psremote", env("MATINEE_PSREMOTE", defaultPSRemote()), "path of matinee-psremote, which plays a PlayStation on the home network; off to not offer it")
 	interval := fs.String("scan-interval", env("MATINEE_SCAN_INTERVAL", "6h"), "how often every library is rescanned in full until an admin picks in Settings, 0 to disable")
 	drainDelay := fs.String("drain-delay", env("MATINEE_DRAIN_DELAY", "0s"), "on shutdown, how long to keep serving after telling players the server is restarting (the Helm chart uses 5s)")
 	shutdownTimeout := fs.String("shutdown-timeout", env("MATINEE_SHUTDOWN_TIMEOUT", "10s"), "on shutdown, how long requests in flight get to finish")
@@ -215,6 +219,19 @@ func defaultGamesDir() string {
 		}
 		if _, err := os.Stat(GameRunner(d)); err == nil {
 			return d
+		}
+	}
+	return ""
+}
+
+// defaultPSRemote is where the image puts matinee-psremote.
+func defaultPSRemote() string {
+	for _, p := range []string{"/usr/lib/matinee/psremote/matinee-psremote", exeDir("matinee-psremote")} {
+		if p == "" {
+			continue
+		}
+		if st, err := os.Stat(p); err == nil && !st.IsDir() {
+			return p
 		}
 	}
 	return ""

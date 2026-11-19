@@ -1254,6 +1254,87 @@ paths:
       responses:
         "200": { description: The desktop's page or file. }
         "404": { description: No game host, or it has no desktop. }
+  /games/playstation:
+    get:
+      summary: PlayStation Remote Play, the paired consoles and whether each is on (admins only, preview)
+      description: >-
+        Matinee plays a PS4 or PS5 on the home network with Remote Play (matinee-psremote, built on chiaki-ng)
+        and streams it like any game: start it with POST /games/play and playstation set to a console's id.
+        The console's stream stays on the home network. Not made or endorsed by Sony.
+      responses:
+        "200":
+          description: The setup.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  available: { type: boolean, description: Whether this server can play a PlayStation. }
+                  signedIn: { type: boolean, description: Whether the PSN account ID pairing needs is saved. }
+                  signInUrl: { type: string, description: "Sony's sign-in page, which ends on an address to send to PUT /games/playstation/account." }
+                  consoles:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id: { type: string }
+                        name: { type: string }
+                        host: { type: string, description: Its IP address. }
+                        ps5: { type: boolean }
+                        state: { type: string, enum: [ready, standby, "off"], description: "On, in rest mode, or not answering." }
+                        app: { type: string, description: What it's running, when on. }
+  /games/playstation/account:
+    put:
+      summary: Save the PSN account ID that pairing needs (admins only, preview)
+      description: Send the address Sony's sign-in page ended on (redirect), or the account ID itself (accountId, base64). Only the ID is kept.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                redirect: { type: string }
+                accountId: { type: string }
+      responses:
+        "204": { description: Saved. }
+        "400": { description: "No sign-in code in the address, a code Sony didn't take, or not an account ID." }
+    delete:
+      summary: Forget the account and every paired console (admins only)
+      responses:
+        "204": { description: Forgotten. }
+  /games/playstation/consoles:
+    post:
+      summary: Pair with a PlayStation on the home network (admins only, preview)
+      description: >-
+        With the 8-digit code the console shows under Settings, System, Remote Play, Pair Device (PS5), or
+        Settings, Remote Play Connection Settings, Add Device (PS4). Pairing the same console again replaces it.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                host: { type: string, description: "The console's IP address on the home network." }
+                ps5: { type: boolean }
+                pin: { type: string, description: The 8-digit code. }
+      responses:
+        "200": { description: Paired; the console, as GET /games/playstation lists it. }
+        "400": { description: "Not a home network address, not signed in, or the console didn't take the code." }
+  /games/playstation/consoles/{id}:
+    delete:
+      summary: Forget a paired console (admins only)
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        "204": { description: Forgotten. }
+  /games/playstation/consoles/{id}/wake:
+    post:
+      summary: Wake a paired console from rest mode (admins only, preview)
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        "204": { description: Sent. A PS5 takes about 20 seconds to come on. }
+        "404": { description: No such console. }
   /games/play:
     post:
       summary: Start playing a game on the server, streamed over WebRTC (admins only)
@@ -1274,6 +1355,7 @@ paths:
                 lagTest: { type: boolean, description: Play the built-in lag test instead of a game. }
                 hostApp: { type: integer, description: "Play this PC game on the game host instead (preview), by its Steam app id; see GET /games/host." }
                 steam: { type: boolean, description: "Play Steam itself on the game host, full screen in Big Picture, where the player picks games with the controller (preview)." }
+                playstation: { type: string, description: "Play a paired PlayStation instead (preview), by its id; see GET /games/playstation. It's woken first if it's resting, so this can take a minute. Select presses the touchpad and Select with Start the PS button." }
                 offer: { type: string, description: The player's SDP offer. }
                 direct: { type: boolean, description: "With no offer: the WebSocket stream instead of WebRTC (see POST /items/{id}/game)." }
       responses:

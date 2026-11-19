@@ -1558,6 +1558,23 @@ export interface GameHostGame {
   size?: number
 }
 
+/** A PlayStation paired for Remote Play, and whether it's on. */
+export interface PlayStationConsole {
+  id: string
+  name: string
+  host: string
+  ps5: boolean
+  state: 'ready' | 'standby' | 'off'
+  app?: string
+}
+
+export interface PlayStationSetup {
+  available: boolean
+  signedIn?: boolean
+  signInUrl?: string
+  consoles: PlayStationConsole[]
+}
+
 export interface GameFolder {
   path: string
   parent: string
@@ -1573,7 +1590,13 @@ export const api = {
   gameStreaming: () => request<GameStreaming>('GET', '/api/v1/games/streaming'),
   gameFiles: (path?: string) => request<GameFolder>('GET', `/api/v1/games/files${path ? `?path=${encodeURIComponent(path)}` : ''}`),
   gameHostGames: () => request<{ games: GameHostGame[] }>('GET', '/api/v1/games/host'),
-  playGame: (body: { path?: string; lagTest?: boolean; hostApp?: number; steam?: boolean; offer: string }) =>
+  playStation: () => request<PlayStationSetup>('GET', '/api/v1/games/playstation'),
+  setPlayStationAccount: (body: { redirect?: string; accountId?: string }) => request<void>('PUT', '/api/v1/games/playstation/account', body),
+  forgetPlayStationAccount: () => request<void>('DELETE', '/api/v1/games/playstation/account'),
+  pairPlayStation: (body: { host: string; ps5: boolean; pin: string }) => request<PlayStationConsole>('POST', '/api/v1/games/playstation/consoles', body),
+  removePlayStation: (id: string) => request<void>('DELETE', `/api/v1/games/playstation/consoles/${id}`),
+  wakePlayStation: (id: string) => request<void>('POST', `/api/v1/games/playstation/consoles/${id}/wake`),
+  playGame: (body: { path?: string; lagTest?: boolean; hostApp?: number; steam?: boolean; playstation?: string; offer: string }) =>
     request<{ id: string; answer: string; system: string; analog?: boolean; width: number; height: number; aspect: number; fps: number }>(
       'POST',
       '/api/v1/games/play',

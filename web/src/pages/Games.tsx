@@ -7,6 +7,7 @@ import { api } from '../api'
 import { Button } from '../components/ui'
 import { GamePlayer } from '../games/GamePlayer'
 import { PCGames } from '../games/PCGames'
+import { PlayStation } from '../games/PlayStation'
 
 /**
  * Playing games streamed from the server, first version: an admin picks a
@@ -54,6 +55,8 @@ export default function Games() {
       )}
 
       <PCGames />
+
+      <PlayStation />
 
       <section className="space-y-2">
         <h2 className="text-lg font-semibold">{t('games.pickGame')}</h2>

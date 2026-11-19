@@ -1737,6 +1737,35 @@
     "noEmulator": "Matinee bu oyunu henüz oynatamıyor: bu sunucuda onun için bir emülatör yok.",
     "addEmulator": "Ayarlar'dan emülatör ekle",
     "emulatorGuide": "Kendi emülatörünüzü nasıl eklersiniz",
-    "askAdminEmulator": "Bir yönetici bunun için emülatör ekleyebilir."
+    "askAdminEmulator": "Bir yönetici bunun için emülatör ekleyebilir.",
+    "ps": {
+      "title": "PlayStation",
+      "hint": "PS5 veya PS4'ünü buradan oyna; Remote Play ile ev ağın üzerinden yayınlanır. Sony tarafından yapılmamış veya onaylanmamıştır.",
+      "signInTitle": "PlayStation'a giriş yap",
+      "signInHint": "Eşleştirme için PSN hesap kimliğin gerekir. PlayStation sayfasında giriş yap; \"redirect\" yazdığında adres çubuğundaki adresi kopyala ve buraya yapıştır. Matinee yalnızca kimliği saklar.",
+      "openSignIn": "PlayStation girişini aç",
+      "redirectPlaceholder": "Adresi buraya yapıştır",
+      "useAccountId": "Hesap kimliğim var",
+      "useSignIn": "Bunun yerine giriş yap",
+      "accountIdHint": "PSN hesap kimliğini yapıştır: diğer Remote Play uygulamalarının gösterdiği gibi = ile biten 12 harf ve rakam.",
+      "accountIdPlaceholder": "Hesap kimliği",
+      "pairTitle": "Konsol eşleştir",
+      "pairHintPS5": "PS5'te Ayarlar → Sistem → Uzaktan Oynatma → Cihaz Eşleştir'i aç ve gösterilen kodu gir. IP adresi Ayarlar → Ağ → Bağlantı Durumu altında.",
+      "pairHintPS4": "PS4'te Ayarlar → Uzaktan Oynatma Bağlantı Ayarları → Cihaz Ekle'yi aç ve gösterilen kodu gir. IP adresi Ayarlar → Ağ → Bağlantı Durumunu Görüntüle altında.",
+      "address": "IP adresi",
+      "console": "Konsol",
+      "code": "Kod",
+      "pair": "Eşleştir",
+      "pairing": "Eşleştiriliyor…",
+      "stateReady": "Açık",
+      "stateStandby": "Dinlenme modu",
+      "stateOff": "Yanıt vermiyor",
+      "wake": "Uyandır",
+      "waking": "Uyandırılıyor…",
+      "remove": "{{name}} kaldır",
+      "signOut": "PlayStation'dan çıkış yap",
+      "starting": "PlayStation uyandırılıyor ve Remote Play başlatılıyor. Bu bir dakika sürebilir.",
+      "buttons": "Select dokunmatik yüzey, Select ve Start birlikte PS düğmesi"
+    }
   }
 }

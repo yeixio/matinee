@@ -1751,6 +1751,35 @@
     "noEmulator": "O Matinee ainda não roda este jogo: não há um emulador para ele neste servidor.",
     "addEmulator": "Adicionar um emulador nas Configurações",
     "emulatorGuide": "Como adicionar seu próprio emulador",
-    "askAdminEmulator": "Um administrador pode adicionar um emulador para ele."
+    "askAdminEmulator": "Um administrador pode adicionar um emulador para ele.",
+    "ps": {
+      "title": "PlayStation",
+      "hint": "Jogue no seu PS5 ou PS4 daqui, transmitido pela sua rede doméstica com o Remote Play. Não feito nem endossado pela Sony.",
+      "signInTitle": "Entrar na PlayStation",
+      "signInHint": "O pareamento precisa do ID da sua conta PSN. Entre na página da PlayStation; quando ela mostrar \"redirect\", copie o endereço da barra de endereços e cole aqui. O Matinee guarda só o ID.",
+      "openSignIn": "Abrir o login da PlayStation",
+      "redirectPlaceholder": "Cole o endereço aqui",
+      "useAccountId": "Tenho o ID da minha conta",
+      "useSignIn": "Entrar em vez disso",
+      "accountIdHint": "Cole o ID da sua conta PSN: 12 letras e números terminando em =, como outros apps de Remote Play mostram.",
+      "accountIdPlaceholder": "ID da conta",
+      "pairTitle": "Parear um console",
+      "pairHintPS5": "No PS5, abra Configurações → Sistema → Reprodução Remota → Parear dispositivo e digite o código exibido. O endereço IP fica em Configurações → Rede → Status da conexão.",
+      "pairHintPS4": "No PS4, abra Configurações → Configurações de conexão da Reprodução Remota → Adicionar dispositivo e digite o código exibido. O endereço IP fica em Configurações → Rede → Ver status da conexão.",
+      "address": "Endereço IP",
+      "console": "Console",
+      "code": "Código",
+      "pair": "Parear",
+      "pairing": "Pareando…",
+      "stateReady": "Ligado",
+      "stateStandby": "Modo de descanso",
+      "stateOff": "Não responde",
+      "wake": "Despertar",
+      "waking": "Despertando…",
+      "remove": "Remover {{name}}",
+      "signOut": "Sair da PlayStation",
+      "starting": "Despertando o PlayStation e iniciando o Remote Play. Pode levar um minuto.",
+      "buttons": "Select é o touchpad; Select e Start juntos, o botão PS"
+    }
   }
 }

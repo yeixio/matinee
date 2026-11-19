@@ -1793,6 +1793,35 @@
     "noEmulator": "لا يستطيع Matinee تشغيل هذه اللعبة بعد: لا يوجد محاكٍ لها على هذا الخادم.",
     "addEmulator": "أضف محاكيًا من الإعدادات",
     "emulatorGuide": "كيف تضيف محاكيًا خاصًا بك",
-    "askAdminEmulator": "يمكن للمسؤول إضافة محاكٍ لها."
+    "askAdminEmulator": "يمكن للمسؤول إضافة محاكٍ لها.",
+    "ps": {
+      "title": "PlayStation",
+      "hint": "العب على PS5 أو PS4 من هنا، ببث عبر شبكتك المنزلية باستخدام Remote Play. ليس من صنع Sony ولا بموافقتها.",
+      "signInTitle": "تسجيل الدخول إلى PlayStation",
+      "signInHint": "يحتاج الإقران إلى معرّف حساب PSN. سجّل الدخول في صفحة PlayStation؛ وعندما تعرض \"redirect\"، انسخ العنوان من شريط العنوان والصقه هنا. يحتفظ Matinee بالمعرّف فقط.",
+      "openSignIn": "فتح تسجيل الدخول إلى PlayStation",
+      "redirectPlaceholder": "الصق العنوان هنا",
+      "useAccountId": "لديّ معرّف الحساب",
+      "useSignIn": "تسجيل الدخول بدلًا من ذلك",
+      "accountIdHint": "الصق معرّف حساب PSN: ‏12 حرفًا ورقمًا تنتهي بـ =، كما تعرضه تطبيقات Remote Play الأخرى.",
+      "accountIdPlaceholder": "معرّف الحساب",
+      "pairTitle": "إقران جهاز",
+      "pairHintPS5": "على PS5، افتح الإعدادات ← النظام ← اللعب عن بُعد ← إقران جهاز، ثم أدخل الرمز المعروض. عنوان IP في الإعدادات ← الشبكة ← حالة الاتصال.",
+      "pairHintPS4": "على PS4، افتح الإعدادات ← إعدادات اتصال اللعب عن بُعد ← إضافة جهاز، ثم أدخل الرمز المعروض. عنوان IP في الإعدادات ← الشبكة ← عرض حالة الاتصال.",
+      "address": "عنوان IP",
+      "console": "الجهاز",
+      "code": "الرمز",
+      "pair": "إقران",
+      "pairing": "جارٍ الإقران…",
+      "stateReady": "يعمل",
+      "stateStandby": "وضع الراحة",
+      "stateOff": "لا يستجيب",
+      "wake": "إيقاظ",
+      "waking": "جارٍ الإيقاظ…",
+      "remove": "إزالة {{name}}",
+      "signOut": "تسجيل الخروج من PlayStation",
+      "starting": "جارٍ إيقاظ PlayStation وبدء Remote Play. قد يستغرق ذلك دقيقة.",
+      "buttons": "زر Select هو لوحة اللمس، وSelect مع Start معًا زر PS"
+    }
   }
 }

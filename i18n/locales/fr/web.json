@@ -1751,6 +1751,35 @@
     "noEmulator": "Matinee ne peut pas encore lancer ce jeu : ce serveur n'a pas d'émulateur pour lui.",
     "addEmulator": "Ajouter un émulateur dans les réglages",
     "emulatorGuide": "Comment ajouter votre propre émulateur",
-    "askAdminEmulator": "Un administrateur peut ajouter un émulateur pour lui."
+    "askAdminEmulator": "Un administrateur peut ajouter un émulateur pour lui.",
+    "ps": {
+      "title": "PlayStation",
+      "hint": "Jouez à votre PS5 ou PS4 d'ici, diffusée sur votre réseau domestique avec Remote Play. Ni conçu ni approuvé par Sony.",
+      "signInTitle": "Se connecter à PlayStation",
+      "signInHint": "L'appairage demande votre identifiant de compte PSN. Connectez-vous sur la page PlayStation ; quand elle affiche « redirect », copiez l'adresse de la barre d'adresse et collez-la ici. Matinee ne garde que l'identifiant.",
+      "openSignIn": "Ouvrir la connexion PlayStation",
+      "redirectPlaceholder": "Collez l'adresse ici",
+      "useAccountId": "J'ai mon identifiant de compte",
+      "useSignIn": "Me connecter plutôt",
+      "accountIdHint": "Collez votre identifiant de compte PSN : 12 lettres et chiffres finissant par =, tel que d'autres apps Remote Play l'affichent.",
+      "accountIdPlaceholder": "Identifiant de compte",
+      "pairTitle": "Appairer une console",
+      "pairHintPS5": "Sur la PS5, ouvrez Paramètres → Système → Lecture à distance → Associer un appareil, puis saisissez le code affiché. Son adresse IP se trouve dans Paramètres → Réseau → État de la connexion.",
+      "pairHintPS4": "Sur la PS4, ouvrez Paramètres → Paramètres de connexion de la Lecture à distance → Ajouter un appareil, puis saisissez le code affiché. Son adresse IP se trouve dans Paramètres → Réseau → Afficher l'état de la connexion.",
+      "address": "Adresse IP",
+      "console": "Console",
+      "code": "Code",
+      "pair": "Appairer",
+      "pairing": "Appairage…",
+      "stateReady": "Allumée",
+      "stateStandby": "Mode repos",
+      "stateOff": "Ne répond pas",
+      "wake": "Réveiller",
+      "waking": "Réveil…",
+      "remove": "Retirer {{name}}",
+      "signOut": "Se déconnecter de PlayStation",
+      "starting": "Réveil de la PlayStation et lancement de Remote Play. Cela peut prendre une minute.",
+      "buttons": "Select est le pavé tactile, Select et Start ensemble la touche PS"
+    }
   }
 }

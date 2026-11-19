@@ -1737,6 +1737,35 @@
     "noEmulator": "Matinee kan ikke spille dette spillet ennå: det finnes ingen emulator for det på denne serveren.",
     "addEmulator": "Legg til en emulator i Innstillinger",
     "emulatorGuide": "Slik legger du til din egen emulator",
-    "askAdminEmulator": "En administrator kan legge til en emulator for det."
+    "askAdminEmulator": "En administrator kan legge til en emulator for det.",
+    "ps": {
+      "title": "PlayStation",
+      "hint": "Spill PS5 eller PS4 herfra, strømmet over hjemmenettverket med Remote Play. Ikke laget eller godkjent av Sony.",
+      "signInTitle": "Logg inn på PlayStation",
+      "signInHint": "Sammenkoblingen trenger PSN-konto-ID-en din. Logg inn på PlayStation-siden; når den viser \"redirect\", kopierer du adressen fra adressefeltet og limer den inn her. Matinee lagrer bare ID-en.",
+      "openSignIn": "Åpne PlayStation-innlogging",
+      "redirectPlaceholder": "Lim inn adressen her",
+      "useAccountId": "Jeg har konto-ID-en min",
+      "useSignIn": "Logg inn i stedet",
+      "accountIdHint": "Lim inn PSN-konto-ID-en din: 12 bokstaver og tall som slutter med =, slik andre Remote Play-apper viser den.",
+      "accountIdPlaceholder": "Konto-ID",
+      "pairTitle": "Koble til en konsoll",
+      "pairHintPS5": "På PS5 åpner du Innstillinger → System → Fjernavspilling → Koble til enhet og skriver inn koden som vises. IP-adressen står under Innstillinger → Nettverk → Tilkoblingsstatus.",
+      "pairHintPS4": "På PS4 åpner du Innstillinger → Tilkoblingsinnstillinger for fjernavspilling → Legg til enhet og skriver inn koden som vises. IP-adressen står under Innstillinger → Nettverk → Vis tilkoblingsstatus.",
+      "address": "IP-adresse",
+      "console": "Konsoll",
+      "code": "Kode",
+      "pair": "Koble til",
+      "pairing": "Kobler til…",
+      "stateReady": "På",
+      "stateStandby": "Hvilemodus",
+      "stateOff": "Svarer ikke",
+      "wake": "Vekk",
+      "waking": "Vekker…",
+      "remove": "Fjern {{name}}",
+      "signOut": "Logg ut av PlayStation",
+      "starting": "Vekker PlayStation og starter Remote Play. Det kan ta et minutt.",
+      "buttons": "Select er styreflaten, Select og Start sammen PS-knappen"
+    }
   }
 }

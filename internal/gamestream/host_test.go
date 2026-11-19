@@ -10,10 +10,13 @@ import (
 	"os/exec"
 	"path/filepath"
 	"strings"
+	"sync"
+	"sync/atomic"
 	"testing"
 	"time"
 
 	"github.com/coder/websocket"
+	"github.com/pion/rtp"
 
 	"github.com/yeixio/matinee/internal/gamehost"
 )
@@ -91,4 +94,85 @@ func TestHostGame(t *testing.T) {
 		time.Sleep(100 * time.Millisecond)
 	}
 	t.Fatal("host still busy")
+}
+
+// fakeRemote sends a video packet every few milliseconds until closed.
+type fakeRemote struct {
+	keyframes, inputs atomic.Int32
+	closed            chan struct{}
+	once              sync.Once
+	seq               uint16
+}
+
+func (f *fakeRemote) Next() (RemotePacket, error) {
+	select {
+	case <-f.closed:
+		return RemotePacket{}, io.EOF
+	case <-time.After(5 * time.Millisecond):
+	}
+	f.seq++
+	return RemotePacket{Kind: gamehost.KindVideo, RTP: &rtp.Packet{Header: rtp.Header{Version: 2, SequenceNumber: f.seq}, Payload: []byte{0x65, 1}}}, nil
+}
+func (f *fakeRemote) Input([]byte) { f.inputs.Add(1) }
+func (f *fakeRemote) Keyframe()    { f.keyframes.Add(1) }
+func (f *fakeRemote) Close()       { f.once.Do(func() { close(f.closed) }) }
+
+// A game played elsewhere, such as a console, reaches the player as it
+// comes; it's asked for a keyframe when the player joins, gets the
+// player's buttons, and ends when the player leaves.
+func TestRemoteGame(t *testing.T) {
+	m, err := NewManager(Config{}, slog.New(slog.NewTextHandler(io.Discard, nil)))
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer m.Close()
+	ctx, cancel := context.WithTimeout(context.Background(), 20*time.Second)
+	defer cancel()
+	f := &fakeRemote{closed: make(chan struct{})}
+	start := func(context.Context) (Remote, Info, error) {
+		return f, Info{Width: 1920, Height: 1080, FPS: 60}, nil
+	}
+	s, _, err := m.Start(ctx, Game{Remote: start, Owner: "1"}, "")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if s.Info.Width != 1920 || s.Info.SampleRate != 48000 {
+		t.Fatalf("info %+v", s.Info)
+	}
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		conn, err := websocket.Accept(w, r, nil)
+		if err != nil {
+			return
+		}
+		defer conn.CloseNow()
+		s.ServeDirect(r.Context(), conn)
+	}))
+	defer srv.Close()
+	conn, _, err := websocket.Dial(ctx, "ws"+strings.TrimPrefix(srv.URL, "http"), nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer conn.CloseNow()
+	conn.Write(ctx, websocket.MessageBinary, []byte{1, 0, 1, 0})
+	for n := 0; n < 5; {
+		typ, b, err := conn.Read(ctx)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if typ == websocket.MessageBinary && b[0] == directVideo {
+			n++
+		}
+	}
+	if f.keyframes.Load() != 1 {
+		t.Fatalf("keyframes asked: %d", f.keyframes.Load())
+	}
+	conn.Close(websocket.StatusNormalClosure, "")
+	select {
+	case <-f.closed:
+	case <-ctx.Done():
+		t.Fatal("still playing after the player left")
+	}
+	if f.inputs.Load() != 1 {
+		t.Fatalf("inputs: %d", f.inputs.Load())
+	}
 }

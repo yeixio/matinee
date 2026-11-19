@@ -248,3 +248,37 @@ If the game host's computer only runs Steam, such as a Steam container, set `MAT
 | --- | --- | --- |
 | `MATINEE_GAMEHOST_TV_MODE` | `false` | Keep Steam in Big Picture when a player leaves. |
 <!-- /since -->
+
+<!-- since: v0.2.10 -->
+## PlayStation Remote Play (preview)
+
+Matinee can also play your own PS5 or PS4 on your home network, with Remote Play, the way Sony's Remote Play app does. The game runs on the console. Matinee receives its picture and sound and streams them to your player like any other game, and your controller works as the console's controller. The stream goes from the console to the Matinee server to your player, all on your home network, and never through Sony's servers or anyone else's.
+
+It's built on [chiaki-ng](https://github.com/streetpea/chiaki-ng), the open-source Remote Play client, and isn't made or endorsed by Sony. The Matinee server image has it built in. Other installs don't have it yet.
+
+### Setting it up
+
+An admin does this once, from **Games** in the web app, under **PlayStation**:
+
+![PlayStation on the Games page: two paired consoles, one on and one in rest mode, and the form to pair another](../images/playstation.webp)
+
+1. **Sign in to PlayStation.** Pairing needs your PSN account ID, which Sony doesn't show anywhere. Choose **Open PlayStation sign-in**, sign in on Sony's own page, and when the page shows the word "redirect", copy the address from your browser's address bar and paste it into Matinee. Matinee asks Sony for your account ID once and keeps only the ID: never your password, and not the sign-in. If you already know your account ID (12 letters and numbers ending in `=`), choose **I have my account ID** and paste it instead.
+2. **Pair the console.** On a PS5, open **Settings → System → Remote Play** and turn on **Enable Remote Play**, then choose **Pair Device**: the console shows an 8-digit code. On a PS4, open **Settings → Remote Play Connection Settings**, turn on **Enable Remote Play**, then choose **Add Device**. In Matinee, enter the console's IP address (on the console under **Settings → Network → Connection Status**), pick PS5 or PS4, type the code and choose **Pair**.
+3. To have Matinee turn the console on from rest mode, set the console's rest mode to stay connected to the internet and to allow turning it on from the network (on a PS5: **Settings → System → Power Saving → Features Available in Rest Mode**).
+
+Give the console a fixed IP address in your router, so it keeps the address you paired it at. The Matinee server has to reach the console directly, so both need to be on the same home network. If Matinee runs in Kubernetes or Docker, the server reaches the console through its computer's network, as it reaches the internet.
+
+### Playing
+
+Choose **Play** next to the console. If it's in rest mode, Matinee wakes it first, which takes a PS5 about 20 seconds. The PlayStation is shown at up to 1080p and 60 frames a second (720p from a PS4 that isn't a Pro).
+
+Your controller's buttons are where they are on a PlayStation controller: the bottom face button is Cross, the right one Circle. **Select** presses the touchpad, and **Select** and **Start** together press the **PS** button. With a keyboard, the keys stand in for a controller as they do for console games.
+
+Only one person can play a console at a time, and not while Sony's own Remote Play app is using it. If the console asks for a login passcode, turn the passcode off for that user on the console. Closing the player ends Remote Play; the game keeps running on the console.
+
+For now PlayStation is played from the web app, by admins. The Matinee apps get it next ([matinee-apps#231](https://github.com/yeixio/matinee-apps/issues/231)).
+
+| Server setting | Default | What it's for |
+| --- | --- | --- |
+| `MATINEE_PSREMOTE` | `/usr/lib/matinee/psremote/matinee-psremote` in the image | Where the PlayStation bridge is; `off` to not offer PlayStation. |
+<!-- /since -->

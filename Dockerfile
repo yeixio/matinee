@@ -82,6 +82,20 @@ RUN v=$(sed -n 's/^version=//p' /src/games/mame.txt) && c=$(sed -n 's/^commit=//
          else echo "no MAME release mame-core-$v-$c yet"; fi ;; \
        esac
 
+# The PlayStation Remote Play bridge (games/psremote), built on chiaki-ng's
+# library for the target itself (under emulation for ARM; it's small). If
+# it can't be built for a platform, that image just can't play a
+# PlayStation.
+FROM debian:trixie AS psremote
+ARG TARGETARCH
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends ca-certificates git cmake make gcc g++ python3 python3-protobuf \
+       protobuf-compiler pkg-config libssl-dev libjson-c-dev libminiupnpc-dev libevent-dev zlib1g-dev \
+    && rm -rf /var/lib/apt/lists/*
+COPY games/psremote/ /src/psremote/
+RUN sh /src/psremote/build.sh /out/psremote \
+    || { echo "no PlayStation bridge for $TARGETARCH"; rm -rf /out/psremote; mkdir -p /out/psremote; }
+
 # Debian rather than Alpine: its FFmpeg is built with every hardware backend
 # Matinee uses on Linux, and glibc lets NVIDIA's container runtime add its
 # driver libraries. mesa-va-drivers runs VAAPI on AMD GPUs (and older Intel);
@@ -100,6 +114,7 @@ ENV NVIDIA_DRIVER_CAPABILITIES=compute,video,utility
 COPY --from=server /out/matinee /usr/local/bin/matinee
 COPY --from=server /out/matinee-gamehost /usr/local/bin/matinee-gamehost
 COPY --from=games /out/games /usr/lib/matinee/games
+COPY --from=psremote /out/psremote /usr/lib/matinee/psremote
 USER matinee
 # MATINEE_INSTALL tells Settings → Updates that a new image is the way to update.
 ENV MATINEE_DATA_DIR=/data MATINEE_ADDR=:7171 MATINEE_INSTALL=docker

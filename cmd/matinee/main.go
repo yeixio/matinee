@@ -48,6 +48,7 @@ import (
 	"github.com/yeixio/matinee/internal/plugin"
 	"github.com/yeixio/matinee/internal/podcast"
 	"github.com/yeixio/matinee/internal/probe"
+	"github.com/yeixio/matinee/internal/psremote"
 	"github.com/yeixio/matinee/internal/rating"
 	"github.com/yeixio/matinee/internal/remote"
 	"github.com/yeixio/matinee/internal/scan"
@@ -338,6 +339,9 @@ func run() (err error) {
 			apiServer.Games = games
 			if cfg.GameHost != "" {
 				apiServer.GameHost = &gamehost.Client{URL: cfg.GameHost, Token: cfg.GameHostToken}
+			}
+			if cfg.PSRemote != "" && cfg.PSRemote != "off" {
+				apiServer.PlayStation = &psremote.Bridge{Path: cfg.PSRemote}
 			}
 		}
 	}
