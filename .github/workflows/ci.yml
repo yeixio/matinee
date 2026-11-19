@@ -40,10 +40,11 @@ jobs:
         env:
           MATINEE_TEST_DATABASE_URL: ${{ matrix.database == 'postgres' && 'postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable' || '' }}
         # On a failure, the failing tests go in an annotation, which can be
-        # read where the job log can't.
+        # read where the job log can't. internal/api alone takes 7-10 minutes
+        # under -race, past go test's default 10 minute limit on a busy runner.
         run: |
           set -o pipefail
-          if ! go test -count=1 -race ./... 2>&1 | tee "$RUNNER_TEMP/test.log"; then
+          if ! go test -count=1 -race -timeout 20m ./... 2>&1 | tee "$RUNNER_TEMP/test.log"; then
             summary="$(grep -E -B2 -A12 '^\s*--- FAIL|^panic:|^FAIL|^WARNING: DATA RACE' "$RUNNER_TEMP/test.log" | head -n 60)"
             summary="${summary//'%'/'%25'}"
             summary="${summary//$'\r'/}"
