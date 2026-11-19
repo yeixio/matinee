@@ -38,7 +38,7 @@ ${CC:-gcc} -O2 -Wall -o "$out/matinee-psremote" "$here/psremote.c" \
 	-I"$src/lib/include" -I"$b/lib/include" \
 	"$b/lib/libchiaki.a" "$b/third-party/nanopb/libprotobuf-nanopb.a" \
 	"$b/third-party/libjerasure.a" "$b/third-party/libgf_complete.a" "$b/third-party/curl/lib/libcurl.a" \
-	-Wl,-Bstatic -ljson-c -lminiupnpc -levent -lssl -lcrypto -Wl,-Bdynamic -lz -lpthread -ldl
+	-Wl,-Bstatic -ljson-c -lminiupnpc -levent -lssl -lcrypto -lzstd -Wl,-Bdynamic -lz -lpthread -ldl
 strip "$out/matinee-psremote" 2>/dev/null || true
 
 mkdir -p "$out/licenses"
