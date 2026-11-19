@@ -136,6 +136,16 @@ A movie's or episode's page has **Other copies** for people who can ask for titl
 These are requests like any other, so **Who can add movies and shows** applies, and an admin can make them always wait for approval. Without Box Office, neither shows.
 <!-- /since -->
 
+## Leaving soon
+
+<!-- since: v0.2.10 -->
+[Box Office](https://github.com/yeixio/boxoffice) can clear out movies and shows that have been watched, with its [clean-up rules](https://github.com/yeixio/boxoffice/blob/main/docs/cleanup.md). So it knows what has been watched, Matinee tells it how many people have played and finished each title, and when. It sends counts only, never who watched what.
+
+Before anything is deleted, Box Office lists it as leaving soon, and Home gets a **Leaving soon** row with those titles, on the web and in the apps, soonest first. Playing a title takes it off Box Office's list, so it stays.
+
+Matinee never deletes anything itself. Without Box Office, or with no clean-up rules there, nothing is sent and there is no row.
+<!-- /since -->
+
 ## Changing quality
 
 On a movie or show's page, admins can change the quality profile Radarr or Sonarr uses for it, for example to upgrade a favorite to 4K.

@@ -72,7 +72,8 @@
     "scanning": "ライブラリをスキャンしています",
     "scanningHint": "新しいタイトルは見つかり次第ここに表示されます。",
     "removeNamed": "「{{title}}」を視聴を続けるから削除",
-    "remove": "視聴を続けるから削除"
+    "remove": "視聴を続けるから削除",
+    "leavingSoon": "まもなく削除"
   },
   "hero": {
     "upNext": "次はこちら",

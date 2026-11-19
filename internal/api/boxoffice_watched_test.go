@@ -104,3 +104,51 @@ func TestWatchedNotReportedElsewhere(t *testing.T) {
 		t.Fatal("a Box Office that doesn't take the report was told")
 	}
 }
+
+// Home gets a Leaving soon row from a Box Office that has the list: the
+// titles in the library, soonest first. Without one there's no row.
+func TestLeavingSoonRow(t *testing.T) {
+	e := pairingSetup(t)
+	ctx := context.Background()
+	type home struct {
+		Rows []struct {
+			ID    string
+			Title string
+			Items []store.Item
+		}
+	}
+	leaving := func() []store.Item {
+		t.Helper()
+		var h home
+		if code := e.ellen.do("GET", "/api/v1/home", nil, &h); code != 200 {
+			t.Fatalf("home: %d", code)
+		}
+		for _, r := range h.Rows {
+			if r.ID == "leavingSoon" {
+				return r.Items
+			}
+		}
+		return nil
+	}
+	if got := leaving(); got != nil {
+		t.Fatalf("a row without Box Office: %+v", got)
+	}
+	bo := arrtest.NewBoxOffice(t)
+	bo.Radarr.Leaving = []map[string]any{
+		{"tmdbId": 999, "title": "Not in the library", "leavesAt": "2026-12-01T00:00:00Z"},
+		{"tmdbId": 78, "title": "Blade Runner", "year": 1982, "leavesAt": "2026-12-03T00:00:00Z"},
+	}
+	bo.Sonarr.Leaving = []map[string]any{}
+	if code := e.admin.do("PUT", "/api/v1/integrations/boxoffice", boxOfficeConfig{URL: bo.URL, APIKey: bo.Key}, nil); code != 200 {
+		t.Fatalf("connect: %d", code)
+	}
+	e.srv.ReadBoxOffice(ctx)
+	got := leaving()
+	if len(got) != 1 || got[0].ID != e.movie {
+		t.Fatalf("row: %+v", got)
+	}
+	var row struct{ Items []store.Item }
+	if code := e.ellen.do("GET", "/api/v1/rows/leavingSoon", nil, &row); code != 200 || len(row.Items) != 1 {
+		t.Fatalf("row page: %d %+v", code, row)
+	}
+}

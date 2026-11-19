@@ -72,7 +72,8 @@
     "scanning": "Memindai perpustakaanmu",
     "scanningHint": "Judul baru muncul di sini begitu ditemukan.",
     "removeNamed": "Hapus {{title}} dari Lanjutkan menonton",
-    "remove": "Hapus dari Lanjutkan menonton"
+    "remove": "Hapus dari Lanjutkan menonton",
+    "leavingSoon": "Segera pergi"
   },
   "hero": {
     "upNext": "Selanjutnya",

@@ -72,7 +72,8 @@
     "scanning": "Prohledávám tvou knihovnu",
     "scanningHint": "Nové tituly se tu objeví, jakmile se najdou.",
     "removeNamed": "Odebrat {{title}} z Pokračovat ve sledování",
-    "remove": "Odebrat z Pokračovat ve sledování"
+    "remove": "Odebrat z Pokračovat ve sledování",
+    "leavingSoon": "Brzy odejde"
   },
   "hero": {
     "upNext": "Další na řadě",

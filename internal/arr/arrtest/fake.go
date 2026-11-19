@@ -58,9 +58,11 @@ type Fake struct {
 	// what has been watched: Watched is each report it got.
 	TakesWatched bool
 	Watched      []map[string]any
-	Requests     map[int64]map[string]any
-	RequestRule  string
-	nextID       int
+	// Leaving, when set, makes it a Box Office with a leaving soon list.
+	Leaving     []map[string]any
+	Requests    map[int64]map[string]any
+	RequestRule string
+	nextID      int
 }
 
 // Notify adds to Box Office's feed, numbering it.
@@ -170,6 +172,9 @@ func (f *Fake) serve(w http.ResponseWriter, r *http.Request) {
 		if f.TakesWatched {
 			features = append(features, "watched")
 		}
+		if f.Leaving != nil {
+			features = append(features, "leaving")
+		}
 		if f.Pairing {
 			features = append(features, "progress", "upgrades")
 			if f.Problems {
@@ -192,6 +197,8 @@ func (f *Fake) serve(w http.ResponseWriter, r *http.Request) {
 	case path == "/boxoffice/watched" && f.TakesWatched && r.Method == http.MethodPut:
 		f.Watched = append(f.Watched, body)
 		write(w, map[string]any{"kept": 0})
+	case path == "/boxoffice/leaving" && f.Leaving != nil:
+		write(w, map[string]any{"titles": f.Leaving})
 	case path == "/boxoffice/activity" && f.Pairing:
 		write(w, f.Activity)
 	case path == "/boxoffice/editions" && f.Pairing && r.Method == http.MethodGet:

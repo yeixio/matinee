@@ -72,7 +72,8 @@
     "scanning": "Kirjastoa skannataan",
     "scanningHint": "Uudet nimikkeet näkyvät tässä heti, kun ne löytyvät.",
     "removeNamed": "Poista {{title}} Jatka katsomista -rivistä",
-    "remove": "Poista Jatka katsomista -rivistä"
+    "remove": "Poista Jatka katsomista -rivistä",
+    "leavingSoon": "Lähdössä pian"
   },
   "hero": {
     "upNext": "Seuraavaksi",

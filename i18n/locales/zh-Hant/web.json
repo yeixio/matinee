@@ -72,7 +72,8 @@
     "scanning": "正在掃描你的媒體庫",
     "scanningHint": "新作品一找到就會顯示在這裡。",
     "removeNamed": "從繼續觀看中移除《{{title}}》",
-    "remove": "從繼續觀看中移除"
+    "remove": "從繼續觀看中移除",
+    "leavingSoon": "即將移除"
   },
   "hero": {
     "upNext": "接下來",

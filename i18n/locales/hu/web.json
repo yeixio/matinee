@@ -72,7 +72,8 @@
     "scanning": "A könyvtárad átvizsgálása",
     "scanningHint": "Az új címek itt jelennek meg, amint megtaláljuk őket.",
     "removeNamed": "{{title}} eltávolítása a Nézd tovább sorból",
-    "remove": "Eltávolítás a Nézd tovább sorból"
+    "remove": "Eltávolítás a Nézd tovább sorból",
+    "leavingSoon": "Hamarosan távozik"
   },
   "hero": {
     "upNext": "Következik",

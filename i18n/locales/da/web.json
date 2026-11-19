@@ -72,7 +72,8 @@
     "scanning": "Scanner dit bibliotek",
     "scanningHint": "Nye titler dukker op her, så snart de bliver fundet.",
     "removeNamed": "Fjern {{title}} fra Fortsæt med at se",
-    "remove": "Fjern fra Fortsæt med at se"
+    "remove": "Fjern fra Fortsæt med at se",
+    "leavingSoon": "Forsvinder snart"
   },
   "hero": {
     "upNext": "Næste",

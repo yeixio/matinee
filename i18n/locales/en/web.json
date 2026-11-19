@@ -72,7 +72,8 @@
     "scanning": "Scanning your library",
     "scanningHint": "New titles show up here as soon as they're found.",
     "removeNamed": "Remove {{title}} from Continue watching",
-    "remove": "Remove from Continue watching"
+    "remove": "Remove from Continue watching",
+    "leavingSoon": "Leaving soon"
   },
   "hero": {
     "upNext": "Up next",

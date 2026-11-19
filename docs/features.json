@@ -286,6 +286,19 @@
               }
             },
             {
+              "name": "Leaving soon row (Box Office clean-up rules)",
+              "doc": "/docs/server/radarr-and-sonarr/#leaving-soon",
+              "since": "v0.2.10",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
               "name": "On its way and Other copies (Box Office)",
               "doc": "/docs/server/radarr-and-sonarr/#on-its-way-and-other-copies",
               "since": "v0.2.3",

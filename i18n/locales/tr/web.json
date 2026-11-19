@@ -72,7 +72,8 @@
     "scanning": "Kütüphanen taranıyor",
     "scanningHint": "Yeni yapımlar bulunur bulunmaz burada görünür.",
     "removeNamed": "{{title}} yapımını İzlemeye devam et'ten kaldır",
-    "remove": "İzlemeye devam et'ten kaldır"
+    "remove": "İzlemeye devam et'ten kaldır",
+    "leavingSoon": "Yakında ayrılacak"
   },
   "hero": {
     "upNext": "Sıradaki",

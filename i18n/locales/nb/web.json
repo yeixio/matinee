@@ -72,7 +72,8 @@
     "scanning": "Skanner biblioteket ditt",
     "scanningHint": "Nye titler dukker opp her så snart de blir funnet.",
     "removeNamed": "Fjern {{title}} fra Fortsett å se",
-    "remove": "Fjern fra Fortsett å se"
+    "remove": "Fjern fra Fortsett å se",
+    "leavingSoon": "Forsvinner snart"
   },
   "hero": {
     "upNext": "Neste",
