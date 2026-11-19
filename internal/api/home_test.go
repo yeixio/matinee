@@ -341,3 +341,30 @@ func TestStopScanRoute(t *testing.T) {
 		t.Fatalf("stopping an idle library: %d", code)
 	}
 }
+
+func TestLibraryFoldersOnlyForAdmins(t *testing.T) {
+	admin, tmp := newTestServer(t)
+	var login struct{ Token string }
+	admin.do("POST", "/api/v1/setup", credentials{"admin", "correct horse"}, &login)
+	admin.token = login.Token
+	dir := filepath.Join(tmp, "movies")
+	os.MkdirAll(dir, 0o755)
+	admin.do("POST", "/api/libraries", map[string]any{"name": "Movies", "kind": "movies", "paths": []string{dir}}, nil)
+	admin.do("POST", "/api/v1/users", map[string]any{"username": "ellen", "password": "password123"}, nil)
+	ellen := &client{t: t, base: admin.base}
+	admin.do("POST", "/api/v1/auth/login", credentials{"ellen", "password123"}, &login)
+	ellen.token = login.Token
+
+	var libs []map[string]any
+	admin.do("GET", "/api/libraries", nil, &libs)
+	if len(libs) != 1 || len(libs[0]["paths"].([]any)) != 1 {
+		t.Fatalf("admin: %+v", libs)
+	}
+	libs = nil
+	if code := ellen.do("GET", "/api/libraries", nil, &libs); code != 200 || len(libs) != 1 {
+		t.Fatalf("ellen: %d %+v", code, libs)
+	}
+	if p, w := libs[0]["paths"].([]any), libs[0]["watch"].([]any); len(p) != 0 || len(w) != 0 || libs[0]["skipped"] != nil {
+		t.Fatalf("ellen sees folders: %+v", libs[0])
+	}
+}

@@ -106,7 +106,7 @@ function Overview({ lib, onMore }: { lib: Library; onMore: (v: View) => void }) 
   if (!added.data?.length) {
     return (
       <EmptyState title={lib.scanning ? t('library.scanning') : t('nothingHereYet')}>
-        {lib.scanning ? t('library.appearAsFound') : t('library.noMedia', { paths: lib.paths.join(', ') })}
+        {lib.scanning ? t('library.appearAsFound') : lib.paths.length ? t('library.noMedia', { paths: lib.paths.join(', ') }) : null}
       </EmptyState>
     )
   }
