@@ -70,16 +70,28 @@ export function clientId(): string {
   try {
     let id = localStorage.getItem(KEY)
     if (!id) {
-      id = crypto.randomUUID()
+      id = newId()
       localStorage.setItem(KEY, id)
     }
     return id
   } catch {
     // No storage (a private window): this tab is its own client.
-    return (fallbackId ??= crypto.randomUUID())
+    return (fallbackId ??= newId())
   }
 }
 let fallbackId: string | undefined
+
+// A random version 4 UUID. crypto.randomUUID only exists on https and
+// localhost, and a default install is plain http on the home network, so
+// build one from crypto.getRandomValues, which works everywhere.
+export function newId(): string {
+  if (typeof crypto.randomUUID === 'function') return crypto.randomUUID()
+  const b = crypto.getRandomValues(new Uint8Array(16))
+  b[6] = (b[6] & 0x0f) | 0x40
+  b[8] = (b[8] & 0x3f) | 0x80
+  const h = Array.from(b, (x) => x.toString(16).padStart(2, '0')).join('')
+  return `${h.slice(0, 8)}-${h.slice(8, 12)}-${h.slice(12, 16)}-${h.slice(16, 20)}-${h.slice(20)}`
+}
 
 // Open players, newest last: the newest gets commands. The music player is
 // always there underneath, and the video player goes on top while it's open.
