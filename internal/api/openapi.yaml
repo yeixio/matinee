@@ -945,11 +945,53 @@ paths:
               schema: { $ref: "#/components/schemas/Library" }
         "400": { $ref: "#/components/responses/Error" }
   /libraries/{id}:
+    put:
+      summary: Rename a library or set its folders (admins only)
+      description: >
+        Give `name`, `paths` or both. When the folders change, a running
+        scan stops and the library is scanned again: titles in an added
+        folder come in, and titles in a removed one leave (the files stay).
+        A folder can be in one library only.
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name: { type: string }
+                paths: { type: array, items: { type: string } }
+      responses:
+        "200": { description: The library. }
+        "400": { $ref: "#/components/responses/Error" }
+        "404": { $ref: "#/components/responses/Error" }
+        "409": { description: The folder is in another library, or a scan didn't stop in time. }
     delete:
       summary: Remove a library (admins only). Files stay where they are.
       parameters: [{ $ref: "#/components/parameters/ID" }]
       responses:
         "204": { description: Removed. }
+        "404": { $ref: "#/components/responses/Error" }
+  /libraries/{id}/merge:
+    post:
+      summary: Combine another library of the same type into this one (admins only)
+      description: >
+        The other library's folders and titles move into this one and the
+        other library is removed. Shows, seasons, artists and albums both
+        have become one; watch history, places, watch lists, ratings and
+        who can see the library carry over. The library is then scanned.
+      parameters: [{ $ref: "#/components/parameters/ID" }]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [from]
+              properties:
+                from: { type: integer, description: The library to combine into this one. }
+      responses:
+        "200": { description: The combined library. }
+        "400": { $ref: "#/components/responses/Error" }
         "404": { $ref: "#/components/responses/Error" }
   /libraries/{id}/scan:
     post:
