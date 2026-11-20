@@ -729,7 +729,16 @@
       "details": "详情",
       "detailsLocal": "优先使用 .nfo 文件",
       "detailsOnline": "优先使用在线信息",
-      "detailsLocalOnly": "仅使用 .nfo 文件"
+      "detailsLocalOnly": "仅使用 .nfo 文件",
+      "edit": "编辑{{name}}",
+      "foldersHint": "一个媒体库可以有多个文件夹，比如分在两块硬盘上的剧集。它们会一起扫描，分在不同文件夹里的剧集仍是同一部剧。",
+      "folderRemoved": "保存后，移除的文件夹中的作品会离开此媒体库。你的文件保持原位。",
+      "combine": "与另一个媒体库合并",
+      "combineHint": "将另一个媒体库的文件夹和作品移到{{name}}，并删除那个媒体库。两边都有的剧集会合为一部。每个人的观看记录、播放进度和待看列表都会保留。",
+      "combinePick": "选择媒体库",
+      "combineButton": "合并",
+      "confirmCombine": "将“{{from}}”合并到“{{into}}”？“{{from}}”将消失，它的文件夹和作品会并入“{{into}}”。",
+      "sameKindTip": "{{names}}是同一类型的媒体库。要合为一个，请编辑要保留的那个，并把其他的合并进去。"
     },
     "people": {
       "title": "成员",

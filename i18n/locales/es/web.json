@@ -741,7 +741,16 @@
       "details": "Detalles",
       "detailsLocal": "Preferir archivos .nfo",
       "detailsOnline": "Preferir en línea",
-      "detailsLocalOnly": "Solo archivos .nfo"
+      "detailsLocalOnly": "Solo archivos .nfo",
+      "edit": "Editar {{name}}",
+      "foldersHint": "Una biblioteca puede tener varias carpetas, como series en dos discos. Se analizan juntas y una serie repartida entre ellas es una sola serie.",
+      "folderRemoved": "Al guardar, los títulos de las carpetas que quitaste salen de esta biblioteca. Tus archivos se quedan donde están.",
+      "combine": "Combinar con otra biblioteca",
+      "combineHint": "Mueve las carpetas y títulos de la otra biblioteca a {{name}} y quita la otra. Las series que estén en ambas pasan a ser una. Lo que cada persona vio, por dónde iba y sus listas se conservan.",
+      "combinePick": "Elige una biblioteca",
+      "combineButton": "Combinar",
+      "confirmCombine": "¿Combinar «{{from}}» con «{{into}}»? «{{from}}» desaparece y sus carpetas y títulos pasan a «{{into}}».",
+      "sameKindTip": "{{names}} son bibliotecas del mismo tipo. Para unirlas, edita la que quieras conservar y combina las demás con ella."
     },
     "people": {
       "title": "Personas",

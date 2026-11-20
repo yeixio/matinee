@@ -735,7 +735,16 @@
       "details": "Részletek",
       "detailsLocal": ".nfo fájlok előnyben",
       "detailsOnline": "Online előnyben",
-      "detailsLocalOnly": "Csak .nfo fájlok"
+      "detailsLocalOnly": "Csak .nfo fájlok",
+      "edit": "{{name}} szerkesztése",
+      "foldersHint": "Egy könyvtárnak több mappája is lehet, például két lemezen lévő sorozatok. Együtt vizsgálja őket, és a köztük megosztott sorozat egy sorozat.",
+      "folderRemoved": "Mentéskor az eltávolított mappák címei kikerülnek ebből a könyvtárból. A fájljaid a helyükön maradnak.",
+      "combine": "Egyesítés egy másik könyvtárral",
+      "combineHint": "Áthelyezi a másik könyvtár mappáit és címeit ide: {{name}}, és eltávolítja a másikat. A mindkettőben szereplő sorozatok eggyé válnak. Amit bárki megnézett, ahol tartott, és a listái megmaradnak.",
+      "combinePick": "Válassz könyvtárat",
+      "combineButton": "Egyesítés",
+      "confirmCombine": "Egyesíted ezt: „{{from}}” ezzel: „{{into}}”? „{{from}}” megszűnik, mappái és címei ide kerülnek: „{{into}}”.",
+      "sameKindTip": "{{names}} azonos típusú könyvtárak. Ha egyet szeretnél belőlük, szerkeszd a megtartandót, és egyesítsd vele a többit."
     },
     "people": {
       "title": "Személyek",

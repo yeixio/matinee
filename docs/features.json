@@ -1033,6 +1033,19 @@
                 "androidtv": {"na": "Admins move the database in the web app or with the matinee command."},
                 "tvweb": {"na": "Admins move the database in the web app or with the matinee command."}
               }
+            },
+            {
+              "name": "Several folders in one library, and combining libraries",
+              "doc": "/docs/getting-started/first-run/#several-folders-in-one-library",
+              "since": "v0.2.11",
+              "apps": {
+                "web": true,
+                "ios": {"na": "Admins set up libraries in the web app."},
+                "android": {"na": "Admins set up libraries in the web app."},
+                "appletv": {"na": "Admins set up libraries in the web app."},
+                "androidtv": {"na": "Admins set up libraries in the web app."},
+                "tvweb": {"na": "Admins set up libraries in the web app."}
+              }
             }
           ]
         }

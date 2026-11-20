@@ -729,7 +729,16 @@
       "details": "Thông tin",
       "detailsLocal": "Ưu tiên tệp .nfo",
       "detailsOnline": "Ưu tiên trực tuyến",
-      "detailsLocalOnly": "Chỉ tệp .nfo"
+      "detailsLocalOnly": "Chỉ tệp .nfo",
+      "edit": "Sửa {{name}}",
+      "foldersHint": "Một thư viện có thể có nhiều thư mục, ví dụ phim bộ trên hai ổ đĩa. Chúng được quét cùng nhau, và một phim bộ chia ra giữa chúng vẫn là một phim bộ.",
+      "folderRemoved": "Khi lưu, các mục trong thư mục bạn đã bỏ sẽ rời thư viện này. Tệp của bạn vẫn ở nguyên chỗ cũ.",
+      "combine": "Gộp với thư viện khác",
+      "combineHint": "Chuyển thư mục và các mục của thư viện kia vào {{name}} rồi xóa thư viện kia. Phim bộ có ở cả hai sẽ thành một. Những gì mọi người đã xem, chỗ đang xem dở và danh sách xem vẫn được giữ.",
+      "combinePick": "Chọn thư viện",
+      "combineButton": "Gộp",
+      "confirmCombine": "Gộp “{{from}}” vào “{{into}}”? “{{from}}” sẽ biến mất, thư mục và các mục của nó chuyển sang “{{into}}”.",
+      "sameKindTip": "{{names}} là các thư viện cùng loại. Để gộp thành một, hãy sửa thư viện muốn giữ và gộp các thư viện còn lại vào đó."
     },
     "people": {
       "title": "Mọi người",

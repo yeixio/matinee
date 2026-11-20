@@ -729,7 +729,16 @@
       "details": "詳細資料",
       "detailsLocal": "優先使用 .nfo 檔案",
       "detailsOnline": "優先使用線上資訊",
-      "detailsLocalOnly": "僅使用 .nfo 檔案"
+      "detailsLocalOnly": "僅使用 .nfo 檔案",
+      "edit": "編輯{{name}}",
+      "foldersHint": "一個媒體庫可以有多個資料夾，例如分在兩顆硬碟上的影集。它們會一起掃描，分在不同資料夾的影集仍是同一部影集。",
+      "folderRemoved": "儲存後，移除的資料夾中的作品會離開此媒體庫。你的檔案保持原位。",
+      "combine": "與另一個媒體庫合併",
+      "combineHint": "將另一個媒體庫的資料夾和作品移到{{name}}，並刪除那個媒體庫。兩邊都有的影集會合為一部。每個人的觀看紀錄、播放進度和待看清單都會保留。",
+      "combinePick": "選擇媒體庫",
+      "combineButton": "合併",
+      "confirmCombine": "將「{{from}}」合併到「{{into}}」？「{{from}}」將消失，它的資料夾和作品會併入「{{into}}」。",
+      "sameKindTip": "{{names}}是同一類型的媒體庫。要合為一個，請編輯要保留的那個，並把其他的合併進去。"
     },
     "people": {
       "title": "成員",

@@ -1637,6 +1637,10 @@ export const api = {
   libraries: () => request<Library[]>('GET', '/api/v1/libraries'),
   createLibrary: (name: string, kind: string, paths: string[]) =>
     request<Library>('POST', '/api/v1/libraries', { name, kind, paths }),
+  // Renames a library or sets its folders; the server scans it again when the folders change.
+  updateLibrary: (id: number, change: { name?: string; paths?: string[] }) => request<Library>('PUT', `/api/v1/libraries/${id}`, change),
+  // Makes another library of the same type part of this one: its folders and titles move here and it goes.
+  mergeLibrary: (id: number, from: number) => request<Library>('POST', `/api/v1/libraries/${id}/merge`, { from }),
   deleteLibrary: (id: number) => request<void>('DELETE', `/api/v1/libraries/${id}`),
   scanLibrary: (id: number) => request<void>('POST', `/api/v1/libraries/${id}/scan`),
   // Stops a library's running scan, whatever started it; what it found stays.

@@ -735,7 +735,16 @@
       "details": "Detaljer",
       "detailsLocal": "Foretræk .nfo-filer",
       "detailsOnline": "Foretræk online",
-      "detailsLocalOnly": "Kun .nfo-filer"
+      "detailsLocalOnly": "Kun .nfo-filer",
+      "edit": "Rediger {{name}}",
+      "foldersHint": "Et bibliotek kan have flere mapper, fx serier på to diske. De scannes sammen, og en serie, der er delt mellem dem, er én serie.",
+      "folderRemoved": "Når du gemmer, forlader titler i de mapper, du fjernede, dette bibliotek. Dine filer bliver, hvor de er.",
+      "combine": "Slå sammen med et andet bibliotek",
+      "combineHint": "Flytter det andet biblioteks mapper og titler til {{name}} og fjerner det andet. Serier, der findes i begge, bliver til én. Hvad alle har set, hvor de er nået til, og deres lister bliver.",
+      "combinePick": "Vælg et bibliotek",
+      "combineButton": "Slå sammen",
+      "confirmCombine": "Slå „{{from}}“ sammen med „{{into}}“? „{{from}}“ forsvinder, og dets mapper og titler flytter til „{{into}}“.",
+      "sameKindTip": "{{names}} er biblioteker af samme type. Gør dem til ét ved at redigere det, der skal blive, og slå de andre sammen med det."
     },
     "people": {
       "title": "Personer",

@@ -741,7 +741,16 @@
       "details": "Dettagli",
       "detailsLocal": "Preferisci i file .nfo",
       "detailsOnline": "Preferisci online",
-      "detailsLocalOnly": "Solo file .nfo"
+      "detailsLocalOnly": "Solo file .nfo",
+      "edit": "Modifica {{name}}",
+      "foldersHint": "Una libreria può avere più cartelle, ad esempio serie TV su due dischi. Vengono analizzate insieme e una serie divisa tra loro resta una sola serie.",
+      "folderRemoved": "Al salvataggio, i titoli delle cartelle rimosse escono da questa libreria. I tuoi file restano dove sono.",
+      "combine": "Unisci con un’altra libreria",
+      "combineHint": "Sposta cartelle e titoli dell’altra libreria in {{name}} e rimuove l’altra. Le serie presenti in entrambe diventano una. Ciò che ognuno ha visto, il punto a cui è arrivato e le liste restano.",
+      "combinePick": "Scegli una libreria",
+      "combineButton": "Unisci",
+      "confirmCombine": "Unire «{{from}}» a «{{into}}»? «{{from}}» sparisce e le sue cartelle e i suoi titoli passano a «{{into}}».",
+      "sameKindTip": "{{names}} sono librerie dello stesso tipo. Per farne una sola, modifica quella da tenere e unisci le altre a essa."
     },
     "people": {
       "title": "Persone",

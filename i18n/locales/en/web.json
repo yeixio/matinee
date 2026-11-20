@@ -735,7 +735,16 @@
       "details": "Details",
       "detailsLocal": "Prefer .nfo files",
       "detailsOnline": "Prefer online",
-      "detailsLocalOnly": "Only .nfo files"
+      "detailsLocalOnly": "Only .nfo files",
+      "edit": "Edit {{name}}",
+      "foldersHint": "A library can have several folders, such as TV shows on two disks. They're scanned together, and a show split across them is one show.",
+      "folderRemoved": "When you save, titles in the folders you took out leave this library. Your files stay where they are.",
+      "combine": "Combine with another library",
+      "combineHint": "Moves the other library's folders and titles into {{name}} and removes the other library. Shows in both become one. What everyone watched, their places and watch lists stay.",
+      "combinePick": "Pick a library",
+      "combineButton": "Combine",
+      "confirmCombine": "Combine “{{from}}” into “{{into}}”? “{{from}}” goes away, and its folders and titles join “{{into}}”.",
+      "sameKindTip": "{{names}} are the same type of library. To make them one, edit the one to keep and combine the others into it."
     },
     "people": {
       "title": "People",

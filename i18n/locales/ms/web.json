@@ -729,7 +729,16 @@
       "details": "Butiran",
       "detailsLocal": "Utamakan fail .nfo",
       "detailsOnline": "Utamakan dalam talian",
-      "detailsLocalOnly": "Fail .nfo sahaja"
+      "detailsLocalOnly": "Fail .nfo sahaja",
+      "edit": "Edit {{name}}",
+      "foldersHint": "Satu pustaka boleh ada beberapa folder, contohnya rancangan TV dalam dua cakera. Folder diimbas bersama, dan rancangan yang terbahagi antaranya tetap satu rancangan.",
+      "folderRemoved": "Apabila disimpan, tajuk dalam folder yang anda keluarkan akan keluar dari pustaka ini. Fail anda kekal di tempatnya.",
+      "combine": "Gabungkan dengan pustaka lain",
+      "combineHint": "Memindahkan folder dan tajuk pustaka lain ke {{name}} dan membuang pustaka itu. Rancangan yang ada dalam kedua-duanya menjadi satu. Apa yang ditonton, kedudukan terakhir dan senarai tontonan semua orang kekal.",
+      "combinePick": "Pilih pustaka",
+      "combineButton": "Gabungkan",
+      "confirmCombine": "Gabungkan “{{from}}” ke dalam “{{into}}”? “{{from}}” akan hilang, dan folder serta tajuknya berpindah ke “{{into}}”.",
+      "sameKindTip": "{{names}} ialah pustaka jenis yang sama. Untuk menjadikannya satu, edit pustaka yang hendak disimpan dan gabungkan yang lain ke dalamnya."
     },
     "people": {
       "title": "Orang",

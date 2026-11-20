@@ -1,9 +1,9 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { Activity, ChevronLeft, ChevronRight, Folder, FolderOpen, Gauge, Globe, Image as ImageIcon, KeyRound, LibraryBig, Monitor, Plus, Puzzle, RefreshCw, Trash2, Tv, UserPlus, UserRound, UsersRound, X, type LucideIcon } from 'lucide-react'
+import { Activity, ChevronLeft, ChevronRight, Combine, Folder, FolderOpen, Gauge, Globe, Image as ImageIcon, KeyRound, LibraryBig, Monitor, Pencil, Plus, Puzzle, RefreshCw, Trash2, Tv, UserPlus, UserRound, UsersRound, X, type LucideIcon } from 'lucide-react'
 import { useEffect, useState, type FormEvent, type ReactNode } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import { Link, Navigate, useLocation, useNavigate, useParams } from 'react-router-dom'
-import { api, type ConnectStatus, type LibraryKind, type MetadataMode, type PlaybackPrefs, type RemoteStatus, type User, type Account as AccountInfo } from '../api'
+import { api, type ConnectStatus, type Library, type LibraryKind, type MetadataMode, type PlaybackPrefs, type RemoteStatus, type User, type Account as AccountInfo } from '../api'
 import { LanguagePicker } from '../components/LanguagePicker'
 import { LiveTVSettings } from '../components/LiveTVSettings'
 import { NewFiles, watchSummary } from '../components/LibraryWatch'
@@ -177,7 +177,10 @@ function Libraries() {
   const { data: libraries = [] } = useLibraries()
   const { data: settings } = useQuery({ queryKey: ['settings'], queryFn: api.settings })
   const [adding, setAdding] = useState(false)
+  const [editing, setEditing] = useState<number | null>(null)
   const refresh = () => qc.invalidateQueries({ queryKey: ['libraries'] })
+  // Two libraries of one type are often one library added twice, folder by folder.
+  const doubled = [...new Set(libraries.map((l) => l.kind))].filter((k) => k !== 'podcasts' && libraries.filter((l) => l.kind === k).length > 1)
   const scan = useMutation({ mutationFn: api.scanLibrary, onSuccess: () => setTimeout(refresh, 300) })
   const stopScan = useMutation({ mutationFn: api.stopScan, onSuccess: () => setTimeout(refresh, 300) })
   const setMode = useMutation({ mutationFn: ({ id, mode }: { id: number; mode: MetadataMode }) => api.setMetadataMode(id, mode), onSuccess: refresh })
@@ -210,7 +213,10 @@ function Libraries() {
       {adding && <AddLibrary onDone={() => setAdding(false)} />}
       <div className="divide-y divide-line/60 rounded-xl border border-line/60 bg-surface/50">
         {libraries.length === 0 && !adding && <p className="p-5 text-sm text-muted">{t('settings.libraries.none')}</p>}
-        {libraries.map((l) => (
+        {libraries.map((l) =>
+          editing === l.id ? (
+            <EditLibrary key={l.id} library={l} libraries={libraries} onDone={() => setEditing(null)} />
+          ) : (
           <div key={l.id} className="flex items-center gap-4 p-4">
             <span className="grid size-10 place-items-center rounded-lg bg-text/5 text-accent">
               <LibraryIcon kind={l.kind} />
@@ -264,14 +270,126 @@ function Libraries() {
             )}
             <Button
               variant="ghost"
+              icon={<Pencil className="size-4" />}
+              aria-label={t('settings.libraries.edit', { name: l.name })}
+              title={t('settings.libraries.edit', { name: l.name })}
+              onClick={() => setEditing(l.id)}
+            />
+            <Button
+              variant="ghost"
               icon={<Trash2 className="size-4" />}
               aria-label={t('settings.libraries.remove', { name: l.name })}
               onClick={() => confirm(t('settings.libraries.confirmRemove', { name: l.name })) && remove.mutate(l.id)}
             />
           </div>
-        ))}
+          ),
+        )}
       </div>
+      {doubled.map((k) => (
+        <p key={k} className="text-sm text-muted">
+          {t('settings.libraries.sameKindTip', {
+            names: libraries
+              .filter((l) => l.kind === k)
+              .map((l) => `\u201c${l.name}\u201d`)
+              .join(t('listSeparator')),
+          })}
+        </p>
+      ))}
     </section>
+  )
+}
+
+// Change a library's name and folders, or combine another library of its type into it.
+function EditLibrary({ library, libraries, onDone }: { library: Library; libraries: Library[]; onDone: () => void }) {
+  const { t } = useTranslation()
+  const qc = useQueryClient()
+  const [name, setName] = useState(library.name)
+  const [paths, setPaths] = useState<string[]>(library.paths)
+  const [from, setFrom] = useState(0)
+  const others = libraries.filter((l) => l.kind === library.kind && l.id !== library.id)
+  const folders = library.kind !== 'podcasts'
+  const done = () => {
+    qc.invalidateQueries({ queryKey: ['libraries'] })
+    qc.invalidateQueries({ queryKey: ['home'] })
+    onDone()
+  }
+  const save = useMutation({
+    mutationFn: () => api.updateLibrary(library.id, folders ? { name, paths } : { name }),
+    onSuccess: done,
+  })
+  const merge = useMutation({ mutationFn: () => api.mergeLibrary(library.id, from), onSuccess: done })
+  const dropped = library.paths.filter((p) => !paths.includes(p))
+  const fromName = others.find((l) => l.id === from)?.name ?? ''
+  const submit = (e: FormEvent) => {
+    e.preventDefault()
+    save.mutate()
+  }
+
+  return (
+    <form onSubmit={submit} className="space-y-5 bg-surface p-5">
+      <Field label={t('profileSettings.name')}>
+        <input className={inputClass} value={name} onChange={(e) => setName(e.target.value)} />
+      </Field>
+      {folders && (
+        <Field label={t('settings.libraries.folders')}>
+          <div className="space-y-2">
+            <span className="block text-sm text-muted">{t('settings.libraries.foldersHint')}</span>
+            {paths.map((p) => (
+              <div key={p} className="flex items-center gap-2 rounded-lg bg-text/5 px-3 py-2 text-sm">
+                <Folder className="size-4 text-accent" />
+                <span className="flex-1 truncate" dir="ltr">
+                  {p}
+                </span>
+                <button type="button" onClick={() => setPaths(paths.filter((x) => x !== p))} aria-label={t('filters.remove', { label: p })}>
+                  <X className="size-4 text-muted hover:text-text" />
+                </button>
+              </div>
+            ))}
+            {dropped.length > 0 && <p className="text-sm text-muted">{t('settings.libraries.folderRemoved')}</p>}
+            <FolderPicker picked={paths} onPick={(p) => setPaths((prev) => (prev.includes(p) ? prev : [...prev, p]))} />
+          </div>
+        </Field>
+      )}
+      {save.error && <p className="text-sm text-danger">{save.error.message}</p>}
+      <div className="flex justify-end gap-2">
+        <Button type="button" variant="ghost" onClick={onDone}>
+          {t('cancel')}
+        </Button>
+        <Button variant="primary" disabled={!name.trim() || (folders && paths.length === 0) || save.isPending}>
+          {t('save')}
+        </Button>
+      </div>
+      {others.length > 0 && (
+        <div className="space-y-2 border-t border-line/60 pt-4">
+          <div className="text-sm font-medium">{t('settings.libraries.combine')}</div>
+          <p className="text-sm text-muted">{t('settings.libraries.combineHint', { name: library.name })}</p>
+          <div className="flex flex-wrap items-center gap-2">
+            <select
+              className="h-9 rounded-md border border-line bg-surface px-2 text-sm text-text"
+              value={from}
+              onChange={(e) => setFrom(Number(e.target.value))}
+              aria-label={t('settings.libraries.combine')}
+            >
+              <option value={0}>{t('settings.libraries.combinePick')}</option>
+              {others.map((l) => (
+                <option key={l.id} value={l.id}>
+                  {l.name}
+                </option>
+              ))}
+            </select>
+            <Button
+              type="button"
+              icon={<Combine className="size-4" />}
+              disabled={!from || merge.isPending}
+              onClick={() => confirm(t('settings.libraries.confirmCombine', { from: fromName, into: library.name })) && merge.mutate()}
+            >
+              {t('settings.libraries.combineButton')}
+            </Button>
+          </div>
+          {merge.error && <p className="text-sm text-danger">{merge.error.message}</p>}
+        </div>
+      )}
+    </form>
   )
 }
 

@@ -735,7 +735,16 @@
       "details": "Tiedot",
       "detailsLocal": "Suosi .nfo-tiedostoja",
       "detailsOnline": "Suosi verkkoa",
-      "detailsLocalOnly": "Vain .nfo-tiedostot"
+      "detailsLocalOnly": "Vain .nfo-tiedostot",
+      "edit": "Muokkaa: {{name}}",
+      "foldersHint": "Kirjastossa voi olla useita kansioita, esimerkiksi sarjoja kahdella levyllä. Ne skannataan yhdessä, ja niiden kesken jaettu sarja on yksi sarja.",
+      "folderRemoved": "Kun tallennat, poistamiesi kansioiden nimikkeet poistuvat tästä kirjastosta. Tiedostosi pysyvät paikallaan.",
+      "combine": "Yhdistä toiseen kirjastoon",
+      "combineHint": "Siirtää toisen kirjaston kansiot ja nimikkeet kirjastoon {{name}} ja poistaa toisen. Molemmissa olevat sarjat yhdistyvät. Kaikkien katselut, kohdat ja katselulistat säilyvät.",
+      "combinePick": "Valitse kirjasto",
+      "combineButton": "Yhdistä",
+      "confirmCombine": "Yhdistetäänkö ”{{from}}” kirjastoon ”{{into}}”? ”{{from}}” poistuu, ja sen kansiot ja nimikkeet siirtyvät kirjastoon ”{{into}}”.",
+      "sameKindTip": "{{names}} ovat samantyyppisiä kirjastoja. Yhdistä ne muokkaamalla säilytettävää ja yhdistämällä muut siihen."
     },
     "people": {
       "title": "Ihmiset",

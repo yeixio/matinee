@@ -729,7 +729,16 @@
       "details": "세부 정보",
       "detailsLocal": ".nfo 파일 우선",
       "detailsOnline": "온라인 우선",
-      "detailsLocalOnly": ".nfo 파일만"
+      "detailsLocalOnly": ".nfo 파일만",
+      "edit": "{{name}} 편집",
+      "foldersHint": "라이브러리 하나에 여러 폴더를 넣을 수 있습니다. 예를 들어 두 디스크에 나뉜 TV 프로그램처럼요. 함께 스캔되며, 폴더에 나뉜 프로그램도 하나의 프로그램이 됩니다.",
+      "folderRemoved": "저장하면 뺀 폴더의 작품은 이 라이브러리에서 빠집니다. 파일은 그대로 남습니다.",
+      "combine": "다른 라이브러리와 합치기",
+      "combineHint": "다른 라이브러리의 폴더와 작품을 {{name}}(으)로 옮기고 다른 라이브러리는 삭제합니다. 양쪽에 있는 프로그램은 하나가 됩니다. 모두의 시청 기록, 이어 보기 위치, 찜 목록은 그대로입니다.",
+      "combinePick": "라이브러리 선택",
+      "combineButton": "합치기",
+      "confirmCombine": "“{{from}}”을(를) “{{into}}”에 합칠까요? “{{from}}”은(는) 사라지고 폴더와 작품은 “{{into}}”(으)로 옮겨집니다.",
+      "sameKindTip": "{{names}}은(는) 같은 종류의 라이브러리입니다. 하나로 만들려면 남길 라이브러리를 편집해 나머지를 합치세요."
     },
     "people": {
       "title": "사용자",

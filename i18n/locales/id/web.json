@@ -729,7 +729,16 @@
       "details": "Detail",
       "detailsLocal": "Utamakan file .nfo",
       "detailsOnline": "Utamakan online",
-      "detailsLocalOnly": "Hanya file .nfo"
+      "detailsLocalOnly": "Hanya file .nfo",
+      "edit": "Edit {{name}}",
+      "foldersHint": "Satu pustaka bisa punya beberapa folder, misalnya serial di dua disk. Folder dipindai bersama, dan serial yang terbagi di antaranya tetap satu serial.",
+      "folderRemoved": "Saat disimpan, judul di folder yang Anda keluarkan akan keluar dari pustaka ini. File Anda tetap di tempatnya.",
+      "combine": "Gabungkan dengan pustaka lain",
+      "combineHint": "Memindahkan folder dan judul pustaka lain ke {{name}} lalu menghapus pustaka itu. Serial yang ada di keduanya menjadi satu. Riwayat tontonan, posisi terakhir, dan daftar tonton semua orang tetap ada.",
+      "combinePick": "Pilih pustaka",
+      "combineButton": "Gabungkan",
+      "confirmCombine": "Gabungkan “{{from}}” ke “{{into}}”? “{{from}}” akan hilang, dan folder serta judulnya pindah ke “{{into}}”.",
+      "sameKindTip": "{{names}} adalah pustaka dengan jenis yang sama. Untuk menjadikannya satu, edit pustaka yang ingin disimpan lalu gabungkan yang lain ke dalamnya."
     },
     "people": {
       "title": "Orang",

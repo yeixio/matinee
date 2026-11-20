@@ -747,7 +747,16 @@
       "details": "Szczegóły",
       "detailsLocal": "Wolę pliki .nfo",
       "detailsOnline": "Wolę online",
-      "detailsLocalOnly": "Tylko pliki .nfo"
+      "detailsLocalOnly": "Tylko pliki .nfo",
+      "edit": "Edytuj {{name}}",
+      "foldersHint": "Biblioteka może mieć kilka folderów, np. seriale na dwóch dyskach. Są skanowane razem, a serial rozdzielony między nie to jeden serial.",
+      "folderRemoved": "Po zapisaniu tytuły z usuniętych folderów znikną z tej biblioteki. Twoje pliki zostaną na miejscu.",
+      "combine": "Połącz z inną biblioteką",
+      "combineHint": "Przenosi foldery i tytuły drugiej biblioteki do {{name}} i usuwa tamtą. Seriale obecne w obu stają się jednym. To, co każdy obejrzał, miejsca, w których skończył, i listy do obejrzenia zostają.",
+      "combinePick": "Wybierz bibliotekę",
+      "combineButton": "Połącz",
+      "confirmCombine": "Połączyć „{{from}}” z „{{into}}”? „{{from}}” zniknie, a jej foldery i tytuły trafią do „{{into}}”.",
+      "sameKindTip": "{{names}} to biblioteki tego samego typu. Aby zrobić z nich jedną, edytuj tę, którą chcesz zachować, i połącz z nią pozostałe."
     },
     "people": {
       "title": "Osoby",

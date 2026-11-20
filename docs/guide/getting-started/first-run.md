@@ -22,10 +22,35 @@ A podcast library is the one kind without folders: its shows come from their fee
 1. Open **Settings** (the gear at the top right; **Settings** in the tab bar on a phone) and pick **Libraries**.
 2. Click **Add a library** and pick the type.
 3. Give it a name, or keep the suggested one. This is the name in the top bar.
-4. Browse to a folder and click **Use this folder**. A library can have several folders, for example movies on two disks; add each one.
+4. Browse to a folder and click **Use this folder**. A library can have several folders, for example movies on two disks: pick each one before you click **Add a library**, or add more later (see below).
 5. Click **Add a library**.
 
 ![Adding a Movies library: the type, the name and the folder picker](../images/add-library.webp)
+
+<!-- since: v0.2.11 -->
+### Several folders in one library
+
+Keep each kind of media in one library, even when it's on several disks or shares. To add a folder to a library you already have, or take one out:
+
+1. In **Settings → Libraries**, click the pencil next to the library.
+2. Browse to the folder and click **Use this folder**. To take a folder out, click the **×** next to it.
+3. Click **Save**.
+
+Matinee scans the library again straight away. Its folders are scanned together as one library, so a show with seasons on two disks is one show, and a movie on both is one movie with two versions. When you take a folder out, its titles leave the library; the files themselves stay where they are.
+
+![Editing the TV Shows library: its folders, with a second disk being added](../images/edit-library.webp)
+
+A folder can be in only one library. Matinee says so if you pick a folder that another library has, or one that sits inside a folder the library already has.
+
+#### Two libraries that should be one
+
+If you added a second library for the same kind of media, for example **TV Shows** and **TV Shows 2**, Settings points it out under the list. To make them one:
+
+1. Click the pencil next to the library to keep.
+2. Under **Combine with another library**, pick the other one and click **Combine**.
+
+The other library's folders and titles move into the one you kept, and the other library goes. A show that was in both becomes one show with all its episodes. What everyone watched, how far they got, their watch lists and ratings stay. Profiles and friends that could see either library can see the combined one.
+<!-- /since -->
 
 The folder picker shows folders on the **server**, not on the computer you're using, since that's where Matinee reads your media. It opens in the folder set by `MATINEE_MEDIA_ROOT` (`/media` in the Docker image).
 

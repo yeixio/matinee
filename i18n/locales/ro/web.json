@@ -741,7 +741,16 @@
       "details": "Detalii",
       "detailsLocal": "Preferă fișierele .nfo",
       "detailsOnline": "Preferă online",
-      "detailsLocalOnly": "Doar fișiere .nfo"
+      "detailsLocalOnly": "Doar fișiere .nfo",
+      "edit": "Editează {{name}}",
+      "foldersHint": "O bibliotecă poate avea mai multe dosare, de exemplu seriale pe două discuri. Sunt scanate împreună, iar un serial împărțit între ele este un singur serial.",
+      "folderRemoved": "La salvare, titlurile din dosarele scoase părăsesc această bibliotecă. Fișierele tale rămân unde sunt.",
+      "combine": "Unește cu altă bibliotecă",
+      "combineHint": "Mută dosarele și titlurile celeilalte biblioteci în {{name}} și o elimină pe cealaltă. Serialele din ambele devin unul. Ce a văzut fiecare, unde a rămas și listele rămân.",
+      "combinePick": "Alege o bibliotecă",
+      "combineButton": "Unește",
+      "confirmCombine": "Unești „{{from}}” cu „{{into}}”? „{{from}}” dispare, iar dosarele și titlurile ei trec în „{{into}}”.",
+      "sameKindTip": "{{names}} sunt biblioteci de același tip. Ca să devină una, editează biblioteca pe care o păstrezi și unește-le pe celelalte cu ea."
     },
     "people": {
       "title": "Persoane",
