@@ -83,18 +83,15 @@ RUN v=$(sed -n 's/^version=//p' /src/games/mame.txt) && c=$(sed -n 's/^commit=//
        esac
 
 # The PlayStation Remote Play bridge (games/psremote), built on chiaki-ng's
-# library for the target itself (under emulation for ARM; it's small). If
-# it can't be built for a platform, that image just can't play a
-# PlayStation.
+# library for the target itself (under emulation for ARM; it's small). A
+# failed build fails the image, so a release never quietly ships without it.
 FROM debian:trixie AS psremote
-ARG TARGETARCH
 RUN apt-get update \
     && apt-get install -y --no-install-recommends ca-certificates git cmake make gcc g++ python3 python3-protobuf \
-       protobuf-compiler pkg-config libssl-dev libjson-c-dev libminiupnpc-dev libevent-dev zlib1g-dev \
+       protobuf-compiler pkg-config libssl-dev libjson-c-dev libminiupnpc-dev libevent-dev zlib1g-dev libzstd-dev \
     && rm -rf /var/lib/apt/lists/*
 COPY games/psremote/ /src/psremote/
-RUN sh /src/psremote/build.sh /out/psremote \
-    || { echo "no PlayStation bridge for $TARGETARCH"; rm -rf /out/psremote; mkdir -p /out/psremote; }
+RUN sh /src/psremote/build.sh /out/psremote && test -x /out/psremote/matinee-psremote
 
 # Debian rather than Alpine: its FFmpeg is built with every hardware backend
 # Matinee uses on Linux, and glibc lets NVIDIA's container runtime add its
