@@ -750,7 +750,12 @@
       "combinePick": "Scegli una libreria",
       "combineButton": "Unisci",
       "confirmCombine": "Unire «{{from}}» a «{{into}}»? «{{from}}» sparisce e le sue cartelle e i suoi titoli passano a «{{into}}».",
-      "sameKindTip": "{{names}} sono librerie dello stesso tipo. Per farne una sola, modifica quella da tenere e unisci le altre a essa."
+      "sameKindTip": "{{names}} sono librerie dello stesso tipo. Per farne una sola, modifica quella da tenere e unisci le altre a essa.",
+      "add": "Aggiungi",
+      "addFolder": "Aggiungi {{name}}",
+      "inLibrary": "In {{name}}",
+      "inOther": "{{folder}} è già nella libreria {{library}} e una cartella può stare in una sola libreria.",
+      "nested": "Quella cartella contiene {{folder}} o si trova al suo interno, e questa libreria ce l’ha già. Scegli invece una cartella accanto."
     },
     "people": {
       "title": "Persone",

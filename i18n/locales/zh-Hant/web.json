@@ -738,7 +738,12 @@
       "combinePick": "選擇媒體庫",
       "combineButton": "合併",
       "confirmCombine": "將「{{from}}」合併到「{{into}}」？「{{from}}」將消失，它的資料夾和作品會併入「{{into}}」。",
-      "sameKindTip": "{{names}}是同一類型的媒體庫。要合為一個，請編輯要保留的那個，並把其他的合併進去。"
+      "sameKindTip": "{{names}}是同一類型的媒體庫。要合為一個，請編輯要保留的那個，並把其他的合併進去。",
+      "add": "新增",
+      "addFolder": "新增{{name}}",
+      "inLibrary": "在{{name}}中",
+      "inOther": "{{folder}}已在{{library}}媒體庫中，一個資料夾只能屬於一個媒體庫。",
+      "nested": "該資料夾包含此媒體庫已有的{{folder}}，或位於其中。請改選旁邊的資料夾。"
     },
     "people": {
       "title": "成員",

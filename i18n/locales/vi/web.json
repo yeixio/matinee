@@ -738,7 +738,12 @@
       "combinePick": "Chọn thư viện",
       "combineButton": "Gộp",
       "confirmCombine": "Gộp “{{from}}” vào “{{into}}”? “{{from}}” sẽ biến mất, thư mục và các mục của nó chuyển sang “{{into}}”.",
-      "sameKindTip": "{{names}} là các thư viện cùng loại. Để gộp thành một, hãy sửa thư viện muốn giữ và gộp các thư viện còn lại vào đó."
+      "sameKindTip": "{{names}} là các thư viện cùng loại. Để gộp thành một, hãy sửa thư viện muốn giữ và gộp các thư viện còn lại vào đó.",
+      "add": "Thêm",
+      "addFolder": "Thêm {{name}}",
+      "inLibrary": "Trong {{name}}",
+      "inOther": "{{folder}} đã thuộc thư viện {{library}}, và một thư mục chỉ thuộc được một thư viện.",
+      "nested": "Thư mục đó chứa {{folder}} hoặc nằm trong nó, mà thư viện này đã có. Hãy chọn một thư mục bên cạnh."
     },
     "people": {
       "title": "Mọi người",

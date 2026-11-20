@@ -744,7 +744,12 @@
       "combinePick": "Kies een bibliotheek",
       "combineButton": "Samenvoegen",
       "confirmCombine": "“{{from}}” samenvoegen met “{{into}}”? “{{from}}” verdwijnt en de mappen en titels gaan naar “{{into}}”.",
-      "sameKindTip": "{{names}} zijn bibliotheken van hetzelfde type. Om er één van te maken, bewerk je de bibliotheek die blijft en voeg je de andere erbij."
+      "sameKindTip": "{{names}} zijn bibliotheken van hetzelfde type. Om er één van te maken, bewerk je de bibliotheek die blijft en voeg je de andere erbij.",
+      "add": "Toevoegen",
+      "addFolder": "{{name}} toevoegen",
+      "inLibrary": "In {{name}}",
+      "inOther": "{{folder}} zit al in de bibliotheek {{library}}, en een map kan maar in één bibliotheek zitten.",
+      "nested": "Die map bevat {{folder}} of zit erin, en die heeft deze bibliotheek al. Kies liever een map ernaast."
     },
     "people": {
       "title": "Mensen",

@@ -744,7 +744,12 @@
       "combinePick": "Mediathek auswählen",
       "combineButton": "Zusammenführen",
       "confirmCombine": "„{{from}}“ mit „{{into}}“ zusammenführen? „{{from}}“ verschwindet, seine Ordner und Titel kommen zu „{{into}}“.",
-      "sameKindTip": "{{names}} sind Mediatheken derselben Art. Um sie zu einer zu machen, bearbeite die, die bleiben soll, und führe die anderen mit ihr zusammen."
+      "sameKindTip": "{{names}} sind Mediatheken derselben Art. Um sie zu einer zu machen, bearbeite die, die bleiben soll, und führe die anderen mit ihr zusammen.",
+      "add": "Hinzufügen",
+      "addFolder": "{{name}} hinzufügen",
+      "inLibrary": "In {{name}}",
+      "inOther": "{{folder}} gehört schon zur Mediathek {{library}}, und ein Ordner kann nur in einer Mediathek sein.",
+      "nested": "Dieser Ordner enthält {{folder}} oder liegt darin, und den hat diese Mediathek schon. Wähle stattdessen einen Ordner daneben."
     },
     "people": {
       "title": "Personen",

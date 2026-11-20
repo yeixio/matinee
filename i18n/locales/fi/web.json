@@ -744,7 +744,12 @@
       "combinePick": "Valitse kirjasto",
       "combineButton": "Yhdistä",
       "confirmCombine": "Yhdistetäänkö ”{{from}}” kirjastoon ”{{into}}”? ”{{from}}” poistuu, ja sen kansiot ja nimikkeet siirtyvät kirjastoon ”{{into}}”.",
-      "sameKindTip": "{{names}} ovat samantyyppisiä kirjastoja. Yhdistä ne muokkaamalla säilytettävää ja yhdistämällä muut siihen."
+      "sameKindTip": "{{names}} ovat samantyyppisiä kirjastoja. Yhdistä ne muokkaamalla säilytettävää ja yhdistämällä muut siihen.",
+      "add": "Lisää",
+      "addFolder": "Lisää {{name}}",
+      "inLibrary": "Kirjastossa {{name}}",
+      "inOther": "{{folder}} on jo kirjastossa {{library}}, ja kansio voi olla vain yhdessä kirjastossa.",
+      "nested": "Kansio sisältää kansion {{folder}} tai on sen sisällä, ja se on jo tässä kirjastossa. Valitse sen vieressä oleva kansio."
     },
     "people": {
       "title": "Ihmiset",

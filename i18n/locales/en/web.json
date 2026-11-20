@@ -744,7 +744,12 @@
       "combinePick": "Pick a library",
       "combineButton": "Combine",
       "confirmCombine": "Combine “{{from}}” into “{{into}}”? “{{from}}” goes away, and its folders and titles join “{{into}}”.",
-      "sameKindTip": "{{names}} are the same type of library. To make them one, edit the one to keep and combine the others into it."
+      "sameKindTip": "{{names}} are the same type of library. To make them one, edit the one to keep and combine the others into it.",
+      "add": "Add",
+      "addFolder": "Add {{name}}",
+      "inLibrary": "In {{name}}",
+      "inOther": "{{folder}} is already in the {{library}} library, and a folder can be in one library only.",
+      "nested": "That folder holds or is inside {{folder}}, which this library already has. Pick a folder next to it instead."
     },
     "people": {
       "title": "People",

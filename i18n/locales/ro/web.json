@@ -750,7 +750,12 @@
       "combinePick": "Alege o bibliotecă",
       "combineButton": "Unește",
       "confirmCombine": "Unești „{{from}}” cu „{{into}}”? „{{from}}” dispare, iar dosarele și titlurile ei trec în „{{into}}”.",
-      "sameKindTip": "{{names}} sunt biblioteci de același tip. Ca să devină una, editează biblioteca pe care o păstrezi și unește-le pe celelalte cu ea."
+      "sameKindTip": "{{names}} sunt biblioteci de același tip. Ca să devină una, editează biblioteca pe care o păstrezi și unește-le pe celelalte cu ea.",
+      "add": "Adaugă",
+      "addFolder": "Adaugă {{name}}",
+      "inLibrary": "În {{name}}",
+      "inOther": "{{folder}} este deja în biblioteca {{library}}, iar un dosar poate fi într-o singură bibliotecă.",
+      "nested": "Acel dosar conține {{folder}} sau e în interiorul lui, iar biblioteca îl are deja. Alege un dosar de alături."
     },
     "people": {
       "title": "Persoane",

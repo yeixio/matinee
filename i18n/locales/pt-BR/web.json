@@ -750,7 +750,12 @@
       "combinePick": "Escolha uma biblioteca",
       "combineButton": "Juntar",
       "confirmCombine": "Juntar “{{from}}” a “{{into}}”? “{{from}}” deixa de existir e suas pastas e títulos passam para “{{into}}”.",
-      "sameKindTip": "{{names}} são bibliotecas do mesmo tipo. Para que virem uma, edite a que vai ficar e junte as outras a ela."
+      "sameKindTip": "{{names}} são bibliotecas do mesmo tipo. Para que virem uma, edite a que vai ficar e junte as outras a ela.",
+      "add": "Adicionar",
+      "addFolder": "Adicionar {{name}}",
+      "inLibrary": "Em {{name}}",
+      "inOther": "{{folder}} já está na biblioteca {{library}}, e uma pasta só pode estar em uma biblioteca.",
+      "nested": "Essa pasta contém {{folder}} ou está dentro dela, e esta biblioteca já a tem. Escolha uma pasta ao lado."
     },
     "people": {
       "title": "Pessoas",

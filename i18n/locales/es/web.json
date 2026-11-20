@@ -750,7 +750,12 @@
       "combinePick": "Elige una biblioteca",
       "combineButton": "Combinar",
       "confirmCombine": "¿Combinar «{{from}}» con «{{into}}»? «{{from}}» desaparece y sus carpetas y títulos pasan a «{{into}}».",
-      "sameKindTip": "{{names}} son bibliotecas del mismo tipo. Para unirlas, edita la que quieras conservar y combina las demás con ella."
+      "sameKindTip": "{{names}} son bibliotecas del mismo tipo. Para unirlas, edita la que quieras conservar y combina las demás con ella.",
+      "add": "Añadir",
+      "addFolder": "Añadir {{name}}",
+      "inLibrary": "En {{name}}",
+      "inOther": "{{folder}} ya está en la biblioteca {{library}}, y una carpeta solo puede estar en una biblioteca.",
+      "nested": "Esa carpeta contiene {{folder}} o está dentro de ella, y esta biblioteca ya la tiene. Elige una carpeta al lado."
     },
     "people": {
       "title": "Personas",

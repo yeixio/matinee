@@ -750,7 +750,12 @@
       "combinePick": "Choisir une bibliothèque",
       "combineButton": "Fusionner",
       "confirmCombine": "Fusionner « {{from}} » dans « {{into}} » ? « {{from}} » disparaît, et ses dossiers et titres rejoignent « {{into}} ».",
-      "sameKindTip": "{{names}} sont des bibliothèques du même type. Pour n’en faire qu’une, modifiez celle à garder et fusionnez-y les autres."
+      "sameKindTip": "{{names}} sont des bibliothèques du même type. Pour n’en faire qu’une, modifiez celle à garder et fusionnez-y les autres.",
+      "add": "Ajouter",
+      "addFolder": "Ajouter {{name}}",
+      "inLibrary": "Dans {{name}}",
+      "inOther": "{{folder}} est déjà dans la bibliothèque {{library}}, et un dossier ne peut être que dans une seule bibliothèque.",
+      "nested": "Ce dossier contient {{folder}} ou se trouve dedans, et cette bibliothèque l’a déjà. Choisissez plutôt un dossier à côté."
     },
     "people": {
       "title": "Personnes",
