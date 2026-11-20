@@ -741,7 +741,16 @@
       "details": "Détails",
       "detailsLocal": "Préférer les fichiers .nfo",
       "detailsOnline": "Préférer en ligne",
-      "detailsLocalOnly": "Fichiers .nfo uniquement"
+      "detailsLocalOnly": "Fichiers .nfo uniquement",
+      "edit": "Modifier {{name}}",
+      "foldersHint": "Une bibliothèque peut avoir plusieurs dossiers, par exemple des séries sur deux disques. Ils sont analysés ensemble, et une série répartie entre eux reste une seule série.",
+      "folderRemoved": "À l’enregistrement, les titres des dossiers retirés quittent cette bibliothèque. Vos fichiers restent où ils sont.",
+      "combine": "Fusionner avec une autre bibliothèque",
+      "combineHint": "Déplace les dossiers et les titres de l’autre bibliothèque dans {{name}} et supprime l’autre. Les séries présentes dans les deux n’en font plus qu’une. Ce que chacun a regardé, où il en est et ses listes sont conservés.",
+      "combinePick": "Choisir une bibliothèque",
+      "combineButton": "Fusionner",
+      "confirmCombine": "Fusionner « {{from}} » dans « {{into}} » ? « {{from}} » disparaît, et ses dossiers et titres rejoignent « {{into}} ».",
+      "sameKindTip": "{{names}} sont des bibliothèques du même type. Pour n’en faire qu’une, modifiez celle à garder et fusionnez-y les autres."
     },
     "people": {
       "title": "Personnes",

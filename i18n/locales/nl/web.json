@@ -735,7 +735,16 @@
       "details": "Details",
       "detailsLocal": "Liever .nfo-bestanden",
       "detailsOnline": "Liever online",
-      "detailsLocalOnly": "Alleen .nfo-bestanden"
+      "detailsLocalOnly": "Alleen .nfo-bestanden",
+      "edit": "{{name}} bewerken",
+      "foldersHint": "Een bibliotheek kan meerdere mappen hebben, zoals series op twee schijven. Ze worden samen gescand, en een serie die over beide verspreid is, is één serie.",
+      "folderRemoved": "Bij opslaan verdwijnen titels uit de mappen die je weghaalde uit deze bibliotheek. Je bestanden blijven waar ze zijn.",
+      "combine": "Samenvoegen met een andere bibliotheek",
+      "combineHint": "Verplaatst de mappen en titels van de andere bibliotheek naar {{name}} en verwijdert de andere. Series die in beide staan, worden één. Wat iedereen keek, waar ze waren en hun kijklijsten blijven.",
+      "combinePick": "Kies een bibliotheek",
+      "combineButton": "Samenvoegen",
+      "confirmCombine": "“{{from}}” samenvoegen met “{{into}}”? “{{from}}” verdwijnt en de mappen en titels gaan naar “{{into}}”.",
+      "sameKindTip": "{{names}} zijn bibliotheken van hetzelfde type. Om er één van te maken, bewerk je de bibliotheek die blijft en voeg je de andere erbij."
     },
     "people": {
       "title": "Mensen",

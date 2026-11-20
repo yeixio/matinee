@@ -735,7 +735,16 @@
       "details": "Details",
       "detailsLocal": "Lieber .nfo-Dateien",
       "detailsOnline": "Lieber online",
-      "detailsLocalOnly": "Nur .nfo-Dateien"
+      "detailsLocalOnly": "Nur .nfo-Dateien",
+      "edit": "{{name}} bearbeiten",
+      "foldersHint": "Eine Mediathek kann mehrere Ordner haben, etwa Serien auf zwei Festplatten. Sie werden zusammen durchsucht, und eine auf beide verteilte Serie ist eine Serie.",
+      "folderRemoved": "Beim Speichern verlassen Titel aus den entfernten Ordnern diese Mediathek. Deine Dateien bleiben, wo sie sind.",
+      "combine": "Mit einer anderen Mediathek zusammenführen",
+      "combineHint": "Verschiebt die Ordner und Titel der anderen Mediathek nach {{name}} und entfernt die andere. Serien, die in beiden sind, werden eine. Was alle gesehen haben, ihre Positionen und Merklisten bleiben.",
+      "combinePick": "Mediathek auswählen",
+      "combineButton": "Zusammenführen",
+      "confirmCombine": "„{{from}}“ mit „{{into}}“ zusammenführen? „{{from}}“ verschwindet, seine Ordner und Titel kommen zu „{{into}}“.",
+      "sameKindTip": "{{names}} sind Mediatheken derselben Art. Um sie zu einer zu machen, bearbeite die, die bleiben soll, und führe die anderen mit ihr zusammen."
     },
     "people": {
       "title": "Personen",

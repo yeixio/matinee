@@ -302,7 +302,9 @@ func (s *Server) routes() []route {
 
 		{"GET /libraries", reader, s.listLibraries},
 		{"POST /libraries", adminOnly, s.createLibrary},
+		{"PUT /libraries/{id}", adminOnly, s.updateLibrary},
 		{"DELETE /libraries/{id}", adminOnly, s.deleteLibrary},
+		{"POST /libraries/{id}/merge", adminOnly, s.mergeLibrary},
 		{"POST /libraries/{id}/scan", adminOnly, s.scanLibrary},
 		{"DELETE /libraries/{id}/scan", adminOnly, s.stopScan},
 		{"POST /libraries/{id}/artwork", adminOnly, s.refreshLibraryArtwork},
@@ -1079,15 +1081,11 @@ func (s *Server) createLibrary(w http.ResponseWriter, r *http.Request) {
 		writeError(w, http.StatusBadRequest, "add at least one folder")
 		return
 	}
-	for i, p := range req.Paths {
-		p = filepath.Clean(p)
-		if info, err := os.Stat(p); err != nil || !info.IsDir() {
-			writeError(w, http.StatusBadRequest, "folder not found: "+p)
-			return
-		}
-		req.Paths[i] = p
+	paths, ok := s.libraryFolders(w, r, 0, nil, req.Paths)
+	if !ok {
+		return
 	}
-	lib, err := s.Store.CreateLibrary(r.Context(), req.Name, req.Kind, req.Paths)
+	lib, err := s.Store.CreateLibrary(r.Context(), req.Name, req.Kind, paths)
 	if err != nil {
 		s.serverError(w, err)
 		return

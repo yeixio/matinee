@@ -747,7 +747,16 @@
       "details": "Podrobnosti",
       "detailsLocal": "Upřednostnit soubory .nfo",
       "detailsOnline": "Upřednostnit online",
-      "detailsLocalOnly": "Pouze soubory .nfo"
+      "detailsLocalOnly": "Pouze soubory .nfo",
+      "edit": "Upravit {{name}}",
+      "foldersHint": "Knihovna může mít víc složek, třeba seriály na dvou discích. Prohledávají se společně a seriál rozdělený mezi ně je jeden seriál.",
+      "folderRemoved": "Po uložení odejdou z této knihovny tituly ze složek, které jste odebrali. Soubory zůstanou, kde jsou.",
+      "combine": "Sloučit s jinou knihovnou",
+      "combineHint": "Přesune složky a tituly druhé knihovny do {{name}} a druhou odebere. Seriály, které jsou v obou, se spojí v jeden. Co kdo viděl, kde skončil a seznamy ke zhlédnutí zůstanou.",
+      "combinePick": "Vyberte knihovnu",
+      "combineButton": "Sloučit",
+      "confirmCombine": "Sloučit „{{from}}“ do „{{into}}“? „{{from}}“ zmizí a její složky a tituly přejdou do „{{into}}“.",
+      "sameKindTip": "{{names}} jsou knihovny stejného typu. Chcete-li z nich udělat jednu, upravte tu, kterou chcete zachovat, a slučte do ní ostatní."
     },
     "people": {
       "title": "Lidé",

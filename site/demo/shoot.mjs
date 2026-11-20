@@ -8,7 +8,7 @@
 // Needs Go, FFmpeg and Playwright's Chromium. The first run makes the demo
 // library in demo/.cache, which takes a few minutes.
 
-import { writeFileSync } from 'node:fs'
+import { mkdirSync, rmSync, writeFileSync } from 'node:fs'
 import http from 'node:http'
 import path from 'node:path'
 import { chromium } from 'playwright'
@@ -75,6 +75,21 @@ try {
     await page.context().close()
   }
   const libs = await addLibraries(token, media)
+  if (wanted('edit-library')) {
+    // A second disk of TV shows, added to the same library.
+    const disk2 = path.join(media, 'TV (disk 2)')
+    mkdirSync(path.join(disk2, 'Lantern Row'), { recursive: true })
+    const page = await open(desktop, token)
+    await settings(page, 'libraries')
+    await page.getByRole('button', { name: 'Edit TV Shows' }).click()
+    await page.locator('form button', { hasText: 'TV (disk 2)' }).last().click()
+    await sleep(500)
+    await page.getByRole('button', { name: 'Use this folder' }).click()
+    await shot(page, 'edit-library', { target: section(page, 'Libraries') })
+    await page.getByRole('button', { name: 'Cancel' }).click()
+    await page.context().close()
+    rmSync(disk2, { recursive: true, force: true })
+  }
 
   // What the screenshots show: something half-watched, a few watched, a
   // watch list, a second person and a kids profile.

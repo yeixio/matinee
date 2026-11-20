@@ -735,7 +735,16 @@
       "details": "Ayrıntılar",
       "detailsLocal": ".nfo dosyalarını tercih et",
       "detailsOnline": "Çevrimiçini tercih et",
-      "detailsLocalOnly": "Yalnızca .nfo dosyaları"
+      "detailsLocalOnly": "Yalnızca .nfo dosyaları",
+      "edit": "{{name}} düzenle",
+      "foldersHint": "Bir kitaplığın birden çok klasörü olabilir; örneğin iki diskteki diziler. Birlikte taranırlar ve aralarında bölünmüş bir dizi tek dizidir.",
+      "folderRemoved": "Kaydettiğinde, çıkardığın klasörlerdeki içerikler bu kitaplıktan çıkar. Dosyaların yerinde kalır.",
+      "combine": "Başka bir kitaplıkla birleştir",
+      "combineHint": "Diğer kitaplığın klasörlerini ve içeriklerini {{name}} kitaplığına taşır ve diğerini kaldırır. İkisinde de olan diziler tek dizi olur. Herkesin izledikleri, kaldığı yerler ve izleme listeleri korunur.",
+      "combinePick": "Bir kitaplık seç",
+      "combineButton": "Birleştir",
+      "confirmCombine": "“{{from}}”, “{{into}}” ile birleştirilsin mi? “{{from}}” kaldırılır; klasörleri ve içerikleri “{{into}}” kitaplığına geçer.",
+      "sameKindTip": "{{names}} aynı türde kitaplıklar. Tek kitaplık yapmak için tutmak istediğini düzenle ve diğerlerini onunla birleştir."
     },
     "people": {
       "title": "Kişiler",
