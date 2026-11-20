@@ -329,6 +329,7 @@
       "for-you": "Anbefalet til dig"
     },
     "because": "Fordi du så {{title}}",
+    "have": "Fordi du har {{title}}",
     "status": {
       "available": "I dit bibliotek",
       "added": "På vej",

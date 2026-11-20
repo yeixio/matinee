@@ -441,6 +441,7 @@
       "for-you": "مقترح لك"
     },
     "because": "لأنك شاهدت {{title}}",
+    "have": "لأن لديك {{title}}",
     "status": {
       "available": "في مكتبتك",
       "added": "في الطريق",

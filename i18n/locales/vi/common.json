@@ -301,6 +301,7 @@
       "for-you": "Đề xuất cho bạn"
     },
     "because": "Vì bạn đã xem {{title}}",
+    "have": "Vì bạn có {{title}}",
     "status": {
       "available": "Trong thư viện của bạn",
       "added": "Đang về",

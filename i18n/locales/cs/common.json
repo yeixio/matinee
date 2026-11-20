@@ -385,6 +385,7 @@
       "for-you": "Doporučeno pro vás"
     },
     "because": "Protože jste sledovali {{title}}",
+    "have": "Protože máte {{title}}",
     "status": {
       "available": "Ve vaší knihovně",
       "added": "Na cestě",

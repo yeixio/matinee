@@ -385,6 +385,7 @@
       "for-you": "Polecane dla Ciebie"
     },
     "because": "Bo oglądałeś {{title}}",
+    "have": "Bo masz {{title}}",
     "status": {
       "available": "W twojej bibliotece",
       "added": "W drodze",

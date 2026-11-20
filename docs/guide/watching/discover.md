@@ -25,6 +25,9 @@ If Overseerr is connected as well, Discover still comes from Box Office, and wha
 <!-- since: v0.2.3 -->
 - **Recommended for you**: with Box Office, titles like the ones already in your libraries, right after the **Because you watched** rows.
 <!-- /since -->
+<!-- since: v0.2.11 -->
+- **Because you have …**: with Box Office, titles like some of the movies and shows added to your libraries lately, between the lists, as in Box Office's own Discover. They leave out titles you already have. Discover shows the same rows on the web, phones, tablets and TVs.
+<!-- /since -->
 
 The **Because you watched** rows leave out titles you already have. Elsewhere, a badge on a poster says when a title is **In your library**, has been **Requested**, or is **On its way**.
 

@@ -50,9 +50,44 @@ var boxOfficeRowIDs = map[string]string{
 	"for-you":         "for-you",
 }
 
-// boxOfficeHomeRows are the rows taken from Box Office's home, in order,
-// after the ones for what someone watched.
-var boxOfficeHomeRows = []string{"for-you", "trending", "popular-movies", "popular-shows", "upcoming-movies", "upcoming-shows"}
+// boxOfficeHaveRow is Matinee's id for one of Box Office's "Because you
+// have …" rows (because-{movie,series}-{tmdb id}): have-{movie,show}-{tmdb
+// id}. ok is false for any other row.
+func boxOfficeHaveRow(boID string) (id string, ok bool) {
+	rest, ok := strings.CutPrefix(boID, "because-")
+	if !ok {
+		return "", false
+	}
+	kind, num, ok := strings.Cut(rest, "-")
+	if n, err := strconv.ParseInt(num, 10, 64); !ok || err != nil || n <= 0 || kind != "movie" && kind != "series" {
+		return "", false
+	}
+	if kind == "series" {
+		kind = "show"
+	}
+	return "have-" + kind + "-" + num, true
+}
+
+// boxOfficeRowID is Box Office's id for one of Matinee's rows, other than
+// the because-{item id} ones.
+func boxOfficeRowID(id string) string {
+	if v, ok := boxOfficeRowIDs[id]; ok {
+		return v
+	}
+	rest, ok := strings.CutPrefix(id, "have-")
+	if !ok {
+		return ""
+	}
+	kind, num, _ := strings.Cut(rest, "-")
+	if kind != "movie" && kind != "show" {
+		return ""
+	}
+	boID := "because-" + boxOfficeKind(kind) + "-" + num
+	if _, ok := boxOfficeHaveRow(boID); !ok {
+		return ""
+	}
+	return boID
+}
 
 func boxOfficeKind(kind string) string {
 	if kind == "show" {
@@ -179,14 +214,26 @@ func (s *Server) discoverFromBoxOffice(w http.ResponseWriter, r *http.Request, c
 		}
 		s.Log.Warn("box office discover", "err", homeErr)
 	}
-	for _, id := range boxOfficeHomeRows {
-		for _, br := range home.Rows {
-			if br.ID != boxOfficeRowIDs[id] {
-				continue
+	// The rest are Box Office's own home rows, in its order, so Discover
+	// here has every row Box Office's Discover has: its lists, and a
+	// "Because you have …" row for some of what's in the libraries.
+	matinee := map[string]string{}
+	for id, boID := range boxOfficeRowIDs {
+		matinee[boID] = id
+	}
+	for _, br := range home.Rows {
+		row := discoverRow{ID: matinee[br.ID], Title: br.Title, More: br.More}
+		if id, ok := boxOfficeHaveRow(br.ID); ok {
+			row.ID, row.Have = id, br.Because
+			if row.Have == "" {
+				row.Have = strings.TrimPrefix(br.Title, "Because you have ")
 			}
-			if !add(discoverRow{ID: id, Title: br.Title, More: br.More}, br.Items, false) {
-				return
-			}
+		}
+		if row.ID == "" {
+			continue
+		}
+		if !add(row, br.Items, row.Have != "") {
+			return
 		}
 	}
 	writeJSON(w, http.StatusOK, out)
@@ -195,7 +242,8 @@ func (s *Server) discoverFromBoxOffice(w http.ResponseWriter, r *http.Request, c
 func (s *Server) discoverRowFromBoxOffice(w http.ResponseWriter, r *http.Request, cl *arr.Client, page int) {
 	ctx, u, id := r.Context(), currentUser(r), r.PathValue("id")
 	row := discoverRow{ID: id}
-	boID, dropOwned := boxOfficeRowIDs[id], false
+	boID := boxOfficeRowID(id)
+	dropOwned := strings.HasPrefix(id, "have-")
 	if v, ok := strings.CutPrefix(id, "because-"); ok {
 		itemID, err := strconv.ParseInt(v, 10, 64)
 		if err != nil {
@@ -227,6 +275,9 @@ func (s *Server) discoverRowFromBoxOffice(w http.ResponseWriter, r *http.Request
 	}
 	if row.Title == "" {
 		row.Title = p.Title
+	}
+	if dropOwned && row.Because == "" {
+		row.Have = p.Because
 	}
 	if row.Items, err = s.boxOfficeTitles(ctx, p.Items, dropOwned); err != nil {
 		s.serverError(w, err)

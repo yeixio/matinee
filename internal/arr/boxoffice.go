@@ -77,10 +77,13 @@ type BoxOfficeTitle struct {
 
 // BoxOfficeRow is one of Box Office's Discover rows.
 type BoxOfficeRow struct {
-	ID    string           `json:"id"`
-	Title string           `json:"title"`
-	Items []BoxOfficeTitle `json:"items"`
-	More  bool             `json:"more,omitempty"`
+	ID    string `json:"id"`
+	Title string `json:"title"`
+	// Because is the library title a because-{movie,series}-{tmdb id} row
+	// is based on.
+	Because string           `json:"because,omitempty"`
+	Items   []BoxOfficeTitle `json:"items"`
+	More    bool             `json:"more,omitempty"`
 	// Page and Pages are set on a row read by itself.
 	Page  int `json:"page,omitempty"`
 	Pages int `json:"pages,omitempty"`
@@ -100,7 +103,8 @@ func (c *Client) BoxOfficeDiscoverHome(ctx context.Context) (BoxOfficeDiscover, 
 
 // BoxOfficeDiscoverRow reads a page (from 1) of one row: trending,
 // popular-movies, popular-series, upcoming-movies, upcoming-series,
-// for-you, or like-{movie,series}-{tmdb id}.
+// for-you, because-{movie,series}-{tmdb id} (a title Box Office has), or
+// like-{movie,series}-{tmdb id}.
 func (c *Client) BoxOfficeDiscoverRow(ctx context.Context, id string, page int) (BoxOfficeRow, error) {
 	var r BoxOfficeRow
 	err := c.do(ctx, "GET", "/boxoffice/discover/rows/"+url.PathEscape(id), url.Values{"page": {strconv.Itoa(max(page, 1))}}, nil, &r)

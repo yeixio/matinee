@@ -357,6 +357,7 @@
       "for-you": "Recomandate pentru tine"
     },
     "because": "Pentru că ai văzut {{title}}",
+    "have": "Pentru că ai {{title}}",
     "status": {
       "available": "În biblioteca ta",
       "added": "Pe drum",

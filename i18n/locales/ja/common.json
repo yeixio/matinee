@@ -301,6 +301,7 @@
       "for-you": "あなたへのおすすめ"
     },
     "because": "{{title}}を観たあなたに",
+    "have": "{{title}}をお持ちのあなたに",
     "status": {
       "available": "ライブラリにあります",
       "added": "準備中",
