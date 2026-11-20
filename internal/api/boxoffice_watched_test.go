@@ -66,6 +66,14 @@ func TestWatchedReportedToBoxOffice(t *testing.T) {
 	}
 	check(bo.Radarr, 78, 2, 1)
 	check(bo.Sonarr, 95396, 2, 1)
+	// How far anyone has got into the show goes too; a movie has no such
+	// place, and a special doesn't count.
+	if got := bo.Sonarr.Watched[0]["titles"].([]any)[0].(map[string]any); got["furthestSeason"] != 1.0 || got["furthestEpisode"] != 2.0 {
+		t.Fatalf("furthest episode: %+v", got)
+	}
+	if got := bo.Radarr.Watched[0]["titles"].([]any)[0].(map[string]any); got["furthestSeason"] != nil || got["furthestEpisode"] != nil {
+		t.Fatalf("a movie has a furthest episode: %+v", got)
+	}
 
 	// Nothing new: nothing said. Something new: said again.
 	e.srv.reportWatched(ctx, true)

@@ -185,6 +185,10 @@ type BoxOfficeWatched struct {
 	Viewers    int        `json:"viewers"`
 	FinishedBy int        `json:"finishedBy"`
 	FinishedAt *time.Time `json:"finishedAt,omitempty"`
+	// FurthestSeason and FurthestEpisode are the latest episode of a show
+	// anyone has started, leaving specials out.
+	FurthestSeason  int `json:"furthestSeason,omitempty"`
+	FurthestEpisode int `json:"furthestEpisode,omitempty"`
 }
 
 // BoxOfficeReportWatched tells Box Office what has been watched of this

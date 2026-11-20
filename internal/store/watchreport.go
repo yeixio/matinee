@@ -18,6 +18,10 @@ type WatchedTitle struct {
 	FinishedBy int
 	// FinishedAt is when the last of those people finished, or 0.
 	FinishedAt int64
+	// FurthestSeason and FurthestEpisode are the latest episode of a show
+	// anyone has started or played, leaving specials out, or 0 and 0.
+	FurthestSeason  int
+	FurthestEpisode int
 }
 
 // WatchReport is what has been watched of every movie (kind "movie") or
@@ -31,7 +35,7 @@ func (s *Store) WatchReport(ctx context.Context, kind string) (people int, title
 	// How many parts each title has: 1 for a movie, a show's episodes.
 	parts := map[int]int{}
 	q := `SELECT p.user_id, m.tmdb_id, MAX(p.updated_at), MAX(p.played), 1,
-			MAX(CASE WHEN p.played = 1 THEN p.updated_at ELSE 0 END)
+			MAX(CASE WHEN p.played = 1 THEN p.updated_at ELSE 0 END), 0
 		FROM progress p
 		JOIN users u ON u.id = p.user_id AND u.guest = 0
 		JOIN items m ON m.id = p.item_id AND m.kind = 'movie' AND m.tmdb_id > 0
@@ -64,7 +68,8 @@ func (s *Store) WatchReport(ctx context.Context, kind string) (people int, title
 		const regular = "p.played = 1 AND COALESCE(se.index_number, -1) <> 0"
 		q = `SELECT p.user_id, sh.tmdb_id, MAX(p.updated_at), 0,
 				COUNT(DISTINCT CASE WHEN ` + regular + ` THEN ` + episode + ` END),
-				MAX(CASE WHEN ` + regular + ` THEN p.updated_at ELSE 0 END)
+				MAX(CASE WHEN ` + regular + ` THEN p.updated_at ELSE 0 END),
+				MAX(CASE WHEN COALESCE(se.index_number, -1) > 0 THEN ` + episode + ` ELSE 0 END)
 			FROM progress p
 			JOIN users u ON u.id = p.user_id AND u.guest = 0
 			JOIN items e ON e.id = p.item_id AND e.kind = 'episode'
@@ -82,8 +87,8 @@ func (s *Store) WatchReport(ctx context.Context, kind string) (people int, title
 	for rows.Next() {
 		var user int64
 		var id, played, done int
-		var last, doneAt int64
-		if err := rows.Scan(&user, &id, &last, &played, &done, &doneAt); err != nil {
+		var last, doneAt, furthest int64
+		if err := rows.Scan(&user, &id, &last, &played, &done, &doneAt, &furthest); err != nil {
 			return 0, nil, err
 		}
 		t := by[id]
@@ -93,6 +98,9 @@ func (s *Store) WatchReport(ctx context.Context, kind string) (people int, title
 		}
 		t.Viewers++
 		t.LastPlayed = max(t.LastPlayed, last)
+		if season, episode := int(furthest/100000), int(furthest%100000); season > t.FurthestSeason || season == t.FurthestSeason && episode > t.FurthestEpisode {
+			t.FurthestSeason, t.FurthestEpisode = season, episode
+		}
 		finished := played == 1
 		if kind == "show" {
 			finished = parts[id] > 0 && done >= parts[id]
