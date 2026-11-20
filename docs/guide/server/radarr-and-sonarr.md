@@ -139,7 +139,7 @@ These are requests like any other, so **Who can add movies and shows** applies, 
 ## Leaving soon
 
 <!-- since: v0.2.10 -->
-[Box Office](https://github.com/yeixio/boxoffice) can clear out movies and shows that have been watched, with its [clean-up rules](https://github.com/yeixio/boxoffice/blob/main/docs/cleanup.md). So it knows what has been watched, Matinee tells it how many people have played and finished each title, and when. It sends counts only, never who watched what.
+[Box Office](https://github.com/yeixio/boxoffice) can clear out movies and shows that have been watched, with its [clean-up rules](https://github.com/yeixio/boxoffice/blob/main/docs/cleanup.md). So it knows what has been watched, Matinee tells it how many people have played and finished each title, and when, and the latest episode of each show anyone has started, so Box Office can fetch the next episodes as a show is watched. It sends counts only, never who watched what.
 
 Before anything is deleted, Box Office lists it as leaving soon, and Home gets a **Leaving soon** row with those titles, on the web and in the apps, soonest first. Playing a title takes it off Box Office's list, so it stays.
 

@@ -15,7 +15,9 @@ import (
 // rules), and only Matinee knows what has been. So when Radarr or Sonarr
 // goes to a Box Office that says it takes the report ("watched"), Matinee
 // tells it, for each movie or show, how many people have played it, how
-// many have finished it, and when: counts, never who. Matinee deletes
+// many have finished it, and when, and how far into a show anyone has got
+// (so Box Office can fetch the next episodes as they're watched): counts,
+// never who. Matinee deletes
 // nothing itself, and real Radarr and Sonarr are told nothing.
 
 const (
@@ -102,7 +104,7 @@ func watchedTitles(titles []store.WatchedTitle) []arr.BoxOfficeWatched {
 	}
 	out := make([]arr.BoxOfficeWatched, len(titles))
 	for i, t := range titles {
-		out[i] = arr.BoxOfficeWatched{TMDBID: t.TMDBID, LastPlayed: at(t.LastPlayed), Viewers: t.Viewers, FinishedBy: t.FinishedBy, FinishedAt: at(t.FinishedAt)}
+		out[i] = arr.BoxOfficeWatched{TMDBID: t.TMDBID, LastPlayed: at(t.LastPlayed), Viewers: t.Viewers, FinishedBy: t.FinishedBy, FinishedAt: at(t.FinishedAt), FurthestSeason: t.FurthestSeason, FurthestEpisode: t.FurthestEpisode}
 	}
 	return out
 }
