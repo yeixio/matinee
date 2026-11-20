@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { Activity, ChevronLeft, ChevronRight, Combine, Folder, FolderOpen, Gauge, Globe, Image as ImageIcon, KeyRound, LibraryBig, Monitor, Pencil, Plus, Puzzle, RefreshCw, Trash2, Tv, UserPlus, UserRound, UsersRound, X, type LucideIcon } from 'lucide-react'
+import { Activity, ChevronLeft, ChevronRight, Combine, Folder, FolderOpen, Gauge, Globe, Image as ImageIcon, KeyRound, LibraryBig, Monitor, Pencil, Plus, Undo2, Puzzle, RefreshCw, Trash2, Tv, UserPlus, UserRound, UsersRound, X, type LucideIcon } from 'lucide-react'
 import { useEffect, useState, type FormEvent, type ReactNode } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import { Link, Navigate, useLocation, useNavigate, useParams } from 'react-router-dom'
@@ -299,6 +299,23 @@ function Libraries() {
   )
 }
 
+// Whether path is dir or inside it, for paths as the server writes them (C:\\Movies on Windows).
+function sameOrInside(path: string, dir: string) {
+  const norm = (p: string) => p.replace(/[\\/]+$/, '')
+  const a = norm(path)
+  const b = norm(dir)
+  return a === b || a.startsWith(b + '/') || a.startsWith(b + '\\')
+}
+
+// The folder a path is in, so the picker opens next to a library's folders.
+function parentOf(path?: string) {
+  if (!path) return ''
+  const trimmed = path.replace(/[\\/]+$/, '')
+  const cut = Math.max(trimmed.lastIndexOf('/'), trimmed.lastIndexOf('\\'))
+  if (cut < 0) return ''
+  return cut === 0 ? '/' : trimmed.slice(0, cut + (/^[A-Za-z]:$/.test(trimmed.slice(0, cut)) ? 1 : 0))
+}
+
 // Change a library's name and folders, or combine another library of its type into it.
 function EditLibrary({ library, libraries, onDone }: { library: Library; libraries: Library[]; onDone: () => void }) {
   const { t } = useTranslation()
@@ -317,7 +334,11 @@ function EditLibrary({ library, libraries, onDone }: { library: Library; librari
     mutationFn: () => api.updateLibrary(library.id, folders ? { name, paths } : { name }),
     onSuccess: done,
   })
-  const merge = useMutation({ mutationFn: () => api.mergeLibrary(library.id, from), onSuccess: done })
+  const merge = useMutation({ mutationFn: (id: number) => api.mergeLibrary(library.id, id), onSuccess: done })
+  // A folder can be in one library only; picking another library's folder offers to combine them instead.
+  const [clash, setClash] = useState<{ path: string; library: Library } | null>(null)
+  const [nested, setNested] = useState('')
+  const holder = (p: string) => libraries.find((l) => l.id !== library.id && l.paths.some((q) => sameOrInside(p, q) || sameOrInside(q, p)))
   const dropped = library.paths.filter((p) => !paths.includes(p))
   const fromName = others.find((l) => l.id === from)?.name ?? ''
   const submit = (e: FormEvent) => {
@@ -334,19 +355,60 @@ function EditLibrary({ library, libraries, onDone }: { library: Library; librari
         <Field label={t('settings.libraries.folders')}>
           <div className="space-y-2">
             <span className="block text-sm text-muted">{t('settings.libraries.foldersHint')}</span>
-            {paths.map((p) => (
-              <div key={p} className="flex items-center gap-2 rounded-lg bg-text/5 px-3 py-2 text-sm">
-                <Folder className="size-4 text-accent" />
-                <span className="flex-1 truncate" dir="ltr">
-                  {p}
-                </span>
-                <button type="button" onClick={() => setPaths(paths.filter((x) => x !== p))} aria-label={t('filters.remove', { label: p })}>
-                  <X className="size-4 text-muted hover:text-text" />
-                </button>
+            {nested && <p className="text-sm text-danger">{t('settings.libraries.nested', { folder: nested })}</p>}
+            {clash && (
+              <div className="space-y-2 rounded-lg border border-accent/40 bg-accent/5 p-3 text-sm">
+                <p>{t('settings.libraries.inOther', { folder: clash.path, library: clash.library.name })}</p>
+                {clash.library.kind === library.kind && (
+                  <Button
+                    type="button"
+                    icon={<Combine className="size-4" />}
+                    disabled={merge.isPending}
+                    onClick={() =>
+                      confirm(t('settings.libraries.confirmCombine', { from: clash.library.name, into: library.name })) && merge.mutate(clash.library.id)
+                    }
+                  >
+                    {t('settings.libraries.combineButton')}
+                  </Button>
+                )}
               </div>
-            ))}
+            )}
+            <FolderPicker
+              picked={paths}
+              start={parentOf(library.paths[0])}
+              inLibrary={(p) => holder(p)?.name}
+              onPick={(p) => {
+                const other = holder(p)
+                const mine = paths.find((q) => q !== p && (sameOrInside(p, q) || sameOrInside(q, p)))
+                setClash(other ? { path: p, library: other } : null)
+                setNested(!other && mine ? mine : '')
+                if (!other && !mine) setPaths((prev) => (prev.includes(p) ? prev : [...prev, p]))
+              }}
+            />
+            {/* Chosen folders are listed under the picker, so nothing moves under the pointer when one is
+                added (a quick second click used to land on a folder's remove button). Folders taken out stay
+                listed until Save, so one taken out by mistake is one click to keep. */}
+            {[...library.paths, ...paths.filter((p) => !library.paths.includes(p))].map((p) => {
+              const out = !paths.includes(p)
+              return (
+                <div key={p} className={`flex items-center gap-2 rounded-lg px-3 py-2 text-sm ${out ? 'border border-dashed border-line' : 'bg-text/5'}`}>
+                  <Folder className={`size-4 ${out ? 'text-faint' : 'text-accent'}`} />
+                  <span className={`flex-1 truncate ${out ? 'text-faint line-through' : ''}`} dir="ltr">
+                    {p}
+                  </span>
+                  {out ? (
+                    <Button type="button" variant="ghost" className="h-7 px-2 text-xs" icon={<Undo2 className="size-3.5" />} onClick={() => setPaths([...paths, p])}>
+                      {t('settings.libraries.keepFolder')}
+                    </Button>
+                  ) : (
+                    <button type="button" onClick={() => setPaths(paths.filter((x) => x !== p))} aria-label={t('filters.remove', { label: p })}>
+                      <X className="size-4 text-muted hover:text-text" />
+                    </button>
+                  )}
+                </div>
+              )
+            })}
             {dropped.length > 0 && <p className="text-sm text-muted">{t('settings.libraries.folderRemoved')}</p>}
-            <FolderPicker picked={paths} onPick={(p) => setPaths((prev) => (prev.includes(p) ? prev : [...prev, p]))} />
           </div>
         </Field>
       )}
@@ -381,7 +443,7 @@ function EditLibrary({ library, libraries, onDone }: { library: Library; librari
               type="button"
               icon={<Combine className="size-4" />}
               disabled={!from || merge.isPending}
-              onClick={() => confirm(t('settings.libraries.confirmCombine', { from: fromName, into: library.name })) && merge.mutate()}
+              onClick={() => confirm(t('settings.libraries.confirmCombine', { from: fromName, into: library.name })) && merge.mutate(from)}
             >
               {t('settings.libraries.combineButton')}
             </Button>
@@ -397,6 +459,7 @@ const builtInKinds: LibraryKind[] = [{ name: 'movies' }, { name: 'tv' }, { name:
 
 function AddLibrary({ onDone }: { onDone: () => void }) {
   const { t } = useTranslation()
+  const { data: libraries = [] } = useLibraries()
   const qc = useQueryClient()
   // Plugins can add kinds of their own, with their own labels.
   const { data: fromServer } = useQuery({ queryKey: ['libraryKinds'], queryFn: api.libraryKinds, retry: false })
@@ -450,7 +513,11 @@ function AddLibrary({ onDone }: { onDone: () => void }) {
         {/* The picker stays put and chosen folders appear below it, so nothing new lands
             under the finger after a tap (a quick second tap used to hit a chip's remove button). */}
         <div className="space-y-2">
-          <FolderPicker picked={paths} onPick={(p) => setPaths((prev) => (prev.includes(p) ? prev : [...prev, p]))} />
+          <FolderPicker
+            picked={paths}
+            inLibrary={(p) => libraries.find((l) => l.paths.some((q) => sameOrInside(p, q) || sameOrInside(q, p)))?.name}
+            onPick={(p) => setPaths((prev) => (prev.includes(p) ? prev : [...prev, p]))}
+          />
           {paths.map((p) => (
             <div key={p} className="flex items-center gap-2 rounded-lg bg-text/5 px-3 py-2 text-sm">
               <Folder className="size-4 text-accent" />
@@ -477,10 +544,21 @@ function AddLibrary({ onDone }: { onDone: () => void }) {
 }
 
 // Browse the server's folders, since the media lives on the server, not this device.
-export function FolderPicker({ picked, onPick }: { picked: string[]; onPick: (path: string) => void }) {
-  // Empty asks the server for its media root (MATINEE_MEDIA_ROOT), so the picker opens on the media.
+export function FolderPicker({
+  picked,
+  onPick,
+  start = '',
+  inLibrary,
+}: {
+  picked: string[]
+  onPick: (path: string) => void
+  // Where it opens; empty asks the server for its media root (MATINEE_MEDIA_ROOT), so the picker opens on the media.
+  start?: string
+  // The other library a folder is in, if any, so it can't be added here by mistake.
+  inLibrary?: (path: string) => string | undefined
+}) {
   const { t } = useTranslation()
-  const [path, setPath] = useState('')
+  const [path, setPath] = useState(start)
   const [typed, setTyped] = useState('')
   const { data, error } = useQuery({ queryKey: ['fs', path], queryFn: () => api.browse(path) })
   // The server sends each subfolder's full path, written its own way (C:\Movies on Windows).
@@ -539,16 +617,35 @@ export function FolderPicker({ picked, onPick }: { picked: string[]; onPick: (pa
       <div className="max-h-60 overflow-y-auto">
         {error && <p className="p-3 text-sm text-danger">{error.message}</p>}
         {data?.dirs.length === 0 && <p className="p-3 text-sm text-faint">{t('settings.libraries.noSubfolders')}</p>}
-        {data?.dirs.map((d, i) => (
-          <button
-            type="button"
-            key={d}
-            onClick={() => setPath(join(i, d))}
-            className="flex w-full items-center gap-2 px-3 py-2 text-start text-sm hover:bg-text/5"
-          >
-            <FolderOpen className="size-4 text-faint" /> {d}
-          </button>
-        ))}
+        {data?.dirs.map((d, i) => {
+          const full = join(i, d)
+          const other = inLibrary?.(full)
+          return (
+            <div key={d} className="flex items-center gap-2 pe-2 hover:bg-text/5">
+              <button type="button" onClick={() => setPath(full)} className="flex min-w-0 flex-1 items-center gap-2 px-3 py-2 text-start text-sm">
+                <FolderOpen className="size-4 shrink-0 text-faint" /> <span className="truncate">{d}</span>
+              </button>
+              {/* Adds this subfolder without opening it, so a folder next to one the library has is one tap. */}
+              {usable &&
+                (picked.includes(full) ? (
+                  <span className="shrink-0 px-2 text-xs text-faint">{t('settings.libraries.added')}</span>
+                ) : other ? (
+                  <span className="shrink-0 truncate px-2 text-xs text-faint">{t('settings.libraries.inLibrary', { name: other })}</span>
+                ) : (
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    className="h-7 shrink-0 px-2 text-xs"
+                    icon={<Plus className="size-3.5" />}
+                    aria-label={t('settings.libraries.addFolder', { name: d })}
+                    onClick={() => onPick(full)}
+                  >
+                    {t('settings.libraries.add')}
+                  </Button>
+                ))}
+            </div>
+          )
+        })}
       </div>
     </div>
   )

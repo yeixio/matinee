@@ -744,7 +744,13 @@
       "combinePick": "Vælg et bibliotek",
       "combineButton": "Slå sammen",
       "confirmCombine": "Slå „{{from}}“ sammen med „{{into}}“? „{{from}}“ forsvinder, og dets mapper og titler flytter til „{{into}}“.",
-      "sameKindTip": "{{names}} er biblioteker af samme type. Gør dem til ét ved at redigere det, der skal blive, og slå de andre sammen med det."
+      "sameKindTip": "{{names}} er biblioteker af samme type. Gør dem til ét ved at redigere det, der skal blive, og slå de andre sammen med det.",
+      "add": "Tilføj",
+      "addFolder": "Tilføj {{name}}",
+      "inLibrary": "I {{name}}",
+      "inOther": "{{folder}} er allerede i biblioteket {{library}}, og en mappe kan kun være i ét bibliotek.",
+      "nested": "Den mappe indeholder {{folder}} eller ligger i den, og den har biblioteket allerede. Vælg en mappe ved siden af i stedet.",
+      "keepFolder": "Behold"
     },
     "people": {
       "title": "Personer",

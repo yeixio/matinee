@@ -738,7 +738,13 @@
       "combinePick": "Pilih pustaka",
       "combineButton": "Gabungkan",
       "confirmCombine": "Gabungkan “{{from}}” ke dalam “{{into}}”? “{{from}}” akan hilang, dan folder serta tajuknya berpindah ke “{{into}}”.",
-      "sameKindTip": "{{names}} ialah pustaka jenis yang sama. Untuk menjadikannya satu, edit pustaka yang hendak disimpan dan gabungkan yang lain ke dalamnya."
+      "sameKindTip": "{{names}} ialah pustaka jenis yang sama. Untuk menjadikannya satu, edit pustaka yang hendak disimpan dan gabungkan yang lain ke dalamnya.",
+      "add": "Tambah",
+      "addFolder": "Tambah {{name}}",
+      "inLibrary": "Dalam {{name}}",
+      "inOther": "{{folder}} sudah ada dalam pustaka {{library}}, dan satu folder hanya boleh berada dalam satu pustaka.",
+      "nested": "Folder itu mengandungi {{folder}} atau berada di dalamnya, dan pustaka ini sudah ada folder itu. Pilih folder di sebelahnya.",
+      "keepFolder": "Kekalkan"
     },
     "people": {
       "title": "Orang",

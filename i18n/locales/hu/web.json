@@ -744,7 +744,13 @@
       "combinePick": "Válassz könyvtárat",
       "combineButton": "Egyesítés",
       "confirmCombine": "Egyesíted ezt: „{{from}}” ezzel: „{{into}}”? „{{from}}” megszűnik, mappái és címei ide kerülnek: „{{into}}”.",
-      "sameKindTip": "{{names}} azonos típusú könyvtárak. Ha egyet szeretnél belőlük, szerkeszd a megtartandót, és egyesítsd vele a többit."
+      "sameKindTip": "{{names}} azonos típusú könyvtárak. Ha egyet szeretnél belőlük, szerkeszd a megtartandót, és egyesítsd vele a többit.",
+      "add": "Hozzáadás",
+      "addFolder": "{{name}} hozzáadása",
+      "inLibrary": "Itt: {{name}}",
+      "inOther": "{{folder}} már a(z) {{library}} könyvtárban van, és egy mappa csak egy könyvtárban lehet.",
+      "nested": "Ez a mappa tartalmazza ezt: {{folder}}, vagy benne van, és ez már a könyvtár része. Válassz inkább mellette lévő mappát.",
+      "keepFolder": "Megtartás"
     },
     "people": {
       "title": "Személyek",

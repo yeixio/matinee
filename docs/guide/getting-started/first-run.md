@@ -33,14 +33,14 @@ A podcast library is the one kind without folders: its shows come from their fee
 Keep each kind of media in one library, even when it's on several disks or shares. To add a folder to a library you already have, or take one out:
 
 1. In **Settings → Libraries**, click the pencil next to the library.
-2. Browse to the folder and click **Use this folder**. To take a folder out, click the **×** next to it.
+2. The folder picker opens next to the library's folders. Click **Add** beside the folder you want, or open it and click **Use this folder**. To take a folder out, click the **×** next to it.
 3. Click **Save**.
 
 Matinee scans the library again straight away. Its folders are scanned together as one library, so a show with seasons on two disks is one show, and a movie on both is one movie with two versions. When you take a folder out, its titles leave the library; the files themselves stay where they are.
 
 ![Editing the TV Shows library: its folders, with a second disk being added](../images/edit-library.webp)
 
-A folder can be in only one library. Matinee says so if you pick a folder that another library has, or one that sits inside a folder the library already has.
+A folder can be in only one library. The picker marks folders another library has with that library's name, and if you pick one, Matinee offers to combine that library into this one instead. It also says so if you pick a folder that holds, or sits inside, a folder the library already has.
 
 #### Two libraries that should be one
 

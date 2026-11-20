@@ -738,7 +738,13 @@
       "combinePick": "选择媒体库",
       "combineButton": "合并",
       "confirmCombine": "将“{{from}}”合并到“{{into}}”？“{{from}}”将消失，它的文件夹和作品会并入“{{into}}”。",
-      "sameKindTip": "{{names}}是同一类型的媒体库。要合为一个，请编辑要保留的那个，并把其他的合并进去。"
+      "sameKindTip": "{{names}}是同一类型的媒体库。要合为一个，请编辑要保留的那个，并把其他的合并进去。",
+      "add": "添加",
+      "addFolder": "添加{{name}}",
+      "inLibrary": "在{{name}}中",
+      "inOther": "{{folder}}已在{{library}}媒体库中，一个文件夹只能属于一个媒体库。",
+      "nested": "该文件夹包含此媒体库已有的{{folder}}，或位于其中。请改选旁边的文件夹。",
+      "keepFolder": "保留"
     },
     "people": {
       "title": "成员",

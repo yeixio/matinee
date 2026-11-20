@@ -756,7 +756,13 @@
       "combinePick": "Wybierz bibliotekę",
       "combineButton": "Połącz",
       "confirmCombine": "Połączyć „{{from}}” z „{{into}}”? „{{from}}” zniknie, a jej foldery i tytuły trafią do „{{into}}”.",
-      "sameKindTip": "{{names}} to biblioteki tego samego typu. Aby zrobić z nich jedną, edytuj tę, którą chcesz zachować, i połącz z nią pozostałe."
+      "sameKindTip": "{{names}} to biblioteki tego samego typu. Aby zrobić z nich jedną, edytuj tę, którą chcesz zachować, i połącz z nią pozostałe.",
+      "add": "Dodaj",
+      "addFolder": "Dodaj {{name}}",
+      "inLibrary": "W {{name}}",
+      "inOther": "{{folder}} jest już w bibliotece {{library}}, a folder może należeć tylko do jednej biblioteki.",
+      "nested": "Ten folder zawiera {{folder}} lub jest w nim, a ta biblioteka już go ma. Wybierz folder obok.",
+      "keepFolder": "Zostaw"
     },
     "people": {
       "title": "Osoby",
