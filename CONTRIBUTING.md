@@ -69,6 +69,7 @@ Run `gofmt -w` on Go files you touch.
 - The same SQL runs on SQLite and PostgreSQL. A schema change is a new entry in the migrations list in `internal/store/store.go`, never an edit to an old one.
 - The HTTP API is what the apps talk to. Add fields and routes; don't rename or remove them.
 - In the web player, use the colors and spacing already defined in `web/src/styles.css`, handle loading, error and empty states, and check your change at 390 px wide.
+- Menus, navigation and settings follow the [navigation and settings design principles](docs/design/navigation-settings-principles.md). Before adding a page, menu item or setting, run through its feature placement questions (section 9) and design review checklist (section 11).
 - UI text is short and plain: "Add library", not "Click here to add a new library to your server".
 - UI text goes in `i18n/locales/en/` and the code shows it with `t()`; a test fails on text written straight into a component. Add the new keys to the other languages too, translated or, if you can't, in English. See [i18n/README.md](i18n/README.md).
 
