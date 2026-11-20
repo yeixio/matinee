@@ -21,8 +21,16 @@
 
 #define W 320
 #define H 240
+// Built with LAGTEST_LATE_RATES, it starts out saying 60 frames a second at
+// 48 kHz, then, like MAME, tells the real rates once it runs (50 frames a
+// second at 44.1 kHz), in Matinee's tests.
+#ifdef LAGTEST_LATE_RATES
+#define RATE 44100
+#define FPS 50
+#else
 #define RATE 48000
 #define FPS 60
+#endif
 
 static uint32_t fb[W * H];
 static int16_t snd[RATE / FPS * 2];
@@ -73,8 +81,15 @@ RETRO_API void retro_get_system_av_info(struct retro_system_av_info *info) {
   info->geometry.base_width = info->geometry.max_width = W;
   info->geometry.base_height = info->geometry.max_height = H;
   info->geometry.aspect_ratio = 4.0f / 3.0f;
+#ifdef LAGTEST_LATE_RATES
+  static bool told;
+  info->timing.fps = told ? FPS : 60;
+  info->timing.sample_rate = told ? RATE : 48000;
+  told = true;
+#else
   info->timing.fps = FPS;
   info->timing.sample_rate = RATE;
+#endif
 }
 
 RETRO_API void retro_set_controller_port_device(unsigned port, unsigned device) {
@@ -128,6 +143,13 @@ RETRO_API size_t retro_get_memory_size(unsigned id) {
 static bool held(unsigned id) { return input(0, RETRO_DEVICE_JOYPAD, 0, id) != 0; }
 
 RETRO_API void retro_run(void) {
+#ifdef LAGTEST_LATE_RATES
+  if (tick == 0) {
+    struct retro_system_av_info av;
+    retro_get_system_av_info(&av);
+    env(RETRO_ENVIRONMENT_SET_SYSTEM_AV_INFO, &av);
+  }
+#endif
   poll_input();
   if (held(RETRO_DEVICE_ID_JOYPAD_LEFT) && x > 0) x -= 4;
   if (held(RETRO_DEVICE_ID_JOYPAD_RIGHT) && x < W - 32) x += 4;

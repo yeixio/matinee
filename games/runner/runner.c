@@ -115,6 +115,15 @@ static unsigned out_w, out_h;
 static uint8_t *frame;         // out_w × out_h × 4, the last frame shown
 static int16_t *sound;         // sound gathered while a frame runs
 static size_t sound_len, sound_cap;
+// The emulator's frame rate and sound rate now. MAME says 60 frames a
+// second and only tells the real rate of the game's screen (54.7 for
+// Mortal Kombat, 59.6 for Street Fighter II…) once the game runs, through
+// SET_SYSTEM_AV_INFO. Playing at the wrong rate makes a second of play
+// carry more or less than a second of sound, which players hear as choppy.
+static double core_fps = 60, core_rate;
+// The sound rate told to Matinee at the start ('I'): sound is resampled to
+// it if the emulator changes its rate later.
+static double out_rate;
 static uint16_t buttons[MAX_PORTS];
 static int8_t axes[MAX_PORTS][4];
 static uint8_t *last_save;     // the save as last written, to spot changes
@@ -311,6 +320,13 @@ static bool environment(unsigned cmd, void *data) {
   case RETRO_ENVIRONMENT_SET_SUPPORT_NO_GAME:
   case RETRO_ENVIRONMENT_SET_INPUT_DESCRIPTORS:
   case RETRO_ENVIRONMENT_SET_CONTROLLER_INFO:
+  case RETRO_ENVIRONMENT_SET_SYSTEM_AV_INFO: {
+    const struct retro_system_av_info *av = data;
+    if (!av) return false;
+    if (av->timing.fps > 1 && av->timing.fps < 500) core_fps = av->timing.fps;
+    if (av->timing.sample_rate > 1000) core_rate = av->timing.sample_rate;
+    return true;
+  }
   case RETRO_ENVIRONMENT_SET_GEOMETRY:
     // Frames are scaled to the size sent at the start, so a new size
     // needs nothing more.
@@ -375,6 +391,40 @@ static size_t audio_batch(const int16_t *data, size_t frames) {
   memcpy(sound + sound_len, data, frames * 2 * sizeof *data);
   sound_len += frames * 2;
   return frames;
+}
+
+// resample turns the frame's sound from the emulator's rate into out_rate,
+// in place in sound, by straight lines between samples. It carries where
+// it was between frames, so the sound joins up.
+static void resample(void) {
+  static double pos;              // where the next output sample is, in input samples, from prev
+  static int16_t prev[2];         // the last input sample of the frame before
+  if (!core_rate || !out_rate || (core_rate > out_rate ? core_rate - out_rate : out_rate - core_rate) < 0.5 || !sound_len) return;
+  size_t in = sound_len / 2;
+  double step = core_rate / out_rate;
+  size_t cap = (size_t)((double)in / step) + 4;
+  int16_t *o = malloc(cap * 2 * sizeof *o);
+  if (!o) return;
+  size_t n = 0;
+  // Input sample i is prev for i == 0 and sound[i-1] after.
+  while (n < cap && pos < (double)in) {
+    size_t i = (size_t)pos;
+    double f = pos - (double)i;
+    for (int c = 0; c < 2; c++) {
+      double a = i == 0 ? prev[c] : sound[(i - 1) * 2 + c];
+      double b = sound[i * 2 + c];
+      double v = a + (b - a) * f;
+      o[n * 2 + c] = (int16_t)(v < 0 ? v - 0.5 : v + 0.5);
+    }
+    n++;
+    pos += step;
+  }
+  pos -= (double)in;
+  prev[0] = sound[(in - 1) * 2];
+  prev[1] = sound[(in - 1) * 2 + 1];
+  memcpy(sound, o, n * 2 * sizeof *o);
+  sound_len = n * 2;
+  free(o);
 }
 
 static void input_poll(void) {}
@@ -668,6 +718,9 @@ int main(int argc, char **argv) {
   out_w = av.geometry.base_width;
   out_h = av.geometry.base_height;
   double fps = av.timing.fps > 1 ? av.timing.fps : 60;
+  core_fps = fps;
+  out_rate = av.timing.sample_rate;
+  core_rate = out_rate;
   if (!out_w || !out_h || out_w > 4096 || out_h > 4096) fail("the emulator gave a picture size of %ux%u", out_w, out_h);
   frame = calloc((size_t)out_w * out_h, 4);
   if (!frame) fail("out of memory");
@@ -677,14 +730,16 @@ int main(int argc, char **argv) {
                    out_w, out_h, fps, av.timing.sample_rate, aspect);
   send_msg('I', hello, (uint32_t)n);
 
-  // Play in real time: one frame every 1/fps seconds, by the clock. Falling
-  // more than a few frames behind (the server was busy) starts the count
-  // again instead of rushing to catch up.
+  // Play in real time: one frame every 1/fps seconds, by the clock, at the
+  // rate the emulator says now. Falling more than a few frames behind (the
+  // server was busy) starts the count again instead of rushing to catch up.
   double step = 1.0 / fps, next = now(), last_save_at = next;
   for (;;) {
     if (!read_input()) break;
     sound_len = 0;
     core.run();
+    step = 1.0 / core_fps;
+    resample();
     send_msg('V', frame, out_w * out_h * 4);
     if (sound_len) send_msg('A', sound, (uint32_t)(sound_len * sizeof *sound));
     next += step;
