@@ -761,7 +761,8 @@
       "addFolder": "Dodaj {{name}}",
       "inLibrary": "W {{name}}",
       "inOther": "{{folder}} jest już w bibliotece {{library}}, a folder może należeć tylko do jednej biblioteki.",
-      "nested": "Ten folder zawiera {{folder}} lub jest w nim, a ta biblioteka już go ma. Wybierz folder obok."
+      "nested": "Ten folder zawiera {{folder}} lub jest w nim, a ta biblioteka już go ma. Wybierz folder obok.",
+      "keepFolder": "Zostaw"
     },
     "people": {
       "title": "Osoby",

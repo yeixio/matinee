@@ -749,7 +749,8 @@
       "addFolder": "{{name}} toevoegen",
       "inLibrary": "In {{name}}",
       "inOther": "{{folder}} zit al in de bibliotheek {{library}}, en een map kan maar in één bibliotheek zitten.",
-      "nested": "Die map bevat {{folder}} of zit erin, en die heeft deze bibliotheek al. Kies liever een map ernaast."
+      "nested": "Die map bevat {{folder}} of zit erin, en die heeft deze bibliotheek al. Kies liever een map ernaast.",
+      "keepFolder": "Houden"
     },
     "people": {
       "title": "Mensen",

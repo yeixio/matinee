@@ -761,7 +761,8 @@
       "addFolder": "Přidat {{name}}",
       "inLibrary": "V {{name}}",
       "inOther": "{{folder}} už je v knihovně {{library}} a složka může být jen v jedné knihovně.",
-      "nested": "Tato složka obsahuje {{folder}} nebo je v ní, a tu už tato knihovna má. Vyberte raději složku vedle."
+      "nested": "Tato složka obsahuje {{folder}} nebo je v ní, a tu už tato knihovna má. Vyberte raději složku vedle.",
+      "keepFolder": "Ponechat"
     },
     "people": {
       "title": "Lidé",

@@ -743,7 +743,8 @@
       "addFolder": "Tambah {{name}}",
       "inLibrary": "Di {{name}}",
       "inOther": "{{folder}} sudah ada di pustaka {{library}}, dan satu folder hanya bisa ada di satu pustaka.",
-      "nested": "Folder itu berisi {{folder}} atau ada di dalamnya, dan pustaka ini sudah memilikinya. Pilih folder di sebelahnya."
+      "nested": "Folder itu berisi {{folder}} atau ada di dalamnya, dan pustaka ini sudah memilikinya. Pilih folder di sebelahnya.",
+      "keepFolder": "Simpan"
     },
     "people": {
       "title": "Orang",

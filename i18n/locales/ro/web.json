@@ -755,7 +755,8 @@
       "addFolder": "Adaugă {{name}}",
       "inLibrary": "În {{name}}",
       "inOther": "{{folder}} este deja în biblioteca {{library}}, iar un dosar poate fi într-o singură bibliotecă.",
-      "nested": "Acel dosar conține {{folder}} sau e în interiorul lui, iar biblioteca îl are deja. Alege un dosar de alături."
+      "nested": "Acel dosar conține {{folder}} sau e în interiorul lui, iar biblioteca îl are deja. Alege un dosar de alături.",
+      "keepFolder": "Păstrează"
     },
     "people": {
       "title": "Persoane",

@@ -749,7 +749,8 @@
       "addFolder": "{{name}} hinzufügen",
       "inLibrary": "In {{name}}",
       "inOther": "{{folder}} gehört schon zur Mediathek {{library}}, und ein Ordner kann nur in einer Mediathek sein.",
-      "nested": "Dieser Ordner enthält {{folder}} oder liegt darin, und den hat diese Mediathek schon. Wähle stattdessen einen Ordner daneben."
+      "nested": "Dieser Ordner enthält {{folder}} oder liegt darin, und den hat diese Mediathek schon. Wähle stattdessen einen Ordner daneben.",
+      "keepFolder": "Behalten"
     },
     "people": {
       "title": "Personen",

@@ -749,7 +749,8 @@
       "addFolder": "Add {{name}}",
       "inLibrary": "In {{name}}",
       "inOther": "{{folder}} is already in the {{library}} library, and a folder can be in one library only.",
-      "nested": "That folder holds or is inside {{folder}}, which this library already has. Pick a folder next to it instead."
+      "nested": "That folder holds or is inside {{folder}}, which this library already has. Pick a folder next to it instead.",
+      "keepFolder": "Keep"
     },
     "people": {
       "title": "People",

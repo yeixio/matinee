@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { Activity, ChevronLeft, ChevronRight, Combine, Folder, FolderOpen, Gauge, Globe, Image as ImageIcon, KeyRound, LibraryBig, Monitor, Pencil, Plus, Puzzle, RefreshCw, Trash2, Tv, UserPlus, UserRound, UsersRound, X, type LucideIcon } from 'lucide-react'
+import { Activity, ChevronLeft, ChevronRight, Combine, Folder, FolderOpen, Gauge, Globe, Image as ImageIcon, KeyRound, LibraryBig, Monitor, Pencil, Plus, Undo2, Puzzle, RefreshCw, Trash2, Tv, UserPlus, UserRound, UsersRound, X, type LucideIcon } from 'lucide-react'
 import { useEffect, useState, type FormEvent, type ReactNode } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import { Link, Navigate, useLocation, useNavigate, useParams } from 'react-router-dom'
@@ -355,18 +355,6 @@ function EditLibrary({ library, libraries, onDone }: { library: Library; librari
         <Field label={t('settings.libraries.folders')}>
           <div className="space-y-2">
             <span className="block text-sm text-muted">{t('settings.libraries.foldersHint')}</span>
-            {paths.map((p) => (
-              <div key={p} className="flex items-center gap-2 rounded-lg bg-text/5 px-3 py-2 text-sm">
-                <Folder className="size-4 text-accent" />
-                <span className="flex-1 truncate" dir="ltr">
-                  {p}
-                </span>
-                <button type="button" onClick={() => setPaths(paths.filter((x) => x !== p))} aria-label={t('filters.remove', { label: p })}>
-                  <X className="size-4 text-muted hover:text-text" />
-                </button>
-              </div>
-            ))}
-            {dropped.length > 0 && <p className="text-sm text-muted">{t('settings.libraries.folderRemoved')}</p>}
             {nested && <p className="text-sm text-danger">{t('settings.libraries.nested', { folder: nested })}</p>}
             {clash && (
               <div className="space-y-2 rounded-lg border border-accent/40 bg-accent/5 p-3 text-sm">
@@ -397,6 +385,30 @@ function EditLibrary({ library, libraries, onDone }: { library: Library; librari
                 if (!other && !mine) setPaths((prev) => (prev.includes(p) ? prev : [...prev, p]))
               }}
             />
+            {/* Chosen folders are listed under the picker, so nothing moves under the pointer when one is
+                added (a quick second click used to land on a folder's remove button). Folders taken out stay
+                listed until Save, so one taken out by mistake is one click to keep. */}
+            {[...library.paths, ...paths.filter((p) => !library.paths.includes(p))].map((p) => {
+              const out = !paths.includes(p)
+              return (
+                <div key={p} className={`flex items-center gap-2 rounded-lg px-3 py-2 text-sm ${out ? 'border border-dashed border-line' : 'bg-text/5'}`}>
+                  <Folder className={`size-4 ${out ? 'text-faint' : 'text-accent'}`} />
+                  <span className={`flex-1 truncate ${out ? 'text-faint line-through' : ''}`} dir="ltr">
+                    {p}
+                  </span>
+                  {out ? (
+                    <Button type="button" variant="ghost" className="h-7 px-2 text-xs" icon={<Undo2 className="size-3.5" />} onClick={() => setPaths([...paths, p])}>
+                      {t('settings.libraries.keepFolder')}
+                    </Button>
+                  ) : (
+                    <button type="button" onClick={() => setPaths(paths.filter((x) => x !== p))} aria-label={t('filters.remove', { label: p })}>
+                      <X className="size-4 text-muted hover:text-text" />
+                    </button>
+                  )}
+                </div>
+              )
+            })}
+            {dropped.length > 0 && <p className="text-sm text-muted">{t('settings.libraries.folderRemoved')}</p>}
           </div>
         </Field>
       )}

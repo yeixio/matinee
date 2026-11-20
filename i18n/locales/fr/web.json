@@ -755,7 +755,8 @@
       "addFolder": "Ajouter {{name}}",
       "inLibrary": "Dans {{name}}",
       "inOther": "{{folder}} est déjà dans la bibliothèque {{library}}, et un dossier ne peut être que dans une seule bibliothèque.",
-      "nested": "Ce dossier contient {{folder}} ou se trouve dedans, et cette bibliothèque l’a déjà. Choisissez plutôt un dossier à côté."
+      "nested": "Ce dossier contient {{folder}} ou se trouve dedans, et cette bibliothèque l’a déjà. Choisissez plutôt un dossier à côté.",
+      "keepFolder": "Garder"
     },
     "people": {
       "title": "Personnes",

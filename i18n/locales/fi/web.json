@@ -749,7 +749,8 @@
       "addFolder": "Lisää {{name}}",
       "inLibrary": "Kirjastossa {{name}}",
       "inOther": "{{folder}} on jo kirjastossa {{library}}, ja kansio voi olla vain yhdessä kirjastossa.",
-      "nested": "Kansio sisältää kansion {{folder}} tai on sen sisällä, ja se on jo tässä kirjastossa. Valitse sen vieressä oleva kansio."
+      "nested": "Kansio sisältää kansion {{folder}} tai on sen sisällä, ja se on jo tässä kirjastossa. Valitse sen vieressä oleva kansio.",
+      "keepFolder": "Säilytä"
     },
     "people": {
       "title": "Ihmiset",

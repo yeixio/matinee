@@ -749,7 +749,8 @@
       "addFolder": "{{name}} ekle",
       "inLibrary": "{{name}} içinde",
       "inOther": "{{folder}} zaten {{library}} kitaplığında ve bir klasör yalnızca bir kitaplıkta olabilir.",
-      "nested": "Bu klasör {{folder}} klasörünü içeriyor ya da onun içinde; bu kitaplıkta zaten var. Bunun yerine yanındaki bir klasörü seç."
+      "nested": "Bu klasör {{folder}} klasörünü içeriyor ya da onun içinde; bu kitaplıkta zaten var. Bunun yerine yanındaki bir klasörü seç.",
+      "keepFolder": "Tut"
     },
     "people": {
       "title": "Kişiler",

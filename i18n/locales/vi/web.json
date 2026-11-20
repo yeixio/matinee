@@ -743,7 +743,8 @@
       "addFolder": "Thêm {{name}}",
       "inLibrary": "Trong {{name}}",
       "inOther": "{{folder}} đã thuộc thư viện {{library}}, và một thư mục chỉ thuộc được một thư viện.",
-      "nested": "Thư mục đó chứa {{folder}} hoặc nằm trong nó, mà thư viện này đã có. Hãy chọn một thư mục bên cạnh."
+      "nested": "Thư mục đó chứa {{folder}} hoặc nằm trong nó, mà thư viện này đã có. Hãy chọn một thư mục bên cạnh.",
+      "keepFolder": "Giữ lại"
     },
     "people": {
       "title": "Mọi người",

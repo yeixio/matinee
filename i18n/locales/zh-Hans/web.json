@@ -743,7 +743,8 @@
       "addFolder": "添加{{name}}",
       "inLibrary": "在{{name}}中",
       "inOther": "{{folder}}已在{{library}}媒体库中，一个文件夹只能属于一个媒体库。",
-      "nested": "该文件夹包含此媒体库已有的{{folder}}，或位于其中。请改选旁边的文件夹。"
+      "nested": "该文件夹包含此媒体库已有的{{folder}}，或位于其中。请改选旁边的文件夹。",
+      "keepFolder": "保留"
     },
     "people": {
       "title": "成员",

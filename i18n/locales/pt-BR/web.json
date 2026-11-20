@@ -755,7 +755,8 @@
       "addFolder": "Adicionar {{name}}",
       "inLibrary": "Em {{name}}",
       "inOther": "{{folder}} já está na biblioteca {{library}}, e uma pasta só pode estar em uma biblioteca.",
-      "nested": "Essa pasta contém {{folder}} ou está dentro dela, e esta biblioteca já a tem. Escolha uma pasta ao lado."
+      "nested": "Essa pasta contém {{folder}} ou está dentro dela, e esta biblioteca já a tem. Escolha uma pasta ao lado.",
+      "keepFolder": "Manter"
     },
     "people": {
       "title": "Pessoas",

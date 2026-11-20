@@ -755,7 +755,8 @@
       "addFolder": "Añadir {{name}}",
       "inLibrary": "En {{name}}",
       "inOther": "{{folder}} ya está en la biblioteca {{library}}, y una carpeta solo puede estar en una biblioteca.",
-      "nested": "Esa carpeta contiene {{folder}} o está dentro de ella, y esta biblioteca ya la tiene. Elige una carpeta al lado."
+      "nested": "Esa carpeta contiene {{folder}} o está dentro de ella, y esta biblioteca ya la tiene. Elige una carpeta al lado.",
+      "keepFolder": "Conservar"
     },
     "people": {
       "title": "Personas",

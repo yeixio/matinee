@@ -749,7 +749,8 @@
       "addFolder": "Lägg till {{name}}",
       "inLibrary": "I {{name}}",
       "inOther": "{{folder}} finns redan i biblioteket {{library}}, och en mapp kan bara finnas i ett bibliotek.",
-      "nested": "Den mappen innehåller {{folder}} eller ligger i den, och den har biblioteket redan. Välj en mapp bredvid i stället."
+      "nested": "Den mappen innehåller {{folder}} eller ligger i den, och den har biblioteket redan. Välj en mapp bredvid i stället.",
+      "keepFolder": "Behåll"
     },
     "people": {
       "title": "Personer",

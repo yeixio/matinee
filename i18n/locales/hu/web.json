@@ -749,7 +749,8 @@
       "addFolder": "{{name}} hozzáadása",
       "inLibrary": "Itt: {{name}}",
       "inOther": "{{folder}} már a(z) {{library}} könyvtárban van, és egy mappa csak egy könyvtárban lehet.",
-      "nested": "Ez a mappa tartalmazza ezt: {{folder}}, vagy benne van, és ez már a könyvtár része. Válassz inkább mellette lévő mappát."
+      "nested": "Ez a mappa tartalmazza ezt: {{folder}}, vagy benne van, és ez már a könyvtár része. Válassz inkább mellette lévő mappát.",
+      "keepFolder": "Megtartás"
     },
     "people": {
       "title": "Személyek",
