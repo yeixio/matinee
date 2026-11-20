@@ -31,8 +31,9 @@ func TestMain(m *testing.M) {
 			a := exec.Command("cc", "-O2", "-o", filepath.Join(dir, "matinee-game-runner"), filepath.Join(src, "runner", "runner.c"), "-ldl")
 			b := exec.Command("cc", "-O2", "-shared", "-fPIC", "-o", filepath.Join(dir, "lagtest.so"), filepath.Join(src, "testcore", "testcore.c"))
 			c := exec.Command("cc", "-O2", "-shared", "-fPIC", `-DLAGTEST_EXTENSIONS="tst|TST2"`, "-o", filepath.Join(dir, "custom_libretro.so"), filepath.Join(src, "testcore", "testcore.c"))
-			a.Stderr, b.Stderr, c.Stderr = os.Stderr, os.Stderr, os.Stderr
-			if a.Run() == nil && b.Run() == nil && c.Run() == nil {
+			d := exec.Command("cc", "-O2", "-shared", "-fPIC", "-DLAGTEST_LATE_RATES", "-o", filepath.Join(dir, "laterates.so"), filepath.Join(src, "testcore", "testcore.c"))
+			a.Stderr, b.Stderr, c.Stderr, d.Stderr = os.Stderr, os.Stderr, os.Stderr, os.Stderr
+			if a.Run() == nil && b.Run() == nil && c.Run() == nil && d.Run() == nil {
 				built = dir
 			}
 		}
@@ -92,6 +93,48 @@ func TestRunnerFramesAndButtons(t *testing.T) {
 	}
 	if sound == 0 {
 		t.Fatal("no sound")
+	}
+}
+
+// An emulator that tells its real rates only once it runs (MAME does) is
+// played at its real frame rate, and its sound still arrives at the rate
+// told at the start: a second of play is a second of sound, so it isn't
+// choppy.
+func TestRunnerLateRates(t *testing.T) {
+	needBuilt(t)
+	r, err := StartRunner(filepath.Join(built, "matinee-game-runner"), filepath.Join(built, "laterates.so"), "", t.TempDir(), t.TempDir(), nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer r.Close()
+	if r.Info.FPS != 60 || r.Info.SampleRate != 48000 {
+		t.Fatalf("info = %+v", r.Info)
+	}
+	frames, bytes := 0, 0
+	var start time.Time
+	err = r.Run(func([]byte) error {
+		frames++
+		switch frames {
+		case 10:
+			start, bytes = time.Now(), 0
+		case 110:
+			return io.EOF
+		}
+		return nil
+	}, func(s []byte) error {
+		bytes += len(s)
+		return nil
+	})
+	if err != io.EOF {
+		t.Fatal(err)
+	}
+	// 100 frames at 50 a second take 2 s (1.67 s at 60).
+	if d := time.Since(start); d < 1900*time.Millisecond || d > 2600*time.Millisecond {
+		t.Errorf("100 frames took %v, want 2 s", d)
+	}
+	// 960 samples a frame at 48 kHz, 4 bytes each.
+	if per := float64(bytes) / 4 / 100; per < 950 || per > 970 {
+		t.Errorf("%.1f samples a frame, want 960", per)
 	}
 }
 
