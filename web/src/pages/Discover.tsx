@@ -10,9 +10,10 @@ import { Button, EmptyState, Spinner } from '../components/ui'
 import i18n from '../i18n'
 
 // A row's name in the page's language: the lists by their id, and
-// "Because you watched …" with the title.
+// "Because you watched …" and "Because you have …" with the title.
 function discoverRowTitle(r: DiscoverRow): string {
   if (r.because) return i18n.t('common:discover.because', { title: r.because })
+  if (r.have) return i18n.t('common:discover.have', { title: r.have })
   return i18n.exists(`common:discover.rows.${r.id}`) ? i18n.t(`common:discover.rows.${r.id}`) : r.title
 }
 

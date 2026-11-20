@@ -329,6 +329,7 @@
       "for-you": "Senin için önerilenler"
     },
     "because": "{{title}} izlediğin için",
+    "have": "{{title}} sende olduğu için",
     "status": {
       "available": "Kitaplığında",
       "added": "Yolda",

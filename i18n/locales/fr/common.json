@@ -357,6 +357,7 @@
       "for-you": "Recommandé pour vous"
     },
     "because": "Parce que vous avez regardé {{title}}",
+    "have": "Parce que vous avez {{title}}",
     "status": {
       "available": "Dans votre bibliothèque",
       "added": "En route",

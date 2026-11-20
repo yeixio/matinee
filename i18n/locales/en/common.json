@@ -329,6 +329,7 @@
       "for-you": "Recommended for you"
     },
     "because": "Because you watched {{title}}",
+    "have": "Because you have {{title}}",
     "status": {
       "available": "In your library",
       "added": "On its way",

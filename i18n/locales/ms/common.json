@@ -301,6 +301,7 @@
       "for-you": "Disyorkan untuk anda"
     },
     "because": "Kerana anda menonton {{title}}",
+    "have": "Kerana anda mempunyai {{title}}",
     "status": {
       "available": "Dalam pustaka anda",
       "added": "Dalam perjalanan",

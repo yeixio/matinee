@@ -51,8 +51,12 @@ func TestDiscoverFromBoxOffice(t *testing.T) {
 			map[string]any{"id": "trending", "title": "Trending this week", "more": true,
 				"items": []any{movie(27205, "Inception", "available"), show(1396, "Breaking Bad", "wanted"), show(60059, "Better Call Saul", "")}},
 			map[string]any{"id": "popular-series", "title": "Popular shows", "items": []any{show(60059, "Better Call Saul", "")}},
-			map[string]any{"id": "because-movie-9", "title": "Because you have Heat", "items": []any{movie(1, "Not shown", "")}},
+			map[string]any{"id": "because-series-1396", "title": "Because you have Breaking Bad", "because": "Breaking Bad",
+				"items": []any{movie(27205, "Inception", "available"), show(60059, "Better Call Saul", "")}, "more": true},
+			map[string]any{"id": "genre-movie-28", "title": "Action movies", "items": []any{movie(1, "Not shown", "")}},
 		}},
+		"/rows/because-series-1396": map[string]any{"id": "because-series-1396", "title": "Because you have Breaking Bad", "because": "Breaking Bad",
+			"items": []any{show(60059, "Better Call Saul", ""), show(1, "Another", "")}, "page": 1, "pages": 2, "more": true},
 		"/rows/like-movie-27205": map[string]any{"id": "like-movie-27205", "items": []any{movie(27205, "Inception", "available"), movie(157336, "Interstellar", "")}, "page": 1, "pages": 3, "more": true},
 		"/rows/popular-series":   map[string]any{"id": "popular-series", "title": "Popular shows", "items": []any{show(60059, "Better Call Saul", "")}, "page": 2, "pages": 2},
 		"/search":                []any{movie(329865, "Arrival", ""), show(60059, "Better Call Saul", "")},
@@ -85,11 +89,16 @@ func TestDiscoverFromBoxOffice(t *testing.T) {
 		rows[r.ID] = r
 	}
 	because := "because-" + strconv.FormatInt(inception, 10)
-	if want := []string{because, "for-you", "trending", "popular-shows"}; !slices.Equal(ids, want) {
+	// Box Office's own rows follow, in its order: "Because you have …"
+	// too, without what's here already. Rows Matinee has no name for stay out.
+	if want := []string{because, "for-you", "trending", "popular-shows", "have-show-1396"}; !slices.Equal(ids, want) {
 		t.Fatalf("rows %v, want %v", ids, want)
 	}
 	if b := rows[because]; b.Because != "Inception" || len(b.Items) != 1 || b.Items[0].TMDBID != 157336 || !b.More {
 		t.Fatalf("because: %+v", b)
+	}
+	if h := rows["have-show-1396"]; h.Have != "Breaking Bad" || h.Because != "" || len(h.Items) != 1 || h.Items[0].TMDBID != 60059 || !h.More {
+		t.Fatalf("have: %+v", h)
 	}
 	tr := rows["trending"].Items
 	if tr[0].Status != titleAvailable || tr[0].ItemID != inception || tr[1].Status != titleAdded || tr[1].Kind != "show" || tr[2].Status != "" || !rows["trending"].More {
@@ -106,6 +115,14 @@ func TestDiscoverFromBoxOffice(t *testing.T) {
 	}
 	if code := ellen.do("GET", "/api/v1/discover/rows/"+because, nil, &page); code != 200 || page.Row.Because != "Inception" || len(page.Row.Items) != 1 {
 		t.Fatalf("because page: %d %+v", code, page)
+	}
+	if code := ellen.do("GET", "/api/v1/discover/rows/have-show-1396", nil, &page); code != 200 || page.Row.Have != "Breaking Bad" || len(page.Row.Items) != 2 || page.Pages != 2 {
+		t.Fatalf("have page: %d %+v", code, page)
+	}
+	for _, id := range []string{"nope", "have-series-1396", "have-show-x", "have-show-0", "genre-movie-28"} {
+		if code := ellen.do("GET", "/api/v1/discover/rows/"+id, nil, nil); code != http.StatusNotFound {
+			t.Fatalf("no such row %s: %d", id, code)
+		}
 	}
 	if code := ellen.do("GET", "/api/v1/discover/rows/nope", nil, nil); code != http.StatusNotFound {
 		t.Fatalf("no such row: %d", code)

@@ -238,8 +238,11 @@ type discoverRow struct {
 	Title string `json:"title"`
 	// Because is the title watched, on a because-{item id} row, so apps can
 	// word the row in their own language.
-	Because string          `json:"because,omitempty"`
-	Items   []discoverTitle `json:"items"`
+	Because string `json:"because,omitempty"`
+	// Have is the library title a have-{movie,show}-{tmdb id} row from
+	// Box Office is based on ("Because you have …"), for the same reason.
+	Have  string          `json:"have,omitempty"`
+	Items []discoverTitle `json:"items"`
 	// More says there are more titles than the row has: GET
 	// /discover/rows/{id} pages through them all.
 	More bool `json:"more,omitempty"`

@@ -329,6 +329,7 @@
       "for-you": "Suositeltu sinulle"
     },
     "because": "Koska katsoit {{title}}",
+    "have": "Koska sinulla on {{title}}",
     "status": {
       "available": "Kirjastossasi",
       "added": "Tulossa",

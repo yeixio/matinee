@@ -357,6 +357,7 @@
       "for-you": "מומלץ בשבילך"
     },
     "because": "כי צפית ב{{title}}",
+    "have": "כי יש לך את {{title}}",
     "status": {
       "available": "בספרייה שלך",
       "added": "בדרך",

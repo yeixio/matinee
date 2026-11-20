@@ -329,6 +329,7 @@
       "for-you": "Aanbevolen voor jou"
     },
     "because": "Omdat je {{title}} hebt gekeken",
+    "have": "Omdat je {{title}} hebt",
     "status": {
       "available": "In je bibliotheek",
       "added": "Onderweg",

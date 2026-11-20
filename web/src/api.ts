@@ -394,7 +394,7 @@ export type DiscoverTitle = {
 }
 
 // more: the row has more titles than it shows (see api.discoverRow).
-export type DiscoverRow = { id: string; title: string; because?: string; items: DiscoverTitle[]; more?: boolean }
+export type DiscoverRow = { id: string; title: string; because?: string; have?: string; items: DiscoverTitle[]; more?: boolean }
 
 // boxOffice: a Box Office fills Discover, so Overseerr isn't used.
 export type OverseerrConnection = { connected: boolean; url: string; hasApiKey: boolean; requestAs: number; boxOffice?: boolean }

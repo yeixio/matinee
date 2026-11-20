@@ -301,6 +301,7 @@
       "for-you": "为你推荐"
     },
     "because": "因为你看过《{{title}}》",
+    "have": "因为你有《{{title}}》",
     "status": {
       "available": "在你的媒体库中",
       "added": "即将到来",

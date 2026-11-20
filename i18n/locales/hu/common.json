@@ -329,6 +329,7 @@
       "for-you": "Neked ajánljuk"
     },
     "because": "Mert megnézted ezt: {{title}}",
+    "have": "Mert megvan neked ez: {{title}}",
     "status": {
       "available": "A könyvtáradban",
       "added": "Úton",

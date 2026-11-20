@@ -329,6 +329,7 @@
       "for-you": "Empfohlen für dich"
     },
     "because": "Weil du {{title}} gesehen hast",
+    "have": "Weil du {{title}} hast",
     "status": {
       "available": "In deiner Mediathek",
       "added": "Unterwegs",
