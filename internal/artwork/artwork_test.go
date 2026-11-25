@@ -33,3 +33,16 @@ func TestFailedImagesWait(t *testing.T) {
 		t.Fatalf("fetched %d times", calls)
 	}
 }
+
+func TestLibretroMirror(t *testing.T) {
+	for src, want := range map[string]string{
+		"https://thumbnails.libretro.com/Nintendo%20-%20Game%20Boy%20Advance/Named_Boxarts/Anguna%20%28World%29.png": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Game_Boy_Advance/master/Named_Boxarts/Anguna%20%28World%29.png",
+		"https://thumbnails.libretro.com/MAME/Named_Snaps/1942.png":                                                  "https://raw.githubusercontent.com/libretro-thumbnails/MAME/master/Named_Snaps/1942.png",
+		"https://image.tmdb.org/t/p/w500/x.jpg":                                                                      "",
+		"https://thumbnails.libretro.com/":                                                                           "",
+	} {
+		if got := LibretroMirror(src); got != want {
+			t.Errorf("LibretroMirror(%q) = %q, want %q", src, got, want)
+		}
+	}
+}

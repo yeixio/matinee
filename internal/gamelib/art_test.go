@@ -113,3 +113,32 @@ func TestLocalArt(t *testing.T) {
 		t.Fatalf("beside the game: %q", p)
 	}
 }
+
+// When libretro's thumbnail site can't list its pictures, they're listed
+// from libretro's copy of them on GitHub.
+func TestOnlineArtFromGitHub(t *testing.T) {
+	site := httptest.NewServer(http.NotFoundHandler())
+	defer site.Close()
+	gh := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		switch r.URL.Path {
+		case "/Nintendo_-_Game_Boy/git/trees/master":
+			w.Write([]byte(`{"tree":[{"path":"Named_Boxarts","type":"tree","sha":"abc"},{"path":"README.md","type":"blob","sha":"r"}]}`))
+		case "/Nintendo_-_Game_Boy/git/trees/abc":
+			w.Write([]byte(`{"tree":[{"path":"Tetris (World) (Rev 1).png","type":"blob","sha":"1"},{"path":"Kirby's Dream Land (USA, Europe).png","type":"blob","sha":"2"}]}`))
+		default:
+			http.NotFound(w, r)
+		}
+	}))
+	defer gh.Close()
+	k := &Kind{Dir: t.TempDir(), Art: site.URL, ArtGitHub: gh.URL}
+	gb, _ := gamedat.SystemByFolder("gb")
+	base := site.URL + "/Nintendo%20-%20Game%20Boy/"
+	for name, want := range map[string]string{
+		"Kirby's Dream Land (Japan)": base + "Named_Boxarts/Kirby%27s%20Dream%20Land%20%28USA%2C%20Europe%29.png",
+		"Nothing Like It (USA)":      "",
+	} {
+		if got := k.onlineArt(context.Background(), gb, name); got != want {
+			t.Errorf("onlineArt(%q) = %q, want %q", name, got, want)
+		}
+	}
+}

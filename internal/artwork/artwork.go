@@ -10,6 +10,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"net/url"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -69,6 +70,40 @@ func Large(src, kind string) string {
 	return tmdbSize.ReplaceAllString(src, "${1}"+size+"/")
 }
 
+// LibretroThumbnails is libretro's thumbnail site, and
+// LibretroThumbnailsMirror the copy of it libretro keeps on GitHub, one
+// repository per system.
+const (
+	LibretroThumbnails       = "https://thumbnails.libretro.com/"
+	LibretroThumbnailsMirror = "https://raw.githubusercontent.com/libretro-thumbnails/"
+)
+
+// LibretroMirror is the address of a libretro thumbnail on GitHub, for
+// src on libretro's thumbnail site, or "". The site's
+// "<System>/<Kind>/<Game>.png" is in the repository named after the system,
+// with its spaces as underscores.
+func LibretroMirror(src string) string {
+	rest, ok := strings.CutPrefix(src, LibretroThumbnails)
+	if !ok {
+		return ""
+	}
+	system, file, ok := strings.Cut(rest, "/")
+	if !ok || file == "" {
+		return ""
+	}
+	name, err := url.PathUnescape(system)
+	if err != nil || name == "" {
+		return ""
+	}
+	return LibretroThumbnailsMirror + url.PathEscape(LibretroRepo(name)) + "/master/" + file
+}
+
+// LibretroRepo is the name of the GitHub repository that holds a system's
+// thumbnails: "Nintendo - Game Boy" is Nintendo_-_Game_Boy.
+func LibretroRepo(system string) string {
+	return strings.ReplaceAll(system, " ", "_")
+}
+
 func (c *Cache) resolve(ctx context.Context, src string) (string, error) {
 	switch {
 	case strings.HasPrefix(src, "http://"), strings.HasPrefix(src, "https://"):
@@ -76,7 +111,19 @@ func (c *Cache) resolve(ctx context.Context, src string) (string, error) {
 		if ext != ".png" && ext != ".webp" {
 			ext = ".jpg"
 		}
-		return c.cached(src, ext, func(dst string) error { return c.download(ctx, src, dst) })
+		return c.cached(src, ext, func(dst string) error {
+			err := c.download(ctx, src, dst)
+			if err != nil {
+				// libretro's thumbnail site has gone dark before; its
+				// pictures are also kept on GitHub.
+				if m := LibretroMirror(src); m != "" && !errors.Is(err, context.Canceled) {
+					if merr := c.download(ctx, m, dst); merr == nil {
+						return nil
+					}
+				}
+			}
+			return err
+		})
 	case strings.HasPrefix(src, "chosen:") && c.Chosen != nil:
 		return c.cached(src, "", func(dst string) error {
 			data, err := c.Chosen(ctx, src)

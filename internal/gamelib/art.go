@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"cmp"
 	"context"
+	"encoding/json"
 	"errors"
 	"html"
 	"net/url"
@@ -15,6 +16,7 @@ import (
 	"time"
 	"unicode"
 
+	"github.com/yeixio/matinee/internal/artwork"
 	"github.com/yeixio/matinee/internal/gamedat"
 )
 
@@ -272,8 +274,101 @@ func (k *Kind) rememberArt(key artListKey, names *artNames) {
 }
 
 // fetchArtList saves the names of libretro's pictures of a kind for a
-// system, one a line, from the server's folder listing.
+// system, one a line, from its thumbnail site's folder listing or, when
+// the site can't give it, from libretro's copy of the pictures on GitHub.
 func (k *Kind) fetchArtList(ctx context.Context, system, kind, dst string) error {
+	err := k.fetchArtListSite(ctx, system, kind, dst)
+	if err == nil || ctx.Err() != nil {
+		return err
+	}
+	gerr := k.fetchArtListGitHub(ctx, system, kind, dst)
+	if gerr == nil {
+		return nil
+	}
+	if errors.Is(err, os.ErrNotExist) && errors.Is(gerr, os.ErrNotExist) {
+		return os.ErrNotExist
+	}
+	if errors.Is(gerr, os.ErrNotExist) {
+		return err
+	}
+	return gerr
+}
+
+// fetchArtListGitHub saves the names of the pictures of a kind for a
+// system from libretro's GitHub repository of them: the repository's tree
+// names the kind's folder, whose tree lists the pictures.
+func (k *Kind) fetchArtListGitHub(ctx context.Context, system, kind, dst string) error {
+	base := strings.TrimRight(cmp.Or(k.ArtGitHub, DefaultArtGitHub), "/") + "/" + url.PathEscape(artwork.LibretroRepo(system)) + "/git/trees/"
+	var root gitTree
+	if err := k.getJSON(ctx, base+"master", &root); err != nil {
+		return err
+	}
+	sha := ""
+	for _, e := range root.Tree {
+		if e.Type == "tree" && e.Path == kind {
+			sha = e.SHA
+		}
+	}
+	if sha == "" {
+		return os.ErrNotExist
+	}
+	var dir gitTree
+	if err := k.getJSON(ctx, base+url.PathEscape(sha), &dir); err != nil {
+		return err
+	}
+	var out strings.Builder
+	for _, e := range dir.Tree {
+		if e.Type == "blob" && strings.EqualFold(filepath.Ext(e.Path), ".png") {
+			out.WriteString(strings.TrimSuffix(e.Path, filepath.Ext(e.Path)))
+			out.WriteByte('\n')
+		}
+	}
+	if out.Len() == 0 {
+		return os.ErrNotExist
+	}
+	return writeArtList(dst, out.String())
+}
+
+type gitTree struct {
+	Tree []struct {
+		Path string `json:"path"`
+		Type string `json:"type"`
+		SHA  string `json:"sha"`
+	} `json:"tree"`
+}
+
+// getJSON reads a JSON answer into v. A 404 is os.ErrNotExist.
+func (k *Kind) getJSON(ctx context.Context, u string, v any) error {
+	f, err := os.CreateTemp("", "matinee-art-*.json")
+	if err != nil {
+		return err
+	}
+	f.Close()
+	defer os.Remove(f.Name())
+	if err := k.download(ctx, u, f.Name()); err != nil {
+		return err
+	}
+	b, err := os.ReadFile(f.Name())
+	if err != nil {
+		return err
+	}
+	return json.Unmarshal(b, v)
+}
+
+func writeArtList(dst, names string) error {
+	if err := os.MkdirAll(filepath.Dir(dst), 0o750); err != nil {
+		return err
+	}
+	tmp := dst + ".tmp"
+	if err := os.WriteFile(tmp, []byte(names), 0o640); err != nil {
+		return err
+	}
+	return os.Rename(tmp, dst)
+}
+
+// fetchArtListSite saves the names of libretro's pictures of a kind for a
+// system, one a line, from its thumbnail site's folder listing.
+func (k *Kind) fetchArtListSite(ctx context.Context, system, kind, dst string) error {
 	u := strings.TrimRight(cmp.Or(k.Art, DefaultArt), "/") + "/" + url.PathEscape(system) + "/" + kind + "/"
 	page := dst + ".html"
 	defer os.Remove(page)
@@ -296,11 +391,7 @@ func (k *Kind) fetchArtList(ctx context.Context, system, kind, dst string) error
 	if out.Len() == 0 {
 		return errors.New("libretro's list of pictures was empty")
 	}
-	tmp := dst + ".tmp"
-	if err := os.WriteFile(tmp, []byte(out.String()), 0o640); err != nil {
-		return err
-	}
-	return os.Rename(tmp, dst)
+	return writeArtList(dst, out.String())
 }
 
 var hrefRE = regexp.MustCompile(`(?i)href="([^"?#]+)"`)
