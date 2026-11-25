@@ -308,5 +308,6 @@
   "text_can_be_at_most_200_characters": "text는 최대 200자까지 가능합니다",
   "text_is_required": "text는 필수입니다",
   "sign_in_to_playstation_first": "먼저 PlayStation에 로그인하세요",
+  "this_server_cant_play_games_on_a_pc": "이 서버는 PC에서 게임을 할 수 없습니다",
   "this_server_cant_play_playstation_games": "이 서버는 PlayStation 게임을 실행할 수 없습니다"
 }

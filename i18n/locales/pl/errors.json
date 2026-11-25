@@ -308,5 +308,6 @@
   "text_can_be_at_most_200_characters": "text może mieć najwyżej 200 znaków",
   "text_is_required": "text jest wymagane",
   "sign_in_to_playstation_first": "najpierw zaloguj się do PlayStation",
+  "this_server_cant_play_games_on_a_pc": "ten serwer nie może grać na komputerze",
   "this_server_cant_play_playstation_games": "ten serwer nie może uruchamiać gier PlayStation"
 }

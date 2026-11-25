@@ -1784,6 +1784,36 @@
       "signOut": "PlayStation'dan çıkış yap",
       "starting": "PlayStation uyandırılıyor ve Remote Play başlatılıyor. Bu bir dakika sürebilir.",
       "buttons": "Select dokunmatik yüzey, Select ve Start birlikte PS düğmesi"
+    },
+    "steampc": {
+      "title": "Steam",
+      "hint": "Steam düğmesi, Steam'in Big Picture modunu iki yoldan biriyle açar. Size uyanı kurun.",
+      "pcTitle": "Zaten Steam oynadığınız bir bilgisayarda",
+      "pcHint": "Oyunlar oyun bilgisayarınızda, Windows, Linux ve Mac için ücretsiz bir yayın uygulaması olan Sunshine ile çalışır. Matinee'yi onunla bir kez eşleyin.",
+      "step1": "Bilgisayara Sunshine'ı kurun, sayfasını https://localhost:47990 adresinde açın ve bir kullanıcı adı ile parola seçin.",
+      "getSunshine": "Sunshine'ı indir",
+      "step2": "Steam'in bilgisayarda kurulu ve oturumunun açık olduğundan emin olun.",
+      "step3": "Bilgisayarın adresini girin ve Eşle'yi seçin. Yönlendiricinizde bilgisayara sabit bir IP verin.",
+      "address": "Bilgisayar adresi",
+      "pair": "Eşle",
+      "looking": "Sunshine aranıyor…",
+      "pinTitle": "Bu PIN'i {{name}} üzerindeki Sunshine'a yazın",
+      "pinHint": "Bilgisayardaki Sunshine sayfasında PIN'i açın, bu PIN'i ve Matinee gibi bir ad yazıp gönderin. Matinee en fazla 3 dakika bekler.",
+      "openPin": "Sunshine'ın PIN sayfasını aç",
+      "stateReady": "Hazır",
+      "stateBusy": "Birine yayın yapıyor",
+      "stateOff": "Yanıt vermiyor",
+      "stateUnpaired": "Artık Matinee'yi tanımıyor: kaldırıp yeniden eşleyin",
+      "remove": "Kaldır",
+      "removeConfirm": "{{name}} kaldırılsın mı? Yeniden eşleyene kadar Steam düğmesi onu kullanmaz.",
+      "containerTitle": "Sunucunuzdaki bir Steam konteynerinde",
+      "containerHint": "Steam, ekran kartlı bir sunucuda Matinee'nin yanındaki bir konteynerde çalışır. Kılavuzda gösterildiği gibi sunucuda kurulur.",
+      "containerOn": "Bu sunucuda kurulu.",
+      "containerOff": "Bu sunucuda kurulu değil.",
+      "bothNote": "İkisi de kurulu: Steam düğmesi bilgisayarı kullanır.",
+      "active": "Kullanımda",
+      "guide": "Kurulum kılavuzu",
+      "playHint": "{{name}} üzerinde Steam, ekran kartında oynanır ve buraya yayınlanır."
     }
   }
 }

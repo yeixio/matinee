@@ -1840,6 +1840,36 @@
       "signOut": "تسجيل الخروج من PlayStation",
       "starting": "جارٍ إيقاظ PlayStation وبدء Remote Play. قد يستغرق ذلك دقيقة.",
       "buttons": "زر Select هو لوحة اللمس، وSelect مع Start معًا زر PS"
+    },
+    "steampc": {
+      "title": "Steam",
+      "hint": "يشغّل زر Steam وضع Big Picture في Steam بإحدى طريقتين. اضبط الطريقة التي تناسبك.",
+      "pcTitle": "على حاسوب تلعب عليه Steam بالفعل",
+      "pcHint": "تعمل الألعاب على حاسوب الألعاب لديك باستخدام Sunshine، وهو تطبيق بث مجاني لأنظمة Windows وLinux وMac. اربط Matinee به مرة واحدة.",
+      "step1": "على الحاسوب، ثبّت Sunshine وافتح صفحته على https://localhost:47990 واختر اسم مستخدم وكلمة مرور.",
+      "getSunshine": "احصل على Sunshine",
+      "step2": "تأكد من أن Steam مثبّت ومسجّل الدخول على الحاسوب.",
+      "step3": "أدخل عنوان الحاسوب واختر ربط. امنح الحاسوب عنوان IP ثابتًا في الموجّه.",
+      "address": "عنوان الحاسوب",
+      "pair": "ربط",
+      "looking": "جارٍ البحث عن Sunshine…",
+      "pinTitle": "اكتب رمز PIN هذا في Sunshine على {{name}}",
+      "pinHint": "في صفحة Sunshine على الحاسوب، افتح PIN واكتب هذا الرمز واسمًا مثل Matinee ثم أرسله. ينتظر Matinee حتى 3 دقائق.",
+      "openPin": "افتح صفحة PIN في Sunshine",
+      "stateReady": "جاهز",
+      "stateBusy": "يبث لشخص ما",
+      "stateOff": "لا يستجيب",
+      "stateUnpaired": "لم يعد يعرف Matinee: أزله واربطه من جديد",
+      "remove": "إزالة",
+      "removeConfirm": "إزالة {{name}}؟ لن يستخدمه زر Steam حتى تربطه من جديد.",
+      "containerTitle": "في حاوية Steam على خادمك",
+      "containerHint": "يعمل Steam في حاوية بجانب Matinee على خادم فيه بطاقة رسومات. يُضبط على الخادم كما يوضح الدليل.",
+      "containerOn": "مضبوط على هذا الخادم.",
+      "containerOff": "غير مضبوط على هذا الخادم.",
+      "bothNote": "كلاهما مضبوط: يستخدم زر Steam الحاسوب.",
+      "active": "قيد الاستخدام",
+      "guide": "دليل الإعداد",
+      "playHint": "Steam على {{name}}، يُلعب على بطاقة رسوماته ويُبث إلى هنا."
     }
   }
 }

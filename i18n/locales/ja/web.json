@@ -1770,6 +1770,36 @@
       "signOut": "PlayStationからサインアウト",
       "starting": "PlayStationを起動してRemote Playを開始しています。1分ほどかかることがあります。",
       "buttons": "Selectはタッチパッド、SelectとStartの同時押しはPSボタン"
+    },
+    "steampc": {
+      "title": "Steam",
+      "hint": "Steam ボタンは、2 つの方法のどちらかで Steam の Big Picture を起動します。合う方を設定してください。",
+      "pcTitle": "すでに Steam で遊んでいる PC で",
+      "pcHint": "ゲームはゲーミング PC 上で、Windows・Linux・Mac 用の無料ストリーミングアプリ Sunshine を使って動きます。Matinee と一度ペアリングしてください。",
+      "step1": "PC に Sunshine をインストールし、https://localhost:47990 でページを開いて、ユーザー名とパスワードを設定します。",
+      "getSunshine": "Sunshine を入手",
+      "step2": "PC に Steam がインストールされ、サインインしていることを確認します。",
+      "step3": "PC のアドレスを入力して「ペアリング」を選びます。ルーターで PC に固定 IP アドレスを割り当ててください。",
+      "address": "PC のアドレス",
+      "pair": "ペアリング",
+      "looking": "Sunshine を探しています…",
+      "pinTitle": "{{name}} の Sunshine にこの PIN を入力してください",
+      "pinHint": "PC の Sunshine のページで PIN を開き、この PIN と Matinee などの名前を入力して送信します。Matinee は最大 3 分待ちます。",
+      "openPin": "Sunshine の PIN ページを開く",
+      "stateReady": "準備完了",
+      "stateBusy": "ほかの人にストリーミング中",
+      "stateOff": "応答なし",
+      "stateUnpaired": "Matinee を認識しなくなりました。削除してペアリングし直してください",
+      "remove": "削除",
+      "removeConfirm": "{{name}} を削除しますか? ペアリングし直すまで Steam ボタンでは使われません。",
+      "containerTitle": "サーバー上の Steam コンテナで",
+      "containerHint": "Steam は、グラフィックカードを持つサーバー上で Matinee の横のコンテナで動きます。ガイドのとおりサーバーで設定します。",
+      "containerOn": "このサーバーで設定済みです。",
+      "containerOff": "このサーバーでは設定されていません。",
+      "bothNote": "両方とも設定済みです。Steam ボタンは PC を使います。",
+      "active": "使用中",
+      "guide": "設定ガイド",
+      "playHint": "{{name}} の Steam。そのグラフィックカードで動かし、ここにストリーミングします。"
     }
   }
 }

@@ -1784,6 +1784,36 @@
       "signOut": "Uitloggen bij PlayStation",
       "starting": "De PlayStation wordt gewekt en Remote Play gestart. Dat kan een minuut duren.",
       "buttons": "Select is het touchpad, Select en Start samen de PS-knop"
+    },
+    "steampc": {
+      "title": "Steam",
+      "hint": "De Steam-knop speelt Steams Big Picture op een van twee manieren. Stel in wat bij je past.",
+      "pcTitle": "Op een pc waarop je al Steam speelt",
+      "pcHint": "De games draaien op je gaming-pc, met Sunshine, een gratis streaming-app voor Windows, Linux en Mac. Koppel Matinee er één keer mee.",
+      "step1": "Installeer Sunshine op de pc, open de pagina op https://localhost:47990 en kies een gebruikersnaam en wachtwoord.",
+      "getSunshine": "Sunshine downloaden",
+      "step2": "Zorg dat Steam op de pc geïnstalleerd en ingelogd is.",
+      "step3": "Vul het adres van de pc in en kies Koppelen. Geef de pc een vast IP-adres in je router.",
+      "address": "Adres van de pc",
+      "pair": "Koppelen",
+      "looking": "Sunshine zoeken…",
+      "pinTitle": "Typ deze pincode in Sunshine op {{name}}",
+      "pinHint": "Open op de Sunshine-pagina van de pc PIN, typ deze pincode en een naam zoals Matinee en verstuur hem. Matinee wacht tot 3 minuten.",
+      "openPin": "Pincodepagina van Sunshine openen",
+      "stateReady": "Klaar",
+      "stateBusy": "Streamt naar iemand",
+      "stateOff": "Reageert niet",
+      "stateUnpaired": "Kent Matinee niet meer: verwijder hem en koppel opnieuw",
+      "remove": "Verwijderen",
+      "removeConfirm": "{{name}} verwijderen? De Steam-knop speelt hem pas weer als je opnieuw koppelt.",
+      "containerTitle": "In een Steam-container op je server",
+      "containerHint": "Steam draait in een container naast Matinee, op een server met een videokaart. Dat stel je in op de server, zoals de handleiding laat zien.",
+      "containerOn": "Ingesteld op deze server.",
+      "containerOff": "Niet ingesteld op deze server.",
+      "bothNote": "Beide zijn ingesteld: de Steam-knop speelt de pc.",
+      "active": "In gebruik",
+      "guide": "Handleiding",
+      "playHint": "Steam op {{name}}, gespeeld op de videokaart en hierheen gestreamd."
     }
   }
 }

@@ -1784,6 +1784,36 @@
       "signOut": "Kirjaudu ulos PlayStationista",
       "starting": "Herätetään PlayStation ja käynnistetään Remote Play. Tämä voi kestää minuutin.",
       "buttons": "Select on kosketuslevy, Select ja Start yhdessä PS-painike"
+    },
+    "steampc": {
+      "title": "Steam",
+      "hint": "Steam-painike avaa Steamin Big Picturen toisella kahdesta tavasta. Ota käyttöön sinulle sopiva.",
+      "pcTitle": "Tietokoneella, jolla jo pelaat Steamia",
+      "pcHint": "Pelit pyörivät pelikoneellasi Sunshinen avulla. Se on ilmainen striimaussovellus Windowsille, Linuxille ja Macille. Muodosta Matineen pari sen kanssa kerran.",
+      "step1": "Asenna Sunshine tietokoneelle, avaa sen sivu osoitteessa https://localhost:47990 ja valitse käyttäjänimi ja salasana.",
+      "getSunshine": "Hanki Sunshine",
+      "step2": "Varmista, että Steam on asennettu ja kirjautuneena tietokoneella.",
+      "step3": "Kirjoita tietokoneen osoite ja valitse Muodosta pari. Anna tietokoneelle kiinteä IP-osoite reitittimessä.",
+      "address": "Tietokoneen osoite",
+      "pair": "Muodosta pari",
+      "looking": "Etsitään Sunshinea…",
+      "pinTitle": "Kirjoita tämä PIN-koodi Sunshineen koneella {{name}}",
+      "pinHint": "Avaa tietokoneen Sunshine-sivulla PIN, kirjoita tämä koodi ja nimi, kuten Matinee, ja lähetä. Matinee odottaa enintään 3 minuuttia.",
+      "openPin": "Avaa Sunshinen PIN-sivu",
+      "stateReady": "Valmis",
+      "stateBusy": "Striimaa jollekulle",
+      "stateOff": "Ei vastaa",
+      "stateUnpaired": "Ei enää tunne Matineeta: poista se ja muodosta pari uudelleen",
+      "remove": "Poista",
+      "removeConfirm": "Poistetaanko {{name}}? Steam-painike lakkaa käyttämästä sitä, kunnes muodostat parin uudelleen.",
+      "containerTitle": "Steam-kontissa palvelimellasi",
+      "containerHint": "Steam pyörii kontissa Matineen rinnalla palvelimella, jossa on näytönohjain. Se määritetään palvelimella ohjeen mukaan.",
+      "containerOn": "Määritetty tällä palvelimella.",
+      "containerOff": "Ei määritetty tällä palvelimella.",
+      "bothNote": "Molemmat on määritetty: Steam-painike käyttää tietokonetta.",
+      "active": "Käytössä",
+      "guide": "Asennusohje",
+      "playHint": "Steam koneella {{name}}, pelataan sen näytönohjaimella ja striimataan tänne."
     }
   }
 }

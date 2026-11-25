@@ -1784,6 +1784,36 @@
       "signOut": "Log ud af PlayStation",
       "starting": "Vækker PlayStation og starter Remote Play. Det kan tage et minut.",
       "buttons": "Select er touchpladen, Select og Start sammen PS-knappen"
+    },
+    "steampc": {
+      "title": "Steam",
+      "hint": "Steam-knappen spiller Steams Big Picture på en af to måder. Opsæt den, der passer dig.",
+      "pcTitle": "På en pc, hvor du allerede spiller Steam",
+      "pcHint": "Spillene kører på din gamer-pc, med Sunshine, en gratis streamingapp til Windows, Linux og Mac. Par Matinee med den én gang.",
+      "step1": "Installer Sunshine på pc'en, åbn dens side på https://localhost:47990, og vælg brugernavn og adgangskode.",
+      "getSunshine": "Hent Sunshine",
+      "step2": "Sørg for, at Steam er installeret og logget ind på pc'en.",
+      "step3": "Indtast pc'ens adresse, og vælg Par. Giv pc'en en fast IP-adresse i din router.",
+      "address": "Pc'ens adresse",
+      "pair": "Par",
+      "looking": "Leder efter Sunshine…",
+      "pinTitle": "Indtast denne pinkode i Sunshine på {{name}}",
+      "pinHint": "På Sunshines side på pc'en åbner du PIN, indtaster koden og et navn som Matinee, og sender den. Matinee venter op til 3 minutter.",
+      "openPin": "Åbn Sunshines PIN-side",
+      "stateReady": "Klar",
+      "stateBusy": "Streamer til nogen",
+      "stateOff": "Svarer ikke",
+      "stateUnpaired": "Kender ikke Matinee længere: fjern den, og par igen",
+      "remove": "Fjern",
+      "removeConfirm": "Fjern {{name}}? Steam-knappen holder op med at bruge den, til du parrer igen.",
+      "containerTitle": "I en Steam-container på din server",
+      "containerHint": "Steam kører i en container ved siden af Matinee, på en server med grafikkort. Den opsættes på serveren, som vejledningen viser.",
+      "containerOn": "Opsat på denne server.",
+      "containerOff": "Ikke opsat på denne server.",
+      "bothNote": "Begge er opsat: Steam-knappen spiller pc'en.",
+      "active": "I brug",
+      "guide": "Opsætningsvejledning",
+      "playHint": "Steam på {{name}}, spillet på dens grafikkort og streamet hertil."
     }
   }
 }

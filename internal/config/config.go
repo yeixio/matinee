@@ -68,6 +68,10 @@ type Config struct {
 	// PSRemote is matinee-psremote (games/psremote), which plays a
 	// PlayStation on the home network; "" when this install hasn't it.
 	PSRemote string
+	// PCRemote is matinee-pcremote (games/pcremote), which plays a gaming
+	// PC running Sunshine on the home network; "" when this install
+	// hasn't it.
+	PCRemote string
 }
 
 // GameSaveDir has games' saves, a folder per person.
@@ -147,6 +151,7 @@ func Load(args []string) (Config, error) {
 	gamesIPs := fs.String("games-public-ip", env("MATINEE_GAMES_PUBLIC_IP", ""), "addresses players reach the games port at, comma separated, when the server can't see its own (behind NAT)")
 	fs.StringVar(&c.GameHost, "game-host", env("MATINEE_GAME_HOST", ""), "address of a game host that plays PC games, such as http://steam:7174 (preview)")
 	fs.StringVar(&c.GameHostToken, "game-host-token", env("MATINEE_GAME_HOST_TOKEN", ""), "the game host's token")
+	fs.StringVar(&c.PCRemote, "pcremote", env("MATINEE_PCREMOTE", defaultBridge("pcremote")), "path of matinee-pcremote, which plays Steam on a gaming PC running Sunshine; off to not offer it")
 	fs.StringVar(&c.PSRemote, "psremote", env("MATINEE_PSREMOTE", defaultPSRemote()), "path of matinee-psremote, which plays a PlayStation on the home network; off to not offer it")
 	interval := fs.String("scan-interval", env("MATINEE_SCAN_INTERVAL", "6h"), "how often every library is rescanned in full until an admin picks in Settings, 0 to disable")
 	drainDelay := fs.String("drain-delay", env("MATINEE_DRAIN_DELAY", "0s"), "on shutdown, how long to keep serving after telling players the server is restarting (the Helm chart uses 5s)")
@@ -225,8 +230,12 @@ func defaultGamesDir() string {
 }
 
 // defaultPSRemote is where the image puts matinee-psremote.
-func defaultPSRemote() string {
-	for _, p := range []string{"/usr/lib/matinee/psremote/matinee-psremote", exeDir("matinee-psremote")} {
+func defaultPSRemote() string { return defaultBridge("psremote") }
+
+// defaultBridge is where the image puts matinee-<name>, or beside the
+// server.
+func defaultBridge(name string) string {
+	for _, p := range []string{"/usr/lib/matinee/" + name + "/matinee-" + name, exeDir("matinee-" + name)} {
 		if p == "" {
 			continue
 		}

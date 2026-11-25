@@ -1784,6 +1784,36 @@
       "signOut": "Kijelentkezés a PlayStationből",
       "starting": "A PlayStation felébresztése és a Remote Play indítása. Ez egy percig is eltarthat.",
       "buttons": "A Select az érintőpanel, a Select és a Start együtt a PS gomb"
+    },
+    "steampc": {
+      "title": "Steam",
+      "hint": "A Steam gomb kétféleképpen indíthatja a Steam Big Picture módját. Állítsd be a hozzád illőt.",
+      "pcTitle": "Egy gépen, amelyen már Steamezel",
+      "pcHint": "A játékok a gamer gépeden futnak a Sunshine segítségével, ami ingyenes streamelő app Windowsra, Linuxra és Macre. Párosítsd vele egyszer a Matinee-t.",
+      "step1": "Telepítsd a Sunshine-t a gépre, nyisd meg az oldalát a https://localhost:47990 címen, és adj meg felhasználónevet és jelszót.",
+      "getSunshine": "Sunshine letöltése",
+      "step2": "Ellenőrizd, hogy a Steam telepítve van és be vagy jelentkezve a gépen.",
+      "step3": "Írd be a gép címét, és válaszd a Párosítást. Adj a gépnek fix IP-címet a routerben.",
+      "address": "A gép címe",
+      "pair": "Párosítás",
+      "looking": "Sunshine keresése…",
+      "pinTitle": "Írd be ezt a PIN-t a Sunshine-ba ezen: {{name}}",
+      "pinHint": "A gép Sunshine-oldalán nyisd meg a PIN részt, írd be ezt a PIN-t és egy nevet, például Matinee, majd küldd el. A Matinee legfeljebb 3 percig vár.",
+      "openPin": "A Sunshine PIN-oldalának megnyitása",
+      "stateReady": "Kész",
+      "stateBusy": "Streamel valakinek",
+      "stateOff": "Nem válaszol",
+      "stateUnpaired": "Már nem ismeri a Matinee-t: távolítsd el, és párosítsd újra",
+      "remove": "Eltávolítás",
+      "removeConfirm": "Eltávolítod: {{name}}? A Steam gomb nem használja, amíg újra nem párosítod.",
+      "containerTitle": "Steam konténerben a szervereden",
+      "containerHint": "A Steam konténerben fut a Matinee mellett, videokártyás szerveren. A szerveren kell beállítani, ahogy az útmutató mutatja.",
+      "containerOn": "Beállítva ezen a szerveren.",
+      "containerOff": "Nincs beállítva ezen a szerveren.",
+      "bothNote": "Mindkettő be van állítva: a Steam gomb a gépet használja.",
+      "active": "Használatban",
+      "guide": "Beállítási útmutató",
+      "playHint": "Steam ezen: {{name}}, a videokártyáján játszva és ide streamelve."
     }
   }
 }

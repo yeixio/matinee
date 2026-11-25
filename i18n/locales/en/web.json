@@ -1784,6 +1784,36 @@
       "signOut": "Sign out of PlayStation",
       "starting": "Waking the PlayStation and starting Remote Play. This can take a minute.",
       "buttons": "Select is the touchpad, Select and Start the PS button"
+    },
+    "steampc": {
+      "title": "Steam",
+      "hint": "The Steam button plays Steam's Big Picture in one of two ways. Set up the one that fits you.",
+      "pcTitle": "On a PC you already play Steam on",
+      "pcHint": "The games run on your gaming PC, with Sunshine, a free streaming app for Windows, Linux and Mac. Pair Matinee with it once.",
+      "step1": "On the PC, install Sunshine, open its page at https://localhost:47990 and pick a username and password.",
+      "getSunshine": "Get Sunshine",
+      "step2": "Make sure Steam is installed and signed in on the PC.",
+      "step3": "Enter the PC's address and choose Pair. Give the PC a fixed IP address in your router.",
+      "address": "PC address",
+      "pair": "Pair",
+      "looking": "Looking for Sunshine…",
+      "pinTitle": "Type this PIN into Sunshine on {{name}}",
+      "pinHint": "In Sunshine's page on the PC, open PIN, type this PIN and a name such as Matinee, and send it. Matinee waits up to 3 minutes.",
+      "openPin": "Open Sunshine's PIN page",
+      "stateReady": "Ready",
+      "stateBusy": "Streaming to someone",
+      "stateOff": "Not answering",
+      "stateUnpaired": "Doesn't know Matinee any more: remove it and pair again",
+      "remove": "Remove",
+      "removeConfirm": "Remove {{name}}? The Steam button stops playing it until you pair again.",
+      "containerTitle": "In a Steam container on your server",
+      "containerHint": "Steam runs in a container beside Matinee, on a server with a graphics card. It's set up on the server, as the guide shows.",
+      "containerOn": "Set up on this server.",
+      "containerOff": "Not set up on this server.",
+      "bothNote": "Both are set up: the Steam button plays the PC.",
+      "active": "In use",
+      "guide": "Setup guide",
+      "playHint": "Steam on {{name}}, played on its graphics card and streamed here."
     }
   }
 }

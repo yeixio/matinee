@@ -1798,6 +1798,36 @@
       "signOut": "Sair da PlayStation",
       "starting": "Despertando o PlayStation e iniciando o Remote Play. Pode levar um minuto.",
       "buttons": "Select é o touchpad; Select e Start juntos, o botão PS"
+    },
+    "steampc": {
+      "title": "Steam",
+      "hint": "O botão Steam abre o Big Picture do Steam de um de dois jeitos. Configure o que for melhor para você.",
+      "pcTitle": "Em um PC onde você já joga no Steam",
+      "pcHint": "Os jogos rodam no seu PC gamer, com o Sunshine, um app de streaming gratuito para Windows, Linux e Mac. Pareie o Matinee com ele uma vez.",
+      "step1": "No PC, instale o Sunshine, abra a página dele em https://localhost:47990 e escolha um usuário e uma senha.",
+      "getSunshine": "Baixar o Sunshine",
+      "step2": "Confira se o Steam está instalado e conectado no PC.",
+      "step3": "Digite o endereço do PC e escolha Parear. Dê ao PC um IP fixo no seu roteador.",
+      "address": "Endereço do PC",
+      "pair": "Parear",
+      "looking": "Procurando o Sunshine…",
+      "pinTitle": "Digite este PIN no Sunshine em {{name}}",
+      "pinHint": "Na página do Sunshine no PC, abra PIN, digite este PIN e um nome como Matinee, e envie. O Matinee espera até 3 minutos.",
+      "openPin": "Abrir a página de PIN do Sunshine",
+      "stateReady": "Pronto",
+      "stateBusy": "Transmitindo para alguém",
+      "stateOff": "Não responde",
+      "stateUnpaired": "Não reconhece mais o Matinee: remova e pareie de novo",
+      "remove": "Remover",
+      "removeConfirm": "Remover {{name}}? O botão Steam deixa de usá-lo até você parear de novo.",
+      "containerTitle": "Em um contêiner Steam no seu servidor",
+      "containerHint": "O Steam roda em um contêiner ao lado do Matinee, em um servidor com placa de vídeo. Ele é configurado no servidor, como mostra o guia.",
+      "containerOn": "Configurado neste servidor.",
+      "containerOff": "Não configurado neste servidor.",
+      "bothNote": "Os dois estão configurados: o botão Steam usa o PC.",
+      "active": "Em uso",
+      "guide": "Guia de configuração",
+      "playHint": "Steam em {{name}}, jogado na placa de vídeo dele e transmitido aqui."
     }
   }
 }

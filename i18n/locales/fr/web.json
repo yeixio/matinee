@@ -1798,6 +1798,36 @@
       "signOut": "Se déconnecter de PlayStation",
       "starting": "Réveil de la PlayStation et lancement de Remote Play. Cela peut prendre une minute.",
       "buttons": "Select est le pavé tactile, Select et Start ensemble la touche PS"
+    },
+    "steampc": {
+      "title": "Steam",
+      "hint": "Le bouton Steam lance Big Picture de Steam de deux façons possibles. Configurez celle qui vous convient.",
+      "pcTitle": "Sur un PC où vous jouez déjà à Steam",
+      "pcHint": "Les jeux tournent sur votre PC de jeu, avec Sunshine, une app de streaming gratuite pour Windows, Linux et Mac. Associez-y Matinee une fois.",
+      "step1": "Sur le PC, installez Sunshine, ouvrez sa page sur https://localhost:47990 et choisissez un nom d'utilisateur et un mot de passe.",
+      "getSunshine": "Obtenir Sunshine",
+      "step2": "Vérifiez que Steam est installé et connecté sur le PC.",
+      "step3": "Saisissez l'adresse du PC et choisissez Associer. Donnez au PC une adresse IP fixe dans votre routeur.",
+      "address": "Adresse du PC",
+      "pair": "Associer",
+      "looking": "Recherche de Sunshine…",
+      "pinTitle": "Saisissez ce code PIN dans Sunshine sur {{name}}",
+      "pinHint": "Dans la page de Sunshine sur le PC, ouvrez PIN, saisissez ce code et un nom comme Matinee, puis envoyez-le. Matinee attend jusqu'à 3 minutes.",
+      "openPin": "Ouvrir la page PIN de Sunshine",
+      "stateReady": "Prêt",
+      "stateBusy": "Diffuse pour quelqu'un",
+      "stateOff": "Ne répond pas",
+      "stateUnpaired": "Ne connaît plus Matinee : retirez-le et associez-le à nouveau",
+      "remove": "Retirer",
+      "removeConfirm": "Retirer {{name}} ? Le bouton Steam ne l'utilisera plus jusqu'à une nouvelle association.",
+      "containerTitle": "Dans un conteneur Steam sur votre serveur",
+      "containerHint": "Steam tourne dans un conteneur à côté de Matinee, sur un serveur avec carte graphique. Il se configure sur le serveur, comme l'explique le guide.",
+      "containerOn": "Configuré sur ce serveur.",
+      "containerOff": "Non configuré sur ce serveur.",
+      "bothNote": "Les deux sont configurés : le bouton Steam utilise le PC.",
+      "active": "Utilisé",
+      "guide": "Guide d'installation",
+      "playHint": "Steam sur {{name}}, joué sur sa carte graphique et diffusé ici."
     }
   }
 }

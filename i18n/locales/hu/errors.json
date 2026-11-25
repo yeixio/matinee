@@ -308,5 +308,6 @@
   "text_can_be_at_most_200_characters": "a text legfeljebb 200 karakter lehet",
   "text_is_required": "a text megadása kötelező",
   "sign_in_to_playstation_first": "előbb jelentkezz be a PlayStationbe",
+  "this_server_cant_play_games_on_a_pc": "ez a szerver nem tud játszani számítógépen",
   "this_server_cant_play_playstation_games": "ez a szerver nem tud PlayStation-játékokat játszani"
 }

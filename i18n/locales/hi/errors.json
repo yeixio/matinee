@@ -308,5 +308,6 @@
   "text_can_be_at_most_200_characters": "text में ज़्यादा से ज़्यादा 200 अक्षर हो सकते हैं",
   "text_is_required": "text ज़रूरी है",
   "sign_in_to_playstation_first": "पहले PlayStation में साइन इन करें",
+  "this_server_cant_play_games_on_a_pc": "यह सर्वर PC पर गेम नहीं चला सकता",
   "this_server_cant_play_playstation_games": "यह सर्वर PlayStation गेम नहीं चला सकता"
 }

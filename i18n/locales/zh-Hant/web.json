@@ -1770,6 +1770,36 @@
       "signOut": "登出 PlayStation",
       "starting": "正在喚醒 PlayStation 並啟動 Remote Play，可能需要一分鐘。",
       "buttons": "Select 是觸控板，同時按 Select 和 Start 是 PS 按鈕"
+    },
+    "steampc": {
+      "title": "Steam",
+      "hint": "Steam 按鈕可以用兩種方式之一開啟 Steam 的大螢幕模式。設定適合你的那一種。",
+      "pcTitle": "在你已經玩 Steam 的電腦上",
+      "pcHint": "遊戲在你的電競電腦上執行，透過 Sunshine——一款適用於 Windows、Linux 和 Mac 的免費串流應用程式。將 Matinee 與它配對一次即可。",
+      "step1": "在電腦上安裝 Sunshine，在 https://localhost:47990 開啟它的頁面，並設定使用者名稱和密碼。",
+      "getSunshine": "取得 Sunshine",
+      "step2": "確認電腦上已安裝 Steam 並已登入。",
+      "step3": "輸入電腦的位址並選擇「配對」。在路由器中為電腦設定固定 IP 位址。",
+      "address": "電腦位址",
+      "pair": "配對",
+      "looking": "正在尋找 Sunshine…",
+      "pinTitle": "在 {{name}} 的 Sunshine 中輸入此 PIN",
+      "pinHint": "在電腦上的 Sunshine 頁面中開啟 PIN，輸入此 PIN 和一個名稱（如 Matinee），然後送出。Matinee 最多等待 3 分鐘。",
+      "openPin": "開啟 Sunshine 的 PIN 頁面",
+      "stateReady": "就緒",
+      "stateBusy": "正在為他人串流",
+      "stateOff": "沒有回應",
+      "stateUnpaired": "已不再認得 Matinee：請移除後重新配對",
+      "remove": "移除",
+      "removeConfirm": "移除 {{name}}？在重新配對之前，Steam 按鈕不會再使用它。",
+      "containerTitle": "在伺服器上的 Steam 容器中",
+      "containerHint": "Steam 在有顯示卡的伺服器上、Matinee 旁邊的容器中執行。依照指南在伺服器上設定。",
+      "containerOn": "已在此伺服器上設定。",
+      "containerOff": "未在此伺服器上設定。",
+      "bothNote": "兩者都已設定：Steam 按鈕使用電腦。",
+      "active": "使用中",
+      "guide": "設定指南",
+      "playHint": "{{name}} 上的 Steam，在其顯示卡上執行並串流到這裡。"
     }
   }
 }

@@ -1784,6 +1784,36 @@
       "signOut": "PlayStation سے سائن آؤٹ کریں",
       "starting": "PlayStation کو جگایا جا رہا ہے اور Remote Play شروع ہو رہا ہے۔ اس میں ایک منٹ لگ سکتا ہے۔",
       "buttons": "Select ٹچ پیڈ ہے، Select اور Start ایک ساتھ PS بٹن"
+    },
+    "steampc": {
+      "title": "Steam",
+      "hint": "Steam بٹن Steam کا Big Picture دو میں سے کسی ایک طریقے سے چلاتا ہے۔ جو آپ کے لیے موزوں ہو اسے سیٹ کریں۔",
+      "pcTitle": "ایسے PC پر جس پر آپ پہلے سے Steam کھیلتے ہیں",
+      "pcHint": "گیمز آپ کے گیمنگ PC پر Sunshine کے ساتھ چلتی ہیں، جو Windows، Linux اور Mac کے لیے مفت اسٹریمنگ ایپ ہے۔ Matinee کو اس سے ایک بار جوڑیں۔",
+      "step1": "PC پر Sunshine انسٹال کریں، اس کا صفحہ https://localhost:47990 پر کھولیں اور یوزر نیم اور پاس ورڈ چنیں۔",
+      "getSunshine": "Sunshine حاصل کریں",
+      "step2": "یقینی بنائیں کہ PC پر Steam انسٹال ہے اور سائن ان ہے۔",
+      "step3": "PC کا پتہ درج کریں اور جوڑیں چنیں۔ اپنے راؤٹر میں PC کو مستقل IP پتہ دیں۔",
+      "address": "PC کا پتہ",
+      "pair": "جوڑیں",
+      "looking": "Sunshine تلاش ہو رہا ہے…",
+      "pinTitle": "{{name}} پر Sunshine میں یہ PIN درج کریں",
+      "pinHint": "PC پر Sunshine کے صفحے میں PIN کھولیں، یہ PIN اور Matinee جیسا کوئی نام درج کریں اور بھیجیں۔ Matinee تین منٹ تک انتظار کرتا ہے۔",
+      "openPin": "Sunshine کا PIN صفحہ کھولیں",
+      "stateReady": "تیار",
+      "stateBusy": "کسی کو اسٹریم کر رہا ہے",
+      "stateOff": "جواب نہیں دے رہا",
+      "stateUnpaired": "اب Matinee کو نہیں پہچانتا: اسے ہٹائیں اور دوبارہ جوڑیں",
+      "remove": "ہٹائیں",
+      "removeConfirm": "{{name}} ہٹائیں؟ جب تک آپ دوبارہ نہیں جوڑتے، Steam بٹن اسے استعمال نہیں کرے گا۔",
+      "containerTitle": "آپ کے سرور پر Steam کنٹینر میں",
+      "containerHint": "Steam، Matinee کے ساتھ ایک کنٹینر میں گرافکس کارڈ والے سرور پر چلتا ہے۔ اسے سرور پر سیٹ کیا جاتا ہے، جیسا کہ گائیڈ میں دکھایا گیا ہے۔",
+      "containerOn": "اس سرور پر سیٹ ہے۔",
+      "containerOff": "اس سرور پر سیٹ نہیں ہے۔",
+      "bothNote": "دونوں سیٹ ہیں: Steam بٹن PC استعمال کرتا ہے۔",
+      "active": "استعمال میں",
+      "guide": "سیٹ اپ گائیڈ",
+      "playHint": "{{name}} پر Steam، اس کے گرافکس کارڈ پر کھیلا اور یہاں اسٹریم کیا گیا۔"
     }
   }
 }

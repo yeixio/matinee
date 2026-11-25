@@ -1770,6 +1770,36 @@
       "signOut": "Đăng xuất PlayStation",
       "starting": "Đang đánh thức PlayStation và khởi động Remote Play. Có thể mất một phút.",
       "buttons": "Select là bàn di cảm ứng, Select và Start cùng lúc là nút PS"
+    },
+    "steampc": {
+      "title": "Steam",
+      "hint": "Nút Steam mở Big Picture của Steam theo một trong hai cách. Hãy thiết lập cách phù hợp với bạn.",
+      "pcTitle": "Trên PC bạn đã chơi Steam",
+      "pcHint": "Trò chơi chạy trên PC chơi game của bạn bằng Sunshine, ứng dụng stream miễn phí cho Windows, Linux và Mac. Ghép đôi Matinee với nó một lần.",
+      "step1": "Trên PC, cài Sunshine, mở trang của nó tại https://localhost:47990 và chọn tên người dùng cùng mật khẩu.",
+      "getSunshine": "Tải Sunshine",
+      "step2": "Đảm bảo Steam đã được cài và đăng nhập trên PC.",
+      "step3": "Nhập địa chỉ của PC và chọn Ghép đôi. Đặt cho PC một địa chỉ IP cố định trong router.",
+      "address": "Địa chỉ PC",
+      "pair": "Ghép đôi",
+      "looking": "Đang tìm Sunshine…",
+      "pinTitle": "Nhập mã PIN này vào Sunshine trên {{name}}",
+      "pinHint": "Trên trang Sunshine của PC, mở PIN, nhập mã này cùng một tên như Matinee rồi gửi. Matinee chờ tối đa 3 phút.",
+      "openPin": "Mở trang PIN của Sunshine",
+      "stateReady": "Sẵn sàng",
+      "stateBusy": "Đang stream cho ai đó",
+      "stateOff": "Không phản hồi",
+      "stateUnpaired": "Không còn nhận ra Matinee: hãy xóa và ghép đôi lại",
+      "remove": "Xóa",
+      "removeConfirm": "Xóa {{name}}? Nút Steam sẽ không dùng nó cho đến khi bạn ghép đôi lại.",
+      "containerTitle": "Trong container Steam trên máy chủ của bạn",
+      "containerHint": "Steam chạy trong một container cạnh Matinee, trên máy chủ có card đồ họa. Nó được thiết lập trên máy chủ, như hướng dẫn chỉ ra.",
+      "containerOn": "Đã thiết lập trên máy chủ này.",
+      "containerOff": "Chưa thiết lập trên máy chủ này.",
+      "bothNote": "Cả hai đều đã thiết lập: nút Steam dùng PC.",
+      "active": "Đang dùng",
+      "guide": "Hướng dẫn thiết lập",
+      "playHint": "Steam trên {{name}}, chạy trên card đồ họa của nó và stream đến đây."
     }
   }
 }

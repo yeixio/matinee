@@ -1,8 +1,8 @@
-package psremote
+package mediabridge
 
 import "bytes"
 
-// keyframer makes every keyframe stand on its own: the console sends the
+// keyframer makes every keyframe stand on its own: a console sends the
 // H.264 SPS and PPS once, at the start, but a player who joins later, or
 // whose decoder starts over, needs them with each keyframe.
 type keyframer struct {
@@ -66,7 +66,7 @@ func (k *keyframer) fix(au []byte) []byte {
 }
 
 // opusSamples is how many 48 kHz samples an Opus packet holds, from its
-// first byte (RFC 6716, 3.1); the console sends 10 ms ones.
+// first byte (RFC 6716, 3.1): a PlayStation sends 10 ms ones, Sunshine 5 ms.
 func opusSamples(p []byte) int {
 	if len(p) == 0 {
 		return 480

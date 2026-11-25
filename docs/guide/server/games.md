@@ -171,7 +171,16 @@ Some emulators need a BIOS file from the console. Put it in `games/system` in Ma
 <!-- since: v0.2.6 -->
 ## PC games from Steam (preview)
 
-Matinee can also stream PC games from Steam. The games don't run on the Matinee server: they run on a **game host**, a Linux computer with a graphics card and Steam on it, such as a gaming PC. The game host plays the game, records its picture and sound on its graphics card, and sends them to Matinee, which streams them to your player the same way it streams console games. Your controller works as a controller plugged into the game host.
+Matinee can also stream PC games from Steam. The games don't run on the Matinee server: they run on a **game host**, a Linux computer with a graphics card and Steam on it, such as a gaming PC.
+
+<!-- since: v0.2.11 -->
+There are two ways to set it up, and **Games → Steam** in the web app shows both side by side, with the one the Steam button uses now:
+
+- **On a PC you already play Steam on**, with Sunshine, a free streaming app for Windows, Linux and Mac. Nothing to install on the server, and you pair it from the web app: see [Steam on a PC you already have](#steam-on-a-pc-you-already-have-preview). Start here if you have a gaming PC.
+- **In a Steam container on your server**, beside Matinee, for a home server with a graphics card of its own. It's set up on the server, as the rest of this section shows.
+
+If both are set up, the Steam button plays the PC.
+<!-- /since --> The game host plays the game, records its picture and sound on its graphics card, and sends them to Matinee, which streams them to your player the same way it streams console games. Your controller works as a controller plugged into the game host.
 
 Only the games you own and have installed in Steam on the game host are listed. Matinee never downloads games.
 
@@ -247,6 +256,35 @@ If the game host's computer only runs Steam, such as a Steam container, set `MAT
 | Game host setting | Default | What it's for |
 | --- | --- | --- |
 | `MATINEE_GAMEHOST_TV_MODE` | `false` | Keep Steam in Big Picture when a player leaves. |
+<!-- /since -->
+
+<!-- since: v0.2.11 -->
+## Steam on a PC you already have (preview)
+
+If you already play Steam on a gaming PC, Matinee can play it from there. The PC runs [Sunshine](https://app.lizardbyte.dev/Sunshine/), a free, open-source game streaming app for Windows, Linux and Mac. Matinee connects to it as the Moonlight apps do, starts Steam's Big Picture on the PC, and streams it to your player like any other game. Your controller works as an Xbox controller plugged into the PC, and in the web app your keyboard and mouse work too. Everything stays on your home network.
+
+Steam's own Remote Play only streams to Valve's Steam Link app, so Matinee can't receive it: that's what Sunshine is for. Matinee's side is built on [moonlight-common-c](https://github.com/moonlight-stream/moonlight-common-c). The Matinee server image has it built in. Other installs don't have it yet.
+
+### Setting it up
+
+1. **On the PC**, install Sunshine from [its download page](https://app.lizardbyte.dev/Sunshine/) and start it. Open its page in a browser on the PC, at `https://localhost:47990`, and pick a username and password. Sunshine adds **Steam Big Picture** to its applications on its own; if it's missing, add an application that runs `steam://open/bigpicture` (on Windows) or `steam steam://open/bigpicture` (on Linux) and name it "Steam Big Picture".
+2. Make sure Steam is installed and signed in on the PC, with the games you want installed. Give the PC a fixed IP address in your router, so Matinee always finds it.
+3. **In Matinee**, open **Games** in the web app. Under **Steam**, in **On a PC you already play Steam on**, enter the PC's address (such as `192.168.1.30`, or `192.168.1.30:48989` if you changed Sunshine's port) and choose **Pair**.
+4. Matinee shows a 4-digit PIN. On the PC, in Sunshine's page, open **PIN**, type that PIN and a name such as "Matinee", and send it. **Open Sunshine's PIN page** opens it for you from a computer that can reach the PC. Matinee waits up to 3 minutes, then shows the PC as paired.
+
+![Steam on the Games page: pairing with a PC, showing the PIN to type into Sunshine, beside the Steam container way](../images/steam-pc.webp)
+
+The PC's firewall has to let Sunshine's ports through from the Matinee server: TCP 47984, 47989, 47990 and 48010, and UDP 47998 to 48010. Sunshine's installer opens them on Windows. The Matinee server has to reach the PC directly, so both need to be on the same home network. If Matinee runs in Kubernetes or Docker, it reaches the PC through its computer's network, as it reaches the internet.
+
+### Playing
+
+Choose **Steam** under **PC games**, in the web app or at the top of a Games library in the Matinee apps, as with a Steam container. Steam's Big Picture opens on the PC, at 1080p and 60 frames a second, and streams to you; pick and play games with your controller. **Select** and **Start** together press the Xbox button, which opens Steam's menu. Closing the player closes Big Picture on the PC.
+
+The PC plays one game for one person at a time, and not while someone else streams from it with Moonlight. While you play, the game shows on the PC's own screen too, as Sunshine streams what's on it. To stop playing on the PC, remove it under **Steam**: Matinee asks the PC to forget it too.
+
+| Server setting | Default | What it's for |
+| --- | --- | --- |
+| `MATINEE_PCREMOTE` | `/usr/lib/matinee/pcremote/matinee-pcremote` in the image | Where the bridge to Sunshine is; `off` to not offer Steam on a PC. |
 <!-- /since -->
 
 <!-- since: v0.2.11 -->

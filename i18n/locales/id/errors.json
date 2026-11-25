@@ -308,5 +308,6 @@
   "text_can_be_at_most_200_characters": "text paling banyak 200 karakter",
   "text_is_required": "text wajib diisi",
   "sign_in_to_playstation_first": "masuk ke PlayStation dulu",
+  "this_server_cant_play_games_on_a_pc": "server ini tidak bisa bermain di PC",
   "this_server_cant_play_playstation_games": "server ini tidak bisa memainkan game PlayStation"
 }

@@ -308,5 +308,6 @@
   "text_can_be_at_most_200_characters": "text יכול להכיל עד 200 תווים",
   "text_is_required": "text הוא שדה חובה",
   "sign_in_to_playstation_first": "התחברו קודם ל-PlayStation",
+  "this_server_cant_play_games_on_a_pc": "השרת הזה לא יכול לשחק במחשב",
   "this_server_cant_play_playstation_games": "השרת הזה לא יכול להפעיל משחקי PlayStation"
 }

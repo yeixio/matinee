@@ -48,6 +48,7 @@ import (
 	"github.com/yeixio/matinee/internal/plugin"
 	"github.com/yeixio/matinee/internal/podcast"
 	"github.com/yeixio/matinee/internal/probe"
+	"github.com/yeixio/matinee/internal/pcremote"
 	"github.com/yeixio/matinee/internal/psremote"
 	"github.com/yeixio/matinee/internal/rating"
 	"github.com/yeixio/matinee/internal/remote"
@@ -342,6 +343,9 @@ func run() (err error) {
 			}
 			if cfg.PSRemote != "" && cfg.PSRemote != "off" {
 				apiServer.PlayStation = &psremote.Bridge{Path: cfg.PSRemote}
+			}
+			if cfg.PCRemote != "" && cfg.PCRemote != "off" {
+				apiServer.SteamPC = &pcremote.Bridge{Path: cfg.PCRemote}
 			}
 		}
 	}

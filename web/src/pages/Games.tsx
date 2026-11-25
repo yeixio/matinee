@@ -8,6 +8,7 @@ import { Button } from '../components/ui'
 import { GamePlayer } from '../games/GamePlayer'
 import { PCGames } from '../games/PCGames'
 import { PlayStation } from '../games/PlayStation'
+import { SteamSetup } from '../games/SteamPC'
 
 /**
  * Playing games streamed from the server, first version: an admin picks a
@@ -55,6 +56,8 @@ export default function Games() {
       )}
 
       <PCGames />
+
+      <SteamSetup />
 
       <PlayStation />
 

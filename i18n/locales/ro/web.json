@@ -1798,6 +1798,36 @@
       "signOut": "Deconectează-te de la PlayStation",
       "starting": "Se trezește PlayStation și pornește Remote Play. Poate dura un minut.",
       "buttons": "Select este touchpadul, Select și Start împreună butonul PS"
+    },
+    "steampc": {
+      "title": "Steam",
+      "hint": "Butonul Steam deschide Big Picture din Steam în unul din două moduri. Configurează-l pe cel potrivit.",
+      "pcTitle": "Pe un PC pe care joci deja Steam",
+      "pcHint": "Jocurile rulează pe PC-ul tău de gaming, cu Sunshine, o aplicație gratuită de streaming pentru Windows, Linux și Mac. Asociază Matinee cu ea o singură dată.",
+      "step1": "Pe PC, instalează Sunshine, deschide-i pagina la https://localhost:47990 și alege un nume de utilizator și o parolă.",
+      "getSunshine": "Descarcă Sunshine",
+      "step2": "Asigură-te că Steam e instalat și conectat pe PC.",
+      "step3": "Introdu adresa PC-ului și alege Asociază. Dă PC-ului o adresă IP fixă în router.",
+      "address": "Adresa PC-ului",
+      "pair": "Asociază",
+      "looking": "Se caută Sunshine…",
+      "pinTitle": "Introdu acest PIN în Sunshine pe {{name}}",
+      "pinHint": "Pe pagina Sunshine de pe PC, deschide PIN, introdu acest PIN și un nume precum Matinee, apoi trimite-l. Matinee așteaptă până la 3 minute.",
+      "openPin": "Deschide pagina PIN din Sunshine",
+      "stateReady": "Gata",
+      "stateBusy": "Transmite cuiva",
+      "stateOff": "Nu răspunde",
+      "stateUnpaired": "Nu mai recunoaște Matinee: elimină-l și asociază-l din nou",
+      "remove": "Elimină",
+      "removeConfirm": "Elimini {{name}}? Butonul Steam nu-l mai folosește până nu-l asociezi din nou.",
+      "containerTitle": "Într-un container Steam pe serverul tău",
+      "containerHint": "Steam rulează într-un container lângă Matinee, pe un server cu placă video. Se configurează pe server, cum arată ghidul.",
+      "containerOn": "Configurat pe acest server.",
+      "containerOff": "Neconfigurat pe acest server.",
+      "bothNote": "Ambele sunt configurate: butonul Steam folosește PC-ul.",
+      "active": "În uz",
+      "guide": "Ghid de configurare",
+      "playHint": "Steam pe {{name}}, jucat pe placa lui video și transmis aici."
     }
   }
 }

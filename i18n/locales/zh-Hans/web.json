@@ -1770,6 +1770,36 @@
       "signOut": "退出 PlayStation",
       "starting": "正在唤醒 PlayStation 并启动 Remote Play，可能需要一分钟。",
       "buttons": "Select 是触摸板，同时按 Select 和 Start 是 PS 按钮"
+    },
+    "steampc": {
+      "title": "Steam",
+      "hint": "Steam 按钮可以用两种方式之一打开 Steam 的大屏幕模式。设置适合你的那一种。",
+      "pcTitle": "在你已经玩 Steam 的电脑上",
+      "pcHint": "游戏在你的游戏电脑上运行，借助 Sunshine——一款适用于 Windows、Linux 和 Mac 的免费串流应用。将 Matinee 与它配对一次即可。",
+      "step1": "在电脑上安装 Sunshine，在 https://localhost:47990 打开它的页面，并设置用户名和密码。",
+      "getSunshine": "获取 Sunshine",
+      "step2": "确认电脑上已安装 Steam 并已登录。",
+      "step3": "输入电脑的地址并选择“配对”。在路由器中为电脑设置固定 IP 地址。",
+      "address": "电脑地址",
+      "pair": "配对",
+      "looking": "正在查找 Sunshine…",
+      "pinTitle": "在 {{name}} 的 Sunshine 中输入此 PIN",
+      "pinHint": "在电脑上的 Sunshine 页面中打开 PIN，输入此 PIN 和一个名称（如 Matinee），然后发送。Matinee 最多等待 3 分钟。",
+      "openPin": "打开 Sunshine 的 PIN 页面",
+      "stateReady": "就绪",
+      "stateBusy": "正在为他人串流",
+      "stateOff": "无响应",
+      "stateUnpaired": "已不再识别 Matinee：请移除后重新配对",
+      "remove": "移除",
+      "removeConfirm": "移除 {{name}}？在重新配对之前，Steam 按钮不会再使用它。",
+      "containerTitle": "在服务器上的 Steam 容器中",
+      "containerHint": "Steam 在带显卡的服务器上、Matinee 旁边的容器中运行。按照指南在服务器上设置。",
+      "containerOn": "已在此服务器上设置。",
+      "containerOff": "未在此服务器上设置。",
+      "bothNote": "两者都已设置：Steam 按钮使用电脑。",
+      "active": "使用中",
+      "guide": "设置指南",
+      "playHint": "{{name}} 上的 Steam，在其显卡上运行并串流到这里。"
     }
   }
 }
