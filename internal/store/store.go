@@ -834,6 +834,11 @@ var migrations = []string{
 	// again on the next scan.
 	`UPDATE items SET mtime = 0 WHERE kind = 'game' AND path IS NOT NULL
 		AND library_id IN (SELECT id FROM libraries WHERE kind = 'games')`,
+	// 147: episodes of shows numbered by year without being daily (Horizon's
+	// S2009E03) are found by title or place in the year now; those that
+	// found nothing are looked up again.
+	`UPDATE items SET meta_at = NULL WHERE kind = 'episode' AND tmdb_id IS NULL AND index_number < 100
+		AND parent_id IN (SELECT id FROM items WHERE kind = 'season' AND index_number >= 1900)`,
 }
 
 func now() int64 { return time.Now().Unix() }
