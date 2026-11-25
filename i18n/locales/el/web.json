@@ -93,7 +93,8 @@
     "episodes": "Επεισόδια",
     "resetPoster": "Χρήση της αυτόματης αφίσας",
     "markWatched": "Σήμανση ως προβεβλημένο",
-    "markUnwatched": "Σήμανση ως μη προβεβλημένο"
+    "markUnwatched": "Σήμανση ως μη προβεβλημένο",
+    "notFound": "Ο τίτλος δεν βρέθηκε"
   },
   "row": {
     "back": "Κύλιση πίσω",
@@ -234,7 +235,8 @@
       "topFolder": "Κύριος φάκελος",
       "unknown_one": "{{count}} αρχείο που το Matinee δεν παίζει ακόμη, όπως {{example}}.",
       "unknown_other": "{{count}} αρχεία που το Matinee δεν παίζει ακόμη, όπως {{example}}."
-    }
+    },
+    "notFound": "Η βιβλιοθήκη δεν βρέθηκε"
   },
   "nothingHereYet": "Τίποτα εδώ ακόμα",
   "collection": {

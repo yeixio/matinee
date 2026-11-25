@@ -93,7 +93,8 @@
     "episodes": "Các tập",
     "resetPoster": "Dùng áp phích tự động",
     "markWatched": "Đánh dấu đã xem",
-    "markUnwatched": "Đánh dấu chưa xem"
+    "markUnwatched": "Đánh dấu chưa xem",
+    "notFound": "Không tìm thấy nội dung này"
   },
   "row": {
     "back": "Cuộn lùi",
@@ -231,7 +232,8 @@
       "title_other": "Đã bỏ qua {{count}} tệp",
       "topFolder": "Thư mục trên cùng",
       "unknown_other": "{{count}} tệp Matinee chưa phát được, ví dụ {{example}}."
-    }
+    },
+    "notFound": "Không tìm thấy thư viện"
   },
   "nothingHereYet": "Chưa có gì ở đây",
   "collection": {

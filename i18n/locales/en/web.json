@@ -93,7 +93,8 @@
     "episodes": "Episodes",
     "resetPoster": "Use the automatic poster",
     "markWatched": "Mark as watched",
-    "markUnwatched": "Mark as unwatched"
+    "markUnwatched": "Mark as unwatched",
+    "notFound": "Title not found"
   },
   "row": {
     "back": "Scroll back",
@@ -234,7 +235,8 @@
       "topFolder": "Top folder",
       "unknown_one": "{{count}} file Matinee can't play yet, such as {{example}}.",
       "unknown_other": "{{count}} files Matinee can't play yet, such as {{example}}."
-    }
+    },
+    "notFound": "Library not found"
   },
   "nothingHereYet": "Nothing here yet",
   "collection": {

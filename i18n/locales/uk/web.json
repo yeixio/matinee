@@ -93,7 +93,8 @@
     "episodes": "Епізоди",
     "resetPoster": "Використати автоматичний постер",
     "markWatched": "Позначити переглянутим",
-    "markUnwatched": "Позначити непереглянутим"
+    "markUnwatched": "Позначити непереглянутим",
+    "notFound": "Назву не знайдено"
   },
   "row": {
     "back": "Прокрутити назад",
@@ -240,7 +241,8 @@
       "unknown_few": "{{count}} файли, які Matinee ще не вміє відтворювати, наприклад {{example}}.",
       "unknown_many": "{{count}} файлів, які Matinee ще не вміє відтворювати, наприклад {{example}}.",
       "unknown_other": "{{count}} файлу, які Matinee ще не вміє відтворювати, наприклад {{example}}."
-    }
+    },
+    "notFound": "Медіатеку не знайдено"
   },
   "nothingHereYet": "Тут поки порожньо",
   "collection": {

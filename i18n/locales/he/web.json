@@ -93,7 +93,8 @@
     "episodes": "פרקים",
     "resetPoster": "שימוש בפוסטר האוטומטי",
     "markWatched": "סימון כנצפה",
-    "markUnwatched": "סימון כלא נצפה"
+    "markUnwatched": "סימון כלא נצפה",
+    "notFound": "הכותר לא נמצא"
   },
   "row": {
     "back": "גלילה אחורה",
@@ -237,7 +238,8 @@
       "unknown_one": "קובץ אחד ש-Matinee עדיין לא יכול להפעיל, כמו {{example}}.",
       "unknown_two": "שני קבצים ש-Matinee עדיין לא יכול להפעיל, כמו {{example}}.",
       "unknown_other": "{{count}} קבצים ש-Matinee עדיין לא יכול להפעיל, כמו {{example}}."
-    }
+    },
+    "notFound": "הספרייה לא נמצאה"
   },
   "nothingHereYet": "אין כאן עדיין כלום",
   "collection": {

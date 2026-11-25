@@ -93,7 +93,8 @@
     "episodes": "Episode",
     "resetPoster": "Gunakan poster otomatis",
     "markWatched": "Tandai sudah ditonton",
-    "markUnwatched": "Tandai belum ditonton"
+    "markUnwatched": "Tandai belum ditonton",
+    "notFound": "Judul tidak ditemukan"
   },
   "row": {
     "back": "Gulir mundur",
@@ -231,7 +232,8 @@
       "title_other": "{{count}} file dilewati",
       "topFolder": "Folder teratas",
       "unknown_other": "{{count}} file yang belum bisa diputar Matinee, misalnya {{example}}."
-    }
+    },
+    "notFound": "Perpustakaan tidak ditemukan"
   },
   "nothingHereYet": "Belum ada apa-apa di sini",
   "collection": {

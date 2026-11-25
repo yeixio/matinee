@@ -93,7 +93,8 @@
     "episodes": "Afsnit",
     "resetPoster": "Brug den automatiske plakat",
     "markWatched": "Markér som set",
-    "markUnwatched": "Markér som uset"
+    "markUnwatched": "Markér som uset",
+    "notFound": "Titlen blev ikke fundet"
   },
   "row": {
     "back": "Rul tilbage",
@@ -234,7 +235,8 @@
       "topFolder": "Øverste mappe",
       "unknown_one": "{{count}} fil, som Matinee ikke kan afspille endnu, f.eks. {{example}}.",
       "unknown_other": "{{count}} filer, som Matinee ikke kan afspille endnu, f.eks. {{example}}."
-    }
+    },
+    "notFound": "Biblioteket blev ikke fundet"
   },
   "nothingHereYet": "Intet her endnu",
   "collection": {

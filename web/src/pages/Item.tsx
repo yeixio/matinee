@@ -17,7 +17,7 @@ import { CastRows, KeyPeople, MoreDetailsButton } from '../components/Credits'
 import { RelatedRows } from '../components/Related'
 import { StarRating } from '../components/StarRating'
 import { TrailerButton } from '../components/Trailer'
-import { Button, Spinner } from '../components/ui'
+import { Button, EmptyState, Spinner } from '../components/ui'
 import { WatchListButton } from '../components/WatchListButton'
 import { useVersion, VersionPicker } from '../components/Versions'
 import { clock, duration, progressFraction, ratingLabel, seasonTitle } from '../format'
@@ -28,7 +28,8 @@ import { EpisodePage, PodcastPage } from './PodcastItem'
 
 export default function ItemPage() {
   const id = Number(useParams().id)
-  const { data: item, isPending } = useQuery({
+  const { t } = useTranslation()
+  const { data: item, isPending, isError } = useQuery({
     queryKey: ['item', id],
     queryFn: () => api.item(id),
     refetchInterval: (q) => pendingRefetch(q.state.data && [q.state.data]),
@@ -40,6 +41,8 @@ export default function ItemPage() {
     refetchInterval: (q) => pendingRefetch(q.state.data),
   })
 
+  // An old bookmark, or a link to something since removed.
+  if (isError) return <EmptyState title={t('item.notFound')}>{t('collection.notFoundHint')}</EmptyState>
   if (isPending || !item) {
     return (
       <div className="grid h-[50vh] place-items-center">

@@ -56,3 +56,38 @@ describe('client id over plain http', () => {
     expect(clientId()).toMatch(/^[0-9a-f-]{36}$/)
   })
 })
+
+// Signing in from the Home guest keeps the browser's client id, which the
+// server still holds for the guest (#449).
+describe('client id of another account', () => {
+  afterEach(() => {
+    vi.unstubAllGlobals()
+    vi.resetModules()
+    localStorage.clear()
+  })
+
+  it('carries on under a new id when the server says the id is someone else’s', async () => {
+    localStorage.setItem('matinee.clientId', 'guest-id')
+    vi.stubGlobal('navigator', {
+      ...navigator,
+      locks: { request: (_n: string, _o: object, cb: (lock: object) => Promise<unknown>) => cb({}) },
+    })
+    const puts: string[] = []
+    vi.stubGlobal('fetch', vi.fn((url: string, init?: RequestInit) => {
+      if (init?.method === 'PUT') {
+        puts.push(url)
+        const status = url.includes('guest-id') ? 409 : 204
+        return Promise.resolve(new Response(null, { status }))
+      }
+      // The long poll never answers.
+      return new Promise((_, reject) => init?.signal?.addEventListener('abort', () => reject(new DOMException('aborted', 'AbortError'))))
+    }))
+    const { remote, clientId } = await import('./remote')
+    remote.start(() => {})
+    await vi.waitFor(() => expect(puts).toHaveLength(2))
+    expect(puts[0]).toContain('guest-id')
+    expect(clientId()).not.toBe('guest-id')
+    expect(puts[1]).toContain(encodeURIComponent(clientId()))
+    window.dispatchEvent(new Event('pagehide'))
+  })
+})

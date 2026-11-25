@@ -21,9 +21,12 @@ import { activeCount, clearPicks, isDesc, toSearchParams, useLibraryFilter } fro
 const LETTERS_FROM = 60
 
 export default function Library() {
+  const { t } = useTranslation()
   const id = Number(useParams().id)
   const { data: libraries } = useLibraries()
   const lib = libraries?.find((l) => l.id === id)
+  // A library that's gone (or was never there), as from an old link.
+  if (libraries && !lib) return <EmptyState title={t('library.notFound')}>{t('collection.notFoundHint')}</EmptyState>
   // Music has its own page: artists, albums and songs.
   if (lib?.kind === 'music') return <Music lib={lib} />
   // So do audiobooks: books, authors, series and narrators.

@@ -93,7 +93,8 @@
     "episodes": "एपिसोड",
     "resetPoster": "अपने-आप वाला पोस्टर इस्तेमाल करें",
     "markWatched": "देखा गया चिह्नित करें",
-    "markUnwatched": "नहीं देखा चिह्नित करें"
+    "markUnwatched": "नहीं देखा चिह्नित करें",
+    "notFound": "शीर्षक नहीं मिला"
   },
   "row": {
     "back": "पीछे स्क्रॉल करें",
@@ -234,7 +235,8 @@
       "topFolder": "सबसे ऊपर का फ़ोल्डर",
       "unknown_one": "{{count}} फ़ाइल जिसे Matinee अभी नहीं चला सकता, जैसे {{example}}।",
       "unknown_other": "{{count}} फ़ाइलें जिन्हें Matinee अभी नहीं चला सकता, जैसे {{example}}।"
-    }
+    },
+    "notFound": "लाइब्रेरी नहीं मिली"
   },
   "nothingHereYet": "अभी यहाँ कुछ नहीं",
   "collection": {

@@ -93,7 +93,8 @@
     "episodes": "اقساط",
     "resetPoster": "خودکار پوسٹر استعمال کریں",
     "markWatched": "دیکھا گیا نشان زد کریں",
-    "markUnwatched": "نہیں دیکھا نشان زد کریں"
+    "markUnwatched": "نہیں دیکھا نشان زد کریں",
+    "notFound": "عنوان نہیں ملا"
   },
   "row": {
     "back": "پیچھے اسکرول کریں",
@@ -234,7 +235,8 @@
       "topFolder": "اوپر والا فولڈر",
       "unknown_one": "{{count}} فائل جو Matinee ابھی نہیں چلا سکتا، جیسے {{example}}۔",
       "unknown_other": "{{count}} فائلیں جو Matinee ابھی نہیں چلا سکتا، جیسے {{example}}۔"
-    }
+    },
+    "notFound": "لائبریری نہیں ملی"
   },
   "nothingHereYet": "یہاں ابھی کچھ نہیں",
   "collection": {

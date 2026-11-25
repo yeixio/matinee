@@ -93,7 +93,8 @@
     "episodes": "ตอน",
     "resetPoster": "ใช้โปสเตอร์อัตโนมัติ",
     "markWatched": "ทำเครื่องหมายว่าดูแล้ว",
-    "markUnwatched": "ทำเครื่องหมายว่ายังไม่ดู"
+    "markUnwatched": "ทำเครื่องหมายว่ายังไม่ดู",
+    "notFound": "ไม่พบรายการนี้"
   },
   "row": {
     "back": "เลื่อนกลับ",
@@ -231,7 +232,8 @@
       "title_other": "ข้ามไป {{count}} ไฟล์",
       "topFolder": "โฟลเดอร์บนสุด",
       "unknown_other": "{{count}} ไฟล์ที่ Matinee ยังเล่นไม่ได้ เช่น {{example}}"
-    }
+    },
+    "notFound": "ไม่พบคลัง"
   },
   "nothingHereYet": "ยังไม่มีอะไรที่นี่",
   "collection": {

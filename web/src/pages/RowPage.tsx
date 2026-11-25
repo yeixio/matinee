@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
-import { api, pendingRefetch } from '../api'
+import { api, ApiError, pendingRefetch } from '../api'
 import { PosterGrid } from '../components/Card'
 import { EmptyState, Spinner } from '../components/ui'
 import { rowTitle } from '../rows'
@@ -17,7 +17,8 @@ export default function RowPage() {
     refetchInterval: (q) => pendingRefetch(q.state.data?.items),
   })
 
-  if (error) return <EmptyState title={t('common:rows.unavailable')}>{error.message}</EmptyState>
+  // A row that doesn't exist needs no more than that; another failure says why.
+  if (error) return <EmptyState title={t('common:rows.unavailable')}>{error instanceof ApiError && error.status === 404 ? null : error.message}</EmptyState>
   if (!data) {
     return (
       <div className="grid h-[50vh] place-items-center">
