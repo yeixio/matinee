@@ -734,6 +734,15 @@
     "mouseOff": "Dùng tay cầm làm tay cầm",
     "mouseHint": "Tay cầm là chuột: cần trái di chuyển, nút dưới nhấp, nút phải nhấp chuột phải và cần phải cuộn.",
     "backToGame": "Quay lại trò chơi",
-    "notTyped": "Không gõ được: {{chars}}"
+    "notTyped": "Không gõ được: {{chars}}",
+    "ps": {
+      "title": "PlayStation",
+      "hint": "Chơi PS5 hoặc PS4 của bạn từ đây, truyền qua mạng gia đình bằng Remote Play. Không do Sony tạo ra hay xác nhận.",
+      "starting": "Đang đánh thức PlayStation và khởi động Remote Play. Có thể mất một phút.",
+      "buttons": "Select là bàn di cảm ứng, Select và Start cùng lúc là nút PS",
+      "stateReady": "Đang bật",
+      "stateStandby": "Chế độ nghỉ",
+      "stateOff": "Không phản hồi"
+    }
   }
 }

@@ -748,6 +748,15 @@
     "mouseOff": "Usar el mando como mando",
     "mouseHint": "El mando es un ratón: el stick izquierdo lo mueve, el botón de abajo hace clic, el de la derecha hace clic derecho y el stick derecho desplaza.",
     "backToGame": "Volver al juego",
-    "notTyped": "No se pudo escribir: {{chars}}"
+    "notTyped": "No se pudo escribir: {{chars}}",
+    "ps": {
+      "title": "PlayStation",
+      "hint": "Juega a tu PS5 o PS4 desde aquí, transmitida por tu red doméstica con Remote Play. No creado ni respaldado por Sony.",
+      "starting": "Despertando la PlayStation e iniciando Remote Play. Puede tardar un minuto.",
+      "buttons": "Select es el panel táctil; Select y Start juntos, el botón PS",
+      "stateReady": "Encendida",
+      "stateStandby": "Modo de reposo",
+      "stateOff": "No responde"
+    }
   }
 }

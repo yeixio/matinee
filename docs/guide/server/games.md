@@ -249,7 +249,7 @@ If the game host's computer only runs Steam, such as a Steam container, set `MAT
 | `MATINEE_GAMEHOST_TV_MODE` | `false` | Keep Steam in Big Picture when a player leaves. |
 <!-- /since -->
 
-<!-- since: v0.2.10 -->
+<!-- since: v0.2.11 -->
 ## PlayStation Remote Play (preview)
 
 Matinee can also play your own PS5 or PS4 on your home network, with Remote Play, the way Sony's Remote Play app does. The game runs on the console. Matinee receives its picture and sound and streams them to your player like any other game, and your controller works as the console's controller. The stream goes from the console to the Matinee server to your player, all on your home network, and never through Sony's servers or anyone else's.
@@ -276,7 +276,9 @@ Your controller's buttons are where they are on a PlayStation controller: the bo
 
 Only one person can play a console at a time, and not while Sony's own Remote Play app is using it. If the console asks for a login passcode, turn the passcode off for that user on the console. Closing the player ends Remote Play; the game keeps running on the console.
 
-For now PlayStation is played from the web app, by admins. The Matinee apps get it next ([matinee-apps#231](https://github.com/yeixio/matinee-apps/issues/231)).
+From app 1.0.50, the iPhone, iPad and Android apps, Apple TV, Android TV, Fire TV, and Samsung and LG TVs play your paired consoles too: they're at the top of each Games library, under **PlayStation**, beside PC games. Choose a console to play it; Matinee wakes it first if it's resting, which can take a minute. As in the web app, only admins see them. Signing in to PlayStation and pairing stay in the web app.
+
+Server 0.2.10 left the PlayStation bridge out of its builds by mistake, so PlayStation needs a server from 0.2.11 on.
 
 | Server setting | Default | What it's for |
 | --- | --- | --- |

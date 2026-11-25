@@ -741,6 +741,15 @@
     "mouseOff": "Använd handkontrollen som handkontroll",
     "mouseHint": "Handkontrollen är en mus: vänster spak flyttar den, nedre knappen klickar, högra knappen högerklickar och höger spak rullar.",
     "backToGame": "Tillbaka till spelet",
-    "notTyped": "Kunde inte skriva: {{chars}}"
+    "notTyped": "Kunde inte skriva: {{chars}}",
+    "ps": {
+      "title": "PlayStation",
+      "hint": "Spela din PS5 eller PS4 härifrån, strömmad över ditt hemnätverk med Remote Play. Inte gjort eller godkänt av Sony.",
+      "starting": "Väcker PlayStation och startar Remote Play. Det kan ta en minut.",
+      "buttons": "Select är pekplattan, Select och Start tillsammans PS-knappen",
+      "stateReady": "På",
+      "stateStandby": "Viloläge",
+      "stateOff": "Svarar inte"
+    }
   }
 }

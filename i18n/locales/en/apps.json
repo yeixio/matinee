@@ -741,6 +741,15 @@
     "mouseOff": "Use the controller as a controller",
     "mouseHint": "The controller is a mouse: the left stick moves it, the bottom button clicks, the right button right-clicks and the right stick scrolls.",
     "backToGame": "Back to the game",
-    "notTyped": "Couldn't type: {{chars}}"
+    "notTyped": "Couldn't type: {{chars}}",
+    "ps": {
+      "title": "PlayStation",
+      "hint": "Play your PS5 or PS4 from here, streamed over your home network with Remote Play. Not made or endorsed by Sony.",
+      "starting": "Waking the PlayStation and starting Remote Play. This can take a minute.",
+      "buttons": "Select is the touchpad, Select and Start the PS button",
+      "stateReady": "On",
+      "stateStandby": "Rest mode",
+      "stateOff": "Not answering"
+    }
   }
 }

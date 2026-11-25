@@ -748,6 +748,15 @@
     "mouseOff": "Usar o controle como controle",
     "mouseHint": "O controle é um mouse: o analógico esquerdo move, o botão de baixo clica, o da direita faz clique direito e o analógico direito rola.",
     "backToGame": "Voltar ao jogo",
-    "notTyped": "Não foi possível digitar: {{chars}}"
+    "notTyped": "Não foi possível digitar: {{chars}}",
+    "ps": {
+      "title": "PlayStation",
+      "hint": "Jogue no seu PS5 ou PS4 daqui, transmitido pela sua rede doméstica com o Remote Play. Não feito nem endossado pela Sony.",
+      "starting": "Despertando o PlayStation e iniciando o Remote Play. Pode levar um minuto.",
+      "buttons": "Select é o touchpad; Select e Start juntos, o botão PS",
+      "stateReady": "Ligado",
+      "stateStandby": "Modo de descanso",
+      "stateOff": "Não responde"
+    }
   }
 }

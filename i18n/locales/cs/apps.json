@@ -755,6 +755,15 @@
     "mouseOff": "Používat ovladač jako ovladač",
     "mouseHint": "Ovladač je myš: levá páčka ji posouvá, spodní tlačítko kliká, pravé tlačítko kliká pravým a pravá páčka posouvá stránku.",
     "backToGame": "Zpět ke hře",
-    "notTyped": "Nepodařilo se napsat: {{chars}}"
+    "notTyped": "Nepodařilo se napsat: {{chars}}",
+    "ps": {
+      "title": "PlayStation",
+      "hint": "Hrajte na své PS5 nebo PS4 odsud, streamováno přes domácí síť pomocí Remote Play. Nevytvořeno ani neschváleno společností Sony.",
+      "starting": "Probouzím PlayStation a spouštím Remote Play. Může to trvat minutu.",
+      "buttons": "Select je touchpad, Select a Start dohromady tlačítko PS",
+      "stateReady": "Zapnutá",
+      "stateStandby": "Klidový režim",
+      "stateOff": "Neodpovídá"
+    }
   }
 }
