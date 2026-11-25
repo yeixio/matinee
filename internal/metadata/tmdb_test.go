@@ -331,3 +331,46 @@ func TestTMDBDailyEpisodes(t *testing.T) {
 		t.Fatalf("season: %+v %v", m, err)
 	}
 }
+
+// Shows numbered by year without being daily (Horizon's S2009E03) are found
+// by title, or else by their place in the year.
+func TestTMDBYearNumberedEpisodes(t *testing.T) {
+	mux := http.NewServeMux()
+	mux.HandleFunc("GET /tv/1966", func(w http.ResponseWriter, r *http.Request) {
+		json.NewEncoder(w).Encode(map[string]any{"id": 1966, "seasons": []map[string]any{
+			{"season_number": 46, "air_date": "2009-01-26"},
+			{"season_number": 47, "air_date": "2009-10-13"},
+		}})
+	})
+	mux.HandleFunc("GET /tv/1966/season/{n}", func(w http.ResponseWriter, r *http.Request) {
+		switch r.PathValue("n") {
+		case "46":
+			json.NewEncoder(w).Encode(map[string]any{"id": 4600, "season_number": 46, "air_date": "2009-01-26",
+				"episodes": []map[string]any{{"id": 1, "name": "The Secret You", "air_date": "2009-01-26"},
+					{"id": 2, "name": "Do You See What I See?", "air_date": "2009-02-03"}}})
+		case "47":
+			json.NewEncoder(w).Encode(map[string]any{"id": 4700, "season_number": 47, "air_date": "2009-10-13",
+				"episodes": []map[string]any{{"id": 3, "name": "Is Everything We Know About the Universe Wrong?", "air_date": "2009-10-13"},
+					{"id": 4, "name": "To Infinity and Beyond", "air_date": "2010-02-10"}}})
+		default:
+			w.WriteHeader(http.StatusNotFound)
+		}
+	})
+	ts := httptest.NewServer(mux)
+	t.Cleanup(ts.Close)
+	tm := NewTMDB("k")
+	tm.BaseURL, tm.ImageURL = ts.URL, "https://img/"
+	ctx := context.Background()
+	if m, err := tm.Lookup(ctx, Query{Kind: "episode", ShowID: 1966, Season: 2009, Episode: 3}); err != nil || m == nil || m.TMDBID != 3 {
+		t.Fatalf("by place: %+v %v", m, err)
+	}
+	if m, err := tm.Lookup(ctx, Query{Kind: "episode", ShowID: 1966, Season: 2009, Episode: 1, Title: "Do you see what I see"}); err != nil || m == nil || m.TMDBID != 2 {
+		t.Fatalf("by title: %+v %v", m, err)
+	}
+	if m, err := tm.Lookup(ctx, Query{Kind: "episode", ShowID: 1966, Season: 2010, Episode: 1}); err != nil || m == nil || m.TMDBID != 4 {
+		t.Fatalf("next year: %+v %v", m, err)
+	}
+	if m, err := tm.Lookup(ctx, Query{Kind: "episode", ShowID: 1966, Season: 2009, Episode: 9}); err != nil || m != nil {
+		t.Fatalf("past the year's episodes: %+v %v", m, err)
+	}
+}

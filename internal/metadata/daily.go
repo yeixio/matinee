@@ -3,10 +3,12 @@ package metadata
 import (
 	"context"
 	"fmt"
+	"slices"
 	"strconv"
 	"strings"
 	"sync"
 	"time"
+	"unicode"
 
 	"github.com/yeixio/matinee/internal/store"
 )
@@ -122,12 +124,16 @@ func (t *TMDB) dailySeasonDetails(ctx context.Context, showID int64, season int)
 }
 
 // dailyEpisodeLookup finds a daily show's episode by the day it aired.
+// Shows numbered by year without being daily, such as the BBC's Horizon
+// (S2009E03 on TheTVDB, and so in Sonarr's and Box Office's file names),
+// have an episode number that isn't a day: theirs is found by its title,
+// or else as the year's episode of that number, in the order they aired.
 func (t *TMDB) dailyEpisodeLookup(ctx context.Context, q Query) (*store.Metadata, error) {
-	date := fmt.Sprintf("%04d-%02d-%02d", q.Season, q.Episode/100, q.Episode%100)
 	seasons, err := t.yearSeasons(ctx, q.ShowID, q.Season)
 	if err != nil {
 		return nil, err
 	}
+	var year []dailyEpisode
 	for _, n := range seasons {
 		s, err := t.dailySeasonDetails(ctx, q.ShowID, n)
 		if err != nil {
@@ -137,13 +143,50 @@ func (t *TMDB) dailyEpisodeLookup(ctx context.Context, q Query) (*store.Metadata
 			continue
 		}
 		for _, e := range s.Episodes {
-			if e.AirDate == date {
-				return &store.Metadata{TMDBID: e.ID, Title: e.Name, Overview: e.Overview, Rating: e.VoteAverage,
-					Poster: t.image("w780", e.StillPath)}, nil
+			if strings.HasPrefix(e.AirDate, strconv.Itoa(q.Season)+"-") {
+				year = append(year, e)
 			}
 		}
 	}
+	found := func(e dailyEpisode) *store.Metadata {
+		return &store.Metadata{TMDBID: e.ID, Title: e.Name, Overview: e.Overview, Rating: e.VoteAverage,
+			Poster: t.image("w780", e.StillPath)}
+	}
+	if month, d := q.Episode/100, q.Episode%100; month >= 1 && month <= 12 && d >= 1 && d <= 31 {
+		date := fmt.Sprintf("%04d-%02d-%02d", q.Season, month, d)
+		for _, e := range year {
+			if e.AirDate == date {
+				return found(e), nil
+			}
+		}
+	}
+	if q.Episode < 1 || q.Episode >= 100 {
+		return nil, nil // a day with nothing on it, not an episode number
+	}
+	if k := titleKey(q.Title); k != "" {
+		for _, e := range year {
+			if titleKey(e.Name) == k {
+				return found(e), nil
+			}
+		}
+	}
+	slices.SortStableFunc(year, func(a, b dailyEpisode) int { return strings.Compare(a.AirDate, b.AirDate) })
+	if q.Episode <= len(year) {
+		return found(year[q.Episode-1]), nil
+	}
 	return nil, nil
+}
+
+// titleKey is an episode title for matching: lower case, letters and
+// digits only.
+func titleKey(s string) string {
+	var b strings.Builder
+	for _, r := range strings.ToLower(s) {
+		if unicode.IsLetter(r) || unicode.IsDigit(r) {
+			b.WriteRune(r)
+		}
+	}
+	return b.String()
 }
 
 // dailySeasonLookup finds the TMDB season of a daily show's year: the
