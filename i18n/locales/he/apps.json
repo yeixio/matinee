@@ -748,6 +748,15 @@
     "mouseOff": "שימוש בבקר כבקר",
     "mouseHint": "הבקר הוא עכבר: הסטיק השמאלי מזיז אותו, הכפתור התחתון לוחץ, הכפתור הימני לוחץ לחיצה ימנית והסטיק הימני גולל.",
     "backToGame": "חזרה למשחק",
-    "notTyped": "לא ניתן להקליד: {{chars}}"
+    "notTyped": "לא ניתן להקליד: {{chars}}",
+    "ps": {
+      "title": "PlayStation",
+      "hint": "שחקו ב-PS5 או ב-PS4 שלכם מכאן, בהזרמה ברשת הביתית עם Remote Play. לא נוצר או אושר על ידי Sony.",
+      "starting": "מעירים את ה-PlayStation ומפעילים את Remote Play. זה יכול לקחת דקה.",
+      "buttons": "Select הוא משטח המגע, ו-Select עם Start יחד הם כפתור ה-PS",
+      "stateReady": "פועלת",
+      "stateStandby": "מצב מנוחה",
+      "stateOff": "לא עונה"
+    }
   }
 }

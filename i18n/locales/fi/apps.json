@@ -741,6 +741,15 @@
     "mouseOff": "Käytä ohjainta ohjaimena",
     "mouseHint": "Ohjain on hiiri: vasen tikku liikuttaa sitä, alin painike napsauttaa, oikea painike napsauttaa oikealla ja oikea tikku vierittää.",
     "backToGame": "Takaisin peliin",
-    "notTyped": "Ei voitu kirjoittaa: {{chars}}"
+    "notTyped": "Ei voitu kirjoittaa: {{chars}}",
+    "ps": {
+      "title": "PlayStation",
+      "hint": "Pelaa PS5:tä tai PS4:ää täältä, kotiverkon yli suoratoistettuna Remote Playn avulla. Ei Sonyn tekemä tai hyväksymä.",
+      "starting": "Herätetään PlayStation ja käynnistetään Remote Play. Tämä voi kestää minuutin.",
+      "buttons": "Select on kosketuslevy, Select ja Start yhdessä PS-painike",
+      "stateReady": "Päällä",
+      "stateStandby": "Lepotila",
+      "stateOff": "Ei vastaa"
+    }
   }
 }

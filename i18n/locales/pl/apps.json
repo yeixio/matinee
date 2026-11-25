@@ -755,6 +755,15 @@
     "mouseOff": "Używaj kontrolera jako kontrolera",
     "mouseHint": "Kontroler jest myszą: lewa gałka ją przesuwa, dolny przycisk klika, prawy klika prawym, a prawa gałka przewija.",
     "backToGame": "Wróć do gry",
-    "notTyped": "Nie udało się wpisać: {{chars}}"
+    "notTyped": "Nie udało się wpisać: {{chars}}",
+    "ps": {
+      "title": "PlayStation",
+      "hint": "Graj na swojej PS5 lub PS4 stąd, strumieniowo przez sieć domową dzięki Remote Play. Nie stworzone ani nie wspierane przez Sony.",
+      "starting": "Wybudzanie PlayStation i uruchamianie Remote Play. To może potrwać minutę.",
+      "buttons": "Select to touchpad, Select i Start razem to przycisk PS",
+      "stateReady": "Włączona",
+      "stateStandby": "Tryb odpoczynku",
+      "stateOff": "Nie odpowiada"
+    }
   }
 }

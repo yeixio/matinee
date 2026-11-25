@@ -734,6 +734,15 @@
     "mouseOff": "把手柄当手柄用",
     "mouseHint": "手柄现在是鼠标：左摇杆移动，下方按钮点击，右侧按钮右键点击，右摇杆滚动。",
     "backToGame": "回到游戏",
-    "notTyped": "无法输入：{{chars}}"
+    "notTyped": "无法输入：{{chars}}",
+    "ps": {
+      "title": "PlayStation",
+      "hint": "在这里玩你的 PS5 或 PS4，通过 Remote Play 在家庭网络中串流。并非由 Sony 制作或认可。",
+      "starting": "正在唤醒 PlayStation 并启动 Remote Play，可能需要一分钟。",
+      "buttons": "Select 是触摸板，同时按 Select 和 Start 是 PS 按钮",
+      "stateReady": "已开机",
+      "stateStandby": "待机模式",
+      "stateOff": "无响应"
+    }
   }
 }

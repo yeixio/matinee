@@ -741,6 +741,15 @@
     "mouseOff": "Controller als controller gebruiken",
     "mouseHint": "De controller is een muis: de linkerstick beweegt hem, de onderste knop klikt, de rechterknop klikt rechts en de rechterstick scrolt.",
     "backToGame": "Terug naar het spel",
-    "notTyped": "Kon niet typen: {{chars}}"
+    "notTyped": "Kon niet typen: {{chars}}",
+    "ps": {
+      "title": "PlayStation",
+      "hint": "Speel je PS5 of PS4 vanaf hier, gestreamd over je thuisnetwerk met Remote Play. Niet gemaakt of goedgekeurd door Sony.",
+      "starting": "De PlayStation wordt gewekt en Remote Play gestart. Dat kan een minuut duren.",
+      "buttons": "Select is het touchpad, Select en Start samen de PS-knop",
+      "stateReady": "Aan",
+      "stateStandby": "Rustmodus",
+      "stateOff": "Antwoordt niet"
+    }
   }
 }

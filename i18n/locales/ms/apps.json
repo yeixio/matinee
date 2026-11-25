@@ -734,6 +734,15 @@
     "mouseOff": "Guna pengawal sebagai pengawal",
     "mouseHint": "Pengawal ialah tetikus: kayu kiri menggerakkannya, butang bawah mengklik, butang kanan klik kanan dan kayu kanan menatal.",
     "backToGame": "Kembali ke permainan",
-    "notTyped": "Tidak dapat menaip: {{chars}}"
+    "notTyped": "Tidak dapat menaip: {{chars}}",
+    "ps": {
+      "title": "PlayStation",
+      "hint": "Main PS5 atau PS4 anda dari sini, distrim melalui rangkaian rumah dengan Remote Play. Tidak dibuat atau disokong oleh Sony.",
+      "starting": "Membangunkan PlayStation dan memulakan Remote Play. Ini mungkin mengambil masa seminit.",
+      "buttons": "Select ialah pad sentuh, Select dan Start bersama butang PS",
+      "stateReady": "Hidup",
+      "stateStandby": "Mod rehat",
+      "stateOff": "Tidak menjawab"
+    }
   }
 }

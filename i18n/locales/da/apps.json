@@ -741,6 +741,15 @@
     "mouseOff": "Brug controlleren som controller",
     "mouseHint": "Controlleren er en mus: venstre stik flytter den, den nederste knap klikker, den højre højreklikker, og højre stik ruller.",
     "backToGame": "Tilbage til spillet",
-    "notTyped": "Kunne ikke skrive: {{chars}}"
+    "notTyped": "Kunne ikke skrive: {{chars}}",
+    "ps": {
+      "title": "PlayStation",
+      "hint": "Spil din PS5 eller PS4 herfra, streamet over dit hjemmenetværk med Remote Play. Ikke lavet eller godkendt af Sony.",
+      "starting": "Vækker PlayStation og starter Remote Play. Det kan tage et minut.",
+      "buttons": "Select er touchpladen, Select og Start sammen PS-knappen",
+      "stateReady": "Tændt",
+      "stateStandby": "Hviletilstand",
+      "stateOff": "Svarer ikke"
+    }
   }
 }

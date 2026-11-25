@@ -734,6 +734,15 @@
     "mouseOff": "コントローラーをコントローラーとして使う",
     "mouseHint": "コントローラーがマウスになります：左スティックで移動、下のボタンでクリック、右のボタンで右クリック、右スティックでスクロール。",
     "backToGame": "ゲームに戻る",
-    "notTyped": "入力できませんでした：{{chars}}"
+    "notTyped": "入力できませんでした：{{chars}}",
+    "ps": {
+      "title": "PlayStation",
+      "hint": "PS5やPS4をここからプレイできます。Remote Playで家のネットワーク経由でストリーミングします。Sonyが作成または承認したものではありません。",
+      "starting": "PlayStationを起動してRemote Playを開始しています。1分ほどかかることがあります。",
+      "buttons": "Selectはタッチパッド、SelectとStartの同時押しはPSボタン",
+      "stateReady": "オン",
+      "stateStandby": "レストモード",
+      "stateOff": "応答なし"
+    }
   }
 }

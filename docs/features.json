@@ -774,14 +774,14 @@
             {
               "name": "Play your PlayStation with Remote Play (preview)",
               "doc": "/docs/server/games/#playstation-remote-play-preview",
-              "since": "v0.2.10",
+              "since": "v0.2.11",
               "apps": {
                 "web": true,
-                "ios": "matinee-apps#231",
-                "android": "matinee-apps#231",
-                "appletv": "matinee-apps#231",
-                "androidtv": "matinee-apps#231",
-                "tvweb": "matinee-apps#231"
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
               }
             },
             {

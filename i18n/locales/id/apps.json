@@ -734,6 +734,15 @@
     "mouseOff": "Pakai kontroler sebagai kontroler",
     "mouseHint": "Kontroler menjadi mouse: stik kiri menggerakkan, tombol bawah mengeklik, tombol kanan klik kanan, dan stik kanan menggulir.",
     "backToGame": "Kembali ke game",
-    "notTyped": "Tidak bisa mengetik: {{chars}}"
+    "notTyped": "Tidak bisa mengetik: {{chars}}",
+    "ps": {
+      "title": "PlayStation",
+      "hint": "Mainkan PS5 atau PS4 kamu dari sini, di-stream lewat jaringan rumah dengan Remote Play. Tidak dibuat atau didukung oleh Sony.",
+      "starting": "Membangunkan PlayStation dan memulai Remote Play. Ini bisa makan waktu semenit.",
+      "buttons": "Select adalah touchpad, Select dan Start bersamaan tombol PS",
+      "stateReady": "Menyala",
+      "stateStandby": "Mode istirahat",
+      "stateOff": "Tidak menjawab"
+    }
   }
 }

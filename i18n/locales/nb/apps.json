@@ -741,6 +741,15 @@
     "mouseOff": "Bruk kontrolleren som kontroller",
     "mouseHint": "Kontrolleren er en mus: venstre spak flytter den, nederste knapp klikker, høyre knapp høyreklikker og høyre spak ruller.",
     "backToGame": "Tilbake til spillet",
-    "notTyped": "Kunne ikke skrive: {{chars}}"
+    "notTyped": "Kunne ikke skrive: {{chars}}",
+    "ps": {
+      "title": "PlayStation",
+      "hint": "Spill PS5 eller PS4 herfra, strømmet over hjemmenettverket med Remote Play. Ikke laget eller godkjent av Sony.",
+      "starting": "Vekker PlayStation og starter Remote Play. Det kan ta et minutt.",
+      "buttons": "Select er styreflaten, Select og Start sammen PS-knappen",
+      "stateReady": "På",
+      "stateStandby": "Hvilemodus",
+      "stateOff": "Svarer ikke"
+    }
   }
 }

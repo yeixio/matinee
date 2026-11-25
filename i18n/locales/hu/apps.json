@@ -741,6 +741,15 @@
     "mouseOff": "Kontroller használata kontrollerként",
     "mouseHint": "A kontroller egér: a bal kar mozgatja, az alsó gomb kattint, a jobb gomb jobb kattint, a jobb kar görget.",
     "backToGame": "Vissza a játékhoz",
-    "notTyped": "Nem sikerült beírni: {{chars}}"
+    "notTyped": "Nem sikerült beírni: {{chars}}",
+    "ps": {
+      "title": "PlayStation",
+      "hint": "Játssz a PS5-ön vagy PS4-en innen, az otthoni hálózaton át streamelve a Remote Play segítségével. Nem a Sony készítette vagy támogatja.",
+      "starting": "A PlayStation felébresztése és a Remote Play indítása. Ez egy percig is eltarthat.",
+      "buttons": "A Select az érintőpanel, a Select és a Start együtt a PS gomb",
+      "stateReady": "Bekapcsolva",
+      "stateStandby": "Nyugalmi mód",
+      "stateOff": "Nem válaszol"
+    }
   }
 }

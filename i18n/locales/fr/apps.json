@@ -748,6 +748,15 @@
     "mouseOff": "Utiliser la manette comme manette",
     "mouseHint": "La manette est une souris : le stick gauche la déplace, le bouton du bas clique, celui de droite fait un clic droit et le stick droit fait défiler.",
     "backToGame": "Retour au jeu",
-    "notTyped": "Impossible de taper : {{chars}}"
+    "notTyped": "Impossible de taper : {{chars}}",
+    "ps": {
+      "title": "PlayStation",
+      "hint": "Jouez à votre PS5 ou PS4 d'ici, diffusée sur votre réseau domestique avec Remote Play. Ni conçu ni approuvé par Sony.",
+      "starting": "Réveil de la PlayStation et lancement de Remote Play. Cela peut prendre une minute.",
+      "buttons": "Select est le pavé tactile, Select et Start ensemble la touche PS",
+      "stateReady": "Allumée",
+      "stateStandby": "Mode repos",
+      "stateOff": "Ne répond pas"
+    }
   }
 }

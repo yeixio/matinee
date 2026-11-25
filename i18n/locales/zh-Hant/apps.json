@@ -734,6 +734,15 @@
     "mouseOff": "把手把當手把用",
     "mouseHint": "手把現在是滑鼠：左搖桿移動，下方按鈕點擊，右側按鈕按右鍵，右搖桿捲動。",
     "backToGame": "回到遊戲",
-    "notTyped": "無法輸入：{{chars}}"
+    "notTyped": "無法輸入：{{chars}}",
+    "ps": {
+      "title": "PlayStation",
+      "hint": "在這裡玩你的 PS5 或 PS4，透過 Remote Play 在家用網路中串流。並非由 Sony 製作或認可。",
+      "starting": "正在喚醒 PlayStation 並啟動 Remote Play，可能需要一分鐘。",
+      "buttons": "Select 是觸控板，同時按 Select 和 Start 是 PS 按鈕",
+      "stateReady": "已開機",
+      "stateStandby": "待命模式",
+      "stateOff": "沒有回應"
+    }
   }
 }

@@ -748,6 +748,15 @@
     "mouseOff": "Folosește controllerul ca controller",
     "mouseHint": "Controllerul e un mouse: stickul stâng îl mișcă, butonul de jos face clic, cel din dreapta clic dreapta, iar stickul drept derulează.",
     "backToGame": "Înapoi la joc",
-    "notTyped": "Nu s-a putut tasta: {{chars}}"
+    "notTyped": "Nu s-a putut tasta: {{chars}}",
+    "ps": {
+      "title": "PlayStation",
+      "hint": "Joacă pe PS5 sau PS4 de aici, transmis prin rețeaua de acasă cu Remote Play. Nu este creat sau aprobat de Sony.",
+      "starting": "Se trezește PlayStation și pornește Remote Play. Poate dura un minut.",
+      "buttons": "Select este touchpadul, Select și Start împreună butonul PS",
+      "stateReady": "Pornită",
+      "stateStandby": "Mod repaus",
+      "stateOff": "Nu răspunde"
+    }
   }
 }
