@@ -1800,6 +1800,36 @@
       "signOut": "Cerrar sesión en PlayStation",
       "starting": "Despertando la PlayStation e iniciando Remote Play. Puede tardar un minuto.",
       "buttons": "Select es el panel táctil; Select y Start juntos, el botón PS"
+    },
+    "steampc": {
+      "title": "Steam",
+      "hint": "El botón Steam abre Big Picture de Steam de una de dos formas. Configura la que te encaje.",
+      "pcTitle": "En un PC donde ya juegas a Steam",
+      "pcHint": "Los juegos se ejecutan en tu PC gaming con Sunshine, una app de streaming gratuita para Windows, Linux y Mac. Vincula Matinee con ella una vez.",
+      "step1": "En el PC, instala Sunshine, abre su página en https://localhost:47990 y elige un usuario y una contraseña.",
+      "getSunshine": "Descargar Sunshine",
+      "step2": "Asegúrate de que Steam está instalado y con la sesión iniciada en el PC.",
+      "step3": "Escribe la dirección del PC y elige Vincular. Dale al PC una IP fija en tu router.",
+      "address": "Dirección del PC",
+      "pair": "Vincular",
+      "looking": "Buscando Sunshine…",
+      "pinTitle": "Escribe este PIN en Sunshine en {{name}}",
+      "pinHint": "En la página de Sunshine del PC, abre PIN, escribe este PIN y un nombre como Matinee, y envíalo. Matinee espera hasta 3 minutos.",
+      "openPin": "Abrir la página PIN de Sunshine",
+      "stateReady": "Listo",
+      "stateBusy": "Transmitiendo a alguien",
+      "stateOff": "No responde",
+      "stateUnpaired": "Ya no conoce Matinee: quítalo y vincúlalo de nuevo",
+      "remove": "Quitar",
+      "removeConfirm": "¿Quitar {{name}}? El botón Steam dejará de usarlo hasta que lo vincules de nuevo.",
+      "containerTitle": "En un contenedor de Steam en tu servidor",
+      "containerHint": "Steam se ejecuta en un contenedor junto a Matinee, en un servidor con tarjeta gráfica. Se configura en el servidor, como muestra la guía.",
+      "containerOn": "Configurado en este servidor.",
+      "containerOff": "No configurado en este servidor.",
+      "bothNote": "Ambos están configurados: el botón Steam usa el PC.",
+      "active": "En uso",
+      "guide": "Guía de configuración",
+      "playHint": "Steam en {{name}}, jugado en su tarjeta gráfica y transmitido aquí."
     }
   }
 }

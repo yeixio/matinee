@@ -129,6 +129,9 @@ func (s *Server) playGame(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		g.Remote, system, analog, timeout = start, "playstation", true, consoleStartTimeout
+	} else if start := s.steamPCGame(r.Context()); start != nil && (body.HostApp > 0 || body.Steam) {
+		// A paired PC with Sunshine plays Steam (steampc.go).
+		g.Remote, system, analog, timeout = start, "pc", true, steamPCStartTimeout
 	} else if body.HostApp > 0 || body.Steam {
 		if s.GameHost == nil {
 			writeError(w, http.StatusNotFound, "no game host is set up")
@@ -156,8 +159,14 @@ func (s *Server) playGame(w http.ResponseWriter, r *http.Request) {
 	s.startGame(w, r, g, body.Offer, system, analog, timeout)
 }
 
-// gameHostGames lists the games the game host has installed.
+// gameHostGames lists the games the game host has installed. Players
+// show the Steam button when it answers. With a Steam PC paired
+// (steampc.go), there's no list: Steam's Big Picture is the list.
 func (s *Server) gameHostGames(w http.ResponseWriter, r *http.Request) {
+	if _, pc := s.pairedSteamPC(r.Context()); pc != nil {
+		writeJSON(w, http.StatusOK, map[string]any{"games": []gamehost.Game{}, "pc": pc.Name})
+		return
+	}
 	if s.GameHost == nil {
 		writeError(w, http.StatusNotFound, "no game host is set up")
 		return
@@ -172,6 +181,10 @@ func (s *Server) gameHostGames(w http.ResponseWriter, r *http.Request) {
 	}
 	writeJSON(w, http.StatusOK, map[string]any{"games": games})
 }
+
+// steamPCStartTimeout is how long starting Steam on a PC may take:
+// Sunshine starts Big Picture, then the stream.
+const steamPCStartTimeout = 60 * time.Second
 
 // gameHostDesktop passes on the game host's desktop, a web page showing its
 // screen where an admin signs in to Steam and installs games. It controls

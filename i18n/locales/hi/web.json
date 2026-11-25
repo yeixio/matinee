@@ -1786,6 +1786,36 @@
       "signOut": "PlayStation से साइन आउट करें",
       "starting": "PlayStation को जगाया जा रहा है और Remote Play शुरू हो रहा है। इसमें एक मिनट लग सकता है।",
       "buttons": "Select टचपैड है, Select और Start साथ में PS बटन"
+    },
+    "steampc": {
+      "title": "Steam",
+      "hint": "Steam बटन Steam का Big Picture दो में से किसी एक तरीके से चलाता है। जो आपके लिए ठीक हो, उसे सेट करें।",
+      "pcTitle": "ऐसे PC पर जिस पर आप पहले से Steam खेलते हैं",
+      "pcHint": "गेम आपके गेमिंग PC पर Sunshine के साथ चलते हैं, जो Windows, Linux और Mac के लिए मुफ़्त स्ट्रीमिंग ऐप है। Matinee को इससे एक बार जोड़ें।",
+      "step1": "PC पर Sunshine इंस्टॉल करें, उसका पेज https://localhost:47990 पर खोलें और यूज़रनेम व पासवर्ड चुनें।",
+      "getSunshine": "Sunshine पाएँ",
+      "step2": "पक्का करें कि PC पर Steam इंस्टॉल है और साइन इन है।",
+      "step3": "PC का पता डालें और जोड़ें चुनें। अपने राउटर में PC को स्थायी IP पता दें।",
+      "address": "PC का पता",
+      "pair": "जोड़ें",
+      "looking": "Sunshine ढूँढा जा रहा है…",
+      "pinTitle": "{{name}} पर Sunshine में यह PIN डालें",
+      "pinHint": "PC पर Sunshine के पेज में PIN खोलें, यह PIN और Matinee जैसा कोई नाम डालें और भेजें। Matinee 3 मिनट तक इंतज़ार करता है।",
+      "openPin": "Sunshine का PIN पेज खोलें",
+      "stateReady": "तैयार",
+      "stateBusy": "किसी को स्ट्रीम कर रहा है",
+      "stateOff": "जवाब नहीं दे रहा",
+      "stateUnpaired": "अब Matinee को नहीं पहचानता: इसे हटाएँ और फिर से जोड़ें",
+      "remove": "हटाएँ",
+      "removeConfirm": "{{name}} हटाएँ? जब तक आप फिर से नहीं जोड़ते, Steam बटन इसका इस्तेमाल नहीं करेगा।",
+      "containerTitle": "आपके सर्वर पर Steam कंटेनर में",
+      "containerHint": "Steam, Matinee के पास एक कंटेनर में ग्राफ़िक्स कार्ड वाले सर्वर पर चलता है। इसे सर्वर पर सेट किया जाता है, जैसा गाइड में दिखाया गया है।",
+      "containerOn": "इस सर्वर पर सेट है।",
+      "containerOff": "इस सर्वर पर सेट नहीं है।",
+      "bothNote": "दोनों सेट हैं: Steam बटन PC का इस्तेमाल करता है।",
+      "active": "इस्तेमाल में",
+      "guide": "सेटअप गाइड",
+      "playHint": "{{name}} पर Steam, उसके ग्राफ़िक्स कार्ड पर खेला और यहाँ स्ट्रीम किया गया।"
     }
   }
 }

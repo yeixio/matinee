@@ -1786,6 +1786,36 @@
       "signOut": "Logg ut av PlayStation",
       "starting": "Vekker PlayStation og starter Remote Play. Det kan ta et minutt.",
       "buttons": "Select er styreflaten, Select og Start sammen PS-knappen"
+    },
+    "steampc": {
+      "title": "Steam",
+      "hint": "Steam-knappen spiller Steams Big Picture på én av to måter. Sett opp den som passer deg.",
+      "pcTitle": "På en PC der du allerede spiller Steam",
+      "pcHint": "Spillene kjører på spill-PC-en din, med Sunshine, en gratis strømmeapp for Windows, Linux og Mac. Koble Matinee til den én gang.",
+      "step1": "Installer Sunshine på PC-en, åpne siden på https://localhost:47990 og velg brukernavn og passord.",
+      "getSunshine": "Last ned Sunshine",
+      "step2": "Sørg for at Steam er installert og pålogget på PC-en.",
+      "step3": "Skriv inn adressen til PC-en og velg Koble til. Gi PC-en en fast IP-adresse i ruteren.",
+      "address": "PC-adresse",
+      "pair": "Koble til",
+      "looking": "Ser etter Sunshine…",
+      "pinTitle": "Skriv inn denne PIN-koden i Sunshine på {{name}}",
+      "pinHint": "På Sunshine-siden på PC-en åpner du PIN, skriver inn koden og et navn som Matinee, og sender. Matinee venter i opptil 3 minutter.",
+      "openPin": "Åpne Sunshines PIN-side",
+      "stateReady": "Klar",
+      "stateBusy": "Strømmer til noen",
+      "stateOff": "Svarer ikke",
+      "stateUnpaired": "Kjenner ikke Matinee lenger: fjern den og koble til på nytt",
+      "remove": "Fjern",
+      "removeConfirm": "Fjerne {{name}}? Steam-knappen slutter å bruke den til du kobler til på nytt.",
+      "containerTitle": "I en Steam-container på serveren din",
+      "containerHint": "Steam kjører i en container ved siden av Matinee, på en server med skjermkort. Det settes opp på serveren, slik veiledningen viser.",
+      "containerOn": "Satt opp på denne serveren.",
+      "containerOff": "Ikke satt opp på denne serveren.",
+      "bothNote": "Begge er satt opp: Steam-knappen spiller PC-en.",
+      "active": "I bruk",
+      "guide": "Oppsettsveiledning",
+      "playHint": "Steam på {{name}}, spilt på skjermkortet og strømmet hit."
     }
   }
 }

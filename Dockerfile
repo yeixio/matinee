@@ -93,6 +93,16 @@ RUN apt-get update \
 COPY games/psremote/ /src/psremote/
 RUN sh /src/psremote/build.sh /out/psremote && test -x /out/psremote/matinee-psremote
 
+# The bridge to a gaming PC running Sunshine (games/pcremote), built on
+# moonlight-common-c. As with the PlayStation bridge, a failed build fails
+# the image.
+FROM debian:trixie AS pcremote
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends ca-certificates git cmake make gcc g++ libc6-dev pkg-config libssl-dev libzstd-dev zlib1g-dev \
+    && rm -rf /var/lib/apt/lists/*
+COPY games/pcremote/ /src/pcremote/
+RUN sh /src/pcremote/build.sh /out/pcremote && test -x /out/pcremote/matinee-pcremote
+
 # Debian rather than Alpine: its FFmpeg is built with every hardware backend
 # Matinee uses on Linux, and glibc lets NVIDIA's container runtime add its
 # driver libraries. mesa-va-drivers runs VAAPI on AMD GPUs (and older Intel);
@@ -112,6 +122,7 @@ COPY --from=server /out/matinee /usr/local/bin/matinee
 COPY --from=server /out/matinee-gamehost /usr/local/bin/matinee-gamehost
 COPY --from=games /out/games /usr/lib/matinee/games
 COPY --from=psremote /out/psremote /usr/lib/matinee/psremote
+COPY --from=pcremote /out/pcremote /usr/lib/matinee/pcremote
 USER matinee
 # MATINEE_INSTALL tells Settings → Updates that a new image is the way to update.
 ENV MATINEE_DATA_DIR=/data MATINEE_ADDR=:7171 MATINEE_INSTALL=docker

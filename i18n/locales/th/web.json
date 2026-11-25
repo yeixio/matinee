@@ -1772,6 +1772,36 @@
       "signOut": "ออกจากระบบ PlayStation",
       "starting": "กำลังปลุก PlayStation และเริ่ม Remote Play อาจใช้เวลาหนึ่งนาที",
       "buttons": "Select คือทัชแพด กด Select และ Start พร้อมกันคือปุ่ม PS"
+    },
+    "steampc": {
+      "title": "Steam",
+      "hint": "ปุ่ม Steam เปิด Big Picture ของ Steam ได้สองแบบ ตั้งค่าแบบที่เหมาะกับคุณ",
+      "pcTitle": "บนพีซีที่คุณเล่น Steam อยู่แล้ว",
+      "pcHint": "เกมทำงานบนพีซีเล่นเกมของคุณด้วย Sunshine แอปสตรีมฟรีสำหรับ Windows, Linux และ Mac จับคู่ Matinee กับแอปนี้ครั้งเดียว",
+      "step1": "บนพีซี ติดตั้ง Sunshine เปิดหน้าของแอปที่ https://localhost:47990 แล้วตั้งชื่อผู้ใช้และรหัสผ่าน",
+      "getSunshine": "ดาวน์โหลด Sunshine",
+      "step2": "ตรวจสอบว่าติดตั้ง Steam และลงชื่อเข้าใช้บนพีซีแล้ว",
+      "step3": "ป้อนที่อยู่ของพีซีแล้วเลือกจับคู่ ตั้ง IP คงที่ให้พีซีในเราเตอร์ของคุณ",
+      "address": "ที่อยู่พีซี",
+      "pair": "จับคู่",
+      "looking": "กำลังค้นหา Sunshine…",
+      "pinTitle": "พิมพ์ PIN นี้ใน Sunshine บน {{name}}",
+      "pinHint": "ในหน้า Sunshine บนพีซี เปิด PIN พิมพ์ PIN นี้และชื่อ เช่น Matinee แล้วส่ง Matinee รอได้นานสุด 3 นาที",
+      "openPin": "เปิดหน้า PIN ของ Sunshine",
+      "stateReady": "พร้อม",
+      "stateBusy": "กำลังสตรีมให้ผู้อื่น",
+      "stateOff": "ไม่ตอบสนอง",
+      "stateUnpaired": "ไม่รู้จัก Matinee แล้ว: นำออกแล้วจับคู่ใหม่",
+      "remove": "นำออก",
+      "removeConfirm": "นำ {{name}} ออกหรือไม่ ปุ่ม Steam จะไม่ใช้เครื่องนี้จนกว่าคุณจะจับคู่ใหม่",
+      "containerTitle": "ในคอนเทนเนอร์ Steam บนเซิร์ฟเวอร์ของคุณ",
+      "containerHint": "Steam ทำงานในคอนเทนเนอร์ข้าง Matinee บนเซิร์ฟเวอร์ที่มีการ์ดจอ ตั้งค่าบนเซิร์ฟเวอร์ตามคู่มือ",
+      "containerOn": "ตั้งค่าไว้บนเซิร์ฟเวอร์นี้แล้ว",
+      "containerOff": "ยังไม่ได้ตั้งค่าบนเซิร์ฟเวอร์นี้",
+      "bothNote": "ตั้งค่าไว้ทั้งสองแบบ: ปุ่ม Steam ใช้พีซี",
+      "active": "กำลังใช้",
+      "guide": "คู่มือการตั้งค่า",
+      "playHint": "Steam บน {{name}} เล่นบนการ์ดจอของเครื่องนั้นและสตรีมมาที่นี่"
     }
   }
 }

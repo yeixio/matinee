@@ -1786,6 +1786,36 @@
       "signOut": "Logga ut från PlayStation",
       "starting": "Väcker PlayStation och startar Remote Play. Det kan ta en minut.",
       "buttons": "Select är pekplattan, Select och Start tillsammans PS-knappen"
+    },
+    "steampc": {
+      "title": "Steam",
+      "hint": "Steam-knappen spelar Steams Big Picture på ett av två sätt. Ställ in det som passar dig.",
+      "pcTitle": "På en dator där du redan spelar Steam",
+      "pcHint": "Spelen körs på din speldator, med Sunshine, en gratis streamingapp för Windows, Linux och Mac. Parkoppla Matinee med den en gång.",
+      "step1": "Installera Sunshine på datorn, öppna dess sida på https://localhost:47990 och välj ett användarnamn och lösenord.",
+      "getSunshine": "Hämta Sunshine",
+      "step2": "Se till att Steam är installerat och inloggat på datorn.",
+      "step3": "Ange datorns adress och välj Parkoppla. Ge datorn en fast IP-adress i routern.",
+      "address": "Datorns adress",
+      "pair": "Parkoppla",
+      "looking": "Letar efter Sunshine…",
+      "pinTitle": "Skriv den här PIN-koden i Sunshine på {{name}}",
+      "pinHint": "På Sunshines sida på datorn öppnar du PIN, skriver den här koden och ett namn som Matinee och skickar. Matinee väntar i upp till 3 minuter.",
+      "openPin": "Öppna Sunshines PIN-sida",
+      "stateReady": "Redo",
+      "stateBusy": "Streamar till någon",
+      "stateOff": "Svarar inte",
+      "stateUnpaired": "Känner inte längre igen Matinee: ta bort den och parkoppla igen",
+      "remove": "Ta bort",
+      "removeConfirm": "Ta bort {{name}}? Steam-knappen slutar använda den tills du parkopplar igen.",
+      "containerTitle": "I en Steam-container på din server",
+      "containerHint": "Steam körs i en container bredvid Matinee, på en server med grafikkort. Det ställs in på servern, som guiden visar.",
+      "containerOn": "Inställt på den här servern.",
+      "containerOff": "Inte inställt på den här servern.",
+      "bothNote": "Båda är inställda: Steam-knappen spelar datorn.",
+      "active": "Används",
+      "guide": "Installationsguide",
+      "playHint": "Steam på {{name}}, spelat på dess grafikkort och streamat hit."
     }
   }
 }

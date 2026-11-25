@@ -1786,6 +1786,36 @@
       "signOut": "Von PlayStation abmelden",
       "starting": "Die PlayStation wird aufgeweckt und Remote Play gestartet. Das kann eine Minute dauern.",
       "buttons": "Select ist das Touchpad, Select und Start zusammen die PS-Taste"
+    },
+    "steampc": {
+      "title": "Steam",
+      "hint": "Die Steam-Taste spielt Steams Big Picture auf eine von zwei Arten. Richte die ein, die zu dir passt.",
+      "pcTitle": "Auf einem PC, auf dem du schon Steam spielst",
+      "pcHint": "Die Spiele laufen auf deinem Gaming-PC, mit Sunshine, einer kostenlosen Streaming-App für Windows, Linux und Mac. Koppel Matinee einmal damit.",
+      "step1": "Installiere Sunshine auf dem PC, öffne seine Seite unter https://localhost:47990 und wähle einen Benutzernamen und ein Passwort.",
+      "getSunshine": "Sunshine holen",
+      "step2": "Achte darauf, dass Steam auf dem PC installiert und angemeldet ist.",
+      "step3": "Gib die Adresse des PCs ein und wähle Koppeln. Gib dem PC in deinem Router eine feste IP-Adresse.",
+      "address": "PC-Adresse",
+      "pair": "Koppeln",
+      "looking": "Suche nach Sunshine…",
+      "pinTitle": "Gib diese PIN in Sunshine auf {{name}} ein",
+      "pinHint": "Öffne auf der Sunshine-Seite des PCs PIN, gib diese PIN und einen Namen wie Matinee ein und sende sie. Matinee wartet bis zu 3 Minuten.",
+      "openPin": "Sunshines PIN-Seite öffnen",
+      "stateReady": "Bereit",
+      "stateBusy": "Streamt gerade für jemanden",
+      "stateOff": "Antwortet nicht",
+      "stateUnpaired": "Kennt Matinee nicht mehr: entferne ihn und kopple neu",
+      "remove": "Entfernen",
+      "removeConfirm": "{{name}} entfernen? Die Steam-Taste spielt ihn erst wieder, wenn du neu koppelst.",
+      "containerTitle": "In einem Steam-Container auf deinem Server",
+      "containerHint": "Steam läuft in einem Container neben Matinee, auf einem Server mit Grafikkarte. Er wird auf dem Server eingerichtet, wie die Anleitung zeigt.",
+      "containerOn": "Auf diesem Server eingerichtet.",
+      "containerOff": "Auf diesem Server nicht eingerichtet.",
+      "bothNote": "Beides ist eingerichtet: Die Steam-Taste spielt den PC.",
+      "active": "In Verwendung",
+      "guide": "Einrichtungsanleitung",
+      "playHint": "Steam auf {{name}}, auf seiner Grafikkarte gespielt und hierher gestreamt."
     }
   }
 }

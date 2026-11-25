@@ -1285,7 +1285,8 @@ paths:
                         appId: { type: integer, description: Steam's app id. }
                         name: { type: string }
                         size: { type: integer, description: Bytes on disk. }
-        "404": { description: No game host is set up. }
+                  pc: { type: string, description: "The paired Steam PC's name, when one is paired (see GET /games/steampc): games is empty then, and steam on POST /games/play plays Big Picture there." }
+        "404": { description: No game host or Steam PC is set up. }
         "502": { description: The game host didn't answer. }
   /games/host/desktop/{path}:
     get:
@@ -1377,6 +1378,81 @@ paths:
       responses:
         "204": { description: Sent. A PS5 takes about 20 seconds to come on. }
         "404": { description: No such console. }
+  /games/steampc:
+    get:
+      summary: Steam on a PC you already have, through Sunshine (admins only, preview)
+      description: >-
+        Matinee plays Steam's Big Picture on a gaming PC running Sunshine on the home network, as Moonlight does
+        (matinee-pcremote, built on moonlight-common-c), and streams it like any game: steam on POST /games/play
+        plays it once a PC is paired. When both a Steam PC and a game host (MATINEE_GAME_HOST) are set up, the PC
+        is played.
+      responses:
+        "200":
+          description: The setup.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  available: { type: boolean, description: Whether this server can play a Steam PC. }
+                  container: { type: boolean, description: Whether a game host (such as a Steam container) is set up too. }
+                  active: { type: string, enum: [pc, container, ""], description: Which one the Steam button plays. }
+                  pc:
+                    type: object
+                    properties:
+                      name: { type: string }
+                      host: { type: string }
+                      port: { type: integer, description: "Sunshine's port, 47989 unless changed." }
+                      state: { type: string, enum: [ready, busy, "off", unpaired], description: "Ready, streaming to someone, not answering, or no longer knows Matinee." }
+                      error: { type: string }
+                  pairing:
+                    type: object
+                    description: A pairing under way or just ended.
+                    properties:
+                      pin: { type: string, description: The PIN to type into Sunshine's PIN page. }
+                      name: { type: string }
+                      host: { type: string }
+                      state: { type: string, enum: [waiting, paired, failed] }
+                      error: { type: string }
+    delete:
+      summary: Forget the paired Steam PC, and have it forget Matinee if it answers (admins only)
+      responses:
+        "204": { description: Forgotten. }
+  /games/steampc/find:
+    post:
+      summary: Check that Sunshine answers at an address, before pairing (admins only, preview)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                address: { type: string, description: "The PC's address on the home network, with :port if Sunshine's isn't 47989." }
+      responses:
+        "200": { description: "Found: its name and Sunshine's version, host and port." }
+        "400": { description: Not an address on the home network. }
+        "502": { description: Sunshine didn't answer there. }
+  /games/steampc/pair:
+    post:
+      summary: Start pairing with a Steam PC (admins only, preview)
+      description: >-
+        Answers with a 4-digit PIN at once; type it into Sunshine's web page on the PC (PIN, at https://the-pc:47990).
+        Pairing waits up to 3 minutes for it; GET /games/steampc says how it went. Pairing again replaces the PC.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                address: { type: string }
+      responses:
+        "200": { description: "The PIN, and the PC's name." }
+        "400": { description: Not an address on the home network. }
+        "502": { description: Sunshine didn't answer there. }
+    delete:
+      summary: Stop a pairing under way (admins only)
+      responses:
+        "204": { description: Stopped. }
   /games/play:
     post:
       summary: Start playing a game on the server, streamed over WebRTC (admins only)
@@ -1396,7 +1472,7 @@ paths:
                 path: { type: string, description: The game file, or a zip holding it. }
                 lagTest: { type: boolean, description: Play the built-in lag test instead of a game. }
                 hostApp: { type: integer, description: "Play this PC game on the game host instead (preview), by its Steam app id; see GET /games/host." }
-                steam: { type: boolean, description: "Play Steam itself on the game host, full screen in Big Picture, where the player picks games with the controller (preview)." }
+                steam: { type: boolean, description: "Play Steam itself, full screen in Big Picture, where the player picks games with the controller (preview): on the paired Steam PC (GET /games/steampc), or else on the game host." }
                 playstation: { type: string, description: "Play a paired PlayStation instead (preview), by its id; see GET /games/playstation. It's woken first if it's resting, so this can take a minute. Select presses the touchpad and Select with Start the PS button." }
                 offer: { type: string, description: The player's SDP offer. }
                 direct: { type: boolean, description: "With no offer: the WebSocket stream instead of WebRTC (see POST /items/{id}/game)." }

@@ -1814,6 +1814,36 @@
       "signOut": "Wyloguj się z PlayStation",
       "starting": "Wybudzanie PlayStation i uruchamianie Remote Play. To może potrwać minutę.",
       "buttons": "Select to touchpad, Select i Start razem to przycisk PS"
+    },
+    "steampc": {
+      "title": "Steam",
+      "hint": "Przycisk Steam uruchamia Big Picture Steam na jeden z dwóch sposobów. Skonfiguruj ten, który ci pasuje.",
+      "pcTitle": "Na komputerze, na którym już grasz w Steam",
+      "pcHint": "Gry działają na twoim komputerze do gier, z Sunshine, darmową aplikacją do streamingu na Windows, Linux i Mac. Sparuj z nią Matinee raz.",
+      "step1": "Na komputerze zainstaluj Sunshine, otwórz jego stronę pod https://localhost:47990 i wybierz nazwę użytkownika i hasło.",
+      "getSunshine": "Pobierz Sunshine",
+      "step2": "Upewnij się, że Steam jest zainstalowany i zalogowany na komputerze.",
+      "step3": "Wpisz adres komputera i wybierz Sparuj. Nadaj komputerowi stały adres IP w routerze.",
+      "address": "Adres komputera",
+      "pair": "Sparuj",
+      "looking": "Szukanie Sunshine…",
+      "pinTitle": "Wpisz ten PIN w Sunshine na {{name}}",
+      "pinHint": "Na stronie Sunshine na komputerze otwórz PIN, wpisz ten PIN i nazwę, np. Matinee, i wyślij. Matinee czeka do 3 minut.",
+      "openPin": "Otwórz stronę PIN Sunshine",
+      "stateReady": "Gotowy",
+      "stateBusy": "Streamuje dla kogoś",
+      "stateOff": "Nie odpowiada",
+      "stateUnpaired": "Nie zna już Matinee: usuń go i sparuj ponownie",
+      "remove": "Usuń",
+      "removeConfirm": "Usunąć {{name}}? Przycisk Steam przestanie go używać, dopóki nie sparujesz go ponownie.",
+      "containerTitle": "W kontenerze Steam na twoim serwerze",
+      "containerHint": "Steam działa w kontenerze obok Matinee, na serwerze z kartą graficzną. Konfiguruje się go na serwerze, jak pokazuje poradnik.",
+      "containerOn": "Skonfigurowany na tym serwerze.",
+      "containerOff": "Nieskonfigurowany na tym serwerze.",
+      "bothNote": "Oba są skonfigurowane: przycisk Steam używa komputera.",
+      "active": "W użyciu",
+      "guide": "Poradnik konfiguracji",
+      "playHint": "Steam na {{name}}, grany na jego karcie graficznej i streamowany tutaj."
     }
   }
 }

@@ -1814,6 +1814,36 @@
       "signOut": "Odhlásit se z PlayStation",
       "starting": "Probouzím PlayStation a spouštím Remote Play. Může to trvat minutu.",
       "buttons": "Select je touchpad, Select a Start dohromady tlačítko PS"
+    },
+    "steampc": {
+      "title": "Steam",
+      "hint": "Tlačítko Steam spouští Big Picture ze Steamu jedním ze dvou způsobů. Nastavte ten, který vám vyhovuje.",
+      "pcTitle": "Na počítači, na kterém už hrajete Steam",
+      "pcHint": "Hry běží na vašem herním počítači se Sunshine, bezplatnou aplikací pro streamování pro Windows, Linux a Mac. Spárujte s ní Matinee jednou.",
+      "step1": "Na počítači nainstalujte Sunshine, otevřete jeho stránku na https://localhost:47990 a zvolte uživatelské jméno a heslo.",
+      "getSunshine": "Stáhnout Sunshine",
+      "step2": "Zkontrolujte, že je Steam na počítači nainstalovaný a přihlášený.",
+      "step3": "Zadejte adresu počítače a zvolte Spárovat. Dejte počítači v routeru pevnou IP adresu.",
+      "address": "Adresa počítače",
+      "pair": "Spárovat",
+      "looking": "Hledání Sunshine…",
+      "pinTitle": "Zadejte tento PIN do Sunshine na {{name}}",
+      "pinHint": "Na stránce Sunshine na počítači otevřete PIN, zadejte tento PIN a název, třeba Matinee, a odešlete. Matinee čeká až 3 minuty.",
+      "openPin": "Otevřít stránku PIN v Sunshine",
+      "stateReady": "Připraven",
+      "stateBusy": "Streamuje někomu",
+      "stateOff": "Neodpovídá",
+      "stateUnpaired": "Už nezná Matinee: odeberte ho a spárujte znovu",
+      "remove": "Odebrat",
+      "removeConfirm": "Odebrat {{name}}? Tlačítko Steam ho přestane používat, dokud ho znovu nespárujete.",
+      "containerTitle": "V kontejneru Steam na vašem serveru",
+      "containerHint": "Steam běží v kontejneru vedle Matinee na serveru s grafickou kartou. Nastavuje se na serveru, jak ukazuje návod.",
+      "containerOn": "Nastaveno na tomto serveru.",
+      "containerOff": "Na tomto serveru nenastaveno.",
+      "bothNote": "Obojí je nastaveno: tlačítko Steam používá počítač.",
+      "active": "Používá se",
+      "guide": "Návod k nastavení",
+      "playHint": "Steam na {{name}}, hraný na jeho grafické kartě a streamovaný sem."
     }
   }
 }

@@ -1575,6 +1575,25 @@ export interface PlayStationSetup {
   consoles: PlayStationConsole[]
 }
 
+/** A gaming PC running Sunshine, which the Steam button plays (preview). */
+export interface SteamPC {
+  name: string
+  host: string
+  port: number
+  state: 'ready' | 'busy' | 'off' | 'unpaired'
+  error?: string
+}
+
+export interface SteamPCSetup {
+  available: boolean
+  /** A game host, such as a Steam container, is set up too. */
+  container: boolean
+  /** What the Steam button plays. */
+  active: 'pc' | 'container' | ''
+  pc?: SteamPC
+  pairing?: { pin: string; name: string; host: string; state: 'waiting' | 'paired' | 'failed'; error?: string }
+}
+
 export interface GameFolder {
   path: string
   parent: string
@@ -1589,7 +1608,13 @@ export const gameHostDesktopUrl =
 export const api = {
   gameStreaming: () => request<GameStreaming>('GET', '/api/v1/games/streaming'),
   gameFiles: (path?: string) => request<GameFolder>('GET', `/api/v1/games/files${path ? `?path=${encodeURIComponent(path)}` : ''}`),
-  gameHostGames: () => request<{ games: GameHostGame[] }>('GET', '/api/v1/games/host'),
+  gameHostGames: () => request<{ games: GameHostGame[]; pc?: string }>('GET', '/api/v1/games/host'),
+  steamPC: () => request<SteamPCSetup>('GET', '/api/v1/games/steampc'),
+  findSteamPC: (address: string) =>
+    request<{ name: string; version: string; host: string; port: number }>('POST', '/api/v1/games/steampc/find', { address }),
+  pairSteamPC: (address: string) => request<{ pin: string; name: string }>('POST', '/api/v1/games/steampc/pair', { address }),
+  cancelSteamPCPairing: () => request<void>('DELETE', '/api/v1/games/steampc/pair'),
+  removeSteamPC: () => request<void>('DELETE', '/api/v1/games/steampc'),
   playStation: () => request<PlayStationSetup>('GET', '/api/v1/games/playstation'),
   setPlayStationAccount: (body: { redirect?: string; accountId?: string }) => request<void>('PUT', '/api/v1/games/playstation/account', body),
   forgetPlayStationAccount: () => request<void>('DELETE', '/api/v1/games/playstation/account'),

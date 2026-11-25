@@ -785,6 +785,19 @@
               }
             },
             {
+              "name": "Play Steam on a PC you already have, with Sunshine (preview)",
+              "doc": "/docs/server/games/#steam-on-a-pc-you-already-have-preview",
+              "since": "v0.2.11",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
               "name": "Play your PlayStation with Remote Play (preview)",
               "doc": "/docs/server/games/#playstation-remote-play-preview",
               "since": "v0.2.11",

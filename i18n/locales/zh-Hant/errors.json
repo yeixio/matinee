@@ -308,5 +308,6 @@
   "text_can_be_at_most_200_characters": "text 最多 200 個字元",
   "text_is_required": "必須提供 text",
   "sign_in_to_playstation_first": "請先登入 PlayStation",
+  "this_server_cant_play_games_on_a_pc": "此伺服器無法在電腦上玩遊戲",
   "this_server_cant_play_playstation_games": "此伺服器無法執行 PlayStation 遊戲"
 }

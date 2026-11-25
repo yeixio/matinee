@@ -1800,6 +1800,36 @@
       "signOut": "Esci da PlayStation",
       "starting": "Riattivo la PlayStation e avvio Remote Play. Può richiedere un minuto.",
       "buttons": "Select è il touchpad, Select e Start insieme il tasto PS"
+    },
+    "steampc": {
+      "title": "Steam",
+      "hint": "Il pulsante Steam apre Big Picture di Steam in uno di due modi. Configura quello adatto a te.",
+      "pcTitle": "Su un PC dove giochi già con Steam",
+      "pcHint": "I giochi girano sul tuo PC da gioco, con Sunshine, un'app di streaming gratuita per Windows, Linux e Mac. Abbina Matinee una volta.",
+      "step1": "Sul PC installa Sunshine, apri la sua pagina su https://localhost:47990 e scegli nome utente e password.",
+      "getSunshine": "Scarica Sunshine",
+      "step2": "Assicurati che Steam sia installato e con l'accesso eseguito sul PC.",
+      "step3": "Inserisci l'indirizzo del PC e scegli Abbina. Dai al PC un indirizzo IP fisso nel router.",
+      "address": "Indirizzo del PC",
+      "pair": "Abbina",
+      "looking": "Ricerca di Sunshine…",
+      "pinTitle": "Inserisci questo PIN in Sunshine su {{name}}",
+      "pinHint": "Nella pagina di Sunshine sul PC apri PIN, inserisci questo PIN e un nome come Matinee, poi invialo. Matinee aspetta fino a 3 minuti.",
+      "openPin": "Apri la pagina PIN di Sunshine",
+      "stateReady": "Pronto",
+      "stateBusy": "In streaming per qualcuno",
+      "stateOff": "Non risponde",
+      "stateUnpaired": "Non conosce più Matinee: rimuovilo e abbinalo di nuovo",
+      "remove": "Rimuovi",
+      "removeConfirm": "Rimuovere {{name}}? Il pulsante Steam non lo userà finché non lo abbini di nuovo.",
+      "containerTitle": "In un container Steam sul tuo server",
+      "containerHint": "Steam gira in un container accanto a Matinee, su un server con scheda grafica. Si configura sul server, come spiega la guida.",
+      "containerOn": "Configurato su questo server.",
+      "containerOff": "Non configurato su questo server.",
+      "bothNote": "Sono configurati entrambi: il pulsante Steam usa il PC.",
+      "active": "In uso",
+      "guide": "Guida alla configurazione",
+      "playHint": "Steam su {{name}}, giocato sulla sua scheda grafica e trasmesso qui."
     }
   }
 }

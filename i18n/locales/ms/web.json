@@ -1772,6 +1772,36 @@
       "signOut": "Log keluar dari PlayStation",
       "starting": "Membangunkan PlayStation dan memulakan Remote Play. Ini mungkin mengambil masa seminit.",
       "buttons": "Select ialah pad sentuh, Select dan Start bersama butang PS"
+    },
+    "steampc": {
+      "title": "Steam",
+      "hint": "Butang Steam memainkan Big Picture Steam dengan salah satu daripada dua cara. Sediakan cara yang sesuai untuk anda.",
+      "pcTitle": "Pada PC yang anda sudah main Steam",
+      "pcHint": "Permainan berjalan pada PC permainan anda dengan Sunshine, aplikasi penstriman percuma untuk Windows, Linux dan Mac. Pasangkan Matinee dengannya sekali.",
+      "step1": "Pada PC, pasang Sunshine, buka halamannya di https://localhost:47990 dan pilih nama pengguna serta kata laluan.",
+      "getSunshine": "Dapatkan Sunshine",
+      "step2": "Pastikan Steam dipasang dan dilog masuk pada PC.",
+      "step3": "Masukkan alamat PC dan pilih Pasangkan. Beri PC alamat IP tetap dalam penghala anda.",
+      "address": "Alamat PC",
+      "pair": "Pasangkan",
+      "looking": "Mencari Sunshine…",
+      "pinTitle": "Taip PIN ini ke dalam Sunshine pada {{name}}",
+      "pinHint": "Dalam halaman Sunshine pada PC, buka PIN, taip PIN ini dan nama seperti Matinee, kemudian hantar. Matinee menunggu sehingga 3 minit.",
+      "openPin": "Buka halaman PIN Sunshine",
+      "stateReady": "Sedia",
+      "stateBusy": "Sedang menstrim kepada seseorang",
+      "stateOff": "Tidak menjawab",
+      "stateUnpaired": "Tidak mengenali Matinee lagi: alih keluar dan pasangkan semula",
+      "remove": "Alih keluar",
+      "removeConfirm": "Alih keluar {{name}}? Butang Steam berhenti menggunakannya sehingga anda memasangkan semula.",
+      "containerTitle": "Dalam bekas Steam pada pelayan anda",
+      "containerHint": "Steam berjalan dalam bekas di sebelah Matinee, pada pelayan dengan kad grafik. Ia disediakan pada pelayan, seperti dalam panduan.",
+      "containerOn": "Disediakan pada pelayan ini.",
+      "containerOff": "Tidak disediakan pada pelayan ini.",
+      "bothNote": "Kedua-duanya disediakan: butang Steam menggunakan PC.",
+      "active": "Digunakan",
+      "guide": "Panduan persediaan",
+      "playHint": "Steam pada {{name}}, dimainkan pada kad grafiknya dan distrim ke sini."
     }
   }
 }

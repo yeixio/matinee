@@ -1800,6 +1800,36 @@
       "signOut": "התנתקות מ-PlayStation",
       "starting": "מעירים את ה-PlayStation ומפעילים את Remote Play. זה יכול לקחת דקה.",
       "buttons": "Select הוא משטח המגע, ו-Select עם Start יחד הם כפתור ה-PS"
+    },
+    "steampc": {
+      "title": "Steam",
+      "hint": "כפתור Steam מפעיל את Big Picture של Steam באחת משתי דרכים. הגדירו את זו שמתאימה לכם.",
+      "pcTitle": "במחשב שבו אתם כבר משחקים ב-Steam",
+      "pcHint": "המשחקים רצים במחשב הגיימינג שלכם עם Sunshine, אפליקציית סטרימינג חינמית ל-Windows,‏ Linux ו-Mac. צמדו אליה את Matinee פעם אחת.",
+      "step1": "במחשב, התקינו את Sunshine, פתחו את הדף שלו בכתובת https://localhost:47990 ובחרו שם משתמש וסיסמה.",
+      "getSunshine": "להורדת Sunshine",
+      "step2": "ודאו ש-Steam מותקן ומחובר במחשב.",
+      "step3": "הזינו את כתובת המחשב ובחרו צימוד. תנו למחשב כתובת IP קבועה בנתב.",
+      "address": "כתובת המחשב",
+      "pair": "צימוד",
+      "looking": "מחפש את Sunshine…",
+      "pinTitle": "הקלידו את קוד ה-PIN הזה ב-Sunshine ב-{{name}}",
+      "pinHint": "בדף של Sunshine במחשב, פתחו את PIN, הקלידו את הקוד הזה ושם כמו Matinee ושלחו. ‏Matinee ממתין עד 3 דקות.",
+      "openPin": "פתיחת דף ה-PIN של Sunshine",
+      "stateReady": "מוכן",
+      "stateBusy": "משדר למישהו",
+      "stateOff": "לא עונה",
+      "stateUnpaired": "כבר לא מכיר את Matinee: הסירו אותו וצמדו מחדש",
+      "remove": "הסרה",
+      "removeConfirm": "להסיר את {{name}}? כפתור Steam יפסיק להשתמש בו עד שתצמדו מחדש.",
+      "containerTitle": "בקונטיינר Steam בשרת שלכם",
+      "containerHint": "Steam רץ בקונטיינר לצד Matinee, בשרת עם כרטיס גרפי. מגדירים אותו בשרת, כפי שהמדריך מראה.",
+      "containerOn": "מוגדר בשרת הזה.",
+      "containerOff": "לא מוגדר בשרת הזה.",
+      "bothNote": "שניהם מוגדרים: כפתור Steam משתמש במחשב.",
+      "active": "בשימוש",
+      "guide": "מדריך הגדרה",
+      "playHint": "Steam ב-{{name}}, רץ על הכרטיס הגרפי שלו ומשודר לכאן."
     }
   }
 }

@@ -1772,6 +1772,36 @@
       "signOut": "Keluar dari PlayStation",
       "starting": "Membangunkan PlayStation dan memulai Remote Play. Ini bisa makan waktu semenit.",
       "buttons": "Select adalah touchpad, Select dan Start bersamaan tombol PS"
+    },
+    "steampc": {
+      "title": "Steam",
+      "hint": "Tombol Steam memutar Big Picture Steam dengan salah satu dari dua cara. Siapkan yang cocok untuk Anda.",
+      "pcTitle": "Di PC tempat Anda sudah bermain Steam",
+      "pcHint": "Game berjalan di PC gaming Anda dengan Sunshine, aplikasi streaming gratis untuk Windows, Linux, dan Mac. Pasangkan Matinee dengannya sekali.",
+      "step1": "Di PC, pasang Sunshine, buka halamannya di https://localhost:47990, lalu pilih nama pengguna dan kata sandi.",
+      "getSunshine": "Dapatkan Sunshine",
+      "step2": "Pastikan Steam terpasang dan sudah masuk di PC.",
+      "step3": "Masukkan alamat PC dan pilih Pasangkan. Beri PC alamat IP tetap di router Anda.",
+      "address": "Alamat PC",
+      "pair": "Pasangkan",
+      "looking": "Mencari Sunshine…",
+      "pinTitle": "Ketik PIN ini di Sunshine pada {{name}}",
+      "pinHint": "Di halaman Sunshine pada PC, buka PIN, ketik PIN ini dan nama seperti Matinee, lalu kirim. Matinee menunggu hingga 3 menit.",
+      "openPin": "Buka halaman PIN Sunshine",
+      "stateReady": "Siap",
+      "stateBusy": "Sedang streaming ke seseorang",
+      "stateOff": "Tidak menjawab",
+      "stateUnpaired": "Tidak mengenali Matinee lagi: hapus dan pasangkan ulang",
+      "remove": "Hapus",
+      "removeConfirm": "Hapus {{name}}? Tombol Steam berhenti memakainya sampai Anda memasangkan ulang.",
+      "containerTitle": "Di kontainer Steam pada server Anda",
+      "containerHint": "Steam berjalan di kontainer di samping Matinee, pada server dengan kartu grafis. Ini disiapkan di server, seperti di panduan.",
+      "containerOn": "Sudah disiapkan di server ini.",
+      "containerOff": "Belum disiapkan di server ini.",
+      "bothNote": "Keduanya sudah disiapkan: tombol Steam memakai PC.",
+      "active": "Dipakai",
+      "guide": "Panduan penyiapan",
+      "playHint": "Steam di {{name}}, dimainkan di kartu grafisnya dan di-streaming ke sini."
     }
   }
 }

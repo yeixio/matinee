@@ -13,6 +13,7 @@ import (
 	"github.com/pion/rtp"
 
 	"github.com/yeixio/matinee/internal/gamehost"
+	"github.com/yeixio/matinee/internal/mediabridge"
 	"github.com/yeixio/matinee/internal/psremote"
 )
 
@@ -174,13 +175,29 @@ func (h *hostRemote) Close() {
 	h.conn.Close(websocket.StatusNormalClosure, "game over")
 }
 
+// BridgeStream is a device being played through a bridge program (see
+// internal/mediabridge): a PlayStation (internal/psremote) or a gaming PC
+// running Sunshine (internal/pcremote).
+type BridgeStream interface {
+	Next() (byte, *rtp.Packet, error)
+	Input(b []byte)
+	Keyframe()
+	Close()
+}
+
 // ConsoleRemote is a PlayStation being played (see internal/psremote).
 func ConsoleRemote(st *psremote.Stream) (Remote, Info) {
-	return &consoleRemote{st: st}, Info{Width: st.Hello.Width, Height: st.Hello.Height, FPS: st.Hello.FPS}
+	return BridgeRemote(st, st.Hello)
+}
+
+// BridgeRemote is a device being played through a bridge, sending the
+// picture h says.
+func BridgeRemote(st BridgeStream, h mediabridge.Hello) (Remote, Info) {
+	return &consoleRemote{st: st}, Info{Width: h.Width, Height: h.Height, FPS: h.FPS}
 }
 
 type consoleRemote struct {
-	st *psremote.Stream
+	st BridgeStream
 	mu sync.Mutex // one Input at a time: the pad keeps what's held
 }
 

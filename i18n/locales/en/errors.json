@@ -265,6 +265,7 @@
   "this_library_isnt_being_scanned": "this library isn't being scanned",
   "this_plugin_was_made_for_a_different_version_of_matinee": "this plugin was made for a different version of Matinee",
   "this_server_cant_change_its_tmdb_key": "this server can't change its TMDB key",
+  "this_server_cant_play_games_on_a_pc": "this server can't play games on a PC",
   "this_server_cant_play_playstation_games": "this server can't play PlayStation games",
   "this_server_cant_restart_itself_restart_it_the_way_it_was_started": "this server can't restart itself; restart it the way it was started",
   "this_server_doesnt_offer_remote_access": "this server doesn't offer remote access",

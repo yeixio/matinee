@@ -35,6 +35,7 @@ import (
 	"github.com/yeixio/matinee/internal/livetv"
 	"github.com/yeixio/matinee/internal/lyrics"
 	"github.com/yeixio/matinee/internal/netstate"
+	"github.com/yeixio/matinee/internal/pcremote"
 	"github.com/yeixio/matinee/internal/plugin"
 	"github.com/yeixio/matinee/internal/podcast"
 	"github.com/yeixio/matinee/internal/probe"
@@ -120,6 +121,9 @@ type Server struct {
 	// PlayStation plays a PlayStation on the home network (see
 	// playstation.go); nil when this server can't.
 	PlayStation *psremote.Bridge
+	// SteamPC plays Steam on a gaming PC running Sunshine (see
+	// steampc.go).
+	SteamPC *pcremote.Bridge
 
 	// Remote keeps remote access going (see remote.go); nil when this
 	// server doesn't offer it.
@@ -565,7 +569,7 @@ func (s *Server) Handler() http.Handler {
 		w.Write([]byte("ok"))
 	})
 
-	for _, rt := range append(append(append(s.routes(), s.liveRoutes()...), s.gameRoutes()...), s.playStationRoutes()...) {
+	for _, rt := range append(append(append(s.routes(), s.liveRoutes()...), s.gameRoutes()...), append(s.playStationRoutes(), s.steamPCRoutes()...)...) {
 		var h http.Handler = rt.handler
 		if rt.access != public {
 			h = s.requireUser(rt.handler, rt.access)
