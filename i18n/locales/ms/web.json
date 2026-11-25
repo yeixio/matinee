@@ -1116,7 +1116,18 @@
     "asking": "Meminta…",
     "waiting": "Menunggu kelulusan pentadbir.",
     "onItsWay": "Ia akan muncul dalam pustaka anda selepas dimuat turun.",
-    "findIt": "Cari dalam Teroka"
+    "findIt": "Cari dalam Teroka",
+    "watch": {
+      "title": "Tempat menonton",
+      "country": "Negara",
+      "network": "Rangkaian",
+      "stream": "Strim",
+      "free": "Percuma",
+      "rent": "Sewa",
+      "buy": "Beli",
+      "none": "Setakat yang kami tahu, tiada strim di {{country}}.",
+      "source": "Perkhidmatan strim daripada JustWatch"
+    }
   },
   "plugins": {
     "title": "Pemalam",

@@ -1122,7 +1122,18 @@
     "asking": "Wird angefragt…",
     "waiting": "Wartet auf die Freigabe durch einen Admin.",
     "onItsWay": "Erscheint in deiner Mediathek, sobald es heruntergeladen ist.",
-    "findIt": "In „Entdecken“ finden"
+    "findIt": "In „Entdecken“ finden",
+    "watch": {
+      "title": "Wo ansehen",
+      "country": "Land",
+      "network": "Sender",
+      "stream": "Streamen",
+      "free": "Kostenlos",
+      "rent": "Leihen",
+      "buy": "Kaufen",
+      "none": "Soweit bekannt nicht als Stream in {{country}} verfügbar.",
+      "source": "Streamingdienste von JustWatch"
+    }
   },
   "plugins": {
     "title": "Plugins",

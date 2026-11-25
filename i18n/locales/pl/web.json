@@ -1134,7 +1134,18 @@
     "asking": "Wysyłanie prośby…",
     "waiting": "Czeka na zatwierdzenie przez administratora.",
     "onItsWay": "Pojawi się w twojej bibliotece, gdy się pobierze.",
-    "findIt": "Znajdź w Odkrywaj"
+    "findIt": "Znajdź w Odkrywaj",
+    "watch": {
+      "title": "Gdzie obejrzeć",
+      "country": "Kraj",
+      "network": "Stacja",
+      "stream": "Streaming",
+      "free": "Za darmo",
+      "rent": "Wypożycz",
+      "buy": "Kup",
+      "none": "Z tego, co wiemy, niedostępne w streamingu w kraju {{country}}.",
+      "source": "Serwisy streamingowe według JustWatch"
+    }
   },
   "plugins": {
     "title": "Wtyczki",

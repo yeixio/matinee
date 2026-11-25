@@ -1128,7 +1128,18 @@
     "asking": "Solicitando…",
     "waiting": "Esperando a que un administrador lo apruebe.",
     "onItsWay": "Aparecerá en tu biblioteca cuando se descargue.",
-    "findIt": "Buscarlo en Descubrir"
+    "findIt": "Buscarlo en Descubrir",
+    "watch": {
+      "title": "Dónde verlo",
+      "country": "País",
+      "network": "Cadena",
+      "stream": "Streaming",
+      "free": "Gratis",
+      "rent": "Alquilar",
+      "buy": "Comprar",
+      "none": "No está en streaming en {{country}}, que sepamos.",
+      "source": "Servicios de streaming de JustWatch"
+    }
   },
   "plugins": {
     "title": "Complementos",

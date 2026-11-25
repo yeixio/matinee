@@ -1122,7 +1122,18 @@
     "asking": "Kérés folyamatban…",
     "waiting": "Adminisztrátori jóváhagyásra vár.",
     "onItsWay": "Megjelenik a könyvtáradban, amint letöltődik.",
-    "findIt": "Keresd a Felfedezésben"
+    "findIt": "Keresd a Felfedezésben",
+    "watch": {
+      "title": "Hol nézhető",
+      "country": "Ország",
+      "network": "Csatorna",
+      "stream": "Stream",
+      "free": "Ingyenes",
+      "rent": "Kölcsönzés",
+      "buy": "Vásárlás",
+      "none": "Tudomásunk szerint nem streamelhető itt: {{country}}.",
+      "source": "Streamingszolgáltatások a JustWatch-tól"
+    }
   },
   "plugins": {
     "title": "Bővítmények",

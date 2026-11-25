@@ -1128,7 +1128,18 @@
     "asking": "Pedindo…",
     "waiting": "Aguardando a aprovação de um administrador.",
     "onItsWay": "Vai aparecer na sua biblioteca quando for baixado.",
-    "findIt": "Encontrar em Descobrir"
+    "findIt": "Encontrar em Descobrir",
+    "watch": {
+      "title": "Onde assistir",
+      "country": "País",
+      "network": "Emissora",
+      "stream": "Streaming",
+      "free": "Grátis",
+      "rent": "Alugar",
+      "buy": "Comprar",
+      "none": "Não está em streaming em {{country}}, até onde sabemos.",
+      "source": "Serviços de streaming do JustWatch"
+    }
   },
   "plugins": {
     "title": "Plugins",

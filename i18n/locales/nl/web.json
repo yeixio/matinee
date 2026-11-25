@@ -1122,7 +1122,18 @@
     "asking": "Bezig met aanvragen…",
     "waiting": "Wacht op goedkeuring van een beheerder.",
     "onItsWay": "Verschijnt in je bibliotheek zodra het is gedownload.",
-    "findIt": "Zoeken in Ontdekken"
+    "findIt": "Zoeken in Ontdekken",
+    "watch": {
+      "title": "Waar te kijken",
+      "country": "Land",
+      "network": "Zender",
+      "stream": "Streamen",
+      "free": "Gratis",
+      "rent": "Huren",
+      "buy": "Kopen",
+      "none": "Voor zover we weten niet te streamen in {{country}}.",
+      "source": "Streamingdiensten van JustWatch"
+    }
   },
   "plugins": {
     "title": "Plug-ins",

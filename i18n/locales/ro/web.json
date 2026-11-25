@@ -1128,7 +1128,18 @@
     "asking": "Se cere…",
     "waiting": "Așteaptă aprobarea unui administrator.",
     "onItsWay": "Va apărea în biblioteca ta după ce se descarcă.",
-    "findIt": "Găsește-l în Descoperă"
+    "findIt": "Găsește-l în Descoperă",
+    "watch": {
+      "title": "Unde poți viziona",
+      "country": "Țară",
+      "network": "Rețea",
+      "stream": "Streaming",
+      "free": "Gratuit",
+      "rent": "Închiriere",
+      "buy": "Cumpărare",
+      "none": "Din câte știm, nu e disponibil în streaming în {{country}}.",
+      "source": "Servicii de streaming de la JustWatch"
+    }
   },
   "plugins": {
     "title": "Pluginuri",

@@ -1122,7 +1122,18 @@
     "asking": "Pyydetään…",
     "waiting": "Odottaa ylläpitäjän hyväksyntää.",
     "onItsWay": "Se näkyy kirjastossasi, kun se on ladattu.",
-    "findIt": "Etsi Löydä-välilehdeltä"
+    "findIt": "Etsi Löydä-välilehdeltä",
+    "watch": {
+      "title": "Missä katsoa",
+      "country": "Maa",
+      "network": "Kanava",
+      "stream": "Suoratoisto",
+      "free": "Ilmainen",
+      "rent": "Vuokraa",
+      "buy": "Osta",
+      "none": "Ei tietojemme mukaan suoratoistossa maassa {{country}}.",
+      "source": "Suoratoistopalvelut: JustWatch"
+    }
   },
   "plugins": {
     "title": "Laajennukset",

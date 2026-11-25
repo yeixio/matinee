@@ -1116,7 +1116,18 @@
     "asking": "요청 중…",
     "waiting": "관리자 승인을 기다리는 중이에요.",
     "onItsWay": "다운로드되면 보관함에 나타나요.",
-    "findIt": "둘러보기에서 찾기"
+    "findIt": "둘러보기에서 찾기",
+    "watch": {
+      "title": "시청 가능한 곳",
+      "country": "국가",
+      "network": "방송사",
+      "stream": "스트리밍",
+      "free": "무료",
+      "rent": "대여",
+      "buy": "구매",
+      "none": "{{country}}에서는 스트리밍되지 않는 것으로 알고 있습니다.",
+      "source": "스트리밍 서비스 정보: JustWatch"
+    }
   },
   "plugins": {
     "title": "플러그인",
