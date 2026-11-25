@@ -93,6 +93,10 @@ Matinee tries hard to find a picture for every game, in this order:
 
 To pick from what libretro has, Matinee keeps its list of pictures for each system for a month, in `games/lists/art`.
 
+<!-- since: v0.2.11 -->
+When libretro's thumbnail site is down or stops serving pictures, Matinee gets the same pictures, and the lists of them, from [libretro's copy on GitHub](https://github.com/libretro-thumbnails) instead. Pictures are kept on the server once they've been shown, so art you've already seen stays when both are out of reach.
+<!-- /since -->
+
 ### Picking a system
 
 In a Games library with games for more than one system, the systems sit above the games: pick one to see only its games, or **All**. **Filters** has them too, to pick several.

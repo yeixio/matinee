@@ -42,6 +42,10 @@ const ItemKind = "game"
 const (
 	DefaultLibretroDB = "https://raw.githubusercontent.com/libretro/libretro-database/master"
 	DefaultArt        = "https://thumbnails.libretro.com"
+	// DefaultArtGitHub is where the lists of libretro's pictures come from
+	// when its thumbnail site can't give them: GitHub's API for its
+	// libretro-thumbnails repositories.
+	DefaultArtGitHub = "https://api.github.com/repos/libretro-thumbnails"
 )
 
 // Facts' labels. The web player shows them in its own language
@@ -64,6 +68,8 @@ type Kind struct {
 	// such as for a mirror or a test; empty uses the defaults.
 	LibretroDB string
 	Art        string
+	// ArtGitHub overrides DefaultArtGitHub.
+	ArtGitHub string
 	// MAMEList overrides where MAME's list of machines comes from (see
 	// DefaultMAMEList).
 	MAMEList string
