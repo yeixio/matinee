@@ -1714,6 +1714,8 @@
     "showLag": "Tunjuk lengah",
     "hideLag": "Sembunyi lengah",
     "stop": "Berhenti bermain",
+    "holdToLeave": "Tahan {{buttons}} untuk keluar",
+    "keepHolding": "Terus tahan untuk keluar",
     "starting": "Memulakan…",
     "back": "Kembali",
     "lostConnection": "Sambungan ke pelayan terputus.",

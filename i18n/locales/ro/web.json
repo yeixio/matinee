@@ -1742,6 +1742,8 @@
     "showLag": "Arată întârzierea",
     "hideLag": "Ascunde întârzierea",
     "stop": "Oprește jocul",
+    "holdToLeave": "Ține apăsat {{buttons}} pentru a ieși",
+    "keepHolding": "Ține în continuare pentru a ieși",
     "starting": "Se pornește…",
     "back": "Înapoi",
     "lostConnection": "Conexiunea cu serverul s-a pierdut.",

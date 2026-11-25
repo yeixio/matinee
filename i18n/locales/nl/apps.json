@@ -51,6 +51,7 @@
     "orType": "Of typ het adres:",
     "addressHint": "Het adres waarmee je hem in een browser opent.",
     "noneFound": "We konden geen server vinden op dit netwerk. Typ het adres waarmee je Matinee in een browser opent.",
+    "notAddress": "‘{{text}}’ is geen serveradres. Typ eerst het adres van je server, zoals matinee.example.com. Daarna log je in met je gebruikersnaam en wachtwoord.",
     "connect": "Koppelen",
     "stillLooking": "Nog aan het zoeken. Als je server opduikt, verschijnt hij hier.",
     "connectTo": "Verbinden met {{name}}",
@@ -710,7 +711,9 @@
     "controller": "{{name}} verbonden",
     "connectController": "Verbind een controller om te spelen",
     "pairHint": "Koppel een controller in de bluetoothinstellingen van de tv en druk op een willekeurige knop.",
-    "leaveHint": "Druk op Terug op de afstandsbediening om te stoppen",
+    "holdToLeave": "Houd {{buttons}} ingedrukt om te stoppen",
+    "keepHolding": "Blijf ingedrukt houden om te stoppen",
+    "pressAgain": "Druk nogmaals om te stoppen",
     "fact": {
       "system": "Systeem",
       "region": "Regio",

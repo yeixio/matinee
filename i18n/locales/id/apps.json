@@ -51,6 +51,7 @@
     "orType": "Atau ketik alamatnya:",
     "addressHint": "Alamat yang Anda buka di browser.",
     "noneFound": "Kami tidak menemukan server di jaringan ini. Ketik alamat yang Anda pakai untuk membuka Matinee di browser.",
+    "notAddress": "“{{text}}” bukan alamat server. Ketik alamat server Anda dulu, seperti matinee.example.com. Setelah itu Anda masuk dengan nama pengguna dan kata sandi.",
     "connect": "Hubungkan",
     "stillLooking": "Masih mencari. Jika server Anda muncul, akan tampil di sini.",
     "connectTo": "Hubungkan ke {{name}}",
@@ -703,7 +704,9 @@
     "controller": "{{name}} terhubung",
     "connectController": "Hubungkan pengontrol game untuk bermain",
     "pairHint": "Sandingkan pengontrol di pengaturan Bluetooth TV, lalu tekan tombol apa saja di pengontrol.",
-    "leaveHint": "Tekan Kembali di remote untuk berhenti",
+    "holdToLeave": "Tahan {{buttons}} untuk keluar",
+    "keepHolding": "Terus tahan untuk keluar",
+    "pressAgain": "Tekan lagi untuk keluar",
     "fact": {
       "system": "Sistem",
       "region": "Wilayah",

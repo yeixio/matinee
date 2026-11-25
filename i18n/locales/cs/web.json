@@ -1756,6 +1756,8 @@
     "showLag": "Zobrazit zpoždění",
     "hideLag": "Skrýt zpoždění",
     "stop": "Přestat hrát",
+    "holdToLeave": "Pro odchod podržte {{buttons}}",
+    "keepHolding": "Pro odchod držte dál",
     "starting": "Spouštění…",
     "back": "Zpět",
     "lostConnection": "Spojení se serverem bylo přerušeno.",

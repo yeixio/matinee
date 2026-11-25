@@ -1728,6 +1728,8 @@
     "showLag": "Vis forsinkelse",
     "hideLag": "Skjul forsinkelse",
     "stop": "Stop med at spille",
+    "holdToLeave": "Hold {{buttons}} nede for at forlade",
+    "keepHolding": "Bliv ved med at holde for at forlade",
     "starting": "Starter…",
     "back": "Tilbage",
     "lostConnection": "Forbindelsen til serveren blev afbrudt.",

@@ -1728,6 +1728,8 @@
     "showLag": "Visa fördröjning",
     "hideLag": "Dölj fördröjning",
     "stop": "Sluta spela",
+    "holdToLeave": "Håll ned {{buttons}} för att avsluta",
+    "keepHolding": "Fortsätt hålla för att avsluta",
     "starting": "Startar…",
     "back": "Tillbaka",
     "lostConnection": "Anslutningen till servern bröts.",

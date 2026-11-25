@@ -51,6 +51,7 @@
     "orType": "Atau taip alamatnya:",
     "addressHint": "Alamat yang anda buka dalam pelayar.",
     "noneFound": "Kami tidak menemui pelayan dalam rangkaian ini. Taip alamat yang anda gunakan untuk membuka Matinee dalam pelayar.",
+    "notAddress": "“{{text}}” bukan alamat pelayan. Taip alamat pelayan anda dahulu, seperti matinee.example.com. Anda akan log masuk dengan nama pengguna dan kata laluan selepas itu.",
     "connect": "Sambung",
     "stillLooking": "Masih mencari. Jika pelayan anda muncul, ia akan dipaparkan di sini.",
     "connectTo": "Sambung ke {{name}}",
@@ -703,7 +704,9 @@
     "controller": "{{name}} disambungkan",
     "connectController": "Sambungkan pengawal permainan untuk bermain",
     "pairHint": "Pasangkan pengawal dalam tetapan Bluetooth TV, kemudian tekan mana-mana butang padanya.",
-    "leaveHint": "Tekan Kembali pada alat kawalan jauh untuk berhenti",
+    "holdToLeave": "Tahan {{buttons}} untuk keluar",
+    "keepHolding": "Terus tahan untuk keluar",
+    "pressAgain": "Tekan sekali lagi untuk keluar",
     "fact": {
       "system": "Sistem",
       "region": "Rantau",

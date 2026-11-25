@@ -51,6 +51,7 @@
     "orType": "Or type its address:",
     "addressHint": "The address you open it at in a browser.",
     "noneFound": "We couldn't find a server on this network. Type the address you open Matinee at in a browser.",
+    "notAddress": "“{{text}}” isn't a server address. Type your server's address first, like matinee.example.com. You'll sign in with your username and password next.",
     "connect": "Connect",
     "stillLooking": "Still looking. If your server turns up, it'll appear here.",
     "connectTo": "Connect to {{name}}",
@@ -710,7 +711,9 @@
     "controller": "{{name}} connected",
     "connectController": "Connect a game controller to play",
     "pairHint": "Pair a controller in the TV's Bluetooth settings, then press any button on it.",
-    "leaveHint": "Press Back on the remote to stop",
+    "holdToLeave": "Hold {{buttons}} to leave",
+    "keepHolding": "Keep holding to leave",
+    "pressAgain": "Press again to leave",
     "fact": {
       "system": "System",
       "region": "Region",

@@ -54,6 +54,46 @@ export function stickValues(pad: Pick<Gamepad, 'axes'>): number[] {
   })
 }
 
+/** How long Select and Start are held together on one controller to leave a game. */
+export const LEAVE_HOLD_MS = 2000
+
+/** How long they're held before the "keep holding" bar shows, so a quick press shows nothing. */
+export const LEAVE_SHOW_MS = 400
+
+const COMBO = (1 << Btn.Select) | (1 << Btn.Start)
+
+/** Whether a controller's (or the keyboard's) buttons hold Select and Start together. */
+export const comboHeld = (mask: number) => (mask & COMBO) === COMBO
+
+/** What Select and Start are called on a controller, by its name, as printed on it. */
+export function comboName(controller?: string): string {
+  const n = controller ?? ''
+  if (/xbox|xinput|045e/i.test(n)) return 'View + Menu'
+  if (/dualsense|ps5|edge/i.test(n)) return 'Create + Options'
+  if (/dualshock|ps4|ps3|playstation|sony|054c/i.test(n)) return 'Share + Options'
+  if (/switch|joy-?con|pro controller|nintendo|057e/i.test(n)) return '− + +'
+  return 'Select + Start'
+}
+
+/**
+ * Times holding the combo: called with whether it's held, it says how far
+ * along the hold is (0 while nothing shows yet) and whether to leave.
+ */
+export function holdTracker(now: () => number = () => performance.now()) {
+  let since: number | undefined
+  return (held: boolean): { progress: number; leave: boolean } => {
+    if (!held) {
+      since = undefined
+      return { progress: 0, leave: false }
+    }
+    const t = now()
+    since ??= t
+    const elapsed = t - since
+    if (elapsed >= LEAVE_HOLD_MS) return { progress: 1, leave: true }
+    return { progress: elapsed < LEAVE_SHOW_MS ? 0 : elapsed / LEAVE_HOLD_MS, leave: false }
+  }
+}
+
 /** How long things take, in milliseconds, for the lag numbers. */
 export interface Lag {
   /** There and back over the network. */
@@ -93,6 +133,10 @@ export interface StreamOptions {
   video: HTMLVideoElement
   onLag: (lag: Lag) => void
   onEnd: (error?: string) => void
+  /** How far along holding Select and Start to leave is, 0 to 1, as it changes. */
+  onHolding?: (progress: number) => void
+  /** Select and Start were held long enough: the person wants to leave. */
+  onLeave?: () => void
 }
 
 export async function startGame(o: StreamOptions): Promise<GameStream> {
@@ -208,8 +252,12 @@ export async function startGame(o: StreamOptions): Promise<GameStream> {
     sticks[axis] = v
   }
   let frame = 0
+  const hold = holdTracker()
+  let holding = 0
+  let left = false
   const poll = () => {
     let mask = 0
+    let combo = false
     let held = [0, 0, 0, 0]
     for (const k of keys) {
       // With sticks, the arrow keys are the left stick.
@@ -219,10 +267,14 @@ export async function startGame(o: StreamOptions): Promise<GameStream> {
       else if (analog && k === Btn.Down) held[1] = 127
       else mask |= 1 << k
     }
+    // The keyboard's Shift and Enter are Select and Start.
+    combo = comboHeld(mask)
     for (const pad of navigator.getGamepads?.() ?? []) {
       if (!pad) continue
       controller ??= pad.id
-      mask |= padMask(pad, !analog)
+      const m = padMask(pad, !analog)
+      if (comboHeld(m)) combo = true
+      mask |= m
       if (analog) {
         const v = stickValues(pad)
         // The first controller with a stick off centre has its way.
@@ -230,6 +282,12 @@ export async function startGame(o: StreamOptions): Promise<GameStream> {
       }
     }
     if (mask !== sent || performance.now() - sentAt > 50) send(mask)
+    const h = hold(combo)
+    if (h.progress !== holding) o.onHolding?.((holding = h.progress))
+    if (h.leave && !left) {
+      left = true
+      o.onLeave?.()
+    }
     if (analog) {
       const again = performance.now() - sticksAt > 50
       held.forEach((v, axis) => {

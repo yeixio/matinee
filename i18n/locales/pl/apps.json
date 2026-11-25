@@ -51,6 +51,7 @@
     "orType": "Lub wpisz jego adres:",
     "addressHint": "Adres, pod którym otwierasz go w przeglądarce.",
     "noneFound": "Nie znaleźliśmy serwera w tej sieci. Wpisz adres, pod którym otwierasz Matinee w przeglądarce.",
+    "notAddress": "„{{text}}” to nie adres serwera. Najpierw wpisz adres swojego serwera, na przykład matinee.example.com. Nazwę użytkownika i hasło podasz w następnym kroku.",
     "connect": "Połącz",
     "stillLooking": "Nadal szukamy. Jeśli Twój serwer się pojawi, zobaczysz go tutaj.",
     "connectTo": "Połącz z {{name}}",
@@ -724,7 +725,9 @@
     "controller": "Połączono {{name}}",
     "connectController": "Podłącz kontroler, aby grać",
     "pairHint": "Sparuj kontroler w ustawieniach Bluetooth telewizora, a potem naciśnij dowolny przycisk.",
-    "leaveHint": "Naciśnij Wstecz na pilocie, aby zakończyć",
+    "holdToLeave": "Przytrzymaj {{buttons}}, aby wyjść",
+    "keepHolding": "Trzymaj dalej, aby wyjść",
+    "pressAgain": "Naciśnij ponownie, aby wyjść",
     "fact": {
       "system": "System",
       "region": "Region",

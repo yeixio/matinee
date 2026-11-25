@@ -1742,6 +1742,8 @@
     "showLag": "Mostra ritardo",
     "hideLag": "Nascondi ritardo",
     "stop": "Smetti di giocare",
+    "holdToLeave": "Tieni premuto {{buttons}} per uscire",
+    "keepHolding": "Continua a tenere premuto per uscire",
     "starting": "Avvio…",
     "back": "Indietro",
     "lostConnection": "Connessione al server persa.",

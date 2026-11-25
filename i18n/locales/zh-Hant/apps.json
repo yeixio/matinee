@@ -51,6 +51,7 @@
     "orType": "或輸入它的位址：",
     "addressHint": "你在瀏覽器中開啟它時使用的位址。",
     "noneFound": "在此網路中找不到伺服器。請輸入你在瀏覽器中開啟 Matinee 時使用的位址。",
+    "notAddress": "「{{text}}」不是伺服器位址。請先輸入你的伺服器位址，例如 matinee.example.com。之後再用使用者名稱和密碼登入。",
     "connect": "連線",
     "stillLooking": "仍在尋找。如果找到你的伺服器，會顯示在這裡。",
     "connectTo": "連線至 {{name}}",
@@ -703,7 +704,9 @@
     "controller": "{{name}} 已連線",
     "connectController": "連接遊戲控制器即可開始遊戲",
     "pairHint": "在電視的藍牙設定中配對控制器，然後按控制器上的任一按鈕。",
-    "leaveHint": "按遙控器上的返回鍵停止",
+    "holdToLeave": "按住 {{buttons}} 離開",
+    "keepHolding": "繼續按住以離開",
+    "pressAgain": "再按一次離開",
     "fact": {
       "system": "平台",
       "region": "地區",

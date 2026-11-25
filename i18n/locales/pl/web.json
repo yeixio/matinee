@@ -1756,6 +1756,8 @@
     "showLag": "Pokaż opóźnienie",
     "hideLag": "Ukryj opóźnienie",
     "stop": "Zakończ grę",
+    "holdToLeave": "Przytrzymaj {{buttons}}, aby wyjść",
+    "keepHolding": "Trzymaj dalej, aby wyjść",
     "starting": "Uruchamianie…",
     "back": "Wróć",
     "lostConnection": "Utracono połączenie z serwerem.",

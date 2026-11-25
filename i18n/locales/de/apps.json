@@ -51,6 +51,7 @@
     "orType": "Oder gib die Adresse ein:",
     "addressHint": "Die Adresse, unter der du ihn im Browser öffnest.",
     "noneFound": "In diesem Netzwerk wurde kein Server gefunden. Gib die Adresse ein, unter der du Matinee im Browser öffnest.",
+    "notAddress": "„{{text}}“ ist keine Serveradresse. Gib zuerst die Adresse deines Servers ein, z. B. matinee.example.com. Benutzername und Passwort kommen danach.",
     "connect": "Verbinden",
     "stillLooking": "Suche noch. Sobald dein Server auftaucht, erscheint er hier.",
     "connectTo": "Mit {{name}} verbinden",
@@ -710,7 +711,9 @@
     "controller": "{{name}} verbunden",
     "connectController": "Verbinde einen Controller, um zu spielen",
     "pairHint": "Kopple einen Controller in den Bluetooth-Einstellungen des Fernsehers und drücke eine beliebige Taste darauf.",
-    "leaveHint": "Zum Beenden auf der Fernbedienung Zurück drücken",
+    "holdToLeave": "{{buttons}} gedrückt halten zum Beenden",
+    "keepHolding": "Weiter gedrückt halten zum Beenden",
+    "pressAgain": "Zum Beenden erneut drücken",
     "fact": {
       "system": "System",
       "region": "Region",

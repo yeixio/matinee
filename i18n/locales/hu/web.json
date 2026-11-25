@@ -1728,6 +1728,8 @@
     "showLag": "Késleltetés mutatása",
     "hideLag": "Késleltetés elrejtése",
     "stop": "Játék befejezése",
+    "holdToLeave": "A kilépéshez tartsd lenyomva: {{buttons}}",
+    "keepHolding": "A kilépéshez tartsd tovább lenyomva",
     "starting": "Indítás…",
     "back": "Vissza",
     "lostConnection": "Megszakadt a kapcsolat a szerverrel.",

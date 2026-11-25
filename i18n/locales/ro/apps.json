@@ -51,6 +51,7 @@
     "orType": "Sau scrie-i adresa:",
     "addressHint": "Adresa la care îl deschizi într-un browser.",
     "noneFound": "Nu am găsit niciun server în această rețea. Scrie adresa la care deschizi Matinee într-un browser.",
+    "notAddress": "„{{text}}” nu este adresa unui server. Scrie mai întâi adresa serverului tău, de exemplu matinee.example.com. Te conectezi apoi cu numele de utilizator și parola.",
     "connect": "Conectează",
     "stillLooking": "Încă se caută. Dacă serverul tău apare, îl vei vedea aici.",
     "connectTo": "Conectează-te la {{name}}",
@@ -717,7 +718,9 @@
     "controller": "{{name}} conectat",
     "connectController": "Conectează un controller pentru a juca",
     "pairHint": "Asociază un controller în setările Bluetooth ale televizorului, apoi apasă orice buton.",
-    "leaveHint": "Apasă Înapoi pe telecomandă pentru a opri",
+    "holdToLeave": "Ține apăsat {{buttons}} pentru a ieși",
+    "keepHolding": "Ține în continuare pentru a ieși",
+    "pressAgain": "Apasă din nou pentru a ieși",
     "fact": {
       "system": "Sistem",
       "region": "Regiune",

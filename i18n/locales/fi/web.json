@@ -1728,6 +1728,8 @@
     "showLag": "Näytä viive",
     "hideLag": "Piilota viive",
     "stop": "Lopeta peli",
+    "holdToLeave": "Poistu pitämällä {{buttons}} pohjassa",
+    "keepHolding": "Pidä edelleen pohjassa poistuaksesi",
     "starting": "Käynnistetään…",
     "back": "Takaisin",
     "lostConnection": "Yhteys palvelimeen katkesi.",

@@ -51,6 +51,7 @@
     "orType": "또는 주소 입력:",
     "addressHint": "브라우저에서 열 때 쓰는 주소입니다.",
     "noneFound": "이 네트워크에서 서버를 찾지 못했습니다. 브라우저에서 Matinee를 열 때 쓰는 주소를 입력하세요.",
+    "notAddress": "“{{text}}”은(는) 서버 주소가 아닙니다. 먼저 matinee.example.com처럼 서버 주소를 입력하세요. 사용자 이름과 비밀번호는 그다음에 입력합니다.",
     "connect": "연결",
     "stillLooking": "계속 찾는 중입니다. 서버가 나타나면 여기에 표시됩니다.",
     "connectTo": "{{name}}에 연결",
@@ -703,7 +704,9 @@
     "controller": "{{name}} 연결됨",
     "connectController": "플레이하려면 게임 컨트롤러를 연결하세요",
     "pairHint": "TV의 블루투스 설정에서 컨트롤러를 페어링한 다음 아무 버튼이나 누르세요.",
-    "leaveHint": "중지하려면 리모컨의 뒤로 버튼을 누르세요",
+    "holdToLeave": "나가려면 {{buttons}} 길게 누르기",
+    "keepHolding": "나가려면 계속 누르세요",
+    "pressAgain": "나가려면 다시 누르세요",
     "fact": {
       "system": "기종",
       "region": "지역",

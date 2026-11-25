@@ -668,6 +668,19 @@
               }
             },
             {
+              "name": "Leave games on purpose: hold Select + Start, or press Back twice",
+              "doc": "/docs/server/games/#leaving-a-game",
+              "since": "v0.2.11",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
               "name": "Games library with box art",
               "doc": "/docs/server/games/#a-games-library",
               "since": "v0.2.4",

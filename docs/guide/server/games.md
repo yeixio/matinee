@@ -102,7 +102,7 @@ In a Games library with games for more than one system, the systems sit above th
 
 1. Connect a controller to the computer and press any button on it, so the browser sees it. Xbox, PlayStation and most other controllers work. Without one, the keyboard works: arrow keys, **Z** and **X** for B and A, **A** and **S** for Y and X, **Enter** for Start.
 2. Open a game in your Games library and press **Play**. It opens full screen.
-3. Close it with the **×** at the top. A battery save is kept.
+3. Close it with the **×** at the top, or [hold Select and Start](#leaving-a-game). A battery save is kept.
 
 Admins can also play any game file on the server without adding it to a library: in **Settings → Streaming → Games** press **Try playing a game** and find it in the folder list.
 
@@ -115,13 +115,28 @@ The iPhone, iPad and Android apps, Android TV, Fire TV, and Samsung and LG TVs p
 
 - **On a phone or tablet** the game turns sideways and shows buttons on the screen: a d-pad, A, B, X, Y, L, R, Select and Start. Use both thumbs at once. On the N64 the d-pad moves the stick.
 - **With a controller**, pair it with the phone, tablet or TV in its Bluetooth settings first. The buttons on the screen make way when it connects; tap the screen to bring them back. Up to four controllers play at once, each as its own player.
-- **To stop**, press the **×** at the top, the TV remote's **Back**, or the controller's own home button.
+- **To stop**, see [Leaving a game](#leaving-a-game).
 <!-- /since -->
 
 <!-- since: v0.2.5 -->
 #### On Apple TV
 
-From app version 1.0.40, Apple TV plays games too, with a server from 0.2.5 on. Pair the controller under **Settings → Remotes and Devices → Bluetooth** on the Apple TV. Apple TV gets the game straight over the connection it already has to the server, so it doesn't need the [games port](#the-games-port). Press the Siri Remote's **Back** button (**Menu** on older remotes), or the controller's own home button, to stop.
+From app version 1.0.40, Apple TV plays games too, with a server from 0.2.5 on. Pair the controller under **Settings → Remotes and Devices → Bluetooth** on the Apple TV. Apple TV gets the game straight over the connection it already has to the server, so it doesn't need the [games port](#the-games-port). To stop, see [Leaving a game](#leaving-a-game).
+<!-- /since -->
+
+<!-- since: v0.2.11 -->
+### Leaving a game
+
+So a stray press doesn't end a game, leaving takes a moment on purpose:
+
+- **Hold Select and Start together for 2 seconds** on any controller. On an Xbox controller they're **View** and **Menu**, on a PlayStation controller **Create** (or **Share**) and **Options**, and on a Nintendo controller **−** and **+**. A small bar fills while you hold; let go before it's full to keep playing. The buttons on a phone's screen work the same way, and so do **Shift** and **Enter** on the keyboard in the web player.
+- **Press twice:** in the apps, the TV remote's **Back** (**Menu** on older Siri Remotes), Android's back gesture, the controller's own home button, or the **×** at the top of a phone or tablet leaves when pressed again within 3 seconds. The first press only shows **Press again to leave**. Touching and holding the **×** leaves at once.
+- With no controller connected to a TV, one press of **Back** still leaves, since there's nothing else to play with.
+- In the web player, the **×** at the top leaves with one click.
+
+When a game starts, a small hint at the top of the screen names the buttons for your controller for a few seconds, then gets out of the way. A PC game's **Back** still opens its menu on a TV; **Stop** is in that menu.
+
+You need app version 1.0.49 or later for this in the apps.
 <!-- /since -->
 
 ## How fast it is

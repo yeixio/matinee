@@ -51,6 +51,7 @@
     "orType": "Hoặc nhập địa chỉ:",
     "addressHint": "Địa chỉ bạn dùng để mở nó trong trình duyệt.",
     "noneFound": "Không tìm thấy máy chủ nào trong mạng này. Hãy nhập địa chỉ bạn dùng để mở Matinee trong trình duyệt.",
+    "notAddress": "“{{text}}” không phải là địa chỉ máy chủ. Hãy nhập địa chỉ máy chủ của bạn trước, ví dụ matinee.example.com. Sau đó bạn sẽ đăng nhập bằng tên người dùng và mật khẩu.",
     "connect": "Kết nối",
     "stillLooking": "Vẫn đang tìm. Nếu máy chủ của bạn xuất hiện, nó sẽ hiện ở đây.",
     "connectTo": "Kết nối với {{name}}",
@@ -703,7 +704,9 @@
     "controller": "Đã kết nối {{name}}",
     "connectController": "Kết nối tay cầm để chơi",
     "pairHint": "Ghép nối tay cầm trong cài đặt Bluetooth của TV, rồi nhấn nút bất kỳ trên tay cầm.",
-    "leaveHint": "Nhấn Quay lại trên điều khiển để dừng",
+    "holdToLeave": "Giữ {{buttons}} để thoát",
+    "keepHolding": "Tiếp tục giữ để thoát",
+    "pressAgain": "Nhấn lần nữa để thoát",
     "fact": {
       "system": "Hệ máy",
       "region": "Khu vực",

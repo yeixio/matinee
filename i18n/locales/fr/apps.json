@@ -51,6 +51,7 @@
     "orType": "Ou saisissez son adresse :",
     "addressHint": "L’adresse que vous ouvrez dans un navigateur.",
     "noneFound": "Aucun serveur trouvé sur ce réseau. Saisissez l’adresse à laquelle vous ouvrez Matinee dans un navigateur.",
+    "notAddress": "« {{text}} » n'est pas une adresse de serveur. Saisissez d'abord l'adresse de votre serveur, par exemple matinee.example.com. Vous vous connecterez ensuite avec votre nom d'utilisateur et votre mot de passe.",
     "connect": "Connecter",
     "stillLooking": "Recherche en cours. Si votre serveur apparaît, il s’affichera ici.",
     "connectTo": "Se connecter à {{name}}",
@@ -717,7 +718,9 @@
     "controller": "{{name}} connectée",
     "connectController": "Connectez une manette pour jouer",
     "pairHint": "Associez une manette dans les réglages Bluetooth du téléviseur, puis appuyez sur n'importe quel bouton.",
-    "leaveHint": "Appuyez sur Retour sur la télécommande pour arrêter",
+    "holdToLeave": "Maintenez {{buttons}} pour quitter",
+    "keepHolding": "Continuez à maintenir pour quitter",
+    "pressAgain": "Appuyez à nouveau pour quitter",
     "fact": {
       "system": "Système",
       "region": "Région",
