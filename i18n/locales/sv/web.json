@@ -93,7 +93,8 @@
     "episodes": "Avsnitt",
     "resetPoster": "Använd den automatiska affischen",
     "markWatched": "Markera som sedd",
-    "markUnwatched": "Markera som osedd"
+    "markUnwatched": "Markera som osedd",
+    "notFound": "Titeln hittades inte"
   },
   "row": {
     "back": "Bläddra bakåt",
@@ -234,7 +235,8 @@
       "topFolder": "Översta mappen",
       "unknown_one": "{{count}} fil som Matinee inte kan spela upp än, till exempel {{example}}.",
       "unknown_other": "{{count}} filer som Matinee inte kan spela upp än, till exempel {{example}}."
-    }
+    },
+    "notFound": "Biblioteket hittades inte"
   },
   "nothingHereYet": "Inget här än",
   "collection": {

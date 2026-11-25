@@ -81,6 +81,17 @@ export function clientId(): string {
 }
 let fallbackId: string | undefined
 
+/** Gives this browser a new client id, for when the old one is another account's. */
+export function renewClientId(): string {
+  const id = newId()
+  try {
+    localStorage.setItem(KEY, id)
+  } catch {
+    fallbackId = id
+  }
+  return id
+}
+
 // A random version 4 UUID. crypto.randomUUID only exists on https and
 // localhost, and a default install is plain http on the home network, so
 // build one from crypto.getRandomValues, which works everywhere.
@@ -137,8 +148,20 @@ async function report() {
   if (!active) return
   try {
     await send('PUT', path(), hello())
-  } catch {
-    // The next report or poll tries again.
+  } catch (e) {
+    // The id is another account's: the browser registered as the Home guest
+    // (or someone else) before signing in or out, and the server keeps that
+    // registration a while. Carry on under a new id rather than be refused
+    // on every page.
+    if (e instanceof ApiError && e.status === 409) {
+      renewClientId()
+      try {
+        await send('PUT', path(), hello())
+      } catch {
+        // The next report or poll tries again.
+      }
+    }
+    // Otherwise the next report or poll tries again.
   }
 }
 

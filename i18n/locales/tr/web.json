@@ -93,7 +93,8 @@
     "episodes": "Bölümler",
     "resetPoster": "Otomatik posteri kullan",
     "markWatched": "İzlendi olarak işaretle",
-    "markUnwatched": "İzlenmedi olarak işaretle"
+    "markUnwatched": "İzlenmedi olarak işaretle",
+    "notFound": "Başlık bulunamadı"
   },
   "row": {
     "back": "Geri kaydır",
@@ -234,7 +235,8 @@
       "topFolder": "Üst klasör",
       "unknown_one": "Matinee'nin henüz oynatamadığı {{count}} dosya, örneğin {{example}}.",
       "unknown_other": "Matinee'nin henüz oynatamadığı {{count}} dosya, örneğin {{example}}."
-    }
+    },
+    "notFound": "Kütüphane bulunamadı"
   },
   "nothingHereYet": "Burada henüz bir şey yok",
   "collection": {

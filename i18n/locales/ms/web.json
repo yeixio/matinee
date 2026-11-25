@@ -93,7 +93,8 @@
     "episodes": "Episod",
     "resetPoster": "Guna poster automatik",
     "markWatched": "Tanda sudah ditonton",
-    "markUnwatched": "Tanda belum ditonton"
+    "markUnwatched": "Tanda belum ditonton",
+    "notFound": "Tajuk tidak ditemui"
   },
   "row": {
     "back": "Tatal ke belakang",
@@ -231,7 +232,8 @@
       "title_other": "{{count}} fail ditinggalkan",
       "topFolder": "Folder teratas",
       "unknown_other": "{{count}} fail yang belum boleh dimainkan oleh Matinee, contohnya {{example}}."
-    }
+    },
+    "notFound": "Pustaka tidak ditemui"
   },
   "nothingHereYet": "Belum ada apa-apa di sini",
   "collection": {

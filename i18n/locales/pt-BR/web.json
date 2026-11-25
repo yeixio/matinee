@@ -93,7 +93,8 @@
     "episodes": "Episódios",
     "resetPoster": "Usar o pôster automático",
     "markWatched": "Marcar como assistido",
-    "markUnwatched": "Marcar como não assistido"
+    "markUnwatched": "Marcar como não assistido",
+    "notFound": "Título não encontrado"
   },
   "row": {
     "back": "Rolar para trás",
@@ -237,7 +238,8 @@
       "unknown_one": "{{count}} arquivo que o Matinee ainda não reproduz, como {{example}}.",
       "unknown_many": "{{count}} de arquivos que o Matinee ainda não reproduz, como {{example}}.",
       "unknown_other": "{{count}} arquivos que o Matinee ainda não reproduz, como {{example}}."
-    }
+    },
+    "notFound": "Biblioteca não encontrada"
   },
   "nothingHereYet": "Nada aqui ainda",
   "collection": {

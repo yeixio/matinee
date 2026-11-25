@@ -93,7 +93,8 @@
     "episodes": "Részek",
     "resetPoster": "Automatikus plakát használata",
     "markWatched": "Megjelölés megnézettként",
-    "markUnwatched": "Megjelölés nem megnézettként"
+    "markUnwatched": "Megjelölés nem megnézettként",
+    "notFound": "A cím nem található"
   },
   "row": {
     "back": "Vissza",
@@ -234,7 +235,8 @@
       "topFolder": "Fő mappa",
       "unknown_one": "{{count}} fájl, amelyet a Matinee még nem tud lejátszani, például {{example}}.",
       "unknown_other": "{{count}} fájl, amelyet a Matinee még nem tud lejátszani, például {{example}}."
-    }
+    },
+    "notFound": "A könyvtár nem található"
   },
   "nothingHereYet": "Még nincs itt semmi",
   "collection": {

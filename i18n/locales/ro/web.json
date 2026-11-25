@@ -93,7 +93,8 @@
     "episodes": "Episoade",
     "resetPoster": "Folosește afișul automat",
     "markWatched": "Marchează ca vizionat",
-    "markUnwatched": "Marchează ca nevizionat"
+    "markUnwatched": "Marchează ca nevizionat",
+    "notFound": "Titlul nu a fost găsit"
   },
   "row": {
     "back": "Derulează înapoi",
@@ -237,7 +238,8 @@
       "unknown_one": "{{count}} fișier pe care Matinee nu îl poate reda încă, de exemplu {{example}}.",
       "unknown_few": "{{count}} fișiere pe care Matinee nu le poate reda încă, de exemplu {{example}}.",
       "unknown_other": "{{count}} de fișiere pe care Matinee nu le poate reda încă, de exemplu {{example}}."
-    }
+    },
+    "notFound": "Biblioteca nu a fost găsită"
   },
   "nothingHereYet": "Nimic aici încă",
   "collection": {

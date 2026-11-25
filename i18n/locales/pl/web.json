@@ -93,7 +93,8 @@
     "episodes": "Odcinki",
     "resetPoster": "Użyj automatycznego plakatu",
     "markWatched": "Oznacz jako obejrzane",
-    "markUnwatched": "Oznacz jako nieobejrzane"
+    "markUnwatched": "Oznacz jako nieobejrzane",
+    "notFound": "Nie znaleziono tytułu"
   },
   "row": {
     "back": "Przewiń wstecz",
@@ -240,7 +241,8 @@
       "unknown_few": "{{count}} pliki, których Matinee jeszcze nie odtwarza, np. {{example}}.",
       "unknown_many": "{{count}} plików, których Matinee jeszcze nie odtwarza, np. {{example}}.",
       "unknown_other": "{{count}} pliku, których Matinee jeszcze nie odtwarza, np. {{example}}."
-    }
+    },
+    "notFound": "Nie znaleziono biblioteki"
   },
   "nothingHereYet": "Nic tu jeszcze nie ma",
   "collection": {

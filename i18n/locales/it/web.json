@@ -93,7 +93,8 @@
     "episodes": "Episodi",
     "resetPoster": "Usa la locandina automatica",
     "markWatched": "Segna come visto",
-    "markUnwatched": "Segna come non visto"
+    "markUnwatched": "Segna come non visto",
+    "notFound": "Titolo non trovato"
   },
   "row": {
     "back": "Scorri indietro",
@@ -237,7 +238,8 @@
       "unknown_one": "{{count}} file che Matinee non sa ancora riprodurre, come {{example}}.",
       "unknown_many": "{{count}} di file che Matinee non sa ancora riprodurre, come {{example}}.",
       "unknown_other": "{{count}} file che Matinee non sa ancora riprodurre, come {{example}}."
-    }
+    },
+    "notFound": "Libreria non trovata"
   },
   "nothingHereYet": "Ancora niente qui",
   "collection": {

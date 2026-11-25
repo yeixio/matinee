@@ -93,7 +93,8 @@
     "episodes": "Afleveringen",
     "resetPoster": "Automatische poster gebruiken",
     "markWatched": "Markeren als bekeken",
-    "markUnwatched": "Markeren als niet bekeken"
+    "markUnwatched": "Markeren als niet bekeken",
+    "notFound": "Titel niet gevonden"
   },
   "row": {
     "back": "Terug scrollen",
@@ -234,7 +235,8 @@
       "topFolder": "Hoofdmap",
       "unknown_one": "{{count}} bestand dat Matinee nog niet kan afspelen, zoals {{example}}.",
       "unknown_other": "{{count}} bestanden die Matinee nog niet kan afspelen, zoals {{example}}."
-    }
+    },
+    "notFound": "Bibliotheek niet gevonden"
   },
   "nothingHereYet": "Hier is nog niets",
   "collection": {

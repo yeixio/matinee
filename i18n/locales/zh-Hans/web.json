@@ -93,7 +93,8 @@
     "episodes": "剧集",
     "resetPoster": "使用自动海报",
     "markWatched": "标记为已看",
-    "markUnwatched": "标记为未看"
+    "markUnwatched": "标记为未看",
+    "notFound": "找不到此作品"
   },
   "row": {
     "back": "向前滚动",
@@ -231,7 +232,8 @@
       "title_other": "有 {{count}} 个文件未收录",
       "topFolder": "顶层文件夹",
       "unknown_other": "{{count}} 个 Matinee 暂时无法播放的文件，例如 {{example}}。"
-    }
+    },
+    "notFound": "找不到媒体库"
   },
   "nothingHereYet": "这里还没有内容",
   "collection": {

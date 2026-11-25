@@ -93,7 +93,8 @@
     "episodes": "Folgen",
     "resetPoster": "Automatisches Poster verwenden",
     "markWatched": "Als gesehen markieren",
-    "markUnwatched": "Als ungesehen markieren"
+    "markUnwatched": "Als ungesehen markieren",
+    "notFound": "Titel nicht gefunden"
   },
   "row": {
     "back": "Zurückblättern",
@@ -234,7 +235,8 @@
       "topFolder": "Oberster Ordner",
       "unknown_one": "{{count}} Datei, die Matinee noch nicht abspielen kann, z. B. {{example}}.",
       "unknown_other": "{{count}} Dateien, die Matinee noch nicht abspielen kann, z. B. {{example}}."
-    }
+    },
+    "notFound": "Mediathek nicht gefunden"
   },
   "nothingHereYet": "Hier ist noch nichts",
   "collection": {

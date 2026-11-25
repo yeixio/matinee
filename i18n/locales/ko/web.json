@@ -93,7 +93,8 @@
     "episodes": "에피소드",
     "resetPoster": "자동 포스터 사용",
     "markWatched": "시청함으로 표시",
-    "markUnwatched": "시청 안 함으로 표시"
+    "markUnwatched": "시청 안 함으로 표시",
+    "notFound": "작품을 찾을 수 없음"
   },
   "row": {
     "back": "뒤로 스크롤",
@@ -231,7 +232,8 @@
       "title_other": "파일 {{count}}개가 제외되었습니다",
       "topFolder": "최상위 폴더",
       "unknown_other": "Matinee가 아직 재생할 수 없는 파일 {{count}}개 (예: {{example}})."
-    }
+    },
+    "notFound": "라이브러리를 찾을 수 없음"
   },
   "nothingHereYet": "아직 아무것도 없습니다",
   "collection": {

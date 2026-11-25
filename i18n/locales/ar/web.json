@@ -93,7 +93,8 @@
     "episodes": "الحلقات",
     "resetPoster": "استخدم الملصق التلقائي",
     "markWatched": "وضع علامة مُشاهَد",
-    "markUnwatched": "وضع علامة غير مُشاهَد"
+    "markUnwatched": "وضع علامة غير مُشاهَد",
+    "notFound": "لم يُعثر على العنوان"
   },
   "row": {
     "back": "التمرير للخلف",
@@ -246,7 +247,8 @@
       "unknown_few": "{{count}} ملفات لا يستطيع Matinee تشغيلها بعد، مثل {{example}}.",
       "unknown_many": "{{count}} ملفًا لا يستطيع Matinee تشغيلها بعد، مثل {{example}}.",
       "unknown_other": "{{count}} ملف لا يستطيع Matinee تشغيلها بعد، مثل {{example}}."
-    }
+    },
+    "notFound": "لم يُعثر على المكتبة"
   },
   "nothingHereYet": "لا شيء هنا بعد",
   "collection": {

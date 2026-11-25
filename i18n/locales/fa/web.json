@@ -93,7 +93,8 @@
     "episodes": "قسمت‌ها",
     "resetPoster": "استفاده از پوستر خودکار",
     "markWatched": "علامت دیده‌شده",
-    "markUnwatched": "علامت دیده‌نشده"
+    "markUnwatched": "علامت دیده‌نشده",
+    "notFound": "عنوان پیدا نشد"
   },
   "row": {
     "back": "پیمایش به عقب",
@@ -234,7 +235,8 @@
       "topFolder": "پوشهٔ اصلی",
       "unknown_one": "{{count}} فایل که Matinee هنوز نمی‌تواند پخش کند، مثل {{example}}.",
       "unknown_other": "{{count}} فایل که Matinee هنوز نمی‌تواند پخش کند، مثل {{example}}."
-    }
+    },
+    "notFound": "کتابخانه پیدا نشد"
   },
   "nothingHereYet": "هنوز چیزی اینجا نیست",
   "collection": {

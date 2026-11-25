@@ -93,7 +93,8 @@
     "episodes": "Díly",
     "resetPoster": "Použít automatický plakát",
     "markWatched": "Označit jako zhlédnuté",
-    "markUnwatched": "Označit jako nezhlédnuté"
+    "markUnwatched": "Označit jako nezhlédnuté",
+    "notFound": "Titul nenalezen"
   },
   "row": {
     "back": "Posunout zpět",
@@ -240,7 +241,8 @@
       "unknown_few": "{{count}} soubory, které Matinee zatím neumí přehrát, např. {{example}}.",
       "unknown_many": "{{count}} souboru, které Matinee zatím neumí přehrát, např. {{example}}.",
       "unknown_other": "{{count}} souborů, které Matinee zatím neumí přehrát, např. {{example}}."
-    }
+    },
+    "notFound": "Knihovna nenalezena"
   },
   "nothingHereYet": "Zatím tu nic není",
   "collection": {

@@ -93,7 +93,8 @@
     "episodes": "Jaksot",
     "resetPoster": "Käytä automaattista julistetta",
     "markWatched": "Merkitse katsotuksi",
-    "markUnwatched": "Merkitse katsomattomaksi"
+    "markUnwatched": "Merkitse katsomattomaksi",
+    "notFound": "Nimikettä ei löytynyt"
   },
   "row": {
     "back": "Vieritä taaksepäin",
@@ -234,7 +235,8 @@
       "topFolder": "Ylin kansio",
       "unknown_one": "{{count}} tiedosto, jota Matinee ei vielä osaa toistaa, esimerkiksi {{example}}.",
       "unknown_other": "{{count}} tiedostoa, joita Matinee ei vielä osaa toistaa, esimerkiksi {{example}}."
-    }
+    },
+    "notFound": "Kirjastoa ei löytynyt"
   },
   "nothingHereYet": "Täällä ei ole vielä mitään",
   "collection": {

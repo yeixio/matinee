@@ -93,7 +93,8 @@
     "episodes": "Épisodes",
     "resetPoster": "Utiliser l'affiche automatique",
     "markWatched": "Marquer comme vu",
-    "markUnwatched": "Marquer comme non vu"
+    "markUnwatched": "Marquer comme non vu",
+    "notFound": "Titre introuvable"
   },
   "row": {
     "back": "Faire défiler vers l’arrière",
@@ -237,7 +238,8 @@
       "unknown_one": "{{count}} fichier que Matinee ne peut pas encore lire, comme {{example}}.",
       "unknown_many": "{{count}} de fichiers que Matinee ne peut pas encore lire, comme {{example}}.",
       "unknown_other": "{{count}} fichiers que Matinee ne peut pas encore lire, comme {{example}}."
-    }
+    },
+    "notFound": "Bibliothèque introuvable"
   },
   "nothingHereYet": "Rien ici pour l’instant",
   "collection": {
