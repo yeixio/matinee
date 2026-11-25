@@ -104,7 +104,8 @@ func watchedTitles(titles []store.WatchedTitle) []arr.BoxOfficeWatched {
 	}
 	out := make([]arr.BoxOfficeWatched, len(titles))
 	for i, t := range titles {
-		out[i] = arr.BoxOfficeWatched{TMDBID: t.TMDBID, LastPlayed: at(t.LastPlayed), Viewers: t.Viewers, FinishedBy: t.FinishedBy, FinishedAt: at(t.FinishedAt), FurthestSeason: t.FurthestSeason, FurthestEpisode: t.FurthestEpisode}
+		out[i] = arr.BoxOfficeWatched{TMDBID: t.TMDBID, LastPlayed: at(t.LastPlayed), Viewers: t.Viewers, FinishedBy: t.FinishedBy, FinishedAt: at(t.FinishedAt), FurthestSeason: t.FurthestSeason, FurthestEpisode: t.FurthestEpisode,
+			AllFinishedSeason: t.AllFinishedSeason, AllFinishedEpisode: t.AllFinishedEpisode}
 	}
 	return out
 }
