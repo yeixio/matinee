@@ -224,3 +224,36 @@ func (c *Client) BoxOfficeLeavingSoon(ctx context.Context) ([]BoxOfficeLeaving, 
 	err := c.do(ctx, "GET", "/boxoffice/leaving", nil, nil, &out)
 	return out.Titles, err
 }
+
+// BoxOfficeProvider is a streaming service or shop, such as Netflix.
+type BoxOfficeProvider struct {
+	ID   int64  `json:"id"`
+	Name string `json:"name"`
+	Logo string `json:"logo,omitempty"`
+}
+
+// BoxOfficeWatch is where a title can be watched in one country, as Box
+// Office tells it (from JustWatch, through TMDB): the networks a show is
+// made for, then services by how they're paid for.
+type BoxOfficeWatch struct {
+	Networks  []BoxOfficeProvider `json:"networks"`
+	Country   string              `json:"country"`
+	Link      string              `json:"link,omitempty"`
+	Stream    []BoxOfficeProvider `json:"stream,omitempty"`
+	Free      []BoxOfficeProvider `json:"free,omitempty"`
+	Rent      []BoxOfficeProvider `json:"rent,omitempty"`
+	Buy       []BoxOfficeProvider `json:"buy,omitempty"`
+	Countries []string            `json:"countries"`
+}
+
+// BoxOfficeWhereToWatch asks where a title can be watched in country
+// (Box Office's own when ""): a movie of Radarr's, a show of Sonarr's.
+func (c *Client) BoxOfficeWhereToWatch(ctx context.Context, tmdbID int, country string) (BoxOfficeWatch, error) {
+	var w BoxOfficeWatch
+	q := url.Values{"tmdbId": {strconv.Itoa(tmdbID)}}
+	if country != "" {
+		q.Set("country", country)
+	}
+	err := c.do(ctx, "GET", "/boxoffice/discover/watch", q, nil, &w)
+	return w, err
+}

@@ -37,6 +37,7 @@ type Fake struct {
 	Notifications []arr.BoxOfficeNotification
 	// Discover, when set, makes it a Box Office with Discover: answers by
 	// what follows /boxoffice/discover ("" for the home, "/rows/trending",
+	// "/watch" for where to watch, which adds the "watch" feature,
 	// "/search").
 	Discover map[string]any
 	// Pairing makes it a Box Office with progress and upgrades (and, as
@@ -165,6 +166,9 @@ func (f *Fake) serve(w http.ResponseWriter, r *http.Request) {
 		features := []string{"notifications"}
 		if f.Discover != nil {
 			features = append(features, "discover")
+			if _, ok := f.Discover["/watch"]; ok {
+				features = append(features, "watch")
+			}
 		}
 		if f.TakesRequests {
 			features = append(features, "requests")

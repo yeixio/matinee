@@ -4513,6 +4513,37 @@ paths:
         "404": { $ref: "#/components/responses/Error" }
         "409": { $ref: "#/components/responses/Error" }
         "502": { $ref: "#/components/responses/Error" }
+  /discover/watch:
+    get:
+      summary: Where a title from Discover can be watched
+      description: |
+        The networks a show is made for, then the streaming services,
+        free services, rentals and shops that have the title in a country
+        (JustWatch's data, through TMDB), from a connected Box Office with
+        the "watch" feature. 404 when none has it.
+      parameters:
+        - { name: kind, in: query, required: true, schema: { type: string, enum: [movie, show] } }
+        - { name: tmdbId, in: query, required: true, schema: { type: integer } }
+        - { name: country, in: query, schema: { type: string }, description: "Two-letter country code, such as US; Box Office's own when left out." }
+      responses:
+        "200":
+          description: Where to watch it.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  networks: { type: array, items: { $ref: "#/components/schemas/WatchProvider" } }
+                  country: { type: string }
+                  link: { type: string, description: "TMDB's page of where to watch it there." }
+                  stream: { type: array, items: { $ref: "#/components/schemas/WatchProvider" } }
+                  free: { type: array, items: { $ref: "#/components/schemas/WatchProvider" } }
+                  rent: { type: array, items: { $ref: "#/components/schemas/WatchProvider" } }
+                  buy: { type: array, items: { $ref: "#/components/schemas/WatchProvider" } }
+                  countries: { type: array, items: { type: string }, description: Every country with any way to watch it. }
+        "400": { $ref: "#/components/responses/Error" }
+        "404": { $ref: "#/components/responses/Error" }
+        "502": { $ref: "#/components/responses/Error" }
   /discover/search:
     get:
       summary: Find any movie or show through Overseerr
@@ -6263,6 +6294,13 @@ components:
       properties:
         id: { type: integer }
         name: { type: string }
+    WatchProvider:
+      type: object
+      description: A network, streaming service or shop.
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        logo: { type: string }
     DiscoverTitle:
       type: object
       properties:

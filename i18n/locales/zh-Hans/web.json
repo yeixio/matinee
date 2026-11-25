@@ -1116,7 +1116,18 @@
     "asking": "正在请求…",
     "waiting": "正在等待管理员批准。",
     "onItsWay": "下载完成后会出现在你的媒体库中。",
-    "findIt": "在“发现”中查找"
+    "findIt": "在“发现”中查找",
+    "watch": {
+      "title": "在哪里观看",
+      "country": "国家/地区",
+      "network": "电视网",
+      "stream": "订阅",
+      "free": "免费",
+      "rent": "租借",
+      "buy": "购买",
+      "none": "据我们所知，{{country}} 暂无流媒体。",
+      "source": "流媒体服务信息来自 JustWatch"
+    }
   },
   "plugins": {
     "title": "插件",

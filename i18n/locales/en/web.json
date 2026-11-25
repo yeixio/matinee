@@ -1122,7 +1122,18 @@
     "asking": "Asking…",
     "waiting": "Waiting for an admin to approve it.",
     "onItsWay": "It'll show up in your library once it's downloaded.",
-    "findIt": "Find it in Discover"
+    "findIt": "Find it in Discover",
+    "watch": {
+      "title": "Where to watch",
+      "country": "Country",
+      "network": "Network",
+      "stream": "Stream",
+      "free": "Free",
+      "rent": "Rent",
+      "buy": "Buy",
+      "none": "Not streaming in {{country}} as far as we know.",
+      "source": "Streaming services from JustWatch"
+    }
   },
   "plugins": {
     "title": "Plugins",

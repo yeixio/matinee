@@ -6,6 +6,7 @@ import { Link, useParams, useSearchParams } from 'react-router-dom'
 import { api, type DiscoverRow, type DiscoverTitle, type User } from '../api'
 import { RemotePoster, useRequestOptions } from '../components/Arr'
 import { Row, RowItem } from '../components/Row'
+import { WhereToWatch } from '../components/WhereToWatch'
 import { Button, EmptyState, Spinner } from '../components/ui'
 import i18n from '../i18n'
 
@@ -287,6 +288,7 @@ function TitleSheet({
               </div>
             </div>
             {d.overview && <p className="text-sm leading-relaxed text-muted">{d.overview}</p>}
+            <WhereToWatch kind={d.kind} tmdbId={d.tmdbId} />
             <div className="flex flex-wrap items-center gap-2 pt-1">
               {d.status === 'available' && d.itemId ? (
                 <Link to={`/item/${d.itemId}`}>

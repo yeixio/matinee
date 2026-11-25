@@ -1116,7 +1116,18 @@
     "asking": "Đang yêu cầu…",
     "waiting": "Đang chờ quản trị viên duyệt.",
     "onItsWay": "Phim sẽ xuất hiện trong thư viện của bạn khi tải xong.",
-    "findIt": "Tìm trong Khám phá"
+    "findIt": "Tìm trong Khám phá",
+    "watch": {
+      "title": "Xem ở đâu",
+      "country": "Quốc gia",
+      "network": "Kênh",
+      "stream": "Phát trực tuyến",
+      "free": "Miễn phí",
+      "rent": "Thuê",
+      "buy": "Mua",
+      "none": "Theo chúng tôi biết, không có phát trực tuyến tại {{country}}.",
+      "source": "Dịch vụ phát trực tuyến từ JustWatch"
+    }
   },
   "plugins": {
     "title": "Tiện ích",

@@ -1116,7 +1116,18 @@
     "asking": "リクエスト中…",
     "waiting": "管理者の承認待ちです。",
     "onItsWay": "ダウンロードされるとライブラリに表示されます。",
-    "findIt": "「見つける」で探す"
+    "findIt": "「見つける」で探す",
+    "watch": {
+      "title": "視聴できる場所",
+      "country": "国",
+      "network": "ネットワーク",
+      "stream": "見放題",
+      "free": "無料",
+      "rent": "レンタル",
+      "buy": "購入",
+      "none": "{{country}} では配信されていないようです。",
+      "source": "配信サービス情報: JustWatch"
+    }
   },
   "plugins": {
     "title": "プラグイン",

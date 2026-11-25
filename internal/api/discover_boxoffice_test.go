@@ -60,6 +60,8 @@ func TestDiscoverFromBoxOffice(t *testing.T) {
 		"/rows/like-movie-27205": map[string]any{"id": "like-movie-27205", "items": []any{movie(27205, "Inception", "available"), movie(157336, "Interstellar", "")}, "page": 1, "pages": 3, "more": true},
 		"/rows/popular-series":   map[string]any{"id": "popular-series", "title": "Popular shows", "items": []any{show(60059, "Better Call Saul", "")}, "page": 2, "pages": 2},
 		"/search":                []any{movie(329865, "Arrival", ""), show(60059, "Better Call Saul", "")},
+		"/watch": map[string]any{"networks": []any{map[string]any{"id": 174, "name": "AMC"}}, "country": "US",
+			"stream": []any{map[string]any{"id": 8, "name": "Netflix"}}, "countries": []any{"US"}},
 	}
 	bo.Radarr.Discover, bo.Sonarr.Discover = discover, discover
 	bo.Radarr.Catalog = []map[string]any{{"tmdbId": 329865, "title": "Arrival", "year": 2016}}
@@ -76,6 +78,18 @@ func TestDiscoverFromBoxOffice(t *testing.T) {
 	ellen.do("GET", "/api/v1/requests/options", nil, &opts)
 	if !opts.Discover {
 		t.Fatalf("discover after connecting: %+v", opts)
+	}
+
+	// Where to watch a title comes from Box Office too.
+	var watch struct {
+		Networks []struct{ Name string }
+		Stream   []struct{ Name string }
+	}
+	if code := ellen.do("GET", "/api/v1/discover/watch?kind=show&tmdbId=60059&country=us", nil, &watch); code != 200 || len(watch.Networks) != 1 || watch.Stream[0].Name != "Netflix" {
+		t.Fatalf("watch: %d %+v", code, watch)
+	}
+	if code := ellen.do("GET", "/api/v1/discover/watch?kind=album&tmdbId=1", nil, nil); code != 400 {
+		t.Fatalf("watch album: %d", code)
 	}
 
 	var view discoverView

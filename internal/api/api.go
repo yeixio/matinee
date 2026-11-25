@@ -493,6 +493,7 @@ func (s *Server) routes() []route {
 		{"GET /discover", reader, grownUps(s.discover)},
 		{"GET /discover/search", reader, grownUps(s.discoverSearch)},
 		{"GET /discover/rows/{id}", reader, grownUps(s.discoverRowPage)},
+		{"GET /discover/watch", reader, grownUps(s.discoverWatch)},
 		{"POST /discover/requests", signedIn, grownUps(s.discoverRequest)},
 		{"GET /requests/options", reader, grownUps(s.getRequestOptions)},
 		{"GET /requests/search", signedIn, grownUps(s.searchTitles)},

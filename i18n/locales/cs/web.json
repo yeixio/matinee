@@ -1134,7 +1134,18 @@
     "asking": "Žádám…",
     "waiting": "Čeká na schválení správcem.",
     "onItsWay": "Objeví se ve vaší knihovně, jakmile se stáhne.",
-    "findIt": "Najít v Objevovat"
+    "findIt": "Najít v Objevovat",
+    "watch": {
+      "title": "Kde sledovat",
+      "country": "Země",
+      "network": "Stanice",
+      "stream": "Streamování",
+      "free": "Zdarma",
+      "rent": "Půjčit",
+      "buy": "Koupit",
+      "none": "V zemi {{country}} se podle nás nestreamuje.",
+      "source": "Streamovací služby od JustWatch"
+    }
   },
   "plugins": {
     "title": "Doplňky",

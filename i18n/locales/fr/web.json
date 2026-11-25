@@ -1128,7 +1128,18 @@
     "asking": "Demande en cours…",
     "waiting": "En attente de l’approbation d’un administrateur.",
     "onItsWay": "Il apparaîtra dans votre bibliothèque une fois téléchargé.",
-    "findIt": "Le trouver dans Découvrir"
+    "findIt": "Le trouver dans Découvrir",
+    "watch": {
+      "title": "Où regarder",
+      "country": "Pays",
+      "network": "Chaîne",
+      "stream": "Streaming",
+      "free": "Gratuit",
+      "rent": "Louer",
+      "buy": "Acheter",
+      "none": "Pas en streaming en {{country}}, à notre connaissance.",
+      "source": "Services de streaming fournis par JustWatch"
+    }
   },
   "plugins": {
     "title": "Extensions",

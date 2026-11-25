@@ -1116,7 +1116,18 @@
     "asking": "正在請求…",
     "waiting": "正在等待管理員核准。",
     "onItsWay": "下載完成後會出現在你的媒體庫中。",
-    "findIt": "在「探索」中尋找"
+    "findIt": "在「探索」中尋找",
+    "watch": {
+      "title": "在哪裡觀看",
+      "country": "國家/地區",
+      "network": "電視網",
+      "stream": "訂閱",
+      "free": "免費",
+      "rent": "租借",
+      "buy": "購買",
+      "none": "據我們所知，{{country}} 暫無串流。",
+      "source": "串流服務資訊來自 JustWatch"
+    }
   },
   "plugins": {
     "title": "外掛程式",

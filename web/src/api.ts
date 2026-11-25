@@ -393,6 +393,21 @@ export type DiscoverTitle = {
   itemId?: number
 }
 
+// WhereToWatch is where a title can be watched in one country, from a
+// connected Box Office (JustWatch's data, through TMDB): the networks a
+// show is made for, then streaming services by how they're paid for.
+export type WatchProvider = { id: number; name: string; logo?: string }
+export type WhereToWatch = {
+  networks: WatchProvider[]
+  country: string
+  link?: string
+  stream?: WatchProvider[]
+  free?: WatchProvider[]
+  rent?: WatchProvider[]
+  buy?: WatchProvider[]
+  countries: string[]
+}
+
 // more: the row has more titles than it shows (see api.discoverRow).
 export type DiscoverRow = { id: string; title: string; because?: string; have?: string; items: DiscoverTitle[]; more?: boolean }
 
@@ -1784,6 +1799,8 @@ export const api = {
   discoverRow: (id: string, page: number) =>
     request<{ row: DiscoverRow; page: number; pages: number; canRequest: boolean }>('GET', `/api/v1/discover/rows/${encodeURIComponent(id)}?page=${page}`),
   discoverSearch: (q: string) => request<DiscoverTitle[]>('GET', `/api/v1/discover/search?q=${encodeURIComponent(q)}`),
+  discoverWatch: (kind: TitleKind, tmdbId: number, country: string) =>
+    request<WhereToWatch>('GET', `/api/v1/discover/watch?kind=${kind}&tmdbId=${tmdbId}${country ? `&country=${country}` : ''}`),
   discoverRequest: (t: DiscoverTitle) => request<DiscoverTitle>('POST', '/api/v1/discover/requests', { kind: t.kind, tmdbId: t.tmdbId }),
   searchTitles: (kind: TitleKind, q: string) =>
     request<Title[]>('GET', `/api/v1/requests/search?kind=${kind}&q=${encodeURIComponent(q)}`),

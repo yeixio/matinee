@@ -351,3 +351,43 @@ func (s *Server) discoverRequestBoxOffice(w http.ResponseWriter, r *http.Request
 	}
 	writeJSON(w, http.StatusCreated, v)
 }
+
+// watchCountry is a two-letter country code, such as "US", or "" for
+// anything else.
+func watchCountry(v string) string {
+	v = strings.ToUpper(strings.TrimSpace(v))
+	if len(v) != 2 || v[0] < 'A' || v[0] > 'Z' || v[1] < 'A' || v[1] > 'Z' {
+		return ""
+	}
+	return v
+}
+
+// discoverWatch is where a title from the Discover tab can be watched
+// (?kind=movie|show&tmdbId=&country=): the network a show is made for and
+// the streaming services that have it, from a Box Office with "watch".
+// Without one it's 404, and the title's card just leaves it out.
+func (s *Server) discoverWatch(w http.ResponseWriter, r *http.Request) {
+	q := r.URL.Query()
+	app, ok := appFor(q.Get("kind"))
+	tmdbID, err := strconv.Atoi(q.Get("tmdbId"))
+	if !ok || err != nil || tmdbID <= 0 {
+		writeError(w, http.StatusBadRequest, "kind is movie or show, and tmdbId a TMDB id")
+		return
+	}
+	if !s.boxOffices.has(app, "watch") {
+		writeError(w, http.StatusNotFound, "where to watch comes from a connected Box Office")
+		return
+	}
+	ctx := r.Context()
+	cl, _, err := s.arrClient(ctx, app)
+	if err != nil {
+		s.arrError(w, r, app, err)
+		return
+	}
+	ww, err := cl.BoxOfficeWhereToWatch(ctx, tmdbID, watchCountry(q.Get("country")))
+	if err != nil {
+		s.boxOfficeDiscoverError(w, r, err)
+		return
+	}
+	writeJSON(w, http.StatusOK, ww)
+}

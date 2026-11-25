@@ -1122,7 +1122,18 @@
     "asking": "İsteniyor…",
     "waiting": "Bir yöneticinin onaylaması bekleniyor.",
     "onItsWay": "İndirildiğinde kitaplığında görünecek.",
-    "findIt": "Keşfet'te bul"
+    "findIt": "Keşfet'te bul",
+    "watch": {
+      "title": "Nerede izlenir",
+      "country": "Ülke",
+      "network": "Kanal",
+      "stream": "Yayın",
+      "free": "Ücretsiz",
+      "rent": "Kirala",
+      "buy": "Satın al",
+      "none": "Bildiğimiz kadarıyla {{country}} içinde yayında değil.",
+      "source": "Yayın hizmetleri JustWatch'tan"
+    }
   },
   "plugins": {
     "title": "Eklentiler",

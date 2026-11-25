@@ -1122,7 +1122,18 @@
     "asking": "Sender…",
     "waiting": "Venter på at en administrator godkjenner den.",
     "onItsWay": "Den dukker opp i biblioteket ditt når den er lastet ned.",
-    "findIt": "Finn den i Utforsk"
+    "findIt": "Finn den i Utforsk",
+    "watch": {
+      "title": "Hvor kan den ses",
+      "country": "Land",
+      "network": "Kanal",
+      "stream": "Strøm",
+      "free": "Gratis",
+      "rent": "Lei",
+      "buy": "Kjøp",
+      "none": "Kan ikke strømmes i {{country}}, så vidt vi vet.",
+      "source": "Strømmetjenester fra JustWatch"
+    }
   },
   "plugins": {
     "title": "Utvidelser",

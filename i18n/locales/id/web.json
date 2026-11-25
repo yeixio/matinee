@@ -1116,7 +1116,18 @@
     "asking": "Meminta…",
     "waiting": "Menunggu persetujuan admin.",
     "onItsWay": "Akan muncul di pustakamu setelah diunduh.",
-    "findIt": "Cari di Jelajahi"
+    "findIt": "Cari di Jelajahi",
+    "watch": {
+      "title": "Tempat menonton",
+      "country": "Negara",
+      "network": "Jaringan",
+      "stream": "Streaming",
+      "free": "Gratis",
+      "rent": "Sewa",
+      "buy": "Beli",
+      "none": "Sejauh yang kami tahu, tidak tersedia streaming di {{country}}.",
+      "source": "Layanan streaming dari JustWatch"
+    }
   },
   "plugins": {
     "title": "Plugin",
