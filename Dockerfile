@@ -98,7 +98,7 @@ RUN sh /src/psremote/build.sh /out/psremote && test -x /out/psremote/matinee-psr
 # the image.
 FROM debian:trixie AS pcremote
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends ca-certificates git cmake make gcc g++ libc6-dev pkg-config libssl-dev \
+    && apt-get install -y --no-install-recommends ca-certificates git cmake make gcc g++ libc6-dev pkg-config libssl-dev libzstd-dev zlib1g-dev \
     && rm -rf /var/lib/apt/lists/*
 COPY games/pcremote/ /src/pcremote/
 RUN sh /src/pcremote/build.sh /out/pcremote && test -x /out/pcremote/matinee-pcremote

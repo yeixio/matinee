@@ -31,7 +31,7 @@ b="$work/build"
 ${CC:-gcc} -O2 -Wall -o "$out/matinee-pcremote" "$here/pcremote.c" \
 	-I"$src/src" \
 	"$b/libmoonlight-common-c.a" "$b/enet/libenet.a" \
-	-Wl,-Bstatic -lssl -lcrypto -Wl,-Bdynamic -lpthread -ldl
+	-Wl,-Bstatic -lssl -lcrypto -lzstd -Wl,-Bdynamic -lz -lpthread -ldl
 strip "$out/matinee-pcremote" 2>/dev/null || true
 
 mkdir -p "$out/licenses"
