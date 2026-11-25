@@ -74,6 +74,11 @@ func TestWatchedReportedToBoxOffice(t *testing.T) {
 	if got := bo.Radarr.Watched[0]["titles"].([]any)[0].(map[string]any); got["furthestSeason"] != nil || got["furthestEpisode"] != nil {
 		t.Fatalf("a movie has a furthest episode: %+v", got)
 	}
+	// Everyone watching the show has finished its first episode: the
+	// admin is the one least far in.
+	if got := bo.Sonarr.Watched[0]["titles"].([]any)[0].(map[string]any); got["allFinishedSeason"] != 1.0 || got["allFinishedEpisode"] != 1.0 {
+		t.Fatalf("the episode everyone has finished: %+v", got)
+	}
 
 	// Nothing new: nothing said. Something new: said again.
 	e.srv.reportWatched(ctx, true)
@@ -85,8 +90,19 @@ func TestWatchedReportedToBoxOffice(t *testing.T) {
 	if len(bo.Radarr.Watched) != 1 || len(bo.Sonarr.Watched) != 2 {
 		t.Fatalf("after a play: %d %d", len(bo.Radarr.Watched), len(bo.Sonarr.Watched))
 	}
-	if got := bo.Sonarr.Watched[1]["titles"].([]any)[0].(map[string]any); got["finishedBy"] != 2.0 {
+	if got := bo.Sonarr.Watched[1]["titles"].([]any)[0].(map[string]any); got["finishedBy"] != 2.0 || got["allFinishedEpisode"] != 2.0 {
 		t.Fatalf("after a play: %+v", got)
+	}
+	// Someone new starts the show without finishing an episode: nothing
+	// of it has been finished by everyone any more.
+	carl, err := e.db.CreateUser(ctx, "carl", "x", false)
+	if err != nil {
+		t.Fatal(err)
+	}
+	e.db.SetProgress(ctx, carl.ID, e1, 30_000, false)
+	e.srv.reportWatched(ctx, true)
+	if got := bo.Sonarr.Watched[len(bo.Sonarr.Watched)-1]["titles"].([]any)[0].(map[string]any); got["viewers"] != 3.0 || got["allFinishedSeason"] != nil || got["allFinishedEpisode"] != nil {
+		t.Fatalf("after someone new started: %+v", got)
 	}
 }
 

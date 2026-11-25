@@ -193,6 +193,11 @@ type BoxOfficeWatched struct {
 	// anyone has started, leaving specials out.
 	FurthestSeason  int `json:"furthestSeason,omitempty"`
 	FurthestEpisode int `json:"furthestEpisode,omitempty"`
+	// AllFinishedSeason and AllFinishedEpisode are the latest episode of
+	// a show that everyone who has played any of it has finished, specials
+	// left out; Box Office can remove watched episodes up to it.
+	AllFinishedSeason  int `json:"allFinishedSeason,omitempty"`
+	AllFinishedEpisode int `json:"allFinishedEpisode,omitempty"`
 }
 
 // BoxOfficeReportWatched tells Box Office what has been watched of this
