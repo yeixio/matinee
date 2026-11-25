@@ -1742,6 +1742,8 @@
     "showLag": "הצגת השהיה",
     "hideLag": "הסתרת השהיה",
     "stop": "הפסקת המשחק",
+    "holdToLeave": "החזיקו את {{buttons}} כדי לצאת",
+    "keepHolding": "המשיכו להחזיק כדי לצאת",
     "starting": "מתחיל…",
     "back": "חזרה",
     "lostConnection": "החיבור לשרת אבד.",

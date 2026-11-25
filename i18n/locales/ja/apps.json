@@ -51,6 +51,7 @@
     "orType": "またはアドレスを入力：",
     "addressHint": "ブラウザで開くときのアドレスです。",
     "noneFound": "このネットワークにサーバーが見つかりませんでした。ブラウザで Matinee を開くときのアドレスを入力してください。",
+    "notAddress": "「{{text}}」はサーバーのアドレスではありません。まずサーバーのアドレス（例: matinee.example.com）を入力してください。ユーザー名とパスワードはその後に入力します。",
     "connect": "接続",
     "stillLooking": "まだ探しています。サーバーが見つかるとここに表示されます。",
     "connectTo": "{{name}} に接続",
@@ -703,7 +704,9 @@
     "controller": "{{name}} が接続されました",
     "connectController": "プレイするにはコントローラを接続してください",
     "pairHint": "テレビの Bluetooth 設定でコントローラをペアリングし、いずれかのボタンを押してください。",
-    "leaveHint": "リモコンの戻るボタンで終了します",
+    "holdToLeave": "{{buttons}} を長押しで終了",
+    "keepHolding": "そのまま押し続けると終了",
+    "pressAgain": "もう一度押すと終了",
     "fact": {
       "system": "機種",
       "region": "地域",

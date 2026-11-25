@@ -51,6 +51,7 @@
     "orType": "Vagy írd be a címét:",
     "addressHint": "A cím, amelyen böngészőben megnyitod.",
     "noneFound": "Ezen a hálózaton nem találtunk szervert. Írd be a címet, amelyen a Matinee-t böngészőben megnyitod.",
+    "notAddress": "„{{text}}” nem szervercím. Először a szervered címét írd be, például matinee.example.com. A felhasználónevet és a jelszót utána adod meg.",
     "connect": "Csatlakoztatás",
     "stillLooking": "Még keresünk. Ha a szervered előkerül, itt jelenik meg.",
     "connectTo": "Csatlakozás: {{name}}",
@@ -710,7 +711,9 @@
     "controller": "{{name}} csatlakoztatva",
     "connectController": "Csatlakoztass egy kontrollert a játékhoz",
     "pairHint": "Párosíts egy kontrollert a tévé Bluetooth-beállításaiban, majd nyomd meg bármelyik gombját.",
-    "leaveHint": "A leállításhoz nyomd meg a Vissza gombot a távirányítón",
+    "holdToLeave": "A kilépéshez tartsd lenyomva: {{buttons}}",
+    "keepHolding": "A kilépéshez tartsd tovább lenyomva",
+    "pressAgain": "A kilépéshez nyomd meg újra",
     "fact": {
       "system": "Rendszer",
       "region": "Régió",

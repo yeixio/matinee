@@ -51,6 +51,7 @@
     "orType": "Ya da adresini yazın:",
     "addressHint": "Tarayıcıda açtığınız adres.",
     "noneFound": "Bu ağda sunucu bulamadık. Matinee’yi tarayıcıda açtığınız adresi yazın.",
+    "notAddress": "“{{text}}” bir sunucu adresi değil. Önce sunucunuzun adresini yazın, örneğin matinee.example.com. Kullanıcı adı ve parolayla bir sonraki adımda giriş yapacaksınız.",
     "connect": "Bağla",
     "stillLooking": "Hâlâ aranıyor. Sunucunuz bulunursa burada görünür.",
     "connectTo": "{{name}} sunucusuna bağlan",
@@ -710,7 +711,9 @@
     "controller": "{{name}} bağlandı",
     "connectController": "Oynamak için bir oyun kumandası bağlayın",
     "pairHint": "Televizyonun Bluetooth ayarlarından bir kumanda eşleştirin, sonra üzerindeki herhangi bir düğmeye basın.",
-    "leaveHint": "Durdurmak için kumandada Geri'ye basın",
+    "holdToLeave": "Çıkmak için {{buttons}} basılı tutun",
+    "keepHolding": "Çıkmak için basılı tutmaya devam edin",
+    "pressAgain": "Çıkmak için tekrar basın",
     "fact": {
       "system": "Sistem",
       "region": "Bölge",

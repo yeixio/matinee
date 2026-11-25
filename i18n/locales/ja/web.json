@@ -1714,6 +1714,8 @@
     "showLag": "遅延を表示",
     "hideLag": "遅延を隠す",
     "stop": "プレイをやめる",
+    "holdToLeave": "{{buttons}} を長押しで終了",
+    "keepHolding": "そのまま押し続けると終了",
     "starting": "起動中…",
     "back": "戻る",
     "lostConnection": "サーバーとの接続が切れました。",

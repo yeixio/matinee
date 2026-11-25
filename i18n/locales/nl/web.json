@@ -1728,6 +1728,8 @@
     "showLag": "Vertraging tonen",
     "hideLag": "Vertraging verbergen",
     "stop": "Stoppen met spelen",
+    "holdToLeave": "Houd {{buttons}} ingedrukt om te stoppen",
+    "keepHolding": "Blijf ingedrukt houden om te stoppen",
     "starting": "Starten…",
     "back": "Terug",
     "lostConnection": "Verbinding met de server verbroken.",

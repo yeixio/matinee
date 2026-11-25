@@ -1742,6 +1742,8 @@
     "showLag": "Afficher la latence",
     "hideLag": "Masquer la latence",
     "stop": "Arrêter de jouer",
+    "holdToLeave": "Maintenez {{buttons}} pour quitter",
+    "keepHolding": "Continuez à maintenir pour quitter",
     "starting": "Démarrage…",
     "back": "Retour",
     "lostConnection": "Connexion au serveur perdue.",

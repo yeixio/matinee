@@ -1714,6 +1714,8 @@
     "showLag": "顯示延遲",
     "hideLag": "隱藏延遲",
     "stop": "停止遊戲",
+    "holdToLeave": "按住 {{buttons}} 離開",
+    "keepHolding": "繼續按住以離開",
     "starting": "正在啟動…",
     "back": "返回",
     "lostConnection": "與伺服器的連線已中斷。",

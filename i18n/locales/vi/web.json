@@ -1714,6 +1714,8 @@
     "showLag": "Hiện độ trễ",
     "hideLag": "Ẩn độ trễ",
     "stop": "Dừng chơi",
+    "holdToLeave": "Giữ {{buttons}} để thoát",
+    "keepHolding": "Tiếp tục giữ để thoát",
     "starting": "Đang khởi động…",
     "back": "Quay lại",
     "lostConnection": "Mất kết nối với máy chủ.",

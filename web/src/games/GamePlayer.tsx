@@ -3,7 +3,10 @@ import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ApiError } from '../api'
 import { Button } from '../components/ui'
-import { startGame, type GameStream, type Lag } from './stream'
+import { comboName, startGame, type GameStream, type Lag } from './stream'
+
+/** How long the hint on leaving stays up once a game starts. */
+const HINT_MS = 6000
 
 /**
  * A game streamed from the server, full screen: a file picked on the Games
@@ -42,6 +45,16 @@ export function GamePlayer({
   // picture paused until there is one.
   const [blocked, setBlocked] = useState(false)
   const [showLag, setShowLag] = useState(itemId === undefined)
+  // Holding Select and Start together leaves (see stream.ts); a hint says
+  // so for a moment, small and out of the game's way.
+  const [holding, setHolding] = useState(0)
+  const [hint, setHint] = useState(true)
+  const close = useRef(onClose)
+  close.current = onClose
+  useEffect(() => {
+    const timer = setTimeout(() => setHint(false), HINT_MS)
+    return () => clearTimeout(timer)
+  }, [])
   // A PC game takes the keyboard and mouse as they are.
   const pcGame = hostApp !== undefined || !!steam
 
@@ -64,6 +77,8 @@ export function GamePlayer({
       onEnd: (err) => {
         if (err) setError(t('games.lostConnection'))
       },
+      onHolding: setHolding,
+      onLeave: () => close.current(),
     })
       .then((s) => {
         if (cancelled) s.stop()
@@ -132,6 +147,19 @@ export function GamePlayer({
                 {t('games.back')}
               </Button>
             </div>
+          </div>
+        )}
+        {!error && !starting && (holding > 0 || (hint && (!pcGame || lag.controller))) && (
+          <div
+            role="status"
+            className={`pointer-events-none absolute start-1/2 top-3 flex -translate-x-1/2 flex-col items-center gap-1.5 rounded-full bg-black/45 px-3 py-1.5 text-xs rtl:translate-x-1/2 ${holding > 0 ? 'opacity-95' : 'opacity-70'}`}
+          >
+            <span>{holding > 0 ? t('games.keepHolding') : t('games.holdToLeave', { buttons: lag.controller ? comboName(lag.controller) : 'Shift + Enter' })}</span>
+            {holding > 0 && (
+              <span className="h-0.5 w-28 overflow-hidden rounded bg-white/25">
+                <span className="block h-full bg-white" style={{ width: `${Math.round(holding * 100)}%` }} />
+              </span>
+            )}
           </div>
         )}
         {showLag && !error && !starting && (

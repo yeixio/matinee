@@ -51,6 +51,7 @@
     "orType": "或者输入它的地址：",
     "addressHint": "你在浏览器中打开它时用的地址。",
     "noneFound": "在此网络中找不到服务器。请输入你在浏览器中打开 Matinee 时用的地址。",
+    "notAddress": "“{{text}}”不是服务器地址。请先输入你的服务器地址，例如 matinee.example.com。之后再用用户名和密码登录。",
     "connect": "连接",
     "stillLooking": "仍在寻找。如果找到你的服务器，会显示在这里。",
     "connectTo": "连接到 {{name}}",
@@ -703,7 +704,9 @@
     "controller": "{{name}} 已连接",
     "connectController": "连接游戏手柄即可开始游戏",
     "pairHint": "在电视的蓝牙设置中配对手柄，然后按手柄上的任意按钮。",
-    "leaveHint": "按遥控器上的返回键停止",
+    "holdToLeave": "按住 {{buttons}} 退出",
+    "keepHolding": "继续按住以退出",
+    "pressAgain": "再按一次退出",
     "fact": {
       "system": "平台",
       "region": "地区",

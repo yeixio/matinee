@@ -1728,6 +1728,8 @@
     "showLag": "Gecikmeyi göster",
     "hideLag": "Gecikmeyi gizle",
     "stop": "Oynamayı bırak",
+    "holdToLeave": "Çıkmak için {{buttons}} basılı tutun",
+    "keepHolding": "Çıkmak için basılı tutmaya devam edin",
     "starting": "Başlatılıyor…",
     "back": "Geri",
     "lostConnection": "Sunucuyla bağlantı koptu.",

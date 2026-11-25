@@ -51,6 +51,7 @@
     "orType": "Oppure digita il suo indirizzo:",
     "addressHint": "L’indirizzo con cui lo apri in un browser.",
     "noneFound": "Non abbiamo trovato server su questa rete. Digita l’indirizzo con cui apri Matinee in un browser.",
+    "notAddress": "«{{text}}» non è l'indirizzo di un server. Scrivi prima l'indirizzo del tuo server, ad esempio matinee.example.com. Poi accederai con nome utente e password.",
     "connect": "Collega",
     "stillLooking": "Sto ancora cercando. Se il tuo server compare, apparirà qui.",
     "connectTo": "Connetti a {{name}}",
@@ -717,7 +718,9 @@
     "controller": "{{name}} connesso",
     "connectController": "Collega un controller per giocare",
     "pairHint": "Abbina un controller nelle impostazioni Bluetooth del televisore, poi premi un tasto qualsiasi.",
-    "leaveHint": "Premi Indietro sul telecomando per uscire",
+    "holdToLeave": "Tieni premuto {{buttons}} per uscire",
+    "keepHolding": "Continua a tenere premuto per uscire",
+    "pressAgain": "Premi di nuovo per uscire",
     "fact": {
       "system": "Sistema",
       "region": "Regione",

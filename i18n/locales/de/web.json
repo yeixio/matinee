@@ -1728,6 +1728,8 @@
     "showLag": "Verzögerung zeigen",
     "hideLag": "Verzögerung ausblenden",
     "stop": "Spiel beenden",
+    "holdToLeave": "{{buttons}} gedrückt halten zum Beenden",
+    "keepHolding": "Weiter gedrückt halten zum Beenden",
     "starting": "Wird gestartet…",
     "back": "Zurück",
     "lostConnection": "Die Verbindung zum Server ist abgebrochen.",

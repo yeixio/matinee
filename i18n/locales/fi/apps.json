@@ -51,6 +51,7 @@
     "orType": "Tai kirjoita sen osoite:",
     "addressHint": "Osoite, jolla avaat sen selaimessa.",
     "noneFound": "Tästä verkosta ei löytynyt palvelinta. Kirjoita osoite, jolla avaat Matineen selaimessa.",
+    "notAddress": "”{{text}}” ei ole palvelimen osoite. Kirjoita ensin palvelimesi osoite, esimerkiksi matinee.example.com. Kirjaudut käyttäjätunnuksella ja salasanalla sen jälkeen.",
     "connect": "Yhdistä",
     "stillLooking": "Etsitään yhä. Jos palvelimesi löytyy, se näkyy tässä.",
     "connectTo": "Yhdistä: {{name}}",
@@ -710,7 +711,9 @@
     "controller": "{{name}} yhdistetty",
     "connectController": "Yhdistä peliohjain pelataksesi",
     "pairHint": "Pariliitä ohjain television Bluetooth-asetuksissa ja paina mitä tahansa sen painiketta.",
-    "leaveHint": "Lopeta painamalla kaukosäätimen Takaisin-painiketta",
+    "holdToLeave": "Poistu pitämällä {{buttons}} pohjassa",
+    "keepHolding": "Pidä edelleen pohjassa poistuaksesi",
+    "pressAgain": "Poistu painamalla uudelleen",
     "fact": {
       "system": "Järjestelmä",
       "region": "Alue",

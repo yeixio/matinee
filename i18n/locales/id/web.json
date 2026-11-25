@@ -1714,6 +1714,8 @@
     "showLag": "Tampilkan jeda",
     "hideLag": "Sembunyikan jeda",
     "stop": "Berhenti main",
+    "holdToLeave": "Tahan {{buttons}} untuk keluar",
+    "keepHolding": "Terus tahan untuk keluar",
     "starting": "Memulai…",
     "back": "Kembali",
     "lostConnection": "Koneksi ke server terputus.",

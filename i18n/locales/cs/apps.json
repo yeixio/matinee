@@ -51,6 +51,7 @@
     "orType": "Nebo zadejte jeho adresu:",
     "addressHint": "Adresa, na které ho otevíráte v prohlížeči.",
     "noneFound": "V této síti jsme nenašli žádný server. Zadejte adresu, na které otevíráte Matinee v prohlížeči.",
+    "notAddress": "„{{text}}“ není adresa serveru. Nejdřív zadej adresu svého serveru, například matinee.example.com. Uživatelské jméno a heslo zadáš potom.",
     "connect": "Připojit",
     "stillLooking": "Stále hledáme. Pokud se váš server objeví, uvidíte ho tady.",
     "connectTo": "Připojit k {{name}}",
@@ -724,7 +725,9 @@
     "controller": "{{name}} připojen",
     "connectController": "Pro hraní připojte herní ovladač",
     "pairHint": "Spárujte ovladač v nastavení Bluetooth televize a stiskněte na něm libovolné tlačítko.",
-    "leaveHint": "Hru ukončíte tlačítkem Zpět na ovladači",
+    "holdToLeave": "Pro odchod podržte {{buttons}}",
+    "keepHolding": "Pro odchod držte dál",
+    "pressAgain": "Pro odchod stiskněte znovu",
     "fact": {
       "system": "Systém",
       "region": "Region",

@@ -51,6 +51,7 @@
     "orType": "Eller skriv adressen:",
     "addressHint": "Adressen, du åbner den på i en browser.",
     "noneFound": "Vi kunne ikke finde en server på dette netværk. Skriv adressen, du åbner Matinee på i en browser.",
+    "notAddress": "“{{text}}” er ikke en serveradresse. Skriv først din servers adresse, fx matinee.example.com. Du logger ind med brugernavn og adgangskode bagefter.",
     "connect": "Forbind",
     "stillLooking": "Leder stadig. Hvis din server dukker op, vises den her.",
     "connectTo": "Forbind til {{name}}",
@@ -710,7 +711,9 @@
     "controller": "{{name}} tilsluttet",
     "connectController": "Tilslut en spilcontroller for at spille",
     "pairHint": "Par en controller i tv'ets Bluetooth-indstillinger, og tryk på en knap på den.",
-    "leaveHint": "Tryk på Tilbage på fjernbetjeningen for at stoppe",
+    "holdToLeave": "Hold {{buttons}} nede for at forlade",
+    "keepHolding": "Bliv ved med at holde for at forlade",
+    "pressAgain": "Tryk igen for at forlade",
     "fact": {
       "system": "System",
       "region": "Region",

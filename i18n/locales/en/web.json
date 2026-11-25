@@ -1728,6 +1728,8 @@
     "showLag": "Show lag",
     "hideLag": "Hide lag",
     "stop": "Stop playing",
+    "holdToLeave": "Hold {{buttons}} to leave",
+    "keepHolding": "Keep holding to leave",
     "starting": "Starting…",
     "back": "Back",
     "lostConnection": "Lost the connection to the server.",

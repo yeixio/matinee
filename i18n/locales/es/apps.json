@@ -51,6 +51,7 @@
     "orType": "O escribe su dirección:",
     "addressHint": "La dirección con la que lo abres en un navegador.",
     "noneFound": "No encontramos ningún servidor en esta red. Escribe la dirección con la que abres Matinee en un navegador.",
+    "notAddress": "«{{text}}» no es la dirección de un servidor. Escribe primero la dirección de tu servidor, como matinee.example.com. Después iniciarás sesión con tu usuario y contraseña.",
     "connect": "Conectar",
     "stillLooking": "Seguimos buscando. Si aparece tu servidor, se mostrará aquí.",
     "connectTo": "Conectar con {{name}}",
@@ -717,7 +718,9 @@
     "controller": "{{name}} conectado",
     "connectController": "Conecta un mando para jugar",
     "pairHint": "Empareja un mando en los ajustes de Bluetooth del televisor y pulsa cualquier botón.",
-    "leaveHint": "Pulsa Atrás en el mando a distancia para salir",
+    "holdToLeave": "Mantén {{buttons}} para salir",
+    "keepHolding": "Sigue manteniendo para salir",
+    "pressAgain": "Pulsa otra vez para salir",
     "fact": {
       "system": "Sistema",
       "region": "Región",

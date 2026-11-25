@@ -1728,6 +1728,8 @@
     "showLag": "Vis forsinkelse",
     "hideLag": "Skjul forsinkelse",
     "stop": "Slutt å spille",
+    "holdToLeave": "Hold inne {{buttons}} for å avslutte",
+    "keepHolding": "Fortsett å holde for å avslutte",
     "starting": "Starter…",
     "back": "Tilbake",
     "lostConnection": "Mistet forbindelsen til serveren.",

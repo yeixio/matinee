@@ -1742,6 +1742,8 @@
     "showLag": "Mostrar retraso",
     "hideLag": "Ocultar retraso",
     "stop": "Dejar de jugar",
+    "holdToLeave": "Mantén {{buttons}} para salir",
+    "keepHolding": "Sigue manteniendo para salir",
     "starting": "Iniciando…",
     "back": "Volver",
     "lostConnection": "Se perdió la conexión con el servidor.",
