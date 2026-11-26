@@ -355,6 +355,18 @@ func TestPlay(t *testing.T) {
 	if !gotA || !gotUp {
 		t.Fatalf("the console didn't get the controller (A %v, up %v)", gotA, gotUp)
 	}
+	// The controller is added last, once the player's is there.
+	f.mu.Lock()
+	var last string
+	for _, c := range f.controls {
+		if strings.Contains(c, "gamepadChanged") {
+			last = c
+		}
+	}
+	f.mu.Unlock()
+	if !strings.Contains(last, `"wasAdded":true`) {
+		t.Errorf("last controller change = %s", last)
+	}
 	f.mu.Lock()
 	first := f.inputs[0]
 	f.mu.Unlock()

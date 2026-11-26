@@ -55,6 +55,9 @@ type Stream struct {
 	frames     []frameTimes
 	seq        uint32
 	inputOn    bool
+	padOn      bool // the console has been told the controller is there
+	sendErr    bool // a failed input send has been logged
+	seen       map[byte]bool
 	videoSSRC  uint32
 	lastKeyReq time.Time
 
@@ -310,7 +313,10 @@ func (s *Stream) onMessage(m webrtc.DataChannelMessage) {
 	case "HandshakeAck":
 		s.readyOnce.Do(func() {
 			s.send(s.control, map[string]string{"message": "authorizationRequest", "accessKey": "4BDB3609-C1F1-4195-9B37-FEFF45DA8B8E"})
-			for _, added := range []bool{true, false, true} {
+			// As xbox.com's player does: add and take out the first
+			// controller with the authorization, then add it for real
+			// once the player's controller is there (addPad).
+			for _, added := range []bool{true, false} {
 				s.send(s.control, map[string]any{"message": "gamepadChanged", "gamepadIndex": 0, "wasAdded": added})
 			}
 			s.input.Send(clientMetadata(time.Since(s.start)))
@@ -358,6 +364,17 @@ func (s *Stream) complete(id string, content any) {
 // which isn't passed on.
 func (s *Stream) onInput(m webrtc.DataChannelMessage) {
 	b := m.Data
+	if len(b) > 0 {
+		s.mu.Lock()
+		if s.seen == nil {
+			s.seen = map[byte]bool{}
+		}
+		if !s.seen[b[0]] {
+			s.seen[b[0]] = true
+			s.log.Info("Xbox input report", "kind", b[0], "bytes", len(b))
+		}
+		s.mu.Unlock()
+	}
 	if len(b) >= 10 && b[0] == reportServerMetadata {
 		h, w := int(le32(b[2:])), int(le32(b[6:]))
 		s.log.Debug("Xbox picture", "width", w, "height", h)
@@ -451,6 +468,9 @@ func (s *Stream) push(kind byte, p *rtp.Packet) bool {
 func (s *Stream) inputLoop() {
 	t := time.NewTicker(16 * time.Millisecond)
 	defer t.Stop()
+	// Without a press from the player within a second, add the
+	// controller anyway, so the console has one.
+	addBy := time.Now().Add(time.Second)
 	for {
 		select {
 		case <-s.done:
@@ -458,19 +478,37 @@ func (s *Stream) inputLoop() {
 		case <-t.C:
 		}
 		s.mu.Lock()
-		if s.inputOn && len(s.frames) > 0 {
+		if s.inputOn && !s.padOn && time.Now().After(addBy) {
+			s.addPad()
+		}
+		if s.inputOn && (s.padOn || len(s.frames) > 0) {
 			s.sendReport()
 		}
 		s.mu.Unlock()
 	}
 }
 
-// sendReport sends what's queued and the controller; s.mu is held.
+// addPad tells the console the first controller is there; s.mu is held.
+func (s *Stream) addPad() {
+	s.padOn = true
+	s.send(s.control, map[string]any{"message": "gamepadChanged", "gamepadIndex": 0, "wasAdded": true})
+	s.log.Info("Xbox controller added")
+}
+
+// sendReport sends what's queued and, once added, the controller, as
+// xbox.com's player does every 16 ms; s.mu is held.
 func (s *Stream) sendReport() {
 	s.seq++
-	b := report(s.seq, time.Since(s.start), s.frames, s.pad.frame())
+	var gamepad []byte
+	if s.padOn {
+		gamepad = s.pad.frame()
+	}
+	b := report(s.seq, time.Since(s.start), s.frames, gamepad)
 	s.frames = s.frames[:0]
-	s.input.Send(b)
+	if err := s.input.Send(b); err != nil && !s.sendErr {
+		s.sendErr = true
+		s.log.Warn("Xbox input not sent", "err", err, "state", s.input.ReadyState().String())
+	}
 }
 
 // keepalive keeps the session going on Microsoft's side.
@@ -513,7 +551,14 @@ func (s *Stream) Next() (byte, *rtp.Packet, error) {
 func (s *Stream) Input(b []byte) {
 	s.mu.Lock()
 	defer s.mu.Unlock()
-	if s.pad.apply(b) && s.inputOn {
+	changed := s.pad.apply(b)
+	if !s.inputOn {
+		return
+	}
+	if !s.padOn {
+		s.addPad()
+	}
+	if changed {
 		s.sendReport()
 	}
 }
