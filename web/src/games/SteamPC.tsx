@@ -19,9 +19,11 @@ function errorText(e: unknown, fallback: string) {
  * Sunshine on it; a Steam container is set up on the server, so it only
  * says whether there is one and points to the guide. Hidden when the
  * server can't play a PC (no matinee-pcremote) or for someone who isn't an
- * admin.
+ * admin. At the top of a Games library (unsetOnly) it shows only while
+ * neither way is set up, so an admin finds where to start; once Steam can
+ * be played, the Steam button there takes its place.
  */
-export function SteamSetup() {
+export function SteamSetup({ unsetOnly = false }: { unsetOnly?: boolean }) {
   const { t } = useTranslation()
   const qc = useQueryClient()
   const setup = useQuery({
@@ -42,6 +44,7 @@ export function SteamSetup() {
 
   const data = setup.data
   if (!data?.available) return null
+  if (unsetOnly && (data.pc || data.container || data.pairing?.state === 'paired')) return null
   return (
     <section className="space-y-3">
       <h2 className="text-lg font-semibold">{t('games.steampc.title')}</h2>

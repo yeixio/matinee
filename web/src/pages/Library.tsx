@@ -11,6 +11,7 @@ import { SkippedFiles } from '../components/SkippedFiles'
 import { PCGames } from '../games/PCGames'
 import { PlayStation } from '../games/PlayStation'
 import { Xbox } from '../games/Xbox'
+import { SteamSetup } from '../games/SteamPC'
 import { LibraryIcon, useLibraries } from '../components/Shell'
 import { Button, EmptyState } from '../components/ui'
 import Books from './Books'
@@ -79,6 +80,8 @@ function Titles({ id, lib }: { id: number; lib?: LibraryInfo }) {
       <SkippedFiles skipped={lib?.skipped} />
       {/* Steam on the game host, when there is one, beside the library's own games. */}
       {lib?.kind === 'games' && !filtered && <PCGames />}
+      {/* Where to set Steam up, for an admin, while it isn't. */}
+      {lib?.kind === 'games' && !filtered && <SteamSetup unsetOnly />}
       {lib?.kind === 'games' && !filtered && <PlayStation />}
       {lib?.kind === 'games' && !filtered && <Xbox />}
       {/* Collections pinned to this library, while no filter is on. */}

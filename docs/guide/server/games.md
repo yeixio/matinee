@@ -288,7 +288,7 @@ Steam's own Remote Play only streams to Valve's Steam Link app, so Matinee can't
 
 1. **On the PC**, install Sunshine from [its download page](https://app.lizardbyte.dev/Sunshine/) and start it. Open its page in a browser on the PC, at `https://localhost:47990`, and pick a username and password. Sunshine adds **Steam Big Picture** to its applications on its own; if it's missing, add an application that runs `steam://open/bigpicture` (on Windows) or `steam steam://open/bigpicture` (on Linux) and name it "Steam Big Picture".
 2. Make sure Steam is installed and signed in on the PC, with the games you want installed. Give the PC a fixed IP address in your router, so Matinee always finds it.
-3. **In Matinee**, open **Games** in the web app. Under **Steam**, in **On a PC you already play Steam on**, enter the PC's address (such as `192.168.1.30`, or `192.168.1.30:48989` if you changed Sunshine's port) and choose **Pair**.
+3. **In Matinee**, as an admin in the web app, open your Games library: until Steam is set up, the **Steam** setup is at its top. It's also on the **Games** page, from **Settings → Streaming → Games → Open games**. Under **Steam**, in **On a PC you already play Steam on**, enter the PC's address (such as `192.168.1.30`, or `192.168.1.30:48989` if you changed Sunshine's port) and choose **Pair**.
 4. Matinee shows a 4-digit PIN. On the PC, in Sunshine's page, open **PIN**, type that PIN and a name such as "Matinee", and send it. **Open Sunshine's PIN page** opens it for you from a computer that can reach the PC. Matinee waits up to 3 minutes, then shows the PC as paired.
 
 ![Steam on the Games page: pairing with a PC, showing the PIN to type into Sunshine, beside the Steam container way](../images/steam-pc.webp)
