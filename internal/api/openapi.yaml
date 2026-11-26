@@ -1378,6 +1378,54 @@ paths:
       responses:
         "204": { description: Sent. A PS5 takes about 20 seconds to come on. }
         "404": { description: No such console. }
+  /games/xbox:
+    get:
+      summary: Xbox remote play, the signed-in account's consoles and whether each is on (admins only, preview)
+      description: >-
+        Matinee plays an Xbox Series X|S or Xbox One that has remote play on and streams it like any game: start it
+        with POST /games/play and xbox set to a console's id. Microsoft's servers start the session; the picture then
+        comes straight from the console. Not made or endorsed by Microsoft.
+      responses:
+        "200":
+          description: The setup.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  available: { type: boolean, description: Whether this server can play an Xbox. }
+                  signedIn: { type: boolean, description: Whether Matinee is signed in to an Xbox account. }
+                  gamertag: { type: string }
+                  signIn:
+                    type: object
+                    description: A sign-in waiting for the admin.
+                    properties:
+                      code: { type: string, description: The code to type at url. }
+                      url: { type: string, description: "Microsoft's page, microsoft.com/link." }
+                      expires: { type: string, format: date-time }
+                  signInError: { type: string, description: Why the last sign-in didn't finish. }
+                  error: { type: string, description: Why the consoles couldn't be listed. }
+                  consoles:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id: { type: string }
+                        name: { type: string }
+                        type: { type: string, description: "XboxSeriesX, XboxSeriesS, XboxOne, XboxOneS or XboxOneX." }
+                        state: { type: string, enum: [ready, standby, "off"], description: "On, in Sleep (remote play wakes it), or off." }
+  /games/xbox/signin:
+    post:
+      summary: Start signing in to Xbox (admins only, preview)
+      description: Returns a code for the admin to type at microsoft.com/link. Matinee waits for them and keeps only the sign-in's refresh token, on the server.
+      responses:
+        "200": { description: "The code, as signIn in GET /games/xbox." }
+        "502": { description: "Microsoft didn't answer." }
+  /games/xbox/account:
+    delete:
+      summary: Sign Matinee out of Xbox (admins only)
+      responses:
+        "204": { description: Signed out. }
   /games/steampc:
     get:
       summary: Steam on a PC you already have, through Sunshine (admins only, preview)
@@ -1474,6 +1522,7 @@ paths:
                 hostApp: { type: integer, description: "Play this PC game on the game host instead (preview), by its Steam app id; see GET /games/host." }
                 steam: { type: boolean, description: "Play Steam itself, full screen in Big Picture, where the player picks games with the controller (preview): on the paired Steam PC (GET /games/steampc), or else on the game host." }
                 playstation: { type: string, description: "Play a paired PlayStation instead (preview), by its id; see GET /games/playstation. It's woken first if it's resting, so this can take a minute. Select presses the touchpad and Select with Start the PS button." }
+                xbox: { type: string, description: "Play a console of the signed-in Xbox account instead (preview), by its id; see GET /games/xbox. One in Sleep wakes first, so this can take a minute. Select is View, Start is Menu, and Select with Start the Xbox button." }
                 offer: { type: string, description: The player's SDP offer. }
                 direct: { type: boolean, description: "With no offer: the WebSocket stream instead of WebRTC (see POST /items/{id}/game)." }
       responses:

@@ -746,6 +746,15 @@
       "stateReady": "Đang bật",
       "stateStandby": "Chế độ nghỉ",
       "stateOff": "Không phản hồi"
+    },
+    "xbox": {
+      "title": "Xbox",
+      "hint": "Chơi Xbox Series X|S hoặc Xbox One của bạn từ đây, bằng tính năng chơi từ xa. Máy chủ của Microsoft khởi động luồng; sau đó hình ảnh đến thẳng từ máy qua mạng gia đình của bạn. Không do Microsoft tạo hoặc xác nhận.",
+      "starting": "Đang đánh thức Xbox và bắt đầu chơi từ xa. Có thể mất một phút.",
+      "buttons": "Select là View, Start là Menu, Select và Start là nút Xbox",
+      "stateReady": "Bật",
+      "stateStandby": "Ngủ",
+      "stateOff": "Tắt"
     }
   }
 }

@@ -311,5 +311,6 @@
   "text_is_required": "text diperlukan",
   "sign_in_to_playstation_first": "log masuk ke PlayStation dahulu",
   "this_server_cant_play_games_on_a_pc": "pelayan ini tidak boleh bermain pada PC",
-  "this_server_cant_play_playstation_games": "pelayan ini tidak boleh memainkan permainan PlayStation"
+  "this_server_cant_play_playstation_games": "pelayan ini tidak boleh memainkan permainan PlayStation",
+  "this_server_cant_play_xbox_games": "pelayan ini tidak boleh memainkan permainan Xbox"
 }

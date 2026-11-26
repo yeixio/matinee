@@ -341,3 +341,28 @@ Server 0.2.10 left the PlayStation bridge out of its builds by mistake, so PlayS
 | --- | --- | --- |
 | `MATINEE_PSREMOTE` | `/usr/lib/matinee/psremote/matinee-psremote` in the image | Where the PlayStation bridge is; `off` to not offer PlayStation. |
 <!-- /since -->
+
+<!-- since: v0.2.11 -->
+## Xbox remote play (preview)
+
+Matinee can also play your own Xbox Series X|S or Xbox One, with the console's remote play, the way the Xbox app does. The game runs on the console. Matinee receives its picture and sound and streams them to your player like any other game, and your controller works as the console's controller.
+
+Microsoft's servers start each session and tell the console and the Matinee server how to reach each other, as they do for the Xbox app. The picture and sound then come straight from the console to the Matinee server on your home network, and on to your player. Matinee talks to the remote play servers the way xbox.com's own player does; it isn't made or endorsed by Microsoft. It needs nothing else installed: every Matinee server has it.
+
+### Setting it up
+
+1. On the Xbox, open **Settings → Devices & connections → Remote features** and turn on **Enable remote features**. Under **Power options**, choose **Sleep**, so remote play can turn the console on. Stay signed in on the console with the account you'll use.
+2. An admin signs Matinee in once, from **Games** in the web app, under **Xbox**: choose **Sign in**, then open [microsoft.com/link](https://www.microsoft.com/link) on any phone or computer, type the code Matinee shows and sign in with the Microsoft account your Xbox uses. Matinee keeps the sign-in on your server so it can start remote play later; it never sees your password. **Sign out of Xbox** forgets it.
+
+The account's consoles that have remote features on then show under **Xbox**, with whether each is on, asleep or off.
+
+### Playing
+
+Choose **Play** next to the console. One that's asleep wakes first, so starting can take up to a minute. The Xbox streams at 1080p and 60 frames a second.
+
+Your controller's buttons are where they are on an Xbox controller: the bottom face button is A, the right one B. **Select** is **View**, **Start** is **Menu**, and **Select** and **Start** together press the **Xbox** button. With a keyboard, the keys stand in for a controller as they do for console games.
+
+Only one person can play a console at a time, and not while the Xbox app or xbox.com is streaming from it. The Matinee server has to reach the console directly, so both need to be on the same home network. Closing the player ends remote play; the game keeps running on the console.
+
+From app 1.0.50, the iPhone, iPad and Android apps, Apple TV, Android TV, Fire TV, and Samsung and LG TVs play the account's consoles too: they're at the top of each Games library, under **Xbox**, beside PC games and PlayStation. As in the web app, only admins see them. Signing in stays in the web app.
+<!-- /since -->

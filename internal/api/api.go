@@ -52,6 +52,7 @@ import (
 	"github.com/yeixio/matinee/internal/together"
 	"github.com/yeixio/matinee/internal/update"
 	"github.com/yeixio/matinee/internal/version"
+	"github.com/yeixio/matinee/internal/xboxremote"
 )
 
 type Server struct {
@@ -124,6 +125,10 @@ type Server struct {
 	// SteamPC plays Steam on a gaming PC running Sunshine (see
 	// steampc.go).
 	SteamPC *pcremote.Bridge
+	// Xbox plays the consoles of the Xbox account an admin signs in with
+	// (see xbox.go); nil when this server can't.
+	Xbox        *xboxremote.Client
+	xboxPending xboxSignIn
 
 	// Remote keeps remote access going (see remote.go); nil when this
 	// server doesn't offer it.
@@ -570,7 +575,7 @@ func (s *Server) Handler() http.Handler {
 		w.Write([]byte("ok"))
 	})
 
-	for _, rt := range append(append(append(s.routes(), s.liveRoutes()...), s.gameRoutes()...), append(s.playStationRoutes(), s.steamPCRoutes()...)...) {
+	for _, rt := range append(append(append(s.routes(), s.liveRoutes()...), s.gameRoutes()...), append(append(s.playStationRoutes(), s.steamPCRoutes()...), s.xboxRoutes()...)...) {
 		var h http.Handler = rt.handler
 		if rt.access != public {
 			h = s.requireUser(rt.handler, rt.access)

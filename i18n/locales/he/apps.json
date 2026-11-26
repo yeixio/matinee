@@ -760,6 +760,15 @@
       "stateReady": "פועלת",
       "stateStandby": "מצב מנוחה",
       "stateOff": "לא עונה"
+    },
+    "xbox": {
+      "title": "Xbox",
+      "hint": "שחקו ב-Xbox Series X|S או Xbox One מכאן, עם המשחק מרחוק שלו. השרתים של Microsoft מתחילים את השידור, ואז התמונה מגיעה ישירות מהקונסולה דרך הרשת הביתית. לא נוצר או אושר על ידי Microsoft.",
+      "starting": "מעיר את ה-Xbox ומתחיל משחק מרחוק. זה יכול לקחת דקה.",
+      "buttons": "Select הוא תצוגה, Start הוא תפריט, Select ו-Start כפתור ה-Xbox",
+      "stateReady": "פועל",
+      "stateStandby": "שינה",
+      "stateOff": "כבוי"
     }
   }
 }

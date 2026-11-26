@@ -8,6 +8,7 @@ import { Button } from '../components/ui'
 import { GamePlayer } from '../games/GamePlayer'
 import { PCGames } from '../games/PCGames'
 import { PlayStation } from '../games/PlayStation'
+import { Xbox } from '../games/Xbox'
 import { SteamSetup } from '../games/SteamPC'
 
 /**
@@ -60,6 +61,7 @@ export default function Games() {
       <SteamSetup />
 
       <PlayStation />
+      <Xbox />
 
       <section className="space-y-2">
         <h2 className="text-lg font-semibold">{t('games.pickGame')}</h2>

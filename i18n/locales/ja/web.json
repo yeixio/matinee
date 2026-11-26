@@ -1784,6 +1784,25 @@
       "starting": "PlayStationを起動してRemote Playを開始しています。1分ほどかかることがあります。",
       "buttons": "Selectはタッチパッド、SelectとStartの同時押しはPSボタン"
     },
+    "xbox": {
+      "title": "Xbox",
+      "hint": "Xbox Series X|SやXbox Oneをここから、リモートプレイで遊べます。Microsoftのサーバーがストリームを始め、そのあと映像は家のネットワーク経由で本体から直接届きます。Microsoftが作成または承認したものではありません。",
+      "signInTitle": "Xboxにサインイン",
+      "signInHint": "Xboxで使っているMicrosoftアカウントでサインインします。Matineeはサインインをサーバーに保存し、パスワードは保存しません。",
+      "signIn": "サインイン",
+      "codeHint": "スマホやパソコンで{{url}}を開き、このコードを入力してください:",
+      "openLink": "microsoft.com/linkを開く",
+      "waiting": "サインインを待っています…",
+      "setupHint": "Xboxで「設定」→「デバイスと接続」→「リモート機能」→「リモート機能を有効にする」をオンにし、Matineeが起動できるよう電源オプションをスリープにしてください。",
+      "noConsoles": "このアカウントにリモート機能がオンのXboxが見つかりませんでした。",
+      "signedInAs": "{{name}}としてサインイン中",
+      "stateReady": "オン",
+      "stateStandby": "スリープ",
+      "stateOff": "オフ",
+      "signOut": "Xboxからサインアウト",
+      "starting": "Xboxを起動してリモートプレイを始めています。1分ほどかかることがあります。",
+      "buttons": "Selectがビュー、Startがメニュー、SelectとStartでXboxボタン"
+    },
     "steampc": {
       "title": "Steam",
       "hint": "Steam ボタンは、2 つの方法のどちらかで Steam の Big Picture を起動します。合う方を設定してください。",

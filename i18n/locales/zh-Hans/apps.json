@@ -746,6 +746,15 @@
       "stateReady": "已开机",
       "stateStandby": "待机模式",
       "stateOff": "无响应"
+    },
+    "xbox": {
+      "title": "Xbox",
+      "hint": "在这里通过远程游玩来玩你的 Xbox Series X|S 或 Xbox One。Microsoft 的服务器启动串流，之后画面通过家庭网络直接从主机传来。并非由 Microsoft 制作或认可。",
+      "starting": "正在唤醒 Xbox 并启动远程游玩，可能需要一分钟。",
+      "buttons": "Select 是视图键，Start 是菜单键，Select 加 Start 是 Xbox 按钮",
+      "stateReady": "开启",
+      "stateStandby": "睡眠",
+      "stateOff": "关闭"
     }
   }
 }

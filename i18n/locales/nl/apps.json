@@ -753,6 +753,15 @@
       "stateReady": "Aan",
       "stateStandby": "Rustmodus",
       "stateOff": "Antwoordt niet"
+    },
+    "xbox": {
+      "title": "Xbox",
+      "hint": "Speel je Xbox Series X|S of Xbox One vanaf hier, met zijn op afstand spelen. De servers van Microsoft starten de stream; het beeld komt daarna rechtstreeks van de console via je thuisnetwerk. Niet gemaakt of goedgekeurd door Microsoft.",
+      "starting": "De Xbox wordt gewekt en op afstand spelen gestart. Dit kan een minuut duren.",
+      "buttons": "Select is Weergave, Start is Menu, Select en Start de Xbox-knop",
+      "stateReady": "Aan",
+      "stateStandby": "Slaapstand",
+      "stateOff": "Uit"
     }
   }
 }

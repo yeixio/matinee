@@ -311,5 +311,6 @@
   "text_is_required": "必须提供 text",
   "sign_in_to_playstation_first": "请先登录 PlayStation",
   "this_server_cant_play_games_on_a_pc": "此服务器无法在电脑上玩游戏",
-  "this_server_cant_play_playstation_games": "此服务器无法运行 PlayStation 游戏"
+  "this_server_cant_play_playstation_games": "此服务器无法运行 PlayStation 游戏",
+  "this_server_cant_play_xbox_games": "此服务器无法运行 Xbox 游戏"
 }

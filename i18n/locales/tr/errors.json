@@ -311,5 +311,6 @@
   "text_is_required": "text gereklidir",
   "sign_in_to_playstation_first": "önce PlayStation'a giriş yap",
   "this_server_cant_play_games_on_a_pc": "bu sunucu bir bilgisayarda oyun oynatamıyor",
-  "this_server_cant_play_playstation_games": "bu sunucu PlayStation oyunlarını oynatamaz"
+  "this_server_cant_play_playstation_games": "bu sunucu PlayStation oyunlarını oynatamaz",
+  "this_server_cant_play_xbox_games": "bu sunucu Xbox oyunlarını oynatamaz"
 }

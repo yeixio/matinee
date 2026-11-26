@@ -1590,6 +1590,32 @@ export interface PlayStationSetup {
   consoles: PlayStationConsole[]
 }
 
+/** An Xbox on the signed-in account, with remote features on. */
+export interface XboxConsole {
+  id: string
+  name: string
+  /** XboxSeriesX, XboxSeriesS, XboxOne, XboxOneS or XboxOneX. */
+  type: string
+  state: 'ready' | 'standby' | 'off'
+}
+
+/** A sign-in waiting for the admin at microsoft.com/link. */
+export interface XboxSignIn {
+  code: string
+  url: string
+  expires: string
+}
+
+export interface XboxSetup {
+  available: boolean
+  signedIn?: boolean
+  gamertag?: string
+  signIn?: XboxSignIn
+  signInError?: string
+  error?: string
+  consoles: XboxConsole[]
+}
+
 /** A gaming PC running Sunshine, which the Steam button plays (preview). */
 export interface SteamPC {
   name: string
@@ -1636,7 +1662,10 @@ export const api = {
   pairPlayStation: (body: { host: string; ps5: boolean; pin: string }) => request<PlayStationConsole>('POST', '/api/v1/games/playstation/consoles', body),
   removePlayStation: (id: string) => request<void>('DELETE', `/api/v1/games/playstation/consoles/${id}`),
   wakePlayStation: (id: string) => request<void>('POST', `/api/v1/games/playstation/consoles/${id}/wake`),
-  playGame: (body: { path?: string; lagTest?: boolean; hostApp?: number; steam?: boolean; playstation?: string; offer: string }) =>
+  xbox: () => request<XboxSetup>('GET', '/api/v1/games/xbox'),
+  signInXbox: () => request<XboxSignIn>('POST', '/api/v1/games/xbox/signin'),
+  signOutXbox: () => request<void>('DELETE', '/api/v1/games/xbox/account'),
+  playGame: (body: { path?: string; lagTest?: boolean; hostApp?: number; steam?: boolean; playstation?: string; xbox?: string; offer: string }) =>
     request<{ id: string; answer: string; system: string; analog?: boolean; width: number; height: number; aspect: number; fps: number }>(
       'POST',
       '/api/v1/games/play',

@@ -753,6 +753,15 @@
       "stateReady": "Tændt",
       "stateStandby": "Hviletilstand",
       "stateOff": "Svarer ikke"
+    },
+    "xbox": {
+      "title": "Xbox",
+      "hint": "Spil din Xbox Series X|S eller Xbox One herfra med dens fjernspil. Microsofts servere starter streamen; derefter kommer billedet direkte fra konsollen over dit hjemmenetværk. Ikke lavet eller godkendt af Microsoft.",
+      "starting": "Vækker din Xbox og starter fjernspil. Det kan tage et minut.",
+      "buttons": "Select er Vis, Start er Menu, Select og Start Xbox-knappen",
+      "stateReady": "Tændt",
+      "stateStandby": "Dvale",
+      "stateOff": "Slukket"
     }
   }
 }

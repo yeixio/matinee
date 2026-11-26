@@ -128,6 +128,8 @@ export interface StreamOptions {
   steam?: boolean
   /** A paired PlayStation, by its id. */
   playstation?: string
+  /** An Xbox on the signed-in account, by its id. */
+  xbox?: string
   /** Called once the server says which system plays the game. */
   onStart?: (game: { system: string; analog: boolean }) => void
   video: HTMLVideoElement
@@ -165,7 +167,7 @@ export async function startGame(o: StreamOptions): Promise<GameStream> {
   let analog = false
   try {
     const offer = pc.localDescription!.sdp
-    const res = o.itemId !== undefined ? await api.playGameItem(o.itemId, offer) : await api.playGame({ path: o.path, lagTest: o.lagTest, hostApp: o.hostApp, steam: o.steam, playstation: o.playstation, offer })
+    const res = o.itemId !== undefined ? await api.playGameItem(o.itemId, offer) : await api.playGame({ path: o.path, lagTest: o.lagTest, hostApp: o.hostApp, steam: o.steam, playstation: o.playstation, xbox: o.xbox, offer })
     id = res.id
     analog = !!res.analog
     o.onStart?.({ system: res.system, analog })

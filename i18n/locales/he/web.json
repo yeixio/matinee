@@ -1812,6 +1812,25 @@
       "starting": "מעירים את ה-PlayStation ומפעילים את Remote Play. זה יכול לקחת דקה.",
       "buttons": "Select הוא משטח המגע, ו-Select עם Start יחד הם כפתור ה-PS"
     },
+    "xbox": {
+      "title": "Xbox",
+      "hint": "שחקו ב-Xbox Series X|S או Xbox One מכאן, עם המשחק מרחוק שלו. השרתים של Microsoft מתחילים את השידור, ואז התמונה מגיעה ישירות מהקונסולה דרך הרשת הביתית. לא נוצר או אושר על ידי Microsoft.",
+      "signInTitle": "התחברות ל-Xbox",
+      "signInHint": "התחברו עם חשבון ה-Microsoft שה-Xbox שלכם משתמש בו. Matinee שומר את ההתחברות בשרת שלכם, אף פעם לא את הסיסמה.",
+      "signIn": "התחברות",
+      "codeHint": "בכל טלפון או מחשב, פתחו את {{url}} והזינו את הקוד הזה:",
+      "openLink": "פתיחת microsoft.com/link",
+      "waiting": "ממתין להתחברות שלכם…",
+      "setupHint": "ב-Xbox, הפעילו הגדרות ← מכשירים וחיבורים ← תכונות מרחוק ← הפעלת תכונות מרחוק, והגדירו את אפשרויות צריכת החשמל למצב שינה כדי ש-Matinee יוכל להעיר אותו.",
+      "noConsoles": "לא נמצא בחשבון הזה Xbox עם תכונות מרחוק מופעלות.",
+      "signedInAs": "מחובר בתור {{name}}",
+      "stateReady": "פועל",
+      "stateStandby": "שינה",
+      "stateOff": "כבוי",
+      "signOut": "התנתקות מ-Xbox",
+      "starting": "מעיר את ה-Xbox ומתחיל משחק מרחוק. זה יכול לקחת דקה.",
+      "buttons": "Select הוא תצוגה, Start הוא תפריט, Select ו-Start כפתור ה-Xbox"
+    },
     "steampc": {
       "title": "Steam",
       "hint": "כפתור Steam מפעיל את Big Picture של Steam באחת משתי דרכים. הגדירו את זו שמתאימה לכם.",

@@ -1798,6 +1798,25 @@
       "starting": "A PlayStation felébresztése és a Remote Play indítása. Ez egy percig is eltarthat.",
       "buttons": "A Select az érintőpanel, a Select és a Start együtt a PS gomb"
     },
+    "xbox": {
+      "title": "Xbox",
+      "hint": "Játssz az Xbox Series X|S vagy Xbox One konzolodon innen, a távoli játékkal. A Microsoft szerverei indítják a streamet; a kép ezután egyenesen a konzolról jön az otthoni hálózaton át. Nem a Microsoft készítette vagy hagyta jóvá.",
+      "signInTitle": "Bejelentkezés az Xboxba",
+      "signInHint": "Jelentkezz be azzal a Microsoft-fiókkal, amelyet az Xboxod használ. A Matinee a bejelentkezést a szervereden tárolja, a jelszavadat soha.",
+      "signIn": "Bejelentkezés",
+      "codeHint": "Bármilyen telefonon vagy számítógépen nyisd meg a(z) {{url}} címet, és írd be ezt a kódot:",
+      "openLink": "microsoft.com/link megnyitása",
+      "waiting": "Várakozás a bejelentkezésedre…",
+      "setupHint": "Az Xboxon kapcsold be a Beállítások → Eszközök és kapcsolatok → Távoli funkciók → Távoli funkciók engedélyezése opciót, és állítsd az energiagazdálkodást Alvó módra, hogy a Matinee fel tudja ébreszteni.",
+      "noConsoles": "Ezen a fiókon nem található Xbox bekapcsolt távoli funkciókkal.",
+      "signedInAs": "Bejelentkezve mint {{name}}",
+      "stateReady": "Be",
+      "stateStandby": "Alvó mód",
+      "stateOff": "Ki",
+      "signOut": "Kijelentkezés az Xboxból",
+      "starting": "Az Xbox ébresztése és a távoli játék indítása. Ez egy percig is eltarthat.",
+      "buttons": "A Select a Nézet, a Start a Menü, a Select és Start az Xbox gomb"
+    },
     "steampc": {
       "title": "Steam",
       "hint": "A Steam gomb kétféleképpen indíthatja a Steam Big Picture módját. Állítsd be a hozzád illőt.",

@@ -767,6 +767,15 @@
       "stateReady": "Включена",
       "stateStandby": "Режим покоя",
       "stateOff": "Не отвечает"
+    },
+    "xbox": {
+      "title": "Xbox",
+      "hint": "Играйте на Xbox Series X|S или Xbox One отсюда, через удалённую игру. Серверы Microsoft запускают трансляцию, а затем изображение идёт прямо с консоли по вашей домашней сети. Не создано и не одобрено Microsoft.",
+      "starting": "Пробуждаем Xbox и запускаем удалённую игру. Это может занять минуту.",
+      "buttons": "Select — Просмотр, Start — Меню, Select и Start — кнопка Xbox",
+      "stateReady": "Включён",
+      "stateStandby": "Сон",
+      "stateOff": "Выключен"
     }
   }
 }

@@ -1798,6 +1798,25 @@
       "starting": "Vekker PlayStation og starter Remote Play. Det kan ta et minutt.",
       "buttons": "Select er styreflaten, Select og Start sammen PS-knappen"
     },
+    "xbox": {
+      "title": "Xbox",
+      "hint": "Spill Xbox Series X|S eller Xbox One herfra, med fjernspillingen. Microsofts servere starter strømmen; deretter kommer bildet rett fra konsollen over hjemmenettverket ditt. Ikke laget eller godkjent av Microsoft.",
+      "signInTitle": "Logg på Xbox",
+      "signInHint": "Logg på med Microsoft-kontoen Xbox-en din bruker. Matinee lagrer påloggingen på serveren din, aldri passordet ditt.",
+      "signIn": "Logg på",
+      "codeHint": "Åpne {{url}} på en telefon eller datamaskin, og skriv inn denne koden:",
+      "openLink": "Åpne microsoft.com/link",
+      "waiting": "Venter på at du logger på…",
+      "setupHint": "Slå på Innstillinger → Enheter og tilkoblinger → Eksterne funksjoner → Aktiver eksterne funksjoner på Xbox-en, og sett strømalternativene til Hvilemodus så Matinee kan vekke den.",
+      "noConsoles": "Fant ingen Xbox med eksterne funksjoner på for denne kontoen.",
+      "signedInAs": "Pålogget som {{name}}",
+      "stateReady": "På",
+      "stateStandby": "Hvilemodus",
+      "stateOff": "Av",
+      "signOut": "Logg av Xbox",
+      "starting": "Vekker Xbox-en og starter fjernspilling. Dette kan ta et minutt.",
+      "buttons": "Select er Vis, Start er Meny, Select og Start Xbox-knappen"
+    },
     "steampc": {
       "title": "Steam",
       "hint": "Steam-knappen spiller Steams Big Picture på én av to måter. Sett opp den som passer deg.",

@@ -1854,6 +1854,25 @@
       "starting": "جارٍ إيقاظ PlayStation وبدء Remote Play. قد يستغرق ذلك دقيقة.",
       "buttons": "زر Select هو لوحة اللمس، وSelect مع Start معًا زر PS"
     },
+    "xbox": {
+      "title": "Xbox",
+      "hint": "العب على Xbox Series X|S أو Xbox One من هنا، باستخدام اللعب عن بُعد. تبدأ خوادم Microsoft البث، ثم تأتي الصورة مباشرة من الجهاز عبر شبكتك المنزلية. ليس من صنع Microsoft ولا بموافقتها.",
+      "signInTitle": "تسجيل الدخول إلى Xbox",
+      "signInHint": "سجّل الدخول بحساب Microsoft الذي يستخدمه جهاز Xbox. يحتفظ Matinee بتسجيل الدخول على خادمك، ولا يحتفظ بكلمة مرورك أبدًا.",
+      "signIn": "تسجيل الدخول",
+      "codeHint": "على أي هاتف أو كمبيوتر، افتح {{url}} وأدخل هذا الرمز:",
+      "openLink": "فتح microsoft.com/link",
+      "waiting": "بانتظار تسجيل دخولك…",
+      "setupHint": "على Xbox، فعّل الإعدادات ← الأجهزة والاتصالات ← الميزات عن بُعد ← تمكين الميزات عن بُعد، واضبط خيارات الطاقة على السكون ليتمكن Matinee من إيقاظه.",
+      "noConsoles": "لم يُعثر على أي Xbox مفعّل الميزات عن بُعد في هذا الحساب.",
+      "signedInAs": "تم تسجيل الدخول باسم {{name}}",
+      "stateReady": "يعمل",
+      "stateStandby": "سكون",
+      "stateOff": "متوقف",
+      "signOut": "تسجيل الخروج من Xbox",
+      "starting": "جارٍ إيقاظ Xbox وبدء اللعب عن بُعد. قد يستغرق ذلك دقيقة.",
+      "buttons": "Select هو العرض، وStart هو القائمة، وSelect مع Start زر Xbox"
+    },
     "steampc": {
       "title": "Steam",
       "hint": "يشغّل زر Steam وضع Big Picture في Steam بإحدى طريقتين. اضبط الطريقة التي تناسبك.",

@@ -1784,6 +1784,25 @@
       "starting": "Đang đánh thức PlayStation và khởi động Remote Play. Có thể mất một phút.",
       "buttons": "Select là bàn di cảm ứng, Select và Start cùng lúc là nút PS"
     },
+    "xbox": {
+      "title": "Xbox",
+      "hint": "Chơi Xbox Series X|S hoặc Xbox One của bạn từ đây, bằng tính năng chơi từ xa. Máy chủ của Microsoft khởi động luồng; sau đó hình ảnh đến thẳng từ máy qua mạng gia đình của bạn. Không do Microsoft tạo hoặc xác nhận.",
+      "signInTitle": "Đăng nhập Xbox",
+      "signInHint": "Đăng nhập bằng tài khoản Microsoft mà Xbox của bạn dùng. Matinee giữ phiên đăng nhập trên máy chủ của bạn, không bao giờ giữ mật khẩu.",
+      "signIn": "Đăng nhập",
+      "codeHint": "Trên điện thoại hoặc máy tính bất kỳ, mở {{url}} và nhập mã này:",
+      "openLink": "Mở microsoft.com/link",
+      "waiting": "Đang chờ bạn đăng nhập…",
+      "setupHint": "Trên Xbox, bật Cài đặt → Thiết bị & kết nối → Tính năng từ xa → Bật tính năng từ xa, và đặt tùy chọn nguồn thành Ngủ để Matinee có thể đánh thức máy.",
+      "noConsoles": "Không tìm thấy Xbox nào bật tính năng từ xa trên tài khoản này.",
+      "signedInAs": "Đã đăng nhập là {{name}}",
+      "stateReady": "Bật",
+      "stateStandby": "Ngủ",
+      "stateOff": "Tắt",
+      "signOut": "Đăng xuất Xbox",
+      "starting": "Đang đánh thức Xbox và bắt đầu chơi từ xa. Có thể mất một phút.",
+      "buttons": "Select là View, Start là Menu, Select và Start là nút Xbox"
+    },
     "steampc": {
       "title": "Steam",
       "hint": "Nút Steam mở Big Picture của Steam theo một trong hai cách. Hãy thiết lập cách phù hợp với bạn.",

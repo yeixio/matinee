@@ -746,6 +746,15 @@
       "stateReady": "オン",
       "stateStandby": "レストモード",
       "stateOff": "応答なし"
+    },
+    "xbox": {
+      "title": "Xbox",
+      "hint": "Xbox Series X|SやXbox Oneをここから、リモートプレイで遊べます。Microsoftのサーバーがストリームを始め、そのあと映像は家のネットワーク経由で本体から直接届きます。Microsoftが作成または承認したものではありません。",
+      "starting": "Xboxを起動してリモートプレイを始めています。1分ほどかかることがあります。",
+      "buttons": "Selectがビュー、Startがメニュー、SelectとStartでXboxボタン",
+      "stateReady": "オン",
+      "stateStandby": "スリープ",
+      "stateOff": "オフ"
     }
   }
 }

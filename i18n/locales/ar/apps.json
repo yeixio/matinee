@@ -781,6 +781,15 @@
       "stateReady": "يعمل",
       "stateStandby": "وضع الراحة",
       "stateOff": "لا يستجيب"
+    },
+    "xbox": {
+      "title": "Xbox",
+      "hint": "العب على Xbox Series X|S أو Xbox One من هنا، باستخدام اللعب عن بُعد. تبدأ خوادم Microsoft البث، ثم تأتي الصورة مباشرة من الجهاز عبر شبكتك المنزلية. ليس من صنع Microsoft ولا بموافقتها.",
+      "starting": "جارٍ إيقاظ Xbox وبدء اللعب عن بُعد. قد يستغرق ذلك دقيقة.",
+      "buttons": "Select هو العرض، وStart هو القائمة، وSelect مع Start زر Xbox",
+      "stateReady": "يعمل",
+      "stateStandby": "سكون",
+      "stateOff": "متوقف"
     }
   }
 }

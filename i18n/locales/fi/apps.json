@@ -753,6 +753,15 @@
       "stateReady": "Päällä",
       "stateStandby": "Lepotila",
       "stateOff": "Ei vastaa"
+    },
+    "xbox": {
+      "title": "Xbox",
+      "hint": "Pelaa Xbox Series X|S- tai Xbox One -konsoliasi täältä sen etäpelillä. Microsoftin palvelimet käynnistävät suoratoiston; sen jälkeen kuva tulee suoraan konsolilta kotiverkkosi kautta. Ei Microsoftin tekemä tai hyväksymä.",
+      "starting": "Herätetään Xbox ja käynnistetään etäpeli. Tämä voi kestää minuutin.",
+      "buttons": "Select on Näkymä, Start on Valikko, Select ja Start Xbox-painike",
+      "stateReady": "Päällä",
+      "stateStandby": "Lepotila",
+      "stateOff": "Pois"
     }
   }
 }

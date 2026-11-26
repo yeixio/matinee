@@ -63,6 +63,7 @@ import (
 	"github.com/yeixio/matinee/internal/together"
 	"github.com/yeixio/matinee/internal/tz"
 	"github.com/yeixio/matinee/internal/version"
+	"github.com/yeixio/matinee/internal/xboxremote"
 	"github.com/yeixio/matinee/web"
 )
 
@@ -347,6 +348,7 @@ func run() (err error) {
 			if cfg.PCRemote != "" && cfg.PCRemote != "off" {
 				apiServer.SteamPC = &pcremote.Bridge{Path: cfg.PCRemote}
 			}
+			apiServer.Xbox = xboxremote.New()
 		}
 	}
 	// A video given up on as damaged is reported to Box Office, which

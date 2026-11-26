@@ -10,6 +10,7 @@ import { FilterBar } from '../components/FilterBar'
 import { SkippedFiles } from '../components/SkippedFiles'
 import { PCGames } from '../games/PCGames'
 import { PlayStation } from '../games/PlayStation'
+import { Xbox } from '../games/Xbox'
 import { SteamSetup } from '../games/SteamPC'
 import { LibraryIcon, useLibraries } from '../components/Shell'
 import { Button, EmptyState } from '../components/ui'
@@ -82,6 +83,7 @@ function Titles({ id, lib }: { id: number; lib?: LibraryInfo }) {
       {/* Where to set Steam up, for an admin, while it isn't. */}
       {lib?.kind === 'games' && !filtered && <SteamSetup unsetOnly />}
       {lib?.kind === 'games' && !filtered && <PlayStation />}
+      {lib?.kind === 'games' && !filtered && <Xbox />}
       {/* Collections pinned to this library, while no filter is on. */}
       {!filtered && <PinnedCollections library={id} />}
       <FilterBar value={filter} onChange={setFilter} libraryId={id} libraryKind={lib?.kind} />

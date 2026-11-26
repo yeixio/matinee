@@ -311,5 +311,6 @@
   "text_is_required": "text este obligatoriu",
   "sign_in_to_playstation_first": "conectează-te mai întâi la PlayStation",
   "this_server_cant_play_games_on_a_pc": "acest server nu poate juca pe un PC",
-  "this_server_cant_play_playstation_games": "acest server nu poate rula jocuri PlayStation"
+  "this_server_cant_play_playstation_games": "acest server nu poate rula jocuri PlayStation",
+  "this_server_cant_play_xbox_games": "acest server nu poate rula jocuri Xbox"
 }

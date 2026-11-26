@@ -811,6 +811,19 @@
               }
             },
             {
+              "name": "Play your Xbox with its remote play (preview)",
+              "doc": "/docs/server/games/#xbox-remote-play-preview",
+              "since": "v0.2.11",
+              "apps": {
+                "web": true,
+                "ios": true,
+                "android": true,
+                "appletv": true,
+                "androidtv": true,
+                "tvweb": true
+              }
+            },
+            {
               "name": "Type and use a mouse in PC games",
               "doc": "/docs/server/games/#pc-games-from-steam-preview",
               "since": "v0.2.7",

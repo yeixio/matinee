@@ -1798,6 +1798,25 @@
       "starting": "Herätetään PlayStation ja käynnistetään Remote Play. Tämä voi kestää minuutin.",
       "buttons": "Select on kosketuslevy, Select ja Start yhdessä PS-painike"
     },
+    "xbox": {
+      "title": "Xbox",
+      "hint": "Pelaa Xbox Series X|S- tai Xbox One -konsoliasi täältä sen etäpelillä. Microsoftin palvelimet käynnistävät suoratoiston; sen jälkeen kuva tulee suoraan konsolilta kotiverkkosi kautta. Ei Microsoftin tekemä tai hyväksymä.",
+      "signInTitle": "Kirjaudu Xboxiin",
+      "signInHint": "Kirjaudu Microsoft-tilillä, jota Xboxisi käyttää. Matinee säilyttää kirjautumisen palvelimellasi, ei koskaan salasanaasi.",
+      "signIn": "Kirjaudu",
+      "codeHint": "Avaa {{url}} puhelimella tai tietokoneella ja syötä tämä koodi:",
+      "openLink": "Avaa microsoft.com/link",
+      "waiting": "Odotetaan kirjautumistasi…",
+      "setupHint": "Ota Xboxissa käyttöön Asetukset → Laitteet ja yhteydet → Etäominaisuudet → Ota etäominaisuudet käyttöön, ja aseta virta-asetukseksi Lepotila, jotta Matinee voi herättää sen.",
+      "noConsoles": "Tililtä ei löytynyt Xboxia, jossa etäominaisuudet ovat käytössä.",
+      "signedInAs": "Kirjautunut nimellä {{name}}",
+      "stateReady": "Päällä",
+      "stateStandby": "Lepotila",
+      "stateOff": "Pois",
+      "signOut": "Kirjaudu ulos Xboxista",
+      "starting": "Herätetään Xbox ja käynnistetään etäpeli. Tämä voi kestää minuutin.",
+      "buttons": "Select on Näkymä, Start on Valikko, Select ja Start Xbox-painike"
+    },
     "steampc": {
       "title": "Steam",
       "hint": "Steam-painike avaa Steamin Big Picturen toisella kahdesta tavasta. Ota käyttöön sinulle sopiva.",

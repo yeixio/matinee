@@ -311,5 +311,6 @@
   "text_is_required": "text مطلوب",
   "sign_in_to_playstation_first": "سجّل الدخول إلى PlayStation أولًا",
   "this_server_cant_play_games_on_a_pc": "لا يستطيع هذا الخادم اللعب على حاسوب",
-  "this_server_cant_play_playstation_games": "لا يستطيع هذا الخادم تشغيل ألعاب PlayStation"
+  "this_server_cant_play_playstation_games": "لا يستطيع هذا الخادم تشغيل ألعاب PlayStation",
+  "this_server_cant_play_xbox_games": "لا يستطيع هذا الخادم تشغيل ألعاب Xbox"
 }

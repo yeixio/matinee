@@ -1826,6 +1826,25 @@
       "starting": "Wybudzanie PlayStation i uruchamianie Remote Play. To może potrwać minutę.",
       "buttons": "Select to touchpad, Select i Start razem to przycisk PS"
     },
+    "xbox": {
+      "title": "Xbox",
+      "hint": "Graj na Xbox Series X|S lub Xbox One stąd, dzięki grze zdalnej. Serwery Microsoftu uruchamiają transmisję; potem obraz płynie prosto z konsoli przez Twoją sieć domową. Nie stworzone ani nie zatwierdzone przez Microsoft.",
+      "signInTitle": "Zaloguj się do Xbox",
+      "signInHint": "Zaloguj się kontem Microsoft, którego używa Twój Xbox. Matinee przechowuje logowanie na Twoim serwerze, nigdy hasła.",
+      "signIn": "Zaloguj się",
+      "codeHint": "Na dowolnym telefonie lub komputerze otwórz {{url}} i wpisz ten kod:",
+      "openLink": "Otwórz microsoft.com/link",
+      "waiting": "Czekam, aż się zalogujesz…",
+      "setupHint": "Na Xboksie włącz Ustawienia → Urządzenia i połączenia → Funkcje zdalne → Włącz funkcje zdalne i ustaw opcje zasilania na Uśpienie, aby Matinee mógł go wybudzić.",
+      "noConsoles": "Na tym koncie nie znaleziono Xboksa z włączonymi funkcjami zdalnymi.",
+      "signedInAs": "Zalogowano jako {{name}}",
+      "stateReady": "Włączony",
+      "stateStandby": "Uśpienie",
+      "stateOff": "Wyłączony",
+      "signOut": "Wyloguj się z Xbox",
+      "starting": "Wybudzanie Xboksa i uruchamianie gry zdalnej. To może potrwać minutę.",
+      "buttons": "Select to Widok, Start to Menu, Select i Start przycisk Xbox"
+    },
     "steampc": {
       "title": "Steam",
       "hint": "Przycisk Steam uruchamia Big Picture Steam na jeden z dwóch sposobów. Skonfiguruj ten, który ci pasuje.",

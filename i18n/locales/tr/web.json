@@ -1798,6 +1798,25 @@
       "starting": "PlayStation uyandırılıyor ve Remote Play başlatılıyor. Bu bir dakika sürebilir.",
       "buttons": "Select dokunmatik yüzey, Select ve Start birlikte PS düğmesi"
     },
+    "xbox": {
+      "title": "Xbox",
+      "hint": "Xbox Series X|S veya Xbox One'ınızı buradan, uzaktan oynatma ile oynayın. Yayını Microsoft'un sunucuları başlatır; ardından görüntü ev ağınız üzerinden doğrudan konsoldan gelir. Microsoft tarafından yapılmamış veya onaylanmamıştır.",
+      "signInTitle": "Xbox'ta oturum açın",
+      "signInHint": "Xbox'ınızın kullandığı Microsoft hesabıyla oturum açın. Matinee oturumu sunucunuzda tutar, parolanızı asla tutmaz.",
+      "signIn": "Oturum aç",
+      "codeHint": "Herhangi bir telefon veya bilgisayarda {{url}} adresini açın ve bu kodu girin:",
+      "openLink": "microsoft.com/link'i aç",
+      "waiting": "Oturum açmanız bekleniyor…",
+      "setupHint": "Xbox'ta Ayarlar → Cihazlar ve bağlantılar → Uzak özellikler → Uzak özellikleri etkinleştir'i açın ve Matinee'nin uyandırabilmesi için güç seçeneklerini Uyku olarak ayarlayın.",
+      "noConsoles": "Bu hesapta uzak özellikleri açık bir Xbox bulunamadı.",
+      "signedInAs": "{{name}} olarak oturum açıldı",
+      "stateReady": "Açık",
+      "stateStandby": "Uyku",
+      "stateOff": "Kapalı",
+      "signOut": "Xbox oturumunu kapat",
+      "starting": "Xbox uyandırılıyor ve uzaktan oynatma başlatılıyor. Bu bir dakika sürebilir.",
+      "buttons": "Select Görünüm, Start Menü, Select ve Start Xbox düğmesidir"
+    },
     "steampc": {
       "title": "Steam",
       "hint": "Steam düğmesi, Steam'in Big Picture modunu iki yoldan biriyle açar. Size uyanı kurun.",

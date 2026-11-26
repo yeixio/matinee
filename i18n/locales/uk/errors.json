@@ -311,5 +311,6 @@
   "text_is_required": "text обов’язковий",
   "sign_in_to_playstation_first": "спершу увійдіть у PlayStation",
   "this_server_cant_play_games_on_a_pc": "цей сервер не може грати на комп'ютері",
-  "this_server_cant_play_playstation_games": "цей сервер не може запускати ігри PlayStation"
+  "this_server_cant_play_playstation_games": "цей сервер не може запускати ігри PlayStation",
+  "this_server_cant_play_xbox_games": "цей сервер не може запускати ігри Xbox"
 }

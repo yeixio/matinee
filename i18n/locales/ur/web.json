@@ -1798,6 +1798,25 @@
       "starting": "PlayStation کو جگایا جا رہا ہے اور Remote Play شروع ہو رہا ہے۔ اس میں ایک منٹ لگ سکتا ہے۔",
       "buttons": "Select ٹچ پیڈ ہے، Select اور Start ایک ساتھ PS بٹن"
     },
+    "xbox": {
+      "title": "Xbox",
+      "hint": "اپنا Xbox Series X|S یا Xbox One یہاں سے اس کے ریموٹ پلے کے ساتھ کھیلیں۔ Microsoft کے سرور اسٹریم شروع کرتے ہیں؛ پھر تصویر سیدھی کنسول سے آپ کے گھریلو نیٹ ورک پر آتی ہے۔ Microsoft کا بنایا یا منظور شدہ نہیں۔",
+      "signInTitle": "Xbox میں سائن ان کریں",
+      "signInHint": "اس Microsoft اکاؤنٹ سے سائن ان کریں جو آپ کا Xbox استعمال کرتا ہے۔ Matinee سائن ان آپ کے سرور پر رکھتا ہے، آپ کا پاس ورڈ کبھی نہیں۔",
+      "signIn": "سائن ان",
+      "codeHint": "کسی بھی فون یا کمپیوٹر پر {{url}} کھولیں اور یہ کوڈ درج کریں:",
+      "openLink": "microsoft.com/link کھولیں",
+      "waiting": "آپ کے سائن ان کا انتظار ہے…",
+      "setupHint": "Xbox پر ترتیبات ← آلات اور کنکشنز ← ریموٹ خصوصیات ← ریموٹ خصوصیات فعال کریں آن کریں، اور پاور کے اختیارات کو سلیپ پر رکھیں تاکہ Matinee اسے جگا سکے۔",
+      "noConsoles": "اس اکاؤنٹ پر ریموٹ خصوصیات آن والا کوئی Xbox نہیں ملا۔",
+      "signedInAs": "بطور {{name}} سائن ان",
+      "stateReady": "آن",
+      "stateStandby": "سلیپ",
+      "stateOff": "آف",
+      "signOut": "Xbox سے سائن آؤٹ کریں",
+      "starting": "Xbox کو جگایا اور ریموٹ پلے شروع کیا جا رہا ہے۔ اس میں ایک منٹ لگ سکتا ہے۔",
+      "buttons": "Select ویو ہے، Start مینو ہے، Select اور Start مل کر Xbox بٹن"
+    },
     "steampc": {
       "title": "Steam",
       "hint": "Steam بٹن Steam کا Big Picture دو میں سے کسی ایک طریقے سے چلاتا ہے۔ جو آپ کے لیے موزوں ہو اسے سیٹ کریں۔",

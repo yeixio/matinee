@@ -760,6 +760,15 @@
       "stateReady": "Pornită",
       "stateStandby": "Mod repaus",
       "stateOff": "Nu răspunde"
+    },
+    "xbox": {
+      "title": "Xbox",
+      "hint": "Joacă pe Xbox Series X|S sau Xbox One de aici, cu jocul de la distanță. Serverele Microsoft pornesc fluxul; apoi imaginea vine direct de la consolă prin rețeaua ta de acasă. Nu este creat sau aprobat de Microsoft.",
+      "starting": "Se trezește Xbox-ul și se pornește jocul de la distanță. Poate dura un minut.",
+      "buttons": "Select este Vizualizare, Start este Meniu, Select și Start butonul Xbox",
+      "stateReady": "Pornit",
+      "stateStandby": "Repaus",
+      "stateOff": "Oprit"
     }
   }
 }

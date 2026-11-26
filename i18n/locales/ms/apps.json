@@ -746,6 +746,15 @@
       "stateReady": "Hidup",
       "stateStandby": "Mod rehat",
       "stateOff": "Tidak menjawab"
+    },
+    "xbox": {
+      "title": "Xbox",
+      "hint": "Main Xbox Series X|S atau Xbox One anda dari sini, dengan main jarak jauhnya. Pelayan Microsoft memulakan strim; kemudian gambar datang terus dari konsol melalui rangkaian rumah anda. Tidak dibuat atau disokong oleh Microsoft.",
+      "starting": "Membangunkan Xbox dan memulakan main jarak jauh. Ini mungkin mengambil masa seminit.",
+      "buttons": "Select ialah View, Start ialah Menu, Select dan Start butang Xbox",
+      "stateReady": "Hidup",
+      "stateStandby": "Tidur",
+      "stateOff": "Mati"
     }
   }
 }

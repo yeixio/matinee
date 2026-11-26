@@ -1812,6 +1812,25 @@
       "starting": "Réveil de la PlayStation et lancement de Remote Play. Cela peut prendre une minute.",
       "buttons": "Select est le pavé tactile, Select et Start ensemble la touche PS"
     },
+    "xbox": {
+      "title": "Xbox",
+      "hint": "Jouez à votre Xbox Series X|S ou Xbox One d'ici, avec son jeu à distance. Les serveurs de Microsoft lancent le flux ; l'image vient ensuite directement de la console via votre réseau domestique. Ni créé ni approuvé par Microsoft.",
+      "signInTitle": "Se connecter à Xbox",
+      "signInHint": "Connectez-vous avec le compte Microsoft de votre Xbox. Matinee garde la connexion sur votre serveur, jamais votre mot de passe.",
+      "signIn": "Se connecter",
+      "codeHint": "Sur un téléphone ou un ordinateur, ouvrez {{url}} et saisissez ce code :",
+      "openLink": "Ouvrir microsoft.com/link",
+      "waiting": "En attente de votre connexion…",
+      "setupHint": "Sur la Xbox, activez Paramètres → Appareils et connexions → Fonctionnalités à distance → Activer les fonctionnalités à distance, et réglez les options d'alimentation sur Veille pour que Matinee puisse la réveiller.",
+      "noConsoles": "Aucune Xbox avec les fonctionnalités à distance activées n'a été trouvée sur ce compte.",
+      "signedInAs": "Connecté en tant que {{name}}",
+      "stateReady": "Allumée",
+      "stateStandby": "Veille",
+      "stateOff": "Éteinte",
+      "signOut": "Se déconnecter de Xbox",
+      "starting": "Réveil de la Xbox et lancement du jeu à distance. Cela peut prendre une minute.",
+      "buttons": "Select est Affichage, Start est Menu, Select et Start le bouton Xbox"
+    },
     "steampc": {
       "title": "Steam",
       "hint": "Le bouton Steam lance Big Picture de Steam de deux façons possibles. Configurez celle qui vous convient.",

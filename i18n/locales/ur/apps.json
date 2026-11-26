@@ -753,6 +753,15 @@
       "stateReady": "آن",
       "stateStandby": "ریسٹ موڈ",
       "stateOff": "جواب نہیں دے رہا"
+    },
+    "xbox": {
+      "title": "Xbox",
+      "hint": "اپنا Xbox Series X|S یا Xbox One یہاں سے اس کے ریموٹ پلے کے ساتھ کھیلیں۔ Microsoft کے سرور اسٹریم شروع کرتے ہیں؛ پھر تصویر سیدھی کنسول سے آپ کے گھریلو نیٹ ورک پر آتی ہے۔ Microsoft کا بنایا یا منظور شدہ نہیں۔",
+      "starting": "Xbox کو جگایا اور ریموٹ پلے شروع کیا جا رہا ہے۔ اس میں ایک منٹ لگ سکتا ہے۔",
+      "buttons": "Select ویو ہے، Start مینو ہے، Select اور Start مل کر Xbox بٹن",
+      "stateReady": "آن",
+      "stateStandby": "سلیپ",
+      "stateOff": "آف"
     }
   }
 }

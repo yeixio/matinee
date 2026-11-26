@@ -311,5 +311,6 @@
   "text_is_required": "text je povinné",
   "sign_in_to_playstation_first": "nejdřív se přihlaste k PlayStation",
   "this_server_cant_play_games_on_a_pc": "tento server nemůže hrát na počítači",
-  "this_server_cant_play_playstation_games": "tento server neumí hrát hry pro PlayStation"
+  "this_server_cant_play_playstation_games": "tento server neumí hrát hry pro PlayStation",
+  "this_server_cant_play_xbox_games": "tento server neumí hrát hry pro Xbox"
 }
