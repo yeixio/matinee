@@ -117,9 +117,38 @@ type session struct {
 	path string // "v5/sessions/home/<id>"
 }
 
+// registerWait is how long to wait before asking again when Microsoft
+// can't reach the console yet; a var so tests can shorten it.
+var registerWait = 10 * time.Second
+
 // startSession asks the console to start remote play, signs it in, and
-// waits until it's ready for the stream.
+// waits until it's ready for the stream. A console that has just woken
+// or restarted can take a little while to check in with Microsoft, which
+// fails the start with WaitingForServerToRegister, so that is asked again
+// a few times before giving up.
 func (c *Client) startSession(ctx context.Context, t *Tokens, consoleID string) (*session, error) {
+	for try := 1; ; try++ {
+		s, err := c.startSessionOnce(ctx, t, consoleID)
+		var nr notRegistered
+		if !errors.As(err, &nr) {
+			return s, err
+		}
+		if try == 4 {
+			return nil, errors.New("the Xbox didn't start remote play: Microsoft can't reach the console. Restart the Xbox (Settings, General, Power options, Restart now), wait until it's signed in, and check that remote features are on in Settings, Devices and connections, Remote features")
+		}
+		select {
+		case <-ctx.Done():
+			return nil, err
+		case <-time.After(registerWait):
+		}
+	}
+}
+
+// notRegistered is a start that failed because the console isn't checked
+// in with Microsoft's servers (yet).
+type notRegistered struct{ error }
+
+func (c *Client) startSessionOnce(ctx context.Context, t *Tokens, consoleID string) (*session, error) {
 	var res struct {
 		SessionPath string `json:"sessionPath"`
 	}
@@ -165,7 +194,11 @@ func (c *Client) startSession(ctx context.Context, t *Tokens, consoleID string) 
 			}
 		case "Failed":
 			s.stop()
-			return nil, consoleError(st.ErrorDetails.Code, st.ErrorDetails.Message)
+			err := consoleError(st.ErrorDetails.Code, st.ErrorDetails.Message)
+			if strings.Contains(st.ErrorDetails.Message, "WaitingForServerToRegister") {
+				err = notRegistered{err}
+			}
+			return nil, err
 		}
 		select {
 		case <-ctx.Done():
