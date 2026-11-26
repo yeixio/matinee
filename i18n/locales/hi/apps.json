@@ -753,6 +753,15 @@
       "stateReady": "चालू",
       "stateStandby": "रेस्ट मोड",
       "stateOff": "जवाब नहीं दे रहा"
+    },
+    "xbox": {
+      "title": "Xbox",
+      "hint": "अपना Xbox Series X|S या Xbox One यहाँ से उसके रिमोट प्ले के साथ खेलें। Microsoft के सर्वर स्ट्रीम शुरू करते हैं; फिर तस्वीर सीधे कंसोल से आपके घरेलू नेटवर्क पर आती है। Microsoft द्वारा बनाया या समर्थित नहीं।",
+      "starting": "Xbox को जगाया जा रहा है और रिमोट प्ले शुरू हो रहा है। इसमें एक मिनट लग सकता है।",
+      "buttons": "Select व्यू है, Start मेनू है, Select और Start साथ में Xbox बटन",
+      "stateReady": "चालू",
+      "stateStandby": "स्लीप",
+      "stateOff": "बंद"
     }
   }
 }

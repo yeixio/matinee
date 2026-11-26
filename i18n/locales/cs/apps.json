@@ -767,6 +767,15 @@
       "stateReady": "Zapnutá",
       "stateStandby": "Klidový režim",
       "stateOff": "Neodpovídá"
+    },
+    "xbox": {
+      "title": "Xbox",
+      "hint": "Hrajte na Xbox Series X|S nebo Xbox One odsud, pomocí jeho vzdáleného hraní. Servery Microsoftu spustí stream; obraz pak přichází přímo z konzole přes vaši domácí síť. Nevytvořeno ani neschváleno společností Microsoft.",
+      "starting": "Probouzí se Xbox a spouští vzdálené hraní. Může to trvat minutu.",
+      "buttons": "Select je Zobrazení, Start je Nabídka, Select a Start tlačítko Xbox",
+      "stateReady": "Zapnuto",
+      "stateStandby": "Spánek",
+      "stateOff": "Vypnuto"
     }
   }
 }

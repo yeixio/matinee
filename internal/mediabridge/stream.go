@@ -70,14 +70,49 @@ type Stream struct {
 	opt   Options
 	Hello Hello
 
+	pack        *Packer
+	pending     []*rtp.Packet
+	pendingKind byte
+	closeOnce   sync.Once
+	exited      chan struct{}
+}
+
+// Packer turns a device's H.264 access units and Opus packets into the
+// RTP packets the game stream sends on.
+type Packer struct {
 	video, audio rtp.Packetizer
 	start        time.Time
 	audioTS      uint32
 	keyframes    keyframer
-	pending      []*rtp.Packet
-	pendingKind  byte
-	closeOnce    sync.Once
-	exited       chan struct{}
+}
+
+// NewPacker starts a stream's packets.
+func NewPacker() *Packer {
+	ssrc := rand.Uint32()
+	return &Packer{start: time.Now(),
+		video: rtp.NewPacketizer(1200, 96, ssrc, &codecs.H264Payloader{DisableStapA: true}, rtp.NewRandomSequencer(), 90000),
+		audio: rtp.NewPacketizer(1200, 111, ssrc+1, &codecs.OpusPayloader{}, rtp.NewRandomSequencer(), 48000)}
+}
+
+// Video packs one Annex B access unit, stamped with the time it came.
+func (k *Packer) Video(au []byte) []*rtp.Packet {
+	au = k.keyframes.fix(au)
+	ts := uint32(time.Since(k.start).Seconds() * 90000)
+	ps := k.video.Packetize(au, 0)
+	for _, p := range ps {
+		p.Timestamp = ts
+	}
+	return ps
+}
+
+// Audio packs one 48 kHz Opus packet.
+func (k *Packer) Audio(b []byte) []*rtp.Packet {
+	ps := k.audio.Packetize(b, 0)
+	for _, p := range ps {
+		p.Timestamp = k.audioTS
+	}
+	k.audioTS += uint32(opusSamples(b))
+	return ps
 }
 
 // Start starts the bridge cmd and waits until its stream starts.
@@ -94,10 +129,7 @@ func Start(ctx context.Context, cmd *exec.Cmd, opt Options) (*Stream, error) {
 	if err := cmd.Start(); err != nil {
 		return nil, err
 	}
-	ssrc := rand.Uint32()
-	s := &Stream{cmd: cmd, in: in, out: bufio.NewReaderSize(out, 1<<20), opt: opt, start: time.Now(), exited: make(chan struct{}),
-		video: rtp.NewPacketizer(1200, 96, ssrc, &codecs.H264Payloader{DisableStapA: true}, rtp.NewRandomSequencer(), 90000),
-		audio: rtp.NewPacketizer(1200, 111, ssrc+1, &codecs.OpusPayloader{}, rtp.NewRandomSequencer(), 48000)}
+	s := &Stream{cmd: cmd, in: in, out: bufio.NewReaderSize(out, 1<<20), opt: opt, pack: NewPacker(), exited: make(chan struct{})}
 	go func() {
 		cmd.Wait()
 		close(s.exited)
@@ -185,20 +217,9 @@ func (s *Stream) Next() (byte, *rtp.Packet, error) {
 		}
 		switch typ {
 		case 'V':
-			au := s.keyframes.fix(b)
-			ts := uint32(time.Since(s.start).Seconds() * 90000)
-			ps := s.video.Packetize(au, 0)
-			for _, p := range ps {
-				p.Timestamp = ts
-			}
-			s.pending, s.pendingKind = ps, KindVideo
+			s.pending, s.pendingKind = s.pack.Video(b), KindVideo
 		case 'A':
-			ps := s.audio.Packetize(b, 0)
-			for _, p := range ps {
-				p.Timestamp = s.audioTS
-			}
-			s.audioTS += uint32(opusSamples(b))
-			s.pending, s.pendingKind = ps, KindAudio
+			s.pending, s.pendingKind = s.pack.Audio(b), KindAudio
 		case 'E':
 			return 0, nil, s.bridgeError(b)
 		}

@@ -112,8 +112,11 @@ func (s *Server) playGame(w http.ResponseWriter, r *http.Request) {
 		Steam bool `json:"steam"`
 		// PlayStation plays a paired console (playstation.go), by its id.
 		PlayStation string `json:"playstation"`
-		Offer       string `json:"offer"`
-		Direct      bool   `json:"direct"`
+		// Xbox plays a console of the signed-in Xbox account (xbox.go),
+		// by its id.
+		Xbox   string `json:"xbox"`
+		Offer  string `json:"offer"`
+		Direct bool   `json:"direct"`
 	}
 	if err := readJSON(r, &body); err != nil || (body.Offer == "") == !body.Direct {
 		writeError(w, http.StatusBadRequest, "bad request")
@@ -122,7 +125,14 @@ func (s *Server) playGame(w http.ResponseWriter, r *http.Request) {
 	g := gamestream.Game{Owner: strconv.FormatInt(currentUser(r).ID, 10)}
 	system, analog := "lagtest", false
 	timeout := 20 * time.Second
-	if body.PlayStation != "" {
+	if body.Xbox != "" {
+		start, err := s.xboxGame(r.Context(), body.Xbox)
+		if err != nil {
+			writeError(w, http.StatusNotFound, err.Error())
+			return
+		}
+		g.Remote, system, analog, timeout = start, "xbox", true, xboxStartTimeout
+	} else if body.PlayStation != "" {
 		start, err := s.playStationGame(r.Context(), body.PlayStation)
 		if err != nil {
 			writeError(w, http.StatusNotFound, err.Error())

@@ -1784,6 +1784,25 @@
       "starting": "正在喚醒 PlayStation 並啟動 Remote Play，可能需要一分鐘。",
       "buttons": "Select 是觸控板，同時按 Select 和 Start 是 PS 按鈕"
     },
+    "xbox": {
+      "title": "Xbox",
+      "hint": "在這裡透過遠端遊玩來玩你的 Xbox Series X|S 或 Xbox One。Microsoft 的伺服器啟動串流，之後畫面透過家用網路直接從主機傳來。並非由 Microsoft 製作或認可。",
+      "signInTitle": "登入 Xbox",
+      "signInHint": "使用你的 Xbox 所用的 Microsoft 帳戶登入。Matinee 把登入資訊保存在你的伺服器上，從不保存密碼。",
+      "signIn": "登入",
+      "codeHint": "在任何手機或電腦上開啟 {{url}}，輸入以下代碼：",
+      "openLink": "開啟 microsoft.com/link",
+      "waiting": "正在等待你登入…",
+      "setupHint": "在 Xbox 上開啟 設定 → 裝置與連線 → 遠端功能 → 啟用遠端功能，並將電源選項設為睡眠，Matinee 才能喚醒它。",
+      "noConsoles": "此帳戶中找不到開啟遠端功能的 Xbox。",
+      "signedInAs": "已登入為 {{name}}",
+      "stateReady": "開啟",
+      "stateStandby": "睡眠",
+      "stateOff": "關閉",
+      "signOut": "登出 Xbox",
+      "starting": "正在喚醒 Xbox 並啟動遠端遊玩，可能需要一分鐘。",
+      "buttons": "Select 是檢視鍵，Start 是選單鍵，Select 加 Start 是 Xbox 按鈕"
+    },
     "steampc": {
       "title": "Steam",
       "hint": "Steam 按鈕可以用兩種方式之一開啟 Steam 的大螢幕模式。設定適合你的那一種。",

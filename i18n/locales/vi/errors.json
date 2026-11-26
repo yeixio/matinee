@@ -311,5 +311,6 @@
   "text_is_required": "text là bắt buộc",
   "sign_in_to_playstation_first": "hãy đăng nhập PlayStation trước",
   "this_server_cant_play_games_on_a_pc": "máy chủ này không thể chơi trên PC",
-  "this_server_cant_play_playstation_games": "máy chủ này không thể chơi trò chơi PlayStation"
+  "this_server_cant_play_playstation_games": "máy chủ này không thể chơi trò chơi PlayStation",
+  "this_server_cant_play_xbox_games": "máy chủ này không thể chơi trò chơi Xbox"
 }

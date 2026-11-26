@@ -753,6 +753,15 @@
       "stateReady": "روشن",
       "stateStandby": "حالت استراحت",
       "stateOff": "پاسخ نمی‌دهد"
+    },
+    "xbox": {
+      "title": "Xbox",
+      "hint": "Xbox Series X|S یا Xbox One خود را از اینجا با بازی از راه دور آن بازی کنید. سرورهای Microsoft پخش را شروع می‌کنند؛ سپس تصویر مستقیماً از کنسول از طریق شبکهٔ خانگی شما می‌آید. ساخته یا تأییدشدهٔ Microsoft نیست.",
+      "starting": "در حال بیدار کردن Xbox و شروع بازی از راه دور. ممکن است یک دقیقه طول بکشد.",
+      "buttons": "Select دکمهٔ View، Start دکمهٔ Menu، و Select با Start دکمهٔ Xbox است",
+      "stateReady": "روشن",
+      "stateStandby": "خواب",
+      "stateOff": "خاموش"
     }
   }
 }

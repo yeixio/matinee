@@ -311,5 +311,6 @@
   "text_is_required": "text ضروری ہے",
   "sign_in_to_playstation_first": "پہلے PlayStation میں سائن ان کریں",
   "this_server_cant_play_games_on_a_pc": "یہ سرور PC پر گیم نہیں چلا سکتا",
-  "this_server_cant_play_playstation_games": "یہ سرور PlayStation گیمز نہیں چلا سکتا"
+  "this_server_cant_play_playstation_games": "یہ سرور PlayStation گیمز نہیں چلا سکتا",
+  "this_server_cant_play_xbox_games": "یہ سرور Xbox گیمز نہیں چلا سکتا"
 }

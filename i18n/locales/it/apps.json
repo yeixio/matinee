@@ -760,6 +760,15 @@
       "stateReady": "Accesa",
       "stateStandby": "Modalità riposo",
       "stateOff": "Non risponde"
+    },
+    "xbox": {
+      "title": "Xbox",
+      "hint": "Gioca alla tua Xbox Series X|S o Xbox One da qui, con il suo gioco remoto. I server di Microsoft avviano lo streaming; poi l'immagine arriva direttamente dalla console tramite la tua rete di casa. Non creato né approvato da Microsoft.",
+      "starting": "Riattivazione della Xbox e avvio del gioco remoto. Può richiedere un minuto.",
+      "buttons": "Select è Visualizza, Start è Menu, Select e Start il pulsante Xbox",
+      "stateReady": "Accesa",
+      "stateStandby": "Sospensione",
+      "stateOff": "Spenta"
     }
   }
 }

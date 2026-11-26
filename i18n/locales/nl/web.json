@@ -1798,6 +1798,25 @@
       "starting": "De PlayStation wordt gewekt en Remote Play gestart. Dat kan een minuut duren.",
       "buttons": "Select is het touchpad, Select en Start samen de PS-knop"
     },
+    "xbox": {
+      "title": "Xbox",
+      "hint": "Speel je Xbox Series X|S of Xbox One vanaf hier, met zijn op afstand spelen. De servers van Microsoft starten de stream; het beeld komt daarna rechtstreeks van de console via je thuisnetwerk. Niet gemaakt of goedgekeurd door Microsoft.",
+      "signInTitle": "Aanmelden bij Xbox",
+      "signInHint": "Meld je aan met het Microsoft-account dat je Xbox gebruikt. Matinee bewaart de aanmelding op je server, nooit je wachtwoord.",
+      "signIn": "Aanmelden",
+      "codeHint": "Open op een telefoon of computer {{url}} en voer deze code in:",
+      "openLink": "microsoft.com/link openen",
+      "waiting": "Wachten tot je je aanmeldt…",
+      "setupHint": "Zet op de Xbox Instellingen → Apparaten en verbindingen → Externe functies → Externe functies inschakelen aan, en zet de energieopties op Slaapstand zodat Matinee hem kan wekken.",
+      "noConsoles": "Er is op dit account geen Xbox met externe functies aan gevonden.",
+      "signedInAs": "Aangemeld als {{name}}",
+      "stateReady": "Aan",
+      "stateStandby": "Slaapstand",
+      "stateOff": "Uit",
+      "signOut": "Afmelden bij Xbox",
+      "starting": "De Xbox wordt gewekt en op afstand spelen gestart. Dit kan een minuut duren.",
+      "buttons": "Select is Weergave, Start is Menu, Select en Start de Xbox-knop"
+    },
     "steampc": {
       "title": "Steam",
       "hint": "De Steam-knop speelt Steams Big Picture op een van twee manieren. Stel in wat bij je past.",

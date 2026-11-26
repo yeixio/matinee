@@ -760,6 +760,15 @@
       "stateReady": "Allumée",
       "stateStandby": "Mode repos",
       "stateOff": "Ne répond pas"
+    },
+    "xbox": {
+      "title": "Xbox",
+      "hint": "Jouez à votre Xbox Series X|S ou Xbox One d'ici, avec son jeu à distance. Les serveurs de Microsoft lancent le flux ; l'image vient ensuite directement de la console via votre réseau domestique. Ni créé ni approuvé par Microsoft.",
+      "starting": "Réveil de la Xbox et lancement du jeu à distance. Cela peut prendre une minute.",
+      "buttons": "Select est Affichage, Start est Menu, Select et Start le bouton Xbox",
+      "stateReady": "Allumée",
+      "stateStandby": "Veille",
+      "stateOff": "Éteinte"
     }
   }
 }

@@ -753,6 +753,15 @@
       "stateReady": "An",
       "stateStandby": "Ruhemodus",
       "stateOff": "Antwortet nicht"
+    },
+    "xbox": {
+      "title": "Xbox",
+      "hint": "Spiele deine Xbox Series X|S oder Xbox One von hier aus, mit ihrem Remote Play. Microsofts Server starten den Stream; das Bild kommt dann direkt von der Konsole über dein Heimnetz. Nicht von Microsoft erstellt oder unterstützt.",
+      "starting": "Die Xbox wird geweckt und Remote Play gestartet. Das kann eine Minute dauern.",
+      "buttons": "Select ist Ansicht, Start ist Menü, Select und Start die Xbox-Taste",
+      "stateReady": "An",
+      "stateStandby": "Standby",
+      "stateOff": "Aus"
     }
   }
 }

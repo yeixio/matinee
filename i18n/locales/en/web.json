@@ -1798,6 +1798,25 @@
       "starting": "Waking the PlayStation and starting Remote Play. This can take a minute.",
       "buttons": "Select is the touchpad, Select and Start the PS button"
     },
+    "xbox": {
+      "title": "Xbox",
+      "hint": "Play your Xbox Series X|S or Xbox One from here, with its remote play. Microsoft's servers start the stream; the picture then comes straight from the console over your home network. Not made or endorsed by Microsoft.",
+      "signInTitle": "Sign in to Xbox",
+      "signInHint": "Sign in with the Microsoft account your Xbox uses. Matinee keeps the sign-in on your server, never your password.",
+      "signIn": "Sign in",
+      "codeHint": "On any phone or computer, open {{url}} and enter this code:",
+      "openLink": "Open microsoft.com/link",
+      "waiting": "Waiting for you to sign in…",
+      "setupHint": "On the Xbox, turn on Settings → Devices & connections → Remote features → Enable remote features, and set Power options to Sleep so Matinee can wake it.",
+      "noConsoles": "No Xbox with remote features on was found on this account.",
+      "signedInAs": "Signed in as {{name}}",
+      "stateReady": "On",
+      "stateStandby": "Sleep",
+      "stateOff": "Off",
+      "signOut": "Sign out of Xbox",
+      "starting": "Waking the Xbox and starting remote play. This can take a minute.",
+      "buttons": "Select is View, Start is Menu, Select and Start the Xbox button"
+    },
     "steampc": {
       "title": "Steam",
       "hint": "The Steam button plays Steam's Big Picture in one of two ways. Set up the one that fits you.",

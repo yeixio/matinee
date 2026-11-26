@@ -10,6 +10,7 @@ import { FilterBar } from '../components/FilterBar'
 import { SkippedFiles } from '../components/SkippedFiles'
 import { PCGames } from '../games/PCGames'
 import { PlayStation } from '../games/PlayStation'
+import { Xbox } from '../games/Xbox'
 import { LibraryIcon, useLibraries } from '../components/Shell'
 import { Button, EmptyState } from '../components/ui'
 import Books from './Books'
@@ -79,6 +80,7 @@ function Titles({ id, lib }: { id: number; lib?: LibraryInfo }) {
       {/* Steam on the game host, when there is one, beside the library's own games. */}
       {lib?.kind === 'games' && !filtered && <PCGames />}
       {lib?.kind === 'games' && !filtered && <PlayStation />}
+      {lib?.kind === 'games' && !filtered && <Xbox />}
       {/* Collections pinned to this library, while no filter is on. */}
       {!filtered && <PinnedCollections library={id} />}
       <FilterBar value={filter} onChange={setFilter} libraryId={id} libraryKind={lib?.kind} />

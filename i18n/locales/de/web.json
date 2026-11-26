@@ -1798,6 +1798,25 @@
       "starting": "Die PlayStation wird aufgeweckt und Remote Play gestartet. Das kann eine Minute dauern.",
       "buttons": "Select ist das Touchpad, Select und Start zusammen die PS-Taste"
     },
+    "xbox": {
+      "title": "Xbox",
+      "hint": "Spiele deine Xbox Series X|S oder Xbox One von hier aus, mit ihrem Remote Play. Microsofts Server starten den Stream; das Bild kommt dann direkt von der Konsole über dein Heimnetz. Nicht von Microsoft erstellt oder unterstützt.",
+      "signInTitle": "Bei Xbox anmelden",
+      "signInHint": "Melde dich mit dem Microsoft-Konto an, das deine Xbox nutzt. Matinee speichert die Anmeldung auf deinem Server, nie dein Passwort.",
+      "signIn": "Anmelden",
+      "codeHint": "Öffne auf einem Handy oder Computer {{url}} und gib diesen Code ein:",
+      "openLink": "microsoft.com/link öffnen",
+      "waiting": "Warte auf deine Anmeldung…",
+      "setupHint": "Schalte auf der Xbox Einstellungen → Geräte & Verbindungen → Remotefunktionen → Remotefunktionen aktivieren ein und stelle die Energieoptionen auf Standby, damit Matinee sie aufwecken kann.",
+      "noConsoles": "Auf diesem Konto wurde keine Xbox mit aktivierten Remotefunktionen gefunden.",
+      "signedInAs": "Angemeldet als {{name}}",
+      "stateReady": "An",
+      "stateStandby": "Standby",
+      "stateOff": "Aus",
+      "signOut": "Von Xbox abmelden",
+      "starting": "Die Xbox wird geweckt und Remote Play gestartet. Das kann eine Minute dauern.",
+      "buttons": "Select ist Ansicht, Start ist Menü, Select und Start die Xbox-Taste"
+    },
     "steampc": {
       "title": "Steam",
       "hint": "Die Steam-Taste spielt Steams Big Picture auf eine von zwei Arten. Richte die ein, die zu dir passt.",

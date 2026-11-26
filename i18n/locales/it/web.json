@@ -1812,6 +1812,25 @@
       "starting": "Riattivo la PlayStation e avvio Remote Play. Può richiedere un minuto.",
       "buttons": "Select è il touchpad, Select e Start insieme il tasto PS"
     },
+    "xbox": {
+      "title": "Xbox",
+      "hint": "Gioca alla tua Xbox Series X|S o Xbox One da qui, con il suo gioco remoto. I server di Microsoft avviano lo streaming; poi l'immagine arriva direttamente dalla console tramite la tua rete di casa. Non creato né approvato da Microsoft.",
+      "signInTitle": "Accedi a Xbox",
+      "signInHint": "Accedi con l'account Microsoft usato dalla tua Xbox. Matinee conserva l'accesso sul tuo server, mai la tua password.",
+      "signIn": "Accedi",
+      "codeHint": "Su un telefono o un computer, apri {{url}} e inserisci questo codice:",
+      "openLink": "Apri microsoft.com/link",
+      "waiting": "In attesa del tuo accesso…",
+      "setupHint": "Sulla Xbox, attiva Impostazioni → Dispositivi e connessioni → Funzionalità remote → Abilita funzionalità remote, e imposta le opzioni di alimentazione su Sospensione così Matinee può riattivarla.",
+      "noConsoles": "Su questo account non è stata trovata nessuna Xbox con le funzionalità remote attive.",
+      "signedInAs": "Accesso eseguito come {{name}}",
+      "stateReady": "Accesa",
+      "stateStandby": "Sospensione",
+      "stateOff": "Spenta",
+      "signOut": "Esci da Xbox",
+      "starting": "Riattivazione della Xbox e avvio del gioco remoto. Può richiedere un minuto.",
+      "buttons": "Select è Visualizza, Start è Menu, Select e Start il pulsante Xbox"
+    },
     "steampc": {
       "title": "Steam",
       "hint": "Il pulsante Steam apre Big Picture di Steam in uno di due modi. Configura quello adatto a te.",

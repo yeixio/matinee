@@ -1812,6 +1812,25 @@
       "starting": "Se trezește PlayStation și pornește Remote Play. Poate dura un minut.",
       "buttons": "Select este touchpadul, Select și Start împreună butonul PS"
     },
+    "xbox": {
+      "title": "Xbox",
+      "hint": "Joacă pe Xbox Series X|S sau Xbox One de aici, cu jocul de la distanță. Serverele Microsoft pornesc fluxul; apoi imaginea vine direct de la consolă prin rețeaua ta de acasă. Nu este creat sau aprobat de Microsoft.",
+      "signInTitle": "Conectează-te la Xbox",
+      "signInHint": "Conectează-te cu contul Microsoft pe care îl folosește Xbox-ul tău. Matinee păstrează conectarea pe serverul tău, niciodată parola.",
+      "signIn": "Conectează-te",
+      "codeHint": "Pe orice telefon sau computer, deschide {{url}} și introdu acest cod:",
+      "openLink": "Deschide microsoft.com/link",
+      "waiting": "Se așteaptă conectarea ta…",
+      "setupHint": "Pe Xbox, activează Setări → Dispozitive și conexiuni → Funcții la distanță → Activează funcțiile la distanță și setează opțiunile de alimentare la Repaus, ca Matinee să-l poată trezi.",
+      "noConsoles": "Nu s-a găsit niciun Xbox cu funcțiile la distanță activate pe acest cont.",
+      "signedInAs": "Conectat ca {{name}}",
+      "stateReady": "Pornit",
+      "stateStandby": "Repaus",
+      "stateOff": "Oprit",
+      "signOut": "Deconectează-te de la Xbox",
+      "starting": "Se trezește Xbox-ul și se pornește jocul de la distanță. Poate dura un minut.",
+      "buttons": "Select este Vizualizare, Start este Meniu, Select și Start butonul Xbox"
+    },
     "steampc": {
       "title": "Steam",
       "hint": "Butonul Steam deschide Big Picture din Steam în unul din două moduri. Configurează-l pe cel potrivit.",

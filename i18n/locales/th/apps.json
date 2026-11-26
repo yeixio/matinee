@@ -746,6 +746,15 @@
       "stateReady": "เปิดอยู่",
       "stateStandby": "โหมดพัก",
       "stateOff": "ไม่ตอบสนอง"
+    },
+    "xbox": {
+      "title": "Xbox",
+      "hint": "เล่น Xbox Series X|S หรือ Xbox One ของคุณจากที่นี่ด้วยการเล่นระยะไกล เซิร์ฟเวอร์ของ Microsoft เริ่มสตรีม จากนั้นภาพจะมาจากเครื่องโดยตรงผ่านเครือข่ายในบ้านของคุณ ไม่ได้สร้างหรือรับรองโดย Microsoft",
+      "starting": "กำลังปลุก Xbox และเริ่มการเล่นระยะไกล อาจใช้เวลาหนึ่งนาที",
+      "buttons": "Select คือ View, Start คือ Menu, Select กับ Start คือปุ่ม Xbox",
+      "stateReady": "เปิด",
+      "stateStandby": "สลีป",
+      "stateOff": "ปิด"
     }
   }
 }

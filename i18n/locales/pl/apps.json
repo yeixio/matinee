@@ -767,6 +767,15 @@
       "stateReady": "Włączona",
       "stateStandby": "Tryb odpoczynku",
       "stateOff": "Nie odpowiada"
+    },
+    "xbox": {
+      "title": "Xbox",
+      "hint": "Graj na Xbox Series X|S lub Xbox One stąd, dzięki grze zdalnej. Serwery Microsoftu uruchamiają transmisję; potem obraz płynie prosto z konsoli przez Twoją sieć domową. Nie stworzone ani nie zatwierdzone przez Microsoft.",
+      "starting": "Wybudzanie Xboksa i uruchamianie gry zdalnej. To może potrwać minutę.",
+      "buttons": "Select to Widok, Start to Menu, Select i Start przycisk Xbox",
+      "stateReady": "Włączony",
+      "stateStandby": "Uśpienie",
+      "stateOff": "Wyłączony"
     }
   }
 }

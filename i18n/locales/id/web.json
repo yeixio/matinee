@@ -1784,6 +1784,25 @@
       "starting": "Membangunkan PlayStation dan memulai Remote Play. Ini bisa makan waktu semenit.",
       "buttons": "Select adalah touchpad, Select dan Start bersamaan tombol PS"
     },
+    "xbox": {
+      "title": "Xbox",
+      "hint": "Mainkan Xbox Series X|S atau Xbox One Anda dari sini, dengan main jarak jauhnya. Server Microsoft memulai stream; lalu gambar datang langsung dari konsol lewat jaringan rumah Anda. Tidak dibuat atau didukung oleh Microsoft.",
+      "signInTitle": "Masuk ke Xbox",
+      "signInHint": "Masuk dengan akun Microsoft yang dipakai Xbox Anda. Matinee menyimpan proses masuk di server Anda, tidak pernah kata sandi Anda.",
+      "signIn": "Masuk",
+      "codeHint": "Di ponsel atau komputer mana pun, buka {{url}} dan masukkan kode ini:",
+      "openLink": "Buka microsoft.com/link",
+      "waiting": "Menunggu Anda masuk…",
+      "setupHint": "Di Xbox, aktifkan Pengaturan → Perangkat & koneksi → Fitur jarak jauh → Aktifkan fitur jarak jauh, dan setel opsi daya ke Tidur agar Matinee bisa membangunkannya.",
+      "noConsoles": "Tidak ditemukan Xbox dengan fitur jarak jauh aktif di akun ini.",
+      "signedInAs": "Masuk sebagai {{name}}",
+      "stateReady": "Menyala",
+      "stateStandby": "Tidur",
+      "stateOff": "Mati",
+      "signOut": "Keluar dari Xbox",
+      "starting": "Membangunkan Xbox dan memulai main jarak jauh. Ini bisa memakan waktu semenit.",
+      "buttons": "Select adalah View, Start adalah Menu, Select dan Start tombol Xbox"
+    },
     "steampc": {
       "title": "Steam",
       "hint": "Tombol Steam memutar Big Picture Steam dengan salah satu dari dua cara. Siapkan yang cocok untuk Anda.",

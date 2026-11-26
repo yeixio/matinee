@@ -311,5 +311,6 @@
   "text_is_required": "text لازم است",
   "sign_in_to_playstation_first": "اول وارد PlayStation شوید",
   "this_server_cant_play_games_on_a_pc": "این سرور نمی‌تواند روی رایانه بازی کند",
-  "this_server_cant_play_playstation_games": "این سرور نمی‌تواند بازی‌های PlayStation را اجرا کند"
+  "this_server_cant_play_playstation_games": "این سرور نمی‌تواند بازی‌های PlayStation را اجرا کند",
+  "this_server_cant_play_xbox_games": "این سرور نمی‌تواند بازی‌های Xbox را اجرا کند"
 }

@@ -753,6 +753,15 @@
       "stateReady": "On",
       "stateStandby": "Rest mode",
       "stateOff": "Not answering"
+    },
+    "xbox": {
+      "title": "Xbox",
+      "hint": "Play your Xbox Series X|S or Xbox One from here, with its remote play. Microsoft's servers start the stream; the picture then comes straight from the console over your home network. Not made or endorsed by Microsoft.",
+      "starting": "Waking the Xbox and starting remote play. This can take a minute.",
+      "buttons": "Select is View, Start is Menu, Select and Start the Xbox button",
+      "stateReady": "On",
+      "stateStandby": "Sleep",
+      "stateOff": "Off"
     }
   }
 }

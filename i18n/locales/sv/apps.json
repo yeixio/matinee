@@ -753,6 +753,15 @@
       "stateReady": "På",
       "stateStandby": "Viloläge",
       "stateOff": "Svarar inte"
+    },
+    "xbox": {
+      "title": "Xbox",
+      "hint": "Spela din Xbox Series X|S eller Xbox One härifrån, med dess fjärrspel. Microsofts servrar startar strömmen; sedan kommer bilden direkt från konsolen över ditt hemnätverk. Inte gjort eller godkänt av Microsoft.",
+      "starting": "Väcker Xboxen och startar fjärrspel. Det kan ta en minut.",
+      "buttons": "Select är Visa, Start är Meny, Select och Start Xbox-knappen",
+      "stateReady": "På",
+      "stateStandby": "Viloläge",
+      "stateOff": "Av"
     }
   }
 }

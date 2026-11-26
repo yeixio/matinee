@@ -311,5 +311,6 @@
   "text_is_required": "text は必須です",
   "sign_in_to_playstation_first": "先にPlayStationにサインインしてください",
   "this_server_cant_play_games_on_a_pc": "このサーバーは PC でゲームをプレイできません",
-  "this_server_cant_play_playstation_games": "このサーバーではPlayStationのゲームを遊べません"
+  "this_server_cant_play_playstation_games": "このサーバーではPlayStationのゲームを遊べません",
+  "this_server_cant_play_xbox_games": "このサーバーではXboxのゲームを遊べません"
 }

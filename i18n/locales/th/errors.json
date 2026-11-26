@@ -311,5 +311,6 @@
   "text_is_required": "ต้องระบุ text",
   "sign_in_to_playstation_first": "ลงชื่อเข้าใช้ PlayStation ก่อน",
   "this_server_cant_play_games_on_a_pc": "เซิร์ฟเวอร์นี้เล่นเกมบนพีซีไม่ได้",
-  "this_server_cant_play_playstation_games": "เซิร์ฟเวอร์นี้เล่นเกม PlayStation ไม่ได้"
+  "this_server_cant_play_playstation_games": "เซิร์ฟเวอร์นี้เล่นเกม PlayStation ไม่ได้",
+  "this_server_cant_play_xbox_games": "เซิร์ฟเวอร์นี้เล่นเกม Xbox ไม่ได้"
 }

@@ -1826,6 +1826,25 @@
       "starting": "Probouzím PlayStation a spouštím Remote Play. Může to trvat minutu.",
       "buttons": "Select je touchpad, Select a Start dohromady tlačítko PS"
     },
+    "xbox": {
+      "title": "Xbox",
+      "hint": "Hrajte na Xbox Series X|S nebo Xbox One odsud, pomocí jeho vzdáleného hraní. Servery Microsoftu spustí stream; obraz pak přichází přímo z konzole přes vaši domácí síť. Nevytvořeno ani neschváleno společností Microsoft.",
+      "signInTitle": "Přihlásit se k Xboxu",
+      "signInHint": "Přihlaste se účtem Microsoft, který používá váš Xbox. Matinee uchovává přihlášení na vašem serveru, nikdy heslo.",
+      "signIn": "Přihlásit se",
+      "codeHint": "Na libovolném telefonu nebo počítači otevřete {{url}} a zadejte tento kód:",
+      "openLink": "Otevřít microsoft.com/link",
+      "waiting": "Čeká se na vaše přihlášení…",
+      "setupHint": "Na Xboxu zapněte Nastavení → Zařízení a připojení → Vzdálené funkce → Povolit vzdálené funkce a nastavte možnosti napájení na Spánek, aby ho Matinee mohl probudit.",
+      "noConsoles": "Na tomto účtu nebyl nalezen žádný Xbox se zapnutými vzdálenými funkcemi.",
+      "signedInAs": "Přihlášeno jako {{name}}",
+      "stateReady": "Zapnuto",
+      "stateStandby": "Spánek",
+      "stateOff": "Vypnuto",
+      "signOut": "Odhlásit se z Xboxu",
+      "starting": "Probouzí se Xbox a spouští vzdálené hraní. Může to trvat minutu.",
+      "buttons": "Select je Zobrazení, Start je Nabídka, Select a Start tlačítko Xbox"
+    },
     "steampc": {
       "title": "Steam",
       "hint": "Tlačítko Steam spouští Big Picture ze Steamu jedním ze dvou způsobů. Nastavte ten, který vám vyhovuje.",

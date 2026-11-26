@@ -311,5 +311,6 @@
   "text_is_required": "text è obbligatorio",
   "sign_in_to_playstation_first": "accedi prima a PlayStation",
   "this_server_cant_play_games_on_a_pc": "questo server non può giocare su un PC",
-  "this_server_cant_play_playstation_games": "questo server non può giocare ai giochi PlayStation"
+  "this_server_cant_play_playstation_games": "questo server non può giocare ai giochi PlayStation",
+  "this_server_cant_play_xbox_games": "questo server non può giocare ai giochi Xbox"
 }

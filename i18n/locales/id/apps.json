@@ -746,6 +746,15 @@
       "stateReady": "Menyala",
       "stateStandby": "Mode istirahat",
       "stateOff": "Tidak menjawab"
+    },
+    "xbox": {
+      "title": "Xbox",
+      "hint": "Mainkan Xbox Series X|S atau Xbox One Anda dari sini, dengan main jarak jauhnya. Server Microsoft memulai stream; lalu gambar datang langsung dari konsol lewat jaringan rumah Anda. Tidak dibuat atau didukung oleh Microsoft.",
+      "starting": "Membangunkan Xbox dan memulai main jarak jauh. Ini bisa memakan waktu semenit.",
+      "buttons": "Select adalah View, Start adalah Menu, Select dan Start tombol Xbox",
+      "stateReady": "Menyala",
+      "stateStandby": "Tidur",
+      "stateOff": "Mati"
     }
   }
 }
