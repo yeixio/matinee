@@ -333,6 +333,8 @@ Your controller's buttons are where they are on a PlayStation controller: the bo
 
 Only one person can play a console at a time, and not while Sony's own Remote Play app is using it. If the console asks for a login passcode, turn the passcode off for that user on the console. Closing the player ends Remote Play; the game keeps running on the console.
 
+If starting says Microsoft can't reach the console (**WaitingForServerToRegister**), the Xbox hasn't checked in with Microsoft's servers. Matinee asks again for about half a minute, since a console that just woke can take that long. If it still fails, restart the Xbox from **Settings → General → Power options → Restart now**, wait until it's signed in, and check that **Enable remote features** is still on. **Test remote play** on that settings page checks the console's side.
+
 From app 1.0.50, the iPhone, iPad and Android apps, Apple TV, Android TV, Fire TV, and Samsung and LG TVs play your paired consoles too: they're at the top of each Games library, under **PlayStation**, beside PC games. Choose a console to play it; Matinee wakes it first if it's resting, which can take a minute. As in the web app, only admins see them. Signing in to PlayStation and pairing stay in the web app.
 
 Server 0.2.10 left the PlayStation bridge out of its builds by mistake, so PlayStation needs a server from 0.2.11 on.

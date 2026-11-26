@@ -25,6 +25,8 @@ type fakeXbox struct {
 	polls     int
 	refreshes []string
 	state     string
+	notReady  int // starts that fail until the console checks in
+	plays     int
 	connected string // the transfer token the console got
 	answer    string
 	deleted   bool
@@ -122,8 +124,19 @@ func (f *fakeXbox) serve(w http.ResponseWriter, r *http.Request) {
 			w.WriteHeader(404)
 			return
 		}
+		f.plays++
+		f.state = "Provisioning"
+		if f.notReady > 0 {
+			f.notReady--
+			f.state = "NotRegistered"
+		}
 		writeJSON(w, map[string]string{"sessionId": "s1", "sessionPath": "v5/sessions/home/s1", "state": "Provisioning"})
 	case p == "/v5/sessions/home/s1/state":
+		if f.state == "NotRegistered" {
+			writeJSON(w, map[string]any{"state": "Failed", "errorDetails": map[string]string{"code": "StartSessionFailed",
+				"message": "Xccs : ErrorCallingWNS : Send command failed : State WaitingForServerToRegister"}})
+			return
+		}
 		if f.state == "Provisioning" {
 			f.state = "ReadyToConnect"
 		}
@@ -366,6 +379,43 @@ func TestPlay(t *testing.T) {
 		}
 		time.Sleep(10 * time.Millisecond)
 	}
+}
+
+// A console that hasn't checked in with Microsoft yet is asked again, and
+// one that never does says what to do.
+func TestPlayNotRegistered(t *testing.T) {
+	defer func(w time.Duration) { registerWait = w }(registerWait)
+	registerWait = 10 * time.Millisecond
+	f := newFakeXbox(t)
+	c := f.client()
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+	tok, err := c.Tokens(ctx, "r1")
+	if err != nil {
+		t.Fatal(err)
+	}
+	f.mu.Lock()
+	f.notReady = 2
+	f.mu.Unlock()
+	st, err := c.Play(ctx, tok, "F4001", nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	st.Close()
+	f.mu.Lock()
+	if f.plays != 3 {
+		t.Errorf("asked %d times, want 3", f.plays)
+	}
+	f.notReady, f.plays = 100, 0
+	f.mu.Unlock()
+	if _, err := c.Play(ctx, tok, "F4001", nil); err == nil || !strings.Contains(err.Error(), "Restart the Xbox") {
+		t.Fatalf("never registered: %v", err)
+	}
+	f.mu.Lock()
+	if f.plays != 4 {
+		t.Errorf("asked %d times, want 4", f.plays)
+	}
+	f.mu.Unlock()
 }
 
 func TestTeredo(t *testing.T) {
