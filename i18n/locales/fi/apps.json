@@ -713,7 +713,6 @@
     "pairHint": "Pariliitä ohjain television Bluetooth-asetuksissa ja paina mitä tahansa sen painiketta.",
     "holdToLeave": "Poistu pitämällä {{buttons}} pohjassa",
     "keepHolding": "Pidä edelleen pohjassa poistuaksesi",
-    "pressAgain": "Poistu painamalla uudelleen",
     "fact": {
       "system": "Järjestelmä",
       "region": "Alue",

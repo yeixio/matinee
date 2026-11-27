@@ -706,7 +706,6 @@
     "pairHint": "TV의 블루투스 설정에서 컨트롤러를 페어링한 다음 아무 버튼이나 누르세요.",
     "holdToLeave": "나가려면 {{buttons}} 길게 누르기",
     "keepHolding": "나가려면 계속 누르세요",
-    "pressAgain": "나가려면 다시 누르세요",
     "fact": {
       "system": "기종",
       "region": "지역",
