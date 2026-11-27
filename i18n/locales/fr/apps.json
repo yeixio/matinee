@@ -720,7 +720,6 @@
     "pairHint": "Associez une manette dans les réglages Bluetooth du téléviseur, puis appuyez sur n'importe quel bouton.",
     "holdToLeave": "Maintenez {{buttons}} pour quitter",
     "keepHolding": "Continuez à maintenir pour quitter",
-    "pressAgain": "Appuyez à nouveau pour quitter",
     "fact": {
       "system": "Système",
       "region": "Région",

@@ -134,7 +134,7 @@ From app version 1.0.40, Apple TV plays games too, with a server from 0.2.5 on. 
 So a stray press doesn't end a game, leaving takes a moment on purpose:
 
 - **Hold Select and Start together for 2 seconds** on any controller. On an Xbox controller they're **View** and **Menu**, on a PlayStation controller **Create** (or **Share**) and **Options**, and on a Nintendo controller **−** and **+**. A small bar fills while you hold; let go before it's full to keep playing. The buttons on a phone's screen work the same way, and so do **Shift** and **Enter** on the keyboard in the web player.
-- **Press twice:** in the apps, the TV remote's **Back** (**Menu** on older Siri Remotes), Android's back gesture, the controller's own home button, or the **×** at the top of a phone or tablet leaves when pressed again within 3 seconds. The first press only shows **Press again to leave**. Touching and holding the **×** leaves at once.
+- **Back, home and the × don't leave.** In the apps, the TV remote's **Back** (**Menu** on older Siri Remotes), Android's back gesture, the controller's own home button and a tap on the **×** at the top of a phone or tablet only bring the hint back, so a stray press, or a controller's B that Apple TV also hears as Menu, can't end the game. Touch and hold the **×** to leave at once. (In app versions 1.0.49 and 1.0.50, a second press of these within 3 seconds still left; from 1.0.51 it doesn't.)
 - With no controller connected to a TV, one press of **Back** still leaves, since there's nothing else to play with.
 - In the web player, the **×** at the top leaves with one click.
 

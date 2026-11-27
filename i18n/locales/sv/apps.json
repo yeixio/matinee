@@ -713,7 +713,6 @@
     "pairHint": "Parkoppla en handkontroll i tv:ns Bluetooth-inställningar och tryck på valfri knapp.",
     "holdToLeave": "Håll ned {{buttons}} för att avsluta",
     "keepHolding": "Fortsätt hålla för att avsluta",
-    "pressAgain": "Tryck igen för att avsluta",
     "fact": {
       "system": "System",
       "region": "Region",

@@ -706,7 +706,6 @@
     "pairHint": "テレビの Bluetooth 設定でコントローラをペアリングし、いずれかのボタンを押してください。",
     "holdToLeave": "{{buttons}} を長押しで終了",
     "keepHolding": "そのまま押し続けると終了",
-    "pressAgain": "もう一度押すと終了",
     "fact": {
       "system": "機種",
       "region": "地域",

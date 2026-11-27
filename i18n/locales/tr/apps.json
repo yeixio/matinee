@@ -713,7 +713,6 @@
     "pairHint": "Televizyonun Bluetooth ayarlarından bir kumanda eşleştirin, sonra üzerindeki herhangi bir düğmeye basın.",
     "holdToLeave": "Çıkmak için {{buttons}} basılı tutun",
     "keepHolding": "Çıkmak için basılı tutmaya devam edin",
-    "pressAgain": "Çıkmak için tekrar basın",
     "fact": {
       "system": "Sistem",
       "region": "Bölge",

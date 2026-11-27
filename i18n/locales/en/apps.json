@@ -713,7 +713,6 @@
     "pairHint": "Pair a controller in the TV's Bluetooth settings, then press any button on it.",
     "holdToLeave": "Hold {{buttons}} to leave",
     "keepHolding": "Keep holding to leave",
-    "pressAgain": "Press again to leave",
     "fact": {
       "system": "System",
       "region": "Region",

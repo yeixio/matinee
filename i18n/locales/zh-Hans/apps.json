@@ -706,7 +706,6 @@
     "pairHint": "在电视的蓝牙设置中配对手柄，然后按手柄上的任意按钮。",
     "holdToLeave": "按住 {{buttons}} 退出",
     "keepHolding": "继续按住以退出",
-    "pressAgain": "再按一次退出",
     "fact": {
       "system": "平台",
       "region": "地区",
