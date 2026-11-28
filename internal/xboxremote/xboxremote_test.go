@@ -27,6 +27,7 @@ type fakeXbox struct {
 	state     string
 	notReady  int // starts that fail until the console checks in
 	plays     int
+	woken     string // the wake command's console and authorization
 	connected string // the transfer token the console got
 	answer    string
 	deleted   bool
@@ -51,7 +52,7 @@ func newFakeXbox(t *testing.T) *fakeXbox {
 
 func (f *fakeXbox) client() *Client {
 	u := f.srv.URL
-	return &Client{End: Endpoints{Login: u, Live: u + "/live", UserAuth: u, XSTS: u, XHome: u}}
+	return &Client{End: Endpoints{Login: u, Live: u + "/live", UserAuth: u, XSTS: u, XHome: u, XCCS: u + "/xccs"}}
 }
 
 func writeJSON(w http.ResponseWriter, v any) {
@@ -103,7 +104,7 @@ func (f *fakeXbox) serve(w http.ResponseWriter, r *http.Request) {
 		if strings.Contains(string(body), "gssv") {
 			writeJSON(w, map[string]any{"Token": "gssv"})
 		} else {
-			writeJSON(w, map[string]any{"Token": "live", "DisplayClaims": map[string]any{"xui": []any{map[string]string{"gtg": "Mike Plays"}}}})
+			writeJSON(w, map[string]any{"Token": "live", "DisplayClaims": map[string]any{"xui": []any{map[string]string{"gtg": "Mike Plays", "uhs": "hash"}}}})
 		}
 	case p == "/v2/login/user":
 		if !strings.Contains(string(body), `"xhome"`) || !strings.Contains(string(body), `"gssv"`) {
@@ -112,6 +113,13 @@ func (f *fakeXbox) serve(w http.ResponseWriter, r *http.Request) {
 		}
 		writeJSON(w, map[string]any{"gsToken": "gs", "durationInSeconds": 14400, "offeringSettings": map[string]any{
 			"regions": []any{map[string]any{"baseUri": "https://elsewhere.invalid", "isDefault": false}, map[string]any{"baseUri": f.srv.URL, "isDefault": true}}}})
+	case p == "/xccs/commands":
+		var b struct {
+			Command, LinkedXboxID string
+		}
+		json.Unmarshal(body, &b)
+		f.woken = b.Command + " " + b.LinkedXboxID + " " + r.Header.Get("Authorization")
+		writeJSON(w, map[string]any{"status": map[string]any{"errorCode": "OK"}})
 	case r.Header.Get("Authorization") != "Bearer gs":
 		w.WriteHeader(401)
 	case p == "/v6/servers/home":
@@ -300,6 +308,9 @@ func TestPlay(t *testing.T) {
 		t.Fatal(err)
 	}
 	f.mu.Lock()
+	if f.woken != "WakeUp F4001 XBL3.0 x=hash;live" {
+		t.Errorf("woken: %q", f.woken)
+	}
 	if f.connected != "transfer" {
 		t.Errorf("the console was signed in with %q", f.connected)
 	}

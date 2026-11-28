@@ -41,6 +41,7 @@ type Endpoints struct {
 	UserAuth string // user.auth.xboxlive.com
 	XSTS     string // xsts.auth.xboxlive.com
 	XHome    string // xhome.gssv-play-prod.xboxlive.com
+	XCCS     string // xccs.xboxlive.com, which turns consoles on
 }
 
 // Microsoft is where Xbox Live is.
@@ -50,6 +51,7 @@ var Microsoft = Endpoints{
 	UserAuth: "https://user.auth.xboxlive.com",
 	XSTS:     "https://xsts.auth.xboxlive.com",
 	XHome:    "https://xhome.gssv-play-prod.xboxlive.com",
+	XCCS:     "https://xccs.xboxlive.com",
 }
 
 // Client talks to Xbox Live.
@@ -156,6 +158,9 @@ type Tokens struct {
 	// hand out a new one each time.
 	Refresh  string
 	Gamertag string
+	// Live is the Xbox Live authorization ("XBL3.0 x=…"), for turning
+	// consoles on; empty when Microsoft didn't give one.
+	Live string
 	// GS is the remote play token, for Base, the remote play servers
 	// nearest the account.
 	GS      string
@@ -196,10 +201,11 @@ func (c *Client) Tokens(ctx context.Context, refresh string) (*Tokens, error) {
 	if err != nil {
 		return nil, err
 	}
-	gamertag := ""
+	gamertag, liveAuth := "", ""
 	var live xblToken
 	if c.xsts(ctx, user.Token, "http://xboxlive.com", &live) == nil && len(live.DisplayClaims.XUI) > 0 {
 		gamertag = live.DisplayClaims.XUI[0].Gamertag
+		liveAuth = "XBL3.0 x=" + live.DisplayClaims.XUI[0].UserHash + ";" + live.Token
 	}
 	var gssv xblToken
 	if err := c.xsts(ctx, user.Token, "http://gssv.xboxlive.com/", &gssv); err != nil {
@@ -234,7 +240,7 @@ func (c *Client) Tokens(ctx context.Context, refresh string) (*Tokens, error) {
 	if dur <= 0 {
 		dur = time.Hour
 	}
-	t = &Tokens{Refresh: tok.RefreshToken, Gamertag: gamertag, GS: home.GSToken, Base: strings.TrimRight(base, "/"), expires: time.Now().Add(dur)}
+	t = &Tokens{Refresh: tok.RefreshToken, Gamertag: gamertag, Live: liveAuth, GS: home.GSToken, Base: strings.TrimRight(base, "/"), expires: time.Now().Add(dur)}
 	c.mu.Lock()
 	if c.cache == nil {
 		c.cache = map[string]*Tokens{}
@@ -263,6 +269,7 @@ type xblToken struct {
 	DisplayClaims struct {
 		XUI []struct {
 			Gamertag string `json:"gtg"`
+			UserHash string `json:"uhs"`
 		} `json:"xui"`
 	} `json:"DisplayClaims"`
 }
