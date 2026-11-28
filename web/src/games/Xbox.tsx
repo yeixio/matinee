@@ -152,7 +152,6 @@ function Console({
       <Button
         variant="primary"
         className="ms-auto"
-        disabled={c.state === "off"}
         onClick={onPlay}
       >
         {t("games.play")}
