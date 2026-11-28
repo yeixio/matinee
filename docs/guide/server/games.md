@@ -360,9 +360,9 @@ The account's consoles that have remote features on then show under **Xbox**, wi
 
 ### Playing
 
-Choose **Play** next to the console. One that's asleep wakes first, so starting can take up to a minute. The Xbox streams at 1080p and 60 frames a second.
+Choose **Play** next to the console. Matinee turns it on first, as the Xbox app's **Turn on** does, so starting can take up to a minute. That needs the console in **Sleep**: one set to **Shutdown (energy saving)** shows as off and has to be turned on by hand. The Xbox streams at 1080p and 60 frames a second.
 
-Your controller's buttons are where they are on an Xbox controller: the bottom face button is A, the right one B. **Select** is **View**, **Start** is **Menu**, and **Select** and **Start** together press the **Xbox** button. With a keyboard, the keys stand in for a controller as they do for console games.
+Your controller's buttons are where they are on an Xbox controller: the bottom face button is A, the right one B. **Select** is **View**, **Start** is **Menu**, and **Select** and **Start** together press the **Xbox** button. In the apps, the controller's own Xbox or home button does too. With a keyboard, the keys stand in for a controller as they do for console games.
 
 Only one person can play a console at a time, and not while the Xbox app or xbox.com is streaming from it. The Matinee server has to reach the console directly, so both need to be on the same home network. Closing the player ends remote play; the game keeps running on the console.
 

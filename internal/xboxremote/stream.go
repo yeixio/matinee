@@ -86,6 +86,9 @@ func (c *Client) Play(ctx context.Context, t *Tokens, consoleID string, log *slo
 	if log == nil {
 		log = slog.New(slog.DiscardHandler)
 	}
+	if err := c.wake(ctx, t, consoleID); err != nil {
+		log.Info("Xbox didn't take the turn-on command", "err", err)
+	}
 	sess, err := c.startSession(ctx, t, consoleID)
 	if err != nil {
 		return nil, err
@@ -437,6 +440,8 @@ func hasIDR(au []byte) bool {
 }
 
 func (s *Stream) readAudio(tr *webrtc.TrackRemote) {
+	s.log.Info("Xbox sound track", "codec", tr.Codec().MimeType, "channels", tr.Codec().Channels)
+	first := true
 	for {
 		p, _, err := tr.ReadRTP()
 		if err != nil {
@@ -444,6 +449,10 @@ func (s *Stream) readAudio(tr *webrtc.TrackRemote) {
 		}
 		if len(p.Payload) == 0 {
 			continue
+		}
+		if first {
+			first = false
+			s.log.Info("Xbox sound started", "bytes", len(p.Payload), "toc", p.Payload[0])
 		}
 		for _, pkt := range s.pack.Audio(p.Payload) {
 			if !s.push(KindAudio, pkt) {

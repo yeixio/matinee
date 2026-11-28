@@ -117,6 +117,21 @@ type session struct {
 	path string // "v5/sessions/home/<id>"
 }
 
+// wake asks Xbox Live to turn the console on, as the Xbox app's Turn on
+// does: one in Sleep wakes and checks in with Microsoft, which remote play
+// then needs. A console that's already on ignores it.
+func (c *Client) wake(ctx context.Context, t *Tokens, consoleID string) error {
+	if c.End.XCCS == "" || t.Live == "" {
+		return nil
+	}
+	ctx, cancel := context.WithTimeout(ctx, 10*time.Second)
+	defer cancel()
+	return c.postJSON(ctx, c.End.XCCS+"/commands", map[string]any{
+		"destination": "Xbox", "type": "Power", "command": "WakeUp", "sessionId": newID(),
+		"sourceId": "com.microsoft.smartglass", "parameters": []map[string]any{{}}, "linkedXboxId": consoleID,
+	}, map[string]string{"Authorization": t.Live, "x-xbl-contract-version": "4", "skillplatform": "RemoteManagement"}, nil)
+}
+
 // registerWait is how long to wait before asking again when Microsoft
 // can't reach the console yet; a var so tests can shorten it.
 var registerWait = 10 * time.Second
