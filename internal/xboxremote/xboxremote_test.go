@@ -126,6 +126,7 @@ func (f *fakeXbox) serve(w http.ResponseWriter, r *http.Request) {
 		writeJSON(w, map[string]any{"results": []any{
 			map[string]string{"deviceName": "Living Room", "serverId": "F4001", "powerState": "ConnectedStandby", "consoleType": "XboxSeriesX"},
 			map[string]string{"deviceName": "", "serverId": "F4002", "powerState": "Off", "consoleType": "XboxOne"},
+			map[string]string{"deviceName": "Den", "serverId": "F4003", "powerState": "Sleep", "consoleType": "XboxSeriesS"},
 		}})
 	case p == "/v5/sessions/home/play":
 		if !strings.Contains(string(body), `"serverId":"F4001"`) {
@@ -283,7 +284,7 @@ func TestSignIn(t *testing.T) {
 		t.Fatalf("ended sign-in: %v", err)
 	}
 	consoles, err := c.Consoles(ctx, tok)
-	if err != nil || len(consoles) != 2 {
+	if err != nil || len(consoles) != 3 {
 		t.Fatalf("Consoles = %v, %v", consoles, err)
 	}
 	if c := consoles[0]; c.ID != "F4001" || c.Name != "Living Room" || c.State != "standby" || c.Type != "XboxSeriesX" {
@@ -291,6 +292,10 @@ func TestSignIn(t *testing.T) {
 	}
 	if c := consoles[1]; c.Name != "Xbox" || c.State != "off" {
 		t.Errorf("console = %+v", c)
+	}
+	// A state Microsoft names otherwise is tried as asleep.
+	if c := consoles[2]; c.State != "standby" {
+		t.Errorf("console 3 = %+v", c)
 	}
 }
 

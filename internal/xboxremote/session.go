@@ -93,12 +93,15 @@ func (c *Client) Consoles(ctx context.Context, t *Tokens) ([]Console, error) {
 	}
 	out := make([]Console, 0, len(res.Results))
 	for _, r := range res.Results {
-		state := "off"
+		// Only "Off" is off: Sleep comes as ConnectedStandby, and any
+		// other state Microsoft names is tried as asleep, which turning
+		// it on and remote play wake.
+		state := "standby"
 		switch r.PowerState {
 		case "On":
 			state = "ready"
-		case "ConnectedStandby":
-			state = "standby"
+		case "Off":
+			state = "off"
 		}
 		name := r.DeviceName
 		if name == "" {
