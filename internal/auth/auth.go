@@ -50,16 +50,23 @@ func Login(ctx context.Context, s *store.Store, username, password string, dev s
 	return u, token, err
 }
 
-// Token pulls a session token from the Authorization header, the session
-// cookie, or a ?token= query parameter (for <video> and <audio> sources in apps).
+// Token pulls a session token from the Authorization header, a ?token=
+// query parameter (for images, <video> and <audio> sources in apps), or the
+// session cookie. A token the request names itself comes before the cookie:
+// on iPhones the app's image loader sends the cookies the app's own requests
+// were given, and a cookie from a session that has since ended would
+// otherwise turn away every picture the app's current token asks for.
 func Token(r *http.Request) string {
 	if h := r.Header.Get("Authorization"); strings.HasPrefix(h, "Bearer ") {
 		return strings.TrimPrefix(h, "Bearer ")
 	}
+	if t := r.URL.Query().Get("token"); t != "" {
+		return t
+	}
 	if c, err := r.Cookie(CookieName); err == nil {
 		return c.Value
 	}
-	return r.URL.Query().Get("token")
+	return ""
 }
 
 type ctxKey struct{}
